@@ -59,8 +59,8 @@ public:
     IOReturn lock_memory(UInt32 lockType, unsigned int *outAddress, UInt32 *outSize);                        /* 5, real addr 0xcc80 */
     IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                                 /* 6, real addr 0xcf30 */
     IOReturn finish(UInt32 mode);                                                                            /* 7, real addr 0xbdc0 */
-    IOReturn declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle); /* 8, real addr 0xd020 */
-    IOReturn create_image(UInt32 param1, UInt32 param2, unsigned int *outLow, unsigned int *outHigh);       /* 9, real addr 0xd130 */
+    IOReturn declare_image(UInt32 unused, unsigned int address, UInt32 length, unsigned int *outUserAddr); /* 8, real addr 0xd020 */
+    IOReturn create_image(UInt32 size, UInt32 auxValue, unsigned int *outDataAddress, unsigned int *outSharedUserAddr);       /* 9, real addr 0xd130 */
     IOReturn create_transfer(UInt32 param1, UInt32 sizeInBytes, unsigned int *outHandle, unsigned int *outAddress); /* 10, real addr 0xd260 */
     IOReturn delete_image(UInt32 textureID);                                                                 /* 11, real addr 0xd450 */
     IOReturn wait_image(UInt32 textureID);                                                                   /* 12, real addr 0xd5c0 */

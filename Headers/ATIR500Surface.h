@@ -190,9 +190,9 @@ public:
      * Full real body in Sources/ATIR500Surface_ResolveFSAABuffer.cpp -
      * see that file for the complete transcription and header comment.
      */
-    void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32 *paramBlock,
-                                  bool clearFlag, SInt32 param5, SInt32 param6, SInt32 param7,
-                                  SInt32 param8);
+    void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32 *packet,
+                                  bool clearFlag, SInt32 x, SInt32 y, SInt32 width,
+                                  SInt32 height);
 
     /*
      * decompress_and_flush_depth_buffer - CONFIRMED real name/signature/
@@ -202,7 +202,7 @@ public:
      * count/index at every real call site). Own body RESOLVED, issue
      * #38 - see Sources/ATIR500Surface_DecompressAndFlushDepthBuffer.cpp.
      */
-    UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *scratch, UInt32 param2, UInt32 *record);
+    UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *buffer, UInt32 wordIndex, UInt32 *packet);
 
     /*
      * load_3d_blit - CONFIRMED real name/signature (mangled
@@ -214,7 +214,7 @@ public:
      * this function wrote (`dest + 0x72` dwords, always) - the caller's
      * own `(end - record) >> 2` conversion already established this.
      */
-    UInt32 *load_3d_blit(UInt32 *dest, ATIR500SurfaceBuffer *scratch);
+    UInt32 *load_3d_blit(UInt32 *dest, ATIR500SurfaceBuffer *buffer);
 
     /*
      * back_resolve_fsaa_buffer - RESOLVED (issue #17). Full real body in
@@ -225,7 +225,7 @@ public:
      * `formatCode` parameter; the third is the same real output record
      * pointer convention `resolve_fsaa_buffer` uses.
      */
-    void *back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, UInt32 *paramBlock);
+    void *back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, UInt32 *packet);
 
     /*
      * FIXED (issue #1, first build attempt): these nine are all real
@@ -246,12 +246,12 @@ public:
      */
     virtual void   setupFullScreen();                                          /* +0x5a4, addr 0x3d200 */
     virtual void   build_swap();                                               /* +0x5c0, addr 0x3eec0 */
-    virtual void   submit_swap_buffer(UInt32 param1, UInt32 param2);            /* +0x5d4, addr 0x3ba80 */
-    virtual void   submit_swap_buffer(UInt32 param1, eDoSwap doSwap, IOATIR500GLContext *context); /* +0x5d8, addr 0x3b310 */
-    virtual void   copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
-                                    UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f); /* +0x5e8, addr 0x43730 */
-    virtual void   copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
-                                  UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f);   /* +0x5ec, addr 0x43340 */
+    virtual void   submit_swap_buffer(UInt32 panel, UInt32 swapArg);            /* +0x5d4, addr 0x3ba80 */
+    virtual void   submit_swap_buffer(UInt32 panel, eDoSwap doSwap, IOATIR500GLContext *context); /* +0x5d8, addr 0x3b310 */
+    virtual void   copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 index, UInt32 level, ATIR500SurfaceBuffer *buffer,
+                                    UInt32 stamp, VendorTransferBuffer *transfer, UInt32 offset, UInt32 pitch, UInt32 flags); /* +0x5e8, addr 0x43730 */
+    virtual void   copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 index, UInt32 level, ATIR500SurfaceBuffer *buffer,
+                                  UInt32 stamp, VendorTransferBuffer *transfer, UInt32 offset, UInt32 pitch, UInt32 flags);   /* +0x5ec, addr 0x43340 */
     virtual SInt32  buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0 */
 
     /* copy_buffer_using_DMA - real addr 0x42a80: the GPU-DMA path shared by copy_to_buffer / copy_from_buffer

@@ -28,50 +28,50 @@ extern "C" UInt32 GH_IOGetTime(...) asm("_IOGetTime");
 
 
 /* real addr 0x31b70 */
-void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *real_param_1) {
+void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   int iVar1;
   
-  if (param_1[0x20] == 0x3) {
-    if ((M<int>(param_1 + 4) != 0) ||
-       (((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)param_1)),
-       M<int>(param_1 + 4) != 0)) {
-      GH_IOGetTime(param_1 + 0x2c);
-      iVar1 = M<int>(param_1 + 0x34);
-      M<UInt32>(iVar1 + 0x38) = M<UInt32>(param_1 + 0x38);
-      M<int>(M<int>(param_1 + 0x38) + 0x34) = iVar1;
-      M<UInt32>(param_1 + 0x34) = M<UInt32>(M<int>(self + 0x94) + 0x6d0);
-      M<int>(param_1 + 0x38) = M<int>(self + 0x94) + 0x69c;
-      M<UInt8 *>(M<int>(self + 0x94) + 0x6d0) = param_1;
-      M<UInt8 *>(M<int>(param_1 + 0x34) + 0x38) = param_1;
+  if (textureBytes[0x20] == 0x3) {
+    if ((M<int>(textureBytes + 4) != 0) ||
+       (((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes)),
+       M<int>(textureBytes + 4) != 0)) {
+      GH_IOGetTime(textureBytes + 0x2c);
+      iVar1 = M<int>(textureBytes + 0x34);
+      M<UInt32>(iVar1 + 0x38) = M<UInt32>(textureBytes + 0x38);
+      M<int>(M<int>(textureBytes + 0x38) + 0x34) = iVar1;
+      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + 0x94) + 0x6d0);
+      M<int>(textureBytes + 0x38) = M<int>(self + 0x94) + 0x69c;
+      M<UInt8 *>(M<int>(self + 0x94) + 0x6d0) = textureBytes;
+      M<UInt8 *>(M<int>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
-    if (((M<int>(param_1 + 0x48) == 0) &&
-        (iVar1 = VCALL(*M<int *>(self + 0x94), 0x528)(M<int *>(self + 0x94),param_1),
+    if (((M<int>(textureBytes + 0x48) == 0) &&
+        (iVar1 = VCALL(*M<int *>(self + 0x94), 0x528)(M<int *>(self + 0x94),textureBytes),
         iVar1 == 0)) &&
        (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x100)),
-                           (VendorTextureBuffer **)((UInt8 **)(self + 0x114)),1,(VendorTextureBuffer *)(param_1)), iVar1 == 0)) {
+                           (VendorTextureBuffer **)((UInt8 **)(self + 0x114)),1,(VendorTextureBuffer *)(textureBytes)), iVar1 == 0)) {
       return;
     }
   }
   else {
-    if (param_1[0x20] != 0x4) {
+    if (textureBytes[0x20] != 0x4) {
       return;
     }
-    if ((M<int>(param_1 + 4) != 0) ||
-       (((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)param_1)),
-       M<int>(param_1 + 4) != 0)) {
-      GH_IOGetTime(param_1 + 0x2c);
-      iVar1 = M<int>(param_1 + 0x34);
-      M<UInt32>(iVar1 + 0x38) = M<UInt32>(param_1 + 0x38);
-      M<int>(M<int>(param_1 + 0x38) + 0x34) = iVar1;
-      M<UInt32>(param_1 + 0x34) = M<UInt32>(M<int>(self + 0x94) + 0x6d0);
-      M<int>(param_1 + 0x38) = M<int>(self + 0x94) + 0x69c;
-      M<UInt8 *>(M<int>(self + 0x94) + 0x6d0) = param_1;
-      M<UInt8 *>(M<int>(param_1 + 0x34) + 0x38) = param_1;
+    if ((M<int>(textureBytes + 4) != 0) ||
+       (((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes)),
+       M<int>(textureBytes + 4) != 0)) {
+      GH_IOGetTime(textureBytes + 0x2c);
+      iVar1 = M<int>(textureBytes + 0x34);
+      M<UInt32>(iVar1 + 0x38) = M<UInt32>(textureBytes + 0x38);
+      M<int>(M<int>(textureBytes + 0x38) + 0x34) = iVar1;
+      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + 0x94) + 0x6d0);
+      M<int>(textureBytes + 0x38) = M<int>(self + 0x94) + 0x69c;
+      M<UInt8 *>(M<int>(self + 0x94) + 0x6d0) = textureBytes;
+      M<UInt8 *>(M<int>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
   }
-  M<UInt8>(M<int>(param_1 + 0x14) + 0x14) = 0;
+  M<UInt8>(M<int>(textureBytes + 0x14) + 0x14) = 0;
   return;
 }

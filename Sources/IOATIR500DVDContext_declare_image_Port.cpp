@@ -29,33 +29,33 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x103e0 */
-IOReturn IOATIR500DVDContext::declare_image(UInt32 param_1, unsigned int param_2, UInt32 param_3, unsigned int*param_4) {
+IOReturn IOATIR500DVDContext::declare_image(UInt32 unused1, unsigned int address, UInt32 length, unsigned int*outHandle) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *this_00;
+  UInt8 *shared;
   SInt32 iVar1;
-  UInt32 uVar2;
+  UInt32 result;
   
-  if ((param_3 == 0) || (param_2 == 0)) {
-    uVar2 = 0xe00002c2;
+  if ((length == 0) || (address == 0)) {
+    result = 0xe00002c2;
   }
   else {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-    this_00 = M<UInt8 *>(self + 0x84);
-    if (this_00 == (UInt8 *)0x0) {
+    shared = M<UInt8 *>(self + 0x84);
+    if (shared == (UInt8 *)0x0) {
       iVar1 = this->create_shared();
       if (iVar1 == 0) {
         GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
         return 0xe00002be;
       }
-      this_00 = M<UInt8 *>(self + 0x84);
+      shared = M<UInt8 *>(self + 0x84);
     }
-    iVar1 = (SInt32)((IOATIR500Shared *)(this_00))->new_agp_texture(param_2, param_3, (unsigned int *)(param_4));
+    iVar1 = (SInt32)((IOATIR500Shared *)(shared))->new_agp_texture(address, length, (unsigned int *)(outHandle));
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-    uVar2 = 0;
+    result = 0;
     if (iVar1 == 0) {
-      uVar2 = 0xe00002bd;
+      result = 0xe00002bd;
     }
   }
-  return uVar2;
+  return result;
 }

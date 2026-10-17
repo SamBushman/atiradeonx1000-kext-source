@@ -1,0 +1,185 @@
+# IOATIR500Surface body locals (and the parameters still left as placeholders): placeholder -> real names. Second table for this class; the first (IOATIR500Surface.tsv) names the declared parameters.
+# kind	target	old	new	tier	evidence
+# Same convention as IOATIR500Surface.tsv (`id` unless the function indexes the per-panel records, then `panel`). A rename is whole-function, so a local reused for several
+# roles in one function (e.g. a call result and later a pointer) is left alone.
+def	IOATIR500Surface::update_contexts@0x11580	piVar1	context	INFERRED	each node of the GL (+0x88), 2D (+0x8c) context lists, walked through its +0x84 link
+def	IOATIR500Surface::invalidate_contexts@0x12050	piVar1	context	INFERRED	each node of the GL (+0x88), 2D (+0x8c) context lists, walked through its +0x84 link
+def	IOATIR500Surface::remove_gl_context_from_list@0x13ec0	pIVar1	current	CONFIRMED	the node being examined in the singly linked unlink walk (link at +0x84)
+def	IOATIR500Surface::remove_gl_context_from_list@0x13ec0	pIVar2	previous	CONFIRMED	the node before `current`; its link is rewritten to skip the removed context
+def	IOATIR500Surface::remove_2d_context_from_list@0x13e30	pIVar1	current	CONFIRMED	the node being examined in the singly linked unlink walk (link at +0x84)
+def	IOATIR500Surface::remove_2d_context_from_list@0x13e30	pIVar2	previous	CONFIRMED	the node before `current`; its link is rewritten to skip the removed context
+def	IOATIR500Surface::init_swap_buffer_header@0x10b40	iVar1	byteOffset	CONFIRMED	offset of the word being zeroed in the 0x20-byte header
+def	IOATIR500Surface::init_swap_buffer_header@0x10b40	iVar2	wordsLeft	CONFIRMED	loop counter: 8 words are zeroed
+def	IOATIR500Surface::delete_buffer_backing@0x12c30	iVar2	nextBuffer	CONFIRMED	the buffer's +0x28 link, relinked to the previous one when the buffer leaves the ring (+0x24 prev / +0x28 next)
+def	IOATIR500Surface::clientMemoryForType@0x141b0	uVar1	result	CONFIRMED	0 on success or 0xe00002c2 (bad panel), the return value
+def	IOATIR500Surface::clientMemoryForType@0x141b0	pIVar2	memoryDescriptor	CONFIRMED	the panel's master buffer memory (entries[0].memory), retained and returned through *memory
+def	IOATIR500Surface::buffer_map_offset@0x14010	uVar1	width	INFERRED	buffer+0x14 (width), multiplied with bytesPerRow into *bytes
+def	IOATIR500Surface::buffer_map_offset@0x14010	uVar2	bytesPerRow	INFERRED	buffer+0x16 (ATIR500SurfaceBuffer::bytesPerRow)
+def	IOATIR500Surface::buffer_map_offset@0x14010	uVar3	height	INFERRED	buffer+0x1e, stored to *h
+def	IOATIR500Surface::alloc_buffer_backing_store@0x12900	pIVar1	memory	CONFIRMED	the IOBufferMemoryDescriptor allocated, attached to the buffer; NULL means failure
+def	IOATIR500Surface::alloc_buffer_backing_store@0x12900	iVar2	backingStore	CONFIRMED	buffer+0x24 (backingStoreHandle) after attach: its +0x59 flag and +0x54 stamp are set
+def	IOATIR500Surface::setupFullScreen@0x13900	iVar1	flipAllowed	CONFIRMED	result of the is_flip_allowed virtual (+0x5dc)
+def	IOATIR500Surface::setupFullScreen@0x13900	uVar2	panel	CONFIRMED	this+0xc14, the panel index used with PANEL_RECORD and the accelerator's flip mask
+def	IOATIR500Surface::free_buffer_backing_orphans@0x12d60	pIVar1	orphan	INFERRED	the single pending-eviction slot at this+0xd8c, released and deleted
+def	IOATIR500Surface::free_buffer_backing_store@0x12df0	pIVar1	backingStore	CONFIRMED	buffer+0x24; +0x59 set means it is still attached, +0x10 holds the memory
+def	IOATIR500Surface::dealloc_surface@0x12580	iVar1	listNode	INFERRED	walks the list at this+0xbcc through the +0x54 link, setting a flag byte in each node's header
+def	IOATIR500Surface::alloc_surface@0x13360	iVar1	allocated	CONFIRMED	nonzero when the VRAM allocation (alloc_surface_buffer, then freeToAllocSurfaceVRAM) succeeded
+def	IOATIR500Surface::alloc_surface@0x13360	pAVar2	surfaceBuffer	CONFIRMED	this + index*0x78 + 0xa8, the surface buffer record for `index`
+def	IOATIR500Surface::alloc_surface_keep@0x13210	iVar1	allocated	CONFIRMED	nonzero when the VRAM allocation (alloc_surface_buffer, then freeToAllocSurfaceVRAM) succeeded
+def	IOATIR500Surface::alloc_surface_keep@0x13210	pAVar2	surfaceBuffer	CONFIRMED	this + index*0x78 + 0xa8, the surface buffer record for `index`
+def	IOATIR500Surface::is_flip_allowed@0x13f60	uVar1	result	CONFIRMED	1 when flipping is enabled and this surface is the one on its panel; 0 otherwise
+def	IOATIR500Surface::resetFullScreen@0x139d0	iVar1	flipAllowed	CONFIRMED	result of the is_flip_allowed virtual (+0x5dc)
+def	IOATIR500Surface::move_buffer_to_backing_store@0x11420	uVar1	result	CONFIRMED	return value of copy_buffer_to_backing_store, returned
+def	IOATIR500Surface::map_transfer_to_GART@0x10be0	iVar1	mapResult	INFERRED	accelerator virtual +0x5a8 result; the transfer is only freed-to-alloc when it is 0
+def	IOATIR500Surface::flush_surface@0x10fa0	uVar2	panelIndex	CONFIRMED	loop index over the panels (tested against panelMask, passed to the submit_swap_buffer virtual)
+def	IOATIR500Surface::surface_flush@0x14e70	iVar1	result	CONFIRMED	alloc_surfaces_retry result, returned
+def	IOATIR500Surface::surface_flush@0x14e70	piVar3	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::surface_flush@0x14e70	uVar4	stamp	CONFIRMED	this+0x84 (the stamp set by flush_surface), passed to waitForTimeStamp (+0x54c)
+def	IOATIR500Surface::surface_flush@0x14e70	iVar5	waitTotal	INFERRED	accelerator+0x798 before the wait: the accumulated wait statistic
+def	IOATIR500Surface::surface_flush@0x14e70	iVar2	waitTime	INFERRED	waitForTimeStamp return value, added to the accumulated wait statistic
+def	IOATIR500Surface::reset_access@0x10de0	iVar3	previous	INFERRED	this+0xc00 before the set_access virtual (+0x604): the descriptors are rebuilt only if it changed
+def	IOATIR500Surface::reset_access@0x10de0	piVar1	descriptor	CONFIRMED	each memory descriptor created from this+0xc00 (virtual +0x150 -> this+0xd88, +0x14c -> this+0xd84)
+def	IOATIR500Surface::surface_write_lock_int@0x114a0	piVar1	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::surface_write_lock_int@0x114a0	iVar3	waitTotal	INFERRED	accelerator+0x7bc before the sleep: the accumulated wait statistic
+def	IOATIR500Surface::surface_query_lock@0x151a0	iVar2	allocated	CONFIRMED	alloc_surface_buffer virtual (+0x5d0) result
+def	IOATIR500Surface::surface_query_lock@0x151a0	uVar3	result	CONFIRMED	0 or 0xe00002cc, the return value
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	pIVar1	memory	CONFIRMED	IOMemoryDescriptor::withAddress result, attached to the buffer; NULL means failure
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	uVar2	length	CONFIRMED	the descriptor length: page-rounded height*pitch + offset, or the this+0xd4c override
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	uVar3	pageOffset	CONFIRMED	userAddress & (page_size-1), passed to attach_buffer_backing_store as the offset
+def	IOATIR500Surface::reset_req_bits@0x13c70	uVar1	requiredBits	CONFIRMED	the accumulated required-surface-buffer mask, stored to this+0xc18 as it grows
+def	IOATIR500Surface::reset_req_bits@0x13c70	iVar2	node	CONFIRMED	cursor of the three list walks: GL contexts (+0x88), 2D contexts (+0x8c) and the surface list at +0xbcc
+def	IOATIR500Surface::reset_req_bits@0x13c70	local_28	bufferMask	CONFIRMED	out parameter of surface_buffer_idx_mask: the mask of surface buffers a format needs
+def	IOATIR500Surface::convert_surface_bits@0x12320	uVar1	result	CONFIRMED	the converted bit mask, returned
+def	IOATIR500Surface::convert_surface_bits@0x12320	iVar2	formatSlot	CONFIRMED	index into the surfaceBuffersByFormat table (this+0xb70) chosen by the selector bit
+def	IOATIR500Surface::convert_surface_bits@0x12320	uVar3	selectorBit	CONFIRMED	the single selector bit under test, shifted left each pass
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	bVar7	isNoLock	INFERRED	bit 1 set when lockType == 0 (no lock requested; the header gives 1 = read, 2 = write)
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	bVar6	isReadLock	CONFIRMED	bit 1 set when lockType == 1 (read)
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	bVar5	isWriteLock	CONFIRMED	bit 1 set when lockType == 2 (write)
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	IVar1	lockState	CONFIRMED	this+0xbd0 (read) or this+0xbd1 (write): the current lock state byte
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	iVar2	pageqResult	CONFIRMED	alloc_surfaces_pageq result: 0 done, 2 give up
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	uVar3	result	CONFIRMED	0 or 0xe00002cc, the return value
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	iVar4	retriesLeft	CONFIRMED	counts down from 0x3e9; at 0 the last attempt asks alloc_surfaces_pageq to free aggressively
+def	IOATIR500Surface::surface_unlock_options@0x14f60	pIVar3	lockStatePtr	CONFIRMED	&this[0xbd0] for a read lock, &this[0xbd1] otherwise
+def	IOATIR500Surface::surface_unlock_options@0x14f60	IVar1	lockState	CONFIRMED	the lock state byte read through lockStatePtr (0 = not locked)
+def	IOATIR500Surface::surface_unlock_options@0x14f60	iVar5	surfaceBuffer	CONFIRMED	this+0xb70, the first entry of surfaceBuffersByFormat
+def	IOATIR500Surface::surface_unlock_options@0x14f60	piVar2	memory	INFERRED	the backing store's memory (record+0x10), released with the +0x18 virtual
+def	IOATIR500Surface::surface_unlock_options@0x14f60	uVar4	result	CONFIRMED	0 or 0xe00002cc, the return value
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	bVar1	isLast	CONFIRMED	set when the loop index reached the last surface buffer (0x16)
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	uVar2	stateBits	CONFIRMED	this+0xbf8 sampled once: the pending-allocation bits tested against mask
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	uVar3	kept	CONFIRMED	alloc_surface_keep virtual (+0x5f8) result for one surface buffer
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	uVar4	allKept	CONFIRMED	AND of every kept result; 0 makes the function return 2
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	uVar5	index	CONFIRMED	surface buffer index 0..0x16 (23 buffers), passed to alloc_surface_keep
+def	IOATIR500Surface::set_volatile_state@0x15b70	iVar2	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::set_volatile_state@0x15b70	iVar1	listHead	CONFIRMED	the accelerator's surface list head (accelerator+0x5c) the surface is moved in front of
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	uVar1	result	CONFIRMED	0 when the record could not be allocated, 1 otherwise; returned
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	iVar2	backingStore	CONFIRMED	the 0xc0-byte record allocated from the accelerator (virtual +0x570), stored at buffer+0x24
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	piVar3	attachedMemory	INFERRED	backingStore+8, the memory descriptor just attached; prepared with the +0xdc virtual
+def	IOATIR500Surface::allocMasterSwapBuffer@0x118e0	piVar1	memoryDescriptor	CONFIRMED	the IOBufferMemoryDescriptor allocated for the entry
+def	IOATIR500Surface::allocMasterSwapBuffer@0x118e0	pVVar2	swapHeader	CONFIRMED	the mapped address of `memory` (virtual +0x1cc), initialised by init_swap_buffer_header
+def	IOATIR500Surface::allocMasterSwapBuffer@0x118e0	iVar3	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::allocMasterSwapBuffer@0x118e0	uVar5	count	CONFIRMED	entries allocated so far, compared with the panel's buffer count
+def	IOATIR500Surface::freeAllSwapBuffers@0x10860	piVar13	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::freeAllSwapBuffers@0x10860	iVar9	waitTotal	INFERRED	accelerator+0x788 before the wait: the accumulated wait statistic
+def	IOATIR500Surface::freeAllSwapBuffers@0x10860	uVar11	bufferIndex	CONFIRMED	index over the panel's buffers (both loops)
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	bVar1	isLastSlot	CONFIRMED	set when slotNumber was 3 (the fourth and last submit slot)
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	iVar2	counterOffset	CONFIRMED	panel * 4: offset into the accelerator's per-panel buffer counts (+0x114)
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	pVVar4	swapHeader	CONFIRMED	the mapped address of the descriptor (virtual +0x1cc), initialised by init_swap_buffer_header
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	iVar5	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	uVar7	bufferIndex	CONFIRMED	index over the panel's buffers for one slot
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	piVar8	memoryDescriptor	CONFIRMED	the IOBufferMemoryDescriptor allocated for the slot's entry (NULL means failure)
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	uVar9	slotNumber	CONFIRMED	submit slot 0..3 being allocated (entries[slotNumber + 1 ...])
+def	IOATIR500Surface::freeToAllocGART@0x10c60	bVar1	notLastSlot	CONFIRMED	slot counter != 3: the slot walk continues
+def	IOATIR500Surface::freeToAllocGART@0x10c60	this_00	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::freeToAllocGART@0x10c60	pVVar3	backingStore	CONFIRMED	surface buffer record +0x24 in the tail walk over the 23 surface buffers
+def	IOATIR500Surface::freeToAllocGART@0x10c60	uVar4	panelIndex	CONFIRMED	loop index over the panels
+def	IOATIR500Surface::freeToAllocGART@0x10c60	uVar5	bufferIndex	CONFIRMED	index over the panel's buffers (master entries)
+def	IOATIR500Surface::freeToAllocGART@0x10c60	iVar6	slotFreed	CONFIRMED	freeTransferToAllocGART result for a submit slot (nonzero: enough was freed)
+def	IOATIR500Surface::freeToAllocGART@0x10c60	pIVar8	cursor	CONFIRMED	walks this+0 .. this+0xac8 in 0x78 steps: the surface buffer records' +0xcc (backing store) fields
+def	IOATIR500Surface::set_scaling@0x11640	bVar1	scalingDisabled	CONFIRMED	bit 1 of flags clear: the scaling struct is not used, the surface's own size applies
+def	IOATIR500Surface::set_scaling@0x11640	uVar2	width	INFERRED	width half of the region record at this+0xd60 (+8), the unscaled size
+def	IOATIR500Surface::set_scaling@0x11640	uVar3	height	INFERRED	height half of the region record at this+0xd60 (+0xa), the unscaled size
+def	IOATIR500Surface::set_scaling@0x11640	uVar4	result	CONFIRMED	0xe00002c2 / 0xe00002be or 0: the return value
+def	IOATIR500Surface::prune_buffers@0x12e80	bVar1	isLast	CONFIRMED	set when the loop index reached the last surface buffer (0x16)
+def	IOATIR500Surface::prune_buffers@0x12e80	uVar2	requestedBits	INFERRED	this+0xc1c with the bit of the buffer set the surface now needs, merged into the required bits
+def	IOATIR500Surface::prune_buffers@0x12e80	uVar5	requiredBits	CONFIRMED	this+0xc18, the required-surface-buffer mask (the same value reset_req_bits accumulates); buffers outside it are freed
+def	IOATIR500Surface::prune_buffers@0x12e80	pIVar6	cursor	CONFIRMED	this + index*0x78: the surface buffer record walked in step with the loop index
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	uVar3	levelCount	INFERRED	buffer+0x22: inner loop bound over the levels passed to buffer_map_offset
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	iVar2	backingStore	CONFIRMED	the +0xcc (backing store) field of one surface buffer record in the tail walk
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	piVar4	attachedMemory	INFERRED	backing store +8, the memory descriptor; completed with the +0xdc virtual
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	pIVar5	cursor	CONFIRMED	walks the surface buffer records' +0xcc fields in 0x78 steps (23 records)
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	iVar7	generation	INFERRED	this+0x7c captured before the copy: backing stores stamped with it are re-stamped afterwards
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	uVar8	index	CONFIRMED	outer loop index, the `index` argument of buffer_map_offset
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	uVar9	nextLevel	CONFIRMED	level index + 1, the loop's next value
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	local_38	levelWidth	CONFIRMED	the `w` out parameter of buffer_map_offset, passed on to copy_to_buffer
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	local_34	levelHeight	CONFIRMED	the `h` out parameter of buffer_map_offset (element 0), passed on to copy_to_buffer
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	uVar1	levelCount	INFERRED	buffer+0x22: inner loop bound over the levels passed to buffer_map_offset
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	piVar2	attachedMemory	INFERRED	backing store +8, the memory descriptor; prepared with the +0xdc virtual
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	pIVar5	cursor	CONFIRMED	walks the surface buffer records' +0xcc fields in 0x78 steps (23 records)
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	uVar6	index	CONFIRMED	outer loop index, the `index` argument of buffer_map_offset
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	uVar8	nextLevel	CONFIRMED	level index + 1, the loop's next value
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	iVar9	recordsLeft	CONFIRMED	counts down the 23 surface buffer records in the tail walk
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	local_38	memoryState	INFERRED	in/out argument of the +0xdc virtual (starts as 2); 4 selects the already-mapped path
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	local_34	levelWidth	CONFIRMED	the `w` out parameter of buffer_map_offset, passed on to copy_from_buffer
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	local_30	levelHeight	CONFIRMED	the `h` out parameter of buffer_map_offset (element 0), passed on to copy_from_buffer
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	piVar1	prevLink	CONFIRMED	address of a surface's +0x9c (previous) link in the accelerator's circular surface list walk
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	bVar2	notLast	CONFIRMED	surface index != 0x16: the move loop continues
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	bVar4	movedAny	CONFIRMED	set when at least one surface buffer was moved to its backing store
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	uVar5	result	CONFIRMED	0 on success, 2 when the allocation still failed: the return value
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	iVar6	listHead	CONFIRMED	the accelerator's surface list head (accelerator+0x5c)
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	uVar7	allAllocated	CONFIRMED	AND of the alloc_surface virtual (+0x5f4) results over the pending surfaces
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	uVar8	pending	CONFIRMED	mask & this+0xbf8: the surfaces that still need VRAM
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	uVar10	index	CONFIRMED	surface buffer index 0..0x16 passed to alloc_surface
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	uVar11	cursor	CONFIRMED	this + index*0x78 as an integer: the surface buffer record walked in the move loop
+def	IOATIR500Surface::stop@0x134b0	bVar1	notLast	CONFIRMED	surface buffer index != 0x16: the dealloc loop continues
+def	IOATIR500Surface::stop@0x134b0	IVar2	lockState	CONFIRMED	this[0xbd0], the read lock state byte
+def	IOATIR500Surface::stop@0x134b0	this_00	contextGL	CONFIRMED	each node of the GL-context list at this+0x88 (cast to IOATIR500GLContext)
+def	IOATIR500Surface::stop@0x134b0	this_01	context2D	CONFIRMED	each node of the 2D-context list at this+0x8c (cast to IOATIR5002DContext)
+def	IOATIR500Surface::stop@0x134b0	pIVar3	nextGL	CONFIRMED	contextGL's +0x84 link, read before it is cleared
+def	IOATIR500Surface::stop@0x134b0	pIVar4	next2D	CONFIRMED	context2D's +0x84 link, read before it is cleared
+def	IOATIR500Surface::stop@0x134b0	piVar5	backingMemory	INFERRED	the first surface buffer's backing store memory (record+0x10), released
+def	IOATIR500Surface::stop@0x134b0	uVar8	panelIndex	CONFIRMED	loop index over the panels
+def	IOATIR500Surface::stop@0x134b0	pIVar9	cursor	CONFIRMED	this + index*0x78: the surface buffer record walked in the dealloc loop
+def	IOATIR500Surface::stop@0x134b0	pIVar10	regionSlot	CONFIRMED	this + panelIndex*8: the {pointer, size} pair at +0xd60 of the region allocation freed with IOFreeAligned
+def	IOATIR500Surface::surface_lock_options@0x15d30	bVar1	buffersResident	INFERRED	true when none of the needed buffers (this+0xc1c & 3) is pending allocation (this+0xbf8)
+def	IOATIR500Surface::surface_lock_options@0x15d30	bVar2	stampPending	INFERRED	true when the backing store is current (generation matches this+0x7c); a wait for the stamp then follows at the end
+def	IOATIR500Surface::surface_lock_options@0x15d30	uVar3	neededBuffers	CONFIRMED	this+0xc1c & 3: the surface buffers the surface uses, passed to alloc_surfaces_retry
+def	IOATIR500Surface::surface_lock_options@0x15d30	piVar4	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::surface_lock_options@0x15d30	uVar5	mapping	INFERRED	memory descriptor virtual +0x14c result, stored at the backing store's +0x10
+def	IOATIR500Surface::surface_lock_options@0x15d30	IVar7	newLockState	CONFIRMED	the lock state byte stored to this[0xbd0] (read) or this[0xbd1] (write) at the end
+def	IOATIR500Surface::surface_lock_options@0x15d30	pAVar9	surfaceBuffer	CONFIRMED	this+0xb70, the first entry of surfaceBuffersByFormat
+def	IOATIR500Surface::surface_lock_options@0x15d30	iVar10	result	CONFIRMED	the return value
+def	IOATIR500Surface::surface_lock_options@0x15d30	bVar11	isReadLock	CONFIRMED	bit 1 set when lockType == 1 (read); selects this[0xbd0] over this[0xbd1]
+def	IOATIR500Surface::surface_lock_options@0x15d30	local_38	memoryState	INFERRED	in/out argument of the +0xdc virtual (starts as 2); 4 selects the already-mapped path
+def	IOATIR500Surface::set_id_mode@0x142b0	pIVar2	owner	CONFIRMED	the surface registered for the panel in the accelerator's table (accelerator+0xe8 + panel*0x20)
+def	IOATIR500Surface::set_id_mode@0x142b0	uVar3	currentPanel	INFERRED	this+0xc14 before the change
+def	IOATIR500Surface::set_id_mode@0x142b0	sVar4	requiredKind	INFERRED	the per-panel 16-bit field (accelerator+0x142 + panel*0x78) value the mode bits need: 2, 4, 8 or 0x10
+def	IOATIR500Surface::set_id_mode@0x142b0	iVar6	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::set_id_mode@0x142b0	uVar8	result	CONFIRMED	the return value
+def	IOATIR500Surface::surface_read@0x14a30	iVar14	x	CONFIRMED	readData+0x00, the left edge of the requested rectangle (clamped to 0 in place)
+def	IOATIR500Surface::surface_read@0x14a30	iVar13	y	CONFIRMED	readData+0x04, the top edge of the requested rectangle (clamped to 0 in place)
+def	IOATIR500Surface::surface_read@0x14a30	iVar5	bottom	CONFIRMED	y + height, tested against the surface height
+def	IOATIR500Surface::surface_read@0x14a30	iVar1	surfaceWidth	CONFIRMED	this+0xbd4, the surface width the rectangle is clipped to
+def	IOATIR500Surface::surface_read@0x14a30	iVar8	surfaceHeight	CONFIRMED	this+0xbd6, the surface height the rectangle is clipped to
+def	IOATIR500Surface::surface_read@0x14a30	iVar10	destPitch	CONFIRMED	readData+0x14, the destination pitch
+def	IOATIR500Surface::surface_read@0x14a30	iVar2	clipOffset	CONFIRMED	byte offset into the destination that accounts for the rectangle clipped at the left/top
+def	IOATIR500Surface::surface_read@0x14a30	uVar3	destination	CONFIRMED	readData destination address plus clipOffset
+def	IOATIR500Surface::surface_read@0x14a30	uVar9	pageOffset	CONFIRMED	destination & (page_size-1), the offset into the first page of the wrapped descriptor
+def	IOATIR500Surface::surface_read@0x14a30	pIVar6	cursor	CONFIRMED	walks the surface buffer records' +0xcc fields in 0x78 steps (23 records)
+def	IOATIR500Surface::surface_read@0x14a30	uVar16	result	CONFIRMED	0 or 0xe00002be, the return value
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	cVar2	hardwareUp	CONFIRMED	accelerator+0x80, the hardware-up flag the shape change sleeps on
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	uVar3	regionWidth	INFERRED	region+8 (bounds width), copied to this+0xbd4 / +0xbe0
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	uVar4	regionHeight	INFERRED	region+10 (bounds height), copied to this+0xbd6 / +0xbe2
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	iVar8	rectIndex	CONFIRMED	index of the rectangle being copied into the per-panel record
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	bVar9	reshape	INFERRED	true when the surface shape changed: the shape_surface virtual and update_contexts then run
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	uVar14	result	CONFIRMED	the return value
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	pAVar15	surfaceBuffer	CONFIRMED	this+0xb70, the first entry of surfaceBuffersByFormat
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	bVar16	noBacking	INFERRED	bit 1 set when backingAddress == 0
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	bVar17	keepBacking	INFERRED	bit 1 set when backingPitch == 0xffffffff: the existing backing store is left alone
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	bVar18	notReshaped	INFERRED	bit 1 set when `reshape` is false
+def	IOATIR500Surface::start@0x119f0	bVar1	success	CONFIRMED	true when the region records and master swap buffers were allocated; start returns it and stops the superclass otherwise
+def	IOATIR500Surface::start@0x119f0	uVar4	lock	CONFIRMED	the IOLock allocated and stored at this+0xc04
+def	IOATIR500Surface::start@0x119f0	this_00	accelerator	CONFIRMED	this+0xd50
+def	IOATIR500Surface::start@0x119f0	pIVar5	formatSlot	CONFIRMED	this + 4*i: the slot of the surfaceBuffersByFormat table (this+0xb70) set to surfaceBuffer
+def	IOATIR500Surface::start@0x119f0	pIVar6	surfaceBuffer	CONFIRMED	this + 0xa8 + i*0x78, the i-th of the 23 surface buffer records
+def	IOATIR500Surface::start@0x119f0	pIVar7	tilingCursor	INFERRED	this + 0xd0 + i*0x78: +0x14 is the record's +0x3c word (tilingDegreeBits), reset to its default
+def	IOATIR500Surface::start@0x119f0	uVar8	panelIndex	CONFIRMED	loop index over the panels (region record and master swap buffer allocation)

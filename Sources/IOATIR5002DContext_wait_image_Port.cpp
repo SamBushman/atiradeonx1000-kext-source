@@ -29,21 +29,21 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0xd5c0 */
-IOReturn IOATIR5002DContext::wait_image(UInt32 param_1) {
+IOReturn IOATIR5002DContext::wait_image(UInt32 textureID) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
-  UInt32 uVar2;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
   iVar1 = M<SInt32>(self + 0x88);
   if (iVar1 == 0) {
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    uVar2 = 0xe00002be;
+    result = 0xe00002be;
   }
   else {
-    if ((param_1 < M<UInt32>(iVar1 + 0x14)) &&
-       (iVar1 = M<SInt32>(param_1 * 4 + M<SInt32>(iVar1 + 0x10)), iVar1 != 0)) {
+    if ((textureID < M<UInt32>(iVar1 + 0x14)) &&
+       (iVar1 = M<SInt32>(textureID * 4 + M<SInt32>(iVar1 + 0x10)), iVar1 != 0)) {
       GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
       iVar1 = VCALL(*M<SInt32 *>(self + 0x94), 0x550)
                         (M<SInt32 *>(self + 0x94),M<UInt32>(M<SInt32>(iVar1 + 0x14) + 8));
@@ -54,7 +54,7 @@ IOReturn IOATIR5002DContext::wait_image(UInt32 param_1) {
       return 0;
     }
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    uVar2 = 0xe00002c2;
+    result = 0xe00002c2;
   }
-  return uVar2;
+  return result;
 }

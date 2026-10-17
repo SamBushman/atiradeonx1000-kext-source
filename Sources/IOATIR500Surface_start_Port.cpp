@@ -45,15 +45,15 @@ bool IOATIR500Surface::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
-  bool bVar1;
+  bool success;
   UInt8 *pIVar2;
   SInt32 iVar3;
-  UInt32 uVar4;
-  UInt8 *this_00;
-  UInt8 *pIVar5;
-  UInt8 *pIVar6;
-  UInt8 *pIVar7;
-  UInt32 uVar8;
+  UInt32 lock;
+  UInt8 *accelerator;
+  UInt8 *formatSlot;
+  UInt8 *surfaceBuffer;
+  UInt8 *tilingCursor;
+  UInt32 panelIndex;
   SInt32 iVar9;
   PanelRecord *panel;
   
@@ -68,10 +68,10 @@ bool IOATIR500Surface::start(IOService *provider) {
   M<UInt32>(self + 0x80) = 0;
   M<UInt32>(self + 0x84) = 0;
   M<SInt32>(self + 0x7c) = iVar3 + -0x3fffffff;
-  uVar4 = GH_IOLockAlloc();
+  lock = GH_IOLockAlloc();
   M<UInt32>(self + 0xd4c) = 0;
   M<UInt32>(self + 0x88) = 0;
-  M<UInt32>(self + 0xc04) = uVar4;
+  M<UInt32>(self + 0xc04) = lock;
   M<UInt32>(self + 0x8c) = 0;
   M<UInt32>(self + 0x90) = 0;
   M<UInt32>(self + 0xd54) = 0;
@@ -86,10 +86,10 @@ bool IOATIR500Surface::start(IOService *provider) {
   self[0xc09] = 0x0;
   self[0xbf7] = 0x0;
   iVar3 = 0x17;
-  pIVar6 = self + 0xa8;
-  pIVar7 = self + 0xd0;
+  surfaceBuffer = self + 0xa8;
+  tilingCursor = self + 0xd0;
   pIVar2 = self;
-  pIVar5 = self;
+  formatSlot = self;
   do {
     M<UInt16>(pIVar2 + 0xbc) = 0;
     M<UInt16>(pIVar2 + 0xbe) = 0;
@@ -115,14 +115,14 @@ bool IOATIR500Surface::start(IOService *provider) {
     M<UInt32>(pIVar2 + 0xd0) = 0xffffffff;
     M<UInt32>(pIVar2 + 0xd4) = 0;
     M<UInt32>(pIVar2 + 0xd8) = 0;
-    M<UInt32>(pIVar7 + 0x14) = M<UInt32>(pIVar7 + 0x14) & 0xff0007ff | 0x111000;
+    M<UInt32>(tilingCursor + 0x14) = M<UInt32>(tilingCursor + 0x14) & 0xff0007ff | 0x111000;
     M<UInt32>(pIVar2 + 0xe8) = 0;
-    pIVar7 = pIVar7 + 0x78;
+    tilingCursor = tilingCursor + 0x78;
     M<UInt32>(pIVar2 + 0xec) = 0;
-    M<UInt8 *>(pIVar5 + 0xb70) = pIVar6;
+    M<UInt8 *>(formatSlot + 0xb70) = surfaceBuffer;
     pIVar2 = pIVar2 + 0x78;
-    pIVar6 = pIVar6 + 0x78;
-    pIVar5 = pIVar5 + 4;
+    surfaceBuffer = surfaceBuffer + 0x78;
+    formatSlot = formatSlot + 4;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
   panel = PANEL_RECORD(self, 0);
@@ -159,28 +159,28 @@ bool IOATIR500Surface::start(IOService *provider) {
   M<UInt32>(self + 0xc10) = 0;
   M<UInt32>(self + 0xd8c) = 0;
   M<UInt32>(self + 0xd70) = 0;
-  this_00 = M<UInt8 *>(self + 0xd50);
+  accelerator = M<UInt8 *>(self + 0xd50);
   M<UInt32>(self + 0xbf8) = 0x307fffff;
   M<UInt32>(self + 0xc14) = 0xffff;
-  if (M<SInt32>(this_00 + 0xcc) == 0) {
+  if (M<SInt32>(accelerator + 0xcc) == 0) {
 LAB_00011d4c:
-    iVar3 = ((IOATIR500Accelerator *)(this_00))->getVRAMDescriptors();
+    iVar3 = ((IOATIR500Accelerator *)(accelerator))->getVRAMDescriptors();
     if (iVar3 != 0) {
-      this_00 = M<UInt8 *>(self + 0xd50);
-      bVar1 = true;
+      accelerator = M<UInt8 *>(self + 0xd50);
+      success = true;
       goto LAB_00011d6c;
     }
-    this_00 = M<UInt8 *>(self + 0xd50);
+    accelerator = M<UInt8 *>(self + 0xd50);
   }
   else {
-    uVar8 = 0;
+    panelIndex = 0;
     pIVar2 = self;
     do {
       iVar3 = GH_IOMallocAligned(0xc,0x20);
       M<SInt32>(pIVar2 + 0xd60) = iVar3;
       if (iVar3 == 0) {
 LAB_00011d38:
-        this_00 = M<UInt8 *>(self + 0xd50);
+        accelerator = M<UInt8 *>(self + 0xd50);
         break;
       }
       iVar3 = M<SInt32>(self + 0xd50);
@@ -193,18 +193,18 @@ LAB_00011d38:
       M<UInt16>(M<SInt32>(pIVar2 + 0xd60) + 6) = 0;
       M<UInt16>(M<SInt32>(pIVar2 + 0xd60) + 8) = 0;
       M<UInt16>(M<SInt32>(pIVar2 + 0xd60) + 10) = 0;
-      iVar3 = this->allocMasterSwapBuffer(uVar8,0x9000);
+      iVar3 = this->allocMasterSwapBuffer(panelIndex,0x9000);
       if (iVar3 == 0) goto LAB_00011d38;
-      this_00 = M<UInt8 *>(self + 0xd50);
-      uVar8 = uVar8 + 1;
+      accelerator = M<UInt8 *>(self + 0xd50);
+      panelIndex = panelIndex + 1;
       pIVar2 = pIVar2 + 8;
-    } while (uVar8 < M<UInt32>(this_00 + 0xcc));
-    if (M<UInt32>(this_00 + 0xcc) == uVar8) goto LAB_00011d4c;
+    } while (panelIndex < M<UInt32>(accelerator + 0xcc));
+    if (M<UInt32>(accelerator + 0xcc) == panelIndex) goto LAB_00011d4c;
   }
-  bVar1 = false;
+  success = false;
 LAB_00011d6c:
   M<UInt8 **>(self + 0xd5c) = (UInt8 **)kSurfaceMethods; /* IOATIR500Surface::start(IOService*)::methodDescs */
-  iVar3 = M<SInt32>(this_00 + 0x5c);
+  iVar3 = M<SInt32>(accelerator + 0x5c);
   if (iVar3 == 0) {
     M<UInt8 *>(self + 0x9c) = self;
     M<UInt8 *>(self + 0xa0) = self;
@@ -216,13 +216,13 @@ LAB_00011d6c:
     M<UInt8 *>(iVar9 + 0x9c) = self;
     M<UInt8 *>(iVar3 + 0xa0) = self;
   }
-  M<UInt8 *>(this_00 + 0x5c) = self;
+  M<UInt8 *>(accelerator + 0x5c) = self;
   M<SInt32>(M<SInt32>(self + 0xd50) + 0x730) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x730) + 1;
-  if (bVar1) {
+  if (success) {
     M<UInt32>(self + 0xd58) = 1;
   }
   else {
     IOATIR500Surface::stop(provider);
   }
-  return bVar1;
+  return success;
 }

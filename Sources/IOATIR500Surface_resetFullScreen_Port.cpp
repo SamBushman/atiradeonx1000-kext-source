@@ -30,7 +30,7 @@
 void IOATIR500Surface::resetFullScreen() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 flipAllowed;
   
   if (M<UInt8 *>(self + 0xb70) == self + 0x120) {
     M<UInt8 *>(self + 0xb74) = M<UInt8 *>(self + 0xb70);
@@ -38,8 +38,8 @@ void IOATIR500Surface::resetFullScreen() {
     M<UInt8 *>(self + 0xb84) = self + 0x300;
     M<SInt32>(self + 0xb70) = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 300;
   }
-  iVar1 = VCALL(M<SInt32>(self), 0x5dc)(self);
-  if (iVar1 != 0) {
+  flipAllowed = VCALL(M<SInt32>(self), 0x5dc)(self);
+  if (flipAllowed != 0) {
     if ((1 << (M<UInt32>(self + 0xc14) & 0x3f) & M<UInt32>(M<SInt32>(self + 0xd50) + 0xd0)) != 0) {
       VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + 0xc14),0,1);
       M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;

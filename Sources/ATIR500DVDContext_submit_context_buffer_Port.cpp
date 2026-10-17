@@ -32,24 +32,24 @@ void ATIR500DVDContext::submit_context_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
-  UInt32 *puVar2;
+  UInt32 *header;
   SInt32 iVar3;
-  UInt8 *pVVar4;
+  UInt8 *texture;
   SInt32 iVar5;
   SInt32 iVar6;
   UInt32 uVar7;
   UInt32 uVar8;
-  UInt32 *puVar9;
-  SInt32 iVar10;
+  UInt32 *slotHeader;
+  SInt32 dwordCount;
   UInt32 uVar11;
-  SInt32 iVar12;
+  SInt32 payload;
   UInt32 uVar13;
   SInt32 iVar14;
   SInt32 iVar15;
   SInt32 iVar16;
   SInt32 iVar17;
-  UInt8 *pAVar18;
-  SInt32 *piVar19;
+  UInt8 *textureSlot;
+  SInt32 *accel;
   SInt32 iVar20;
   UInt8 *pAVar21;
   SInt32 iVar22;
@@ -57,18 +57,18 @@ void ATIR500DVDContext::submit_context_buffer() {
   
   pAVar21 = self;
   do {
-    pVVar4 = M<UInt8 *>(pAVar21 + 0x104);
-    pAVar18 = pAVar21 + 0x104;
-    if (pVVar4 != (UInt8 *)0x0) {
-      if (M<char>(M<SInt32>(pVVar4 + 0x14) + 0x14) != '\0') {
-        if (M<SInt32>(pVVar4 + 4) == 0) {
-          ((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar4));
-          pVVar4 = M<UInt8 *>(pAVar21 + 0x104);
-          if (M<SInt32>(pVVar4 + 4) != 0) goto LAB_000344b0;
+    texture = M<UInt8 *>(pAVar21 + 0x104);
+    textureSlot = pAVar21 + 0x104;
+    if (texture != (UInt8 *)0x0) {
+      if (M<char>(M<SInt32>(texture + 0x14) + 0x14) != '\0') {
+        if (M<SInt32>(texture + 4) == 0) {
+          ((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture));
+          texture = M<UInt8 *>(pAVar21 + 0x104);
+          if (M<SInt32>(texture + 4) != 0) goto LAB_000344b0;
         }
         else {
 LAB_000344b0:
-          GH_IOGetTime(pVVar4 + 0x2c);
+          GH_IOGetTime(texture + 0x2c);
           M<UInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) + 0x38) =
                M<UInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38);
           M<UInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38) + 0x34) =
@@ -79,18 +79,18 @@ LAB_000344b0:
           M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0) = M<UInt32>(pAVar21 + 0x104);
           M<SInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) + 0x38) = M<SInt32>(pAVar21 + 0x104);
         }
-        M<UInt8>(M<SInt32>(M<SInt32>(pAVar18) + 0x14) + 0x14) = 0;
+        M<UInt8>(M<SInt32>(M<SInt32>(textureSlot) + 0x14) + 0x14) = 0;
         M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) = M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) | 1;
       }
-      iVar1 = M<SInt32>(pAVar18);
+      iVar1 = M<SInt32>(textureSlot);
       if (M<SInt32>(iVar1 + 0x48) != 0) {
         M<UInt32>(M<SInt32>(iVar1 + 0x24) + 0x28) = M<UInt32>(iVar1 + 0x28);
-        M<UInt32>(M<SInt32>(M<SInt32>(pAVar18) + 0x28) + 0x24) =
-             M<UInt32>(M<SInt32>(pAVar18) + 0x24);
-        M<UInt32>(M<SInt32>(pAVar18) + 0x24) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x600);
-        M<SInt32>(M<SInt32>(pAVar18) + 0x28) = M<SInt32>(self + 0x8c) + 0x5dc;
-        M<SInt32>(M<SInt32>(self + 0x8c) + 0x600) = M<SInt32>(pAVar18);
-        M<SInt32>(M<SInt32>(M<SInt32>(pAVar18) + 0x24) + 0x28) = M<SInt32>(pAVar18);
+        M<UInt32>(M<SInt32>(M<SInt32>(textureSlot) + 0x28) + 0x24) =
+             M<UInt32>(M<SInt32>(textureSlot) + 0x24);
+        M<UInt32>(M<SInt32>(textureSlot) + 0x24) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x600);
+        M<SInt32>(M<SInt32>(textureSlot) + 0x28) = M<SInt32>(self + 0x8c) + 0x5dc;
+        M<SInt32>(M<SInt32>(self + 0x8c) + 0x600) = M<SInt32>(textureSlot);
+        M<SInt32>(M<SInt32>(M<SInt32>(textureSlot) + 0x24) + 0x28) = M<SInt32>(textureSlot);
       }
     }
     pAVar21 = pAVar21 + 4;
@@ -99,35 +99,35 @@ LAB_000344b0:
         pAVar21 = self + M<SInt32>(self + 0xf4) * 0x18;
       }
       else {
-        piVar19 = M<SInt32 *>(self + 0x8c);
+        accel = M<SInt32 *>(self + 0x8c);
         uVar7 = M<SInt32>(self + 0xf4) + 1U & 1;
         M<UInt32>(self + 0xf4) = uVar7;
         pAVar21 = self + uVar7 * 0x18;
-        iVar22 = piVar19[0x1e1];
-        iVar1 = VCALL(*piVar19, 0x54c)(piVar19,M<UInt32>(pAVar21 + 0xd4));
-        piVar19[0x1e1] = iVar22 + iVar1;
-        puVar2 = M<UInt32 *>(self + 0xc0);
-        puVar9 = M<UInt32 *>(pAVar21 + 0xd8);
-        uVar13 = puVar2[1];
-        uVar11 = puVar2[2];
-        uVar8 = puVar2[3];
-        *puVar9 = *puVar2;
-        puVar9[1] = uVar13;
-        puVar9[2] = uVar11;
-        puVar9[3] = uVar8;
-        uVar8 = puVar2[7];
-        uVar13 = puVar2[4];
-        uVar11 = puVar2[6];
-        puVar9[5] = puVar2[5];
-        puVar9[7] = uVar8;
-        puVar9[4] = uVar13;
-        puVar9[6] = uVar11;
+        iVar22 = accel[0x1e1];
+        iVar1 = VCALL(*accel, 0x54c)(accel,M<UInt32>(pAVar21 + 0xd4));
+        accel[0x1e1] = iVar22 + iVar1;
+        header = M<UInt32 *>(self + 0xc0);
+        slotHeader = M<UInt32 *>(pAVar21 + 0xd8);
+        uVar13 = header[1];
+        uVar11 = header[2];
+        uVar8 = header[3];
+        *slotHeader = *header;
+        slotHeader[1] = uVar13;
+        slotHeader[2] = uVar11;
+        slotHeader[3] = uVar8;
+        uVar8 = header[7];
+        uVar13 = header[4];
+        uVar11 = header[6];
+        slotHeader[5] = header[5];
+        slotHeader[7] = uVar8;
+        slotHeader[4] = uVar13;
+        slotHeader[6] = uVar11;
         iVar1 = M<SInt32>(self + 0xc0);
         iVar22 = M<SInt32>(pAVar21 + 0xd8);
-        iVar10 = M<SInt32>(iVar1 + 0x14);
-        iVar12 = iVar22 + 0x20;
-        if (iVar10 == 0) {
-          iVar10 = 0;
+        dwordCount = M<SInt32>(iVar1 + 0x14);
+        payload = iVar22 + 0x20;
+        if (dwordCount == 0) {
+          dwordCount = 0;
           iVar1 = 0;
           iVar5 = 1;
           iVar14 = 2;
@@ -142,35 +142,35 @@ LAB_000344b0:
         }
         else {
           iVar3 = 0;
-          iVar22 = iVar10;
+          iVar22 = dwordCount;
           do {
-            M<UInt32>(iVar12 + iVar3) = M<UInt32>(iVar1 + 0x20 + iVar3);
+            M<UInt32>(payload + iVar3) = M<UInt32>(iVar1 + 0x20 + iVar3);
             iVar3 = iVar3 + 4;
             iVar22 = iVar22 + -1;
           } while (iVar22 != 0);
           iVar22 = M<SInt32>(pAVar21 + 0xd8);
-          iVar1 = iVar10 << 2;
-          iVar5 = iVar10 + 1;
-          iVar14 = iVar10 + 2;
-          iVar6 = iVar10 + 3;
-          iVar17 = iVar10 + 4;
-          iVar15 = iVar10 + 5;
-          iVar20 = iVar10 + 6;
-          iVar23 = iVar10 + 7;
-          iVar3 = iVar10 + 8;
-          iVar16 = iVar10 + 9;
-          uVar7 = iVar10 + 10;
+          iVar1 = dwordCount << 2;
+          iVar5 = dwordCount + 1;
+          iVar14 = dwordCount + 2;
+          iVar6 = dwordCount + 3;
+          iVar17 = dwordCount + 4;
+          iVar15 = dwordCount + 5;
+          iVar20 = dwordCount + 6;
+          iVar23 = dwordCount + 7;
+          iVar3 = dwordCount + 8;
+          iVar16 = dwordCount + 9;
+          uVar7 = dwordCount + 10;
         }
-        M<UInt32>(iVar12 + iVar1) = 0x1393;
-        M<UInt32>(iVar12 + iVar5 * 4) = 10;
-        M<UInt32>(iVar12 + iVar14 * 4) = 0xd0b;
-        M<UInt32>(iVar12 + iVar6 * 4) = 5;
-        M<UInt32>(iVar12 + iVar17 * 4) = 0x13c6;
-        M<UInt32>(iVar12 + iVar15 * 4) = 3;
-        M<UInt32>(iVar12 + iVar20 * 4) = 0x5c8;
-        M<UInt32>(iVar12 + iVar23 * 4) = 0x70000;
-        M<UInt32>(iVar12 + iVar3 * 4) = 0x1006;
-        M<UInt32>(iVar12 + iVar16 * 4) =
+        M<UInt32>(payload + iVar1) = 0x1393;
+        M<UInt32>(payload + iVar5 * 4) = 10;
+        M<UInt32>(payload + iVar14 * 4) = 0xd0b;
+        M<UInt32>(payload + iVar6 * 4) = 5;
+        M<UInt32>(payload + iVar17 * 4) = 0x13c6;
+        M<UInt32>(payload + iVar15 * 4) = 3;
+        M<UInt32>(payload + iVar20 * 4) = 0x5c8;
+        M<UInt32>(payload + iVar23 * 4) = 0x70000;
+        M<UInt32>(payload + iVar3 * 4) = 0x1006;
+        M<UInt32>(payload + iVar16 * 4) =
              M<UInt32>(M<SInt32>(self + 0x8c) + 0xb74) & 0xfffeffff | 0x10000;
         iVar1 = 0x12;
         do {
@@ -178,8 +178,8 @@ LAB_000344b0:
         } while (iVar1 != 0);
         if ((uVar7 & 7) != 0) {
           iVar1 = uVar7 * 4;
-          uVar7 = iVar10 + 0xb;
-          M<UInt32>(iVar12 + iVar1) = 0x80000000;
+          uVar7 = dwordCount + 0xb;
+          M<UInt32>(payload + iVar1) = 0x80000000;
         }
         M<UInt32>(iVar22 + 0x14) = uVar7;
         M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) =

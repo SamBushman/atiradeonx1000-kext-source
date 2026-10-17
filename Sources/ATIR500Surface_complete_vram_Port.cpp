@@ -27,42 +27,42 @@
 
 
 /* real addr 0x3c000 */
-UInt32 ATIR500Surface::complete_vram(ATIR500SurfaceBuffer *real_param_1) {
+UInt32 ATIR500Surface::complete_vram(ATIR500SurfaceBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
+  UInt32 bitIndex;
+  SInt32 slotOffset;
   UInt32 uVar3;
-  UInt8 AVar4;
-  SInt32 *piVar5;
-  UInt8 *this_00;
-  SInt32 iVar6;
+  UInt8 bufferSlot;
+  SInt32 *accel;
+  UInt8 *accelBytes;
+  SInt32 packet;
   
   uVar3 = 0;
-  if (param_1[0x3c] != 0x0) {
-    AVar4 = ((char)param_1[0x3c] + -1);
-    param_1[0x3c] = AVar4;
-    if (AVar4 == 0x0) {
-      AVar4 = param_1[0x37];
-      param_1[0x37] = 0xff;
-      uVar1 = (UInt8)AVar4 & 0x1f;
+  if (bufferBytes[0x3c] != 0x0) {
+    bufferSlot = ((char)bufferBytes[0x3c] + -1);
+    bufferBytes[0x3c] = bufferSlot;
+    if (bufferSlot == 0x0) {
+      bufferSlot = bufferBytes[0x37];
+      bufferBytes[0x37] = 0xff;
+      bitIndex = (UInt8)bufferSlot & 0x1f;
       M<UInt32>(M<SInt32>(self + 0xd50) + 0x890) =
-           (-2 << uVar1 | 0xfffffffeU >> 0x20 - uVar1) & M<UInt32>(M<SInt32>(self + 0xd50) + 0x890);
-      piVar5 = M<SInt32 *>(self + 0xd50);
-      if (M<char>(piVar5 + 0x20) != '\0') {
-        iVar6 = piVar5[0x8e];
-        iVar2 = (UInt32)(UInt8)AVar4 * 4;
-        VCALL(*piVar5, 0x54c)(piVar5,piVar5[0x8d]);
-        M<UInt32>(iVar6 + 0x120) = iVar2 + 0x2c1;
-        M<UInt32>(iVar6 + 0x124) = 0;
-        M<SInt32>(iVar6 + 0x128) = iVar2 + 0x2c2;
-        M<UInt32>(iVar6 + 300) = 0;
-        M<SInt32>(iVar6 + 0x130) = iVar2 + 0x2c3;
-        M<UInt32>(iVar6 + 0x134) = 0;
-        this_00 = M<UInt8 *>(self + 0xd50);
-        uVar3 = ((ATIRadeonX1000 *)(this_00))->submit_buffer((UInt32 *)(iVar6 + 0x120),M<SInt32>(this_00 + 0x228) + 0x120,6);
-        M<UInt32>(this_00 + 0x234) = uVar3;
+           (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & M<UInt32>(M<SInt32>(self + 0xd50) + 0x890);
+      accel = M<SInt32 *>(self + 0xd50);
+      if (M<char>(accel + 0x20) != '\0') {
+        packet = accel[0x8e];
+        slotOffset = (UInt32)(UInt8)bufferSlot * 4;
+        VCALL(*accel, 0x54c)(accel,accel[0x8d]);
+        M<UInt32>(packet + 0x120) = slotOffset + 0x2c1;
+        M<UInt32>(packet + 0x124) = 0;
+        M<SInt32>(packet + 0x128) = slotOffset + 0x2c2;
+        M<UInt32>(packet + 300) = 0;
+        M<SInt32>(packet + 0x130) = slotOffset + 0x2c3;
+        M<UInt32>(packet + 0x134) = 0;
+        accelBytes = M<UInt8 *>(self + 0xd50);
+        uVar3 = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet + 0x120),M<SInt32>(accelBytes + 0x228) + 0x120,6);
+        M<UInt32>(accelBytes + 0x234) = uVar3;
         return 1;
       }
     }

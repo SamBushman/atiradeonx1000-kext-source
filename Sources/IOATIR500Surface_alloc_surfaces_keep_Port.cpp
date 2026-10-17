@@ -31,28 +31,28 @@ UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *excludeSurface, V
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *excludeSurfaceBytes = reinterpret_cast<UInt8 *>(excludeSurface);
 
-  bool bVar1;
-  UInt32 uVar2;
-  UInt32 uVar3;
-  UInt32 uVar4;
-  UInt32 uVar5;
+  bool isLast;
+  UInt32 stateBits;
+  UInt32 kept;
+  UInt32 allKept;
+  UInt32 index;
   
-  uVar5 = 0;
-  uVar4 = 1;
-  uVar2 = M<UInt32>(self + 0xbf8);
+  index = 0;
+  allKept = 1;
+  stateBits = M<UInt32>(self + 0xbf8);
   while( true ) {
-    if ((mask & uVar2 & 1 << (uVar5 & 0x3f)) != 0) {
-      uVar3 = VCALL(M<SInt32>(self), 0x5f8)(self,excludeSurfaceBytes,excludeList,excludeCount,uVar5);
-      uVar4 = uVar4 & uVar3;
+    if ((mask & stateBits & 1 << (index & 0x3f)) != 0) {
+      kept = VCALL(M<SInt32>(self), 0x5f8)(self,excludeSurfaceBytes,excludeList,excludeCount,index);
+      allKept = allKept & kept;
     }
-    bVar1 = uVar5 == 0x16;
-    uVar5 = uVar5 + 1;
-    if (bVar1) break;
-    if (uVar4 == 0) {
+    isLast = index == 0x16;
+    index = index + 1;
+    if (isLast) break;
+    if (allKept == 0) {
       return 2;
     }
   }
-  if (uVar4 == 0) {
+  if (allKept == 0) {
     return 2;
   }
   return 0;

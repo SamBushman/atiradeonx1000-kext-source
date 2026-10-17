@@ -1,0 +1,16 @@
+# ATIR500DVDContext::process_command_buffer remap (fork D3). Names follow Tools/renames/ATIR500GLContext_process_command_buffer.tsv: the DVD interpreter has the same shape
+# (walk the context buffer's records, flush the pending dwords with ATIRadeonX1000::submit_buffer at the flush opcodes, publish the cursor/offset/count in the descriptor).
+# A rename applies to the whole function, so only variables with ONE role everywhere are named; the decompile reuses uVar17/uVar21/uVar37/iVar12/iVar18/iVar23 and the
+# bVar44/uVar41 flag/temp variables for several unrelated values per opcode case and they stay as placeholders. The four format-word locals (local_58/5c/60/64) each hold a
+# packed surface-format control word, but which side of the blit each belongs to is not established, so they are left alone too.
+# kind	target	old	new	tier	evidence
+def	ATIR500DVDContext::process_command_buffer@0x357c0	real_param_1	descriptor	INFERRED	the sole parameter, a VendorCommandDescriptor * (same role as in the GL context's process_command_buffer)
+def	ATIR500DVDContext::process_command_buffer@0x357c0	param_1	descriptorBytes	INFERRED	untyped alias of the typed parameter; written only at the tail (start, end offset, dword count, cursor at +0/+4/+8/+0xc)
+def	ATIR500DVDContext::process_command_buffer@0x357c0	puVar40	recordCursor	CONFIRMED	starts at context buffer (self+0xa4) + 0x1c, every case reads/rewrites the record at it, advanced by the record length at LAB_0003903c, final value stored to descriptor+0xc
+def	ATIR500DVDContext::process_command_buffer@0x357c0	local_6c	pendingWords	CONFIRMED	dword count of the unsubmitted stream: starts 0xffffffff, grows by the record length, passed as submit_buffer's 3rd argument and zeroed after each flush, stored to descriptor+8
+def	ATIR500DVDContext::process_command_buffer@0x357c0	local_70	streamOffset	CONFIRMED	byte offset of the first unsubmitted dword: advanced by 4*pendingWords after each submit_buffer, masked and added to self+0xa4/+0x94 for its arguments, stored to descriptor+4/+0
+def	ATIR500DVDContext::process_command_buffer@0x357c0	local_68	result	CONFIRMED	initialised 0, set to 3 by the opcode 0x02 case, and is the function's return value
+def	ATIR500DVDContext::process_command_buffer@0x357c0	uVar10	wordsToSubmit	INFERRED	snapshot of pendingWords taken before the flush zeroes it; its only reads are submit_buffer's 3rd argument at the two flush sites
+def	ATIR500DVDContext::process_command_buffer@0x357c0	uVar15	stamp	CONFIRMED	submit_buffer's return value (the submit stamp), stored to self+0xa0 at both flush sites
+def	ATIR500DVDContext::process_command_buffer@0x357c0	piVar14	accelerator	CONFIRMED	M(self+0x8c), the ATIRadeonX1000 the context belongs to: used for its vtable +0x5ec call and the +0x88c field test
+def	ATIR500DVDContext::process_command_buffer@0x357c0	pVVar42	texture	INFERRED	always the texture/transfer buffer taken from the context's slot table (self+0x104+4*index) or the shared table (self+0x84); then GART-mapped (map_transfer_to_GART), timestamped (IOGetTime at +0x2c) and linked into the accelerator's list

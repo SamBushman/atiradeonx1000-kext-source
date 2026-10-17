@@ -27,20 +27,20 @@
 
 
 /* real addr 0xbdc0 */
-IOReturn IOATIR5002DContext::finish(UInt32 param_1) {
+IOReturn IOATIR5002DContext::finish(UInt32 mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   code *pcVar1;
   SInt32 *piVar2;
   SInt32 iVar3;
   
-  if (param_1 == 1) {
+  if (mode == 1) {
     piVar2 = M<SInt32 *>(self + 0x94);
     iVar3 = piVar2[0x14];
     pcVar1 = M<code *>(*piVar2 + 0x55c);
   }
   else {
-    if (param_1 == 0) {
+    if (mode == 0) {
       iVar3 = VCALL(*M<SInt32 *>(self + 0x94), 0x55c)
                         (M<SInt32 *>(self + 0x94),M<UInt32>(self + 0x7c));
       if (iVar3 == -1) {
@@ -49,7 +49,7 @@ IOReturn IOATIR5002DContext::finish(UInt32 param_1) {
       M<SInt32>(M<SInt32>(self + 0x94) + 0x7a4) = iVar3 + M<SInt32>(M<SInt32>(self + 0x94) + 0x7a4);
       return 0;
     }
-    if (param_1 != 2) {
+    if (mode != 2) {
       return 0xe00002c2;
     }
     piVar2 = M<SInt32 *>(self + 0x94);

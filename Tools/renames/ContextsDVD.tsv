@@ -1,0 +1,166 @@
+# IOATIR500DVDContext and ATIR500DVDContext (except process_command_buffer) remap: placeholder -> real names. Applied by Tools/apply_renames.py.
+# kind	target	old	new	tier	evidence
+# Parameters from the class header declarations (Tools/renames/gen_param_rows.py) unless the body shows the header guess is wrong; locals from reading the bodies. Locals reused for several roles are left alone.
+def	IOATIR500DVDContext::add_texture_to_stream@0xe770	real_param_1	texture	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::add_texture_to_stream@0xe770	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	param_1	size	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::clientMemoryForType@0xf0c0	param_1	type	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::clientMemoryForType@0xf0c0	param_2	options	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::clientMemoryForType@0xf0c0	param_3	memory	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::delete_image@0x104f0	param_1	textureID	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	real_param_1	needed	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	param_1	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	param_2	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::get_config@0xe980	param_1	out0	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::get_config@0xe980	param_2	out1	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::get_status@0xe9b0	param_1	out0	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::get_surface_size@0xe9e0	param_1	outW	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::get_surface_size@0xe9e0	param_2	outH	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::init_context_buffer_header@0xe7d0	real_param_1	header	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::init_context_buffer_header@0xe7d0	param_1	headerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::init_context_buffer_header@0xe7d0	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::lock_all_buffers@0xfd00	real_param_2	out	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::map_transfer_to_GART@0xe820	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::map_transfer_to_GART@0xe820	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::remove_texture_from_stream@0xe750	real_param_1	texture	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::remove_texture_from_stream@0xe750	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::set_surface@0xfa40	param_1	surfaceID	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::set_surface@0xfa40	param_3	modeBits	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::set_surface@0xfa40	param_4	flagCount	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::stop@0xe3a0	real_param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::stop@0xe3a0	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::unlock_memory@0xff20	param_1	lockType	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::unlock_memory@0xff20	param_2	outTag	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::write_buffer@0xffe0	real_param_2	data	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::write_buffer@0xffe0	param_2	dataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500DVDContext::write_buffer@0xffe0	param_3	byteCount	INFERRED	name from the class header declaration
+def	IOATIR500DVDContext::declare_image@0x103e0	param_1	unused1	INFERRED	never read: the body uses only the other three arguments
+def	IOATIR500DVDContext::declare_image@0x103e0	param_2	address	CONFIRMED	first argument of IOATIR500Shared::new_agp_texture(address, length, outHandle): a client virtual address (see IOATIR500Shared.tsv)
+def	IOATIR500DVDContext::declare_image@0x103e0	param_3	length	CONFIRMED	second argument of new_agp_texture (byte length); declare_image fails with 0xe00002c2 when it or the address is 0
+def	IOATIR500DVDContext::declare_image@0x103e0	param_4	outHandle	CONFIRMED	third argument of new_agp_texture: receives the handle of the new texture
+def	IOATIR500DVDContext::declare_image@0x103e0	this_00	shared	CONFIRMED	the IOATIR500Shared at this+0x84, created on demand by create_shared
+def	IOATIR500DVDContext::declare_image@0x103e0	uVar2	result	CONFIRMED	the return value: 0xe00002c2 bad argument, 0 or 0xe00002bd when new_agp_texture failed
+decl	IOATIR500DVDContext::declare_image	param1	unused1	INFERRED	header placeholder; the body never reads it
+decl	IOATIR500DVDContext::declare_image	formatOrSize	address	CONFIRMED	the body passes it to new_agp_texture as the client virtual address
+decl	IOATIR500DVDContext::declare_image	sizeInBytes	length	CONFIRMED	the body passes it to new_agp_texture as the byte length
+def	IOATIR500DVDContext::lock_all_buffers@0xfd00	param_2	outCursor	INFERRED	untyped alias of `out`, advanced 8 bytes per entry while the 13 (offset, pitch) pairs are written
+def	IOATIR500DVDContext::lock_all_buffers@0xfd00	param_1	unused1	INFERRED	never read by the body
+def	IOATIR500DVDContext::lock_all_buffers@0xfd00	uVar2	surface	CONFIRMED	the bound IOATIR500Surface at this+0xf8 (null: nothing bound), whose buffer table at +0xb70 is read
+def	IOATIR500DVDContext::lock_all_buffers@0xfd00	iVar1	entryOffset	CONFIRMED	byte offset of the current buffer-table entry (index*4) into surface+0xb70
+def	IOATIR500DVDContext::lock_all_buffers@0xfd00	uVar5	result	CONFIRMED	the return value: 0 or 0xe00002cc
+decl	IOATIR500DVDContext::lock_all_buffers	param1	unused1	INFERRED	header placeholder; the body never reads it
+def	IOATIR500DVDContext::write_buffer@0xffe0	pIVar1	surface	CONFIRMED	the bound IOATIR500Surface at this+0xf8; its buffer table (+0xb70) is indexed and alloc_surfaces_retry is called on it
+def	IOATIR500DVDContext::write_buffer@0xffe0	iVar13	rectX	CONFIRMED	data+0: the left edge of the destination rectangle; clipped to 0 when negative
+def	IOATIR500DVDContext::write_buffer@0xffe0	iVar12	rectY	CONFIRMED	data+4: the top edge of the destination rectangle; clipped to 0 when negative
+def	IOATIR500DVDContext::write_buffer@0xffe0	iVar5	rectBottom	CONFIRMED	rectY + height, compared with the buffer height (+0x1e)
+def	IOATIR500DVDContext::write_buffer@0xffe0	iVar8	srcPitch	CONFIRMED	data+0x18: the source row pitch, passed on to the transfer call and used to size the mapped range
+def	IOATIR500DVDContext::write_buffer@0xffe0	uVar15	result	CONFIRMED	the return value: 0 or 0xe00002be when the descriptor could not be made
+def	IOATIR500DVDContext::set_surface@0xfa40	bVar1	unbind	CONFIRMED	true when surfaceID is 0 or find_surface_for_id found nothing: the context is detached from its surface
+def	IOATIR500DVDContext::set_surface@0xfa40	uVar6	result	CONFIRMED	the return value: 0 or 0xe00002c2 when the surface id is unknown
+def	IOATIR500DVDContext::set_surface@0xfa40	this_00	newSurface	CONFIRMED	find_surface_for_id(surfaceID): the surface to bind (null when unbinding)
+def	IOATIR500DVDContext::set_surface@0xfa40	local_38	currentModeBits	CONFIRMED	this surface's mode word (surface+0xbe8), passed as &local_38 to the +0x5ac setCompatibleSurfaceMode call and stored back
+def	IOATIR500DVDContext::set_surface@0xfa40	iVar4	accepted	CONFIRMED	result of the +0x5ac setCompatibleSurfaceMode call: 0 means the mode was refused
+def	IOATIR500DVDContext::set_surface@0xfa40	uVar5	bufferMask	INFERRED	this+0x88 with one bit (0x400 << n) added for each of the flagCount buffers; the same field is the keep mask given to alloc_surfaces
+def	IOATIR500DVDContext::stop@0xe3a0	pIVar1	previous	CONFIRMED	the node before this context on the accelerator's context list (linked through +0x80), unlinked below
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	bVar1	lastSlot	CONFIRMED	iVar2 == 1: the loop over the two context-buffer slots ends after this one
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	iVar3	freed	CONFIRMED	result of freeTransferToAllocGART for a context-buffer slot: non-zero stops the walk
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	pVVar4	slot	INFERRED	the 0x18-byte context-buffer slot walked at this+0xc4 + n*0x18
+def	IOATIR500DVDContext::freeToAllocGART@0xe8a0	pIVar5	slotBase	INFERRED	stepped in lockstep with `slot`; its +0xd4 is the slot's stamp (slot+0x10)
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	bVar1	more	CONFIRMED	iVar6 != 1: another of the two slot buffers remains to be allocated
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	piVar2	descriptor	CONFIRMED	each IOBufferMemoryDescriptor::withOptions result (the shared buffer, then each slot buffer)
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	pVVar3	header	CONFIRMED	the descriptor's mapped address (vtable +0x1cc), initialised by init_context_buffer_header
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	uVar4	result	CONFIRMED	the return value: 1 when everything was allocated
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	iVar6	slotIndex	CONFIRMED	which of the two slot buffers is being allocated (0, 1)
+def	IOATIR500DVDContext::allocAllContextBuffers@0xeab0	iVar5	released	CONFIRMED	count of slot buffers released by the failure unwind
+def	IOATIR500DVDContext::init_context_buffer_header@0xe7d0	iVar1	offset	CONFIRMED	byte offset of the dword being zeroed in the 0x20-byte header
+def	IOATIR500DVDContext::init_context_buffer_header@0xe7d0	iVar2	wordsLeft	CONFIRMED	dwords still to zero (starts at 8)
+def	IOATIR500DVDContext::unlock_memory@0xff20	iVar1	surface	CONFIRMED	the bound surface at this+0xf8; its lock count (+0xbd2) is decremented
+def	IOATIR500DVDContext::unlock_memory@0xff20	iVar2	result	CONFIRMED	the return value: 0, or 0xe00002c2 (-0x1ffffd3e) when no surface is bound
+def	IOATIR500DVDContext::freeAllContextBuffers@0xe270	bVar1	more	CONFIRMED	iVar3 != 1: another of the two slot buffers remains
+def	IOATIR500DVDContext::freeAllContextBuffers@0xe270	iVar3	slotIndex	CONFIRMED	which of the two slot buffers is being released (0, 1)
+def	IOATIR500DVDContext::freeAllContextBuffers@0xe270	pIVar4	slot	INFERRED	the 0x18-byte slot passed to the +0x5ac call, stepped per iteration
+def	IOATIR500DVDContext::freeAllContextBuffers@0xe270	piVar5	accel	CONFIRMED	the accelerator at this+0x8c; +0x1e1*4 accumulates the wait on the last slot's stamp
+def	IOATIR500DVDContext::freeAllContextBuffers@0xe270	pIVar7	slotBase	INFERRED	this + slotIndex*0x18: the slot whose fields are zeroed
+def	IOATIR500DVDContext::create_shared@0xee60	this_00	shared	CONFIRMED	the new IOATIR500Shared (stored at this+0x84)
+def	IOATIR500DVDContext::create_shared@0xee60	uVar1	result	CONFIRMED	the return value: 1 when the shared object was created and initialised
+def	IOATIR500DVDContext::create_shared@0xee60	iVar2	initialised	CONFIRMED	result of the vtable +0x48 (init) call on the new object
+def	IOATIR500DVDContext::map_transfer_to_GART@0xe820	iVar1	mapped	CONFIRMED	result of the accelerator's +0x5a8 call: 0 means the buffer was not mapped, so freeToAllocGART is tried
+def	IOATIR500DVDContext::delete_image@0x104f0	this_00	shared	CONFIRMED	the IOATIR500Shared at this+0x84 whose texture table (+0x10, count at +0x14) is indexed
+def	IOATIR500DVDContext::delete_image@0x104f0	pVVar1	texture	CONFIRMED	the texture table entry for textureID, passed to delete_texture
+def	IOATIR500DVDContext::delete_image@0x104f0	uVar2	result	CONFIRMED	the return value
+def	IOATIR500DVDContext::finish@0xea30	iVar1	waited	CONFIRMED	result of the accelerator's +0x55c call on this context's last stamp (this+0x7c); -1 means the wait failed
+def	IOATIR500DVDContext::finish@0xea30	uVar2	result	CONFIRMED	the return value: 0 or 0xe00002d6
+def	IOATIR500DVDContext::get_status@0xe9b0	uVar1	status	CONFIRMED	1 when a surface is bound and its flag 0x20000000 is clear, else 0: stored through the out pointer
+def	ATIR500DVDContext::check_stamps@0x341a0	param_1	checkMain	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::check_stamps@0x341a0	param_2	checkIDCT	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::check_stamps@0x341a0	param_3	outBothDone	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::clientMemoryForType@0x352a0	param_1	type	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::clientMemoryForType@0x352a0	param_2	options	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::clientMemoryForType@0x352a0	param_3	memory	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::doIDCT@0x35540	real_param_2	info	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::doIDCT@0x35540	param_2	infoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500DVDContext::doIDCT@0x35540	param_3	infoSize	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_enable_deint@0x34c90	param_1	mode	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_enable_overlay@0x34f30	param_1	enable	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_1	x	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_2	y	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_3	w	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_4	h	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::read_regs@0x35120	param_1	offsets	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::read_regs@0x35120	param_2	outValues	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::read_regs@0x35120	param_3	byteCount	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::read_regs@0x35120	param_4	inOutCount	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::set_macrovision@0x35010	param_2	attribute	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::set_macrovision@0x35010	param_3	value	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::setup_buffers@0x34260	param_1	topHeight	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::setup_buffers@0x34260	param_2	leftWidth	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::setup_buffers@0x34260	param_3	bottomHeight	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::setup_buffers@0x34260	param_4	rightWidth	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::setup_buffers@0x34260	param_5	controlFlags	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::wait_for_stamps@0x34120	param_1	waitMain	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::wait_for_stamps@0x34120	param_2	waitIDCT	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::write_regs@0x35200	param_1	offset	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::write_regs@0x35200	param_2	value	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_5	overlayExists	INFERRED	stored at surface+0xda4 (the flag alloc_overlay returns); when 0 the surface's 0xbed/0xbee dirty bytes are set
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	iVar1	accel	CONFIRMED	the accelerator at this+0x8c, whose lock (+0x840) is released at the end
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	uVar2	result	CONFIRMED	the return value: 0, 0xe00002d8 (hardware down) or 0xe00002bc (no surface)
+decl	ATIR500DVDContext::dvd_setup_overlay	param5	overlayExists	INFERRED	header placeholder; see the definition
+def	ATIR500DVDContext::dvd_setup_subpicture@0x34e50	param_2	unknownArg1	UNKNOWN	forwarded unchanged to ATIR500Surface::dvd_setup_subpicture, which is an empty function: the role is not established
+def	ATIR500DVDContext::dvd_setup_subpicture@0x34e50	param_3	unknownArg2	UNKNOWN	forwarded unchanged to ATIR500Surface::dvd_setup_subpicture, which is an empty function: the role is not established
+def	ATIR500DVDContext::dvd_setup_subpicture@0x34e50	param_4	unknownArg3	UNKNOWN	forwarded unchanged to ATIR500Surface::dvd_setup_subpicture, which is an empty function: the role is not established
+def	ATIR500DVDContext::dvd_setup_subpicture@0x34e50	param_5	unknownArg4	UNKNOWN	forwarded unchanged to ATIR500Surface::dvd_setup_subpicture, which is an empty function: the role is not established
+def	ATIR500DVDContext::dvd_setup_subpicture@0x34e50	iVar1	accel	CONFIRMED	the accelerator at this+0x8c, whose lock (+0x840) is released at the end
+def	ATIR500DVDContext::dvd_setup_subpicture@0x34e50	uVar2	result	CONFIRMED	the return value: 0, 0xe00002d8 (hardware down) or 0xe00002bc (no surface)
+decl	ATIR500DVDContext::dvd_setup_subpicture	param1	unknownArg1	UNKNOWN	header placeholder; the surface-side function is empty
+decl	ATIR500DVDContext::dvd_setup_subpicture	param2	unknownArg2	UNKNOWN	header placeholder; the surface-side function is empty
+decl	ATIR500DVDContext::dvd_setup_subpicture	param3	unknownArg3	UNKNOWN	header placeholder; the surface-side function is empty
+decl	ATIR500DVDContext::dvd_setup_subpicture	param4	unknownArg4	UNKNOWN	header placeholder; the surface-side function is empty
+def	ATIR500DVDContext::dvd_enable_overlay@0x34f30	iVar1	accel	CONFIRMED	the accelerator at this+0x8c, whose lock (+0x840) is released at the end
+def	ATIR500DVDContext::dvd_enable_overlay@0x34f30	uVar2	result	CONFIRMED	the return value: 0, 0xe00002d8 (hardware down) or 0xe00002bc (no surface)
+def	ATIR500DVDContext::dvd_enable_deint@0x34c90	iVar1	accel	CONFIRMED	the accelerator at this+0x8c, whose lock (+0x840) is released at the end
+def	ATIR500DVDContext::dvd_enable_deint@0x34c90	uVar2	result	CONFIRMED	the return value: 0, 0xe00002d8 (hardware down) or 0xe00002bc (no surface)
+def	ATIR500DVDContext::read_regs@0x35120	iVar3	registers	CONFIRMED	the register window pointer read from accelerator+0x860
+def	ATIR500DVDContext::read_regs@0x35120	pbVar1	registerAddress	CONFIRMED	registers + (offsets[i] & 0x1ffc): the register read through loadWordByteReversed
+def	ATIR500DVDContext::read_regs@0x35120	uVar5	result	CONFIRMED	the return value: 0, 0xe00002d8 (hardware down) or 0xe00002c2 (bad count)
+def	ATIR500DVDContext::write_regs@0x35200	iVar3	registers	CONFIRMED	the register window pointer read from accelerator+0x860
+def	ATIR500DVDContext::write_regs@0x35200	iVar1	accel	CONFIRMED	the accelerator at this+0x8c, whose lock (+0x840) is released at the end
+def	ATIR500DVDContext::write_regs@0x35200	uVar2	result	CONFIRMED	the return value: 0 or 0xe00002d8 (hardware down)
+def	ATIR500DVDContext::set_macrovision@0x35010	piVar2	framebuffer	CONFIRMED	the IONDRVFramebuffer found by safeMetaCast on the display's entry; stored at this+0x160 and called through vtable +0x70c
+def	ATIR500DVDContext::set_macrovision@0x35010	uVar3	result	CONFIRMED	the return value: the framebuffer call's result, 0xe00002d8 (hardware down) or 0xe00002c0 (no framebuffer)
+def	ATIR500DVDContext::check_stamps@0x341a0	iVar3	mainDone	CONFIRMED	1 when checkMain is 0, else the accelerator's +0x5f4 check of that stamp
+def	ATIR500DVDContext::check_stamps@0x341a0	iVar2	idctDone	CONFIRMED	1 when checkIDCT is 0, else the accelerator's +0x554 check of that stamp
+def	ATIR500DVDContext::check_stamps@0x341a0	uVar1	bothDone	CONFIRMED	1 only when both checks passed: stored through the out pointer
+def	ATIR500DVDContext::clientMemoryForType@0x352a0	uVar1	result	CONFIRMED	the return value
+def	ATIR500DVDContext::doIDCT@0x35540	pVVar4	bufferSlot	CONFIRMED	the command-buffer slot (this+0x168/0x184 for plane 0, 0x1a4/0x1c0 for plane 1) whose GART offset (+4) and header (+0x14) go to submit_idct_buffer_consumed
+def	ATIR500DVDContext::discard_command_buffer@0x33c30	puVar7	record	CONFIRMED	cursor over the command records, starting at the header + 0x1c and advanced by each record's length
+def	ATIR500DVDContext::discard_command_buffer@0x33c30	uVar6	recordWord	CONFIRMED	the first dword of the record: opcode in the top byte, length in the low 24 bits
+def	ATIR500DVDContext::discard_command_buffer@0x33c30	uVar5	recordLength	CONFIRMED	recordWord & 0xffffff, or 0 for a bad texture: added to the cursor, and 0 ends the walk
+def	ATIR500DVDContext::discard_command_buffer@0x33c30	iVar2	slotOffset	CONFIRMED	byte offset of the bound-texture slot (this+0x104 + n*4) selected by the opcode
+def	ATIR500DVDContext::discard_command_buffer@0x33c30	iVar3	oldRefCount	CONFIRMED	OSDecrementAtomic result on the replaced texture's reference count: 1 means it was the last reference
+def	ATIR500DVDContext::submit_context_buffer@0x34440	pAVar18	textureSlot	CONFIRMED	the address of this context's bound-texture pointer (this+0x104+n*4)
+def	ATIR500DVDContext::submit_context_buffer@0x34440	pVVar4	texture	CONFIRMED	the texture bound in that slot
+def	ATIR500DVDContext::submit_context_buffer@0x34440	puVar2	header	CONFIRMED	this+0xc0: the pending context-buffer header, copied into the next slot
+def	ATIR500DVDContext::submit_context_buffer@0x34440	puVar9	slotHeader	CONFIRMED	the header area of the slot being submitted (slot+0xd8), the copy destination
+def	ATIR500DVDContext::submit_context_buffer@0x34440	piVar19	accel	CONFIRMED	the accelerator at this+0x8c
+def	ATIR500DVDContext::submit_context_buffer@0x34440	iVar10	dwordCount	CONFIRMED	header+0x14: the dwords of commands already in the header, copied before the trailer is appended
+def	ATIR500DVDContext::submit_context_buffer@0x34440	iVar12	payload	CONFIRMED	slotHeader + 0x20: where the commands and the trailer are written

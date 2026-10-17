@@ -30,44 +30,44 @@
 void ATIR500Surface::resetFullScreen() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 AVar1;
+  UInt8 savedValue;
   UInt8 bVar2;
   UInt8 bVar3;
   UInt8 bVar4;
-  UInt32 uVar5;
-  UInt32 uVar6;
+  UInt32 maskedValue;
+  UInt32 newValue;
   UInt32 uVar7;
   SInt32 iVar8;
   SInt32 iVar9;
-  SInt32 iVar10;
-  SInt32 iVar11;
+  SInt32 registers;
+  SInt32 id;
   
-  AVar1 = self[0xdbb];
-  M<UInt8>(M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 0x164) = AVar1;
-  iVar11 = M<SInt32>(self + 0xc14);
+  savedValue = self[0xdbb];
+  M<UInt8>(M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 0x164) = savedValue;
+  id = M<SInt32>(self + 0xc14);
   iVar9 = M<SInt32>(self + 0xd50);
-  self[iVar11 + 0xdb6] = 0x0;
+  self[id + 0xdb6] = 0x0;
   if (M<char>(iVar9 + 0x9b0) != '\0') {
-    if (M<SInt32>(iVar11 * 0x18 + iVar9 + 0xb10) == 0) {
+    if (M<SInt32>(id * 0x18 + iVar9 + 0xb10) == 0) {
       if ((M<SInt32>(iVar9 + 0x894) != 0) &&
-         (M<SInt32>((UInt32)(iVar11 == 0) * 0x18 + iVar9 + 0xb10) != 0)) {
-        iVar9 = (UInt32)(iVar11 == 0) * 0x78 + iVar9;
-        M<UInt8>(iVar9 + 0x9f4) = AVar1;
-        M<UInt8>(iVar9 + 0x164) = AVar1;
+         (M<SInt32>((UInt32)(id == 0) * 0x18 + iVar9 + 0xb10) != 0)) {
+        iVar9 = (UInt32)(id == 0) * 0x78 + iVar9;
+        M<UInt8>(iVar9 + 0x9f4) = savedValue;
+        M<UInt8>(iVar9 + 0x164) = savedValue;
       }
     }
     else {
-      M<UInt8>(iVar11 * 0x78 + iVar9 + 0x9f4) = AVar1;
+      M<UInt8>(id * 0x78 + iVar9 + 0x9f4) = savedValue;
       iVar9 = M<SInt32>(self + 0xd50);
       if (M<SInt32>(iVar9 + 0x894) != 0) {
         uVar7 = (UInt32)(M<SInt32>(self + 0xc14) == 0);
         if (M<SInt32>(uVar7 * 0x18 + iVar9 + 0xb10) == 0) {
-          M<UInt8>(uVar7 * 0x78 + iVar9 + 0x164) = AVar1;
+          M<UInt8>(uVar7 * 0x78 + iVar9 + 0x164) = savedValue;
         }
         else {
           iVar9 = uVar7 * 0x78 + iVar9;
-          M<UInt8>(iVar9 + 0x164) = AVar1;
-          M<UInt8>(iVar9 + 0x9f4) = AVar1;
+          M<UInt8>(iVar9 + 0x164) = savedValue;
+          M<UInt8>(iVar9 + 0x9f4) = savedValue;
         }
       }
     }
@@ -75,15 +75,15 @@ void ATIR500Surface::resetFullScreen() {
   iVar9 = VCALL(M<SInt32>(self), 0x5dc)(self);
   if (iVar9 == 0) {
     iVar9 = M<SInt32>(self + 0xd50);
-    iVar10 = M<SInt32>(iVar9 + 0x860);
-    uVar5 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6104)) & 0xffcfffff;
-    iVar11 = M<SInt32>(self + 0xc14);
-    uVar7 = (UInt32)M<UInt8>(iVar11 * 0x78 + iVar9 + 0x164);
-    uVar6 = uVar5 | (uVar7 & 1) << 0x15 | (UInt32)(1 < uVar7) << 0x14;
-    storeWordByteReversed(&M<UInt8>(iVar10 + (iVar11 == 0 ? 0x6104 : 0x6904)), uVar6);
+    registers = M<SInt32>(iVar9 + 0x860);
+    maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
+    id = M<SInt32>(self + 0xc14);
+    uVar7 = (UInt32)M<UInt8>(id * 0x78 + iVar9 + 0x164);
+    newValue = maskedValue | (uVar7 & 1) << 0x15 | (UInt32)(1 < uVar7) << 0x14;
+    storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6104 : 0x6904)), newValue);
     enforceInOrderExecutionIO();
     if (M<SInt32>(iVar9 + 0x894) != 0) {
-      storeWordByteReversed(&M<UInt8>(iVar10 + (iVar11 == 0 ? 0x6904 : 0x6104)), uVar6);
+      storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6904 : 0x6104)), newValue);
       enforceInOrderExecutionIO();
     }
   }

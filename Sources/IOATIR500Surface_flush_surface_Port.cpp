@@ -31,7 +31,7 @@ void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
-  UInt32 uVar2;
+  UInt32 panelIndex;
   PanelRecord *panel;
   
   if ((self[0xbed] == 0x0) ||
@@ -44,17 +44,17 @@ void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
     iVar1 = M<SInt32>(self + 0xd50);
     M<UInt32>(self + 0x84) = M<UInt32>(self + 0x80);
     if (M<SInt32>(iVar1 + 0xcc) != 0) {
-      uVar2 = 0;
+      panelIndex = 0;
       panel = PANEL_RECORD(self, 0);
       do {
-        if (((1 << (uVar2 & 0x3f) & panelMask) != 0) && (panel->active != 0x0)) {
-          VCALL(M<SInt32>(self), 0x5d4)(self,uVar2,swapArg);
+        if (((1 << (panelIndex & 0x3f) & panelMask) != 0) && (panel->active != 0x0)) {
+          VCALL(M<SInt32>(self), 0x5d4)(self,panelIndex,swapArg);
           M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
           iVar1 = M<SInt32>(self + 0xd50);
         }
-        uVar2 = uVar2 + 1;
+        panelIndex = panelIndex + 1;
         panel = panel + 1;
-      } while (uVar2 < M<UInt32>(iVar1 + 0xcc));
+      } while (panelIndex < M<UInt32>(iVar1 + 0xcc));
     }
     M<UInt32>(iVar1 + 0x78) = 0;
   }

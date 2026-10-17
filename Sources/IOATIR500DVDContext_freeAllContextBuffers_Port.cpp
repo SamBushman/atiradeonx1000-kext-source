@@ -30,39 +30,39 @@
 void IOATIR500DVDContext::freeAllContextBuffers() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool more;
   SInt32 iVar2;
-  SInt32 iVar3;
-  UInt8 *pIVar4;
-  SInt32 *piVar5;
+  SInt32 slotIndex;
+  UInt8 *slot;
+  SInt32 *accel;
   SInt32 iVar6;
-  UInt8 *pIVar7;
+  UInt8 *slotBase;
   
-  pIVar4 = self + 0xc4;
-  iVar3 = 0;
-  piVar5 = M<SInt32 *>(self + 0x8c);
-  iVar6 = piVar5[0x1e1];
-  iVar2 = VCALL(*piVar5, 0x54c)
-                    (piVar5,M<UInt32>(self + M<SInt32>(self + 0xf4) * 0x18 + 0xd4));
-  piVar5[0x1e1] = iVar6 + iVar2;
-  pIVar7 = self;
+  slot = self + 0xc4;
+  slotIndex = 0;
+  accel = M<SInt32 *>(self + 0x8c);
+  iVar6 = accel[0x1e1];
+  iVar2 = VCALL(*accel, 0x54c)
+                    (accel,M<UInt32>(self + M<SInt32>(self + 0xf4) * 0x18 + 0xd4));
+  accel[0x1e1] = iVar6 + iVar2;
+  slotBase = self;
   do {
-    if (M<SInt32>(pIVar7 + 200) != 0) {
-      VCALL(*M<SInt32 *>(self + 0x8c), 0x5ac)(M<SInt32 *>(self + 0x8c),pIVar4);
+    if (M<SInt32>(slotBase + 200) != 0) {
+      VCALL(*M<SInt32 *>(self + 0x8c), 0x5ac)(M<SInt32 *>(self + 0x8c),slot);
     }
-    pIVar4 = pIVar4 + 0x18;
-    VCALL(*M<SInt32 *>(pIVar7 + 0xcc), 0x18)(M<SInt32 *>(pIVar7 + 0xcc));
-    bVar1 = iVar3 != 1;
-    M<UInt32>(pIVar7 + 0xc4) = 0;
-    M<UInt32>(pIVar7 + 200) = 0;
-    M<UInt32>(pIVar7 + 0xcc) = 0;
-    M<UInt16>(pIVar7 + 0xd2) = 0;
-    M<UInt16>(pIVar7 + 0xd0) = 0;
-    M<UInt32>(pIVar7 + 0xd4) = 0;
-    M<UInt32>(pIVar7 + 0xd8) = 0;
-    iVar3 = iVar3 + 1;
-    pIVar7 = pIVar7 + 0x18;
-  } while (bVar1);
+    slot = slot + 0x18;
+    VCALL(*M<SInt32 *>(slotBase + 0xcc), 0x18)(M<SInt32 *>(slotBase + 0xcc));
+    more = slotIndex != 1;
+    M<UInt32>(slotBase + 0xc4) = 0;
+    M<UInt32>(slotBase + 200) = 0;
+    M<UInt32>(slotBase + 0xcc) = 0;
+    M<UInt16>(slotBase + 0xd2) = 0;
+    M<UInt16>(slotBase + 0xd0) = 0;
+    M<UInt32>(slotBase + 0xd4) = 0;
+    M<UInt32>(slotBase + 0xd8) = 0;
+    slotIndex = slotIndex + 1;
+    slotBase = slotBase + 0x18;
+  } while (more);
   VCALL(*M<SInt32 *>(self + 0xb4), 0x18)(M<SInt32 *>(self + 0xb4));
   M<UInt16>(self + 0xba) = 0;
   M<UInt16>(self + 0xb8) = 0;

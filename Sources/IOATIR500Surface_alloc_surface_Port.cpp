@@ -30,20 +30,20 @@
 bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 allocated;
   UInt32 in_register_00000014;
-  UInt8 *pAVar2;
+  UInt8 *surfaceBuffer;
   
-  pAVar2 = (UInt8 *)(self + index * 0x78 + 0xa8);
+  surfaceBuffer = (UInt8 *)(self + index * 0x78 + 0xa8);
   if ((M<SInt32>(self + index * 0x78 + 0xb8) == 0) || (M<SInt32>(self + index * 0x78 + 0xb0) != 0)
      ) {
     if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto LAB_00013448;
   }
   else {
-    iVar1 = VCALL(M<SInt32>(self), 0x5d0)(self,pAVar2);
-    if ((iVar1 == 0) &&
-       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocSurfaceVRAM((IOATIR500Surface *)(self),(IOATIR500Surface *)((UInt8 *)0x0),
-                           (VendorTextureBuffer **)((UInt8 **)0x0),0,(ATIR500SurfaceBuffer *)(pAVar2)), iVar1 == 0)) {
+    allocated = VCALL(M<SInt32>(self), 0x5d0)(self,surfaceBuffer);
+    if ((allocated == 0) &&
+       (allocated = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocSurfaceVRAM((IOATIR500Surface *)(self),(IOATIR500Surface *)((UInt8 *)0x0),
+                           (VendorTextureBuffer **)((UInt8 **)0x0),0,(ATIR500SurfaceBuffer *)(surfaceBuffer)), allocated == 0)) {
       return 0;
     }
     if ((3U >> (index & 0x3f) & 1) != 0) {
@@ -51,11 +51,11 @@ bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
     }
     if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto LAB_00013448;
     if (((UInt32)moveFromBacking) != 0) {
-      this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
+      this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
       goto LAB_00013448;
     }
   }
-  this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
+  this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
 LAB_00013448:
   M<UInt32>(self + 0xbf8) =
        (-2 << (index & 0x1f) | 0xfffffffeU >> 0x20 - (index & 0x1f)) & M<UInt32>(self + 0xbf8);

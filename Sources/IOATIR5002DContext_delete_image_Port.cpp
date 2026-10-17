@@ -29,42 +29,42 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0xd450 */
-IOReturn IOATIR5002DContext::delete_image(UInt32 param_1) {
+IOReturn IOATIR5002DContext::delete_image(UInt32 textureID) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *this_00;
-  UInt8 *pVVar1;
-  int iVar2;
-  UInt8 *pAVar3;   /* #176: byte pointer - typed ATIR500SurfaceBuffer* scaled `pAVar3 + 0x24` by sizeof=0x80 */
-  UInt32 uVar4;
+  UInt8 *shared;
+  UInt8 *texture;
+  int backingStore;
+  UInt8 *surfaceBuffer;   /* #176: byte pointer - typed ATIR500SurfaceBuffer* scaled `surfaceBuffer + 0x24` by sizeof=0x80 */
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + 0x94) + 0x840));
-  this_00 = M<UInt8 *>(self + 0x88);
-  if (this_00 == (UInt8 *)0x0) {
-    uVar4 = 0xe00002be;
+  shared = M<UInt8 *>(self + 0x88);
+  if (shared == (UInt8 *)0x0) {
+    result = 0xe00002be;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
   }
-  else if ((param_1 < M<unsigned int>(this_00 + 0x14)) &&
-          (pVVar1 = M<UInt8 *>(param_1 * 4 + M<int>(this_00 + 0x10)),
-          pVVar1 != (UInt8 *)0x0)) {
-    if (M<UInt8 *>(self + 0x114) == pVVar1) {
+  else if ((textureID < M<unsigned int>(shared + 0x14)) &&
+          (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
+          texture != (UInt8 *)0x0)) {
+    if (M<UInt8 *>(self + 0x114) == texture) {
       M<UInt32>(self + 0x114) = 0;
     }
     if (M<int>(self + 0x100) != 0) {
-      pAVar3 = M<UInt8 *>(M<int>(self + 0x100) + 0xb70);
-      iVar2 = M<int>(pAVar3 + 0x24);
-      if ((iVar2 != 0) && (M<int>(iVar2 + 8) == M<int>(pVVar1 + 8))) {
-        M<UInt8>(iVar2 + 0x59) = 0;
-        ((IOATIR500Surface *)(M<UInt8 *>(self + 0x100)))->free_buffer_backing_store((ATIR500SurfaceBuffer *)(pAVar3));
-        this_00 = M<UInt8 *>(self + 0x88);
+      surfaceBuffer = M<UInt8 *>(M<int>(self + 0x100) + 0xb70);
+      backingStore = M<int>(surfaceBuffer + 0x24);
+      if ((backingStore != 0) && (M<int>(backingStore + 8) == M<int>(texture + 8))) {
+        M<UInt8>(backingStore + 0x59) = 0;
+        ((IOATIR500Surface *)(M<UInt8 *>(self + 0x100)))->free_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
+        shared = M<UInt8 *>(self + 0x88);
       }
     }
-    uVar4 = ((IOATIR500Shared *)(this_00))->delete_texture((VendorTextureBuffer *)(pVVar1));
+    result = ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)(texture));
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
   }
   else {
-    uVar4 = 0xe00002c2;
+    result = 0xe00002c2;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
   }
-  return uVar4;
+  return result;
 }

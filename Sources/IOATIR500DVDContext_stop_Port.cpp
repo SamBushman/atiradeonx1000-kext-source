@@ -29,11 +29,11 @@ extern "C" UInt32 GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDes
 
 
 /* real addr 0xe3a0 */
-void IOATIR500DVDContext::stop(IOService *real_param_1) {
+void IOATIR500DVDContext::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
-  UInt8 *pIVar1;
+  UInt8 *previous;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -52,11 +52,11 @@ void IOATIR500DVDContext::stop(IOService *real_param_1) {
   }
   else {
     do {
-      pIVar1 = pIVar5;
-      pIVar5 = M<UInt8 *>(pIVar1 + 0x80);
+      previous = pIVar5;
+      pIVar5 = M<UInt8 *>(previous + 0x80);
       if (pIVar5 == (UInt8 *)0x0) break;
     } while (self != pIVar5);
-    M<UInt32>(pIVar1 + 0x80) = M<UInt32>(self + 0x80);
+    M<UInt32>(previous + 0x80) = M<UInt32>(self + 0x80);
   }
   piVar2[0x1cf] = piVar2[0x1cf] + -1;
   M<UInt32>(M<int>(self + 0x8c) + 0x5c8) = 0x20000;
@@ -127,6 +127,6 @@ LAB_0000e548:
     VCALL(*M<int *>(self + 0x84), 0x18)(M<int *>(self + 0x84));
     M<UInt32>(self + 0x84) = 0;
   }
-  IOUserClient::stop(real_param_1);   /* the shipped body tail-calls the base class (SUB_60000000 = its lazy-binding stub) */
+  IOUserClient::stop(provider);   /* the shipped body tail-calls the base class (SUB_60000000 = its lazy-binding stub) */
   return;
 }

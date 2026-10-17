@@ -32,7 +32,7 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0xf0c0 */
-IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 param_1, UInt32*param_2, IOMemoryDescriptor**param_3) {
+IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   unsigned int uVar1;
@@ -53,32 +53,32 @@ IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 param_1, UInt32*param_2
   /* one real 7-word VendorCommandBuffer (mirror of the 0x1c-byte slot at self+0x90). allocCommandBuffer fills it by address, so it must be ONE contiguous object - seven separate int locals only worked in stock by stack-adjacency luck (same bug class as #164/#160); in our gcc 4.0.1 build they scatter and the alloc result never reached the copy-back (#168) */
   int cmdBufBlock[7];
   
-  if (param_1 != 1) {
-    if (param_1 == 0) {
+  if (type != 1) {
+    if (type == 0) {
       if (M<int *>(M<int>(self + 0x8c) + 0xac) != (int *)0x0) {
         VCALL(*M<int *>(M<int>(self + 0x8c) + 0xac), 0x14)(M<int *>(M<int>(self + 0x8c) + 0xac));
-        *param_2 = 0;
-        *param_3 = M<IOMemoryDescriptor *>(M<int>(self + 0x8c) + 0xac);
+        *options = 0;
+        *memory = M<IOMemoryDescriptor *>(M<int>(self + 0x8c) + 0xac);
         return 0;
       }
     }
     else {
-      if (param_1 == 2) {
+      if (type == 2) {
         GH_IOLockLock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
         VCALL(*M<int *>(self + 0xb4), 0x14)(M<int *>(self + 0xb4));
-        *param_2 = 0;
-        *param_3 = M<IOMemoryDescriptor *>(self + 0xb4);
+        *options = 0;
+        *memory = M<IOMemoryDescriptor *>(self + 0xb4);
         this->init_context_buffer_header((VendorContextBufferHeader *)(M<VendorContextBufferHeader *>(self + 0xc0)),0x1000);
         GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
         return 0;
       }
-      if (param_1 != 3) {
+      if (type != 3) {
         return 0xe00002c2;
       }
       if (M<int *>(M<int>(self + 0x8c) + 0xb0) != (int *)0x0) {
         VCALL(*M<int *>(M<int>(self + 0x8c) + 0xb0), 0x14)(M<int *>(M<int>(self + 0x8c) + 0xb0));
-        *param_2 = 0;
-        *param_3 = M<IOMemoryDescriptor *>(M<int>(self + 0x8c) + 0xb0);
+        *options = 0;
+        *memory = M<IOMemoryDescriptor *>(M<int>(self + 0x8c) + 0xb0);
         return 0;
       }
     }
@@ -96,8 +96,8 @@ LAB_0000f334:
       M<UInt32>(M<int>(self + 0x8c) + 0x78) = 0;
 LAB_0000f800:
       VCALL(*M<int *>(self + 0x98), 0x14)(M<int *>(self + 0x98));
-      *param_2 = 0;
-      *param_3 = M<IOMemoryDescriptor *>(self + 0x98);
+      *options = 0;
+      *memory = M<IOMemoryDescriptor *>(self + 0x98);
       this->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0xa4)),M<UInt32>(self + 0xa8),uVar6);
       GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
       return 0;

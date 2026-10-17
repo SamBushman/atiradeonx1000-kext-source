@@ -30,17 +30,17 @@
 void IOATIR500Surface::surface_write_lock_int(UInt32 bufferIndex, UInt32*outAddress, UInt32*outPitch) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
+  SInt32 *accelerator;
   SInt32 iVar2;
-  SInt32 iVar3;
+  SInt32 waitTotal;
   
   iVar2 = M<SInt32>(self + bufferIndex * 4 + 0xb70);
   VCALL(M<SInt32>(self), 0x5fc)(self,iVar2);
   *outAddress = M<UInt32>(iVar2 + 8);
   *outPitch = (UInt32)M<UInt16>(iVar2 + 0x18);
-  piVar1 = M<SInt32 *>(self + 0xd50);
-  iVar3 = piVar1[0x1ef];
-  iVar2 = VCALL(*piVar1, 0x558)(piVar1,piVar1[0x14] + -1);
-  piVar1[0x1ef] = iVar3 + iVar2;
+  accelerator = M<SInt32 *>(self + 0xd50);
+  waitTotal = accelerator[0x1ef];
+  iVar2 = VCALL(*accelerator, 0x558)(accelerator,accelerator[0x14] + -1);
+  accelerator[0x1ef] = waitTotal + iVar2;
   return;
 }

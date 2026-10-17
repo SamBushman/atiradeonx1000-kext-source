@@ -30,14 +30,14 @@
 void IOATIR500Surface::update_contexts() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
+  SInt32 *context;
   
   M<UInt32>(M<SInt32>(self + 0xd50) + 0x78) = 0;
-  for (piVar1 = M<SInt32 *>(self + 0x8c); piVar1 != (SInt32 *)0x0; piVar1 = (SInt32 *)piVar1[0x21]) {
-    VCALL(*piVar1, 0x5a4)(piVar1);
+  for (context = M<SInt32 *>(self + 0x8c); context != (SInt32 *)0x0; context = (SInt32 *)context[0x21]) {
+    VCALL(*context, 0x5a4)(context);
   }
-  for (piVar1 = M<SInt32 *>(self + 0x88); piVar1 != (SInt32 *)0x0; piVar1 = (SInt32 *)piVar1[0x21]) {
-    VCALL(*piVar1, 0x5a8)(piVar1);
+  for (context = M<SInt32 *>(self + 0x88); context != (SInt32 *)0x0; context = (SInt32 *)context[0x21]) {
+    VCALL(*context, 0x5a8)(context);
   }
   if (M<SInt32 *>(self + 0x90) != (SInt32 *)0x0) {
     VCALL(*M<SInt32 *>(self + 0x90), 0x5a8)(M<SInt32 *>(self + 0x90));

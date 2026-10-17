@@ -27,9 +27,9 @@
 
 
 /* real addr 0x39f30 */
-void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32*param_2) {
+void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *infoBytes = reinterpret_cast<UInt8 *>(info);
 
   float fVar1;
   float fVar2;
@@ -74,12 +74,12 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
   SInt64 local_38;
   SInt64 local_30;
   
-  if (M<int>(param_1 + 0x3c) - 9U < 2) {
-    uVar10 = M<UInt32>(param_1 + 0x40);
-    iVar17 = M<int>(param_1 + 0xe0);
+  if (M<int>(infoBytes + 0x3c) - 9U < 2) {
+    uVar10 = M<UInt32>(infoBytes + 0x40);
+    iVar17 = M<int>(infoBytes + 0xe0);
     iVar14 = 0;
     iVar19 = 6;
-    pOVar11 = param_1;
+    pOVar11 = infoBytes;
     do {
       uVar5 = M<UInt32>(self + M<int>(self + 0xd90) * 0x78 + 0x560);
       M<UInt32>(pOVar11 + 0x70) = uVar10;
@@ -92,9 +92,9 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
       iVar19 = iVar19 + -1;
     } while (iVar19 != 0);
     if (iVar17 == 0) {
-      uVar6 = M<unsigned int>(param_1 + 0xd4);
-      uVar8 = M<unsigned int>(param_1 + 0xd8);
-      uVar12 = M<unsigned int>(param_1 + 0xdc);
+      uVar6 = M<unsigned int>(infoBytes + 0xd4);
+      uVar8 = M<unsigned int>(infoBytes + 0xd8);
+      uVar12 = M<unsigned int>(infoBytes + 0xdc);
       local_b8[0] = ((int)uVar6 >> 4) + (unsigned int)((int)uVar6 < 0 && (uVar6 & 0xf) != 0);
       local_b8[1] = ((int)uVar8 >> 4) + (unsigned int)((int)uVar8 < 0 && (uVar8 & 0xf) != 0);
       local_b8[2] = ((int)uVar12 >> 4) + (unsigned int)((int)uVar12 < 0 && (uVar12 & 0xf) != 0);
@@ -103,45 +103,45 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
       local_b8[5] = local_b8[2];
     }
     else {
-      uVar6 = M<unsigned int>(param_1 + 0xd4);
-      uVar8 = M<unsigned int>(param_1 + 0xd8);
-      uVar12 = M<unsigned int>(param_1 + 0xdc);
+      uVar6 = M<unsigned int>(infoBytes + 0xd4);
+      uVar8 = M<unsigned int>(infoBytes + 0xd8);
+      uVar12 = M<unsigned int>(infoBytes + 0xdc);
       local_b8[0] = ((int)uVar6 >> 4) + (unsigned int)((int)uVar6 < 0 && (uVar6 & 0xf) != 0);
       local_b8[1] = ((int)uVar8 >> 4) + (unsigned int)((int)uVar8 < 0 && (uVar8 & 0xf) != 0);
       local_b8[2] = ((int)uVar12 >> 4) + (unsigned int)((int)uVar12 < 0 && (uVar12 & 0xf) != 0);
     }
-    M<UInt32>(param_1 + 0x90) = 1;
-    M<UInt32>(param_1 + 0x98) = 1;
-    M<UInt32>(param_1 + 0x8c) = 1;
-    M<UInt32>(param_1 + 0x9c) = 1;
+    M<UInt32>(infoBytes + 0x90) = 1;
+    M<UInt32>(infoBytes + 0x98) = 1;
+    M<UInt32>(infoBytes + 0x8c) = 1;
+    M<UInt32>(infoBytes + 0x9c) = 1;
   }
   else {
-    uVar6 = M<unsigned int>(param_1 + 0x10);
-    uVar15 = M<unsigned int>(param_1 + 0x14);
+    uVar6 = M<unsigned int>(infoBytes + 0x10);
+    uVar15 = M<unsigned int>(infoBytes + 0x14);
     uVar12 = 0;
     local_40 = 0x43300000;
     local_60 = 0x43300000;
     iVar14 = 0;
     local_78 = 0x43300000;
     local_98 = 0x43300000;
-    fVar1 = M<float>(param_1 + 0x30);
-    iVar17 = M<int>(param_1 + 0xe0);
-    uVar10 = M<UInt32>(param_1 + 0x40);
-    uVar18 = M<unsigned int>(param_1 + 0x54);
+    fVar1 = M<float>(infoBytes + 0x30);
+    iVar17 = M<int>(infoBytes + 0xe0);
+    uVar10 = M<UInt32>(infoBytes + 0x40);
+    uVar18 = M<unsigned int>(infoBytes + 0x54);
     uStack_3c = (int)uVar6 >> 0x1f & -uVar6 ^ 0x80000000;
     uVar8 = (int)uVar15 >> 0x1f & -uVar15 ^ 0x80000000;
     uStack_5c = uVar8;
     iVar19 = 6;
-    uStack_74 = (int)(uVar6 / M<unsigned int>(param_1 + 0x50)) >> 0x1f &
-                -(uVar6 / M<unsigned int>(param_1 + 0x50)) ^ 0x80000000;
+    uStack_74 = (int)(uVar6 / M<unsigned int>(infoBytes + 0x50)) >> 0x1f &
+                -(uVar6 / M<unsigned int>(infoBytes + 0x50)) ^ 0x80000000;
     fVar2 = (float)((double)CONCAT44d(0x43300000,uStack_3c) - 4503601774854144.0) *
-            M<float>(param_1 + 0x34);
-    uVar6 = (int)(uVar15 / M<unsigned int>(param_1 + 0x4c)) >> 0x1f &
-            -(uVar15 / M<unsigned int>(param_1 + 0x4c)) ^ 0x80000000;
+            M<float>(infoBytes + 0x34);
+    uVar6 = (int)(uVar15 / M<unsigned int>(infoBytes + 0x4c)) >> 0x1f &
+            -(uVar15 / M<unsigned int>(infoBytes + 0x4c)) ^ 0x80000000;
     uStack_94 = uVar6;
     fVar3 = (float)((double)CONCAT44d(0x43300000,uStack_74) - 4503601774854144.0) *
-            M<float>(param_1 + 0x34);
-    pOVar11 = param_1;
+            M<float>(infoBytes + 0x34);
+    pOVar11 = infoBytes;
     do {
       M<int>((int)local_e8 + iVar14) = iVar17;
       uVar5 = M<UInt32>(self + 0x128);
@@ -152,9 +152,9 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
       M<UInt32>(pOVar11 + 0x58) = uVar5;
       if ((uVar18 >> (uVar12 & 0x3f) & 1) == 0) {
         local_58 = 0x43300000;
-        uStack_54 = M<UInt32>(param_1 + 0x44);
+        uStack_54 = M<UInt32>(infoBytes + 0x44);
         fVar4 = (float)((double)CONCAT44d(0x43300000,uVar8) - 4503601774854144.0) * fVar1 *
-                (float)((double)CONCAT44d(0x43300000,M<UInt32>(param_1 + 0x44)) -
+                (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x44)) -
                        4503599627370496.0);
         if (2147483648.0 <= fVar4) {
           local_48 = (SInt64)(int)(fVar4 - 2147483648.0);
@@ -176,9 +176,9 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
       }
       else {
         local_90 = 0x43300000;
-        uStack_8c = M<UInt32>(param_1 + 0x48);
+        uStack_8c = M<UInt32>(infoBytes + 0x48);
         fVar4 = (float)((double)CONCAT44d(0x43300000,uVar6) - 4503601774854144.0) * fVar1 *
-                (float)((double)CONCAT44d(0x43300000,M<UInt32>(param_1 + 0x48)) -
+                (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x48)) -
                        4503599627370496.0);
         if (2147483648.0 <= fVar4) {
           local_80 = (SInt64)(int)(fVar4 - 2147483648.0);
@@ -220,9 +220,9 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
   iVar14 = 0;
   iVar17 = 6;
   do {
-    pOVar11 = param_1 + 0x88;
-    param_1 = param_1 + 4;
-    M<unsigned int>((int)param_2 + iVar14) =
+    pOVar11 = infoBytes + 0x88;
+    infoBytes = infoBytes + 4;
+    M<unsigned int>((int)outRegs + iVar14) =
          M<int>((int)local_e8 + iVar14) << 1 | M<unsigned int>(pOVar11) |
          M<int>((int)local_b8 + iVar14) << 4 | M<int>((int)local_d0 + iVar14) << 0x1b;
     iVar14 = iVar14 + 4;

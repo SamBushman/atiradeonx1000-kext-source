@@ -31,21 +31,21 @@ SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  UInt16 uVar1;
-  UInt16 uVar2;
-  UInt16 uVar3;
+  UInt16 width;
+  UInt16 bytesPerRow;
+  UInt16 height;
   
-  uVar1 = M<UInt16>(bufferBytes + 0x14);
-  uVar2 = M<UInt16>(bufferBytes + 0x16);
-  uVar3 = M<UInt16>(bufferBytes + 0x1e);
+  width = M<UInt16>(bufferBytes + 0x14);
+  bytesPerRow = M<UInt16>(bufferBytes + 0x16);
+  height = M<UInt16>(bufferBytes + 0x1e);
   if (w != (long *)0x0) {
     *w = (UInt32)M<UInt16>(bufferBytes + 0x1c);
   }
   if (h != (long *)0x0) {
-    *h = (UInt32)uVar3;
+    *h = (UInt32)height;
   }
   if (bytes != (long *)0x0) {
-    *bytes = (UInt32)uVar2 * (UInt32)uVar1;
+    *bytes = (UInt32)bytesPerRow * (UInt32)width;
   }
   return 0;
 }

@@ -27,17 +27,17 @@
 
 
 /* real addr 0x34260 */
-IOReturn ATIR500DVDContext::setup_buffers(UInt32 param_1, UInt32 param_2, UInt32 param_3, UInt32 param_4, UInt32 param_5) {
+IOReturn ATIR500DVDContext::setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   if ((M<SInt32>(self + 0xf8) != 0) && (M<char>(M<SInt32>(self + 0x8c) + 0x80) != '\0')) {
     M<UInt8>(M<SInt32>(self + 0xf8) + 0xbed) = 1;
     M<UInt8>(M<SInt32>(self + 0xf8) + 0xbee) = 1;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x94) = (SInt16)param_1;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x9a) = (SInt16)param_3;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x96) = (SInt16)param_4;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x98) = (SInt16)param_2;
-    M<UInt32>(self + 0x88) = param_5 & 0xfffffc00 | 0x20000002;
+    M<SInt16>(M<SInt32>(self + 0xf8) + 0x94) = (SInt16)topHeight;
+    M<SInt16>(M<SInt32>(self + 0xf8) + 0x9a) = (SInt16)bottomHeight;
+    M<SInt16>(M<SInt32>(self + 0xf8) + 0x96) = (SInt16)rightWidth;
+    M<SInt16>(M<SInt32>(self + 0xf8) + 0x98) = (SInt16)leftWidth;
+    M<UInt32>(self + 0x88) = controlFlags & 0xfffffc00 | 0x20000002;
     return 0;
   }
   return 0xe00002d8;

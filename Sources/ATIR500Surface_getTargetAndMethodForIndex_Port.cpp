@@ -27,12 +27,12 @@
 
 
 /* real addr 0x3ac80 */
-IOExternalMethod *ATIR500Surface::getTargetAndMethodForIndex(IOService**param_1, UInt32 param_2) {
+IOExternalMethod *ATIR500Surface::getTargetAndMethodForIndex(IOService**target, UInt32 selector) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  *param_1 = reinterpret_cast<IOService *>(this);
-  if (0x12 < param_2) {
+  *target = reinterpret_cast<IOService *>(this);
+  if (0x12 < selector) {
     return 0;
   }
-  return (IOExternalMethod *)(param_2 * 0x18 + M<SInt32>(self + 0xd5c));
+  return (IOExternalMethod *)(selector * 0x18 + M<SInt32>(self + 0xd5c));
 }

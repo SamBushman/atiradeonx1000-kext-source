@@ -30,29 +30,29 @@
 void IOATIR500Surface::reset_req_bits() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
-  UInt32 local_28 [8];
+  UInt32 requiredBits;
+  SInt32 node;
+  UInt32 bufferMask [8];
   
-  iVar2 = M<SInt32>(self + 0x88);
-  uVar1 = M<UInt32>(self + 0xc1c) & 0x30000020;
-  M<UInt32>(self + 0xc1c) = uVar1;
-  M<UInt32>(self + 0xc18) = uVar1;
-  for (; iVar2 != 0; iVar2 = M<SInt32>(iVar2 + 0x84)) {
-    uVar1 = uVar1 | M<UInt32>(iVar2 + 0x8c);
-    M<UInt32>(self + 0xc18) = uVar1;
+  node = M<SInt32>(self + 0x88);
+  requiredBits = M<UInt32>(self + 0xc1c) & 0x30000020;
+  M<UInt32>(self + 0xc1c) = requiredBits;
+  M<UInt32>(self + 0xc18) = requiredBits;
+  for (; node != 0; node = M<SInt32>(node + 0x84)) {
+    requiredBits = requiredBits | M<UInt32>(node + 0x8c);
+    M<UInt32>(self + 0xc18) = requiredBits;
   }
-  iVar2 = M<SInt32>(self + 0x8c);
-  if (iVar2 != 0) {
-    uVar1 = M<UInt32>(self + 0xc18);
+  node = M<SInt32>(self + 0x8c);
+  if (node != 0) {
+    requiredBits = M<UInt32>(self + 0xc18);
     do {
-      uVar1 = uVar1 | M<UInt32>(iVar2 + 0x8c);
-      M<UInt32>(self + 0xc18) = uVar1;
-      iVar2 = M<SInt32>(iVar2 + 0x84);
-    } while (iVar2 != 0);
+      requiredBits = requiredBits | M<UInt32>(node + 0x8c);
+      M<UInt32>(self + 0xc18) = requiredBits;
+      node = M<SInt32>(node + 0x84);
+    } while (node != 0);
   }
-  for (iVar2 = M<SInt32>(self + 0xbcc); iVar2 != 0; iVar2 = M<SInt32>(iVar2 + 0x54)) {
-    if (M<UInt32>(iVar2 + 0x58) == 0x11) {
+  for (node = M<SInt32>(self + 0xbcc); node != 0; node = M<SInt32>(node + 0x54)) {
+    if (M<UInt32>(node + 0x58) == 0x11) {
       if (((M<UInt32>(self + 0xbf8) & 2) == 0) || (M<SInt32>(self + 0x144) != 0)) {
         M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | 2;
       }
@@ -61,8 +61,8 @@ void IOATIR500Surface::reset_req_bits() {
       }
     }
     else {
-      this->surface_buffer_idx_mask(M<UInt32>(iVar2 + 0x58),(UInt32 *)(local_28));
-      M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | local_28[0];
+      this->surface_buffer_idx_mask(M<UInt32>(node + 0x58),(UInt32 *)(bufferMask));
+      M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | bufferMask[0];
     }
   }
   if (M<SInt32>(self + 0x90) != 0) {

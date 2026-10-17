@@ -30,69 +30,69 @@
 UInt32 IOATIR500Surface::convert_surface_bits(UInt32 selectorBits) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
-  UInt32 uVar3;
+  UInt32 result;
+  SInt32 formatSlot;
+  UInt32 selectorBit;
   
-  uVar1 = 0;
+  result = 0;
   if (selectorBits == 0) {
-    return uVar1;
+    return result;
   }
-  uVar3 = 1;
+  selectorBit = 1;
   do {
-    if ((uVar3 & selectorBits) == 0) goto LAB_00012454;
-    if (uVar3 == 0x10) {
-      iVar2 = 6;
+    if ((selectorBit & selectorBits) == 0) goto LAB_00012454;
+    if (selectorBit == 0x10) {
+      formatSlot = 6;
 LAB_00012420:
-      uVar1 = uVar1 | 1 << ((M<SInt32>(self + iVar2 * 4 + 0xb70) - (SInt32)(self + 0xa8)) / 0x78 & 0x3fU
+      result = result | 1 << ((M<SInt32>(self + formatSlot * 4 + 0xb70) - (SInt32)(self + 0xa8)) / 0x78 & 0x3fU
                            );
     }
     else {
-      if (0x10 < uVar3) {
-        if (uVar3 == 0x400) {
-          iVar2 = 7;
+      if (0x10 < selectorBit) {
+        if (selectorBit == 0x400) {
+          formatSlot = 7;
         }
-        else if (uVar3 < 0x401) {
-          if (uVar3 == 0x80) {
-            iVar2 = 2;
+        else if (selectorBit < 0x401) {
+          if (selectorBit == 0x80) {
+            formatSlot = 2;
           }
           else {
-            if (uVar3 != 0x100) goto LAB_00012454;
-            iVar2 = 3;
+            if (selectorBit != 0x100) goto LAB_00012454;
+            formatSlot = 3;
           }
         }
-        else if (uVar3 == 0x800) {
-          iVar2 = 8;
+        else if (selectorBit == 0x800) {
+          formatSlot = 8;
         }
         else {
-          if (uVar3 != 0x10000) goto LAB_00012454;
-          iVar2 = 9;
+          if (selectorBit != 0x10000) goto LAB_00012454;
+          formatSlot = 9;
         }
         goto LAB_00012420;
       }
-      if (uVar3 == 2) {
-        iVar2 = 0;
+      if (selectorBit == 2) {
+        formatSlot = 0;
         goto LAB_00012420;
       }
-      if (2 < uVar3) {
-        if (uVar3 == 4) {
-          iVar2 = 4;
+      if (2 < selectorBit) {
+        if (selectorBit == 4) {
+          formatSlot = 4;
         }
         else {
-          if (uVar3 != 8) goto LAB_00012454;
-          iVar2 = 5;
+          if (selectorBit != 8) goto LAB_00012454;
+          formatSlot = 5;
         }
         goto LAB_00012420;
       }
-      if (uVar3 == 1) {
-        iVar2 = 1;
+      if (selectorBit == 1) {
+        formatSlot = 1;
         goto LAB_00012420;
       }
     }
 LAB_00012454:
-    uVar3 = uVar3 << 1;
-    if (selectorBits < uVar3) {
-      return uVar1;
+    selectorBit = selectorBit << 1;
+    if (selectorBits < selectorBit) {
+      return result;
     }
   } while( true );
 }

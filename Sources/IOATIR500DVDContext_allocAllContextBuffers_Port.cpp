@@ -28,35 +28,35 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(...) asm("__Z
 
 
 /* real addr 0xeab0 */
-bool IOATIR500DVDContext::allocAllContextBuffers(UInt32 param_1) {
+bool IOATIR500DVDContext::allocAllContextBuffers(UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  SInt32 *piVar2;
-  VendorContextBufferHeader *pVVar3;
-  UInt32 uVar4;
-  SInt32 iVar5;
-  SInt32 iVar6;
+  bool more;
+  SInt32 *descriptor;
+  VendorContextBufferHeader *header;
+  UInt32 result;
+  SInt32 released;
+  SInt32 slotIndex;
   UInt8 *pIVar7;
   
-  piVar2 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,param_1,GH_page_size);
-  uVar4 = 0;
-  M<SInt32 *>(self + 0xb4) = piVar2;
-  if (piVar2 != (SInt32 *)0x0) {
-    iVar6 = 0;
-    pVVar3 = (VendorContextBufferHeader *)VCALL(*piVar2, 0x1cc)(piVar2);
-    M<VendorContextBufferHeader *>(self + 0xc0) = pVVar3;
-    this->init_context_buffer_header((VendorContextBufferHeader *)(pVVar3),param_1);
+  descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,size,GH_page_size);
+  result = 0;
+  M<SInt32 *>(self + 0xb4) = descriptor;
+  if (descriptor != (SInt32 *)0x0) {
+    slotIndex = 0;
+    header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
+    M<VendorContextBufferHeader *>(self + 0xc0) = header;
+    this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
     pIVar7 = self;
     do {
-      piVar2 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,param_1,GH_page_size);
-      M<SInt32 *>(pIVar7 + 0xcc) = piVar2;
-      if (piVar2 == (SInt32 *)0x0) {
-        if (-1 < iVar6 + -1) {
-          iVar5 = 0;
-          pIVar7 = self + (iVar6 + -1) * 0x18 + 0xcc;
+      descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,size,GH_page_size);
+      M<SInt32 *>(pIVar7 + 0xcc) = descriptor;
+      if (descriptor == (SInt32 *)0x0) {
+        if (-1 < slotIndex + -1) {
+          released = 0;
+          pIVar7 = self + (slotIndex + -1) * 0x18 + 0xcc;
           do {
-            iVar5 = iVar5 + 1;
+            released = released + 1;
             VCALL(*M<SInt32 *>(pIVar7), 0x18)(M<SInt32 *>(pIVar7));
             M<UInt32>(pIVar7 + -8) = 0;
             M<UInt32>(pIVar7 + -4) = 0;
@@ -66,7 +66,7 @@ bool IOATIR500DVDContext::allocAllContextBuffers(UInt32 param_1) {
             M<UInt32>(pIVar7 + 8) = 0;
             M<UInt32>(pIVar7 + 0xc) = 0;
             pIVar7 = pIVar7 + -0x18;
-          } while (iVar5 != iVar6);
+          } while (released != slotIndex);
         }
         VCALL(*M<SInt32 *>(self + 0xb4), 0x18)(M<SInt32 *>(self + 0xb4));
         M<UInt32>(self + 0xc0) = 0;
@@ -78,14 +78,14 @@ bool IOATIR500DVDContext::allocAllContextBuffers(UInt32 param_1) {
         M<UInt32>(self + 0xbc) = 0;
         return 0;
       }
-      pVVar3 = (VendorContextBufferHeader *)VCALL(*piVar2, 0x1cc)(piVar2);
-      M<VendorContextBufferHeader *>(pIVar7 + 0xd8) = pVVar3;
+      header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
+      M<VendorContextBufferHeader *>(pIVar7 + 0xd8) = header;
       pIVar7 = pIVar7 + 0x18;
-      this->init_context_buffer_header((VendorContextBufferHeader *)(pVVar3),param_1);
-      bVar1 = iVar6 != 1;
-      iVar6 = iVar6 + 1;
-    } while (bVar1);
-    uVar4 = 1;
+      this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
+      more = slotIndex != 1;
+      slotIndex = slotIndex + 1;
+    } while (more);
+    result = 1;
   }
-  return uVar4;
+  return result;
 }

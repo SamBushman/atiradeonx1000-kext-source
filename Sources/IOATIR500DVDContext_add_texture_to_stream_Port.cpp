@@ -27,10 +27,10 @@
 
 
 /* real addr 0xe770 */
-void IOATIR500DVDContext::add_texture_to_stream(VendorTextureBuffer *real_param_1) {
+void IOATIR500DVDContext::add_texture_to_stream(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  M<SInt16>(param_1 + 0xe) = M<SInt16>(param_1 + 0xe) + 1;
+  M<SInt16>(textureBytes + 0xe) = M<SInt16>(textureBytes + 0xe) + 1;
   return;
 }

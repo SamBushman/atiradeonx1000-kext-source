@@ -1,0 +1,122 @@
+# 2D contexts remap (IOATIR5002DContext, ATIR5002DContext): placeholder -> real names. Applied by Tools/apply_renames.py (see its header).
+# kind	target	old	new	tier	evidence
+# Names follow the GL-context / Shared / accelerator tables for the same concepts (recordCursor, streamOffset, pendingWords, result, accel, shared, texture, ringEntry, bufferIndex).
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	param_1	size	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	param_1	type	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	param_2	options	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	param_3	memory	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::delete_image@0xd450	param_1	textureID	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	real_param_1	needed	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	param_1	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	param_2	aggressive	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::get_config@0xbd90	param_1	out0	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::get_config@0xbd90	param_2	out1	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::init_context_buffer_header@0xbaf0	real_param_1	header	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::init_context_buffer_header@0xbaf0	param_1	headerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR5002DContext::init_context_buffer_header@0xbaf0	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::map_transfer_to_GART@0xbb40	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::map_transfer_to_GART@0xbb40	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR5002DContext::wait_image@0xd5c0	param_1	textureID	INFERRED	name from the class header declaration
+def	ATIR5002DContext::alloc_and_load_image@0x31b70	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR5002DContext::alloc_and_load_image@0x31b70	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR5002DContext::read_regs@0x33660	param_1	offsets	INFERRED	name from the class header declaration
+def	ATIR5002DContext::read_regs@0x33660	param_2	outValues	INFERRED	name from the class header declaration
+def	ATIR5002DContext::read_regs@0x33660	param_3	requestedByteCount	INFERRED	name from the class header declaration
+def	ATIR5002DContext::read_regs@0x33660	param_4	actualByteCount	INFERRED	name from the class header declaration
+def	ATIR5002DContext::write_2_regs@0x325d0	param_1	offset1	INFERRED	name from the class header declaration
+def	ATIR5002DContext::write_2_regs@0x325d0	param_2	offset2	INFERRED	name from the class header declaration
+def	ATIR5002DContext::write_2_regs@0x325d0	param_3	values	INFERRED	name from the class header declaration
+def	ATIR5002DContext::write_2_regs@0x325d0	param_4	byteCount	INFERRED	name from the class header declaration
+def	ATIR5002DContext::write_regs@0x33740	param_1	offsetValuePairs	INFERRED	name from the class header declaration
+def	ATIR5002DContext::write_regs@0x33740	param_2	pairByteCount	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::finish@0xbdc0	param_1	mode	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::scale_surface@0xcb90	param_1	flags	INFERRED	name from the class header declaration (same as IOATIR500GLContext::scale_surface)
+def	IOATIR5002DContext::scale_surface@0xcb90	param_2	xScale	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::scale_surface@0xcb90	param_3	yScale	INFERRED	name from the class header declaration
+def	IOATIR5002DContext::scale_surface@0xcb90	uVar1	result	INFERRED	the IOReturn of set_scaling (or 0xe00002c7), returned
+def	IOATIR5002DContext::declare_image@0xd020	param_1	unused	INFERRED	never read in the body (the header called it param1)
+def	IOATIR5002DContext::declare_image@0xd020	param_2	address	CONFIRMED	first argument of IOATIR500Shared::new_agp_texture(address, length, out): a client virtual address (the header guessed formatOrSize); zero is rejected
+def	IOATIR5002DContext::declare_image@0xd020	param_3	length	CONFIRMED	second argument of new_agp_texture: the byte length (the header guessed sizeInBytes); zero is rejected
+def	IOATIR5002DContext::declare_image@0xd020	param_4	outUserAddr	CONFIRMED	new_agp_texture writes the client-shared record user address through it (the header guessed outHandle)
+def	IOATIR5002DContext::declare_image@0xd020	this_00	shared	CONFIRMED	this+0x88, the IOATIR500Shared created on first use by create_shared; new_agp_texture is called on it
+def	IOATIR5002DContext::declare_image@0xd020	uVar2	result	INFERRED	the IOReturn returned: 0xe00002c2 for bad arguments, 0xe00002be if create_shared fails, 0xe00002bd if new_agp_texture fails
+def	IOATIR5002DContext::create_image@0xd130	param_1	size	CONFIRMED	first argument of IOATIR500Shared::new_texture(size, auxValue, agpAddress, agpLength, outDataAddress, outSharedUserAddr); zero is rejected
+def	IOATIR5002DContext::create_image@0xd130	param_2	auxValue	INFERRED	second argument of new_texture (stored at texture+0x50 for types 3 and 7)
+def	IOATIR5002DContext::create_image@0xd130	param_3	outDataAddress	CONFIRMED	new_texture receives it as outDataAddress: the client-task mapping address of the texture memory (the header guessed outLow)
+def	IOATIR5002DContext::create_image@0xd130	param_4	outSharedUserAddr	CONFIRMED	new_texture receives it as outSharedUserAddr: the user address of the client-shared record (the header guessed outHigh)
+def	IOATIR5002DContext::create_image@0xd130	this_00	shared	CONFIRMED	this+0x88, the IOATIR500Shared created on first use by create_shared
+def	IOATIR5002DContext::create_image@0xd130	uVar1	result	INFERRED	the IOReturn returned (0xe00002c2 / 0xe00002be / 0xe00002bd, or 0)
+def	IOATIR5002DContext::wait_image@0xd5c0	uVar2	result	INFERRED	the IOReturn returned
+def	IOATIR5002DContext::delete_image@0xd450	this_00	shared	CONFIRMED	this+0x88, the IOATIR500Shared whose texture table (+0x10) is indexed and whose delete_texture is called
+def	IOATIR5002DContext::delete_image@0xd450	pVVar1	texture	CONFIRMED	the texture looked up by textureID, passed to delete_texture; also compared with lastBoundTexture (this+0x114)
+def	IOATIR5002DContext::delete_image@0xd450	pAVar3	surfaceBuffer	CONFIRMED	the bound surface's buffer table entry (boundSurface+0xb70): backingStoreHandle (+0x24) is tested and free_buffer_backing_store called on it
+def	IOATIR5002DContext::delete_image@0xd450	iVar2	backingStore	INFERRED	surfaceBuffer->backingStoreHandle (+0x24): when its +8 matches the texture's +8 the backing is released
+def	IOATIR5002DContext::delete_image@0xd450	uVar4	result	INFERRED	the IOReturn returned: 0xe00002be (no shared), 0xe00002c2 (bad id) or delete_texture's result
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	piVar2	descriptor	INFERRED	the IOBufferMemoryDescriptor just allocated (same as IOATIR500GLContext::allocAllContextBuffers)
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	pVVar3	header	INFERRED	its mapped address (descriptor vtable +0x1cc), where init_context_buffer_header writes
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	uVar4	result	INFERRED	the bool returned
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	iVar6	bufferIndex	INFERRED	count of ring buffers allocated so far (2 in the ring: the loop ends when it was 1)
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	iVar5	released	INFERRED	counts the ring entries released while unwinding after an allocation failure
+def	IOATIR5002DContext::allocAllContextBuffers@0xbee0	bVar1	more	INFERRED	loop continuation flag (bufferIndex was not the last ring index)
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	pIVar4	buffer	INFERRED	cursor over the 2 ring entries (stride 0x18) passed to accelerator vtable +0x5ac (same as IOATIR500GLContext::freeAllContextBuffers)
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	iVar3	bufferIndex	INFERRED	ring entry index 0..1
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	piVar5	accel	INFERRED	this+0x94 (the accelerator, as words)
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	iVar6	counterBefore	INFERRED	accelerator wait counter (word 0x1df) before adding the wait result
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	iVar2	waited	INFERRED	result of the accelerator wait (vtable +0x54c) added to that counter (as IOATIR500GLContext::finish)
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	bVar1	more	INFERRED	loop continuation flag (bufferIndex was not the last ring index)
+def	IOATIR5002DContext::freeAllContextBuffers@0xb6c0	pIVar7	entry	INFERRED	cursor over the ring entries (stride 0x18 from self), zeroed one by one
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	pVVar4	candidate	INFERRED	the transfer buffer offered to freeTransferToAllocGART (fixed slots, then the ring entries; same as IOATIR500GLContext::freeToAllocGART)
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	iVar3	freed	INFERRED	result of freeTransferToAllocGART in the ring walk, tested for non-zero
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	pIVar5	ringEntry	INFERRED	cursor over the ring entries (stride 0x18): its +0xdc is the entry's stamp argument
+def	IOATIR5002DContext::freeToAllocGART@0xbbc0	bVar1	lastEntry	INFERRED	set when the ring index was the last one (1): the walk ends and 0 is returned
+def	IOATIR5002DContext::init_context_buffer_header@0xbaf0	iVar1	offset	INFERRED	byte offset of the zeroing loop over the first 0x20 header bytes
+def	IOATIR5002DContext::init_context_buffer_header@0xbaf0	iVar2	wordsLeft	INFERRED	loop counter of the zeroing loop
+def	IOATIR5002DContext::map_transfer_to_GART@0xbb40	iVar1	mapResult	INFERRED	result of accelerator vtable +0x5a8 (submit_context_buffer slot) for the buffer; when 0, freeToAllocGART is asked to make room
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	this_00	surface	CONFIRMED	this+0x100 (boundSurface): alloc_surfaces / sleep_blocked are called on it
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	this_01	accel	CONFIRMED	this+0x94 (the accelerator): allocMoreCommandBuffers is called on it
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	auStack_38	descriptor	INFERRED	the 16-byte record filled by vtable +0x5ac (process_command_buffer) and passed to the accelerator submit_buffer path (+0x560), as in IOATIR500GLContext::clientMemoryForType
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	uVar13	savedStamp	INFERRED	surface+0x84 saved before it is overwritten with +0x80 and passed to accelerator vtable +0x558
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	uVar14	bufferFlags	INFERRED	surface+0xbfc (|2 when +0xbec has a non-zero low 24 bits): the third argument of init_command_buffer_header
+def	IOATIR5002DContext::clientMemoryForType@0xd6f0	uVar2	surfaceMask	INFERRED	(this+0x8c | surface+0xc1c) & 0x7fffff: the mask passed to alloc_surfaces
+decl	IOATIR5002DContext::declare_image	param1	unused	INFERRED	never read in the body
+decl	IOATIR5002DContext::declare_image	formatOrSize	address	CONFIRMED	new_agp_texture's address argument (client virtual address)
+decl	IOATIR5002DContext::declare_image	sizeInBytes	length	CONFIRMED	new_agp_texture's length argument
+decl	IOATIR5002DContext::declare_image	outHandle	outUserAddr	CONFIRMED	new_agp_texture returns the client-shared record user address through it
+decl	IOATIR5002DContext::create_image	param1	size	CONFIRMED	new_texture's size argument
+decl	IOATIR5002DContext::create_image	param2	auxValue	INFERRED	new_texture's auxValue argument
+decl	IOATIR5002DContext::create_image	outLow	outDataAddress	CONFIRMED	new_texture's outDataAddress
+decl	IOATIR5002DContext::create_image	outHigh	outSharedUserAddr	CONFIRMED	new_texture's outSharedUserAddr
+def	ATIR5002DContext::read_regs@0x33660	iVar3	registers	CONFIRMED	the register window pointer read from accelerator+0x860
+def	ATIR5002DContext::read_regs@0x33660	pbVar1	registerAddress	CONFIRMED	registers + (offset & 0x1ffc): the word read byte-reversed
+def	ATIR5002DContext::read_regs@0x33660	uVar5	result	INFERRED	the IOReturn returned: 0xe00002c2 (size mismatch / misaligned), 0xe00002d8 (hardware not up) or 0
+def	ATIR5002DContext::write_regs@0x33740	iVar4	registers	CONFIRMED	the register window pointer read from accelerator+0x860
+def	ATIR5002DContext::write_regs@0x33740	iVar1	accel	INFERRED	this+0x94 (the accelerator), used for the hardware-up flag (+0x80) and the lock (+0x840)
+def	ATIR5002DContext::write_regs@0x33740	uVar2	value	CONFIRMED	the second word of the (offset, value) pair, byte-swapped into the register
+def	ATIR5002DContext::write_regs@0x33740	uVar3	wordsDone	CONFIRMED	counts the words consumed (2 per pair) against pairByteCount >> 3 pairs
+def	ATIR5002DContext::write_regs@0x33740	uVar5	result	INFERRED	the IOReturn returned: 0xe00002c2, 0xe00002d8 or 0
+def	ATIR5002DContext::write_2_regs@0x325d0	iVar4	registers	CONFIRMED	the register window pointer read from accelerator+0x860
+def	ATIR5002DContext::write_2_regs@0x325d0	iVar2	accel	INFERRED	this+0x94 (the accelerator), used for the hardware-up flag (+0x80) and the lock (+0x840)
+def	ATIR5002DContext::write_2_regs@0x325d0	uVar1	value	CONFIRMED	the value word written (byte-swapped) to offset1 then offset2
+def	ATIR5002DContext::write_2_regs@0x325d0	uVar3	wordsDone	CONFIRMED	counts the words consumed (2 per pair of values) against byteCount >> 3
+def	ATIR5002DContext::write_2_regs@0x325d0	uVar5	result	INFERRED	the IOReturn returned: 0xe00002c2, 0xe00002d8 or 0
+def	ATIR5002DContext::submit_context_buffer@0x31e90	pVVar7	texture	CONFIRMED	this+0x114 (lastBoundTexture): loaded into the GART/VRAM by alloc_and_load_image when its header flag is set
+def	ATIR5002DContext::submit_context_buffer@0x31e90	pAVar2	entry	CONFIRMED	the current ring entry: self + ringIndex(+0xfc)*0x18; its +0xd0 gart offset, +0xdc stamp, +0xe0 header
+def	ATIR5002DContext::submit_context_buffer@0x31e90	puVar3	pendingWrites	CONFIRMED	this+200 (pendingWriteQueue): the pending write batch copied into the ring entry header
+def	ATIR5002DContext::submit_context_buffer@0x31e90	puVar12	entryHeader	CONFIRMED	the ring entry's header (entry+0xe0) that receives the copy of the batch
+def	ATIR5002DContext::submit_context_buffer@0x31e90	iVar11	packet	CONFIRMED	entryHeader + 0x20: the first dword after the header, where the packet words are written
+def	ATIR5002DContext::submit_context_buffer@0x31e90	local_98	pendingWordCount	CONFIRMED	pendingWrites->count (+0x14): dwords of batch copied to the packet start
+def	ATIR5002DContext::submit_context_buffer@0x31e90	iVar9	surfaceBuffer	CONFIRMED	bound surface +0xa8 buffer, or the accelerator buffer array entry (+300 + defaultMipIndex*0x78) when no surface is bound
+def	ATIR5002DContext::submit_context_buffer@0x31e90	iVar14	accel	CONFIRMED	this+0x94 (the accelerator)
+def	ATIR5002DContext::submit_context_buffer@0x31e90	bVar1	tilingByte0	CONFIRMED	surfaceBuffer->tilingConfigByte0 (+0x38)
+def	ATIR5002DContext::submit_context_buffer@0x31e90	uVar17	gpuBase	CONFIRMED	surfaceBuffer->gpuBaseAddress (+8)
+def	ATIR5002DContext::submit_context_buffer@0x31e90	piVar34	accelWords	INFERRED	this+0x94 (the accelerator) as words: wait counter at word 0x1df
+def	ATIR5002DContext::process_command_buffer@0x326d0	real_param_1	descriptor	INFERRED	name from the class header declaration
+def	ATIR5002DContext::process_command_buffer@0x326d0	param_1	descriptorBytes	INFERRED	untyped alias of the typed parameter; written only at the tail (stream start, end, size)
+def	ATIR5002DContext::process_command_buffer@0x326d0	puVar18	recordCursor	CONFIRMED	starts at contextBufferHeader+0x1c, advanced by each record's length (same idiom as ATIR500GLContext::process_command_buffer)
+def	ATIR5002DContext::process_command_buffer@0x326d0	uVar13	result	CONFIRMED	initialised 0, set to 1 by opcode 0x02 and returned
+def	ATIR5002DContext::process_command_buffer@0x326d0	iVar14	streamOffset	CONFIRMED	byte offset of the first not-yet-submitted dword; advanced by 4*pendingWords after each submit_buffer; becomes descriptor+0 / +4 offsets
+def	ATIR5002DContext::process_command_buffer@0x326d0	uVar15	pendingWords	CONFIRMED	dword count passed as submit_buffer's 3rd argument, zeroed after each submit; stored at descriptor+8
+def	ATIR5002DContext::process_command_buffer@0x326d0	pVVar9	texture	CONFIRMED	the texture looked up in the shared table (this+0x88 +0x10) for opcodes 0x03/0x04/0x10
+def	ATIR5002DContext::process_command_buffer@0x326d0	local_68	bindTexture	CONFIRMED	the texture looked up in the shared table for the bind opcodes 0x07/0x08/0x13; stored to lastBoundTexture (this+0x114)
+def	ATIR5002DContext::process_command_buffer@0x326d0	this_00	surface	CONFIRMED	the surface found by find_surface_for_id for opcodes 0x0b/0x0c
+def	ATIR5002DContext::process_command_buffer@0x326d0	uVar10	stamp	CONFIRMED	submit_buffer's return value, stored at this+0xa8

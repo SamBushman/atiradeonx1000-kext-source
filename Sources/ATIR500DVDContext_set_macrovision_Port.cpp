@@ -30,34 +30,34 @@ extern "C" UInt32 GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(...) 
 
 
 /* real addr 0x35010 */
-IOReturn ATIR500DVDContext::set_macrovision(UInt32 param_2, UInt32 param_3) {
+IOReturn ATIR500DVDContext::set_macrovision(UInt32 attribute, UInt32 value) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); (attribute, value) are param_2/param_3 (#86) */
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); (attribute, value) are attribute/value (#86) */
 
   SInt32 iVar1;
-  SInt32 *piVar2;
-  UInt32 uVar3;
-  /* the shipped code spills its 3rd register argument (param_3, `value`) to the stack and passes the slot's address on */
+  SInt32 *framebuffer;
+  UInt32 result;
+  /* the shipped code spills its 3rd register argument (value, `value`) to the stack and passes the slot's address on */
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 0x8c) + 0x840));
   iVar1 = M<SInt32>(param_1 + 0x8c);
   if (M<char>(iVar1 + 0x80) == '\0') {
-    uVar3 = 0xe00002d8;
+    result = 0xe00002d8;
   }
   else {
     iVar1 = ((ATIR500Surface *)(M<UInt8 *>(param_1 + 0xf8)))->getFramebufferIndex();
-    piVar2 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(iVar1 * 0x20 + M<SInt32>(param_1 + 0x8c) + 0xd4),
+    framebuffer = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(iVar1 * 0x20 + M<SInt32>(param_1 + 0x8c) + 0xd4),
                                  GH_IONDRVFramebuffer_metaClass);
-    M<SInt32 *>(param_1 + 0x160) = piVar2;
-    if (piVar2 == (SInt32 *)0x0) {
+    M<SInt32 *>(param_1 + 0x160) = framebuffer;
+    if (framebuffer == (SInt32 *)0x0) {
       iVar1 = M<SInt32>(param_1 + 0x8c);
-      uVar3 = 0xe00002c0;
+      result = 0xe00002c0;
     }
     else {
-      uVar3 = VCALL(*piVar2, 0x70c)(piVar2,param_2,&param_3);
+      result = VCALL(*framebuffer, 0x70c)(framebuffer,attribute,&value);
       iVar1 = M<SInt32>(param_1 + 0x8c);
     }
   }
   GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));
-  return uVar3;
+  return result;
 }

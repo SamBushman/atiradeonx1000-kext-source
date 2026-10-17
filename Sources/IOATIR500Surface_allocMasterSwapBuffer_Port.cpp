@@ -32,30 +32,30 @@ bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 panel, UInt32 swapBufferSize
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     PanelRecord *rec = PANEL_RECORD(self, panel);
 
-  SInt32 *piVar1;
-  VendorSwapBufferHeader *pVVar2;
-  SInt32 iVar3;
-  UInt32 uVar5;
+  SInt32 *memoryDescriptor;
+  VendorSwapBufferHeader *swapHeader;
+  SInt32 accelerator;
+  UInt32 count;
   SwapBufferEntry *entry;
   
   rec->swapBufferSize = 0;
-  iVar3 = M<SInt32>(self + 0xd50);
-  if (M<SInt32>(panel * 4 + iVar3 + 0x114) != 0) {
-    uVar5 = 0;
+  accelerator = M<SInt32>(self + 0xd50);
+  if (M<SInt32>(panel * 4 + accelerator + 0x114) != 0) {
+    count = 0;
     entry = rec->entries;
     do {
-      piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(iVar3 + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
-      entry->memory = piVar1;
-      if (piVar1 == (SInt32 *)0x0) {
+      memoryDescriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(accelerator + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
+      entry->memory = memoryDescriptor;
+      if (memoryDescriptor == (SInt32 *)0x0) {
         return 0;
       }
-      uVar5 = uVar5 + 1;
-      pVVar2 = (VendorSwapBufferHeader *)VCALL(*piVar1, 0x1cc)(piVar1);
-      entry->header = pVVar2;
+      count = count + 1;
+      swapHeader = (VendorSwapBufferHeader *)VCALL(*memoryDescriptor, 0x1cc)(memoryDescriptor);
+      entry->header = swapHeader;
       entry = entry + 1;
-      this->init_swap_buffer_header((VendorSwapBufferHeader *)(pVVar2),swapBufferSize);
-      iVar3 = M<SInt32>(self + 0xd50);
-    } while (uVar5 < M<UInt32>(panel * 4 + iVar3 + 0x114));
+      this->init_swap_buffer_header((VendorSwapBufferHeader *)(swapHeader),swapBufferSize);
+      accelerator = M<SInt32>(self + 0xd50);
+    } while (count < M<UInt32>(panel * 4 + accelerator + 0x114));
   }
   rec->swapBufferSize = swapBufferSize;
   return 1;

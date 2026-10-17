@@ -29,42 +29,42 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x35120 */
-IOReturn ATIR500DVDContext::read_regs(UInt32*param_1, UInt32*param_2, UInt32 param_3, UInt32*param_4) {
+IOReturn ATIR500DVDContext::read_regs(UInt32*offsets, UInt32*outValues, UInt32 byteCount, UInt32*inOutCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *pbVar1;
+  UInt8 *registerAddress;
   SInt32 iVar2;
-  SInt32 iVar3;
+  SInt32 registers;
   UInt32 uVar4;
-  UInt32 uVar5;
+  UInt32 result;
   
-  uVar4 = *param_4;
-  iVar3 = M<SInt32>(M<SInt32>(self + 0x8c) + 0x860);
-  if ((uVar4 == param_3) && ((uVar4 & 3) == 0)) {
+  uVar4 = *inOutCount;
+  registers = M<SInt32>(M<SInt32>(self + 0x8c) + 0x860);
+  if ((uVar4 == byteCount) && ((uVar4 & 3) == 0)) {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
     iVar2 = M<SInt32>(self + 0x8c);
     if (M<char>(iVar2 + 0x80) == '\0') {
-      uVar5 = 0xe00002d8;
+      result = 0xe00002d8;
     }
     else {
       uVar4 = uVar4 >> 2;
       if (uVar4 != 0) {
         iVar2 = 0;
         do {
-          pbVar1 = (UInt8 *)(iVar3 + (M<UInt32>((SInt32)param_1 + iVar2) & 0x1ffc));
-          M<UInt32>((SInt32)param_2 + iVar2) =
-               loadWordByteReversed(pbVar1);
+          registerAddress = (UInt8 *)(registers + (M<UInt32>((SInt32)offsets + iVar2) & 0x1ffc));
+          M<UInt32>((SInt32)outValues + iVar2) =
+               loadWordByteReversed(registerAddress);
           iVar2 = iVar2 + 4;
           uVar4 = uVar4 - 1;
         } while (uVar4 != 0);
         iVar2 = M<SInt32>(self + 0x8c);
       }
-      uVar5 = 0;
+      result = 0;
     }
     GH_IOLockUnlock(M<UInt32>(iVar2 + 0x840));
   }
   else {
-    uVar5 = 0xe00002c2;
+    result = 0xe00002c2;
   }
-  return uVar5;
+  return result;
 }

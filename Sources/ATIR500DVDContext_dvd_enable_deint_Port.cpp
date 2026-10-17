@@ -29,25 +29,25 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x34c90 */
-IOReturn ATIR500DVDContext::dvd_enable_deint(int param_1) {
+IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
+  SInt32 accel;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  iVar1 = M<SInt32>(self + 0x8c);
-  if (M<char>(iVar1 + 0x80) == '\0') {
-    uVar2 = 0xe00002d8;
+  accel = M<SInt32>(self + 0x8c);
+  if (M<char>(accel + 0x80) == '\0') {
+    result = 0xe00002d8;
   }
   else if (M<UInt8 *>(self + 0xf8) == (UInt8 *)0x0) {
-    uVar2 = 0xe00002bc;
+    result = 0xe00002bc;
   }
   else {
-    uVar2 = 0;
-    ((ATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->enable_deint(param_1);
-    iVar1 = M<SInt32>(self + 0x8c);
+    result = 0;
+    ((ATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->enable_deint(mode);
+    accel = M<SInt32>(self + 0x8c);
   }
-  GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));
-  return uVar2;
+  GH_IOLockUnlock(M<UInt32>(accel + 0x840));
+  return result;
 }

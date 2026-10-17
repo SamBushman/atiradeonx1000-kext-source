@@ -29,15 +29,15 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x3d3f0 */
-bool ATIR500Surface::start(IOService *real_param_1) {
+bool ATIR500Surface::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
-  SInt32 iVar1;
+  SInt32 started;
   
-  GH_IOLockLock(M<UInt32>(param_1 + 0x840));
-  iVar1 = IOATIR500Surface::start(real_param_1);
-  if (iVar1 != 0) {
+  GH_IOLockLock(M<UInt32>(providerBytes + 0x840));
+  started = IOATIR500Surface::start(provider);
+  if (started != 0) {
     M<UInt16>(self + 0xdb4) = 0;
     self[0xdb7] = 0x0;
     self[0xdb6] = 0x0;
@@ -47,10 +47,10 @@ bool ATIR500Surface::start(IOService *real_param_1) {
     M<UInt32>(self + 0xda8) = 0;
     M<UInt32>(self + 0xdac) = 0;
     M<UInt32>(self + 0xdb8) = 1;
-    GH_IOLockUnlock(M<UInt32>(param_1 + 0x840));
+    GH_IOLockUnlock(M<UInt32>(providerBytes + 0x840));
   }
   else {
-    GH_IOLockUnlock(M<UInt32>(param_1 + 0x840));
+    GH_IOLockUnlock(M<UInt32>(providerBytes + 0x840));
   }
-  return iVar1 != 0;
+  return started != 0;
 }

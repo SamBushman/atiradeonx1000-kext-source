@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-16 17:54:58.434718857 -0700
-+++ b/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-16 17:54:58.439317027 -0700
+--- a/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-16 20:25:58.175411356 -0700
++++ b/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-16 20:25:58.176552931 -0700
 @@ -29,85 +29,64 @@
  /* real addr 0x10860 */
  void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
@@ -14,31 +14,31 @@
 -  UInt8 *pIVar6;
 -  UInt8 *pIVar7;
 -  UInt8 *pIVar8;
-   SInt32 iVar9;
+   SInt32 waitTotal;
 -  UInt8 *pIVar10;
-   UInt32 uVar11;
+   UInt32 bufferIndex;
 -  UInt8 *pIVar12;
-   SInt32 *piVar13;
+   SInt32 *accelerator;
    
-   piVar13 = M<SInt32 *>(self + 0xd50);
-   if (piVar13[panel + 0x45] != 0) {
+   accelerator = M<SInt32 *>(self + 0xd50);
+   if (accelerator[panel + 0x45] != 0) {
 -    iVar4 = panel * 0x94;
-     uVar11 = 0;
+     bufferIndex = 0;
      do {
-       iVar9 = piVar13[0x1e2];
--      iVar2 = M<UInt16>(self + iVar4 + 0xcae) + uVar11;
-+      /* the stamp of the submit slot (rec->slotIndex + uVar11), numbered from entries[1] */
-+      iVar2 = rec->slotIndex + uVar11;
-       uVar11 = uVar11 + 1;
-       iVar2 = VCALL(*piVar13, 0x54c)
--                        (piVar13,M<UInt32>(self + iVar2 * 0x1c + iVar4 + 0xc4c));
-+                        (piVar13,rec->entries[iVar2 + 1].stamp);
-       piVar13[0x1e2] = iVar9 + iVar2;
-       piVar13 = M<SInt32 *>(self + 0xd50);
-     } while (uVar11 < (UInt32)piVar13[panel + 0x45]);
-     if (piVar13[panel + 0x45] != 0) {
+       waitTotal = accelerator[0x1e2];
+-      iVar2 = M<UInt16>(self + iVar4 + 0xcae) + bufferIndex;
++      /* the stamp of the submit slot (rec->slotIndex + bufferIndex), numbered from entries[1] */
++      iVar2 = rec->slotIndex + bufferIndex;
+       bufferIndex = bufferIndex + 1;
+       iVar2 = VCALL(*accelerator, 0x54c)
+-                        (accelerator,M<UInt32>(self + iVar2 * 0x1c + iVar4 + 0xc4c));
++                        (accelerator,rec->entries[iVar2 + 1].stamp);
+       accelerator[0x1e2] = waitTotal + iVar2;
+       accelerator = M<SInt32 *>(self + 0xd50);
+     } while (bufferIndex < (UInt32)accelerator[panel + 0x45]);
+     if (accelerator[panel + 0x45] != 0) {
 -      pIVar3 = self + iVar4;
-       uVar11 = 0;
+       bufferIndex = 0;
 -      pIVar7 = self + iVar4 + 0xc20;
 -      pIVar5 = pIVar3 + 0xc40;
 -      pIVar6 = pIVar3 + 0xc30;
@@ -50,8 +50,8 @@
 -        do {
 -          if (M<SInt32>(pIVar10) != 0) {
 -            VCALL(*M<SInt32 *>(self + 0xd50), 0x5ac)(M<SInt32 *>(self + 0xd50),pIVar8);
-+        /* the four submit slots entries[uVar11 + 1 .. uVar11 + 4]. With more than one buffer per panel this walks past the record into the next one (stock behaviour, kept) */
-+        SwapBufferEntry *slot = &rec->entries[uVar11 + 1];
++        /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]. With more than one buffer per panel this walks past the record into the next one (stock behaviour, kept) */
++        SwapBufferEntry *slot = &rec->entries[bufferIndex + 1];
 +        for (SInt32 iVar4 = 0; iVar4 != 4; iVar4 = iVar4 + 1, slot = slot + 1) {
 +          if (slot->gartOffset != 0) {
 +            VCALL(*M<SInt32 *>(self + 0xd50), 0x5ac)(M<SInt32 *>(self + 0xd50),slot);
@@ -88,13 +88,13 @@
          }
 -        M<UInt16>(pIVar7 + 0xc) = 2;
 -        M<UInt16>(pIVar7 + 0xe) = 0;
-+        SwapBufferEntry *master = &rec->entries[uVar11];
++        SwapBufferEntry *master = &rec->entries[bufferIndex];
 +        if (master->memory != (void *)0x0) {
 +          VCALL(*(SInt32 *)master->memory, 0x18)((SInt32 *)master->memory);
 +        }
 +        master->unknown_0x0c = 2;
 +        master->unknown_0x0e = 0;
-         uVar11 = uVar11 + 1;
+         bufferIndex = bufferIndex + 1;
 -        pIVar3 = pIVar3 + 0x1c;
 -        M<UInt32>(pIVar7 + 0x18) = 0;
 -        M<UInt32>(pIVar7) = 0;
@@ -111,7 +111,7 @@
 +        master->memory = (void *)0x0;
 +        master->stamp = 0;
 +        master->header = (VendorSwapBufferHeader *)0x0;
-       } while (uVar11 < M<UInt32>(panel * 4 + M<SInt32>(self + 0xd50) + 0x114));
+       } while (bufferIndex < M<UInt32>(panel * 4 + M<SInt32>(self + 0xd50) + 0x114));
      }
    }
 -  M<UInt32>(self + panel * 0x94 + 0xcb0) = 0;

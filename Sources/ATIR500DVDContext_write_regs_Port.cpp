@@ -29,24 +29,24 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x35200 */
-IOReturn ATIR500DVDContext::write_regs(UInt32 param_1, UInt32 param_2) {
+IOReturn ATIR500DVDContext::write_regs(UInt32 offset, UInt32 value) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
-  SInt32 iVar3;
+  SInt32 accel;
+  UInt32 result;
+  SInt32 registers;
   
-  iVar3 = M<SInt32>(M<SInt32>(self + 0x8c) + 0x860);
+  registers = M<SInt32>(M<SInt32>(self + 0x8c) + 0x860);
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  iVar1 = M<SInt32>(self + 0x8c);
-  if (M<char>(iVar1 + 0x80) == '\0') {
-    uVar2 = 0xe00002d8;
+  accel = M<SInt32>(self + 0x8c);
+  if (M<char>(accel + 0x80) == '\0') {
+    result = 0xe00002d8;
   }
   else {
-    M<UInt32>(iVar3 + (param_1 & 0x1ffc)) =
-         param_2 << 0x18 | (param_2 & 0xff00) << 8 | param_2 >> 8 & 0xff00 | param_2 >> 0x18;
-    uVar2 = 0;
+    M<UInt32>(registers + (offset & 0x1ffc)) =
+         value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+    result = 0;
   }
-  GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));
-  return uVar2;
+  GH_IOLockUnlock(M<UInt32>(accel + 0x840));
+  return result;
 }

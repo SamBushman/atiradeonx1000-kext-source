@@ -31,9 +31,9 @@ bool IOATIR500Surface::move_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  UInt32 uVar1;
+  UInt32 result;
   
-  uVar1 = this->copy_buffer_to_backing_store((ATIR500SurfaceBuffer *)(bufferBytes));
+  result = this->copy_buffer_to_backing_store((ATIR500SurfaceBuffer *)(bufferBytes));
   VCALL(M<SInt32>(self), 0x5cc)(self,((SInt32)bufferBytes - (SInt32)(self + 0xa8) >> 3) * -0x11111111);
-  return uVar1;
+  return result;
 }

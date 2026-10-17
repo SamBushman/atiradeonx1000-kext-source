@@ -31,44 +31,44 @@ UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 keepMask, bool
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
-  int *piVar1;
-  bool bVar2;
+  int *prevLink;
+  bool notLast;
   unsigned int uVar3;
-  bool bVar4;
-  UInt32 uVar5;
+  bool movedAny;
+  UInt32 result;
   UInt32 in_register_00000014;
-  int iVar6;
-  unsigned int uVar7;
-  unsigned int uVar8;
+  int listHead;
+  unsigned int allAllocated;
+  unsigned int pending;
   int iVar9;
-  unsigned int uVar10;
-  UInt32 uVar11;
+  unsigned int index;
+  UInt32 cursor;
   
   this->invalidate_contexts();
-  uVar8 = mask & M<unsigned int>(self + 0xbf8);
-  if (uVar8 == 0) {
+  pending = mask & M<unsigned int>(self + 0xbf8);
+  if (pending == 0) {
 LAB_000122dc:
-    uVar5 = 0;
+    result = 0;
   }
   else {
-    uVar10 = 0;
-    uVar7 = 1;
+    index = 0;
+    allAllocated = 1;
     do {
-      uVar3 = 1 << (uVar10 & 0x3f);
-      if ((uVar8 & uVar3) != 0) {
+      uVar3 = 1 << (index & 0x3f);
+      if ((pending & uVar3) != 0) {
         uVar3 = VCALL(M<int>(self), 0x5f4)
-                          (self,uVar10,(((UInt32)keepMask) & uVar3) == 0);
-        uVar7 = uVar7 & uVar3;
+                          (self,index,(((UInt32)keepMask) & uVar3) == 0);
+        allAllocated = allAllocated & uVar3;
       }
-      uVar10 = uVar10 + 1;
-      if ((uVar8 >> (uVar10 & 0x3f) == 0) || (uVar10 == 0x17)) {
-        if (uVar7 != 0) goto LAB_000122dc;
+      index = index + 1;
+      if ((pending >> (index & 0x3f) == 0) || (index == 0x17)) {
+        if (allAllocated != 0) goto LAB_000122dc;
         break;
       }
-    } while (uVar7 != 0);
-    iVar6 = M<int>(M<int>(self + 0xd50) + 0x5c);
-    iVar9 = iVar6;
-    if (iVar6 != 0) {
+    } while (allAllocated != 0);
+    listHead = M<int>(M<int>(self + 0xd50) + 0x5c);
+    iVar9 = listHead;
+    if (listHead != 0) {
       do {
         if (M<int>(iVar9 + 0xbd0) != 0) {
           if (iVar9 != 0) {
@@ -76,42 +76,42 @@ LAB_000122dc:
           }
           break;
         }
-        piVar1 = (int *)(iVar9 + 0x9c);
-        iVar9 = *piVar1;
-      } while (iVar6 != *piVar1);
+        prevLink = (int *)(iVar9 + 0x9c);
+        iVar9 = *prevLink;
+      } while (listHead != *prevLink);
     }
-    bVar4 = false;
+    movedAny = false;
     iVar9 = 0;
-    uVar11 = (UInt32)self;
+    cursor = (UInt32)self;
     do {
-      if (M<int>(uVar11 + 0xb0) != 0) {
+      if (M<int>(cursor + 0xb0) != 0) {
         this->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(iVar9 * 0x78 + self + 0xa8)));
-        bVar4 = true;
+        movedAny = true;
       }
-      bVar2 = iVar9 != 0x16;
-      uVar11 = uVar11 + 0x78;
+      notLast = iVar9 != 0x16;
+      cursor = cursor + 0x78;
       iVar9 = iVar9 + 1;
-    } while (bVar2);
-    if (bVar4) {
-      uVar8 = mask & M<unsigned int>(self + 0xbf8);
-      if (uVar8 == 0) goto LAB_000122dc;
-      uVar10 = 0;
-      uVar7 = 1;
+    } while (notLast);
+    if (movedAny) {
+      pending = mask & M<unsigned int>(self + 0xbf8);
+      if (pending == 0) goto LAB_000122dc;
+      index = 0;
+      allAllocated = 1;
       do {
-        uVar3 = 1 << (uVar10 & 0x3f);
-        if ((uVar8 & uVar3) != 0) {
+        uVar3 = 1 << (index & 0x3f);
+        if ((pending & uVar3) != 0) {
           uVar3 = VCALL(M<int>(self), 0x5f4)
-                            (self,uVar10,(uVar3 & ((UInt32)keepMask)) == 0);
-          uVar7 = uVar7 & uVar3;
+                            (self,index,(uVar3 & ((UInt32)keepMask)) == 0);
+          allAllocated = allAllocated & uVar3;
         }
-        uVar10 = uVar10 + 1;
-        if ((uVar8 >> (uVar10 & 0x3f) == 0) || (uVar10 == 0x17)) {
-          if (uVar7 != 0) goto LAB_000122dc;
+        index = index + 1;
+        if ((pending >> (index & 0x3f) == 0) || (index == 0x17)) {
+          if (allAllocated != 0) goto LAB_000122dc;
           break;
         }
-      } while (uVar7 != 0);
+      } while (allAllocated != 0);
     }
-    uVar5 = 2;
+    result = 2;
   }
-  return uVar5;
+  return result;
 }

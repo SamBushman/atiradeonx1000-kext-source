@@ -32,40 +32,40 @@ UInt32 IOATIR500Surface::allocAllSlaveSwapBuffers(UInt32 panel, UInt32 swapBuffe
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     PanelRecord *rec = PANEL_RECORD(self, panel);
 
-  bool bVar1;
-  SInt32 iVar2;
-  VendorSwapBufferHeader *pVVar4;
-  SInt32 iVar5;
-  UInt32 uVar7;
-  SInt32 *piVar8;
-  UInt32 uVar9;
+  bool isLastSlot;
+  SInt32 counterOffset;
+  VendorSwapBufferHeader *swapHeader;
+  SInt32 accelerator;
+  UInt32 bufferIndex;
+  SInt32 *memoryDescriptor;
+  UInt32 slotNumber;
   SwapBufferEntry *slot;
   SwapBufferEntry *victim;
   
-  /* The four submit slots are entries[1..4]; slot number uVar9 (0..3) allocates one descriptor per buffer of the panel, into entries[uVar9 + 1 + uVar7]
+  /* The four submit slots are entries[1..4]; slot number slotNumber (0..3) allocates one descriptor per buffer of the panel, into entries[slotNumber + 1 + bufferIndex]
      (with more than one buffer per panel that runs past the record into the next one - stock behaviour, kept). */
-  piVar8 = (SInt32 *)0x0;
-  uVar9 = 0;
-  iVar2 = panel * 4;
-  iVar5 = M<SInt32>(self + 0xd50);
+  memoryDescriptor = (SInt32 *)0x0;
+  slotNumber = 0;
+  counterOffset = panel * 4;
+  accelerator = M<SInt32>(self + 0xd50);
   do {
-    if (M<SInt32>(iVar2 + iVar5 + 0x114) == 0) {
-      if (piVar8 == (SInt32 *)0x0) {
+    if (M<SInt32>(counterOffset + accelerator + 0x114) == 0) {
+      if (memoryDescriptor == (SInt32 *)0x0) {
 LAB_00011f54:
-        /* Failure unwind: release the slots allocated so far, walking backwards from entries[uVar9]. The shipped code has no exit condition here
+        /* Failure unwind: release the slots allocated so far, walking backwards from entries[slotNumber]. The shipped code has no exit condition here
            (issue #32: it keeps walking down through memory until it faults); the loop is kept exactly that way. */
-        victim = &rec->entries[uVar9];
+        victim = &rec->entries[slotNumber];
         do {
-          if (M<SInt32>(iVar2 + iVar5 + 0x114) != 0) {
+          if (M<SInt32>(counterOffset + accelerator + 0x114) != 0) {
             SwapBufferEntry *v = victim;
-            uVar9 = 0;
+            slotNumber = 0;
             do {
               if (v->memory != (void *)0x0) {
                 VCALL(*(SInt32 *)v->memory, 0x18)((SInt32 *)v->memory);
               }
               v->unknown_0x0e = 0;
               v->unknown_0x0c = 2;
-              uVar9 = uVar9 + 1;
+              slotNumber = slotNumber + 1;
               v->unknown_0x00 = 0;
               v->gartOffset = 0;
               v->memory = (void *)0x0;
@@ -73,37 +73,37 @@ LAB_00011f54:
               v->header = (VendorSwapBufferHeader *)0x0;
               v->rectWordIndex = 0;
               v = v + 1;
-              iVar5 = M<SInt32>(self + 0xd50);
-            } while (uVar9 < M<UInt32>(iVar2 + iVar5 + 0x114));
+              accelerator = M<SInt32>(self + 0xd50);
+            } while (slotNumber < M<UInt32>(counterOffset + accelerator + 0x114));
           }
           victim = victim - 1;
         } while( true );
       }
     }
     else {
-      uVar7 = 0;
-      slot = &rec->entries[uVar9 + 1];
+      bufferIndex = 0;
+      slot = &rec->entries[slotNumber + 1];
       do {
-        piVar8 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(iVar5 + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
-        slot->memory = piVar8;
-        if (piVar8 == (SInt32 *)0x0) {
-          if (3 < uVar9) {
+        memoryDescriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(accelerator + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
+        slot->memory = memoryDescriptor;
+        if (memoryDescriptor == (SInt32 *)0x0) {
+          if (3 < slotNumber) {
             return 1;
           }
-          iVar5 = M<SInt32>(self + 0xd50);
+          accelerator = M<SInt32>(self + 0xd50);
           goto LAB_00011f54;
         }
-        uVar7 = uVar7 + 1;
-        pVVar4 = (VendorSwapBufferHeader *)VCALL(*piVar8, 0x1cc)(piVar8);
-        slot->header = pVVar4;
+        bufferIndex = bufferIndex + 1;
+        swapHeader = (VendorSwapBufferHeader *)VCALL(*memoryDescriptor, 0x1cc)(memoryDescriptor);
+        slot->header = swapHeader;
         slot = slot + 1;
-        this->init_swap_buffer_header((VendorSwapBufferHeader *)(pVVar4),swapBufferSize);
-        iVar5 = M<SInt32>(self + 0xd50);
-      } while (uVar7 < M<UInt32>(iVar2 + iVar5 + 0x114));
+        this->init_swap_buffer_header((VendorSwapBufferHeader *)(swapHeader),swapBufferSize);
+        accelerator = M<SInt32>(self + 0xd50);
+      } while (bufferIndex < M<UInt32>(counterOffset + accelerator + 0x114));
     }
-    bVar1 = uVar9 == 3;
-    uVar9 = uVar9 + 1;
-    if (bVar1) {
+    isLastSlot = slotNumber == 3;
+    slotNumber = slotNumber + 1;
+    if (isLastSlot) {
       return 1;
     }
   } while( true );

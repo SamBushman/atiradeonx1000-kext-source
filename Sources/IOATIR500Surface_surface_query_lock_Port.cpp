@@ -33,8 +33,8 @@ IOReturn IOATIR500Surface::surface_query_lock() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
-  SInt32 iVar2;
-  UInt32 uVar3;
+  SInt32 allocated;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
   if (((M<UInt32>(self + 0xbd0) & 0xffff0000) == 0) &&
@@ -46,22 +46,22 @@ IOReturn IOATIR500Surface::surface_query_lock() {
         if ((M<SInt32>(self + uVar1 * 0x78 + 0xb8) != 0) &&
            (M<SInt32>(self + uVar1 * 0x78 + 0xb0) == 0)) {
           /* #171: stock 0x15210: r4 = this + idx*0x78 + 0xa8 (the buffer record), alloc_surface_buffer(ATIR500SurfaceBuffer*) */
-          iVar2 = VCALL(M<SInt32>(self), 0x5d0)(self,self + uVar1 * 0x78 + 0xa8);
-          if (iVar2 != 0) {
-            uVar3 = 0;
+          allocated = VCALL(M<SInt32>(self), 0x5d0)(self,self + uVar1 * 0x78 + 0xa8);
+          if (allocated != 0) {
+            result = 0;
             VCALL(M<SInt32>(self), 0x5cc)(self,uVar1);
             goto LAB_00015280;
           }
           goto LAB_00015270;
         }
       }
-      uVar3 = 0;
+      result = 0;
       goto LAB_00015280;
     }
   }
 LAB_00015270:
-  uVar3 = 0xe00002cc;
+  result = 0xe00002cc;
 LAB_00015280:
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  return uVar3;
+  return result;
 }

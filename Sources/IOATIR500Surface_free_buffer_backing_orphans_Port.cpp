@@ -30,15 +30,15 @@
 void IOATIR500Surface::free_buffer_backing_orphans() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *pIVar1;
+  UInt8 *orphan;
   
-  pIVar1 = M<UInt8 *>(self + 0xd8c);
-  if (M<SInt32 *>(pIVar1 + 0x10) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(pIVar1 + 0x10), 0x18)(M<SInt32 *>(pIVar1 + 0x10));
+  orphan = M<UInt8 *>(self + 0xd8c);
+  if (M<SInt32 *>(orphan + 0x10) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(orphan + 0x10), 0x18)(M<SInt32 *>(orphan + 0x10));
     M<UInt32>(M<SInt32>(self + 0xd8c) + 0x10) = 0;
-    pIVar1 = M<UInt8 *>(self + 0xd8c);
+    orphan = M<UInt8 *>(self + 0xd8c);
   }
-  this->delete_buffer_backing((IOTextureBuffer *)(pIVar1));
+  this->delete_buffer_backing((IOTextureBuffer *)(orphan));
   M<UInt32>(self + 0xd8c) = 0;
   return;
 }

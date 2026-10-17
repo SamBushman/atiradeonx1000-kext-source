@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 17:59:12.618695027 -0700
-+++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 17:59:12.623916110 -0700
+--- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 20:25:14.576129347 -0700
++++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 20:25:14.577224137 -0700
 @@ -39,7 +39,6 @@
    UInt16 uVar5;
    int iVar6;
@@ -10,26 +10,26 @@
    int iVar11;
 @@ -63,27 +62,27 @@
    }
-   if (M<UInt32>(self + 0xd54) != (UInt32)param_3) {
-     M<UInt32>(self + 0xd54) = (UInt32)param_3;
--    iVar17 = M<int>((int)param_2 * 0x94 + self + 0xc34);
-+    iVar17 = (int)Vol(PANEL_RECORD(self, param_2)->entries[0].header);
+   if (M<UInt32>(self + 0xd54) != (UInt32)contextBytes) {
+     M<UInt32>(self + 0xd54) = (UInt32)contextBytes;
+-    iVar17 = M<int>((int)panel * 0x94 + self + 0xc34);
++    iVar17 = (int)Vol(PANEL_RECORD(self, panel)->entries[0].header);
      M<unsigned int>(iVar17 + 0x1c) = M<unsigned int>(iVar17 + 0x1c) | 1;
    }
--  iVar11 = (int)param_2 * 0x94;
+-  iVar11 = (int)panel * 0x94;
 -  iVar17 = iVar11 + (SInt32)self;
 -  if ((M<unsigned int>(M<int>(iVar17 + 0xc34) + 0x1c) & 1) == 0) {
 -    iVar11 = (unsigned int)M<UInt16>(iVar17 + 0xcae) * 0x1c + iVar11 + (SInt32)self;
 -    pVVar23 = (UInt8 *)(iVar11 + 0xc3c);
 -    if ((M<int>(iVar11 + 0xc44) == 0) &&
--       (iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)param_2,M<UInt32>(iVar17 + 0xcb0)),
-+  PanelRecord *rec = PANEL_RECORD(self, param_2);
+-       (iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)panel,M<UInt32>(iVar17 + 0xcb0)),
++  PanelRecord *rec = PANEL_RECORD(self, panel);
 +  SwapBufferEntry *slot;     /* the submit slot in use: entries[1 + slotIndex] */
 +  if ((M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 1) == 0) {
 +    slot = &rec->entries[1 + (unsigned int)Vol(rec->slotIndex)];
 +    pVVar23 = (UInt8 *)slot;
 +    if (((int)Vol(slot->memory) == 0) &&
-+       (iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)param_2,Vol(rec->swapBufferSize)),
++       (iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)panel,Vol(rec->swapBufferSize)),
         iVar17 == 0)) {
        return;
      }
@@ -40,13 +40,13 @@
 -  iVar8 = uVar13 * 0x1c + iVar11 + (SInt32)self;
 -  pVVar23 = (UInt8 *)(iVar8 + 0xc3c);
 -  if (M<int>(iVar8 + 0xc44) == 0) {
--    iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)param_2,M<UInt32>(iVar17 + 0xcb0));
+-    iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)panel,M<UInt32>(iVar17 + 0xcb0));
 +  uVar13 = Vol(rec->slotIndex) + 1 & 3;
 +  Vol(rec->slotIndex) = (UInt16)uVar13;
 +  slot = &rec->entries[1 + uVar13];
 +  pVVar23 = (UInt8 *)slot;
 +  if ((int)Vol(slot->memory) == 0) {
-+    iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)param_2,Vol(rec->swapBufferSize));
++    iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)panel,Vol(rec->swapBufferSize));
      if (iVar17 == 0) {
        return;
      }

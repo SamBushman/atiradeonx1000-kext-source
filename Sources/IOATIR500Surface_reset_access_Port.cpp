@@ -30,13 +30,13 @@
 void IOATIR500Surface::reset_access() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
+  SInt32 *descriptor;
   UInt32 uVar2;
-  SInt32 iVar3;
+  SInt32 previous;
   
-  iVar3 = M<SInt32>(self + 0xc00);
+  previous = M<SInt32>(self + 0xc00);
   VCALL(M<SInt32>(self), 0x604)(self);
-  if (iVar3 != M<SInt32>(self + 0xc00)) {
+  if (previous != M<SInt32>(self + 0xc00)) {
     if (M<SInt32 *>(self + 0xd84) != (SInt32 *)0x0) {
       VCALL(*M<SInt32 *>(self + 0xd84), 0x18)(M<SInt32 *>(self + 0xd84));
     }
@@ -45,18 +45,18 @@ void IOATIR500Surface::reset_access() {
     }
     M<UInt32>(self + 0xc0c) = 0;
     M<UInt32>(self + 0xc10) = 0;
-    piVar1 = (SInt32 *)VCALL(*M<SInt32 *>(self + 0xc00), 0x150)(M<SInt32 *>(self + 0xc00),1);
-    M<SInt32 *>(self + 0xd88) = piVar1;
-    if (piVar1 != (SInt32 *)0x0) {
-      uVar2 = VCALL(*piVar1, 0xd0)(piVar1);
+    descriptor = (SInt32 *)VCALL(*M<SInt32 *>(self + 0xc00), 0x150)(M<SInt32 *>(self + 0xc00),1);
+    M<SInt32 *>(self + 0xd88) = descriptor;
+    if (descriptor != (SInt32 *)0x0) {
+      uVar2 = VCALL(*descriptor, 0xd0)(descriptor);
       M<UInt32>(self + 0xc10) = uVar2;
     }
     if (self[0xbf4] != 0x0) {
-      piVar1 = (SInt32 *)VCALL(*M<SInt32 *>(self + 0xc00), 0x14c)
+      descriptor = (SInt32 *)VCALL(*M<SInt32 *>(self + 0xc00), 0x14c)
                                 (M<SInt32 *>(self + 0xc00),M<UInt32>(self + 0x78),0,1,0,0);
-      M<SInt32 *>(self + 0xd84) = piVar1;
-      if (piVar1 != (SInt32 *)0x0) {
-        uVar2 = VCALL(*piVar1, 0xd0)(piVar1);
+      M<SInt32 *>(self + 0xd84) = descriptor;
+      if (descriptor != (SInt32 *)0x0) {
+        uVar2 = VCALL(*descriptor, 0xd0)(descriptor);
         M<UInt32>(self + 0xc0c) = uVar2;
       }
     }

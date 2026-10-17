@@ -30,12 +30,12 @@
 UInt32 IOATIR500Surface::dealloc_surface(UInt32 surfaceIndex) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 listNode;
   
   if (M<SInt32>(self + surfaceIndex * 0x78 + 0xb0) != 0) {
     if ((3 >> (surfaceIndex & 0x3f) & 1U) != 0) {
-      for (iVar1 = M<SInt32>(self + 0xbcc); iVar1 != 0; iVar1 = M<SInt32>(iVar1 + 0x54)) {
-        M<UInt8>(M<SInt32>(iVar1 + 0x14) + 0x14) = 1;
+      for (listNode = M<SInt32>(self + 0xbcc); listNode != 0; listNode = M<SInt32>(listNode + 0x54)) {
+        M<UInt8>(M<SInt32>(listNode + 0x14) + 0x14) = 1;
       }
     }
     ((ATIR500Memory *)(M<UInt8 *>(M<SInt32>(self + 0xd50) + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + surfaceIndex * 0x78 + 0xa8)));

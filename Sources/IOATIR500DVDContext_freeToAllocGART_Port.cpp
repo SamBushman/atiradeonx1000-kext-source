@@ -27,31 +27,31 @@
 
 
 /* real addr 0xe8a0 */
-bool IOATIR500DVDContext::freeToAllocGART(VendorTransferBuffer *real_param_1, bool param_2) {
+bool IOATIR500DVDContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
-  bool bVar1;
+  bool lastSlot;
   SInt32 iVar2;
-  SInt32 iVar3;
-  UInt8 *pVVar4;
-  UInt8 *pIVar5;
+  SInt32 freed;
+  UInt8 *slot;
+  UInt8 *slotBase;
   
   iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0xac)),
-                     (VendorTransferBuffer *)(param_1),M<UInt32>(self + 0xbc),param_2);
+                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xbc),aggressive);
   if ((iVar2 == 0) &&
-     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0x90)),(VendorTransferBuffer *)(param_1),M<UInt32>(self + 0xa0),
-                         param_2), iVar2 == 0)) {
+     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0x90)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xa0),
+                         aggressive), iVar2 == 0)) {
     iVar2 = 0;
-    pVVar4 = (UInt8 *)(self + 0xc4);
-    pIVar5 = self;
-    while (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar4),(VendorTransferBuffer *)(param_1),
-                              M<UInt32>(pIVar5 + 0xd4),param_2), iVar3 == 0) {
-      bVar1 = iVar2 == 1;
-      pVVar4 = pVVar4 + 0x18;
-      pIVar5 = pIVar5 + 0x18;
+    slot = (UInt8 *)(self + 0xc4);
+    slotBase = self;
+    while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
+                              M<UInt32>(slotBase + 0xd4),aggressive), freed == 0) {
+      lastSlot = iVar2 == 1;
+      slot = slot + 0x18;
+      slotBase = slotBase + 0x18;
       iVar2 = iVar2 + 1;
-      if (bVar1) {
+      if (lastSlot) {
         return 0;
       }
     }

@@ -31,19 +31,19 @@ UInt32 ATIR500Surface::getFramebufferIndex() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
+  SInt32 index;
+  SInt32 result;
   
-  iVar3 = 0;
-  iVar2 = 0;
+  result = 0;
+  index = 0;
   do {
     if (((M<SInt32>(self + 0xd64) != 0) && (M<SInt16>(M<SInt32>(self + 0xd60) + 8) != 0)) &&
        (M<SInt16>(M<SInt32>(self + 0xd60) + 10) != 0)) {
-      iVar3 = iVar2;
+      result = index;
     }
-    bVar1 = iVar2 != 1;
+    bVar1 = index != 1;
     self = self + 8;
-    iVar2 = iVar2 + 1;
+    index = index + 1;
   } while (bVar1);
-  return iVar3;
+  return result;
 }

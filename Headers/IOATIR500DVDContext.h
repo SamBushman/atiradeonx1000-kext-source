@@ -94,11 +94,11 @@ public:
     IOReturn get_config(UInt32 *out0, UInt32 *out1);                                           /* 1, REAL SIGNATURE CORRECTED (issue #42 pass): shipped symbol get_configEPmS0_ / table = 0 in, 2 out */
     IOReturn get_status(UInt32 *out0);                                                         /* 2 */
     IOReturn get_surface_size(SInt32 *outW, SInt32 *outH);                                       /* 3, REAL SIGNATURE CORRECTED (issue #42 pass): shipped symbol get_surface_sizeEPlS0_ / table = 0 in, 2 out. Returns kIOReturnError if no surface is bound. */
-    IOReturn lock_all_buffers(UInt32 param1, sIODVDContextLockBufferData *out);              /* 4 */
+    IOReturn lock_all_buffers(UInt32 unused1, sIODVDContextLockBufferData *out);              /* 4 */
     IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                    /* 5 */
     IOReturn write_buffer(sIODVDContextWriteBufferData *data, UInt32 byteCount);                                       /* 6 */
     IOReturn finish(void);                                                                       /* 7 */
-    IOReturn declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle); /* 8 */
+    IOReturn declare_image(UInt32 unused1, unsigned int address, UInt32 length, unsigned int *outHandle); /* 8 */
     IOReturn delete_image(UInt32 textureID);                                                     /* 9 */
     void     remove_surface(void);  /* real addr in ledger; clears the bound-surface pointer (+0xf8) */
     bool     create_shared(void);                                                                /* helper, real addr 0xee60 */

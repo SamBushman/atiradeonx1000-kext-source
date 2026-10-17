@@ -31,55 +31,55 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
-  bool bVar1;
-  UInt8 *this_00;
+  bool notLastSlot;
+  UInt8 *accelerator;
   SInt32 iVar2;
-  UInt8 *pVVar3;
-  UInt32 uVar4;
-  UInt32 uVar5;
-  SInt32 iVar6;
-  UInt8 *pIVar8;
+  UInt8 *backingStore;
+  UInt32 panelIndex;
+  UInt32 bufferIndex;
+  SInt32 slotFreed;
+  UInt8 *cursor;
   
-  uVar4 = 0;
-  this_00 = M<UInt8 *>(self + 0xd50);
-  if (M<SInt32>(this_00 + 0xcc) != 0) {
+  panelIndex = 0;
+  accelerator = M<UInt8 *>(self + 0xd50);
+  if (M<SInt32>(accelerator + 0xcc) != 0) {
     do {
-      if (M<SInt32>(this_00 + uVar4 * 4 + 0x114) != 0) {
-        PanelRecord *rec = PANEL_RECORD(self, uVar4);
-        uVar5 = 0;
+      if (M<SInt32>(accelerator + panelIndex * 4 + 0x114) != 0) {
+        PanelRecord *rec = PANEL_RECORD(self, panelIndex);
+        bufferIndex = 0;
         do {
-          SwapBufferEntry *master = &rec->entries[uVar5];
-          iVar2 = ((IOATIR500Accelerator *)(this_00))->freeTransferToAllocGART((VendorTransferBuffer *)(master),(VendorTransferBuffer *)(neededBytes),
+          SwapBufferEntry *master = &rec->entries[bufferIndex];
+          iVar2 = ((IOATIR500Accelerator *)(accelerator))->freeTransferToAllocGART((VendorTransferBuffer *)(master),(VendorTransferBuffer *)(neededBytes),
                              master->stamp,aggressive);
           if (iVar2 != 0) {
             return 1;
           }
           iVar2 = 0;
-          /* the four submit slots entries[uVar5 + 1 .. uVar5 + 4]; with more than one buffer per panel this walks past the record (stock behaviour, kept) */
-          SwapBufferEntry *slot = &rec->entries[uVar5 + 1];
+          /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]; with more than one buffer per panel this walks past the record (stock behaviour, kept) */
+          SwapBufferEntry *slot = &rec->entries[bufferIndex + 1];
           do {
-            iVar6 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
+            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
                                slot->stamp,aggressive);
-            if (iVar6 != 0) {
+            if (slotFreed != 0) {
               return 1;
             }
-            bVar1 = iVar2 != 3;
+            notLastSlot = iVar2 != 3;
             slot = slot + 1;
             iVar2 = iVar2 + 1;
-          } while (bVar1);
-          this_00 = M<UInt8 *>(self + 0xd50);
-          uVar5 = uVar5 + 1;
-        } while (uVar5 < M<UInt32>(this_00 + uVar4 * 4 + 0x114));
+          } while (notLastSlot);
+          accelerator = M<UInt8 *>(self + 0xd50);
+          bufferIndex = bufferIndex + 1;
+        } while (bufferIndex < M<UInt32>(accelerator + panelIndex * 4 + 0x114));
       }
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < M<UInt32>(this_00 + 0xcc));
+      panelIndex = panelIndex + 1;
+    } while (panelIndex < M<UInt32>(accelerator + 0xcc));
   }
-  pIVar8 = self;
-  while ((pVVar3 = M<UInt8 *>(pIVar8 + 0xcc), pVVar3 == (UInt8 *)0x0
-         || (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(neededBytes),
-                                M<UInt32>(M<SInt32>(pVVar3 + 0x14) + 8),aggressive), iVar2 == 0))) {
-    pIVar8 = pIVar8 + 0x78;
-    if (self + 0xac8 == pIVar8) {
+  cursor = self;
+  while ((backingStore = M<UInt8 *>(cursor + 0xcc), backingStore == (UInt8 *)0x0
+         || (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(backingStore),(VendorTransferBuffer *)(neededBytes),
+                                M<UInt32>(M<SInt32>(backingStore + 0x14) + 8),aggressive), iVar2 == 0))) {
+    cursor = cursor + 0x78;
+    if (self + 0xac8 == cursor) {
       return 0;
     }
   }

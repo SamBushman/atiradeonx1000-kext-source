@@ -32,22 +32,22 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 IOReturn IOATIR500Surface::surface_flush(UInt32 panelMask, UInt32 swapArg) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  SInt32 iVar2;
-  SInt32 *piVar3;
-  UInt32 uVar4;
-  SInt32 iVar5;
+  SInt32 result;
+  SInt32 waitTime;
+  SInt32 *accelerator;
+  UInt32 stamp;
+  SInt32 waitTotal;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  iVar1 = this->alloc_surfaces_retry(M<UInt32>(self + 0xc1c) & 3,(eLockType)(0));
-  if (iVar1 == 0) {
+  result = this->alloc_surfaces_retry(M<UInt32>(self + 0xc1c) & 3,(eLockType)(0));
+  if (result == 0) {
     this->flush_surface(panelMask,swapArg);
   }
-  uVar4 = M<UInt32>(self + 0x84);
+  stamp = M<UInt32>(self + 0x84);
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  piVar3 = M<SInt32 *>(self + 0xd50);
-  iVar5 = piVar3[0x1e6];
-  iVar2 = VCALL(*piVar3, 0x54c)(piVar3,uVar4);
-  piVar3[0x1e6] = iVar5 + iVar2;
-  return iVar1;
+  accelerator = M<SInt32 *>(self + 0xd50);
+  waitTotal = accelerator[0x1e6];
+  waitTime = VCALL(*accelerator, 0x54c)(accelerator,stamp);
+  accelerator[0x1e6] = waitTotal + waitTime;
+  return result;
 }

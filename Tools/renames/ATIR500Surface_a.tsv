@@ -1,0 +1,80 @@
+# ATIR500Surface remap, part A (surface lifecycle, VRAM, shaping, build_swap, filter_setup ...). Applied by Tools/apply_renames.py.
+# kind	target	old	new	tier	evidence
+# Locals reused for several roles inside one function are NOT renamed (a rename covers the whole function); the vocabulary follows
+# IOATIR500Surface.tsv and the GL-context/accelerator tables: `accel` (the accelerator, self+0xd50), `stamp`, `panel`, `buffer`.
+def	ATIR500Surface::alloc_surface_buffer@0x3e230	real_param_1	buffer	INFERRED	name from the class header declaration
+def	ATIR500Surface::alloc_surface_buffer@0x3e230	param_1	bufferBytes	INFERRED	name from the class header declaration
+def	ATIR500Surface::complete_vram@0x3c000	real_param_1	buffer	INFERRED	name from the class header declaration
+def	ATIR500Surface::complete_vram@0x3c000	param_1	bufferBytes	INFERRED	name from the class header declaration
+def	ATIR500Surface::dealloc_surface@0x3df70	param_1	surfaceIndex	INFERRED	name from the class header declaration
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_1	x	INFERRED	name from the class header declaration
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_2	y	INFERRED	name from the class header declaration
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_3	w	INFERRED	name from the class header declaration
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_4	h	INFERRED	name from the class header declaration
+def	ATIR500Surface::enable_deint@0x3a800	param_1	mode	INFERRED	name from the class header declaration
+def	ATIR500Surface::filter_setup@0x398f0	param_1	scale	INFERRED	name from the class header declaration
+def	ATIR500Surface::filter_setup@0x398f0	real_param_2	regs	INFERRED	name from the class header declaration
+def	ATIR500Surface::filter_setup@0x398f0	param_2	regsBytes	INFERRED	name from the class header declaration
+def	ATIR500Surface::getTargetAndMethodForIndex@0x3ac80	param_1	target	INFERRED	name from the class header declaration
+def	ATIR500Surface::getTargetAndMethodForIndex@0x3ac80	param_2	selector	INFERRED	name from the class header declaration
+def	ATIR500Surface::prepare_vram@0x3dc50	real_param_1	buffer	INFERRED	name from the class header declaration
+def	ATIR500Surface::prepare_vram@0x3dc50	param_1	bufferBytes	INFERRED	name from the class header declaration
+def	ATIR500Surface::showbuffer@0x3a6d0	param_1	bufferIndex	INFERRED	name from the class header declaration
+def	ATIR500Surface::start@0x3d3f0	real_param_1	provider	INFERRED	name from the class header declaration
+def	ATIR500Surface::start@0x3d3f0	param_1	providerBytes	INFERRED	name from the class header declaration
+def	ATIR500Surface::stop@0x3b0c0	real_param_1	provider	INFERRED	name from the class header declaration
+def	ATIR500Surface::stop@0x3b0c0	param_1	providerBytes	INFERRED	name from the class header declaration
+def	ATIR500Surface::decompress_and_flush_depth_buffer@0x3db40	real_param_1	buffer	CONFIRMED	callers (dealloc_surface, prepare_vram) pass the surface buffer record; its +0x34 byte selects the load_3d_blit path (the header's name `scratch` was wrong)
+def	ATIR500Surface::decompress_and_flush_depth_buffer@0x3db40	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter
+def	ATIR500Surface::decompress_and_flush_depth_buffer@0x3db40	param_2	wordIndex	CONFIRMED	index into the packet word array where the new packets start (callers pass 0 or 6)
+def	ATIR500Surface::decompress_and_flush_depth_buffer@0x3db40	param_3	packet	CONFIRMED	the packet word array the preamble / load_3d_blit packets are written into (callers pass the command buffer words)
+def	ATIR500Surface::decompress_and_flush_depth_buffer@0x3db40	iVar1	endIndex	CONFIRMED	the returned word index just past the packets written
+decl	ATIR500Surface::decompress_and_flush_depth_buffer	scratch	buffer	CONFIRMED	see the definition: the first parameter is the surface buffer record
+decl	ATIR500Surface::decompress_and_flush_depth_buffer	param2	wordIndex	CONFIRMED	see the definition
+decl	ATIR500Surface::decompress_and_flush_depth_buffer	record	packet	CONFIRMED	see the definition
+def	ATIR500Surface::is_flip_allowed@0x3ae30	uVar2	baseResult	CONFIRMED	result of IOATIR500Surface::is_flip_allowed(), kept unless the display records forbid a flip
+def	ATIR500Surface::is_flip_allowed@0x3ae30	uVar3	result	CONFIRMED	the returned value
+def	ATIR500Surface::is_flip_allowed@0x3ae30	iVar4	accel	CONFIRMED	self+0xd50, the accelerator
+def	ATIR500Surface::getFramebufferIndex@0x3a7a0	iVar3	result	CONFIRMED	the returned framebuffer index: the last of the two entries whose region record has a non-zero width and height
+def	ATIR500Surface::getFramebufferIndex@0x3a7a0	iVar2	index	CONFIRMED	loop counter over the two per-panel region records (0, 1)
+def	ATIR500Surface::start@0x3d3f0	iVar1	started	CONFIRMED	result of IOATIR500Surface::start(provider); returned as a bool
+def	ATIR500Surface::stop@0x3b0c0	bVar1	notLast	INFERRED	loop-continue flag of the buffer-record loop (counter != 0x16)
+def	ATIR500Surface::stop@0x3b0c0	uVar2	stamp	CONFIRMED	submit_buffer's return value, stored at accelerator+0x234 (the last submit stamp)
+def	ATIR500Surface::stop@0x3b0c0	puVar8	packet	CONFIRMED	the packet words (accelerator command buffer + 0x120) passed to submit_buffer as bufferStart
+def	ATIR500Surface::stop@0x3b0c0	uVar4	wordCount	CONFIRMED	submit_buffer's dwordCount (0 or 2)
+def	ATIR500Surface::stop@0x3b0c0	pAVar6	buffer	CONFIRMED	the buffer record (self+0xa8, stride 0x78) released through vtable +0x600
+def	ATIR500Surface::dealloc_surface@0x3df70	iVar5	bufferOffset	CONFIRMED	surfaceIndex * 0x78: the byte offset of the buffer record in the surface's buffer array
+def	ATIR500Surface::dealloc_surface@0x3df70	pVVar6	entry	CONFIRMED	the submit slot (rec0->entries[1 + slotIndex]) the flush packets are written into
+def	ATIR500Surface::dealloc_surface@0x3df70	piVar8	accel	CONFIRMED	self+0xd50, the accelerator (words)
+def	ATIR500Surface::dealloc_surface@0x3df70	uVar1	slot	CONFIRMED	the new submit slot index ((slotIndex + 1) & 3)
+def	ATIR500Surface::dealloc_surface@0x3df70	uVar4	submitStamp	CONFIRMED	submit_buffer's return value, stored at entry+0x10 (the slot's submit stamp)
+def	ATIR500Surface::complete_vram@0x3c000	AVar4	bufferSlot	CONFIRMED	the buffer's slot id (record+0x37): the bit index cleared in accelerator+0x890 and the register offset base
+def	ATIR500Surface::complete_vram@0x3c000	uVar1	bitIndex	CONFIRMED	bufferSlot & 0x1f, the bit cleared in the allocation mask
+def	ATIR500Surface::complete_vram@0x3c000	iVar2	slotOffset	CONFIRMED	bufferSlot * 4: added to the 0x2c1.. register indexes of the packet
+def	ATIR500Surface::complete_vram@0x3c000	iVar6	packet	CONFIRMED	the packet words (accelerator command buffer + 0x120) passed to submit_buffer as bufferStart
+def	ATIR500Surface::complete_vram@0x3c000	piVar5	accel	CONFIRMED	self+0xd50, the accelerator (words)
+def	ATIR500Surface::complete_vram@0x3c000	this_00	accelBytes	CONFIRMED	self+0xd50, the accelerator (bytes)
+def	ATIR500Surface::prepare_vram@0x3dc50	piVar4	accel	CONFIRMED	self+0xd50, the accelerator (words)
+def	ATIR500Surface::prepare_vram@0x3dc50	puVar11	packet	CONFIRMED	the packet words (accelerator command buffer + 0x120) passed to submit_buffer as bufferStart
+def	ATIR500Surface::prepare_vram@0x3dc50	uVar5	stamp	CONFIRMED	submit_buffer's return value, stored at accelerator+0x234 (the last submit stamp)
+def	ATIR500Surface::prepare_vram@0x3dc50	this_00	accelBytes	CONFIRMED	self+0xd50, the accelerator (bytes)
+def	ATIR500Surface::alloc_surface_buffer@0x3e230	iVar2	alignment	INFERRED	0x20 or (accelerator+0xb98 << 4): the pitch alignment the width is rounded up to, in all three allocation paths
+def	ATIR500Surface::alloc_surface_buffer@0x3e230	uVar1	height	CONFIRMED	buffer+0x1e, the height (rounded up to 32 for the HZMEM_Alloc call)
+def	ATIR500Surface::filter_setup@0x398f0	dVar17	ratio	INFERRED	4096 / scale clamped to [0.25, 1.0]: the index (ratio-0.25)*100 selects the filter set
+def	ATIR500Surface::filter_setup@0x398f0	iVar16	setOffset	CONFIRMED	byte offset (32 * set index) of the chosen set in kFilterSetupArrayOfSets
+def	ATIR500Surface::shape_surface@0x3c130	local_98	bufferIds	INFERRED	the buffer indexes to (re)shape, in order: {6,7,8} for the front buffers, then {0,1,5,4,2,3} or {0,1}
+def	ATIR500Surface::shape_surface@0x3c130	local_90	mipOffsets	CONFIRMED	copy of kShapeSurfaceDefaultMipTable (14 words) filled with the byte offset of each mip level, then stored at buffer record +0xe8
+def	ATIR500Surface::shape_surface@0x3c130	local_58	heightScale	INFERRED	vertical multisample factor (1 or 2) multiplied into the buffer height
+def	ATIR500Surface::build_swap	local_104	panel	CONFIRMED	loop counter over the accelerator's panels (compared with accelerator+0xcc, indexes PANEL_RECORD and the per-panel records at +0x18/+0x78 strides)
+def	ATIR500Surface::build_swap	dVar58	zero	CONFIRMED	FLOAT_0004c370 = 0.0f
+def	ATIR500Surface::build_swap	dVar57	one	CONFIRMED	FLOAT_0004c374 = 1.0f
+def	ATIR500Surface::build_swap	dVar56	half	CONFIRMED	FLOAT_0004c380 = 0.5f
+def	ATIR500Surface::build_swap	dVar60	signedIntBias	CONFIRMED	DOUBLE_0004c3a8 = 2^52 + 2^31: the bias of the signed-int to double conversion idiom
+def	ATIR500Surface::build_swap	puVar45	blitPacket	CONFIRMED	the copy of g_r500_3d_blit_state_packet being built for the scaled-blit path (batch words + iVar26)
+def	ATIR500Surface::build_swap	puVar39	batchWords	CONFIRMED	the panel's pending swap-write batch: header + 0x20, indexed by word
+def	ATIR500Surface::build_swap	sVar9	regionX	INFERRED	panel region record (self+0xd60 entry) +4
+def	ATIR500Surface::build_swap	sVar10	regionWidth	CONFIRMED	panel region record +8; the function returns when it is 0 (same field getFramebufferIndex tests)
+def	ATIR500Surface::build_swap	sVar11	surfaceWidth	INFERRED	self+0xbd4, the surface width
+def	ATIR500Surface::build_swap	sVar12	surfaceHeight	INFERRED	self+0xbd6, the surface height
+def	ATIR500Surface::build_swap	fVar8	widthRatio	INFERRED	+0xbe0 / +0xbe4 as a float (1.0 when equal): the horizontal scale of the swap
+def	ATIR500Surface::build_swap	fVar41	heightRatio	INFERRED	+0xbe2 / +0xbe6 as a float (1.0 when the widths are equal): the vertical scale of the swap

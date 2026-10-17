@@ -63,9 +63,9 @@ void ATIR500Surface::shape_surface() {
   SInt32 iVar27;
   UInt32 uVar28;
   UInt32 uVar29;
-  UInt8 local_98 [8];
-  SInt32 local_90 [14];
-  UInt32 local_58;
+  UInt8 bufferIds [8];
+  SInt32 mipOffsets [14];
+  UInt32 heightScale;
   
   M<UInt32>(M<SInt32>(self + 0xd50) + 0xb94) = 1;
   uVar29 = M<UInt32>(self + 0xbe8);
@@ -81,7 +81,7 @@ void ATIR500Surface::shape_surface() {
   if ((uVar29 & 0x7c0000) == 0) {
 LAB_0003c260:
     iVar23 = 1;
-    local_58 = 1;
+    heightScale = 1;
   }
   else {
     uVar7 = uVar29 & 0x700000;
@@ -90,35 +90,35 @@ LAB_0003c260:
       if (uVar7 == 0) goto LAB_0003c260;
       if (uVar7 == 0x40000) {
         iVar23 = 1;
-        local_58 = 2;
+        heightScale = 2;
       }
       else if (uVar7 == 0x80000) {
         iVar23 = 2;
-        local_58 = 2;
+        heightScale = 2;
       }
       else {
         iVar23 = 1;
-        local_58 = 1;
+        heightScale = 1;
       }
       if (0x1000 < (UInt32)(iVar23 * M<SInt16>(self + 0xbd4))) {
         iVar23 = 1;
       }
-      if (0x1000 < local_58 * (SInt32)M<SInt16>(self + 0xbd6)) {
-        local_58 = 1;
+      if (0x1000 < heightScale * (SInt32)M<SInt16>(self + 0xbd6)) {
+        heightScale = 1;
       }
     }
     else if (uVar7 == 0x200000) {
       iVar23 = 4;
-      local_58 = 1;
+      heightScale = 1;
     }
     else if (uVar7 == 0x400000) {
       iVar23 = 6;
-      local_58 = 1;
+      heightScale = 1;
     }
     else {
       if (uVar7 != 0x100000) goto LAB_0003c260;
       iVar23 = 2;
-      local_58 = 1;
+      heightScale = 1;
     }
   }
   if ((uVar28 & 0x1c0) != 0) {
@@ -143,13 +143,13 @@ LAB_0003c260:
       }
     }
     iVar16 = 0;
-    local_98[0] = 6;
-    local_98[1] = 7;
-    local_98[2] = 8;
+    bufferIds[0] = 6;
+    bufferIds[1] = 7;
+    bufferIds[2] = 8;
     do {
-      uVar26 = (UInt32)local_98[iVar16];
+      uVar26 = (UInt32)bufferIds[iVar16];
       if ((uVar28 >> (uVar26 & 0x3f) & 1) != 0) {
-        uVar28 = local_58;
+        uVar28 = heightScale;
         iVar9 = iVar23;
         if (uVar26 != 6) {
           uVar28 = 1;
@@ -259,7 +259,7 @@ LAB_0003c52c:
   if ((uVar28 & 0x200) != 0) {
     if (((uVar29 != M<UInt16>(self + 0x4f6)) ||
         ((UInt32)M<UInt16>(self + 0x4fc) != iVar23 * M<SInt16>(self + 0xbd4))) ||
-       ((UInt32)M<UInt16>(self + 0x4fe) != local_58 * (SInt32)M<SInt16>(self + 0xbd6))) {
+       ((UInt32)M<UInt16>(self + 0x4fe) != heightScale * (SInt32)M<SInt16>(self + 0xbd6))) {
       if (M<SInt32>(self + 0x504) != 0) {
         ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + 0x4e0)));
         uVar7 = M<UInt32>(self + 0xbe8);
@@ -282,7 +282,7 @@ LAB_0003c52c:
                                                               (uVar24 & 0x1f) != 0)) * -0x20)) +
                  0x20;
       }
-      iVar9 = uVar28 * local_58 * uVar24;
+      iVar9 = uVar28 * heightScale * uVar24;
       if (iVar9 != M<SInt32>(self + 0x4f0)) {
         VCALL(M<SInt32>(self), 0x5cc)(self,9);
         M<SInt32>(self + 0x4f0) = iVar9;
@@ -299,7 +299,7 @@ LAB_0003c52c:
       M<SInt16>(self + 0x4f8) = (SInt16)uVar28;
       M<SInt16>(self + 0x4f6) = (SInt16)uVar29;
       M<SInt16>(self + 0x4fc) = (SInt16)iVar23 * sVar2;
-      M<SInt16>(self + 0x4fe) = (SInt16)local_58 * sVar18;
+      M<SInt16>(self + 0x4fe) = (SInt16)heightScale * sVar18;
     }
     self[0x518] = AVar12;
     self[0x519] = AVar22;
@@ -311,7 +311,7 @@ LAB_0003c52c:
       }
       else {
         M<UInt32>(self + 0x51c) =
-             (local_58 & 0xf) << 0xc |
+             (heightScale & 0xf) << 0xc |
              iVar23 << 0x10 | M<UInt32>(self + 0x51c) & 0xff000fff | 0x100000;
       }
     }
@@ -319,7 +319,7 @@ LAB_0003c52c:
       M<UInt32>(self + 0x51c) = iVar23 << 0x14 | M<UInt32>(self + 0x51c) & 0xff000fff | 0x11000;
     }
   }
-  GH_memcpy(local_90,kShapeSurfaceDefaultMipTable,0x38);
+  GH_memcpy(mipOffsets,kShapeSurfaceDefaultMipTable,0x38);
   uVar28 = M<UInt32>(self + 0xbe8);
   if ((uVar28 & 0x20) == 0) {
     uVar26 = 0;
@@ -360,7 +360,7 @@ LAB_0003c52c:
     uVar19 = uVar13;
     while( true ) {
       bVar1 = uVar17 != 0;
-      local_90[uVar17] = iVar9;
+      mipOffsets[uVar17] = iVar9;
       if (bVar1) {
         uVar10 = 0x20;
       }
@@ -395,7 +395,7 @@ LAB_0003c52c:
     }
     uVar8 = uVar26 + 1;
     uVar7 = 6;
-    local_90[uVar17] = iVar9;
+    mipOffsets[uVar17] = iVar9;
     if ((uVar28 & 0x70000000) != 0x30000000) {
       uVar7 = 1;
     }
@@ -437,14 +437,14 @@ LAB_0003c9d0:
       }
     }
   }
-  local_98[0] = 0;
-  local_98[1] = 1;
+  bufferIds[0] = 0;
+  bufferIds[1] = 1;
   if (M<SInt32>(self + 0x90) == 0) {
     uVar28 = 6;
-    local_98[2] = 5;
-    local_98[3] = 4;
-    local_98[4] = 2;
-    local_98[5] = 3;
+    bufferIds[2] = 5;
+    bufferIds[3] = 4;
+    bufferIds[4] = 2;
+    bufferIds[5] = 3;
   }
   else {
     iVar23 = (SInt32)M<SInt16>(self + 0x98) - (SInt32)M<SInt16>(self + 0x96);
@@ -483,7 +483,7 @@ LAB_0003c9d0:
   uVar13 = M<UInt32>(self + 0xc18);
   uVar19 = 0;
   do {
-    uVar17 = (UInt32)local_98[uVar19];
+    uVar17 = (UInt32)bufferIds[uVar19];
     if ((uVar13 >> (uVar17 & 0x3f) & 1) != 0) {
       iVar23 = uVar17 * 0x78;
       if (((uVar29 != M<UInt16>(self + iVar23 + 0xbe)) ||
@@ -513,7 +513,7 @@ LAB_0003c9d0:
         M<SInt16>(self + iVar23 + 0xca) = (SInt16)uVar8;
         M<SInt16>(self + iVar23 + 200) = (SInt16)uVar7;
         M<UInt16>(self + iVar23 + 0xc6) = uVar6;
-        piVar11 = local_90;
+        piVar11 = mipOffsets;
         do {
           uVar13 = uVar13 + 1;
           iVar25 = *piVar11;

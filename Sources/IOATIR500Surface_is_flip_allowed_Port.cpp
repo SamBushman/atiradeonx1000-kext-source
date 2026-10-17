@@ -30,13 +30,13 @@
 SInt32 IOATIR500Surface::is_flip_allowed() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 result;
   
   if (((M<char>(M<SInt32>(self + 0xd50) + 0x80) == '\0') || (M<SInt32>(self + 0xc14) == 0xffff)) ||
-     (uVar1 = 1,
+     (result = 1,
      self != M<UInt8 *>(M<SInt32>(self + 0xc14) * 0x20 + M<SInt32>(self + 0xd50) + 0xe8)))
   {
-    uVar1 = 0;
+    result = 0;
   }
-  return uVar1;
+  return result;
 }

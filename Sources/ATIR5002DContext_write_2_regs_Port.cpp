@@ -29,42 +29,42 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x325d0 */
-IOReturn ATIR5002DContext::write_2_regs(UInt32 param_1, UInt32 param_2, UInt32*param_3, UInt32 param_4) {
+IOReturn ATIR5002DContext::write_2_regs(UInt32 offset1, UInt32 offset2, UInt32*values, UInt32 byteCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
-  UInt32 uVar3;
-  SInt32 iVar4;
-  UInt32 uVar5;
+  UInt32 value;
+  SInt32 accel;
+  UInt32 wordsDone;
+  SInt32 registers;
+  UInt32 result;
   
-  iVar4 = M<SInt32>(M<SInt32>(self + 0x94) + 0x860);
-  if ((param_4 & 7) == 0) {
+  registers = M<SInt32>(M<SInt32>(self + 0x94) + 0x860);
+  if ((byteCount & 7) == 0) {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    iVar2 = M<SInt32>(self + 0x94);
-    if (M<char>(iVar2 + 0x80) == '\0') {
-      uVar5 = 0xe00002d8;
+    accel = M<SInt32>(self + 0x94);
+    if (M<char>(accel + 0x80) == '\0') {
+      result = 0xe00002d8;
     }
     else {
-      if (param_4 >> 3 != 0) {
-        uVar3 = 0;
+      if (byteCount >> 3 != 0) {
+        wordsDone = 0;
         do {
-          uVar1 = *param_3;
-          M<UInt32>(iVar4 + (param_1 & 0x1ffc)) =
-               uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
-          uVar1 = param_3[1];
-          M<UInt32>(iVar4 + (param_2 & 0x1ffc)) =
-               uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
-          uVar3 = uVar3 + 2;
-          param_3 = param_3 + 2;
-        } while (uVar3 < param_4 >> 3);
+          value = *values;
+          M<UInt32>(registers + (offset1 & 0x1ffc)) =
+               value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+          value = values[1];
+          M<UInt32>(registers + (offset2 & 0x1ffc)) =
+               value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+          wordsDone = wordsDone + 2;
+          values = values + 2;
+        } while (wordsDone < byteCount >> 3);
       }
-      uVar5 = 0;
+      result = 0;
     }
-    GH_IOLockUnlock(M<UInt32>(iVar2 + 0x840));
+    GH_IOLockUnlock(M<UInt32>(accel + 0x840));
   }
   else {
-    uVar5 = 0xe00002c2;
+    result = 0xe00002c2;
   }
-  return uVar5;
+  return result;
 }

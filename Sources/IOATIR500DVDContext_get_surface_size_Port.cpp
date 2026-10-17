@@ -27,13 +27,13 @@
 
 
 /* real addr 0xe9e0 */
-IOReturn IOATIR500DVDContext::get_surface_size(SInt32*param_1, SInt32*param_2) {
+IOReturn IOATIR500DVDContext::get_surface_size(SInt32*outW, SInt32*outH) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   if (M<SInt32>(self + 0xf8) == 0) {
     return 0xe00002bc;
   }
-  *param_1 = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + 0xf8) + 0xb70) + 0x1c);
-  *param_2 = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + 0xf8) + 0xb70) + 0x1e);
+  *outW = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + 0xf8) + 0xb70) + 0x1c);
+  *outH = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + 0xf8) + 0xb70) + 0x1e);
   return 0;
 }

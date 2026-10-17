@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-16 14:37:52.875927335 -0700
-+++ b/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-16 14:37:52.878034059 -0700
+--- a/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-16 20:25:14.604869222 -0700
++++ b/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-16 20:25:14.605901068 -0700
 @@ -52,9 +52,7 @@
    int iVar19;
    int local_e8 [6];
@@ -21,10 +21,10 @@
 +      local_b8[5] = local_b8[2];
      }
      else {
-       uVar6 = M<unsigned int>(param_1 + 0xd4);
+       uVar6 = M<unsigned int>(infoBytes + 0xd4);
 @@ -158,18 +156,18 @@
          fVar4 = (float)((double)CONCAT44d(0x43300000,uVar8) - 4503601774854144.0) * fVar1 *
-                 (float)((double)CONCAT44d(0x43300000,M<UInt32>(param_1 + 0x44)) -
+                 (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x44)) -
                         4503599627370496.0);
 -        if (2.1474836e+09 <= fVar4) {
 -          local_48 = (SInt64)(int)(fVar4 - 2.1474836e+09);
@@ -49,7 +49,7 @@
            iVar13 = (int)fVar2;
 @@ -182,18 +180,18 @@
          fVar4 = (float)((double)CONCAT44d(0x43300000,uVar6) - 4503601774854144.0) * fVar1 *
-                 (float)((double)CONCAT44d(0x43300000,M<UInt32>(param_1 + 0x48)) -
+                 (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x48)) -
                         4503599627370496.0);
 -        if (2.1474836e+09 <= fVar4) {
 -          local_80 = (SInt64)(int)(fVar4 - 2.1474836e+09);

@@ -27,31 +27,31 @@
 
 
 /* real addr 0xbbc0 */
-bool IOATIR5002DContext::freeToAllocGART(VendorTransferBuffer *real_param_1, bool param_2) {
+bool IOATIR5002DContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
-  bool bVar1;
+  bool lastEntry;
   SInt32 iVar2;
-  SInt32 iVar3;
-  UInt8 *pVVar4;
-  UInt8 *pIVar5;
+  SInt32 freed;
+  UInt8 *candidate;
+  UInt8 *ringEntry;
   
   iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0xb4)),
-                     (VendorTransferBuffer *)(param_1),M<UInt32>(self + 0xc4),param_2);
+                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xc4),aggressive);
   if ((iVar2 == 0) &&
-     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)),(VendorTransferBuffer *)(param_1),M<UInt32>(self + 0xa8),
-                         param_2), iVar2 == 0)) {
+     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xa8),
+                         aggressive), iVar2 == 0)) {
     iVar2 = 0;
-    pVVar4 = (UInt8 *)(self + 0xcc);
-    pIVar5 = self;
-    while (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar4),(VendorTransferBuffer *)(param_1),
-                              M<UInt32>(pIVar5 + 0xdc),param_2), iVar3 == 0) {
-      bVar1 = iVar2 == 1;
-      pVVar4 = pVVar4 + 0x18;
-      pIVar5 = pIVar5 + 0x18;
+    candidate = (UInt8 *)(self + 0xcc);
+    ringEntry = self;
+    while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
+                              M<UInt32>(ringEntry + 0xdc),aggressive), freed == 0) {
+      lastEntry = iVar2 == 1;
+      candidate = candidate + 0x18;
+      ringEntry = ringEntry + 0x18;
       iVar2 = iVar2 + 1;
-      if (bVar1) {
+      if (lastEntry) {
         return 0;
       }
     }

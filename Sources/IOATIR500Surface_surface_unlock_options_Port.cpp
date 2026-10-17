@@ -33,41 +33,41 @@ IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockType, UInt32 unl
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 IVar1;
-  int *piVar2;
-  UInt8 *pIVar3;
-  UInt32 uVar4;
-  int iVar5;
+  UInt8 lockState;
+  int *memory;
+  UInt8 *lockStatePtr;
+  UInt32 result;
+  int surfaceBuffer;
   
-  pIVar3 = self + 0xbd0;
+  lockStatePtr = self + 0xbd0;
   if (lockType != 1) {
-    pIVar3 = self + 0xbd1;
+    lockStatePtr = self + 0xbd1;
   }
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
-  IVar1 = *pIVar3;
-  if (IVar1 == 0x0) {
-    uVar4 = 0xe00002cc;
+  lockState = *lockStatePtr;
+  if (lockState == 0x0) {
+    result = 0xe00002cc;
   }
   else {
-    iVar5 = M<int>(self + 0xb70);
-    if (IVar1 == 0x3) {
+    surfaceBuffer = M<int>(self + 0xb70);
+    if (lockState == 0x3) {
       if (M<int>(self + 0xd8c) == 0) {
-        if ((M<int>(iVar5 + 0x24) != 0) &&
-           (piVar2 = M<int *>(M<int>(iVar5 + 0x24) + 0x10), piVar2 != (int *)0x0)) {
-          VCALL(*piVar2, 0x18)(piVar2);
-          M<UInt32>(M<int>(iVar5 + 0x24) + 0x10) = 0;
+        if ((M<int>(surfaceBuffer + 0x24) != 0) &&
+           (memory = M<int *>(M<int>(surfaceBuffer + 0x24) + 0x10), memory != (int *)0x0)) {
+          VCALL(*memory, 0x18)(memory);
+          M<UInt32>(M<int>(surfaceBuffer + 0x24) + 0x10) = 0;
         }
       }
       else {
         this->free_buffer_backing_orphans();
       }
     }
-    else if ((IVar1 == 0x1) && (M<int>(iVar5 + 8) != 0)) {
-      VCALL(M<int>(self), 0x600)(self,iVar5);
+    else if ((lockState == 0x1) && (M<int>(surfaceBuffer + 8) != 0)) {
+      VCALL(M<int>(self), 0x600)(self,surfaceBuffer);
     }
-    uVar4 = 0;
-    *pIVar3 = 0x0;
+    result = 0;
+    *lockStatePtr = 0x0;
   }
   GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
-  return uVar4;
+  return result;
 }

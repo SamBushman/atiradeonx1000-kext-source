@@ -29,15 +29,15 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x35540 */
-IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *real_param_2, UInt32 param_3) {
+IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its param_2 (#86) */
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its infoBytes (#86) */
+    UInt8 *infoBytes = reinterpret_cast<UInt8 *>(info);
 
   SInt32 iVar1;
   UInt32 uVar2;
   UInt32 uVar3;
-  UInt8 *pVVar4;
+  UInt8 *bufferSlot;
   UInt32 uVar5;
   
   VCALL(*M<SInt32 *>(param_1 + 0x8c), 0x54c)
@@ -48,24 +48,24 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *real_param_2, UInt32 param_3
     GH_IOLockLock(M<UInt32>(iVar1 + 0x840));
     iVar1 = M<SInt32>(param_1 + 0xf8);
     uVar2 = (SInt32)M<SInt16>(iVar1 + 0x9a) - (SInt32)M<SInt16>(iVar1 + 0x94);
-    if (M<SInt32>(param_2 + 0xc) == 0) {
-      pVVar4 = (UInt8 *)(param_1 + 0x168);
+    if (M<SInt32>(infoBytes + 0xc) == 0) {
+      bufferSlot = (UInt8 *)(param_1 + 0x168);
       if (M<SInt32>(param_1 + 0x164) != 0) {
-        pVVar4 = (UInt8 *)(param_1 + 0x184);
+        bufferSlot = (UInt8 *)(param_1 + 0x184);
       }
-      iVar1 = M<SInt32>(param_2 + 8) * 0x78 + iVar1 + 0x558;
+      iVar1 = M<SInt32>(infoBytes + 8) * 0x78 + iVar1 + 0x558;
     }
     else {
-      if (M<SInt32>(param_2 + 0xc) != 1) {
+      if (M<SInt32>(infoBytes + 0xc) != 1) {
         return 0xe00002c2;
       }
-      pVVar4 = (UInt8 *)(param_1 + 0x1a4);
+      bufferSlot = (UInt8 *)(param_1 + 0x1a4);
       if (M<SInt32>(param_1 + 0x1a0) != 0) {
-        pVVar4 = (UInt8 *)(param_1 + 0x1c0);
+        bufferSlot = (UInt8 *)(param_1 + 0x1c0);
       }
       iVar1 = iVar1 + 0x8a0;
     }
-    if (M<SInt32>(param_2) == 0) {
+    if (M<SInt32>(infoBytes) == 0) {
       uVar3 = (UInt32)M<UInt16>(iVar1 + 0x18);
       uVar5 = (UInt32)M<UInt16>(iVar1 + 0x18);
     }
@@ -73,32 +73,32 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *real_param_2, UInt32 param_3
       uVar3 = (UInt32)M<UInt16>(iVar1 + 0x18);
       uVar5 = uVar3 << 1;
     }
-    if (M<SInt32>(param_2 + 4) == 0) {
-      M<UInt32>(param_2 + 0x2c) = M<UInt32>(iVar1 + 8);
-      M<UInt32>(param_2 + 0x30) = uVar2 * M<UInt16>(iVar1 + 0x18) + M<SInt32>(iVar1 + 8);
+    if (M<SInt32>(infoBytes + 4) == 0) {
+      M<UInt32>(infoBytes + 0x2c) = M<UInt32>(iVar1 + 8);
+      M<UInt32>(infoBytes + 0x30) = uVar2 * M<UInt16>(iVar1 + 0x18) + M<SInt32>(iVar1 + 8);
     }
     else {
-      M<UInt32>(param_2 + 0x2c) = uVar3 + M<SInt32>(iVar1 + 8);
-      M<UInt32>(param_2 + 0x30) =
+      M<UInt32>(infoBytes + 0x2c) = uVar3 + M<SInt32>(iVar1 + 8);
+      M<UInt32>(infoBytes + 0x30) =
            (UInt32)M<UInt16>(iVar1 + 0x18) + uVar2 * M<UInt16>(iVar1 + 0x18) + M<SInt32>(iVar1 + 8)
       ;
     }
-    M<UInt32>(param_2 + 0x1c) = uVar5 * uVar2 + -1;
-    M<UInt32>(param_2 + 0x28) = uVar5 | uVar5 << 0x10;
-    M<UInt32>(param_2 + 0x20) = uVar5 * (uVar2 >> 1) + -1;
-    if (M<SInt32>(param_2 + 0x2c) != 0) {
-      iVar1 = M<SInt32>(pVVar4 + 4);
+    M<UInt32>(infoBytes + 0x1c) = uVar5 * uVar2 + -1;
+    M<UInt32>(infoBytes + 0x28) = uVar5 | uVar5 << 0x10;
+    M<UInt32>(infoBytes + 0x20) = uVar5 * (uVar2 >> 1) + -1;
+    if (M<SInt32>(infoBytes + 0x2c) != 0) {
+      iVar1 = M<SInt32>(bufferSlot + 4);
       if (iVar1 == 0) {
-        ((IOATIR500DVDContext *)(param_1))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar4));
-        iVar1 = M<SInt32>(pVVar4 + 4);
+        ((IOATIR500DVDContext *)(param_1))->map_transfer_to_GART((VendorTransferBuffer *)(bufferSlot));
+        iVar1 = M<SInt32>(bufferSlot + 4);
       }
       uVar5 = M<UInt32>(M<UInt8 *>(param_1 + 0x8c) + 0x854);
-      uVar2 = ((ATIRadeonX1000 *)(M<UInt8 *>(param_1 + 0x8c)))->submit_idct_buffer_consumed((UInt32 *)(M<SInt32>(pVVar4 + 0x14) + 0x20),iVar1 + 0x20,
-                         (sATIDVDIDCTInfo *)param_2);
+      uVar2 = ((ATIRadeonX1000 *)(M<UInt8 *>(param_1 + 0x8c)))->submit_idct_buffer_consumed((UInt32 *)(M<SInt32>(bufferSlot + 0x14) + 0x20),iVar1 + 0x20,
+                         (sATIDVDIDCTInfo *)infoBytes);
       M<UInt32>(param_1 + 0x150) = uVar2;
       if (uVar5 <= uVar2) {
-        M<UInt32>(pVVar4 + 0x10) = uVar2;
-        if (M<SInt32>(param_2 + 0xc) == 0) {
+        M<UInt32>(bufferSlot + 0x10) = uVar2;
+        if (M<SInt32>(infoBytes + 0xc) == 0) {
           M<UInt32>(param_1 + 0x154) = M<UInt32>(param_1 + 0x150);
         }
         GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 0x8c) + 0x840));

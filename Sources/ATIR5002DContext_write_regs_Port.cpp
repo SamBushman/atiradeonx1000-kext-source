@@ -29,39 +29,39 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x33740 */
-IOReturn ATIR5002DContext::write_regs(UInt32*param_1, UInt32 param_2) {
+IOReturn ATIR5002DContext::write_regs(UInt32*offsetValuePairs, UInt32 pairByteCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
-  UInt32 uVar3;
-  SInt32 iVar4;
-  UInt32 uVar5;
+  SInt32 accel;
+  UInt32 value;
+  UInt32 wordsDone;
+  SInt32 registers;
+  UInt32 result;
   
-  iVar4 = M<SInt32>(M<SInt32>(self + 0x94) + 0x860);
-  if ((param_2 & 7) == 0) {
+  registers = M<SInt32>(M<SInt32>(self + 0x94) + 0x860);
+  if ((pairByteCount & 7) == 0) {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    iVar1 = M<SInt32>(self + 0x94);
-    if (M<char>(iVar1 + 0x80) == '\0') {
-      uVar5 = 0xe00002d8;
+    accel = M<SInt32>(self + 0x94);
+    if (M<char>(accel + 0x80) == '\0') {
+      result = 0xe00002d8;
     }
     else {
-      if (param_2 >> 3 != 0) {
-        uVar3 = 0;
+      if (pairByteCount >> 3 != 0) {
+        wordsDone = 0;
         do {
-          uVar2 = param_1[1];
-          M<UInt32>(iVar4 + (*param_1 & 0x1ffc)) =
-               uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
-          uVar3 = uVar3 + 2;
-          param_1 = param_1 + 2;
-        } while (uVar3 < param_2 >> 3);
+          value = offsetValuePairs[1];
+          M<UInt32>(registers + (*offsetValuePairs & 0x1ffc)) =
+               value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+          wordsDone = wordsDone + 2;
+          offsetValuePairs = offsetValuePairs + 2;
+        } while (wordsDone < pairByteCount >> 3);
       }
-      uVar5 = 0;
+      result = 0;
     }
-    GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));
+    GH_IOLockUnlock(M<UInt32>(accel + 0x840));
   }
   else {
-    uVar5 = 0xe00002c2;
+    result = 0xe00002c2;
   }
-  return uVar5;
+  return result;
 }

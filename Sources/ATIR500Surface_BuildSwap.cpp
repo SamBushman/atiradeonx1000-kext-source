@@ -40,11 +40,11 @@ void ATIR500Surface::build_swap() {
   UInt8 AVar5;
   UInt8 bVar6;
   UInt8 bVar7;
-  float fVar8;
-  SInt16 sVar9;
-  SInt16 sVar10;
-  SInt16 sVar11;
-  SInt16 sVar12;
+  float widthRatio;
+  SInt16 regionX;
+  SInt16 regionWidth;
+  SInt16 surfaceWidth;
+  SInt16 surfaceHeight;
   UInt16 uVar13;
   UInt16 uVar14;
   UInt32 uVar15;
@@ -71,13 +71,13 @@ void ATIR500Surface::build_swap() {
   SwapBufferEntry *batchEntry;     /* entries[0] of the panel being built: its `header` is the pending swap-write batch */
   PanelRecord *panelRec;
   UInt32 uVar38;
-  UInt32 *puVar39;
+  UInt32 *batchWords;
   UInt32 uVar40;
-  float fVar41;
+  float heightRatio;
   UInt32 uVar42;
   SInt32 iVar43;
   SInt32 iVar44;
-  UInt32 *puVar45;
+  UInt32 *blitPacket;
   UInt8 bVar46;
   double dVar47;
   double dVar48;
@@ -88,11 +88,11 @@ void ATIR500Surface::build_swap() {
   double dVar53;
   double dVar54;
   double dVar55;
-  double dVar56;
-  double dVar57;
-  double dVar58;
+  double half;
+  double one;
+  double zero;
   double dVar59;
-  double dVar60;
+  double signedIntBias;
   double dVar61;
   double dVar62;
   double dVar63;
@@ -102,18 +102,18 @@ void ATIR500Surface::build_swap() {
   double dVar67;
   double dVar68;
   UInt8 *local_108;
-  UInt32 local_104;
+  UInt32 panel;
   SInt32 *local_100;
   
   M<UInt16>(self + 0xdb4) = 0;
   iVar32 = M<SInt32>(self + 0xd50);
   if (M<SInt32>(iVar32 + 0xcc) != 0) {
-    local_104 = 0;
-    dVar58 = (double)FLOAT_0004c370;
-    dVar57 = (double)FLOAT_0004c374;
-    dVar56 = (double)FLOAT_0004c380;
+    panel = 0;
+    zero = (double)FLOAT_0004c370;
+    one = (double)FLOAT_0004c374;
+    half = (double)FLOAT_0004c380;
     panelRec = PANEL_RECORD(self, 0);
-    dVar60 = DOUBLE_0004c3a8;
+    signedIntBias = DOUBLE_0004c3a8;
     local_108 = self;
     do {
       bVar1 = (M<UInt32>(self + 0xbe8) & 0x20) == 0;
@@ -123,7 +123,7 @@ void ATIR500Surface::build_swap() {
       else {
         iVar43 = M<SInt32>(self + 0xb70);
       }
-      iVar32 = local_104 * 0x78 + iVar32;
+      iVar32 = panel * 0x78 + iVar32;
       if ((self[0xbf1] == 0x10) ||
          ((self[0xbf1] != 0x20 && (M<SInt32>(self + 0xbe0) == M<SInt32>(self + 0xbe4))
           ))) {
@@ -140,11 +140,11 @@ void ATIR500Surface::build_swap() {
         iVar34 = 1;
       }
       uVar40 = (UInt32)M<SInt16>((SInt32)piVar27 + 10);
-      sVar9 = M<SInt16>(piVar27 + 1);
+      regionX = M<SInt16>(piVar27 + 1);
       uVar38 = (UInt32)M<SInt16>((SInt32)piVar27 + 6);
-      sVar10 = M<SInt16>(piVar27 + 2);
+      regionWidth = M<SInt16>(piVar27 + 2);
       if ((M<SInt32>(self + 0x90) != 0) && (M<SInt32>(self + 0xda4) != 0)) {
-        if ((SInt32)sVar10 == 0) {
+        if ((SInt32)regionWidth == 0) {
           return;
         }
         if (uVar40 == 0) {
@@ -153,16 +153,16 @@ void ATIR500Surface::build_swap() {
       }
       iVar44 = (SInt32)Vol(panelRec->entries[0].header);
       batchEntry = &panelRec->entries[0];
-      bVar46 = (local_104 == 0) << 1;
-      puVar39 = (UInt32 *)(iVar44 + 0x20);
-      if (((local_104 != 0) || (M<SInt32>(self + 0xb70) == M<SInt32>(self + 0xb74))) || (bVar1)) {
+      bVar46 = (panel == 0) << 1;
+      batchWords = (UInt32 *)(iVar44 + 0x20);
+      if (((panel != 0) || (M<SInt32>(self + 0xb70) == M<SInt32>(self + 0xb74))) || (bVar1)) {
         iVar44 = 0;
       }
       else {
-        *puVar39 = 0xd0b;
+        *batchWords = 0xd0b;
         M<UInt32>(iVar44 + 0x24) = 5;
         GCopy(iVar44 + 0x28,(&g_r500_3d_blit_state_packet),0x2f4);
-        iVar26 = (iVar44 + 0x31c) - (SInt32)puVar39 >> 2;
+        iVar26 = (iVar44 + 0x31c) - (SInt32)batchWords >> 2;
         iVar28 = (UInt32)(UInt8)self[0xe2] * 0x1c;
         uVar29 = 0;
         M<UInt32>(iVar44 + 0x290) =
@@ -249,27 +249,27 @@ void ATIR500Surface::build_swap() {
         M<UInt32>(iVar44 + 0x2b0) = M<UInt32>(iVar44 + 0x2b0) & 0xffffe1ff | 0x1400;
         M<UInt32>(iVar44 + 0x3c) = 0x70000;
         M<UInt32>(iVar44 + 0x54) = uVar16;
-        sVar11 = M<SInt16>(self + 0xbd4);
-        sVar12 = M<SInt16>(self + 0xbd6);
-        puVar39[iVar26] = 0x31080;
-        puVar39[iVar26 + 5] = 0x1087;
-        puVar39[iVar26 + 1] = FBITS((float)dVar58);
-        puVar39[iVar26 + 2] = FBITS((float)dVar57);
-        puVar39[iVar26 + 3] = FBITS((float)dVar57);
-        puVar39[iVar26 + 4] = FBITS((float)dVar58);
-        dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)sVar11 ^ 0x80000000) - dVar60);
-        dVar55 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)sVar12 ^ 0x80000000) - dVar60);
-        puVar39[iVar26 + 7] = 0xc0033500;
-        puVar39[iVar26 + 8] = 0x10031;
-        puVar39[iVar26 + 9] = FBITS((float)((double)(float)(dVar47 + dVar58) * dVar56));
-        puVar39[iVar26 + 10] = FBITS((float)((double)(float)(dVar55 + dVar58) * dVar56));
-        puVar39[iVar26 + 0xb] = 0;
-        puVar39[iVar26 + 6] = (SInt32)(dVar47 * dVar54) << 0x10 | (SInt32)(dVar55 * dVar54);
-        puVar39[iVar28] = 0x1393;
-        puVar39[iVar28 + 1] = 10;
-        puVar39[iVar28 + 2] = 0x5c8;
+        surfaceWidth = M<SInt16>(self + 0xbd4);
+        surfaceHeight = M<SInt16>(self + 0xbd6);
+        batchWords[iVar26] = 0x31080;
+        batchWords[iVar26 + 5] = 0x1087;
+        batchWords[iVar26 + 1] = FBITS((float)zero);
+        batchWords[iVar26 + 2] = FBITS((float)one);
+        batchWords[iVar26 + 3] = FBITS((float)one);
+        batchWords[iVar26 + 4] = FBITS((float)zero);
+        dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceWidth ^ 0x80000000) - signedIntBias);
+        dVar55 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceHeight ^ 0x80000000) - signedIntBias);
+        batchWords[iVar26 + 7] = 0xc0033500;
+        batchWords[iVar26 + 8] = 0x10031;
+        batchWords[iVar26 + 9] = FBITS((float)((double)(float)(dVar47 + zero) * half));
+        batchWords[iVar26 + 10] = FBITS((float)((double)(float)(dVar55 + zero) * half));
+        batchWords[iVar26 + 0xb] = 0;
+        batchWords[iVar26 + 6] = (SInt32)(dVar47 * dVar54) << 0x10 | (SInt32)(dVar55 * dVar54);
+        batchWords[iVar28] = 0x1393;
+        batchWords[iVar28 + 1] = 10;
+        batchWords[iVar28 + 2] = 0x5c8;
         iVar44 = iVar28 + 4;
-        puVar39[iVar28 + 3] = 0x70000;
+        batchWords[iVar28 + 3] = 0x70000;
       }
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0x18) = iVar44;
       if (panelRec->active != 0x0) {
@@ -280,7 +280,7 @@ void ATIR500Surface::build_swap() {
         else {
           iVar28 = M<SInt32>(self + 0xd50);
           if ((M<char>(iVar28 + 0x9b0) == '\0') ||
-             (M<SInt32>(local_104 * 0x18 + iVar28 + 0xb10) == 0)) {
+             (M<SInt32>(panel * 0x18 + iVar28 + 0xb10) == 0)) {
             if ((SInt32)uVar38 < 0) {
               uVar29 = 0;
               uVar19 = uVar40;
@@ -296,23 +296,23 @@ void ATIR500Surface::build_swap() {
             if (uVar17 < uVar19) {
               uVar19 = uVar17;
             }
-            puVar39[iVar44] = 0x1393;
-            puVar39[iVar44 + 1] = 10;
-            puVar39[iVar44 + 2] = 0xd0b;
-            puVar39[iVar44 + 3] = 5;
-            puVar39[iVar44 + 4] = 0x5c8;
+            batchWords[iVar44] = 0x1393;
+            batchWords[iVar44 + 1] = 10;
+            batchWords[iVar44 + 2] = 0xd0b;
+            batchWords[iVar44 + 3] = 5;
+            batchWords[iVar44 + 4] = 0x5c8;
             iVar26 = iVar44 + 6;
-            puVar39[iVar44 + 5] = 0x70000;
+            batchWords[iVar44 + 5] = 0x70000;
             if ((bool)(bVar46 >> 1 & 1)) {
               iVar18 = M<SInt32>(iVar28 + 0x894);
               if (iVar18 == 0) {
-                puVar39[iVar26] = 0x194e;
-                puVar39[iVar44 + 7] =
+                batchWords[iVar26] = 0x194e;
+                batchWords[iVar44 + 7] =
                      uVar29 & ~M<UInt32>(iVar28 + 0x898) |
                      (uVar19 & ~M<UInt32>(iVar28 + 0x898)) << 0x10 | 0x80000000;
-                puVar39[iVar44 + 8] = 0x5c8;
+                batchWords[iVar44 + 8] = 0x5c8;
                 iVar26 = iVar44 + 10;
-                puVar39[iVar44 + 9] = 8;
+                batchWords[iVar44 + 9] = 8;
               }
               else {
 LAB_0003f644:
@@ -320,39 +320,39 @@ LAB_0003f644:
               }
             }
             else {
-              if (local_104 != 1) {
+              if (panel != 1) {
                 iVar18 = M<SInt32>(iVar28 + 0x894);
                 goto LAB_0003f644;
               }
 LAB_0003f654:
-              puVar39[iVar26] = 0x1b4e;
-              puVar39[iVar44 + 7] =
+              batchWords[iVar26] = 0x1b4e;
+              batchWords[iVar44 + 7] =
                    uVar29 & ~M<UInt32>(iVar28 + 0x89c) |
                    (uVar19 & ~M<UInt32>(iVar28 + 0x89c)) << 0x10 | 0x80000000;
-              puVar39[iVar44 + 8] = 0x5c8;
-              puVar39[iVar44 + 9] = 0x80000008;
+              batchWords[iVar44 + 8] = 0x5c8;
+              batchWords[iVar44 + 9] = 0x80000008;
               iVar26 = iVar44 + 10;
             }
           }
         }
         if (M<SInt32>(self + 0xbe0) == M<SInt32>(self + 0xbe4)) {
-          fVar41 = 1.0;
-          fVar8 = 1.0;
+          heightRatio = 1.0;
+          widthRatio = 1.0;
         }
         else {
-          fVar8 = FLOAT_0004c370;
+          widthRatio = FLOAT_0004c370;
           if ((SInt32)M<SInt16>(self + 0xbe4) != 0) {
-            fVar8 = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe0) ^ 0x80000000)
+            widthRatio = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe0) ^ 0x80000000)
                            - DOUBLE_0004c3a8) /
                     (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe4) ^ 0x80000000)
                            - DOUBLE_0004c3a8);
           }
-          fVar41 = 0.0;
+          heightRatio = 0.0;
           if ((SInt32)M<SInt16>(self + 0xbe6) != 0) {
-            fVar41 = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe2) ^ 0x80000000)
+            heightRatio = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe2) ^ 0x80000000)
                             - DOUBLE_0004c3a8) /
                      (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe6) ^ 0x80000000)
-                            - dVar60);
+                            - signedIntBias);
           }
         }
         uVar29 = (UInt32)M<UInt8>(iVar43 + 0x3a);
@@ -434,91 +434,91 @@ LAB_0003f654:
           uVar24 = 0;
         }
         dVar66 = (double)(float)((double)CONCAT44d(0x43300000,uVar42) - DOUBLE_0004c3b0);
-        dVar68 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)sVar9 ^ 0x80000000) - dVar60);
-        dVar67 = (double)(float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - dVar60);
-        dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)sVar10 ^ 0x80000000) - dVar60);
+        dVar68 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionX ^ 0x80000000) - signedIntBias);
+        dVar67 = (double)(float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias);
+        dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionWidth ^ 0x80000000) - signedIntBias);
         dVar55 = (double)FLOAT_0004c370;
-        puVar45 = puVar39 + iVar26;
-        dVar54 = (double)(float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - dVar60);
+        blitPacket = batchWords + iVar26;
+        dVar54 = (double)(float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias);
         dVar65 = (double)(float)((double)CONCAT44d(0x43300000,uVar15) - DOUBLE_0004c3b0);
         dVar61 = (double)(float)((double)CONCAT44d(0x43300000,
                                                   (SInt32)M<SInt16>(self + 0xbdc) ^ 0x80000000) -
-                                dVar60);
+                                signedIntBias);
         dVar62 = (double)(float)((double)CONCAT44d(0x43300000,
                                                   (SInt32)M<SInt16>(self + 0xbde) ^ 0x80000000) -
-                                dVar60);
-        dVar63 = (double)fVar8;
-        dVar64 = (double)fVar41;
+                                signedIntBias);
+        dVar63 = (double)widthRatio;
+        dVar64 = (double)heightRatio;
         iVar43 = M<SInt32>(iVar28 + 0x8c4);
         if (dVar66 != dVar55) {
-          dVar55 = (double)(float)(dVar57 / dVar66);
+          dVar55 = (double)(float)(one / dVar66);
         }
         dVar59 = (double)FLOAT_0004c370;
         if (dVar65 != dVar59) {
-          dVar59 = (double)(float)(dVar57 / dVar65);
+          dVar59 = (double)(float)(one / dVar65);
         }
         iVar26 = 0xbd;
-        GCopy(puVar45,(&g_r500_3d_blit_state_packet),0x2f4);
-        uVar38 = puVar45[0xa2];
-        puVar45[0xa0] = (bVar7 & 7) << 2 | (UInt32)uVar14 * iVar32 + iVar33 & 0xffffffe0;
-        puVar45[0xa6] = uVar23 & 0x7ff | (uVar22 & 0x7ff) << 0xb | 0x80000000;
-        puVar45[0xa8] =
+        GCopy(blitPacket,(&g_r500_3d_blit_state_packet),0x2f4);
+        uVar38 = blitPacket[0xa2];
+        blitPacket[0xa0] = (bVar7 & 7) << 2 | (UInt32)uVar14 * iVar32 + iVar33 & 0xffffffe0;
+        blitPacket[0xa6] = uVar23 & 0x7ff | (uVar22 & 0x7ff) << 0xb | 0x80000000;
+        blitPacket[0xa8] =
              uVar17 >> 0x13 & 0x1f | (uVar17 & 0x40) << 0x10 | uVar17 >> 7 & 0xe00 |
              uVar17 >> 1 & 0x7000 | (uVar17 & 0x1c00) << 5 | (uVar17 & 0x380) << 0xb;
-        puVar45[0xaa] = uVar31 - 1 & 0x3fff | (uVar25 & 0x800) << 4 | (uVar24 & 0x800) << 5;
-        puVar45[0x9c] =
+        blitPacket[0xaa] = uVar31 - 1 & 0x3fff | (uVar25 & 0x800) << 4 | (uVar24 & 0x800) << 5;
+        blitPacket[0x9c] =
              uVar20 & 0x3ffe | (bVar46 & 1) << 0x10 | (bVar46 & 6) << 0x10 | (bVar6 & 3) << 0x13 |
              uVar19 >> 1 & 0x1e00000;
-        puVar45[0x9a] = (UInt32)uVar13 * iVar44 + iVar18 & 0xffffffe0;
-        puVar45[0x8a] =
+        blitPacket[0x9a] = (UInt32)uVar13 * iVar44 + iVar18 & 0xffffffe0;
+        blitPacket[0x8a] =
              (uVar19 & 0x600) << 5 |
              (uVar19 & 0x1800) << 1 |
              uVar19 >> 3 & 0xc00 | uVar19 >> 7 & 0x300 | uVar19 >> 0x11 & 0x1f;
-        puVar45[0xb2] = 0;
-        puVar45[0xb3] = uVar30 & 0x1fff | (uVar21 & 0x1fff) << 0xd;
-        puVar45[0xb] = uVar16;
-        puVar45[0xa2] = iVar35 << 9 | uVar38 & 0xfffff9ff;
-        puVar45[0xa2] = iVar35 << 0xb | iVar35 << 9 | uVar38 & 0xffffe1ff;
+        blitPacket[0xb2] = 0;
+        blitPacket[0xb3] = uVar30 & 0x1fff | (uVar21 & 0x1fff) << 0xd;
+        blitPacket[0xb] = uVar16;
+        blitPacket[0xa2] = iVar35 << 9 | uVar38 & 0xfffff9ff;
+        blitPacket[0xa2] = iVar35 << 0xb | iVar35 << 9 | uVar38 & 0xffffe1ff;
         if (bVar1) {
-          puVar45[0x1e] = puVar45[0x1e] & 0xfffffffc | 2;
+          blitPacket[0x1e] = blitPacket[0x1e] & 0xfffffffc | 2;
         }
         dVar48 = (double)FLOAT_0004c378;
         if (((dVar48 < dVar66) && (iVar43 != 0)) || (dVar48 < dVar65)) {
           if (dVar66 <= (double)FLOAT_0004c378) {
             uVar19 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
-            uVar29 = puVar45[0xaa];
+            uVar29 = blitPacket[0xaa];
             uVar40 = (SInt32)dVar65 >> 1;
             uVar38 = uVar40 & 0xffffffc0;
             uVar42 = (SInt32)dVar65 - uVar38;
             uVar17 = uVar38 + 1;
             dVar65 = dVar67;
-            if (dVar64 != dVar58) {
+            if (dVar64 != zero) {
               dVar65 = (double)(float)(dVar67 + (double)(float)((double)(float)((double)(float)((
                                                   double)CONCAT44d(0x43300000,
                                                                   uVar38 + uVar17 ^ 0x80000000) -
-                                                  dVar60) * dVar56 + dVar62) / dVar64));
+                                                  signedIntBias) * half + dVar62) / dVar64));
             }
-            if (dVar65 <= dVar58) {
-              dVar65 = dVar65 - dVar56;
+            if (dVar65 <= zero) {
+              dVar65 = dVar65 - half;
             }
             else {
-              dVar65 = dVar65 + dVar56;
+              dVar65 = dVar65 + half;
             }
             dVar66 = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
                                                                       (SInt32)dVar65 ^ 0x80000000) -
-                                                    dVar60) - dVar67);
-            puVar45[0xa6] = (uVar40 & 0x7c0) << 0xb | puVar45[0xa6] & 0xffc007ff;
-            puVar45[0xbd] = 0x1040;
+                                                    signedIntBias) - dVar67);
+            blitPacket[0xa6] = (uVar40 & 0x7c0) << 0xb | blitPacket[0xa6] & 0xffc007ff;
+            blitPacket[0xbd] = 0x1040;
             iVar32 = 0xbf;
-            puVar45[0xbe] = 0;
+            blitPacket[0xbe] = 0;
             dVar65 = DOUBLE_0004c3a8;
             fVar4 = FLOAT_0004c380;
-            fVar41 = FLOAT_0004c37c;
-            fVar8 = FLOAT_0004c370;
+            heightRatio = FLOAT_0004c37c;
+            widthRatio = FLOAT_0004c370;
             if (uVar17 != 0) {
-              fVar8 = (float)(dVar57 / (double)(float)((double)CONCAT44d(0x43300000,
+              widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
                                                                         uVar17 ^ 0x80000000) -
-                                                      dVar60));
+                                                      signedIntBias));
             }
             if (iVar34 != 0) {
               dVar59 = (double)(float)(dVar68 + dVar47);
@@ -576,53 +576,53 @@ LAB_0003f654:
                 iVar32 = iVar43;
                 if ((FLOAT_0004c370 < (float)(dVar52 - dVar49)) &&
                    (FLOAT_0004c370 < (float)(dVar51 - dVar50))) {
-                  puVar45[iVar43] = 0x31080;
-                  puVar45[iVar43 + 5] = 0x1087;
+                  blitPacket[iVar43] = 0x31080;
+                  blitPacket[iVar43 + 5] = 0x1087;
                   iVar32 = iVar43 * 4 + 0x30 >> 2;
-                  puVar45[iVar43 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
+                  blitPacket[iVar43 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
                                                        dVar61)));
-                  puVar45[iVar43 + 2] =
-                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar51 - dVar67) - dVar62));
-                  puVar45[iVar43 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar52 - dVar68) -
+                  blitPacket[iVar43 + 2] =
+                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar51 - dVar67) - dVar62));
+                  blitPacket[iVar43 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar52 - dVar68) -
                                                        dVar61)));
-                  puVar45[iVar43 + 4] =
-                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
-                  puVar45[iVar43 + 7] = 0xc0033500;
-                  puVar45[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
-                  puVar45[iVar43 + 10] = FBITS((float)(dVar50 + dVar51) * fVar4);
-                  puVar45[iVar43 + 8] = 0x10031;
-                  puVar45[iVar43 + 0xb] = 0;
-                  puVar45[iVar43 + 6] =
-                       (SInt32)((float)(dVar52 - dVar49) * fVar41) << 0x10 |
-                       (SInt32)((float)(dVar51 - dVar50) * fVar41);
+                  blitPacket[iVar43 + 4] =
+                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
+                  blitPacket[iVar43 + 7] = 0xc0033500;
+                  blitPacket[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
+                  blitPacket[iVar43 + 10] = FBITS((float)(dVar50 + dVar51) * fVar4);
+                  blitPacket[iVar43 + 8] = 0x10031;
+                  blitPacket[iVar43 + 0xb] = 0;
+                  blitPacket[iVar43 + 6] =
+                       (SInt32)((float)(dVar52 - dVar49) * heightRatio) << 0x10 |
+                       (SInt32)((float)(dVar51 - dVar50) * heightRatio);
                 }
                 piVar27 = piVar27 + 2;
                 iVar35 = iVar35 + -1;
                 iVar43 = iVar32;
               } while (iVar35 != 0);
             }
-            iVar43 = puVar45[0xa0];
-            puVar45[iVar32] = 0x1150;
-            puVar45[iVar32 + 1] =
+            iVar43 = blitPacket[0xa0];
+            blitPacket[iVar32] = 0x1150;
+            blitPacket[iVar32 + 1] =
                  iVar43 + (uVar38 * ((uVar29 & 0x3fff) + 1) << (uVar19 >> 0xc & 7) & 0xffffffe0);
-            uVar40 = puVar45[0xa6];
-            puVar45[iVar32 + 2] = 0x1120;
-            puVar45[iVar32 + 3] = (uVar42 - 1) * 0x800 & 0x3ff800 | uVar40 & 0xffc007ff;
-            puVar45[iVar32 + 4] = 0x1040;
+            uVar40 = blitPacket[0xa6];
+            blitPacket[iVar32 + 2] = 0x1120;
+            blitPacket[iVar32 + 3] = (uVar42 - 1) * 0x800 & 0x3ff800 | uVar40 & 0xffc007ff;
+            blitPacket[iVar32 + 4] = 0x1040;
             iVar26 = iVar32 + 6;
-            puVar45[iVar32 + 5] = 0;
+            blitPacket[iVar32 + 5] = 0;
             dVar65 = DOUBLE_0004c3a8;
             fVar4 = FLOAT_0004c380;
-            fVar41 = FLOAT_0004c37c;
-            fVar8 = FLOAT_0004c370;
+            heightRatio = FLOAT_0004c37c;
+            widthRatio = FLOAT_0004c370;
             if (uVar42 != 0) {
-              fVar8 = (float)(dVar57 / (double)(float)((double)CONCAT44d(0x43300000,
+              widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
                                                                         uVar42 ^ 0x80000000) -
-                                                      dVar60));
+                                                      signedIntBias));
             }
             dVar62 = (double)(float)(dVar62 + (double)(float)((double)CONCAT44d(0x43300000,
                                                                                uVar38 ^ 0x80000000)
-                                                             - dVar60));
+                                                             - signedIntBias));
             if (iVar34 != 0) {
               dVar66 = (double)(float)(dVar67 + dVar66);
               dVar47 = (double)(float)(dVar68 + dVar47);
@@ -679,25 +679,25 @@ LAB_0003f654:
                 iVar26 = iVar32;
                 if ((FLOAT_0004c370 < (float)(dVar48 - dVar59)) &&
                    (FLOAT_0004c370 < (float)(dVar50 - dVar49))) {
-                  puVar45[iVar32] = 0x31080;
-                  puVar45[iVar32 + 5] = 0x1087;
+                  blitPacket[iVar32] = 0x31080;
+                  blitPacket[iVar32 + 5] = 0x1087;
                   iVar26 = iVar32 * 4 + 0x30 >> 2;
-                  puVar45[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar59 - dVar68) -
+                  blitPacket[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar59 - dVar68) -
                                                        dVar61)));
-                  puVar45[iVar32 + 2] =
-                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
-                  puVar45[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar48 - dVar68) -
+                  blitPacket[iVar32 + 2] =
+                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
+                  blitPacket[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar48 - dVar68) -
                                                        dVar61)));
-                  puVar45[iVar32 + 4] =
-                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar49 - dVar67) - dVar62));
-                  puVar45[iVar32 + 7] = 0xc0033500;
-                  puVar45[iVar32 + 9] = FBITS((float)(dVar59 + dVar48) * fVar4);
-                  puVar45[iVar32 + 10] = FBITS((float)(dVar49 + dVar50) * fVar4);
-                  puVar45[iVar32 + 8] = 0x10031;
-                  puVar45[iVar32 + 0xb] = 0;
-                  puVar45[iVar32 + 6] =
-                       (SInt32)((float)(dVar48 - dVar59) * fVar41) << 0x10 |
-                       (SInt32)((float)(dVar50 - dVar49) * fVar41);
+                  blitPacket[iVar32 + 4] =
+                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar49 - dVar67) - dVar62));
+                  blitPacket[iVar32 + 7] = 0xc0033500;
+                  blitPacket[iVar32 + 9] = FBITS((float)(dVar59 + dVar48) * fVar4);
+                  blitPacket[iVar32 + 10] = FBITS((float)(dVar49 + dVar50) * fVar4);
+                  blitPacket[iVar32 + 8] = 0x10031;
+                  blitPacket[iVar32 + 0xb] = 0;
+                  blitPacket[iVar32 + 6] =
+                       (SInt32)((float)(dVar48 - dVar59) * heightRatio) << 0x10 |
+                       (SInt32)((float)(dVar50 - dVar49) * heightRatio);
                 }
                 local_100 = local_100 + 2;
                 iVar43 = iVar43 + -1;
@@ -709,7 +709,7 @@ LAB_0003f654:
             uVar38 = (SInt32)dVar66 >> 1 & 0xfffffe00;
             uVar19 = (SInt32)dVar66 - uVar38;
             uVar40 = uVar38 + 2;
-            if ((puVar45[0xa0] & 0x18) == 0) {
+            if ((blitPacket[0xa0] & 0x18) == 0) {
               uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
               iVar32 = 0;
             }
@@ -719,34 +719,34 @@ LAB_0003f654:
             }
             iVar43 = (SInt32)uVar38 >> ((iVar32 - (uVar29 >> 0xc & 7)) + 5 & 0x3f);
             iVar32 = iVar43 << 5;
-            if (((UInt32)puVar45[0xa0] >> 2 & 1) != 0) {
+            if (((UInt32)blitPacket[0xa0] >> 2 & 1) != 0) {
               iVar32 = (iVar43 << 0xc) >> 3;
             }
             dVar55 = dVar68;
-            if (dVar63 != dVar58) {
+            if (dVar63 != zero) {
               dVar55 = (double)(float)(dVar68 + (double)(float)((double)(float)((double)(float)((
                                                   double)CONCAT44d(0x43300000,
                                                                   uVar38 + uVar40 ^ 0x80000000) -
-                                                  dVar60) * dVar56 + dVar61) / dVar63));
+                                                  signedIntBias) * half + dVar61) / dVar63));
             }
-            if (dVar55 <= dVar58) {
-              dVar55 = dVar55 - dVar56;
+            if (dVar55 <= zero) {
+              dVar55 = dVar55 - half;
             }
             else {
-              dVar55 = dVar55 + dVar56;
+              dVar55 = dVar55 + half;
             }
             dVar65 = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
                                                                       (SInt32)dVar55 ^ 0x80000000) -
-                                                    dVar60) - dVar68);
-            puVar45[0xa6] = uVar38 + 1 & 0x7ff | puVar45[0xa6] & 0xfffff800;
+                                                    signedIntBias) - dVar68);
+            blitPacket[0xa6] = uVar38 + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
             dVar55 = DOUBLE_0004c3a8;
             fVar4 = FLOAT_0004c380;
-            fVar41 = FLOAT_0004c37c;
-            fVar8 = FLOAT_0004c370;
+            heightRatio = FLOAT_0004c37c;
+            widthRatio = FLOAT_0004c370;
             if (uVar40 != 0) {
-              fVar8 = (float)(dVar57 / (double)(float)((double)CONCAT44d(0x43300000,
+              widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
                                                                         uVar40 ^ 0x80000000) -
-                                                      dVar60));
+                                                      signedIntBias));
             }
             if (iVar34 != 0) {
               dVar66 = (double)(float)(dVar68 + dVar65);
@@ -804,51 +804,51 @@ LAB_0003f654:
                 iVar26 = iVar43;
                 if ((FLOAT_0004c370 < (float)(dVar52 - dVar49)) &&
                    (FLOAT_0004c370 < (float)(dVar53 - dVar50))) {
-                  puVar45[iVar43] = 0x31080;
-                  puVar45[iVar43 + 5] = 0x1087;
+                  blitPacket[iVar43] = 0x31080;
+                  blitPacket[iVar43 + 5] = 0x1087;
                   iVar26 = iVar43 * 4 + 0x30 >> 2;
-                  puVar45[iVar43 + 1] =
-                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar49 - dVar68) - dVar61));
-                  puVar45[iVar43 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar53 - dVar67) -
+                  blitPacket[iVar43 + 1] =
+                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar49 - dVar68) - dVar61));
+                  blitPacket[iVar43 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar53 - dVar67) -
                                                        dVar62)));
-                  puVar45[iVar43 + 3] =
-                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar52 - dVar68) - dVar61));
-                  puVar45[iVar43 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
+                  blitPacket[iVar43 + 3] =
+                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar52 - dVar68) - dVar61));
+                  blitPacket[iVar43 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
                                                        dVar62)));
-                  puVar45[iVar43 + 7] = 0xc0033500;
-                  puVar45[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
-                  puVar45[iVar43 + 10] = FBITS((float)(dVar50 + dVar53) * fVar4);
-                  puVar45[iVar43 + 8] = 0x10031;
-                  puVar45[iVar43 + 0xb] = 0;
-                  puVar45[iVar43 + 6] =
-                       (SInt32)((float)(dVar52 - dVar49) * fVar41) << 0x10 |
-                       (SInt32)((float)(dVar53 - dVar50) * fVar41);
+                  blitPacket[iVar43 + 7] = 0xc0033500;
+                  blitPacket[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
+                  blitPacket[iVar43 + 10] = FBITS((float)(dVar50 + dVar53) * fVar4);
+                  blitPacket[iVar43 + 8] = 0x10031;
+                  blitPacket[iVar43 + 0xb] = 0;
+                  blitPacket[iVar43 + 6] =
+                       (SInt32)((float)(dVar52 - dVar49) * heightRatio) << 0x10 |
+                       (SInt32)((float)(dVar53 - dVar50) * heightRatio);
                 }
                 piVar27 = piVar27 + 2;
                 iVar35 = iVar35 + -1;
                 iVar43 = iVar26;
               } while (iVar35 != 0);
             }
-            iVar43 = puVar45[0xa0];
-            puVar45[iVar26] = 0x1150;
-            puVar45[iVar26 + 1] = iVar43 + iVar32;
-            uVar40 = puVar45[0xa6];
-            puVar45[iVar26 + 2] = 0x1120;
+            iVar43 = blitPacket[0xa0];
+            blitPacket[iVar26] = 0x1150;
+            blitPacket[iVar26 + 1] = iVar43 + iVar32;
+            uVar40 = blitPacket[0xa6];
+            blitPacket[iVar26 + 2] = 0x1120;
             iVar32 = iVar26 + 3;
             iVar26 = iVar26 + 4;
-            puVar45[iVar32] = uVar19 - 1 & 0x7ff | uVar40 & 0xfffff800;
+            blitPacket[iVar32] = uVar19 - 1 & 0x7ff | uVar40 & 0xfffff800;
             dVar55 = DOUBLE_0004c3a8;
             fVar4 = FLOAT_0004c380;
-            fVar41 = FLOAT_0004c37c;
-            fVar8 = FLOAT_0004c370;
+            heightRatio = FLOAT_0004c37c;
+            widthRatio = FLOAT_0004c370;
             if (uVar19 != 0) {
-              fVar8 = (float)(dVar57 / (double)(float)((double)CONCAT44d(0x43300000,
+              widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
                                                                         uVar19 ^ 0x80000000) -
-                                                      dVar60));
+                                                      signedIntBias));
             }
             dVar61 = (double)(float)(dVar61 + (double)(float)((double)CONCAT44d(0x43300000,
                                                                                uVar38 ^ 0x80000000)
-                                                             - dVar60));
+                                                             - signedIntBias));
             if (iVar34 != 0) {
               dVar65 = (double)(float)(dVar68 + dVar65);
               dVar47 = (double)(float)(dVar68 + dVar47);
@@ -905,25 +905,25 @@ LAB_0003f654:
                 iVar26 = iVar32;
                 if ((FLOAT_0004c370 < (float)(dVar50 - dVar66)) &&
                    (FLOAT_0004c370 < (float)(dVar52 - dVar48))) {
-                  puVar45[iVar32] = 0x31080;
-                  puVar45[iVar32 + 5] = 0x1087;
+                  blitPacket[iVar32] = 0x31080;
+                  blitPacket[iVar32 + 5] = 0x1087;
                   iVar26 = iVar32 * 4 + 0x30 >> 2;
-                  puVar45[iVar32 + 1] =
-                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar66 - dVar68) - dVar61));
-                  puVar45[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar52 - dVar67) -
+                  blitPacket[iVar32 + 1] =
+                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar66 - dVar68) - dVar61));
+                  blitPacket[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar52 - dVar67) -
                                                        dVar62)));
-                  puVar45[iVar32 + 3] =
-                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar50 - dVar68) - dVar61));
-                  puVar45[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
+                  blitPacket[iVar32 + 3] =
+                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar50 - dVar68) - dVar61));
+                  blitPacket[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
                                                        dVar62)));
-                  puVar45[iVar32 + 7] = 0xc0033500;
-                  puVar45[iVar32 + 9] = FBITS((float)(dVar66 + dVar50) * fVar4);
-                  puVar45[iVar32 + 10] = FBITS((float)(dVar48 + dVar52) * fVar4);
-                  puVar45[iVar32 + 8] = 0x10031;
-                  puVar45[iVar32 + 0xb] = 0;
-                  puVar45[iVar32 + 6] =
-                       (SInt32)((float)(dVar50 - dVar66) * fVar41) << 0x10 |
-                       (SInt32)((float)(dVar52 - dVar48) * fVar41);
+                  blitPacket[iVar32 + 7] = 0xc0033500;
+                  blitPacket[iVar32 + 9] = FBITS((float)(dVar66 + dVar50) * fVar4);
+                  blitPacket[iVar32 + 10] = FBITS((float)(dVar48 + dVar52) * fVar4);
+                  blitPacket[iVar32 + 8] = 0x10031;
+                  blitPacket[iVar32 + 0xb] = 0;
+                  blitPacket[iVar32 + 6] =
+                       (SInt32)((float)(dVar50 - dVar66) * heightRatio) << 0x10 |
+                       (SInt32)((float)(dVar52 - dVar48) * heightRatio);
                 }
                 local_100 = local_100 + 2;
                 iVar43 = iVar43 + -1;
@@ -938,7 +938,7 @@ LAB_0003f654:
             uVar40 = (SInt32)uVar38 >> 1 & 0xfffffe00;
             uVar17 = uVar40 + 2;
             uVar19 = uVar38 - uVar40;
-            if ((puVar45[0xa0] & 0x18) == 0) {
+            if ((blitPacket[0xa0] & 0x18) == 0) {
               uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
               iVar32 = 0;
             }
@@ -948,138 +948,138 @@ LAB_0003f654:
             }
             iVar43 = (SInt32)uVar40 >> ((iVar32 - (uVar29 >> 0xc & 7)) + 5 & 0x3f);
             iVar32 = iVar43 << 5;
-            if (((UInt32)puVar45[0xa0] >> 2 & 1) != 0) {
+            if (((UInt32)blitPacket[0xa0] >> 2 & 1) != 0) {
               iVar32 = (iVar43 << 0xc) >> 3;
             }
-            fVar8 = FLOAT_0004c370;
+            widthRatio = FLOAT_0004c370;
             if (uVar17 != 0) {
-              fVar8 = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - dVar60) /
-                      (float)((double)CONCAT44d(0x43300000,uVar17 ^ 0x80000000) - dVar60);
+              widthRatio = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias) /
+                      (float)((double)CONCAT44d(0x43300000,uVar17 ^ 0x80000000) - signedIntBias);
             }
-            fVar41 = FLOAT_0004c370;
+            heightRatio = FLOAT_0004c370;
             if (uVar19 != 0) {
-              fVar41 = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - dVar60) /
-                       (float)((double)CONCAT44d(0x43300000,uVar19 ^ 0x80000000) - dVar60);
+              heightRatio = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias) /
+                       (float)((double)CONCAT44d(0x43300000,uVar19 ^ 0x80000000) - signedIntBias);
             }
             fVar4 = FLOAT_0004c3a0;
             fVar3 = FLOAT_0004c3a0;
             if (uVar38 != 0) {
-              fVar3 = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - dVar60);
-              fVar4 = -((float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - dVar60) / fVar3);
+              fVar3 = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias);
+              fVar4 = -((float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias) / fVar3);
               fVar3 = -((float)((double)(float)((double)CONCAT44d(0x43300000,
                                                                  uVar40 + uVar17 ^ 0x80000000) -
-                                               dVar60) * dVar56) / fVar3);
+                                               signedIntBias) * half) / fVar3);
             }
-            puVar45[0xdb] = 0x1040;
-            puVar45[0xcf] = 0x1101;
-            puVar45[0xc0] = FBITS(fVar8);
-            puVar45[0xd1] = 0x1111;
-            puVar45[0xc4] = 0x3f800000;
-            puVar45[0xd3] = 0x1121;
-            puVar45[200] = FBITS(fVar41 * fVar4);
-            puVar45[0xc6] = FBITS(fVar41);
-            puVar45[0xce] = FBITS(fVar3);
-            puVar45[0xc2] = 0x3f800000;
-            puVar45[0xdc] = 0;
-            puVar45[0xbf] = 0x1095;
-            puVar45[0xc1] = 0x1095;
-            puVar45[0xc3] = 0x1095;
-            puVar45[0xc5] = 0x1095;
-            puVar45[199] = 0x1095;
-            puVar45[0xc9] = 0x1095;
-            puVar45[0xca] = 0;
-            puVar45[0xcb] = 0x1095;
-            puVar45[0xcc] = 0;
-            puVar45[0xd5] = 0x1131;
-            puVar45[0xd7] = 0x1141;
-            puVar45[0xbd] = 0x1094;
-            puVar45[0xd9] = 0x1151;
-            puVar45[0xbe] = 0x10000;
-            puVar45[0xcd] = 0x1095;
-            puVar45[0xd0] = puVar45[0xa2];
-            puVar45[0xd2] = puVar45[0xa4];
+            blitPacket[0xdb] = 0x1040;
+            blitPacket[0xcf] = 0x1101;
+            blitPacket[0xc0] = FBITS(widthRatio);
+            blitPacket[0xd1] = 0x1111;
+            blitPacket[0xc4] = 0x3f800000;
+            blitPacket[0xd3] = 0x1121;
+            blitPacket[200] = FBITS(heightRatio * fVar4);
+            blitPacket[0xc6] = FBITS(heightRatio);
+            blitPacket[0xce] = FBITS(fVar3);
+            blitPacket[0xc2] = 0x3f800000;
+            blitPacket[0xdc] = 0;
+            blitPacket[0xbf] = 0x1095;
+            blitPacket[0xc1] = 0x1095;
+            blitPacket[0xc3] = 0x1095;
+            blitPacket[0xc5] = 0x1095;
+            blitPacket[199] = 0x1095;
+            blitPacket[0xc9] = 0x1095;
+            blitPacket[0xca] = 0;
+            blitPacket[0xcb] = 0x1095;
+            blitPacket[0xcc] = 0;
+            blitPacket[0xd5] = 0x1131;
+            blitPacket[0xd7] = 0x1141;
+            blitPacket[0xbd] = 0x1094;
+            blitPacket[0xd9] = 0x1151;
+            blitPacket[0xbe] = 0x10000;
+            blitPacket[0xcd] = 0x1095;
+            blitPacket[0xd0] = blitPacket[0xa2];
+            blitPacket[0xd2] = blitPacket[0xa4];
             iVar26 = 0xdd;
-            puVar45[0xd4] = puVar45[0xa6];
-            puVar45[0xd6] = puVar45[0xa8];
-            puVar45[0xd0] = puVar45[0xa2] & 0xfffffff | 0x10000000;
-            puVar45[0xd8] = puVar45[0xaa];
-            puVar45[0xda] = puVar45[0xa0] + iVar32;
-            puVar45[0x3c] = 3;
-            puVar45[0xa6] = uVar40 + 1 & 0x7ff | puVar45[0xa6] & 0xfffff800;
-            puVar45[0xd4] = uVar19 - 1 & 0x7ff | puVar45[0xd4] & 0xfffff800;
-            puVar45[0x42] = 0x7800;
-            puVar45[0x4c] = 0x1c490010;
-            puVar45[0x48] = 0x442220;
-            puVar45[0x4a] = 0xc00000;
-            puVar45[0x46] = 0x10100000;
-            puVar45[0x54] = 0x29a220;
-            puVar45[0x40] = 0;
-            puVar45[0x41] = 0x1095;
-            puVar45[0x43] = 0x1095;
-            puVar45[0x45] = 0x1095;
-            puVar45[0x47] = 0x1095;
-            puVar45[0x4e] = 0x3800;
-            puVar45[0x50] = 0x10140000;
-            puVar45[0x3f] = 0x1094;
-            puVar45[0x44] = 0x40000;
-            puVar45[0x49] = 0x1095;
-            puVar45[0x52] = 0x40000;
-            puVar45[0x56] = 0x810000;
-            puVar45[0x4b] = 0x1095;
-            puVar45[0x4d] = 0x1095;
-            puVar45[0x4f] = 0x1095;
-            puVar45[0x51] = 0x1095;
-            puVar45[0x53] = 0x1095;
-            puVar45[0x55] = 0x1095;
-            puVar45[0x58] = 0x20222020;
-            puVar45[0x5e] = 0xe401e401;
-            puVar45[0x6a] = 0xe402e402;
-            puVar45[0x72] = 0x78105;
-            puVar45[0x76] = 0x100800;
-            puVar45[0x57] = 0x1095;
-            puVar45[0x59] = 0x1095;
-            puVar45[0x5b] = 0x1095;
-            puVar45[0x5d] = 0x1095;
-            puVar45[0x5f] = 0x1095;
-            puVar45[0x60] = 0;
-            puVar45[0x61] = 0x1095;
-            puVar45[0x62] = 0;
-            puVar45[99] = 0x1095;
-            puVar45[100] = 0;
-            puVar45[0x65] = 0x1095;
-            puVar45[0x67] = 0x1095;
-            puVar45[0x69] = 0x1095;
-            puVar45[0x6b] = 0x1095;
-            puVar45[0x6c] = 0;
-            puVar45[0x6d] = 0x1095;
-            puVar45[0x5a] = 0x7c03;
-            puVar45[0x5c] = 0x2400000;
-            puVar45[0x66] = 0x7c07;
-            puVar45[0x68] = 0x2410000;
-            puVar45[0x6e] = 0;
-            puVar45[0x6f] = 0x1095;
-            puVar45[0x83] = 0x118d;
-            puVar45[0x85] = 0x118e;
-            puVar45[0x70] = 0;
-            puVar45[0x71] = 0x1095;
-            puVar45[0x73] = 0x1095;
-            puVar45[0x74] = 0x100800;
-            puVar45[0x75] = 0x1095;
-            puVar45[0x77] = 0x1095;
-            puVar45[0x78] = 0x444221;
-            puVar45[0x7a] = 0x70d006;
-            puVar45[0x7c] = 0x1836c008;
-            puVar45[0x79] = 0x1095;
-            puVar45[0x7b] = 0x1095;
-            puVar45[0x84] = 0x40000;
-            puVar45[0x86] = 0;
-            puVar45[0x88] = 0x40000;
-            puVar45[0x87] = 0x118c;
-            puVar45[0x82] = 2;
+            blitPacket[0xd4] = blitPacket[0xa6];
+            blitPacket[0xd6] = blitPacket[0xa8];
+            blitPacket[0xd0] = blitPacket[0xa2] & 0xfffffff | 0x10000000;
+            blitPacket[0xd8] = blitPacket[0xaa];
+            blitPacket[0xda] = blitPacket[0xa0] + iVar32;
+            blitPacket[0x3c] = 3;
+            blitPacket[0xa6] = uVar40 + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
+            blitPacket[0xd4] = uVar19 - 1 & 0x7ff | blitPacket[0xd4] & 0xfffff800;
+            blitPacket[0x42] = 0x7800;
+            blitPacket[0x4c] = 0x1c490010;
+            blitPacket[0x48] = 0x442220;
+            blitPacket[0x4a] = 0xc00000;
+            blitPacket[0x46] = 0x10100000;
+            blitPacket[0x54] = 0x29a220;
+            blitPacket[0x40] = 0;
+            blitPacket[0x41] = 0x1095;
+            blitPacket[0x43] = 0x1095;
+            blitPacket[0x45] = 0x1095;
+            blitPacket[0x47] = 0x1095;
+            blitPacket[0x4e] = 0x3800;
+            blitPacket[0x50] = 0x10140000;
+            blitPacket[0x3f] = 0x1094;
+            blitPacket[0x44] = 0x40000;
+            blitPacket[0x49] = 0x1095;
+            blitPacket[0x52] = 0x40000;
+            blitPacket[0x56] = 0x810000;
+            blitPacket[0x4b] = 0x1095;
+            blitPacket[0x4d] = 0x1095;
+            blitPacket[0x4f] = 0x1095;
+            blitPacket[0x51] = 0x1095;
+            blitPacket[0x53] = 0x1095;
+            blitPacket[0x55] = 0x1095;
+            blitPacket[0x58] = 0x20222020;
+            blitPacket[0x5e] = 0xe401e401;
+            blitPacket[0x6a] = 0xe402e402;
+            blitPacket[0x72] = 0x78105;
+            blitPacket[0x76] = 0x100800;
+            blitPacket[0x57] = 0x1095;
+            blitPacket[0x59] = 0x1095;
+            blitPacket[0x5b] = 0x1095;
+            blitPacket[0x5d] = 0x1095;
+            blitPacket[0x5f] = 0x1095;
+            blitPacket[0x60] = 0;
+            blitPacket[0x61] = 0x1095;
+            blitPacket[0x62] = 0;
+            blitPacket[99] = 0x1095;
+            blitPacket[100] = 0;
+            blitPacket[0x65] = 0x1095;
+            blitPacket[0x67] = 0x1095;
+            blitPacket[0x69] = 0x1095;
+            blitPacket[0x6b] = 0x1095;
+            blitPacket[0x6c] = 0;
+            blitPacket[0x6d] = 0x1095;
+            blitPacket[0x5a] = 0x7c03;
+            blitPacket[0x5c] = 0x2400000;
+            blitPacket[0x66] = 0x7c07;
+            blitPacket[0x68] = 0x2410000;
+            blitPacket[0x6e] = 0;
+            blitPacket[0x6f] = 0x1095;
+            blitPacket[0x83] = 0x118d;
+            blitPacket[0x85] = 0x118e;
+            blitPacket[0x70] = 0;
+            blitPacket[0x71] = 0x1095;
+            blitPacket[0x73] = 0x1095;
+            blitPacket[0x74] = 0x100800;
+            blitPacket[0x75] = 0x1095;
+            blitPacket[0x77] = 0x1095;
+            blitPacket[0x78] = 0x444221;
+            blitPacket[0x7a] = 0x70d006;
+            blitPacket[0x7c] = 0x1836c008;
+            blitPacket[0x79] = 0x1095;
+            blitPacket[0x7b] = 0x1095;
+            blitPacket[0x84] = 0x40000;
+            blitPacket[0x86] = 0;
+            blitPacket[0x88] = 0x40000;
+            blitPacket[0x87] = 0x118c;
+            blitPacket[0x82] = 2;
           }
           dVar65 = DOUBLE_0004c3a8;
-          fVar41 = FLOAT_0004c380;
-          fVar8 = FLOAT_0004c37c;
+          heightRatio = FLOAT_0004c380;
+          widthRatio = FLOAT_0004c37c;
           if (iVar34 != 0) {
             dVar47 = (double)(float)(dVar68 + dVar47);
             dVar54 = (double)(float)(dVar67 + dVar54);
@@ -1135,25 +1135,25 @@ LAB_0003f654:
               iVar26 = iVar32;
               if ((FLOAT_0004c370 < (float)(dVar49 - dVar66)) &&
                  (FLOAT_0004c370 < (float)(dVar50 - dVar48))) {
-                puVar45[iVar32] = 0x31080;
-                puVar45[iVar32 + 5] = 0x1087;
+                blitPacket[iVar32] = 0x31080;
+                blitPacket[iVar32 + 5] = 0x1087;
                 iVar26 = iVar32 * 4 + 0x30 >> 2;
-                puVar45[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar66 - dVar68) -
+                blitPacket[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar66 - dVar68) -
                                                      dVar61)));
-                puVar45[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
+                blitPacket[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
                                                      dVar62)));
-                puVar45[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
+                blitPacket[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
                                                      dVar61)));
-                puVar45[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
+                blitPacket[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
                                                      dVar62)));
-                puVar45[iVar32 + 7] = 0xc0033500;
-                puVar45[iVar32 + 9] = FBITS((float)(dVar66 + dVar49) * fVar41);
-                puVar45[iVar32 + 10] = FBITS((float)(dVar48 + dVar50) * fVar41);
-                puVar45[iVar32 + 8] = 0x10031;
-                puVar45[iVar32 + 0xb] = 0;
-                puVar45[iVar32 + 6] =
-                     (SInt32)((float)(dVar49 - dVar66) * fVar8) << 0x10 |
-                     (SInt32)((float)(dVar50 - dVar48) * fVar8);
+                blitPacket[iVar32 + 7] = 0xc0033500;
+                blitPacket[iVar32 + 9] = FBITS((float)(dVar66 + dVar49) * heightRatio);
+                blitPacket[iVar32 + 10] = FBITS((float)(dVar48 + dVar50) * heightRatio);
+                blitPacket[iVar32 + 8] = 0x10031;
+                blitPacket[iVar32 + 0xb] = 0;
+                blitPacket[iVar32 + 6] =
+                     (SInt32)((float)(dVar49 - dVar66) * widthRatio) << 0x10 |
+                     (SInt32)((float)(dVar50 - dVar48) * widthRatio);
               }
               local_100 = local_100 + 2;
               iVar43 = iVar43 + -1;
@@ -1161,20 +1161,20 @@ LAB_0003f654:
             } while (iVar43 != 0);
           }
         }
-        puVar45[iVar26] = 0x1393;
-        puVar45[iVar26 + 1] = 10;
-        Vol(panelRec->entries[0].rectWordIndex) = (SInt32)puVar45 + (0x2c8 - (SInt32)puVar39) >> 2;
-        iVar44 = (SInt32)puVar45 + ((iVar26 + 2) * 4 - (SInt32)puVar39) >> 2;
+        blitPacket[iVar26] = 0x1393;
+        blitPacket[iVar26 + 1] = 10;
+        Vol(panelRec->entries[0].rectWordIndex) = (SInt32)blitPacket + (0x2c8 - (SInt32)batchWords) >> 2;
+        iVar44 = (SInt32)blitPacket + ((iVar26 + 2) * 4 - (SInt32)batchWords) >> 2;
       }
       panelRec = panelRec + 1;
-      local_104 = local_104 + 1;
+      panel = panel + 1;
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0xc) = iVar34;
       local_108 = local_108 + 8;
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0x14) = iVar44;
       M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) = M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) | 1;
       M<UInt16>(self + 0xdb4) = 1;
       iVar32 = M<SInt32>(self + 0xd50);
-    } while (local_104 < M<UInt32>(iVar32 + 0xcc));
+    } while (panel < M<UInt32>(iVar32 + 0xcc));
   }
   return;
 }

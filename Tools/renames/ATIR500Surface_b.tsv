@@ -1,0 +1,150 @@
+# ATIR500Surface remap, fork SB: placeholder -> real names for copy_to/from_buffer, copy_buffer_using_DMA, setup/resetFullScreen, load_3d_blit, get_surf_desc_regs,
+# resolve/back_resolve_fsaa_buffer, submit_flip_buffer, submit_swap_buffer (both). Applied by Tools/apply_renames.py.
+# Convention (see IOATIR500Surface.tsv): `panel` only where the 0x94-byte per-panel record array is indexed; `id` for the display id at this+0xc14.
+# A rename is whole-function, so locals that carry several roles are left alone.
+# kind	target	old	new	tier	evidence
+def	ATIR500Surface::copy_to_buffer@0x43340	param_1	x	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_to_buffer@0x43340	param_2	y	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_to_buffer@0x43340	param_3	w	INFERRED	name from the class header declaration; converted to a count of 16-byte blocks in the CPU path
+def	ATIR500Surface::copy_to_buffer@0x43340	param_4	h	INFERRED	name from the class header declaration; clipped to the rows the backing record holds
+def	ATIR500Surface::copy_to_buffer@0x43340	param_5	index	CONFIRMED	passed unchanged as copy_buffer_using_DMA's `index` and as the 2nd argument of buffer_map_offset (vtable +0x5f0)
+def	ATIR500Surface::copy_to_buffer@0x43340	param_6	level	CONFIRMED	passed unchanged as copy_buffer_using_DMA's `level`; the copy_from_buffer CPU path uses it as the mip level (>> level, buffer+0x40+level*4)
+def	ATIR500Surface::copy_to_buffer@0x43340	real_param_7	buffer	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_to_buffer@0x43340	param_7	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::copy_to_buffer@0x43340	param_8	stamp	CONFIRMED	argument of vtable +0x558 = ATIRadeonX1000::sleepForTimeStamp (Ledger/kext_ppc_vtables.txt): the CPU path waits for it before touching the memory
+def	ATIR500Surface::copy_to_buffer@0x43340	real_param_9	transfer	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_to_buffer@0x43340	param_9	transferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::copy_to_buffer@0x43340	param_10	offset	CONFIRMED	passed as copy_buffer_using_DMA's `offset`; added to the mapped address of the transfer memory in the CPU path
+def	ATIR500Surface::copy_to_buffer@0x43340	param_11	pitch	CONFIRMED	passed as copy_buffer_using_DMA's `pitch`; the CPU path advances the transfer pointer by it for every row
+def	ATIR500Surface::copy_to_buffer@0x43340	param_12	flags	CONFIRMED	passed unchanged as copy_buffer_using_DMA's `flags`
+def	ATIR500Surface::copy_to_buffer@0x43340	pVVar13	backing	INFERRED	buffer+0x24 (backingStoreHandle): a record with the memory descriptor at +8, offset/pitch halfwords at +0x50/+0x52 and a stamp at +0x54 compared with this+0x7c (the last submitted stamp)
+def	ATIR500Surface::copy_to_buffer@0x43340	piVar7	transferMap	INFERRED	the memory mapping (vtable +0x150) of the transfer-side memory descriptor; its address (vtable +0xd0) plus `offset` is the transfer pointer, released with vtable +0x18 at the end
+def	ATIR500Surface::copy_to_buffer@0x43340	puVar14	transferRow	CONFIRMED	starts at the mapped transfer address + offset and advances by `pitch` for every row
+def	ATIR500Surface::copy_to_buffer@0x43340	puVar12	surfaceRow	CONFIRMED	starts at the surface-side address of (x, y) and advances by one surface row per iteration
+def	ATIR500Surface::copy_from_buffer@0x43730	param_1	x	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_from_buffer@0x43730	param_2	y	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_from_buffer@0x43730	param_3	w	INFERRED	name from the class header declaration; converted to a count of 16-byte blocks in the CPU path
+def	ATIR500Surface::copy_from_buffer@0x43730	param_4	h	INFERRED	name from the class header declaration; clipped to the rows the backing record holds
+def	ATIR500Surface::copy_from_buffer@0x43730	param_5	index	CONFIRMED	passed unchanged as copy_buffer_using_DMA's `index` and as the 2nd argument of buffer_map_offset (vtable +0x5f0)
+def	ATIR500Surface::copy_from_buffer@0x43730	param_6	level	CONFIRMED	passed unchanged as copy_buffer_using_DMA's `level`; the copy_from_buffer CPU path uses it as the mip level (>> level, buffer+0x40+level*4)
+def	ATIR500Surface::copy_from_buffer@0x43730	real_param_7	buffer	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_from_buffer@0x43730	param_7	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::copy_from_buffer@0x43730	param_8	stamp	CONFIRMED	argument of vtable +0x558 = ATIRadeonX1000::sleepForTimeStamp (Ledger/kext_ppc_vtables.txt): the CPU path waits for it before touching the memory
+def	ATIR500Surface::copy_from_buffer@0x43730	real_param_9	transfer	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_from_buffer@0x43730	param_9	transferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::copy_from_buffer@0x43730	param_10	offset	CONFIRMED	passed as copy_buffer_using_DMA's `offset`; added to the mapped address of the transfer memory in the CPU path
+def	ATIR500Surface::copy_from_buffer@0x43730	param_11	pitch	CONFIRMED	passed as copy_buffer_using_DMA's `pitch`; the CPU path advances the transfer pointer by it for every row
+def	ATIR500Surface::copy_from_buffer@0x43730	param_12	flags	CONFIRMED	passed unchanged as copy_buffer_using_DMA's `flags`
+def	ATIR500Surface::copy_from_buffer@0x43730	pVVar27	backing	INFERRED	buffer+0x24 (backingStoreHandle): a record with the memory descriptor at +8, offset/pitch halfwords at +0x50/+0x52 and a stamp at +0x54 compared with this+0x7c (the last submitted stamp)
+def	ATIR500Surface::copy_from_buffer@0x43730	piVar13	transferMap	INFERRED	the memory mapping (vtable +0x150) of the transfer-side memory descriptor; its address (vtable +0xd0) plus `offset` is the transfer pointer, released with vtable +0x18 at the end
+def	ATIR500Surface::copy_from_buffer@0x43730	puVar23	transferRow	CONFIRMED	starts at the mapped transfer address + offset and advances by `pitch` for every row
+def	ATIR500Surface::copy_from_buffer@0x43730	puVar26	surfaceRow	CONFIRMED	starts at the surface-side address of (x, y) and advances by one surface row per iteration
+def	ATIR500Surface::copy_to_buffer@0x43340	uVar1	bufferWidth	CONFIRMED	ATIR500SurfaceBuffer::width (+0x14); times bytesPerRow it is the surface row advance
+def	ATIR500Surface::copy_to_buffer@0x43340	puVar8	srcBlock	CONFIRMED	read side of the 16-byte copy loop: walks the transfer row
+def	ATIR500Surface::copy_to_buffer@0x43340	puVar9	dstBlock	CONFIRMED	write side of the 16-byte copy loop: walks the surface row
+def	ATIR500Surface::copy_from_buffer@0x43730	bVar1	synchronous	INFERRED	(flags & 1) == 0: the same bit copy_buffer_using_DMA tests to decide whether to wait for the submitted stamp
+def	ATIR500Surface::copy_from_buffer@0x43730	uVar3	bytesPerRow	CONFIRMED	ATIR500SurfaceBuffer::bytesPerRow (+0x16), assigned from that field in both branches
+def	ATIR500Surface::copy_from_buffer@0x43730	uVar17	tilingBits	CONFIRMED	ATIR500SurfaceBuffer::tilingDegreeBits (+0x3c), every assignment reads that field
+decl	ATIR500Surface::copy_to_buffer	a	index	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_to_buffer	b	level	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_to_buffer	c	stamp	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_to_buffer	d	offset	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_to_buffer	e	pitch	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_to_buffer	f	flags	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_from_buffer	a	index	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_from_buffer	b	level	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_from_buffer	c	stamp	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_from_buffer	d	offset	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_from_buffer	e	pitch	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::copy_from_buffer	f	flags	CONFIRMED	same roles as the definition (see its rows)
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_1	x	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_2	y	INFERRED	name from the class header declaration; flipped against the surface height when `flipVertically`
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_3	w	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_4	h	INFERRED	name from the class header declaration; (h - 1) * pitch + bytesPerRow * w is the transfer span
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_5	index	CONFIRMED	2nd argument of buffer_map_offset (vtable +0x5f0), as passed by copy_to_buffer/copy_from_buffer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_6	level	CONFIRMED	3rd argument of buffer_map_offset, as passed by copy_to_buffer/copy_from_buffer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	real_param_7	buffer	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_7	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	real_param_8	transfer	INFERRED	name from the class header declaration
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_8	transferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_9	offset	CONFIRMED	added to the transfer's GART offset and to the mapped address of its memory
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_10	pitch	CONFIRMED	bytes per transfer row: (h - 1) * pitch is the span, and the source/destination pitch passed to the quad writer is pitch >> pixel shift
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_12	direction	INFERRED	name from the class header declaration; 1 from copy_from_buffer, 2 from copy_to_buffer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	param_13	flags	INFERRED	name from the class header declaration; bit 0 = do not wait for the stamp (it is recorded in the transfer instead), bit 1 = flip vertically
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_80	flipVertically	CONFIRMED	(flags & 2) unless this+0xbe8 & 0x70000000; passed as the `flip` argument of write_3dtexquad_cmds_for_copy_buffer_using_DMA
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_84	transferSpan	INFERRED	(h - 1) * pitch + bytesPerRow * w: the byte length passed to flush_memory_for_in
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_88	mappedAddress	CONFIRMED	mapped address of the transfer memory + offset, passed to flush_memory_for_out/in
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	piVar10	transferMap	INFERRED	the mapping of the transfer memory (vtable +0x14c), released with vtable +0x18 at the end
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	bVar5	synchronous	INFERRED	(flags & 1) == 0: the stamp is waited for and the transfer removed from the GART at the end
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	uVar6	slot	CONFIRMED	(rec0->slotIndex + 1) & 3: the submit slot, indexes rec0->entries[1 + slot]
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	uVar11	wordCount	CONFIRMED	result of decompress_and_flush_depth_buffer (or 0), passed as the wordCount argument of write_3dtexquad_cmds_for_copy_buffer_using_DMA
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	puVar25	cmd	CONFIRMED	the slot's command buffer (header + 0x20), passed as the `cmd` argument of the quad writer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	uVar12	paddedWordCount	CONFIRMED	the quad writer's word count rounded up to even, stored at header + 0x14 and passed to submit_buffer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	uVar13	submitStamp	CONFIRMED	submit_buffer's return value: stored in this+0x7c and in the slot, waited for or recorded in the transfer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_78	srcAddress	CONFIRMED	passed as the `srcAddress` argument of the quad writer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_7c	dstAddress	CONFIRMED	passed as the `dstAddress` argument of the quad writer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_5c	srcWidth	CONFIRMED	passed as the `srcWidth` argument of the quad writer (pitch >> pixel shift)
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_60	dstPitch	CONFIRMED	passed as the `dstPitch` argument of the quad writer (pitch >> pixel shift)
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_6c	dstX	CONFIRMED	passed as the `dstX` argument of the quad writer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_70	dstY	CONFIRMED	passed as the `dstY` argument of the quad writer
+def	ATIR500Surface::copy_buffer_using_DMA@0x42a80	local_74	srcX	CONFIRMED	passed as the `srcX` argument of the quad writer
+def	ATIR500Surface::setupFullScreen@0x3d200	iVar11	id	CONFIRMED	this+0xc14, the display id of this surface: indexes the 0x18/0x78-stride per-display records of the accelerator and the byte array at this+0xdb6 (not the 0x94 panel records)
+def	ATIR500Surface::setupFullScreen@0x3d200	iVar10	registers	CONFIRMED	accelerator + 0x860, the register window: 0x6104 / 0x6904 are accessed through it
+def	ATIR500Surface::setupFullScreen@0x3d200	uVar5	maskedValue	CONFIRMED	register 0x6104 read and masked with 0xffcfffff
+def	ATIR500Surface::setupFullScreen@0x3d200	uVar6	newValue	CONFIRMED	maskedValue with bits 21/20 set from the per-display value; written to 0x6104 or 0x6904
+def	ATIR500Surface::setupFullScreen@0x3d200	AVar1	fullScreenValue	INFERRED	this+0x158: stored in the accelerator's per-display records (+0x164, +0x9f4); the previous +0x164 byte is kept at this+0xdb8 for resetFullScreen
+def	ATIR500Surface::resetFullScreen@0x3cf60	iVar11	id	CONFIRMED	this+0xc14, the display id of this surface (indexes the 0x18/0x78-stride per-display records of the accelerator and the byte array at this+0xdb6)
+def	ATIR500Surface::resetFullScreen@0x3cf60	iVar10	registers	CONFIRMED	accelerator + 0x860, the register window: 0x6104 / 0x6904 are accessed through it
+def	ATIR500Surface::resetFullScreen@0x3cf60	uVar5	maskedValue	CONFIRMED	register 0x6104 read and masked with 0xffcfffff
+def	ATIR500Surface::resetFullScreen@0x3cf60	uVar6	newValue	CONFIRMED	maskedValue with bits 21/20 set from the per-display value; written to 0x6104 or 0x6904
+def	ATIR500Surface::resetFullScreen@0x3cf60	AVar1	savedValue	CONFIRMED	this+0xdbb, the byte setupFullScreen saved from the accelerator's per-display record at this+0xdb8; written back to +0x164/+0x9f4
+def	ATIR500Surface::load_3d_blit@0x3d4c0	param_1	dest	INFERRED	name from the class header declaration (the 0x72-word packet is written there; the end pointer is returned)
+def	ATIR500Surface::load_3d_blit@0x3d4c0	real_param_2	buffer	CONFIRMED	the body reads ATIR500SurfaceBuffer fields (+0x8 address, +0x14 width, +0x16 bytesPerRow, +0x28 hz block, +0x3c tiling bits); the header called it `scratch`
+def	ATIR500Surface::load_3d_blit@0x3d4c0	param_2	bufferBytes	INFERRED	untyped alias of the typed parameter
+def	ATIR500Surface::load_3d_blit@0x3d4c0	iVar6	accelerator	CONFIRMED	this+0xd50, the accelerator (HZMEM pool at +0x870, +0xb98)
+decl	ATIR500Surface::load_3d_blit	scratch	buffer	CONFIRMED	the second argument is the surface buffer that is loaded (see the definition)
+def	ATIR500Surface::get_surf_desc_regs@0x39f30	real_param_1	info	INFERRED	name from the class header declaration
+def	ATIR500Surface::get_surf_desc_regs@0x39f30	param_1	infoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Surface::get_surf_desc_regs@0x39f30	param_2	outRegs	INFERRED	name from the class header declaration; six register words are written
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	iVar22	fixedBuffer	CONFIRMED	this+0xb94, IOATIR500Surface::fixedSurfaceBuffer (header member)
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	iVar21	formatBuffer	CONFIRMED	this+0xb70[formatCode]*4, IOATIR500Surface::surfaceBuffersByFormat[formatCode] (header member)
+def	ATIR500Surface::back_resolve_fsaa_buffer@0x44880	iVar18	fixedBuffer	CONFIRMED	this+0xb94, IOATIR500Surface::fixedSurfaceBuffer (header member)
+def	ATIR500Surface::back_resolve_fsaa_buffer@0x44880	iVar17	formatBuffer	CONFIRMED	this+0xb70[formatCode]*4, IOATIR500Surface::surfaceBuffersByFormat[formatCode] (header member)
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_1	surfaceIndex	INFERRED	name from the class header declaration; compared with 9 when the HZ block is released
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_2	formatCode	CONFIRMED	index of surfaceBuffersByFormat (this+0xb70 + param_2*4)
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_3	packet	INFERRED	the 0x2f4-byte blit state packet is copied there (GH_memcpy from g_r500_3d_blit_state_packet) and patched; the end pointer is returned
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_4	clearFlag	INFERRED	name from the class header declaration; gates the HZ block clear at the end
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_5	x	CONFIRMED	the rectangle: x and y are converted to floats as the left/top, x + width and y + height as the right/bottom; width and height are packed in packet word 200
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_6	y	CONFIRMED	the rectangle: x and y are converted to floats as the left/top, x + width and y + height as the right/bottom; width and height are packed in packet word 200
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_7	width	CONFIRMED	the rectangle: x and y are converted to floats as the left/top, x + width and y + height as the right/bottom; width and height are packed in packet word 200
+def	ATIR500Surface::resolve_fsaa_buffer@0x43e60	param_8	height	CONFIRMED	the rectangle: x and y are converted to floats as the left/top, x + width and y + height as the right/bottom; width and height are packed in packet word 200
+def	ATIR500Surface::back_resolve_fsaa_buffer@0x44880	param_1	unusedParam1	INFERRED	name from the class header declaration; never read
+def	ATIR500Surface::back_resolve_fsaa_buffer@0x44880	param_2	formatCode	CONFIRMED	index of surfaceBuffersByFormat (this+0xb70 + param_2*4)
+def	ATIR500Surface::back_resolve_fsaa_buffer@0x44880	param_3	packet	INFERRED	the 0x2f4-byte blit state packet is copied there and patched
+decl	ATIR500Surface::resolve_fsaa_buffer	param5	x	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::resolve_fsaa_buffer	param6	y	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::resolve_fsaa_buffer	param7	width	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::resolve_fsaa_buffer	param8	height	CONFIRMED	same roles as the definition (see its rows)
+decl	ATIR500Surface::resolve_fsaa_buffer	paramBlock	packet	INFERRED	same roles as the definition (see its rows)
+decl	ATIR500Surface::back_resolve_fsaa_buffer	paramBlock	packet	INFERRED	same role as the definition
+def	ATIR500Surface::submit_flip_buffer@0x3e5c0	param_2	panel	CONFIRMED	indexes PANEL_RECORD(self, param_2) and the byte array at this+0xdb6
+def	ATIR500Surface::submit_flip_buffer@0x3e5c0	real_param_3	context	INFERRED	name from the body: compared with this+0xd54 (the context that last submitted) and its +0x98/+0xac fields are read
+def	ATIR500Surface::submit_flip_buffer@0x3e5c0	param_3	contextBytes	INFERRED	untyped alias of the typed parameter
+def	ATIR500Surface::submit_flip_buffer@0x3e5c0	param_4	unused4	INFERRED	never read in the body
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	param_1	panel	CONFIRMED	indexes PANEL_RECORD(self, param_1) and the per-display accelerator records
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	param_2	swapArg	CONFIRMED	the second argument flush_surface passes through vtable +0x5d4; bits 0x18 gate the extra swap-control packet
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	puVar18	cmd	CONFIRMED	the slot's command buffer (slot header + 0x20): the swap packets are written here and it is passed to SWDSWriteBlitToCmdBuf
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	puVar4	pendingBatch	INFERRED	entries[0].header: the pending swap-write batch copied into the slot's header
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	puVar13	slotHeader	INFERRED	the slot's header the batch is copied into
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	pAVar7	accelerator	CONFIRMED	this+0xd50
+def	ATIR500Surface::submit_swap_buffer@0x3b310	param_1	panel	CONFIRMED	indexes PANEL_RECORD(self, param_1) (the Ghidra comment in the file says so)
+def	ATIR500Surface::submit_swap_buffer@0x3b310	param_3	doSwap	CONFIRMED	eDoSwap, stored in the record's swapMode byte; the value is compared with 1 and 2
+def	ATIR500Surface::submit_swap_buffer@0x3b310	real_param_4	context	CONFIRMED	IOATIR500GLContext *, compared with this+0xd54
+def	ATIR500Surface::submit_swap_buffer@0x3b310	param_4	contextAddress	CONFIRMED	the context pointer as an integer
+def	ATIR500Surface::submit_swap_buffer@0x3b310	puVar26	cmd	CONFIRMED	the slot's command buffer (slot header + 0x20), passed to SWDSWriteBlitToCmdBuf
+def	ATIR500Surface::submit_swap_buffer@0x3b310	puVar4	pendingBatch	INFERRED	entries[0].header: the pending swap-write batch copied into the slot's header
+def	ATIR500Surface::submit_swap_buffer@0x3b310	puVar14	slotHeader	INFERRED	the slot's header the batch is copied into
+def	ATIR500Surface::submit_swap_buffer@0x3b310	pAVar7	accelerator	CONFIRMED	this+0xd50
+decl	ATIR500Surface::submit_swap_buffer#1	param1	panel	CONFIRMED	indexes PANEL_RECORD in the definition
+decl	ATIR500Surface::submit_swap_buffer#1	param2	swapArg	CONFIRMED	see the definition
+decl	ATIR500Surface::submit_swap_buffer#2	param1	panel	CONFIRMED	indexes PANEL_RECORD in the definition

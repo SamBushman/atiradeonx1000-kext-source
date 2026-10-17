@@ -27,9 +27,9 @@
 
 
 /* real addr 0x3a800 */
-void ATIR500Surface::enable_deint(int param_1) {
+void ATIR500Surface::enable_deint(int mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<SInt32>(self + 0xdac) = param_1;
+  M<SInt32>(self + 0xdac) = mode;
   return;
 }

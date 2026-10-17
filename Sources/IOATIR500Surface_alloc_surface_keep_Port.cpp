@@ -31,28 +31,28 @@ bool IOATIR500Surface::alloc_surface_keep(IOATIR500Surface *other, VendorTexture
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *otherBytes = reinterpret_cast<UInt8 *>(other);
 
-  SInt32 iVar1;
-  UInt8 *pAVar2;
+  SInt32 allocated;
+  UInt8 *surfaceBuffer;
   
-  pAVar2 = (UInt8 *)(self + index * 0x78 + 0xa8);
+  surfaceBuffer = (UInt8 *)(self + index * 0x78 + 0xa8);
   if ((M<SInt32>(self + index * 0x78 + 0xb8) == 0) || (M<SInt32>(self + index * 0x78 + 0xb0) != 0)
      ) {
     if (M<SInt32>(self + index * 0x78 + 0xcc) != 0) {
-      this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
+      this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
     }
   }
   else {
-    iVar1 = VCALL(M<SInt32>(self), 0x5d0)(self,pAVar2);
-    if ((iVar1 == 0) &&
-       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocSurfaceVRAM((IOATIR500Surface *)(self),(IOATIR500Surface *)(otherBytes),(VendorTextureBuffer **)(texture),excludeCount,
-                           (ATIR500SurfaceBuffer *)(pAVar2)), iVar1 == 0)) {
+    allocated = VCALL(M<SInt32>(self), 0x5d0)(self,surfaceBuffer);
+    if ((allocated == 0) &&
+       (allocated = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocSurfaceVRAM((IOATIR500Surface *)(self),(IOATIR500Surface *)(otherBytes),(VendorTextureBuffer **)(texture),excludeCount,
+                           (ATIR500SurfaceBuffer *)(surfaceBuffer)), allocated == 0)) {
       return 0;
     }
     if ((3U >> (index & 0x3f) & 1) != 0) {
       M<UInt32>(self + 0xbf8) = M<UInt32>(self + 0xbf8) | 0x10000000;
     }
     if (M<SInt32>(self + index * 0x78 + 0xcc) != 0) {
-      this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
+      this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
     }
   }
   M<UInt32>(self + 0xbf8) =

@@ -33,32 +33,32 @@ inline void *operator new(size_t, void *where) { return where; }   /* placement 
 bool IOATIR500DVDContext::create_shared() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *this_00;
-  UInt32 uVar1;
-  SInt32 iVar2;
+  UInt8 *shared;
+  UInt32 result;
+  SInt32 initialised;
   UInt8 bVar3;
   
   /* gcc 4.0.1 emits no null test after an unconditional `new T()` here; the shipped code tests the allocation before running the constructor (difftest:
    * with a failed allocation the rebuilt code ran the constructor on a null pointer). So the allocation is made by hand and tested. */
   void *mem = OSObject::operator new(0x28);
-  this_00 = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
-  bVar3 = (this_00 == (UInt8 *)0x0) << 1;
-  M<UInt8 *>(self + 0x84) = this_00;
+  shared = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
+  bVar3 = (shared == (UInt8 *)0x0) << 1;
+  M<UInt8 *>(self + 0x84) = shared;
   if ((bool)(bVar3 >> 1 & 1)) {
-    uVar1 = 0;
+    result = 0;
   }
   else {
-    iVar2 = VCALL(M<SInt32>(this_00), 0x48)(this_00);
-    if (iVar2 == 0) {
+    initialised = VCALL(M<SInt32>(shared), 0x48)(shared);
+    if (initialised == 0) {
       VCALL(*M<SInt32 *>(self + 0x84), 0x18)(M<SInt32 *>(self + 0x84));
-      uVar1 = 0;
+      result = 0;
       M<UInt32>(self + 0x84) = 0;
     }
     else {
-      uVar1 = 1;
+      result = 1;
       M<UInt32>(M<SInt32>(self + 0x84) + 0xc) = M<UInt32>(self + 0x8c);
       M<UInt32>(M<SInt32>(self + 0x84) + 8) = M<UInt32>(self + 0x78);
     }
   }
-  return uVar1;
+  return result;
 }

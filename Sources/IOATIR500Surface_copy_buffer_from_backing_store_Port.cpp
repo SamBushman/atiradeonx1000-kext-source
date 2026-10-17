@@ -32,51 +32,51 @@ UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *bu
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   SInt32 iVar1;
-  UInt16 uVar3;
-  SInt32 iVar2;
-  SInt32 *piVar4;
-  UInt8 *pIVar5;
+  UInt16 levelCount;
+  SInt32 backingStore;
+  SInt32 *attachedMemory;
+  UInt8 *cursor;
   UInt32 uVar6;
-  SInt32 iVar7;
-  UInt32 uVar8;
-  UInt32 uVar9;
-  UInt32 local_38;
-  UInt32 local_34 [6];
+  SInt32 generation;
+  UInt32 index;
+  UInt32 nextLevel;
+  UInt32 levelWidth;
+  UInt32 levelHeight [6];
   
   if (M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x54) == M<SInt32>(self + 0x7c)) {
     M<SInt32>(M<SInt32>(self + 0xd50) + 0x724) =
          M<SInt32>(M<SInt32>(self + 0xd50) + 0x724) + M<SInt32>(bufferBytes + 0x10);
     uVar6 = (UInt32)M<UInt16>(bufferBytes + 0x20);
-    iVar7 = M<SInt32>(self + 0x7c);
+    generation = M<SInt32>(self + 0x7c);
     iVar1 = M<SInt32>(M<SInt32>(self + 0xd50) + 0x50);
     if (uVar6 != 0) {
-      uVar3 = M<UInt16>(bufferBytes + 0x22);
-      uVar8 = 0;
+      levelCount = M<UInt16>(bufferBytes + 0x22);
+      index = 0;
       do {
-        if (uVar3 != 0) {
+        if (levelCount != 0) {
           uVar6 = 0;
           do {
-            VCALL(M<SInt32>(self), 0x5f0)(self,bufferBytes,uVar8,uVar6,&local_38,local_34,0);
-            uVar9 = uVar6 + 1;
+            VCALL(M<SInt32>(self), 0x5f0)(self,bufferBytes,index,uVar6,&levelWidth,levelHeight,0);
+            nextLevel = uVar6 + 1;
             VCALL(M<SInt32>(self), 0x5ec)
-                      (self,0,0,local_38,local_34[0],uVar8,uVar6,bufferBytes,iVar1 + -1,0,0,0,1);
+                      (self,0,0,levelWidth,levelHeight[0],index,uVar6,bufferBytes,iVar1 + -1,0,0,0,1);
             M<UInt32>(M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x14) + 8) =
                  M<UInt32>(self + 0x7c);
-            uVar3 = M<UInt16>(bufferBytes + 0x22);
-            uVar6 = uVar9;
-          } while (uVar9 < uVar3);
+            levelCount = M<UInt16>(bufferBytes + 0x22);
+            uVar6 = nextLevel;
+          } while (nextLevel < levelCount);
           uVar6 = (UInt32)M<UInt16>(bufferBytes + 0x20);
         }
-        uVar8 = uVar8 + 1;
-      } while (uVar8 < uVar6);
+        index = index + 1;
+      } while (index < uVar6);
     }
-    pIVar5 = self + 0xcc;
+    cursor = self + 0xcc;
     iVar1 = 0x17;
     do {
-      iVar2 = M<SInt32>(pIVar5);
-      pIVar5 = pIVar5 + 0x78;
-      if ((iVar2 != 0) && (iVar7 == M<SInt32>(iVar2 + 0x54))) {
-        M<UInt32>(iVar2 + 0x54) = M<UInt32>(self + 0x7c);
+      backingStore = M<SInt32>(cursor);
+      cursor = cursor + 0x78;
+      if ((backingStore != 0) && (generation == M<SInt32>(backingStore + 0x54))) {
+        M<UInt32>(backingStore + 0x54) = M<UInt32>(self + 0x7c);
       }
       iVar1 = iVar1 + -1;
     } while (iVar1 != 0);
@@ -84,8 +84,8 @@ UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *bu
   if ((((self[0xc09] == 0x0) && ((M<UInt32>(self + 0xbd0) & 0xffff0000) == 0)) &&
       (self[0xc08] == 0x0)) &&
      (((self[0xbf7] != 0x0 && (M<SInt32>(bufferBytes + 0x24) != 0)) &&
-      (piVar4 = M<SInt32 *>(M<SInt32>(bufferBytes + 0x24) + 8), piVar4 != (SInt32 *)0x0)))) {
-    VCALL(*piVar4, 0xdc)(piVar4,3,0);
+      (attachedMemory = M<SInt32 *>(M<SInt32>(bufferBytes + 0x24) + 8), attachedMemory != (SInt32 *)0x0)))) {
+    VCALL(*attachedMemory, 0xdc)(attachedMemory,3,0);
   }
   return 1;
 }

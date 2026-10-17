@@ -33,33 +33,33 @@ void ATIR500DVDContext::discard_command_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
+  SInt32 slotOffset;
+  SInt32 oldRefCount;
   SInt32 iVar4;
-  UInt32 uVar5;
-  UInt32 uVar6;
-  UInt32 *puVar7;
+  UInt32 recordLength;
+  UInt32 recordWord;
+  UInt32 *record;
   
-  puVar7 = (UInt32 *)(M<SInt32>(self + 0xa4) + 0x1c);
+  record = (UInt32 *)(M<SInt32>(self + 0xa4) + 0x1c);
   do {
-    uVar6 = *puVar7;
-    uVar1 = uVar6 & 0xff000000;
+    recordWord = *record;
+    uVar1 = recordWord & 0xff000000;
     if (uVar1 == 0x2a000000) {
 LAB_00033ed0:
-      if ((puVar7[1] < M<UInt32>(M<SInt32>(self + 0x84) + 0x14)) &&
-         (iVar4 = M<SInt32>(puVar7[1] * 4 + M<SInt32>(M<SInt32>(self + 0x84) + 0x10)), iVar4 != 0)) {
-        iVar2 = (uVar1 + 0xe7000000 >> 0x18) * 4;
-        if ((M<SInt32>(self + iVar2 + 0x104) != 0) &&
-           (iVar3 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + iVar2 + 0x104) + 0x14) + 0x10), iVar3 == 1
+      if ((record[1] < M<UInt32>(M<SInt32>(self + 0x84) + 0x14)) &&
+         (iVar4 = M<SInt32>(record[1] * 4 + M<SInt32>(M<SInt32>(self + 0x84) + 0x10)), iVar4 != 0)) {
+        slotOffset = (uVar1 + 0xe7000000 >> 0x18) * 4;
+        if ((M<SInt32>(self + slotOffset + 0x104) != 0) &&
+           (oldRefCount = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + slotOffset + 0x104) + 0x14) + 0x10), oldRefCount == 1
            )) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + iVar2 + 0x104)));
+          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + slotOffset + 0x104)));
         }
         GH_OSAddAtomic(0xffff0001,M<SInt32>(iVar4 + 0x14) + 0x10);
-        uVar5 = uVar6 & 0xffffff;
-        M<SInt32>(self + iVar2 + 0x104) = iVar4;
+        recordLength = recordWord & 0xffffff;
+        M<SInt32>(self + slotOffset + 0x104) = iVar4;
       }
       else {
-        uVar5 = 0;
+        recordLength = 0;
       }
     }
     else {
@@ -98,14 +98,14 @@ LAB_00033ed0:
       }
       if (uVar1 == 0x33000000) {
 LAB_00033f70:
-        uVar5 = uVar6 & 0xffffff;
+        recordLength = recordWord & 0xffffff;
         uVar1 = uVar1 + 0xd5000000 >> 0x16;
         if (M<SInt32>(self + uVar1 + 0x104) != 0) {
           iVar4 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + uVar1 + 0x104) + 0x14) + 0x10);
           if (iVar4 == 1) {
             ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + uVar1 + 0x104)));
           }
-          uVar5 = uVar6 & 0xffffff;
+          recordLength = recordWord & 0xffffff;
           M<UInt32>(self + uVar1 + 0x104) = 0;
         }
       }
@@ -143,11 +143,11 @@ LAB_00033f70:
         }
         else if ((uVar1 == 0x3b000000) || (uVar1 == 0x3c000000)) goto LAB_00033f70;
 LAB_00033ec0:
-        uVar5 = uVar6 & 0xffffff;
+        recordLength = recordWord & 0xffffff;
       }
     }
-    puVar7 = puVar7 + uVar5;
-    if (uVar5 == 0) {
+    record = record + recordLength;
+    if (recordLength == 0) {
       return;
     }
   } while( true );

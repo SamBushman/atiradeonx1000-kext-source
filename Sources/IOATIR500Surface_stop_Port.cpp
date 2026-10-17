@@ -32,18 +32,18 @@ void IOATIR500Surface::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
-  bool bVar1;
-  UInt8 IVar2;
-  UInt8 *this_00;
-  UInt8 *this_01;
-  UInt8 *pIVar3;
-  UInt8 *pIVar4;
-  SInt32 *piVar5;
+  bool notLast;
+  UInt8 lockState;
+  UInt8 *contextGL;
+  UInt8 *context2D;
+  UInt8 *nextGL;
+  UInt8 *next2D;
+  SInt32 *backingMemory;
   SInt32 iVar6;
   SInt32 iVar7;
-  UInt32 uVar8;
-  UInt8 *pIVar9;
-  UInt8 *pIVar10;
+  UInt32 panelIndex;
+  UInt8 *cursor;
+  UInt8 *regionSlot;
   PanelRecord *panel;
   
   M<UInt32>(self + 0xd58) = 0;
@@ -83,14 +83,14 @@ void IOATIR500Surface::stop(IOService *provider) {
     M<UInt32>(M<SInt32>(self + 0xc14) * 0x20 + M<SInt32>(self + 0xd50) + 0xe8) = 0;
     M<UInt32>(self + 0xc14) = 0xffff;
   }
-  IVar2 = self[0xbd0];
-  if (IVar2 != 0x0) {
-    if (IVar2 == 0x3) {
+  lockState = self[0xbd0];
+  if (lockState != 0x0) {
+    if (lockState == 0x3) {
       iVar6 = M<SInt32>(self + 0xb70);
       if (M<SInt32>(self + 0xd8c) == 0) {
         iVar7 = M<SInt32>(iVar6 + 0x24);
-        if ((iVar7 != 0) && (piVar5 = M<SInt32 *>(iVar7 + 0x10), piVar5 != (SInt32 *)0x0)) {
-          VCALL(*piVar5, 0x18)(piVar5);
+        if ((iVar7 != 0) && (backingMemory = M<SInt32 *>(iVar7 + 0x10), backingMemory != (SInt32 *)0x0)) {
+          VCALL(*backingMemory, 0x18)(backingMemory);
           M<UInt32>(M<SInt32>(iVar6 + 0x24) + 0x10) = 0;
         }
       }
@@ -98,7 +98,7 @@ void IOATIR500Surface::stop(IOService *provider) {
         this->free_buffer_backing_orphans();
       }
     }
-    else if (IVar2 == 0x1) {
+    else if (lockState == 0x1) {
       VCALL(M<SInt32>(self), 0x600)(self,M<UInt32>(self + 0xb70));
     }
     self[0xbd0] = 0x0;
@@ -111,56 +111,56 @@ void IOATIR500Surface::stop(IOService *provider) {
     VCALL(*M<SInt32 *>(self + 0xd88), 0x18)(M<SInt32 *>(self + 0xd88));
     M<UInt32>(self + 0xd88) = 0;
   }
-  this_00 = M<UInt8 *>(self + 0x88);
-  while (this_00 != (UInt8 *)0x0) {
-    ((IOATIR500GLContext *)(this_00))->remove_surface();
-    pIVar3 = M<UInt8 *>(this_00 + 0x84);
-    M<UInt32>(this_00 + 0x84) = 0;
-    this_00 = pIVar3;
+  contextGL = M<UInt8 *>(self + 0x88);
+  while (contextGL != (UInt8 *)0x0) {
+    ((IOATIR500GLContext *)(contextGL))->remove_surface();
+    nextGL = M<UInt8 *>(contextGL + 0x84);
+    M<UInt32>(contextGL + 0x84) = 0;
+    contextGL = nextGL;
   }
-  this_01 = M<UInt8 *>(self + 0x8c);
-  while (this_01 != (UInt8 *)0x0) {
-    ((IOATIR5002DContext *)(this_01))->remove_surface();
-    pIVar4 = M<UInt8 *>(this_01 + 0x84);
-    M<UInt32>(this_01 + 0x84) = 0;
-    this_01 = pIVar4;
+  context2D = M<UInt8 *>(self + 0x8c);
+  while (context2D != (UInt8 *)0x0) {
+    ((IOATIR5002DContext *)(context2D))->remove_surface();
+    next2D = M<UInt8 *>(context2D + 0x84);
+    M<UInt32>(context2D + 0x84) = 0;
+    context2D = next2D;
   }
   if (M<UInt8 *>(self + 0x90) != (UInt8 *)0x0) {
     ((IOATIR500DVDContext *)(M<UInt8 *>(self + 0x90)))->remove_surface();
   }
   iVar6 = 0;
-  pIVar9 = self;
+  cursor = self;
   do {
     VCALL(M<SInt32>(self), 0x5cc)(self,iVar6);
-    if (M<UInt8 *>(pIVar9 + 0xcc) != (UInt8 *)0x0) {
-      this->delete_buffer_backing((IOTextureBuffer *)(M<UInt8 *>(pIVar9 + 0xcc)));
-      M<UInt32>(pIVar9 + 0xcc) = 0;
+    if (M<UInt8 *>(cursor + 0xcc) != (UInt8 *)0x0) {
+      this->delete_buffer_backing((IOTextureBuffer *)(M<UInt8 *>(cursor + 0xcc)));
+      M<UInt32>(cursor + 0xcc) = 0;
     }
-    bVar1 = iVar6 != 0x16;
-    pIVar9 = pIVar9 + 0x78;
+    notLast = iVar6 != 0x16;
+    cursor = cursor + 0x78;
     iVar6 = iVar6 + 1;
-  } while (bVar1);
+  } while (notLast);
   if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xcc) != 0) {
-    uVar8 = 0;
+    panelIndex = 0;
     panel = PANEL_RECORD(self, 0);
-    pIVar10 = self;
+    regionSlot = self;
     do {
       if (panel->entries[0].memory != 0) {
-        this->freeAllSwapBuffers(uVar8);
+        this->freeAllSwapBuffers(panelIndex);
       }
-      if (M<SInt32>(pIVar10 + 0xd60) != 0) {
-        GH_IOFreeAligned(M<SInt32>(pIVar10 + 0xd60),M<UInt32>(pIVar10 + 0xd64));
+      if (M<SInt32>(regionSlot + 0xd60) != 0) {
+        GH_IOFreeAligned(M<SInt32>(regionSlot + 0xd60),M<UInt32>(regionSlot + 0xd64));
         iVar6 = M<SInt32>(self + 0xd50);
         if (iVar6 != 0) {
-          M<SInt32>(iVar6 + 0x804) = M<SInt32>(iVar6 + 0x804) - M<SInt32>(pIVar10 + 0xd64);
+          M<SInt32>(iVar6 + 0x804) = M<SInt32>(iVar6 + 0x804) - M<SInt32>(regionSlot + 0xd64);
         }
-        M<UInt32>(pIVar10 + 0xd64) = 0;
-        M<UInt32>(pIVar10 + 0xd60) = 0;
+        M<UInt32>(regionSlot + 0xd64) = 0;
+        M<UInt32>(regionSlot + 0xd60) = 0;
       }
-      uVar8 = uVar8 + 1;
+      panelIndex = panelIndex + 1;
       panel = panel + 1;
-      pIVar10 = pIVar10 + 8;
-    } while (uVar8 < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
+      regionSlot = regionSlot + 8;
+    } while (panelIndex < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
   }
   if (M<SInt32>(self + 0xd8c) != 0) {
     this->free_buffer_backing_orphans();

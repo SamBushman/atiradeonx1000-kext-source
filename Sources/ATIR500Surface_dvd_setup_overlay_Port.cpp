@@ -27,13 +27,13 @@
 
 
 /* real addr 0x3a6e0 */
-void ATIR500Surface::dvd_setup_overlay(int param_1, int param_2, int param_3, int param_4) {
+void ATIR500Surface::dvd_setup_overlay(int x, int y, int w, int h) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<SInt16>(self + 0x94) = (SInt16)param_1;
-  M<SInt16>(self + 0x96) = (SInt16)param_4;
-  M<SInt16>(self + 0x9a) = (SInt16)param_3;
-  M<SInt16>(self + 0x98) = (SInt16)param_2;
+  M<SInt16>(self + 0x94) = (SInt16)x;
+  M<SInt16>(self + 0x96) = (SInt16)h;
+  M<SInt16>(self + 0x9a) = (SInt16)w;
+  M<SInt16>(self + 0x98) = (SInt16)y;
   M<UInt32>(self + 0xd94) = 1;
   return;
 }

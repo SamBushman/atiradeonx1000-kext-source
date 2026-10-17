@@ -29,33 +29,33 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0xd130 */
-IOReturn IOATIR5002DContext::create_image(UInt32 param_1, UInt32 param_2, unsigned int*param_3, unsigned int*param_4) {
+IOReturn IOATIR5002DContext::create_image(UInt32 size, UInt32 auxValue, unsigned int*outDataAddress, unsigned int*outSharedUserAddr) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  UInt8 *this_00;
+  UInt32 result;
+  UInt8 *shared;
   SInt32 iVar2;
   
-  if (param_1 == 0) {
-    uVar1 = 0xe00002c2;
+  if (size == 0) {
+    result = 0xe00002c2;
   }
   else {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    this_00 = M<UInt8 *>(self + 0x88);
-    if (this_00 == (UInt8 *)0x0) {
+    shared = M<UInt8 *>(self + 0x88);
+    if (shared == (UInt8 *)0x0) {
       iVar2 = this->create_shared();
       if (iVar2 == 0) {
         GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
         return 0xe00002be;
       }
-      this_00 = M<UInt8 *>(self + 0x88);
+      shared = M<UInt8 *>(self + 0x88);
     }
-    iVar2 = (SInt32)((IOATIR500Shared *)(this_00))->new_texture(param_1, param_2, 0, 0, (unsigned int *)(param_3), (unsigned int *)(param_4));
+    iVar2 = (SInt32)((IOATIR500Shared *)(shared))->new_texture(size, auxValue, 0, 0, (unsigned int *)(outDataAddress), (unsigned int *)(outSharedUserAddr));
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    uVar1 = 0;
+    result = 0;
     if (iVar2 == 0) {
-      uVar1 = 0xe00002bd;
+      result = 0xe00002bd;
     }
   }
-  return uVar1;
+  return result;
 }

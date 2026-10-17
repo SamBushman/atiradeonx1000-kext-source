@@ -27,27 +27,27 @@
 
 
 /* real addr 0x3db40 */
-UInt32 ATIR500Surface::decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *real_param_1, UInt32 param_2, UInt32*param_3) {
+UInt32 ATIR500Surface::decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *buffer, UInt32 wordIndex, UInt32*packet) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
+  SInt32 endIndex;
   
   M<UInt32>(M<SInt32>(self + 0xd50) + 0xb94) = 0;
-  if (param_1[0x34] == 0x0) {
-    param_3[param_2] = 0x1393;
-    param_3[param_2 + 1] = 10;
-    param_3[param_2 + 2] = 0x13c6;
-    param_3[param_2 + 3] = 3;
-    param_3[param_2 + 4] = 0x5c8;
-    iVar1 = param_2 + 6;
-    param_3[param_2 + 5] = 0x20000;
+  if (bufferBytes[0x34] == 0x0) {
+    packet[wordIndex] = 0x1393;
+    packet[wordIndex + 1] = 10;
+    packet[wordIndex + 2] = 0x13c6;
+    packet[wordIndex + 3] = 3;
+    packet[wordIndex + 4] = 0x5c8;
+    endIndex = wordIndex + 6;
+    packet[wordIndex + 5] = 0x20000;
   }
   else {
-    iVar1 = (SInt32)this->load_3d_blit((UInt32 *)(param_3 + param_2),(ATIR500SurfaceBuffer *)(param_1));
-    iVar1 = iVar1 - (SInt32)param_3 >> 2;
+    endIndex = (SInt32)this->load_3d_blit((UInt32 *)(packet + wordIndex),(ATIR500SurfaceBuffer *)(bufferBytes));
+    endIndex = endIndex - (SInt32)packet >> 2;
     M<UInt32>(M<SInt32>(self + 0xd50) + 0xb90) = 1;
     M<UInt32>(M<SInt32>(self + 0xd50) + 0x78) = 0;
   }
-  return iVar1;
+  return endIndex;
 }

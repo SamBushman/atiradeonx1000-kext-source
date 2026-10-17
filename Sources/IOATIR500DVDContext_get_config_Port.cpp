@@ -27,10 +27,10 @@
 
 
 /* real addr 0xe980 */
-IOReturn IOATIR500DVDContext::get_config(UInt32*param_1, UInt32*param_2) {
+IOReturn IOATIR500DVDContext::get_config(UInt32*out0, UInt32*out1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  *param_1 = M<UInt32>(M<SInt32>(self + 0x8c) + 0x98);
-  *param_2 = M<UInt32>(M<SInt32>(self + 0x8c) + 0x9c);
+  *out0 = M<UInt32>(M<SInt32>(self + 0x8c) + 0x98);
+  *out1 = M<UInt32>(M<SInt32>(self + 0x8c) + 0x9c);
   return 0;
 }

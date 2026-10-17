@@ -27,15 +27,15 @@
 
 
 /* real addr 0xe9b0 */
-IOReturn IOATIR500DVDContext::get_status(UInt32*param_1) {
+IOReturn IOATIR500DVDContext::get_status(UInt32*out0) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 status;
   
   if ((M<SInt32>(self + 0xf8) == 0) ||
-     (uVar1 = 1, (M<UInt32>(M<SInt32>(self + 0xf8) + 0xbf8) & 0x20000000) != 0)) {
-    uVar1 = 0;
+     (status = 1, (M<UInt32>(M<SInt32>(self + 0xf8) + 0xbf8) & 0x20000000) != 0)) {
+    status = 0;
   }
-  *param_1 = uVar1;
+  *out0 = status;
   return 0;
 }

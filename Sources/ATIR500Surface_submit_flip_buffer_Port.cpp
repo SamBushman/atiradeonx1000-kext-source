@@ -27,10 +27,10 @@
 
 
 /* real addr 0x3e5c0 */
-void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real_param_3, UInt32 param_4) {
+void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *context, UInt32 unused4) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_3 = reinterpret_cast<UInt8 *>(real_param_3);
+    UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
   bool bVar1;
   bool bVar2;
@@ -60,18 +60,18 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
   if (M<SInt16>(self + 0xdb4) != 0) {
     M<UInt32>(M<int>(self + 0xd50) + 0x78) = 0;
   }
-  if (M<UInt32>(self + 0xd54) != (UInt32)param_3) {
-    M<UInt32>(self + 0xd54) = (UInt32)param_3;
-    iVar17 = (int)Vol(PANEL_RECORD(self, param_2)->entries[0].header);
+  if (M<UInt32>(self + 0xd54) != (UInt32)contextBytes) {
+    M<UInt32>(self + 0xd54) = (UInt32)contextBytes;
+    iVar17 = (int)Vol(PANEL_RECORD(self, panel)->entries[0].header);
     M<unsigned int>(iVar17 + 0x1c) = M<unsigned int>(iVar17 + 0x1c) | 1;
   }
-  PanelRecord *rec = PANEL_RECORD(self, param_2);
+  PanelRecord *rec = PANEL_RECORD(self, panel);
   SwapBufferEntry *slot;     /* the submit slot in use: entries[1 + slotIndex] */
   if ((M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 1) == 0) {
     slot = &rec->entries[1 + (unsigned int)Vol(rec->slotIndex)];
     pVVar23 = (UInt8 *)slot;
     if (((int)Vol(slot->memory) == 0) &&
-       (iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)param_2,Vol(rec->swapBufferSize)),
+       (iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)panel,Vol(rec->swapBufferSize)),
        iVar17 == 0)) {
       return;
     }
@@ -82,7 +82,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
   slot = &rec->entries[1 + uVar13];
   pVVar23 = (UInt8 *)slot;
   if ((int)Vol(slot->memory) == 0) {
-    iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)param_2,Vol(rec->swapBufferSize));
+    iVar17 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers((UInt32)panel,Vol(rec->swapBufferSize));
     if (iVar17 == 0) {
       return;
     }
@@ -117,12 +117,12 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
   M<UInt32>(iVar17 + 0x2c) = 10;
   M<UInt32>(iVar17 + 0x30) = 0x5c8;
   M<UInt32>(iVar17 + 0x34) = 0x30000;
-  if (param_3 == 0) {
+  if (contextBytes == 0) {
     uVar13 = 6;
     sVar7 = 0;
   }
   else {
-    iVar19 = M<int>((unsigned int)M<UInt16>(param_3 + 0xac) * 4 + self + 0xb70);
+    iVar19 = M<int>((unsigned int)M<UInt16>(contextBytes + 0xac) * 4 + self + 0xb70);
     iVar11 = M<int>(iVar19 + 0x40);
     uVar4 = M<UInt16>(iVar19 + 0x20);
     uVar13 = M<unsigned int>(iVar19 + 0x3c);
@@ -166,7 +166,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
     M<unsigned int>(iVar17 + 0x4c) =
          uVar10 >> 1 & 0x1e00000 |
          (uVar15 & 0xc00) << 9 | (bVar3 & 6) << 0x10 | (bVar3 & 1) << 0x10 | uVar13 & 0x3ffe;
-    sVar7 = M<SInt16>(param_3 + 0x98);
+    sVar7 = M<SInt16>(contextBytes + 0x98);
     uVar13 = 0xc;
   }
   M<unsigned int>(M<int>(self + 0xd50) + 0xb78) =
@@ -177,7 +177,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
        M<unsigned int>(M<int>(self + 0xd50) + 0xb78) & 0xffefffff;
   M<unsigned int>(M<int>(self + 0xd50) + 0xb80) =
        (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + 0xd50) + 0xb80) & 0xfffffffe;
-  if (param_2[self + 0xdb6] == 0x0) {
+  if (panel[self + 0xdb6] == 0x0) {
     uVar16 = 0;
     M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
          M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfeffffff;
@@ -199,7 +199,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
        M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) & 0xffefffff;
   M<unsigned int>(M<int>(self + 0xd50) + 0xb84) =
        (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + 0xd50) + 0xb84) & 0xfffffffe;
-  if (param_2[self + 0xdb6] == 0x0) {
+  if (panel[self + 0xdb6] == 0x0) {
     M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
          M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfeffffff;
   }
@@ -217,9 +217,9 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
     M<unsigned int>(iVar17 + 0xb80) = M<unsigned int>(iVar17 + 0xb80) & 0xfffffffe | 1;
     iVar17 = M<int>(self + 0xd50);
   }
-  bVar1 = param_2 == 0;
+  bVar1 = panel == 0;
   if ((bVar1) || (M<int>(iVar17 + 0x894) != 0)) {
-    if (param_2[self + 0xdb6] != 0x0) {
+    if (panel[self + 0xdb6] != 0x0) {
       puVar9[uVar13] = 0x1848;
       iVar11 = uVar13 + 1;
       uVar13 = uVar13 + 2;
@@ -234,9 +234,9 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
     uVar13 = uVar13 + 6;
     puVar9[iVar11] = M<UInt32>(iVar17 + 0xb88);
   }
-  bVar2 = param_2 == 1;
+  bVar2 = panel == 1;
   if ((bVar2) || (M<int>(iVar17 + 0x894) != 0)) {
-    if (param_2[self + 0xdb6] != 0x0) {
+    if (panel[self + 0xdb6] != 0x0) {
       puVar9[uVar13] = 0x1a48;
       iVar11 = uVar13 + 1;
       uVar13 = uVar13 + 2;
@@ -260,7 +260,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
     puVar9[uVar13 + 4] = 0x1844;
     uVar16 = uVar13 + 6;
     puVar9[uVar13 + 5] = uVar14;
-    if (param_2[self + 0xdb6] != 0x0) {
+    if (panel[self + 0xdb6] != 0x0) {
       puVar9[uVar16] = 0x1846;
       uVar16 = uVar13 + 8;
       puVar9[uVar13 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
@@ -274,7 +274,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real
     puVar9[uVar16 + 4] = 0x1a44;
     uVar13 = uVar16 + 6;
     puVar9[uVar16 + 5] = uVar14;
-    if (param_2[self + 0xdb6] != 0x0) {
+    if (panel[self + 0xdb6] != 0x0) {
       puVar9[uVar13] = 0x1a46;
       uVar13 = uVar16 + 8;
       puVar9[uVar16 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
@@ -295,7 +295,7 @@ LAB_0003ed40:
       puVar9[iVar17] = 0x80000001;
     }
   }
-  else if (M<int>((int)param_2 * 0x18 + iVar17 + 0xb10) == 0) {
+  else if (M<int>((int)panel * 0x18 + iVar17 + 0xb10) == 0) {
     if (M<int>(iVar17 + 0x894) != 0) {
       if (bVar1) {
         iVar11 = 0xb18;
@@ -326,6 +326,6 @@ LAB_0003ee00:
                       M<UInt32>(M<int>(pVVar23 + 0x14) + 0x14));
   M<UInt32>(pVVar23 + 0x10) = uVar14;
   M<UInt32>(self + 0x80) = uVar14;
-  M<UInt32>(pAccel + (int)param_2 * 0x20 + 0xec) = uVar14;
+  M<UInt32>(pAccel + (int)panel * 0x20 + 0xec) = uVar14;
   return;
 }

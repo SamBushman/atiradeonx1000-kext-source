@@ -31,31 +31,31 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *scalingBytes = reinterpret_cast<UInt8 *>(scaling);
 
-  bool bVar1;
-  UInt16 uVar2;
-  UInt16 uVar3;
-  UInt32 uVar4;
+  bool scalingDisabled;
+  UInt16 width;
+  UInt16 height;
+  UInt32 result;
   SInt32 iVar5;
   UInt32 local_28;
   UInt32 local_24;
   UInt32 local_20;
   UInt32 local_1c;
   
-  bVar1 = (flags >> 1 & 1) == 0;
-  if ((bVar1) || (scalingBytes != (UInt8 *)0x0)) {
+  scalingDisabled = (flags >> 1 & 1) == 0;
+  if ((scalingDisabled) || (scalingBytes != (UInt8 *)0x0)) {
     self[0xbee] = ((UInt8)flags & 1);
     self[0xbf1] = ((UInt8)flags & 0xf0);
     self[0xbed] = SUB41m(-(M<UInt32>(self + 0xbec) & 0xffff00) >> 0x1f,0);
-    if (bVar1) {
+    if (scalingDisabled) {
       self[0xbec] = 0x0;
-      uVar2 = M<UInt16>(M<SInt32>(self + 0xd60) + 8);
-      M<UInt16>(self + 0xbd4) = uVar2;
-      uVar3 = M<UInt16>(M<SInt32>(self + 0xd60) + 10);
+      width = M<UInt16>(M<SInt32>(self + 0xd60) + 8);
+      M<UInt16>(self + 0xbd4) = width;
+      height = M<UInt16>(M<SInt32>(self + 0xd60) + 10);
       M<UInt16>(self + 0xbdc) = 0;
       M<UInt16>(self + 0xbde) = 0;
-      M<UInt16>(self + 0xbe0) = uVar2;
-      M<UInt16>(self + 0xbe2) = uVar3;
-      M<UInt16>(self + 0xbd6) = uVar3;
+      M<UInt16>(self + 0xbe0) = width;
+      M<UInt16>(self + 0xbe2) = height;
+      M<UInt16>(self + 0xbd6) = height;
     }
     else if ((M<UInt32>(self + 0xbe8) & 0x20) != 0) {
       self[0xbec] = 0x1;
@@ -86,11 +86,11 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
         return 0;
       }
     }
-    uVar4 = 0xe00002be;
+    result = 0xe00002be;
     M<UInt32>(self + 0xbf8) = M<UInt32>(self + 0xbf8) | 0x20000000;
   }
   else {
-    uVar4 = 0xe00002c2;
+    result = 0xe00002c2;
   }
-  return uVar4;
+  return result;
 }

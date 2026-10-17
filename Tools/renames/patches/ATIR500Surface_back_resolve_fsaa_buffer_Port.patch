@@ -1,38 +1,38 @@
---- a/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-16 14:39:40.189358691 -0700
-+++ b/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-16 14:39:40.192539757 -0700
+--- a/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-16 20:25:14.589137059 -0700
++++ b/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-16 20:25:14.590383448 -0700
 @@ -152,12 +152,12 @@
-     param_3[0xc2] = 0x1087;
+     packet[0xc2] = 0x1087;
      dVar11 = DOUBLE_0004c3b0;
-     param_3[0xc4] = 0xc0033500;
--    param_3[0xbe] = (UInt32)fVar10;
--    param_3[0xc1] = (UInt32)fVar10;
--    param_3[0xc6] = (UInt32)fVar10;
-+    param_3[0xbe] = FBITS(fVar10);
-+    param_3[0xc1] = FBITS(fVar10);
-+    param_3[0xc6] = FBITS(fVar10);
+     packet[0xc4] = 0xc0033500;
+-    packet[0xbe] = (UInt32)fVar10;
+-    packet[0xc1] = (UInt32)fVar10;
+-    packet[0xc6] = (UInt32)fVar10;
++    packet[0xbe] = FBITS(fVar10);
++    packet[0xc1] = FBITS(fVar10);
++    packet[0xc6] = FBITS(fVar10);
      fVar4 = (float)((double)CONCAT44d(0x43300000,(UInt32)uVar6) - dVar11);
      fVar9 = fVar4 * FLOAT_0004c37c;
--    param_3[199] = (UInt32)((fVar4 + fVar10) * FLOAT_0004c380);
-+    param_3[199] = FBITS(((fVar4 + fVar10) * FLOAT_0004c380));
-     param_3[0xc3] = (SInt32)fVar9;
+-    packet[199] = (UInt32)((fVar4 + fVar10) * FLOAT_0004c380);
++    packet[199] = FBITS(((fVar4 + fVar10) * FLOAT_0004c380));
+     packet[0xc3] = (SInt32)fVar9;
    }
    else {
 @@ -169,14 +169,14 @@
-     param_3[0xc4] = 0xc0033500;
-     param_3[0xc5] = 0x10031;
-     param_3[200] = 0;
--    param_3[0xbe] = (UInt32)fVar4;
-+    param_3[0xbe] = FBITS(fVar4);
-     param_3[0xbf] = 0x3f800000;
--    param_3[0xc1] = (UInt32)fVar4;
-+    param_3[0xc1] = FBITS(fVar4);
+     packet[0xc4] = 0xc0033500;
+     packet[0xc5] = 0x10031;
+     packet[200] = 0;
+-    packet[0xbe] = (UInt32)fVar4;
++    packet[0xbe] = FBITS(fVar4);
+     packet[0xbf] = 0x3f800000;
+-    packet[0xc1] = (UInt32)fVar4;
++    packet[0xc1] = FBITS(fVar4);
      fVar2 = (float)((double)CONCAT44d(0x43300000,(UInt32)uVar6 / (uVar16 >> 0x14 & 0xf) ^ 0x80000000) -
                     dVar11);
      fVar3 = (float)((double)CONCAT44d(0x43300000,(UInt32)uVar7) - DOUBLE_0004c3b0);
--    param_3[0xc6] = (UInt32)((fVar2 + fVar4) * fVar10);
--    param_3[199] = (UInt32)((fVar3 + fVar4) * fVar10);
-+    param_3[0xc6] = FBITS(((fVar2 + fVar4) * fVar10));
-+    param_3[199] = FBITS(((fVar3 + fVar4) * fVar10));
-     param_3[0xc3] = (SInt32)(fVar2 * fVar9) << 0x10 | (SInt32)(fVar3 * fVar9);
+-    packet[0xc6] = (UInt32)((fVar2 + fVar4) * fVar10);
+-    packet[199] = (UInt32)((fVar3 + fVar4) * fVar10);
++    packet[0xc6] = FBITS(((fVar2 + fVar4) * fVar10));
++    packet[199] = FBITS(((fVar3 + fVar4) * fVar10));
+     packet[0xc3] = (SInt32)(fVar2 * fVar9) << 0x10 | (SInt32)(fVar3 * fVar9);
    }
-   param_3[0xc9] = 0x1393;
+   packet[0xc9] = 0x1393;

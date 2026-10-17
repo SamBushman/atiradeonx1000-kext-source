@@ -29,27 +29,27 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0xff20 */
-IOReturn IOATIR500DVDContext::unlock_memory(UInt32 param_1, UInt32*param_2) {
+IOReturn IOATIR500DVDContext::unlock_memory(UInt32 lockType, UInt32*outTag) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  SInt32 iVar2;
+  SInt32 surface;
+  SInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  iVar1 = M<SInt32>(self + 0xf8);
-  if (iVar1 == 0) {
-    iVar2 = -0x1ffffd3e;
+  surface = M<SInt32>(self + 0xf8);
+  if (surface == 0) {
+    result = -0x1ffffd3e;
   }
   else {
-    iVar2 = 0;
-    M<SInt16>(iVar1 + 0xbd2) = M<SInt16>(iVar1 + 0xbd2) + -1;
+    result = 0;
+    M<SInt16>(surface + 0xbd2) = M<SInt16>(surface + 0xbd2) + -1;
   }
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  if ((iVar2 == 0) && ((SInt32)param_1 < 0)) {
-    *param_2 = 0;
+  if ((result == 0) && ((SInt32)lockType < 0)) {
+    *outTag = 0;
   }
   else {
-    *param_2 = 0;
+    *outTag = 0;
   }
-  return iVar2;
+  return result;
 }

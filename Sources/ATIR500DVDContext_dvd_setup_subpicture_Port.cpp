@@ -29,26 +29,26 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x34e50 */
-IOReturn ATIR500DVDContext::dvd_setup_subpicture(int param_2, int param_3, int param_4, int param_5) {
+IOReturn ATIR500DVDContext::dvd_setup_subpicture(int unknownArg1, int unknownArg2, int unknownArg3, int unknownArg4) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
-  int iVar1;
-  UInt32 uVar2;
+  int accel;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
-  iVar1 = M<int>(self + 0x8c);
-  if (M<char>(iVar1 + 0x80) == '\0') {
-    uVar2 = 0xe00002d8;
+  accel = M<int>(self + 0x8c);
+  if (M<char>(accel + 0x80) == '\0') {
+    result = 0xe00002d8;
   }
   else if (M<int>(self + 0xf8) == 0) {
-    uVar2 = 0xe00002bc;
+    result = 0xe00002bc;
   }
   else {
-    uVar2 = 0;
-    ((ATIR500Surface *)(M<int>(self + 0xf8)))->dvd_setup_subpicture(param_2, param_3, param_4, param_5);   /* r7 (the 4th explicit argument) is passed on untouched */
-    iVar1 = M<int>(self + 0x8c);
+    result = 0;
+    ((ATIR500Surface *)(M<int>(self + 0xf8)))->dvd_setup_subpicture(unknownArg1, unknownArg2, unknownArg3, unknownArg4);   /* r7 (the 4th explicit argument) is passed on untouched */
+    accel = M<int>(self + 0x8c);
   }
-  GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));
-  return uVar2;
+  GH_IOLockUnlock(M<UInt32>(accel + 0x840));
+  return result;
 }

@@ -27,15 +27,15 @@
 
 
 /* real addr 0x34120 */
-IOReturn ATIR500DVDContext::wait_for_stamps(UInt32 param_1, UInt32 param_2) {
+IOReturn ATIR500DVDContext::wait_for_stamps(UInt32 waitMain, UInt32 waitIDCT) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if (param_1 != 0) {
-    /* #171: stock 0x34148 passes param_1 (incoming r4, untouched since entry) to sleepForConsumedIDCTTimeStamp(unsigned long); the port dropped it */
-    VCALL(*M<SInt32 *>(self + 0x8c), 0x5fc)(M<SInt32 *>(self + 0x8c),param_1);
+  if (waitMain != 0) {
+    /* #171: stock 0x34148 passes waitMain (incoming r4, untouched since entry) to sleepForConsumedIDCTTimeStamp(unsigned long); the port dropped it */
+    VCALL(*M<SInt32 *>(self + 0x8c), 0x5fc)(M<SInt32 *>(self + 0x8c),waitMain);
   }
-  if (param_2 != 0) {
-    VCALL(*M<SInt32 *>(self + 0x8c), 0x558)(M<SInt32 *>(self + 0x8c),param_2);
+  if (waitIDCT != 0) {
+    VCALL(*M<SInt32 *>(self + 0x8c), 0x558)(M<SInt32 *>(self + 0x8c),waitIDCT);
   }
   return 0;
 }

@@ -32,7 +32,7 @@ void IOATIR500Surface::delete_buffer_backing(IOTextureBuffer *buffer) {
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   SInt32 iVar1;
-  SInt32 iVar2;
+  SInt32 nextBuffer;
   
   if (M<SInt32>(bufferBytes + 4) != 0) {
     iVar1 = VCALL(*M<SInt32 *>(self + 0xd50), 0x554)
@@ -44,9 +44,9 @@ void IOATIR500Surface::delete_buffer_backing(IOTextureBuffer *buffer) {
       }
       iVar1 = M<SInt32>(bufferBytes + 0x24);
       M<UInt32>(iVar1 + 0x28) = M<UInt32>(bufferBytes + 0x28);
-      iVar2 = M<SInt32>(bufferBytes + 0x28);
+      nextBuffer = M<SInt32>(bufferBytes + 0x28);
       M<UInt8 *>(bufferBytes + 0x28) = bufferBytes;
-      M<SInt32>(iVar2 + 0x24) = iVar1;
+      M<SInt32>(nextBuffer + 0x24) = iVar1;
       M<UInt8 *>(bufferBytes + 0x24) = bufferBytes;
       return;
     }

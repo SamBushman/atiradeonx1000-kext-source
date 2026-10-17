@@ -31,20 +31,20 @@ void IOATIR500Surface::remove_gl_context_from_list(IOATIR500GLContext *context) 
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
-  UInt8 *pIVar1;
-  UInt8 *pIVar2;
+  UInt8 *current;
+  UInt8 *previous;
   
-  pIVar1 = M<UInt8 *>(self + 0x88);
+  current = M<UInt8 *>(self + 0x88);
   if (M<UInt8 *>(self + 0x88) == contextBytes) {
     M<UInt32>(self + 0x88) = M<UInt32>(contextBytes + 0x84);
   }
   else {
     do {
-      pIVar2 = pIVar1;
-      pIVar1 = M<UInt8 *>(pIVar2 + 0x84);
-      if (pIVar1 == (UInt8 *)0x0) break;
-    } while (contextBytes != pIVar1);
-    M<UInt32>(pIVar2 + 0x84) = M<UInt32>(contextBytes + 0x84);
+      previous = current;
+      current = M<UInt8 *>(previous + 0x84);
+      if (current == (UInt8 *)0x0) break;
+    } while (contextBytes != current);
+    M<UInt32>(previous + 0x84) = M<UInt32>(contextBytes + 0x84);
   }
   M<UInt32>(contextBytes + 0x84) = 0;
   this->reset_req_bits();

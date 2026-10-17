@@ -31,16 +31,16 @@ void IOATIR500Surface::init_swap_buffer_header(VendorSwapBufferHeader *header, U
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *headerBytes = reinterpret_cast<UInt8 *>(header);
 
-  SInt32 iVar1;
-  SInt32 iVar2;
+  SInt32 byteOffset;
+  SInt32 wordsLeft;
   
-  iVar1 = 0;
-  iVar2 = 8;
+  byteOffset = 0;
+  wordsLeft = 8;
   do {
-    M<UInt32>(headerBytes + iVar1) = 0;
-    iVar1 = iVar1 + 4;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    M<UInt32>(headerBytes + byteOffset) = 0;
+    byteOffset = byteOffset + 4;
+    wordsLeft = wordsLeft + -1;
+  } while (wordsLeft != 0);
   M<UInt32>(headerBytes + 0x1c) = 1;
   M<UInt32>(headerBytes + 0x10) = size - 0x20 >> 2;
   return;

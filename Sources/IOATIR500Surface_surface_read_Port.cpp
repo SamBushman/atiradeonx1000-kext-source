@@ -35,22 +35,22 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
     UInt8 *readDataBytes = reinterpret_cast<UInt8 *>(readData);
 
-  int iVar1;
-  int iVar2;
-  unsigned int uVar3;
+  int surfaceWidth;
+  int clipOffset;
+  unsigned int destination;
   int *piVar4;
-  int iVar5;
-  UInt8 *pIVar6;
+  int bottom;
+  UInt8 *cursor;
   int iVar7;
-  int iVar8;
-  unsigned int uVar9;
-  int iVar10;
+  int surfaceHeight;
+  unsigned int pageOffset;
+  int destPitch;
   int iVar11;
   int iVar12;
-  int iVar13;
-  int iVar14;
+  int y;
+  int x;
   int iVar15;
-  UInt32 uVar16;
+  UInt32 result;
   int iVar17;
   /*
    * #164 root cause: the shipped code uses ONE real contiguous stack structure here (a
@@ -79,8 +79,8 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32
   M<SInt32>(xferBufBlock + 4) = 0;           /* local_58[1] = 0 */
   M<SInt32>(xferBufBlock + 8) = 0;           /* local_58[2] = 0 */
   M<SInt32>(xferBufBlock + 0xc) = 0;         /* local_4c = 0 */
-  iVar14 = M<int>(readDataBytes);
-  iVar13 = M<int>(readDataBytes + 4);
+  x = M<int>(readDataBytes);
+  y = M<int>(readDataBytes + 4);
   iVar12 = M<int>(readDataBytes + 8);
   iVar11 = M<int>(readDataBytes + 0xc);
   iVar15 = M<int>(readDataBytes + 0x10);
@@ -101,40 +101,40 @@ LAB_00014af4:
     if (iVar17 != 0) goto LAB_00014af4;
     iVar17 = M<int>(self + 0xb70);
   }
-  iVar7 = iVar14 + iVar12;
-  if ((((0 < iVar7) && (iVar5 = iVar13 + iVar11, 0 < iVar5)) &&
-      (iVar1 = (int)M<SInt16>(self + 0xbd4), iVar14 < iVar1)) &&
-     (iVar8 = (int)M<SInt16>(self + 0xbd6), iVar13 < iVar8)) {
-    iVar10 = M<int>(readDataBytes + 0x14);
-    iVar2 = 0;
-    if (iVar14 < 0) {
-      iVar2 = (unsigned int)M<UInt16>(iVar17 + 0x16) * iVar14;
-      iVar14 = 0;
-      iVar2 = -iVar2;
+  iVar7 = x + iVar12;
+  if ((((0 < iVar7) && (bottom = y + iVar11, 0 < bottom)) &&
+      (surfaceWidth = (int)M<SInt16>(self + 0xbd4), x < surfaceWidth)) &&
+     (surfaceHeight = (int)M<SInt16>(self + 0xbd6), y < surfaceHeight)) {
+    destPitch = M<int>(readDataBytes + 0x14);
+    clipOffset = 0;
+    if (x < 0) {
+      clipOffset = (unsigned int)M<UInt16>(iVar17 + 0x16) * x;
+      x = 0;
+      clipOffset = -clipOffset;
       iVar12 = iVar7;
     }
-    if (iVar13 < 0) {
-      iVar11 = iVar10 * iVar13;
-      iVar13 = 0;
-      iVar2 = iVar2 - iVar11;
-      iVar11 = iVar5;
+    if (y < 0) {
+      iVar11 = destPitch * y;
+      y = 0;
+      clipOffset = clipOffset - iVar11;
+      iVar11 = bottom;
     }
-    if (iVar1 < iVar7) {
-      iVar12 = iVar1 - iVar14;
+    if (surfaceWidth < iVar7) {
+      iVar12 = surfaceWidth - x;
     }
-    if (iVar8 < iVar5) {
-      iVar11 = iVar8 - iVar13;
+    if (surfaceHeight < bottom) {
+      iVar11 = surfaceHeight - y;
     }
-    uVar3 = iVar15 + iVar2;
-    uVar9 = uVar3 & GH_page_size - 1U;
-    M<SInt32>(xferBufBlock + 0xc) = (SInt32)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(uVar3 & -GH_page_size,
+    destination = iVar15 + clipOffset;
+    pageOffset = destination & GH_page_size - 1U;
+    M<SInt32>(xferBufBlock + 0xc) = (SInt32)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(destination & -GH_page_size,
                                    -GH_page_size &
                                    (GH_page_size +
-                                   iVar10 * (iVar11 + -1) +
-                                   (unsigned int)M<UInt16>(iVar17 + 0x16) * iVar12 + uVar9) - 1,0,
+                                   destPitch * (iVar11 + -1) +
+                                   (unsigned int)M<UInt16>(iVar17 + 0x16) * iVar12 + pageOffset) - 1,0,
                                    M<UInt32>(self + 0x78));
     if (M<SInt32>(xferBufBlock + 0xc) == 0) {
-      uVar16 = 0xe00002be;
+      result = 0xe00002be;
     }
     else {
       if (((self[0xbf7] != 0) && (M<int>(iVar17 + 0x24) != 0)) &&
@@ -158,12 +158,12 @@ LAB_00014af4:
       }
       iVar15 = M<int>(self + 0x7c);
       VCALL(M<int>(self), 0x5e8)
-                (self,iVar14,iVar13,iVar12,iVar11,0,0,iVar17,iVar15,xferBufBlock + 4,uVar9,iVar10,0);
-      pIVar6 = self + 0xcc;
+                (self,x,y,iVar12,iVar11,0,0,iVar17,iVar15,xferBufBlock + 4,pageOffset,destPitch,0);
+      cursor = self + 0xcc;
       iVar11 = 0x17;
       do {
-        iVar12 = M<int>(pIVar6);
-        pIVar6 = pIVar6 + 0x78;
+        iVar12 = M<int>(cursor);
+        cursor = cursor + 0x78;
         if ((iVar12 != 0) && (iVar15 == M<int>(iVar12 + 0x54))) {
           M<UInt32>(iVar12 + 0x54) = M<UInt32>(self + 0x7c);
         }
@@ -178,7 +178,7 @@ LAB_00014af4:
         GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
         VCALL(*M<int *>(self + 0xd50), 0x5ac)(M<int *>(self + 0xd50),xferBufBlock + 4);
       }
-      uVar16 = 0;
+      result = 0;
       {
         SInt32 *desc = (SInt32 *)M<SInt32>(xferBufBlock + 0xc);
         VCALL(*desc, 0x18)(desc);
@@ -186,7 +186,7 @@ LAB_00014af4:
     }
     M<SInt32>(xferBufBlock + 0xc) = 0;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
-    return uVar16;
+    return result;
   }
 LAB_00014b30:
   GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
