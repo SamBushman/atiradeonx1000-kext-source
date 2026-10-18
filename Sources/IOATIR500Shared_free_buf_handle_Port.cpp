@@ -32,19 +32,19 @@ void IOATIR500Shared::free_buf_handle(void*record, UInt32 handle) {
 
   UInt32 bitmapOffset;
   
-  if (M<UInt32>(self + 0x14) <= handle) {
+  if (M<UInt32>(self + kIOATIR500Shared_handleCapacity) <= handle) {
     return;
   }
-  if (M<void *>(M<SInt32>(self + 0x10) + handle * 4) != record) {
+  if (M<void *>(M<SInt32>(self + kIOATIR500Shared_handleTable) + handle * 4) != record) {
     return;
   }
-  if (handle < M<UInt32>(self + 0x1c)) {
-    M<UInt32>(self + 0x1c) = handle;
+  if (handle < M<UInt32>(self + kIOATIR500Shared_handleHint)) {
+    M<UInt32>(self + kIOATIR500Shared_handleHint) = handle;
   }
   bitmapOffset = handle >> 3 & 0x1ffffffc;
-  M<UInt32>(handle * 4 + M<SInt32>(self + 0x10)) = 0;
-  M<UInt32>(bitmapOffset + M<SInt32>(self + 0x18)) =
+  M<UInt32>(handle * 4 + M<SInt32>(self + kIOATIR500Shared_handleTable)) = 0;
+  M<UInt32>(bitmapOffset + M<SInt32>(self + kIOATIR500Shared_handleBitmap)) =
        (-2 << (handle & 0x1f) | 0xfffffffeU >> 0x20 - (handle & 0x1f)) &
-       M<UInt32>(bitmapOffset + M<SInt32>(self + 0x18));
+       M<UInt32>(bitmapOffset + M<SInt32>(self + kIOATIR500Shared_handleBitmap));
   return;
 }

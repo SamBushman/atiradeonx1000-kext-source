@@ -39,19 +39,19 @@ bool IOATIR500Shared::alloc_buf_handle(void*record, UInt32*outHandle) {
   UInt32 wordIndex;
   UInt32 handle;
   
-  wordIndex = M<UInt32>(self + 0x1c) >> 5;
+  wordIndex = M<UInt32>(self + kIOATIR500Shared_handleHint) >> 5;
   do {
-    if (wordIndex < M<UInt32>(self + 0x14) >> 5) {
+    if (wordIndex < M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 5) {
       iVar4 = wordIndex * 4;
-      bitmapWord = M<UInt32>(M<SInt32>(self + 0x18) + iVar4);
+      bitmapWord = M<UInt32>(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + iVar4);
       if (bitmapWord != 0xffffffff) {
 LAB_00016c4c:
         bitIndex = 0;
         iVar1 = 0x20;
         break;
       }
-      iVar1 = (M<UInt32>(self + 0x14) >> 5) - wordIndex;
-      bitmapCursor = (UInt32 *)(M<SInt32>(self + 0x18) + iVar4);
+      iVar1 = (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 5) - wordIndex;
+      bitmapCursor = (UInt32 *)(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + iVar4);
       while( true ) {
         iVar4 = iVar4 + 4;
         wordIndex = wordIndex + 1;
@@ -77,10 +77,10 @@ LAB_00016c4c:
   bit = 0x20;
 LAB_00016c7c:
   handle = wordIndex * 0x20 + bitIndex;
-  M<UInt32>(self + 0x1c) = handle + 1;
-  M<void *>(handle * 4 + M<SInt32>(self + 0x10)) = record;
-  M<UInt32>(iVar4 + M<SInt32>(self + 0x18)) =
-       1 << (bit & 0x3f) | M<UInt32>(iVar4 + M<SInt32>(self + 0x18));
+  M<UInt32>(self + kIOATIR500Shared_handleHint) = handle + 1;
+  M<void *>(handle * 4 + M<SInt32>(self + kIOATIR500Shared_handleTable)) = record;
+  M<UInt32>(iVar4 + M<SInt32>(self + kIOATIR500Shared_handleBitmap)) =
+       1 << (bit & 0x3f) | M<UInt32>(iVar4 + M<SInt32>(self + kIOATIR500Shared_handleBitmap));
   *outHandle = handle;
   return 1;
 }

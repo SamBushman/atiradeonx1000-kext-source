@@ -32,17 +32,17 @@ void IOATIR500Surface::resetFullScreen() {
 
   SInt32 flipAllowed;
   
-  if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) == self + 0x120) {
-    M<UInt8 *>(self + 0xb74) = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
-    M<UInt8 *>(self + 0xb80) = self + 0x288;
-    M<UInt8 *>(self + 0xb84) = self + 0x300;
-    M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 300;
+  if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) == self + kIOATIR500Surface_buffer1) {
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) = self + kIOATIR500Surface_buffer4;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer5) = self + kIOATIR500Surface_buffer5;
+    M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) = M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 300;
   }
   flipAllowed = VCALL(M<SInt32>(self), 0x5dc)(self);
   if (flipAllowed != 0) {
-    if ((1 << (M<UInt32>(self + 0xc14) & 0x3f) & M<UInt32>(M<SInt32>(self + 0xd50) + 0xd0)) != 0) {
-      VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + 0xc14),0,1);
-      M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
+    if ((1 << (M<UInt32>(self + kIOATIR500Surface_panel) & 0x3f) & M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xd0)) != 0) {
+      VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + kIOATIR500Surface_panel),0,1);
+      M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) + 1;
     }
   }
   return;

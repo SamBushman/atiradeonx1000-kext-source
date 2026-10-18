@@ -34,9 +34,9 @@ void IOATIR500Surface::remove_2d_context_from_list(IOATIR5002DContext *context) 
   UInt8 *current;
   UInt8 *previous;
   
-  current = M<UInt8 *>(self + 0x8c);
-  if (M<UInt8 *>(self + 0x8c) == contextBytes) {
-    M<UInt32>(self + 0x8c) = M<UInt32>(contextBytes + 0x84);
+  current = M<UInt8 *>(self + kIOATIR500Surface_context2DList);
+  if (M<UInt8 *>(self + kIOATIR500Surface_context2DList) == contextBytes) {
+    M<UInt32>(self + kIOATIR500Surface_context2DList) = M<UInt32>(contextBytes + 0x84);
   }
   else {
     do {

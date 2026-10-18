@@ -1,9 +1,9 @@
---- a/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp	2026-10-16 20:25:50.143753893 -0700
-+++ b/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp	2026-10-16 20:25:50.145107139 -0700
+--- a/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp	2026-10-17 19:59:33.015395002 -0700
++++ b/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp	2026-10-17 19:59:33.016653322 -0700
 @@ -37,12 +37,12 @@
    
-   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-   if (type < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc)) {
+   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+   if (type < M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc)) {
 -    memoryDescriptor = M<UInt8 *>(self + type * 0x94 + 0xc28);
 +    memoryDescriptor = (UInt8 *)Vol(PANEL_RECORD(self, type)->entries[0].memory);
      VCALL(M<SInt32>(memoryDescriptor), 0x14)(memoryDescriptor);
@@ -13,6 +13,6 @@
 -               M<UInt32>(self + type * 0x94 + 0xcb0));
 +    this->init_swap_buffer_header((VendorSwapBufferHeader *)(Vol(PANEL_RECORD(self, type)->entries[0].header)),
 +               Vol(PANEL_RECORD(self, type)->swapBufferSize));
-     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
+     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
      result = 0;
    }

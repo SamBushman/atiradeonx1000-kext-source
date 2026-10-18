@@ -39,11 +39,11 @@ bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer
   pageOffset = GH_page_size - 1U & userAddress;
   length = -GH_page_size & (GH_page_size + M<UInt16>(bufferBytes + 0x1e) * pitch + pageOffset) - 1
   ;
-  if (M<UInt32>(self + 0xd4c) != 0) {
-    length = M<UInt32>(self + 0xd4c);
+  if (M<UInt32>(self + kIOATIR500Surface_backingLength) != 0) {
+    length = M<UInt32>(self + kIOATIR500Surface_backingLength);
   }
   memory = (UInt8 *)
-           GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(userAddress & -GH_page_size,length,0x10003,M<UInt32>(self + 0x78));
+           GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(userAddress & -GH_page_size,length,0x10003,M<UInt32>(self + kIOATIR500Surface_task));
   if (memory != (UInt8 *)0x0) {
     VCALL(M<SInt32>(memory), 0xdc)(memory,2,0);
     this->attach_buffer_backing_store((ATIR500SurfaceBuffer *)(bufferBytes),(IOMemoryDescriptor *)(memory),pageOffset,pitch);

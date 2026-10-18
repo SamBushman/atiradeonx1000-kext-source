@@ -30,6 +30,6 @@
 void ATIR500Surface::enable_deint(int mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<SInt32>(self + 0xdac) = mode;
+  M<SInt32>(self + kATIR500Surface_deintMode) = mode;
   return;
 }

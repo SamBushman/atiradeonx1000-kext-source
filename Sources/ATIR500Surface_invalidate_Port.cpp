@@ -34,7 +34,7 @@ void ATIR500Surface::invalidate() {
   UInt32 uVar2;
   PanelRecord *panel;
   
-  if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xcc) == 0) {
+  if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc) == 0) {
     return;
   }
   uVar2 = 0;
@@ -44,6 +44,6 @@ void ATIR500Surface::invalidate() {
     uVar2 = uVar2 + 1;
     panel = panel + 1;
     M<UInt32>(batchHeader + 0x1c) = M<UInt32>(batchHeader + 0x1c) | 1;
-  } while (uVar2 < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
+  } while (uVar2 < M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc));
   return;
 }

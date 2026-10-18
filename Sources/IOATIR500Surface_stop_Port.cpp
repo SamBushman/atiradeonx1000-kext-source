@@ -46,48 +46,48 @@ void IOATIR500Surface::stop(IOService *provider) {
   UInt8 *regionSlot;
   PanelRecord *panel;
   
-  M<UInt32>(self + 0xd58) = 0;
-  iVar6 = M<SInt32>(self + 0x9c);
-  iVar7 = M<SInt32>(self + 0xd50);
-  M<UInt32>(iVar6 + 0xa0) = M<UInt32>(self + 0xa0);
-  M<SInt32>(M<SInt32>(self + 0xa0) + 0x9c) = iVar6;
+  M<UInt32>(self + kIOATIR500Surface_vramInitSucceeded) = 0;
+  iVar6 = M<SInt32>(self + kIOATIR500Surface_surfaceListNext);
+  iVar7 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+  M<UInt32>(iVar6 + 0xa0) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
+  M<SInt32>(M<SInt32>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = iVar6;
   if (self == M<UInt8 *>(iVar7 + 0x5c)) {
-    if (self == M<UInt8 *>(self + 0x9c)) {
+    if (self == M<UInt8 *>(self + kIOATIR500Surface_surfaceListNext)) {
       M<UInt32>(iVar7 + 0x5c) = 0;
-      iVar7 = M<SInt32>(self + 0xd50);
+      iVar7 = M<SInt32>(self + kIOATIR500Surface_accelerator);
     }
     else {
-      M<UInt8 *>(iVar7 + 0x5c) = M<UInt8 *>(self + 0x9c);
-      iVar7 = M<SInt32>(self + 0xd50);
+      M<UInt8 *>(iVar7 + 0x5c) = M<UInt8 *>(self + kIOATIR500Surface_surfaceListNext);
+      iVar7 = M<SInt32>(self + kIOATIR500Surface_accelerator);
     }
   }
   M<SInt32>(iVar7 + 0x730) = M<SInt32>(iVar7 + 0x730) + -1;
-  if (M<SInt32>(self + 0xd48) != 0) {
-    iVar6 = M<SInt32>(M<SInt32>(self + 0xd50) + 0x21c);
+  if (M<SInt32>(self + kIOATIR500Surface_volatileState) != 0) {
+    iVar6 = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x21c);
     if (iVar6 != 0) {
-      M<SInt32>(M<SInt32>(self + 0xd50) + 0x21c) = iVar6 + -1;
+      M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x21c) = iVar6 + -1;
     }
   }
-  iVar6 = M<SInt32>(self + 0xbcc);
+  iVar6 = M<SInt32>(self + kIOATIR500Surface_backingStoreList);
   while (iVar6 != 0) {
     M<UInt32>(iVar6 + 0x50) = 0;
     M<UInt8>(M<SInt32>(iVar6 + 0x14) + 0x14) = 1;
-    M<UInt32>(self + 0xbcc) = M<UInt32>(iVar6 + 0x54);
+    M<UInt32>(self + kIOATIR500Surface_backingStoreList) = M<UInt32>(iVar6 + 0x54);
     M<UInt32>(iVar6 + 0x54) = 0;
-    iVar6 = M<SInt32>(self + 0xbcc);
+    iVar6 = M<SInt32>(self + kIOATIR500Surface_backingStoreList);
   }
-  if ((M<SInt32>(self + 0xc14) != 0xffff) &&
-     (self == M<UInt8 *>(M<SInt32>(self + 0xc14) * 0x20 + M<SInt32>(self + 0xd50) + 0xe8))
+  if ((M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff) &&
+     (self == M<UInt8 *>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xe8))
      ) {
     VCALL(M<SInt32>(self), 0x5a8)(self);
-    M<UInt32>(M<SInt32>(self + 0xc14) * 0x20 + M<SInt32>(self + 0xd50) + 0xe8) = 0;
-    M<UInt32>(self + 0xc14) = 0xffff;
+    M<UInt32>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xe8) = 0;
+    M<UInt32>(self + kIOATIR500Surface_panel) = 0xffff;
   }
   lockState = self[0xbd0];
   if (lockState != 0x0) {
     if (lockState == 0x3) {
       iVar6 = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
-      if (M<SInt32>(self + 0xd8c) == 0) {
+      if (M<SInt32>(self + kIOATIR500Surface_orphanedBacking) == 0) {
         iVar7 = M<SInt32>(iVar6 + 0x24);
         if ((iVar7 != 0) && (backingMemory = M<SInt32 *>(iVar7 + 0x10), backingMemory != (SInt32 *)0x0)) {
           VCALL(*backingMemory, 0x18)(backingMemory);
@@ -103,30 +103,30 @@ void IOATIR500Surface::stop(IOService *provider) {
     }
     self[0xbd0] = 0x0;
   }
-  if (M<SInt32 *>(self + 0xd84) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(self + 0xd84), 0x18)(M<SInt32 *>(self + 0xd84));
-    M<UInt32>(self + 0xd84) = 0;
+  if (M<SInt32 *>(self + kIOATIR500Surface_userMap) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(self + kIOATIR500Surface_userMap), 0x18)(M<SInt32 *>(self + kIOATIR500Surface_userMap));
+    M<UInt32>(self + kIOATIR500Surface_userMap) = 0;
   }
-  if (M<SInt32 *>(self + 0xd88) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(self + 0xd88), 0x18)(M<SInt32 *>(self + 0xd88));
-    M<UInt32>(self + 0xd88) = 0;
+  if (M<SInt32 *>(self + kIOATIR500Surface_kernelMap) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(self + kIOATIR500Surface_kernelMap), 0x18)(M<SInt32 *>(self + kIOATIR500Surface_kernelMap));
+    M<UInt32>(self + kIOATIR500Surface_kernelMap) = 0;
   }
-  contextGL = M<UInt8 *>(self + 0x88);
+  contextGL = M<UInt8 *>(self + kIOATIR500Surface_glContextList);
   while (contextGL != (UInt8 *)0x0) {
     ((IOATIR500GLContext *)(contextGL))->remove_surface();
     nextGL = M<UInt8 *>(contextGL + 0x84);
     M<UInt32>(contextGL + 0x84) = 0;
     contextGL = nextGL;
   }
-  context2D = M<UInt8 *>(self + 0x8c);
+  context2D = M<UInt8 *>(self + kIOATIR500Surface_context2DList);
   while (context2D != (UInt8 *)0x0) {
     ((IOATIR5002DContext *)(context2D))->remove_surface();
     next2D = M<UInt8 *>(context2D + 0x84);
     M<UInt32>(context2D + 0x84) = 0;
     context2D = next2D;
   }
-  if (M<UInt8 *>(self + 0x90) != (UInt8 *)0x0) {
-    ((IOATIR500DVDContext *)(M<UInt8 *>(self + 0x90)))->remove_surface();
+  if (M<UInt8 *>(self + kIOATIR500Surface_boundDVDContext) != (UInt8 *)0x0) {
+    ((IOATIR500DVDContext *)(M<UInt8 *>(self + kIOATIR500Surface_boundDVDContext)))->remove_surface();
   }
   iVar6 = 0;
   cursor = self;
@@ -140,7 +140,7 @@ void IOATIR500Surface::stop(IOService *provider) {
     cursor = cursor + 0x78;
     iVar6 = iVar6 + 1;
   } while (notLast);
-  if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xcc) != 0) {
+  if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc) != 0) {
     panelIndex = 0;
     panel = PANEL_RECORD(self, 0);
     regionSlot = self;
@@ -150,7 +150,7 @@ void IOATIR500Surface::stop(IOService *provider) {
       }
       if (M<SInt32>(regionSlot + 0xd60) != 0) {
         GH_IOFreeAligned(M<SInt32>(regionSlot + 0xd60),M<UInt32>(regionSlot + 0xd64));
-        iVar6 = M<SInt32>(self + 0xd50);
+        iVar6 = M<SInt32>(self + kIOATIR500Surface_accelerator);
         if (iVar6 != 0) {
           M<SInt32>(iVar6 + 0x804) = M<SInt32>(iVar6 + 0x804) - M<SInt32>(regionSlot + 0xd64);
         }
@@ -160,9 +160,9 @@ void IOATIR500Surface::stop(IOService *provider) {
       panelIndex = panelIndex + 1;
       panel = panel + 1;
       regionSlot = regionSlot + 8;
-    } while (panelIndex < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
+    } while (panelIndex < M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc));
   }
-  if (M<SInt32>(self + 0xd8c) != 0) {
+  if (M<SInt32>(self + kIOATIR500Surface_orphanedBacking) != 0) {
     this->free_buffer_backing_orphans();
   }
   IOUserClient::stop(provider);

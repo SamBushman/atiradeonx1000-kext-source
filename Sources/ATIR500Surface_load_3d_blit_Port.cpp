@@ -81,7 +81,7 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
   dest[0xf] = 0x1006;
   dest[10] = M<UInt32>((UInt8 *)kLoad3dMspos1Table +
                           (uVar4 >> 0x12 & 0x3c));
-  uVar10 = M<UInt32>(M<SInt32>(self + 0xd50) + 0xb74);
+  uVar10 = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
   dest[0x11] = 0x13c7;
   dest[0x12] = 0xc;
   dest[0x14] = 0;
@@ -106,7 +106,7 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
   dest[0x19] =
        ((UInt8)bufferBytes[0x38] & 6) << 0x10 |
        ((UInt8)bufferBytes[0x38] & 1) << 0x10 | ((UInt8)bufferBytes[0x39] & 3) << 0x13 | uVar7 & 0x3ffc;
-  accelerator = M<SInt32>(self + 0xd50);
+  accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
   iVar8 = M<SInt32>(accelerator + 0xb98);
   if (bVar1) {
     uVar4 = (UInt32)M<UInt16>(bufferBytes + 0x14) / (uVar4 >> 0x14 & 0xf);

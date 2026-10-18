@@ -1,0 +1,119 @@
+# Names for the direct object-field offsets (self + 0xOFF) of the surface classes, IOATIR500Shared and ATIR500Memory.
+# field<TAB>classes<TAB>offset<TAB>name<TAB>tier<TAB>evidence. Offsets in the buffers[] array are named buffer<N><Field> after ATIR500SurfaceBuffer (ATIRadeonX1000Types.h).
+# Not named: +0xac8 and similar loop bounds (23 * 0x78) and decimal offsets (self + 200) - the applier only rewrites hex literals.
+field	IOATIR500Surface,ATIR500Surface	0x78	task	CONFIRMED	the task argument of IOMemoryDescriptor::withAddress in connect_buffer_backing_store, and of the map call in reset_access
+field	IOATIR500Surface,ATIR500Surface	0x7c	stamp	INFERRED	copy_buffer_using_DMA stores the submit stamp here; attach/alloc_buffer_backing_store tag each backing store (+0x54) with it (set_shape: stamp-1 when StaleBacking)
+field	IOATIR500Surface,ATIR500Surface	0x80	submittedStamp	INFERRED	handed to the accelerator wait call (vtable +0x558) by flush_surface/set_shape_backing_length_ext; submit_flip_buffer stores the new stamp
+field	IOATIR500Surface,ATIR500Surface	0x84	flushedStamp	INFERRED	flush_surface copies +0x80 here; surface_flush reads it under the lock and waits for it (vtable +0x54c)
+field	IOATIR500Surface,ATIR500Surface	0x88	glContextList	CONFIRMED	add_gl_context_to_list links the context at the head of this list; invalidate_contexts walks it (next pointer at context+0x84)
+field	IOATIR500Surface,ATIR500Surface	0x8c	context2DList	CONFIRMED	add_2d_context_to_list links the context at the head of this list
+field	IOATIR500Surface,ATIR500Surface	0x90	boundDVDContext	CONFIRMED	Headers/IOATIR500Surface.h: the single bound IOATIR500DVDContext, set by set_dvd_context / cleared by remove_dvd_context
+field	IOATIR500Surface,ATIR500Surface	0x9c	surfaceListNext	CONFIRMED	set_volatile_state moves the surface to the head of the accelerator's circular surface list (accelerator+0x5c) through +0x9c/+0xa0
+field	IOATIR500Surface,ATIR500Surface	0xa0	surfaceListPrev	CONFIRMED	set_volatile_state: previous link of the same circular list
+field	IOATIR500Surface,ATIR500Surface	0xa4	requestedId	INFERRED	set_id_mode stores the requested id here when the mode bits ask for a window surface (the stored panel then becomes 0xffff); start() sets 0xffffffe0; read_buffer waits for the hardware when it is >= 0x100
+field	IOATIR500Surface,ATIR500Surface	0xa8	buffers	CONFIRMED	Headers/IOATIR500Surface.h: the 23-entry ATIR500SurfaceBuffer array (stride 0x78); buffer index = (buffer - (this+0xa8)) / 0x78
+field	IOATIR500Surface,ATIR500Surface	0xb0	buffer0GpuBase	CONFIRMED	buffers[0] + 0x08 (ATIR500SurfaceBuffer::gpuBaseAddress); read by build_swap
+field	IOATIR500Surface,ATIR500Surface	0xb8	buffer0Storage	INFERRED	buffers[0] + 0x10: nonzero = the buffer has storage (read_buffer / surface_lock_options fail with 0xe00002cc when it is 0); set_id_mode reads it for buffer 0
+field	IOATIR500Surface,ATIR500Surface	0xbc	buffer0Width	CONFIRMED	buffers[0] + 0x14 (ATIR500SurfaceBuffer::width); build_swap divides it by the tiling degree
+field	IOATIR500Surface,ATIR500Surface	0xbe	buffer0BytesPerRow	CONFIRMED	buffers[0] + 0x16 (ATIR500SurfaceBuffer::bytesPerRow); build_swap 0x20 / this
+field	IOATIR500Surface,ATIR500Surface	0xc4	buffer0HeightOrRows	CONFIRMED	buffers[0] + 0x1c (ATIR500SurfaceBuffer::heightOrRows)
+field	IOATIR500Surface,ATIR500Surface	0xc6	buffer0Extra1e	CONFIRMED	buffers[0] + 0x1e (ATIR500SurfaceBuffer::extra1e)
+field	IOATIR500Surface,ATIR500Surface	0xcc	buffer0BackingStore	CONFIRMED	buffers[0] + 0x24 (ATIR500SurfaceBuffer::backingStoreHandle); copy_buffer_to/from_backing_store and freeToAllocGART walk this field of every buffer (stride 0x78)
+field	IOATIR500Surface,ATIR500Surface	0xd0	buffer0HzBlockField	CONFIRMED	buffers[0] + 0x28 (ATIR500SurfaceBuffer::hzBlockField); start() initialises the field of every buffer in a loop
+field	IOATIR500Surface,ATIR500Surface	0xe4	buffer0TilingDegreeBits	CONFIRMED	buffers[0] + 0x3c (ATIR500SurfaceBuffer::tilingDegreeBits): build_swap tests & 0xf00000 and takes >> 0x14 & 0xf
+field	IOATIR500Surface,ATIR500Surface	0xe8	buffer0MipOffset0	CONFIRMED	buffers[0] + 0x40 (ATIR500SurfaceBuffer::mipOffsets[0]); build_swap base-address maths
+field	IOATIR500Surface,ATIR500Surface	0x120	buffer1	CONFIRMED	buffers[1] (0xa8 + 0x78); prune_buffers/resetFullScreen point attachmentBuffers[1] at it
+field	IOATIR500Surface,ATIR500Surface	0x128	buffer1GpuBase	CONFIRMED	buffers[1] + 0x08 (gpuBaseAddress)
+field	IOATIR500Surface,ATIR500Surface	0x130	buffer1Storage	INFERRED	buffers[1] + 0x10, the counterpart of buffer0Storage read by set_id_mode when the request bit 2 is set
+field	IOATIR500Surface,ATIR500Surface	0x134	buffer1Width	CONFIRMED	buffers[1] + 0x14 (width)
+field	IOATIR500Surface,ATIR500Surface	0x136	buffer1BytesPerRow	CONFIRMED	buffers[1] + 0x16 (bytesPerRow)
+field	IOATIR500Surface,ATIR500Surface	0x13c	buffer1HeightOrRows	CONFIRMED	buffers[1] + 0x1c (heightOrRows)
+field	IOATIR500Surface,ATIR500Surface	0x13e	buffer1Extra1e	CONFIRMED	buffers[1] + 0x1e (extra1e)
+field	IOATIR500Surface,ATIR500Surface	0x140	buffer1BasePitch	CONFIRMED	buffers[1] + 0x20 (basePitch); build_swap: basePitch * mipOffsets[0] + gpuBaseAddress
+field	IOATIR500Surface,ATIR500Surface	0x144	buffer1BackingStore	CONFIRMED	buffers[1] + 0x24 (backingStoreHandle); reset_req_bits tests it
+field	IOATIR500Surface,ATIR500Surface	0x15c	buffer1TilingDegreeBits	CONFIRMED	buffers[1] + 0x3c (tilingDegreeBits)
+field	IOATIR500Surface,ATIR500Surface	0x160	buffer1MipOffset0	CONFIRMED	buffers[1] + 0x40 (mipOffsets[0])
+field	IOATIR500Surface,ATIR500Surface	0x288	buffer4	CONFIRMED	buffers[4] (0xa8 + 4 * 0x78); prune_buffers/resetFullScreen point attachmentBuffers[4] at it
+field	IOATIR500Surface,ATIR500Surface	0x300	buffer5	CONFIRMED	buffers[5]; attachmentBuffers[5] points at it
+field	IOATIR500Surface,ATIR500Surface	0x4e0	buffer9	CONFIRMED	buffers[9]: the buffer free_buffer_backing_store is called on in shape_surface; dealloc_surface compares surfaceIndex == 9 and tests its HZ field (+0x508)
+field	IOATIR500Surface,ATIR500Surface	0x4f0	buffer9Storage	INFERRED	buffers[9] + 0x10 (storage word, see buffer0Storage); shape_surface compares it with the new size
+field	IOATIR500Surface,ATIR500Surface	0x4f4	buffer9Width	CONFIRMED	buffers[9] + 0x14 (width); shape_surface
+field	IOATIR500Surface,ATIR500Surface	0x4f6	buffer9BytesPerRow	CONFIRMED	buffers[9] + 0x16 (bytesPerRow)
+field	IOATIR500Surface,ATIR500Surface	0x4f8	buffer9Pitch	INFERRED	buffers[9] + 0x18; shape_surface stores the pitch in bytes there
+field	IOATIR500Surface,ATIR500Surface	0x4fc	buffer9HeightOrRows	CONFIRMED	buffers[9] + 0x1c (heightOrRows)
+field	IOATIR500Surface,ATIR500Surface	0x4fe	buffer9Extra1e	CONFIRMED	buffers[9] + 0x1e (extra1e)
+field	IOATIR500Surface,ATIR500Surface	0x504	buffer9BackingStore	CONFIRMED	buffers[9] + 0x24 (backingStoreHandle)
+field	IOATIR500Surface,ATIR500Surface	0x508	buffer9HzBlockField	CONFIRMED	buffers[9] + 0x28 (hzBlockField); dealloc_surface compares & 0x3ff00000 with 0x3ff00000
+field	IOATIR500Surface,ATIR500Surface	0x51c	buffer9TilingDegreeBits	CONFIRMED	buffers[9] + 0x3c (tilingDegreeBits); shape_surface sets the degree bits & 0xff000fff | 0x111000
+field	IOATIR500Surface,ATIR500Surface	0x558	buffer10	CONFIRMED	buffers[10] (0xa8 + 10 * 0x78): lower bound of the buffer range copy_buffer_using_DMA tests
+field	IOATIR500Surface,ATIR500Surface	0x738	buffer14	CONFIRMED	buffers[14]: upper bound of the same range
+field	IOATIR500Surface,ATIR500Surface	0x844	buffer16HeightOrRows	CONFIRMED	buffers[16] + 0x1c; shape_surface writes 0x2d0 for bufferId 0x10 (+0x1e gets 0x240 or 0x1e0)
+field	IOATIR500Surface,ATIR500Surface	0x846	buffer16Extra1e	CONFIRMED	buffers[16] + 0x1e
+field	IOATIR500Surface,ATIR500Surface	0x936	buffer18Extra1e	CONFIRMED	buffers[18] + 0x1e; shape_surface for bufferId 0x12
+field	IOATIR500Surface,ATIR500Surface	0xb74	attachmentBuffer1	CONFIRMED	attachmentBuffers[1] (the table at +0xb70)
+field	IOATIR500Surface,ATIR500Surface	0xb80	attachmentBuffer4	CONFIRMED	attachmentBuffers[4]
+field	IOATIR500Surface,ATIR500Surface	0xb84	attachmentBuffer5	CONFIRMED	attachmentBuffers[5]; submit_flip_buffer reads the buffer's +8 base from it
+field	IOATIR500Surface,ATIR500Surface	0xb94	fixedSurfaceBuffer	CONFIRMED	Headers/IOATIR500Surface.h: attachmentBuffers[9], the buffer back_resolve_fsaa_buffer always uses
+field	IOATIR500Surface,ATIR500Surface	0xbcc	backingStoreList	INFERRED	head of a singly linked list of backing stores (next at +0x54); start() clears it, dealloc_surface/reset_req_bits walk it
+field	IOATIR500Surface,ATIR500Surface	0xbd0	lockFlags	INFERRED	byte 0 = read-lock state tested by surface_lock_options (byte 1 is +0xbd1); the word & 0xffff0000 != 0 makes set_id_mode / set_shape fail with 0xe00002cc
+field	IOATIR500Surface,ATIR500Surface	0xbd1	writeLockHeld	INFERRED	surface_lock_options picks self[0xbd0] for a read lock and self[0xbd1] otherwise; non-zero fails the lock
+field	IOATIR500Surface,ATIR500Surface	0xbd2	unknown_0xbd2	UNKNOWN	start() clears this halfword; no other reader seen
+field	IOATIR500Surface,ATIR500Surface	0xbd4	width	CONFIRMED	set_scaling stores IOAccelSurfaceScaling.buffer.w here, set_shape_backing_length_ext the region width; build_swap/shape_surface read it as surfaceWidth
+field	IOATIR500Surface,ATIR500Surface	0xbd6	height	CONFIRMED	set_scaling stores buffer.h, set_shape the region height; build_swap/shape_surface read it as surfaceHeight
+field	IOATIR500Surface,ATIR500Surface	0xbd8	committedWidth	INFERRED	copy of +0xbd4 made by set_scaling/set_shape/set_id_mode after a size change
+field	IOATIR500Surface,ATIR500Surface	0xbda	committedHeight	INFERRED	copy of +0xbd6; copy_buffer_using_DMA compares height with it
+field	IOATIR500Surface,ATIR500Surface	0xbdc	scalingBufferX	CONFIRMED	set_scaling: IOAccelSurfaceScaling.buffer.x (scaling+0), 0 when scaling is off
+field	IOATIR500Surface,ATIR500Surface	0xbde	scalingBufferY	CONFIRMED	set_scaling: IOAccelSurfaceScaling.buffer.y (scaling+2)
+field	IOATIR500Surface,ATIR500Surface	0xbe0	scalingSourceWidth	CONFIRMED	set_scaling: IOAccelSurfaceScaling.source.w (scaling+8); full width when scaling is off; build_swap divides by it
+field	IOATIR500Surface,ATIR500Surface	0xbe2	scalingSourceHeight	CONFIRMED	set_scaling: IOAccelSurfaceScaling.source.h (scaling+10)
+field	IOATIR500Surface,ATIR500Surface	0xbe4	regionWidth	INFERRED	set_shape_backing_length_ext stores the IOAccelDeviceRegion bounds width (region+8) here
+field	IOATIR500Surface,ATIR500Surface	0xbe6	regionHeight	INFERRED	set_shape_backing_length_ext stores the region bounds height (region+10)
+field	IOATIR500Surface,ATIR500Surface	0xbe8	modeBits	CONFIRMED	set_id_mode stores its modeBitsValue here; bit 0x20 = window surface, 0x8000 registers the surface with the panel
+field	IOATIR500Surface,ATIR500Surface	0xbec	scalingState	INFERRED	byte 0 = scaling active (set_scaling writes 0/1); read as a word by set_scaling to derive +0xbed
+field	IOATIR500Surface,ATIR500Surface	0xbee	scalingFlags	INFERRED	set_scaling stores flags & 1 here; set_shape_backing_length_ext tests the halfword
+field	IOATIR500Surface,ATIR500Surface	0xbf8	stateBits	CONFIRMED	Headers/IOATIR500Surface.h: the +0xbf8 state-bits field (buffers allocated bits; 0x10000000 = needs allocation, 0x20000000 = allocation failed)
+field	IOATIR500Surface,ATIR500Surface	0xbfc	shapeBits	CONFIRMED	set_shape_backing_length_ext stores its shapeBits argument here; set_id_mode/start clear it
+field	IOATIR500Surface,ATIR500Surface	0xc00	accessDescriptor	INFERRED	set_access copies accelerator+0xdc here; reset_access maps it (vtable +0x14c / +0x150)
+field	IOATIR500Surface,ATIR500Surface	0xc04	lock	CONFIRMED	IOLock* taken with IOLockLock/IOLockSleep/IOLockWakeup by set_surface_blocking and sleep_blocked
+field	IOATIR500Surface,ATIR500Surface	0xc0c	userMapAddress	INFERRED	reset_access: address of the user-task mapping (+0xd84) of accessDescriptor
+field	IOATIR500Surface,ATIR500Surface	0xc10	kernelMapAddress	INFERRED	reset_access: address of the kernel mapping (+0xd88)
+field	IOATIR500Surface,ATIR500Surface	0xc14	panel	CONFIRMED	panel index (0xffff = none): indexes the accelerator's per-panel tables (*0x20 + 0xe8, *0x78 + 300, *0x18 + 0xb10) and PanelRecord; set_id_mode stores it
+field	IOATIR500Surface,ATIR500Surface	0xc18	contextReqBits	INFERRED	OR of the bound contexts' requirement bits (context+0x8c), maintained by add_*_context_to_list / reset_req_bits
+field	IOATIR500Surface,ATIR500Surface	0xc1c	reqBits	INFERRED	buffers wanted: & 3 is passed to alloc_surfaces_pageq/alloc_surfaces_retry (bit 0 = buffer 0, bit 1 = buffer 1); 0x10000000/0x20000000 flags
+field	IOATIR500Surface,ATIR500Surface	0xd48	volatileState	CONFIRMED	set_volatile_state stores its eSurfaceVolatileState argument here
+field	IOATIR500Surface,ATIR500Surface	0xd4c	backingLength	INFERRED	set_shape_backing_length_ext stores the backing length; connect_buffer_backing_store uses it instead of the computed length when non-zero
+field	IOATIR500Surface,ATIR500Surface	0xd50	accelerator	CONFIRMED	Headers/IOATIR500Surface.h: the ATIRadeonX1000 this surface belongs to
+field	IOATIR500Surface,ATIR500Surface	0xd54	flipContext	INFERRED	submit_flip_buffer stores the submitting context here; submit_swap_buffer clears it and sets bit 0 of the batch header word at +0x1c
+field	IOATIR500Surface,ATIR500Surface	0xd58	vramInitSucceeded	CONFIRMED	Headers/IOATIR500Surface.h: set to 1 on the success path of start(), 0 in stop(); clientClose tests it
+field	IOATIR500Surface,ATIR500Surface	0xd5c	methodTable	CONFIRMED	Headers/IOATIR500Surface.h: the external-method table getTargetAndMethodForIndex indexes (selector * 0x18)
+field	IOATIR500Surface,ATIR500Surface	0xd60	regionRecords	CONFIRMED	array of {region record pointer, size} per id (id * 8 + 0xd60); the record holds the id's width/height at +8/+10 (set_scaling, start)
+field	IOATIR500Surface,ATIR500Surface	0xd64	regionRecordSize0	INFERRED	size word of regionRecords[0]; getFramebufferIndex tests it
+field	IOATIR500Surface,ATIR500Surface	0xd70	lockDataFlags	INFERRED	returned in IOAccelSurfaceData word 8 by surface_lock_options; bit 2 forces a reshape in set_shape_backing_length_ext; start() clears it
+field	IOATIR500Surface,ATIR500Surface	0xd74	unknown_0xd74	UNKNOWN	copied to IOAccelSurfaceData word 0xd by surface_lock_options; meaning not established
+field	IOATIR500Surface,ATIR500Surface	0xd78	unknown_0xd78	UNKNOWN	copied to IOAccelSurfaceData word 0xe
+field	IOATIR500Surface,ATIR500Surface	0xd7c	unknown_0xd7c	UNKNOWN	copied to IOAccelSurfaceData word 0xf
+field	IOATIR500Surface,ATIR500Surface	0xd80	unknown_0xd80	UNKNOWN	read by surface_lock_options after the lock; meaning not established
+field	IOATIR500Surface,ATIR500Surface	0xd84	userMap	CONFIRMED	reset_access: IOMemoryMap* of accessDescriptor in the user task (vtable +0x14c); released through vtable +0x18
+field	IOATIR500Surface,ATIR500Surface	0xd88	kernelMap	CONFIRMED	reset_access: IOMemoryMap* in the kernel task (vtable +0x150)
+field	IOATIR500Surface,ATIR500Surface	0xd8c	orphanedBacking	INFERRED	free_buffer_backing_store parks a backing store that is still referenced here; free_buffer_backing_orphans frees it
+field	ATIR500Surface	0x94	overlayTop	INFERRED	dvd_setup_overlay/setup_buffers store it (setup_buffers: topHeight); the DVD pcb computes the field height as (+0x9a) - (+0x94). NOTE dvd_setup_overlay's x,y,w,h parameter names disagree with the consumers (x lands here)
+field	ATIR500Surface	0x96	overlayRight	INFERRED	setup_buffers: rightWidth; the DVD pcb tests +0x98 != +0x96 as "has width" (dvd_setup_overlay stores h here)
+field	ATIR500Surface	0x98	overlayLeft	INFERRED	setup_buffers: leftWidth (dvd_setup_overlay stores y here)
+field	ATIR500Surface	0x9a	overlayBottom	INFERRED	setup_buffers: bottomHeight; field height = +0x9a - +0x94 (dvd_setup_overlay stores w here)
+field	ATIR500Surface	0xd90	currentBufferIndex	INFERRED	the DVD pcb stores the record's buffer index here (recordCursor[1]); get_surf_desc_regs indexes buffers[...] with it
+field	ATIR500Surface	0xd94	overlayHandle	CONFIRMED	dvd_setup_overlay sets it to 1, free_overlay clears it (Sources/ATIR500Surface_Overlay2.cpp: the overlay handle)
+field	ATIR500Surface	0xda4	overlayExists	CONFIRMED	the overlayExists argument stored by ATIR500DVDContext::dvd_setup_overlay; build_swap/shape_surface test it
+field	ATIR500Surface	0xda8	unknown_0xda8	UNKNOWN	start() clears it; no other access seen
+field	ATIR500Surface	0xdac	deintMode	CONFIRMED	enable_deint stores its mode argument here; copy_buffer_using_DMA / shape_surface test it
+field	ATIR500Surface	0xdb4	swapBatchBuilt	INFERRED	build_swap sets it to 1 once a batch is queued (0 on entry); submit_swap_buffer clears accelerator+0x78 when set
+field	ATIR500Surface	0xdb8	panelSide	INFERRED	setupFullScreen saves the accelerator panel record's side byte (+0x164) here; start() sets 1
+field	IOATIR500Shared	0xc	accelerator	INFERRED	owner: alloc_handles adds the table size to accelerator+0x808 (memory accounting)
+field	IOATIR500Shared	0x10	handleTable	CONFIRMED	alloc_handles / alloc_buf_handle: pointer table indexed by handle (handle * 4 + table)
+field	IOATIR500Shared	0x14	handleCapacity	CONFIRMED	alloc_handles: 0 -> 0x400, then doubled; bitmap bits = capacity
+field	IOATIR500Shared	0x18	handleBitmap	CONFIRMED	alloc_handles: bitmap placed after the table; alloc_buf_handle scans it
+field	IOATIR500Shared	0x1c	handleHint	INFERRED	alloc_buf_handle: next handle to try (word index = hint >> 5); set to handle + 1
+field	IOATIR500Shared	0x20	chunkList	CONFIRMED	Headers/IOATIR500Shared.h: list of 0x2000-byte shared chunks (alloc_client_shared)
+field	IOATIR500Shared	0x24	textureListHead	CONFIRMED	Headers/IOATIR500Shared.h: head of the doubly linked texture list (delete_texture; next at texture+0x3c)
+field	ATIR500Memory	0xc	spareNodeStack	CONFIRMED	Sources/ATIR500Memory header: head of the stack of unused BoundaryNode records; add_to_stack refills it
+field	ATIR500Memory	0x10	chunkList	CONFIRMED	Headers/ATIR500Memory.h: this+0x10 chunk list freed by free() / grown by init()
+field	IOATIR500Surface,ATIR500Surface	0xb70	attachmentBuffers	CONFIRMED	pointer table indexed by attachment; bound_surface in the difftest worlds and read_buffer (surface + attachment * 4 + 0xb70) use it

@@ -37,7 +37,7 @@ UInt32 ATIR500Memory::reserve(GLKMemoryElement *elem, UInt32 offset, UInt32 size
   SInt32 *piVar4;
   SInt32 *node;
   
-  if ((M<SInt32>(self + 0xc) != 0) || (iVar2 = this->add_to_stack(), iVar2 != 0)) {
+  if ((M<SInt32>(self + kATIR500Memory_spareNodeStack) != 0) || (iVar2 = this->add_to_stack(), iVar2 != 0)) {
     reserveEnd = offset + size;
     piVar4 = *(SInt32 **)*M<UInt32 *>(self + 8);
 joined_r0x000192c4:
@@ -57,8 +57,8 @@ joined_r0x000192c4:
               piVar4[1] = (SInt32)elemBytes;
               return 1;
             }
-            puVar1 = M<UInt32 *>(self + 0xc);
-            M<UInt32>(self + 0xc) = *puVar1;
+            puVar1 = M<UInt32 *>(self + kATIR500Memory_spareNodeStack);
+            M<UInt32>(self + kATIR500Memory_spareNodeStack) = *puVar1;
             *puVar1 = (UInt32)(piVar4);
             piVar4[1] = (SInt32)puVar1;
             M<UInt32 *>(elemBytes) = puVar1;
@@ -74,12 +74,12 @@ joined_r0x000192c4:
             M<UInt32 *>(elemBytes + 4) = puVar1;
             *puVar1 = (UInt32)(elemBytes);
             piVar4[1] = (SInt32)elemBytes;
-            iVar2 = M<SInt32>(self + 0xc);
+            iVar2 = M<SInt32>(self + kATIR500Memory_spareNodeStack);
             node[3] = 0;
             node[1] = 0;
             node[2] = 0;
             *node = iVar2;
-            M<SInt32 *>(self + 0xc) = node;
+            M<SInt32 *>(self + kATIR500Memory_spareNodeStack) = node;
             return 1;
           }
           M<SInt32 *>(elemBytes) = node;

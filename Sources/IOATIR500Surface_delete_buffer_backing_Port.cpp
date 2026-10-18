@@ -35,10 +35,10 @@ void IOATIR500Surface::delete_buffer_backing(IOTextureBuffer *buffer) {
   SInt32 nextBuffer;
   
   if (M<SInt32>(bufferBytes + 4) != 0) {
-    iVar1 = VCALL(*M<SInt32 *>(self + 0xd50), 0x554)
-                      (M<SInt32 *>(self + 0xd50),M<UInt32>(M<SInt32>(bufferBytes + 0x14) + 8));
+    iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
+                      (M<SInt32 *>(self + kIOATIR500Surface_accelerator),M<UInt32>(M<SInt32>(bufferBytes + 0x14) + 8));
     if (iVar1 == 0) {
-      ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->addOrphanTexture((IOTextureBuffer *)(bufferBytes));
+      ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->addOrphanTexture((IOTextureBuffer *)(bufferBytes));
       if (bufferBytes[0x20] != 0x0) {
         return;
       }
@@ -51,10 +51,10 @@ void IOATIR500Surface::delete_buffer_backing(IOTextureBuffer *buffer) {
       return;
     }
     if (M<SInt32>(bufferBytes + 4) != 0) {
-      VCALL(*M<SInt32 *>(self + 0xd50), 0x5ac)(M<SInt32 *>(self + 0xd50),bufferBytes);
+      VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),bufferBytes);
     }
   }
   VCALL(*M<SInt32 *>(bufferBytes + 8), 0x18)(M<SInt32 *>(bufferBytes + 8));
-  VCALL(*M<SInt32 *>(self + 0xd50), 0x574)(M<SInt32 *>(self + 0xd50),bufferBytes,0xc0);
+  VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x574)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),bufferBytes,0xc0);
   return;
 }

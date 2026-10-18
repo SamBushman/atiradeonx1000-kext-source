@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-16 20:26:02.244608785 -0700
-+++ b/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-16 20:26:02.246001372 -0700
+--- a/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-17 20:01:16.270419693 -0700
++++ b/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-17 20:01:16.271729456 -0700
 @@ -38,7 +38,6 @@
    UInt32 panelIndex;
    UInt32 bufferIndex;
@@ -31,9 +31,9 @@
 +          /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]; with more than one buffer per panel this walks past the record (stock behaviour, kept) */
 +          SwapBufferEntry *slot = &rec->entries[bufferIndex + 1];
            do {
--            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(backingStore),(VendorTransferBuffer *)(neededBytes),
+-            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(backingStore),(VendorTransferBuffer *)(neededBytes),
 -                               M<UInt32>(pIVar7),aggressive);
-+            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
++            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
 +                               slot->stamp,aggressive);
              if (slotFreed != 0) {
                return 1;
@@ -44,7 +44,7 @@
 +            slot = slot + 1;
              iVar2 = iVar2 + 1;
            } while (notLastSlot);
-           accelerator = M<UInt8 *>(self + 0xd50);
+           accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
            bufferIndex = bufferIndex + 1;
 -          cursor = cursor + 0x1c;
          } while (bufferIndex < M<UInt32>(accelerator + panelIndex * 4 + 0x114));

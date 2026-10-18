@@ -81,7 +81,7 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs
     iVar19 = 6;
     pOVar11 = infoBytes;
     do {
-      uVar5 = M<UInt32>(self + M<int>(self + 0xd90) * 0x78 + 0x560);
+      uVar5 = M<UInt32>(self + M<int>(self + kATIR500Surface_currentBufferIndex) * 0x78 + 0x560);
       M<UInt32>(pOVar11 + 0x70) = uVar10;
       M<UInt32>(pOVar11 + 0x88) = 0;
       M<UInt32>(pOVar11 + 0x58) = uVar5;
@@ -144,7 +144,7 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs
     pOVar11 = infoBytes;
     do {
       M<int>((int)local_e8 + iVar14) = iVar17;
-      uVar5 = M<UInt32>(self + 0x128);
+      uVar5 = M<UInt32>(self + kIOATIR500Surface_buffer1GpuBase);
       M<UInt32>(pOVar11 + 0x70) = uVar10;
       M<UInt32>(pOVar11 + 0x88) = 0;
       M<UInt32>(pOVar11 + 0xa0) = 0;

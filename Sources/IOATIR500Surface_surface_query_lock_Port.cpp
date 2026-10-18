@@ -36,11 +36,11 @@ IOReturn IOATIR500Surface::surface_query_lock() {
   SInt32 allocated;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  if (((M<UInt32>(self + 0xbd0) & 0xffff0000) == 0) &&
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+  if (((M<UInt32>(self + kIOATIR500Surface_lockFlags) & 0xffff0000) == 0) &&
      (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) + 0x10) != 0)) {
-    if ((M<UInt32>(self + 0xbf8) & 0x20000000) == 0) {
-      uVar1 = M<UInt32>(self + 0xbf8) & M<UInt32>(self + 0xc1c);
+    if ((M<UInt32>(self + kIOATIR500Surface_stateBits) & 0x20000000) == 0) {
+      uVar1 = M<UInt32>(self + kIOATIR500Surface_stateBits) & M<UInt32>(self + kIOATIR500Surface_reqBits);
       if ((uVar1 & 3) != 0) {
         uVar1 = uVar1 & 1 ^ 1;
         if ((M<SInt32>(self + uVar1 * 0x78 + 0xb8) != 0) &&
@@ -62,6 +62,6 @@ IOReturn IOATIR500Surface::surface_query_lock() {
 LAB_00015270:
   result = 0xe00002cc;
 LAB_00015280:
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
   return result;
 }

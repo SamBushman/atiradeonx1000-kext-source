@@ -36,7 +36,7 @@ bool IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer *buffer) 
   SInt32 backingStore;
   
   memory = (UInt8 *)
-           GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(M<SInt32>(self + 0xd50) + 0x220),0x10063,
+           GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x220),0x10063,
                         (GH_page_size + M<SInt32>(bufferBytes + 0x10)) - 1U & -GH_page_size,
                         GH_page_size);   /* #175: 4th argument (alignment) - stock leaves r6 = _page_size live from the capacity computation (0x12944: r6 never rewritten); Ghidra dropped it */
   if (memory != (UInt8 *)0x0) {
@@ -44,10 +44,10 @@ bool IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer *buffer) 
     this->attach_buffer_backing_store((ATIR500SurfaceBuffer *)(bufferBytes),(IOMemoryDescriptor *)(memory),0,(UInt32)M<UInt16>(bufferBytes + 0x18));
     backingStore = M<SInt32>(bufferBytes + 0x24);
     M<UInt8>(backingStore + 0x59) = 0;
-    M<SInt32>(backingStore + 0x54) = M<SInt32>(self + 0x7c) + -1;
+    M<SInt32>(backingStore + 0x54) = M<SInt32>(self + kIOATIR500Surface_stamp) + -1;
   }
   else {
-    VCALL(M<SInt32>(self), 0x5cc)(self,((SInt32)bufferBytes - (SInt32)(self + 0xa8) >> 3) * -0x11111111)
+    VCALL(M<SInt32>(self), 0x5cc)(self,((SInt32)bufferBytes - (SInt32)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111)
     ;
   }
   return memory != (UInt8 *)0x0;

@@ -32,15 +32,15 @@ void IOATIR500Surface::invalidate_contexts() {
 
   SInt32 *context;
   
-  M<UInt32>(M<SInt32>(self + 0xd50) + 0x78) = 0;
-  for (context = M<SInt32 *>(self + 0x8c); context != (SInt32 *)0x0; context = (SInt32 *)context[0x21]) {
+  M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
+  for (context = M<SInt32 *>(self + kIOATIR500Surface_context2DList); context != (SInt32 *)0x0; context = (SInt32 *)context[0x21]) {
     VCALL(*context, 0x5a4)(context);
   }
-  for (context = M<SInt32 *>(self + 0x88); context != (SInt32 *)0x0; context = (SInt32 *)context[0x21]) {
+  for (context = M<SInt32 *>(self + kIOATIR500Surface_glContextList); context != (SInt32 *)0x0; context = (SInt32 *)context[0x21]) {
     VCALL(*context, 0x5a4)(context);
   }
-  if (M<SInt32 *>(self + 0x90) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(self + 0x90), 0x5a4)(M<SInt32 *>(self + 0x90));
+  if (M<SInt32 *>(self + kIOATIR500Surface_boundDVDContext) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(self + kIOATIR500Surface_boundDVDContext), 0x5a4)(M<SInt32 *>(self + kIOATIR500Surface_boundDVDContext));
   }
   return;
 }

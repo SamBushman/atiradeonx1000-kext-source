@@ -38,9 +38,9 @@ void IOATIR500Surface::map_transfer_to_GART(VendorTransferBuffer *buffer) {
    * clobbered since function entry (`mr r30,r4` copies without clearing it), so it's still the
    * real buffer value at the call. The naive 1-argument transcription dropped that implicit
    * second argument, which our own compiler does not replicate - restoring it explicitly. */
-  mapResult = VCALL(*M<SInt32 *>(self + 0xd50), 0x5a8)(M<SInt32 *>(self + 0xd50), bufferBytes);
+  mapResult = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x5a8)(M<SInt32 *>(self + kIOATIR500Surface_accelerator), bufferBytes);
   if (mapResult == 0) {
-    ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+    ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),(IOATIR500Surface *)(self),(IOATIR500Shared *)((UInt8 *)0x0),
                (VendorTransferBuffer *)(bufferBytes));
   }

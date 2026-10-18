@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-16 20:25:14.580632146 -0700
-+++ b/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-16 20:25:14.581834757 -0700
+--- a/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-17 19:57:18.362633142 -0700
++++ b/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-17 19:57:18.363820503 -0700
 @@ -32,7 +32,6 @@
  
    int iVar1;
@@ -10,8 +10,8 @@
    int iVar6;
 @@ -55,26 +54,27 @@
    }
-   if (M<int>(self + 0xd54) != 0) {
-     M<UInt32>(self + 0xd54) = 0;
+   if (M<int>(self + kIOATIR500Surface_flipContext) != 0) {
+     M<UInt32>(self + kIOATIR500Surface_flipContext) = 0;
 -    M<unsigned int>(M<int>(self + panel * 0x94 + 0xc34) + 0x1c) =
 -         M<unsigned int>(M<int>(self + panel * 0x94 + 0xc34) + 0x1c) | 1;
 +    M<unsigned int>((int)Vol(PANEL_RECORD(self, panel)->entries[0].header) + 0x1c) =
@@ -52,7 +52,7 @@
      }
 @@ -82,11 +82,11 @@
    else {
-     piVar17 = M<int *>(self + 0xd50);
+     piVar17 = M<int *>(self + kIOATIR500Surface_accelerator);
      iVar12 = piVar17[0x1e2];
 -    iVar6 = VCALL(*piVar17, 0x54c)(piVar17,M<UInt32>(self + iVar3 + 0xc4c));
 +    iVar6 = VCALL(*piVar17, 0x54c)(piVar17,Vol(slot->stamp));
@@ -72,8 +72,8 @@
 -  iVar6 = M<int>(self + iVar3 + 0xc50);
 +  iVar6 = (int)Vol(slot->header);
    cmd = (UInt32 *)(iVar6 + 0x20);
-   if ((((swapArg & 0x18) == 0) || (M<SInt16>(self + 0xbee) != 0)) ||
-      ((iVar12 = M<int>(self + 0xd50), M<char>(iVar12 + 0x9b0) != '\0' &&
+   if ((((swapArg & 0x18) == 0) || (M<SInt16>(self + kIOATIR500Surface_scalingFlags) != 0)) ||
+      ((iVar12 = M<int>(self + kIOATIR500Surface_accelerator), M<char>(iVar12 + 0x9b0) != '\0' &&
 @@ -144,7 +144,7 @@
        M<UInt32>(iVar6 + 0x44) = 0x80000008;
      }

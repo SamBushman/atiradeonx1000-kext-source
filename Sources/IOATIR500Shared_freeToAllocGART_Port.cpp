@@ -35,7 +35,7 @@ bool IOATIR500Shared::freeToAllocGART(VendorTransferBuffer *needed, bool aggress
   int freed;
   UInt8 *texture;
   
-  texture = M<UInt8 *>(self + 0x24);
+  texture = M<UInt8 *>(self + kIOATIR500Shared_textureListHead);
   do {
     if (texture == (UInt8 *)0x0) {
       return 0;
@@ -43,7 +43,7 @@ bool IOATIR500Shared::freeToAllocGART(VendorTransferBuffer *needed, bool aggress
     bufferType = texture[0x20];
     if (bufferType == 0x4) {
       M<UInt8>(M<int>(texture + 0x14) + 0x14) = 1;
-      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->freeTransferToAllocGART((VendorTransferBuffer *)(texture),(VendorTransferBuffer *)(neededBytes),
+      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Shared_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(texture),(VendorTransferBuffer *)(neededBytes),
                          M<UInt32>(M<int>(texture + 0x14) + 8),aggressive);
 joined_r0x000170d8:
       if (freed != 0) {
@@ -51,7 +51,7 @@ joined_r0x000170d8:
       }
     }
     else if ((bufferType == 0x7) || (bufferType == 0x3)) {
-      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->freeTransferToAllocGART((VendorTransferBuffer *)(texture),(VendorTransferBuffer *)(neededBytes),
+      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Shared_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(texture),(VendorTransferBuffer *)(neededBytes),
                          M<UInt32>(M<int>(texture + 0x14) + 0xc),aggressive);
       goto joined_r0x000170d8;
     }

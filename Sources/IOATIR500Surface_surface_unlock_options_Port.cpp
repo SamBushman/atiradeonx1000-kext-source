@@ -39,11 +39,11 @@ IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockType, UInt32 unl
   UInt32 result;
   int surfaceBuffer;
   
-  lockStatePtr = self + 0xbd0;
+  lockStatePtr = self + kIOATIR500Surface_lockFlags;
   if (lockType != 1) {
-    lockStatePtr = self + 0xbd1;
+    lockStatePtr = self + kIOATIR500Surface_writeLockHeld;
   }
-  GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   lockState = *lockStatePtr;
   if (lockState == 0x0) {
     result = 0xe00002cc;
@@ -51,7 +51,7 @@ IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockType, UInt32 unl
   else {
     surfaceBuffer = M<int>(self + kIOATIR500Surface_attachmentBuffers);
     if (lockState == 0x3) {
-      if (M<int>(self + 0xd8c) == 0) {
+      if (M<int>(self + kIOATIR500Surface_orphanedBacking) == 0) {
         if ((M<int>(surfaceBuffer + 0x24) != 0) &&
            (memory = M<int *>(M<int>(surfaceBuffer + 0x24) + 0x10), memory != (int *)0x0)) {
           VCALL(*memory, 0x18)(memory);
@@ -68,6 +68,6 @@ IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockType, UInt32 unl
     result = 0;
     *lockStatePtr = 0x0;
   }
-  GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   return result;
 }

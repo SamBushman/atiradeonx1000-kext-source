@@ -49,7 +49,7 @@ UInt32 ATIR500Surface::prepare_vram(ATIR500SurfaceBuffer *buffer) {
   if (1 < (UInt8)((char)AVar1 + 1U)) {
     return 1;
   }
-  iVar8 = M<SInt32>(self + 0xd50);
+  iVar8 = M<SInt32>(self + kIOATIR500Surface_accelerator);
   if (M<UInt8>(iVar8 + 0x990) == 0) {
 LAB_0003dcc0:
     bufferBytes[0x3c] = 0x0;
@@ -69,7 +69,7 @@ LAB_0003dcc0:
   }
   M<UInt32>(iVar8 + 0x890) = 1 << (uVar7 & 0x3f) | uVar9;
   bufferBytes[0x37] = SUB41m(uVar7,0);
-  accel = M<SInt32 *>(self + 0xd50);
+  accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   if (M<char>(accel + 0x20) == '\0') {
     return 1;
   }
@@ -135,10 +135,10 @@ switchD_0003dd5c_caseD_0:
     uVar9 = iVar6 + 3;
     packet[uVar7] = 0x80000000;
   }
-  accelBytes = M<UInt8 *>(self + 0xd50);
+  accelBytes = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   stamp = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet), M<SInt32>(accelBytes + 0x228) + 0x120, uVar9);
   M<UInt32>(accelBytes + 0x234) = stamp;
-  accel = M<SInt32 *>(self + 0xd50);
+  accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   VCALL(*accel, 0x54c)(accel,accel[0x8d]);
   return 1;
 }

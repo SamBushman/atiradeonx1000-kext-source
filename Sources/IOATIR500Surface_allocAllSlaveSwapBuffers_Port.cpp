@@ -47,7 +47,7 @@ UInt32 IOATIR500Surface::allocAllSlaveSwapBuffers(UInt32 panel, UInt32 swapBuffe
   memoryDescriptor = (SInt32 *)0x0;
   slotNumber = 0;
   counterOffset = panel * 4;
-  accelerator = M<SInt32>(self + 0xd50);
+  accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
   do {
     if (M<SInt32>(counterOffset + accelerator + 0x114) == 0) {
       if (memoryDescriptor == (SInt32 *)0x0) {
@@ -73,7 +73,7 @@ LAB_00011f54:
               v->header = (VendorSwapBufferHeader *)0x0;
               v->rectWordIndex = 0;
               v = v + 1;
-              accelerator = M<SInt32>(self + 0xd50);
+              accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
             } while (slotNumber < M<UInt32>(counterOffset + accelerator + 0x114));
           }
           victim = victim - 1;
@@ -90,7 +90,7 @@ LAB_00011f54:
           if (3 < slotNumber) {
             return 1;
           }
-          accelerator = M<SInt32>(self + 0xd50);
+          accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
           goto LAB_00011f54;
         }
         bufferIndex = bufferIndex + 1;
@@ -98,7 +98,7 @@ LAB_00011f54:
         slot->header = swapHeader;
         slot = slot + 1;
         this->init_swap_buffer_header((VendorSwapBufferHeader *)(swapHeader),swapBufferSize);
-        accelerator = M<SInt32>(self + 0xd50);
+        accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
       } while (bufferIndex < M<UInt32>(counterOffset + accelerator + 0x114));
     }
     isLastSlot = slotNumber == 3;

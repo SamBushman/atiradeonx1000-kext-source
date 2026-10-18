@@ -48,11 +48,11 @@ bool ATIR500Memory::init() {
         return false;
     }
 
-    UInt32 *chunk = *reinterpret_cast<UInt32 **>(self + 0x10);
+    UInt32 *chunk = *reinterpret_cast<UInt32 **>(self + kATIR500Memory_chunkList);
     while (chunk != 0) {
         UInt32 *nextChunk = reinterpret_cast<UInt32 *>(chunk[0]);
         GH_IOFreeAligned(chunk, 0x204);
-        *reinterpret_cast<UInt32 **>(self + 0x10) = nextChunk;
+        *reinterpret_cast<UInt32 **>(self + kATIR500Memory_chunkList) = nextChunk;
         chunk = nextChunk;
     }
     return true;
@@ -63,11 +63,11 @@ bool ATIR500Memory::init() {
 void ATIR500Memory::free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-    UInt32 *chunk = *reinterpret_cast<UInt32 **>(self + 0x10);
+    UInt32 *chunk = *reinterpret_cast<UInt32 **>(self + kATIR500Memory_chunkList);
     while (chunk != 0) {
         UInt32 *nextChunk = reinterpret_cast<UInt32 *>(chunk[0]);
         GH_IOFreeAligned(chunk, 0x204);
-        *reinterpret_cast<UInt32 **>(self + 0x10) = nextChunk;
+        *reinterpret_cast<UInt32 **>(self + kATIR500Memory_chunkList) = nextChunk;
         chunk = nextChunk;
     }
 

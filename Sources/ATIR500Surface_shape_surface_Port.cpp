@@ -82,16 +82,16 @@ void ATIR500Surface::shape_surface() {
   UInt32 alignedHeight;
   UInt32 overlayHeight;
   
-  M<UInt32>(M<SInt32>(self + 0xd50) + 0xb94) = 1;
-  windowMode = M<UInt32>(self + 0xbe8);
+  M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb94) = 1;
+  windowMode = M<UInt32>(self + kIOATIR500Surface_modeBits);
   if ((windowMode & 0x70000000) == 0) {
-    shapeMask = M<UInt32>(self + 0xc18);
+    shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   }
   else {
     windowMode = windowMode & 0xff83ffff;
-    M<UInt32>(self + 0xbe8) = windowMode;
-    shapeMask = M<UInt32>(self + 0xc18) & 0xfffffdff;
-    M<UInt32>(self + 0xc18) = shapeMask;
+    M<UInt32>(self + kIOATIR500Surface_modeBits) = windowMode;
+    shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits) & 0xfffffdff;
+    M<UInt32>(self + kIOATIR500Surface_contextReqBits) = shapeMask;
   }
   if ((windowMode & 0x7c0000) == 0) {
 LAB_0003c260:
@@ -115,10 +115,10 @@ LAB_0003c260:
         iVar23 = 1;
         heightScale = 1;
       }
-      if (0x1000 < (UInt32)(iVar23 * M<SInt16>(self + 0xbd4))) {
+      if (0x1000 < (UInt32)(iVar23 * M<SInt16>(self + kIOATIR500Surface_width))) {
         iVar23 = 1;
       }
-      if (0x1000 < heightScale * (SInt32)M<SInt16>(self + 0xbd6)) {
+      if (0x1000 < heightScale * (SInt32)M<SInt16>(self + kIOATIR500Surface_height)) {
         heightScale = 1;
       }
     }
@@ -149,7 +149,7 @@ LAB_0003c260:
     }
     uVar7 = FormatTableLookup_0x0004d2dc(iVar16 * 0x1c);
     uVar24 = 1 << (uVar7 >> 0xc & 7);
-    if (M<SInt16>(self + 0xbd6) < 0x20) {
+    if (M<SInt16>(self + kIOATIR500Surface_height) < 0x20) {
       if (AVar22 == 0x5) {
         AVar22 = 0x4;
       }
@@ -170,7 +170,7 @@ LAB_0003c260:
           bufferHeightScale = 1;
           iVar9 = 1;
         }
-        iVar14 = (SInt32)M<SInt16>(self + 0xbd4);
+        iVar14 = (SInt32)M<SInt16>(self + kIOATIR500Surface_width);
         iVar25 = iVar14;
         if (((windowMode & 0x700000) != 0) && (uVar26 == 6)) {
           iVar25 = iVar14 + 0x18;
@@ -179,11 +179,11 @@ LAB_0003c260:
         if ((rowBytes & 0xff) != 0) {
           rowBytes = (rowBytes & 0xffffff00) + 0x100;
         }
-        uVar19 = (UInt32)M<SInt16>(self + 0xbd6);
+        uVar19 = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
         rowBytes = iVar9 * rowBytes;
         uVar8 = uVar19;
         if ((uVar19 & 0x1f) != 0) {
-          uVar8 = (uVar19 - (SInt32)(SInt16)(M<SInt16>(self + 0xbd6) +
+          uVar8 = (uVar19 - (SInt32)(SInt16)(M<SInt16>(self + kIOATIR500Surface_height) +
                                         (SInt16)(((SInt32)uVar19 >> 5) +
                                                (UInt32)((SInt32)uVar19 < 0 && (uVar19 & 0x1f) != 0)) *
                                         -0x20)) + 0x20;
@@ -208,15 +208,15 @@ LAB_0003c260:
           }
           M<SInt16>(self + iVar27 + 0xc0) = (SInt16)rowBytes;
           M<SInt16>(self + iVar27 + 0xbe) = (SInt16)uVar24;
-          M<SInt16>(self + iVar27 + 0xc4) = (SInt16)iVar9 * M<SInt16>(self + 0xbd4);
-          M<SInt16>(self + iVar27 + 0xc6) = (SInt16)bufferHeightScale * M<SInt16>(self + 0xbd6);
+          M<SInt16>(self + iVar27 + 0xc4) = (SInt16)iVar9 * M<SInt16>(self + kIOATIR500Surface_width);
+          M<SInt16>(self + iVar27 + 0xc6) = (SInt16)bufferHeightScale * M<SInt16>(self + kIOATIR500Surface_height);
         }
         self[iVar27 + 0xe0] = AVar22;
         self[iVar27 + 0xe1] = ((UInt8)(uVar7 >> 10) & 3);
         self[iVar27 + 0xe3] = ((UInt8)(uVar7 >> 3) & 0x1f);
         self[iVar27 + 0xe2] = AVar12;
-        if ((M<UInt32>(self + 0xbe8) & 0x700000) == 0) {
-          if ((M<UInt32>(self + 0xbe8) & 0xc0000) == 0) {
+        if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) {
+          if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0xc0000) == 0) {
             M<UInt32>(self + iVar27 + 0xe4) =
                  M<UInt32>(self + iVar27 + 0xe4) & 0xff000fff | 0x111000;
           }
@@ -231,8 +231,8 @@ LAB_0003c260:
                iVar9 << 0x14 | M<UInt32>(self + iVar27 + 0xe4) & 0xff000fff | 0x11000;
         }
         M<UInt32>(self + iVar27 + 0xe4) = M<UInt32>(self + iVar27 + 0xe4) | 0x800;
-        windowMode = M<UInt32>(self + 0xbe8);
-        shapeMask = M<UInt32>(self + 0xc18);
+        windowMode = M<UInt32>(self + kIOATIR500Surface_modeBits);
+        shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
       }
       bVar1 = iVar16 != 2;
       iVar16 = iVar16 + 1;
@@ -242,21 +242,21 @@ LAB_0003c260:
     formatBit = 1 << (windowMode & 0xf);
     if ((formatBit & 0x1c18) == 0) {
       if (((formatBit & 0x2000) == 0) ||
-         (AVar12 = 0x1, M<SInt16>(self + 0xbd6) < 0x10)) goto LAB_0003c52c;
+         (AVar12 = 0x1, M<SInt16>(self + kIOATIR500Surface_height) < 0x10)) goto LAB_0003c52c;
     }
     else {
-      AVar12 = ((0xf < M<SInt16>(self + 0xbd6)) + '\x02');
+      AVar12 = ((0xf < M<SInt16>(self + kIOATIR500Surface_height)) + '\x02');
     }
   }
   else {
 LAB_0003c52c:
     AVar12 = 0x0;
   }
-  if ((M<SInt32>(self + 0xc14) != 0xffff) && ((shapeMask & 2) != 0)) {
-    M<UInt8>(M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 0x164) = AVar12;
-    shapeMask = M<UInt32>(self + 0xc18);
+  if ((M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff) && ((shapeMask & 2) != 0)) {
+    M<UInt8>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x164) = AVar12;
+    shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   }
-  if (M<SInt32>(self + 0x90) == 0) {
+  if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
     pendingMask = shapeMask & 0x23f;
   }
   else {
@@ -265,21 +265,21 @@ LAB_0003c52c:
   if (pendingMask == 0) {
     return;
   }
-  uVar7 = M<UInt32>(self + 0xbe8);
+  uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
   iVar16 = window_mode_to_ati_format(uVar7 & 0xf);
   formatEntry = FormatTableLookup_0x0004d2dc(iVar16 * 0x1c);
   AVar22 = ((UInt8)(formatEntry >> 10) & 3);
   AVar5 = ((UInt8)(formatEntry >> 3) & 0x1f);
   bytesPerPixel = 1 << (formatEntry >> 0xc & 7);
   if ((shapeMask & 0x200) != 0) {
-    if (((bytesPerPixel != M<UInt16>(self + 0x4f6)) ||
-        ((UInt32)M<UInt16>(self + 0x4fc) != iVar23 * M<SInt16>(self + 0xbd4))) ||
-       ((UInt32)M<UInt16>(self + 0x4fe) != heightScale * (SInt32)M<SInt16>(self + 0xbd6))) {
-      if (M<SInt32>(self + 0x504) != 0) {
-        ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + 0x4e0)));
-        uVar7 = M<UInt32>(self + 0xbe8);
+    if (((bytesPerPixel != M<UInt16>(self + kIOATIR500Surface_buffer9BytesPerRow)) ||
+        ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9HeightOrRows) != iVar23 * M<SInt16>(self + kIOATIR500Surface_width))) ||
+       ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9Extra1e) != heightScale * (SInt32)M<SInt16>(self + kIOATIR500Surface_height))) {
+      if (M<SInt32>(self + kIOATIR500Surface_buffer9BackingStore) != 0) {
+        ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + kIOATIR500Surface_buffer9)));
+        uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
       }
-      sVar2 = M<SInt16>(self + 0xbd4);
+      sVar2 = M<SInt16>(self + kIOATIR500Surface_width);
       iVar9 = (SInt32)sVar2;
       if ((uVar7 & 0x700000) != 0) {
         iVar9 = iVar9 + 0x18;
@@ -288,7 +288,7 @@ LAB_0003c52c:
       if ((pitchBytes & 0xff) != 0) {
         pitchBytes = (pitchBytes & 0xffffff00) + 0x100;
       }
-      sVar18 = M<SInt16>(self + 0xbd6);
+      sVar18 = M<SInt16>(self + kIOATIR500Surface_height);
       pitchBytes = iVar23 * pitchBytes;
       uVar24 = (UInt32)sVar18;
       if ((uVar24 & 0x1f) != 0) {
@@ -298,23 +298,23 @@ LAB_0003c52c:
                  0x20;
       }
       iVar9 = pitchBytes * heightScale * uVar24;
-      if (iVar9 != M<SInt32>(self + 0x4f0)) {
+      if (iVar9 != M<SInt32>(self + kIOATIR500Surface_buffer9Storage)) {
         VCALL(M<SInt32>(self), 0x5cc)(self,9);
-        M<SInt32>(self + 0x4f0) = iVar9;
-        uVar7 = M<UInt32>(self + 0xbe8);
-        sVar2 = M<SInt16>(self + 0xbd4);
-        sVar18 = M<SInt16>(self + 0xbd6);
+        M<SInt32>(self + kIOATIR500Surface_buffer9Storage) = iVar9;
+        uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
+        sVar2 = M<SInt16>(self + kIOATIR500Surface_width);
+        sVar18 = M<SInt16>(self + kIOATIR500Surface_height);
       }
       if (bytesPerPixel == 0) {
-        M<UInt16>(self + 0x4f4) = 0;
+        M<UInt16>(self + kIOATIR500Surface_buffer9Width) = 0;
       }
       else {
-        M<SInt16>(self + 0x4f4) = (SInt16)(pitchBytes / bytesPerPixel);
+        M<SInt16>(self + kIOATIR500Surface_buffer9Width) = (SInt16)(pitchBytes / bytesPerPixel);
       }
-      M<SInt16>(self + 0x4f8) = (SInt16)pitchBytes;
-      M<SInt16>(self + 0x4f6) = (SInt16)bytesPerPixel;
-      M<SInt16>(self + 0x4fc) = (SInt16)iVar23 * sVar2;
-      M<SInt16>(self + 0x4fe) = (SInt16)heightScale * sVar18;
+      M<SInt16>(self + kIOATIR500Surface_buffer9Pitch) = (SInt16)pitchBytes;
+      M<SInt16>(self + kIOATIR500Surface_buffer9BytesPerRow) = (SInt16)bytesPerPixel;
+      M<SInt16>(self + kIOATIR500Surface_buffer9HeightOrRows) = (SInt16)iVar23 * sVar2;
+      M<SInt16>(self + kIOATIR500Surface_buffer9Extra1e) = (SInt16)heightScale * sVar18;
     }
     self[0x518] = AVar12;
     self[0x519] = AVar22;
@@ -322,36 +322,36 @@ LAB_0003c52c:
     self[0x51a] = SUB41m(iVar16,0);
     if ((uVar7 & 0x700000) == 0) {
       if ((uVar7 & 0xc0000) == 0) {
-        M<UInt32>(self + 0x51c) = M<UInt32>(self + 0x51c) & 0xff000fff | 0x111000;
+        M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) = M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x111000;
       }
       else {
-        M<UInt32>(self + 0x51c) =
+        M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) =
              (heightScale & 0xf) << 0xc |
-             iVar23 << 0x10 | M<UInt32>(self + 0x51c) & 0xff000fff | 0x100000;
+             iVar23 << 0x10 | M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x100000;
       }
     }
     else {
-      M<UInt32>(self + 0x51c) = iVar23 << 0x14 | M<UInt32>(self + 0x51c) & 0xff000fff | 0x11000;
+      M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) = iVar23 << 0x14 | M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x11000;
     }
   }
   GH_memcpy(mipOffsets,kShapeSurfaceDefaultMipTable,0x38);
-  modeBits = M<UInt32>(self + 0xbe8);
+  modeBits = M<UInt32>(self + kIOATIR500Surface_modeBits);
   if ((modeBits & 0x20) == 0) {
     uVar26 = 0;
     uVar7 = 1;
     uVar8 = 1;
-    iVar23 = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50);
+    iVar23 = M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator);
     iVar9 = M<SInt32>(iVar23 + 0x13c);
     uVar24 = (UInt32)M<UInt16>(iVar23 + 0x144);
   }
   else if ((modeBits & 0x70000000) == 0) {
-    uVar24 = bytesPerPixel * (SInt32)M<SInt16>(self + 0xbd4);
+    uVar24 = bytesPerPixel * (SInt32)M<SInt16>(self + kIOATIR500Surface_width);
     if ((uVar24 & 0xff) != 0) {
       uVar24 = (uVar24 & 0xffffff00) + 0x100;
     }
-    alignedHeight = (UInt32)M<SInt16>(self + 0xbd6);
+    alignedHeight = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
     if ((alignedHeight & 0x1f) != 0) {
-      alignedHeight = (alignedHeight - (SInt32)(SInt16)(M<SInt16>(self + 0xbd6) +
+      alignedHeight = (alignedHeight - (SInt32)(SInt16)(M<SInt16>(self + kIOATIR500Surface_height) +
                                      (SInt16)(((SInt32)alignedHeight >> 5) +
                                             (UInt32)((SInt32)alignedHeight < 0 && (alignedHeight & 0x1f) != 0)) * -0x20
                                      )) + 0x20;
@@ -362,13 +362,13 @@ LAB_0003c52c:
     uVar8 = 1;
   }
   else {
-    uVar7 = (UInt32)M<SInt16>(self + 0xbd4);
+    uVar7 = (UInt32)M<SInt16>(self + kIOATIR500Surface_width);
     uVar8 = bytesPerPixel * uVar7;
     uVar24 = uVar8;
     if ((uVar8 & 0xff) != 0) {
       uVar24 = (uVar8 & 0xffffff00) + 0x100;
     }
-    uVar13 = (UInt32)M<SInt16>(self + 0xbd6);
+    uVar13 = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
     uVar26 = modeBits >> 0x18 & 0xf;
     iVar9 = 0;
     uVar17 = 0;
@@ -454,7 +454,7 @@ LAB_0003c9d0:
   }
   bufferIds[0] = 0;
   bufferIds[1] = 1;
-  if (M<SInt32>(self + 0x90) == 0) {
+  if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
     bufferCount = 6;
     bufferIds[2] = 5;
     bufferIds[3] = 4;
@@ -462,8 +462,8 @@ LAB_0003c9d0:
     bufferIds[5] = 3;
   }
   else {
-    iVar23 = (SInt32)M<SInt16>(self + 0x98) - (SInt32)M<SInt16>(self + 0x96);
-    overlayHeight = (SInt32)M<SInt16>(self + 0x9a) - (SInt32)M<SInt16>(self + 0x94);
+    iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayLeft) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayRight);
+    overlayHeight = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
     if (iVar23 == 0) {
       iVar23 = 0x300;
       uVar6 = 0x300;
@@ -488,22 +488,22 @@ LAB_0003c9d0:
       overlayHeight = (overlayHeight & 0xfffffff0) + 0x10;
     }
     iVar9 = uVar24 * overlayHeight;
-    M<UInt16>(self + 0xbe0) = uVar6;
-    M<UInt16>(self + 0xbe2) = uVar21;
+    M<UInt16>(self + kIOATIR500Surface_scalingSourceWidth) = uVar6;
+    M<UInt16>(self + kIOATIR500Surface_scalingSourceHeight) = uVar21;
     self[0xbec] = 0x1;
-    M<UInt16>(self + 0xbd4) = uVar6;
-    M<UInt16>(self + 0xbd6) = uVar21;
+    M<UInt16>(self + kIOATIR500Surface_width) = uVar6;
+    M<UInt16>(self + kIOATIR500Surface_height) = uVar21;
     bufferCount = 2;
   }
-  uVar13 = M<UInt32>(self + 0xc18);
+  uVar13 = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   uVar19 = 0;
   do {
     uVar17 = (UInt32)bufferIds[uVar19];
     if ((uVar13 >> (uVar17 & 0x3f) & 1) != 0) {
       iVar23 = uVar17 * 0x78;
       if (((bytesPerPixel != M<UInt16>(self + iVar23 + 0xbe)) ||
-          ((UInt32)M<UInt16>(self + iVar23 + 0xc4) != (SInt32)M<SInt16>(self + 0xbd4))) ||
-         (((UInt32)M<UInt16>(self + iVar23 + 0xc6) != (SInt32)M<SInt16>(self + 0xbd6) ||
+          ((UInt32)M<UInt16>(self + iVar23 + 0xc4) != (SInt32)M<SInt16>(self + kIOATIR500Surface_width))) ||
+         (((UInt32)M<UInt16>(self + iVar23 + 0xc6) != (SInt32)M<SInt16>(self + kIOATIR500Surface_height) ||
           ((uVar7 != M<UInt16>(self + iVar23 + 200) ||
            (uVar8 != M<UInt16>(self + iVar23 + 0xca))))))) {
         if (M<SInt32>(self + iVar23 + 0xcc) != 0) {
@@ -523,8 +523,8 @@ LAB_0003c9d0:
         M<SInt16>(self + iVar23 + 0xbe) = (SInt16)bytesPerPixel;
         M<SInt16>(self + iVar23 + 0xc0) = (SInt16)uVar24;
         pAVar15 = self + iVar23 + 0xe8;
-        M<UInt16>(self + iVar23 + 0xc4) = M<UInt16>(self + 0xbd4);
-        uVar6 = M<UInt16>(self + 0xbd6);
+        M<UInt16>(self + iVar23 + 0xc4) = M<UInt16>(self + kIOATIR500Surface_width);
+        uVar6 = M<UInt16>(self + kIOATIR500Surface_height);
         M<SInt16>(self + iVar23 + 0xca) = (SInt16)uVar8;
         M<SInt16>(self + iVar23 + 200) = (SInt16)uVar7;
         M<UInt16>(self + iVar23 + 0xc6) = uVar6;
@@ -541,20 +541,20 @@ LAB_0003c9d0:
       self[iVar23 + 0xe0] = AVar12;
       self[iVar23 + 0xe1] = AVar22;
       self[iVar23 + 0xe3] = AVar5;
-      uVar13 = M<UInt32>(self + 0xc18);
+      uVar13 = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
     }
     uVar19 = uVar19 + 1;
   } while (uVar19 < bufferCount);
   if ((uVar13 & 0x7ffc00) == 0) {
     return;
   }
-  if (M<SInt32>(self + 0x90) == 0) {
+  if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
     return;
   }
-  sVar2 = M<SInt16>(self + 0x98);
-  sVar18 = M<SInt16>(self + 0x96);
+  sVar2 = M<SInt16>(self + kATIR500Surface_overlayLeft);
+  sVar18 = M<SInt16>(self + kATIR500Surface_overlayRight);
   bufferId = 10;
-  iVar23 = (SInt32)M<SInt16>(self + 0x9a) - (SInt32)M<SInt16>(self + 0x94);
+  iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
   scaledHeight = iVar23 * 3;
   uVar6 = (UInt16)scaledHeight;
   uVar21 = (UInt16)(scaledHeight >> 1);
@@ -566,7 +566,7 @@ LAB_0003c9d0:
       }
       M<SInt16>(pAVar15 + 0x574) = sVar2 - sVar18;
       uVar20 = uVar21;
-      if ((((M<SInt32>(self + 0xdac) != 0) && (9 < bufferId)) && (bufferId < 0xf)) &&
+      if ((((M<SInt32>(self + kATIR500Surface_deintMode) != 0) && (9 < bufferId)) && (bufferId < 0xf)) &&
          ((uVar20 = uVar6, M<SInt32>(pAVar15 + 0x560) != 0 &&
           ((UInt32)M<UInt16>(pAVar15 + 0x576) != (scaledHeight & 0xffff))))) {
         ((IOATIR500Surface *)((UInt8 *)self))->copy_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + bufferId * 0x78 + 0xa8)));
@@ -576,17 +576,17 @@ LAB_0003c9d0:
         self[0x8da] = 0x2e;
       }
       else if (bufferId == 0x10) {
-        M<UInt16>(self + 0x844) = 0x2d0;
+        M<UInt16>(self + kIOATIR500Surface_buffer16HeightOrRows) = 0x2d0;
         if ((iVar23 == 0x240) || (iVar23 == 0x120)) {
-          M<UInt16>(self + 0x846) = 0x240;
+          M<UInt16>(self + kIOATIR500Surface_buffer16Extra1e) = 0x240;
         }
         else {
-          M<UInt16>(self + 0x846) = 0x1e0;
+          M<UInt16>(self + kIOATIR500Surface_buffer16Extra1e) = 0x1e0;
         }
         self[0x862] = 0xb;
       }
       else if (bufferId == 0x12) {
-        M<SInt16>(self + 0x936) = (SInt16)iVar23;
+        M<SInt16>(self + kIOATIR500Surface_buffer18Extra1e) = (SInt16)iVar23;
         self[0x952] = 0xb;
       }
       else {
@@ -628,9 +628,9 @@ LAB_0003c9d0:
     pAVar15 = pAVar15 + 0x78;
     bufferId = bufferId + 1;
     if (bVar1) break;
-    uVar13 = M<UInt32>(self + 0xc18);
+    uVar13 = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   }
-  if (M<SInt32>(self + 0xda4) != 0) {
+  if (M<SInt32>(self + kATIR500Surface_overlayExists) != 0) {
     if (self[0xbf0] != 0x0) goto LAB_0003ce90;
     AVar12 = this->alloc_overlay();
     self[0xbf0] = AVar12;

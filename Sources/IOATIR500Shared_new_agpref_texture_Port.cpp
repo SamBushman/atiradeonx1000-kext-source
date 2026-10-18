@@ -42,7 +42,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(unsigned int refAddress
   
   agpTexture = (UInt8 *)this->new_agp_texture(agpAddress,agpLength,(unsigned int *)(&agpUserAddr));
   if (agpTexture != (UInt8 *)0x0) {
-    texture = (void *)VCALL(*M<SInt32 *>(self + 0xc), 0x570)(M<SInt32 *>(self + 0xc),0x80);
+    texture = (void *)VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x570)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),0x80);
     if (texture != (void *)0x0) {
       iVar4 = this->alloc_buf_handle(texture,(UInt32 *)(&handle));
       if (iVar4 != 0) {
@@ -53,9 +53,9 @@ VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(unsigned int refAddress
           M<UInt32>((SInt32)texture + 0x18) = clientUserAddr[0];
           M<UInt32>(clientShared) = handle;
           M<UInt32>(M<SInt32>((SInt32)texture + 0x14) + 8) =
-               M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
+               M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x54);
           M<UInt32>(M<SInt32>((SInt32)texture + 0x14) + 0xc) =
-               M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
+               M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x54);
           M<UInt8>(M<SInt32>((SInt32)texture + 0x14) + 0x16) = 6;
           M<UInt8>((SInt32)texture + 0x20) = 6;
           M<UInt8 *>((SInt32)texture + 0x1c) = self;
@@ -65,11 +65,11 @@ VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(unsigned int refAddress
           M<SInt32>((SInt32)texture + 0x50) = iVar4;
           M<UInt8 *>((SInt32)texture + 0x54) = agpTexture;
           GH_OSIncrementAtomic(M<SInt32>(agpTexture + 0x14) + 0x10);
-          M<UInt32>((SInt32)texture + 0x3c) = M<UInt32>(self + 0x24);
-          M<void *>(self + 0x24) = texture;
+          M<UInt32>((SInt32)texture + 0x3c) = M<UInt32>(self + kIOATIR500Shared_textureListHead);
+          M<void *>(self + kIOATIR500Shared_textureListHead) = texture;
           *param_4 = clientUserAddr[0];
-          M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) = M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) + 1;
-          iVar4 = M<SInt32>(self + 0xc);
+          M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x72c) = M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x72c) + 1;
+          iVar4 = M<SInt32>(self + kIOATIR500Shared_accelerator);
           if (self != M<UInt8 *>(iVar4 + 0x6c)) {
             return (VendorTextureBuffer *)(texture);
           }
@@ -83,7 +83,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(unsigned int refAddress
       if (M<SInt32>(M<SInt32>(agpTexture + 0x14) + 0x10) == 0) {
         this->delete_texture((VendorTextureBuffer *)(agpTexture));
       }
-      VCALL(*M<SInt32 *>(self + 0xc), 0x574)(M<SInt32 *>(self + 0xc),texture,0x80);
+      VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x574)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),texture,0x80);
       return (VendorTextureBuffer *)((void *)0x0);
     }
     if (M<SInt32>(M<SInt32>(agpTexture + 0x14) + 0x10) == 0) {

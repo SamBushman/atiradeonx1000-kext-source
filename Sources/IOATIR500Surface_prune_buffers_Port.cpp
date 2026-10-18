@@ -37,72 +37,72 @@ void IOATIR500Surface::prune_buffers() {
   UInt32 requiredBits;
   UInt8 *cursor;
   
-  if ((M<UInt32>(self + 0xbe8) & 0x20) == 0) {
-    requiredBits = M<UInt32>(self + 0xc18);
+  if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x20) == 0) {
+    requiredBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
     if ((requiredBits & 2) == 0) {
-      M<UInt8 *>(self + 0xb84) = self + 0x300;
-      M<UInt8 *>(self + 0xb80) = self + 0x300;
-      iVar4 = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 300;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer5) = self + kIOATIR500Surface_buffer5;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) = self + kIOATIR500Surface_buffer5;
+      iVar4 = M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 300;
       M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) = iVar4;
-      M<SInt32>(self + 0xb74) = iVar4;
+      M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1) = iVar4;
     }
-    else if (M<SInt32>(self + 0xb74) == M<SInt32>(self + kIOATIR500Surface_attachmentBuffers)) {
-      M<UInt8 *>(self + 0xb74) = self + 0x120;
-      M<UInt8 *>(self + 0xb80) = self + 0x288;
+    else if (M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1) == M<SInt32>(self + kIOATIR500Surface_attachmentBuffers)) {
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = self + kIOATIR500Surface_buffer1;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) = self + kIOATIR500Surface_buffer4;
     }
     goto LAB_00012fec;
   }
-  requiredBits = M<UInt32>(self + 0xc18);
+  requiredBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   if ((requiredBits & 1) == 0) {
     if ((requiredBits & 2) == 0) {
-      uVar3 = M<UInt32>(self + 0xbf8);
+      uVar3 = M<UInt32>(self + kIOATIR500Surface_stateBits);
       if ((uVar3 & 2) != 0) {
-        requestedBits = M<UInt32>(self + 0xc1c) | 1;
-        M<UInt32>(self + 0xc1c) = requestedBits;
+        requestedBits = M<UInt32>(self + kIOATIR500Surface_reqBits) | 1;
+        M<UInt32>(self + kIOATIR500Surface_reqBits) = requestedBits;
         goto LAB_00012f00;
       }
     }
     else {
-      uVar3 = M<UInt32>(self + 0xbf8);
+      uVar3 = M<UInt32>(self + kIOATIR500Surface_stateBits);
     }
-    requestedBits = M<UInt32>(self + 0xc1c) | 2;
-    M<UInt32>(self + 0xc1c) = requestedBits;
+    requestedBits = M<UInt32>(self + kIOATIR500Surface_reqBits) | 2;
+    M<UInt32>(self + kIOATIR500Surface_reqBits) = requestedBits;
   }
   else {
-    uVar3 = M<UInt32>(self + 0xbf8);
-    requestedBits = M<UInt32>(self + 0xc1c) | 1;
-    M<UInt32>(self + 0xc1c) = requestedBits;
+    uVar3 = M<UInt32>(self + kIOATIR500Surface_stateBits);
+    requestedBits = M<UInt32>(self + kIOATIR500Surface_reqBits) | 1;
+    M<UInt32>(self + kIOATIR500Surface_reqBits) = requestedBits;
   }
 LAB_00012f00:
   requiredBits = requiredBits | requestedBits;
-  M<UInt32>(self + 0xc18) = requiredBits;
+  M<UInt32>(self + kIOATIR500Surface_contextReqBits) = requiredBits;
   if ((requiredBits & 1) == 0) {
-    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) = self + 0x120;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) = self + kIOATIR500Surface_buffer1;
   }
   else {
-    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) = self + 0xa8;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) = self + kIOATIR500Surface_buffers;
   }
   if ((requiredBits & 2) == 0) {
-    M<UInt8 *>(self + 0xb74) = self + 0xa8;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = self + kIOATIR500Surface_buffers;
   }
   else {
-    M<UInt8 *>(self + 0xb74) = self + 0x120;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = self + kIOATIR500Surface_buffer1;
   }
-  if ((M<UInt32>(self + 0xbe8) & 0x10) != 0) {
+  if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x10) != 0) {
     if ((requiredBits & 0x20) == 0) {
-      M<UInt8 *>(self + 0xb84) = self + 0x288;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer5) = self + kIOATIR500Surface_buffer4;
     }
     else {
-      M<UInt8 *>(self + 0xb84) = self + 0x300;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer5) = self + kIOATIR500Surface_buffer5;
     }
     if ((requiredBits & 0x10) == 0) {
-      M<UInt8 *>(self + 0xb80) = self + 0x300;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) = self + kIOATIR500Surface_buffer5;
     }
     else {
-      M<UInt8 *>(self + 0xb80) = self + 0x288;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) = self + kIOATIR500Surface_buffer4;
     }
   }
-  M<UInt32>(self + 0xbf8) = uVar3 | 0x10000000;
+  M<UInt32>(self + kIOATIR500Surface_stateBits) = uVar3 | 0x10000000;
 LAB_00012fec:
   uVar3 = 0;
   cursor = self;
@@ -147,17 +147,17 @@ LAB_00012fec:
     cursor = cursor + 0x78;
     uVar3 = uVar3 + 1;
     if (isLast) break;
-    requiredBits = M<UInt32>(self + 0xc18);
+    requiredBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   }
   VCALL(M<SInt32>(self), 0x5c8)(self);
-  if (M<SInt32>(self + 0xc14) == 0xffff) {
-    iVar4 = M<SInt32>(self + 0xd50);
+  if (M<SInt32>(self + kIOATIR500Surface_panel) == 0xffff) {
+    iVar4 = M<SInt32>(self + kIOATIR500Surface_accelerator);
   }
   else {
-    iVar4 = M<SInt32>(self + 0xd50);
-    if (self == M<UInt8 *>(M<SInt32>(self + 0xc14) * 0x20 + iVar4 + 0xe8)) {
+    iVar4 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+    if (self == M<UInt8 *>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + iVar4 + 0xe8)) {
       VCALL(M<SInt32>(self), 0x5a4)(self);
-      iVar4 = M<SInt32>(self + 0xd50);
+      iVar4 = M<SInt32>(self + kIOATIR500Surface_accelerator);
     }
   }
   M<UInt32>(iVar4 + 0x78) = 0;

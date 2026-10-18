@@ -40,7 +40,7 @@ bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared**outKern
   UInt32 *chunk;
   
   lastChunk = (UInt32 *)0x0;
-  chunk = M<UInt32 *>(self + 0x20);
+  chunk = M<UInt32 *>(self + kIOATIR500Shared_chunkList);
   while (chunk != (UInt32 *)0x0) {
 LAB_00016f00:
     lastChunk = chunk;
@@ -91,7 +91,7 @@ LAB_00016f00:
     iVar3 = VCALL(*(SInt32 *)chunk[1], 0x14c)((SInt32 *)chunk[1],GH_kernel_task,0,1,0,0);
     chunk[3] = iVar3;
     if (iVar3 != 0) {
-      iVar3 = M<SInt32>(self + 0xc);
+      iVar3 = M<SInt32>(self + kIOATIR500Shared_accelerator);
       if (iVar3 != 0) {
         M<SInt32>(iVar3 + 0x808) = M<SInt32>(iVar3 + 0x808) + 0x1c;
       }
@@ -100,7 +100,7 @@ LAB_00016f00:
       chunk[4] = uVar2;
       chunk[6] = 0x80;
       if (lastChunk == (UInt32 *)0x0) {
-        M<UInt32 *>(self + 0x20) = chunk;
+        M<UInt32 *>(self + kIOATIR500Shared_chunkList) = chunk;
       }
       else {
         *lastChunk = (UInt32)(chunk);

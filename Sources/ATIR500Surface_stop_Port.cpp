@@ -43,7 +43,7 @@ void ATIR500Surface::stop(IOService *provider) {
   UInt32 *packet;
   
   iVar5 = 0;
-  buffer = self + 0xa8;
+  buffer = self + kIOATIR500Surface_buffers;
   GH_IOLockLock(M<UInt32>(providerBytes + 0x840));
   pAVar7 = self;
   do {
@@ -55,18 +55,18 @@ void ATIR500Surface::stop(IOService *provider) {
     pAVar7 = pAVar7 + 0x78;
     iVar5 = iVar5 + 1;
   } while (notLast);
-  if (((providerBytes[0x80] != 0x0) && (M<SInt32>(self + 0xc14) != 0xffff)) &&
-     (M<UInt8 *>(providerBytes + M<SInt32>(self + 0xc14) * 0x20 + 0xe8) == self)) {
+  if (((providerBytes[0x80] != 0x0) && (M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff)) &&
+     (M<UInt8 *>(providerBytes + M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + 0xe8) == self)) {
     iVar3 = M<SInt32>(providerBytes + 0x238);
     packet = (UInt32 *)(iVar3 + 0x120);
     VCALL(M<SInt32>(providerBytes), 0x54c)(providerBytes,M<UInt32>(providerBytes + 0x234));
-    providerBytes[M<SInt32>(self + 0xc14) * 0x78 + 0x164] = SUB41m(M<UInt32>(self + 0xdb8),0);
+    providerBytes[M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + 0x164] = SUB41m(M<UInt32>(self + kATIR500Surface_panelSide),0);
     iVar5 = VCALL(M<SInt32>(self), 0x5dc)(self);
-    if ((iVar5 == 0) || (M<UInt8 *>(self + 0xb74) == self + 0x120)) {
+    if ((iVar5 == 0) || (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) == self + kIOATIR500Surface_buffer1)) {
       wordCount = 0;
     }
     else {
-      iVar5 = M<SInt32>(self + 0xc14);
+      iVar5 = M<SInt32>(self + kIOATIR500Surface_panel);
       wordCount = 0x1844;
       if (iVar5 != 0) {
         wordCount = 0x1a44;
@@ -74,7 +74,7 @@ void ATIR500Surface::stop(IOService *provider) {
       *packet = wordCount;
       M<UInt32>(iVar3 + 0x124) = M<UInt32>(providerBytes + iVar5 * 0x78 + 0x134);
       wordCount = 2;
-      M<UInt8 *>(self + 0xb74) = self + 0x120;
+      M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = self + kIOATIR500Surface_buffer1;
     }
     stamp = ((ATIRadeonX1000 *)((UInt8 *)providerBytes))->submit_buffer((UInt32 *)(packet),M<SInt32>(providerBytes + 0x228) + 0x120,wordCount);
     M<UInt32>(providerBytes + 0x234) = stamp;

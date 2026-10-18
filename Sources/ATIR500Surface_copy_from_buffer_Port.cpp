@@ -79,7 +79,7 @@ void ATIR500Surface::copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UI
   synchronous = (flags & 1) == 0;
   if (synchronous) {
     if ((backing == (UInt8 *)0x0) ||
-       (M<int>(backing + 0x54) != M<int>(self + 0x7c))) goto LAB_00043834;
+       (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto LAB_00043834;
 LAB_00043888:
     transferMap = M<int *>(transferBytes + 8);
   }
@@ -95,7 +95,7 @@ LAB_00043888:
       h = uVar6;
     }
     transferBytes = backing;
-    if ((M<unsigned int>(self + 0xbe8) & 0x70000000) != 0) {
+    if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) {
       offsetAdjust = VCALL(M<int>(self), 0x5f0)(self,bufferBytes,index,level,0,0,&pitch);
       offset = offset + offsetAdjust;
     }
@@ -109,18 +109,18 @@ LAB_00043834:
     transferMap = M<int *>(backing + 8);
   }
   transferMap = (int *)VCALL(*transferMap, 0x150)
-                             (transferMap,M<unsigned int>(M<int>(self + 0xd50) + 0x82c) | 1);
+                             (transferMap,M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1);
   if (transferMap == (int *)0x0) {
     return;
   }
   transferAddress = VCALL(*transferMap, 0xd0)(transferMap);
-  accel = M<int *>(self + 0xd50);
+  accel = M<int *>(self + kIOATIR500Surface_accelerator);
   transferRow = (UInt64 *)(transferAddress + offset);
   waitTotal = accel[0x1ed];
   waited = VCALL(*accel, 0x558)(accel,stamp);
   accel[0x1ed] = waitTotal + waited;
   if (((synchronous) && (uVar6 = M<unsigned int>(bufferBytes + 0x3c), (uVar6 & 0x800) != 0)) &&
-     ((M<unsigned int>(self + 0xbe8) & 0xc0000) != 0)) {
+     ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0xc0000) != 0)) {
     uVar11 = uVar6 >> 0xc & 0xf;
     uVar6 = uVar6 >> 0x10 & 0xf;
   }
@@ -131,9 +131,9 @@ LAB_00043834:
   xScaled = uVar6 * x;
   surfaceY = uVar11 * y;
   if (((synchronous) && (backing != (UInt8 *)0x0)) &&
-     (M<int>(backing + 0x54) == M<int>(self + 0x7c))) {
+     (M<int>(backing + 0x54) == M<int>(self + kIOATIR500Surface_stamp))) {
     backingMap = (int *)VCALL(*M<int *>(backing + 8), 0x150)
-                               (M<int *>(backing + 8),M<unsigned int>(M<int>(self + 0xd50) + 0x82c) | 1
+                               (M<int *>(backing + 8),M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1
                                );
     bVar29 = (backingMap == (int *)0x0) << 1;
     if (backingMap == (int *)0x0) goto LAB_00043db4;
@@ -147,7 +147,7 @@ LAB_00043834:
   else {
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
     uVar19 = 0;
-    iVar14 = M<int>(bufferBytes + 8) + M<int>(self + 0xc10);
+    iVar14 = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
     if ((tilingBits & 0xf00000) != 0) {
       uVar19 = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
       ;
@@ -171,9 +171,9 @@ LAB_00043834:
   if (iVar21 != 0) {
     iVar14 = iVar21;
   }
-  if ((synchronous) && ((M<unsigned int>(self + 0xbe8) & 0x70000000) == 0)) {
-    if ((int)M<SInt16>(self + 0xbd6) != (int)M<SInt16>(self + 0xbda)) {
-      iVar14 = (int)M<SInt16>(self + 0xbda);
+  if ((synchronous) && ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) == 0)) {
+    if ((int)M<SInt16>(self + kIOATIR500Surface_height) != (int)M<SInt16>(self + kIOATIR500Surface_committedHeight)) {
+      iVar14 = (int)M<SInt16>(self + kIOATIR500Surface_committedHeight);
     }
     surfaceY = (iVar14 - surfaceY) - uVar11;
   }
@@ -187,7 +187,7 @@ LAB_00043ad0:
   }
   else {
 LAB_00043ac4:
-    if ((M<unsigned int>(self + 0xbe8) & 0x70000000) != 0) goto LAB_00043ad0;
+    if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto LAB_00043ad0;
   }
   bVar30 = !bVar4 << 1;
   iVar14 = uVar6 * (unsigned int)bytesPerRow * w;

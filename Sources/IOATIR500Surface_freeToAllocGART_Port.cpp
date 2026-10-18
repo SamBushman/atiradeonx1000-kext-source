@@ -41,7 +41,7 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
   UInt8 *cursor;
   
   panelIndex = 0;
-  accelerator = M<UInt8 *>(self + 0xd50);
+  accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   if (M<SInt32>(accelerator + 0xcc) != 0) {
     do {
       if (M<SInt32>(accelerator + panelIndex * 4 + 0x114) != 0) {
@@ -58,7 +58,7 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
           /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]; with more than one buffer per panel this walks past the record (stock behaviour, kept) */
           SwapBufferEntry *slot = &rec->entries[bufferIndex + 1];
           do {
-            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
+            slotFreed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
                                slot->stamp,aggressive);
             if (slotFreed != 0) {
               return 1;
@@ -67,7 +67,7 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
             slot = slot + 1;
             iVar2 = iVar2 + 1;
           } while (notLastSlot);
-          accelerator = M<UInt8 *>(self + 0xd50);
+          accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
           bufferIndex = bufferIndex + 1;
         } while (bufferIndex < M<UInt32>(accelerator + panelIndex * 4 + 0x114));
       }
@@ -76,7 +76,7 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
   }
   cursor = self;
   while ((backingStore = M<UInt8 *>(cursor + 0xcc), backingStore == (UInt8 *)0x0
-         || (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(backingStore),(VendorTransferBuffer *)(neededBytes),
+         || (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(backingStore),(VendorTransferBuffer *)(neededBytes),
                                 M<UInt32>(M<SInt32>(backingStore + 0x14) + 8),aggressive), iVar2 == 0))) {
     cursor = cursor + 0x78;
     if (self + 0xac8 == cursor) {

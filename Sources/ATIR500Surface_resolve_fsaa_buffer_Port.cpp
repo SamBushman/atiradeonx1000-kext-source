@@ -56,11 +56,11 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
   SInt32 fixedBuffer;
   UInt32 *puVar23;
   
-  fixedBuffer = M<SInt32>(self + 0xb94);
+  fixedBuffer = M<SInt32>(self + kIOATIR500Surface_fixedSurfaceBuffer);
   formatBuffer = M<SInt32>(self + formatCode * 4 + 0xb70);
   GH_memcpy(packet,&g_r500_3d_blit_state_packet,0x2f4);
-  packet[0xb] = M<UInt32>(M<SInt32>(self + 0xd50) + 0xb74);
-  if ((M<UInt32>(self + 0xbe8) & 0x700000) == 0) {
+  packet[0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
+  if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) {
     uVar18 = 0;
     iVar13 = (UInt32)M<UInt8>(formatBuffer + 0x3a) * 0x1c;
     packet[0x9a] =
@@ -236,7 +236,7 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
   }
   packet[0xb3] = uVar18 & 0x1fff | (uVar15 & 0x1fff) << 0xd;
   uVar17 = HZMEM_GetBlockOffset
-                     ((_HZDATA *)((UInt8 *)(M<SInt32>(self + 0xd50) + 0x870)),M<UInt32>(fixedBuffer + 0x28),2);
+                     ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),M<UInt32>(fixedBuffer + 0x28),2);
   uVar18 = 0;
   if ((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) != 0) {
     uVar18 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
@@ -246,12 +246,12 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     uVar15 = uVar18;
   }
   iVar13 = 0x20;
-  if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xb98) == 4) {
+  if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) == 4) {
 LAB_00044100:
     uVar19 = iVar13 * ((SInt32)(iVar13 + uVar15 + -1) / iVar13);
   }
   else {
-    iVar13 = M<SInt32>(M<SInt32>(self + 0xd50) + 0xb98) << 4;
+    iVar13 = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) << 4;
     uVar19 = 0;
     if (iVar13 != 0) goto LAB_00044100;
   }
@@ -301,7 +301,7 @@ LAB_00044100:
   puVar20 = puVar23;
   if ((((UInt32)clearFlag) != 0) &&
      ((M<UInt32>(fixedBuffer + 0x28) & 0x3ff00000) != 0x3ff00000)) {
-    uVar18 = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + 0xd50) + 0x870)),
+    uVar18 = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),
                                  M<UInt32>(fixedBuffer + 0x28),2);
     *puVar23 = 0x1385;
     puVar20 = puVar23 + 6;
@@ -309,7 +309,7 @@ LAB_00044100:
     puVar23[2] = 0xc0023800;
     puVar23[3] = uVar17;
     puVar23[1] = uVar19;
-    formatBuffer = M<SInt32>(M<SInt32>(self + 0xd50) + 0xb98);
+    formatBuffer = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98);
     puVar23[5] = 0;
     puVar23[4] = uVar18 / (UInt32)(formatBuffer << 4);
     if (surfaceIndex == 9) {
@@ -320,6 +320,6 @@ LAB_00044100:
     M<UInt8>(fixedBuffer + 0x36) = 1;
   }
 LAB_0004481c:
-  M<UInt32>(M<SInt32>(self + 0xd50) + 0x78) = 0;
+  M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   return puVar20;
 }

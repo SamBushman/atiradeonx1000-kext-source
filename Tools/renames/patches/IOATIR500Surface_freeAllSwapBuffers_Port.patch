@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-16 20:25:58.175411356 -0700
-+++ b/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-16 20:25:58.176552931 -0700
+--- a/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-17 20:00:41.331682949 -0700
++++ b/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-17 20:00:41.332801181 -0700
 @@ -29,85 +29,64 @@
  /* real addr 0x10860 */
  void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
@@ -20,7 +20,7 @@
 -  UInt8 *pIVar12;
    SInt32 *accelerator;
    
-   accelerator = M<SInt32 *>(self + 0xd50);
+   accelerator = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
    if (accelerator[panel + 0x45] != 0) {
 -    iVar4 = panel * 0x94;
      bufferIndex = 0;
@@ -34,7 +34,7 @@
 -                        (accelerator,M<UInt32>(self + iVar2 * 0x1c + iVar4 + 0xc4c));
 +                        (accelerator,rec->entries[iVar2 + 1].stamp);
        accelerator[0x1e2] = waitTotal + iVar2;
-       accelerator = M<SInt32 *>(self + 0xd50);
+       accelerator = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
      } while (bufferIndex < (UInt32)accelerator[panel + 0x45]);
      if (accelerator[panel + 0x45] != 0) {
 -      pIVar3 = self + iVar4;
@@ -49,12 +49,12 @@
 -        pIVar8 = pIVar3 + 0xc3c;
 -        do {
 -          if (M<SInt32>(pIVar10) != 0) {
--            VCALL(*M<SInt32 *>(self + 0xd50), 0x5ac)(M<SInt32 *>(self + 0xd50),pIVar8);
+-            VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),pIVar8);
 +        /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]. With more than one buffer per panel this walks past the record into the next one (stock behaviour, kept) */
 +        SwapBufferEntry *slot = &rec->entries[bufferIndex + 1];
 +        for (SInt32 iVar4 = 0; iVar4 != 4; iVar4 = iVar4 + 1, slot = slot + 1) {
 +          if (slot->gartOffset != 0) {
-+            VCALL(*M<SInt32 *>(self + 0xd50), 0x5ac)(M<SInt32 *>(self + 0xd50),slot);
++            VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),slot);
            }
 -          if (M<SInt32 *>(pIVar10 + 4) != (SInt32 *)0x0) {
 -            VCALL(*M<SInt32 *>(pIVar10 + 4), 0x18)(M<SInt32 *>(pIVar10 + 4));
@@ -111,7 +111,7 @@
 +        master->memory = (void *)0x0;
 +        master->stamp = 0;
 +        master->header = (VendorSwapBufferHeader *)0x0;
-       } while (bufferIndex < M<UInt32>(panel * 4 + M<SInt32>(self + 0xd50) + 0x114));
+       } while (bufferIndex < M<UInt32>(panel * 4 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x114));
      }
    }
 -  M<UInt32>(self + panel * 0x94 + 0xcb0) = 0;

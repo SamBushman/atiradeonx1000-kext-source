@@ -42,9 +42,9 @@ UInt32 ATIR500Surface::alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) {
   
   uVar6 = M<unsigned int>(bufferBytes + 0x3c);
   uVar8 = uVar6 >> 0xb & 1;
-  if (((M<unsigned int>(self + 0xbe8) & 0x700000) == 0) ||
-     ((uVar8 == 0 && (bufferBytes != (UInt8 *)(self + 0x4e0))))) {
-    iVar7 = M<int>(self + 0xd50);
+  if (((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) ||
+     ((uVar8 == 0 && (bufferBytes != (UInt8 *)(self + kIOATIR500Surface_buffer9))))) {
+    iVar7 = M<int>(self + kIOATIR500Surface_accelerator);
     if (M<UInt16>(iVar7 + 0xa8) < M<UInt16>(bufferBytes + 0x1c)) {
       return 0;
     }
@@ -60,9 +60,9 @@ UInt32 ATIR500Surface::alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) {
     if (0x1000 < M<UInt16>(bufferBytes + 0x1e)) {
       return 0;
     }
-    iVar7 = M<int>(self + 0xd50);
+    iVar7 = M<int>(self + kIOATIR500Surface_accelerator);
   }
-  if (M<int>(self + 0x90) == 0) {
+  if (M<int>(self + kIOATIR500Surface_boundDVDContext) == 0) {
 LAB_0003e330:
     if (M<int>(iVar7 + 0xd0) == 0) {
       iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
@@ -84,16 +84,16 @@ LAB_0003e330:
     iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
                        M<UInt32>(bufferBytes + 0x10),0x1000,uVar5,M<unsigned int>(iVar7 + 0x9c) - uVar5);
     if (iVar7 == 0) {
-      iVar7 = M<int>(self + 0xd50);
+      iVar7 = M<int>(self + kIOATIR500Surface_accelerator);
       goto LAB_0003e330;
     }
   }
   if (uVar8 == 0) {
-    if (bufferBytes != (UInt8 *)(self + 0x4e0)) {
+    if (bufferBytes != (UInt8 *)(self + kIOATIR500Surface_buffer9)) {
       return 1;
     }
     uVar6 = 0;
-    iVar7 = M<int>(M<int>(self + 0xd50) + 0xb98);
+    iVar7 = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
     if ((M<unsigned int>(bufferBytes + 0x3c) & 0xf00000) != 0) {
       uVar6 = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
     }
@@ -114,13 +114,13 @@ LAB_0003e544:
     if ((height & 0x1f) != 0) {
       uVar6 = (height & 0xffffffe0) + 0x20;
     }
-    uVar3 = HZMEM_Alloc((_HZDATA *)((UInt8 *)(M<int>(self + 0xd50) + 0x870)),M<UInt32>(bufferBytes + 0x28),2,
+    uVar3 = HZMEM_Alloc((_HZDATA *)((UInt8 *)(M<int>(self + kIOATIR500Surface_accelerator) + 0x870)),M<UInt32>(bufferBytes + 0x28),2,
                         uVar5,uVar6);
     M<UInt32>(bufferBytes + 0x28) = uVar3;
     return 1;
   }
   uVar6 = 0;
-  iVar7 = M<int>(M<int>(self + 0xd50) + 0xb98);
+  iVar7 = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
   if ((M<unsigned int>(bufferBytes + 0x3c) & 0xf00000) != 0) {
     uVar6 = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
   }
@@ -143,7 +143,7 @@ LAB_0003e3e8:
   if ((height & 0x1f) != 0) {
     uVar6 = (height & 0xffffffe0) + 0x20;
   }
-  uVar5 = HZMEM_Alloc((_HZDATA *)((UInt8 *)(M<int>(self + 0xd50) + 0x870)),M<UInt32>(bufferBytes + 0x28),0,uVar5
+  uVar5 = HZMEM_Alloc((_HZDATA *)((UInt8 *)(M<int>(self + kIOATIR500Surface_accelerator) + 0x870)),M<UInt32>(bufferBytes + 0x28),0,uVar5
                       ,uVar6);
   M<UInt32>(bufferBytes + 0x28) = uVar5;
   if (M<UInt16>(bufferBytes + 0x16) == 2) {
@@ -156,7 +156,7 @@ LAB_0003e3e8:
     uVar6 = M<unsigned int>(bufferBytes + 0x3c);
   }
   uVar8 = 0;
-  iVar7 = M<int>(M<int>(self + 0xd50) + 0xb98);
+  iVar7 = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
   if ((uVar6 & 0xf00000) != 0) {
     uVar8 = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (uVar6 >> 0x14 & 0xf);
   }
@@ -177,7 +177,7 @@ LAB_0003e4a4:
   if ((height & 0x1f) != 0) {
     uVar6 = (height & 0xffffffe0) + 0x20;
   }
-  uVar3 = HZMEM_Alloc((_HZDATA *)((UInt8 *)(M<int>(self + 0xd50) + 0x870)),uVar5,1,uVar4,uVar6);
+  uVar3 = HZMEM_Alloc((_HZDATA *)((UInt8 *)(M<int>(self + kIOATIR500Surface_accelerator) + 0x870)),uVar5,1,uVar4,uVar6);
   M<UInt32>(bufferBytes + 0x28) = uVar3;
   return 1;
 }

@@ -1,11 +1,11 @@
---- a/Sources/IOATIR500Surface_setupFullScreen_Port.cpp	2026-10-16 20:26:06.284925852 -0700
-+++ b/Sources/IOATIR500Surface_setupFullScreen_Port.cpp	2026-10-16 20:26:06.286381207 -0700
+--- a/Sources/IOATIR500Surface_setupFullScreen_Port.cpp	2026-10-17 20:02:29.486820811 -0700
++++ b/Sources/IOATIR500Surface_setupFullScreen_Port.cpp	2026-10-17 20:02:29.488251661 -0700
 @@ -37,7 +37,7 @@
    if (flipAllowed != 0) {
-     panel = M<UInt32>(self + 0xc14);
-     if ((1 << (panel & 0x3f) & M<UInt32>(M<SInt32>(self + 0xd50) + 0xd0)) != 0) {
+     panel = M<UInt32>(self + kIOATIR500Surface_panel);
+     if ((1 << (panel & 0x3f) & M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xd0)) != 0) {
 -      M<UInt16>(self + panel * 0x94 + 0xcae) = M<SInt16>(self + panel * 0x94 + 0xcae) + 1U & 3;
 +      Vol(PANEL_RECORD(self, panel)->slotIndex) = M<SInt16>(&PANEL_RECORD(self, panel)->slotIndex) + 1U & 3;
-       VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + 0xc14),0,0);
-       M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
+       VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + kIOATIR500Surface_panel),0,0);
+       M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) + 1;
      }

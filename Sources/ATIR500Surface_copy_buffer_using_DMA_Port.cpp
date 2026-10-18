@@ -80,32 +80,32 @@ UInt32 ATIR500Surface::copy_buffer_using_DMA(SInt32 x, SInt32 y, SInt32 w, SInt3
   UInt32 dstPitch;
   UInt32 srcWidth;
   
-  iVar14 = M<int>(self + 0xd50);
+  iVar14 = M<int>(self + kIOATIR500Surface_accelerator);
   transferSpan = (h - 1) * pitch + M<UInt16>(bufferBytes + 0x16) * w;
   if (M<char>(iVar14 + 0x80) == '\0') {
     return 0;
   }
   uVar9 = M<unsigned int>(bufferBytes + 0x3c) >> 0xb & 1;
-  if ((bufferBytes < self + 0x558) || (bVar4 = true, self + 0x738 < bufferBytes)) {
+  if ((bufferBytes < self + kIOATIR500Surface_buffer10) || (bVar4 = true, self + kIOATIR500Surface_buffer14 < bufferBytes)) {
     bVar4 = false;
   }
-  if (bufferBytes == (UInt8 *)(self + 0x4e0)) {
+  if (bufferBytes == (UInt8 *)(self + kIOATIR500Surface_buffer9)) {
     return 0;
   }
   bVar1 = uVar9 == 0;
   bVar27 = bVar1 << 1;
   bVar16 = (UInt8)uVar9 ^ 1;
-  if ((!bVar1) && ((M<unsigned int>(self + 0xbe8) & 0x7c0000) != 0)) {
+  if ((!bVar1) && ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x7c0000) != 0)) {
     return 0;
   }
-  if (((flags & 2) == 0) || (flipVertically = 1, (M<unsigned int>(self + 0xbe8) & 0x70000000) != 0)) {
+  if (((flags & 2) == 0) || (flipVertically = 1, (M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0)) {
     flipVertically = 0;
   }
   synchronous = (flags & 1) == 0;
   bVar26 = synchronous << 1;
   if (synchronous) {
     if (!bVar1) {
-      bVar7 = (M<unsigned int>(self + 0xbe8) & 0x7c0000) == 0;
+      bVar7 = (M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x7c0000) == 0;
 joined_r0x00042bb8:
       if (!bVar7) {
         return 0;
@@ -134,7 +134,7 @@ LAB_00042bf4:
     return 0;
   }
   if ((bVar1) || (synchronous)) {
-    if ((bVar4) && ((M<int>(self + 0xdac) != 0 && (!synchronous)))) {
+    if ((bVar4) && ((M<int>(self + kATIR500Surface_deintMode) != 0 && (!synchronous)))) {
       w = (UInt32)M<UInt16>(bufferBytes + 0x14);
     }
   }
@@ -147,7 +147,7 @@ LAB_00042bf4:
   }
   if (M<int>(bufferBytes + 0x24) != 0) {
     M<UInt8>(M<int>(bufferBytes + 0x24) + 0x58) = bVar16;
-    iVar14 = M<int>(self + 0xd50);
+    iVar14 = M<int>(self + kIOATIR500Surface_accelerator);
   }
   if (!bVar3) {
     iVar14 = M<int>(iVar14 + 0x8a4);
@@ -166,17 +166,17 @@ LAB_00042bf4:
     iVar14 = VCALL(*transferMap, 0xd0)(transferMap);
     mappedAddress = (void *)(iVar14 + offset);
     if ((bool)(bVar16 >> 1 & 1)) {
-      this_00 = M<UInt8 *>(self + 0xd50);
+      this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       if ((M<unsigned int>(this_00 + 0x98) & 0x80) != 0) {
         ((IOATIR500Accelerator *)(this_00))->flush_memory_for_out((const void *)(mappedAddress), pitch * h);
-        this_00 = M<UInt8 *>(self + 0xd50);
+        this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       }
     }
     else {
-      this_00 = M<UInt8 *>(self + 0xd50);
+      this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       if ((M<unsigned int>(this_00 + 0x98) & 0x80) != 0) {
         ((IOATIR500Accelerator *)(this_00))->flush_memory_for_in((const void *)(mappedAddress), transferSpan);
-        this_00 = M<UInt8 *>(self + 0xd50);
+        this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       }
     }
     iVar14 = M<int>(this_00 + 0x8a4);
@@ -187,11 +187,11 @@ LAB_00042bf4:
     iVar15 = M<int>(transferBytes + 4);
   }
   if (flipVertically != 0) {
-    if ((int)M<SInt16>(self + 0xbd6) == (int)M<SInt16>(self + 0xbda)) {
+    if ((int)M<SInt16>(self + kIOATIR500Surface_height) == (int)M<SInt16>(self + kIOATIR500Surface_committedHeight)) {
       y = ((unsigned int)M<UInt16>(bufferBytes + 0x1e) - y) - h;
     }
     else {
-      y = (M<SInt16>(self + 0xbda) - y) - h;
+      y = (M<SInt16>(self + kIOATIR500Surface_committedHeight) - y) - h;
     }
   }
   if ((bool)(bVar16 >> 1 & 1)) {
@@ -270,7 +270,7 @@ LAB_00042bf4:
     }
   }
   else {
-    piVar23 = M<int *>(self + 0xd50);
+    piVar23 = M<int *>(self + kIOATIR500Surface_accelerator);
     iVar24 = piVar23[0x1e2];
     iVar15 = VCALL(*piVar23, 0x54c)(piVar23,Vol(rec0->entries[1 + slot].stamp));
     piVar23[0x1e2] = iVar24 + iVar15;
@@ -283,15 +283,15 @@ LAB_00042bf4:
     wordCount = this->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(bufferBytes),0,(UInt32 *)(cmd));
   }
   uVar9 = write_3dtexquad_cmds_for_copy_buffer_using_DMA
-                    (M<ATIRadeonX1000 *>(self + 0xd50),(UInt32 *)cmd,wordCount,uVar19,srcAddress,local_98,
+                    (M<ATIRadeonX1000 *>(self + kIOATIR500Surface_accelerator),(UInt32 *)cmd,wordCount,uVar19,srcAddress,local_98,
                      srcWidth,uVar9,uVar17,FormatTableLookup_0x0004d2dc(iVar21) >> 0xc & 7,
                      (UInt8)local_64,uVar18,dstAddress,local_94[0],dstPitch,uVar20,
                      FormatTableLookup_0x0004d2dc(iVar22) >> 0xc & 7,(UInt8)local_68,dstX,dstY,
                      srcX,iVar14,w,h,SUB41m(flipVertically,0));
   if (!(bool)(bVar26 >> 1 & 1)) {
-    M<UInt32>(M<int>(self + 0xd50) + 0xb90) = 1;
+    M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb90) = 1;
   }
-  M<UInt32>(M<int>(self + 0xd50) + 0x78) = 0;
+  M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   paddedWordCount = uVar9;
   if ((uVar9 & 1) != 0) {
     paddedWordCount = uVar9 + 1;
@@ -307,16 +307,16 @@ LAB_00042bf4:
     iVar14 = (int)Vol(rec0->entries[1 + slot].gartOffset);
   }
   M<SInt16>(transferBytes + 0xe) = sVar8 + -1;
-  submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0xd50)))->submit_buffer((UInt32 *)((int)Vol(rec0->entries[1 + slot].header) + 0x20),iVar14 + 0x20,
+  submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->submit_buffer((UInt32 *)((int)Vol(rec0->entries[1 + slot].header) + 0x20),iVar14 + 0x20,
                       M<UInt32>((int)Vol(rec0->entries[1 + slot].header) + 0x14));
-  M<UInt32>(self + 0x7c) = submitStamp;
+  M<UInt32>(self + kIOATIR500Surface_stamp) = submitStamp;
   Vol(rec0->entries[1 + slot].stamp) = submitStamp;
   if ((bool)(bVar26 >> 1 & 1)) {
-    VCALL(*M<int *>(self + 0xd50), 0x54c)(M<int *>(self + 0xd50),submitStamp);
-    VCALL(*M<int *>(self + 0xd50), 0x5ac)(M<int *>(self + 0xd50),transferBytes);
+    VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x54c)(M<int *>(self + kIOATIR500Surface_accelerator),submitStamp);
+    VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x5ac)(M<int *>(self + kIOATIR500Surface_accelerator),transferBytes);
     if (((bVar3) && (!bVar7)) &&
-       ((M<unsigned int>(M<UInt8 *>(self + 0xd50) + 0x98) & 0x80) != 0)) {
-      ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->flush_memory_for_in((const void *)(mappedAddress),transferSpan);
+       ((M<unsigned int>(M<UInt8 *>(self + kIOATIR500Surface_accelerator) + 0x98) & 0x80) != 0)) {
+      ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->flush_memory_for_in((const void *)(mappedAddress),transferSpan);
     }
   }
   else {

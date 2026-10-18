@@ -33,21 +33,21 @@ UInt32 IOATIR500Surface::surface_buffer_idx_mask(UInt32 bufferType, UInt32*outMa
   switch(bufferType) {
   case 1:
 switchD_00013ae0_caseD_1:
-    if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) == self + 0xa8) {
+    if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) == self + kIOATIR500Surface_buffers) {
       *outMask = 1;
       return 0;
     }
     *outMask = 2;
     return 0;
   case 2:
-    if (M<UInt8 *>(self + 0xb80) == self + 0x300) {
+    if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) == self + kIOATIR500Surface_buffer5) {
       *outMask = 0x20;
       return 4;
     }
     *outMask = 0x10;
     return 4;
   case 3:
-    if (M<UInt8 *>(self + 0xb84) == self + 0x300) {
+    if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer5) == self + kIOATIR500Surface_buffer5) {
       *outMask = 0x20;
       return 5;
     }
@@ -69,15 +69,15 @@ switchD_00013ae0_caseD_1:
     *outMask = 0x100;
     return 8;
   case 0x11:
-    if ((M<UInt32>(self + 0xc18) & 2) == 0) {
-      if ((M<UInt32>(self + 0xc18) & 1) == 0) {
+    if ((M<UInt32>(self + kIOATIR500Surface_contextReqBits) & 2) == 0) {
+      if ((M<UInt32>(self + kIOATIR500Surface_contextReqBits) & 1) == 0) {
         *outMask = 0;
         return 0;
       }
       goto switchD_00013ae0_caseD_1;
     }
   }
-  if (M<UInt8 *>(self + 0xb74) == self + 0xa8) {
+  if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) == self + kIOATIR500Surface_buffers) {
     *outMask = 1;
     return 1;
   }

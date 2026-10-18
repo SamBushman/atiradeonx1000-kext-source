@@ -31,8 +31,8 @@ void IOATIR500Surface::remove_dvd_context(IOATIR500DVDContext *context) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
-  if (M<UInt8 *>(self + 0x90) == contextBytes) {
-    M<UInt32>(self + 0x90) = 0;
+  if (M<UInt8 *>(self + kIOATIR500Surface_boundDVDContext) == contextBytes) {
+    M<UInt32>(self + kIOATIR500Surface_boundDVDContext) = 0;
   }
   this->reset_req_bits();
   return;

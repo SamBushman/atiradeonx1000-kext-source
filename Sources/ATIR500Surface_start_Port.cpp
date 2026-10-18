@@ -38,15 +38,15 @@ bool ATIR500Surface::start(IOService *provider) {
   GH_IOLockLock(M<UInt32>(providerBytes + 0x840));
   started = IOATIR500Surface::start(provider);
   if (started != 0) {
-    M<UInt16>(self + 0xdb4) = 0;
+    M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 0;
     self[0xdb7] = 0x0;
     self[0xdb6] = 0x0;
-    M<UInt32>(self + 0xd90) = 0;
-    M<UInt32>(self + 0xd94) = 0;
-    M<UInt32>(self + 0xda4) = 0;
-    M<UInt32>(self + 0xda8) = 0;
-    M<UInt32>(self + 0xdac) = 0;
-    M<UInt32>(self + 0xdb8) = 1;
+    M<UInt32>(self + kATIR500Surface_currentBufferIndex) = 0;
+    M<UInt32>(self + kATIR500Surface_overlayHandle) = 0;
+    M<UInt32>(self + kATIR500Surface_overlayExists) = 0;
+    M<UInt32>(self + kATIR500Surface_unknown_0xda8) = 0;
+    M<UInt32>(self + kATIR500Surface_deintMode) = 0;
+    M<UInt32>(self + kATIR500Surface_panelSide) = 1;
     GH_IOLockUnlock(M<UInt32>(providerBytes + 0x840));
   }
   else {

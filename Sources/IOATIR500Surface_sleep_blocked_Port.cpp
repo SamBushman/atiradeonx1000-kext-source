@@ -35,12 +35,12 @@ void IOATIR500Surface::sleep_blocked() {
 
   UInt8 IVar1;
   
-  GH_IOLockLock(M<UInt32>(self + 0xc04));
+  GH_IOLockLock(M<UInt32>(self + kIOATIR500Surface_lock));
   IVar1 = self[0xbf6];
   while (IVar1 != 0x0) {
-    GH_IOLockSleep(M<UInt32>(self + 0xc04),self,0);
+    GH_IOLockSleep(M<UInt32>(self + kIOATIR500Surface_lock),self,0);
     IVar1 = self[0xbf6];
   }
-  GH_IOLockUnlock(M<UInt32>(self + 0xc04));
+  GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Surface_lock));
   return;
 }

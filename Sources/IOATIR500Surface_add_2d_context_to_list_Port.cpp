@@ -31,8 +31,8 @@ void IOATIR500Surface::add_2d_context_to_list(IOATIR5002DContext *context) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
-  M<UInt32>(contextBytes + 0x84) = M<UInt32>(self + 0x8c);
-  M<UInt8 *>(self + 0x8c) = contextBytes;
-  M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | M<UInt32>(contextBytes + 0x8c);
+  M<UInt32>(contextBytes + 0x84) = M<UInt32>(self + kIOATIR500Surface_context2DList);
+  M<UInt8 *>(self + kIOATIR500Surface_context2DList) = contextBytes;
+  M<UInt32>(self + kIOATIR500Surface_contextReqBits) = M<UInt32>(self + kIOATIR500Surface_contextReqBits) | M<UInt32>(contextBytes + 0x8c);
   return;
 }

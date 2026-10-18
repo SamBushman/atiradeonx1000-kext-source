@@ -33,7 +33,7 @@ UInt32 ATIR500Surface::decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *b
 
   SInt32 endIndex;
   
-  M<UInt32>(M<SInt32>(self + 0xd50) + 0xb94) = 0;
+  M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb94) = 0;
   if (bufferBytes[0x34] == 0x0) {
     packet[wordIndex] = 0x1393;
     packet[wordIndex + 1] = 10;
@@ -46,8 +46,8 @@ UInt32 ATIR500Surface::decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *b
   else {
     endIndex = (SInt32)this->load_3d_blit((UInt32 *)(packet + wordIndex),(ATIR500SurfaceBuffer *)(bufferBytes));
     endIndex = endIndex - (SInt32)packet >> 2;
-    M<UInt32>(M<SInt32>(self + 0xd50) + 0xb90) = 1;
-    M<UInt32>(M<SInt32>(self + 0xd50) + 0x78) = 0;
+    M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb90) = 1;
+    M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   }
   return endIndex;
 }

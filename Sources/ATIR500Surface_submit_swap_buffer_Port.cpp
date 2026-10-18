@@ -49,11 +49,11 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
   UInt32 *cmd;
   UInt8 *pVVar19;
   
-  if (M<SInt16>(self + 0xdb4) != 0) {
-    M<UInt32>(M<int>(self + 0xd50) + 0x78) = 0;
+  if (M<SInt16>(self + kATIR500Surface_swapBatchBuilt) != 0) {
+    M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   }
-  if (M<int>(self + 0xd54) != 0) {
-    M<UInt32>(self + 0xd54) = 0;
+  if (M<int>(self + kIOATIR500Surface_flipContext) != 0) {
+    M<UInt32>(self + kIOATIR500Surface_flipContext) = 0;
     M<unsigned int>((int)Vol(PANEL_RECORD(self, panel)->entries[0].header) + 0x1c) =
          M<unsigned int>((int)Vol(PANEL_RECORD(self, panel)->entries[0].header) + 0x1c) | 1;
   }
@@ -80,7 +80,7 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
     }
   }
   else {
-    piVar17 = M<int *>(self + 0xd50);
+    piVar17 = M<int *>(self + kIOATIR500Surface_accelerator);
     iVar12 = piVar17[0x1e2];
     iVar6 = VCALL(*piVar17, 0x54c)(piVar17,Vol(slot->stamp));
     piVar17[0x1e2] = iVar12 + iVar6;
@@ -103,8 +103,8 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
   slotHeader[6] = uVar11;
   iVar6 = (int)Vol(slot->header);
   cmd = (UInt32 *)(iVar6 + 0x20);
-  if ((((swapArg & 0x18) == 0) || (M<SInt16>(self + 0xbee) != 0)) ||
-     ((iVar12 = M<int>(self + 0xd50), M<char>(iVar12 + 0x9b0) != '\0' &&
+  if ((((swapArg & 0x18) == 0) || (M<SInt16>(self + kIOATIR500Surface_scalingFlags) != 0)) ||
+     ((iVar12 = M<int>(self + kIOATIR500Surface_accelerator), M<char>(iVar12 + 0x9b0) != '\0' &&
       (M<int>(panel * 0x18 + iVar12 + 0xb10) != 0)))) {
     uVar9 = 0;
   }
@@ -160,7 +160,7 @@ LAB_0003bcc8:
     } while (iVar12 != 0);
     uVar9 = uVar9 + iVar6;
   }
-  accelerator = M<UInt8 *>(self + 0xd50);
+  accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   if (accelerator[0x9b0] == 0x0) {
     uVar11 = 0;
   }
@@ -191,26 +191,26 @@ LAB_0003be90:
   if (M<int>(pVVar19 + 4) == 0) {
     ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar19));
   }
-  M<int>(M<int>(self + 0xd50) + 0x710) =
-       M<int>(M<int>(pVVar19 + 0x14) + 0x14) * 4 + M<int>(M<int>(self + 0xd50) + 0x710);
-  accelerator = M<UInt8 *>(self + 0xd50);
+  M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710) =
+       M<int>(M<int>(pVVar19 + 0x14) + 0x14) * 4 + M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710);
+  accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   uVar11 = ((ATIRadeonX1000 *)(accelerator))->submit_buffer((UInt32 *)(M<int>(pVVar19 + 0x14) + 0x20),M<int>(pVVar19 + 4) + 0x20
                       ,M<UInt32>(M<int>(pVVar19 + 0x14) + 0x14));
   M<UInt32>(pVVar19 + 0x10) = uVar11;
-  M<UInt32>(self + 0x80) = uVar11;
+  M<UInt32>(self + kIOATIR500Surface_submittedStamp) = uVar11;
   M<UInt32>(accelerator + panel * 0x20 + 0xec) = uVar11;
-  iVar8 = M<int>(self + 0xd50);
+  iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
   if ((M<char>(iVar8 + 0x9b0) != '\0') && (*M<int *>(pVVar19 + 0x14) != 0)) {
     if (M<int>(panel * 0x18 + iVar8 + 0xb10) == 0) {
       if ((M<int>(iVar8 + 0x894) != 0) &&
          (M<int>((unsigned int)(panel == 0) * 0x18 + iVar8 + 0xb10) != 0)) {
-        M<UInt32>((unsigned int)(panel == 0) * 4 + iVar8 + 0xad4) = M<UInt32>(self + 0x80);
-        M<UInt32>(M<int>(self + 0xd50) + 0x78) = 0;
+        M<UInt32>((unsigned int)(panel == 0) * 4 + iVar8 + 0xad4) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
+        M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
       }
     }
     else {
-      M<UInt32>(panel * 4 + iVar8 + 0xad4) = M<UInt32>(self + 0x80);
-      M<UInt32>(M<int>(self + 0xd50) + 0x78) = 0;
+      M<UInt32>(panel * 4 + iVar8 + 0xad4) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
+      M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
     }
   }
   return;

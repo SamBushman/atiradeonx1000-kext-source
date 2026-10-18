@@ -35,7 +35,7 @@ UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *buffe
   SInt32 backingStore;
   SInt32 *attachedMemory;
   
-  backingStore = VCALL(*M<SInt32 *>(self + 0xd50), 0x570)(M<SInt32 *>(self + 0xd50),0xc0);
+  backingStore = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x570)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),0xc0);
   result = 0;
   if (backingStore != 0) {
     M<SInt32>(bufferBytes + 0x24) = backingStore;
@@ -70,7 +70,7 @@ UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *buffe
     M<SInt16>(backingStore + 0x50) = (SInt16)pageOffset;
     M<SInt16>(backingStore + 0x52) = (SInt16)alignedPitch;
     M<UInt8>(backingStore + 0x58) = 1;
-    M<UInt32>(backingStore + 0x54) = M<UInt32>(self + 0x7c);
+    M<UInt32>(backingStore + 0x54) = M<UInt32>(self + kIOATIR500Surface_stamp);
     if (((self[0xbf7] == 0x0) || (M<SInt32>(bufferBytes + 0x24) == 0)) ||
        (attachedMemory = M<SInt32 *>(M<SInt32>(bufferBytes + 0x24) + 8), attachedMemory == (SInt32 *)0x0)) {
       result = 1;

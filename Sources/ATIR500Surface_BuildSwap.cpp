@@ -130,8 +130,8 @@ void ATIR500Surface::build_swap() {
   SInt32 pitch;
   UInt32 bufferWidth;
   
-  M<UInt16>(self + 0xdb4) = 0;
-  iVar32 = M<SInt32>(self + 0xd50);
+  M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 0;
+  iVar32 = M<SInt32>(self + kIOATIR500Surface_accelerator);
   if (M<SInt32>(iVar32 + 0xcc) != 0) {
     panel = 0;
     zero = (double)FLOAT_0004c370;
@@ -141,16 +141,16 @@ void ATIR500Surface::build_swap() {
     signedIntBias = DOUBLE_0004c3a8;
     local_108 = self;
     do {
-      bVar1 = (M<UInt32>(self + 0xbe8) & 0x20) == 0;
+      bVar1 = (M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x20) == 0;
       if (bVar1) {
-        surfaceBuffer = M<SInt32>(self + 0xb74);
+        surfaceBuffer = M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1);
       }
       else {
         surfaceBuffer = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
       }
       iVar32 = panel * 0x78 + iVar32;
       if ((self[0xbf1] == 0x10) ||
-         ((self[0xbf1] != 0x20 && (M<SInt32>(self + 0xbe0) == M<SInt32>(self + 0xbe4))
+         ((self[0xbf1] != 0x20 && (M<SInt32>(self + kIOATIR500Surface_scalingSourceWidth) == M<SInt32>(self + kIOATIR500Surface_regionWidth))
           ))) {
         iVar35 = 1;
       }
@@ -168,7 +168,7 @@ void ATIR500Surface::build_swap() {
       regionX = M<SInt16>(piVar27 + 1);
       uVar38 = (UInt32)M<SInt16>((SInt32)piVar27 + 6);
       regionWidth = M<SInt16>(piVar27 + 2);
-      if ((M<SInt32>(self + 0x90) != 0) && (M<SInt32>(self + 0xda4) != 0)) {
+      if ((M<SInt32>(self + kIOATIR500Surface_boundDVDContext) != 0) && (M<SInt32>(self + kATIR500Surface_overlayExists) != 0)) {
         if ((SInt32)regionWidth == 0) {
           return;
         }
@@ -180,7 +180,7 @@ void ATIR500Surface::build_swap() {
       batchEntry = &panelRec->entries[0];
       bVar46 = (panel == 0) << 1;
       batchWords = (UInt32 *)(batchHeader + 0x20);
-      if (((panel != 0) || (M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) == M<SInt32>(self + 0xb74))) || (bVar1)) {
+      if (((panel != 0) || (M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) == M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1))) || (bVar1)) {
         batchIndex = 0;
       }
       else {
@@ -191,13 +191,13 @@ void ATIR500Surface::build_swap() {
         formatOffset = (UInt32)(UInt8)self[0xe2] * 0x1c;
         widthUnits = 0;
         M<UInt32>(batchHeader + 0x290) =
-             (UInt32)M<UInt16>(self + 200) * M<SInt32>(self + 0xe8) + M<SInt32>(self + 0xb0) &
+             (UInt32)M<UInt16>(self + 200) * M<SInt32>(self + kIOATIR500Surface_buffer0MipOffset0) + M<SInt32>(self + kIOATIR500Surface_buffer0GpuBase) &
              0xffffffe0;
-        if ((M<UInt32>(self + 0xe4) & 0xf00000) != 0) {
-          widthUnits = (UInt32)M<UInt16>(self + 0xbc) / (M<UInt32>(self + 0xe4) >> 0x14 & 0xf);
+        if ((M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) & 0xf00000) != 0) {
+          widthUnits = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0Width) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf);
         }
-        pitchUnits = 0x20 / M<UInt16>(self + 0xbe);
-        if (0x20 / M<UInt16>(self + 0xbe) <= widthUnits) {
+        pitchUnits = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerRow);
+        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerRow) <= widthUnits) {
           pitchUnits = widthUnits;
         }
         uVar15 = M<UInt32>(batchHeader + 0x250);
@@ -216,66 +216,66 @@ void ATIR500Surface::build_swap() {
         M<UInt32>(batchHeader + 0x250) =
              (FormatTableLookup_0x0004d2e0(formatOffset) & 0x600) << 5 |
              uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffff00e0;
-        if (((M<UInt32>(self + 0xe4) & 0xf00000) == 0) ||
-           (uVar19 = (UInt32)M<UInt16>(self + 0xc4) / (M<UInt32>(self + 0xe4) >> 0x14 & 0xf),
+        if (((M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) & 0xf00000) == 0) ||
+           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0HeightOrRows) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf),
            lastColumn = uVar19 - 1, uVar19 == 0)) {
           lastColumn = 0;
         }
         lastRow = 0;
-        if (M<UInt16>(self + 0xc6) != 0) {
-          lastRow = M<UInt16>(self + 0xc6) - 1;
+        if (M<UInt16>(self + kIOATIR500Surface_buffer0Extra1e) != 0) {
+          lastRow = M<UInt16>(self + kIOATIR500Surface_buffer0Extra1e) - 1;
         }
         M<UInt32>(batchHeader + 0x2f4) = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
         AVar5 = self[0x15a];
         M<UInt32>(batchHeader + 0x2a8) =
              ((UInt8)self[0x158] & 7) << 2 |
-             (UInt32)M<UInt16>(self + 0x140) * M<SInt32>(self + 0x160) + M<SInt32>(self + 0x128) &
+             (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1BasePitch) * M<SInt32>(self + kIOATIR500Surface_buffer1MipOffset0) + M<SInt32>(self + kIOATIR500Surface_buffer1GpuBase) &
              0xffffffe0;
-        if (((M<UInt32>(self + 0x15c) & 0xf00000) == 0) ||
-           (uVar19 = (UInt32)M<UInt16>(self + 0x13c) / (M<UInt32>(self + 0x15c) >> 0x14 & 0xf),
+        if (((M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) == 0) ||
+           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1HeightOrRows) / (M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf),
            lastColumn = uVar19 - 1, uVar19 == 0)) {
           lastColumn = 0;
         }
         lastRow = 0;
-        if (M<UInt16>(self + 0x13e) != 0) {
-          lastRow = M<UInt16>(self + 0x13e) - 1;
+        if (M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) != 0) {
+          lastRow = M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) - 1;
         }
         M<UInt32>(batchHeader + 0x2c0) = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
         uVar29 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar5 * 0x1c);
         M<UInt32>(batchHeader + 0x2c8) =
              uVar29 >> 0x13 & 0x1f | (uVar29 & 0x40) << 0x10 | uVar29 >> 7 & 0xe00 |
              uVar29 >> 1 & 0x7000 | (uVar29 & 0x1c00) << 5 | (uVar29 & 0x380) << 0xb;
-        uVar29 = M<UInt32>(self + 0x15c);
+        uVar29 = M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits);
         bVar1 = (uVar29 & 0xf00000) == 0;
         if (bVar1) {
           uVar19 = 0;
         }
         else {
-          uVar19 = (UInt32)M<UInt16>(self + 0x134) / (uVar29 >> 0x14 & 0xf);
+          uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (uVar29 >> 0x14 & 0xf);
         }
-        uVar17 = 0x20 / M<UInt16>(self + 0x136);
-        if (0x20 / M<UInt16>(self + 0x136) <= uVar19) {
+        uVar17 = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerRow);
+        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerRow) <= uVar19) {
           uVar17 = uVar19;
         }
         if ((bVar1) ||
-           (uVar19 = (UInt32)M<UInt16>(self + 0x13c) / (uVar29 >> 0x14 & 0xf), uVar29 = uVar19 - 1,
+           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1HeightOrRows) / (uVar29 >> 0x14 & 0xf), uVar29 = uVar19 - 1,
            uVar19 == 0)) {
           uVar29 = 0;
         }
         uVar19 = 0;
-        if (M<UInt16>(self + 0x13e) != 0) {
-          uVar19 = M<UInt16>(self + 0x13e) - 1;
+        if (M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) != 0) {
+          uVar19 = M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) - 1;
         }
         M<UInt32>(batchHeader + 0x2d0) =
              uVar17 - 1 & 0x3fff | (uVar29 & 0x800) << 4 | (uVar19 & 0x800) << 5;
         dVar54 = (double)FLOAT_0004c37c;
         nextIndex = rectPacketIndex * 4 + 0x30 >> 2;
-        uVar16 = M<UInt32>(M<SInt32>(self + 0xd50) + 0xb74);
+        uVar16 = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
         M<UInt32>(batchHeader + 0x2b0) = M<UInt32>(batchHeader + 0x2b0) & 0xffffe1ff | 0x1400;
         M<UInt32>(batchHeader + 0x3c) = 0x70000;
         M<UInt32>(batchHeader + 0x54) = uVar16;
-        surfaceWidth = M<SInt16>(self + 0xbd4);
-        surfaceHeight = M<SInt16>(self + 0xbd6);
+        surfaceWidth = M<SInt16>(self + kIOATIR500Surface_width);
+        surfaceHeight = M<SInt16>(self + kIOATIR500Surface_height);
         batchWords[rectPacketIndex] = 0x31080;
         batchWords[rectPacketIndex + 5] = 0x1087;
         batchWords[rectPacketIndex + 1] = FBITS((float)zero);
@@ -300,10 +300,10 @@ void ATIR500Surface::build_swap() {
       if (panelRec->active != 0x0) {
         iVar26 = batchIndex;
         if (self[0xbed] == 0x0) {
-          accelerator = M<SInt32>(self + 0xd50);
+          accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
         }
         else {
-          accelerator = M<SInt32>(self + 0xd50);
+          accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
           if ((M<char>(accelerator + 0x9b0) == '\0') ||
              (M<SInt32>(panel * 0x18 + accelerator + 0xb10) == 0)) {
             if ((SInt32)uVar38 < 0) {
@@ -360,23 +360,23 @@ LAB_0003f654:
             }
           }
         }
-        if (M<SInt32>(self + 0xbe0) == M<SInt32>(self + 0xbe4)) {
+        if (M<SInt32>(self + kIOATIR500Surface_scalingSourceWidth) == M<SInt32>(self + kIOATIR500Surface_regionWidth)) {
           heightRatio = 1.0;
           widthRatio = 1.0;
         }
         else {
           widthRatio = FLOAT_0004c370;
-          if ((SInt32)M<SInt16>(self + 0xbe4) != 0) {
-            widthRatio = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe0) ^ 0x80000000)
+          if ((SInt32)M<SInt16>(self + kIOATIR500Surface_regionWidth) != 0) {
+            widthRatio = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + kIOATIR500Surface_scalingSourceWidth) ^ 0x80000000)
                            - DOUBLE_0004c3a8) /
-                    (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe4) ^ 0x80000000)
+                    (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + kIOATIR500Surface_regionWidth) ^ 0x80000000)
                            - DOUBLE_0004c3a8);
           }
           heightRatio = 0.0;
-          if ((SInt32)M<SInt16>(self + 0xbe6) != 0) {
-            heightRatio = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe2) ^ 0x80000000)
+          if ((SInt32)M<SInt16>(self + kIOATIR500Surface_regionHeight) != 0) {
+            heightRatio = (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + kIOATIR500Surface_scalingSourceHeight) ^ 0x80000000)
                             - DOUBLE_0004c3a8) /
-                     (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + 0xbe6) ^ 0x80000000)
+                     (float)((double)CONCAT44d(0x43300000,(SInt32)M<SInt16>(self + kIOATIR500Surface_regionHeight) ^ 0x80000000)
                             - signedIntBias);
           }
         }
@@ -467,10 +467,10 @@ LAB_0003f654:
         dVar54 = (double)(float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias);
         dVar65 = (double)(float)((double)CONCAT44d(0x43300000,bufferHeight) - DOUBLE_0004c3b0);
         dVar61 = (double)(float)((double)CONCAT44d(0x43300000,
-                                                  (SInt32)M<SInt16>(self + 0xbdc) ^ 0x80000000) -
+                                                  (SInt32)M<SInt16>(self + kIOATIR500Surface_scalingBufferX) ^ 0x80000000) -
                                 signedIntBias);
         dVar62 = (double)(float)((double)CONCAT44d(0x43300000,
-                                                  (SInt32)M<SInt16>(self + 0xbde) ^ 0x80000000) -
+                                                  (SInt32)M<SInt16>(self + kIOATIR500Surface_scalingBufferY) ^ 0x80000000) -
                                 signedIntBias);
         dVar63 = (double)widthRatio;
         dVar64 = (double)heightRatio;
@@ -1197,8 +1197,8 @@ LAB_0003f654:
       local_108 = local_108 + 8;
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0x14) = batchIndex;
       M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) = M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) | 1;
-      M<UInt16>(self + 0xdb4) = 1;
-      iVar32 = M<SInt32>(self + 0xd50);
+      M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 1;
+      iVar32 = M<SInt32>(self + kIOATIR500Surface_accelerator);
     } while (panel < M<UInt32>(iVar32 + 0xcc));
   }
   return;

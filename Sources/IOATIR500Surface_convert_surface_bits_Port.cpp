@@ -44,7 +44,7 @@ UInt32 IOATIR500Surface::convert_surface_bits(UInt32 selectorBits) {
     if (selectorBit == 0x10) {
       formatSlot = 6;
 LAB_00012420:
-      result = result | 1 << ((M<SInt32>(self + formatSlot * 4 + 0xb70) - (SInt32)(self + 0xa8)) / 0x78 & 0x3fU
+      result = result | 1 << ((M<SInt32>(self + formatSlot * 4 + 0xb70) - (SInt32)(self + kIOATIR500Surface_buffers)) / 0x78 & 0x3fU
                            );
     }
     else {

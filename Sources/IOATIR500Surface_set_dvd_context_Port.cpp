@@ -31,7 +31,7 @@ void IOATIR500Surface::set_dvd_context(IOATIR500DVDContext *context) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
-  M<UInt8 *>(self + 0x90) = contextBytes;
-  M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | M<UInt32>(contextBytes + 0x88);
+  M<UInt8 *>(self + kIOATIR500Surface_boundDVDContext) = contextBytes;
+  M<UInt32>(self + kIOATIR500Surface_contextReqBits) = M<UInt32>(self + kIOATIR500Surface_contextReqBits) | M<UInt32>(contextBytes + 0x88);
   return;
 }

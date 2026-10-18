@@ -45,16 +45,16 @@ LAB_000190f0:
     result = 0;
   }
   else {
-    iVar1 = M<SInt32>(self + 0x10);
-    M<UInt32>(self + 0xc) = 0;
+    iVar1 = M<SInt32>(self + kATIR500Memory_chunkList);
+    M<UInt32>(self + kATIR500Memory_spareNodeStack) = 0;
     M<UInt32>(self + 8) = 0;
     if (iVar1 == 0) {
       newChunk = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
-      M<UInt32 *>(self + 0x10) = newChunk;
+      M<UInt32 *>(self + kATIR500Memory_chunkList) = newChunk;
       if (newChunk != (UInt32 *)0x0) {
         *newChunk = 0;
       }
-      iVar1 = M<SInt32>(self + 0x10);
+      iVar1 = M<SInt32>(self + kATIR500Memory_chunkList);
       if (iVar1 == 0) goto LAB_000190f0;
     }
     piVar7 = (SInt32 *)(iVar1 + 0x24);
@@ -88,7 +88,7 @@ LAB_000190f0:
     piVar7[7] = -0x80000000;
     piVar7[10] = poolSize;
     piVar7[0xb] = 0;
-    M<SInt32 *>(self + 0xc) = piVar5;
+    M<SInt32 *>(self + kATIR500Memory_spareNodeStack) = piVar5;
     piVar7[0xd] = 0;
     piVar7[0xe] = 0;
     piVar7[0xf] = 0;

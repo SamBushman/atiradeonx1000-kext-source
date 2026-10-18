@@ -51,10 +51,10 @@ void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 forma
   SInt32 fixedBuffer;
   
   formatBuffer = M<SInt32>(self + formatCode * 4 + 0xb70);
-  fixedBuffer = M<SInt32>(self + 0xb94);
+  fixedBuffer = M<SInt32>(self + kIOATIR500Surface_fixedSurfaceBuffer);
   GH_memcpy(packet,&g_r500_3d_blit_state_packet,0x2f4);
   uVar16 = 0;
-  packet[0xb] = M<UInt32>(M<SInt32>(self + 0xd50) + 0xb74);
+  packet[0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
   iVar13 = (UInt32)M<UInt8>(fixedBuffer + 0x3a) * 0x1c;
   packet[0x9a] =
        (UInt32)M<UInt16>(fixedBuffer + 0x20) * M<SInt32>(fixedBuffer + 0x40) + M<SInt32>(fixedBuffer + 8) &
@@ -133,7 +133,7 @@ void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 forma
     uVar14 = M<UInt16>(formatBuffer + 0x1e) - 1;
   }
   packet[0xaa] = uVar15 - 1 & 0x3fff | (uVar16 & 0x800) << 4 | (uVar14 & 0x800) << 5;
-  if ((M<UInt32>(self + 0xbe8) & 0x700000) != 0) {
+  if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) != 0) {
     packet[0xf] = 0xc0001000;
   }
   dVar11 = DOUBLE_0004c3a8;
@@ -181,6 +181,6 @@ void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 forma
   }
   packet[0xc9] = 0x1393;
   packet[0xca] = 10;
-  M<UInt32>(M<SInt32>(self + 0xd50) + 0x78) = 0;
+  M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   return (void *)(packet + 0xcb);
 }

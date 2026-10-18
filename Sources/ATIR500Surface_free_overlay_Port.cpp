@@ -30,9 +30,9 @@
 void ATIR500Surface::free_overlay() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if (M<SInt32>(self + 0xd94) != 0) {
-    M<UInt32>(self + 0xd94) = 0;
+  if (M<SInt32>(self + kATIR500Surface_overlayHandle) != 0) {
+    M<UInt32>(self + kATIR500Surface_overlayHandle) = 0;
   }
-  M<UInt32>(self + 0xd70) = M<UInt32>(self + 0xd70) & 0xfffffffd;
+  M<UInt32>(self + kIOATIR500Surface_lockDataFlags) = M<UInt32>(self + kIOATIR500Surface_lockDataFlags) & 0xfffffffd;
   return;
 }

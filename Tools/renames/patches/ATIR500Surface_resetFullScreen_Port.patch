@@ -1,14 +1,14 @@
---- a/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-16 20:25:14.600998228 -0700
-+++ b/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-16 20:25:14.602185851 -0700
+--- a/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-17 19:55:37.994254883 -0700
++++ b/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-17 19:55:37.995594072 -0700
 @@ -76,32 +76,14 @@
    if (iVar9 == 0) {
-     iVar9 = M<SInt32>(self + 0xd50);
+     iVar9 = M<SInt32>(self + kIOATIR500Surface_accelerator);
      registers = M<SInt32>(iVar9 + 0x860);
 -    bVar2 = M<UInt8>(registers + 0x6107);
 -    bVar3 = M<UInt8>(registers + 0x6105);
 -    bVar4 = M<UInt8>(registers + 0x6104);
 +    maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
-     id = M<SInt32>(self + 0xc14);
+     id = M<SInt32>(self + kIOATIR500Surface_panel);
 -    maskedValue = (M<UInt8>(registers + 0x6106) & 0xffcf) << 0x10;
      uVar7 = (UInt32)M<UInt8>(id * 0x78 + iVar9 + 0x164);
 -    newValue = (uVar7 & 1) << 0x15;

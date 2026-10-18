@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-16 20:25:14.585139203 -0700
-+++ b/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-16 20:25:14.586120900 -0700
+--- a/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-17 19:57:51.531550258 -0700
++++ b/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-17 19:57:51.532666302 -0700
 @@ -53,7 +53,6 @@
    unsigned int uVar19;
    UInt32 *puVar20;
@@ -9,7 +9,7 @@
    unsigned int uVar24;
    int iVar25;
 @@ -67,22 +66,23 @@
-   if (M<int>(self + 0xd54) == contextAddress) {
+   if (M<int>(self + kIOATIR500Surface_flipContext) == contextAddress) {
      if (doSwap != (UInt8)self[panel * 0x94 + 0xcad]) {
        self[panel * 0x94 + 0xcad] = SUB41m(doSwap,0);
 -      M<unsigned int>(M<int>(self + panel * 0x94 + 0xc34) + 0x1c) =
@@ -19,7 +19,7 @@
      }
    }
    else {
-     M<int>(self + 0xd54) = contextAddress;
+     M<int>(self + kIOATIR500Surface_flipContext) = contextAddress;
 -    M<unsigned int>(M<int>(self + panel * 0x94 + 0xc34) + 0x1c) =
 -         M<unsigned int>(M<int>(self + panel * 0x94 + 0xc34) + 0x1c) | 1;
 +    M<unsigned int>((int)Vol(PANEL_RECORD(self, panel)->entries[0].header) + 0x1c) =
@@ -63,7 +63,7 @@
      }
 @@ -117,11 +117,11 @@
    else {
-     piVar23 = M<int *>(self + 0xd50);
+     piVar23 = M<int *>(self + kIOATIR500Surface_accelerator);
      iVar12 = piVar23[0x1e2];
 -    iVar6 = VCALL(*piVar23, 0x54c)(piVar23,M<UInt32>(self + iVar17 + 0xc4c));
 +    iVar6 = VCALL(*piVar23, 0x54c)(piVar23,Vol(slot->stamp));
@@ -84,7 +84,7 @@
 +  iVar6 = (int)Vol(slot->header);
    cmd = (UInt32 *)(iVar6 + 0x20);
    if (((((bool)(bVar28 >> 1 & 1)) || (contextAddress == 0)) || (M<SInt16>(contextAddress + 0x98) < 1)) ||
-      ((iVar12 = M<int>(self + 0xd50), M<char>(iVar12 + 0x9b0) != '\0' &&
+      ((iVar12 = M<int>(self + kIOATIR500Surface_accelerator), M<char>(iVar12 + 0x9b0) != '\0' &&
 @@ -206,9 +206,9 @@
        iVar6 = (int)((M<unsigned int>(accelerator + iVar21 + 0x134) & 0x3ff) - uVar24 * uVar19) /
                (int)(unsigned int)M<UInt16>(accelerator + iVar21 + 0x142);

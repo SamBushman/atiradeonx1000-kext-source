@@ -36,12 +36,12 @@ SInt32 ATIR500Surface::is_flip_allowed() {
   SInt32 accel;
   
   baseResult = IOATIR500Surface::is_flip_allowed();
-  accel = M<SInt32>(self + 0xd50);
+  accel = M<SInt32>(self + kIOATIR500Surface_accelerator);
   if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003aec0;
-  if (M<SInt32>(M<SInt32>(self + 0xc14) * 0x18 + accel + 0xb10) == 0) {
+  if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x18 + accel + 0xb10) == 0) {
     if (M<SInt32>(accel + 0x894) == 0) goto LAB_0003aec0;
     iVar1 = 0xb18;
-    if (M<SInt32>(self + 0xc14) != 0) {
+    if (M<SInt32>(self + kIOATIR500Surface_panel) != 0) {
       iVar1 = 0xb00;
     }
     if (M<SInt32>(accel + iVar1 + 0x10) == 0) goto LAB_0003aec0;
@@ -49,7 +49,7 @@ SInt32 ATIR500Surface::is_flip_allowed() {
   baseResult = 0;
 LAB_0003aec0:
   result = 0;
-  if (-1 < M<SInt32>(self + 0xbe8)) {
+  if (-1 < M<SInt32>(self + kIOATIR500Surface_modeBits)) {
     result = baseResult;
   }
   return result;

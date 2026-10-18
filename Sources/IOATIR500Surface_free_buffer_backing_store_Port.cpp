@@ -35,11 +35,11 @@ UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *buffer)
   
   backingStore = M<UInt8 *>(bufferBytes + 0x24);
   if (backingStore[0x59] == 0x0) {
-    if ((M<SInt32>(backingStore + 0x10) == 0) || (M<SInt32>(self + 0xd8c) != 0)) {
+    if ((M<SInt32>(backingStore + 0x10) == 0) || (M<SInt32>(self + kIOATIR500Surface_orphanedBacking) != 0)) {
       this->delete_buffer_backing((IOTextureBuffer *)(backingStore));
     }
     else {
-      M<UInt8 *>(self + 0xd8c) = backingStore;
+      M<UInt8 *>(self + kIOATIR500Surface_orphanedBacking) = backingStore;
     }
     M<UInt32>(bufferBytes + 0x24) = 0;
   }

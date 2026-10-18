@@ -33,12 +33,12 @@ void IOATIR500Shared::free_handles() {
 
   SInt32 accel;
   
-  GH_IOFree(M<UInt32>(self + 0x10),
-               M<UInt32>(self + 0x14) * 4 + (M<UInt32>(self + 0x14) >> 3));
-  accel = M<SInt32>(self + 0xc);
+  GH_IOFree(M<UInt32>(self + kIOATIR500Shared_handleTable),
+               M<UInt32>(self + kIOATIR500Shared_handleCapacity) * 4 + (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 3));
+  accel = M<SInt32>(self + kIOATIR500Shared_accelerator);
   if (accel != 0) {
     M<UInt32>(accel + 0x808) =
-         M<SInt32>(accel + 0x808) - (M<UInt32>(self + 0x14) * 4 + (M<UInt32>(self + 0x14) >> 3));
+         M<SInt32>(accel + 0x808) - (M<UInt32>(self + kIOATIR500Shared_handleCapacity) * 4 + (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 3));
   }
   return;
 }

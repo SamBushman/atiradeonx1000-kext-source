@@ -42,7 +42,7 @@ VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 globalId, unsign
   unsigned int clientUserAddr [4];
   
   if (globalId != 0) {
-    accel = M<int *>(self + 0xc);
+    accel = M<int *>(self + kIOATIR500Shared_accelerator);
     globalShared = (UInt8 *)accel[0x1b];
     if ((globalShared != (UInt8 *)0x0) && (self != globalShared)) {
       for (sourceTexture = M<int>(globalShared + 0x24); sourceTexture != 0; sourceTexture = M<int>(sourceTexture + 0x3c)) {
@@ -59,25 +59,25 @@ VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 globalId, unsign
               M<sIOClientShared *>((int)texture + 0x14) = clientShared;
               M<UInt32>(clientShared) = handle;
               M<UInt32>(M<int>((int)texture + 0x14) + 8) =
-                   M<UInt32>(M<int>(self + 0xc) + 0x54);
+                   M<UInt32>(M<int>(self + kIOATIR500Shared_accelerator) + 0x54);
               M<UInt32>(M<int>((int)texture + 0x14) + 0xc) =
-                   M<UInt32>(M<int>(self + 0xc) + 0x54);
+                   M<UInt32>(M<int>(self + kIOATIR500Shared_accelerator) + 0x54);
               M<UInt8>(M<int>((int)texture + 0x14) + 0x16) = 1;
               M<UInt8>((int)texture + 0x20) = 1;
               M<UInt32>((int)texture + 0x10) = 0;
               M<UInt8 *>((int)texture + 0x1c) = self;
               M<int>((int)texture + 0x50) = sourceTexture;
               GH_OSIncrementAtomic(M<int>(sourceTexture + 0x14) + 0x10);
-              VCALL(*M<int *>(M<int>(self + 0xc) + 0x6c), 0x14)(M<int *>(M<int>(self + 0xc) + 0x6c));
-              M<UInt32>((int)texture + 0x3c) = M<UInt32>(self + 0x24);
-              M<void *>(self + 0x24) = texture;
+              VCALL(*M<int *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c), 0x14)(M<int *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c));
+              M<UInt32>((int)texture + 0x3c) = M<UInt32>(self + kIOATIR500Shared_textureListHead);
+              M<void *>(self + kIOATIR500Shared_textureListHead) = texture;
               *param_2 = clientUserAddr[0];
-              M<int>(M<int>(self + 0xc) + 0x72c) = M<int>(M<int>(self + 0xc) + 0x72c) + 1;
+              M<int>(M<int>(self + kIOATIR500Shared_accelerator) + 0x72c) = M<int>(M<int>(self + kIOATIR500Shared_accelerator) + 0x72c) + 1;
               return (VendorTextureBuffer *)(texture);
             }
             this->free_buf_handle(texture,handle);
           }
-          VCALL(*M<int *>(self + 0xc), 0x574)(M<int *>(self + 0xc),texture,0x80);
+          VCALL(*M<int *>(self + kIOATIR500Shared_accelerator), 0x574)(M<int *>(self + kIOATIR500Shared_accelerator),texture,0x80);
           return (VendorTextureBuffer *)((void *)0x0);
         }
       }

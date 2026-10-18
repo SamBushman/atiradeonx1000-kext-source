@@ -35,11 +35,11 @@ void IOATIR500Surface::setupFullScreen() {
   
   flipAllowed = VCALL(M<SInt32>(self), 0x5dc)(self);
   if (flipAllowed != 0) {
-    panel = M<UInt32>(self + 0xc14);
-    if ((1 << (panel & 0x3f) & M<UInt32>(M<SInt32>(self + 0xd50) + 0xd0)) != 0) {
+    panel = M<UInt32>(self + kIOATIR500Surface_panel);
+    if ((1 << (panel & 0x3f) & M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xd0)) != 0) {
       Vol(PANEL_RECORD(self, panel)->slotIndex) = M<SInt16>(&PANEL_RECORD(self, panel)->slotIndex) + 1U & 3;
-      VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + 0xc14),0,0);
-      M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
+      VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + kIOATIR500Surface_panel),0,0);
+      M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) + 1;
     }
   }
   return;

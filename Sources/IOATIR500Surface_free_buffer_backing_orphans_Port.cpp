@@ -32,13 +32,13 @@ void IOATIR500Surface::free_buffer_backing_orphans() {
 
   UInt8 *orphan;
   
-  orphan = M<UInt8 *>(self + 0xd8c);
+  orphan = M<UInt8 *>(self + kIOATIR500Surface_orphanedBacking);
   if (M<SInt32 *>(orphan + 0x10) != (SInt32 *)0x0) {
     VCALL(*M<SInt32 *>(orphan + 0x10), 0x18)(M<SInt32 *>(orphan + 0x10));
-    M<UInt32>(M<SInt32>(self + 0xd8c) + 0x10) = 0;
-    orphan = M<UInt8 *>(self + 0xd8c);
+    M<UInt32>(M<SInt32>(self + kIOATIR500Surface_orphanedBacking) + 0x10) = 0;
+    orphan = M<UInt8 *>(self + kIOATIR500Surface_orphanedBacking);
   }
   this->delete_buffer_backing((IOTextureBuffer *)(orphan));
-  M<UInt32>(self + 0xd8c) = 0;
+  M<UInt32>(self + kIOATIR500Surface_orphanedBacking) = 0;
   return;
 }

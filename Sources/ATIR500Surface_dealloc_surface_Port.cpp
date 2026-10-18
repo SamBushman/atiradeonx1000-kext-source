@@ -42,7 +42,7 @@ UInt32 ATIR500Surface::dealloc_surface(UInt32 surfaceIndex) {
   
   if (2 < surfaceIndex - 6) goto LAB_0003e150;
   bufferOffset = surfaceIndex * 0x78;
-  if ((M<SInt32>(self + bufferOffset + 0xb0) != 0) && (accel = M<SInt32 *>(self + 0xd50), accel[0x2e5] != 0)
+  if ((M<SInt32>(self + bufferOffset + 0xb0) != 0) && (accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator), accel[0x2e5] != 0)
      ) {
     slot = Vol(rec0->slotIndex) + 1 & 3;
     Vol(rec0->slotIndex) = (UInt16)slot;
@@ -71,29 +71,29 @@ LAB_0003e028:
         M<UInt32>(iVar2 + M<SInt32>(entry + 0x14) + 0x20) = 0x80000000;
       }
       M<UInt32>((SInt32)Vol(rec0->entries[0].header) + 0x1c) = M<UInt32>((SInt32)Vol(rec0->entries[0].header) + 0x1c) | 1;
-      M<UInt32>(M<SInt32>(self + 0xd50) + 0x710) =
-           uVar3 * 4 + M<SInt32>(M<SInt32>(self + 0xd50) + 0x710);
-      submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0xd50)))->submit_buffer((UInt32 *)(M<SInt32>(entry + 0x14) + 0x20),M<SInt32>(entry + 4) + 0x20,uVar3);
+      M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x710) =
+           uVar3 * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x710);
+      submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(entry + 0x14) + 0x20),M<SInt32>(entry + 4) + 0x20,uVar3);
       M<UInt32>(entry + 0x10) = submitStamp;
     }
   }
   uVar3 = M<UInt32>(self + bufferOffset + 0xd0);
   if ((uVar3 & 0x3ff) != 0x3ff) {
-    HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + 0xd50) + 0x870)),uVar3,0);
+    HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),uVar3,0);
     self[bufferOffset + 0xdc] = 0x0;
     uVar3 = M<UInt32>(self + bufferOffset + 0xd0) & 0xfffffc00 | 0x3ff;
     M<UInt32>(self + bufferOffset + 0xd0) = uVar3;
   }
   if ((uVar3 & 0xffc00) != 0xffc00) {
-    HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + 0xd50) + 0x870)),uVar3,1);
+    HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),uVar3,1);
     self[bufferOffset + 0xdd] = 0x0;
     M<UInt32>(self + bufferOffset + 0xd0) = M<UInt32>(self + bufferOffset + 0xd0) & 0xfff003ff | 0xffc00;
   }
 LAB_0003e150:
-  if ((surfaceIndex == 9) && ((M<UInt32>(self + 0x508) & 0x3ff00000) != 0x3ff00000)) {
-    HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + 0xd50) + 0x870)),M<UInt32>(self + 0x508),2);
+  if ((surfaceIndex == 9) && ((M<UInt32>(self + kIOATIR500Surface_buffer9HzBlockField) & 0x3ff00000) != 0x3ff00000)) {
+    HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),M<UInt32>(self + kIOATIR500Surface_buffer9HzBlockField),2);
     self[0x516] = 0x0;
-    M<UInt32>(self + 0x508) = M<UInt32>(self + 0x508) & 0xc00fffff | 0x3ff00000;
+    M<UInt32>(self + kIOATIR500Surface_buffer9HzBlockField) = M<UInt32>(self + kIOATIR500Surface_buffer9HzBlockField) & 0xc00fffff | 0x3ff00000;
   }
   IOATIR500Surface::dealloc_surface(surfaceIndex);
   return 1;

@@ -38,14 +38,14 @@ IOReturn IOATIR500Surface::surface_flush(UInt32 panelMask, UInt32 swapArg) {
   UInt32 stamp;
   SInt32 waitTotal;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  result = this->alloc_surfaces_retry(M<UInt32>(self + 0xc1c) & 3,(eLockType)(0));
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+  result = this->alloc_surfaces_retry(M<UInt32>(self + kIOATIR500Surface_reqBits) & 3,(eLockType)(0));
   if (result == 0) {
     this->flush_surface(panelMask,swapArg);
   }
-  stamp = M<UInt32>(self + 0x84);
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  accelerator = M<SInt32 *>(self + 0xd50);
+  stamp = M<UInt32>(self + kIOATIR500Surface_flushedStamp);
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+  accelerator = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   waitTotal = accelerator[0x1e6];
   waitTime = VCALL(*accelerator, 0x54c)(accelerator,stamp);
   accelerator[0x1e6] = waitTotal + waitTime;

@@ -32,9 +32,9 @@ SInt32 IOATIR500Surface::is_flip_allowed() {
 
   UInt32 result;
   
-  if (((M<char>(M<SInt32>(self + 0xd50) + 0x80) == '\0') || (M<SInt32>(self + 0xc14) == 0xffff)) ||
+  if (((M<char>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x80) == '\0') || (M<SInt32>(self + kIOATIR500Surface_panel) == 0xffff)) ||
      (result = 1,
-     self != M<UInt8 *>(M<SInt32>(self + 0xc14) * 0x20 + M<SInt32>(self + 0xd50) + 0xe8)))
+     self != M<UInt8 *>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xe8)))
   {
     result = 0;
   }

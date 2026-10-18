@@ -65,11 +65,11 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   int otherPanelRecord;
   int accel;
   
-  if (M<SInt16>(self + 0xdb4) != 0) {
-    M<UInt32>(M<int>(self + 0xd50) + 0x78) = 0;
+  if (M<SInt16>(self + kATIR500Surface_swapBatchBuilt) != 0) {
+    M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   }
-  if (M<UInt32>(self + 0xd54) != (UInt32)contextBytes) {
-    M<UInt32>(self + 0xd54) = (UInt32)contextBytes;
+  if (M<UInt32>(self + kIOATIR500Surface_flipContext) != (UInt32)contextBytes) {
+    M<UInt32>(self + kIOATIR500Surface_flipContext) = (UInt32)contextBytes;
     iVar17 = (int)Vol(PANEL_RECORD(self, panel)->entries[0].header);
     M<unsigned int>(iVar17 + 0x1c) = M<unsigned int>(iVar17 + 0x1c) | 1;
   }
@@ -96,7 +96,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     }
   }
   else {
-    piVar24 = M<int *>(self + 0xd50);
+    piVar24 = M<int *>(self + kIOATIR500Surface_accelerator);
     iVar12 = piVar24[0x1e2];
     waited = VCALL(*piVar24, 0x54c)(piVar24,Vol(slot->stamp));
     piVar24[0x1e2] = iVar12 + waited;
@@ -177,53 +177,53 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     sVar7 = M<SInt16>(contextBytes + 0x98);
     wordIndex = 0xc;
   }
-  M<unsigned int>(M<int>(self + 0xd50) + 0xb78) =
-       M<unsigned int>(M<int>(self + 0xd50) + 0xb78) & 0xffdfffff |
+  M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb78) =
+       M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb78) & 0xffdfffff |
        (M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38) & 1) << 0x15;
-  M<unsigned int>(M<int>(self + 0xd50) + 0xb78) =
+  M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb78) =
        (unsigned int)(1 < M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38)) * 0x100000 |
-       M<unsigned int>(M<int>(self + 0xd50) + 0xb78) & 0xffefffff;
-  M<unsigned int>(M<int>(self + 0xd50) + 0xb80) =
-       (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + 0xd50) + 0xb80) & 0xfffffffe;
+       M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb78) & 0xffefffff;
+  M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb80) =
+       (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb80) & 0xfffffffe;
   if (panel[self + 0xdb6] == 0x0) {
     uVar16 = 0;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfeffffff;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) & 0xfeffffff;
   }
   else {
     uVar16 = M<UInt16>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x14) & 0x3fff;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfeffffff | 0x1000000;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfffffeff;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfffeffff;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) & 0xfeffffff | 0x1000000;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) & 0xfffffeff;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb88) & 0xfffeffff;
   }
-  M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) =
-       M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) & 0xffdfffff |
+  M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb7c) =
+       M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb7c) & 0xffdfffff |
        (M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38) & 1) << 0x15;
-  M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) =
+  M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb7c) =
        (unsigned int)(1 < M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38)) * 0x100000 |
-       M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) & 0xffefffff;
-  M<unsigned int>(M<int>(self + 0xd50) + 0xb84) =
-       (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + 0xd50) + 0xb84) & 0xfffffffe;
+       M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb7c) & 0xffefffff;
+  M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb84) =
+       (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb84) & 0xfffffffe;
   if (panel[self + 0xdb6] == 0x0) {
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfeffffff;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) & 0xfeffffff;
   }
   else {
     uVar16 = M<UInt16>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x14) & 0x3fff;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfeffffff | 0x1000000;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfffffeff;
-    M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
-         M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfffeffff;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) & 0xfeffffff | 0x1000000;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) & 0xfffffeff;
+    M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) =
+         M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) & 0xfffeffff;
   }
-  accel = M<int>(self + 0xd50);
+  accel = M<int>(self + kIOATIR500Surface_accelerator);
   if (M<int>(accel + 0x894) != 0) {
     M<unsigned int>(accel + 0xb80) = M<unsigned int>(accel + 0xb80) & 0xfffffffe | 1;
-    accel = M<int>(self + 0xd50);
+    accel = M<int>(self + kIOATIR500Surface_accelerator);
   }
   bVar1 = panel == 0;
   if ((bVar1) || (M<int>(accel + 0x894) != 0)) {
@@ -271,7 +271,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     if (panel[self + 0xdb6] != 0x0) {
       packet[uVar16] = 0x1846;
       uVar16 = wordIndex + 8;
-      packet[wordIndex + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
+      packet[wordIndex + 7] = M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffer5) + 8);
     }
   }
   if ((bVar2) || (wordIndex = uVar16, M<int>(accel + 0x894) != 0)) {
@@ -285,7 +285,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     if (panel[self + 0xdb6] != 0x0) {
       packet[wordIndex] = 0x1a46;
       wordIndex = uVar16 + 8;
-      packet[uVar16 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
+      packet[uVar16 + 7] = M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffer5) + 8);
     }
   }
   if (M<char>(accel + 0x9b0) == '\0') {
@@ -326,14 +326,14 @@ LAB_0003ee00:
   if (M<int>(pVVar23 + 4) == 0) {
     ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar23));
   }
-  M<int>(M<int>(self + 0xd50) + 0x710) =
-       M<int>(M<int>(pVVar23 + 0x14) + 0x14) * 4 + M<int>(M<int>(self + 0xd50) + 0x710);
-  pAccel = M<UInt8 *>(self + 0xd50);
+  M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710) =
+       M<int>(M<int>(pVVar23 + 0x14) + 0x14) * 4 + M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710);
+  pAccel = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   uVar14 = ((ATIRadeonX1000 *)pAccel)->submit_buffer
                      ((UInt32 *)(M<int>(pVVar23 + 0x14) + 0x20),M<int>(pVVar23 + 4) + 0x20,
                       M<UInt32>(M<int>(pVVar23 + 0x14) + 0x14));
   M<UInt32>(pVVar23 + 0x10) = uVar14;
-  M<UInt32>(self + 0x80) = uVar14;
+  M<UInt32>(self + kIOATIR500Surface_submittedStamp) = uVar14;
   M<UInt32>(pAccel + (int)panel * 0x20 + 0xec) = uVar14;
   return;
 }

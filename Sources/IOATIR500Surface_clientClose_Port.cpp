@@ -30,9 +30,9 @@
 IOReturn IOATIR500Surface::clientClose() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if (M<SInt32>(self + 0xd58) != 0) {
-    VCALL(M<SInt32>(self), 0x34c)(self,M<UInt32>(self + 0xd50));
-    VCALL(M<SInt32>(self), 0x3a8)(self,M<UInt32>(self + 0xd50));
+  if (M<SInt32>(self + kIOATIR500Surface_vramInitSucceeded) != 0) {
+    VCALL(M<SInt32>(self), 0x34c)(self,M<UInt32>(self + kIOATIR500Surface_accelerator));
+    VCALL(M<SInt32>(self), 0x3a8)(self,M<UInt32>(self + kIOATIR500Surface_accelerator));
   }
   return 0;
 }

@@ -37,8 +37,8 @@ UInt32 ATIR500Surface::getFramebufferIndex() {
   result = 0;
   index = 0;
   do {
-    if (((M<SInt32>(self + 0xd64) != 0) && (M<SInt16>(M<SInt32>(self + 0xd60) + 8) != 0)) &&
-       (M<SInt16>(M<SInt32>(self + 0xd60) + 10) != 0)) {
+    if (((M<SInt32>(self + kIOATIR500Surface_regionRecordSize0) != 0) && (M<SInt16>(M<SInt32>(self + kIOATIR500Surface_regionRecords) + 8) != 0)) &&
+       (M<SInt16>(M<SInt32>(self + kIOATIR500Surface_regionRecords) + 10) != 0)) {
       result = index;
     }
     bVar1 = index != 1;

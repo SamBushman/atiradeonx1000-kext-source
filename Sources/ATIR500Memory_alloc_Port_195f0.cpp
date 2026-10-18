@@ -40,7 +40,7 @@ UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignmen
   UInt32 *nextNode;
   UInt32 *freeNode;
   
-  if ((M<SInt32>(self + 0xc) != 0) || (refilled = this->add_to_stack(), refilled != 0)) {
+  if ((M<SInt32>(self + kATIR500Memory_spareNodeStack) != 0) || (refilled = this->add_to_stack(), refilled != 0)) {
     alignMask = 0;
     if (alignment != 0) {
       alignMask = alignment - 1;
@@ -73,12 +73,12 @@ UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignmen
             M<UInt32 *>(elemBytes + 4) = puVar5;
             *puVar5 = (UInt32)(elemBytes);
             nextNode[1] = (UInt32)(elemBytes);
-            oldSpareHead = M<UInt32>(self + 0xc);
+            oldSpareHead = M<UInt32>(self + kATIR500Memory_spareNodeStack);
             freeNode[3] = 0;
             freeNode[1] = 0;
             freeNode[2] = 0;
             *freeNode = oldSpareHead;
-            M<UInt32 *>(self + 0xc) = freeNode;
+            M<UInt32 *>(self + kATIR500Memory_spareNodeStack) = freeNode;
             return 1;
           }
           if (nextNode[2] == allocEnd) {
@@ -88,8 +88,8 @@ UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignmen
             nextNode[1] = (UInt32)(elemBytes);
             return 1;
           }
-          puVar5 = M<UInt32 *>(self + 0xc);
-          M<UInt32>(self + 0xc) = *puVar5;
+          puVar5 = M<UInt32 *>(self + kATIR500Memory_spareNodeStack);
+          M<UInt32>(self + kATIR500Memory_spareNodeStack) = *puVar5;
           *puVar5 = (UInt32)(nextNode);
           nextNode[1] = (UInt32)(puVar5);
           M<UInt32 *>(elemBytes) = puVar5;

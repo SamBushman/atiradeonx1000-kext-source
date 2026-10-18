@@ -39,7 +39,7 @@ UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *excludeSurface, V
   
   index = 0;
   allKept = 1;
-  stateBits = M<UInt32>(self + 0xbf8);
+  stateBits = M<UInt32>(self + kIOATIR500Surface_stateBits);
   while( true ) {
     if ((mask & stateBits & 1 << (index & 0x3f)) != 0) {
       kept = VCALL(M<SInt32>(self), 0x5f8)(self,excludeSurfaceBytes,excludeList,excludeCount,index);

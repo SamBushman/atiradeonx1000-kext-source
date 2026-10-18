@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_invalidate_Port.cpp	2026-10-16 17:54:19.316106929 -0700
-+++ b/Sources/ATIR500Surface_invalidate_Port.cpp	2026-10-16 17:54:19.320529520 -0700
+--- a/Sources/ATIR500Surface_invalidate_Port.cpp	2026-10-17 19:55:03.668777079 -0700
++++ b/Sources/ATIR500Surface_invalidate_Port.cpp	2026-10-17 19:55:03.670123154 -0700
 @@ -30,20 +30,20 @@
  void ATIR500Surface::invalidate() {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -10,7 +10,7 @@
 -  UInt8 *pAVar3;
 +  PanelRecord *panel;
    
-   if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xcc) == 0) {
+   if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc) == 0) {
      return;
    }
    uVar2 = 0;
@@ -24,6 +24,6 @@
 -    M<UInt32>(M<SInt32>(pAVar1) + 0x1c) = M<UInt32>(M<SInt32>(pAVar1) + 0x1c) | 1;
 +    panel = panel + 1;
 +    M<UInt32>(batchHeader + 0x1c) = M<UInt32>(batchHeader + 0x1c) | 1;
-   } while (uVar2 < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
+   } while (uVar2 < M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc));
    return;
  }

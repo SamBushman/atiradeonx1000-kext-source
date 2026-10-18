@@ -39,9 +39,9 @@ VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceId, UInt
   UInt32 clientUserAddr [4];
   
   surface = (UInt8 *)
-            ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->find_surface_for_id(surfaceId);
+            ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Shared_accelerator)))->find_surface_for_id(surfaceId);
   if ((surface != (UInt8 *)0x0) &&
-     (texture = (void *)VCALL(*M<SInt32 *>(self + 0xc), 0x570)(M<SInt32 *>(self + 0xc),0x80),
+     (texture = (void *)VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x570)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),0x80),
      texture != (void *)0x0)) {
     M<UInt32>((SInt32)texture + 8) = 0;
     iVar3 = this->alloc_buf_handle(texture,(UInt32 *)(&handle));
@@ -51,9 +51,9 @@ VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceId, UInt
         M<sIOClientShared *>((SInt32)texture + 0x14) = clientShared;
         M<UInt32>(clientShared) = handle;
         M<UInt32>(M<SInt32>((SInt32)texture + 0x14) + 8) =
-             M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
+             M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x54);
         M<UInt32>(M<SInt32>((SInt32)texture + 0x14) + 0xc) =
-             M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
+             M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x54);
         M<UInt8>(M<SInt32>((SInt32)texture + 0x14) + 0x16) = 0;
         M<char>(M<SInt32>((SInt32)texture + 0x14) + 0x34) = (char)unknown_0x34;
         M<UInt8>((SInt32)texture + 0x20) = 0;
@@ -62,15 +62,15 @@ VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceId, UInt
         M<UInt32>((SInt32)texture + 0x5c) = surfaceId;
         M<UInt8 *>((SInt32)texture + 0x1c) = self;
         M<UInt8 *>((SInt32)texture + 0x50) = surface;
-        M<UInt32>((SInt32)texture + 0x3c) = M<UInt32>(self + 0x24);
-        M<void *>(self + 0x24) = texture;
+        M<UInt32>((SInt32)texture + 0x3c) = M<UInt32>(self + kIOATIR500Shared_textureListHead);
+        M<void *>(self + kIOATIR500Shared_textureListHead) = texture;
         *param_4 = clientUserAddr[0];
         M<UInt32>((SInt32)texture + 0x54) = M<UInt32>(surface + 0xbcc);
         M<void *>(surface + 0xbcc) = texture;
         ((IOATIR500Surface *)(surface))->reset_req_bits();
         ((IOATIR500Surface *)(surface))->prune_buffers();
-        M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) = M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) + 1;
-        iVar3 = M<SInt32>(self + 0xc);
+        M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x72c) = M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x72c) + 1;
+        iVar3 = M<SInt32>(self + kIOATIR500Shared_accelerator);
         if (self != M<UInt8 *>(iVar3 + 0x6c)) {
           return (VendorTextureBuffer *)(texture);
         }
@@ -81,7 +81,7 @@ VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceId, UInt
       }
       this->free_buf_handle(texture,handle);
     }
-    VCALL(*M<SInt32 *>(self + 0xc), 0x574)(M<SInt32 *>(self + 0xc),texture,0x80);
+    VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x574)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),texture,0x80);
     return (VendorTextureBuffer *)((void *)0x0);
   }
   return (VendorTextureBuffer *)((void *)0x0);

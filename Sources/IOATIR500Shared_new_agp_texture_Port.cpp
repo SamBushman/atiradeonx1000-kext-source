@@ -50,10 +50,10 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
   pageOffset = GH_page_size - 1U & address;
   uVar9 = address & -GH_page_size;
   roundedLength = -GH_page_size & (GH_page_size + pageOffset + length) - 1;
-  if (roundedLength <= (UInt32)(M<SInt32>(M<SInt32>(self + 0xc) + 0x830) * 0xc00) >> 2) {
+  if (roundedLength <= (UInt32)(M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x830) * 0xc00) >> 2) {
     if (uVar9 == 0) {
       memory = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),
-                                   M<UInt32>(M<SInt32>(self + 0xc) + 0x82c) | 0x10022,roundedLength,
+                                   M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x82c) | 0x10022,roundedLength,
                                    GH_page_size);
       if (memory != (SInt32 *)0x0) {
         uVar9 = VCALL(*memory, 0x1cc)(memory);
@@ -61,8 +61,8 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
       }
     }
     else {
-      pvVar2 = M<void *>(self + 0x24);
-      pvVar5 = M<void *>(self + 0x24);
+      pvVar2 = M<void *>(self + kIOATIR500Shared_textureListHead);
+      pvVar5 = M<void *>(self + kIOATIR500Shared_textureListHead);
       while (candidate = pvVar2, candidate != (void *)0x0) {
         if ((((M<char>((SInt32)candidate + 0x20) == '\x04') && (M<SInt32>((SInt32)candidate + 0x54) == 0)) &&
             (pageOffset == M<UInt32>((SInt32)candidate + 0x50))) &&
@@ -72,12 +72,12 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
           if (memory == M<SInt32 *>((SInt32)candidate + 8)) {
             VCALL(*memory, 0x18)(memory);
             *param_3 = M<UInt32>((SInt32)candidate + 0x18);
-            if (candidate == M<void *>(self + 0x24)) {
+            if (candidate == M<void *>(self + kIOATIR500Shared_textureListHead)) {
               return (VendorTextureBuffer *)(candidate);
             }
             M<UInt32>((SInt32)pvVar5 + 0x3c) = M<UInt32>((SInt32)candidate + 0x3c);
-            M<UInt32>((SInt32)candidate + 0x3c) = M<UInt32>(self + 0x24);
-            M<void *>(self + 0x24) = candidate;
+            M<UInt32>((SInt32)candidate + 0x3c) = M<UInt32>(self + kIOATIR500Shared_textureListHead);
+            M<void *>(self + kIOATIR500Shared_textureListHead) = candidate;
             return (VendorTextureBuffer *)(candidate);
           }
           M<UInt32>((SInt32)candidate + 0x54) = 1;
@@ -90,7 +90,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
       memory = (SInt32 *)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(uVar9,roundedLength,0x10002,M<UInt32>(self + 8));
       if (memory != (SInt32 *)0x0) {
 LAB_00017310:
-        pvVar5 = (void *)VCALL(*M<SInt32 *>(self + 0xc), 0x570)(M<SInt32 *>(self + 0xc),0x80);
+        pvVar5 = (void *)VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x570)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),0x80);
         if (pvVar5 == (void *)0x0) {
           VCALL(*memory, 0x18)(memory);
           return (VendorTextureBuffer *)((void *)0x0);
@@ -104,9 +104,9 @@ LAB_00017310:
             M<UInt32>((SInt32)pvVar5 + 0x18) = clientUserAddr[0];
             M<UInt32>(clientShared) = handle;
             M<UInt32>(M<SInt32>((SInt32)pvVar5 + 0x14) + 8) =
-                 M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
+                 M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x54);
             M<UInt32>(M<SInt32>((SInt32)pvVar5 + 0x14) + 0xc) =
-                 M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
+                 M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x54);
             M<UInt8>(M<SInt32>((SInt32)pvVar5 + 0x14) + 0x16) = 4;
             M<UInt8>((SInt32)pvVar5 + 0x20) = 4;
             M<UInt32>((SInt32)pvVar5 + 0x50) = pageOffset;
@@ -115,11 +115,11 @@ LAB_00017310:
             descriptorLength = VCALL(*M<SInt32 *>((SInt32)pvVar5 + 8), 0x128)(M<SInt32 *>((SInt32)pvVar5 + 8));
             M<UInt32>((SInt32)pvVar5 + 0x5c) = descriptorLength;
             M<UInt32>((SInt32)pvVar5 + 0x54) = 0;
-            M<UInt32>((SInt32)pvVar5 + 0x3c) = M<UInt32>(self + 0x24);
-            M<void *>(self + 0x24) = pvVar5;
+            M<UInt32>((SInt32)pvVar5 + 0x3c) = M<UInt32>(self + kIOATIR500Shared_textureListHead);
+            M<void *>(self + kIOATIR500Shared_textureListHead) = pvVar5;
             *param_3 = clientUserAddr[0];
-            M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) = M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) + 1;
-            iVar6 = M<SInt32>(self + 0xc);
+            M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x72c) = M<SInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x72c) + 1;
+            iVar6 = M<SInt32>(self + kIOATIR500Shared_accelerator);
             if (self != M<UInt8 *>(iVar6 + 0x6c)) {
               return (VendorTextureBuffer *)(pvVar5);
             }
@@ -131,7 +131,7 @@ LAB_00017310:
           this->free_buf_handle(pvVar5,handle);
         }
         VCALL(*memory, 0x18)(memory);
-        VCALL(*M<SInt32 *>(self + 0xc), 0x574)(M<SInt32 *>(self + 0xc),pvVar5,0x80);
+        VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x574)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),pvVar5,0x80);
         return (VendorTextureBuffer *)((void *)0x0);
       }
     }

@@ -34,5 +34,5 @@ IOExternalMethod *ATIR500Surface::getTargetAndMethodForIndex(IOService**target, 
   if (0x12 < selector) {
     return 0;
   }
-  return (IOExternalMethod *)(selector * 0x18 + M<SInt32>(self + 0xd5c));
+  return (IOExternalMethod *)(selector * 0x18 + M<SInt32>(self + kIOATIR500Surface_methodTable));
 }

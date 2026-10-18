@@ -33,13 +33,13 @@ extern "C" UInt32 GH_IOLockWakeup(...) asm("_IOLockWakeup");
 IOReturn IOATIR500Surface::set_surface_blocking(UInt32 blockingMode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
-  GH_IOLockLock(M<UInt32>(self + 0xc04));
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
+  GH_IOLockLock(M<UInt32>(self + kIOATIR500Surface_lock));
   self[0xbf6] = (blockingMode != 0);
   if (blockingMode == 0) {
-    GH_IOLockWakeup(M<UInt32>(self + 0xc04),self,0);
+    GH_IOLockWakeup(M<UInt32>(self + kIOATIR500Surface_lock),self,0);
   }
-  GH_IOLockUnlock(M<UInt32>(self + 0xc04));
-  GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Surface_lock));
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   return 0;
 }

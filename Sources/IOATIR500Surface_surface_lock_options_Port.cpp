@@ -50,7 +50,7 @@ IOReturn IOATIR500Surface::surface_lock_options(eLockType lockType, UInt32 lockO
   
   isReadLock = (lockType == 1) << 1;
   GH_bzero(dataRaw,0x44);
-  GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   if ((bool)(isReadLock >> 1 & 1)) {
     newLockState = self[0xbd0];
   }
@@ -63,7 +63,7 @@ IOReturn IOATIR500Surface::surface_lock_options(eLockType lockType, UInt32 lockO
     result = -0x1ffffd34;
     goto LAB_00016360;
   }
-  uVar6 = M<unsigned int>(self + 0xbf8);
+  uVar6 = M<unsigned int>(self + kIOATIR500Surface_stateBits);
   if ((uVar6 & 0x20000000) != 0) {
 LAB_00016330:
     stampPending = false;
@@ -71,14 +71,14 @@ LAB_00016330:
     result = -0x1ffffd34;
     goto LAB_00016360;
   }
-  if (((((bool)(isReadLock >> 1 & 1)) && ((M<unsigned int>(self + 0xc18) & 0x7ffc00) != 0)) &&
-      (M<int>(self + 0x90) != 0)) && (self[0xbf0] != 0x0)) {
+  if (((((bool)(isReadLock >> 1 & 1)) && ((M<unsigned int>(self + kIOATIR500Surface_contextReqBits) & 0x7ffc00) != 0)) &&
+      (M<int>(self + kIOATIR500Surface_boundDVDContext) != 0)) && (self[0xbf0] != 0x0)) {
     lockOptions = lockOptions | 3;
   }
   else if (M<int>(surfaceBuffer + 0x10) == 0) goto LAB_00016330;
   iVar8 = M<int>(surfaceBuffer + 0x24);
-  neededBuffers = M<unsigned int>(self + 0xc1c) & 3;
-  if ((iVar8 == 0) || (stampPending = true, M<int>(iVar8 + 0x54) != M<int>(self + 0x7c))) {
+  neededBuffers = M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3;
+  if ((iVar8 == 0) || (stampPending = true, M<int>(iVar8 + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) {
     stampPending = false;
   }
   lockOptions = lockOptions & 3;
@@ -101,23 +101,23 @@ LAB_00016344:
       }
     }
     dataRaw[4] = (unsigned int)M<UInt16>(surfaceBuffer + 0x18);
-    *dataRaw = M<int>(surfaceBuffer + 8) + M<int>(self + 0xc0c);
+    *dataRaw = M<int>(surfaceBuffer + 8) + M<int>(self + kIOATIR500Surface_userMapAddress);
     VCALL(M<int>(self), 0x5fc)(self,surfaceBuffer);
     if ((bool)(isReadLock >> 1 & 1)) {
       stampPending = false;
-      iVar8 = VCALL(*M<int *>(self + 0xd50), 0x558)
-                        (M<int *>(self + 0xd50),M<UInt32>(self + 0x7c));
+      iVar8 = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x558)
+                        (M<int *>(self + kIOATIR500Surface_accelerator),M<UInt32>(self + kIOATIR500Surface_stamp));
       newLockState = 0x1;
-      M<int>(M<int>(self + 0xd50) + 0x7b8) =
-           iVar8 + M<int>(M<int>(self + 0xd50) + 0x7b8);
+      M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x7b8) =
+           iVar8 + M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x7b8);
     }
     else {
-      accelerator = M<int *>(self + 0xd50);
+      accelerator = M<int *>(self + kIOATIR500Surface_accelerator);
       stampPending = false;
       iVar8 = VCALL(*accelerator, 0x558)(accelerator,accelerator[0x14] + -1);
       newLockState = 0x1;
-      M<int>(M<int>(self + 0xd50) + 0x7bc) =
-           iVar8 + M<int>(M<int>(self + 0xd50) + 0x7bc);
+      M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x7bc) =
+           iVar8 + M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x7bc);
     }
   }
   else {
@@ -161,7 +161,7 @@ LAB_00016174:
             if (result == 0) {
               if ((buffersResident) && (memoryState[0] == 4)) {
                 iVar8 = M<int>(surfaceBuffer + 0x24);
-                if (M<int>(iVar8 + 0x54) == M<int>(self + 0x7c)) {
+                if (M<int>(iVar8 + 0x54) == M<int>(self + kIOATIR500Surface_stamp)) {
                   M<UInt8>(iVar8 + 0x58) = 0;
                   iVar8 = M<int>(surfaceBuffer + 0x24);
                 }
@@ -181,7 +181,7 @@ LAB_000160bc:
             if (iVar8 == 0) goto LAB_00016170;
           }
 LAB_000160c4:
-          if ((M<int>(iVar8 + 0x54) == M<int>(self + 0x7c)) &&
+          if ((M<int>(iVar8 + 0x54) == M<int>(self + kIOATIR500Surface_stamp)) &&
              (M<char>(iVar8 + 0x58) == '\0')) {
             if ((bool)(isReadLock >> 1 & 1)) {
               self[0xbd0] = 0x3;
@@ -202,12 +202,12 @@ LAB_000160c4:
           else {
             result = 0;
           }
-          if (((iVar8 == 0) || (M<int>(iVar8 + 0x54) != M<int>(self + 0x7c))) ||
+          if (((iVar8 == 0) || (M<int>(iVar8 + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) ||
              (stampPending = false, M<char>(iVar8 + 0x58) == '\0')) goto LAB_00016174;
         }
         if (lockType == 2) {
           VCALL(M<int>(self), 0x5cc)
-                    (self,((int)surfaceBuffer - (int)(self + 0xa8) >> 3) * -0x11111111);
+                    (self,((int)surfaceBuffer - (int)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111);
         }
         iVar8 = M<int>(surfaceBuffer + 0x24);
         if (iVar8 == 0) {
@@ -218,7 +218,7 @@ LAB_00016350:
         }
         if (M<int>(iVar8 + 0x10) == 0) {
           mapping = VCALL(*M<int *>(iVar8 + 8), 0x14c)
-                            (M<int *>(iVar8 + 8),M<UInt32>(self + 0x78),0,1,0,0);
+                            (M<int *>(iVar8 + 8),M<UInt32>(self + kIOATIR500Surface_task),0,1,0,0);
           M<UInt32>(iVar8 + 0x10) = mapping;
           iVar8 = M<int>(surfaceBuffer + 0x24);
           if (M<int>(iVar8 + 0x10) == 0) goto LAB_00016350;
@@ -248,7 +248,7 @@ LAB_00015e70:
 LAB_00015e7c:
   dataRaw[5] = (unsigned int)M<UInt16>(surfaceBuffer + 0x1c);
   dataRaw[6] = (unsigned int)M<UInt16>(surfaceBuffer + 0x1e);
-  uVar6 = M<unsigned int>(self + 0xbe8) & 0xf;
+  uVar6 = M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0xf;
   dataRaw[7] = uVar6;
   if (uVar6 == 6) {
     dataRaw[7] = 0x79757673;
@@ -259,11 +259,11 @@ LAB_00015e7c:
   else if (uVar6 == 10) {
     dataRaw[7] = 4;
   }
-  dataRaw[8] = M<int>(self + 0xd70);
-  dataRaw[0xd] = M<int>(self + 0xd74);
-  dataRaw[0xe] = M<int>(self + 0xd78);
-  dataRaw[0xf] = M<int>(self + 0xd7c);
-  iVar8 = M<int>(self + 0xd80);
+  dataRaw[8] = M<int>(self + kIOATIR500Surface_lockDataFlags);
+  dataRaw[0xd] = M<int>(self + kIOATIR500Surface_unknown_0xd74);
+  dataRaw[0xe] = M<int>(self + kIOATIR500Surface_unknown_0xd78);
+  dataRaw[0xf] = M<int>(self + kIOATIR500Surface_unknown_0xd7c);
+  iVar8 = M<int>(self + kIOATIR500Surface_unknown_0xd80);
   dataRaw[9] = 0x1cccc;
   dataRaw[0x10] = iVar8;
 LAB_00016360:
@@ -273,10 +273,10 @@ LAB_00016360:
   else {
     self[0xbd1] = newLockState;
   }
-  GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   if (stampPending) {
-    VCALL(*M<int *>(self + 0xd50), 0x558)
-              (M<int *>(self + 0xd50),M<UInt32>(self + 0x7c));
+    VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x558)
+              (M<int *>(self + kIOATIR500Surface_accelerator),M<UInt32>(self + kIOATIR500Surface_stamp));
   }
   return result;
 }

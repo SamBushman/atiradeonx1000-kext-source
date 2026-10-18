@@ -56,7 +56,7 @@ void ATIR500Surface::copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt
   bVar15 = bVar2 << 1;
   if (bVar2) {
     if ((backing == (UInt8 *)0x0) ||
-       (M<int>(backing + 0x54) != M<int>(self + 0x7c))) goto LAB_00043444;
+       (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto LAB_00043444;
 LAB_00043494:
     transferMap = M<int *>(transferBytes + 8);
   }
@@ -72,7 +72,7 @@ LAB_00043494:
       h = uVar4;
     }
     transferBytes = backing;
-    if ((M<unsigned int>(self + 0xbe8) & 0x70000000) != 0) {
+    if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) {
       iVar6 = VCALL(M<int>(self), 0x5f0)(self,bufferBytes,index,level,0,0,&pitch);
       offset = offset + iVar6;
     }
@@ -86,20 +86,20 @@ LAB_00043444:
     transferMap = M<int *>(backing + 8);
   }
   transferMap = (int *)VCALL(*transferMap, 0x150)
-                            (transferMap,M<unsigned int>(M<int>(self + 0xd50) + 0x82c) | 1);
+                            (transferMap,M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1);
   if (transferMap == (int *)0x0) {
     return;
   }
   iVar6 = VCALL(*transferMap, 0xd0)(transferMap);
-  piVar10 = M<int *>(self + 0xd50);
+  piVar10 = M<int *>(self + kIOATIR500Surface_accelerator);
   transferRow = (UInt32 *)(iVar6 + offset);
   iVar11 = piVar10[0x1ec];
   iVar6 = VCALL(*piVar10, 0x558)(piVar10,stamp);
   piVar10[0x1ec] = iVar11 + iVar6;
   if ((((bool)(bVar15 >> 1 & 1)) && (backing != (UInt8 *)0x0)) &&
-     (M<int>(backing + 0x54) == M<int>(self + 0x7c))) {
+     (M<int>(backing + 0x54) == M<int>(self + kIOATIR500Surface_stamp))) {
     piVar10 = (int *)VCALL(*M<int *>(backing + 8), 0x150)
-                               (M<int *>(backing + 8),M<unsigned int>(M<int>(self + 0xd50) + 0x82c) | 1
+                               (M<int *>(backing + 8),M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1
                                );
     bVar15 = (piVar10 == (int *)0x0) << 1;
     if (piVar10 == (int *)0x0) goto LAB_000436cc;
@@ -111,7 +111,7 @@ LAB_00043444:
     piVar10 = (int *)0x0;
     bVar2 = true;
     bVar15 = 2;
-    iVar6 = M<int>(bufferBytes + 8) + M<int>(self + 0xc10);
+    iVar6 = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
   }
   bufferWidth = M<UInt16>(bufferBytes + 0x14);
   uVar4 = (unsigned int)M<UInt16>(bufferBytes + 0x16);

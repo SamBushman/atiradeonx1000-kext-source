@@ -48,7 +48,7 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 flags, eLockType lockType
   retriesLeft = 0x3e9;
   do {
     if ((bool)(isNoLock >> 1 & 1)) {
-      if (M<char>(M<int>(self + 0xd50) + 0x80) == '\0') {
+      if (M<char>(M<int>(self + kIOATIR500Surface_accelerator) + 0x80) == '\0') {
         return 0xe00002be;
       }
     }
@@ -63,9 +63,9 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 flags, eLockType lockType
       if (lockState != 0x0) goto LAB_00014970;
     }
 LAB_000148e0:
-    if ((M<unsigned int>(self + 0xbf8) & 0x20000000) != 0) goto LAB_00014970;
-    if ((M<unsigned int>(self + 0xbf8) & flags) == 0) goto LAB_00014968;
-    if ((!(bool)(isNoLock >> 1 & 1)) && (M<char>(M<int>(self + 0xd50) + 0x80) == '\0')) {
+    if ((M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0x20000000) != 0) goto LAB_00014970;
+    if ((M<unsigned int>(self + kIOATIR500Surface_stateBits) & flags) == 0) goto LAB_00014968;
+    if ((!(bool)(isNoLock >> 1 & 1)) && (M<char>(M<int>(self + kIOATIR500Surface_accelerator) + 0x80) == '\0')) {
       return 0xe00002be;
     }
     /* the decompile passed `this` as a leading argument and dropped the last one: shipped asm 0x14910 is (this, mask = flags, keepMask = 0, bool = 0) */
@@ -74,7 +74,7 @@ LAB_000148e0:
     if (pageqResult == 2) goto LAB_00014970;
     retriesLeft = retriesLeft + -1;
     if (retriesLeft == 0) {
-      retriesLeft = this->alloc_surfaces_pageq(M<unsigned int>(self + 0xc1c) & 3,0,true);   /* shipped asm 0x14988: r4 = self[0xc1c] & 3, r5 = 0, r6 = 1 */
+      retriesLeft = this->alloc_surfaces_pageq(M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3,0,true);   /* shipped asm 0x14988: r4 = self[0xc1c] & 3, r5 = 0, r6 = 1 */
       if (retriesLeft == 0) {
 LAB_00014968:
         result = 0;
@@ -85,9 +85,9 @@ LAB_00014970:
       }
       return result;
     }
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
     GH_thread_block(0);
     GH_IOSleep(1);
-    GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
+    GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   } while( true );
 }

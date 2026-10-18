@@ -43,15 +43,15 @@ void ATIR500Surface::setupFullScreen() {
   int id;
   
   fullScreenValue = self[0x158];
-  iVar8 = M<int>(self + 0xc14) * 0x78 + M<int>(self + 0xd50);
-  M<unsigned int>(self + 0xdb8) = (unsigned int)M<UInt8>(iVar8 + 0x164);
+  iVar8 = M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator);
+  M<unsigned int>(self + kATIR500Surface_panelSide) = (unsigned int)M<UInt8>(iVar8 + 0x164);
   M<UInt8>(iVar8 + 0x164) = fullScreenValue;
-  if ((M<unsigned int>(self + 0xbe8) & 0x10) != 0) {
-    self[M<int>(self + 0xc14) + 0xdb6] = 0x1;
+  if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x10) != 0) {
+    self[M<int>(self + kIOATIR500Surface_panel) + 0xdb6] = 0x1;
   }
-  iVar8 = M<int>(self + 0xd50);
+  iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
   if (M<char>(iVar8 + 0x9b0) == '\0') goto LAB_0003d310;
-  id = M<int>(self + 0xc14);
+  id = M<int>(self + kIOATIR500Surface_panel);
   if (M<int>(id * 0x18 + iVar8 + 0xb10) == 0) {
     if ((M<int>(iVar8 + 0x894) == 0) ||
        (uVar7 = (unsigned int)(id == 0), M<int>(uVar7 * 0x18 + iVar8 + 0xb10) == 0))
@@ -59,9 +59,9 @@ void ATIR500Surface::setupFullScreen() {
   }
   else {
     M<UInt8>(id * 0x78 + iVar8 + 0x9f4) = fullScreenValue;
-    iVar8 = M<int>(self + 0xd50);
+    iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
     if (M<int>(iVar8 + 0x894) == 0) goto LAB_0003d310;
-    uVar7 = (unsigned int)(M<int>(self + 0xc14) == 0);
+    uVar7 = (unsigned int)(M<int>(self + kIOATIR500Surface_panel) == 0);
     if (M<int>(uVar7 * 0x18 + iVar8 + 0xb10) == 0) {
       M<UInt8>(uVar7 * 0x78 + iVar8 + 0x164) = fullScreenValue;
       goto LAB_0003d310;
@@ -73,10 +73,10 @@ void ATIR500Surface::setupFullScreen() {
 LAB_0003d310:
   iVar8 = VCALL(M<int>(self), 0x5dc)(self);
   if (iVar8 == 0) {
-    iVar8 = M<int>(self + 0xd50);
+    iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
     registers = M<int>(iVar8 + 0x860);
     maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
-    id = M<int>(self + 0xc14);
+    id = M<int>(self + kIOATIR500Surface_panel);
     uVar7 = (unsigned int)M<UInt8>(id * 0x78 + iVar8 + 0x164);
     newValue = maskedValue | (uVar7 & 1) << 0x15 | (unsigned int)(1 < uVar7) << 0x14;
     storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6104 : 0x6904)), newValue);

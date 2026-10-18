@@ -30,6 +30,6 @@
 void IOATIR500Surface::set_access() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<UInt32>(self + 0xc00) = M<UInt32>(M<SInt32>(self + 0xd50) + 0xdc);
+  M<UInt32>(self + kIOATIR500Surface_accessDescriptor) = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xdc);
   return;
 }

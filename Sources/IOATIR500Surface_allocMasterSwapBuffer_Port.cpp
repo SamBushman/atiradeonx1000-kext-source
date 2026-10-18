@@ -39,7 +39,7 @@ bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 panel, UInt32 swapBufferSize
   SwapBufferEntry *entry;
   
   rec->swapBufferSize = 0;
-  accelerator = M<SInt32>(self + 0xd50);
+  accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
   if (M<SInt32>(panel * 4 + accelerator + 0x114) != 0) {
     count = 0;
     entry = rec->entries;
@@ -54,7 +54,7 @@ bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 panel, UInt32 swapBufferSize
       entry->header = swapHeader;
       entry = entry + 1;
       this->init_swap_buffer_header((VendorSwapBufferHeader *)(swapHeader),swapBufferSize);
-      accelerator = M<SInt32>(self + 0xd50);
+      accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
     } while (count < M<UInt32>(panel * 4 + accelerator + 0x114));
   }
   rec->swapBufferSize = swapBufferSize;

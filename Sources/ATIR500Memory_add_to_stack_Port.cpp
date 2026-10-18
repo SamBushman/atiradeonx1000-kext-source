@@ -41,9 +41,9 @@ bool ATIR500Memory::add_to_stack() {
   result = 0;
   if (chunk != (UInt32 *)0x0) {
     node = chunk + 1;
-    *chunk = M<UInt32>(self + 0x10);
-    M<UInt32 *>(self + 0xc) = node;
-    M<UInt32 *>(self + 0x10) = chunk;
+    *chunk = M<UInt32>(self + kATIR500Memory_chunkList);
+    M<UInt32 *>(self + kATIR500Memory_spareNodeStack) = node;
+    M<UInt32 *>(self + kATIR500Memory_chunkList) = chunk;
     chunk[2] = 0;
     chunk[3] = 0;
     chunk[4] = 0;

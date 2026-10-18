@@ -38,13 +38,13 @@ bool IOATIR500Shared::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     bool ok = OSObject::init(); /* real: qualified base call (relocation at 0x16aa4 -> __ZTV8OSObject, slot +0x48 = OSObject::init()) */
     if (ok) {
-        *reinterpret_cast<UInt32 *>(self + 0x24) = 0;
-        *reinterpret_cast<UInt32 *>(self + 0x10) = 0;
-        *reinterpret_cast<UInt32 *>(self + 0x18) = 0;
-        *reinterpret_cast<UInt32 *>(self + 0x14) = 0;
-        *reinterpret_cast<UInt32 *>(self + 0x1c) = 0;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Shared_textureListHead) = 0;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Shared_handleTable) = 0;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Shared_handleBitmap) = 0;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Shared_handleCapacity) = 0;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Shared_handleHint) = 0;
         alloc_handles();
-        *reinterpret_cast<UInt32 *>(self + 0x20) = 0;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Shared_chunkList) = 0;
     }
     return ok;
 }

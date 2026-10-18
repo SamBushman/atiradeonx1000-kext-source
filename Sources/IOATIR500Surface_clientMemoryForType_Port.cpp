@@ -35,19 +35,19 @@ IOReturn IOATIR500Surface::clientMemoryForType(UInt32 type, UInt32*options, IOMe
   UInt32 result;
   UInt8 *memoryDescriptor;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  if (type < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc)) {
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+  if (type < M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc)) {
     memoryDescriptor = (UInt8 *)Vol(PANEL_RECORD(self, type)->entries[0].memory);
     VCALL(M<SInt32>(memoryDescriptor), 0x14)(memoryDescriptor);
     *options = 0;
     *memory = (IOMemoryDescriptor *)memoryDescriptor;
     this->init_swap_buffer_header((VendorSwapBufferHeader *)(Vol(PANEL_RECORD(self, type)->entries[0].header)),
                Vol(PANEL_RECORD(self, type)->swapBufferSize));
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
     result = 0;
   }
   else {
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
     result = 0xe00002c2;
   }
   return result;

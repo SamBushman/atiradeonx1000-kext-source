@@ -35,22 +35,22 @@ void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
   PanelRecord *panel;
   
   if ((self[0xbed] == 0x0) ||
-     (iVar1 = VCALL(*M<SInt32 *>(self + 0xd50), 0x554)
-                        (M<SInt32 *>(self + 0xd50),M<UInt32>(self + 0x80)), iVar1 != 0)) {
-    if ((M<UInt32>(self + 0xbf8) & M<UInt32>(self + 0xc1c) & 0x10000000) != 0) {
+     (iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
+                        (M<SInt32 *>(self + kIOATIR500Surface_accelerator),M<UInt32>(self + kIOATIR500Surface_submittedStamp)), iVar1 != 0)) {
+    if ((M<UInt32>(self + kIOATIR500Surface_stateBits) & M<UInt32>(self + kIOATIR500Surface_reqBits) & 0x10000000) != 0) {
       VCALL(M<SInt32>(self), 0x5c0)(self);
-      M<UInt32>(self + 0xbf8) = M<UInt32>(self + 0xbf8) & 0xefffffff;
+      M<UInt32>(self + kIOATIR500Surface_stateBits) = M<UInt32>(self + kIOATIR500Surface_stateBits) & 0xefffffff;
     }
-    iVar1 = M<SInt32>(self + 0xd50);
-    M<UInt32>(self + 0x84) = M<UInt32>(self + 0x80);
+    iVar1 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+    M<UInt32>(self + kIOATIR500Surface_flushedStamp) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
     if (M<SInt32>(iVar1 + 0xcc) != 0) {
       panelIndex = 0;
       panel = PANEL_RECORD(self, 0);
       do {
         if (((1 << (panelIndex & 0x3f) & panelMask) != 0) && (panel->active != 0x0)) {
           VCALL(M<SInt32>(self), 0x5d4)(self,panelIndex,swapArg);
-          M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
-          iVar1 = M<SInt32>(self + 0xd50);
+          M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) + 1;
+          iVar1 = M<SInt32>(self + kIOATIR500Surface_accelerator);
         }
         panelIndex = panelIndex + 1;
         panel = panel + 1;

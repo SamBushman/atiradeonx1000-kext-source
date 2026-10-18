@@ -43,16 +43,16 @@ LAB_00018f2c:
     result = 0;
   }
   else {
-    iVar2 = M<SInt32>(self + 0x10);
-    M<UInt32>(self + 0xc) = 0;
+    iVar2 = M<SInt32>(self + kATIR500Memory_chunkList);
+    M<UInt32>(self + kATIR500Memory_spareNodeStack) = 0;
     M<UInt32>(self + 8) = 0;
     if (iVar2 == 0) {
       puVar3 = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
-      M<UInt32 *>(self + 0x10) = puVar3;
+      M<UInt32 *>(self + kATIR500Memory_chunkList) = puVar3;
       if (puVar3 != (UInt32 *)0x0) {
         *puVar3 = 0;
       }
-      iVar2 = M<SInt32>(self + 0x10);
+      iVar2 = M<SInt32>(self + kATIR500Memory_chunkList);
       if (iVar2 == 0) goto LAB_00018f2c;
     }
     puVar3 = (UInt32 *)(iVar2 + 0x44);
@@ -73,7 +73,7 @@ LAB_00018f2c:
     M<UInt32>(iVar2 + 0x20) = 0;
     M<UInt32>(iVar2 + 0x30) = 0x80000000;
     M<UInt32>(iVar2 + 0x40) = 0;
-    M<UInt32 *>(self + 0xc) = puVar3;
+    M<UInt32 *>(self + kATIR500Memory_spareNodeStack) = puVar3;
     M<UInt32>(iVar2 + 0x48) = 0;
     M<UInt32>(iVar2 + 0x4c) = 0;
     M<UInt32>(iVar2 + 0x50) = 0;

@@ -33,7 +33,7 @@ IOReturn IOATIR500Surface::get_state(eIOAccelSurfaceStateBits *outStateBits) {
 
   SInt32 iVar1;
   
-  iVar1 = VCALL(*M<SInt32 *>(self + 0xd50), 0x520)(M<SInt32 *>(self + 0xd50));
+  iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x520)(M<SInt32 *>(self + kIOATIR500Surface_accelerator));
   if (iVar1 == 0) {
     M<UInt32>(outStateBitsBytes) = 0;
   }

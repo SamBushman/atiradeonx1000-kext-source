@@ -62,23 +62,23 @@ bool IOATIR500Surface::copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
     if ((iVar3 == 0) && (memoryState == 4)) {
       iVar3 = M<SInt32>(bufferBytes + 0x24);
       if (M<SInt32>(iVar3 + 4) != 0) {
-        GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-        attachedMemory = M<SInt32 *>(self + 0xd50);
+        GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+        attachedMemory = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
         iVar7 = attachedMemory[0x1ed];
-        iVar3 = VCALL(*attachedMemory, 0x55c)(attachedMemory,M<UInt32>(self + 0x7c));
+        iVar3 = VCALL(*attachedMemory, 0x55c)(attachedMemory,M<UInt32>(self + kIOATIR500Surface_stamp));
         attachedMemory[0x1ed] = iVar7 + iVar3;
-        GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-        VCALL(*M<SInt32 *>(self + 0xd50), 0x5ac)
-                  (M<SInt32 *>(self + 0xd50),M<UInt32>(bufferBytes + 0x24));
+        GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
+        VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x5ac)
+                  (M<SInt32 *>(self + kIOATIR500Surface_accelerator),M<UInt32>(bufferBytes + 0x24));
         M<UInt32>(M<SInt32>(bufferBytes + 0x24) + 4) = 0;
         iVar3 = M<SInt32>(bufferBytes + 0x24);
       }
-      if (M<SInt32>(iVar3 + 0x54) == M<SInt32>(self + 0x7c)) {
+      if (M<SInt32>(iVar3 + 0x54) == M<SInt32>(self + kIOATIR500Surface_stamp)) {
         M<UInt8>(iVar3 + 0x58) = 0;
         iVar3 = M<SInt32>(bufferBytes + 0x24);
       }
       else {
-        M<SInt32>(iVar3 + 0x54) = M<SInt32>(self + 0x7c) + -1;
+        M<SInt32>(iVar3 + 0x54) = M<SInt32>(self + kIOATIR500Surface_stamp) + -1;
         iVar3 = M<SInt32>(bufferBytes + 0x24);
       }
     }
@@ -86,11 +86,11 @@ bool IOATIR500Surface::copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
       iVar3 = M<SInt32>(bufferBytes + 0x24);
     }
   }
-  if ((M<SInt32>(iVar3 + 0x54) != M<SInt32>(self + 0x7c)) || (M<char>(iVar3 + 0x58) == '\0')) {
-    M<SInt32>(M<SInt32>(self + 0xd50) + 0x728) =
-         M<SInt32>(M<SInt32>(self + 0xd50) + 0x728) + M<SInt32>(bufferBytes + 0x10);
+  if ((M<SInt32>(iVar3 + 0x54) != M<SInt32>(self + kIOATIR500Surface_stamp)) || (M<char>(iVar3 + 0x58) == '\0')) {
+    M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x728) =
+         M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x728) + M<SInt32>(bufferBytes + 0x10);
     uVar4 = (UInt32)M<UInt16>(bufferBytes + 0x20);
-    iVar7 = M<SInt32>(self + 0x7c);
+    iVar7 = M<SInt32>(self + kIOATIR500Surface_stamp);
     iVar3 = iVar7;
     if (uVar4 != 0) {
       levelCount = M<UInt16>(bufferBytes + 0x22);
@@ -104,7 +104,7 @@ bool IOATIR500Surface::copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
             VCALL(M<SInt32>(self), 0x5e8)
                       (self,0,0,levelWidth,levelHeight[0],index,uVar4,bufferBytes,iVar7,0,0,0,1);
             M<UInt32>(M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x14) + 8) =
-                 M<UInt32>(self + 0x7c);
+                 M<UInt32>(self + kIOATIR500Surface_stamp);
             levelCount = M<UInt16>(bufferBytes + 0x22);
             uVar4 = nextLevel;
           } while (nextLevel < levelCount);
@@ -112,16 +112,16 @@ bool IOATIR500Surface::copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
         }
         index = index + 1;
       } while (index < uVar4);
-      iVar3 = M<SInt32>(self + 0x7c);
+      iVar3 = M<SInt32>(self + kIOATIR500Surface_stamp);
     }
-    cursor = self + 0xcc;
+    cursor = self + kIOATIR500Surface_buffer0BackingStore;
     recordsLeft = 0x17;
     M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x54) = iVar3;
     do {
       iVar3 = M<SInt32>(cursor);
       cursor = cursor + 0x78;
       if ((iVar3 != 0) && (iVar7 == M<SInt32>(iVar3 + 0x54))) {
-        M<UInt32>(iVar3 + 0x54) = M<UInt32>(self + 0x7c);
+        M<UInt32>(iVar3 + 0x54) = M<UInt32>(self + kIOATIR500Surface_stamp);
       }
       recordsLeft = recordsLeft + -1;
     } while (recordsLeft != 0);

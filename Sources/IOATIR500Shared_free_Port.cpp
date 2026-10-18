@@ -39,7 +39,7 @@ void IOATIR500Shared::free() {
   SInt32 *nextChunk;
   UInt8 *nextTexture;
   
-  texture = M<UInt8 *>(self + 0x24);
+  texture = M<UInt8 *>(self + kIOATIR500Shared_textureListHead);
   iVar4 = 0;
   if (texture != (UInt8 *)0x0) {
     do {
@@ -62,28 +62,28 @@ void IOATIR500Shared::free() {
       }
       texture = nextTexture;
     } while (nextTexture != (UInt8 *)0x0);
-    iVar4 = M<SInt32>(self + 0x24);
+    iVar4 = M<SInt32>(self + kIOATIR500Shared_textureListHead);
   }
   while (iVar4 != 0) {
     M<UInt32>(M<SInt32>(iVar4 + 0x14) + 0x10) = (UInt32)M<UInt16>(M<SInt32>(iVar4 + 0x14) + 0x12);
-    this->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + 0x24)));
-    iVar4 = M<SInt32>(self + 0x24);
+    this->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + kIOATIR500Shared_textureListHead)));
+    iVar4 = M<SInt32>(self + kIOATIR500Shared_textureListHead);
   }
-  accel = M<UInt8 *>(self + 0xc);
+  accel = M<UInt8 *>(self + kIOATIR500Shared_accelerator);
   if (self == M<UInt8 *>(accel + 0x6c)) {
     M<UInt32>(accel + 0x6c) = 0;
-    M<UInt32>(M<SInt32>(self + 0xc) + 0x70) = 0;
-    accel = M<UInt8 *>(self + 0xc);
+    M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x70) = 0;
+    accel = M<UInt8 *>(self + kIOATIR500Shared_accelerator);
   }
   ((IOATIR500Accelerator *)(accel))->freeOrphanTexture(true);
-  chunk = (SInt32 *)M<SInt32>(self + 0x20);
+  chunk = (SInt32 *)M<SInt32>(self + kIOATIR500Shared_chunkList);
   while (chunk != (SInt32 *)0x0) {
     nextChunk = (SInt32 *)*chunk;
     VCALL(*(SInt32 *)chunk[3], 0x18)(chunk[3]);
     VCALL(*(SInt32 *)chunk[2], 0x18)(chunk[2]);
     VCALL(*(SInt32 *)chunk[1], 0x18)(chunk[1]);
     GH_IOFree(chunk,0x1c);
-    iVar4 = M<SInt32>(self + 0xc);
+    iVar4 = M<SInt32>(self + kIOATIR500Shared_accelerator);
     chunk = nextChunk;
     if (iVar4 != 0) {
       M<SInt32>(iVar4 + 0x808) = M<SInt32>(iVar4 + 0x808) + -0x1c;

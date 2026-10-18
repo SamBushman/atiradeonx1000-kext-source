@@ -41,9 +41,9 @@ SInt32 IOATIR500Surface::is_surface_size_supported(short width, short height) {
    * `(int)M<SInt16>(...)` - ordinary C++ integer promotion of `short` to `SInt32` reproduces that
    * exact value with no UB, so no CONCAT22/in_register reconstruction is needed at all. */
   if (((SInt32)width <=
-       (SInt32)(UInt32)M<UInt16>(M<SInt32>(self + 0xd50) + 0xa8)) &&
+       (SInt32)(UInt32)M<UInt16>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xa8)) &&
      ((SInt32)height <=
-      (SInt32)(UInt32)M<UInt16>(M<SInt32>(self + 0xd50) + 0xaa))) {
+      (SInt32)(UInt32)M<UInt16>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xaa))) {
     return 1;
   }
   return 0;

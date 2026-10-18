@@ -43,7 +43,7 @@ bool IOATIR500Shared::alloc_handles() {
   UInt32 oldCapacity;
   SInt32 oldTable;
   
-  oldCapacity = M<UInt32>(self + 0x14);
+  oldCapacity = M<UInt32>(self + kIOATIR500Shared_handleCapacity);
   if (oldCapacity == 0) {
     newCapacity = 0x400;
     bitmapBytes = 0x80;
@@ -55,28 +55,28 @@ bool IOATIR500Shared::alloc_handles() {
     bitmapBytes = (oldCapacity & 0x7fffffff) >> 2;
   }
   totalBytes = iVar5 + bitmapBytes;
-  oldTable = M<SInt32>(self + 0x10);
-  uVar3 = M<UInt32>(self + 0x18);
+  oldTable = M<SInt32>(self + kIOATIR500Shared_handleTable);
+  uVar3 = M<UInt32>(self + kIOATIR500Shared_handleBitmap);
   iVar2 = GH_IOMalloc(totalBytes);
-  M<SInt32>(self + 0x10) = iVar2;
+  M<SInt32>(self + kIOATIR500Shared_handleTable) = iVar2;
   if (iVar2 == 0) {
     uVar3 = 0;
-    M<SInt32>(self + 0x10) = oldTable;
+    M<SInt32>(self + kIOATIR500Shared_handleTable) = oldTable;
   }
   else {
-    iVar2 = M<SInt32>(self + 0xc);
+    iVar2 = M<SInt32>(self + kIOATIR500Shared_accelerator);
     if (iVar2 != 0) {
       M<SInt32>(iVar2 + 0x808) = totalBytes + M<SInt32>(iVar2 + 0x808);
     }
-    M<SInt32>(self + 0x14) = newCapacity;
-    M<SInt32>(self + 0x18) = iVar5 + M<SInt32>(self + 0x10);
-    GH_memset(M<SInt32>(self + 0x10),0,totalBytes);
+    M<SInt32>(self + kIOATIR500Shared_handleCapacity) = newCapacity;
+    M<SInt32>(self + kIOATIR500Shared_handleBitmap) = iVar5 + M<SInt32>(self + kIOATIR500Shared_handleTable);
+    GH_memset(M<SInt32>(self + kIOATIR500Shared_handleTable),0,totalBytes);
     if (oldTable != 0) {
       iVar5 = oldCapacity * 4 + (oldCapacity >> 3);
-      GH_memcpy(M<UInt32>(self + 0x10),oldTable,oldCapacity * 4);
-      GH_memcpy(M<UInt32>(self + 0x18),uVar3,oldCapacity >> 3);
+      GH_memcpy(M<UInt32>(self + kIOATIR500Shared_handleTable),oldTable,oldCapacity * 4);
+      GH_memcpy(M<UInt32>(self + kIOATIR500Shared_handleBitmap),uVar3,oldCapacity >> 3);
       GH_IOFree(oldTable,iVar5);
-      newCapacity = M<SInt32>(self + 0xc);
+      newCapacity = M<SInt32>(self + kIOATIR500Shared_accelerator);
       if (newCapacity != 0) {
         M<SInt32>(newCapacity + 0x808) = M<SInt32>(newCapacity + 0x808) - iVar5;
         return 1;

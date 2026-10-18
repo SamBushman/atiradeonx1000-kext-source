@@ -45,7 +45,7 @@ UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 keepMask, bool
   UInt32 cursor;
   
   this->invalidate_contexts();
-  pending = mask & M<unsigned int>(self + 0xbf8);
+  pending = mask & M<unsigned int>(self + kIOATIR500Surface_stateBits);
   if (pending == 0) {
 LAB_000122dc:
     result = 0;
@@ -66,7 +66,7 @@ LAB_000122dc:
         break;
       }
     } while (allAllocated != 0);
-    listHead = M<int>(M<int>(self + 0xd50) + 0x5c);
+    listHead = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x5c);
     iVar9 = listHead;
     if (listHead != 0) {
       do {
@@ -85,7 +85,7 @@ LAB_000122dc:
     cursor = (UInt32)self;
     do {
       if (M<int>(cursor + 0xb0) != 0) {
-        this->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(iVar9 * 0x78 + self + 0xa8)));
+        this->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(iVar9 * 0x78 + self + kIOATIR500Surface_buffers)));
         movedAny = true;
       }
       notLast = iVar9 != 0x16;
@@ -93,7 +93,7 @@ LAB_000122dc:
       iVar9 = iVar9 + 1;
     } while (notLast);
     if (movedAny) {
-      pending = mask & M<unsigned int>(self + 0xbf8);
+      pending = mask & M<unsigned int>(self + kIOATIR500Surface_stateBits);
       if (pending == 0) goto LAB_000122dc;
       index = 0;
       allAllocated = 1;

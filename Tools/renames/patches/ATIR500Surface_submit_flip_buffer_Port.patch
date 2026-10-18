@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 22:12:09.177755918 -0700
-+++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 22:12:09.179113958 -0700
+--- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-17 19:56:45.082052945 -0700
++++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-17 19:56:45.084516741 -0700
 @@ -39,7 +39,6 @@
    UInt16 uVar5;
    int iVar6;
@@ -8,10 +8,10 @@
    UInt32 *puVar9;
    UInt32 *packet;
    unsigned int uVar10;
-@@ -68,27 +67,27 @@
+@@ -71,27 +70,27 @@
    }
-   if (M<UInt32>(self + 0xd54) != (UInt32)contextBytes) {
-     M<UInt32>(self + 0xd54) = (UInt32)contextBytes;
+   if (M<UInt32>(self + kIOATIR500Surface_flipContext) != (UInt32)contextBytes) {
+     M<UInt32>(self + kIOATIR500Surface_flipContext) = (UInt32)contextBytes;
 -    iVar17 = M<int>((int)panel * 0x94 + self + 0xc34);
 +    iVar17 = (int)Vol(PANEL_RECORD(self, panel)->entries[0].header);
      M<unsigned int>(iVar17 + 0x1c) = M<unsigned int>(iVar17 + 0x1c) | 1;
@@ -50,9 +50,9 @@
      if (iVar17 == 0) {
        return;
      }
-@@ -96,11 +95,11 @@
+@@ -99,11 +98,11 @@
    else {
-     piVar24 = M<int *>(self + 0xd50);
+     piVar24 = M<int *>(self + kIOATIR500Surface_accelerator);
      iVar12 = piVar24[0x1e2];
 -    waited = VCALL(*piVar24, 0x54c)(piVar24,M<UInt32>(iVar8 + 0xc4c));
 +    waited = VCALL(*piVar24, 0x54c)(piVar24,Vol(slot->stamp));
@@ -65,7 +65,7 @@
    uVar21 = puVar9[1];
    uVar20 = puVar9[2];
    uVar14 = puVar9[3];
-@@ -115,7 +114,7 @@
+@@ -118,7 +117,7 @@
    puVar18[7] = uVar14;
    puVar18[4] = uVar21;
    puVar18[6] = uVar20;
@@ -74,9 +74,9 @@
    packet = (UInt32 *)(slotHeaderAddr + 0x20);
    *packet = 0xd0b;
    M<UInt32>(slotHeaderAddr + 0x24) = 5;
-@@ -319,7 +318,7 @@
-     uVar16 = uVar13 + 1;
-     packet[uVar13] = 0x80000000;
+@@ -322,7 +321,7 @@
+     uVar16 = wordIndex + 1;
+     packet[wordIndex] = 0x80000000;
    }
 -  M<unsigned int>(M<int>(iVar8 + 0xc50) + 0x14) = uVar16;
 +  M<unsigned int>((int)Vol(slot->header) + 0x14) = uVar16;

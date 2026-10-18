@@ -34,9 +34,9 @@ void IOATIR500Surface::remove_gl_context_from_list(IOATIR500GLContext *context) 
   UInt8 *current;
   UInt8 *previous;
   
-  current = M<UInt8 *>(self + 0x88);
-  if (M<UInt8 *>(self + 0x88) == contextBytes) {
-    M<UInt32>(self + 0x88) = M<UInt32>(contextBytes + 0x84);
+  current = M<UInt8 *>(self + kIOATIR500Surface_glContextList);
+  if (M<UInt8 *>(self + kIOATIR500Surface_glContextList) == contextBytes) {
+    M<UInt32>(self + kIOATIR500Surface_glContextList) = M<UInt32>(contextBytes + 0x84);
   }
   else {
     do {
