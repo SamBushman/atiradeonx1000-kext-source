@@ -1,0 +1,9 @@
+# DVD process_command_buffer round 2: the first two video-plane handlers (overlay setup opcode 0x0a and its sibling) - scratch locals that carry one role each inside a handler
+#!use-decl: end
+use	ATIR500DVDContext::process_command_buffer	uVar17	plane0Address	INFERRED	word 3 of the 0x1150 write: luma plane start address (base, or base + 1.5 fields for the second field, or the +0x998 alternate source)	\(recordCursor\[3\] & 2\) == 0	^\s*uVar17 = 0;$
+use	ATIR500DVDContext::process_command_buffer	uVar21	bufferPitch	CONFIRMED	M<UInt16>(bufferInfo + 0x570) in all three branches: the plane pitch; recordCursor[1] = pitch - 1	\(recordCursor\[3\] & 2\) == 0	uVar21 = 0x20 / M<UInt16>\(surfaceInfo \+ 0x136\)
+use	ATIR500DVDContext::process_command_buffer	uVar11	plane1Address	INFERRED	word 7 of the 0x1151 write: second plane start address (base + field height * pitch [+ chroma offset])	\(recordCursor\[3\] & 4\) == 0	recordCursor\[8\] = 0x1393;
+use	ATIR500DVDContext::process_command_buffer	uVar17	widthUnits	INFERRED	surface width / the format table's element size when the format has one; first operand of the max() that gives the pitch field	^\s*uVar17 = 0;$	recordCursor\[0xd\] = local_64;
+use	ATIR500DVDContext::process_command_buffer	uVar21	pitchUnits	INFERRED	max(0x20 / bytesPerUnit, widthUnits): the 0x3ffe pitch field of the colour-pitch word	uVar21 = 0x20 / M<UInt16>\(surfaceInfo \+ 0x136\)	recordCursor\[0xd\] = local_64;
+use	ATIR500DVDContext::process_command_buffer	uVar17	widthUnits	INFERRED	same computation as in the 0x0a handler, for the plain 0x1150 variant	^\s*uVar17 = 0;$#2	recordCursor\[7\] = local_58;
+use	ATIR500DVDContext::process_command_buffer	uVar21	pitchUnits	INFERRED	same computation as in the 0x0a handler	uVar21 = 0x20 / M<UInt16>\(surfaceInfo \+ 0x136\)#2	recordCursor\[7\] = local_58;

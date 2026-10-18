@@ -1,0 +1,14 @@
+# Round 2, second batch: loop counters and cursors of the strip loops (one role each, pure renames)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar38	rowIndex	CONFIRMED	strip loop: 0, +1 per row of chunks, compared with rowChunks
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar43	columnsLeft	CONFIRMED	inner loop counter: columnChunks, -1 per chunk
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar31	chunkLeft	CONFIRMED	x of the current chunk: firstColumn, +0xc00 per chunk (stored in the chunk record, word 0)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar29	columnWidthLeft	CONFIRMED	width still to cover: srcWidth - firstColumn, -0xc00 per chunk
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar40	chunkTop	CONFIRMED	y of the current row of chunks: firstRow + the 0xf80 row step
+def	::pcl_CopyPix	uVar43	rowIndex	CONFIRMED	strip loop: 0, +1 per row of chunks
+def	::pcl_CopyPix	uVar45	columnsLeft	CONFIRMED	inner loop counter: columnChunks, -1 per chunk
+def	::pcl_CopyPix	uVar35	chunkLeft	CONFIRMED	x of the current chunk: firstColumn, +0xc00 per chunk
+def	::pcl_CopyPix	uVar34	columnWidthLeft	CONFIRMED	width still to cover: width - firstColumn, -0xc00 per chunk
+def	::pcl_CopyPix	uVar42	chunkTop	CONFIRMED	y of the current row of chunks: firstRow + the 0xf80 row step
+def	::pcl_CopyPix	puVar29	quadPacket	CONFIRMED	write cursor of the quad packets, cmd + 0xbd; ends as the packet end
+def	::pcl_CopyPix	puVar37	chunkPacket	CONFIRMED	write cursor inside the quad packets, one 0x10-word record per chunk
+def	::pcl_CopyPix	psVar44	rect	CONFIRMED	params + 0x50: pointer to the four shorts x, y, width, height of the destination rectangle
