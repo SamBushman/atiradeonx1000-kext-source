@@ -123,15 +123,15 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
       }
       else {
         accelAddr = M<int>(self + kIOATIR5002DContext_accelerator);
-        if (M<char>(accelAddr + 0x80) == '\0') {
+        if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') {
           do {
-            GH_IOLockSleep(M<UInt32>(accelAddr + 0x840),accelAddr,0);
-          } while (M<char>(accelAddr + 0x80) == '\0');
+            GH_IOLockSleep(M<UInt32>(accelAddr + kIOATIR500Accelerator_commandLock),accelAddr,0);
+          } while (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0');
           accelAddr = M<int>(self + kIOATIR5002DContext_accelerator);
           surface = M<UInt8 *>(self + kIOATIR5002DContext_boundSurface);
         }
       }
-      if (M<char>(accelAddr + 0x80) == '\0') {
+      if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') {
         retries = 0x3e9;
         bufferFlags = 0;
         goto checkSurface;
@@ -248,7 +248,7 @@ recordStampOnly:
     }
     boundSurfaceAddr = M<int>(self + kIOATIR5002DContext_boundSurface);
     if (boundSurfaceAddr != M<int>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x5c)) {
-      M<UInt32>(M<int>(boundSurfaceAddr + 0x9c) + 0xa0) = M<UInt32>(boundSurfaceAddr + 0xa0);
+      M<UInt32>(M<int>(boundSurfaceAddr + kIOATIR500Surface_surfaceListNext) + 0xa0) = M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_surfaceListPrev);
       M<UInt32>(M<int>(M<int>(self + kIOATIR5002DContext_boundSurface) + 0xa0) + 0x9c) =
            M<UInt32>(M<int>(self + kIOATIR5002DContext_boundSurface) + 0x9c);
       listHead = M<int>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x5c);
@@ -261,8 +261,8 @@ recordStampOnly:
     }
     if ((swapRequest != 0) && ((bufferFlags & 2) == 0)) {
       flushSurface = M<int>(self + kIOATIR5002DContext_boundSurface);
-      savedStamp = M<UInt32>(flushSurface + 0x84);
-      M<UInt32>(flushSurface + 0x84) = M<UInt32>(flushSurface + 0x80);
+      savedStamp = M<UInt32>(flushSurface + kIOATIR500Surface_flushedStamp);
+      M<UInt32>(flushSurface + kIOATIR500Surface_flushedStamp) = M<UInt32>(flushSurface + kIOATIR500Surface_submittedStamp);
       accelWords = M<int *>(self + kIOATIR5002DContext_accelerator);
       if (accelWords[0x33] != 0) {
         panel = 0;
@@ -288,25 +288,25 @@ recordStampOnly:
   stampComplete = VCALL(*accelWords, 0x554)(accelWords,ringSlot[4]);
   if (stampComplete == 0) {
     accel = M<UInt8 *>(self + kIOATIR5002DContext_accelerator);
-    if (M<UInt16>(accel + 0x5c6) < 8) {
+    if (M<UInt16>(accel + kIOATIR500Accelerator_commandBufferRing1Count) < 8) {
       allocatedMore = ((IOATIR500Accelerator *)(accel))->allocMoreCommandBuffers(1, 0x1000);
       if (allocatedMore != 0) {
         accelAddr = M<int>(self + kIOATIR5002DContext_accelerator);
-        ringSlot = (int *)(accelAddr + (unsigned int)M<UInt16>(accelAddr + 0x5c4) * 0x1c + 0x404);
+        ringSlot = (int *)(accelAddr + (unsigned int)M<UInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing1Head) * 0x1c + 0x404);
         goto advanceRing;
       }
       accel = M<UInt8 *>(self + kIOATIR5002DContext_accelerator);
     }
-    savedBusyCount = M<int>(accel + 0x76c);
+    savedBusyCount = M<int>(accel + kIOATIR500Accelerator_freeCommandBuffer2DWaitTime);
     waitedCount = VCALL(M<int>(accel), 0x54c)(accel,ringSlot[4]);
-    M<int>(accel + 0x76c) = savedBusyCount + waitedCount;
+    M<int>(accel + kIOATIR500Accelerator_freeCommandBuffer2DWaitTime) = savedBusyCount + waitedCount;
     accelAddr = M<int>(self + kIOATIR5002DContext_accelerator);
   }
   else {
     accelAddr = M<int>(self + kIOATIR5002DContext_accelerator);
   }
 advanceRing:
-  M<UInt16>(accelAddr + 0x5c4) = M<SInt16>(accelAddr + 0x5c4) + 1U & M<SInt16>(accelAddr + 0x5c6) - 1U;
+  M<UInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing1Head) = M<SInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing1Head) + 1U & M<SInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing1Count) - 1U;
   oldType = M<UInt16>(self + kIOATIR5002DContext_commandBufferType);
   savedInFlight = M<UInt16>(self + kIOATIR5002DContext_commandBufferInFlight);      /* read before the 32-bit store to commandBufferType below overwrites both halves */
   newType = ringSlot[3];
@@ -337,8 +337,8 @@ advanceRing:
   ringSlot[1] = oldGartOffset;
   accelAddr = M<int>(self + kIOATIR5002DContext_accelerator);
   if (M<char>(accelAddr + 0x88) == '\0') {
-    VCALL(*M<int *>(accelAddr + 0xc0), 300)
-              (M<int *>(accelAddr + 0xc0),M<UInt32>(accelAddr + 0x8c));
+    VCALL(*M<int *>(accelAddr + kIOATIR500Accelerator_gartCollectorTimer), 300)
+              (M<int *>(accelAddr + kIOATIR500Accelerator_gartCollectorTimer),M<UInt32>(accelAddr + kIOATIR500Accelerator_gartReclaimInterval));
     M<UInt8>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x88) = 1;
   }
   else {

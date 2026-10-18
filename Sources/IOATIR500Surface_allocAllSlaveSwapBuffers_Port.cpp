@@ -84,7 +84,7 @@ LAB_00011f54:
       bufferIndex = 0;
       slot = &rec->entries[slotNumber + 1];
       do {
-        memoryDescriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(accelerator + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
+        memoryDescriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(accelerator + kIOATIR500Accelerator_commandBufferMemoryOptions) | 0x10023,swapBufferSize,GH_page_size);
         slot->memory = memoryDescriptor;
         if (memoryDescriptor == (SInt32 *)0x0) {
           if (3 < slotNumber) {

@@ -164,42 +164,42 @@ finishCommandBuffer:
         accelWords[0x1e6] = savedWaitCount + waitedCount;
         return 0;
       }
-      if (M<unsigned int>(surface + 0xa4) < 0x100) {
+      if (M<unsigned int>(surface + kIOATIR500Surface_requestedId) < 0x100) {
 surfaceReady:
         accelAddr = M<int>(self + kIOATIR500GLContext_accelerator);
       }
       else {
         accelAddr = M<int>(self + kIOATIR500GLContext_accelerator);
-        if (M<char>(accelAddr + 0x80) == '\0') {
+        if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') {
           do {
-            GH_IOLockSleep(M<UInt32>(accelAddr + 0x840),accelAddr,0);
-          } while (M<char>(accelAddr + 0x80) == '\0');
+            GH_IOLockSleep(M<UInt32>(accelAddr + kIOATIR500Accelerator_commandLock),accelAddr,0);
+          } while (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0');
           surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
           if (surface != (UInt8 *)0x0) goto surfaceReady;
           goto noSurface;
         }
       }
-      if (M<char>(accelAddr + 0x80) == '\0') goto noSurface;
+      if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') goto noSurface;
       if (surface[0xbf6] == 0x0) {
-        commandBufferFlags = M<UInt32>(surface + 0xbfc);
-        if ((M<SInt16>(self + kIOATIR500GLContext_swapIntervalNumerator) != 0) && ((M<unsigned int>(surface + 0xbe8) & 0x20) != 0)) {
+        commandBufferFlags = M<UInt32>(surface + kIOATIR500Surface_shapeBits);
+        if ((M<SInt16>(self + kIOATIR500GLContext_swapIntervalNumerator) != 0) && ((M<unsigned int>(surface + kIOATIR500Surface_modeBits) & 0x20) != 0)) {
           commandBufferFlags = commandBufferFlags | 2;
         }
         if ((surface[0xbd0] == 0x0) || (retryCount == 999)) {
-          allocatedMask = M<unsigned int>(surface + 0xbf8);
-          if (((M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(surface + 0xc1c)) & allocatedMask) != 0) {
+          allocatedMask = M<unsigned int>(surface + kIOATIR500Surface_stateBits);
+          if (((M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(surface + kIOATIR500Surface_reqBits)) & allocatedMask) != 0) {
             if ((allocatedMask & 0x20000000) != 0) goto abortSetup;
-            neededMask = (M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
+            neededMask = (M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(surface + kIOATIR500Surface_reqBits)) & 0x7fffff;
             presentNeeded = allocatedMask & neededMask;
             if (presentNeeded == 0) {
               surfaceVtable = M<int>(surface);
             }
             else {
-              if ((((presentNeeded & 1) != 0) && (M<int>(surface + 0xcc) == 0)) &&
-                 (((allocatedMask & 2) == 0 || (M<int>(surface + 0x144) != 0)))) {
+              if ((((presentNeeded & 1) != 0) && (M<int>(surface + kIOATIR500Surface_buffer0BackingStore) == 0)) &&
+                 (((allocatedMask & 2) == 0 || (M<int>(surface + kIOATIR500Surface_buffer1BackingStore) != 0)))) {
                 pendingSubmits = pendingSubmits | 1;
               }
-              if (((M<unsigned int>(surface + 0xbe8) & 0x20) == 0) && ((presentNeeded & 0x20) != 0)) {
+              if (((M<unsigned int>(surface + kIOATIR500Surface_modeBits) & 0x20) == 0) && ((presentNeeded & 0x20) != 0)) {
                 pendingSubmits = pendingSubmits | 2;
               }
               surfaceBits = ((IOATIR500Surface *)(surface))->convert_surface_bits(M<UInt32>(M<int>(self + kIOATIR500GLContext_commandBufferHeader) + 0xc));
@@ -209,7 +209,7 @@ surfaceReady:
                 goto abortSetup;
               }
               surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
-              if ((M<unsigned int>(surface + 0xbf8) & M<unsigned int>(surface + 0xc1c) & 0x10000000) == 0)
+              if ((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & M<unsigned int>(surface + kIOATIR500Surface_reqBits) & 0x10000000) == 0)
               goto afterPageQueue;
               surfaceVtable = M<int>(surface);
             }
@@ -333,13 +333,13 @@ noStampRecord:
               goto submitFlips;
             }
             boundSurfaceAddr = M<int>(self + kIOATIR500GLContext_boundSurface);
-            savedFlipBuffer = M<UInt32>(boundSurfaceAddr + 0xb74);
-            flipPanel = M<unsigned int>(boundSurfaceAddr + 0xc14);
-            M<UInt32>(boundSurfaceAddr + 0xb74) = M<UInt32>(boundSurfaceAddr + 0xb70);
+            savedFlipBuffer = M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_attachmentBuffer1);
+            flipPanel = M<unsigned int>(boundSurfaceAddr + kIOATIR500Surface_panel);
+            M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_attachmentBuffer1) = M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_attachmentBuffers);
             M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xb70) = savedFlipBuffer;
             boundSurfaceAddr = M<int>(self + kIOATIR500GLContext_boundSurface);
-            savedAuxBuffer = M<UInt32>(boundSurfaceAddr + 0xb80);
-            M<UInt32>(boundSurfaceAddr + 0xb80) = M<UInt32>(boundSurfaceAddr + 0xb84);
+            savedAuxBuffer = M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_attachmentBuffer4);
+            M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_attachmentBuffer4) = M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_attachmentBuffer5);
             M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xb84) = savedAuxBuffer;
             accelWords = M<int *>(self + kIOATIR500GLContext_accelerator);
             if ((1 << (flipPanel & 0x3f) & accelWords[0x34]) != 0) {
@@ -382,25 +382,25 @@ submitFlips:
         stampComplete = VCALL(*accelWords, 0x554)(accelWords,ringSlot[4]);
         if (stampComplete == 0) {
           accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-          if (M<UInt16>(accel + 0x402) < 0x10) {
-            allocatedMore = ((IOATIR500Accelerator *)(accel))->allocMoreCommandBuffers(0,M<UInt32>(accel + 0x5c8));
+          if (M<UInt16>(accel + kIOATIR500Accelerator_commandBufferRing0Count) < 0x10) {
+            allocatedMore = ((IOATIR500Accelerator *)(accel))->allocMoreCommandBuffers(0,M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold));
             if (allocatedMore != 0) {
               accelAddr = M<int>(self + kIOATIR500GLContext_accelerator);
-              ringSlot = (int *)(accelAddr + (unsigned int)M<UInt16>(accelAddr + 0x400) * 0x1c + 0x240);
+              ringSlot = (int *)(accelAddr + (unsigned int)M<UInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Head) * 0x1c + 0x240);
               goto advanceRing;
             }
             accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
           }
-          savedBusyCount = M<int>(accel + 0x770);
+          savedBusyCount = M<int>(accel + kIOATIR500Accelerator_freeCommandBufferGLWaitTime);
           waitedCount = VCALL(M<int>(accel), 0x54c)(accel,ringSlot[4]);
-          M<int>(accel + 0x770) = savedBusyCount + waitedCount;
+          M<int>(accel + kIOATIR500Accelerator_freeCommandBufferGLWaitTime) = savedBusyCount + waitedCount;
           accelAddr = M<int>(self + kIOATIR500GLContext_accelerator);
         }
         else {
           accelAddr = M<int>(self + kIOATIR500GLContext_accelerator);
         }
 advanceRing:
-        M<UInt16>(accelAddr + 0x400) = M<SInt16>(accelAddr + 0x400) + 1U & M<SInt16>(accelAddr + 0x402) - 1U
+        M<UInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Head) = M<SInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Head) + 1U & M<SInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Count) - 1U
         ;
         cmdBufBlock[3] = M<int>(self + kIOATIR500GLContext_commandBufferState);
         cmdBufBlock[4] = M<int>(self + kIOATIR500GLContext_commandBufferStamp);
@@ -429,7 +429,7 @@ advanceRing:
         ringSlot[5] = cmdBufBlock[5];
         ringSlot[6] = cmdBufBlock[6];
         accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-        if (M<int>(self + kIOATIR500GLContext_commandBufferSize) != M<int>(accel + 0x5c8)) {
+        if (M<int>(self + kIOATIR500GLContext_commandBufferSize) != M<int>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold)) {
           cmdBufBlock[3] = 0x10000;
           cmdBufBlock[6] = 0;
           cmdBufBlock[0] = 0;
@@ -437,7 +437,7 @@ advanceRing:
           cmdBufBlock[2] = 0;
           cmdBufBlock[4] = 0;
           cmdBufBlock[5] = 0;
-          iVar3 = ((IOATIR500Accelerator *)(accel))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accel + 0x5c8));
+          iVar3 = ((IOATIR500Accelerator *)(accel))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold));
           if (iVar3 == 0) {
             accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
           }
@@ -456,8 +456,8 @@ advanceRing:
         }
         M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp) = M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp);
         if (accel[0x88] == 0x0) {
-          VCALL(*M<int *>(accel + 0xc0), 300)
-                    (M<int *>(accel + 0xc0),M<UInt32>(accel + 0x8c));
+          VCALL(*M<int *>(accel + kIOATIR500Accelerator_gartCollectorTimer), 300)
+                    (M<int *>(accel + kIOATIR500Accelerator_gartCollectorTimer),M<UInt32>(accel + kIOATIR500Accelerator_gartReclaimInterval));
           M<UInt8>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x88) = 1;
         }
         else {

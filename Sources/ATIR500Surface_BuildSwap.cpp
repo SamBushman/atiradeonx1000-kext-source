@@ -368,7 +368,7 @@ void ATIR500Surface::build_swap() {
         else {
           accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
           if ((M<char>(accelerator + 0x9b0) == '\0') ||
-             (M<SInt32>(panel * 0x18 + accelerator + 0xb10) == 0)) {
+             (M<SInt32>(panel * 0x18 + accelerator + kIOATIR500Accelerator_swdsPanel0Flag) == 0)) {
             if ((SInt32)uVar38 < 0) {
               uVar29 = 0;
               uVar19 = uVar40;
@@ -392,12 +392,12 @@ void ATIR500Surface::build_swap() {
             iVar26 = batchIndex + 6;
             batchWords[batchIndex + 5] = 0x70000;
             if ((bool)(bVar46 >> 1 & 1)) {
-              iVar18 = M<SInt32>(accelerator + 0x894);
+              iVar18 = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
               if (iVar18 == 0) {
                 batchWords[iVar26] = 0x194e;
                 batchWords[batchIndex + 7] =
-                     uVar29 & ~M<UInt32>(accelerator + 0x898) |
-                     (uVar19 & ~M<UInt32>(accelerator + 0x898)) << 0x10 | 0x80000000;
+                     uVar29 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display1Enabled) |
+                     (uVar19 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display1Enabled)) << 0x10 | 0x80000000;
                 batchWords[batchIndex + 8] = 0x5c8;
                 iVar26 = batchIndex + 10;
                 batchWords[batchIndex + 9] = 8;
@@ -409,14 +409,14 @@ LAB_0003f644:
             }
             else {
               if (panel != 1) {
-                iVar18 = M<SInt32>(accelerator + 0x894);
+                iVar18 = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
                 goto LAB_0003f644;
               }
 LAB_0003f654:
               batchWords[iVar26] = 0x1b4e;
               batchWords[batchIndex + 7] =
-                   uVar29 & ~M<UInt32>(accelerator + 0x89c) |
-                   (uVar19 & ~M<UInt32>(accelerator + 0x89c)) << 0x10 | 0x80000000;
+                   uVar29 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled) |
+                   (uVar19 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled)) << 0x10 | 0x80000000;
               batchWords[batchIndex + 8] = 0x5c8;
               batchWords[batchIndex + 9] = 0x80000008;
               iVar26 = batchIndex + 10;
@@ -445,7 +445,7 @@ LAB_0003f654:
         }
         uVar29 = (UInt32)M<UInt8>(surfaceBuffer + 0x3a);
         uVar19 = (UInt32)M<UInt8>(iVar32 + 0x166);
-        uVar16 = M<UInt32>(accelerator + 0xb74);
+        uVar16 = M<UInt32>(accelerator + kIOATIR500Accelerator_gbTileConfig);
         if (uVar29 == uVar19) {
           bVar1 = false;
           uVar17 = uVar19;
@@ -537,7 +537,7 @@ LAB_0003f654:
                                 signedIntBias);
         sourceScaleX = (double)widthRatio;
         sourceScaleY = (double)heightRatio;
-        iVar43 = M<SInt32>(accelerator + 0x8c4);
+        iVar43 = M<SInt32>(accelerator + kIOATIR500Accelerator_tearingWideBlit);
         if (bufferWidthF != invBufferWidthD) {
           invBufferWidthD = (double)(float)(one / bufferWidthF);
         }

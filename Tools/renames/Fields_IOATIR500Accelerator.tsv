@@ -204,3 +204,4 @@ field	IOATIR500Accelerator,ATIRadeonX1000	0x848	gartReservedEntry	CONFIRMED	IOAT
 field	IOATIR500Accelerator,ATIRadeonX1000	0x80	active	INFERRED	byte; IOATIR5002DContext::lock_memory/swap loops sleep until `accelerator+0x80 != 0`, callPlatformFunction reports the device as down (0x640000 = 100% busy) while it is 0
 field	IOATIR500Accelerator,ATIRadeonX1000	0x83	sleeping	CONFIRMED	byte; system_will_sleep sets it to 1 and system_did_wake clears it, both under the command lock
 field	IOATIR500Accelerator,ATIRadeonX1000	0x84	cacheLineSize	CONFIRMED	byte; flush_memory_for_in/out use it as the dcbf stride and line mask
+field	IOATIR500Accelerator,ATIRadeonX1000	0xec	framebuffer0SubmitStamp	INFERRED	member +0x18 of the 0x20-byte per-panel record that starts at 0xd4 (framebuffer0): submit_swap_buffer and submit_flip_buffer store the stamp submit_buffer returned at accelerator + panel*0x20 + 0xec, and SWDS reads it back the same way (ownerBytes + panel*0x20 + 0xec)

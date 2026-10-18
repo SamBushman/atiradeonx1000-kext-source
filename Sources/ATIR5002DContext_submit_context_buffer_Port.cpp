@@ -233,7 +233,7 @@ void ATIR5002DContext::submit_context_buffer() {
     }
     if (M<SInt32>(self + kIOATIR5002DContext_boundSurface) == 0) {
       accel = M<SInt32>(self + kIOATIR5002DContext_accelerator);
-      surfaceBuffer = M<SInt32>(self + kIOATIR5002DContext_panelIndex) * 0x78 + accel + 300;
+      surfaceBuffer = M<SInt32>(self + kIOATIR5002DContext_panelIndex) * 0x78 + accel + kIOATIR500Accelerator_scanout1Buffer;
     }
     else {
       accel = M<SInt32>(self + kIOATIR5002DContext_accelerator);
@@ -248,7 +248,7 @@ void ATIR5002DContext::submit_context_buffer() {
     M<UInt32>(packet + iVar32 * 4) = 0x5c8;
     M<UInt32>(packet + iVar33 * 4) = 0x70000;
     M<UInt32>(packet + iVar18 * 4) = 0x1006;
-    M<UInt32>(packet + iVar23 * 4) = M<UInt32>(accel + 0xb74);
+    M<UInt32>(packet + iVar23 * 4) = M<UInt32>(accel + kIOATIR500Accelerator_gbTileConfig);
     M<UInt32>(packet + iVar24 * 4) = 0x1008;
     M<UInt32>(packet + iVar25 * 4) = 0;
     M<UInt32>(packet + iVar26 * 4) = 0x1380;

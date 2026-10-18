@@ -167,19 +167,19 @@ LAB_00042bf4:
     mappedAddress = (void *)(iVar14 + offset);
     if ((bool)(bVar16 >> 1 & 1)) {
       this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
-      if ((M<unsigned int>(this_00 + 0x98) & 0x80) != 0) {
+      if ((M<unsigned int>(this_00 + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) != 0) {
         ((IOATIR500Accelerator *)(this_00))->flush_memory_for_out((const void *)(mappedAddress), pitch * h);
         this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       }
     }
     else {
       this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
-      if ((M<unsigned int>(this_00 + 0x98) & 0x80) != 0) {
+      if ((M<unsigned int>(this_00 + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) != 0) {
         ((IOATIR500Accelerator *)(this_00))->flush_memory_for_in((const void *)(mappedAddress), transferSpan);
         this_00 = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       }
     }
-    iVar14 = M<int>(this_00 + 0x8a4);
+    iVar14 = M<int>(this_00 + kIOATIR500Accelerator_vramSizeProgrammed);
   }
   iVar15 = M<int>(transferBytes + 4);
   if (iVar15 == 0) {

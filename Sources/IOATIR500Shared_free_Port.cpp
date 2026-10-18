@@ -70,8 +70,8 @@ void IOATIR500Shared::free() {
     iVar4 = M<SInt32>(self + kIOATIR500Shared_textureListHead);
   }
   accel = M<UInt8 *>(self + kIOATIR500Shared_accelerator);
-  if (self == M<UInt8 *>(accel + 0x6c)) {
-    M<UInt32>(accel + 0x6c) = 0;
+  if (self == M<UInt8 *>(accel + kIOATIR500Accelerator_unknown_0x6c)) {
+    M<UInt32>(accel + kIOATIR500Accelerator_unknown_0x6c) = 0;
     M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x70) = 0;
     accel = M<UInt8 *>(self + kIOATIR500Shared_accelerator);
   }

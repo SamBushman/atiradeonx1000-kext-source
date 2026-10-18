@@ -39,6 +39,17 @@ Table format (tab separated, '#' starts a comment line):
           (`static const int`, so the compiled code is identical). Only the object's OWN fields: `M<T>(M<int>(self + 0x8c) + 0x50)` names +0x8c but
           the +0x50 field belongs to another object's class. Several classes (a base and its derived class) share the one constant.
 
+  kind    ptrfield  FIELDNAME  CLASS[,CLASS...]  tier  evidence   (columns: kind fieldname classes tier evidence)
+          FIELDNAME (or a full constant `kIOATIR500Surface_accelerator`) is a field that holds a POINTER to an object of CLASS (a base and its derived class
+          are listed together). Evidence for the type: the class header's member declaration, or a caller that uses the pointer that way.
+  kind    fieldvar  CLASS[,CLASS...]  VAR  SCOPE  tier  evidence   (columns: kind classes var scope tier evidence)
+          the local variable/parameter VAR points to an object of CLASS wherever SCOPE (`*`, a file name `X.cpp`, or `X.cpp:substring-of-the-function-header`)
+          says - for the cases that cannot be derived. Normally this is NOT needed: the type of a local is inferred. For every local V used as
+          `V + 0xOFF` or `U32At(V, 0xOFF)` in a function, the tool collects ALL assignments to V in that function; V has class C when every assignment is a plain
+          load of a `ptrfield` (`M<UInt8 *>(self + kIOATIR500GLContext_accelerator)`), a copy of another typed local, a walk `V = M<..>(V + OFF)` through a
+          pointer field of C itself, a declaration with a pointer-to-class type, or a null; a single assignment of any other shape leaves V untyped.
+          The `field` constants of C then replace `V + 0xOFF` / `U32At(V, 0xOFF)` (same rules as `field`: only the object's OWN fields).
+
 Anchors (`from`/`to`) are Python regexes (a trailing `#N` selects the N-th matching line instead of the first) matched against a line in which every `use` rename of the function has been taken back (so an anchor
 may be written with the old names and keeps matching after the table was applied). A `use` row is applied once its segment no longer contains `old`; several rows may give disjoint segments of one variable the same `new` name
 (the first one declares it).
@@ -390,7 +401,135 @@ def apply_fields(field_rows, root, read, files, errors):
         lines.append('static const int %s = %s;' % (cname, consts[cname]))
     lines += ['', '#endif', '']
     files[os.path.join(root, FIELDS_HEADER)] = '\n'.join(lines)
-    return pending, applied
+    return pending, applied, by_off, consts
+
+
+FAMILIES = [('IOATIR500Accelerator', 'ATIRadeonX1000'), ('IOATIR500Surface', 'ATIR500Surface'), ('IOATIR500GLContext', 'ATIR500GLContext'),
+            ('IOATIR5002DContext', 'ATIR5002DContext'), ('IOATIR500DVDContext', 'ATIR500DVDContext'), ('IOATIR500Shared', 'ATIR500Memory')]
+ALLOWED_RHS = set('M U32At U16At U8At F32At reinterpret_cast static_cast const_cast UInt8 UInt16 UInt32 SInt32 SInt16 SInt8 int void char unsigned long short self this param_1 const'.split())
+CLASS_ALT = '|'.join(sorted({c for fm in FAMILIES for c in fm} | {'IOATIR500Accelerator', 'ATIRadeonX1000'}))
+LIT = r'(?:0x[0-9a-fA-F]+|[0-9]+)'
+
+
+def family_of(cls):
+    for f in FAMILIES:
+        if cls in f: return frozenset(f)
+    return frozenset([cls])
+
+
+def all_functions(s):
+    """-> [(start, end)] of every function body at file scope, header included (namespace and extern "C" blocks are entered)"""
+    out, i, n, hs = [], 0, len(s), 0
+    while i < n:
+        sk = lex_skip(s, i)
+        if sk: i = sk[0]; continue
+        c = s[i]
+        if c == '#' and (i == 0 or s[i - 1] == '\n'):
+            j = i
+            while j < n and s[j] != '\n': j += 2 if s[j] == '\\' else 1
+            i = j; hs = i; continue
+        if c == ';': hs = i + 1
+        elif c == '{':
+            h = re.sub(r'/\*.*?\*/|//[^\n]*', '', s[hs:i], flags=re.S)
+            if re.search(r'\bnamespace\b|extern\s*"C"', h): hs = i + 1; i += 1; continue
+            e = find_body_end(s, i)
+            if not re.search(r'\b(class|struct|enum|union)\b[^()]*$', h) and ')' in h: out.append((hs, e))
+            i = e; hs = i; continue
+        elif c == '}': hs = i + 1
+        i += 1
+    return out
+
+
+def classify_rhs(rhs, v, cls, ptr_class, fam_off):
+    """-> family, 'null', or None (cannot be derived)"""
+    rr = re.sub(r'/\*.*?\*/', '', rhs).strip()
+    toks = [t for t in IDENT.findall(rr) if t not in ALLOWED_RHS and not re.fullmatch(r'0x[0-9a-fA-F]+|\d+', t)]
+    kc = [t for t in toks if re.fullmatch(r'k[A-Za-z0-9]+_\w+', t)]
+    others = [t for t in toks if t not in kc]
+    if not toks and re.fullmatch(r'[\s\(\)\w\*<>:]*', rr) and re.search(r'\b(0x0|0|nullptr|NULL)\b', rr) and '+' not in rr: return 'null'
+    if len(kc) == 1 and not others:
+        return ptr_class(kc[0])
+    if len(others) == 1 and not kc and others[0] != v and others[0] in cls and not re.search(r'[+*]|U32At|M<', rr.replace('reinterpret_cast', '')):
+        return cls[others[0]]
+    if len(others) == 1 and others[0] == v and v in cls:                    # a walk through a pointer field of the same class
+        if len(kc) == 1 and not re.search(r'%s\s*\+\s*%s' % (re.escape(v), LIT), rr):
+            return cls[v] if ptr_class(kc[0]) == cls[v] else None
+        ms = re.search(r'%s\s*\+\s*(%s)\b' % (re.escape(v), LIT), rr)
+        if ms and not kc:
+            o = int(ms.group(1), 0)
+            cn = fam_off.get(cls[v], {}).get(o)
+            if cn and len(cn) == 1 and ptr_class(next(iter(cn))) == cls[v]: return cls[v]
+        if len(kc) == 0 and not ms: return None
+        kk = re.search(r'%s\s*\+\s*(k\w+)' % re.escape(v), rr)
+        if kk and ptr_class(kk.group(1)) == cls[v]: return cls[v]
+    return None
+
+
+def apply_fieldvars(ptr_rows, var_rows, root, read, files, errors, by_off):
+    """-> (pending, applied): name `V + 0xOFF` / `U32At(V, 0xOFF)` for locals/parameters whose class is known"""
+    fam_off = {}                                             # family -> offset -> {constants}
+    for (c, off), cn in by_off.items(): fam_off.setdefault(family_of(c), {}).setdefault(int(off, 16), set()).add(cn)
+    ptr = {}
+    for (t, n, fld, classes, tier) in ptr_rows:
+        fams = {family_of(c) for c in classes}
+        if len(fams) != 1: errors.append('%s:%d: ptrfield %s: the classes must be one family' % (t, n, fld)); continue
+        ptr[fld] = next(iter(fams))
+    def ptr_class(const):
+        if const in ptr: return ptr[const]
+        m = re.fullmatch(r'k[A-Za-z0-9]+_(\w+)', const)
+        return ptr.get(m.group(1)) if m else None
+    pat_add = lambda v: re.compile(r'(?<![\w.>])%s(\s*\+\s*)(%s)\b(?!\s*[\]\*])' % (re.escape(v), LIT))
+    pat_acc = lambda v: re.compile(r'\b(?:U8At|U16At|U32At|F32At)\(\s*%s\s*,\s*(%s)\s*\)' % (re.escape(v), LIT))
+    TERM = r'(?:\([^()]*\)\s*)*(?:\w+|\([^()]*\))'
+    pat_idx = lambda v: re.compile(r'(?<![\w.>])%s\s*\+\s*%s\s*\*\s*(?:0x[0-9a-fA-F]+|[0-9]+)\s*\+\s*(%s)\b(?!\s*[\]\*])' % (re.escape(v), TERM, LIT))
+    cand_pat = re.compile(r'(?<![\w.>])([A-Za-z_]\w*)\s*\+\s*(?:%s\s*\*\s*(?:0x[0-9a-fA-F]+|[0-9]+)\s*\+\s*)?%s\b(?!\s*[\]\*])|\b(?:U8At|U16At|U32At|F32At)\(\s*([A-Za-z_]\w*)\s*,\s*%s\s*\)' % (TERM, LIT, LIT))
+    pending = 0
+    for f in sorted(glob.glob(os.path.join(root, 'Sources', '*.cpp'))):
+        s = read(f); base = os.path.basename(f); edits = set()
+        for (fs, fe) in all_functions(s):
+            body = s[fs:fe]
+            header = body[:body.find('{')]
+            cands = {m.group(1) or m.group(2) for m in cand_pat.finditer(body)} - {'self', 'this', 'param_1'} - KEYWORDS
+            if not cands: continue
+            cls = {}
+            for (t, n, cl, var, sc, tier) in var_rows:
+                scf, _, sub = sc.partition(':')
+                if scf not in ('*', base) or (sub and sub not in header) or var not in cands: continue
+                cls[var] = family_of(cl[0])
+            assigns = {}
+            for v in cands - set(cls):
+                lst = []
+                for m in re.finditer(r'(?<![\w.>\]])(?:(%s)\s*\*\s*)?%s\s*=(?!=)\s*([^;]*);' % (CLASS_ALT, re.escape(v)), body):
+                    lst.append((m.group(2), m.group(1)))
+                for m in re.finditer(r'\b(%s)\s*\*\s*%s\b(?!\s*=)' % (CLASS_ALT, re.escape(v)), body):
+                    lst.append((None, m.group(1)))                       # declared (or a parameter) as a pointer to the class
+                if re.search(r'(?<![\w.>])%s\s*(\+\+|--|[-+*/%%&|^]=|<<=|>>=)|(\+\+|--)\s*%s\b|&\s*%s\b' % ((re.escape(v),) * 3), body): continue      # used as a counter or by reference: not a plain pointer
+                if lst: assigns[v] = lst
+            for _ in range(6):
+                ch = False
+                for v, lst in assigns.items():
+                    if v in cls: continue
+                    got, ok = set(), True
+                    for rhs, decl in lst:
+                        if rhs is None: got.add(family_of(decl)); continue
+                        r = family_of(decl) if decl else classify_rhs(rhs, v, cls, ptr_class, fam_off)
+                        if r is None: ok = False; break
+                        if r != 'null': got.add(r)
+                    if ok and len(got) == 1: cls[v] = next(iter(got)); ch = True
+                if not ch: break
+            for v, fam in cls.items():
+                offs = fam_off.get(fam, {})
+                hits = [(m.start(2), m.end(2), m.group(2)) for m in pat_add(v).finditer(body)] + [(m.start(1), m.end(1), m.group(1)) for m in pat_acc(v).finditer(body)] + [(m.start(1), m.end(1), m.group(1)) for m in pat_idx(v).finditer(body)]
+                for (a, b, lit) in hits:
+                    cn = offs.get(int(lit, 0))
+                    if not cn or len(cn) != 1: continue
+                    ls = body.rfind('\n', 0, a) + 1
+                    if '//' in body[ls:a] or body.rfind('/*', 0, a) > body.rfind('*/', 0, a): continue
+                    edits.add((fs + a, fs + b, next(iter(cn))))
+        if edits:
+            for (a, b, r) in sorted(edits, reverse=True): s = s[:a] + r + s[b:]
+            pending += len(edits); files[f] = s
+    return pending, 0
 
 
 def main():
@@ -399,7 +538,7 @@ def main():
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
-    rows, use_rows, field_rows = [], [], []
+    rows, use_rows, field_rows, ptr_rows, var_rows = [], [], [], [], []
     for t in tables:
         dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
         for n, l in enumerate(open(t), 1):
@@ -414,6 +553,12 @@ def main():
                     sys.exit('%s:%d: bad field row (field CLASSES 0xOFFSET name tier [evidence])' % (t, n))
                 field_rows.append((t, n, f[1].split(','), f[2].lower(), f[3], f[4]))
                 continue
+            if f[0] == 'ptrfield':                      # ptrfield FIELD CLASSES TIER EVIDENCE
+                if len(f) < 5 or f[3] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'): sys.exit('%s:%d: bad ptrfield row (ptrfield FIELD CLASSES tier evidence)' % (t, n))
+                ptr_rows.append((t, n, f[1], f[2].split(','), f[3])); continue
+            if f[0] == 'fieldvar':                      # fieldvar CLASSES VAR SCOPE TIER EVIDENCE
+                if len(f) < 6 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]): sys.exit('%s:%d: bad fieldvar row (fieldvar CLASSES var scope tier evidence)' % (t, n))
+                var_rows.append((t, n, f[1].split(','), f[2], f[3], f[4])); continue
             if len(f) < 5 or f[0] not in ('def', 'decl', 'use') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
                 sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
             if f[0] == 'use':
@@ -458,8 +603,11 @@ def main():
     up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts)
     pending += up; applied += ua
     if field_rows:
-        fp, fa = apply_fields(field_rows, a.root, read, files, errors)
+        fp, fa, by_off, _consts = apply_fields(field_rows, a.root, read, files, errors)
         pending += fp; applied += fa
+        if ptr_rows or var_rows:
+            vp, va = apply_fieldvars(ptr_rows, var_rows, a.root, read, files, errors, by_off)
+            pending += vp; applied += va
     for e in errors: print('ERROR', e, file=sys.stderr)
     if not a.check and not errors:
         for f, s in files.items(): open(f, 'w').write(s)

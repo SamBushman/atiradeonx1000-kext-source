@@ -37,8 +37,8 @@ void IOATIR500Shared::free_handles() {
                M<UInt32>(self + kIOATIR500Shared_handleCapacity) * 4 + (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 3));
   accel = M<SInt32>(self + kIOATIR500Shared_accelerator);
   if (accel != 0) {
-    M<UInt32>(accel + 0x808) =
-         M<SInt32>(accel + 0x808) - (M<UInt32>(self + kIOATIR500Shared_handleCapacity) * 4 + (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 3));
+    M<UInt32>(accel + kIOATIR500Accelerator_vendorTextureBufferBytes) =
+         M<SInt32>(accel + kIOATIR500Accelerator_vendorTextureBufferBytes) - (M<UInt32>(self + kIOATIR500Shared_handleCapacity) * 4 + (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 3));
   }
   return;
 }

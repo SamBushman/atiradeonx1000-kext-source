@@ -85,15 +85,15 @@ bool IOATIR500DVDContext::start(IOService *provider) {
     }
 
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR500DVDContext_accelerator));
-    if (U32At(accel, 0x68) == 0 && U32At(accel, 0x60) == 0) {
+    if (U32At(accel, kIOATIR500Accelerator_liveDVDContextListHead) == 0 && U32At(accel, kIOATIR500Accelerator_liveGLContextListHead) == 0) {
         if (accelerator->setup3D() == 0) {
             IOATIR500DVDContext::stop(provider);
             return false;
         }
         accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR500DVDContext_accelerator));
     }
-    U32At(self, kIOATIR500DVDContext_nextLiveContext) = U32At(accel, 0x68);
-    U32At(accel, 0x68) = reinterpret_cast<UInt32>(this);
+    U32At(self, kIOATIR500DVDContext_nextLiveContext) = U32At(accel, kIOATIR500Accelerator_liveDVDContextListHead);
+    U32At(accel, kIOATIR500Accelerator_liveDVDContextListHead) = reinterpret_cast<UInt32>(this);
     U32At(reinterpret_cast<void *>(U32At(self, kIOATIR500DVDContext_accelerator)), 0x73c) += 1;
     if (accelerator->getVRAMDescriptors() &&
         accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kIOATIR500DVDContext_commandBuffer), 0x80000) &&

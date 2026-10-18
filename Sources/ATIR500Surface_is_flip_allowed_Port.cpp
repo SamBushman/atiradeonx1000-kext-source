@@ -38,8 +38,8 @@ SInt32 ATIR500Surface::is_flip_allowed() {
   baseResult = IOATIR500Surface::is_flip_allowed();
   accel = M<SInt32>(self + kIOATIR500Surface_accelerator);
   if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003aec0;
-  if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x18 + accel + 0xb10) == 0) {
-    if (M<SInt32>(accel + 0x894) == 0) goto LAB_0003aec0;
+  if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
+    if (M<SInt32>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto LAB_0003aec0;
     iVar1 = 0xb18;
     if (M<SInt32>(self + kIOATIR500Surface_panel) != 0) {
       iVar1 = 0xb00;

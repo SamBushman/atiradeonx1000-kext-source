@@ -43,7 +43,7 @@ IOReturn IOATIR500DVDContext::delete_image(UInt32 textureID) {
     GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   }
   else {
-    if ((textureID < M<unsigned int>(shared + 0x14)) &&
+    if ((textureID < M<unsigned int>(shared + kIOATIR500Shared_handleCapacity)) &&
        (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
        texture != (UInt8 *)0x0)) {
       result = ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)(texture));

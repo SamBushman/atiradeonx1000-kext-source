@@ -164,8 +164,8 @@ LAB_0003bcc8:
   if (accelerator[0x9b0] == 0x0) {
     uVar11 = 0;
   }
-  else if ((M<int>(accelerator + 0x894) == 0) || (M<int>(accelerator + 0xb28) == 0)) {
-    if (M<int>(accelerator + panel * 0x18 + 0xb10) == 0) {
+  else if ((M<int>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) || (M<int>(accelerator + kIOATIR500Accelerator_swdsPanel1Flag) == 0)) {
+    if (M<int>(accelerator + panel * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
       uVar9 = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), uVar9, true, (unsigned int)(panel == 0));
       uVar11 = 1;
     }
@@ -198,7 +198,7 @@ LAB_0003be90:
                       ,M<UInt32>(M<int>(pVVar19 + 0x14) + 0x14));
   M<UInt32>(pVVar19 + 0x10) = uVar11;
   M<UInt32>(self + kIOATIR500Surface_submittedStamp) = uVar11;
-  M<UInt32>(accelerator + panel * 0x20 + 0xec) = uVar11;
+  M<UInt32>(accelerator + panel * 0x20 + kIOATIR500Accelerator_framebuffer0SubmitStamp) = uVar11;
   iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
   if ((M<char>(iVar8 + 0x9b0) != '\0') && (*M<int *>(pVVar19 + 0x14) != 0)) {
     if (M<int>(panel * 0x18 + iVar8 + 0xb10) == 0) {

@@ -37,7 +37,7 @@ IOReturn ATIR500DVDContext::dvd_setup_overlay(int top, int right, int bottom, in
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
-  if (M<char>(accel + 0x80) == '\0') {
+  if (M<char>(accel + kIOATIR500Accelerator_active) == '\0') {
     result = 0xe00002d8;
   }
   else if (M<SInt32>(self + kIOATIR500DVDContext_boundSurface) == 0) {
@@ -53,6 +53,6 @@ IOReturn ATIR500DVDContext::dvd_setup_overlay(int top, int right, int bottom, in
     ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->dvd_setup_overlay(top,right,bottom,left);
     accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   }
-  GH_IOLockUnlock(M<UInt32>(accel + 0x840));
+  GH_IOLockUnlock(M<UInt32>(accel + kIOATIR500Accelerator_commandLock));
   return result;
 }

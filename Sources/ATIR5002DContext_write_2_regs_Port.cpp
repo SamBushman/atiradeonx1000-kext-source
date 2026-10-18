@@ -42,7 +42,7 @@ IOReturn ATIR5002DContext::write_2_regs(UInt32 offset1, UInt32 offset2, UInt32*v
   if ((byteCount & 7) == 0) {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
     accel = M<SInt32>(self + kIOATIR5002DContext_accelerator);
-    if (M<char>(accel + 0x80) == '\0') {
+    if (M<char>(accel + kIOATIR500Accelerator_active) == '\0') {
       result = 0xe00002d8;
     }
     else {
@@ -61,7 +61,7 @@ IOReturn ATIR5002DContext::write_2_regs(UInt32 offset1, UInt32 offset2, UInt32*v
       }
       result = 0;
     }
-    GH_IOLockUnlock(M<UInt32>(accel + 0x840));
+    GH_IOLockUnlock(M<UInt32>(accel + kIOATIR500Accelerator_commandLock));
   }
   else {
     result = 0xe00002c2;

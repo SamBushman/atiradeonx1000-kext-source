@@ -87,7 +87,7 @@
 -      pIVar11 = self + iVar3 + 0xc44;
 +      slot = &rec->entries[slotNumber + 1];
        do {
-         memoryDescriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(accelerator + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
+         memoryDescriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(accelerator + kIOATIR500Accelerator_commandBufferMemoryOptions) | 0x10023,swapBufferSize,GH_page_size);
 -        M<SInt32 *>(pIVar11) = memoryDescriptor;
 +        slot->memory = memoryDescriptor;
          if (memoryDescriptor == (SInt32 *)0x0) {

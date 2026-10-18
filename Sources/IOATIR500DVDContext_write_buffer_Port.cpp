@@ -79,14 +79,14 @@ IOReturn IOATIR500DVDContext::write_buffer(sIODVDContextWriteBufferData *data, U
   surface = M<UInt8 *>(param_1 + kIOATIR500DVDContext_boundSurface);
   bufferBit = 0x40000000;
   surfaceBuffer = M<int>(surface + bufferSlotOffset + 0xb70);
-  bufferIndex = (surfaceBuffer - (int)(surface + 0xa8) >> 3) * -0x11111111;
+  bufferIndex = (surfaceBuffer - (int)(surface + kIOATIR500Surface_buffers) >> 3) * -0x11111111;
   if (bufferIndex < 0x17) {
     bufferBit = 1 << (bufferIndex & 0x3f) & M<unsigned int>(param_1 + kIOATIR500DVDContext_surfaceFlagsBitmask);
   }
   if ((surface == (UInt8 *)0x0) || (bufferBit == 0)) goto LAB_00010120;
-  if ((bufferBit & M<unsigned int>(surface + 0xbf8)) == 0) {
+  if ((bufferBit & M<unsigned int>(surface + kIOATIR500Surface_stateBits)) == 0) {
 LAB_00010100:
-    if (((M<unsigned int>(surface + 0xbf8) & 0x20000000) != 0) || (M<int>(surfaceBuffer + 0x10) == 0)) {
+    if (((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & 0x20000000) != 0) || (M<int>(surfaceBuffer + 0x10) == 0)) {
 LAB_00010120:
       GH_IOLockUnlock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
       return 0xe00002cc;

@@ -49,14 +49,14 @@ IOReturn IOATIR500GLContext::get_data_buffer(unsigned int*outHandle, UInt32*outA
     M<unsigned int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x70c) = commandBytes + M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x70c);
   }
   accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-  if (M<unsigned int>(accel + 0x5d8) < M<unsigned int>(self + kIOATIR500GLContext_dataBufferSizeHint)) {
-    M<unsigned int>(accel + 0x5d8) = M<unsigned int>(self + kIOATIR500GLContext_dataBufferSizeHint);
+  if (M<unsigned int>(accel + kIOATIR500Accelerator_dataBufferSizeThreshold) < M<unsigned int>(self + kIOATIR500GLContext_dataBufferSizeHint)) {
+    M<unsigned int>(accel + kIOATIR500Accelerator_dataBufferSizeThreshold) = M<unsigned int>(self + kIOATIR500GLContext_dataBufferSizeHint);
     accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
   }
-  buffer = M<UInt8 *>(accel + 0x5cc);
+  buffer = M<UInt8 *>(accel + kIOATIR500Accelerator_dataBufferCacheHead);
   if (buffer == (UInt8 *)0x0) {
     buffer = (UInt8 *)
-             ((IOATIR500Accelerator *)(accel))->allocOneDataBuffer(M<UInt32>(accel + 0x5d8), true);
+             ((IOATIR500Accelerator *)(accel))->allocOneDataBuffer(M<UInt32>(accel + kIOATIR500Accelerator_dataBufferSizeThreshold), true);
     if (buffer == (UInt8 *)0x0) {
       GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
       *outHandle = 0;
@@ -87,7 +87,7 @@ IOReturn IOATIR500GLContext::get_data_buffer(unsigned int*outHandle, UInt32*outA
   }
   M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + -1;
   accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-  if (M<int>(buffer + 0x50) != M<int>(accel + 0x5d8)) {
+  if (M<int>(buffer + 0x50) != M<int>(accel + kIOATIR500Accelerator_dataBufferSizeThreshold)) {
     piVar4 = M<int *>(buffer + 8);
     if (piVar4 != (int *)0x0) {
       if (M<int>(buffer + 4) != 0) {

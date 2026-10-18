@@ -45,14 +45,14 @@ IOReturn IOATIR500GLContext::reclaim_resources() {
   while (buffer = nextBuffer, buffer != (UInt8 *)0x0) {
     accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
     nextBuffer = M<UInt8 *>(buffer + 0x3c);
-    if (M<UInt32>(accel + 0x5d4) < 0x10) {
-      if (M<SInt32>(accel + 0x5d0) == 0) {
-        M<UInt8 *>(accel + 0x5cc) = buffer;
+    if (M<UInt32>(accel + kIOATIR500Accelerator_dataBufferCacheCount) < 0x10) {
+      if (M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheTail) == 0) {
+        M<UInt8 *>(accel + kIOATIR500Accelerator_dataBufferCacheHead) = buffer;
         M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = buffer;
         M<UInt32>(buffer + 0x3c) = 0;
       }
       else {
-        M<UInt8 *>(M<SInt32>(accel + 0x5d0) + 0x3c) = buffer;
+        M<UInt8 *>(M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheTail) + 0x3c) = buffer;
         M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = buffer;
         M<UInt32>(buffer + 0x3c) = 0;
       }
@@ -71,15 +71,15 @@ IOReturn IOATIR500GLContext::reclaim_resources() {
   M<UInt32>(self + kIOATIR500GLContext_dataBufferCount) = 0;
   M<UInt32>(self + kIOATIR500GLContext_dataBufferListHead) = 0;
   M<UInt32>(self + kIOATIR500GLContext_dataBufferListTail) = 0;
-  pooledCount = M<UInt32>(iVar3 + 0x5d4);
+  pooledCount = M<UInt32>(iVar3 + kIOATIR500Accelerator_dataBufferCacheCount);
   while (0xf < pooledCount) {
-    nextBuffer = M<UInt8 *>(iVar3 + 0x5cc);
-    M<UInt32>(iVar3 + 0x5cc) = M<UInt32>(nextBuffer + 0x3c);
+    nextBuffer = M<UInt8 *>(iVar3 + kIOATIR500Accelerator_dataBufferCacheHead);
+    M<UInt32>(iVar3 + kIOATIR500Accelerator_dataBufferCacheHead) = M<UInt32>(nextBuffer + 0x3c);
     M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + -1;
     ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeOneDataBuffer((VendorTextureBuffer *)(nextBuffer));
     iVar3 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-    pooledCount = M<UInt32>(iVar3 + 0x5d4);
+    pooledCount = M<UInt32>(iVar3 + kIOATIR500Accelerator_dataBufferCacheCount);
   }
-  GH_IOLockUnlock(M<UInt32>(iVar3 + 0x840));
+  GH_IOLockUnlock(M<UInt32>(iVar3 + kIOATIR500Accelerator_commandLock));
   return 0;
 }

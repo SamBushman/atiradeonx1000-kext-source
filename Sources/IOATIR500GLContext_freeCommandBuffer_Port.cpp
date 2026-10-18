@@ -37,16 +37,16 @@ void IOATIR500GLContext::freeCommandBuffer() {
   
   if (M<SInt32>(self + kIOATIR500GLContext_commandBufferDescriptor) != 0) {
     accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-    context = M<SInt32>(accel + 0x60);
+    context = M<SInt32>(accel + kIOATIR500Accelerator_liveGLContextListHead);
     if (context == 0) {
-      if (M<SInt32>(accel + 0x68) == 0) {
+      if (M<SInt32>(accel + kIOATIR500Accelerator_liveDVDContextListHead) == 0) {
         return;
       }
     }
     else {
       while( true ) {
-        if (M<UInt32>(accel + 0x5c8) < M<UInt32>(context + 0xb0)) {
-          M<UInt32>(accel + 0x5c8) = M<UInt32>(context + 0xb0);
+        if (M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold) < M<UInt32>(context + 0xb0)) {
+          M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold) = M<UInt32>(context + 0xb0);
         }
         mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + kIOATIR500GLContext_commandBufferDescriptor));
         if (mapping != (SInt32 *)0x0) {
@@ -58,11 +58,11 @@ void IOATIR500GLContext::freeCommandBuffer() {
       }
       accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
     }
-    context = M<SInt32>(accel + 0x68);
+    context = M<SInt32>(accel + kIOATIR500Accelerator_liveDVDContextListHead);
     if (context != 0) {
       while( true ) {
-        if (M<UInt32>(accel + 0x5c8) < 0x80000) {
-          M<UInt32>(accel + 0x5c8) = 0x80000;
+        if (M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold) < 0x80000) {
+          M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold) = 0x80000;
         }
         mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + kIOATIR500GLContext_commandBufferDescriptor));
         if (mapping != (SInt32 *)0x0) {

@@ -66,7 +66,7 @@ void IOATIR500GLContext::stop(IOService *provider) {
   this->freeCommandBuffer();
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d8) = 0x10000;
   accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-  iVar6 = M<SInt32>(accel + 0x5cc);
+  iVar6 = M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheHead);
   if (iVar6 != 0) {
     do {
       if ((M<SInt32 *>(iVar6 + 0x10) != (SInt32 *)0x0) &&
@@ -83,14 +83,14 @@ void IOATIR500GLContext::stop(IOService *provider) {
   if (buffer != (UInt8 *)0x0) {
     while( true ) {
       nextBuffer = M<UInt8 *>(buffer + 0x3c);
-      if (M<UInt32>(accel + 0x5d4) < 0x10) {
-        if (M<SInt32>(accel + 0x5d0) == 0) {
-          M<UInt8 *>(accel + 0x5cc) = buffer;
+      if (M<UInt32>(accel + kIOATIR500Accelerator_dataBufferCacheCount) < 0x10) {
+        if (M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheTail) == 0) {
+          M<UInt8 *>(accel + kIOATIR500Accelerator_dataBufferCacheHead) = buffer;
           M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = buffer;
           M<UInt32>(buffer + 0x3c) = 0;
         }
         else {
-          M<UInt8 *>(M<SInt32>(accel + 0x5d0) + 0x3c) = buffer;
+          M<UInt8 *>(M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheTail) + 0x3c) = buffer;
           M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = buffer;
           M<UInt32>(buffer + 0x3c) = 0;
         }
@@ -113,14 +113,14 @@ void IOATIR500GLContext::stop(IOService *provider) {
   M<UInt32>(self + kIOATIR500GLContext_dataBufferCount) = 0;
   M<UInt32>(self + kIOATIR500GLContext_dataBufferListHead) = 0;
   M<UInt32>(self + kIOATIR500GLContext_dataBufferListTail) = 0;
-  pooledCount = M<UInt32>(accel + 0x5d4);
+  pooledCount = M<UInt32>(accel + kIOATIR500Accelerator_dataBufferCacheCount);
   while (0xf < pooledCount) {
-    buffer = M<UInt8 *>(accel + 0x5cc);
-    M<UInt32>(accel + 0x5cc) = M<UInt32>(buffer + 0x3c);
+    buffer = M<UInt8 *>(accel + kIOATIR500Accelerator_dataBufferCacheHead);
+    M<UInt32>(accel + kIOATIR500Accelerator_dataBufferCacheHead) = M<UInt32>(buffer + 0x3c);
     M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + -1;
     ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeOneDataBuffer((VendorTextureBuffer *)(buffer));
     accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-    pooledCount = M<UInt32>(accel + 0x5d4);
+    pooledCount = M<UInt32>(accel + kIOATIR500Accelerator_dataBufferCacheCount);
   }
   if (M<SInt32>(self + kIOATIR500GLContext_contextBufferDescriptor) != 0) {
     this->freeAllContextBuffers();

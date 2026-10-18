@@ -124,29 +124,29 @@ finishCommandBuffer:
       GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
       return 0;
     }
-    if (M<unsigned int>(surface + 0xa4) < 0x100) {
+    if (M<unsigned int>(surface + kIOATIR500Surface_requestedId) < 0x100) {
 surfaceReady:
       accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
     }
     else {
       accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
-      if (M<char>(accelAddr + 0x80) == '\0') {
+      if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') {
         do {
-          GH_IOLockSleep(M<UInt32>(accelAddr + 0x840),accelAddr,0);
-        } while (M<char>(accelAddr + 0x80) == '\0');
+          GH_IOLockSleep(M<UInt32>(accelAddr + kIOATIR500Accelerator_commandLock),accelAddr,0);
+        } while (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0');
         surface = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
         if (surface != (UInt8 *)0x0) goto surfaceReady;
         goto noSurface;
       }
     }
-    if (M<char>(accelAddr + 0x80) == '\0') goto noSurface;
+    if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') goto noSurface;
     if (surface[0xbf6] == 0x0) {
-      commandBufferFlags = M<unsigned int>(surface + 0xbfc) | 2;
+      commandBufferFlags = M<unsigned int>(surface + kIOATIR500Surface_shapeBits) | 2;
       if ((surface[0xbd0] == 0x0) || (retryCount == 999)) {
-        allocatedMask = M<unsigned int>(surface + 0xbf8);
-        if (((M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) | M<unsigned int>(surface + 0xc1c)) & allocatedMask) != 0) {
+        allocatedMask = M<unsigned int>(surface + kIOATIR500Surface_stateBits);
+        if (((M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) | M<unsigned int>(surface + kIOATIR500Surface_reqBits)) & allocatedMask) != 0) {
           if ((allocatedMask & 0x20000000) != 0) goto abortSetup;
-          neededMask = (M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
+          neededMask = (M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) | M<unsigned int>(surface + kIOATIR500Surface_reqBits)) & 0x7fffff;
           if ((allocatedMask & neededMask) == 0) {
             surfaceVtable = M<int>(surface);
           }
@@ -157,7 +157,7 @@ surfaceReady:
               goto abortSetup;
             }
             surface = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
-            if ((M<unsigned int>(surface + 0xbf8) & M<unsigned int>(surface + 0xc1c) & 0x10000000) == 0)
+            if ((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & M<unsigned int>(surface + kIOATIR500Surface_reqBits) & 0x10000000) == 0)
             goto afterAllocation;
             surfaceVtable = M<int>(surface);
           }
@@ -208,7 +208,7 @@ submitCommandBuffer:
           M<int>(self + kIOATIR500DVDContext_commandBufferStamp) = surfaceStamp;
           boundSurfaceAddr = M<int>(self + kIOATIR500DVDContext_boundSurface);
           if (boundSurfaceAddr != M<int>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x5c)) {
-            M<UInt32>(M<int>(boundSurfaceAddr + 0x9c) + 0xa0) = M<UInt32>(boundSurfaceAddr + 0xa0);
+            M<UInt32>(M<int>(boundSurfaceAddr + kIOATIR500Surface_surfaceListNext) + 0xa0) = M<UInt32>(boundSurfaceAddr + kIOATIR500Surface_surfaceListPrev);
             M<UInt32>(M<int>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xa0) + 0x9c) =
                  M<UInt32>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0x9c);
             listHead = M<int>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x5c);
@@ -224,11 +224,11 @@ submitCommandBuffer:
            * `commandBufferFlags = 0` exit (the other path ORs 2 into commandBufferFlags). #85 */
           if ((rv5b4 != 0) && ((commandBufferFlags & 2) == 0)) {
             UInt8 *surf = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
-            UInt32 savedField = M<UInt32>(surf + 0x84);
+            UInt32 savedField = M<UInt32>(surf + kIOATIR500Surface_flushedStamp);
             UInt8 *accel = M<UInt8 *>(self + kIOATIR500DVDContext_accelerator);
             UInt32 idx = 0, off = 0;
-            M<UInt32>(surf + 0x84) = M<UInt32>(surf + 0x80);
-            if (M<UInt32>(accel + 0xcc) != 0) {
+            M<UInt32>(surf + kIOATIR500Surface_flushedStamp) = M<UInt32>(surf + kIOATIR500Surface_submittedStamp);
+            if (M<UInt32>(accel + kIOATIR500Accelerator_displayCount) != 0) {
               do {
                 UInt8 *s2 = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
                 if (M<UInt8>(s2 + off + 0xcac) != 0) {
@@ -238,12 +238,12 @@ submitCommandBuffer:
                 }
                 idx = idx + 1;
                 off = off + 0x94;
-              } while (idx < M<UInt32>(accel + 0xcc));
+              } while (idx < M<UInt32>(accel + kIOATIR500Accelerator_displayCount));
             }
             {
-              UInt32 acc = M<UInt32>(accel + 0x79c);
+              UInt32 acc = M<UInt32>(accel + kIOATIR500Accelerator_swapCompleteDVDWaitTime);
               acc = acc + VCALL(*M<SInt32 *>(accel), 0x558)(accel, savedField);
-              M<UInt32>(accel + 0x79c) = acc;
+              M<UInt32>(accel + kIOATIR500Accelerator_swapCompleteDVDWaitTime) = acc;
             }
           }
           accelWords = M<int *>(self + kIOATIR500DVDContext_accelerator);
@@ -255,26 +255,26 @@ submitCommandBuffer:
           stampComplete = VCALL(*accelWords, 0x554)(accelWords,bufferEntry[4]);
           if (stampComplete == 0) {
             accelBytes = M<UInt8 *>(self + kIOATIR500DVDContext_accelerator);
-            if (M<UInt16>(accelBytes + 0x402) < 0x10) {
+            if (M<UInt16>(accelBytes + kIOATIR500Accelerator_commandBufferRing0Count) < 0x10) {
               allocatedMore = ((IOATIR500Accelerator *)(accelBytes))->allocMoreCommandBuffers(0, 0x80000);
               if (allocatedMore != 0) {
                 accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
-                bufferEntry = (int *)(accelAddr + (unsigned int)M<UInt16>(accelAddr + 0x400) * 0x1c + 0x240);
+                bufferEntry = (int *)(accelAddr + (unsigned int)M<UInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Head) * 0x1c + 0x240);
                 goto advanceRing;
               }
               accelBytes = M<UInt8 *>(self + kIOATIR500DVDContext_accelerator);
             }
-            savedBusyCount = M<int>(accelBytes + 0x774);
+            savedBusyCount = M<int>(accelBytes + kIOATIR500Accelerator_freeCommandBufferDVDWaitTime);
             waitedCount = VCALL(M<int>(accelBytes), 0x54c)(accelBytes,bufferEntry[4]);
-            M<int>(accelBytes + 0x774) = savedBusyCount + waitedCount;
+            M<int>(accelBytes + kIOATIR500Accelerator_freeCommandBufferDVDWaitTime) = savedBusyCount + waitedCount;
             accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
           }
           else {
             accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
           }
 advanceRing:
-          M<UInt16>(accelAddr + 0x400) =
-               M<SInt16>(accelAddr + 0x400) + 1U & M<SInt16>(accelAddr + 0x402) - 1U;
+          M<UInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Head) =
+               M<SInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Head) + 1U & M<SInt16>(accelAddr + kIOATIR500Accelerator_commandBufferRing0Count) - 1U;
           cmdBufBlock[3] = M<int>(self + kIOATIR500DVDContext_commandBufferState);
           cmdBufBlock[4] = M<int>(self + kIOATIR500DVDContext_commandBufferStamp);
           cmdBufBlock[5] = M<int>(self + kIOATIR500DVDContext_commandBufferHeader);
@@ -302,7 +302,7 @@ advanceRing:
           bufferEntry[5] = cmdBufBlock[5];
           bufferEntry[6] = cmdBufBlock[6];
           accelBytes = M<UInt8 *>(self + kIOATIR500DVDContext_accelerator);
-          if (M<int>(self + kIOATIR500DVDContext_commandBufferSize) != M<int>(accelBytes + 0x5c8)) {
+          if (M<int>(self + kIOATIR500DVDContext_commandBufferSize) != M<int>(accelBytes + kIOATIR500Accelerator_cachedBufferSizeThreshold)) {
             cmdBufBlock[3] = 0x10000;
             cmdBufBlock[6] = 0;
             cmdBufBlock[0] = 0;
@@ -310,7 +310,7 @@ advanceRing:
             cmdBufBlock[2] = 0;
             cmdBufBlock[4] = 0;
             cmdBufBlock[5] = 0;
-            allocated = ((IOATIR500Accelerator *)(accelBytes))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accelBytes + 0x5c8))
+            allocated = ((IOATIR500Accelerator *)(accelBytes))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accelBytes + kIOATIR500Accelerator_cachedBufferSizeThreshold))
             ;
             if (allocated != 0) {
               ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_commandBuffer)));

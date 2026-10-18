@@ -81,7 +81,7 @@ bool IOATIR5002DContext::start(IOService *provider) {
     U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) = 0x20000000;
 
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR5002DContext_accelerator));
-    if (U32At(accel, 0x64) == 0) {
+    if (U32At(accel, kIOATIR500Accelerator_live2DContextListHead) == 0) {
         AccelSetupFn setup2D = *reinterpret_cast<AccelSetupFn *>(*reinterpret_cast<UInt8 **>(accel) + 0x534);
         if (setup2D(accel) == 0) {
             IOATIR5002DContext::stop(provider);
@@ -89,8 +89,8 @@ bool IOATIR5002DContext::start(IOService *provider) {
         }
         accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR5002DContext_accelerator));
     }
-    U32At(self, kIOATIR5002DContext_nextLiveContext) = U32At(accel, 0x64);
-    U32At(accel, 0x64) = reinterpret_cast<UInt32>(this);
+    U32At(self, kIOATIR5002DContext_nextLiveContext) = U32At(accel, kIOATIR500Accelerator_live2DContextListHead);
+    U32At(accel, kIOATIR500Accelerator_live2DContextListHead) = reinterpret_cast<UInt32>(this);
     U32At(reinterpret_cast<void *>(U32At(self, kIOATIR5002DContext_accelerator)), 0x734) += 1;
     if (accelerator->getVRAMDescriptors() &&
         accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kIOATIR5002DContext_commandBuffer), 0x1000) &&
@@ -114,11 +114,11 @@ void IOATIR5002DContext::stop(IOService *provider) {
 
     /* unlink from the accelerator's singly-linked list of live 2D contexts (head at accelerator+0x64) */
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR5002DContext_accelerator));
-    UInt8 *head = reinterpret_cast<UInt8 *>(U32At(accel, 0x64));
+    UInt8 *head = reinterpret_cast<UInt8 *>(U32At(accel, kIOATIR500Accelerator_live2DContextListHead));
     if (self == head) {
-        U32At(accel, 0x64) = U32At(self, kIOATIR5002DContext_nextLiveContext);
+        U32At(accel, kIOATIR500Accelerator_live2DContextListHead) = U32At(self, kIOATIR5002DContext_nextLiveContext);
         accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR5002DContext_accelerator));
-        if (U32At(accel, 0x64) == 0) {
+        if (U32At(accel, kIOATIR500Accelerator_live2DContextListHead) == 0) {
             AccelTeardownFn teardown2D = *reinterpret_cast<AccelTeardownFn *>(*reinterpret_cast<UInt8 **>(accel) + 0x53c);
             teardown2D(accel);
             accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR5002DContext_accelerator));
@@ -134,7 +134,7 @@ void IOATIR5002DContext::stop(IOService *provider) {
         } while (self != head);
         U32At(prev, 0x80) = U32At(self, kIOATIR5002DContext_nextLiveContext);
     }
-    U32At(accel, 0x734) -= 1;
+    U32At(accel, kIOATIR500Accelerator_context2DCount) -= 1;
 
     /* drop every other live 2D context's client mapping of this context's command-buffer descriptor */
     if (U32At(self, kIOATIR5002DContext_commandBufferDescriptor) != 0) {
@@ -160,8 +160,8 @@ void IOATIR5002DContext::stop(IOService *provider) {
         accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kIOATIR5002DContext_commandBuffer));
     }
     accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR5002DContext_accelerator));
-    if (self == reinterpret_cast<UInt8 *>(U32At(accel, 0x78))) {
-        U32At(accel, 0x78) = 0;
+    if (self == reinterpret_cast<UInt8 *>(U32At(accel, kIOATIR500Accelerator_unknown_0x78))) {
+        U32At(accel, kIOATIR500Accelerator_unknown_0x78) = 0;
     }
     if (boundSurface != nullptr) {
         boundSurface->remove_2d_context_from_list(this);

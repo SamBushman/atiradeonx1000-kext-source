@@ -142,6 +142,7 @@ static const int kIOATIR500Accelerator_displayCount = 0xcc;
 static const int kIOATIR500Accelerator_displayConfigBits = 0xd0;
 static const int kIOATIR500Accelerator_framebuffer0 = 0xd4;
 static const int kIOATIR500Accelerator_vramApertureBase = 0xe4;
+static const int kIOATIR500Accelerator_framebuffer0SubmitStamp = 0xec;
 static const int kIOATIR500Accelerator_framebuffer1 = 0xf4;
 static const int kIOATIR500Accelerator_scanout1Buffer = 0x12c;
 static const int kIOATIR500Accelerator_scanout1BufferElementPrev = 0x130;

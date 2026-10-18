@@ -40,9 +40,9 @@ IOReturn IOATIR500GLContext::get_surface_size(SInt32*outW, SInt32*outH, SInt32*o
   surface = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
   if (surface != 0) {
     levelsLeft = M<SInt32>(self + kIOATIR500GLContext_mipLevel);
-    if (M<SInt32>(surface + 0xbd8) == M<SInt32>(surface + 0xbd4)) {
-      uVar2 = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1e);
-      uVar1 = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1c);
+    if (M<SInt32>(surface + kIOATIR500Surface_committedWidth) == M<SInt32>(surface + kIOATIR500Surface_width)) {
+      uVar2 = (UInt32)M<UInt16>(M<SInt32>(surface + kIOATIR500Surface_attachmentBuffers) + 0x1e);
+      uVar1 = (UInt32)M<UInt16>(M<SInt32>(surface + kIOATIR500Surface_attachmentBuffers) + 0x1c);
       uVar5 = uVar1;
       uVar6 = uVar2;
       if (0 < levelsLeft) {
@@ -60,10 +60,10 @@ IOReturn IOATIR500GLContext::get_surface_size(SInt32*outW, SInt32*outH, SInt32*o
       }
     }
     else {
-      uVar2 = (UInt32)M<SInt16>(surface + 0xbda);
-      uVar1 = (UInt32)M<SInt16>(surface + 0xbd4);
-      uVar5 = (SInt32)M<SInt16>(surface + 0xbd8);
-      uVar6 = (SInt32)M<SInt16>(surface + 0xbd6);
+      uVar2 = (UInt32)M<SInt16>(surface + kIOATIR500Surface_committedHeight);
+      uVar1 = (UInt32)M<SInt16>(surface + kIOATIR500Surface_width);
+      uVar5 = (SInt32)M<SInt16>(surface + kIOATIR500Surface_committedWidth);
+      uVar6 = (SInt32)M<SInt16>(surface + kIOATIR500Surface_height);
     }
     *outW = uVar5;
     *outH = uVar2;

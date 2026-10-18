@@ -91,9 +91,9 @@ IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scalin
     UInt8 *accel = *reinterpret_cast<UInt8 **>(self + kIOATIR500Surface_accelerator);
     bool passedScaling = (scalingSize != 0); /* real: `bVar2` gate, INFERRED role from the real decompile's own inverted-bit encoding */
 
-    GH_IOLockLock(*reinterpret_cast<void **>(accel + 0x840));
+    GH_IOLockLock(*reinterpret_cast<void **>(accel + kIOATIR500Accelerator_commandLock));
     IOReturn result = set_scaling(flags, passedScaling ? scaling : nullptr);
-    GH_IOLockUnlock(*reinterpret_cast<void **>(accel + 0x840));
+    GH_IOLockUnlock(*reinterpret_cast<void **>(accel + kIOATIR500Accelerator_commandLock));
     return result;
 }
 

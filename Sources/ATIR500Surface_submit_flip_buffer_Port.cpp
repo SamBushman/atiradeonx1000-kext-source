@@ -221,12 +221,12 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
          M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb8c) & 0xfffeffff;
   }
   accel = M<int>(self + kIOATIR500Surface_accelerator);
-  if (M<int>(accel + 0x894) != 0) {
-    M<unsigned int>(accel + 0xb80) = M<unsigned int>(accel + 0xb80) & 0xfffffffe | 1;
+  if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0) {
+    M<unsigned int>(accel + kIOATIR500Accelerator_savedD1Reg6148) = M<unsigned int>(accel + kIOATIR500Accelerator_savedD1Reg6148) & 0xfffffffe | 1;
     accel = M<int>(self + kIOATIR500Surface_accelerator);
   }
   bVar1 = panel == 0;
-  if ((bVar1) || (M<int>(accel + 0x894) != 0)) {
+  if ((bVar1) || (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0)) {
     if (panel[self + 0xdb6] != 0x0) {
       packet[wordIndex] = 0x1848;
       valueIndex = wordIndex + 1;
@@ -234,16 +234,16 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
       packet[valueIndex] = uVar16;
     }
     packet[wordIndex] = 0x1841;
-    packet[wordIndex + 1] = M<UInt32>(accel + 0xb78);
+    packet[wordIndex + 1] = M<UInt32>(accel + kIOATIR500Accelerator_savedD1Reg6104);
     packet[wordIndex + 2] = 0x1852;
-    packet[wordIndex + 3] = M<UInt32>(accel + 0xb80);
+    packet[wordIndex + 3] = M<UInt32>(accel + kIOATIR500Accelerator_savedD1Reg6148);
     packet[wordIndex + 4] = 0x1831;
     valueIndex = wordIndex + 5;
     wordIndex = wordIndex + 6;
-    packet[valueIndex] = M<UInt32>(accel + 0xb88);
+    packet[valueIndex] = M<UInt32>(accel + kIOATIR500Accelerator_savedD1Reg60c4);
   }
   bVar2 = panel == 1;
-  if ((bVar2) || (M<int>(accel + 0x894) != 0)) {
+  if ((bVar2) || (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0)) {
     if (panel[self + 0xdb6] != 0x0) {
       packet[wordIndex] = 0x1a48;
       valueIndex = wordIndex + 1;
@@ -251,16 +251,16 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
       packet[valueIndex] = uVar16;
     }
     packet[wordIndex] = 0x1a41;
-    packet[wordIndex + 1] = M<UInt32>(accel + 0xb7c);
+    packet[wordIndex + 1] = M<UInt32>(accel + kIOATIR500Accelerator_savedD2Reg6904);
     packet[wordIndex + 2] = 0x1a52;
-    packet[wordIndex + 3] = M<UInt32>(accel + 0xb84);
+    packet[wordIndex + 3] = M<UInt32>(accel + kIOATIR500Accelerator_savedD2Reg6948);
     packet[wordIndex + 4] = 0x1a31;
     valueIndex = wordIndex + 5;
     wordIndex = wordIndex + 6;
-    packet[valueIndex] = M<UInt32>(accel + 0xb8c);
+    packet[valueIndex] = M<UInt32>(accel + kIOATIR500Accelerator_savedD2Reg68c4);
   }
   uVar14 = M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 8);
-  if ((bVar1) || (uVar16 = wordIndex, M<int>(accel + 0x894) != 0)) {
+  if ((bVar1) || (uVar16 = wordIndex, M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0)) {
     packet[wordIndex] = 0x1844;
     packet[wordIndex + 1] = uVar14;
     packet[wordIndex + 2] = 0x1844;
@@ -274,7 +274,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
       packet[wordIndex + 7] = M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffer5) + 8);
     }
   }
-  if ((bVar2) || (wordIndex = uVar16, M<int>(accel + 0x894) != 0)) {
+  if ((bVar2) || (wordIndex = uVar16, M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0)) {
     packet[uVar16] = 0x1a44;
     packet[uVar16 + 1] = uVar14;
     packet[uVar16 + 2] = 0x1a44;
@@ -303,8 +303,8 @@ LAB_0003ed40:
       packet[markerValueIndex] = 0x80000001;
     }
   }
-  else if (M<int>((int)panel * 0x18 + accel + 0xb10) == 0) {
-    if (M<int>(accel + 0x894) != 0) {
+  else if (M<int>((int)panel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
+    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0) {
       if (bVar1) {
         otherPanelRecord = 0xb18;
       }
@@ -334,6 +334,6 @@ LAB_0003ee00:
                       M<UInt32>(M<int>(pVVar23 + 0x14) + 0x14));
   M<UInt32>(pVVar23 + 0x10) = uVar14;
   M<UInt32>(self + kIOATIR500Surface_submittedStamp) = uVar14;
-  M<UInt32>(pAccel + (int)panel * 0x20 + 0xec) = uVar14;
+  M<UInt32>(pAccel + (int)panel * 0x20 + kIOATIR500Accelerator_framebuffer0SubmitStamp) = uVar14;
   return;
 }

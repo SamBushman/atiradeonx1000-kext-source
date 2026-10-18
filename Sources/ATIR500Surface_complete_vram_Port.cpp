@@ -61,8 +61,8 @@ UInt32 ATIR500Surface::complete_vram(ATIR500SurfaceBuffer *buffer) {
         M<SInt32>(packet + 0x130) = slotOffset + 0x2c3;
         M<UInt32>(packet + 0x134) = 0;
         accelBytes = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
-        uVar3 = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet + 0x120),M<SInt32>(accelBytes + 0x228) + 0x120,6);
-        M<UInt32>(accelBytes + 0x234) = uVar3;
+        uVar3 = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet + 0x120),M<SInt32>(accelBytes + kIOATIR500Accelerator_scratchBufferGartOffset) + 0x120,6);
+        M<UInt32>(accelBytes + kIOATIR500Accelerator_scratchCommandBuffer_0x10) = uVar3;
         return 1;
       }
     }

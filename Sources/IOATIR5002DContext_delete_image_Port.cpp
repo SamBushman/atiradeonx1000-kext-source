@@ -44,7 +44,7 @@ IOReturn IOATIR5002DContext::delete_image(UInt32 textureID) {
     result = 0xe00002be;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x840));
   }
-  else if ((textureID < M<unsigned int>(shared + 0x14)) &&
+  else if ((textureID < M<unsigned int>(shared + kIOATIR500Shared_handleCapacity)) &&
           (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
           texture != (UInt8 *)0x0)) {
     if (M<UInt8 *>(self + kIOATIR5002DContext_lastBoundTexture) == texture) {

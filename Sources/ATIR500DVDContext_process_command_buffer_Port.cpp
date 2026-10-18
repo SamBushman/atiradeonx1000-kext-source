@@ -248,8 +248,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + kATIR500DVDContext_idctTimeStamp));
                     M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xd90) = recordCursor[1];
                     surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
-                    fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
-                    if ((M<SInt16>(surfaceInfo + 0x98) != M<SInt16>(surfaceInfo + 0x96)) && (fieldHeight != 0)) {
+                    fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
+                    if ((M<SInt16>(surfaceInfo + kATIR500Surface_overlayRight) != M<SInt16>(surfaceInfo + kATIR500Surface_overlayLeft)) && (fieldHeight != 0)) {
                       bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
                       if ((recordCursor[3] & 2) == 0) {
                         if (recordCursor[2] == 0) {
@@ -291,15 +291,15 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                       recordCursor[8] = 0x1393;
                       recordCursor[9] = 10;
                       recordCursor[10] = 0x138a;
-                      recordCursor[0xb] = M<UInt32>(surfaceInfo + 0x128) & 0xffffffe0;
+                      recordCursor[0xb] = M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1GpuBase) & 0xffffffe0;
                       recordCursor[0xc] = 0x138e;
                       widthUnits = 0;
                       formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
-                      if ((M<UInt32>(surfaceInfo + 0x15c) & 0xf00000) != 0) {
-                        widthUnits = (UInt32)M<UInt16>(surfaceInfo + 0x134) /
-                                 (M<UInt32>(surfaceInfo + 0x15c) >> 0x14 & 0xf);
+                      if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
+                        widthUnits = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1Width) /
+                                 (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf);
                       }
-                      pitchUnits = 0x20 / M<UInt16>(surfaceInfo + 0x136);
+                      pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerRow);
                       if (pitchUnits <= widthUnits) {
                         pitchUnits = widthUnits;
                       }
@@ -351,15 +351,15 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               recordCursor[2] = 0x1393;
               recordCursor[3] = 10;
               recordCursor[4] = 0x138a;
-              recordCursor[5] = M<UInt32>(surfaceInfo + 0x128) & 0xffffffe0;
+              recordCursor[5] = M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1GpuBase) & 0xffffffe0;
               recordCursor[6] = 0x138e;
               widthUnits = 0;
               formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
-              if ((M<UInt32>(surfaceInfo + 0x15c) & 0xf00000) != 0) {
-                widthUnits = (UInt32)M<UInt16>(surfaceInfo + 0x134) /
-                         (M<UInt32>(surfaceInfo + 0x15c) >> 0x14 & 0xf);
+              if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
+                widthUnits = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1Width) /
+                         (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf);
               }
-              pitchUnits = 0x20 / M<UInt16>(surfaceInfo + 0x136);
+              pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerRow);
               if (pitchUnits <= widthUnits) {
                 pitchUnits = widthUnits;
               }
@@ -383,8 +383,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               recordCursor[4] = 0x1393;
               recordCursor[5] = 10;
               recordCursor[6] = 0x138a;
-              recordCursor[7] = plane0Address + (((SInt32)M<SInt16>(surfaceInfo + 0x9a) -
-                                     (SInt32)M<SInt16>(surfaceInfo + 0x94)) * (UInt32)pitch * 3 >> 1) &
+              recordCursor[7] = plane0Address + (((SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) -
+                                     (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop)) * (UInt32)pitch * 3 >> 1) &
                            0xffffffe0;
               recordCursor[8] = 0x138e;
               recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(bufferInfo + 0x590) & 1) << 0x10 |
@@ -420,12 +420,12 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   gartStep = recordCursor[8];
                   destBufferIndex = recordCursor[9];
                   uVar35 = recordCursor[10];
-                  overlayRight = M<SInt16>(surfaceInfo + 0x98);
-                  overlayLeft = M<SInt16>(surfaceInfo + 0x96);
+                  overlayRight = M<SInt16>(surfaceInfo + kATIR500Surface_overlayRight);
+                  overlayLeft = M<SInt16>(surfaceInfo + kATIR500Surface_overlayLeft);
                   uVar36 = recordCursor[0xb];
                   uVar28 = recordCursor[0xc];
                   texture = M<UInt8 *>(self + recordCursor[1] * 4 + 0x104);
-                  overlayHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+                  overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
                   if ((M<SInt32>(texture + 4) != 0) ||
                      (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture))
                      , M<SInt32>(texture + 4) != 0)) {
@@ -662,7 +662,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
               bufferInfo = recordCursor[3] * 0x78 + surfaceInfo;
-              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               uVar17 = recordCursor[4];
               pitch = M<UInt16>(secondBufferInfo + 0x570);
               secondBufferPitch = (UInt32)pitch;
@@ -780,7 +780,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             clearByte = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
-            overlayHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+            overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             if (recordCursor[2] == 0) {
               targetAddress = M<UInt32>(bufferInfo + 0x560);
               pitch = M<UInt16>(bufferInfo + 0x570);
@@ -821,7 +821,7 @@ LAB_00037c4c:
             clearByte = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
-            overlayHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+            overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             if (recordCursor[2] == 0) {
               pitch = M<UInt16>(bufferInfo + 0x570);
               targetAddress = overlayHeight * pitch + M<SInt32>(bufferInfo + 0x560);
@@ -1336,7 +1336,7 @@ LAB_00039030:
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
             secondBlockOffset = recordCursor[6];
-            fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+            fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             pitch = M<UInt16>(bufferInfo + 0x570);
             bufferPitch = (UInt32)pitch;
             uVar31 = M<UInt32>(bufferInfo + 0x560);
@@ -1518,7 +1518,7 @@ LAB_00039030:
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
-            fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+            fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             bVar43 = recordCursor[3] != 0;
             if ((selectFlags & 2) == 0) {
               if (bVar43) {
@@ -1588,7 +1588,7 @@ joined_r0x000381c4:
               }
               else {
                 pitch = M<UInt16>(bufferInfo + 0x570);
-                plane0Address = (((SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94)) *
+                plane0Address = (((SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop)) *
                           (UInt32)pitch * 3 >> 1) + M<SInt32>(bufferInfo + 0x560);
               }
               *recordCursor = 0x1150;
@@ -1605,7 +1605,7 @@ joined_r0x000381c4:
             else if (uVar17 == 0x42000000) {
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
-              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               if (recordCursor[2] == 0) {
                 pitch = M<UInt16>(bufferInfo + 0x570);
                 plane0Address = fieldHeight * (UInt32)pitch + M<SInt32>(bufferInfo + 0x560);
@@ -1633,8 +1633,8 @@ joined_r0x000381c4:
               if (uVar17 != 0x3e000000) goto LAB_00039028;
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               targetPitch = recordCursor[3];
-              overlayTop = M<SInt16>(surfaceInfo + 0x94);
-              overlayBottom = M<SInt16>(surfaceInfo + 0x9a);
+              overlayTop = M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
+              overlayBottom = M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom);
               texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               if ((M<SInt32>(texture + 4) != 0) ||
@@ -1713,7 +1713,7 @@ joined_r0x000381c4:
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
-              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               bVar43 = recordCursor[3] != 0;
               if ((selectFlags & 2) == 0) {
                 if (bVar43) {
@@ -1734,7 +1734,7 @@ joined_r0x000381c4:
             }
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             *recordCursor = 0x1140;
-            uVar17 = (UInt32)M<UInt16>(surfaceInfo + 0x136);
+            uVar17 = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerRow);
             if (uVar17 == 0) {
               recordCursor[1] = 0;
             }
@@ -1743,7 +1743,7 @@ joined_r0x000381c4:
             }
             recordCursor[2] = 0x1150;
             uVar28 = M<UInt8>(surfaceInfo + 0x158) & 1;
-            uVar11 = M<UInt32>(surfaceInfo + 0x128) & 0xffffffe0;
+            uVar11 = M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1GpuBase) & 0xffffffe0;
             uVar21 = (UInt32)(M<UInt8>(surfaceInfo + 0x158) >> 1);
             recordCursor[3] = uVar11 | uVar28 << 2 | (uVar21 & 3) << 3;
             recordCursor[4] = 0x1141;
@@ -1766,8 +1766,8 @@ joined_r0x000381c4:
             recordCursor[0xc] = 0x138e;
             uVar11 = 0;
             formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
-            if ((M<UInt32>(surfaceInfo + 0x15c) & 0xf00000) != 0) {
-              uVar11 = (UInt32)M<UInt16>(surfaceInfo + 0x134) / (M<UInt32>(surfaceInfo + 0x15c) >> 0x14 & 0xf)
+            if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
+              uVar11 = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1Width) / (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf)
               ;
             }
             uVar36 = 0x20 / uVar17;

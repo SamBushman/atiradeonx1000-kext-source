@@ -99,9 +99,9 @@ IOReturn ATIR5002DContext::get_buffer_info(IOATIR500Surface *surface, UInt32 ind
         U32At(out, 0x14) = quotient2;
         U32At(out, 0x18) = quotient;
     } else {
-        record = reinterpret_cast<UInt8 *>(U32At(surface, 0xb70));
-        U32At(out, 8) = static_cast<SInt32>(static_cast<SInt16>(U16At(surface, 0xbe4)));
-        SInt16 height = static_cast<SInt16>(U16At(surface, 0xbe6));
+        record = reinterpret_cast<UInt8 *>(U32At(surface, kIOATIR500Surface_attachmentBuffers));
+        U32At(out, 8) = static_cast<SInt32>(static_cast<SInt16>(U16At(surface, kIOATIR500Surface_regionWidth)));
+        SInt16 height = static_cast<SInt16>(U16At(surface, kIOATIR500Surface_regionHeight));
         U32At(out, 0x18) = 0;
         U32At(out, 0x14) = 0;
         U32At(out, 0xc) = static_cast<SInt32>(height);

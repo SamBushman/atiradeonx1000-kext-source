@@ -693,8 +693,8 @@ LAB_0002c0b4:
                   }
                   recordCursor[8] = hzBlockOffset;
                   accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-                  recordCursor[9] = hzBlockCount / (UInt32)(M<SInt32>(accel + 0xb98) << 4);
-                  hzIsPartial = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(accel + 0x870)),M<UInt32>(surfaceBuffer + 0x28),2)
+                  recordCursor[9] = hzBlockCount / (UInt32)(M<SInt32>(accel + kIOATIR500Accelerator_numPipes) << 4);
+                  hzIsPartial = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(accel + kIOATIR500Accelerator_hzmem)),M<UInt32>(surfaceBuffer + 0x28),2)
                   ;
                   if (hzIsPartial == 0) {
                     recordCursor[0xd] = (uVar58 - 2) * 0x10000 | 0xc0001000;
@@ -703,7 +703,7 @@ LAB_0002c0b4:
                     accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
                     uVar15 = M<UInt16>(surfaceBuffer + 0x1e);
                     iVar48 = 0x10;
-                    if ((M<UInt32>(accel + 0xb74) & 0x10000) == 0) {
+                    if ((M<UInt32>(accel + kIOATIR500Accelerator_gbTileConfig) & 0x10000) == 0) {
                       iVar48 = 0xc;
                     }
                     hzBlockCount = 0;
@@ -718,17 +718,17 @@ LAB_0002c0b4:
                       pitchPixels = hzBlockCount;
                     }
                     alignment = 0x20;
-                    if (M<SInt32>(accel + 0xb98) == 4) {
+                    if (M<SInt32>(accel + kIOATIR500Accelerator_numPipes) == 4) {
 LAB_0002c898:
                       hzBlockCount = alignment * ((SInt32)(alignment + pitchPixels + -1) / alignment);
                     }
                     else {
-                      alignment = M<SInt32>(accel + 0xb98) << 4;
+                      alignment = M<SInt32>(accel + kIOATIR500Accelerator_numPipes) << 4;
                       in_cr0 = (alignment == 0) << 1;
                       hzBlockCount = 0;
                       if (alignment != 0) goto LAB_0002c898;
                     }
-                    hzTotalBlocks = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(accel + 0x870)),
+                    hzTotalBlocks = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(accel + kIOATIR500Accelerator_hzmem)),
                                                  M<UInt32>(surfaceBuffer + 0x28),2);
                     dVar31 = DOUBLE_0004c3b8;
                     hzBlockCount = (UInt32)(hzTotalBlocks << 4) / hzBlockCount & 0xfffffff0;
@@ -2047,7 +2047,7 @@ LAB_0002ef48:
         }
         if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
           pAVar43 = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
-          pAVar45 = M<UInt8 *>(pAVar43 + opcode * 4 + 0xb70);
+          pAVar45 = M<UInt8 *>(pAVar43 + opcode * 4 + kIOATIR500Surface_attachmentBuffers);
           pAVar76 = (UInt8 *)(pAVar43 + (UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 0x78 + 0xa8)
           ;
         }
@@ -2205,10 +2205,10 @@ LAB_0002ef48:
           if (M<UInt32>(self + kIOATIR500GLContext_statusRegionSize) <= opcode) goto LAB_00030d40;
           *recordCursor = 0x578;
           accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-          stamp = M<UInt32>(accel + 0x50);
+          stamp = M<UInt32>(accel + kIOATIR500Accelerator_submitStamp);
           recordCursor[1] = stamp;
           M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_statusRegion) + opcode) = stamp;
-          M<UInt32>(accel + 0x50) = stamp + 1;
+          M<UInt32>(accel + kIOATIR500Accelerator_submitStamp) = stamp + 1;
           M<UInt32>(opcode + M<SInt32>(self + kIOATIR500GLContext_statusRegion) + 4) = 0;
           reservedWords = reservedWords + 1;
         }
@@ -2243,7 +2243,7 @@ LAB_0002f4c0:
 LAB_0002f498:
                 if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
                   pAVar43 = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
-                  pAVar45 = M<UInt8 *>(pAVar43 + attachment * 4 + 0xb70);
+                  pAVar45 = M<UInt8 *>(pAVar43 + attachment * 4 + kIOATIR500Surface_attachmentBuffers);
                 }
                 else {
                   pAVar43 = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
@@ -2401,10 +2401,10 @@ LAB_0002f498:
               surfaceBase = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
               opcode = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
               iVar48 = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
-              pAVar68 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + surfaceBase + 0xb70);
-              pAVar72 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + surfaceBase + 0xb70);
+              pAVar68 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + surfaceBase + kIOATIR500Surface_attachmentBuffers);
+              pAVar72 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + surfaceBase + kIOATIR500Surface_attachmentBuffers);
               iVar33 = opcode + 1;
-              pAVar77 = (UInt8 *)((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + surfaceBase + 0xa8);
+              pAVar77 = (UInt8 *)((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + surfaceBase + kIOATIR500Surface_buffers);
             }
             else {
               pAVar68 = self + kATIR500GLContext_textureDepthBuffer;

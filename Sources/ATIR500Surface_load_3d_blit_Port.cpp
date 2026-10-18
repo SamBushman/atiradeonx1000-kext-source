@@ -107,7 +107,7 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
        ((UInt8)bufferBytes[0x38] & 6) << 0x10 |
        ((UInt8)bufferBytes[0x38] & 1) << 0x10 | ((UInt8)bufferBytes[0x39] & 3) << 0x13 | uVar7 & 0x3ffc;
   accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
-  iVar8 = M<SInt32>(accelerator + 0xb98);
+  iVar8 = M<SInt32>(accelerator + kIOATIR500Accelerator_numPipes);
   if (bVar1) {
     uVar4 = (UInt32)M<UInt16>(bufferBytes + 0x14) / (uVar4 >> 0x14 & 0xf);
   }
@@ -127,7 +127,7 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
 LAB_0003d700:
   dest[0x1a] = 0x13cd;
   dest[0x1b] = uVar10;
-  uVar10 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(accelerator + 0x870)),M<UInt32>(bufferBytes + 0x28),0);
+  uVar10 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(accelerator + kIOATIR500Accelerator_hzmem)),M<UInt32>(bufferBytes + 0x28),0);
   dest[0x1c] = 0x13cc;
   dest[0x1d] = uVar10;
   dest[0x1e] = 0x13ca;

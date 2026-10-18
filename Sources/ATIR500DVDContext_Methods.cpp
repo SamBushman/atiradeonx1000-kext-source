@@ -167,9 +167,9 @@ void ATIR500DVDContext::update_surface() {
 /* Real: waits (accelerator vtable +0x558) for this context's last stamp; always returns 0. */
 IOReturn ATIR500DVDContext::finish() {
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(this, kIOATIR500DVDContext_accelerator));
-    UInt32 waited = U32At(accel, 0x7ac);
+    UInt32 waited = U32At(accel, kIOATIR500Accelerator_finishDVDWaitTime);
     SInt32 delta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<UInt8 **>(accel) + 0x558))(accel, U32At(this, kIOATIR500DVDContext_lastSubmitStamp));
-    U32At(accel, 0x7ac) = waited + delta;
+    U32At(accel, kIOATIR500Accelerator_finishDVDWaitTime) = waited + delta;
     return 0;
 }
 

@@ -1,0 +1,10 @@
+# Fieldvars.tsv - pointer-typed fields (`ptrfield`) and hand-typed locals (`fieldvar`) for Tools/apply_renames.py: they let the `field` constants be applied to
+# `accel + 0xOFF`, `surface + 0xOFF`, `U32At(accel, 0xOFF)` ... through a local variable (see the module docstring). Columns:
+#   ptrfield  FIELD  CLASSES  tier  evidence
+#   fieldvar  CLASSES  VAR  SCOPE  tier  evidence
+ptrfield	accelerator	IOATIR500Accelerator,ATIRadeonX1000	CONFIRMED	the class headers declare it as the ATIRadeonX1000 / IOATIR500Accelerator the context, surface or shared object belongs to (Headers/IOATIR5002DContext.h, IOATIR500DVDContext.h, IOATIR500GLContext.h, IOATIR500Surface.h)
+ptrfield	boundSurface	IOATIR500Surface,ATIR500Surface	CONFIRMED	Headers/IOATIR500GLContext.h, IOATIR5002DContext.h, IOATIR500DVDContext.h boundSurface: the IOATIR500Surface the context renders to
+ptrfield	sharedAllocator	IOATIR500Shared	CONFIRMED	Headers/IOATIR5002DContext.h, IOATIR500DVDContext.h sharedAllocator: the IOATIR500Shared
+ptrfield	surfaceListNext	IOATIR500Surface,ATIR500Surface	CONFIRMED	set_volatile_state: next link of the accelerator's circular list of surfaces
+ptrfield	surfaceListPrev	IOATIR500Surface,ATIR500Surface	CONFIRMED	set_volatile_state: previous link of the same circular list
+ptrfield	liveSurfaceListHead	IOATIR500Surface,ATIR500Surface	CONFIRMED	find_surface_for_id walks the circular list of live surfaces from this head

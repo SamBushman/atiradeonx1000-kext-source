@@ -42,7 +42,7 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
   
   panelIndex = 0;
   accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
-  if (M<SInt32>(accelerator + 0xcc) != 0) {
+  if (M<SInt32>(accelerator + kIOATIR500Accelerator_displayCount) != 0) {
     do {
       if (M<SInt32>(accelerator + panelIndex * 4 + 0x114) != 0) {
         PanelRecord *rec = PANEL_RECORD(self, panelIndex);
@@ -72,7 +72,7 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
         } while (bufferIndex < M<UInt32>(accelerator + panelIndex * 4 + 0x114));
       }
       panelIndex = panelIndex + 1;
-    } while (panelIndex < M<UInt32>(accelerator + 0xcc));
+    } while (panelIndex < M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount));
   }
   cursor = self;
   while ((backingStore = M<UInt8 *>(cursor + 0xcc), backingStore == (UInt8 *)0x0

@@ -136,8 +136,8 @@ switchD_0003dd5c_caseD_0:
     packet[uVar7] = 0x80000000;
   }
   accelBytes = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
-  stamp = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet), M<SInt32>(accelBytes + 0x228) + 0x120, uVar9);
-  M<UInt32>(accelBytes + 0x234) = stamp;
+  stamp = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet), M<SInt32>(accelBytes + kIOATIR500Accelerator_scratchBufferGartOffset) + 0x120, uVar9);
+  M<UInt32>(accelBytes + kIOATIR500Accelerator_scratchCommandBuffer_0x10) = stamp;
   accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   VCALL(*accel, 0x54c)(accel,accel[0x8d]);
   return 1;
