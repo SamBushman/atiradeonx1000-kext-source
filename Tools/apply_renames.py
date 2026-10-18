@@ -355,12 +355,12 @@ def apply_fields(field_rows, root, read, files, errors):
     applied = sum(len(re.findall(r'\b%s\b' % re.escape(c), allsrc)) for c in consts)
     edits = {}                                               # file -> [(start, end, replacement scope)]
     for c, sp in spans.items():
-        offs = {o: n for (cc, o), n in by_off.items() if cc == c}
-        pat = re.compile(r'\b(self|param_1)(\s*\+\s*)(0x[0-9a-fA-F]+)\b(?!\s*\])')
+        offs = {int(o, 16): n for (cc, o), n in by_off.items() if cc == c}
+        pat = re.compile(r'\b(self|param_1)(\s*\+\s*)(0x[0-9a-fA-F]+|[0-9]+)\b(?!\s*[\]\*])')       # Ghidra prints some offsets in decimal (self + 200 = 0xc8)
         for (f, st, en) in sp:
             s = read(f); scope = s[st:en]; out, i, ch = [], 0, False
             for m in pat.finditer(scope):
-                o = m.group(3).lower()
+                o = int(m.group(3), 0 if m.group(3).lower().startswith('0x') else 10)
                 if o not in offs: continue
                 sk = None
                 # leave comments and string literals alone
