@@ -43,7 +43,7 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   unsigned int neededMask;
   int iVar3;
   unsigned int presentNeeded;
-  UInt8 surfaceBits;
+  UInt32 surfaceBits;   /* the shipped code passes convert_surface_bits' whole result on (no byte truncation) */
   int *piVar5;
   UInt32 uVar6;
   unsigned int uVar8;

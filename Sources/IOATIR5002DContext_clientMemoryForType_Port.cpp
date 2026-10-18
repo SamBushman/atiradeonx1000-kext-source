@@ -38,6 +38,7 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt16 uVar1;
+  UInt16 savedInFlight;
   unsigned int surfaceMask;
   int *piVar3;
   int iVar4;
@@ -283,6 +284,7 @@ recordStampOnly:
 advanceRing:
   M<UInt16>(iVar16 + 0x5c4) = M<SInt16>(iVar16 + 0x5c4) + 1U & M<SInt16>(iVar16 + 0x5c6) - 1U;
   uVar1 = M<UInt16>(self + kIOATIR5002DContext_commandBufferType);
+  savedInFlight = M<UInt16>(self + kIOATIR5002DContext_commandBufferInFlight);      /* read before the 32-bit store to commandBufferType below overwrites both halves */
   iVar16 = ringSlot[3];
   iVar9 = ringSlot[1];
   iVar4 = ringSlot[2];
@@ -301,7 +303,7 @@ advanceRing:
   M<int>(self + kIOATIR5002DContext_commandBufferHeader) = ringSlot[5];
   M<int>(self + kIOATIR5002DContext_commandBufferStamp) = iVar16;
   M<int>(self + kIOATIR5002DContext_commandBufferSize) = iVar9;
-  M<UInt16>((int)ringSlot + 0xe) = M<UInt16>(self + kIOATIR5002DContext_commandBufferInFlight);
+  M<UInt16>((int)ringSlot + 0xe) = savedInFlight;
   M<UInt16>(ringSlot + 3) = uVar1;
   *ringSlot = iVar7;
   ringSlot[6] = iVar10;
