@@ -304,9 +304,9 @@ LAB_0003c52c:
                  0x20;
       }
       iVar9 = pitchBytes * heightScale * uVar24;
-      if (iVar9 != M<SInt32>(self + kIOATIR500Surface_buffer9Storage)) {
+      if (iVar9 != M<SInt32>(self + kIOATIR500Surface_buffer9StorageBytes)) {
         VCALL(M<SInt32>(self), 0x5cc)(self,9);
-        M<SInt32>(self + kIOATIR500Surface_buffer9Storage) = iVar9;
+        M<SInt32>(self + kIOATIR500Surface_buffer9StorageBytes) = iVar9;
         uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
         sVar2 = M<SInt16>(self + kIOATIR500Surface_width);
         sVar18 = M<SInt16>(self + kIOATIR500Surface_height);
@@ -317,7 +317,7 @@ LAB_0003c52c:
       else {
         M<SInt16>(self + kIOATIR500Surface_buffer9PitchPixels) = (SInt16)(pitchBytes / bytesPerPixel);
       }
-      M<SInt16>(self + kIOATIR500Surface_buffer9Pitch) = (SInt16)pitchBytes;
+      M<SInt16>(self + kIOATIR500Surface_buffer9PitchBytes) = (SInt16)pitchBytes;
       M<SInt16>(self + kIOATIR500Surface_buffer9BytesPerPixel) = (SInt16)bytesPerPixel;
       M<SInt16>(self + kIOATIR500Surface_buffer9Width) = (SInt16)widthScale * sVar2;
       M<SInt16>(self + kIOATIR500Surface_buffer9Height) = (SInt16)heightScale * sVar18;

@@ -139,7 +139,7 @@ bool IOATIR500Surface::start(IOService *provider) {
     }
   }
   self[0xbd1] = 0x0;
-  M<UInt16>(self + kIOATIR500Surface_unknown_0xbd2) = 0;
+  M<UInt16>(self + kIOATIR500Surface_memoryLockCount) = 0;
   self[0xc08] = 0x0;
   self[0xbec] = 0x0;
   self[0xbd0] = 0x0;

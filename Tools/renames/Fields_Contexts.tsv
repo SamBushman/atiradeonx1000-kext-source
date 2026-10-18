@@ -56,7 +56,7 @@ field	ATIR500GLContext	0x618	textureSurfaceBuffer	INFERRED	ATIR500SurfaceBuffer 
 field	IOATIR5002DContext	0x78	task	CONFIRMED	create_shared stores it into the IOATIR500Shared (+8), same as the GL/DVD contexts
 field	IOATIR5002DContext,ATIR5002DContext	0x7c	lastSubmitStamp	CONFIRMED	clientMemoryForType/finish wait on it; submit_context_buffer stores the submit_buffer result
 field	IOATIR5002DContext,ATIR5002DContext	0x88	sharedAllocator	CONFIRMED	Headers/IOATIR5002DContext.h sharedAllocator: the IOATIR500Shared; create_shared installs it, the bind opcodes bounds-check its +0x10/+0x14 table
-field	IOATIR5002DContext	0x8c	surfaceFlagsBitmask	INFERRED	ORed with surface+0xc1c in clientMemoryForType (same role as the GL/DVD field)
+field	IOATIR5002DContext	0x8c	surfaceFlagsBitmask	CONFIRMED	ORed with surface+0xc1c in clientMemoryForType (same role as the GL/DVD field); add_gl/2d_context_to_list OR it into surface+0xc18 (contextReqBits)
 field	IOATIR5002DContext,ATIR5002DContext	0x94	accelerator	CONFIRMED	Headers/IOATIR5002DContext.h accelerator: every method reaches hardware through it
 field	IOATIR5002DContext,ATIR5002DContext	0x98	commandBuffer	CONFIRMED	first word of the 7-word VendorCommandBuffer (0x98..0xb0) allocCommandBuffer fills; `self + 0x98` is passed to map_transfer_to_GART
 field	IOATIR5002DContext,ATIR5002DContext	0x9c	commandBufferGartOffset	CONFIRMED	Headers/IOATIR5002DContext.h ringSlotBufferOffset: word 1, zero-checked to decide whether to GART-map it, added to the stream offset
@@ -105,9 +105,9 @@ field	IOATIR500DVDContext	0xfc	started	CONFIRMED	start() clears it and sets 1 on
 field	IOATIR500GLContext	0x78	task	CONFIRMED	read_buffer passes it as the task of IOMemoryDescriptor::withAddress; connectClient compares it with the client's; create_shared stores it into the IOATIR500Shared (+8)
 field	IOATIR500GLContext,ATIR500GLContext	0x7c	lastSubmitStamp	CONFIRMED	submit_context_buffer/restore_state store the stamp ATIRadeonX1000::submit_buffer returned; finish() waits for it; copied to commandBufferStamp (+0xdc) and to header+0x18 by init_command_buffer_header
 field	IOATIR500GLContext	0x80	nextLiveContext	CONFIRMED	Headers/IOATIR500GLContext.h: intrusive link of the accelerator's live-GL-context list; start() pushes, stop() unlinks
-field	IOATIR500GLContext	0x84	unknown_0x84	UNKNOWN	start() zeroes it; set_surface tests it (self == surface+0x88 && +0x84 == 0) before re-binding; role not established
+field	IOATIR500GLContext	0x84	nextContext	CONFIRMED	next link of the surface's singly linked context list: add_gl_context_to_list stores the old list head here (surface+0x88); set_surface tests it for the list tail
 field	IOATIR500GLContext,ATIR500GLContext	0x88	clientHandle	CONFIRMED	Headers/IOATIR500GLContext.h: the reference-counted IOATIR500Shared; every delete_texture/bounds check (+0x10 array, +0x14 count) goes through it
-field	IOATIR500GLContext,ATIR500GLContext	0x8c	surfaceFlagsBitmask	INFERRED	one bit per surface buffer: read_buffer tests 1<<bufferIndex against it, set_surface ORs 4/8/0x84/0x108 from modeBits, clientMemoryForType ORs it with surface+0xc1c; same role as the DVD context field of that name (+0x88)
+field	IOATIR500GLContext,ATIR500GLContext	0x8c	surfaceFlagsBitmask	CONFIRMED	one bit per surface buffer: read_buffer tests 1<<bufferIndex against it, set_surface ORs 4/8/0x84/0x108 from modeBits, clientMemoryForType ORs it with surface+0xc1c; same role as the DVD context field of that name (+0x88); add_gl/2d_context_to_list OR it into surface+0xc18 (contextReqBits)
 field	IOATIR500GLContext	0x90	swapRectX	CONFIRMED	written by set_swap_rect(x, y, w, h) from its x argument; start() zeroes it
 field	IOATIR500GLContext	0x92	swapRectY	CONFIRMED	written by set_swap_rect from its y argument
 field	IOATIR500GLContext	0x94	swapRectWidth	CONFIRMED	written by set_swap_rect from its w argument
@@ -149,7 +149,7 @@ field	IOATIR500GLContext,ATIR500GLContext	0x298	surfaceIndex	INFERRED	set_surfac
 field	IOATIR500GLContext,ATIR500GLContext	0x29c	mipLevel	CONFIRMED	Headers/IOATIR500GLContext.h mipLevel; set_surface's mipLevel argument; read_buffer passes it as copy_from_buffer's level
 field	IOATIR500GLContext,ATIR500GLContext	0x2a0	regularMethodTable	CONFIRMED	Headers/IOATIR500GLContext.h: start() stores kGLRegularMethods; getTargetAndMethodForIndex returns selector*0x18 + it
 field	IOATIR5002DContext,ATIR5002DContext	0x80	nextLiveContext	CONFIRMED	stop() unlinks: previous->+0x80 = self->+0x80 and the accelerator list head (+0x64) = self->+0x80; start links self at the head (same list as the GL/DVD contexts)
-field	IOATIR5002DContext,ATIR5002DContext	0x84	unknown_0x84	UNKNOWN	zeroed in start (neighbour of sharedAllocator +0x88), never read by any ported function
+field	IOATIR5002DContext,ATIR5002DContext	0x84	nextContext	CONFIRMED	next link of the surface's singly linked context list: add_2d_context_to_list stores the old list head here (surface+0x8c); set_surface tests it for the list tail
 field	IOATIR5002DContext,ATIR5002DContext	0x90	unknown_0x90	UNKNOWN	halfword zeroed in start, never read by any ported function
 field	IOATIR5002DContext,ATIR5002DContext	0x92	surfaceBackingReplaced	INFERRED	byte; cleared at the start of the texture-attach method and set to 1 only after attach_buffer_backing_store swapped the bound surface's buffer backing store
 field	IOATIR5002DContext,ATIR5002DContext	0x93	unknown_0x93	UNKNOWN	byte zeroed in start, never read by any ported function

@@ -44,7 +44,7 @@ bool IOATIR5002DContext::start(IOService *provider) {
     U32At(self, kIOATIR5002DContext_lastSubmitStamp) = 0;
     U32At(self, kIOATIR5002DContext_boundSurface) = 0;
     U32At(self, kIOATIR5002DContext_sharedAllocator) = 0;
-    U32At(self, kIOATIR5002DContext_unknown_0x84) = 0;
+    U32At(self, kIOATIR5002DContext_nextContext) = 0;
     U32At(self, kIOATIR5002DContext_panelIndex) = 0;
     U16At(self, kIOATIR5002DContext_unknown_0x90) = 0;
     U32At(self, kIOATIR5002DContext_commandBuffer) = 0;

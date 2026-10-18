@@ -142,7 +142,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   UInt32 transferGartAddress;
   UInt32 destPitch;
   UInt32 destPlane0Address;
-  UInt32 buffer17Pitch;
+  UInt32 buffer17PitchBytes;
   UInt32 buffer17Address;
   UInt32 tilingBits;
   UInt32 *firstBlockWords;
@@ -156,7 +156,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   SInt32 previousRefCount;
   UInt32 fillValue;
   UInt32 buffer15Address;
-  UInt32 buffer15Pitch;
+  UInt32 buffer15PitchBytes;
   UInt32 selectFlags;
   UInt32 texOffsetWord;
   SInt16 overlayTop;
@@ -486,7 +486,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   }
                   surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                   destBufferInfo = destBufferIndex * 0x78 + surfaceInfo;
-                  buffer17Pitch = (UInt32)M<UInt16>(surfaceInfo + 0x8b8);
+                  buffer17PitchBytes = (UInt32)M<UInt16>(surfaceInfo + 0x8b8);
                   firstBlockWords = recordCursor + firstBlockOffset;
                   destPitch = (UInt32)M<UInt16>(destBufferInfo + 0x570);
                   uVar36 = M<UInt32>(uVar36 * 0x78 + surfaceInfo + 0x560);
@@ -544,16 +544,16 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   if (bVar43) {
                     firstBlockWords[0xc] = 0x115b;
                     firstBlockWords[0xd] = uVar21;
-                    uVar21 = buffer17Address + buffer17Pitch & 0xffffffe0 | tilingBits;
+                    uVar21 = buffer17Address + buffer17PitchBytes & 0xffffffe0 | tilingBits;
                   }
                   else {
                     firstBlockWords[0xc] = 0x115b;
-                    uVar21 = tilingBits | buffer17Address + buffer17Pitch & 0xffffffe0;
+                    uVar21 = tilingBits | buffer17Address + buffer17PitchBytes & 0xffffffe0;
                     firstBlockWords[0xd] = uVar21;
                   }
                   firstBlockWords[0xe] = 0x115c;
                   firstBlockWords[0xf] = uVar21;
-                  buffer17Address = buffer17Address + overlayHeight * buffer17Pitch;
+                  buffer17Address = buffer17Address + overlayHeight * buffer17PitchBytes;
                   secondBlockWords = recordCursor + secondBlockOffset;
                   uVar30 = iVar12 + uVar30;
                   uVar11 = destPlane0Address + iVar12;
@@ -604,11 +604,11 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   if (bVar43) {
                     secondBlockWords[0xc] = 0x115b;
                     secondBlockWords[0xd] = uVar17;
-                    tilingBits = buffer17Pitch + buffer17Address & 0xffffffe0 | tilingBits;
+                    tilingBits = buffer17PitchBytes + buffer17Address & 0xffffffe0 | tilingBits;
                   }
                   else {
                     secondBlockWords[0xc] = 0x115b;
-                    tilingBits = tilingBits | buffer17Pitch + buffer17Address & 0xffffffe0;
+                    tilingBits = tilingBits | buffer17PitchBytes + buffer17Address & 0xffffffe0;
                     secondBlockWords[0xd] = tilingBits;
                   }
                   secondBlockWords[0xe] = 0x115c;
@@ -1349,7 +1349,7 @@ LAB_00039030:
             recordCursor[4] = 0x80000000;
             recordCursor[5] = 0x80000000;
             recordCursor[6] = 0x80000000;
-            buffer15Pitch = (UInt32)M<UInt16>(surfaceInfo + 0x7c8);
+            buffer15PitchBytes = (UInt32)M<UInt16>(surfaceInfo + 0x7c8);
             puVar26 = recordCursor + recordCursor[5];
             uVar17 = (UInt32)(M<UInt16>(surfaceInfo + 0x7c8) >> 1);
             local_78 = uVar17 & 0x7ffe;
@@ -1363,7 +1363,7 @@ LAB_00039030:
                 uVar19 = bufferPitch + uVar35;
                 uVar13 = uVar31 + bufferPitch;
                 uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
-                uVar29 = uVar32 + buffer15Pitch;
+                uVar29 = uVar32 + buffer15PitchBytes;
                 uVar41 = uVar32;
                 uVar30 = uVar34;
               }
@@ -1372,7 +1372,7 @@ LAB_00039030:
                 uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
                 uVar34 = M<UInt32>(secondBufferInfo + 0x560);
                 uVar13 = uVar31;
-                uVar41 = uVar32 + buffer15Pitch;
+                uVar41 = uVar32 + buffer15PitchBytes;
                 uVar29 = uVar32;
                 uVar21 = bufferPitch + uVar35;
                 uVar11 = uVar31 + bufferPitch;
@@ -1384,7 +1384,7 @@ LAB_00039030:
               uVar34 = M<UInt32>(secondBufferInfo + 0x560);
               uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
               uVar13 = uVar34;
-              uVar41 = uVar32 + buffer15Pitch;
+              uVar41 = uVar32 + buffer15PitchBytes;
               uVar29 = uVar32;
               uVar21 = bufferPitch + uVar35;
               uVar11 = uVar31 + bufferPitch;
@@ -1396,7 +1396,7 @@ LAB_00039030:
               uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
               uVar13 = uVar34 + M<UInt16>(secondBufferInfo + 0x570);
               uVar41 = uVar32;
-              uVar29 = uVar32 + buffer15Pitch;
+              uVar29 = uVar32 + buffer15PitchBytes;
               uVar30 = uVar34;
               uVar19 = bufferPitch + uVar35;
             }
@@ -1440,38 +1440,38 @@ LAB_00039030:
               if (uVar38 == 0) {
                 uVar19 = fieldBytes + uVar35;
                 uVar35 = bufferPitch + uVar19;
-                uVar21 = buffer15Pitch * fieldHeight + uVar32;
+                uVar21 = buffer15PitchBytes * fieldHeight + uVar32;
                 uVar31 = uVar31 + fieldBytes;
                 uVar34 = fieldHeight * uVar39 + uVar34;
-                uVar32 = buffer15Pitch + uVar21;
+                uVar32 = buffer15PitchBytes + uVar21;
                 uVar33 = bufferPitch + uVar31;
               }
               else {
                 uVar35 = fieldBytes + uVar35;
                 uVar33 = uVar31 + fieldBytes;
-                uVar32 = buffer15Pitch * fieldHeight + uVar32;
+                uVar32 = buffer15PitchBytes * fieldHeight + uVar32;
                 uVar19 = bufferPitch + uVar35;
                 uVar31 = bufferPitch + uVar33;
-                uVar21 = buffer15Pitch + uVar32;
+                uVar21 = buffer15PitchBytes + uVar32;
                 uVar34 = uVar39 + fieldHeight * uVar39 + uVar34;
               }
             }
             else if (uVar38 == 0) {
               uVar35 = fieldBytes + uVar35;
               uVar19 = bufferPitch + uVar35;
-              uVar32 = buffer15Pitch * fieldHeight + uVar32;
+              uVar32 = buffer15PitchBytes * fieldHeight + uVar32;
               uVar33 = fieldHeight * uVar39 + uVar34;
-              uVar21 = buffer15Pitch + uVar32;
+              uVar21 = buffer15PitchBytes + uVar32;
               uVar31 = bufferPitch + uVar31 + fieldBytes;
               uVar34 = uVar39 + uVar33;
             }
             else {
               uVar19 = fieldBytes + uVar35;
               uVar35 = bufferPitch + uVar19;
-              uVar21 = buffer15Pitch * fieldHeight + uVar32;
+              uVar21 = buffer15PitchBytes * fieldHeight + uVar32;
               uVar31 = uVar31 + fieldBytes;
               uVar34 = fieldHeight * uVar39 + uVar34;
-              uVar32 = buffer15Pitch + uVar21;
+              uVar32 = buffer15PitchBytes + uVar21;
               uVar33 = uVar39 + uVar34;
             }
             *puVar26 = 0x1150;

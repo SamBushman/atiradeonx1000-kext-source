@@ -75,7 +75,7 @@ IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits 
     }
     if (((M<int>(surface + 0x90) == 0) && (M<int>(surface + 0x8c) == 0)) &&
        ((M<UInt8 *>(surface + 0x88) == (UInt8 *)0x0 ||
-        ((self == M<UInt8 *>(surface + 0x88) && (M<int>(self + kIOATIR500GLContext_unknown_0x84) == 0)))))) {
+        ((self == M<UInt8 *>(surface + 0x88) && (M<int>(self + kIOATIR500GLContext_nextContext) == 0)))))) {
       surfaceModeBits[0] = surfaceModeBits[0] & 0x803f | modeBits & 0xffffc03f;
     }
     else if ((((M<unsigned int>(surface + 0xc18) & 4) != 0) &&

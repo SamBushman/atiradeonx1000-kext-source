@@ -141,11 +141,11 @@ LAB_0001460c:
       if ((M<unsigned int>(self + kIOATIR500Surface_reqBits) & 1) == 0) {
         iVar5 = 0;
         if ((M<unsigned int>(self + kIOATIR500Surface_reqBits) & 2) != 0) {
-          iVar5 = M<int>(self + kIOATIR500Surface_buffer1Storage);
+          iVar5 = M<int>(self + kIOATIR500Surface_buffer1StorageBytes);
         }
       }
       else {
-        iVar5 = M<int>(self + kIOATIR500Surface_buffer0Storage);
+        iVar5 = M<int>(self + kIOATIR500Surface_buffer0StorageBytes);
       }
       M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
       if (iVar5 == 0) {

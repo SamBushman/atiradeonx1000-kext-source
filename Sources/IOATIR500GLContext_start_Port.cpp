@@ -54,7 +54,7 @@ bool IOATIR500GLContext::start(IOService *provider) {
   M<UInt32>(self + kIOATIR500GLContext_surfaceIndex) = 0;
   M<UInt32>(self + kIOATIR500GLContext_mipLevel) = 0;
   M<UInt32>(self + kIOATIR500GLContext_clientHandle) = 0;
-  M<UInt32>(self + kIOATIR500GLContext_unknown_0x84) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_nextContext) = 0;
   M<UInt32>(self + kIOATIR500GLContext_commandBuffer) = 0;
   M<UInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) = 0;
   M<UInt32>(self + kIOATIR500GLContext_commandBufferDescriptor) = 0;
