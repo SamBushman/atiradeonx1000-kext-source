@@ -52,18 +52,18 @@ void ATIR500Surface::build_swap() {
   UInt32 uVar17;
   SInt32 iVar18;
   UInt32 uVar19;
-  UInt32 uVar20;
+  UInt32 dstPitchUnits;
   UInt32 uVar21;
   UInt32 uVar22;
-  UInt32 uVar23;
+  UInt32 srcLastColumn;
   UInt32 uVar24;
-  UInt32 uVar25;
+  UInt32 srcLastColumnCopy;
   SInt32 iVar26;
   SInt32 *piVar27;
   SInt32 iVar28;
   UInt32 uVar29;
   UInt32 uVar30;
-  UInt32 uVar31;
+  UInt32 srcPitchUnits;
   SInt32 iVar32;
   SInt32 iVar33;
   SInt32 iVar34;
@@ -79,6 +79,13 @@ void ATIR500Surface::build_swap() {
   UInt32 pitchUnits;
   UInt32 lastColumn;
   UInt32 lastRow;
+  UInt32 srcWidthUnits;
+  UInt32 srcLastRow;
+  UInt32 srcLastRowCopy;
+  UInt32 dstWidthUnits;
+  UInt32 scissorRight;
+  UInt32 scissorWidthUnits;
+  UInt32 scissorBottom;
   SwapBufferEntry *batchEntry;     /* entries[0] of the panel being built: its `header` is the pending swap-write batch */
   PanelRecord *panelRec;
   UInt32 uVar38;
@@ -392,26 +399,26 @@ LAB_0003f654:
         iVar18 = M<SInt32>(iVar32 + 0x134);
         bVar2 = (M<UInt32>(iVar32 + 0x168) & 0xf00000) == 0;
         if (bVar2) {
-          uVar30 = 0;
+          dstWidthUnits = 0;
         }
         else {
-          uVar30 = (UInt32)M<UInt16>(iVar32 + 0x140) / (M<UInt32>(iVar32 + 0x168) >> 0x14 & 0xf);
+          dstWidthUnits = (UInt32)M<UInt16>(iVar32 + 0x140) / (M<UInt32>(iVar32 + 0x168) >> 0x14 & 0xf);
         }
-        uVar20 = 0x20 / M<UInt16>(iVar32 + 0x142);
-        if (uVar20 <= uVar30) {
-          uVar20 = uVar30;
+        dstPitchUnits = 0x20 / M<UInt16>(iVar32 + 0x142);
+        if (dstPitchUnits <= dstWidthUnits) {
+          dstPitchUnits = dstWidthUnits;
         }
         uVar19 = FormatTableLookup_0x0004d2e0(uVar19 * 0x1c);
         bVar46 = M<UInt8>(iVar32 + 0x164);
         bVar6 = M<UInt8>(iVar32 + 0x165);
         if ((bVar2) ||
-           (uVar21 = (UInt32)M<UInt16>(iVar32 + 0x148) / (M<UInt32>(iVar32 + 0x168) >> 0x14 & 0xf),
-           uVar30 = uVar21 - 1, uVar21 == 0)) {
-          uVar30 = 0;
+           (scissorWidthUnits = (UInt32)M<UInt16>(iVar32 + 0x148) / (M<UInt32>(iVar32 + 0x168) >> 0x14 & 0xf),
+           scissorRight = scissorWidthUnits - 1, scissorWidthUnits == 0)) {
+          scissorRight = 0;
         }
-        uVar21 = 0;
+        scissorBottom = 0;
         if (M<UInt16>(iVar32 + 0x14a) != 0) {
-          uVar21 = M<UInt16>(iVar32 + 0x14a) - 1;
+          scissorBottom = M<UInt16>(iVar32 + 0x14a) - 1;
         }
         bufferOriginY = M<UInt16>(surfaceBuffer + 0x20);
         iVar32 = M<SInt32>(surfaceBuffer + 0x40);
@@ -419,37 +426,37 @@ LAB_0003f654:
         bVar7 = M<UInt8>(surfaceBuffer + 0x38);
         bVar2 = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
         if ((bVar2) ||
-           (uVar22 = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), uVar23 = uVar22 - 1,
-           uVar22 == 0)) {
-          uVar23 = 0;
+           (srcWidthUnits = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), srcLastColumn = srcWidthUnits - 1,
+           srcWidthUnits == 0)) {
+          srcLastColumn = 0;
         }
         if (bufferHeight != 0) {
-          uVar22 = bufferHeight - 1;
+          srcLastRow = bufferHeight - 1;
         }
         else {
-          uVar22 = 0;
+          srcLastRow = 0;
         }
         uVar17 = FormatTableLookup_0x0004d2e4(uVar17 * 0x1c);
         if (bVar2) {
-          uVar24 = 0;
+          srcWidthUnits = 0;
         }
         else {
-          uVar24 = (UInt32)M<UInt16>(surfaceBuffer + 0x14) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
+          srcWidthUnits = (UInt32)M<UInt16>(surfaceBuffer + 0x14) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
         }
-        uVar31 = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
-        if (uVar31 <= uVar24) {
-          uVar31 = uVar24;
+        srcPitchUnits = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
+        if (srcPitchUnits <= srcWidthUnits) {
+          srcPitchUnits = srcWidthUnits;
         }
         if ((bVar2) ||
-           (uVar24 = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), uVar25 = uVar24 - 1,
+           (uVar24 = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), srcLastColumnCopy = uVar24 - 1,
            uVar24 == 0)) {
-          uVar25 = 0;
+          srcLastColumnCopy = 0;
         }
         if (bufferHeight != 0) {
-          uVar24 = bufferHeight - 1;
+          srcLastRowCopy = bufferHeight - 1;
         }
         else {
-          uVar24 = 0;
+          srcLastRowCopy = 0;
         }
         dVar66 = (double)(float)((double)CONCAT44d(0x43300000,bufferWidth) - DOUBLE_0004c3b0);
         dVar68 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionX ^ 0x80000000) - signedIntBias);
@@ -479,13 +486,13 @@ LAB_0003f654:
         GCopy(blitPacket,(&g_r500_3d_blit_state_packet),0x2f4);
         uVar38 = blitPacket[0xa2];
         blitPacket[0xa0] = (bVar7 & 7) << 2 | (UInt32)bufferOriginY * iVar32 + iVar33 & 0xffffffe0;
-        blitPacket[0xa6] = uVar23 & 0x7ff | (uVar22 & 0x7ff) << 0xb | 0x80000000;
+        blitPacket[0xa6] = srcLastColumn & 0x7ff | (srcLastRow & 0x7ff) << 0xb | 0x80000000;
         blitPacket[0xa8] =
              uVar17 >> 0x13 & 0x1f | (uVar17 & 0x40) << 0x10 | uVar17 >> 7 & 0xe00 |
              uVar17 >> 1 & 0x7000 | (uVar17 & 0x1c00) << 5 | (uVar17 & 0x380) << 0xb;
-        blitPacket[0xaa] = uVar31 - 1 & 0x3fff | (uVar25 & 0x800) << 4 | (uVar24 & 0x800) << 5;
+        blitPacket[0xaa] = srcPitchUnits - 1 & 0x3fff | (srcLastColumnCopy & 0x800) << 4 | (srcLastRowCopy & 0x800) << 5;
         blitPacket[0x9c] =
-             uVar20 & 0x3ffe | (bVar46 & 1) << 0x10 | (bVar46 & 6) << 0x10 | (bVar6 & 3) << 0x13 |
+             dstPitchUnits & 0x3ffe | (bVar46 & 1) << 0x10 | (bVar46 & 6) << 0x10 | (bVar6 & 3) << 0x13 |
              uVar19 >> 1 & 0x1e00000;
         blitPacket[0x9a] = (UInt32)panelOriginY * pitch + iVar18 & 0xffffffe0;
         blitPacket[0x8a] =
@@ -493,7 +500,7 @@ LAB_0003f654:
              (uVar19 & 0x1800) << 1 |
              uVar19 >> 3 & 0xc00 | uVar19 >> 7 & 0x300 | uVar19 >> 0x11 & 0x1f;
         blitPacket[0xb2] = 0;
-        blitPacket[0xb3] = uVar30 & 0x1fff | (uVar21 & 0x1fff) << 0xd;
+        blitPacket[0xb3] = scissorRight & 0x1fff | (scissorBottom & 0x1fff) << 0xd;
         blitPacket[0xb] = uVar16;
         blitPacket[0xa2] = iVar35 << 9 | uVar38 & 0xfffff9ff;
         blitPacket[0xa2] = iVar35 << 0xb | iVar35 << 9 | uVar38 & 0xffffe1ff;
