@@ -46,7 +46,7 @@ UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*outputBuffer, UInt32 star
   packetHeader = 0x832;
   extraOffsetB = self + 4;
   byteOffsetA = startIndex * 4 + 4;
-  bVar11 = (M<SInt32>(self + 0x364) == 0) << 1;
+  bVar11 = (M<SInt32>(self + kATIR500GLContext_vertexArrayParam) == 0) << 1;
   extraOffsetA = self;
   byteOffsetB = startIndex * 4 + 8;
   do {

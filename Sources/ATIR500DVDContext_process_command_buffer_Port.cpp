@@ -117,7 +117,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   local_58 = 0;
   result = 0;
   streamOffset = 0;
-  recordCursor = (UInt32 *)(M<SInt32>(self + 0xa4) + 0x1c);
+  recordCursor = (UInt32 *)(M<SInt32>(self + kIOATIR500DVDContext_commandBufferHeader) + 0x1c);
   pendingWords = 0xffffffff;
   do {
     wordsToSubmit = pendingWords;
@@ -143,23 +143,23 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   prevNode = M<SInt32>(texture + 0x34);
                   M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                   M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                  M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-                  M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                  M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                  M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+                  M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                  M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                   M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
                 }
                 uVar19 = 0;
                 M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
                 if (M<SInt32>(texture + 4) != 0) {
                   uVar19 = (UInt32)(M<SInt32>(texture + 4) +
-                                 M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4))
+                                 M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4))
                            >> 10;
                 }
                 iVar23 = 0;
                 uVar19 = uVar19 | (uVar11 & 0xff0) << 0x12;
               }
               else {
-                iVar18 = M<SInt32>(self + 0xf8);
+                iVar18 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                 iVar23 = iVar18 + 0x828;
                 uVar19 = M<UInt32>(iVar18 + 0x830) >> 10 |
                          (M<UInt16>(iVar18 + 0x840) & 0x3fc0) << 0x10;
@@ -171,8 +171,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               recordCursor[4] = 0xc0069a00;
               recordCursor[5] = 0x52f036da;
               recordCursor[6] = uVar19;
-              recordCursor[7] = M<UInt32>(self + 0x158);
-              recordCursor[8] = M<UInt32>(self + 0x15c);
+              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
+              recordCursor[8] = M<UInt32>(self + kATIR500DVDContext_scissorBottomRight);
               recordCursor[9] = 0;
               recordCursor[10] = 0;
               if ((bool)(bVar44 >> 1 & 1)) {
@@ -187,11 +187,11 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               if (uVar17 != 0xb000000) {
                 if (uVar17 != 0xc000000) {
                   if (uVar17 != 0xa000000) goto LAB_00039028;
-                  accelerator = M<SInt32 *>(self + 0x8c);
+                  accelerator = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
                   if (accelerator[0x22f] != 0) {
-                    VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + 0x154));
-                    M<UInt32>(M<SInt32>(self + 0xf8) + 0xd90) = recordCursor[1];
-                    surfaceInfo = M<SInt32>(self + 0xf8);
+                    VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + kATIR500DVDContext_idctTimeStamp));
+                    M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xd90) = recordCursor[1];
+                    surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                     fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
                     if ((M<SInt16>(surfaceInfo + 0x98) != M<SInt16>(surfaceInfo + 0x96)) && (fieldHeight != 0)) {
                       bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
@@ -269,25 +269,25 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   prevNode = M<SInt32>(texture + 0x34);
                   M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                   M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                  M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-                  M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                  M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                  M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+                  M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                  M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                   M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
                 }
                 M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
                 if (M<SInt32>(texture + 4) == 0) {
-                  surfaceInfo = M<SInt32>(self + 0xf8);
+                  surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                   gartBlock32 = 0;
                 }
                 else {
-                  surfaceInfo = M<SInt32>(self + 0xf8);
+                  surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                   gartBlock32 = (UInt32)(M<SInt32>(texture + 4) +
-                                 M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4))
+                                 M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4))
                            >> 5;
                 }
               }
               else {
-                surfaceInfo = M<SInt32>(self + 0xf8);
+                surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                 gartBlock32 = M<UInt32>(surfaceInfo + 0x830) >> 5;
               }
               *recordCursor = 0x1150;
@@ -316,7 +316,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               recordWord = recordWord & 0xffffff;
             }
             else if (uVar17 == 0x13000000) {
-              surfaceInfo = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               uVar17 = M<UInt32>(bufferInfo + 0x560);
               pitch = M<UInt16>(bufferInfo + 0x570);
@@ -352,11 +352,11 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             else {
               if (uVar17 != 0x14000000) {
                 if (uVar17 == 0x12000000) {
-                  accelerator = M<SInt32 *>(self + 0x8c);
+                  accelerator = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
                   if ((accelerator[0x22f] == 0) ||
-                     (VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + 0x154)),
+                     (VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + kATIR500DVDContext_idctTimeStamp)),
                      recordCursor[0xd] == 0)) goto LAB_00039030;
-                  iVar23 = M<SInt32>(self + 0xf8);
+                  iVar23 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                   uVar17 = recordCursor[2];
                   uVar21 = recordCursor[3];
                   uVar31 = recordCursor[6];
@@ -377,17 +377,17 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     prevNode = M<SInt32>(texture + 0x34);
                     M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                     M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                    M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0)
+                    M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0)
                     ;
-                    M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                    M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                    M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                    M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                     M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
                   }
                   iVar23 = 0;
                   M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
                   if (M<SInt32>(texture + 4) != 0) {
                     iVar23 = M<SInt32>(texture + 4) +
-                             M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4);
+                             M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4);
                   }
                   iVar12 = 0;
                   iVar45 = 4;
@@ -416,19 +416,19 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     prevNode = M<SInt32>(texture + 0x34);
                     M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                     M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                    M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0)
+                    M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0)
                     ;
-                    M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                    M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                    M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                    M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                     M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
                   }
                   uVar13 = 0;
                   M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
                   if (M<SInt32>(texture + 4) != 0) {
                     uVar13 = M<SInt32>(texture + 4) +
-                             M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4);
+                             M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4);
                   }
-                  iVar18 = M<SInt32>(self + 0xf8);
+                  iVar18 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                   iVar23 = uVar33 * 0x78 + iVar18;
                   uVar34 = (UInt32)M<UInt16>(iVar18 + 0x8b8);
                   puVar26 = recordCursor + uVar31;
@@ -603,7 +603,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 }
                 goto LAB_00039028;
               }
-              surfaceInfo = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
               bufferInfo = recordCursor[3] * 0x78 + surfaceInfo;
               fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
@@ -722,7 +722,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
           }
           if (uVar17 == 0x5000000) {
             uVar21 = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
-            surfaceInfo = M<SInt32>(self + 0xf8);
+            surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             uVar17 = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
             if (recordCursor[2] == 0) {
@@ -745,7 +745,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             recordCursor[4] = 0xc0069a00;
             recordCursor[5] = 0x52f036da;
             recordCursor[6] = uVar19 | uVar11 >> 10 | (pitch & 0x3fc0) << 0x10 | (bVar44 & 1) << 0x1e;
-            recordCursor[7] = M<UInt32>(self + 0x158);
+            recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
             recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
             recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
                                   uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
@@ -763,7 +763,7 @@ LAB_00037c4c:
             if ((uVar17 == 0x7000000) || (uVar17 == 0x8000000)) goto LAB_00039030;
             if (uVar17 != 0x6000000) goto LAB_00039028;
             uVar21 = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
-            surfaceInfo = M<SInt32>(self + 0xf8);
+            surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             uVar17 = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
             if (recordCursor[2] == 0) {
@@ -786,7 +786,7 @@ LAB_00037c4c:
             recordCursor[4] = 0xc0069a00;
             recordCursor[5] = 0x52f036da;
             recordCursor[6] = uVar19 | uVar11 >> 10 | (pitch & 0x3fc0) << 0x10 | (bVar44 & 1) << 0x1e;
-            recordCursor[7] = M<UInt32>(self + 0x158);
+            recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
             recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
             recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
                                   uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
@@ -804,28 +804,28 @@ LAB_00037c4c:
             submitBytes = pendingWords * 4;
             pendingWords = 0;
             alignedOffset = streamOffset & 0xfffffffc;
-            M<SInt32>(M<SInt32>(self + 0x8c) + 0x708) =
-                 submitBytes + M<SInt32>(M<SInt32>(self + 0x8c) + 0x708);
-            gartOffset = streamOffset + M<SInt32>(self + 0x94);
+            M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708) =
+                 submitBytes + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708);
+            gartOffset = streamOffset + M<SInt32>(self + kIOATIR500DVDContext_commandBufferGartOffset);
             streamOffset = streamOffset + submitBytes;
-            stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0x8c)))->submit_buffer((UInt32 *)(alignedOffset + M<SInt32>(self + 0xa4) + 0x20),gartOffset + 0x20,
+            stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->submit_buffer((UInt32 *)(alignedOffset + M<SInt32>(self + kIOATIR500DVDContext_commandBufferHeader) + 0x20),gartOffset + 0x20,
                                 wordsToSubmit);
-            M<UInt32>(self + 0xa0) = stamp;
+            M<UInt32>(self + kIOATIR500DVDContext_commandBufferStamp) = stamp;
           }
           goto LAB_00039020;
         }
         if (uVar17 == 0x1d000000) {
 LAB_00037620:
-          if ((recordCursor[1] < M<UInt32>(M<SInt32>(self + 0x84) + 0x14)) &&
+          if ((recordCursor[1] < M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x14)) &&
              (texture = *(UInt8 **)
-                         (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + 0x84) + 0x10)),
+                         (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x10)),
              texture != (UInt8 *)0x0)) {
             iVar23 = (uVar17 + 0xe7000000 >> 0x18) * 4;
             if (M<UInt8 *>(self + iVar23 + 0x104) != (UInt8 *)0x0) {
               ((IOATIR500DVDContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(self + iVar23 + 0x104)));
               iVar18 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + iVar23 + 0x104) + 0x14) + 0x10);
               if (iVar18 == 1) {
-                ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + iVar23 + 0x104)));
+                ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + iVar23 + 0x104)));
               }
               M<UInt32>(self + iVar23 + 0x104) = 0;
             }
@@ -836,13 +836,13 @@ LAB_00037620:
                 submitBytes = pendingWords * 4;
                 pendingWords = 0;
                 alignedOffset = streamOffset & 0xfffffffc;
-                M<SInt32>(M<SInt32>(self + 0x8c) + 0x708) =
-                     submitBytes + M<SInt32>(M<SInt32>(self + 0x8c) + 0x708);
-                gartOffset = streamOffset + M<SInt32>(self + 0x94);
+                M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708) =
+                     submitBytes + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708);
+                gartOffset = streamOffset + M<SInt32>(self + kIOATIR500DVDContext_commandBufferGartOffset);
                 streamOffset = streamOffset + submitBytes;
-                stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0x8c)))->submit_buffer((UInt32 *)(alignedOffset + M<SInt32>(self + 0xa4) + 0x20),gartOffset + 0x20,
+                stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->submit_buffer((UInt32 *)(alignedOffset + M<SInt32>(self + kIOATIR500DVDContext_commandBufferHeader) + 0x20),gartOffset + 0x20,
                                     wordsToSubmit);
-                M<UInt32>(self + 0xa0) = stamp;
+                M<UInt32>(self + kIOATIR500DVDContext_commandBufferStamp) = stamp;
               }
               if ((M<SInt32>(texture + 4) != 0) ||
                  (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
@@ -850,23 +850,23 @@ LAB_00037620:
                 GH_IOGetTime(texture + 0x2c);
                 M<UInt32>(M<SInt32>(texture + 0x34) + 0x38) = M<UInt32>(texture + 0x38);
                 M<UInt32>(M<SInt32>(texture + 0x38) + 0x34) = M<UInt32>(texture + 0x34);
-                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-                M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+                M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                 M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
               }
               M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
-              if (M<SInt32>(self + 0x94) == 0) {
-                ((IOATIR500DVDContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0x90)));
+              if (M<SInt32>(self + kIOATIR500DVDContext_commandBufferGartOffset) == 0) {
+                ((IOATIR500DVDContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_commandBuffer)));
               }
             }
             GH_OSAddAtomic(0xffff0001,M<SInt32>(texture + 0x14) + 0x10);
             if (M<SInt32>(texture + 0x48) != 0) {
               M<UInt32>(M<SInt32>(texture + 0x24) + 0x28) = M<UInt32>(texture + 0x28);
               M<UInt32>(M<SInt32>(texture + 0x28) + 0x24) = M<UInt32>(texture + 0x24);
-              M<UInt32>(texture + 0x24) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x600);
-              M<SInt32>(texture + 0x28) = M<SInt32>(self + 0x8c) + 0x5dc;
-              M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x600) = texture;
+              M<UInt32>(texture + 0x24) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x600);
+              M<SInt32>(texture + 0x28) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x5dc;
+              M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x600) = texture;
               M<UInt8 *>(M<SInt32>(texture + 0x24) + 0x28) = texture;
             }
             *recordCursor = 0x80000000;
@@ -901,16 +901,16 @@ LAB_00037620:
                 prevNode = M<SInt32>(texture + 0x34);
                 M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                 M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-                M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+                M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                 M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
               }
               gartBlock32 = 0;
               M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
               if (M<SInt32>(texture + 4) != 0) {
                 gartBlock32 = (UInt32)(M<SInt32>(texture + 4) +
-                               M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4))
+                               M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4))
                          >> 5;
               }
               texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
@@ -921,18 +921,18 @@ LAB_00037620:
                 prevNode = M<SInt32>(texture + 0x34);
                 M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                 M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-                M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+                M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                 M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
               }
               textureAddress = 0;
               M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
               if (M<SInt32>(texture + 4) != 0) {
                 textureAddress = M<SInt32>(texture + 4) +
-                         M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4);
+                         M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4);
               }
-              surfaceInfo = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               *recordCursor = 0x1150;
               recordCursor[1] = gartBlock32 << 5;
               recordCursor[2] = 0x1151;
@@ -954,7 +954,7 @@ LAB_00037620:
             }
             else {
               if (uVar17 != 0x16000000) goto LAB_00039028;
-              iVar12 = M<SInt32>(self + 0xf8);
+              iVar12 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               uVar21 = recordCursor[1];
               uVar17 = recordCursor[4];
               iVar18 = recordCursor[2] * 0x78 + iVar12;
@@ -1111,7 +1111,7 @@ LAB_00037620:
             }
             goto LAB_0003903c;
           }
-          iVar12 = M<SInt32>(self + 0xf8);
+          iVar12 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
           uVar17 = recordCursor[1];
           uVar21 = recordCursor[4];
           iVar18 = recordCursor[2] * 0x78 + iVar12;
@@ -1235,7 +1235,7 @@ LAB_00038870:
         goto LAB_00037620;
         goto LAB_00039028;
       }
-      iVar23 = M<SInt32>(self + 0xf8);
+      iVar23 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
       uVar21 = recordCursor[1];
       uVar17 = M<UInt32>(iVar23 + 0x7b8);
       if (uVar17 != 0) {
@@ -1252,7 +1252,7 @@ LAB_00038870:
         recordCursor[4] = 0xc0069a00;
         recordCursor[5] = 0x52f036da;
         recordCursor[6] = uVar11 | uVar17 >> 10 | (pitch & 0x3fc0) << 0x10 | (bVar44 & 1) << 0x1e;
-        recordCursor[7] = M<UInt32>(self + 0x158);
+        recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
         otherPitch = M<UInt16>(iVar23 + 0x7ce);
         recordCursor[8] = CONCAT22(otherPitch,M<UInt16>(iVar23 + 0x7cc));
         recordCursor[9] = uVar21;
@@ -1274,7 +1274,7 @@ LAB_00039030:
       if (uVar17 != 0x35000000) {
         if (0x35000000 < uVar17) {
           if (uVar17 == 0x3d000000) {
-            surfaceInfo = M<SInt32>(self + 0xf8);
+            surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             uVar38 = recordCursor[3];
             uVar33 = recordCursor[4];
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
@@ -1459,7 +1459,7 @@ LAB_00039030:
           }
           if (uVar17 == 0x43000000) {
             uVar17 = recordCursor[4];
-            surfaceInfo = M<SInt32>(self + 0xf8);
+            surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
             fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
@@ -1498,16 +1498,16 @@ joined_r0x000381c4:
               prevNode = M<SInt32>(texture + 0x34);
               M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
               M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-              M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-              M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-              M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+              M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+              M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+              M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
               M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
             }
             gartBlock32 = 0;
             M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
             if (M<SInt32>(texture + 4) != 0) {
               gartBlock32 = (UInt32)(M<SInt32>(texture + 4) +
-                             M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4)) >>
+                             M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4)) >>
                        5;
             }
             *recordCursor = 0x1150;
@@ -1524,7 +1524,7 @@ joined_r0x000381c4:
           }
           else if (uVar17 < 0x43000001) {
             if (uVar17 == 0x3f000000) {
-              surfaceInfo = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               if (recordCursor[2] == 0) {
                 uVar17 = M<UInt32>(bufferInfo + 0x560);
@@ -1547,7 +1547,7 @@ joined_r0x000381c4:
               recordWord = recordWord & 0xffffff;
             }
             else if (uVar17 == 0x42000000) {
-              surfaceInfo = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
               if (recordCursor[2] == 0) {
@@ -1575,7 +1575,7 @@ joined_r0x000381c4:
             }
             else {
               if (uVar17 != 0x3e000000) goto LAB_00039028;
-              iVar23 = M<SInt32>(self + 0xf8);
+              iVar23 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               uVar17 = recordCursor[3];
               sVar1 = M<SInt16>(iVar23 + 0x94);
               sVar2 = M<SInt16>(iVar23 + 0x9a);
@@ -1588,16 +1588,16 @@ joined_r0x000381c4:
                 prevNode = M<SInt32>(texture + 0x34);
                 M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
                 M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
-                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-                M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-                M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
+                M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+                M<SInt32>(texture + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+                M<UInt8 *>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = texture;
                 M<UInt8 *>(M<SInt32>(texture + 0x34) + 0x38) = texture;
               }
               gartBlock32 = 0;
               M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
               if (M<SInt32>(texture + 4) != 0) {
                 gartBlock32 = (UInt32)(M<SInt32>(texture + 4) +
-                               M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4))
+                               M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4))
                          >> 5;
               }
               uVar28 = M<UInt32>(iVar23 + 0x560);
@@ -1633,8 +1633,8 @@ joined_r0x000381c4:
                   uVar17 = 1;
                 }
                 else if (0xc < uVar17 - 10) goto LAB_00039030;
-                iVar23 = uVar17 * 0x78 + M<SInt32>(self + 0xf8);
-                iVar18 = uVar21 * 0x78 + M<SInt32>(self + 0xf8);
+                iVar23 = uVar17 * 0x78 + M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+                iVar18 = uVar21 * 0x78 + M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                 *recordCursor = 0x1140;
                 recordCursor[1] = (M<UInt16>(iVar18 + 0xc0) >> 2) - 1;
                 recordCursor[2] = 0x1150;
@@ -1654,7 +1654,7 @@ joined_r0x000381c4:
               }
               if (uVar17 != 0x44000000) goto LAB_00039028;
               uVar17 = recordCursor[4];
-              surfaceInfo = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
               fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
@@ -1676,7 +1676,7 @@ joined_r0x000381c4:
               }
               goto joined_r0x000381c4;
             }
-            surfaceInfo = M<SInt32>(self + 0xf8);
+            surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             *recordCursor = 0x1140;
             uVar17 = (UInt32)M<UInt16>(surfaceInfo + 0x136);
             if (uVar17 == 0) {
@@ -1777,7 +1777,7 @@ LAB_00037880:
         ((IOATIR500DVDContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(self + uVar17 + 0x104)));
         iVar23 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + uVar17 + 0x104) + 0x14) + 0x10);
         if (iVar23 == 1) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + uVar17 + 0x104)));
+          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + uVar17 + 0x104)));
         }
         M<UInt32>(self + uVar17 + 0x104) = 0;
       }
@@ -1795,8 +1795,8 @@ LAB_0003903c:
         recordCursor = recordCursor + 1;
         pendingWords = pendingWords + 1;
       }
-      M<UInt32>(descriptorBytes) = (streamOffset & 0xfffffffc) + M<SInt32>(self + 0xa4) + 0x20;
-      iVar23 = M<SInt32>(self + 0x94);
+      M<UInt32>(descriptorBytes) = (streamOffset & 0xfffffffc) + M<SInt32>(self + kIOATIR500DVDContext_commandBufferHeader) + 0x20;
+      iVar23 = M<SInt32>(self + kIOATIR500DVDContext_commandBufferGartOffset);
       M<UInt32 *>(descriptorBytes + 0xc) = recordCursor;
       M<UInt32>(descriptorBytes + 8) = pendingWords;
       M<UInt32>(descriptorBytes + 4) = streamOffset + iVar23 + 0x20;

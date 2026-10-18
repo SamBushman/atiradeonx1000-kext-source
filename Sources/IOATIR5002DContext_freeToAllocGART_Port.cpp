@@ -37,15 +37,15 @@ bool IOATIR5002DContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
   UInt8 *candidate;
   UInt8 *ringEntry;
   
-  iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0xb4)),
-                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xc4),aggressive);
+  iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR5002DContext_contextBuffer)),
+                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR5002DContext_contextBufferStamp),aggressive);
   if ((iVar2 == 0) &&
-     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xa8),
+     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR5002DContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR5002DContext_commandBufferStamp),
                          aggressive), iVar2 == 0)) {
     iVar2 = 0;
-    candidate = (UInt8 *)(self + 0xcc);
+    candidate = (UInt8 *)(self + kIOATIR5002DContext_contextBufferRing);
     ringEntry = self;
-    while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
+    while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
                               M<UInt32>(ringEntry + 0xdc),aggressive), freed == 0) {
       lastEntry = iVar2 == 1;
       candidate = candidate + 0x18;

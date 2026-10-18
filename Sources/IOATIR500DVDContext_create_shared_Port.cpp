@@ -43,21 +43,21 @@ bool IOATIR500DVDContext::create_shared() {
   void *mem = OSObject::operator new(0x28);
   shared = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
   bVar3 = (shared == (UInt8 *)0x0) << 1;
-  M<UInt8 *>(self + 0x84) = shared;
+  M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator) = shared;
   if ((bool)(bVar3 >> 1 & 1)) {
     result = 0;
   }
   else {
     initialised = VCALL(M<SInt32>(shared), 0x48)(shared);
     if (initialised == 0) {
-      VCALL(*M<SInt32 *>(self + 0x84), 0x18)(M<SInt32 *>(self + 0x84));
+      VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_sharedAllocator), 0x18)(M<SInt32 *>(self + kIOATIR500DVDContext_sharedAllocator));
       result = 0;
-      M<UInt32>(self + 0x84) = 0;
+      M<UInt32>(self + kIOATIR500DVDContext_sharedAllocator) = 0;
     }
     else {
       result = 1;
-      M<UInt32>(M<SInt32>(self + 0x84) + 0xc) = M<UInt32>(self + 0x8c);
-      M<UInt32>(M<SInt32>(self + 0x84) + 8) = M<UInt32>(self + 0x78);
+      M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0xc) = M<UInt32>(self + kIOATIR500DVDContext_accelerator);
+      M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 8) = M<UInt32>(self + kIOATIR500DVDContext_task);
     }
   }
   return result;

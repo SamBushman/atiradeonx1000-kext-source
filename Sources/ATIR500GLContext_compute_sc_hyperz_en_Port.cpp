@@ -33,10 +33,10 @@ UInt32 ATIR500GLContext::compute_sc_hyperz_en(UInt32 requested) {
   UInt32 enableBit;
   UInt8 *depthBuffer;
   
-  depthBuffer = self + 0x5a0;
-  if (M<SInt32>(self + 0x3bc) == 0) {
+  depthBuffer = self + kATIR500GLContext_textureDepthBuffer;
+  if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
     depthBuffer = *(UInt8 **)
-              ((UInt32)M<UInt16>(self + 0xae) * 4 + M<SInt32>(self + 0x290) + 0xb70);
+              ((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
   }
   if ((depthBuffer[0x35] == 0x0) || (enableBit = 1, (requested & 1) == 0)) {
     enableBit = 0;

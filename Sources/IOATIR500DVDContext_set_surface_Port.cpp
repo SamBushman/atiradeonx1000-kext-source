@@ -41,7 +41,7 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
   UInt8 *newSurface;
   unsigned int currentModeBits [8];
   
-  GH_IOLockLock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   if (surfaceID == 0) {
     result = 0;
     newSurface = (UInt8 *)0x0;
@@ -49,7 +49,7 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
   }
   else {
     newSurface = (UInt8 *)
-              ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->find_surface_for_id(surfaceID);
+              ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->find_surface_for_id(surfaceID);
     unbind = newSurface == (UInt8 *)0x0;
     if (unbind) {
       result = 0xe00002c2;
@@ -58,20 +58,20 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
       result = 0;
     }
   }
-  if (M<UInt8 *>(self + 0xf8) != (UInt8 *)0x0) {
-    ((IOATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->remove_dvd_context((IOATIR500DVDContext *)(self));
-    if (newSurface != M<UInt8 *>(self + 0xf8)) {
-      ((IOATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->prune_buffers();
+  if (M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface) != (UInt8 *)0x0) {
+    ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->remove_dvd_context((IOATIR500DVDContext *)(self));
+    if (newSurface != M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)) {
+      ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->prune_buffers();
     }
   }
   if ((unbind) ||
      ((M<UInt8 *>(newSurface + 0x90) != (UInt8 *)0x0 &&
       (self != M<UInt8 *>(newSurface + 0x90))))) {
-    M<UInt32>(self + 0xf8) = 0;
+    M<UInt32>(self + kIOATIR500DVDContext_boundSurface) = 0;
   }
   else {
     currentModeBits[0] = M<unsigned int>(newSurface + 0xbe8);
-    if (newSurface != M<UInt8 *>(self + 0xf8)) {
+    if (newSurface != M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)) {
       ((IOATIR500Surface *)(newSurface))->reset_req_bits();
     }
     if ((M<int>(newSurface + 0x88) == 0) && (M<int>(newSurface + 0x8c) == 0)) {
@@ -80,17 +80,17 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
     else {
       accepted = VCALL(M<int>(self), 0x5ac)(self,currentModeBits,modeBits);
       if (accepted == 0) {
-        if (newSurface == M<UInt8 *>(self + 0xf8)) {
+        if (newSurface == M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)) {
           ((IOATIR500Surface *)(newSurface))->prune_buffers();
         }
-        M<UInt32>(self + 0xf8) = 0;
+        M<UInt32>(self + kIOATIR500DVDContext_boundSurface) = 0;
         result = 0xe00002c2;
         goto LAB_0000fc30;
       }
     }
     M<unsigned int>(newSurface + 0xbe8) = currentModeBits[0];
     if (0 < flagCount) {
-      bufferMask = M<unsigned int>(self + 0x88);
+      bufferMask = M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask);
       uVar3 = 0;
       do {
         uVar2 = uVar3 & 0x3f;
@@ -98,17 +98,17 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
         bufferMask = bufferMask | 0x400 << uVar2;
         flagCount = flagCount + -1;
       } while (flagCount != 0);
-      M<unsigned int>(self + 0x88) = bufferMask;
+      M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) = bufferMask;
     }
     ((IOATIR500Surface *)(newSurface))->set_dvd_context((IOATIR500DVDContext *)(self));
-    M<UInt8 *>(self + 0xf8) = newSurface;
+    M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface) = newSurface;
     ((IOATIR500Surface *)(newSurface))->prune_buffers();
   }
 LAB_0000fc30:
-  if (self == M<UInt8 *>(M<int>(self + 0x8c) + 0x78)) {
-    M<UInt32>(M<int>(self + 0x8c) + 0x78) = 0;
+  if (self == M<UInt8 *>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x78)) {
+    M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x78) = 0;
   }
   VCALL(M<int>(self), 0x5a8)(self);
-  GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   return result;
 }

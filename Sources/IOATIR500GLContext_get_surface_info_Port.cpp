@@ -36,9 +36,9 @@ IOReturn IOATIR500GLContext::get_surface_info(UInt32 surfaceID, SInt32*outFlags,
   SInt32 surface;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   if (surfaceID != 0) {
-    surface = (SInt32)((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->find_surface_for_id(surfaceID);
+    surface = (SInt32)((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->find_surface_for_id(surfaceID);
     if (surface != 0) {
       modeBits = M<UInt32>(surface + 0xbe8);
       *outFlags = modeBits;
@@ -68,6 +68,6 @@ IOReturn IOATIR500GLContext::get_surface_info(UInt32 surfaceID, SInt32*outFlags,
   *outW = 0;
   *outH = 0;
 LAB_00008cb0:
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return result;
 }

@@ -30,6 +30,6 @@
 void ATIR500GLContext::invalidate() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<UInt32>(M<SInt32>(self + 0x108) + 0x1c) = M<UInt32>(M<SInt32>(self + 0x108) + 0x1c) | 1;
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) | 1;
   return;
 }

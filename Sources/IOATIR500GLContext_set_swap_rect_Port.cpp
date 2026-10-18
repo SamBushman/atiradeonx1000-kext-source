@@ -32,11 +32,11 @@ IOReturn IOATIR500GLContext::set_swap_rect(SInt32 x, SInt32 y, SInt32 w, SInt32 
 
   SInt32 *surface;
   
-  M<SInt16>(self + 0x90) = (SInt16)x;
-  M<SInt16>(self + 0x92) = (SInt16)y;
-  M<SInt16>(self + 0x94) = (SInt16)w;
-  M<SInt16>(self + 0x96) = (SInt16)h;
-  surface = M<SInt32 *>(self + 0x290);
+  M<SInt16>(self + kIOATIR500GLContext_swapRectX) = (SInt16)x;
+  M<SInt16>(self + kIOATIR500GLContext_swapRectY) = (SInt16)y;
+  M<SInt16>(self + kIOATIR500GLContext_swapRectWidth) = (SInt16)w;
+  M<SInt16>(self + kIOATIR500GLContext_swapRectHeight) = (SInt16)h;
+  surface = M<SInt32 *>(self + kIOATIR500GLContext_boundSurface);
   if (surface != (SInt32 *)0x0) {
     VCALL(*surface, 0x5c4)(surface);
   }

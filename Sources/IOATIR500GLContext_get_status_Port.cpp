@@ -41,15 +41,15 @@ IOReturn IOATIR500GLContext::get_status(UInt32*out0) {
   UInt32 *info;
   UInt32 infoRecords [94];
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  iVar2 = M<SInt32>(self + 0x290);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  iVar2 = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
   if (iVar2 != 0) {
     if ((0xff < M<UInt32>(iVar2 + 0xa4)) &&
-       (iVar5 = M<SInt32>(self + 200), M<char>(iVar5 + 0x80) == '\0')) {
+       (iVar5 = M<SInt32>(self + kIOATIR500GLContext_accelerator), M<char>(iVar5 + 0x80) == '\0')) {
       do {
         GH_IOLockSleep(M<UInt32>(iVar5 + 0x840),iVar5,0);
       } while (M<char>(iVar5 + 0x80) == '\0');
-      iVar2 = M<SInt32>(self + 0x290);
+      iVar2 = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
       if (iVar2 == 0) goto LAB_0000b3e4;
     }
     if ((M<UInt32>(iVar2 + 0xbf8) & 0x20000000) == 0) {
@@ -57,14 +57,14 @@ IOReturn IOATIR500GLContext::get_status(UInt32*out0) {
       iVar2 = 0;
       info = infoRecords;
       do {
-        if ((1 << (bufferIndex & 0x3f) & M<UInt32>(self + 0x8c)) != 0) {
+        if ((1 << (bufferIndex & 0x3f) & M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask)) != 0) {
           *info = 0;
           info[1] = 0;
           info[2] = 0;
           info[3] = 0;
-          iVar5 = VCALL(*M<SInt32 *>(self + 200), 0x540)
-                            (M<SInt32 *>(self + 200),info,
-                             M<UInt32>(iVar2 + M<SInt32>(self + 0x290) + 0xb8),0x1000);
+          iVar5 = VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x540)
+                            (M<SInt32 *>(self + kIOATIR500GLContext_accelerator),info,
+                             M<UInt32>(iVar2 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb8),0x1000);
           if (iVar5 == 0) {
             iVar2 = bufferIndex - 1;
             *out0 = 0;
@@ -83,9 +83,9 @@ LAB_0000b38c:
       iVar5 = iVar2 << 4;
       iVar4 = 0;
       do {
-        if ((1 << (iVar2 - iVar4 & 0x3fU) & M<UInt32>(self + 0x8c)) != 0) {
-          VCALL(*M<SInt32 *>(self + 200), 0x544)
-                    (M<SInt32 *>(self + 200),(SInt32)infoRecords + iVar5);
+        if ((1 << (iVar2 - iVar4 & 0x3fU) & M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask)) != 0) {
+          VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x544)
+                    (M<SInt32 *>(self + kIOATIR500GLContext_accelerator),(SInt32)infoRecords + iVar5);
         }
         iVar4 = iVar4 + 1;
         iVar5 = iVar5 + -0x10;
@@ -96,6 +96,6 @@ LAB_0000b38c:
 LAB_0000b3e4:
   *out0 = 0;
 LAB_0000b3ec:
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return 0;
 }

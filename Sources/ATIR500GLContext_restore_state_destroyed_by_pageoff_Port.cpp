@@ -47,7 +47,7 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
   SInt32 waitTotal;
   r500_3d_blit_state_packet_struct *blitPacket;
   
-  M<UInt32>(M<SInt32>(self + 200) + 0xb90) = 0;
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 0;
   track_regs_written_by_pm4
             ((tracked_register_set *)savedStateBytes,M<UInt32 *>(savedStateBytes + 0x134),
              M<UInt32 *>(savedStateBytes + 0x138));
@@ -57,13 +57,13 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
              M<UInt32 *>(savedStateBytes + 0x140));
   M<UInt32>(savedStateBytes + 0x13c) = M<UInt32>(savedStateBytes + 0x140);
   VCALL(M<SInt32>(self), 0x5a4)(self);
-  accelerator = M<SInt32 *>(self + 200);
-  ringIndex = M<SInt32>(self + 0x28c) + 1U & 0xf;
-  M<UInt32>(self + 0x28c) = ringIndex;
+  accelerator = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
+  ringIndex = M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) + 1U & 0xf;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) = ringIndex;
   waitTotal = accelerator[0x1e0];
   waited = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(self + ringIndex * 0x18 + 0x11c));
   accelerator[0x1e0] = waitTotal + waited;
-  headerTemplate = M<UInt32 *>(self + 0x108);
+  headerTemplate = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
   ringHead = M<UInt32 *>(self + ringIndex * 0x18 + 0x120);
   uVar8 = headerTemplate[1];
   uVar7 = headerTemplate[2];
@@ -308,13 +308,13 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
   if (M<SInt32>(self + ringIndex * 0x18 + 0x110) == 0) {
     ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x18 + 0x10c)));
   }
-  M<SInt32>(M<SInt32>(self + 200) + 0x704) =
+  M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) =
        M<SInt32>(M<SInt32>(self + ringIndex * 0x18 + 0x120) + 0x14) * 4 +
-       M<SInt32>(M<SInt32>(self + 200) + 0x704);
-  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(M<SInt32>(self + ringIndex * 0x18 + 0x120) + 0x20),
+       M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(self + ringIndex * 0x18 + 0x120) + 0x20),
                      M<SInt32>(self + ringIndex * 0x18 + 0x110) + 0x20,
                      M<UInt32>(M<SInt32>(self + ringIndex * 0x18 + 0x120) + 0x14));
   M<UInt32>(self + ringIndex * 0x18 + 0x11c) = value;
-  M<UInt32>(self + 0x7c) = value;
+  M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp) = value;
   return;
 }

@@ -39,23 +39,23 @@ IOReturn ATIR500DVDContext::set_macrovision(UInt32 attribute, UInt32 value) {
   UInt32 result;
   /* the shipped code spills its 3rd register argument (value, `value`) to the stack and passes the slot's address on */
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 0x8c) + 0x840));
-  iVar1 = M<SInt32>(param_1 + 0x8c);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
+  iVar1 = M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator);
   if (M<char>(iVar1 + 0x80) == '\0') {
     result = 0xe00002d8;
   }
   else {
-    iVar1 = ((ATIR500Surface *)(M<UInt8 *>(param_1 + 0xf8)))->getFramebufferIndex();
-    framebuffer = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(iVar1 * 0x20 + M<SInt32>(param_1 + 0x8c) + 0xd4),
+    iVar1 = ((ATIR500Surface *)(M<UInt8 *>(param_1 + kIOATIR500DVDContext_boundSurface)))->getFramebufferIndex();
+    framebuffer = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(iVar1 * 0x20 + M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator) + 0xd4),
                                  GH_IONDRVFramebuffer_metaClass);
-    M<SInt32 *>(param_1 + 0x160) = framebuffer;
+    M<SInt32 *>(param_1 + kATIR500DVDContext_macrovisionFramebuffer) = framebuffer;
     if (framebuffer == (SInt32 *)0x0) {
-      iVar1 = M<SInt32>(param_1 + 0x8c);
+      iVar1 = M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator);
       result = 0xe00002c0;
     }
     else {
       result = VCALL(*framebuffer, 0x70c)(framebuffer,attribute,&value);
-      iVar1 = M<SInt32>(param_1 + 0x8c);
+      iVar1 = M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator);
     }
   }
   GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));

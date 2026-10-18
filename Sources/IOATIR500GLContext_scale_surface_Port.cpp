@@ -42,8 +42,8 @@ IOReturn IOATIR500GLContext::scale_surface(UInt32 flags, UInt32 xScale, UInt32 y
    * is the only layout C guarantees. */
   UInt16 local_scale_buf[6];
 
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  if ((M<UInt8 *>(self + 0x290) == (UInt8 *)0x0) || ((flags & 1) == 0)) {
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  if ((M<UInt8 *>(self + kIOATIR500GLContext_boundSurface) == (UInt8 *)0x0) || ((flags & 1) == 0)) {
     result = 0xe00002c7;
   }
   else {
@@ -53,9 +53,9 @@ IOReturn IOATIR500GLContext::scale_surface(UInt32 flags, UInt32 xScale, UInt32 y
     local_scale_buf[0] = 0;
     local_scale_buf[4] = local_scale_buf[2];
     local_scale_buf[5] = local_scale_buf[3];
-    result = ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_scaling(flags >> 2 & 1 | flags & 2,
+    result = ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->set_scaling(flags >> 2 & 1 | flags & 2,
                        (IOAccelSurfaceScaling *)local_scale_buf);
   }
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return result;
 }

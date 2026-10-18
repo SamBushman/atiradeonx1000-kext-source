@@ -38,16 +38,16 @@ IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFac
   SInt32 iVar3;
   SInt32 texture;   /* #169: the texture-buffer pointer, live in r4 at the vcall in stock (0x9790 lwzx r4) */
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
-  accel = M<SInt32 *>(param_1 + 200);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+  accel = M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator);
   if (M<char>(accel + 0x20) == '\0') {
 LAB_00009800:
     GH_IOLockUnlock(accel[0x210]);
     result = 0;
   }
   else {
-    if (textureID < M<UInt32>(M<SInt32>(param_1 + 0x88) + 0x14)) {
-      iVar3 = M<SInt32>(textureID * 4 + M<SInt32>(M<SInt32>(param_1 + 0x88) + 0x10));
+    if (textureID < M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_clientHandle) + 0x14)) {
+      iVar3 = M<SInt32>(textureID * 4 + M<SInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_clientHandle) + 0x10));
       texture = iVar3;
       if (iVar3 != 0) {
         iVar3 = (mipAndFace >> 0x10) * 2 + M<SInt32>(iVar3 + 0x14);
@@ -57,7 +57,7 @@ LAB_00009800:
            * r5=mipAndFace>>16, r6=mipAndFace&0xffff - all still live in registers from the check above. The earlier port
            * dropped the three arguments (implicit-argument forwarding), so the callee read a NULL texture. */
           VCALL(*accel, 0x52c)(accel, texture, mipAndFace >> 0x10, mipAndFace & 0xffff);
-          accel = M<SInt32 *>(param_1 + 200);
+          accel = M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator);
         }
         goto LAB_00009800;
       }

@@ -37,7 +37,7 @@ public:
     IOReturn finish(void);                                                                    /* real addr 0x340a0: shadows the base class's finish() */
 
     IOReturn show_buffer(int bufferIndex, int param2); /* 10, CONFIRMED body (stage8): thin lock wrapper delegating to ATIR500Surface::showbuffer, which is a REAL EMPTY NO-OP in this exact kext build */
-    IOReturn dvd_setup_overlay(int x, int y, int w, int h, int overlayExists); /* 11, CONFIRMED body (stage8): delegates to ATIR500Surface::dvd_setup_overlay - real, stores geometry into the surface's shared this+0x94/0x96/0x98/0x9a fields plus a dirty flag at +0xd94 */
+    IOReturn dvd_setup_overlay(int top, int right, int bottom, int left, int overlayExists); /* 11, CONFIRMED body (stage8): delegates to ATIR500Surface::dvd_setup_overlay - real, stores the rectangle into the surface's shared fields top +0x94, left +0x96, right +0x98, bottom +0x9a (shape_surface derives the overlay width as right - left and height as bottom - top) plus a dirty flag at +0xd94 */
     IOReturn dvd_enable_overlay(int enable); /* 12, CONFIRMED body (stage8): delegates to ATIR500Surface::enable_overlay/disable_overlay, BOTH real empty no-ops in this exact kext build */
     IOReturn read_regs(UInt32 *offsets, UInt32 *outValues, UInt32 byteCount, UInt32 *inOutCount); /* 13, CONFIRMED body: identical masking/validation shape to the 2D context's read_regs - see Sources/ATIR500DVDContext_RawRegs.cpp */
     IOReturn write_regs(UInt32 offset, UInt32 value); /* 14, CONFIRMED body: this DVD variant's real decompiled signature takes a single scalar (offset, value) pair, not an array like the 2D context's write_regs */
@@ -54,7 +54,7 @@ public:
     IOReturn doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize);   /* 18 */
     IOReturn wait_for_stamps(UInt32 waitMain, UInt32 waitIDCT);                /* 19, CONFIRMED body (stage5): calls two distinct vtable methods (0x5fc/0x558) depending on which flags are set - mirrors the GL side's fence pair, confirming the IDCT path uses the same stamp architecture */
     IOReturn check_stamps(UInt32 checkMain, UInt32 checkIDCT, UInt32 *outBothDone); /* 20, CONFIRMED body (stage5): non-blocking poll counterpart to wait_for_stamps */
-    IOReturn setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags); /* 21, CONFIRMED body (stage5): real per-plane geometry setup for the IDCT working surface, writes a control dword combining caller flags with a fixed 0x20000002 base */
+    IOReturn setup_buffers(UInt32 top, UInt32 right, UInt32 bottom, UInt32 left, UInt32 controlFlags); /* 21, CONFIRMED body (stage5): real per-plane geometry setup for the IDCT working surface, writes a control dword combining caller flags with a fixed 0x20000002 base */
 
     /*
      * map_transfer_to_GART - FIXED (issue #1, get-it-linking pass): this

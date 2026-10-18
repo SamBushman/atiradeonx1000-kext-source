@@ -30,10 +30,10 @@
 IOReturn IOATIR500DVDContext::get_surface_size(SInt32*outW, SInt32*outH) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if (M<SInt32>(self + 0xf8) == 0) {
+  if (M<SInt32>(self + kIOATIR500DVDContext_boundSurface) == 0) {
     return 0xe00002bc;
   }
-  *outW = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + 0xf8) + 0xb70) + 0x1c);
-  *outH = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + 0xf8) + 0xb70) + 0x1e);
+  *outW = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xb70) + 0x1c);
+  *outH = (UInt32)M<UInt16>(M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xb70) + 0x1e);
   return 0;
 }

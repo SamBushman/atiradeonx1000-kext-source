@@ -30,9 +30,9 @@
 IOReturn IOATIR500GLContext::clientClose() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if (M<SInt32>(self + 0x294) != 0) {
-    VCALL(M<SInt32>(self), 0x34c)(self,M<UInt32>(self + 200));
-    VCALL(M<SInt32>(self), 0x3a8)(self,M<UInt32>(self + 200));
+  if (M<SInt32>(self + kIOATIR500GLContext_started) != 0) {
+    VCALL(M<SInt32>(self), 0x34c)(self,M<UInt32>(self + kIOATIR500GLContext_accelerator));
+    VCALL(M<SInt32>(self), 0x3a8)(self,M<UInt32>(self + kIOATIR500GLContext_accelerator));
   }
   return 0;
 }

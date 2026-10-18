@@ -39,15 +39,15 @@ void IOATIR500DVDContext::stop(IOService *provider) {
   int iVar4;
   UInt8 *pIVar5;
   
-  M<UInt32>(self + 0xfc) = 0;
-  piVar2 = M<int *>(self + 0x8c);
+  M<UInt32>(self + kIOATIR500DVDContext_started) = 0;
+  piVar2 = M<int *>(self + kIOATIR500DVDContext_accelerator);
   pIVar5 = (UInt8 *)piVar2[0x1a];
   if (self == (UInt8 *)piVar2[0x1a]) {
-    piVar2[0x1a] = M<int>(self + 0x80);
-    piVar2 = M<int *>(self + 0x8c);
+    piVar2[0x1a] = M<int>(self + kIOATIR500DVDContext_nextLiveContext);
+    piVar2 = M<int *>(self + kIOATIR500DVDContext_accelerator);
     if ((piVar2[0x1a] == 0) && (piVar2[0x18] == 0)) {
       VCALL(*piVar2, 0x538)(piVar2);
-      piVar2 = M<int *>(self + 0x8c);
+      piVar2 = M<int *>(self + kIOATIR500DVDContext_accelerator);
     }
   }
   else {
@@ -56,12 +56,12 @@ void IOATIR500DVDContext::stop(IOService *provider) {
       pIVar5 = M<UInt8 *>(previous + 0x80);
       if (pIVar5 == (UInt8 *)0x0) break;
     } while (self != pIVar5);
-    M<UInt32>(previous + 0x80) = M<UInt32>(self + 0x80);
+    M<UInt32>(previous + 0x80) = M<UInt32>(self + kIOATIR500DVDContext_nextLiveContext);
   }
   piVar2[0x1cf] = piVar2[0x1cf] + -1;
-  M<UInt32>(M<int>(self + 0x8c) + 0x5c8) = 0x20000;
-  if (M<int>(self + 0x98) != 0) {
-    iVar3 = M<int>(self + 0x8c);
+  M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x5c8) = 0x20000;
+  if (M<int>(self + kIOATIR500DVDContext_commandBufferDescriptor) != 0) {
+    iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
     iVar4 = M<int>(iVar3 + 0x60);
     if (iVar4 == 0) {
       if (M<int>(iVar3 + 0x68) == 0) goto LAB_0000e548;
@@ -71,15 +71,15 @@ void IOATIR500DVDContext::stop(IOService *provider) {
         if (M<unsigned int>(iVar3 + 0x5c8) < M<unsigned int>(iVar4 + 0xb0)) {
           M<unsigned int>(iVar3 + 0x5c8) = M<unsigned int>(iVar4 + 0xb0);
         }
-        piVar2 = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar4,M<UInt32>(self + 0x98));
+        piVar2 = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar4,M<UInt32>(self + kIOATIR500DVDContext_commandBufferDescriptor));
         if (piVar2 != (int *)0x0) {
           VCALL(*piVar2, 0x18)(piVar2);
         }
         iVar4 = M<int>(iVar4 + 0x80);
         if (iVar4 == 0) break;
-        iVar3 = M<int>(self + 0x8c);
+        iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
       }
-      iVar3 = M<int>(self + 0x8c);
+      iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
     }
     iVar4 = M<int>(iVar3 + 0x68);
     if (iVar4 != 0) {
@@ -87,45 +87,45 @@ void IOATIR500DVDContext::stop(IOService *provider) {
         if (M<unsigned int>(iVar3 + 0x5c8) < 0x80000) {
           M<UInt32>(iVar3 + 0x5c8) = 0x80000;
         }
-        piVar2 = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar4,M<UInt32>(self + 0x98));
+        piVar2 = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar4,M<UInt32>(self + kIOATIR500DVDContext_commandBufferDescriptor));
         if (piVar2 != (int *)0x0) {
           VCALL(*piVar2, 0x18)(piVar2);
         }
         iVar4 = M<int>(iVar4 + 0x80);
         if (iVar4 == 0) break;
-        iVar3 = M<int>(self + 0x8c);
+        iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
       }
     }
   }
 LAB_0000e548:
-  if (M<int>(self + 0xb4) != 0) {
+  if (M<int>(self + kIOATIR500DVDContext_contextBufferDescriptor) != 0) {
     this->freeAllContextBuffers();
   }
-  if (M<int>(self + 0x98) != 0) {
-    ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0x90)));
+  if (M<int>(self + kIOATIR500DVDContext_commandBufferDescriptor) != 0) {
+    ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_commandBuffer)));
   }
-  if (self == M<UInt8 *>(M<int>(self + 0x8c) + 0x78)) {
-    M<UInt32>(M<int>(self + 0x8c) + 0x78) = 0;
+  if (self == M<UInt8 *>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x78)) {
+    M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x78) = 0;
   }
-  if (M<UInt8 *>(self + 0xf8) != (UInt8 *)0x0) {
-    ((IOATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->remove_dvd_context((IOATIR500DVDContext *)(self));
-    ((IOATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->prune_buffers();
-    M<UInt32>(self + 0xf8) = 0;
+  if (M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface) != (UInt8 *)0x0) {
+    ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->remove_dvd_context((IOATIR500DVDContext *)(self));
+    ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->prune_buffers();
+    M<UInt32>(self + kIOATIR500DVDContext_boundSurface) = 0;
   }
-  if (M<int>(self + 0x84) != 0) {
+  if (M<int>(self + kIOATIR500DVDContext_sharedAllocator) != 0) {
     pIVar5 = self;
     do {
       if (M<int>(pIVar5 + 0x104) != 0) {
         iVar3 = GH_OSDecrementAtomic(M<int>(M<int>(pIVar5 + 0x104) + 0x14) + 0x10);
         if (iVar3 == 1) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(pIVar5 + 0x104)));
+          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(pIVar5 + 0x104)));
         }
         M<UInt32>(pIVar5 + 0x104) = 0;
       }
       pIVar5 = pIVar5 + 4;
     } while (pIVar5 != self + 0x48);
-    VCALL(*M<int *>(self + 0x84), 0x18)(M<int *>(self + 0x84));
-    M<UInt32>(self + 0x84) = 0;
+    VCALL(*M<int *>(self + kIOATIR500DVDContext_sharedAllocator), 0x18)(M<int *>(self + kIOATIR500DVDContext_sharedAllocator));
+    M<UInt32>(self + kIOATIR500DVDContext_sharedAllocator) = 0;
   }
   IOUserClient::stop(provider);   /* the shipped body tail-calls the base class (SUB_60000000 = its lazy-binding stub) */
   return;

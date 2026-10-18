@@ -41,59 +41,59 @@ IOReturn ATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32*options, IOM
   }
   else {
     if (type == 4) {
-      GH_IOLockLock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
-      if (M<int>(self + 0x164) == 0) {
-        VCALL(*M<int *>(self + 0x8c), 0x5ec)
-                  (M<int *>(self + 0x8c),M<UInt32>(self + 0x194));
-        VCALL(*M<int *>(self + 0x18c), 0x14)(M<int *>(self + 0x18c));
+      GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+      if (M<int>(self + kATIR500DVDContext_lumaBufferToggle) == 0) {
+        VCALL(*M<int *>(self + kIOATIR500DVDContext_accelerator), 0x5ec)
+                  (M<int *>(self + kIOATIR500DVDContext_accelerator),M<UInt32>(self + kATIR500DVDContext_idctLumaBuffer1Stamp));
+        VCALL(*M<int *>(self + kATIR500DVDContext_idctLumaBuffer1Descriptor), 0x14)(M<int *>(self + kATIR500DVDContext_idctLumaBuffer1Descriptor));
         *options = 0;
-        *memory = M<IOMemoryDescriptor *>(self + 0x18c);
-        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0x198)),
-                   M<UInt32>(self + 0x19c),0);
-        M<UInt32>(M<int>(self + 0x198) + 0x18) = M<UInt32>(self + 0x150);
-        M<UInt32>(self + 0x164) = 1;
+        *memory = M<IOMemoryDescriptor *>(self + kATIR500DVDContext_idctLumaBuffer1Descriptor);
+        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + kATIR500DVDContext_idctLumaBuffer1Header)),
+                   M<UInt32>(self + kATIR500DVDContext_idctLumaBuffer1Size),0);
+        M<UInt32>(M<int>(self + kATIR500DVDContext_idctLumaBuffer1Header) + 0x18) = M<UInt32>(self + kATIR500DVDContext_idctTimeStampCounter);
+        M<UInt32>(self + kATIR500DVDContext_lumaBufferToggle) = 1;
       }
       else {
-        VCALL(*M<int *>(self + 0x8c), 0x5ec)
-                  (M<int *>(self + 0x8c),M<UInt32>(self + 0x178));
-        VCALL(*M<int *>(self + 0x170), 0x14)(M<int *>(self + 0x170));
+        VCALL(*M<int *>(self + kIOATIR500DVDContext_accelerator), 0x5ec)
+                  (M<int *>(self + kIOATIR500DVDContext_accelerator),M<UInt32>(self + kATIR500DVDContext_idctLumaBuffer0Stamp));
+        VCALL(*M<int *>(self + kATIR500DVDContext_idctLumaBuffer0Descriptor), 0x14)(M<int *>(self + kATIR500DVDContext_idctLumaBuffer0Descriptor));
         *options = 0;
-        *memory = M<IOMemoryDescriptor *>(self + 0x170);
-        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0x17c)),
-                   M<UInt32>(self + 0x180),0);
-        M<UInt32>(M<int>(self + 0x17c) + 0x18) = M<UInt32>(self + 0x150);
-        M<UInt32>(self + 0x164) = 0;
+        *memory = M<IOMemoryDescriptor *>(self + kATIR500DVDContext_idctLumaBuffer0Descriptor);
+        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + kATIR500DVDContext_idctLumaBuffer0Header)),
+                   M<UInt32>(self + kATIR500DVDContext_idctLumaBuffer0Size),0);
+        M<UInt32>(M<int>(self + kATIR500DVDContext_idctLumaBuffer0Header) + 0x18) = M<UInt32>(self + kATIR500DVDContext_idctTimeStampCounter);
+        M<UInt32>(self + kATIR500DVDContext_lumaBufferToggle) = 0;
       }
     }
     else {
       if (type != 5) {
         return 0xe00002c2;
       }
-      GH_IOLockLock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
-      if (M<int>(self + 0x1a0) == 0) {
-        VCALL(*M<int *>(self + 0x8c), 0x5ec)
-                  (M<int *>(self + 0x8c),M<UInt32>(self + 0x1d0));
-        VCALL(*M<int *>(self + 0x1c8), 0x14)(M<int *>(self + 0x1c8));
+      GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+      if (M<int>(self + kATIR500DVDContext_chromaBufferToggle) == 0) {
+        VCALL(*M<int *>(self + kIOATIR500DVDContext_accelerator), 0x5ec)
+                  (M<int *>(self + kIOATIR500DVDContext_accelerator),M<UInt32>(self + kATIR500DVDContext_idctChromaBuffer1Stamp));
+        VCALL(*M<int *>(self + kATIR500DVDContext_idctChromaBuffer1Descriptor), 0x14)(M<int *>(self + kATIR500DVDContext_idctChromaBuffer1Descriptor));
         *options = 0;
-        *memory = M<IOMemoryDescriptor *>(self + 0x1c8);
-        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0x1d4)),
-                   M<UInt32>(self + 0x1d8),0);
-        M<UInt32>(M<int>(self + 0x1d4) + 0x18) = M<UInt32>(self + 0x150);
-        M<UInt32>(self + 0x1a0) = 1;
+        *memory = M<IOMemoryDescriptor *>(self + kATIR500DVDContext_idctChromaBuffer1Descriptor);
+        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + kATIR500DVDContext_idctChromaBuffer1Header)),
+                   M<UInt32>(self + kATIR500DVDContext_idctChromaBuffer1Size),0);
+        M<UInt32>(M<int>(self + kATIR500DVDContext_idctChromaBuffer1Header) + 0x18) = M<UInt32>(self + kATIR500DVDContext_idctTimeStampCounter);
+        M<UInt32>(self + kATIR500DVDContext_chromaBufferToggle) = 1;
       }
       else {
-        VCALL(*M<int *>(self + 0x8c), 0x5ec)
-                  (M<int *>(self + 0x8c),M<UInt32>(self + 0x1b4));
-        VCALL(*M<int *>(self + 0x1ac), 0x14)(M<int *>(self + 0x1ac));
+        VCALL(*M<int *>(self + kIOATIR500DVDContext_accelerator), 0x5ec)
+                  (M<int *>(self + kIOATIR500DVDContext_accelerator),M<UInt32>(self + kATIR500DVDContext_idctChromaBuffer0Stamp));
+        VCALL(*M<int *>(self + kATIR500DVDContext_idctChromaBuffer0Descriptor), 0x14)(M<int *>(self + kATIR500DVDContext_idctChromaBuffer0Descriptor));
         *options = 0;
-        *memory = M<IOMemoryDescriptor *>(self + 0x1ac);
-        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0x1b8)),
-                   M<UInt32>(self + 0x1bc),0);
-        M<UInt32>(M<int>(self + 0x1b8) + 0x18) = M<UInt32>(self + 0x150);
-        M<UInt32>(self + 0x1a0) = 0;
+        *memory = M<IOMemoryDescriptor *>(self + kATIR500DVDContext_idctChromaBuffer0Descriptor);
+        ((IOATIR500DVDContext *)((UInt8 *)self))->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + kATIR500DVDContext_idctChromaBuffer0Header)),
+                   M<UInt32>(self + kATIR500DVDContext_idctChromaBuffer0Size),0);
+        M<UInt32>(M<int>(self + kATIR500DVDContext_idctChromaBuffer0Header) + 0x18) = M<UInt32>(self + kATIR500DVDContext_idctTimeStampCounter);
+        M<UInt32>(self + kATIR500DVDContext_chromaBufferToggle) = 0;
       }
     }
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
     result = 0;
   }
   return result;

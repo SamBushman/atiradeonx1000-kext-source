@@ -35,8 +35,8 @@ IOReturn IOATIR500DVDContext::unlock_memory(UInt32 lockType, UInt32*outTag) {
   SInt32 surface;
   SInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  surface = M<SInt32>(self + 0xf8);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  surface = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
   if (surface == 0) {
     result = -0x1ffffd3e;
   }
@@ -44,7 +44,7 @@ IOReturn IOATIR500DVDContext::unlock_memory(UInt32 lockType, UInt32*outTag) {
     result = 0;
     M<SInt16>(surface + 0xbd2) = M<SInt16>(surface + 0xbd2) + -1;
   }
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   if ((result == 0) && ((SInt32)lockType < 0)) {
     *outTag = 0;
   }

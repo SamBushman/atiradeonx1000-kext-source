@@ -38,11 +38,11 @@ void IOATIR500GLContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
    * clobbered since function entry (`mr r30,r4` copies without clearing it), so it's still the
    * real buffer value at the call. The naive 1-argument transcription dropped that implicit
    * second argument, which our own compiler does not replicate - restoring it explicitly. */
-  iVar1 = VCALL(*M<SInt32 *>(self + 200), 0x5a8)(M<SInt32 *>(self + 200), bufferBytes);
+  iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x5a8)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator), bufferBytes);
   if (iVar1 == 0) {
-    ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
-               (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)(self),(IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
-               (IOATIR500Shared *)(M<UInt8 *>(self + 0x88)),(VendorTransferBuffer *)(bufferBytes));
+    ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+               (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)(self),(IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)),
+               (IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)),(VendorTransferBuffer *)(bufferBytes));
   }
   return;
 }

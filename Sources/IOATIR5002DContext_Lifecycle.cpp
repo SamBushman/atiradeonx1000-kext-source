@@ -93,7 +93,7 @@ bool IOATIR5002DContext::start(IOService *provider) {
     U32At(accel, 0x64) = reinterpret_cast<UInt32>(this);
     U32At(reinterpret_cast<void *>(U32At(self, 0x94)), 0x734) += 1;
     if (accelerator->getVRAMDescriptors() &&
-        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x98), 0x1000) &&
+        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kIOATIR5002DContext_commandBuffer), 0x1000) &&
         allocAllContextBuffers(0x1000)) {
         U32At(self, 0x108) = 1;
         U32At(self, 0x10c) = reinterpret_cast<UInt32>(kTwoDBaseMethods);
@@ -157,7 +157,7 @@ void IOATIR5002DContext::stop(IOService *provider) {
         freeAllContextBuffers();
     }
     if (U32At(self, 0xa0) != 0) {
-        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x98));
+        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kIOATIR5002DContext_commandBuffer));
     }
     accel = reinterpret_cast<UInt8 *>(U32At(self, 0x94));
     if (self == reinterpret_cast<UInt8 *>(U32At(accel, 0x78))) {

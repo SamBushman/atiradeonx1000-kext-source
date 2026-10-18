@@ -32,10 +32,10 @@ IOExternalMethod *ATIR500GLContext::getTargetAndMethodForIndex(IOService**target
 
   *target = reinterpret_cast<IOService *>(this);
   if (selector < 0x14) {
-    return (IOExternalMethod *)(selector * 0x18 + M<SInt32>(self + 0x2a0));
+    return (IOExternalMethod *)(selector * 0x18 + M<SInt32>(self + kIOATIR500GLContext_regularMethodTable));
   }
   if (selector != 0x14) {
     return 0;
   }
-  return (IOExternalMethod *)(*(SInt32 *)(self + 0x360));
+  return (IOExternalMethod *)(*(SInt32 *)(self + kATIR500GLContext_specialMethodTable));
 }

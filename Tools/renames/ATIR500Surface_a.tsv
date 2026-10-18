@@ -7,10 +7,10 @@ def	ATIR500Surface::alloc_surface_buffer@0x3e230	param_1	bufferBytes	INFERRED	na
 def	ATIR500Surface::complete_vram@0x3c000	real_param_1	buffer	INFERRED	name from the class header declaration
 def	ATIR500Surface::complete_vram@0x3c000	param_1	bufferBytes	INFERRED	name from the class header declaration
 def	ATIR500Surface::dealloc_surface@0x3df70	param_1	surfaceIndex	INFERRED	name from the class header declaration
-def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_1	x	INFERRED	name from the class header declaration
-def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_2	y	INFERRED	name from the class header declaration
-def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_3	w	INFERRED	name from the class header declaration
-def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_4	h	INFERRED	name from the class header declaration
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_1	top	CONFIRMED	first argument is stored at surface+0x94, the rectangle top: ATIR500Surface::shape_surface computes the overlay height as (+0x9a) - (+0x94); dvd_setup_overlay and setup_buffers store their arguments to the same four fields in the same order (the x/y/w/h and topHeight/leftWidth/bottomHeight/rightWidth names guessed earlier disagreed with each other)
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_2	right	CONFIRMED	second argument is stored at surface+0x98, the rectangle right edge: shape_surface computes the overlay width as (+0x98) - (+0x96)
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_3	bottom	CONFIRMED	third argument is stored at surface+0x9a, the rectangle bottom: shape_surface computes the overlay height as (+0x9a) - (+0x94)
+def	ATIR500Surface::dvd_setup_overlay@0x3a6e0	param_4	left	CONFIRMED	fourth argument is stored at surface+0x96, the rectangle left edge: shape_surface computes the overlay width as (+0x98) - (+0x96)
 def	ATIR500Surface::enable_deint@0x3a800	param_1	mode	INFERRED	name from the class header declaration
 def	ATIR500Surface::filter_setup@0x398f0	param_1	scale	INFERRED	name from the class header declaration
 def	ATIR500Surface::filter_setup@0x398f0	real_param_2	regs	INFERRED	name from the class header declaration

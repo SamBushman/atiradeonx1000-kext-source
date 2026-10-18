@@ -29,29 +29,29 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x34d50 */
-IOReturn ATIR500DVDContext::dvd_setup_overlay(int x, int y, int w, int h, int overlayExists) {
+IOReturn ATIR500DVDContext::dvd_setup_overlay(int top, int right, int bottom, int left, int overlayExists) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 accel;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  accel = M<SInt32>(self + 0x8c);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   if (M<char>(accel + 0x80) == '\0') {
     result = 0xe00002d8;
   }
-  else if (M<SInt32>(self + 0xf8) == 0) {
+  else if (M<SInt32>(self + kIOATIR500DVDContext_boundSurface) == 0) {
     result = 0xe00002bc;
   }
   else {
-    M<SInt32>(M<SInt32>(self + 0xf8) + 0xda4) = overlayExists;
+    M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xda4) = overlayExists;
     if (overlayExists == 0) {
-      M<UInt8>(M<SInt32>(self + 0xf8) + 0xbed) = 1;
-      M<UInt8>(M<SInt32>(self + 0xf8) + 0xbee) = 1;
+      M<UInt8>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xbed) = 1;
+      M<UInt8>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xbee) = 1;
     }
     result = 0;
-    ((ATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->dvd_setup_overlay(x,y,w,h);
-    accel = M<SInt32>(self + 0x8c);
+    ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->dvd_setup_overlay(top,right,bottom,left);
+    accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   }
   GH_IOLockUnlock(M<UInt32>(accel + 0x840));
   return result;

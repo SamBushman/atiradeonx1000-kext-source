@@ -40,18 +40,18 @@ IOReturn IOATIR5002DContext::declare_image(UInt32 unused, unsigned int address, 
     result = 0xe00002c2;
   }
   else {
-    GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    shared = M<UInt8 *>(self + 0x88);
+    GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
+    shared = M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator);
     if (shared == (UInt8 *)0x0) {
       iVar1 = this->create_shared();
       if (iVar1 == 0) {
-        GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
+        GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
         return 0xe00002be;
       }
-      shared = M<UInt8 *>(self + 0x88);
+      shared = M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator);
     }
     iVar1 = (SInt32)((IOATIR500Shared *)(shared))->new_agp_texture(address, length, (unsigned int *)(outUserAddr));
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
     result = 0;
     if (iVar1 == 0) {
       result = 0xe00002bd;

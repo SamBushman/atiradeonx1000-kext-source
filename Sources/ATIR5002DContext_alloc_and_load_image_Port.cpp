@@ -42,16 +42,16 @@ void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
       iVar1 = M<int>(textureBytes + 0x34);
       M<UInt32>(iVar1 + 0x38) = M<UInt32>(textureBytes + 0x38);
       M<int>(M<int>(textureBytes + 0x38) + 0x34) = iVar1;
-      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + 0x94) + 0x6d0);
-      M<int>(textureBytes + 0x38) = M<int>(self + 0x94) + 0x69c;
-      M<UInt8 *>(M<int>(self + 0x94) + 0x6d0) = textureBytes;
+      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0);
+      M<int>(textureBytes + 0x38) = M<int>(self + kIOATIR5002DContext_accelerator) + 0x69c;
+      M<UInt8 *>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<int>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
     if (((M<int>(textureBytes + 0x48) == 0) &&
-        (iVar1 = VCALL(*M<int *>(self + 0x94), 0x528)(M<int *>(self + 0x94),textureBytes),
+        (iVar1 = VCALL(*M<int *>(self + kIOATIR5002DContext_accelerator), 0x528)(M<int *>(self + kIOATIR5002DContext_accelerator),textureBytes),
         iVar1 == 0)) &&
-       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x100)),
-                           (VendorTextureBuffer **)((UInt8 **)(self + 0x114)),1,(VendorTextureBuffer *)(textureBytes)), iVar1 == 0)) {
+       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR5002DContext_boundSurface)),
+                           (VendorTextureBuffer **)((UInt8 **)(self + kIOATIR5002DContext_lastBoundTexture)),1,(VendorTextureBuffer *)(textureBytes)), iVar1 == 0)) {
       return;
     }
   }
@@ -66,9 +66,9 @@ void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
       iVar1 = M<int>(textureBytes + 0x34);
       M<UInt32>(iVar1 + 0x38) = M<UInt32>(textureBytes + 0x38);
       M<int>(M<int>(textureBytes + 0x38) + 0x34) = iVar1;
-      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + 0x94) + 0x6d0);
-      M<int>(textureBytes + 0x38) = M<int>(self + 0x94) + 0x69c;
-      M<UInt8 *>(M<int>(self + 0x94) + 0x6d0) = textureBytes;
+      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0);
+      M<int>(textureBytes + 0x38) = M<int>(self + kIOATIR5002DContext_accelerator) + 0x69c;
+      M<UInt8 *>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<int>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
   }

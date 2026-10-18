@@ -74,39 +74,39 @@ LAB_000344b0:
           M<UInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38) + 0x34) =
                M<UInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34);
           M<UInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) =
-               M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
-          M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
-          M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0) = M<UInt32>(pAVar21 + 0x104);
+               M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
+          M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+          M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = M<UInt32>(pAVar21 + 0x104);
           M<SInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) + 0x38) = M<SInt32>(pAVar21 + 0x104);
         }
         M<UInt8>(M<SInt32>(M<SInt32>(textureSlot) + 0x14) + 0x14) = 0;
-        M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) = M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) | 1;
+        M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) | 1;
       }
       iVar1 = M<SInt32>(textureSlot);
       if (M<SInt32>(iVar1 + 0x48) != 0) {
         M<UInt32>(M<SInt32>(iVar1 + 0x24) + 0x28) = M<UInt32>(iVar1 + 0x28);
         M<UInt32>(M<SInt32>(M<SInt32>(textureSlot) + 0x28) + 0x24) =
              M<UInt32>(M<SInt32>(textureSlot) + 0x24);
-        M<UInt32>(M<SInt32>(textureSlot) + 0x24) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x600);
-        M<SInt32>(M<SInt32>(textureSlot) + 0x28) = M<SInt32>(self + 0x8c) + 0x5dc;
-        M<SInt32>(M<SInt32>(self + 0x8c) + 0x600) = M<SInt32>(textureSlot);
+        M<UInt32>(M<SInt32>(textureSlot) + 0x24) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x600);
+        M<SInt32>(M<SInt32>(textureSlot) + 0x28) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x5dc;
+        M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x600) = M<SInt32>(textureSlot);
         M<SInt32>(M<SInt32>(M<SInt32>(textureSlot) + 0x24) + 0x28) = M<SInt32>(textureSlot);
       }
     }
     pAVar21 = pAVar21 + 4;
     if (pAVar21 == self + 0x48) {
-      if ((M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) & 1) == 0) {
-        pAVar21 = self + M<SInt32>(self + 0xf4) * 0x18;
+      if ((M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) & 1) == 0) {
+        pAVar21 = self + M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) * 0x18;
       }
       else {
-        accel = M<SInt32 *>(self + 0x8c);
-        uVar7 = M<SInt32>(self + 0xf4) + 1U & 1;
-        M<UInt32>(self + 0xf4) = uVar7;
+        accel = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
+        uVar7 = M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) + 1U & 1;
+        M<UInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) = uVar7;
         pAVar21 = self + uVar7 * 0x18;
         iVar22 = accel[0x1e1];
         iVar1 = VCALL(*accel, 0x54c)(accel,M<UInt32>(pAVar21 + 0xd4));
         accel[0x1e1] = iVar22 + iVar1;
-        header = M<UInt32 *>(self + 0xc0);
+        header = M<UInt32 *>(self + kIOATIR500DVDContext_contextBufferHeader);
         slotHeader = M<UInt32 *>(pAVar21 + 0xd8);
         uVar13 = header[1];
         uVar11 = header[2];
@@ -122,7 +122,7 @@ LAB_000344b0:
         slotHeader[7] = uVar8;
         slotHeader[4] = uVar13;
         slotHeader[6] = uVar11;
-        iVar1 = M<SInt32>(self + 0xc0);
+        iVar1 = M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader);
         iVar22 = M<SInt32>(pAVar21 + 0xd8);
         dwordCount = M<SInt32>(iVar1 + 0x14);
         payload = iVar22 + 0x20;
@@ -171,7 +171,7 @@ LAB_000344b0:
         M<UInt32>(payload + iVar23 * 4) = 0x70000;
         M<UInt32>(payload + iVar3 * 4) = 0x1006;
         M<UInt32>(payload + iVar16 * 4) =
-             M<UInt32>(M<SInt32>(self + 0x8c) + 0xb74) & 0xfffeffff | 0x10000;
+             M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0xb74) & 0xfffeffff | 0x10000;
         iVar1 = 0x12;
         do {
           iVar1 = iVar1 + -1;
@@ -182,18 +182,18 @@ LAB_000344b0:
           M<UInt32>(payload + iVar1) = 0x80000000;
         }
         M<UInt32>(iVar22 + 0x14) = uVar7;
-        M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) =
-             M<UInt32>(M<SInt32>(self + 0xc0) + 0x1c) & 0xfffffffe;
+        M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) =
+             M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) & 0xfffffffe;
       }
       if (M<SInt32>(pAVar21 + 200) == 0) {
         ((IOATIR500DVDContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(pAVar21 + 0xc4)));
       }
-      M<SInt32>(M<SInt32>(self + 0x8c) + 0x708) =
-           M<SInt32>(M<SInt32>(pAVar21 + 0xd8) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + 0x8c) + 0x708);
-      uVar8 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0x8c)))->submit_buffer((UInt32 *)(M<SInt32>(pAVar21 + 0xd8) + 0x20),M<SInt32>(pAVar21 + 200) + 0x20,
+      M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708) =
+           M<SInt32>(M<SInt32>(pAVar21 + 0xd8) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708);
+      uVar8 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(pAVar21 + 0xd8) + 0x20),M<SInt32>(pAVar21 + 200) + 0x20,
                          M<UInt32>(M<SInt32>(pAVar21 + 0xd8) + 0x14));
       M<UInt32>(pAVar21 + 0xd4) = uVar8;
-      M<UInt32>(self + 0x7c) = uVar8;
+      M<UInt32>(self + kIOATIR500DVDContext_lastSubmitStamp) = uVar8;
       return;
     }
   } while( true );

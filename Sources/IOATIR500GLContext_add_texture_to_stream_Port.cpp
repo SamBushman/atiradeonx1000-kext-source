@@ -49,9 +49,9 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
       iVar3 = M<int>(iVar4 + 0x34);
       M<UInt32>(iVar3 + 0x38) = M<UInt32>(iVar4 + 0x38);
       M<int>(M<int>(iVar4 + 0x38) + 0x34) = iVar3;
-      M<UInt32>(iVar4 + 0x34) = M<UInt32>(M<int>(self + 200) + 0x6d0);
-      M<int>(iVar4 + 0x38) = M<int>(self + 200) + 0x69c;
-      M<int>(M<int>(self + 200) + 0x6d0) = iVar4;
+      M<UInt32>(iVar4 + 0x34) = M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x6d0);
+      M<int>(iVar4 + 0x38) = M<int>(self + kIOATIR500GLContext_accelerator) + 0x69c;
+      M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = iVar4;
       M<int>(M<int>(iVar4 + 0x34) + 0x38) = iVar4;
     }
   }

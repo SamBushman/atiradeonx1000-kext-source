@@ -35,24 +35,24 @@ IOReturn IOATIR5002DContext::finish(UInt32 mode) {
   SInt32 iVar3;
   
   if (mode == 1) {
-    piVar2 = M<SInt32 *>(self + 0x94);
+    piVar2 = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
     iVar3 = piVar2[0x14];
     pcVar1 = M<code *>(*piVar2 + 0x55c);
   }
   else {
     if (mode == 0) {
-      iVar3 = VCALL(*M<SInt32 *>(self + 0x94), 0x55c)
-                        (M<SInt32 *>(self + 0x94),M<UInt32>(self + 0x7c));
+      iVar3 = VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_accelerator), 0x55c)
+                        (M<SInt32 *>(self + kIOATIR5002DContext_accelerator),M<UInt32>(self + kIOATIR5002DContext_lastSubmitStamp));
       if (iVar3 == -1) {
         return 0xe00002d6;
       }
-      M<SInt32>(M<SInt32>(self + 0x94) + 0x7a4) = iVar3 + M<SInt32>(M<SInt32>(self + 0x94) + 0x7a4);
+      M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a4) = iVar3 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a4);
       return 0;
     }
     if (mode != 2) {
       return 0xe00002c2;
     }
-    piVar2 = M<SInt32 *>(self + 0x94);
+    piVar2 = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
     iVar3 = piVar2[0x14];
     pcVar1 = M<code *>(*piVar2 + 0x558);
   }
@@ -60,6 +60,6 @@ IOReturn IOATIR5002DContext::finish(UInt32 mode) {
   if (iVar3 == -1) {
     return 0xe00002d6;
   }
-  M<SInt32>(M<SInt32>(self + 0x94) + 0x7a0) = iVar3 + M<SInt32>(M<SInt32>(self + 0x94) + 0x7a0);
+  M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a0) = iVar3 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a0);
   return 0;
 }

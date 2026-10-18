@@ -38,17 +38,17 @@ void IOATIR500DVDContext::freeAllContextBuffers() {
   SInt32 iVar6;
   UInt8 *slotBase;
   
-  slot = self + 0xc4;
+  slot = self + kIOATIR500DVDContext_contextBufferRing;
   slotIndex = 0;
-  accel = M<SInt32 *>(self + 0x8c);
+  accel = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
   iVar6 = accel[0x1e1];
   iVar2 = VCALL(*accel, 0x54c)
-                    (accel,M<UInt32>(self + M<SInt32>(self + 0xf4) * 0x18 + 0xd4));
+                    (accel,M<UInt32>(self + M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) * 0x18 + 0xd4));
   accel[0x1e1] = iVar6 + iVar2;
   slotBase = self;
   do {
     if (M<SInt32>(slotBase + 200) != 0) {
-      VCALL(*M<SInt32 *>(self + 0x8c), 0x5ac)(M<SInt32 *>(self + 0x8c),slot);
+      VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500DVDContext_accelerator),slot);
     }
     slot = slot + 0x18;
     VCALL(*M<SInt32 *>(slotBase + 0xcc), 0x18)(M<SInt32 *>(slotBase + 0xcc));
@@ -63,13 +63,13 @@ void IOATIR500DVDContext::freeAllContextBuffers() {
     slotIndex = slotIndex + 1;
     slotBase = slotBase + 0x18;
   } while (more);
-  VCALL(*M<SInt32 *>(self + 0xb4), 0x18)(M<SInt32 *>(self + 0xb4));
-  M<UInt16>(self + 0xba) = 0;
-  M<UInt16>(self + 0xb8) = 0;
-  M<UInt32>(self + 0xc0) = 0;
-  M<UInt32>(self + 0xac) = 0;
-  M<UInt32>(self + 0xb0) = 0;
-  M<UInt32>(self + 0xb4) = 0;
-  M<UInt32>(self + 0xbc) = 0;
+  VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_contextBufferDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR500DVDContext_contextBufferDescriptor));
+  M<UInt16>(self + kIOATIR500DVDContext_contextBufferInFlight) = 0;
+  M<UInt16>(self + kIOATIR500DVDContext_contextBufferType) = 0;
+  M<UInt32>(self + kIOATIR500DVDContext_contextBufferHeader) = 0;
+  M<UInt32>(self + kIOATIR500DVDContext_contextBuffer) = 0;
+  M<UInt32>(self + kIOATIR500DVDContext_contextBufferGartOffset) = 0;
+  M<UInt32>(self + kIOATIR500DVDContext_contextBufferDescriptor) = 0;
+  M<UInt32>(self + kIOATIR500DVDContext_contextBufferStamp) = 0;
   return;
 }

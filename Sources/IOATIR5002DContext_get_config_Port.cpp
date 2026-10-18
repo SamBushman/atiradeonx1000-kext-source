@@ -30,7 +30,7 @@
 IOReturn IOATIR5002DContext::get_config(UInt32*out0, UInt32*out1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  *out0 = M<UInt32>(M<SInt32>(self + 0x94) + 0x98);
-  *out1 = M<UInt32>(M<SInt32>(self + 0x94) + 0x9c);
+  *out0 = M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x98);
+  *out1 = M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x9c);
   return 0;
 }

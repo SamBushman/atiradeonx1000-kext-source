@@ -38,16 +38,16 @@ bool IOATIR500GLContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
   UInt8 *pIVar5;
   UInt8 *candidate;
   
-  freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0xf4)),
-                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0x104),aggressive);
+  freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500GLContext_contextBuffer)),
+                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500GLContext_contextBufferStamp),aggressive);
   if ((freed == 0) &&
-     (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0xcc)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xdc),
+     (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500GLContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp),
                          aggressive), freed == 0)) {
     freed = 0;
-    candidate = (UInt8 *)(self + 0x10c);
+    candidate = (UInt8 *)(self + kIOATIR500GLContext_contextBufferRing);
     pIVar5 = self;
     do {
-      iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
+      iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
                          M<UInt32>(pIVar5 + 0x11c),aggressive);
       if (iVar3 != 0) goto LAB_00007b30;
       bVar1 = freed != 0xf;
@@ -55,9 +55,9 @@ bool IOATIR500GLContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
       pIVar5 = pIVar5 + 0x18;
       freed = freed + 1;
     } while (bVar1);
-    for (candidate = M<UInt8 *>(self + 0xe8); candidate != (UInt8 *)0x0;
+    for (candidate = M<UInt8 *>(self + kIOATIR500GLContext_dataBufferListHead); candidate != (UInt8 *)0x0;
         candidate = M<UInt8 *>(candidate + 0x3c)) {
-      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
+      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
                          M<UInt32>(candidate + 0x5c),aggressive);
       if (freed != 0) goto LAB_00007b30;
     }

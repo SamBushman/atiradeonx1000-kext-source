@@ -1,0 +1,150 @@
+# Fields_Contexts.tsv - names of the direct `self + 0xOFF` object fields of the GL / DVD / 2D context classes (see `field` in Tools/apply_renames.py).
+# columns: field  CLASSES  OFFSET  name  tier  evidence.  Offsets that are loop end sentinels, not fields, are left as literals: GL 0x44 and 0xa8 (`slotCursor != self + 0x44`, `self + 0xa8 != cursor`), DVD 0x48.
+field	ATIR500DVDContext	0x150	idctTimeStampCounter	INFERRED	doIDCT stores the new timestamp here; clientMemoryForType copies it into the +0x18 word of each of the four IDCT command buffer headers
+field	ATIR500DVDContext	0x154	idctTimeStamp	CONFIRMED	doIDCT copies +0x150 here; process_command_buffer passes it to accelerator vtable +0x5ec (waitForConsumedIDCTTimeStamp)
+field	ATIR500DVDContext	0x158	scissorTopLeft	INFERRED	build_scissor zeroes it (top/left); process_command_buffer embeds it as record word 7
+field	ATIR500DVDContext	0x15c	scissorBottomRight	CONFIRMED	build_scissor stores (right & 0x3fff) | (bottom & 0x3fff) << 16 from the surface size; embedded as record word 8
+field	ATIR500DVDContext	0x160	macrovisionFramebuffer	INFERRED	set_macrovision stores the IOFramebuffer pointer it obtained
+field	ATIR500DVDContext	0x164	lumaBufferToggle	INFERRED	clientMemoryForType types 4: flips 0/1 to alternate between the two luma IDCT command buffers (0x168/0x184); doIDCT tests it
+field	ATIR500DVDContext	0x168	idctLumaBuffer0	CONFIRMED	first VendorCommandBuffer of the four IDCT buffers allocated by start() (size 0x80000), freed by stop()
+field	ATIR500DVDContext	0x170	idctLumaBuffer0Descriptor	CONFIRMED	its descriptor (record +8): released/handed out by clientMemoryForType
+field	ATIR500DVDContext	0x178	idctLumaBuffer0Stamp	CONFIRMED	its stamp (record +0x10): passed to the accelerator wait in clientMemoryForType
+field	ATIR500DVDContext	0x17c	idctLumaBuffer0Header	CONFIRMED	its mapped header (record +0x14): init_command_buffer_header target; +0x18 gets idctTimeStampCounter
+field	ATIR500DVDContext	0x180	idctLumaBuffer0Size	CONFIRMED	its size (record +0x18): second argument of init_command_buffer_header
+field	ATIR500DVDContext	0x184	idctLumaBuffer1	CONFIRMED	second luma IDCT command buffer
+field	ATIR500DVDContext	0x18c	idctLumaBuffer1Descriptor	CONFIRMED	its descriptor (record +8)
+field	ATIR500DVDContext	0x194	idctLumaBuffer1Stamp	CONFIRMED	its stamp (record +0x10)
+field	ATIR500DVDContext	0x198	idctLumaBuffer1Header	CONFIRMED	its mapped header (record +0x14)
+field	ATIR500DVDContext	0x19c	idctLumaBuffer1Size	CONFIRMED	its size (record +0x18)
+field	ATIR500DVDContext	0x1a0	chromaBufferToggle	INFERRED	same alternation as lumaBufferToggle for the chroma pair (0x1a4/0x1c0)
+field	ATIR500DVDContext	0x1a4	idctChromaBuffer0	CONFIRMED	first chroma IDCT command buffer
+field	ATIR500DVDContext	0x1ac	idctChromaBuffer0Descriptor	CONFIRMED	its descriptor (record +8)
+field	ATIR500DVDContext	0x1b4	idctChromaBuffer0Stamp	CONFIRMED	its stamp (record +0x10)
+field	ATIR500DVDContext	0x1b8	idctChromaBuffer0Header	CONFIRMED	its mapped header (record +0x14)
+field	ATIR500DVDContext	0x1bc	idctChromaBuffer0Size	CONFIRMED	its size (record +0x18)
+field	ATIR500DVDContext	0x1c0	idctChromaBuffer1	CONFIRMED	second chroma IDCT command buffer
+field	ATIR500DVDContext	0x1c8	idctChromaBuffer1Descriptor	CONFIRMED	its descriptor (record +8)
+field	ATIR500DVDContext	0x1d0	idctChromaBuffer1Stamp	CONFIRMED	its stamp (record +0x10)
+field	ATIR500DVDContext	0x1d4	idctChromaBuffer1Header	CONFIRMED	its mapped header (record +0x14)
+field	ATIR500DVDContext	0x1d8	idctChromaBuffer1Size	CONFIRMED	its size (record +0x18)
+field	ATIR500GLContext	0x2a4	textureSlots	CONFIRMED	Headers/ATIR500GLContext.h textureSlotArray: base of the per-unit bound-texture slot array (stride 4), refcounted by the bind/unbind opcodes
+field	ATIR500GLContext	0x328	transferBufferSlot	CONFIRMED	Headers/ATIR500GLContext.h: single texture slot of the opcode 0x26/0x27 bind/unbind pair (in-flight counter at texture+0xe is dec'd on unbind)
+field	ATIR500GLContext	0x32c	streamedTexture	INFERRED	texture kept in the command stream: remove_texture_from_stream(+0x32c) then release before it is replaced; set by opcode 0x3b/discard_command_buffer
+field	ATIR500GLContext	0x334	pinnedTexture	INFERRED	opcode 0x36: previous texture's in-flight counter (texture+0xe) is decremented, the new one's incremented, then stored here
+field	ATIR500GLContext	0x348	renderTargetTexture	INFERRED	texture bound as render target by the opcode that calls build_surface_from_texture (remove_texture_from_stream before it is replaced); Headers/ATIR500GLContext.h calls it secondaryTextureSlotB
+field	ATIR500GLContext	0x34c	unknown_0x34c	UNKNOWN	only start() zeroes it
+field	ATIR500GLContext	0x350	unknown_0x350	UNKNOWN	only start() zeroes it
+field	ATIR500GLContext	0x354	scissorY	CONFIRMED	Headers/ATIR500GLContext.h: live scissor rectangle Y written by build_scissor and embedded in the opcode 0x28/0x29/0x2a packets
+field	ATIR500GLContext	0x358	scissorX	CONFIRMED	Headers/ATIR500GLContext.h: live scissor rectangle X written by build_scissor and embedded in the opcode packets
+field	ATIR500GLContext	0x35c	renderBufferIndex	INFERRED	copy of attachmentBufferIds[0] (same value as colorBufferIndex) set by opcode 0x29; opcode 0x2d indexes surface->attachmentBuffers[] with it
+field	ATIR500GLContext	0x360	specialMethodTable	CONFIRMED	start() stores kGLSpecialMethod20; getTargetAndMethodForIndex returns it for selector 20
+field	ATIR500GLContext	0x364	vertexArrayParam	UNKNOWN	opcode 0x39 stores record word 2 here; WriteVertexArrayOffset tests it for zero
+field	ATIR500GLContext	0x3a8	attachmentCount	CONFIRMED	Headers/ATIR500GLContext.h: count tracked by opcode 0x29 (attachment enumeration); start() zeroes it, process_command_buffer defaults it to 1
+field	ATIR500GLContext	0x3aa	attachmentBufferIds	CONFIRMED	array of four halfwords at +0x3aa filled by opcode 0x29 from the attachment format codes (discard_command_buffer writes slotCursor+0x3aa); element 0 is also stored in colorBufferIndex
+field	ATIR500GLContext	0x3b2	currentAttachment	CONFIRMED	index of the selected attachment: build_scissor/load_texture address unitBuffers[currentAttachment] = self + idx*0x78 + 0x3c0
+field	ATIR500GLContext	0x3bc	renderToTexture	INFERRED	cleared by opcode 0x29, set to 1 when a texture is bound as render target (renderTargetTexture); compute_sc_hyperz_en/compute_zb_bw_cntl then use textureDepthBuffer instead of the surface depth attachment
+field	ATIR500GLContext	0x3c0	unitBuffers	CONFIRMED	base of the six 0x78-byte buffer records (0x3c0..0x690, the end of the object) addressed by currentAttachment; entry 4 is textureDepthBuffer (+0x5a0), entry 5 textureSurfaceBuffer (+0x618)
+field	ATIR500GLContext	0x3f0	perUnitTextureArray	CONFIRMED	Headers/ATIR500GLContext.h: start() initialises the per-unit default blend/format words from here
+field	ATIR500GLContext	0x5a0	textureDepthBuffer	CONFIRMED	ATIR500SurfaceBuffer built by build_surface_from_texture for a depth render target; compute_sc_hyperz_en/compute_zb_bw_cntl/write_r500_zdecompress_restore_add_on_packet use it when renderToTexture is set
+field	ATIR500GLContext	0x5b4	unknown_0x5b4	UNKNOWN	halfword used as the width of the hyper-z allocation ((w + align - 1) / align * align) in the render-target path of process_command_buffer
+field	ATIR500GLContext	0x5b8	unknown_0x5b8	UNKNOWN	halfword copied to textureBuffer+0x78 in the same path
+field	ATIR500GLContext	0x5bc	unknown_0x5bc	UNKNOWN	halfword copied to textureBuffer+0x70; gate (> 0x20) of the hyper-z allocation
+field	ATIR500GLContext	0x5be	unknown_0x5be	UNKNOWN	halfword rounded up to 32 for HZMEM_Alloc and copied to textureBuffer+0x72
+field	ATIR500GLContext	0x5c8	hzMemoryHandle	INFERRED	cached textureBuffer+0x6c (the HZMEM_Alloc result); reset to 0xffffffff when the render target is replaced
+field	ATIR500GLContext	0x5cc	unknown_0x5cc	UNKNOWN	cached textureBuffer+0x7c of the render-target texture
+field	ATIR500GLContext	0x618	textureSurfaceBuffer	INFERRED	ATIR500SurfaceBuffer built by build_surface_from_texture for a colour render target (unitBuffers entry 5)
+field	IOATIR5002DContext	0x78	task	CONFIRMED	create_shared stores it into the IOATIR500Shared (+8), same as the GL/DVD contexts
+field	IOATIR5002DContext,ATIR5002DContext	0x7c	lastSubmitStamp	CONFIRMED	clientMemoryForType/finish wait on it; submit_context_buffer stores the submit_buffer result
+field	IOATIR5002DContext,ATIR5002DContext	0x88	sharedAllocator	CONFIRMED	Headers/IOATIR5002DContext.h sharedAllocator: the IOATIR500Shared; create_shared installs it, the bind opcodes bounds-check its +0x10/+0x14 table
+field	IOATIR5002DContext	0x8c	surfaceFlagsBitmask	INFERRED	ORed with surface+0xc1c in clientMemoryForType (same role as the GL/DVD field)
+field	IOATIR5002DContext,ATIR5002DContext	0x94	accelerator	CONFIRMED	Headers/IOATIR5002DContext.h accelerator: every method reaches hardware through it
+field	IOATIR5002DContext,ATIR5002DContext	0x98	commandBuffer	CONFIRMED	first word of the 7-word VendorCommandBuffer (0x98..0xb0) allocCommandBuffer fills; `self + 0x98` is passed to map_transfer_to_GART
+field	IOATIR5002DContext,ATIR5002DContext	0x9c	commandBufferGartOffset	CONFIRMED	Headers/IOATIR5002DContext.h ringSlotBufferOffset: word 1, zero-checked to decide whether to GART-map it, added to the stream offset
+field	IOATIR5002DContext	0xa0	commandBufferDescriptor	CONFIRMED	word 2: descriptor from allocCommandBuffer, released through vtable +0x14
+field	IOATIR5002DContext	0xa4	commandBufferType	UNKNOWN	word 3 low halfword (read in clientMemoryForType)
+field	IOATIR5002DContext	0xa6	commandBufferInFlight	INFERRED	word 3 high halfword, copied to the mapping record +0xe (in-flight counter position)
+field	IOATIR5002DContext,ATIR5002DContext	0xa8	commandBufferStamp	CONFIRMED	Headers/IOATIR5002DContext.h lastSubmitResult: word 4, the submit_buffer result
+field	IOATIR5002DContext,ATIR5002DContext	0xac	commandBufferHeader	CONFIRMED	Headers/IOATIR5002DContext.h commandBufferBase: word 5, the mapped header; records start at header+0x1c
+field	IOATIR5002DContext	0xb0	commandBufferSize	CONFIRMED	word 6: second argument of init_command_buffer_header
+field	IOATIR5002DContext	0xb4	contextBuffer	CONFIRMED	first word of the context-buffer record (0xb4..0xcc): zeroed by allocAllContextBuffers, passed to freeTransferToAllocGART
+field	IOATIR5002DContext	0xb8	contextBufferGartOffset	CONFIRMED	word 1, zeroed by allocAllContextBuffers/freeAllContextBuffers
+field	IOATIR5002DContext	0xbc	contextBufferDescriptor	CONFIRMED	word 2: descriptor allocAllContextBuffers stores and releases
+field	IOATIR5002DContext	0xc0	contextBufferType	UNKNOWN	word 3 low halfword
+field	IOATIR5002DContext	0xc2	contextBufferInFlight	INFERRED	word 3 high halfword (in-flight counter position)
+field	IOATIR5002DContext	0xc4	contextBufferStamp	CONFIRMED	word 4: stamp passed to freeTransferToAllocGART
+field	IOATIR5002DContext,ATIR5002DContext	0xc8	contextBufferHeader	CONFIRMED	word 5 of the context buffer: the VendorContextBufferHeader (allocAllContextBuffers installs it); +0x1c bit 0 is the dirty flag invalidate()/submit_context_buffer set and clear (Headers: pendingWriteQueue); Ghidra printed the offset in decimal (self + 200)
+field	IOATIR5002DContext	0xcc	contextBufferRing	CONFIRMED	freeToAllocGART/freeAllContextBuffers: 2-entry ring at +0xcc, stride 0x18 (stamp at +0xdc)
+field	IOATIR5002DContext,ATIR5002DContext	0xfc	contextBufferRingIndex	CONFIRMED	submit_context_buffer toggles it (idx+1)&1 and indexes the ring
+field	IOATIR5002DContext,ATIR5002DContext	0x100	boundSurface	CONFIRMED	Headers/IOATIR5002DContext.h boundSurface: read throughout lock_memory/swap_surface/create_transfer/process_command_buffer
+field	IOATIR5002DContext,ATIR5002DContext	0x110	panelIndex	INFERRED	indexes accelerator+0xec (stride 0x20, the per-panel table) and accelerator+0x12c (stride 0x78 buffer records) when no surface is bound; 0xffff = none; the surface field +0xc14 plays the same role for GL (read_buffer)
+field	IOATIR5002DContext,ATIR5002DContext	0x114	lastBoundTexture	CONFIRMED	Headers/IOATIR5002DContext.h lastBoundTexture: single-slot bound texture of the raw bind opcodes, released on replace in delete_image/alloc_and_load_image
+field	IOATIR500DVDContext	0x78	task	CONFIRMED	write_buffer passes it as the task of IOMemoryDescriptor::withAddress; create_shared stores it into the IOATIR500Shared (+8)
+field	IOATIR500DVDContext,ATIR500DVDContext	0x7c	lastSubmitStamp	CONFIRMED	finish() waits (accelerator vtable +0x558) for it; doIDCT passes it to the accelerator; submit_context_buffer stores the submit_buffer result
+field	IOATIR500DVDContext	0x80	nextLiveContext	CONFIRMED	stop() unlinks: previous->+0x80 = self->+0x80, accelerator list head (+0x68) = self->+0x80
+field	IOATIR500DVDContext,ATIR500DVDContext	0x84	sharedAllocator	CONFIRMED	Headers/IOATIR500DVDContext.h sharedAllocator: the IOATIR500Shared whose +0x10/+0x14 table the bind opcodes bounds-check; create_shared installs it
+field	IOATIR500DVDContext,ATIR500DVDContext	0x88	surfaceFlagsBitmask	CONFIRMED	Headers/IOATIR500DVDContext.h surfaceFlagsBitmask: ORed with surface+0xc1c in clientMemoryForType, written by set_surface/setup_buffers
+field	IOATIR500DVDContext,ATIR500DVDContext	0x8c	accelerator	CONFIRMED	Headers/IOATIR500DVDContext.h accelerator: every hardware/accelerator call goes through it
+field	IOATIR500DVDContext,ATIR500DVDContext	0x90	commandBuffer	CONFIRMED	first word of the 7-word VendorCommandBuffer (0x90..0xa8) allocCommandBuffer fills; `self + 0x90` is passed to allocCommandBuffer/map_transfer_to_GART
+field	IOATIR500DVDContext,ATIR500DVDContext	0x94	commandBufferGartOffset	CONFIRMED	Headers/IOATIR500DVDContext.h ringSlotZeroCheck: word 1, zero-checked to decide whether to GART-map it, added to the stream offset in process_command_buffer
+field	IOATIR500DVDContext	0x98	commandBufferDescriptor	CONFIRMED	word 2: the IOBufferMemoryDescriptor from allocCommandBuffer, released through vtable +0x14 in clientMemoryForType/stop
+field	IOATIR500DVDContext	0x9c	commandBufferState	INFERRED	word 3 (0x10000 initially): copied with the 7-word record by clientMemoryForType
+field	IOATIR500DVDContext,ATIR500DVDContext	0xa0	commandBufferStamp	CONFIRMED	Headers/IOATIR500DVDContext.h lastSubmitResult: word 4, the submit_buffer result stored by process_command_buffer
+field	IOATIR500DVDContext,ATIR500DVDContext	0xa4	commandBufferHeader	CONFIRMED	Headers/IOATIR500DVDContext.h commandBufferBase: word 5, the mapped header; records start at header+0x1c, the stream at header+0x20
+field	IOATIR500DVDContext	0xa8	commandBufferSize	CONFIRMED	word 6: passed to init_command_buffer_header (size) in clientMemoryForType
+field	IOATIR500DVDContext	0xac	contextBuffer	CONFIRMED	first word of the context-buffer record (0xac..0xc4): zeroed by allocAllContextBuffers, `self + 0xac` passed to freeTransferToAllocGART
+field	IOATIR500DVDContext	0xb0	contextBufferGartOffset	CONFIRMED	word 1, zeroed by allocAllContextBuffers/freeAllContextBuffers
+field	IOATIR500DVDContext	0xb4	contextBufferDescriptor	CONFIRMED	word 2: descriptor allocAllContextBuffers stores and releases
+field	IOATIR500DVDContext	0xb8	contextBufferType	UNKNOWN	word 3 low halfword, zeroed with 0xba
+field	IOATIR500DVDContext	0xba	contextBufferInFlight	INFERRED	word 3 high halfword (in-flight counter position)
+field	IOATIR500DVDContext	0xbc	contextBufferStamp	CONFIRMED	word 4: stamp passed to freeTransferToAllocGART in freeToAllocGART
+field	IOATIR500DVDContext,ATIR500DVDContext	0xc0	contextBufferHeader	CONFIRMED	word 5: the VendorContextBufferHeader; +0x1c bit 0 is the dirty flag set by invalidate()/build_scissor and tested by submit_context_buffer (Headers: pendingWriteQueue-style)
+field	IOATIR500DVDContext	0xc4	contextBufferRing	CONFIRMED	freeToAllocGART/freeAllContextBuffers: 2-entry ring at +0xc4, stride 0x18 (stamp at +0xd4)
+field	IOATIR500DVDContext,ATIR500DVDContext	0xf4	contextBufferRingIndex	CONFIRMED	submit_context_buffer toggles it (idx+1)&1 and indexes the ring; freeAllContextBuffers uses self+idx*0x18+0xd4
+field	IOATIR500DVDContext,ATIR500DVDContext	0xf8	boundSurface	CONFIRMED	Headers/IOATIR500DVDContext.h boundSurface: the surface every overlay/IDCT/deint method operates through
+field	IOATIR500DVDContext	0xfc	started	CONFIRMED	start() clears it and sets 1 on success; stop() clears it; the teardown path tests it
+field	IOATIR500GLContext	0x78	task	CONFIRMED	read_buffer passes it as the task of IOMemoryDescriptor::withAddress; connectClient compares it with the client's; create_shared stores it into the IOATIR500Shared (+8)
+field	IOATIR500GLContext,ATIR500GLContext	0x7c	lastSubmitStamp	CONFIRMED	submit_context_buffer/restore_state store the stamp ATIRadeonX1000::submit_buffer returned; finish() waits for it; copied to commandBufferStamp (+0xdc) and to header+0x18 by init_command_buffer_header
+field	IOATIR500GLContext	0x80	nextLiveContext	CONFIRMED	Headers/IOATIR500GLContext.h: intrusive link of the accelerator's live-GL-context list; start() pushes, stop() unlinks
+field	IOATIR500GLContext	0x84	unknown_0x84	UNKNOWN	start() zeroes it; set_surface tests it (self == surface+0x88 && +0x84 == 0) before re-binding; role not established
+field	IOATIR500GLContext,ATIR500GLContext	0x88	clientHandle	CONFIRMED	Headers/IOATIR500GLContext.h: the reference-counted IOATIR500Shared; every delete_texture/bounds check (+0x10 array, +0x14 count) goes through it
+field	IOATIR500GLContext,ATIR500GLContext	0x8c	surfaceFlagsBitmask	INFERRED	one bit per surface buffer: read_buffer tests 1<<bufferIndex against it, set_surface ORs 4/8/0x84/0x108 from modeBits, clientMemoryForType ORs it with surface+0xc1c; same role as the DVD context field of that name (+0x88)
+field	IOATIR500GLContext	0x90	swapRectX	CONFIRMED	written by set_swap_rect(x, y, w, h) from its x argument; start() zeroes it
+field	IOATIR500GLContext	0x92	swapRectY	CONFIRMED	written by set_swap_rect from its y argument
+field	IOATIR500GLContext	0x94	swapRectWidth	CONFIRMED	written by set_swap_rect from its w argument
+field	IOATIR500GLContext	0x96	swapRectHeight	CONFIRMED	written by set_swap_rect from its h argument
+field	IOATIR500GLContext	0x98	swapIntervalNumerator	CONFIRMED	written by set_swap_interval(numerator, denominator); clientMemoryForType tests it together with surface+0xbe8 & 0x20
+field	IOATIR500GLContext	0x9a	swapIntervalDenominator	CONFIRMED	written by set_swap_interval from its denominator argument; start() sets it to 1
+field	IOATIR500GLContext,ATIR500GLContext	0xac	colorBufferIndex	CONFIRMED	index into the surface attachment table (surface+0xb70): build_scissor reads surface->attachmentBuffers[+0xac]; start() sets 1, discard_command_buffer opcode 0x29 sets it to the first attachment id
+field	IOATIR500GLContext,ATIR500GLContext	0xae	depthBufferIndex	CONFIRMED	index into the surface attachment table (surface+0xb70): compute_sc_hyperz_en/compute_zb_bw_cntl read the depth buffer through it; start() sets 6, opcode 0x29 sets 6/7/8
+field	IOATIR500GLContext	0xb0	commandBufferSizeHint	CONFIRMED	start() sets 0x20000; clientMemoryForType doubles it up to 0x80000 and raises accelerator+0x5c8 (cachedBufferSizeThreshold) to it
+field	IOATIR500GLContext	0xb4	dataBufferSizeHint	CONFIRMED	start() sets 0x10000; get_data_buffer doubles it up to 0x80000 and raises accelerator+0x5d8 to it
+field	IOATIR500GLContext	0xb8	statusDescriptor	INFERRED	IOMemoryDescriptor retained/released (vtable +0x14/+0x18) and handed out by clientMemoryForType for the status region
+field	IOATIR500GLContext,ATIR500GLContext	0xbc	statusRegionSize	INFERRED	clientMemoryForType sets it to GH_page_size and memcpys that many bytes; the 0x34 opcode bounds-checks its 8-byte entry offset against it
+field	IOATIR500GLContext,ATIR500GLContext	0xc0	statusRegion	INFERRED	kernel copy of the status page: clientMemoryForType memcpy source/target; opcode 0x34 stores the allocated query id at statusRegion[entry]
+field	IOATIR500GLContext	0xc4	unknown_0xc4	UNKNOWN	only start() zeroes it (between statusRegion and the accelerator pointer)
+field	IOATIR500GLContext,ATIR500GLContext	0xc8	accelerator	CONFIRMED	Headers/IOATIR500GLContext.h accelerator (+200): every method reaches hardware through it; Ghidra printed the offset in decimal (self + 200)
+field	IOATIR500GLContext,ATIR500GLContext	0xcc	commandBuffer	CONFIRMED	first word of the 7-word VendorCommandBuffer (0xcc..0xe4) that allocCommandBuffer fills; passed as `self + 0xcc` to allocCommandBuffer/freeCommandBuffer/map_transfer_to_GART
+field	IOATIR500GLContext,ATIR500GLContext	0xd0	commandBufferGartOffset	CONFIRMED	word 1 of the command buffer: zero-checked to decide whether to GART-map it (get_texture, process_command_buffer); added to the stream offset when submitting
+field	IOATIR500GLContext	0xd4	commandBufferDescriptor	CONFIRMED	word 2: the IOBufferMemoryDescriptor from allocCommandBuffer (outBuffer+8); released through vtable +0x14 in clientMemoryForType/stop
+field	IOATIR500GLContext	0xd8	commandBufferState	INFERRED	word 3 (halfwords type/in-flight counter, 0x10000 initially); copied with the rest of the 7-word record
+field	IOATIR500GLContext	0xda	commandBufferInFlight	INFERRED	start() zeroes the high halfword of word 3 (the +0xe in-flight counter of the 7-word record)
+field	IOATIR500GLContext,ATIR500GLContext	0xdc	commandBufferStamp	CONFIRMED	word 4: stamp of the last submit_buffer of this buffer (get_texture/process_command_buffer store it; clientMemoryForType copies lastSubmitStamp into it)
+field	IOATIR500GLContext,ATIR500GLContext	0xe0	commandBufferHeader	CONFIRMED	word 5: the mapped VendorCommandBufferHeader; records start at header+0x1c (discard_command_buffer) and the stream at header+0x20 (submit_buffer)
+field	IOATIR500GLContext	0xe4	commandBufferSize	CONFIRMED	word 6: allocCommandBuffer's size (outBuffer+0x18); compared with accelerator+0x5c8 and passed to init_command_buffer_header
+field	IOATIR500GLContext	0xe8	dataBufferListHead	CONFIRMED	get_data_buffer appends, reclaim_resources/stop/freeToAllocGART walk it (next at buffer+0x3c); start()/stop() zero it
+field	IOATIR500GLContext	0xec	dataBufferListTail	CONFIRMED	get_data_buffer links the new buffer after it (tail+0x3c = buffer)
+field	IOATIR500GLContext	0xf0	dataBufferCount	CONFIRMED	incremented per buffer in get_data_buffer, zeroed in start/stop/reclaim_resources
+field	IOATIR500GLContext	0xf4	contextBuffer	CONFIRMED	first word of the second 7-word record (VendorContextBuffer, 0xf4..0x10c) zeroed by allocAllContextBuffers; `self + 0xf4` is passed to freeTransferToAllocGART
+field	IOATIR500GLContext	0xf8	contextBufferGartOffset	CONFIRMED	word 1 of the context buffer, zeroed by allocAllContextBuffers/freeAllContextBuffers (same layout as commandBuffer)
+field	IOATIR500GLContext	0xfc	contextBufferDescriptor	CONFIRMED	word 2: the IOBufferMemoryDescriptor allocAllContextBuffers stores and releases (vtable +0x18)
+field	IOATIR500GLContext	0x100	contextBufferType	UNKNOWN	word 3 low halfword; zeroed with 0x102, role not established
+field	IOATIR500GLContext	0x102	contextBufferInFlight	INFERRED	word 3 high halfword (+0xe of the record is the in-flight counter copy_buffer_using_DMA increments)
+field	IOATIR500GLContext	0x104	contextBufferStamp	CONFIRMED	word 4: stamp passed to freeTransferToAllocGART as the buffer's last-use stamp (freeToAllocGART)
+field	IOATIR500GLContext,ATIR500GLContext	0x108	contextBufferHeader	CONFIRMED	word 5: the VendorContextBufferHeader allocAllContextBuffers installs; its +0x1c bit 0 is the dirty flag invalidate()/submit_context_buffer set and clear. (ATIR500GLContext reaches it too.)
+field	IOATIR500GLContext	0x10c	contextBufferRing	CONFIRMED	Headers/IOATIR500GLContext.h freeToAllocGART: 16-entry ring at +0x10c, stride 0x18 (stamp at +0x11c, header at +0x120)
+field	IOATIR500GLContext,ATIR500GLContext	0x28c	contextBufferRingIndex	CONFIRMED	submit_context_buffer/restore_state/compact_current_textures advance it modulo 16 and index the ring (self + idx*0x18 + 0x11c); start() zeroes it
+field	IOATIR500GLContext,ATIR500GLContext	0x290	boundSurface	CONFIRMED	Headers/IOATIR500GLContext.h: the currently bound render surface; surface->attachmentBuffers[...] is read through it throughout
+field	IOATIR500GLContext	0x294	started	CONFIRMED	start() clears it and sets it to 1 at the end of a successful start; stop() clears it; clientClose() only tears down when it is set
+field	IOATIR500GLContext,ATIR500GLContext	0x298	surfaceIndex	INFERRED	set_surface's third argument (unknown_0x298); read_buffer passes it as the `index` argument of copy_from_buffer (before the mip level)
+field	IOATIR500GLContext,ATIR500GLContext	0x29c	mipLevel	CONFIRMED	Headers/IOATIR500GLContext.h mipLevel; set_surface's mipLevel argument; read_buffer passes it as copy_from_buffer's level
+field	IOATIR500GLContext,ATIR500GLContext	0x2a0	regularMethodTable	CONFIRMED	Headers/IOATIR500GLContext.h: start() stores kGLRegularMethods; getTargetAndMethodForIndex returns selector*0x18 + it

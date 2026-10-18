@@ -40,18 +40,18 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
   UInt8 *bufferSlot;
   UInt32 uVar5;
   
-  VCALL(*M<SInt32 *>(param_1 + 0x8c), 0x54c)
-            (M<SInt32 *>(param_1 + 0x8c),M<UInt32>(param_1 + 0x7c));
-  if (((M<SInt32>(param_1 + 0xf8) != 0) &&
-      (iVar1 = M<SInt32>(param_1 + 0x8c), M<char>(iVar1 + 0x80) != '\0')) &&
+  VCALL(*M<SInt32 *>(param_1 + kIOATIR500DVDContext_accelerator), 0x54c)
+            (M<SInt32 *>(param_1 + kIOATIR500DVDContext_accelerator),M<UInt32>(param_1 + kIOATIR500DVDContext_lastSubmitStamp));
+  if (((M<SInt32>(param_1 + kIOATIR500DVDContext_boundSurface) != 0) &&
+      (iVar1 = M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator), M<char>(iVar1 + 0x80) != '\0')) &&
      (M<SInt32>(iVar1 + 0x8bc) != 0)) {
     GH_IOLockLock(M<UInt32>(iVar1 + 0x840));
-    iVar1 = M<SInt32>(param_1 + 0xf8);
+    iVar1 = M<SInt32>(param_1 + kIOATIR500DVDContext_boundSurface);
     uVar2 = (SInt32)M<SInt16>(iVar1 + 0x9a) - (SInt32)M<SInt16>(iVar1 + 0x94);
     if (M<SInt32>(infoBytes + 0xc) == 0) {
-      bufferSlot = (UInt8 *)(param_1 + 0x168);
-      if (M<SInt32>(param_1 + 0x164) != 0) {
-        bufferSlot = (UInt8 *)(param_1 + 0x184);
+      bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctLumaBuffer0);
+      if (M<SInt32>(param_1 + kATIR500DVDContext_lumaBufferToggle) != 0) {
+        bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctLumaBuffer1);
       }
       iVar1 = M<SInt32>(infoBytes + 8) * 0x78 + iVar1 + 0x558;
     }
@@ -59,9 +59,9 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
       if (M<SInt32>(infoBytes + 0xc) != 1) {
         return 0xe00002c2;
       }
-      bufferSlot = (UInt8 *)(param_1 + 0x1a4);
-      if (M<SInt32>(param_1 + 0x1a0) != 0) {
-        bufferSlot = (UInt8 *)(param_1 + 0x1c0);
+      bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctChromaBuffer0);
+      if (M<SInt32>(param_1 + kATIR500DVDContext_chromaBufferToggle) != 0) {
+        bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctChromaBuffer1);
       }
       iVar1 = iVar1 + 0x8a0;
     }
@@ -92,20 +92,20 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
         ((IOATIR500DVDContext *)(param_1))->map_transfer_to_GART((VendorTransferBuffer *)(bufferSlot));
         iVar1 = M<SInt32>(bufferSlot + 4);
       }
-      uVar5 = M<UInt32>(M<UInt8 *>(param_1 + 0x8c) + 0x854);
-      uVar2 = ((ATIRadeonX1000 *)(M<UInt8 *>(param_1 + 0x8c)))->submit_idct_buffer_consumed((UInt32 *)(M<SInt32>(bufferSlot + 0x14) + 0x20),iVar1 + 0x20,
+      uVar5 = M<UInt32>(M<UInt8 *>(param_1 + kIOATIR500DVDContext_accelerator) + 0x854);
+      uVar2 = ((ATIRadeonX1000 *)(M<UInt8 *>(param_1 + kIOATIR500DVDContext_accelerator)))->submit_idct_buffer_consumed((UInt32 *)(M<SInt32>(bufferSlot + 0x14) + 0x20),iVar1 + 0x20,
                          (sATIDVDIDCTInfo *)infoBytes);
-      M<UInt32>(param_1 + 0x150) = uVar2;
+      M<UInt32>(param_1 + kATIR500DVDContext_idctTimeStampCounter) = uVar2;
       if (uVar5 <= uVar2) {
         M<UInt32>(bufferSlot + 0x10) = uVar2;
         if (M<SInt32>(infoBytes + 0xc) == 0) {
-          M<UInt32>(param_1 + 0x154) = M<UInt32>(param_1 + 0x150);
+          M<UInt32>(param_1 + kATIR500DVDContext_idctTimeStamp) = M<UInt32>(param_1 + kATIR500DVDContext_idctTimeStampCounter);
         }
-        GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 0x8c) + 0x840));
+        GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
         return 0;
       }
     }
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 0x8c) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
   }
   return 0xe00002d8;
 }

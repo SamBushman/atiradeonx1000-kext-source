@@ -1,5 +1,5 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 18:22:39.739858541 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 18:22:39.741285781 -0700
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 20:30:21.687307633 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 20:30:21.688913777 -0700
 @@ -702,8 +702,8 @@
                           iVar48 * (uVar15 - hzBlockCount) >> 1 | recordCursor[uVar55 + 1] & 0xffff0000;
                      local_1b8 = 0x43300000;

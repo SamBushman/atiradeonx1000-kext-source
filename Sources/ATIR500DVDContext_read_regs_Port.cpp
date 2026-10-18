@@ -39,10 +39,10 @@ IOReturn ATIR500DVDContext::read_regs(UInt32*offsets, UInt32*outValues, UInt32 b
   UInt32 result;
   
   uVar4 = *inOutCount;
-  registers = M<SInt32>(M<SInt32>(self + 0x8c) + 0x860);
+  registers = M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x860);
   if ((uVar4 == byteCount) && ((uVar4 & 3) == 0)) {
-    GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-    iVar2 = M<SInt32>(self + 0x8c);
+    GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+    iVar2 = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
     if (M<char>(iVar2 + 0x80) == '\0') {
       result = 0xe00002d8;
     }
@@ -57,7 +57,7 @@ IOReturn ATIR500DVDContext::read_regs(UInt32*offsets, UInt32*outValues, UInt32 b
           iVar2 = iVar2 + 4;
           uVar4 = uVar4 - 1;
         } while (uVar4 != 0);
-        iVar2 = M<SInt32>(self + 0x8c);
+        iVar2 = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
       }
       result = 0;
     }

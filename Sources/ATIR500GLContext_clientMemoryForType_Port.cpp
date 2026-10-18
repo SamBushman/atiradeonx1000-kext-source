@@ -33,14 +33,14 @@ IOReturn ATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IOMe
   UInt32 result;
   
   if (type == 0) {
-    if (M<SInt32 *>(M<SInt32>(self + 200) + 0x8d8) == (SInt32 *)0x0) {
+    if (M<SInt32 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8d8) == (SInt32 *)0x0) {
       result = 0xe00002be;
     }
     else {
-      VCALL(*M<SInt32 *>(M<SInt32>(self + 200) + 0x8d8), 0x14)(M<SInt32 *>(M<SInt32>(self + 200) + 0x8d8));
+      VCALL(*M<SInt32 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8d8), 0x14)(M<SInt32 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8d8));
       result = 0;
       *options = 0x1000;
-      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<SInt32>(self + 200) + 0x8d8));
+      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8d8));
     }
   }
   else {

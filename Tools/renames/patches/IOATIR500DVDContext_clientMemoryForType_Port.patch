@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 19:52:19.055562502 -0700
-+++ b/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 19:52:19.056936143 -0700
+--- a/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 20:34:03.621729252 -0700
++++ b/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 20:34:03.623122597 -0700
 @@ -31,6 +31,8 @@
  extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
  

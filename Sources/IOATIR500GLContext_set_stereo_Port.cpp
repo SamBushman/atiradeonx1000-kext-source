@@ -34,9 +34,9 @@ IOReturn IOATIR500GLContext::set_stereo(UInt32 leftOrRight, UInt32 stereoParam) 
 
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  result = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->setup_stereo(stereoParam, leftOrRight)
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  result = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->setup_stereo(stereoParam, leftOrRight)
   ;
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return result;
 }

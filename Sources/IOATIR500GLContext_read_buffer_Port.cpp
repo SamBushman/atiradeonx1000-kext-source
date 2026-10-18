@@ -99,43 +99,43 @@ IOReturn IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData *readData, U
   case 0xb:
     attachment = 8;
   }
-  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
-  surface = M<UInt8 *>(param_1 + 0x290);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+  surface = M<UInt8 *>(param_1 + kIOATIR500GLContext_boundSurface);
   if (surface == (UInt8 *)0x0) goto LAB_00008f74;
   if ((0xff < M<UInt32>(surface + 0xa4)) &&
-     (sourceBuffer = M<SInt32>(param_1 + 200), M<char>(sourceBuffer + 0x80) == '\0')) {
+     (sourceBuffer = M<SInt32>(param_1 + kIOATIR500GLContext_accelerator), M<char>(sourceBuffer + 0x80) == '\0')) {
     do {
       GH_IOLockSleep(M<UInt32>(sourceBuffer + 0x840),sourceBuffer,0);
     } while (M<char>(sourceBuffer + 0x80) == '\0');
-    surface = M<UInt8 *>(param_1 + 0x290);
+    surface = M<UInt8 *>(param_1 + kIOATIR500GLContext_boundSurface);
     if (surface == (UInt8 *)0x0) goto LAB_00008f74;
   }
   if ((((attachment != 0) || (M<SInt32>(surface + 0xc14) == 0xffff)) ||
       (pIVar1 = *(UInt8 **)
-                 (M<SInt32>(surface + 0xc14) * 0x20 + M<SInt32>(param_1 + 200) + 0xe8),
+                 (M<SInt32>(surface + 0xc14) * 0x20 + M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0xe8),
       pIVar1 == (UInt8 *)0x0)) || (surface == pIVar1)) {
     pIVar1 = surface + attachment * 4;
   }
   sourceBuffer = M<SInt32>(pIVar1 + 0xb70);
   uVar6 = 0x40000000;
   bufferIndex = (sourceBuffer - (SInt32)(surface + 0xa8) >> 3) * -0x11111111;
-  if ((bufferIndex < 0x17) && (uVar6 = 1 << (bufferIndex & 0x3f) & M<UInt32>(param_1 + 0x8c), uVar6 == 0))
+  if ((bufferIndex < 0x17) && (uVar6 = 1 << (bufferIndex & 0x3f) & M<UInt32>(param_1 + kIOATIR500GLContext_surfaceFlagsBitmask), uVar6 == 0))
   goto LAB_00008f74;
   if ((M<UInt32>(surface + 0xbf8) & uVar6) == 0) {
 LAB_00008f60:
     if (((M<UInt32>(surface + 0xbf8) & 0x20000000) != 0) || (M<SInt32>(sourceBuffer + 0x10) == 0)) {
 LAB_00008f74:
-      GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
+      GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
       return 0xe00002cc;
     }
   }
   else {
     if (M<SInt32>(sourceBuffer + 0x24) == 0) goto LAB_00008fb0;
-    if ((M<char>(M<SInt32>(param_1 + 200) + 0x80) == '\0') ||
+    if ((M<char>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x80) == '\0') ||
        (M<char>(M<SInt32>(sourceBuffer + 0x24) + 0x58) != '\0')) goto LAB_00008f60;
     sourceBuffer = ((IOATIR500Surface *)(surface))->alloc_surfaces_retry(uVar6, (eLockType)(0));
     if (sourceBuffer != 0) goto LAB_00008f74;
-    surface = M<UInt8 *>(param_1 + 0x290);
+    surface = M<UInt8 *>(param_1 + kIOATIR500GLContext_boundSurface);
     sourceBuffer = M<SInt32>(surface + attachment * 4 + 0xb70);
   }
   attachment = x + width;
@@ -169,12 +169,12 @@ LAB_00008f74:
                                    (GH_page_size +
                                    rowBytes * (height + -1) +
                                    (UInt32)M<UInt16>(sourceBuffer + 0x16) * width + bufferIndex) - 1,0,
-                                   M<UInt32>(param_1 + 0x78));
+                                   M<UInt32>(param_1 + kIOATIR500GLContext_task));
     if (local_s.f40 == (SInt32 *)0x0) {
       result = 0xe00002be;
     }
     else {
-      piVar5 = M<SInt32 *>(param_1 + 0x290);
+      piVar5 = M<SInt32 *>(param_1 + kIOATIR500GLContext_boundSurface);
       destAddress = piVar5[0x1f];
       /* +0x5e8 is copy_from_buffer -> copy_buffer_using_DMA (ATIR500Surface_copy_buffer_using_DMA_Port.cpp):
        * this is NOT a memcpy of sourceBuffer's backing bytes. It builds a real GPU 3D-render command
@@ -185,37 +185,37 @@ LAB_00008f74:
        * observable effect on what came back - don't assume a CPU-side write to the source surface
        * is visible to this call, and don't assume the returned content is a literal byte copy. */
       VCALL(*piVar5, 0x5e8)
-                (piVar5,x,y,width,height,M<UInt32>(param_1 + 0x298),
-                 M<UInt32>(param_1 + 0x29c),sourceBuffer,M<UInt32>(param_1 + 0x7c),&local_s,
+                (piVar5,x,y,width,height,M<UInt32>(param_1 + kIOATIR500GLContext_surfaceIndex),
+                 M<UInt32>(param_1 + kIOATIR500GLContext_mipLevel),sourceBuffer,M<UInt32>(param_1 + kIOATIR500GLContext_lastSubmitStamp),&local_s,
                  bufferIndex,rowBytes,2);
       height = 0xa0;
       width = 0x17;
       do {
-        y = M<SInt32>(M<SInt32>(param_1 + 0x290) + height + 0x2c);
+        y = M<SInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_boundSurface) + height + 0x2c);
         if ((y != 0) && (destAddress == M<SInt32>(y + 0x54))) {
-          M<UInt32>(y + 0x54) = M<UInt32>(M<SInt32>(param_1 + 0x290) + 0x7c);
+          M<UInt32>(y + 0x54) = M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_boundSurface) + 0x7c);
         }
         height = height + 0x78;
         width = width + -1;
       } while (width != 0);
       if (local_s.f44 != 0) {
-        GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
-        piVar5 = M<SInt32 *>(param_1 + 200);
+        GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+        piVar5 = M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator);
         width = piVar5[0x1ed];
         height = VCALL(*piVar5, 0x55c)
-                           (piVar5,M<UInt32>(M<SInt32>(param_1 + 0x290) + 0x7c));
+                           (piVar5,M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_boundSurface) + 0x7c));
         piVar5[0x1ed] = width + height;
-        GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
-        VCALL(*M<SInt32 *>(param_1 + 200), 0x5ac)(M<SInt32 *>(param_1 + 200),&local_s);
+        GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+        VCALL(*M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator), 0x5ac)(M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator),&local_s);
       }
       result = 0;
       VCALL(*local_s.f40, 0x18)(local_s.f40);
     }
     local_s.f40 = (SInt32 *)0x0;
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
     return result;
   }
 LAB_00008fb0:
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
   return 0;
 }

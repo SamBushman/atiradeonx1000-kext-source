@@ -48,18 +48,18 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
   SInt32 iVar15;
   UInt8 *colorRecord;
   
-  if (M<SInt32>(self + 0x3bc) == 0) {
-    uVar14 = M<UInt32>(self + 0x29c);
-    colorBuffer = M<SInt32>((UInt32)M<UInt16>(self + 0xac) * 4 + M<SInt32>(self + 0x290) + 0xb70);
+  if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
+    uVar14 = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
+    colorBuffer = M<SInt32>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
     colorRecord = (UInt8 *)
-              ((UInt32)M<UInt16>(self + 0xac) * 0x78 + M<SInt32>(self + 0x290) + 0xa8);
+              ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xa8);
     iVar15 = uVar14 * 4 + colorBuffer;
     iVar8 = M<SInt32>(iVar15 + 0x40);
     formatIndex = M<UInt8>(colorBuffer + 0x3a);
     uVar11 = 0;
     M<UInt32>(packetBytes + 0x268) =
          iVar8 * (UInt32)M<UInt16>(colorBuffer + 0x20) +
-         (M<SInt32>(iVar15 + 0x44) - iVar8) * M<SInt32>(self + 0x298) + M<SInt32>(colorBuffer + 8) &
+         (M<SInt32>(iVar15 + 0x44) - iVar8) * M<SInt32>(self + kIOATIR500GLContext_surfaceIndex) + M<SInt32>(colorBuffer + 8) &
          0xffffffe0;
     if ((M<UInt32>(colorBuffer + 0x3c) & 0xf00000) != 0) {
       uVar11 = (SInt32)((UInt32)M<UInt16>(colorBuffer + 0x14) / (M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf)) >>
@@ -75,7 +75,7 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
   }
   else {
     uVar14 = 0;
-    colorRecord = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
+    colorRecord = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
     formatIndex = colorRecord[0x3a];
     M<UInt32>(packetBytes + 0x268) =
          (UInt32)M<UInt16>(colorRecord + 0x20) * M<SInt32>(colorRecord + 0x40) + M<SInt32>(colorRecord + 8) &
@@ -108,7 +108,7 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
   M<UInt32>(packetBytes + 0x228) =
        (FormatTableLookup_0x0004d2e0(iVar8) & 0x600) << 5 |
        uVar7 | uVar6 | uVar14 | uVar11 | uVar9 & 0xffff00e0;
-  uVar10 = M<UInt32>(M<SInt32>(self + 200) + 0xb74);
+  uVar10 = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
   M<UInt32>(packetBytes + 0x2b0) = 0xaaaa;
   M<UInt32>(packetBytes + 0x2c) = uVar10;
   uVar10 = this->compute_sc_hyperz_en(M<UInt32>(packetBytes + 0x48));
@@ -117,14 +117,14 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
   M<UInt32>(packetBytes + 0x50) = uVar10;
   if (((((M<UInt32>(colorRecord + 0x28) & 0x3ff00000) == 0x3ff00000) ||
        (colorRecord[0x36] == 0x0)) ||
-      ((M<UInt32>(M<SInt32>(self + 0x290) + 0xbe8) & 0x700000) == 0)) ||
-     (M<SInt16>(self + 0xac) != 9)) {
+      ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xbe8) & 0x700000) == 0)) ||
+     (M<SInt16>(self + kIOATIR500GLContext_colorBufferIndex) != 9)) {
     M<UInt32>(packetBytes + 0x80) = 0;
   }
   else {
     M<UInt32>(packetBytes + 0x80) = 0x600;
   }
-  pVVar12 = M<UInt8 *>(self + 0x2a4);
+  pVVar12 = M<UInt8 *>(self + kATIR500GLContext_textureSlots);
   if (pVVar12 == (UInt8 *)0x0) {
     M<UInt32>(packetBytes + 0x27c) = 0xc0001000;
   }

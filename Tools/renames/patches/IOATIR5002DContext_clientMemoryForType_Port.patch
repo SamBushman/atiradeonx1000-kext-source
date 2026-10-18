@@ -1,5 +1,5 @@
---- a/Sources/IOATIR5002DContext_clientMemoryForType_Port.cpp	2026-10-17 19:51:52.462699040 -0700
-+++ b/Sources/IOATIR5002DContext_clientMemoryForType_Port.cpp	2026-10-17 19:51:52.463939706 -0700
+--- a/Sources/IOATIR5002DContext_clientMemoryForType_Port.cpp	2026-10-17 20:31:35.807170277 -0700
++++ b/Sources/IOATIR5002DContext_clientMemoryForType_Port.cpp	2026-10-17 20:31:35.808388693 -0700
 @@ -31,6 +31,8 @@
  extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
  

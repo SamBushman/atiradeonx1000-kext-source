@@ -37,15 +37,15 @@ bool IOATIR500DVDContext::freeToAllocGART(VendorTransferBuffer *needed, bool agg
   UInt8 *slot;
   UInt8 *slotBase;
   
-  iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0xac)),
-                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xbc),aggressive);
+  iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_contextBuffer)),
+                     (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500DVDContext_contextBufferStamp),aggressive);
   if ((iVar2 == 0) &&
-     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + 0x90)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + 0xa0),
+     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500DVDContext_commandBufferStamp),
                          aggressive), iVar2 == 0)) {
     iVar2 = 0;
-    slot = (UInt8 *)(self + 0xc4);
+    slot = (UInt8 *)(self + kIOATIR500DVDContext_contextBufferRing);
     slotBase = self;
-    while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
+    while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
                               M<UInt32>(slotBase + 0xd4),aggressive), freed == 0) {
       lastSlot = iVar2 == 1;
       slot = slot + 0x18;

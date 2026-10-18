@@ -36,9 +36,9 @@ IOReturn ATIR500DVDContext::write_regs(UInt32 offset, UInt32 value) {
   UInt32 result;
   SInt32 registers;
   
-  registers = M<SInt32>(M<SInt32>(self + 0x8c) + 0x860);
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  accel = M<SInt32>(self + 0x8c);
+  registers = M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x860);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   if (M<char>(accel + 0x80) == '\0') {
     result = 0xe00002d8;
   }

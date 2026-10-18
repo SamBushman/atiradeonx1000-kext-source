@@ -46,7 +46,7 @@ UInt32 ATIR500GLContext::GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt3
         return 0;
       }
       return *(SInt32 *)(M<SInt32>(bufferBytes + 0x54) + 4) +
-             extraOffset + M<SInt32>(bufferBytes + 0x50) + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
+             extraOffset + M<SInt32>(bufferBytes + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4);
     }
   }
   return 0;

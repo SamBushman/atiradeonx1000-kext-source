@@ -34,9 +34,9 @@ void ATIR500GLContext::update_surface() {
   SInt32 unitIndex;
   UInt32 surfaceFlags;
   
-  if (M<SInt32>(self + 0x290) != 0) {
-    unitIndex = M<SInt32>(self + 0x35c);
-    surfaceFlags = M<UInt32>(M<SInt32>(self + 0x290) + 0xbe8);
+  if (M<SInt32>(self + kIOATIR500GLContext_boundSurface) != 0) {
+    unitIndex = M<SInt32>(self + kATIR500GLContext_renderBufferIndex);
+    surfaceFlags = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xbe8);
     if ((unitIndex == 1) || ((unitIndex == 0 && ((surfaceFlags & 0x400) == 0)))) {
       bVar1 = true;
     }
@@ -44,16 +44,16 @@ void ATIR500GLContext::update_surface() {
       bVar1 = false;
     }
     if (((surfaceFlags & 0x7c0000) == 0) || (!bVar1)) {
-      M<SInt16>(self + 0x3aa) = (SInt16)unitIndex;
-      M<SInt16>(self + 0xac) = (SInt16)unitIndex;
+      M<SInt16>(self + kATIR500GLContext_attachmentBufferIds) = (SInt16)unitIndex;
+      M<SInt16>(self + kIOATIR500GLContext_colorBufferIndex) = (SInt16)unitIndex;
     }
     else {
-      M<UInt16>(self + 0x3aa) = 9;
-      M<UInt16>(self + 0xac) = 9;
+      M<UInt16>(self + kATIR500GLContext_attachmentBufferIds) = 9;
+      M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) = 9;
     }
     this->build_scissor();
   }
   VCALL(M<SInt32>(self), 0x5a4)(self);
-  M<UInt32>(M<SInt32>(self + 200) + 0x78) = 0;
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x78) = 0;
   return;
 }

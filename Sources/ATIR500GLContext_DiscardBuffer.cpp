@@ -54,7 +54,7 @@ void ATIR500GLContext::discard_command_buffer() {
   SInt32 textures [22];
   SInt32 slot;
   
-  packet = (UInt32 *)(M<SInt32>(self + 0xe0) + 0x1c);
+  packet = (UInt32 *)(M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x1c);
   do {
     header = *packet;
     opcode = header & 0xff000000;
@@ -67,7 +67,7 @@ LAB_00027ab0:
         useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
         oldCount = atomicAddReturningOld((SInt32 *)useCount, -1);
         if (oldCount == 1) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)boundTexture);
+          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->delete_texture((VendorTextureBuffer *)boundTexture);
         }
         packetWords = header & 0xffffff;
         M<UInt32>(self + opcode + 0x2a4) = 0;
@@ -100,7 +100,7 @@ LAB_00027ab0:
             if (opcode == 0x29000000) {
               wordOffset = 0;
               slotOffset = 4;
-              M<UInt32>(self + 0x3bc) = 0;
+              M<UInt32>(self + kATIR500GLContext_renderToTexture) = 0;
               slotCursor = self;
               do {
                 switch(M<UInt32>((SInt32)packet + wordOffset + 4)) {
@@ -132,23 +132,23 @@ LAB_00027ab0:
                 wordOffset = wordOffset + 4;
                 slotCursor = slotCursor + 2;
               } while (slotOffset != 0);
-              M<UInt16>(self + 0xac) = M<UInt16>(self + 0x3aa);
-              M<UInt32>(self + 0x35c) = (UInt32)M<UInt16>(self + 0x3aa);
+              M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) = M<UInt16>(self + kATIR500GLContext_attachmentBufferIds);
+              M<UInt32>(self + kATIR500GLContext_renderBufferIndex) = (UInt32)M<UInt16>(self + kATIR500GLContext_attachmentBufferIds);
               if (packet[5] == 0x10) {
-                M<UInt16>(self + 0x3aa) = 9;
-                M<UInt16>(self + 0xac) = 9;
+                M<UInt16>(self + kATIR500GLContext_attachmentBufferIds) = 9;
+                M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) = 9;
               }
               packetWords = header & 0xffffff;
-              bVar1 = (M<UInt32>(self + 0x8c) & 0x80) == 0;
+              bVar1 = (M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) & 0x80) == 0;
               in_cr0 = bVar1 << 1;
               if (!bVar1) {
                 mode = packet[1];
                 if ((mode == 7) || (mode == 8)) {
                   packetWords = header & 0xffffff;
-                  M<SInt16>(self + 0xae) = (SInt16)mode;
+                  M<SInt16>(self + kIOATIR500GLContext_depthBufferIndex) = (SInt16)mode;
                 }
                 else {
-                  M<UInt16>(self + 0xae) = 6;
+                  M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) = 6;
                 }
               }
               goto LAB_00027e90;
@@ -163,7 +163,7 @@ LAB_00027ab0:
                     useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
                     oldCount = atomicAddReturningOld((SInt32 *)useCount, -1);
                     if (oldCount == 1) {
-                      ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)boundTexture);
+                      ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->delete_texture((VendorTextureBuffer *)boundTexture);
                     }
                     M<UInt32>(slotCursor + 0x2e4) = 0;
                   }
@@ -172,7 +172,7 @@ LAB_00027ab0:
               }
               else if (opcode < 0x3a000001) {
                 if (opcode == 0x36000000) {
-                  previousTexture = M<SInt32>(self + 0x334);
+                  previousTexture = M<SInt32>(self + kATIR500GLContext_pinnedTexture);
                   newTexture = packet[1];
                   if ((previousTexture != 0) && (M<SInt32>(previousTexture + 0x48) == 0)) {
                     M<SInt16>(previousTexture + 0xe) = M<SInt16>(previousTexture + 0xe) + -1;
@@ -181,7 +181,7 @@ LAB_00027ab0:
                     M<SInt16>(newTexture + 0xe) = M<SInt16>(newTexture + 0xe) + 1;
                   }
                   packetWords = header & 0xffffff;
-                  M<UInt32>(self + 0x334) = newTexture;
+                  M<UInt32>(self + kATIR500GLContext_pinnedTexture) = newTexture;
                   goto LAB_00027e90;
                 }
                 if (opcode == 0x39000000) {
@@ -204,7 +204,7 @@ LAB_00027ab0:
                     if ((!(bool)(bVar18 >> 1 & 1)) && (packetWords == opcode - 1)) {
                       slot = 0x20;
                     }
-                    shared = M<UInt8 *>(self + 0x88);
+                    shared = M<UInt8 *>(self + kIOATIR500GLContext_clientHandle);
                     handle = M<UInt32>((SInt32)packet + slotOffset + 0x20);
                     if ((M<UInt32>(shared + 0x14) <= handle) ||
                        (slotTableOffset = M<SInt32>(handle * 4 + M<SInt32>(shared + 0x10)), slotTableOffset == 0))
@@ -238,12 +238,12 @@ LAB_00027ab0:
                 }
               }
               else if (opcode == 0x3b000000) {
-                shared = M<UInt8 *>(self + 0x88);
+                shared = M<UInt8 *>(self + kIOATIR500GLContext_clientHandle);
                 opcode = packet[3];
                 if ((M<UInt32>(shared + 0x14) <= packet[1]) ||
                    (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(shared + 0x10)), texture == 0))
                 goto LAB_00027e80;
-                boundTexture = M<UInt8 *>(self + 0x32c);
+                boundTexture = M<UInt8 *>(self + kATIR500GLContext_streamedTexture);
                 if (boundTexture != (UInt8 *)0x0) {
                   useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
                   slotOffset = atomicAddReturningOld((SInt32 *)useCount, -1);
@@ -253,7 +253,7 @@ LAB_00027ab0:
                 }
                 useCount = (SInt32 *)(M<SInt32>(texture + 0x14) + 0x10);
                 atomicAddReturningOld((SInt32 *)useCount, -0xffff);
-                M<SInt32>(self + 0x32c) = texture;
+                M<SInt32>(self + kATIR500GLContext_streamedTexture) = texture;
                 useCount = (SInt32 *)0x0;
                 if (M<SInt32>(texture + 0x54) != 0) {
                   useCount = M<SInt32 *>(M<SInt32>(texture + 0x54) + 8);
@@ -273,8 +273,8 @@ LAB_00027ab0:
               else if (opcode == 0x3d000000) {
                 packetWords = header & 0xffffff;
                 if (packet[1] == 0x132) {
-                  if (M<UInt8 *>(self + 0x290) != (UInt8 *)0x0) {
-                    ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_volatile_state((eSurfaceVolatileState)packet[2]);
+                  if (M<UInt8 *>(self + kIOATIR500GLContext_boundSurface) != (UInt8 *)0x0) {
+                    ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->set_volatile_state((eSurfaceVolatileState)packet[2]);
                     goto LAB_00027e70;
                   }
                 }
@@ -285,16 +285,16 @@ LAB_00027ab0:
             if (opcode != 0x25000000) {
               if (0x25000000 < opcode) {
                 if (opcode == 0x26000000) {
-                  if ((M<UInt32>(M<SInt32>(self + 0x88) + 0x14) <= packet[1]) ||
-                     (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)),
+                  if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14) <= packet[1]) ||
+                     (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
                      texture == 0)) goto LAB_00027e80;
                   packetWords = header & 0xffffff;
-                  M<SInt32>(self + 0x328) = texture;
+                  M<SInt32>(self + kATIR500GLContext_transferBufferSlot) = texture;
                 }
                 else {
                   if (opcode != 0x27000000) goto LAB_00027e70;
                   packetWords = header & 0xffffff;
-                  M<UInt32>(self + 0x328) = 0;
+                  M<UInt32>(self + kATIR500GLContext_transferBufferSlot) = 0;
                 }
                 goto LAB_00027e90;
               }
@@ -345,7 +345,7 @@ LAB_00027e70:
         }
       }
 LAB_00027a00:
-      shared = M<UInt8 *>(self + 0x88);
+      shared = M<UInt8 *>(self + kIOATIR500GLContext_clientHandle);
       if ((packet[1] < M<UInt32>(shared + 0x14)) &&
          (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(shared + 0x10)), texture != 0)) {
         slotOffset = (opcode + 0xfa000000 >> 0x18) * 4;

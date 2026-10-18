@@ -92,7 +92,7 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
         VCALL(M<SInt32>(surface), 0x5c4)(surface);
       }
       else {
-        VCALL(*M<SInt32 *>(self + 200), 0x524)(M<SInt32 *>(self + 200),slotTexture);
+        VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x524)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),slotTexture);
       }
       M<UInt8>(M<SInt32>(slotTexture + 0x14) + 0x14) = 1;
       M<UInt16>(M<SInt32>(slotTexture + 0x14) + 0x28) = 0;
@@ -151,9 +151,9 @@ LAB_00029f5c:
       slot = 0;
       wordCount = 0;
       VCALL(M<SInt32>(self), 0x5a4)(self);
-      accelerator = M<SInt32 *>(self + 200);
-      ringIndex = M<SInt32>(self + 0x28c) + 1U & 0xf;
-      M<UInt32>(self + 0x28c) = ringIndex;
+      accelerator = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
+      ringIndex = M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) + 1U & 0xf;
+      M<UInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) = ringIndex;
       waitTotal = accelerator[0x1e0];
       waited = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(self + ringIndex * 0x18 + 0x11c))
       ;
@@ -174,7 +174,7 @@ LAB_00029f5c:
               ((IOATIR500Surface *)(surface))->copy_buffer_from_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
             }
             else {
-              loaded = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),boundTexture);
+              loaded = VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x528)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),boundTexture);
               if (loaded != 0) {
                 this->load_texture((VendorTextureBuffer *)(boundTexture));
               }
@@ -200,9 +200,9 @@ LAB_00029f5c:
       if (M<SInt32>(self + ringIndex * 0x18 + 0x110) == 0) {
         ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x18 + 0x10c)));
       }
-      M<UInt32>(M<SInt32>(self + 200) + 0x704) = paddedWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-      M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
-      stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(record),
+      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) = paddedWords * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb94) = 1;
+      stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),
                          M<SInt32>(self + ringIndex * 0x18 + 0x110) + 0x20,paddedWords);
       M<UInt32>(self + ringIndex * 0x18 + 0x11c) = stamp;
       if (textureBytes[0x20] == 0x0) {
@@ -218,7 +218,7 @@ LAB_00029f5c:
         result = 0;
       }
       else {
-        result = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),textureBytes);
+        result = VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x528)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),textureBytes);
       }
       return result;
     }

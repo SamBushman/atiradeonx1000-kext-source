@@ -35,22 +35,22 @@ IOReturn ATIR500DVDContext::dvd_enable_overlay(int enable) {
   SInt32 accel;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  accel = M<SInt32>(self + 0x8c);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   if (M<char>(accel + 0x80) == '\0') {
     result = 0xe00002d8;
   }
-  else if (M<SInt32>(self + 0xf8) == 0) {
+  else if (M<SInt32>(self + kIOATIR500DVDContext_boundSurface) == 0) {
     result = 0xe00002bc;
   }
   else if (enable == 0) {
-    ((ATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->disable_overlay();
-    accel = M<SInt32>(self + 0x8c);
+    ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->disable_overlay();
+    accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
     result = 0;
   }
   else {
-    ((ATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->enable_overlay();
-    accel = M<SInt32>(self + 0x8c);
+    ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->enable_overlay();
+    accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
     result = 0;
   }
   GH_IOLockUnlock(M<UInt32>(accel + 0x840));

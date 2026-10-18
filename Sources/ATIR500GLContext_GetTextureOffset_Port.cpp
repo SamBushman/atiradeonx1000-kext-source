@@ -53,7 +53,7 @@ UInt32 ATIR500GLContext::GetTextureOffset(VendorTextureBuffer *texture, bool for
           offset = M<SInt32>(textureBytes + 0x60);
         }
         return *(SInt32 *)(M<SInt32>(textureBytes + 0x54) + 4) +
-               offset + M<SInt32>(textureBytes + 0x50) + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
+               offset + M<SInt32>(textureBytes + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4);
       }
     }
     else if ((type == 0x0) &&

@@ -38,25 +38,25 @@ IOReturn IOATIR500GLContext::reclaim_resources() {
   SInt32 iVar3;
   UInt8 *nextBuffer;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  M<UInt32>(M<SInt32>(self + 200) + 0x5c8) = 0x20000;
-  M<UInt32>(M<SInt32>(self + 200) + 0x5d8) = 0x10000;
-  nextBuffer = M<UInt8 *>(self + 0xe8);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5c8) = 0x20000;
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d8) = 0x10000;
+  nextBuffer = M<UInt8 *>(self + kIOATIR500GLContext_dataBufferListHead);
   while (buffer = nextBuffer, buffer != (UInt8 *)0x0) {
-    accel = M<UInt8 *>(self + 200);
+    accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
     nextBuffer = M<UInt8 *>(buffer + 0x3c);
     if (M<UInt32>(accel + 0x5d4) < 0x10) {
       if (M<SInt32>(accel + 0x5d0) == 0) {
         M<UInt8 *>(accel + 0x5cc) = buffer;
-        M<UInt8 *>(M<SInt32>(self + 200) + 0x5d0) = buffer;
+        M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = buffer;
         M<UInt32>(buffer + 0x3c) = 0;
       }
       else {
         M<UInt8 *>(M<SInt32>(accel + 0x5d0) + 0x3c) = buffer;
-        M<UInt8 *>(M<SInt32>(self + 200) + 0x5d0) = buffer;
+        M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = buffer;
         M<UInt32>(buffer + 0x3c) = 0;
       }
-      M<SInt32>(M<SInt32>(self + 200) + 0x5d4) = M<SInt32>(M<SInt32>(self + 200) + 0x5d4) + 1;
+      M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + 1;
       buffer[0x54] = 0x0;
       if (M<SInt32 *>(buffer + 0x10) != (SInt32 *)0x0) {
         VCALL(*M<SInt32 *>(buffer + 0x10), 0x18)(M<SInt32 *>(buffer + 0x10));
@@ -67,17 +67,17 @@ IOReturn IOATIR500GLContext::reclaim_resources() {
       ((IOATIR500Accelerator *)(accel))->freeOneDataBuffer((VendorTextureBuffer *)(buffer));
     }
   }
-  iVar3 = M<SInt32>(self + 200);
-  M<UInt32>(self + 0xf0) = 0;
-  M<UInt32>(self + 0xe8) = 0;
-  M<UInt32>(self + 0xec) = 0;
+  iVar3 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferCount) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferListHead) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferListTail) = 0;
   pooledCount = M<UInt32>(iVar3 + 0x5d4);
   while (0xf < pooledCount) {
     nextBuffer = M<UInt8 *>(iVar3 + 0x5cc);
     M<UInt32>(iVar3 + 0x5cc) = M<UInt32>(nextBuffer + 0x3c);
-    M<SInt32>(M<SInt32>(self + 200) + 0x5d4) = M<SInt32>(M<SInt32>(self + 200) + 0x5d4) + -1;
-    ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeOneDataBuffer((VendorTextureBuffer *)(nextBuffer));
-    iVar3 = M<SInt32>(self + 200);
+    M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + -1;
+    ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeOneDataBuffer((VendorTextureBuffer *)(nextBuffer));
+    iVar3 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
     pooledCount = M<UInt32>(iVar3 + 0x5d4);
   }
   GH_IOLockUnlock(M<UInt32>(iVar3 + 0x840));

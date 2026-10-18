@@ -93,10 +93,10 @@ bool ATIR500DVDContext::start(IOService *provider) {
     U32At(self, 0x1d8) = 0;
     U32At(self, 0x1d0) = 0;
     U32At(self, 0x1d4) = 0;
-    if (accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x168), 0x80000) &&
-        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x184), 0x80000) &&
-        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x1a4), 0x80000) &&
-        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x1c0), 0x80000)) {
+    if (accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer0), 0x80000) &&
+        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer1), 0x80000) &&
+        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer0), 0x80000) &&
+        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer1), 0x80000)) {
         U32At(self, 0x1dc) = reinterpret_cast<UInt32>(kDVDSubMethods);
         DVDSubM_unlock(lock);
         return true;
@@ -112,16 +112,16 @@ void ATIR500DVDContext::stop(IOService *provider) {
     DVDSubM_lock(lock);
     IOATIR500DVDContext::stop(provider);
     if (U32At(self, 0x170) != 0) {
-        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x168));
+        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer0));
     }
     if (U32At(self, 0x18c) != 0) {
-        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x184));
+        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer1));
     }
     if (U32At(self, 0x1ac) != 0) {
-        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x1a4));
+        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer0));
     }
     if (U32At(self, 0x1c8) != 0) {
-        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x1c0));
+        accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer1));
     }
     reinterpret_cast<ATIRadeonX1000 *>(provider)->stop_xdct_engine();
     DVDSubM_unlock(lock);

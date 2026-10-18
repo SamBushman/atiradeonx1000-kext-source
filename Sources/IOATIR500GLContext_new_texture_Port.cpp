@@ -38,24 +38,24 @@ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *newTextureData, sI
   int texture;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
   switch(M<UInt32>(newTextureDataBytes)) {
   case 0:
-    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_surface_texture(M<UInt32>(newTextureDataBytes + 4),
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->new_surface_texture(M<UInt32>(newTextureDataBytes + 4),
                        M<UInt32>(newTextureDataBytes + 8),M<UInt32>(newTextureDataBytes + 0xc),(unsigned int *)(returnDataBytes + 4));
     M<UInt32>(returnDataBytes) = 0;
     break;
   case 1:
-    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_global_texture(M<UInt32>(newTextureDataBytes + 4),
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->new_global_texture(M<UInt32>(newTextureDataBytes + 4),
                        (unsigned int *)(returnDataBytes + 4));
     M<UInt32>(returnDataBytes) = 0;
     break;
   case 2:
-    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(newTextureDataBytes + 4),0,0,0,
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->new_texture(M<UInt32>(newTextureDataBytes + 4),0,0,0,
                        (unsigned int *)returnDataBytes,(unsigned int *)(returnDataBytes + 4));
     break;
   case 3:
-    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(newTextureDataBytes + 4),
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->new_texture(M<UInt32>(newTextureDataBytes + 4),
                        M<UInt32>(newTextureDataBytes + 8),0,0,(unsigned int *)returnDataBytes,(unsigned int *)(returnDataBytes + 4));
     break;
   default:
@@ -64,7 +64,7 @@ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *newTextureData, sI
     M<UInt32>(returnDataBytes + 4) = 0;
     goto LAB_000094e0;
   case 6:
-    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_agpref_texture(M<unsigned int>(newTextureDataBytes + 4),
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->new_agpref_texture(M<unsigned int>(newTextureDataBytes + 4),
                        M<unsigned int>(newTextureDataBytes + 8),M<UInt32>(newTextureDataBytes + 0xc),(unsigned int *)(returnDataBytes + 4));
     if (texture == 0) {
       M<UInt32>(returnDataBytes) = 0;
@@ -74,7 +74,7 @@ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *newTextureData, sI
     M<UInt32>(returnDataBytes) = M<UInt32>(M<int>(texture + 0x54) + 0x58);
     goto LAB_00009410;
   case 7:
-    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(newTextureDataBytes + 4),
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->new_texture(M<UInt32>(newTextureDataBytes + 4),
                        M<UInt32>(newTextureDataBytes + 8),M<unsigned int>(newTextureDataBytes + 0xc),M<UInt32>(newTextureDataBytes + 0x10),
                        (unsigned int *)returnDataBytes,(unsigned int *)(returnDataBytes + 4));
   }
@@ -87,6 +87,6 @@ LAB_00009410:
     VCALL(M<int>(self), 0x5c0)(self,texture);
   }
 LAB_000094e0:
-  GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return result;
 }

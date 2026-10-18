@@ -35,18 +35,18 @@ IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
   SInt32 accel;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x8c) + 0x840));
-  accel = M<SInt32>(self + 0x8c);
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   if (M<char>(accel + 0x80) == '\0') {
     result = 0xe00002d8;
   }
-  else if (M<UInt8 *>(self + 0xf8) == (UInt8 *)0x0) {
+  else if (M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface) == (UInt8 *)0x0) {
     result = 0xe00002bc;
   }
   else {
     result = 0;
-    ((ATIR500Surface *)(M<UInt8 *>(self + 0xf8)))->enable_deint(mode);
-    accel = M<SInt32>(self + 0x8c);
+    ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->enable_deint(mode);
+    accel = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
   }
   GH_IOLockUnlock(M<UInt32>(accel + 0x840));
   return result;

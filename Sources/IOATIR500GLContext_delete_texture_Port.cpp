@@ -36,15 +36,15 @@ IOReturn IOATIR500GLContext::delete_texture(UInt32 textureID) {
   UInt32 result;
   UInt8 *texture;
   
-  GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
-  shared = M<UInt8 *>(self + 0x88);
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  shared = M<UInt8 *>(self + kIOATIR500GLContext_clientHandle);
   if ((textureID < M<unsigned int>(shared + 0x14)) &&
      (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
      texture != (UInt8 *)0x0)) {
     result = ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)(texture));
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
     return result;
   }
-  GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return 0xe00002c2;
 }

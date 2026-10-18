@@ -102,20 +102,20 @@ def	ATIR500DVDContext::doIDCT@0x35540	param_2	infoBytes	INFERRED	untyped alias o
 def	ATIR500DVDContext::doIDCT@0x35540	param_3	infoSize	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::dvd_enable_deint@0x34c90	param_1	mode	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::dvd_enable_overlay@0x34f30	param_1	enable	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_1	x	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_2	y	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_3	w	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_4	h	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_1	top	CONFIRMED	first argument is stored at surface+0x94, the rectangle top: ATIR500Surface::shape_surface computes the overlay height as (+0x9a) - (+0x94); dvd_setup_overlay and setup_buffers store their arguments to the same four fields in the same order (the x/y/w/h and topHeight/leftWidth/bottomHeight/rightWidth names guessed earlier disagreed with each other)
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_2	right	CONFIRMED	second argument is stored at surface+0x98, the rectangle right edge: shape_surface computes the overlay width as (+0x98) - (+0x96)
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_3	bottom	CONFIRMED	third argument is stored at surface+0x9a, the rectangle bottom: shape_surface computes the overlay height as (+0x9a) - (+0x94)
+def	ATIR500DVDContext::dvd_setup_overlay@0x34d50	param_4	left	CONFIRMED	fourth argument is stored at surface+0x96, the rectangle left edge: shape_surface computes the overlay width as (+0x98) - (+0x96)
 def	ATIR500DVDContext::read_regs@0x35120	param_1	offsets	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::read_regs@0x35120	param_2	outValues	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::read_regs@0x35120	param_3	byteCount	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::read_regs@0x35120	param_4	inOutCount	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::set_macrovision@0x35010	param_2	attribute	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::set_macrovision@0x35010	param_3	value	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::setup_buffers@0x34260	param_1	topHeight	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::setup_buffers@0x34260	param_2	leftWidth	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::setup_buffers@0x34260	param_3	bottomHeight	INFERRED	name from the class header declaration
-def	ATIR500DVDContext::setup_buffers@0x34260	param_4	rightWidth	INFERRED	name from the class header declaration
+def	ATIR500DVDContext::setup_buffers@0x34260	param_1	top	CONFIRMED	first argument is stored at surface+0x94, the rectangle top: ATIR500Surface::shape_surface computes the overlay height as (+0x9a) - (+0x94); dvd_setup_overlay and setup_buffers store their arguments to the same four fields in the same order (the x/y/w/h and topHeight/leftWidth/bottomHeight/rightWidth names guessed earlier disagreed with each other)
+def	ATIR500DVDContext::setup_buffers@0x34260	param_2	right	CONFIRMED	second argument is stored at surface+0x98, the rectangle right edge: shape_surface computes the overlay width as (+0x98) - (+0x96)
+def	ATIR500DVDContext::setup_buffers@0x34260	param_3	bottom	CONFIRMED	third argument is stored at surface+0x9a, the rectangle bottom: shape_surface computes the overlay height as (+0x9a) - (+0x94)
+def	ATIR500DVDContext::setup_buffers@0x34260	param_4	left	CONFIRMED	fourth argument is stored at surface+0x96, the rectangle left edge: shape_surface computes the overlay width as (+0x98) - (+0x96)
 def	ATIR500DVDContext::setup_buffers@0x34260	param_5	controlFlags	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::wait_for_stamps@0x34120	param_1	waitMain	INFERRED	name from the class header declaration
 def	ATIR500DVDContext::wait_for_stamps@0x34120	param_2	waitIDCT	INFERRED	name from the class header declaration

@@ -34,12 +34,12 @@ IOReturn IOATIR500GLContext::purge_texture(UInt32 textureID) {
 
   SInt32 texture;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  if ((textureID < M<UInt32>(M<SInt32>(self + 0x88) + 0x14)) &&
-     (texture = M<SInt32>(textureID * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)), texture != 0)) {
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  if ((textureID < M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14)) &&
+     (texture = M<SInt32>(textureID * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)), texture != 0)) {
     if (M<SInt32>(texture + 0x48) != 0) {
       /* #171: stock 0x98c0: r4 = the texture (lwzx r4 ... stw r4,0x38(r1)), deallocate_texture(VendorTextureBuffer*) */
-      VCALL(*M<SInt32 *>(self + 200), 0x524)(M<SInt32 *>(self + 200),texture);
+      VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x524)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),texture);
       M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 1;
       M<UInt16>(M<SInt32>(texture + 0x14) + 0x28) = 0;
       M<UInt16>(M<SInt32>(texture + 0x14) + 0x2a) = 0;
@@ -52,9 +52,9 @@ IOReturn IOATIR500GLContext::purge_texture(UInt32 textureID) {
     M<UInt32>(M<SInt32>(texture + 0x28) + 0x24) = M<UInt32>(texture + 0x24);
     M<SInt32>(texture + 0x24) = texture;
     M<SInt32>(texture + 0x28) = texture;
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
     return 0;
   }
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return 0xe00002c2;
 }

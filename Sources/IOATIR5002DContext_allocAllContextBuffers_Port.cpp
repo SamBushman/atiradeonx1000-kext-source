@@ -41,15 +41,15 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
   
   descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,size,GH_page_size);
   result = 0;
-  M<SInt32 *>(self + 0xbc) = descriptor;
+  M<SInt32 *>(self + kIOATIR5002DContext_contextBufferDescriptor) = descriptor;
   if (descriptor != (SInt32 *)0x0) {
     bufferIndex = 0;
     header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
-    M<VendorContextBufferHeader *>(self + 200) = header;
+    M<VendorContextBufferHeader *>(self + kIOATIR5002DContext_contextBufferHeader) = header;
     this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
     pIVar7 = self;
     do {
-      descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(M<SInt32>(self + 0x94) + 0x82c) | 0x10023,size,
+      descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x82c) | 0x10023,size,
                                    GH_page_size);
       M<SInt32 *>(pIVar7 + 0xd4) = descriptor;
       if (descriptor == (SInt32 *)0x0) {
@@ -69,14 +69,14 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
             pIVar7 = pIVar7 + -0x18;
           } while (released != bufferIndex);
         }
-        VCALL(*M<SInt32 *>(self + 0xbc), 0x18)(M<SInt32 *>(self + 0xbc));
-        M<UInt32>(self + 200) = 0;
-        M<UInt32>(self + 0xb4) = 0;
-        M<UInt32>(self + 0xb8) = 0;
-        M<UInt32>(self + 0xbc) = 0;
-        M<UInt16>(self + 0xc2) = 0;
-        M<UInt16>(self + 0xc0) = 0;
-        M<UInt32>(self + 0xc4) = 0;
+        VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_contextBufferDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR5002DContext_contextBufferDescriptor));
+        M<UInt32>(self + kIOATIR5002DContext_contextBufferHeader) = 0;
+        M<UInt32>(self + kIOATIR5002DContext_contextBuffer) = 0;
+        M<UInt32>(self + kIOATIR5002DContext_contextBufferGartOffset) = 0;
+        M<UInt32>(self + kIOATIR5002DContext_contextBufferDescriptor) = 0;
+        M<UInt16>(self + kIOATIR5002DContext_contextBufferInFlight) = 0;
+        M<UInt16>(self + kIOATIR5002DContext_contextBufferType) = 0;
+        M<UInt32>(self + kIOATIR5002DContext_contextBufferStamp) = 0;
         return 0;
       }
       header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);

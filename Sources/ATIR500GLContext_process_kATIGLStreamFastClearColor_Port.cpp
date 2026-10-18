@@ -52,12 +52,12 @@ void ATIR500GLContext::process_kATIGLStreamFastClearColor(UInt32*record) {
   SInt32 depthBuffer;
   
   clearWordIndex = record[1];
-  surface = M<SInt32>(self + 0x290);
-  uVar16 = M<UInt32>(self + 0x29c);
-  lodBlendWeight = M<SInt32>(self + 0x298);
-  colorBuffer = M<SInt32>((UInt32)M<UInt16>(self + 0xac) * 4 + surface + 0xb70);
-  depthRecord = (UInt32)M<UInt16>(self + 0xae) * 0x78 + surface;
-  depthBuffer = M<SInt32>((UInt32)M<UInt16>(self + 0xae) * 4 + surface + 0xb70);
+  surface = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
+  uVar16 = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
+  lodBlendWeight = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
+  colorBuffer = M<SInt32>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + surface + 0xb70);
+  depthRecord = (UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 0x78 + surface;
+  depthBuffer = M<SInt32>((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + surface + 0xb70);
   iVar10 = uVar16 * 4 + colorBuffer;
   basePitch = M<UInt16>(colorBuffer + 0x20);
   uVar14 = 0x10;

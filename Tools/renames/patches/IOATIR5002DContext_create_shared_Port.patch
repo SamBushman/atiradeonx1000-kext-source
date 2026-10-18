@@ -1,5 +1,5 @@
---- a/Sources/IOATIR5002DContext_create_shared_Port.cpp	2026-10-16 15:07:13.451634525 -0700
-+++ b/Sources/IOATIR5002DContext_create_shared_Port.cpp	2026-10-16 15:07:13.455825164 -0700
+--- a/Sources/IOATIR5002DContext_create_shared_Port.cpp	2026-10-17 20:32:50.460801871 -0700
++++ b/Sources/IOATIR5002DContext_create_shared_Port.cpp	2026-10-17 20:32:50.462059015 -0700
 @@ -27,6 +27,8 @@
  extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
  
@@ -19,5 +19,5 @@
 +  void *mem = OSObject::operator new(0x28);
 +  this_00 = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
    bVar3 = (this_00 == (UInt8 *)0x0) << 1;
-   M<UInt8 *>(self + 0x88) = this_00;
+   M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator) = this_00;
    if ((bool)(bVar3 >> 1 & 1)) {

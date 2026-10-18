@@ -43,21 +43,21 @@ bool IOATIR5002DContext::create_shared() {
   void *mem = OSObject::operator new(0x28);
   this_00 = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
   bVar3 = (this_00 == (UInt8 *)0x0) << 1;
-  M<UInt8 *>(self + 0x88) = this_00;
+  M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator) = this_00;
   if ((bool)(bVar3 >> 1 & 1)) {
     uVar1 = 0;
   }
   else {
     iVar2 = VCALL(M<SInt32>(this_00), 0x48)(this_00);
     if (iVar2 == 0) {
-      VCALL(*M<SInt32 *>(self + 0x88), 0x18)(M<SInt32 *>(self + 0x88));
+      VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_sharedAllocator), 0x18)(M<SInt32 *>(self + kIOATIR5002DContext_sharedAllocator));
       uVar1 = 0;
-      M<UInt32>(self + 0x88) = 0;
+      M<UInt32>(self + kIOATIR5002DContext_sharedAllocator) = 0;
     }
     else {
       uVar1 = 1;
-      M<UInt32>(M<SInt32>(self + 0x88) + 0xc) = M<UInt32>(self + 0x94);
-      M<UInt32>(M<SInt32>(self + 0x88) + 8) = M<UInt32>(self + 0x78);
+      M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0xc) = M<UInt32>(self + kIOATIR5002DContext_accelerator);
+      M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 8) = M<UInt32>(self + kIOATIR5002DContext_task);
     }
   }
   return uVar1;

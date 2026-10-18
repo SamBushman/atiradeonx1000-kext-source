@@ -71,10 +71,10 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   iVar3 = GH_page_size;
   switch(type) {
   case 0:
-    if (M<int *>(M<int>(self + 200) + 0xac) != (int *)0x0) {
-      VCALL(*M<int *>(M<int>(self + 200) + 0xac), 0x14)(M<int *>(M<int>(self + 200) + 0xac));
+    if (M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xac) != (int *)0x0) {
+      VCALL(*M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xac), 0x14)(M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xac));
       *options = 0;
-      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + 200) + 0xac));
+      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xac));
       return 0;
     }
     break;
@@ -84,49 +84,49 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
     surfaceBits = 0;
 retryAllocation:
     do {
-      GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
-      surface = M<UInt8 *>(self + 0x290);
+      GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
+      surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
       if (surface == (UInt8 *)0x0) {
 noSurface:
         commandBufferFlags = 0;
 abortSetup:
         recordSwapStamp = false;
         VCALL(M<int>(self), 0x5b8)(self);
-        M<UInt32>(M<int>(self + 200) + 0x78) = 0;
+        M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x78) = 0;
 finishCommandBuffer:
-        iVar3 = M<int>(self + 0xe8);
-        if (M<int>(self + 0xe8) != M<int>(self + 0xec)) {
+        iVar3 = M<int>(self + kIOATIR500GLContext_dataBufferListHead);
+        if (M<int>(self + kIOATIR500GLContext_dataBufferListHead) != M<int>(self + kIOATIR500GLContext_dataBufferListTail)) {
           do {
             iVar10 = M<int>(iVar3 + 0x3c);
-            iVar9 = M<int>(M<int>(self + 200) + 0x5d0);
+            iVar9 = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d0);
             if (iVar9 == 0) {
-              M<int>(M<int>(self + 200) + 0x5cc) = iVar3;
-              M<int>(M<int>(self + 200) + 0x5d0) = iVar3;
+              M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5cc) = iVar3;
+              M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = iVar3;
               M<UInt32>(iVar3 + 0x3c) = 0;
             }
             else {
               M<int>(iVar9 + 0x3c) = iVar3;
-              M<int>(M<int>(self + 200) + 0x5d0) = iVar3;
+              M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = iVar3;
               M<UInt32>(iVar3 + 0x3c) = 0;
             }
-            M<int>(M<int>(self + 200) + 0x5d4) = M<int>(M<int>(self + 200) + 0x5d4) + 1;
+            M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + 1;
             M<UInt8>(iVar3 + 0x54) = 0;
             iVar3 = iVar10;
-          } while (M<int>(self + 0xec) != iVar10);
-          M<int>(self + 0xe8) = iVar10;
+          } while (M<int>(self + kIOATIR500GLContext_dataBufferListTail) != iVar10);
+          M<int>(self + kIOATIR500GLContext_dataBufferListHead) = iVar10;
           M<UInt32>(iVar10 + 0x3c) = 0;
-          M<UInt32>(self + 0xf0) = 1;
+          M<UInt32>(self + kIOATIR500GLContext_dataBufferCount) = 1;
         }
-        VCALL(*M<int *>(self + 0xd4), 0x14)(M<int *>(self + 0xd4));
+        VCALL(*M<int *>(self + kIOATIR500GLContext_commandBufferDescriptor), 0x14)(M<int *>(self + kIOATIR500GLContext_commandBufferDescriptor));
         *options = 0;
-        *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xd4));
-        this->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0xe0)),M<UInt32>(self + 0xe4),commandBufferFlags)
+        *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + kIOATIR500GLContext_commandBufferDescriptor));
+        this->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + kIOATIR500GLContext_commandBufferHeader)),M<UInt32>(self + kIOATIR500GLContext_commandBufferSize),commandBufferFlags)
         ;
-        GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+        GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
         if (!recordSwapStamp) {
           return 0;
         }
-        piVar5 = M<int *>(self + 200);
+        piVar5 = M<int *>(self + kIOATIR500GLContext_accelerator);
         iVar9 = piVar5[0x1e6];
         iVar3 = VCALL(*piVar5, 0x55c)
                           (piVar5,M<UInt32>(self + M<int>(self + 0xa8) * 4 + 0x9c));
@@ -135,15 +135,15 @@ finishCommandBuffer:
       }
       if (M<unsigned int>(surface + 0xa4) < 0x100) {
 surfaceReady:
-        iVar3 = M<int>(self + 200);
+        iVar3 = M<int>(self + kIOATIR500GLContext_accelerator);
       }
       else {
-        iVar3 = M<int>(self + 200);
+        iVar3 = M<int>(self + kIOATIR500GLContext_accelerator);
         if (M<char>(iVar3 + 0x80) == '\0') {
           do {
             GH_IOLockSleep(M<UInt32>(iVar3 + 0x840),iVar3,0);
           } while (M<char>(iVar3 + 0x80) == '\0');
-          surface = M<UInt8 *>(self + 0x290);
+          surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
           if (surface != (UInt8 *)0x0) goto surfaceReady;
           goto noSurface;
         }
@@ -151,14 +151,14 @@ surfaceReady:
       if (M<char>(iVar3 + 0x80) == '\0') goto noSurface;
       if (surface[0xbf6] == 0x0) {
         commandBufferFlags = M<UInt32>(surface + 0xbfc);
-        if ((M<SInt16>(self + 0x98) != 0) && ((M<unsigned int>(surface + 0xbe8) & 0x20) != 0)) {
+        if ((M<SInt16>(self + kIOATIR500GLContext_swapIntervalNumerator) != 0) && ((M<unsigned int>(surface + 0xbe8) & 0x20) != 0)) {
           commandBufferFlags = commandBufferFlags | 2;
         }
         if ((surface[0xbd0] == 0x0) || (retryCount == 999)) {
           allocatedMask = M<unsigned int>(surface + 0xbf8);
-          if (((M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & allocatedMask) != 0) {
+          if (((M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(surface + 0xc1c)) & allocatedMask) != 0) {
             if ((allocatedMask & 0x20000000) != 0) goto abortSetup;
-            neededMask = (M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
+            neededMask = (M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
             presentNeeded = allocatedMask & neededMask;
             if (presentNeeded == 0) {
               iVar3 = M<int>(surface);
@@ -171,20 +171,20 @@ surfaceReady:
               if (((M<unsigned int>(surface + 0xbe8) & 0x20) == 0) && ((presentNeeded & 0x20) != 0)) {
                 pendingSubmits = pendingSubmits | 2;
               }
-              surfaceBits = ((IOATIR500Surface *)(surface))->convert_surface_bits(M<UInt32>(M<int>(self + 0xe0) + 0xc));
-              iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + 0x290)))->alloc_surfaces_pageq(neededMask,surfaceBits,false);   /* r6 = 0: the decompile drops the register args after the mask; checked against the disassembly at 0xa3c4 */
+              surfaceBits = ((IOATIR500Surface *)(surface))->convert_surface_bits(M<UInt32>(M<int>(self + kIOATIR500GLContext_commandBufferHeader) + 0xc));
+              iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + kIOATIR500GLContext_boundSurface)))->alloc_surfaces_pageq(neededMask,surfaceBits,false);   /* r6 = 0: the decompile drops the register args after the mask; checked against the disassembly at 0xa3c4 */
               if (iVar3 != 0) {
                 if (iVar3 != 2) goto retryOrGiveUp;
                 goto abortSetup;
               }
-              surface = M<UInt8 *>(self + 0x290);
+              surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
               if ((M<unsigned int>(surface + 0xbf8) & M<unsigned int>(surface + 0xc1c) & 0x10000000) == 0)
               goto afterPageQueue;
               iVar3 = M<int>(surface);
             }
             VCALL(iVar3, 0x5c0)(surface);
-            M<unsigned int>(M<int>(self + 0x290) + 0xbf8) =
-                 M<unsigned int>(M<int>(self + 0x290) + 0xbf8) & 0xefffffff;
+            M<unsigned int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xbf8) =
+                 M<unsigned int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xbf8) & 0xefffffff;
           }
 afterPageQueue:
           if (999 < retryCount) {
@@ -196,32 +196,32 @@ afterPageQueue:
 retryOrGiveUp:
           if (retryCount != 1000) {
             retryCount = retryCount + 1;
-            GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+            GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
             GH_thread_block(0);
             GH_IOSleep(1);
             goto retryAllocation;
           }
 forceAllocation:
-          iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + 0x290)))->alloc_surfaces_pageq((M<unsigned int>(self + 0x8c) | M<unsigned int>(M<UInt32>(self + 0x290) + 0xc1c))
+          iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + kIOATIR500GLContext_boundSurface)))->alloc_surfaces_pageq((M<unsigned int>(self + kIOATIR500GLContext_surfaceFlagsBitmask) | M<unsigned int>(M<UInt32>(self + kIOATIR500GLContext_boundSurface) + 0xc1c))
                              & 0x7fffff,surfaceBits,true);   /* r6 = 1 (disassembly 0xa448) */
           if (iVar3 != 0) goto abortSetup;
-          piVar5 = M<int *>(self + 0x290);
+          piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
           if ((piVar5[0x2fe] & piVar5[0x307] & 0x10000000U) != 0) {
             VCALL(*piVar5, 0x5c0)(piVar5);
-            M<unsigned int>(M<int>(self + 0x290) + 0xbf8) =
-                 M<unsigned int>(M<int>(self + 0x290) + 0xbf8) & 0xefffffff;
+            M<unsigned int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xbf8) =
+                 M<unsigned int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xbf8) & 0xefffffff;
           }
         }
         if (pendingSubmits != 0) {
           if ((pendingSubmits & 1) != 0) {
-            VCALL(*M<int *>(self + 0x290), 0x5d8)(M<int *>(self + 0x290),0,1,self);
-            M<int>(M<int>(self + 200) + 0x74c) = M<int>(M<int>(self + 200) + 0x74c) + 1;
+            VCALL(*M<int *>(self + kIOATIR500GLContext_boundSurface), 0x5d8)(M<int *>(self + kIOATIR500GLContext_boundSurface),0,1,self);
+            M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) + 1;
           }
           if ((pendingSubmits & 2) != 0) {
-            piVar5 = M<int *>(self + 0x290);
-            if ((1 << (piVar5[0x305] & 0x3fU) & M<unsigned int>(M<int>(self + 200) + 0xd0)) != 0) {
+            piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
+            if ((1 << (piVar5[0x305] & 0x3fU) & M<unsigned int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xd0)) != 0) {
               VCALL(*piVar5, 0x5e0)(piVar5,piVar5[0x305],self,0);
-              M<int>(M<int>(self + 200) + 0x74c) = M<int>(M<int>(self + 200) + 0x74c) + 1;
+              M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) + 1;
             }
           }
         }
@@ -232,15 +232,15 @@ forceAllocation:
           }
           textureSlot = textureSlot + 4;
         } while (self + 0xa8 != textureSlot);
-        if (self != M<UInt8 *>(M<int>(self + 200) + 0x78)) {
+        if (self != M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x78)) {
           VCALL(M<int>(self), 0x5b0)(self);
-          M<int>(M<int>(self + 200) + 0x740) = M<int>(M<int>(self + 200) + 0x740) + 1;
-          M<UInt8 *>(M<int>(self + 200) + 0x78) = self;
+          M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x740) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x740) + 1;
+          M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x78) = self;
         }
-        VCALL(*M<int *>(self + 0x290), 0x5b8)
-                  (M<int *>(self + 0x290),M<UInt32>(self + 0x8c));
-        if (M<int>(self + 0xd0) == 0) {
-          this->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0xcc)));
+        VCALL(*M<int *>(self + kIOATIR500GLContext_boundSurface), 0x5b8)
+                  (M<int *>(self + kIOATIR500GLContext_boundSurface),M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask));
+        if (M<int>(self + kIOATIR500GLContext_commandBufferGartOffset) == 0) {
+          this->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500GLContext_commandBuffer)));
         }
         swapRequest = VCALL(M<int>(self), 0x5b4)(self,descriptor);
         textureSlot = self;
@@ -250,72 +250,72 @@ forceAllocation:
           }
           textureSlot = textureSlot + 4;
         } while (self + 0xa8 != textureSlot);
-        if (((unsigned int)(M<int>(M<int>(self + 0xe0) + 0x10) * 4 - GH_page_size) <
-             (unsigned int)(descriptor[3] - (M<int>(self + 0xe0) + 0x20))) &&
-           (M<unsigned int>(self + 0xb0) < 0x80000)) {
-          M<unsigned int>(self + 0xb0) = M<unsigned int>(self + 0xb0) << 1;
+        if (((unsigned int)(M<int>(M<int>(self + kIOATIR500GLContext_commandBufferHeader) + 0x10) * 4 - GH_page_size) <
+             (unsigned int)(descriptor[3] - (M<int>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20))) &&
+           (M<unsigned int>(self + kIOATIR500GLContext_commandBufferSizeHint) < 0x80000)) {
+          M<unsigned int>(self + kIOATIR500GLContext_commandBufferSizeHint) = M<unsigned int>(self + kIOATIR500GLContext_commandBufferSizeHint) << 1;
         }
         if (descriptor[2] == 0) {
-          iVar3 = M<int>(M<int>(self + 200) + 0x50) + -1;
+          iVar3 = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x50) + -1;
         }
         else {
-          M<int>(M<int>(self + 200) + 0x704) =
-               descriptor[2] * 4 + M<int>(M<int>(self + 200) + 0x704);
-          iVar3 = VCALL(*M<int *>(self + 200), 0x560)(M<int *>(self + 200),descriptor);
+          M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x704) =
+               descriptor[2] * 4 + M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x704);
+          iVar3 = VCALL(*M<int *>(self + kIOATIR500GLContext_accelerator), 0x560)(M<int *>(self + kIOATIR500GLContext_accelerator),descriptor);
         }
-        piVar5 = M<int *>(self + 0x290);
-        iVar3 = VCALL(*piVar5, 0x5b4)(piVar5,iVar3,M<UInt32>(self + 0x8c));
+        piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
+        iVar3 = VCALL(*piVar5, 0x5b4)(piVar5,iVar3,M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask));
         piVar5[0x1f] = iVar3;
-        M<int>(self + 0x7c) = iVar3;
-        M<int>(self + 0xdc) = iVar3;
-        piVar5 = M<int *>(self + 0x290);
-        if (piVar5 != M<int *>(M<int>(self + 200) + 0x5c)) {
+        M<int>(self + kIOATIR500GLContext_lastSubmitStamp) = iVar3;
+        M<int>(self + kIOATIR500GLContext_commandBufferStamp) = iVar3;
+        piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
+        if (piVar5 != M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5c)) {
           M<int>(piVar5[0x27] + 0xa0) = piVar5[0x28];
-          M<UInt32>(M<int>(M<int>(self + 0x290) + 0xa0) + 0x9c) =
-               M<UInt32>(M<int>(self + 0x290) + 0x9c);
-          iVar3 = M<int>(M<int>(self + 200) + 0x5c);
-          M<int>(M<int>(self + 0x290) + 0x9c) = iVar3;
+          M<UInt32>(M<int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xa0) + 0x9c) =
+               M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0x9c);
+          iVar3 = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5c);
+          M<int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0x9c) = iVar3;
           iVar9 = M<int>(iVar3 + 0xa0);
-          M<int>(M<int>(self + 0x290) + 0xa0) = iVar9;
-          M<UInt32>(iVar3 + 0xa0) = M<UInt32>(self + 0x290);
-          M<UInt32>(iVar9 + 0x9c) = M<UInt32>(self + 0x290);
-          M<UInt32>(M<int>(self + 200) + 0x5c) = M<UInt32>(self + 0x290);
-          piVar5 = M<int *>(self + 0x290);
+          M<int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xa0) = iVar9;
+          M<UInt32>(iVar3 + 0xa0) = M<UInt32>(self + kIOATIR500GLContext_boundSurface);
+          M<UInt32>(iVar9 + 0x9c) = M<UInt32>(self + kIOATIR500GLContext_boundSurface);
+          M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5c) = M<UInt32>(self + kIOATIR500GLContext_boundSurface);
+          piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
         }
-        VCALL(*piVar5, 0x5bc)(piVar5,M<UInt32>(self + 0x8c));
+        VCALL(*piVar5, 0x5bc)(piVar5,M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask));
         if ((commandBufferFlags & 2) != 0) {
           swapRequest = swapRequest & 1;
         }
         if (swapRequest == 0) {
-          piVar5 = M<int *>(self + 200);
+          piVar5 = M<int *>(self + kIOATIR500GLContext_accelerator);
 noStampRecord:
           recordSwapStamp = false;
         }
         else {
-          M<UInt32>(M<int>(self + 0x290) + 0x84) =
-               M<UInt32>(M<int>(self + 0x290) + 0x80);
-          piVar5 = M<int *>(self + 0x290);
+          M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0x84) =
+               M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0x80);
+          piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
           if ((piVar5[0x2fa] & 0x20U) == 0) {
             iVar3 = VCALL(*piVar5, 0x5dc)(piVar5);
             if (iVar3 == 0) {
-              piVar5 = M<int *>(self + 0x290);
+              piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
               goto submitFlips;
             }
-            iVar3 = M<int>(self + 0x290);
+            iVar3 = M<int>(self + kIOATIR500GLContext_boundSurface);
             uVar6 = M<UInt32>(iVar3 + 0xb74);
             flipPanel = M<unsigned int>(iVar3 + 0xc14);
             M<UInt32>(iVar3 + 0xb74) = M<UInt32>(iVar3 + 0xb70);
-            M<UInt32>(M<int>(self + 0x290) + 0xb70) = uVar6;
-            iVar3 = M<int>(self + 0x290);
+            M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xb70) = uVar6;
+            iVar3 = M<int>(self + kIOATIR500GLContext_boundSurface);
             uVar6 = M<UInt32>(iVar3 + 0xb80);
             M<UInt32>(iVar3 + 0xb80) = M<UInt32>(iVar3 + 0xb84);
-            M<UInt32>(M<int>(self + 0x290) + 0xb84) = uVar6;
-            piVar5 = M<int *>(self + 200);
+            M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xb84) = uVar6;
+            piVar5 = M<int *>(self + kIOATIR500GLContext_accelerator);
             if ((1 << (flipPanel & 0x3f) & piVar5[0x34]) != 0) {
-              VCALL(*M<int *>(self + 0x290), 0x5e0)(M<int *>(self + 0x290),flipPanel,self,0)
+              VCALL(*M<int *>(self + kIOATIR500GLContext_boundSurface), 0x5e0)(M<int *>(self + kIOATIR500GLContext_boundSurface),flipPanel,self,0)
               ;
-              M<int>(M<int>(self + 200) + 0x74c) = M<int>(M<int>(self + 200) + 0x74c) + 1;
-              piVar5 = M<int *>(self + 200);
+              M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) + 1;
+              piVar5 = M<int *>(self + kIOATIR500GLContext_accelerator);
             }
           }
           else {
@@ -327,69 +327,69 @@ submitFlips:
               if ((M<char>((int)piVar5 + iVar3 + 0xcac) != '\0') ||
                  (swapArg = swapRequest & 1, swapArg != 0)) {
                 VCALL(*piVar5, 0x5d8)(piVar5,panel,swapArg,self);
-                M<int>(M<int>(self + 200) + 0x74c) = M<int>(M<int>(self + 200) + 0x74c) + 1;
+                M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x74c) + 1;
               }
-              piVar5 = M<int *>(self + 200);
+              piVar5 = M<int *>(self + kIOATIR500GLContext_accelerator);
               panel = panel + 1;
               iVar3 = iVar3 + 0x94;
               if (((unsigned int)piVar5[0x33] <= panel) || (swapRequest = swapRequest & 0xfffffffe, swapRequest == 0))
               break;
-              piVar5 = M<int *>(self + 0x290);
+              piVar5 = M<int *>(self + kIOATIR500GLContext_boundSurface);
             }
           }
-          if (M<SInt16>(self + 0x9a) == 0) goto noStampRecord;
+          if (M<SInt16>(self + kIOATIR500GLContext_swapIntervalDenominator) == 0) goto noStampRecord;
           iVar3 = M<int>(self + 0xa8);
           recordSwapStamp = true;
-          M<UInt32>(self + iVar3 * 4 + 0x9c) = M<UInt32>(M<int>(self + 0x290) + 0x84);
+          M<UInt32>(self + iVar3 * 4 + 0x9c) = M<UInt32>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0x84);
           M<unsigned int>(self + 0xa8) = (iVar3 + 1U) % 3;
         }
-        if ((unsigned int)piVar5[0x172] < M<unsigned int>(self + 0xb0)) {
-          piVar5[0x172] = M<unsigned int>(self + 0xb0);
-          piVar5 = M<int *>(self + 200);
+        if ((unsigned int)piVar5[0x172] < M<unsigned int>(self + kIOATIR500GLContext_commandBufferSizeHint)) {
+          piVar5[0x172] = M<unsigned int>(self + kIOATIR500GLContext_commandBufferSizeHint);
+          piVar5 = M<int *>(self + kIOATIR500GLContext_accelerator);
         }
         ringSlot = piVar5 + (unsigned int)M<UInt16>(piVar5 + 0x100) * 7 + 0x90;
         iVar3 = VCALL(*piVar5, 0x554)(piVar5,ringSlot[4]);
         if (iVar3 == 0) {
-          accel = M<UInt8 *>(self + 200);
+          accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
           if (M<UInt16>(accel + 0x402) < 0x10) {
             iVar3 = ((IOATIR500Accelerator *)(accel))->allocMoreCommandBuffers(0,M<UInt32>(accel + 0x5c8));
             if (iVar3 != 0) {
-              iVar3 = M<int>(self + 200);
+              iVar3 = M<int>(self + kIOATIR500GLContext_accelerator);
               ringSlot = (int *)(iVar3 + (unsigned int)M<UInt16>(iVar3 + 0x400) * 0x1c + 0x240);
               goto advanceRing;
             }
-            accel = M<UInt8 *>(self + 200);
+            accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
           }
           iVar9 = M<int>(accel + 0x770);
           iVar3 = VCALL(M<int>(accel), 0x54c)(accel,ringSlot[4]);
           M<int>(accel + 0x770) = iVar9 + iVar3;
-          iVar3 = M<int>(self + 200);
+          iVar3 = M<int>(self + kIOATIR500GLContext_accelerator);
         }
         else {
-          iVar3 = M<int>(self + 200);
+          iVar3 = M<int>(self + kIOATIR500GLContext_accelerator);
         }
 advanceRing:
         M<UInt16>(iVar3 + 0x400) = M<SInt16>(iVar3 + 0x400) + 1U & M<SInt16>(iVar3 + 0x402) - 1U
         ;
-        cmdBufBlock[3] = M<int>(self + 0xd8);
-        cmdBufBlock[4] = M<int>(self + 0xdc);
-        cmdBufBlock[5] = M<int>(self + 0xe0);
-        cmdBufBlock[6] = M<int>(self + 0xe4);
-        cmdBufBlock[0] = M<int>(self + 0xcc);
-        cmdBufBlock[1] = M<int>(self + 0xd0);
-        cmdBufBlock[2] = M<int>(self + 0xd4);
+        cmdBufBlock[3] = M<int>(self + kIOATIR500GLContext_commandBufferState);
+        cmdBufBlock[4] = M<int>(self + kIOATIR500GLContext_commandBufferStamp);
+        cmdBufBlock[5] = M<int>(self + kIOATIR500GLContext_commandBufferHeader);
+        cmdBufBlock[6] = M<int>(self + kIOATIR500GLContext_commandBufferSize);
+        cmdBufBlock[0] = M<int>(self + kIOATIR500GLContext_commandBuffer);
+        cmdBufBlock[1] = M<int>(self + kIOATIR500GLContext_commandBufferGartOffset);
+        cmdBufBlock[2] = M<int>(self + kIOATIR500GLContext_commandBufferDescriptor);
         iVar3 = ringSlot[1];
         iVar9 = ringSlot[2];
         iVar10 = ringSlot[3];
-        M<int>(self + 0xcc) = *ringSlot;
-        M<int>(self + 0xd0) = iVar3;
-        M<int>(self + 0xd4) = iVar9;
-        M<int>(self + 0xd8) = iVar10;
+        M<int>(self + kIOATIR500GLContext_commandBuffer) = *ringSlot;
+        M<int>(self + kIOATIR500GLContext_commandBufferGartOffset) = iVar3;
+        M<int>(self + kIOATIR500GLContext_commandBufferDescriptor) = iVar9;
+        M<int>(self + kIOATIR500GLContext_commandBufferState) = iVar10;
         iVar3 = ringSlot[5];
         iVar9 = ringSlot[6];
-        M<int>(self + 0xdc) = ringSlot[4];
-        M<int>(self + 0xe0) = iVar3;
-        M<int>(self + 0xe4) = iVar9;
+        M<int>(self + kIOATIR500GLContext_commandBufferStamp) = ringSlot[4];
+        M<int>(self + kIOATIR500GLContext_commandBufferHeader) = iVar3;
+        M<int>(self + kIOATIR500GLContext_commandBufferSize) = iVar9;
         *ringSlot = cmdBufBlock[0];
         ringSlot[1] = cmdBufBlock[1];
         ringSlot[2] = cmdBufBlock[2];
@@ -397,8 +397,8 @@ advanceRing:
         ringSlot[4] = cmdBufBlock[4];
         ringSlot[5] = cmdBufBlock[5];
         ringSlot[6] = cmdBufBlock[6];
-        accel = M<UInt8 *>(self + 200);
-        if (M<int>(self + 0xe4) != M<int>(accel + 0x5c8)) {
+        accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
+        if (M<int>(self + kIOATIR500GLContext_commandBufferSize) != M<int>(accel + 0x5c8)) {
           cmdBufBlock[3] = 0x10000;
           cmdBufBlock[6] = 0;
           cmdBufBlock[0] = 0;
@@ -408,26 +408,26 @@ advanceRing:
           cmdBufBlock[5] = 0;
           iVar3 = ((IOATIR500Accelerator *)(accel))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accel + 0x5c8));
           if (iVar3 == 0) {
-            accel = M<UInt8 *>(self + 200);
+            accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
           }
           else {
             this->freeCommandBuffer();
-            ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0xcc)));
-            accel = M<UInt8 *>(self + 200);
-            M<int>(self + 0xd0) = cmdBufBlock[1];
-            M<int>(self + 0xd4) = cmdBufBlock[2];
-            M<int>(self + 0xd8) = cmdBufBlock[3];
-            M<int>(self + 0xdc) = cmdBufBlock[4];
-            M<int>(self + 0xe0) = cmdBufBlock[5];
-            M<int>(self + 0xe4) = cmdBufBlock[6];
-            M<int>(self + 0xcc) = cmdBufBlock[0];
+            ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + kIOATIR500GLContext_commandBuffer)));
+            accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
+            M<int>(self + kIOATIR500GLContext_commandBufferGartOffset) = cmdBufBlock[1];
+            M<int>(self + kIOATIR500GLContext_commandBufferDescriptor) = cmdBufBlock[2];
+            M<int>(self + kIOATIR500GLContext_commandBufferState) = cmdBufBlock[3];
+            M<int>(self + kIOATIR500GLContext_commandBufferStamp) = cmdBufBlock[4];
+            M<int>(self + kIOATIR500GLContext_commandBufferHeader) = cmdBufBlock[5];
+            M<int>(self + kIOATIR500GLContext_commandBufferSize) = cmdBufBlock[6];
+            M<int>(self + kIOATIR500GLContext_commandBuffer) = cmdBufBlock[0];
           }
         }
-        M<UInt32>(self + 0xdc) = M<UInt32>(self + 0x7c);
+        M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp) = M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp);
         if (accel[0x88] == 0x0) {
           VCALL(*M<int *>(accel + 0xc0), 300)
                     (M<int *>(accel + 0xc0),M<UInt32>(accel + 0x8c));
-          M<UInt8>(M<int>(self + 200) + 0x88) = 1;
+          M<UInt8>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x88) = 1;
         }
         else {
           accel[0x89] = 0x1;
@@ -435,51 +435,51 @@ advanceRing:
         goto finishCommandBuffer;
       }
       VCALL(M<int>(surface), 0x14)(surface);
-      GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+      GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
       ((IOATIR500Surface *)(surface))->sleep_blocked();
       VCALL(M<int>(surface), 0x18)(surface);
     } while( true );
   case 2:
-    GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
-    VCALL(*M<int *>(self + 0xfc), 0x14)(M<int *>(self + 0xfc));
+    GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
+    VCALL(*M<int *>(self + kIOATIR500GLContext_contextBufferDescriptor), 0x14)(M<int *>(self + kIOATIR500GLContext_contextBufferDescriptor));
     *options = 0;
-    *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xfc));
-    this->init_context_buffer_header((VendorContextBufferHeader *)(M<VendorContextBufferHeader *>(self + 0x108)),0x8000);
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
+    *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + kIOATIR500GLContext_contextBufferDescriptor));
+    this->init_context_buffer_header((VendorContextBufferHeader *)(M<VendorContextBufferHeader *>(self + kIOATIR500GLContext_contextBufferHeader)),0x8000);
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
     return 0;
   case 3:
-    if (M<int *>(M<int>(self + 200) + 0xb0) != (int *)0x0) {
-      VCALL(*M<int *>(M<int>(self + 200) + 0xb0), 0x14)(M<int *>(M<int>(self + 200) + 0xb0));
+    if (M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xb0) != (int *)0x0) {
+      VCALL(*M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xb0), 0x14)(M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xb0));
       *options = 0;
-      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + 200) + 0xb0));
+      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xb0));
       return 0;
     }
     break;
   case 4:
-    if (M<int>(self + 0xb8) == 0) {
-      M<int>(self + 0xbc) = GH_page_size;
+    if (M<int>(self + kIOATIR500GLContext_statusDescriptor) == 0) {
+      M<int>(self + kIOATIR500GLContext_statusRegionSize) = GH_page_size;
       piVar5 = (int *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,iVar3,GH_page_size);
-      M<int *>(self + 0xb8) = piVar5;
+      M<int *>(self + kIOATIR500GLContext_statusDescriptor) = piVar5;
       if (piVar5 != (int *)0x0) {
         uVar6 = VCALL(*piVar5, 0x1cc)(piVar5);
-        M<UInt32>(self + 0xc0) = uVar6;
+        M<UInt32>(self + kIOATIR500GLContext_statusRegion) = uVar6;
 retainDescriptor:
-        VCALL(*M<int *>(self + 0xb8), 0x14)(M<int *>(self + 0xb8));
+        VCALL(*M<int *>(self + kIOATIR500GLContext_statusDescriptor), 0x14)(M<int *>(self + kIOATIR500GLContext_statusDescriptor));
         *options = 0;
-        *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xb8));
+        *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + kIOATIR500GLContext_statusDescriptor));
         return 0;
       }
     }
     else {
-      iVar3 = M<int>(self + 0xbc);
+      iVar3 = M<int>(self + kIOATIR500GLContext_statusRegionSize);
       piVar5 = (int *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,iVar3 << 1,GH_page_size);
       if (piVar5 != (int *)0x0) {
         uVar6 = VCALL(*piVar5, 0x1cc)(piVar5);
-        GH_memcpy(uVar6,M<UInt32>(self + 0xc0),M<UInt32>(self + 0xbc));
-        VCALL(*M<int *>(self + 0xb8), 0x18)(M<int *>(self + 0xb8));
-        M<int *>(self + 0xb8) = piVar5;
-        M<int>(self + 0xbc) = iVar3 << 1;
-        M<UInt32>(self + 0xc0) = uVar6;
+        GH_memcpy(uVar6,M<UInt32>(self + kIOATIR500GLContext_statusRegion),M<UInt32>(self + kIOATIR500GLContext_statusRegionSize));
+        VCALL(*M<int *>(self + kIOATIR500GLContext_statusDescriptor), 0x18)(M<int *>(self + kIOATIR500GLContext_statusDescriptor));
+        M<int *>(self + kIOATIR500GLContext_statusDescriptor) = piVar5;
+        M<int>(self + kIOATIR500GLContext_statusRegionSize) = iVar3 << 1;
+        M<UInt32>(self + kIOATIR500GLContext_statusRegion) = uVar6;
         goto retainDescriptor;
       }
     }

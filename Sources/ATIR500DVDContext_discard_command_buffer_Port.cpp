@@ -40,19 +40,19 @@ void ATIR500DVDContext::discard_command_buffer() {
   UInt32 recordWord;
   UInt32 *record;
   
-  record = (UInt32 *)(M<SInt32>(self + 0xa4) + 0x1c);
+  record = (UInt32 *)(M<SInt32>(self + kIOATIR500DVDContext_commandBufferHeader) + 0x1c);
   do {
     recordWord = *record;
     uVar1 = recordWord & 0xff000000;
     if (uVar1 == 0x2a000000) {
 LAB_00033ed0:
-      if ((record[1] < M<UInt32>(M<SInt32>(self + 0x84) + 0x14)) &&
-         (iVar4 = M<SInt32>(record[1] * 4 + M<SInt32>(M<SInt32>(self + 0x84) + 0x10)), iVar4 != 0)) {
+      if ((record[1] < M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x14)) &&
+         (iVar4 = M<SInt32>(record[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x10)), iVar4 != 0)) {
         slotOffset = (uVar1 + 0xe7000000 >> 0x18) * 4;
         if ((M<SInt32>(self + slotOffset + 0x104) != 0) &&
            (oldRefCount = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + slotOffset + 0x104) + 0x14) + 0x10), oldRefCount == 1
            )) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + slotOffset + 0x104)));
+          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + slotOffset + 0x104)));
         }
         GH_OSAddAtomic(0xffff0001,M<SInt32>(iVar4 + 0x14) + 0x10);
         recordLength = recordWord & 0xffffff;
@@ -103,7 +103,7 @@ LAB_00033f70:
         if (M<SInt32>(self + uVar1 + 0x104) != 0) {
           iVar4 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + uVar1 + 0x104) + 0x14) + 0x10);
           if (iVar4 == 1) {
-            ((IOATIR500Shared *)(M<UInt8 *>(self + 0x84)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + uVar1 + 0x104)));
+            ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + uVar1 + 0x104)));
           }
           recordLength = recordWord & 0xffffff;
           M<UInt32>(self + uVar1 + 0x104) = 0;

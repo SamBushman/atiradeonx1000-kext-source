@@ -35,8 +35,8 @@ void IOATIR500GLContext::freeCommandBuffer() {
   SInt32 *mapping;
   SInt32 context;
   
-  if (M<SInt32>(self + 0xd4) != 0) {
-    accel = M<SInt32>(self + 200);
+  if (M<SInt32>(self + kIOATIR500GLContext_commandBufferDescriptor) != 0) {
+    accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
     context = M<SInt32>(accel + 0x60);
     if (context == 0) {
       if (M<SInt32>(accel + 0x68) == 0) {
@@ -48,15 +48,15 @@ void IOATIR500GLContext::freeCommandBuffer() {
         if (M<UInt32>(accel + 0x5c8) < M<UInt32>(context + 0xb0)) {
           M<UInt32>(accel + 0x5c8) = M<UInt32>(context + 0xb0);
         }
-        mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + 0xd4));
+        mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + kIOATIR500GLContext_commandBufferDescriptor));
         if (mapping != (SInt32 *)0x0) {
           VCALL(*mapping, 0x18)(mapping);
         }
         context = M<SInt32>(context + 0x80);
         if (context == 0) break;
-        accel = M<SInt32>(self + 200);
+        accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
       }
-      accel = M<SInt32>(self + 200);
+      accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
     }
     context = M<SInt32>(accel + 0x68);
     if (context != 0) {
@@ -64,13 +64,13 @@ void IOATIR500GLContext::freeCommandBuffer() {
         if (M<UInt32>(accel + 0x5c8) < 0x80000) {
           M<UInt32>(accel + 0x5c8) = 0x80000;
         }
-        mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + 0xd4));
+        mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + kIOATIR500GLContext_commandBufferDescriptor));
         if (mapping != (SInt32 *)0x0) {
           VCALL(*mapping, 0x18)(mapping);
         }
         context = M<SInt32>(context + 0x80);
         if (context == 0) break;
-        accel = M<SInt32>(self + 200);
+        accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
       }
     }
   }

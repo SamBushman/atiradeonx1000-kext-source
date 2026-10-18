@@ -33,14 +33,14 @@ IOReturn IOATIR500DVDContext::finish() {
   SInt32 waited;
   UInt32 result;
   
-  waited = VCALL(*M<SInt32 *>(self + 0x8c), 0x55c)
-                    (M<SInt32 *>(self + 0x8c),M<UInt32>(self + 0x7c));
+  waited = VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_accelerator), 0x55c)
+                    (M<SInt32 *>(self + kIOATIR500DVDContext_accelerator),M<UInt32>(self + kIOATIR500DVDContext_lastSubmitStamp));
   if (waited == -1) {
     result = 0xe00002d6;
   }
   else {
     result = 0;
-    M<SInt32>(M<SInt32>(self + 0x8c) + 0x7ac) = waited + M<SInt32>(M<SInt32>(self + 0x8c) + 0x7ac);
+    M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x7ac) = waited + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x7ac);
   }
   return result;
 }

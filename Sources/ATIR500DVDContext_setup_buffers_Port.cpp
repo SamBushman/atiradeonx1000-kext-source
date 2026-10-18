@@ -27,17 +27,17 @@
 
 
 /* real addr 0x34260 */
-IOReturn ATIR500DVDContext::setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags) {
+IOReturn ATIR500DVDContext::setup_buffers(UInt32 top, UInt32 right, UInt32 bottom, UInt32 left, UInt32 controlFlags) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if ((M<SInt32>(self + 0xf8) != 0) && (M<char>(M<SInt32>(self + 0x8c) + 0x80) != '\0')) {
-    M<UInt8>(M<SInt32>(self + 0xf8) + 0xbed) = 1;
-    M<UInt8>(M<SInt32>(self + 0xf8) + 0xbee) = 1;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x94) = (SInt16)topHeight;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x9a) = (SInt16)bottomHeight;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x96) = (SInt16)rightWidth;
-    M<SInt16>(M<SInt32>(self + 0xf8) + 0x98) = (SInt16)leftWidth;
-    M<UInt32>(self + 0x88) = controlFlags & 0xfffffc00 | 0x20000002;
+  if ((M<SInt32>(self + kIOATIR500DVDContext_boundSurface) != 0) && (M<char>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x80) != '\0')) {
+    M<UInt8>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xbed) = 1;
+    M<UInt8>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xbee) = 1;
+    M<SInt16>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0x94) = (SInt16)top;
+    M<SInt16>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0x9a) = (SInt16)bottom;
+    M<SInt16>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0x96) = (SInt16)left;
+    M<SInt16>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0x98) = (SInt16)right;
+    M<UInt32>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) = controlFlags & 0xfffffc00 | 0x20000002;
     return 0;
   }
   return 0xe00002d8;

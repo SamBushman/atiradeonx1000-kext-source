@@ -37,11 +37,11 @@ IOReturn ATIR500DVDContext::check_stamps(UInt32 checkMain, UInt32 checkIDCT, UIn
   mainDone = 1;
   if (checkMain != 0) {
     /* r4 (the first stamp) is left untouched by the shipped code, so it is forwarded to the accelerator's check (vtable +0x5f4); the decompile dropped it */
-    mainDone = VCALL(*M<SInt32 *>(self + 0x8c), 0x5f4)(M<SInt32 *>(self + 0x8c),checkMain);
+    mainDone = VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_accelerator), 0x5f4)(M<SInt32 *>(self + kIOATIR500DVDContext_accelerator),checkMain);
   }
   idctDone = 1;
   if (checkIDCT != 0) {
-    idctDone = VCALL(*M<SInt32 *>(self + 0x8c), 0x554)(M<SInt32 *>(self + 0x8c),checkIDCT);
+    idctDone = VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_accelerator), 0x554)(M<SInt32 *>(self + kIOATIR500DVDContext_accelerator),checkIDCT);
   }
   if ((mainDone == 0) || (bothDone = 1, idctDone == 0)) {
     bothDone = 0;

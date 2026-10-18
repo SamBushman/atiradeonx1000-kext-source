@@ -45,6 +45,6 @@ void IOATIR500GLContext::init_command_buffer_header(VendorCommandBufferHeader *h
   M<UInt32>(headerBytes + 0x20) = 0x1000000;
   M<UInt32>(headerBytes + 0x10) = size - 0x20 >> 2;
   M<UInt32>(headerBytes + 0x1c) = 1;
-  M<UInt32>(headerBytes + 0x18) = M<UInt32>(self + 0x7c);
+  M<UInt32>(headerBytes + 0x18) = M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp);
   return;
 }

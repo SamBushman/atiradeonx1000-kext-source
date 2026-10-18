@@ -56,23 +56,23 @@ void ATIR500GLContext::get_texture(UInt32*record, VendorTextureBuffer *texture, 
       record[-3] = 0;
       record[-2] = 0x5c8;
       record[-1] = 0x20000;
-      M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-           *pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-      M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
-      stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((*streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20),
-                         *streamOffset + M<SInt32>(self + 0xd0) + 0x20,*pendingWords);
-      M<UInt32>(self + 0xdc) = stamp;
+      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) =
+           *pendingWords * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb94) = 1;
+      stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)((*streamOffset & 0xfffffffc) + M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20),
+                         *streamOffset + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) + 0x20,*pendingWords);
+      M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp) = stamp;
       *streamOffset = *pendingWords * 4 + *streamOffset;
       *pendingWords = 0;
       *reservedWords = 0;
     }
     this->alloc_and_load_texture((VendorTextureBuffer *)(textureBytes));
-    if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
+    if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) != 0) {
       M<UInt32 *>(scratchBytes + 0x140) = record;
       this->restore_state_destroyed_by_pageoff((register_tracking_state *)(scratchBytes));
     }
-    if (M<SInt32>(self + 0xd0) == 0) {
-      ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0xcc)));
+    if (M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) == 0) {
+      ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500GLContext_commandBuffer)));
       header = M<SInt32>(textureBytes + 0x14);
     }
     else {
@@ -85,9 +85,9 @@ void ATIR500GLContext::get_texture(UInt32*record, VendorTextureBuffer *texture, 
     prev = M<SInt32>(textureBytes + 0x24);
     M<UInt32>(prev + 0x28) = M<UInt32>(textureBytes + 0x28);
     M<SInt32>(M<SInt32>(textureBytes + 0x28) + 0x24) = prev;
-    M<UInt32>(textureBytes + 0x24) = M<UInt32>(M<SInt32>(self + 200) + 0x600);
-    M<SInt32>(textureBytes + 0x28) = M<SInt32>(self + 200) + 0x5dc;
-    M<UInt8 *>(M<SInt32>(self + 200) + 0x600) = textureBytes;
+    M<UInt32>(textureBytes + 0x24) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600);
+    M<SInt32>(textureBytes + 0x28) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5dc;
+    M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600) = textureBytes;
     M<UInt8 *>(M<SInt32>(textureBytes + 0x24) + 0x28) = textureBytes;
   }
   return;

@@ -36,22 +36,22 @@ IOReturn IOATIR500DVDContext::delete_image(UInt32 textureID) {
   UInt8 *texture;
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
-  shared = M<UInt8 *>(self + 0x84);
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  shared = M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator);
   if (shared == (UInt8 *)0x0) {
     result = 0xe00002be;
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   }
   else {
     if ((textureID < M<unsigned int>(shared + 0x14)) &&
        (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
        texture != (UInt8 *)0x0)) {
       result = ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)(texture));
-      GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
+      GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
       return result;
     }
     result = 0xe00002c2;
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x8c) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   }
   return result;
 }

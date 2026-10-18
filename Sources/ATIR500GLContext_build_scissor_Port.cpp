@@ -36,14 +36,14 @@ void ATIR500GLContext::build_scissor() {
   UInt8 *colorBuffer;
   UInt32 uVar5;
   
-  if (M<SInt32>(self + 0x3bc) == 0) {
-    uVar5 = M<UInt32>(self + 0x29c);
+  if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
+    uVar5 = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
     colorBuffer = *(UInt8 **)
-              ((UInt32)M<UInt16>(self + 0xac) * 4 + M<SInt32>(self + 0x290) + 0xb70);
+              ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
   }
   else {
     uVar5 = 0;
-    colorBuffer = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
+    colorBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
   }
   if (((M<UInt32>(colorBuffer + 0x3c) & 0xf00000) == 0) ||
      (levelWidth = (SInt32)((UInt32)M<UInt16>(colorBuffer + 0x1c) / (M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf)) >>
@@ -59,7 +59,7 @@ void ATIR500GLContext::build_scissor() {
   if ((uVar2 < 3) || ((formatShiftAdjust = 1, 4 < uVar2 && (formatShiftAdjust = 2, uVar2 != 6)))) {
     formatShiftAdjust = 0;
   }
-  M<UInt32>(self + 0x358) =
+  M<UInt32>(self + kATIR500GLContext_scissorX) =
        levelWidth << ((FormatTableLookup_0x0004d2dc((UInt32)(UInt8)colorBuffer[0x3a] * 0x1c) >> 0xc & 7) - formatShiftAdjust &
                 0x3f) & 0x3fffU | (uVar5 & 0x3fff) << 0x10;
   return;

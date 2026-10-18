@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-16 15:07:14.182645364 -0700
-+++ b/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-16 15:07:14.186129317 -0700
+--- a/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-17 20:35:18.843392693 -0700
++++ b/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-17 20:35:18.844796337 -0700
 @@ -27,6 +27,8 @@
  extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
  
@@ -19,5 +19,5 @@
 +  void *mem = OSObject::operator new(0x28);
 +  shared = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
    bVar3 = (shared == (UInt8 *)0x0) << 1;
-   M<UInt8 *>(self + 0x84) = shared;
+   M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator) = shared;
    if ((bool)(bVar3 >> 1 & 1)) {

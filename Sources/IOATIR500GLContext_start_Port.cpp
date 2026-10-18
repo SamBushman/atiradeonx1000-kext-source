@@ -44,38 +44,38 @@ bool IOATIR500GLContext::start(IOService *provider) {
   if (iVar3 == 0) {
     return 0;
   }
-  M<UInt8 *>(self + 200) = providerBytes;
-  M<UInt32>(self + 0x108) = 0;
-  M<UInt32>(self + 0x294) = 0;
-  M<UInt32>(self + 0x7c) = 0;
-  M<UInt16>(self + 0xd8) = 1;
-  M<UInt16>(self + 0xac) = 1;
-  M<UInt32>(self + 0x290) = 0;
-  M<UInt32>(self + 0x298) = 0;
-  M<UInt32>(self + 0x29c) = 0;
-  M<UInt32>(self + 0x88) = 0;
-  M<UInt32>(self + 0x84) = 0;
-  M<UInt32>(self + 0xcc) = 0;
-  M<UInt32>(self + 0xd0) = 0;
-  M<UInt32>(self + 0xd4) = 0;
-  M<UInt16>(self + 0xda) = 0;
-  M<UInt32>(self + 0xdc) = 0;
-  M<UInt32>(self + 0xe0) = 0;
-  M<UInt32>(self + 0xe4) = 0;
-  M<UInt32>(self + 0xe8) = 0;
-  M<UInt32>(self + 0xec) = 0;
-  M<UInt32>(self + 0xf0) = 0;
-  M<UInt32>(self + 0x28c) = 0;
-  M<UInt32>(self + 0xf4) = 0;
-  M<UInt32>(self + 0xf8) = 0;
-  M<UInt32>(self + 0xfc) = 0;
-  M<UInt16>(self + 0x102) = 0;
-  M<UInt16>(self + 0x100) = 0;
-  M<UInt32>(self + 0x104) = 0;
-  M<UInt16>(self + 0xae) = 6;
+  M<UInt8 *>(self + kIOATIR500GLContext_accelerator) = providerBytes;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferHeader) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_started) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_commandBufferState) = 1;
+  M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) = 1;
+  M<UInt32>(self + kIOATIR500GLContext_boundSurface) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_surfaceIndex) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_mipLevel) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_clientHandle) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_unknown_0x84) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_commandBuffer) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_commandBufferDescriptor) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_commandBufferInFlight) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_commandBufferHeader) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_commandBufferSize) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferListHead) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferListTail) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferCount) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBuffer) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferGartOffset) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferDescriptor) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_contextBufferInFlight) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_contextBufferType) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferStamp) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) = 6;
   iVar3 = 0x10;
-  M<UInt32>(self + 0xb0) = 0x20000;
-  M<UInt32>(self + 0xb4) = 0x10000;
+  M<UInt32>(self + kIOATIR500GLContext_commandBufferSizeHint) = 0x20000;
+  M<UInt32>(self + kIOATIR500GLContext_dataBufferSizeHint) = 0x10000;
   pIVar2 = self;
   do {
     M<UInt32>(pIVar2 + 0x10c) = 0;
@@ -88,12 +88,12 @@ bool IOATIR500GLContext::start(IOService *provider) {
     pIVar2 = pIVar2 + 0x18;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
-  M<UInt16>(self + 0x98) = 0;
-  M<UInt16>(self + 0x90) = 0;
-  M<UInt16>(self + 0x92) = 0;
-  M<UInt16>(self + 0x94) = 0;
-  M<UInt16>(self + 0x9a) = 1;
-  M<UInt16>(self + 0x96) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_swapIntervalNumerator) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_swapRectX) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_swapRectY) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_swapRectWidth) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_swapIntervalDenominator) = 1;
+  M<UInt16>(self + kIOATIR500GLContext_swapRectHeight) = 0;
   iVar3 = 0;
   pIVar2 = self;
   do {
@@ -102,9 +102,9 @@ bool IOATIR500GLContext::start(IOService *provider) {
     iVar3 = iVar3 + 1;
     pIVar2 = pIVar2 + 4;
   } while (bVar1);
-  M<UInt32>(self + 0xc4) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_unknown_0xc4) = 0;
   iVar3 = 0x2a;
-  M<UInt32>(self + 0x8c) = 0x20000000;
+  M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) = 0x20000000;
   pIVar2 = self;
   do {
     M<UInt32>(pIVar2 + 0x2a4) = 0;
@@ -113,31 +113,31 @@ bool IOATIR500GLContext::start(IOService *provider) {
   } while (iVar3 != 0);
   shared = (UInt8 *)new IOATIR500Shared();   /* real: OSObject::operator new(0x28) + the IOATIR500Shared constructor */
   bVar5 = (shared == (UInt8 *)0x0) << 1;
-  M<UInt8 *>(self + 0x88) = shared;
+  M<UInt8 *>(self + kIOATIR500GLContext_clientHandle) = shared;
   if (!(bool)(bVar5 >> 1 & 1)) {
     iVar3 = VCALL(M<SInt32>(shared), 0x48)(shared);
     if (iVar3 == 0) {
-      VCALL(*M<SInt32 *>(self + 0x88), 0x18)(M<SInt32 *>(self + 0x88));
-      M<UInt32>(self + 0x88) = 0;
+      VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_clientHandle), 0x18)(M<SInt32 *>(self + kIOATIR500GLContext_clientHandle));
+      M<UInt32>(self + kIOATIR500GLContext_clientHandle) = 0;
     }
     else {
-      M<UInt32>(M<SInt32>(self + 0x88) + 0xc) = M<UInt32>(self + 200);
-      M<UInt32>(M<SInt32>(self + 0x88) + 8) = M<UInt32>(self + 0x78);
-      accel = M<SInt32 *>(self + 200);
+      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0xc) = M<UInt32>(self + kIOATIR500GLContext_accelerator);
+      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 8) = M<UInt32>(self + kIOATIR500GLContext_task);
+      accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
       if ((accel[0x18] == 0) && (accel[0x1a] == 0)) {
         iVar3 = VCALL(*accel, 0x530)(accel);
         if (iVar3 == 0) goto LAB_0000790c;
-        accel = M<SInt32 *>(self + 200);
+        accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
       }
-      M<SInt32>(self + 0x80) = accel[0x18];
+      M<SInt32>(self + kIOATIR500GLContext_nextLiveContext) = accel[0x18];
       accel[0x18] = (SInt32)self;
-      M<SInt32>(M<SInt32>(self + 200) + 0x738) = M<SInt32>(M<SInt32>(self + 200) + 0x738) + 1;
-      iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->getVRAMDescriptors();
+      M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x738) = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x738) + 1;
+      iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->getVRAMDescriptors();
       if (((iVar3 != 0) &&
-          (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0xcc)),0x20000), iVar3 != 0)) &&
+          (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + kIOATIR500GLContext_commandBuffer)),0x20000), iVar3 != 0)) &&
          (iVar3 = this->allocAllContextBuffers(0x8000), iVar3 != 0)) {
-        M<UInt32>(self + 0x294) = 1;
-        M<UInt8 **>(self + 0x2a0) = (UInt8 **)kGLRegularMethods; /* IOATIR500GLContext::start(IOService*)::methodDescs */
+        M<UInt32>(self + kIOATIR500GLContext_started) = 1;
+        M<UInt8 **>(self + kIOATIR500GLContext_regularMethodTable) = (UInt8 **)kGLRegularMethods; /* IOATIR500GLContext::start(IOService*)::methodDescs */
         return 1;
       }
     }

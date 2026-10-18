@@ -96,7 +96,7 @@ bool IOATIR500DVDContext::start(IOService *provider) {
     U32At(accel, 0x68) = reinterpret_cast<UInt32>(this);
     U32At(reinterpret_cast<void *>(U32At(self, 0x8c)), 0x73c) += 1;
     if (accelerator->getVRAMDescriptors() &&
-        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + 0x90), 0x80000) &&
+        accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kIOATIR500DVDContext_commandBuffer), 0x80000) &&
         allocAllContextBuffers(0x1000)) {
         U32At(self, 0xfc) = 1;
         U32At(self, 0x100) = reinterpret_cast<UInt32>(kDVDBaseMethods);

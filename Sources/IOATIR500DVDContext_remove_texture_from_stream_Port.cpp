@@ -31,7 +31,7 @@ void IOATIR500DVDContext::remove_texture_from_stream(VendorTextureBuffer *textur
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  M<UInt32>(M<SInt32>(textureBytes + 0x14) + 8) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x50);
+  M<UInt32>(M<SInt32>(textureBytes + 0x14) + 8) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x50);
   M<SInt16>(textureBytes + 0xe) = M<SInt16>(textureBytes + 0xe) + -1;
   return;
 }

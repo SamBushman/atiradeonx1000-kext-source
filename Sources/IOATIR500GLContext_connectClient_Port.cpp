@@ -36,13 +36,13 @@ IOReturn IOATIR500GLContext::connectClient(IOUserClient *client) {
   SInt32 *handle;
   UInt32 result;
   
-  if (M<SInt32>(self + 0x78) == M<SInt32>(clientBytes + 0x78)) {
-    GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-    VCALL(*M<SInt32 *>(self + 0x88), 0x18)(M<SInt32 *>(self + 0x88));
+  if (M<SInt32>(self + kIOATIR500GLContext_task) == M<SInt32>(clientBytes + 0x78)) {
+    GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+    VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_clientHandle), 0x18)(M<SInt32 *>(self + kIOATIR500GLContext_clientHandle));
     handle = M<SInt32 *>(clientBytes + 0x88);
-    M<SInt32 *>(self + 0x88) = handle;
+    M<SInt32 *>(self + kIOATIR500GLContext_clientHandle) = handle;
     VCALL(*handle, 0x14)(handle);
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
     result = 0;
   }
   else {

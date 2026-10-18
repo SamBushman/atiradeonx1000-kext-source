@@ -37,7 +37,7 @@ void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *texture
   SInt32 *piVar4;
   
   do {
-    stamp = M<UInt32>(M<SInt32>(self + 200) + 0x50);
+    stamp = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
     M<UInt32>(M<SInt32>(textureBytes + 0x14) + 8) = stamp;
     kind = textureBytes[0x20];
     if (kind == 0x6) {

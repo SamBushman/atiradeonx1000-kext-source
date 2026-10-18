@@ -37,9 +37,9 @@ IOReturn IOATIR500GLContext::get_surface_size(SInt32*outW, SInt32*outH, SInt32*o
   UInt32 uVar5;
   UInt32 uVar6;
   
-  surface = M<SInt32>(self + 0x290);
+  surface = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
   if (surface != 0) {
-    levelsLeft = M<SInt32>(self + 0x29c);
+    levelsLeft = M<SInt32>(self + kIOATIR500GLContext_mipLevel);
     if (M<SInt32>(surface + 0xbd8) == M<SInt32>(surface + 0xbd4)) {
       uVar2 = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1e);
       uVar1 = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1c);

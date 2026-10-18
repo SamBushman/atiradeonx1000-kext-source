@@ -38,10 +38,10 @@ void ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet(r500_zdecomp
   UInt32 uVar5;
   UInt8 *depthBuffer;
   
-  depthBuffer = self + 0x5a0;
-  if (M<SInt32>(self + 0x3bc) == 0) {
+  depthBuffer = self + kATIR500GLContext_textureDepthBuffer;
+  if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
     depthBuffer = *(UInt8 **)
-              ((UInt32)M<UInt16>(self + 0xae) * 4 + M<SInt32>(self + 0x290) + 0xb70);
+              ((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
   }
   uVar5 = 0;
   M<UInt32>(packetBytes + 4) = -((UInt8)depthBuffer[0x3a] ^ 0x10) >> 0x1e & 2;
@@ -65,8 +65,8 @@ void ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet(r500_zdecomp
     uVar2 = uVar5;
   }
   iVar1 = 0x20;
-  if (M<SInt32>(M<SInt32>(self + 200) + 0xb98) != 4) {
-    iVar1 = M<SInt32>(M<SInt32>(self + 200) + 0xb98) << 4;
+  if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) != 4) {
+    iVar1 = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) << 4;
     iVar4 = 0;
     if (iVar1 == 0) goto LAB_0002888c;
   }
@@ -74,7 +74,7 @@ void ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet(r500_zdecomp
 LAB_0002888c:
   M<SInt32>(packetBytes + 0x18) = iVar4;
   uVar3 = HZMEM_GetBlockOffset
-                    ((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),M<UInt32>(depthBuffer + 0x28),0);
+                    ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),M<UInt32>(depthBuffer + 0x28),0);
   M<UInt32>(packetBytes + 0x20) = uVar3;
   M<UInt32>(packetBytes + 0x28) = M<UInt32>(depthBuffer + 0x2c);
   return;

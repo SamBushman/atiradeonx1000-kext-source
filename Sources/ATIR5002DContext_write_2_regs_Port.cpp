@@ -38,10 +38,10 @@ IOReturn ATIR5002DContext::write_2_regs(UInt32 offset1, UInt32 offset2, UInt32*v
   SInt32 registers;
   UInt32 result;
   
-  registers = M<SInt32>(M<SInt32>(self + 0x94) + 0x860);
+  registers = M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x860);
   if ((byteCount & 7) == 0) {
-    GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0x94) + 0x840));
-    accel = M<SInt32>(self + 0x94);
+    GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
+    accel = M<SInt32>(self + kIOATIR5002DContext_accelerator);
     if (M<char>(accel + 0x80) == '\0') {
       result = 0xe00002d8;
     }

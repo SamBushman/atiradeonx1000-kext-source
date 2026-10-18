@@ -77,15 +77,15 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
     iVar13 = iVar13 + 4;
     iVar29 = iVar29 + -1;
   } while (iVar29 != 0);
-  if (M<int>(self + 0x3bc) == 0) {
-    uVar9 = (unsigned int)M<UInt16>(self + 0x3a8);
-    lodBlendWeight = M<int>(self + 0x298);
-    uVar26 = M<unsigned int>(self + 0x29c);
+  if (M<int>(self + kATIR500GLContext_renderToTexture) == 0) {
+    uVar9 = (unsigned int)M<UInt16>(self + kATIR500GLContext_attachmentCount);
+    lodBlendWeight = M<int>(self + kIOATIR500GLContext_surfaceIndex);
+    uVar26 = M<unsigned int>(self + kIOATIR500GLContext_mipLevel);
     if (uVar9 == 0) {
-      iVar19 = M<int>(self + 0x290);
+      iVar19 = M<int>(self + kIOATIR500GLContext_boundSurface);
     }
     else {
-      iVar19 = M<int>(self + 0x290);
+      iVar19 = M<int>(self + kIOATIR500GLContext_boundSurface);
       iVar13 = 0;
       pAVar21 = self;
       do {
@@ -98,11 +98,11 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
       } while (uVar9 != 0);
     }
     nextMipLevel = uVar26 + 1;
-    pAVar27 = M<UInt8 *>((unsigned int)M<UInt16>(self + 0xae) * 4 + iVar19 + 0xb70);
-    pAVar21 = (UInt8 *)((unsigned int)M<UInt16>(self + 0xae) * 0x78 + iVar19 + 0xa8);
+    pAVar27 = M<UInt8 *>((unsigned int)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + iVar19 + 0xb70);
+    pAVar21 = (UInt8 *)((unsigned int)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 0x78 + iVar19 + 0xa8);
   }
   else {
-    uVar26 = (unsigned int)M<UInt16>(self + 0x3a8);
+    uVar26 = (unsigned int)M<UInt16>(self + kATIR500GLContext_attachmentCount);
     if (uVar26 != 0) {
       iVar13 = 0;
       iVar29 = 0;
@@ -119,7 +119,7 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
         uVar26 = uVar26 - 1;
       } while (uVar26 != 0);
     }
-    pAVar27 = self + 0x5a0;
+    pAVar27 = self + kATIR500GLContext_textureDepthBuffer;
     lodBlendWeight = 0;
     uVar26 = 0;
     nextMipLevel = 1;
@@ -133,7 +133,7 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
   outputBuffer[wordIndex + 5] = 10;
   outputBuffer[wordIndex + 6] = 0x1006;
   local_58 = wordIndex + 8;
-  iVar16 = M<int>(self + 200);
+  iVar16 = M<int>(self + kIOATIR500GLContext_accelerator);
   outputBuffer[wordIndex + 7] = M<UInt32>(iVar16 + 0xb74);
   uVar9 = 0;
   iVar19 = M<int>(uVar26 * 4 + attachmentBuffers[0] + 0x40);
@@ -175,11 +175,11 @@ LAB_00028bac:
   uVar17 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(iVar16 + 0x870)),M<UInt32>(attachmentRecords[0] + 0x28),2);
   if (((((M<unsigned int>(attachmentRecords[0] + 0x28) & 0x3ff00000) == 0x3ff00000) ||
        (M<char>(attachmentRecords[0] + 0x36) == '\0')) ||
-      ((M<unsigned int>(M<int>(self + 0x290) + 0xbe8) & 0x700000) == 0)) ||
-     (uVar18 = 0x600, M<SInt16>(self + 0xac) != 9)) {
+      ((M<unsigned int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xbe8) & 0x700000) == 0)) ||
+     (uVar18 = 0x600, M<SInt16>(self + kIOATIR500GLContext_colorBufferIndex) != 9)) {
     uVar18 = 0;
   }
-  uVar23 = (unsigned int)M<UInt16>(self + 0x3a8);
+  uVar23 = (unsigned int)M<UInt16>(self + kATIR500GLContext_attachmentCount);
   if (uVar23 != 0) {
     iVar16 = 0;
     if (uVar23 == 0) {
@@ -246,10 +246,10 @@ LAB_00028bac:
   AVar5 = pAVar21[0x3a];
   uVar17 = M<UInt32>(pAVar21 + 0x2c);
   uVar25 = HZMEM_GetBlockOffset
-                     ((_HZDATA *)((UInt8 *)(M<int>(self + 200) + 0x870)),M<UInt32>(pAVar21 + 0x28),0);
+                     ((_HZDATA *)((UInt8 *)(M<int>(self + kIOATIR500GLContext_accelerator) + 0x870)),M<UInt32>(pAVar21 + 0x28),0);
   uVar9 = HZMEM_GetBlockOffset
-                    ((_HZDATA *)((UInt8 *)(M<int>(self + 200) + 0x870)),M<UInt32>(pAVar21 + 0x28),1);
-  iVar13 = M<int>(M<int>(self + 200) + 0xb98);
+                    ((_HZDATA *)((UInt8 *)(M<int>(self + kIOATIR500GLContext_accelerator) + 0x870)),M<UInt32>(pAVar21 + 0x28),1);
+  iVar13 = M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xb98);
   bVar1 = iVar13 != 4;
   if (!bVar1) {
     uVar9 = uVar9 >> 1;
@@ -320,9 +320,9 @@ LAB_00028fac:
   outputBuffer[wordIndex + 0x2e] = uVar9;
   outputBuffer[wordIndex + 0x2f] = 0x13d5;
   outputBuffer[wordIndex + 0x30] = uVar28;
-  if (M<int>(self + 0x3bc) == 0) {
-    if ((attachmentBuffers[0] == M<int>(self + 0x290) + 0x4e0) &&
-       ((M<unsigned int>(M<int>(self + 0x290) + 0xbe8) & 0x700000) != 0)) {
+  if (M<int>(self + kATIR500GLContext_renderToTexture) == 0) {
+    if ((attachmentBuffers[0] == M<int>(self + kIOATIR500GLContext_boundSurface) + 0x4e0) &&
+       ((M<unsigned int>(M<int>(self + kIOATIR500GLContext_boundSurface) + 0xbe8) & 0x700000) != 0)) {
       if ((M<unsigned int>(attachmentBuffers[0] + 0x3c) & 0xf00000) == 0) {
         uVar9 = 0;
       }
@@ -356,7 +356,7 @@ LAB_00028fac:
   outputBuffer[wordIndex + 0x34] = 0x10f4;
   outputBuffer[wordIndex + 0x35] = 0xaaaa;
   outputBuffer[wordIndex + 0x36] = 0x105bb;
-  outputBuffer[wordIndex + 0x37] = M<UInt32>(self + 0x354);
-  outputBuffer[wordIndex + 0x38] = M<UInt32>(self + 0x358);
+  outputBuffer[wordIndex + 0x37] = M<UInt32>(self + kATIR500GLContext_scissorY);
+  outputBuffer[wordIndex + 0x38] = M<UInt32>(self + kATIR500GLContext_scissorX);
   return wordIndex + 0x39;
 }

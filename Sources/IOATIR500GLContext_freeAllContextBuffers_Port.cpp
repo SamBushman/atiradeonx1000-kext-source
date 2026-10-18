@@ -38,17 +38,17 @@ void IOATIR500GLContext::freeAllContextBuffers() {
   UInt8 *buffer;
   UInt8 *pIVar7;
   
-  buffer = self + 0x10c;
+  buffer = self + kIOATIR500GLContext_contextBufferRing;
   bufferIndex = 0;
-  accel = M<SInt32 *>(self + 200);
+  accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
   iVar5 = accel[0x1e0];
   iVar2 = VCALL(*accel, 0x54c)
-                    (accel,M<UInt32>(self + M<SInt32>(self + 0x28c) * 0x18 + 0x11c));
+                    (accel,M<UInt32>(self + M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) * 0x18 + 0x11c));
   accel[0x1e0] = iVar5 + iVar2;
   pIVar7 = self;
   do {
     if (M<SInt32>(pIVar7 + 0x110) != 0) {
-      VCALL(*M<SInt32 *>(self + 200), 0x5ac)(M<SInt32 *>(self + 200),buffer);
+      VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),buffer);
     }
     buffer = buffer + 0x18;
     VCALL(*M<SInt32 *>(pIVar7 + 0x114), 0x18)(M<SInt32 *>(pIVar7 + 0x114));
@@ -63,13 +63,13 @@ void IOATIR500GLContext::freeAllContextBuffers() {
     bufferIndex = bufferIndex + 1;
     pIVar7 = pIVar7 + 0x18;
   } while (bVar1);
-  VCALL(*M<SInt32 *>(self + 0xfc), 0x18)(M<SInt32 *>(self + 0xfc));
-  M<UInt16>(self + 0x102) = 0;
-  M<UInt16>(self + 0x100) = 0;
-  M<UInt32>(self + 0x108) = 0;
-  M<UInt32>(self + 0xf4) = 0;
-  M<UInt32>(self + 0xf8) = 0;
-  M<UInt32>(self + 0xfc) = 0;
-  M<UInt32>(self + 0x104) = 0;
+  VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor));
+  M<UInt16>(self + kIOATIR500GLContext_contextBufferInFlight) = 0;
+  M<UInt16>(self + kIOATIR500GLContext_contextBufferType) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferHeader) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBuffer) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferGartOffset) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferDescriptor) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_contextBufferStamp) = 0;
   return;
 }

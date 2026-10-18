@@ -33,14 +33,14 @@ IOReturn IOATIR500GLContext::finish() {
   SInt32 waited;
   UInt32 result;
   
-  waited = VCALL(*M<SInt32 *>(self + 200), 0x55c)
-                    (M<SInt32 *>(self + 200),M<UInt32>(self + 0x7c));
+  waited = VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x55c)
+                    (M<SInt32 *>(self + kIOATIR500GLContext_accelerator),M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp));
   if (waited == -1) {
     result = 0xe00002d6;
   }
   else {
     result = 0;
-    M<SInt32>(M<SInt32>(self + 200) + 0x7a8) = waited + M<SInt32>(M<SInt32>(self + 200) + 0x7a8);
+    M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x7a8) = waited + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x7a8);
   }
   return result;
 }

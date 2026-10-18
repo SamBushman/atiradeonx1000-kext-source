@@ -106,7 +106,7 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
   }
   mapping = (SInt32 *)VCALL(*M<SInt32 *>(textureBytes + 8), 0x14c)
                             (M<SInt32 *>(textureBytes + 8),GH_kernel_task,0,
-                             M<UInt32>(M<SInt32>(self + 200) + 0x82c) | 1,0,0);
+                             M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x82c) | 1,0,0);
   if (mapping == (SInt32 *)0x0) {
     return;
   }
@@ -119,9 +119,9 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
       nextNode = M<SInt32>(textureBytes + 0x34);
       M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
       M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = nextNode;
-      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
-      M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + 200) + 0x69c;
-      M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = textureBytes;
+      M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0);
+      M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x69c;
+      M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<SInt32>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
 LAB_00029704:
@@ -148,9 +148,9 @@ LAB_00029660:
         nextNode = M<SInt32>(textureBytes + 0x34);
         M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
         M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = nextNode;
-        M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
-        M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + 200) + 0x69c;
-        M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = textureBytes;
+        M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0);
+        M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x69c;
+        M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = textureBytes;
         M<UInt8 *>(M<SInt32>(textureBytes + 0x34) + 0x38) = textureBytes;
       }
       if (M<SInt32>(innerBuffer + 4) != 0) {
@@ -158,9 +158,9 @@ LAB_00029660:
         nextNode = M<SInt32>(innerBuffer + 0x34);
         M<UInt32>(nextNode + 0x38) = M<UInt32>(innerBuffer + 0x38);
         M<SInt32>(M<SInt32>(innerBuffer + 0x38) + 0x34) = nextNode;
-        M<UInt32>(innerBuffer + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
-        M<SInt32>(innerBuffer + 0x38) = M<SInt32>(self + 200) + 0x69c;
-        M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = innerBuffer;
+        M<UInt32>(innerBuffer + 0x34) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0);
+        M<SInt32>(innerBuffer + 0x38) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x69c;
+        M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = innerBuffer;
         M<UInt8 *>(M<SInt32>(innerBuffer + 0x34) + 0x38) = innerBuffer;
       }
       goto LAB_00029704;
@@ -169,12 +169,12 @@ LAB_00029724:
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
     gartAddress = M<SInt32>(textureBytes + 4);
   }
-  accelerator = M<SInt32 *>(self + 200);
+  accelerator = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
   waitTotal = accelerator[0x1d5];
   waited = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0xc));
   record = (UInt32 *)(hwInfo + 0x280);
   accelerator[0x1d5] = waitTotal + waited;
-  gartAddress = gartAddress + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
+  gartAddress = gartAddress + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4);
   if (hwInfo[8] < 0) {
     if (M<SInt32>(textureBytes + 100) == 2) {
       hwInfo[0x285] = 1;
@@ -235,18 +235,18 @@ LAB_00029724:
     } while (uVar20 < uVar24);
     recordIndex = *hwInfo;
     record[recordIndex] = 0x50b;
-    if (M<SInt32>(self + 0x3bc) == 0) {
-      mipLevel = M<SInt32>(self + 0x29c);
-      lodBlendWeight = M<SInt32>(self + 0x298);
+    if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
+      mipLevel = M<SInt32>(self + kIOATIR500GLContext_mipLevel);
+      lodBlendWeight = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
       nextMipLevel = mipLevel + 1;
       currentSurfaceBuffer = *(UInt8 **)
-                 ((UInt32)M<UInt16>(self + 0xac) * 4 + M<SInt32>(self + 0x290) + 0xb70);
+                 ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
     }
     else {
       lodBlendWeight = 0;
       mipLevel = 0;
       nextMipLevel = 1;
-      currentSurfaceBuffer = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
+      currentSurfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
     }
     uVar24 = 0;
     if ((M<UInt32>(currentSurfaceBuffer + 0x3c) & 0xf00000) != 0) {
@@ -270,7 +270,7 @@ LAB_00029724:
     goto LAB_00029cb4;
   }
   record = record + hwInfo[1];
-  record[0xb] = M<UInt32>(M<SInt32>(self + 200) + 0xb74);
+  record[0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
   iVar32 = M<SInt32>(textureBytes + 0x14);
   bVar1 = M<UInt8>(iVar32 + 0x15) >> 3;
   iVar8 = -(bVar1 & 3);
@@ -379,23 +379,23 @@ LAB_00029a94:
     uVar20 = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
   }
   uVar24 = hwInfo[2];
-  M<UInt32>(M<SInt32>(self + 200) + 0xb90) = 1;
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 1;
 LAB_00029cb4:
   uVar25 = uVar24;
   if ((uVar24 & 1) != 0) {
     uVar25 = uVar24 + 1;
     record[uVar24] = 0x80000000;
   }
-  M<UInt32>(M<SInt32>(self + 200) + 0x704) = uVar25 * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-  M<SInt32>(M<SInt32>(self + 200) + 0x71c) = payloadByteLen + M<SInt32>(M<SInt32>(self + 200) + 0x71c);
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) = uVar25 * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+  M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x71c) = payloadByteLen + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x71c);
   if (hwInfo[8] < 0) {
     header = M<SInt32>(textureBytes + 0x14);
-    uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(record),M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
+    uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
     M<UInt32>(header + 0xc) = uVar9;
   }
   else {
     header = M<SInt32>(textureBytes + 0x14);
-    uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(record),
+    uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),
                        hwInfo[1] * 4 + M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
     M<UInt32>(header + 0xc) = uVar9;
   }

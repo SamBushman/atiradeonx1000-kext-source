@@ -32,9 +32,9 @@ IOReturn IOATIR500GLContext::set_swap_interval(SInt32 numerator, SInt32 denomina
 
   SInt32 *surface;
   
-  M<SInt16>(self + 0x98) = (SInt16)numerator;
-  M<SInt16>(self + 0x9a) = (SInt16)denominator;
-  surface = M<SInt32 *>(self + 0x290);
+  M<SInt16>(self + kIOATIR500GLContext_swapIntervalNumerator) = (SInt16)numerator;
+  M<SInt16>(self + kIOATIR500GLContext_swapIntervalDenominator) = (SInt16)denominator;
+  surface = M<SInt32 *>(self + kIOATIR500GLContext_boundSurface);
   if (surface != (SInt32 *)0x0) {
     VCALL(*surface, 0x5c4)(surface);
   }

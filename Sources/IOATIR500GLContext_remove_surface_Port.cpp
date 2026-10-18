@@ -30,6 +30,6 @@
 void IOATIR500GLContext::remove_surface() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<UInt32>(self + 0x290) = 0;
+  M<UInt32>(self + kIOATIR500GLContext_boundSurface) = 0;
   return;
 }

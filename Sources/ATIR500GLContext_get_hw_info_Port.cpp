@@ -34,16 +34,16 @@ IOReturn ATIR500GLContext::get_hw_info(UInt32*out0, UInt32*out1, UInt32*out2, UI
 
   UInt32 value;
   
-  GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getNumPipes();
+  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->getNumPipes();
   *out0 = value;
-  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getChipID();
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->getChipID();
   *out1 = value;
-  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getChipRev();
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->getChipRev();
   *out2 = value;
-  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getNumZPipes();
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->getNumZPipes();
   *out3 = value;
   *out4 = 0;
-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
+  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return 0;
 }

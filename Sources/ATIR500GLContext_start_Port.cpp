@@ -47,12 +47,12 @@ bool ATIR500GLContext::start(IOService *provider) {
     result = 0;
   }
   else {
-    M<UInt32>(self + 0x3bc) = 0;
-    M<UInt32>(self + 0x34c) = 0;
-    M<UInt32>(self + 0x350) = 0;
-    M<UInt32>(self + 0x354) = 0;
-    M<UInt32>(self + 0x358) = 0;
-    pAVar5 = self + 0x3f0;
+    M<UInt32>(self + kATIR500GLContext_renderToTexture) = 0;
+    M<UInt32>(self + kATIR500GLContext_unknown_0x34c) = 0;
+    M<UInt32>(self + kATIR500GLContext_unknown_0x350) = 0;
+    M<UInt32>(self + kATIR500GLContext_scissorY) = 0;
+    M<UInt32>(self + kATIR500GLContext_scissorX) = 0;
+    pAVar5 = self + kATIR500GLContext_perUnitTextureArray;
     iVar3 = 6;
     pAVar2 = self;
     do {
@@ -87,7 +87,7 @@ bool ATIR500GLContext::start(IOService *provider) {
       pAVar2 = pAVar2 + 0x78;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
-    unitFormat = M<UInt16>(self + 0xac);
+    unitFormat = M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex);
     iVar3 = 4;
     pAVar2 = self;
     do {
@@ -96,10 +96,10 @@ bool ATIR500GLContext::start(IOService *provider) {
       pAVar2 = pAVar2 + 2;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
-    M<UInt16>(self + 0x3a8) = 1;
-    M<UInt32>(M<SInt32>(self + 0xe0) + 0x1c) = 9;
-    M<UInt32>(M<SInt32>(self + 0xe0) + 0x40) = 0x1000000;
-    M<UInt8 **>(self + 0x360) = (UInt8 **)&kGLSpecialMethod20; /* ATIR500GLContext::start(IOService*)::methodDescs */
+    M<UInt16>(self + kATIR500GLContext_attachmentCount) = 1;
+    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x1c) = 9;
+    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x40) = 0x1000000;
+    M<UInt8 **>(self + kATIR500GLContext_specialMethodTable) = (UInt8 **)&kGLSpecialMethod20; /* ATIR500GLContext::start(IOService*)::methodDescs */
     GH_IOLockUnlock(M<UInt32>(providerBytes + 0x840));
     result = 1;
   }

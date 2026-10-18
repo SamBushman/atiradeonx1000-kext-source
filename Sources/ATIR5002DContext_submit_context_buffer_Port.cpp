@@ -88,35 +88,35 @@ void ATIR5002DContext::submit_context_buffer() {
   SInt32 local_58;
   SInt32 local_54;
   
-  texture = M<UInt8 *>(self + 0x114);
+  texture = M<UInt8 *>(self + kIOATIR5002DContext_lastBoundTexture);
   if (texture != (UInt8 *)0x0) {
     if (M<char>(M<SInt32>(texture + 0x14) + 0x14) != '\0') {
       this->alloc_and_load_image((VendorTextureBuffer *)(texture));
-      texture = M<UInt8 *>(self + 0x114);
+      texture = M<UInt8 *>(self + kIOATIR5002DContext_lastBoundTexture);
     }
     if (M<SInt32>(texture + 0x48) != 0) {
       M<UInt32>(M<SInt32>(texture + 0x24) + 0x28) = M<UInt32>(texture + 0x28);
-      M<UInt32>(M<SInt32>(M<SInt32>(self + 0x114) + 0x28) + 0x24) =
-           M<UInt32>(M<SInt32>(self + 0x114) + 0x24);
-      M<UInt32>(M<SInt32>(self + 0x114) + 0x24) =
-           M<UInt32>(M<SInt32>(self + 0x94) + 0x600);
-      M<SInt32>(M<SInt32>(self + 0x114) + 0x28) = M<SInt32>(self + 0x94) + 0x5dc;
-      M<UInt32>(M<SInt32>(self + 0x94) + 0x600) = M<UInt32>(self + 0x114);
-      M<SInt32>(M<SInt32>(M<SInt32>(self + 0x114) + 0x24) + 0x28) = M<SInt32>(self + 0x114);
+      M<UInt32>(M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_lastBoundTexture) + 0x28) + 0x24) =
+           M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_lastBoundTexture) + 0x24);
+      M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_lastBoundTexture) + 0x24) =
+           M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x600);
+      M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_lastBoundTexture) + 0x28) = M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x5dc;
+      M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x600) = M<UInt32>(self + kIOATIR5002DContext_lastBoundTexture);
+      M<SInt32>(M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_lastBoundTexture) + 0x24) + 0x28) = M<SInt32>(self + kIOATIR5002DContext_lastBoundTexture);
     }
   }
-  if ((M<UInt32>(M<SInt32>(self + 200) + 0x1c) & 1) == 0) {
-    entry = self + M<SInt32>(self + 0xfc) * 0x18;
+  if ((M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_contextBufferHeader) + 0x1c) & 1) == 0) {
+    entry = self + M<SInt32>(self + kIOATIR5002DContext_contextBufferRingIndex) * 0x18;
   }
   else {
-    accelWords = M<SInt32 *>(self + 0x94);
-    uVar6 = M<SInt32>(self + 0xfc) + 1U & 1;
-    M<UInt32>(self + 0xfc) = uVar6;
+    accelWords = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
+    uVar6 = M<SInt32>(self + kIOATIR5002DContext_contextBufferRingIndex) + 1U & 1;
+    M<UInt32>(self + kIOATIR5002DContext_contextBufferRingIndex) = uVar6;
     entry = self + uVar6 * 0x18;
     iVar36 = accelWords[0x1df];
     iVar5 = VCALL(*accelWords, 0x54c)(accelWords,M<UInt32>(entry + 0xdc));
     accelWords[0x1df] = iVar36 + iVar5;
-    pendingWrites = M<UInt32 *>(self + 200);
+    pendingWrites = M<UInt32 *>(self + kIOATIR5002DContext_contextBufferHeader);
     entryHeader = M<UInt32 *>(entry + 0xe0);
     uVar15 = pendingWrites[1];
     uVar13 = pendingWrites[2];
@@ -132,7 +132,7 @@ void ATIR5002DContext::submit_context_buffer() {
     entryHeader[7] = uVar10;
     entryHeader[4] = uVar15;
     entryHeader[5] = uVar13;
-    iVar5 = M<SInt32>(self + 200);
+    iVar5 = M<SInt32>(self + kIOATIR5002DContext_contextBufferHeader);
     iVar36 = M<SInt32>(entry + 0xe0);
     pendingWordCount = M<SInt32>(iVar5 + 0x14);
     packet = iVar36 + 0x20;
@@ -231,13 +231,13 @@ void ATIR5002DContext::submit_context_buffer() {
       iVar22 = pendingWordCount + 0x17;
       uVar6 = pendingWordCount + 0x28;
     }
-    if (M<SInt32>(self + 0x100) == 0) {
-      accel = M<SInt32>(self + 0x94);
-      surfaceBuffer = M<SInt32>(self + 0x110) * 0x78 + accel + 300;
+    if (M<SInt32>(self + kIOATIR5002DContext_boundSurface) == 0) {
+      accel = M<SInt32>(self + kIOATIR5002DContext_accelerator);
+      surfaceBuffer = M<SInt32>(self + kIOATIR5002DContext_panelIndex) * 0x78 + accel + 300;
     }
     else {
-      accel = M<SInt32>(self + 0x94);
-      surfaceBuffer = M<SInt32>(self + 0x100) + 0xa8;
+      accel = M<SInt32>(self + kIOATIR5002DContext_accelerator);
+      surfaceBuffer = M<SInt32>(self + kIOATIR5002DContext_boundSurface) + 0xa8;
     }
     M<UInt32>(packet + iVar5) = 0x1393;
     M<UInt32>(packet + iVar35 * 4) = 10;
@@ -295,16 +295,16 @@ void ATIR5002DContext::submit_context_buffer() {
       M<UInt32>(packet + iVar5) = 0x80000000;
     }
     M<UInt32>(iVar36 + 0x14) = uVar6;
-    M<UInt32>(M<SInt32>(self + 200) + 0x1c) = M<UInt32>(M<SInt32>(self + 200) + 0x1c) & 0xfffffffe;
+    M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_contextBufferHeader) + 0x1c) = M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_contextBufferHeader) + 0x1c) & 0xfffffffe;
   }
   if (M<SInt32>(entry + 0xd0) == 0) {
     ((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(entry + 0xcc)));
   }
-  M<SInt32>(M<SInt32>(self + 0x94) + 0x700) =
-       M<SInt32>(M<SInt32>(entry + 0xe0) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + 0x94) + 0x700);
-  uVar10 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0x94)))->submit_buffer((UInt32 *)(M<SInt32>(entry + 0xe0) + 0x20),
+  M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x700) =
+       M<SInt32>(M<SInt32>(entry + 0xe0) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x700);
+  uVar10 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(entry + 0xe0) + 0x20),
                       M<SInt32>(entry + 0xd0) + 0x20,M<UInt32>(M<SInt32>(entry + 0xe0) + 0x14));
   M<UInt32>(entry + 0xdc) = uVar10;
-  M<UInt32>(self + 0x7c) = uVar10;
+  M<UInt32>(self + kIOATIR5002DContext_lastSubmitStamp) = uVar10;
   return;
 }

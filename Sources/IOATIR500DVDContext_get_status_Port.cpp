@@ -32,8 +32,8 @@ IOReturn IOATIR500DVDContext::get_status(UInt32*out0) {
 
   UInt32 status;
   
-  if ((M<SInt32>(self + 0xf8) == 0) ||
-     (status = 1, (M<UInt32>(M<SInt32>(self + 0xf8) + 0xbf8) & 0x20000000) != 0)) {
+  if ((M<SInt32>(self + kIOATIR500DVDContext_boundSurface) == 0) ||
+     (status = 1, (M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_boundSurface) + 0xbf8) & 0x20000000) != 0)) {
     status = 0;
   }
   *out0 = status;

@@ -41,15 +41,15 @@ bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
   
   descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,size,GH_page_size);
   result = 0;
-  M<SInt32 *>(self + 0xfc) = descriptor;
+  M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor) = descriptor;
   if (descriptor != (SInt32 *)0x0) {
     bufferIndex = 0;
     header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
-    M<VendorContextBufferHeader *>(self + 0x108) = header;
+    M<VendorContextBufferHeader *>(self + kIOATIR500GLContext_contextBufferHeader) = header;
     this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
     pIVar7 = self;
     do {
-      descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(M<SInt32>(self + 200) + 0x82c) | 0x10023,size,
+      descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x82c) | 0x10023,size,
                                    GH_page_size);
       M<SInt32 *>(pIVar7 + 0x114) = descriptor;
       if (descriptor == (SInt32 *)0x0) {
@@ -69,14 +69,14 @@ bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
             pIVar7 = pIVar7 + -0x18;
           } while (iVar5 != bufferIndex);
         }
-        VCALL(*M<SInt32 *>(self + 0xfc), 0x18)(M<SInt32 *>(self + 0xfc));
-        M<UInt32>(self + 0x108) = 0;
-        M<UInt32>(self + 0xf4) = 0;
-        M<UInt32>(self + 0xf8) = 0;
-        M<UInt32>(self + 0xfc) = 0;
-        M<UInt16>(self + 0x102) = 0;
-        M<UInt16>(self + 0x100) = 0;
-        M<UInt32>(self + 0x104) = 0;
+        VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor));
+        M<UInt32>(self + kIOATIR500GLContext_contextBufferHeader) = 0;
+        M<UInt32>(self + kIOATIR500GLContext_contextBuffer) = 0;
+        M<UInt32>(self + kIOATIR500GLContext_contextBufferGartOffset) = 0;
+        M<UInt32>(self + kIOATIR500GLContext_contextBufferDescriptor) = 0;
+        M<UInt16>(self + kIOATIR500GLContext_contextBufferInFlight) = 0;
+        M<UInt16>(self + kIOATIR500GLContext_contextBufferType) = 0;
+        M<UInt32>(self + kIOATIR500GLContext_contextBufferStamp) = 0;
         return 0;
       }
       header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);

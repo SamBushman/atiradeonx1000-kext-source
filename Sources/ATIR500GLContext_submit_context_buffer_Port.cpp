@@ -49,7 +49,7 @@ void ATIR500GLContext::submit_context_buffer() {
   UInt8 *pAVar17;
   UInt32 uVar18;
   
-  M<UInt32>(M<SInt32>(self + 200) + 0xb90) = 0;
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 0;
   pAVar15 = self;
   do {
     pVVar4 = M<UInt8 *>(pAVar15 + 0x2a4);
@@ -64,26 +64,26 @@ void ATIR500GLContext::submit_context_buffer() {
         M<UInt32>(M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x28) + 0x24) =
              M<UInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x24);
         M<UInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x24) =
-             M<UInt32>(M<SInt32>(self + 200) + 0x600);
-        M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x28) = M<SInt32>(self + 200) + 0x5dc;
-        M<UInt32>(M<SInt32>(self + 200) + 0x600) = M<UInt32>(pAVar15 + 0x2a4);
+             M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600);
+        M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x28) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5dc;
+        M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600) = M<UInt32>(pAVar15 + 0x2a4);
         M<SInt32>(M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x24) + 0x28) = M<SInt32>(pAVar15 + 0x2a4);
       }
     }
     pAVar15 = pAVar15 + 4;
   } while (self + 0xa8 != pAVar15);
-  if ((M<UInt32>(M<SInt32>(self + 0x108) + 0x1c) & 1) == 0) {
-    pAVar15 = self + M<SInt32>(self + 0x28c) * 0x18;
+  if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) & 1) == 0) {
+    pAVar15 = self + M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) * 0x18;
   }
   else {
-    accelerator = M<SInt32 *>(self + 200);
-    uVar12 = M<SInt32>(self + 0x28c) + 1U & 0xf;
-    M<UInt32>(self + 0x28c) = uVar12;
+    accelerator = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
+    uVar12 = M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) + 1U & 0xf;
+    M<UInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) = uVar12;
     pAVar15 = self + uVar12 * 0x18;
     iVar16 = accelerator[0x1e0];
     iVar3 = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(pAVar15 + 0x11c));
     accelerator[0x1e0] = iVar16 + iVar3;
-    puVar2 = M<UInt32 *>(self + 0x108);
+    puVar2 = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
     puVar7 = M<UInt32 *>(pAVar15 + 0x120);
     uVar9 = puVar2[1];
     uVar8 = puVar2[2];
@@ -99,7 +99,7 @@ void ATIR500GLContext::submit_context_buffer() {
     puVar7[4] = uVar9;
     puVar7[5] = uVar8;
     puVar7[6] = uVar6;
-    puVar5 = M<UInt32 *>(self + 0x108);
+    puVar5 = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
     uVar10 = puVar5[5];
     puVar13 = (UInt32 *)(M<SInt32>(pAVar15 + 0x120) + 0x20);
     uVar18 = 0;
@@ -111,7 +111,7 @@ void ATIR500GLContext::submit_context_buffer() {
         iVar3 = iVar3 + 4;
         uVar18 = uVar18 - 1;
       } while (uVar18 != 0);
-      puVar5 = M<UInt32 *>(self + 0x108);
+      puVar5 = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
       uVar18 = uVar10;
     }
     uVar10 = 0;
@@ -138,17 +138,17 @@ void ATIR500GLContext::submit_context_buffer() {
       puVar13[uVar11] = 0x80000000;
     }
     M<UInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14) = uVar12;
-    M<UInt32>(M<SInt32>(self + 0x108) + 0x1c) = M<UInt32>(M<SInt32>(self + 0x108) + 0x1c) & 0xfffffffe
+    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) & 0xfffffffe
     ;
   }
   if (M<SInt32>(pAVar15 + 0x110) == 0) {
     ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(pAVar15 + 0x10c)));
   }
-  M<SInt32>(M<SInt32>(self + 200) + 0x704) =
-       M<SInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-  uVar6 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(M<SInt32>(pAVar15 + 0x120) + 0x20),
+  M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) =
+       M<SInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+  uVar6 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(pAVar15 + 0x120) + 0x20),
                      M<SInt32>(pAVar15 + 0x110) + 0x20,M<UInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14));
   M<UInt32>(pAVar15 + 0x11c) = uVar6;
-  M<UInt32>(self + 0x7c) = uVar6;
+  M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp) = uVar6;
   return;
 }

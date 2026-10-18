@@ -36,13 +36,13 @@ IOReturn IOATIR500GLContext::wait_for_stamp(UInt32 stamp) {
   
   /* CORRECTED (found by the live T2 test: wait_for_stamp(0x7fffffff) returned Timeout on stock): the shipped body leaves r4 - the caller's stamp - untouched, so the
    * stamp IS the second argument of the accelerator's wait (vtable +0x550); the decompile dropped it and #86's first fix wrongly called it unused. */
-  waited = VCALL(*M<SInt32 *>(param_1 + 200), 0x550)(M<SInt32 *>(param_1 + 200),stamp);
+  waited = VCALL(*M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator), 0x550)(M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator),stamp);
   if (waited == -1) {
     result = 0xe00002d6;
   }
   else {
     result = 0;
-    M<SInt32>(M<SInt32>(param_1 + 200) + 0x768) = waited + M<SInt32>(M<SInt32>(param_1 + 200) + 0x768);
+    M<SInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x768) = waited + M<SInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x768);
   }
   return result;
 }

@@ -27,13 +27,13 @@
 
 
 /* real addr 0x3a6e0 */
-void ATIR500Surface::dvd_setup_overlay(int x, int y, int w, int h) {
+void ATIR500Surface::dvd_setup_overlay(int top, int right, int bottom, int left) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<SInt16>(self + kATIR500Surface_overlayTop) = (SInt16)x;
-  M<SInt16>(self + kATIR500Surface_overlayRight) = (SInt16)h;
-  M<SInt16>(self + kATIR500Surface_overlayBottom) = (SInt16)w;
-  M<SInt16>(self + kATIR500Surface_overlayLeft) = (SInt16)y;
+  M<SInt16>(self + kATIR500Surface_overlayTop) = (SInt16)top;
+  M<SInt16>(self + kATIR500Surface_overlayRight) = (SInt16)left;
+  M<SInt16>(self + kATIR500Surface_overlayBottom) = (SInt16)bottom;
+  M<SInt16>(self + kATIR500Surface_overlayLeft) = (SInt16)right;
   M<UInt32>(self + kATIR500Surface_overlayHandle) = 1;
   return;
 }

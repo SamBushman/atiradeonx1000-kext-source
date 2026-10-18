@@ -38,33 +38,33 @@ IOReturn IOATIR5002DContext::delete_image(UInt32 textureID) {
   UInt8 *surfaceBuffer;   /* #176: byte pointer - typed ATIR500SurfaceBuffer* scaled `surfaceBuffer + 0x24` by sizeof=0x80 */
   UInt32 result;
   
-  GH_IOLockLock(M<UInt32>(M<int>(self + 0x94) + 0x840));
-  shared = M<UInt8 *>(self + 0x88);
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x840));
+  shared = M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator);
   if (shared == (UInt8 *)0x0) {
     result = 0xe00002be;
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x840));
   }
   else if ((textureID < M<unsigned int>(shared + 0x14)) &&
           (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
           texture != (UInt8 *)0x0)) {
-    if (M<UInt8 *>(self + 0x114) == texture) {
-      M<UInt32>(self + 0x114) = 0;
+    if (M<UInt8 *>(self + kIOATIR5002DContext_lastBoundTexture) == texture) {
+      M<UInt32>(self + kIOATIR5002DContext_lastBoundTexture) = 0;
     }
-    if (M<int>(self + 0x100) != 0) {
-      surfaceBuffer = M<UInt8 *>(M<int>(self + 0x100) + 0xb70);
+    if (M<int>(self + kIOATIR5002DContext_boundSurface) != 0) {
+      surfaceBuffer = M<UInt8 *>(M<int>(self + kIOATIR5002DContext_boundSurface) + 0xb70);
       backingStore = M<int>(surfaceBuffer + 0x24);
       if ((backingStore != 0) && (M<int>(backingStore + 8) == M<int>(texture + 8))) {
         M<UInt8>(backingStore + 0x59) = 0;
-        ((IOATIR500Surface *)(M<UInt8 *>(self + 0x100)))->free_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
-        shared = M<UInt8 *>(self + 0x88);
+        ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR5002DContext_boundSurface)))->free_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
+        shared = M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator);
       }
     }
     result = ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)(texture));
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x840));
   }
   else {
     result = 0xe00002c2;
-    GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x840));
   }
   return result;
 }
