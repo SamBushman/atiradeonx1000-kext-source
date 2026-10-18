@@ -1,6 +1,6 @@
 # Full evaluation of a rebuilt-driver build (stock vs rebuilt)
 
-Written Oct 18 for tip `3c31d03` (kext built `-Os`, staged by `sh Tools/stage_for_test.sh`). Every phase compares the rebuilt kext with the stock 4.1.9 kext on the same G5.
+Written Oct 18 for tip `0c80ead` (kext built `-Os`, staged by `sh Tools/stage_for_test.sh`). Every phase compares the rebuilt kext with the stock 4.1.9 kext on the same G5.
 Paths: `S=~/rung3/src_<sha>` (sources + built tests) and `K=kext_build_<sha>` on the G5; `swap.sh` loads `~/rung3/$K`. Evidence goes in `~/g5logs/final_eval/` (dev) and `~/rung3/final_eval/` (G5), never /tmp.
 
 ## Rules that apply to every phase
@@ -11,7 +11,7 @@ Paths: `S=~/rung3/src_<sha>` (sources + built tests) and `K=kext_build_<sha>` on
 - Every divergence from stock is a NEW issue (label `rebuilt-kext-defect`), never a reopened one. A stock-only misbehaviour is `stock-driver-bug`.
 - Not safe, never run: broad-fuzz IOConnectMethod calls, kernel memory scans, `glstress`/window fastclear modes, system sleep (#180), the `*_inject` T3 tests.
 
-## Phase 0 - Gates (dev machine, done for 3c31d03)
+## Phase 0 - Gates (dev machine; run for the tip before staging)
 `python3 Tools/apply_renames.py --check` = 0 errors; `sh Tests/difftest/run_all.sh` = all PASS (553); `sh Tools/verify_identical_build.sh G5` = IDENTICAL; `sh Tools/stage_for_test.sh G5` = STAGED.
 
 ## Phase 1 - Stock reference on this boot (stock loaded, nothing swapped)
