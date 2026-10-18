@@ -141,6 +141,8 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
   UInt32 maxY;
   UInt16 levelBit;
   UInt32 faceOffset;
+  UInt8 *surfaceBuffer;
+  UInt32 formatFieldDC;
   UInt8 local_374 [0x80];   /* the ATIR500SurfaceBuffer on the shipped stack (Ghidra shows 0x2c bytes here + M<UInt32>(local_374 + 0x2c) = its +0x2c word) */
   /* #170: ONE real 0x144-byte stack object (shipped frame -0x2fc..-0x1b8): the 0x134-byte register_tracking_state
    * plus four range words at +0x134..+0x140 that restore_state_destroyed_by_pageoff hands to track_regs_written_by_pm4.
@@ -235,8 +237,8 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
       if (boundTexture != (UInt8 *)0x0) {
         ((IOATIR500GLContext *)(self))->remove_texture_from_stream((VendorTextureBuffer *)(boundTexture));
         refCountPtr = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
-        iVar48 = atomicAddReturningOld((SInt32 *)refCountPtr, -1);
-        if (iVar48 == 1) {
+        previousRefCount = atomicAddReturningOld((SInt32 *)refCountPtr, -1);
+        if (previousRefCount == 1) {
           ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)(boundTexture));
         }
         M<UInt32>(self + iVar59 + 0x2a4) = 0;
@@ -267,11 +269,11 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
           M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
           uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20),
                               streamOffset + M<SInt32>(self + 0xd0) + 0x20,pendingWords);
-          uVar55 = pendingWords;
+          submittedWords = pendingWords;
           M<UInt32>(self + 0xdc) = uVar40;
           reservedWords = 0;
           pendingWords = 0;
-          streamOffset = uVar55 * 4 + streamOffset;
+          streamOffset = submittedWords * 4 + streamOffset;
         }
         this->alloc_and_load_texture((VendorTextureBuffer *)(texture));
         if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
@@ -295,12 +297,12 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
           bVar1 = (M<UInt8>(M<SInt32>(texture + 0x14) + 0x15) & 0x18) == 0;
           in_cr0 = bVar1 << 1;
           if (bVar1) {
-            opcode = FormatTableLookup_0x0004d2dc(iVar33);
+            formatFieldDC = FormatTableLookup_0x0004d2dc(iVar33);
             iVar33 = 0;
           }
           else {
-            opcode = FormatTableLookup_0x0004d2dc(iVar33);
-            iVar33 = -(opcode >> 8 & 3);
+            formatFieldDC = FormatTableLookup_0x0004d2dc(iVar33);
+            iVar33 = -(formatFieldDC >> 8 & 3);
           }
           iVar33 = (SInt32)(recordCursor[3] & 0xffffff) >> ((iVar33 - (opcode >> 0xc & 7)) + 5 & 0x3f);
           opcode = iVar33 << 5;
@@ -594,7 +596,7 @@ LAB_0002c0b4:
                    ((UInt32)M<UInt16>(self + 0xac) * 4 + M<SInt32>(self + 0x290) + 0xb70);
       }
       else {
-        pAVar77 = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
+        surfaceBuffer = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
       }
       opcode = 0;
       bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
@@ -641,7 +643,7 @@ LAB_0002c0b4:
                   *recordCursor = 0xc00b1000;
                 }
                 else {
-                  uVar61 = HZMEM_GetBlockOffset
+                  hzBlockOffset = HZMEM_GetBlockOffset
                                      ((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
                                       M<UInt32>(pAVar77 + 0x28),2);
                   hzBlockCount = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
@@ -654,7 +656,7 @@ LAB_0002c0b4:
                   else {
                     recordCursor[0xc] = 0x600;
                   }
-                  recordCursor[8] = uVar61;
+                  recordCursor[8] = hzBlockOffset;
                   iVar59 = M<SInt32>(self + 200);
                   recordCursor[9] = hzBlockCount / (UInt32)(M<SInt32>(iVar59 + 0xb98) << 4);
                   iVar59 = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(iVar59 + 0x870)),M<UInt32>(pAVar77 + 0x28),2)
@@ -744,10 +746,10 @@ LAB_0002cd2c:
                                                  M<UInt32>(pAVar77 + 0x28),0);
                     hzIsPartial = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
                                              M<UInt32>(pAVar77 + 0x28),0);
-                    uVar71 = HZMEM_GetBlockOffset
+                    hzBlockOffset = HZMEM_GetBlockOffset
                                        ((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
                                         M<UInt32>(pAVar77 + 0x28),1);
-                    uVar73 = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
+                    hzBlockCount = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
                                                  M<UInt32>(pAVar77 + 0x28),1);
                     iVar48 = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(M<SInt32>(self + 200) + 0x870)),
                                              M<UInt32>(pAVar77 + 0x28),1);
@@ -764,8 +766,8 @@ LAB_0002cd2c:
                       pAVar77[0x35] = 0x0;
                     }
                     else {
-                      recordCursor[uVar64 + 1] = uVar71;
-                      recordCursor[uVar64 + 2] = uVar73 / (UInt32)(iVar33 * 4);
+                      recordCursor[uVar64 + 1] = hzBlockOffset;
+                      recordCursor[uVar64 + 2] = hzBlockCount / (UInt32)(iVar33 * 4);
                       pAVar77[0x35] = 0x1;
                     }
                     if ((hzIsPartial == 0) && (iVar48 == 0)) {
@@ -800,22 +802,22 @@ LAB_0002cb94:
                       if (iVar48 == 4) {
                         iVar33 = uVar37 << 5;
                       }
-                      if (uVar73 < opcode) {
-                        opcode = uVar73;
+                      if (hzBlockCount < opcode) {
+                        opcode = hzBlockCount;
                       }
-                      uVar73 = 0;
+                      hzBlockCount = 0;
                       if (uVar75 != 0) {
-                        uVar73 = (opcode * hzIsPartial) / uVar75 & -iVar33;
+                        hzBlockCount = (opcode * hzIsPartial) / uVar75 & -iVar33;
                       }
                       opcode = 0;
                       if (uVar53 != 0) {
-                        opcode = ((recordCursor[uVar62 + 1] & 0xffff) / uVar53) * (uVar53 - uVar73);
+                        opcode = ((recordCursor[uVar62 + 1] & 0xffff) / uVar53) * (uVar53 - hzBlockCount);
                       }
                       local_378 = (UInt8 *)0x0;
                       bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf000) == 0;
                       in_cr0 = bVar1 << 1;
                       if (!bVar1) {
-                        iStack_1ac = uVar73 + uVar53;
+                        iStack_1ac = hzBlockCount + uVar53;
                         local_1b0 = 0x43300000;
                         local_1a8 = 0x43300000;
                         uStack_1a4 = M<UInt32>(pAVar77 + 0x3c) >> 0xc & 0xf ^ 0x80000000;
@@ -1615,11 +1617,11 @@ LAB_00030fe0:
                    uVar73 == 0)) {
                   opcode = 0;
                 }
-                uVar73 = 0;
+                maxY = 0;
                 if (M<UInt16>(pAVar77 + 0x1e) != 0) {
-                  uVar73 = M<UInt16>(pAVar77 + 0x1e) - 1;
+                  maxY = M<UInt16>(pAVar77 + 0x1e) - 1;
                 }
-                recordCursor[0xab] = opcode & 0x7ff | (uVar73 & 0x7ff) << 0xb | 0x80000000;
+                recordCursor[0xab] = opcode & 0x7ff | (maxY & 0x7ff) << 0xb | 0x80000000;
                 formatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar10 * 0x1c);
                 recordCursor[0xad] =
                      formatFieldE4 >> 0x13 & 0x1f | (formatFieldE4 & 0x40) << 0x10 | formatFieldE4 >> 7 & 0xe00 |
@@ -1628,14 +1630,14 @@ LAB_00030fe0:
                 bVar1 = (opcode & 0xf00000) == 0;
                 in_cr0 = bVar1 << 1;
                 if (bVar1) {
-                  uVar73 = 0;
+                  maxY = 0;
                 }
                 else {
-                  uVar73 = (UInt32)M<UInt16>(pAVar77 + 0x14) / (opcode >> 0x14 & 0xf);
+                  maxY = (UInt32)M<UInt16>(pAVar77 + 0x14) / (opcode >> 0x14 & 0xf);
                 }
                 pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
-                if (0x20 / M<UInt16>(pAVar77 + 0x16) <= uVar73) {
-                  pitchPixels = uVar73;
+                if (0x20 / M<UInt16>(pAVar77 + 0x16) <= maxY) {
+                  pitchPixels = maxY;
                 }
                 if ((bVar1) ||
                    (uVar73 = (UInt32)M<UInt16>(pAVar77 + 0x1c) / (opcode >> 0x14 & 0xf),
@@ -2313,9 +2315,9 @@ LAB_0002f498:
                 uVar73 = (SInt32)((UInt32)M<UInt16>(pAVar77 + 0x14) /
                               (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf)) >> (opcode & 0x3f);
               }
-              uVar75 = 0x20 / M<UInt16>(pAVar77 + 0x16);
+              pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
               if (0x20 / M<UInt16>(pAVar77 + 0x16) <= uVar73) {
-                uVar75 = uVar73;
+                pitchPixels = uVar73;
               }
               uVar15 = M<UInt16>(pAVar77 + 0x20);
               iVar74 = M<SInt32>(pAVar77 + 8);
@@ -2325,7 +2327,7 @@ LAB_0002f498:
               if ((uVar58 != 0) && (0 < (SInt32)uVar58)) {
                 do {
                   if ((UInt8)AVar11 >> 1 == 0) {
-                    opcode = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
+                    formatFieldDC = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
                     iVar49 = 0;
                   }
                   else {
@@ -2343,7 +2345,7 @@ LAB_0002f498:
                   *puVar69 = 0x1150;
                   puVar69[1] = ((UInt8)AVar11 >> 1 & 3) << 3 | ((UInt8)AVar11 & 1) << 2 |
                                iVar59 * (UInt32)uVar15 + iVar48 * (iVar33 - iVar59) + iVar74 +
-                               iVar49 + (uVar75 * puVar69[1] << opcode) & 0xffffffe0;
+                               iVar49 + (pitchPixels * puVar69[1] << opcode) & 0xffffffe0;
                   uVar55 = puVar69[2];
                   opcode = recordCursor[0xad];
                   puVar69[2] = 0x1120;
@@ -2802,9 +2804,9 @@ LAB_0002fe70:
         uVar53 = (SInt32)((UInt32)M<UInt16>(pAVar72 + 0x14) / (uVar37 >> 0x14 & 0xf)) >>
                  (uVar75 & 0x3f);
       }
-      uVar35 = 0x20 / M<UInt16>(pAVar72 + 0x16);
+      pitchPixels = 0x20 / M<UInt16>(pAVar72 + 0x16);
       if (0x20 / M<UInt16>(pAVar72 + 0x16) <= uVar53) {
-        uVar35 = uVar53;
+        pitchPixels = uVar53;
       }
       if ((bVar1) ||
          (iVar59 = (SInt32)((UInt32)M<UInt16>(pAVar72 + 0x1c) / (uVar37 >> 0x14 & 0xf)) >>
@@ -2820,7 +2822,7 @@ LAB_0002fe70:
         uVar53 = iVar59 - 1;
       }
       uStack_17c = uVar55 - opcode ^ 0x80000000;
-      recordCursor[0xaa] = uVar35 - 1 & 0x3fff | (uVar37 & 0x800) << 4 | (uVar53 & 0x800) << 5;
+      recordCursor[0xaa] = pitchPixels - 1 & 0x3fff | (uVar37 & 0x800) << 4 | (uVar53 & 0x800) << 5;
       uVar55 = M<UInt32>(M<SInt32>(self + 200) + 0xb74);
       recordCursor[0xaf] = 0xc0001000;
       recordCursor[0x11] = 0xc0001000;
@@ -2911,12 +2913,12 @@ LAB_0002d820:
           fVar17 = fVar24;
           fVar24 = fVar20;
         }
-        uVar35 = M<UInt16>(pAVar72 + 0x1c) & 0xfe00;
+        pitchPixels = M<UInt16>(pAVar72 + 0x1c) & 0xfe00;
         local_170 = (SInt64)(SInt32)fVar17;
         opcode = (SInt32)fVar17 - 1;
         opcode = (((SInt32)opcode >> 9) + (UInt32)((SInt32)opcode < 0 && (opcode & 0x1ff) != 0)) * 0x200;
         uVar73 = 0;
-        if ((-1 < (SInt32)opcode) && (uVar73 = uVar35, (SInt32)opcode <= (SInt32)uVar35)) {
+        if ((-1 < (SInt32)opcode) && (uVar73 = pitchPixels, (SInt32)opcode <= (SInt32)pitchPixels)) {
           uVar73 = opcode & 0xfe00;
         }
         opcode = 0x40;
@@ -2926,33 +2928,33 @@ LAB_0002d820:
         }
         uVar57 = 0;
         local_168 = (SInt64)(SInt32)fVar22;
-        uVar35 = (SInt32)fVar22 - 1;
-        uVar35 = (((SInt32)uVar35 >> 6) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x3f) != 0)) * 0x40;
-        if ((-1 < (SInt32)uVar35) && (uVar57 = opcode & 0xffff, (SInt32)uVar35 <= (SInt32)opcode)) {
-          uVar57 = uVar35 & 0xffc0;
+        pitchPixels = (SInt32)fVar22 - 1;
+        pitchPixels = (((SInt32)pitchPixels >> 6) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x3f) != 0)) * 0x40;
+        if ((-1 < (SInt32)pitchPixels) && (uVar57 = opcode & 0xffff, (SInt32)pitchPixels <= (SInt32)opcode)) {
+          uVar57 = pitchPixels & 0xffc0;
         }
         opcode = 0x200;
         if (0x1ff < uVar73) {
           opcode = uVar73;
         }
-        uVar35 = uVar53 - 1;
-        uVar34 = (((SInt32)uVar35 >> 9) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x1ff) != 0)) * 0x200;
-        uVar35 = (UInt32)(SInt32)fVar24;
-        local_160 = (SInt64)(SInt32)uVar35;
+        pitchPixels = uVar53 - 1;
+        uVar34 = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
+        pitchPixels = (UInt32)(SInt32)fVar24;
+        local_160 = (SInt64)(SInt32)pitchPixels;
         if (FLOAT_0004c370 < fVar24) {
-          uStack_154 = uVar35 ^ 0x80000000;
+          uStack_154 = pitchPixels ^ 0x80000000;
           local_158 = 0x43300000;
-          if ((float)((double)CONCAT44d(0x43300000,uVar35 ^ 0x80000000) - DOUBLE_0004c3a8) < fVar24)
+          if ((float)((double)CONCAT44d(0x43300000,pitchPixels ^ 0x80000000) - DOUBLE_0004c3a8) < fVar24)
           {
-            uVar35 = uVar35 + 1;
+            pitchPixels = pitchPixels + 1;
           }
         }
-        if ((SInt32)uVar35 <= (SInt32)uVar34) {
-          uVar34 = uVar35;
+        if ((SInt32)pitchPixels <= (SInt32)uVar34) {
+          uVar34 = pitchPixels;
         }
-        uVar35 = 1;
+        pitchPixels = 1;
         if ((SInt32)opcode < (SInt32)uVar34) {
-          uVar35 = (SInt32)((uVar34 - opcode) + 0xbff) / 0xc00 & 0xff;
+          pitchPixels = (SInt32)((uVar34 - opcode) + 0xbff) / 0xc00 & 0xff;
         }
         opcode = 0x40;
         if (0x3f < uVar57) {
@@ -2977,7 +2979,7 @@ LAB_0002d820:
         if ((SInt32)opcode < (SInt32)uVar41) {
           uVar34 = (SInt32)((uVar41 - opcode) + 0xf7f) / 0xf80 & 0xff;
         }
-        opcode = uVar35 * uVar34 & 0xff;
+        opcode = pitchPixels * uVar34 & 0xff;
         if (opcode == 0) goto LAB_0002d820;
         bVar1 = false;
         if (uVar34 != 0) {
@@ -2987,7 +2989,7 @@ LAB_0002d820:
           uVar41 = uVar57;
           puVar54 = puVar42;
           do {
-            if (uVar35 != 0) {
+            if (pitchPixels != 0) {
               uVar44 = iVar59 + uVar57;
               local_d8 = 0x43300000;
               uVar46 = uVar53 - uVar73;
@@ -2995,7 +2997,7 @@ LAB_0002d820:
               uStack_d4 = uVar44 ^ 0x80000000;
               fVar4 = (float)((double)CONCAT44d(0x43300000,uVar44 ^ 0x80000000) - dVar31);
               uVar47 = uVar73;
-              uVar81 = uVar35;
+              uVar81 = pitchPixels;
               do {
                 *puVar54 = uVar47;
                 puVar54[1] = uVar41;
@@ -3022,7 +3024,7 @@ LAB_0002d820:
                   fVar7 = (float)((double)CONCAT44d(0x43300000,uStack_114) - dVar31);
                 }
                 fVar8 = fVar24;
-                if (iVar33 != uVar35 - 1) {
+                if (iVar33 != pitchPixels - 1) {
                   local_110 = 0x43300000;
                   uStack_10c = uVar47 + 0xe00 ^ 0x80000000;
                   fVar8 = (float)((double)CONCAT44d(0x43300000,uStack_10c) - dVar31);
@@ -3136,9 +3138,9 @@ LAB_0002d820:
         uVar73 = (SInt32)((UInt32)M<UInt16>(pAVar72 + 0x14) / (M<UInt32>(pAVar72 + 0x3c) >> 0x14 & 0xf)
                       ) >> (uVar75 & 0x3f);
       }
-      uVar37 = 0x20 / M<UInt16>(pAVar72 + 0x16);
+      pitchPixels = 0x20 / M<UInt16>(pAVar72 + 0x16);
       if (0x20 / M<UInt16>(pAVar72 + 0x16) <= uVar73) {
-        uVar37 = uVar73;
+        pitchPixels = uVar73;
       }
       uVar15 = M<UInt16>(pAVar72 + 0x20);
       AVar11 = pAVar72[0x38];
@@ -3155,12 +3157,12 @@ LAB_0002d820:
           puVar54 = puVar42;
           do {
             if ((UInt8)AVar11 >> 1 == 0) {
-              uVar73 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
+              formatFieldDC = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
               iVar39 = 0;
             }
             else {
-              uVar73 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
-              iVar39 = -(uVar73 >> 8 & 3);
+              formatFieldDC = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
+              iVar39 = -(formatFieldDC >> 8 & 3);
             }
             uVar73 = uVar73 >> 0xc & 7;
             iVar39 = (SInt32)*puVar54 >> ((iVar39 - uVar73) + 5 & 0x3f);
@@ -3173,7 +3175,7 @@ LAB_0002d820:
             iVar49 = iVar49 + 1;
             *puVar54 = 0x1150;
             puVar54[1] = iVar59 * (UInt32)uVar15 + iVar48 * (iVar74 - iVar59) + iVar33 +
-                         iVar39 + (uVar37 * puVar54[1] << uVar73) & 0xffffffe0 |
+                         iVar39 + (pitchPixels * puVar54[1] << uVar73) & 0xffffffe0 |
                          ((UInt8)AVar11 & 1) << 2 | ((UInt8)AVar11 >> 1 & 3) << 3;
             uVar75 = puVar54[2];
             uVar73 = recordCursor[0xa6];
