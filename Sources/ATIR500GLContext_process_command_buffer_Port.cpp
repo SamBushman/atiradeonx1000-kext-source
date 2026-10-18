@@ -143,6 +143,41 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
   UInt32 faceOffset;
   UInt8 *surfaceBuffer;
   UInt32 formatFieldDC;
+  bool singleSample;
+  SInt32 alignment;
+  UInt8 *selfAlias;
+  UInt16 bufferPitch;
+  UInt32 formatBits3000;
+  UInt32 formatBitsC00;
+  UInt32 bufferHeight;
+  UInt32 formatBits300;
+  UInt32 bufferWidth;
+  UInt32 hzBlockField;
+  UInt32 queryOffset;
+  UInt32 volatileState;
+  UInt32 offsetWord;
+  UInt32 stamp;
+  UInt32 hyperzEnable;
+  UInt32 zbBwCntl;
+  UInt32 accelFlags;
+  UInt32 wordCount;
+  UInt32 attachmentId;
+  UInt32 pairCount;
+  UInt32 stateIndex;
+  UInt32 textureUnit;
+  SInt32 dataByteOffset;
+  SInt32 attachment;
+  SInt32 hzTotalBlocks;
+  SInt32 vtable;
+  SInt32 levelEntry;
+  SInt32 currentTexture;
+  SInt32 emittedWords;
+  SInt32 nextLevel;
+  SInt32 mipHeight;
+  SInt32 mipOffset;
+  SInt32 surfaceBase;
+  SInt32 pendingBytes;
+  SInt32 remainingBytes;
   UInt8 local_374 [0x80];   /* the ATIR500SurfaceBuffer on the shipped stack (Ghidra shows 0x2c bytes here + M<UInt32>(local_374 + 0x2c) = its +0x2c word) */
   /* #170: ONE real 0x144-byte stack object (shipped frame -0x2fc..-0x1b8): the 0x134-byte register_tracking_state
    * plus four range words at +0x134..+0x140 that restore_state_destroyed_by_pageoff hands to track_regs_written_by_pm4.
@@ -230,9 +265,9 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
     iVar52 = uVar63 * 4;
     dataCacheBlockTouch(recordCursor + uVar63);
     opcode = uVar73 & 0xff000000;
-    uVar75 = (uVar73 >> 0x18) - 6;
-    if (uVar75 < 0x10) {
-      iVar59 = uVar75 * 4;
+    textureUnit = (uVar73 >> 0x18) - 6;
+    if (textureUnit < 0x10) {
+      iVar59 = textureUnit * 4;
       boundTexture = M<UInt8 *>(self + iVar59 + 0x2a4);
       if (boundTexture != (UInt8 *)0x0) {
         ((IOATIR500GLContext *)(self))->remove_texture_from_stream((VendorTextureBuffer *)(boundTexture));
@@ -343,7 +378,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
         M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600) = texture;
         M<UInt8 *>(M<SInt32>(texture + 0x24) + 0x28) = texture;
       }
-      this->WriteTextureOffset(uVar75,(UInt32 *)(recordCursor),0,(VendorTextureBuffer *)(texture));
+      this->WriteTextureOffset(textureUnit,(UInt32 *)(recordCursor),0,(VendorTextureBuffer *)(texture));
       M<UInt8 *>(self + iVar59 + 0x2a4) = texture;
     }
     else if (opcode == 0x39000000) {
@@ -460,23 +495,23 @@ LAB_0002c0b4:
         this->restore_state_destroyed_by_pageoff((register_tracking_state *)(trackingState));
       }
       if (!bVar1) {
-        uVar73 = opcode + 1 >> 1;
-        in_cr0 = (uVar73 == 0) << 1;
-        if (uVar73 != 0) {
+        pairCount = opcode + 1 >> 1;
+        in_cr0 = (pairCount == 0) << 1;
+        if (pairCount != 0) {
           bVar80 = (uVar71 == 0) << 1;
           uVar37 = 0;
           puVar69 = recordCursor + uVar64;
           uVar75 = 0;
-          pAVar77 = self;
+          selfAlias = self;
           do {
             uVar71 = *puVar69;
-            M<UInt32>(pAVar77 + 0x368) = uVar71;
+            M<UInt32>(selfAlias + 0x368) = uVar71;
             if (uVar71 == 0xffffffff) {
-              iVar59 = uVar62 * 4;
+              dataByteOffset = uVar62 * 4;
               uVar62 = uVar62 + 4;
               uVar71 = (SInt32)recordCursor +
                        M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4) + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) +
-                       (iVar59 - (M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20)) + 0x20;
+                       (dataByteOffset - (M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20)) + 0x20;
             }
             else {
               uVar71 = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(local_374 + uVar37 * 4)),uVar71);
@@ -487,13 +522,13 @@ LAB_0002c0b4:
             }
             if (uVar37 == opcode) break;
             uVar71 = puVar69[1];
-            M<UInt32>(pAVar77 + 0x36c) = uVar71;
+            M<UInt32>(selfAlias + 0x36c) = uVar71;
             if (uVar71 == 0xffffffff) {
-              iVar59 = uVar62 * 4;
+              dataByteOffset = uVar62 * 4;
               uVar62 = uVar62 + 4;
               uVar71 = (SInt32)recordCursor +
                        M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4) + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) +
-                       (iVar59 - (M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20)) + 0x20;
+                       (dataByteOffset - (M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20)) + 0x20;
             }
             else {
               uVar71 = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(local_374 + uVar37 * 4)),uVar71);
@@ -505,8 +540,8 @@ LAB_0002c0b4:
             }
             uVar75 = uVar75 + 1;
             puVar69 = puVar69 + 3;
-            pAVar77 = pAVar77 + 8;
-          } while (uVar73 != uVar75);
+            selfAlias = selfAlias + 8;
+          } while (pairCount != uVar75);
         }
         if (uVar61 != 0) {
           iVar52 = M<SInt32>(local_374 + iVar52 * 4 + -4);
@@ -535,38 +570,38 @@ LAB_0002c0b4:
     else if (opcode == 0x2a000000) {
       switch(recordCursor[1]) {
       default:
-        iVar59 = 1;
+        attachment = 1;
         break;
       case 1:
-        iVar59 = 0;
+        attachment = 0;
         break;
       case 2:
-        iVar59 = 4;
+        attachment = 4;
         break;
       case 3:
-        iVar59 = 5;
+        attachment = 5;
         break;
       case 4:
-        iVar59 = 6;
+        attachment = 6;
         break;
       case 7:
-        iVar59 = 2;
+        attachment = 2;
         break;
       case 8:
-        iVar59 = 3;
+        attachment = 3;
         break;
       case 10:
-        iVar59 = 7;
+        attachment = 7;
         break;
       case 0xb:
-        iVar59 = 8;
+        attachment = 8;
       }
       iVar48 = M<SInt32>(self + kATIR500GLContext_renderToTexture);
       if (iVar48 == 0) {
         iVar74 = M<SInt32>(self + kIOATIR500GLContext_mipLevel);
         iVar33 = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
         iVar49 = iVar74 + 1;
-        pAVar77 = M<UInt8 *>(iVar59 * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
+        pAVar77 = M<UInt8 *>(attachment * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
       }
       else {
         iVar33 = 0;
@@ -599,9 +634,9 @@ LAB_0002c0b4:
         surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
       }
       opcode = 0;
-      bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
-      in_cr0 = bVar1 << 1;
-      if (!bVar1) {
+      singleSample = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
+      in_cr0 = singleSample << 1;
+      if (!singleSample) {
         opcode = (UInt32)M<UInt16>(pAVar77 + 0x14) / (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf);
       }
       pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
@@ -630,24 +665,24 @@ LAB_0002c0b4:
             if (opcode < 0x17000001) {
               if (opcode == 0x4000000) {
                 if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
-                  pAVar77 = (UInt8 *)
+                  surfaceBuffer = (UInt8 *)
                             ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xa8);
                 }
                 else {
-                  pAVar77 = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
+                  surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
                 }
                 uVar58 = recordCursor[1];
                 uVar55 = recordCursor[2];
                 *recordCursor = 0xc0011000;
-                if ((M<UInt32>(pAVar77 + 0x28) & 0x3ff00000) == 0x3ff00000) {
+                if ((M<UInt32>(surfaceBuffer + 0x28) & 0x3ff00000) == 0x3ff00000) {
                   *recordCursor = 0xc00b1000;
                 }
                 else {
                   hzBlockOffset = HZMEM_GetBlockOffset
                                      ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),
-                                      M<UInt32>(pAVar77 + 0x28),2);
+                                      M<UInt32>(surfaceBuffer + 0x28),2);
                   hzBlockCount = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),
-                                               M<UInt32>(pAVar77 + 0x28),2);
+                                               M<UInt32>(surfaceBuffer + 0x28),2);
                   bVar1 = (M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xbe8) & 0x700000) == 0;
                   in_cr0 = bVar1 << 1;
                   if ((bVar1) || (M<SInt16>(self + kIOATIR500GLContext_colorBufferIndex) != 9)) {
@@ -657,46 +692,46 @@ LAB_0002c0b4:
                     recordCursor[0xc] = 0x600;
                   }
                   recordCursor[8] = hzBlockOffset;
-                  iVar59 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-                  recordCursor[9] = hzBlockCount / (UInt32)(M<SInt32>(iVar59 + 0xb98) << 4);
-                  iVar59 = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(iVar59 + 0x870)),M<UInt32>(pAVar77 + 0x28),2)
+                  accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
+                  recordCursor[9] = hzBlockCount / (UInt32)(M<SInt32>(accel + 0xb98) << 4);
+                  hzIsPartial = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(accel + 0x870)),M<UInt32>(surfaceBuffer + 0x28),2)
                   ;
-                  if (iVar59 == 0) {
+                  if (hzIsPartial == 0) {
                     recordCursor[0xd] = (uVar58 - 2) * 0x10000 | 0xc0001000;
                   }
                   else {
-                    iVar59 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-                    uVar15 = M<UInt16>(pAVar77 + 0x1e);
+                    accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
+                    uVar15 = M<UInt16>(surfaceBuffer + 0x1e);
                     iVar48 = 0x10;
-                    if ((M<UInt32>(iVar59 + 0xb74) & 0x10000) == 0) {
+                    if ((M<UInt32>(accel + 0xb74) & 0x10000) == 0) {
                       iVar48 = 0xc;
                     }
                     hzBlockCount = 0;
-                    bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
-                    in_cr0 = bVar1 << 1;
-                    if (!bVar1) {
-                      hzBlockCount = (UInt32)M<UInt16>(pAVar77 + 0x14) /
-                               (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf);
+                    singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
+                    in_cr0 = singleSample << 1;
+                    if (!singleSample) {
+                      hzBlockCount = (UInt32)M<UInt16>(surfaceBuffer + 0x14) /
+                               (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
                     }
-                    pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
-                    if (0x20 / M<UInt16>(pAVar77 + 0x16) <= hzBlockCount) {
+                    pitchPixels = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
+                    if (0x20 / M<UInt16>(surfaceBuffer + 0x16) <= hzBlockCount) {
                       pitchPixels = hzBlockCount;
                     }
-                    iVar33 = 0x20;
-                    if (M<SInt32>(iVar59 + 0xb98) == 4) {
+                    alignment = 0x20;
+                    if (M<SInt32>(accel + 0xb98) == 4) {
 LAB_0002c898:
-                      hzBlockCount = iVar33 * ((SInt32)(iVar33 + pitchPixels + -1) / iVar33);
+                      hzBlockCount = alignment * ((SInt32)(alignment + pitchPixels + -1) / alignment);
                     }
                     else {
-                      iVar33 = M<SInt32>(iVar59 + 0xb98) << 4;
-                      in_cr0 = (iVar33 == 0) << 1;
+                      alignment = M<SInt32>(accel + 0xb98) << 4;
+                      in_cr0 = (alignment == 0) << 1;
                       hzBlockCount = 0;
-                      if (iVar33 != 0) goto LAB_0002c898;
+                      if (alignment != 0) goto LAB_0002c898;
                     }
-                    iVar59 = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(iVar59 + 0x870)),
-                                                 M<UInt32>(pAVar77 + 0x28),2);
+                    hzTotalBlocks = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(accel + 0x870)),
+                                                 M<UInt32>(surfaceBuffer + 0x28),2);
                     dVar31 = DOUBLE_0004c3b8;
-                    hzBlockCount = (UInt32)(iVar59 << 4) / hzBlockCount & 0xfffffff0;
+                    hzBlockCount = (UInt32)(hzTotalBlocks << 4) / hzBlockCount & 0xfffffff0;
                     iStack_1b4 = uVar15 + hzBlockCount;
                     recordCursor[uVar55 + 1] =
                          iVar48 * (uVar15 - hzBlockCount) >> 1 | recordCursor[uVar55 + 1] & 0xffff0000;
@@ -705,12 +740,12 @@ LAB_0002c898:
                          FBITS((float)(((double)CONCAT44d(0x43300000,iStack_1b4) - DOUBLE_0004c3b0)
                                        * dVar31));
                   }
-                  pAVar77[0x36] = 0x1;
+                  surfaceBuffer[0x36] = 0x1;
                 }
-                M<UInt32>(pAVar77 + 0x30) = recordCursor[6];
-                iVar59 = M<SInt32>(self);
+                M<UInt32>(surfaceBuffer + 0x30) = recordCursor[6];
+                vtable = M<SInt32>(self);
 LAB_0002cd2c:
-                VCALL(iVar59, 0x5a4)(self);
+                VCALL(vtable, 0x5a4)(self);
               }
               else if (opcode < 0x4000001) {
                 if (opcode == 0x2000000) {
@@ -728,12 +763,12 @@ LAB_0002cd2c:
                               ((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 0x78 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xa8
                               );
                   }
-                  uVar55 = M<UInt32>(pAVar77 + 0x28);
+                  hzBlockField = M<UInt32>(pAVar77 + 0x28);
                   uVar58 = recordCursor[1];
                   uVar64 = recordCursor[2];
                   uVar61 = recordCursor[3];
                   uVar62 = recordCursor[5];
-                  if (((uVar55 & 0x3ff) == 0x3ff) || ((uVar55 & 0xffc00) == 0xffc00)) {
+                  if (((hzBlockField & 0x3ff) == 0x3ff) || ((hzBlockField & 0xffc00) == 0xffc00)) {
                     *recordCursor = (recordCursor[4] - 2) * 0x10000 | 0xc0001000;
                     pAVar77[0x35] = 0x0;
                     pAVar77[0x34] = 0x0;
@@ -741,7 +776,7 @@ LAB_0002cd2c:
                   else {
                     *recordCursor = 0xc0041000;
                     uVar55 = HZMEM_GetBlockOffset
-                                       ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),uVar55,0);
+                                       ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),hzBlockField,0);
                     opcode = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),
                                                  M<UInt32>(pAVar77 + 0x28),0);
                     hzIsPartial = HZMEM_IsPartial((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),
@@ -795,7 +830,7 @@ LAB_0002cb94:
                         uVar75 = 0;
                         if (hzIsPartial != 0) goto LAB_0002cb94;
                       }
-                      uVar53 = (UInt32)M<UInt16>(pAVar77 + 0x1e);
+                      bufferHeight = (UInt32)M<UInt16>(pAVar77 + 0x1e);
                       uVar37 = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74) >> 4 & 3;
                       hzIsPartial = uVar37 * 0x10;
                       iVar33 = hzIsPartial;
@@ -810,14 +845,14 @@ LAB_0002cb94:
                         hzBlockCount = (opcode * hzIsPartial) / uVar75 & -iVar33;
                       }
                       opcode = 0;
-                      if (uVar53 != 0) {
-                        opcode = ((recordCursor[uVar62 + 1] & 0xffff) / uVar53) * (uVar53 - hzBlockCount);
+                      if (bufferHeight != 0) {
+                        opcode = ((recordCursor[uVar62 + 1] & 0xffff) / bufferHeight) * (bufferHeight - hzBlockCount);
                       }
                       local_378 = (UInt8 *)0x0;
                       bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf000) == 0;
                       in_cr0 = bVar1 << 1;
                       if (!bVar1) {
-                        iStack_1ac = hzBlockCount + uVar53;
+                        iStack_1ac = hzBlockCount + bufferHeight;
                         local_1b0 = 0x43300000;
                         local_1a8 = 0x43300000;
                         uStack_1a4 = M<UInt32>(pAVar77 + 0x3c) >> 0xc & 0xf ^ 0x80000000;
@@ -834,7 +869,7 @@ LAB_0002cb94:
                     M<UInt16>(M<SInt32>(self + kATIR500GLContext_renderTargetTexture) + 0x7a) =
                          CONCAT11(pAVar77[0x35],pAVar77[0x34]);
                   }
-                  iVar59 = M<SInt32>(self);
+                  vtable = M<SInt32>(self);
                   goto LAB_0002cd2c;
                 }
                 if (opcode == 0x16000000) goto LAB_0002e820;
@@ -913,41 +948,41 @@ LAB_0002cb94:
                 iVar33 = M<SInt32>(self + kIOATIR500GLContext_mipLevel);
                 iVar59 = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
                 iVar48 = iVar33 + 1;
-                pAVar77 = *(UInt8 **)
+                surfaceBuffer = *(UInt8 **)
                            ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
               }
               else {
                 iVar59 = 0;
                 iVar33 = 0;
                 iVar48 = 1;
-                pAVar77 = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
+                surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
               }
               *recordCursor = 0x105bb;
               recordCursor[1] = M<UInt32>(self + kATIR500GLContext_scissorY);
               recordCursor[2] = M<UInt32>(self + kATIR500GLContext_scissorX);
               opcode = 0;
-              iVar33 = M<SInt32>(pAVar77 + iVar33 * 4 + 0x40);
-              iVar74 = M<SInt32>(pAVar77 + iVar48 * 4 + 0x40);
-              uVar15 = M<UInt16>(pAVar77 + 0x20);
-              iVar48 = M<SInt32>(pAVar77 + 8);
-              bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
-              in_cr0 = bVar1 << 1;
-              if (!bVar1) {
-                opcode = (UInt32)M<UInt16>(pAVar77 + 0x14) /
-                         (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf);
+              iVar33 = M<SInt32>(surfaceBuffer + iVar33 * 4 + 0x40);
+              iVar74 = M<SInt32>(surfaceBuffer + iVar48 * 4 + 0x40);
+              bufferPitch = M<UInt16>(surfaceBuffer + 0x20);
+              iVar48 = M<SInt32>(surfaceBuffer + 8);
+              singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
+              in_cr0 = singleSample << 1;
+              if (!singleSample) {
+                opcode = (UInt32)M<UInt16>(surfaceBuffer + 0x14) /
+                         (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
               }
-              uVar14 = M<UInt16>(pAVar77 + 0x16);
+              uVar14 = M<UInt16>(surfaceBuffer + 0x16);
               uVar73 = 0x20 / uVar14;
               if (uVar73 <= opcode) {
                 uVar73 = opcode;
               }
-              AVar10 = pAVar77[0x38];
+              AVar10 = surfaceBuffer[0x38];
               opcode = 0x80000000;
               if ((UInt8)AVar10 < 2) {
                 opcode = 0;
               }
               recordCursor[3] = 0x50b;
-              recordCursor[4] = opcode | iVar33 * (UInt32)uVar15 + iVar59 * (iVar74 - iVar33) + iVar48 >>
+              recordCursor[4] = opcode | iVar33 * (UInt32)bufferPitch + iVar59 * (iVar74 - iVar33) + iVar48 >>
                                     10 | uVar73 * uVar14 * 0x10000 & 0x3fc00000 |
                                     ((UInt8)AVar10 & 1) << 0x1e;
             }
@@ -958,58 +993,58 @@ LAB_0002cb94:
               opcode = 0;
               iVar59 = 4;
               M<UInt16>(self + kATIR500GLContext_attachmentCount) = 0;
-              pAVar77 = self;
+              selfAlias = self;
               puVar69 = recordCursor;
               do {
                 switch(puVar69[1]) {
                 case 0:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 1;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 1;
                   break;
                 case 1:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 0;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 0;
                   break;
                 case 2:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 4;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 4;
                   break;
                 case 3:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 5;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 5;
                   break;
                 case 7:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 2;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 2;
                   break;
                 case 8:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 3;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 3;
                   break;
                 case 0x10:
-                  uVar73 = opcode & 0xffff;
-                  opcode = uVar73 + 1;
+                  stateIndex = opcode & 0xffff;
+                  opcode = stateIndex + 1;
                   M<SInt16>(self + kATIR500GLContext_attachmentCount) = (SInt16)opcode;
-                  M<UInt16>(self + uVar73 * 2 + 0x3aa) = 9;
+                  M<UInt16>(self + stateIndex * 2 + 0x3aa) = 9;
                   break;
                 case 0x11:
-                  M<UInt16>(pAVar77 + 0x3aa) = 0x17;
+                  M<UInt16>(selfAlias + 0x3aa) = 0x17;
                 }
                 iVar59 = iVar59 + -1;
                 puVar69 = puVar69 + 1;
-                pAVar77 = pAVar77 + 2;
+                selfAlias = selfAlias + 2;
               } while (iVar59 != 0);
               if ((opcode & 0xffff) == 0) {
                 M<UInt16>(self + kATIR500GLContext_attachmentCount) = 1;
@@ -1107,10 +1142,10 @@ LAB_0002eae8:
                 recordCursor[uVar55] =
                      iVar59 * (UInt32)M<UInt16>(iVar48 + 0x20) +
                      (uVar75 >> 0x10) * (M<SInt32>(iVar33 + 0x44) - iVar59) + M<SInt32>(iVar48 + 8);
-                bVar1 = (M<UInt32>(iVar48 + 0x3c) & 0xf00000) == 0;
-                in_cr0 = bVar1 << 1;
-                iVar59 = (UInt32)M<UInt8>(iVar48 + 0x3a) * 0x1c;
-                if (!bVar1) {
+                singleSample = (M<UInt32>(iVar48 + 0x3c) & 0xf00000) == 0;
+                in_cr0 = singleSample << 1;
+                formatByteOffset = (UInt32)M<UInt8>(iVar48 + 0x3a) * 0x1c;
+                if (!singleSample) {
                   uVar37 = (SInt32)((UInt32)M<UInt16>(iVar48 + 0x14) /
                                 (M<UInt32>(iVar48 + 0x3c) >> 0x14 & 0xf)) >> (uVar75 & 0x3f);
                 }
@@ -1118,8 +1153,8 @@ LAB_0002eae8:
                 if (pitchPixels <= uVar37) {
                   pitchPixels = uVar37;
                 }
-                local_c8 = FormatTableLookup_0x0004d2e0(iVar59) >> 1 & 0x1e00000 |
-                           (FormatTableLookup_0x0004d2dc(iVar59) & 0xc00) << 9 |
+                local_c8 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 1 & 0x1e00000 |
+                           (FormatTableLookup_0x0004d2dc(formatByteOffset) & 0xc00) << 9 |
                            (M<UInt8>(iVar48 + 0x38) & 6) << 0x10 |
                            (M<UInt8>(iVar48 + 0x38) & 1) << 0x10 |
                            pitchPixels & 0x3ffe | local_c8 & 0xfe00c001;
@@ -1152,12 +1187,12 @@ LAB_0002eae8:
                      M<UInt8>(M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14) + 0x15) & 0x1f |
                      textureOffset + recordCursor[*puVar69] & 0xffffffe0;
               }
-              iVar59 = (uVar75 >> 0x10) * 2;
-              iVar48 = iVar59 + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
-              uVar15 = (UInt16)((1 << (uVar75 & 0x3f)) + -1 << (uVar75 >> 8 & 0x3f));
-              M<UInt16>(iVar48 + 0x28) = uVar15 | M<UInt16>(iVar48 + 0x28);
-              iVar59 = iVar59 + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
-              M<UInt16>(iVar59 + 0x1c) = M<UInt16>(iVar59 + 0x1c) & ~uVar15;
+              levelEntry = (uVar75 >> 0x10) * 2;
+              iVar48 = levelEntry + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
+              levelBit = (UInt16)((1 << (uVar75 & 0x3f)) + -1 << (uVar75 >> 8 & 0x3f));
+              M<UInt16>(iVar48 + 0x28) = levelBit | M<UInt16>(iVar48 + 0x28);
+              levelEntry = levelEntry + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
+              M<UInt16>(levelEntry + 0x1c) = M<UInt16>(levelEntry + 0x1c) & ~levelBit;
               M<UInt32>(M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14) + 0xc) =
                    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
             }
@@ -1212,50 +1247,50 @@ LAB_0002f978:
           *recordCursor = 0xc0021000;
           recordCursor[0xf] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
           if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
-            pAVar77 = *(UInt8 **)
+            surfaceBuffer = *(UInt8 **)
                        (M<SInt32>(self + kATIR500GLContext_renderBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
           }
           else {
-            pAVar77 = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
+            surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
           }
           opcode = 0;
-          formatByteOffset = (UInt32)(UInt8)pAVar77[0x3a] * 0x1c;
+          formatByteOffset = (UInt32)(UInt8)surfaceBuffer[0x3a] * 0x1c;
           recordCursor[0x9e] =
-               (UInt32)M<UInt16>(pAVar77 + 0x20) * M<SInt32>(pAVar77 + 0x40) + M<SInt32>(pAVar77 + 8)
+               (UInt32)M<UInt16>(surfaceBuffer + 0x20) * M<SInt32>(surfaceBuffer + 0x40) + M<SInt32>(surfaceBuffer + 8)
                & 0xffffffe0;
-          if ((M<UInt32>(pAVar77 + 0x3c) & 0xf00000) != 0) {
-            opcode = (UInt32)M<UInt16>(pAVar77 + 0x14) / (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf);
+          if ((M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) != 0) {
+            opcode = (UInt32)M<UInt16>(surfaceBuffer + 0x14) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
           }
-          pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
-          if (0x20 / M<UInt16>(pAVar77 + 0x16) <= opcode) {
+          pitchPixels = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
+          if (0x20 / M<UInt16>(surfaceBuffer + 0x16) <= opcode) {
             pitchPixels = opcode;
           }
           uVar53 = recordCursor[0x8e];
           recordCursor[0xa0] =
-               pitchPixels & 0x3ffe | ((UInt8)pAVar77[0x38] & 1) << 0x10 |
-               ((UInt8)pAVar77[0x38] & 6) << 0x10 | ((UInt8)pAVar77[0x39] & 3) << 0x13 |
-               FormatTableLookup_0x0004d2e0((UInt32)(UInt8)pAVar77[0x3a] * 0x1c) >> 1 & 0x1e00000;
+               pitchPixels & 0x3ffe | ((UInt8)surfaceBuffer[0x38] & 1) << 0x10 |
+               ((UInt8)surfaceBuffer[0x38] & 6) << 0x10 | ((UInt8)surfaceBuffer[0x39] & 3) << 0x13 |
+               FormatTableLookup_0x0004d2e0((UInt32)(UInt8)surfaceBuffer[0x3a] * 0x1c) >> 1 & 0x1e00000;
           formatFieldE0 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 0x11 & 0x1f;
           recordCursor[0x8e] = formatFieldE0 | uVar53 & 0xffffffe0;
-          uVar73 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
-          recordCursor[0x8e] = uVar73 | formatFieldE0 | uVar53 & 0xfffffce0;
-          uVar75 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
-          recordCursor[0x8e] = uVar75 | uVar73 | formatFieldE0 | uVar53 & 0xfffff0e0;
-          uVar37 = (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x1800) << 1;
-          recordCursor[0x8e] = uVar37 | uVar75 | uVar73 | formatFieldE0 | uVar53 & 0xffffc0e0;
+          formatBits300 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
+          recordCursor[0x8e] = formatBits300 | formatFieldE0 | uVar53 & 0xfffffce0;
+          formatBitsC00 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
+          recordCursor[0x8e] = formatBitsC00 | formatBits300 | formatFieldE0 | uVar53 & 0xfffff0e0;
+          formatBits3000 = (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x1800) << 1;
+          recordCursor[0x8e] = formatBits3000 | formatBitsC00 | formatBits300 | formatFieldE0 | uVar53 & 0xffffc0e0;
           recordCursor[0x8e] =
                (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x600) << 5 |
-               uVar37 | uVar75 | uVar73 | formatFieldE0 | uVar53 & 0xffff00e0;
-          bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
-          in_cr0 = bVar1 << 1;
-          if ((bVar1) ||
-             (uVar73 = (UInt32)M<UInt16>(pAVar77 + 0x1c) / (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf)
-             , opcode = uVar73 - 1, uVar73 == 0)) {
+               formatBits3000 | formatBitsC00 | formatBits300 | formatFieldE0 | uVar53 & 0xffff00e0;
+          singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
+          in_cr0 = singleSample << 1;
+          if ((singleSample) ||
+             (formatBits300 = (UInt32)M<UInt16>(surfaceBuffer + 0x1c) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)
+             , opcode = formatBits300 - 1, formatBits300 == 0)) {
             opcode = 0;
           }
           maxY = 0;
-          if (M<UInt16>(pAVar77 + 0x1e) != 0) {
-            maxY = M<UInt16>(pAVar77 + 0x1e) - 1;
+          if (M<UInt16>(surfaceBuffer + 0x1e) != 0) {
+            maxY = M<UInt16>(surfaceBuffer + 0x1e) - 1;
           }
           recordCursor[0xb7] = opcode & 0x1fff | (maxY & 0x1fff) << 0xd;
           vertexArrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(local_378),uVar55);
@@ -1325,25 +1360,25 @@ LAB_00030994:
               }
             }
             texture = local_378;
-            uVar55 = this->GetQueryOffset((VendorTextureBuffer *)(local_378),uVar58,uVar55);
+            queryOffset = this->GetQueryOffset((VendorTextureBuffer *)(local_378),uVar58,uVar55);
             *recordCursor = 0x80000000;
             recordCursor[1] = 0x80000000;
             recordCursor[2] = 0x80000000;
             recordCursor[3] = 0x80000000;
             if ((opcode == 1) && (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb9c) == 2)) {
-              recordCursor[9] = uVar55;
-              recordCursor[0xd] = uVar55 + 0x10;
+              recordCursor[9] = queryOffset;
+              recordCursor[0xd] = queryOffset + 0x10;
             }
             else {
-              recordCursor[7] = uVar55;
+              recordCursor[7] = queryOffset;
               if (1 < opcode) {
-                recordCursor[0xb] = uVar55 + 0x10;
+                recordCursor[0xb] = queryOffset + 0x10;
               }
               if (2 < opcode) {
-                recordCursor[0xf] = uVar55 + 8;
+                recordCursor[0xf] = queryOffset + 8;
               }
               if (3 < opcode) {
-                recordCursor[0x13] = uVar55 + 0xc;
+                recordCursor[0x13] = queryOffset + 0xc;
               }
             }
             refCountPtr = (SInt32 *)(M<SInt32>(texture + 0x14) + 0x10);
@@ -1384,32 +1419,32 @@ LAB_00030994:
               }
             }
             else if (opcode == 0x3a000000) {
-              pAVar77 = self;
+              selfAlias = self;
               do {
-                if (M<UInt8 *>(pAVar77 + 0x2e4) != (UInt8 *)0x0) {
-                  ((IOATIR500GLContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(pAVar77 + 0x2e4)));
-                  pVVar70 = M<UInt8 *>(pAVar77 + 0x2e4);
+                if (M<UInt8 *>(selfAlias + 0x2e4) != (UInt8 *)0x0) {
+                  ((IOATIR500GLContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(selfAlias + 0x2e4)));
+                  pVVar70 = M<UInt8 *>(selfAlias + 0x2e4);
                   refCountPtr = (SInt32 *)(M<SInt32>(pVVar70 + 0x14) + 0x10);
                   previousRefCount = atomicAddReturningOld((SInt32 *)refCountPtr, -1);
                   if (previousRefCount == 1) {
                     ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->delete_texture((VendorTextureBuffer *)(pVVar70));
                   }
-                  M<UInt32>(pAVar77 + 0x2e4) = 0;
+                  M<UInt32>(selfAlias + 0x2e4) = 0;
                 }
-                pAVar77 = pAVar77 + 4;
-              } while (self + 0x44 != pAVar77);
+                selfAlias = selfAlias + 4;
+              } while (self + 0x44 != selfAlias);
               goto LAB_0002eae8;
             }
           }
           else if (opcode == 0x3d000000) {
             if (recordCursor[1] == 0x132) {
-              uVar55 = recordCursor[2];
+              volatileState = recordCursor[2];
               *recordCursor = 0x80000000;
               recordCursor[1] = 0x80000000;
               recordCursor[2] = 0x80000000;
               recordCursor[3] = 0x80000000;
               if (M<UInt8 *>(self + kIOATIR500GLContext_boundSurface) != (UInt8 *)0x0) {
-                ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->set_volatile_state((eSurfaceVolatileState)(uVar55));
+                ((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->set_volatile_state((eSurfaceVolatileState)(volatileState));
               }
             }
             else {
@@ -1418,9 +1453,9 @@ LAB_00030994:
             }
           }
           else if (opcode == 0x3e000000) {
-            iVar59 = M<SInt32>(self + kATIR500GLContext_textureSlots);
-            if ((iVar59 != 0) &&
-               ((M<char>(iVar59 + 0x20) == '\x06' || (M<SInt32>(iVar59 + 0x48) != 0)))) {
+            currentTexture = M<SInt32>(self + kATIR500GLContext_textureSlots);
+            if ((currentTexture != 0) &&
+               ((M<char>(currentTexture + 0x20) == '\x06' || (M<SInt32>(currentTexture + 0x48) != 0)))) {
               opcode = recordCursor[4];
               uVar55 = recordCursor[3];
               if ((recordCursor[2] < M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14)) &&
@@ -1462,17 +1497,17 @@ LAB_00030994:
                     ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500GLContext_commandBuffer)));
                   }
                 }
-                iVar59 = (opcode >> 0x10) * 2;
+                levelEntry = (opcode >> 0x10) * 2;
                 levelBit = (UInt16)(1 << (opcode & 0x3f));
-                iVar48 = iVar59 + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
+                iVar48 = levelEntry + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
                 M<UInt16>(iVar48 + 0x28) = levelBit | M<UInt16>(iVar48 + 0x28);
-                iVar59 = iVar59 + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
-                M<UInt16>(iVar59 + 0x1c) = M<UInt16>(iVar59 + 0x1c) & ~levelBit;
+                levelEntry = levelEntry + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
+                M<UInt16>(levelEntry + 0x1c) = M<UInt16>(levelEntry + 0x1c) & ~levelBit;
                 *recordCursor = 0xc0031000;
-                uVar58 = recordCursor[0x9f];
+                offsetWord = recordCursor[0x9f];
                 recordCursor[0x10] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
                 textureOffset = this->GetTextureOffset((VendorTextureBuffer *)(M<UInt8 *>(self + kATIR500GLContext_textureSlots)),true);
-                recordCursor[0x9f] = uVar58 + textureOffset;
+                recordCursor[0x9f] = offsetWord + textureOffset;
                 vertexArrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(local_378),uVar55);
                 recordCursor[0xa5] =
                      vertexArrayOffset + (recordCursor[0xa5] >> 3 & 0x1ffffffc) & 0xffffffe0 | recordCursor[0xa5] & 0x1f;
@@ -1627,9 +1662,9 @@ LAB_00030fe0:
                      formatFieldE4 >> 0x13 & 0x1f | (formatFieldE4 & 0x40) << 0x10 | formatFieldE4 >> 7 & 0xe00 |
                      formatFieldE4 >> 1 & 0x7000 | (formatFieldE4 & 0x1c00) << 5 | (formatFieldE4 & 0x380) << 0xb;
                 opcode = M<UInt32>(pAVar77 + 0x3c);
-                bVar1 = (opcode & 0xf00000) == 0;
-                in_cr0 = bVar1 << 1;
-                if (bVar1) {
+                singleSample = (opcode & 0xf00000) == 0;
+                in_cr0 = singleSample << 1;
+                if (singleSample) {
                   maxY = 0;
                 }
                 else {
@@ -1639,7 +1674,7 @@ LAB_00030fe0:
                 if (0x20 / M<UInt16>(pAVar77 + 0x16) <= maxY) {
                   pitchPixels = maxY;
                 }
-                if ((bVar1) ||
+                if ((singleSample) ||
                    (uVar73 = (UInt32)M<UInt16>(pAVar77 + 0x1c) / (opcode >> 0x14 & 0xf),
                    opcode = uVar73 - 1, uVar73 == 0)) {
                   opcode = 0;
@@ -1658,10 +1693,10 @@ LAB_00030fe0:
             if (opcode != 0x41000000) goto LAB_00031340;
             uVar55 = recordCursor[1];
             iVar52 = 4;
-            pAVar77 = self;
+            selfAlias = self;
             do {
-              M<UInt16>(pAVar77 + 0x3b2) = 0;
-              pAVar77 = pAVar77 + 2;
+              M<UInt16>(selfAlias + 0x3b2) = 0;
+              selfAlias = selfAlias + 2;
               iVar52 = iVar52 + -1;
             } while (iVar52 != 0);
             uVar58 = recordCursor[4];
@@ -1677,14 +1712,14 @@ LAB_00030fe0:
               uVar62 = 0;
               iVar59 = 6;
               iVar52 = 0x18;
-              pAVar77 = self;
+              selfAlias = self;
               pAVar72 = self;
               puVar42 = recordCursor;
               do {
                 puVar54 = puVar42 + 6;
                 local_37c = (UInt8 *)0x0;
-                M<SInt16>(pAVar77 + 0x3dc) = (SInt16)recordCursor[2];
-                M<SInt16>(pAVar77 + 0x3de) = (SInt16)recordCursor[3];
+                M<SInt16>(selfAlias + 0x3dc) = (SInt16)recordCursor[2];
+                M<SInt16>(selfAlias + 0x3de) = (SInt16)recordCursor[3];
                 if (M<SInt32>(pAVar72 + 0x338) != 0) {
                   iVar48 = M<SInt32>(M<SInt32>(pAVar72 + 0x338) + 0x14);
                   M<SInt16>(iVar48 + 0x36) = M<SInt16>(iVar48 + 0x36) + -1;
@@ -1718,13 +1753,13 @@ LAB_00030fe0:
                   ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
                   this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(texture),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
                   uVar63 = puVar42[10] >> 0xf & 0x1fffe;
-                  uVar15 = (UInt16)(1 << (puVar42[10] & 0x3f));
+                  levelBit = (UInt16)(1 << (puVar42[10] & 0x3f));
                   M<SInt16>(M<SInt32>(texture + 0x14) + 0x36) =
                        M<SInt16>(M<SInt32>(texture + 0x14) + 0x36) + 1;
                   iVar48 = uVar63 + M<SInt32>(texture + 0x14);
-                  M<UInt16>(iVar48 + 0x28) = uVar15 | M<UInt16>(iVar48 + 0x28);
+                  M<UInt16>(iVar48 + 0x28) = levelBit | M<UInt16>(iVar48 + 0x28);
                   iVar48 = uVar63 + M<SInt32>(texture + 0x14);
-                  M<UInt16>(iVar48 + 0x1c) = M<UInt16>(iVar48 + 0x1c) & ~uVar15;
+                  M<UInt16>(iVar48 + 0x1c) = M<UInt16>(iVar48 + 0x1c) & ~levelBit;
                   this->build_surface_from_texture((VendorTextureBuffer *)(texture),(ATIR500SurfaceBuffer *)((UInt8 *)local_c0),
                              M<UInt16>((SInt32)recordCursor + 10),M<UInt16>((SInt32)recordCursor + 0xe),
                              M<UInt8>((SInt32)puVar42 + 0x2f),puVar42[7],
@@ -1733,7 +1768,7 @@ LAB_00030fe0:
                 }
                 uVar62 = uVar62 + 1;
                 iVar59 = iVar59 + 6;
-                pAVar77 = pAVar77 + 0x78;
+                selfAlias = selfAlias + 0x78;
                 pAVar72 = pAVar72 + 4;
                 iVar52 = iVar52 + 0x18;
                 local_c0 = local_c0 + 0x78;
@@ -1881,13 +1916,13 @@ LAB_00030d40:
               ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
               this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(texture),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
               uVar63 = puVar42[4] >> 0xf & 0x1fffe;
-              uVar15 = (UInt16)(1 << (puVar42[4] & 0x3f));
+              levelBit = (UInt16)(1 << (puVar42[4] & 0x3f));
               M<SInt16>(M<SInt32>(texture + 0x14) + 0x36) =
                    M<SInt16>(M<SInt32>(texture + 0x14) + 0x36) + 1;
               iVar52 = uVar63 + M<SInt32>(texture + 0x14);
-              M<UInt16>(iVar52 + 0x28) = uVar15 | M<UInt16>(iVar52 + 0x28);
+              M<UInt16>(iVar52 + 0x28) = levelBit | M<UInt16>(iVar52 + 0x28);
               iVar52 = uVar63 + M<SInt32>(texture + 0x14);
-              M<UInt16>(iVar52 + 0x1c) = M<UInt16>(iVar52 + 0x1c) & ~uVar15;
+              M<UInt16>(iVar52 + 0x1c) = M<UInt16>(iVar52 + 0x1c) & ~levelBit;
               this->build_surface_from_texture((VendorTextureBuffer *)(texture),(ATIR500SurfaceBuffer *)((UInt8 *)(self + kATIR500GLContext_textureSurfaceBuffer)),
                          M<UInt16>((SInt32)recordCursor + 10),M<UInt16>((SInt32)recordCursor + 0xe),
                          M<UInt8>((SInt32)puVar42 + 0x17),puVar42[1],M<UInt16>((SInt32)puVar42 + 10));
@@ -1934,11 +1969,11 @@ LAB_0002eed0:
             if (opcode <= uVar73) {
 LAB_0002eed8:
               if (opcode < uVar73) {
-                uVar75 = 0x80000000;
+                nopHeader = 0x80000000;
                 if (uVar73 - opcode != 1) {
-                  uVar75 = ((uVar73 - opcode) + -2) * 0x10000 | 0xc0001000;
+                  nopHeader = ((uVar73 - opcode) + -2) * 0x10000 | 0xc0001000;
                 }
-                recordCursor[opcode] = uVar75;
+                recordCursor[opcode] = nopHeader;
               }
             }
           }
@@ -1946,9 +1981,9 @@ LAB_0002eed8:
             this->process_kATIGLStreamFastClearColor((UInt32 *)(recordCursor));
           }
           else if (opcode == 0x44000000) {
-            iVar59 = M<SInt32>(self + kATIR500GLContext_textureSlots);
-            if ((iVar59 != 0) &&
-               ((M<char>(iVar59 + 0x20) == '\x06' || (M<SInt32>(iVar59 + 0x48) != 0)))) {
+            currentTexture = M<SInt32>(self + kATIR500GLContext_textureSlots);
+            if ((currentTexture != 0) &&
+               ((M<char>(currentTexture + 0x20) == '\x06' || (M<SInt32>(currentTexture + 0x48) != 0)))) {
               pVVar79 = (UInt8 *)recordCursor[3];
               opcode = recordCursor[2];
               uVar55 = recordCursor[4];
@@ -1966,16 +2001,16 @@ LAB_0002eed8:
                 recordCursor[4] = 2;
                 uVar58 = uVar55 + M<SInt32>(pVVar79 + 4) + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4);
               }
-              iVar59 = (opcode >> 0x10) * 2;
+              levelEntry = (opcode >> 0x10) * 2;
               levelBit = (UInt16)(1 << (opcode & 0x3f));
-              iVar48 = iVar59 + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
+              iVar48 = levelEntry + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
               M<UInt16>(iVar48 + 0x28) = levelBit | M<UInt16>(iVar48 + 0x28);
-              iVar59 = iVar59 + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
-              M<UInt16>(iVar59 + 0x1c) = M<UInt16>(iVar59 + 0x1c) & ~levelBit;
+              levelEntry = levelEntry + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
+              M<UInt16>(levelEntry + 0x1c) = M<UInt16>(levelEntry + 0x1c) & ~levelBit;
               recordCursor[0x10] = uVar58;
-              uVar55 = recordCursor[0x16];
+              offsetWord = recordCursor[0x16];
               textureOffset = this->GetTextureOffset((VendorTextureBuffer *)(M<UInt8 *>(self + kATIR500GLContext_textureSlots)),true);
-              recordCursor[0x16] = uVar55 + textureOffset;
+              recordCursor[0x16] = offsetWord + textureOffset;
               M<UInt32>(pVVar79 + 0x5c) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
               goto LAB_0002fe70;
             }
@@ -2054,18 +2089,18 @@ LAB_0002ef48:
              FormatTableLookup_0x0004d2e0((UInt32)(UInt8)pAVar76[0x3a] * 0x1c) >> 1 & 0x1e00000;
         formatFieldE0 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 0x11 & 0x1f;
         recordCursor[uVar73 + 0x8a] = formatFieldE0 | uVar35 & 0xffffffe0;
-        uVar75 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
-        recordCursor[uVar73 + 0x8a] = uVar75 | formatFieldE0 | uVar35 & 0xfffffce0;
-        uVar37 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
-        recordCursor[uVar73 + 0x8a] = uVar37 | uVar75 | formatFieldE0 | uVar35 & 0xfffff0e0;
+        formatBits300 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
+        recordCursor[uVar73 + 0x8a] = formatBits300 | formatFieldE0 | uVar35 & 0xfffffce0;
+        formatBitsC00 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
+        recordCursor[uVar73 + 0x8a] = formatBitsC00 | formatBits300 | formatFieldE0 | uVar35 & 0xfffff0e0;
         uVar53 = (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x1800) << 1;
-        recordCursor[uVar73 + 0x8a] = uVar53 | uVar37 | uVar75 | formatFieldE0 | uVar35 & 0xffffc0e0;
+        recordCursor[uVar73 + 0x8a] = uVar53 | formatBitsC00 | formatBits300 | formatFieldE0 | uVar35 & 0xffffc0e0;
         recordCursor[uVar73 + 0x8a] =
              (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x600) << 5 |
-             uVar53 | uVar37 | uVar75 | formatFieldE0 | uVar35 & 0xffff00e0;
+             uVar53 | formatBitsC00 | formatBits300 | formatFieldE0 | uVar35 & 0xffff00e0;
         if (((M<UInt32>(pAVar76 + 0x3c) & 0xf00000) == 0) ||
-           (uVar75 = (UInt32)M<UInt16>(pAVar76 + 0x1c) / (M<UInt32>(pAVar76 + 0x3c) >> 0x14 & 0xf),
-           opcode = uVar75 - 1, uVar75 == 0)) {
+           (formatBits300 = (UInt32)M<UInt16>(pAVar76 + 0x1c) / (M<UInt32>(pAVar76 + 0x3c) >> 0x14 & 0xf),
+           opcode = formatBits300 - 1, formatBits300 == 0)) {
           opcode = 0;
         }
         maxY = 0;
@@ -2093,8 +2128,8 @@ LAB_0002ef48:
              formatFieldE4 >> 0x13 & 0x1f | (formatFieldE4 & 0x40) << 0x10 | formatFieldE4 >> 7 & 0xe00 |
              formatFieldE4 >> 1 & 0x7000 | (formatFieldE4 & 0x1c00) << 5 | (formatFieldE4 & 0x380) << 0xb;
         opcode = M<UInt32>(pAVar45 + 0x3c);
-        bVar1 = (opcode & 0xf00000) == 0;
-        if (bVar1) {
+        singleSample = (opcode & 0xf00000) == 0;
+        if (singleSample) {
           maxY = 0;
         }
         else {
@@ -2104,7 +2139,7 @@ LAB_0002ef48:
         if (0x20 / M<UInt16>(pAVar45 + 0x16) <= maxY) {
           pitchPixels = maxY;
         }
-        if ((bVar1) ||
+        if ((singleSample) ||
            (uVar75 = (UInt32)M<UInt16>(pAVar45 + 0x1c) / (opcode >> 0x14 & 0xf), opcode = uVar75 - 1
            , uVar75 == 0)) {
           opcode = 0;
@@ -2119,9 +2154,9 @@ LAB_0002ef48:
         ;
         recordCursor[uVar73 + 0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
         AVar12 = pAVar45[0x3a];
-        bVar1 = (M<UInt32>(pAVar45 + 0x3c) & 0xf00000) == 0;
-        in_cr0 = bVar1 << 1;
-        if (!bVar1) {
+        singleSample = (M<UInt32>(pAVar45 + 0x3c) & 0xf00000) == 0;
+        in_cr0 = singleSample << 1;
+        if (!singleSample) {
           uVar53 = (UInt32)M<UInt16>(pAVar45 + 0x14) / (M<UInt32>(pAVar45 + 0x3c) >> 0x14 & 0xf);
         }
         pitchPixels = 0x20 / M<UInt16>(pAVar45 + 0x16);
@@ -2129,7 +2164,7 @@ LAB_0002ef48:
           pitchPixels = uVar53;
         }
         iVar59 = M<SInt32>(pAVar45 + 0x40);
-        uVar15 = M<UInt16>(pAVar45 + 0x20);
+        bufferPitch = M<UInt16>(pAVar45 + 0x20);
         AVar13 = pAVar45[0x38];
         iVar48 = M<SInt32>(pAVar45 + 8);
         if ((uVar55 != 0) && (0 < (SInt32)uVar55)) {
@@ -2151,7 +2186,7 @@ LAB_0002ef48:
               iVar33 = (iVar33 << 0xc) >> 3;
             }
             *puVar69 = 0x1150;
-            puVar69[1] = (UInt32)uVar15 * iVar59 + iVar48 + iVar33 + (pitchPixels * puVar69[1] << maxY) &
+            puVar69[1] = (UInt32)bufferPitch * iVar59 + iVar48 + iVar33 + (pitchPixels * puVar69[1] << maxY) &
                          0xffffffe0 | ((UInt8)AVar13 >> 1 & 3) << 3 | ((UInt8)AVar13 & 1) << 2;
             uVar58 = puVar69[2];
             maxY = recordCursor[uVar73 + 0xa6];
@@ -2170,10 +2205,10 @@ LAB_0002ef48:
           if (M<UInt32>(self + kIOATIR500GLContext_statusRegionSize) <= opcode) goto LAB_00030d40;
           *recordCursor = 0x578;
           accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-          uVar55 = M<UInt32>(accel + 0x50);
-          recordCursor[1] = uVar55;
-          M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_statusRegion) + opcode) = uVar55;
-          M<UInt32>(accel + 0x50) = uVar55 + 1;
+          stamp = M<UInt32>(accel + 0x50);
+          recordCursor[1] = stamp;
+          M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_statusRegion) + opcode) = stamp;
+          M<UInt32>(accel + 0x50) = stamp + 1;
           M<UInt32>(opcode + M<SInt32>(self + kIOATIR500GLContext_statusRegion) + 4) = 0;
           reservedWords = reservedWords + 1;
         }
@@ -2189,13 +2224,13 @@ LAB_0002ef48:
                 uVar73 = recordCursor[3];
                 if (uVar73 == 8) {
 LAB_0002f4c8:
-                  iVar59 = 8;
+                  attachment = 8;
                 }
                 else {
                   if (uVar73 < 9) {
                     if (uVar73 == 7) {
 LAB_0002f4c0:
-                      iVar59 = 7;
+                      attachment = 7;
                       goto LAB_0002f498;
                     }
                   }
@@ -2203,23 +2238,23 @@ LAB_0002f4c0:
                     if (uVar73 == 10) goto LAB_0002f4c0;
                     if (uVar73 == 0xb) goto LAB_0002f4c8;
                   }
-                  iVar59 = 6;
+                  attachment = 6;
                 }
 LAB_0002f498:
                 if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
                   pAVar43 = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
-                  pAVar45 = M<UInt8 *>(pAVar43 + iVar59 * 4 + 0xb70);
+                  pAVar45 = M<UInt8 *>(pAVar43 + attachment * 4 + 0xb70);
                 }
                 else {
                   pAVar43 = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
                   pAVar45 = (UInt8 *)(self + kATIR500GLContext_textureDepthBuffer);
                 }
-                iVar59 = ((ATIR500Surface *)(pAVar43))->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(pAVar45),0,(UInt32 *)(recordCursor + -uVar55));
-                uVar73 = 0x80000000;
-                if (uVar55 - iVar59 != 1) {
-                  uVar73 = ((uVar55 - iVar59) + -2) * 0x10000 | 0xc0001000;
+                emittedWords = ((ATIR500Surface *)(pAVar43))->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(pAVar45),0,(UInt32 *)(recordCursor + -uVar55));
+                nopHeader = 0x80000000;
+                if (uVar55 - emittedWords != 1) {
+                  nopHeader = ((uVar55 - emittedWords) + -2) * 0x10000 | 0xc0001000;
                 }
-                (recordCursor + -uVar55)[iVar59] = uVar73;
+                (recordCursor + -uVar55)[emittedWords] = nopHeader;
                 iVar59 = M<SInt32>(self + kATIR500GLContext_textureSlots);
               }
               iVar48 = (opcode >> 0x10) * 2;
@@ -2233,97 +2268,97 @@ LAB_0002f498:
               if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
                 opcode = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
                 iVar48 = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
-                iVar59 = opcode + 1;
-                pAVar77 = *(UInt8 **)
+                nextLevel = opcode + 1;
+                surfaceBuffer = *(UInt8 **)
                            ((SInt32)local_378 * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
               }
               else if (recordCursor[3] == 4) {
-                pAVar77 = self + kATIR500GLContext_textureDepthBuffer;
-                iVar59 = 1;
+                surfaceBuffer = self + kATIR500GLContext_textureDepthBuffer;
+                nextLevel = 1;
                 opcode = 0;
                 iVar48 = 0;
               }
               else {
-                iVar59 = 1;
+                nextLevel = 1;
                 opcode = 0;
                 iVar48 = 0;
-                pAVar77 = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
+                surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
               }
-              AVar10 = pAVar77[0x3a];
+              AVar10 = surfaceBuffer[0x3a];
               recordCursor[0xa7] =
-                   ((UInt8)pAVar77[0x38] & 7) << 2 |
-                   M<SInt32>(pAVar77 + opcode * 4 + 0x40) * (UInt32)M<UInt16>(pAVar77 + 0x20) +
-                   iVar48 * (M<SInt32>(pAVar77 + iVar59 * 4 + 0x40) -
-                            M<SInt32>(pAVar77 + opcode * 4 + 0x40)) + M<SInt32>(pAVar77 + 8) &
+                   ((UInt8)surfaceBuffer[0x38] & 7) << 2 |
+                   M<SInt32>(surfaceBuffer + opcode * 4 + 0x40) * (UInt32)M<UInt16>(surfaceBuffer + 0x20) +
+                   iVar48 * (M<SInt32>(surfaceBuffer + nextLevel * 4 + 0x40) -
+                            M<SInt32>(surfaceBuffer + opcode * 4 + 0x40)) + M<SInt32>(surfaceBuffer + 8) &
                    0xffffffe0;
-              if (((M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0) ||
-                 (iVar59 = (SInt32)((UInt32)M<UInt16>(pAVar77 + 0x1c) /
-                                (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf)) >> (opcode & 0x3f),
-                 iVar59 == 0)) {
+              if (((M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0) ||
+                 (nextLevel = (SInt32)((UInt32)M<UInt16>(surfaceBuffer + 0x1c) /
+                                (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)) >> (opcode & 0x3f),
+                 nextLevel == 0)) {
                 uVar73 = 0;
               }
               else {
-                uVar73 = iVar59 - 1;
+                uVar73 = nextLevel - 1;
               }
               uVar75 = 0;
-              iVar59 = (SInt32)(UInt32)M<UInt16>(pAVar77 + 0x1e) >> (opcode & 0x3f);
-              if (iVar59 != 0) {
-                uVar75 = iVar59 - 1;
+              mipHeight = (SInt32)(UInt32)M<UInt16>(surfaceBuffer + 0x1e) >> (opcode & 0x3f);
+              if (mipHeight != 0) {
+                uVar75 = mipHeight - 1;
               }
               recordCursor[0xad] = uVar73 & 0x7ff | (uVar75 & 0x7ff) << 0xb | 0x80000000;
               formatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar10 * 0x1c);
               recordCursor[0xaf] =
                    formatFieldE4 >> 0x13 & 0x1f | (formatFieldE4 & 0x40) << 0x10 | formatFieldE4 >> 7 & 0xe00 |
                    formatFieldE4 >> 1 & 0x7000 | (formatFieldE4 & 0x1c00) << 5 | (formatFieldE4 & 0x380) << 0xb;
-              uVar73 = M<UInt32>(pAVar77 + 0x3c);
-              bVar1 = (uVar73 & 0xf00000) == 0;
-              if (bVar1) {
+              uVar73 = M<UInt32>(surfaceBuffer + 0x3c);
+              singleSample = (uVar73 & 0xf00000) == 0;
+              if (singleSample) {
                 uVar75 = 0;
               }
               else {
-                uVar75 = (SInt32)((UInt32)M<UInt16>(pAVar77 + 0x14) / (uVar73 >> 0x14 & 0xf)) >>
+                uVar75 = (SInt32)((UInt32)M<UInt16>(surfaceBuffer + 0x14) / (uVar73 >> 0x14 & 0xf)) >>
                          (opcode & 0x3f);
               }
-              pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
-              if (0x20 / M<UInt16>(pAVar77 + 0x16) <= uVar75) {
+              pitchPixels = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
+              if (0x20 / M<UInt16>(surfaceBuffer + 0x16) <= uVar75) {
                 pitchPixels = uVar75;
               }
-              if ((bVar1) ||
-                 (iVar59 = (SInt32)((UInt32)M<UInt16>(pAVar77 + 0x1c) / (uVar73 >> 0x14 & 0xf)) >>
-                           (opcode & 0x3f), iVar59 == 0)) {
+              if ((singleSample) ||
+                 (mipHeight = (SInt32)((UInt32)M<UInt16>(surfaceBuffer + 0x1c) / (uVar73 >> 0x14 & 0xf)) >>
+                           (opcode & 0x3f), mipHeight == 0)) {
                 uVar73 = 0;
               }
               else {
-                uVar73 = iVar59 - 1;
+                uVar73 = mipHeight - 1;
               }
               uVar75 = 0;
-              iVar59 = (SInt32)(UInt32)M<UInt16>(pAVar77 + 0x1e) >> (opcode & 0x3f);
-              if (iVar59 != 0) {
-                uVar75 = iVar59 - 1;
+              mipHeight = (SInt32)(UInt32)M<UInt16>(surfaceBuffer + 0x1e) >> (opcode & 0x3f);
+              if (mipHeight != 0) {
+                uVar75 = mipHeight - 1;
               }
-              uVar55 = recordCursor[0xa1];
+              offsetWord = recordCursor[0xa1];
               recordCursor[0xb1] = pitchPixels - 1 & 0x3fff | (uVar73 & 0x800) << 4 | (uVar75 & 0x800) << 5;
               recordCursor[0x12] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
               textureOffset = this->GetTextureOffset((VendorTextureBuffer *)(M<UInt8 *>(self + kATIR500GLContext_textureSlots)),true);
               puVar69 = recordCursor + 0xc4;
               uVar73 = 0;
-              recordCursor[0xa1] = uVar55 + textureOffset;
-              AVar10 = pAVar77[0x3a];
-              bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
-              in_cr0 = bVar1 << 1;
-              if (!bVar1) {
-                uVar73 = (SInt32)((UInt32)M<UInt16>(pAVar77 + 0x14) /
-                              (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf)) >> (opcode & 0x3f);
+              recordCursor[0xa1] = offsetWord + textureOffset;
+              AVar10 = surfaceBuffer[0x3a];
+              singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
+              in_cr0 = singleSample << 1;
+              if (!singleSample) {
+                uVar73 = (SInt32)((UInt32)M<UInt16>(surfaceBuffer + 0x14) /
+                              (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)) >> (opcode & 0x3f);
               }
-              pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
-              if (0x20 / M<UInt16>(pAVar77 + 0x16) <= uVar73) {
+              pitchPixels = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
+              if (0x20 / M<UInt16>(surfaceBuffer + 0x16) <= uVar73) {
                 pitchPixels = uVar73;
               }
-              uVar15 = M<UInt16>(pAVar77 + 0x20);
-              iVar74 = M<SInt32>(pAVar77 + 8);
-              iVar59 = M<SInt32>(pAVar77 + opcode * 4 + 0x40);
-              iVar33 = M<SInt32>(pAVar77 + opcode * 4 + 0x44);
-              AVar11 = pAVar77[0x38];
+              bufferPitch = M<UInt16>(surfaceBuffer + 0x20);
+              iVar74 = M<SInt32>(surfaceBuffer + 8);
+              mipOffset = M<SInt32>(surfaceBuffer + opcode * 4 + 0x40);
+              iVar33 = M<SInt32>(surfaceBuffer + opcode * 4 + 0x44);
+              AVar11 = surfaceBuffer[0x38];
               if ((uVar58 != 0) && (0 < (SInt32)uVar58)) {
                 do {
                   if ((UInt8)AVar11 >> 1 == 0) {
@@ -2344,7 +2379,7 @@ LAB_0002f498:
                   }
                   *puVar69 = 0x1150;
                   puVar69[1] = ((UInt8)AVar11 >> 1 & 3) << 3 | ((UInt8)AVar11 & 1) << 2 |
-                               iVar59 * (UInt32)uVar15 + iVar48 * (iVar33 - iVar59) + iVar74 +
+                               mipOffset * (UInt32)bufferPitch + iVar48 * (iVar33 - mipOffset) + iVar74 +
                                iVar49 + (pitchPixels * puVar69[1] << opcode) & 0xffffffe0;
                   uVar55 = puVar69[2];
                   opcode = recordCursor[0xad];
@@ -2363,13 +2398,13 @@ LAB_0002f498:
           }
           else if (opcode == 0x33000000) {
             if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
-              iVar59 = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
+              surfaceBase = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
               opcode = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
               iVar48 = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
-              pAVar68 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + iVar59 + 0xb70);
-              pAVar72 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + iVar59 + 0xb70);
+              pAVar68 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + surfaceBase + 0xb70);
+              pAVar72 = M<UInt8 *>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + surfaceBase + 0xb70);
               iVar33 = opcode + 1;
-              pAVar77 = (UInt8 *)((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + iVar59 + 0xa8);
+              pAVar77 = (UInt8 *)((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + surfaceBase + 0xa8);
             }
             else {
               pAVar68 = self + kATIR500GLContext_textureDepthBuffer;
@@ -2403,22 +2438,22 @@ LAB_0002f498:
                  FormatTableLookup_0x0004d2e0((UInt32)(UInt8)pAVar72[0x3a] * 0x1c) >> 1 & 0x1e00000;
             formatFieldE0 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 0x11 & 0x1f;
             recordCursor[0x8c] = formatFieldE0 | uVar35 & 0xffffffe0;
-            uVar73 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
-            recordCursor[0x8c] = uVar73 | formatFieldE0 | uVar35 & 0xfffffce0;
-            uVar37 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
-            recordCursor[0x8c] = uVar37 | uVar73 | formatFieldE0 | uVar35 & 0xfffff0e0;
-            uVar53 = (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x1800) << 1;
-            recordCursor[0x8c] = uVar53 | uVar37 | uVar73 | formatFieldE0 | uVar35 & 0xffffc0e0;
+            formatBits300 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
+            recordCursor[0x8c] = formatBits300 | formatFieldE0 | uVar35 & 0xfffffce0;
+            formatBitsC00 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
+            recordCursor[0x8c] = formatBitsC00 | formatBits300 | formatFieldE0 | uVar35 & 0xfffff0e0;
+            formatBits3000 = (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x1800) << 1;
+            recordCursor[0x8c] = formatBits3000 | formatBitsC00 | formatBits300 | formatFieldE0 | uVar35 & 0xffffc0e0;
             recordCursor[0x8c] =
                  (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x600) << 5 |
-                 uVar53 | uVar37 | uVar73 | formatFieldE0 | uVar35 & 0xffff00e0;
-            uVar55 = this->compute_sc_hyperz_en(recordCursor[0x14]);
-            recordCursor[0x14] = uVar55;
-            uVar55 = this->compute_zb_bw_cntl(recordCursor[0x16]);
-            recordCursor[0x16] = uVar55;
-            uVar55 = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
+                 formatBits3000 | formatBitsC00 | formatBits300 | formatFieldE0 | uVar35 & 0xffff00e0;
+            hyperzEnable = this->compute_sc_hyperz_en(recordCursor[0x14]);
+            recordCursor[0x14] = hyperzEnable;
+            zbBwCntl = this->compute_zb_bw_cntl(recordCursor[0x16]);
+            recordCursor[0x16] = zbBwCntl;
+            accelFlags = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
             recordCursor[0xae] = 0xaaaa;
-            recordCursor[0xd] = uVar55;
+            recordCursor[0xd] = accelFlags;
             if ((((M<UInt32>(pAVar77 + 0x28) & 0x3ff00000) == 0x3ff00000) ||
                 (pAVar77[0x36] == 0x0)) ||
                (((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xbe8) & 0x700000) == 0 ||
@@ -2457,9 +2492,9 @@ LAB_0002f498:
                          ((UInt8)pAVar68[0x39] & 3) << 0x13 | pitchPixels & 0x3ffc | local_c4 & 0xffe0c003
               ;
               recordCursor[0xc3] = local_c4;
-              bVar1 = (M<UInt32>(pAVar68 + 0x3c) & 0xf00000) == 0;
-              in_cr0 = bVar1 << 1;
-              if (!bVar1) {
+              singleSample = (M<UInt32>(pAVar68 + 0x3c) & 0xf00000) == 0;
+              in_cr0 = singleSample << 1;
+              if (!singleSample) {
                 formatFieldE0 = (UInt32)M<UInt16>(pAVar68 + 0x14) /
                          (M<UInt32>(pAVar68 + 0x3c) >> 0x14 & 0xf);
               }
@@ -2488,21 +2523,21 @@ LAB_00030cec:
           }
         }
         else if (opcode == 0x35000000) {
-          iVar59 = M<SInt32>(self + kATIR500GLContext_textureSlots);
-          if ((iVar59 == 0) ||
-             ((M<char>(iVar59 + 0x20) != '\x06' && (M<SInt32>(iVar59 + 0x48) == 0))))
+          currentTexture = M<SInt32>(self + kATIR500GLContext_textureSlots);
+          if ((currentTexture == 0) ||
+             ((M<char>(currentTexture + 0x20) != '\x06' && (M<SInt32>(currentTexture + 0x48) == 0))))
           goto LAB_000300b8;
           opcode = recordCursor[2] >> 0xf & 0x1fffe;
-          iVar59 = opcode + M<SInt32>(iVar59 + 0x14);
-          uVar15 = (UInt16)(1 << (recordCursor[2] & 0x3f));
-          M<UInt16>(iVar59 + 0x28) = uVar15 | M<UInt16>(iVar59 + 0x28);
+          iVar59 = opcode + M<SInt32>(currentTexture + 0x14);
+          levelBit = (UInt16)(1 << (recordCursor[2] & 0x3f));
+          M<UInt16>(iVar59 + 0x28) = levelBit | M<UInt16>(iVar59 + 0x28);
           iVar59 = opcode + M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14);
-          M<UInt16>(iVar59 + 0x1c) = M<UInt16>(iVar59 + 0x1c) & ~uVar15;
+          M<UInt16>(iVar59 + 0x1c) = M<UInt16>(iVar59 + 0x1c) & ~levelBit;
           *recordCursor = 0xc0011000;
-          uVar55 = recordCursor[0x9d];
+          offsetWord = recordCursor[0x9d];
           recordCursor[0xe] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
           textureOffset = this->GetTextureOffset((VendorTextureBuffer *)(M<UInt8 *>(self + kATIR500GLContext_textureSlots)),true);
-          recordCursor[0x9d] = uVar55 + textureOffset;
+          recordCursor[0x9d] = offsetWord + textureOffset;
           recordCursor[0xa3] =
                M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4) + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) +
                ((SInt32)recordCursor - (M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20) & 0xfffffffcU) + 0x20 +
@@ -2561,9 +2596,9 @@ LAB_0002fe70:
               uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20)
                                   ,streamOffset + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) + 0x20,pendingWords);
               M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp) = uVar40;
-              iVar59 = pendingWords * 4;
+              pendingBytes = pendingWords * 4;
               pendingWords = 0;
-              streamOffset = iVar59 + streamOffset;
+              streamOffset = pendingBytes + streamOffset;
               reservedWords = 0;
             }
             *recordCursor = 0x80000000;
@@ -2573,37 +2608,37 @@ LAB_0002fe70:
               iVar33 = M<SInt32>(self + kIOATIR500GLContext_mipLevel);
               iVar59 = M<SInt32>(self + kIOATIR500GLContext_surfaceIndex);
               iVar48 = iVar33 + 1;
-              pAVar77 = *(UInt8 **)
+              surfaceBuffer = *(UInt8 **)
                          ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
             }
             else {
               iVar59 = 0;
               iVar33 = 0;
               iVar48 = 1;
-              pAVar77 = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
+              surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
             }
-            bVar1 = (M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0;
-            in_cr0 = bVar1 << 1;
+            singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
+            in_cr0 = singleSample << 1;
             opcode = 0;
-            if (!bVar1) {
-              opcode = (UInt32)M<UInt16>(pAVar77 + 0x14) / (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf)
+            if (!singleSample) {
+              opcode = (UInt32)M<UInt16>(surfaceBuffer + 0x14) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)
               ;
             }
-            pitchPixels = 0x20 / M<UInt16>(pAVar77 + 0x16);
+            pitchPixels = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
             if (pitchPixels <= opcode) {
               pitchPixels = opcode;
             }
             opcode = 0x80000000;
-            if ((UInt8)pAVar77[0x38] < 2) {
+            if ((UInt8)surfaceBuffer[0x38] < 2) {
               opcode = 0;
             }
-            *recordCursor = opcode | M<SInt32>(pAVar77 + iVar33 * 4 + 0x40) *
-                                (UInt32)M<UInt16>(pAVar77 + 0x20) +
-                                iVar59 * (M<SInt32>(pAVar77 + iVar48 * 4 + 0x40) -
-                                         M<SInt32>(pAVar77 + iVar33 * 4 + 0x40)) +
-                                M<SInt32>(pAVar77 + 8) >> 10 |
-                                pitchPixels * M<UInt16>(pAVar77 + 0x16) * 0x10000 & 0x3fc00000 |
-                                ((UInt8)pAVar77[0x38] & 1) << 0x1e;
+            *recordCursor = opcode | M<SInt32>(surfaceBuffer + iVar33 * 4 + 0x40) *
+                                (UInt32)M<UInt16>(surfaceBuffer + 0x20) +
+                                iVar59 * (M<SInt32>(surfaceBuffer + iVar48 * 4 + 0x40) -
+                                         M<SInt32>(surfaceBuffer + iVar33 * 4 + 0x40)) +
+                                M<SInt32>(surfaceBuffer + 8) >> 10 |
+                                pitchPixels * M<UInt16>(surfaceBuffer + 0x16) * 0x10000 & 0x3fc00000 |
+                                ((UInt8)surfaceBuffer[0x38] & 1) << 0x1e;
             opcode = recordCursor[1] >> 0x10;
             uVar73 = M<UInt32>(self + kATIR500GLContext_scissorY) >> 0x10;
             uVar53 = recordCursor[2] & 0xffff;
@@ -2630,43 +2665,43 @@ LAB_0002fe70:
         }
         else if (opcode == 0x2f000000) {
           *recordCursor = 0x80000000;
-          uVar55 = this->compute_sc_hyperz_en(recordCursor[2]);
-          recordCursor[2] = uVar55;
-          uVar55 = this->compute_zb_bw_cntl(recordCursor[4]);
-          recordCursor[4] = uVar55;
+          hyperzEnable = this->compute_sc_hyperz_en(recordCursor[2]);
+          recordCursor[2] = hyperzEnable;
+          zbBwCntl = this->compute_zb_bw_cntl(recordCursor[4]);
+          recordCursor[4] = zbBwCntl;
           VCALL(M<SInt32>(self), 0x5a4)(self);
         }
         else if (opcode == 0x30000000) {
-          uVar55 = recordCursor[1];
+          wordCount = recordCursor[1];
           switch(recordCursor[2]) {
           default:
-            uVar58 = 1;
+            attachmentId = 1;
             break;
           case 1:
-            uVar58 = 0;
+            attachmentId = 0;
             break;
           case 2:
-            uVar58 = 4;
+            attachmentId = 4;
             break;
           case 3:
-            uVar58 = 5;
+            attachmentId = 5;
             break;
           case 7:
-            uVar58 = 2;
+            attachmentId = 2;
             break;
           case 8:
-            uVar58 = 3;
+            attachmentId = 3;
           }
-          puVar42 = (UInt32 *)((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->resolve_fsaa_buffer((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex),uVar58,(UInt32 *)(recordCursor),
+          puVar42 = (UInt32 *)((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->resolve_fsaa_buffer((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex),attachmentId,(UInt32 *)(recordCursor),
                                        (bool)('\x01' - (recordCursor[3] == 0)),recordCursor[4],recordCursor[5],
                                        recordCursor[6],recordCursor[7]);
-          if (puVar42 < recordCursor + uVar55) {
-            iVar59 = (SInt32)(recordCursor + uVar55) - (SInt32)puVar42;
-            if (iVar59 - 4U < 4) {
+          if (puVar42 < recordCursor + wordCount) {
+            remainingBytes = (SInt32)(recordCursor + wordCount) - (SInt32)puVar42;
+            if (remainingBytes - 4U < 4) {
               *puVar42 = 0x80000000;
             }
             else {
-              *puVar42 = ((iVar59 >> 2) + -2) * 0x10000 | 0xc0001000;
+              *puVar42 = ((remainingBytes >> 2) + -2) * 0x10000 | 0xc0001000;
             }
           }
         }
@@ -2746,15 +2781,15 @@ LAB_0002fe70:
            FormatTableLookup_0x0004d2e0((UInt32)(UInt8)pAVar77[0x3a] * 0x1c) >> 1 & 0x1e00000;
       formatFieldE0 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 0x11 & 0x1f;
       recordCursor[0x8a] = formatFieldE0 | uVar34 & 0xffffffe0;
-      uVar53 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
-      recordCursor[0x8a] = uVar53 | formatFieldE0 | uVar34 & 0xfffffce0;
+      formatBits300 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 7 & 0x300;
+      recordCursor[0x8a] = formatBits300 | formatFieldE0 | uVar34 & 0xfffffce0;
       uVar35 = FormatTableLookup_0x0004d2e0(formatByteOffset) >> 3 & 0xc00;
-      recordCursor[0x8a] = uVar35 | uVar53 | formatFieldE0 | uVar34 & 0xfffff0e0;
+      recordCursor[0x8a] = uVar35 | formatBits300 | formatFieldE0 | uVar34 & 0xfffff0e0;
       uVar57 = (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x1800) << 1;
-      recordCursor[0x8a] = uVar57 | uVar35 | uVar53 | formatFieldE0 | uVar34 & 0xffffc0e0;
+      recordCursor[0x8a] = uVar57 | uVar35 | formatBits300 | formatFieldE0 | uVar34 & 0xffffc0e0;
       recordCursor[0x8a] =
            (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x600) << 5 |
-           uVar57 | uVar35 | uVar53 | formatFieldE0 | uVar34 & 0xffff00e0;
+           uVar57 | uVar35 | formatBits300 | formatFieldE0 | uVar34 & 0xffff00e0;
       if (((M<UInt32>(pAVar77 + 0x3c) & 0xf00000) == 0) ||
          (iVar59 = (SInt32)((UInt32)M<UInt16>(pAVar77 + 0x1c) /
                         (M<UInt32>(pAVar77 + 0x3c) >> 0x14 & 0xf)) >> (uVar75 & 0x3f), iVar59 == 0))
@@ -2796,8 +2831,8 @@ LAB_0002fe70:
            formatFieldE4 >> 0x13 & 0x1f | (formatFieldE4 & 0x40) << 0x10 | formatFieldE4 >> 7 & 0xe00 |
            formatFieldE4 >> 1 & 0x7000 | (formatFieldE4 & 0x1c00) << 5 | (formatFieldE4 & 0x380) << 0xb;
       uVar37 = M<UInt32>(pAVar72 + 0x3c);
-      bVar1 = (uVar37 & 0xf00000) == 0;
-      if (bVar1) {
+      singleSample = (uVar37 & 0xf00000) == 0;
+      if (singleSample) {
         uVar53 = 0;
       }
       else {
@@ -2808,7 +2843,7 @@ LAB_0002fe70:
       if (0x20 / M<UInt16>(pAVar72 + 0x16) <= uVar53) {
         pitchPixels = uVar53;
       }
-      if ((bVar1) ||
+      if ((singleSample) ||
          (iVar59 = (SInt32)((UInt32)M<UInt16>(pAVar72 + 0x1c) / (uVar37 >> 0x14 & 0xf)) >>
                    (uVar75 & 0x3f), iVar59 == 0)) {
         uVar37 = 0;
@@ -2823,7 +2858,7 @@ LAB_0002fe70:
       }
       uStack_17c = uVar55 - opcode ^ 0x80000000;
       recordCursor[0xaa] = pitchPixels - 1 & 0x3fff | (uVar37 & 0x800) << 4 | (uVar53 & 0x800) << 5;
-      uVar55 = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
+      accelFlags = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
       recordCursor[0xaf] = 0xc0001000;
       recordCursor[0x11] = 0xc0001000;
       recordCursor[0x13] = 0xc0001000;
@@ -2831,7 +2866,7 @@ LAB_0002fe70:
       recordCursor[0x1d] = 0xc0001000;
       recordCursor[0x2d] = 0xc0001000;
       recordCursor[0x2f] = 0xc0001000;
-      recordCursor[0xb] = uVar55;
+      recordCursor[0xb] = accelFlags;
       recordCursor[0x31] = 0xc0001000;
       recordCursor[0x33] = 0xc0001000;
       recordCursor[0x35] = 0xc0001000;
@@ -2853,7 +2888,7 @@ LAB_0002fe70:
       local_188 = 0x43300000;
       local_178 = 0x43300000;
       uStack_174 = uVar58 - uVar73 ^ 0x80000000;
-      uVar53 = (UInt32)M<UInt16>(pAVar72 + 0x1c);
+      bufferWidth = (UInt32)M<UInt16>(pAVar72 + 0x1c);
       uVar37 = (UInt32)M<UInt16>(pAVar72 + 0x1e);
       fVar4 = (float)((double)CONCAT44d(0x43300000,uVar73 ^ 0x80000000) - DOUBLE_0004c3a8);
       fVar5 = (float)((double)CONCAT44d(0x43300000,uStack_17c) - DOUBLE_0004c3a8);
@@ -2861,14 +2896,14 @@ LAB_0002fe70:
       fVar7 = (float)((double)CONCAT44d(0x43300000,uVar61 + opcode) - DOUBLE_0004c3b0);
       fVar8 = (float)((double)CONCAT44d(0x43300000,uVar62 + uVar73) - DOUBLE_0004c3b0);
       fVar9 = (float)((double)CONCAT44d(0x43300000,uStack_174) - DOUBLE_0004c3a8);
-      if ((uVar53 < 0x1001) && (uVar37 < 0x1001)) {
+      if ((bufferWidth < 0x1001) && (uVar37 < 0x1001)) {
 LAB_0002d820:
         fVar28 = FLOAT_0004c370;
-        if (uVar53 != 0) {
+        if (bufferWidth != 0) {
           local_140 = 0x43300000;
-          uStack_13c = uVar53 ^ 0x80000000;
+          uStack_13c = bufferWidth ^ 0x80000000;
           fVar28 = FLOAT_0004c374 /
-                   (float)((double)CONCAT44d(0x43300000,uVar53 ^ 0x80000000) - DOUBLE_0004c3a8);
+                   (float)((double)CONCAT44d(0x43300000,bufferWidth ^ 0x80000000) - DOUBLE_0004c3a8);
         }
         fVar23 = FLOAT_0004c370;
         if (uVar37 != 0) {
@@ -3142,7 +3177,7 @@ LAB_0002d820:
       if (0x20 / M<UInt16>(pAVar72 + 0x16) <= uVar73) {
         pitchPixels = uVar73;
       }
-      uVar15 = M<UInt16>(pAVar72 + 0x20);
+      bufferPitch = M<UInt16>(pAVar72 + 0x20);
       AVar11 = pAVar72[0x38];
       iVar33 = M<SInt32>(pAVar72 + 8);
       iVar59 = M<SInt32>(pAVar72 + uVar75 * 4 + 0x40);
@@ -3174,7 +3209,7 @@ LAB_0002d820:
             }
             iVar49 = iVar49 + 1;
             *puVar54 = 0x1150;
-            puVar54[1] = iVar59 * (UInt32)uVar15 + iVar48 * (iVar74 - iVar59) + iVar33 +
+            puVar54[1] = iVar59 * (UInt32)bufferPitch + iVar48 * (iVar74 - iVar59) + iVar33 +
                          iVar39 + (pitchPixels * puVar54[1] << uVar73) & 0xffffffe0 |
                          ((UInt8)AVar11 & 1) << 2 | ((UInt8)AVar11 >> 1 & 3) << 3;
             uVar75 = puVar54[2];
