@@ -1,15 +1,13 @@
-diff --git a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp
-index 1831b17..13a302d 100644
---- a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp
-+++ b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp
-@@ -67,29 +67,24 @@ void ATIRadeonX1000::DumpASICHangState() {
+--- a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-17 20:03:09.509201546 -0700
++++ b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-17 20:03:09.509288422 -0700
+@@ -67,29 +67,24 @@
    UInt32 uVar30;
    UInt32 uVar31;
    UInt32 uVar32;
 +  UInt32 uVar33;
    
    this->disable_GPUSensor();
-   iVar24 = M<SInt32>(self + 0x860);
+   iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
 -  bVar4 = M<UInt8>(iVar24 + 0x7fb);
 -  bVar5 = M<UInt8>(iVar24 + 0x7fa);
 -  bVar6 = M<UInt8>(iVar24 + 0x7f9);
@@ -19,7 +17,7 @@ index 1831b17..13a302d 100644
    do {
      GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
      GH_thread_block(0);
-     iVar25 = M<SInt32>(self + 0x860);
+     iVar25 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
 -    if (((UInt32)bVar4 << 0x18 | (UInt32)bVar5 << 0x10 | (UInt32)bVar6 << 8 | (UInt32)bVar7) !=
 -        (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
 +    if (uVar33 != (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
@@ -35,4 +33,4 @@ index 1831b17..13a302d 100644
 -  uVar32 = CONCAT11(uVar2,uVar3) | 0x1000000;
    GH_IOLog("** ASIC Hang Log Start **\n");
    GH_IOSleep(10);
-   iVar24 = M<SInt32>(self + 0x860);
+   iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);

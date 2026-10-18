@@ -44,7 +44,7 @@ IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
   if ((type == 0x3) || (type == 0x7)) {
     size = M<UInt32>(textureBytes + 0x50);
 LAB_0001a84c:
-    cpuVisibleSize = M<UInt32>(self + 0x84c);
+    cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
     if (cpuVisibleSize == M<UInt32>(self + kIOATIR500Accelerator_vramSize)) {
 LAB_0001a8f0:
       if (M<int>(self + kIOATIR500Accelerator_activePanelMask) == 0) {
@@ -62,18 +62,18 @@ LAB_0001a980:
       mapping = (int *)VCALL(*M<int *>(textureBytes + 8), 0x14c)
                                 (M<int *>(textureBytes + 8),GH_kernel_task,0,1,0,0);
       if (mapping == (int *)0x0) {
-        cpuVisibleSize = M<UInt32>(self + 0x84c);
+        cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
         goto LAB_0001a8f0;
       }
       iVar3 = VCALL(*mapping, 0xd0)(mapping);
       flags = M<unsigned int>(iVar3 + 0x20);
       VCALL(*mapping, 0x18)(mapping);
-      cpuVisibleSize = M<UInt32>(self + 0x84c);
+      cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
       if (((flags ^ 0x40000000) >> 0x1e & 1) != 0) goto LAB_0001a8f0;
       iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
                          ,0x1000,cpuVisibleSize,M<int>(self + kIOATIR500Accelerator_vramSize) - cpuVisibleSize);
       if (iVar3 == 0) {
-        cpuVisibleSize = M<UInt32>(self + 0x84c);
+        cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
         memory = M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool);
         goto LAB_0001a980;
       }

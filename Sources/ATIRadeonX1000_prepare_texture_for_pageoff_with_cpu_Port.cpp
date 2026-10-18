@@ -59,7 +59,7 @@ UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer 
   UInt8 oldElement[28];
   
   oldVramOffset = M<UInt32>(textureBytes + 0x48);
-  if (oldVramOffset < M<UInt32>(self + 0x84c)) {
+  if (oldVramOffset < M<UInt32>(self + kIOATIR500Accelerator_usableVramSize)) {
     return 1;
   }
   if ((textureBytes[0x20] != 0x3) && (textureBytes[0x20] != 0x7)) {
@@ -68,13 +68,13 @@ UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer 
   uVar22 = M<UInt32>(textureBytes + 0x50);
   GH_memcpy(oldElement,(UInt8 *)(textureBytes + 0x40),0x10);
   iVar6 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),uVar22,
-                     0x1000,0,M<UInt32>(self + 0x84c));
+                     0x1000,0,M<UInt32>(self + kIOATIR500Accelerator_usableVramSize));
   if ((iVar6 == 0) && (iVar6 = this->freeToAllocTextureCPUVisibleVRAM((VendorTextureBuffer *)(textureBytes),uVar22), iVar6 == 0)) {
     return 0;
   }
   newVramOffset = M<SInt32>(textureBytes + 0x48);
   record = hwInfoBytes + M<SInt32>(hwInfoBytes + 4) * 4 + 0xa00;
-  M<UInt32>(record + 0x2c) = M<UInt32>(self + 0xb74);
+  M<UInt32>(record + 0x2c) = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
   iVar6 = M<SInt32>(textureBytes + 0x14);
   mipFlags = (UInt32)M<UInt8>(iVar6 + 0x15);
   baseLevel = (UInt32)M<UInt8>(iVar6 + 0x17);
@@ -169,7 +169,7 @@ LAB_00020e80:
     }
   }
   uVar22 = M<UInt32>(hwInfoBytes + 8);
-  M<UInt32>(self + 0xb90) = 1;
+  M<UInt32>(self + kIOATIR500Accelerator_stateDestroyedByPageoff) = 1;
   if ((uVar22 & 1) != 0) {
     iVar6 = uVar22 * 4;
     uVar22 = uVar22 + 1;

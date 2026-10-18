@@ -134,7 +134,7 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
   }
   iVar14 = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
   iVar5 = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(M<int>(textureBytes + 0x14) + 0xc));
-  iVar1 = M<int>(self + 0x8a4);
+  iVar1 = M<int>(self + kIOATIR500Accelerator_vramSizeProgrammed);
   record = hwInfoBytes + 0xa00;
   M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = iVar14 + iVar5;
   burstIndex = (unsigned int)M<UInt16>(hwInfoBytes + 0x40);

@@ -30,5 +30,5 @@
 UInt32 ATIRadeonX1000::getChipRev() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  return *(UInt32 *)(self + 0xc54);
+  return *(UInt32 *)(self + kIOATIR500Accelerator_chipRev);
 }

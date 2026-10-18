@@ -137,7 +137,7 @@ IOReturn ATIRadeonX1000::addTransferToGART(VendorTransferBuffer *buffer) {
      * addToMinMaxGART (slot +0x590, returns 1 on success / 0 on failure) passes r3 straight through, and the flag is only set
      * when the mapping succeeded. The result is returned unchanged (r3 is untouched after the compare). */
     if (mapped != 0 && self[0x85] != 0) {
-        *reinterpret_cast<UInt32 *>(self + 0x8a0) = 1;
+        *reinterpret_cast<UInt32 *>(self + kIOATIR500Accelerator_transferMappedFlag) = 1;
     }
     return mapped;
 }

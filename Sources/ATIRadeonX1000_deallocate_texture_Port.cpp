@@ -81,11 +81,11 @@ LAB_0001a700:
   hzHandle = M<UInt32>(textureBytes + 0x6c);
   if (hzHandle != 0xffffffff) {
     if ((hzHandle & 0x3ff) != 0x3ff) {
-      HZMEM_Free((_HZDATA *)((UInt8 *)(self + 0x870)),hzHandle,0);
+      HZMEM_Free((_HZDATA *)((UInt8 *)(self + kIOATIR500Accelerator_hzmem)),hzHandle,0);
       hzHandle = M<UInt32>(textureBytes + 0x6c);
     }
     if ((hzHandle & 0xffc00) != 0xffc00) {
-      HZMEM_Free((_HZDATA *)((UInt8 *)(self + 0x870)),hzHandle,1);
+      HZMEM_Free((_HZDATA *)((UInt8 *)(self + kIOATIR500Accelerator_hzmem)),hzHandle,1);
     }
     M<UInt16>(textureBytes + 0x72) = 0;
     M<UInt16>(textureBytes + 0x7a) = 0;

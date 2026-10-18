@@ -47,7 +47,7 @@ UInt32 ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM(VendorTextureBuffer *tex
       if (self + kIOATIR500Accelerator_vramBufferList == candidate) {
         return 0;
       }
-      if (M<UInt32>(candidate + 0x48) < M<UInt32>(self + 0x84c)) break;
+      if (M<UInt32>(candidate + 0x48) < M<UInt32>(self + kIOATIR500Accelerator_usableVramSize)) break;
 LAB_0001e480:
       candidate = M<UInt8 *>(candidate + 0x28);
     }
@@ -70,7 +70,7 @@ LAB_0001e3c8:
       M<UInt8 *>(candidate + 0x24) = candidate;
       M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) + 1;
       iVar4 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),
-                         size,0x1000,0,M<UInt32>(self + 0x84c));
+                         size,0x1000,0,M<UInt32>(self + kIOATIR500Accelerator_usableVramSize));
       if (iVar4 != 0) {
         return 1;
       }

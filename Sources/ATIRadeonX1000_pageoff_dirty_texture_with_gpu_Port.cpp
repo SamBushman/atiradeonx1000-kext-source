@@ -156,10 +156,10 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *textu
   }
   iVar28 = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
   iVar15 = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(iVar15 + 0xc));
-  iVar8 = M<int>(self + 0x8a4);
+  iVar8 = M<int>(self + kIOATIR500Accelerator_vramSizeProgrammed);
   M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = iVar28 + iVar15;
   record = hwInfoBytes + M<int>(hwInfoBytes + 4) * 4 + 0xa00;
-  M<UInt32>(record + 0x2c) = M<UInt32>(self + 0xb74);
+  M<UInt32>(record + 0x2c) = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
   iVar28 = M<int>(textureBytes + 0x14);
   bVar4 = M<UInt8>(iVar28 + 0x15) >> 3;
   iVar15 = -(bVar4 & 3);
@@ -262,7 +262,7 @@ LAB_000214e0:
     }
   }
   wordCount = M<UInt32>(hwInfoBytes + 8);
-  M<UInt32>(self + 0xb90) = 1;
+  M<UInt32>(self + kIOATIR500Accelerator_stateDestroyedByPageoff) = 1;
   M<UInt32>(self + kIOATIR500Accelerator_currentContext) = 0;
   if ((wordCount & 1) != 0) {
     iVar15 = wordCount * 4;

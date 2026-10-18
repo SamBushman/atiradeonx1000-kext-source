@@ -38,23 +38,23 @@ IOReturn ATIRadeonX1000::waitForRetiredTimeStamp(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x858)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastRetiredStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
+    stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_retiredStampOffset));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
-    M<UInt32>(self + 0x858) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastRetiredStamp) = currentStamp;
     if (0 < (SInt32)(tag - currentStamp)) {
       pollCount = 1;
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
+        stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_retiredStampOffset));
         currentStamp = loadWordByteReversed(stampAddress);
-        M<UInt32>(self + 0x858) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastRetiredStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         pollCount = pollCount + 1;
       } while (pollCount != 0xc351);
@@ -86,7 +86,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+    stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
     M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
@@ -96,7 +96,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+        stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
         currentStamp = loadWordByteReversed(stampAddress);
         M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
@@ -128,23 +128,23 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x85c)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    iVar1 = M<SInt32>(self + 0x860);
+    iVar1 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
     currentStamp = loadWordByteReversed(&M<UInt8>(iVar1 + 0x1fa8));
-    M<UInt32>(self + 0x85c) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
     iVar1 = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       iVar1 = 1;
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        mmioBase = M<SInt32>(self + 0x860);
+        mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
         currentStamp = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa8));
-        M<UInt32>(self + 0x85c) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         iVar1 = iVar1 + 1;
       } while (iVar1 != 0xc351);
@@ -174,24 +174,24 @@ UInt32 ATIRadeonX1000::sleepForRetiredTimeStamp(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x858)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastRetiredStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
+    stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_retiredStampOffset));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
-    M<UInt32>(self + 0x858) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastRetiredStamp) = currentStamp;
     pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       pollCount = 1;
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
+        stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_retiredStampOffset));
         currentStamp = loadWordByteReversed(stampAddress);
-        M<UInt32>(self + 0x858) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastRetiredStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         pollCount = pollCount + 1;
       } while (pollCount != 0xc351);
@@ -226,7 +226,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 tag) {
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+    stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
     M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
@@ -236,7 +236,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 tag) {
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+        stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
         currentStamp = loadWordByteReversed(stampAddress);
         M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
@@ -273,7 +273,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+    stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
     M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
@@ -283,7 +283,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+        stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
         currentStamp = loadWordByteReversed(stampAddress);
         M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
@@ -315,23 +315,23 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x85c)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    iVar1 = M<SInt32>(self + 0x860);
+    iVar1 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
     currentStamp = loadWordByteReversed(&M<UInt8>(iVar1 + 0x1fa8));
-    M<UInt32>(self + 0x85c) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
     iVar1 = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       iVar1 = 1;
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        mmioBase = M<SInt32>(self + 0x860);
+        mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
         currentStamp = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa8));
-        M<UInt32>(self + 0x85c) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         iVar1 = iVar1 + 1;
       } while (iVar1 != 0xc351);
@@ -366,7 +366,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 tag) {
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+    stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
     M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
@@ -376,7 +376,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 tag) {
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
-        stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
+        stampAddress = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_stampPageBase) + M<SInt32>(self + kIOATIR500Accelerator_checkedStampOffset));
         currentStamp = loadWordByteReversed(stampAddress);
         M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;

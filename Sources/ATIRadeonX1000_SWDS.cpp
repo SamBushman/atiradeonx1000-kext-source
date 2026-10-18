@@ -41,13 +41,13 @@ bool ATIRadeonX1000::SWDSShutdown() {
   UInt8 *pAVar9;
   UInt8 *pAVar10;
   
-  if (M<SInt32 *>(self + 0x9b8) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(self + 0x9b8), 0xf0)(M<SInt32 *>(self + 0x9b8));
+  if (M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer), 0xf0)(M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer));
   }
   if (self[0x9b0] != 0x0) {
     panel = 0;
     self[0x9b0] = 0x0;
-    pGVar8 = (self + 0x9bc);
+    pGVar8 = (self + kIOATIR500Accelerator_swdsBuffer0);
     pAVar9 = self;
     pAVar10 = self;
     do {
@@ -63,7 +63,7 @@ bool ATIRadeonX1000::SWDSShutdown() {
           iVar5 = 0xb78;
           iVar3 = 0xb7c;
         }
-        registers = M<SInt32>(self + 0x860);
+        registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
         savedValue = M<UInt32>(pAVar10 + 0xafc);
         M<UInt32>(registers + iVar6) =
              savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
@@ -242,13 +242,13 @@ bool ATIRadeonX1000::SWDSInit() {
   UInt8 *pAVar28;
   
   if (self[0x80] != 0x0) {
-    uVar7 = M<UInt32>(self + 0x84c);
+    uVar7 = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
     bVar6 = false;
     bVar5 = false;
     uVar18 = 0;
     panel = 1;
-    pGVar20 = (self + 0xabc);
-    pGVar23 = (self + 0xa34);
+    pGVar20 = (self + kIOATIR500Accelerator_swdsScratchElement);
+    pGVar23 = (self + kIOATIR500Accelerator_swdsBuffer1);
     recordOffset = 0x78;
     pAVar21 = self;
     pAVar24 = self;
@@ -269,21 +269,21 @@ bool ATIRadeonX1000::SWDSInit() {
           if ((uVar14 & 0xf) != 0) {
             uVar16 = (uVar14 & 0xfffffff0) + 0x10;
           }
-          uVar17 = M<UInt32>(self + 0x84c);
+          uVar17 = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
           uVar15 = M<UInt32>(self + kIOATIR500Accelerator_vramSize);
           uVar25 = uVar16 * uVar11;
           if (uVar17 < uVar15) {
             if ((panel == 1) ||
-               ((((M<SInt32>(self + 0x894) == 1 && (M<SInt32>(self + 0xb2c) != 0)) &&
-                 (M<SInt32>(self + 0xb30) != 0)) &&
-                ((M<SInt32>(self + 0xb34) == M<SInt32>(self + 0xb38) ||
-                 (M<SInt32>(self + 0xb3c) == M<SInt32>(self + 0xb40))))))) {
+               ((((M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) == 1 && (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb2c) != 0)) &&
+                 (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb30) != 0)) &&
+                ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb34) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb38) ||
+                 (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
               iVar8 = uVar15 - uVar25;
               bVar6 = panel == 1;
             }
             else {
               if (bVar6) {
-                uVar15 = M<UInt32>(self + 0xa3c);
+                uVar15 = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress);
               }
               iVar8 = uVar15 - uVar25;
             }
@@ -337,12 +337,12 @@ LAB_00024750:
               iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)pGVar23, uVar16, uVar25)
               ;
               if (iVar8 != 0) {
-                iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->reserve((GLKMemoryElement *)pGVar20,uVar16,uVar25);
+                iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPoolB)))->reserve((GLKMemoryElement *)pGVar20,uVar16,uVar25);
                 if (iVar8 == 0) {
                   ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)pGVar23);
                 }
                 else {
-                  iVar8 = M<SInt32>(self + 0xadc) * 0x1c;
+                  iVar8 = M<SInt32>(self + kIOATIR500Accelerator_swdsEntryIndex) * 0x1c;
                   iVar9 = VCALL(M<SInt32>(self), 0x554)
                                     (self,M<UInt32>(self + iVar8 + 0xaf0));
                   if (iVar9 != 0) {
@@ -365,11 +365,11 @@ LAB_00024750:
                     M<UInt32>(pAVar24 + 0xad8) = uVar10;
                     VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + iVar8 + 0xaf0));
                   }
-                  if (((M<SInt32>(self + 0x894) == 1) && (M<SInt32>(self + 0xb2c) != 0)) &&
-                     ((M<SInt32>(self + 0xb30) != 0 &&
-                      ((M<SInt32>(self + 0xb34) == M<SInt32>(self + 0xb38) &&
-                       (M<SInt32>(self + 0xb3c) == M<SInt32>(self + 0xb40))))))) {
-                    iVar8 = M<SInt32>(self + 0x860);
+                  if (((M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) == 1) && (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb2c) != 0)) &&
+                     ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb30) != 0 &&
+                      ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb34) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb38) &&
+                       (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
+                    iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
                     uVar14 = M<UInt32>(pAVar28 + 0xa3c);
                     M<UInt32>(iVar8 + 0x6110) =
                          uVar14 << 0x18 | (uVar14 & 0xff00) << 8 | uVar14 >> 8 & 0xff00 |
@@ -384,26 +384,26 @@ LAB_00024750:
                     enforceInOrderExecutionIO();
                     M<UInt32>(iVar8 + 0x6920) = uVar12 << 0x18 | (uVar12 & 0xff00) << 8;
                     enforceInOrderExecutionIO();
-                    M<UInt32>(self + 0xb6c) = uVar14;
-                    M<UInt32>(self + 0xb70) = M<UInt32>(pAVar28 + 0xa3c);
+                    M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressSeen) = uVar14;
+                    M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressSeen) = M<UInt32>(pAVar28 + 0xa3c);
                   }
                   else {
                     if (panel == 0) {
-                      iVar8 = M<SInt32>(self + 0x860);
-                      uVar12 = M<UInt32>(self + 0x9c4);
+                      iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+                      uVar12 = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer0GpuBaseAddress);
                       M<UInt32>(iVar8 + 0x6110) =
                            uVar12 << 0x18 | (uVar12 & 0xff00) << 8 | uVar12 >> 8 & 0xff00 |
                            uVar12 >> 0x18;
                       enforceInOrderExecutionIO();
                       M<UInt32>(iVar8 + 0x6120) =
-                           (UInt32)M<UInt16>(self + 0x9d0) << 0x18 |
-                           (M<UInt16>(self + 0x9d0) & 0xff00) << 8;
+                           (UInt32)M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width) << 0x18 |
+                           (M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width) & 0xff00) << 8;
                       enforceInOrderExecutionIO();
                       uVar12 = M<UInt32>(pAVar28 + 0xa3c);
                     }
                     else {
                       uVar12 = M<UInt32>(pAVar28 + 0xa3c);
-                      iVar8 = M<SInt32>(self + 0x860);
+                      iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
                       M<UInt32>(iVar8 + 0x6910) =
                            uVar12 << 0x18 | (uVar12 & 0xff00) << 8 | uVar12 >> 8 & 0xff00 |
                            uVar12 >> 0x18;
@@ -451,13 +451,13 @@ LAB_00024750:
                   pbVar4 = (UInt8 *)(iVar8 + iVar26);
                   M<UInt32>(pAVar21 + 0xb14) =
                        loadWordByteReversed(pbVar4);
-                  pbVar4 = (UInt8 *)(M<SInt32>(self + 0x860) + iVar9);
+                  pbVar4 = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + iVar9);
                   M<UInt32>(pAVar21 + 0xb18) =
                        loadWordByteReversed(pbVar4);
-                  pbVar4 = (UInt8 *)(M<SInt32>(self + 0x860) + iVar13);
+                  pbVar4 = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + iVar13);
                   M<UInt32>(pAVar21 + 0xb1c) =
                        loadWordByteReversed(pbVar4);
-                  iVar8 = M<SInt32>(self + 0x860);
+                  iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
                   M<UInt32>(iVar8 + iVar26) =
                        uVar11 << 0x18 | (uVar11 & 0xff00) << 8 | uVar11 >> 8 & 0xff00 |
                        uVar11 >> 0x18;
@@ -476,33 +476,33 @@ LAB_00024750:
               }
             }
           }
-          else if (((M<SInt32>(self + 0x894) == 1) && (M<SInt32>(self + 0xb2c) != 0)) &&
-                  ((M<SInt32>(self + 0xb30) != 0 &&
-                   ((M<SInt32>(self + 0xb34) != M<SInt32>(self + 0xb38) ||
-                    (M<SInt32>(self + 0xb3c) != M<SInt32>(self + 0xb40))))))) {
+          else if (((M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) == 1) && (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb2c) != 0)) &&
+                  ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb30) != 0 &&
+                   ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb34) != M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb38) ||
+                    (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) != M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
             if (panel == 1) {
-              iVar9 = M<SInt32>(self + 0xbac);
-              iVar8 = M<SInt32>(self + 0x1ac);
-              iVar26 = M<SInt32>(self + 0x1b4);
+              iVar9 = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
+              iVar8 = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress);
+              iVar26 = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferSize);
 LAB_00024a0c:
               uVar16 = ((uVar17 - iVar9) - uVar25) - 0x8000 & 0xffff8000;
               if ((UInt32)(iVar8 + iVar26) < uVar16) goto LAB_00024750;
             }
             else {
-              uVar16 = (M<SInt32>(self + 0xa3c) - uVar25) - 0x8000 & 0xffff8000;
+              uVar16 = (M<SInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress) - uVar25) - 0x8000 & 0xffff8000;
               if ((UInt32)(M<SInt32>(pAVar28 + 0x1ac) + M<SInt32>(pAVar28 + 0x1b4)) < uVar16)
               goto LAB_00024750;
             }
           }
           else {
-            if ((panel != 0) || ((M<SInt32>(self + 0x1b4) == 0 || (M<SInt32>(self + 0x894) != 0)))) {
-              iVar9 = M<SInt32>(self + 0xbac);
+            if ((panel != 0) || ((M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferSize) == 0 || (M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) != 0)))) {
+              iVar9 = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
               iVar8 = M<SInt32>(pAVar28 + 0x1ac);
               iVar26 = M<SInt32>(pAVar28 + 0x1b4);
               goto LAB_00024a0c;
             }
-            uVar16 = M<SInt32>(self + 0x134) + M<SInt32>(self + 0x13c) + 0x8000U & 0xffff8000;
-            if (uVar25 + uVar16 < (M<UInt32>(self + 0x1ac) & ~((uVar7 >> 1) - 1)))
+            uVar16 = M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferGpuBaseAddress) + M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferSize) + 0x8000U & 0xffff8000;
+            if (uVar25 + uVar16 < (M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress) & ~((uVar7 >> 1) - 1)))
             goto LAB_00024750;
           }
         }
@@ -517,9 +517,9 @@ LAB_00024a0c:
       panel = panel - 1;
     } while (bVar1);
     if (bVar5) {
-      VCALL(*M<SInt32 *>(self + 0x9b8), 300)
-                (M<SInt32 *>(self + 0x9b8),M<UInt32>(self + 0x9b4));
-      VCALL(*M<SInt32 *>(self + 0x9b8), 0xec)(M<SInt32 *>(self + 0x9b8));
+      VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer), 300)
+                (M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer),M<UInt32>(self + kIOATIR500Accelerator_swdsPeriodMs));
+      VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer), 0xec)(M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer));
       self[0x9b0] = 0x1;
       return 1;
     }

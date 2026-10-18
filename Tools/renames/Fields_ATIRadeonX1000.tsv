@@ -1,0 +1,203 @@
+# Fields_ATIRadeonX1000.tsv - names of the accelerator object's fields (ATIRadeonX1000 and its base IOATIR500Accelerator are ONE object, so one constant serves both).
+# row: field  CLASSES  OFFSET  name  tier  evidence      (constants land in the generated Headers/FieldOffsets.h as kIOATIR500Accelerator_<name>)
+# Direct `self + 0xOFF` accesses only; other objects' fields reached through pointers (M<int>(self + 0xd4) + 0x5f0 ...) are not renamed here.
+# Offsets already named in Fields_IOATIR500Accelerator.tsv (the base-class table owns the constant) are not repeated here.
+field	IOATIR500Accelerator,ATIRadeonX1000	0xf4	framebuffer2	CONFIRMED	set_display_mode_and_vram: second framebuffer, same two vtable calls
+field	IOATIR500Accelerator,ATIRadeonX1000	0x12c	scanout1Buffer	CONFIRMED	embedded scanout record 1 (address passed to ATIR500Memory::reserve)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x130	scanout1BufferElementPrev	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x134	scanout1BufferGpuBaseAddress	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x138	scanout1BufferAlignMask	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x13c	scanout1BufferSize	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x140	scanout1BufferWidth	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x142	scanout1BufferBytesPerPixel	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x144	scanout1BufferPitch	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x148	scanout1BufferActiveWidth	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x14a	scanout1BufferActiveHeight	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x14c	scanout1BufferField20	UNKNOWN	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x14e	scanout1BufferField22	UNKNOWN	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x154	scanout1BufferHzBlockField	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x158	scanout1BufferHzBlockExtra	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x15c	scanout1BufferHzBlockCountField	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x168	scanout1BufferTilingDegreeBits	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x16c	scanout1BufferMipOffset0	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x170	scanout1BufferMipOffset1	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1a4	scanout2Buffer	CONFIRMED	embedded scanout record 2 (address passed to ATIR500Memory::reserve)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1ac	scanout2BufferGpuBaseAddress	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1b4	scanout2BufferSize	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1b8	scanout2BufferWidth	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1ba	scanout2BufferBytesPerPixel	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1bc	scanout2BufferPitch	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1c0	scanout2BufferActiveWidth	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x1c2	scanout2BufferActiveHeight	CONFIRMED	second embedded scanout record (display 2, D2 registers), same layout
+field	IOATIR500Accelerator,ATIRadeonX1000	0x84c	usableVramSize	CONFIRMED	set_display_mode_and_vram: = vramSize clamped to 0x8000000; the init_pool size
+field	IOATIR500Accelerator,ATIRadeonX1000	0x850	retiredStampCounter	INFERRED	submit_buffer_retired: stamp = this - 1; start() initialises it to 1 (the retired-buffer stamp issued next)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x854	idctSubmitBaseCounter	CONFIRMED	Headers/ATIRadeonX1000.h member idctSubmitBaseCounter
+field	IOATIR500Accelerator,ATIRadeonX1000	0x858	lastRetiredStamp	CONFIRMED	ATIRadeonX1000_SmallMethods.cpp: +0x858 cached retired stamp; waitForRetiredTimeStamp updates it from the stamp page
+field	IOATIR500Accelerator,ATIRadeonX1000	0x85c	lastConsumedIDCTStamp	CONFIRMED	SmallMethods comment: +0x85c cached consumed-IDCT stamp (sleepForConsumedIDCTTimeStamp)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x860	mmioBase	CONFIRMED	Headers/ATIRadeonX1000.h member mmioBase (register aperture)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x864	stampPageBase	CONFIRMED	SmallMethods comment: +0x864 stamp page base; waitFor*TimeStamp read (this + 0x864 + stamp offset)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x868	retiredStampOffset	CONFIRMED	SmallMethods comment: retired stamp offset; start() stores 0x15e4 (register) or 4 (stamp page)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x86c	checkedStampOffset	CONFIRMED	SmallMethods comment: checked stamp offset; start() stores 0x15e0 (register) or 0 (stamp page)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x870	hzmem	CONFIRMED	start(): HZMEM_Init((_HZDATA *)(self + 0x870), ...); deallocate_texture HZMEM_Free((_HZDATA *)(self + 0x870), handle, ...)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x88c	unknown_0x88c	UNKNOWN	start() zeroes it; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0x890	vramPreparedMask	INFERRED	ATIR500Surface::prepare_vram sets bit (1 << index), complete_vram clears it; pageoff_dirty_texture_with_cpu tests bits
+field	IOATIR500Accelerator,ATIRadeonX1000	0x894	scanoutOverlapsVram	INFERRED	set_display_mode_and_vram sets 1 when a scanout buffer lies inside the reserved region; SWDSInit tests == 1
+field	IOATIR500Accelerator,ATIRadeonX1000	0x898	display1Enabled	INFERRED	set_display_mode_and_vram: = D1 register 0x6088 & 1; SWDSWriteBlitToCmdBuf masks the packet with ~this
+field	IOATIR500Accelerator,ATIRadeonX1000	0x89c	display2Enabled	INFERRED	set_display_mode_and_vram: = D2 register 0x6888 & 1; SWDSWriteBlitToCmdBuf masks the packet with ~this
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8a0	transferMappedFlag	INFERRED	addTransferToGART sets 1; start() zeroes it; submit_buffer tests != 0
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8a4	vramSizeProgrammed	INFERRED	setup_R500_internal_space: CONFIG_MEMSIZE (0xf8) read back after being reprogrammed; start_promo4_engine/start_xdct_engine/submit_buffer_retired add it to ring addresses
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8a8	scratchTransfer	INFERRED	stop(): removeTransferFromGART(self+0x8a8) - an embedded VendorTransferBuffer-shaped record whose +8 (0x8b0) is its descriptor
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8b0	scratchTransferDescriptor	INFERRED	VendorTransferBuffer +8 of scratchTransfer; stop() zeroes it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8b8	scratchTransferMemory	INFERRED	stop(): IOFreeAligned(this, 0x2000) after removing scratchTransfer
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8bc	xdctEngineRunning	INFERRED	start_xdct_engine sets 1; stop_xdct_engine/display_mode_will_change test it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8c0	wideBlitSupport	CONFIRMED	start(): the "ATIEnableWideBlitSupport" boolean property
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8c4	tearingWideBlit	CONFIRMED	start(): the "ATIUseTearingWideBlit" boolean property; SWDSWriteBlitToCmdBuf puts it in the blit packet
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8c8	unknown_0x8c8	UNKNOWN	start() zeroes it and tests == 0; stop() tests == 0 before the SWDS shutdown path
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8d0	stampPageMemory	INFERRED	start(): IOMallocAligned(page) buffer; +0x864 stampPageBase = it; its descriptor is +0x8d8, GART offset +0x8d4
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8d4	stampPageGartOffset	INFERRED	start(): out-parameter of the +0x5a0 map call for the stamp page descriptor; added to the register base in setup_R500_internal_space
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8d8	clientMemoryDescriptorType0	CONFIRMED	Headers/ATIRadeonX1000.h member of the same name (the stamp page descriptor every context returns from clientMemoryForType(0))
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8dc	scanout2PadElement	INFERRED	set_display_mode_and_vram: ATIR500Memory element reserving the alignment gap below scanout 2; display_mode_will_change deallocs it when +0x8e0 != 0
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8e0	scanout2PadElementPrev	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +4 of scanout2PadElement; nonzero = reserved (display_mode_will_change/stop test it before dealloc)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8e4	scanout2PadElementOffset	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +8 of scanout2PadElement
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8e8	scanout2PadElementAlignMask	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +0xc of scanout2PadElement
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8ec	scanout1PadElement	INFERRED	same for scanout 1
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8f0	scanout1PadElementPrev	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +4 of scanout1PadElement; nonzero = reserved
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8f4	scanout1PadElementOffset	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +8 of scanout1PadElement
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8f8	scanout1PadElementAlignMask	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +0xc of scanout1PadElement
+field	IOATIR500Accelerator,ATIRadeonX1000	0x8fc	unknown_0x8fc	UNKNOWN	setup_R500_internal_space and start() zero it; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0x900	mainRingMemory	CONFIRMED	start(): IOMallocAligned(0x2000) (size at +0xba0); stop() IOFreeAligned(+0x900, +0xba0)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x904	mainRingGartOffset	CONFIRMED	start(): out-parameter of the +0x5a0 map call; setup_R500_internal_space adds it to the ring base register
+field	IOATIR500Accelerator,ATIRadeonX1000	0x908	mainRingDescriptor	CONFIRMED	start(): IOMemoryDescriptor::withAddress(+0x900 memory); stop unmaps (descriptor, gart offset)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x90c	ringPointerBase	CONFIRMED	start_promo4_engine local ringPointerBase = this; start() sets mmio base or +0x238 scratch header
+field	IOATIR500Accelerator,ATIRadeonX1000	0x910	ringWritePointerOffset	CONFIRMED	start_promo4_engine stores the write pointer at (ringPointerBase + this); start() stores 0 or 0x710
+field	IOATIR500Accelerator,ATIRadeonX1000	0x914	ringIndex	INFERRED	display_mode_will_change stores ringIndex / nextRingIndex here and into the ring slot
+field	IOATIR500Accelerator,ATIRadeonX1000	0x918	mainRingCursor	INFERRED	Headers/ATIRadeonX1000.h member mainRingCursor (submit_ring_data advances it)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x91c	idctRingMemory	CONFIRMED	start(): IOMallocAligned(0x2000), 0x800 entries initialised to 0x80000000; descriptor +0x924, GART offset +0x920
+field	IOATIR500Accelerator,ATIRadeonX1000	0x920	idctRingGartOffset	CONFIRMED	start(): out-parameter of the +0x5a0 map call for the IDCT ring; added to the ring base in start_xdct_engine
+field	IOATIR500Accelerator,ATIRadeonX1000	0x924	idctRingDescriptor	CONFIRMED	start(): IOMemoryDescriptor::withAddress(+0x91c memory)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x928	idctPointerBase	CONFIRMED	start(): = mmio base or +0x238 + 4; submit_idct_buffer_consumed reads (this + 0x92c) through it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x92c	idctPointerOffset	CONFIRMED	start(): stores 0x1f9c (the consumed-IDCT pointer register); submit_idct_buffer_consumed loads (base + this)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x930	idctRingCursor	CONFIRMED	Headers/ATIRadeonX1000.h member idctRingCursor
+field	IOATIR500Accelerator,ATIRadeonX1000	0x934	registerMap	CONFIRMED	start(): IOMemoryMap from the BAR0 mapping call (vtable +0x57c); getVirtualAddress (+0xd0) gives mmioBase; stop() releases it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x938	idctEngineActive	INFERRED	start() sets 0, later 1; stop checks it before stopping the IDCT engine
+field	IOATIR500Accelerator,ATIRadeonX1000	0x93c	vramPoolB	INFERRED	second ATIR500Memory pool (tmpAllocVRAM/tmpDeallocVRAM, tmpTotalVRAM); set_display_mode_and_vram repeats every vramPool reservation here
+field	IOATIR500Accelerator,ATIRadeonX1000	0x940	scanout1ElementB	INFERRED	vramPoolB mirror of the scanout 1 reservation (set_display_mode_and_vram)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x950	scanout1PadElementB	INFERRED	vramPoolB mirror of scanout1PadElement
+field	IOATIR500Accelerator,ATIRadeonX1000	0x960	scanout2ElementB	INFERRED	vramPoolB mirror of the scanout 2 reservation
+field	IOATIR500Accelerator,ATIRadeonX1000	0x970	scanout2PadElementB	INFERRED	vramPoolB mirror of scanout2PadElement
+field	IOATIR500Accelerator,ATIRadeonX1000	0x980	unknown_0x980	UNKNOWN	start(): = 0x7b8; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0x984	unknown_0x984	UNKNOWN	start(): = 0x3ff; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0x988	unknown_0x988	UNKNOWN	start(): = 0; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0x994	swdsPeriodMsA	INFERRED	display_mode_did_change/system_did_change_speed: = period seconds * 1000 + microseconds / 1000000 from getPeriodValue
+field	IOATIR500Accelerator,ATIRadeonX1000	0x998	gpuSensorPeriodMs	INFERRED	same period conversion; enable_GPUSensor/start read it as the sensor timer period
+field	IOATIR500Accelerator,ATIRadeonX1000	0x99c	gpuSensorBusyCount	INFERRED	enable_GPUSensor zeroes it (ATIRadeonX1000_SmallMethods.cpp: GPU-sensor busy counter)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9a0	gpuSensorSampleCount	INFERRED	enable_GPUSensor zeroes it (ATIRadeonX1000_SmallMethods.cpp: GPU-sensor sample counter)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9a4	gpuSensorProvider	INFERRED	display_mode_did_change/system_did_change_speed gate on it; start() stores the object found via platform lookup (SmallMethods comment: sensor provider)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9a8	gpuSensorTimer	CONFIRMED	start(): IOTimerEventSource for GPUSensorFunc; enable/disable_GPUSensor arm/cancel it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9ac	gpuSensorFunction	INFERRED	start stores an OSSymbol; stop releases it (vtable +0x18) - the GPU-sensor function name (SmallMethods comment)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9b4	swdsPeriodMs	INFERRED	start() stores 10; SWDSInit passes it with the timer to the event source (setTimeoutMS)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9b8	swdsTimer	CONFIRMED	start(): IOTimerEventSource::timerEventSource(self, SWDSFunc) added to the work loop; SWDSShutdown cancels it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9bc	swdsBuffer0	INFERRED	SWDSInit/SWDSShutdown/stop: first of two 0x78-byte SWDS buffer records (memset(self+0x9bc, 0, 0xf0) in start; stop deallocs each element when +4 and +0 are set)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9c4	swdsBuffer0GpuBaseAddress	INFERRED	swdsBuffer0 +8 (element offset), read by SWDSInit
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9d0	swdsBuffer0Width	INFERRED	swdsBuffer0 +0x14 (UInt16), byte-swapped into the SWDS packet by SWDSInit
+field	IOATIR500Accelerator,ATIRadeonX1000	0xa34	swdsBuffer1	INFERRED	second SWDS buffer record, 0x78 after swdsBuffer0
+field	IOATIR500Accelerator,ATIRadeonX1000	0xa3c	swdsBuffer1GpuBaseAddress	INFERRED	swdsBuffer1 +8; SWDSInit copies it to display2SurfaceAddressSeen
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaac	unknown_0xaac	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xab0	unknown_0xab0	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xab4	unknown_0xab4	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xab8	unknown_0xab8	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xabc	swdsScratchElement	UNKNOWN	SWDSInit passes self+0xabc as an ATIR500Memory element; start() zeroes the word
+field	IOATIR500Accelerator,ATIRadeonX1000	0xac0	unknown_0xac0	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xac4	unknown_0xac4	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xac8	unknown_0xac8	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xacc	unknown_0xacc	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xad0	unknown_0xad0	UNKNOWN	start() zeroes it (block 0xaac..0xad0 after the SWDS buffers); no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xadc	swdsEntryIndex	INFERRED	SWDSInit: entry = this * 0x1c indexes the swdsEntry array starting at +0xae0
+field	IOATIR500Accelerator,ATIRadeonX1000	0xae0	swdsEntry0	CONFIRMED	start(): allocCommandBuffer((VendorCommandBuffer *)(self + 0xae0), 0x1000); stop() freeCommandBuffer; 0x1c-byte SwapBufferEntry-shaped entries (stride in SWDSInit)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xae4	swdsEntry0GartOffset	CONFIRMED	SwapBufferEntry +4 (gartOffset): SWDSInit reads (this + idx * 0x1c + 0xae4) as the GART address
+field	IOATIR500Accelerator,ATIRadeonX1000	0xae8	swdsEntry0Memory	INFERRED	SwapBufferEntry +8 (memory descriptor): stop() frees the command buffer when nonzero
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaec	swdsEntry0Field0c	UNKNOWN	SwapBufferEntry unknown_0x0c; start() stores 1
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaee	swdsEntry0Field0e	UNKNOWN	SwapBufferEntry unknown_0x0e; start() stores 0
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaf0	swdsEntry0Stamp	CONFIRMED	SwapBufferEntry +0x10 (stamp): SWDSInit calls vtable +0x554 (waitForTimeStamp) with (this + idx * 0x1c + 0xaf0)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaf4	swdsEntry0Header	CONFIRMED	SwapBufferEntry +0x14 (mapped header): SWDSInit writes the packet words at (header + 0x20)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaf8	swdsEntry0RectWordIndex	INFERRED	SwapBufferEntry +0x18; start() zeroes it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xafc	swdsEntry1	INFERRED	second swdsEntry (+0x1c); start() memset(self+0xafc, 0, 0x30) clears the rest of the array
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb08	display1SurfaceAddress	INFERRED	set_display_mode_and_vram caches D1 register 0x6110 (D1GRPH_PRIMARY_SURFACE_ADDRESS) here; stop() clears
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb0c	display1SurfaceAddressB	INFERRED	set_display_mode_and_vram caches D1 register 0x6120 here
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb10	swdsPanel0Flag	UNKNOWN	first word of a 0x18-stride per-panel record (is_flip_allowed: panel * 0x18 + 0xb10 == 0; SWDS dualPanel test); role not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb20	display2SurfaceAddress	INFERRED	set_display_mode_and_vram caches D2 register 0x6910 here
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb24	display2SurfaceAddressB	INFERRED	set_display_mode_and_vram caches D2 register 0x6920 here
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb28	swdsPanel1Flag	UNKNOWN	same word of the second per-panel record; SWDS dualPanel test, stop() clears
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb2c	swdsState_0xb2c	UNKNOWN	SWDSInit compares these words (b34 vs b38, b3c vs b40) in the display-overlap test; start() memsets 0xb2c..0xb6b; roles not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb30	swdsState_0xb30	UNKNOWN	SWDSInit compares these words (b34 vs b38, b3c vs b40) in the display-overlap test; start() memsets 0xb2c..0xb6b; roles not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb34	swdsState_0xb34	UNKNOWN	SWDSInit compares these words (b34 vs b38, b3c vs b40) in the display-overlap test; start() memsets 0xb2c..0xb6b; roles not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb38	swdsState_0xb38	UNKNOWN	SWDSInit compares these words (b34 vs b38, b3c vs b40) in the display-overlap test; start() memsets 0xb2c..0xb6b; roles not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb3c	swdsState_0xb3c	UNKNOWN	SWDSInit compares these words (b34 vs b38, b3c vs b40) in the display-overlap test; start() memsets 0xb2c..0xb6b; roles not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb40	swdsState_0xb40	UNKNOWN	SWDSInit compares these words (b34 vs b38, b3c vs b40) in the display-overlap test; start() memsets 0xb2c..0xb6b; roles not established
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb54	unknown_0xb54	UNKNOWN	start() stores 7; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb58	unknown_0xb58	UNKNOWN	start() stores 7; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb6c	display1SurfaceAddressSeen	INFERRED	compared with D1 register 0x6110 in set_display_mode_and_vram; start() zeroes it, SWDSInit refreshes it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb70	display2SurfaceAddressSeen	INFERRED	compared with D2 register 0x6910 in set_display_mode_and_vram; start() zeroes it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb74	gbTileConfig	CONFIRMED	setupR520Pipes: = pipe-config bits | 0xc00011, written to GB_TILE_CONFIG (0x4018); SWDSWriteBlitToCmdBuf copies it into the blit packet
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb78	savedD1Reg6104	INFERRED	initialize_hardware: read-back of display register 0x6104 (D1 block 0x6000.., D2 block 0x6800..)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb7c	savedD2Reg6904	INFERRED	initialize_hardware: read-back of display register 0x6904 (D1 block 0x6000.., D2 block 0x6800..)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb80	savedD1Reg6148	INFERRED	initialize_hardware: read-back of display register 0x6148 (D1 block 0x6000.., D2 block 0x6800..)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb84	savedD2Reg6948	INFERRED	initialize_hardware: read-back of display register 0x6948 (D1 block 0x6000.., D2 block 0x6800..)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb88	savedD1Reg60c4	INFERRED	initialize_hardware: read-back of display register 0x60c4 (D1 block 0x6000.., D2 block 0x6800..)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb8c	savedD2Reg68c4	INFERRED	initialize_hardware: read-back of display register 0x68c4 (D1 block 0x6000.., D2 block 0x6800..)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb90	stateDestroyedByPageoff	CONFIRMED	pageoff_dirty_texture_with_gpu/copy_buffer_using_DMA set 1; get_texture tests it and restore_state_destroyed_by_pageoff clears it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb98	numPipes	CONFIRMED	getNumPipes returns it; setupR520Pipes sets 1..4 from the pipe count code
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb9c	numZPipes	CONFIRMED	getNumZPipes returns it; start() passes both to HZMEM_Init
+field	IOATIR500Accelerator,ATIRadeonX1000	0xba0	mainRingSize	CONFIRMED	start(): = 0x2000, the IOMemoryDescriptor length and IOFreeAligned size of the main ring
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbac	gartReserveSize	INFERRED	startupPCIeGART: = gartSizeKB-derived size + 0x10000; set_display_mode_and_vram reserves (gartReserveOffset, this) from vramPool into gartTableBuffer
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbb0	gartTableVramOffset	INFERRED	startupPCIeGART: = min(CONFIG_MEMSIZE, 128M) - gart table size; copied to gartTableBuffer.gpuBaseAddress; setup_R500_internal_space reads it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbb4	gartReserveOffset	INFERRED	startupPCIeGART: = vram size - (gart table size + 0x10000); set_display_mode_and_vram tests != 0 then reserves from here
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbb8	gartTableCpuAddress	INFERRED	startupPCIeGART: = (vram size - gart size) + vramApertureBase, the CPU address of the GART table copy in VRAM; reserveInGART/clearInGART write every entry here as well as to +0xc4c
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbbc	pcieIndirectRegValue	INFERRED	setup_R500_internal_space stores 0x47; shutdownPCIeGART/submit_empty_buffer re-write it through the 0x30 (index) / 0x34 (data) register pair
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbc0	gartEntryBase	INFERRED	ATIRadeonX1000_SmallMethods.cpp: "+0xbc0 GART entry base"; startupPCIeGART sets 1 when hwCapabilityBits & 0x80, addToPCIeGART ORs it into every entry
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbc4	gartTableBuffer	CONFIRMED	embedded GART-table record (address passed to ATIR500Memory::reserve)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbc8	gartTableBufferElementPrev	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbcc	gartTableBufferGpuBaseAddress	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbd0	gartTableBufferAlignMask	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbd4	gartTableBufferSize	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbd8	gartTableBufferWidth	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbda	gartTableBufferBytesPerPixel	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbdc	gartTableBufferPitch	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbe0	gartTableBufferActiveWidth	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbe2	gartTableBufferActiveHeight	CONFIRMED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbe4	gartTableBufferField20	UNKNOWN	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbe6	gartTableBufferField22	UNKNOWN	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbe8	gartTableBufferBackingStoreHandle	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbec	gartTableBufferHzBlockField	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbf0	gartTableBufferHzBlockExtra	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xbf4	gartTableBufferHzBlockCountField	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc00	gartTableBufferTilingDegreeBits	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc04	gartTableBufferMipOffset0	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc08	gartTableBufferMipOffset1	INFERRED	third embedded record: startupPCIeGART sizes it as the GART table (width/pitch/size from the table size), reserved from vramPool by set_display_mode_and_vram
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc3c	gartTableElementB	INFERRED	vramPoolB mirror of the GART-table reservation (set_display_mode_and_vram, startupPCIeGART zeroes it)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc40	gartTableElementBPrev	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +4 of gartTableElementB
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc44	gartTableElementBOffset	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +8 of gartTableElementB
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc48	gartTableElementBAlignMask	INFERRED	ATIR500Memory element layout (node, prev, offset, alignMask - Headers/ATIR500Memory.h): element +0xc of gartTableElementB
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc4c	pcieGartTable	CONFIRMED	startupPCIeGART: IOMallocAligned(gart size, page) primary GART table; every GART function indexes it with (offset >> page_shift) * 4
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc50	chipID	CONFIRMED	getChipID returns it; start(): PCI device id (live-verified 0x7240 on the X1900)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc54	chipRev	CONFIRMED	getChipRev returns it; start(): chip revision word (live-verified 0xc); setupR520Pipes tests < 4
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc58	unknown_0xc58	UNKNOWN	start() zeroes it; no reader found
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc5c	gartFlushScratch	INFERRED	addToPCIeGART/removeFromPCIeGART/reserveInGART: register 0x130 read-back, set bit 0x8000000, written back, then the last entry re-read (a posted-write flush)
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x78: unknown_0x78 (not currentContext) - SWDSWriteBlitToCmdBuf and pageoff_dirty_texture_with_gpu store 0; no reader found
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x7c: vramPool (not memoryPool) - ATIR500Memory pool: init_pool(usableVramSize), reserve() of the scanout buffers; ATIRadeonX1000::writePerformanceStats exports its total_fre
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x98: hwCapabilityBits (not capabilityFlags) - tested bitwise all over: 0x80 (GART entry base), 0x10000 (second display), 0x80000 (no promo4), 0x200000/0x400000 (R520 pipes / hang dump), 
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xa8: maxSurfaceWidth (not unknown_0xa8) - is_surface_size_supported compares width <= this (UInt16); start() stores 0x1000
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xaa: maxSurfaceHeight (not unknown_0xaa) - is_surface_size_supported compares height <= this (UInt16); alloc_surface_buffer too; start() stores 0x1000 when wide-blit support is on
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xac: pciBar0Config (not registerDeviceMemory) - start(): PCI config read of register 0x18 (BAR0) via vtable +0x578; stop() clears
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xcc: displayCount (not framebufferCount) - set_display_mode_and_vram: second display only when < 2 is false (this >= 2); start() tests == 0
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xd0: displayConfigBits (not activePanelMask) - set_display_mode_and_vram: 0, then 1 (display 1 found), |= 2 (display 2 found); allocate_texture tests it
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xd4: framebuffer1 (not framebuffer0) - set_display_mode_and_vram: fFramebuffers[0].framebuffer - vtable +0x5f0 getCurrentDisplayMode, +0x5ec getPixelInformation
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xe4: vramApertureBase (not vramMappedAddress) - pageoff_dirty_texture_with_cpu: CPU address of a texture in VRAM = this + texture offset; startupPCIeGART adds it to the GART table position
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x150: scanout1BufferBackingStoreHandle (not unknown_0x150) - embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMa
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x228: scratchBufferGartOffset (not scratchCommandBufferGartOffset) - Headers/ATIRadeonX1000.h _unknown_0x228: the scratch command buffer record at +0x224; start() maps it with addr = self+0x228 (GART offset ou
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x22c: scratchBufferDescriptor (not scratchCommandBufferMemory) - start() calls vtable +0x144 on it with the buffer; stop() unmaps it with (descriptor, gart offset +0x228, size)
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x238: scratchHeader (not scratchCommandBufferHeader) - Headers/ATIRadeonX1000.h member scratchHeader
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x5c8: cachedBufferSizeThreshold (not commandBufferSize) - Headers/ATIRadeonX1000.h member of the same name
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x5dc: textureVramListSentinel (not vramBufferList) - freeToAllocTextureCPUVisibleVRAM: list end marker (address self+0x5dc), see ATIRadeonX1000_FreeToAllocTextureCPUVisibleVRAM.cpp header
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x604: textureVramListFirst (not vramBufferList_next) - freeToAllocTextureCPUVisibleVRAM/freeToAllocTextureVRAM: first node of the same list (initial link)
+# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x7e0: unknown_0x7e0 (not vramScanEvictedCount) - freeToAllocTextureCPUVisibleVRAM increments it once per freed texture; role not established (see that file's header)

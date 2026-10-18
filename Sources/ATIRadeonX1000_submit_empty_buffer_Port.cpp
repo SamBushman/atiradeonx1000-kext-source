@@ -37,9 +37,9 @@ void ATIRadeonX1000::submit_empty_buffer() {
   if (self[0x80] == 0x0) {
     return;
   }
-  uVar2 = M<UInt32>(self + 0xbbc);
-  M<UInt32>(self + 0x8a0) = 0;
-  iVar1 = M<SInt32>(self + 0x860);
+  uVar2 = M<UInt32>(self + kIOATIR500Accelerator_pcieIndirectRegValue);
+  M<UInt32>(self + kIOATIR500Accelerator_transferMappedFlag) = 0;
+  iVar1 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   iVar3 = 0x2711;
   do {
     M<UInt32>(iVar1 + 0x30) = 0x10000000;

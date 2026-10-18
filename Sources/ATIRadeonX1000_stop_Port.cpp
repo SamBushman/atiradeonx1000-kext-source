@@ -55,7 +55,7 @@ void ATIRadeonX1000::stop(IOService *provider) {
   UInt8 *displayRecord;
   int iVar7;
   
-  if (M<int>(self + 0x9a8) != 0) {
+  if (M<int>(self + kIOATIR500Accelerator_gpuSensorTimer) != 0) {
     /* #155 FIX: real IOWorkLoop::removeEventSource(IOEventSource*) at vtable+0xe8 takes TWO args
      * (this, toRemove) - confirmed against the real XNU IOWorkLoop.cpp source (_maintRequest's
      * mRemoveEvent case) and against stock's own disassembly, which keeps the event-source pointer
@@ -64,17 +64,17 @@ void ATIRadeonX1000::stop(IOService *provider) {
      * the compiler only sets up registers for args actually written here) - the real callee read
      * whatever happened to be in r4, a valid-looking but wrong pointer, matching this issue's
      * "valid pointer, zeroed vtable" crash signature exactly. */
-    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + 0x9a8));
-    VCALL(*M<int *>(self + 0x9a8), 0x18)(M<int *>(self + 0x9a8));
-    M<UInt32>(self + 0x9a8) = 0;
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + kIOATIR500Accelerator_gpuSensorTimer));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_gpuSensorTimer), 0x18)(M<int *>(self + kIOATIR500Accelerator_gpuSensorTimer));
+    M<UInt32>(self + kIOATIR500Accelerator_gpuSensorTimer) = 0;
   }
-  if (M<int>(self + 0x9b8) != 0) {
-    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + 0x9b8));
-    VCALL(*M<int *>(self + 0x9b8), 0x18)(M<int *>(self + 0x9b8));
-    M<UInt32>(self + 0x9b8) = 0;
+  if (M<int>(self + kIOATIR500Accelerator_swdsTimer) != 0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + kIOATIR500Accelerator_swdsTimer));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_swdsTimer), 0x18)(M<int *>(self + kIOATIR500Accelerator_swdsTimer));
+    M<UInt32>(self + kIOATIR500Accelerator_swdsTimer) = 0;
   }
   iVar4 = 0;
-  memoryElement = (UInt8 *)(self + 0x9bc);
+  memoryElement = (UInt8 *)(self + kIOATIR500Accelerator_swdsBuffer0);
   VCALL(*M<int *>(self + kIOATIR500Accelerator_pciDevice), 0x17c)(M<int *>(self + kIOATIR500Accelerator_pciDevice),"ATIFEDSInfo");
   displayRecord = self;
   do {
@@ -86,17 +86,17 @@ void ATIRadeonX1000::stop(IOService *provider) {
     displayRecord = displayRecord + 0x78;
     iVar4 = iVar4 + 1;
   } while (bVar1);
-  if (M<int>(self + 0xae8) != 0) {
-    ((IOATIR500Accelerator *)((UInt8 *)self))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0xae0)));
+  if (M<int>(self + kIOATIR500Accelerator_swdsEntry0Memory) != 0) {
+    ((IOATIR500Accelerator *)((UInt8 *)self))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + kIOATIR500Accelerator_swdsEntry0)));
   }
-  if ((M<int>(self + 0x8e0) != 0) && (M<int>(self + 0x8dc) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8dc)));
+  if ((M<int>(self + kIOATIR500Accelerator_scanout2PadElementPrev) != 0) && (M<int>(self + kIOATIR500Accelerator_scanout2PadElement) != 0)) {
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + kIOATIR500Accelerator_scanout2PadElement)));
   }
-  if ((M<int>(self + 0x8f0) != 0) && (M<int>(self + 0x8ec) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8ec)));
+  if ((M<int>(self + kIOATIR500Accelerator_scanout1PadElementPrev) != 0) && (M<int>(self + kIOATIR500Accelerator_scanout1PadElement) != 0)) {
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + kIOATIR500Accelerator_scanout1PadElement)));
   }
   iVar4 = 0;
-  memoryElement = (UInt8 *)(self + 300);
+  memoryElement = (UInt8 *)(self + kIOATIR500Accelerator_scanout1Buffer);
   displayRecord = self;
   do {
     if ((M<int>(displayRecord + 0x130) != 0) && (M<int>(displayRecord + 300) != 0)) {
@@ -108,77 +108,77 @@ void ATIRadeonX1000::stop(IOService *provider) {
     iVar4 = iVar4 + 1;
   } while (bVar1);
   VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-  if (M<int>(self + 0x8bc) != 0) {
+  if (M<int>(self + kIOATIR500Accelerator_xdctEngineRunning) != 0) {
     this->stop_xdct_engine();
   }
   this->stop_promo4_engine();
-  if (M<int>(self + 0xb10) != 0) {
-    uVar3 = M<unsigned int>(self + 0xb08);
-    iVar4 = M<int>(self + 0x860);
+  if (M<int>(self + kIOATIR500Accelerator_swdsPanel0Flag) != 0) {
+    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddress);
+    iVar4 = M<int>(self + kIOATIR500Accelerator_mmioBase);
     M<unsigned int>(iVar4 + 0x6110) =
          uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
     enforceInOrderExecutionIO();
-    uVar3 = M<unsigned int>(self + 0xb0c);
-    M<UInt32>(self + 0xb08) = 0;
+    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddressB);
+    M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddress) = 0;
     M<unsigned int>(iVar4 + 0x6120) =
          uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
     enforceInOrderExecutionIO();
-    M<UInt32>(self + 0xb10) = 0;
-    M<UInt32>(self + 0xb0c) = 0;
+    M<UInt32>(self + kIOATIR500Accelerator_swdsPanel0Flag) = 0;
+    M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressB) = 0;
   }
-  if (M<int>(self + 0xb28) != 0) {
-    uVar3 = M<unsigned int>(self + 0xb20);
-    iVar4 = M<int>(self + 0x860);
+  if (M<int>(self + kIOATIR500Accelerator_swdsPanel1Flag) != 0) {
+    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddress);
+    iVar4 = M<int>(self + kIOATIR500Accelerator_mmioBase);
     M<unsigned int>(iVar4 + 0x6910) =
          uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
     enforceInOrderExecutionIO();
-    uVar3 = M<unsigned int>(self + 0xb24);
-    M<UInt32>(self + 0xb20) = 0;
+    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddressB);
+    M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddress) = 0;
     M<unsigned int>(iVar4 + 0x6920) =
          uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
     enforceInOrderExecutionIO();
-    M<UInt32>(self + 0xb28) = 0;
-    M<UInt32>(self + 0xb24) = 0;
+    M<UInt32>(self + kIOATIR500Accelerator_swdsPanel1Flag) = 0;
+    M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressB) = 0;
   }
-  HZMEM_Destroy((_HZDATA *)((UInt8 *)(self + 0x870)));
-  if (M<int>(self + 0x8d0) != 0) {
-    M<UInt32>(self + 0x868) = 0x15e4;
-    M<UInt32>(self + 0x86c) = 0x15e0;
-    M<int>(self + 0x864) = M<int>(self + 0x860);
-    M<UInt32>(M<int>(self + 0x860) + 0x770) = 0;
+  HZMEM_Destroy((_HZDATA *)((UInt8 *)(self + kIOATIR500Accelerator_hzmem)));
+  if (M<int>(self + kIOATIR500Accelerator_stampPageMemory) != 0) {
+    M<UInt32>(self + kIOATIR500Accelerator_retiredStampOffset) = 0x15e4;
+    M<UInt32>(self + kIOATIR500Accelerator_checkedStampOffset) = 0x15e0;
+    M<int>(self + kIOATIR500Accelerator_stampPageBase) = M<int>(self + kIOATIR500Accelerator_mmioBase);
+    M<UInt32>(M<int>(self + kIOATIR500Accelerator_mmioBase) + 0x770) = 0;
     enforceInOrderExecutionIO();
     VCALL(M<int>(self), 0x5a4)
-              (self,M<UInt32>(self + 0x8d8),M<UInt32>(self + 0x8d4));
-    VCALL(*M<int *>(self + 0x8d8), 0x18)(M<int *>(self + 0x8d8));
-    GH_IOFreeAligned(M<UInt32>(self + 0x8d0),GH_page_size);
-    M<UInt32>(self + 0x8d0) = 0;
+              (self,M<UInt32>(self + kIOATIR500Accelerator_clientMemoryDescriptorType0),M<UInt32>(self + kIOATIR500Accelerator_stampPageGartOffset));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_clientMemoryDescriptorType0), 0x18)(M<int *>(self + kIOATIR500Accelerator_clientMemoryDescriptorType0));
+    GH_IOFreeAligned(M<UInt32>(self + kIOATIR500Accelerator_stampPageMemory),GH_page_size);
+    M<UInt32>(self + kIOATIR500Accelerator_stampPageMemory) = 0;
   }
-  if (M<int>(self + 0x900) != 0) {
-    if (M<int>(self + 0xba0) != 0) {
+  if (M<int>(self + kIOATIR500Accelerator_mainRingMemory) != 0) {
+    if (M<int>(self + kIOATIR500Accelerator_mainRingSize) != 0) {
       uVar3 = 0;
       do {
-        VCALL(M<int>(self), 0x598)(self,uVar3 + M<int>(self + 0x904) + 0x1000000);
+        VCALL(M<int>(self), 0x598)(self,uVar3 + M<int>(self + kIOATIR500Accelerator_mainRingGartOffset) + 0x1000000);
         uVar3 = uVar3 + GH_page_size;
-      } while (uVar3 < M<unsigned int>(self + 0xba0));
+      } while (uVar3 < M<unsigned int>(self + kIOATIR500Accelerator_mainRingSize));
     }
     VCALL(M<int>(self), 0x5a4)
-              (self,M<UInt32>(self + 0x908),M<UInt32>(self + 0x904));
-    GH_IOFreeAligned(M<UInt32>(self + 0x900),M<UInt32>(self + 0xba0));
-    M<UInt32>(self + 0x900) = 0;
+              (self,M<UInt32>(self + kIOATIR500Accelerator_mainRingDescriptor),M<UInt32>(self + kIOATIR500Accelerator_mainRingGartOffset));
+    GH_IOFreeAligned(M<UInt32>(self + kIOATIR500Accelerator_mainRingMemory),M<UInt32>(self + kIOATIR500Accelerator_mainRingSize));
+    M<UInt32>(self + kIOATIR500Accelerator_mainRingMemory) = 0;
   }
-  if (M<int>(self + 0x91c) != 0) {
+  if (M<int>(self + kIOATIR500Accelerator_idctRingMemory) != 0) {
     iVar4 = 0;
     do {
-      VCALL(M<int>(self), 0x598)(self,iVar4 + M<int>(self + 0x920) + 0x1000000);
+      VCALL(M<int>(self), 0x598)(self,iVar4 + M<int>(self + kIOATIR500Accelerator_idctRingGartOffset) + 0x1000000);
       iVar4 = iVar4 + GH_page_size;
     } while (iVar4 < 0x2000);
     VCALL(M<int>(self), 0x5a4)
-              (self,M<UInt32>(self + 0x924),M<UInt32>(self + 0x920));
-    GH_IOFreeAligned(M<UInt32>(self + 0x91c),0x2000);
-    M<UInt32>(self + 0x91c) = 0;
+              (self,M<UInt32>(self + kIOATIR500Accelerator_idctRingDescriptor),M<UInt32>(self + kIOATIR500Accelerator_idctRingGartOffset));
+    GH_IOFreeAligned(M<UInt32>(self + kIOATIR500Accelerator_idctRingMemory),0x2000);
+    M<UInt32>(self + kIOATIR500Accelerator_idctRingMemory) = 0;
   }
-  if (M<int>(self + 0x938) != 0) {
-    if (M<int>(self + 0x8c8) == 0) {
+  if (M<int>(self + kIOATIR500Accelerator_idctEngineActive) != 0) {
+    if (M<int>(self + kIOATIR500Accelerator_unknown_0x8c8) == 0) {
       if (((UInt8)self[0x8cc] != 0) && (iVar4 = (UInt8)self[0x8cc] - 1, 0 < iVar4)) {
         iVar7 = 0;
         do {
@@ -202,33 +202,33 @@ void ATIRadeonX1000::stop(IOService *provider) {
     VCALL(M<int>(self), 0x5a4)
               (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferGartOffset));
   }
-  if (M<int *>(self + 0x9ac) != (int *)0x0) {
-    VCALL(*M<int *>(self + 0x9ac), 0x18)(M<int *>(self + 0x9ac));
-    M<UInt32>(self + 0x9ac) = 0;
+  if (M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction) != (int *)0x0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction), 0x18)(M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction));
+    M<UInt32>(self + kIOATIR500Accelerator_gpuSensorFunction) = 0;
   }
   this->shutdownPCIeGART();
-  M<UInt32>(self + 3000) = 0;
-  if (M<int>(self + 0xc4c) != 0) {
-    GH_IOFreeAligned(M<int>(self + 0xc4c),M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB));
-    M<UInt32>(self + 0xc4c) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) = 0;
+  if (M<int>(self + kIOATIR500Accelerator_pcieGartTable) != 0) {
+    GH_IOFreeAligned(M<int>(self + kIOATIR500Accelerator_pcieGartTable),M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB));
+    M<UInt32>(self + kIOATIR500Accelerator_pcieGartTable) = 0;
   }
-  if (M<int *>(self + 0x934) != (int *)0x0) {
-    VCALL(*M<int *>(self + 0x934), 0x18)(M<int *>(self + 0x934));
-    M<UInt32>(self + 0x934) = 0;
-    M<UInt32>(self + 0x860) = 0;
+  if (M<int *>(self + kIOATIR500Accelerator_registerMap) != (int *)0x0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_registerMap), 0x18)(M<int *>(self + kIOATIR500Accelerator_registerMap));
+    M<UInt32>(self + kIOATIR500Accelerator_registerMap) = 0;
+    M<UInt32>(self + kIOATIR500Accelerator_mmioBase) = 0;
   }
-  if (M<int>(self + 0x8b8) != 0) {
-    VCALL(M<int>(self), 0x5ac)(self,self + 0x8a8);
-    M<UInt32>(self + 0x8b0) = 0;
-    GH_IOFreeAligned(M<UInt32>(self + 0x8b8),0x2000);
-    M<UInt32>(self + 0x8b8) = 0;
+  if (M<int>(self + kIOATIR500Accelerator_scratchTransferMemory) != 0) {
+    VCALL(M<int>(self), 0x5ac)(self,self + kIOATIR500Accelerator_scratchTransfer);
+    M<UInt32>(self + kIOATIR500Accelerator_scratchTransferDescriptor) = 0;
+    GH_IOFreeAligned(M<UInt32>(self + kIOATIR500Accelerator_scratchTransferMemory),0x2000);
+    M<UInt32>(self + kIOATIR500Accelerator_scratchTransferMemory) = 0;
   }
   if (M<int>(self + kIOATIR500Accelerator_registerDeviceMemory) != 0) {
     M<UInt32>(self + kIOATIR500Accelerator_registerDeviceMemory) = 0;
   }
-  if (M<int *>(self + 0x93c) != (int *)0x0) {
-    VCALL(*M<int *>(self + 0x93c), 0x18)(M<int *>(self + 0x93c));
-    M<UInt32>(self + 0x93c) = 0;
+  if (M<int *>(self + kIOATIR500Accelerator_vramPoolB) != (int *)0x0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_vramPoolB), 0x18)(M<int *>(self + kIOATIR500Accelerator_vramPoolB));
+    M<UInt32>(self + kIOATIR500Accelerator_vramPoolB) = 0;
   }
   /* #155 ROOT CAUSE FIX (2026-10-11): the mechanical port wrote this base-class chain-up as a
    * pointer-cast-and-arrow call. Under -fapple-kext (required for this build; it disables

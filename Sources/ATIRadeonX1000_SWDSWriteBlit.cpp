@@ -96,7 +96,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     buffer[wordCount + 1] = 0x70000;
     if (panel == 0) {
       buffer[wordCount + 2] = 0x194e;
-      buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + 0x898)) << 0x10 | 0x80000000;
+      buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + kIOATIR500Accelerator_display1Enabled)) << 0x10 | 0x80000000;
       buffer[wordCount + 4] = 0x5c8;
       regValueIndex = wordCount + 5;
       wordCount = wordCount + 6;
@@ -104,7 +104,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     }
     else {
       buffer[wordCount + 2] = 0x1b4e;
-      buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + 0x89c)) << 0x10 | 0x80000000;
+      buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + kIOATIR500Accelerator_display2Enabled)) << 0x10 | 0x80000000;
       buffer[wordCount + 4] = 0x5c8;
       regValueIndex = wordCount + 5;
       wordCount = wordCount + 6;
@@ -117,7 +117,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     blk[17] = blk[17] | 0xf8000000;
     uVar17 = 0;
     rect[2] = M<UInt16>(self + panel * 0x78 + 0x148);
-    blk[10] = M<UInt32>(self + 0xb74);
+    blk[10] = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
     rect[3] = M<UInt16>(self + panel * 0x78 + 0x14a);
     uStack_94 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148);
     blk[11] = (UInt32)(UInt8)self[panel * 0x78 + 0x166];
@@ -226,7 +226,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     if (blk[15] < 0x20) {
       blk[15] = 0x20;
     }
-    blk[33] = M<UInt32>(self + 0x8c4);
+    blk[33] = M<UInt32>(self + kIOATIR500Accelerator_tearingWideBlit);
     blk[16] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14c) *
                 M<SInt32>(self + panel * 0x78 + 0x16c) + M<SInt32>(self + panel * 0x78 + 0x134);
     if (rotation == 0xb4) {
@@ -322,7 +322,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
   }
   blitPacket[0xaa] = uVar11 - 1 & 0x3fff | (uVar17 & 0x800) << 4 | (uVar10 & 0x800) << 5;
-  uVar15 = M<UInt32>(self + 0xb74);
+  uVar15 = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
   blitPacket[0xa2] = blitPacket[0xa2] & 0xffffe1ff | 0x1400;
   blitPacket[5] = 0x30000;
   blitPacket[0xb] = uVar15;

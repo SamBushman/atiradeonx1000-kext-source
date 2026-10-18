@@ -72,10 +72,10 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
     instructionSynchronize();
     instructionSynchronize();
   }
-  gartBase = M<SInt32>(self + 0x8a4);
+  gartBase = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
   spinCount = 0;
-  writeIndex = M<SInt32>(self + 0x914);
-  while (freeDwords = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) & 0xffff) - writeIndex) -
+  writeIndex = M<SInt32>(self + kIOATIR500Accelerator_ringIndex);
+  while (freeDwords = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase) + M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset))) & 0xffff) - writeIndex) -
                   1 & 0x7ff) - 7, freeDwords < 8) {
     spinCount = spinCount + 1;
     if (spinCount == 0xf4241) goto LAB_000208e8;
@@ -87,41 +87,41 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
   }
   if (spinCount == 0xf4241) {
 LAB_000208e8:
-    registers = M<SInt32>(self + 0x860);
+    registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
     GH_IOLog("ATIRadeon::submit_buffer: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
                  ,freeDwords,8,loadWordByteReversed(&M<UInt8>(registers + 0xe40)));
     ((ATIRadeonX1000 *)(self))->DumpASICHangState();
-    stamp = M<SInt32>(self + 0x850) + -1;
+    stamp = M<SInt32>(self + kIOATIR500Accelerator_retiredStampCounter) + -1;
   }
   else {
-    ringBase = M<SInt32>(self + 0x900);
+    ringBase = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
     M<UInt32>(ringBase + writeIndex * 4) = 0x101ce;
     ringIndex = writeIndex + 1U & 0x7ff;
-    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
     M<UInt32>(ringBase + ringIndex * 4) = gartOffset + gartBase & 0xfffffffc;
     ringIndex = ringIndex + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
     M<UInt32>(ringBase + ringIndex * 4) = dwordCount & 0x7fffff;
     ringIndex = ringIndex + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
     M<UInt32>(ringBase + ringIndex * 4) = 0x394;
     ringIndex = ringIndex + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
     M<UInt32>(ringBase + ringIndex * 4) = 1;
     ringIndex = ringIndex + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
     M<UInt32>(ringBase + ringIndex * 4) = 0x579;
     ringIndex = ringIndex + 1 & 0x7ff;
     nextIndex = ringIndex + 1;
-    M<UInt32>(self + 0x914) = nextIndex;
-    M<UInt32>(ringBase + ringIndex * 4) = M<UInt32>(self + 0x850);
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = M<UInt32>(self + kIOATIR500Accelerator_retiredStampCounter);
     nextIndex = nextIndex & 0x7ff;
-    M<UInt32>(self + 0x914) = nextIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextIndex;
     M<UInt32>(ringBase + nextIndex * 4) = 0x80000000;
-    M<UInt32>(self + 0x914) = nextIndex + 1 & 0x7ff;
+    M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextIndex + 1 & 0x7ff;
     ((ATIRadeonX1000 *)(self))->submit_ring_data();
-    stamp = M<SInt32>(self + 0x850);
-    M<SInt32>(self + 0x850) = stamp + 1;
+    stamp = M<SInt32>(self + kIOATIR500Accelerator_retiredStampCounter);
+    M<SInt32>(self + kIOATIR500Accelerator_retiredStampCounter) = stamp + 1;
   }
   return stamp;
 }

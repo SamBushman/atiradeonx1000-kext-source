@@ -49,17 +49,17 @@ void ATIRadeonX1000::submit_ring_data() {
   UInt32 lineBase;
   UInt32 tailLineBase;
   
-  writeIndex = M<UInt32>(self + 0x914);
-  submittedIndex = M<UInt32>(self + 0x918);
+  writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
+  submittedIndex = M<UInt32>(self + kIOATIR500Accelerator_mainRingCursor);
   if (writeIndex != submittedIndex) {
     if ((writeIndex & 7) != 0) {
-      ringPtr = M<SInt32>(self + 0x900);
+      ringPtr = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
       do {
         nextIndex = writeIndex + 1;
         M<UInt32>(ringPtr + writeIndex * 4) = 0x80000000;
         writeIndex = nextIndex & 0x7ff;
       } while ((nextIndex & 7) != 0);
-      M<UInt32>(self + 0x914) = writeIndex;
+      M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = writeIndex;
     }
     if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
       ppcSync();
@@ -67,7 +67,7 @@ void ATIRadeonX1000::submit_ring_data() {
     }
     else if (submittedIndex < writeIndex) {
       cacheLine = (UInt32)(UInt8)self[0x84];
-      rangeStart = submittedIndex * 4 + M<SInt32>(self + 0x900);
+      rangeStart = submittedIndex * 4 + M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
       lineBase = -cacheLine & rangeStart;
       flushOffset = 0;
       flushEnd = ((writeIndex - submittedIndex) * 4 + (rangeStart & cacheLine - 1)) - cacheLine;
@@ -86,7 +86,7 @@ void ATIRadeonX1000::submit_ring_data() {
     }
     else {
       lineSize = (UInt32)(UInt8)self[0x84];
-      ringBase = M<UInt32>(self + 0x900);
+      ringBase = M<UInt32>(self + kIOATIR500Accelerator_mainRingMemory);
       rangeStart = ringBase + submittedIndex * 4;
       tailLineBase = -lineSize & rangeStart;
       flushOffset = 0;
@@ -119,9 +119,9 @@ void ATIRadeonX1000::submit_ring_data() {
       instructionSynchronize();
       instructionSynchronize();
     }
-    M<UInt32>(M<SInt32>(self + 0x860) + 0x714) = writeIndex << 0x18 | (writeIndex & 0x700) << 8;
+    M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + 0x714) = writeIndex << 0x18 | (writeIndex & 0x700) << 8;
     enforceInOrderExecutionIO();
-    M<UInt32>(self + 0x918) = writeIndex;
+    M<UInt32>(self + kIOATIR500Accelerator_mainRingCursor) = writeIndex;
     return;
   }
   return;

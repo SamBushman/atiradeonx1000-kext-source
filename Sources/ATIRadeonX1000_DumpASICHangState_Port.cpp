@@ -70,13 +70,13 @@ void ATIRadeonX1000::DumpASICHangState() {
   UInt32 uVar33;
   
   this->disable_GPUSensor();
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   uVar33 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7f8));
   iVar24 = 0;
   do {
     GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
     GH_thread_block(0);
-    iVar25 = M<SInt32>(self + 0x860);
+    iVar25 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
     if (uVar33 != (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
       this->enable_GPUSensor();
       return;
@@ -87,7 +87,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   GH_IOSleep(10);
   GH_IOLog("** ASIC Hang Log Start **\n");
   GH_IOSleep(10);
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   M<UInt32>(iVar24 + 0x30) = 0x21000000;
   enforceInOrderExecutionIO();
   uVar14 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x34));
@@ -97,14 +97,14 @@ void ATIRadeonX1000::DumpASICHangState() {
   uVar26 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7fc));
   GH_IOLog("0x%08lx %08lx %08lx %08lx\n",uVar32,uVar14,uVar20,uVar26);
   GH_IOSleep(10);
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   uVar9 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7f8));
   uVar15 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7c0));
   uVar21 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x790));
   uVar27 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7b0));
   GH_IOLog("0x%08lx %08lx %08lx %08lx\n",uVar9,uVar15,uVar21,uVar27);
   GH_IOSleep(10);
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   M<UInt32>(iVar24 + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
   uVar10 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x34));
@@ -121,7 +121,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   uVar8 = loadWordByteReversed(&M<UInt8>(iVar24 + 0xe40));
   GH_IOLog("0x%08lx %08lx %08lx %08lx\n",uVar10,uVar16,uVar22,uVar8);
   GH_IOSleep(10);
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   uVar11 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x2140));
   M<UInt32>(iVar24 + 0x30) = 0x4010000;
   enforceInOrderExecutionIO();
@@ -130,7 +130,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   uVar28 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x740));
   GH_IOLog("0x%08lx %08lx %08lx %08lx\n",uVar11,uVar17,uVar23,uVar28);
   GH_IOSleep(10);
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   uVar12 = loadWordByteReversed(&M<UInt8>(iVar24 + 2000));
   uVar18 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x704));
   M<UInt32>(iVar24 + 0x30) = 0xb4000000;
@@ -139,7 +139,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   uVar29 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x130));
   GH_IOLog("0x%08lx %08lx %08lx %08lx\n",uVar12,uVar18,uVar31,uVar29);
   GH_IOSleep(10);
-  iVar24 = M<SInt32>(self + 0x860);
+  iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   uVar13 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x1724));
   uVar19 = loadWordByteReversed(&M<UInt8>(iVar24 + 0xec));
   uVar30 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7b8));
@@ -150,7 +150,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   GH_IOLog("0x%08lx %08lx %08lx\n",uVar13,uVar19,uVar30);
   GH_IOSleep(10);
   do {
-    iVar25 = M<SInt32>(self + 0x860);
+    iVar25 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
     M<UInt32>(iVar25 + 0x7f0) =
          uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 | uVar9 >> 0x18;
     enforceInOrderExecutionIO();

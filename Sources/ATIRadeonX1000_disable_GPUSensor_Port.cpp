@@ -30,9 +30,9 @@
 void ATIRadeonX1000::disable_GPUSensor() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  if (M<SInt32 *>(self + 0x9a8) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(self + 0x9a8), 0x158)(M<SInt32 *>(self + 0x9a8));
-    VCALL(*M<SInt32 *>(self + 0x9a8), 0xf0)(M<SInt32 *>(self + 0x9a8));
+  if (M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer), 0x158)(M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer));
+    VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer), 0xf0)(M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer));
   }
   return;
 }

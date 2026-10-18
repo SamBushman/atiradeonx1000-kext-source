@@ -31,6 +31,6 @@ void ATIRadeonX1000::tmpDeallocVRAM(GLKMemoryElement *element) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *elementBytes = reinterpret_cast<UInt8 *>(element);
 
-  ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->dealloc((GLKMemoryElement *)(elementBytes));
+  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPoolB)))->dealloc((GLKMemoryElement *)(elementBytes));
   return;
 }

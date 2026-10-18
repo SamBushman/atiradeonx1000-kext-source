@@ -76,7 +76,7 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
   faceCount = M<UInt8>(iVar26 + 0x34);
   VCALL(M<SInt32>(self), 0x558)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
   uVar19 = (UInt32)(UInt8)self[0x990];
-  if ((uVar19 == 0) || ((M<UInt32>(self + 0x890) & 1) == 0)) {
+  if ((uVar19 == 0) || ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1) == 0)) {
 LAB_0001e594:
     iVar26 = 0;
   }
@@ -86,10 +86,10 @@ LAB_0001e594:
       uVar35 = uVar35 + 1;
       uVar19 = uVar19 - 1;
       if (uVar19 == 0) goto LAB_0001e594;
-    } while ((M<UInt32>(self + 0x890) & 1 << (uVar35 & 0x3f)) != 0);
+    } while ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1 << (uVar35 & 0x3f)) != 0);
     iVar26 = uVar35 * 4;
   }
-  iVar31 = M<SInt32>(self + 0x860);
+  iVar31 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   surfaceInfoOffset = (iVar26 + 0x2c3) * 4;
   /* the three registers are read as words (lwbrx) and written back later (stwbrx), exactly as the shipped code does: four single-byte reads would be a different access on the bus */
   saved0 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset));
@@ -204,7 +204,7 @@ LAB_0001e668:
               }
               iVar28 = iVar28 * (1 << iVar20);
               uVar32 = vramSource - M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress);
-              iVar27 = M<SInt32>(self + 0x860);
+              iVar27 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
               M<UInt32>(iVar27 + surfaceInfoOffset) =
                    (uVar40 >> 3) << 0x18 | (uVar40 >> 3 & 0x1f00) << 8 |
                    (uVar22 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x14 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x16)
@@ -285,7 +285,7 @@ LAB_0001e668:
       }
       face = face + 1;
     } while (face < faceCount);
-    iVar31 = M<SInt32>(self + 0x860);
+    iVar31 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   }
   M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = bytesCopied + M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
   storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset), saved0);
