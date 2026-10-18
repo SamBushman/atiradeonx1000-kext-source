@@ -1,0 +1,10 @@
+# round 2, batch 2: copy size and the source-texture register words read back from the packet (write_3dtexquad / pcl_CopyPix)
+#!use-decl: end
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar34	copyWidth	CONFIRMED	(SInt32)srcWidth & 0xffff: the copy width in texels (both loops and the chunk maths)	\(SInt32\)dVar46 & 0xffff;	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar32	copyHeight	CONFIRMED	(SInt32)srcHeight & 0xffff	\(SInt32\)dVar45 & 0xffff;	uVar32 = packet\[0xa0\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar34	texturePitchWord	CONFIRMED	packet[0xaa] read back: pitch word, (value & 0x3fff) + 1 = row pitch	uVar34 = packet\[0xaa\];	^\s*uVar39 = packet\[0xa0\];$
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar32	textureOffsetWord	CONFIRMED	packet[0xa0] read back: texture offset word (tile bits in 2..4)	uVar32 = packet\[0xa0\];	^\s*uVar39 = packet\[0xa0\];$
+use	::pcl_CopyPix	uVar38	copyWidth	CONFIRMED	(SInt32)width & 0xffff: the copy width in texels	\(SInt32\)dVar51 & 0xffff;	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	uVar23	copyHeight	CONFIRMED	(SInt32)height & 0xffff	\(SInt32\)dVar50 & 0xffff;	uVar23 = cmd\[0xa0\];
+use	::pcl_CopyPix	uVar38	texturePitchWord	CONFIRMED	cmd[0xaa] read back: pitch word	uVar38 = cmd\[0xaa\];	^\s*uVar36 = cmd\[0xa0\];$
+use	::pcl_CopyPix	uVar23	textureOffsetWord	CONFIRMED	cmd[0xa0] read back: texture offset word	uVar23 = cmd\[0xa0\];	^\s*uVar36 = cmd\[0xa0\];$

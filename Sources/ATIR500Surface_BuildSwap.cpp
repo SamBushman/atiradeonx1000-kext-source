@@ -75,6 +75,10 @@ void ATIR500Surface::build_swap() {
   UInt16 bufferOriginY;
   UInt16 panelOriginY;
   UInt32 bufferHeight;
+  UInt32 widthUnits;
+  UInt32 pitchUnits;
+  UInt32 lastColumn;
+  UInt32 lastRow;
   SwapBufferEntry *batchEntry;     /* entries[0] of the panel being built: its `header` is the pending swap-write batch */
   PanelRecord *panelRec;
   UInt32 uVar38;
@@ -178,20 +182,20 @@ void ATIR500Surface::build_swap() {
         GCopy(batchHeader + 0x28,(&g_r500_3d_blit_state_packet),0x2f4);
         rectPacketIndex = (batchHeader + 0x31c) - (SInt32)batchWords >> 2;
         formatOffset = (UInt32)(UInt8)self[0xe2] * 0x1c;
-        uVar29 = 0;
+        widthUnits = 0;
         M<UInt32>(batchHeader + 0x290) =
              (UInt32)M<UInt16>(self + 200) * M<SInt32>(self + 0xe8) + M<SInt32>(self + 0xb0) &
              0xffffffe0;
         if ((M<UInt32>(self + 0xe4) & 0xf00000) != 0) {
-          uVar29 = (UInt32)M<UInt16>(self + 0xbc) / (M<UInt32>(self + 0xe4) >> 0x14 & 0xf);
+          widthUnits = (UInt32)M<UInt16>(self + 0xbc) / (M<UInt32>(self + 0xe4) >> 0x14 & 0xf);
         }
-        uVar19 = 0x20 / M<UInt16>(self + 0xbe);
-        if (0x20 / M<UInt16>(self + 0xbe) <= uVar29) {
-          uVar19 = uVar29;
+        pitchUnits = 0x20 / M<UInt16>(self + 0xbe);
+        if (0x20 / M<UInt16>(self + 0xbe) <= widthUnits) {
+          pitchUnits = widthUnits;
         }
         uVar15 = M<UInt32>(batchHeader + 0x250);
         M<UInt32>(batchHeader + 0x298) =
-             uVar19 & 0x3ffe | ((UInt8)self[0xe0] & 1) << 0x10 | ((UInt8)self[0xe0] & 6) << 0x10 |
+             pitchUnits & 0x3ffe | ((UInt8)self[0xe0] & 1) << 0x10 | ((UInt8)self[0xe0] & 6) << 0x10 |
              ((UInt8)self[0xe1] & 3) << 0x13 |
              FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[0xe2] * 0x1c) >> 1 & 0x1e00000;
         uVar29 = FormatTableLookup_0x0004d2e0(formatOffset) >> 0x11 & 0x1f;
@@ -207,14 +211,14 @@ void ATIR500Surface::build_swap() {
              uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffff00e0;
         if (((M<UInt32>(self + 0xe4) & 0xf00000) == 0) ||
            (uVar19 = (UInt32)M<UInt16>(self + 0xc4) / (M<UInt32>(self + 0xe4) >> 0x14 & 0xf),
-           uVar29 = uVar19 - 1, uVar19 == 0)) {
-          uVar29 = 0;
+           lastColumn = uVar19 - 1, uVar19 == 0)) {
+          lastColumn = 0;
         }
-        uVar19 = 0;
+        lastRow = 0;
         if (M<UInt16>(self + 0xc6) != 0) {
-          uVar19 = M<UInt16>(self + 0xc6) - 1;
+          lastRow = M<UInt16>(self + 0xc6) - 1;
         }
-        M<UInt32>(batchHeader + 0x2f4) = uVar29 & 0x1fff | (uVar19 & 0x1fff) << 0xd;
+        M<UInt32>(batchHeader + 0x2f4) = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
         AVar5 = self[0x15a];
         M<UInt32>(batchHeader + 0x2a8) =
              ((UInt8)self[0x158] & 7) << 2 |
@@ -222,14 +226,14 @@ void ATIR500Surface::build_swap() {
              0xffffffe0;
         if (((M<UInt32>(self + 0x15c) & 0xf00000) == 0) ||
            (uVar19 = (UInt32)M<UInt16>(self + 0x13c) / (M<UInt32>(self + 0x15c) >> 0x14 & 0xf),
-           uVar29 = uVar19 - 1, uVar19 == 0)) {
-          uVar29 = 0;
+           lastColumn = uVar19 - 1, uVar19 == 0)) {
+          lastColumn = 0;
         }
-        uVar19 = 0;
+        lastRow = 0;
         if (M<UInt16>(self + 0x13e) != 0) {
-          uVar19 = M<UInt16>(self + 0x13e) - 1;
+          lastRow = M<UInt16>(self + 0x13e) - 1;
         }
-        M<UInt32>(batchHeader + 0x2c0) = uVar29 & 0x7ff | (uVar19 & 0x7ff) << 0xb | 0x80000000;
+        M<UInt32>(batchHeader + 0x2c0) = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
         uVar29 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar5 * 0x1c);
         M<UInt32>(batchHeader + 0x2c8) =
              uVar29 >> 0x13 & 0x1f | (uVar29 & 0x40) << 0x10 | uVar29 >> 7 & 0xe00 |
