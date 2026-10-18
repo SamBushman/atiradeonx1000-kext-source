@@ -14,8 +14,8 @@ H=${1:-G5}; BASE=${2:-HEAD}
 WORK=${WORK:-rung3/ident_check}; EV=${EVIDENCE:-$HOME/g5logs/ident_check}
 mkdir -p "$EV"; T=$(mktemp -d)
 mkdir "$T/base"; git archive "$BASE" Headers Sources Tools Resources | tar -x -C "$T/base"
-tar czf "$T/cand.tgz" Headers Sources Tools Resources
-tar czf "$T/base.tgz" -C "$T/base" Headers Sources Tools Resources
+tar czf "$T/cand.tgz" --exclude=Tools/userspace --exclude=__pycache__ Headers Sources Tools Resources
+tar czf "$T/base.tgz" -C "$T/base" --exclude=Tools/userspace --exclude=__pycache__ Headers Sources Tools Resources
 ssh $H "mkdir -p $WORK" && scp -q "$T/cand.tgz" "$T/base.tgz" $H:$WORK/ || exit 2
 BASE_SHA=$(git rev-parse "$BASE")
 sides='base cand'

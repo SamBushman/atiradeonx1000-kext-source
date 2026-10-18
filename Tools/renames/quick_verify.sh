@@ -9,7 +9,7 @@ FILES=$(git diff --name-only "$BASE" -- Sources | grep '\.cpp$')
 [ -n "$FILES" ] || { echo "no changed Sources/*.cpp"; exit 0; }
 for f in $FILES; do git cat-file -e "$BASE:$f" 2>/dev/null || { echo "$f is new (not in $BASE): compare by hand"; exit 2; }; done
 T=$(mktemp -d)
-tar czf "$T/cand.tgz" Headers Sources Tools Resources
+tar czf "$T/cand.tgz" --exclude=Tools/userspace --exclude=__pycache__ Headers Sources Tools Resources
 git archive "$BASE" Headers $FILES | gzip > "$T/base.tgz"
 ssh "$H" "mkdir -p $WORK" && scp -q "$T/cand.tgz" "$T/base.tgz" "$H:$WORK/" || { rm -rf "$T"; exit 2; }
 echo "$FILES" | ssh "$H" "cat > $WORK/files.txt"
