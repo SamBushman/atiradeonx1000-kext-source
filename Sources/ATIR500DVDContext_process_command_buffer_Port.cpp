@@ -194,6 +194,49 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   UInt32 *secondBlock;
   UInt32 buffer15HalfPitch;
   UInt32 buffer15PitchWord;
+  SInt32 boundSurface;
+  SInt32 rectHeight;
+  SInt32 secondFieldBase;
+  SInt32 firstBufferInfo;
+  SInt32 otherBufferInfo;
+  SInt32 fieldEndAddress;
+  SInt32 fieldSizeBytes;
+  SInt32 chromaBase;
+  SInt32 chromaBase2;
+  UInt32 firstPitch;
+  UInt32 tilingByteHalf;
+  UInt32 sourceOffset0;
+  UInt32 otherTilingBitZeroAt2;
+  UInt32 chromaFormat;
+  UInt32 colorPitch;
+  UInt32 parityFlag;
+  UInt32 fieldBytes5Over4;
+  UInt32 otherRowPitch;
+  UInt32 sourceOffset2;
+  UInt32 sourceOffset1;
+  UInt32 otherRowPitch2;
+  UInt32 sourceOffset3;
+  UInt32 otherRowPitch3;
+  UInt32 destOffset;
+  UInt32 tilingBitZero;
+  UInt32 tilingBitsShifted3;
+  UInt32 tilingBitZeroAt2;
+  UInt32 otherTilingBitsShifted3;
+  SInt32 fieldEndAddress17;
+  SInt32 chromaBase17;
+  SInt32 secondFieldBase17;
+  UInt32 chromaFormat17;
+  UInt32 colorPitch17;
+  UInt32 colorPitchWord;
+  UInt32 parityFlag17;
+  UInt32 fieldBytes5Over4For17;
+  UInt32 destOffset17;
+  SInt32 rectHeight17;
+  SInt32 fieldSizeBytes17;
+  UInt32 tilingBitZero17;
+  UInt32 tilingBitsShifted317;
+  UInt32 tilingBitZeroAt217;
+  UInt8 tilingByte1;
   
   local_64 = 0;
   local_60 = 0;
@@ -1038,282 +1081,282 @@ LAB_00037620:
             }
             else {
               if (uVar17 != 0x16000000) goto LAB_00039028;
-              iVar12 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
-              uVar21 = recordCursor[1];
-              uVar17 = recordCursor[4];
-              iVar18 = recordCursor[2] * 0x78 + iVar12;
-              iVar23 = iVar18;
+              boundSurface = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+              chromaFormat = recordCursor[1];
+              parityFlag = recordCursor[4];
+              firstBufferInfo = recordCursor[2] * 0x78 + boundSurface;
+              otherBufferInfo = firstBufferInfo;
               if (recordCursor[5] != 1) {
-                iVar23 = recordCursor[3] * 0x78 + iVar12;
+                otherBufferInfo = recordCursor[3] * 0x78 + boundSurface;
               }
-              pitch = M<UInt16>(iVar18 + 0x570);
-              uVar11 = (UInt32)pitch;
-              uVar19 = M<UInt32>(iVar18 + 0x560);
-              iVar12 = (SInt32)M<SInt16>(iVar12 + 0x9a) - (SInt32)M<SInt16>(iVar12 + 0x94);
-              iVar45 = iVar12 * uVar11;
-              iVar22 = uVar19 + ((UInt32)(iVar45 * 3) >> 1);
+              pitch = M<UInt16>(firstBufferInfo + 0x570);
+              firstPitch = (UInt32)pitch;
+              sourceOffset0 = M<UInt32>(firstBufferInfo + 0x560);
+              rectHeight = (SInt32)M<SInt16>(boundSurface + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(boundSurface + kATIR500Surface_overlayTop);
+              fieldSizeBytes = rectHeight * firstPitch;
+              fieldEndAddress = sourceOffset0 + ((UInt32)(fieldSizeBytes * 3) >> 1);
               if (recordCursor[5] != 1) {
-                if (uVar21 == 2) {
-                  uVar21 = (UInt32)(pitch >> 2);
-                  if (uVar17 == 0) {
-                    iVar25 = uVar19 + iVar45;
-                    uVar33 = uVar11 + iVar45 + iVar22;
-                    uVar19 = iVar25 + (UInt32)(pitch >> 1);
-                    uVar17 = iVar25 + ((SInt32)(uVar11 * 3) >> 1);
-                    uVar31 = iVar12 * (UInt32)M<UInt16>(iVar23 + 0x570) + M<SInt32>(iVar23 + 0x560);
-                    uVar28 = M<UInt16>(iVar23 + 0x570) + uVar31;
+                if (chromaFormat == 2) {
+                  colorPitch = (UInt32)(pitch >> 2);
+                  if (parityFlag == 0) {
+                    chromaBase2 = sourceOffset0 + fieldSizeBytes;
+                    destOffset = firstPitch + fieldSizeBytes + fieldEndAddress;
+                    sourceOffset0 = chromaBase2 + (UInt32)(pitch >> 1);
+                    sourceOffset2 = chromaBase2 + ((SInt32)(firstPitch * 3) >> 1);
+                    sourceOffset3 = rectHeight * (UInt32)M<UInt16>(otherBufferInfo + 0x570) + M<SInt32>(otherBufferInfo + 0x560);
+                    sourceOffset1 = M<UInt16>(otherBufferInfo + 0x570) + sourceOffset3;
                   }
                   else {
-                    otherPitch = M<UInt16>(iVar23 + 0x570);
-                    uVar19 = uVar19 + iVar45;
-                    uVar33 = iVar45 + iVar22 + (UInt32)(pitch >> 1);
-                    uVar17 = uVar11 + uVar19;
-                    iVar12 = iVar12 * (UInt32)otherPitch + M<SInt32>(iVar23 + 0x560);
-                    uVar31 = iVar12 + ((SInt32)((UInt32)otherPitch * 3) >> 1);
-                    uVar28 = iVar12 + (UInt32)(otherPitch >> 1);
+                    otherPitch = M<UInt16>(otherBufferInfo + 0x570);
+                    sourceOffset0 = sourceOffset0 + fieldSizeBytes;
+                    destOffset = fieldSizeBytes + fieldEndAddress + (UInt32)(pitch >> 1);
+                    sourceOffset2 = firstPitch + sourceOffset0;
+                    secondFieldBase = rectHeight * (UInt32)otherPitch + M<SInt32>(otherBufferInfo + 0x560);
+                    sourceOffset3 = secondFieldBase + ((SInt32)((UInt32)otherPitch * 3) >> 1);
+                    sourceOffset1 = secondFieldBase + (UInt32)(otherPitch >> 1);
                   }
                 }
-                else if (uVar21 == 3) {
-                  uVar21 = (UInt32)(pitch >> 2);
-                  if (uVar17 == 0) {
-                    uVar17 = (UInt32)(iVar45 * 5) >> 2;
-                    iVar45 = uVar19 + uVar17;
-                    uVar33 = uVar11 + iVar22 + uVar17;
-                    uVar17 = iVar45 + ((SInt32)(uVar11 * 3) >> 1);
-                    uVar19 = iVar45 + (UInt32)(pitch >> 1);
-                    uVar31 = (iVar12 * (UInt32)M<UInt16>(iVar23 + 0x570) * 5 >> 2) +
-                             M<SInt32>(iVar23 + 0x560);
-                    uVar28 = M<UInt16>(iVar23 + 0x570) + uVar31;
+                else if (chromaFormat == 3) {
+                  colorPitch = (UInt32)(pitch >> 2);
+                  if (parityFlag == 0) {
+                    fieldBytes5Over4 = (UInt32)(fieldSizeBytes * 5) >> 2;
+                    chromaBase = sourceOffset0 + fieldBytes5Over4;
+                    destOffset = firstPitch + fieldEndAddress + fieldBytes5Over4;
+                    sourceOffset2 = chromaBase + ((SInt32)(firstPitch * 3) >> 1);
+                    sourceOffset0 = chromaBase + (UInt32)(pitch >> 1);
+                    sourceOffset3 = (rectHeight * (UInt32)M<UInt16>(otherBufferInfo + 0x570) * 5 >> 2) +
+                             M<SInt32>(otherBufferInfo + 0x560);
+                    sourceOffset1 = M<UInt16>(otherBufferInfo + 0x570) + sourceOffset3;
                   }
                   else {
-                    otherPitch = M<UInt16>(iVar23 + 0x570);
-                    uVar17 = (UInt32)(iVar45 * 5) >> 2;
-                    uVar19 = uVar19 + uVar17;
-                    uVar33 = iVar22 + uVar17 + (UInt32)(pitch >> 1);
-                    uVar17 = uVar11 + uVar19;
-                    iVar12 = (iVar12 * (UInt32)otherPitch * 5 >> 2) + M<SInt32>(iVar23 + 0x560);
-                    uVar31 = iVar12 + ((SInt32)((UInt32)otherPitch * 3) >> 1);
-                    uVar28 = iVar12 + (UInt32)(otherPitch >> 1);
+                    otherPitch = M<UInt16>(otherBufferInfo + 0x570);
+                    fieldBytes5Over4 = (UInt32)(fieldSizeBytes * 5) >> 2;
+                    sourceOffset0 = sourceOffset0 + fieldBytes5Over4;
+                    destOffset = fieldEndAddress + fieldBytes5Over4 + (UInt32)(pitch >> 1);
+                    sourceOffset2 = firstPitch + sourceOffset0;
+                    secondFieldBase = (rectHeight * (UInt32)otherPitch * 5 >> 2) + M<SInt32>(otherBufferInfo + 0x560);
+                    sourceOffset3 = secondFieldBase + ((SInt32)((UInt32)otherPitch * 3) >> 1);
+                    sourceOffset1 = secondFieldBase + (UInt32)(otherPitch >> 1);
                   }
                 }
                 else {
-                  uVar21 = pitch >> 1 & 0x7ffe;
-                  if (uVar17 == 0) {
-                    uVar31 = M<UInt32>(iVar23 + 0x560);
-                    uVar33 = iVar22 + uVar11 * 2;
-                    uVar17 = uVar19 + uVar11 * 3;
-                    uVar19 = uVar19 + uVar11;
-                    uVar28 = uVar31 + (UInt32)M<UInt16>(iVar23 + 0x570) * 2;
+                  colorPitch = pitch >> 1 & 0x7ffe;
+                  if (parityFlag == 0) {
+                    sourceOffset3 = M<UInt32>(otherBufferInfo + 0x560);
+                    destOffset = fieldEndAddress + firstPitch * 2;
+                    sourceOffset2 = sourceOffset0 + firstPitch * 3;
+                    sourceOffset0 = sourceOffset0 + firstPitch;
+                    sourceOffset1 = sourceOffset3 + (UInt32)M<UInt16>(otherBufferInfo + 0x570) * 2;
                   }
                   else {
-                    uVar33 = uVar11 + iVar22;
-                    uVar17 = uVar19 + uVar11 * 2;
-                    uVar28 = M<SInt32>(iVar23 + 0x560) + (UInt32)M<UInt16>(iVar23 + 0x570);
-                    uVar31 = M<SInt32>(iVar23 + 0x560) + (UInt32)M<UInt16>(iVar23 + 0x570) * 3;
+                    destOffset = firstPitch + fieldEndAddress;
+                    sourceOffset2 = sourceOffset0 + firstPitch * 2;
+                    sourceOffset1 = M<SInt32>(otherBufferInfo + 0x560) + (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                    sourceOffset3 = M<SInt32>(otherBufferInfo + 0x560) + (UInt32)M<UInt16>(otherBufferInfo + 0x570) * 3;
                   }
                 }
               }
-              else if (uVar21 == 2) {
-                uVar21 = (UInt32)(pitch >> 2);
-                if (uVar17 == 0) {
-                  uVar17 = (UInt32)M<UInt16>(iVar23 + 0x570);
-                  uVar33 = iVar45 + iVar22 + (UInt32)(pitch >> 1);
-                  uVar19 = iVar12 * uVar17 + M<SInt32>(iVar23 + 0x560);
-                  uVar28 = uVar19 + (M<UInt16>(iVar23 + 0x570) >> 1);
-                  uVar31 = uVar19 + ((SInt32)(uVar17 * 3) >> 1);
-                  uVar17 = uVar17 + uVar19;
+              else if (chromaFormat == 2) {
+                colorPitch = (UInt32)(pitch >> 2);
+                if (parityFlag == 0) {
+                  otherRowPitch = (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                  destOffset = fieldSizeBytes + fieldEndAddress + (UInt32)(pitch >> 1);
+                  sourceOffset0 = rectHeight * otherRowPitch + M<SInt32>(otherBufferInfo + 0x560);
+                  sourceOffset1 = sourceOffset0 + (M<UInt16>(otherBufferInfo + 0x570) >> 1);
+                  sourceOffset3 = sourceOffset0 + ((SInt32)(otherRowPitch * 3) >> 1);
+                  sourceOffset2 = otherRowPitch + sourceOffset0;
                 }
                 else {
-                  uVar28 = (UInt32)M<UInt16>(iVar23 + 0x570);
-                  uVar33 = uVar11 + iVar45 + iVar22;
-                  uVar31 = iVar12 * uVar28 + M<SInt32>(iVar23 + 0x560);
-                  uVar19 = uVar31 + (M<UInt16>(iVar23 + 0x570) >> 1);
-                  uVar17 = uVar31 + ((SInt32)(uVar28 * 3) >> 1);
-                  uVar28 = uVar28 + uVar31;
+                  otherRowPitch2 = (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                  destOffset = firstPitch + fieldSizeBytes + fieldEndAddress;
+                  sourceOffset3 = rectHeight * otherRowPitch2 + M<SInt32>(otherBufferInfo + 0x560);
+                  sourceOffset0 = sourceOffset3 + (M<UInt16>(otherBufferInfo + 0x570) >> 1);
+                  sourceOffset2 = sourceOffset3 + ((SInt32)(otherRowPitch2 * 3) >> 1);
+                  sourceOffset1 = otherRowPitch2 + sourceOffset3;
                 }
               }
-              else if (uVar21 == 3) {
-                uVar21 = (UInt32)(pitch >> 2);
-                if (uVar17 == 0) {
-                  uVar17 = (UInt32)M<UInt16>(iVar23 + 0x570);
-                  uVar33 = iVar22 + ((UInt32)(iVar45 * 5) >> 2) + (UInt32)(pitch >> 1);
-                  uVar19 = (iVar12 * uVar17 * 5 >> 2) + M<SInt32>(iVar23 + 0x560);
-                  uVar28 = uVar19 + (M<UInt16>(iVar23 + 0x570) >> 1);
-                  uVar31 = uVar19 + ((SInt32)(uVar17 * 3) >> 1);
-                  uVar17 = uVar17 + uVar19;
+              else if (chromaFormat == 3) {
+                colorPitch = (UInt32)(pitch >> 2);
+                if (parityFlag == 0) {
+                  otherRowPitch = (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                  destOffset = fieldEndAddress + ((UInt32)(fieldSizeBytes * 5) >> 2) + (UInt32)(pitch >> 1);
+                  sourceOffset0 = (rectHeight * otherRowPitch * 5 >> 2) + M<SInt32>(otherBufferInfo + 0x560);
+                  sourceOffset1 = sourceOffset0 + (M<UInt16>(otherBufferInfo + 0x570) >> 1);
+                  sourceOffset3 = sourceOffset0 + ((SInt32)(otherRowPitch * 3) >> 1);
+                  sourceOffset2 = otherRowPitch + sourceOffset0;
                 }
                 else {
-                  uVar28 = (UInt32)M<UInt16>(iVar23 + 0x570);
-                  uVar33 = uVar11 + iVar22 + ((UInt32)(iVar45 * 5) >> 2);
-                  uVar31 = (iVar12 * uVar28 * 5 >> 2) + M<SInt32>(iVar23 + 0x560);
-                  uVar19 = uVar31 + (M<UInt16>(iVar23 + 0x570) >> 1);
-                  uVar17 = uVar31 + ((SInt32)(uVar28 * 3) >> 1);
-                  uVar28 = uVar28 + uVar31;
+                  otherRowPitch2 = (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                  destOffset = firstPitch + fieldEndAddress + ((UInt32)(fieldSizeBytes * 5) >> 2);
+                  sourceOffset3 = (rectHeight * otherRowPitch2 * 5 >> 2) + M<SInt32>(otherBufferInfo + 0x560);
+                  sourceOffset0 = sourceOffset3 + (M<UInt16>(otherBufferInfo + 0x570) >> 1);
+                  sourceOffset2 = sourceOffset3 + ((SInt32)(otherRowPitch2 * 3) >> 1);
+                  sourceOffset1 = otherRowPitch2 + sourceOffset3;
                 }
               }
               else {
-                uVar21 = pitch >> 1 & 0x7ffe;
-                if (uVar17 == 0) {
-                  uVar31 = (UInt32)M<UInt16>(iVar23 + 0x570);
-                  uVar19 = M<UInt32>(iVar23 + 0x560);
-                  uVar33 = uVar11 + iVar22;
-                  uVar28 = uVar19 + uVar31;
-                  uVar17 = uVar19 + uVar31 * 2;
-                  uVar31 = uVar19 + uVar31 * 3;
+                colorPitch = pitch >> 1 & 0x7ffe;
+                if (parityFlag == 0) {
+                  otherRowPitch3 = (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                  sourceOffset0 = M<UInt32>(otherBufferInfo + 0x560);
+                  destOffset = firstPitch + fieldEndAddress;
+                  sourceOffset1 = sourceOffset0 + otherRowPitch3;
+                  sourceOffset2 = sourceOffset0 + otherRowPitch3 * 2;
+                  sourceOffset3 = sourceOffset0 + otherRowPitch3 * 3;
                 }
                 else {
-                  uVar17 = (UInt32)M<UInt16>(iVar23 + 0x570);
-                  uVar31 = M<UInt32>(iVar23 + 0x560);
-                  uVar33 = iVar22 + uVar11 * 2;
-                  uVar19 = uVar31 + uVar17;
-                  uVar28 = uVar31 + uVar17 * 2;
-                  uVar17 = uVar31 + uVar17 * 3;
+                  otherRowPitch = (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+                  sourceOffset3 = M<UInt32>(otherBufferInfo + 0x560);
+                  destOffset = fieldEndAddress + firstPitch * 2;
+                  sourceOffset0 = sourceOffset3 + otherRowPitch;
+                  sourceOffset1 = sourceOffset3 + otherRowPitch * 2;
+                  sourceOffset2 = sourceOffset3 + otherRowPitch * 3;
                 }
               }
               *recordCursor = 0x1150;
-              uVar38 = M<UInt8>(iVar18 + 0x590) & 1;
-              uVar11 = (UInt32)(M<UInt8>(iVar18 + 0x590) >> 1);
-              uVar13 = (uVar11 & 3) << 3;
-              uVar35 = uVar38 << 2;
-              recordCursor[1] = uVar19 & 0xffffffe0 | uVar35 | uVar13;
+              tilingBitZero = M<UInt8>(firstBufferInfo + 0x590) & 1;
+              tilingByteHalf = (UInt32)(M<UInt8>(firstBufferInfo + 0x590) >> 1);
+              tilingBitsShifted3 = (tilingByteHalf & 3) << 3;
+              tilingBitZeroAt2 = tilingBitZero << 2;
+              recordCursor[1] = sourceOffset0 & 0xffffffe0 | tilingBitZeroAt2 | tilingBitsShifted3;
               recordCursor[2] = 0x1151;
-              uVar19 = (M<UInt8>(iVar23 + 0x590) & 1) << 2;
-              uVar36 = (M<UInt8>(iVar23 + 0x590) & 6) << 2;
-              recordCursor[3] = uVar28 & 0xffffffe0 | uVar19 | uVar36;
+              otherTilingBitZeroAt2 = (M<UInt8>(otherBufferInfo + 0x590) & 1) << 2;
+              otherTilingBitsShifted3 = (M<UInt8>(otherBufferInfo + 0x590) & 6) << 2;
+              recordCursor[3] = sourceOffset1 & 0xffffffe0 | otherTilingBitZeroAt2 | otherTilingBitsShifted3;
               recordCursor[4] = 0x1152;
-              recordCursor[5] = uVar13 | uVar35 | uVar17 & 0xffffffe0;
+              recordCursor[5] = tilingBitsShifted3 | tilingBitZeroAt2 | sourceOffset2 & 0xffffffe0;
               recordCursor[6] = 0x1153;
-              recordCursor[7] = uVar36 | uVar19 | uVar31 & 0xffffffe0;
+              recordCursor[7] = otherTilingBitsShifted3 | otherTilingBitZeroAt2 | sourceOffset3 & 0xffffffe0;
               recordCursor[8] = 0x1393;
               recordCursor[9] = 10;
               recordCursor[10] = 0x138a;
-              recordCursor[0xb] = uVar33 & 0xffffffe0;
+              recordCursor[0xb] = destOffset & 0xffffffe0;
               recordCursor[0xc] = 0x138e;
-              recordCursor[0xd] = uVar21 & 0x3ffe | uVar38 << 0x10 | (uVar11 & 3) << 0x11 |
-                             (M<UInt8>(iVar18 + 0x591) & 3) << 0x13 | 0xc00000;
+              recordCursor[0xd] = colorPitch & 0x3ffe | tilingBitZero << 0x10 | (tilingByteHalf & 3) << 0x11 |
+                             (M<UInt8>(firstBufferInfo + 0x591) & 3) << 0x13 | 0xc00000;
               recordWord = recordWord & 0xffffff;
             }
             goto LAB_0003903c;
           }
-          iVar12 = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
-          uVar17 = recordCursor[1];
-          uVar21 = recordCursor[4];
-          iVar18 = recordCursor[2] * 0x78 + iVar12;
-          iVar23 = iVar18;
+          boundSurface = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+          chromaFormat17 = recordCursor[1];
+          parityFlag17 = recordCursor[4];
+          firstBufferInfo = recordCursor[2] * 0x78 + boundSurface;
+          otherBufferInfo = firstBufferInfo;
           if (recordCursor[5] != 1) {
-            iVar23 = recordCursor[3] * 0x78 + iVar12;
+            otherBufferInfo = recordCursor[3] * 0x78 + boundSurface;
           }
-          pitch = M<UInt16>(iVar18 + 0x570);
-          uVar11 = (UInt32)pitch;
-          uVar19 = M<UInt32>(iVar18 + 0x560);
-          iVar45 = (SInt32)M<SInt16>(iVar12 + 0x9a) - (SInt32)M<SInt16>(iVar12 + 0x94);
-          iVar22 = iVar45 * uVar11;
-          iVar12 = uVar19 + ((UInt32)(iVar22 * 3) >> 1);
+          pitch = M<UInt16>(firstBufferInfo + 0x570);
+          firstPitch = (UInt32)pitch;
+          sourceOffset0 = M<UInt32>(firstBufferInfo + 0x560);
+          rectHeight17 = (SInt32)M<SInt16>(boundSurface + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(boundSurface + kATIR500Surface_overlayTop);
+          fieldSizeBytes17 = rectHeight17 * firstPitch;
+          fieldEndAddress17 = sourceOffset0 + ((UInt32)(fieldSizeBytes17 * 3) >> 1);
           if (recordCursor[5] != 1) {
-            if (uVar17 == 2) {
-              uVar17 = (UInt32)(pitch >> 2);
-              if (uVar21 == 0) {
-                iVar23 = uVar19 + iVar22;
-                uVar21 = uVar11 + iVar22 + iVar12;
-                uVar19 = iVar23 + (UInt32)(pitch >> 1);
-                uVar28 = iVar23 + ((SInt32)(uVar11 * 3) >> 1);
+            if (chromaFormat17 == 2) {
+              colorPitch17 = (UInt32)(pitch >> 2);
+              if (parityFlag17 == 0) {
+                chromaBase17 = sourceOffset0 + fieldSizeBytes17;
+                destOffset17 = firstPitch + fieldSizeBytes17 + fieldEndAddress17;
+                sourceOffset0 = chromaBase17 + (UInt32)(pitch >> 1);
+                sourceOffset1 = chromaBase17 + ((SInt32)(firstPitch * 3) >> 1);
               }
               else {
-                uVar19 = uVar19 + iVar22;
-                uVar28 = uVar11 + uVar19;
-                uVar21 = iVar22 + iVar12 + (UInt32)(pitch >> 1);
+                sourceOffset0 = sourceOffset0 + fieldSizeBytes17;
+                sourceOffset1 = firstPitch + sourceOffset0;
+                destOffset17 = fieldSizeBytes17 + fieldEndAddress17 + (UInt32)(pitch >> 1);
               }
             }
-            else if (uVar17 == 3) {
-              uVar17 = (UInt32)(pitch >> 2);
-              if (uVar21 == 0) {
-                uVar21 = (UInt32)(iVar22 * 5) >> 2;
-                iVar23 = uVar19 + uVar21;
-                uVar21 = uVar11 + iVar12 + uVar21;
-                uVar28 = iVar23 + ((SInt32)(uVar11 * 3) >> 1);
-                uVar19 = iVar23 + (UInt32)(pitch >> 1);
+            else if (chromaFormat17 == 3) {
+              colorPitch17 = (UInt32)(pitch >> 2);
+              if (parityFlag17 == 0) {
+                fieldBytes5Over4For17 = (UInt32)(fieldSizeBytes17 * 5) >> 2;
+                chromaBase17 = sourceOffset0 + fieldBytes5Over4For17;
+                destOffset17 = firstPitch + fieldEndAddress17 + fieldBytes5Over4For17;
+                sourceOffset1 = chromaBase17 + ((SInt32)(firstPitch * 3) >> 1);
+                sourceOffset0 = chromaBase17 + (UInt32)(pitch >> 1);
               }
               else {
-                uVar21 = (UInt32)(iVar22 * 5) >> 2;
-                uVar19 = uVar19 + uVar21;
-                uVar21 = iVar12 + uVar21 + (UInt32)(pitch >> 1);
-                uVar28 = uVar11 + uVar19;
+                fieldBytes5Over4For17 = (UInt32)(fieldSizeBytes17 * 5) >> 2;
+                sourceOffset0 = sourceOffset0 + fieldBytes5Over4For17;
+                destOffset17 = fieldEndAddress17 + fieldBytes5Over4For17 + (UInt32)(pitch >> 1);
+                sourceOffset1 = firstPitch + sourceOffset0;
               }
             }
             else {
-              uVar17 = pitch >> 1 & 0x7ffe;
-              if (uVar21 == 0) {
-                uVar21 = iVar12 + uVar11 * 2;
-                uVar28 = uVar19 + uVar11 * 3;
-                uVar19 = uVar19 + uVar11;
+              colorPitch17 = pitch >> 1 & 0x7ffe;
+              if (parityFlag17 == 0) {
+                destOffset17 = fieldEndAddress17 + firstPitch * 2;
+                sourceOffset1 = sourceOffset0 + firstPitch * 3;
+                sourceOffset0 = sourceOffset0 + firstPitch;
               }
               else {
-                uVar21 = uVar11 + iVar12;
-                uVar28 = uVar19 + uVar11 * 2;
+                destOffset17 = firstPitch + fieldEndAddress17;
+                sourceOffset1 = sourceOffset0 + firstPitch * 2;
               }
             }
           }
-          else if (uVar17 == 2) {
-            uVar17 = (UInt32)(pitch >> 2);
-            if (uVar21 == 0) {
-              uVar21 = iVar22 + iVar12 + (UInt32)(pitch >> 1);
-              uVar19 = iVar45 * (UInt32)M<UInt16>(iVar23 + 0x570) + M<SInt32>(iVar23 + 0x560);
-              uVar28 = M<UInt16>(iVar23 + 0x570) + uVar19;
+          else if (chromaFormat17 == 2) {
+            colorPitch17 = (UInt32)(pitch >> 2);
+            if (parityFlag17 == 0) {
+              destOffset17 = fieldSizeBytes17 + fieldEndAddress17 + (UInt32)(pitch >> 1);
+              sourceOffset0 = rectHeight17 * (UInt32)M<UInt16>(otherBufferInfo + 0x570) + M<SInt32>(otherBufferInfo + 0x560);
+              sourceOffset1 = M<UInt16>(otherBufferInfo + 0x570) + sourceOffset0;
             }
             else {
-              pitch = M<UInt16>(iVar23 + 0x570);
-              uVar21 = uVar11 + iVar22 + iVar12;
-              iVar23 = iVar45 * (UInt32)pitch + M<SInt32>(iVar23 + 0x560);
-              uVar28 = iVar23 + ((SInt32)((UInt32)pitch * 3) >> 1);
-              uVar19 = iVar23 + (UInt32)(pitch >> 1);
+              pitch = M<UInt16>(otherBufferInfo + 0x570);
+              destOffset17 = firstPitch + fieldSizeBytes17 + fieldEndAddress17;
+              secondFieldBase17 = rectHeight17 * (UInt32)pitch + M<SInt32>(otherBufferInfo + 0x560);
+              sourceOffset1 = secondFieldBase17 + ((SInt32)((UInt32)pitch * 3) >> 1);
+              sourceOffset0 = secondFieldBase17 + (UInt32)(pitch >> 1);
             }
           }
-          else if (uVar17 == 3) {
-            uVar17 = (UInt32)(pitch >> 2);
-            if (uVar21 == 0) {
-              uVar21 = iVar12 + ((UInt32)(iVar22 * 5) >> 2) + (UInt32)(pitch >> 1);
-              uVar19 = (iVar45 * (UInt32)M<UInt16>(iVar23 + 0x570) * 5 >> 2) +
-                       M<SInt32>(iVar23 + 0x560);
-              uVar28 = M<UInt16>(iVar23 + 0x570) + uVar19;
+          else if (chromaFormat17 == 3) {
+            colorPitch17 = (UInt32)(pitch >> 2);
+            if (parityFlag17 == 0) {
+              destOffset17 = fieldEndAddress17 + ((UInt32)(fieldSizeBytes17 * 5) >> 2) + (UInt32)(pitch >> 1);
+              sourceOffset0 = (rectHeight17 * (UInt32)M<UInt16>(otherBufferInfo + 0x570) * 5 >> 2) +
+                       M<SInt32>(otherBufferInfo + 0x560);
+              sourceOffset1 = M<UInt16>(otherBufferInfo + 0x570) + sourceOffset0;
             }
             else {
-              pitch = M<UInt16>(iVar23 + 0x570);
-              uVar21 = uVar11 + iVar12 + ((UInt32)(iVar22 * 5) >> 2);
-              iVar23 = (iVar45 * (UInt32)pitch * 5 >> 2) + M<SInt32>(iVar23 + 0x560);
-              uVar28 = iVar23 + ((SInt32)((UInt32)pitch * 3) >> 1);
-              uVar19 = iVar23 + (UInt32)(pitch >> 1);
+              pitch = M<UInt16>(otherBufferInfo + 0x570);
+              destOffset17 = firstPitch + fieldEndAddress17 + ((UInt32)(fieldSizeBytes17 * 5) >> 2);
+              secondFieldBase17 = (rectHeight17 * (UInt32)pitch * 5 >> 2) + M<SInt32>(otherBufferInfo + 0x560);
+              sourceOffset1 = secondFieldBase17 + ((SInt32)((UInt32)pitch * 3) >> 1);
+              sourceOffset0 = secondFieldBase17 + (UInt32)(pitch >> 1);
             }
           }
           else {
-            uVar17 = pitch >> 1 & 0x7ffe;
-            if (uVar21 == 0) {
-              uVar19 = M<UInt32>(iVar23 + 0x560);
-              uVar21 = uVar11 + iVar12;
-              uVar28 = uVar19 + (UInt32)M<UInt16>(iVar23 + 0x570) * 2;
+            colorPitch17 = pitch >> 1 & 0x7ffe;
+            if (parityFlag17 == 0) {
+              sourceOffset0 = M<UInt32>(otherBufferInfo + 0x560);
+              destOffset17 = firstPitch + fieldEndAddress17;
+              sourceOffset1 = sourceOffset0 + (UInt32)M<UInt16>(otherBufferInfo + 0x570) * 2;
             }
             else {
-              uVar21 = iVar12 + uVar11 * 2;
-              uVar19 = M<SInt32>(iVar23 + 0x560) + (UInt32)M<UInt16>(iVar23 + 0x570);
-              uVar28 = M<SInt32>(iVar23 + 0x560) + (UInt32)M<UInt16>(iVar23 + 0x570) * 3;
+              destOffset17 = fieldEndAddress17 + firstPitch * 2;
+              sourceOffset0 = M<SInt32>(otherBufferInfo + 0x560) + (UInt32)M<UInt16>(otherBufferInfo + 0x570);
+              sourceOffset1 = M<SInt32>(otherBufferInfo + 0x560) + (UInt32)M<UInt16>(otherBufferInfo + 0x570) * 3;
             }
           }
           *recordCursor = 0x1150;
-          uVar33 = M<UInt8>(iVar18 + 0x590) & 1;
-          uVar11 = (UInt32)(M<UInt8>(iVar18 + 0x590) >> 1);
-          uVar35 = (uVar11 & 3) << 3;
-          uVar31 = uVar33 << 2;
-          recordCursor[1] = uVar19 & 0xffffffe0 | uVar31 | uVar35;
+          tilingBitZero17 = M<UInt8>(firstBufferInfo + 0x590) & 1;
+          tilingByteHalf = (UInt32)(M<UInt8>(firstBufferInfo + 0x590) >> 1);
+          tilingBitsShifted317 = (tilingByteHalf & 3) << 3;
+          tilingBitZeroAt217 = tilingBitZero17 << 2;
+          recordCursor[1] = sourceOffset0 & 0xffffffe0 | tilingBitZeroAt217 | tilingBitsShifted317;
           recordCursor[2] = 0x1151;
-          recordCursor[3] = uVar35 | uVar31 | uVar28 & 0xffffffe0;
+          recordCursor[3] = tilingBitsShifted317 | tilingBitZeroAt217 | sourceOffset1 & 0xffffffe0;
           recordCursor[4] = 0x1393;
           recordCursor[5] = 10;
           recordCursor[6] = 0x138a;
-          recordCursor[7] = uVar21 & 0xffffffe0;
+          recordCursor[7] = destOffset17 & 0xffffffe0;
           recordCursor[8] = 0x138e;
-          bVar44 = M<UInt8>(iVar18 + 0x591);
-          uVar17 = uVar17 & 0x3ffe | uVar33 << 0x10 | (uVar11 & 3) << 0x11;
+          tilingByte1 = M<UInt8>(firstBufferInfo + 0x591);
+          colorPitchWord = colorPitch17 & 0x3ffe | tilingBitZero17 << 0x10 | (tilingByteHalf & 3) << 0x11;
 LAB_00038870:
-          recordCursor[9] = uVar17 | (bVar44 & 3) << 0x13 | 0xc00000;
+          recordCursor[9] = colorPitchWord | (tilingByte1 & 3) << 0x13 | 0xc00000;
         }
         else if (((uVar17 == 0x1b000000) || (uVar17 == 0x1c000000)) || (uVar17 == 0x1a000000))
         goto LAB_00037620;
@@ -1730,8 +1773,8 @@ joined_r0x000381c4:
                 recordCursor[6] = 0x138a;
                 recordCursor[7] = M<UInt32>(targetBufferInfo + 0xb0) & 0xffffffe0;
                 recordCursor[8] = 0x138e;
-                bVar44 = M<UInt8>(targetBufferInfo + 0xe1);
-                uVar17 = M<UInt16>(targetBufferInfo + 0xc0) >> 2 & 0x3ffe |
+                tilingByte1 = M<UInt8>(targetBufferInfo + 0xe1);
+                colorPitchWord = M<UInt16>(targetBufferInfo + 0xc0) >> 2 & 0x3ffe |
                          (M<UInt8>(targetBufferInfo + 0xe0) & 1) << 0x10 |
                          (M<UInt8>(targetBufferInfo + 0xe0) & 6) << 0x10;
                 goto LAB_00038870;
