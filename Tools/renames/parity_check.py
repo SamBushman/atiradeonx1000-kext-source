@@ -86,6 +86,8 @@ def main():
         if b and b['verdict'] == 'PASS':
             if b['cycles_rebuilt'] and c['cycles_rebuilt'] > b['cycles_rebuilt'] * (1 + a.max_slowdown):
                 bad.append('%s: estimated cycles %d -> %d (+%.1f%%)' % (name, b['cycles_rebuilt'], c['cycles_rebuilt'], 100.0 * (c['cycles_rebuilt'] / b['cycles_rebuilt'] - 1)))
+            if c.get('inconclusive', 0) > b.get('inconclusive', 0) or c['runs'] < b['runs']:
+                bad.append('%s: fewer conclusive runs (%d runs, %d inconclusive -> %d runs, %d inconclusive)' % (name, b['runs'], b.get('inconclusive', 0), c['runs'], c.get('inconclusive', 0)))
             cb, cc = b.get('coverage_rebuilt'), c.get('coverage_rebuilt')
             if cb is not None and cc is not None and cc + 1e-9 < cb - 0.01:
                 bad.append('%s: coverage %.0f%% -> %.0f%%' % (name, 100 * cb, 100 * cc))

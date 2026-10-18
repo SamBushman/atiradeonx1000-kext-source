@@ -490,6 +490,7 @@ class Machine:
     def _read_code(self, uc, access, addr, size, value, ud):
         if self.own[0] <= addr < self.own[1]:
             return                # the function's own extent holds its jump tables
+        if os.environ.get('DT_WILD'): print('WILD %s read %x/%d' % (self.image.label, addr, size), file=sys.stderr)
         self.bad_read = True      # the function read machine code as data: a garbage pointer in the test world
 
     def _trace_read(self, uc, access, addr, size, value, ud):
@@ -823,7 +824,10 @@ def compare(case, st, rb, strict_order=False, strict_calls=False):
         for i in range(min(len(st.events), len(rb.events))):         # both ran out of budget: the observable part so far must still agree
             if st.events[i] != rb.events[i]:
                 return ['before the budget ran out, event #%d differs: stock %s, rebuilt %s' % (i, fmt_event(st.events[i]), fmt_event(rb.events[i]))]
-    if st.status in ('TIMEOUT', 'NULLCALL') or rb.status in ('TIMEOUT', 'NULLCALL') or st.bad_read or rb.bad_read:
+    inc = lambda o: o.status in ('TIMEOUT', 'NULLCALL') or o.bad_read
+    if inc(st) != inc(rb):                    # one side completes, the other runs away or reads a wild pointer: that is a divergence, not an unusable input
+        return ['only %s finished: stock %s%s, rebuilt %s%s' % ('rebuilt' if inc(st) else 'stock', st.status, ' (wild read)' if st.bad_read else '', rb.status, ' (wild read)' if rb.bad_read else '')]
+    if inc(st) or inc(rb):
         return ['INCONCLUSIVE']          # budget exceeded, or a wild pointer in the test world (a read of machine code as data, a store into it): not comparable
     if st.status == 'FAULT' and rb.status == 'FAULT':
         # both dereferenced a wild pointer the test world handed them: the state they leave behind is not a result, but what they did BEFORE it

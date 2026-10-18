@@ -35,6 +35,8 @@ def header_return(cls, meth):
 OPTIONS = {
     # no register access in the shipped function (checked in its disassembly): a plain buffer behind +0x860, so soup pointers that land in it are not 'hardware'
     'ATIRadeonX1000::SWDSWriteBlitToCmdBuf': dict(no_mmio=True),
+    # polls a status word that never changes in the soup world: the bounded loop costs more instructions per pass in the shipped code, so give both sides room to finish
+    'ATIRadeonX1000::submit_empty_buffer': dict(limit=400000),
     'IOATIR500GLContext::set_surface': dict(ignore_args={'setCompatibleSurfaceMode': [3]}),
 }
 
