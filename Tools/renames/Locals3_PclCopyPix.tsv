@@ -1,0 +1,40 @@
+# PclCopyPix function-wide temporaries split by role (use rows)
+use	::pcl_CopyPix	fVar2	dstX	INFERRED	params+0x54 float: left of the destination quad (viewport centre = (dstX+dstRight)/2, packet word 0xc6)	fVar2 = M<float>\(paramsBytes \+ 0x54\);	if \(fVar10 != FLOAT_0004c370\) \{@-1
+use	::pcl_CopyPix	fVar2	dstX	INFERRED	same value in the single-quad path	if \(uVar38 != 0\) \{@-2	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar5	dstY	INFERRED	params+0x58 float: top of the destination quad (viewport centre y)	fVar2 = M<float>\(paramsBytes \+ 0x54\);@1	fVar5 = \(float\)\(\(double\)CONCAT44d\(0x43300000,chunkTop \^ 0x80000000\) \- DOUBLE_0004c3a8\);
+use	::pcl_CopyPix	fVar5	dstY	INFERRED	same value in the single-quad path	if \(uVar38 != 0\) \{@-2	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar7	dstRight	INFERRED	dstX + params+0x5c (width)	fVar7 = fVar2 \+ fVar4;	fVar7 = fVar14;
+use	::pcl_CopyPix	fVar7	dstRight	INFERRED	same value in the single-quad path	if \(uVar38 != 0\) \{@-2	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar3	dstBottom	INFERRED	dstY + params+0x60 (height)	fVar3 = fVar5 \+ fVar6;	fVar3 = fVar6;
+use	::pcl_CopyPix	fVar3	dstBottom	INFERRED	same value in the single-quad path	if \(uVar38 != 0\) \{@-2	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar8	srcPerDstX	INFERRED	rect[2] / params+0x5c: source texels per destination unit, negated for the horizontal flip	fVar8 = FLOAT_0004c370;	fVar8 = fVar19;
+use	::pcl_CopyPix	fVar8	srcPerDstX	INFERRED	same value in the single-quad path	if \(uVar38 != 0\) \{@-2	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar10	srcPerDstY	INFERRED	rect[3] / params+0x60, negated for the vertical flip	fVar10 = FLOAT_0004c370;	fVar10 = fVar16;
+use	::pcl_CopyPix	fVar10	srcPerDstY	INFERRED	same value in the single-quad path	if \(uVar38 != 0\) \{@-2	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar9	srcOffsetX	INFERRED	srcX = dstX * srcPerDstX + srcOffsetX maps destination x to source x; reflected when flipped	fVar9 = \-\(fVar8 \* fVar2 \- fVar4\);	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar18	srcOffsetY	INFERRED	likewise for y	fVar18 = \-\(fVar5 \* fVar10 \- fVar6\);	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar4	srcRectX	INFERRED	(float)rect[0], the source rectangle's x	fVar4 = \(float\)\(\(double\)CONCAT44d\(0x43300000,\(SInt32\)\*rect \^ 0x80000000\) \- DOUBLE_0004c3a8\);	fVar4 = fVar2 \* fVar8 \+ fVar9;
+use	::pcl_CopyPix	fVar6	srcRectY	INFERRED	(float)rect[1], the source rectangle's y	fVar6 = \(float\)\(\(double\)CONCAT44d\(0x43300000,\(SInt32\)rect\[1\] \^ 0x80000000\) \- DOUBLE_0004c3a8\);	\- DOUBLE_0004c3a8\) \- \(fVar18 \- fVar6\);@1
+use	::pcl_CopyPix	fVar14	srcMinX	INFERRED	zero-chunk case: bounding box of the source area is empty	fVar14 = FLOAT_0004c370;	fVar14 = fVar10 \* fVar5 \+ fVar18;
+use	::pcl_CopyPix	fVar6	srcMaxX	INFERRED	zero-chunk case	\- DOUBLE_0004c3a8\) \- \(fVar18 \- fVar6\);@1	fVar14 = fVar10 \* fVar5 \+ fVar18;
+use	::pcl_CopyPix	fVar16	srcMaxY	INFERRED	zero-chunk case	fVar14 = FLOAT_0004c370;	fVar14 = fVar10 \* fVar5 \+ fVar18;
+use	::pcl_CopyPix	fVar19	srcMinY	INFERRED	zero-chunk case	fVar14 = FLOAT_0004c370;	fVar14 = fVar10 \* fVar5 \+ fVar18;
+use	::pcl_CopyPix	fVar14	srcMinX	INFERRED	smaller of the mapped left/right edges: bounding box of the quad in source space (chunk counts derive from it)	fVar14 = fVar4;	if \(uVar38 != 0\) \{@-2
+use	::pcl_CopyPix	fVar6	srcMaxX	INFERRED	larger of the mapped left/right edges	fVar6 = fVar7 \* fVar8 \+ fVar9;	if \(uVar38 != 0\) \{@-2
+use	::pcl_CopyPix	fVar19	srcMinY	INFERRED	smaller of the mapped top/bottom edges	fVar19 = fVar14;	if \(uVar38 != 0\) \{@-2
+use	::pcl_CopyPix	fVar16	srcMaxY	INFERRED	larger of the mapped top/bottom edges	fVar16 = fVar10 \* fVar3 \+ fVar18;	if \(uVar38 != 0\) \{@-2
+use	::pcl_CopyPix	fVar4	dstPerSrcX	INFERRED	1 / srcPerDstX: maps a source x back to the destination	if \(fVar8 != FLOAT_0004c370\) \{@-1	if \(uVar38 != 0\) \{@-2
+use	::pcl_CopyPix	fVar2	dstPerSrcY	INFERRED	1 / srcPerDstY	if \(fVar10 != FLOAT_0004c370\) \{@-1	if \(uVar38 != 0\) \{@-2
+use	::pcl_CopyPix	fVar5	chunkTopF	CONFIRMED	(float)chunkTop, computed from chunkTop in the line above	fVar5 = \(float\)\(\(double\)CONCAT44d\(0x43300000,chunkTop \^ 0x80000000\) \- DOUBLE_0004c3a8\);	\} while \(columnsLeft != 0\);@1
+use	::pcl_CopyPix	fVar3	invChunkWidth	INFERRED	1 / chunk width (uVar28), the texture-coordinate scale of the chunk quad	fVar3 = FLOAT_0004c370;	\} while \(columnsLeft != 0\);
+use	::pcl_CopyPix	fVar11	invChunkHeight	INFERRED	1 / chunk height (uVar41)	fVar11 = FLOAT_0004c370;	\} while \(columnsLeft != 0\);
+use	::pcl_CopyPix	fVar22	halfHeight	INFERRED	(maxY-minY)*0.5, low halfword of packet word 10 (the single-quad path stores the same pair as halfHeight)	fVar22 = \(fVar17 \- fVar20\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
+use	::pcl_CopyPix	fVar21	halfWidth	INFERRED	(maxX-minX)*0.5, high halfword of packet word 10	fVar21 = \(fVar10 \- fVar15\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
+use	::pcl_CopyPix	fVar17	centerY	INFERRED	(minY+maxY)*0.5, packet word 0xe	fVar17 = \(fVar20 \+ fVar17\) \* FLOAT_0004c380;	\} while \(columnsLeft != 0\);	1,3
+use	::pcl_CopyPix	fVar10	centerX	INFERRED	(minX+maxX)*0.5, packet word 0xd	fVar10 = \(fVar15 \+ fVar10\) \* FLOAT_0004c380;	\} while \(columnsLeft != 0\);	1,3
+use	::pcl_CopyPix	fVar4	invCopyWidth	CONFIRMED	1 / (float)copyWidth: the texture-coordinate scale of the single quad	if \(uVar38 != 0\) \{@-1	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar6	invCopyHeight	CONFIRMED	1 / (float)copyHeight	if \(uVar23 != 0\) \{@-1	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar16	halfWidth	INFERRED	(dstRight-dstX)*0.5, high halfword of packet word 0xc3	fVar16 = \(fVar7 \- fVar2\) \* FLOAT_0004c37c;	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar14	halfHeight	INFERRED	(dstBottom-dstY)*0.5, low halfword of packet word 0xc3	fVar14 = \(fVar3 \- fVar5\) \* FLOAT_0004c37c;	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar11	centerY	INFERRED	(dstY+dstBottom)*0.5, packet word 199	fVar11 = \(fVar5 \+ fVar3\) \* FLOAT_0004c380;	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar19	centerX	INFERRED	(dstX+dstRight)*0.5, packet word 0xc6	fVar19 = \(fVar2 \+ fVar7\) \* FLOAT_0004c380;	uVar38 = cmd\[0xaa\];
