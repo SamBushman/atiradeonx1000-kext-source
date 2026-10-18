@@ -1,0 +1,12 @@
+# shape_surface round 2: scales, heights and the per-buffer loop of the first shaping pass
+#!use-decl: end
+use	ATIR500Surface::shape_surface@0x3c130	iVar23	widthScale	INFERRED	horizontal sample multiplier of the buffers (1, 2, 4 or 6 from the multisample bits of the window mode) - used for the buffer record widths	LAB_0003c260:@1	iVar9 = M<SInt32>\(iVar23 \+ 0x13c\);@-1
+use	ATIR500Surface::shape_surface@0x3c130	uVar24	bytesPerPixel	CONFIRMED	1 << the format table's size field: bytes per pixel of the chosen colour/depth format (the later bytesPerPixel segment is the same quantity for the overlay buffers)	uVar24 = 1 << \(uVar7 >> 0xc \& 7\);	uVar24 = \(UInt32\)sVar18;
+use	ATIR500Surface::shape_surface@0x3c130	uVar26	bufferSlot	CONFIRMED	the buffer id (6, 7 or 8) of the loop over the three shaped buffers; the byte offset of its 0x78-byte record is bufferSlot * 0x78	uVar26 = \(UInt32\)bufferIds\[iVar16\];	if \(\(modeBits \& 0x20\) == 0\) \{@1
+use	ATIR500Surface::shape_surface@0x3c130	iVar9	bufferWidthScale	INFERRED	widthScale for buffer 6, 1 for the others	iVar9 = iVar23;	iVar9 = \(SInt32\)sVar2;
+use	ATIR500Surface::shape_surface@0x3c130	iVar25	rowWidth	CONFIRMED	surface width, +0x18 for buffer 6 of a 0x700000-mode window: the width the row bytes are computed from	iVar25 = surfaceWidth;	if \(\(rowBytes \& 0xff\) != 0\) \{
+use	ATIR500Surface::shape_surface@0x3c130	uVar19	surfaceHeight	CONFIRMED	the surface height from the +height field	rowBytes = iVar9 \* rowBytes;@-1	uVar19 = uVar13;
+use	ATIR500Surface::shape_surface@0x3c130	uVar8	alignedHeight	CONFIRMED	surfaceHeight rounded up to a multiple of 32	uVar8 = uVar19;	iVar9 = M<SInt32>\(iVar23 \+ 0x13c\);@-2
+use	ATIR500Surface::shape_surface@0x3c130	iVar25	storageBytes	CONFIRMED	bufferHeightScale * alignedHeight * rowBytes: the backing-store size compared with and stored to the record's +0xb8	iVar25 = bufferHeightScale \* uVar8 \* rowBytes;	self\[bufferRecordOffset \+ 0xe0\] = AVar22;
+def	ATIR500Surface::shape_surface@0x3c130	iVar14	surfaceWidth	CONFIRMED	(SInt32) the surface width field, read once per loop iteration
+def	ATIR500Surface::shape_surface@0x3c130	iVar27	bufferRecordOffset	CONFIRMED	bufferSlot * 0x78: the byte offset of the buffer's record (+0xa8..)

@@ -47,7 +47,7 @@ void ATIR500Surface::shape_surface() {
   SInt32 *piVar11;
   UInt8 AVar12;
   UInt32 uVar13;
-  SInt32 iVar14;
+  SInt32 surfaceWidth;
   UInt8 *pAVar15;
   SInt32 iVar16;
   SInt16 sVar18;
@@ -60,7 +60,7 @@ void ATIR500Surface::shape_surface() {
   UInt32 uVar24;
   SInt32 iVar25;
   UInt32 uVar26;
-  SInt32 iVar27;
+  SInt32 bufferRecordOffset;
   UInt32 uVar28;
   UInt32 uVar29;
   UInt8 bufferIds [8];
@@ -81,6 +81,12 @@ void ATIR500Surface::shape_surface() {
   UInt32 shapeMask;
   UInt32 alignedHeight;
   UInt32 overlayHeight;
+  SInt32 widthScale;
+  UInt32 bufferSlot;
+  SInt32 bufferWidthScale;
+  SInt32 rowWidth;
+  UInt32 surfaceHeight;
+  SInt32 storageBytes;
   
   M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb94) = 1;
   windowMode = M<UInt32>(self + kIOATIR500Surface_modeBits);
@@ -95,7 +101,7 @@ void ATIR500Surface::shape_surface() {
   }
   if ((windowMode & 0x7c0000) == 0) {
 LAB_0003c260:
-    iVar23 = 1;
+    widthScale = 1;
     heightScale = 1;
   }
   else {
@@ -104,35 +110,35 @@ LAB_0003c260:
       uVar7 = windowMode & 0xc0000;
       if (uVar7 == 0) goto LAB_0003c260;
       if (uVar7 == 0x40000) {
-        iVar23 = 1;
+        widthScale = 1;
         heightScale = 2;
       }
       else if (uVar7 == 0x80000) {
-        iVar23 = 2;
+        widthScale = 2;
         heightScale = 2;
       }
       else {
-        iVar23 = 1;
+        widthScale = 1;
         heightScale = 1;
       }
-      if (0x1000 < (UInt32)(iVar23 * M<SInt16>(self + kIOATIR500Surface_width))) {
-        iVar23 = 1;
+      if (0x1000 < (UInt32)(widthScale * M<SInt16>(self + kIOATIR500Surface_width))) {
+        widthScale = 1;
       }
       if (0x1000 < heightScale * (SInt32)M<SInt16>(self + kIOATIR500Surface_height)) {
         heightScale = 1;
       }
     }
     else if (uVar7 == 0x200000) {
-      iVar23 = 4;
+      widthScale = 4;
       heightScale = 1;
     }
     else if (uVar7 == 0x400000) {
-      iVar23 = 6;
+      widthScale = 6;
       heightScale = 1;
     }
     else {
       if (uVar7 != 0x100000) goto LAB_0003c260;
-      iVar23 = 2;
+      widthScale = 2;
       heightScale = 1;
     }
   }
@@ -148,7 +154,7 @@ LAB_0003c260:
       iVar16 = 0x10;
     }
     uVar7 = FormatTableLookup_0x0004d2dc(iVar16 * 0x1c);
-    uVar24 = 1 << (uVar7 >> 0xc & 7);
+    bytesPerPixel = 1 << (uVar7 >> 0xc & 7);
     if (M<SInt16>(self + kIOATIR500Surface_height) < 0x20) {
       if (AVar22 == 0x5) {
         AVar22 = 0x4;
@@ -162,75 +168,75 @@ LAB_0003c260:
     bufferIds[1] = 7;
     bufferIds[2] = 8;
     do {
-      uVar26 = (UInt32)bufferIds[iVar16];
-      if ((shapeMask >> (uVar26 & 0x3f) & 1) != 0) {
+      bufferSlot = (UInt32)bufferIds[iVar16];
+      if ((shapeMask >> (bufferSlot & 0x3f) & 1) != 0) {
         bufferHeightScale = heightScale;
-        iVar9 = iVar23;
-        if (uVar26 != 6) {
+        bufferWidthScale = widthScale;
+        if (bufferSlot != 6) {
           bufferHeightScale = 1;
-          iVar9 = 1;
+          bufferWidthScale = 1;
         }
-        iVar14 = (SInt32)M<SInt16>(self + kIOATIR500Surface_width);
-        iVar25 = iVar14;
-        if (((windowMode & 0x700000) != 0) && (uVar26 == 6)) {
-          iVar25 = iVar14 + 0x18;
+        surfaceWidth = (SInt32)M<SInt16>(self + kIOATIR500Surface_width);
+        rowWidth = surfaceWidth;
+        if (((windowMode & 0x700000) != 0) && (bufferSlot == 6)) {
+          rowWidth = surfaceWidth + 0x18;
         }
-        rowBytes = iVar25 * uVar24;
+        rowBytes = rowWidth * bytesPerPixel;
         if ((rowBytes & 0xff) != 0) {
           rowBytes = (rowBytes & 0xffffff00) + 0x100;
         }
-        uVar19 = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
-        rowBytes = iVar9 * rowBytes;
-        uVar8 = uVar19;
-        if ((uVar19 & 0x1f) != 0) {
-          uVar8 = (uVar19 - (SInt32)(SInt16)(M<SInt16>(self + kIOATIR500Surface_height) +
-                                        (SInt16)(((SInt32)uVar19 >> 5) +
-                                               (UInt32)((SInt32)uVar19 < 0 && (uVar19 & 0x1f) != 0)) *
+        surfaceHeight = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
+        rowBytes = bufferWidthScale * rowBytes;
+        alignedHeight = surfaceHeight;
+        if ((surfaceHeight & 0x1f) != 0) {
+          alignedHeight = (surfaceHeight - (SInt32)(SInt16)(M<SInt16>(self + kIOATIR500Surface_height) +
+                                        (SInt16)(((SInt32)surfaceHeight >> 5) +
+                                               (UInt32)((SInt32)surfaceHeight < 0 && (surfaceHeight & 0x1f) != 0)) *
                                         -0x20)) + 0x20;
         }
-        iVar27 = uVar26 * 0x78;
-        iVar25 = bufferHeightScale * uVar8 * rowBytes;
-        if (((uVar24 != M<UInt16>(self + iVar27 + 0xbe)) ||
-            ((UInt32)M<UInt16>(self + iVar27 + 0xc4) != iVar9 * iVar14)) ||
-           ((UInt32)M<UInt16>(self + iVar27 + 0xc6) != bufferHeightScale * uVar19)) {
-          if (M<SInt32>(self + iVar27 + 0xcc) != 0) {
-            ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + iVar27 + 0xa8)));
+        bufferRecordOffset = bufferSlot * 0x78;
+        storageBytes = bufferHeightScale * alignedHeight * rowBytes;
+        if (((bytesPerPixel != M<UInt16>(self + bufferRecordOffset + 0xbe)) ||
+            ((UInt32)M<UInt16>(self + bufferRecordOffset + 0xc4) != bufferWidthScale * surfaceWidth)) ||
+           ((UInt32)M<UInt16>(self + bufferRecordOffset + 0xc6) != bufferHeightScale * surfaceHeight)) {
+          if (M<SInt32>(self + bufferRecordOffset + 0xcc) != 0) {
+            ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + bufferRecordOffset + 0xa8)));
           }
-          if (iVar25 != M<SInt32>(self + iVar27 + 0xb8)) {
-            VCALL(M<SInt32>(self), 0x5cc)(self,uVar26);
-            M<SInt32>(self + iVar27 + 0xb8) = iVar25;
+          if (storageBytes != M<SInt32>(self + bufferRecordOffset + 0xb8)) {
+            VCALL(M<SInt32>(self), 0x5cc)(self,bufferSlot);
+            M<SInt32>(self + bufferRecordOffset + 0xb8) = storageBytes;
           }
-          if (uVar24 == 0) {
-            M<UInt16>(self + iVar27 + 0xbc) = 0;
+          if (bytesPerPixel == 0) {
+            M<UInt16>(self + bufferRecordOffset + 0xbc) = 0;
           }
           else {
-            M<SInt16>(self + iVar27 + 0xbc) = (SInt16)(rowBytes / uVar24);
+            M<SInt16>(self + bufferRecordOffset + 0xbc) = (SInt16)(rowBytes / bytesPerPixel);
           }
-          M<SInt16>(self + iVar27 + 0xc0) = (SInt16)rowBytes;
-          M<SInt16>(self + iVar27 + 0xbe) = (SInt16)uVar24;
-          M<SInt16>(self + iVar27 + 0xc4) = (SInt16)iVar9 * M<SInt16>(self + kIOATIR500Surface_width);
-          M<SInt16>(self + iVar27 + 0xc6) = (SInt16)bufferHeightScale * M<SInt16>(self + kIOATIR500Surface_height);
+          M<SInt16>(self + bufferRecordOffset + 0xc0) = (SInt16)rowBytes;
+          M<SInt16>(self + bufferRecordOffset + 0xbe) = (SInt16)bytesPerPixel;
+          M<SInt16>(self + bufferRecordOffset + 0xc4) = (SInt16)bufferWidthScale * M<SInt16>(self + kIOATIR500Surface_width);
+          M<SInt16>(self + bufferRecordOffset + 0xc6) = (SInt16)bufferHeightScale * M<SInt16>(self + kIOATIR500Surface_height);
         }
-        self[iVar27 + 0xe0] = AVar22;
-        self[iVar27 + 0xe1] = ((UInt8)(uVar7 >> 10) & 3);
-        self[iVar27 + 0xe3] = ((UInt8)(uVar7 >> 3) & 0x1f);
-        self[iVar27 + 0xe2] = AVar12;
+        self[bufferRecordOffset + 0xe0] = AVar22;
+        self[bufferRecordOffset + 0xe1] = ((UInt8)(uVar7 >> 10) & 3);
+        self[bufferRecordOffset + 0xe3] = ((UInt8)(uVar7 >> 3) & 0x1f);
+        self[bufferRecordOffset + 0xe2] = AVar12;
         if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) {
           if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0xc0000) == 0) {
-            M<UInt32>(self + iVar27 + 0xe4) =
-                 M<UInt32>(self + iVar27 + 0xe4) & 0xff000fff | 0x111000;
+            M<UInt32>(self + bufferRecordOffset + 0xe4) =
+                 M<UInt32>(self + bufferRecordOffset + 0xe4) & 0xff000fff | 0x111000;
           }
           else {
-            M<UInt32>(self + iVar27 + 0xe4) =
+            M<UInt32>(self + bufferRecordOffset + 0xe4) =
                  (bufferHeightScale & 0xf) << 0xc |
-                 iVar9 << 0x10 | M<UInt32>(self + iVar27 + 0xe4) & 0xff000fff | 0x100000;
+                 bufferWidthScale << 0x10 | M<UInt32>(self + bufferRecordOffset + 0xe4) & 0xff000fff | 0x100000;
           }
         }
         else {
-          M<UInt32>(self + iVar27 + 0xe4) =
-               iVar9 << 0x14 | M<UInt32>(self + iVar27 + 0xe4) & 0xff000fff | 0x11000;
+          M<UInt32>(self + bufferRecordOffset + 0xe4) =
+               bufferWidthScale << 0x14 | M<UInt32>(self + bufferRecordOffset + 0xe4) & 0xff000fff | 0x11000;
         }
-        M<UInt32>(self + iVar27 + 0xe4) = M<UInt32>(self + iVar27 + 0xe4) | 0x800;
+        M<UInt32>(self + bufferRecordOffset + 0xe4) = M<UInt32>(self + bufferRecordOffset + 0xe4) | 0x800;
         windowMode = M<UInt32>(self + kIOATIR500Surface_modeBits);
         shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
       }
@@ -273,7 +279,7 @@ LAB_0003c52c:
   bytesPerPixel = 1 << (formatEntry >> 0xc & 7);
   if ((shapeMask & 0x200) != 0) {
     if (((bytesPerPixel != M<UInt16>(self + kIOATIR500Surface_buffer9BytesPerRow)) ||
-        ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9HeightOrRows) != iVar23 * M<SInt16>(self + kIOATIR500Surface_width))) ||
+        ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9HeightOrRows) != widthScale * M<SInt16>(self + kIOATIR500Surface_width))) ||
        ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9Extra1e) != heightScale * (SInt32)M<SInt16>(self + kIOATIR500Surface_height))) {
       if (M<SInt32>(self + kIOATIR500Surface_buffer9BackingStore) != 0) {
         ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + kIOATIR500Surface_buffer9)));
@@ -289,7 +295,7 @@ LAB_0003c52c:
         pitchBytes = (pitchBytes & 0xffffff00) + 0x100;
       }
       sVar18 = M<SInt16>(self + kIOATIR500Surface_height);
-      pitchBytes = iVar23 * pitchBytes;
+      pitchBytes = widthScale * pitchBytes;
       uVar24 = (UInt32)sVar18;
       if ((uVar24 & 0x1f) != 0) {
         uVar24 = (uVar24 - (SInt32)(SInt16)(sVar18 + (SInt16)(((SInt32)uVar24 >> 5) +
@@ -313,7 +319,7 @@ LAB_0003c52c:
       }
       M<SInt16>(self + kIOATIR500Surface_buffer9Pitch) = (SInt16)pitchBytes;
       M<SInt16>(self + kIOATIR500Surface_buffer9BytesPerRow) = (SInt16)bytesPerPixel;
-      M<SInt16>(self + kIOATIR500Surface_buffer9HeightOrRows) = (SInt16)iVar23 * sVar2;
+      M<SInt16>(self + kIOATIR500Surface_buffer9HeightOrRows) = (SInt16)widthScale * sVar2;
       M<SInt16>(self + kIOATIR500Surface_buffer9Extra1e) = (SInt16)heightScale * sVar18;
     }
     self[0x518] = AVar12;
@@ -327,11 +333,11 @@ LAB_0003c52c:
       else {
         M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) =
              (heightScale & 0xf) << 0xc |
-             iVar23 << 0x10 | M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x100000;
+             widthScale << 0x10 | M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x100000;
       }
     }
     else {
-      M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) = iVar23 << 0x14 | M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x11000;
+      M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) = widthScale << 0x14 | M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x11000;
     }
   }
   GH_memcpy(mipOffsets,kShapeSurfaceDefaultMipTable,0x38);
