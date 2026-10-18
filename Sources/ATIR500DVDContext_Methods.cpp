@@ -50,49 +50,49 @@ bool ATIR500DVDContext::start(IOService *provider) {
         return false;
     }
     U32At(self, 0x14c) = 0;
-    U32At(self, 0x150) = 0;
-    U32At(self, 0x154) = 0;
-    U32At(self, 0x158) = 0;
-    U32At(self, 0x15c) = 0;
-    U32At(self, 0x160) = reinterpret_cast<UInt32>(DVDSubM_safeMetaCast(
+    U32At(self, kATIR500DVDContext_idctTimeStampCounter) = 0;
+    U32At(self, kATIR500DVDContext_idctTimeStamp) = 0;
+    U32At(self, kATIR500DVDContext_scissorTopLeft) = 0;
+    U32At(self, kATIR500DVDContext_scissorBottomRight) = 0;
+    U32At(self, kATIR500DVDContext_macrovisionFramebuffer) = reinterpret_cast<UInt32>(DVDSubM_safeMetaCast(
         reinterpret_cast<void *>(U32At(provider, 0xd4)), DVDSubM_IONDRVFramebuffer_metaClass));
     reinterpret_cast<ATIRadeonX1000 *>(provider)->start_xdct_engine();
-    U32At(reinterpret_cast<void *>(U32At(self, 0xa4)), 0x1c) = 9;
-    U32At(reinterpret_cast<void *>(U32At(self, 0xa4)), 0x40) = 0x1000000;
+    U32At(reinterpret_cast<void *>(U32At(self, kIOATIR500DVDContext_commandBufferHeader)), 0x1c) = 9;
+    U32At(reinterpret_cast<void *>(U32At(self, kIOATIR500DVDContext_commandBufferHeader)), 0x40) = 0x1000000;
     U16At(self, 0x174) = 1;
     U16At(self, 400) = 1;
     U16At(self, 0x1b0) = 1;
-    U32At(self, 0x164) = 0;
-    U32At(self, 0x1a0) = 0;
-    U32At(self, 0x168) = 0;
+    U32At(self, kATIR500DVDContext_lumaBufferToggle) = 0;
+    U32At(self, kATIR500DVDContext_chromaBufferToggle) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer0) = 0;
     U32At(self, 0x16c) = 0;
-    U32At(self, 0x170) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer0Descriptor) = 0;
     U16At(self, 0x176) = 0;
-    U32At(self, 0x178) = 0;
-    U32At(self, 0x17c) = 0;
-    U32At(self, 0x180) = 0;
-    U32At(self, 0x184) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer0Stamp) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer0Header) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer0Size) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer1) = 0;
     U32At(self, 0x188) = 0;
-    U32At(self, 0x18c) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer1Descriptor) = 0;
     U16At(self, 0x192) = 0;
-    U32At(self, 0x194) = 0;
-    U32At(self, 0x198) = 0;
-    U32At(self, 0x19c) = 0;
-    U32At(self, 0x1a4) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer1Stamp) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer1Header) = 0;
+    U32At(self, kATIR500DVDContext_idctLumaBuffer1Size) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer0) = 0;
     U32At(self, 0x1a8) = 0;
-    U32At(self, 0x1ac) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer0Descriptor) = 0;
     U16At(self, 0x1b2) = 0;
-    U32At(self, 0x1b4) = 0;
-    U32At(self, 0x1b8) = 0;
-    U32At(self, 0x1bc) = 0;
-    U32At(self, 0x1c0) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer0Stamp) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer0Header) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer0Size) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer1) = 0;
     U32At(self, 0x1c4) = 0;
-    U32At(self, 0x1c8) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer1Descriptor) = 0;
     U16At(self, 0x1ce) = 0;
     U16At(self, 0x1cc) = 1;
-    U32At(self, 0x1d8) = 0;
-    U32At(self, 0x1d0) = 0;
-    U32At(self, 0x1d4) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer1Size) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer1Stamp) = 0;
+    U32At(self, kATIR500DVDContext_idctChromaBuffer1Header) = 0;
     if (accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer0), 0x80000) &&
         accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer1), 0x80000) &&
         accelerator->allocCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer0), 0x80000) &&
@@ -111,16 +111,16 @@ void ATIR500DVDContext::stop(IOService *provider) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(provider) + 0x840);
     DVDSubM_lock(lock);
     IOATIR500DVDContext::stop(provider);
-    if (U32At(self, 0x170) != 0) {
+    if (U32At(self, kATIR500DVDContext_idctLumaBuffer0Descriptor) != 0) {
         accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer0));
     }
-    if (U32At(self, 0x18c) != 0) {
+    if (U32At(self, kATIR500DVDContext_idctLumaBuffer1Descriptor) != 0) {
         accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctLumaBuffer1));
     }
-    if (U32At(self, 0x1ac) != 0) {
+    if (U32At(self, kATIR500DVDContext_idctChromaBuffer0Descriptor) != 0) {
         accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer0));
     }
-    if (U32At(self, 0x1c8) != 0) {
+    if (U32At(self, kATIR500DVDContext_idctChromaBuffer1Descriptor) != 0) {
         accelerator->freeCommandBuffer(reinterpret_cast<VendorCommandBuffer *>(self + kATIR500DVDContext_idctChromaBuffer1));
     }
     reinterpret_cast<ATIRadeonX1000 *>(provider)->stop_xdct_engine();
@@ -146,29 +146,29 @@ IOExternalMethod *ATIR500DVDContext::getTargetAndMethodForIndex(IOService **targ
 }
 
 void ATIR500DVDContext::invalidate() {
-    U32At(reinterpret_cast<void *>(U32At(this, 0xc0)), 0x1c) |= 1;
+    U32At(reinterpret_cast<void *>(U32At(this, kIOATIR500DVDContext_contextBufferHeader)), 0x1c) |= 1;
 }
 
 void ATIR500DVDContext::build_scissor() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(reinterpret_cast<void *>(U32At(self, 0xc0)), 0x1c) |= 1;
-    UInt16 bottom = U16At(reinterpret_cast<void *>(U32At(self, 0xf8)), 0x576);
-    UInt16 right = U16At(reinterpret_cast<void *>(U32At(self, 0xf8)), 0x574);
-    U32At(self, 0x158) = 0;
-    U32At(self, 0x15c) = (right & 0x3fff) | (static_cast<UInt32>(bottom & 0x3fff) << 16);
+    U32At(reinterpret_cast<void *>(U32At(self, kIOATIR500DVDContext_contextBufferHeader)), 0x1c) |= 1;
+    UInt16 bottom = U16At(reinterpret_cast<void *>(U32At(self, kIOATIR500DVDContext_boundSurface)), 0x576);
+    UInt16 right = U16At(reinterpret_cast<void *>(U32At(self, kIOATIR500DVDContext_boundSurface)), 0x574);
+    U32At(self, kATIR500DVDContext_scissorTopLeft) = 0;
+    U32At(self, kATIR500DVDContext_scissorBottomRight) = (right & 0x3fff) | (static_cast<UInt32>(bottom & 0x3fff) << 16);
 }
 
 void ATIR500DVDContext::update_surface() {
-    if (U32At(this, 0xf8) != 0) {
+    if (U32At(this, kIOATIR500DVDContext_boundSurface) != 0) {
         build_scissor();
     }
 }
 
 /* Real: waits (accelerator vtable +0x558) for this context's last stamp; always returns 0. */
 IOReturn ATIR500DVDContext::finish() {
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(this, 0x8c));
+    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(this, kIOATIR500DVDContext_accelerator));
     UInt32 waited = U32At(accel, 0x7ac);
-    SInt32 delta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<UInt8 **>(accel) + 0x558))(accel, U32At(this, 0x7c));
+    SInt32 delta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<UInt8 **>(accel) + 0x558))(accel, U32At(this, kIOATIR500DVDContext_lastSubmitStamp));
     U32At(accel, 0x7ac) = waited + delta;
     return 0;
 }

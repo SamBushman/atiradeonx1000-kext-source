@@ -108,7 +108,7 @@ extern "C" void GLContext_mutex_unlock(void *) asm("_IOLockUnlock");
  */
 IOReturn IOATIR500GLContext::set_surface_volatile_state(UInt32 state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(self, 0xc4) = state;
+    U32At(self, kIOATIR500GLContext_unknown_0xc4) = state;
     IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(self + kIOATIR500GLContext_boundSurface);
     if (surface != nullptr) {
         surface->set_volatile_state(static_cast<eSurfaceVolatileState>(state));

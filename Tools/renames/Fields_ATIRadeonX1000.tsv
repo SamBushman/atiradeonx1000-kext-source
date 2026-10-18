@@ -2,7 +2,7 @@
 # row: field  CLASSES  OFFSET  name  tier  evidence      (constants land in the generated Headers/FieldOffsets.h as kIOATIR500Accelerator_<name>)
 # Direct `self + 0xOFF` accesses only; other objects' fields reached through pointers (M<int>(self + 0xd4) + 0x5f0 ...) are not renamed here.
 # Offsets already named in Fields_IOATIR500Accelerator.tsv (the base-class table owns the constant) are not repeated here.
-field	IOATIR500Accelerator,ATIRadeonX1000	0xf4	framebuffer2	CONFIRMED	set_display_mode_and_vram: second framebuffer, same two vtable calls
+field	IOATIR500Accelerator,ATIRadeonX1000	0xf4	framebuffer1	CONFIRMED	second 0x20-byte framebuffer record (index 1 of the table at 0xd4 + index*0x20, indexed by displayCount 0xcc): set_display_mode_and_vram queries it with vtable +0x5f0/+0x5ec like record 0
 field	IOATIR500Accelerator,ATIRadeonX1000	0x12c	scanout1Buffer	CONFIRMED	embedded scanout record 1 (address passed to ATIR500Memory::reserve)
 field	IOATIR500Accelerator,ATIRadeonX1000	0x130	scanout1BufferElementPrev	INFERRED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
 field	IOATIR500Accelerator,ATIRadeonX1000	0x134	scanout1BufferGpuBaseAddress	CONFIRMED	embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMask), size at +0x10; set_display_mode_and_vram fills it from the D1 registers and IOPixelInformation (activeWidth/Height)
@@ -183,4 +183,4 @@ field	IOATIR500Accelerator,ATIRadeonX1000	0xc50	chipID	CONFIRMED	getChipID retur
 field	IOATIR500Accelerator,ATIRadeonX1000	0xc54	chipRev	CONFIRMED	getChipRev returns it; start(): chip revision word (live-verified 0xc); setupR520Pipes tests < 4
 field	IOATIR500Accelerator,ATIRadeonX1000	0xc58	unknown_0xc58	UNKNOWN	start() zeroes it; no reader found
 field	IOATIR500Accelerator,ATIRadeonX1000	0xc5c	gartFlushScratch	INFERRED	addToPCIeGART/removeFromPCIeGART/reserveInGART: register 0x130 read-back, set bit 0x8000000, written back, then the last entry re-read (a posted-write flush)
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xd4: framebuffer1 (not framebuffer0) - set_display_mode_and_vram: fFramebuffers[0].framebuffer - vtable +0x5f0 getCurrentDisplayMode, +0x5ec getPixelInformation
+# RESOLVED: 0xd4 stays framebuffer0 and 0xf4 is framebuffer1. Every user indexes the table 0-based as `accel + index*0x20 + 0xd4` (foundFramebuffer, getVRAMDescriptor, the DVD set_macrovision and 2D display-attribute loops, callPlatformFunction), so 0xd4 is element 0 and 0xf4 element 1.

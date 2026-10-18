@@ -411,10 +411,10 @@ LAB_0001c54c:
   uVar16 = M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddress);
   uVar13 = M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressB);
   if (((((bVar1 & 1) == 0) || (M<UInt32>(self + kIOATIR500Accelerator_vramSize) <= uVar16)) ||
-      (queryResult = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer2), 0x5f0)
-                          (M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer2),&L.f8,&L.f4), queryResult != 0)) ||
-     (queryResult = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer2), 0x5ec)
-                         (M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer2),L.f8,L.f4,0,L.pix), queryResult != 0)) {
+      (queryResult = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer1), 0x5f0)
+                          (M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer1),&L.f8,&L.f4), queryResult != 0)) ||
+     (queryResult = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer1), 0x5ec)
+                         (M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer1),L.f8,L.f4,0,L.pix), queryResult != 0)) {
     uVar16 = 0;
     uVar14 = 0x200000;
     M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferSize) = 0;

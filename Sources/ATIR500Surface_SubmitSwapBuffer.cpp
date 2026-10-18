@@ -57,7 +57,7 @@ bool PrepareSlot(ATIR500Surface *surface, UInt8 *self, UInt32 panel, UInt32 slot
     if (U32At(self, slotOffset + 0xc44) == 0) {
         return surface->allocAllSlaveSwapBuffers(panel, U32At(self, panel * 0x94 + 0xcb0)) != 0;
     }
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
+    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR500Surface_accelerator));
     UInt32 waited = U32At(accel, 0x788);
     SInt32 delta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<UInt8 **>(accel) + 0x54c))(accel, U32At(self, slotOffset + 0xc4c));
     U32At(accel, 0x788) = waited + delta;
@@ -72,20 +72,20 @@ void CopyHeader(UInt8 *dst, UInt8 *src) {
 
 /* after the stamp is known: record it and, with SWDS active and a pending flag, in the accelerator's per-panel table */
 void RecordSubmit(UInt8 *self, UInt8 *pV, UInt32 panel, UInt32 stamp, bool checkFlag) {
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
+    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR500Surface_accelerator));
     U32At(pV, 0x10) = stamp;
-    U32At(self, 0x80) = stamp;
+    U32At(self, kIOATIR500Surface_submittedStamp) = stamp;
     U32At(accel, panel * 0x20 + 0xec) = stamp;
-    accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
+    accel = reinterpret_cast<UInt8 *>(U32At(self, kIOATIR500Surface_accelerator));
     if (U8At(accel, 0x9b0) != 0 && (!checkFlag || U32At(reinterpret_cast<void *>(U32At(pV, 0x14)), 0) != 0)) {
         if (U32At(accel, panel * 0x18 + 0xb10) == 0) {
             if (U32At(accel, 0x894) != 0 && U32At(accel, (panel == 0 ? 1u : 0u) * 0x18 + 0xb10) != 0) {
-                U32At(accel, (panel == 0 ? 1u : 0u) * 4 + 0xad4) = U32At(self, 0x80);
-                U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0x78) = 0;
+                U32At(accel, (panel == 0 ? 1u : 0u) * 4 + 0xad4) = U32At(self, kIOATIR500Surface_submittedStamp);
+                U32At(reinterpret_cast<void *>(U32At(self, kIOATIR500Surface_accelerator)), 0x78) = 0;
             }
         } else {
-            U32At(accel, panel * 4 + 0xad4) = U32At(self, 0x80);
-            U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0x78) = 0;
+            U32At(accel, panel * 4 + 0xad4) = U32At(self, kIOATIR500Surface_submittedStamp);
+            U32At(reinterpret_cast<void *>(U32At(self, kIOATIR500Surface_accelerator)), 0x78) = 0;
         }
     }
 }

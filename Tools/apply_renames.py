@@ -359,17 +359,20 @@ def apply_fields(field_rows, root, read, files, errors):
     for c, sp in spans.items():
         offs = {int(o, 16): n for (cc, o), n in by_off.items() if cc == c}
         pat = re.compile(r'\b(self|param_1)(\s*\+\s*)(0x[0-9a-fA-F]+|[0-9]+)\b(?!\s*[\]\*])')       # Ghidra prints some offsets in decimal (self + 200 = 0xc8)
+        pat_acc = re.compile(r'\b(?:U8At|U16At|U32At|F32At)\(\s*(?:self|this|param_1)\s*,\s*(0x[0-9a-fA-F]+|[0-9]+)\s*\)')
         for (f, st, en) in sp:
             s = read(f); scope = s[st:en]; out, i, ch = [], 0, False
-            for m in pat.finditer(scope):
-                o = int(m.group(3), 0 if m.group(3).lower().startswith('0x') else 10)
+            ms = [(m, m.start(3), m.end(3), m.group(3)) for m in pat.finditer(scope)]
+            ms += [(m, m.start(1), m.end(1), m.group(1)) for m in pat_acc.finditer(scope)]       # U32At(self, 0x118) in the hand-written files
+            for (m, ms_, me_, lit) in sorted(ms, key=lambda x: x[1]):
+                o = int(lit, 0 if lit.lower().startswith('0x') else 10)
                 if o not in offs: continue
                 sk = None
                 # leave comments and string literals alone
                 ls = scope.rfind('\n', 0, m.start()) + 1
                 if '//' in scope[ls:m.start()]: continue
                 if scope.rfind('/*', 0, m.start()) > scope.rfind('*/', 0, m.start()): continue
-                out.append((m.start(3), m.end(3), offs[o])); ch = True
+                out.append((ms_, me_, offs[o])); ch = True
             if ch:
                 new = scope
                 for (a, b, r) in sorted(out, reverse=True): new = new[:a] + r + new[b:]

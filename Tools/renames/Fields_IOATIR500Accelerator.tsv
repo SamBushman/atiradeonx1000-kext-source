@@ -201,3 +201,6 @@ field	IOATIR500Accelerator	0x83c	gartTable	CONFIRMED	IOATIR500Accelerator_SmallM
 field	IOATIR500Accelerator,ATIRadeonX1000	0x840	commandLock	CONFIRMED	start: IOLockAlloc() stored here; garbage_collector/gart_collector/system_will_sleep lock it; stop frees it
 field	IOATIR500Accelerator,ATIRadeonX1000	0x844	gartEmptyEntry	CONFIRMED	IOATIR500Accelerator_SmallMethods.cpp: "+0x844 empty entry"; clearInGART stores it, addToMinMaxGART scans for it
 field	IOATIR500Accelerator,ATIRadeonX1000	0x848	gartReservedEntry	CONFIRMED	IOATIR500Accelerator_SmallMethods.cpp: "+0x848 reserved entry"; reserveInGART stores it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x80	active	INFERRED	byte; IOATIR5002DContext::lock_memory/swap loops sleep until `accelerator+0x80 != 0`, callPlatformFunction reports the device as down (0x640000 = 100% busy) while it is 0
+field	IOATIR500Accelerator,ATIRadeonX1000	0x83	sleeping	CONFIRMED	byte; system_will_sleep sets it to 1 and system_did_wake clears it, both under the command lock
+field	IOATIR500Accelerator,ATIRadeonX1000	0x84	cacheLineSize	CONFIRMED	byte; flush_memory_for_in/out use it as the dcbf stride and line mask

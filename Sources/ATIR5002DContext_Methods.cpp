@@ -45,11 +45,11 @@ bool ATIR5002DContext::start(IOService *provider) {
     TwoDC_lock(lock);
     bool started = IOATIR5002DContext::start(provider);
     if (started) {
-        U32At(self, 0x128) = 0;
-        U32At(self, 0x124) = 0;
-        U32At(reinterpret_cast<void *>(U32At(self, 0xac)), 0x1c) = 9;
-        U32At(reinterpret_cast<void *>(U32At(self, 0xac)), 0x40) = 0x1000000;
-        U32At(self, 0x120) = reinterpret_cast<UInt32>(kTwoDRegisterMethods);
+        U32At(self, kATIR5002DContext_unknown_0x128) = 0;
+        U32At(self, kATIR5002DContext_unknown_0x124) = 0;
+        U32At(reinterpret_cast<void *>(U32At(self, kIOATIR5002DContext_commandBufferHeader)), 0x1c) = 9;
+        U32At(reinterpret_cast<void *>(U32At(self, kIOATIR5002DContext_commandBufferHeader)), 0x40) = 0x1000000;
+        U32At(self, kATIR5002DContext_registerMethodTable) = reinterpret_cast<UInt32>(kTwoDRegisterMethods);
     }
     TwoDC_unlock(lock);
     return started;
@@ -67,12 +67,12 @@ IOExternalMethod *ATIR5002DContext::getTargetAndMethodForIndex(IOService **targe
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     *target = this;
     if (selector < 0x10) {
-        return reinterpret_cast<IOExternalMethod *>(selector * 0x18 + U32At(self, 0x10c));
+        return reinterpret_cast<IOExternalMethod *>(selector * 0x18 + U32At(self, kIOATIR5002DContext_baseMethodTable));
     }
     if (selector > 0x12) {
         return nullptr;
     }
-    return reinterpret_cast<IOExternalMethod *>(selector * 0x18 + U32At(self, 0x120) - 0x180);
+    return reinterpret_cast<IOExternalMethod *>(selector * 0x18 + U32At(self, kATIR5002DContext_registerMethodTable) - 0x180);
 }
 
 IOReturn ATIR5002DContext::get_buffer_info(IOATIR500Surface *surface, UInt32 index, void *info, UInt32 *infoSize) {
@@ -126,7 +126,7 @@ IOReturn ATIR5002DContext::get_buffer_info(IOATIR500Surface *surface, UInt32 ind
 
 /* Real: a tail call into vtable +0x5b4 (get_buffer_info) with the bound surface and fallback index. */
 IOReturn ATIR5002DContext::set_destination(void *info, UInt32 *infoSize) {
-    return get_buffer_info(boundSurface, U32At(this, 0x110), info, infoSize);
+    return get_buffer_info(boundSurface, U32At(this, kIOATIR5002DContext_panelIndex), info, infoSize);
 }
 
 void ATIR5002DContext::load_image(VendorTextureBuffer *texture) {
@@ -134,7 +134,7 @@ void ATIR5002DContext::load_image(VendorTextureBuffer *texture) {
 }
 
 void ATIR5002DContext::invalidate() {
-    U32At(reinterpret_cast<void *>(U32At(this, 200)), 0x1c) |= 1;
+    U32At(reinterpret_cast<void *>(U32At(this, kIOATIR5002DContext_contextBufferHeader)), 0x1c) |= 1;
 }
 
 /* (re-ported mechanically: see ATIR5002DContext_submit_context_buffer_Port.cpp) */

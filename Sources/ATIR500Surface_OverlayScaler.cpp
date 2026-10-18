@@ -340,7 +340,7 @@ void ATIR500Surface::calc_h_scaler_blank(OverlaySurfaceInfo *infoIn, OverlayBand
 UInt32 ATIR500Surface::bad_panel(void) {
     typedef void *(*GetPropertyFn)(void *, const char *);
     typedef UInt32 *(*GetBytesFn)(void *);
-    void *provider = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(this, 0xd50)), 0x74));
+    void *provider = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(this, kIOATIR500Surface_accelerator)), 0x74));
     void *property = (*reinterpret_cast<GetPropertyFn *>(*reinterpret_cast<UInt8 **>(provider) + 0x188))(provider, "display-family");
     if (property != nullptr) {
         UInt32 *bytes = (*reinterpret_cast<GetBytesFn *>(*reinterpret_cast<UInt8 **>(property) + 0x100))(property);

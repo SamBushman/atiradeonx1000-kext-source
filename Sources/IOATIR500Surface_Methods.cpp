@@ -53,8 +53,8 @@ inline void ReleaseObj(void *obj) {
 
 void IOATIR500Surface::free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (U32At(self, 0xc04) != 0) {
-        SurfM_IOLockFree(reinterpret_cast<void *>(U32At(self, 0xc04)));
+    if (U32At(self, kIOATIR500Surface_lock) != 0) {
+        SurfM_IOLockFree(reinterpret_cast<void *>(U32At(self, kIOATIR500Surface_lock)));
     }
     OSObject::free();
 }

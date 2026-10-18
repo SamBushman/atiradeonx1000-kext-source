@@ -148,3 +148,16 @@ field	IOATIR500GLContext	0x294	started	CONFIRMED	start() clears it and sets it t
 field	IOATIR500GLContext,ATIR500GLContext	0x298	surfaceIndex	INFERRED	set_surface's third argument (unknown_0x298); read_buffer passes it as the `index` argument of copy_from_buffer (before the mip level)
 field	IOATIR500GLContext,ATIR500GLContext	0x29c	mipLevel	CONFIRMED	Headers/IOATIR500GLContext.h mipLevel; set_surface's mipLevel argument; read_buffer passes it as copy_from_buffer's level
 field	IOATIR500GLContext,ATIR500GLContext	0x2a0	regularMethodTable	CONFIRMED	Headers/IOATIR500GLContext.h: start() stores kGLRegularMethods; getTargetAndMethodForIndex returns selector*0x18 + it
+field	IOATIR5002DContext,ATIR5002DContext	0x80	nextLiveContext	CONFIRMED	stop() unlinks: previous->+0x80 = self->+0x80 and the accelerator list head (+0x64) = self->+0x80; start links self at the head (same list as the GL/DVD contexts)
+field	IOATIR5002DContext,ATIR5002DContext	0x84	unknown_0x84	UNKNOWN	zeroed in start (neighbour of sharedAllocator +0x88), never read by any ported function
+field	IOATIR5002DContext,ATIR5002DContext	0x90	unknown_0x90	UNKNOWN	halfword zeroed in start, never read by any ported function
+field	IOATIR5002DContext,ATIR5002DContext	0x92	surfaceBackingReplaced	INFERRED	byte; cleared at the start of the texture-attach method and set to 1 only after attach_buffer_backing_store swapped the bound surface's buffer backing store
+field	IOATIR5002DContext,ATIR5002DContext	0x93	unknown_0x93	UNKNOWN	byte zeroed in start, never read by any ported function
+field	IOATIR5002DContext,ATIR5002DContext	0x104	mappedDescriptor	CONFIRMED	lock_memory stores surface+0xc00 here when it maps the surface and re-maps when it no longer equals surface+0xc00
+field	IOATIR5002DContext,ATIR5002DContext	0x108	started	CONFIRMED	start sets it to 1 after the method table is installed, stop clears it, and the free path tests it
+field	IOATIR5002DContext,ATIR5002DContext	0x10c	baseMethodTable	CONFIRMED	getTargetAndMethodForIndex returns selector*0x18 + this+0x10c for selectors 0-15; start stores kTwoDBaseMethods
+field	IOATIR5002DContext,ATIR5002DContext	0x118	surfaceMemoryMap	CONFIRMED	the IOMemoryMap lock_memory gets from the descriptor (vtable +0x14c, then +0xd0 for the address) and releases through vtable +0x18
+field	IOATIR5002DContext,ATIR5002DContext	0x11c	surfaceMapAddress	CONFIRMED	virtual address of surfaceMemoryMap; lock_memory returns it plus the range offset in *outAddress
+field	ATIR5002DContext	0x120	registerMethodTable	CONFIRMED	getTargetAndMethodForIndex serves selectors 16-18 from selector*0x18 + this+0x120 - 0x180; start stores kTwoDRegisterMethods
+field	ATIR5002DContext	0x124	unknown_0x124	UNKNOWN	zeroed in start next to registerMethodTable, never read by any ported function
+field	ATIR5002DContext	0x128	unknown_0x128	UNKNOWN	zeroed in start, never read by any ported function

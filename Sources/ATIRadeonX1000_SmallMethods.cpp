@@ -42,7 +42,7 @@ void ATIRadeonX1000::free() {
 
 /* Real: property `name` of the sensor provider (this+0x9a4) as OSData; returns its bytes (a big-endian period pair). */
 void *ATIRadeonX1000::getPeriodValue(char *name) {
-    void *provider = reinterpret_cast<void *>(U32At(this, 0x9a4));
+    void *provider = reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_gpuSensorProvider));
     if (provider != nullptr) {
         void *property = (*reinterpret_cast<FnProp *>(*reinterpret_cast<UInt8 **>(provider) + 0x188))(provider, name);
         void *data = SmallX_safeMetaCast(property, GH_OSData_metaClass);
@@ -57,16 +57,16 @@ void *ATIRadeonX1000::getPeriodValue(char *name) {
  * fixed point (0x640000 = 100.0 while the device is down); anything else goes to the base implementation. */
 IOReturn ATIRadeonX1000::callPlatformFunction(const OSSymbol *function, bool waitForFunction, void *param1, void *param2,
                                               void *param3, void *param4) {
-    if (U32At(this, 0x9ac) == reinterpret_cast<UInt32>(function) && U32At(this, 0x9a4) != 0) {
-        if (U8At(this, 0x80) == 0) {
+    if (U32At(this, kIOATIR500Accelerator_gpuSensorFunction) == reinterpret_cast<UInt32>(function) && U32At(this, kIOATIR500Accelerator_gpuSensorProvider) != 0) {
+        if (U8At(this, kIOATIR500Accelerator_active) == 0) {
             *reinterpret_cast<UInt32 *>(param2) = 0x640000;
             return 0;
         }
-        UInt32 samples = U32At(this, 0x9a0);
+        UInt32 samples = U32At(this, kIOATIR500Accelerator_gpuSensorSampleCount);
         UInt32 fixed = 0;
         if (samples != 0) {
             disable_GPUSensor();
-            UInt32 busy = U32At(this, 0x99c);
+            UInt32 busy = U32At(this, kIOATIR500Accelerator_gpuSensorBusyCount);
             enable_GPUSensor();
             fixed = ((busy * 100) / samples) << 16;
         }
@@ -78,7 +78,7 @@ IOReturn ATIRadeonX1000::callPlatformFunction(const OSSymbol *function, bool wai
 
 void ATIRadeonX1000::writePerformanceStats(OSDictionary *dictionary) {
     IOATIR500Accelerator::writePerformanceStats(dictionary);
-    UInt32 freeBytes = reinterpret_cast<ATIR500Memory *>(U32At(this, 0x7c))->total_free();
+    UInt32 freeBytes = reinterpret_cast<ATIR500Memory *>(U32At(this, kIOATIR500Accelerator_vramPool))->total_free();
     OSNumber *number = OSNumber::withNumber(static_cast<unsigned long long>(freeBytes), 0x20);
     if (number != nullptr) {
         dictionary->setObject("vramFreeBytes", number);
@@ -111,7 +111,7 @@ void ATIRadeonX1000::unmapVendorTransferBuffer(VendorTransferBuffer *buffer) {
 }
 
 UInt32 ATIRadeonX1000::makeGARTEntry(UInt32 physicalAddress) {
-    return (physicalAddress >> 8) | U32At(this, 0xbc0) | 0xc;
+    return (physicalAddress >> 8) | U32At(this, kIOATIR500Accelerator_gartEntryBase) | 0xc;
 }
 
 UInt32 ATIRadeonX1000::getAccelCapsBits() {
@@ -119,11 +119,11 @@ UInt32 ATIRadeonX1000::getAccelCapsBits() {
 }
 
 UInt32 ATIRadeonX1000::tmpTotalVRAM() {
-    return reinterpret_cast<ATIR500Memory *>(U32At(this, 0x93c))->total_free();
+    return reinterpret_cast<ATIR500Memory *>(U32At(this, kIOATIR500Accelerator_vramPoolB))->total_free();
 }
 
 bool ATIRadeonX1000::SWDSIsRequired() {
-    return !(U32At(this, 0xb2c) == 0 && U32At(this, 0xb30) == 0);
+    return !(U32At(this, kIOATIR500Accelerator_swdsState_0xb2c) == 0 && U32At(this, kIOATIR500Accelerator_swdsState_0xb30) == 0);
 }
 
 /* Real: if display `index` has its SWDS "CLUT pending" bit (bit 1 of this+0xb2c+index*4) set and is an IONDRVFramebuffer,
@@ -165,10 +165,10 @@ UInt32 ATIRadeonX1000::noop_buffer(UInt32 *buffer) {
 /* stamp checks: true when `tag` has passed. The cached value is refreshed from the hardware/stamp page only when the
  * cache says the tag is still ahead. */
 bool ATIRadeonX1000::checkForConsumedIDCTTimeStamp(UInt32 tag) {
-    if (0 < static_cast<SInt32>(tag - U32At(this, 0x85c))) {
-        UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(this, 0x860));
+    if (0 < static_cast<SInt32>(tag - U32At(this, kIOATIR500Accelerator_lastConsumedIDCTStamp))) {
+        UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(this, kIOATIR500Accelerator_mmioBase));
         UInt32 value = ReadLE32(mmio + 0x1fa8);
-        U32At(this, 0x85c) = value;
+        U32At(this, kIOATIR500Accelerator_lastConsumedIDCTStamp) = value;
         if (0 < static_cast<SInt32>(tag - value)) {
             return false;
         }
@@ -177,10 +177,10 @@ bool ATIRadeonX1000::checkForConsumedIDCTTimeStamp(UInt32 tag) {
 }
 
 bool ATIRadeonX1000::checkForRetiredTimeStamp(UInt32 tag) {
-    if (0 < static_cast<SInt32>(tag - U32At(this, 0x858))) {
-        UInt8 *p = reinterpret_cast<UInt8 *>(U32At(this, 0x864) + U32At(this, 0x868));
+    if (0 < static_cast<SInt32>(tag - U32At(this, kIOATIR500Accelerator_lastRetiredStamp))) {
+        UInt8 *p = reinterpret_cast<UInt8 *>(U32At(this, kIOATIR500Accelerator_stampPageBase) + U32At(this, kIOATIR500Accelerator_retiredStampOffset));
         UInt32 value = ReadLE32(p);
-        U32At(this, 0x858) = value;
+        U32At(this, kIOATIR500Accelerator_lastRetiredStamp) = value;
         if (0 < static_cast<SInt32>(tag - value)) {
             return false;
         }
@@ -189,10 +189,10 @@ bool ATIRadeonX1000::checkForRetiredTimeStamp(UInt32 tag) {
 }
 
 bool ATIRadeonX1000::checkForTimeStamp(UInt32 tag) {
-    if (0 < static_cast<SInt32>(tag - U32At(this, 0x54))) {
-        UInt8 *p = reinterpret_cast<UInt8 *>(U32At(this, 0x864) + U32At(this, 0x86c));
+    if (0 < static_cast<SInt32>(tag - U32At(this, kIOATIR500Accelerator_lastReadStamp))) {
+        UInt8 *p = reinterpret_cast<UInt8 *>(U32At(this, kIOATIR500Accelerator_stampPageBase) + U32At(this, kIOATIR500Accelerator_checkedStampOffset));
         UInt32 value = ReadLE32(p);
-        U32At(this, 0x54) = value;
+        U32At(this, kIOATIR500Accelerator_lastReadStamp) = value;
         if (0 < static_cast<SInt32>(tag - value)) {
             return false;
         }
@@ -202,7 +202,7 @@ bool ATIRadeonX1000::checkForTimeStamp(UInt32 tag) {
 
 void ATIRadeonX1000::initialize_GUI() {
     /* stock 0x1e0c0: lwbrx; clear bit 5; stwbrx; eieio; stwbrx 0 -> +0x208c; eieio; sync; isync. Register accesses are volatile and the read is one lwbrx (#174). */
-    UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(this, 0x860));
+    UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(this, kIOATIR500Accelerator_mmioBase));
     UInt32 value = ReadLE32(mmio + 0x4c);
     M<UInt32>(mmio + 0x4c) = SwapBytes32(value & 0xffffffdfu);
     enforceInOrderExecutionIO();

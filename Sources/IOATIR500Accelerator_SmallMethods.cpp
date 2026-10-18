@@ -39,7 +39,7 @@ bool IOATIR500Accelerator::ASICSupportsAGP() {
 }
 
 bool IOATIR500Accelerator::is_idle() {
-    return checkForTimeStamp(U32At(this, 0x50) - 1);
+    return checkForTimeStamp(U32At(this, kIOATIR500Accelerator_submitStamp) - 1);
 }
 
 void IOATIR500Accelerator::pageoff_dirty_texture(VendorTextureBuffer *, SInt32, SInt32) {
@@ -75,60 +75,60 @@ UInt32 IOATIR500Accelerator::getAccelCapsBits() {
 }
 
 void IOATIR500Accelerator::system_will_sleep() {
-    SmallM_lock(reinterpret_cast<void *>(U32At(this, 0x840)));
-    if (U8At(this, 0x83) == 0) {
-        U8At(this, 0x83) = 1;
+    SmallM_lock(reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_commandLock)));
+    if (U8At(this, kIOATIR500Accelerator_sleeping) == 0) {
+        U8At(this, kIOATIR500Accelerator_sleeping) = 1;
     }
-    SmallM_unlock(reinterpret_cast<void *>(U32At(this, 0x840)));
+    SmallM_unlock(reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_commandLock)));
 }
 
 void IOATIR500Accelerator::system_did_wake() {
-    SmallM_lock(reinterpret_cast<void *>(U32At(this, 0x840)));
-    if (U8At(this, 0x83) != 0) {
-        U8At(this, 0x83) = 0;
+    SmallM_lock(reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_commandLock)));
+    if (U8At(this, kIOATIR500Accelerator_sleeping) != 0) {
+        U8At(this, kIOATIR500Accelerator_sleeping) = 0;
     }
-    SmallM_unlock(reinterpret_cast<void *>(U32At(this, 0x840)));
+    SmallM_unlock(reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_commandLock)));
 }
 
 IOReturn IOATIR500Accelerator::requestProbe(UInt32 options) {
     if ((options & 1) == 0) {
         return 0xe00002c7;
     }
-    SmallM_lock(reinterpret_cast<void *>(U32At(this, 0x840)));
+    SmallM_lock(reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_commandLock)));
     findFramebuffers();
-    SmallM_unlock(reinterpret_cast<void *>(U32At(this, 0x840)));
+    SmallM_unlock(reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_commandLock)));
     return 0;
 }
 
 /* Real: tail calls into the AGP provider (this+0x74) vtable +0x5ec / +0x5f0 with the caller's own arguments. */
 IOReturn IOATIR500Accelerator::commitAGPMemory(IOMemoryDescriptor *memory, UInt32 agpOffset, UInt32 options) {
-    void *provider = reinterpret_cast<void *>(U32At(this, 0x74));
+    void *provider = reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_pciDevice));
     return (*reinterpret_cast<AGPFn *>(*reinterpret_cast<UInt8 **>(provider) + 0x5ec))(provider, memory, agpOffset, options);
 }
 
 IOReturn IOATIR500Accelerator::releaseAGPMemory(IOMemoryDescriptor *memory, UInt32 agpOffset, UInt32 options) {
-    void *provider = reinterpret_cast<void *>(U32At(this, 0x74));
+    void *provider = reinterpret_cast<void *>(U32At(this, kIOATIR500Accelerator_pciDevice));
     return (*reinterpret_cast<AGPFn *>(*reinterpret_cast<UInt8 **>(provider) + 0x5f0))(provider, memory, agpOffset, options);
 }
 
 /* GART page slot (this+0x83c): 0x844 marks a free slot; reserving stores the "reserved" entry from 0x848 */
 bool IOATIR500Accelerator::reserveInGART(UInt32 gartOffset) {
-    UInt32 *table = reinterpret_cast<UInt32 *>(U32At(this, 0x83c));
+    UInt32 *table = reinterpret_cast<UInt32 *>(U32At(this, kIOATIR500Accelerator_gartTable));
     UInt32 index = gartOffset >> (GH_page_shift & 0x3f);
-    bool wasFree = table[index] == U32At(this, 0x844);
+    bool wasFree = table[index] == U32At(this, kIOATIR500Accelerator_gartEmptyEntry);
     if (wasFree) {
-        table[index] = U32At(this, 0x848);
+        table[index] = U32At(this, kIOATIR500Accelerator_gartReservedEntry);
     }
     return wasFree;
 }
 
 void IOATIR500Accelerator::clearInGART(UInt32 gartOffset) {
-    reinterpret_cast<UInt32 *>(U32At(this, 0x83c))[gartOffset >> (GH_page_shift & 0x3f)] = U32At(this, 0x844);
+    reinterpret_cast<UInt32 *>(U32At(this, kIOATIR500Accelerator_gartTable))[gartOffset >> (GH_page_shift & 0x3f)] = U32At(this, kIOATIR500Accelerator_gartEmptyEntry);
 }
 
 /* Real: flush the cache lines covering [address, address+length): dcbf every line but the last, then the last line */
 void IOATIR500Accelerator::flush_memory_for_in(const void *address, UInt32 length) {
-    UInt32 line = U8At(this, 0x84);
+    UInt32 line = U8At(this, kIOATIR500Accelerator_cacheLineSize);
     UInt32 base = reinterpret_cast<UInt32>(address);
     SInt32 offset = 0;
     SInt32 limit = static_cast<SInt32>(((base & (line - 1)) + length) - line);
@@ -144,7 +144,7 @@ void IOATIR500Accelerator::flush_memory_for_in(const void *address, UInt32 lengt
 }
 
 void IOATIR500Accelerator::flush_memory_for_out(const void *address, UInt32 length) {
-    UInt32 line = U8At(this, 0x84);
+    UInt32 line = U8At(this, kIOATIR500Accelerator_cacheLineSize);
     UInt32 base = reinterpret_cast<UInt32>(address);
     SInt32 offset = 0;
     SInt32 limit = static_cast<SInt32>(((base & (line - 1)) + length) - line);

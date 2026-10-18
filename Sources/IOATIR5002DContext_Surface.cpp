@@ -57,15 +57,15 @@ IOReturn IOATIR5002DContext::set_surface(UInt32 surfaceID, eIOContextModeBits mo
         if (surfaceID < U32At(accel, 0xcc)) {
             result = 0;
             if (((1u << (surfaceID & 0x3f)) & U32At(accel, 0xd0)) == 0) {
-                U32At(self, 0x110) = 0;
+                U32At(self, kIOATIR5002DContext_panelIndex) = 0;
             } else {
-                U32At(self, 0x110) = surfaceID;
+                U32At(self, kIOATIR5002DContext_panelIndex) = surfaceID;
             }
         } else {
-            U32At(self, 0x110) = 0;
+            U32At(self, kIOATIR5002DContext_panelIndex) = 0;
             result = 0xe00002c2;
         }
-        U32At(self, 0x8c) = 0x20000000;
+        U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) = 0x20000000;
     } else {
         IOATIR500Surface *surface;
         bool noSurface;
@@ -86,21 +86,21 @@ IOReturn IOATIR5002DContext::set_surface(UInt32 surfaceID, eIOContextModeBits mo
         }
         if (noSurface) {
             accel = reinterpret_cast<UInt8 *>(accelerator);
-            U32At(self, 0x100) = reinterpret_cast<UInt32>(surface);
-            U32At(self, 0x110) = reinterpret_cast<UInt32>(surface);
+            U32At(self, kIOATIR5002DContext_boundSurface) = reinterpret_cast<UInt32>(surface);
+            U32At(self, kIOATIR5002DContext_panelIndex) = reinterpret_cast<UInt32>(surface);
         } else {
             UInt32 oldBits = U32At(surface, 0xbe8);
-            U32At(self, 0x110) = 0xffff;
+            U32At(self, kIOATIR5002DContext_panelIndex) = 0xffff;
             if (surface != boundSurface) {
                 surface->reset_req_bits();
             }
             U32At(surface, 0xbe8) = (oldBits & 0x803f) | (mode & 0xffff803f);
-            U32At(self, 0x8c) = 0x20000001;
+            U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) = 0x20000001;
             if (((mode >> 10) & 1) != 0) {
-                U32At(self, 0x8c) = 0x20000003;
+                U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) = 0x20000003;
             }
             if ((mode & 0x4000) != 0) {
-                U32At(self, 0x8c) |= 0x7ffc00;
+                U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) |= 0x7ffc00;
             }
             surface->add_2d_context_to_list(this);
             boundSurface = surface;
@@ -111,7 +111,7 @@ IOReturn IOATIR5002DContext::set_surface(UInt32 surfaceID, eIOContextModeBits mo
     if (self == reinterpret_cast<UInt8 *>(U32At(accel, 0x78))) {
         U32At(accel, 0x78) = 0;
     }
-    U8At(self, 0x92) = 0;
+    U8At(self, kIOATIR5002DContext_surfaceBackingReplaced) = 0;
     invalidate();
     if (result == 0) {
         result = set_destination(info, infoSize);
@@ -170,7 +170,7 @@ IOReturn IOATIR5002DContext::swap_surface(UInt32 lockType, UInt32 *outTag) {
         if (U8At(accelerator, 0x80) == 0) {
             goto fail;
         }
-        if ((((U32At(self, 0x8c) | U32At(surface, 0xc1c)) & 0x20000001) & U32At(surface, 0xbf8)) == 0) {
+        if ((((U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) | U32At(surface, 0xc1c)) & 0x20000001) & U32At(surface, 0xbf8)) == 0) {
             break;
         }
         if ((U32At(surface, 0xbf8) & 0x20000000) != 0) {
@@ -228,7 +228,7 @@ IOReturn IOATIR5002DContext::lock_memory(UInt32 lockType, unsigned int *outAddre
         if (surface == nullptr) {
             goto noSurface;
         }
-        if ((((U32At(self, 0x8c) | U32At(surface, 0xc1c)) & 0x20000001) & U32At(surface, 0xbf8)) == 0) {
+        if ((((U32At(self, kIOATIR5002DContext_surfaceFlagsBitmask) | U32At(surface, 0xc1c)) & 0x20000001) & U32At(surface, 0xbf8)) == 0) {
             break;
         }
         if ((U32At(surface, 0xbf8) & 0x20000000) != 0) {
@@ -257,45 +257,45 @@ IOReturn IOATIR5002DContext::lock_memory(UInt32 lockType, unsigned int *outAddre
         Ctx2DS_IOSleep(1);
     }
     if (U8At(surface, 0xbf4) == 0) {
-        if (U32At(self, 0x118) != 0) {
-            reinterpret_cast<OSObject *>(U32At(self, 0x118))->release();
-            U32At(self, 0x11c) = 0;
-            U32At(self, 0x118) = 0;
+        if (U32At(self, kIOATIR5002DContext_surfaceMemoryMap) != 0) {
+            reinterpret_cast<OSObject *>(U32At(self, kIOATIR5002DContext_surfaceMemoryMap))->release();
+            U32At(self, kIOATIR5002DContext_surfaceMapAddress) = 0;
+            U32At(self, kIOATIR5002DContext_surfaceMemoryMap) = 0;
         }
         goto noSurface;
     }
     {
         bool needMap = false;
-        if (U32At(self, 0x118) == 0) {
+        if (U32At(self, kIOATIR5002DContext_surfaceMemoryMap) == 0) {
             needMap = true;
-        } else if (U32At(self, 0x104) != U32At(surface, 0xc00)) {
-            reinterpret_cast<OSObject *>(U32At(self, 0x118))->release();
+        } else if (U32At(self, kIOATIR5002DContext_mappedDescriptor) != U32At(surface, 0xc00)) {
+            reinterpret_cast<OSObject *>(U32At(self, kIOATIR5002DContext_surfaceMemoryMap))->release();
             surface = boundSurface;
-            U32At(self, 0x118) = 0;
+            U32At(self, kIOATIR5002DContext_surfaceMemoryMap) = 0;
             needMap = true;
         }
         if (needMap) {
             void *descriptor = reinterpret_cast<void *>(U32At(surface, 0xc00));
-            U32At(self, 0x104) = reinterpret_cast<UInt32>(descriptor);
+            U32At(self, kIOATIR5002DContext_mappedDescriptor) = reinterpret_cast<UInt32>(descriptor);
             /* real: IOMemoryDescriptor vtable +0x14c map(task = this+0x78, address 0, options kIOMapAnywhere, 0, 0) */
             void *map = (*reinterpret_cast<MapFn *>(*reinterpret_cast<UInt8 **>(descriptor) + 0x14c))(
-                descriptor, reinterpret_cast<void *>(U32At(self, 0x78)), 0, 1, 0, 0);
-            U32At(self, 0x118) = reinterpret_cast<UInt32>(map);
+                descriptor, reinterpret_cast<void *>(U32At(self, kIOATIR5002DContext_task)), 0, 1, 0, 0);
+            U32At(self, kIOATIR5002DContext_surfaceMemoryMap) = reinterpret_cast<UInt32>(map);
             if (map == nullptr) {
-                U32At(self, 0x11c) = 0;
+                U32At(self, kIOATIR5002DContext_surfaceMapAddress) = 0;
                 result = 0xe00002c8;
                 *outAddress = 0xdeadbeef;
                 goto out;
             }
             /* real: IOMemoryMap vtable +0xd0 getVirtualAddress() */
-            U32At(self, 0x11c) = (*reinterpret_cast<GetVAFn *>(*reinterpret_cast<UInt8 **>(map) + 0xd0))(map);
+            U32At(self, kIOATIR5002DContext_surfaceMapAddress) = (*reinterpret_cast<GetVAFn *>(*reinterpret_cast<UInt8 **>(map) + 0xd0))(map);
             surface = boundSurface;
         }
     }
     result = 0;
     surface->surface_write_lock_int(0, range, outSize);
     U16At(boundSurface, 0xbd2) = U16At(boundSurface, 0xbd2) + 1;
-    *outAddress = U32At(self, 0x11c) + range[0];
+    *outAddress = U32At(self, kIOATIR5002DContext_surfaceMapAddress) + range[0];
     goto out;
 noSurface:
     result = 0xe00002cc;
@@ -341,7 +341,7 @@ IOReturn IOATIR5002DContext::create_transfer(UInt32 param1, UInt32 sizeInBytes, 
         return 0xe00002bd;
     }
     *outHandle = U32At(texture, 0x58);
-    U8At(self, 0x92) = 0;
+    U8At(self, kIOATIR5002DContext_surfaceBackingReplaced) = 0;
     if (boundSurface != nullptr && ((param1 ^ U32At(boundSurface, 0xbe8)) & 0xf) == 0) {
         UInt8 *buffer = reinterpret_cast<UInt8 *>(U32At(boundSurface, 0xb70));
         if (U32At(buffer, 0x24) != 0) {
@@ -353,7 +353,7 @@ IOReturn IOATIR5002DContext::create_transfer(UInt32 param1, UInt32 sizeInBytes, 
         boundSurface->attach_buffer_backing_store(reinterpret_cast<ATIR500SurfaceBuffer *>(buffer), memory, 0,
                                                   (static_cast<UInt32>(U16At(buffer, 0x1c)) * U16At(buffer, 0x16) + 0x7f) & 0xffffff80);
         U8At(reinterpret_cast<void *>(U32At(buffer, 0x24)), 0x59) = 1;
-        U8At(self, 0x92) = 1;
+        U8At(self, kIOATIR5002DContext_surfaceBackingReplaced) = 1;
     }
     Ctx2DS_unlock(ACCEL_LOCK());
     return 0;

@@ -84,14 +84,14 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 
 bool IOATIR500Accelerator::getVRAMDescriptors(void) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 count = U32At(self, 0xcc);
+    UInt32 count = U32At(self, kIOATIR500Accelerator_displayCount);
     if (count == 0) {
         return false;
     }
     for (UInt32 i = 0; i < count; i++) {
         getVRAMDescriptor(i); /* real addr 0x290, own body not decompiled this pass */
     }
-    return U32At(self, 0xcc) != 0 && U32At(self, 0xe4) != 0;
+    return U32At(self, kIOATIR500Accelerator_displayCount) != 0 && U32At(self, kIOATIR500Accelerator_vramApertureBase) != 0;
 }
 
 
