@@ -468,7 +468,7 @@ LAB_0003c9d0:
     bufferIds[5] = 3;
   }
   else {
-    iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayLeft) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayRight);
+    iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayRight) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayLeft);
     overlayHeight = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
     if (iVar23 == 0) {
       iVar23 = 0x300;
@@ -557,8 +557,8 @@ LAB_0003c9d0:
   if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
     return;
   }
-  sVar2 = M<SInt16>(self + kATIR500Surface_overlayLeft);
-  sVar18 = M<SInt16>(self + kATIR500Surface_overlayRight);
+  sVar2 = M<SInt16>(self + kATIR500Surface_overlayRight);
+  sVar18 = M<SInt16>(self + kATIR500Surface_overlayLeft);
   bufferId = 10;
   iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
   scaledHeight = iVar23 * 3;

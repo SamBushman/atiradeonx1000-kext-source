@@ -97,8 +97,8 @@ field	IOATIR500Surface,ATIR500Surface	0xd84	userMap	CONFIRMED	reset_access: IOMe
 field	IOATIR500Surface,ATIR500Surface	0xd88	kernelMap	CONFIRMED	reset_access: IOMemoryMap* in the kernel task (vtable +0x150)
 field	IOATIR500Surface,ATIR500Surface	0xd8c	orphanedBacking	INFERRED	free_buffer_backing_store parks a backing store that is still referenced here; free_buffer_backing_orphans frees it
 field	ATIR500Surface	0x94	overlayTop	INFERRED	dvd_setup_overlay/setup_buffers store it (setup_buffers: topHeight); the DVD pcb computes the field height as (+0x9a) - (+0x94). NOTE dvd_setup_overlay's x,y,w,h parameter names disagree with the consumers (x lands here)
-field	ATIR500Surface	0x96	overlayRight	INFERRED	setup_buffers: rightWidth; the DVD pcb tests +0x98 != +0x96 as "has width" (dvd_setup_overlay stores h here)
-field	ATIR500Surface	0x98	overlayLeft	INFERRED	setup_buffers: leftWidth (dvd_setup_overlay stores y here)
+field	ATIR500Surface	0x96	overlayLeft	INFERRED	left edge: shape_surface computes the width as (+0x98) - (+0x96); dvd_setup_overlay stores its `left` argument here (setup_buffers' old leftWidth/rightWidth names were swapped, fixed with the DVD overlay naming in 23f29ca)
+field	ATIR500Surface	0x98	overlayRight	INFERRED	right edge: shape_surface width = (+0x98) - (+0x96); dvd_setup_overlay stores its `right` argument here
 field	ATIR500Surface	0x9a	overlayBottom	INFERRED	setup_buffers: bottomHeight; field height = +0x9a - +0x94 (dvd_setup_overlay stores w here)
 field	ATIR500Surface	0xd90	currentBufferIndex	INFERRED	the DVD pcb stores the record's buffer index here (recordCursor[1]); get_surf_desc_regs indexes buffers[...] with it
 field	ATIR500Surface	0xd94	overlayHandle	CONFIRMED	dvd_setup_overlay sets it to 1, free_overlay clears it (Sources/ATIR500Surface_Overlay2.cpp: the overlay handle)
