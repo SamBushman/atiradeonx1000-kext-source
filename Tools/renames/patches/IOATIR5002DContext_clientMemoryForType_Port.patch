@@ -1,0 +1,11 @@
+--- a/Sources/IOATIR5002DContext_clientMemoryForType_Port.cpp	2026-10-17 19:51:52.462699040 -0700
++++ b/Sources/IOATIR5002DContext_clientMemoryForType_Port.cpp	2026-10-17 19:51:52.463939706 -0700
+@@ -31,6 +31,8 @@
+ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
+ 
+ 
++/* label addresses in the shipped code: retryOrGiveUp 0xd8b8, checkSurface 0xd930, checkPanelIndex 0xd93c, afterAllocation 0xd950, recordStampOnly 0xdc70, advanceRing 0xdd38,
++ * returnCommandBuffer 0xde0c */
+ /* real addr 0xd6f0 */
+ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);

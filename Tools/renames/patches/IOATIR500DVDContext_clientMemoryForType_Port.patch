@@ -1,0 +1,11 @@
+--- a/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 19:52:19.055562502 -0700
++++ b/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 19:52:19.056936143 -0700
+@@ -31,6 +31,8 @@
+ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
+ 
+ 
++/* label addresses in the shipped code: surfaceReady 0xf180, afterAllocation 0xf264, retryOrGiveUp 0xf2b8, forceAllocation 0xf2ec, noSurface 0xf330, abortSetup 0xf334,
++ * submitCommandBuffer 0xf380, advanceRing 0xf6bc, finishCommandBuffer 0xf800 */
+ /* real addr 0xf0c0 */
+ IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);

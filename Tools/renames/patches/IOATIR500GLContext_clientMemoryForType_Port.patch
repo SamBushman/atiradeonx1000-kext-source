@@ -1,0 +1,11 @@
+--- a/Sources/IOATIR500GLContext_clientMemoryForType_Port.cpp	2026-10-17 19:52:45.177430666 -0700
++++ b/Sources/IOATIR500GLContext_clientMemoryForType_Port.cpp	2026-10-17 19:52:45.178724201 -0700
+@@ -33,6 +33,8 @@
+ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
+ 
+ 
++/* label addresses in the shipped code: retryAllocation 0xa1e0, surfaceReady 0xa250, afterPageQueue 0xa354, retryOrGiveUp 0xa408, forceAllocation 0xa43c, noSurface 0xa480,
++ * abortSetup 0xa484, submitFlips 0xa7f8, noStampRecord 0xa8f4, advanceRing 0xa9bc, finishCommandBuffer 0xab68, retainDescriptor 0xae2c */
+ /* real addr 0xa160 */
+ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);

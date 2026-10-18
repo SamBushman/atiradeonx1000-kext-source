@@ -31,6 +31,8 @@ extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
+/* label addresses in the shipped code: retryOrGiveUp 0xd8b8, checkSurface 0xd930, checkPanelIndex 0xd93c, afterAllocation 0xd950, recordStampOnly 0xdc70, advanceRing 0xdd38,
+ * returnCommandBuffer 0xde0c */
 /* real addr 0xd6f0 */
 IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -40,9 +42,11 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   int *piVar3;
   int iVar4;
   int *piVar5;
+  int *surfaceForPanel;
+  int *ringSlot;
   int iVar6;
   int iVar7;
-  unsigned int uVar8;
+  unsigned int allocatedMask;
   int iVar9;
   int iVar10;
   int iVar11;
@@ -50,6 +54,7 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   UInt32 savedStamp;
   UInt32 bufferFlags;
   unsigned int retries;
+  unsigned int panel;
   UInt8 *surface;
   int iVar16;
   UInt8 *accel;
@@ -104,12 +109,12 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
       if (M<char>(accelAddr + 0x80) == '\0') {
         retries = 0x3e9;
         bufferFlags = 0;
-        goto LAB_0000d930;
+        goto checkSurface;
       }
       if (surface == (UInt8 *)0x0) {
         surface = (UInt8 *)0x0;
         bufferFlags = 0;
-        goto LAB_0000d93c;
+        goto checkPanelIndex;
       }
       if (surface[0xbf6] == 0x0) break;
       VCALL(M<int>(surface), 0x14)(surface);
@@ -122,32 +127,32 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
       bufferFlags = bufferFlags | 2;
     }
     if ((surface[0xbd0] == 0x0) || (retries == 999)) {
-      uVar8 = M<unsigned int>(surface + 0xbf8);
-      if (((M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & uVar8) == 0) goto LAB_0000d950;
-      if ((uVar8 & 0x20000000) != 0) {
+      allocatedMask = M<unsigned int>(surface + 0xbf8);
+      if (((M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & allocatedMask) == 0) goto afterAllocation;
+      if ((allocatedMask & 0x20000000) != 0) {
         retries = 0x3e9;
-        goto LAB_0000d950;
+        goto afterAllocation;
       }
       surfaceMask = (M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
-      if ((uVar8 & surfaceMask) != 0) {
+      if ((allocatedMask & surfaceMask) != 0) {
         allocResult = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces(surfaceMask, false);
         if (allocResult != 0) {
-          if (allocResult != 2) goto LAB_0000d8b8;
+          if (allocResult != 2) goto retryOrGiveUp;
           surface = M<UInt8 *>(self + 0x100);
           retries = 0x3e9;
-          goto LAB_0000d930;
+          goto checkSurface;
         }
         surface = M<UInt8 *>(self + 0x100);
         if ((M<unsigned int>(surface + 0xbf8) & M<unsigned int>(surface + 0xc1c) & 0x10000000) == 0)
-        goto LAB_0000d950;
+        goto afterAllocation;
       }
       VCALL(M<int>(surface), 0x5c0)(surface);
       M<unsigned int>(M<int>(self + 0x100) + 0xbf8) =
            M<unsigned int>(M<int>(self + 0x100) + 0xbf8) & 0xefffffff;
       surface = M<UInt8 *>(self + 0x100);
-      goto LAB_0000d930;
+      goto checkSurface;
     }
-LAB_0000d8b8:
+retryOrGiveUp:
     if (retries == 1000) break;
     retries = retries + 1;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
@@ -155,16 +160,16 @@ LAB_0000d8b8:
     GH_IOSleep(1);
   } while( true );
   surface = M<UInt8 *>(self + 0x100);
-LAB_0000d930:
+checkSurface:
   if (surface == (UInt8 *)0x0) {
-LAB_0000d93c:
-    if (M<int>(self + 0x110) == 0xffff) goto LAB_0000de0c;
+checkPanelIndex:
+    if (M<int>(self + 0x110) == 0xffff) goto returnCommandBuffer;
   }
-LAB_0000d950:
+afterAllocation:
   if (999 < retries) {
     if ((1000 < retries) ||
        (iVar16 = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces((M<UInt32>(self + 0x8c) | M<UInt32>(surface + 0xc1c)) & 0x7fffff, true), iVar16 != 0))
-    goto LAB_0000de0c;
+    goto returnCommandBuffer;
     surfaceWords = M<int *>(self + 0x100);
     if ((surfaceWords[0x2fe] & surfaceWords[0x307] & 0x10000000U) != 0) {
       VCALL(*surfaceWords, 0x5c0)(surfaceWords);
@@ -201,14 +206,14 @@ LAB_0000d950:
   M<int>(self + 0x7c) = iVar4;
   M<int>(self + 0xa8) = iVar4;
   if (surfaceWords == (int *)0x0) {
-LAB_0000dc70:
+recordStampOnly:
     M<UInt32>(M<int>(self + 0x110) * 0x20 + M<int>(self + 0x94) + 0xec) =
          M<UInt32>(self + 0x7c);
   }
   else {
     VCALL(*surfaceWords, 0x5bc)(surfaceWords,M<UInt32>(self + 0x8c));
     surfaceWords = M<int *>(self + 0x100);
-    if (surfaceWords == (int *)0x0) goto LAB_0000dc70;
+    if (surfaceWords == (int *)0x0) goto recordStampOnly;
     iVar4 = VCALL(*surfaceWords, 0x5b4)
                       (surfaceWords,M<UInt32>(self + 0x7c),M<UInt32>(self + 0x8c));
     surfaceWords[0x1f] = iVar4;
@@ -235,18 +240,18 @@ LAB_0000dc70:
       M<UInt32>(iVar16 + 0x84) = M<UInt32>(iVar16 + 0x80);
       accelWords = M<int *>(self + 0x94);
       if (accelWords[0x33] != 0) {
-        retries = 0;
+        panel = 0;
         panelOffset = 0;
         do {
-          piVar5 = M<int *>(self + 0x100);
-          if (M<char>((int)piVar5 + panelOffset + 0xcac) != '\0') {
-            VCALL(*piVar5, 0x5d4)(piVar5,retries,0);
+          surfaceForPanel = M<int *>(self + 0x100);
+          if (M<char>((int)surfaceForPanel + panelOffset + 0xcac) != '\0') {
+            VCALL(*surfaceForPanel, 0x5d4)(surfaceForPanel,panel,0);
             M<int>(M<int>(self + 0x94) + 0x74c) = M<int>(M<int>(self + 0x94) + 0x74c) + 1;
             accelWords = M<int *>(self + 0x94);
           }
-          retries = retries + 1;
+          panel = panel + 1;
           panelOffset = panelOffset + 0x94;
-        } while (retries < (unsigned int)accelWords[0x33]);
+        } while (panel < (unsigned int)accelWords[0x33]);
       }
       iVar4 = accelWords[0x1e5];
       waited = VCALL(*accelWords, 0x558)(accelWords,savedStamp);
@@ -254,56 +259,56 @@ LAB_0000dc70:
     }
   }
   accelWords = M<int *>(self + 0x94);
-  piVar5 = accelWords + (unsigned int)M<UInt16>(accelWords + 0x171) * 7 + 0x101;
-  iVar16 = VCALL(*accelWords, 0x554)(accelWords,piVar5[4]);
+  ringSlot = accelWords + (unsigned int)M<UInt16>(accelWords + 0x171) * 7 + 0x101;
+  iVar16 = VCALL(*accelWords, 0x554)(accelWords,ringSlot[4]);
   if (iVar16 == 0) {
     accel = M<UInt8 *>(self + 0x94);
     if (M<UInt16>(accel + 0x5c6) < 8) {
       iVar16 = ((IOATIR500Accelerator *)(accel))->allocMoreCommandBuffers(1, 0x1000);
       if (iVar16 != 0) {
         iVar16 = M<int>(self + 0x94);
-        piVar5 = (int *)(iVar16 + (unsigned int)M<UInt16>(iVar16 + 0x5c4) * 0x1c + 0x404);
-        goto LAB_0000dd38;
+        ringSlot = (int *)(iVar16 + (unsigned int)M<UInt16>(iVar16 + 0x5c4) * 0x1c + 0x404);
+        goto advanceRing;
       }
       accel = M<UInt8 *>(self + 0x94);
     }
     iVar4 = M<int>(accel + 0x76c);
-    iVar16 = VCALL(M<int>(accel), 0x54c)(accel,piVar5[4]);
+    iVar16 = VCALL(M<int>(accel), 0x54c)(accel,ringSlot[4]);
     M<int>(accel + 0x76c) = iVar4 + iVar16;
     iVar16 = M<int>(self + 0x94);
   }
   else {
     iVar16 = M<int>(self + 0x94);
   }
-LAB_0000dd38:
+advanceRing:
   M<UInt16>(iVar16 + 0x5c4) = M<SInt16>(iVar16 + 0x5c4) + 1U & M<SInt16>(iVar16 + 0x5c6) - 1U;
   uVar1 = M<UInt16>(self + 0xa4);
-  iVar16 = piVar5[3];
-  iVar9 = piVar5[1];
-  iVar4 = piVar5[2];
+  iVar16 = ringSlot[3];
+  iVar9 = ringSlot[1];
+  iVar4 = ringSlot[2];
   iVar6 = M<int>(self + 0xa0);
   iVar11 = M<int>(self + 0x9c);
   iVar7 = M<int>(self + 0x98);
   iVar10 = M<int>(self + 0xb0);
-  M<int>(self + 0x98) = *piVar5;
+  M<int>(self + 0x98) = *ringSlot;
   M<int>(self + 0xa4) = iVar16;
   M<int>(self + 0xa0) = iVar4;
   M<int>(self + 0x9c) = iVar9;
   iVar12 = M<int>(self + 0xac);
   iVar4 = M<int>(self + 0xa8);
-  iVar16 = piVar5[4];
-  iVar9 = piVar5[6];
-  M<int>(self + 0xac) = piVar5[5];
+  iVar16 = ringSlot[4];
+  iVar9 = ringSlot[6];
+  M<int>(self + 0xac) = ringSlot[5];
   M<int>(self + 0xa8) = iVar16;
   M<int>(self + 0xb0) = iVar9;
-  M<UInt16>((int)piVar5 + 0xe) = M<UInt16>(self + 0xa6);
-  M<UInt16>(piVar5 + 3) = uVar1;
-  *piVar5 = iVar7;
-  piVar5[6] = iVar10;
-  piVar5[5] = iVar12;
-  piVar5[4] = iVar4;
-  piVar5[2] = iVar6;
-  piVar5[1] = iVar11;
+  M<UInt16>((int)ringSlot + 0xe) = M<UInt16>(self + 0xa6);
+  M<UInt16>(ringSlot + 3) = uVar1;
+  *ringSlot = iVar7;
+  ringSlot[6] = iVar10;
+  ringSlot[5] = iVar12;
+  ringSlot[4] = iVar4;
+  ringSlot[2] = iVar6;
+  ringSlot[1] = iVar11;
   iVar16 = M<int>(self + 0x94);
   if (M<char>(iVar16 + 0x88) == '\0') {
     VCALL(*M<int *>(iVar16 + 0xc0), 300)
@@ -313,7 +318,7 @@ LAB_0000dd38:
   else {
     M<UInt8>(iVar16 + 0x89) = 1;
   }
-LAB_0000de0c:
+returnCommandBuffer:
   VCALL(*M<int *>(self + 0xa0), 0x14)(M<int *>(self + 0xa0));
   *options = 0;
   *memory = M<IOMemoryDescriptor *>(self + 0xa0);

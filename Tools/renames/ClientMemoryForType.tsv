@@ -1,0 +1,55 @@
+# clientMemoryForType placeholders (GL, 2D, DVD). kind target old new tier evidence [from to [occ]]
+#!use-decl: beside
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a1e0	retryAllocation	CONFIRMED	retry loop head (0xa1e0): the surface-allocation loop jumps back here after unlock/thread_block/IOSleep
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a250	surfaceReady	CONFIRMED	0xa250: the surface exists and accelerator pointer is reloaded
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a354	afterPageQueue	CONFIRMED	0xa354: after the alloc_surfaces_pageq attempt, retry-count check
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a408	retryOrGiveUp	CONFIRMED	0xa408: allocation failed; sleep and retry until the count reaches 1000
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a43c	forceAllocation	CONFIRMED	0xa43c: final alloc_surfaces_pageq call with the force flag (r6 = 1)
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a480	noSurface	CONFIRMED	0xa480: no bound surface; flags cleared, falls into abortSetup
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a484	abortSetup	CONFIRMED	0xa484: leave the setup without submitting (restore current context, clear +0x78)
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a7f8	submitFlips	CONFIRMED	0xa7f8: per-panel submit_swap_buffer loop
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a8f4	noStampRecord	CONFIRMED	0xa8f4: no swap stamp to record
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000a9bc	advanceRing	CONFIRMED	0xa9bc: advance the accelerator command-buffer ring index
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000ab68	finishCommandBuffer	CONFIRMED	0xab68: return the pending texture list, hand out the command-buffer descriptor and init its header
+def	IOATIR500GLContext::clientMemoryForType	LAB_0000ae2c	retainDescriptor	CONFIRMED	0xae2c: type 4 - retain the descriptor and return it
+def	IOATIR500GLContext::clientMemoryForType	bVar1	recordSwapStamp	INFERRED	true only on the path that stores the new swap stamp into the 3-entry ring at self+0x9c; tested after unlock to decide on the sleepForTimeStampNoLock accounting
+def	IOATIR500GLContext::clientMemoryForType	uVar2	neededMask	CONFIRMED	(context mask | surface required mask) & 0x7fffff: the attachment buffers this surface must have; passed to alloc_surfaces_pageq
+def	IOATIR500GLContext::clientMemoryForType	uVar4	presentNeeded	INFERRED	allocated-mask & neededMask: needed buffers that are already allocated; drives the swap/flip flag bits
+def	IOATIR500GLContext::clientMemoryForType	uVar12	commandBufferFlags	CONFIRMED	passed as the last argument of init_command_buffer_header; initialised from surface+0xbfc, bit 1 added when stereo and buffer flag 0x20
+def	IOATIR500GLContext::clientMemoryForType	pIVar13	accel	CONFIRMED	always the accelerator (self+200): allocMoreCommandBuffers / allocCommandBuffer / flags at +0x88/+0x89
+def	IOATIR500GLContext::clientMemoryForType	pIVar14	textureSlot	CONFIRMED	walks the context texture slot array (self+0x2a4, stride 4, until self+0xa8) in both add/remove stream loops
+def	IOATIR500GLContext::clientMemoryForType	piVar16	ringSlot	CONFIRMED	accelerator command-buffer ring entry (7 words, 0x1c stride at accel+0x240); its words are exchanged with cmdBufBlock and the context buffer at +0xcc
+use	IOATIR500GLContext::clientMemoryForType	uVar8	allocatedMask	INFERRED	surface+0xbf8: mask of attachment buffers already allocated	-	submitFlips:
+use	IOATIR500GLContext::clientMemoryForType	uVar11	pendingSubmits	INFERRED	bit 0: submit_swap_buffer, bit 1: submit_flip_buffer needed for the old buffers; accumulates across retries	-	uVar11 = VCALL\(M<int>\(self\), 0x5b4\)
+use	IOATIR500GLContext::clientMemoryForType	uVar11	swapRequest	INFERRED	result of the +0x5b4 process_command_buffer call: bit 0 requests a swap; masked by commandBufferFlags bit 1, then drives the per-panel submit loop	uVar11 = VCALL\(M<int>\(self\), 0x5b4\)
+use	IOATIR500GLContext::clientMemoryForType	swapRequest	flipPanel	INFERRED	flip path: the surface panel index read from surface+0xc14, used for submit_flip_buffer	(uVar11|swapRequest|flipPanel) = M<unsigned int>\(iVar3 \+ 0xc14\)	submitFlips:
+use	IOATIR500GLContext::clientMemoryForType	uVar15	retryCount	CONFIRMED	allocation retry counter, 0..1000, kept across the retryAllocation loop	-	^\s*uVar15 = 0;#2
+use	IOATIR500GLContext::clientMemoryForType	uVar15	panel	CONFIRMED	index into the accelerator panel records in the submit loop (bounded by accel panel count)	^\s*uVar15 = 0;#2
+use	IOATIR500GLContext::clientMemoryForType	uVar8	swapArg	INFERRED	third argument of submit_swap_buffer (+0x5d8): the mask value or its low bit	submitFlips:
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000d8b8	retryOrGiveUp	CONFIRMED	0xd8b8: allocation failed; sleep and retry until the count reaches 1000
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000d930	checkSurface	CONFIRMED	0xd930: bound surface re-read after allocation
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000d93c	checkPanelIndex	CONFIRMED	0xd93c: no surface; give up when the panel index is 0xffff
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000d950	afterAllocation	CONFIRMED	0xd950: allocation finished; force-allocate when the retry limit was reached
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000dc70	recordStampOnly	CONFIRMED	0xdc70: no surface; only the panel stamp is recorded
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000dd38	advanceRing	CONFIRMED	0xdd38: advance the accelerator command-buffer ring index
+def	IOATIR5002DContext::clientMemoryForType	LAB_0000de0c	returnCommandBuffer	CONFIRMED	0xde0c: hand out the command-buffer descriptor and init its header
+def	IOATIR5002DContext::clientMemoryForType	uVar8	allocatedMask	INFERRED	surface+0xbf8: mask of attachment buffers already allocated; tested against the needed mask
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f180	surfaceReady	CONFIRMED	0xf180: the surface exists and the accelerator pointer is reloaded
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f264	afterAllocation	CONFIRMED	0xf264: after the alloc_surfaces attempt
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f2b8	retryOrGiveUp	CONFIRMED	0xf2b8: allocation failed; sleep and retry until the count reaches 1000
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f2ec	forceAllocation	CONFIRMED	0xf2ec: final alloc_surfaces call with the force flag
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f330	noSurface	CONFIRMED	0xf330: no bound surface; flags cleared, falls into abortSetup
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f334	abortSetup	CONFIRMED	0xf334: leave the setup without submitting (restore current context, clear +0x78)
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f380	submitCommandBuffer	CONFIRMED	0xf380: add the textures to the stream and submit the command buffer
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f6bc	advanceRing	CONFIRMED	0xf6bc: advance the accelerator command-buffer ring index
+def	IOATIR500DVDContext::clientMemoryForType	LAB_0000f800	finishCommandBuffer	CONFIRMED	0xf800: hand out the command-buffer descriptor and init its header
+def	IOATIR500DVDContext::clientMemoryForType	uVar7	retryCount	CONFIRMED	allocation retry counter, 0..1000, kept across the retry loop
+def	IOATIR500DVDContext::clientMemoryForType	uVar6	commandBufferFlags	CONFIRMED	passed as the last argument of init_command_buffer_header; surface+0xbfc | 2 or 0
+def	IOATIR500DVDContext::clientMemoryForType	uVar3	allocatedMask	INFERRED	surface+0xbf8: mask of attachment buffers already allocated
+def	IOATIR500DVDContext::clientMemoryForType	uVar1	neededMask	CONFIRMED	(context mask | surface required mask) & 0x7fffff; passed to alloc_surfaces
+def	IOATIR500DVDContext::clientMemoryForType	this_00	surface	CONFIRMED	the bound surface (self+0xf8) in every use
+def	IOATIR500DVDContext::clientMemoryForType	piVar10	accelWords	CONFIRMED	the accelerator (self+0x8c) as an int array: ring index at word 0x100, timestamps, flags
+def	IOATIR500DVDContext::clientMemoryForType	pIVar11	accelBytes	CONFIRMED	the accelerator (self+0x8c) as bytes: allocMoreCommandBuffers / allocCommandBuffer / counters
+use	IOATIR5002DContext::clientMemoryForType	piVar5	ringSlot	CONFIRMED	accelerator command-buffer ring entry (7 words, 0x1c stride); exchanged with the context buffer words	piVar5 = accelWords \+
+use	IOATIR5002DContext::clientMemoryForType	retries	panel	CONFIRMED	panel index of the submit loop (the retry counter is dead by then)	^\s*retries = 0;$#2
+use	IOATIR5002DContext::clientMemoryForType	piVar5	surfaceForPanel	INFERRED	surface read again for each panel in the submit loop (+0x5d4 call)	-	piVar5 = accelWords \+ 
