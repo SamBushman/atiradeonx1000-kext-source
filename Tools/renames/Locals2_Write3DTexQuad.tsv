@@ -1,0 +1,28 @@
+# Write3DTexQuad locals, round 2: variables with ONE role over the whole function (pure renames; compiled code unchanged).
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_368	rectX	CONFIRMED	dstX truncated to 16 bits: the rectangle's x (header comment of the file)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	sStack_366	rectY	CONFIRMED	dstY truncated to 16 bits
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_364	rectWidth	CONFIRMED	width truncated to 16 bits
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	sStack_362	rectHeight	CONFIRMED	height truncated to 16 bits
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_30c	quadLeft	INFERRED	0.0f origin of the destination quad in its own space; vertex x = quadLeft + quadWidth
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_308	quadTop	INFERRED	0.0f origin y of the destination quad
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_304	quadWidth	CONFIRMED	(float)width
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_2f4	srcWidthF	CONFIRMED	(float)srcWidth, the divisor for the texture-coordinate scale
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_2f0	srcHeightF	CONFIRMED	(float)srcHeight
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	iStack_2b4	srcRightEdge	CONFIRMED	srcX + width
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	iStack_2ac	srcBottomEdge	CONFIRMED	srcY + height
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uStack_2c4	srcXBiased	CONFIRMED	srcX ^ 0x80000000: the int->double conversion idiom (high word 0x43300000)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uStack_2bc	srcYBiased	CONFIRMED	srcY ^ 0x80000000
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_360	srcTextureOffsetReg	CONFIRMED	stored to packet[0xa0]: source address & ~0x1f | tile/low bits
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_35c	srcTextureSizeReg	CONFIRMED	stored to packet[0xa6]: (srcWidth-1) | (srcHeight-1) << 11 | 0x80000000
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_354	srcTexturePitchReg	CONFIRMED	stored to packet[0xaa]: lastColumn-derived pitch word
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_358	srcTextureFormatReg	CONFIRMED	stored to packet[0xa8]: texture_type[srcShift] | 0x8600 (| 0x2000 when srcShift != 0)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_348	dstColorOffsetReg	CONFIRMED	stored to packet[0x9a]: dstAddress & ~0x1f
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_34c	dstColorPitchReg	CONFIRMED	stored to packet[0x9c]: dst tile bits | dstPitch & 0x3ffe | rb3d_dst_format
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_344	outputFormatReg	CONFIRMED	stored to packet[0x8a]: out_fmt[srcShift] | 0x1b00
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_340	scissorTopLeftReg	CONFIRMED	stored to packet[0xb2]: srcLeft | srcTop << 13
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_33c	scissorBottomRightReg	CONFIRMED	stored to packet[0xb3]: srcRight | srcBottom << 13
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_338	acceleratorWord0xb74	UNKNOWN	M<UInt32>(accelerator + 0xb74), stored unchanged to packet[0xb]
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_350	packetBits0xa92	UNKNOWN	constant 0xa92 whose 0x1800|0x600 bits are merged into packet[0xa2]
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	local_334	formatIndexSaved	CONFIRMED	copy of formatIndex (low byte indexes the 0x1c-byte format table)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	puVar27	quadPacket	CONFIRMED	write cursor of the quad packets, packet + 0xbd; advanced past them, ends as the packet end
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	puVar33	chunkPacket	CONFIRMED	write cursor inside the quad packets, one 0x10-word record per chunk
