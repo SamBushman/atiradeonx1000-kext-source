@@ -28,13 +28,13 @@ use	::pcl_CopyPix	fVar2	dstPerSrcY	INFERRED	1 / srcPerDstY	if \(fVar10 != FLOAT_
 use	::pcl_CopyPix	fVar5	chunkTopF	CONFIRMED	(float)chunkTop, computed from chunkTop in the line above	fVar5 = \(float\)\(\(double\)CONCAT44d\(0x43300000,chunkTop \^ 0x80000000\) \- DOUBLE_0004c3a8\);	\} while \(columnsLeft != 0\);@1
 use	::pcl_CopyPix	fVar3	invChunkWidth	INFERRED	1 / chunk width (uVar28), the texture-coordinate scale of the chunk quad	fVar3 = FLOAT_0004c370;	\} while \(columnsLeft != 0\);
 use	::pcl_CopyPix	fVar11	invChunkHeight	INFERRED	1 / chunk height (uVar41)	fVar11 = FLOAT_0004c370;	\} while \(columnsLeft != 0\);
-use	::pcl_CopyPix	fVar22	halfHeight	INFERRED	(maxY-minY)*0.5, low halfword of packet word 10 (the single-quad path stores the same pair as halfHeight)	fVar22 = \(fVar17 \- fVar20\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
-use	::pcl_CopyPix	fVar21	halfWidth	INFERRED	(maxX-minX)*0.5, high halfword of packet word 10	fVar21 = \(fVar10 \- fVar15\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
+use	::pcl_CopyPix	fVar22	scaledHeight	INFERRED	(maxY-minY) * FLOAT_0004c37c (6.0f), low halfword of packet word 10 (the single-quad path stores the same pair)	fVar22 = \(fVar17 \- fVar20\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
+use	::pcl_CopyPix	fVar21	scaledWidth	INFERRED	(maxX-minX) * FLOAT_0004c37c (6.0f), high halfword of packet word 10	fVar21 = \(fVar10 \- fVar15\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
 use	::pcl_CopyPix	fVar17	centerY	INFERRED	(minY+maxY)*0.5, packet word 0xe	fVar17 = \(fVar20 \+ fVar17\) \* FLOAT_0004c380;	\} while \(columnsLeft != 0\);	1,3
 use	::pcl_CopyPix	fVar10	centerX	INFERRED	(minX+maxX)*0.5, packet word 0xd	fVar10 = \(fVar15 \+ fVar10\) \* FLOAT_0004c380;	\} while \(columnsLeft != 0\);	1,3
 use	::pcl_CopyPix	fVar4	invCopyWidth	CONFIRMED	1 / (float)copyWidth: the texture-coordinate scale of the single quad	if \(uVar38 != 0\) \{@-1	uVar38 = cmd\[0xaa\];
 use	::pcl_CopyPix	fVar6	invCopyHeight	CONFIRMED	1 / (float)copyHeight	if \(uVar23 != 0\) \{@-1	uVar38 = cmd\[0xaa\];
-use	::pcl_CopyPix	fVar16	halfWidth	INFERRED	(dstRight-dstX)*0.5, high halfword of packet word 0xc3	fVar16 = \(fVar7 \- fVar2\) \* FLOAT_0004c37c;	uVar38 = cmd\[0xaa\];
-use	::pcl_CopyPix	fVar14	halfHeight	INFERRED	(dstBottom-dstY)*0.5, low halfword of packet word 0xc3	fVar14 = \(fVar3 \- fVar5\) \* FLOAT_0004c37c;	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar16	scaledWidth	INFERRED	(dstRight-dstX) * FLOAT_0004c37c (6.0f), high halfword of packet word 0xc3	fVar16 = \(fVar7 \- fVar2\) \* FLOAT_0004c37c;	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	fVar14	scaledHeight	INFERRED	(dstBottom-dstY) * FLOAT_0004c37c (6.0f), low halfword of packet word 0xc3	fVar14 = \(fVar3 \- fVar5\) \* FLOAT_0004c37c;	uVar38 = cmd\[0xaa\];
 use	::pcl_CopyPix	fVar11	centerY	INFERRED	(dstY+dstBottom)*0.5, packet word 199	fVar11 = \(fVar5 \+ fVar3\) \* FLOAT_0004c380;	uVar38 = cmd\[0xaa\];
 use	::pcl_CopyPix	fVar19	centerX	INFERRED	(dstX+dstRight)*0.5, packet word 0xc6	fVar19 = \(fVar2 \+ fVar7\) \* FLOAT_0004c380;	uVar38 = cmd\[0xaa\];

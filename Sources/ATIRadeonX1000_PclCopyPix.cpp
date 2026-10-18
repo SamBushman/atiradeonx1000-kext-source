@@ -104,8 +104,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
   float chunkTopF;
   float invChunkWidth;
   float invChunkHeight;
-  float halfHeight;
-  float halfWidth;
+  float scaledHeight;
+  float scaledWidth;
   float centerY;
   float centerX;
   float invCopyWidth;
@@ -382,8 +382,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
                 iVar31 = iVar31 + 1;
                 chunkLeft = chunkLeft + 0xc00;
                 columnWidthLeft = columnWidthLeft - 0xc00;
-                halfHeight = (fVar17 - fVar20) * FLOAT_0004c37c;
-                halfWidth = (fVar10 - fVar15) * FLOAT_0004c37c;
+                scaledHeight = (fVar17 - fVar20) * FLOAT_0004c37c;
+                scaledWidth = (fVar10 - fVar15) * FLOAT_0004c37c;
                 centerY = (fVar20 + fVar17) * FLOAT_0004c380;
                 centerX = (fVar15 + fVar10) * FLOAT_0004c380;
                 dVar49 = (double)CONCAT44d(0x43300000,uVar28) - DOUBLE_0004c3a8;
@@ -396,7 +396,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
                 fVar8 = (float)dVar49;
                 chunkPacket[0xe] = FBITS(centerY);
                 chunkPacket[9] = 0x1087;
-                chunkPacket[10] = (SInt32)halfWidth << 0x10 | (SInt32)halfHeight;
+                chunkPacket[10] = (SInt32)scaledWidth << 0x10 | (SInt32)scaledHeight;
                 chunkPacket[0xf] = 0;
                 chunkPacket[7] = FBITS((invChunkWidth * (fVar12 - fVar8)));
                 chunkPacket[5] = FBITS((invChunkWidth * (fVar7 - fVar8)));
@@ -422,8 +422,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
           invCopyHeight = FLOAT_0004c374 /
                   (float)((double)CONCAT44d(0x43300000,copyHeight ^ 0x80000000) - DOUBLE_0004c3a8);
         }
-        halfWidth = (dstRight - dstX) * FLOAT_0004c37c;
-        halfHeight = (dstBottom - dstY) * FLOAT_0004c37c;
+        scaledWidth = (dstRight - dstX) * FLOAT_0004c37c;
+        scaledHeight = (dstBottom - dstY) * FLOAT_0004c37c;
         centerY = (dstY + dstBottom) * FLOAT_0004c380;
         centerX = (dstX + dstRight) * FLOAT_0004c380;
         *quadPacket = 0x31080;
@@ -436,7 +436,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         cmd[0xc6] = FBITS(centerX);
         cmd[199] = FBITS(centerY);
         cmd[0xc2] = 0x1087;
-        cmd[0xc3] = (SInt32)halfWidth << 0x10 | (SInt32)halfHeight;
+        cmd[0xc3] = (SInt32)scaledWidth << 0x10 | (SInt32)scaledHeight;
         cmd[200] = 0;
       }
       texturePitchWord = cmd[0xaa];

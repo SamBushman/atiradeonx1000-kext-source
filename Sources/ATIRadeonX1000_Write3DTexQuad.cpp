@@ -190,8 +190,8 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   float chunkTopF;
   float invChunkWidth;
   float invChunkHeight;
-  float halfHeight;
-  float halfWidth;
+  float scaledHeight;
+  float scaledWidth;
   float centerY;
   float centerX;
   float chunkLeftF;
@@ -575,8 +575,8 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
                 iVar22 = iVar22 + 1;
                 chunkLeft = chunkLeft + 0xc00;
                 columnWidthLeft = columnWidthLeft - 0xc00;
-                halfHeight = (fVar16 - fVar19) * FLOAT_0004c37c;
-                halfWidth = (fVar4 - fVar12) * FLOAT_0004c37c;
+                scaledHeight = (fVar16 - fVar19) * FLOAT_0004c37c;
+                scaledWidth = (fVar4 - fVar12) * FLOAT_0004c37c;
                 centerY = (fVar16 + fVar19) * FLOAT_0004c380;
                 centerX = (fVar4 + fVar12) * FLOAT_0004c380;
                 dVar44 = (double)CONCAT44d(0x43300000,uVar26) - DOUBLE_0004c3a8;
@@ -589,7 +589,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
                 chunkLeftF = (float)dVar44;
                 chunkPacket[0xe] = FBITS(centerY);
                 chunkPacket[9] = 0x1087;
-                chunkPacket[10] = (SInt32)halfWidth << 0x10 | (SInt32)halfHeight;
+                chunkPacket[10] = (SInt32)scaledWidth << 0x10 | (SInt32)scaledHeight;
                 chunkPacket[0xf] = 0;
                 chunkPacket[7] = FBITS(invChunkWidth * (fVar9 - chunkLeftF));
                 chunkPacket[5] = FBITS(invChunkWidth * (fVar10 - chunkLeftF));
@@ -615,8 +615,8 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
           invCopyHeight = FLOAT_0004c374 /
                   (float)((double)CONCAT44d(0x43300000,copyHeight ^ 0x80000000) - DOUBLE_0004c3a8);
         }
-        halfWidth = (quadRight - quadLeft) * FLOAT_0004c37c;
-        halfHeight = (quadBottom - quadTop) * FLOAT_0004c37c;
+        scaledWidth = (quadRight - quadLeft) * FLOAT_0004c37c;
+        scaledHeight = (quadBottom - quadTop) * FLOAT_0004c37c;
         centerY = (quadTop + quadBottom) * FLOAT_0004c380;
         centerX = (quadLeft + quadRight) * FLOAT_0004c380;
         *quadPacket = 0x31080;
@@ -629,7 +629,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         packet[0xc6] = FBITS(centerX);
         packet[199] = FBITS(centerY);
         packet[0xc2] = 0x1087;
-        packet[0xc3] = (SInt32)halfWidth << 0x10 | (SInt32)halfHeight;
+        packet[0xc3] = (SInt32)scaledWidth << 0x10 | (SInt32)scaledHeight;
         packet[200] = 0;
       }
       texturePitchWord = packet[0xaa];
