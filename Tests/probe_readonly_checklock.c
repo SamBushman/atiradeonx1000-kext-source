@@ -15,6 +15,7 @@
 int g_testsRun = 0;
 int g_testsUnexpected = 0;
 int g_testsSkipped = 0;
+int g_testsRecorded = 0;
 
 int main(void) {
     io_service_t service = find_accelerator_service();

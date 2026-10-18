@@ -84,3 +84,6 @@ surface (`this+0xf8 == NULL`), reachable by one call on a fresh DVD connection. 
 - **Coverage data:** `function_coverage.md` (method coverage), `body_triage.tsv` (every static-check difference, classified), `deep_paths.json` and
   `deep_paths_notes.tsv` (shipped return codes per method and hand-written notes; `Tools/return_code_audit.py` checks them against the baselines).
   `Tools/parity_report.py` compares stock and rebuilt logs from the destructive tests and lists the known vendor deviations.
+
+# Building every test
+`sh Tests/build_all.sh` (on the G5) builds all test programs found under Tests/ (frameworks chosen from each file's includes; `build_exclude.tsv` lists any file deliberately skipped, with a reason) and exits non-zero if one fails. `sh Tools/stage_for_test.sh` (dev machine) builds the rebuilt kext AND all tests on the G5 in one step. Per-file list: `Tests/build_all.out`; compiler output: `Tests/build_all.err`.

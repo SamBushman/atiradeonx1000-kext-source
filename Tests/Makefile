@@ -7,7 +7,9 @@
 # IOKit/CoreFoundation frameworks so it exercises the real live driver.
 #
 # Usage (on the G5, from Tests/):
-#   make
+#   make                 just the parity harness
+#   sh build_all.sh      EVERY test program (harness, stand-alone tools/probes/perf, destructive/, userspace/); fails if any does not build.
+#                        From the dev machine: sh Tools/stage_for_test.sh  (kext + all tests, nothing loaded)
 #   ./parity_test_harness
 
 CC = gcc
