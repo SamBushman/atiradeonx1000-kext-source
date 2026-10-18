@@ -53,7 +53,7 @@ VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 sizeClass, 
         prevNode = M<SInt32>(dataBuffer + 0x24);
         M<UInt32>(prevNode + 0x28) = M<UInt32>(dataBuffer + 0x28);
         iVar2 = M<SInt32>(dataBuffer + 0x28);
-        M<UInt8 *>(dataBuffer + 0x28) = self + kIOATIR500Accelerator_vramBufferList;
+        M<UInt8 *>(dataBuffer + 0x28) = self + kIOATIR500Accelerator_textureVramListSentinel;
         M<SInt32>(iVar2 + 0x24) = prevNode;
         M<UInt32>(dataBuffer + 0x24) = M<UInt32>(self + kIOATIR500Accelerator_vramBufferList_prev);
         M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_prev) = dataBuffer;

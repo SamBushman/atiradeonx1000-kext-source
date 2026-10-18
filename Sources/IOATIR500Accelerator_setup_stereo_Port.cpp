@@ -80,7 +80,7 @@ LAB_000055e0:
     stereoMode = 0;
 LAB_000055e8:
     if (M<SInt32>(self + panel * 0x78 + 0x1ac) != 0) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + panel * 0x78 + 0x1a4)));
+      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + panel * 0x78 + 0x1a4)));
     }
     M<UInt32>(self + panelOffset + 0x114) = 1;
   }

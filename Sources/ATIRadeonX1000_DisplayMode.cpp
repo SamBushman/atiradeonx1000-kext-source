@@ -154,24 +154,24 @@ bool ATIRadeonX1000::display_mode_will_change(SInt32 mode) {
   this->shutdownPCIeGART();
   M<UInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) = 0;
   if ((M<SInt32>(self + kIOATIR500Accelerator_scanout2PadElementPrev) != 0) && (M<SInt32>(self + kIOATIR500Accelerator_scanout2PadElement) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout2PadElement));
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout2PadElement));
   }
   if ((M<SInt32>(self + kIOATIR500Accelerator_scanout1PadElementPrev) != 0) && (M<SInt32>(self + kIOATIR500Accelerator_scanout1PadElement) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout1PadElement));
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout1PadElement));
   }
   iVar4 = 0;
   displayElement = (self + kIOATIR500Accelerator_scanout1Buffer);
   displayRecord = self;
   do {
     if ((M<SInt32>(displayRecord + 0x130) != 0) && (M<SInt32>(displayRecord + 300) != 0)) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)displayElement);
+      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)displayElement);
     }
     bVar1 = iVar4 != 1;
     displayElement = displayElement + 0x78;
     displayRecord = displayRecord + 0x78;
     iVar4 = iVar4 + 1;
   } while (bVar1);
-  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->init_pool(0);
+  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->init_pool(0);
   GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
   return result;
 }

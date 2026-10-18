@@ -47,12 +47,12 @@ LAB_0001a84c:
     cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
     if (cpuVisibleSize == M<UInt32>(self + kIOATIR500Accelerator_vramSize)) {
 LAB_0001a8f0:
-      if (M<int>(self + kIOATIR500Accelerator_activePanelMask) == 0) {
-        iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),
+      if (M<int>(self + kIOATIR500Accelerator_displayConfigBits) == 0) {
+        iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),
                            size,0x1000,0x10000,cpuVisibleSize - 0x10000);
       }
       else {
-        memory = M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool);
+        memory = M<UInt8 *>(self + kIOATIR500Accelerator_vramPool);
 LAB_0001a980:
         iVar3 = ((ATIR500Memory *)(memory))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size,0x1000,0,cpuVisibleSize);
       }
@@ -70,11 +70,11 @@ LAB_0001a980:
       VCALL(*mapping, 0x18)(mapping);
       cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
       if (((flags ^ 0x40000000) >> 0x1e & 1) != 0) goto LAB_0001a8f0;
-      iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
+      iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
                          ,0x1000,cpuVisibleSize,M<int>(self + kIOATIR500Accelerator_vramSize) - cpuVisibleSize);
       if (iVar3 == 0) {
         cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
-        memory = M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool);
+        memory = M<UInt8 *>(self + kIOATIR500Accelerator_vramPool);
         goto LAB_0001a980;
       }
     }

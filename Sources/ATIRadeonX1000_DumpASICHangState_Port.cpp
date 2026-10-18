@@ -108,7 +108,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   M<UInt32>(iVar24 + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
   uVar10 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x34));
-  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x400000) == 0) {
+  if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x400000) == 0) {
     M<UInt32>(iVar24 + 0x70) = 0;
     enforceInOrderExecutionIO();
   }

@@ -4,8 +4,8 @@
            iVar2 = iVar4 - iVar7;
            iVar7 = iVar7 + 1;
            VCALL(M<int>(self), 0x5a4)
--                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar2 << (GH_page_size & 0x3f));
-+                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar2 << (GH_page_shift & 0x3f));
+-                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar2 << (GH_page_size & 0x3f));
++                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar2 << (GH_page_shift & 0x3f));
          } while (iVar4 != iVar7);
        }
      }
@@ -15,12 +15,12 @@
 -        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_size & 0x3f));
 +        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_shift & 0x3f));
          VCALL(M<int>(self), 0x5a4)
--                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar7 << (GH_page_size & 0x3f));
-+                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar7 << (GH_page_shift & 0x3f));
+-                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar7 << (GH_page_size & 0x3f));
++                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar7 << (GH_page_shift & 0x3f));
          iVar4 = iVar7;
        }
 -      VCALL(M<int>(self), 0x598)(self,1 << (GH_page_size & 0x3f));
 +      VCALL(M<int>(self), 0x598)(self,1 << (GH_page_shift & 0x3f));
      }
      VCALL(M<int>(self), 0x5a4)
-               (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferGartOffset));
+               (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),M<UInt32>(self + kIOATIR500Accelerator_scratchBufferGartOffset));

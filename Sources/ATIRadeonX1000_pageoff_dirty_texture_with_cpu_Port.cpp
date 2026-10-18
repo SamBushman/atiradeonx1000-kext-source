@@ -168,7 +168,7 @@ LAB_0001e668:
                 destination = hwInfoBytes + M<SInt32>(tileRecord + 2);
               }
               destination = destination + repeat * M<SInt32>(tileRecord + 10);
-              vramSource = M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress) + M<SInt32>(textureBytes + 0x48) + M<SInt32>(tileRecord + 6) +
+              vramSource = M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) + M<SInt32>(textureBytes + 0x48) + M<SInt32>(tileRecord + 6) +
                        repeat * M<SInt32>(tileRecord + 0xe);
               if ((((SInt32)uVar40 < 1 << iVar33 + 3) || ((SInt32)uVar35 < 1 << local_7c + 3)) ||
                  ((M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) & 4) == 0)) {
@@ -203,7 +203,7 @@ LAB_0001e668:
                 iVar28 = 1;
               }
               iVar28 = iVar28 * (1 << iVar20);
-              uVar32 = vramSource - M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress);
+              uVar32 = vramSource - M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase);
               iVar27 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
               M<UInt32>(iVar27 + surfaceInfoOffset) =
                    (uVar40 >> 3) << 0x18 | (uVar40 >> 3 & 0x1f00) << 8 |
@@ -230,7 +230,7 @@ LAB_0001e668:
                 iVar28 = 0;
                 do {
                   GH_memcpy(destination,vramSource,uVar37 << (uVar22 & 0x3f));
-                  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
+                  if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
                     AVar25 = hwInfoBytes[0x1a];
                   }
                   else {

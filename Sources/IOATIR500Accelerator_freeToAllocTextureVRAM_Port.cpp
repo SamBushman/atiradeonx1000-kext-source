@@ -57,11 +57,11 @@ LAB_00004450:
     if (iVar5 == 0) {
       M<SInt32>(self + kIOATIR500Accelerator_textureVRAMAllocFailCount) = M<SInt32>(self + kIOATIR500Accelerator_textureVRAMAllocFailCount) + 1;
       if (surfaceBytes == (UInt8 *)0x0) {
-        node = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next);
+        node = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
       }
       else {
-        node = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next);
-        pIVar10 = self + kIOATIR500Accelerator_vramBufferList;
+        node = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
+        pIVar10 = self + kIOATIR500Accelerator_textureVramListSentinel;
         if ((node == pIVar10) ||
            (M<SInt32>(surfaceBytes + 0x84) - M<SInt32>(M<SInt32>(node + 0x14) + 8) < 1)) {
           pIVar11 = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_prev);
@@ -87,7 +87,7 @@ LAB_00004294:
           goto LAB_00004448;
         }
       }
-      pIVar11 = self + kIOATIR500Accelerator_vramBufferList;
+      pIVar11 = self + kIOATIR500Accelerator_textureVramListSentinel;
       bVar12 = !secondPass << 1;
       pIVar10 = (UInt8 *)0x0;
 LAB_00004040:
@@ -144,7 +144,7 @@ LAB_00004124:
                 M<UInt8 *>(node + 0x28) = node;
                 M<SInt32>(iVar5 + 0x24) = iVar9;
                 M<UInt8 *>(node + 0x24) = node;
-                M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) + 1;
+                M<SInt32>(self + kIOATIR500Accelerator_unknown_0x7e0) = M<SInt32>(self + kIOATIR500Accelerator_unknown_0x7e0) + 1;
                 if (pIVar11 != node) goto LAB_00004430;
                 goto LAB_00004448;
               }
@@ -229,8 +229,8 @@ joined_r0x00004360:
         iVar9 = M<SInt32>(pIVar11 + 0x24);
         M<UInt32>(iVar9 + 0x28) = M<UInt32>(pIVar11 + 0x28);
         iVar5 = M<SInt32>(pIVar11 + 0x28);
-        M<UInt32>(pIVar11 + 0x28) = M<UInt32>(self + kIOATIR500Accelerator_vramBufferList_next);
-        M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next) = pIVar11;
+        M<UInt32>(pIVar11 + 0x28) = M<UInt32>(self + kIOATIR500Accelerator_textureVramListFirst);
+        M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst) = pIVar11;
         M<SInt32>(iVar5 + 0x24) = iVar9;
         M<UInt8 *>(pIVar11 + 0x24) = pIVar10;
         M<UInt8 *>(M<SInt32>(pIVar11 + 0x28) + 0x24) = pIVar11;

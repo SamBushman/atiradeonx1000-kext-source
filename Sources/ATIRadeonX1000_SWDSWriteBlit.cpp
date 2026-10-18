@@ -90,7 +90,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   local_a8 = 0x43300000;
   uStack_9c = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9da);
   local_a0 = 0x43300000;
-  M<UInt32>(self + kIOATIR500Accelerator_currentContext) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_unknown_0x78) = 0;
   BF(blk[23]) = (float)((double)CONCAT44d(0x43300000,uStack_a4) - dVar25);
   dVar24 = (double)BF(blk[23]);
   BF(blk[24]) = (float)((double)CONCAT44d(0x43300000,uStack_9c) - dVar25);

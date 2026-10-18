@@ -263,7 +263,7 @@ LAB_000214e0:
   }
   wordCount = M<UInt32>(hwInfoBytes + 8);
   M<UInt32>(self + kIOATIR500Accelerator_stateDestroyedByPageoff) = 1;
-  M<UInt32>(self + kIOATIR500Accelerator_currentContext) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_unknown_0x78) = 0;
   if ((wordCount & 1) != 0) {
     iVar15 = wordCount * 4;
     wordCount = wordCount + 1;

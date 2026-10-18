@@ -125,7 +125,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
   M<UInt32>(self + kIOATIR500Accelerator_scanout1PadElementPrev) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_scanout1PadElementOffset) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_scanout1PadElementAlignMask) = 0;
-  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->init_pool(0);
+  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->init_pool(0);
   M<UInt32>(self + kIOATIR500Accelerator_vramPoolB) = 0;
   index = 0;
   pAVar4 = self;
@@ -159,11 +159,11 @@ bool ATIRadeonX1000::start(IOService *provider) {
   }
   if (M<SInt32>(self + kIOATIR500Accelerator_wideBlitSupport) == 0) {
     M<UInt32>(self + kIOATIR500Accelerator_tearingWideBlit) = 0;
-    M<UInt16>(self + kIOATIR500Accelerator_unknown_0xa8) = 0x1000;
+    M<UInt16>(self + kIOATIR500Accelerator_maxSurfaceWidth) = 0x1000;
   }
   else {
-    M<UInt16>(self + kIOATIR500Accelerator_unknown_0xaa) = 0x1000;
-    M<UInt16>(self + kIOATIR500Accelerator_unknown_0xa8) = 0x1000;
+    M<UInt16>(self + kIOATIR500Accelerator_maxSurfaceHeight) = 0x1000;
+    M<UInt16>(self + kIOATIR500Accelerator_maxSurfaceWidth) = 0x1000;
   }
   /* #85: the decompile's `operator new(0x14); if (p) ATIR500Memory::ATIR500Memory(p)` pair is exactly what `new ATIR500Memory()` compiles to; the
    * mechanical port wrote both, which allocated twice and leaked the first object on every start(). */
@@ -177,7 +177,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
     }
     else {
       iVar5 = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x578)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x18);
-      M<SInt32>(self + kIOATIR500Accelerator_registerDeviceMemory) = iVar5;
+      M<SInt32>(self + kIOATIR500Accelerator_pciBar0Config) = iVar5;
       if (iVar5 != 0) {
         piVar7 = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x57c)
                                   (M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x18,0);
@@ -225,7 +225,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
                   if (chipID < (UInt8 *)0x7141) {
                     if (chipID + -0x7100 < (UInt8 *)0x10) {
                       uVar13 = 0;
-                      M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) = M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) | 0x110000;
+                      M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x110000;
                       this->setupR520Pipes();
                       goto LAB_0001fc04;
                     }
@@ -245,7 +245,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
               }
 LAB_0001fafc:
               uVar13 = 2;
-              M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) = M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) | 0x410000;
+              M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x410000;
               this->setupR520Pipes();
             }
             else {
@@ -255,7 +255,7 @@ LAB_0001fafc:
                     if ((UInt8 *)0x723f < chipID) {
 LAB_0001fbec:
                       uVar13 = 3;
-                      M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) = M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) | 0x810000;
+                      M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x810000;
                       this->setupR520Pipes();
                       goto LAB_0001fc04;
                     }
@@ -280,7 +280,7 @@ LAB_0001fbc8:
               }
 LAB_0001fbd0:
               uVar13 = 1;
-              M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) = M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) | 0x210000;
+              M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x210000;
               this->setupR520Pipes();
             }
 LAB_0001fc04:
@@ -294,7 +294,7 @@ LAB_0001fc04:
               M<UInt32>(self + kIOATIR500Accelerator_stampPageBase) = M<UInt32>(self + kIOATIR500Accelerator_mmioBase);
               M<UInt32>(self + kIOATIR500Accelerator_retiredStampOffset) = 0x15e4;
               mapped = VCALL(M<SInt32>(self), 0x590)
-                                (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),self + kIOATIR500Accelerator_scratchCommandBufferGartOffset,0,0x1000);
+                                (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),self + kIOATIR500Accelerator_scratchBufferGartOffset,0,0x1000);
               if (mapped != 0) {
                 if (M<SInt32>(self + kIOATIR500Accelerator_unknown_0x8c8) == 0) {
                   if ((self[0x8cc] != 0x0) && (1 < (UInt8)self[0x8cc])) {
@@ -302,7 +302,7 @@ LAB_0001fc04:
                     do {
                       gartOffset = pageIndex << (GH_page_shift & 0x3f);
                       iVar9 = VCALL(M<SInt32>(self), 0x590)
-                                        (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),&gartOffset,gartOffset,
+                                        (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
                       if (iVar9 == 0) {
                         if (pageIndex < (SInt32)(UInt32)(UInt8)self[0x8cc]) {
@@ -312,7 +312,7 @@ LAB_0001fc04:
                               iVar16 = (pageIndex + -1) - iVar9;
                               iVar9 = iVar9 + 1;
                               VCALL(M<SInt32>(self), 0x5a4)
-                                        (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),
+                                        (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),
                                          iVar16 << (GH_page_shift & 0x3f));
                             } while (pageIndex != iVar9);
                           }
@@ -331,7 +331,7 @@ LAB_0001fc04:
                     do {
                       gartOffset = pageIndex << (GH_page_shift & 0x3f);
                       iVar9 = VCALL(M<SInt32>(self), 0x590)
-                                        (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),&gartOffset,gartOffset,
+                                        (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
                       if (iVar9 == 0) {
                         if (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto LAB_0001fd88;
@@ -344,11 +344,11 @@ LAB_0001fc04:
                   }
                 }
                 M<UInt32>(self + kIOATIR500Accelerator_idctEngineActive) = 1;
-                if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) != 0) {
+                if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) != 0) {
                   uVar11 = (UInt32)(UInt8)self[0x84];
                   iVar9 = 0;
-                  cacheFlushStart = -uVar11 & M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferHeader) + 0x20U;
-                  flushLength = ((M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferHeader) + 0x20U & uVar11 - 1) + 0x20) - uVar11;
+                  cacheFlushStart = -uVar11 & M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 0x20U;
+                  flushLength = ((M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 0x20U & uVar11 - 1) + 0x20) - uVar11;
                   if (0 < flushLength) {
                     iVar9 = 0;
                     do {
@@ -363,9 +363,9 @@ LAB_0001fc04:
                   instructionSynchronize();
                   instructionSynchronize();
                 }
-                if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80000) == 0) {
+                if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
                   M<UInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset) = 0;
-                  M<UInt32>(self + kIOATIR500Accelerator_ringPointerBase) = M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferHeader);
+                  M<UInt32>(self + kIOATIR500Accelerator_ringPointerBase) = M<UInt32>(self + kIOATIR500Accelerator_scratchHeader);
                 }
                 else {
                   M<UInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset) = 0x710;
@@ -388,9 +388,9 @@ LAB_0001fc04:
                         index = index + 1;
                         iVar16 = iVar16 + -1;
                       } while (iVar16 != 0);
-                      if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80000) == 0) {
+                      if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
                         M<UInt32>(self + kIOATIR500Accelerator_idctPointerOffset) = 0;
-                        M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) = M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferHeader) + 4;
+                        M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) = M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 4;
                       }
                       else {
                         M<UInt32>(self + kIOATIR500Accelerator_idctPointerOffset) = 0x1f9c;
@@ -413,7 +413,7 @@ LAB_0001fc04:
                               iVar16 = iVar16 + -1;
                             } while (iVar16 != 0);
                             M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig) = 0x11;
-                            if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80000) == 0) {
+                            if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
                               bufferMemory = GH_IOMallocAligned(GH_page_size,GH_page_size);
                               M<SInt32>(self + kIOATIR500Accelerator_stampPageMemory) = bufferMemory;
                               if (bufferMemory != 0) {
@@ -488,8 +488,8 @@ LAB_0001fc04:
                                   local_34[0] = self + kIOATIR500Accelerator_swdsState_0xb2c;
                                   VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x170)
                                             (M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),"ATIFEDSInfo",local_34,4);
-                                  if ((M<SInt32>(self + kIOATIR500Accelerator_framebufferCount) == 0) ||
-                                     ((M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress) == 0 ||
+                                  if ((M<SInt32>(self + kIOATIR500Accelerator_displayCount) == 0) ||
+                                     ((M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) == 0 ||
                                       (hardwareReady = this->initialize_hardware(), hardwareReady != 0)))) {
                                     pcVar14 = M<code *>(M<SInt32>(self) + 0x16c);
                                     uVar6 = VCALL(M<SInt32>(self), 0x5d0)(self);
@@ -591,7 +591,7 @@ LAB_0001fd88:
   while (iVar9 = pageIndex + -2, -1 < iVar9) {
     VCALL(M<SInt32>(self), 0x598)(self,pageIndex + -1 << (GH_page_shift & 0x3f));
     VCALL(M<SInt32>(self), 0x5a4)
-              (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar9 << (GH_page_shift & 0x3f));
+              (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar9 << (GH_page_shift & 0x3f));
     pageIndex = iVar9;
   }
   goto LAB_0001f9a0;

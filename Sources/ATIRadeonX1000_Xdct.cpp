@@ -52,7 +52,7 @@ bool ATIRadeonX1000::start_xdct_engine() {
        uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();
   iVar4 = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
-  uVar3 = iVar4 + M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferGartOffset) + (M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) - M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferHeader));
+  uVar3 = iVar4 + M<SInt32>(self + kIOATIR500Accelerator_scratchBufferGartOffset) + (M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) - M<SInt32>(self + kIOATIR500Accelerator_scratchHeader));
   M<UInt32>(mmioBase + 0x1f98) =
        (uVar3 & 0xfffffffc) << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();

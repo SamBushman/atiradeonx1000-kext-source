@@ -183,21 +183,4 @@ field	IOATIR500Accelerator,ATIRadeonX1000	0xc50	chipID	CONFIRMED	getChipID retur
 field	IOATIR500Accelerator,ATIRadeonX1000	0xc54	chipRev	CONFIRMED	getChipRev returns it; start(): chip revision word (live-verified 0xc); setupR520Pipes tests < 4
 field	IOATIR500Accelerator,ATIRadeonX1000	0xc58	unknown_0xc58	UNKNOWN	start() zeroes it; no reader found
 field	IOATIR500Accelerator,ATIRadeonX1000	0xc5c	gartFlushScratch	INFERRED	addToPCIeGART/removeFromPCIeGART/reserveInGART: register 0x130 read-back, set bit 0x8000000, written back, then the last entry re-read (a posted-write flush)
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x78: unknown_0x78 (not currentContext) - SWDSWriteBlitToCmdBuf and pageoff_dirty_texture_with_gpu store 0; no reader found
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x7c: vramPool (not memoryPool) - ATIR500Memory pool: init_pool(usableVramSize), reserve() of the scanout buffers; ATIRadeonX1000::writePerformanceStats exports its total_fre
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x98: hwCapabilityBits (not capabilityFlags) - tested bitwise all over: 0x80 (GART entry base), 0x10000 (second display), 0x80000 (no promo4), 0x200000/0x400000 (R520 pipes / hang dump), 
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xa8: maxSurfaceWidth (not unknown_0xa8) - is_surface_size_supported compares width <= this (UInt16); start() stores 0x1000
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xaa: maxSurfaceHeight (not unknown_0xaa) - is_surface_size_supported compares height <= this (UInt16); alloc_surface_buffer too; start() stores 0x1000 when wide-blit support is on
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xac: pciBar0Config (not registerDeviceMemory) - start(): PCI config read of register 0x18 (BAR0) via vtable +0x578; stop() clears
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xcc: displayCount (not framebufferCount) - set_display_mode_and_vram: second display only when < 2 is false (this >= 2); start() tests == 0
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xd0: displayConfigBits (not activePanelMask) - set_display_mode_and_vram: 0, then 1 (display 1 found), |= 2 (display 2 found); allocate_texture tests it
 # SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xd4: framebuffer1 (not framebuffer0) - set_display_mode_and_vram: fFramebuffers[0].framebuffer - vtable +0x5f0 getCurrentDisplayMode, +0x5ec getPixelInformation
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0xe4: vramApertureBase (not vramMappedAddress) - pageoff_dirty_texture_with_cpu: CPU address of a texture in VRAM = this + texture offset; startupPCIeGART adds it to the GART table position
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x150: scanout1BufferBackingStoreHandle (not unknown_0x150) - embedded ATIR500SurfaceBuffer-shaped record (stride 0x78 like the surface's +0xa8 records): GLKMemoryElement at +0 (node,prev,offset,alignMa
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x228: scratchBufferGartOffset (not scratchCommandBufferGartOffset) - Headers/ATIRadeonX1000.h _unknown_0x228: the scratch command buffer record at +0x224; start() maps it with addr = self+0x228 (GART offset ou
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x22c: scratchBufferDescriptor (not scratchCommandBufferMemory) - start() calls vtable +0x144 on it with the buffer; stop() unmaps it with (descriptor, gart offset +0x228, size)
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x238: scratchHeader (not scratchCommandBufferHeader) - Headers/ATIRadeonX1000.h member scratchHeader
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x5c8: cachedBufferSizeThreshold (not commandBufferSize) - Headers/ATIRadeonX1000.h member of the same name
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x5dc: textureVramListSentinel (not vramBufferList) - freeToAllocTextureCPUVisibleVRAM: list end marker (address self+0x5dc), see ATIRadeonX1000_FreeToAllocTextureCPUVisibleVRAM.cpp header
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x604: textureVramListFirst (not vramBufferList_next) - freeToAllocTextureCPUVisibleVRAM/freeToAllocTextureVRAM: first node of the same list (initial link)
-# SUGGESTION for Fields_IOATIR500Accelerator.tsv 0x7e0: unknown_0x7e0 (not vramScanEvictedCount) - freeToAllocTextureCPUVisibleVRAM increments it once per freed texture; role not established (see that file's header)

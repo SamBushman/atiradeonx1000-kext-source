@@ -184,7 +184,7 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
   UInt32 emptyEntry;
   
   result = 0;
-  if (((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0xf00000) != 0) && (result = 1, M<SInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) == 0)) {
+  if (((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0xf00000) != 0) && (result = 1, M<SInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) == 0)) {
     iVar3 = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x568)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x10,0);
     if (iVar3 == 0) {
       GH_kprintf(
@@ -202,8 +202,8 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
       M<UInt32>(self + kIOATIR500Accelerator_gartReserveSize) = uVar4 + 0x10000;
       M<UInt32>(self + kIOATIR500Accelerator_gartTableVramOffset) = uVar1 - uVar4;
       M<UInt32>(self + kIOATIR500Accelerator_gartReserveOffset) = uVar1 - (uVar4 + 0x10000);
-      if (M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress) != 0) {
-        M<UInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) = (uVar1 - uVar4) + M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress);
+      if (M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) != 0) {
+        M<UInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) = (uVar1 - uVar4) + M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase);
       }
       if (M<SInt32>(self + kIOATIR500Accelerator_pcieGartTable) == 0) {
         primaryEntry = (UInt32 *)GH_IOMallocAligned(uVar4,GH_page_size);
@@ -309,7 +309,7 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
           self[0xbff] = 0x6;
           self[0xbfe] = 0xb;
           M<SInt16>(self + kIOATIR500Accelerator_gartTableBufferActiveHeight) = (SInt16)(uVar4 / (uVar1 << 2));
-          if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
+          if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
             M<UInt32>(self + kIOATIR500Accelerator_gartEntryBase) = 0;
           }
           else {
@@ -367,7 +367,7 @@ void ATIRadeonX1000::shutdownPCIeGART() {
        (savedValue & 0xfffffffe) << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
   enforceInOrderExecutionIO();
   if ((M<SInt32>(self + kIOATIR500Accelerator_gartTableBufferElementPrev) != 0) && (M<SInt32>(self + kIOATIR500Accelerator_gartTableBuffer) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_gartTableBuffer));
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_gartTableBuffer));
   }
   M<UInt32>(self + kIOATIR500Accelerator_gartTableVramOffset) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_gartReserveOffset) = 0;

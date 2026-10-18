@@ -50,12 +50,12 @@ void IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor*descriptor, UInt32 
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
     }
-    if (((M<unsigned int>(self + kIOATIR500Accelerator_capabilityFlags) & 2) != 0) &&
+    if (((M<unsigned int>(self + kIOATIR500Accelerator_hwCapabilityBits) & 2) != 0) &&
        (entry = gartOffset >> (GH_page_shift & 0x3f), entry < endEntry)) {
       do {
         iVar3 = entry << (GH_page_shift & 0x3f);
         entry = entry + 1;
-        VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar3,0);
+        VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar3,0);
       } while (entry != endEntry);
     }
     entry = gartOffset >> (GH_page_shift & 0x3f);

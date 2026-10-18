@@ -64,7 +64,7 @@ UInt32 ATIRadeonX1000::submit_buffer(UInt32*bufferStart, UInt32 gartOffset, UInt
   else {
 LAB_00020a3c:
     M<UInt32>(self + kIOATIR500Accelerator_commandBytesPerSample) = dwordCount * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandBytesPerSample);
-    if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
+    if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
       ppcSync();
       instructionSynchronize();
     }

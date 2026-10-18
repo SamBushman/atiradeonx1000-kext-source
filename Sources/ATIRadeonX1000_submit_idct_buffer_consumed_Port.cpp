@@ -55,7 +55,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
   SInt32 flushOffset;
   
   startIndex = M<SInt32>(self + kIOATIR500Accelerator_idctRingCursor);
-  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
+  if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
     ppcSync();
     instructionSynchronize();
   }
@@ -203,7 +203,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
       M<UInt32>(ringBase + ringIndex * 4) = 0;
       ringIndex = ringIndex + 1;
       M<UInt32>(self + kIOATIR500Accelerator_idctRingCursor) = ringIndex & 0x7ff;
-      if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
+      if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
         ppcSync();
         instructionSynchronize();
       }

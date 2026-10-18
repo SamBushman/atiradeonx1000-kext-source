@@ -62,11 +62,11 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
         iVar5 = VCALL(M<int>(excludeABytes), 0x5d0)(excludeABytes,neededBytes);
       }
       if (iVar5 == 1) break;
-      texture = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next);
+      texture = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
       do {
         do {
           while( true ) {
-            if (self + kIOATIR500Accelerator_vramBufferList == texture) goto LAB_00004794;
+            if (self + kIOATIR500Accelerator_textureVramListSentinel == texture) goto LAB_00004794;
             if (excludeCount < 1) break;
             if (texture != (UInt8 *)*excludeList) {
               iVar5 = 0;

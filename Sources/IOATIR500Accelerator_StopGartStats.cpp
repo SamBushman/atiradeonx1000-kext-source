@@ -80,16 +80,16 @@ void IOATIR500Accelerator::stop(IOService *provider) {
     recordIndex = recordIndex + 1;
   } while (notLastRecord);
   ((IOATIR500Accelerator *)(self))->freeAllDataBuffers();
-  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 1) != 0) {
-    commandBufferMemory = M<SInt32 *>(self + kIOATIR500Accelerator_scratchCommandBufferMemory);
+  if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 1) != 0) {
+    commandBufferMemory = M<SInt32 *>(self + kIOATIR500Accelerator_scratchBufferDescriptor);
     if (commandBufferMemory == (SInt32 *)0x0) goto LAB_000067e8;
     VCALL(*commandBufferMemory, 0x148)(commandBufferMemory,3);
   }
-  if (M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory) != 0) {
+  if (M<SInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor) != 0) {
     ((IOATIR500Accelerator *)(self))->freeCommandBuffer((VendorCommandBuffer *)(self + kIOATIR500Accelerator_scratchCommandBuffer));
   }
 LAB_000067e8:
-  if (M<SInt32>(self + kIOATIR500Accelerator_framebufferCount) != 0) {
+  if (M<SInt32>(self + kIOATIR500Accelerator_displayCount) != 0) {
     panelIndex = 0;
     panelRecordCursor = self;
     do {
@@ -104,11 +104,11 @@ LAB_000067e8:
       }
       panelIndex = panelIndex + 1;
       panelRecordCursor = panelRecordCursor + 0x20;
-    } while (panelIndex < M<UInt32>(self + kIOATIR500Accelerator_framebufferCount));
+    } while (panelIndex < M<UInt32>(self + kIOATIR500Accelerator_displayCount));
   }
-  if (M<SInt32 *>(self + kIOATIR500Accelerator_memoryPool) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_memoryPool), 0x18)(M<SInt32 *>(self + kIOATIR500Accelerator_memoryPool));
-    M<UInt32>(self + kIOATIR500Accelerator_memoryPool) = 0;
+  if (M<SInt32 *>(self + kIOATIR500Accelerator_vramPool) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_vramPool), 0x18)(M<SInt32 *>(self + kIOATIR500Accelerator_vramPool));
+    M<UInt32>(self + kIOATIR500Accelerator_vramPool) = 0;
   }
   VCALL(M<SInt32>(self), 0x584)(self,provider);
   if (M<SInt32>(self + kIOATIR500Accelerator_commandLock) != 0) {
@@ -181,7 +181,7 @@ IOReturn IOATIR500Accelerator::addToMinMaxGART(IOMemoryDescriptor *memory, UInt3
 LAB_000060d8:
   iVar6 = VCALL(M<SInt32>(memoryBytes), 0x144)(memoryBytes,3);
   if (iVar6 == 0) {
-    if (((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 2) == 0) ||
+    if (((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 2) == 0) ||
        (iVar6 = VCALL(M<SInt32>(self), 0x588)
                           (self,memoryBytes,firstEntry << (GH_page_shift & 0x3f),0), iVar6 == 0)) {
       iVar6 = 0;
