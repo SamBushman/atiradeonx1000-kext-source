@@ -6,7 +6,7 @@
  * flags): copies the r500 3D-blit state packet into `cmd`, patches in the destination colour buffer (address, pitch,
  * size, format) and source texture (address, size, pitch, format) words, emits the viewport/scissor floats and one or
  * more textured quads (large or scaled copies are split into strips), and returns the pointer one past the last word
- * written. param_3 flips vertically, param_4 selects the alternate-buffer variant.
+ * written. flipHorizontally / flipVertically mirror the copy about the X / Y axis of the rectangle (the 180-degree case passes both).
  *
  * Transcribed mechanically from the decompile (Tools/ghidra2cpp.py, Headers/GhidraCompat.h; conventions as in
  * ATIR500Surface_BuildSwap.cpp). pcl_ParamsR500_t's layout was never recovered as a struct: the body reads it at raw
@@ -20,7 +20,7 @@
 struct pcl_ParamsR500_t;
 extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
-UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, bool alternateBuffer) {
+UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally, bool flipVertically) {
     UInt8 *paramsBytes = reinterpret_cast<UInt8 *>(params);
 
   bool bVar1;
@@ -86,7 +86,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
   UInt32 texturePitchWord;
   UInt32 textureOffsetWord;
   
-  iVar32 = ((UInt32)alternateBuffer);
+  iVar32 = ((UInt32)flipVertically);
   dVar49 = (double)FLOAT_0004c370;
   dVar51 = (double)M<float>(paramsBytes + 0x6c);
   rect = M<SInt16 *>(paramsBytes + 0x50);
@@ -121,7 +121,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
   fVar2 = FLOAT_0004c37c;
   fVar4 = FLOAT_0004c370;
   if (((double)FLOAT_0004c378 < dVar51) || ((double)FLOAT_0004c378 < dVar50)) {
-    bVar1 = ((UInt32)flipVertically) != 0;
+    bVar1 = ((UInt32)flipHorizontally) != 0;
     if ((bVar1) || (dVar51 <= (double)FLOAT_0004c378)) {
       fVar4 = M<float>(paramsBytes + 0x5c);
       fVar2 = M<float>(paramsBytes + 0x54);

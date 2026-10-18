@@ -28,7 +28,7 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 extern "C" UInt32 GH_memset(...) asm("_memset");
 
 struct pcl_ParamsR500_t;
-UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, bool param_4);
+UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally, bool flipVertically);
 extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
 /* real addr 0x23320 */

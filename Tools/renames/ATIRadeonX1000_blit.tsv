@@ -30,8 +30,8 @@ def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_25	flip	CONFIRMED	"fl
 def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	puVar41	packet	INFERRED	param_2 + param_3: base of the copied 0x2f4-byte state packet, patched through word indexes 0x9a..0xb3 and 0xbd..
 def	::pcl_CopyPix	param_1	cmd	CONFIRMED	destination command words: the state packet is copied there and the pointer after the emitted stream is returned
 def	::pcl_CopyPix	param_2	paramsBytes	INFERRED	untyped alias of the typed parameter `params` (the pcl_ParamsR500_t block, fields copied into packet words 0xa0.. )
-def	::pcl_CopyPix	param_3	flipVertically	CONFIRMED	file header: param_3 flips vertically
-def	::pcl_CopyPix	param_4	alternateBuffer	CONFIRMED	file header: param_4 selects the alternate-buffer variant
+def	::pcl_CopyPix	param_3	flipHorizontally	CONFIRMED	mirrors the X axis: negates the x scale and reflects the x origin about rect[0]/rect[2] (x, width); SWDSWriteBlitToCmdBuf passes (true,true) for rotation 0xb4 = 180 degrees
+def	::pcl_CopyPix	param_4	flipVertically	CONFIRMED	mirrors the Y axis: negates the y scale and reflects the y origin about rect[1]/rect[3] (y, height); see param_3
 def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_1	buffer	INFERRED	name from the class header declaration
 def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_2	wordCount	INFERRED	name from the class header; words already used in `buffer`, the function writes at buffer[param_2] and returns the new count
 def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_3	flag	INFERRED	name from the class header; true from submit_swap_buffer (the function then prepends a register write and wait), false from SWDSFunc
