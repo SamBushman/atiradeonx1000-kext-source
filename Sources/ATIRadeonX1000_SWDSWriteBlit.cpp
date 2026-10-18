@@ -64,6 +64,11 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   UInt32 uVar19;
   UInt32 uVar20;
   UInt32 *blitPacket;
+  UInt32 widthUnits;
+  UInt32 pitchUnits;
+  UInt32 lastColumn;
+  UInt32 lastRow;
+  UInt32 bufferFormatWord;
   UInt32 blk[35];   /* the pcl_ParamsR500_t block on the shipped stack: 0x8c bytes at sp+0x40 (Ghidra blk[0] .. blk[34]) */
   UInt16 rect[4];   /* the 8-byte rectangle at sp+0x38 (Ghidra rect[0] .. rect[3]) */
   double dVar22;
@@ -115,7 +120,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     rect[0] = 0;
     rect[1] = 1;
     blk[17] = blk[17] | 0xf8000000;
-    uVar17 = 0;
+    widthUnits = 0;
     rect[2] = M<UInt16>(self + panel * 0x78 + 0x148);
     blk[10] = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
     rect[3] = M<UInt16>(self + panel * 0x78 + 0x14a);
@@ -145,15 +150,15 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
                 M<SInt32>(self + panel * 0x78 + 0x9fc) + M<SInt32>(self + panel * 0x78 + 0x9c4) &
                 0xffffffe0;
     if ((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) != 0) {
-      uVar17 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) /
+      widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) /
                (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf);
     }
-    uVar10 = 0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2);
-    if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= uVar17) {
-      uVar10 = uVar17;
+    pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2);
+    if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= widthUnits) {
+      pitchUnits = widthUnits;
     }
     blkFormatFieldE0 = FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c);
-    blk[5] = uVar10 & 0x3ffe | ((UInt8)self[panel * 0x78 + 0x9f4] & 1) << 0x10 |
+    blk[5] = pitchUnits & 0x3ffe | ((UInt8)self[panel * 0x78 + 0x9f4] & 1) << 0x10 |
                 ((UInt8)self[panel * 0x78 + 0x9f4] & 6) << 0x10 |
                 ((UInt8)self[panel * 0x78 + 0x9f5] & 3) << 0x13 |
                 FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c) >> 1 &
@@ -163,55 +168,55 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
                 blkFormatFieldE0 >> 3 & 0xc00 | blkFormatFieldE0 >> 7 & 0x300 | blkFormatFieldE0 >> 0x11 & 0x1f;
     if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
        (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                 (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), uVar17 = uVar10 - 1,
+                 (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
        uVar10 == 0)) {
-      uVar17 = 0;
+      lastColumn = 0;
     }
-    uVar10 = 0;
+    lastRow = 0;
     if (M<UInt16>(self + panel * 0x78 + 0x9da) != 0) {
-      uVar10 = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
+      lastRow = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
     }
-    blk[9] = uVar17 & 0x1fff | (uVar10 & 0x1fff) << 0xd;
+    blk[9] = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
     blk[0] = ((UInt8)self[panel * 0x78 + 0x164] & 7) << 2 |
                 (UInt32)M<UInt16>(self + panel * 0x78 + 0x14c) *
                 M<SInt32>(self + panel * 0x78 + 0x16c) + M<SInt32>(self + panel * 0x78 + 0x134) &
                 0xffffffe0;
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
        (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), uVar17 = uVar10 - 1,
+                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
        uVar10 == 0)) {
-      uVar17 = 0;
+      lastColumn = 0;
     }
-    uVar10 = 0;
+    lastRow = 0;
     if (M<UInt16>(self + panel * 0x78 + 0x14a) != 0) {
-      uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
+      lastRow = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
     }
     blkFormatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)self[panel * 0x78 + 0x166] * 0x1c);
-    blk[1] = uVar17 & 0x7ff | (uVar10 & 0x7ff) << 0xb | 0x80000000;
+    blk[1] = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
     blk[2] = blkFormatFieldE4 >> 0x13 & 0x1f | (blkFormatFieldE4 & 0x40) << 0x10 | blkFormatFieldE4 >> 7 & 0xe00 |
                 blkFormatFieldE4 >> 1 & 0x7000 | (blkFormatFieldE4 & 0x1c00) << 5 | (blkFormatFieldE4 & 0x380) << 0xb;
-    uVar17 = M<UInt32>(self + panel * 0x78 + 0x168);
-    bVar1 = (uVar17 & 0xf00000) == 0;
+    bufferFormatWord = M<UInt32>(self + panel * 0x78 + 0x168);
+    bVar1 = (bufferFormatWord & 0xf00000) == 0;
     if (bVar1) {
-      uVar10 = 0;
+      widthUnits = 0;
     }
     else {
-      uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (uVar17 >> 0x14 & 0xf);
+      widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (bufferFormatWord >> 0x14 & 0xf);
     }
-    uVar11 = 0x20 / M<UInt16>(self + panel * 0x78 + 0x142);
-    if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= uVar10) {
-      uVar11 = uVar10;
+    pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x142);
+    if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= widthUnits) {
+      pitchUnits = widthUnits;
     }
     if ((bVar1) ||
-       (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (uVar17 >> 0x14 & 0xf),
-       uVar17 = uVar10 - 1, uVar10 == 0)) {
-      uVar17 = 0;
+       (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
+       lastColumn = uVar10 - 1, uVar10 == 0)) {
+      lastColumn = 0;
     }
-    uVar10 = 0;
+    lastRow = 0;
     if (M<UInt16>(self + panel * 0x78 + 0x14a) != 0) {
-      uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
+      lastRow = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
     }
-    blk[3] = uVar11 - 1 & 0x3fff | (uVar17 & 0x800) << 4 | (uVar10 & 0x800) << 5;
+    blk[3] = pitchUnits - 1 & 0x3fff | (lastColumn & 0x800) << 4 | (lastRow & 0x800) << 5;
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
        (blk[13] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
                     (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), blk[13] == 0)) {
@@ -240,21 +245,21 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   GH_memcpy(blitPacket,&g_r500_3d_blit_state_packet,0x2f4);
   iVar14 = (UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c;
   packetEnd = (SInt32)blitPacket + (0x2f4 - (SInt32)buffer) >> 2;
-  uVar17 = 0;
+  widthUnits = 0;
   blitPacket[0x9a] =
        (UInt32)M<UInt16>(self + panel * 0x78 + 0x9dc) * M<SInt32>(self + panel * 0x78 + 0x9fc) +
        M<SInt32>(self + panel * 0x78 + 0x9c4) & 0xffffffe0;
   if ((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) != 0) {
-    uVar17 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) /
+    widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) /
              (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf);
   }
-  uVar10 = 0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2);
-  if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= uVar17) {
-    uVar10 = uVar17;
+  pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2);
+  if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= widthUnits) {
+    pitchUnits = widthUnits;
   }
   uVar7 = blitPacket[0x8a];
   blitPacket[0x9c] =
-       uVar10 & 0x3ffe | ((UInt8)self[panel * 0x78 + 0x9f4] & 1) << 0x10 |
+       pitchUnits & 0x3ffe | ((UInt8)self[panel * 0x78 + 0x9f4] & 1) << 0x10 |
        ((UInt8)self[panel * 0x78 + 0x9f4] & 6) << 0x10 |
        ((UInt8)self[panel * 0x78 + 0x9f5] & 3) << 0x13 |
        FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c) >> 1 & 0x1e00000;
@@ -271,15 +276,15 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
        uVar13 | uVar11 | uVar10 | uVar17 | uVar7 & 0xffff00e0;
   if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
      (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-               (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), uVar17 = uVar10 - 1,
+               (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
      uVar10 == 0)) {
-    uVar17 = 0;
+    lastColumn = 0;
   }
-  uVar10 = 0;
+  lastRow = 0;
   if (M<UInt16>(self + panel * 0x78 + 0x9da) != 0) {
-    uVar10 = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
+    lastRow = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
   }
-  blitPacket[0xb3] = uVar17 & 0x1fff | (uVar10 & 0x1fff) << 0xd;
+  blitPacket[0xb3] = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
   AVar2 = self[panel * 0x78 + 0x166];
   blitPacket[0xa0] =
        ((UInt8)self[panel * 0x78 + 0x164] & 7) << 2 |
@@ -287,41 +292,41 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
        M<SInt32>(self + panel * 0x78 + 0x134) & 0xffffffe0;
   if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
      (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-               (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), uVar17 = uVar10 - 1,
+               (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
      uVar10 == 0)) {
-    uVar17 = 0;
+    lastColumn = 0;
   }
-  uVar10 = 0;
+  lastRow = 0;
   if (M<UInt16>(self + panel * 0x78 + 0x14a) != 0) {
-    uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
+    lastRow = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
   }
-  blitPacket[0xa6] = uVar17 & 0x7ff | (uVar10 & 0x7ff) << 0xb | 0x80000000;
+  blitPacket[0xa6] = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
   packetFormatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar2 * 0x1c);
   blitPacket[0xa8] =
        packetFormatFieldE4 >> 0x13 & 0x1f | (packetFormatFieldE4 & 0x40) << 0x10 | packetFormatFieldE4 >> 7 & 0xe00 | packetFormatFieldE4 >> 1 & 0x7000
        | (packetFormatFieldE4 & 0x1c00) << 5 | (packetFormatFieldE4 & 0x380) << 0xb;
-  uVar17 = M<UInt32>(self + panel * 0x78 + 0x168);
-  bVar1 = (uVar17 & 0xf00000) == 0;
+  bufferFormatWord = M<UInt32>(self + panel * 0x78 + 0x168);
+  bVar1 = (bufferFormatWord & 0xf00000) == 0;
   if (bVar1) {
-    uVar10 = 0;
+    widthUnits = 0;
   }
   else {
-    uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (uVar17 >> 0x14 & 0xf);
+    widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (bufferFormatWord >> 0x14 & 0xf);
   }
-  uVar11 = 0x20 / M<UInt16>(self + panel * 0x78 + 0x142);
-  if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= uVar10) {
-    uVar11 = uVar10;
+  pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x142);
+  if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= widthUnits) {
+    pitchUnits = widthUnits;
   }
   if ((bVar1) ||
-     (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (uVar17 >> 0x14 & 0xf),
-     uVar17 = uVar10 - 1, uVar10 == 0)) {
-    uVar17 = 0;
+     (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
+     lastColumn = uVar10 - 1, uVar10 == 0)) {
+    lastColumn = 0;
   }
-  uVar10 = 0;
+  lastRow = 0;
   if (M<UInt16>(self + panel * 0x78 + 0x14a) != 0) {
-    uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
+    lastRow = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
   }
-  blitPacket[0xaa] = uVar11 - 1 & 0x3fff | (uVar17 & 0x800) << 4 | (uVar10 & 0x800) << 5;
+  blitPacket[0xaa] = pitchUnits - 1 & 0x3fff | (lastColumn & 0x800) << 4 | (lastRow & 0x800) << 5;
   uVar15 = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
   blitPacket[0xa2] = blitPacket[0xa2] & 0xffffe1ff | 0x1400;
   blitPacket[5] = 0x30000;
