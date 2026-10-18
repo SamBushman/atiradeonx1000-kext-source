@@ -130,7 +130,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     sVar7 = 0;
   }
   else {
-    iVar19 = M<int>((unsigned int)M<UInt16>(contextBytes + 0xac) * 4 + self + 0xb70);
+    iVar19 = M<int>((unsigned int)M<UInt16>(contextBytes + 0xac) * 4 + self + kIOATIR500Surface_attachmentBuffers);
     iVar11 = M<int>(iVar19 + 0x40);
     uVar4 = M<UInt16>(iVar19 + 0x20);
     uVar13 = M<unsigned int>(iVar19 + 0x3c);
@@ -179,9 +179,9 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   }
   M<unsigned int>(M<int>(self + 0xd50) + 0xb78) =
        M<unsigned int>(M<int>(self + 0xd50) + 0xb78) & 0xffdfffff |
-       (M<UInt8>(M<int>(self + 0xb70) + 0x38) & 1) << 0x15;
+       (M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38) & 1) << 0x15;
   M<unsigned int>(M<int>(self + 0xd50) + 0xb78) =
-       (unsigned int)(1 < M<UInt8>(M<int>(self + 0xb70) + 0x38)) * 0x100000 |
+       (unsigned int)(1 < M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38)) * 0x100000 |
        M<unsigned int>(M<int>(self + 0xd50) + 0xb78) & 0xffefffff;
   M<unsigned int>(M<int>(self + 0xd50) + 0xb80) =
        (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + 0xd50) + 0xb80) & 0xfffffffe;
@@ -191,7 +191,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
          M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfeffffff;
   }
   else {
-    uVar16 = M<UInt16>(M<int>(self + 0xb70) + 0x14) & 0x3fff;
+    uVar16 = M<UInt16>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x14) & 0x3fff;
     M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
          M<unsigned int>(M<int>(self + 0xd50) + 0xb88) & 0xfeffffff | 0x1000000;
     M<unsigned int>(M<int>(self + 0xd50) + 0xb88) =
@@ -201,9 +201,9 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   }
   M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) =
        M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) & 0xffdfffff |
-       (M<UInt8>(M<int>(self + 0xb70) + 0x38) & 1) << 0x15;
+       (M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38) & 1) << 0x15;
   M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) =
-       (unsigned int)(1 < M<UInt8>(M<int>(self + 0xb70) + 0x38)) * 0x100000 |
+       (unsigned int)(1 < M<UInt8>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x38)) * 0x100000 |
        M<unsigned int>(M<int>(self + 0xd50) + 0xb7c) & 0xffefffff;
   M<unsigned int>(M<int>(self + 0xd50) + 0xb84) =
        (unsigned int)(sVar7 == 0) | M<unsigned int>(M<int>(self + 0xd50) + 0xb84) & 0xfffffffe;
@@ -212,7 +212,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
          M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfeffffff;
   }
   else {
-    uVar16 = M<UInt16>(M<int>(self + 0xb70) + 0x14) & 0x3fff;
+    uVar16 = M<UInt16>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x14) & 0x3fff;
     M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
          M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) & 0xfeffffff | 0x1000000;
     M<unsigned int>(M<int>(self + 0xd50) + 0xb8c) =
@@ -259,7 +259,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     wordIndex = wordIndex + 6;
     packet[valueIndex] = M<UInt32>(accel + 0xb8c);
   }
-  uVar14 = M<UInt32>(M<int>(self + 0xb70) + 8);
+  uVar14 = M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 8);
   if ((bVar1) || (uVar16 = wordIndex, M<int>(accel + 0x894) != 0)) {
     packet[wordIndex] = 0x1844;
     packet[wordIndex + 1] = uVar14;

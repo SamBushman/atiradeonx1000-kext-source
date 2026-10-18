@@ -85,7 +85,7 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32
   iVar11 = M<int>(readDataBytes + 0xc);
   iVar15 = M<int>(readDataBytes + 0x10);
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
-  iVar17 = M<int>(self + 0xb70);
+  iVar17 = M<int>(self + kIOATIR500Surface_attachmentBuffers);
   if ((M<unsigned int>(self + 0xc1c) & 3 & M<unsigned int>(self + 0xbf8)) == 0) {
 LAB_00014ae0:
     if (((M<unsigned int>(self + 0xbf8) & 0x20000000) != 0) || (M<int>(iVar17 + 0x10) == 0)) {
@@ -99,7 +99,7 @@ LAB_00014af4:
     if (M<char>(M<int>(iVar17 + 0x24) + 0x58) != '\0') goto LAB_00014ae0;
     iVar17 = this->alloc_surfaces_retry(M<unsigned int>(self + 0xc1c) & 3,(eLockType)(0));
     if (iVar17 != 0) goto LAB_00014af4;
-    iVar17 = M<int>(self + 0xb70);
+    iVar17 = M<int>(self + kIOATIR500Surface_attachmentBuffers);
   }
   iVar7 = x + iVar12;
   if ((((0 < iVar7) && (bottom = y + iVar11, 0 < bottom)) &&

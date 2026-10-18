@@ -49,7 +49,7 @@ IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockType, UInt32 unl
     result = 0xe00002cc;
   }
   else {
-    surfaceBuffer = M<int>(self + 0xb70);
+    surfaceBuffer = M<int>(self + kIOATIR500Surface_attachmentBuffers);
     if (lockState == 0x3) {
       if (M<int>(self + 0xd8c) == 0) {
         if ((M<int>(surfaceBuffer + 0x24) != 0) &&

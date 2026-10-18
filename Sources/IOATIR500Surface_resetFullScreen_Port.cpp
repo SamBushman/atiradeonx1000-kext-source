@@ -32,11 +32,11 @@ void IOATIR500Surface::resetFullScreen() {
 
   SInt32 flipAllowed;
   
-  if (M<UInt8 *>(self + 0xb70) == self + 0x120) {
-    M<UInt8 *>(self + 0xb74) = M<UInt8 *>(self + 0xb70);
+  if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) == self + 0x120) {
+    M<UInt8 *>(self + 0xb74) = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
     M<UInt8 *>(self + 0xb80) = self + 0x288;
     M<UInt8 *>(self + 0xb84) = self + 0x300;
-    M<SInt32>(self + 0xb70) = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 300;
+    M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 300;
   }
   flipAllowed = VCALL(M<SInt32>(self), 0x5dc)(self);
   if (flipAllowed != 0) {

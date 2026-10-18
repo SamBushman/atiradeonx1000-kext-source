@@ -33,7 +33,7 @@ UInt32 IOATIR500Surface::surface_buffer_idx_mask(UInt32 bufferType, UInt32*outMa
   switch(bufferType) {
   case 1:
 switchD_00013ae0_caseD_1:
-    if (M<UInt8 *>(self + 0xb70) == self + 0xa8) {
+    if (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) == self + 0xa8) {
       *outMask = 1;
       return 0;
     }

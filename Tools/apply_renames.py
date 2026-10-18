@@ -33,6 +33,12 @@ Table format (tab separated, '#' starts a comment line):
           placeholder with a readable shape, e.g. unknown_0x84)
   evidence  one line: where the meaning comes from (not interpreted by the tool)
 
+  kind    field  CLASS[,CLASS...]  0xOFFSET  name  tier  evidence   (columns: kind classes offset name tier evidence)
+          name the direct object-field accesses `self + 0xOFFSET` (or `param_1 + 0xOFFSET`, the same pointer under Ghidra's name) in every method of the
+          class(es): the literal becomes the constant `k<FirstClass>_<name>`, declared in the generated Headers/FieldOffsets.h
+          (`static const int`, so the compiled code is identical). Only the object's OWN fields: `M<T>(M<int>(self + 0x8c) + 0x50)` names +0x8c but
+          the +0x50 field belongs to another object's class. Several classes (a base and its derived class) share the one constant.
+
 Anchors (`from`/`to`) are Python regexes (a trailing `#N` selects the N-th matching line instead of the first) matched against a line in which every `use` rename of the function has been taken back (so an anchor
 may be written with the old names and keeps matching after the table was applied). A `use` row is applied once its segment no longer contains `old`; several rows may give disjoint segments of one variable the same `new` name
 (the first one declares it).
@@ -307,13 +313,88 @@ def apply_uses(use_rows, root, read, files, errors):
     return pending, applied
 
 
+FIELDS_HEADER = 'Headers/FieldOffsets.h'
+
+
+def class_spans(root, cls, read):
+    """-> [(file, start, end)] of every function definition `... Cls::name(...) {...}` in Sources/*.cpp"""
+    found = []
+    pat = re.compile(r'^[^\s#/*][^\n]*\b%s::~?[A-Za-z0-9_]+\s*\(' % re.escape(cls), re.M)
+    for f in sorted(glob.glob(os.path.join(root, 'Sources', '*.cpp'))):
+        s = read(f)
+        if cls + '::' not in s: continue
+        for m in pat.finditer(s):
+            j = m.end(); depth = 1
+            while j < len(s) and depth:
+                depth += (s[j] == '(') - (s[j] == ')'); j += 1
+            k = j
+            while k < len(s) and s[k] not in '{;': k += 1
+            if k < len(s) and s[k] == '{':
+                found.append((f, m.start(), find_body_end(s, k)))
+    return found
+
+
+def apply_fields(field_rows, root, read, files, errors):
+    """-> (pending, applied); writes the generated constants header into `files`"""
+    pending = applied = 0
+    consts = {}                                              # constant name -> (offset, tier, evidence)
+    by_off = {}
+    for (t, n, classes, off, name, tier) in field_rows:
+        if not IDENT.fullmatch(name) or name in KEYWORDS: errors.append('%s:%d: %r is not a usable identifier' % (t, n, name)); continue
+        cname = 'k%s_%s' % (classes[0], name)
+        if cname in consts and consts[cname] != off: errors.append('%s:%d: %s is already the constant for %s' % (t, n, cname, consts[cname])); continue
+        consts[cname] = off
+        for c in classes:
+            if (c, off) in by_off and by_off[(c, off)] != cname: errors.append('%s:%d: %s +%s is already named %s' % (t, n, c, off, by_off[(c, off)])); continue
+            by_off[(c, off)] = cname
+    spans = {}
+    for c in {c for (c, _) in by_off}:
+        spans[c] = class_spans(root, c, read)
+        if not spans[c]: errors.append('field rows: no method of %s found' % c)
+    allsrc = ''.join(read(f) for f in glob.glob(os.path.join(root, 'Sources', '*.cpp')))        # constants already in the sources = applied
+    applied = sum(len(re.findall(r'\b%s\b' % re.escape(c), allsrc)) for c in consts)
+    edits = {}                                               # file -> [(start, end, replacement scope)]
+    for c, sp in spans.items():
+        offs = {o: n for (cc, o), n in by_off.items() if cc == c}
+        pat = re.compile(r'\b(self|param_1)(\s*\+\s*)(0x[0-9a-fA-F]+)\b(?!\s*\])')
+        for (f, st, en) in sp:
+            s = read(f); scope = s[st:en]; out, i, ch = [], 0, False
+            for m in pat.finditer(scope):
+                o = m.group(3).lower()
+                if o not in offs: continue
+                sk = None
+                # leave comments and string literals alone
+                ls = scope.rfind('\n', 0, m.start()) + 1
+                if '//' in scope[ls:m.start()]: continue
+                if scope.rfind('/*', 0, m.start()) > scope.rfind('*/', 0, m.start()): continue
+                out.append((m.start(3), m.end(3), offs[o])); ch = True
+            if ch:
+                new = scope
+                for (a, b, r) in sorted(out, reverse=True): new = new[:a] + r + new[b:]
+                pending += len(out)
+                edits.setdefault(f, []).append((st, en, new))
+    for f, es in edits.items():                              # apply from the end so the spans stay valid
+        s = read(f)
+        for (st, en, new) in sorted(es, reverse=True): s = s[:st] + new + s[en:]
+        files[f] = s
+    lines = ['/* FieldOffsets.h - GENERATED by Tools/apply_renames.py from the `field` rows of Tools/renames/*.tsv. Do not edit by hand.',
+             ' * Named byte offsets of the object fields that the ported sources reach as `self + 0xOFFSET`. static const int: the compiled code is the same as with the literal. */',
+             '#ifndef FIELD_OFFSETS_H', '#define FIELD_OFFSETS_H', '']
+    meta = {(t, off, nm): (tier) for (t, n, cl, off, nm, tier) in field_rows}
+    for cname in sorted(consts, key=lambda c: (c.split('_')[0], int(consts[c], 16), c)):
+        lines.append('static const int %s = %s;' % (cname, consts[cname]))
+    lines += ['', '#endif', '']
+    files[os.path.join(root, FIELDS_HEADER)] = '\n'.join(lines)
+    return pending, applied
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--check', action='store_true'); ap.add_argument('--no-use', action='store_true', help='ignore the `use` rows (to see the text the anchors of the use rows are matched against)'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
-    rows, use_rows = [], []
+    rows, use_rows, field_rows = [], [], []
     for t in tables:
         dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
         for n, l in enumerate(open(t), 1):
@@ -323,6 +404,11 @@ def main():
                 continue
             if l.startswith('#') or not l.strip(): continue
             f = l.rstrip('\n').split('\t')
+            if f[0] == 'field':                         # field CLASSES OFFSET NAME TIER EVIDENCE
+                if len(f) < 5 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not re.fullmatch(r'0x[0-9a-fA-F]+', f[2]):
+                    sys.exit('%s:%d: bad field row (field CLASSES 0xOFFSET name tier [evidence])' % (t, n))
+                field_rows.append((t, n, f[1].split(','), f[2].lower(), f[3], f[4]))
+                continue
             if len(f) < 5 or f[0] not in ('def', 'decl', 'use') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
                 sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
             if f[0] == 'use':
@@ -365,6 +451,9 @@ def main():
         files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
     up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors)
     pending += up; applied += ua
+    if field_rows:
+        fp, fa = apply_fields(field_rows, a.root, read, files, errors)
+        pending += fp; applied += fa
     for e in errors: print('ERROR', e, file=sys.stderr)
     if not a.check and not errors:
         for f, s in files.items(): open(f, 'w').write(s)

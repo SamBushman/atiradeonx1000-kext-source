@@ -1,0 +1,1 @@
+field	IOATIR500Surface,ATIR500Surface	0xb70	attachmentBuffers	CONFIRMED	pointer table indexed by attachment; bound_surface in the difftest worlds and read_buffer (surface + attachment * 4 + 0xb70) use it

@@ -80,7 +80,7 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
       local_20 = 0;
       iVar5 = VCALL(*M<SInt32 *>(self + 0xd50), 0x540)
                         (M<SInt32 *>(self + 0xd50),&local_28,
-                         M<UInt32>(M<SInt32>(self + 0xb70) + 0x10),0x1000);
+                         M<UInt32>(M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
       if (iVar5 != 0) {
         VCALL(*M<SInt32 *>(self + 0xd50), 0x544)(M<SInt32 *>(self + 0xd50),&local_28);
         return 0;

@@ -135,7 +135,7 @@ void ATIR500Surface::build_swap() {
         surfaceBuffer = M<SInt32>(self + 0xb74);
       }
       else {
-        surfaceBuffer = M<SInt32>(self + 0xb70);
+        surfaceBuffer = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
       }
       iVar32 = panel * 0x78 + iVar32;
       if ((self[0xbf1] == 0x10) ||
@@ -169,7 +169,7 @@ void ATIR500Surface::build_swap() {
       batchEntry = &panelRec->entries[0];
       bVar46 = (panel == 0) << 1;
       batchWords = (UInt32 *)(batchHeader + 0x20);
-      if (((panel != 0) || (M<SInt32>(self + 0xb70) == M<SInt32>(self + 0xb74))) || (bVar1)) {
+      if (((panel != 0) || (M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) == M<SInt32>(self + 0xb74))) || (bVar1)) {
         batchIndex = 0;
       }
       else {

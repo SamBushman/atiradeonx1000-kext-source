@@ -43,10 +43,10 @@ void IOATIR500Surface::prune_buffers() {
       M<UInt8 *>(self + 0xb84) = self + 0x300;
       M<UInt8 *>(self + 0xb80) = self + 0x300;
       iVar4 = M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 300;
-      M<SInt32>(self + 0xb70) = iVar4;
+      M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) = iVar4;
       M<SInt32>(self + 0xb74) = iVar4;
     }
-    else if (M<SInt32>(self + 0xb74) == M<SInt32>(self + 0xb70)) {
+    else if (M<SInt32>(self + 0xb74) == M<SInt32>(self + kIOATIR500Surface_attachmentBuffers)) {
       M<UInt8 *>(self + 0xb74) = self + 0x120;
       M<UInt8 *>(self + 0xb80) = self + 0x288;
     }
@@ -77,10 +77,10 @@ LAB_00012f00:
   requiredBits = requiredBits | requestedBits;
   M<UInt32>(self + 0xc18) = requiredBits;
   if ((requiredBits & 1) == 0) {
-    M<UInt8 *>(self + 0xb70) = self + 0x120;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) = self + 0x120;
   }
   else {
-    M<UInt8 *>(self + 0xb70) = self + 0xa8;
+    M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers) = self + 0xa8;
   }
   if ((requiredBits & 2) == 0) {
     M<UInt8 *>(self + 0xb74) = self + 0xa8;

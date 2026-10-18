@@ -38,7 +38,7 @@ IOReturn IOATIR500Surface::surface_query_lock() {
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
   if (((M<UInt32>(self + 0xbd0) & 0xffff0000) == 0) &&
-     (M<SInt32>(M<SInt32>(self + 0xb70) + 0x10) != 0)) {
+     (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) + 0x10) != 0)) {
     if ((M<UInt32>(self + 0xbf8) & 0x20000000) == 0) {
       uVar1 = M<UInt32>(self + 0xbf8) & M<UInt32>(self + 0xc1c);
       if ((uVar1 & 3) != 0) {

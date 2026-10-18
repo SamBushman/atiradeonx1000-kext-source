@@ -86,7 +86,7 @@ void IOATIR500Surface::stop(IOService *provider) {
   lockState = self[0xbd0];
   if (lockState != 0x0) {
     if (lockState == 0x3) {
-      iVar6 = M<SInt32>(self + 0xb70);
+      iVar6 = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
       if (M<SInt32>(self + 0xd8c) == 0) {
         iVar7 = M<SInt32>(iVar6 + 0x24);
         if ((iVar7 != 0) && (backingMemory = M<SInt32 *>(iVar7 + 0x10), backingMemory != (SInt32 *)0x0)) {
@@ -99,7 +99,7 @@ void IOATIR500Surface::stop(IOService *provider) {
       }
     }
     else if (lockState == 0x1) {
-      VCALL(M<SInt32>(self), 0x600)(self,M<UInt32>(self + 0xb70));
+      VCALL(M<SInt32>(self), 0x600)(self,M<UInt32>(self + kIOATIR500Surface_attachmentBuffers));
     }
     self[0xbd0] = 0x0;
   }

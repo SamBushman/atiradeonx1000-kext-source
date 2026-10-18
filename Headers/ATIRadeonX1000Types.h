@@ -14,6 +14,7 @@
 #define ATIRADEONX1000_TYPES_H
 
 #include "ATIRadeonX1000Enums.h"
+#include "FieldOffsets.h"
 
 #include <IOKit/IOTypes.h>
 

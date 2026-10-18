@@ -211,12 +211,12 @@ LAB_00015720:
       local_40 = 0;
       iVar10 = VCALL(*M<int *>(self + 0xd50), 0x540)
                          (M<int *>(self + 0xd50),&local_48,
-                          M<UInt32>(M<int>(self + 0xb70) + 0x10),0x1000);
+                          M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
       if (iVar10 == 0) goto LAB_00015720;
       M<unsigned int>(self + 0xbf8) = M<unsigned int>(self + 0xbf8) & 0xdfffffff;
       VCALL(*M<int *>(self + 0xd50), 0x544)(M<int *>(self + 0xd50),&local_48);
     }
-    surfaceBuffer = M<UInt8 *>(self + 0xb70);
+    surfaceBuffer = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
     if ((bool)(keepBacking >> 1 & 1)) {
       backingPitch = 0;
     }

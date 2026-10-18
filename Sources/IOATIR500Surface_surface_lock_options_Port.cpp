@@ -57,7 +57,7 @@ IOReturn IOATIR500Surface::surface_lock_options(eLockType lockType, UInt32 lockO
   else {
     newLockState = self[0xbd1];
   }
-  surfaceBuffer = M<UInt8 *>(self + 0xb70);
+  surfaceBuffer = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
   if (newLockState != 0x0) {
     stampPending = false;
     result = -0x1ffffd34;
