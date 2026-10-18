@@ -9,8 +9,11 @@ sh run_gl_features.sh "$O/features" multitex texfmt fbo fbo2 query clear state d
 sh run_gl_features.sh "$O/windows" win:0,30,1,24,basic win:4,40,1,24,basic win:2,40,1,24,basic win:6,40,1,24,basic win:0,40,0,16,basic win:0,40,1,24,clears win:0,40,1,24,hz win:4,40,1,24,hz win:4,30,1,24,resolve win:0,30,1,24,resolve win:6,30,0,24,resolve > "$O/windows.log" 2>&1; echo "windows: done" >> "$O/groups.txt"
 mkdir -p "$O/godot"
 for m in game editor; do
-  if [ $m = game ]; then A="--path $PROJ Main.tscn"; else A="-e --path $PROJ"; fi
-  DYLD_INSERT_LIBRARIES="$P/opcode_recorder.dylib" OPCODE_LOG="$O/godot/$m.tsv" "$G" $A > "$O/godot/$m.out" 2>&1 < /dev/null &
+  if [ $m = game ]; then
+    DYLD_INSERT_LIBRARIES="$P/opcode_recorder.dylib" OPCODE_LOG="$O/godot/$m.tsv" "$G" --path "$PROJ" Main.tscn > "$O/godot/$m.out" 2>&1 < /dev/null &
+  else
+    DYLD_INSERT_LIBRARIES="$P/opcode_recorder.dylib" OPCODE_LOG="$O/godot/$m.tsv" "$G" -e --path "$PROJ" > "$O/godot/$m.out" 2>&1 < /dev/null &
+  fi
   pid=$!; i=0; while kill -0 $pid 2>/dev/null && [ $i -lt 40 ]; do sleep 1; i=`expr $i + 1`; done
   kill $pid 2>/dev/null; j=0; while kill -0 $pid 2>/dev/null && [ $j -lt 60 ]; do sleep 1; j=`expr $j + 1`; done
   echo "godot $m: ran ${i}s, exit wait ${j}s" >> "$O/groups.txt"
