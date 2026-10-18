@@ -3,11 +3,12 @@
 # leaving both on the G5 under ~/rung3 next to each other, without loading anything.
 #   sh Tools/stage_for_test.sh [ssh-host=G5]          (run from the repository root; the tree must be committed: the staging dir is named after HEAD)
 # Result on the host:  ~/rung3/src_<sha>/ (sources + built tests, Tests/build_all.out has the per-file list)  and  ~/rung3/kext_build_<sha>/ATIRadeonX1000.kext
+# The tree shipped includes Tests/baseline and the small Tools/userspace helpers (not va_capture dvd/streams/captures, 115 MB).
 # Exit 0 only if the kext linked AND Tests/build_all.sh built every test (0 failed, 0 unaccounted).
 H=${1:-G5}; SHA=$(git rev-parse --short HEAD) || exit 2
 git diff --quiet HEAD -- Headers Sources Tools Tests Resources || echo "warning: uncommitted changes are staged under the name of $SHA"
 ssh $H 'ps auxww | egrep -i "godot|soak|kextload|crashdump" | grep -v egrep' | grep -v " Z " && echo "warning: stale processes above (precheck)"
-T=$(mktemp -d); tar czf "$T/s.tgz" --exclude=Tools/userspace --exclude=__pycache__ --exclude=Tests/baseline --exclude=Tests/difftest Headers Sources Tools Resources Tests || exit 2
+T=$(mktemp -d); tar czf "$T/s.tgz" --exclude=Tools/userspace/va_capture/dvd --exclude=Tools/userspace/va_capture/streams --exclude=Tools/userspace/va_capture/captures --exclude=__pycache__ --exclude=Tests/difftest Headers Sources Tools Resources Tests || exit 2
 scp -q "$T/s.tgz" $H:rung3/src_$SHA.tgz || exit 2; rm -rf "$T"
 ssh $H "cd rung3 && rm -rf src_$SHA kext_build_$SHA && mkdir src_$SHA && cd src_$SHA && tar xzf ../src_$SHA.tgz && OPT=-Os OUT=\$HOME/rung3/kext_build_$SHA sh Tools/build_kext.sh > ../build_$SHA.log 2>&1; echo \$? > ../build_$SHA.rc"
 [ "$(ssh $H cat rung3/build_$SHA.rc)" = 0 ] || { echo "KEXT BUILD FAILED:"; ssh $H "tail -15 rung3/build_$SHA.log"; exit 1; }

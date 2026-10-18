@@ -1,1 +1,10 @@
-# file	reason (a test source that build_all.sh must not build; every entry needs a reason)
+# file<TAB>reason  (paths relative to the repository root; a test or helper source that Tests/build_all.sh must NOT build. Every entry needs a reason.)
+Tools/ga_probe/GAProbe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue147_minstart/MinStart.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue147_probe/Issue147Probe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue153_ctxprobe/Issue153CtxProbe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue153_probe/Issue153Probe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue154_probe/Issue154Probe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue155_probe/Issue155Probe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/issue157_probe/Issue157Probe.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test
+Tools/vram_peek/VRAMPeek.cpp	diagnostic KEXT (own Info.plist/Makefile style build through Tools/build_kext.sh-like steps), loaded into the kernel only by hand for one investigation; not a userland test

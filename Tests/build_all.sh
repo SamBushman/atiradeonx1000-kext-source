@@ -1,13 +1,14 @@
 #!/bin/sh
 # Tests/build_all.sh - build EVERY test program in Tests/ on the Tiger machine (run from Tests/, on the G5), into ./bin-free in-place binaries
 # (the binary sits next to its .c, as the runbooks expect), and fail if any source is neither built nor listed in build_exclude.tsv.
-#   sh build_all.sh [GROUP...]      GROUP = harness | tools | destructive | userspace   (default: all four)
+#   sh build_all.sh [GROUP...]      GROUP = harness | tools | destructive | userspace | devtools   (default: all five)
+#   devtools = the userland helpers the test runners need that live outside Tests/: ../Tools/*.c, Tools/userspace (IOKit recorders = dylibs, cgs_probe), Tools/userspace/va_capture, Tests/userspace/glwin.m
 # Every *.c / *.cpp / *.m found is considered automatically, so a new test cannot be forgotten: it is either built here, built by a
 # special rule below, or must be named (with a reason) in build_exclude.tsv, otherwise this script exits 1.
 # Exit: 0 everything built, 1 a build failed or a source is unaccounted for.  Output: one line per file; summary last; failures in build_all.err.
 cd "$(dirname "$0")" || exit 2
 TESTS_DIR=$(pwd)
-GROUPS_WANTED=${*:-harness tools destructive userspace}
+GROUPS_WANTED=${*:-harness tools destructive userspace devtools}
 ERR=build_all.err; : > "$ERR"
 built=0; failed=0; excluded=0; unaccounted=0
 CC=${CC:-gcc}
@@ -106,6 +107,28 @@ if want userspace; then
                    && $CC -arch ppc -w -std=gnu99 -o userspace/libgl_dispatch_test "$f" $D/dsp_calls.c $D/thunks.s >> "$ERR" 2>&1; then report "$f" ok; else report "$f" fail; fi;;
             *.cpp) if g++ -arch ppc -w -I. -o "$b" "$f" >> "$ERR" 2>&1; then report "$f" ok; else report "$f" fail; fi;;
             *) if try "$f" "$b"; then report "$f" ok; else report "$f" fail; fi;;
+        esac
+    done
+fi
+
+# --- devtools: recorders and helpers used by the runners (Tools/), and the Cocoa GL window helper -------------------------------------------
+if want devtools; then
+    for f in ../Tools/gui_input.c ../Tools/request_probe.c ../Tools/klog_udp_mirror.c ../Tools/issue157_unstick_hotswap/force_mode_change.c ../Tools/userspace/*.c ../Tools/userspace/va_capture/*.c userspace/glwin.m ../Tools/ga_probe/GAProbe.cpp ../Tools/issue147_minstart/MinStart.cpp ../Tools/issue147_probe/Issue147Probe.cpp ../Tools/issue153_ctxprobe/Issue153CtxProbe.cpp ../Tools/issue153_probe/Issue153Probe.cpp ../Tools/issue154_probe/Issue154Probe.cpp ../Tools/issue155_probe/Issue155Probe.cpp ../Tools/issue157_probe/Issue157Probe.cpp ../Tools/vram_peek/VRAMPeek.cpp ../Tools/userspace/va_capture/vram_peek.c; do
+        [ -f "$f" ] || continue
+        key=${f#../}; case $f in userspace/*) key=Tests/$f;; esac
+        if [ -n "$(excluded_reason "$key")" ]; then report "$key" excl; continue; fi
+        b=${f%.*}
+        case $f in
+            *.cpp) report "$key" none;;                                                      # diagnostic kexts: must be listed in build_exclude.tsv
+            *glwin.m) if $CC -arch ppc -x objective-c -w -o userspace/glwin "$f" -framework Cocoa -framework OpenGL >> "$ERR" 2>&1; then report "$key" ok; else report "$key" fail; fi;;
+            *ava_drive.c) if $CC -arch ppc -o "$b" "$f" -F/System/Library/PrivateFrameworks -framework AppleVA -framework ApplicationServices -framework IOKit -framework CoreFoundation >> "$ERR" 2>&1; then report "$key" ok; else report "$key" fail; fi;;
+            *)  if grep -q -e '-dynamiclib' "$f"; then
+                    fw=$(fw_for "$f" | tr "\n" " ")
+                    if $CC -arch ppc -dynamiclib -I. -o "$b.dylib" "$f" $fw -framework IOKit -framework CoreFoundation >> "$ERR" 2>&1 \
+                       || $CC -arch ppc -dynamiclib -I. -o "$b.dylib" "$f" $fw -undefined suppress -flat_namespace >> "$ERR" 2>&1; then report "$key" ok; else report "$key" fail; fi
+                else
+                    if try "$f" "$b"; then report "$key" ok; else report "$key" fail; fi
+                fi;;
         esac
     done
 fi
