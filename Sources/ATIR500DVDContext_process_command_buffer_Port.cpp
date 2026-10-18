@@ -296,10 +296,10 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                       widthUnits = 0;
                       formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
                       if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
-                        widthUnits = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1Width) /
+                        widthUnits = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1PitchPixels) /
                                  (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf);
                       }
-                      pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerRow);
+                      pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerPixel);
                       if (pitchUnits <= widthUnits) {
                         pitchUnits = widthUnits;
                       }
@@ -356,10 +356,10 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               widthUnits = 0;
               formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
               if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
-                widthUnits = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1Width) /
+                widthUnits = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1PitchPixels) /
                          (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf);
               }
-              pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerRow);
+              pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerPixel);
               if (pitchUnits <= widthUnits) {
                 pitchUnits = widthUnits;
               }
@@ -1734,7 +1734,7 @@ joined_r0x000381c4:
             }
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             *recordCursor = 0x1140;
-            uVar17 = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerRow);
+            uVar17 = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerPixel);
             if (uVar17 == 0) {
               recordCursor[1] = 0;
             }
@@ -1767,7 +1767,7 @@ joined_r0x000381c4:
             uVar11 = 0;
             formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
             if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
-              uVar11 = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1Width) / (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf)
+              uVar11 = (UInt32)M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1PitchPixels) / (M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf)
               ;
             }
             uVar36 = 0x20 / uVar17;

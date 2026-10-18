@@ -42,7 +42,7 @@ IOReturn IOATIR500DVDContext::unlock_memory(UInt32 lockType, UInt32*outTag) {
   }
   else {
     result = 0;
-    M<SInt16>(surface + kIOATIR500Surface_unknown_0xbd2) = M<SInt16>(surface + kIOATIR500Surface_unknown_0xbd2) + -1;
+    M<SInt16>(surface + kIOATIR500Surface_memoryLockCount) = M<SInt16>(surface + kIOATIR500Surface_memoryLockCount) + -1;
   }
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   if ((result == 0) && ((SInt32)lockType < 0)) {
