@@ -1,0 +1,3 @@
+# DVD process_command_buffer, round 3: the two address arrays of the 0x12 (motion-compensation setup) handler
+def	ATIR500DVDContext::process_command_buffer@0x357c0	local_b4	firstBlockAddresses	CONFIRMED	four GART addresses a stride apart, filled by the first loop of the 0x12 handler and stored as the values of registers 0x1150..0x1153 of the first register block
+def	ATIR500DVDContext::process_command_buffer@0x357c0	local_a4	secondBlockAddresses	CONFIRMED	the next four, stored as registers 0x1150..0x1153 of the second register block
