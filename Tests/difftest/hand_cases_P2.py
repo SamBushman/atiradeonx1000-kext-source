@@ -70,7 +70,29 @@ def w_dealloc_surface(m, rng):
     return [S, ident]
 
 
+def w_lock_memory(m, rng):
+    """IOATIR5002DContext::lock_memory(lockType, outAddress, outSize): the context's bound surface (+0x100) with its state bytes/flags (+0xbf4/+0xbf8/+0xc1c),
+    the cached IOMemoryDescriptor map (+0x118, a real object with a vtable, so the release at slot +0x18 is a recorded call and not a wild jump) and the surface's
+    descriptor (+0xc00, +0x104 caches it)"""
+    from common import generic_this
+    this, pool = generic_this(m, rng, 'IOATIR5002DContext')
+    S = obj(m, rng, 'ATIR500Surface', 0xe00)
+    m.w32(this + 0x100, rng.choice([S, S, S, 0]))
+    m.w8(S + 0xbf4, rng.choice([0, 1, 1]))
+    m.w32(S + 0xbf8, rng.choice([0, 0x1, 0x20000000, 0x20000001, 0x10000000]))
+    m.w32(S + 0xc1c, rng.choice([0, 1, 0x20000000]))
+    m.w32(this + 0x8c, rng.choice([0, 1, 0x20000000]))
+    desc = plain(m, rng)
+    m.w32(S + 0xc00, desc)
+    m.w32(this + 0x118, rng.choice([0, plain(m, rng), plain(m, rng)]))
+    m.w32(this + 0x104, rng.choice([desc, desc, 0x1234]))
+    m.w32(this + 0x11c, rng.choice([0, 0x100, 0x2000]))
+    out = m.alloc(0x40)
+    return [this, rng.choice([0, 1, 2]), out, out + 0x20]
+
+
 CASES = [
+    Case('IOATIR5002DContext::lock_memory', w_lock_memory, ret='u32', seeds=60, mock=new_mock, plain_words=True, ignore_args=REL),
     Case('ATIR500Surface::dealloc_surface', w_dealloc_surface, ret='void', seeds=80, mock=new_mock, plain_words=True, ignore_args=REL),
     Case('ATIR500Surface::submit_flip_buffer', w_submit_flip, ret='void', seeds=120, mock=new_mock, plain_words=True, ignore_args=REL),
     Case('IOATIR500Surface::flush_surface', w_flush_surface, ret='void', seeds=40),

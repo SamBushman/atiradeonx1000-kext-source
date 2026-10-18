@@ -32,7 +32,7 @@ Usage: difftest.py [--stock BIN] [--rebuilt BIN] [-f SUBSTRING] [-v] [--json OUT
   A case file defines CASES = [Case(...), ...] (see class Case). Exit 0 if every run matches, 1 otherwise.
 Setup: pip install --break-system-packages --target ~/.cache/kext-difftest/pkgs unicorn   (or set DIFFTEST_PKGS)
 """
-import os, sys, struct, re, subprocess, random, json, importlib.util, zlib, time
+import bisect, os, sys, struct, re, subprocess, random, json, importlib.util, zlib, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 for _p in (os.environ.get('DIFFTEST_PKGS'), os.path.expanduser('~/.cache/kext-difftest/pkgs'), '/tmp/upkgs'):
@@ -508,7 +508,24 @@ class Machine:
             return
         self.record_call(name)
 
+    def _mid_function(self, addr):
+        if not hasattr(self, '_fn_list'):
+            self._fn_list = sorted((a, n) for n, a in self.image.funcs.items())
+            self._fn_addrs = [a for a, n in self._fn_list]
+        if self.own[0] <= addr < self.own[1] or addr >= self._fn_addrs[-1]:
+            return False                  # the function itself (jump tables, local labels), or code past the last function (stub islands)
+        i = bisect.bisect_right(self._fn_addrs, addr) - 1
+        if i < 0 or self._fn_addrs[i] == addr:
+            return False
+        name = self._fn_list[i][1]
+        if (self.transparent and self.transparent.search(name)) or name in self.exclusive:
+            return False                  # a function that runs for real (not stubbed): its own blocks start mid-function
+        return True
+
     def _block(self, uc, addr, size, ud):
+
+        if addr & 3 or self._mid_function(addr):      # a soup value used as a function pointer (unaligned, or into the middle of ANOTHER function, whose bytes differ between the two images): a hole in the test world, not behaviour
+            self.bad_read = True; self.status = 'NULLCALL'; uc.emu_stop(); return
         self.insns += size // 4
         self.visited[(addr, size)] = self.visited.get((addr, size), 0) + 1
         self.trail.append(addr)
