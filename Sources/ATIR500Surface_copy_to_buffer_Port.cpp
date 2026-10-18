@@ -33,7 +33,7 @@ void ATIR500Surface::copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
     UInt8 *transferBytes = reinterpret_cast<UInt8 *>(transfer);
 
-  UInt16 bufferWidth;
+  UInt16 bufferPitchPixels;
   bool bVar2;
   UInt32 uVar3;
   unsigned int uVar4;
@@ -113,9 +113,9 @@ LAB_00043444:
     bVar15 = 2;
     iVar6 = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
   }
-  bufferWidth = M<UInt16>(bufferBytes + 0x14);
+  bufferPitchPixels = M<UInt16>(bufferBytes + 0x14);
   uVar4 = (unsigned int)M<UInt16>(bufferBytes + 0x16);
-  surfaceRow = (UInt32 *)(iVar6 + uVar4 * ((unsigned int)bufferWidth * y + x));
+  surfaceRow = (UInt32 *)(iVar6 + uVar4 * ((unsigned int)bufferPitchPixels * y + x));
   if (uVar4 == 2) {
     w = w + 7 >> 3;
   }
@@ -154,7 +154,7 @@ LAB_000435cc:
         } while (iVar6 != 0);
       }
       uVar5 = uVar5 + 1;
-      surfaceRow = (UInt32 *)((int)surfaceRow + bufferWidth * uVar4);
+      surfaceRow = (UInt32 *)((int)surfaceRow + bufferPitchPixels * uVar4);
       transferRow = (UInt32 *)((int)transferRow + pitch);
     } while (uVar5 != h);
   }

@@ -14,10 +14,10 @@ field	IOATIR500Surface,ATIR500Surface	0xa4	requestedId	INFERRED	set_id_mode stor
 field	IOATIR500Surface,ATIR500Surface	0xa8	buffers	CONFIRMED	Headers/IOATIR500Surface.h: the 23-entry ATIR500SurfaceBuffer array (stride 0x78); buffer index = (buffer - (this+0xa8)) / 0x78
 field	IOATIR500Surface,ATIR500Surface	0xb0	buffer0GpuBase	CONFIRMED	buffers[0] + 0x08 (ATIR500SurfaceBuffer::gpuBaseAddress); read by build_swap
 field	IOATIR500Surface,ATIR500Surface	0xb8	buffer0Storage	INFERRED	buffers[0] + 0x10: nonzero = the buffer has storage (read_buffer / surface_lock_options fail with 0xe00002cc when it is 0); set_id_mode reads it for buffer 0
-field	IOATIR500Surface,ATIR500Surface	0xbc	buffer0Width	CONFIRMED	buffers[0] + 0x14 (ATIR500SurfaceBuffer::width); build_swap divides it by the tiling degree
-field	IOATIR500Surface,ATIR500Surface	0xbe	buffer0BytesPerRow	CONFIRMED	buffers[0] + 0x16 (ATIR500SurfaceBuffer::bytesPerRow); build_swap 0x20 / this
-field	IOATIR500Surface,ATIR500Surface	0xc4	buffer0HeightOrRows	CONFIRMED	buffers[0] + 0x1c (ATIR500SurfaceBuffer::heightOrRows)
-field	IOATIR500Surface,ATIR500Surface	0xc6	buffer0Extra1e	CONFIRMED	buffers[0] + 0x1e (ATIR500SurfaceBuffer::extra1e)
+field	IOATIR500Surface,ATIR500Surface	0xbc	buffer0PitchPixels	CONFIRMED	buffers[0] + 0x14 (ATIR500SurfaceBuffer::pitchPixels); build_swap divides it by the tiling degree
+field	IOATIR500Surface,ATIR500Surface	0xbe	buffer0BytesPerPixel	CONFIRMED	buffers[0] + 0x16 (ATIR500SurfaceBuffer::bytesPerPixel); build_swap 0x20 / this
+field	IOATIR500Surface,ATIR500Surface	0xc4	buffer0Width	CONFIRMED	buffers[0] + 0x1c (ATIR500SurfaceBuffer::width)
+field	IOATIR500Surface,ATIR500Surface	0xc6	buffer0Height	CONFIRMED	buffers[0] + 0x1e (ATIR500SurfaceBuffer::height)
 field	IOATIR500Surface,ATIR500Surface	0xcc	buffer0BackingStore	CONFIRMED	buffers[0] + 0x24 (ATIR500SurfaceBuffer::backingStoreHandle); copy_buffer_to/from_backing_store and freeToAllocGART walk this field of every buffer (stride 0x78)
 field	IOATIR500Surface,ATIR500Surface	0xd0	buffer0HzBlockField	CONFIRMED	buffers[0] + 0x28 (ATIR500SurfaceBuffer::hzBlockField); start() initialises the field of every buffer in a loop
 field	IOATIR500Surface,ATIR500Surface	0xe4	buffer0TilingDegreeBits	CONFIRMED	buffers[0] + 0x3c (ATIR500SurfaceBuffer::tilingDegreeBits): build_swap tests & 0xf00000 and takes >> 0x14 & 0xf
@@ -25,10 +25,10 @@ field	IOATIR500Surface,ATIR500Surface	0xe8	buffer0MipOffset0	CONFIRMED	buffers[0
 field	IOATIR500Surface,ATIR500Surface	0x120	buffer1	CONFIRMED	buffers[1] (0xa8 + 0x78); prune_buffers/resetFullScreen point attachmentBuffers[1] at it
 field	IOATIR500Surface,ATIR500Surface	0x128	buffer1GpuBase	CONFIRMED	buffers[1] + 0x08 (gpuBaseAddress)
 field	IOATIR500Surface,ATIR500Surface	0x130	buffer1Storage	INFERRED	buffers[1] + 0x10, the counterpart of buffer0Storage read by set_id_mode when the request bit 2 is set
-field	IOATIR500Surface,ATIR500Surface	0x134	buffer1Width	CONFIRMED	buffers[1] + 0x14 (width)
-field	IOATIR500Surface,ATIR500Surface	0x136	buffer1BytesPerRow	CONFIRMED	buffers[1] + 0x16 (bytesPerRow)
-field	IOATIR500Surface,ATIR500Surface	0x13c	buffer1HeightOrRows	CONFIRMED	buffers[1] + 0x1c (heightOrRows)
-field	IOATIR500Surface,ATIR500Surface	0x13e	buffer1Extra1e	CONFIRMED	buffers[1] + 0x1e (extra1e)
+field	IOATIR500Surface,ATIR500Surface	0x134	buffer1PitchPixels	CONFIRMED	buffers[1] + 0x14 (pitchPixels)
+field	IOATIR500Surface,ATIR500Surface	0x136	buffer1BytesPerPixel	CONFIRMED	buffers[1] + 0x16 (bytesPerPixel)
+field	IOATIR500Surface,ATIR500Surface	0x13c	buffer1Width	CONFIRMED	buffers[1] + 0x1c (width)
+field	IOATIR500Surface,ATIR500Surface	0x13e	buffer1Height	CONFIRMED	buffers[1] + 0x1e (height)
 field	IOATIR500Surface,ATIR500Surface	0x140	buffer1BasePitch	CONFIRMED	buffers[1] + 0x20 (basePitch); build_swap: basePitch * mipOffsets[0] + gpuBaseAddress
 field	IOATIR500Surface,ATIR500Surface	0x144	buffer1BackingStore	CONFIRMED	buffers[1] + 0x24 (backingStoreHandle); reset_req_bits tests it
 field	IOATIR500Surface,ATIR500Surface	0x15c	buffer1TilingDegreeBits	CONFIRMED	buffers[1] + 0x3c (tilingDegreeBits)
@@ -37,19 +37,19 @@ field	IOATIR500Surface,ATIR500Surface	0x288	buffer4	CONFIRMED	buffers[4] (0xa8 +
 field	IOATIR500Surface,ATIR500Surface	0x300	buffer5	CONFIRMED	buffers[5]; attachmentBuffers[5] points at it
 field	IOATIR500Surface,ATIR500Surface	0x4e0	buffer9	CONFIRMED	buffers[9]: the buffer free_buffer_backing_store is called on in shape_surface; dealloc_surface compares surfaceIndex == 9 and tests its HZ field (+0x508)
 field	IOATIR500Surface,ATIR500Surface	0x4f0	buffer9Storage	INFERRED	buffers[9] + 0x10 (storage word, see buffer0Storage); shape_surface compares it with the new size
-field	IOATIR500Surface,ATIR500Surface	0x4f4	buffer9Width	CONFIRMED	buffers[9] + 0x14 (width); shape_surface
-field	IOATIR500Surface,ATIR500Surface	0x4f6	buffer9BytesPerRow	CONFIRMED	buffers[9] + 0x16 (bytesPerRow)
+field	IOATIR500Surface,ATIR500Surface	0x4f4	buffer9PitchPixels	CONFIRMED	buffers[9] + 0x14 (pitchPixels): row pitch in pixels, padded; shape_surface stores pitchBytes / bytesPerPixel here
+field	IOATIR500Surface,ATIR500Surface	0x4f6	buffer9BytesPerPixel	CONFIRMED	buffers[9] + 0x16 (bytesPerPixel); shape_surface stores 1 << (format >> 12 & 7) and compares it before reshaping
 field	IOATIR500Surface,ATIR500Surface	0x4f8	buffer9Pitch	INFERRED	buffers[9] + 0x18; shape_surface stores the pitch in bytes there
-field	IOATIR500Surface,ATIR500Surface	0x4fc	buffer9HeightOrRows	CONFIRMED	buffers[9] + 0x1c (heightOrRows)
-field	IOATIR500Surface,ATIR500Surface	0x4fe	buffer9Extra1e	CONFIRMED	buffers[9] + 0x1e (extra1e)
+field	IOATIR500Surface,ATIR500Surface	0x4fc	buffer9Width	CONFIRMED	buffers[9] + 0x1c (width): visible width in pixels, widthScale * surface.width; shape_surface compares and stores it; the DVD/GL mip code divides it by the tiling degree and shifts it right per mip level
+field	IOATIR500Surface,ATIR500Surface	0x4fe	buffer9Height	CONFIRMED	buffers[9] + 0x1e (height): visible height in pixels, heightScale * surface.height; shape_surface; shifted right per mip level
 field	IOATIR500Surface,ATIR500Surface	0x504	buffer9BackingStore	CONFIRMED	buffers[9] + 0x24 (backingStoreHandle)
 field	IOATIR500Surface,ATIR500Surface	0x508	buffer9HzBlockField	CONFIRMED	buffers[9] + 0x28 (hzBlockField); dealloc_surface compares & 0x3ff00000 with 0x3ff00000
 field	IOATIR500Surface,ATIR500Surface	0x51c	buffer9TilingDegreeBits	CONFIRMED	buffers[9] + 0x3c (tilingDegreeBits); shape_surface sets the degree bits & 0xff000fff | 0x111000
 field	IOATIR500Surface,ATIR500Surface	0x558	buffer10	CONFIRMED	buffers[10] (0xa8 + 10 * 0x78): lower bound of the buffer range copy_buffer_using_DMA tests
 field	IOATIR500Surface,ATIR500Surface	0x738	buffer14	CONFIRMED	buffers[14]: upper bound of the same range
-field	IOATIR500Surface,ATIR500Surface	0x844	buffer16HeightOrRows	CONFIRMED	buffers[16] + 0x1c; shape_surface writes 0x2d0 for bufferId 0x10 (+0x1e gets 0x240 or 0x1e0)
-field	IOATIR500Surface,ATIR500Surface	0x846	buffer16Extra1e	CONFIRMED	buffers[16] + 0x1e
-field	IOATIR500Surface,ATIR500Surface	0x936	buffer18Extra1e	CONFIRMED	buffers[18] + 0x1e; shape_surface for bufferId 0x12
+field	IOATIR500Surface,ATIR500Surface	0x844	buffer16Width	CONFIRMED	buffers[16] + 0x1c (width): shape_surface writes 720 (the SD video width) for bufferId 0x10; +0x1e (height) gets 576 or 480 (PAL/NTSC)
+field	IOATIR500Surface,ATIR500Surface	0x846	buffer16Height	CONFIRMED	buffers[16] + 0x1e (height): 576 (PAL) or 480 (NTSC)
+field	IOATIR500Surface,ATIR500Surface	0x936	buffer18Height	CONFIRMED	buffers[18] + 0x1e; shape_surface for bufferId 0x12
 field	IOATIR500Surface,ATIR500Surface	0xb74	attachmentBuffer1	CONFIRMED	attachmentBuffers[1] (the table at +0xb70)
 field	IOATIR500Surface,ATIR500Surface	0xb80	attachmentBuffer4	CONFIRMED	attachmentBuffers[4]
 field	IOATIR500Surface,ATIR500Surface	0xb84	attachmentBuffer5	CONFIRMED	attachmentBuffers[5]; submit_flip_buffer reads the buffer's +8 base from it

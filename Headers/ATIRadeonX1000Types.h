@@ -202,12 +202,12 @@ struct ATIR500SurfaceBuffer {
     UInt8   _pad_0x00[0x08];
     UInt32  gpuBaseAddress;      /* +0x08, CONFIRMED: real per-surface base address, added into every offset computation seen this project */
     UInt8   _pad_0x0c[0x14 - 0x0c];
-    UInt16  width;               /* +0x14, CONFIRMED: real pixel width, used throughout pitch/offset math */
+    UInt16  pitchPixels;         /* +0x14, CONFIRMED (shape_surface): row pitch in pixels, padded: pitchBytes / bytesPerPixel; used throughout pitch/offset math (renamed from `width`, which is +0x1c) */
     UInt8   _pad_0x16[0x16 - 0x16];
-    UInt16  bytesPerRow;         /* +0x16, CONFIRMED: real real pitch-adjacent value ("uVar73 * *(ushort*)(pAVar77+0x16)" pitch formulas throughout) */
+    UInt16  bytesPerPixel;       /* +0x16, CONFIRMED (shape_surface stores `1 << (format >> 12 & 7)` and compares it before reshaping; renamed from `bytesPerRow`): bytes per pixel ("uVar73 * *(ushort*)(pAVar77+0x16)" pitch formulas throughout) */
     UInt8   _pad_0x18[0x1c - 0x18];
-    UInt16  heightOrRows;        /* +0x1c, CONFIRMED: used identically to width in scissor/clip clamping */
-    UInt16  extra1e;             /* +0x1e, CONFIRMED: paired with +0x1c in get_surface_size's non-mip branch */
+    UInt16  width;               /* +0x1c, CONFIRMED (shape_surface: widthScale * surface.width; DVD shape writes 720): visible width in pixels; scissor/clip clamping, per-mip width = width / tilingDegree >> mip (renamed from `heightOrRows`) */
+    UInt16  height;              /* +0x1e, CONFIRMED (shape_surface: heightScale * surface.height; DVD shape writes 576/480): visible height in pixels (renamed from `extra1e`) */
     UInt16  basePitch;           /* +0x20, CONFIRMED (issue #17, ATIR500Surface::back_resolve_fsaa_buffer): real field, distinct from `bytesPerRow` (+0x16) despite the superficially similar name - read via `basePitch * mipOffsets[0] + gpuBaseAddress` (masked `& 0xffffffe0`) to form a base address, in BOTH `resolve_fsaa_buffer` (issue #13; that file's own committed transcription wrongly aliased this read to `bytesPerRow` at two call sites - CORRECTED, see that file's own header comment) and this function - two independent real functions agreeing on this exact offset/role is what promoted it out of the surrounding padding. Real semantic distinction from `bytesPerRow` beyond "used in the base-address multiply instead of the block-count divide" not independently confirmed. */
     UInt8   _pad_0x22[0x24 - 0x22];
     UInt32  backingStoreHandle;  /* +0x24, CONFIRMED (issue #22, ATIR500Surface::shape_surface): real nonzero-means-allocated gate this project's own transcription of `free_buffer_backing_store`'s real call sites already treats generically as "record has a real allocated backing" (own body still not decompiled) - `shape_surface` is the first ALREADY-decompiled real function to read this exact field, at this exact offset, on every one of this class's own per-slot records (the `this+idx*0x78+0xa8`-based ones AND the fixed buffer at `this+0x4e0`), confirming the offset. */

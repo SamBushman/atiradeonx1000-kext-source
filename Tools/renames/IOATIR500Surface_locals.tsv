@@ -13,8 +13,8 @@ def	IOATIR500Surface::init_swap_buffer_header@0x10b40	iVar2	wordsLeft	CONFIRMED	
 def	IOATIR500Surface::delete_buffer_backing@0x12c30	iVar2	nextBuffer	CONFIRMED	the buffer's +0x28 link, relinked to the previous one when the buffer leaves the ring (+0x24 prev / +0x28 next)
 def	IOATIR500Surface::clientMemoryForType@0x141b0	uVar1	result	CONFIRMED	0 on success or 0xe00002c2 (bad panel), the return value
 def	IOATIR500Surface::clientMemoryForType@0x141b0	pIVar2	memoryDescriptor	CONFIRMED	the panel's master buffer memory (entries[0].memory), retained and returned through *memory
-def	IOATIR500Surface::buffer_map_offset@0x14010	uVar1	width	INFERRED	buffer+0x14 (width), multiplied with bytesPerRow into *bytes
-def	IOATIR500Surface::buffer_map_offset@0x14010	uVar2	bytesPerRow	INFERRED	buffer+0x16 (ATIR500SurfaceBuffer::bytesPerRow)
+def	IOATIR500Surface::buffer_map_offset@0x14010	uVar1	pitchPixels	CONFIRMED	buffer+0x14 (pitchPixels), multiplied with bytesPerPixel into *bytes (the row size in bytes); *w gets +0x1c and *h +0x1e
+def	IOATIR500Surface::buffer_map_offset@0x14010	uVar2	bytesPerPixel	INFERRED	buffer+0x16 (ATIR500SurfaceBuffer::bytesPerPixel)
 def	IOATIR500Surface::buffer_map_offset@0x14010	uVar3	height	INFERRED	buffer+0x1e, stored to *h
 def	IOATIR500Surface::alloc_buffer_backing_store@0x12900	pIVar1	memory	CONFIRMED	the IOBufferMemoryDescriptor allocated, attached to the buffer; NULL means failure
 def	IOATIR500Surface::alloc_buffer_backing_store@0x12900	iVar2	backingStore	CONFIRMED	buffer+0x24 (backingStoreHandle) after attach: its +0x59 flag and +0x54 stamp are set

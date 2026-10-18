@@ -35,7 +35,7 @@ void ATIR500Surface::copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UI
 
   bool synchronous;
   UInt8 uVar2;
-  UInt16 bytesPerRow;
+  UInt16 bytesPerPixel;
   bool bVar4;
   UInt32 uVar5;
   unsigned int uVar6;
@@ -141,7 +141,7 @@ LAB_00043834:
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
     bVar4 = false;
     uVar28 = (unsigned int)M<UInt16>(backing + 0x52);
-    bytesPerRow = M<UInt16>(bufferBytes + 0x16);
+    bytesPerPixel = M<UInt16>(bufferBytes + 0x16);
     iVar14 = iVar14 + (unsigned int)M<UInt16>(backing + 0x50);
   }
   else {
@@ -152,13 +152,13 @@ LAB_00043834:
       uVar19 = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
       ;
     }
-    bytesPerRow = M<UInt16>(bufferBytes + 0x16);
-    uVar28 = 0x20 / bytesPerRow;
+    bytesPerPixel = M<UInt16>(bufferBytes + 0x16);
+    uVar28 = 0x20 / bytesPerPixel;
     if (uVar28 <= uVar19) {
       uVar28 = uVar19;
     }
     backingMap = (int *)0x0;
-    uVar28 = uVar28 * bytesPerRow;
+    uVar28 = uVar28 * bytesPerPixel;
     bVar4 = true;
     bVar29 = 2;
   }
@@ -180,7 +180,7 @@ LAB_00043834:
   if (((tilingBits & 0xf00000) == 0x100000) || (!synchronous)) {
     iVar14 = surfaceY * uVar28;
     uVar28 = -uVar28;
-    surfaceRow = (UInt64 *)((int)surfaceRow + iVar14 + xScaled * (unsigned int)bytesPerRow);
+    surfaceRow = (UInt64 *)((int)surfaceRow + iVar14 + xScaled * (unsigned int)bytesPerPixel);
     if (synchronous) goto LAB_00043ac4;
 LAB_00043ad0:
     uVar28 = -uVar28;
@@ -190,7 +190,7 @@ LAB_00043ac4:
     if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto LAB_00043ad0;
   }
   bVar30 = !bVar4 << 1;
-  iVar14 = uVar6 * (unsigned int)bytesPerRow * w;
+  iVar14 = uVar6 * (unsigned int)bytesPerPixel * w;
   if (bVar4) {
     VCALL(M<int>(self), 0x5fc)(self,bufferBytes);
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);

@@ -31,12 +31,12 @@ SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  UInt16 width;
-  UInt16 bytesPerRow;
+  UInt16 pitchPixels;
+  UInt16 bytesPerPixel;
   UInt16 height;
   
-  width = M<UInt16>(bufferBytes + 0x14);
-  bytesPerRow = M<UInt16>(bufferBytes + 0x16);
+  pitchPixels = M<UInt16>(bufferBytes + 0x14);
+  bytesPerPixel = M<UInt16>(bufferBytes + 0x16);
   height = M<UInt16>(bufferBytes + 0x1e);
   if (w != (long *)0x0) {
     *w = (UInt32)M<UInt16>(bufferBytes + 0x1c);
@@ -45,7 +45,7 @@ SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 
     *h = (UInt32)height;
   }
   if (bytes != (long *)0x0) {
-    *bytes = (UInt32)bytesPerRow * (UInt32)width;
+    *bytes = (UInt32)bytesPerPixel * (UInt32)pitchPixels;
   }
   return 0;
 }

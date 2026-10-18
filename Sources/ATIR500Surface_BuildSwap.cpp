@@ -257,10 +257,10 @@ void ATIR500Surface::build_swap() {
              (UInt32)M<UInt16>(self + 200) * M<SInt32>(self + kIOATIR500Surface_buffer0MipOffset0) + M<SInt32>(self + kIOATIR500Surface_buffer0GpuBase) &
              0xffffffe0;
         if ((M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) & 0xf00000) != 0) {
-          widthUnits = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0Width) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf);
+          widthUnits = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0PitchPixels) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf);
         }
-        pitchUnits = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerRow);
-        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerRow) <= widthUnits) {
+        pitchUnits = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerPixel);
+        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerPixel) <= widthUnits) {
           pitchUnits = widthUnits;
         }
         uVar15 = M<UInt32>(batchHeader + 0x250);
@@ -280,13 +280,13 @@ void ATIR500Surface::build_swap() {
              (FormatTableLookup_0x0004d2e0(formatOffset) & 0x600) << 5 |
              uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffff00e0;
         if (((M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) & 0xf00000) == 0) ||
-           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0HeightOrRows) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf),
+           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0Width) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf),
            lastColumn = uVar19 - 1, uVar19 == 0)) {
           lastColumn = 0;
         }
         lastRow = 0;
-        if (M<UInt16>(self + kIOATIR500Surface_buffer0Extra1e) != 0) {
-          lastRow = M<UInt16>(self + kIOATIR500Surface_buffer0Extra1e) - 1;
+        if (M<UInt16>(self + kIOATIR500Surface_buffer0Height) != 0) {
+          lastRow = M<UInt16>(self + kIOATIR500Surface_buffer0Height) - 1;
         }
         M<UInt32>(batchHeader + 0x2f4) = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
         AVar5 = self[0x15a];
@@ -295,13 +295,13 @@ void ATIR500Surface::build_swap() {
              (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1BasePitch) * M<SInt32>(self + kIOATIR500Surface_buffer1MipOffset0) + M<SInt32>(self + kIOATIR500Surface_buffer1GpuBase) &
              0xffffffe0;
         if (((M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) == 0) ||
-           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1HeightOrRows) / (M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf),
+           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf),
            lastColumn = uVar19 - 1, uVar19 == 0)) {
           lastColumn = 0;
         }
         lastRow = 0;
-        if (M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) != 0) {
-          lastRow = M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) - 1;
+        if (M<UInt16>(self + kIOATIR500Surface_buffer1Height) != 0) {
+          lastRow = M<UInt16>(self + kIOATIR500Surface_buffer1Height) - 1;
         }
         M<UInt32>(batchHeader + 0x2c0) = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
         uVar29 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar5 * 0x1c);
@@ -314,20 +314,20 @@ void ATIR500Surface::build_swap() {
           uVar19 = 0;
         }
         else {
-          uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (uVar29 >> 0x14 & 0xf);
+          uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1PitchPixels) / (uVar29 >> 0x14 & 0xf);
         }
-        uVar17 = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerRow);
-        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerRow) <= uVar19) {
+        uVar17 = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerPixel);
+        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerPixel) <= uVar19) {
           uVar17 = uVar19;
         }
         if ((bVar1) ||
-           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1HeightOrRows) / (uVar29 >> 0x14 & 0xf), uVar29 = uVar19 - 1,
+           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (uVar29 >> 0x14 & 0xf), uVar29 = uVar19 - 1,
            uVar19 == 0)) {
           uVar29 = 0;
         }
         uVar19 = 0;
-        if (M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) != 0) {
-          uVar19 = M<UInt16>(self + kIOATIR500Surface_buffer1Extra1e) - 1;
+        if (M<UInt16>(self + kIOATIR500Surface_buffer1Height) != 0) {
+          uVar19 = M<UInt16>(self + kIOATIR500Surface_buffer1Height) - 1;
         }
         M<UInt32>(batchHeader + 0x2d0) =
              uVar17 - 1 & 0x3fff | (uVar29 & 0x800) << 4 | (uVar19 & 0x800) << 5;

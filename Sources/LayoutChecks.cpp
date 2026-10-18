@@ -83,10 +83,10 @@ LAYOUT_CHECK(off52_VendorTransferBuffer_listNext, __builtin_offsetof(VendorTrans
 LAYOUT_CHECK(off53_VendorTransferBuffer_poolSizeClass, __builtin_offsetof(VendorTransferBuffer, poolSizeClass) == 0x50);
 LAYOUT_CHECK(off54_VendorTransferBuffer_generationTag, __builtin_offsetof(VendorTransferBuffer, generationTag) == 0x5c);
 LAYOUT_CHECK(off55_ATIR500SurfaceBuffer_gpuBaseAddress, __builtin_offsetof(ATIR500SurfaceBuffer, gpuBaseAddress) == 0x08);
-LAYOUT_CHECK(off56_ATIR500SurfaceBuffer_width, __builtin_offsetof(ATIR500SurfaceBuffer, width) == 0x14);
-LAYOUT_CHECK(off57_ATIR500SurfaceBuffer_bytesPerRow, __builtin_offsetof(ATIR500SurfaceBuffer, bytesPerRow) == 0x16);
-LAYOUT_CHECK(off58_ATIR500SurfaceBuffer_heightOrRows, __builtin_offsetof(ATIR500SurfaceBuffer, heightOrRows) == 0x1c);
-LAYOUT_CHECK(off59_ATIR500SurfaceBuffer_extra1e, __builtin_offsetof(ATIR500SurfaceBuffer, extra1e) == 0x1e);
+LAYOUT_CHECK(off56_ATIR500SurfaceBuffer_pitchPixels, __builtin_offsetof(ATIR500SurfaceBuffer, pitchPixels) == 0x14);
+LAYOUT_CHECK(off57_ATIR500SurfaceBuffer_bytesPerPixel, __builtin_offsetof(ATIR500SurfaceBuffer, bytesPerPixel) == 0x16);
+LAYOUT_CHECK(off58_ATIR500SurfaceBuffer_width, __builtin_offsetof(ATIR500SurfaceBuffer, width) == 0x1c);
+LAYOUT_CHECK(off59_ATIR500SurfaceBuffer_height, __builtin_offsetof(ATIR500SurfaceBuffer, height) == 0x1e);
 LAYOUT_CHECK(off60_ATIR500SurfaceBuffer_basePitch, __builtin_offsetof(ATIR500SurfaceBuffer, basePitch) == 0x20);
 LAYOUT_CHECK(off61_ATIR500SurfaceBuffer_backingStoreHandle, __builtin_offsetof(ATIR500SurfaceBuffer, backingStoreHandle) == 0x24);
 LAYOUT_CHECK(off62_ATIR500SurfaceBuffer_hzBlockField, __builtin_offsetof(ATIR500SurfaceBuffer, hzBlockField) == 0x28);
