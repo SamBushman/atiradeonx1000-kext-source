@@ -1,7 +1,7 @@
 # build_swap round 2: the colour-buffer register words computed from the surface's format (pitch / size)
 #!use-decl: end
-use	ATIR500Surface::build_swap	uVar29	widthUnits	INFERRED	surface width / the format's element size when it has one (same computation as in the DVD handlers)	^\s*uVar29 = 0;$#1	uVar29 = FormatTableLookup_0x0004d2e0\(formatOffset\) >> 0x11
-use	ATIR500Surface::build_swap	uVar19	pitchUnits	INFERRED	max(0x20 / bytesPerUnit, widthUnits): the 0x3ffe pitch field of the +0x298 colour-pitch word	uVar19 = 0x20 / M<UInt16>\(self \+ 0xbe\)	uVar29 = FormatTableLookup_0x0004d2e0\(formatOffset\) >> 0x11
+use	ATIR500Surface::build_swap	uVar29	widthUnits	INFERRED	surface width / the format's element size when it has one (same computation as in the DVD handlers)	^\s*uVar29 = 0;$#1	uVar29 = FormatTableLookup_0x0004d2e0\(iVar28\) >> 0x11
+use	ATIR500Surface::build_swap	uVar19	pitchUnits	INFERRED	max(0x20 / bytesPerUnit, widthUnits): the 0x3ffe pitch field of the +0x298 colour-pitch word	uVar19 = 0x20 / M<UInt16>\(self \+ 0xbe\)	uVar29 = FormatTableLookup_0x0004d2e0\(iVar28\) >> 0x11
 use	ATIR500Surface::build_swap	uVar29	lastColumn	INFERRED	width in format elements - 1 (0 when empty): low half of the +0x2f4 size word	\(M<UInt32>\(self \+ 0xe4\) & 0xf00000\) == 0\) \|\|	^\s*AVar5 = self\[0x15a\];
 use	ATIR500Surface::build_swap	uVar19	lastRow	INFERRED	height - 1 (0 when empty): high half of the +0x2f4 size word	^\s*uVar19 = 0;$#1	^\s*AVar5 = self\[0x15a\];
 use	ATIR500Surface::build_swap	uVar29	lastColumn	INFERRED	source texture width in elements - 1: low field of the +0x2c0 size word	\(M<UInt32>\(self \+ 0x15c\) & 0xf00000\) == 0\) \|\|	uVar29 = FormatTableLookup_0x0004d2e4
