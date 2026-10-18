@@ -104,6 +104,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   SInt32 bufferInfo;
   UInt32 gartBlock32;
   SInt32 textureAddress;
+  SInt32 secondBufferInfo;
   
   local_64 = 0;
   local_60 = 0;
@@ -134,9 +135,9 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                    (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
                    M<SInt32>(texture + 4) != 0)) {
                   GH_IOGetTime(texture + 0x2c);
-                  iVar23 = M<SInt32>(texture + 0x34);
-                  M<UInt32>(iVar23 + 0x38) = M<UInt32>(texture + 0x38);
-                  M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = iVar23;
+                  prevNode = M<SInt32>(texture + 0x34);
+                  M<UInt32>(prevNode + 0x38) = M<UInt32>(texture + 0x38);
+                  M<SInt32>(M<SInt32>(texture + 0x38) + 0x34) = prevNode;
                   M<UInt32>(texture + 0x34) = M<UInt32>(M<SInt32>(self + 0x8c) + 0x6d0);
                   M<SInt32>(texture + 0x38) = M<SInt32>(self + 0x8c) + 0x69c;
                   M<UInt8 *>(M<SInt32>(self + 0x8c) + 0x6d0) = texture;
@@ -188,29 +189,29 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     surfaceInfo = M<SInt32>(self + 0xf8);
                     fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
                     if ((M<SInt16>(surfaceInfo + 0x98) != M<SInt16>(surfaceInfo + 0x96)) && (fieldHeight != 0)) {
-                      iVar12 = recordCursor[1] * 0x78 + surfaceInfo;
+                      bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
                       if ((recordCursor[3] & 2) == 0) {
                         if (recordCursor[2] == 0) {
-                          uVar17 = M<UInt32>(iVar12 + 0x560);
-                          uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
+                          uVar17 = M<UInt32>(bufferInfo + 0x560);
+                          uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
                         }
                         else {
-                          uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
-                          uVar17 = (fieldHeight * (UInt32)M<UInt16>(iVar12 + 0x570) * 3 >> 1) +
-                                   M<SInt32>(iVar12 + 0x560);
+                          uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
+                          uVar17 = (fieldHeight * (UInt32)M<UInt16>(bufferInfo + 0x570) * 3 >> 1) +
+                                   M<SInt32>(bufferInfo + 0x560);
                         }
                       }
                       else {
                         uVar17 = M<UInt32>(surfaceInfo + 0x998);
-                        uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
+                        uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
                       }
                       if ((recordCursor[3] & 4) == 0) {
                         if (recordCursor[2] == 0) {
-                          uVar11 = fieldHeight * uVar21 + M<SInt32>(iVar12 + 0x560);
+                          uVar11 = fieldHeight * uVar21 + M<SInt32>(bufferInfo + 0x560);
                         }
                         else {
                           uVar11 = fieldHeight * uVar21 +
-                                   (fieldHeight * uVar21 * 3 >> 1) + M<SInt32>(iVar12 + 0x560);
+                                   (fieldHeight * uVar21 * 3 >> 1) + M<SInt32>(bufferInfo + 0x560);
                         }
                       }
                       else {
@@ -219,8 +220,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                       *recordCursor = 0x1140;
                       recordCursor[1] = uVar21 - 1;
                       recordCursor[2] = 0x1150;
-                      uVar19 = (M<UInt8>(iVar12 + 0x590) & 1) << 2;
-                      uVar28 = (M<UInt8>(iVar12 + 0x590) & 6) << 2;
+                      uVar19 = (M<UInt8>(bufferInfo + 0x590) & 1) << 2;
+                      uVar28 = (M<UInt8>(bufferInfo + 0x590) & 6) << 2;
                       recordCursor[3] = uVar17 & 0xffffffe0 | uVar19 | uVar28;
                       recordCursor[4] = 0x1141;
                       recordCursor[5] = (uVar21 >> 1) - 1;
@@ -270,64 +271,64 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 }
                 M<UInt8>(M<SInt32>(texture + 0x14) + 0x14) = 0;
                 if (M<SInt32>(texture + 4) == 0) {
-                  iVar23 = M<SInt32>(self + 0xf8);
+                  surfaceInfo = M<SInt32>(self + 0xf8);
                   gartBlock32 = 0;
                 }
                 else {
-                  iVar23 = M<SInt32>(self + 0xf8);
+                  surfaceInfo = M<SInt32>(self + 0xf8);
                   gartBlock32 = (UInt32)(M<SInt32>(texture + 4) +
                                  M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4))
                            >> 5;
                 }
               }
               else {
-                iVar23 = M<SInt32>(self + 0xf8);
-                gartBlock32 = M<UInt32>(iVar23 + 0x830) >> 5;
+                surfaceInfo = M<SInt32>(self + 0xf8);
+                gartBlock32 = M<UInt32>(surfaceInfo + 0x830) >> 5;
               }
               *recordCursor = 0x1150;
               recordCursor[1] = gartBlock32 << 5;
               recordCursor[2] = 0x1393;
               recordCursor[3] = 10;
               recordCursor[4] = 0x138a;
-              recordCursor[5] = M<UInt32>(iVar23 + 0x128) & 0xffffffe0;
+              recordCursor[5] = M<UInt32>(surfaceInfo + 0x128) & 0xffffffe0;
               recordCursor[6] = 0x138e;
               uVar17 = 0;
-              iVar18 = (UInt32)M<UInt8>(iVar23 + 0x15a) * 0x1c;
-              if ((M<UInt32>(iVar23 + 0x15c) & 0xf00000) != 0) {
-                uVar17 = (UInt32)M<UInt16>(iVar23 + 0x134) /
-                         (M<UInt32>(iVar23 + 0x15c) >> 0x14 & 0xf);
+              formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
+              if ((M<UInt32>(surfaceInfo + 0x15c) & 0xf00000) != 0) {
+                uVar17 = (UInt32)M<UInt16>(surfaceInfo + 0x134) /
+                         (M<UInt32>(surfaceInfo + 0x15c) >> 0x14 & 0xf);
               }
-              uVar21 = 0x20 / M<UInt16>(iVar23 + 0x136);
+              uVar21 = 0x20 / M<UInt16>(surfaceInfo + 0x136);
               if (uVar21 <= uVar17) {
                 uVar21 = uVar17;
               }
-              local_58 = FormatTableLookup_0x0004d2e0(iVar18) >> 1 & 0x1e00000 |
-                         (FormatTableLookup_0x0004d2dc(iVar18) & 0xc00) << 9 |
-                         (M<UInt8>(iVar23 + 0x158) & 6) << 0x10 |
-                         (M<UInt8>(iVar23 + 0x158) & 1) << 0x10 |
+              local_58 = FormatTableLookup_0x0004d2e0(formatOffset) >> 1 & 0x1e00000 |
+                         (FormatTableLookup_0x0004d2dc(formatOffset) & 0xc00) << 9 |
+                         (M<UInt8>(surfaceInfo + 0x158) & 6) << 0x10 |
+                         (M<UInt8>(surfaceInfo + 0x158) & 1) << 0x10 |
                          uVar21 & 0x3ffe | local_58 & 0xfe00c001;
               recordCursor[7] = local_58;
               recordWord = recordWord & 0xffffff;
             }
             else if (uVar17 == 0x13000000) {
-              iVar23 = M<SInt32>(self + 0xf8);
-              iVar18 = recordCursor[1] * 0x78 + iVar23;
-              uVar17 = M<UInt32>(iVar18 + 0x560);
-              pitch = M<UInt16>(iVar18 + 0x570);
+              surfaceInfo = M<SInt32>(self + 0xf8);
+              bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
+              uVar17 = M<UInt32>(bufferInfo + 0x560);
+              pitch = M<UInt16>(bufferInfo + 0x570);
               *recordCursor = 0x1087;
-              recordCursor[1] = (M<UInt16>(iVar18 + 0x576) & 0x3fff) << 2 | (UInt32)pitch << 0x11;
+              recordCursor[1] = (M<UInt16>(bufferInfo + 0x576) & 0x3fff) << 2 | (UInt32)pitch << 0x11;
               recordCursor[2] = 0x1150;
               recordCursor[3] = uVar17 & 0xffffffe0;
               recordCursor[4] = 0x1393;
               recordCursor[5] = 10;
               recordCursor[6] = 0x138a;
-              recordCursor[7] = uVar17 + (((SInt32)M<SInt16>(iVar23 + 0x9a) -
-                                     (SInt32)M<SInt16>(iVar23 + 0x94)) * (UInt32)pitch * 3 >> 1) &
+              recordCursor[7] = uVar17 + (((SInt32)M<SInt16>(surfaceInfo + 0x9a) -
+                                     (SInt32)M<SInt16>(surfaceInfo + 0x94)) * (UInt32)pitch * 3 >> 1) &
                            0xffffffe0;
               recordCursor[8] = 0x138e;
-              recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(iVar18 + 0x590) & 1) << 0x10 |
-                           (M<UInt8>(iVar18 + 0x590) & 6) << 0x10 |
-                           (M<UInt8>(iVar18 + 0x591) & 3) << 0x13 | 0xc00000;
+              recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(bufferInfo + 0x590) & 1) << 0x10 |
+                           (M<UInt8>(bufferInfo + 0x590) & 6) << 0x10 |
+                           (M<UInt8>(bufferInfo + 0x591) & 3) << 0x13 | 0xc00000;
               dVar9 = DOUBLE_0004c3c0;
               dVar8 = DOUBLE_0004c3b8;
               dVar7 = DOUBLE_0004c3a8;
@@ -337,7 +338,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                    FBITS((float)((((double)CONCAT44d(0x43300000,uStack_84) - DOUBLE_0004c3a8) +
                                  DOUBLE_0004c3c0) * DOUBLE_0004c3b8));
               local_80 = 0x43300000;
-              uStack_7c = M<UInt16>(iVar18 + 0x576) >> 1 ^ 0x80000000;
+              uStack_7c = M<UInt16>(bufferInfo + 0x576) >> 1 ^ 0x80000000;
               recordCursor[0x62] =
                    FBITS((float)((((double)CONCAT44d(0x43300000,uStack_7c) - dVar7) + dVar9) * dVar8))
               ;
@@ -598,23 +599,23 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 goto LAB_00039028;
               }
               surfaceInfo = M<SInt32>(self + 0xf8);
-              iVar23 = recordCursor[2] * 0x78 + surfaceInfo;
+              secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
               bufferInfo = recordCursor[3] * 0x78 + surfaceInfo;
-              iVar12 = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
+              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
               uVar17 = recordCursor[4];
-              pitch = M<UInt16>(iVar23 + 0x570);
+              pitch = M<UInt16>(secondBufferInfo + 0x570);
               uVar11 = (UInt32)pitch;
-              uVar21 = M<UInt32>(iVar23 + 0x560);
-              iVar18 = iVar12 * uVar11;
+              uVar21 = M<UInt32>(secondBufferInfo + 0x560);
+              iVar18 = fieldHeight * uVar11;
               iVar45 = uVar21 + ((UInt32)(iVar18 * 3) >> 1);
               if (recordCursor[1] == 2) {
                 if (uVar17 == 0) {
                   otherPitch = M<UInt16>(bufferInfo + 0x570);
                   uVar19 = uVar21 + iVar18;
                   uVar33 = uVar11 + iVar18 + iVar45;
-                  uVar36 = iVar12 * (UInt32)otherPitch + M<SInt32>(bufferInfo + 0x560);
+                  uVar36 = fieldHeight * (UInt32)otherPitch + M<SInt32>(bufferInfo + 0x560);
                   uVar38 = uVar36 + (otherPitch >> 1);
-                  uVar17 = iVar12 * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) + M<SInt32>(surfaceInfo + 0x7b8);
+                  uVar17 = fieldHeight * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) + M<SInt32>(surfaceInfo + 0x7b8);
                   uVar28 = uVar19 + (pitch >> 1);
                   uVar35 = uVar19 + ((SInt32)(uVar11 * 3) >> 1);
                   uVar31 = uVar36 + ((SInt32)((UInt32)otherPitch * 3) >> 1);
@@ -622,8 +623,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 else {
                   otherPitch = M<UInt16>(bufferInfo + 0x570);
                   uVar28 = uVar21 + iVar18;
-                  uVar38 = iVar12 * (UInt32)otherPitch + M<SInt32>(bufferInfo + 0x560);
-                  uVar17 = iVar12 * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) + M<SInt32>(surfaceInfo + 0x7b8) +
+                  uVar38 = fieldHeight * (UInt32)otherPitch + M<SInt32>(bufferInfo + 0x560);
+                  uVar17 = fieldHeight * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) + M<SInt32>(surfaceInfo + 0x7b8) +
                            (UInt32)(M<UInt16>(surfaceInfo + 0x7c8) >> 1);
                   uVar31 = otherPitch + uVar38;
                   uVar33 = (UInt32)(pitch >> 1) + iVar18 + iVar45;
@@ -637,11 +638,11 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   otherPitch = M<UInt16>(bufferInfo + 0x570);
                   uVar17 = (UInt32)(iVar18 * 5) >> 2;
                   uVar19 = uVar21 + uVar17;
-                  uVar36 = (iVar12 * (UInt32)otherPitch * 5 >> 2) + M<SInt32>(bufferInfo + 0x560);
+                  uVar36 = (fieldHeight * (UInt32)otherPitch * 5 >> 2) + M<SInt32>(bufferInfo + 0x560);
                   uVar33 = uVar11 + iVar45 + uVar17;
                   uVar35 = uVar19 + ((SInt32)(uVar11 * 3) >> 1);
                   uVar38 = uVar36 + (otherPitch >> 1);
-                  uVar17 = (iVar12 * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) * 5 >> 2) +
+                  uVar17 = (fieldHeight * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) * 5 >> 2) +
                            M<SInt32>(surfaceInfo + 0x7b8);
                   uVar31 = uVar36 + ((SInt32)((UInt32)otherPitch * 3) >> 1);
                   uVar28 = uVar19 + (pitch >> 1);
@@ -650,8 +651,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   otherPitch = M<UInt16>(bufferInfo + 0x570);
                   uVar19 = (UInt32)(iVar18 * 5) >> 2;
                   uVar28 = uVar21 + uVar19;
-                  uVar38 = (iVar12 * (UInt32)otherPitch * 5 >> 2) + M<SInt32>(bufferInfo + 0x560);
-                  uVar17 = (iVar12 * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) * 5 >> 2) +
+                  uVar38 = (fieldHeight * (UInt32)otherPitch * 5 >> 2) + M<SInt32>(bufferInfo + 0x560);
+                  uVar17 = (fieldHeight * (UInt32)M<UInt16>(surfaceInfo + 0x7c8) * 5 >> 2) +
                            M<SInt32>(surfaceInfo + 0x7b8) + (UInt32)(M<UInt16>(surfaceInfo + 0x7c8) >> 1);
                   uVar31 = otherPitch + uVar38;
                   uVar33 = (UInt32)(pitch >> 1) + iVar45 + uVar19;
@@ -681,8 +682,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 uVar28 = uVar21;
               }
               *recordCursor = 0x1150;
-              uVar21 = (M<UInt8>(iVar23 + 0x590) & 1) << 2;
-              uVar11 = (M<UInt8>(iVar23 + 0x590) & 6) << 2;
+              uVar21 = (M<UInt8>(secondBufferInfo + 0x590) & 1) << 2;
+              uVar11 = (M<UInt8>(secondBufferInfo + 0x590) & 6) << 2;
               recordCursor[1] = uVar19 & 0xffffffe0 | uVar21 | uVar11;
               recordCursor[2] = 0x1151;
               recordCursor[3] = uVar11 | uVar21 | uVar28 & 0xffffffe0;
@@ -716,9 +717,9 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
           }
           if (uVar17 == 0x5000000) {
             uVar21 = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
-            iVar18 = M<SInt32>(self + 0xf8);
-            bufferInfo = recordCursor[1] * 0x78 + iVar18;
-            uVar17 = (SInt32)M<SInt16>(iVar18 + 0x9a) - (SInt32)M<SInt16>(iVar18 + 0x94);
+            surfaceInfo = M<SInt32>(self + 0xf8);
+            bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
+            uVar17 = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
             if (recordCursor[2] == 0) {
               uVar11 = M<UInt32>(bufferInfo + 0x560);
               pitch = M<UInt16>(bufferInfo + 0x570);
@@ -757,18 +758,18 @@ LAB_00037c4c:
             if ((uVar17 == 0x7000000) || (uVar17 == 0x8000000)) goto LAB_00039030;
             if (uVar17 != 0x6000000) goto LAB_00039028;
             uVar21 = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
-            iVar23 = M<SInt32>(self + 0xf8);
-            iVar18 = recordCursor[1] * 0x78 + iVar23;
-            uVar17 = (SInt32)M<SInt16>(iVar23 + 0x9a) - (SInt32)M<SInt16>(iVar23 + 0x94);
+            surfaceInfo = M<SInt32>(self + 0xf8);
+            bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
+            uVar17 = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
             if (recordCursor[2] == 0) {
-              pitch = M<UInt16>(iVar18 + 0x570);
-              uVar11 = uVar17 * pitch + M<SInt32>(iVar18 + 0x560);
+              pitch = M<UInt16>(bufferInfo + 0x570);
+              uVar11 = uVar17 * pitch + M<SInt32>(bufferInfo + 0x560);
             }
             else {
-              pitch = M<UInt16>(iVar18 + 0x570);
-              uVar11 = uVar17 * pitch + (uVar17 * pitch * 3 >> 1) + M<SInt32>(iVar18 + 0x560);
+              pitch = M<UInt16>(bufferInfo + 0x570);
+              uVar11 = uVar17 * pitch + (uVar17 * pitch * 3 >> 1) + M<SInt32>(bufferInfo + 0x560);
             }
-            bVar44 = M<UInt8>(iVar18 + 0x590);
+            bVar44 = M<UInt8>(bufferInfo + 0x590);
             uVar19 = 0x80000000;
             if (bVar44 < 2) {
               uVar19 = 0;
@@ -781,7 +782,7 @@ LAB_00037c4c:
             recordCursor[5] = 0x52f036da;
             recordCursor[6] = uVar19 | uVar11 >> 10 | (pitch & 0x3fc0) << 0x10 | (bVar44 & 1) << 0x1e;
             recordCursor[7] = M<UInt32>(self + 0x158);
-            recordCursor[8] = CONCAT22(M<UInt16>(iVar18 + 0x576),M<UInt16>(iVar18 + 0x574));
+            recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
             recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
                                   uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
             recordCursor[10] = 0;
@@ -829,12 +830,12 @@ LAB_00037620:
               if (pendingWords != 0) {
                 submitBytes = pendingWords * 4;
                 pendingWords = 0;
-                uVar17 = streamOffset & 0xfffffffc;
+                alignedOffset = streamOffset & 0xfffffffc;
                 M<SInt32>(M<SInt32>(self + 0x8c) + 0x708) =
                      submitBytes + M<SInt32>(M<SInt32>(self + 0x8c) + 0x708);
                 gartOffset = streamOffset + M<SInt32>(self + 0x94);
                 streamOffset = streamOffset + submitBytes;
-                stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0x8c)))->submit_buffer((UInt32 *)(uVar17 + M<SInt32>(self + 0xa4) + 0x20),gartOffset + 0x20,
+                stamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0x8c)))->submit_buffer((UInt32 *)(alignedOffset + M<SInt32>(self + 0xa4) + 0x20),gartOffset + 0x20,
                                     wordsToSubmit);
                 M<UInt32>(self + 0xa0) = stamp;
               }
@@ -926,7 +927,7 @@ LAB_00037620:
                 textureAddress = M<SInt32>(texture + 4) +
                          M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + 0x8c) + 0x8a4);
               }
-              iVar18 = M<SInt32>(self + 0xf8);
+              surfaceInfo = M<SInt32>(self + 0xf8);
               *recordCursor = 0x1150;
               recordCursor[1] = gartBlock32 << 5;
               recordCursor[2] = 0x1151;
@@ -934,15 +935,15 @@ LAB_00037620:
               recordCursor[4] = 0x1393;
               recordCursor[5] = 10;
               recordCursor[6] = 0x138a;
-              recordCursor[7] = M<UInt32>(iVar18 + 0x830) & 0xffffffe0;
+              recordCursor[7] = M<UInt32>(surfaceInfo + 0x830) & 0xffffffe0;
               recordCursor[8] = 0x138e;
-              if (M<UInt16>(iVar18 + 0x83e) == 0) {
+              if (M<UInt16>(surfaceInfo + 0x83e) == 0) {
                 recordCursor[9] = 0x1400000;
                 recordWord = recordWord & 0xffffff;
               }
               else {
-                recordCursor[9] = (SInt32)((UInt32)M<UInt16>(iVar18 + 0x840) /
-                                  (UInt32)M<UInt16>(iVar18 + 0x83e)) >> 1 & 0x3ffeU | 0x1400000;
+                recordCursor[9] = (SInt32)((UInt32)M<UInt16>(surfaceInfo + 0x840) /
+                                  (UInt32)M<UInt16>(surfaceInfo + 0x83e)) >> 1 & 0x3ffeU | 0x1400000;
                 recordWord = recordWord & 0xffffff;
               }
             }
@@ -1272,7 +1273,7 @@ LAB_00039030:
             uVar38 = recordCursor[3];
             uVar33 = recordCursor[4];
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
-            iVar18 = recordCursor[2] * 0x78 + surfaceInfo;
+            secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
             local_74 = recordCursor[6];
             fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
             pitch = M<UInt16>(bufferInfo + 0x570);
@@ -1297,42 +1298,42 @@ LAB_00039030:
             if (uVar33 != 1) {
               if (uVar38 == 0) {
                 uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-                uVar34 = M<UInt32>(iVar18 + 0x560);
+                uVar34 = M<UInt32>(secondBufferInfo + 0x560);
                 uVar19 = uVar28 + uVar35;
                 uVar13 = uVar31 + uVar28;
-                uVar39 = (UInt32)M<UInt16>(iVar18 + 0x570);
+                uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
                 uVar29 = uVar32 + uVar36;
                 uVar41 = uVar32;
                 uVar30 = uVar34;
               }
               else {
-                uVar39 = (UInt32)M<UInt16>(iVar18 + 0x570);
+                uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
                 uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-                uVar34 = M<UInt32>(iVar18 + 0x560);
+                uVar34 = M<UInt32>(secondBufferInfo + 0x560);
                 uVar13 = uVar31;
                 uVar41 = uVar32 + uVar36;
                 uVar29 = uVar32;
                 uVar21 = uVar28 + uVar35;
                 uVar11 = uVar31 + uVar28;
-                uVar30 = M<UInt16>(iVar18 + 0x570) + uVar34;
+                uVar30 = M<UInt16>(secondBufferInfo + 0x570) + uVar34;
               }
             }
             else if (uVar38 == 0) {
-              uVar39 = (UInt32)M<UInt16>(iVar18 + 0x570);
-              uVar34 = M<UInt32>(iVar18 + 0x560);
+              uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
+              uVar34 = M<UInt32>(secondBufferInfo + 0x560);
               uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
               uVar13 = uVar34;
               uVar41 = uVar32 + uVar36;
               uVar29 = uVar32;
               uVar21 = uVar28 + uVar35;
               uVar11 = uVar31 + uVar28;
-              uVar30 = uVar34 + M<UInt16>(iVar18 + 0x570);
+              uVar30 = uVar34 + M<UInt16>(secondBufferInfo + 0x570);
             }
             else {
-              uVar39 = (UInt32)M<UInt16>(iVar18 + 0x570);
-              uVar34 = M<UInt32>(iVar18 + 0x560);
+              uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
+              uVar34 = M<UInt32>(secondBufferInfo + 0x560);
               uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-              uVar13 = uVar34 + M<UInt16>(iVar18 + 0x570);
+              uVar13 = uVar34 + M<UInt16>(secondBufferInfo + 0x570);
               uVar41 = uVar32;
               uVar29 = uVar32 + uVar36;
               uVar30 = uVar34;
@@ -1349,8 +1350,8 @@ LAB_00039030:
             puVar26[4] = 0x1152;
             puVar26[5] = tilingBitsAt3 | tilingBit0At2 | uVar13 & 0xffffffe0;
             puVar26[6] = 0x1153;
-            uVar13 = (M<UInt8>(iVar18 + 0x590) & 1) << 2;
-            uVar29 = (M<UInt8>(iVar18 + 0x590) & 6) << 2;
+            uVar13 = (M<UInt8>(secondBufferInfo + 0x590) & 1) << 2;
+            uVar29 = (M<UInt8>(secondBufferInfo + 0x590) & 6) << 2;
             puVar26[7] = uVar30 & 0xffffffe0 | uVar13 | uVar29;
             puVar26[8] = 0x1154;
             puVar26[9] = uVar29 | uVar13 | uVar11 & 0xffffffe0;
@@ -1453,37 +1454,37 @@ LAB_00039030:
           }
           if (uVar17 == 0x43000000) {
             uVar17 = recordCursor[4];
-            iVar23 = M<SInt32>(self + 0xf8);
-            iVar12 = recordCursor[1] * 0x78 + iVar23;
+            surfaceInfo = M<SInt32>(self + 0xf8);
+            bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
-            iVar18 = (SInt32)M<SInt16>(iVar23 + 0x9a) - (SInt32)M<SInt16>(iVar23 + 0x94);
+            fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
             bVar43 = recordCursor[3] != 0;
             if ((uVar17 & 2) == 0) {
               if (bVar43) {
-                uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
-                uVar11 = (iVar18 * (UInt32)M<UInt16>(iVar12 + 0x570) * 3 >> 1) +
-                         M<SInt32>(iVar12 + 0x560);
+                uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
+                uVar11 = (fieldHeight * (UInt32)M<UInt16>(bufferInfo + 0x570) * 3 >> 1) +
+                         M<SInt32>(bufferInfo + 0x560);
               }
               else {
-                uVar11 = M<UInt32>(iVar12 + 0x560);
-                uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
+                uVar11 = M<UInt32>(bufferInfo + 0x560);
+                uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
               }
             }
             else {
-              uVar11 = M<UInt32>(iVar23 + 0x998);
-              uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
+              uVar11 = M<UInt32>(surfaceInfo + 0x998);
+              uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
             }
 joined_r0x000381c4:
             if ((uVar17 & 4) == 0) {
               if (bVar43) {
-                uVar17 = iVar18 * uVar21 + (iVar18 * uVar21 * 3 >> 1) + M<SInt32>(iVar12 + 0x560);
+                uVar17 = fieldHeight * uVar21 + (fieldHeight * uVar21 * 3 >> 1) + M<SInt32>(bufferInfo + 0x560);
               }
               else {
-                uVar17 = iVar18 * uVar21 + M<SInt32>(iVar12 + 0x560);
+                uVar17 = fieldHeight * uVar21 + M<SInt32>(bufferInfo + 0x560);
               }
             }
             else {
-              uVar17 = iVar18 * uVar21 + M<SInt32>(iVar23 + 0x998);
+              uVar17 = fieldHeight * uVar21 + M<SInt32>(surfaceInfo + 0x998);
             }
             if ((M<SInt32>(texture + 4) != 0) ||
                (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
@@ -1505,8 +1506,8 @@ joined_r0x000381c4:
                        5;
             }
             *recordCursor = 0x1150;
-            uVar19 = (M<UInt8>(iVar12 + 0x590) & 1) << 2;
-            uVar28 = (M<UInt8>(iVar12 + 0x590) & 6) << 2;
+            uVar19 = (M<UInt8>(bufferInfo + 0x590) & 1) << 2;
+            uVar28 = (M<UInt8>(bufferInfo + 0x590) & 6) << 2;
             recordCursor[1] = uVar11 & 0xffffffe0 | uVar19 | uVar28;
             recordCursor[2] = 0x1151;
             recordCursor[3] = uVar28 | uVar19 | uVar17 & 0xffffffe0;
@@ -1518,53 +1519,53 @@ joined_r0x000381c4:
           }
           else if (uVar17 < 0x43000001) {
             if (uVar17 == 0x3f000000) {
-              iVar18 = M<SInt32>(self + 0xf8);
-              iVar23 = recordCursor[1] * 0x78 + iVar18;
+              surfaceInfo = M<SInt32>(self + 0xf8);
+              bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               if (recordCursor[2] == 0) {
-                uVar17 = M<UInt32>(iVar23 + 0x560);
-                pitch = M<UInt16>(iVar23 + 0x570);
+                uVar17 = M<UInt32>(bufferInfo + 0x560);
+                pitch = M<UInt16>(bufferInfo + 0x570);
               }
               else {
-                pitch = M<UInt16>(iVar23 + 0x570);
-                uVar17 = (((SInt32)M<SInt16>(iVar18 + 0x9a) - (SInt32)M<SInt16>(iVar18 + 0x94)) *
-                          (UInt32)pitch * 3 >> 1) + M<SInt32>(iVar23 + 0x560);
+                pitch = M<UInt16>(bufferInfo + 0x570);
+                uVar17 = (((SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94)) *
+                          (UInt32)pitch * 3 >> 1) + M<SInt32>(bufferInfo + 0x560);
               }
               *recordCursor = 0x1150;
-              recordCursor[1] = uVar17 & 0xffffffe0 | (M<UInt8>(iVar23 + 0x590) & 1) << 2 |
-                           (M<UInt8>(iVar23 + 0x590) & 6) << 2;
+              recordCursor[1] = uVar17 & 0xffffffe0 | (M<UInt8>(bufferInfo + 0x590) & 1) << 2 |
+                           (M<UInt8>(bufferInfo + 0x590) & 6) << 2;
               recordCursor[2] = 0x1393;
               recordCursor[3] = 10;
               recordCursor[4] = 0x138a;
-              recordCursor[5] = M<UInt32>(iVar18 + 0x998) & 0xffffffe0;
+              recordCursor[5] = M<UInt32>(surfaceInfo + 0x998) & 0xffffffe0;
               recordCursor[6] = 0x138e;
-              recordCursor[7] = pitch >> 2 & 0x3ffe | (M<UInt8>(iVar18 + 0x9c9) & 3) << 0x13 | 0xc00000;
+              recordCursor[7] = pitch >> 2 & 0x3ffe | (M<UInt8>(surfaceInfo + 0x9c9) & 3) << 0x13 | 0xc00000;
               recordWord = recordWord & 0xffffff;
             }
             else if (uVar17 == 0x42000000) {
-              iVar18 = M<SInt32>(self + 0xf8);
-              iVar23 = recordCursor[1] * 0x78 + iVar18;
-              fieldHeight = (SInt32)M<SInt16>(iVar18 + 0x9a) - (SInt32)M<SInt16>(iVar18 + 0x94);
+              surfaceInfo = M<SInt32>(self + 0xf8);
+              bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
+              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
               if (recordCursor[2] == 0) {
-                pitch = M<UInt16>(iVar23 + 0x570);
-                uVar17 = fieldHeight * (UInt32)pitch + M<SInt32>(iVar23 + 0x560);
+                pitch = M<UInt16>(bufferInfo + 0x570);
+                uVar17 = fieldHeight * (UInt32)pitch + M<SInt32>(bufferInfo + 0x560);
               }
               else {
-                pitch = M<UInt16>(iVar23 + 0x570);
+                pitch = M<UInt16>(bufferInfo + 0x570);
                 uVar17 = fieldHeight * (UInt32)pitch +
-                         (fieldHeight * (UInt32)pitch * 3 >> 1) + M<SInt32>(iVar23 + 0x560);
+                         (fieldHeight * (UInt32)pitch * 3 >> 1) + M<SInt32>(bufferInfo + 0x560);
               }
               *recordCursor = 0x1150;
-              uVar17 = uVar17 & 0xffffffe0 | (M<UInt8>(iVar23 + 0x590) & 1) << 2 |
-                       (M<UInt8>(iVar23 + 0x590) & 6) << 2;
+              uVar17 = uVar17 & 0xffffffe0 | (M<UInt8>(bufferInfo + 0x590) & 1) << 2 |
+                       (M<UInt8>(bufferInfo + 0x590) & 6) << 2;
               recordCursor[1] = uVar17;
               recordCursor[2] = 0x1151;
               recordCursor[3] = uVar17;
               recordCursor[4] = 0x1393;
               recordCursor[5] = 10;
               recordCursor[6] = 0x138a;
-              recordCursor[7] = fieldHeight * (UInt32)pitch + M<SInt32>(iVar18 + 0x998) & 0xffffffe0;
+              recordCursor[7] = fieldHeight * (UInt32)pitch + M<SInt32>(surfaceInfo + 0x998) & 0xffffffe0;
               recordCursor[8] = 0x138e;
-              recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(iVar18 + 0x9c9) & 3) << 0x13 | 0xc00000;
+              recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(surfaceInfo + 0x9c9) & 3) << 0x13 | 0xc00000;
               recordWord = recordWord & 0xffffff;
             }
             else {
@@ -1648,25 +1649,25 @@ joined_r0x000381c4:
               }
               if (uVar17 != 0x44000000) goto LAB_00039028;
               uVar17 = recordCursor[4];
-              iVar23 = M<SInt32>(self + 0xf8);
-              iVar12 = recordCursor[1] * 0x78 + iVar23;
+              surfaceInfo = M<SInt32>(self + 0xf8);
+              bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
-              iVar18 = (SInt32)M<SInt16>(iVar23 + 0x9a) - (SInt32)M<SInt16>(iVar23 + 0x94);
+              fieldHeight = (SInt32)M<SInt16>(surfaceInfo + 0x9a) - (SInt32)M<SInt16>(surfaceInfo + 0x94);
               bVar43 = recordCursor[3] != 0;
               if ((uVar17 & 2) == 0) {
                 if (bVar43) {
-                  uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
-                  uVar11 = (iVar18 * (UInt32)M<UInt16>(iVar12 + 0x570) * 3 >> 1) +
-                           M<SInt32>(iVar12 + 0x560);
+                  uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
+                  uVar11 = (fieldHeight * (UInt32)M<UInt16>(bufferInfo + 0x570) * 3 >> 1) +
+                           M<SInt32>(bufferInfo + 0x560);
                 }
                 else {
-                  uVar11 = M<UInt32>(iVar12 + 0x560);
-                  uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
+                  uVar11 = M<UInt32>(bufferInfo + 0x560);
+                  uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
                 }
               }
               else {
-                uVar11 = M<UInt32>(iVar23 + 0x998);
-                uVar21 = (UInt32)M<UInt16>(iVar12 + 0x570);
+                uVar11 = M<UInt32>(surfaceInfo + 0x998);
+                uVar21 = (UInt32)M<UInt16>(bufferInfo + 0x570);
               }
               goto joined_r0x000381c4;
             }
@@ -1703,7 +1704,7 @@ joined_r0x000381c4:
             recordCursor[0xb] = uVar11;
             recordCursor[0xc] = 0x138e;
             uVar11 = 0;
-            iVar18 = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
+            formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
             if ((M<UInt32>(surfaceInfo + 0x15c) & 0xf00000) != 0) {
               uVar11 = (UInt32)M<UInt16>(surfaceInfo + 0x134) / (M<UInt32>(surfaceInfo + 0x15c) >> 0x14 & 0xf)
               ;
@@ -1712,8 +1713,8 @@ joined_r0x000381c4:
             if (0x20 / uVar17 <= uVar11) {
               uVar36 = uVar11;
             }
-            local_60 = FormatTableLookup_0x0004d2e0(iVar18) >> 1 & 0x1e00000 |
-                       (FormatTableLookup_0x0004d2dc(iVar18) & 0xc00) << 9 |
+            local_60 = FormatTableLookup_0x0004d2e0(formatOffset) >> 1 & 0x1e00000 |
+                       (FormatTableLookup_0x0004d2dc(formatOffset) & 0xc00) << 9 |
                        (uVar21 & 3) << 0x11 |
                        uVar28 << 0x10 | uVar36 & 0x3ffe | local_60 & 0xfe00c001;
             recordCursor[0xd] = local_60;
@@ -1721,7 +1722,7 @@ joined_r0x000381c4:
             recordCursor[0xf] = uVar33;
             recordCursor[0x10] = 0x138f;
             uVar17 = 0;
-            iVar18 = (UInt32)M<UInt8>(surfaceInfo + 0x952) * 0x1c;
+            formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x952) * 0x1c;
             if ((M<UInt32>(surfaceInfo + 0x954) & 0xf00000) != 0) {
               uVar17 = (UInt32)M<UInt16>(surfaceInfo + 0x92c) / (M<UInt32>(surfaceInfo + 0x954) >> 0x14 & 0xf)
               ;
@@ -1730,8 +1731,8 @@ joined_r0x000381c4:
             if (0x20 / uVar19 <= uVar17) {
               uVar21 = uVar17;
             }
-            local_5c = FormatTableLookup_0x0004d2e0(iVar18) >> 1 & 0x1e00000 |
-                       (FormatTableLookup_0x0004d2dc(iVar18) & 0xc00) << 9 |
+            local_5c = FormatTableLookup_0x0004d2e0(formatOffset) >> 1 & 0x1e00000 |
+                       (FormatTableLookup_0x0004d2dc(formatOffset) & 0xc00) << 9 |
                        (uVar31 & 3) << 0x11 |
                        uVar35 << 0x10 | uVar21 & 0x3ffe | local_5c & 0xfe00c001;
             recordCursor[0x11] = local_5c;
