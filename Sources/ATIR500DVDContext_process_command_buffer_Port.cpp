@@ -166,6 +166,34 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   UInt32 targetBufferIndex;
   SInt32 targetBufferInfo;
   SInt32 sourceBufferInfo;
+  UInt32 fieldParity;
+  UInt32 modeFlag;
+  UInt32 secondTexOffset2;
+  UInt32 bufferAddress;
+  UInt32 secondTexOffset4;
+  UInt32 nextFieldAddress;
+  UInt32 secondColorOffset1;
+  UInt32 firstColorOffset0;
+  UInt32 secondTexOffset0;
+  UInt32 firstColorOffset1;
+  UInt32 secondColorOffset0;
+  UInt32 firstTexOffset4;
+  UInt32 pitchWord;
+  UInt32 buffer15Base;
+  UInt32 secondTexOffset1;
+  UInt32 secondBufferAddress;
+  UInt32 secondTexOffset3;
+  UInt32 secondRowPitch;
+  UInt32 firstTexOffset1;
+  UInt32 secondTilingBitsAt3;
+  UInt32 firstTexOffset2;
+  UInt32 secondTilingBit0At2;
+  UInt32 firstTexOffset0;
+  UInt32 firstTexOffset3;
+  UInt32 *firstBlock;
+  UInt32 *secondBlock;
+  UInt32 buffer15HalfPitch;
+  UInt32 buffer15PitchWord;
   
   local_64 = 0;
   local_60 = 0;
@@ -1331,17 +1359,17 @@ LAB_00039030:
         if (0x35000000 < uVar17) {
           if (uVar17 == 0x3d000000) {
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
-            uVar38 = recordCursor[3];
-            uVar33 = recordCursor[4];
+            fieldParity = recordCursor[3];
+            modeFlag = recordCursor[4];
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
             secondBlockOffset = recordCursor[6];
             fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             pitch = M<UInt16>(bufferInfo + 0x570);
             bufferPitch = (UInt32)pitch;
-            uVar31 = M<UInt32>(bufferInfo + 0x560);
+            bufferAddress = M<UInt32>(bufferInfo + 0x560);
             fieldBytes = fieldHeight * bufferPitch;
-            uVar35 = uVar31 + ((UInt32)(fieldBytes * 3) >> 1);
+            nextFieldAddress = bufferAddress + ((UInt32)(fieldBytes * 3) >> 1);
             *recordCursor = 0x80000000;
             recordCursor[1] = 0x80000000;
             recordCursor[2] = 0x80000000;
@@ -1350,154 +1378,154 @@ LAB_00039030:
             recordCursor[5] = 0x80000000;
             recordCursor[6] = 0x80000000;
             buffer15PitchBytes = (UInt32)M<UInt16>(surfaceInfo + 0x7c8);
-            puVar26 = recordCursor + recordCursor[5];
-            uVar17 = (UInt32)(M<UInt16>(surfaceInfo + 0x7c8) >> 1);
-            local_78 = uVar17 & 0x7ffe;
-            uVar21 = uVar35;
-            uVar11 = uVar31;
-            uVar19 = uVar35;
-            if (uVar33 != 1) {
-              if (uVar38 == 0) {
-                uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-                uVar34 = M<UInt32>(secondBufferInfo + 0x560);
-                uVar19 = bufferPitch + uVar35;
-                uVar13 = uVar31 + bufferPitch;
-                uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
-                uVar29 = uVar32 + buffer15PitchBytes;
-                uVar41 = uVar32;
-                uVar30 = uVar34;
+            firstBlock = recordCursor + recordCursor[5];
+            buffer15HalfPitch = (UInt32)(M<UInt16>(surfaceInfo + 0x7c8) >> 1);
+            local_78 = buffer15HalfPitch & 0x7ffe;
+            firstColorOffset0 = nextFieldAddress;
+            firstTexOffset4 = bufferAddress;
+            firstColorOffset1 = nextFieldAddress;
+            if (modeFlag != 1) {
+              if (fieldParity == 0) {
+                buffer15Base = M<UInt32>(surfaceInfo + 0x7b8);
+                secondBufferAddress = M<UInt32>(secondBufferInfo + 0x560);
+                firstColorOffset1 = bufferPitch + nextFieldAddress;
+                firstTexOffset2 = bufferAddress + bufferPitch;
+                secondRowPitch = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
+                firstTexOffset1 = buffer15Base + buffer15PitchBytes;
+                firstTexOffset0 = buffer15Base;
+                firstTexOffset3 = secondBufferAddress;
               }
               else {
-                uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
-                uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-                uVar34 = M<UInt32>(secondBufferInfo + 0x560);
-                uVar13 = uVar31;
-                uVar41 = uVar32 + buffer15PitchBytes;
-                uVar29 = uVar32;
-                uVar21 = bufferPitch + uVar35;
-                uVar11 = uVar31 + bufferPitch;
-                uVar30 = M<UInt16>(secondBufferInfo + 0x570) + uVar34;
+                secondRowPitch = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
+                buffer15Base = M<UInt32>(surfaceInfo + 0x7b8);
+                secondBufferAddress = M<UInt32>(secondBufferInfo + 0x560);
+                firstTexOffset2 = bufferAddress;
+                firstTexOffset0 = buffer15Base + buffer15PitchBytes;
+                firstTexOffset1 = buffer15Base;
+                firstColorOffset0 = bufferPitch + nextFieldAddress;
+                firstTexOffset4 = bufferAddress + bufferPitch;
+                firstTexOffset3 = M<UInt16>(secondBufferInfo + 0x570) + secondBufferAddress;
               }
             }
-            else if (uVar38 == 0) {
-              uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
-              uVar34 = M<UInt32>(secondBufferInfo + 0x560);
-              uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-              uVar13 = uVar34;
-              uVar41 = uVar32 + buffer15PitchBytes;
-              uVar29 = uVar32;
-              uVar21 = bufferPitch + uVar35;
-              uVar11 = uVar31 + bufferPitch;
-              uVar30 = uVar34 + M<UInt16>(secondBufferInfo + 0x570);
+            else if (fieldParity == 0) {
+              secondRowPitch = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
+              secondBufferAddress = M<UInt32>(secondBufferInfo + 0x560);
+              buffer15Base = M<UInt32>(surfaceInfo + 0x7b8);
+              firstTexOffset2 = secondBufferAddress;
+              firstTexOffset0 = buffer15Base + buffer15PitchBytes;
+              firstTexOffset1 = buffer15Base;
+              firstColorOffset0 = bufferPitch + nextFieldAddress;
+              firstTexOffset4 = bufferAddress + bufferPitch;
+              firstTexOffset3 = secondBufferAddress + M<UInt16>(secondBufferInfo + 0x570);
             }
             else {
-              uVar39 = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
-              uVar34 = M<UInt32>(secondBufferInfo + 0x560);
-              uVar32 = M<UInt32>(surfaceInfo + 0x7b8);
-              uVar13 = uVar34 + M<UInt16>(secondBufferInfo + 0x570);
-              uVar41 = uVar32;
-              uVar29 = uVar32 + buffer15PitchBytes;
-              uVar30 = uVar34;
-              uVar19 = bufferPitch + uVar35;
+              secondRowPitch = (UInt32)M<UInt16>(secondBufferInfo + 0x570);
+              secondBufferAddress = M<UInt32>(secondBufferInfo + 0x560);
+              buffer15Base = M<UInt32>(surfaceInfo + 0x7b8);
+              firstTexOffset2 = secondBufferAddress + M<UInt16>(secondBufferInfo + 0x570);
+              firstTexOffset0 = buffer15Base;
+              firstTexOffset1 = buffer15Base + buffer15PitchBytes;
+              firstTexOffset3 = secondBufferAddress;
+              firstColorOffset1 = bufferPitch + nextFieldAddress;
             }
-            *puVar26 = 0x1150;
+            *firstBlock = 0x1150;
             tilingBit0 = M<UInt8>(bufferInfo + 0x590) & 1;
             tilingByte0Shifted = (UInt32)(M<UInt8>(bufferInfo + 0x590) >> 1);
             tilingBitsAt3 = (tilingByte0Shifted & 3) << 3;
             tilingBit0At2 = tilingBit0 << 2;
-            puVar26[1] = uVar41 & 0xffffffe0 | tilingBit0At2 | tilingBitsAt3;
-            puVar26[2] = 0x1151;
-            puVar26[3] = tilingBitsAt3 | tilingBit0At2 | uVar29 & 0xffffffe0;
-            puVar26[4] = 0x1152;
-            puVar26[5] = tilingBitsAt3 | tilingBit0At2 | uVar13 & 0xffffffe0;
-            puVar26[6] = 0x1153;
-            uVar13 = (M<UInt8>(secondBufferInfo + 0x590) & 1) << 2;
-            uVar29 = (M<UInt8>(secondBufferInfo + 0x590) & 6) << 2;
-            puVar26[7] = uVar30 & 0xffffffe0 | uVar13 | uVar29;
-            puVar26[8] = 0x1154;
-            puVar26[9] = uVar29 | uVar13 | uVar11 & 0xffffffe0;
-            puVar26[10] = 0x1393;
-            puVar26[0xb] = 10;
-            puVar26[0xc] = 0x138e;
-            uVar11 = pitch >> 1 & 0x3ffe | tilingBit0 << 0x10 | (tilingByte0Shifted & 3) << 0x11 |
+            firstBlock[1] = firstTexOffset0 & 0xffffffe0 | tilingBit0At2 | tilingBitsAt3;
+            firstBlock[2] = 0x1151;
+            firstBlock[3] = tilingBitsAt3 | tilingBit0At2 | firstTexOffset1 & 0xffffffe0;
+            firstBlock[4] = 0x1152;
+            firstBlock[5] = tilingBitsAt3 | tilingBit0At2 | firstTexOffset2 & 0xffffffe0;
+            firstBlock[6] = 0x1153;
+            secondTilingBit0At2 = (M<UInt8>(secondBufferInfo + 0x590) & 1) << 2;
+            secondTilingBitsAt3 = (M<UInt8>(secondBufferInfo + 0x590) & 6) << 2;
+            firstBlock[7] = firstTexOffset3 & 0xffffffe0 | secondTilingBit0At2 | secondTilingBitsAt3;
+            firstBlock[8] = 0x1154;
+            firstBlock[9] = secondTilingBitsAt3 | secondTilingBit0At2 | firstTexOffset4 & 0xffffffe0;
+            firstBlock[10] = 0x1393;
+            firstBlock[0xb] = 10;
+            firstBlock[0xc] = 0x138e;
+            pitchWord = pitch >> 1 & 0x3ffe | tilingBit0 << 0x10 | (tilingByte0Shifted & 3) << 0x11 |
                      (M<UInt8>(bufferInfo + 0x591) & 3) << 0x13 | 0xc00000;
-            puVar26[0xd] = uVar11;
-            puVar26[0xe] = 0x138a;
-            puVar26[0xf] = uVar21 & 0xffffffe0;
-            puVar26[0x10] = 0x138f;
-            puVar26[0x11] = uVar11;
-            puVar26[0x12] = 0x138b;
-            puVar26[0x13] = uVar19 & 0xffffffe0;
-            puVar26[0x14] = 0x1390;
-            uVar17 = uVar17 & 0x3ffe | (M<UInt8>(surfaceInfo + 0x7e8) & 1) << 0x10 |
+            firstBlock[0xd] = pitchWord;
+            firstBlock[0xe] = 0x138a;
+            firstBlock[0xf] = firstColorOffset0 & 0xffffffe0;
+            firstBlock[0x10] = 0x138f;
+            firstBlock[0x11] = pitchWord;
+            firstBlock[0x12] = 0x138b;
+            firstBlock[0x13] = firstColorOffset1 & 0xffffffe0;
+            firstBlock[0x14] = 0x1390;
+            buffer15PitchWord = buffer15HalfPitch & 0x3ffe | (M<UInt8>(surfaceInfo + 0x7e8) & 1) << 0x10 |
                      (M<UInt8>(surfaceInfo + 0x7e8) & 6) << 0x10 |
                      (M<UInt8>(surfaceInfo + 0x7e9) & 3) << 0x13 | 0xc00000;
-            puVar26[0x15] = uVar17;
-            puVar26[0x16] = 0x138c;
-            puVar26[0x17] = uVar41 & 0xffffffe0;
-            puVar26 = recordCursor + secondBlockOffset;
-            if (uVar33 != 1) {
-              if (uVar38 == 0) {
-                uVar19 = fieldBytes + uVar35;
-                uVar35 = bufferPitch + uVar19;
-                uVar21 = buffer15PitchBytes * fieldHeight + uVar32;
-                uVar31 = uVar31 + fieldBytes;
-                uVar34 = fieldHeight * uVar39 + uVar34;
-                uVar32 = buffer15PitchBytes + uVar21;
-                uVar33 = bufferPitch + uVar31;
+            firstBlock[0x15] = buffer15PitchWord;
+            firstBlock[0x16] = 0x138c;
+            firstBlock[0x17] = firstTexOffset0 & 0xffffffe0;
+            secondBlock = recordCursor + secondBlockOffset;
+            if (modeFlag != 1) {
+              if (fieldParity == 0) {
+                secondColorOffset0 = fieldBytes + nextFieldAddress;
+                secondColorOffset1 = bufferPitch + secondColorOffset0;
+                secondTexOffset0 = buffer15PitchBytes * fieldHeight + buffer15Base;
+                secondTexOffset4 = bufferAddress + fieldBytes;
+                secondTexOffset3 = fieldHeight * secondRowPitch + secondBufferAddress;
+                secondTexOffset1 = buffer15PitchBytes + secondTexOffset0;
+                secondTexOffset2 = bufferPitch + secondTexOffset4;
               }
               else {
-                uVar35 = fieldBytes + uVar35;
-                uVar33 = uVar31 + fieldBytes;
-                uVar32 = buffer15PitchBytes * fieldHeight + uVar32;
-                uVar19 = bufferPitch + uVar35;
-                uVar31 = bufferPitch + uVar33;
-                uVar21 = buffer15PitchBytes + uVar32;
-                uVar34 = uVar39 + fieldHeight * uVar39 + uVar34;
+                secondColorOffset1 = fieldBytes + nextFieldAddress;
+                secondTexOffset2 = bufferAddress + fieldBytes;
+                secondTexOffset1 = buffer15PitchBytes * fieldHeight + buffer15Base;
+                secondColorOffset0 = bufferPitch + secondColorOffset1;
+                secondTexOffset4 = bufferPitch + secondTexOffset2;
+                secondTexOffset0 = buffer15PitchBytes + secondTexOffset1;
+                secondTexOffset3 = secondRowPitch + fieldHeight * secondRowPitch + secondBufferAddress;
               }
             }
-            else if (uVar38 == 0) {
-              uVar35 = fieldBytes + uVar35;
-              uVar19 = bufferPitch + uVar35;
-              uVar32 = buffer15PitchBytes * fieldHeight + uVar32;
-              uVar33 = fieldHeight * uVar39 + uVar34;
-              uVar21 = buffer15PitchBytes + uVar32;
-              uVar31 = bufferPitch + uVar31 + fieldBytes;
-              uVar34 = uVar39 + uVar33;
+            else if (fieldParity == 0) {
+              secondColorOffset1 = fieldBytes + nextFieldAddress;
+              secondColorOffset0 = bufferPitch + secondColorOffset1;
+              secondTexOffset1 = buffer15PitchBytes * fieldHeight + buffer15Base;
+              secondTexOffset2 = fieldHeight * secondRowPitch + secondBufferAddress;
+              secondTexOffset0 = buffer15PitchBytes + secondTexOffset1;
+              secondTexOffset4 = bufferPitch + bufferAddress + fieldBytes;
+              secondTexOffset3 = secondRowPitch + secondTexOffset2;
             }
             else {
-              uVar19 = fieldBytes + uVar35;
-              uVar35 = bufferPitch + uVar19;
-              uVar21 = buffer15PitchBytes * fieldHeight + uVar32;
-              uVar31 = uVar31 + fieldBytes;
-              uVar34 = fieldHeight * uVar39 + uVar34;
-              uVar32 = buffer15PitchBytes + uVar21;
-              uVar33 = uVar39 + uVar34;
+              secondColorOffset0 = fieldBytes + nextFieldAddress;
+              secondColorOffset1 = bufferPitch + secondColorOffset0;
+              secondTexOffset0 = buffer15PitchBytes * fieldHeight + buffer15Base;
+              secondTexOffset4 = bufferAddress + fieldBytes;
+              secondTexOffset3 = fieldHeight * secondRowPitch + secondBufferAddress;
+              secondTexOffset1 = buffer15PitchBytes + secondTexOffset0;
+              secondTexOffset2 = secondRowPitch + secondTexOffset3;
             }
-            *puVar26 = 0x1150;
-            puVar26[1] = tilingBitsAt3 | tilingBit0At2 | uVar21 & 0xffffffe0;
-            puVar26[2] = 0x1151;
-            puVar26[3] = tilingBitsAt3 | tilingBit0At2 | uVar32 & 0xffffffe0;
-            puVar26[4] = 0x1152;
-            puVar26[5] = tilingBitsAt3 | tilingBit0At2 | uVar33 & 0xffffffe0;
-            puVar26[6] = 0x1153;
-            puVar26[7] = uVar29 | uVar13 | uVar34 & 0xffffffe0;
-            puVar26[8] = 0x1154;
-            puVar26[9] = uVar29 | uVar13 | uVar31 & 0xffffffe0;
-            puVar26[10] = 0x1393;
-            puVar26[0xb] = 10;
-            puVar26[0xc] = 0x138e;
-            puVar26[0xd] = uVar11;
-            puVar26[0xe] = 0x138a;
-            puVar26[0xf] = uVar19 & 0xffffffe0;
-            puVar26[0x10] = 0x138f;
-            puVar26[0x11] = uVar11;
-            puVar26[0x12] = 0x138b;
-            puVar26[0x13] = uVar35 & 0xffffffe0;
-            puVar26[0x14] = 0x1390;
-            puVar26[0x15] = uVar17;
-            puVar26[0x16] = 0x138c;
-            puVar26[0x17] = uVar21 & 0xffffffe0;
+            *secondBlock = 0x1150;
+            secondBlock[1] = tilingBitsAt3 | tilingBit0At2 | secondTexOffset0 & 0xffffffe0;
+            secondBlock[2] = 0x1151;
+            secondBlock[3] = tilingBitsAt3 | tilingBit0At2 | secondTexOffset1 & 0xffffffe0;
+            secondBlock[4] = 0x1152;
+            secondBlock[5] = tilingBitsAt3 | tilingBit0At2 | secondTexOffset2 & 0xffffffe0;
+            secondBlock[6] = 0x1153;
+            secondBlock[7] = secondTilingBitsAt3 | secondTilingBit0At2 | secondTexOffset3 & 0xffffffe0;
+            secondBlock[8] = 0x1154;
+            secondBlock[9] = secondTilingBitsAt3 | secondTilingBit0At2 | secondTexOffset4 & 0xffffffe0;
+            secondBlock[10] = 0x1393;
+            secondBlock[0xb] = 10;
+            secondBlock[0xc] = 0x138e;
+            secondBlock[0xd] = pitchWord;
+            secondBlock[0xe] = 0x138a;
+            secondBlock[0xf] = secondColorOffset0 & 0xffffffe0;
+            secondBlock[0x10] = 0x138f;
+            secondBlock[0x11] = pitchWord;
+            secondBlock[0x12] = 0x138b;
+            secondBlock[0x13] = secondColorOffset1 & 0xffffffe0;
+            secondBlock[0x14] = 0x1390;
+            secondBlock[0x15] = buffer15PitchWord;
+            secondBlock[0x16] = 0x138c;
+            secondBlock[0x17] = secondTexOffset0 & 0xffffffe0;
             recordWord = recordWord & 0xffffff;
             goto LAB_0003903c;
           }
