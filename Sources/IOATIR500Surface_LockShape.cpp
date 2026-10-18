@@ -78,8 +78,8 @@ IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccel
  * kernel primitives, `mutex_lock`/`mutex_unlock_rwcmb`, aliased below via
  * their real symbol names.
  */
-extern "C" void FUN_00015aa4(void *lockPtr) asm("_IOLockLock");
-extern "C" void FUN_00015a84(void *lockPtr) asm("_IOLockUnlock");
+extern "C" void GH_IOLockLock(void *lockPtr) asm("_IOLockLock"); /* stub 0x15aa4 */
+extern "C" void GH_IOLockUnlock(void *lockPtr) asm("_IOLockUnlock"); /* stub 0x15a84 */
 
 
 IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 scalingSize) {
@@ -91,9 +91,9 @@ IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scalin
     UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
     bool passedScaling = (scalingSize != 0); /* real: `bVar2` gate, INFERRED role from the real decompile's own inverted-bit encoding */
 
-    FUN_00015aa4(*reinterpret_cast<void **>(accel + 0x840));
+    GH_IOLockLock(*reinterpret_cast<void **>(accel + 0x840));
     IOReturn result = set_scaling(flags, passedScaling ? scaling : nullptr);
-    FUN_00015a84(*reinterpret_cast<void **>(accel + 0x840));
+    GH_IOLockUnlock(*reinterpret_cast<void **>(accel + 0x840));
     return result;
 }
 
@@ -198,10 +198,10 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * running kernel's own symbol table - see
  * `Headers/ATIRadeonX1000Registers.h`.
  */
-extern "C" void FUN_00014850(void *lockPtr) asm("_IOLockLock");
-extern "C" void FUN_000147f0(void *lockPtr) asm("_IOLockUnlock");
-extern "C" void *FUN_00014820(UInt32 size, UInt32 align) asm("_IOMallocAligned");
-extern "C" void FUN_00014810(void *ptr, UInt32 size) asm("_IOFreeAligned");
+extern "C" void GH_IOLockLock(void *lockPtr) asm("_IOLockLock"); /* stub 0x14850 */
+extern "C" void GH_IOLockUnlock(void *lockPtr) asm("_IOLockUnlock"); /* stub 0x147f0 */
+extern "C" void *GH_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* stub 0x14820 */
+extern "C" void GH_IOFreeAligned(void *ptr, UInt32 size) asm("_IOFreeAligned"); /* stub 0x14810 */
 
 /* (re-ported mechanically: see IOATIR500Surface_set_id_mode_Port.cpp) */
 
@@ -362,11 +362,11 @@ extern "C" void FUN_00014810(void *ptr, UInt32 size) asm("_IOFreeAligned");
  * real external XNU kernel primitives. FUN_000158d0's real target is
  * `IOLockSleep`, confirming the "plausibly a real IOLockSleep-shaped
  * call" guess above exactly. */
-extern "C" void FUN_000158e0(void *lockPtr) asm("_IOLockLock");
-extern "C" void FUN_000158d0(void *lockPtr, void *accel, UInt32 zero) asm("_IOLockSleep");
-extern "C" void *FUN_000158c0(UInt32 size, UInt32 align) asm("_IOMallocAligned");
-extern "C" void FUN_000158b0(void *ptr, UInt32 size) asm("_IOFreeAligned");
-extern "C" void FUN_00015870(void *lockPtr) asm("_IOLockUnlock");
+extern "C" void GH_IOLockLock(void *lockPtr) asm("_IOLockLock"); /* stub 0x158e0 */
+extern "C" void GH_IOLockSleep(void *lockPtr, void *accel, UInt32 zero) asm("_IOLockSleep"); /* stub 0x158d0 */
+extern "C" void *GH_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* stub 0x158c0 */
+extern "C" void GH_IOFreeAligned(void *ptr, UInt32 size) asm("_IOFreeAligned"); /* stub 0x158b0 */
+extern "C" void GH_IOLockUnlock(void *lockPtr) asm("_IOLockUnlock"); /* stub 0x15870 */
 
 /* (re-ported mechanically: see IOATIR500Surface_set_shape_backing_length_ext_Port.cpp) */
 

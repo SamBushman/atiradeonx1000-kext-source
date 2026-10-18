@@ -134,7 +134,7 @@ inline void ReleaseObj(void *obj) {
    ReleaseBoundTextureSlot/DecrementRefAndWasLast. */
 /* FUN_00008340: RESOLVED (issue #58 follow-up) - live kxld target 0x30a840 = OSDecrementAtomic,
  * which returns the PREVIOUS value (so "was last" is old == 1, as the call site tests). */
-extern "C" SInt32 FUN_00008340(void *countField) asm("_OSDecrementAtomic");
+extern "C" SInt32 GH_OSDecrementAtomic(void *countField) asm("_OSDecrementAtomic"); /* stub 0x8340 */
 
 extern "C" void GLStop_mutex_lock(void *) asm("_IOLockLock");
 extern "C" void GLStop_mutex_unlock(void *) asm("_IOLockUnlock");

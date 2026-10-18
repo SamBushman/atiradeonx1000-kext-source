@@ -42,10 +42,10 @@
 
 #include "../Headers/IOATIR500Shared.h"
 
-extern "C" void *FUN_00016a88(UInt32 size) asm("_IOMalloc");
-extern "C" void  FUN_00016a78(void *ptr, UInt32 zero, UInt32 size) asm("_memset");
-extern "C" void  FUN_00016a68(void *dest, const void *src, UInt32 size) asm("_memmove");
-extern "C" void  FUN_00016a58(void *ptr, UInt32 size) asm("_IOFree");
+extern "C" void *GH_IOMalloc(UInt32 size) asm("_IOMalloc"); /* stub 0x16a88 */
+extern "C" void  GH_memset(void *ptr, UInt32 zero, UInt32 size) asm("_memset"); /* stub 0x16a78 */
+extern "C" void  GH_memmove(void *dest, const void *src, UInt32 size) asm("_memmove"); /* stub 0x16a68 */
+extern "C" void  GH_IOFree(void *ptr, UInt32 size) asm("_IOFree"); /* stub 0x16a58 */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

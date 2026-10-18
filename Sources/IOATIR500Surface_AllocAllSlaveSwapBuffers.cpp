@@ -74,7 +74,7 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
 
-extern "C" void *FUN_00012034(UInt32 options, UInt32 capacity, int task) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
+extern "C" void *GH_IOBufferMemoryDescriptor_withOptions(UInt32 options, UInt32 capacity, int task) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj"); /* stub 0x12034 */
 extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
 namespace {

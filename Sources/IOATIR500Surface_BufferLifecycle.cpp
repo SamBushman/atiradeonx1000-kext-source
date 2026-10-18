@@ -64,7 +64,7 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
 /* FUN_000128ec: RESOLVED (issue #58 follow-up) - live kxld target 0x2d617c,
  * IOMemoryDescriptor::withAddress(unsigned long, unsigned long, IODirection,
  * task*). Parameters below renamed from the earlier guesses to the real ones. */
-extern "C" void *FUN_000128ec(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task");
+extern "C" void *GH_IOMemoryDescriptor_withAddress(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task"); /* stub 0x128ec */
 
 /* (re-ported mechanically: see IOATIR500Surface_connect_buffer_backing_store_Port.cpp) */
 

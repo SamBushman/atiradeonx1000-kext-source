@@ -35,8 +35,8 @@
 /* real object size, from its allocation site (issue #23) */
 static_assert(sizeof(ATIR500Memory) == 0x28, "ATIR500Memory must be 0x28 bytes");
 
-extern "C" void FUN_00018de8(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* init()'s own stub instance */
-extern "C" void FUN_00019198(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* free()'s own stub instance (distinct real address, same real target) */
+extern "C" void GH_IOFreeAligned(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* stub 0x18de8; init()'s own stub instance */
+extern "C" void GH_IOFreeAligned(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* stub 0x19198; free()'s own stub instance (distinct real address, same real target) */
 
 /* free()'s own stub instance (distinct real address, same real target) */
 
@@ -51,7 +51,7 @@ bool ATIR500Memory::init() {
     UInt32 *chunk = *reinterpret_cast<UInt32 **>(self + 0x10);
     while (chunk != 0) {
         UInt32 *nextChunk = reinterpret_cast<UInt32 *>(chunk[0]);
-        FUN_00018de8(chunk, 0x204);
+        GH_IOFreeAligned(chunk, 0x204);
         *reinterpret_cast<UInt32 **>(self + 0x10) = nextChunk;
         chunk = nextChunk;
     }
@@ -66,7 +66,7 @@ void ATIR500Memory::free() {
     UInt32 *chunk = *reinterpret_cast<UInt32 **>(self + 0x10);
     while (chunk != 0) {
         UInt32 *nextChunk = reinterpret_cast<UInt32 *>(chunk[0]);
-        FUN_00019198(chunk, 0x204);
+        GH_IOFreeAligned(chunk, 0x204);
         *reinterpret_cast<UInt32 **>(self + 0x10) = nextChunk;
         chunk = nextChunk;
     }

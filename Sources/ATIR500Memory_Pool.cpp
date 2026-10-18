@@ -44,9 +44,9 @@
 
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void *FUN_00018f44(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* init_pool(1-param)'s own stub instance */
-extern "C" void *FUN_00019108(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* init_pool(3-param)'s own stub instance */
-extern "C" void *FUN_00019260(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* add_to_stack's own stub instance */
+extern "C" void *GH_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* stub 0x18f44; init_pool(1-param)'s own stub instance */
+extern "C" void *GH_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* stub 0x19108; init_pool(3-param)'s own stub instance */
+extern "C" void *GH_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* stub 0x19260; add_to_stack's own stub instance */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

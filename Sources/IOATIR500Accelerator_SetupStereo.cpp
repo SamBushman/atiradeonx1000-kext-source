@@ -53,7 +53,7 @@
 #include "../Headers/ATIRadeonX1000Types.h"
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void FUN_000056f8(void *dest, const void *src, UInt32 size) asm("_memmove"); /* RESOLVED, issue #50 */
+extern "C" void GH_memmove(void *dest, const void *src, UInt32 size) asm("_memmove"); /* stub 0x56f8; RESOLVED, issue #50 */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

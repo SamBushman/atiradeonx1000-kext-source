@@ -90,7 +90,7 @@ inline void ReleaseObj(void *obj) {
    G5/Tiger hardware): real target IOUserClient::removeMappingForDescriptor
    (IOMemoryDescriptor*), called non-virtually with liveContextNode as the
    implicit `this` and `handle` (really an IOMemoryDescriptor*) as `mem`. */
-extern "C" void *FUN_00007f8c(void *liveContextNode, UInt32 handle) asm("__ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDescriptor");
+extern "C" void *GH_IOUserClient_removeMappingForDescriptor(void *liveContextNode, UInt32 handle) asm("__ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDescriptor"); /* stub 0x7f8c */
 
 /* (re-ported mechanically: see IOATIR500GLContext_freeCommandBuffer_Port.cpp) */
 

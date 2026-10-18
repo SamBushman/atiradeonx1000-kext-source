@@ -115,7 +115,7 @@ extern "C" void IOFree_TexAlloc(void *ptr, UInt32 size) asm("_IOFree");
 extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value (alloc_client_shared's map() task argument) */
 
-extern "C" void *FUN_00017508(void *obj) asm("__ZN18IOMemoryDescriptor30withPersistentMemoryDescriptorEPS_");
+extern "C" void *GH_IOMemoryDescriptor_withPersistentMemoryDescriptor(void *obj) asm("__ZN18IOMemoryDescriptor30withPersistentMemoryDescriptorEPS_"); /* stub 0x17508 */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

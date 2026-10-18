@@ -84,8 +84,8 @@
 
 extern "C" UInt32 global_dummy_read_back_a_register; /* real: a genuine global this function reads INTO after a register write - a real "force the write to actually land before continuing" pattern, distinct from the explicit barrier intrinsics also present */
 
-extern "C" void FUN_000210d8(void *dest, void *src, UInt32 size) asm("_memmove"); /* RESOLVED, issue #50 (live kxld-resolved /dev/kmem read) */
-extern "C" void FUN_0001eb18(void *dest, SInt32 byteOffset, UInt32 byteCount) asm("_memmove"); /* RESOLVED, issue #50 - same real target as FUN_000210d8; the real second argument (`byteOffset`, an SInt32 here rather than a pointer type) is passed through unchanged - this project's own prior "running byte offset" reading of this parameter is presumably really a raw VRAM-mapped address the caller already computed, not a plain relative offset, though that caller-side semantic question is unchanged by this linkage fix. */
+extern "C" void GH_memmove(void *dest, void *src, UInt32 size) asm("_memmove"); /* stub 0x210d8; RESOLVED, issue #50 (live kxld-resolved /dev/kmem read) */
+extern "C" void GH_memmoveAtOffset(void *dest, SInt32 byteOffset, UInt32 byteCount) asm("_memmove"); /* stub 0x1eb18; RESOLVED, issue #50 - same real target as FUN_000210d8; the real second argument (`byteOffset`, an SInt32 here rather than a pointer type) is passed through unchanged - this project's own prior "running byte offset" reading of this parameter is presumably really a raw VRAM-mapped address the caller already computed, not a plain relative offset, though that caller-side semantic question is unchanged by this linkage fix. */
 extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
 namespace {

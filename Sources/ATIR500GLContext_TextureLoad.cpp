@@ -97,14 +97,14 @@
  * aging/LRU. Same real target as 2D's FUN_000334cc and DVD's
  * FUN_0003913c below.
  */
-extern "C" void FUN_0002a864(void *timestampField) asm("_IOGetTime");
+extern "C" void GH_IOGetTime(void *timestampField) asm("_IOGetTime"); /* stub 0x2a864 */
 /* Same real target, second distinct decompiled call site (real address
  * 0x29da8) - see load_texture's own use below. Declared here at file
  * scope rather than locally inside that function: gcc-4.0.1 (FIXED,
  * issue #1, first build attempt) does not accept an asm-label rename on
  * a local `extern` declaration inside a function body - only at file
  * scope, matching FUN_0002a864 immediately above. */
-extern "C" void FUN_00029da8(void *timestampField) asm("_IOGetTime");
+extern "C" void GH_IOGetTime(void *timestampField) asm("_IOGetTime"); /* stub 0x29da8 */
 
 /*
  * Two more real accelerator vtable calls alloc_and_load_texture makes -

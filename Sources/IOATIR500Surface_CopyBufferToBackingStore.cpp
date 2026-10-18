@@ -91,12 +91,12 @@
 
 /* real addrs 0x11400/0x11410 - RESOLVED, issue #50 (live kxld-resolved
    /dev/kmem read on real G5/Tiger hardware, cross-referenced against the
-   running kernel's own symbol table): FUN_00011410 = _lck_mtx_unlock
-   (aka _mutex_unlock_rwcmb), FUN_00011400 = _mutex_lock (aka
+   running kernel's own symbol table): GH_IOLockUnlock = _lck_mtx_unlock
+   (aka _mutex_unlock_rwcmb), GH_IOLockLock = _mutex_lock (aka
    _lck_mtx_lock) - the REVERSE of this project's own prior "acquire/
    release" labels, see this function's own header comment above. */
-extern "C" void FUN_00011410(void *lockPtr) asm("_IOLockUnlock");
-extern "C" void FUN_00011400(void *lockPtr) asm("_IOLockLock");
+extern "C" void GH_IOLockUnlock(void *lockPtr) asm("_IOLockUnlock"); /* stub 0x11410 */
+extern "C" void GH_IOLockLock(void *lockPtr) asm("_IOLockLock"); /* stub 0x11400 */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
