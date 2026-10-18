@@ -129,6 +129,69 @@ void ATIR500Surface::build_swap() {
   SInt32 batchIndex;
   SInt32 pitch;
   UInt32 bufferWidth;
+  double regionXF;
+  double regionYF;
+  double sourceScaleX;
+  double sourceScaleY;
+  double bufferWidthF;
+  double bufferHeightF;
+  double regionWidthF;
+  double regionHeightF;
+  double invBufferWidthD;
+  double invBufferHeightD;
+  double scalingBufferXF;
+  double scalingBufferYF;
+  double firstStripRight;
+  double firstStripBottom;
+  double firstStripRectLeftF;
+  double firstStripRectTopF;
+  double firstStripRectRightF;
+  double firstStripRectBottomF;
+  double firstStripClipLeft;
+  double firstStripClipTop;
+  double firstStripClipRight;
+  double firstStripClipBottom;
+  double firstStripHeightF;
+  double secondStripTop;
+  double regionRightF;
+  double regionBottomF;
+  double secondStripRectLeftF;
+  double secondStripRectTopF;
+  double secondStripRectRightF;
+  double secondStripRectBottomF;
+  double secondStripClipLeft;
+  double secondStripClipTop;
+  double secondStripClipRight;
+  double secondStripClipBottom;
+  double intToFloatBiasD;
+  double firstColumnWidthF;
+  double firstColumnRight;
+  double firstColumnBottom;
+  double firstColumnRectLeftF;
+  double firstColumnRectTopF;
+  double firstColumnRectRightF;
+  double firstColumnRectBottomF;
+  double firstColumnClipLeft;
+  double firstColumnClipTop;
+  double firstColumnClipRight;
+  double firstColumnClipBottom;
+  double secondColumnLeft;
+  double secondColumnRectLeftF;
+  double secondColumnRectTopF;
+  double secondColumnRectRightF;
+  double secondColumnRectBottomF;
+  double secondColumnClipLeft;
+  double secondColumnClipTop;
+  double secondColumnClipRight;
+  double secondColumnClipBottom;
+  double rectLeftF;
+  double rectTopF;
+  double rectRightF;
+  double rectBottomF;
+  double clipLeft;
+  double clipTop;
+  double clipRight;
+  double clipBottom;
   
   M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 0;
   iVar32 = M<SInt32>(self + kIOATIR500Surface_accelerator);
@@ -458,29 +521,29 @@ LAB_0003f654:
         else {
           srcLastRowCopy = 0;
         }
-        dVar66 = (double)(float)((double)CONCAT44d(0x43300000,bufferWidth) - DOUBLE_0004c3b0);
-        dVar68 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionX ^ 0x80000000) - signedIntBias);
-        dVar67 = (double)(float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias);
-        dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionWidth ^ 0x80000000) - signedIntBias);
-        dVar55 = (double)FLOAT_0004c370;
+        bufferWidthF = (double)(float)((double)CONCAT44d(0x43300000,bufferWidth) - DOUBLE_0004c3b0);
+        regionXF = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionX ^ 0x80000000) - signedIntBias);
+        regionYF = (double)(float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias);
+        regionWidthF = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionWidth ^ 0x80000000) - signedIntBias);
+        invBufferWidthD = (double)FLOAT_0004c370;
         blitPacket = batchWords + iVar26;
-        dVar54 = (double)(float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias);
-        dVar65 = (double)(float)((double)CONCAT44d(0x43300000,bufferHeight) - DOUBLE_0004c3b0);
-        dVar61 = (double)(float)((double)CONCAT44d(0x43300000,
+        regionHeightF = (double)(float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias);
+        bufferHeightF = (double)(float)((double)CONCAT44d(0x43300000,bufferHeight) - DOUBLE_0004c3b0);
+        scalingBufferXF = (double)(float)((double)CONCAT44d(0x43300000,
                                                   (SInt32)M<SInt16>(self + kIOATIR500Surface_scalingBufferX) ^ 0x80000000) -
                                 signedIntBias);
-        dVar62 = (double)(float)((double)CONCAT44d(0x43300000,
+        scalingBufferYF = (double)(float)((double)CONCAT44d(0x43300000,
                                                   (SInt32)M<SInt16>(self + kIOATIR500Surface_scalingBufferY) ^ 0x80000000) -
                                 signedIntBias);
-        dVar63 = (double)widthRatio;
-        dVar64 = (double)heightRatio;
+        sourceScaleX = (double)widthRatio;
+        sourceScaleY = (double)heightRatio;
         iVar43 = M<SInt32>(accelerator + 0x8c4);
-        if (dVar66 != dVar55) {
-          dVar55 = (double)(float)(one / dVar66);
+        if (bufferWidthF != invBufferWidthD) {
+          invBufferWidthD = (double)(float)(one / bufferWidthF);
         }
-        dVar59 = (double)FLOAT_0004c370;
-        if (dVar65 != dVar59) {
-          dVar59 = (double)(float)(one / dVar65);
+        invBufferHeightD = (double)FLOAT_0004c370;
+        if (bufferHeightF != invBufferHeightD) {
+          invBufferHeightD = (double)(float)(one / bufferHeightF);
         }
         iVar26 = 0xbd;
         GCopy(blitPacket,(&g_r500_3d_blit_state_packet),0x2f4);
@@ -508,20 +571,20 @@ LAB_0003f654:
           blitPacket[0x1e] = blitPacket[0x1e] & 0xfffffffc | 2;
         }
         dVar48 = (double)FLOAT_0004c378;
-        if (((dVar48 < dVar66) && (iVar43 != 0)) || (dVar48 < dVar65)) {
-          if (dVar66 <= (double)FLOAT_0004c378) {
+        if (((dVar48 < bufferWidthF) && (iVar43 != 0)) || (dVar48 < bufferHeightF)) {
+          if (bufferWidthF <= (double)FLOAT_0004c378) {
             uVar19 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
             uVar29 = blitPacket[0xaa];
-            uVar40 = (SInt32)dVar65 >> 1;
+            uVar40 = (SInt32)bufferHeightF >> 1;
             uVar38 = uVar40 & 0xffffffc0;
-            uVar42 = (SInt32)dVar65 - uVar38;
+            uVar42 = (SInt32)bufferHeightF - uVar38;
             uVar17 = uVar38 + 1;
-            dVar65 = dVar67;
-            if (dVar64 != zero) {
-              dVar65 = (double)(float)(dVar67 + (double)(float)((double)(float)((double)(float)((
+            dVar65 = regionYF;
+            if (sourceScaleY != zero) {
+              dVar65 = (double)(float)(regionYF + (double)(float)((double)(float)((double)(float)((
                                                   double)CONCAT44d(0x43300000,
                                                                   uVar38 + uVar17 ^ 0x80000000) -
-                                                  signedIntBias) * half + dVar62) / dVar64));
+                                                  signedIntBias) * half + scalingBufferYF) / sourceScaleY));
             }
             if (dVar65 <= zero) {
               dVar65 = dVar65 - half;
@@ -529,9 +592,9 @@ LAB_0003f654:
             else {
               dVar65 = dVar65 + half;
             }
-            dVar66 = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
+            firstStripHeightF = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
                                                                       (SInt32)dVar65 ^ 0x80000000) -
-                                                    signedIntBias) - dVar67);
+                                                    signedIntBias) - regionYF);
             blitPacket[0xa6] = (uVar40 & 0x7c0) << 0xb | blitPacket[0xa6] & 0xffc007ff;
             blitPacket[0xbd] = 0x1040;
             iVar32 = 0xbf;
@@ -546,80 +609,80 @@ LAB_0003f654:
                                                       signedIntBias));
             }
             if (iVar34 != 0) {
-              dVar59 = (double)(float)(dVar68 + dVar47);
-              dVar48 = (double)(float)(dVar67 + dVar66);
+              firstStripRight = (double)(float)(regionXF + regionWidthF);
+              firstStripBottom = (double)(float)(regionYF + firstStripHeightF);
               packetIndex = iVar32;
               piVar27 = local_100;
               iVar35 = iVar34;
               do {
-                dVar50 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstStripRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(piVar27) ^ 0x80000000) -
                                         dVar65);
-                fVar3 = (float)(dVar68 - dVar50);
-                dVar49 = dVar68;
+                fVar3 = (float)(regionXF - firstStripRectLeftF);
+                firstStripClipLeft = regionXF;
                 if (fVar3 < 0.0) {
-                  dVar49 = dVar50;
+                  firstStripClipLeft = firstStripRectLeftF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar49 = dVar68;
+                  firstStripClipLeft = regionXF;
                 }
-                dVar52 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstStripRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*piVar27 ^ 0x80000000) -
                                         dVar65);
-                fVar3 = (float)(dVar67 - dVar52);
-                dVar50 = dVar67;
+                fVar3 = (float)(regionYF - firstStripRectTopF);
+                firstStripClipTop = regionYF;
                 if (fVar3 < 0.0) {
-                  dVar50 = dVar52;
+                  firstStripClipTop = firstStripRectTopF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar50 = dVar67;
+                  firstStripClipTop = regionYF;
                 }
-                dVar51 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstStripRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(piVar27) +
                                                           (SInt32)M<SInt16>(piVar27 + 1) ^ 0x80000000)
                                         - dVar65);
-                fVar3 = (float)(dVar51 - dVar59);
-                dVar52 = dVar59;
+                fVar3 = (float)(firstStripRectRightF - firstStripRight);
+                firstStripClipRight = firstStripRight;
                 if (fVar3 < 0.0) {
-                  dVar52 = dVar51;
+                  firstStripClipRight = firstStripRectRightF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar52 = dVar59;
+                  firstStripClipRight = firstStripRight;
                 }
-                dVar53 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstStripRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*piVar27 +
                                                           (SInt32)M<SInt16>((SInt32)piVar27 + 6) ^
                                                           0x80000000) - dVar65);
-                fVar3 = (float)(dVar53 - dVar48);
-                dVar51 = dVar48;
+                fVar3 = (float)(firstStripRectBottomF - firstStripBottom);
+                firstStripClipBottom = firstStripBottom;
                 if (fVar3 < 0.0) {
-                  dVar51 = dVar53;
+                  firstStripClipBottom = firstStripRectBottomF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar51 = dVar48;
+                  firstStripClipBottom = firstStripBottom;
                 }
                 iVar32 = packetIndex;
-                if ((FLOAT_0004c370 < (float)(dVar52 - dVar49)) &&
-                   (FLOAT_0004c370 < (float)(dVar51 - dVar50))) {
+                if ((FLOAT_0004c370 < (float)(firstStripClipRight - firstStripClipLeft)) &&
+                   (FLOAT_0004c370 < (float)(firstStripClipBottom - firstStripClipTop))) {
                   blitPacket[packetIndex] = 0x31080;
                   blitPacket[packetIndex + 5] = 0x1087;
                   iVar32 = packetIndex * 4 + 0x30 >> 2;
-                  blitPacket[packetIndex + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
-                                                       dVar61)));
+                  blitPacket[packetIndex + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(firstStripClipLeft - regionXF) -
+                                                       scalingBufferXF)));
                   blitPacket[packetIndex + 2] =
-                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar51 - dVar67) - dVar62));
-                  blitPacket[packetIndex + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar52 - dVar68) -
-                                                       dVar61)));
+                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(firstStripClipBottom - regionYF) - scalingBufferYF));
+                  blitPacket[packetIndex + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(firstStripClipRight - regionXF) -
+                                                       scalingBufferXF)));
                   blitPacket[packetIndex + 4] =
-                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
+                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(firstStripClipTop - regionYF) - scalingBufferYF));
                   blitPacket[packetIndex + 7] = 0xc0033500;
-                  blitPacket[packetIndex + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
-                  blitPacket[packetIndex + 10] = FBITS((float)(dVar50 + dVar51) * fVar4);
+                  blitPacket[packetIndex + 9] = FBITS((float)(firstStripClipLeft + firstStripClipRight) * fVar4);
+                  blitPacket[packetIndex + 10] = FBITS((float)(firstStripClipTop + firstStripClipBottom) * fVar4);
                   blitPacket[packetIndex + 8] = 0x10031;
                   blitPacket[packetIndex + 0xb] = 0;
                   blitPacket[packetIndex + 6] =
-                       (SInt32)((float)(dVar52 - dVar49) * heightRatio) << 0x10 |
-                       (SInt32)((float)(dVar51 - dVar50) * heightRatio);
+                       (SInt32)((float)(firstStripClipRight - firstStripClipLeft) * heightRatio) << 0x10 |
+                       (SInt32)((float)(firstStripClipBottom - firstStripClipTop) * heightRatio);
                 }
                 piVar27 = piVar27 + 2;
                 iVar35 = iVar35 + -1;
@@ -645,84 +708,84 @@ LAB_0003f654:
                                                                         uVar42 ^ 0x80000000) -
                                                       signedIntBias));
             }
-            dVar62 = (double)(float)(dVar62 + (double)(float)((double)CONCAT44d(0x43300000,
+            dVar62 = (double)(float)(scalingBufferYF + (double)(float)((double)CONCAT44d(0x43300000,
                                                                                uVar38 ^ 0x80000000)
                                                              - signedIntBias));
             if (iVar34 != 0) {
-              dVar66 = (double)(float)(dVar67 + dVar66);
-              dVar47 = (double)(float)(dVar68 + dVar47);
-              dVar54 = (double)(float)(dVar67 + dVar54);
+              secondStripTop = (double)(float)(regionYF + firstStripHeightF);
+              regionRightF = (double)(float)(regionXF + regionWidthF);
+              regionBottomF = (double)(float)(regionYF + regionHeightF);
               iVar32 = iVar26;
               iVar43 = iVar34;
               do {
-                dVar48 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondStripRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(local_100) ^ 0x80000000) -
                                         dVar65);
-                fVar3 = (float)(dVar68 - dVar48);
-                dVar59 = dVar68;
+                fVar3 = (float)(regionXF - secondStripRectLeftF);
+                secondStripClipLeft = regionXF;
                 if (fVar3 < 0.0) {
-                  dVar59 = dVar48;
+                  secondStripClipLeft = secondStripRectLeftF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar59 = dVar68;
+                  secondStripClipLeft = regionXF;
                 }
-                dVar48 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondStripRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*local_100 ^ 0x80000000) -
                                         dVar65);
-                fVar3 = (float)(dVar48 - dVar66);
+                fVar3 = (float)(secondStripRectTopF - secondStripTop);
                 if (fVar3 < 0.0) {
-                  dVar48 = dVar66;
+                  secondStripRectTopF = secondStripTop;
                 }
-                dVar49 = dVar66;
+                secondStripClipTop = secondStripTop;
                 if (-fVar3 < 0.0) {
-                  dVar49 = dVar48;
+                  secondStripClipTop = secondStripRectTopF;
                 }
-                dVar50 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondStripRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(local_100) +
                                                           (SInt32)M<SInt16>(local_100 + 1) ^
                                                           0x80000000) - dVar65);
-                fVar3 = (float)(dVar50 - dVar47);
-                dVar48 = dVar47;
+                fVar3 = (float)(secondStripRectRightF - regionRightF);
+                secondStripClipRight = regionRightF;
                 if (fVar3 < 0.0) {
-                  dVar48 = dVar50;
+                  secondStripClipRight = secondStripRectRightF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar48 = dVar47;
+                  secondStripClipRight = regionRightF;
                 }
-                dVar52 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondStripRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*local_100 +
                                                           (SInt32)M<SInt16>((SInt32)local_100 + 6) ^
                                                           0x80000000) - dVar65);
-                fVar3 = (float)(dVar52 - dVar54);
-                dVar50 = dVar54;
+                fVar3 = (float)(secondStripRectBottomF - regionBottomF);
+                secondStripClipBottom = regionBottomF;
                 if (fVar3 < 0.0) {
-                  dVar50 = dVar52;
+                  secondStripClipBottom = secondStripRectBottomF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar50 = dVar54;
+                  secondStripClipBottom = regionBottomF;
                 }
                 iVar26 = iVar32;
-                if ((FLOAT_0004c370 < (float)(dVar48 - dVar59)) &&
-                   (FLOAT_0004c370 < (float)(dVar50 - dVar49))) {
+                if ((FLOAT_0004c370 < (float)(secondStripClipRight - secondStripClipLeft)) &&
+                   (FLOAT_0004c370 < (float)(secondStripClipBottom - secondStripClipTop))) {
                   blitPacket[iVar32] = 0x31080;
                   blitPacket[iVar32 + 5] = 0x1087;
                   iVar26 = iVar32 * 4 + 0x30 >> 2;
-                  blitPacket[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar59 - dVar68) -
-                                                       dVar61)));
+                  blitPacket[iVar32 + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(secondStripClipLeft - regionXF) -
+                                                       scalingBufferXF)));
                   blitPacket[iVar32 + 2] =
-                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
-                  blitPacket[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar48 - dVar68) -
-                                                       dVar61)));
+                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(secondStripClipBottom - regionYF) - dVar62));
+                  blitPacket[iVar32 + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(secondStripClipRight - regionXF) -
+                                                       scalingBufferXF)));
                   blitPacket[iVar32 + 4] =
-                       FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar49 - dVar67) - dVar62));
+                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(secondStripClipTop - regionYF) - dVar62));
                   blitPacket[iVar32 + 7] = 0xc0033500;
-                  blitPacket[iVar32 + 9] = FBITS((float)(dVar59 + dVar48) * fVar4);
-                  blitPacket[iVar32 + 10] = FBITS((float)(dVar49 + dVar50) * fVar4);
+                  blitPacket[iVar32 + 9] = FBITS((float)(secondStripClipLeft + secondStripClipRight) * fVar4);
+                  blitPacket[iVar32 + 10] = FBITS((float)(secondStripClipTop + secondStripClipBottom) * fVar4);
                   blitPacket[iVar32 + 8] = 0x10031;
                   blitPacket[iVar32 + 0xb] = 0;
                   blitPacket[iVar32 + 6] =
-                       (SInt32)((float)(dVar48 - dVar59) * heightRatio) << 0x10 |
-                       (SInt32)((float)(dVar50 - dVar49) * heightRatio);
+                       (SInt32)((float)(secondStripClipRight - secondStripClipLeft) * heightRatio) << 0x10 |
+                       (SInt32)((float)(secondStripClipBottom - secondStripClipTop) * heightRatio);
                 }
                 local_100 = local_100 + 2;
                 iVar43 = iVar43 + -1;
@@ -731,8 +794,8 @@ LAB_0003f654:
             }
           }
           else {
-            uVar38 = (SInt32)dVar66 >> 1 & 0xfffffe00;
-            uVar19 = (SInt32)dVar66 - uVar38;
+            uVar38 = (SInt32)bufferWidthF >> 1 & 0xfffffe00;
+            uVar19 = (SInt32)bufferWidthF - uVar38;
             uVar40 = uVar38 + 2;
             if ((blitPacket[0xa0] & 0x18) == 0) {
               uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
@@ -747,12 +810,12 @@ LAB_0003f654:
             if (((UInt32)blitPacket[0xa0] >> 2 & 1) != 0) {
               iVar32 = (iVar43 << 0xc) >> 3;
             }
-            dVar55 = dVar68;
-            if (dVar63 != zero) {
-              dVar55 = (double)(float)(dVar68 + (double)(float)((double)(float)((double)(float)((
+            dVar55 = regionXF;
+            if (sourceScaleX != zero) {
+              dVar55 = (double)(float)(regionXF + (double)(float)((double)(float)((double)(float)((
                                                   double)CONCAT44d(0x43300000,
                                                                   uVar38 + uVar40 ^ 0x80000000) -
-                                                  signedIntBias) * half + dVar61) / dVar63));
+                                                  signedIntBias) * half + scalingBufferXF) / sourceScaleX));
             }
             if (dVar55 <= zero) {
               dVar55 = dVar55 - half;
@@ -760,11 +823,11 @@ LAB_0003f654:
             else {
               dVar55 = dVar55 + half;
             }
-            dVar65 = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
+            firstColumnWidthF = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
                                                                       (SInt32)dVar55 ^ 0x80000000) -
-                                                    signedIntBias) - dVar68);
+                                                    signedIntBias) - regionXF);
             blitPacket[0xa6] = uVar38 + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
-            dVar55 = DOUBLE_0004c3a8;
+            intToFloatBiasD = DOUBLE_0004c3a8;
             fVar4 = FLOAT_0004c380;
             heightRatio = FLOAT_0004c37c;
             widthRatio = FLOAT_0004c370;
@@ -774,80 +837,80 @@ LAB_0003f654:
                                                       signedIntBias));
             }
             if (iVar34 != 0) {
-              dVar66 = (double)(float)(dVar68 + dVar65);
-              dVar48 = (double)(float)(dVar67 + dVar54);
+              firstColumnRight = (double)(float)(regionXF + firstColumnWidthF);
+              firstColumnBottom = (double)(float)(regionYF + regionHeightF);
               piVar27 = local_100;
               packetIndex = iVar26;
               iVar35 = iVar34;
               do {
-                dVar50 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstColumnRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(piVar27) ^ 0x80000000) -
-                                        dVar55);
-                fVar3 = (float)(dVar68 - dVar50);
-                dVar49 = dVar68;
+                                        intToFloatBiasD);
+                fVar3 = (float)(regionXF - firstColumnRectLeftF);
+                firstColumnClipLeft = regionXF;
                 if (fVar3 < 0.0) {
-                  dVar49 = dVar50;
+                  firstColumnClipLeft = firstColumnRectLeftF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar49 = dVar68;
+                  firstColumnClipLeft = regionXF;
                 }
-                dVar52 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstColumnRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*piVar27 ^ 0x80000000) -
-                                        dVar55);
-                fVar3 = (float)(dVar67 - dVar52);
-                dVar50 = dVar67;
+                                        intToFloatBiasD);
+                fVar3 = (float)(regionYF - firstColumnRectTopF);
+                firstColumnClipTop = regionYF;
                 if (fVar3 < 0.0) {
-                  dVar50 = dVar52;
+                  firstColumnClipTop = firstColumnRectTopF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar50 = dVar67;
+                  firstColumnClipTop = regionYF;
                 }
-                dVar51 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstColumnRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(piVar27) +
                                                           (SInt32)M<SInt16>(piVar27 + 1) ^ 0x80000000)
-                                        - dVar55);
-                fVar3 = (float)(dVar51 - dVar66);
-                dVar52 = dVar66;
+                                        - intToFloatBiasD);
+                fVar3 = (float)(firstColumnRectRightF - firstColumnRight);
+                firstColumnClipRight = firstColumnRight;
                 if (fVar3 < 0.0) {
-                  dVar52 = dVar51;
+                  firstColumnClipRight = firstColumnRectRightF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar52 = dVar66;
+                  firstColumnClipRight = firstColumnRight;
                 }
-                dVar51 = (double)(float)((double)CONCAT44d(0x43300000,
+                firstColumnRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*piVar27 +
                                                           (SInt32)M<SInt16>((SInt32)piVar27 + 6) ^
-                                                          0x80000000) - dVar55);
-                fVar3 = (float)(dVar48 - dVar51);
+                                                          0x80000000) - intToFloatBiasD);
+                fVar3 = (float)(firstColumnBottom - firstColumnRectBottomF);
                 if (fVar3 < 0.0) {
-                  dVar51 = dVar48;
+                  firstColumnRectBottomF = firstColumnBottom;
                 }
-                dVar53 = dVar48;
+                firstColumnClipBottom = firstColumnBottom;
                 if (-fVar3 < 0.0) {
-                  dVar53 = dVar51;
+                  firstColumnClipBottom = firstColumnRectBottomF;
                 }
                 iVar26 = packetIndex;
-                if ((FLOAT_0004c370 < (float)(dVar52 - dVar49)) &&
-                   (FLOAT_0004c370 < (float)(dVar53 - dVar50))) {
+                if ((FLOAT_0004c370 < (float)(firstColumnClipRight - firstColumnClipLeft)) &&
+                   (FLOAT_0004c370 < (float)(firstColumnClipBottom - firstColumnClipTop))) {
                   blitPacket[packetIndex] = 0x31080;
                   blitPacket[packetIndex + 5] = 0x1087;
                   iVar26 = packetIndex * 4 + 0x30 >> 2;
                   blitPacket[packetIndex + 1] =
-                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar49 - dVar68) - dVar61));
-                  blitPacket[packetIndex + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar53 - dVar67) -
-                                                       dVar62)));
+                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(firstColumnClipLeft - regionXF) - scalingBufferXF));
+                  blitPacket[packetIndex + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(firstColumnClipBottom - regionYF) -
+                                                       scalingBufferYF)));
                   blitPacket[packetIndex + 3] =
-                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar52 - dVar68) - dVar61));
-                  blitPacket[packetIndex + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
-                                                       dVar62)));
+                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(firstColumnClipRight - regionXF) - scalingBufferXF));
+                  blitPacket[packetIndex + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(firstColumnClipTop - regionYF) -
+                                                       scalingBufferYF)));
                   blitPacket[packetIndex + 7] = 0xc0033500;
-                  blitPacket[packetIndex + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
-                  blitPacket[packetIndex + 10] = FBITS((float)(dVar50 + dVar53) * fVar4);
+                  blitPacket[packetIndex + 9] = FBITS((float)(firstColumnClipLeft + firstColumnClipRight) * fVar4);
+                  blitPacket[packetIndex + 10] = FBITS((float)(firstColumnClipTop + firstColumnClipBottom) * fVar4);
                   blitPacket[packetIndex + 8] = 0x10031;
                   blitPacket[packetIndex + 0xb] = 0;
                   blitPacket[packetIndex + 6] =
-                       (SInt32)((float)(dVar52 - dVar49) * heightRatio) << 0x10 |
-                       (SInt32)((float)(dVar53 - dVar50) * heightRatio);
+                       (SInt32)((float)(firstColumnClipRight - firstColumnClipLeft) * heightRatio) << 0x10 |
+                       (SInt32)((float)(firstColumnClipBottom - firstColumnClipTop) * heightRatio);
                 }
                 piVar27 = piVar27 + 2;
                 iVar35 = iVar35 + -1;
@@ -862,7 +925,7 @@ LAB_0003f654:
             iVar32 = iVar26 + 3;
             iVar26 = iVar26 + 4;
             blitPacket[iVar32] = uVar19 - 1 & 0x7ff | uVar40 & 0xfffff800;
-            dVar55 = DOUBLE_0004c3a8;
+            intToFloatBiasD = DOUBLE_0004c3a8;
             fVar4 = FLOAT_0004c380;
             heightRatio = FLOAT_0004c37c;
             widthRatio = FLOAT_0004c370;
@@ -871,84 +934,84 @@ LAB_0003f654:
                                                                         uVar19 ^ 0x80000000) -
                                                       signedIntBias));
             }
-            dVar61 = (double)(float)(dVar61 + (double)(float)((double)CONCAT44d(0x43300000,
+            dVar61 = (double)(float)(scalingBufferXF + (double)(float)((double)CONCAT44d(0x43300000,
                                                                                uVar38 ^ 0x80000000)
                                                              - signedIntBias));
             if (iVar34 != 0) {
-              dVar65 = (double)(float)(dVar68 + dVar65);
-              dVar47 = (double)(float)(dVar68 + dVar47);
-              dVar54 = (double)(float)(dVar67 + dVar54);
+              secondColumnLeft = (double)(float)(regionXF + firstColumnWidthF);
+              regionRightF = (double)(float)(regionXF + regionWidthF);
+              regionBottomF = (double)(float)(regionYF + regionHeightF);
               iVar32 = iVar26;
               iVar43 = iVar34;
               do {
-                dVar48 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondColumnRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(local_100) ^ 0x80000000) -
-                                        dVar55);
-                fVar3 = (float)(dVar65 - dVar48);
-                dVar66 = dVar65;
+                                        intToFloatBiasD);
+                fVar3 = (float)(secondColumnLeft - secondColumnRectLeftF);
+                secondColumnClipLeft = secondColumnLeft;
                 if (fVar3 < 0.0) {
-                  dVar66 = dVar48;
+                  secondColumnClipLeft = secondColumnRectLeftF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar66 = dVar65;
+                  secondColumnClipLeft = secondColumnLeft;
                 }
-                dVar49 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondColumnRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*local_100 ^ 0x80000000) -
-                                        dVar55);
-                fVar3 = (float)(dVar67 - dVar49);
-                dVar48 = dVar67;
+                                        intToFloatBiasD);
+                fVar3 = (float)(regionYF - secondColumnRectTopF);
+                secondColumnClipTop = regionYF;
                 if (fVar3 < 0.0) {
-                  dVar48 = dVar49;
+                  secondColumnClipTop = secondColumnRectTopF;
                 }
                 if (-fVar3 < 0.0) {
-                  dVar48 = dVar67;
+                  secondColumnClipTop = regionYF;
                 }
-                dVar49 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondColumnRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)M<SInt16>(local_100) +
                                                           (SInt32)M<SInt16>(local_100 + 1) ^
-                                                          0x80000000) - dVar55);
-                fVar3 = (float)(dVar47 - dVar49);
+                                                          0x80000000) - intToFloatBiasD);
+                fVar3 = (float)(regionRightF - secondColumnRectRightF);
                 if (fVar3 < 0.0) {
-                  dVar49 = dVar47;
+                  secondColumnRectRightF = regionRightF;
                 }
-                dVar50 = dVar47;
+                secondColumnClipRight = regionRightF;
                 if (-fVar3 < 0.0) {
-                  dVar50 = dVar49;
+                  secondColumnClipRight = secondColumnRectRightF;
                 }
-                dVar49 = (double)(float)((double)CONCAT44d(0x43300000,
+                secondColumnRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
                                                           (SInt32)(SInt16)*local_100 +
                                                           (SInt32)M<SInt16>((SInt32)local_100 + 6) ^
-                                                          0x80000000) - dVar55);
-                fVar3 = (float)(dVar54 - dVar49);
+                                                          0x80000000) - intToFloatBiasD);
+                fVar3 = (float)(regionBottomF - secondColumnRectBottomF);
                 if (fVar3 < 0.0) {
-                  dVar49 = dVar54;
+                  secondColumnRectBottomF = regionBottomF;
                 }
-                dVar52 = dVar54;
+                secondColumnClipBottom = regionBottomF;
                 if (-fVar3 < 0.0) {
-                  dVar52 = dVar49;
+                  secondColumnClipBottom = secondColumnRectBottomF;
                 }
                 iVar26 = iVar32;
-                if ((FLOAT_0004c370 < (float)(dVar50 - dVar66)) &&
-                   (FLOAT_0004c370 < (float)(dVar52 - dVar48))) {
+                if ((FLOAT_0004c370 < (float)(secondColumnClipRight - secondColumnClipLeft)) &&
+                   (FLOAT_0004c370 < (float)(secondColumnClipBottom - secondColumnClipTop))) {
                   blitPacket[iVar32] = 0x31080;
                   blitPacket[iVar32 + 5] = 0x1087;
                   iVar26 = iVar32 * 4 + 0x30 >> 2;
                   blitPacket[iVar32 + 1] =
-                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar66 - dVar68) - dVar61));
-                  blitPacket[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar52 - dVar67) -
-                                                       dVar62)));
+                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(secondColumnClipLeft - regionXF) - dVar61));
+                  blitPacket[iVar32 + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(secondColumnClipBottom - regionYF) -
+                                                       scalingBufferYF)));
                   blitPacket[iVar32 + 3] =
-                       FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar50 - dVar68) - dVar61));
-                  blitPacket[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
-                                                       dVar62)));
+                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(secondColumnClipRight - regionXF) - dVar61));
+                  blitPacket[iVar32 + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(secondColumnClipTop - regionYF) -
+                                                       scalingBufferYF)));
                   blitPacket[iVar32 + 7] = 0xc0033500;
-                  blitPacket[iVar32 + 9] = FBITS((float)(dVar66 + dVar50) * fVar4);
-                  blitPacket[iVar32 + 10] = FBITS((float)(dVar48 + dVar52) * fVar4);
+                  blitPacket[iVar32 + 9] = FBITS((float)(secondColumnClipLeft + secondColumnClipRight) * fVar4);
+                  blitPacket[iVar32 + 10] = FBITS((float)(secondColumnClipTop + secondColumnClipBottom) * fVar4);
                   blitPacket[iVar32 + 8] = 0x10031;
                   blitPacket[iVar32 + 0xb] = 0;
                   blitPacket[iVar32 + 6] =
-                       (SInt32)((float)(dVar50 - dVar66) * heightRatio) << 0x10 |
-                       (SInt32)((float)(dVar52 - dVar48) * heightRatio);
+                       (SInt32)((float)(secondColumnClipRight - secondColumnClipLeft) * heightRatio) << 0x10 |
+                       (SInt32)((float)(secondColumnClipBottom - secondColumnClipTop) * heightRatio);
                 }
                 local_100 = local_100 + 2;
                 iVar43 = iVar43 + -1;
@@ -958,8 +1021,8 @@ LAB_0003f654:
           }
         }
         else {
-          if (dVar48 < dVar66) {
-            uVar38 = (UInt32)dVar66;
+          if (dVar48 < bufferWidthF) {
+            uVar38 = (UInt32)bufferWidthF;
             uVar40 = (SInt32)uVar38 >> 1 & 0xfffffe00;
             uVar17 = uVar40 + 2;
             uVar19 = uVar38 - uVar40;
@@ -1106,79 +1169,79 @@ LAB_0003f654:
           heightRatio = FLOAT_0004c380;
           widthRatio = FLOAT_0004c37c;
           if (iVar34 != 0) {
-            dVar47 = (double)(float)(dVar68 + dVar47);
-            dVar54 = (double)(float)(dVar67 + dVar54);
+            regionRightF = (double)(float)(regionXF + regionWidthF);
+            regionBottomF = (double)(float)(regionYF + regionHeightF);
             iVar32 = iVar26;
             iVar43 = iVar34;
             do {
-              dVar48 = (double)(float)((double)CONCAT44d(0x43300000,
+              rectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
                                                         (SInt32)M<SInt16>(local_100) ^ 0x80000000) -
                                       dVar65);
-              fVar4 = (float)(dVar68 - dVar48);
-              dVar66 = dVar68;
+              fVar4 = (float)(regionXF - rectLeftF);
+              clipLeft = regionXF;
               if (fVar4 < 0.0) {
-                dVar66 = dVar48;
+                clipLeft = rectLeftF;
               }
               if (-fVar4 < 0.0) {
-                dVar66 = dVar68;
+                clipLeft = regionXF;
               }
-              dVar49 = (double)(float)((double)CONCAT44d(0x43300000,
+              rectTopF = (double)(float)((double)CONCAT44d(0x43300000,
                                                         (SInt32)(SInt16)*local_100 ^ 0x80000000) -
                                       dVar65);
-              fVar4 = (float)(dVar67 - dVar49);
-              dVar48 = dVar67;
+              fVar4 = (float)(regionYF - rectTopF);
+              clipTop = regionYF;
               if (fVar4 < 0.0) {
-                dVar48 = dVar49;
+                clipTop = rectTopF;
               }
               if (-fVar4 < 0.0) {
-                dVar48 = dVar67;
+                clipTop = regionYF;
               }
-              dVar50 = (double)(float)((double)CONCAT44d(0x43300000,
+              rectRightF = (double)(float)((double)CONCAT44d(0x43300000,
                                                         (SInt32)M<SInt16>(local_100) +
                                                         (SInt32)M<SInt16>(local_100 + 1) ^ 0x80000000)
                                       - dVar65);
-              fVar4 = (float)(dVar50 - dVar47);
-              dVar49 = dVar47;
+              fVar4 = (float)(rectRightF - regionRightF);
+              clipRight = regionRightF;
               if (fVar4 < 0.0) {
-                dVar49 = dVar50;
+                clipRight = rectRightF;
               }
               if (-fVar4 < 0.0) {
-                dVar49 = dVar47;
+                clipRight = regionRightF;
               }
-              dVar52 = (double)(float)((double)CONCAT44d(0x43300000,
+              rectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
                                                         (SInt32)(SInt16)*local_100 +
                                                         (SInt32)M<SInt16>((SInt32)local_100 + 6) ^
                                                         0x80000000) - dVar65);
-              fVar4 = (float)(dVar52 - dVar54);
-              dVar50 = dVar54;
+              fVar4 = (float)(rectBottomF - regionBottomF);
+              clipBottom = regionBottomF;
               if (fVar4 < 0.0) {
-                dVar50 = dVar52;
+                clipBottom = rectBottomF;
               }
               if (-fVar4 < 0.0) {
-                dVar50 = dVar54;
+                clipBottom = regionBottomF;
               }
               iVar26 = iVar32;
-              if ((FLOAT_0004c370 < (float)(dVar49 - dVar66)) &&
-                 (FLOAT_0004c370 < (float)(dVar50 - dVar48))) {
+              if ((FLOAT_0004c370 < (float)(clipRight - clipLeft)) &&
+                 (FLOAT_0004c370 < (float)(clipBottom - clipTop))) {
                 blitPacket[iVar32] = 0x31080;
                 blitPacket[iVar32 + 5] = 0x1087;
                 iVar26 = iVar32 * 4 + 0x30 >> 2;
-                blitPacket[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar66 - dVar68) -
-                                                     dVar61)));
-                blitPacket[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
-                                                     dVar62)));
-                blitPacket[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
-                                                     dVar61)));
-                blitPacket[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
-                                                     dVar62)));
+                blitPacket[iVar32 + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(clipLeft - regionXF) -
+                                                     scalingBufferXF)));
+                blitPacket[iVar32 + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(clipBottom - regionYF) -
+                                                     scalingBufferYF)));
+                blitPacket[iVar32 + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(clipRight - regionXF) -
+                                                     scalingBufferXF)));
+                blitPacket[iVar32 + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(clipTop - regionYF) -
+                                                     scalingBufferYF)));
                 blitPacket[iVar32 + 7] = 0xc0033500;
-                blitPacket[iVar32 + 9] = FBITS((float)(dVar66 + dVar49) * heightRatio);
-                blitPacket[iVar32 + 10] = FBITS((float)(dVar48 + dVar50) * heightRatio);
+                blitPacket[iVar32 + 9] = FBITS((float)(clipLeft + clipRight) * heightRatio);
+                blitPacket[iVar32 + 10] = FBITS((float)(clipTop + clipBottom) * heightRatio);
                 blitPacket[iVar32 + 8] = 0x10031;
                 blitPacket[iVar32 + 0xb] = 0;
                 blitPacket[iVar32 + 6] =
-                     (SInt32)((float)(dVar49 - dVar66) * widthRatio) << 0x10 |
-                     (SInt32)((float)(dVar50 - dVar48) * widthRatio);
+                     (SInt32)((float)(clipRight - clipLeft) * widthRatio) << 0x10 |
+                     (SInt32)((float)(clipBottom - clipTop) * widthRatio);
               }
               local_100 = local_100 + 2;
               iVar43 = iVar43 + -1;
