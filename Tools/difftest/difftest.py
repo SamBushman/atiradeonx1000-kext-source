@@ -422,6 +422,7 @@ class Machine:
         if base < 0x1000:                                    # null-page accesses are faults, not data
             return False
         if len(self.mapped) > 2000:                          # a loop sweeping through address space: a wild pointer, not a test
+            if os.environ.get('DT_WILD'): print('WILD %s %s %x/%d pc=%x' % (self.image.label, 'map-sweep', addr, size, uc.reg_read(UC_PPC_REG_PC)), file=sys.stderr)
             self.bad_read = True
             return False
         try:
@@ -457,6 +458,7 @@ class Machine:
     def _write(self, uc, access, addr, size, value, ud):
         self._flush()
         if any(a <= addr < b for a, b in self.ro):
+            if os.environ.get('DT_WILD'): print('WILD %s %s %x/%d pc=%x' % (self.image.label, 'store-into-code', addr, size, uc.reg_read(UC_PPC_REG_PC)), file=sys.stderr)
             self.bad_read = True          # a store into the kext's own machine code / constants: a garbage pointer in the test world
             return
         self.write_log.append([addr, size, bytes(uc.mem_read(addr, size)), None])
@@ -480,6 +482,7 @@ class Machine:
         self.events.append(['R', addr - h[0], size, bytes(uc.mem_read(addr, size)).hex()])
 
     def _null_call(self, uc, addr, size, ud):
+        if os.environ.get('DT_WILD'): print('WILD %s %s %x/%d pc=%x' % (self.image.label, 'null-call', addr, size, uc.reg_read(UC_PPC_REG_PC)), file=sys.stderr)
         self.bad_read = True              # a call through a null function pointer: a hole in the test world, not behaviour
         self.status = 'NULLCALL'; uc.emu_stop()
 
@@ -490,7 +493,7 @@ class Machine:
     def _read_code(self, uc, access, addr, size, value, ud):
         if self.own[0] <= addr < self.own[1]:
             return                # the function's own extent holds its jump tables
-        if os.environ.get('DT_WILD'): print('WILD %s read %x/%d' % (self.image.label, addr, size), file=sys.stderr)
+        if os.environ.get('DT_WILD'): print('WILD %s read %x/%d pc=%x' % (self.image.label, addr, size, uc.reg_read(UC_PPC_REG_PC)), file=sys.stderr)
         self.bad_read = True      # the function read machine code as data: a garbage pointer in the test world
 
     def _trace_read(self, uc, access, addr, size, value, ud):

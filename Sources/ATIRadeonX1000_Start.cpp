@@ -16,6 +16,9 @@
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
 
+/* placement new for the hand-made allocation of ATIR500Memory (see ATIRadeonX1000_ContextFactories.cpp) */
+inline void *operator new(size_t, void *where) { return where; }
+
 extern "C" UInt32 GH_IOFreeAligned(...) asm("_IOFreeAligned");
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 extern "C" UInt32 GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(...) asm("__ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass");
@@ -167,7 +170,8 @@ bool ATIRadeonX1000::start(IOService *provider) {
   }
   /* #85: the decompile's `operator new(0x14); if (p) ATIR500Memory::ATIR500Memory(p)` pair is exactly what `new ATIR500Memory()` compiles to; the
    * mechanical port wrote both, which allocated twice and leaked the first object on every start(). */
-  memoryPool = (UInt8 *)new ATIR500Memory();
+  { void *mem = OSObject::operator new(0x14);   /* the null check must be explicit: `new T()` here compiled to an unconditional constructor call (#187) */
+    memoryPool = (UInt8 *)(mem ? ::new (mem) ATIR500Memory() : 0); }
   M<UInt8 *>(self + kIOATIR500Accelerator_vramPoolB) = memoryPool;
   if (memoryPool != (UInt8 *)0x0) {
     poolReady = ((ATIR500Memory *)(memoryPool))->init_pool(0);
@@ -361,6 +365,8 @@ LAB_0001fc04:
                   dataCacheBlockFlush(cacheFlushStart + iVar9);
                   ppcSync();
                   instructionSynchronize();
+                  /* shipped code: lwzx from the just-flushed line (result unused), then isync - the decompile dropped the load */
+                  (void)*reinterpret_cast<volatile UInt32 *>(cacheFlushStart + iVar9);
                   instructionSynchronize();
                 }
                 if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
