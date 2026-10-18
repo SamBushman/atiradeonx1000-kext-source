@@ -1,6 +1,6 @@
---- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-18 00:33:15.571330214 -0700
-+++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-18 00:33:15.572862064 -0700
-@@ -377,12 +377,12 @@
+--- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-18 01:02:37.477438617 -0700
++++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-18 01:02:37.479015466 -0700
+@@ -387,12 +387,12 @@
                uStack_84 = pitch >> 2 ^ 0x80000000;
                local_88 = 0x43300000;
                recordCursor[0x61] =
@@ -16,21 +16,21 @@
                ;
                recordWord = recordWord & 0xffffff;
              }
-@@ -785,7 +785,7 @@
+@@ -795,7 +795,7 @@
              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
              recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
-             recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
+             recordCursor[9] = clearByte | clearByte << 0x18 | clearByte << 0x10 |
 -                                  (UInt32)M<UInt8>((SInt32)recordCursor + 0xf) << 8;
-+                                  uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
++                                  clearByte << 8;   /* the byte replicated four times: clearByte holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
              recordCursor[10] = 0;
-             uVar17 = uVar17 | (pitch & 0xfffc) << 0xe;
+             sizeWord = overlayHeight | (pitch & 0xfffc) << 0xe;
  LAB_00037c4c:
-@@ -826,7 +826,7 @@
+@@ -836,7 +836,7 @@
              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
              recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
-             recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
+             recordCursor[9] = clearByte | clearByte << 0x18 | clearByte << 0x10 |
 -                                  (UInt32)M<UInt8>((SInt32)recordCursor + 0xf) << 8;
-+                                  uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
++                                  clearByte << 8;   /* the byte replicated four times: clearByte holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
              recordCursor[10] = 0;
-             uVar17 = (pitch & 0xfffc) << 0xe | uVar17 >> 1;
+             sizeWord = (pitch & 0xfffc) << 0xe | overlayHeight >> 1;
              goto LAB_00037c4c;
