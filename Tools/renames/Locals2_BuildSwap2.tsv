@@ -4,10 +4,10 @@ def	ATIR500Surface::build_swap	uVar20	dstPitchUnits	INFERRED	max(0x20 / bytesPer
 def	ATIR500Surface::build_swap	uVar23	srcLastColumn	INFERRED	surface-buffer width in format elements - 1 (0 when empty): low field of blitPacket[0xa6]
 def	ATIR500Surface::build_swap	uVar25	srcLastColumnCopy	INFERRED	the same width - 1 again: bit 11 goes to bit 15 of blitPacket[0xaa]
 def	ATIR500Surface::build_swap	uVar31	srcPitchUnits	INFERRED	max(0x20 / bytesPerUnit, width in units) of the surface buffer: (value - 1) & 0x3fff in blitPacket[0xaa]
-use	ATIR500Surface::build_swap	uVar22	srcWidthUnits	INFERRED	surfaceBuffer width / the format's element size (temporary of the width - 1 computation)	\(uVar22 = bufferWidth	if \(bufferHeight != 0\) \{#1
-use	ATIR500Surface::build_swap	uVar22	srcLastRow	INFERRED	surface-buffer height - 1 (0 when empty): bits 11.. of blitPacket[0xa6]	if \(bufferHeight != 0\) \{#1	blitPacket\[0xa8\] =
-use	ATIR500Surface::build_swap	uVar24	srcWidthUnits	INFERRED	surfaceBuffer->+0x14 / the format's element size, first operand of the pitch max()	uVar24 = 0;#1	\(uVar24 = bufferWidth
-use	ATIR500Surface::build_swap	uVar24	srcLastRowCopy	INFERRED	the same height - 1 again: bit 11 goes to bit 16 of blitPacket[0xaa]	if \(bufferHeight != 0\) \{#2	blitPacket\[0x9c\] =
+use	ATIR500Surface::build_swap	uVar22	srcWidthUnits	INFERRED	surfaceBuffer width / the format's element size (temporary of the width - 1 computation)	\(uVar22 = uVar42	if \(uVar15 != 0\) \{#1
+use	ATIR500Surface::build_swap	uVar22	srcLastRow	INFERRED	surface-buffer height - 1 (0 when empty): bits 11.. of blitPacket[0xa6]	if \(uVar15 != 0\) \{#1	blitPacket\[0xa8\] =
+use	ATIR500Surface::build_swap	uVar24	srcWidthUnits	INFERRED	surfaceBuffer->+0x14 / the format's element size, first operand of the pitch max()	uVar24 = 0;#1	\(uVar24 = uVar42
+use	ATIR500Surface::build_swap	uVar24	srcLastRowCopy	INFERRED	the same height - 1 again: bit 11 goes to bit 16 of blitPacket[0xaa]	if \(uVar15 != 0\) \{#2	blitPacket\[0x9c\] =
 use	ATIR500Surface::build_swap	uVar30	dstWidthUnits	INFERRED	panel buffer width / the format's element size, first operand of the pitch max()	uVar30 = 0;#1	uVar19 = FormatTableLookup_0x0004d2e0\(uVar19 \* 0x1c\)
 use	ATIR500Surface::build_swap	uVar30	scissorRight	INFERRED	panel region width - 1 (0 when empty): low field of the scissor word blitPacket[0xb3]	uVar21 = \(UInt32\)M<UInt16>\(iVar32 \+ 0x148\)	blitPacket\[0xb\] = uVar16;
 use	ATIR500Surface::build_swap	uVar21	scissorWidthUnits	INFERRED	panel region width / the format's element size (temporary of the width - 1 computation)	uVar21 = \(UInt32\)M<UInt16>\(iVar32 \+ 0x148\)	^\s*uVar21 = 0;$#1
