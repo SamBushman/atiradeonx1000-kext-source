@@ -59,6 +59,6 @@ void IOATIR500Accelerator::freeOneDataBuffer(VendorTextureBuffer *buffer) {
     VCALL(*backing, 0x18)(backing);
   }
   VCALL(M<SInt32>(self), 0x574)(self,bufferBytes,0xc0);
-  M<SInt32>(self + 0x750) = M<SInt32>(self + 0x750) + -1;
+  M<SInt32>(self + kIOATIR500Accelerator_dataBufferCount) = M<SInt32>(self + kIOATIR500Accelerator_dataBufferCount) + -1;
   return;
 }

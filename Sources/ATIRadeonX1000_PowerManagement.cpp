@@ -63,7 +63,7 @@ void ATIRadeonX1000::system_did_change_speed() {
   SInt32 previousDepth;
   SInt32 *period;
   
-  previousDepth = GH_OSDecrementAtomic(self + 200);
+  previousDepth = GH_OSDecrementAtomic(self + kIOATIR500Accelerator_displayChangeDepth);
   if (previousDepth == 1) {
     if (M<SInt32>(self + 0x9a4) != 0) {
       period = (SInt32 *)this->getPeriodValue("polling-period");
@@ -76,7 +76,7 @@ void ATIRadeonX1000::system_did_change_speed() {
       }
       ((ATIRadeonX1000 *)(self))->enable_GPUSensor();
     }
-    GH_IOLockUnlock(M<UInt32>(self + 0x840));
+    GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
   }
   return;
 }
@@ -91,9 +91,9 @@ void ATIRadeonX1000::system_will_change_speed() {
   UInt32 nextRingIndex;
   SInt32 iVar5;
   
-  iVar3 = GH_OSIncrementAtomic(self + 200);
+  iVar3 = GH_OSIncrementAtomic(self + kIOATIR500Accelerator_displayChangeDepth);
   if (iVar3 == 0) {
-    GH_IOLockLock(M<UInt32>(self + 0x840));
+    GH_IOLockLock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
     if (M<SInt32>(self + 0x9a4) != 0) {
       ((ATIRadeonX1000 *)(self))->disable_GPUSensor();
     }
@@ -110,11 +110,11 @@ void ATIRadeonX1000::system_will_change_speed() {
       ringIndex = ringIndex + 1 & 0x7ff;
       nextRingIndex = ringIndex + 1;
       M<UInt32>(self + 0x914) = nextRingIndex;
-      M<UInt32>(iVar5 + ringIndex * 4) = M<UInt32>(self + 0x50);
+      M<UInt32>(iVar5 + ringIndex * 4) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
       M<UInt32>(self + 0x914) = nextRingIndex & 0x7ff;
       ((ATIRadeonX1000 *)(self))->submit_ring_data();
-      VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + 0x50));
-      M<SInt32>(self + 0x50) = M<SInt32>(self + 0x50) + 1;
+      VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + kIOATIR500Accelerator_submitStamp));
+      M<SInt32>(self + kIOATIR500Accelerator_submitStamp) = M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + 1;
       if (M<SInt32>(self + 0x8bc) != 0) {
         VCALL(M<SInt32>(self), 0x5ec)(self,M<SInt32>(self + 0x854) + -1);
         enforceInOrderExecutionIO();

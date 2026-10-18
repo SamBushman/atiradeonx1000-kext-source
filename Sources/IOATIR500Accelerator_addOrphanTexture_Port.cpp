@@ -37,13 +37,13 @@ void IOATIR500Accelerator::addOrphanTexture(IOTextureBuffer *buffer) {
   prevNode = M<SInt32>(bufferBytes + 0x24);
   M<UInt32>(prevNode + 0x28) = M<UInt32>(bufferBytes + 0x28);
   nextNode = M<SInt32>(bufferBytes + 0x28);
-  M<UInt8 *>(bufferBytes + 0x28) = self + 0x63c;
+  M<UInt8 *>(bufferBytes + 0x28) = self + kIOATIR500Accelerator_orphanTextureList;
   M<SInt32>(nextNode + 0x24) = prevNode;
-  M<UInt32>(bufferBytes + 0x24) = M<UInt32>(self + 0x660);
-  M<UInt8 *>(self + 0x660) = bufferBytes;
+  M<UInt32>(bufferBytes + 0x24) = M<UInt32>(self + kIOATIR500Accelerator_orphanTextureList_prev);
+  M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_prev) = bufferBytes;
   M<UInt8 *>(M<SInt32>(bufferBytes + 0x24) + 0x28) = bufferBytes;
   if (self[0x82] == 0x0) {
-    VCALL(*M<SInt32 *>(self + 0xb8), 300)(M<SInt32 *>(self + 0xb8),100);
+    VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_garbageCollectorTimer), 300)(M<SInt32 *>(self + kIOATIR500Accelerator_garbageCollectorTimer),100);
     self[0x82] = 0x1;
   }
   return;

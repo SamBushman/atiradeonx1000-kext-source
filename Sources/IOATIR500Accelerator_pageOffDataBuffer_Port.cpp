@@ -61,7 +61,7 @@ void IOATIR500Accelerator::pageOffDataBuffer(VendorTextureBuffer *buffer) {
         do {
           wordIndex = wordIndex + 1;
           M<UInt32>(iVar3 + iVar1) =
-               M<UInt32>(M<SInt32>(self + 0xe4) + iVar3 + M<SInt32>(bufferBytes + 0x48));
+               M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress) + iVar3 + M<SInt32>(bufferBytes + 0x48));
           iVar3 = iVar3 + 4;
         } while (wordIndex < M<UInt32>(bufferBytes + 0x50) >> 2);
       }

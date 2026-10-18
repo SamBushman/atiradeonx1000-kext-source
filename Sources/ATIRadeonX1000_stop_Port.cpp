@@ -43,7 +43,7 @@ void ATIRadeonX1000::stop(IOService *provider) {
    * so logging its raw value and first vtable word right here to see if it's already garbage by
    * the time stop() runs, before touching it. */
   {
-    void *field_0x74 = *(void **)(self + 0x74);
+    void *field_0x74 = *(void **)(self + kIOATIR500Accelerator_pciDevice);
     UInt32 field_0x74_vtable = field_0x74 ? *(UInt32 *)field_0x74 : 0;
   }
 
@@ -64,22 +64,22 @@ void ATIRadeonX1000::stop(IOService *provider) {
      * the compiler only sets up registers for args actually written here) - the real callee read
      * whatever happened to be in r4, a valid-looking but wrong pointer, matching this issue's
      * "valid pointer, zeroed vtable" crash signature exactly. */
-    VCALL(*M<int *>(self + 0xb4), 0xe8)(M<int *>(self + 0xb4), M<int *>(self + 0x9a8));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + 0x9a8));
     VCALL(*M<int *>(self + 0x9a8), 0x18)(M<int *>(self + 0x9a8));
     M<UInt32>(self + 0x9a8) = 0;
   }
   if (M<int>(self + 0x9b8) != 0) {
-    VCALL(*M<int *>(self + 0xb4), 0xe8)(M<int *>(self + 0xb4), M<int *>(self + 0x9b8));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + 0x9b8));
     VCALL(*M<int *>(self + 0x9b8), 0x18)(M<int *>(self + 0x9b8));
     M<UInt32>(self + 0x9b8) = 0;
   }
   iVar4 = 0;
   memoryElement = (UInt8 *)(self + 0x9bc);
-  VCALL(*M<int *>(self + 0x74), 0x17c)(M<int *>(self + 0x74),"ATIFEDSInfo");
+  VCALL(*M<int *>(self + kIOATIR500Accelerator_pciDevice), 0x17c)(M<int *>(self + kIOATIR500Accelerator_pciDevice),"ATIFEDSInfo");
   displayRecord = self;
   do {
     if ((M<int>(displayRecord + 0x9c0) != 0) && (M<int>(displayRecord + 0x9bc) != 0)) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(memoryElement));
+      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(memoryElement));
     }
     bVar1 = iVar4 != 1;
     memoryElement = memoryElement + 0x78;
@@ -90,24 +90,24 @@ void ATIRadeonX1000::stop(IOService *provider) {
     ((IOATIR500Accelerator *)((UInt8 *)self))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0xae0)));
   }
   if ((M<int>(self + 0x8e0) != 0) && (M<int>(self + 0x8dc) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8dc)));
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8dc)));
   }
   if ((M<int>(self + 0x8f0) != 0) && (M<int>(self + 0x8ec) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8ec)));
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8ec)));
   }
   iVar4 = 0;
   memoryElement = (UInt8 *)(self + 300);
   displayRecord = self;
   do {
     if ((M<int>(displayRecord + 0x130) != 0) && (M<int>(displayRecord + 300) != 0)) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(memoryElement));
+      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(memoryElement));
     }
     bVar1 = iVar4 != 1;
     memoryElement = memoryElement + 0x78;
     displayRecord = displayRecord + 0x78;
     iVar4 = iVar4 + 1;
   } while (bVar1);
-  VCALL(M<int>(self), 0x54c)(self,M<int>(self + 0x50) + -1);
+  VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
   if (M<int>(self + 0x8bc) != 0) {
     this->stop_xdct_engine();
   }
@@ -185,7 +185,7 @@ void ATIRadeonX1000::stop(IOService *provider) {
           iVar2 = iVar4 - iVar7;
           iVar7 = iVar7 + 1;
           VCALL(M<int>(self), 0x5a4)
-                    (self,M<UInt32>(self + 0x22c),iVar2 << (GH_page_shift & 0x3f));
+                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar2 << (GH_page_shift & 0x3f));
         } while (iVar4 != iVar7);
       }
     }
@@ -194,13 +194,13 @@ void ATIRadeonX1000::stop(IOService *provider) {
       while (iVar7 = iVar4 + -2, 0 < iVar7) {
         VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_shift & 0x3f));
         VCALL(M<int>(self), 0x5a4)
-                  (self,M<UInt32>(self + 0x22c),iVar7 << (GH_page_shift & 0x3f));
+                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar7 << (GH_page_shift & 0x3f));
         iVar4 = iVar7;
       }
       VCALL(M<int>(self), 0x598)(self,1 << (GH_page_shift & 0x3f));
     }
     VCALL(M<int>(self), 0x5a4)
-              (self,M<UInt32>(self + 0x22c),M<UInt32>(self + 0x228));
+              (self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferGartOffset));
   }
   if (M<int *>(self + 0x9ac) != (int *)0x0) {
     VCALL(*M<int *>(self + 0x9ac), 0x18)(M<int *>(self + 0x9ac));
@@ -209,7 +209,7 @@ void ATIRadeonX1000::stop(IOService *provider) {
   this->shutdownPCIeGART();
   M<UInt32>(self + 3000) = 0;
   if (M<int>(self + 0xc4c) != 0) {
-    GH_IOFreeAligned(M<int>(self + 0xc4c),M<UInt32>(self + 0x830));
+    GH_IOFreeAligned(M<int>(self + 0xc4c),M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB));
     M<UInt32>(self + 0xc4c) = 0;
   }
   if (M<int *>(self + 0x934) != (int *)0x0) {
@@ -223,8 +223,8 @@ void ATIRadeonX1000::stop(IOService *provider) {
     GH_IOFreeAligned(M<UInt32>(self + 0x8b8),0x2000);
     M<UInt32>(self + 0x8b8) = 0;
   }
-  if (M<int>(self + 0xac) != 0) {
-    M<UInt32>(self + 0xac) = 0;
+  if (M<int>(self + kIOATIR500Accelerator_registerDeviceMemory) != 0) {
+    M<UInt32>(self + kIOATIR500Accelerator_registerDeviceMemory) = 0;
   }
   if (M<int *>(self + 0x93c) != (int *)0x0) {
     VCALL(*M<int *>(self + 0x93c), 0x18)(M<int *>(self + 0x93c));

@@ -35,7 +35,7 @@ bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *outBuffer, UI
   SInt32 *backing;
   VendorCommandBufferHeader *header;
   
-  backing = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(self + 0x82c) | 0x10022,size,GH_page_size);
+  backing = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(self + kIOATIR500Accelerator_commandBufferMemoryOptions) | 0x10022,size,GH_page_size);
   M<SInt32 *>(outBufferBytes + 8) = backing;
   if (backing != (SInt32 *)0x0) {
     M<UInt32>(outBufferBytes + 0x18) = size;

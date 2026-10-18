@@ -44,7 +44,7 @@ UInt32 IOATIR500Accelerator::tossSurfacesForVRAM(IOATIR500Surface *excludeSurfac
   UInt8 excludeFlags;
   long excludeLeft;
   
-  surfaceListHead = M<UInt8 *>(self + 0x5c);
+  surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
   if (surfaceListHead != (UInt8 *)0x0) {
     excludeFlags = (0 < excludeCount) << 2 | (excludeCount == 0) << 1;
     surface = surfaceListHead;
@@ -88,7 +88,7 @@ LAB_00003ec0:
           bufferIndex = bufferIndex + 1;
         } while (notLastBuffer);
         if (M<SInt32>(neededBytes + 0x48) != 0) goto LAB_00003f28;
-        surfaceListHead = M<UInt8 *>(self + 0x5c);
+        surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
       }
 LAB_00003f10: ;
     } while (surface != surfaceListHead);

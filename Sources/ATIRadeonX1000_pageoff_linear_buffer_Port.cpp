@@ -66,7 +66,7 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
                              (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                              (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
                              (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar4 == 0)) {
-        VCALL(M<int>(self), 0x54c)(self,M<int>(self + 0x50) + -1);
+        VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
         iVar4 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
         if ((iVar4 == 0) &&
            (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
@@ -89,7 +89,7 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
        (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                            (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                            (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), iVar4 == 0)) {
-      VCALL(M<int>(self), 0x54c)(self,M<int>(self + 0x50) + -1);
+      VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
       iVar4 = VCALL(M<int>(self), 0x5a8)(self,innerBuffer);
       if ((iVar4 == 0) &&
          (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
@@ -108,7 +108,7 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
                              (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                              (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
                              (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar4 == 0)) {
-        VCALL(M<int>(self), 0x54c)(self,M<int>(self + 0x50) + -1);
+        VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
         iVar4 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
         if ((iVar4 == 0) &&
            (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
@@ -132,11 +132,11 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
     gartOffset = M<int>(textureBytes + 4);
     iVar4 = M<int>(textureBytes + 0x50);
   }
-  iVar14 = M<int>(self + 0x758);
+  iVar14 = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
   iVar5 = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(M<int>(textureBytes + 0x14) + 0xc));
   iVar1 = M<int>(self + 0x8a4);
   record = hwInfoBytes + 0xa00;
-  M<int>(self + 0x758) = iVar14 + iVar5;
+  M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = iVar14 + iVar5;
   burstIndex = (unsigned int)M<UInt16>(hwInfoBytes + 0x40);
   iVar5 = M<int>(hwInfoBytes + 0x44);
   iVar14 = M<int>(hwInfoBytes + 0x48);
@@ -170,8 +170,8 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
     wordCount = wordCount + 1;
     M<UInt32>(record + gartOffset) = 0x80000000;
   }
-  M<UInt32>(self + 0x704) = wordCount * 4 + M<int>(self + 0x704);
-  M<int>(self + 0x720) = iVar4 + M<int>(self + 0x720);
+  M<UInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample) = wordCount * 4 + M<int>(self + kIOATIR500Accelerator_commandGLBytesPerSample);
+  M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = iVar4 + M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
   iVar4 = M<int>(textureBytes + 0x14);
   stamp = this->submit_buffer((UInt32 *)record,M<int>(textureBytes + 4) + 0xa00,wordCount);
   M<UInt32>(iVar4 + 0xc) = stamp;

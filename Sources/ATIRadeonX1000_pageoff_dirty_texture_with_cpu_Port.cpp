@@ -74,7 +74,7 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
   baseLevel = (UInt32)M<UInt8>(iVar26 + 0x17);
   lastLevel = (baseLevel + M<UInt8>(iVar26 + 0x35)) - 1;
   faceCount = M<UInt8>(iVar26 + 0x34);
-  VCALL(M<SInt32>(self), 0x558)(self,M<SInt32>(self + 0x50) + -1);
+  VCALL(M<SInt32>(self), 0x558)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
   uVar19 = (UInt32)(UInt8)self[0x990];
   if ((uVar19 == 0) || ((M<UInt32>(self + 0x890) & 1) == 0)) {
 LAB_0001e594:
@@ -168,7 +168,7 @@ LAB_0001e668:
                 destination = hwInfoBytes + M<SInt32>(tileRecord + 2);
               }
               destination = destination + repeat * M<SInt32>(tileRecord + 10);
-              vramSource = M<SInt32>(self + 0xe4) + M<SInt32>(textureBytes + 0x48) + M<SInt32>(tileRecord + 6) +
+              vramSource = M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress) + M<SInt32>(textureBytes + 0x48) + M<SInt32>(tileRecord + 6) +
                        repeat * M<SInt32>(tileRecord + 0xe);
               if ((((SInt32)uVar40 < 1 << iVar33 + 3) || ((SInt32)uVar35 < 1 << local_7c + 3)) ||
                  ((M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) & 4) == 0)) {
@@ -203,7 +203,7 @@ LAB_0001e668:
                 iVar28 = 1;
               }
               iVar28 = iVar28 * (1 << iVar20);
-              uVar32 = vramSource - M<SInt32>(self + 0xe4);
+              uVar32 = vramSource - M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress);
               iVar27 = M<SInt32>(self + 0x860);
               M<UInt32>(iVar27 + surfaceInfoOffset) =
                    (uVar40 >> 3) << 0x18 | (uVar40 >> 3 & 0x1f00) << 8 |
@@ -230,7 +230,7 @@ LAB_0001e668:
                 iVar28 = 0;
                 do {
                   GH_memcpy(destination,vramSource,uVar37 << (uVar22 & 0x3f));
-                  if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
+                  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
                     AVar25 = hwInfoBytes[0x1a];
                   }
                   else {
@@ -287,7 +287,7 @@ LAB_0001e668:
     } while (face < faceCount);
     iVar31 = M<SInt32>(self + 0x860);
   }
-  M<SInt32>(self + 0x720) = bytesCopied + M<SInt32>(self + 0x720);
+  M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = bytesCopied + M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
   storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset), saved0);
   enforceInOrderExecutionIO();
   storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceLowerOffset), saved1);

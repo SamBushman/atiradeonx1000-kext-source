@@ -34,7 +34,7 @@ void *IOATIR500Accelerator::find_surface_for_id(UInt32 surfaceID) {
   SInt32 head;
   SInt32 surface;
   
-  head = M<SInt32>(self + 0x5c);
+  head = M<SInt32>(self + kIOATIR500Accelerator_liveSurfaceListHead);
   surface = head;
   if (head != 0) {
     do {

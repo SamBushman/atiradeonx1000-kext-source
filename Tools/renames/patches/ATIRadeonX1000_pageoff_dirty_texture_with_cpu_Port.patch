@@ -1,5 +1,5 @@
---- a/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-16 19:18:40.220588162 -0700
-+++ b/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-16 19:18:40.222729625 -0700
+--- a/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-17 19:48:41.166152793 -0700
++++ b/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-17 19:48:41.167109757 -0700
 @@ -36,18 +36,9 @@
  
    UInt8 faceCount;
@@ -53,7 +53,7 @@
 @@ -308,14 +288,11 @@
      iVar31 = M<SInt32>(self + 0x860);
    }
-   M<SInt32>(self + 0x720) = bytesCopied + M<SInt32>(self + 0x720);
+   M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = bytesCopied + M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
 -  M<UInt32>(iVar31 + surfaceInfoOffset) =
 -       (UInt32)bVar12 << 0x18 | (UInt32)bVar9 << 0x10 | (UInt32)bVar6 << 8 | (UInt32)bVar3;
 +  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset), saved0);

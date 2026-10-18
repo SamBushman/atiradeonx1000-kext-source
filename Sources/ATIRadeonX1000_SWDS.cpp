@@ -77,7 +77,7 @@ bool ATIRadeonX1000::SWDSShutdown() {
              savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
         if ((M<SInt32>(pAVar9 + 0x9c0) != 0) && (M<SInt32>(pAVar9 + 0x9bc) != 0)) {
-          ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)pGVar8);
+          ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)pGVar8);
         }
       }
       bVar1 = panel != 1;
@@ -270,7 +270,7 @@ bool ATIRadeonX1000::SWDSInit() {
             uVar16 = (uVar14 & 0xfffffff0) + 0x10;
           }
           uVar17 = M<UInt32>(self + 0x84c);
-          uVar15 = M<UInt32>(self + 0x9c);
+          uVar15 = M<UInt32>(self + kIOATIR500Accelerator_vramSize);
           uVar25 = uVar16 * uVar11;
           if (uVar17 < uVar15) {
             if ((panel == 1) ||
@@ -334,12 +334,12 @@ LAB_00024750:
                    uVar12 & 0x800 |
                    uVar12 & 0xf000 |
                    uVar12 & 0xf0000 | uVar12 & 0xf00000 | M<UInt32>(pGVar23 + 0x3c) & 0xff0007ff;
-              iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->reserve((GLKMemoryElement *)pGVar23, uVar16, uVar25)
+              iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)pGVar23, uVar16, uVar25)
               ;
               if (iVar8 != 0) {
                 iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->reserve((GLKMemoryElement *)pGVar20,uVar16,uVar25);
                 if (iVar8 == 0) {
-                  ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)pGVar23);
+                  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)pGVar23);
                 }
                 else {
                   iVar8 = M<SInt32>(self + 0xadc) * 0x1c;

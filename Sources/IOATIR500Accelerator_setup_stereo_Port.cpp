@@ -74,26 +74,26 @@ LAB_000055e0:
     if ((stereoMode & 1) == 0) goto LAB_000055e8;
   }
   else {
-    VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + 0x50) + -1);
+    VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
     result = VCALL(M<SInt32>(self), 0x5cc)(self,panel,stereoMode);
     if (result == 0) goto LAB_000055e0;
     stereoMode = 0;
 LAB_000055e8:
     if (M<SInt32>(self + panel * 0x78 + 0x1ac) != 0) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + panel * 0x78 + 0x1a4)));
+      ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + panel * 0x78 + 0x1a4)));
     }
     M<UInt32>(self + panelOffset + 0x114) = 1;
   }
   M<UInt32>(self + panelOffset + 0x11c) = stereoMode;
 LAB_0000561c:
   if ((oldBufferCount != M<SInt32>(self + panelOffset + 0x114)) &&
-     (surface = M<UInt8 *>(self + 0x5c), surface != (UInt8 *)0x0)) {
+     (surface = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead), surface != (UInt8 *)0x0)) {
     do {
       ((IOATIR500Surface *)(surface))->freeAllSwapBuffers(panel);
       ((IOATIR500Surface *)(surface))->allocMasterSwapBuffer(panel, 0x9000);
       ((IOATIR500Surface *)(surface))->allocAllSlaveSwapBuffers(panel, 0x9000);
       surface = M<UInt8 *>(surface + 0x9c);
-    } while (surface != M<UInt8 *>(self + 0x5c));
+    } while (surface != M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead));
   }
   return result;
 }

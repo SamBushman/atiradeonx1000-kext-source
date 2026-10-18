@@ -43,14 +43,14 @@ void IOATIR500Accelerator::free_gart_wirings() {
   int cutoffNanos;
   
   GH_IOGetTime(&cutoffSeconds);
-  cutoffNanos = cutoffNanos - M<int>(self + 0x94);
+  cutoffNanos = cutoffNanos - M<int>(self + kIOATIR500Accelerator_gartReclaimTimeoutNsec);
   if (cutoffNanos < 0) {
     cutoffNanos = cutoffNanos + 1000000000;
     cutoffSeconds = cutoffSeconds - 1;
   }
-  transfer = M<UInt8 *>(self + 0x6d4);
-  listHead = self + 0x69c;
-  cutoffSeconds = cutoffSeconds - M<int>(self + 0x90);
+  transfer = M<UInt8 *>(self + kIOATIR500Accelerator_gartWiredTransferList_transferNext);
+  listHead = self + kIOATIR500Accelerator_gartWiredTransferList;
+  cutoffSeconds = cutoffSeconds - M<int>(self + kIOATIR500Accelerator_gartReclaimTimeoutSec);
   if (transfer != listHead) {
     blockedOnce = false;
     do {
@@ -102,7 +102,7 @@ void IOATIR500Accelerator::free_gart_wirings() {
       else {
         GH_IOPanic("vendor private transfer buffer found in gart garbage collection list\n");
       }
-      transfer = M<UInt8 *>(self + 0x6d4);
+      transfer = M<UInt8 *>(self + kIOATIR500Accelerator_gartWiredTransferList_transferNext);
     } while (transfer != listHead);
   }
   return;

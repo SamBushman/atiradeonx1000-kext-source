@@ -33,6 +33,6 @@ void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *buffe
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   GH_IOFree(bufferBytes,size);
-  M<UInt32>(self + 0x808) = M<SInt32>(self + 0x808) - size;
+  M<UInt32>(self + kIOATIR500Accelerator_vendorTextureBufferBytes) = M<SInt32>(self + kIOATIR500Accelerator_vendorTextureBufferBytes) - size;
   return;
 }

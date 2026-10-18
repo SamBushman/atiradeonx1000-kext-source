@@ -110,7 +110,7 @@ LAB_0001bea0:
   } while ((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
           (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))));
   M<UInt32>(self + 0xb9c) = 1;
-  if ((M<UInt32>(self + 0x98) & 0x200000) == 0) {
+  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x200000) == 0) {
     return;
   }
   /* #147/#155/#156-class bug (fixed 2026-10-08, same pattern as ATIRadeonX1000_Start.cpp's chip-ID/
@@ -215,7 +215,7 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   M<UInt16>(self + 0x144) = 0;
   M<UInt16>(self + 0x148) = 0;
   M<UInt16>(self + 0x14a) = 0;
-  M<UInt32>(self + 0x150) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_unknown_0x150) = 0;
   M<UInt32>(self + 0x154) = 0xffffffff;
   M<UInt32>(self + 0x158) = 0;
   M<UInt32>(self + 0x15c) = 0;
@@ -227,11 +227,11 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   registers = M<SInt32>(self + 0x860);
   M<UInt32>(self + 0x168) = M<UInt32>(self + 0x168) & 0xff0007ff | 0x111000;
   memorySize = loadWordByteReversed(&M<UInt8>(registers + 0xf8));
-  M<UInt32>(self + 0x9c) = memorySize;
+  M<UInt32>(self + kIOATIR500Accelerator_vramSize) = memorySize;
   if (memorySize == 0) {
-    M<UInt32>(self + 0x9c) = 0x800000;
+    M<UInt32>(self + kIOATIR500Accelerator_vramSize) = 0x800000;
   }
-  vramSize = M<UInt32>(self + 0x9c);
+  vramSize = M<UInt32>(self + kIOATIR500Accelerator_vramSize);
   if (vramSize < 0x8000001) {
     M<UInt32>(self + 0x84c) = vramSize;
   }
@@ -239,25 +239,25 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
     M<UInt32>(self + 0x84c) = 0x8000000;
   }
   usableSize = M<UInt32>(self + 0x84c);
-  M<UInt32>(self + 0xd0) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_activePanelMask) = 0;
   uVar12 = (usableSize >> 1) - 1;
   if (vramSize == usableSize) {
-    poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->init_pool(usableSize);
+    poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->init_pool(usableSize);
     if (poolReady == 0) {
       return 0;
     }
-    ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->init_pool(M<UInt32>(self + 0x9c));
+    ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->init_pool(M<UInt32>(self + kIOATIR500Accelerator_vramSize));
   }
   else {
-    poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->init_pool(vramSize, usableSize, 0);
+    poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->init_pool(vramSize, usableSize, 0);
     if (poolReady == 0) {
       return 0;
     }
-    ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->init_pool(M<UInt32>(self + 0x9c),M<UInt32>(self + 0x84c),0)
+    ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->init_pool(M<UInt32>(self + kIOATIR500Accelerator_vramSize),M<UInt32>(self + 0x84c),0)
     ;
   }
   if (M<UInt32>(self + 0xbb4) != 0) {
-    reserved = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->reserve((GLKMemoryElement *)(self + 0xbc4),
+    reserved = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)(self + 0xbc4),
                         M<UInt32>(self + 0xbb4),M<UInt32>(self + 0xbac));
     if (reserved == 0) {
       return 0;
@@ -275,15 +275,15 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   }
   uVar4 = M<UInt32>(self + 0xb08);
   uVar14 = M<UInt32>(self + 0xb0c);
-  modeResult = VCALL(*M<SInt32 *>(self + 0xd4), 0x5f0)
-                     (M<SInt32 *>(self + 0xd4),&L.f4,&L.f8);
+  modeResult = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer0), 0x5f0)
+                     (M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer0),&L.f4,&L.f8);
   if (modeResult != 0) {
     GH_IOLog("ERROR: VendorAccelerator::set_display_mode_and_vram() call to fFramebuffers[0].framebuffer->getCurrentDisplayMode() result:%lX\n"
                  ,modeResult);
     GH_IOSleep(10);
   }
-  pixelResult = VCALL(*M<SInt32 *>(self + 0xd4), 0x5ec)
-                     (M<SInt32 *>(self + 0xd4),L.f4,L.f8,0,L.pix);
+  pixelResult = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer0), 0x5ec)
+                     (M<SInt32 *>(self + kIOATIR500Accelerator_framebuffer0),L.f4,L.f8,0,L.pix);
   if (pixelResult != 0) {
     GH_IOLog("ERROR: VendorAccelerator::set_display_mode_and_vram() call to fFramebuffers[0].framebuffer->getPixelInformation() result:%lX\n"
                  ,pixelResult);
@@ -390,11 +390,11 @@ LAB_0001c54c:
     }
     self[0x167] = SUB41m(pixelFormat,0);
     self[0x166] = AVar6;
-    M<UInt32>(self + 0xd0) = 1;
+    M<UInt32>(self + kIOATIR500Accelerator_activePanelMask) = 1;
     uVar14 = 0xff;
     self[0x165] = ('\x01' - (char)((SInt32)-(bytesPerPixel ^ 2) >> 0x1f));
   }
-  if (((M<UInt32>(self + 0x98) & 0x10000) == 0) || (M<UInt32>(self + 0xcc) < 2)) {
+  if (((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x10000) == 0) || (M<UInt32>(self + kIOATIR500Accelerator_framebufferCount) < 2)) {
     uVar16 = 0;
     uVar14 = 0x200000;
     goto LAB_0001c9b0;
@@ -410,7 +410,7 @@ LAB_0001c54c:
   }
   uVar16 = M<UInt32>(self + 0xb20);
   uVar13 = M<UInt32>(self + 0xb24);
-  if (((((bVar1 & 1) == 0) || (M<UInt32>(self + 0x9c) <= uVar16)) ||
+  if (((((bVar1 & 1) == 0) || (M<UInt32>(self + kIOATIR500Accelerator_vramSize) <= uVar16)) ||
       (queryResult = VCALL(*M<SInt32 *>(self + 0xf4), 0x5f0)
                           (M<SInt32 *>(self + 0xf4),&L.f8,&L.f4), queryResult != 0)) ||
      (queryResult = VCALL(*M<SInt32 *>(self + 0xf4), 0x5ec)
@@ -512,7 +512,7 @@ LAB_0001c7d0:
   }
   self[0x1df] = AVar6;
   self[0x1de] = AVar7;
-  M<UInt32>(self + 0xd0) = M<UInt32>(self + 0xd0) | 2;
+  M<UInt32>(self + kIOATIR500Accelerator_activePanelMask) = M<UInt32>(self + kIOATIR500Accelerator_activePanelMask) | 2;
   self[0x1dd] = ('\x01' - (char)((SInt32)-(uVar8 ^ 2) >> 0x1f));
   if ((uVar16 < uVar4) || (uVar5 + uVar4 <= uVar16)) {
     if ((uVar16 <= uVar4) && (uVar4 < uVar16 + uVar15)) {
@@ -523,7 +523,7 @@ LAB_0001c7d0:
       M<UInt32>(self + 0x894) = 1;
     }
     if (uVar15 != 0) {
-      reserved = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->reserve((GLKMemoryElement *)(self + 0x1a4),uVar16
+      reserved = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)(self + 0x1a4),uVar16
                           ,uVar15);
       if (reserved == 0) {
         return 0;
@@ -532,7 +532,7 @@ LAB_0001c7d0:
       ;
       uVar13 = uVar12 & uVar16;
       if (uVar13 != 0) {
-        reserved = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->reserve((GLKMemoryElement *)(self + 0x8dc),
+        reserved = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)(self + 0x8dc),
                             uVar16 - uVar13,uVar13);
         if (reserved == 0) {
           return 0;
@@ -554,7 +554,7 @@ LAB_0001c7d0:
   }
 LAB_0001c9b0:
   if (uVar5 != 0) {
-    reserved = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->reserve((GLKMemoryElement *)(self + 300),uVar4,
+    reserved = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)(self + 300),uVar4,
                         uVar5);
     if (reserved == 0) {
       return 0;
@@ -562,7 +562,7 @@ LAB_0001c9b0:
     ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->reserve((GLKMemoryElement *)(self + 0x940),uVar4,uVar5);
     uVar12 = uVar12 & uVar4;
     if (uVar12 != 0) {
-      reserved = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->reserve((GLKMemoryElement *)(self + 0x8ec),
+      reserved = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->reserve((GLKMemoryElement *)(self + 0x8ec),
                           uVar4 - uVar12,uVar12);
       if (reserved == 0) {
         return 0;
@@ -721,8 +721,8 @@ bool ATIRadeonX1000::start_promo4_engine(UInt32 mode) {
     ringPointerBase = M<SInt32>(self + 0x90c);
     storeWordByteReversed(&M<UInt8>(ringPointerBase + M<SInt32>(self + 0x910)), ringWritePointer);
     enforceInOrderExecutionIO();
-    if ((M<UInt32>(self + 0x98) & 0x80000) == 0) {
-      uVar7 = M<SInt32>(self + 0x8a4) + M<SInt32>(self + 0x228) + (ringPointerBase - M<SInt32>(self + 0x238));
+    if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80000) == 0) {
+      uVar7 = M<SInt32>(self + 0x8a4) + M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferGartOffset) + (ringPointerBase - M<SInt32>(self + kIOATIR500Accelerator_scratchCommandBufferHeader));
       M<UInt32>(mmioBase + 0x70c) =
            (uVar7 & 0xfffffffc) << 0x18 | (uVar7 & 0xff00) << 8 | uVar7 >> 8 & 0xff00 |
            uVar7 >> 0x18;
@@ -742,7 +742,7 @@ bool ATIRadeonX1000::start_promo4_engine(UInt32 mode) {
       mmioBase = M<SInt32>(self + 0x860);
     }
     if (spinCount != 0xf4241) {
-      if ((M<UInt32>(self + 0x98) & 0x80000) == 0) {
+      if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80000) == 0) {
         ringControl = ringControl & 0xf7ffffff;
       }
       storeWordByteReversed(&M<UInt8>(M<SInt32>(self + 0x860) + 0x704), ringControl);
@@ -789,7 +789,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x744) = 0;
   enforceInOrderExecutionIO();
-  chipFlags = M<UInt32>(self + 0x98);
+  chipFlags = M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags);
   M<UInt32>(self + 0x8fc) = 0;
   if ((chipFlags & 0x400000) == 0) {
     M<UInt32>(mmioBase + 0x70) = 0x4007f00;
@@ -880,7 +880,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x30) = 0x16000000;
   enforceInOrderExecutionIO();
-  uVar7 = uVar8 + M<SInt32>(self + 0x830) * 0x400;
+  uVar7 = uVar8 + M<SInt32>(self + kIOATIR500Accelerator_gartSizeKB) * 0x400;
   M<UInt32>(mmioBase + 0x34) = (uVar7 & 0xff00) << 8 | uVar7 >> 8 & 0xff00 | uVar7 >> 0x18;
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x30) = 0x15000000;
@@ -962,7 +962,7 @@ bool ATIRadeonX1000::initialize_hardware() {
   SInt32 ring;
   UInt32 uVar9;
   
-  if ((M<UInt32>(self + 0x98) & 0xf00000) != 0) {
+  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0xf00000) != 0) {
     setupR520Pipes();
   }
   setup_R500_internal_space();
@@ -977,7 +977,7 @@ bool ATIRadeonX1000::initialize_hardware() {
     }
     else {
       registers = M<SInt32>(self + 0x860);
-      uVar6 = M<SInt32>(self + 0x50) - 1;
+      uVar6 = M<SInt32>(self + kIOATIR500Accelerator_submitStamp) - 1;
       M<UInt32>(registers + 0x15e0) =
            uVar6 * 0x1000000 | (uVar6 & 0xff00) << 8 | uVar6 >> 8 & 0xff00 | uVar6 >> 0x18;
       enforceInOrderExecutionIO();
@@ -991,7 +991,7 @@ bool ATIRadeonX1000::initialize_hardware() {
       enforceInOrderExecutionIO();
       M<UInt32>(registers + 0x2284) = 0;
       enforceInOrderExecutionIO();
-      uVar6 = M<UInt32>(self + 0x98);
+      uVar6 = M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags);
       if ((uVar6 & 0x200000) == 0) {
         if ((uVar6 & 0x400000) == 0) {
           M<UInt32>(registers + 0x2080) = 0x56083000;

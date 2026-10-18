@@ -48,29 +48,29 @@ UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *surface, V
   long excludeLeft;
   UInt32 uVar15;
   
-  if (((M<SInt32>(self + 0x21c) == 0) ||
+  if (((M<SInt32>(self + kIOATIR500Accelerator_volatileSurfaceCount) == 0) ||
       (iVar5 = VCALL(M<SInt32>(self), 0x528)(self,neededBytes), iVar5 != 0)) ||
      (iVar5 = this->tossSurfacesForVRAM((IOATIR500Surface *)(surfaceBytes),(VendorTextureBuffer **)(excludeList),excludeCount,(VendorTextureBuffer *)(neededBytes),true), iVar5 == 0)) {
     secondPass = false;
 LAB_00004450:
     iVar5 = VCALL(M<SInt32>(self), 0x528)(self,neededBytes);
     if (iVar5 == 0) {
-      M<SInt32>(self + 0x7cc) = M<SInt32>(self + 0x7cc) + 1;
+      M<SInt32>(self + kIOATIR500Accelerator_textureVRAMAllocFailCount) = M<SInt32>(self + kIOATIR500Accelerator_textureVRAMAllocFailCount) + 1;
       if (surfaceBytes == (UInt8 *)0x0) {
-        node = M<UInt8 *>(self + 0x604);
+        node = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next);
       }
       else {
-        node = M<UInt8 *>(self + 0x604);
-        pIVar10 = self + 0x5dc;
+        node = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next);
+        pIVar10 = self + kIOATIR500Accelerator_vramBufferList;
         if ((node == pIVar10) ||
            (M<SInt32>(surfaceBytes + 0x84) - M<SInt32>(M<SInt32>(node + 0x14) + 8) < 1)) {
-          pIVar11 = M<UInt8 *>(self + 0x600);
+          pIVar11 = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_prev);
           bVar12 = !secondPass << 1;
           node = (UInt8 *)0x0;
           bVar3 = pIVar11 == pIVar10;
 LAB_00004294:
           if ((!bVar3) && (bVar13 = (pIVar11 == node) << 1, pIVar11 != node)) {
-            M<SInt32>(self + 0x7e4) = M<SInt32>(self + 0x7e4) + 1;
+            M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExaminedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExaminedCount) + 1;
             if (excludeCount < 1) goto code_r0x00004264;
             if (pIVar11 != (UInt8 *)*excludeList) {
               iVar5 = 0;
@@ -81,20 +81,20 @@ LAB_00004294:
                 if (excludeLeft == 0) goto LAB_000042b8;
               } while ((UInt8 *)excludeList[iVar5] != pIVar11);
             }
-            M<SInt32>(self + 0x7e8) = M<SInt32>(self + 0x7e8) + 1;
+            M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExcludedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExcludedCount) + 1;
             goto LAB_0000428c;
           }
           goto LAB_00004448;
         }
       }
-      pIVar11 = self + 0x5dc;
+      pIVar11 = self + kIOATIR500Accelerator_vramBufferList;
       bVar12 = !secondPass << 1;
       pIVar10 = (UInt8 *)0x0;
 LAB_00004040:
       do {
         if ((node == pIVar11) || (bVar13 = (pIVar10 == node) << 1, pIVar10 == node))
         goto LAB_00004448;
-        M<SInt32>(self + 2000) = M<SInt32>(self + 2000) + 1;
+        M<SInt32>(self + kIOATIR500Accelerator_vramScanExaminedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanExaminedCount) + 1;
         if (excludeCount < 1) {
           if (excludeCount == 0) {
 LAB_000040b8:
@@ -121,7 +121,7 @@ LAB_000040b8:
                   iVar9 = iVar9 + 2;
                 } while ((*puVar2 & ~*puVar1) == 0);
               }
-              M<SInt32>(self + 0x7d8) = M<SInt32>(self + 0x7d8) + 1;
+              M<SInt32>(self + kIOATIR500Accelerator_vramScanInUseCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanInUseCount) + 1;
             }
             else {
               iVar5 = M<SInt32>(node + 0x14);
@@ -144,11 +144,11 @@ LAB_00004124:
                 M<UInt8 *>(node + 0x28) = node;
                 M<SInt32>(iVar5 + 0x24) = iVar9;
                 M<UInt8 *>(node + 0x24) = node;
-                M<SInt32>(self + 0x7e0) = M<SInt32>(self + 0x7e0) + 1;
+                M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) + 1;
                 if (pIVar11 != node) goto LAB_00004430;
                 goto LAB_00004448;
               }
-              M<SInt32>(self + 0x7dc) = M<SInt32>(self + 0x7dc) + 1;
+              M<SInt32>(self + kIOATIR500Accelerator_vramScanBusyCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanBusyCount) + 1;
             }
             if (pIVar10 == (UInt8 *)0x0) {
               pIVar10 = node;
@@ -159,8 +159,8 @@ LAB_00004124:
               iVar5 = M<SInt32>(node + 0x28);
               M<UInt8 *>(node + 0x28) = pIVar11;
               M<SInt32>(iVar5 + 0x24) = iVar9;
-              M<UInt32>(node + 0x24) = M<UInt32>(self + 0x600);
-              M<UInt8 *>(self + 0x600) = node;
+              M<UInt32>(node + 0x24) = M<UInt32>(self + kIOATIR500Accelerator_vramBufferList_prev);
+              M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_prev) = node;
               M<UInt8 *>(M<SInt32>(node + 0x24) + 0x28) = node;
             }
             node = M<UInt8 *>(node + 0x28);
@@ -176,7 +176,7 @@ LAB_00004124:
             if (excludeLeft == 0) goto LAB_000040b8;
           } while ((UInt8 *)excludeList[iVar5] != node);
         }
-        M<SInt32>(self + 0x7d4) = M<SInt32>(self + 0x7d4) + 1;
+        M<SInt32>(self + kIOATIR500Accelerator_vramScanExcludedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanExcludedCount) + 1;
         node = M<UInt8 *>(node + 0x28);
       } while( true );
     }
@@ -212,7 +212,7 @@ LAB_000042b8:
             iVar9 = iVar9 + 2;
           } while ((*puVar2 & ~*puVar1) == 0);
         }
-        M<SInt32>(self + 0x7ec) = M<SInt32>(self + 0x7ec) + 1;
+        M<SInt32>(self + kIOATIR500Accelerator_vramScanTailInUseCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailInUseCount) + 1;
         goto joined_r0x00004360;
       }
 LAB_00004314:
@@ -220,7 +220,7 @@ LAB_00004314:
     }
     iVar5 = VCALL(M<SInt32>(self), 0x554)(self,M<UInt32>(iVar5 + 0xc));
     if (iVar5 == 0) {
-      M<SInt32>(self + 0x7f0) = M<SInt32>(self + 0x7f0) + 1;
+      M<SInt32>(self + kIOATIR500Accelerator_vramScanTailBusyCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailBusyCount) + 1;
 joined_r0x00004360:
       if (node == (UInt8 *)0x0) {
         node = pIVar11;
@@ -229,8 +229,8 @@ joined_r0x00004360:
         iVar9 = M<SInt32>(pIVar11 + 0x24);
         M<UInt32>(iVar9 + 0x28) = M<UInt32>(pIVar11 + 0x28);
         iVar5 = M<SInt32>(pIVar11 + 0x28);
-        M<UInt32>(pIVar11 + 0x28) = M<UInt32>(self + 0x604);
-        M<UInt8 *>(self + 0x604) = pIVar11;
+        M<UInt32>(pIVar11 + 0x28) = M<UInt32>(self + kIOATIR500Accelerator_vramBufferList_next);
+        M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next) = pIVar11;
         M<SInt32>(iVar5 + 0x24) = iVar9;
         M<UInt8 *>(pIVar11 + 0x24) = pIVar10;
         M<UInt8 *>(M<SInt32>(pIVar11 + 0x28) + 0x24) = pIVar11;
@@ -257,7 +257,7 @@ LAB_0000428c:
   M<UInt8 *>(pIVar11 + 0x28) = pIVar11;
   M<SInt32>(iVar5 + 0x24) = iVar9;
   M<UInt8 *>(pIVar11 + 0x24) = pIVar11;
-  M<SInt32>(self + 0x7f4) = M<SInt32>(self + 0x7f4) + 1;
+  M<SInt32>(self + kIOATIR500Accelerator_vramScanTailEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailEvictedCount) + 1;
   if (pIVar10 != pIVar11) goto LAB_00004430;
   goto LAB_00004448;
 LAB_00004430:

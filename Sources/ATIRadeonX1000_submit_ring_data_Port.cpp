@@ -61,7 +61,7 @@ void ATIRadeonX1000::submit_ring_data() {
       } while ((nextIndex & 7) != 0);
       M<UInt32>(self + 0x914) = writeIndex;
     }
-    if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
+    if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
       ppcSync();
       instructionSynchronize();
     }

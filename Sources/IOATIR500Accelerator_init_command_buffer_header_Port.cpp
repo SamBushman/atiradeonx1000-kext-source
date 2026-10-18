@@ -43,6 +43,6 @@ void IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader 
   } while (wordsLeft != 0);
   VCALL(M<SInt32>(self), 0x564)(self,headerBytes + 0x20);
   M<UInt32>(headerBytes + 0x10) = size - 0x20 >> 2;
-  M<SInt32>(headerBytes + 0x18) = M<SInt32>(self + 0x50) + -1;
+  M<SInt32>(headerBytes + 0x18) = M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1;
   return;
 }

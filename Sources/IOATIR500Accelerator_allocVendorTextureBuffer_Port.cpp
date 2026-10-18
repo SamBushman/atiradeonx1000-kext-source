@@ -34,7 +34,7 @@ VendorTextureBuffer *IOATIR500Accelerator::allocVendorTextureBuffer(UInt32 size)
   UInt32 *texture;
   
   texture = (UInt32 *)GH_IOMalloc(size);
-  M<UInt32>(self + 0x808) = size + M<SInt32>(self + 0x808);
+  M<UInt32>(self + kIOATIR500Accelerator_vendorTextureBufferBytes) = size + M<SInt32>(self + kIOATIR500Accelerator_vendorTextureBufferBytes);
   M<UInt16>(texture + 3) = 4;
   *texture = 0;
   texture[1] = 0;

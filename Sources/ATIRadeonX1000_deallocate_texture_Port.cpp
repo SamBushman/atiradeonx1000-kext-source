@@ -94,6 +94,6 @@ LAB_0001a700:
     M<UInt32>(textureBytes + 0x74) = 0;
     M<UInt16>(textureBytes + 0x78) = 0;
   }
-  ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)));
+  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)));
   return;
 }

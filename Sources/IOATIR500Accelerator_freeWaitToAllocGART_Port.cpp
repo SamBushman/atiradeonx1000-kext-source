@@ -49,14 +49,14 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
   UInt8 *surface;
   UInt8 *dataBuffer;
   
-  if (M<UInt8 *>(self + 0x664) != self + 0x63c) {
+  if (M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next) != self + kIOATIR500Accelerator_orphanTextureList) {
     this->freeOrphanTexture(aggressive);
     iVar3 = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);
     if (iVar3 != 0) {
       return 1;
     }
   }
-  for (context2D = M<UInt8 *>(self + 100); context2D != (UInt8 *)0x0;
+  for (context2D = M<UInt8 *>(self + kIOATIR500Accelerator_live2DContextListHead); context2D != (UInt8 *)0x0;
       context2D = M<UInt8 *>(context2D + 0x80)) {
     if (context2D != exclude2DBytes) {
       shared = M<UInt8 *>(context2D + 0x88);
@@ -70,7 +70,7 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
       }
     }
   }
-  for (contextDVD = M<UInt8 *>(self + 0x68); contextDVD != (UInt8 *)0x0;
+  for (contextDVD = M<UInt8 *>(self + kIOATIR500Accelerator_liveDVDContextListHead); contextDVD != (UInt8 *)0x0;
       contextDVD = M<UInt8 *>(contextDVD + 0x80)) {
     if (contextDVD != excludeDVDBytes) {
       shared = M<UInt8 *>(contextDVD + 0x84);
@@ -84,7 +84,7 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
       }
     }
   }
-  for (contextGL = M<UInt8 *>(self + 0x60); contextGL != (UInt8 *)0x0;
+  for (contextGL = M<UInt8 *>(self + kIOATIR500Accelerator_liveGLContextListHead); contextGL != (UInt8 *)0x0;
       contextGL = M<UInt8 *>(contextGL + 0x80)) {
     if (contextGL != excludeGLBytes) {
       if ((excludeSharedBytes != M<UInt8 *>(contextGL + 0x88)) &&
@@ -97,7 +97,7 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
       }
     }
   }
-  surfaceListHead = M<UInt8 *>(self + 0x5c);
+  surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
   surface = surfaceListHead;
   if (surfaceListHead != (UInt8 *)0x0) {
     do {
@@ -107,15 +107,15 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
         if (iVar3 != 0) {
           return 1;
         }
-        surfaceListHead = M<UInt8 *>(self + 0x5c);
+        surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
       }
     } while (surface != surfaceListHead);
   }
   if ((excludeSharedBytes == (UInt8 *)0x0) ||
      (iVar3 = ((IOATIR500Shared *)(excludeSharedBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)) {
     if (((UInt32)aggressive) == 0) {
-      ringEntryCount = M<UInt16>(self + 0x5c6);
-      ringIndex = (UInt32)M<UInt16>(self + 0x5c4);
+      ringEntryCount = M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Count);
+      ringIndex = (UInt32)M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Head);
       if (ringEntryCount != 0) {
         visited = 0;
         do {
@@ -126,10 +126,10 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
             return 1;
           }
           visited = visited + 1;
-        } while (visited < M<UInt16>(self + 0x5c6));
+        } while (visited < M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Count));
       }
-      ringEntryCount = M<UInt16>(self + 0x402);
-      ringIndex = (UInt32)M<UInt16>(self + 0x400);
+      ringEntryCount = M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing0Count);
+      ringIndex = (UInt32)M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing0Head);
       if (ringEntryCount != 0) {
         visited = 0;
         do {
@@ -140,12 +140,12 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
             return 1;
           }
           visited = visited + 1;
-        } while (visited < M<UInt16>(self + 0x402));
+        } while (visited < M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing0Count));
       }
     }
     else {
-      ringEntryCount = M<UInt16>(self + 0x5c6);
-      ringIndex = (UInt32)M<UInt16>(self + 0x5c4);
+      ringEntryCount = M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Count);
+      ringIndex = (UInt32)M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Head);
       if (ringEntryCount != 0) {
         visited = 0;
         do {
@@ -158,10 +158,10 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
           }
           visited = visited + 1;
           ringIndex = ringIndex + 1;
-        } while (visited < M<UInt16>(self + 0x5c6));
+        } while (visited < M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Count));
       }
-      ringEntryCount = M<UInt16>(self + 0x402);
-      ringIndex = (UInt32)M<UInt16>(self + 0x400);
+      ringEntryCount = M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing0Count);
+      ringIndex = (UInt32)M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing0Head);
       if (ringEntryCount != 0) {
         visited = 0;
         do {
@@ -174,10 +174,10 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
           }
           visited = visited + 1;
           ringIndex = ringIndex + 1;
-        } while (visited < M<UInt16>(self + 0x402));
+        } while (visited < M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing0Count));
       }
     }
-    for (dataBuffer = M<UInt8 *>(self + 0x5cc); dataBuffer != (UInt8 *)0x0;
+    for (dataBuffer = M<UInt8 *>(self + kIOATIR500Accelerator_dataBufferCacheHead); dataBuffer != (UInt8 *)0x0;
         dataBuffer = M<UInt8 *>(dataBuffer + 0x3c)) {
       iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)(dataBuffer),(VendorTransferBuffer *)(neededBytes),M<UInt32>(dataBuffer + 0x5c),aggressive);
       if (iVar3 != 0) {

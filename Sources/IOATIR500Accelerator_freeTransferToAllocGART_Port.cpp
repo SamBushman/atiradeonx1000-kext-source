@@ -53,9 +53,9 @@ LAB_00003650:
        * passes (self, stamp) to waitForTimeStamp here. Our port dropped stamp. Same benign-
        * in-practice dropped-argument defect class as the sibling fix in freeOrphanTexture_Port.cpp
        * (self+0x790 is a cosmetic stat only). */
-      waitStat = M<SInt32>(self + 0x790);
+      waitStat = M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime);
       iVar1 = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
-      M<SInt32>(self + 0x790) = waitStat + iVar1;
+      M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime) = waitStat + iVar1;
     }
     VCALL(M<SInt32>(self), 0x5ac)(self,candidateBytes);
     result = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);

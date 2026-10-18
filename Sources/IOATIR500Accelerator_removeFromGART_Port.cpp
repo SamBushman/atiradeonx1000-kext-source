@@ -40,22 +40,22 @@ void IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor*descriptor, UInt32 
     endEntry = VCALL(M<int>(descriptor), 0x128)(descriptor);
     endEntry = entry + (endEntry >> (GH_page_shift & 0x3f));
     iVar3 = endEntry - entry;
-    M<int>(self + 0x718) = (iVar3 << (GH_page_shift & 0x3f)) + M<int>(self + 0x718);
-    M<int>(self + 0xa0) = M<int>(self + 0xa0) - (iVar3 << (GH_page_shift & 0x3f));
+    M<int>(self + kIOATIR500Accelerator_gartMapOutBytesPerSample) = (iVar3 << (GH_page_shift & 0x3f)) + M<int>(self + kIOATIR500Accelerator_gartMapOutBytesPerSample);
+    M<int>(self + kIOATIR500Accelerator_gartUsedBytes) = M<int>(self + kIOATIR500Accelerator_gartUsedBytes) - (iVar3 << (GH_page_shift & 0x3f));
     if (entry < endEntry) {
       tableOffset = entry << 2;
       do {
-        M<UInt32>(M<int>(self + 0x83c) + tableOffset) = M<UInt32>(self + 0x844);
+        M<UInt32>(M<int>(self + kIOATIR500Accelerator_gartTable) + tableOffset) = M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry);
         tableOffset = tableOffset + 4;
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
     }
-    if (((M<unsigned int>(self + 0x98) & 2) != 0) &&
+    if (((M<unsigned int>(self + kIOATIR500Accelerator_capabilityFlags) & 2) != 0) &&
        (entry = gartOffset >> (GH_page_shift & 0x3f), entry < endEntry)) {
       do {
         iVar3 = entry << (GH_page_shift & 0x3f);
         entry = entry + 1;
-        VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + 0x22c),iVar3,0);
+        VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + kIOATIR500Accelerator_scratchCommandBufferMemory),iVar3,0);
       } while (entry != endEntry);
     }
     entry = gartOffset >> (GH_page_shift & 0x3f);

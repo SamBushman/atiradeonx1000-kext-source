@@ -47,12 +47,12 @@ void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *descriptor, UInt32 g
     uVar1 = VCALL(M<SInt32>(descriptorBytes), 0x128)(descriptorBytes);
     uVar1 = uVar9 + (uVar1 >> (GH_page_shift & 0x3f));
     iVar6 = uVar1 - uVar9;
-    M<SInt32>(self + 0xa0) = M<SInt32>(self + 0xa0) - (iVar6 << (GH_page_shift & 0x3f));
+    M<SInt32>(self + kIOATIR500Accelerator_gartUsedBytes) = M<SInt32>(self + kIOATIR500Accelerator_gartUsedBytes) - (iVar6 << (GH_page_shift & 0x3f));
     if (uVar9 < uVar1) {
       iVar2 = M<SInt32>(self + 3000);
       entryOffset = uVar9 * 4;
       pageTable = M<SInt32>(self + 0xc4c);
-      uVar8 = M<UInt32>(self + 0x844);
+      uVar8 = M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry);
       pagesCleared = 0;
       secondEntry = (UInt32 *)(iVar2 + entryOffset);
       do {
@@ -106,13 +106,13 @@ bool ATIRadeonX1000::reserveInGART(UInt32 gartOffset) {
   if (iVar2 != 0) {
     iVar2 = (gartOffset >> (GH_page_shift & 0x3f)) * 4;
     entry = (UInt32 *)(iVar2 + M<SInt32>(self + 0xc4c));
-    if ((loadWordByteReversed(entry)) != M<UInt32>(self + 0x844))
+    if ((loadWordByteReversed(entry)) != M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry))
     {
       BASE_clearInGART(gartOffset >> (GH_page_shift & 0x3f));
       GH_IOSleep(10);
       return 0;
     }
-    uVar1 = M<UInt32>(self + 0x848);
+    uVar1 = M<UInt32>(self + kIOATIR500Accelerator_gartReservedEntry);
     *entry = uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
     if (M<SInt32>(self + 3000) != 0) {
       entry = (UInt32 *)(iVar2 + M<SInt32>(self + 3000));
@@ -145,7 +145,7 @@ void ATIRadeonX1000::clearInGART(UInt32 gartOffset) {
   SInt32 iVar3;
   
   BASE_clearInGART(gartOffset);
-  uVar2 = M<UInt32>(self + 0x844);
+  uVar2 = M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry);
   iVar3 = (gartOffset >> (GH_page_shift & 0x3f)) * 4;
   M<UInt32>(iVar3 + M<SInt32>(self + 0xc4c)) =
        uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
@@ -184,15 +184,15 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
   UInt32 emptyEntry;
   
   result = 0;
-  if (((M<UInt32>(self + 0x98) & 0xf00000) != 0) && (result = 1, M<SInt32>(self + 3000) == 0)) {
-    iVar3 = VCALL(*M<SInt32 *>(self + 0x74), 0x568)(M<SInt32 *>(self + 0x74),0x10,0);
+  if (((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0xf00000) != 0) && (result = 1, M<SInt32>(self + 3000) == 0)) {
+    iVar3 = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x568)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x10,0);
     if (iVar3 == 0) {
       GH_kprintf(
                   "ATI_PCIe:startupPCIeGART() (findPCICapability(kIOPCIPCIExpressCapability) failed, IGNORING...)\n"
                   );
       GH_IOSleep(10);
     }
-    uVar4 = M<UInt32>(self + 0x830);
+    uVar4 = M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB);
     if (uVar4 != 0) {
       iVar3 = M<SInt32>(self + 0x860);
       uVar1 = loadWordByteReversed(&M<UInt8>(iVar3 + 0xf8));
@@ -202,8 +202,8 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
       M<UInt32>(self + 0xbac) = uVar4 + 0x10000;
       M<UInt32>(self + 0xbb0) = uVar1 - uVar4;
       M<UInt32>(self + 0xbb4) = uVar1 - (uVar4 + 0x10000);
-      if (M<SInt32>(self + 0xe4) != 0) {
-        M<UInt32>(self + 3000) = (uVar1 - uVar4) + M<SInt32>(self + 0xe4);
+      if (M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress) != 0) {
+        M<UInt32>(self + 3000) = (uVar1 - uVar4) + M<SInt32>(self + kIOATIR500Accelerator_vramMappedAddress);
       }
       if (M<SInt32>(self + 0xc4c) == 0) {
         primaryEntry = (UInt32 *)GH_IOMallocAligned(uVar4,GH_page_size);
@@ -217,10 +217,10 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
         }
         secondTable = M<UInt32 *>(self + 3000);
         if (secondTable == (UInt32 *)0x0) {
-          uVar4 = M<UInt32>(self + 0x830);
+          uVar4 = M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB);
           uVar1 = uVar4 >> 2;
           if (uVar1 != 0) {
-            emptyEntry = M<UInt32>(self + 0x844);
+            emptyEntry = M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry);
             do {
               *primaryEntry = emptyEntry << 0x18 | (emptyEntry & 0xff00) << 8 | emptyEntry >> 8 & 0xff00 | emptyEntry >> 0x18;
               primaryEntry = primaryEntry + 1;
@@ -229,11 +229,11 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
           }
         }
         else {
-          uVar4 = M<UInt32>(self + 0x830);
+          uVar4 = M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB);
           iVar3 = 0;
           uVar1 = uVar4 >> 2;
           if (uVar1 != 0) {
-            emptyEntry = M<UInt32>(self + 0x844);
+            emptyEntry = M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry);
             iVar3 = 0;
             secondEntry = secondTable;
             do {
@@ -309,7 +309,7 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
           self[0xbff] = 0x6;
           self[0xbfe] = 0xb;
           M<SInt16>(self + 0xbe2) = (SInt16)(uVar4 / (uVar1 << 2));
-          if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
+          if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
             M<UInt32>(self + 0xbc0) = 0;
           }
           else {
@@ -367,7 +367,7 @@ void ATIRadeonX1000::shutdownPCIeGART() {
        (savedValue & 0xfffffffe) << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
   enforceInOrderExecutionIO();
   if ((M<SInt32>(self + 0xbc8) != 0) && (M<SInt32>(self + 0xbc4) != 0)) {
-    ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(self + 0xbc4));
+    ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(self + 0xbc4));
   }
   M<UInt32>(self + 0xbb0) = 0;
   M<UInt32>(self + 0xbb4) = 0;
@@ -387,12 +387,12 @@ void ATIRadeonX1000::pageOnPCIeGART() {
   if (secondTable != 0) {
     iVar1 = 0;
     uVar4 = 0;
-    if (M<UInt32>(self + 0x830) >> 2 != 0) {
+    if (M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB) >> 2 != 0) {
       while( true ) {
         M<UInt32>(secondTable + uVar4 * 4) = M<UInt32>(M<SInt32>(self + 0xc4c) + uVar4 * 4);
         enforceInOrderExecutionIO();
         uVar4 = uVar4 + 1;
-        if (M<UInt32>(self + 0x830) >> 2 <= uVar4) break;
+        if (M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB) >> 2 <= uVar4) break;
         secondTable = M<SInt32>(self + 3000);
       }
       secondTable = M<SInt32>(self + 3000);
@@ -441,7 +441,7 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *descriptor, UInt32 *o
   if ((descriptorBytes != 0) && (outOffsetBytes != 0)) {
     pageCount = VCALL(M<UInt32>(descriptorBytes), 0x128)(descriptorBytes);
     uVar10 = GH_page_shift;
-    uVar1 = M<UInt32>(self + 0x830);
+    uVar1 = M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB);
     M<UInt32>(outOffsetBytes) = 0;
     uVar1 = uVar1 >> 2;
     pageCount = pageCount >> (uVar10 & 0x3f);
@@ -501,8 +501,8 @@ LAB_0001de4c:
                  loadWordByteReversed(&M<UInt8>(iVar4 + -4));
           }
           VCALL(M<SInt32>(self), 0x59c)(self,pageIndex - pageCount,pageCount);
-          M<UInt32>(self + 0xa0) =
-               (pageCount << (GH_page_shift & 0x3f)) + M<SInt32>(self + 0xa0);
+          M<UInt32>(self + kIOATIR500Accelerator_gartUsedBytes) =
+               (pageCount << (GH_page_shift & 0x3f)) + M<SInt32>(self + kIOATIR500Accelerator_gartUsedBytes);
           return 1;
         }
       }
@@ -513,7 +513,7 @@ LAB_0001de4c:
       pageIndex = 0;
       do {
         uVar10 = uVar10 + 1;
-        if ((loadWordByteReversed(entryScan)) != M<UInt32>(self + 0x844)) {
+        if ((loadWordByteReversed(entryScan)) != M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry)) {
           uVar10 = 0;
         }
         pageIndex = pageIndex + 1;

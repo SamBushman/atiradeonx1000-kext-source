@@ -239,7 +239,7 @@ def decl_block(lines, decl_i):
     return j + 1, k
 
 
-def apply_uses(use_rows, root, read, files, errors):
+def apply_uses(use_rows, root, read, files, errors, field_consts=None):
     """-> (pending, applied) for the `use` rows (see the module docstring); edits go into `files`."""
     pending = applied = 0
     groups = {}
@@ -257,6 +257,8 @@ def apply_uses(use_rows, root, read, files, errors):
         revert = {}
         for r in rs:
             if r[3] not in revert.setdefault(r[4], []): revert[r[4]].append(r[3])
+        for cname, off in (field_consts or {}).items():     # a `field` row turned `self + 0x238` into `self + k..._name`: anchors are written against the literal (hex or decimal)
+            revert[cname] = [hex(off), str(off)]
         for (t, n, _, old, new, frm, to, occ, dmode) in rs:
             where = '%s:%d: %s' % (t, n, target)
             have = idents_in(scope)
@@ -449,7 +451,8 @@ def main():
         if not mapping: continue
         pending += len(mapping)
         files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
-    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors)
+    field_consts = {'k%s_%s' % (cl[0], nm): int(off, 16) for (_, _, cl, off, nm, _) in field_rows}
+    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts)
     pending += up; applied += ua
     if field_rows:
         fp, fa = apply_fields(field_rows, a.root, read, files, errors)

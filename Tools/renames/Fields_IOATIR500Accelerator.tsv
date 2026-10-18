@@ -1,0 +1,203 @@
+# Field names for IOATIR500Accelerator (the base accelerator class; ATIRadeonX1000 derives from it). Row: field<TAB>classes<TAB>offset<TAB>name<TAB>tier<TAB>evidence.
+# Constants appear as kIOATIR500Accelerator_<name> in the generated Headers/FieldOffsets.h. Offsets reached from ATIRadeonX1000 methods list that class as well.
+field	IOATIR500Accelerator,ATIRadeonX1000	0x50	submitStamp	CONFIRMED	PerformanceStatistics key "submitStamp" reads it; start sets 1; waitForTimeStamp(this+0x50-1) at every call site
+field	IOATIR500Accelerator,ATIRadeonX1000	0x54	lastReadStamp	CONFIRMED	PerformanceStatistics key "lastReadStamp"; waitForTimeStamp stores the retired stamp here
+field	IOATIR500Accelerator	0x5c	liveSurfaceListHead	CONFIRMED	Headers/IOATIR500Accelerator.h; find_surface_for_id walks the circular list from it
+field	IOATIR500Accelerator	0x60	liveGLContextListHead	CONFIRMED	Headers/IOATIR500Accelerator.h; IOATIR500GLContext::start writes accelerator+0x60
+field	IOATIR500Accelerator	0x64	live2DContextListHead	CONFIRMED	freeWaitToAllocGART walks it as the IOATIR5002DContext list (next at +0x80, shared at +0x88)
+field	IOATIR500Accelerator	0x68	liveDVDContextListHead	CONFIRMED	freeWaitToAllocGART walks it as the IOATIR500DVDContext list (next at +0x80, shared at +0x84)
+field	IOATIR500Accelerator	0x6c	unknown_0x6c	UNKNOWN	zeroed in start, never read by any ported function
+field	IOATIR500Accelerator	0x70	unknown_0x70	UNKNOWN	zeroed in start, never read by any ported function
+field	IOATIR500Accelerator,ATIRadeonX1000	0x74	pciDevice	CONFIRMED	start casts the provider to IOPCIDevice (safeMetaCast IOPCIDevice) and stores it here; configureAGP/startupPCIeGART call its vtable
+field	IOATIR500Accelerator,ATIRadeonX1000	0x78	currentContext	CONFIRMED	GL/DVD contexts compare `self == accelerator+0x78` and clear it in stop/set_surface; set to the last submitting context in clientMemoryForType
+field	IOATIR500Accelerator,ATIRadeonX1000	0x7c	memoryPool	CONFIRMED	start creates `new ATIR500Memory()` and stores it; Radeon init_pool/reserve/dealloc go through it
+field	IOATIR500Accelerator	0x8c	gartReclaimInterval	CONFIRMED	start default 0xfa, overridden by the "GARTReclaimInterval" property; gart_collector passes it to the collector timer
+field	IOATIR500Accelerator	0x90	gartReclaimTimeoutSec	INFERRED	"GARTReclaimTimeout" property / 1000 (seconds part); free_gart_wirings subtracts it from the current IOGetTime seconds
+field	IOATIR500Accelerator	0x94	gartReclaimTimeoutNsec	INFERRED	sub-second part of "GARTReclaimTimeout"; free_gart_wirings subtracts it from the nanoseconds (borrowing 1e9)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x98	capabilityFlags	INFERRED	bit0 AGP, bit1 AGP aperture wired, bits2-4 from "IOAGPFlags", 0x20 "IOAGPCommandValue", 0x40 PCIe link (configureAGP/start); 0x80 and 0x10000-0x800000 chip-family bits tested by ATIRadeonX1000 (setup_R500_internal_space calls it chipFlags)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x9c	vramSize	CONFIRMED	set_display_mode_and_vram stores the memory size here and sizes the VRAM pool from it; allocate_texture compares the CPU-visible size with it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xa0	gartUsedBytes	CONFIRMED	PerformanceStatistics key "gartUsedBytes"; addToMinMaxGART adds, removeFromGART subtracts
+field	IOATIR500Accelerator	0xa4	gartCacheBytes	CONFIRMED	PerformanceStatistics key "gartCacheBytes"; start reads the "GARTCacheSize" property into it; gart_collector compares it with gartUsedBytes
+field	IOATIR500Accelerator,ATIRadeonX1000	0xa8	unknown_0xa8	UNKNOWN	UInt16 0x1000, written by start (both classes); no reader in the ported code
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaa	unknown_0xaa	UNKNOWN	UInt16 0x1000 written by ATIRadeonX1000::start when +0x8c0 is set; no reader in the ported code
+field	IOATIR500Accelerator,ATIRadeonX1000	0xac	registerDeviceMemory	INFERRED	ATIRadeonX1000::start stores IOPCIDevice vtable+0x578(0x18) (the device memory of BAR 0x18, the register aperture) here; stop clears it
+field	IOATIR500Accelerator	0xb0	unknown_0xb0	UNKNOWN	zeroed in start, never read by any ported function
+field	IOATIR500Accelerator,ATIRadeonX1000	0xb4	workLoop	CONFIRMED	start stores IOWorkLoop::workLoop() here; the event sources are added to it and stop releases it
+field	IOATIR500Accelerator	0xb8	garbageCollectorTimer	CONFIRMED	IOTimerEventSource created with garbage_collector_timer; addOrphanTexture schedules it (vtable +0x12c, 100 ms)
+field	IOATIR500Accelerator	0xbc	garbageCollectorSource	CONFIRMED	IOInterruptEventSource created with garbage_collector; garbage_collector_timer triggers it
+field	IOATIR500Accelerator	0xc0	gartCollectorTimer	CONFIRMED	IOTimerEventSource created with gart_collector_timer; gart_collector schedules it with gartReclaimInterval
+field	IOATIR500Accelerator	0xc4	gartCollectorSource	CONFIRMED	IOInterruptEventSource created with gart_collector; gart_collector_timer triggers it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xc8	displayChangeDepth	INFERRED	display_change_handler increments it on events 1/3 and decrements on 2/4; gart_collector does nothing while it is nonzero
+field	IOATIR500Accelerator,ATIRadeonX1000	0xcc	framebufferCount	CONFIRMED	foundFramebuffer appends a framebuffer record at this index and increments it ("IOAccelIndex"); loops in stop/disp_mode_* run to it
+field	IOATIR500Accelerator,ATIRadeonX1000	0xd0	activePanelMask	INFERRED	disp_mode_did_change tests `1 << panel & +0xd0`; ATIRadeonX1000::set_display_mode_and_vram sets bit 0 / bit 1
+field	IOATIR500Accelerator,ATIRadeonX1000	0xd4	framebuffer0	CONFIRMED	first 0x20-byte framebuffer record: IOFramebuffer* (foundFramebuffer stores it; set_display_mode_and_vram calls its vtable +0x5ec/+0x5f0)
+field	IOATIR500Accelerator,ATIRadeonX1000	0xe4	vramMappedAddress	INFERRED	record 0 +0x10: getVRAMDescriptor stores the IOMemoryMap virtual address here; pageOffDataBuffer / pageoff_dirty_texture_with_cpu use it as the CPU address of VRAM
+field	IOATIR500Accelerator,ATIRadeonX1000	0x150	unknown_0x150	UNKNOWN	+0x24 of the 0x78-byte buffer record that starts at +0x12c; zeroed by start and ATIRadeonX1000::set_display_mode_and_vram, never read
+field	IOATIR500Accelerator	0x21c	volatileSurfaceCount	CONFIRMED	PerformanceStatistics key "volatileSurfaceCount"
+field	IOATIR500Accelerator	0x220	unknown_0x220	UNKNOWN	zeroed in start, never read by any ported function
+field	IOATIR500Accelerator	0x224	scratchCommandBuffer	CONFIRMED	start: allocCommandBuffer(self + 0x224, 0x1000); stop frees it (a 0x1c-byte VendorCommandBuffer)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x228	scratchCommandBufferGartOffset	INFERRED	+4 of the scratch buffer: ATIRadeonX1000::start passes self+0x228 as the output offset of the GART mapping of the buffer memory
+field	IOATIR500Accelerator,ATIRadeonX1000	0x22c	scratchCommandBufferMemory	CONFIRMED	+8 of the scratch buffer: the IOBufferMemoryDescriptor (allocCommandBuffer stores it at buffer+8; vtable +0x144/+0x148 prepare/complete)
+field	IOATIR500Accelerator	0x230	scratchCommandBuffer_0x0c	UNKNOWN	+0xc of the scratch buffer: UInt16 set to 1 by start (same init as every ring entry)
+field	IOATIR500Accelerator	0x232	scratchCommandBuffer_0x0e	UNKNOWN	+0xe of the scratch buffer: UInt16 zeroed by start
+field	IOATIR500Accelerator	0x234	scratchCommandBuffer_0x10	UNKNOWN	+0x10 of the scratch buffer: zeroed by start
+field	IOATIR500Accelerator,ATIRadeonX1000	0x238	scratchCommandBufferHeader	INFERRED	+0x14 of the scratch buffer = allocCommandBuffer stores the memory descriptor header pointer there; ATIRadeonX1000 uses it as the CPU address for cache flush and ring-pointer arithmetic
+field	IOATIR500Accelerator	0x23c	scratchCommandBufferSize	CONFIRMED	+0x18 of the scratch buffer: allocCommandBuffer stores the requested size at buffer+0x18
+field	IOATIR500Accelerator	0x400	commandBufferRing0Head	INFERRED	freeAllCommandBuffers zeroes it with the count; allocMoreCommandBuffers stores the previous count here; freeWaitToAllocGART starts its ring walk at it
+field	IOATIR500Accelerator	0x402	commandBufferRing0Count	CONFIRMED	allocMoreCommandBuffers: UInt16 current capacity (doubles, capped at 0x10); freeAllCommandBuffers loops to it
+field	IOATIR500Accelerator	0x5c4	commandBufferRing1Head	INFERRED	same field as +0x400 for record index 1 (record stride 0x1c4)
+field	IOATIR500Accelerator	0x5c6	commandBufferRing1Count	CONFIRMED	same field as +0x402 for record index 1 (record stride 0x1c4)
+field	IOATIR500Accelerator	0x5c8	commandBufferSize	INFERRED	default 0x20000; allocMoreCommandBuffers(0, accelerator+0x5c8) in IOATIR500GLContext::clientMemoryForType; contexts raise it up to 0x80000
+field	IOATIR500Accelerator	0x5cc	dataBufferCacheHead	INFERRED	head of the singly linked (+0x3c) cache of free data buffers: reclaim_resources fills it, freeAllDataBuffers/freeWaitToAllocGART walk it
+field	IOATIR500Accelerator	0x5d0	dataBufferCacheTail	INFERRED	tail pointer of the data buffer cache (reclaim_resources appends at it)
+field	IOATIR500Accelerator	0x5d4	dataBufferCacheCount	INFERRED	number of cached data buffers (reclaim_resources caches only while < 0x10)
+field	IOATIR500Accelerator	0x5d8	dataBufferSizeThreshold	INFERRED	default 0x10000; Headers/ATIRadeonX1000Types.h: compared with a buffer's poolSizeClass in get_data_buffer
+field	IOATIR500Accelerator,ATIRadeonX1000	0x5dc	vramBufferList	CONFIRMED	sentinel of the list of buffers resident in VRAM (nonzero +0x48): allocOneDataBuffer appends, freeToAllocTextureVRAM / disp_mode_will_change walk it
+field	IOATIR500Accelerator	0x5e0	vramBufferList_0x04	UNKNOWN	+0x04 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x5e4	vramBufferList_0x08	UNKNOWN	+0x08 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x5e8	vramBufferList_kind	INFERRED	+0xc UInt16 = 4 in start/allocVendorTextureBuffer (kind tag 4 = GART-mapped transfer, removeTransferFromGART)
+field	IOATIR500Accelerator	0x5ea	vramBufferList_0x0e	UNKNOWN	+0x0e UInt16 zeroed by start
+field	IOATIR500Accelerator	0x5ec	vramBufferList_0x10	UNKNOWN	+0x10 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x5f0	vramBufferList_0x14	UNKNOWN	+0x14 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x5f4	vramBufferList_0x18	UNKNOWN	+0x18 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x5f8	vramBufferList_0x1c	UNKNOWN	+0x1c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x5fe	vramBufferList_0x22	UNKNOWN	+0x22 UInt16 zeroed by start
+field	IOATIR500Accelerator	0x600	vramBufferList_prev	CONFIRMED	+0x24 link: with +0x28 the circular doubly-linked list (vramBufferList_next = oldest)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x604	vramBufferList_next	CONFIRMED	+0x28 link of the circular list (vramBufferList_next = oldest)
+field	IOATIR500Accelerator	0x608	vramBufferList_0x2c	UNKNOWN	+0x2c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x60c	vramBufferList_0x30	UNKNOWN	+0x30 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x610	vramBufferList_transferPrev	INFERRED	+0x34 link of the transfer-buffer list (free_gart_wirings checks transfer+0x34 == list head)
+field	IOATIR500Accelerator	0x614	vramBufferList_transferNext	INFERRED	+0x38 link of the transfer-buffer list
+field	IOATIR500Accelerator	0x618	vramBufferList_0x3c	UNKNOWN	+0x3c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x61c	vramBufferList_0x40	UNKNOWN	+0x40 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x620	vramBufferList_0x44	UNKNOWN	+0x44 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x624	vramBufferList_0x48	UNKNOWN	+0x48 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x628	vramBufferList_0x4c	UNKNOWN	+0x4c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x62c	vramBufferList_0x50	UNKNOWN	+0x50 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x630	vramBufferList_0x54	UNKNOWN	+0x54 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x634	vramBufferList_0x58	UNKNOWN	+0x58 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x63c	orphanTextureList	CONFIRMED	sentinel of the orphan texture list: addOrphanTexture appends, freeOrphanTexture / stop drain it (freeWaitToAllocGART tests head != self+0x63c)
+field	IOATIR500Accelerator	0x640	orphanTextureList_0x04	UNKNOWN	+0x04 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x644	orphanTextureList_0x08	UNKNOWN	+0x08 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x648	orphanTextureList_kind	INFERRED	+0xc UInt16 = 4 in start/allocVendorTextureBuffer (kind tag 4 = GART-mapped transfer, removeTransferFromGART)
+field	IOATIR500Accelerator	0x64a	orphanTextureList_0x0e	UNKNOWN	+0x0e UInt16 zeroed by start
+field	IOATIR500Accelerator	0x64c	orphanTextureList_0x10	UNKNOWN	+0x10 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x650	orphanTextureList_0x14	UNKNOWN	+0x14 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x654	orphanTextureList_0x18	UNKNOWN	+0x18 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x658	orphanTextureList_0x1c	UNKNOWN	+0x1c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x65e	orphanTextureList_0x22	UNKNOWN	+0x22 UInt16 zeroed by start
+field	IOATIR500Accelerator	0x660	orphanTextureList_prev	CONFIRMED	+0x24 link: with +0x28 the circular doubly-linked list (orphanTextureList_next = head)
+field	IOATIR500Accelerator	0x664	orphanTextureList_next	CONFIRMED	+0x28 link of the circular list (orphanTextureList_next = head)
+field	IOATIR500Accelerator	0x668	orphanTextureList_0x2c	UNKNOWN	+0x2c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x66c	orphanTextureList_0x30	UNKNOWN	+0x30 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x670	orphanTextureList_transferPrev	INFERRED	+0x34 link of the transfer-buffer list (free_gart_wirings checks transfer+0x34 == list head)
+field	IOATIR500Accelerator	0x674	orphanTextureList_transferNext	INFERRED	+0x38 link of the transfer-buffer list
+field	IOATIR500Accelerator	0x678	orphanTextureList_0x3c	UNKNOWN	+0x3c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x67c	orphanTextureList_0x40	UNKNOWN	+0x40 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x680	orphanTextureList_0x44	UNKNOWN	+0x44 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x684	orphanTextureList_0x48	UNKNOWN	+0x48 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x688	orphanTextureList_0x4c	UNKNOWN	+0x4c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x68c	orphanTextureList_0x50	UNKNOWN	+0x50 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x690	orphanTextureList_0x54	UNKNOWN	+0x54 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x694	orphanTextureList_0x58	UNKNOWN	+0x58 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x69c	gartWiredTransferList	CONFIRMED	sentinel of the GART-wired transfer buffers: free_gart_wirings walks it ("transfer buffer poorly linked" panics) 
+field	IOATIR500Accelerator	0x6a0	gartWiredTransferList_0x04	UNKNOWN	+0x04 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6a4	gartWiredTransferList_0x08	UNKNOWN	+0x08 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6a8	gartWiredTransferList_kind	INFERRED	+0xc UInt16 = 4 in start/allocVendorTextureBuffer (kind tag 4 = GART-mapped transfer, removeTransferFromGART)
+field	IOATIR500Accelerator	0x6aa	gartWiredTransferList_0x0e	UNKNOWN	+0x0e UInt16 zeroed by start
+field	IOATIR500Accelerator	0x6ac	gartWiredTransferList_0x10	UNKNOWN	+0x10 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6b0	gartWiredTransferList_0x14	UNKNOWN	+0x14 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6b4	gartWiredTransferList_0x18	UNKNOWN	+0x18 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6b8	gartWiredTransferList_0x1c	UNKNOWN	+0x1c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6be	gartWiredTransferList_0x22	UNKNOWN	+0x22 UInt16 zeroed by start
+field	IOATIR500Accelerator	0x6c0	gartWiredTransferList_prev	CONFIRMED	+0x24 link: with +0x28 the circular doubly-linked list 
+field	IOATIR500Accelerator	0x6c4	gartWiredTransferList_next	CONFIRMED	+0x28 link of the circular list 
+field	IOATIR500Accelerator	0x6c8	gartWiredTransferList_0x2c	UNKNOWN	+0x2c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6cc	gartWiredTransferList_0x30	UNKNOWN	+0x30 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6d0	gartWiredTransferList_transferPrev	INFERRED	+0x34 link of the transfer-buffer list (free_gart_wirings checks transfer+0x34 == list head)
+field	IOATIR500Accelerator	0x6d4	gartWiredTransferList_transferNext	INFERRED	+0x38 link of the transfer-buffer list
+field	IOATIR500Accelerator	0x6d8	gartWiredTransferList_0x3c	UNKNOWN	+0x3c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6dc	gartWiredTransferList_0x40	UNKNOWN	+0x40 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6e0	gartWiredTransferList_0x44	UNKNOWN	+0x44 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6e4	gartWiredTransferList_0x48	UNKNOWN	+0x48 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6e8	gartWiredTransferList_0x4c	UNKNOWN	+0x4c of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6ec	gartWiredTransferList_0x50	UNKNOWN	+0x50 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6f0	gartWiredTransferList_0x54	UNKNOWN	+0x54 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator	0x6f4	gartWiredTransferList_0x58	UNKNOWN	+0x58 of the embedded list-head node; initialised by start like allocVendorTextureBuffer's records, no other reader
+field	IOATIR500Accelerator,ATIRadeonX1000	0x6fc	commandBytesPerSample	CONFIRMED	PerformanceStatistics key "commandBytesPerSample" (writePerformanceStats reads this+0x6fc)
+field	IOATIR500Accelerator	0x700	command2DBytesPerSample	CONFIRMED	PerformanceStatistics key "command2DBytesPerSample" (writePerformanceStats reads this+0x700)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x704	commandGLBytesPerSample	CONFIRMED	PerformanceStatistics key "commandGLBytesPerSample" (writePerformanceStats reads this+0x704)
+field	IOATIR500Accelerator	0x708	commandDVDBytesPerSample	CONFIRMED	PerformanceStatistics key "commandDVDBytesPerSample" (writePerformanceStats reads this+0x708)
+field	IOATIR500Accelerator	0x70c	dataGLBytesPerSample	CONFIRMED	PerformanceStatistics key "dataGLBytesPerSample" (writePerformanceStats reads this+0x70c)
+field	IOATIR500Accelerator	0x710	swapBytesPerSample	CONFIRMED	PerformanceStatistics key "swapBytesPerSample" (writePerformanceStats reads this+0x710)
+field	IOATIR500Accelerator	0x714	gartMapInBytesPerSample	CONFIRMED	PerformanceStatistics key "gartMapInBytesPerSample" (writePerformanceStats reads this+0x714)
+field	IOATIR500Accelerator	0x718	gartMapOutBytesPerSample	CONFIRMED	PerformanceStatistics key "gartMapOutBytesPerSample" (writePerformanceStats reads this+0x718)
+field	IOATIR500Accelerator	0x71c	texturePageInBytesPerSample	CONFIRMED	PerformanceStatistics key "texturePageInBytesPerSample" (writePerformanceStats reads this+0x71c)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x720	texturePageOutBytesPerSample	CONFIRMED	PerformanceStatistics key "texturePageOutBytesPerSample" (writePerformanceStats reads this+0x720)
+field	IOATIR500Accelerator	0x724	surfacePageInBytesPerSample	CONFIRMED	PerformanceStatistics key "surfacePageInBytesPerSample" (writePerformanceStats reads this+0x724)
+field	IOATIR500Accelerator	0x728	surfacePageOutBytesPerSample	CONFIRMED	PerformanceStatistics key "surfacePageOutBytesPerSample" (writePerformanceStats reads this+0x728)
+field	IOATIR500Accelerator	0x72c	textureCount	CONFIRMED	PerformanceStatistics key "textureCount" (writePerformanceStats reads this+0x72c)
+field	IOATIR500Accelerator	0x730	surfaceCount	CONFIRMED	PerformanceStatistics key "surfaceCount" (writePerformanceStats reads this+0x730)
+field	IOATIR500Accelerator	0x734	context2DCount	CONFIRMED	PerformanceStatistics key "context2DCount" (writePerformanceStats reads this+0x734)
+field	IOATIR500Accelerator	0x738	contextGLCount	CONFIRMED	PerformanceStatistics key "contextGLCount" (writePerformanceStats reads this+0x738)
+field	IOATIR500Accelerator	0x73c	contextDVDCount	CONFIRMED	PerformanceStatistics key "contextDVDCount" (writePerformanceStats reads this+0x73c)
+field	IOATIR500Accelerator	0x740	contextGLSwitchCount	CONFIRMED	PerformanceStatistics key "contextGLSwitchCount" (writePerformanceStats reads this+0x740)
+field	IOATIR500Accelerator	0x744	context2DSwitchCount	CONFIRMED	PerformanceStatistics key "context2DSwitchCount" (writePerformanceStats reads this+0x744)
+field	IOATIR500Accelerator	0x748	contextDVDSwitchCount	CONFIRMED	PerformanceStatistics key "contextDVDSwitchCount" (writePerformanceStats reads this+0x748)
+field	IOATIR500Accelerator	0x74c	bufferSwapCount	CONFIRMED	PerformanceStatistics key "bufferSwapCount" (writePerformanceStats reads this+0x74c)
+field	IOATIR500Accelerator	0x750	dataBufferCount	CONFIRMED	PerformanceStatistics key "dataBufferCount" (writePerformanceStats reads this+0x750)
+field	IOATIR500Accelerator	0x754	texturePageInWaitTime	CONFIRMED	PerformanceStatistics key "texturePageInWaitTime" (writePerformanceStats reads this+0x754)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x758	texturePageOutWaitTime	CONFIRMED	PerformanceStatistics key "texturePageOutWaitTime" (writePerformanceStats reads this+0x758)
+field	IOATIR500Accelerator	0x75c	textureWaitTime	CONFIRMED	PerformanceStatistics key "textureWaitTime" (writePerformanceStats reads this+0x75c)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x760	hardwareWaitTime	CONFIRMED	PerformanceStatistics key "hardwareWaitTime" (writePerformanceStats reads this+0x760)
+field	IOATIR500Accelerator	0x764	hardwareSubmitWaitTime	CONFIRMED	PerformanceStatistics key "hardwareSubmitWaitTime" (writePerformanceStats reads this+0x764)
+field	IOATIR500Accelerator	0x768	clientGLWaitTime	CONFIRMED	PerformanceStatistics key "clientGLWaitTime" (writePerformanceStats reads this+0x768)
+field	IOATIR500Accelerator	0x76c	freeCommandBuffer2DWaitTime	CONFIRMED	PerformanceStatistics key "freeCommandBuffer2DWaitTime" (writePerformanceStats reads this+0x76c)
+field	IOATIR500Accelerator	0x770	freeCommandBufferGLWaitTime	CONFIRMED	PerformanceStatistics key "freeCommandBufferGLWaitTime" (writePerformanceStats reads this+0x770)
+field	IOATIR500Accelerator	0x774	freeCommandBufferDVDWaitTime	CONFIRMED	PerformanceStatistics key "freeCommandBufferDVDWaitTime" (writePerformanceStats reads this+0x774)
+field	IOATIR500Accelerator	0x778	freeDataBufferGLWaitTime	CONFIRMED	PerformanceStatistics key "freeDataBufferGLWaitTime" (writePerformanceStats reads this+0x778)
+field	IOATIR500Accelerator	0x77c	freeContextBuffer2DWaitTime	CONFIRMED	PerformanceStatistics key "freeContextBuffer2DWaitTime" (writePerformanceStats reads this+0x77c)
+field	IOATIR500Accelerator	0x780	freeContextBufferGLWaitTime	CONFIRMED	PerformanceStatistics key "freeContextBufferGLWaitTime" (writePerformanceStats reads this+0x780)
+field	IOATIR500Accelerator	0x784	freeContextBufferDVDWaitTime	CONFIRMED	PerformanceStatistics key "freeContextBufferDVDWaitTime" (writePerformanceStats reads this+0x784)
+field	IOATIR500Accelerator	0x788	freeSurfaceSwapBufferWaitTime	CONFIRMED	PerformanceStatistics key "freeSurfaceSwapBufferWaitTime" (writePerformanceStats reads this+0x788)
+field	IOATIR500Accelerator	0x78c	freeSurfaceBackingWaitTime	CONFIRMED	PerformanceStatistics key "freeSurfaceBackingWaitTime" (writePerformanceStats reads this+0x78c)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x790	removeFromGARTWaitTime	CONFIRMED	PerformanceStatistics key "removeFromGARTWaitTime" (writePerformanceStats reads this+0x790)
+field	IOATIR500Accelerator	0x794	swapComplete2DWaitTime	CONFIRMED	PerformanceStatistics key "swapComplete2DWaitTime" (writePerformanceStats reads this+0x794)
+field	IOATIR500Accelerator	0x798	swapCompleteGLWaitTime	CONFIRMED	PerformanceStatistics key "swapCompleteGLWaitTime" (writePerformanceStats reads this+0x798)
+field	IOATIR500Accelerator	0x79c	swapCompleteDVDWaitTime	CONFIRMED	PerformanceStatistics key "swapCompleteDVDWaitTime" (writePerformanceStats reads this+0x79c)
+field	IOATIR500Accelerator	0x7a0	finishAll2DWaitTime	CONFIRMED	PerformanceStatistics key "finishAll2DWaitTime" (writePerformanceStats reads this+0x7a0)
+field	IOATIR500Accelerator	0x7a4	finish2DWaitTime	CONFIRMED	PerformanceStatistics key "finish2DWaitTime" (writePerformanceStats reads this+0x7a4)
+field	IOATIR500Accelerator	0x7a8	finishGLWaitTime	CONFIRMED	PerformanceStatistics key "finishGLWaitTime" (writePerformanceStats reads this+0x7a8)
+field	IOATIR500Accelerator	0x7ac	finishDVDWaitTime	CONFIRMED	PerformanceStatistics key "finishDVDWaitTime" (writePerformanceStats reads this+0x7ac)
+field	IOATIR500Accelerator	0x7b0	surfaceCopyInWaitTime	CONFIRMED	PerformanceStatistics key "surfaceCopyInWaitTime" (writePerformanceStats reads this+0x7b0)
+field	IOATIR500Accelerator	0x7b4	surfaceCopyOutWaitTime	CONFIRMED	PerformanceStatistics key "surfaceCopyOutWaitTime" (writePerformanceStats reads this+0x7b4)
+field	IOATIR500Accelerator	0x7b8	surfaceReadLockIdleWaitTime	CONFIRMED	PerformanceStatistics key "surfaceReadLockIdleWaitTime" (writePerformanceStats reads this+0x7b8)
+field	IOATIR500Accelerator	0x7bc	surfaceWriteLockIdleWaitTime	CONFIRMED	PerformanceStatistics key "surfaceWriteLockIdleWaitTime" (writePerformanceStats reads this+0x7bc)
+field	IOATIR500Accelerator	0x7c0	surfaceSetShapeIdleWaitTime	CONFIRMED	PerformanceStatistics key "surfaceSetShapeIdleWaitTime" (writePerformanceStats reads this+0x7c0)
+field	IOATIR500Accelerator	0x7cc	textureVRAMAllocFailCount	INFERRED	freeToAllocTextureVRAM counts each pass where allocate_texture (vtable +0x528) of the needed buffer failed
+field	IOATIR500Accelerator	0x7d0	vramScanExaminedCount	INFERRED	textures visited by the first scan (from vramBufferList_next)
+field	IOATIR500Accelerator	0x7d4	vramScanExcludedCount	INFERRED	first scan: texture was on the caller's exclude list
+field	IOATIR500Accelerator	0x7d8	vramScanInUseCount	INFERRED	first scan: texture still in use (face-mask test failed)
+field	IOATIR500Accelerator	0x7dc	vramScanBusyCount	INFERRED	first scan: texture's stamp not yet retired (vtable +0x554 returned 0)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x7e0	vramScanEvictedCount	INFERRED	first scan: texture removed from VRAM (ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM bumps the same counter)
+field	IOATIR500Accelerator	0x7e4	vramScanTailExaminedCount	INFERRED	textures visited by the second scan (from vramBufferList_prev)
+field	IOATIR500Accelerator	0x7e8	vramScanTailExcludedCount	INFERRED	second scan: excluded
+field	IOATIR500Accelerator	0x7ec	vramScanTailInUseCount	INFERRED	second scan: in use
+field	IOATIR500Accelerator	0x7f0	vramScanTailBusyCount	INFERRED	second scan: stamp not retired
+field	IOATIR500Accelerator	0x7f4	vramScanTailEvictedCount	INFERRED	second scan: evicted
+field	IOATIR500Accelerator	0x7fc	gartTableAllocatedBytes	INFERRED	configureAGP adds the size of the GART table allocation, teardownAGP subtracts it
+field	IOATIR500Accelerator	0x808	vendorTextureBufferBytes	CONFIRMED	allocVendorTextureBuffer adds the size, releaseVendorTextureBuffer subtracts it
+field	IOATIR500Accelerator	0x814	mappedTransferCountKind0	INFERRED	mapVendorTransferBuffer increments / unmapVendorTransferBuffer decrements, selected by the buffer's kind tag (+0xc)
+field	IOATIR500Accelerator	0x818	mappedTransferCountKind1	INFERRED	mapVendorTransferBuffer increments / unmapVendorTransferBuffer decrements, selected by the buffer's kind tag (+0xc)
+field	IOATIR500Accelerator	0x81c	mappedTransferCountKind2	INFERRED	mapVendorTransferBuffer increments / unmapVendorTransferBuffer decrements, selected by the buffer's kind tag (+0xc)
+field	IOATIR500Accelerator	0x820	mappedTransferCountKind3	INFERRED	mapVendorTransferBuffer increments / unmapVendorTransferBuffer decrements, selected by the buffer's kind tag (+0xc)
+field	IOATIR500Accelerator	0x824	mappedTransferCountKind4	INFERRED	mapVendorTransferBuffer increments / unmapVendorTransferBuffer decrements, selected by the buffer's kind tag (+0xc)
+field	IOATIR500Accelerator	0x828	mappedTransferCountOther	INFERRED	mapVendorTransferBuffer increments / unmapVendorTransferBuffer decrements, selected by the buffer's kind tag (+0xc)
+field	IOATIR500Accelerator	0x82c	commandBufferMemoryOptions	INFERRED	0x400 when no "IOAGPFlags" number (configureAGP), else 0; OR-ed into the IOBufferMemoryDescriptor options in allocCommandBuffer
+field	IOATIR500Accelerator,ATIRadeonX1000	0x830	gartSizeKB	CONFIRMED	PerformanceStatistics "gartSizeBytes" = this+0x830 << 10; configureAGP sizes it from hw.memsize (clamped 0x8000..0x20000)
+field	IOATIR500Accelerator	0x834	gartTablePhysical	INFERRED	configureAGP: IOMallocContiguous(size, align, self+0x834) - the physical address of the GART table; empty/reserved entries are made from the pages after it
+field	IOATIR500Accelerator	0x838	agpApertureBase	INFERRED	configureAGP passes self+0x838 as the output of the AGP provider call (vtable +0x5dc) that creates the aperture
+field	IOATIR500Accelerator	0x83c	gartTable	CONFIRMED	IOATIR500Accelerator_SmallMethods.cpp: "+0x83c GART page table"; configureAGP stores the IOMallocContiguous address, reserveInGART/clearInGART index it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x840	commandLock	CONFIRMED	start: IOLockAlloc() stored here; garbage_collector/gart_collector/system_will_sleep lock it; stop frees it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x844	gartEmptyEntry	CONFIRMED	IOATIR500Accelerator_SmallMethods.cpp: "+0x844 empty entry"; clearInGART stores it, addToMinMaxGART scans for it
+field	IOATIR500Accelerator,ATIRadeonX1000	0x848	gartReservedEntry	CONFIRMED	IOATIR500Accelerator_SmallMethods.cpp: "+0x848 reserved entry"; reserveInGART stores it

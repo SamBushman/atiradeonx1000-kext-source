@@ -62,11 +62,11 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
         iVar5 = VCALL(M<int>(excludeABytes), 0x5d0)(excludeABytes,neededBytes);
       }
       if (iVar5 == 1) break;
-      texture = M<UInt8 *>(self + 0x604);
+      texture = M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_next);
       do {
         do {
           while( true ) {
-            if (self + 0x5dc == texture) goto LAB_00004794;
+            if (self + kIOATIR500Accelerator_vramBufferList == texture) goto LAB_00004794;
             if (excludeCount < 1) break;
             if (texture != (UInt8 *)*excludeList) {
               iVar5 = 0;
@@ -129,7 +129,7 @@ LAB_00004794:
     if (secondPass) {
       return 0;
     }
-    surfaceListHead = M<UInt8 *>(self + 0x5c);
+    surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
     if (surfaceListHead != (UInt8 *)0x0) {
       bVar14 = (0 < excludeCount) << 2 | (excludeCount == 0) << 1;
       surface = surfaceListHead;
@@ -176,7 +176,7 @@ LAB_00004794:
             surfaceBuffer = surfaceBuffer + 0x78;
             uVar10 = uVar10 + 1;
           } while (secondPass);
-          surfaceListHead = M<UInt8 *>(self + 0x5c);
+          surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
         }
 LAB_0000492c: ;
       } while (surface != surfaceListHead);

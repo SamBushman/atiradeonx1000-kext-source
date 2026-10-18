@@ -34,5 +34,5 @@ IOReturn IOATIR500Accelerator::addToGART(IOMemoryDescriptor *descriptor, UInt32 
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
     /* the shipped body tail-calls: the callee's r3 is this function's result (the earlier `void` typing, issue #26, hid it) */
-    return addToMinMaxGART(descriptor, result, 0, (M<UInt32>(self + 0x830) >> 2) << GH_page_shift);
+    return addToMinMaxGART(descriptor, result, 0, (M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB) >> 2) << GH_page_shift);
 }

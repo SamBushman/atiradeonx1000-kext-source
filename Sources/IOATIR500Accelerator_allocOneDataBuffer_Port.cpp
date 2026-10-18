@@ -53,15 +53,15 @@ VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 sizeClass, 
         prevNode = M<SInt32>(dataBuffer + 0x24);
         M<UInt32>(prevNode + 0x28) = M<UInt32>(dataBuffer + 0x28);
         iVar2 = M<SInt32>(dataBuffer + 0x28);
-        M<UInt8 *>(dataBuffer + 0x28) = self + 0x5dc;
+        M<UInt8 *>(dataBuffer + 0x28) = self + kIOATIR500Accelerator_vramBufferList;
         M<SInt32>(iVar2 + 0x24) = prevNode;
-        M<UInt32>(dataBuffer + 0x24) = M<UInt32>(self + 0x600);
-        M<UInt8 *>(self + 0x600) = dataBuffer;
+        M<UInt32>(dataBuffer + 0x24) = M<UInt32>(self + kIOATIR500Accelerator_vramBufferList_prev);
+        M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_prev) = dataBuffer;
         M<UInt8 *>(M<SInt32>(dataBuffer + 0x24) + 0x28) = dataBuffer;
       }
-      VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + 0x50) + -1);
+      VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
     }
-    M<SInt32>(self + 0x750) = M<SInt32>(self + 0x750) + 1;
+    M<SInt32>(self + kIOATIR500Accelerator_dataBufferCount) = M<SInt32>(self + kIOATIR500Accelerator_dataBufferCount) + 1;
   }
   return (VendorTextureBuffer *)(dataBuffer);
 }

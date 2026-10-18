@@ -49,8 +49,8 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
   SInt32 gartBase;
   SInt32 stamp;
   
-  M<UInt32>(self + 0x6fc) = dwordCount * 4 + M<SInt32>(self + 0x6fc);
-  if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
+  M<UInt32>(self + kIOATIR500Accelerator_commandBytesPerSample) = dwordCount * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandBytesPerSample);
+  if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
     ppcSync();
     instructionSynchronize();
   }

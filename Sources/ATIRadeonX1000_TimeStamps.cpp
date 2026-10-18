@@ -64,7 +64,7 @@ IOReturn ATIRadeonX1000::waitForRetiredTimeStamp(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
   }
   return elapsedNs[1];
 }
@@ -81,7 +81,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x54)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastReadStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
@@ -89,7 +89,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
     stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
-    M<UInt32>(self + 0x54) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
     pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       pollCount = 1;
@@ -98,7 +98,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
         GH_thread_block(0);
         stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
         currentStamp = loadWordByteReversed(stampAddress);
-        M<UInt32>(self + 0x54) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         pollCount = pollCount + 1;
       } while (pollCount != 0xc351);
@@ -108,7 +108,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (pollCount == 0xc351) {
       return -1;
     }
@@ -154,7 +154,7 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (iVar1 == 0xc351) {
       return -1;
     }
@@ -201,7 +201,7 @@ UInt32 ATIRadeonX1000::sleepForRetiredTimeStamp(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (pollCount == 0xc351) {
       return -1;
     }
@@ -221,7 +221,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x54)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastReadStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
@@ -229,7 +229,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 tag) {
     stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
-    M<UInt32>(self + 0x54) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
     pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       pollCount = 1;
@@ -238,7 +238,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 tag) {
         GH_thread_block(0);
         stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
         currentStamp = loadWordByteReversed(stampAddress);
-        M<UInt32>(self + 0x54) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         pollCount = pollCount + 1;
       } while (pollCount != 0xc351);
@@ -248,7 +248,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (pollCount == 0xc351) {
       return -1;
     }
@@ -268,7 +268,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x54)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastReadStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
@@ -276,7 +276,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
     stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
-    M<UInt32>(self + 0x54) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
     pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       pollCount = 1;
@@ -285,7 +285,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
         GH_thread_block(0);
         stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
         currentStamp = loadWordByteReversed(stampAddress);
-        M<UInt32>(self + 0x54) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         pollCount = pollCount + 1;
       } while (pollCount != 0xc351);
@@ -295,7 +295,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (pollCount == 0xc351) {
       return -1;
     }
@@ -341,7 +341,7 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (iVar1 == 0xc351) {
       return -1;
     }
@@ -361,7 +361,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 tag) {
   
   elapsedNs[0] = 0;
   elapsedNs[1] = 0;
-  if ((SInt32)(tag - M<SInt32>(self + 0x54)) < 1) {
+  if ((SInt32)(tag - M<SInt32>(self + kIOATIR500Accelerator_lastReadStamp)) < 1) {
     elapsedNs[1] = 0;
   }
   else {
@@ -369,7 +369,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 tag) {
     stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
     currentStamp = loadWordByteReversed(stampAddress)
     ;
-    M<UInt32>(self + 0x54) = currentStamp;
+    M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
     pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
       pollCount = 1;
@@ -378,7 +378,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 tag) {
         GH_thread_block(0);
         stampAddress = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
         currentStamp = loadWordByteReversed(stampAddress);
-        M<UInt32>(self + 0x54) = currentStamp;
+        M<UInt32>(self + kIOATIR500Accelerator_lastReadStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
         pollCount = pollCount + 1;
       } while (pollCount != 0xc351);
@@ -388,7 +388,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 tag) {
     endTime[1] = endTime[1] - startTime[1];
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
-    M<SInt32>(self + 0x760) = M<SInt32>(self + 0x760) + elapsedNs[1];
+    M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
     if (pollCount == 0xc351) {
       return -1;
     }

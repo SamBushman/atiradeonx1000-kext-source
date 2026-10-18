@@ -67,7 +67,7 @@ UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer 
   }
   uVar22 = M<UInt32>(textureBytes + 0x50);
   GH_memcpy(oldElement,(UInt8 *)(textureBytes + 0x40),0x10);
-  iVar6 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),uVar22,
+  iVar6 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),uVar22,
                      0x1000,0,M<UInt32>(self + 0x84c));
   if ((iVar6 == 0) && (iVar6 = this->freeToAllocTextureCPUVisibleVRAM((VendorTextureBuffer *)(textureBytes),uVar22), iVar6 == 0)) {
     return 0;
@@ -175,12 +175,12 @@ LAB_00020e80:
     uVar22 = uVar22 + 1;
     M<UInt32>(record + iVar6) = 0x80000000;
   }
-  M<UInt32>(self + 0x704) = uVar22 * 4 + M<SInt32>(self + 0x704);
+  M<UInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample) = uVar22 * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample);
   iVar6 = M<SInt32>(textureBytes + 0x14);
   stamp = this->submit_buffer((UInt32 *)record,
                         M<SInt32>(hwInfoBytes + 4) * 4 + M<SInt32>(textureBytes + 4) + 0xa00,uVar22);
   M<UInt32>(iVar6 + 0xc) = stamp;
   VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0xc));
-  ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(oldElement));
+  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_memoryPool)))->dealloc((GLKMemoryElement *)(oldElement));
   return 1;
 }

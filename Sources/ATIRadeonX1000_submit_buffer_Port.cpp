@@ -63,8 +63,8 @@ UInt32 ATIRadeonX1000::submit_buffer(UInt32*bufferStart, UInt32 gartOffset, UInt
   }
   else {
 LAB_00020a3c:
-    M<UInt32>(self + 0x6fc) = dwordCount * 4 + M<SInt32>(self + 0x6fc);
-    if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
+    M<UInt32>(self + kIOATIR500Accelerator_commandBytesPerSample) = dwordCount * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandBytesPerSample);
+    if ((M<UInt32>(self + kIOATIR500Accelerator_capabilityFlags) & 0x80) == 0) {
       ppcSync();
       instructionSynchronize();
     }
@@ -100,7 +100,7 @@ LAB_00020b4c:
       if (M<SInt32>(self + 0x8d0) == 0) {
         iVar3 = M<SInt32>(self + 0x900);
         M<UInt32>(iVar3 + writeIndex * 4) = 0x57f;
-        stamp = M<UInt32>(self + 0x50);
+        stamp = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
         uVar6 = writeIndex + 1 & 0x7ff;
         writeIndex = uVar6 + 1;
         M<UInt32>(self + 0x914) = writeIndex;
@@ -110,7 +110,7 @@ LAB_00020b4c:
       }
       else {
         iVar3 = M<SInt32>(self + 0x900);
-        stamp = M<UInt32>(self + 0x50);
+        stamp = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
       }
       M<UInt32>(iVar3 + writeIndex * 4) = 0x101ce;
       writeIndex = writeIndex + 1 & 0x7ff;
@@ -129,10 +129,10 @@ LAB_00020b4c:
       M<UInt32>(self + 0x914) = uVar6 & 0x7ff;
       this->submit_ring_data();
       if (M<SInt32>(self + 0x8d0) != 0) {
-        M<UInt32>(M<SInt32>(self + 0x8d0) + 0x20) = M<UInt32>(self + 0x50);
+        M<UInt32>(M<SInt32>(self + 0x8d0) + 0x20) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
       }
-      iVar3 = M<SInt32>(self + 0x50);
-      M<SInt32>(self + 0x50) = iVar3 + 1;
+      iVar3 = M<SInt32>(self + kIOATIR500Accelerator_submitStamp);
+      M<SInt32>(self + kIOATIR500Accelerator_submitStamp) = iVar3 + 1;
       return iVar3;
     }
     do {
@@ -148,5 +148,5 @@ LAB_00020b4c:
   GH_IOLog("ATIRadeon::wait_for_rb_space: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
                ,iVar1,5,loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)));
   this->DumpASICHangState();
-  return *(SInt32 *)(self + 0x50) + -1;
+  return *(SInt32 *)(self + kIOATIR500Accelerator_submitStamp) + -1;
 }
