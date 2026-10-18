@@ -173,6 +173,42 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   UInt32 copyHeight;
   UInt32 texturePitchWord;
   UInt32 textureOffsetWord;
+  float quadRight;
+  float quadBottom;
+  float srcPerQuadX;
+  float srcPerQuadY;
+  float scaledQuadLeft;
+  float srcOffsetX;
+  float rectYF;
+  float srcOffsetY;
+  float srcMinX;
+  float srcMaxX;
+  float srcMaxY;
+  float srcMinY;
+  float dstPerSrcX;
+  float dstPerSrcY;
+  float chunkTopF;
+  float invChunkWidth;
+  float invChunkHeight;
+  float halfHeight;
+  float halfWidth;
+  float centerY;
+  float centerX;
+  float chunkLeftF;
+  float invCopyWidth;
+  float invCopyHeight;
+  double srcRightD;
+  double srcRightRoundedD;
+  double srcTopD;
+  double srcLeftD;
+  double srcTopRoundedD;
+  double srcBottomD;
+  double srcLeftRoundedD;
+  double srcBottomRoundedD;
+  double srcWidthD;
+  double srcHeightD;
+  double invSrcHeightD;
+  double intToFloatBias;
   
   srcRightEdge = srcX + width;
   srcBottomEdge = srcY + height;
@@ -200,7 +236,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   local_2f8 = FLOAT_0004c370;
   local_318 = 1;
   local_314 = 0;
-  dVar45 = (double)CONCAT44d(0x43300000,srcRightEdge) - DOUBLE_0004c3b0;
+  srcRightD = (double)CONCAT44d(0x43300000,srcRightEdge) - DOUBLE_0004c3b0;
   quadLeft = FLOAT_0004c370;
   quadTop = FLOAT_0004c370;
   local_2fc = FLOAT_0004c370;
@@ -214,13 +250,13 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   quadWidth = (float)((double)CONCAT44d(0x43300000,width) - DOUBLE_0004c3b0);
   local_2e4 = 0x3f800000;
   local_300 = (float)((double)CONCAT44d(0x43300000,height) - DOUBLE_0004c3b0);
-  dVar46 = (double)(float)dVar45;
-  dVar47 = (double)CONCAT44d(0x43300000,srcYBiased) - DOUBLE_0004c3a8;
-  dVar44 = (double)CONCAT44d(0x43300000,srcXBiased) - DOUBLE_0004c3a8;
-  dVar48 = (double)(float)dVar47;
-  dVar49 = (double)CONCAT44d(0x43300000,srcBottomEdge) - DOUBLE_0004c3b0;
-  dVar51 = (double)(float)dVar44;
-  dVar50 = (double)(float)dVar49;
+  srcRightRoundedD = (double)(float)srcRightD;
+  srcTopD = (double)CONCAT44d(0x43300000,srcYBiased) - DOUBLE_0004c3a8;
+  srcLeftD = (double)CONCAT44d(0x43300000,srcXBiased) - DOUBLE_0004c3a8;
+  srcTopRoundedD = (double)(float)srcTopD;
+  srcBottomD = (double)CONCAT44d(0x43300000,srcBottomEdge) - DOUBLE_0004c3b0;
+  srcLeftRoundedD = (double)(float)srcLeftD;
+  srcBottomRoundedD = (double)(float)srcBottomD;
   srcHeightF = (float)((double)CONCAT44d(0x43300000,srcHeight) - DOUBLE_0004c3b0);
   if (srcShift != 4) {
     srcTileBits = (srcTileFlags & 6) << 2;
@@ -239,54 +275,54 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   dstColorPitchReg = dstTileBits | (dstTileFlags & 1) << 0x10 | dstPitch & 0x3ffe | (unknown_param18 & 3) << 0x13 |
               (rb3d_dst_format[srcShift] & 0xf) << 0x15;
   outputFormatReg = out_fmt[srcShift] & 0x1f | 0x1b00;
-  if (DOUBLE_0004c3c8 <= dVar51) {
-    iVar30 = (SInt32)(dVar51 - DOUBLE_0004c3c8);
+  if (DOUBLE_0004c3c8 <= srcLeftRoundedD) {
+    iVar30 = (SInt32)(srcLeftRoundedD - DOUBLE_0004c3c8);
     local_280 = (SInt64)iVar30;
     srcLeft = iVar30 + 0x80000000;
   }
   else {
-    srcLeft = (UInt32)dVar44;
+    srcLeft = (UInt32)srcLeftD;
     local_288 = (SInt64)(SInt32)srcLeft;
   }
-  if (DOUBLE_0004c3c8 <= dVar48) {
-    iVar30 = (SInt32)(dVar48 - DOUBLE_0004c3c8);
+  if (DOUBLE_0004c3c8 <= srcTopRoundedD) {
+    iVar30 = (SInt32)(srcTopRoundedD - DOUBLE_0004c3c8);
     local_270 = (SInt64)iVar30;
     srcTop = iVar30 + 0x80000000;
   }
   else {
-    srcTop = (UInt32)dVar47;
+    srcTop = (UInt32)srcTopD;
     local_278 = (SInt64)(SInt32)srcTop;
   }
   scissorTopLeftReg = srcLeft & 0x1fff | (srcTop & 0x1fff) << 0xd;
-  if (DOUBLE_0004c3c8 <= dVar46) {
-    iVar30 = (SInt32)(dVar46 - DOUBLE_0004c3c8);
+  if (DOUBLE_0004c3c8 <= srcRightRoundedD) {
+    iVar30 = (SInt32)(srcRightRoundedD - DOUBLE_0004c3c8);
     local_260 = (SInt64)iVar30;
     srcRight = iVar30 + 0x80000000;
   }
   else {
-    srcRight = (UInt32)dVar45;
+    srcRight = (UInt32)srcRightD;
     local_268 = (SInt64)(SInt32)srcRight;
   }
-  if (DOUBLE_0004c3c8 <= dVar50) {
-    iVar30 = (SInt32)(dVar50 - DOUBLE_0004c3c8);
+  if (DOUBLE_0004c3c8 <= srcBottomRoundedD) {
+    iVar30 = (SInt32)(srcBottomRoundedD - DOUBLE_0004c3c8);
     local_250 = (SInt64)iVar30;
     srcBottom = iVar30 + 0x80000000;
   }
   else {
-    srcBottom = (UInt32)dVar49;
+    srcBottom = (UInt32)srcBottomD;
     local_258 = (SInt64)(SInt32)srcBottom;
   }
-  dVar46 = (double)srcWidthF;
-  dVar45 = (double)srcHeightF;
+  srcWidthD = (double)srcWidthF;
+  srcHeightD = (double)srcHeightF;
   scissorBottomRightReg = srcRight & 0x1fff | (srcBottom & 0x1fff) << 0xd;
   dVar44 = (double)FLOAT_0004c370;
   packet = cmd + wordCount;
-  if (dVar46 != dVar44) {
-    dVar44 = (double)(float)((double)FLOAT_0004c374 / dVar46);
+  if (srcWidthD != dVar44) {
+    dVar44 = (double)(float)((double)FLOAT_0004c374 / srcWidthD);
   }
-  dVar47 = (double)FLOAT_0004c370;
-  if (dVar45 != dVar47) {
-    dVar47 = (double)(float)((double)FLOAT_0004c374 / dVar45);
+  invSrcHeightD = (double)FLOAT_0004c370;
+  if (srcHeightD != invSrcHeightD) {
+    invSrcHeightD = (double)(float)((double)FLOAT_0004c374 / srcHeightD);
   }
   formatIndexSaved = formatIndex;
   uStack_294 = srcWidth;
@@ -307,75 +343,75 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   if (local_2d8 != 0) {
     packet[0x1e] = packet[0x1e] & 0xfffffffc | 2;
   }
-  dVar48 = DOUBLE_0004c3a8;
+  intToFloatBias = DOUBLE_0004c3a8;
   fVar5 = FLOAT_0004c380;
   fVar1 = FLOAT_0004c37c;
   fVar2 = FLOAT_0004c370;
-  if (((double)FLOAT_0004c378 < dVar46) || ((double)FLOAT_0004c378 < dVar45)) {
-    if (dVar46 <= (double)FLOAT_0004c378) {
-      fVar2 = quadLeft + quadWidth;
-      fVar5 = quadTop + local_300;
-      fVar1 = FLOAT_0004c370;
+  if (((double)FLOAT_0004c378 < srcWidthD) || ((double)FLOAT_0004c378 < srcHeightD)) {
+    if (srcWidthD <= (double)FLOAT_0004c378) {
+      quadRight = quadLeft + quadWidth;
+      quadBottom = quadTop + local_300;
+      srcPerQuadX = FLOAT_0004c370;
       if (quadWidth != FLOAT_0004c370) {
-        fVar1 = (float)((double)CONCAT44d(0x43300000,(SInt32)rectWidth ^ 0x80000000) - DOUBLE_0004c3a8)
+        srcPerQuadX = (float)((double)CONCAT44d(0x43300000,(SInt32)rectWidth ^ 0x80000000) - DOUBLE_0004c3a8)
                 / quadWidth;
       }
-      fVar4 = quadLeft * fVar1;
-      fVar6 = (float)((double)CONCAT44d(0x43300000,(SInt32)rectX ^ 0x80000000) - DOUBLE_0004c3a8) -
-              fVar4;
-      fVar7 = FLOAT_0004c370;
+      scaledQuadLeft = quadLeft * srcPerQuadX;
+      srcOffsetX = (float)((double)CONCAT44d(0x43300000,(SInt32)rectX ^ 0x80000000) - DOUBLE_0004c3a8) -
+              scaledQuadLeft;
+      srcPerQuadY = FLOAT_0004c370;
       if (local_300 != FLOAT_0004c370) {
-        fVar7 = (float)((double)CONCAT44d(0x43300000,(SInt32)rectHeight ^ 0x80000000) - DOUBLE_0004c3a8)
+        srcPerQuadY = (float)((double)CONCAT44d(0x43300000,(SInt32)rectHeight ^ 0x80000000) - DOUBLE_0004c3a8)
                 / local_300;
       }
-      fVar3 = (float)((double)CONCAT44d(0x43300000,(SInt32)rectY ^ 0x80000000) - DOUBLE_0004c3a8);
-      fVar17 = -(quadTop * fVar7 - fVar3);
+      rectYF = (float)((double)CONCAT44d(0x43300000,(SInt32)rectY ^ 0x80000000) - DOUBLE_0004c3a8);
+      srcOffsetY = -(quadTop * srcPerQuadY - rectYF);
       if (flip != 0) {
-        fVar7 = -fVar7;
-        fVar17 = (float)((double)CONCAT44d(0x43300000,(SInt32)rectY + (SInt32)rectHeight ^ 0x80000000)
-                        - DOUBLE_0004c3a8) - (fVar17 - fVar3);
+        srcPerQuadY = -srcPerQuadY;
+        srcOffsetY = (float)((double)CONCAT44d(0x43300000,(SInt32)rectY + (SInt32)rectHeight ^ 0x80000000)
+                        - DOUBLE_0004c3a8) - (srcOffsetY - rectYF);
       }
-      copyWidth = (SInt32)dVar46 & 0xffff;
-      copyHeight = (SInt32)dVar45 & 0xffff;
+      copyWidth = (SInt32)srcWidthD & 0xffff;
+      copyHeight = (SInt32)srcHeightD & 0xffff;
       if ((copyWidth < 0x1001) && (copyHeight < 0x1001)) {
         firstRow = 0;
         firstColumn = 0;
         rowChunks = 0;
         columnChunks = 0;
         chunkCount = 0;
-        fVar11 = FLOAT_0004c370;
-        fVar8 = FLOAT_0004c370;
-        fVar13 = FLOAT_0004c370;
-        fVar18 = FLOAT_0004c370;
+        srcMinX = FLOAT_0004c370;
+        srcMaxX = FLOAT_0004c370;
+        srcMaxY = FLOAT_0004c370;
+        srcMinY = FLOAT_0004c370;
       }
       else {
-        fVar11 = fVar7 * quadTop + fVar17;
-        fVar13 = fVar7 * fVar5 + fVar17;
-        fVar3 = fVar4 + fVar6;
-        fVar8 = fVar2 * fVar1 + fVar6;
-        fVar18 = fVar11;
-        if (fVar13 < fVar11) {
-          fVar18 = fVar13;
-          fVar13 = fVar11;
+        fVar11 = srcPerQuadY * quadTop + srcOffsetY;
+        srcMaxY = srcPerQuadY * quadBottom + srcOffsetY;
+        fVar3 = scaledQuadLeft + srcOffsetX;
+        srcMaxX = quadRight * srcPerQuadX + srcOffsetX;
+        srcMinY = fVar11;
+        if (srcMaxY < fVar11) {
+          srcMinY = srcMaxY;
+          srcMaxY = fVar11;
         }
-        fVar11 = fVar3;
-        if (fVar8 < fVar3) {
-          fVar11 = fVar8;
-          fVar8 = fVar3;
+        srcMinX = fVar3;
+        if (srcMaxX < fVar3) {
+          srcMinX = srcMaxX;
+          srcMaxX = fVar3;
         }
-        uVar25 = (SInt32)dVar46 & 0xfe00;
-        uVar42 = (SInt32)fVar11 - 1;
+        uVar25 = (SInt32)srcWidthD & 0xfe00;
+        uVar42 = (SInt32)srcMinX - 1;
         uVar42 = (((SInt32)uVar42 >> 9) + (UInt32)((SInt32)uVar42 < 0 && (uVar42 & 0x1ff) != 0)) * 0x200;
         firstColumn = 0;
         if ((-1 < (SInt32)uVar42) && (firstColumn = uVar25, (SInt32)uVar42 <= (SInt32)uVar25)) {
           firstColumn = uVar42 & 0xfe00;
         }
         uVar42 = 0x40;
-        if ((0x40 < copyHeight) && (uVar42 = (SInt32)dVar45 & 0xffc0, (SInt32)(copyHeight - uVar42) < 0x40)) {
+        if ((0x40 < copyHeight) && (uVar42 = (SInt32)srcHeightD & 0xffc0, (SInt32)(copyHeight - uVar42) < 0x40)) {
           uVar42 = uVar42 - 0x40;
         }
         firstRow = 0;
-        uVar25 = (SInt32)fVar18 - 1;
+        uVar25 = (SInt32)srcMinY - 1;
         uVar25 = (((SInt32)uVar25 >> 6) + (UInt32)((SInt32)uVar25 < 0 && (uVar25 & 0x3f) != 0)) * 0x40;
         if ((-1 < (SInt32)uVar25) && (firstRow = uVar42 & 0xffff, (SInt32)uVar25 <= (SInt32)uVar42)) {
           firstRow = uVar25 & 0xffc0;
@@ -386,9 +422,9 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         }
         uVar25 = copyWidth - 1;
         uVar35 = (((SInt32)uVar25 >> 9) + (UInt32)((SInt32)uVar25 < 0 && (uVar25 & 0x1ff) != 0)) * 0x200;
-        uVar25 = (UInt32)fVar8;
-        if ((FLOAT_0004c370 < fVar8) &&
-           ((float)((double)CONCAT44d(0x43300000,uVar25 ^ 0x80000000) - DOUBLE_0004c3a8) < fVar8)) {
+        uVar25 = (UInt32)srcMaxX;
+        if ((FLOAT_0004c370 < srcMaxX) &&
+           ((float)((double)CONCAT44d(0x43300000,uVar25 ^ 0x80000000) - DOUBLE_0004c3a8) < srcMaxX)) {
           uVar25 = uVar25 + 1;
         }
         if ((SInt32)uVar25 <= (SInt32)uVar35) {
@@ -404,9 +440,9 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         }
         uVar35 = copyHeight - 1;
         uVar37 = (((SInt32)uVar35 >> 6) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x3f) != 0)) * 0x40;
-        uVar35 = (UInt32)fVar13;
-        if ((FLOAT_0004c370 < fVar13) &&
-           ((float)((double)CONCAT44d(0x43300000,uVar35 ^ 0x80000000) - DOUBLE_0004c3a8) < fVar13)) {
+        uVar35 = (UInt32)srcMaxY;
+        if ((FLOAT_0004c370 < srcMaxY) &&
+           ((float)((double)CONCAT44d(0x43300000,uVar35 ^ 0x80000000) - DOUBLE_0004c3a8) < srcMaxY)) {
           uVar35 = uVar35 + 1;
         }
         if ((SInt32)uVar35 <= (SInt32)uVar37) {
@@ -420,13 +456,13 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
       }
       quadPacket = packet + 0xbd;
       if (chunkCount != 0) {
-        fVar2 = FLOAT_0004c370;
-        if (fVar1 != FLOAT_0004c370) {
-          fVar2 = FLOAT_0004c374 / fVar1;
+        dstPerSrcX = FLOAT_0004c370;
+        if (srcPerQuadX != FLOAT_0004c370) {
+          dstPerSrcX = FLOAT_0004c374 / srcPerQuadX;
         }
-        fVar1 = FLOAT_0004c370;
-        if (fVar7 != FLOAT_0004c370) {
-          fVar1 = FLOAT_0004c374 / fVar7;
+        dstPerSrcY = FLOAT_0004c370;
+        if (srcPerQuadY != FLOAT_0004c370) {
+          dstPerSrcY = FLOAT_0004c374 / srcPerQuadY;
         }
         if (rowChunks != 0) {
           uVar37 = copyHeight - firstRow;
@@ -439,7 +475,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
               chunkTop = firstRow + iVar30;
               columnWidthLeft = copyWidth - firstColumn;
               iVar22 = 0;
-              fVar5 = (float)((double)CONCAT44d(0x43300000,chunkTop ^ 0x80000000) - DOUBLE_0004c3a8);
+              chunkTopF = (float)((double)CONCAT44d(0x43300000,chunkTop ^ 0x80000000) - DOUBLE_0004c3a8);
               chunkLeft = firstColumn;
               columnsLeft = columnChunks;
               do {
@@ -455,58 +491,58 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
                 }
                 chunkPacket[2] = uVar26;
                 chunkPacket[3] = uVar36;
-                fVar4 = fVar11;
+                fVar4 = srcMinX;
                 if (iVar22 != 0) {
                   fVar4 = (float)((double)CONCAT44d(0x43300000,chunkLeft + 0x200 ^ 0x80000000) -
                                  DOUBLE_0004c3a8);
                 }
-                fVar7 = fVar18;
+                fVar7 = srcMinY;
                 if (rowIndex != 0) {
                   fVar7 = (float)((double)CONCAT44d(0x43300000,chunkTop + 0x40 ^ 0x80000000) -
                                  DOUBLE_0004c3a8);
                 }
-                fVar3 = fVar8;
+                fVar3 = srcMaxX;
                 if (iVar22 != columnChunks - 1) {
                   fVar3 = (float)((double)CONCAT44d(0x43300000,chunkLeft + 0xe00 ^ 0x80000000) -
                                  DOUBLE_0004c3a8);
                 }
-                fVar9 = fVar13;
+                fVar9 = srcMaxY;
                 if (rowIndex != rowChunks - 1) {
                   fVar9 = (float)((double)CONCAT44d(0x43300000,chunkTop + 0xfc0 ^ 0x80000000) -
                                  DOUBLE_0004c3a8);
                 }
                 fVar15 = fVar7;
-                if (fVar7 - fVar18 < 0.0) {
-                  fVar15 = fVar18;
+                if (fVar7 - srcMinY < 0.0) {
+                  fVar15 = srcMinY;
                 }
-                fVar14 = fVar13;
-                if (fVar9 - fVar13 < 0.0) {
+                fVar14 = srcMaxY;
+                if (fVar9 - srcMaxY < 0.0) {
                   fVar14 = fVar9;
                 }
                 fVar10 = fVar4;
-                if (fVar4 - fVar11 < 0.0) {
-                  fVar10 = fVar11;
+                if (fVar4 - srcMinX < 0.0) {
+                  fVar10 = srcMinX;
                 }
-                fVar12 = fVar8;
-                if (fVar3 - fVar8 < 0.0) {
+                fVar12 = srcMaxX;
+                if (fVar3 - srcMaxX < 0.0) {
                   fVar12 = fVar3;
                 }
-                if (-(fVar7 - fVar18) < 0.0) {
+                if (-(fVar7 - srcMinY) < 0.0) {
                   fVar15 = fVar7;
                 }
-                if (-(fVar9 - fVar13) < 0.0) {
+                if (-(fVar9 - srcMaxY) < 0.0) {
                   fVar9 = fVar14;
                 }
-                if (-(fVar4 - fVar11) < 0.0) {
+                if (-(fVar4 - srcMinX) < 0.0) {
                   fVar10 = fVar4;
                 }
-                if (-(fVar3 - fVar8) < 0.0) {
+                if (-(fVar3 - srcMaxX) < 0.0) {
                   fVar3 = fVar12;
                 }
-                fVar12 = fVar1 * fVar15 + fVar1 * -fVar17;
-                fVar16 = fVar1 * fVar9 + fVar1 * -fVar17;
-                fVar7 = fVar2 * fVar10 + fVar2 * -fVar6;
-                fVar4 = fVar2 * fVar3 + fVar2 * -fVar6;
+                fVar12 = dstPerSrcY * fVar15 + dstPerSrcY * -srcOffsetY;
+                fVar16 = dstPerSrcY * fVar9 + dstPerSrcY * -srcOffsetY;
+                fVar7 = dstPerSrcX * fVar10 + dstPerSrcX * -srcOffsetX;
+                fVar4 = dstPerSrcX * fVar3 + dstPerSrcX * -srcOffsetX;
                 fVar14 = fVar9;
                 fVar19 = fVar12;
                 if (fVar16 < fVar12) {
@@ -523,15 +559,15 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
                   fVar12 = fVar4;
                   fVar4 = fVar7;
                 }
-                fVar7 = FLOAT_0004c370;
+                invChunkWidth = FLOAT_0004c370;
                 if (uVar26 != 0) {
-                  fVar7 = FLOAT_0004c374 /
+                  invChunkWidth = FLOAT_0004c374 /
                           (float)((double)CONCAT44d(0x43300000,uVar26 ^ 0x80000000) - DOUBLE_0004c3a8
                                  );
                 }
-                fVar3 = FLOAT_0004c370;
+                invChunkHeight = FLOAT_0004c370;
                 if (uVar36 != 0) {
-                  fVar3 = FLOAT_0004c374 /
+                  invChunkHeight = FLOAT_0004c374 /
                           (float)((double)CONCAT44d(0x43300000,uVar36 ^ 0x80000000) - DOUBLE_0004c3a8
                                  );
                 }
@@ -539,24 +575,24 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
                 iVar22 = iVar22 + 1;
                 chunkLeft = chunkLeft + 0xc00;
                 columnWidthLeft = columnWidthLeft - 0xc00;
-                fVar21 = (fVar16 - fVar19) * FLOAT_0004c37c;
-                fVar20 = (fVar4 - fVar12) * FLOAT_0004c37c;
-                fVar16 = (fVar16 + fVar19) * FLOAT_0004c380;
-                fVar4 = (fVar4 + fVar12) * FLOAT_0004c380;
+                halfHeight = (fVar16 - fVar19) * FLOAT_0004c37c;
+                halfWidth = (fVar4 - fVar12) * FLOAT_0004c37c;
+                centerY = (fVar16 + fVar19) * FLOAT_0004c380;
+                centerX = (fVar4 + fVar12) * FLOAT_0004c380;
                 dVar44 = (double)CONCAT44d(0x43300000,uVar26) - DOUBLE_0004c3a8;
                 chunkPacket[4] = 0x31080;
-                chunkPacket[6] = FBITS(fVar3 * (fVar14 - fVar5));
-                chunkPacket[8] = FBITS(fVar3 * (fVar15 - fVar5));
+                chunkPacket[6] = FBITS(invChunkHeight * (fVar14 - chunkTopF));
+                chunkPacket[8] = FBITS(invChunkHeight * (fVar15 - chunkTopF));
                 chunkPacket[0xb] = 0xc0033500;
                 chunkPacket[0xc] = 0x10031;
-                chunkPacket[0xd] = FBITS(fVar4);
-                fVar4 = (float)dVar44;
-                chunkPacket[0xe] = FBITS(fVar16);
+                chunkPacket[0xd] = FBITS(centerX);
+                chunkLeftF = (float)dVar44;
+                chunkPacket[0xe] = FBITS(centerY);
                 chunkPacket[9] = 0x1087;
-                chunkPacket[10] = (SInt32)fVar20 << 0x10 | (SInt32)fVar21;
+                chunkPacket[10] = (SInt32)halfWidth << 0x10 | (SInt32)halfHeight;
                 chunkPacket[0xf] = 0;
-                chunkPacket[7] = FBITS(fVar7 * (fVar9 - fVar4));
-                chunkPacket[5] = FBITS(fVar7 * (fVar10 - fVar4));
+                chunkPacket[7] = FBITS(invChunkWidth * (fVar9 - chunkLeftF));
+                chunkPacket[5] = FBITS(invChunkWidth * (fVar10 - chunkLeftF));
                 chunkPacket = chunkPacket + 0x10;
                 columnsLeft = columnsLeft - 1;
               } while (columnsLeft != 0);
@@ -569,31 +605,31 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         }
       }
       else {
-        fVar3 = FLOAT_0004c370;
+        invCopyWidth = FLOAT_0004c370;
         if (copyWidth != 0) {
-          fVar3 = FLOAT_0004c374 /
+          invCopyWidth = FLOAT_0004c374 /
                   (float)((double)CONCAT44d(0x43300000,copyWidth ^ 0x80000000) - DOUBLE_0004c3a8);
         }
-        fVar8 = FLOAT_0004c370;
+        invCopyHeight = FLOAT_0004c370;
         if (copyHeight != 0) {
-          fVar8 = FLOAT_0004c374 /
+          invCopyHeight = FLOAT_0004c374 /
                   (float)((double)CONCAT44d(0x43300000,copyHeight ^ 0x80000000) - DOUBLE_0004c3a8);
         }
-        fVar13 = (fVar2 - quadLeft) * FLOAT_0004c37c;
-        fVar11 = (fVar5 - quadTop) * FLOAT_0004c37c;
-        fVar9 = (quadTop + fVar5) * FLOAT_0004c380;
-        fVar18 = (quadLeft + fVar2) * FLOAT_0004c380;
+        halfWidth = (quadRight - quadLeft) * FLOAT_0004c37c;
+        halfHeight = (quadBottom - quadTop) * FLOAT_0004c37c;
+        centerY = (quadTop + quadBottom) * FLOAT_0004c380;
+        centerX = (quadLeft + quadRight) * FLOAT_0004c380;
         *quadPacket = 0x31080;
-        packet[0xbe] = FBITS(fVar3 * (fVar4 + fVar6));
-        packet[0xbf] = FBITS(fVar8 * (fVar7 * fVar5 + fVar17));
-        packet[0xc0] = FBITS(fVar3 * (fVar2 * fVar1 + fVar6));
-        packet[0xc1] = FBITS(fVar8 * (fVar7 * quadTop + fVar17));
+        packet[0xbe] = FBITS(invCopyWidth * (scaledQuadLeft + srcOffsetX));
+        packet[0xbf] = FBITS(invCopyHeight * (srcPerQuadY * quadBottom + srcOffsetY));
+        packet[0xc0] = FBITS(invCopyWidth * (quadRight * srcPerQuadX + srcOffsetX));
+        packet[0xc1] = FBITS(invCopyHeight * (srcPerQuadY * quadTop + srcOffsetY));
         packet[0xc4] = 0xc0033500;
         packet[0xc5] = 0x10031;
-        packet[0xc6] = FBITS(fVar18);
-        packet[199] = FBITS(fVar9);
+        packet[0xc6] = FBITS(centerX);
+        packet[199] = FBITS(centerY);
         packet[0xc2] = 0x1087;
-        packet[0xc3] = (SInt32)fVar13 << 0x10 | (SInt32)fVar11;
+        packet[0xc3] = (SInt32)halfWidth << 0x10 | (SInt32)halfHeight;
         packet[200] = 0;
       }
       texturePitchWord = packet[0xaa];
@@ -650,8 +686,8 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
     else {
       uVar39 = packet[0xa0];
       iVar22 = (formatIndexSaved & 0xff) * 0x1c;
-      uVar32 = (SInt32)dVar46 >> 1 & 0xfffffe00;
-      uVar42 = (SInt32)dVar46 - uVar32;
+      uVar32 = (SInt32)srcWidthD >> 1 & 0xfffffe00;
+      uVar42 = (SInt32)srcWidthD - uVar32;
       uVar34 = uVar32 + 2;
       if ((uVar39 & 0x18) == 0) {
         uVar28 = FormatTableLookup_0x0004d2dc(iVar22);
@@ -668,7 +704,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
       }
       uVar28 = uVar32 + 1 & 0x7ff | packet[0xa6] & 0xfffff800;
       packet[0xa6] = uVar28;
-      fVar1 = (float)((double)CONCAT44d(0x43300000,uVar34 ^ 0x80000000) - dVar48);
+      fVar1 = (float)((double)CONCAT44d(0x43300000,uVar34 ^ 0x80000000) - intToFloatBias);
       if (fVar1 != fVar2) {
         fVar2 = FLOAT_0004c374 / fVar1;
       }
@@ -706,9 +742,9 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         packet[0xbd] = 0x31080;
         packet[0xbe] = FBITS(fVar2);
         packet[0xc2] = 0x1087;
-        packet[0xbf] = FBITS((float)(dVar47 * (double)(float)dVar45));
+        packet[0xbf] = FBITS((float)(invSrcHeightD * (double)(float)dVar45));
         packet[0xc0] = FBITS(fVar5);
-        packet[0xc1] = FBITS((float)(dVar47 * (double)(float)dVar44));
+        packet[0xc1] = FBITS((float)(invSrcHeightD * (double)(float)dVar44));
         packet[0xc4] = 0xc0033500;
         packet[0xc5] = 0x10031;
         packet[0xc6] = FBITS(fVar1);
@@ -763,10 +799,10 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         fVar2 = (fVar2 + quadLeft + quadWidth) * FLOAT_0004c380;
         packet[iVar23] = 0x31080;
         packet[iVar30 + 5] = FBITS(fVar5);
-        packet[iVar30 + 6] = FBITS((float)(dVar47 * (double)(float)dVar45));
+        packet[iVar30 + 6] = FBITS((float)(invSrcHeightD * (double)(float)dVar45));
         packet[iVar30 + 7] = FBITS(fVar1);
         packet[iVar30 + 9] = 0x1087;
-        packet[iVar30 + 8] = FBITS((float)(dVar47 * (double)(float)dVar44));
+        packet[iVar30 + 8] = FBITS((float)(invSrcHeightD * (double)(float)dVar44));
         packet[iVar30 + 0xb] = 0xc0033500;
         packet[iVar30 + 0xc] = 0x10031;
         packet[iVar30 + 0xd] = FBITS(fVar2);
@@ -792,9 +828,9 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
     dVar49 = (double)CONCAT44d(0x43300000,uVar32 ^ 0x80000000) - DOUBLE_0004c3a8;
     packet[0xbd] = 0x31080;
     packet[0xbe] = FBITS((float)(dVar44 * (double)(float)dVar45));
-    packet[0xbf] = FBITS((float)(dVar47 * (double)(float)dVar49));
+    packet[0xbf] = FBITS((float)(invSrcHeightD * (double)(float)dVar49));
     packet[0xc0] = FBITS((float)(dVar44 * (double)(float)dVar46));
-    packet[0xc1] = FBITS((float)(dVar47 * (double)(float)dVar48));
+    packet[0xc1] = FBITS((float)(invSrcHeightD * (double)(float)dVar48));
     packet[0xc2] = 0x1087;
     packet[0xc4] = 0xc0033500;
     packet[0xc5] = 0x10031;

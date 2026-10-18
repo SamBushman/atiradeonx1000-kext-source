@@ -1,0 +1,50 @@
+# Write3DTexQuad function-wide temporaries split by role (use rows)
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar2	quadRight	INFERRED	quadLeft + quadWidth: right edge of the destination quad (centre x = (quadLeft+quadRight)/2, packet word 0xc6)	fVar2 = quadLeft \+ quadWidth;	if \(fVar1 != FLOAT_0004c370\) \{@-1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar2	quadRight	INFERRED	same value in the single-quad path	if \(uVar34 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar5	quadBottom	INFERRED	quadTop + quadHeight: bottom edge of the destination quad	fVar5 = quadTop \+ local_300;	fVar5 = \(float\)\(\(double\)CONCAT44d\(0x43300000,chunkTop \^ 0x80000000\) \- DOUBLE_0004c3a8\);
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar5	quadBottom	INFERRED	same value in the single-quad path	if \(uVar34 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar1	srcPerQuadX	INFERRED	rectWidth / quadWidth: source texels per destination unit in x	fVar5 = quadTop \+ local_300;@1	if \(fVar7 != FLOAT_0004c370\) \{@-1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar1	srcPerQuadX	INFERRED	same value in the single-quad path	if \(uVar34 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar7	srcPerQuadY	INFERRED	rectHeight / quadHeight, negated when flip is set	if \(local_300 != FLOAT_0004c370\) \{@-1	fVar7 = fVar18;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar7	srcPerQuadY	INFERRED	same value in the single-quad path	if \(uVar34 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar4	scaledQuadLeft	INFERRED	quadLeft * srcPerQuadX	fVar4 = quadLeft \* fVar1;	fVar8 = fVar2 \* fVar1 \+ fVar6;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar4	scaledQuadLeft	INFERRED	same value in the single-quad path	if \(uVar34 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar6	srcOffsetX	INFERRED	rectX - quadLeft*srcPerQuadX: source x = quadX * srcPerQuadX + srcOffsetX	fVar6 = \(float\)\(\(double\)CONCAT44d\(0x43300000,\(SInt32\)rectX \^ 0x80000000\) \- DOUBLE_0004c3a8\) \-	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar3	rectYF	CONFIRMED	(float)rectY, used in the next line only	fVar3 = \(float\)\(\(double\)CONCAT44d\(0x43300000,\(SInt32\)rectY \^ 0x80000000\) \- DOUBLE_0004c3a8\);	\- DOUBLE_0004c3a8\) \- \(fVar17 \- fVar3\);@1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar17	srcOffsetY	INFERRED	likewise for y, reflected when flip is set	fVar17 = \-\(quadTop \* fVar7 \- fVar3\);	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar11	srcMinX	INFERRED	zero-chunk case: the source bounding box is empty	fVar11 = FLOAT_0004c370;	fVar18 = FLOAT_0004c370;@1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar8	srcMaxX	INFERRED	zero-chunk case	fVar11 = FLOAT_0004c370;@1	fVar18 = FLOAT_0004c370;@1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar13	srcMaxY	INFERRED	zero-chunk case	fVar13 = FLOAT_0004c370;	fVar18 = FLOAT_0004c370;@1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar18	srcMinY	INFERRED	zero-chunk case	fVar18 = FLOAT_0004c370;	fVar11 = fVar7 \* quadTop \+ fVar17;@-1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar11	srcMinX	INFERRED	smaller of the mapped left/right edges: bounding box of the quad in source space (the chunk counts derive from it)	fVar11 = fVar3;	if \(uVar34 != 0\) \{@-2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar8	srcMaxX	INFERRED	larger of the mapped left/right edges	fVar8 = fVar2 \* fVar1 \+ fVar6;	if \(uVar34 != 0\) \{@-2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar18	srcMinY	INFERRED	smaller of the mapped top/bottom edges	fVar18 = fVar11;	if \(uVar34 != 0\) \{@-2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar13	srcMaxY	INFERRED	larger of the mapped top/bottom edges	fVar13 = fVar7 \* fVar5 \+ fVar17;	if \(uVar34 != 0\) \{@-2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar2	dstPerSrcX	INFERRED	1 / srcPerQuadX: maps a source x back to the destination quad	if \(fVar1 != FLOAT_0004c370\) \{@-1	if \(uVar34 != 0\) \{@-2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar1	dstPerSrcY	INFERRED	1 / srcPerQuadY	if \(fVar7 != FLOAT_0004c370\) \{@-1	if \(uVar34 != 0\) \{@-2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar5	chunkTopF	CONFIRMED	(float)chunkTop, computed from chunkTop in the line above	fVar5 = \(float\)\(\(double\)CONCAT44d\(0x43300000,chunkTop \^ 0x80000000\) \- DOUBLE_0004c3a8\);	\} while \(rowIndex != uVar35\);@1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar7	invChunkWidth	INFERRED	1 / chunk width (uVar26), the x texture-coordinate scale of the chunk quad	if \(uVar26 != 0\) \{@-1	\} while \(columnsLeft != 0\);
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar3	invChunkHeight	INFERRED	1 / chunk height (uVar36)	if \(uVar36 != 0\) \{@-1	\} while \(columnsLeft != 0\);
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar21	halfHeight	INFERRED	(maxY-minY)*0.5, low halfword of packet word 10	fVar21 = \(fVar16 \- fVar19\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar20	halfWidth	INFERRED	(maxX-minX)*0.5, high halfword of packet word 10	fVar20 = \(fVar4 \- fVar12\) \* FLOAT_0004c37c;	\} while \(columnsLeft != 0\);
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar16	centerY	INFERRED	(minY+maxY)*0.5, packet word 0xe	fVar16 = \(fVar16 \+ fVar19\) \* FLOAT_0004c380;	\} while \(columnsLeft != 0\);	1,3
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar4	centerX	INFERRED	(minX+maxX)*0.5, packet word 0xd	fVar4 = \(fVar4 \+ fVar12\) \* FLOAT_0004c380;	fVar4 = \(float\)dVar44;	1,3
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar4	chunkLeftF	CONFIRMED	(float) of the chunk's left coordinate (uVar26 = chunkLeft ^ 0x80000000 converted)	fVar4 = \(float\)dVar44;	chunkPacket\[5\] = FBITS\(fVar7 \* \(fVar10 \- fVar4\)\);@1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar3	invCopyWidth	CONFIRMED	1 / (float)copyWidth: the x texture-coordinate scale of the single quad	if \(uVar34 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar8	invCopyHeight	CONFIRMED	1 / (float)copyHeight	if \(uVar32 != 0\) \{@-1	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar13	halfWidth	INFERRED	(quadRight-quadLeft)*0.5, high halfword of packet word 0xc3	fVar13 = \(fVar2 \- quadLeft\) \* FLOAT_0004c37c;	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar11	halfHeight	INFERRED	(quadBottom-quadTop)*0.5, low halfword of packet word 0xc3	fVar11 = \(fVar5 \- quadTop\) \* FLOAT_0004c37c;	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar9	centerY	INFERRED	(quadTop+quadBottom)*0.5, packet word 199	fVar9 = \(quadTop \+ fVar5\) \* FLOAT_0004c380;	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	fVar18	centerX	INFERRED	(quadLeft+quadRight)*0.5, packet word 0xc6	fVar18 = \(quadLeft \+ fVar2\) \* FLOAT_0004c380;	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar45	srcRightD	CONFIRMED	(double)srcRightEdge - bias, before the float rounding in the next lines	dVar45 = \(double\)CONCAT44d\(0x43300000,srcRightEdge\) \- DOUBLE_0004c3b0;	dVar45 = \(double\)srcHeightF;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar46	srcRightRoundedD	CONFIRMED	(double)(float)srcRightD: the value tested against the 2^31 threshold	dVar46 = \(double\)\(float\)dVar45;	dVar46 = \(double\)srcWidthF;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar47	srcTopD	CONFIRMED	srcYBiased converted to double	dVar47 = \(double\)CONCAT44d\(0x43300000,srcYBiased\) \- DOUBLE_0004c3a8;	dVar47 = \(double\)FLOAT_0004c370;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar44	srcLeftD	CONFIRMED	srcXBiased converted to double	dVar44 = \(double\)CONCAT44d\(0x43300000,srcXBiased\) \- DOUBLE_0004c3a8;	dVar44 = \(double\)FLOAT_0004c370;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar48	srcTopRoundedD	CONFIRMED	(double)(float)srcTopD	dVar48 = \(double\)\(float\)dVar47;	dVar48 = DOUBLE_0004c3a8;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar49	srcBottomD	CONFIRMED	srcBottomEdge converted to double	dVar49 = \(double\)CONCAT44d\(0x43300000,srcBottomEdge\) \- DOUBLE_0004c3b0;	dVar46 = \(double\)srcWidthF;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar51	srcLeftRoundedD	CONFIRMED	(double)(float)srcLeftD	dVar51 = \(double\)\(float\)dVar44;	uVar32 = \(UInt32\)dVar44;@-1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar50	srcBottomRoundedD	CONFIRMED	(double)(float)srcBottomD	dVar50 = \(double\)\(float\)dVar49;	dVar46 = \(double\)srcWidthF;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar46	srcWidthD	CONFIRMED	(double)srcWidthF; copyWidth = (SInt32)srcWidthD & 0xffff	dVar46 = \(double\)srcWidthF;	dVar45 = \(double\)CONCAT44d\(0x43300000,\(SInt32\)rectX \^ 0x80000000\) \- DOUBLE_0004c3a8;@-1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar45	srcHeightD	CONFIRMED	(double)srcHeightF; copyHeight = (SInt32)srcHeightD & 0xffff	dVar45 = \(double\)srcHeightF;	dVar44 = \(double\)CONCAT44d\(0x43300000,uVar25 \^ 0x80000000\) \- DOUBLE_0004c3a8;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar47	invSrcHeightD	INFERRED	1 / srcHeightD (0 if zero): the y texture-coordinate scale of the small-copy paths	dVar47 = \(double\)FLOAT_0004c370;	
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	dVar48	intToFloatBias	CONFIRMED	DOUBLE_0004c3a8 held in a register for the int-to-float conversions	dVar48 = DOUBLE_0004c3a8;	dVar45 = \(double\)CONCAT44d\(0x43300000,\(SInt32\)rectX \^ 0x80000000\) \- DOUBLE_0004c3a8;@-1
