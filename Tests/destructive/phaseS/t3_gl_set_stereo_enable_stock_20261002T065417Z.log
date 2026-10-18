@@ -1,0 +1,10 @@
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] NOTE start: method=t3_gl_set_stereo_enable phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] ABOUT TO CALL GL set_stereo(sel19, mode 1, panel 0) enable
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] RESULT -> 0xe00002bd (kIOReturnNoMemory) GL set_stereo(sel19, mode 1, panel 0) enable
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] NOTE enable -> 0xe00002bd
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] ABOUT TO CALL GL set_stereo(sel19, mode 0, panel 0) restore
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_stereo(sel19, mode 0, panel 0) restore
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] NOTE restore: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:54:17Z [t3_gl_set_stereo_enable/stock/S] NOTE finish: outcome=DIVERGENCE calls=3

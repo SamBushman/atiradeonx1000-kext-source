@@ -1,0 +1,23 @@
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE start: method=t3_gl_reclaim phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] ABOUT TO CALL GL get_data_buffer(sel18)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL get_data_buffer(sel18)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer #0: out0=0xa000 out1=0x10000
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] ABOUT TO CALL GL get_data_buffer(sel18)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL get_data_buffer(sel18)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer #1: out0=0x1a000 out1=0x10000
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] ABOUT TO CALL GL get_data_buffer(sel18)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL get_data_buffer(sel18)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer #2: out0=0x2a000 out1=0x10000
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] ABOUT TO CALL GL reclaim_resources(sel17)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL reclaim_resources(sel17)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE reclaim: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] ABOUT TO CALL GL get_data_buffer(sel18) after reclaim
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL get_data_buffer(sel18) after reclaim
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE get_data_buffer after: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE after reclaim: out0=0xa000 out1=0x10000 (expect out1 0x10000, out0 a non-zero multiple of 0x1000)
+2026-10-02T03:29:56Z [t3_gl_reclaim/stock/S] NOTE finish: outcome=PASS calls=6

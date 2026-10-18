@@ -1,0 +1,27 @@
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] NOTE start: method=t3_dvd_write_buffer phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL open DVD connection
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL DVD set_surface(1,0,0) binds
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(1,0,0) binds
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL DVD setup_buffers(0,0,16,16, 0x7ffc00)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD setup_buffers(0,0,16,16, 0x7ffc00)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] NOTE setup_buffers: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL DVD write_buffer(sel6, rect 0,0,4,4, bufferSelect 0)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_buffer(sel6, rect 0,0,4,4, bufferSelect 0)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] NOTE write_buffer bufferSelect 0 -> 0x00000000 (0 = done or no-op; CannotLock = slot not enabled/usable)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL DVD write_buffer(sel6, rect 0,0,4,4, bufferSelect 1)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_buffer(sel6, rect 0,0,4,4, bufferSelect 1)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] NOTE write_buffer bufferSelect 1 -> 0x00000000 (0 = done or no-op; CannotLock = slot not enabled/usable)
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] ABOUT TO CALL DVD set_surface(0) detaches
+2026-10-02T06:13:01Z [t3_dvd_write_buffer/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(0) detaches
+2026-10-02T06:13:02Z [t3_dvd_write_buffer/stock/S] NOTE source buffer bytes changed: 0 (expected 0)
+2026-10-02T06:13:02Z [t3_dvd_write_buffer/stock/S] NOTE finish: outcome=PASS calls=10

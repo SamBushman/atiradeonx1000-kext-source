@@ -1,0 +1,23 @@
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] NOTE start: method=t3_2d_unlock_swap phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL 2D lock_memory(0)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0)
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] NOTE lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL 2D unlock_memory(0x80000000) -> unlock then swap_surface
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0x80000000) -> unlock then swap_surface
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] NOTE unlock+swap -> r=0x00000000 tag=0x0
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] ABOUT TO CALL 2D set_surface(0) detaches
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+2026-10-02T03:18:16Z [t3_2d_unlock_swap/stock/S] NOTE finish: outcome=PASS calls=9

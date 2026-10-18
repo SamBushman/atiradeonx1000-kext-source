@@ -1,0 +1,80 @@
+Oct  1 21:57:49 sam-bushmans-power-mac-g5 ntpd[233]: sendto(17.253.16.253): Bad file descriptor
+Oct  1 22:23:57 localhost kernel[0]: standard timeslicing quantum is 10000 us
+Oct  1 22:23:57 localhost mDNSResponder-108.6 (Jul 19 2007 11: 33:32)[46]: starting
+Oct  1 22:23:58 localhost kernel[0]: vm_page_bootstrap: 4094485 free pages
+Oct  1 22:23:57 localhost memberd[54]: memberd starting up
+Oct  1 22:23:58 localhost kernel[0]: mig_table_max_displ = 70
+Oct  1 22:23:57 localhost lookupd[55]: lookupd (version 369.8) starting - Thu Oct  1 22:23:57 2026
+Oct  1 22:23:58 localhost kernel[0]: 94 prelinked modules
+Oct  1 22:23:58 localhost DirectoryService[61]: Launched version 2.1 (v353.6)
+Oct  1 22:23:58 localhost kernel[0]: Copyright (c) 1982, 1986, 1989, 1991, 1993
+Oct  1 22:23:58 localhost ajad[43]: ajad - AJA daemon starting up...\n
+Oct  1 22:23:58 localhost kernel[0]: The Regents of the University of California. All rights reserved.
+Oct  1 22:23:58 localhost ajad[43]: ajad - Copyright 2005-2008 AJA Video Systems, Inc.  All rights reserved.\n
+Oct  1 22:23:58 localhost kernel[0]: using 8192 buffer headers and 4096 cluster IO buffer headers
+Oct  1 22:23:58 localhost kernel[0]: AppleKauaiATA shasta-ata features enabled
+Oct  1 22:23:58 localhost kernel[0]: DART enabled
+Oct  1 22:23:58 localhost kernel[0]: Enabling ECC Error Notifications
+Oct  1 22:23:58 localhost kernel[0]: FireWire (OHCI) Apple ID 52 built-in now active, GUID 001451ff fe3f263c; max speed s800.
+Oct  1 22:23:58 localhost kernel[0]: AppleSMUparent::clientNotifyData nobody registed for 0x40
+Oct  1 22:23:58 localhost kernel[0]: Security auditing service present
+Oct  1 22:23:58 localhost kernel[0]: BSM auditing present
+Oct  1 22:23:58 localhost kernel[0]: disabled
+Oct  1 22:23:58 localhost kernel[0]: rooting via boot-uuid from /chosen: 26A8A72F-1907-3F1D-8457-DE9AD3ADCA6B
+Oct  1 22:23:58 localhost kernel[0]: Waiting on <dict ID="0"><key>IOProviderClass</key><string ID="1">IOResources</string><key>IOResourceMatch</key><string ID="2">boot-uuid-media</string></dict>
+Oct  1 22:23:58 localhost kernel[0]: Got boot device = IOService:/MacRISC4PE/ht@0,f2000000/AppleMacRiscHT/pci@9/IOPCI2PCIBridge/k2-sata-root@C/AppleK2SATARoot/k2-sata@0/AppleK2SATA/ATADeviceNub@0/IOATABlockStorageDriver/IOATABlockStorageDevice/IOBlockStorageDriver/WDC WD2500JS-41MVB1 Media/IOApplePartitionScheme/Apple_HFS_Untitled_1@3
+Oct  1 22:23:58 localhost kernel[0]: BSD root: disk1s3, major 14, minor 5
+Oct  1 22:23:58 localhost kernel[0]: jnl: replay_journal: from: 7704576 to: 16248832 (joffset 0x5b7000)
+Oct  1 22:23:58 localhost kernel[0]: AppleSMU -- shutdown cause = 3
+Oct  1 22:23:58 localhost kernel[0]: AppleSMU::PMU vers = 0x000d00a0, SPU vers = 0x69, SDB vers = 0x01,
+Oct  1 22:23:58 localhost kernel[0]: HFS: Removed 1 orphaned unlinked files
+Oct  1 22:23:58 localhost kernel[0]: Jettisoning kernel linker.
+Oct  1 22:23:58 localhost kernel[0]: Resetting IOCatalogue.
+Oct  1 22:23:58 localhost kernel[0]: Matching service count = 0
+Oct  1 22:23:58 localhost kernel[0]: Matching service count = 2
+Oct  1 22:23:58 localhost kernel[0]: Matching service count = 2
+Oct  1 22:23:58 localhost kernel[0]: Matching service count = 2
+Oct  1 22:23:58 localhost kernel[0]: Matching service count = 2
+Oct  1 22:23:58 localhost kernel[0]: Matching service count = 2
+Oct  1 22:23:58 localhost kernel[0]: SonnetSATA::init 2.2.4, (c) 2004-2010 Sonnet Technologies, Inc.
+Oct  1 22:23:58 localhost kernel[0]: SonnetSATA::start: switched to MSI mode
+Oct  1 22:23:58 localhost kernel[0]: SonnetSATA::setPowerState: Switch to MSI mode from wakeup
+Oct  1 22:23:58 localhost kernel[0]: PowerMac11_2_ThermalProfile::start 1
+Oct  1 22:23:58 localhost kernel[0]: PowerMac11_2_ThermalProfile::end 1
+Oct  1 22:23:58 localhost kernel[0]: SMU_Neo2_PlatformPlugin::initThermalProfile - entry
+Oct  1 22:23:58 localhost kernel[0]: SonnetSATA::detectDeviceType@0: Marvell 88SX7042 detected Disk Drive WDC WD7500BPKT-75PK4T0                   01.01A01      WD-WXF1E62JEPN6
+Oct  1 22:23:58 localhost kernel[0]: SMU_Neo2_PlatformPlugin::initThermalProfile - calling adjust
+Oct  1 22:23:58 localhost kernel[0]: PowerMac11_2_ThermalProfile::adjustThermalProfile start
+Oct  1 22:23:58 localhost kernel[0]: IPv6 packet filtering initialized, default to accept, logging disabled
+Oct  1 22:23:59 localhost kernel[0]: BCM5701Enet: Ethernet address 00:16:cb:39:ae:48
+Oct  1 22:23:59 localhost kernel[0]: BCM5701Enet: Ethernet address 00:16:cb:39:ae:49
+Oct  1 22:23:59 localhost lookupd[71]: lookupd (version 369.8) starting - Thu Oct  1 22:23:59 2026
+Oct  1 22:23:59 localhost usbmuxd[49]: usbmuxd-196 built for iTunesNineTwo on May 17 2010 at 13:53:51, running 32 bit
+Oct  1 22:23:59 localhost kernel[0]: jnl: replay_journal: from: 78803968 to: 78853632 (joffset 0x1dd0000)
+Oct  1 22:23:59 localhost diskarbitrationd[53]: disk0s3    hfs      22575FAA-F0D9-3B9A-8E7C-94E65DC59253 Macintosh SSD           /Volumes/Macintosh SSD
+Oct  1 22:23:59 localhost diskarbitrationd[53]: disk1s3    hfs      26A8A72F-1907-3F1D-8457-DE9AD3ADCA6B Tiger HD                /
+Oct  1 22:23:59 localhost kernel[0]: jnl: replay_journal: from: 29808640 to: 31496704 (joffset 0x15c6000)
+Oct  1 22:23:59 localhost mDNSResponder: mDNSPlatformSendUDP sendto failed to send packet on InterfaceID 01808E00   lo0/4 to 224.0.0.251:5353 skt 9 error -1 errno 65 (No route to host) 983036633
+Oct  1 22:23:59 localhost kernel[0]: jnl: replay_journal: from: 3443200 to: 3755008 (joffset 0x193000)
+Oct  1 22:23:59 localhost diskarbitrationd[53]: disk2s3    hfs      F0FFF23F-035E-34E2-9B5F-E5DF7F674213 Test HD                 /Volumes/Test HD
+Oct  1 22:23:59 localhost kernel[0]: jnl: replay_journal: from: 7222272 to: 7263744 (joffset 0x12000)
+Oct  1 22:23:59 localhost mDNSResponder: mDNSPlatformSendUDP sendto failed to send packet on InterfaceID 01808E00   lo0/4 to 224.0.0.251:5353 skt 9 error -1 errno 65 (No route to host) 983036883
+Oct  1 22:23:59 localhost diskarbitrationd[53]: disk2s5    hfs      2294B17F-FE12-3267-9DCD-015CDA34AF8A ThinkTanks              /Volumes/ThinkTanks
+Oct  1 22:23:59 localhost mDNSResponder: mDNSPlatformSendUDP sendto failed to send packet on InterfaceID 01808E00   lo0/4 to 224.0.0.251:5353 skt 9 error -1 errno 65 (No route to host) 983037133
+Oct  1 22:24:00 localhost diskarbitrationd[53]: disk1s5    hfs      3265D6D3-29B2-36D9-B662-886C5D332087 Sorbet HD               /Volumes/Sorbet HD
+Oct  1 22:24:00 localhost mDNSResponder: mDNSPlatformSendUDP sendto failed to send packet on InterfaceID 01808E00   lo0/4 to 224.0.0.251:5353 skt 9 error -1 errno 65 (No route to host) 983037383
+Oct  1 22:24:00 localhost mDNSResponder: Adding browse domain local.
+Oct  1 22:24:01 localhost mDNSResponder: mDNSPlatformSendUDP sendto failed to send packet on InterfaceID 01808E00   lo0/4 to 224.0.0.251:5353 skt 9 error -1 errno 65 (No route to host) 983038383
+Oct  1 22:24:02 sam-bushmans-power-mac-g5 kernel[0]: ATY,Prionace_A: vram [98000000:08000000]
+Oct  1 22:24:02 sam-bushmans-power-mac-g5 kernel[0]: ATY,Prionace_B: vram [98000000:08000000]
+Oct  1 22:24:02 sam-bushmans-power-mac-g5 configd[51]: setting hostname to "sam-bushmans-power-mac-g5.local"
+Oct  1 22:24:02 sam-bushmans-power-mac-g5 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow: Login Window Application Started
+Oct  1 22:24:03 sam-bushmans-power-mac-g5 loginwindow[98]: Login Window Started Security Agent
+Oct  1 22:24:03 sam-bushmans-power-mac-g5 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/ATS.framework/Support/ATSServer: FSFindFolder failed for domain -32762: 0x-43.  Now relying on persistent store for said domain.\n
+Oct  1 22:24:07 sam-bushmans-power-mac-g5 kernel[0]: AppleBCM5701Ethernet - en1 link active, 1000-Mbit, full duplex, symmetric flow control enabled
+Oct  1 22:24:09 sam-bushmans-power-mac-g5 configd[51]: posting notification com.apple.system.config.network_change
+Oct  1 22:24:09 sam-bushmans-power-mac-g5 configd[51]: executing /System/Library/SystemConfiguration/Kicker.bundle/Contents/Resources/enable-network
+Oct  1 22:24:09 sam-bushmans-power-mac-g5 lookupd[124]: lookupd (version 369.8) starting - Thu Oct  1 22:24:09 2026
+Oct  1 22:24:15 sam-bushmans-power-mac-g5 configd[51]:   target=enable-network: disabled
+Oct  1 22:24:28 sam-bushmans-power-mac-g5 diskarbitrationd[53]: disk2s3    hfs      F0FFF23F-035E-34E2-9B5F-E5DF7F674213 Test HD                 /Volumes/Test HD
+Oct  1 22:24:39 sam-bushmans-power-mac-g5 diskarbitrationd[53]: disk0s3    hfs      22575FAA-F0D9-3B9A-8E7C-94E65DC59253 Macintosh SSD           /Volumes/Macintosh SSD

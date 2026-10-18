@@ -1,0 +1,23 @@
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE start: method=t3_gl_textures phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL GL new_texture(sel10, typeTag 2, p1 0x1000)
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL new_texture(sel10, typeTag 2, p1 0x1000)
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE new_texture -> r=0x00000000 out0=0xa000 out1=0xc000 outSize=8
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE new_texture: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL GL purge_texture(0) probe
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL purge_texture(0) probe
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE texture id found by probe: 0
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL GL page_off_texture(id, 0)
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL page_off_texture(id, 0)
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE page_off: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL GL delete_texture(id)
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL delete_texture(id)
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE delete: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL GL delete_texture(id) again
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) GL delete_texture(id) again
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE delete twice: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] ABOUT TO CALL GL purge_texture(id) after delete
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) GL purge_texture(id) after delete
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE purge deleted: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T03:24:06Z [t3_gl_textures/stock/S] NOTE finish: outcome=PASS calls=7

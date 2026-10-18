@@ -1,0 +1,27 @@
+Graphics/Displays:
+
+    ATY,RadeonX1900:
+
+      Chipset Model: ATY,RadeonX1900
+      Type: Display
+      Bus: PCI
+      Slot: SLOT-1
+      VRAM (Total): 128 MB
+      Vendor: ATI (0x1002)
+      Device ID: 0x7240
+      Revision ID: 0x0000
+      ROM Revision: 113-A52070-109
+      Displays:
+        U32J59x:
+          Resolution: 1920 x 1080 @ 60 Hz
+          Depth: 32-bit Color
+          Core Image: Supported
+          Main Display: Yes
+          Mirror: Off
+          Online: Yes
+          Quartz Extreme: Supported
+          Rotation: Supported
+          Television: Yes
+        Display:
+          Status: No display connected
+

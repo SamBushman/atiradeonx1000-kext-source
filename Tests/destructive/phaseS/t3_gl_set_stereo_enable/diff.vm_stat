@@ -1,0 +1,24 @@
+2,4c2,4
+< Pages free:                  4005293.
+< Pages active:                  20442.
+< Pages inactive:                54570.
+---
+> Pages free:                  4003543.
+> Pages active:                  20437.
+> Pages inactive:                56325.
+6,8c6,8
+< "Translation faults":        1822540.
+< Pages copy-on-write:          104734.
+< Pages zero filled:            557340.
+---
+> "Translation faults":        1879453.
+> Pages copy-on-write:          107560.
+> Pages zero filled:            575079.
+10c10
+< Pageins:                       15013.
+---
+> Pageins:                       15027.
+12c12
+< Object cache: 17533 hits of 22041 lookups (79% hit rate)
+---
+> Object cache: 17877 hits of 22398 lookups (79% hit rate)

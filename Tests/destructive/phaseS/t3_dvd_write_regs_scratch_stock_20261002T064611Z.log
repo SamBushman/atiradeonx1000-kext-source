@@ -1,0 +1,28 @@
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE start: method=t3_dvd_write_regs_scratch phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL open DVD connection
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD read_regs(sel13, 0x0770)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x0770 -> 0x000000ff
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD read_regs(sel13, 0x15f4)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x00000000
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD read_regs(sel13, 0x15e0)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15e0 -> 0x0000c495
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD write_regs(sel14, 0x15f4, 0x00000000)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x00000000)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE write identity: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD write_regs(sel14, 0x15f4, 0x5a5a5a5a)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x5a5a5a5a)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE write pattern: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD read_regs(sel13, 0x15f4)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x5a5a5a5a
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE read-back pattern code: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD write_regs(sel14, 0x15f4, 0x00000000)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x00000000)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE restore 0: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD read_regs(sel13, 0x15f4)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x00000000
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE read-back restored code: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] ABOUT TO CALL DVD read_regs(sel13, 0x15e0)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15e0 -> 0x0000c495
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE SCRATCH_REG0 before 0x0000c495 after 0x0000c495 (stamp register, must not go backwards)
+2026-10-02T06:46:11Z [t3_dvd_write_regs_scratch/stock/S] NOTE finish: outcome=PASS calls=10

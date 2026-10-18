@@ -1,0 +1,32 @@
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE start: method=t3_2d_lock_unlock phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D lock_memory(0) UNBOUND
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0xe00002cc (kIOReturnCannotLock) 2D lock_memory(0) UNBOUND
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE lock unbound: got 0xe00002cc want 0xe00002cc -> MATCH
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D lock_memory(0) bound
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0) bound
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE lock #0 -> r=0x00000000 addr=0x3810000 size=0x100 (CannotLock 0xe00002cc is the predicted reject when the surface has no ready buffer)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D unlock_memory(0) after a successful lock
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0) after a successful lock
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D lock_memory(0) bound
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0) bound
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE lock #1 -> r=0x00000000 addr=0x3810000 size=0x100 (CannotLock 0xe00002cc is the predicted reject when the surface has no ready buffer)
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D unlock_memory(0) after a successful lock
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0) after a successful lock
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] ABOUT TO CALL 2D set_surface(0) detaches
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+2026-10-02T03:05:04Z [t3_2d_lock_unlock/stock/S] NOTE finish: outcome=PASS calls=12
