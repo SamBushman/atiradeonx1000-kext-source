@@ -852,3 +852,155 @@ def stop_mock(m, name, k):
 CASES += [
     Case('ATIR500Surface::stop', w_atir500_stop, ret='void', name='ATIR500Surface::stop teardown H3', seeds=250, mock=stop_mock, plain_words=True, ignore_args=REL),
 ]
+
+
+# ---------------------------------------------------------------- ATIR500Surface::alloc_surface_buffer
+def w_alloc_surface_buffer(m, rng):
+    S, A = surf(m, rng)
+    m.w16(A + 0xa8, rng.choice([512, 1024, 0x1000, 0x2000])); m.w16(A + 0xaa, rng.choice([512, 768, 0x1000, 0x2000]))
+    m.w32(A + 0xd0, rng.choice([0, 1, 3]))
+    m.w32(A + 0x7c, obj(m, rng, 'ATIR500Memory', 0x40))
+    m.w32(A + 0x84c, rng.choice([0, 0x10000, 0x800000, 0x2000000])); m.w32(A + 0x9c, rng.choice([0, 0x400000, 0x1000000, 0x8000000]))
+    m.w32(A + 0xb98, rng.choice([4, 1, 2, 6, 0]))
+    m.w32(S + 0xbe8, rng.choice([0, 0, 0x100000, 0x200000, 0x400000, 0x700000]))
+    m.w32(S + 0x90, rng.choice([0, 0, obj(m, rng, 'ATIR500DVDContext', 0x400)]))
+    buf = rng.choice([S + 0x4e0, S + 0x4e0, S + 0xa8, S + 0x120, S + 0x288])
+    m.w32(buf + 0x3c, (rng.choice([0, 1, 2, 3, 4, 8, 15]) << 20) | rng.choice([0, 0x800, 0x800]))
+    m.w8(buf + 0x3a, rng.choice([0, 0xb, 0x2d, 0x2e, 0x2f, 5]))
+    m.w32(buf + 0x10, rng.choice([0x1000, 0x40000, 0x800000]))
+    m.w16(buf + 0x14, rng.choice([0, 64, 640, 1024, 5000])); m.w16(buf + 0x16, rng.choice([1, 2, 4]))
+    m.w16(buf + 0x1c, rng.choice([64, 640, 1024, 5000, 0x1fff])); m.w16(buf + 0x1e, rng.choice([16, 33, 480, 768, 0x1001, 5000]))
+    m.w32(buf + 0x28, word(rng))
+    return [S, buf]
+
+
+def asb_mock(m, name, k):
+    r = (m.seed * 31 + k * 11) % 10
+    if 'ATIR500Memory' in name and 'alloc' in name:
+        return 1 if r < 7 else 0
+    if 'HZMEM_Alloc' in name:
+        return 0x100 + r
+    return surf_mock(m, name, k)
+
+
+CASES += [
+    Case('ATIR500Surface::alloc_surface_buffer', w_alloc_surface_buffer, ret='u32', name='ATIR500Surface::alloc_surface_buffer layouts H3', seeds=500, mock=asb_mock, plain_words=True, ignore_args=REL),
+]
+
+
+# ---------------------------------------------------------------- ATIR500Surface::copy_to_buffer / copy_from_buffer (rows of pixels moved between a mapped surface and a mapped transfer buffer)
+def w_copy_buffer(m, rng):
+    S, A = surf(m, rng)
+    stamp = rng.choice([5, 9]); m.w32(S + 0x7c, stamp)
+    m.w32(S + 0xbe8, rng.choice([0, 0, 0x70000000, 0x10000000, 0xc0000, 0x40000, 0x80000, 0x700c0000]))
+    m.w16(S + 0xbd6, rng.choice([16, 32, 64])); m.w16(S + 0xbda, rng.choice([16, 32, 48, 64]))
+    m.w32(S + 0xc10, 0x20000 + 0x1000 * rng.randrange(4))                  # kernel map address (lazily mapped memory around the test arena is fine; offsets stay small)
+    m.w32(A + 0x82c, rng.choice([0, 2]))
+    buf = S + 0xa8 + 0x78 * rng.randrange(0, 6)
+    m.w32(buf + 0x08, rng.choice([0, 0x100, 0x400, 0x1000]))
+    m.w16(buf + 0x14, rng.choice([16, 32, 64])); m.w16(buf + 0x16, rng.choice([1, 2, 4, 4, 8, 16]))
+    m.w16(buf + 0x1c, rng.choice([16, 32, 64])); m.w16(buf + 0x1e, rng.choice([16, 32, 64]))
+    m.w16(buf + 0x20, rng.choice([1, 1, 2]))
+    flags = (rng.choice([0, 0, 1, 2, 3, 4]) << 20) | (rng.choice([0, 0, 1, 2]) << 16) | (rng.choice([0, 1, 2]) << 12) | rng.choice([0, 0x800, 0x800])
+    m.w32(buf + 0x3c, flags)
+    for i in range(0, 6):
+        m.w32(buf + 0x40 + 4 * i, rng.choice([0, 0x80, 0x400, 0x1000]))
+    if rng.random() < 0.85:
+        bs = m.alloc(0x80); fill_words(m, bs, 0x80, rng)
+        m.w32(bs + 0x54, rng.choice([stamp, stamp, stamp + 1]))
+        m.w32(bs + 0x08, plain(m, rng, 0x400, 0x800))
+        m.w16(bs + 0x50, rng.choice([0, 0x40, 0x100])); m.w16(bs + 0x52, rng.choice([0, 64, 256, 1024]))
+        m.w8(bs + 0x58, rng.choice([0, 1]))
+        m.w32(buf + 0x24, bs)
+    else:
+        m.w32(buf + 0x24, 0)
+    transfer = m.alloc(0x20); fill_words(m, transfer, 0x20, rng)
+    m.w32(transfer + 8, plain(m, rng, 0x400, 0x800))
+    x, y = rng.choice([0, 1, 3, 8]), rng.choice([0, 1, 2, 5])
+    w, h = rng.choice([1, 4, 9, 16]), rng.choice([1, 2, 4, 6])
+    return [S, x, y, w, h, rng.choice([0, 1]), rng.choice([0, 1, 2]), buf, stamp, transfer, rng.choice([0, 0x40, 0x100]), rng.choice([64, 256, 1024]), rng.choice([0, 0, 1])]
+
+
+def copy_buf_mock(m, name, k):
+    r = (m.seed * 37 + k * 13) % 10
+    if slot(name, 0xd0):                                              # IOMemoryMap::getVirtualAddress: a block of (random) memory, entered in the middle so small negative offsets stay inside
+        blk = m.alloc(0x20000)
+        m.uc.mem_write(blk, bytes(((m.seed * 31 + i * 7 + k) & 0xff) for i in range(0x20000)))
+        return blk + 0x8000
+    if slot(name, 0x150) or slot(name, 0x14c):                        # createMappingInTask: a mapping object or nothing
+        return plain(m, rng_for(m, k), 0x400, 0x800) if r != 9 else 0
+    if slot(name, 0x128):                                             # descriptor length
+        return [0, 64, 4096, 65536][r % 4]
+    if 'copy_buffer_using_DMA' in name:
+        return 1 if r < 3 else 0
+    if 'get_offset_of_sample_0' in name:
+        return (m.seed * 7 + k * 3) % 64
+    if slot(name, 0x558):
+        return r
+    if slot(name, 0x5f0) or 'buffer_map_offset' in name:
+        return r * 16
+    return surf_mock(m, name, k)
+
+
+CASES += [
+    Case('ATIR500Surface::copy_to_buffer', w_copy_buffer, ret='void', name='ATIR500Surface::copy_to_buffer mapped H3', seeds=400, mock=copy_buf_mock, plain_words=True, ignore_args=REL,
+         out_extents={'buffer_map_offset': {6: 4}}),
+    Case('ATIR500Surface::copy_from_buffer', w_copy_buffer, ret='void', name='ATIR500Surface::copy_from_buffer mapped H3', seeds=500, mock=copy_buf_mock, plain_words=True, ignore_args=REL,
+         out_extents={'buffer_map_offset': {6: 4}}),
+]
+
+
+# ---------------------------------------------------------------- ATIR500Surface::shape_surface
+def w_shape_surface(m, rng):
+    S, A = surf(m, rng)
+    for i in range(23):                                                           # buffer records: plausible dimensions, so "unchanged" and "changed" both occur
+        r = S + 0xa8 + 0x78 * i
+        m.w16(r + 0x16, rng.choice([0, 1, 2, 4, 4, 8, 16])); m.w16(r + 0x1c, rng.choice([0, 16, 32, 64, 128, 256])); m.w16(r + 0x1e, rng.choice([0, 16, 32, 64, 96]))
+        m.w16(r + 0x20, rng.choice([1, 1, 2, 6])); m.w16(r + 0x22, rng.choice([1, 2, 3]))
+        m.w32(r + 0x10, rng.choice([0, 0x4000, 0x20000])); m.w32(r + 0x24, rng.choice([0, 0, plain(m, rng, 0x40)]))
+    size = (rng.choice([16, 32, 64, 128, 256]), rng.choice([8, 12, 16, 32, 64, 96, 128]))
+    m.w16(S + 0xbd4, size[0]); m.w16(S + 0xbd6, size[1])
+    layer = rng.choice([0, 0, 0x40000, 0x80000, 0xc0000, 0x100000, 0x200000, 0x400000, 0x10000000, 0x30000000, 0x30000000, 0x10000000, 0x50000000, 0x30000000 | 0x400000])
+    m.w32(S + 0xbe8, layer | (0x20 if layer & 0x70000000 and rng.random() < 0.8 else 0) | rng.choice([0, 1, 2, 3, 4, 6, 9, 0xa, 0xb, 0xd, 0x20, 0x8000, 0x20000, 0x30000]) | (rng.choice([0, 0, 0, 1, 3]) << 24 if layer & 0x70000000 else 0))
+    req = rng.choice([0, 0x1c0, 0x40, 0x80, 0x100, 0x200, 0x2, 0x3, 0x23f, 0x7ffc00, 0x7ffc03, 0x1fe, 0x203])
+    m.w32(S + 0xc18, req)
+    m.w32(S + 0xc14, rng.choice([0, 1, 0xffff]))
+    m.w32(S + 0x90, rng.choice([0, 0, obj(m, rng, 'ATIR500DVDContext', 0x400)]))
+    for off in (0x94, 0x96, 0x98, 0x9a):
+        m.w16(S + off, rng.choice([0, 0, 16, 64, 640, 0x240]))
+    m.w32(S + 0xda4, rng.choice([0, 1])); m.w32(S + 0xdac, rng.choice([0, 1])); m.w8(S + 0xbf0, rng.choice([0, 1]))
+    for p in range(2):
+        pr = m.alloc(0x40); fill_words(m, pr, 0x40, rng)
+        m.w32(S + 0xd60 + 8 * p, rng.choice([0, pr])); m.w16(pr + 0x10, rng.choice([0, 640])); m.w16(pr + 0x12, rng.choice([0, 480]))
+    m.w32(A + 0xb94, 0)
+    m.w32(A + 0x13c, word(rng)); m.w16(A + 0x144, rng.choice([0, 640]))
+    return [S]
+
+
+def shape_mock(m, name, k):
+    r = (m.seed * 41 + k * 13) % 16
+    if 'FormatTableLookup' in name:                                   # format table entry bits: bytes-per-pixel exponent (bits 12..14), tiling bits (10..11), index (3..7)
+        return (r << 12) | ((r & 3) << 10) | ((r * 5 & 0x1f) << 3)
+    if 'window_mode_to_ati_format' in name:
+        return r
+    if 'getFramebufferIndex' in name:
+        return r & 1
+    if 'alloc_overlay' in name:
+        return r & 1
+    return surf_mock(m, name, k)
+
+
+CASES += [
+    Case('ATIR500Surface::shape_surface', w_shape_surface, ret='void', name='ATIR500Surface::shape_surface modes H3', seeds=700, mock=shape_mock, plain_words=True, ignore_args=REL),
+]
+
+
+def w_filter_init(m, rng):
+    S = obj(m, rng, 'ATIR500Surface', 0x100)
+    m.fargs = [rng.choice([0.0, 1.5, 100.0, 3.0e9, 1.0e10, -50.0, 1234.5, 5.0e9]), rng.choice([0.0, 1.0, 2.0, 8.0, -3.0, 100.0])]
+    return [S, 0, 0, rng.choice([1, 2, 4, 16, 100]), rng.choice([0, 1]), rng.choice([0, 1, 2, 3, 4, 7, 8]), m.alloc(0x10), m.alloc(0x10)]       # f1/f2 shadow r4/r5
+
+
+CASES += [
+    Case('ATIR500Surface::filter_init', w_filter_init, ret='void', name='ATIR500Surface::filter_init values H3', seeds=200, plain_words=True),
+]
