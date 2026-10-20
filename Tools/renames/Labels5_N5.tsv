@@ -1,0 +1,38 @@
+# N5: goto labels of the GL context sources (def rows; use-row anchors in Locals5_N5.tsv still use the old names)
+def	ATIR500GLContext::alloc_and_load_texture	LAB_0002a798	moveToListHead	INFERRED	stamp the texture and move it to the head of the accelerator's texture list (same sequence as in load_texture)
+def	ATIR500GLContext::alloc_and_load_texture	LAB_0002a5f4	allocTextureMemory	INFERRED	accelerator +0x528 call, then freeToAllocTextureVRAM and compact_current_textures when it fails
+def	ATIR500GLContext::alloc_and_load_texture	LAB_0002a650	loadTexture	CONFIRMED	calls load_texture
+def	ATIR500GLContext::alloc_and_load_texture	LAB_0002a65c	clearDirtyFlag	CONFIRMED	stores 0 at header +0x14
+def	ATIR500GLContext::compact_current_textures	LAB_00029f5c	nextSlot	CONFIRMED	advances the slot cursor and index of the slot loop
+def	ATIR500GLContext::discard_command_buffer@0x27580	LAB_00027a00	lookupTexture	CONFIRMED	looks up the texture named by packet[1] in the client handle table
+def	ATIR500GLContext::discard_command_buffer@0x27580	LAB_00027ab0	bindTextureSlot	CONFIRMED	opcode - 0x16000000 >> 0x16 indexes a texture slot (self + 0x2a4)
+def	ATIR500GLContext::discard_command_buffer@0x27580	LAB_00027e70	packetDone	CONFIRMED	sets packetWords from the header and falls into advancePacket
+def	ATIR500GLContext::discard_command_buffer@0x27580	LAB_00027e80	endOfStream	CONFIRMED	packetWords = 0 ends the stream
+def	ATIR500GLContext::discard_command_buffer@0x27580	LAB_00027e90	advancePacket	CONFIRMED	packet += packetWords; returns when packetWords is 0
+def	ATIR500GLContext::load_texture	LAB_00029660	moveToListHead	INFERRED	stamp the texture and move it to the head of the accelerator's texture list
+def	ATIR500GLContext::load_texture	LAB_00029704	checkInnerTransfer	INFERRED	type 7 textures take their size and GART address from the inner transfer buffer
+def	ATIR500GLContext::load_texture	LAB_00029724	ownTransfer	CONFIRMED	payload size and GART address come from the texture's own transfer record
+def	ATIR500GLContext::load_texture	LAB_00029a5c	tileModeKnown	INFERRED	the tile mode bits are known; blockShift is read next
+def	ATIR500GLContext::load_texture	LAB_00029a64	pickBlockSizes	INFERRED	chooses blockLog2/tileSizeLog2 from blockShift
+def	ATIR500GLContext::load_texture	LAB_00029a94	largeBlocks	INFERRED	blockLog2 0 and tileSizeLog2 5: the largest tile
+def	ATIR500GLContext::load_texture	LAB_00029cb4	submitPacket	CONFIRMED	pads the packet to an even word count and hands it to submit_buffer
+def	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	LAB_0002888c	storePitch	CONFIRMED	stores alignedPitch at packet +0x18
+def	IOATIR500GLContext::become_global_shared	LAB_000096f8	unlockAndReturn	CONFIRMED	unlocks the accelerator command lock and returns result
+def	IOATIR500GLContext::freeToAllocGART	LAB_00007b30	freedEnough	CONFIRMED	a candidate freed enough GART: result is 1
+def	IOATIR500GLContext::get_config	LAB_0000b08c	haveAccelerator	CONFIRMED	accelerator pointer is loaded; out0 and out2 are stored
+def	IOATIR500GLContext::get_config	LAB_0000b174	releaseInfoRecords	CONFIRMED	walks the info records backwards and releases each queried buffer
+def	IOATIR500GLContext::get_config	LAB_0000b1f0	storeOut1	CONFIRMED	stores out1Value, unlocks and returns 0
+def	IOATIR500GLContext::get_data_buffer	LAB_00009e94	freeBufferAndFail	CONFIRMED	frees the data buffer, unlocks and reports a zero handle
+def	IOATIR500GLContext::get_data_buffer	LAB_00009fd0	appendToList	CONFIRMED	marks the buffer in use and appends it to the context's data buffer list
+def	IOATIR500GLContext::get_status	LAB_0000b38c	releaseInfoRecords	CONFIRMED	walks the info records backwards and releases each queried buffer
+def	IOATIR500GLContext::get_status	LAB_0000b3e4	noSurface	CONFIRMED	no usable surface: out0 is 0
+def	IOATIR500GLContext::get_status	LAB_0000b3ec	unlockAndReturn	CONFIRMED	unlocks the accelerator command lock and returns
+def	IOATIR500GLContext::get_surface_info	LAB_00008cb0	unlockAndReturn	CONFIRMED	unlocks the accelerator command lock and returns result
+def	IOATIR500GLContext::new_texture	LAB_00009410	textureCreated	CONFIRMED	the new texture was created: result 0 and the vtable +0x5c0 notification
+def	IOATIR500GLContext::new_texture	LAB_000094e0	unlockAndReturn	CONFIRMED	unlocks the accelerator command lock and returns result
+def	IOATIR500GLContext::page_off_texture	LAB_00009800	unlockAndSucceed	CONFIRMED	unlocks the accelerator command lock; result 0
+def	IOATIR500GLContext::read_buffer	LAB_00008f60	checkSurfaceState	CONFIRMED	tests stateBits bit 0x20000000 and the source buffer's +0x10 word
+def	IOATIR500GLContext::read_buffer	LAB_00008f74	unlockAndFail	CONFIRMED	unlocks the accelerator command lock and returns 0xe00002cc
+def	IOATIR500GLContext::read_buffer	LAB_00008fb0	unlockAndReturnZero	CONFIRMED	unlocks the accelerator command lock and returns 0
+def	IOATIR500GLContext::set_surface	LAB_00008ad0	clearCurrentContext	CONFIRMED	clears the accelerator's current-context word when it is this context
+def	IOATIR500GLContext::start@0x7690	LAB_0000790c	stopAndFail	CONFIRMED	stops the context and returns 0 (start failed)

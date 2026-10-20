@@ -51,7 +51,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
        (result = this->compact_current_textures((VendorTextureBuffer *)(textureBytes)), result == 0)) {
       return;
     }
-    goto LAB_0002a650;
+    goto loadTexture;
   }
   if (type == 0x2) {
     if ((M<SInt32>(textureBytes + 4) != 0) ||
@@ -66,7 +66,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
       M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<SInt32>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
-    goto LAB_0002a65c;
+    goto clearDirtyFlag;
   }
   if (type == 0x6) {
     linked = M<UInt8 *>(textureBytes + 0x54);
@@ -129,13 +129,13 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
       return;
     }
     if ((M<SInt32>(textureBytes + 0x48) == 0) && (M<SInt32>(textureBytes + 8) != 0)) {
-      if (M<SInt32>(textureBytes + 4) != 0) goto LAB_0002a798;
+      if (M<SInt32>(textureBytes + 4) != 0) goto moveToListHead;
       ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes));
     }
     if (M<SInt32>(textureBytes + 4) == 0) {
       return;
     }
-LAB_0002a798:
+moveToListHead:
     GH_IOGetTime(textureBytes + 0x2c);
     nextNode = M<SInt32>(textureBytes + 0x34);
     M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
@@ -147,7 +147,7 @@ LAB_0002a798:
     return;
   }
   if (M<SInt32>(textureBytes + 0x48) == 0) {
-LAB_0002a5f4:
+allocTextureMemory:
     result = VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x528)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),textureBytes);
     if (((result == 0) &&
         (result = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)),
@@ -173,11 +173,11 @@ LAB_0002a5f4:
     M<UInt16>(M<SInt32>(textureBytes + 0x14) + 0x30) = 0;
     M<UInt16>(M<SInt32>(textureBytes + 0x14) + 0x32) = 0;
     M<UInt32>(textureBytes + 0x50) = M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0x18);
-    if (M<SInt32>(textureBytes + 0x48) == 0) goto LAB_0002a5f4;
+    if (M<SInt32>(textureBytes + 0x48) == 0) goto allocTextureMemory;
   }
-LAB_0002a650:
+loadTexture:
   this->load_texture((VendorTextureBuffer *)(textureBytes));
-LAB_0002a65c:
+clearDirtyFlag:
   M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x14) = 0;
   return;
 }

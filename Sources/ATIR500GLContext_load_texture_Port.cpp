@@ -147,8 +147,8 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
       M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<SInt32>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
-LAB_00029704:
-    if (textureBytes[0x20] != 0x7) goto LAB_00029724;
+checkInnerTransfer:
+    if (textureBytes[0x20] != 0x7) goto ownTransfer;
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
     gartAddress = M<SInt32>(M<SInt32>(textureBytes + 0x58) + 4);
   }
@@ -163,10 +163,10 @@ LAB_00029704:
         ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes));
         gartOffset = M<SInt32>(textureBytes + 4);
         M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + -1;
-        if (gartOffset != 0) goto LAB_00029660;
+        if (gartOffset != 0) goto moveToListHead;
       }
       else {
-LAB_00029660:
+moveToListHead:
         GH_IOGetTime(textureBytes + 0x2c);
         nextNode = M<SInt32>(textureBytes + 0x34);
         M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
@@ -186,9 +186,9 @@ LAB_00029660:
         M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = innerBuffer;
         M<UInt8 *>(M<SInt32>(innerBuffer + 0x34) + 0x38) = innerBuffer;
       }
-      goto LAB_00029704;
+      goto checkInnerTransfer;
     }
-LAB_00029724:
+ownTransfer:
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
     gartAddress = M<SInt32>(textureBytes + 4);
   }
@@ -290,7 +290,7 @@ LAB_00029724:
                            M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40)) + M<SInt32>(currentSurfaceBuffer + 8) >> 10 |
                   pitchPixels * M<UInt16>(currentSurfaceBuffer + 0x16) * 0x10000 & 0x3fc00000 |
                   ((UInt8)currentSurfaceBuffer[0x38] & 1) << 0x1e;
-    goto LAB_00029cb4;
+    goto submitPacket;
   }
   record = record + hwInfo[1];
   record[0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
@@ -300,12 +300,12 @@ LAB_00029724:
   if ((tileModeBits & 2) == 0) {
     if (-1 < negTileMode) {
       useSmallBlock = false;
-      goto LAB_00029a5c;
+      goto tileModeKnown;
     }
     blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
     useSmallBlock = blockShift == 0;
-LAB_00029a64:
-    if (3 < blockShift) goto LAB_00029a94;
+pickBlockSizes:
+    if (3 < blockShift) goto largeBlocks;
     if (useSmallBlock) {
       blockLog2 = 2;
       tileSizeLog2 = 3;
@@ -317,13 +317,13 @@ LAB_00029a64:
   }
   else {
     useSmallBlock = true;
-LAB_00029a5c:
+tileModeKnown:
     if (negTileMode < 0) {
       blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
-      goto LAB_00029a64;
+      goto pickBlockSizes;
     }
     blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
-LAB_00029a94:
+largeBlocks:
     blockLog2 = 0;
     tileSizeLog2 = 5;
   }
@@ -403,7 +403,7 @@ LAB_00029a94:
   }
   totalWords = hwInfo[2];
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 1;
-LAB_00029cb4:
+submitPacket:
   paddedWords = totalWords;
   if ((totalWords & 1) != 0) {
     paddedWords = totalWords + 1;

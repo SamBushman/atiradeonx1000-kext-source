@@ -29,7 +29,7 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x87b0 */
-IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits modeBits, UInt32 unknown_0x298, UInt32 mipLevel) {
+IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits modeBits, UInt32 surfaceIndex, UInt32 mipLevel) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool detach;
@@ -87,7 +87,7 @@ IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits 
       }
       M<UInt32>(self + kIOATIR500GLContext_boundSurface) = 0;
       result = 0xe00002c2;
-      goto LAB_00008ad0;
+      goto clearCurrentContext;
     }
     M<unsigned int>(surface + 0xbe8) = surfaceModeBits[0];
     M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) = 0x20000000;
@@ -139,11 +139,11 @@ IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits 
     M<UInt8 *>(self + kIOATIR500GLContext_boundSurface) = surface;
     ((IOATIR500Surface *)(surface))->prune_buffers();
   }
-LAB_00008ad0:
+clearCurrentContext:
   if (self == M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x78)) {
     M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x78) = 0;
   }
-  M<UInt32>(self + kIOATIR500GLContext_surfaceIndex) = unknown_0x298;
+  M<UInt32>(self + kIOATIR500GLContext_surfaceIndex) = surfaceIndex;
   M<UInt32>(self + kIOATIR500GLContext_mipLevel) = mipLevel;
   VCALL(M<int>(self), 0x5a8)(self);
   GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));

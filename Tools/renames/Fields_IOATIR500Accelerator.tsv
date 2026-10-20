@@ -6,8 +6,8 @@ field	IOATIR500Accelerator	0x5c	liveSurfaceListHead	CONFIRMED	Headers/IOATIR500A
 field	IOATIR500Accelerator	0x60	liveGLContextListHead	CONFIRMED	Headers/IOATIR500Accelerator.h; IOATIR500GLContext::start writes accelerator+0x60
 field	IOATIR500Accelerator	0x64	live2DContextListHead	CONFIRMED	freeWaitToAllocGART walks it as the IOATIR5002DContext list (next at +0x80, shared at +0x88)
 field	IOATIR500Accelerator	0x68	liveDVDContextListHead	CONFIRMED	freeWaitToAllocGART walks it as the IOATIR500DVDContext list (next at +0x80, shared at +0x84)
-field	IOATIR500Accelerator	0x6c	unknown_0x6c	UNKNOWN	zeroed in start, never read by any ported function
-field	IOATIR500Accelerator	0x70	unknown_0x70	UNKNOWN	zeroed in start, never read by any ported function
+field	IOATIR500Accelerator	0x6c	globalSharedClient	CONFIRMED	the IOATIR500Shared client that is the global shared one: become_global_shared(1) stores the context's clientHandle here when the slot is empty, become_global_shared(0) and IOATIR500Shared::free clear it when it is theirs; zeroed in start
+field	IOATIR500Accelerator	0x70	globalSharedActive	INFERRED	become_global_shared stores 1 here when it sets globalSharedClient and 0 when it clears it (reached as accelerator + 0x70); zeroed in start
 field	IOATIR500Accelerator,ATIRadeonX1000	0x74	pciDevice	CONFIRMED	start casts the provider to IOPCIDevice (safeMetaCast IOPCIDevice) and stores it here; configureAGP/startupPCIeGART call its vtable
 field	IOATIR500Accelerator,ATIRadeonX1000	0x78	unknown_0x78	CONFIRMED	GL/DVD contexts compare `self == accelerator+0x78` and clear it in stop/set_surface; set to the last submitting context in clientMemoryForType | renamed from currentContext: SWDSWriteBlitToCmdBuf and pageoff_dirty_texture_with_gpu store 0; no reader found
 field	IOATIR500Accelerator,ATIRadeonX1000	0x7c	vramPool	CONFIRMED	start creates `new ATIR500Memory()` and stores it; Radeon init_pool/reserve/dealloc go through it | renamed from memoryPool: ATIR500Memory pool: init_pool(usableVramSize), reserve() of the scanout buffers; ATIRadeonX1000::writePerformanceStats exports its total_fre

@@ -41,7 +41,7 @@ IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFac
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
   if (M<char>(accel + 0x20) == '\0') {
-LAB_00009800:
+unlockAndSucceed:
     GH_IOLockUnlock(accel[0x210]);
     result = 0;
   }
@@ -59,7 +59,7 @@ LAB_00009800:
           VCALL(*accel, 0x52c)(accel, texture, mipAndFace >> 0x10, mipAndFace & 0xffff);
           accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
         }
-        goto LAB_00009800;
+        goto unlockAndSucceed;
       }
     }
     GH_IOLockUnlock(accel[0x210]);

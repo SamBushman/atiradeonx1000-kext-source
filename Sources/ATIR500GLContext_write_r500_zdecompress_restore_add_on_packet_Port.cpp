@@ -68,10 +68,10 @@ void ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet(r500_zdecomp
   if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) != 4) {
     hzAlignment = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) << 4;
     alignedPitch = 0;
-    if (hzAlignment == 0) goto LAB_0002888c;
+    if (hzAlignment == 0) goto storePitch;
   }
   alignedPitch = hzAlignment * ((SInt32)(depthPitch + hzAlignment + -1) / hzAlignment);
-LAB_0002888c:
+storePitch:
   M<SInt32>(packetBytes + 0x18) = alignedPitch;
   hzBlockOffset = HZMEM_GetBlockOffset
                     ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),M<UInt32>(depthBuffer + 0x28),0);

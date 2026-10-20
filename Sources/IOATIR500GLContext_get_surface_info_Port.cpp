@@ -60,14 +60,14 @@ IOReturn IOATIR500GLContext::get_surface_info(UInt32 surfaceID, SInt32*outFlags,
         *outW = (SInt32)M<SInt16>(surface + 0xbd8);
         *outH = (SInt32)M<SInt16>(surface + 0xbda);
       }
-      goto LAB_00008cb0;
+      goto unlockAndReturn;
     }
   }
   result = 0xe00002c2;
   *outFlags = 0;
   *outW = 0;
   *outH = 0;
-LAB_00008cb0:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return result;
 }

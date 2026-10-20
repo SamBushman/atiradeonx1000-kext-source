@@ -134,7 +134,7 @@ bool IOATIR500GLContext::start(IOService *provider) {
       accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
       if ((accel[0x18] == 0) && (accel[0x1a] == 0)) {
         readyResult = VCALL(*accel, 0x530)(accel);
-        if (readyResult == 0) goto LAB_0000790c;
+        if (readyResult == 0) goto stopAndFail;
         accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
       }
       M<SInt32>(self + kIOATIR500GLContext_nextLiveContext) = accel[0x18];
@@ -150,7 +150,7 @@ bool IOATIR500GLContext::start(IOService *provider) {
       }
     }
   }
-LAB_0000790c:
+stopAndFail:
   IOATIR500GLContext::stop(provider);
   return 0;
 }

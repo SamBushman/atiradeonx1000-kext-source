@@ -250,7 +250,7 @@ def decl_block(lines, decl_i):
     return j + 1, k
 
 
-def apply_uses(use_rows, root, read, files, errors, field_consts=None):
+def apply_uses(use_rows, root, read, files, errors, field_consts=None, def_pairs=()):
     """-> (pending, applied) for the `use` rows (see the module docstring); edits go into `files`."""
     pending = applied = 0
     groups = {}
@@ -268,6 +268,9 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
         revert = {}
         for r in rs:
             if r[3] not in revert.setdefault(r[4], []): revert[r[4]].append(r[3])
+        for (dc, dm, da, o, nw) in def_pairs:               # a `def` row of the same function renamed the line's identifiers first: an anchor may be written with the old or the new name
+            if dc == cls and dm == meth and (not addr or not da or da == addr) and nw not in revert:
+                revert[nw] = [nw, o]                           # either spelling matches: older tables wrote their anchors with the def'd (new) names
         for cname, off in (field_consts or {}).items():     # a `field` row turned `self + 0x238` into `self + k..._name`: anchors are written against the literal (hex or decimal)
             revert[cname] = [hex(off), str(off)]
         for (t, n, _, old, new, frm, to, occ, dmode) in rs:
@@ -608,7 +611,13 @@ def main():
         pending += len(mapping)
         files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
     field_consts = {'k%s_%s' % (cl[0], nm): int(off, 16) for (_, _, cl, off, nm, _) in field_rows}
-    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts)
+    def_pairs = []
+    for (_t, _n, kind, target, old, new) in rows:
+        if kind == 'def':
+            try: dc, dm, da, _nth = parse_target(target)
+            except Exception: continue
+            def_pairs.append((dc, dm, da, old, new))
+    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, def_pairs)
     pending += up; applied += ua
     if field_rows:
         fp, fa, by_off, _consts = apply_fields(field_rows, a.root, read, files, errors)

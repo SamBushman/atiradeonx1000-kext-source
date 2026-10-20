@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500GLContext_page_off_texture_Port.cpp	2026-10-20 09:51:33.501513248 -0700
-+++ b/Sources/IOATIR500GLContext_page_off_texture_Port.cpp	2026-10-20 09:51:33.502819448 -0700
+--- a/Sources/IOATIR500GLContext_page_off_texture_Port.cpp	2026-10-20 10:25:27.192390584 -0700
++++ b/Sources/IOATIR500GLContext_page_off_texture_Port.cpp	2026-10-20 10:25:27.193686606 -0700
 @@ -31,7 +31,6 @@
  /* real addr 0x9740 */
  IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace, unsigned int structPtr, unsigned int structSize) {
@@ -17,7 +17,7 @@
 +  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
 +  accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
    if (M<char>(accel + 0x20) == '\0') {
- LAB_00009800:
+ unlockAndSucceed:
      GH_IOLockUnlock(accel[0x210]);
      result = 0;
    }
@@ -36,5 +36,5 @@
 -          accel = M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator);
 +          accel = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
          }
-         goto LAB_00009800;
+         goto unlockAndSucceed;
        }

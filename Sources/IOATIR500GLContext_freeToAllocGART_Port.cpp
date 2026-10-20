@@ -49,7 +49,7 @@ bool IOATIR500GLContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
     do {
       freeResult = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
                          M<UInt32>(entryCursor + 0x11c),aggressive);
-      if (freeResult != 0) goto LAB_00007b30;
+      if (freeResult != 0) goto freedEnough;
       moreCandidates = freed != 0xf;
       candidate = candidate + 0x18;
       entryCursor = entryCursor + 0x18;
@@ -59,12 +59,12 @@ bool IOATIR500GLContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
         candidate = M<UInt8 *>(candidate + 0x3c)) {
       freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
                          M<UInt32>(candidate + 0x5c),aggressive);
-      if (freed != 0) goto LAB_00007b30;
+      if (freed != 0) goto freedEnough;
     }
     result = 0;
   }
   else {
-LAB_00007b30:
+freedEnough:
     result = 1;
   }
   return result;

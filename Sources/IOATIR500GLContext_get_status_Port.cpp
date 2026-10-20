@@ -54,7 +54,7 @@ IOReturn IOATIR500GLContext::get_status(UInt32*out0) {
         GH_IOLockSleep(M<UInt32>(accelerator + 0x840),accelerator,0);
       } while (M<char>(accelerator + 0x80) == '\0');
       surface = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
-      if (surface == 0) goto LAB_0000b3e4;
+      if (surface == 0) goto noSurface;
     }
     if ((M<UInt32>(surface + kIOATIR500Surface_stateBits) & 0x20000000) == 0) {
       bufferIndex = 0;
@@ -72,8 +72,8 @@ IOReturn IOATIR500GLContext::get_status(UInt32*out0) {
           if (queryResult == 0) {
             lastIndex = bufferIndex - 1;
             *out0 = 0;
-            if (lastIndex < 0) goto LAB_0000b3ec;
-            goto LAB_0000b38c;
+            if (lastIndex < 0) goto unlockAndReturn;
+            goto releaseInfoRecords;
           }
         }
         more = bufferIndex != 0x16;
@@ -83,7 +83,7 @@ IOReturn IOATIR500GLContext::get_status(UInt32*out0) {
       } while (more);
       lastIndex = 0x16;
       *out0 = 1;
-LAB_0000b38c:
+releaseInfoRecords:
       infoByteOffset = lastIndex << 4;
       walkIndex = 0;
       do {
@@ -94,12 +94,12 @@ LAB_0000b38c:
         walkIndex = walkIndex + 1;
         infoByteOffset = infoByteOffset + -0x10;
       } while (lastIndex + 1 != walkIndex);
-      goto LAB_0000b3ec;
+      goto unlockAndReturn;
     }
   }
-LAB_0000b3e4:
+noSurface:
   *out0 = 0;
-LAB_0000b3ec:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   return 0;
 }

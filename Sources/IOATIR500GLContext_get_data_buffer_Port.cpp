@@ -85,7 +85,7 @@ IOReturn IOATIR500GLContext::get_data_buffer(unsigned int*outHandle, UInt32*outA
       accelPtr[0x1de] = waitTotal + waited;
     }
   }
-  if (buffer != M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5cc)) goto LAB_00009fd0;
+  if (buffer != M<UInt8 *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5cc)) goto appendToList;
   M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5cc) = M<UInt32>(buffer + 0x3c);
   if (M<int>(buffer + 0x3c) == 0) {
     M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x5d0) = 0;
@@ -125,7 +125,7 @@ IOReturn IOATIR500GLContext::get_data_buffer(unsigned int*outHandle, UInt32*outA
     if (M<int>(buffer + 8) == 0) {
       allocResult = ((IOATIR500Accelerator *)(accel))->allocDataBufferBacking((VendorTextureBuffer *)(buffer));
       if (allocResult == 0) {
-LAB_00009e94:
+freeBufferAndFail:
         ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeOneDataBuffer((VendorTextureBuffer *)(buffer));
         GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
         *outHandle = 0;
@@ -152,7 +152,7 @@ LAB_00009e94:
         M<int>(nextNode + 0x24) = prevNode;
         M<UInt8 *>(buffer + 0x24) = buffer;
       }
-      goto LAB_00009fd0;
+      goto appendToList;
     }
   }
   else if (M<int>(buffer + 0x48) == 0) {
@@ -188,12 +188,12 @@ LAB_00009e94:
         VCALL(*M<int *>(buffer + 8), 0x18)(M<int *>(buffer + 8));
         M<UInt32>(buffer + 8) = 0;
       }
-      goto LAB_00009fd0;
+      goto appendToList;
     }
     if (M<int>(buffer + 8) == 0) {
       allocResult = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->allocDataBufferBacking((VendorTextureBuffer *)(buffer));
-      if (allocResult == 0) goto LAB_00009e94;
-      goto LAB_00009fd0;
+      if (allocResult == 0) goto freeBufferAndFail;
+      goto appendToList;
     }
   }
   if ((M<int *>(buffer + 0x10) != (int *)0x0) &&
@@ -201,7 +201,7 @@ LAB_00009e94:
     VCALL(*M<int *>(buffer + 0x10), 0x18)(M<int *>(buffer + 0x10));
     M<UInt32>(buffer + 0x10) = 0;
   }
-LAB_00009fd0:
+appendToList:
   buffer[0x54] = 0x1;
   if (M<int>(self + kIOATIR500GLContext_dataBufferListTail) == 0) {
     M<UInt8 *>(self + kIOATIR500GLContext_dataBufferListHead) = buffer;

@@ -74,7 +74,7 @@ def	IOATIR500GLContext::start@0x7690	param_1	providerBytes	INFERRED	untyped alia
 def	IOATIR500GLContext::stop@0x7fa0	real_param_1	provider	INFERRED	name from the class header declaration
 def	IOATIR500GLContext::stop@0x7fa0	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
 def	IOATIR500GLContext::wait_for_stamp@0x7de0	param_2	stamp	INFERRED	name from the class header declaration
-def	IOATIR500GLContext::set_surface@0x87b0	param_4	unknown_0x298	UNKNOWN	stored verbatim to this+0x298; the header calls it param3 and no reader gives it a role
+def	IOATIR500GLContext::set_surface@0x87b0	param_4	surfaceIndex	INFERRED	stored to this+0x298 (kIOATIR500GLContext_surfaceIndex), which write_r500_3d_blit_state_packet and process_kATIGLStreamFastClearColor use as the weight between the two mip-level offsets of the colour buffer
 def	IOATIR500GLContext::set_surface@0x87b0	param_5	mipLevel	CONFIRMED	stored to this+0x29c, which the class header documents as mipLevel
 def	IOATIR500GLContext::set_surface@0x87b0	this_00	surface	INFERRED	result of find_surface_for_id(surfaceID); becomes boundSurface (this+0x290) and receives add_gl_context_to_list
 def	IOATIR500GLContext::set_surface@0x87b0	bVar1	detach	INFERRED	true when surfaceID is 0 or the lookup failed: the context is then unbound (boundSurface/+0x298/+0x29c cleared)

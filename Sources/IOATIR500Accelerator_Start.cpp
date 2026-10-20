@@ -147,8 +147,8 @@ bool IOATIR500Accelerator::start(IOService *provider) {
   M<UInt32>(self + kIOATIR500Accelerator_liveGLContextListHead) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_live2DContextListHead) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_liveDVDContextListHead) = 0;
-  M<UInt32>(self + kIOATIR500Accelerator_unknown_0x6c) = 0;
-  M<UInt32>(self + kIOATIR500Accelerator_unknown_0x70) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_globalSharedClient) = 0;
+  M<UInt32>(self + kIOATIR500Accelerator_globalSharedActive) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_unknown_0x78) = 0;
   GH_memset(self + kIOATIR500Accelerator_commandBytesPerSample,0,0x130);
   M<UInt16>(self + kIOATIR500Accelerator_scratchCommandBuffer_0x0c) = 1;
