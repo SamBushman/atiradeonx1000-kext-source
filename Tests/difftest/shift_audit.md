@@ -57,9 +57,26 @@ generic one-run case and the shape_surface generic 9-run case do not notice the 
   `(float)x` sit in functions whose hand worlds use operands >= 2^31 (H1 high-bit worlds, H3 overlay worlds with negative/0x7fffffff sizes) and pass.
   `Tools/difftest/audit/cvtseq.py STOCK.dis REBUILT.dis` prints the ordered S/U conversion sequences; the rebuilt compiler emits extra (CSE-less) conversions and
   `addis 0x8000` for the sign flip, so the sequences differ in length without a behavioural difference.
-* **Shift/mask constants** (`Tools/difftest/audit/rlwscan.py`): 12 functions differ in right-shift extraction constants between stock and rebuilt; the ones inspected
-  (set_display_mode_and_vram, GL/DVD process_command_buffer) are compiler differences (byte-reversal by rlwinm instead of lwbrx, merged shift+mask), not source
-  differences. Not a detector for stale variables; kept as a triage aid.
+* **Shift/mask constants** (`Tools/difftest/audit/rlwscan.py`, right-shift extractions `rlwinm sh,mb,31` compared per function): 12 functions differ between stock and rebuilt.
+  Each was classified from the disassembly and then tested by a mutant (one mask/shift in the source altered, image rebuilt, `run_all.sh -f <function>`; a function is
+  *pinned* when a case FAILS on the mutant). Result: **0 source defects, 12 compiler artifacts, all 12 pinned** (one needed a new world, one a new failure-injection world).
+
+| function | difference (stock vs rebuilt) | class | pinned by (mutant -> result) |
+|---|---|---|---|
+| HZMEM_InitMemResource | rebuilt materialises the CR bit `hzMode==1` with `mfcr; rlwinm 31,31,31` / `srwi. 1`; stock branches on the CR bit (source variable `modeIsOne`) | CR pseudo-register | `kind1MapBytes` 0xa000->0xa010: generic + new case FAIL. Coverage was 72%: added `HZMEM_InitMemResource (failure injection R3)` (every mode, n-th IOMallocPageable fails): 240/240, 93%/100% |
+| ATIR500Surface::copy_from_buffer | stock saves/restores CR fields through `mtocrf`+`rlwinm 4/28`; rebuilt keeps `kernelPathBits>>1&1` in a GPR | CR pseudo-register | `if (!(kernelPathBits>>1&1))` inverted: "mapped H3" FAIL |
+| ATIR500Surface::copy_buffer_using_DMA | same CR save/restore sandwiches (5 in stock) and CR-bit tests | CR pseudo-register | shift mutants 1/2 (45/81 FAIL); case 96%/99% |
+| ATIRadeonX1000::startupPCIeGART | stock stores the GART pitch word with `stwbrx`; source builds the byte-swapped word explicitly (`(p>>3)<<24 \| (p>>3 & 0xff00)<<8`) | byte-reversed store | `& 0xff00` -> `& 0xfb00`: [hand H2] FAIL. (The first mutant `& 0x7f00` was unobservable: the pitch is `tableWidth<<2` <= 0x2000, so `p>>3` <= 0x400.) |
+| ATIRadeonX1000::set_display_mode_and_vram | byte-reversal done by `rlwinm 24,*,*` composition where stock uses lwbrx/stwbrx | byte-reversed store | display base words `& 0xff00` -> `& 0xfb00`: FAIL |
+| ATIRadeonX1000::pageoff_dirty_texture_with_cpu | stock `stwbrx` of `(srcPitch>>3)&0x1fff` \| fields; source composes the swapped word | byte-reversed store | `& 0x1f00` -> `& 0x0f00`: the old world PASSED (pitch < 0x800). Added `pageoff_dirty_texture_with_cpu (wide pitches R3)` (pitches up to 0x1fff8): mutant FAIL 62/80, baseline 80/80 |
+| IOATIR500Shared::alloc_handles | stock `(n<<1)>>3`, rebuilt `n>>2`; algebraically equal: `rlwinm 1,0,30` then `rlwinm 29,3,31` = `(n & 0x7fffffff)>>2` = rebuilt `rlwinm 30,3,31` | strength reduction | `bitmapBytes >> 2` -> `>> 3`: FAIL |
+| IOATIR500Shared::alloc_buf_handle | stock reuses the loaded capacity word, rebuilt reloads it (volatile `M<T>`) before each `>>5` | CSE vs reload | `handleHint >> 5` -> `>> 4`: FAIL |
+| ATIR500GLContext::load_texture | rebuilt duplicates the mip-halving `>>1` into two arms (tail duplication) | code layout | `halfWidth = curWidth>>1` -> `>>2`: "load_texture (hand world)" FAIL |
+| ATIR500GLContext::process_kATIGLStreamFastClearColor | stock `(x>>1)&0x1fff` then `<<1`; source writes `(pitch & 0x3ffe)` (same value) | merged shift+mask | `& 0x3ffe` -> `& 0x3ffc`: FAIL |
+| ATIR500GLContext::process_command_buffer | rebuilt reads packed halfwords/bytes with `lhz`/`lbz` where stock loads the word and extracts (`rlwinm 16,16,31` x11 vs x7, `24,24`); `27,10` is a merged `>>5 & 0x3fffff` | load width / merged shift+mask | mutated `>>0x10` (opcode 0x37 x2, 0x2c x2) and `>>5 & 0x3fffff` (ops 0x08-0x15): H1 cases for 0x37, 0x2c, 0x0b/0e/12/13/14 FAIL |
+| ATIR500DVDContext::process_command_buffer | the five stock `(a+b+c)>>5` (`rlwinm 27,5,31`) are merged with the following mask/shift in the rebuilt code; `31,30`/`31,31` are CR-bit extractions | merged shift+mask / CR bit | `surfaceInfo+0x830 >> 5` -> `>> 4`: 4 DVD cases FAIL |
+
+Mutation builds used a throw-away worktree; none of the mutations is committed.
 
 ## 5. Reproduce
 
