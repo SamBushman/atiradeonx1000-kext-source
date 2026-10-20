@@ -3226,7 +3226,7 @@ singleQuadPath:
         if (0x1ff < tileXStart) {
           tileXMin = tileXStart;
         }
-        pitchPixels = mipHeightMinus1 - 1;
+        pitchPixels = bufferWidth - 1;
         tileXEnd = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
         pitchPixels = (UInt32)(SInt32)srcMaxX;
         srcRightSpill = (SInt64)(SInt32)pitchPixels;
@@ -3281,7 +3281,7 @@ singleQuadPath:
             if (pitchPixels != 0) {
               rowY = rowOffsetY + tileYStart;
               rowYCvtHi = 0x43300000;
-              colWidthLeft = mipHeightMinus1 - tileXStart;
+              colWidthLeft = bufferWidth - tileXStart;
               tileCol = 0;
               rowYCvtLo = rowY ^ 0x80000000;
               rowYF = (float)((double)CONCAT44d(0x43300000,rowY ^ 0x80000000) - fpMagicBias);
@@ -3291,7 +3291,7 @@ singleQuadPath:
                 *quadCursor = tileX;
                 quadCursor[1] = quadY;
                 quadWidth = colWidthLeft;
-                if ((SInt32)(tileX + 0x1000) <= (SInt32)mipHeightMinus1) {
+                if ((SInt32)(tileX + 0x1000) <= (SInt32)bufferWidth) {
                   quadWidth = 0x1000;
                 }
                 quadHeight = rowHeightLeft;

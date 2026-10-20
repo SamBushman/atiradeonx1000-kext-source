@@ -1,5 +1,5 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 11:38:02.822549595 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 11:38:02.824051350 -0700
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 13:36:42.512541276 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 13:36:42.513952439 -0700
 @@ -991,8 +991,8 @@
                           tileRowsScale * (surfaceHeight - hzBlockCount) >> 1 | recordCursor[statePacketIndex + 1] & 0xffff0000;
                      hzExtentCvtHi = 0x43300000;
@@ -39,9 +39,12 @@
          recordCursor[0xc3] = quadWidthFixed << 0x10 | quadHeightFixed;
          recordCursor[200] = 0;
        }
-@@ -3228,7 +3228,7 @@
+@@ -3226,9 +3226,9 @@
+         if (0x1ff < tileXStart) {
+           tileXMin = tileXStart;
          }
-         pitchPixels = mipHeightMinus1 - 1;
+-        pitchPixels = mipHeightMinus1 - 1;
++        pitchPixels = bufferWidth - 1;
          tileXEnd = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
 -        pitchPixels = (UInt32)srcMaxX;
 +        pitchPixels = (UInt32)(SInt32)srcMaxX;
@@ -57,6 +60,24 @@
          srcBottomSpill = (SInt64)(SInt32)srcBottomInt;
          if (FLOAT_0004c370 < srcMaxY) {
            srcBottomIntCvtHi = 0x43300000;
+@@ -3281,7 +3281,7 @@
+             if (pitchPixels != 0) {
+               rowY = rowOffsetY + tileYStart;
+               rowYCvtHi = 0x43300000;
+-              colWidthLeft = mipHeightMinus1 - tileXStart;
++              colWidthLeft = bufferWidth - tileXStart;
+               tileCol = 0;
+               rowYCvtLo = rowY ^ 0x80000000;
+               rowYF = (float)((double)CONCAT44d(0x43300000,rowY ^ 0x80000000) - fpMagicBias);
+@@ -3291,7 +3291,7 @@
+                 *quadCursor = tileX;
+                 quadCursor[1] = quadY;
+                 quadWidth = colWidthLeft;
+-                if ((SInt32)(tileX + 0x1000) <= (SInt32)mipHeightMinus1) {
++                if ((SInt32)(tileX + 0x1000) <= (SInt32)bufferWidth) {
+                   quadWidth = 0x1000;
+                 }
+                 quadHeight = rowHeightLeft;
 @@ -3392,20 +3392,20 @@
                  tileX = tileX + 0xc00;
                  colWidthLeft = colWidthLeft - 0xc00;
