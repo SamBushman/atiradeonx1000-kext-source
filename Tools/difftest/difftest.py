@@ -811,7 +811,8 @@ class Case:
               kext's own data, and is compared as such (default: such words are compared by the name of what they point at, because the two builds lay
               their data out differently)
     """
-    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None, plain_words=False, out_extents=None):
+    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None, plain_words=False, out_extents=None, seconds=None):
+        self.seconds = seconds        # wall-clock allowance for this case (default --case-seconds): a polling loop of 100000 iterations is slow in the emulator
         self.ignore_args = ignore_args or {}
         self.out_extents = out_extents or {}
         self.plain_words = plain_words
@@ -978,6 +979,27 @@ def uncovered(runs):
     return out
 
 
+def print_uncovered(case, runs, img, sym):
+    """DIFFTEST_UNCOVERED=1: the instruction ranges (offsets from the entry of the stock function) no run executed, to see what a hand world still has to reach"""
+    vis, own = set(), None
+    for r in runs:
+        own = r.own
+        for a, n in r.visited:
+            if own[0] <= a < own[1]:
+                vis.update(range(a, min(a + n, own[1]), 4))
+    if not own: return
+    entry, miss, cur = img.funcs[sym], [], None
+    for a in range(own[0], own[1], 4):
+        if a in vis:
+            if cur: miss.append(cur); cur = None
+        elif cur: cur[1] = a
+        else: cur = [a, a]
+    if cur: miss.append(cur)
+    sys.stderr.write('UNCOVERED %s (stock, offsets from entry): %s\n' % (case.name, ' '.join('%x-%x' % (a - entry, b - entry) for a, b in miss)))
+    sys.stderr.flush()
+
+
+
 def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
     results = []
     cyc = [0, 0]
@@ -1008,6 +1030,8 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
     case.uncov = (uncovered_ranges(all_runs[0]), uncovered_ranges(all_runs[1]))
     case.cycles = (cyc[0], cyc[1])
+    if os.environ.get('DIFFTEST_UNCOVERED'):
+        print_uncovered(case, all_runs[0], stock, sym_s)
     return sym_s, results
 
 
@@ -1084,11 +1108,11 @@ def _work(i):
     def on_alarm(sig, frm):
         raise CaseTimeout()
     signal.signal(signal.SIGALRM, on_alarm)
-    signal.alarm(_G['case_seconds'])
+    signal.alarm(case.seconds or _G['case_seconds'])
     try:
         return i, evaluate(case, _G['stock'], _G['rebuilt'], _G['reg'], *_G['opts'])
     except CaseTimeout:
-        return i, ('NO-RESULT', ['NO-RESULT  %-58s the harness gave up after %ds (a run is too slow: lower Case.limit or fix the world)' % (case.name, _G['case_seconds'])], None)
+        return i, ('NO-RESULT', ['NO-RESULT  %-58s the harness gave up after %ds (a run is too slow: lower Case.limit or fix the world)' % (case.name, case.seconds or _G['case_seconds'])], None)
     finally:
         signal.alarm(0)
 
