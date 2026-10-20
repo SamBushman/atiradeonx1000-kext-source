@@ -1,0 +1,38 @@
+--- a/Sources/ATIR500GLContext_build_scissor_Port.cpp	2026-10-20 14:20:06.015334025 -0700
++++ b/Sources/ATIR500GLContext_build_scissor_Port.cpp	2026-10-20 14:20:06.016668477 -0700
+@@ -37,6 +37,7 @@
+   UInt32 scissorHeight;
+   UInt32 levelHeight;
+   UInt32 formatClass;
++  UInt32 formatInfo;
+   
+   if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
+     mipLevel = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
+@@ -48,21 +49,21 @@
+     colorBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
+   }
+   if (((M<UInt32>(colorBuffer + 0x3c) & 0xf00000) == 0) ||
+-     (levelWidth = (SInt32)((UInt32)M<UInt16>(colorBuffer + 0x1c) / (M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf)) >>
+-              (mipLevel & 0x3f), levelWidth == 0)) {
++     (levelWidth = (SInt32)(M<UInt16>(colorBuffer + 0x1c)) / (SInt32)(M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf) >>
++              mipLevel, levelWidth == 0)) {
+     levelWidth = 1;
+   }
+-  levelHeight = (SInt32)(UInt32)M<UInt16>(colorBuffer + 0x1e) >> (mipLevel & 0x3f);
++  levelHeight = (SInt32)(UInt32)M<UInt16>(colorBuffer + 0x1e) >> mipLevel;
+   scissorHeight = 1;
+   if (levelHeight != 0) {
+     scissorHeight = levelHeight;
+   }
+-  formatClass = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)colorBuffer[0x3a] * 0x1c) >> 3 & 0x1f;
++  formatInfo = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)colorBuffer[0x3a] * 0x1c);
++  formatClass = formatInfo >> 3 & 0x1f;
+   if ((formatClass < 3) || ((formatShiftAdjust = 1, 4 < formatClass && (formatShiftAdjust = 2, formatClass != 6)))) {
+     formatShiftAdjust = 0;
+   }
+   M<UInt32>(self + kATIR500GLContext_scissorX) =
+-       levelWidth << ((FormatTableLookup_0x0004d2dc((UInt32)(UInt8)colorBuffer[0x3a] * 0x1c) >> 0xc & 7) - formatShiftAdjust &
+-                0x3f) & 0x3fffU | (scissorHeight & 0x3fff) << 0x10;
++       levelWidth << ((formatInfo >> 0xc & 7) - formatShiftAdjust) & 0x3fffU | (scissorHeight & 0x3fff) << 0x10;
+   return;
+ }

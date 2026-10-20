@@ -1,0 +1,16 @@
+--- a/Sources/ATIR500GLContext_build_surface_from_texture_Port.cpp	2026-10-20 15:06:39.248068417 -0700
++++ b/Sources/ATIR500GLContext_build_surface_from_texture_Port.cpp	2026-10-20 15:06:39.249320596 -0700
+@@ -91,12 +91,11 @@
+   tileBits = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 2;
+   tilingMode = (tileBits & 7);
+   surfaceBufferBytes[0x38] = tilingMode;
++  formatInfo = FormatTableLookup_0x0004d2dc(formatByteOffset);
+   if ((UInt8)tilingMode < 2) {
+-    formatInfo = FormatTableLookup_0x0004d2dc(formatByteOffset);
+     blockRows = 1;
+   }
+   else {
+-    formatInfo = FormatTableLookup_0x0004d2dc(formatByteOffset);
+     blockRows = 1 << (formatInfo >> 8 & 3);
+   }
+   if (((UInt32)M<UInt16>(surfaceBufferBytes + 0x18) < (UInt32)((0x20 >> (formatInfo >> 8 & 3)) << 3)) ||

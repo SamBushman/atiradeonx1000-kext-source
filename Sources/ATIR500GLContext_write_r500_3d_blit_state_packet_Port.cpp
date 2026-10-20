@@ -40,12 +40,13 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
   UInt32 mipLevel;
   UInt32 minPitch;
   UInt32 sampledPitch;
-  UInt32 fmtField1;
   UInt32 pitchPixels;
   UInt32 fmtField0;
   UInt32 slot0Offset;
-  UInt32 fmtField2;
-  UInt32 fmtField3;
+  UInt32 formatWord;
+  UInt32 colorIndex;
+  SInt32 boundSurface;
+  UInt32 tilingBits;
   UInt32 oldFormatWord;
   SInt32 sliceOffset;
   SInt32 formatTableOffset;
@@ -58,9 +59,10 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
   
   if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
     mipLevel = M<UInt32>(self + kIOATIR500GLContext_mipLevel);
-    colorBuffer = M<SInt32>((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
-    colorRecord = (UInt8 *)
-              ((UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) * 0x78 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xa8);
+    colorIndex = (UInt32)M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex);
+    boundSurface = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
+    colorBuffer = M<SInt32>(colorIndex * 4 + boundSurface + kIOATIR500Surface_attachmentBuffers);
+    colorRecord = (UInt8 *)(colorIndex * 0x78 + boundSurface + kIOATIR500Surface_buffers);
     mipOffsetEntry = mipLevel * 4 + colorBuffer;
     sliceOffset = M<SInt32>(mipOffsetEntry + 0x40);
     formatIndex = M<UInt8>(colorBuffer + 0x3a);
@@ -70,10 +72,10 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
          (M<SInt32>(mipOffsetEntry + 0x44) - sliceOffset) * M<SInt32>(self + kIOATIR500GLContext_surfaceIndex) + M<SInt32>(colorBuffer + 8) &
          0xffffffe0;
     if ((M<UInt32>(colorBuffer + 0x3c) & 0xf00000) != 0) {
-      pitchPixels = (SInt32)((UInt32)M<UInt16>(colorBuffer + 0x14) / (M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf)) >>
-               (mipLevel & 0x3f);
+      pitchPixels = (SInt32)(M<UInt16>(colorBuffer + 0x14)) / (SInt32)(M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf) >>
+               mipLevel;
     }
-    minPitch = 0x20 / M<UInt16>(colorBuffer + 0x16);
+    minPitch = (SInt32)0x20 / (SInt32)M<UInt16>(colorBuffer + 0x16);
     if (pitchPixels < minPitch) {
       pitchPixels = minPitch;
     }
@@ -88,11 +90,13 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
     M<UInt32>(packetBytes + 0x268) =
          (UInt32)M<UInt16>(colorRecord + 0x20) * M<SInt32>(colorRecord + 0x40) + M<SInt32>(colorRecord + 8) &
          0xffffffe0;
-    if ((M<UInt32>(colorRecord + 0x3c) & 0xf00000) != 0) {
-      sampledPitch = (UInt32)M<UInt16>(colorRecord + 0x14) / (M<UInt32>(colorRecord + 0x3c) >> 0x14 & 0xf);
+    tilingBits = M<UInt32>(colorRecord + 0x3c);
+    if ((tilingBits & 0xf00000) != 0) {
+      sampledPitch = (SInt32)M<UInt16>(colorRecord + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
     }
-    pitchPixels = 0x20 / M<UInt16>(colorRecord + 0x16);
-    if (0x20 / M<UInt16>(colorRecord + 0x16) <= sampledPitch) {
+    minPitch = (SInt32)0x20 / (SInt32)M<UInt16>(colorRecord + 0x16);
+    pitchPixels = minPitch;
+    if (minPitch <= sampledPitch) {
       pitchPixels = sampledPitch;
     }
     formatIndexCopy = colorRecord[0x3a];
@@ -106,16 +110,16 @@ void ATIR500GLContext::write_r500_3d_blit_state_packet(r500_3d_blit_state_packet
        ((UInt8)tilingByte1 & 3) << 0x13 |
        FormatTableLookup_0x0004d2e0((UInt32)(UInt8)formatIndexCopy * 0x1c) >> 1 & 0x1e00000;
   fmtField0 = FormatTableLookup_0x0004d2e0(formatTableOffset) >> 0x11 & 0x1f;
-  M<UInt32>(packetBytes + 0x228) = fmtField0 | oldFormatWord & 0xffffffe0;
-  fmtField1 = FormatTableLookup_0x0004d2e0(formatTableOffset) >> 7 & 0x300;
-  M<UInt32>(packetBytes + 0x228) = fmtField1 | fmtField0 | oldFormatWord & 0xfffffce0;
-  fmtField2 = FormatTableLookup_0x0004d2e0(formatTableOffset) >> 3 & 0xc00;
-  M<UInt32>(packetBytes + 0x228) = fmtField2 | fmtField1 | fmtField0 | oldFormatWord & 0xfffff0e0;
-  fmtField3 = (FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x1800) << 1;
-  M<UInt32>(packetBytes + 0x228) = fmtField3 | fmtField2 | fmtField1 | fmtField0 | oldFormatWord & 0xffffc0e0;
+  formatWord = fmtField0 | oldFormatWord & 0xffffffe0;
+  M<UInt32>(packetBytes + 0x228) = formatWord;
+  formatWord = (FormatTableLookup_0x0004d2e0(formatTableOffset) >> 7 & 0x300) | formatWord & 0xfffffcff;
+  M<UInt32>(packetBytes + 0x228) = formatWord;
+  formatWord = (FormatTableLookup_0x0004d2e0(formatTableOffset) >> 3 & 0xc00) | formatWord & 0xfffff3ff;
+  M<UInt32>(packetBytes + 0x228) = formatWord;
+  formatWord = ((FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x1800) << 1) | formatWord & 0xffffcfff;
+  M<UInt32>(packetBytes + 0x228) = formatWord;
   M<UInt32>(packetBytes + 0x228) =
-       (FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x600) << 5 |
-       fmtField3 | fmtField2 | fmtField1 | fmtField0 | oldFormatWord & 0xffff00e0;
+       ((FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x600) << 5) | formatWord & 0xffff3fff;
   stateWord = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
   M<UInt32>(packetBytes + 0x2b0) = 0xaaaa;
   M<UInt32>(packetBytes + 0x2c) = stateWord;
