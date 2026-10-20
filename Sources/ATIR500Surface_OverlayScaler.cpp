@@ -107,7 +107,8 @@ UInt32 ATIR500Surface::real_to_hex(UInt32 mode, float value) {
         }
     }
     SInt32 whole = static_cast<SInt32>(F2U(static_cast<double>(value)));
-    float scaledFraction = static_cast<float>(static_cast<double>(value) - SD(whole)) * 10000.0f;
+    /* the shipped code converts the integer part with the UNSIGNED int->double idiom (no sign flip before the 0x43300000 trick), so a negative part - an out-of-range input - gives a huge negative fraction; SD() here returned the signed value (found by the H3 real_to_hex hand world) */
+    float scaledFraction = static_cast<float>(static_cast<double>(value) - UD(static_cast<UInt32>(whole))) * 10000.0f;
     UInt32 fraction;
     if (mode == 0) {
         double rounded = static_cast<double>(scaledFraction) + 0.5;

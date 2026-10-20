@@ -692,3 +692,163 @@ def w_cmft_surface(m, rng):
 CASES += [
     Case('IOATIR500Surface::clientMemoryForType', w_cmft_surface, ret='u32', name='IOATIR500Surface::clientMemoryForType panels H3', seeds=80, mock=surf_mock, plain_words=True, ignore_args=REL),
 ]
+
+
+# ---------------------------------------------------------------- ATIR500Surface::prepare_vram / complete_vram
+def vram_world(m, rng, prepare):
+    S, A = surf(m, rng)
+    m.w8(A + 0x990, rng.choice([0, 1, 4, 8, 32]))                       # number of VRAM-lock slots
+    m.w32(A + 0x890, rng.choice([0, 1, 3, 0xff, 0xffffffff, 5, 0x55]))   # slot-in-use mask
+    m.w8(A + 0x80, rng.choice([0, 1, 1]))                               # hardware up
+    pk = m.alloc(0x200); fill_words(m, pk, 0x200, rng)
+    m.w32(A + 0x238, pk); m.w32(A + 0x234, word(rng))
+    m.w32(A + 0x228, rng.choice([0, 0x1000]))
+    buf = S + 0xa8 + 0x78 * rng.randrange(0, 6)
+    m.w8(buf + 0x3c, rng.choice([0, 1, 2, 0xff]) if prepare else rng.choice([0, 1, 1, 2]))
+    m.w8(buf + 0x37, rng.choice([0, 3, 7, 0xff]))
+    m.w8(buf + 0x38, rng.choice([0, 1, 2, 3, 4, 5, 9]))
+    m.w8(buf + 0x39, rng.choice([0, 1, 2, 3]))
+    m.w8(buf + 0x3d, rng.choice([0, 0x00, 0x10, 0x20, 0xf0]))                  # bits 20..23 of the word at +0x3c (the byte at +0x3c is its top byte)
+    m.w8(buf + 0x3e, rng.choice([0, 0x08]))                                    # bit 0x800: depth buffer needing a decompress
+    m.w32(buf + 0x08, rng.choice([0, 0x1000, 0x20000])); m.w32(buf + 0x10, rng.choice([0, 0x1000, 0x2000]))
+    m.w16(buf + 0x18, rng.choice([0, 64, 640]))
+    return [S, buf]
+
+
+def vram_mock(m, name, k):
+    if 'decompress_and_flush_depth_buffer' in name:
+        return [0, 6, 10, 11][(m.seed + k) % 4]
+    if 'submit_buffer' in name:
+        return m.seed * 3 + k
+    return surf_mock(m, name, k)
+
+
+CASES += [
+    Case('ATIR500Surface::prepare_vram', lambda m, r: vram_world(m, r, True), ret='u32', name='ATIR500Surface::prepare_vram slots H3', seeds=300, mock=vram_mock, plain_words=True, ignore_args=REL),
+    Case('ATIR500Surface::complete_vram', lambda m, r: vram_world(m, r, False), ret='u32', name='ATIR500Surface::complete_vram slots H3', seeds=200, mock=vram_mock, plain_words=True, ignore_args=REL),
+]
+
+
+# ---------------------------------------------------------------- ATIR500Surface: real_to_hex, calc_h_inc_step_by, is_surface_size_supported, buffer_map_offset
+FLOAT_VALUES = [3.0e9, 2147483648.0, 4294967295.0, 5.0e9, -5.0e9, 1e30, float("inf"), float("-inf"), float("nan"), -3000.0, -2047.5, -10.0, -8.5, 0.0, 1.0, -1.0, 0.5, -0.25, 1.5, 3.999, -3.999, 7.9, -7.9, 100.0, 1000.0, -1000.0, 2047.5, 0.3333, -0.7, 1e-6, 33.3, 65535.0]
+
+
+def w_real_to_hex(m, rng):
+    m.fargs = [rng.choice(FLOAT_VALUES) + rng.choice([0.0, 0.001, 0.123])]
+    S = obj(m, rng, 'ATIR500Surface', 0x100)
+    return [S, rng.choice([0, 1, 1, 0, 2])]
+
+
+def w_calc_h_inc(m, rng):
+    S = obj(m, rng, 'ATIR500Surface', 0x100)
+    m.fargs = [rng.choice([0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 0.1, 8.0, 1e-4, 1e-9, 64.0, 1000.0, 0.0, 1e7, 1e9, 3e12])]
+    outs = [m.alloc(0x10) for _ in range(9)]
+    mode = rng.choice([3, 4, 6, 9, 10, 0xb, 0xc, 0xd, 0xe, 0, 5, 7])
+    return [S, mode, 0, rng.randrange(0, 12), rng.randrange(0, 12), rng.choice([0, 1, 1, 2])] + outs      # the float `scale` (f1) takes the r5 slot; o6/o7 in r9/r10, o8..o14 on the stack
+
+
+def w_size_supported(m, rng):
+    S, A = surf(m, rng)
+    m.w16(A + 0xa8, rng.choice([0, 1024, 0x1000, 0x2000])); m.w16(A + 0xaa, rng.choice([0, 768, 0x1000, 0x2000]))
+    sx = lambda v: v & 0xffffffff
+    return [S, sx(rng.choice([-1, 0, 4, 640, 1024, 0x1000, 0x1001, 0x2000])), sx(rng.choice([-1, 0, 4, 480, 768, 0x1000, 0x1001, 0x2000]))]
+
+
+def w_map_offset2(m, rng):
+    S = obj(m, rng, 'ATIR500Surface', 0x100)
+    buf = m.alloc(0x80); fill_words(m, buf, 0x80, rng)
+    m.w32(buf + 0x3c, rng.choice([0, 0x100000, 0x200000, 0x400000, 0x300000 | 0x800, 0xf00000]))
+    m.w16(buf + 0x1c, rng.choice([0, 7, 64, 640])); m.w16(buf + 0x1e, rng.choice([0, 1, 48, 480]))
+    m.w16(buf + 0x14, rng.choice([0, 64, 640])); m.w16(buf + 0x16, rng.choice([0, 2, 4])); m.w16(buf + 0x20, rng.choice([0, 1, 6]))
+    outs = [m.alloc(0x10) if rng.random() < 0.8 else 0 for _ in range(3)]
+    return [S, buf, rng.choice([0, 1, 2, 3]), rng.choice([0, 1, 2, 4, 9])] + outs
+
+
+CASES += [
+    Case('ATIR500Surface::real_to_hex', w_real_to_hex, ret='u32', name='ATIR500Surface::real_to_hex values H3', seeds=300, plain_words=True),
+    Case('ATIR500Surface::calc_h_inc_step_by', w_calc_h_inc, ret='u32', name='ATIR500Surface::calc_h_inc_step_by modes H3', seeds=800, plain_words=True),
+    Case('ATIR500Surface::is_surface_size_supported', w_size_supported, ret='s32', name='ATIR500Surface::is_surface_size_supported H3', seeds=80, mock=surf_mock, plain_words=True, ignore_args=REL),
+    Case('IOATIR500Surface::is_surface_size_supported', w_size_supported, ret='s32', name='IOATIR500Surface::is_surface_size_supported H3', seeds=80, mock=surf_mock, plain_words=True, ignore_args=REL),
+    Case('ATIR500Surface::buffer_map_offset', w_map_offset2, ret='s32', name='ATIR500Surface::buffer_map_offset H3', seeds=150, plain_words=True),
+]
+
+
+def fbits(f):
+    return struct.unpack('>I', struct.pack('>f', f))[0]
+
+
+def w_surf_desc(m, rng):
+    S = obj(m, rng, 'ATIR500Surface', 0xe00)
+    info = m.alloc(0x100); fill_words(m, info, 0x100, rng)
+    m.w32(info + 0x3c, rng.choice([9, 10, 3, 4, 6, 0xb, 0xd, 0]))
+    m.w32(info + 0x40, rng.choice([0, 64, 1280, 4096]))
+    m.w32(info + 0xe0, rng.choice([0, 0, 1, 2]))
+    for off in (0xd4, 0xd8, 0xdc):                                             # chroma plane sizes: positive, negative, multiples of 16 or not
+        m.w32(info + off, rng.choice([0, 16, 100, 0x7fffffff & 0x1000, (-48) & 0xffffffff, (-5) & 0xffffffff, 7]))
+    m.w32(info + 0x10, rng.choice([0, 7, 640, (-16) & 0xffffffff])); m.w32(info + 0x14, rng.choice([0, 5, 480, (-9) & 0xffffffff]))
+    m.w32(info + 0x30, fbits(rng.choice([0.0, 0.5, 1.0, 2.0, 1e10, -3.0]))); m.w32(info + 0x34, fbits(rng.choice([0.0, 1.0, 0.25, 4.0, 1e12])))
+    m.w32(info + 0x4c, rng.choice([1, 2, 3, 16])); m.w32(info + 0x50, rng.choice([1, 2, 4, 7]))
+    m.w32(info + 0x54, rng.choice([0, 0x3f, 0x15, 0x2a, 1]))
+    m.w32(info + 0x44, rng.choice([0, 3, 640, 70000])); m.w32(info + 0x48, rng.choice([0, 3, 480, 70000]))
+    m.w32(S + 0x128, rng.choice([0, 0x1000, 0x40000]))                                              # buffer1GpuBase
+    idx = rng.choice([0, 1, 2])
+    m.w32(S + 0xd90, idx)                                                                           # currentBufferIndex
+    for i in range(3):
+        m.w32(S + 0x560 + 0x78 * i, rng.choice([0, 0x2000, 0x80000]))
+    out = m.alloc(0x20)
+    return [S, info, out]
+
+
+CASES += [
+    Case('ATIR500Surface::get_surf_desc_regs', w_surf_desc, ret='void', name='ATIR500Surface::get_surf_desc_regs modes H3', seeds=400, plain_words=True),
+]
+
+
+def w_load_3d_blit(m, rng):
+    S, A = surf(m, rng)
+    dest = m.alloc(0x300)
+    buf = m.alloc(0x80); fill_words(m, buf, 0x80, rng)
+    m.w32(buf + 0x3c, (rng.choice([0, 1, 2, 3, 4, 6, 8, 15]) << 20) | rng.choice([0, 0x800, 0x3000]) | (rng.randrange(4) << 24))
+    for off in (0x38, 0x39, 0x3a):
+        m.w8(buf + off, rng.choice([0, 1, 2, 3, 6, 0x10, 0x30, 0xff]))
+    m.w32(buf + 0x08, rng.choice([0, 0x1000, 0x3000000]))
+    m.w16(buf + 0x14, rng.choice([0, 1, 64, 640, 1000])); m.w16(buf + 0x16, rng.choice([1, 2, 4, 8, 16]))
+    m.w16(buf + 0x1c, rng.choice([0, 64, 640, 1023])); m.w16(buf + 0x1e, rng.choice([1, 48, 480]))
+    m.w32(A + 0xb74, word(rng))
+    m.w32(A + 0xb98, rng.choice([1, 2, 4, 6, 8, 12, 0]))                                         # number of pipes
+    return [S, dest, buf]
+
+
+CASES += [
+    Case('ATIR500Surface::load_3d_blit', w_load_3d_blit, ret='u32', name='ATIR500Surface::load_3d_blit formats H3', seeds=300, plain_words=True, ignore_args=REL),
+]
+
+
+def w_atir500_stop(m, rng):
+    S, A = surf(m, rng)
+    for i in range(23):
+        m.w8(S + 0xa8 + 0x78 * i + 0x37, rng.choice([0xff, 0xff, 0xff, 3, 0]))
+    m.w8(A + 0x80, rng.choice([0, 1, 1]))
+    panel = rng.choice([0, 1, 0xffff]); m.w32(S + 0xc14, panel)
+    for p in range(2):
+        m.w32(A + 0xe8 + 0x20 * p, rng.choice([S, S, 0]))
+    pk = m.alloc(0x200); fill_words(m, pk, 0x200, rng)
+    m.w32(A + 0x238, pk); m.w32(A + 0x234, word(rng)); m.w32(A + 0x228, rng.choice([0, 0x1000]))
+    for p in range(2):
+        m.w32(A + 0x134 + 0x78 * p, word(rng))
+    m.w32(S + 0xdb8, rng.choice([0, 1]))
+    m.w32(S + 0xb74, rng.choice([S + 0x120, S + 0xa8]))
+    m.w8(S + 0xbf0, rng.choice([0, 1]))
+    m.w32(A + 0x8b8, rng.choice([0, 1])); m.w32(A + 0x8b0, plain(m, rng, 0x100, 0x800))
+    return [S, A]
+
+
+def stop_mock(m, name, k):
+    if 'submit_buffer' in name:
+        return m.seed + k
+    return surf_mock(m, name, k)
+
+
+CASES += [
+    Case('ATIR500Surface::stop', w_atir500_stop, ret='void', name='ATIR500Surface::stop teardown H3', seeds=250, mock=stop_mock, plain_words=True, ignore_args=REL),
+]
