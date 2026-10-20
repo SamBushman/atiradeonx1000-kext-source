@@ -11,6 +11,11 @@ from hand_cases_D import new_mock, plain, obj, clean_word, surf, accel, REL
 from unicorn.ppc_const import UC_PPC_REG_3, UC_PPC_REG_4, UC_PPC_REG_5, UC_PPC_REG_6, UC_PPC_REG_7
 
 CASES = []
+
+
+def slot(name, off):
+    """does this mocked call go through vtable slot `off` (named `X::m() [vcall +0xNNN]` when the vtable listing names it, `vtable slot +0xNNN` when not)"""
+    return name.endswith('[vcall +0x%x]' % off) or name.endswith('vtable slot +0x%x' % off)
 PAGE = 0x1000
 
 
@@ -157,9 +162,9 @@ def sid_mock(m, name, k):
         this = m.uc.reg_read(UC_PPC_REG_3)
         m.w32(this + 0xc1c, m.r32(this + 0xc1c) | ((m.seed + k) % 4))
         return 0
-    if name.endswith('vtable slot +0x540'):                      # accelerator: allocate a transfer region
+    if slot(name, 0x540):                      # accelerator: allocate a transfer region
         return (m.seed + k) % 3 != 0
-    if name.endswith('vtable slot +0x5dc'):                      # surface: is the panel record already active?
+    if slot(name, 0x5dc):                      # surface: is the panel record already active?
         return (m.seed + k) % 2
     return new_mock(m, name, k)
 
@@ -219,19 +224,19 @@ def lock_mock(m, name, k):
         return 0 if r < 7 else 0xe00002be
     if 'copy_buffer_to_backing_store' in name or 'move_buffer_to_backing_store' in name:
         return 1 if r < 7 else 0
-    if name.endswith('vtable slot +0xdc'):                       # IOMemoryDescriptor state query: (state in, out state)
+    if slot(name, 0xdc):                       # IOMemoryDescriptor state query: (state in, out state)
         out = m.uc.reg_read(UC_PPC_REG_5)
         if out > 0x1000: m.w32(out, [2, 4, 4, 1][(m.seed + k) % 4])
         return 0 if r < 8 else 0xe00002bc
-    if name.endswith('vtable slot +0x558'):                      # accelerator: how many stamps retired / a count
+    if slot(name, 0x558):                      # accelerator: how many stamps retired / a count
         return r
-    if name.endswith('vtable slot +0xd0'):
+    if slot(name, 0xd0):
         return 0x10000000
     return new_mock(m, name, k)
 
 
 CASES += [
-    Case('IOATIR500Surface::surface_lock_options', w_lock_options, ret='u32', name='IOATIR500Surface::surface_lock_options states H3', seeds=1200, mock=lock_mock, plain_words=True,
+    Case('IOATIR500Surface::surface_lock_options', w_lock_options, ret='u32', name='IOATIR500Surface::surface_lock_options states H3', seeds=450, mock=lock_mock, plain_words=True,
          ignore_args=REL, out_extents={'vtable slot +0xdc': {2: 4}}),
 ]
 
@@ -254,7 +259,7 @@ def w_query_lock(m, rng):
 
 
 def q_mock(m, name, k):
-    if name.endswith('vtable slot +0x5d0'):                                         # alloc_surface_buffer through the vtable
+    if slot(name, 0x5d0):                                         # alloc_surface_buffer through the vtable
         return (m.seed + k) % 3 != 0
     return new_mock(m, name, k)
 
@@ -288,7 +293,7 @@ def read_mock(m, name, k):
     r = (m.seed * 17 + k * 5) % 10
     if 'withAddress' in name:                                    # IOMemoryDescriptor::withAddress: a descriptor or nothing
         return plain(m, rng_for(m, k), 0x400, 0x800) if r != 9 else 0
-    if 'copy_from_buffer' in name or name.endswith('vtable slot +0x5e8'):
+    if 'copy_from_buffer' in name or slot(name, 0x5e8):
         from unicorn.ppc_const import UC_PPC_REG_1
         sp = m.uc.reg_read(UC_PPC_REG_1)
         ptr = m.r32(sp + 0x3c)
@@ -304,6 +309,386 @@ def rng_for(m, k):
 
 
 CASES += [
-    Case('IOATIR500Surface::surface_read', w_surface_read, ret='u32', name='IOATIR500Surface::surface_read ranges H3', seeds=500, mock=read_mock, plain_words=True,
+    Case('IOATIR500Surface::surface_read', w_surface_read, ret='u32', name='IOATIR500Surface::surface_read ranges H3', seeds=250, mock=read_mock, plain_words=True,
          ignore_args=REL, out_extents={'vtable slot +0xdc': {2: 4}, 'copy_from_buffer': {9: [(4, 4), (0xe, 2)]}, 'vtable slot +0x5e8': {9: [(4, 4), (0xe, 2)]}}),
+]
+
+
+# ---------------------------------------------------------------- IOATIR500Surface::surface_buffer_idx_mask, reset_access
+def w_idx_mask(m, rng):
+    S, A = surf(m, rng)
+    for off in (0xb70, 0xb74, 0xb80, 0xb84):                                          # attachment table entries: the primary buffer record or the second one
+        m.w32(S + off, rng.choice([S + 0xa8, S + 0x120, S + 0x300, S + 0x288]))
+    m.w32(S + 0xc18, rng.choice([0, 1, 2, 3]))
+    out = m.alloc(0x10)
+    return [S, rng.choice([0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 0xb, 0x11, 0x12, 0x20]), out]
+
+
+def reset_access_mock(m, name, k):
+    if slot(name, 0x604):                                           # (re)computes the access descriptor
+        this = m.uc.reg_read(UC_PPC_REG_3)
+        if (m.seed + k) % 3:
+            m.w32(this + 0xc00, plain(m, rng_for(m, k), 0x400, 0x800))
+        return 0
+    if slot(name, 0x150) or slot(name, 0x14c):    # createMappingInTask / map: a mapping object or nothing
+        return plain(m, rng_for(m, k), 0x400, 0x800) if (m.seed + k) % 4 != 3 else 0
+    if slot(name, 0xd0):
+        return 0x10000000 + k
+    return new_mock(m, name, k)
+
+
+def w_reset_access(m, rng):
+    S, A = surf(m, rng)
+    m.w32(S + 0xc00, rng.choice([0, plain(m, rng, 0x400, 0x800)]))                       # access descriptor before the call
+    m.w32(S + 0xd84, rng.choice([0, plain(m, rng, 0x400, 0x800)]))                       # user mapping
+    m.w32(S + 0xd88, rng.choice([0, plain(m, rng, 0x400, 0x800)]))                       # kernel mapping
+    m.w8(S + 0xbf4, rng.choice([0, 1, 1]))
+    m.w32(S + 0x78, rng.choice([0, 0x40000000]))
+    return [S]
+
+
+CASES += [
+    Case('IOATIR500Surface::surface_buffer_idx_mask', w_idx_mask, ret='u32', name='IOATIR500Surface::surface_buffer_idx_mask types H3', seeds=300, mock=new_mock, ignore_args=REL),
+    Case('IOATIR500Surface::reset_access', w_reset_access, ret='void', name='IOATIR500Surface::reset_access mappings H3', seeds=200, mock=reset_access_mock, plain_words=True, ignore_args=REL),
+]
+
+
+# ---------------------------------------------------------------- IOATIR500Surface::alloc_surfaces_retry / alloc_surfaces_pageq
+def w_retry(m, rng):
+    S, A = surf(m, rng)
+    m.w8(A + 0x80, rng.choice([0, 1, 1, 1]))
+    m.w8(S + 0xbd0, rng.choice([0, 0, 1])); m.w8(S + 0xbd1, rng.choice([0, 0, 1]))
+    m.w32(S + 0xbf8, rng.choice([0, 1, 2, 3, 3, 0x20000000, 0x20000003]))
+    m.w32(S + 0xc1c, rng.choice([0, 1, 2, 3]))
+    return [S, rng.choice([0, 1, 2, 3, 3]), rng.choice([0, 1, 2, 2])]
+
+
+def retry_mock(m, name, k):
+    if 'alloc_surfaces_pageq' in name:                 # 0 allocated, 1 busy (retry), 2 failed; mostly settles after a few busy answers; now and then stays busy for ever
+        if m.seed % 23 == 5:
+            return 1 if k < 1100 else 0
+        return [1, 1, 0, 2, 0][(m.seed + (k if k < 3 else 4)) % 5] if k < 3 else (0 if (m.seed % 2) else 2)
+    return default_mock(m, name, k)
+
+
+def w_pageq(m, rng):
+    S, A = surf(m, rng)
+    m.w32(S + 0xbf8, rng.choice([0, 1, 3, 5, 0x7fffff, 0x20000003, 0x400001]))
+    # the other surfaces on the accelerator's circular list (head A+0x5c, linked through +0x9c): some locked
+    n = rng.choice([0, 1, 2, 3])
+    others = [obj(m, rng, 'ATIR500Surface', 0xe00) for _ in range(n)]
+    ring = [S] + others
+    for i, o in enumerate(ring):
+        m.w32(o + 0x9c, ring[(i + 1) % len(ring)])
+        m.w32(o + 0xbd0, rng.choice([0, 0, 0, 1, 3]))
+    m.w32(A + 0x5c, rng.choice([S, ring[-1], 0]))
+    for i in range(23):
+        m.w32(S + 0xb0 + 0x78 * i, rng.choice([0, 0, 0x1000]))
+    return [S, rng.choice([1, 3, 0x7fffff, 4, 0]), rng.choice([0, 1, 0x7fffff]), rng.choice([0, 1])]
+
+
+def pageq_mock(m, name, k):
+    if slot(name, 0x5f4):                              # allocate buffer `index`: succeeds mostly
+        return 1 if (m.seed * 13 + k * 3) % 10 < 6 else 0
+    return default_mock(m, name, k)
+
+
+CASES += [
+    Case('IOATIR500Surface::alloc_surfaces_retry', w_retry, ret='u32', name='IOATIR500Surface::alloc_surfaces_retry states H3', seeds=300, mock=retry_mock, plain_words=True, limit=400000),
+    Case('IOATIR500Surface::alloc_surfaces_pageq', w_pageq, ret='u32', name='IOATIR500Surface::alloc_surfaces_pageq lists H3', seeds=300, mock=pageq_mock, plain_words=True),
+]
+
+
+# ---------------------------------------------------------------- IOATIR500Surface::copy_buffer_from_backing_store / copy_buffer_to_backing_store / connect_buffer_backing_store
+def backed_buffer(m, rng, S, with_bs=True):
+    """a surface buffer record with its backing-store record (+0x24: descriptor +8, GART state +4, header +0x14, stamp +0x54, flag +0x58) and level counts (+0x20/+0x22)"""
+    buf = S + 0xa8 + 0x78 * rng.randrange(0, 6)
+    stamp = m.r32(S + 0x7c)
+    m.w32(buf + 0x10, rng.choice([0x1000, 0x4000]))
+    m.w16(buf + 0x20, rng.choice([0, 1, 2])); m.w16(buf + 0x22, rng.choice([0, 1, 3]))
+    m.w16(buf + 0x1e, rng.choice([16, 480]))
+    if with_bs:
+        bs = m.alloc(0x80); fill_words(m, bs, 0x80, rng)
+        m.w32(bs + 0x04, rng.choice([0, 1])); m.w32(bs + 0x08, rng.choice([0, plain(m, rng, 0x400, 0x800)]))
+        hdr = m.alloc(0x40); fill_words(m, hdr, 0x40, rng); m.w32(bs + 0x14, hdr)
+        m.w32(bs + 0x54, rng.choice([stamp, stamp, stamp - 1, 7])); m.w8(bs + 0x58, rng.choice([0, 1, 1]))
+        m.w32(buf + 0x24, bs)
+        # other buffer records point at backing stores too (the loop retargets those whose stamp matched)
+        for i in range(23):
+            if rng.random() < 0.3:
+                o = m.alloc(0x80); fill_words(m, o, 0x80, rng); m.w32(o + 0x54, rng.choice([stamp - 1, stamp, 7]))
+                m.w32(S + 0xcc + 0x78 * i, o)
+            else:
+                m.w32(S + 0xcc + 0x78 * i, 0)
+        m.w32(S + 0xcc + 0x78 * ((buf - S - 0xa8) // 0x78), bs)
+    else:
+        m.w32(buf + 0x24, 0)
+    return buf
+
+
+def w_copy_backing(m, rng):
+    S, A = surf(m, rng)
+    m.w32(S + 0x7c, rng.choice([5, 0x1234]))
+    buf = backed_buffer(m, rng, S, with_bs=rng.random() < 0.9)
+    for off in (0xc08, 0xc09, 0xbf7):
+        m.w8(S + off, rng.choice([0, 0, 1]))
+    m.w8(S + 0xbf7, rng.choice([0, 1, 1]))
+    m.w32(S + 0xbd0, rng.choice([0, 0, 0x10000]))
+    m.w32(A + 0x50, rng.randrange(1, 50)); m.w32(A + 0x724, rng.randrange(0, 100)); m.w32(A + 0x728, rng.randrange(0, 100)); m.w32(A + 0x7b4, rng.randrange(0, 100))
+    return [S, buf]
+
+
+def backing_mock(m, name, k):
+    r = (m.seed * 29 + k * 11) % 10
+    if 'buffer_map_offset' in name:                                  # (buffer, index, level, &width, &height, 0): the mip level's size
+        w, h = m.uc.reg_read(UC_PPC_REG_7), m.uc.reg_read(UC_PPC_REG_8)
+        if w > 0x1000: m.w32(w, [16, 64, 256][(m.seed + k) % 3])
+        if h > 0x1000: m.w32(h, [16, 64, 128][(m.seed + k * 2) % 3])
+        return 0
+    if slot(name, 0x5e4) or 'alloc_buffer_backing_store' in name:       # alloc_buffer_backing_store(buffer): installs the record (+0x24) or fails
+        buf = m.uc.reg_read(UC_PPC_REG_4)
+        if r < 7:
+            bs = m.alloc(0x80)
+            m.w32(bs + 0x14, m.alloc(0x40)); m.w32(bs + 0x08, plain(m, rng_for(m, k), 0x400, 0x800) if r < 4 else 0)
+            m.w32(buf + 0x24, bs)
+            return 1
+        return 0
+    if 'copy_to_buffer' in name or 'copy_from_buffer' in name or slot(name, 0x5e8) or slot(name, 0x5ec):
+        return 0
+    if slot(name, 0x55c):
+        return r
+    return lock_mock(m, name, k)
+
+
+from unicorn.ppc_const import UC_PPC_REG_8
+
+BACKING_EXT = {'buffer_map_offset': {4: 4, 5: 4}, 'vtable slot +0xdc': {2: 4}}
+
+CASES += [
+    Case('IOATIR500Surface::copy_buffer_from_backing_store', w_copy_backing, ret='u32', name='IOATIR500Surface::copy_buffer_from_backing_store H3', seeds=300, mock=backing_mock, plain_words=True,
+         ignore_args=REL, out_extents=BACKING_EXT),
+    Case('IOATIR500Surface::copy_buffer_to_backing_store', w_copy_backing, ret='bool', name='IOATIR500Surface::copy_buffer_to_backing_store H3', seeds=300, mock=backing_mock, plain_words=True,
+         ignore_args=REL, out_extents=BACKING_EXT),
+]
+
+
+def w_connect(m, rng):
+    S, A = surf(m, rng)
+    buf = backed_buffer(m, rng, S, with_bs=True)
+    m.w32(S + 0xd4c, rng.choice([0, 0, 0x8000]))
+    m.w32(S + 0x78, rng.choice([0, 0x40000000]))
+    return [S, buf, rng.choice([0x40000000, 0x40000123, 0x40001000]), rng.choice([64, 640, 2560])]
+
+
+def connect_mock(m, name, k):
+    if 'withAddress' in name:
+        return plain(m, rng_for(m, k), 0x400, 0x800) if (m.seed + k) % 5 != 4 else 0
+    return backing_mock(m, name, k)
+
+
+CASES += [
+    Case('IOATIR500Surface::connect_buffer_backing_store', w_connect, ret='bool', name='IOATIR500Surface::connect_buffer_backing_store H3', seeds=120, mock=connect_mock, plain_words=True,
+         ignore_args=REL, out_extents=BACKING_EXT),
+]
+
+
+# ---------------------------------------------------------------- IOATIR500Surface: alloc_surface(_keep), prune_buffers, resetFullScreen, reset_req_bits, remove_*_context(_from_list), free_buffer_backing_orphans
+def buffers_state(m, rng, S, p_storage=0.6):
+    """the 23 buffer records: storage bytes (+0x10), GPU base (+8), backing store (+0x24) set or clear"""
+    for i in range(23):
+        r = S + 0xa8 + 0x78 * i
+        m.w32(r + 0x10, rng.choice([0, 0x1000]) if rng.random() < p_storage else 0)
+        m.w32(r + 0x08, rng.choice([0, 0, 0x2000]))
+        m.w32(r + 0x24, rng.choice([0, 0, plain(m, rng, 0x40)]))
+
+
+def w_alloc_surface(m, rng):
+    S, A = surf(m, rng)
+    buffers_state(m, rng, S)
+    m.w32(S + 0xbf8, rng.choice([0, 0xffffffff, 0x1, 0x3f]))
+    return [S, rng.choice([0, 1, 2, 5, 22]), rng.choice([0, 1])]
+
+
+def w_alloc_surface_keep(m, rng):
+    S, A = surf(m, rng)
+    buffers_state(m, rng, S)
+    m.w32(S + 0xbf8, rng.choice([0, 0xffffffff, 0x1, 0x3f]))
+    other = obj(m, rng, 'ATIR500Surface', 0xe00)
+    tex = m.alloc(0x40)
+    return [S, other, tex, rng.choice([0, 1, 3]), rng.choice([0, 1, 2, 5, 22])]
+
+
+def surf_mock(m, name, k):
+    r = (m.seed * 19 + k * 7) % 10
+    if slot(name, 0x5d0) or 'alloc_surface_buffer' in name:         # vtable alloc_surface_buffer(buffer)
+        return 1 if r < 4 else 0
+    if 'freeToAllocSurfaceVRAM' in name:
+        return 1 if r < 7 else 0
+    if 'surface_buffer_idx_mask' in name:                          # (type, &mask): the mask word
+        out = m.uc.reg_read(UC_PPC_REG_5)
+        if out > 0x1000: m.w32(out, [1, 2, 4, 0x10, 0x30][(m.seed + k) % 5])
+        return (m.seed + k) % 8
+    if slot(name, 0x5dc):                                            # is_flip_allowed
+        return r % 2
+    return new_mock(m, name, k)
+
+
+def w_prune(m, rng):
+    S, A = surf(m, rng)
+    buffers_state(m, rng, S)
+    m.w32(S + 0xbe8, rng.choice([0, 0x20, 0x30, 0x10, 0x8000, 0x8020]))
+    m.w32(S + 0xc18, rng.choice([0, 1, 2, 3, 0x11, 0x13, 0x30, 0x20, 0x10, 0x7fffff]))
+    m.w32(S + 0xbf8, rng.choice([0, 1, 2, 3, 0x20000000]))
+    m.w32(S + 0xc1c, rng.choice([0, 1, 2, 0x30000000]))
+    panel = rng.choice([0, 1, 0xffff]); m.w32(S + 0xc14, panel)
+    for p in range(2):
+        m.w32(A + 0xe8 + 0x20 * p, rng.choice([0, S]))                              # panel owner: this surface or not
+    for off in (0xb70, 0xb74, 0xb80, 0xb84):
+        m.w32(S + off, rng.choice([S + 0xa8, S + 0x120, S + 0x288, S + 0x300]))
+    return [S]
+
+
+def w_reset_full_screen(m, rng):
+    S, A = surf(m, rng)
+    m.w32(S + 0xb70, rng.choice([S + 0x120, S + 0xa8]))
+    m.w32(S + 0xc14, rng.choice([0, 1]))
+    m.w32(A + 0xd0, rng.choice([0, 1, 2, 3]))
+    m.w32(A + 0x74c, rng.randrange(0, 5))
+    return [S]
+
+
+def ctx_chain(m, rng, cls, bits_off=0x8c):
+    head = 0
+    for _ in range(rng.choice([0, 1, 2, 3])):
+        n = obj(m, rng, cls, 0x400); m.w32(n + 0x84, head); m.w32(n + bits_off, rng.choice([0, 1, 2, 0x10, 0x100])); head = n
+    return head
+
+
+def w_reset_req_bits(m, rng):
+    S, A = surf(m, rng)
+    m.w32(S + 0xc1c, rng.choice([0, 1, 0x30000020, 0x7fffffff]))
+    m.w32(S + 0x88, ctx_chain(m, rng, 'ATIR500GLContext')); m.w32(S + 0x8c, ctx_chain(m, rng, 'ATIR5002DContext'))
+    dvd = obj(m, rng, 'ATIR500DVDContext', 0x400); m.w32(dvd + 0x88, rng.choice([0, 4, 0x40]))
+    m.w32(S + 0x90, rng.choice([0, dvd]))
+    m.w32(S + 0xbf8, rng.choice([0, 1, 2, 3]))
+    m.w32(S + 0x144, rng.choice([0, 0x5000])); m.w32(S + 0xcc, rng.choice([0, 0x5000]))
+    head = 0
+    for _ in range(rng.choice([0, 1, 2, 3])):                            # list of buffer descriptors (+0xbcc, linked through +0x54), type word at +0x58
+        n = m.alloc(0x80); m.w32(n + 0x58, rng.choice([0x11, 0x11, 1, 2, 3, 4, 7]))
+        m.w32(n + 0x54, head); head = n
+    m.w32(S + 0xbcc, head)
+    return [S]
+
+
+def w_remove_dvd(m, rng):
+    S, A = surf(m, rng)
+    dvd = obj(m, rng, 'ATIR500DVDContext', 0x400)
+    m.w32(S + 0x90, rng.choice([dvd, dvd, 0, obj(m, rng, 'ATIR500DVDContext', 0x400)]))
+    return [S, dvd]
+
+
+def w_remove_ctx_list(cls, off):
+    def w(m, rng):
+        S, A = surf(m, rng)
+        chain = [obj(m, rng, cls, 0x400) for _ in range(rng.choice([1, 2, 3, 4]))]
+        for i, c in enumerate(chain):
+            m.w32(c + 0x84, chain[i + 1] if i + 1 < len(chain) else 0)
+        m.w32(S + off, chain[0])
+        victim = rng.choice(chain + [obj(m, rng, cls, 0x400)])                # in the list at any position, or not in it
+        return [S, victim]
+    return w
+
+
+def w_orphans(m, rng):
+    S, A = surf(m, rng)
+    o = m.alloc(0x80); fill_words(m, o, 0x80, rng); m.w32(o + 0x10, rng.choice([0, plain(m, rng, 0x40)]))
+    m.w32(S + 0xd8c, o)
+    return [S]
+
+
+CASES += [
+    Case('IOATIR500Surface::alloc_surface', w_alloc_surface, ret='bool', name='IOATIR500Surface::alloc_surface buffers H3', seeds=300, mock=surf_mock, plain_words=True, ignore_args=REL),
+    Case('IOATIR500Surface::alloc_surface_keep', w_alloc_surface_keep, ret='bool', name='IOATIR500Surface::alloc_surface_keep buffers H3', seeds=300, mock=surf_mock, plain_words=True, ignore_args=REL),
+    Case('IOATIR500Surface::prune_buffers', w_prune, ret='void', name='IOATIR500Surface::prune_buffers modes H3', seeds=300, mock=surf_mock, plain_words=True, ignore_args=REL),
+    Case('IOATIR500Surface::resetFullScreen', w_reset_full_screen, ret='void', name='IOATIR500Surface::resetFullScreen H3', seeds=120, mock=surf_mock, plain_words=True, ignore_args=REL),
+    Case('IOATIR500Surface::reset_req_bits', w_reset_req_bits, ret='void', name='IOATIR500Surface::reset_req_bits lists H3', seeds=200, mock=surf_mock, plain_words=True, ignore_args=REL,
+         out_extents={'surface_buffer_idx_mask': {2: 4}}),
+    Case('IOATIR500Surface::remove_dvd_context', w_remove_dvd, ret='void', name='IOATIR500Surface::remove_dvd_context H3', seeds=40, mock=surf_mock, ignore_args=REL),
+    Case('IOATIR500Surface::remove_2d_context_from_list', w_remove_ctx_list('ATIR5002DContext', 0x8c), ret='void', name='IOATIR500Surface::remove_2d_context_from_list H3', seeds=60, mock=surf_mock, ignore_args=REL),
+    Case('IOATIR500Surface::remove_gl_context_from_list', w_remove_ctx_list('ATIR500GLContext', 0x88), ret='void', name='IOATIR500Surface::remove_gl_context_from_list H3', seeds=60, mock=surf_mock, ignore_args=REL),
+    Case('IOATIR500Surface::free_buffer_backing_orphans', w_orphans, ret='void', name='IOATIR500Surface::free_buffer_backing_orphans H3', seeds=60, mock=surf_mock, ignore_args=REL),
+]
+
+
+# ---------------------------------------------------------------- IOATIR500Surface::set_shape_backing_length_ext
+def w_shape_ext(m, rng):
+    S, A = surf(m, rng)
+    n = rng.choice([0, 1, 1, 2, 3])
+    region = m.alloc(0x80); fill_words(m, region, 0x80, rng)
+    m.w32(region, n)
+    m.w32(region + 4, rng.choice([0, 1, 0x100]))
+    m.w32(region + 8, 0)
+    w, h = rng.choice([0, 640, 1024]), rng.choice([0, 480, 768])
+    if rng.random() < 0.05: w = 0xfff0                                           # negative as a signed halfword: rejected
+    m.w16(region + 8, w); m.w16(region + 10, h)
+    for i in range(3):
+        m.w32(region + 0xc + 8 * i, rng.choice([0, 8, 16])); m.w32(region + 0x10 + 8 * i, rng.choice([0, 1, 640]))
+    m.w16(region + 0x10, rng.choice([0, 0, 320, 640])); m.w16(region + 0x12, rng.choice([0, 0, 200, 480]))
+    npanels = rng.choice([1, 2, 2])
+    m.w32(A + 0xcc, npanels)
+    m.w8(A + 0x80, rng.choice([0, 1, 1]))
+    m.w32(A + 0xd0, rng.choice([0, 1, 2, 3]))
+    m.w32(A + 0x804, rng.choice([0, 0x10000]))
+    exact = n * 8 + 0xc
+    rsize = rng.choice([0, exact, exact, exact + 4])
+    shape = rng.choice([0, 1, 4, 0x80, 0x20, 0x10, 8, 4 | 0x20, 0x3d, 0xb5, 0xff]) 
+    m.w32(S + 0xbd0, rng.choice([0, 0, 0, 0x10000]))
+    m.w32(S + 0xbe8, rng.choice([0x20, 0x20, 0x20, 0]))
+    m.w8(S + 0xbec, rng.choice([0, 0, 1]))
+    m.w16(S + 0xbee, rng.choice([0, 0, 1]))
+    m.w32(S + 0xd70, rng.choice([0, 2, 3]))
+    m.w32(S + 0xbf8, rng.choice([0, 0x20000000, 3]))
+    for p in range(2):
+        hdr = m.alloc(0x40); fill_words(m, hdr, 0x40, rng); m.w32(hdr + 8, rng.choice([m.r32(region + 8), 0x1234]))
+        m.w32(S + 0xd60 + 8 * p, rng.choice([0, hdr])); m.w32(S + 0xd64 + 8 * p, rng.choice([0, 0x100, exact, exact + 0x100, 0x2000]))
+    buf = S + 0xa8 + 0x78 * rng.randrange(0, 2)
+    m.w32(S + 0xb70, buf); m.w32(buf + 0x10, rng.choice([0, 0x1000])); m.w32(buf + 0x24, rng.choice([0, plain(m, rng, 0x40)]))
+    m.w32(S + 0x7c, rng.choice([5, 9])); m.w32(S + 0x80, rng.choice([5, 9]))
+    m.w32(A + 0x7c0, rng.randrange(0, 5))
+    return [S, shape, rng.choice([0, 1, 1, 2]), rng.choice([0, 0x40000000, 0x40000000]), rng.choice([0, 640, 0xffffffff, 0xffffffff]), region, rsize, rng.choice([0, 0x8000])]
+
+
+def shape_ext_mock(m, name, k):
+    r = (m.seed * 23 + k * 5) % 10
+    if 'IOLockSleep' in name:                                         # the hardware comes up while this thread sleeps
+        acc = m.uc.reg_read(UC_PPC_REG_4)
+        m.w8(acc + 0x80, 1)
+        return 0
+    if slot(name, 0x5b0) or 'is_surface_size_supported' in name:      # is the size supported
+        return 1 if r < 7 else 0
+    if 'connect_buffer_backing_store' in name:
+        return 1 if r < 6 else 0
+    if slot(name, 0x540):
+        return 1 if r < 7 else 0
+    return sid_mock(m, name, k) if ('IOMallocAligned' in name or slot(name, 0x544) or slot(name, 0x5dc)) else surf_mock(m, name, k)
+
+
+CASES += [
+    Case('IOATIR500Surface::set_shape_backing_length_ext', w_shape_ext, ret='u32', name='IOATIR500Surface::set_shape_backing_length_ext regions H3', seeds=400, mock=shape_ext_mock, plain_words=True,
+         ignore_args=REL, stack_args={'vtable slot +0x540': {1: 16}, 'vtable slot +0x544': {1: 16}}),
+]
+
+
+def w_cmft_surface(m, rng):
+    S, A = surf(m, rng)
+    m.w32(A + 0xcc, rng.choice([1, 2, 2]))
+    for p in range(2):                                           # panel records: entries[0] = (memory descriptor, header), then the swap buffer size
+        base = S + 0xc20 + p * 0x94
+        m.w32(base, plain(m, rng, 0x400, 0x800)); m.w32(base + 0x08, rng.choice([0, plain(m, rng, 0x100)]))
+        m.w32(base + 0x90, rng.choice([0, 0x1000, 0x10000]))
+    return [S, rng.choice([0, 1, 1, 2, 5]), m.alloc(0x10), m.alloc(0x10)]
+
+
+CASES += [
+    Case('IOATIR500Surface::clientMemoryForType', w_cmft_surface, ret='u32', name='IOATIR500Surface::clientMemoryForType panels H3', seeds=80, mock=surf_mock, plain_words=True, ignore_args=REL),
 ]
