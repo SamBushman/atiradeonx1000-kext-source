@@ -105,7 +105,7 @@ def tex_mock(m, name, k):
     alloc_client_shared succeed (writing their out parameters) except on some seeds, new_agp_texture returns a record whose header holds a refcount,
     IOBufferMemoryDescriptor::inTaskWithOptions / IOMemoryDescriptor::withAddress return a descriptor object (a null on some seeds)."""
     r3, r4, r5, r6 = (m.uc.reg_read(r) for r in (UC_PPC_REG_3, UC_PPC_REG_4, UC_PPC_REG_5, UC_PPC_REG_6))
-    if 'vtable slot +0x570' in name or '0x570' in name:
+    if '+0x570' in name or '0x570' in name:
         if fail_at(m, k, 9): return 0
         t = m.alloc(0x100); m.w32(t + 0x24, t); m.w32(t + 0x28, t)
         return t
@@ -131,9 +131,9 @@ def tex_mock(m, name, k):
         return plain(m, random_for(m, k), 0x40)
     if name.startswith('IOMalloc') or name.startswith('_IOMalloc'):
         return 0 if m.seed % 7 == 3 else m.alloc(0x40)
-    if 'vtable slot +0xd0' in name or 'vtable slot +0x1cc' in name:      # an address of a mapped region (kernel mappings get stored into and indexed)
+    if '+0xd0' in name or '+0x1cc' in name:      # an address of a mapped region (kernel mappings get stored into and indexed)
         return m.alloc(0x2100)
-    if 'vtable slot +0x128' in name:
+    if '+0x128' in name:
         return PAGE * (1 + m.seed % 3)
     if 'delete_texture' in name or 'free_buf_handle' in name or 'reset_req_bits' in name or 'prune_buffers' in name:
         return 0
@@ -242,7 +242,7 @@ CASES += [
 def del_mock(m, name, k):
     """delete_texture's callees: the accelerator's stamp test (slot 0x554: the orphan path when it says no), OSDecrementAtomic (old value 1 = last
     reference: the nested delete), everything else harmless"""
-    if 'vtable slot +0x554' in name:
+    if '+0x554' in name:
         return 1 if (m.seed + k) % 3 else 0
     if 'DecrementAtomic' in name:
         return 1 if (m.seed + k) % 2 else 2
@@ -293,7 +293,7 @@ def w_delete_texture(m, rng):
 
 CASES += [
     Case('IOATIR500Shared::delete_texture', w_delete_texture, ret='u32', seeds=400, mock=del_mock, plain_words=True,
-         ignore_args={'vtable slot +0x18': [1, 2], 'vtable slot +0x554': [2], 'vtable slot +0x524': [2], 'vtable slot +0x5ac': [2]}),
+         ignore_args={'vtable slot +0x18': [1, 2], '+0x554': [2], '+0x524': [2], '+0x5ac': [2]}),
 ]
 
 
@@ -334,7 +334,7 @@ def alloc_ctx_mock(m, name, k):
         n = getattr(m, 'nopts', 0); m.nopts = n + 1
         if m.seed % 5 == n: return 0
         return plain(m, random_for(m, k), 0x40)
-    if 'vtable slot +0x1cc' in name:
+    if '+0x1cc' in name:
         return m.alloc(0x400)
     if 'init_context_buffer_header' in name:
         return 0
@@ -387,9 +387,9 @@ def surf_mock(m, name, k):
     """set_surface: find_surface_for_id returns the surface object or none; slot 0x5ac (mode-bits acceptance) answers yes/no by seed"""
     if 'find_surface_for_id' in name:
         return 0 if m.seed % 5 == 0 else m.surf_new
-    if 'vtable slot +0x5ac' in name:
+    if '+0x5ac' in name:
         return 0 if m.seed % 4 == 3 else 1
-    if any(x in name for x in ('remove_dvd_context', 'prune_buffers', 'reset_req_bits', 'set_dvd_context', 'vtable slot +0x5a8')):
+    if any(x in name for x in ('remove_dvd_context', 'prune_buffers', 'reset_req_bits', 'set_dvd_context', '+0x5a8')):
         return 0
     return new_mock(m, name, k)
 
@@ -509,7 +509,7 @@ def w_dvd_start(m, rng):
 CASES += [
     Case('ATIR500DVDContext::read_regs', w_dvd_read_regs, ret='u32', seeds=80, plain_words=True),
     Case('ATIR500DVDContext::dvd_setup_subpicture', w_dvd_subpicture, ret='u32', seeds=40, mock=new_mock, plain_words=True),
-    Case('ATIR500DVDContext::doIDCT', w_dvd_idct, ret='u32', seeds=120, mock=idct_mock, plain_words=True, ignore_args={'vtable slot +0x54c': [2]}),
+    Case('ATIR500DVDContext::doIDCT', w_dvd_idct, ret='u32', seeds=120, mock=idct_mock, plain_words=True, ignore_args={'+0x54c': [2]}),
     Case('ATIR500DVDContext::discard_command_buffer', w_dvd_discard, ret='void', seeds=150, mock=discard_mock, plain_words=True),
     Case('ATIR500DVDContext::start', w_dvd_start, ret='bool', seeds=60, mock=start_mock),
 ]
@@ -527,7 +527,7 @@ def w_dvd_cmft(m, rng):
 
 
 CASES += [
-    Case('ATIR500DVDContext::clientMemoryForType', w_dvd_cmft, ret='u32', seeds=80, mock=new_mock, plain_words=True, ignore_args={'vtable slot +0x5ec': [2], 'vtable slot +0x14': [1, 2]}),
+    Case('ATIR500DVDContext::clientMemoryForType', w_dvd_cmft, ret='u32', seeds=80, mock=new_mock, plain_words=True, ignore_args={'+0x5ec': [2], '+0x14': [1, 2]}),
 ]
 
 
@@ -555,4 +555,488 @@ def w_io_dvd_start(m, rng):
 
 CASES += [
     Case('IOATIR500DVDContext::start', w_io_dvd_start, ret='bool', seeds=90, mock=io_start_mock),
+]
+
+
+# ---- IOATIR500Accelerator ---------------------------------------------------------------------------------------------------------------------
+def w_alloc_cmdbuf(m, rng):
+    a = accel(m, rng, mmio=False)
+    m.w32(a + 0x82c, rng.choice([0, 0x100]))
+    return [a, m.alloc(0x40), rng.choice([0x1000, 0x80000])]
+
+
+def cmdbuf_mock(m, name, k):
+    if 'withOptions' in name:
+        return 0 if m.seed % 4 == 0 else plain(m, random_for(m, k), 0x40)
+    if '+0x1cc' in name:
+        return m.alloc(0x100)
+    if 'init_command_buffer_header' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def disp_mock(m, name, k):
+    if 'IncrementAtomic' in name:
+        return m.seed % 2
+    if 'DecrementAtomic' in name:
+        return 1 if (m.seed // 2) % 2 else 2
+    if '+0x5b4' in name or '+0x5b8' in name:
+        return 0 if (m.seed // 3) % 2 else 1
+    if 'getVRAMDescriptor' in name or '+0x5' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_display_change(m, rng):
+    a = accel(m, rng, mmio=False)
+    return [a, 0x1234, plain(m, rng, 0x40), rng.choice([1, 2, 3, 4, 5, 9, 10, 11, 0, -1]), rng.choice([0, 0, 1, 0x10])]
+
+
+def orphan_mock(m, name, k):
+    if 'free_texvert' in name:                       # unlink the record from the orphan list, as the real one does
+        r = m.uc.reg_read(UC_PPC_REG_4)
+        p, n = m.r32(r + 0x24), m.r32(r + 0x28)
+        m.w32(p + 0x28, n); m.w32(n + 0x24, p)
+        return 0
+    if '+0x554' in name:
+        return 1 if (m.seed % 3) else 0
+    if '+0x54c' in name:
+        return 5 + m.seed % 3
+    return new_mock(m, name, k)
+
+
+def w_free_orphan(m, rng):
+    a = accel(m, rng, mmio=False)
+    m.w32(a + 0xb8, plain(m, rng, 0x40)); m.w8(a + 0x82, rng.choice([0, 1]))
+    sentinel = a + 0x63c
+    nodes = [rec(m, rng, rng.choice([3, 4, 5, 7, 3, 4, 2, 6])) for _ in range(rng.randrange(0, 5))]
+    chain = [sentinel] + nodes + [sentinel]
+    for i in range(1, len(chain) - 1):
+        m.w32(chain[i] + 0x24, chain[i - 1]); m.w32(chain[i] + 0x28, chain[i + 1])
+    m.w32(sentinel + 0x28, nodes[0] if nodes else sentinel); m.w32(sentinel + 0x24, nodes[-1] if nodes else sentinel)
+    return [a, rng.choice([0, 1])]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::allocCommandBuffer', w_alloc_cmdbuf, ret='bool', seeds=40, mock=cmdbuf_mock, plain_words=True),
+    Case('IOATIR500Accelerator::display_change_handler', w_display_change, ret='u32', seeds=120, mock=disp_mock, plain_words=True,
+         ignore_args={'getVRAMDescriptor': [2], '+0x5': [1, 2]}),
+    Case('IOATIR500Accelerator::freeOrphanTexture', w_free_orphan, ret='void', seeds=120, mock=orphan_mock, plain_words=True,
+         ignore_args={'+0x554': [2], '+0x54c': [2], '+300': [2], 'free_texvert': [2]}),
+]
+
+
+def stop_mock(m, name, k):
+    """freeWaitToAllocGART & friends: every "did that free enough?" callee says no until the Nth one (N by seed), which says yes; seeds beyond the number
+    of callees say no throughout"""
+    if any(x in name for x in ('freeToAllocGART', 'freeTransferToAllocGART', '+0x5a8')):
+        n = getattr(m, 'nfree', 0); m.nfree = n + 1
+        return 1 if n == m.seed % 24 else 0
+    if 'freeOrphanTexture' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def live_ctx(m, rng, cls, link, shared_off, n):
+    nodes = []
+    for _ in range(n):
+        c = obj(m, rng, cls, 0x400)
+        m.w32(c + link, 0)
+        if shared_off:
+            m.w32(c + shared_off, rng.choice([0, obj(m, rng, 'IOATIR500Shared', 0x100)]))
+        nodes.append(c)
+    for i in range(len(nodes) - 1): m.w32(nodes[i] + link, nodes[i + 1])
+    return nodes
+
+
+def w_free_wait(m, rng):
+    a = accel(m, rng, mmio=False)
+    sentinel = a + 0x63c
+    m.w32(a + 0x664, rng.choice([sentinel, sentinel, a + 0x700]))
+    c2 = live_ctx(m, rng, 'ATIR5002DContext', 0x80, 0x88, rng.choice([0, 1, 2]))
+    cd = live_ctx(m, rng, 'ATIR500DVDContext', 0x80, 0x84, rng.choice([0, 1, 2]))
+    cg = live_ctx(m, rng, 'ATIR500GLContext', 0x80, 0x88, rng.choice([0, 1, 2]))
+    m.w32(a + 0x64, c2[0] if c2 else 0); m.w32(a + 0x68, cd[0] if cd else 0); m.w32(a + 0x60, cg[0] if cg else 0)
+    ss = [obj(m, rng, 'IOATIR500Surface', 0xd00) for _ in range(rng.choice([0, 1, 2, 3]))]
+    for i, s_ in enumerate(ss): m.w32(s_ + 0xa0, ss[(i + 1) % len(ss)])
+    m.w32(a + 0x5c, ss[0] if ss else 0)
+    m.w16(a + 0x402, rng.choice([0, 2, 4])); m.w16(a + 0x400, rng.randrange(0, 8))
+    m.w16(a + 0x5c6, rng.choice([0, 2, 4])); m.w16(a + 0x5c4, rng.randrange(0, 8))
+    prev = 0
+    for _ in range(rng.choice([0, 1, 2])):
+        d = m.alloc(0x100); m.w32(d + 0x3c, prev); m.w32(d + 0x5c, rng.getrandbits(8)); prev = d
+    m.w32(a + 0x5cc, prev)
+    sh = obj(m, rng, 'IOATIR500Shared', 0x100)
+    ex2 = rng.choice([0, 0, c2[0] if c2 else 0, obj(m, rng, 'ATIR5002DContext', 0x400)])
+    exd = rng.choice([0, 0, cd[0] if cd else 0, obj(m, rng, 'ATIR500DVDContext', 0x400)])
+    exg = rng.choice([0, 0, cg[0] if cg else 0, obj(m, rng, 'ATIR500GLContext', 0x400)])
+    exs = rng.choice([0, 0, ss[0] if ss else 0, obj(m, rng, 'IOATIR500Surface', 0xd00)])
+    return [a, ex2, exd, exg, exs, rng.choice([0, 0, sh]), plain(m, rng, 0x40), rng.choice([0, 1])]
+
+
+def w_free_transfer(m, rng):
+    a = accel(m, rng, mmio=False)
+    cand = m.alloc(0x80); fill_words(m, cand, 0x80, rng)
+    m.w32(cand + 4, rng.choice([0, 0x1000])); m.w16(cand + 0xe, rng.choice([0, 0, 1]))
+    return [a, cand, plain(m, rng, 0x40), rng.getrandbits(16), rng.choice([0, 1])]
+
+
+def tmock(m, name, k):
+    if '+0x554' in name:
+        return m.seed % 2
+    if '+0x54c' in name:
+        return 3
+    if '+0x5a8' in name:
+        return (m.seed // 2) % 2
+    return new_mock(m, name, k)
+
+
+def w_remove_transfer(m, rng):
+    a = accel(m, rng, mmio=False)
+    if rng.random() < 0.15: return [a, 0]
+    b = m.alloc(0x80); fill_words(m, b, 0x80, rng)
+    m.w16(b + 0xc, rng.choice([4, 4, 2]))
+    p, n = m.alloc(0x80), m.alloc(0x80)
+    m.w32(b + 0x34, rng.choice([p, b])); m.w32(b + 0x38, rng.choice([n, b]))
+    m.w32(b + 4, rng.choice([0, 0x2000])); m.w32(b + 8, rng.getrandbits(16))
+    return [a, b]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::freeWaitToAllocGART', w_free_wait, ret='bool', seeds=200, mock=stop_mock, plain_words=True, limit=300000,
+         ignore_args={'+0x5a8': [2], 'freeTransferToAllocGART': [4]}),
+    Case('IOATIR500Accelerator::freeTransferToAllocGART', w_free_transfer, ret='bool', seeds=60, mock=tmock, plain_words=True,
+         ignore_args={'+0x554': [2], '+0x54c': [2], '+0x5ac': [2], '+0x5a8': [2]}),
+    Case('IOATIR500Accelerator::removeTransferFromGART', w_remove_transfer, ret='void', seeds=40, mock=new_mock, plain_words=True),
+]
+
+
+def w_xfer_type(m, rng):
+    a = accel(m, rng, mmio=False)
+    b = m.alloc(0x80); fill_words(m, b, 0x80, rng)
+    m.w16(b + 0xc, rng.choice([0, 1, 2, 3, 4, 5, 9]))
+    return [a, b]
+
+
+def fb_mock(m, name, k):
+    if 'addFramebufferNotification' in name:
+        return 0 if m.seed % 7 == 1 else 0x20000000 + m.seed
+    if '+0x188' in name:
+        return plain(m, random_for(m, k), 0x40)
+    if '+0x218' in name:
+        return 0 if m.seed % 7 == 2 else 1
+    if 'getVRAMDescriptor' in name or '+0x160' in name or '+0x164' in name or '+0x16c' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def declare(m, slots):
+    """argument kinds of virtual slots the ledger does not name ('this', 'p' pointer: compared by text/symbol when it points into the kext image, 'i' integer)"""
+    for off, kinds in slots.items():
+        m.reg.sig['vtable slot +0x%x' % off] = (len(kinds), kinds)
+
+
+def w_found_fb(m, rng):
+    declare(m, {0x160: ['this', 'p', 'p'], 0x164: ['this', 'p', 'p'], 0x16c: ['this', 'p', 'i', 'i', 'i'], 0x188: ['this', 'p'], 0x218: ['this', 'p', 'p', 'p']})
+    a = accel(m, rng, mmio=False)
+    n = rng.choice([0, 1, 2, 2])
+    m.w32(a + 0xcc, n)
+    known = [plain(m, rng, 0x400) for _ in range(2)]
+    for i in range(2): m.w32(a + 0xd4 + 0x20 * i, known[i])
+    fb = rng.choice([known[0], known[1], plain(m, rng, 0x400), plain(m, rng, 0x400)])
+    return [a, fb]
+
+
+def vram_mock(m, name, k):
+    if '+0x5d0' in name:
+        return 0 if m.seed % 5 == 1 else plain(m, random_for(m, k), 0x40)
+    if '+0x150' in name:
+        return 0 if m.seed % 5 == 2 else plain(m, random_for(m, k), 0x40)
+    if '+0xd0' in name:
+        return 0x40000000 + 0x1000 * (m.seed % 5)
+    return new_mock(m, name, k)
+
+
+def w_get_vram(m, rng):
+    a = accel(m, rng, mmio=False)
+    for i in range(2):
+        m.w32(a + 0xd4 + 0x20 * i, plain(m, rng, 0x400)); m.w32(a + 0xdc + 0x20 * i, rng.choice([0, 0, plain(m, rng, 0x40)]))
+    return [a, rng.choice([0, 1])]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::mapVendorTransferBuffer', w_xfer_type, ret='bool', seeds=40, mock=new_mock, plain_words=True),
+    Case('IOATIR500Accelerator::unmapVendorTransferBuffer', w_xfer_type, ret='void', seeds=40, mock=new_mock, plain_words=True),
+    Case('IOATIR500Accelerator::foundFramebuffer', w_found_fb, ret='bool', seeds=120, mock=fb_mock, plain_words=True,
+         ignore_args={'getVRAMDescriptor': [2], 'addFramebufferNotification': [3]}),
+    Case('IOATIR500Accelerator::getVRAMDescriptor', w_get_vram, ret='u32', seeds=80, mock=vram_mock, plain_words=True,
+         ignore_args={'+0x5d0': [1, 2], '+0x150': [2], '+0x18': [1, 2]}),
+]
+
+
+def vram_list_mock(m, name, k):
+    """+0x528 (allocate texture VRAM for `needed`) says yes on its Nth call (N by seed); +0x554 (stamp retired?) alternates; tossSurfacesForVRAM frees
+    nothing (0) or something (1); +0x524 pages a texture out"""
+    if name.endswith('[vcall +0x528]') or '+0x528' in name:
+        n = getattr(m, 'nvr', 0); m.nvr = n + 1
+        return 1 if n == m.seed % 9 - 2 else 0
+    if '+0x554' in name:
+        n = getattr(m, 'nst', 0); m.nst = n + 1
+        return (m.seed + n // 2) % 2
+    if 'tossSurfacesForVRAM' in name:
+        return 1 if m.seed % 11 == 4 else 0
+    if '+0x524' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def vram_node(m, rng, a):
+    n = m.alloc(0x80); fill_words(m, n, 0x80, rng)
+    h = m.alloc(0x40); fill_words(m, h, 0x40, rng)
+    m.w32(n + 0x14, rng.choice([h, h, h, 0]))
+    m.w32(n + 0x48, rng.choice([0, 0x100, 0x100])); m.w8(h + 0x34, rng.choice([0, 1, 2, 3])); m.w8(h + 0x14, 0)
+    m.w32(h + 8, rng.randrange(0, 0x400)); m.w32(h + 0xc, rng.getrandbits(8))
+    for i in range(8):
+        m.w16(h + 0x1c + 2 * i, rng.choice([0, 0xffff, 0x00ff, 0xff00])); m.w16(h + 0x28 + 2 * i, rng.choice([0, 0, 0xffff, 0x00ff, 0xff00]))
+    return n
+
+
+def w_free_tex_vram(m, rng):
+    a = accel(m, rng, mmio=False)
+    sentinel = a + 0x5dc
+    nodes = [vram_node(m, rng, a) for _ in range(rng.randrange(0, 6))]
+    chain = [sentinel] + nodes + [sentinel]
+    for i in range(1, len(chain) - 1):
+        m.w32(chain[i] + 0x24, chain[i - 1]); m.w32(chain[i] + 0x28, chain[i + 1])
+    m.w32(sentinel + 0x28, nodes[0] if nodes else sentinel); m.w32(sentinel + 0x24, nodes[-1] if nodes else sentinel)
+    m.w32(a + 0x21c, rng.choice([0, 0, 2]))
+    surf = rng.choice([0, 0, obj(m, rng, 'IOATIR500Surface', 0xd00)])
+    if surf: m.w32(surf + 0x84, rng.randrange(0, 0x800))
+    ex = m.alloc(0x20)
+    cnt = rng.choice([0, 0, 1, 2, 3])
+    pool = nodes + [sentinel]
+    for i in range(3): m.w32(ex + 4 * i, rng.choice(pool) if rng.random() < 0.6 else m.alloc(0x40))
+    needed = m.alloc(0x80); m.w32(needed + 0x48, rng.choice([0, 0, 0x100]))
+    return [a, surf, ex, cnt, needed]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::freeToAllocTextureVRAM', w_free_tex_vram, ret='u32', seeds=600, mock=vram_list_mock, plain_words=True, limit=400000,
+         ignore_args={'+0x528': [2], '+0x554': [2], '+0x524': [2], 'tossSurfacesForVRAM': [5]}),
+]
+
+
+def toss_mock(m, name, k):
+    if '+0x528' in name:                       # allocating the needed texture's VRAM succeeded now: needed+0x48 becomes non-zero on some seeds
+        n = getattr(m, 'ntoss', 0); m.ntoss = n + 1
+        if n == m.seed % 7 - 1 and m.seed % 7 != 0: m.w32(m.needed + 0x48, 0x100)
+        return 0
+    if 'move_buffer_to_backing_store' in name or '+0x5cc' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_toss(m, rng):
+    a = accel(m, rng, mmio=False)
+    ss = []
+    for _ in range(rng.choice([0, 1, 2, 3])):
+        s_ = obj(m, rng, 'IOATIR500Surface', 0xd80)
+        m.w32(s_ + 0xd48, rng.choice([0, 0, 1])); m.w32(s_ + 0xc14, rng.choice([0xffff, 0xffff, 3]))
+        m.w32(s_ + 0xbcc, rng.choice([0, 0, 1])); m.w32(s_ + 0xbd0, rng.choice([0, 0, 0x10000]))
+        m.w32(s_ + 0xb70, s_ + 0xa8 + 0x78 * rng.choice([0, 3, 9]))
+        for i in range(23): m.w32(s_ + 0xa8 + 0x78 * i + 8, rng.choice([0, 0, 0x100]))
+        ss.append(s_)
+    for i, s_ in enumerate(ss): m.w32(s_ + 0xa0, ss[(i + 1) % len(ss)])
+    m.w32(a + 0x5c, ss[0] if ss else 0)
+    needed = m.alloc(0x80); m.w32(needed + 0x48, rng.choice([0, 0, 0, 0x100])); m.needed = needed
+    ex = m.alloc(0x20)
+    cnt = rng.choice([0, 1, 2, 3])
+    for i in range(3):
+        t = m.alloc(0x80); fill_words(m, t, 0x80, rng); m.w8(t + 0x20, rng.choice([0, 0, 1])); m.w32(t + 0x50, rng.choice(ss + [0]) if ss else 0)
+        m.w32(ex + 4 * i, rng.choice([t, t, 0]))
+    return [a, rng.choice([0] + ss + [obj(m, rng, 'IOATIR500Surface', 0x400)]), ex, cnt, needed, rng.choice([0, 1])]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::tossSurfacesForVRAM', w_toss, ret='u32', seeds=300, mock=toss_mock, plain_words=True,
+         ignore_args={'+0x528': [2], '+0x5cc': [2], 'move_buffer_to_backing_store': [2]}),
+]
+
+
+def uc_mock(m, name, k):
+    if 'withCapacity' in name:
+        return 0 if m.seed % 8 == 1 else plain(m, random_for(m, k), 0x40)
+    if any(x in name for x in ('+0x5d4', '+0x5dc', '+0x5d8', '+0x5e0', 'vtable function')):
+        return 0 if m.seed % 8 == 2 else m.client
+    if '+0x150' in name:
+        return 0 if m.seed % 8 == 3 else 1
+    if '+0x3a4' in name:
+        return 0 if m.seed % 8 == 4 else 1
+    if '+0x348' in name:
+        return 0 if m.seed % 8 == 5 else 1
+    return new_mock(m, name, k)
+
+
+def w_new_user_client(m, rng):
+    declare(m, {0x5d4: ['this'], 0x5d8: ['this'], 0x5dc: ['this'], 0x5e0: ['this'], 0x150: ['this', 'p'], 0x3a4: ['this', 'p'], 0x348: ['this', 'p'], 0x3a8: ['this', 'p'], 300: ['this', 'p', 'p']})
+    a = accel(m, rng, mmio=False)
+    m.client = plain(m, rng, 0x100)
+    return [a, plain(m, rng, 0x40), plain(m, rng, 0x40), rng.choice([0, 1, 2, 3, 3, 4, 9]), m.alloc(0x10)]
+
+
+def stereo_mock(m, name, k):
+    if '+0x56c' in name or '+0x5cc' in name:
+        return 0 if (m.seed + k) % 3 else 1
+    if 'freeToAllocSurfaceVRAM' in name:
+        return 0 if m.seed % 4 == 1 else 1
+    if 'dealloc' in name or 'freeAllSwapBuffers' in name or 'allocMasterSwapBuffer' in name or 'allocAllSlaveSwapBuffers' in name or '+0x54c' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_setup_stereo(m, rng):
+    a = accel(m, rng, mmio=False)
+    m.w8(a + 0x81, rng.choice([0, 0, 0, 1]))
+    for p in range(2):
+        m.w32(a + 0x11c + 4 * p, rng.choice([0, 1, 2, 3])); m.w32(a + 0x114 + 4 * p, rng.choice([1, 2])); m.w32(a + 0x1ac + 0x78 * p, rng.choice([0, 0, 0x1000]))
+    ss = [obj(m, rng, 'IOATIR500Surface', 0x400) for _ in range(rng.choice([0, 1, 2]))]
+    for i, s_ in enumerate(ss): m.w32(s_ + 0x9c, ss[(i + 1) % len(ss)])
+    m.w32(a + 0x5c, ss[0] if ss else 0); m.w32(a + 0x7c, obj(m, rng, 'ATIR500Memory', 0x40))
+    return [a, rng.choice([0, 1]), rng.choice([0, 1, 2, 3])]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::newUserClient', w_new_user_client, ret='u32', seeds=120, mock=uc_mock, plain_words=True,
+         ignore_args={'vtable slot +0x18': [1, 2], '+0x5': [1, 2], '+0x150': [2], '+0x3a4': [2], '+0x348': [2], '+0x3a8': [2], 'withCapacity': [1]}),
+    Case('IOATIR500Accelerator::setup_stereo', w_setup_stereo, ret='u32', seeds=150, mock=stereo_mock, plain_words=True,
+         ignore_args={'+0x56c': [2], '+0x54c': [2], '+0x5cc': [3], 'memcpy': [3]}),
+]
+
+
+def w_reserve_gart(m, rng):
+    a = accel(m, rng, mmio=False)
+    tbl = m.alloc(0x4100); fill_words(m, tbl, 0x4100, rng)
+    empty = rng.choice([0, 0x0badf00d, 0xdead0000])
+    m.w32(a + 0x83c, tbl); m.w32(a + 0x844, empty); m.w32(a + 0x848, rng.choice([1, 2]))
+    idx = rng.randrange(0, 0x100)
+    if rng.random() < 0.5: m.w32(tbl + 4 * idx, empty)
+    return [a, idx << 12 | rng.choice([0, 0x234])]
+
+
+def collector_mock(m, name, k):
+    if 'free_gart_wirings' in name or '+300' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_gart_collector(m, rng):
+    a = accel(m, rng, mmio=False)
+    m.w32(a + 200, rng.choice([0, 0, 0, 1]))
+    m.w32(a + 0xa0, rng.choice([0x1000, 0x100000])); m.w32(a + 0xa4, rng.choice([0, 0x800, 0x200000]))
+    m.w8(a + 0x88, rng.choice([0, 1])); m.w8(a + 0x89, rng.choice([0, 1, 1]))
+    m.w32(a + 0xc0, plain(m, rng, 0x40)); m.w32(a + 0x8c, rng.getrandbits(8))
+    return [a, plain(m, rng, 0x40), 0]
+
+
+def w_teardown_agp(m, rng):
+    a = accel(m, rng, mmio=False)
+    m.w32(a + 0x83c, rng.choice([0, m.alloc(0x40)])); m.w32(a + 0x830, rng.choice([0x1000, 0x4000]))
+    m.w32(a + 0x7fc, rng.randrange(0x10000, 0x100000))
+    m.w32(a + 0x74, rng.choice([0, plain(m, rng, 0x40)])); m.w32(a + 0x98, rng.choice([0, 2, 3, 1]))
+    return [a, plain(m, rng, 0x40)]
+
+
+def ser_mock(m, name, k):
+    if 'safeMetaCast' in name:
+        return 0 if m.seed % 4 == 0 else m.uc.reg_read(UC_PPC_REG_3)
+    if 'withCapacity' in name:
+        return 0 if m.seed % 4 == 1 else plain(m, random_for(m, k), 0x40)
+    if '+0x1c' in name:
+        return m.seed % 2
+    return new_mock(m, name, k)
+
+
+def w_serialize(m, rng):
+    declare(m, {0x568: ['this', 'p']})
+    a = accel(m, rng, mmio=False)
+    return [a, a, 0, plain(m, rng, 0x40)]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::reserveInGART', w_reserve_gart, ret='bool', seeds=60, mock=new_mock, plain_words=True),
+    Case('IOATIR500Accelerator::gart_collector', w_gart_collector, ret='void', seeds=60, mock=collector_mock, plain_words=True,
+         ignore_args={'+300': [2], 'free_gart_wirings': [1]}),
+    Case('IOATIR500Accelerator::teardownAGP', w_teardown_agp, ret='void', seeds=60, mock=new_mock, plain_words=True,
+         ignore_args={'+0x5e0': [1, 2], 'IOFreeContiguous': []}),
+    Case('IOATIR500Accelerator::serializePerformanceStats', w_serialize, ret='bool', seeds=60, mock=ser_mock, plain_words=True,
+         ignore_args={'+0x1c': [2], '+0x18': [1, 2], 'withCapacity': [1]}),
+]
+
+
+def accel_start_mock(m, name, k):
+    """IOATIR500Accelerator::start: the fatal steps (IOAccelerator::start, workLoop, the PCI cast, IOLockAlloc, slot 0x580, the memory manager's init, the
+    command buffer, findFramebuffers) are numbered in call order and the N-th one fails (N = seed % 14, so seeds 0-10 each break a different step and the
+    rest run to the end); the non-fatal ones (event sources, properties, registry strings) vary with the seed"""
+    r3, r4, r5, r6 = (m.uc.reg_read(r) for r in (UC_PPC_REG_3, UC_PPC_REG_4, UC_PPC_REG_5, UC_PPC_REG_6))
+    def fatal():
+        n = getattr(m, 'nfatal', 0); m.nfatal = n + 1
+        return n == m.seed % 14
+    obj_ = lambda: plain(m, random_for(m, k), 0x100)
+    if 'IOAccelerator5start' in name or 'IOAccelerator::start' in name:
+        return 0 if fatal() else 1
+    if 'sysctlbyname' in name:
+        if m.seed % 5 == 3: return 1
+        m.uc.mem_write(r4, bytes([0, 0, 0, 0, 0, 0, 0, 0x80 if m.seed % 2 else 0x20])); return 0
+    if 'IOWorkLoop' in name:
+        return 0 if fatal() else obj_()
+    if 'interruptEventSource' in name or 'timerEventSource' in name:
+        return 0 if (m.seed + k) % 5 == 0 else obj_()
+    if 'safeMetaCast' in name:
+        if 'IOPCIDevice' in name or True:
+            n = getattr(m, 'ncast', 0); m.ncast = n + 1
+            if n == 3: return 0 if fatal() else r3                  # the provider cast to IOPCIDevice
+            return 0 if (m.seed + n) % 4 == 0 else r3
+    if 'IOLockAlloc' in name:
+        return 0 if fatal() else m.alloc(0x40)
+    if '+0x580' in name:
+        if m.seed % 3 == 0: m.w32(m.accel + 0x98, 1)             # hardware capability bit 0: the GART warm-up loop
+        return 0 if fatal() else 1
+    if '+0x188' in name:
+        return 0 if (m.seed + k) % 3 == 0 else obj_()
+    if '+0xe8' in name:
+        return 1500 + 7 * m.seed
+    if '+0x48' in name:
+        return 0 if fatal() else 1
+    if 'allocCommandBuffer' in name:                          # fills the VendorCommandBuffer at r4: its descriptor (+8) is used by the GART warm-up loop
+        if fatal(): return 0
+        m.w32(r4 + 8, obj_()); return 1
+    if 'findFramebuffers' in name:
+        return 0 if fatal() else 1
+    if 'forTarget' in name:
+        return 0 if m.seed % 6 == 2 else obj_()
+    if 'getRegistryRoot' in name:
+        return 0 if m.seed % 7 == 4 else obj_()
+    if 'sscanf' in name:
+        m.w32(r5, 5 if m.seed % 3 else 9); m.w32(r6, 2); return 2 if m.seed % 8 else 1
+    if '+0x100' in name:
+        w = m.alloc(0x10); m.w32(w, 0x10 if m.seed % 2 else 0); return w
+    if 'operator new' in name or 'nwEm' in name:
+        return 0 if m.seed % 9 == 7 else m.alloc(0x20)
+    return new_mock(m, name, k)
+
+
+def w_accel_start(m, rng):
+    declare(m, {0x188: ['this', 'p'], 0x160: ['this', 'p', 'p'], 0x16c: ['this', 'p', 'i', 'i', 'i'], 0x588: ['this', 'p', 'i', 'i'], 0x144: ['this', 'i'],
+                0x55c: ['this', 'i'], 0x564: ['this', 'i'], 0xe4: ['this', 'p'], 0xec: ['this']})
+    a = accel(m, rng, mmio=False)
+    m.accel = a
+    m.w32(a + 0x83c, 0); m.w32(a + 0x830, rng.choice([0, 0x10, 0x4000]))
+    m.w32(a + 0x8b0, plain(m, rng, 0x40)); m.w32(a + 0x22c, plain(m, rng, 0x40))
+    return [a, plain(m, rng, 0x100)]
+
+
+CASES += [
+    Case('IOATIR500Accelerator::start', w_accel_start, ret='bool', seeds=200, mock=accel_start_mock, plain_words=False, limit=600000,
+         ignore_args={'sysctlbyname': [], 'IOWorkLoop': [], 'interruptEventSource': [], 'timerEventSource': [], 'sscanf': [3, 4, 5], 'vtable slot +0x18': [1, 2],
+                      '+0xe4': [2], '+0xec': [1, 2], '+0x580': [2], '+0x48': [1, 2], 'stop': [1]}),
 ]

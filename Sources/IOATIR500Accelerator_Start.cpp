@@ -17,6 +17,8 @@
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
 
+inline void *operator new(size_t, void *where) { return where; }   /* placement new (the same inline definition as ATIRadeonX1000_Start.cpp) */
+
 extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
 extern "C" UInt32 GH_ZN10IOWorkLoop8workLoopEv(...) asm("__ZN10IOWorkLoop8workLoopEv");
 extern "C" UInt32 GH_ZN12OSSerializer9forTargetEPvPFbS0_S0_P11OSSerializeES0_(...) asm("__ZN12OSSerializer9forTargetEPvPFbS0_S0_P11OSSerializeES0_");
@@ -331,7 +333,8 @@ bool IOATIR500Accelerator::start(IOService *provider) {
   }
   VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x55c)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),1);
   VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x564)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),1);
-  memoryManager = (UInt8 *)new ATIR500Memory();   /* real: OSObject::operator new(0x14) + the ATIR500Memory constructor */
+  { void *mem = OSObject::operator new(0x14);   /* real: OSObject::operator new(0x14) + the ATIR500Memory constructor; the null check must be explicit: `new T()` compiled to an unconditional constructor call (the #187 bug class; found by the IOATIR500Accelerator::start hand world) */
+    memoryManager = (UInt8 *)(mem ? ::new (mem) ATIR500Memory() : 0); }
   M<UInt8 *>(self + kIOATIR500Accelerator_vramPool) = memoryManager;
   if (memoryManager == (UInt8 *)0x0) goto LAB_00002f98;
   iVar3 = VCALL(M<SInt32>(memoryManager), 0x48)(memoryManager);
