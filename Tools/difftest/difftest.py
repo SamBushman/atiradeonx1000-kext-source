@@ -941,6 +941,24 @@ def coverage(runs):
     return (len(vis) * 4 / float(own[1] - own[0])) if own and own[1] > own[0] else 0.0
 
 
+def uncovered(runs):
+    """the instruction ranges [(first, last_exclusive), ...] of the function (offsets from its start) that no usable run executed - for hand-world work"""
+    vis, own = set(), None
+    for r in runs:
+        own = r.own
+        for a, n in r.visited:
+            if own[0] <= a < own[1]:
+                vis.update(range(a, min(a + n, own[1]), 4))
+    if not own: return []
+    out, cur = [], None
+    for a in range(own[0], own[1], 4):
+        if a in vis:
+            if cur: out.append((cur[0] - own[0], a - own[0])); cur = None
+        elif cur is None: cur = [a]
+    if cur: out.append((cur[0] - own[0], own[1] - own[0]))
+    return out
+
+
 def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
     results = []
     cyc = [0, 0]
@@ -969,6 +987,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
             cyc[0] += outs[0].cycles; cyc[1] += outs[1].cycles      # only runs both sides finished: the two sums are comparable
         results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if ((probs == ['INCONCLUSIVE'] and (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read)) or (outs[0].status == 'FAULT' and outs[1].status == 'FAULT' and probs == ['INCONCLUSIVE'])) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
+    case.uncov = (uncovered(all_runs[0]), uncovered(all_runs[1]))
     case.cycles = (cyc[0], cyc[1])
     return sym_s, results
 
@@ -1028,7 +1047,7 @@ def evaluate(case, stock, rebuilt, reg, verbose, strict_order, strict_calls):
     for seed, probs, *_ in fails[:3 if not verbose else 99]:
         lines.append('       seed %d: %s' % (seed, '; '.join(probs)))
     rep = dict(case=case.name, symbol=sym, verdict=verdict, runs=len(res), failures=len(fails), inconclusive=len(inconclusive),
-               insns_stock=si, insns_rebuilt=ri, cycles_stock=cs, cycles_rebuilt=cr, coverage_stock=case.cov[0], coverage_rebuilt=case.cov[1],
+               insns_stock=si, insns_rebuilt=ri, cycles_stock=cs, cycles_rebuilt=cr, coverage_stock=case.cov[0], coverage_rebuilt=case.cov[1], uncovered_stock=getattr(case, 'uncov', ([], []))[0], uncovered_rebuilt=getattr(case, 'uncov', ([], []))[1],
                register_accesses=getattr(case, 'hw_events', 0), problems=[dict(seed=sd, problems=pb) for sd, pb, *_ in fails])
     return verdict, lines, rep
 
