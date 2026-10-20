@@ -316,3 +316,243 @@ def w_shared_free_to_alloc(m, rng):
 CASES += [
     Case('IOATIR500Shared::freeToAllocGART', w_shared_free_to_alloc, ret='bool', seeds=100, mock=fta_mock, plain_words=True),
 ]
+
+
+# ---- IOATIR500DVDContext ----------------------------------------------------------------------------------------------------------------------
+def dvdctx(m, rng, cls='ATIR500DVDContext', size=0x400):
+    """a DVD context (+0x8c accelerator, +0xf8 bound surface), no bound surface yet"""
+    c = obj(m, rng, cls, size)
+    a = accel(m, rng, mmio=False)
+    m.w32(c + 0x8c, a); m.w32(c + 0xf8, 0); m.w32(c + 0x88, rng.choice([0, 0x400, 0x7ffc00, 0x20000400]))
+    m.w32(a + 0x78, rng.choice([c, 0, word(rng)]))
+    return c, a
+
+
+def alloc_ctx_mock(m, name, k):
+    """withOptions: the Nth allocation fails (N by seed: 0 = first, 1 = second, 2 = third, otherwise none); slot 0x1cc gives a header block"""
+    if 'withOptions' in name:
+        n = getattr(m, 'nopts', 0); m.nopts = n + 1
+        if m.seed % 5 == n: return 0
+        return plain(m, random_for(m, k), 0x40)
+    if 'vtable slot +0x1cc' in name:
+        return m.alloc(0x400)
+    if 'init_context_buffer_header' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_alloc_all_ctx(m, rng):
+    c, a = dvdctx(m, rng)
+    return [c, rng.choice([0x1000, 0x2000, 0x10000])]
+
+
+def surf_dvd(m, rng, c, bound=True):
+    """a surface the DVD context may bind: state bits (+0xbf8), attachment buffer table (+0xb70 + 4*n -> records with +8 / +0x18 / +0x10 / +0x24 / +0x1c / +0x1e)"""
+    sf = obj(m, rng, 'IOATIR500Surface', 0xd00)
+    for n in range(0x20):
+        r = m.alloc(0x40); fill_words(m, r, 0x40, rng)
+        m.w32(r + 0x10, rng.choice([0, 0x1000])); m.w32(r + 0x24, rng.choice([0, 0])); m.w16(r + 0x1c, rng.choice([16, 64, 200])); m.w16(r + 0x1e, rng.choice([16, 64, 100])); m.w16(r + 0x16, rng.choice([1, 2, 4]))
+        m.w32(sf + 0xb70 + 4 * n, r)
+    m.w32(sf + 0xbf8, rng.choice([0, 0x400, 0x20000400, 0x7ffc00, 0x10000400]))
+    m.w32(sf + 0x90, rng.choice([0, 0, c]))
+    m.w32(sf + 0x88, rng.choice([0, 0, 1])); m.w32(sf + 0x8c, rng.choice([0, 0, 1]))
+    m.w32(sf + 0xbe8, rng.getrandbits(16))
+    if bound: m.w32(c + 0xf8, sf)
+    return sf
+
+
+def lock_mock(m, name, k):
+    """alloc_surfaces(mask, aggressive): per-seed script - 0 now (success), 2 (give up), 1 (busy) a few times and then success, 1 for ever (the 1000-try
+    path, whose aggressive retry then succeeds or fails)"""
+    if 'alloc_surfaces' in name:
+        n = getattr(m, 'nalloc', 0); m.nalloc = n + 1
+        mode = m.seed % 6
+        agg = m.uc.reg_read(UC_PPC_REG_5) & 0xff
+        if mode == 0: return 0
+        if mode == 1: return 2
+        if mode == 2: return 1 if n < 3 else 0
+        if mode == 3: return (0 if agg and m.seed % 12 == 3 else 1) if True else 0
+        if mode == 4: return 1 if n < 1 else 2
+        return 1
+    return new_mock(m, name, k)
+
+
+def w_lock_all(m, rng):
+    c, a = dvdctx(m, rng)
+    if rng.random() > 0.15: surf_dvd(m, rng, c)
+    return [c, 0, m.alloc(0x80)]
+
+
+def surf_mock(m, name, k):
+    """set_surface: find_surface_for_id returns the surface object or none; slot 0x5ac (mode-bits acceptance) answers yes/no by seed"""
+    if 'find_surface_for_id' in name:
+        return 0 if m.seed % 5 == 0 else m.surf_new
+    if 'vtable slot +0x5ac' in name:
+        return 0 if m.seed % 4 == 3 else 1
+    if any(x in name for x in ('remove_dvd_context', 'prune_buffers', 'reset_req_bits', 'set_dvd_context', 'vtable slot +0x5a8')):
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_dvd_set_surface(m, rng):
+    c, a = dvdctx(m, rng)
+    old = surf_dvd(m, rng, c, bound=rng.random() < 0.6)
+    m.surf_new = old if rng.random() < 0.3 and m.r32(c + 0xf8) else surf_dvd(m, rng, c, bound=False)
+    if rng.random() < 0.3: m.w32(m.surf_new + 0x90, obj(m, rng, 'ATIR500DVDContext', 0x100))          # owned by another DVD context
+    return [c, rng.choice([0, 1, 2, 3]), rng.choice([0x1, 0x40, 0x4000, 0x803f]), rng.choice([0, 1, 3, 6])]
+
+
+CASES += [
+    Case('IOATIR500DVDContext::allocAllContextBuffers', w_alloc_all_ctx, ret='bool', seeds=60, mock=alloc_ctx_mock, plain_words=True,
+         ignore_args={'vtable slot +0x18': [1, 2]}),
+    Case('IOATIR500DVDContext::lock_all_buffers', w_lock_all, ret='u32', seeds=90, mock=lock_mock, plain_words=True, limit=800000),
+    Case('IOATIR500DVDContext::set_surface', w_dvd_set_surface, ret='u32', seeds=120, mock=surf_mock, plain_words=True),
+]
+
+
+# ---- ATIR500DVDContext ------------------------------------------------------------------------------------------------------------------------
+def w_dvd_read_regs(m, rng):
+    c = obj(m, rng, 'ATIR500DVDContext', 0x400)
+    a = accel_r500(m, rng)
+    m.w32(c + 0x8c, a)
+    n = rng.choice([0, 1, 2, 5])
+    offs = m.alloc(0x40); outv = m.alloc(0x40); cnt = m.alloc(0x10)
+    for i in range(8): m.w32(offs + 4 * i, rng.choice([0, 0x1720, 0xe40, 0x3ffc, 0x1fff, word(rng)]))
+    bc = 4 * n if rng.random() < 0.8 else rng.choice([4 * n + 2, 4 * n + 4, 1])
+    m.w32(cnt, 4 * n if rng.random() < 0.8 else rng.choice([4 * n + 1, 4 * n + 4]))
+    return [c, offs, outv, bc, cnt]
+
+
+def w_dvd_subpicture(m, rng):
+    c, a = dvdctx(m, rng)
+    m.w8(a + 0x80, rng.choice([0, 1, 1]))
+    if rng.random() < 0.7: m.w32(c + 0xf8, obj(m, rng, 'ATIR500Surface', 0x400))
+    return [c, rng.randrange(0, 100), rng.randrange(0, 100), rng.randrange(0, 100), rng.randrange(0, 100)]
+
+
+def idct_mock(m, name, k):
+    if 'submit_idct_buffer_consumed' in name:
+        return rng_stamp(m, k)
+    return new_mock(m, name, k)
+
+
+def rng_stamp(m, k):
+    return (0x100 if m.seed % 3 else 0x7fffffff) + (m.seed % 7)
+
+
+def w_dvd_idct(m, rng):
+    c, a = dvdctx(m, rng)
+    m.w32(a + 0x8bc, rng.choice([0, 1, 1, 1])); m.w8(a + 0x80, rng.choice([1, 1, 1, 0])); m.w32(a + 0x854, rng.choice([0x10, 0x100, 0x7ffffff0]))
+    if rng.random() < 0.85:
+        sf = obj(m, rng, 'ATIR500Surface', 0x1000)
+        m.w16(sf + 0x9a, rng.randrange(8, 64)); m.w16(sf + 0x94, rng.randrange(0, 8))
+        for off in [0x558 + 0x78 * i for i in range(4)] + [0x8a0]:
+            m.w32(off + sf + 8, m.alloc(0x1000)); m.w16(off + sf + 0x18, rng.choice([16, 32, 64]))
+        m.w32(c + 0xf8, sf)
+    for slot in (0x168, 0x184, 0x1a4, 0x1c0):                      # the four IDCT buffers: GART offset at +4, header pointer at +0x14
+        m.w32(c + slot + 4, rng.choice([0, 0x1000])); m.w32(c + slot + 0x14, m.alloc(0x100))
+    m.w32(c + 0x164, rng.choice([0, 1])); m.w32(c + 0x1a0, rng.choice([0, 1]))
+    info = m.alloc(0x80)
+    m.w32(info, rng.choice([0, 1])); m.w32(info + 4, rng.choice([0, 1])); m.w32(info + 8, rng.randrange(0, 3)); m.w32(info + 0xc, rng.choice([0, 0, 1, 1, 2]))
+    return [c, info, 0x80]
+
+
+def discard_mock(m, name, k):
+    if 'DecrementAtomic' in name:
+        return 1 if (m.seed + k) % 2 else 2
+    if 'delete_texture' in name or 'AddAtomic' in name:
+        return 0
+    return new_mock(m, name, k)
+
+
+def w_dvd_discard(m, rng):
+    """the command buffer's record stream (header +0xa4, records from +0x1c: opcode byte, 24-bit length, a handle index): opcodes 0x19-0x2a attach the
+    shared allocator's texture to a slot (+0x104 + 4*n), 0x2b-0x3c detach, others are skipped; a length of 0 ends the stream"""
+    c, a = dvdctx(m, rng)
+    sh = obj(m, rng, 'IOATIR500Shared', 0x100)
+    cap = rng.choice([4, 16])
+    tbl = m.alloc(4 * cap + 0x10)
+    for i in range(cap):
+        t = rng.choice([0, 0, rec(m, rng, 4)])
+        if t: m.w32(m.r32(t + 0x14) + 0x10, rng.choice([1, 2, 3]))
+        m.w32(tbl + 4 * i, t)
+    m.w32(sh + 0x10, tbl); m.w32(sh + 0x14, cap); m.w32(c + 0x84, sh)
+    for i in range(0x48 // 4): m.w32(c + 0x104 + 4 * i, rng.choice([0, 0, rec(m, rng, 4)]))
+    hdr = m.alloc(0x400); fill_words(m, hdr, 0x400, rng); m.w32(c + 0xa4, hdr)
+    ops = list(range(0x19, 0x3d)) + [0x00, 0x18, 0x3d, 0x40, 0xff]
+    p = hdr + 0x1c
+    for _ in range(rng.randrange(1, 14)):
+        ln = rng.choice([1, 2, 2, 3])
+        m.w32(p, (rng.choice(ops) << 24) | ln); m.w32(p + 4, rng.choice([0, 1, 2, cap - 1, cap, cap + 3]))
+        p += 4 * ln
+    m.w32(p, 0)
+    return [c]
+
+
+def start_mock(m, name, k):
+    if 'IOATIR500DVDContext' in name and 'start' in name:
+        return 0 if m.seed % 6 == 0 else 1
+    if 'allocCommandBuffer' in name:                               # the Nth of the four IDCT buffers fails (N by seed), or none
+        n = getattr(m, 'nalloc', 0); m.nalloc = n + 1
+        return 0 if m.seed % 6 - 1 == n else 1
+    if 'safeMetaCast' in name:
+        return 0x20001230
+    return new_mock(m, name, k)
+
+
+def w_dvd_start(m, rng):
+    c, a = dvdctx(m, rng)
+    m.w32(c + 0xa4, m.alloc(0x100)); m.w32(a + 0xd4, m.alloc(0x40))
+    return [c, a]
+
+
+CASES += [
+    Case('ATIR500DVDContext::read_regs', w_dvd_read_regs, ret='u32', seeds=80, plain_words=True),
+    Case('ATIR500DVDContext::dvd_setup_subpicture', w_dvd_subpicture, ret='u32', seeds=40, mock=new_mock, plain_words=True),
+    Case('ATIR500DVDContext::doIDCT', w_dvd_idct, ret='u32', seeds=120, mock=idct_mock, plain_words=True, ignore_args={'vtable slot +0x54c': [2]}),
+    Case('ATIR500DVDContext::discard_command_buffer', w_dvd_discard, ret='void', seeds=150, mock=discard_mock, plain_words=True),
+    Case('ATIR500DVDContext::start', w_dvd_start, ret='bool', seeds=60, mock=start_mock),
+]
+
+
+def w_dvd_cmft(m, rng):
+    """types 0-3 go to the base class (mocked), 4/5 hand out one of two luma/chroma IDCT buffers and flip the toggle, anything else is refused"""
+    c, a = dvdctx(m, rng)
+    for tog in (0x164, 0x1a0): m.w32(c + tog, rng.choice([0, 1]))
+    for base in (0x168, 0x184, 0x1a4, 0x1c0):
+        m.w32(c + base + 8, plain(m, rng, 0x40)); m.w32(c + base + 0x10, rng.getrandbits(16))
+        m.w32(c + base + 0x14, m.alloc(0x100)); m.w32(c + base + 0x18, rng.choice([0x1000, 0x80000]))
+    m.w32(c + 0x150, rng.getrandbits(16))
+    return [c, rng.choice([0, 1, 2, 3, 4, 4, 5, 5, 6, 9]), m.alloc(0x10), m.alloc(0x10)]
+
+
+CASES += [
+    Case('ATIR500DVDContext::clientMemoryForType', w_dvd_cmft, ret='u32', seeds=80, mock=new_mock, plain_words=True, ignore_args={'vtable slot +0x5ec': [2], 'vtable slot +0x14': [1, 2]}),
+]
+
+
+def io_start_mock(m, name, k):
+    """IOUserClient::start (fails on some seeds), setup3D, getVRAMDescriptors, allocCommandBuffer, allocAllContextBuffers: each fails on its own seeds"""
+    if 'IOUserClient5start' in name or 'IOUserClient::start' in name:
+        return 0 if m.seed % 9 == 0 else 1
+    if 'setup3D' in name:
+        return 0 if m.seed % 9 == 1 else 1
+    if 'getVRAMDescriptors' in name:
+        return 0 if m.seed % 9 == 2 else 1
+    if 'allocCommandBuffer' in name:
+        return 0 if m.seed % 9 == 3 else 1
+    if 'allocAllContextBuffers' in name:
+        return 0 if m.seed % 9 == 4 else 1
+    return new_mock(m, name, k)
+
+
+def w_io_dvd_start(m, rng):
+    c = obj(m, rng, 'ATIR500DVDContext', 0x400)
+    a = accel(m, rng, mmio=False)
+    m.w32(a + 0x68, rng.choice([0, 0, c])); m.w32(a + 0x60, rng.choice([0, 0, c])); m.w32(a + 0x73c, rng.randrange(0, 5))
+    return [c, a]
+
+
+CASES += [
+    Case('IOATIR500DVDContext::start', w_io_dvd_start, ret='bool', seeds=90, mock=io_start_mock),
+]
