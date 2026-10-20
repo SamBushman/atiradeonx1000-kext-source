@@ -36,6 +36,8 @@ bool ATIRadeonX1000::start_xdct_engine() {
   SInt32 iVar4;
   SInt32 mmioBase;
   UInt32 uVar6;
+  UInt32 readPointer;
+  UInt32 writePointer;
   
   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   M<UInt32>(mmioBase + 0x1f80) = 0;
@@ -78,11 +80,13 @@ bool ATIRadeonX1000::start_xdct_engine() {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
       GH_thread_block(0);
       mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+      /* the shipped code reads both pointers BEFORE it tests the retry limit, so the last (10001st) pass still makes the two reads */
+      readPointer = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c));
+      writePointer = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0));
       pollLimitReached = iVar4 == 10000;
       iVar4 = iVar4 + 1;
       if (pollLimitReached) break;
-    } while ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
-             (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0))));
+    } while (readPointer < writePointer);
   }
   M<UInt32>(self + kIOATIR500Accelerator_xdctEngineRunning) = 1;
   return 1;
@@ -95,6 +99,8 @@ bool ATIRadeonX1000::stop_xdct_engine() {
   bool pollLimitReached;
   SInt32 mmioBase;
   SInt32 pollCount;
+  UInt32 readPointer;
+  UInt32 writePointer;
   
   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
@@ -104,11 +110,12 @@ bool ATIRadeonX1000::stop_xdct_engine() {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
       GH_thread_block(0);
       mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+      readPointer = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c));
+      writePointer = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0));
       pollLimitReached = pollCount == 10000;
       pollCount = pollCount + 1;
       if (pollLimitReached) break;
-    } while ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
-             (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0))));
+    } while (readPointer < writePointer);
   }
   enforceInOrderExecutionIO();
   storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f94)) | 0x88000000);
