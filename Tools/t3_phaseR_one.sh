@@ -31,6 +31,6 @@ norm "$NEW" > "$OUT/$N.rebuilt.norm"; norm "$OLD" > "$OUT/$N.stock.norm"
 if diff "$OUT/$N.stock.norm" "$OUT/$N.rebuilt.norm" > "$OUT/$N.diff"; then echo "T3 $N: SAME AS STOCK ($(ssh $H "cd $D && tail -1 $NEW | cut -c1-120"))"; rc=0; else echo "T3 $N: DIVERGENCE vs stock:"; head -20 "$OUT/$N.diff"; rc=1; fi
 if [ "$REBOOT" = reboot ]; then
     ssh $H 'sudo shutdown -r now' >/dev/null 2>&1; sleep 60
-    until timeout 20 ssh -o ConnectTimeout=15 $H true >/dev/null 2>&1; do sleep 15; done; echo "G5 back up after reboot"
+    until timeout 20 ssh -o ConnectTimeout=15 $H 'ls "/Volumes/Test HD/rung3" >/dev/null' >/dev/null 2>&1; do sleep 15; done; echo "G5 back up after reboot"
 fi
 exit $rc
