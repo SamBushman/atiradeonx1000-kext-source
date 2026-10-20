@@ -1119,6 +1119,9 @@ def evaluate(case, stock, rebuilt, reg, verbose, strict_order, strict_calls):
         verdict, case.name, len(res) - len(fails), len(res), cs, cr, ratio, round(100 * case.cov[0]), round(100 * case.cov[1]), reached,
         ('   register accesses %d' % case.hw_events) if getattr(case, 'hw_events', 0) else '',
         ('   (%d inconclusive: budget exceeded or wild pointer)' % len(inconclusive)) if inconclusive else '')]
+    if os.environ.get('DT_UNCOV'):
+        for lab, u in zip(('stock', 'rebuilt'), case.uncov):
+            lines.append('       uncovered %s: %s' % (lab, ' '.join('%x-%x' % r for r in u)))
     if ratio > 1.5 or (ratio and ratio < 0.5):
         lines.append('       note: estimated-cycle ratio x%.2f' % ratio)
     for seed, probs, *_ in fails[:3 if not verbose else 99]:
