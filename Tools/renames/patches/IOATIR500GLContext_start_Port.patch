@@ -1,0 +1,24 @@
+--- a/Sources/IOATIR500GLContext_start_Port.cpp	2026-10-20 11:55:43.375029689 -0700
++++ b/Sources/IOATIR500GLContext_start_Port.cpp	2026-10-20 11:55:43.376494262 -0700
+@@ -23,6 +23,9 @@
+ #include "../Headers/GhidraExterns.h"
+ #include "../Headers/GhidraCompat.h"
+ #include "../Headers/GhidraLiterals.h"
++/* placement new for the hand-made allocation of IOATIR500Shared (see ATIRadeonX1000_ContextFactories.cpp) */
++inline void *operator new(size_t, void *where) { return where; }
++
+ extern const VendorExternalMethod kGLRegularMethods[20] asm("__ZZN18IOATIR500GLContext5startEP9IOServiceE11methodDescs");   /* IOATIR500GLContext_ExternalMethods.cpp */
+ 
+ extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
+@@ -111,7 +114,10 @@
+     pIVar2 = pIVar2 + 4;
+     iVar3 = iVar3 + -1;
+   } while (iVar3 != 0);
+-  shared = (UInt8 *)new IOATIR500Shared();   /* real: OSObject::operator new(0x28) + the IOATIR500Shared constructor */
++  /* the null check must be explicit: `new IOATIR500Shared()` compiled to an unconditional constructor call (same as #187), which writes through a null `this`
++   * when OSObject::operator new fails; the shipped code tests the allocation first (difftest: IOATIR500GLContext::start hand world) */
++  { void *mem = OSObject::operator new(0x28);
++    shared = mem ? (UInt8 *)::new (mem) IOATIR500Shared() : (UInt8 *)0; }
+   bVar5 = (shared == (UInt8 *)0x0) << 1;
+   M<UInt8 *>(self + kIOATIR500GLContext_clientHandle) = shared;
+   if (!(bool)(bVar5 >> 1 & 1)) {

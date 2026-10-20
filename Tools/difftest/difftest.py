@@ -960,6 +960,24 @@ def coverage(runs):
     return (len(vis) * 4 / float(own[1] - own[0])) if own and own[1] > own[0] else 0.0
 
 
+def uncovered(runs):
+    """the instruction ranges [(first, last_exclusive), ...] of the function (offsets from its start) that no usable run executed - for hand-world work"""
+    vis, own = set(), None
+    for r in runs:
+        own = r.own
+        for a, n in r.visited:
+            if own[0] <= a < own[1]:
+                vis.update(range(a, min(a + n, own[1]), 4))
+    if not own: return []
+    out, cur = [], None
+    for a in range(own[0], own[1], 4):
+        if a in vis:
+            if cur: out.append((cur[0] - own[0], a - own[0])); cur = None
+        elif cur is None: cur = [a]
+    if cur: out.append((cur[0] - own[0], own[1] - own[0]))
+    return out
+
+
 def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
     results = []
     cyc = [0, 0]
