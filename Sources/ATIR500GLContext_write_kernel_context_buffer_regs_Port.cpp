@@ -30,40 +30,10 @@
 UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, UInt32 wordIndex, UInt32 headerWord0, UInt32 headerWord1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  UInt8 bVar2;
-  UInt8 AVar3;
-  UInt8 AVar4;
-  UInt8 AVar5;
-  UInt16 uVar6;
-  UInt16 uVar7;
-  bool bVar8;
-  unsigned int uVar9;
-  unsigned int uVar10;
-  int iVar11;
-  unsigned int uVar12;
-  int iVar13;
-  int iVar14;
-  unsigned int uVar15;
-  int iVar16;
-  UInt32 uVar17;
-  UInt32 uVar18;
-  int iVar19;
-  int iVar20;
-  UInt8 *pAVar21;
-  int iVar22;
-  unsigned int uVar23;
-  UInt32 uVar24;
-  UInt32 uVar25;
-  unsigned int uVar26;
-  UInt8 *pAVar27;
-  UInt32 uVar28;
-  int iVar29;
   int attachmentRecords [4];
   int attachmentBuffers [4];
   UInt32 attachmentAddresses [4];
   UInt32 attachmentPitchWords [4];
-  int local_58;
   int lodBlendWeight;
   int nextMipLevel;
   UInt8 depthFlags1;
@@ -228,13 +198,13 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
   }
   hzAlignment = 0x20;
   if (M<int>(accelerator + kIOATIR500Accelerator_numPipes) == 4) {
-LAB_00028bac:
+alignRecordPitch:
     recordAlignedPitch = hzAlignment * ((int)(recordMinPitch + hzAlignment + -1) / hzAlignment);
   }
   else {
     hzAlignment = M<int>(accelerator + kIOATIR500Accelerator_numPipes) << 4;
     recordAlignedPitch = 0;
-    if (hzAlignment != 0) goto LAB_00028bac;
+    if (hzAlignment != 0) goto alignRecordPitch;
   }
   hzBlockOffset2 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(accelerator + kIOATIR500Accelerator_hzmem)),M<UInt32>(attachmentRecords[0] + 0x28),2);
   if (((((M<unsigned int>(attachmentRecords[0] + 0x28) & 0x3ff00000) == 0x3ff00000) ||
@@ -333,11 +303,11 @@ LAB_00028bac:
   if (notFourPipes) {
     hzAlignment2 = numPipes << 4;
     hzAlignedPitch = 0;
-    if (hzAlignment2 != 0) goto LAB_00028f3c;
+    if (hzAlignment2 != 0) goto alignHzPitch;
   }
   else {
     hzAlignment2 = 0x20;
-LAB_00028f3c:
+alignHzPitch:
     hzAlignedPitch = ((int)(hzPitch + hzAlignment2 + -1) / hzAlignment2) * hzAlignment2;
   }
   if (hasSamples) {
@@ -352,13 +322,13 @@ LAB_00028f3c:
   if (notFourPipes) {
     numPipes = numPipes << 4;
     hzAlignedPitch2 = 0;
-    if (numPipes == 0) goto LAB_00028fac;
+    if (numPipes == 0) goto hzPitchDone;
   }
   else {
     numPipes = 0x20;
   }
   hzAlignedPitch2 = ((int)(hzMinPitch + numPipes + -1) / numPipes) * numPipes;
-LAB_00028fac:
+hzPitchDone:
   outputBuffer[wordIndex + 0x1c] = 0x113c8;
   outputBuffer[wordIndex + 0x1d] = depthBaseAddress;
   outputBuffer[wordIndex + 0x1e] =

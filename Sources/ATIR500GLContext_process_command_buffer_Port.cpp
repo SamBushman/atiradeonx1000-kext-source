@@ -32,94 +32,12 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *descriptorBytes = reinterpret_cast<UInt8 *>(descriptor);
 
-  bool bVar1;
-  bool bVar2;
-  UInt32 *puVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  UInt8 AVar10;
-  UInt8 AVar11;
-  UInt8 AVar12;
-  UInt8 AVar13;
-  UInt16 uVar14;
-  UInt16 uVar15;
-  SInt32 iVar16;
-  float fVar17;
-  float fVar18;
-  float fVar19;
-  float fVar20;
-  float fVar21;
-  float fVar22;
-  float fVar23;
-  float fVar24;
-  float fVar25;
-  float fVar26;
-  float fVar27;
-  float fVar28;
-  float fVar29;
-  float fVar30;
-  double dVar31;
-  UInt32 uVar32;
-  SInt32 iVar33;
-  UInt32 uVar34;
-  UInt32 uVar35;
-  SInt32 *piVar36;
-  UInt32 uVar37;
   UInt32 opcode;
-  SInt32 iVar39;
-  UInt32 uVar40;
-  UInt32 uVar41;
-  UInt32 *puVar42;
-  UInt8 *pAVar43;
-  UInt32 uVar44;
-  UInt8 *pAVar45;
-  UInt32 uVar46;
-  UInt32 uVar47;
-  SInt32 iVar48;
-  SInt32 iVar49;
-  UInt32 uVar50;
-  UInt8 *pVVar51;
-  SInt32 iVar52;
-  UInt32 uVar53;
-  UInt32 *puVar54;
-  UInt32 uVar55;
-  UInt32 uVar56;
-  UInt32 uVar57;
-  UInt32 uVar58;
-  SInt32 iVar59;
-  UInt32 uVar60;
-  UInt32 uVar61;
-  UInt32 uVar62;
-  UInt32 uVar63;
-  UInt32 uVar64;
   UInt32 *recordCursor;
-  UInt8 *pIVar66;
-  UInt32 *puVar67;
-  UInt8 *pAVar68;
-  UInt32 *puVar69;
-  UInt8 *pVVar70;
-  UInt32 uVar71;
-  UInt8 *pAVar72;
-  UInt32 uVar73;
-  SInt32 iVar74;
-  UInt32 uVar75;
-  UInt8 *pAVar76;
-  UInt8 *pAVar77;
-  UInt32 uVar78;
-  UInt8 *pVVar79;
-  char in_RESERVE;
-  UInt8 in_cr0;
-  UInt8 bVar80;
-  UInt32 uVar81;
+  UInt8 cr0Bits;
   UInt32 streamOffset;
   UInt32 pendingWords;
   UInt32 reservedWords;
-  UInt8 *local_37c;
-  UInt8 *local_378;
   UInt32 nopHeader;
   UInt32 gapWords;
   UInt8 *boundTexture;
@@ -523,61 +441,8 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
    * the end of a buffer. */
   struct { register_tracking_state s; UInt32 rangeWords[4]; } trackBlk;
   register_tracking_state *trackingState = &trackBlk.s;
-  UInt32 local_1b8;
-  SInt32 iStack_1b4;
-  UInt32 local_1b0;
-  SInt32 iStack_1ac;
-  UInt32 local_1a8;
-  UInt32 uStack_1a4;
-  UInt32 local_1a0;
-  UInt32 uStack_19c;
-  UInt32 local_198;
-  UInt32 uStack_194;
-  UInt32 local_190;
-  SInt32 iStack_18c;
-  UInt32 local_188;
-  SInt32 iStack_184;
-  UInt32 local_180;
-  UInt32 uStack_17c;
-  UInt32 local_178;
-  UInt32 uStack_174;
-  SInt64 local_170;
-  SInt64 local_168;
-  SInt64 local_160;
-  UInt32 local_158;
-  UInt32 uStack_154;
-  SInt64 local_150;
-  UInt32 local_148;
-  UInt32 uStack_144;
-  UInt32 local_140;
-  UInt32 uStack_13c;
-  UInt32 local_138;
-  UInt32 uStack_134;
-  SInt64 local_130;
-  SInt64 local_128;
-  UInt32 local_120;
-  UInt32 uStack_11c;
-  UInt32 local_118;
-  UInt32 uStack_114;
-  UInt32 local_110;
-  UInt32 uStack_10c;
-  UInt32 local_108;
-  UInt32 uStack_104;
-  UInt32 local_100;
-  UInt32 uStack_fc;
-  UInt32 local_f8;
-  UInt32 uStack_f4;
-  UInt32 local_f0;
-  UInt32 uStack_ec;
-  SInt64 local_e8;
-  SInt64 local_e0;
-  UInt32 local_d8;
-  UInt32 uStack_d4;
   UInt32 *recordPayloadEnd;
   UInt32 result;
-  UInt32 local_c8;
-  UInt32 local_c4;
-  UInt8 *local_c0;
   UInt32 *trailerLastWord;
   SInt32 dstBottomCvtLo;
   SInt32 dstRightCvtLo;
@@ -670,7 +535,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
       if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14) <= recordCursor[1]) ||
          (texture = *(UInt8 **)
                      (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
-         texture == (UInt8 *)0x0)) goto LAB_00030d40;
+         texture == (UInt8 *)0x0)) goto abortStreamUnreserve;
       activeTexture = texture;
       ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
       textureInfo = M<SInt32>(texture + 0x14);
@@ -719,7 +584,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
         if (texModeBits == 1) {
           formatTableOffset = (UInt32)formatId * 0x1c;
           noMacroTile = (M<UInt8>(M<SInt32>(texture + 0x14) + 0x15) & 0x18) == 0;
-          in_cr0 = noMacroTile << 1;
+          cr0Bits = noMacroTile << 1;
           if (noMacroTile) {
             formatFieldDC = FormatTableLookup_0x0004d2dc(formatTableOffset);
             sizeShiftAdjust = 0;
@@ -781,7 +646,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
       *recordCursor = 0xc0061000;
       M<UInt32>(self + kATIR500GLContext_vertexArrayParam) = vertexArrayParam;
       textureCount = indexedFlag + ((vertexArrayCount & -vertexArrayParam) - vertexArrayParam) + 1;
-      in_cr0 = (textureCount == 0) << 1;
+      cr0Bits = (textureCount == 0) << 1;
       if (textureCount != 0) {
         indexedFlagZeroBit = (indexedFlag == 0) << 1;
         textureIndex = 0;
@@ -803,7 +668,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             pendingWords = 0;
             M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50) =
                  M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50) - reservedWords;
-            goto LAB_0002c0b4;
+            goto vertexArraysDone;
           }
           M<SInt32>(texturePtrCursor) = streamTexturePtr;
           slotArrayOffset = streamTextureSlot * 4;
@@ -878,14 +743,14 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
         } while (textureCount != textureIndex);
       }
       lookupFailed = false;
-LAB_0002c0b4:
+vertexArraysDone:
       if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) != 0) {
         M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = recordCursor;
         this->restore_state_destroyed_by_pageoff((register_tracking_state *)(trackingState));
       }
       if (!lookupFailed) {
         pairCount = vertexArrayCount + 1 >> 1;
-        in_cr0 = (pairCount == 0) << 1;
+        cr0Bits = (pairCount == 0) << 1;
         if (pairCount != 0) {
           paramZeroBit = (vertexArrayParam == 0) << 1;
           arrayTextureIndex = 0;
@@ -943,7 +808,7 @@ LAB_0002c0b4:
           }
           fixupAddress = recordCursor[fixupWordIndex + 2] + lastTextureAddress;
           addressBit1Clear = (fixupAddress & 2) == 0;
-          in_cr0 = addressBit1Clear << 1;
+          cr0Bits = addressBit1Clear << 1;
           fixupWord3 = recordCursor[fixupWordIndex + 3];
           if ((!addressBit1Clear) && (vertexStreamType == 2)) {
             fixupWord3 = fixupWord3 + 1;
@@ -1024,7 +889,7 @@ LAB_0002c0b4:
       }
       widthPerSample = 0;
       singleSample = (M<UInt32>(targetBuffer + 0x3c) & 0xf00000) == 0;
-      in_cr0 = singleSample << 1;
+      cr0Bits = singleSample << 1;
       if (!singleSample) {
         widthPerSample = (UInt32)M<UInt16>(targetBuffer + 0x14) / (M<UInt32>(targetBuffer + 0x3c) >> 0x14 & 0xf);
       }
@@ -1073,7 +938,7 @@ LAB_0002c0b4:
                   hzBlockCount = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),
                                                M<UInt32>(surfaceBuffer + 0x28),2);
                   zFormatBitsClear = (M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xbe8) & 0x700000) == 0;
-                  in_cr0 = zFormatBitsClear << 1;
+                  cr0Bits = zFormatBitsClear << 1;
                   if ((zFormatBitsClear) || (M<SInt16>(self + kIOATIR500GLContext_colorBufferIndex) != 9)) {
                     recordCursor[0xc] = 0;
                   }
@@ -1097,7 +962,7 @@ LAB_0002c0b4:
                     }
                     hzBlockCount = 0;
                     singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
-                    in_cr0 = singleSample << 1;
+                    cr0Bits = singleSample << 1;
                     if (!singleSample) {
                       hzBlockCount = (UInt32)M<UInt16>(surfaceBuffer + 0x14) /
                                (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
@@ -1108,14 +973,14 @@ LAB_0002c0b4:
                     }
                     alignment = 0x20;
                     if (M<SInt32>(accel + kIOATIR500Accelerator_numPipes) == 4) {
-LAB_0002c898:
+alignHzPitchOp04:
                       hzBlockCount = alignment * ((SInt32)(alignment + pitchPixels + -1) / alignment);
                     }
                     else {
                       alignment = M<SInt32>(accel + kIOATIR500Accelerator_numPipes) << 4;
-                      in_cr0 = (alignment == 0) << 1;
+                      cr0Bits = (alignment == 0) << 1;
                       hzBlockCount = 0;
-                      if (alignment != 0) goto LAB_0002c898;
+                      if (alignment != 0) goto alignHzPitchOp04;
                     }
                     hzTotalBlocks = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(accel + kIOATIR500Accelerator_hzmem)),
                                                  M<UInt32>(surfaceBuffer + 0x28),2);
@@ -1133,7 +998,7 @@ LAB_0002c898:
                 }
                 M<UInt32>(surfaceBuffer + 0x30) = recordCursor[6];
                 vtable = M<SInt32>(self);
-LAB_0002cd2c:
+updateStateAfterHz:
                 VCALL(vtable, 0x5a4)(self);
               }
               else if (opcode < 0x4000001) {
@@ -1211,13 +1076,13 @@ LAB_0002cd2c:
                       }
                       if (numPipes == 4) {
                         hzIsPartial = 0x20;
-LAB_0002cb94:
+alignHzPitchOp05:
                         alignedPitch = hzIsPartial * ((SInt32)(hzIsPartial + minPitchPixels + -1) / hzIsPartial);
                       }
                       else {
                         hzIsPartial = numPipes << 4;
                         alignedPitch = 0;
-                        if (hzIsPartial != 0) goto LAB_0002cb94;
+                        if (hzIsPartial != 0) goto alignHzPitchOp05;
                       }
                       bufferHeight = (UInt32)M<UInt16>(depthBuffer + 0x1e);
                       gbPipeConfig = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74) >> 4 & 3;
@@ -1239,7 +1104,7 @@ LAB_0002cb94:
                       }
                       hzScaleBits = (UInt8 *)0x0;
                       sampleBitsClear = (M<UInt32>(depthBuffer + 0x3c) & 0xf000) == 0;
-                      in_cr0 = sampleBitsClear << 1;
+                      cr0Bits = sampleBitsClear << 1;
                       if (!sampleBitsClear) {
                         hzHeightSumCvtLo = hzBlockCount + bufferHeight;
                         hzHeightSumCvtHi = 0x43300000;
@@ -1259,18 +1124,18 @@ LAB_0002cb94:
                          CONCAT11(depthBuffer[0x35],depthBuffer[0x34]);
                   }
                   vtable = M<SInt32>(self);
-                  goto LAB_0002cd2c;
+                  goto updateStateAfterHz;
                 }
-                if (opcode == 0x16000000) goto LAB_0002e820;
+                if (opcode == 0x16000000) goto unbindSlotAndNop;
               }
-              goto LAB_00031340;
+              goto nextRecord;
             }
             if (opcode != 0x1a000000) {
               if (opcode < 0x1a000001) {
-                if ((opcode == 0x18000000) || (opcode == 0x19000000)) goto LAB_0002e820;
+                if ((opcode == 0x18000000) || (opcode == 0x19000000)) goto unbindSlotAndNop;
               }
-              else if ((opcode == 0x1b000000) || (opcode == 0x1c000000)) goto LAB_0002e820;
-              goto LAB_00031340;
+              else if ((opcode == 0x1b000000) || (opcode == 0x1c000000)) goto unbindSlotAndNop;
+              goto nextRecord;
             }
           }
         }
@@ -1280,7 +1145,7 @@ LAB_0002cb94:
               if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14) <= recordCursor[1]) ||
                  (texture = *(UInt8 **)
                              (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
-                 texture == (UInt8 *)0x0)) goto LAB_00030d40;
+                 texture == (UInt8 *)0x0)) goto abortStreamUnreserve;
               currentTransferBuffer = M<UInt8 *>(self + kATIR500GLContext_transferBufferSlot);
               activeTexture = texture;
               if (currentTransferBuffer != texture) {
@@ -1330,7 +1195,7 @@ LAB_0002cb94:
                            recordCursor[5] + 0x80;
             }
             else if (opcode < 0x26000001) {
-              if ((opcode == 0x24000000) || (opcode == 0x25000000)) goto LAB_0002e820;
+              if ((opcode == 0x24000000) || (opcode == 0x25000000)) goto unbindSlotAndNop;
             }
             else if (opcode == 0x28000000) {
               if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
@@ -1355,7 +1220,7 @@ LAB_0002cb94:
               bufferPitch = M<UInt16>(surfaceBuffer + 0x20);
               surfaceBaseAddress = M<SInt32>(surfaceBuffer + 8);
               singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
-              in_cr0 = singleSample << 1;
+              cr0Bits = singleSample << 1;
               if (!singleSample) {
                 widthPerSample = (UInt32)M<UInt16>(surfaceBuffer + 0x14) /
                          (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
@@ -1446,7 +1311,7 @@ LAB_0002cb94:
                 M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) = 9;
               }
               noDepthFlag = (M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) & 0x80) == 0;
-              in_cr0 = noDepthFlag << 1;
+              cr0Bits = noDepthFlag << 1;
               if (!noDepthFlag) {
                 depthAttachment = recordCursor[1];
                 if ((depthAttachment == 7) || (depthAttachment == 8)) {
@@ -1468,20 +1333,20 @@ LAB_0002cb94:
                      M<SInt16>(M<SInt32>(self + kATIR500GLContext_transferBufferSlot) + 0xe) + -1;
                 M<UInt32>(self + kATIR500GLContext_transferBufferSlot) = 0;
               }
-              goto LAB_0002eae8;
+              goto nopRecord;
             }
-            goto LAB_00031340;
+            goto nextRecord;
           }
           if (opcode != 0x20000000) {
             if (opcode < 0x20000001) {
-              if ((opcode == 0x1e000000) || (opcode == 0x1f000000)) goto LAB_0002e820;
+              if ((opcode == 0x1e000000) || (opcode == 0x1f000000)) goto unbindSlotAndNop;
             }
-            else if ((opcode == 0x21000000) || (opcode == 0x22000000)) goto LAB_0002e820;
-            goto LAB_00031340;
+            else if ((opcode == 0x21000000) || (opcode == 0x22000000)) goto unbindSlotAndNop;
+            goto nextRecord;
           }
         }
       }
-LAB_0002e820:
+unbindSlotAndNop:
       slotByteOffsetUnbind = opcode + 0xea000000 >> 0x16;
       if (M<UInt8 *>(self + slotByteOffsetUnbind + 0x2a4) != (UInt8 *)0x0) {
         ((IOATIR500GLContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(self + slotByteOffsetUnbind + 0x2a4)));
@@ -1493,7 +1358,7 @@ LAB_0002e820:
         }
         M<UInt32>(self + slotByteOffsetUnbind + 0x2a4) = 0;
       }
-LAB_0002eae8:
+nopRecord:
       *recordCursor = 0x80000000;
     }
     else {
@@ -1502,7 +1367,7 @@ LAB_0002eae8:
         if (slotTexture != 0) {
           if (M<char>(slotTexture + 0x20) == '\0') {
             ownerSurface = M<UInt8 *>(slotTexture + 0x50);
-            if (ownerSurface == (UInt8 *)0x0) goto LAB_0002f978;
+            if (ownerSurface == (UInt8 *)0x0) goto nopRecordCounted;
             bufferIndex = ((IOATIR500Surface *)(ownerSurface))->surface_buffer_idx_mask(M<UInt32>(slotTexture + 0x58),(UInt32 *)&bufferMaskOut);
             usesSurfaceBuffer = true;
             surfaceBufferPtr = M<SInt32>(ownerSurface + bufferIndex * 4 + 0xb70);
@@ -1532,7 +1397,7 @@ LAB_0002eae8:
                      levelOffset0Op37 * (UInt32)M<UInt16>(surfaceBufferPtr + 0x20) +
                      (patchWord >> 0x10) * (M<SInt32>(levelEntryPtr + 0x44) - levelOffset0Op37) + M<SInt32>(surfaceBufferPtr + 8);
                 singleSample = (M<UInt32>(surfaceBufferPtr + 0x3c) & 0xf00000) == 0;
-                in_cr0 = singleSample << 1;
+                cr0Bits = singleSample << 1;
                 formatByteOffset = (UInt32)M<UInt8>(surfaceBufferPtr + 0x3a) * 0x1c;
                 if (!singleSample) {
                   mipWidth = (SInt32)((UInt32)M<UInt16>(surfaceBufferPtr + 0x14) /
@@ -1585,12 +1450,12 @@ LAB_0002eae8:
               M<UInt32>(M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14) + 0xc) =
                    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
             }
-            goto LAB_00031340;
+            goto nextRecord;
           }
         }
-LAB_0002f978:
+nopRecordCounted:
         *recordCursor = (recordCursor[1] - 2) * 0x10000 | 0xc0001000;
-        goto LAB_00031340;
+        goto nextRecord;
       }
       if (0x37000000 < opcode) {
         if (opcode == 0x3f000000) {
@@ -1598,7 +1463,7 @@ LAB_0002f978:
           if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14) <= recordCursor[2]) ||
              (texture = *(UInt8 **)
                          (recordCursor[2] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
-             texture == (UInt8 *)0x0)) goto LAB_00030fe0;
+             texture == (UInt8 *)0x0)) goto abortStream;
           activeTexture = texture;
           ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
           if (M<char>(M<SInt32>(activeTexture + 0x14) + 0x14) != '\0') {
@@ -1671,7 +1536,7 @@ LAB_0002f978:
                (FormatTableLookup_0x0004d2e0(formatByteOffset) & 0x600) << 5 |
                formatBits3000 | formatBitsC00 | formatBits300 | formatFieldE0 | savedFormatReg & 0xffff00e0;
           singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
-          in_cr0 = singleSample << 1;
+          cr0Bits = singleSample << 1;
           if ((singleSample) ||
              (formatBits300 = (UInt32)M<UInt16>(surfaceBuffer + 0x1c) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)
              , maxX = formatBits300 - 1, formatBits300 == 0)) {
@@ -1685,15 +1550,15 @@ LAB_0002f978:
           vertexArrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(activeTexture),offsetInTexture);
           recordCursor[0xa4] =
                vertexArrayOffset + (recordCursor[0xa4] >> 3 & 0x1ffffffc) & 0xffffffe0 | recordCursor[0xa4] & 0x1f;
-LAB_00030964:
+releaseActiveTexture:
           ((IOATIR500GLContext *)(self))->remove_texture_from_stream((VendorTextureBuffer *)(activeTexture));
           refCountPtr = (SInt32 *)(M<SInt32>(activeTexture + 0x14) + 0x10);
           previousRefCount = atomicAddReturningOld((SInt32 *)refCountPtr, -0x10000);
           if (previousRefCount == 1) {
-LAB_00030994:
+deleteActiveTexture:
             ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->delete_texture((VendorTextureBuffer *)(activeTexture));
           }
-          goto LAB_00031340;
+          goto nextRecord;
         }
         if (opcode < 0x3f000001) {
           if (opcode == 0x3b000000) {
@@ -1703,7 +1568,7 @@ LAB_00030994:
             if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14) <= recordCursor[1]) ||
                (texture = *(UInt8 **)
                            (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
-               texture == (UInt8 *)0x0)) goto LAB_00030fe0;
+               texture == (UInt8 *)0x0)) goto abortStream;
             activeTexture = texture;
             if (M<UInt8 *>(self + kATIR500GLContext_streamedTexture) != (UInt8 *)0x0) {
               ((IOATIR500GLContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(self + kATIR500GLContext_streamedTexture)));
@@ -1822,7 +1687,7 @@ LAB_00030994:
                 }
                 selfAlias = selfAlias + 4;
               } while (self + 0x44 != selfAlias);
-              goto LAB_0002eae8;
+              goto nopRecord;
             }
           }
           else if (opcode == 0x3d000000) {
@@ -1902,11 +1767,11 @@ LAB_00030994:
                      vertexArrayOffset + (recordCursor[0xa5] >> 3 & 0x1ffffffc) & 0xffffffe0 | recordCursor[0xa5] & 0x1f;
                 M<UInt32>(M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14) + 0xc) =
                      M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
-                goto LAB_00030318;
+                goto releaseActiveTextureBound;
               }
-              goto LAB_00030fe0;
+              goto abortStream;
             }
-LAB_000300b8:
+nopRecordCountedOrSingle:
             nopHeaderNop = 0x80000000;
             if (recordCursor[1] != 1) {
               nopHeaderNop = (recordCursor[1] - 2) * 0x10000 | 0xc0001000;
@@ -1969,19 +1834,19 @@ LAB_000300b8:
                 M<UInt32>(M<SInt32>(M<SInt32>(activeTexture + 0x58) + 0x14) + 8) =
                      M<UInt32>(M<SInt32>(activeTexture + 0x14) + 0xc);
               }
-LAB_00030318:
+releaseActiveTextureBound:
               ((IOATIR500GLContext *)(self))->remove_texture_from_stream((VendorTextureBuffer *)(activeTexture));
               refCountPtr = (SInt32 *)(M<SInt32>(activeTexture + 0x14) + 0x10);
               previousRefCount = atomicAddReturningOld((SInt32 *)refCountPtr, -0x10000);
-              if (previousRefCount == 0x10000) goto LAB_00030994;
+              if (previousRefCount == 0x10000) goto deleteActiveTexture;
             }
             else {
-LAB_00030fe0:
+abortStream:
               pendingWords = 0;
               recordWords = 0;
               recordBytes = 0;
             }
-            goto LAB_00031340;
+            goto nextRecord;
           }
           if (opcode < 0x43000001) {
             if (opcode == 0x40000000) {
@@ -2052,7 +1917,7 @@ LAB_00030fe0:
                      formatFieldE4 >> 1 & 0x7000 | (formatFieldE4 & 0x1c00) << 5 | (formatFieldE4 & 0x380) << 0xb;
                 sampleInfo = M<UInt32>(targetBuffer + 0x3c);
                 singleSample = (sampleInfo & 0xf00000) == 0;
-                in_cr0 = singleSample << 1;
+                cr0Bits = singleSample << 1;
                 if (singleSample) {
                   maxY = 0;
                 }
@@ -2075,11 +1940,11 @@ LAB_00030fe0:
                 recordCursor[0xaf] = pitchPixels - 1 & 0x3fff | (maxX & 0x800) << 4 | (maxY & 0x800) << 5;
                 vertexArrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(activeTexture),offsetInTexture);
                 recordCursor[0x9f] = vertexArrayOffset + recordCursor[0x9f];
-                goto LAB_00030964;
+                goto releaseActiveTexture;
               }
-              goto LAB_00030fe0;
+              goto abortStream;
             }
-            if (opcode != 0x41000000) goto LAB_00031340;
+            if (opcode != 0x41000000) goto nextRecord;
             colorTargetCount = recordCursor[1];
             slotsLeft = 4;
             selfAlias = self;
@@ -2137,7 +2002,7 @@ LAB_00030fe0:
                     pendingWords = 0;
                     M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50) =
                          M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50) - reservedWords;
-                    goto LAB_0002e114;
+                    goto renderTargetsBound;
                   }
                   ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
                   this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(texture),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
@@ -2166,7 +2031,7 @@ LAB_00030fe0:
               entryByteOffsetOp41 = entryWordIndexOp41 * 4;
               depthEntry = recordCursor + entryWordIndexOp41;
             }
-LAB_0002e114:
+renderTargetsBound:
             if (M<SInt16>(self + kATIR500GLContext_attachmentCount) == 0) {
               M<UInt16>(self + kATIR500GLContext_currentAttachment) = 0;
               M<UInt16>(self + kATIR500GLContext_attachmentCount) = 1;
@@ -2190,7 +2055,7 @@ LAB_0002e114:
               if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x14) <= depthTextureHandle) ||
                  (texture = *(UInt8 **)
                              (depthTextureHandle * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
-                 texture == (UInt8 *)0x0)) goto LAB_00030d40;
+                 texture == (UInt8 *)0x0)) goto abortStreamUnreserve;
               depthTexture = texture;
               ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
               this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(depthTexture),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
@@ -2218,17 +2083,17 @@ LAB_0002e114:
                   hzAlignment = 0x20;
                   numPipesOp41 = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98);
                   if (numPipesOp41 == 4) {
-LAB_0002e2d4:
+hzAllocWidthAligned:
                     hzAllocWidth = ((SInt32)((UInt32)M<UInt16>(self + kATIR500GLContext_unknown_0x5b4) + hzAlignment + -1) / hzAlignment) *
                              hzAlignment;
                   }
                   else {
                     hzAlignment = numPipesOp41 << 4;
                     hzAllocWidth = 0;
-                    if (hzAlignment != 0) goto LAB_0002e2d4;
+                    if (hzAlignment != 0) goto hzAllocWidthAligned;
                   }
                   heightIsAligned = (hzHeight & 0x1f) == 0;
-                  in_cr0 = heightIsAligned << 1;
+                  cr0Bits = heightIsAligned << 1;
                   if (!heightIsAligned) {
                     hzAllocHeight = (hzHeight & 0xffffffe0) + 0x20;
                   }
@@ -2240,19 +2105,19 @@ LAB_0002e2d4:
                     hzAlignment = 0x20;
                     numPipesOp41 = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98);
                     if (numPipesOp41 == 4) {
-LAB_0002e34c:
+hzAllocWidthAligned2:
                       hzAllocWidthOp41 = ((SInt32)((UInt32)M<UInt16>(self + kATIR500GLContext_unknown_0x5b4) + hzAlignment + -1) / hzAlignment) *
                                hzAlignment;
                     }
                     else {
                       hzAlignment = numPipesOp41 << 4;
                       hzAllocWidthOp41 = 0;
-                      if (hzAlignment != 0) goto LAB_0002e34c;
+                      if (hzAlignment != 0) goto hzAllocWidthAligned2;
                     }
                     hzHeight = M<UInt16>(self + kATIR500GLContext_unknown_0x5be);
                     hzAllocHeightOp41 = (UInt32)hzHeight;
                     heightIsAligned = (hzHeight & 0x1f) == 0;
-                    in_cr0 = heightIsAligned << 1;
+                    cr0Bits = heightIsAligned << 1;
                     if (!heightIsAligned) {
                       hzAllocHeightOp41 = (hzHeight & 0xffffffe0) + 0x20;
                     }
@@ -2293,13 +2158,13 @@ LAB_0002e34c:
                  (texture = *(UInt8 **)
                              (*renderTargetEntry * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x10)),
                  texture == (UInt8 *)0x0)) {
-LAB_00030d40:
+abortStreamUnreserve:
                 recordWords = 0;
                 recordBytes = 0;
                 M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50) =
                      M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50) - reservedWords;
                 pendingWords = 0;
-                goto LAB_00031340;
+                goto nextRecord;
               }
               texture = texture;
               ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(texture));
@@ -2343,20 +2208,20 @@ LAB_00030d40:
                   M<UInt32>(scratchArea + 0x2c) = M<UInt32>(activeTexture + 0x7c);
                   flushedWords = ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(scratchArea),0,(UInt32 *)(recordCursor));
                   M<UInt16>(activeTexture + 0x7a) = 0;
-                  goto LAB_0002eed0;
+                  goto depthFlushed;
                 }
                 packetEndWord = packetEndWord + recordCursor[2];
                 flushedWords = 0;
-                goto LAB_0002eed8;
+                goto padPacketWithNop;
               }
-              goto LAB_00030d40;
+              goto abortStreamUnreserve;
             }
             flushedWords = ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500GLContext_boundSurface)))->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)((UInt8 *)
                                 (M<UInt8 *>(self + kIOATIR500GLContext_boundSurface) +
                                 (UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 0x78 + 0xa8)),0,(UInt32 *)(recordCursor));
-LAB_0002eed0:
+depthFlushed:
             if (flushedWords <= packetEndWord) {
-LAB_0002eed8:
+padPacketWithNop:
               if (flushedWords < packetEndWord) {
                 nopHeader = 0x80000000;
                 if (packetEndWord - flushedWords != 1) {
@@ -2401,36 +2266,36 @@ LAB_0002eed8:
               textureOffset = this->GetTextureOffset((VendorTextureBuffer *)(M<UInt8 *>(self + kATIR500GLContext_textureSlots)),true);
               recordCursor[0x16] = offsetWord + textureOffset;
               M<UInt32>(transferBuffer + 0x5c) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
-              goto LAB_0002fe70;
+              goto markTextureUsed;
             }
-            goto LAB_000300b8;
+            goto nopRecordCountedOrSingle;
           }
         }
-        goto LAB_00031340;
+        goto nextRecord;
       }
       if (opcode == 0x31000000) {
         attachmentType = recordCursor[2];
         packetWordsOp31 = recordCursor[1];
         layerCount = recordCursor[3];
         if (attachmentType == 8) {
-LAB_0002ef74:
+slotIsDepth8:
           attachmentSlot = 8;
         }
         else {
           if (attachmentType < 9) {
             if (attachmentType == 7) {
-LAB_0002ef6c:
+slotIsDepth7:
               attachmentSlot = 7;
-              goto LAB_0002ef48;
+              goto slotSelected;
             }
           }
           else {
-            if (attachmentType == 10) goto LAB_0002ef6c;
-            if (attachmentType == 0xb) goto LAB_0002ef74;
+            if (attachmentType == 10) goto slotIsDepth7;
+            if (attachmentType == 0xb) goto slotIsDepth8;
           }
           attachmentSlot = 6;
         }
-LAB_0002ef48:
+slotSelected:
         if ((M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) & 0x80) == 0) {
           attachmentSlot = 6;
         }
@@ -2544,7 +2409,7 @@ LAB_0002ef48:
         recordCursor[packetWordsOp31 + 0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
         bufferFormatIdOp31 = selectedBuffer[0x3a];
         singleSample = (M<UInt32>(selectedBuffer + 0x3c) & 0xf00000) == 0;
-        in_cr0 = singleSample << 1;
+        cr0Bits = singleSample << 1;
         if (!singleSample) {
           widthPerSampleOp31 = (UInt32)M<UInt16>(selectedBuffer + 0x14) / (M<UInt32>(selectedBuffer + 0x3c) >> 0x14 & 0xf);
         }
@@ -2586,12 +2451,12 @@ LAB_0002ef48:
             layerCount = layerCount - 1;
           } while (layerCount != 0);
         }
-        goto LAB_00031340;
+        goto nextRecord;
       }
       if (0x31000000 < opcode) {
         if (opcode == 0x34000000) {
           statusOffset = recordCursor[1] * 8;
-          if (M<UInt32>(self + kIOATIR500GLContext_statusRegionSize) <= statusOffset) goto LAB_00030d40;
+          if (M<UInt32>(self + kIOATIR500GLContext_statusRegionSize) <= statusOffset) goto abortStreamUnreserve;
           *recordCursor = 0x578;
           accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
           stamp = M<UInt32>(accel + kIOATIR500Accelerator_submitStamp);
@@ -2612,24 +2477,24 @@ LAB_0002ef48:
               if (flushRegionWords != 0) {
                 attachmentTypeOp32 = recordCursor[3];
                 if (attachmentTypeOp32 == 8) {
-LAB_0002f4c8:
+slotIsDepth8Op32:
                   attachment = 8;
                 }
                 else {
                   if (attachmentTypeOp32 < 9) {
                     if (attachmentTypeOp32 == 7) {
-LAB_0002f4c0:
+slotIsDepth7Op32:
                       attachment = 7;
-                      goto LAB_0002f498;
+                      goto slotSelectedOp32;
                     }
                   }
                   else {
-                    if (attachmentTypeOp32 == 10) goto LAB_0002f4c0;
-                    if (attachmentTypeOp32 == 0xb) goto LAB_0002f4c8;
+                    if (attachmentTypeOp32 == 10) goto slotIsDepth7Op32;
+                    if (attachmentTypeOp32 == 0xb) goto slotIsDepth8Op32;
                   }
                   attachment = 6;
                 }
-LAB_0002f498:
+slotSelectedOp32:
                 if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
                   surfaceObject = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
                   selectedBuffer = M<UInt8 *>(surfaceObject + attachment * 4 + kIOATIR500Surface_attachmentBuffers);
@@ -2734,7 +2599,7 @@ LAB_0002f498:
               recordCursor[0xa1] = offsetWord + textureOffset;
               bufferFormatId = surfaceBuffer[0x3a];
               singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
-              in_cr0 = singleSample << 1;
+              cr0Bits = singleSample << 1;
               if (!singleSample) {
                 widthPerSampleOp40 = (SInt32)((UInt32)M<UInt16>(surfaceBuffer + 0x14) /
                               (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)) >> (mipLevelOp32 & 0x3f);
@@ -2781,7 +2646,7 @@ LAB_0002f498:
               }
               M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0x80) =
                    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
-              goto LAB_0002fe70;
+              goto markTextureUsed;
             }
             recordCursor[-flushRegionWords] = (flushRegionWords + recordCursor[1] + -2) * 0x10000 | 0xc0001000;
           }
@@ -2862,7 +2727,7 @@ LAB_0002f498:
               recordCursor[0xa2] = texFormatFlags & 0x1f | textureOffset & 0xffffffe0;
             }
             flagBit1Clear = (recordFlags & 2) == 0;
-            in_cr0 = flagBit1Clear << 1;
+            cr0Bits = flagBit1Clear << 1;
             if (!flagBit1Clear) {
               formatFieldE0 = 0;
               recordCursor[0xc0] = -((UInt8)depthBufferOp33[0x3a] ^ 0x10) >> 0x1e & 2;
@@ -2882,7 +2747,7 @@ LAB_0002f498:
               ;
               recordCursor[0xc3] = depthPitchRegWord;
               singleSample = (M<UInt32>(depthBufferOp33 + 0x3c) & 0xf00000) == 0;
-              in_cr0 = singleSample << 1;
+              cr0Bits = singleSample << 1;
               if (!singleSample) {
                 formatFieldE0 = (UInt32)M<UInt16>(depthBufferOp33 + 0x14) /
                          (M<UInt32>(depthBufferOp33 + 0x3c) >> 0x14 & 0xf);
@@ -2893,14 +2758,14 @@ LAB_0002f498:
               }
               formatByteOffset = 0x20;
               if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) == 4) {
-LAB_00030cec:
+alignColorPitch:
                 alignedPitchOp33 = formatByteOffset * ((SInt32)(formatByteOffset + pitchPixels + -1) / formatByteOffset);
               }
               else {
                 formatByteOffset = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) << 4;
-                in_cr0 = (formatByteOffset == 0) << 1;
+                cr0Bits = (formatByteOffset == 0) << 1;
                 alignedPitchOp33 = 0;
-                if (formatByteOffset != 0) goto LAB_00030cec;
+                if (formatByteOffset != 0) goto alignColorPitch;
               }
               recordCursor[0xc5] = alignedPitchOp33;
               hzBlockOffset = HZMEM_GetBlockOffset
@@ -2915,7 +2780,7 @@ LAB_00030cec:
           currentTexture = M<SInt32>(self + kATIR500GLContext_textureSlots);
           if ((currentTexture == 0) ||
              ((M<char>(currentTexture + 0x20) != '\x06' && (M<SInt32>(currentTexture + 0x48) == 0))))
-          goto LAB_000300b8;
+          goto nopRecordCountedOrSingle;
           levelIndexOffsetOp35 = recordCursor[2] >> 0xf & 0x1fffe;
           levelEntryPtrOp32 = levelIndexOffsetOp35 + M<SInt32>(currentTexture + 0x14);
           levelBit = (UInt16)(1 << (recordCursor[2] & 0x3f));
@@ -2931,7 +2796,7 @@ LAB_00030cec:
                M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x8a4) + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) +
                ((SInt32)recordCursor - (M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20) & 0xfffffffcU) + 0x20 +
                (recordCursor[0xa3] >> 3 & 0x1ffffffc) & 0xffffffe0 | recordCursor[0xa3] & 0x1f;
-LAB_0002fe70:
+markTextureUsed:
           M<UInt32>(M<SInt32>(M<SInt32>(self + kATIR500GLContext_textureSlots) + 0x14) + 0xc) =
                M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
         }
@@ -2973,7 +2838,7 @@ LAB_0002fe70:
             } while (pairCountOp38 != 0);
           }
         }
-        goto LAB_00031340;
+        goto nextRecord;
       }
       if (opcode != 0x2d000000) {
         if (opcode < 0x2d000001) {
@@ -3007,7 +2872,7 @@ LAB_0002fe70:
               surfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
             }
             singleSample = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
-            in_cr0 = singleSample << 1;
+            cr0Bits = singleSample << 1;
             widthPerSample = 0;
             if (!singleSample) {
               widthPerSample = (UInt32)M<UInt16>(surfaceBuffer + 0x14) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf)
@@ -3094,7 +2959,7 @@ LAB_0002fe70:
             }
           }
         }
-        goto LAB_00031340;
+        goto nextRecord;
       }
       recordPayloadEnd = recordCursor + recordCursor[1];
       switch(recordCursor[2]) {
@@ -3286,7 +3151,7 @@ LAB_0002fe70:
       dstBottomF = (float)((double)CONCAT44d(0x43300000,blitHeight + dstY) - DOUBLE_0004c3b0);
       yOffsetF = (float)((double)CONCAT44d(0x43300000,yOffsetCvtLo) - DOUBLE_0004c3a8);
       if ((bufferWidth < 0x1001) && (bufferHeightOp2d < 0x1001)) {
-LAB_0002d820:
+singleQuadPath:
         scaleX = FLOAT_0004c370;
         if (bufferWidth != 0) {
           widthCvtHi = 0x43300000;
@@ -3404,7 +3269,7 @@ LAB_0002d820:
           tileRows = (SInt32)((tileYEnd - tileYMin) + 0xf7f) / 0xf80 & 0xff;
         }
         tileCount = pitchPixels * tileRows & 0xff;
-        if (tileCount == 0) goto LAB_0002d820;
+        if (tileCount == 0) goto singleQuadPath;
         singleQuad = false;
         if (tileRows != 0) {
           rowHeightLeft = bufferHeightOp2d - tileYStart;
@@ -3557,7 +3422,7 @@ LAB_0002d820:
       bufferFormatId = attachmentBuffer[0x3a];
       widthPerSampleOp40 = 0;
       noSampleBits = (M<UInt32>(attachmentBuffer + 0x3c) & 0xf00000) == 0;
-      in_cr0 = noSampleBits << 1;
+      cr0Bits = noSampleBits << 1;
       if (!noSampleBits) {
         widthPerSampleOp40 = (SInt32)((UInt32)M<UInt16>(attachmentBuffer + 0x14) / (M<UInt32>(attachmentBuffer + 0x3c) >> 0x14 & 0xf)
                       ) >> (mipLevelOp2d & 0x3f);
@@ -3622,7 +3487,7 @@ LAB_0002d820:
       }
       M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x78) = 0;
     }
-LAB_00031340:
+nextRecord:
     nextPendingWords = pendingWords + recordWords;
     recordCursor = (UInt32 *)((SInt32)recordCursor + recordBytes);
     if (recordWords == 0) {

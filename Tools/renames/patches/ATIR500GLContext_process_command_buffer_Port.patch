@@ -1,6 +1,6 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 10:50:54.224864615 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 10:50:54.226243390 -0700
-@@ -1126,8 +1126,8 @@
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 11:38:02.822549595 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 11:38:02.824051350 -0700
+@@ -991,8 +991,8 @@
                           tileRowsScale * (surfaceHeight - hzBlockCount) >> 1 | recordCursor[statePacketIndex + 1] & 0xffff0000;
                      hzExtentCvtHi = 0x43300000;
                      recordCursor[statePacketIndex + 7] =
@@ -11,7 +11,7 @@
                    }
                    surfaceBuffer[0x36] = 0x1;
                  }
-@@ -3305,20 +3305,20 @@
+@@ -3170,20 +3170,20 @@
          *tailCursor = 0x31080;
          recordCursor[0xc2] = 0x1087;
          tileCount = 0;
@@ -39,7 +39,7 @@
          recordCursor[0xc3] = quadWidthFixed << 0x10 | quadHeightFixed;
          recordCursor[200] = 0;
        }
-@@ -3363,7 +3363,7 @@
+@@ -3228,7 +3228,7 @@
          }
          pitchPixels = mipHeightMinus1 - 1;
          tileXEnd = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
@@ -48,7 +48,7 @@
          srcRightSpill = (SInt64)(SInt32)pitchPixels;
          if (FLOAT_0004c370 < srcMaxX) {
            srcRightIntCvtLo = pitchPixels ^ 0x80000000;
-@@ -3386,7 +3386,7 @@
+@@ -3251,7 +3251,7 @@
          }
          heightMinus1 = bufferHeightOp2d - 1;
          tileYEnd = (((SInt32)heightMinus1 >> 6) + (UInt32)((SInt32)heightMinus1 < 0 && (heightMinus1 & 0x3f) != 0)) * 0x40;
@@ -57,7 +57,7 @@
          srcBottomSpill = (SInt64)(SInt32)srcBottomInt;
          if (FLOAT_0004c370 < srcMaxY) {
            srcBottomIntCvtHi = 0x43300000;
-@@ -3527,20 +3527,20 @@
+@@ -3392,20 +3392,20 @@
                  tileX = tileX + 0xc00;
                  colWidthLeft = colWidthLeft - 0xc00;
                  quadWidthFixedOp2d = (SInt32)((dstXMax - dstXMin) * subpixelScale);

@@ -283,7 +283,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	surfaceIndexOp28	CON
 use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	surfaceIndexOp28	CONFIRMED	self->surfaceIndex, or 0 when rendering to a texture	[A-Za-z0-9_]+\ =\ 0;#33	10\ \|\ [A-Za-z0-9_]+\ \*\ uVar14\ \*\ 0x10000\ \&\ 0x3fc00000\ \|	
 use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	attachmentsLeft	CONFIRMED	loop counter over the attachment words	[A-Za-z0-9_]+\ =\ 4;#2	M<UInt16>\(self\ \+\ [A-Za-z0-9_]+\)\ =\ 0;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	attachmentsLeft	CONFIRMED	loop counter over the attachment words	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ \-1;#2	if\ \(\([A-Za-z0-9_]+\ \&\ 0xffff\)\ ==\ 0\)\ \{	
-use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	slotTexture	CONFIRMED	self->textureSlots: the currently selected texture	[A-Za-z0-9_]+\ =\ M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\);#8	if\ \([A-Za-z0-9_]+\ ==\ \(UInt8\ \*\)0x0\)\ goto\ LAB_0002f978;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	slotTexture	CONFIRMED	self->textureSlots: the currently selected texture	[A-Za-z0-9_]+\ =\ M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\);#8	if\ \([A-Za-z0-9_]+\ ==\ \(UInt8\ \*\)0x0\)\ goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	slotTexture	CONFIRMED	self->textureSlots: the currently selected texture	[A-Za-z0-9_]+\ =\ \(\(IOATIR500Surface\ \*\)\([A-Za-z0-9_]+\)\)\->surface_buffer_idx_mask\(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x58\),\(UInt32\ \*\)\&[A-Za-z0-9_]+\);#2	[A-Za-z0-9_]+\ =\ true;	2
 use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	slotTexture	CONFIRMED	self->textureSlots: the currently selected texture	[A-Za-z0-9_]+\ =\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 0x48\);#2	[A-Za-z0-9_]+\ =\ false;	2
 use	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	bufferIndex	CONFIRMED	surface_buffer_idx_mask() result	[A-Za-z0-9_]+\ =\ \(\(IOATIR500Surface\ \*\)\([A-Za-z0-9_]+\)\)\->surface_buffer_idx_mask\(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x58\),\(UInt32\ \*\)\&[A-Za-z0-9_]+\);#2	[A-Za-z0-9_]+\ =\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\);	1,3
@@ -380,7 +380,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	activeTexture	INF
 use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	activeTexture	INFERRED	texture currently being added to the stream (kept in a stack slot)	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#135	[A-Za-z0-9_]+\ =\ atomicAddReturningOld\(\(SInt32\ \*\)[A-Za-z0-9_]+,\ \-0x10000\);	
 use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	activeTexture	INFERRED	texture currently being added to the stream (kept in a stack slot)	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#142	recordCursor\[0x9f\]\ =\ [A-Za-z0-9_]+\ \+\ recordCursor\[0x9f\];	
 use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	activeTexture	INFERRED	texture currently being added to the stream (kept in a stack slot)	[A-Za-z0-9_]+\ =\ \(UInt8\ \*\)0x0;#5	if\ \([A-Za-z0-9_]+\ !=\ 0xffffffff\)\ \{	
-use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	activeTexture	INFERRED	texture currently being added to the stream (kept in a stack slot)	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#177	goto\ LAB_0002eed0;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	activeTexture	INFERRED	texture currently being added to the stream (kept in a stack slot)	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#177	goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	bufferMaskOut	CONFIRMED	surface_buffer_idx_mask() output mask	[A-Za-z0-9_]+\ =\ \(\(IOATIR500Surface\ \*\)\([A-Za-z0-9_]+\)\)\->surface_buffer_idx_mask\(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x58\),\(UInt32\ \*\)\&[A-Za-z0-9_]+\);	[A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\(M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0xb70\)\ \+\ 0x14\)\ \*	
 use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	bufferMaskOut	CONFIRMED	surface_buffer_idx_mask() output mask	[A-Za-z0-9_]+\ =\ \(\(IOATIR500Surface\ \*\)\([A-Za-z0-9_]+\)\)\->surface_buffer_idx_mask\(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x58\),\(UInt32\ \*\)\&[A-Za-z0-9_]+\);#2	[A-Za-z0-9_]+\ =\ true;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	local_378	bufferIndexOut	CONFIRMED	convertIOGLBufferToBufIdx() output: buffer index	convertIOGLBufferToBufIdx\(recordCursor\[3\],\(UInt32\ \*\)\&[A-Za-z0-9_]+\);	if\ \(M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\)\ ==\ 0\)\ \{	
@@ -406,7 +406,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	texSizeBits	INFERRED
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	bufferStride	INFERRED	bytes per pitch-aligned row unit of the owner surface buffer: pitchPixels * bytesPerPixel, at least 0x20	[A-Za-z0-9_]+\ =\ 0;#9	if\ \([A-Za-z0-9_]+\ !=\ \(UInt8\ \*\)0x0\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	bufferStride	INFERRED	bytes per pitch-aligned row unit of the owner surface buffer: pitchPixels * bytesPerPixel, at least 0x20	[A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\(M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0xb70\)\ \+\ 0x14\)\ \*	[A-Za-z0-9_]+\ =\ 0x20;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	bufferStride	INFERRED	minimum 0x20	[A-Za-z0-9_]+\ =\ 0x20;	M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x68\)\ \&\ 0xffc00000;	
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	vertexArrayCount	INFERRED	recordCursor[1]: number of vertex-array textures; pairCount = (count + 1) >> 1	[A-Za-z0-9_]+\ =\ recordCursor\[1\];	in_cr0\ =\ \([A-Za-z0-9_]+\ ==\ 0\)\ <<\ 1;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	vertexArrayCount	INFERRED	recordCursor[1]: number of vertex-array textures; pairCount = (count + 1) >> 1	[A-Za-z0-9_]+\ =\ recordCursor\[1\];	[A-Za-z0-9_]+\ =\ \([A-Za-z0-9_]+\ ==\ 0\)\ <<\ 1;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	vertexArrayCount	INFERRED	recordCursor[1]: number of vertex-array textures; pairCount = (count + 1) >> 1	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ 1\ >>\ 1;	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\[1\];	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	fixupAddress	INFERRED	record word + last texture address	[A-Za-z0-9_]+\ =\ recordCursor\[[A-Za-z0-9_]+\ \+\ 2\]\ \+\ [A-Za-z0-9_]+;	recordCursor\[[A-Za-z0-9_]+\ \+\ 3\]\ =\ [A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	tiledFlagBit	INFERRED	bit 31 set when the buffer is tiled (+0x38 >= 2)	[A-Za-z0-9_]+\ =\ 0x80000000;#3	if\ \(\(UInt8\)[A-Za-z0-9_]+\[0x38\]\ <\ 2\)\ \{	
@@ -469,16 +469,16 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	maxX	INFERRED	0, or 
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	maxX	INFERRED	0, or widthPerSample - 1	recordCursor\[0xaf\]\ =\ [A-Za-z0-9_]+\ \-\ 1\ \&\ 0x3fff\ \|\ \([A-Za-z0-9_]+\ \&\ 0x800\)\ <<\ 4\ \|\ \([A-Za-z0-9_]+\ \&\ 0x800\)\ <<\ 5;	[A-Za-z0-9_]+\ =\ this\->GetVertexArrayOffset\(\(VendorTextureBuffer\ \*\)\([A-Za-z0-9_]+\),[A-Za-z0-9_]+\);	2
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	depthHandle	CONFIRMED	recordCursor[3]: client handle of the depth texture, or 0xffffffff	[A-Za-z0-9_]+\ =\ recordCursor\[3\];#8	[A-Za-z0-9_]+\ !=\ \(UInt8\ \*\)0x0\)\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	flushedWords	CONFIRMED	words emitted by decompress_and_flush_depth_buffer	[A-Za-z0-9_]+\ =\ \(\(ATIR500Surface\ \*\)\(M<UInt8\ \*>\(self\ \+\ [A-Za-z0-9_]+\)\)\)\->decompress_and_flush_depth_buffer\(\(ATIR500SurfaceBuffer\ \*\)\([A-Za-z0-9_]+\),0,\(UInt32\ \*\)\(recordCursor\)\);	M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x7a\)\ =\ 0;	
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	flushedWords	CONFIRMED	words emitted by decompress_and_flush_depth_buffer	[A-Za-z0-9_]+\ =\ 0;#64	goto\ LAB_0002eed8;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	flushedWords	CONFIRMED	words emitted by decompress_and_flush_depth_buffer	[A-Za-z0-9_]+\ =\ 0;#64	goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	flushedWords	CONFIRMED	words emitted by decompress_and_flush_depth_buffer	[A-Za-z0-9_]+\ =\ \(\(ATIR500Surface\ \*\)\(M<UInt8\ \*>\(self\ \+\ [A-Za-z0-9_]+\)\)\)\->decompress_and_flush_depth_buffer\(\(ATIR500SurfaceBuffer\ \*\)\(\(UInt8\ \*\)	\}#2	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	levelWordOp3e	INFERRED	recordCursor[2]: mip level number and level index	[A-Za-z0-9_]+\ =\ recordCursor\[2\];#7	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ M<SInt32>\(M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\)\ \+\ 0x14\);	
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentType	CONFIRMED	recordCursor[2]: attachment type 7/8/10/11 or other	[A-Za-z0-9_]+\ =\ recordCursor\[2\];#8	LAB_0002ef74:	
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentType	CONFIRMED	recordCursor[2]: attachment type 7/8/10/11 or other	if\ \([A-Za-z0-9_]+\ <\ 9\)\ \{	LAB_0002ef6c:	
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentType	CONFIRMED	recordCursor[2]: attachment type 7/8/10/11 or other	if\ \([A-Za-z0-9_]+\ ==\ 10\)\ goto\ LAB_0002ef6c;	\}	
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentType	CONFIRMED	recordCursor[2]: attachment type 7/8/10/11 or other	[A-Za-z0-9_]+\ =\ recordCursor\[2\];#8	[A-Za-z0-9_]+:	
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentType	CONFIRMED	recordCursor[2]: attachment type 7/8/10/11 or other	if\ \([A-Za-z0-9_]+\ <\ 9\)\ \{	[A-Za-z0-9_]+:	
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentType	CONFIRMED	recordCursor[2]: attachment type 7/8/10/11 or other	if\ \([A-Za-z0-9_]+\ ==\ 10\)\ goto\ [A-Za-z0-9_]+;	\}	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentSlot	CONFIRMED	depth/stencil attachment slot of the surface: 8, 7 or 6	[A-Za-z0-9_]+\ =\ 6;#5	\}	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentSlot	CONFIRMED	depth/stencil attachment slot of the surface: 8, 7 or 6	[A-Za-z0-9_]+\ =\ 6;#6	\([A-Za-z0-9_]+\[0x34\]\ !=\ 0x0\)\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentSlot	CONFIRMED	depth/stencil attachment slot of the surface: 8, 7 or 6	[A-Za-z0-9_]+\ =\ 8;#2	\}	
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentSlot	CONFIRMED	depth/stencil attachment slot of the surface: 8, 7 or 6	[A-Za-z0-9_]+\ =\ 7;#2	goto\ LAB_0002ef48;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	attachmentSlot	CONFIRMED	depth/stencil attachment slot of the surface: 8, 7 or 6	[A-Za-z0-9_]+\ =\ 7;#2	goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	nopHeaderNop	CONFIRMED	0x80000000, or a NOP header covering the unused words	[A-Za-z0-9_]+\ =\ 0x80000000;#20	if\ \([A-Za-z0-9_]+\ \-\ [A-Za-z0-9_]+\ !=\ 1\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	nopHeaderNop	CONFIRMED	0x80000000, or a NOP header covering the unused words	[A-Za-z0-9_]+\ =\ \(\([A-Za-z0-9_]+\ \-\ [A-Za-z0-9_]+\)\ \+\ \-2\)\ \*\ 0x10000\ \|\ 0xc0001000;#2	\}#2	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	widthPerSample	INFERRED	buffer width divided by the sample count	[A-Za-z0-9_]+\ =\ 0;#65	[A-Za-z0-9_]+\ =\ \(UInt32\)\(UInt8\)[A-Za-z0-9_]+\[0x3a\]\ \*\ 0x1c;	
@@ -559,7 +559,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONF
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	texture depth buffer when rendering to a texture	\(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)\ \*\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 0x40\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)\ \&#2	0xffffffe0;	1
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	texture depth buffer when rendering to a texture	\(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)\ \*\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 0x40\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)\ \&#2	0xffffffe0;	2
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	texture depth buffer when rendering to a texture	\(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)\ \*\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 0x40\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)\ \&#2	\([A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\),	3,4
-use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	texture depth buffer when rendering to a texture	\([A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\),#2	in_cr0\ =\ [A-Za-z0-9_]+\ <<\ 1;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	texture depth buffer when rendering to a texture	\([A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\),#2	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ <<\ 1;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	texture depth buffer when rendering to a texture	[A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x14\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\);#5	if\ \(\([A-Za-z0-9_]+\ !=\ 0\)\ \&\&\ \(0\ <\ \(SInt32\)[A-Za-z0-9_]+\)\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	bound surface attachment buffer of the selected slot	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ [A-Za-z0-9_]+\);#2	\}	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	selectedBuffer	CONFIRMED	bound surface attachment buffer of the selected slot	[A-Za-z0-9_]+\ =\ \(UInt8\ \*\)\(self\ \+\ [A-Za-z0-9_]+\);#2	[A-Za-z0-9_]+\ =\ 0x80000000;	
@@ -575,7 +575,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	colorBuffer	CONFIRM
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	attachmentBuffer	CONFIRMED	surface buffer of attachmentIndex (or the render-to-texture attachment)	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\([A-Za-z0-9_]+\ \*\ 4\ \+\ M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\)\ \+\ 0xb70\);#3	[A-Za-z0-9_]+\ =\ \*\(UInt8\ \*\*\)	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	attachmentBuffer	CONFIRMED	surface buffer of attachmentIndex (or the render-to-texture attachment)	[A-Za-z0-9_]+\ =\ self\ \+\ \(UInt32\)M<UInt16>\(self\ \+\ [A-Za-z0-9_]+\)\ \*\ 0x78\ \+\ 0x3c0;#10	M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\ \*\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)\ \+#2	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	attachmentBuffer	CONFIRMED	surface buffer of attachmentIndex (or the render-to-texture attachment)	M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\ \*\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)\ \+#4	[A-Za-z0-9_]+\ \*\ \(M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\ \-\ M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)	
-use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	attachmentBuffer	CONFIRMED	surface buffer of attachmentIndex (or the render-to-texture attachment)	[A-Za-z0-9_]+\ \*\ \(M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\ \-\ M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)#2	in_cr0\ =\ bVar2\ <<\ 1;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	attachmentBuffer	CONFIRMED	surface buffer of attachmentIndex (or the render-to-texture attachment)	[A-Za-z0-9_]+\ \*\ \(M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\ \-\ M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)#2	[A-Za-z0-9_]+\ =\ bVar2\ <<\ 1;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	attachmentBuffer	CONFIRMED	surface buffer of attachmentIndex (or the render-to-texture attachment)	[A-Za-z0-9_]+\ =\ \(SInt32\)\(\(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x14\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\)#2	if\ \([A-Za-z0-9_]+\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar76	texturePtrSlot	CONFIRMED	&local_374[textureIndex]	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+;	M<SInt32>\(M<SInt32>\(M<SInt32>\([A-Za-z0-9_]+\)\ \+\ 0x24\)\ \+\ 0x28\)\ =\ M<SInt32>\([A-Za-z0-9_]+\);	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar76	texturePtrSlot	CONFIRMED	&local_374[textureIndex]	M<SInt32>\(M<SInt32>\(M<SInt32>\([A-Za-z0-9_]+\)\ \+\ 0x24\)\ \+\ 0x28\)\ =\ M<SInt32>\([A-Za-z0-9_]+\);	\}	
@@ -593,7 +593,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERR
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	\*recordCursor\ =\ [A-Za-z0-9_]+\ \|\ M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\ \*\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)	M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)	if\ \([A-Za-z0-9_]+\ ==\ 0\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	[A-Za-z0-9_]+\ =\ \*\(UInt8\ \*\*\)#2	\(\(UInt32\)M<UInt16>\(self\ \+\ [A-Za-z0-9_]+\)\ \*\ 4\ \+\ M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\)\ \+\ 0xb70\);	
-use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	[A-Za-z0-9_]+\ =\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ \&\ 0xf00000\)\ ==\ 0;	in_cr0\ =\ [A-Za-z0-9_]+\ <<\ 1;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	[A-Za-z0-9_]+\ =\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ \&\ 0xf00000\)\ ==\ 0;	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ <<\ 1;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	[A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x14\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\);#2	M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (attachment or colour buffer) addressed by this record word	M<SInt32>\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \*\ 4\ \+\ 0x40\)\)\ \+\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 8\)#2	[A-Za-z0-9_]+\ =\ M<UInt32>\(self\ \+\ [A-Za-z0-9_]+\);	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	targetBuffer	INFERRED	surface buffer (indexed or render-to-texture attachment) described by the record	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\([A-Za-z0-9_]+\ \*\ 4\ \+\ M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\)\ \+\ 0xb70\);#2	\}	
@@ -617,7 +617,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar51	hzTexture	INFERRED	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar70	unboundTexture	CONFIRMED	texture just removed from its bound slot, released below	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\([A-Za-z0-9_]+\ \+\ 0x2e4\);	\}	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar70	unboundTexture	CONFIRMED	texture just removed from its bound slot, released below	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\([A-Za-z0-9_]+\ \+\ 0x338\);	\}	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar70	unboundTexture	CONFIRMED	texture just removed from its bound slot, released below	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\(self\ \+\ [A-Za-z0-9_]+\);#3	\}	
-use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar79	transferBuffer	INFERRED	record word used as a pointer to a transfer buffer	[A-Za-z0-9_]+\ =\ \(UInt8\ \*\)recordCursor\[3\];	goto\ LAB_0002fe70;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar79	transferBuffer	INFERRED	record word used as a pointer to a transfer buffer	[A-Za-z0-9_]+\ =\ \(UInt8\ \*\)recordCursor\[3\];	goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar79	transferBuffer	INFERRED	record word used as a pointer to a transfer buffer	[A-Za-z0-9_]+\ =\ \(UInt8\ \*\)recordCursor\[1\];	\(M<SInt16>\([A-Za-z0-9_]+\ \+\ 0xe\)\ =\ M<SInt16>\([A-Za-z0-9_]+\ \+\ 0xe\)\ \+\ 1,\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 4\)\ ==\ 0	
 use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar79	transferBuffer	INFERRED	record word used as a pointer to a transfer buffer	\(M<SInt16>\([A-Za-z0-9_]+\ \+\ 0xe\)\ =\ M<SInt16>\([A-Za-z0-9_]+\ \+\ 0xe\)\ \+\ 1,\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 4\)\ ==\ 0	\)\)\ \&\&\ \(\(\(IOATIR500GLContext\ \*\)\(self\)\)\->map_transfer_to_GART\(\(VendorTransferBuffer\ \*\)\([A-Za-z0-9_]+\)\),	1
 use	ATIR500GLContext::process_command_buffer@0x2b820	pVVar79	transferBuffer	INFERRED	record word used as a pointer to a transfer buffer	\(M<SInt16>\([A-Za-z0-9_]+\ \+\ 0xe\)\ =\ M<SInt16>\([A-Za-z0-9_]+\ \+\ 0xe\)\ \+\ 1,\ M<SInt32>\([A-Za-z0-9_]+\ \+\ 4\)\ ==\ 0	\)\)\ \&\&\ \(\(\(IOATIR500GLContext\ \*\)\(self\)\)\->map_transfer_to_GART\(\(VendorTransferBuffer\ \*\)\([A-Za-z0-9_]+\)\),	2
@@ -894,7 +894,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	textureHandle	CONFIR
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	textureHandle	CONFIRMED	record word: client handle of the colour render-target texture	[A-Za-z0-9_]+\ =\ M<UInt32>\(\(SInt32\)recordCursor\ \+\ [A-Za-z0-9_]+\);#2	[A-Za-z0-9_]+\ ==\ \(UInt8\ \*\)0x0\)\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	faceByteOffset	INFERRED	(level word >> 15) & 0x1fffe: byte offset of the face in the texture info	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\[10\]\ >>\ 0xf\ \&\ 0x1fffe;	M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ =\ M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ \&\ \~[A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	faceByteOffset	INFERRED	(level word >> 15) & 0x1fffe: byte offset of the face in the texture info	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\[4\]\ >>\ 0xf\ \&\ 0x1fffe;	M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ =\ M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x1c\)\ \&\ \~[A-Za-z0-9_]+;	
-use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	depthTextureHandle	CONFIRMED	word of the depth entry: client texture handle	[A-Za-z0-9_]+\ =\ \*[A-Za-z0-9_]+;#3	[A-Za-z0-9_]+\ ==\ \(UInt8\ \*\)0x0\)\)\ goto\ LAB_00030d40;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	depthTextureHandle	CONFIRMED	word of the depth entry: client texture handle	[A-Za-z0-9_]+\ =\ \*[A-Za-z0-9_]+;#3	[A-Za-z0-9_]+\ ==\ \(UInt8\ \*\)0x0\)\)\ goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	levelWordOp41	INFERRED	record word: mip level number and face index	[A-Za-z0-9_]+\ =\ M<UInt32>\(\(SInt32\)recordCursor\ \+\ [A-Za-z0-9_]+\ \+\ 0x10\);	M<SInt16>\(M<SInt32>\([A-Za-z0-9_]+\ \+\ 0x14\)\ \+\ 0x36\)\ =	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar64	offsetsStartWord	INFERRED	recordCursor[5]: word index of the first array offset in the record	[A-Za-z0-9_]+\ =\ recordCursor\[5\];	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ 3;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar64	offsetsStartWord	INFERRED	recordCursor[5]: word index of the first array offset in the record	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ 3;	if\ \(!\(bool\)\([A-Za-z0-9_]+\ >>\ 1\ \&\ 1\)\)\ \{	
@@ -1000,7 +1000,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	widthPerSampleOp05	I
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	widthPerSampleOp05	INFERRED	buffer width divided by the sample count, shifted by the mip level	if\ \(0x20\ /\ M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x16\)\ <=\ [A-Za-z0-9_]+\)\ \{#7	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	widthPerSampleOp05	INFERRED	buffer width divided by the sample count, shifted by the mip level	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#216	\}	2
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	recordFlags	INFERRED	recordCursor[1]: bit 1 enables the depth-buffer address words	[A-Za-z0-9_]+\ =\ recordCursor\[1\];#8	\*recordCursor\ =\ 0xc0001000;	
-use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	recordFlags	INFERRED	recordCursor[1]: bit 1 enables the depth-buffer address words	[A-Za-z0-9_]+\ =\ \([A-Za-z0-9_]+\ \&\ 2\)\ ==\ 0;#2	in_cr0\ =\ [A-Za-z0-9_]+\ <<\ 1;	
+use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	recordFlags	INFERRED	recordCursor[1]: bit 1 enables the depth-buffer address words	[A-Za-z0-9_]+\ =\ \([A-Za-z0-9_]+\ \&\ 2\)\ ==\ 0;#2	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ <<\ 1;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	recordXHi	INFERRED	recordCursor[2] >> 16	[A-Za-z0-9_]+\ =\ recordCursor\[2\]\ >>\ 0x10;	\}#3	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	mipLevelOp2d	CONFIRMED	self->mipLevel, or 0 when rendering to a texture	[A-Za-z0-9_]+\ =\ M<UInt32>\(self\ \+\ [A-Za-z0-9_]+\);#4	[A-Za-z0-9_]+\ =\ M<UInt8\ \*>\([A-Za-z0-9_]+\ \*\ 4\ \+\ M<SInt32>\(self\ \+\ [A-Za-z0-9_]+\)\ \+\ 0xb70\);	
 use	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	mipLevelOp2d	CONFIRMED	self->mipLevel, or 0 when rendering to a texture	[A-Za-z0-9_]+\ =\ 0;#101	\}#2	
@@ -1036,9 +1036,9 @@ use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	attachment
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	CONFIRMED	accelerator +0xb98 (numPipes)	[A-Za-z0-9_]+\ =\ M<int>\(M<int>\(self\ \+\ [A-Za-z0-9_]+\)\ \+\ 0xb98\);	[A-Za-z0-9_]+\ =\ 0;#2	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	CONFIRMED	accelerator +0xb98 (numPipes)	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ <<\ 4;#2	\}	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ 0x20;#3	\}	
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	LAB_00028fac:	1
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	LAB_00028fac:	2
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	LAB_00028fac:	3
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	[A-Za-z0-9_]+:	1
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	[A-Za-z0-9_]+:	2
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	numPipes	INFERRED	holds numPipes << 4, or 0x20 with four pipes: alignment of the second hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	[A-Za-z0-9_]+:	3
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar14	levelOffset1	CONFIRMED	colour buffer +0x40[nextMipLevel]: offset of the next level	-	-	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar16	accelerator	CONFIRMED	self->accelerator	[A-Za-z0-9_]+\ =\ M<int>\(self\ \+\ [A-Za-z0-9_]+\);#4	if\ \(\(\(\(\(M<unsigned\ int>\(attachmentRecords\[0\]\ \+\ 0x28\)\ \&\ 0x3ff00000\)\ ==\ 0x3ff00000\)\ \|\|	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar16	colorSlotOffset	CONFIRMED	byte offset of the colour attachment being written	[A-Za-z0-9_]+\ =\ 0;#12	FormatTableLookup_0x0004d2e0\([A-Za-z0-9_]+\)\ >>\ 1\ \&\ 0x1e00000\ \|	
@@ -1053,7 +1053,7 @@ use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar22	colorBaseA
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	clearCount	CONFIRMED	4: the four attachment arrays are zeroed	[A-Za-z0-9_]+\ =\ 4;	[A-Za-z0-9_]+\ =\ 0;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	clearCount	CONFIRMED	4: the four attachment arrays are zeroed	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ \-1;	if\ \(M<int>\(self\ \+\ [A-Za-z0-9_]+\)\ ==\ 0\)\ \{	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	hzAlignment2	INFERRED	0x20, or numPipes * 16: alignment of the hz pitch	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ <<\ 4;	\}	
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	hzAlignment2	INFERRED	0x20, or numPipes * 16: alignment of the hz pitch	[A-Za-z0-9_]+\ =\ 0x20;#2	LAB_00028f3c:	
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	hzAlignment2	INFERRED	0x20, or numPipes * 16: alignment of the hz pitch	[A-Za-z0-9_]+\ =\ 0x20;#2	[A-Za-z0-9_]+:	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	hzAlignment2	INFERRED	0x20, or numPipes * 16: alignment of the hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;	\}	1
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	hzAlignment2	INFERRED	0x20, or numPipes * 16: alignment of the hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;	\}	2
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	hzAlignment2	INFERRED	0x20, or numPipes * 16: alignment of the hz pitch	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;	\}	3
@@ -1079,7 +1079,7 @@ use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar10	depthMinPi
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar12	loopMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ 0x20\ /\ M<UInt16>\(iVar20\ \+\ 0x16\);	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar12	loopMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#24	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ 4;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar12	hzMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ 0x20\ /\ M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x16\);#3	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#5	
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar12	hzMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#32	LAB_00028fac:	
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar12	hzMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#32	[A-Za-z0-9_]+:	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar15	recordMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ 0x20\ /\ M<UInt16>\(attachmentRecords\[0\]\ \+\ 0x16\);	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar15	recordMinPitch	INFERRED	0x20 / bytesPerPixel, raised to the sample width	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#17	\}#2	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar15	loopWidthPerSample	INFERRED	attachment width divided by the sample count, shifted by the mip level	[A-Za-z0-9_]+\ =\ 0;#13	[A-Za-z0-9_]+\ =\ M<int>\([A-Za-z0-9_]+\ \*\ 4\ \+\ iVar20\ \+\ 0x40\);	
@@ -1091,7 +1091,7 @@ use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar17	hzBlockOff
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar17	depthWord2c	CONFIRMED	depth record +0x2c	[A-Za-z0-9_]+\ =\ M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x2c\);	outputBuffer\[wordIndex\ \+\ 0x25\]\ =\ 0x13c7;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar18	hzEnableWord	INFERRED	0x600 when the hz test is enabled for colour buffer 9, else 0	\([A-Za-z0-9_]+\ =\ 0x600,\ M<SInt16>\(self\ \+\ [A-Za-z0-9_]+\)\ !=\ 9\)\)\ \{	[A-Za-z0-9_]+\ =\ 0;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar18	hzEnableWord	INFERRED	0x600 when the hz test is enabled for colour buffer 9, else 0	[A-Za-z0-9_]+\ =\ 0;#11	outputBuffer\[wordIndex\ \+\ 0x16\]\ =\ 0x1385;	
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar18	hzAlignedPitch	INFERRED	hz pitch rounded up to the pipe alignment	[A-Za-z0-9_]+\ =\ 0;#16	if\ \([A-Za-z0-9_]+\ !=\ 0\)\ goto\ LAB_00028f3c;	
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar18	hzAlignedPitch	INFERRED	hz pitch rounded up to the pipe alignment	[A-Za-z0-9_]+\ =\ 0;#16	if\ \([A-Za-z0-9_]+\ !=\ 0\)\ goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar18	hzAlignedPitch	INFERRED	hz pitch rounded up to the pipe alignment	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;	outputBuffer\[wordIndex\ \+\ 0x2b\]\ =\ 0x10e9;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar23	recordWidthPerSample	INFERRED	colour attachment record width divided by the sample count	[A-Za-z0-9_]+\ =\ 0;#9	[A-Za-z0-9_]+\ =\ M<UInt32>\(attachmentRecords\[0\]\ \+\ 0x30\);	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar23	recordWidthPerSample	INFERRED	colour attachment record width divided by the sample count	[A-Za-z0-9_]+\ =\ \(unsigned\ int\)M<UInt16>\(attachmentRecords\[0\]\ \+\ 0x14\)\ /\ \(M<unsigned\ int>\(attachmentRecords\[0\]\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\);	\}#2	
@@ -1118,7 +1118,7 @@ use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar26	attachment
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar26	attachmentsLeft2	CONFIRMED	attachmentCount: loop counter over the render-to-texture attachments	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \-\ 1;#2	\}#2	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar26	mipHeight	INFERRED	attachment height shifted by the mip level, at least 1	[A-Za-z0-9_]+\ =\ \(int\)\(unsigned\ int\)M<UInt16>\(attachmentBuffers\[0\]\ \+\ 0x1e\)\ >>\ \([A-Za-z0-9_]+\ \&\ 0x3f\);	[A-Za-z0-9_]+\ =\ 1;	1,3
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar26	mipHeight	INFERRED	attachment height shifted by the mip level, at least 1	[A-Za-z0-9_]+\ =\ 1;#4	\}#2	
-use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar28	hzAlignedPitch2	INFERRED	hz pitch rounded up to the pipe alignment	[A-Za-z0-9_]+\ =\ 0;#18	if\ \([A-Za-z0-9_]+\ ==\ 0\)\ goto\ LAB_00028fac;	
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar28	hzAlignedPitch2	INFERRED	hz pitch rounded up to the pipe alignment	[A-Za-z0-9_]+\ =\ 0;#18	if\ \([A-Za-z0-9_]+\ ==\ 0\)\ goto\ [A-Za-z0-9_]+;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar28	hzAlignedPitch2	INFERRED	hz pitch rounded up to the pipe alignment	[A-Za-z0-9_]+\ =\ \(\(int\)\([A-Za-z0-9_]+\ \+\ [A-Za-z0-9_]+\ \+\ \-1\)\ /\ [A-Za-z0-9_]+\)\ \*\ [A-Za-z0-9_]+;#2	if\ \(M<int>\(self\ \+\ [A-Za-z0-9_]+\)\ ==\ 0\)\ \{	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar6	slotBufferIndex	CONFIRMED	buffer index stored in the attachment slot	[A-Za-z0-9_]+\ =\ M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x3aa\);	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \+\ 4;	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar6	colorPitchBytes	CONFIRMED	colour buffer +0x20	[A-Za-z0-9_]+\ =\ M<UInt16>\(attachmentBuffers\[0\]\ \+\ 0x20\);	[A-Za-z0-9_]+\ \*\ uVar7\ \*\ 0x10000\ \&\ 0x3fc00000\ \|\ \(bVar2\ \&\ 1\)\ <<\ 0x1e;	
@@ -1138,3 +1138,202 @@ use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar9	widthField	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar9	widthField	INFERRED	width of the colour buffer (per sample) shifted by the mip level, at least 1	\([A-Za-z0-9_]+\ =\ \(int\)\(\(unsigned\ int\)M<UInt16>\(attachmentBuffers\[0\]\ \+\ 0x1c\)\ /	\)\)\ \{	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar9	widthField	INFERRED	width of the colour buffer (per sample) shifted by the mip level, at least 1	[A-Za-z0-9_]+\ =\ 1;#3	\}	
 use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar9	widthField	INFERRED	width of the colour buffer (per sample) shifted by the mip level, at least 1	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+\ \&\ 0x1fff;	\}#3	
+# dead declarations: every use of these decompile variables was renamed above
+drop	ATIR500GLContext::process_command_buffer@0x2b820	bVar1	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	bVar2	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	puVar3	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar5	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar6	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar7	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar9	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	AVar10	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	AVar11	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	AVar12	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	AVar13	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar14	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar15	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar16	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar17	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar18	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar19	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar20	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar21	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar22	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar23	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar24	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar25	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar26	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar27	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar28	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar29	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	fVar30	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	dVar31	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar32	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar33	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar34	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar35	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	piVar36	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar37	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar39	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar40	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar41	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	puVar42	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pAVar43	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar44	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pAVar45	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar46	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar47	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar48	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar49	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar50	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pVVar51	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar52	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar53	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	puVar54	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar55	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar56	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar57	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar58	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar59	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar60	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar61	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar62	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar63	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar64	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pIVar66	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	puVar67	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pAVar68	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	puVar69	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pVVar70	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar71	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pAVar72	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar73	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iVar74	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar75	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pAVar76	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pAVar77	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar78	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	pVVar79	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	bVar80	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uVar81	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_37c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_378	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_1b8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iStack_1b4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_1b0	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iStack_1ac	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_1a8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_1a4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_1a0	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_19c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_198	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_194	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_190	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iStack_18c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_188	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	iStack_184	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_180	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_17c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_178	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_174	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_170	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_168	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_160	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_158	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_154	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_150	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_148	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_144	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_140	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_13c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_138	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_134	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_130	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_128	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_120	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_11c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_118	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_114	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_110	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_10c	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_108	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_104	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_100	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_fc	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_f8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_f4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_f0	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_ec	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_e8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_e0	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_d8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	uStack_d4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_c8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_c4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::process_command_buffer@0x2b820	local_c0	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	bVar1	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	bVar2	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	AVar3	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	AVar4	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	AVar5	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar6	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar7	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	bVar8	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar9	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar10	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar11	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar12	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar14	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar15	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar16	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar17	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar18	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar19	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar20	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	pAVar21	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar22	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar23	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar24	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar25	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar26	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	pAVar27	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	uVar28	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+drop	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	local_58	CONFIRMED	every use of this decompile variable was renamed to a named variable; the declaration is dead
+# labels and decompile pseudo registers
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00031340	nextRecord	INFERRED	end of a record: advance recordCursor and the pending word counts, or finish the stream
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00030d40	abortStreamUnreserve	INFERRED	a client handle did not resolve: give back the reserved words, then abort the stream
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00030fe0	abortStream	INFERRED	a client handle did not resolve: abort the stream (nothing reserved by this record)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002c0b4	vertexArraysDone	INFERRED	after the stream textures of a vertex-array record were bound (or one failed)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002c898	alignHzPitchOp04	INFERRED	pitch rounded up to the pipe alignment (0x04 handler)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002cb94	alignHzPitchOp05	INFERRED	pitch rounded up to the pipe alignment (0x05 handler)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002cd2c	updateStateAfterHz	INFERRED	call the context state update hook (vtable +0x5a4) after the hz setup
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002e820	unbindSlotAndNop	INFERRED	unbind the texture slot named by the opcode, then overwrite the record with a NOP
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002eae8	nopRecord	INFERRED	overwrite the first word of the record with a one-word NOP
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002f978	nopRecordCounted	INFERRED	overwrite the first word of the record with a NOP covering recordCursor[1] words
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_000300b8	nopRecordCountedOrSingle	INFERRED	NOP covering recordCursor[1] words, or a one-word NOP when the count is 1
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00030964	releaseActiveTexture	INFERRED	take the active texture out of the stream and drop its reference
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00030994	deleteActiveTexture	INFERRED	delete the active texture: its last reference was dropped
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00030318	releaseActiveTextureBound	INFERRED	take the active texture out of the stream and drop the bind reference
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002e114	renderTargetsBound	INFERRED	after the colour render targets of a 0x41 record were bound (or one failed)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002e2d4	hzAllocWidthAligned	INFERRED	width of the hz allocation rounded up to hzAlignment
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002e34c	hzAllocWidthAligned2	INFERRED	width of the second hz allocation rounded up to hzAlignment
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002eed0	depthFlushed	INFERRED	the depth buffer was flushed: pad the rest of the packet with a NOP
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002eed8	padPacketWithNop	INFERRED	pad the rest of the packet with a NOP
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002fe70	markTextureUsed	INFERRED	record the accelerator stamp in the texture info
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002ef74	slotIsDepth8	INFERRED	attachment type selects slot 8
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002ef6c	slotIsDepth7	INFERRED	attachment type selects slot 7
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002ef48	slotSelected	INFERRED	attachment slot chosen
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002f4c8	slotIsDepth8Op32	INFERRED	attachment type selects slot 8 (0x32 handler)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002f4c0	slotIsDepth7Op32	INFERRED	attachment type selects slot 7 (0x32 handler)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002f498	slotSelectedOp32	INFERRED	attachment slot chosen (0x32 handler)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_00030cec	alignColorPitch	INFERRED	pitch rounded up to the pipe alignment (0x33 handler)
+post	ATIR500GLContext::process_command_buffer@0x2b820	LAB_0002d820	singleQuadPath	INFERRED	the whole rectangle fits one quad
+post	ATIR500GLContext::process_command_buffer@0x2b820	in_cr0	cr0Bits	CONFIRMED	Condition-register field 0 as Ghidra models it: written from compare results, never read
+drop	ATIR500GLContext::process_command_buffer@0x2b820	in_RESERVE	CONFIRMED	Ghidra pseudo input for the lwarx/stwcx. reservation, never used
+post	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	LAB_00028bac	alignRecordPitch	INFERRED	pitch rounded up to the pipe alignment
+post	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	LAB_00028f3c	alignHzPitch	INFERRED	hz pitch rounded up to the pipe alignment
+post	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	LAB_00028fac	hzPitchDone	INFERRED	after the second hz pitch alignment
