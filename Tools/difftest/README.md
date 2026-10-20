@@ -116,3 +116,11 @@ To look at the machine code of a function in both builds: `Tools/difftest/disass
 A stored word that is an address into the kext image is compared by the name of its target (so two layouts compare). A plain number that happens to equal an address in ONE of
 the two images is then named on that side only; a byte whose two sides stored the same raw bytes is therefore not reported as a difference ("memory left behind differs"
 needs different raw bytes). Cases whose words are never addresses can still say `plain_words=True`.
+
+### Negative control for that rule
+
+    STOCK_KEXT=... python3 Tools/difftest/negative_control.py build/difftest/rebuilt.bin [IMAGE_WHERE_A_TOKEN_EQUALS_AN_IMAGE_ADDRESS]
+
+Runs `WriteVertexArrayOffset` with `plain_words` off on (1) the image as built (must PASS), (2) the image with one `oris` binary-patched so the function stores a different constant (must FAIL
+with "memory left behind differs": a real difference is still caught), and (3) optionally an image whose layout makes a stored token equal an address inside it (must PASS with the raw-bytes
+rule and FAIL with `DT_CANON_ONLY=1`, the old rule). Oct 20 2026 result with the tip of wt-R1 and the earlier image `~/g5logs/R1/b1.bin` for (3): UNCHANGED PASS, MUTATED FAIL, COINCIDENCE raw PASS / canonical-only FAIL.

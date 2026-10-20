@@ -901,7 +901,8 @@ def compare(case, st, rb, strict_order=False, strict_calls=False):
     # a word that is an address into one kext image is compared by the name of its target; a plain number that happens to equal an address in ONE of the two
     # layouts is then named on that side only. Such a byte is not a difference when both sides stored the same raw bytes.
     d = [(k, st.writes.get(k), rb.writes.get(k)) for k in sorted(set(st.writes) | set(rb.writes), key=str) if st.writes.get(k) != rb.writes.get(k)]
-    d = [x for x in d if st.writes_raw.get(x[0]) != rb.writes_raw.get(x[0])]
+    if not os.environ.get('DT_CANON_ONLY'):          # DT_CANON_ONLY=1 restores the old rule (canonical names only), for Tools/difftest/negative_control.py
+        d = [x for x in d if st.writes_raw.get(x[0]) != rb.writes_raw.get(x[0])]
     if d:
         probs.append('memory left behind differs at %d byte(s), first: %s' % (len(d), ', '.join('%s stock %s rebuilt %s' % (fmt_key(k), hexs(a), hexs(b)) for k, a, b in d[:4])))
     elif strict_order and st.write_order != rb.write_order:
