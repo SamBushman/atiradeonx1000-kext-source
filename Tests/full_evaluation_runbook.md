@@ -59,6 +59,7 @@ All on the G5 from `$S/Tests`; results into `~/rung3/final_eval/stock_*`.
 GUI apps launch from SSH inside the console session with `open -a Terminal x.command` (real pixels; the old `bootstrap_register` failure only affects direct SSH launch). Synthetic mouse/keyboard (`CGPostMouseEvent`) and WindowServer performance data work over SSH, so Godot, WindowServer gestures, Expose and Dashboard can be driven by script with screenshots (Phase 3 already does Godot and gestures this way); Expose/Dashboard automation is untried. A person is needed only to look at the screenshots before closing a hardware bug, because automated evidence alone does not close one.
 
 ## Phase 9 - DVD IDCT performance (boot-time install; ONLY with the user's explicit go-ahead)
+Full procedure, the safety-block lessons and the recovery steps: `Tests/boot_time_install_procedure.md` (install only the binary into the stock bundle, `touch /System/Library/Extensions`, reboot; send each step as a separate command). The text below is the older summary.
 Back up the stock binary + mkext (`~/rung3/bootinstall_backup`), install the rebuilt binary into `/System/Library/Extensions`, rebuild the mkext, run `Tests/perf_dvd_idct` against a fresh stock baseline, then RESTORE stock and reboot. Recovery if boot hangs: Option-key boot to Sorbet HD, restore from the Tiger HD mount (Sorbet itself stays untouched).
 
 ## Report
