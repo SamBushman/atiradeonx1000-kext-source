@@ -35,17 +35,17 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
     UInt8 *savedStateBytes = reinterpret_cast<UInt8 *>(savedState);
 
   UInt32 ringIndex;
-  UInt32 uVar2;
   UInt32 *headerTemplate;
   SInt32 ringBuffer;
   SInt32 waited;
   UInt32 value;
   UInt32 *ringHead;
-  UInt32 uVar7;
-  UInt32 uVar8;
   SInt32 *accelerator;
   SInt32 waitTotal;
   r500_3d_blit_state_packet_struct *blitPacket;
+  UInt32 packetWords;
+  UInt32 copyTempA;
+  UInt32 copyTempB;
   
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 0;
   track_regs_written_by_pm4
@@ -65,19 +65,19 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
   accelerator[0x1e0] = waitTotal + waited;
   headerTemplate = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
   ringHead = M<UInt32 *>(self + ringIndex * 0x18 + 0x120);
-  uVar8 = headerTemplate[1];
-  uVar7 = headerTemplate[2];
+  copyTempA = headerTemplate[1];
+  copyTempB = headerTemplate[2];
   value = headerTemplate[3];
   *ringHead = *headerTemplate;
-  ringHead[1] = uVar8;
-  ringHead[2] = uVar7;
+  ringHead[1] = copyTempA;
+  ringHead[2] = copyTempB;
   ringHead[3] = value;
-  uVar8 = headerTemplate[4];
-  uVar7 = headerTemplate[5];
+  copyTempA = headerTemplate[4];
+  copyTempB = headerTemplate[5];
   value = headerTemplate[6];
   ringHead[7] = headerTemplate[7];
-  ringHead[4] = uVar8;
-  ringHead[5] = uVar7;
+  ringHead[4] = copyTempA;
+  ringHead[5] = copyTempB;
   ringHead[6] = value;
   ringBuffer = M<SInt32>(self + ringIndex * 0x18 + 0x120);
   blitPacket = (r500_3d_blit_state_packet_struct *)(ringBuffer + 0x20);
@@ -299,12 +299,12 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
   M<UInt32>(ringBuffer + 0x338) = 0x13ca;
   this->write_r500_3d_blit_state_packet((r500_3d_blit_state_packet_struct *)(blitPacket));
   this->write_r500_zdecompress_restore_add_on_packet((r500_zdecompress_restore_add_on_packet_struct *)(ringBuffer + 0x314));
-  uVar2 = (ringBuffer + 0x340) - (SInt32)blitPacket >> 2;
-  if ((uVar2 & 1) != 0) {
+  packetWords = (ringBuffer + 0x340) - (SInt32)blitPacket >> 2;
+  if ((packetWords & 1) != 0) {
     M<UInt32>(ringBuffer + 0x340) = 0x80000000;
-    uVar2 = (ringBuffer + 0x344) - (SInt32)blitPacket >> 2;
+    packetWords = (ringBuffer + 0x344) - (SInt32)blitPacket >> 2;
   }
-  M<UInt32>(M<SInt32>(self + ringIndex * 0x18 + 0x120) + 0x14) = uVar2;
+  M<UInt32>(M<SInt32>(self + ringIndex * 0x18 + 0x120) + 0x14) = packetWords;
   if (M<SInt32>(self + ringIndex * 0x18 + 0x110) == 0) {
     ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x18 + 0x10c)));
   }

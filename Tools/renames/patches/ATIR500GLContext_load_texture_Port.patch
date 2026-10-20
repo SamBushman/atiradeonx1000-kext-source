@@ -1,0 +1,10 @@
+--- a/Sources/ATIR500GLContext_load_texture_Port.cpp	2026-10-20 09:34:32.351299552 -0700
++++ b/Sources/ATIR500GLContext_load_texture_Port.cpp	2026-10-20 09:34:32.352831174 -0700
+@@ -40,7 +40,6 @@
+   SInt32 waited;
+   UInt32 *record;
+   UInt32 *tileCursor;
+-  SInt32 iVar17;
+   SInt32 gartAddress;
+   SInt32 gartOffset;
+   SInt32 nextNode;

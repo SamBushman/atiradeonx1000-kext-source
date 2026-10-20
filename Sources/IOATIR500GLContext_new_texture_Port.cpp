@@ -31,7 +31,6 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 /* real addr 0x9320 */
 IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *newTextureData, sIOGLNewTextureReturnData *returnData, UInt32 structSize, UInt32 *sizeOut) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
     UInt8 *newTextureDataBytes = reinterpret_cast<UInt8 *>(newTextureData);
     UInt8 *returnDataBytes = reinterpret_cast<UInt8 *>(returnData);
 

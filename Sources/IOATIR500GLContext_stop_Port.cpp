@@ -32,19 +32,21 @@ void IOATIR500GLContext::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
-  UInt8 *pIVar1;
   UInt32 pooledCount;
-  SInt32 iVar3;
   SInt32 *accelWords;
   UInt8 *accel;
   UInt8 *nextBuffer;
-  SInt32 iVar6;
   UInt8 *buffer;
-  UInt8 *pIVar8;
+  UInt8 *prevContext;
+  UInt8 *contextCursor;
+  UInt8 *slotCursor;
+  SInt32 mappingTask;
+  SInt32 bufferCursor;
+  SInt32 oldRefCount;
   
   M<UInt32>(self + kIOATIR500GLContext_started) = 0;
   accelWords = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
-  pIVar8 = (UInt8 *)accelWords[0x18];
+  contextCursor = (UInt8 *)accelWords[0x18];
   if (self == (UInt8 *)accelWords[0x18]) {
     accelWords[0x18] = M<SInt32>(self + kIOATIR500GLContext_nextLiveContext);
     accelWords = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
@@ -55,28 +57,28 @@ void IOATIR500GLContext::stop(IOService *provider) {
   }
   else {
     do {
-      pIVar1 = pIVar8;
-      pIVar8 = M<UInt8 *>(pIVar1 + 0x80);
-      if (pIVar8 == (UInt8 *)0x0) break;
-    } while (self != pIVar8);
-    M<UInt32>(pIVar1 + 0x80) = M<UInt32>(self + kIOATIR500GLContext_nextLiveContext);
+      prevContext = contextCursor;
+      contextCursor = M<UInt8 *>(prevContext + 0x80);
+      if (contextCursor == (UInt8 *)0x0) break;
+    } while (self != contextCursor);
+    M<UInt32>(prevContext + 0x80) = M<UInt32>(self + kIOATIR500GLContext_nextLiveContext);
   }
   accelWords[0x1ce] = accelWords[0x1ce] + -1;
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5c8) = 0x20000;
   this->freeCommandBuffer();
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d8) = 0x10000;
   accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
-  iVar6 = M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheHead);
-  if (iVar6 != 0) {
+  bufferCursor = M<SInt32>(accel + kIOATIR500Accelerator_dataBufferCacheHead);
+  if (bufferCursor != 0) {
     do {
-      if ((M<SInt32 *>(iVar6 + 0x10) != (SInt32 *)0x0) &&
-         (iVar3 = VCALL(*M<SInt32 *>(iVar6 + 0x10), 0xdc)(M<SInt32 *>(iVar6 + 0x10)), iVar3 == M<SInt32>(self + kIOATIR500GLContext_task)))
+      if ((M<SInt32 *>(bufferCursor + 0x10) != (SInt32 *)0x0) &&
+         (mappingTask = VCALL(*M<SInt32 *>(bufferCursor + 0x10), 0xdc)(M<SInt32 *>(bufferCursor + 0x10)), mappingTask == M<SInt32>(self + kIOATIR500GLContext_task)))
       {
-        VCALL(*M<SInt32 *>(iVar6 + 0x10), 0x18)(M<SInt32 *>(iVar6 + 0x10));
-        M<UInt32>(iVar6 + 0x10) = 0;
+        VCALL(*M<SInt32 *>(bufferCursor + 0x10), 0x18)(M<SInt32 *>(bufferCursor + 0x10));
+        M<UInt32>(bufferCursor + 0x10) = 0;
       }
-      iVar6 = M<SInt32>(iVar6 + 0x3c);
-    } while (iVar6 != 0);
+      bufferCursor = M<SInt32>(bufferCursor + 0x3c);
+    } while (bufferCursor != 0);
     accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
   }
   buffer = M<UInt8 *>(self + kIOATIR500GLContext_dataBufferListHead);
@@ -140,17 +142,17 @@ void IOATIR500GLContext::stop(IOService *provider) {
     M<UInt32>(self + kIOATIR500GLContext_boundSurface) = 0;
   }
   if (M<SInt32>(self + kIOATIR500GLContext_clientHandle) != 0) {
-    pIVar8 = self;
+    slotCursor = self;
     do {
-      if (M<SInt32>(pIVar8 + 0x2a4) != 0) {
-        iVar6 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(pIVar8 + 0x2a4) + 0x14) + 0x10);
-        if (iVar6 == 1) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(pIVar8 + 0x2a4)));
+      if (M<SInt32>(slotCursor + 0x2a4) != 0) {
+        oldRefCount = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(slotCursor + 0x2a4) + 0x14) + 0x10);
+        if (oldRefCount == 1) {
+          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500GLContext_clientHandle)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(slotCursor + 0x2a4)));
         }
-        M<UInt32>(pIVar8 + 0x2a4) = 0;
+        M<UInt32>(slotCursor + 0x2a4) = 0;
       }
-      pIVar8 = pIVar8 + 4;
-    } while (self + 0xa8 != pIVar8);
+      slotCursor = slotCursor + 4;
+    } while (self + 0xa8 != slotCursor);
     VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_clientHandle), 0x18)(M<SInt32 *>(self + kIOATIR500GLContext_clientHandle));
     M<UInt32>(self + kIOATIR500GLContext_clientHandle) = 0;
   }

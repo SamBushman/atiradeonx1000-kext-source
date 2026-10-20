@@ -35,8 +35,8 @@ IOReturn IOATIR500GLContext::reclaim_resources() {
   UInt8 *buffer;
   UInt32 pooledCount;
   UInt8 *accel;
-  SInt32 iVar3;
   UInt8 *nextBuffer;
+  SInt32 accelAddr;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5c8) = 0x20000;
@@ -67,19 +67,19 @@ IOReturn IOATIR500GLContext::reclaim_resources() {
       ((IOATIR500Accelerator *)(accel))->freeOneDataBuffer((VendorTextureBuffer *)(buffer));
     }
   }
-  iVar3 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
+  accelAddr = M<SInt32>(self + kIOATIR500GLContext_accelerator);
   M<UInt32>(self + kIOATIR500GLContext_dataBufferCount) = 0;
   M<UInt32>(self + kIOATIR500GLContext_dataBufferListHead) = 0;
   M<UInt32>(self + kIOATIR500GLContext_dataBufferListTail) = 0;
-  pooledCount = M<UInt32>(iVar3 + kIOATIR500Accelerator_dataBufferCacheCount);
+  pooledCount = M<UInt32>(accelAddr + kIOATIR500Accelerator_dataBufferCacheCount);
   while (0xf < pooledCount) {
-    nextBuffer = M<UInt8 *>(iVar3 + kIOATIR500Accelerator_dataBufferCacheHead);
-    M<UInt32>(iVar3 + kIOATIR500Accelerator_dataBufferCacheHead) = M<UInt32>(nextBuffer + 0x3c);
+    nextBuffer = M<UInt8 *>(accelAddr + kIOATIR500Accelerator_dataBufferCacheHead);
+    M<UInt32>(accelAddr + kIOATIR500Accelerator_dataBufferCacheHead) = M<UInt32>(nextBuffer + 0x3c);
     M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5d4) + -1;
     ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->freeOneDataBuffer((VendorTextureBuffer *)(nextBuffer));
-    iVar3 = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-    pooledCount = M<UInt32>(iVar3 + kIOATIR500Accelerator_dataBufferCacheCount);
+    accelAddr = M<SInt32>(self + kIOATIR500GLContext_accelerator);
+    pooledCount = M<UInt32>(accelAddr + kIOATIR500Accelerator_dataBufferCacheCount);
   }
-  GH_IOLockUnlock(M<UInt32>(iVar3 + kIOATIR500Accelerator_commandLock));
+  GH_IOLockUnlock(M<UInt32>(accelAddr + kIOATIR500Accelerator_commandLock));
   return 0;
 }

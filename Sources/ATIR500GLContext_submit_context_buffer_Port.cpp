@@ -30,125 +30,133 @@
 void ATIR500GLContext::submit_context_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  UInt32 *puVar2;
-  SInt32 iVar3;
-  UInt8 *pVVar4;
-  UInt32 *puVar5;
-  UInt32 uVar6;
-  UInt32 *puVar7;
-  UInt32 uVar8;
-  UInt32 uVar9;
-  UInt32 uVar10;
-  UInt32 uVar11;
-  UInt32 uVar12;
-  UInt32 *puVar13;
   SInt32 *accelerator;
-  UInt8 *pAVar15;
-  SInt32 iVar16;
-  UInt8 *pAVar17;
-  UInt32 uVar18;
+  UInt8 *slotCursor;
+  UInt8 *ringEntry;
+  SInt32 waited;
+  SInt32 copyByteOffset;
+  SInt32 wordsWritten;
+  SInt32 endIndex;
+  UInt32 copyTempA;
+  UInt32 copyTempB;
+  UInt32 copyTempC;
+  UInt32 submitStamp;
+  UInt32 regWordCount;
+  UInt32 slotIndex;
+  UInt32 regsLeft;
+  UInt32 wordCount;
+  UInt32 ringIndex;
+  UInt32 paddedWords;
+  UInt8 *texture;
+  UInt32 *headerForCopy;
+  UInt32 *headerForRegs;
+  UInt32 *destHeader;
+  UInt32 *commandWords;
+  SInt32 waitTotal;
+  bool notLastSlot;
+  UInt32 unpaddedWords;
+  UInt8 *writeCursor;
   
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 0;
-  pAVar15 = self;
+  slotCursor = self;
   do {
-    pVVar4 = M<UInt8 *>(pAVar15 + 0x2a4);
-    if (pVVar4 != (UInt8 *)0x0) {
-      if (M<char>(M<SInt32>(pVVar4 + 0x14) + 0x14) != '\0') {
-        this->alloc_and_load_texture((VendorTextureBuffer *)(pVVar4));
+    texture = M<UInt8 *>(slotCursor + 0x2a4);
+    if (texture != (UInt8 *)0x0) {
+      if (M<char>(M<SInt32>(texture + 0x14) + 0x14) != '\0') {
+        this->alloc_and_load_texture((VendorTextureBuffer *)(texture));
         VCALL(M<SInt32>(self), 0x5a4)(self);
-        pVVar4 = M<UInt8 *>(pAVar15 + 0x2a4);
+        texture = M<UInt8 *>(slotCursor + 0x2a4);
       }
-      if (M<SInt32>(pVVar4 + 0x48) != 0) {
-        M<UInt32>(M<SInt32>(pVVar4 + 0x24) + 0x28) = M<UInt32>(pVVar4 + 0x28);
-        M<UInt32>(M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x28) + 0x24) =
-             M<UInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x24);
-        M<UInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x24) =
+      if (M<SInt32>(texture + 0x48) != 0) {
+        M<UInt32>(M<SInt32>(texture + 0x24) + 0x28) = M<UInt32>(texture + 0x28);
+        M<UInt32>(M<SInt32>(M<SInt32>(slotCursor + 0x2a4) + 0x28) + 0x24) =
+             M<UInt32>(M<SInt32>(slotCursor + 0x2a4) + 0x24);
+        M<UInt32>(M<SInt32>(slotCursor + 0x2a4) + 0x24) =
              M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600);
-        M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x28) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5dc;
-        M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600) = M<UInt32>(pAVar15 + 0x2a4);
-        M<SInt32>(M<SInt32>(M<SInt32>(pAVar15 + 0x2a4) + 0x24) + 0x28) = M<SInt32>(pAVar15 + 0x2a4);
+        M<SInt32>(M<SInt32>(slotCursor + 0x2a4) + 0x28) = M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x5dc;
+        M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x600) = M<UInt32>(slotCursor + 0x2a4);
+        M<SInt32>(M<SInt32>(M<SInt32>(slotCursor + 0x2a4) + 0x24) + 0x28) = M<SInt32>(slotCursor + 0x2a4);
       }
     }
-    pAVar15 = pAVar15 + 4;
-  } while (self + 0xa8 != pAVar15);
+    slotCursor = slotCursor + 4;
+  } while (self + 0xa8 != slotCursor);
   if ((M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) & 1) == 0) {
-    pAVar15 = self + M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) * 0x18;
+    ringEntry = self + M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) * 0x18;
   }
   else {
     accelerator = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
-    uVar12 = M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) + 1U & 0xf;
-    M<UInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) = uVar12;
-    pAVar15 = self + uVar12 * 0x18;
-    iVar16 = accelerator[0x1e0];
-    iVar3 = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(pAVar15 + 0x11c));
-    accelerator[0x1e0] = iVar16 + iVar3;
-    puVar2 = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
-    puVar7 = M<UInt32 *>(pAVar15 + 0x120);
-    uVar9 = puVar2[1];
-    uVar8 = puVar2[2];
-    uVar6 = puVar2[3];
-    *puVar7 = *puVar2;
-    puVar7[1] = uVar9;
-    puVar7[2] = uVar8;
-    puVar7[3] = uVar6;
-    uVar9 = puVar2[4];
-    uVar8 = puVar2[5];
-    uVar6 = puVar2[6];
-    puVar7[7] = puVar2[7];
-    puVar7[4] = uVar9;
-    puVar7[5] = uVar8;
-    puVar7[6] = uVar6;
-    puVar5 = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
-    uVar10 = puVar5[5];
-    puVar13 = (UInt32 *)(M<SInt32>(pAVar15 + 0x120) + 0x20);
-    uVar18 = 0;
-    if (uVar10 != 0) {
-      iVar3 = 0;
-      uVar18 = uVar10;
+    ringIndex = M<SInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) + 1U & 0xf;
+    M<UInt32>(self + kIOATIR500GLContext_contextBufferRingIndex) = ringIndex;
+    ringEntry = self + ringIndex * 0x18;
+    waitTotal = accelerator[0x1e0];
+    waited = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(ringEntry + 0x11c));
+    accelerator[0x1e0] = waitTotal + waited;
+    headerForCopy = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
+    destHeader = M<UInt32 *>(ringEntry + 0x120);
+    copyTempA = headerForCopy[1];
+    copyTempB = headerForCopy[2];
+    copyTempC = headerForCopy[3];
+    *destHeader = *headerForCopy;
+    destHeader[1] = copyTempA;
+    destHeader[2] = copyTempB;
+    destHeader[3] = copyTempC;
+    copyTempA = headerForCopy[4];
+    copyTempB = headerForCopy[5];
+    copyTempC = headerForCopy[6];
+    destHeader[7] = headerForCopy[7];
+    destHeader[4] = copyTempA;
+    destHeader[5] = copyTempB;
+    destHeader[6] = copyTempC;
+    headerForRegs = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
+    regWordCount = headerForRegs[5];
+    commandWords = (UInt32 *)(M<SInt32>(ringEntry + 0x120) + 0x20);
+    regsLeft = 0;
+    if (regWordCount != 0) {
+      copyByteOffset = 0;
+      regsLeft = regWordCount;
       do {
-        M<UInt32>((SInt32)puVar13 + iVar3) = M<UInt32>((SInt32)puVar5 + iVar3 + 0x20);
-        iVar3 = iVar3 + 4;
-        uVar18 = uVar18 - 1;
-      } while (uVar18 != 0);
-      puVar5 = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
-      uVar18 = uVar10;
+        M<UInt32>((SInt32)commandWords + copyByteOffset) = M<UInt32>((SInt32)headerForRegs + copyByteOffset + 0x20);
+        copyByteOffset = copyByteOffset + 4;
+        regsLeft = regsLeft - 1;
+      } while (regsLeft != 0);
+      headerForRegs = M<UInt32 *>(self + kIOATIR500GLContext_contextBufferHeader);
+      regsLeft = regWordCount;
     }
-    uVar10 = 0;
-    uVar18 = this->write_kernel_context_buffer_regs((UInt32 *)(puVar13),uVar18,*puVar5,puVar5[1]);
-    pAVar17 = self;
+    slotIndex = 0;
+    wordCount = this->write_kernel_context_buffer_regs((UInt32 *)(commandWords),regsLeft,*headerForRegs,headerForRegs[1]);
+    writeCursor = self;
     do {
-      if (M<UInt8 *>(pAVar17 + 0x2a4) != (UInt8 *)0x0) {
-        iVar3 = this->WriteTextureOffset(uVar10,(UInt32 *)(puVar13),uVar18,
-                                   (VendorTextureBuffer *)(M<UInt8 *>(pAVar17 + 0x2a4)));
-        uVar18 = uVar18 + iVar3;
+      if (M<UInt8 *>(writeCursor + 0x2a4) != (UInt8 *)0x0) {
+        wordsWritten = this->WriteTextureOffset(slotIndex,(UInt32 *)(commandWords),wordCount,
+                                   (VendorTextureBuffer *)(M<UInt8 *>(writeCursor + 0x2a4)));
+        wordCount = wordCount + wordsWritten;
       }
-      bVar1 = uVar10 != 0xf;
-      pAVar17 = pAVar17 + 4;
-      uVar10 = uVar10 + 1;
-    } while (bVar1);
-    iVar3 = this->WriteVertexArrayOffset((UInt32 *)(puVar13),uVar18);
-    iVar3 = uVar18 + iVar3;
-    puVar13[iVar3] = 0x1040;
-    uVar11 = iVar3 + 2;
-    puVar13[iVar3 + 1] = 0;
-    uVar12 = uVar11;
-    if ((uVar11 & 1) != 0) {
-      uVar12 = iVar3 + 3;
-      puVar13[uVar11] = 0x80000000;
+      notLastSlot = slotIndex != 0xf;
+      writeCursor = writeCursor + 4;
+      slotIndex = slotIndex + 1;
+    } while (notLastSlot);
+    endIndex = this->WriteVertexArrayOffset((UInt32 *)(commandWords),wordCount);
+    endIndex = wordCount + endIndex;
+    commandWords[endIndex] = 0x1040;
+    unpaddedWords = endIndex + 2;
+    commandWords[endIndex + 1] = 0;
+    paddedWords = unpaddedWords;
+    if ((unpaddedWords & 1) != 0) {
+      paddedWords = endIndex + 3;
+      commandWords[unpaddedWords] = 0x80000000;
     }
-    M<UInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14) = uVar12;
+    M<UInt32>(M<SInt32>(ringEntry + 0x120) + 0x14) = paddedWords;
     M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_contextBufferHeader) + 0x1c) & 0xfffffffe
     ;
   }
-  if (M<SInt32>(pAVar15 + 0x110) == 0) {
-    ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(pAVar15 + 0x10c)));
+  if (M<SInt32>(ringEntry + 0x110) == 0) {
+    ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(ringEntry + 0x10c)));
   }
   M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) =
-       M<SInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
-  uVar6 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(pAVar15 + 0x120) + 0x20),
-                     M<SInt32>(pAVar15 + 0x110) + 0x20,M<UInt32>(M<SInt32>(pAVar15 + 0x120) + 0x14));
-  M<UInt32>(pAVar15 + 0x11c) = uVar6;
-  M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp) = uVar6;
+       M<SInt32>(M<SInt32>(ringEntry + 0x120) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+  submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(ringEntry + 0x120) + 0x20),
+                     M<SInt32>(ringEntry + 0x110) + 0x20,M<UInt32>(M<SInt32>(ringEntry + 0x120) + 0x14));
+  M<UInt32>(ringEntry + 0x11c) = submitStamp;
+  M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp) = submitStamp;
   return;
 }

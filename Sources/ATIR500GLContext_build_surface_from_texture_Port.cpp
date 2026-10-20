@@ -32,17 +32,18 @@ void ATIR500GLContext::build_surface_from_texture(VendorTextureBuffer *texture, 
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
     UInt8 *surfaceBufferBytes = reinterpret_cast<UInt8 *>(surfaceBuffer);
 
-  UInt8 bVar1;
-  UInt8 AVar2;
-  UInt32 uVar3;
   SInt32 formatByteOffset;
-  UInt32 uVar5;
-  UInt32 uVar6;
-  UInt16 uVar7;
-  SInt32 iVar8;
   UInt32 in_register_00000020;
-  UInt32 uVar9;
-  UInt32 uVar10;
+  UInt8 tileBits;
+  UInt8 tilingMode;
+  UInt32 textureWord4c;
+  UInt32 textureWord40;
+  UInt32 textureWord44;
+  UInt32 formatInfo;
+  UInt32 bytesPerPixelMasked;
+  UInt32 bytesPerPixel;
+  UInt16 bytesPerPixel16;
+  SInt32 blockRows;
   
   surfaceBufferBytes[0x3c] = 0x0;
   surfaceBufferBytes[0x37] = 0xff;
@@ -78,40 +79,40 @@ void ATIR500GLContext::build_surface_from_texture(VendorTextureBuffer *texture, 
   else {
     M<UInt32>(surfaceBufferBytes + 8) = baseOffset + M<SInt32>(textureBytes + 0x48);
   }
-  uVar3 = M<UInt32>(textureBytes + 0x4c);
-  uVar5 = M<UInt32>(textureBytes + 0x40);
-  uVar9 = M<UInt32>(textureBytes + 0x44);
+  textureWord4c = M<UInt32>(textureBytes + 0x4c);
+  textureWord40 = M<UInt32>(textureBytes + 0x40);
+  textureWord44 = M<UInt32>(textureBytes + 0x44);
   M<UInt16>(surfaceBufferBytes + 0x18) = pitch;
   surfaceBufferBytes[0x3a] = formatIndex;
-  M<UInt32>(surfaceBufferBytes + 0xc) = uVar3;
-  M<UInt32>(surfaceBufferBytes) = uVar5;
-  M<UInt32>(surfaceBufferBytes + 4) = uVar9;
+  M<UInt32>(surfaceBufferBytes + 0xc) = textureWord4c;
+  M<UInt32>(surfaceBufferBytes) = textureWord40;
+  M<UInt32>(surfaceBufferBytes + 4) = textureWord44;
   formatByteOffset = ((UInt32)formatIndex) * 0x1c;
-  bVar1 = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 2;
-  AVar2 = (bVar1 & 7);
-  surfaceBufferBytes[0x38] = AVar2;
-  if ((UInt8)AVar2 < 2) {
-    uVar10 = FormatTableLookup_0x0004d2dc(formatByteOffset);
-    iVar8 = 1;
+  tileBits = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 2;
+  tilingMode = (tileBits & 7);
+  surfaceBufferBytes[0x38] = tilingMode;
+  if ((UInt8)tilingMode < 2) {
+    formatInfo = FormatTableLookup_0x0004d2dc(formatByteOffset);
+    blockRows = 1;
   }
   else {
-    uVar10 = FormatTableLookup_0x0004d2dc(formatByteOffset);
-    iVar8 = 1 << (uVar10 >> 8 & 3);
+    formatInfo = FormatTableLookup_0x0004d2dc(formatByteOffset);
+    blockRows = 1 << (formatInfo >> 8 & 3);
   }
-  if (((UInt32)M<UInt16>(surfaceBufferBytes + 0x18) < (UInt32)((0x20 >> (uVar10 >> 8 & 3)) << 3)) ||
-     ((UInt32)M<UInt16>(surfaceBufferBytes + 0x1e) < (UInt32)(iVar8 << 3))) {
-    surfaceBufferBytes[0x38] = (bVar1 & 6);
-    uVar10 = FormatTableLookup_0x0004d2dc(formatByteOffset);
+  if (((UInt32)M<UInt16>(surfaceBufferBytes + 0x18) < (UInt32)((0x20 >> (formatInfo >> 8 & 3)) << 3)) ||
+     ((UInt32)M<UInt16>(surfaceBufferBytes + 0x1e) < (UInt32)(blockRows << 3))) {
+    surfaceBufferBytes[0x38] = (tileBits & 6);
+    formatInfo = FormatTableLookup_0x0004d2dc(formatByteOffset);
   }
-  uVar6 = 1 << (uVar10 >> 0xc & 7);
-  uVar10 = uVar6 & 0xffff;
-  uVar7 = (UInt16)uVar6;
-  M<UInt16>(surfaceBufferBytes + 0x16) = uVar7;
-  if (uVar10 == 0) {
-    M<UInt16>(surfaceBufferBytes + 0x14) = uVar7;
+  bytesPerPixel = 1 << (formatInfo >> 0xc & 7);
+  bytesPerPixelMasked = bytesPerPixel & 0xffff;
+  bytesPerPixel16 = (UInt16)bytesPerPixel;
+  M<UInt16>(surfaceBufferBytes + 0x16) = bytesPerPixel16;
+  if (bytesPerPixelMasked == 0) {
+    M<UInt16>(surfaceBufferBytes + 0x14) = bytesPerPixel16;
   }
   else {
-    M<SInt16>(surfaceBufferBytes + 0x14) = (SInt16)(M<UInt16>(surfaceBufferBytes + 0x18) / uVar10);
+    M<SInt16>(surfaceBufferBytes + 0x14) = (SInt16)(M<UInt16>(surfaceBufferBytes + 0x18) / bytesPerPixelMasked);
   }
   M<UInt32>(surfaceBufferBytes + 0x28) = M<UInt32>(textureBytes + 0x6c);
   surfaceBufferBytes[0x34] = SUB21(M<UInt16>(textureBytes + 0x7a),0);

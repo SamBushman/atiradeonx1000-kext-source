@@ -32,9 +32,10 @@ UInt32 ATIR500GLContext::WriteTextureOffset(UInt32 unit, UInt32*outputBuffer, UI
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   UInt8 formatBits;
-  UInt32 uVar2;
   SInt32 nextIndex;
   UInt32 packedOffset;
+  UInt32 textureOffset;
+  UInt32 sizeWord;
   
   while (textureBytes[0x20] == 0x1) {
     textureBytes = M<UInt8 *>(textureBytes + 0x50);
@@ -43,19 +44,19 @@ UInt32 ATIR500GLContext::WriteTextureOffset(UInt32 unit, UInt32*outputBuffer, UI
     }
   }
   formatBits = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15);
-  uVar2 = this->GetTextureOffset((VendorTextureBuffer *)(textureBytes),false);
-  packedOffset = formatBits & 0x1f | uVar2 & 0xffffffe0;
+  textureOffset = this->GetTextureOffset((VendorTextureBuffer *)(textureBytes),false);
+  packedOffset = formatBits & 0x1f | textureOffset & 0xffffffe0;
   outputBuffer[index] = unit + 0x1150;
   nextIndex = index + 2;
   outputBuffer[index + 1] = packedOffset;
-  uVar2 = M<UInt32>(textureBytes + 0x68);
-  if ((uVar2 & 0xc0000000) == 0) {
+  sizeWord = M<UInt32>(textureBytes + 0x68);
+  if ((sizeWord & 0xc0000000) == 0) {
     outputBuffer[nextIndex] = 0x80000000;
     return 3;
   }
   if (unit < 8) {
     outputBuffer[nextIndex] = unit + 0x1158;
-    outputBuffer[index + 3] = packedOffset + (uVar2 & 0x3fffff) * 0x20;
+    outputBuffer[index + 3] = packedOffset + (sizeWord & 0x3fffff) * 0x20;
     return 4;
   }
   outputBuffer[nextIndex] = 0xc0001000;

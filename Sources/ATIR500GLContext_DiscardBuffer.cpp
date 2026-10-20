@@ -26,13 +26,10 @@
 void ATIR500GLContext::discard_command_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  SInt32 iVar2;
   SInt32 *useCount;
   UInt32 opcode;
   UInt32 newTexture;
   UInt32 mode;
-  SInt32 *piVar5;
   UInt8 *shared;
   UInt8 *boundTexture;
   SInt32 texture;
@@ -41,18 +38,21 @@ void ATIR500GLContext::discard_command_buffer() {
   SInt32 oldCount;
   SInt32 slotTableOffset;
   UInt32 handle;
-  SInt32 iVar11;
   UInt32 packetWords;
-  UInt32 uVar13;
   SInt32 slotOffset;
   UInt32 header;
   UInt32 *packet;
   UInt8 *slotCursor;
   char in_RESERVE;
   UInt8 in_cr0;
-  UInt8 bVar18;
   SInt32 textures [22];
   SInt32 slot;
+  bool flag80Clear;
+  SInt32 *refCountWord;
+  SInt32 oldRefCount;
+  SInt32 slotTexture;
+  UInt32 packetWord4;
+  UInt8 crEqualBits;
   
   packet = (UInt32 *)(M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x1c);
   do {
@@ -139,9 +139,9 @@ LAB_00027ab0:
                 M<UInt16>(self + kIOATIR500GLContext_colorBufferIndex) = 9;
               }
               packetWords = header & 0xffffff;
-              bVar1 = (M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) & 0x80) == 0;
-              in_cr0 = bVar1 << 1;
-              if (!bVar1) {
+              flag80Clear = (M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) & 0x80) == 0;
+              in_cr0 = flag80Clear << 1;
+              if (!flag80Clear) {
                 mode = packet[1];
                 if ((mode == 7) || (mode == 8)) {
                   packetWords = header & 0xffffff;
@@ -155,7 +155,7 @@ LAB_00027ab0:
             }
             if (0x29000000 < opcode) {
               if (opcode == 0x3a000000) {
-                bVar18 = (packet[1] == 0) << 1;
+                crEqualBits = (packet[1] == 0) << 1;
                 slotCursor = self;
                 do {
                   boundTexture = M<UInt8 *>(slotCursor + 0x2e4);
@@ -167,7 +167,7 @@ LAB_00027ab0:
                     }
                     M<UInt32>(slotCursor + 0x2e4) = 0;
                   }
-                } while ((!(bool)(bVar18 >> 1 & 1)) &&
+                } while ((!(bool)(crEqualBits >> 1 & 1)) &&
                         (slotCursor = slotCursor + 4, slotCursor != self + 0x44));
               }
               else if (opcode < 0x3a000001) {
@@ -186,11 +186,11 @@ LAB_00027ab0:
                 }
                 if (opcode == 0x39000000) {
                   opcode = packet[1];
-                  uVar13 = packet[4];
+                  packetWord4 = packet[4];
                   if (packet[2] == 0) {
                     opcode = 1;
                   }
-                  bVar18 = (packet[3] == 0) << 1;
+                  crEqualBits = (packet[3] == 0) << 1;
                   if (packet[3] != 0) {
                     opcode = opcode + 1;
                   }
@@ -201,7 +201,7 @@ LAB_00027ab0:
                   slotOffset = 0;
                   useCount = textures;
                   do {
-                    if ((!(bool)(bVar18 >> 1 & 1)) && (packetWords == opcode - 1)) {
+                    if ((!(bool)(crEqualBits >> 1 & 1)) && (packetWords == opcode - 1)) {
                       slot = 0x20;
                     }
                     shared = M<UInt8 *>(self + kIOATIR500GLContext_clientHandle);
@@ -213,26 +213,26 @@ LAB_00027ab0:
                     slotTableOffset = slot * 4;
                     boundTexture = M<UInt8 *>(self + slotTableOffset + 0x2a4);
                     if (boundTexture != (UInt8 *)0x0) {
-                      piVar5 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
-                      iVar11 = atomicAddReturningOld((SInt32 *)piVar5, -1);
-                      if (iVar11 == 1) {
+                      refCountWord = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
+                      oldRefCount = atomicAddReturningOld((SInt32 *)refCountWord, -1);
+                      if (oldRefCount == 1) {
                         ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)boundTexture);
                       }
                       M<UInt32>(self + slotTableOffset + 0x2a4) = 0;
                     }
                     if (((slot == 0x20) &&
-                        (iVar11 = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures), M<char>(iVar11 + 0x20) == '\a'
-                        )) && (uVar13 != M<UInt32>(iVar11 + 100))) {
-                      M<UInt32>(iVar11 + 100) = uVar13;
+                        (slotTexture = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures), M<char>(slotTexture + 0x20) == '\a'
+                        )) && (packetWord4 != M<UInt32>(slotTexture + 100))) {
+                      M<UInt32>(slotTexture + 100) = packetWord4;
                       M<UInt8>(M<SInt32>(M<SInt32>(slotOffset + (SInt32)(unsigned long)textures) + 0x14) + 0x14) = 1;
                     }
-                    iVar11 = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures);
-                    piVar5 = (SInt32 *)(M<SInt32>(iVar11 + 0x14) + 0x10);
-                    atomicAddReturningOld((SInt32 *)piVar5, -0xffff);
+                    slotTexture = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures);
+                    refCountWord = (SInt32 *)(M<SInt32>(slotTexture + 0x14) + 0x10);
+                    atomicAddReturningOld((SInt32 *)refCountWord, -0xffff);
                     packetWords = packetWords + 1;
                     useCount = useCount + 1;
                     slot = slot + 1;
-                    M<SInt32>(self + slotTableOffset + 0x2a4) = iVar11;
+                    M<SInt32>(self + slotTableOffset + 0x2a4) = slotTexture;
                     slotOffset = slotOffset + 4;
                   } while (opcode != packetWords);
                 }

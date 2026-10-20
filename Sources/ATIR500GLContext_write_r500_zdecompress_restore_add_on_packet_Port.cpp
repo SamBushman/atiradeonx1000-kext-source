@@ -31,51 +31,51 @@ void ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet(r500_zdecomp
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *packetBytes = reinterpret_cast<UInt8 *>(packet);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
-  UInt32 uVar3;
-  SInt32 iVar4;
-  UInt32 uVar5;
   UInt8 *depthBuffer;
+  SInt32 hzAlignment;
+  SInt32 alignedPitch;
+  UInt32 depthPitch;
+  UInt32 hzBlockOffset;
+  UInt32 samplePitch;
   
   depthBuffer = self + kATIR500GLContext_textureDepthBuffer;
   if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
     depthBuffer = *(UInt8 **)
               ((UInt32)M<UInt16>(self + kIOATIR500GLContext_depthBufferIndex) * 4 + M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xb70);
   }
-  uVar5 = 0;
+  samplePitch = 0;
   M<UInt32>(packetBytes + 4) = -((UInt8)depthBuffer[0x3a] ^ 0x10) >> 0x1e & 2;
   M<UInt32>(packetBytes + 0xc) = M<UInt32>(depthBuffer + 8);
   if ((M<UInt32>(depthBuffer + 0x3c) & 0xf00000) != 0) {
-    uVar5 = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
+    samplePitch = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
   }
-  uVar2 = 0x20 / M<UInt16>(depthBuffer + 0x16);
-  if (0x20 / M<UInt16>(depthBuffer + 0x16) <= uVar5) {
-    uVar2 = uVar5;
+  depthPitch = 0x20 / M<UInt16>(depthBuffer + 0x16);
+  if (0x20 / M<UInt16>(depthBuffer + 0x16) <= samplePitch) {
+    depthPitch = samplePitch;
   }
-  uVar5 = 0;
+  samplePitch = 0;
   M<UInt32>(packetBytes + 0x10) =
        ((UInt8)depthBuffer[0x38] & 6) << 0x10 |
-       ((UInt8)depthBuffer[0x38] & 1) << 0x10 | ((UInt8)depthBuffer[0x39] & 3) << 0x13 | uVar2 & 0x3ffc;
+       ((UInt8)depthBuffer[0x38] & 1) << 0x10 | ((UInt8)depthBuffer[0x39] & 3) << 0x13 | depthPitch & 0x3ffc;
   if ((M<UInt32>(depthBuffer + 0x3c) & 0xf00000) != 0) {
-    uVar5 = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
+    samplePitch = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
   }
-  uVar2 = 0x20 / M<UInt16>(depthBuffer + 0x16);
-  if (0x20 / M<UInt16>(depthBuffer + 0x16) <= uVar5) {
-    uVar2 = uVar5;
+  depthPitch = 0x20 / M<UInt16>(depthBuffer + 0x16);
+  if (0x20 / M<UInt16>(depthBuffer + 0x16) <= samplePitch) {
+    depthPitch = samplePitch;
   }
-  iVar1 = 0x20;
+  hzAlignment = 0x20;
   if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) != 4) {
-    iVar1 = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) << 4;
-    iVar4 = 0;
-    if (iVar1 == 0) goto LAB_0002888c;
+    hzAlignment = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) << 4;
+    alignedPitch = 0;
+    if (hzAlignment == 0) goto LAB_0002888c;
   }
-  iVar4 = iVar1 * ((SInt32)(uVar2 + iVar1 + -1) / iVar1);
+  alignedPitch = hzAlignment * ((SInt32)(depthPitch + hzAlignment + -1) / hzAlignment);
 LAB_0002888c:
-  M<SInt32>(packetBytes + 0x18) = iVar4;
-  uVar3 = HZMEM_GetBlockOffset
+  M<SInt32>(packetBytes + 0x18) = alignedPitch;
+  hzBlockOffset = HZMEM_GetBlockOffset
                     ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),M<UInt32>(depthBuffer + 0x28),0);
-  M<UInt32>(packetBytes + 0x20) = uVar3;
+  M<UInt32>(packetBytes + 0x20) = hzBlockOffset;
   M<UInt32>(packetBytes + 0x28) = M<UInt32>(depthBuffer + 0x2c);
   return;
 }

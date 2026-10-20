@@ -41,7 +41,6 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
 
   bool recordSwapStamp;
   unsigned int neededMask;
-  int iVar3;
   unsigned int presentNeeded;
   int dataNode;
   int waitedCount;
@@ -60,15 +59,11 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   int newGartOffset;
   int newHeader;
   int oldRegionSize;
+  int allocStatus;
+  int pageSize;
   UInt32 surfaceBits;   /* the shipped code passes convert_surface_bits' whole result on (no byte truncation) */
-  int *piVar5;
-  UInt32 uVar6;
-  unsigned int uVar8;
   unsigned int swapArg;
   unsigned int allocatedMask;
-  int iVar9;
-  int iVar10;
-  unsigned int uVar11;
   unsigned int swapRequest;
   unsigned int flipPanel;
   unsigned int pendingSubmits;
@@ -76,7 +71,6 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   UInt8 *accel;
   UInt8 *surface;
   UInt8 *textureSlot;
-  unsigned int uVar15;
   unsigned int panel;
   unsigned int retryCount;
   int *ringSlot;
@@ -99,7 +93,7 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   /* one real 7-word VendorCommandBuffer (mirror of the 0x1c-byte slot at self+0xcc/0x90). allocCommandBuffer fills it by address, so it must be ONE contiguous object - seven separate int locals only worked in stock by stack-adjacency luck (same bug class as #164/#160); in our gcc 4.0.1 build they scatter and the alloc result never reached the copy-back (#168) */
   int cmdBufBlock[7];
   
-  iVar3 = GH_page_size;
+  pageSize = GH_page_size;
   switch(type) {
   case 0:
     if (M<int *>(M<int>(self + kIOATIR500GLContext_accelerator) + 0xac) != (int *)0x0) {
@@ -437,8 +431,8 @@ advanceRing:
           cmdBufBlock[2] = 0;
           cmdBufBlock[4] = 0;
           cmdBufBlock[5] = 0;
-          iVar3 = ((IOATIR500Accelerator *)(accel))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold));
-          if (iVar3 == 0) {
+          allocStatus = ((IOATIR500Accelerator *)(accel))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(accel + kIOATIR500Accelerator_cachedBufferSizeThreshold));
+          if (allocStatus == 0) {
             accel = M<UInt8 *>(self + kIOATIR500GLContext_accelerator);
           }
           else {
@@ -489,7 +483,7 @@ advanceRing:
   case 4:
     if (M<int>(self + kIOATIR500GLContext_statusDescriptor) == 0) {
       M<int>(self + kIOATIR500GLContext_statusRegionSize) = GH_page_size;
-      newStatusDescriptor = (int *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,iVar3,GH_page_size);
+      newStatusDescriptor = (int *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,pageSize,GH_page_size);
       M<int *>(self + kIOATIR500GLContext_statusDescriptor) = newStatusDescriptor;
       if (newStatusDescriptor != (int *)0x0) {
         newRegion = VCALL(*newStatusDescriptor, 0x1cc)(newStatusDescriptor);

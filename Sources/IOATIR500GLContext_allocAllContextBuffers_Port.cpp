@@ -31,13 +31,14 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(...) asm("__Z
 bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
   SInt32 *descriptor;
   VendorContextBufferHeader *header;
   UInt32 result;
-  SInt32 iVar5;
   SInt32 bufferIndex;
-  UInt8 *pIVar7;
+  bool moreBuffers;
+  SInt32 releasedCount;
+  UInt8 *entryCursor;
+  UInt8 *unwindCursor;
   
   descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,size,GH_page_size);
   result = 0;
@@ -47,27 +48,27 @@ bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
     header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
     M<VendorContextBufferHeader *>(self + kIOATIR500GLContext_contextBufferHeader) = header;
     this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
-    pIVar7 = self;
+    entryCursor = self;
     do {
       descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x82c) | 0x10023,size,
                                    GH_page_size);
-      M<SInt32 *>(pIVar7 + 0x114) = descriptor;
+      M<SInt32 *>(entryCursor + 0x114) = descriptor;
       if (descriptor == (SInt32 *)0x0) {
         if (-1 < bufferIndex + -1) {
-          iVar5 = 0;
-          pIVar7 = self + (bufferIndex + -1) * 0x18 + 0x114;
+          releasedCount = 0;
+          unwindCursor = self + (bufferIndex + -1) * 0x18 + 0x114;
           do {
-            iVar5 = iVar5 + 1;
-            VCALL(*M<SInt32 *>(pIVar7), 0x18)(M<SInt32 *>(pIVar7));
-            M<UInt32>(pIVar7 + -8) = 0;
-            M<UInt32>(pIVar7 + -4) = 0;
-            M<UInt32>(pIVar7) = 0;
-            M<UInt16>(pIVar7 + 6) = 0;
-            M<UInt16>(pIVar7 + 4) = 0;
-            M<UInt32>(pIVar7 + 8) = 0;
-            M<UInt32>(pIVar7 + 0xc) = 0;
-            pIVar7 = pIVar7 + -0x18;
-          } while (iVar5 != bufferIndex);
+            releasedCount = releasedCount + 1;
+            VCALL(*M<SInt32 *>(unwindCursor), 0x18)(M<SInt32 *>(unwindCursor));
+            M<UInt32>(unwindCursor + -8) = 0;
+            M<UInt32>(unwindCursor + -4) = 0;
+            M<UInt32>(unwindCursor) = 0;
+            M<UInt16>(unwindCursor + 6) = 0;
+            M<UInt16>(unwindCursor + 4) = 0;
+            M<UInt32>(unwindCursor + 8) = 0;
+            M<UInt32>(unwindCursor + 0xc) = 0;
+            unwindCursor = unwindCursor + -0x18;
+          } while (releasedCount != bufferIndex);
         }
         VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR500GLContext_contextBufferDescriptor));
         M<UInt32>(self + kIOATIR500GLContext_contextBufferHeader) = 0;
@@ -80,12 +81,12 @@ bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
         return 0;
       }
       header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
-      M<VendorContextBufferHeader *>(pIVar7 + 0x120) = header;
-      pIVar7 = pIVar7 + 0x18;
+      M<VendorContextBufferHeader *>(entryCursor + 0x120) = header;
+      entryCursor = entryCursor + 0x18;
       this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
-      bVar1 = bufferIndex != 0xf;
+      moreBuffers = bufferIndex != 0xf;
       bufferIndex = bufferIndex + 1;
-    } while (bVar1);
+    } while (moreBuffers);
     result = 1;
   }
   return result;

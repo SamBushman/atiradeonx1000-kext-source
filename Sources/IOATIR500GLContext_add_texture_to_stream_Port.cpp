@@ -33,32 +33,33 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   UInt8 kind;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
   UInt8 *source;
+  int linkedTexture;
+  int textureHeader;
+  int nextNode;
+  int *backingDescriptor;
   
   kind = textureBytes[0x20];
   if (kind == 0x6) {
-    iVar4 = M<int>(textureBytes + 0x54);
-    iVar3 = M<int>(textureBytes + 0x14);
-    M<SInt16>(iVar4 + 0xe) = M<SInt16>(iVar4 + 0xe) + 1;
-    M<UInt8>(iVar3 + 0x14) = M<UInt8>(iVar3 + 0x14) | M<UInt8>(M<int>(iVar4 + 0x14) + 0x14);
-    if (M<int>(iVar4 + 4) != 0) {
-      GH_IOGetTime(iVar4 + 0x2c);
-      iVar3 = M<int>(iVar4 + 0x34);
-      M<UInt32>(iVar3 + 0x38) = M<UInt32>(iVar4 + 0x38);
-      M<int>(M<int>(iVar4 + 0x38) + 0x34) = iVar3;
-      M<UInt32>(iVar4 + 0x34) = M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x6d0);
-      M<int>(iVar4 + 0x38) = M<int>(self + kIOATIR500GLContext_accelerator) + 0x69c;
-      M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = iVar4;
-      M<int>(M<int>(iVar4 + 0x34) + 0x38) = iVar4;
+    linkedTexture = M<int>(textureBytes + 0x54);
+    textureHeader = M<int>(textureBytes + 0x14);
+    M<SInt16>(linkedTexture + 0xe) = M<SInt16>(linkedTexture + 0xe) + 1;
+    M<UInt8>(textureHeader + 0x14) = M<UInt8>(textureHeader + 0x14) | M<UInt8>(M<int>(linkedTexture + 0x14) + 0x14);
+    if (M<int>(linkedTexture + 4) != 0) {
+      GH_IOGetTime(linkedTexture + 0x2c);
+      nextNode = M<int>(linkedTexture + 0x34);
+      M<UInt32>(nextNode + 0x38) = M<UInt32>(linkedTexture + 0x38);
+      M<int>(M<int>(linkedTexture + 0x38) + 0x34) = nextNode;
+      M<UInt32>(linkedTexture + 0x34) = M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x6d0);
+      M<int>(linkedTexture + 0x38) = M<int>(self + kIOATIR500GLContext_accelerator) + 0x69c;
+      M<int>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = linkedTexture;
+      M<int>(M<int>(linkedTexture + 0x34) + 0x38) = linkedTexture;
     }
   }
   else if (kind == 0x0) {
-    piVar2 = M<int *>(textureBytes + 0x50);
-    if (piVar2 != (int *)0x0) {
-      VCALL(*piVar2, 0x5b8)(piVar2,3);
+    backingDescriptor = M<int *>(textureBytes + 0x50);
+    if (backingDescriptor != (int *)0x0) {
+      VCALL(*backingDescriptor, 0x5b8)(backingDescriptor,3);
     }
   }
   else if (kind == 0x1) {

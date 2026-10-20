@@ -13,7 +13,7 @@ RENAMED text). They carry the structural edits that need more than a rename - su
 applied is skipped; one that applies neither way is an error (the re-ported text differs: redo the edit and regenerate the patch).
 
 Table format (tab separated, '#' starts a comment line):
-    #!use-decl: end|beside      (a line of its own in a table, before its `use` rows; default end)
+    #!use-decl: end|beside|end-drop      (a line of its own in a table, before its `use` rows; default end; end-drop = end, and the declaration of an `old` that no code uses any more is deleted)
     kind  target  old  new  tier  evidence  [from  to  [occ]]
   kind    def   rename an identifier inside one function DEFINITION in Sources/*.cpp (signature included)
           decl  rename a parameter name inside one function DECLARATION in Headers/<Class>.h
@@ -284,7 +284,9 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
             if new in have and not declared: errors.append('%s: %s already occurs in the function and is not a variable declared by a use row' % (where, new)); continue
             norm = [line_variants(l, revert) for l in lines]
             decl_i = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
-            if decl_i is None: errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
+            if decl_i is None:
+                if declared: applied += 1; continue          # the declaration of `old` was dropped once nothing used it any more (see below)
+                errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
             decl_end, body0 = decl_block(lines, decl_i)
             if frm in ('', '-'): a = body0
             else:
@@ -319,9 +321,15 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
                 lines[a:b] = seg.split('\n')
             if not declared:
                 m = re.match(DECL_RE % re.escape(old), lines[decl_i])
-                lines.insert(decl_end if dmode == 'end' else decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
+                lines.insert(decl_end if dmode != 'beside' else decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
             scope = '\n'.join(lines)
             pending += 1
+        lines = scope.split('\n')                      # a variable that every `use` row has renamed away loses its (now unused) declaration
+        for old in sorted({r[3] for r in rs if r[8] == 'end-drop'}):
+            di = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
+            if di is not None and not code_idents('\n'.join(lines[:di] + lines[di + 1:]), {old}):
+                del lines[di]
+        scope = '\n'.join(lines)
         files[f] = s[:st] + scope + s[en:]
     return pending, applied
 
@@ -544,7 +552,7 @@ def main():
         for n, l in enumerate(open(t), 1):
             if l.startswith('#!use-decl:'):
                 dmode = l.split(':', 1)[1].strip()
-                if dmode not in ('end', 'beside'): sys.exit('%s:%d: #!use-decl must be end or beside' % (t, n))
+                if dmode not in ('end', 'beside', 'end-drop'): sys.exit('%s:%d: #!use-decl must be end, beside or end-drop' % (t, n))
                 continue
             if l.startswith('#') or not l.strip(): continue
             f = l.rstrip('\n').split('\t')
