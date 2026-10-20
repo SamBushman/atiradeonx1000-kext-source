@@ -32,3 +32,8 @@ Needs a person at the machine: Option-key boot into Sorbet HD (Leopard, do not m
 ## Other things that went wrong this time (harness)
 - `timeout` does not exist on Tiger: a runner using it fails with rc 127 and no output.
 - A wait-loop that greps a results file for `rc=` matched the stale `rc=127` from the previous attempt; clear or use fresh filenames before waiting.
+
+## Result of the Oct 20 run and what the restore leaves behind
+- Medians (us, 3 runs each, `perf_dvd_idct 2000 12`): prelinked stock 4.33 / 5.05 / 12.03; kextd-loaded stock 4.38 / 5.05 / 12.03; rebuilt `06f8492` boot-time 4.44 / 5.06 / 12.05 (1 / 4 / 12 macroblocks). Rebuilt is within 1.4% of the like-for-like (kextd-loaded) stock. No panic; `panic.log` unchanged at 223340 B.
+- After restoring the stock binary and the three cache files (md5 identical to the backup) and rebooting, stock loads through kextd (`0x72e45000`, then `0x6a042000` after a second reboot; size `0x4f000`), NOT from the prelinked kernelcache (`0x541000`) as before the test. The machine is functionally stock (`compare_to_baseline.sh` IDENTICAL) but the load path differs from the pre-test state, which matters only for comparisons that assume the prelinked address. kextd ran `kextcache -Flrc` after boot and did not bring the prelinked image back. Getting the prelinked state back (e.g. regenerating the kernelcache, or restoring /System/Library/Extensions' original mtime) is not done and not needed for any remaining test. The kextd-loaded stock is the right like-for-like control for a kextd-loaded rebuilt driver.
+- Scripts that look for `0x541000` as "stock" should match on size (`0x4f000`) or md5 instead.
