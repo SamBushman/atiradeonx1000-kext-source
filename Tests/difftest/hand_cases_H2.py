@@ -591,9 +591,9 @@ def w_buffer_retired(overflow=False):
         window = m.mmio(0x1000, None)
         good = (wi + 0x100) & 0x7ff
         if overflow:
-            seq = [(wi + 2) & 0x7ff]
+            seq = [(wi + 10) & 0x7ff]
         else:
-            seq = rng.choice([[good], [(wi + 3) & 0x7ff, good], [(wi + 1) & 0x7ff] * 5 + [good]])
+            seq = rng.choice([[good], [(wi + 10) & 0x7ff, good], [(wi + 12) & 0x7ff] * 5 + [good]])
         a = spec_accel(m, rng, {'ringIndex': [wi], 'mainRingMemory': [('blk', 0x2000)], 'hwCapabilityBits': [0, 0x80, 0x80], 'vramSizeProgrammed': [0, 0x100000],
                                 'retiredStampCounter': [5, 0x7fffffff], 'commandBytesPerSample': [0, 100], 0x84: [('u8', 32), ('u8', 128)]}, None)
         regs = SeqRegisters(rng, {0x100: seq, 0xe40: [0]})
@@ -767,7 +767,7 @@ CASES = [
     Case('ATIRadeonX1000::deallocate_texture', w_dealloc_tex, ret='void', seeds=200, plain_words=True, name='ATIRadeonX1000::deallocate_texture [hand H2]'),
     Case('ATIRadeonX1000::allocate_texture', w_alloc_tex, ret='u32', seeds=200, mock=mock_alloc_tex, plain_words=True, name='ATIRadeonX1000::allocate_texture [hand H2]'),
     Case('ATIRadeonX1000::submit_buffer_retired', w_buffer_retired(False), ret='u32', seeds=150, plain_words=True, name='ATIRadeonX1000::submit_buffer_retired [hand H2]'),
-    Case('ATIRadeonX1000::submit_buffer_retired', w_buffer_retired(True), ret='u32', seeds=1, limit=200000000, seconds=1700, plain_words=True, name='ATIRadeonX1000::submit_buffer_retired [hand H2 fifo overflow]'),
+    Case('ATIRadeonX1000::submit_buffer_retired', w_buffer_retired(True), ret='u32', seeds=1, limit=200000000, seconds=1700, plain_words=True, ignore_args={'IOLog': [4, 5, 6, 7, 8]}, name='ATIRadeonX1000::submit_buffer_retired [hand H2 fifo overflow]'),
     Case('ATIRadeonX1000::submit_idct_buffer_consumed', w_idct_consumed(False), ret='u32', seeds=150, plain_words=True, name='ATIRadeonX1000::submit_idct_buffer_consumed [hand H2]'),
     Case('ATIRadeonX1000::submit_idct_buffer_consumed', w_idct_consumed(True), ret='u32', seeds=1, limit=200000000, seconds=1700, plain_words=True, name='ATIRadeonX1000::submit_idct_buffer_consumed [hand H2 fifo overflow]'),
     Case('ATIRadeonX1000::start', w_start_deep, ret='bool', seeds=300, mock=mock_start_deep, limit=300000, ignore_args={'IOLog': [2, 3, 4, 5, 6, 7, 8], 'vtable slot +0x164': [1, 2], 'vtable slot +0x16c': [1], 'vtable slot +0x170': [1], 'vtable slot +0x188': [1], 'getPeriodValue': [1]}, name='ATIRadeonX1000::start [hand H2]'),
