@@ -264,7 +264,7 @@ def decl_block(lines, decl_i):
     return j + 1, k
 
 
-def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_rows=(), def_pairs=()):
+def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_rows=(), def_pairs=(), post_revert=None):
     """-> (pending, applied) for the `use` rows (see the module docstring); edits go into `files`."""
     pending = applied = 0
     groups = {}
@@ -290,6 +290,7 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_row
         for (dc, dm, da, o, nw) in def_pairs:               # a `def` row of the same function renamed the line's identifiers first: an anchor may be written with the old or the new name
             if dc == cls and dm == meth and (not addr or not da or da == addr) and nw not in revert:
                 revert[nw] = [nw, o]                           # either spelling matches: older tables wrote their anchors with the def'd (new) names
+        for nn, oo in (post_revert or {}).get(target, {}).items(): revert.setdefault(nn, []).append(oo)      # a `post` row renamed this identifier after the use rows were applied
         for cname, off in (field_consts or {}).items():     # a `field` row turned `self + 0x238` into `self + k..._name`: anchors are written against the literal (hex or decimal)
             revert[cname] = [hex(off), str(off)]
         for (t, n, _, old, new, frm, to, occ, dmode) in rs:
@@ -562,13 +563,74 @@ def apply_fieldvars(ptr_rows, var_rows, root, read, files, errors, by_off):
     return pending, 0
 
 
+def apply_posts(post_rows, root, read, files, errors):
+    """-> (pending, applied): the `post` rows - whole-function renames made after every other row"""
+    pending = applied = 0
+    groups = {}
+    for (t, n, target, old, new) in post_rows: groups.setdefault(target, []).append((t, n, old, new))
+    for target, rs in groups.items():
+        try:
+            cls, meth, addr, nth = parse_target(target)
+            spans = find_defs(root, cls, meth, addr, read)
+        except Exception as e:
+            errors.append('%s: %s' % (target, e)); continue
+        if len(spans) != 1:
+            errors.append('%s (post): %d matches' % (target, len(spans))); continue
+        f, st, en = spans[0]
+        s = read(f); scope = s[st:en]; have = idents_in(scope)
+        mapping = {}
+        for (t, n, old, new) in rs:
+            if old not in have:
+                if new in have: applied += 1
+                else: errors.append('%s:%d: %s: neither %s nor %s occurs' % (t, n, target, old, new))
+                continue
+            if new in have: errors.append('%s:%d: %s: %s already occurs in the function' % (t, n, target, new)); continue
+            mapping[old] = new
+        if mapping:
+            pending += len(mapping)
+            files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
+    return pending, applied
+
+
+def apply_drops(drop_rows, root, read, files, errors):
+    """-> (pending, applied): remove the declaration of each dropped placeholder; it must not occur anywhere else in the function (the use rows that renamed
+    its last roles have been applied by now). A declaration that is already gone counts as applied."""
+    pending = applied = 0
+    groups = {}
+    for (t, n, target, old) in drop_rows: groups.setdefault(target, []).append((t, n, old))
+    for target, rs in groups.items():
+        try:
+            cls, meth, addr, nth = parse_target(target)
+            spans = find_defs(root, cls, meth, addr, read)
+        except Exception as e:
+            errors.append('%s: %s' % (target, e)); continue
+        if len(spans) != 1:
+            errors.append('%s (drop): %d matches' % (target, len(spans))); continue
+        f, st, en = spans[0]
+        s = read(f); scope = s[st:en]; lines = scope.split('\n')
+        for (t, n, old) in rs:
+            pats = [DECL_RE % re.escape(old), r'^(\s*)((?:[A-Za-z_][\w:<>]*\s+)*[A-Za-z_][\w:<>]*(?:\s*\*+\s*|\s+))%s\s*\[[^\]]*\]\s*;\s*$' % re.escape(old)]
+            di = next((i for i, l in enumerate(lines) if any(re.match(p, l) for p in pats)), None)
+            if di is None:
+                if old in idents_in(scope, comments=False): errors.append('%s:%d: %s: no declaration of %s to drop' % (t, n, target, old))
+                else: applied += 1
+                continue
+            rest = '\n'.join(lines[:di] + lines[di + 1:])
+            if old in idents_in(rest, comments=False):
+                errors.append('%s:%d: %s: %s is still used' % (t, n, target, old)); continue
+            del lines[di]; pending += 1
+        scope = '\n'.join(lines)
+        files[f] = s[:st] + scope + s[en:]
+    return pending, applied
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--check', action='store_true'); ap.add_argument('--no-patch', action='store_true', help='skip the structural patches (rename a patched file, then regenerate its patch with Tools/renames/make_patch.sh)'); ap.add_argument('--no-use', action='store_true', help='ignore the `use` rows (to see the text the anchors of the use rows are matched against)'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
-    rows, use_rows, field_rows, ptr_rows, var_rows, redef_rows, drop_rows = [], [], [], [], [], [], []
+    rows, use_rows, field_rows, ptr_rows, var_rows, redef_rows, drop_rows, post_rows = [], [], [], [], [], [], [], []
     for t in tables:
         dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
         dropunused = False                              # `#!use-drop: yes`: drop the declaration of an `old` that no `use` row leaves in the code
@@ -593,10 +655,15 @@ def main():
             if f[0] == 'fieldvar':                      # fieldvar CLASSES VAR SCOPE TIER EVIDENCE
                 if len(f) < 6 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]): sys.exit('%s:%d: bad fieldvar row (fieldvar CLASSES var scope tier evidence)' % (t, n))
                 var_rows.append((t, n, f[1].split(','), f[2], f[3], f[4])); continue
-            if len(f) < 5 or f[0] not in ('def', 'decl', 'use', 'redef', 'drop') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
-                sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
-            if f[0] == 'drop':                          # drop TARGET OLD - TIER EVIDENCE: remove the declaration of a variable the decompile declared and never used
+            if f[0] == 'post':                          # post TARGET old new tier evidence: rename an identifier of one function AFTER every other row (labels, pseudo registers): the anchors of the other rows may keep spelling the old name
+                if len(f) < 5 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]) or not IDENT.fullmatch(f[3]): sys.exit('%s:%d: bad post row (post TARGET old new tier [evidence])' % (t, n))
+                post_rows.append((t, n, f[1], f[2], f[3])); continue
+            if f[0] == 'drop':                          # drop TARGET OLD TIER EVIDENCE   (or, older form, drop TARGET OLD - TIER EVIDENCE): remove the declaration of a variable no code mentions any more
+                tiers = ('CONFIRMED', 'INFERRED', 'UNKNOWN')
+                if not (len(f) >= 4 and f[3] in tiers) and not (len(f) >= 5 and f[4] in tiers): sys.exit('%s:%d: bad drop row (drop TARGET old tier [evidence])' % (t, n))
                 drop_rows.append((t, n, f[1], f[2])); continue
+            if len(f) < 5 or f[0] not in ('def', 'decl', 'use', 'redef') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
+                sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
             if f[0] == 'use':
                 f += [''] * (9 - len(f))
                 use_rows.append((t, n, f[1], f[2], f[3], f[6], f[7], f[8], dmode + ('!' if dropunused else '')))
@@ -646,7 +713,9 @@ def main():
             try: dc, dm, da, _nth = parse_target(target)
             except Exception: continue
             def_pairs.append((dc, dm, da, old, new))
-    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, redef_rows, def_pairs)
+    post_revert = {}
+    for (t, n, target, old, new) in post_rows: post_revert.setdefault(target, {})[new] = old
+    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, redef_rows, def_pairs, post_revert)
     pending += up; applied += ua
     apply_groups(redef_rows)
     for (t, n, target, old) in drop_rows:
@@ -672,6 +741,10 @@ def main():
         if ptr_rows or var_rows:
             vp, va = apply_fieldvars(ptr_rows, var_rows, a.root, read, files, errors, by_off)
             pending += vp; applied += va
+    pp, pa = apply_posts(post_rows, a.root, read, files, errors)
+    pending += pp; applied += pa
+    dp, da = apply_drops(drop_rows, a.root, read, files, errors)
+    pending += dp; applied += da
     for e in errors: print('ERROR', e, file=sys.stderr)
     if not a.check and not errors:
         for f, s in files.items(): open(f, 'w').write(s)
