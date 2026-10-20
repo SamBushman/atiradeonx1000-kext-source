@@ -74,4 +74,6 @@ One table per phase: pass / divergence (issue #) / not run, with the evidence di
 | 4 display sleep | pass, 3/3 both sides | dsleep |
 | 5 soak 4 h | pass (751 rounds, 14416 s, 0 transients); attempt 1 stopped at 17 min on a monitor re-handshake | soak |
 | 6 T3 27 tests | all ran, no hang/panic; 20 same as Phase S, 7 flagged and all cleared by stock re-runs with the current test binaries (no divergence): see `Tests/destructive/phaseR_oct19_findings.md` | t3/ |
-| 7, 8, 9 | not run yet (9 needs the user's go-ahead) | |
+| 7 harness recheck after the T3 reboots | pass: `compare_to_baseline.sh` and DEEP both IDENTICAL on a fresh stock boot; `diskutil verifyVolume` Tiger HD and Test HD both OK; panic.log unchanged | phase7_normal.txt, phase7_deep.txt |
+| 8 Expose / Dashboard / show-desktop | automated with `Tools/expose_dashboard_test.sh` (synthetic F9/F10/F11/F12, screenshots): same visible behaviour on stock boot and hot-swapped rebuilt, no panic, WindowServer alive, 1080p unchanged. Godot and WindowServer gestures were run in Phase 3. A human look at the screenshots is still the closing check | expose/ |
+| 9 DVD IDCT perf (boot-time install) | NOT RUN: needs the user's explicit go-ahead | |
