@@ -40,6 +40,8 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
   UInt32 result;
   UInt8 *newSurface;
   unsigned int currentModeBits [8];
+  unsigned int bitIndex;
+  unsigned int shiftCount;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   if (surfaceID == 0) {
@@ -91,11 +93,11 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
     M<unsigned int>(newSurface + 0xbe8) = currentModeBits[0];
     if (0 < flagCount) {
       bufferMask = M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask);
-      uVar3 = 0;
+      bitIndex = 0;
       do {
-        uVar2 = uVar3 & 0x3f;
-        uVar3 = uVar3 + 1;
-        bufferMask = bufferMask | 0x400 << uVar2;
+        shiftCount = bitIndex & 0x3f;
+        bitIndex = bitIndex + 1;
+        bufferMask = bufferMask | 0x400 << shiftCount;
         flagCount = flagCount + -1;
       } while (flagCount != 0);
       M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) = bufferMask;

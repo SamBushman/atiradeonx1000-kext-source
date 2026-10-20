@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-17 20:35:18.843392693 -0700
-+++ b/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-17 20:35:18.844796337 -0700
+--- a/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-20 10:04:29.792666804 -0700
++++ b/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-20 10:04:29.793976912 -0700
 @@ -27,6 +27,8 @@
  extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
  
@@ -9,15 +9,15 @@
  /* real addr 0xee60 */
  bool IOATIR500DVDContext::create_shared() {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
-@@ -36,7 +38,10 @@
-   SInt32 initialised;
+@@ -37,7 +39,10 @@
    UInt8 bVar3;
+   UInt8 allocFailedFlag;
    
 -  shared = (UInt8 *)new IOATIR500Shared();   /* real: OSObject::operator new(0x28) + the IOATIR500Shared constructor */
 +  /* gcc 4.0.1 emits no null test after an unconditional `new T()` here; the shipped code tests the allocation before running the constructor (difftest:
 +   * with a failed allocation the rebuilt code ran the constructor on a null pointer). So the allocation is made by hand and tested. */
 +  void *mem = OSObject::operator new(0x28);
 +  shared = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
-   bVar3 = (shared == (UInt8 *)0x0) << 1;
+   allocFailedFlag = (shared == (UInt8 *)0x0) << 1;
    M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator) = shared;
-   if ((bool)(bVar3 >> 1 & 1)) {
+   if ((bool)(allocFailedFlag >> 1 & 1)) {

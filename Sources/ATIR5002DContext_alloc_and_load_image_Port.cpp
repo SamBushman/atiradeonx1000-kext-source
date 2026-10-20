@@ -33,25 +33,27 @@ void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   int iVar1;
+  int prevNode;
+  int allocResult;
   
   if (textureBytes[0x20] == 0x3) {
     if ((M<int>(textureBytes + 4) != 0) ||
        (((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes)),
        M<int>(textureBytes + 4) != 0)) {
       GH_IOGetTime(textureBytes + 0x2c);
-      iVar1 = M<int>(textureBytes + 0x34);
-      M<UInt32>(iVar1 + 0x38) = M<UInt32>(textureBytes + 0x38);
-      M<int>(M<int>(textureBytes + 0x38) + 0x34) = iVar1;
+      prevNode = M<int>(textureBytes + 0x34);
+      M<UInt32>(prevNode + 0x38) = M<UInt32>(textureBytes + 0x38);
+      M<int>(M<int>(textureBytes + 0x38) + 0x34) = prevNode;
       M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0);
       M<int>(textureBytes + 0x38) = M<int>(self + kIOATIR5002DContext_accelerator) + 0x69c;
       M<UInt8 *>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<int>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
     if (((M<int>(textureBytes + 0x48) == 0) &&
-        (iVar1 = VCALL(*M<int *>(self + kIOATIR5002DContext_accelerator), 0x528)(M<int *>(self + kIOATIR5002DContext_accelerator),textureBytes),
-        iVar1 == 0)) &&
-       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR5002DContext_boundSurface)),
-                           (VendorTextureBuffer **)((UInt8 **)(self + kIOATIR5002DContext_lastBoundTexture)),1,(VendorTextureBuffer *)(textureBytes)), iVar1 == 0)) {
+        (allocResult = VCALL(*M<int *>(self + kIOATIR5002DContext_accelerator), 0x528)(M<int *>(self + kIOATIR5002DContext_accelerator),textureBytes),
+        allocResult == 0)) &&
+       (allocResult = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + kIOATIR5002DContext_boundSurface)),
+                           (VendorTextureBuffer **)((UInt8 **)(self + kIOATIR5002DContext_lastBoundTexture)),1,(VendorTextureBuffer *)(textureBytes)), allocResult == 0)) {
       return;
     }
   }
@@ -63,9 +65,9 @@ void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
        (((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes)),
        M<int>(textureBytes + 4) != 0)) {
       GH_IOGetTime(textureBytes + 0x2c);
-      iVar1 = M<int>(textureBytes + 0x34);
-      M<UInt32>(iVar1 + 0x38) = M<UInt32>(textureBytes + 0x38);
-      M<int>(M<int>(textureBytes + 0x38) + 0x34) = iVar1;
+      prevNode = M<int>(textureBytes + 0x34);
+      M<UInt32>(prevNode + 0x38) = M<UInt32>(textureBytes + 0x38);
+      M<int>(M<int>(textureBytes + 0x38) + 0x34) = prevNode;
       M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0);
       M<int>(textureBytes + 0x38) = M<int>(self + kIOATIR5002DContext_accelerator) + 0x69c;
       M<UInt8 *>(M<int>(self + kIOATIR5002DContext_accelerator) + 0x6d0) = textureBytes;

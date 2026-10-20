@@ -37,31 +37,35 @@ IOReturn ATIR500DVDContext::read_regs(UInt32*offsets, UInt32*outValues, UInt32 b
   SInt32 registers;
   UInt32 uVar4;
   UInt32 result;
+  UInt32 actualBytes;
+  UInt32 dwordsLeft;
+  SInt32 accelAddr;
+  SInt32 byteOffset;
   
-  uVar4 = *inOutCount;
+  actualBytes = *inOutCount;
   registers = M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x860);
-  if ((uVar4 == byteCount) && ((uVar4 & 3) == 0)) {
+  if ((actualBytes == byteCount) && ((actualBytes & 3) == 0)) {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
-    iVar2 = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
-    if (M<char>(iVar2 + 0x80) == '\0') {
+    accelAddr = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
+    if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') {
       result = 0xe00002d8;
     }
     else {
-      uVar4 = uVar4 >> 2;
-      if (uVar4 != 0) {
-        iVar2 = 0;
+      dwordsLeft = actualBytes >> 2;
+      if (dwordsLeft != 0) {
+        byteOffset = 0;
         do {
-          registerAddress = (UInt8 *)(registers + (M<UInt32>((SInt32)offsets + iVar2) & 0x1ffc));
-          M<UInt32>((SInt32)outValues + iVar2) =
+          registerAddress = (UInt8 *)(registers + (M<UInt32>((SInt32)offsets + byteOffset) & 0x1ffc));
+          M<UInt32>((SInt32)outValues + byteOffset) =
                loadWordByteReversed(registerAddress);
-          iVar2 = iVar2 + 4;
-          uVar4 = uVar4 - 1;
-        } while (uVar4 != 0);
-        iVar2 = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
+          byteOffset = byteOffset + 4;
+          dwordsLeft = dwordsLeft - 1;
+        } while (dwordsLeft != 0);
+        accelAddr = M<SInt32>(self + kIOATIR500DVDContext_accelerator);
       }
       result = 0;
     }
-    GH_IOLockUnlock(M<UInt32>(iVar2 + 0x840));
+    GH_IOLockUnlock(M<UInt32>(accelAddr + kIOATIR500Accelerator_commandLock));
   }
   else {
     result = 0xe00002c2;

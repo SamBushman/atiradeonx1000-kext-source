@@ -37,14 +37,15 @@ bool IOATIR500DVDContext::create_shared() {
   UInt32 result;
   SInt32 initialised;
   UInt8 bVar3;
+  UInt8 allocFailedFlag;
   
   /* gcc 4.0.1 emits no null test after an unconditional `new T()` here; the shipped code tests the allocation before running the constructor (difftest:
    * with a failed allocation the rebuilt code ran the constructor on a null pointer). So the allocation is made by hand and tested. */
   void *mem = OSObject::operator new(0x28);
   shared = (UInt8 *)(mem ? ::new (mem) IOATIR500Shared() : 0);
-  bVar3 = (shared == (UInt8 *)0x0) << 1;
+  allocFailedFlag = (shared == (UInt8 *)0x0) << 1;
   M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator) = shared;
-  if ((bool)(bVar3 >> 1 & 1)) {
+  if ((bool)(allocFailedFlag >> 1 & 1)) {
     result = 0;
   }
   else {

@@ -38,62 +38,69 @@ void IOATIR500DVDContext::stop(IOService *provider) {
   int iVar3;
   int iVar4;
   UInt8 *pIVar5;
+  int *accelWords;
+  int *mapping;
+  UInt8 *liveContext;
+  UInt8 *slotCursor;
+  int textureRefCount;
+  int accelAddr;
+  int clientNode;
   
   M<UInt32>(self + kIOATIR500DVDContext_started) = 0;
-  piVar2 = M<int *>(self + kIOATIR500DVDContext_accelerator);
-  pIVar5 = (UInt8 *)piVar2[0x1a];
-  if (self == (UInt8 *)piVar2[0x1a]) {
-    piVar2[0x1a] = M<int>(self + kIOATIR500DVDContext_nextLiveContext);
-    piVar2 = M<int *>(self + kIOATIR500DVDContext_accelerator);
-    if ((piVar2[0x1a] == 0) && (piVar2[0x18] == 0)) {
-      VCALL(*piVar2, 0x538)(piVar2);
-      piVar2 = M<int *>(self + kIOATIR500DVDContext_accelerator);
+  accelWords = M<int *>(self + kIOATIR500DVDContext_accelerator);
+  liveContext = (UInt8 *)accelWords[0x1a];
+  if (self == (UInt8 *)accelWords[0x1a]) {
+    accelWords[0x1a] = M<int>(self + kIOATIR500DVDContext_nextLiveContext);
+    accelWords = M<int *>(self + kIOATIR500DVDContext_accelerator);
+    if ((accelWords[0x1a] == 0) && (accelWords[0x18] == 0)) {
+      VCALL(*accelWords, 0x538)(accelWords);
+      accelWords = M<int *>(self + kIOATIR500DVDContext_accelerator);
     }
   }
   else {
     do {
-      previous = pIVar5;
-      pIVar5 = M<UInt8 *>(previous + 0x80);
-      if (pIVar5 == (UInt8 *)0x0) break;
-    } while (self != pIVar5);
+      previous = liveContext;
+      liveContext = M<UInt8 *>(previous + 0x80);
+      if (liveContext == (UInt8 *)0x0) break;
+    } while (self != liveContext);
     M<UInt32>(previous + 0x80) = M<UInt32>(self + kIOATIR500DVDContext_nextLiveContext);
   }
-  piVar2[0x1cf] = piVar2[0x1cf] + -1;
+  accelWords[0x1cf] = accelWords[0x1cf] + -1;
   M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x5c8) = 0x20000;
   if (M<int>(self + kIOATIR500DVDContext_commandBufferDescriptor) != 0) {
-    iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
-    iVar4 = M<int>(iVar3 + 0x60);
-    if (iVar4 == 0) {
-      if (M<int>(iVar3 + 0x68) == 0) goto LAB_0000e548;
+    accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
+    clientNode = M<int>(accelAddr + kIOATIR500Accelerator_liveGLContextListHead);
+    if (clientNode == 0) {
+      if (M<int>(accelAddr + kIOATIR500Accelerator_liveDVDContextListHead) == 0) goto LAB_0000e548;
     }
     else {
       while( true ) {
-        if (M<unsigned int>(iVar3 + 0x5c8) < M<unsigned int>(iVar4 + 0xb0)) {
-          M<unsigned int>(iVar3 + 0x5c8) = M<unsigned int>(iVar4 + 0xb0);
+        if (M<unsigned int>(accelAddr + kIOATIR500Accelerator_cachedBufferSizeThreshold) < M<unsigned int>(clientNode + 0xb0)) {
+          M<unsigned int>(accelAddr + kIOATIR500Accelerator_cachedBufferSizeThreshold) = M<unsigned int>(clientNode + 0xb0);
         }
-        piVar2 = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar4,M<UInt32>(self + kIOATIR500DVDContext_commandBufferDescriptor));
-        if (piVar2 != (int *)0x0) {
-          VCALL(*piVar2, 0x18)(piVar2);
+        mapping = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(clientNode,M<UInt32>(self + kIOATIR500DVDContext_commandBufferDescriptor));
+        if (mapping != (int *)0x0) {
+          VCALL(*mapping, 0x18)(mapping);
         }
-        iVar4 = M<int>(iVar4 + 0x80);
-        if (iVar4 == 0) break;
-        iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
+        clientNode = M<int>(clientNode + 0x80);
+        if (clientNode == 0) break;
+        accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
       }
-      iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
+      accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
     }
-    iVar4 = M<int>(iVar3 + 0x68);
-    if (iVar4 != 0) {
+    clientNode = M<int>(accelAddr + kIOATIR500Accelerator_liveDVDContextListHead);
+    if (clientNode != 0) {
       while( true ) {
-        if (M<unsigned int>(iVar3 + 0x5c8) < 0x80000) {
-          M<UInt32>(iVar3 + 0x5c8) = 0x80000;
+        if (M<unsigned int>(accelAddr + kIOATIR500Accelerator_cachedBufferSizeThreshold) < 0x80000) {
+          M<UInt32>(accelAddr + kIOATIR500Accelerator_cachedBufferSizeThreshold) = 0x80000;
         }
-        piVar2 = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar4,M<UInt32>(self + kIOATIR500DVDContext_commandBufferDescriptor));
-        if (piVar2 != (int *)0x0) {
-          VCALL(*piVar2, 0x18)(piVar2);
+        mapping = (int *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(clientNode,M<UInt32>(self + kIOATIR500DVDContext_commandBufferDescriptor));
+        if (mapping != (int *)0x0) {
+          VCALL(*mapping, 0x18)(mapping);
         }
-        iVar4 = M<int>(iVar4 + 0x80);
-        if (iVar4 == 0) break;
-        iVar3 = M<int>(self + kIOATIR500DVDContext_accelerator);
+        clientNode = M<int>(clientNode + 0x80);
+        if (clientNode == 0) break;
+        accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
       }
     }
   }
@@ -113,17 +120,17 @@ LAB_0000e548:
     M<UInt32>(self + kIOATIR500DVDContext_boundSurface) = 0;
   }
   if (M<int>(self + kIOATIR500DVDContext_sharedAllocator) != 0) {
-    pIVar5 = self;
+    slotCursor = self;
     do {
-      if (M<int>(pIVar5 + 0x104) != 0) {
-        iVar3 = GH_OSDecrementAtomic(M<int>(M<int>(pIVar5 + 0x104) + 0x14) + 0x10);
-        if (iVar3 == 1) {
-          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(pIVar5 + 0x104)));
+      if (M<int>(slotCursor + 0x104) != 0) {
+        textureRefCount = GH_OSDecrementAtomic(M<int>(M<int>(slotCursor + 0x104) + 0x14) + 0x10);
+        if (textureRefCount == 1) {
+          ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(slotCursor + 0x104)));
         }
-        M<UInt32>(pIVar5 + 0x104) = 0;
+        M<UInt32>(slotCursor + 0x104) = 0;
       }
-      pIVar5 = pIVar5 + 4;
-    } while (pIVar5 != self + 0x48);
+      slotCursor = slotCursor + 4;
+    } while (slotCursor != self + 0x48);
     VCALL(*M<int *>(self + kIOATIR500DVDContext_sharedAllocator), 0x18)(M<int *>(self + kIOATIR500DVDContext_sharedAllocator));
     M<UInt32>(self + kIOATIR500DVDContext_sharedAllocator) = 0;
   }

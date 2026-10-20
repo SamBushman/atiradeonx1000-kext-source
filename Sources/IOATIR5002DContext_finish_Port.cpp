@@ -33,33 +33,37 @@ IOReturn IOATIR5002DContext::finish(UInt32 mode) {
   code *pcVar1;
   SInt32 *piVar2;
   SInt32 iVar3;
+  SInt32 currentStamp;
+  SInt32 waited;
+  SInt32 *accelWords;
+  code *waitRoutine;
   
   if (mode == 1) {
-    piVar2 = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
-    iVar3 = piVar2[0x14];
-    pcVar1 = M<code *>(*piVar2 + 0x55c);
+    accelWords = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
+    currentStamp = accelWords[0x14];
+    waitRoutine = M<code *>(*accelWords + 0x55c);
   }
   else {
     if (mode == 0) {
-      iVar3 = VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_accelerator), 0x55c)
+      waited = VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_accelerator), 0x55c)
                         (M<SInt32 *>(self + kIOATIR5002DContext_accelerator),M<UInt32>(self + kIOATIR5002DContext_lastSubmitStamp));
-      if (iVar3 == -1) {
+      if (waited == -1) {
         return 0xe00002d6;
       }
-      M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a4) = iVar3 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a4);
+      M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a4) = waited + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a4);
       return 0;
     }
     if (mode != 2) {
       return 0xe00002c2;
     }
-    piVar2 = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
-    iVar3 = piVar2[0x14];
-    pcVar1 = M<code *>(*piVar2 + 0x558);
+    accelWords = M<SInt32 *>(self + kIOATIR5002DContext_accelerator);
+    currentStamp = accelWords[0x14];
+    waitRoutine = M<code *>(*accelWords + 0x558);
   }
-  iVar3 = (*pcVar1)(piVar2,iVar3 + -1);
-  if (iVar3 == -1) {
+  waited = (*waitRoutine)(accelWords,currentStamp + -1);
+  if (waited == -1) {
     return 0xe00002d6;
   }
-  M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a0) = iVar3 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a0);
+  M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a0) = waited + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x7a0);
   return 0;
 }
