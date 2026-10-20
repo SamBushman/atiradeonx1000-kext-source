@@ -941,6 +941,26 @@ def coverage(runs):
     return (len(vis) * 4 / float(own[1] - own[0])) if own and own[1] > own[0] else 0.0
 
 
+def uncovered(runs):
+    """the instructions of the function no usable run executed, as (first, last) byte offsets from the function's entry (merged ranges)"""
+    vis, own = set(), None
+    for r in runs:
+        own = r.own
+        for a, n in r.visited:
+            if own[0] <= a < own[1]:
+                vis.update(range(a, min(a + n, own[1]), 4))
+    if not own: return []
+    out, lo = [], None
+    for a in range(own[0], own[1], 4):
+        if a not in vis:
+            if lo is None: lo = a
+            last = a
+        elif lo is not None:
+            out.append((lo - own[0], last - own[0])); lo = None
+    if lo is not None: out.append((lo - own[0], last - own[0]))
+    return out
+
+
 def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
     results = []
     cyc = [0, 0]
@@ -969,6 +989,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
             cyc[0] += outs[0].cycles; cyc[1] += outs[1].cycles      # only runs both sides finished: the two sums are comparable
         results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if ((probs == ['INCONCLUSIVE'] and (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read)) or (outs[0].status == 'FAULT' and outs[1].status == 'FAULT' and probs == ['INCONCLUSIVE'])) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
+    case.uncov = (uncovered(all_runs[0]), uncovered(all_runs[1]))
     case.cycles = (cyc[0], cyc[1])
     return sym_s, results
 
@@ -1023,6 +1044,9 @@ def evaluate(case, stock, rebuilt, reg, verbose, strict_order, strict_calls):
         verdict, case.name, len(res) - len(fails), len(res), cs, cr, ratio, round(100 * case.cov[0]), round(100 * case.cov[1]), reached,
         ('   register accesses %d' % case.hw_events) if getattr(case, 'hw_events', 0) else '',
         ('   (%d inconclusive: budget exceeded or wild pointer)' % len(inconclusive)) if inconclusive else '')]
+    if os.environ.get('DT_UNCOV'):
+        for lab, u in zip(('stock', 'rebuilt'), case.uncov):
+            lines.append('       uncovered %s: %s' % (lab, ' '.join('%x-%x' % r for r in u)))
     if ratio > 1.5 or (ratio and ratio < 0.5):
         lines.append('       note: estimated-cycle ratio x%.2f' % ratio)
     for seed, probs, *_ in fails[:3 if not verbose else 99]:
