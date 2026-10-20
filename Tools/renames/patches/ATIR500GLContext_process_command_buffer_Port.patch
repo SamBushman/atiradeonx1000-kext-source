@@ -1,5 +1,14 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 22:08:03.126237000 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 22:08:03.127810166 -0700
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 13:14:12.276602172 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 13:14:12.278181641 -0700
+@@ -339,7 +339,7 @@
+             formatFieldDC = FormatTableLookup_0x0004d2dc(iVar33);
+             iVar33 = -(formatFieldDC >> 8 & 3);
+           }
+-          iVar33 = (SInt32)(recordCursor[3] & 0xffffff) >> ((iVar33 - (opcode >> 0xc & 7)) + 5 & 0x3f);
++          iVar33 = (SInt32)(recordCursor[3] & 0xffffff) >> ((iVar33 - (formatFieldDC >> 0xc & 7)) + 5 & 0x3f);
+           opcode = iVar33 << 5;
+           if ((M<UInt8>(M<SInt32>(texture + 0x14) + 0x15) & 4) != 0) {
+             opcode = (iVar33 << 0xc) >> 3;
 @@ -737,8 +737,8 @@
                           iVar48 * (uVar15 - hzBlockCount) >> 1 | recordCursor[uVar55 + 1] & 0xffff0000;
                      local_1b8 = 0x43300000;
@@ -11,6 +20,20 @@
                    }
                    surfaceBuffer[0x36] = 0x1;
                  }
+@@ -2366,10 +2366,10 @@
+                     iVar49 = 0;
+                   }
+                   else {
+-                    opcode = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
+-                    iVar49 = -(opcode >> 8 & 3);
++                    formatFieldDC = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
++                    iVar49 = -(formatFieldDC >> 8 & 3);
+                   }
+-                  opcode = opcode >> 0xc & 7;
++                  opcode = formatFieldDC >> 0xc & 7;
+                   iVar49 = (SInt32)*puVar69 >> ((iVar49 - opcode) + 5 & 0x3f);
+                   if (((UInt8)AVar11 & 1) == 0) {
+                     iVar49 = iVar49 << 5;
 @@ -2916,20 +2916,20 @@
          *puVar42 = 0x31080;
          recordCursor[0xc2] = 0x1087;
@@ -39,9 +62,12 @@
          recordCursor[0xc3] = iVar59 << 0x10 | uVar73;
          recordCursor[200] = 0;
        }
-@@ -2974,7 +2974,7 @@
+@@ -2972,9 +2972,9 @@
+         if (0x1ff < uVar73) {
+           opcode = uVar73;
          }
-         pitchPixels = uVar53 - 1;
+-        pitchPixels = uVar53 - 1;
++        pitchPixels = bufferWidth - 1;
          uVar34 = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
 -        pitchPixels = (UInt32)fVar24;
 +        pitchPixels = (UInt32)(SInt32)fVar24;
@@ -57,6 +83,24 @@
          local_150 = (SInt64)(SInt32)uVar34;
          if (FLOAT_0004c370 < fVar18) {
            local_148 = 0x43300000;
+@@ -3027,7 +3027,7 @@
+             if (pitchPixels != 0) {
+               uVar44 = iVar59 + uVar57;
+               local_d8 = 0x43300000;
+-              uVar46 = uVar53 - uVar73;
++              uVar46 = bufferWidth - uVar73;
+               iVar33 = 0;
+               uStack_d4 = uVar44 ^ 0x80000000;
+               fVar4 = (float)((double)CONCAT44d(0x43300000,uVar44 ^ 0x80000000) - dVar31);
+@@ -3037,7 +3037,7 @@
+                 *puVar54 = uVar47;
+                 puVar54[1] = uVar41;
+                 uVar50 = uVar46;
+-                if ((SInt32)(uVar47 + 0x1000) <= (SInt32)uVar53) {
++                if ((SInt32)(uVar47 + 0x1000) <= (SInt32)bufferWidth) {
+                   uVar50 = 0x1000;
+                 }
+                 uVar56 = uVar78;
 @@ -3138,20 +3138,20 @@
                  uVar47 = uVar47 + 0xc00;
                  uVar46 = uVar46 - 0xc00;
@@ -85,3 +129,12 @@
                  puVar54[10] = iVar74 << 0x10 | uVar50;
                  puVar54[0xf] = 0;
                  puVar54 = puVar54 + 0x10;
+@@ -3199,7 +3199,7 @@
+               formatFieldDC = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)AVar10 * 0x1c);
+               iVar39 = -(formatFieldDC >> 8 & 3);
+             }
+-            uVar73 = uVar73 >> 0xc & 7;
++            uVar73 = formatFieldDC >> 0xc & 7;
+             iVar39 = (SInt32)*puVar54 >> ((iVar39 - uVar73) + 5 & 0x3f);
+             if (((UInt8)AVar11 & 1) == 0) {
+               iVar39 = iVar39 << 5;

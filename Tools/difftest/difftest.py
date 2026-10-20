@@ -930,15 +930,29 @@ def fmt_call(c):
     return '%s(%s)%s' % (name if ' [vcall' in name else d, ', '.join(('stack:' + a[1][:16] + '..') if isinstance(a, tuple) and a[0] == 'stack' else hexs(a) for a in args), ' [arity unknown]' if unk else '')
 
 
-def coverage(runs):
-    """fraction of the function's instructions executed in at least one run (block granularity), over runs that were usable"""
+def coverage_set(runs):
+    """(set of executed instruction offsets from the function entry, function size in bytes)"""
     vis, own = set(), None
     for r in runs:
         own = r.own
         for a, n in r.visited:
             if own[0] <= a < own[1]:
-                vis.update(range(a, min(a + n, own[1]), 4))
-    return (len(vis) * 4 / float(own[1] - own[0])) if own and own[1] > own[0] else 0.0
+                vis.update(x - own[0] for x in range(a, min(a + n, own[1]), 4))
+    return vis, ((own[1] - own[0]) if own else 0)
+
+
+def coverage(runs):
+    """fraction of the function's instructions executed in at least one run (block granularity), over runs that were usable"""
+    vis, size = coverage_set(runs)
+    return (len(vis) * 4 / float(size)) if size else 0.0
+
+
+def ranges_of(offsets):
+    out = []
+    for o in sorted(offsets):
+        if out and o == out[-1][1]: out[-1][1] = o + 4
+        else: out.append([o, o + 4])
+    return out
 
 
 def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
@@ -969,6 +983,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
             cyc[0] += outs[0].cycles; cyc[1] += outs[1].cycles      # only runs both sides finished: the two sums are comparable
         results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if ((probs == ['INCONCLUSIVE'] and (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read)) or (outs[0].status == 'FAULT' and outs[1].status == 'FAULT' and probs == ['INCONCLUSIVE'])) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
+    case.vis = [coverage_set(all_runs[0]), coverage_set(all_runs[1])]
     case.cycles = (cyc[0], cyc[1])
     return sym_s, results
 
@@ -1029,7 +1044,8 @@ def evaluate(case, stock, rebuilt, reg, verbose, strict_order, strict_calls):
         lines.append('       seed %d: %s' % (seed, '; '.join(probs)))
     rep = dict(case=case.name, symbol=sym, verdict=verdict, runs=len(res), failures=len(fails), inconclusive=len(inconclusive),
                insns_stock=si, insns_rebuilt=ri, cycles_stock=cs, cycles_rebuilt=cr, coverage_stock=case.cov[0], coverage_rebuilt=case.cov[1],
-               register_accesses=getattr(case, 'hw_events', 0), problems=[dict(seed=sd, problems=pb) for sd, pb, *_ in fails])
+               register_accesses=getattr(case, 'hw_events', 0), function=case.function, size_stock=case.vis[0][1], size_rebuilt=case.vis[1][1],
+               visited_stock=ranges_of(case.vis[0][0]), visited_rebuilt=ranges_of(case.vis[1][0]), problems=[dict(seed=sd, problems=pb) for sd, pb, *_ in fails])
     return verdict, lines, rep
 
 
