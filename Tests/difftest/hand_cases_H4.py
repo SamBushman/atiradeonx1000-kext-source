@@ -1040,3 +1040,20 @@ CASES += [
          ignore_args={'sysctlbyname': [], 'IOWorkLoop': [], 'interruptEventSource': [], 'timerEventSource': [], 'sscanf': [3, 4, 5], 'vtable slot +0x18': [1, 2],
                       '+0xe4': [2], '+0xec': [1, 2], '+0x580': [2], '+0x48': [1, 2], 'stop': [1]}),
 ]
+
+
+def finish_mock(m, name, k):
+    if '+0x55c' in name:                          # waitForTimeStamp: -1 = failed, else the time waited
+        return 0xffffffff if m.seed % 3 == 0 else m.seed * 5
+    return new_mock(m, name, k)
+
+
+def w_dvd_finish(m, rng):
+    c, a = dvdctx(m, rng)
+    m.w32(c + 0x7c, rng.getrandbits(16)); m.w32(a + 0x7ac, rng.randrange(0, 1000))
+    return [c]
+
+
+CASES += [
+    Case('IOATIR500DVDContext::finish', w_dvd_finish, ret='u32', seeds=30, mock=finish_mock, plain_words=True, ignore_args={'+0x55c': [2]}),
+]
