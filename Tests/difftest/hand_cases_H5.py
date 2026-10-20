@@ -639,6 +639,168 @@ CASES += [
     Case('IOATIR500GLContext::get_config', with_hw_state(C.w_get_config), ret='u32', seeds=100, mock=h5_mock, plain_words=True, name='get_config (hardware-state hand world)'),
 ]
 
+
+def w_gl_set_compat(m, rng):
+    """ATIR500GLContext::setCompatibleSurfaceMode(modeBits*, mode, flags): the base class result is scripted; *modeBits is the surface's current mode word"""
+    this, pool, accel = gl_context(m, rng)
+    p = m.alloc(8)
+    m.w32(p, (rng.choice([0, 0x10000, 0x20000, 0x30000, 0x100000, 0x200000, 0x300000, 0x400000, 0x40000, 0x80000, 0xc0000]) |
+              rng.choice([0, 0x10000, 0x700000, 0x803f]) | rng.choice([0, 0x3f, 0x40])) & 0xffffffff)
+    script(m, 'IOATIR500GLContext24setCompatibleSurfaceMode', [rng.choice([0, 0, 1])])
+    script(m, 'setCompatibleSurfaceMode', [rng.choice([0, 0, 1])])
+    mode = (rng.choice([0, 0x10000, 0x20000, 0x30000]) | rng.choice([0, 0x100000, 0x200000, 0x300000, 0x400000, 0x40000, 0x80000, 0xc0000]) |
+            rng.choice([0, 0x3f, 0x803f]) | rng.choice([0, 0x4000]))
+    return [this, p, mode, rng.choice([0, 0x40, 0x200, 0x240, 0x1])]
+
+
+def w_gl_texture_offset(w_arg_count):
+    def world(m, rng):
+        this, pool, accel = gl_context(m, rng, 'ATIR500GLContext')
+        m.w32(accel + 0x8a4, rng.choice([0, 0x1000, 0x20000]))
+        t = link_texture(m, rng, rng.choice([0, 3, 6, 7, 1, 8]))
+        m.w32(t + 0x60, rng.choice([0, 0x40, 3])); m.w32(t + 0x48, rng.choice([0, 0x2000, 0x4000]))
+        m.w32(t + 0x50, rng.choice([0, 0x100, 0x2000]))
+        linked = link_texture(m, rng, 2); m.w32(linked + 4, rng.choice([0, 0x1000, 0x80000]))
+        m.w32(t + 0x54, linked)
+        if m.r8(t + 0x20) == 0:                       # a surface texture: its owner surface with the buffer table (+0xb70), buffer records with +8 base, +0x20 pitch, +0x40 table
+            S = D.obj(m, rng, 'ATIR500Surface', 0x1000)
+            for i in range(34):
+                r = D.plain(m, rng, 0x100)
+                m.w16(r + 0x20, rng.choice([0, 1, 4, 16])); m.w32(r + 8, rng.choice([0, 0x1000])); 
+                for k in range(4): m.w32(r + 0x40 + 4 * k, rng.choice([0, 0x40, 0x80, 0x1000]))
+                m.w32(S + 0xb70 + 4 * i, r)
+            m.w32(t + 0x50, rng.choice([0, S, S, S])); m.w32(t + 0x58, rng.choice([0, 1, 2]))
+        args = [this, t]
+        args.append(rng.choice([0, 1, 5]) if w_arg_count == 'write' else rng.choice([0, 0x10, 0xffffffff]))
+        return args
+    return world
+
+
+def w_gl_build_scissor(m, rng):
+    """ATIR500GLContext::build_scissor(): this+0x3bc render-to-texture flag, +0x29c mip level, +0xac colour buffer index, +0x290 the bound surface (+0xb70 buffer
+    table), +0x3c0 + 0x78*attachment the in-context buffer records (+0x1c width, +0x1e height, +0x3a format code, +0x3c packed word)"""
+    this, pool, accel = gl_context(m, rng, 'ATIR500GLContext')
+    S = D.obj(m, rng, 'ATIR500Surface', 0x1000)
+    for i in range(34):
+        r = D.plain(m, rng, 0x100)
+        m.w16(r + 0x1c, rng.choice([0, 1, 64, 640, 1920])); m.w16(r + 0x1e, rng.choice([0, 1, 48, 480, 1080]))
+        m.w8(r + 0x3a, rng.randrange(0x10)); m.w32(r + 0x3c, rng.choice([0, 0x100000, 0x200000, 0xf00000, 0x300000]))
+        m.w32(S + 0xb70 + 4 * i, r)
+    m.w32(this + 0x290, S)
+    m.w16(this + 0xac, rng.randrange(34))
+    m.w32(this + 0x3bc, rng.choice([0, 0, 1])); m.w32(this + 0x29c, rng.choice([0, 1, 2, 5, 11, 0x40]))
+    for a in range(6):
+        r = this + 0x3c0 + 0x78 * a
+        m.w16(r + 0x1c, rng.choice([0, 1, 64, 640])); m.w16(r + 0x1e, rng.choice([0, 1, 48, 480]))
+        m.w8(r + 0x3a, rng.randrange(0x10)); m.w32(r + 0x3c, rng.choice([0, 0x100000, 0x200000, 0xf00000]))
+    m.w16(this + 0x3b8, rng.randrange(6)) if False else None
+    return [this]
+
+
+CASES += [
+    Case('ATIR500GLContext::setCompatibleSurfaceMode', w_gl_set_compat, ret='bool', seeds=200, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='ATIR500GLContext::setCompatibleSurfaceMode (hand world)'),
+    Case('ATIR500GLContext::GetTextureOffset', w_gl_texture_offset('write'), ret='u32', seeds=300, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='GetTextureOffset (hand world)'),
+    Case('ATIR500GLContext::GetVertexArrayOffset', w_gl_texture_offset('extra'), ret='u32', seeds=150, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='GetVertexArrayOffset (hand world)'),
+    Case('ATIR500GLContext::build_scissor', w_gl_build_scissor, ret='void', seeds=200, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='ATIR500GLContext::build_scissor (hand world)'),
+]
+
+
+def w_gl_free_to_alloc_gart(m, rng):
+    """IOATIR500GLContext::freeToAllocGART(needed, aggressive): the accelerator's freeTransferToAllocGART is asked for the context buffer, the command buffer, the
+    16 ring buffers and then each data buffer of the context's list (+0xe8, linked through +0x3c); the script says which of those calls succeeds"""
+    this, pool, accel = gl_context(m, rng)
+    nodes = [D.plain(m, rng, 0x100) for _ in range(rng.choice([0, 1, 3]))]
+    for a, b in zip(nodes, nodes[1:] + [0]): m.w32(a + 0x3c, b)
+    m.w32(this + 0xe8, nodes[0] if nodes else 0)
+    total = 2 + 16 + len(nodes)
+    ok_at = rng.choice([0, 1, 2, 9, 17, 18, total - 1, total + 2, total + 2])
+    script(m, 'freeTransferToAllocGART', [1 if i == ok_at else 0 for i in range(total + 1)])
+    return [this, D.plain(m, rng, 0x100), rng.choice([0, 1])]
+
+
+def w_gl_get_surface_info(m, rng):
+    """IOATIR500GLContext::get_surface_info(surfaceID, flags*, w*, h*): the surface from find_surface_for_id: +0xbe8 mode bits, +0xc18 required bits, +0xbd4 /
+    +0xbd8 (equal -> the buffer's size at +0xb70 +0x1c/+0x1e, else the halfwords +0xbd8/+0xbda)"""
+    this, pool, accel = gl_context(m, rng)
+    S = D.obj(m, rng, 'ATIR500Surface', 0x1000)
+    rec = D.plain(m, rng, 0x100); m.w16(rec + 0x1c, rng.choice([64, 640])); m.w16(rec + 0x1e, rng.choice([48, 480]))
+    m.w32(S + 0xb70, rec)
+    m.w32(S + 0xc18, rng.choice([0, 4, 8, 0xc])); m.w32(S + 0xbe8, rng.choice([0, 0x10, 0x803f]))
+    v = rng.choice([0, 0x00100020, 0x80002])
+    m.w32(S + 0xbd4, v); m.w32(S + 0xbd8, v if rng.random() < 0.5 else v ^ 0x10001)
+    script(m, 'find_surface_for_id', [rng.choice([0, S, S, S])])
+    return [this, rng.choice([0, 1, 2]), m.alloc(8), m.alloc(8), m.alloc(8)]
+
+
+def with_task_answer(world):
+    """a hand_cases_C world, plus the IOMemoryMap::getTask() virtual (+0xdc) answering this context's task about half the time"""
+    def w(m, rng):
+        args = world(m, rng)
+        this = args[0]
+        script(m, 'slot +0xdc', [m.r32(this + 0x78) if rng.random() < 0.5 else 0x5555 for _ in range(6)])
+        return args
+    return w
+
+
+CASES += [
+    Case('IOATIR500GLContext::freeToAllocGART', w_gl_free_to_alloc_gart, ret='bool', seeds=150, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='IOATIR500GLContext::freeToAllocGART (hand world)'),
+    Case('IOATIR500GLContext::get_surface_info', w_gl_get_surface_info, ret='u32', seeds=100, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='IOATIR500GLContext::get_surface_info (hand world)'),
+    Case('IOATIR500GLContext::stop', with_task_answer(C.w_stop), ret='void', seeds=200, mock=scripted_mock, name='IOATIR500GLContext::stop (task-answer hand world)'),
+]
+
+
+def w_gl_start(m, rng):
+    """IOATIR500GLContext::start(provider): IOUserClient::start, the new IOATIR500Shared (operator new, then its init virtual at +0x48), the accelerator's
+    context lists (+0x60 GL, +0x68 DVD), setup3D (+0x530) and the allocations are scripted; the failure paths call stop(), run for real on both sides"""
+    c = D.obj(m, rng, 'IOATIR500GLContext', 0x1000)
+    A = D.accel(m, rng, mmio=False)
+    m.h5_accel = A
+    m.w32(A + 0x60, rng.choice([0, 0, D.obj(m, rng, 'IOATIR500GLContext', 0x400)])); m.w32(A + 0x68, rng.choice([0, 0, D.obj(m, rng, 'IOATIR500DVDContext', 0x400)]))
+    m.w32(A + 0x738, rng.choice([0, 1, 3]))
+    for off in (0x5cc, 0x5d0, 0x5d4): m.w32(A + off, 0)             # the accelerator's data-buffer cache is empty (stop() walks it)
+    script(m, 'IOUserClient5start', [rng.choice([1, 1, 1, 0])])
+    script(m, 'IOATIR500Shared4init', [rng.choice([1, 1, 0])]); script(m, 'slot +0x48', [rng.choice([1, 1, 0])])
+    script(m, 'setup3D', [rng.choice([1, 1, 0])]); script(m, 'getVRAMDescriptors', [rng.choice([1, 1, 0])])
+    script(m, 'allocCommandBuffer', [rng.choice([1, 1, 0])]); script(m, 'allocAllContextBuffers', [rng.choice([1, 1, 0])])
+    return [c, A]
+
+
+CASES += [
+    Case('IOATIR500GLContext::start', w_gl_start, ret='bool', seeds=200, mock=h5_mock, plain_words=False, ignore_args=D.REL,
+         transparent=r'(C[12]E|D[012]E|IOATIR500GLContext4stop)', name='IOATIR500GLContext::start (hand world)'),
+]
+
+
+def w_dvd_read_regs(m, rng):
+    """ATIR500DVDContext::read_regs(offsets, out, byteCount, inOutCount): the accelerator (+0x8c) has the register window (+0x860) and the live flag (+0x80); the
+    count must be a multiple of 4 and equal to *inOutCount"""
+    c, A = D.dvd(m, rng)
+    m.w8(A + 0x80, rng.choice([1, 1, 0]))
+    n = rng.choice([0, 1, 2, 5])
+    offs = m.alloc(0x100); outv = m.alloc(0x100); actual = m.alloc(0x10)
+    for i in range(n): m.w32(offs + 4 * i, rng.choice([0xf8, 0xe40, 0x15f4, 0x1ffc, 0x2000, 0x1234]))
+    m.w32(actual, 4 * n if rng.random() < 0.85 else 4 * n + 4)
+    return [c, offs, outv, rng.choice([4 * n, 4 * n, 4 * n + 1]), actual]
+
+
+def w_2d_set_surface(m, rng):
+    """IOATIR5002DContext::set_surface(id, modeBits, info, infoSize): accelerator (+0x94) with display count (+0xcc) and mask (+0xd0); with mode bit 0x800 the
+    surface comes from find_surface_for_id, otherwise the id selects a display; set_destination / invalidate (members) are mocked"""
+    c, A, S = ctx2d_bound(m, rng, bound=0.6)
+    other = surf2d(m, rng, A)
+    m.w32(A + 0xcc, rng.choice([0, 1, 2, 3])); m.w32(A + 0xd0, rng.choice([0, 1, 2, 3, 0xffffffff]))
+    m.w32(A + 0x78, rng.choice([0, c, 0x1234]))
+    m.w32(c + 0x110, rng.choice([0, 1, 5]))
+    script(m, 'find_surface_for_id', [rng.choice([0, other, other, S or other])])
+    script(m, 'set_destination', [rng.choice([0, 0xe00002c2])])
+    return [c, rng.choice([0, 1, 2, 3, 5]), rng.choice([0, 0x800, 0x800, 0x400, 0x4000, 0x4c00, 0x803f]), m.alloc(0x40), m.alloc(8)]
+
+
+CASES += [
+    Case('ATIR500DVDContext::read_regs', w_dvd_read_regs, ret='u32', seeds=80, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='ATIR500DVDContext::read_regs (hand world)'),
+    Case('IOATIR5002DContext::set_surface', w_2d_set_surface, ret='u32', seeds=200, mock=h5_mock, plain_words=True, ignore_args=D.REL, name='IOATIR5002DContext::set_surface (hand world)'),
+]
+
 CASES += [
     Case('ATIR5002DContext::get_buffer_info', w_2d_get_buffer_info, ret='u32', seeds=120, plain_words=True, name='get_buffer_info (hand world)'),
 ]
