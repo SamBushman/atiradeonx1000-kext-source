@@ -64,7 +64,7 @@ LAB_0003dcc0:
     bufferBytes[0x3c] = 0x0;
     return 0;
   }
-  busyMask = M<UInt32>(accelBase + 0x890);
+  busyMask = M<UInt32>(accelBase + kIOATIR500Accelerator_vramPreparedMask);
   slotIndex = 0;
   if ((busyMask & 1) == 0) {
     slotIndex = 0;
@@ -76,7 +76,7 @@ LAB_0003dcc0:
       if (slotIndex == M<UInt8>(accelBase + 0x990)) goto LAB_0003dcc0;
     } while ((busyMask & 1 << (nextSlot & 0x3f)) != 0);
   }
-  M<UInt32>(accelBase + 0x890) = 1 << (slotIndex & 0x3f) | busyMask;
+  M<UInt32>(accelBase + kIOATIR500Accelerator_vramPreparedMask) = 1 << (slotIndex & 0x3f) | busyMask;
   bufferBytes[0x37] = SUB41m(slotIndex,0);
   accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   if (M<char>(accel + 0x20) == '\0') {

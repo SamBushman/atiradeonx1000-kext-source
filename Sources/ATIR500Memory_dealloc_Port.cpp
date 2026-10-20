@@ -35,9 +35,10 @@ UInt32 ATIR500Memory::dealloc(GLKMemoryElement *elem) {
   SInt32 refilled;
   SInt32 *nodePrev;
   SInt32 *node;
-  SInt32 iVar5;
+  SInt32 elemOffset;
+  SInt32 oldSpareHead;
   
-  iVar5 = M<SInt32>(elemBytes + 8);
+  elemOffset = M<SInt32>(elemBytes + 8);
   if ((M<SInt32>(self + kATIR500Memory_spareNodeStack) == 0) && (refilled = this->add_to_stack(), refilled == 0)) {
     return 0;
   }
@@ -50,11 +51,11 @@ UInt32 ATIR500Memory::dealloc(GLKMemoryElement *elem) {
   if ((nodePrev[3] & node[3]) < 0) {
     *nodePrev = *node;
     M<SInt32 *>(*node + 4) = nodePrev;
-    iVar5 = M<SInt32>(self + kATIR500Memory_spareNodeStack);
+    oldSpareHead = M<SInt32>(self + kATIR500Memory_spareNodeStack);
     node[3] = 0;
     node[1] = 0;
     node[2] = 0;
-    *node = iVar5;
+    *node = oldSpareHead;
     M<SInt32 *>(self + kATIR500Memory_spareNodeStack) = node;
   }
   else if (nodePrev[3] < 0) {
@@ -62,7 +63,7 @@ UInt32 ATIR500Memory::dealloc(GLKMemoryElement *elem) {
     *nodePrev = (SInt32)node;
   }
   else if (node[3] < 0) {
-    node[2] = iVar5;
+    node[2] = elemOffset;
     node[1] = (SInt32)nodePrev;
     *nodePrev = (SInt32)node;
   }
@@ -72,7 +73,7 @@ UInt32 ATIR500Memory::dealloc(GLKMemoryElement *elem) {
     *nodePrev = (SInt32)spareNode;
     node[1] = (SInt32)spareNode;
     spareNode[3] = 0x80000000;
-    spareNode[2] = iVar5;
+    spareNode[2] = elemOffset;
     *spareNode = (UInt32)(node);
     spareNode[1] = (UInt32)(nodePrev);
   }

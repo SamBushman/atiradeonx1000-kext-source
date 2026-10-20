@@ -35,7 +35,7 @@ void IOATIR500Accelerator::free_gart_wirings() {
 
   UInt8 bufferType;
   bool blockedOnce;
-  int iVar3;
+  int stampReached;
   UInt32 stamp;
   UInt8 *listHead;
   UInt8 *transfer;
@@ -72,8 +72,8 @@ void IOATIR500Accelerator::free_gart_wirings() {
           }
           stamp = M<UInt32>(M<int>(transfer + 0x14) + 8);
         }
-        iVar3 = VCALL(M<int>(self), 0x554)(self,stamp);
-        if (iVar3 == 0) {
+        stampReached = VCALL(M<int>(self), 0x554)(self,stamp);
+        if (stampReached == 0) {
           self[0x89] = 0x1;
           return;
         }

@@ -32,26 +32,38 @@ extern "C" UInt32 GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(.
 /* real addr 0x14a30 */
 IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32 structSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
+    UInt8 *selfBytes = reinterpret_cast<UInt8 *>(this);
     UInt8 *readDataBytes = reinterpret_cast<UInt8 *>(readData);
 
   int surfaceWidth;
   int clipOffset;
   unsigned int destination;
-  int *piVar4;
   int bottom;
   UInt8 *cursor;
-  int iVar7;
   int surfaceHeight;
   unsigned int pageOffset;
   int destPitch;
-  int iVar11;
-  int iVar12;
   int y;
   int x;
-  int iVar15;
   UInt32 result;
-  int iVar17;
+  int copyWidth;
+  int bufferBacking;
+  int waitTotalBefore;
+  int copyHeight;
+  int rowClipBytes;
+  int buffersLeft;
+  int finalWaitTime;
+  int destBase;
+  int queryStatus;
+  int transferBuffer;
+  int waitTime;
+  int readStamp;
+  int readBuffer;
+  int retryStatus;
+  int rightEdge;
+  int waitBefore;
+  int *transferMemory;
+  int *accelerator;
   /*
    * #164 root cause: the shipped code uses ONE real contiguous stack structure here (a
    * stand-in VendorTransferBuffer, as proven by real stock disassembly - see the issue for
@@ -81,100 +93,100 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32
   M<SInt32>(xferBufBlock + 0xc) = 0;         /* local_4c = 0 */
   x = M<int>(readDataBytes);
   y = M<int>(readDataBytes + 4);
-  iVar12 = M<int>(readDataBytes + 8);
-  iVar11 = M<int>(readDataBytes + 0xc);
-  iVar15 = M<int>(readDataBytes + 0x10);
+  copyWidth = M<int>(readDataBytes + 8);
+  copyHeight = M<int>(readDataBytes + 0xc);
+  destBase = M<int>(readDataBytes + 0x10);
   GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
-  iVar17 = M<int>(self + kIOATIR500Surface_attachmentBuffers);
+  readBuffer = M<int>(self + kIOATIR500Surface_attachmentBuffers);
   if ((M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3 & M<unsigned int>(self + kIOATIR500Surface_stateBits)) == 0) {
 LAB_00014ae0:
-    if (((M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0x20000000) != 0) || (M<int>(iVar17 + 0x10) == 0)) {
+    if (((M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0x20000000) != 0) || (M<int>(readBuffer + 0x10) == 0)) {
 LAB_00014af4:
       GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
       return 0xe00002cc;
     }
   }
   else {
-    if (M<int>(iVar17 + 0x24) == 0) goto LAB_00014b30;
-    if (M<char>(M<int>(iVar17 + 0x24) + 0x58) != '\0') goto LAB_00014ae0;
-    iVar17 = this->alloc_surfaces_retry(M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3,(eLockType)(0));
-    if (iVar17 != 0) goto LAB_00014af4;
-    iVar17 = M<int>(self + kIOATIR500Surface_attachmentBuffers);
+    if (M<int>(readBuffer + 0x24) == 0) goto LAB_00014b30;
+    if (M<char>(M<int>(readBuffer + 0x24) + 0x58) != '\0') goto LAB_00014ae0;
+    retryStatus = this->alloc_surfaces_retry(M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3,(eLockType)(0));
+    if (retryStatus != 0) goto LAB_00014af4;
+    readBuffer = M<int>(self + kIOATIR500Surface_attachmentBuffers);
   }
-  iVar7 = x + iVar12;
-  if ((((0 < iVar7) && (bottom = y + iVar11, 0 < bottom)) &&
+  rightEdge = x + copyWidth;
+  if ((((0 < rightEdge) && (bottom = y + copyHeight, 0 < bottom)) &&
       (surfaceWidth = (int)M<SInt16>(self + kIOATIR500Surface_width), x < surfaceWidth)) &&
      (surfaceHeight = (int)M<SInt16>(self + kIOATIR500Surface_height), y < surfaceHeight)) {
     destPitch = M<int>(readDataBytes + 0x14);
     clipOffset = 0;
     if (x < 0) {
-      clipOffset = (unsigned int)M<UInt16>(iVar17 + 0x16) * x;
+      clipOffset = (unsigned int)M<UInt16>(readBuffer + 0x16) * x;
       x = 0;
       clipOffset = -clipOffset;
-      iVar12 = iVar7;
+      copyWidth = rightEdge;
     }
     if (y < 0) {
-      iVar11 = destPitch * y;
+      rowClipBytes = destPitch * y;
       y = 0;
-      clipOffset = clipOffset - iVar11;
-      iVar11 = bottom;
+      clipOffset = clipOffset - rowClipBytes;
+      copyHeight = bottom;
     }
-    if (surfaceWidth < iVar7) {
-      iVar12 = surfaceWidth - x;
+    if (surfaceWidth < rightEdge) {
+      copyWidth = surfaceWidth - x;
     }
     if (surfaceHeight < bottom) {
-      iVar11 = surfaceHeight - y;
+      copyHeight = surfaceHeight - y;
     }
-    destination = iVar15 + clipOffset;
+    destination = destBase + clipOffset;
     pageOffset = destination & GH_page_size - 1U;
     M<SInt32>(xferBufBlock + 0xc) = (SInt32)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(destination & -GH_page_size,
                                    -GH_page_size &
                                    (GH_page_size +
-                                   destPitch * (iVar11 + -1) +
-                                   (unsigned int)M<UInt16>(iVar17 + 0x16) * iVar12 + pageOffset) - 1,0,
+                                   destPitch * (copyHeight + -1) +
+                                   (unsigned int)M<UInt16>(readBuffer + 0x16) * copyWidth + pageOffset) - 1,0,
                                    M<UInt32>(self + kIOATIR500Surface_task));
     if (M<SInt32>(xferBufBlock + 0xc) == 0) {
       result = 0xe00002be;
     }
     else {
-      if (((self[0xbf7] != 0) && (M<int>(iVar17 + 0x24) != 0)) &&
-         ((piVar4 = M<int *>(M<int>(iVar17 + 0x24) + 8), piVar4 != (int *)0x0 &&
-          ((iVar15 = VCALL(*piVar4, 0xdc)(piVar4,2,xferBufBlock), iVar15 == 0 &&
+      if (((self[0xbf7] != 0) && (M<int>(readBuffer + 0x24) != 0)) &&
+         ((transferMemory = M<int *>(M<int>(readBuffer + 0x24) + 8), transferMemory != (int *)0x0 &&
+          ((queryStatus = VCALL(*transferMemory, 0xdc)(transferMemory,2,xferBufBlock), queryStatus == 0 &&
            (M<SInt32>(xferBufBlock) == 4)))))) {
-        iVar15 = M<int>(iVar17 + 0x24);
-        if (M<int>(iVar15 + 4) != 0) {
+        transferBuffer = M<int>(readBuffer + 0x24);
+        if (M<int>(transferBuffer + 4) != 0) {
           GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
-          piVar4 = M<int *>(self + kIOATIR500Surface_accelerator);
-          iVar7 = piVar4[0x1ed];
-          iVar15 = VCALL(*piVar4, 0x55c)(piVar4,M<UInt32>(self + kIOATIR500Surface_stamp));
-          piVar4[0x1ed] = iVar7 + iVar15;
+          accelerator = M<int *>(self + kIOATIR500Surface_accelerator);
+          waitBefore = accelerator[0x1ed];
+          waitTime = VCALL(*accelerator, 0x55c)(accelerator,M<UInt32>(self + kIOATIR500Surface_stamp));
+          accelerator[0x1ed] = waitBefore + waitTime;
           GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
           VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x5ac)
-                    (M<int *>(self + kIOATIR500Surface_accelerator),M<UInt32>(iVar17 + 0x24));
-          M<UInt32>(M<int>(iVar17 + 0x24) + 4) = 0;
-          iVar15 = M<int>(iVar17 + 0x24);
+                    (M<int *>(self + kIOATIR500Surface_accelerator),M<UInt32>(readBuffer + 0x24));
+          M<UInt32>(M<int>(readBuffer + 0x24) + 4) = 0;
+          transferBuffer = M<int>(readBuffer + 0x24);
         }
-        M<int>(iVar15 + 0x54) = M<int>(self + kIOATIR500Surface_stamp) + -1;
+        M<int>(transferBuffer + 0x54) = M<int>(self + kIOATIR500Surface_stamp) + -1;
       }
-      iVar15 = M<int>(self + kIOATIR500Surface_stamp);
+      readStamp = M<int>(self + kIOATIR500Surface_stamp);
       VCALL(M<int>(self), 0x5e8)
-                (self,x,y,iVar12,iVar11,0,0,iVar17,iVar15,xferBufBlock + 4,pageOffset,destPitch,0);
+                (self,x,y,copyWidth,copyHeight,0,0,readBuffer,readStamp,xferBufBlock + 4,pageOffset,destPitch,0);
       cursor = self + kIOATIR500Surface_buffer0BackingStore;
-      iVar11 = 0x17;
+      buffersLeft = 0x17;
       do {
-        iVar12 = M<int>(cursor);
+        bufferBacking = M<int>(cursor);
         cursor = cursor + 0x78;
-        if ((iVar12 != 0) && (iVar15 == M<int>(iVar12 + 0x54))) {
-          M<UInt32>(iVar12 + 0x54) = M<UInt32>(self + kIOATIR500Surface_stamp);
+        if ((bufferBacking != 0) && (readStamp == M<int>(bufferBacking + 0x54))) {
+          M<UInt32>(bufferBacking + 0x54) = M<UInt32>(self + kIOATIR500Surface_stamp);
         }
-        iVar11 = iVar11 + -1;
-      } while (iVar11 != 0);
+        buffersLeft = buffersLeft + -1;
+      } while (buffersLeft != 0);
       if (M<SInt32>(xferBufBlock + 8) != 0) {
         GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
-        piVar4 = M<int *>(self + kIOATIR500Surface_accelerator);
-        iVar12 = piVar4[0x1ed];
-        iVar11 = VCALL(*piVar4, 0x55c)(piVar4,M<UInt32>(self + kIOATIR500Surface_stamp));
-        piVar4[0x1ed] = iVar12 + iVar11;
+        accelerator = M<int *>(self + kIOATIR500Surface_accelerator);
+        waitTotalBefore = accelerator[0x1ed];
+        finalWaitTime = VCALL(*accelerator, 0x55c)(accelerator,M<UInt32>(self + kIOATIR500Surface_stamp));
+        accelerator[0x1ed] = waitTotalBefore + finalWaitTime;
         GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
         VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x5ac)(M<int *>(self + kIOATIR500Surface_accelerator),xferBufBlock + 4);
       }

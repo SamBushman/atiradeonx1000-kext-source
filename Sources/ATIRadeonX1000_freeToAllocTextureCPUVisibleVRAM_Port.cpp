@@ -70,7 +70,7 @@ LAB_0001e3c8:
       M<UInt8 *>(candidate + 0x28) = candidate;
       M<SInt32>(nextEntry + 0x24) = prevEntry;
       M<UInt8 *>(candidate + 0x24) = candidate;
-      M<SInt32>(self + kIOATIR500Accelerator_unknown_0x7e0) = M<SInt32>(self + kIOATIR500Accelerator_unknown_0x7e0) + 1;
+      M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) + 1;
       allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),
                          size,0x1000,0,M<UInt32>(self + kIOATIR500Accelerator_usableVramSize));
       if (allocResult != 0) {

@@ -32,10 +32,11 @@ bool IOATIR500Accelerator::freeTransferToAllocGART(VendorTransferBuffer *candida
     UInt8 *candidateBytes = reinterpret_cast<UInt8 *>(candidate);
     UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
-  SInt32 iVar1;
   UInt32 result;
   UInt32 in_register_0000001c;
   SInt32 waitStat;
+  SInt32 stampReached;
+  SInt32 waitTime;
   
   if ((M<SInt32>(candidateBytes + 4) == 0) || (M<SInt16>(candidateBytes + 0xe) != 0)) {
 LAB_00003650:
@@ -43,8 +44,8 @@ LAB_00003650:
   }
   else {
     if (((UInt32)aggressive) == 0) {
-      iVar1 = VCALL(M<SInt32>(self), 0x554)(self,stamp);
-      if (iVar1 == 0) goto LAB_00003650;
+      stampReached = VCALL(M<SInt32>(self), 0x554)(self,stamp);
+      if (stampReached == 0) goto LAB_00003650;
     }
     else {
       /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3580) shows stamp
@@ -54,8 +55,8 @@ LAB_00003650:
        * in-practice dropped-argument defect class as the sibling fix in freeOrphanTexture_Port.cpp
        * (self+0x790 is a cosmetic stat only). */
       waitStat = M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime);
-      iVar1 = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
-      M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime) = waitStat + iVar1;
+      waitTime = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
+      M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime) = waitStat + waitTime;
     }
     VCALL(M<SInt32>(self), 0x5ac)(self,candidateBytes);
     result = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);

@@ -33,12 +33,13 @@ void IOATIR500Accelerator::freeOrphanTexture(bool aggressive) {
 
   UInt8 bufferType;
   bool blockedOnce;
-  SInt32 iVar3;
   UInt32 in_register_00000010;
   UInt32 stamp;
   SInt32 waitStat;
   UInt8 *texvert;
   UInt8 notAggressive;
+  SInt32 stampReached;
+  SInt32 waitTime;
   
   texvert = M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next);
   if (texvert == (UInt8 *)(self + kIOATIR500Accelerator_orphanTextureList)) {
@@ -58,8 +59,8 @@ void IOATIR500Accelerator::freeOrphanTexture(bool aggressive) {
       stamp = M<UInt32>(M<SInt32>(texvert + 0x14) + 8);
     }
     if ((bool)(notAggressive >> 1 & 1)) {
-      iVar3 = VCALL(M<SInt32>(self), 0x554)(self,stamp);
-      if (iVar3 == 0) {
+      stampReached = VCALL(M<SInt32>(self), 0x554)(self,stamp);
+      if (stampReached == 0) {
         if (self[0x82] != 0x0) {
           return;
         }
@@ -79,8 +80,8 @@ void IOATIR500Accelerator::freeOrphanTexture(bool aggressive) {
        * writePerformanceStats), not used in any control-flow decision - but a real, independently
        * verified dropped-argument bug, same class as removeEventSource()/IOLockFree/free_texvert. */
       waitStat = M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime);
-      iVar3 = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
-      M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime) = waitStat + iVar3;
+      waitTime = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
+      M<SInt32>(self + kIOATIR500Accelerator_removeFromGARTWaitTime) = waitStat + waitTime;
     }
     if (blockedOnce) {
       GH_thread_block(0);

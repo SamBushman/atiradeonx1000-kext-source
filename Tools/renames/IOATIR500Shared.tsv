@@ -87,7 +87,7 @@ decl	IOATIR500Shared::new_agpref_texture	param3	agpAddress	INFERRED	named from t
 decl	IOATIR500Shared::new_agpref_texture	param4	agpLength	INFERRED	named from the body
 def	IOATIR500Shared::new_surface_texture@0x17520	param_1	surfaceId	CONFIRMED	passed to the accelerator's find_surface_for_id and stored at texture+0x5c
 def	IOATIR500Shared::new_surface_texture@0x17520	param_2	unknown_0x58	UNKNOWN	stored verbatim at texture+0x58, never read in this function
-def	IOATIR500Shared::new_surface_texture@0x17520	param_3	unknown_0x34	UNKNOWN	stored as a byte at client-shared record +0x34, never read in this function
+def	IOATIR500Shared::new_surface_texture@0x17520	param_3	faceCount	CONFIRMED	stored as the shared record's byte +0x34, which delete_texture bounds its per-face loop with (the face count)
 def	IOATIR500Shared::new_surface_texture@0x17520	this_00	surface	CONFIRMED	the surface found for surfaceId: the new texture is linked into its list at +0xbcc and its buffers pruned
 def	IOATIR500Shared::new_surface_texture@0x17520	pvVar2	texture	CONFIRMED	the 0x80-byte VendorTextureBuffer from the accelerator (vtable +0x570), returned on success
 def	IOATIR500Shared::new_surface_texture@0x17520	local_38	handle	CONFIRMED	handle from alloc_buf_handle
@@ -95,7 +95,7 @@ def	IOATIR500Shared::new_surface_texture@0x17520	local_34	clientShared	CONFIRMED
 def	IOATIR500Shared::new_surface_texture@0x17520	local_30	clientUserAddr	CONFIRMED	user address of the record (element 0), returned through outParam
 decl	IOATIR500Shared::new_surface_texture	param2	surfaceId	INFERRED	named from the body
 decl	IOATIR500Shared::new_surface_texture	param3	unknown_0x58	INFERRED	named from the body
-decl	IOATIR500Shared::new_surface_texture	param4	unknown_0x34	INFERRED	named from the body
+decl	IOATIR500Shared::new_surface_texture	param4	faceCount	CONFIRMED	stored as the shared record's byte +0x34, which delete_texture bounds its per-face loop with (the face count)
 def	IOATIR500Shared::new_global_texture@0x17740	param_1	globalId	INFERRED	compared with the id stored at +4 of each texture's client-shared record in the global shared object's list
 def	IOATIR500Shared::new_global_texture@0x17740	pIVar1	globalShared	CONFIRMED	the accelerator's global IOATIR500Shared (accel+0x6c); a different object from this
 def	IOATIR500Shared::new_global_texture@0x17740	piVar2	accel	CONFIRMED	the accelerator (+0xc)

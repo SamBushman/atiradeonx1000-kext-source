@@ -1,17 +1,17 @@
---- a/Sources/IOATIR500Surface_flush_surface_Port.cpp	2026-10-17 20:00:06.574704715 -0700
-+++ b/Sources/IOATIR500Surface_flush_surface_Port.cpp	2026-10-17 20:00:06.575943855 -0700
-@@ -32,7 +32,7 @@
+--- a/Sources/IOATIR500Surface_flush_surface_Port.cpp	2026-10-20 10:43:26.834481022 -0700
++++ b/Sources/IOATIR500Surface_flush_surface_Port.cpp	2026-10-20 10:43:26.835261217 -0700
+@@ -31,7 +31,7 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
-   SInt32 iVar1;
    UInt32 panelIndex;
 -  UInt8 *pIVar3;
 +  PanelRecord *panel;
+   SInt32 stampReached;
+   SInt32 accelerator;
    
-   if ((self[0xbed] == 0x0) ||
-      (iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
-@@ -45,15 +45,15 @@
+@@ -46,15 +46,15 @@
      M<UInt32>(self + kIOATIR500Surface_flushedStamp) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
-     if (M<SInt32>(iVar1 + 0xcc) != 0) {
+     if (M<SInt32>(accelerator + kIOATIR500Accelerator_displayCount) != 0) {
        panelIndex = 0;
 -      pIVar3 = self;
 +      panel = PANEL_RECORD(self, 0);
@@ -20,11 +20,11 @@
 +        if (((1 << (panelIndex & 0x3f) & panelMask) != 0) && (panel->active != 0x0)) {
            VCALL(M<SInt32>(self), 0x5d4)(self,panelIndex,swapArg);
            M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) + 1;
-           iVar1 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+           accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
          }
          panelIndex = panelIndex + 1;
 -        pIVar3 = pIVar3 + 0x94;
 +        panel = panel + 1;
-       } while (panelIndex < M<UInt32>(iVar1 + 0xcc));
+       } while (panelIndex < M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount));
      }
-     M<UInt32>(iVar1 + 0x78) = 0;
+     M<UInt32>(accelerator + kIOATIR500Accelerator_unknown_0x78) = 0;

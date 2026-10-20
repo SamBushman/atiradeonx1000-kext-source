@@ -35,25 +35,28 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, eIOSurfaceModeBits modeBits)
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt32 modeBitsValue = modeBits;   /* the body edits the mode bits as a plain integer */
 
-  UInt16 uVar1;
   UInt8 *owner;
   unsigned int currentPanel;
   SInt16 requiredKind;
-  int iVar5;
   int accelerator;
-  unsigned int uVar7;
+  unsigned int requestedId;
   UInt32 result;
-  UInt32 local_38;
-  UInt32 local_34;
-  UInt32 local_30;
-  UInt32 local_2c;
+  UInt32 vramElement[4];   /* ONE real 16-byte GLKMemoryElement: the decompile showed four separate locals and stock passes vramElement (stock's compiler placed them adjacently) */
+  int acceleratorPtr;
+  int panelNo;
+  int newRegion;
+  int shapeStatus;
+  int storageBytes;
+  int vramAllocOk;
+  UInt16 panelWidth;
+  UInt16 panelHeight;
   
   if ((modeBitsValue & 0xffff7fc0) != 0) {
     return 0xe00002c2;
   }
   GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   if ((M<unsigned int>(self + kIOATIR500Surface_lockFlags) & 0xffff0000) != 0) {
-    iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
+    acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
     result = 0xe00002cc;
     goto LAB_000147d0;
   }
@@ -61,7 +64,7 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, eIOSurfaceModeBits modeBits)
      ) {
 LAB_00014370:
     if ((modeBitsValue & 0x20) != 0) {
-      uVar7 = mode;
+      requestedId = mode;
       mode = 0xffff;
 LAB_00014454:
       currentPanel = M<unsigned int>(self + kIOATIR500Surface_panel);
@@ -70,7 +73,7 @@ LAB_00014454:
         VCALL(M<int>(self), 0x5a8)(self);
         M<UInt32>(M<int>(self + kIOATIR500Surface_panel) * 0x20 + M<int>(self + kIOATIR500Surface_accelerator) + 0xe8) = 0;
       }
-      M<unsigned int>(self + kIOATIR500Surface_requestedId) = uVar7;
+      M<unsigned int>(self + kIOATIR500Surface_requestedId) = requestedId;
       M<unsigned int>(self + kIOATIR500Surface_modeBits) = modeBitsValue;
       M<unsigned int>(self + kIOATIR500Surface_panel) = mode;
       if ((mode != 0xffff) && ((modeBitsValue & 0x8000) != 0)) {
@@ -88,15 +91,15 @@ LAB_00014454:
       this->reset_access();
       if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x20) == 0) {
         M<UInt32>(self + kIOATIR500Surface_shapeBits) = 0;
-        iVar5 = M<int>(self + kIOATIR500Surface_panel);
-        if (M<int>(self + iVar5 * 8 + 0xd64) == 0xc) {
+        panelNo = M<int>(self + kIOATIR500Surface_panel);
+        if (M<int>(self + panelNo * 8 + 0xd64) == 0xc) {
 LAB_0001460c:
           result = 0;
         }
         else {
-          iVar5 = GH_IOMallocAligned(0xc,0x20);
-          if (iVar5 == 0) {
-            iVar5 = M<int>(self + kIOATIR500Surface_panel);
+          newRegion = GH_IOMallocAligned(0xc,0x20);
+          if (newRegion == 0) {
+            panelNo = M<int>(self + kIOATIR500Surface_panel);
             result = 0xe00002be;
           }
           else {
@@ -107,31 +110,31 @@ LAB_0001460c:
               M<int>(accelerator + 0x804) =
                    M<int>(accelerator + 0x804) - M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd64);
             }
-            M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) = iVar5;
+            M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) = newRegion;
             M<UInt32>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd64) = 0xc;
-            iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
-            if (iVar5 == 0) {
-              iVar5 = M<int>(self + kIOATIR500Surface_panel);
+            acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
+            if (acceleratorPtr == 0) {
+              panelNo = M<int>(self + kIOATIR500Surface_panel);
               goto LAB_0001460c;
             }
             result = 0;
-            M<int>(iVar5 + 0x804) = M<int>(iVar5 + 0x804) + 0xc;
-            iVar5 = M<int>(self + kIOATIR500Surface_panel);
+            M<int>(acceleratorPtr + 0x804) = M<int>(acceleratorPtr + 0x804) + 0xc;
+            panelNo = M<int>(self + kIOATIR500Surface_panel);
           }
         }
-        *M<UInt32 *>(self + iVar5 * 8 + 0xd60) = 0;
+        *M<UInt32 *>(self + panelNo * 8 + 0xd60) = 0;
         M<UInt16>(M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) + 4) = 0;
         M<UInt16>(M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) + 6) = 0;
-        uVar1 = M<UInt16>(M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator) + 0x148);
-        M<UInt16>(M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) + 8) = uVar1;
-        M<UInt16>(self + kIOATIR500Surface_width) = uVar1;
-        M<UInt16>(self + kIOATIR500Surface_committedWidth) = uVar1;
-        uVar1 = M<UInt16>(M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator) + 0x14a);
-        M<UInt16>(M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) + 10) = uVar1;
-        M<UInt16>(self + kIOATIR500Surface_height) = uVar1;
-        M<UInt16>(self + kIOATIR500Surface_committedHeight) = uVar1;
-        iVar5 = VCALL(M<int>(self), 0x5dc)(self);
-        if (iVar5 == 0) {
+        panelWidth = M<UInt16>(M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator) + 0x148);
+        M<UInt16>(M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) + 8) = panelWidth;
+        M<UInt16>(self + kIOATIR500Surface_width) = panelWidth;
+        M<UInt16>(self + kIOATIR500Surface_committedWidth) = panelWidth;
+        panelHeight = M<UInt16>(M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator) + 0x14a);
+        M<UInt16>(M<int>(self + M<int>(self + kIOATIR500Surface_panel) * 8 + 0xd60) + 10) = panelHeight;
+        M<UInt16>(self + kIOATIR500Surface_height) = panelHeight;
+        M<UInt16>(self + kIOATIR500Surface_committedHeight) = panelHeight;
+        shapeStatus = VCALL(M<int>(self), 0x5dc)(self);
+        if (shapeStatus == 0) {
           PANEL_RECORD(self, M<int>(self + kIOATIR500Surface_panel))->active = 0x1;
           M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) | 0x10000000;
           M<unsigned int>(self + kIOATIR500Surface_reqBits) = M<unsigned int>(self + kIOATIR500Surface_reqBits) | 0x10000000;
@@ -139,41 +142,41 @@ LAB_0001460c:
       }
       this->prune_buffers();
       if ((M<unsigned int>(self + kIOATIR500Surface_reqBits) & 1) == 0) {
-        iVar5 = 0;
+        storageBytes = 0;
         if ((M<unsigned int>(self + kIOATIR500Surface_reqBits) & 2) != 0) {
-          iVar5 = M<int>(self + kIOATIR500Surface_buffer1StorageBytes);
+          storageBytes = M<int>(self + kIOATIR500Surface_buffer1StorageBytes);
         }
       }
       else {
-        iVar5 = M<int>(self + kIOATIR500Surface_buffer0StorageBytes);
+        storageBytes = M<int>(self + kIOATIR500Surface_buffer0StorageBytes);
       }
       M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
-      if (iVar5 == 0) {
-        iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
+      if (storageBytes == 0) {
+        acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
       }
       else {
-        local_2c = 0;
-        local_38 = 0;
-        local_34 = 0;
-        local_30 = 0;
-        iVar5 = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x540)
-                          (M<int *>(self + kIOATIR500Surface_accelerator),&local_38,iVar5,0x1000);
-        if (iVar5 == 0) {
-          iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
+        vramElement[3] = 0;
+        vramElement[0] = 0;
+        vramElement[1] = 0;
+        vramElement[2] = 0;
+        vramAllocOk = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x540)
+                          (M<int *>(self + kIOATIR500Surface_accelerator),vramElement,storageBytes,0x1000);
+        if (vramAllocOk == 0) {
+          acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
           result = 0xe00002be;
           M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) | 0x20000000;
         }
         else {
-          VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),&local_38);
-          iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
+          VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),vramElement);
+          acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
         }
       }
       goto LAB_000147d0;
     }
-    iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
-    if (mode < M<unsigned int>(iVar5 + 0xcc)) {
-      uVar7 = ~mode;
-      owner = M<UInt8 *>(mode * 0x20 + iVar5 + 0xe8);
+    acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
+    if (mode < M<unsigned int>(acceleratorPtr + kIOATIR500Accelerator_displayCount)) {
+      requestedId = ~mode;
+      owner = M<UInt8 *>(mode * 0x20 + acceleratorPtr + 0xe8);
       if (((owner == (UInt8 *)0x0) || (self == owner)) || ((modeBitsValue & 0x8000) == 0)) {
         switch(modeBitsValue & 0xf) {
         case 3:
@@ -192,7 +195,7 @@ LAB_0001460c:
         case 0xd:
           requiredKind = 0x10;
         }
-        if (M<SInt16>(mode * 0x78 + iVar5 + 0x142) == requiredKind) goto LAB_00014454;
+        if (M<SInt16>(mode * 0x78 + acceleratorPtr + kIOATIR500Accelerator_scanout1BufferBytesPerPixel) == requiredKind) goto LAB_00014454;
       }
     }
   }
@@ -201,10 +204,10 @@ LAB_0001460c:
       modeBitsValue = modeBitsValue | M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0xffff7fc0;
       goto LAB_00014370;
     }
-    iVar5 = M<int>(self + kIOATIR500Surface_accelerator);
+    acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
   }
   result = 0xe00002bc;
 LAB_000147d0:
-  GH_IOLockUnlock(M<UInt32>(iVar5 + 0x840));
+  GH_IOLockUnlock(M<UInt32>(acceleratorPtr + kIOATIR500Accelerator_commandLock));
   return result;
 }

@@ -229,7 +229,7 @@ void ATIR500Surface::build_swap() {
   
   M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 0;
   accelBase = M<SInt32>(self + kIOATIR500Surface_accelerator);
-  if (M<SInt32>(accelBase + 0xcc) != 0) {
+  if (M<SInt32>(accelBase + kIOATIR500Accelerator_displayCount) != 0) {
     panel = 0;
     zero = (double)FLOAT_0004c370;
     one = (double)FLOAT_0004c374;
@@ -1296,7 +1296,7 @@ LAB_0003f654:
       M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) = M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) | 1;
       M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 1;
       accelBase = M<SInt32>(self + kIOATIR500Surface_accelerator);
-    } while (panel < M<UInt32>(accelBase + 0xcc));
+    } while (panel < M<UInt32>(accelBase + kIOATIR500Accelerator_displayCount));
   }
   return;
 }

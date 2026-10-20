@@ -134,40 +134,45 @@ IOReturn IOATIR500Accelerator::addToMinMaxGART(IOMemoryDescriptor *memory, UInt3
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *memoryBytes = reinterpret_cast<UInt8 *>(memory);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
   UInt32 pageCount;
   UInt32 result;
   UInt32 physAddress;
-  SInt32 iVar6;
   UInt32 firstEntry;
   UInt32 freeRun;
   UInt32 segmentLength [9];
+  UInt32 gartLimitBytes;
+  UInt32 lastEntry;
+  UInt32 pageSize;
+  SInt32 tableByteOffset;
+  SInt32 status;
+  SInt32 segmentOffset;
+  SInt32 entriesToScan;
+  SInt32 gartTable;
   
   *outOffset = 0;
   pageCount = VCALL(M<SInt32>(memoryBytes), 0x128)(memoryBytes);
   pageCount = pageCount >> (GH_page_shift & 0x3f);
   firstEntry = minOffset >> (GH_page_shift & 0x3f);
-  uVar1 = (M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB) >> 2) << (GH_page_shift & 0x3f);
-  if (uVar1 <= maxOffset) {
-    maxOffset = uVar1 - GH_page_size;
+  gartLimitBytes = (M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB) >> 2) << (GH_page_shift & 0x3f);
+  if (gartLimitBytes <= maxOffset) {
+    maxOffset = gartLimitBytes - GH_page_size;
   }
-  uVar1 = maxOffset >> (GH_page_shift & 0x3f);
-  iVar6 = firstEntry << 2;
+  lastEntry = maxOffset >> (GH_page_shift & 0x3f);
+  tableByteOffset = firstEntry << 2;
   freeRun = 0;
-  iVar2 = (uVar1 - firstEntry) + 1;
-  if ((uVar1 < firstEntry) || (uVar1 == 0)) {
-    iVar2 = 1;
+  entriesToScan = (lastEntry - firstEntry) + 1;
+  if ((lastEntry < firstEntry) || (lastEntry == 0)) {
+    entriesToScan = 1;
   }
   do {
-    iVar2 = iVar2 + -1;
-    if (iVar2 == 0) {
+    entriesToScan = entriesToScan + -1;
+    if (entriesToScan == 0) {
       if (pageCount != freeRun) {
         return 0;
       }
       goto LAB_000060d8;
     }
-    if ((M<SInt32>(iVar6 + M<SInt32>(self + kIOATIR500Accelerator_gartTable)) == M<SInt32>(self + kIOATIR500Accelerator_gartEmptyEntry)) &&
+    if ((M<SInt32>(tableByteOffset + M<SInt32>(self + kIOATIR500Accelerator_gartTable)) == M<SInt32>(self + kIOATIR500Accelerator_gartEmptyEntry)) &&
        ((freeRun != 0 || ((firstEntry & 1) == 0)))) {
       freeRun = freeRun + 1;
     }
@@ -175,29 +180,29 @@ IOReturn IOATIR500Accelerator::addToMinMaxGART(IOMemoryDescriptor *memory, UInt3
       freeRun = 0;
     }
     firstEntry = firstEntry + 1;
-    iVar6 = iVar6 + 4;
+    tableByteOffset = tableByteOffset + 4;
   } while (freeRun != pageCount);
   firstEntry = firstEntry - pageCount;
 LAB_000060d8:
-  iVar6 = VCALL(M<SInt32>(memoryBytes), 0x144)(memoryBytes,3);
-  if (iVar6 == 0) {
+  status = VCALL(M<SInt32>(memoryBytes), 0x144)(memoryBytes,3);
+  if (status == 0) {
     if (((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 2) == 0) ||
-       (iVar6 = VCALL(M<SInt32>(self), 0x588)
-                          (self,memoryBytes,firstEntry << (GH_page_shift & 0x3f),0), iVar6 == 0)) {
-      iVar6 = 0;
+       (status = VCALL(M<SInt32>(self), 0x588)
+                          (self,memoryBytes,firstEntry << (GH_page_shift & 0x3f),0), status == 0)) {
+      segmentOffset = 0;
       *outOffset = firstEntry << (GH_page_shift & 0x3f);
-      while (physAddress = VCALL(M<SInt32>(memoryBytes), 0x13c)(memoryBytes,iVar6,segmentLength),
-            uVar1 = GH_page_size, physAddress != 0) {
-        iVar6 = iVar6 + segmentLength[0];
+      while (physAddress = VCALL(M<SInt32>(memoryBytes), 0x13c)(memoryBytes,segmentOffset,segmentLength),
+            pageSize = GH_page_size, physAddress != 0) {
+        segmentOffset = segmentOffset + segmentLength[0];
         if (GH_page_size <= segmentLength[0]) {
-          iVar2 = M<SInt32>(self + kIOATIR500Accelerator_gartTable);
+          gartTable = M<SInt32>(self + kIOATIR500Accelerator_gartTable);
           do {
-            M<UInt32>(iVar2 + firstEntry * 4) =
+            M<UInt32>(gartTable + firstEntry * 4) =
                  physAddress << 0x18 | (physAddress & 0xff00) << 8 | physAddress >> 8 & 0xff00 | physAddress >> 0x18;
-            segmentLength[0] = segmentLength[0] - uVar1;
-            physAddress = physAddress + uVar1;
+            segmentLength[0] = segmentLength[0] - pageSize;
+            physAddress = physAddress + pageSize;
             firstEntry = firstEntry + 1;
-          } while (uVar1 <= segmentLength[0]);
+          } while (pageSize <= segmentLength[0]);
         }
       }
       VCALL(M<SInt32>(self), 0x59c)(self,firstEntry - freeRun,pageCount);

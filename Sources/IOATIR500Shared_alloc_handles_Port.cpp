@@ -35,54 +35,58 @@ bool IOATIR500Shared::alloc_handles() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 bitmapBytes;
-  SInt32 iVar2;
-  UInt32 uVar3;
   SInt32 newCapacity;
-  SInt32 iVar5;
   SInt32 totalBytes;
   UInt32 oldCapacity;
   SInt32 oldTable;
+  UInt32 oldBitmap;
+  UInt32 result;
+  SInt32 newTable;
+  SInt32 acceleratorBytes;
+  SInt32 tableBytes;
+  SInt32 oldTotalBytes;
+  SInt32 accelerator;
   
   oldCapacity = M<UInt32>(self + kIOATIR500Shared_handleCapacity);
   if (oldCapacity == 0) {
     newCapacity = 0x400;
     bitmapBytes = 0x80;
-    iVar5 = 0x1000;
+    tableBytes = 0x1000;
   }
   else {
     newCapacity = oldCapacity << 1;
-    iVar5 = oldCapacity << 3;
+    tableBytes = oldCapacity << 3;
     bitmapBytes = (oldCapacity & 0x7fffffff) >> 2;
   }
-  totalBytes = iVar5 + bitmapBytes;
+  totalBytes = tableBytes + bitmapBytes;
   oldTable = M<SInt32>(self + kIOATIR500Shared_handleTable);
-  uVar3 = M<UInt32>(self + kIOATIR500Shared_handleBitmap);
-  iVar2 = GH_IOMalloc(totalBytes);
-  M<SInt32>(self + kIOATIR500Shared_handleTable) = iVar2;
-  if (iVar2 == 0) {
-    uVar3 = 0;
+  oldBitmap = M<UInt32>(self + kIOATIR500Shared_handleBitmap);
+  newTable = GH_IOMalloc(totalBytes);
+  M<SInt32>(self + kIOATIR500Shared_handleTable) = newTable;
+  if (newTable == 0) {
+    result = 0;
     M<SInt32>(self + kIOATIR500Shared_handleTable) = oldTable;
   }
   else {
-    iVar2 = M<SInt32>(self + kIOATIR500Shared_accelerator);
-    if (iVar2 != 0) {
-      M<SInt32>(iVar2 + 0x808) = totalBytes + M<SInt32>(iVar2 + 0x808);
+    acceleratorBytes = M<SInt32>(self + kIOATIR500Shared_accelerator);
+    if (acceleratorBytes != 0) {
+      M<SInt32>(acceleratorBytes + kIOATIR500Accelerator_vendorTextureBufferBytes) = totalBytes + M<SInt32>(acceleratorBytes + kIOATIR500Accelerator_vendorTextureBufferBytes);
     }
     M<SInt32>(self + kIOATIR500Shared_handleCapacity) = newCapacity;
-    M<SInt32>(self + kIOATIR500Shared_handleBitmap) = iVar5 + M<SInt32>(self + kIOATIR500Shared_handleTable);
+    M<SInt32>(self + kIOATIR500Shared_handleBitmap) = tableBytes + M<SInt32>(self + kIOATIR500Shared_handleTable);
     GH_memset(M<SInt32>(self + kIOATIR500Shared_handleTable),0,totalBytes);
     if (oldTable != 0) {
-      iVar5 = oldCapacity * 4 + (oldCapacity >> 3);
+      oldTotalBytes = oldCapacity * 4 + (oldCapacity >> 3);
       GH_memcpy(M<UInt32>(self + kIOATIR500Shared_handleTable),oldTable,oldCapacity * 4);
-      GH_memcpy(M<UInt32>(self + kIOATIR500Shared_handleBitmap),uVar3,oldCapacity >> 3);
-      GH_IOFree(oldTable,iVar5);
-      newCapacity = M<SInt32>(self + kIOATIR500Shared_accelerator);
-      if (newCapacity != 0) {
-        M<SInt32>(newCapacity + 0x808) = M<SInt32>(newCapacity + 0x808) - iVar5;
+      GH_memcpy(M<UInt32>(self + kIOATIR500Shared_handleBitmap),oldBitmap,oldCapacity >> 3);
+      GH_IOFree(oldTable,oldTotalBytes);
+      accelerator = M<SInt32>(self + kIOATIR500Shared_accelerator);
+      if (accelerator != 0) {
+        M<SInt32>(accelerator + kIOATIR500Accelerator_vendorTextureBufferBytes) = M<SInt32>(accelerator + kIOATIR500Accelerator_vendorTextureBufferBytes) - oldTotalBytes;
         return 1;
       }
     }
-    uVar3 = 1;
+    result = 1;
   }
-  return uVar3;
+  return result;
 }

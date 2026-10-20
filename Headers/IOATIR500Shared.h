@@ -148,7 +148,7 @@ public:
      * (non-null on success, passed straight into further vtable calls
      * taking that exact type elsewhere in this project).
      */
-    VendorTextureBuffer *new_surface_texture(UInt32 surfaceId, UInt32 unknown_0x58, UInt32 unknown_0x34, unsigned int *outParam);
+    VendorTextureBuffer *new_surface_texture(UInt32 surfaceId, UInt32 unknown_0x58, UInt32 faceCount, unsigned int *outClientAddress);
     VendorTextureBuffer *new_global_texture(UInt32 globalId, unsigned int *outParam);
     VendorTextureBuffer *new_texture(UInt32 size, UInt32 auxValue, unsigned int agpAddress, UInt32 agpLength, unsigned int *outDataAddress, unsigned int *outSharedUserAddr);
     VendorTextureBuffer *new_agpref_texture(unsigned int refAddress, unsigned int agpAddress, UInt32 agpLength, unsigned int *outParam);

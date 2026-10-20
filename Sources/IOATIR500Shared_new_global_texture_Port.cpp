@@ -28,18 +28,19 @@ extern "C" UInt32 GH_OSIncrementAtomic(...) asm("_OSIncrementAtomic");
 
 
 /* real addr 0x17740 */
-VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 globalId, unsigned int *real_param_2) {
+VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 globalId, unsigned int *outClientAddress) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    unsigned int *param_2 = reinterpret_cast<unsigned int *>(real_param_2);
+    unsigned int *outClientAddressAlias = reinterpret_cast<unsigned int *>(outClientAddress);
 
   UInt8 *globalShared;
   int *accel;
   void *texture;
-  int iVar4;
   int sourceTexture;
   UInt32 handle;
   sIOClientShared *clientShared;
   unsigned int clientUserAddr [4];
+  int handleOk;
+  int clientSharedOk;
   
   if (globalId != 0) {
     accel = M<int *>(self + kIOATIR500Shared_accelerator);
@@ -51,10 +52,10 @@ VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 globalId, unsign
           if (texture == (void *)0x0) {
             return (VendorTextureBuffer *)((void *)0x0);
           }
-          iVar4 = this->alloc_buf_handle(texture,(UInt32 *)(&handle));
-          if (iVar4 != 0) {
-            iVar4 = this->alloc_client_shared(handle,(sIOClientShared **)(&clientShared),(unsigned int *)(clientUserAddr));
-            if (iVar4 != 0) {
+          handleOk = this->alloc_buf_handle(texture,(UInt32 *)(&handle));
+          if (handleOk != 0) {
+            clientSharedOk = this->alloc_client_shared(handle,(sIOClientShared **)(&clientShared),(unsigned int *)(clientUserAddr));
+            if (clientSharedOk != 0) {
               M<UInt32>((int)texture + 8) = 0;
               M<sIOClientShared *>((int)texture + 0x14) = clientShared;
               M<UInt32>(clientShared) = handle;
@@ -71,7 +72,7 @@ VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 globalId, unsign
               VCALL(*M<int *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c), 0x14)(M<int *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c));
               M<UInt32>((int)texture + 0x3c) = M<UInt32>(self + kIOATIR500Shared_textureListHead);
               M<void *>(self + kIOATIR500Shared_textureListHead) = texture;
-              *param_2 = clientUserAddr[0];
+              *outClientAddressAlias = clientUserAddr[0];
               M<int>(M<int>(self + kIOATIR500Shared_accelerator) + 0x72c) = M<int>(M<int>(self + kIOATIR500Shared_accelerator) + 0x72c) + 1;
               return (VendorTextureBuffer *)(texture);
             }

@@ -6,8 +6,8 @@ field	IOATIR500Accelerator	0x5c	liveSurfaceListHead	CONFIRMED	Headers/IOATIR500A
 field	IOATIR500Accelerator	0x60	liveGLContextListHead	CONFIRMED	Headers/IOATIR500Accelerator.h; IOATIR500GLContext::start writes accelerator+0x60
 field	IOATIR500Accelerator	0x64	live2DContextListHead	CONFIRMED	freeWaitToAllocGART walks it as the IOATIR5002DContext list (next at +0x80, shared at +0x88)
 field	IOATIR500Accelerator	0x68	liveDVDContextListHead	CONFIRMED	freeWaitToAllocGART walks it as the IOATIR500DVDContext list (next at +0x80, shared at +0x84)
-field	IOATIR500Accelerator	0x6c	globalSharedClient	CONFIRMED	the IOATIR500Shared client that is the global shared one: become_global_shared(1) stores the context's clientHandle here when the slot is empty, become_global_shared(0) and IOATIR500Shared::free clear it when it is theirs; zeroed in start
-field	IOATIR500Accelerator	0x70	globalSharedActive	INFERRED	become_global_shared stores 1 here when it sets globalSharedClient and 0 when it clears it (reached as accelerator + 0x70); zeroed in start
+field	IOATIR500Accelerator	0x6c	globalShared	CONFIRMED	the global IOATIR500Shared (a context that became global shared): new_global_texture copies textures out of its list, Shared::free clears it when it is that Shared, new_*_texture bump its counter when they run on it; zeroed in start
+field	IOATIR500Accelerator	0x70	globalTextureCounter	CONFIRMED	next global texture id: new_*_texture on the global Shared store it in the texture's client shared record +4 and increment it (new_global_texture matches the id); zeroed in start
 field	IOATIR500Accelerator,ATIRadeonX1000	0x74	pciDevice	CONFIRMED	start casts the provider to IOPCIDevice (safeMetaCast IOPCIDevice) and stores it here; configureAGP/startupPCIeGART call its vtable
 field	IOATIR500Accelerator,ATIRadeonX1000	0x78	unknown_0x78	CONFIRMED	GL/DVD contexts compare `self == accelerator+0x78` and clear it in stop/set_surface; set to the last submitting context in clientMemoryForType | renamed from currentContext: SWDSWriteBlitToCmdBuf and pageoff_dirty_texture_with_gpu store 0; no reader found
 field	IOATIR500Accelerator,ATIRadeonX1000	0x7c	vramPool	CONFIRMED	start creates `new ATIR500Memory()` and stores it; Radeon init_pool/reserve/dealloc go through it | renamed from memoryPool: ATIR500Memory pool: init_pool(usableVramSize), reserve() of the scanout buffers; ATIRadeonX1000::writePerformanceStats exports its total_fre
@@ -179,7 +179,7 @@ field	IOATIR500Accelerator	0x7d0	vramScanExaminedCount	INFERRED	textures visited
 field	IOATIR500Accelerator	0x7d4	vramScanExcludedCount	INFERRED	first scan: texture was on the caller's exclude list
 field	IOATIR500Accelerator	0x7d8	vramScanInUseCount	INFERRED	first scan: texture still in use (face-mask test failed)
 field	IOATIR500Accelerator	0x7dc	vramScanBusyCount	INFERRED	first scan: texture's stamp not yet retired (vtable +0x554 returned 0)
-field	IOATIR500Accelerator,ATIRadeonX1000	0x7e0	unknown_0x7e0	INFERRED	first scan: texture removed from VRAM (ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM bumps the same counter) | renamed from vramScanEvictedCount: freeToAllocTextureCPUVisibleVRAM increments it once per freed texture; role not established (see that file's header)
+field	IOATIR500Accelerator,ATIRadeonX1000	0x7e0	vramScanEvictedCount	INFERRED	first scan: texture removed from VRAM (ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM bumps the same counter) | renamed from vramScanEvictedCount: freeToAllocTextureCPUVisibleVRAM increments it once per freed texture; role not established (see that file's header)
 field	IOATIR500Accelerator	0x7e4	vramScanTailExaminedCount	INFERRED	textures visited by the second scan (from vramBufferList_prev)
 field	IOATIR500Accelerator	0x7e8	vramScanTailExcludedCount	INFERRED	second scan: excluded
 field	IOATIR500Accelerator	0x7ec	vramScanTailInUseCount	INFERRED	second scan: in use

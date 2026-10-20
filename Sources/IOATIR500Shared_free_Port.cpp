@@ -31,16 +31,17 @@ extern "C" UInt32 GH_IOFree(...) asm("_IOFree");
 void IOATIR500Shared::free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 VVar1;
+  UInt8 nextBufferType;
   SInt32 *chunk;
   UInt8 *texture;
-  SInt32 iVar4;
   UInt8 *accel;
   SInt32 *nextChunk;
   UInt8 *nextTexture;
+  SInt32 headTexture;
+  SInt32 acceleratorBytes;
   
   texture = M<UInt8 *>(self + kIOATIR500Shared_textureListHead);
-  iVar4 = 0;
+  headTexture = 0;
   if (texture != (UInt8 *)0x0) {
     do {
       if (texture[0x20] == 0x4) {
@@ -49,11 +50,11 @@ void IOATIR500Shared::free() {
       else {
         nextTexture = M<UInt8 *>(texture + 0x3c);
         if (nextTexture != (UInt8 *)0x0) {
-          VVar1 = nextTexture[0x20];
-          while ((VVar1 == 0x4 &&
+          nextBufferType = nextTexture[0x20];
+          while ((nextBufferType == 0x4 &&
                  (nextTexture = M<UInt8 *>(nextTexture + 0x3c),
                  nextTexture != (UInt8 *)0x0))) {
-            VVar1 = nextTexture[0x20];
+            nextBufferType = nextTexture[0x20];
           }
         }
         M<UInt32>(M<SInt32>(texture + 0x14) + 0x10) =
@@ -62,16 +63,16 @@ void IOATIR500Shared::free() {
       }
       texture = nextTexture;
     } while (nextTexture != (UInt8 *)0x0);
-    iVar4 = M<SInt32>(self + kIOATIR500Shared_textureListHead);
+    headTexture = M<SInt32>(self + kIOATIR500Shared_textureListHead);
   }
-  while (iVar4 != 0) {
-    M<UInt32>(M<SInt32>(iVar4 + 0x14) + 0x10) = (UInt32)M<UInt16>(M<SInt32>(iVar4 + 0x14) + 0x12);
+  while (headTexture != 0) {
+    M<UInt32>(M<SInt32>(headTexture + 0x14) + 0x10) = (UInt32)M<UInt16>(M<SInt32>(headTexture + 0x14) + 0x12);
     this->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + kIOATIR500Shared_textureListHead)));
-    iVar4 = M<SInt32>(self + kIOATIR500Shared_textureListHead);
+    headTexture = M<SInt32>(self + kIOATIR500Shared_textureListHead);
   }
   accel = M<UInt8 *>(self + kIOATIR500Shared_accelerator);
-  if (self == M<UInt8 *>(accel + kIOATIR500Accelerator_globalSharedClient)) {
-    M<UInt32>(accel + kIOATIR500Accelerator_globalSharedClient) = 0;
+  if (self == M<UInt8 *>(accel + kIOATIR500Accelerator_globalShared)) {
+    M<UInt32>(accel + kIOATIR500Accelerator_globalShared) = 0;
     M<UInt32>(M<SInt32>(self + kIOATIR500Shared_accelerator) + 0x70) = 0;
     accel = M<UInt8 *>(self + kIOATIR500Shared_accelerator);
   }
@@ -83,10 +84,10 @@ void IOATIR500Shared::free() {
     VCALL(*(SInt32 *)chunk[2], 0x18)(chunk[2]);
     VCALL(*(SInt32 *)chunk[1], 0x18)(chunk[1]);
     GH_IOFree(chunk,0x1c);
-    iVar4 = M<SInt32>(self + kIOATIR500Shared_accelerator);
+    acceleratorBytes = M<SInt32>(self + kIOATIR500Shared_accelerator);
     chunk = nextChunk;
-    if (iVar4 != 0) {
-      M<SInt32>(iVar4 + 0x808) = M<SInt32>(iVar4 + 0x808) + -0x1c;
+    if (acceleratorBytes != 0) {
+      M<SInt32>(acceleratorBytes + kIOATIR500Accelerator_vendorTextureBufferBytes) = M<SInt32>(acceleratorBytes + kIOATIR500Accelerator_vendorTextureBufferBytes) + -0x1c;
     }
   }
   this->free_handles();

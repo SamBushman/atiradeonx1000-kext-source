@@ -31,10 +31,10 @@ IOReturn IOATIR500Surface::get_state(eIOAccelSurfaceStateBits *outStateBits) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *outStateBitsBytes = reinterpret_cast<UInt8 *>(outStateBits);
 
-  SInt32 iVar1;
+  SInt32 isIdle;
   
-  iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x520)(M<SInt32 *>(self + kIOATIR500Surface_accelerator));
-  if (iVar1 == 0) {
+  isIdle = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x520)(M<SInt32 *>(self + kIOATIR500Surface_accelerator));
+  if (isIdle == 0) {
     M<UInt32>(outStateBitsBytes) = 0;
   }
   else {

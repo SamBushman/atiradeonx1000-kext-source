@@ -94,7 +94,7 @@ UInt32 ATIR500Surface::copy_buffer_using_DMA(SInt32 x, SInt32 y, SInt32 w, SInt3
   
   accel = M<int>(self + kIOATIR500Surface_accelerator);
   transferSpan = (h - 1) * pitch + M<UInt16>(bufferBytes + 0x16) * w;
-  if (M<char>(accel + 0x80) == '\0') {
+  if (M<char>(accel + kIOATIR500Accelerator_active) == '\0') {
     return 0;
   }
   hzFlag = M<unsigned int>(bufferBytes + 0x3c) >> 0xb & 1;
@@ -135,14 +135,14 @@ LAB_00042bcc:
   if (isWrite) {
     if (direction != 2) goto LAB_00042bf0;
   }
-  else if ((M<unsigned int>(accel + 0x98) >> 3 & 1) == 0) {
+  else if ((M<unsigned int>(accel + kIOATIR500Accelerator_hwCapabilityBits) >> 3 & 1) == 0) {
 LAB_00042bf0:
     needsMapping = false;
     goto LAB_00042bf4;
   }
   needsMapping = true;
 LAB_00042bf4:
-  if (((M<unsigned int>(accel + 0x98) & 0x20000) != 0) && (!needsMapping)) {
+  if (((M<unsigned int>(accel + kIOATIR500Accelerator_hwCapabilityBits) & 0x20000) != 0) && (!needsMapping)) {
     return 0;
   }
   if ((hzClear) || (synchronous)) {
@@ -162,7 +162,7 @@ LAB_00042bf4:
     accel = M<int>(self + kIOATIR500Surface_accelerator);
   }
   if (!needsMapping) {
-    gartBase = M<int>(accel + 0x8a4);
+    gartBase = M<int>(accel + kIOATIR500Accelerator_vramSizeProgrammed);
     writeBits = (direction == 2) << 1;
     transferMap = (int *)0x0;
     mappedAddress = (void *)0x0;
@@ -170,7 +170,7 @@ LAB_00042bf4:
   else {
     transferMap = (int *)VCALL(*M<int *>(transferBytes + 8), 0x14c)
                                (M<int *>(transferBytes + 8),GH_kernel_task,0,
-                                M<unsigned int>(accel + 0x82c) | 1,0,0);
+                                M<unsigned int>(accel + kIOATIR500Accelerator_commandBufferMemoryOptions) | 1,0,0);
     if (transferMap == (int *)0x0) {
       return 0;
     }

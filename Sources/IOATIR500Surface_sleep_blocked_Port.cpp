@@ -33,13 +33,13 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 void IOATIR500Surface::sleep_blocked() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 IVar1;
+  UInt8 blockedFlag;
   
   GH_IOLockLock(M<UInt32>(self + kIOATIR500Surface_lock));
-  IVar1 = self[0xbf6];
-  while (IVar1 != 0x0) {
+  blockedFlag = self[0xbf6];
+  while (blockedFlag != 0x0) {
     GH_IOLockSleep(M<UInt32>(self + kIOATIR500Surface_lock),self,0);
-    IVar1 = self[0xbf6];
+    blockedFlag = self[0xbf6];
   }
   GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Surface_lock));
   return;

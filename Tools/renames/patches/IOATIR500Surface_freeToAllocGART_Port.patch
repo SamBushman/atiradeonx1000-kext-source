@@ -1,15 +1,20 @@
---- a/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-17 20:01:16.270419693 -0700
-+++ b/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-17 20:01:16.271729456 -0700
-@@ -38,7 +38,6 @@
+--- a/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-20 10:51:48.089452889 -0700
++++ b/Sources/IOATIR500Surface_freeToAllocGART_Port.cpp	2026-10-20 10:51:48.090478518 -0700
+@@ -33,12 +33,10 @@
+ 
+   bool notLastSlot;
+   UInt8 *accelerator;
+-  SInt32 iVar2;
+   UInt8 *backingStore;
    UInt32 panelIndex;
    UInt32 bufferIndex;
    SInt32 slotFreed;
 -  UInt8 *pIVar7;
    UInt8 *cursor;
-   
-   panelIndex = 0;
-@@ -46,32 +45,30 @@
-   if (M<SInt32>(accelerator + 0xcc) != 0) {
+   SInt32 freed;
+   SInt32 slotNo;
+@@ -48,32 +46,30 @@
+   if (M<SInt32>(accelerator + kIOATIR500Accelerator_displayCount) != 0) {
      do {
        if (M<SInt32>(accelerator + panelIndex * 4 + 0x114) != 0) {
 +        PanelRecord *rec = PANEL_RECORD(self, panelIndex);
@@ -20,12 +25,12 @@
 -          iVar2 = ((IOATIR500Accelerator *)(accelerator))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + slotFreed + 0xc20)),(VendorTransferBuffer *)(neededBytes),
 -                             M<UInt32>(cursor),aggressive);
 +          SwapBufferEntry *master = &rec->entries[bufferIndex];
-+          iVar2 = ((IOATIR500Accelerator *)(accelerator))->freeTransferToAllocGART((VendorTransferBuffer *)(master),(VendorTransferBuffer *)(neededBytes),
++          freed = ((IOATIR500Accelerator *)(accelerator))->freeTransferToAllocGART((VendorTransferBuffer *)(master),(VendorTransferBuffer *)(neededBytes),
 +                             master->stamp,aggressive);
-           if (iVar2 != 0) {
+           if (freed != 0) {
              return 1;
            }
-           iVar2 = 0;
+           slotNo = 0;
 -          backingStore = (UInt8 *)(self + slotFreed + 0xc3c);
 -          pIVar7 = self + slotFreed + 0xc4c;
 +          /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]; with more than one buffer per panel this walks past the record (stock behaviour, kept) */
@@ -38,11 +43,11 @@
              if (slotFreed != 0) {
                return 1;
              }
-             notLastSlot = iVar2 != 3;
+             notLastSlot = slotNo != 3;
 -            backingStore = backingStore + 0x1c;
 -            pIVar7 = pIVar7 + 0x1c;
 +            slot = slot + 1;
-             iVar2 = iVar2 + 1;
+             slotNo = slotNo + 1;
            } while (notLastSlot);
            accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
            bufferIndex = bufferIndex + 1;

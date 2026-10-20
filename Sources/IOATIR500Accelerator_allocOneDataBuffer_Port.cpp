@@ -31,9 +31,10 @@ VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 sizeClass, 
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt8 *dataBuffer;
-  SInt32 iVar2;
   UInt32 in_register_00000014;
   SInt32 prevNode;
+  SInt32 nextNode;
+  SInt32 allocStatus;
   
   dataBuffer = (UInt8 *)VCALL(M<SInt32>(self), 0x570)(self,0xc0);
   if (dataBuffer != (UInt8 *)0x0) {
@@ -41,9 +42,9 @@ VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 sizeClass, 
     M<UInt8 *>(dataBuffer + 0x14) = dataBuffer + 0x80;
     dataBuffer[0x20] = 0x8;
     if ((((UInt32)forWrite) == 0) ||
-       (iVar2 = VCALL(M<SInt32>(self), 0x528)(self,dataBuffer), iVar2 == 0)) {
-      iVar2 = this->allocDataBufferBacking((VendorTextureBuffer *)(dataBuffer));
-      if (iVar2 == 0) {
+       (allocStatus = VCALL(M<SInt32>(self), 0x528)(self,dataBuffer), allocStatus == 0)) {
+      allocStatus = this->allocDataBufferBacking((VendorTextureBuffer *)(dataBuffer));
+      if (allocStatus == 0) {
         VCALL(M<SInt32>(self), 0x574)(self,dataBuffer,0xc0);
         return (VendorTextureBuffer *)((UInt8 *)0x0);
       }
@@ -52,9 +53,9 @@ VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 sizeClass, 
       if (M<SInt32>(dataBuffer + 0x48) != 0) {
         prevNode = M<SInt32>(dataBuffer + 0x24);
         M<UInt32>(prevNode + 0x28) = M<UInt32>(dataBuffer + 0x28);
-        iVar2 = M<SInt32>(dataBuffer + 0x28);
+        nextNode = M<SInt32>(dataBuffer + 0x28);
         M<UInt8 *>(dataBuffer + 0x28) = self + kIOATIR500Accelerator_textureVramListSentinel;
-        M<SInt32>(iVar2 + 0x24) = prevNode;
+        M<SInt32>(nextNode + 0x24) = prevNode;
         M<UInt32>(dataBuffer + 0x24) = M<UInt32>(self + kIOATIR500Accelerator_vramBufferList_prev);
         M<UInt8 *>(self + kIOATIR500Accelerator_vramBufferList_prev) = dataBuffer;
         M<UInt8 *>(M<SInt32>(dataBuffer + 0x24) + 0x28) = dataBuffer;

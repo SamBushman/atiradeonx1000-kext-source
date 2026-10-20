@@ -31,55 +31,57 @@ UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *bu
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
   UInt16 levelCount;
   SInt32 backingStore;
   SInt32 *attachedMemory;
   UInt8 *cursor;
-  UInt32 uVar6;
   SInt32 generation;
   UInt32 index;
   UInt32 nextLevel;
   UInt32 levelWidth;
   UInt32 levelHeight [6];
+  SInt32 acceleratorStamp;
+  SInt32 recordsLeft;
+  UInt32 faceCount;
+  UInt32 level;
   
   if (M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x54) == M<SInt32>(self + kIOATIR500Surface_stamp)) {
     M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x724) =
          M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x724) + M<SInt32>(bufferBytes + 0x10);
-    uVar6 = (UInt32)M<UInt16>(bufferBytes + 0x20);
+    faceCount = (UInt32)M<UInt16>(bufferBytes + 0x20);
     generation = M<SInt32>(self + kIOATIR500Surface_stamp);
-    iVar1 = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x50);
-    if (uVar6 != 0) {
+    acceleratorStamp = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x50);
+    if (faceCount != 0) {
       levelCount = M<UInt16>(bufferBytes + 0x22);
       index = 0;
       do {
         if (levelCount != 0) {
-          uVar6 = 0;
+          level = 0;
           do {
-            VCALL(M<SInt32>(self), 0x5f0)(self,bufferBytes,index,uVar6,&levelWidth,levelHeight,0);
-            nextLevel = uVar6 + 1;
+            VCALL(M<SInt32>(self), 0x5f0)(self,bufferBytes,index,level,&levelWidth,levelHeight,0);
+            nextLevel = level + 1;
             VCALL(M<SInt32>(self), 0x5ec)
-                      (self,0,0,levelWidth,levelHeight[0],index,uVar6,bufferBytes,iVar1 + -1,0,0,0,1);
+                      (self,0,0,levelWidth,levelHeight[0],index,level,bufferBytes,acceleratorStamp + -1,0,0,0,1);
             M<UInt32>(M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x14) + 8) =
                  M<UInt32>(self + kIOATIR500Surface_stamp);
             levelCount = M<UInt16>(bufferBytes + 0x22);
-            uVar6 = nextLevel;
+            level = nextLevel;
           } while (nextLevel < levelCount);
-          uVar6 = (UInt32)M<UInt16>(bufferBytes + 0x20);
+          faceCount = (UInt32)M<UInt16>(bufferBytes + 0x20);
         }
         index = index + 1;
-      } while (index < uVar6);
+      } while (index < faceCount);
     }
     cursor = self + kIOATIR500Surface_buffer0BackingStore;
-    iVar1 = 0x17;
+    recordsLeft = 0x17;
     do {
       backingStore = M<SInt32>(cursor);
       cursor = cursor + 0x78;
       if ((backingStore != 0) && (generation == M<SInt32>(backingStore + 0x54))) {
         M<UInt32>(backingStore + 0x54) = M<UInt32>(self + kIOATIR500Surface_stamp);
       }
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      recordsLeft = recordsLeft + -1;
+    } while (recordsLeft != 0);
   }
   if ((((self[0xc09] == 0x0) && ((M<UInt32>(self + kIOATIR500Surface_lockFlags) & 0xffff0000) == 0)) &&
       (self[0xc08] == 0x0)) &&

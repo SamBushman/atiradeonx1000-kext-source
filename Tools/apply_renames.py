@@ -37,6 +37,10 @@ Table format (tab separated, '#' starts a comment line):
           placeholder with a readable shape, e.g. unknown_0x84)
   evidence  one line: where the meaning comes from (not interpreted by the tool)
 
+  kind    drop  TARGET  OLD  -  TIER  EVIDENCE   (columns: kind target old new tier evidence)
+          remove the declaration of OLD in the definition TARGET when nothing else uses it (a variable the decompile declared and never touched);
+          `new` is ignored (write `-`).
+
   kind    field  CLASS[,CLASS...]  0xOFFSET  name  tier  evidence   (columns: kind classes offset name tier evidence)
           name the direct object-field accesses `self + 0xOFFSET` (or `param_1 + 0xOFFSET`, the same pointer under Ghidra's name) in every method of the
           class(es): the literal becomes the constant `k<FirstClass>_<name>`, declared in the generated Headers/FieldOffsets.h
@@ -60,7 +64,8 @@ The rows of the cleanup tables Locals5_*.tsv are gated by Tools/renames/parity_c
 name a new variable per old variable (two different old variables may not share a new name: the occ numbering counts the new names of one old variable), use
 anchors that avoid identifiers other tables rename (a field constant `kClass_name` in an anchor must be written as its offset literal).
 Anchors (`from`/`to`) are Python regexes (a trailing `#N` selects the N-th matching line instead of the first) matched against a line in which every `use` rename of the function has been taken back (so an anchor
-may be written with the old names and keeps matching after the table was applied). A `use` row is applied once its segment no longer contains `old`; several rows may give disjoint segments of one variable the same `new` name
+may be written with the old names and keeps matching after the table was applied). A table that carries the line `#!use-drop: yes` (before its `use` rows) also loses the now unused declaration of every `old` its rows have emptied.
+A `use` row is applied once its segment no longer contains `old`; several rows may give disjoint segments of one variable the same `new` name
 (the first one declares it).
 A split is only valid when no value of `old` flows from one segment into another: the tool cannot see that, so Tools/verify_identical_build.sh
 (the compiled kext must stay byte-identical) is the gate for every `use` row; Tools/renames/find_splits.py lists the assignments and reads of a
@@ -231,7 +236,7 @@ def nth_match(pattern, norm, start):
     return None
 
 
-DECL_RE = r'^(\s*)((?:[A-Za-z_][\w:<>]*\s+)*[A-Za-z_][\w:<>]*(?:\s*\*+\s*|\s+))%s\s*;\s*$'
+DECL_RE = r'^(\s*)((?:[A-Za-z_][\w:<>]*\s+)*[A-Za-z_][\w:<>]*(?:\s*\*+\s*|\s+))%s(\s*\[[^\]]*\])?\s*;\s*(?:/\*.*\*/\s*)?$'
 
 
 def line_variants(line, revert, limit=64):
@@ -338,15 +343,15 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_row
                 lines[a:b] = seg.split('\n')
             if not declared:
                 m = re.match(DECL_RE % re.escape(old), lines[decl_i])
-                lines.insert(decl_end if dmode != 'beside' else decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
+                lines.insert(decl_end if dmode.rstrip('!') != 'beside' else decl_i + 1, '%s%s%s%s;' % (m.group(1), m.group(2), new, m.group(3) or ''))
             scope = '\n'.join(lines)
             pending += 1
-        lines = scope.split('\n')                      # a variable that every `use` row has renamed away loses its (now unused) declaration
-        for old in sorted({r[3] for r in rs if r[8] == 'end-drop'}):
-            di = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
-            if di is not None and not code_idents('\n'.join(lines[:di] + lines[di + 1:]), {old}):
-                del lines[di]
-        scope = '\n'.join(lines)
+        # an `old` that no row leaves in the code any more (`#!use-decl: end-drop` or `#!use-drop: yes`): drop its (now unused) declaration, so no placeholder name is left behind
+        for old in sorted({r[3] for r in rs if r[8] == 'end-drop' or r[8].endswith('!')}):
+            ls = scope.split('\n')
+            di = [i for i, l in enumerate(ls) if re.match(DECL_RE % re.escape(old), l)]
+            if len(di) == 1 and old not in idents_in('\n'.join(l for i, l in enumerate(ls) if i != di[0]), comments=False):
+                del ls[di[0]]; scope = '\n'.join(ls)
         files[f] = s[:st] + scope + s[en:]
     return pending, applied
 
@@ -563,10 +568,14 @@ def main():
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
-    rows, use_rows, field_rows, ptr_rows, var_rows, redef_rows = [], [], [], [], [], []
+    rows, use_rows, field_rows, ptr_rows, var_rows, redef_rows, drop_rows = [], [], [], [], [], [], []
     for t in tables:
         dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
+        dropunused = False                              # `#!use-drop: yes`: drop the declaration of an `old` that no `use` row leaves in the code
         for n, l in enumerate(open(t), 1):
+            if l.startswith('#!use-drop:'):
+                dropunused = l.split(':', 1)[1].strip() == 'yes'
+                continue
             if l.startswith('#!use-decl:'):
                 dmode = l.split(':', 1)[1].strip()
                 if dmode not in ('end', 'beside', 'end-drop'): sys.exit('%s:%d: #!use-decl must be end, beside or end-drop' % (t, n))
@@ -584,11 +593,13 @@ def main():
             if f[0] == 'fieldvar':                      # fieldvar CLASSES VAR SCOPE TIER EVIDENCE
                 if len(f) < 6 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]): sys.exit('%s:%d: bad fieldvar row (fieldvar CLASSES var scope tier evidence)' % (t, n))
                 var_rows.append((t, n, f[1].split(','), f[2], f[3], f[4])); continue
-            if len(f) < 5 or f[0] not in ('def', 'decl', 'use', 'redef') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
+            if len(f) < 5 or f[0] not in ('def', 'decl', 'use', 'redef', 'drop') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
                 sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
+            if f[0] == 'drop':                          # drop TARGET OLD - TIER EVIDENCE: remove the declaration of a variable the decompile declared and never used
+                drop_rows.append((t, n, f[1], f[2])); continue
             if f[0] == 'use':
                 f += [''] * (9 - len(f))
-                use_rows.append((t, n, f[1], f[2], f[3], f[6], f[7], f[8], dmode))
+                use_rows.append((t, n, f[1], f[2], f[3], f[6], f[7], f[8], dmode + ('!' if dropunused else '')))
                 continue
             if f[0] == 'redef': redef_rows.append((t, n, 'def', f[1], f[2], f[3])); continue
             rows.append((t, n, f[0], f[1], f[2], f[3]))
@@ -638,6 +649,23 @@ def main():
     up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, redef_rows, def_pairs)
     pending += up; applied += ua
     apply_groups(redef_rows)
+    for (t, n, target, old) in drop_rows:
+        try:
+            cls, meth, addr, nth = parse_target(target)
+            spans = find_defs(a.root, cls, meth, addr, read)
+        except Exception as e:
+            errors.append('%s:%d: %s: %s' % (t, n, target, e)); continue
+        if len(spans) != 1: errors.append('%s:%d: %s (drop): %d matches' % (t, n, target, len(spans))); continue
+        f, st, en = spans[0]
+        s = read(f); ls = s[st:en].split('\n')
+        di = [i for i, l in enumerate(ls) if re.match(DECL_RE % re.escape(old), l)]
+        if not di:
+            if old in idents_in(s[st:en], comments=False): errors.append('%s:%d: %s: %s has no plain declaration to drop' % (t, n, target, old))
+            else: applied += 1
+            continue
+        if old in idents_in('\n'.join(l for i, l in enumerate(ls) if i != di[0]), comments=False):
+            errors.append('%s:%d: %s: %s is still used, it cannot be dropped' % (t, n, target, old)); continue
+        del ls[di[0]]; files[f] = s[:st] + '\n'.join(ls) + s[en:]; pending += 1
     if field_rows:
         fp, fa, by_off, _consts = apply_fields(field_rows, a.root, read, files, errors)
         pending += fp; applied += fa

@@ -32,24 +32,25 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 IOReturn IOATIR500Surface::surface_query_lock() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
   SInt32 allocated;
   UInt32 result;
+  UInt32 pendingBits;
+  UInt32 bufferIndex;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
   if (((M<UInt32>(self + kIOATIR500Surface_lockFlags) & 0xffff0000) == 0) &&
      (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) + 0x10) != 0)) {
     if ((M<UInt32>(self + kIOATIR500Surface_stateBits) & 0x20000000) == 0) {
-      uVar1 = M<UInt32>(self + kIOATIR500Surface_stateBits) & M<UInt32>(self + kIOATIR500Surface_reqBits);
-      if ((uVar1 & 3) != 0) {
-        uVar1 = uVar1 & 1 ^ 1;
-        if ((M<SInt32>(self + uVar1 * 0x78 + 0xb8) != 0) &&
-           (M<SInt32>(self + uVar1 * 0x78 + 0xb0) == 0)) {
+      pendingBits = M<UInt32>(self + kIOATIR500Surface_stateBits) & M<UInt32>(self + kIOATIR500Surface_reqBits);
+      if ((pendingBits & 3) != 0) {
+        bufferIndex = pendingBits & 1 ^ 1;
+        if ((M<SInt32>(self + bufferIndex * 0x78 + 0xb8) != 0) &&
+           (M<SInt32>(self + bufferIndex * 0x78 + 0xb0) == 0)) {
           /* #171: stock 0x15210: r4 = this + idx*0x78 + 0xa8 (the buffer record), alloc_surface_buffer(ATIR500SurfaceBuffer*) */
-          allocated = VCALL(M<SInt32>(self), 0x5d0)(self,self + uVar1 * 0x78 + 0xa8);
+          allocated = VCALL(M<SInt32>(self), 0x5d0)(self,self + bufferIndex * 0x78 + 0xa8);
           if (allocated != 0) {
             result = 0;
-            VCALL(M<SInt32>(self), 0x5cc)(self,uVar1);
+            VCALL(M<SInt32>(self), 0x5cc)(self,bufferIndex);
             goto LAB_00015280;
           }
           goto LAB_00015270;

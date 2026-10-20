@@ -30,33 +30,34 @@
 void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
   UInt32 panelIndex;
   PanelRecord *panel;
+  SInt32 stampReached;
+  SInt32 accelerator;
   
   if ((self[0xbed] == 0x0) ||
-     (iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
-                        (M<SInt32 *>(self + kIOATIR500Surface_accelerator),M<UInt32>(self + kIOATIR500Surface_submittedStamp)), iVar1 != 0)) {
+     (stampReached = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
+                        (M<SInt32 *>(self + kIOATIR500Surface_accelerator),M<UInt32>(self + kIOATIR500Surface_submittedStamp)), stampReached != 0)) {
     if ((M<UInt32>(self + kIOATIR500Surface_stateBits) & M<UInt32>(self + kIOATIR500Surface_reqBits) & 0x10000000) != 0) {
       VCALL(M<SInt32>(self), 0x5c0)(self);
       M<UInt32>(self + kIOATIR500Surface_stateBits) = M<UInt32>(self + kIOATIR500Surface_stateBits) & 0xefffffff;
     }
-    iVar1 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+    accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
     M<UInt32>(self + kIOATIR500Surface_flushedStamp) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
-    if (M<SInt32>(iVar1 + 0xcc) != 0) {
+    if (M<SInt32>(accelerator + kIOATIR500Accelerator_displayCount) != 0) {
       panelIndex = 0;
       panel = PANEL_RECORD(self, 0);
       do {
         if (((1 << (panelIndex & 0x3f) & panelMask) != 0) && (panel->active != 0x0)) {
           VCALL(M<SInt32>(self), 0x5d4)(self,panelIndex,swapArg);
           M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x74c) + 1;
-          iVar1 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+          accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
         }
         panelIndex = panelIndex + 1;
         panel = panel + 1;
-      } while (panelIndex < M<UInt32>(iVar1 + 0xcc));
+      } while (panelIndex < M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount));
     }
-    M<UInt32>(iVar1 + 0x78) = 0;
+    M<UInt32>(accelerator + kIOATIR500Accelerator_unknown_0x78) = 0;
   }
   return;
 }

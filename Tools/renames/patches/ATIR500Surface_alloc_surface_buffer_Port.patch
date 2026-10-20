@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 09:35:57.098817675 -0700
-+++ b/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 09:35:57.100314111 -0700
+--- a/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 13:04:46.132860707 -0700
++++ b/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 13:04:46.134271129 -0700
 @@ -33,151 +33,158 @@
  
    UInt16 height;
@@ -34,11 +34,11 @@
 -    if (M<UInt16>(iVar7 + 0xa8) < M<UInt16>(bufferBytes + 0x1c)) {
 +     ((usesHzmem == 0 && (bufferBytes != (UInt8 *)(self + kIOATIR500Surface_buffer9))))) {
 +    accel = M<int>(self + kIOATIR500Surface_accelerator);
-+    if (M<UInt16>(accel + 0xa8) < M<UInt16>(bufferBytes + 0x1c)) {
++    if (M<UInt16>(accel + kIOATIR500Accelerator_maxSurfaceWidth) < M<UInt16>(bufferBytes + 0x1c)) {
        return 0;
      }
 -    if (M<UInt16>(iVar7 + 0xaa) < M<UInt16>(bufferBytes + 0x1e)) {
-+    if (M<UInt16>(accel + 0xaa) < M<UInt16>(bufferBytes + 0x1e)) {
++    if (M<UInt16>(accel + kIOATIR500Accelerator_maxSurfaceHeight) < M<UInt16>(bufferBytes + 0x1e)) {
        return 0;
      }
    }
@@ -60,15 +60,15 @@
 -    if (M<int>(iVar7 + 0xd0) == 0) {
 -      iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
 -                         M<UInt32>(bufferBytes + 0x10),0x1000,0x10000,M<int>(iVar7 + 0x84c) - 0x10000);
-+    if (M<int>(accel + 0xd0) == 0) {
-+      allocOk = ((ATIR500Memory *)(M<UInt8 *>(accel + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
-+                         M<UInt32>(bufferBytes + 0x10),0x1000,0x10000,M<int>(accel + 0x84c) - 0x10000);
++    if (M<int>(accel + kIOATIR500Accelerator_displayConfigBits) == 0) {
++      allocOk = ((ATIR500Memory *)(M<UInt8 *>(accel + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
++                         M<UInt32>(bufferBytes + 0x10),0x1000,0x10000,M<int>(accel + kIOATIR500Accelerator_usableVramSize) - 0x10000);
      }
      else {
 -      iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
 -                         M<UInt32>(bufferBytes + 0x10),0x1000,0,M<UInt32>(iVar7 + 0x84c));
-+      allocOk = ((ATIR500Memory *)(M<UInt8 *>(accel + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
-+                         M<UInt32>(bufferBytes + 0x10),0x1000,0,M<UInt32>(accel + 0x84c));
++      allocOk = ((ATIR500Memory *)(M<UInt8 *>(accel + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
++                         M<UInt32>(bufferBytes + 0x10),0x1000,0,M<UInt32>(accel + kIOATIR500Accelerator_usableVramSize));
      }
 -    if (iVar7 == 0) {
 +    if (allocOk == 0) {
@@ -78,16 +78,16 @@
    else {
 -    uVar5 = M<UInt32>(iVar7 + 0x84c);
 -    if ((M<unsigned int>(iVar7 + 0x9c) <= uVar5) ||
-+    vramLimit = M<UInt32>(accel + 0x84c);
-+    if ((M<unsigned int>(accel + 0x9c) <= vramLimit) ||
++    vramLimit = M<UInt32>(accel + kIOATIR500Accelerator_usableVramSize);
++    if ((M<unsigned int>(accel + kIOATIR500Accelerator_vramSize) <= vramLimit) ||
         ((1 < (UInt8)((char)bufferBytes[0x3a] - 0x2dU) && (bufferBytes[0x3a] != 0xb))))
      goto LAB_0003e330;
 -    iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
 -                       M<UInt32>(bufferBytes + 0x10),0x1000,uVar5,M<unsigned int>(iVar7 + 0x9c) - uVar5);
 -    if (iVar7 == 0) {
 -      iVar7 = M<int>(self + kIOATIR500Surface_accelerator);
-+    allocOk = ((ATIR500Memory *)(M<UInt8 *>(accel + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
-+                       M<UInt32>(bufferBytes + 0x10),0x1000,vramLimit,M<unsigned int>(accel + 0x9c) - vramLimit);
++    allocOk = ((ATIR500Memory *)(M<UInt8 *>(accel + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
++                       M<UInt32>(bufferBytes + 0x10),0x1000,vramLimit,M<unsigned int>(accel + kIOATIR500Accelerator_vramSize) - vramLimit);
 +    if (allocOk == 0) {
 +      accel = M<int>(self + kIOATIR500Surface_accelerator);
        goto LAB_0003e330;

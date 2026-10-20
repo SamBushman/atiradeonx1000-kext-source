@@ -32,30 +32,31 @@ void IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor*descriptor, UInt32 
 
   unsigned int endEntry;
   int tableOffset;
-  int iVar3;
   unsigned int entry;
+  int gartByteOffset;
+  int pageCount;
   
   entry = gartOffset >> (GH_page_shift & 0x3f);
   if (descriptor != 0) {
     endEntry = VCALL(M<int>(descriptor), 0x128)(descriptor);
     endEntry = entry + (endEntry >> (GH_page_shift & 0x3f));
-    iVar3 = endEntry - entry;
-    M<int>(self + kIOATIR500Accelerator_gartMapOutBytesPerSample) = (iVar3 << (GH_page_shift & 0x3f)) + M<int>(self + kIOATIR500Accelerator_gartMapOutBytesPerSample);
-    M<int>(self + kIOATIR500Accelerator_gartUsedBytes) = M<int>(self + kIOATIR500Accelerator_gartUsedBytes) - (iVar3 << (GH_page_shift & 0x3f));
+    pageCount = endEntry - entry;
+    M<int>(self + kIOATIR500Accelerator_gartMapOutBytesPerSample) = (pageCount << (GH_page_shift & 0x3f)) + M<int>(self + kIOATIR500Accelerator_gartMapOutBytesPerSample);
+    M<int>(self + kIOATIR500Accelerator_gartUsedBytes) = M<int>(self + kIOATIR500Accelerator_gartUsedBytes) - (pageCount << (GH_page_shift & 0x3f));
     if (entry < endEntry) {
       tableOffset = entry << 2;
       do {
         M<UInt32>(M<int>(self + kIOATIR500Accelerator_gartTable) + tableOffset) = M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry);
         tableOffset = tableOffset + 4;
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
+        pageCount = pageCount + -1;
+      } while (pageCount != 0);
     }
     if (((M<unsigned int>(self + kIOATIR500Accelerator_hwCapabilityBits) & 2) != 0) &&
        (entry = gartOffset >> (GH_page_shift & 0x3f), entry < endEntry)) {
       do {
-        iVar3 = entry << (GH_page_shift & 0x3f);
+        gartByteOffset = entry << (GH_page_shift & 0x3f);
         entry = entry + 1;
-        VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar3,0);
+        VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),gartByteOffset,0);
       } while (entry != endEntry);
     }
     entry = gartOffset >> (GH_page_shift & 0x3f);

@@ -31,66 +31,68 @@ UInt32 ATIR500Memory::reserve(GLKMemoryElement *elem, UInt32 offset, UInt32 size
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *elemBytes = reinterpret_cast<UInt8 *>(elem);
 
-  UInt32 *puVar1;
-  SInt32 iVar2;
   UInt32 reserveEnd;
-  SInt32 *piVar4;
+  SInt32 *nextNode;
   SInt32 *node;
+  SInt32 addOk;
+  UInt32 *prevNode;
+  UInt32 *spareNode;
+  SInt32 spareHead;
   
-  if ((M<SInt32>(self + kATIR500Memory_spareNodeStack) != 0) || (iVar2 = this->add_to_stack(), iVar2 != 0)) {
+  if ((M<SInt32>(self + kATIR500Memory_spareNodeStack) != 0) || (addOk = this->add_to_stack(), addOk != 0)) {
     reserveEnd = offset + size;
-    piVar4 = *(SInt32 **)*M<UInt32 *>(self + 8);
+    nextNode = *(SInt32 **)*M<UInt32 *>(self + 8);
 joined_r0x000192c4:
-    if (piVar4 != (SInt32 *)0x0) {
-      while (node = piVar4, node[3] < 0) {
-        piVar4 = (SInt32 *)*node;
+    if (nextNode != (SInt32 *)0x0) {
+      while (node = nextNode, node[3] < 0) {
+        nextNode = (SInt32 *)*node;
         if (offset < (UInt32)node[2]) goto joined_r0x000192c4;
-        if (reserveEnd <= (UInt32)piVar4[2]) {
+        if (reserveEnd <= (UInt32)nextNode[2]) {
           M<UInt32>(elemBytes + 8) = offset;
-          puVar1 = (UInt32 *)node[1];
+          prevNode = (UInt32 *)node[1];
           M<UInt32>(elemBytes + 0xc) = 0;
           if (offset != node[2]) {
-            if (piVar4[2] == reserveEnd) {
-              M<SInt32 *>(elemBytes) = piVar4;
+            if (nextNode[2] == reserveEnd) {
+              M<SInt32 *>(elemBytes) = nextNode;
               M<SInt32 *>(elemBytes + 4) = node;
               *node = (SInt32)elemBytes;
-              piVar4[1] = (SInt32)elemBytes;
+              nextNode[1] = (SInt32)elemBytes;
               return 1;
             }
-            puVar1 = M<UInt32 *>(self + kATIR500Memory_spareNodeStack);
-            M<UInt32>(self + kATIR500Memory_spareNodeStack) = *puVar1;
-            *puVar1 = (UInt32)(piVar4);
-            piVar4[1] = (SInt32)puVar1;
-            M<UInt32 *>(elemBytes) = puVar1;
-            puVar1[1] = (UInt32)(elemBytes);
-            puVar1[3] = 0x80000000;
-            puVar1[2] = reserveEnd;
+            spareNode = M<UInt32 *>(self + kATIR500Memory_spareNodeStack);
+            M<UInt32>(self + kATIR500Memory_spareNodeStack) = *spareNode;
+            *spareNode = (UInt32)(nextNode);
+            nextNode[1] = (SInt32)spareNode;
+            M<UInt32 *>(elemBytes) = spareNode;
+            spareNode[1] = (UInt32)(elemBytes);
+            spareNode[3] = 0x80000000;
+            spareNode[2] = reserveEnd;
             *node = (SInt32)elemBytes;
             M<SInt32 *>(elemBytes + 4) = node;
             return 1;
           }
-          if (reserveEnd == piVar4[2]) {
-            M<SInt32 *>(elemBytes) = piVar4;
-            M<UInt32 *>(elemBytes + 4) = puVar1;
-            *puVar1 = (UInt32)(elemBytes);
-            piVar4[1] = (SInt32)elemBytes;
-            iVar2 = M<SInt32>(self + kATIR500Memory_spareNodeStack);
+          if (reserveEnd == nextNode[2]) {
+            M<SInt32 *>(elemBytes) = nextNode;
+            M<UInt32 *>(elemBytes + 4) = prevNode;
+            *prevNode = (UInt32)(elemBytes);
+            nextNode[1] = (SInt32)elemBytes;
+            spareHead = M<SInt32>(self + kATIR500Memory_spareNodeStack);
             node[3] = 0;
             node[1] = 0;
             node[2] = 0;
-            *node = iVar2;
+            *node = spareHead;
             M<SInt32 *>(self + kATIR500Memory_spareNodeStack) = node;
             return 1;
           }
           M<SInt32 *>(elemBytes) = node;
-          M<UInt32 *>(elemBytes + 4) = puVar1;
+          M<UInt32 *>(elemBytes + 4) = prevNode;
           node[2] = reserveEnd;
-          *puVar1 = (UInt32)(elemBytes);
+          *prevNode = (UInt32)(elemBytes);
           node[1] = (SInt32)elemBytes;
           return 1;
         }
       }
-      piVar4 = (SInt32 *)*node;
+      nextNode = (SInt32 *)*node;
       goto joined_r0x000192c4;
     }
   }

@@ -52,17 +52,17 @@ void ATIR500Surface::setupFullScreen() {
   accel = M<int>(self + kIOATIR500Surface_accelerator);
   if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003d310;
   id = M<int>(self + kIOATIR500Surface_panel);
-  if (M<int>(id * 0x18 + accel + 0xb10) == 0) {
-    if ((M<int>(accel + 0x894) == 0) ||
-       (otherPanel = (unsigned int)(id == 0), M<int>(otherPanel * 0x18 + accel + 0xb10) == 0))
+  if (M<int>(id * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
+    if ((M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) ||
+       (otherPanel = (unsigned int)(id == 0), M<int>(otherPanel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0))
     goto LAB_0003d310;
   }
   else {
     M<UInt8>(id * 0x78 + accel + 0x9f4) = fullScreenValue;
     accel = M<int>(self + kIOATIR500Surface_accelerator);
-    if (M<int>(accel + 0x894) == 0) goto LAB_0003d310;
+    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto LAB_0003d310;
     otherPanel = (unsigned int)(M<int>(self + kIOATIR500Surface_panel) == 0);
-    if (M<int>(otherPanel * 0x18 + accel + 0xb10) == 0) {
+    if (M<int>(otherPanel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
       M<UInt8>(otherPanel * 0x78 + accel + 0x164) = fullScreenValue;
       goto LAB_0003d310;
     }
@@ -74,14 +74,14 @@ LAB_0003d310:
   vtable5dcResult = VCALL(M<int>(self), 0x5dc)(self);
   if (vtable5dcResult == 0) {
     accel = M<int>(self + kIOATIR500Surface_accelerator);
-    registers = M<int>(accel + 0x860);
+    registers = M<int>(accel + kIOATIR500Accelerator_mmioBase);
     maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
     id = M<int>(self + kIOATIR500Surface_panel);
     modeValue = (unsigned int)M<UInt8>(id * 0x78 + accel + 0x164);
     newValue = maskedValue | (modeValue & 1) << 0x15 | (unsigned int)(1 < modeValue) << 0x14;
     storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6104 : 0x6904)), newValue);
     enforceInOrderExecutionIO();
-    if (M<int>(accel + 0x894) != 0) {
+    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0) {
       storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6904 : 0x6104)), newValue);
       enforceInOrderExecutionIO();
     }

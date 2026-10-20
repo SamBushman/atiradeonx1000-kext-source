@@ -34,21 +34,22 @@ void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState state) {
 
   int listHead;
   int accelerator;
-  int iVar3;
+  int nextSurface;
+  int lastSurface;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   M<int>(self + kIOATIR500Surface_volatileState) = state;
   if (state == 1) {
     accelerator = M<int>(self + kIOATIR500Surface_accelerator);
     if (self != M<UInt8 *>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead)) {
-      iVar3 = M<int>(self + kIOATIR500Surface_surfaceListNext);
-      M<UInt32>(iVar3 + 0xa0) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
-      M<int>(M<int>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = iVar3;
+      nextSurface = M<int>(self + kIOATIR500Surface_surfaceListNext);
+      M<UInt32>(nextSurface + kIOATIR500Surface_surfaceListPrev) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
+      M<int>(M<int>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = nextSurface;
       listHead = M<int>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead);
-      iVar3 = M<int>(listHead + 0xa0);
+      lastSurface = M<int>(listHead + 0xa0);
       M<int>(self + kIOATIR500Surface_surfaceListNext) = listHead;
-      M<int>(self + kIOATIR500Surface_surfaceListPrev) = iVar3;
-      M<UInt8 *>(iVar3 + 0x9c) = self;
+      M<int>(self + kIOATIR500Surface_surfaceListPrev) = lastSurface;
+      M<UInt8 *>(lastSurface + 0x9c) = self;
       M<UInt8 *>(listHead + 0xa0) = self;
       M<UInt8 *>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead) = self;
       accelerator = M<int>(self + kIOATIR500Surface_accelerator);
@@ -59,14 +60,14 @@ void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState state) {
   else {
     accelerator = M<int>(self + kIOATIR500Surface_accelerator);
     if (self != M<UInt8 *>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead)) {
-      iVar3 = M<int>(self + kIOATIR500Surface_surfaceListNext);
-      M<UInt32>(iVar3 + 0xa0) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
-      M<int>(M<int>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = iVar3;
+      nextSurface = M<int>(self + kIOATIR500Surface_surfaceListNext);
+      M<UInt32>(nextSurface + kIOATIR500Surface_surfaceListPrev) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
+      M<int>(M<int>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = nextSurface;
       listHead = M<int>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead);
-      iVar3 = M<int>(listHead + 0xa0);
+      lastSurface = M<int>(listHead + 0xa0);
       M<int>(self + kIOATIR500Surface_surfaceListNext) = listHead;
-      M<int>(self + kIOATIR500Surface_surfaceListPrev) = iVar3;
-      M<UInt8 *>(iVar3 + 0x9c) = self;
+      M<int>(self + kIOATIR500Surface_surfaceListPrev) = lastSurface;
+      M<UInt8 *>(lastSurface + 0x9c) = self;
       M<UInt8 *>(listHead + 0xa0) = self;
       M<UInt8 *>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead) = self;
       M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x5c) = M<UInt32>(self + kIOATIR500Surface_surfaceListNext);

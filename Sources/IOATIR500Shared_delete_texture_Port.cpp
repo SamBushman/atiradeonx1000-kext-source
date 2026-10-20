@@ -33,51 +33,59 @@ IOReturn IOATIR500Shared::delete_texture(VendorTextureBuffer *texture) {
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   UInt8 bufferType;
-  UInt8 *pVVar2;
-  int iVar3;
-  UInt8 *pVVar4;
   int *accel;
   UInt32 stamp;
-  int iVar7;
   unsigned int faceIndex;
   UInt8 *surface;
+  UInt8 *prevInList;
+  UInt8 *listCursor;
+  UInt8 *refTexture;
+  UInt8 *nextTexture;
+  UInt8 *prevTexture;
+  int prevVramNode;
+  int nextVramNode;
+  int faceByteOffset;
+  int textureRecord;
+  int refCount;
+  int accelVtable;
+  int stampReached;
   
-  pVVar2 = M<UInt8 *>(self + kIOATIR500Shared_textureListHead);
-  if (pVVar2 == textureBytes) {
+  prevInList = M<UInt8 *>(self + kIOATIR500Shared_textureListHead);
+  if (prevInList == textureBytes) {
     M<UInt32>(self + kIOATIR500Shared_textureListHead) = M<UInt32>(textureBytes + 0x3c);
   }
   else {
-    if (pVVar2 == (UInt8 *)0x0) {
+    if (prevInList == (UInt8 *)0x0) {
       return 0xe00002bc;
     }
-    for (pVVar4 = M<UInt8 *>(pVVar2 + 0x3c); textureBytes != pVVar4;
-        pVVar4 = M<UInt8 *>(pVVar4 + 0x3c)) {
-      if (pVVar4 == (UInt8 *)0x0) {
+    for (listCursor = M<UInt8 *>(prevInList + 0x3c); textureBytes != listCursor;
+        listCursor = M<UInt8 *>(listCursor + 0x3c)) {
+      if (listCursor == (UInt8 *)0x0) {
         return 0xe00002bc;
       }
-      pVVar2 = pVVar4;
+      prevInList = listCursor;
     }
-    M<UInt32>(pVVar2 + 0x3c) = M<UInt32>(textureBytes + 0x3c);
+    M<UInt32>(prevInList + 0x3c) = M<UInt32>(textureBytes + 0x3c);
   }
-  iVar7 = M<int>(textureBytes + 0x24);
+  prevVramNode = M<int>(textureBytes + 0x24);
   bufferType = textureBytes[0x20];
-  M<UInt32>(iVar7 + 0x28) = M<UInt32>(textureBytes + 0x28);
-  iVar3 = M<int>(textureBytes + 0x28);
+  M<UInt32>(prevVramNode + 0x28) = M<UInt32>(textureBytes + 0x28);
+  nextVramNode = M<int>(textureBytes + 0x28);
   M<UInt8 *>(textureBytes + 0x28) = textureBytes;
-  M<int>(iVar3 + 0x24) = iVar7;
+  M<int>(nextVramNode + 0x24) = prevVramNode;
   M<UInt8 *>(textureBytes + 0x24) = textureBytes;
   if ((((UInt8)((char)bufferType - 2U) < 2) || (bufferType == 0x6)) ||
      (bufferType == 0x7)) {
     if ((bufferType == 0x3) || (bufferType == 0x7)) {
-      iVar3 = M<int>(textureBytes + 0x14);
+      textureRecord = M<int>(textureBytes + 0x14);
       faceIndex = 0;
-      if (M<char>(iVar3 + 0x34) != '\0') {
+      if (M<char>(textureRecord + 0x34) != '\0') {
         do {
-          iVar7 = faceIndex * 2;
+          faceByteOffset = faceIndex * 2;
           faceIndex = faceIndex + 1;
-          M<UInt16>(iVar7 + iVar3 + 0x28) = 0;
-          iVar3 = M<int>(textureBytes + 0x14);
-        } while (faceIndex < M<UInt8>(iVar3 + 0x34));
+          M<UInt16>(faceByteOffset + textureRecord + 0x28) = 0;
+          textureRecord = M<int>(textureBytes + 0x14);
+        } while (faceIndex < M<UInt8>(textureRecord + 0x34));
       }
       if (M<int>(textureBytes + 0x48) != 0) {
         VCALL(*M<int *>(self + kIOATIR500Shared_accelerator), 0x524)(M<int *>(self + kIOATIR500Shared_accelerator),textureBytes);
@@ -88,26 +96,26 @@ IOReturn IOATIR500Shared::delete_texture(VendorTextureBuffer *texture) {
       M<UInt32>(textureBytes + 0x10) = 0;
     }
     if (textureBytes[0x20] == 0x7) {
-      pVVar2 = M<UInt8 *>(textureBytes + 0x58);
+      refTexture = M<UInt8 *>(textureBytes + 0x58);
       M<UInt32>(textureBytes + 0x58) = 0;
 LAB_00017ac4:
-      iVar3 = GH_OSDecrementAtomic(M<int>(pVVar2 + 0x14) + 0x10);
-      if (iVar3 == 1) {
-        this->delete_texture((VendorTextureBuffer *)(pVVar2));
+      refCount = GH_OSDecrementAtomic(M<int>(refTexture + 0x14) + 0x10);
+      if (refCount == 1) {
+        this->delete_texture((VendorTextureBuffer *)(refTexture));
       }
     }
     else if (textureBytes[0x20] == 0x6) {
-      pVVar2 = M<UInt8 *>(textureBytes + 0x54);
+      refTexture = M<UInt8 *>(textureBytes + 0x54);
       M<UInt32>(textureBytes + 0x54) = 0;
       goto LAB_00017ac4;
     }
     if (M<int>(textureBytes + 4) != 0) {
       accel = M<int *>(self + kIOATIR500Shared_accelerator);
-      iVar3 = *accel;
+      accelVtable = *accel;
       stamp = M<UInt32>(M<int>(textureBytes + 0x14) + 0xc);
 LAB_00017b60:
-      iVar3 = VCALL(iVar3, 0x554)(accel,stamp);
-      if (iVar3 == 0) {
+      stampReached = VCALL(accelVtable, 0x554)(accel,stamp);
+      if (stampReached == 0) {
         ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Shared_accelerator)))->addOrphanTexture((IOTextureBuffer *)((UInt8 *)textureBytes));
         goto LAB_00017cf0;
       }
@@ -130,7 +138,7 @@ LAB_00017ba0:
       }
       if (M<int>(textureBytes + 4) != 0) {
         accel = M<int *>(self + kIOATIR500Shared_accelerator);
-        iVar3 = *accel;
+        accelVtable = *accel;
         stamp = M<UInt32>(M<int>(textureBytes + 0x14) + 8);
         goto LAB_00017b60;
       }
@@ -139,17 +147,17 @@ LAB_00017ba0:
     if (bufferType == 0x0) {
       surface = M<UInt8 *>(textureBytes + 0x50);
       if (surface != (UInt8 *)0x0) {
-        pVVar2 = M<UInt8 *>(surface + 0xbcc);
+        nextTexture = M<UInt8 *>(surface + 0xbcc);
         if (textureBytes == M<UInt8 *>(surface + 0xbcc)) {
           M<UInt32>(surface + 0xbcc) = M<UInt32>(textureBytes + 0x54);
         }
         else {
           do {
-            pVVar4 = pVVar2;
-            if (pVVar4 == (UInt8 *)0x0) break;
-            pVVar2 = M<UInt8 *>(pVVar4 + 0x54);
-          } while (textureBytes != M<UInt8 *>(pVVar4 + 0x54));
-          M<UInt32>(pVVar4 + 0x54) = M<UInt32>(textureBytes + 0x54);
+            prevTexture = nextTexture;
+            if (prevTexture == (UInt8 *)0x0) break;
+            nextTexture = M<UInt8 *>(prevTexture + 0x54);
+          } while (textureBytes != M<UInt8 *>(prevTexture + 0x54));
+          M<UInt32>(prevTexture + 0x54) = M<UInt32>(textureBytes + 0x54);
         }
         ((IOATIR500Surface *)(surface))->reset_req_bits();
         ((IOATIR500Surface *)(surface))->prune_buffers();
@@ -157,11 +165,11 @@ LAB_00017ba0:
     }
     else {
       if (bufferType != 0x1) goto LAB_00017cf0;
-      pVVar2 = M<UInt8 *>(textureBytes + 0x50);
-      if (pVVar2 != (UInt8 *)0x0) {
-        iVar3 = GH_OSDecrementAtomic(M<int>(pVVar2 + 0x14) + 0x10);
-        if (iVar3 == 1) {
-          ((IOATIR500Shared *)(M<UInt8 *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c)))->delete_texture((VendorTextureBuffer *)pVVar2);
+      refTexture = M<UInt8 *>(textureBytes + 0x50);
+      if (refTexture != (UInt8 *)0x0) {
+        refCount = GH_OSDecrementAtomic(M<int>(refTexture + 0x14) + 0x10);
+        if (refCount == 1) {
+          ((IOATIR500Shared *)(M<UInt8 *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c)))->delete_texture((VendorTextureBuffer *)refTexture);
         }
         VCALL(*M<int *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c), 0x18)(M<int *>(M<int>(self + kIOATIR500Shared_accelerator) + 0x6c));
         M<UInt32>(textureBytes + 0x50) = 0;

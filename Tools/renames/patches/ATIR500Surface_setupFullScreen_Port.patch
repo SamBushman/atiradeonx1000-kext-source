@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-20 09:44:45.149474668 -0700
-+++ b/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-20 09:44:45.150777950 -0700
+--- a/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-20 13:04:43.645062599 -0700
++++ b/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-20 13:04:43.646375496 -0700
 @@ -31,76 +31,58 @@
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
@@ -39,9 +39,9 @@
 -  if (M<int>(id * 0x18 + iVar8 + 0xb10) == 0) {
 -    if ((M<int>(iVar8 + 0x894) == 0) ||
 -       (uVar7 = (unsigned int)(id == 0), M<int>(uVar7 * 0x18 + iVar8 + 0xb10) == 0))
-+  if (M<int>(id * 0x18 + accel + 0xb10) == 0) {
-+    if ((M<int>(accel + 0x894) == 0) ||
-+       (otherPanel = (unsigned int)(id == 0), M<int>(otherPanel * 0x18 + accel + 0xb10) == 0))
++  if (M<int>(id * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
++    if ((M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) ||
++       (otherPanel = (unsigned int)(id == 0), M<int>(otherPanel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0))
      goto LAB_0003d310;
    }
    else {
@@ -53,9 +53,9 @@
 -      M<UInt8>(uVar7 * 0x78 + iVar8 + 0x164) = fullScreenValue;
 +    M<UInt8>(id * 0x78 + accel + 0x9f4) = fullScreenValue;
 +    accel = M<int>(self + kIOATIR500Surface_accelerator);
-+    if (M<int>(accel + 0x894) == 0) goto LAB_0003d310;
++    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto LAB_0003d310;
 +    otherPanel = (unsigned int)(M<int>(self + kIOATIR500Surface_panel) == 0);
-+    if (M<int>(otherPanel * 0x18 + accel + 0xb10) == 0) {
++    if (M<int>(otherPanel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
 +      M<UInt8>(otherPanel * 0x78 + accel + 0x164) = fullScreenValue;
        goto LAB_0003d310;
      }
@@ -77,7 +77,7 @@
 +  vtable5dcResult = VCALL(M<int>(self), 0x5dc)(self);
 +  if (vtable5dcResult == 0) {
 +    accel = M<int>(self + kIOATIR500Surface_accelerator);
-+    registers = M<int>(accel + 0x860);
++    registers = M<int>(accel + kIOATIR500Accelerator_mmioBase);
 +    maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
      id = M<int>(self + kIOATIR500Surface_panel);
 -    maskedValue = (M<UInt8>(registers + 0x6106) & 0xffcf) << 0x10;
@@ -105,7 +105,7 @@
 -      }
 -      M<unsigned int>(registers + iVar8) =
 -           (unsigned int)bVar4 << 0x18 | (unsigned int)bVar3 << 0x10 | (uVar7 | maskedValue | newValue) >> 8 | (unsigned int)bVar2;
-+    if (M<int>(accel + 0x894) != 0) {
++    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) != 0) {
 +      storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6904 : 0x6104)), newValue);
        enforceInOrderExecutionIO();
      }
