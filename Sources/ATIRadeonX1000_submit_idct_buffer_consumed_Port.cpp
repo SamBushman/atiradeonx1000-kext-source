@@ -32,24 +32,18 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *infoBytes = reinterpret_cast<UInt8 *>(info);
 
-  SInt32 iVar1;
   SInt32 stamp;
   SInt32 gartBase;
   SInt32 bufferFlushEnd;
-  UInt32 uVar2;
-  UInt32 uVar3;
+  UInt32 ringLineStart;
   UInt32 ringIndex;
   UInt32 cacheLine;
-  UInt32 uVar4;
-  SInt32 iVar5;
+  UInt32 ringCacheLine;
   SInt32 writeIndex;
-  SInt32 iVar6;
   SInt32 ringBase;
   SInt32 spinCount;
-  UInt32 uVar7;
   UInt32 ringAddress;
   UInt32 nextIndex;
-  SInt32 iVar8;
   SInt32 ringFlushEnd;
   SInt32 startIndex;
   SInt32 flushOffset;
@@ -208,20 +202,20 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
         instructionSynchronize();
       }
       else {
-        uVar4 = (UInt32)(UInt8)self[0x84];
+        ringCacheLine = (UInt32)(UInt8)self[0x84];
         flushOffset = 0;
         ringAddress = startIndex * 4 + ringBase;
-        uVar2 = -uVar4 & ringAddress;
-        ringFlushEnd = ((ringAddress & uVar4 - 1) + 0x80) - uVar4;
+        ringLineStart = -ringCacheLine & ringAddress;
+        ringFlushEnd = ((ringAddress & ringCacheLine - 1) + 0x80) - ringCacheLine;
         if (0 < ringFlushEnd) {
           do {
-            dataCacheBlockStore(uVar2 + flushOffset);
-            flushOffset = flushOffset + uVar4;
+            dataCacheBlockStore(ringLineStart + flushOffset);
+            flushOffset = flushOffset + ringCacheLine;
           } while (flushOffset < ringFlushEnd);
         }
         ppcSync();
         instructionSynchronize();
-        dataCacheBlockFlush(uVar2 + flushOffset);
+        dataCacheBlockFlush(ringLineStart + flushOffset);
         ppcSync();
         instructionSynchronize();
         instructionSynchronize();

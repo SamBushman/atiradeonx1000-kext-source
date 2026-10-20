@@ -31,37 +31,37 @@ void ATIRadeonX1000::deallocate_texture(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt16 *puVar1;
-  UInt16 *puVar2;
+  UInt16 *nextFaceMaskPtr;
+  UInt16 *nextFaceDirtyPtr;
   UInt8 type;
   UInt32 hzHandle;
   UInt32 faceCount;
-  SInt32 iVar6;
-  UInt32 uVar7;
-  UInt32 uVar8;
+  SInt32 infoCursor;
+  UInt32 faceIndex;
+  UInt32 facesLeft;
   
   type = textureBytes[0x20];
   if ((type == 0x3) || (type == 0x7)) {
-    iVar6 = M<SInt32>(textureBytes + 0x14);
-    faceCount = (UInt32)M<UInt8>(iVar6 + 0x34);
+    infoCursor = M<SInt32>(textureBytes + 0x14);
+    faceCount = (UInt32)M<UInt8>(infoCursor + 0x34);
     if (faceCount != 0) {
-      if ((M<UInt16>(iVar6 + 0x28) & ~M<UInt16>(iVar6 + 0x1c)) == 0) {
-        uVar7 = 0;
-        uVar8 = faceCount;
+      if ((M<UInt16>(infoCursor + 0x28) & ~M<UInt16>(infoCursor + 0x1c)) == 0) {
+        faceIndex = 0;
+        facesLeft = faceCount;
         if (faceCount == 0) {
-          uVar8 = 1;
+          facesLeft = 1;
         }
         do {
-          uVar7 = uVar7 + 1;
-          uVar8 = uVar8 - 1;
-          if (uVar8 == 0) {
-            if (faceCount == uVar7) goto LAB_0001a700;
+          faceIndex = faceIndex + 1;
+          facesLeft = facesLeft - 1;
+          if (facesLeft == 0) {
+            if (faceCount == faceIndex) goto LAB_0001a700;
             break;
           }
-          puVar1 = (UInt16 *)(iVar6 + 0x2a);
-          puVar2 = (UInt16 *)(iVar6 + 0x1e);
-          iVar6 = iVar6 + 2;
-        } while ((*puVar1 & ~*puVar2) == 0);
+          nextFaceMaskPtr = (UInt16 *)(infoCursor + 0x2a);
+          nextFaceDirtyPtr = (UInt16 *)(infoCursor + 0x1e);
+          infoCursor = infoCursor + 2;
+        } while ((*nextFaceMaskPtr & ~*nextFaceDirtyPtr) == 0);
       }
       VCALL(M<SInt32>(self), 0x52c)(self,textureBytes,0xffffffff,0xffffffff);
     }

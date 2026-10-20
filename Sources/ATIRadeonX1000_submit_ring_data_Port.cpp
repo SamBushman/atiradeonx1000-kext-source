@@ -30,21 +30,16 @@
 void ATIRadeonX1000::submit_ring_data() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
   UInt32 headLineBase;
   UInt32 submittedIndex;
   UInt32 writeIndex;
-  UInt32 uVar3;
   UInt32 rangeStart;
   UInt32 nextIndex;
   SInt32 flushEnd;
-  UInt32 uVar5;
   UInt32 ringBase;
   UInt32 cacheLine;
-  SInt32 iVar6;
   SInt32 flushOffset;
   SInt32 ringPtr;
-  UInt32 uVar7;
   UInt32 lineSize;
   UInt32 lineBase;
   UInt32 tailLineBase;

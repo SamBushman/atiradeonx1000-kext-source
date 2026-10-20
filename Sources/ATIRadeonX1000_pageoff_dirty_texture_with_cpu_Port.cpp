@@ -35,103 +35,116 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
     UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
 
   UInt8 faceCount;
-  UInt8 *pbVar2;
+  UInt8 *regPtr;
   UInt32 saved0;
   UInt32 saved1;
   UInt32 saved2;
   SInt32 surfaceInfoOffset;
   SInt32 surfaceLowerOffset;
-  bool bVar17;
-  UInt8 bVar18;
-  UInt32 uVar19;
-  SInt32 iVar20;
+  bool macroTiled;
+  UInt8 tileFlags;
+  UInt32 levelDepth;
+  SInt32 tileRowShift;
   UInt32 lastLevel;
-  UInt32 uVar22;
+  UInt32 pixelShift;
   UInt8 *destination;
   SInt32 vramSource;
-  UInt8 AVar25;
-  SInt32 iVar26;
-  SInt32 iVar27;
-  SInt32 iVar28;
-  SInt32 iVar29;
+  UInt8 pixelShiftByte;
+  SInt32 surfaceUpperOffset;
+  SInt32 registerWindow;
+  SInt32 rowGranularity;
+  SInt32 flushBytes;
   UInt32 baseLevel;
-  SInt32 iVar31;
-  UInt32 uVar32;
-  SInt32 iVar33;
+  SInt32 mmioBase;
+  UInt32 vramOffset;
+  SInt32 macroTileWidthShift;
   UInt32 level;
-  UInt32 uVar35;
+  UInt32 levelHeight;
   SInt32 repeat;
-  UInt32 uVar37;
+  UInt32 levelWidth;
   SInt32 rowCount;
   UInt8 *tileRecord;
-  UInt32 uVar40;
+  UInt32 srcPitch;
   UInt32 face;
   SInt32 bytesCopied;
-  SInt32 local_7c;
+  SInt32 macroTileHeightShift;
   SInt32 *innerMapping;
+  UInt32 slotsLeft;
+  SInt32 negTileBits;
+  SInt32 textureInfo;
+  SInt32 slotOffset;
+  UInt32 freeSlot;
+  UInt32 repeatCount;
+  UInt32 macroTileFlag;
+  UInt32 tilingBits;
+  UInt32 endAddress;
+  UInt32 cacheLine;
+  SInt32 flushOffset;
+  SInt32 rowIndex;
+  SInt32 destPitch;
   
-  iVar26 = M<SInt32>(textureBytes + 0x14);
-  baseLevel = (UInt32)M<UInt8>(iVar26 + 0x17);
-  lastLevel = (baseLevel + M<UInt8>(iVar26 + 0x35)) - 1;
-  faceCount = M<UInt8>(iVar26 + 0x34);
+  textureInfo = M<SInt32>(textureBytes + 0x14);
+  baseLevel = (UInt32)M<UInt8>(textureInfo + 0x17);
+  lastLevel = (baseLevel + M<UInt8>(textureInfo + 0x35)) - 1;
+  faceCount = M<UInt8>(textureInfo + 0x34);
   VCALL(M<SInt32>(self), 0x558)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
-  uVar19 = (UInt32)(UInt8)self[0x990];
-  if ((uVar19 == 0) || ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1) == 0)) {
+  slotsLeft = (UInt32)(UInt8)self[0x990];
+  if ((slotsLeft == 0) || ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1) == 0)) {
 LAB_0001e594:
-    iVar26 = 0;
+    slotOffset = 0;
   }
   else {
-    uVar35 = 0;
+    freeSlot = 0;
     do {
-      uVar35 = uVar35 + 1;
-      uVar19 = uVar19 - 1;
-      if (uVar19 == 0) goto LAB_0001e594;
-    } while ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1 << (uVar35 & 0x3f)) != 0);
-    iVar26 = uVar35 * 4;
+      freeSlot = freeSlot + 1;
+      slotsLeft = slotsLeft - 1;
+      if (slotsLeft == 0) goto LAB_0001e594;
+    } while ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1 << (freeSlot & 0x3f)) != 0);
+    slotOffset = freeSlot * 4;
   }
-  iVar31 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-  surfaceInfoOffset = (iVar26 + 0x2c3) * 4;
+  mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+  surfaceInfoOffset = (slotOffset + 0x2c3) * 4;
   /* the three registers are read as words (lwbrx) and written back later (stwbrx), exactly as the shipped code does: four single-byte reads would be a different access on the bus */
-  saved0 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset));
-  surfaceLowerOffset = (iVar26 + 0x2c1) * 4;
-  saved1 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceLowerOffset));
-  iVar26 = (iVar26 + 0x2c2) * 4;
-  saved2 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar26));
-  bVar18 = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 3;
-  iVar20 = -(bVar18 & 3);
-  if ((bVar18 & 2) == 0) {
-    if (-1 < iVar20) {
-      bVar17 = false;
+  saved0 = loadWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceInfoOffset));
+  surfaceLowerOffset = (slotOffset + 0x2c1) * 4;
+  saved1 = loadWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceLowerOffset));
+  surfaceUpperOffset = (slotOffset + 0x2c2) * 4;
+  saved2 = loadWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceUpperOffset));
+  tileFlags = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 3;
+  negTileBits = -(tileFlags & 3);
+  if ((tileFlags & 2) == 0) {
+    if (-1 < negTileBits) {
+      macroTiled = false;
       goto LAB_0001e61c;
     }
-    AVar25 = hwInfoBytes[0x1a];
-    bVar17 = AVar25 == 0x0;
+    pixelShiftByte = hwInfoBytes[0x1a];
+    macroTiled = pixelShiftByte == 0x0;
 LAB_0001e624:
-    if ((UInt8)AVar25 < 4) {
-      if (bVar17) {
-        iVar20 = 2;
-        iVar33 = 3;
-        local_7c = 2;
+    if ((UInt8)pixelShiftByte < 4) {
+      if (macroTiled) {
+        tileRowShift = 2;
+        macroTileWidthShift = 3;
+        macroTileHeightShift = 2;
       }
       else {
-        iVar20 = 1;
-        iVar33 = 4;
-        local_7c = 1;
+        tileRowShift = 1;
+        macroTileWidthShift = 4;
+        macroTileHeightShift = 1;
       }
       goto LAB_0001e668;
     }
   }
   else {
-    bVar17 = true;
+    macroTiled = true;
 LAB_0001e61c:
-    if (iVar20 < 0) {
-      AVar25 = hwInfoBytes[0x1a];
+    if (negTileBits < 0) {
+      pixelShiftByte = hwInfoBytes[0x1a];
       goto LAB_0001e624;
     }
   }
-  iVar20 = 0;
-  iVar33 = 5;
-  local_7c = 0;
+  tileRowShift = 0;
+  macroTileWidthShift = 5;
+  macroTileHeightShift = 0;
 LAB_0001e668:
   if (faceCount == 0) {
     innerMapping = (SInt32 *)0x0;
@@ -142,17 +155,17 @@ LAB_0001e668:
     innerMapping = (SInt32 *)0x0;
     bytesCopied = 0;
     do {
-      uVar37 = (UInt32)M<UInt16>(hwInfoBytes + 0x14);
-      uVar35 = (UInt32)M<UInt16>(hwInfoBytes + 0x16);
-      uVar19 = (UInt32)M<UInt16>(hwInfoBytes + 0x18);
-      uVar40 = M<UInt32>(hwInfoBytes + 0xc);
-      iVar31 = M<SInt32>(hwInfoBytes + 0x10);
+      levelWidth = (UInt32)M<UInt16>(hwInfoBytes + 0x14);
+      levelHeight = (UInt32)M<UInt16>(hwInfoBytes + 0x16);
+      levelDepth = (UInt32)M<UInt16>(hwInfoBytes + 0x18);
+      srcPitch = M<UInt32>(hwInfoBytes + 0xc);
+      destPitch = M<SInt32>(hwInfoBytes + 0x10);
       if (baseLevel <= lastLevel) {
         tileRecord = hwInfoBytes + (face * 0xd + baseLevel) * 0x20 + 0x42;
         level = baseLevel;
         do {
-          uVar22 = (UInt32)M<UInt16>(tileRecord);
-          if ((uVar22 != 0) && (rowCount = (SInt32)(uVar35 * uVar19) / (SInt32)uVar22, uVar22 != 0)) {
+          repeatCount = (UInt32)M<UInt16>(tileRecord);
+          if ((repeatCount != 0) && (rowCount = (SInt32)(levelHeight * levelDepth) / (SInt32)repeatCount, repeatCount != 0)) {
             repeat = 0;
             do {
               if (textureBytes[0x20] == 0x7) {
@@ -170,114 +183,114 @@ LAB_0001e668:
               destination = destination + repeat * M<SInt32>(tileRecord + 10);
               vramSource = M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) + M<SInt32>(textureBytes + 0x48) + M<SInt32>(tileRecord + 6) +
                        repeat * M<SInt32>(tileRecord + 0xe);
-              if ((((SInt32)uVar40 < 1 << iVar33 + 3) || ((SInt32)uVar35 < 1 << local_7c + 3)) ||
+              if ((((SInt32)srcPitch < 1 << macroTileWidthShift + 3) || ((SInt32)levelHeight < 1 << macroTileHeightShift + 3)) ||
                  ((M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) & 4) == 0)) {
-                bVar17 = false;
-                uVar22 = 0;
+                macroTiled = false;
+                macroTileFlag = 0;
               }
               else {
-                bVar17 = true;
-                uVar22 = 1;
+                macroTiled = true;
+                macroTileFlag = 1;
               }
-              switch(local_7c << 1 | uVar22) {
+              switch(macroTileHeightShift << 1 | macroTileFlag) {
               default:
-                uVar22 = 0;
+                tilingBits = 0;
                 break;
               case 1:
-                uVar22 = 0x10000;
+                tilingBits = 0x10000;
                 break;
               case 2:
-                uVar22 = 0x20000;
+                tilingBits = 0x20000;
                 break;
               case 3:
-                uVar22 = 0x30000;
+                tilingBits = 0x30000;
                 break;
               case 4:
-                uVar22 = 0x60000;
+                tilingBits = 0x60000;
                 break;
               case 5:
-                uVar22 = 0x70000;
+                tilingBits = 0x70000;
               }
-              iVar28 = 8;
-              if (!bVar17) {
-                iVar28 = 1;
+              rowGranularity = 8;
+              if (!macroTiled) {
+                rowGranularity = 1;
               }
-              iVar28 = iVar28 * (1 << iVar20);
-              uVar32 = vramSource - M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase);
-              iVar27 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-              M<UInt32>(iVar27 + surfaceInfoOffset) =
-                   (uVar40 >> 3) << 0x18 | (uVar40 >> 3 & 0x1f00) << 8 |
-                   (uVar22 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x14 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x16)
+              rowGranularity = rowGranularity * (1 << tileRowShift);
+              vramOffset = vramSource - M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase);
+              registerWindow = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+              M<UInt32>(registerWindow + surfaceInfoOffset) =
+                   (srcPitch >> 3) << 0x18 | (srcPitch >> 3 & 0x1f00) << 8 |
+                   (tilingBits | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x14 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x16)
                    >> 8;
               enforceInOrderExecutionIO();
-              M<UInt32>(iVar27 + surfaceLowerOffset) =
-                   uVar32 * 0x1000000 | (uVar32 & 0xff00) << 8 | uVar32 >> 8 & 0xff00 |
-                   uVar32 >> 0x18;
+              M<UInt32>(registerWindow + surfaceLowerOffset) =
+                   vramOffset * 0x1000000 | (vramOffset & 0xff00) << 8 | vramOffset >> 8 & 0xff00 |
+                   vramOffset >> 0x18;
               enforceInOrderExecutionIO();
-              uVar22 = (uVar32 + iVar28 * uVar40 * ((rowCount + iVar28 + -1) / iVar28)) - 1;
-              M<UInt32>(iVar27 + iVar26) =
-                   uVar22 * 0x1000000 | (uVar22 & 0xff00) << 8 | uVar22 >> 8 & 0xff00 |
-                   uVar22 >> 0x18;
+              endAddress = (vramOffset + rowGranularity * srcPitch * ((rowCount + rowGranularity + -1) / rowGranularity)) - 1;
+              M<UInt32>(registerWindow + surfaceUpperOffset) =
+                   endAddress * 0x1000000 | (endAddress & 0xff00) << 8 | endAddress >> 8 & 0xff00 |
+                   endAddress >> 0x18;
               enforceInOrderExecutionIO();
-              pbVar2 = (UInt8 *)(iVar27 + iVar26);
+              regPtr = (UInt8 *)(registerWindow + surfaceUpperOffset);
               global_dummy_read_back_a_register =
-                   loadWordByteReversed(pbVar2);
+                   loadWordByteReversed(regPtr);
               if (rowCount < 1) {
-                uVar22 = (UInt32)(UInt8)hwInfoBytes[0x1a];
+                pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
               }
               else {
-                uVar22 = (UInt32)(UInt8)hwInfoBytes[0x1a];
-                iVar28 = 0;
+                pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
+                rowIndex = 0;
                 do {
-                  GH_memcpy(destination,vramSource,uVar37 << (uVar22 & 0x3f));
+                  GH_memcpy(destination,vramSource,levelWidth << (pixelShift & 0x3f));
                   if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
-                    AVar25 = hwInfoBytes[0x1a];
+                    pixelShiftByte = hwInfoBytes[0x1a];
                   }
                   else {
-                    uVar22 = (UInt32)(UInt8)self[0x84];
-                    AVar25 = hwInfoBytes[0x1a];
-                    iVar27 = 0;
-                    iVar29 = ((uVar37 << ((UInt8)AVar25 & 0x3f)) + ((UInt32)destination & uVar22 - 1)) -
-                             uVar22;
-                    if (0 < iVar29) {
-                      iVar27 = 0;
+                    cacheLine = (UInt32)(UInt8)self[0x84];
+                    pixelShiftByte = hwInfoBytes[0x1a];
+                    flushOffset = 0;
+                    flushBytes = ((levelWidth << ((UInt8)pixelShiftByte & 0x3f)) + ((UInt32)destination & cacheLine - 1)) -
+                             cacheLine;
+                    if (0 < flushBytes) {
+                      flushOffset = 0;
                       do {
-                        dataCacheBlockStore((-uVar22 & (UInt32)destination) + iVar27);
-                        iVar27 = iVar27 + uVar22;
-                      } while (iVar27 < iVar29);
+                        dataCacheBlockStore((-cacheLine & (UInt32)destination) + flushOffset);
+                        flushOffset = flushOffset + cacheLine;
+                      } while (flushOffset < flushBytes);
                     }
                     ppcSync();
                     instructionSynchronize();
-                    dataCacheBlockFlush((-uVar22 & (UInt32)destination) + iVar27);
+                    dataCacheBlockFlush((-cacheLine & (UInt32)destination) + flushOffset);
                     ppcSync();
                     instructionSynchronize();
                     instructionSynchronize();
                   }
-                  uVar22 = (UInt32)(UInt8)AVar25;
-                  iVar28 = iVar28 + 1;
-                  destination = destination + iVar31;
-                  vramSource = vramSource + uVar40;
-                } while (rowCount != iVar28);
+                  pixelShift = (UInt32)(UInt8)pixelShiftByte;
+                  rowIndex = rowIndex + 1;
+                  destination = destination + destPitch;
+                  vramSource = vramSource + srcPitch;
+                } while (rowCount != rowIndex);
               }
               repeat = repeat + 1;
-              bytesCopied = bytesCopied + rowCount * (uVar37 << (uVar22 & 0x3f));
+              bytesCopied = bytesCopied + rowCount * (levelWidth << (pixelShift & 0x3f));
             } while (repeat < (SInt32)(UInt32)M<UInt16>(tileRecord));
           }
-          if (((1 >= uVar37) && (uVar35 < 2)) && (uVar19 < 2)) break;
-          if (0x20 < iVar31) {
-            iVar31 = iVar31 >> 1;
+          if (((1 >= levelWidth) && (levelHeight < 2)) && (levelDepth < 2)) break;
+          if (0x20 < destPitch) {
+            destPitch = destPitch >> 1;
           }
-          if (1 << iVar33 < (SInt32)uVar40) {
-            uVar40 = (SInt32)uVar40 >> 1;
+          if (1 << macroTileWidthShift < (SInt32)srcPitch) {
+            srcPitch = (SInt32)srcPitch >> 1;
           }
-          if (1 < uVar37) {
-            uVar37 = (SInt32)uVar37 >> 1;
+          if (1 < levelWidth) {
+            levelWidth = (SInt32)levelWidth >> 1;
           }
-          if (1 < uVar35) {
-            uVar35 = (SInt32)uVar35 >> 1;
+          if (1 < levelHeight) {
+            levelHeight = (SInt32)levelHeight >> 1;
           }
-          if (1 < uVar19) {
-            uVar19 = (SInt32)uVar19 >> 1;
+          if (1 < levelDepth) {
+            levelDepth = (SInt32)levelDepth >> 1;
           }
           level = level + 1;
           tileRecord = tileRecord + 0x20;
@@ -285,14 +298,14 @@ LAB_0001e668:
       }
       face = face + 1;
     } while (face < faceCount);
-    iVar31 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+    mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   }
   M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = bytesCopied + M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
-  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset), saved0);
+  storeWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceInfoOffset), saved0);
   enforceInOrderExecutionIO();
-  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceLowerOffset), saved1);
+  storeWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceLowerOffset), saved1);
   enforceInOrderExecutionIO();
-  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar26), saved2);
+  storeWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceUpperOffset), saved2);
   enforceInOrderExecutionIO();
   if (innerMapping != (SInt32 *)0x0) {
     VCALL(*innerMapping, 0x18)(innerMapping);

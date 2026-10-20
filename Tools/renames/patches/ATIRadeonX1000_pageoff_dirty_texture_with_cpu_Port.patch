@@ -1,9 +1,9 @@
---- a/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-17 19:48:41.166152793 -0700
-+++ b/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-17 19:48:41.167109757 -0700
+--- a/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-20 10:15:29.776372770 -0700
++++ b/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-20 10:15:29.777727612 -0700
 @@ -36,18 +36,9 @@
  
    UInt8 faceCount;
-   UInt8 *pbVar2;
+   UInt8 *regPtr;
 -  UInt8 bVar3;
 -  UInt8 bVar4;
 -  UInt8 bVar5;
@@ -21,50 +21,68 @@
 +  UInt32 saved2;
    SInt32 surfaceInfoOffset;
    SInt32 surfaceLowerOffset;
-   bool bVar17;
-@@ -100,23 +91,12 @@
+   bool macroTiled;
+@@ -113,23 +104,12 @@
    }
-   iVar31 = M<SInt32>(self + 0x860);
-   surfaceInfoOffset = (iVar26 + 0x2c3) * 4;
--  pbVar2 = (UInt8 *)(iVar31 + surfaceInfoOffset);
--  bVar3 = pbVar2[3];
--  bVar6 = pbVar2[2];
--  bVar9 = pbVar2[1];
--  bVar12 = *pbVar2;
+   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+   surfaceInfoOffset = (slotOffset + 0x2c3) * 4;
+-  regPtr = (UInt8 *)(mmioBase + surfaceInfoOffset);
+-  bVar3 = regPtr[3];
+-  bVar6 = regPtr[2];
+-  bVar9 = regPtr[1];
+-  bVar12 = *regPtr;
 +  /* the three registers are read as words (lwbrx) and written back later (stwbrx), exactly as the shipped code does: four single-byte reads would be a different access on the bus */
-+  saved0 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset));
-   surfaceLowerOffset = (iVar26 + 0x2c1) * 4;
--  pbVar2 = (UInt8 *)(iVar31 + surfaceLowerOffset);
--  bVar4 = pbVar2[3];
--  bVar7 = pbVar2[2];
--  bVar10 = pbVar2[1];
--  bVar13 = *pbVar2;
-+  saved1 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceLowerOffset));
-   iVar26 = (iVar26 + 0x2c2) * 4;
--  pbVar2 = (UInt8 *)(iVar31 + iVar26);
--  bVar5 = pbVar2[3];
--  bVar8 = pbVar2[2];
--  bVar11 = pbVar2[1];
--  bVar14 = *pbVar2;
-+  saved2 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar26));
-   bVar18 = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 3;
-   iVar20 = -(bVar18 & 3);
-   if ((bVar18 & 2) == 0) {
-@@ -308,14 +288,11 @@
-     iVar31 = M<SInt32>(self + 0x860);
++  saved0 = loadWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceInfoOffset));
+   surfaceLowerOffset = (slotOffset + 0x2c1) * 4;
+-  regPtr = (UInt8 *)(mmioBase + surfaceLowerOffset);
+-  bVar4 = regPtr[3];
+-  bVar7 = regPtr[2];
+-  bVar10 = regPtr[1];
+-  bVar13 = *regPtr;
++  saved1 = loadWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceLowerOffset));
+   surfaceUpperOffset = (slotOffset + 0x2c2) * 4;
+-  regPtr = (UInt8 *)(mmioBase + surfaceUpperOffset);
+-  bVar5 = regPtr[3];
+-  bVar8 = regPtr[2];
+-  bVar11 = regPtr[1];
+-  bVar14 = *regPtr;
++  saved2 = loadWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceUpperOffset));
+   tileFlags = M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) >> 3;
+   negTileBits = -(tileFlags & 3);
+   if ((tileFlags & 2) == 0) {
+@@ -142,7 +122,7 @@
+ LAB_0001e624:
+     if ((UInt8)pixelShiftByte < 4) {
+       if (macroTiled) {
+-        negTileBits = 2;
++        tileRowShift = 2;
+         macroTileWidthShift = 3;
+         macroTileHeightShift = 2;
+       }
+@@ -157,7 +137,7 @@
+   else {
+     macroTiled = true;
+ LAB_0001e61c:
+-    if (tileRowShift < 0) {
++    if (negTileBits < 0) {
+       pixelShiftByte = hwInfoBytes[0x1a];
+       goto LAB_0001e624;
+     }
+@@ -321,14 +301,11 @@
+     mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
    }
    M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = bytesCopied + M<SInt32>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
--  M<UInt32>(iVar31 + surfaceInfoOffset) =
+-  M<UInt32>(mmioBase + surfaceInfoOffset) =
 -       (UInt32)bVar12 << 0x18 | (UInt32)bVar9 << 0x10 | (UInt32)bVar6 << 8 | (UInt32)bVar3;
-+  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceInfoOffset), saved0);
++  storeWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceInfoOffset), saved0);
    enforceInOrderExecutionIO();
--  M<UInt32>(iVar31 + surfaceLowerOffset) =
+-  M<UInt32>(mmioBase + surfaceLowerOffset) =
 -       (UInt32)bVar13 << 0x18 | (UInt32)bVar10 << 0x10 | (UInt32)bVar7 << 8 | (UInt32)bVar4;
-+  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + surfaceLowerOffset), saved1);
++  storeWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceLowerOffset), saved1);
    enforceInOrderExecutionIO();
--  M<UInt32>(iVar31 + iVar26) =
+-  M<UInt32>(mmioBase + surfaceUpperOffset) =
 -       (UInt32)bVar14 << 0x18 | (UInt32)bVar11 << 0x10 | (UInt32)bVar8 << 8 | (UInt32)bVar5;
-+  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar26), saved2);
++  storeWordByteReversed(reinterpret_cast<UInt8 *>(mmioBase + surfaceUpperOffset), saved2);
    enforceInOrderExecutionIO();
    if (innerMapping != (SInt32 *)0x0) {
      VCALL(*innerMapping, 0x18)(innerMapping);

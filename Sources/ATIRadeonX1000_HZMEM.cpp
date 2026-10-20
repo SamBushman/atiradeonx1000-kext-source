@@ -34,38 +34,38 @@ template <class T> inline void HZ_zero(T address, UInt32 size) { bzero((void *)(
 
 
 UInt32 HZMEM_InitAllocationTable(_HZDATA *hz) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(hz);
+    UInt8 *hzBytes = reinterpret_cast<UInt8 *>(hz);
 
-  UInt8 *p_Var1;
-  UInt32 uVar2;
-  UInt8 *p_Var3;
+  UInt8 *blockSlot;
+  UInt32 blockIndex;
+  UInt8 *blockSlotCursor;
   
-  if (M<SInt32>(param_1 + 0xc) != 0) {
-    uVar2 = 0;
-    p_Var3 = param_1;
+  if (M<SInt32>(hzBytes + 0xc) != 0) {
+    blockIndex = 0;
+    blockSlotCursor = hzBytes;
     do {
-      uVar2 = uVar2 + 1;
-      HZ_zero((M<UInt32 *>(p_Var3 + 0x10))[3],*M<UInt32 *>(p_Var3 + 0x10));
-      p_Var1 = p_Var3 + 0x10;
-      p_Var3 = p_Var3 + 4;
-      HZ_zero(M<SInt32>(p_Var1) + 0x14,0x1000);
-    } while (uVar2 < M<UInt32>(param_1 + 0xc));
+      blockIndex = blockIndex + 1;
+      HZ_zero((M<UInt32 *>(blockSlotCursor + 0x10))[3],*M<UInt32 *>(blockSlotCursor + 0x10));
+      blockSlot = blockSlotCursor + 0x10;
+      blockSlotCursor = blockSlotCursor + 4;
+      HZ_zero(M<SInt32>(blockSlot) + 0x14,0x1000);
+    } while (blockIndex < M<UInt32>(hzBytes + 0xc));
   }
   return 0;
 }
 
-UInt32 HZMEM_Init(_HZDATA *hz, UInt32 param_2, UInt32 param_3, UInt32 param_4) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(hz);
+UInt32 HZMEM_Init(_HZDATA *hz, UInt32 chipClass, UInt32 numPipes, UInt32 numZPipes) {
+    UInt8 *hzBytes = reinterpret_cast<UInt8 *>(hz);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
+  SInt32 initResult;
+  UInt32 tableResult;
   
-  if (param_1 != (UInt8 *)0x0) {
-    M<UInt32>(param_1) = param_2;
-    iVar1 = HZMEM_InitMemResource(hz,param_2,param_3,param_4);
-    if (iVar1 == 0) {
-      uVar2 = HZMEM_InitAllocationTable(hz);
-      return uVar2;
+  if (hzBytes != (UInt8 *)0x0) {
+    M<UInt32>(hzBytes) = chipClass;
+    initResult = HZMEM_InitMemResource(hz,chipClass,numPipes,numZPipes);
+    if (initResult == 0) {
+      tableResult = HZMEM_InitAllocationTable(hz);
+      return tableResult;
     }
   }
   return 1;

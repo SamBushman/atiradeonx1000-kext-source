@@ -35,73 +35,92 @@ extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, bool flag, UInt32 panel) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  UInt8 AVar2;
-  UInt16 uVar3;
-  UInt16 uVar4;
-  float fVar5;
-  float fVar6;
-  UInt32 uVar7;
-  UInt32 uVar8;
+  bool noFormatBits;
+  UInt8 dstFormat;
+  UInt16 dstRow;
+  UInt16 dstColumnUnits;
+  UInt32 lastColumnRot;
   SInt32 packetEnd;
   SInt32 baseOffset;
   SInt32 regValueIndex;
-  UInt32 uVar10;
-  UInt32 uVar11;
   UInt32 blkFormatFieldE4;
-  UInt32 uVar12;
-  UInt32 in_register_00000018;
-  UInt32 uVar13;
-  SInt32 iVar14;
-  UInt32 uVar15;
+  UInt32 columnCountRot;
+  SInt32 packetWordIndex;
+  UInt32 texCoordWord4;
   SInt32 rotation;
   SInt32 pitch;
   SInt32 endAddress;
-  UInt32 uVar17;
+  UInt32 dstHeight;
   UInt32 packetFormatFieldE4;
   UInt32 blkFormatFieldE0;
-  UInt32 uVar18;
-  UInt32 uVar19;
-  UInt32 uVar20;
+  UInt32 texCoordWord3;
+  UInt32 texCoordWord2;
+  UInt32 texCoordWord1;
   UInt32 *blitPacket;
   UInt32 widthUnits;
   UInt32 pitchUnits;
   UInt32 lastColumn;
   UInt32 lastRow;
   UInt32 bufferFormatWord;
+  SInt32 formatTableOffset;
+  UInt16 panelHeight16;
+  float vertexY1;
+  float vertexX1;
+  float vertexX2;
+  float vertexY2;
+  UInt32 tileConfig;
+  UInt32 packetWord8a;
+  UInt32 packetWordA0;
+  UInt32 formatField0;
+  UInt32 dstColumnCount;
+  UInt32 lastRowRot;
+  UInt32 packetWord98;
+  UInt32 columnOffsetRot;
+  UInt32 columnCount;
+  UInt32 formatField1;
+  UInt32 lastColumnLarge;
+  UInt32 columnCountWrap;
+  UInt32 packetWordB3;
+  UInt32 formatField2;
+  UInt32 packetWordB2;
+  UInt32 formatField3;
+  UInt32 packetWordA6;
   UInt32 blk[35];   /* the pcl_ParamsR500_t block on the shipped stack: 0x8c bytes at sp+0x40 (Ghidra blk[0] .. blk[34]) */
   UInt16 rect[4];   /* the 8-byte rectangle at sp+0x38 (Ghidra rect[0] .. rect[3]) */
-  double dVar22;
-  double dVar23;
-  double dVar24;
-  double dVar25;
-  UInt32 local_a8;
-  UInt32 uStack_a4;
-  UInt32 local_a0;
-  UInt32 uStack_9c;
-  UInt32 local_98;
-  UInt32 uStack_94;
-  UInt32 local_90;
-  UInt32 uStack_8c;
+  double widthD;
+  double heightD;
+  UInt32 magicHi0;
+  UInt32 widthLo;
+  UInt32 magicHi1;
+  UInt32 heightLo;
+  UInt32 magicHi2;
+  UInt32 dstWidthLo;
+  UInt32 magicHi3;
+  UInt32 dstHeightLo;
+  double magicBias;
+  double vertexScaleA;
+  double vertexBiasA;
+  double vertexScaleB;
+  double vertexBiasB;
   
-  dVar25 = DOUBLE_0004c3b0;
-  uStack_a4 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8);
+  magicBias = DOUBLE_0004c3b0;
+  widthLo = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8);
   rotation = M<SInt32>(self + panel * 4 + 0xb5c);
-  local_a8 = 0x43300000;
-  uStack_9c = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9da);
-  local_a0 = 0x43300000;
+  magicHi0 = 0x43300000;
+  heightLo = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9da);
+  magicHi1 = 0x43300000;
   M<UInt32>(self + kIOATIR500Accelerator_unknown_0x78) = 0;
-  BF(blk[23]) = (float)((double)CONCAT44d(0x43300000,uStack_a4) - dVar25);
-  dVar24 = (double)BF(blk[23]);
-  BF(blk[24]) = (float)((double)CONCAT44d(0x43300000,uStack_9c) - dVar25);
-  dVar25 = (double)BF(blk[24]);
+  BF(blk[23]) = (float)((double)CONCAT44d(0x43300000,widthLo) - magicBias);
+  widthD = (double)BF(blk[23]);
+  BF(blk[24]) = (float)((double)CONCAT44d(0x43300000,heightLo) - magicBias);
+  heightD = (double)BF(blk[24]);
   if (((UInt32)flag) != 0) {
-    uVar3 = M<UInt16>(self + panel * 0x78 + 0x9da);
+    panelHeight16 = M<UInt16>(self + panel * 0x78 + 0x9da);
     buffer[wordCount] = 0x5c8;
     buffer[wordCount + 1] = 0x70000;
     if (panel == 0) {
       buffer[wordCount + 2] = 0x194e;
-      buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + kIOATIR500Accelerator_display1Enabled)) << 0x10 | 0x80000000;
+      buffer[wordCount + 3] = ((UInt32)panelHeight16 & ~M<UInt32>(self + kIOATIR500Accelerator_display1Enabled)) << 0x10 | 0x80000000;
       buffer[wordCount + 4] = 0x5c8;
       regValueIndex = wordCount + 5;
       wordCount = wordCount + 6;
@@ -109,7 +128,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     }
     else {
       buffer[wordCount + 2] = 0x1b4e;
-      buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + kIOATIR500Accelerator_display2Enabled)) << 0x10 | 0x80000000;
+      buffer[wordCount + 3] = ((UInt32)panelHeight16 & ~M<UInt32>(self + kIOATIR500Accelerator_display2Enabled)) << 0x10 | 0x80000000;
       buffer[wordCount + 4] = 0x5c8;
       regValueIndex = wordCount + 5;
       wordCount = wordCount + 6;
@@ -124,14 +143,14 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     rect[2] = M<UInt16>(self + panel * 0x78 + 0x148);
     blk[10] = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
     rect[3] = M<UInt16>(self + panel * 0x78 + 0x14a);
-    uStack_94 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148);
+    dstWidthLo = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148);
     blk[11] = (UInt32)(UInt8)self[panel * 0x78 + 0x166];
     blk[12] = (UInt32)(UInt8)self[panel * 0x78 + 0x9f6];
-    local_98 = 0x43300000;
-    uStack_8c = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
+    magicHi2 = 0x43300000;
+    dstHeightLo = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
     blk[4] = 0x1492;
     blk[8] = 0;
-    local_90 = 0x43300000;
+    magicHi3 = 0x43300000;
     blk[18] = 1;
     blk[20] = (UInt32)rect;
     blk[19] = 0;
@@ -144,8 +163,8 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     blk[29] = 0x3f800000;
     blk[30] = 0x3f800000;
     blk[31] = 0x3f800000;
-    BF(blk[27]) = (float)((double)CONCAT44d(0x43300000,uStack_94) - DOUBLE_0004c3b0);
-    BF(blk[28]) = (float)((double)CONCAT44d(0x43300000,uStack_8c) - DOUBLE_0004c3b0);
+    BF(blk[27]) = (float)((double)CONCAT44d(0x43300000,dstWidthLo) - DOUBLE_0004c3b0);
+    BF(blk[28]) = (float)((double)CONCAT44d(0x43300000,dstHeightLo) - DOUBLE_0004c3b0);
     blk[6] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9dc) *
                 M<SInt32>(self + panel * 0x78 + 0x9fc) + M<SInt32>(self + panel * 0x78 + 0x9c4) &
                 0xffffffe0;
@@ -167,9 +186,9 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
                 (blkFormatFieldE0 & 0x1800) << 1 |
                 blkFormatFieldE0 >> 3 & 0xc00 | blkFormatFieldE0 >> 7 & 0x300 | blkFormatFieldE0 >> 0x11 & 0x1f;
     if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-       (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                 (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
-       uVar10 == 0)) {
+       (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
+                 (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+       columnCount == 0)) {
       lastColumn = 0;
     }
     lastRow = 0;
@@ -182,9 +201,9 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
                 M<SInt32>(self + panel * 0x78 + 0x16c) + M<SInt32>(self + panel * 0x78 + 0x134) &
                 0xffffffe0;
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-       (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
-       uVar10 == 0)) {
+       (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
+                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+       columnCount == 0)) {
       lastColumn = 0;
     }
     lastRow = 0;
@@ -196,8 +215,8 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     blk[2] = blkFormatFieldE4 >> 0x13 & 0x1f | (blkFormatFieldE4 & 0x40) << 0x10 | blkFormatFieldE4 >> 7 & 0xe00 |
                 blkFormatFieldE4 >> 1 & 0x7000 | (blkFormatFieldE4 & 0x1c00) << 5 | (blkFormatFieldE4 & 0x380) << 0xb;
     bufferFormatWord = M<UInt32>(self + panel * 0x78 + 0x168);
-    bVar1 = (bufferFormatWord & 0xf00000) == 0;
-    if (bVar1) {
+    noFormatBits = (bufferFormatWord & 0xf00000) == 0;
+    if (noFormatBits) {
       widthUnits = 0;
     }
     else {
@@ -207,9 +226,9 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= widthUnits) {
       pitchUnits = widthUnits;
     }
-    if ((bVar1) ||
-       (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
-       lastColumn = uVar10 - 1, uVar10 == 0)) {
+    if ((noFormatBits) ||
+       (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
+       lastColumn = columnCount - 1, columnCount == 0)) {
       lastColumn = 0;
     }
     lastRow = 0;
@@ -243,7 +262,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   }
   blitPacket = buffer + wordCount;
   GH_memcpy(blitPacket,&g_r500_3d_blit_state_packet,0x2f4);
-  iVar14 = (UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c;
+  formatTableOffset = (UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c;
   packetEnd = (SInt32)blitPacket + (0x2f4 - (SInt32)buffer) >> 2;
   widthUnits = 0;
   blitPacket[0x9a] =
@@ -257,27 +276,27 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= widthUnits) {
     pitchUnits = widthUnits;
   }
-  uVar7 = blitPacket[0x8a];
+  packetWord8a = blitPacket[0x8a];
   blitPacket[0x9c] =
        pitchUnits & 0x3ffe | ((UInt8)self[panel * 0x78 + 0x9f4] & 1) << 0x10 |
        ((UInt8)self[panel * 0x78 + 0x9f4] & 6) << 0x10 |
        ((UInt8)self[panel * 0x78 + 0x9f5] & 3) << 0x13 |
        FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c) >> 1 & 0x1e00000;
-  uVar17 = FormatTableLookup_0x0004d2e0(iVar14) >> 0x11 & 0x1f;
-  blitPacket[0x8a] = uVar17 | uVar7 & 0xffffffe0;
-  uVar10 = FormatTableLookup_0x0004d2e0(iVar14) >> 7 & 0x300;
-  blitPacket[0x8a] = uVar10 | uVar17 | uVar7 & 0xfffffce0;
-  uVar11 = FormatTableLookup_0x0004d2e0(iVar14) >> 3 & 0xc00;
-  blitPacket[0x8a] = uVar11 | uVar10 | uVar17 | uVar7 & 0xfffff0e0;
-  uVar13 = (FormatTableLookup_0x0004d2e0(iVar14) & 0x1800) << 1;
-  blitPacket[0x8a] = uVar13 | uVar11 | uVar10 | uVar17 | uVar7 & 0xffffc0e0;
+  formatField0 = FormatTableLookup_0x0004d2e0(formatTableOffset) >> 0x11 & 0x1f;
+  blitPacket[0x8a] = formatField0 | packetWord8a & 0xffffffe0;
+  formatField1 = FormatTableLookup_0x0004d2e0(formatTableOffset) >> 7 & 0x300;
+  blitPacket[0x8a] = formatField1 | formatField0 | packetWord8a & 0xfffffce0;
+  formatField2 = FormatTableLookup_0x0004d2e0(formatTableOffset) >> 3 & 0xc00;
+  blitPacket[0x8a] = formatField2 | formatField1 | formatField0 | packetWord8a & 0xfffff0e0;
+  formatField3 = (FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x1800) << 1;
+  blitPacket[0x8a] = formatField3 | formatField2 | formatField1 | formatField0 | packetWord8a & 0xffffc0e0;
   blitPacket[0x8a] =
-       (FormatTableLookup_0x0004d2e0(iVar14) & 0x600) << 5 |
-       uVar13 | uVar11 | uVar10 | uVar17 | uVar7 & 0xffff00e0;
+       (FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x600) << 5 |
+       formatField3 | formatField2 | formatField1 | formatField0 | packetWord8a & 0xffff00e0;
   if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-     (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-               (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
-     uVar10 == 0)) {
+     (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
+               (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+     columnCount == 0)) {
     lastColumn = 0;
   }
   lastRow = 0;
@@ -285,15 +304,15 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     lastRow = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
   }
   blitPacket[0xb3] = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
-  AVar2 = self[panel * 0x78 + 0x166];
+  dstFormat = self[panel * 0x78 + 0x166];
   blitPacket[0xa0] =
        ((UInt8)self[panel * 0x78 + 0x164] & 7) << 2 |
        (UInt32)M<UInt16>(self + panel * 0x78 + 0x14c) * M<SInt32>(self + panel * 0x78 + 0x16c) +
        M<SInt32>(self + panel * 0x78 + 0x134) & 0xffffffe0;
   if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-     (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-               (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = uVar10 - 1,
-     uVar10 == 0)) {
+     (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
+               (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+     columnCount == 0)) {
     lastColumn = 0;
   }
   lastRow = 0;
@@ -301,13 +320,13 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     lastRow = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
   }
   blitPacket[0xa6] = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
-  packetFormatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar2 * 0x1c);
+  packetFormatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)dstFormat * 0x1c);
   blitPacket[0xa8] =
        packetFormatFieldE4 >> 0x13 & 0x1f | (packetFormatFieldE4 & 0x40) << 0x10 | packetFormatFieldE4 >> 7 & 0xe00 | packetFormatFieldE4 >> 1 & 0x7000
        | (packetFormatFieldE4 & 0x1c00) << 5 | (packetFormatFieldE4 & 0x380) << 0xb;
   bufferFormatWord = M<UInt32>(self + panel * 0x78 + 0x168);
-  bVar1 = (bufferFormatWord & 0xf00000) == 0;
-  if (bVar1) {
+  noFormatBits = (bufferFormatWord & 0xf00000) == 0;
+  if (noFormatBits) {
     widthUnits = 0;
   }
   else {
@@ -317,9 +336,9 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= widthUnits) {
     pitchUnits = widthUnits;
   }
-  if ((bVar1) ||
-     (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
-     lastColumn = uVar10 - 1, uVar10 == 0)) {
+  if ((noFormatBits) ||
+     (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
+     lastColumn = columnCount - 1, columnCount == 0)) {
     lastColumn = 0;
   }
   lastRow = 0;
@@ -327,214 +346,214 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     lastRow = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
   }
   blitPacket[0xaa] = pitchUnits - 1 & 0x3fff | (lastColumn & 0x800) << 4 | (lastRow & 0x800) << 5;
-  uVar15 = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
+  tileConfig = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
   blitPacket[0xa2] = blitPacket[0xa2] & 0xffffe1ff | 0x1400;
   blitPacket[5] = 0x30000;
-  blitPacket[0xb] = uVar15;
+  blitPacket[0xb] = tileConfig;
   if (M<UInt16>(self + panel * 0x78 + 0x14a) < 0x1001) {
 LAB_00023ca0:
     if (rotation == 0xb4) {
-      uVar20 = 0x3f800000;
-      uVar18 = 0;
-      uVar15 = 0x3f800000;
-      uVar19 = 0;
+      texCoordWord1 = 0x3f800000;
+      texCoordWord3 = 0;
+      texCoordWord4 = 0x3f800000;
+      texCoordWord2 = 0;
     }
     else {
       if (rotation == 0x10e) goto LAB_00023c68;
       if (rotation == 0x5a) goto LAB_00023c18;
-      uVar20 = 0;
-      uVar18 = 0x3f800000;
-      uVar15 = 0;
-      uVar19 = 0x3f800000;
+      texCoordWord1 = 0;
+      texCoordWord3 = 0x3f800000;
+      texCoordWord4 = 0;
+      texCoordWord2 = 0x3f800000;
     }
   }
   else {
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-       (uVar17 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), uVar10 = uVar17 - 1,
-       uVar17 == 0)) {
-      uVar10 = 0;
+       (dstColumnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
+                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumnLarge = dstColumnCount - 1,
+       dstColumnCount == 0)) {
+      lastColumnLarge = 0;
     }
-    blitPacket[0xa6] = uVar10 & 0x7ff | 0x803ff800;
+    blitPacket[0xa6] = lastColumnLarge & 0x7ff | 0x803ff800;
     if (rotation == 0x5a) {
-      uVar17 = 0;
+      lastRowRot = 0;
       if (M<UInt16>(self + panel * 0x78 + 0x9da) != 0) {
-        uVar17 = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
+        lastRowRot = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
       }
-      blitPacket[0xb3] = (uVar17 & 0x1fff) << 0xd | 0xfff;
+      blitPacket[0xb3] = (lastRowRot & 0x1fff) << 0xd | 0xfff;
 LAB_00023c18:
-      uVar17 = blitPacket[0x98];
-      uVar19 = 0;
-      uVar18 = 0x3f800000;
+      packetWord98 = blitPacket[0x98];
+      texCoordWord2 = 0;
+      texCoordWord3 = 0x3f800000;
     }
     else {
       if (rotation != 0x10e) goto LAB_00023ca0;
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-         (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
+         (columnCountWrap = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
                    (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf),
-         uVar17 = uVar10 - 0x1001, uVar10 == 0)) {
-        uVar17 = 0xfffff000;
+         columnOffsetRot = columnCountWrap - 0x1001, columnCountWrap == 0)) {
+        columnOffsetRot = 0xfffff000;
       }
-      blitPacket[0xb2] = uVar17 & 0x1fff;
+      blitPacket[0xb2] = columnOffsetRot & 0x1fff;
 LAB_00023c68:
-      uVar17 = blitPacket[0x98];
-      uVar19 = 0x3f800000;
-      uVar18 = 0;
+      packetWord98 = blitPacket[0x98];
+      texCoordWord2 = 0x3f800000;
+      texCoordWord3 = 0;
     }
-    blitPacket[0x98] = uVar17 & 0xfffff000 | 1;
-    uVar15 = uVar18;
-    uVar20 = uVar19;
+    blitPacket[0x98] = packetWord98 & 0xfffff000 | 1;
+    texCoordWord4 = texCoordWord3;
+    texCoordWord1 = texCoordWord2;
   }
   if (0x1000 < M<UInt16>(self + panel * 0x78 + 0x14a)) {
     if (rotation == 0x5a) {
-      dVar23 = (double)FLOAT_0004c37c;
-      iVar14 = packetEnd * 4 + 0x30 >> 2;
-      fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      vertexScaleA = (double)FLOAT_0004c37c;
+      packetWordIndex = packetEnd * 4 + 0x30 >> 2;
+      vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
       buffer[packetEnd] = 0x31080;
       buffer[packetEnd + 5] = 0x1087;
       buffer[packetEnd + 7] = 0xc0033500;
       buffer[packetEnd + 8] = 0x10031;
       buffer[packetEnd + 9] = 0x45000000;
-      buffer[packetEnd + 10] = FBITS(fVar5);
-      buffer[packetEnd + 1] = uVar20;
-      buffer[packetEnd + 2] = uVar19;
-      buffer[packetEnd + 3] = uVar18;
-      buffer[packetEnd + 4] = uVar15;
+      buffer[packetEnd + 10] = FBITS(vertexY1);
+      buffer[packetEnd + 1] = texCoordWord1;
+      buffer[packetEnd + 2] = texCoordWord2;
+      buffer[packetEnd + 3] = texCoordWord3;
+      buffer[packetEnd + 4] = texCoordWord4;
       buffer[packetEnd + 0xb] = 0;
-      buffer[packetEnd + 6] = (SInt32)(dVar25 * dVar23) | 0x60000000;
+      buffer[packetEnd + 6] = (SInt32)(heightD * vertexScaleA) | 0x60000000;
       goto LAB_00023f44;
     }
     if (rotation == 0x10e) {
-      dVar23 = (double)FLOAT_0004c37c;
-      dVar22 = (double)FLOAT_0004c378;
-      iVar14 = packetEnd * 4 + 0x30 >> 2;
-      fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      fVar6 = (float)(dVar24 + (double)(float)(dVar24 - dVar22)) * FLOAT_0004c380;
+      vertexScaleA = (double)FLOAT_0004c37c;
+      vertexBiasB = (double)FLOAT_0004c378;
+      packetWordIndex = packetEnd * 4 + 0x30 >> 2;
+      vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      vertexX2 = (float)(widthD + (double)(float)(widthD - vertexBiasB)) * FLOAT_0004c380;
       buffer[packetEnd] = 0x31080;
       buffer[packetEnd + 7] = 0xc0033500;
       buffer[packetEnd + 5] = 0x1087;
       buffer[packetEnd + 8] = 0x10031;
-      buffer[packetEnd + 9] = FBITS(fVar6);
-      buffer[packetEnd + 10] = FBITS(fVar5);
+      buffer[packetEnd + 9] = FBITS(vertexX2);
+      buffer[packetEnd + 10] = FBITS(vertexY1);
       buffer[packetEnd + 0xb] = 0;
-      buffer[packetEnd + 1] = uVar20;
-      buffer[packetEnd + 2] = uVar19;
-      buffer[packetEnd + 3] = uVar18;
-      buffer[packetEnd + 4] = uVar15;
+      buffer[packetEnd + 1] = texCoordWord1;
+      buffer[packetEnd + 2] = texCoordWord2;
+      buffer[packetEnd + 3] = texCoordWord3;
+      buffer[packetEnd + 4] = texCoordWord4;
       buffer[packetEnd + 6] =
-           (SInt32)((double)(float)(dVar24 - (double)(float)(dVar24 - dVar22)) * dVar23) << 0x10 |
-           (SInt32)(dVar25 * dVar23);
+           (SInt32)((double)(float)(widthD - (double)(float)(widthD - vertexBiasB)) * vertexScaleA) << 0x10 |
+           (SInt32)(heightD * vertexScaleA);
       goto LAB_00023f44;
     }
   }
-  dVar23 = (double)FLOAT_0004c37c;
-  fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
-  fVar6 = (float)(dVar24 + (double)FLOAT_0004c370) * FLOAT_0004c380;
+  vertexScaleA = (double)FLOAT_0004c37c;
+  vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+  vertexX2 = (float)(widthD + (double)FLOAT_0004c370) * FLOAT_0004c380;
   buffer[packetEnd] = 0x31080;
   buffer[packetEnd + 7] = 0xc0033500;
   buffer[packetEnd + 8] = 0x10031;
   buffer[packetEnd + 5] = 0x1087;
-  buffer[packetEnd + 9] = FBITS(fVar6);
-  buffer[packetEnd + 10] = FBITS(fVar5);
-  buffer[packetEnd + 1] = uVar20;
-  buffer[packetEnd + 2] = uVar19;
-  buffer[packetEnd + 3] = uVar18;
-  buffer[packetEnd + 4] = uVar15;
+  buffer[packetEnd + 9] = FBITS(vertexX2);
+  buffer[packetEnd + 10] = FBITS(vertexY1);
+  buffer[packetEnd + 1] = texCoordWord1;
+  buffer[packetEnd + 2] = texCoordWord2;
+  buffer[packetEnd + 3] = texCoordWord3;
+  buffer[packetEnd + 4] = texCoordWord4;
   buffer[packetEnd + 0xb] = 0;
-  buffer[packetEnd + 6] = (SInt32)(dVar24 * dVar23) << 0x10 | (SInt32)(dVar25 * dVar23);
-  iVar14 = packetEnd * 4 + 0x30 >> 2;
+  buffer[packetEnd + 6] = (SInt32)(widthD * vertexScaleA) << 0x10 | (SInt32)(heightD * vertexScaleA);
+  packetWordIndex = packetEnd * 4 + 0x30 >> 2;
 LAB_00023f44:
-  uVar17 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
-  if (0x1000 < uVar17) {
+  dstHeight = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
+  if (0x1000 < dstHeight) {
     if (rotation == 0x5a) {
       pitch = M<SInt32>(self + panel * 0x78 + 0x16c);
-      uVar3 = M<UInt16>(self + panel * 0x78 + 0x14c);
-      uVar4 = M<UInt16>(self + panel * 0x78 + 0x144);
+      dstRow = M<UInt16>(self + panel * 0x78 + 0x14c);
+      dstColumnUnits = M<UInt16>(self + panel * 0x78 + 0x144);
       baseOffset = M<SInt32>(self + panel * 0x78 + 0x134);
-      uVar7 = blitPacket[0xa0];
-      uVar13 = blitPacket[0xa6];
-      uVar11 = blitPacket[0xb2];
-      uVar10 = blitPacket[0xb3];
+      packetWordA0 = blitPacket[0xa0];
+      packetWordA6 = blitPacket[0xa6];
+      packetWordB2 = blitPacket[0xb2];
+      packetWordB3 = blitPacket[0xb3];
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-         (uVar12 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), uVar8 = uVar12 - 1,
-         uVar12 == 0)) {
-        uVar8 = 0;
+         (columnCountRot = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
+                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumnRot = columnCountRot - 1,
+         columnCountRot == 0)) {
+        lastColumnRot = 0;
       }
-      buffer[iVar14] = 0x1150;
-      buffer[iVar14 + 1] =
-           (UInt32)uVar3 * pitch + baseOffset + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
-      buffer[iVar14 + 2] = 0x1120;
-      buffer[iVar14 + 3] = (uVar17 - 0x1001) * 0x800 & 0x3ff800 | uVar13 & 0xffc007ff;
-      buffer[iVar14 + 4] = 0x10f8;
-      buffer[iVar14 + 5] = uVar11 & 0xffffe000 | 0xfff;
-      buffer[iVar14 + 6] = 0x10f9;
-      buffer[iVar14 + 7] = uVar8 & 0x1fff | uVar10 & 0xffffe000;
-      dVar23 = (double)FLOAT_0004c378;
-      dVar22 = (double)FLOAT_0004c37c;
-      fVar5 = (float)(dVar24 + dVar23) * FLOAT_0004c380;
-      fVar6 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      buffer[iVar14 + 8] = 0x31080;
-      buffer[iVar14 + 0xd] = 0x1087;
-      buffer[iVar14 + 9] = uVar20;
-      buffer[iVar14 + 10] = uVar19;
-      buffer[iVar14 + 0xb] = uVar18;
-      buffer[iVar14 + 0xc] = uVar15;
-      buffer[iVar14 + 0xf] = 0xc0033500;
-      buffer[iVar14 + 0x10] = 0x10031;
-      buffer[iVar14 + 0x11] = FBITS(fVar5);
-      buffer[iVar14 + 0x12] = FBITS(fVar6);
-      buffer[iVar14 + 0x13] = 0;
-      buffer[iVar14 + 0xe] =
-           (SInt32)((double)(float)(dVar24 - dVar23) * dVar22) << 0x10 | (SInt32)(dVar25 * dVar22);
-      iVar14 = (iVar14 + 8) * 4 + 0x30 >> 2;
+      buffer[packetWordIndex] = 0x1150;
+      buffer[packetWordIndex + 1] =
+           (UInt32)dstRow * pitch + baseOffset + (UInt32)dstColumnUnits * 0x1000 & 0xffffffe0 | packetWordA0 & 0x1f;
+      buffer[packetWordIndex + 2] = 0x1120;
+      buffer[packetWordIndex + 3] = (dstHeight - 0x1001) * 0x800 & 0x3ff800 | packetWordA6 & 0xffc007ff;
+      buffer[packetWordIndex + 4] = 0x10f8;
+      buffer[packetWordIndex + 5] = packetWordB2 & 0xffffe000 | 0xfff;
+      buffer[packetWordIndex + 6] = 0x10f9;
+      buffer[packetWordIndex + 7] = lastColumnRot & 0x1fff | packetWordB3 & 0xffffe000;
+      vertexBiasA = (double)FLOAT_0004c378;
+      vertexScaleB = (double)FLOAT_0004c37c;
+      vertexX1 = (float)(widthD + vertexBiasA) * FLOAT_0004c380;
+      vertexY2 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      buffer[packetWordIndex + 8] = 0x31080;
+      buffer[packetWordIndex + 0xd] = 0x1087;
+      buffer[packetWordIndex + 9] = texCoordWord1;
+      buffer[packetWordIndex + 10] = texCoordWord2;
+      buffer[packetWordIndex + 0xb] = texCoordWord3;
+      buffer[packetWordIndex + 0xc] = texCoordWord4;
+      buffer[packetWordIndex + 0xf] = 0xc0033500;
+      buffer[packetWordIndex + 0x10] = 0x10031;
+      buffer[packetWordIndex + 0x11] = FBITS(vertexX1);
+      buffer[packetWordIndex + 0x12] = FBITS(vertexY2);
+      buffer[packetWordIndex + 0x13] = 0;
+      buffer[packetWordIndex + 0xe] =
+           (SInt32)((double)(float)(widthD - vertexBiasA) * vertexScaleB) << 0x10 | (SInt32)(heightD * vertexScaleB);
+      packetWordIndex = (packetWordIndex + 8) * 4 + 0x30 >> 2;
     }
     else if (rotation == 0x10e) {
       pitch = M<SInt32>(self + panel * 0x78 + 0x16c);
-      uVar3 = M<UInt16>(self + panel * 0x78 + 0x14c);
-      uVar4 = M<UInt16>(self + panel * 0x78 + 0x144);
+      dstRow = M<UInt16>(self + panel * 0x78 + 0x14c);
+      dstColumnUnits = M<UInt16>(self + panel * 0x78 + 0x144);
       baseOffset = M<SInt32>(self + panel * 0x78 + 0x134);
-      uVar7 = blitPacket[0xa0];
-      uVar13 = blitPacket[0xa6];
-      uVar11 = blitPacket[0xb2];
-      uVar10 = blitPacket[0xb3];
+      packetWordA0 = blitPacket[0xa0];
+      packetWordA6 = blitPacket[0xa6];
+      packetWordB2 = blitPacket[0xb2];
+      packetWordB3 = blitPacket[0xb3];
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-         (uVar12 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), uVar8 = uVar12 - 0x1001
-         , uVar12 == 0)) {
-        uVar8 = 0xfffff000;
+         (columnCountRot = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
+                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumnRot = columnCountRot - 0x1001
+         , columnCountRot == 0)) {
+        lastColumnRot = 0xfffff000;
       }
-      buffer[iVar14] = 0x1150;
-      buffer[iVar14 + 1] =
-           (UInt32)uVar3 * pitch + baseOffset + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
-      buffer[iVar14 + 2] = 0x1120;
-      buffer[iVar14 + 3] = (uVar17 - 0x1001) * 0x800 & 0x3ff800 | uVar13 & 0xffc007ff;
-      buffer[iVar14 + 4] = 0x10f8;
-      buffer[iVar14 + 5] = uVar11 & 0xffffe000;
-      buffer[iVar14 + 6] = 0x10f9;
-      buffer[iVar14 + 7] = uVar8 & 0x1fff | uVar10 & 0xffffe000;
-      dVar23 = (double)FLOAT_0004c37c;
-      dVar22 = (double)FLOAT_0004c378;
-      fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      fVar6 = (float)((double)(float)(dVar24 - dVar22) + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      buffer[iVar14 + 8] = 0x31080;
-      buffer[iVar14 + 0xd] = 0x1087;
-      buffer[iVar14 + 9] = uVar20;
-      buffer[iVar14 + 10] = uVar19;
-      buffer[iVar14 + 0xb] = uVar18;
-      buffer[iVar14 + 0xc] = uVar15;
-      buffer[iVar14 + 0xf] = 0xc0033500;
-      buffer[iVar14 + 0x10] = 0x10031;
-      buffer[iVar14 + 0x11] = FBITS(fVar6);
-      buffer[iVar14 + 0x12] = FBITS(fVar5);
-      buffer[iVar14 + 0x13] = 0;
-      buffer[iVar14 + 0xe] =
-           (SInt32)((double)(float)(dVar24 - dVar22) * dVar23) << 0x10 | (SInt32)(dVar25 * dVar23);
-      iVar14 = (iVar14 + 8) * 4 + 0x30 >> 2;
+      buffer[packetWordIndex] = 0x1150;
+      buffer[packetWordIndex + 1] =
+           (UInt32)dstRow * pitch + baseOffset + (UInt32)dstColumnUnits * 0x1000 & 0xffffffe0 | packetWordA0 & 0x1f;
+      buffer[packetWordIndex + 2] = 0x1120;
+      buffer[packetWordIndex + 3] = (dstHeight - 0x1001) * 0x800 & 0x3ff800 | packetWordA6 & 0xffc007ff;
+      buffer[packetWordIndex + 4] = 0x10f8;
+      buffer[packetWordIndex + 5] = packetWordB2 & 0xffffe000;
+      buffer[packetWordIndex + 6] = 0x10f9;
+      buffer[packetWordIndex + 7] = lastColumnRot & 0x1fff | packetWordB3 & 0xffffe000;
+      vertexScaleA = (double)FLOAT_0004c37c;
+      vertexBiasB = (double)FLOAT_0004c378;
+      vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      vertexX2 = (float)((double)(float)(widthD - vertexBiasB) + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      buffer[packetWordIndex + 8] = 0x31080;
+      buffer[packetWordIndex + 0xd] = 0x1087;
+      buffer[packetWordIndex + 9] = texCoordWord1;
+      buffer[packetWordIndex + 10] = texCoordWord2;
+      buffer[packetWordIndex + 0xb] = texCoordWord3;
+      buffer[packetWordIndex + 0xc] = texCoordWord4;
+      buffer[packetWordIndex + 0xf] = 0xc0033500;
+      buffer[packetWordIndex + 0x10] = 0x10031;
+      buffer[packetWordIndex + 0x11] = FBITS(vertexX2);
+      buffer[packetWordIndex + 0x12] = FBITS(vertexY1);
+      buffer[packetWordIndex + 0x13] = 0;
+      buffer[packetWordIndex + 0xe] =
+           (SInt32)((double)(float)(widthD - vertexBiasB) * vertexScaleA) << 0x10 | (SInt32)(heightD * vertexScaleA);
+      packetWordIndex = (packetWordIndex + 8) * 4 + 0x30 >> 2;
     }
   }
-  buffer[iVar14] = 0x1393;
-  buffer[iVar14 + 1] = 10;
-  return iVar14 + 2;
+  buffer[packetWordIndex] = 0x1393;
+  buffer[packetWordIndex + 1] = 10;
+  return packetWordIndex + 2;
 }
 

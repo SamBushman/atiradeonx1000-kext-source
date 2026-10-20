@@ -32,34 +32,41 @@ extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 UInt32 ATIRadeonX1000::submit_buffer(UInt32*bufferStart, UInt32 gartOffset, UInt32 dwordCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 freeSpace;
   UInt32 stamp;
-  SInt32 iVar3;
+  SInt32 mmioBase;
   UInt32 writeIndex;
   SInt32 rptrOffset;
-  UInt32 uVar6;
-  SInt32 iVar7;
+  UInt32 nextIndex;
+  SInt32 vramBase;
   SInt32 spinCount;
+  SInt32 cacheBytes;
+  SInt32 ringPointerBase;
+  SInt32 ringMemory;
+  SInt32 submittedStamp;
+  SInt32 waitTries;
+  SInt32 flushOffset;
+  UInt32 cacheLineSize;
   
   for (; (dwordCount & 7) != 0; dwordCount = dwordCount + 1) {
     bufferStart[dwordCount] = 0x80000000;
   }
-  iVar3 = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
+  ringPointerBase = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
   rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset);
   writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
-  iVar7 = 0;
-  if ((SInt32)((((loadWordByteReversed((UInt8 *)(iVar3 + rptrOffset)) & 0xffff) - writeIndex) -
+  waitTries = 0;
+  if ((SInt32)((((loadWordByteReversed((UInt8 *)(ringPointerBase + rptrOffset)) & 0xffff) - writeIndex) -
              1 & 0x7ff) - 7) < 5) {
     do {
-      iVar7 = iVar7 + 1;
+      waitTries = waitTries + 1;
       GH_IOSleep(1);
-      iVar3 = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
+      ringPointerBase = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
       rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset);
       writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
-      iVar1 = (((loadWordByteReversed((UInt8 *)(iVar3 + rptrOffset)) & 0xffff) - writeIndex)
+      freeSpace = (((loadWordByteReversed((UInt8 *)(ringPointerBase + rptrOffset)) & 0xffff) - writeIndex)
                - 1 & 0x7ff) - 7;
-      if (4 < iVar1) goto LAB_00020a3c;
-    } while (iVar7 != 1000);
+      if (4 < freeSpace) goto LAB_00020a3c;
+    } while (waitTries != 1000);
   }
   else {
 LAB_00020a3c:
@@ -69,84 +76,84 @@ LAB_00020a3c:
       instructionSynchronize();
     }
     else {
-      uVar6 = (UInt32)(UInt8)self[0x84];
-      iVar7 = 0;
-      iVar1 = (dwordCount * 4 + ((UInt32)bufferStart & uVar6 - 1)) - uVar6;
-      if (0 < iVar1) {
-        iVar7 = 0;
+      cacheLineSize = (UInt32)(UInt8)self[0x84];
+      flushOffset = 0;
+      cacheBytes = (dwordCount * 4 + ((UInt32)bufferStart & cacheLineSize - 1)) - cacheLineSize;
+      if (0 < cacheBytes) {
+        flushOffset = 0;
         do {
-          dataCacheBlockStore((-uVar6 & (UInt32)bufferStart) + iVar7);
-          iVar7 = iVar7 + uVar6;
-        } while (iVar7 < iVar1);
+          dataCacheBlockStore((-cacheLineSize & (UInt32)bufferStart) + flushOffset);
+          flushOffset = flushOffset + cacheLineSize;
+        } while (flushOffset < cacheBytes);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush((-uVar6 & (UInt32)bufferStart) + iVar7);
+      dataCacheBlockFlush((-cacheLineSize & (UInt32)bufferStart) + flushOffset);
       ppcSync();
       instructionSynchronize();
       instructionSynchronize();
     }
     if (M<SInt32>(self + kIOATIR500Accelerator_transferMappedFlag) != 0) {
       this->submit_empty_buffer();
-      iVar3 = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
+      ringPointerBase = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
       rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset);
       writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
     }
-    iVar7 = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
+    vramBase = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
     spinCount = 0;
-    if (4 < (SInt32)((((loadWordByteReversed((UInt8 *)(iVar3 + rptrOffset)) & 0xffff) -
+    if (4 < (SInt32)((((loadWordByteReversed((UInt8 *)(ringPointerBase + rptrOffset)) & 0xffff) -
                    writeIndex) - 1 & 0x7ff) - 7)) {
 LAB_00020b4c:
       if (M<SInt32>(self + kIOATIR500Accelerator_stampPageMemory) == 0) {
-        iVar3 = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
-        M<UInt32>(iVar3 + writeIndex * 4) = 0x57f;
+        ringMemory = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
+        M<UInt32>(ringMemory + writeIndex * 4) = 0x57f;
         stamp = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
-        uVar6 = writeIndex + 1 & 0x7ff;
-        writeIndex = uVar6 + 1;
+        nextIndex = writeIndex + 1 & 0x7ff;
+        writeIndex = nextIndex + 1;
         M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = writeIndex;
-        M<UInt32>(iVar3 + uVar6 * 4) = stamp;
+        M<UInt32>(ringMemory + nextIndex * 4) = stamp;
         writeIndex = writeIndex & 0x7ff;
         M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = writeIndex;
       }
       else {
-        iVar3 = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
+        ringMemory = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
         stamp = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
       }
-      M<UInt32>(iVar3 + writeIndex * 4) = 0x101ce;
+      M<UInt32>(ringMemory + writeIndex * 4) = 0x101ce;
       writeIndex = writeIndex + 1 & 0x7ff;
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = writeIndex;
-      M<UInt32>(iVar3 + writeIndex * 4) = gartOffset + iVar7 & 0xfffffffc;
+      M<UInt32>(ringMemory + writeIndex * 4) = gartOffset + vramBase & 0xfffffffc;
       writeIndex = writeIndex + 1 & 0x7ff;
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = writeIndex;
-      M<UInt32>(iVar3 + writeIndex * 4) = dwordCount & 0x7fffff;
+      M<UInt32>(ringMemory + writeIndex * 4) = dwordCount & 0x7fffff;
       writeIndex = writeIndex + 1 & 0x7ff;
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = writeIndex;
-      M<UInt32>(iVar3 + writeIndex * 4) = 0x578;
+      M<UInt32>(ringMemory + writeIndex * 4) = 0x578;
       writeIndex = writeIndex + 1 & 0x7ff;
-      uVar6 = writeIndex + 1;
-      M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = uVar6;
-      M<UInt32>(iVar3 + writeIndex * 4) = stamp;
-      M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = uVar6 & 0x7ff;
+      nextIndex = writeIndex + 1;
+      M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextIndex;
+      M<UInt32>(ringMemory + writeIndex * 4) = stamp;
+      M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextIndex & 0x7ff;
       this->submit_ring_data();
       if (M<SInt32>(self + kIOATIR500Accelerator_stampPageMemory) != 0) {
         M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_stampPageMemory) + 0x20) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
       }
-      iVar3 = M<SInt32>(self + kIOATIR500Accelerator_submitStamp);
-      M<SInt32>(self + kIOATIR500Accelerator_submitStamp) = iVar3 + 1;
-      return iVar3;
+      submittedStamp = M<SInt32>(self + kIOATIR500Accelerator_submitStamp);
+      M<SInt32>(self + kIOATIR500Accelerator_submitStamp) = submittedStamp + 1;
+      return submittedStamp;
     }
     do {
       spinCount = spinCount + 1;
       GH_IOSleep(1);
       writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
-      iVar1 = (((loadWordByteReversed((UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase) + M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset))) & 0xffff) - writeIndex)
+      freeSpace = (((loadWordByteReversed((UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase) + M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset))) & 0xffff) - writeIndex)
                - 1 & 0x7ff) - 7;
-      if (4 < iVar1) goto LAB_00020b4c;
+      if (4 < freeSpace) goto LAB_00020b4c;
     } while (spinCount != 1000);
   }
-  iVar3 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+  mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   GH_IOLog("ATIRadeon::wait_for_rb_space: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
-               ,iVar1,5,loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)));
+               ,freeSpace,5,loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)));
   this->DumpASICHangState();
   return *(SInt32 *)(self + kIOATIR500Accelerator_submitStamp) + -1;
 }

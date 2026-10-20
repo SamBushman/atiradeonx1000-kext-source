@@ -27,7 +27,7 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 extern "C" UInt32 GH_memset(...) asm("_memset");
 
 struct _HZDATA;
-UInt32 HZMEM_Init(_HZDATA *hz, UInt32 param_2, UInt32 param_3, UInt32 param_4);
+UInt32 HZMEM_Init(_HZDATA *hz, UInt32 chipClass, UInt32 numPipes, UInt32 numZPipes);
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 
 /* real addr 0x26250 */

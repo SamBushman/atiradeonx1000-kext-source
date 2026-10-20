@@ -120,10 +120,11 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 tag) {
 UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 tag) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 pollCount;
   UInt32 currentStamp;
   SInt32 mmioBase;
   bool borrow;
+  SInt32 initialMmioBase;
   UInt32 startTime[2], endTime[2], elapsedNs[2];   /* 8-byte results of clock_get_uptime / absolutetime_to_nanoseconds: hi word first (Ghidra shows them as two adjacent locals) */
   
   elapsedNs[0] = 0;
@@ -133,12 +134,12 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 tag) {
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    iVar1 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-    currentStamp = loadWordByteReversed(&M<UInt8>(iVar1 + 0x1fa8));
+    initialMmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+    currentStamp = loadWordByteReversed(&M<UInt8>(initialMmioBase + 0x1fa8));
     M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
-    iVar1 = 0;
+    pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
-      iVar1 = 1;
+      pollCount = 1;
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
@@ -146,8 +147,8 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 tag) {
         currentStamp = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa8));
         M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
-        iVar1 = iVar1 + 1;
-      } while (iVar1 != 0xc351);
+        pollCount = pollCount + 1;
+      } while (pollCount != 0xc351);
     }
     GH_clock_get_uptime(&endTime[0]);
     borrow = endTime[1] < startTime[1];
@@ -155,7 +156,7 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 tag) {
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
     M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
-    if (iVar1 == 0xc351) {
+    if (pollCount == 0xc351) {
       return -1;
     }
   }
@@ -307,10 +308,11 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 tag) {
 IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 tag) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 pollCount;
   UInt32 currentStamp;
   SInt32 mmioBase;
   bool borrow;
+  SInt32 initialMmioBase;
   UInt32 startTime[2], endTime[2], elapsedNs[2];   /* 8-byte results of clock_get_uptime / absolutetime_to_nanoseconds: hi word first (Ghidra shows them as two adjacent locals) */
   
   elapsedNs[0] = 0;
@@ -320,12 +322,12 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 tag) {
   }
   else {
     GH_clock_get_uptime(&startTime[0]);
-    iVar1 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-    currentStamp = loadWordByteReversed(&M<UInt8>(iVar1 + 0x1fa8));
+    initialMmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+    currentStamp = loadWordByteReversed(&M<UInt8>(initialMmioBase + 0x1fa8));
     M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
-    iVar1 = 0;
+    pollCount = 0;
     if (0 < (SInt32)(tag - currentStamp)) {
-      iVar1 = 1;
+      pollCount = 1;
       do {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
@@ -333,8 +335,8 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 tag) {
         currentStamp = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa8));
         M<UInt32>(self + kIOATIR500Accelerator_lastConsumedIDCTStamp) = currentStamp;
         if ((SInt32)(tag - currentStamp) < 1) break;
-        iVar1 = iVar1 + 1;
-      } while (iVar1 != 0xc351);
+        pollCount = pollCount + 1;
+      } while (pollCount != 0xc351);
     }
     GH_clock_get_uptime(&endTime[0]);
     borrow = endTime[1] < startTime[1];
@@ -342,7 +344,7 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 tag) {
     endTime[0] = endTime[0] - (startTime[0] + (UInt32)borrow);
     GH_absolutetime_to_nanoseconds(endTime[0],endTime[1],&elapsedNs[0]);
     M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) = M<SInt32>(self + kIOATIR500Accelerator_hardwareWaitTime) + elapsedNs[1];
-    if (iVar1 == 0xc351) {
+    if (pollCount == 0xc351) {
       return -1;
     }
   }

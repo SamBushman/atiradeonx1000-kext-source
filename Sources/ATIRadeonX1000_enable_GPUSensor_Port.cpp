@@ -30,13 +30,13 @@
 void ATIRadeonX1000::enable_GPUSensor() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
+  SInt32 *sensorTimer;
   
   M<UInt32>(self + kIOATIR500Accelerator_gpuSensorSampleCount) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_gpuSensorBusyCount) = 0;
-  piVar1 = M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer);
-  if (piVar1 != (SInt32 *)0x0) {
-    VCALL(*piVar1, 300)(piVar1,M<UInt32>(self + kIOATIR500Accelerator_gpuSensorPeriodMs));
+  sensorTimer = M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer);
+  if (sensorTimer != (SInt32 *)0x0) {
+    VCALL(*sensorTimer, 300)(sensorTimer,M<UInt32>(self + kIOATIR500Accelerator_gpuSensorPeriodMs));
     VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer), 0xec)(M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorTimer));
   }
   return;

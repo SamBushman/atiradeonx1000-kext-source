@@ -32,18 +32,14 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     static UInt32 u32Dummy;
 
-  SInt32 iVar1;
   SInt32 registers;
   SInt32 flushOffset;
-  SInt32 iVar2;
   SInt32 writeIndex;
   SInt32 flushEnd;
   UInt32 nextIndex;
-  UInt32 uVar4;
   UInt32 ringIndex;
   UInt32 freeDwords;
   UInt32 cacheLine;
-  SInt32 iVar5;
   SInt32 ringBase;
   SInt32 spinCount;
   SInt32 gartBase;

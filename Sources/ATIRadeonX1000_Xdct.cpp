@@ -31,55 +31,58 @@ bool ATIRadeonX1000::start_xdct_engine() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool pollLimitReached;
-  UInt8 bVar2;
-  UInt32 uVar3;
-  SInt32 iVar4;
+  UInt32 ringBaseAddress;
+  SInt32 vramBase;
   SInt32 mmioBase;
-  UInt32 uVar6;
+  UInt32 ringControl;
+  UInt32 ringCursor;
+  UInt32 rptrWritebackAddress;
+  SInt32 pollCount;
+  UInt32 idctStamp;
   
   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
   M<UInt32>(mmioBase + 0x1f80) = 0;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
-  uVar6 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f94)) | 0x88000000;      /* one byte-reversed read, kept: reused below, as in the shipped code */
-  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), uVar6);
+  ringControl = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f94)) | 0x88000000;      /* one byte-reversed read, kept: reused below, as in the shipped code */
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), ringControl);
   enforceInOrderExecutionIO();
-  uVar3 = M<UInt32>(self + kIOATIR500Accelerator_idctRingCursor);
+  ringCursor = M<UInt32>(self + kIOATIR500Accelerator_idctRingCursor);
   M<UInt32>(mmioBase + 0x1f9c) =
-       uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+       ringCursor << 0x18 | (ringCursor & 0xff00) << 8 | ringCursor >> 8 & 0xff00 | ringCursor >> 0x18;
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x1fa0) =
-       uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+       ringCursor << 0x18 | (ringCursor & 0xff00) << 8 | ringCursor >> 8 & 0xff00 | ringCursor >> 0x18;
   enforceInOrderExecutionIO();
-  iVar4 = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
-  uVar3 = iVar4 + M<SInt32>(self + kIOATIR500Accelerator_scratchBufferGartOffset) + (M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) - M<SInt32>(self + kIOATIR500Accelerator_scratchHeader));
+  vramBase = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
+  rptrWritebackAddress = vramBase + M<SInt32>(self + kIOATIR500Accelerator_scratchBufferGartOffset) + (M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) - M<SInt32>(self + kIOATIR500Accelerator_scratchHeader));
   M<UInt32>(mmioBase + 0x1f98) =
-       (uVar3 & 0xfffffffc) << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+       (rptrWritebackAddress & 0xfffffffc) << 0x18 | (rptrWritebackAddress & 0xff00) << 8 | rptrWritebackAddress >> 8 & 0xff00 | rptrWritebackAddress >> 0x18;
   enforceInOrderExecutionIO();
-  uVar3 = iVar4 + M<SInt32>(self + kIOATIR500Accelerator_idctRingGartOffset);
+  ringBaseAddress = vramBase + M<SInt32>(self + kIOATIR500Accelerator_idctRingGartOffset);
   M<UInt32>(mmioBase + 0x1f90) =
-       uVar3 * 0x1000000 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+       ringBaseAddress * 0x1000000 | (ringBaseAddress & 0xff00) << 8 | ringBaseAddress >> 8 & 0xff00 | ringBaseAddress >> 0x18;
   enforceInOrderExecutionIO();
-  uVar6 = uVar6 & 0x67fcc0ff | 0x2002030a;
-  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), uVar6);
+  ringControl = ringControl & 0x67fcc0ff | 0x2002030a;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), ringControl);
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x1f80) = 0x40;
   enforceInOrderExecutionIO();
-  uVar6 = M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) - 1;
+  idctStamp = M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) - 1;
   M<UInt32>(mmioBase + 0x1fa8) =
-       uVar6 * 0x1000000 | (uVar6 & 0xff00) << 8 | uVar6 >> 8 & 0xff00 | uVar6 >> 0x18;
+       idctStamp * 0x1000000 | (idctStamp & 0xff00) << 8 | idctStamp >> 8 & 0xff00 | idctStamp >> 0x18;
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x1f80) = 0xa000580;
   enforceInOrderExecutionIO();
   if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
       (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0)))) {
-    iVar4 = 0;
+    pollCount = 0;
     do {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
       GH_thread_block(0);
       mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-      pollLimitReached = iVar4 == 10000;
-      iVar4 = iVar4 + 1;
+      pollLimitReached = pollCount == 10000;
+      pollCount = pollCount + 1;
       if (pollLimitReached) break;
     } while ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
              (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0))));

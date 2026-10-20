@@ -4,7 +4,8 @@
 The *_Port.cpp files are generated from the Ghidra decompile (Tools/replace_fn.py, Tools/port_fn.py), so names are NOT edited in them by hand: they live in
 a remap table, `Tools/renames/<Class>.tsv`, and this tool applies the table. Run it after any re-port and the names come back; it is idempotent.
 
-Usage: apply_renames.py [--check] [--root DIR] [TABLE.tsv ...]      (default: every Tools/renames/*.tsv)
+Usage: apply_renames.py [--check] [--no-patch] [--root DIR] [TABLE.tsv ...]      (default: every Tools/renames/*.tsv)
+  --no-patch  skip the structural patches (rename a patched file, then regenerate its patch with Tools/renames/make_patch.sh)
   --check   change nothing; exit 1 if any row or patch is not yet applied or cannot be applied
 
 After the renames, every Tools/renames/patches/*.patch is applied (unified diffs, -p1 from the repository root, one per source file, made against the
@@ -25,6 +26,9 @@ Table format (tab separated, '#' starts a comment line):
                 inside the segment - for a line like `x = f(x)` whose two sides play different roles; the indices count, in text order, every code
                 occurrence (comments and string literals excluded) of `old` or of any `new` name that a use row gives the same `old`, so they stay stable
                 as rows are applied. Rows of one function are applied in table order and may split the same `old` several times.
+          redef like def, but applied AFTER every `use` row (and after the defs of all tables): it names what is left of a reused variable once its other
+                segments were split off by `use` rows, so a `use` row's `old` and anchors stay the original (Ghidra) name. A `use` row whose `old` has a
+                `redef` is also found by that new name (idempotent re-runs).
   target  Class::method, optionally Class::method@0xADDR (several definitions with that name: the one whose "real addr" comment matches)
           or Class::method#N (decl only: the N-th declaration, 1-based). A FREE function (no class) is written with an empty class: `::pcl_CopyPix`
           (def rows only; a decl row needs a class header)
@@ -50,6 +54,11 @@ Table format (tab separated, '#' starts a comment line):
           pointer field of C itself, a declaration with a pointer-to-class type, or a null; a single assignment of any other shape leaves V untyped.
           The `field` constants of C then replace `V + 0xOFF` / `U32At(V, 0xOFF)` (same rules as `field`: only the object's OWN fields).
 
+The rows of the cleanup tables Locals5_*.tsv are gated by Tools/renames/parity_check.py (difftest against the stock driver, estimated cycles, no new
+-Wuninitialized warning), not by the byte-identical build: a split may change gcc's register allocation but may never carry a value from one segment to another
+(a variable that is initialised before a branch and only conditionally reassigned is ONE live range: the gate reports it as `used uninitialized`). Their `use` rows
+name a new variable per old variable (two different old variables may not share a new name: the occ numbering counts the new names of one old variable), use
+anchors that avoid identifiers other tables rename (a field constant `kClass_name` in an anchor must be written as its offset literal).
 Anchors (`from`/`to`) are Python regexes (a trailing `#N` selects the N-th matching line instead of the first) matched against a line in which every `use` rename of the function has been taken back (so an anchor
 may be written with the old names and keeps matching after the table was applied). A `use` row is applied once its segment no longer contains `old`; several rows may give disjoint segments of one variable the same `new` name
 (the first one declares it).
@@ -250,7 +259,7 @@ def decl_block(lines, decl_i):
     return j + 1, k
 
 
-def apply_uses(use_rows, root, read, files, errors, field_consts=None):
+def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_rows=()):
     """-> (pending, applied) for the `use` rows (see the module docstring); edits go into `files`."""
     pending = applied = 0
     groups = {}
@@ -268,6 +277,11 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
         revert = {}
         for r in rs:
             if r[3] not in revert.setdefault(r[4], []): revert[r[4]].append(r[3])
+        for r in use_rows:                                  # the rows of the later cleanup tables (Locals5_*.tsv) rename names that earlier tables' anchors mention, whatever spelling of the target
+            if os.path.basename(r[0]).startswith('Locals5_') and r[2].split('@')[0] == target.split('@')[0] and r[3] not in revert.setdefault(r[4], []): revert[r[4]].append(r[3])
+        redef_of = {}                                       # old -> its `redef` name (the Ghidra name is gone from the text once the redef is applied)
+        for (_, _, _, rt, ro, rn) in redef_rows:
+            if rt.split('@')[0] == target.split('@')[0]: redef_of[ro] = rn; revert.setdefault(rn, []).append(ro)
         for cname, off in (field_consts or {}).items():     # a `field` row turned `self + 0x238` into `self + k..._name`: anchors are written against the literal (hex or decimal)
             revert[cname] = [hex(off), str(off)]
         for (t, n, _, old, new, frm, to, occ, dmode) in rs:
@@ -283,7 +297,9 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
                     print('WARNING %s: %s is declared as %r but %s as %r (a shared new name should have the same type; the byte-identical build is the check)' % (where, new, dn.group(2).strip(), old, do.group(2).strip()), file=sys.stderr)
             if new in have and not declared: errors.append('%s: %s already occurs in the function and is not a variable declared by a use row' % (where, new)); continue
             norm = [line_variants(l, revert) for l in lines]
-            decl_i = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
+            decl_i = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l) or (old in redef_of and re.match(DECL_RE % re.escape(redef_of[old]), l))), None)
+            if decl_i is None and declared and old not in idents_in(scope, comments=False):
+                applied += 1; continue                         # the dead declaration of a fully split variable was deleted
             if decl_i is None: errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
             decl_end, body0 = decl_block(lines, decl_i)
             if frm in ('', '-'): a = body0
@@ -304,11 +320,11 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
             else:
                 try: want = sorted({int(x) for x in occ.split(',')})
                 except ValueError: errors.append('%s: bad occ %r' % (where, occ)); continue
-                family = {old} | {r[4] for r in rs if r[3] == old}
+                family = {old} | {r[4] for r in rs if r[3] == old} | ({redef_of[old]} if old in redef_of else set())
                 hits = code_idents(seg, family)
                 if want[-1] > len(hits): errors.append('%s: occ %d but only %d occurrences of %s in lines %d-%d' % (where, want[-1], len(hits), old, a + 1, b)); continue
                 todo = [hits[k - 1] for k in want]
-                bad = [h for h in todo if h[2] not in (old, new)]
+                bad = [h for h in todo if h[2] not in (old, new, redef_of.get(old))]
                 if bad: errors.append('%s: occurrence at %d is already named %s' % (where, bad[0][0], bad[0][2])); continue
                 todo = [h for h in todo if h[2] == old]
                 if not todo:
@@ -534,11 +550,11 @@ def apply_fieldvars(ptr_rows, var_rows, root, read, files, errors, by_off):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--check', action='store_true'); ap.add_argument('--no-use', action='store_true', help='ignore the `use` rows (to see the text the anchors of the use rows are matched against)'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+    ap.add_argument('--check', action='store_true'); ap.add_argument('--no-patch', action='store_true', help='skip the structural patches (rename a patched file, then regenerate its patch with Tools/renames/make_patch.sh)'); ap.add_argument('--no-use', action='store_true', help='ignore the `use` rows (to see the text the anchors of the use rows are matched against)'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
-    rows, use_rows, field_rows, ptr_rows, var_rows = [], [], [], [], []
+    rows, use_rows, field_rows, ptr_rows, var_rows, redef_rows = [], [], [], [], [], []
     for t in tables:
         dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
         for n, l in enumerate(open(t), 1):
@@ -559,49 +575,54 @@ def main():
             if f[0] == 'fieldvar':                      # fieldvar CLASSES VAR SCOPE TIER EVIDENCE
                 if len(f) < 6 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]): sys.exit('%s:%d: bad fieldvar row (fieldvar CLASSES var scope tier evidence)' % (t, n))
                 var_rows.append((t, n, f[1].split(','), f[2], f[3], f[4])); continue
-            if len(f) < 5 or f[0] not in ('def', 'decl', 'use') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
+            if len(f) < 5 or f[0] not in ('def', 'decl', 'use', 'redef') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
                 sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
             if f[0] == 'use':
                 f += [''] * (9 - len(f))
                 use_rows.append((t, n, f[1], f[2], f[3], f[6], f[7], f[8], dmode))
                 continue
+            if f[0] == 'redef': redef_rows.append((t, n, 'def', f[1], f[2], f[3])); continue
             rows.append((t, n, f[0], f[1], f[2], f[3]))
     # group rows by (kind, target) so one scope gets all its renames at once
-    groups = {}
-    for r in rows: groups.setdefault((r[2], r[3]), []).append(r)
     files, errors, pending, applied = {}, [], 0, 0
     read = lambda f: files[f] if f in files else open(f).read()
-    for (kind, target), rs in groups.items():
-        try:
-            cls, meth, addr, nth = parse_target(target)
-            spans = find_defs(a.root, cls, meth, addr, read) if kind == 'def' else find_decls(a.root, cls, meth, nth, read)
-        except Exception as e:
-            errors.append('%s: %s' % (target, e)); continue
-        if len(spans) != 1:
-            errors.append('%s (%s): %d matches%s' % (target, kind, len(spans), ' - add @0xADDR' if kind == 'def' and spans else '')); continue
-        f, st, en = spans[0]
-        s = read(f)
-        scope = s[st:en]
-        have = idents_in(scope)
-        code = idents_in(scope, comments=False)     # a new name may repeat a word in a comment, never a code identifier
-        mapping = {}
-        for t, n, _, _, old, new, in [(r[0], r[1], r[2], r[3], r[4], r[5]) for r in rs]:
-            if not IDENT.fullmatch(new) or new in KEYWORDS:
-                errors.append('%s:%d: %r is not a usable identifier' % (t, n, new)); continue
-            if old not in have:
-                if new in have: applied += 1; continue
-                errors.append('%s:%d: %s: neither %s nor %s occurs' % (t, n, target, old, new)); continue
-            if new in code and new != old:
-                errors.append('%s:%d: %s: %s already occurs in the function' % (t, n, target, new)); continue
-            if new in mapping.values():
-                errors.append('%s:%d: %s: two renames to %s' % (t, n, target, new)); continue
-            mapping[old] = new
-        if not mapping: continue
-        pending += len(mapping)
-        files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
+    def apply_groups(rows_):
+        nonlocal pending, applied
+        groups = {}
+        for r in rows_: groups.setdefault((r[2], r[3]), []).append(r)
+        for (kind, target), rs in groups.items():
+            try:
+                cls, meth, addr, nth = parse_target(target)
+                spans = find_defs(a.root, cls, meth, addr, read) if kind == 'def' else find_decls(a.root, cls, meth, nth, read)
+            except Exception as e:
+                errors.append('%s: %s' % (target, e)); continue
+            if len(spans) != 1:
+                errors.append('%s (%s): %d matches%s' % (target, kind, len(spans), ' - add @0xADDR' if kind == 'def' and spans else '')); continue
+            f, st, en = spans[0]
+            s = read(f)
+            scope = s[st:en]
+            have = idents_in(scope)
+            code = idents_in(scope, comments=False)     # a new name may repeat a word in a comment, never a code identifier
+            mapping = {}
+            for t, n, _, _, old, new, in [(r[0], r[1], r[2], r[3], r[4], r[5]) for r in rs]:
+                if not IDENT.fullmatch(new) or new in KEYWORDS:
+                    errors.append('%s:%d: %r is not a usable identifier' % (t, n, new)); continue
+                if old not in have:
+                    if new in have: applied += 1; continue
+                    errors.append('%s:%d: %s: neither %s nor %s occurs' % (t, n, target, old, new)); continue
+                if new in code and new != old:
+                    errors.append('%s:%d: %s: %s already occurs in the function' % (t, n, target, new)); continue
+                if new in mapping.values():
+                    errors.append('%s:%d: %s: two renames to %s' % (t, n, target, new)); continue
+                mapping[old] = new
+            if not mapping: continue
+            pending += len(mapping)
+            files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
+    apply_groups(rows)
     field_consts = {'k%s_%s' % (cl[0], nm): int(off, 16) for (_, _, cl, off, nm, _) in field_rows}
-    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts)
+    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, redef_rows)
     pending += up; applied += ua
+    apply_groups(redef_rows)
     if field_rows:
         fp, fa, by_off, _consts = apply_fields(field_rows, a.root, read, files, errors)
         pending += fp; applied += fa
@@ -617,7 +638,7 @@ def main():
         with open(pf) as fh:
             return subprocess.call(['patch', '-p1', '-s', '-d', a.root] + list(flags), stdin=fh, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0
     p_pending = p_done = 0
-    for pf in sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', 'patches', '*.patch'))):
+    for pf in ([] if a.no_patch else sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', 'patches', '*.patch')))):
         if run_patch(pf, '--dry-run', '-R'): p_done += 1; continue
         if not run_patch(pf, '--dry-run'):
             errors.append('%s: applies neither forward nor in reverse (the source text differs from what the patch was made against)' % os.path.basename(pf)); print('ERROR', errors[-1], file=sys.stderr); continue

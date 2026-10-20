@@ -30,16 +30,16 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 bool ATIRadeonX1000::SWDSShutdown() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool morePanels;
   UInt32 savedValue;
-  SInt32 iVar3;
+  SInt32 regOffset2;
   SInt32 registers;
-  SInt32 iVar5;
-  SInt32 iVar6;
+  SInt32 regOffset1;
+  SInt32 regOffset0;
   SInt32 panel;
-  UInt8 *pGVar8;
-  UInt8 *pAVar9;
-  UInt8 *pAVar10;
+  UInt8 *bufferCursor;
+  UInt8 *recordCursor;
+  UInt8 *stateCursor;
   
   if (M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer) != (SInt32 *)0x0) {
     VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer), 0xf0)(M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer));
@@ -47,45 +47,45 @@ bool ATIRadeonX1000::SWDSShutdown() {
   if (self[0x9b0] != 0x0) {
     panel = 0;
     self[0x9b0] = 0x0;
-    pGVar8 = (self + kIOATIR500Accelerator_swdsBuffer0);
-    pAVar9 = self;
-    pAVar10 = self;
+    bufferCursor = (self + kIOATIR500Accelerator_swdsBuffer0);
+    recordCursor = self;
+    stateCursor = self;
     do {
-      if (M<SInt32>(pAVar10 + 0xb10) != 0) {
-        M<UInt32>(pAVar10 + 0xb10) = 0;
+      if (M<SInt32>(stateCursor + 0xb10) != 0) {
+        M<UInt32>(stateCursor + 0xb10) = 0;
         if (panel == 1) {
-          iVar6 = 0xb64;
-          iVar5 = 0xb68;
-          iVar3 = 0xb6c;
+          regOffset0 = 0xb64;
+          regOffset1 = 0xb68;
+          regOffset2 = 0xb6c;
         }
         else {
-          iVar6 = 0xb74;
-          iVar5 = 0xb78;
-          iVar3 = 0xb7c;
+          regOffset0 = 0xb74;
+          regOffset1 = 0xb78;
+          regOffset2 = 0xb7c;
         }
         registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-        savedValue = M<UInt32>(pAVar10 + 0xafc);
-        M<UInt32>(registers + iVar6) =
+        savedValue = M<UInt32>(stateCursor + 0xafc);
+        M<UInt32>(registers + regOffset0) =
              savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
-        savedValue = M<UInt32>(pAVar10 + 0xb00);
-        M<UInt32>(registers + iVar5) =
+        savedValue = M<UInt32>(stateCursor + 0xb00);
+        M<UInt32>(registers + regOffset1) =
              savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
-        savedValue = M<UInt32>(pAVar10 + 0xb04);
-        M<UInt32>(registers + iVar3) =
+        savedValue = M<UInt32>(stateCursor + 0xb04);
+        M<UInt32>(registers + regOffset2) =
              savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
-        if ((M<SInt32>(pAVar9 + 0x9c0) != 0) && (M<SInt32>(pAVar9 + 0x9bc) != 0)) {
-          ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)pGVar8);
+        if ((M<SInt32>(recordCursor + 0x9c0) != 0) && (M<SInt32>(recordCursor + 0x9bc) != 0)) {
+          ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)bufferCursor);
         }
       }
-      bVar1 = panel != 1;
-      pGVar8 = pGVar8 + 0x78;
-      pAVar10 = pAVar10 + 0x18;
-      pAVar9 = pAVar9 + 0x78;
+      morePanels = panel != 1;
+      bufferCursor = bufferCursor + 0x78;
+      stateCursor = stateCursor + 0x18;
+      recordCursor = recordCursor + 0x78;
       panel = panel + 1;
-    } while (bVar1);
+    } while (morePanels);
   }
   return 1;
 }
@@ -96,19 +96,22 @@ void ATIRadeonX1000::SWDSFunc(OSObject *owner, IOTimerEventSource *source) {
 
   UInt8 statusBits;
   bool dualPanel;
-  UInt8 bVar3;
-  UInt32 uVar4;
-  SInt32 iVar5;
+  UInt8 panelStatusMask;
+  UInt32 stampBusy;
+  SInt32 appendWordCount;
   UInt32 stamp;
   UInt32 bufferOffset;
   UInt8 *entry;
-  UInt32 uVar9;
+  UInt32 stampPending;
   UInt32 cmdWordCount;
-  SInt32 iVar11;
+  SInt32 nextPanel;
   UInt32 *cmdBuffer;
   UInt32 panel;
-  UInt8 bVar14;
-  UInt8 bVar15;
+  UInt8 noBlitYet;
+  UInt8 isPanel0Flag;
+  SInt32 latestStamp;
+  SInt32 entryRetired;
+  SInt32 blitWordCount;
   
   GH_IOLockLock(M<UInt32>(ownerBytes + 0x840));
   if ((ownerBytes[0x80] != 0x0) && (ownerBytes[0x9b0] != 0x0)) {
@@ -116,79 +119,79 @@ void ATIRadeonX1000::SWDSFunc(OSObject *owner, IOTimerEventSource *source) {
     if ((M<SInt32>(ownerBytes + 0xb10) == 0) || (dualPanel = true, M<SInt32>(ownerBytes + 0xb28) == 0)) {
       dualPanel = false;
     }
-    iVar11 = 0;
+    nextPanel = 0;
     entry = (UInt8 *)0x0;
-    uVar9 = 0;
+    stampPending = 0;
     cmdBuffer = (UInt32 *)0x0;
-    bVar14 = 2;
+    noBlitYet = 2;
     bufferOffset = 0;
     cmdWordCount = 0;
     panel = 0;
     do {
       if (M<SInt32>(ownerBytes + panel * 0x18 + 0xb10) != 0) {
-        bVar15 = (panel == 0) << 1;
+        isPanel0Flag = (panel == 0) << 1;
         if (panel == 0) {
-          bVar3 = 0x80;
+          panelStatusMask = 0x80;
         }
         else {
-          bVar3 = 0x40;
+          panelStatusMask = 0x40;
         }
-        if ((statusBits & bVar3) == 0) {
+        if ((statusBits & panelStatusMask) == 0) {
           if (M<SInt32>(ownerBytes + panel * 4 + 0xacc) - M<SInt32>(ownerBytes + panel * 4 + 0xad4) < 1) {
             if (M<SInt32>(ownerBytes + 0x894) == 1) {
-              iVar5 = M<SInt32>(ownerBytes + 0xec);
-              if (iVar5 - M<SInt32>(ownerBytes + 0x10c) < 1) {
+              latestStamp = M<SInt32>(ownerBytes + 0xec);
+              if (latestStamp - M<SInt32>(ownerBytes + 0x10c) < 1) {
                 M<SInt32>(ownerBytes + panel * 4 + 0xacc) = M<SInt32>(ownerBytes + 0x10c);
                 goto LAB_00024480;
               }
             }
             else {
-              iVar5 = M<SInt32>(ownerBytes + panel * 0x20 + 0xec);
+              latestStamp = M<SInt32>(ownerBytes + panel * 0x20 + 0xec);
             }
-            M<SInt32>(ownerBytes + panel * 4 + 0xacc) = iVar5;
+            M<SInt32>(ownerBytes + panel * 4 + 0xacc) = latestStamp;
           }
           else {
             /* #171: stock 0x2442c: r4 = lwz 0xacc(r9) = this[panel*4+0xacc], the stamp to check (checkForTimeStamp(unsigned long)); the port dropped it */
-            uVar4 = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(ownerBytes + panel * 4 + 0xacc));
-            uVar9 = uVar9 | uVar4;
+            stampBusy = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(ownerBytes + panel * 4 + 0xacc));
+            stampPending = stampPending | stampBusy;
           }
 LAB_00024480:
-          if (uVar9 == 0) goto LAB_00024584;
+          if (stampPending == 0) goto LAB_00024584;
         }
         else {
-          uVar9 = 1;
+          stampPending = 1;
         }
-        if ((bool)(bVar14 >> 1 & 1)) {
+        if ((bool)(noBlitYet >> 1 & 1)) {
           entry = ownerBytes + M<SInt32>(ownerBytes + 0xadc) * 0x1c + 0xae0;
-          iVar5 = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(entry + 0x10));
-          if (iVar5 != 0) {
+          entryRetired = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(entry + 0x10));
+          if (entryRetired != 0) {
             cmdBuffer = (UInt32 *)(M<SInt32>(entry + 0x14) + 0x20);
             bufferOffset = M<SInt32>(entry + 4) + 0x20;
-            iVar11 = ((ATIRadeonX1000 *)ownerBytes)->SWDSWriteBlitToCmdBuf(cmdBuffer,0,false,panel);
-            if ((bool)(bVar15 >> 1 & 1)) {
-              cmdBuffer[iVar11] = 0x2ff;
-              cmdBuffer[iVar11 + 1] = 0x80;
+            blitWordCount = ((ATIRadeonX1000 *)ownerBytes)->SWDSWriteBlitToCmdBuf(cmdBuffer,0,false,panel);
+            if ((bool)(isPanel0Flag >> 1 & 1)) {
+              cmdBuffer[blitWordCount] = 0x2ff;
+              cmdBuffer[blitWordCount + 1] = 0x80;
             }
             else {
-              cmdBuffer[iVar11] = 0x2ff;
-              cmdBuffer[iVar11 + 1] = 0x40;
+              cmdBuffer[blitWordCount] = 0x2ff;
+              cmdBuffer[blitWordCount + 1] = 0x40;
             }
-            cmdWordCount = iVar11 + 2;
-            iVar11 = panel + 1;
-            bVar14 = (iVar11 == 0) << 1;
+            cmdWordCount = blitWordCount + 2;
+            nextPanel = panel + 1;
+            noBlitYet = (nextPanel == 0) << 1;
           }
         }
         else {
-          iVar5 = ((ATIRadeonX1000 *)ownerBytes)->SWDSWriteBlitToCmdBuf(cmdBuffer,cmdWordCount,false,panel);
-          cmdBuffer[iVar5] = 0x2ff;
-          cmdWordCount = iVar5 + 2;
-          cmdBuffer[iVar5 + 1] = 0x40;
+          appendWordCount = ((ATIRadeonX1000 *)ownerBytes)->SWDSWriteBlitToCmdBuf(cmdBuffer,cmdWordCount,false,panel);
+          cmdBuffer[appendWordCount] = 0x2ff;
+          cmdWordCount = appendWordCount + 2;
+          cmdBuffer[appendWordCount + 1] = 0x40;
         }
       }
 LAB_00024584:
       panel = panel + 1;
     } while (panel < 2);
-    if (!(bool)(bVar14 >> 1 & 1)) {
+    if (!(bool)(noBlitYet >> 1 & 1)) {
       if (dualPanel) {
         stamp = ((ATIRadeonX1000 *)ownerBytes)->submit_buffer(cmdBuffer,bufferOffset,cmdWordCount);
         M<UInt32>(entry + 0x10) = stamp;
@@ -198,7 +201,7 @@ LAB_00024584:
       else {
         stamp = ((ATIRadeonX1000 *)ownerBytes)->submit_buffer(cmdBuffer,bufferOffset,cmdWordCount);
         M<UInt32>(entry + 0x10) = stamp;
-        M<UInt32>(ownerBytes + iVar11 * 4 + 0xad0) = stamp;
+        M<UInt32>(ownerBytes + nextPanel * 4 + 0xad0) = stamp;
       }
     }
     VCALL(*M<SInt32 *>(ownerBytes + 0x9b8), 300)
@@ -212,266 +215,287 @@ LAB_00024584:
 bool ATIRadeonX1000::SWDSInit() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  UInt8 AVar2;
-  UInt16 uVar3;
-  UInt8 *pbVar4;
-  bool bVar5;
-  bool bVar6;
-  UInt32 uVar7;
-  SInt32 iVar8;
-  SInt32 iVar9;
-  UInt32 uVar10;
-  UInt32 uVar11;
-  UInt32 uVar12;
-  SInt32 iVar13;
-  UInt32 uVar14;
-  UInt32 uVar15;
-  UInt32 uVar16;
-  UInt32 uVar17;
-  UInt32 uVar18;
+  bool morePanels;
+  UInt8 tilingMode;
+  UInt16 bytesPerPixel16;
+  UInt8 *regPtr;
+  bool swdsStarted;
+  bool panel1Placed;
+  UInt32 usableVramAtEntry;
+  SInt32 mmioBase;
+  SInt32 regOffset1;
+  UInt32 stamp;
+  UInt32 recordBase;
+  UInt32 tilingRegValue;
+  SInt32 regOffset2;
+  UInt32 endAddress;
+  UInt32 placementLimit;
+  UInt32 bufferBase;
+  UInt32 usableVram;
+  UInt32 paddedWidth;
   SInt32 recordOffset;
-  UInt8 *pGVar20;
-  UInt8 *pAVar21;
+  UInt8 *elementB;
+  UInt8 *savedRegCursor;
   UInt32 panel;
-  UInt8 *pGVar23;
-  UInt8 *pAVar24;
-  UInt32 uVar25;
-  SInt32 iVar26;
-  UInt32 *puVar27;
-  UInt8 *pAVar28;
+  UInt8 *element;
+  UInt8 *stateCursor;
+  UInt32 bufferSize;
+  SInt32 regOffset0;
+  UInt32 *cmdWords;
+  UInt8 *recordCursor;
+  UInt32 swdsWidth;
+  UInt32 tileBits;
+  UInt32 secondaryWord;
+  UInt32 buffer0Base;
+  UInt32 newRecordBase;
+  UInt32 swdsHeight;
+  UInt32 baseWord;
+  UInt32 tilingBits;
+  UInt32 pitch;
+  UInt32 bytesPerPixel32;
+  UInt32 alignedHeight;
+  SInt32 unalignedBase;
+  SInt32 reserveResult;
+  SInt32 entryOffset;
+  SInt32 otherBufferBase;
+  SInt32 entryRetired;
+  SInt32 cmdBufferAddr;
+  SInt32 blitWordCount;
+  SInt32 reserveBelow;
+  SInt32 cmdBufferOffset;
+  SInt32 otherBufferSize;
   
   if (self[0x80] != 0x0) {
-    uVar7 = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
-    bVar6 = false;
-    bVar5 = false;
-    uVar18 = 0;
+    usableVramAtEntry = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
+    panel1Placed = false;
+    swdsStarted = false;
+    paddedWidth = 0;
     panel = 1;
-    pGVar20 = (self + kIOATIR500Accelerator_swdsScratchElement);
-    pGVar23 = (self + kIOATIR500Accelerator_swdsBuffer1);
+    elementB = (self + kIOATIR500Accelerator_swdsScratchElement);
+    element = (self + kIOATIR500Accelerator_swdsBuffer1);
     recordOffset = 0x78;
-    pAVar21 = self;
-    pAVar24 = self;
-    pAVar28 = self;
+    savedRegCursor = self;
+    stateCursor = self;
+    recordCursor = self;
     do {
-      if (M<SInt32>(pAVar24 + 0xb30) != 0) {
-        uVar12 = M<UInt32>(pAVar24 + 0xb38);
-        uVar14 = M<UInt32>(pAVar24 + 0xb40);
-        if (((uVar12 != M<UInt16>(pAVar28 + 0x1c0)) || (uVar14 != M<UInt16>(pAVar28 + 0x1c2)))
-           || (M<SInt32>(pAVar24 + 0xb60) != 0)) {
-          uVar3 = M<UInt16>(pAVar28 + 0x1ba);
-          uVar16 = (UInt32)uVar3;
-          uVar11 = uVar12 * uVar16 + 0xff & 0xffffff00;
-          if (uVar16 != 0) {
-            uVar18 = uVar11 / uVar16;
+      if (M<SInt32>(stateCursor + 0xb30) != 0) {
+        swdsWidth = M<UInt32>(stateCursor + 0xb38);
+        swdsHeight = M<UInt32>(stateCursor + 0xb40);
+        if (((swdsWidth != M<UInt16>(recordCursor + 0x1c0)) || (swdsHeight != M<UInt16>(recordCursor + 0x1c2)))
+           || (M<SInt32>(stateCursor + 0xb60) != 0)) {
+          bytesPerPixel16 = M<UInt16>(recordCursor + 0x1ba);
+          bytesPerPixel32 = (UInt32)bytesPerPixel16;
+          pitch = swdsWidth * bytesPerPixel32 + 0xff & 0xffffff00;
+          if (bytesPerPixel32 != 0) {
+            paddedWidth = pitch / bytesPerPixel32;
           }
-          uVar16 = uVar14;
-          if ((uVar14 & 0xf) != 0) {
-            uVar16 = (uVar14 & 0xfffffff0) + 0x10;
+          alignedHeight = swdsHeight;
+          if ((swdsHeight & 0xf) != 0) {
+            alignedHeight = (swdsHeight & 0xfffffff0) + 0x10;
           }
-          uVar17 = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
-          uVar15 = M<UInt32>(self + kIOATIR500Accelerator_vramSize);
-          uVar25 = uVar16 * uVar11;
-          if (uVar17 < uVar15) {
+          usableVram = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
+          placementLimit = M<UInt32>(self + kIOATIR500Accelerator_vramSize);
+          bufferSize = alignedHeight * pitch;
+          if (usableVram < placementLimit) {
             if ((panel == 1) ||
                ((((M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) == 1 && (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb2c) != 0)) &&
                  (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb30) != 0)) &&
                 ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb34) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb38) ||
                  (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
-              iVar8 = uVar15 - uVar25;
-              bVar6 = panel == 1;
+              unalignedBase = placementLimit - bufferSize;
+              panel1Placed = panel == 1;
             }
             else {
-              if (bVar6) {
-                uVar15 = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress);
+              if (panel1Placed) {
+                placementLimit = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress);
               }
-              iVar8 = uVar15 - uVar25;
+              unalignedBase = placementLimit - bufferSize;
             }
-            uVar16 = iVar8 - 0x8000U & 0xffff8000;
-            if (uVar17 <= uVar16) {
+            bufferBase = unalignedBase - 0x8000U & 0xffff8000;
+            if (usableVram <= bufferBase) {
 LAB_00024750:
-              M<UInt16>(pAVar28 + 0xa48) = 0;
-              M<UInt16>(pAVar28 + 0xa4a) = 0;
-              M<UInt16>(pAVar28 + 0xa4c) = 0;
-              M<UInt16>(pAVar28 + 0xa50) = 0;
-              pAVar28[0xa6f] = 0x6;
-              M<UInt16>(pAVar28 + 0xa56) = 1;
-              M<UInt16>(pAVar28 + 0xa54) = 1;
-              M<UInt16>(pAVar28 + 0xa52) = 0;
-              pAVar28[0xa68] = 0x0;
-              pAVar28[0xa69] = 0x0;
-              pAVar28[0xa6a] = 0x0;
-              pAVar28[0xa6c] = 0x0;
-              pAVar28[0xa6d] = 0x0;
-              pAVar28[0xa70] = 0x0;
-              M<UInt32>(pAVar28 + 0xa3c) = 0;
-              M<UInt32>(pAVar28 + 0xa44) = 0;
-              M<UInt32>(pAVar28 + 0xa34) = 0;
-              M<UInt32>(pAVar28 + 0xa38) = 0;
-              M<UInt32>(pAVar28 + 0xa40) = 0;
-              M<UInt32>(pAVar28 + 0xa58) = 0;
-              M<UInt32>(pAVar28 + 0xa60) = 0;
-              M<UInt32>(pAVar28 + 0xa64) = 0;
-              pAVar28[0xa6b] = 0xff;
-              M<UInt32>(pAVar28 + 0xa5c) = 0xffffffff;
-              M<UInt32>(pGVar23 + 0x3c) = M<UInt32>(pGVar23 + 0x3c) & 0xff0007ff | 0x111000;
-              M<UInt16>(pAVar28 + 0xa4a) = uVar3;
-              M<SInt16>(pAVar28 + 0xa4c) = (SInt16)uVar11;
-              M<UInt32>(pAVar28 + 0xa74) = 0;
-              M<UInt32>(pAVar28 + 0xa78) = 0;
-              M<UInt32>(pAVar28 + 0xa3c) = uVar16;
-              M<UInt32>(pAVar28 + 0xa44) = uVar25;
-              M<SInt16>(pAVar28 + 0xa48) = (SInt16)uVar18;
-              M<SInt16>(pAVar28 + 0xa50) = (SInt16)uVar12;
-              M<SInt16>(pAVar28 + 0xa52) = (SInt16)uVar14;
-              pAVar28[0xa6b] = pAVar28[0x1db];
-              pAVar28[0xa6c] = pAVar28[0x1dc];
-              pAVar28[0xa6d] = pAVar28[0x1dd];
-              pAVar28[0xa6e] = pAVar28[0x1de];
-              pAVar28[0xa6f] = pAVar28[0x1df];
-              uVar12 = M<UInt32>(pGVar23 + -0x854);
-              M<UInt32>(pGVar23 + 0x3c) =
-                   uVar12 & 0x800 |
-                   uVar12 & 0xf000 |
-                   uVar12 & 0xf0000 | uVar12 & 0xf00000 | M<UInt32>(pGVar23 + 0x3c) & 0xff0007ff;
-              iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->reserve((GLKMemoryElement *)pGVar23, uVar16, uVar25)
+              M<UInt16>(recordCursor + 0xa48) = 0;
+              M<UInt16>(recordCursor + 0xa4a) = 0;
+              M<UInt16>(recordCursor + 0xa4c) = 0;
+              M<UInt16>(recordCursor + 0xa50) = 0;
+              recordCursor[0xa6f] = 0x6;
+              M<UInt16>(recordCursor + 0xa56) = 1;
+              M<UInt16>(recordCursor + 0xa54) = 1;
+              M<UInt16>(recordCursor + 0xa52) = 0;
+              recordCursor[0xa68] = 0x0;
+              recordCursor[0xa69] = 0x0;
+              recordCursor[0xa6a] = 0x0;
+              recordCursor[0xa6c] = 0x0;
+              recordCursor[0xa6d] = 0x0;
+              recordCursor[0xa70] = 0x0;
+              M<UInt32>(recordCursor + 0xa3c) = 0;
+              M<UInt32>(recordCursor + 0xa44) = 0;
+              M<UInt32>(recordCursor + 0xa34) = 0;
+              M<UInt32>(recordCursor + 0xa38) = 0;
+              M<UInt32>(recordCursor + 0xa40) = 0;
+              M<UInt32>(recordCursor + 0xa58) = 0;
+              M<UInt32>(recordCursor + 0xa60) = 0;
+              M<UInt32>(recordCursor + 0xa64) = 0;
+              recordCursor[0xa6b] = 0xff;
+              M<UInt32>(recordCursor + 0xa5c) = 0xffffffff;
+              M<UInt32>(element + 0x3c) = M<UInt32>(element + 0x3c) & 0xff0007ff | 0x111000;
+              M<UInt16>(recordCursor + 0xa4a) = bytesPerPixel16;
+              M<SInt16>(recordCursor + 0xa4c) = (SInt16)pitch;
+              M<UInt32>(recordCursor + 0xa74) = 0;
+              M<UInt32>(recordCursor + 0xa78) = 0;
+              M<UInt32>(recordCursor + 0xa3c) = bufferBase;
+              M<UInt32>(recordCursor + 0xa44) = bufferSize;
+              M<SInt16>(recordCursor + 0xa48) = (SInt16)paddedWidth;
+              M<SInt16>(recordCursor + 0xa50) = (SInt16)swdsWidth;
+              M<SInt16>(recordCursor + 0xa52) = (SInt16)swdsHeight;
+              recordCursor[0xa6b] = recordCursor[0x1db];
+              recordCursor[0xa6c] = recordCursor[0x1dc];
+              recordCursor[0xa6d] = recordCursor[0x1dd];
+              recordCursor[0xa6e] = recordCursor[0x1de];
+              recordCursor[0xa6f] = recordCursor[0x1df];
+              tileBits = M<UInt32>(element + -0x854);
+              M<UInt32>(element + 0x3c) =
+                   tileBits & 0x800 |
+                   tileBits & 0xf000 |
+                   tileBits & 0xf0000 | tileBits & 0xf00000 | M<UInt32>(element + 0x3c) & 0xff0007ff;
+              reserveResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->reserve((GLKMemoryElement *)element, bufferBase, bufferSize)
               ;
-              if (iVar8 != 0) {
-                iVar8 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPoolB)))->reserve((GLKMemoryElement *)pGVar20,uVar16,uVar25);
-                if (iVar8 == 0) {
-                  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)pGVar23);
+              if (reserveResult != 0) {
+                reserveResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPoolB)))->reserve((GLKMemoryElement *)elementB,bufferBase,bufferSize);
+                if (reserveResult == 0) {
+                  ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)element);
                 }
                 else {
-                  iVar8 = M<SInt32>(self + kIOATIR500Accelerator_swdsEntryIndex) * 0x1c;
-                  iVar9 = VCALL(M<SInt32>(self), 0x554)
-                                    (self,M<UInt32>(self + iVar8 + 0xaf0));
-                  if (iVar9 != 0) {
-                    iVar9 = M<SInt32>(self + iVar8 + 0xaf4);
-                    iVar26 = M<SInt32>(self + iVar8 + 0xae4);
-                    puVar27 = (UInt32 *)(iVar9 + 0x20);
-                    *puVar27 = 0xd0b;
-                    M<UInt32>(iVar9 + 0x24) = 5;
-                    M<UInt32>(iVar9 + 0x28) = 0x1393;
-                    M<UInt32>(iVar9 + 0x2c) = 10;
-                    M<UInt32>(iVar9 + 0x30) = 0x5c8;
-                    M<UInt32>(iVar9 + 0x34) = 0x30000;
-                    iVar9 = this->SWDSWriteBlitToCmdBuf(puVar27,6,false,panel);
-                    puVar27[iVar9] = 0x2ff;
-                    puVar27[iVar9 + 1] = 0xc0;
-                    puVar27[iVar9 + 2] = 0x5c8;
-                    puVar27[iVar9 + 3] = 0x30000;
-                    uVar10 = this->submit_buffer(puVar27,iVar26 + 0x20,iVar9 + 4);
-                    M<UInt32>(self + iVar8 + 0xaf0) = uVar10;
-                    M<UInt32>(pAVar24 + 0xad8) = uVar10;
-                    VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + iVar8 + 0xaf0));
+                  entryOffset = M<SInt32>(self + kIOATIR500Accelerator_swdsEntryIndex) * 0x1c;
+                  entryRetired = VCALL(M<SInt32>(self), 0x554)
+                                    (self,M<UInt32>(self + entryOffset + 0xaf0));
+                  if (entryRetired != 0) {
+                    cmdBufferAddr = M<SInt32>(self + entryOffset + 0xaf4);
+                    cmdBufferOffset = M<SInt32>(self + entryOffset + 0xae4);
+                    cmdWords = (UInt32 *)(cmdBufferAddr + 0x20);
+                    *cmdWords = 0xd0b;
+                    M<UInt32>(cmdBufferAddr + 0x24) = 5;
+                    M<UInt32>(cmdBufferAddr + 0x28) = 0x1393;
+                    M<UInt32>(cmdBufferAddr + 0x2c) = 10;
+                    M<UInt32>(cmdBufferAddr + 0x30) = 0x5c8;
+                    M<UInt32>(cmdBufferAddr + 0x34) = 0x30000;
+                    blitWordCount = this->SWDSWriteBlitToCmdBuf(cmdWords,6,false,panel);
+                    cmdWords[blitWordCount] = 0x2ff;
+                    cmdWords[blitWordCount + 1] = 0xc0;
+                    cmdWords[blitWordCount + 2] = 0x5c8;
+                    cmdWords[blitWordCount + 3] = 0x30000;
+                    stamp = this->submit_buffer(cmdWords,cmdBufferOffset + 0x20,blitWordCount + 4);
+                    M<UInt32>(self + entryOffset + 0xaf0) = stamp;
+                    M<UInt32>(stateCursor + 0xad8) = stamp;
+                    VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + entryOffset + 0xaf0));
                   }
                   if (((M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) == 1) && (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb2c) != 0)) &&
                      ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb30) != 0 &&
                       ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb34) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb38) &&
                        (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
-                    iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-                    uVar14 = M<UInt32>(pAVar28 + 0xa3c);
-                    M<UInt32>(iVar8 + 0x6110) =
-                         uVar14 << 0x18 | (uVar14 & 0xff00) << 8 | uVar14 >> 8 & 0xff00 |
-                         uVar14 >> 0x18;
+                    mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+                    baseWord = M<UInt32>(recordCursor + 0xa3c);
+                    M<UInt32>(mmioBase + 0x6110) =
+                         baseWord << 0x18 | (baseWord & 0xff00) << 8 | baseWord >> 8 & 0xff00 |
+                         baseWord >> 0x18;
                     enforceInOrderExecutionIO();
-                    uVar12 = (UInt32)M<UInt16>(pAVar28 + 0xa48);
-                    M<UInt32>(iVar8 + 0x6120) = uVar12 << 0x18 | (uVar12 & 0xff00) << 8;
+                    secondaryWord = (UInt32)M<UInt16>(recordCursor + 0xa48);
+                    M<UInt32>(mmioBase + 0x6120) = secondaryWord << 0x18 | (secondaryWord & 0xff00) << 8;
                     enforceInOrderExecutionIO();
-                    M<UInt32>(iVar8 + 0x6910) =
-                         uVar14 << 0x18 | (uVar14 & 0xff00) << 8 | uVar14 >> 8 & 0xff00 |
-                         uVar14 >> 0x18;
+                    M<UInt32>(mmioBase + 0x6910) =
+                         baseWord << 0x18 | (baseWord & 0xff00) << 8 | baseWord >> 8 & 0xff00 |
+                         baseWord >> 0x18;
                     enforceInOrderExecutionIO();
-                    M<UInt32>(iVar8 + 0x6920) = uVar12 << 0x18 | (uVar12 & 0xff00) << 8;
+                    M<UInt32>(mmioBase + 0x6920) = secondaryWord << 0x18 | (secondaryWord & 0xff00) << 8;
                     enforceInOrderExecutionIO();
-                    M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressSeen) = uVar14;
-                    M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressSeen) = M<UInt32>(pAVar28 + 0xa3c);
+                    M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressSeen) = baseWord;
+                    M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressSeen) = M<UInt32>(recordCursor + 0xa3c);
                   }
                   else {
                     if (panel == 0) {
-                      iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-                      uVar12 = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer0GpuBaseAddress);
-                      M<UInt32>(iVar8 + 0x6110) =
-                           uVar12 << 0x18 | (uVar12 & 0xff00) << 8 | uVar12 >> 8 & 0xff00 |
-                           uVar12 >> 0x18;
+                      mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+                      buffer0Base = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer0GpuBaseAddress);
+                      M<UInt32>(mmioBase + 0x6110) =
+                           buffer0Base << 0x18 | (buffer0Base & 0xff00) << 8 | buffer0Base >> 8 & 0xff00 |
+                           buffer0Base >> 0x18;
                       enforceInOrderExecutionIO();
-                      M<UInt32>(iVar8 + 0x6120) =
+                      M<UInt32>(mmioBase + 0x6120) =
                            (UInt32)M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width) << 0x18 |
                            (M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width) & 0xff00) << 8;
                       enforceInOrderExecutionIO();
-                      uVar12 = M<UInt32>(pAVar28 + 0xa3c);
+                      newRecordBase = M<UInt32>(recordCursor + 0xa3c);
                     }
                     else {
-                      uVar12 = M<UInt32>(pAVar28 + 0xa3c);
-                      iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-                      M<UInt32>(iVar8 + 0x6910) =
-                           uVar12 << 0x18 | (uVar12 & 0xff00) << 8 | uVar12 >> 8 & 0xff00 |
-                           uVar12 >> 0x18;
+                      newRecordBase = M<UInt32>(recordCursor + 0xa3c);
+                      mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+                      M<UInt32>(mmioBase + 0x6910) =
+                           newRecordBase << 0x18 | (newRecordBase & 0xff00) << 8 | newRecordBase >> 8 & 0xff00 |
+                           newRecordBase >> 0x18;
                       enforceInOrderExecutionIO();
-                      M<UInt32>(iVar8 + 0x6920) =
-                           (UInt32)M<UInt16>(pAVar28 + 0xa48) << 0x18 |
-                           (M<UInt16>(pAVar28 + 0xa48) & 0xff00) << 8;
+                      M<UInt32>(mmioBase + 0x6920) =
+                           (UInt32)M<UInt16>(recordCursor + 0xa48) << 0x18 |
+                           (M<UInt16>(recordCursor + 0xa48) & 0xff00) << 8;
                       enforceInOrderExecutionIO();
                     }
-                    M<UInt32>(pAVar24 + 0xb70) = uVar12;
+                    M<UInt32>(stateCursor + 0xb70) = newRecordBase;
                   }
-                  uVar12 = 0;
-                  AVar2 = self[recordOffset + 0x164];
-                  uVar11 = M<UInt32>(self + recordOffset + 0x134);
-                  uVar14 = 0;
-                  if (AVar2 != 0x0) {
-                    uVar12 = (UInt32)(M<UInt16>(self + recordOffset + 0x144) >> 3);
-                    if (AVar2 == 0x2) {
-                      uVar14 = 0x20000;
+                  tilingRegValue = 0;
+                  tilingMode = self[recordOffset + 0x164];
+                  recordBase = M<UInt32>(self + recordOffset + 0x134);
+                  tilingBits = 0;
+                  if (tilingMode != 0x0) {
+                    tilingRegValue = (UInt32)(M<UInt16>(self + recordOffset + 0x144) >> 3);
+                    if (tilingMode == 0x2) {
+                      tilingBits = 0x20000;
                     }
-                    else if (AVar2 == 0x3) {
-                      uVar14 = 0x30000;
+                    else if (tilingMode == 0x3) {
+                      tilingBits = 0x30000;
                     }
-                    else if (AVar2 == 0x1) {
-                      uVar14 = 0x10000;
+                    else if (tilingMode == 0x1) {
+                      tilingBits = 0x10000;
                     }
                     else {
-                      uVar14 = 0;
+                      tilingBits = 0;
                     }
                   }
                   if (panel == 1) {
-                    iVar26 = 0xb64;
-                    iVar9 = 0xb68;
-                    iVar13 = 0xb6c;
-                    uVar12 = uVar12 | uVar14 | ((UInt8)self[recordOffset + 0x165] & 3) << 0x14 |
+                    regOffset0 = 0xb64;
+                    regOffset1 = 0xb68;
+                    regOffset2 = 0xb6c;
+                    tilingRegValue = tilingRegValue | tilingBits | ((UInt8)self[recordOffset + 0x165] & 3) << 0x14 |
                              ((UInt8)self[recordOffset + 0x165] & 3) << 0x16;
                   }
                   else {
-                    iVar26 = 0xb74;
-                    iVar9 = 0xb78;
-                    iVar13 = 0xb7c;
-                    uVar12 = uVar12 | uVar14 | ((UInt8)self[recordOffset + 0x165] & 3) << 0x14 |
+                    regOffset0 = 0xb74;
+                    regOffset1 = 0xb78;
+                    regOffset2 = 0xb7c;
+                    tilingRegValue = tilingRegValue | tilingBits | ((UInt8)self[recordOffset + 0x165] & 3) << 0x14 |
                              ((UInt8)self[recordOffset + 0x165] & 3) << 0x16;
                   }
-                  pbVar4 = (UInt8 *)(iVar8 + iVar26);
-                  M<UInt32>(pAVar21 + 0xb14) =
-                       loadWordByteReversed(pbVar4);
-                  pbVar4 = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + iVar9);
-                  M<UInt32>(pAVar21 + 0xb18) =
-                       loadWordByteReversed(pbVar4);
-                  pbVar4 = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + iVar13);
-                  M<UInt32>(pAVar21 + 0xb1c) =
-                       loadWordByteReversed(pbVar4);
-                  iVar8 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-                  M<UInt32>(iVar8 + iVar26) =
-                       uVar11 << 0x18 | (uVar11 & 0xff00) << 8 | uVar11 >> 8 & 0xff00 |
-                       uVar11 >> 0x18;
+                  regPtr = (UInt8 *)(mmioBase + regOffset0);
+                  M<UInt32>(savedRegCursor + 0xb14) =
+                       loadWordByteReversed(regPtr);
+                  regPtr = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + regOffset1);
+                  M<UInt32>(savedRegCursor + 0xb18) =
+                       loadWordByteReversed(regPtr);
+                  regPtr = (UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + regOffset2);
+                  M<UInt32>(savedRegCursor + 0xb1c) =
+                       loadWordByteReversed(regPtr);
+                  mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+                  M<UInt32>(mmioBase + regOffset0) =
+                       recordBase << 0x18 | (recordBase & 0xff00) << 8 | recordBase >> 8 & 0xff00 |
+                       recordBase >> 0x18;
                   enforceInOrderExecutionIO();
-                  uVar14 = (uVar11 + M<SInt32>(self + recordOffset + 0x13c)) - 1;
-                  M<UInt32>(iVar8 + iVar9) =
-                       uVar14 * 0x1000000 | (uVar14 & 0xff00) << 8 | uVar14 >> 8 & 0xff00 |
-                       uVar14 >> 0x18;
+                  endAddress = (recordBase + M<SInt32>(self + recordOffset + 0x13c)) - 1;
+                  M<UInt32>(mmioBase + regOffset1) =
+                       endAddress * 0x1000000 | (endAddress & 0xff00) << 8 | endAddress >> 8 & 0xff00 |
+                       endAddress >> 0x18;
                   enforceInOrderExecutionIO();
-                  M<UInt32>(iVar8 + iVar13) =
-                       uVar12 << 0x18 | (uVar12 & 0xff00) << 8 | uVar12 >> 8 & 0xff00;
+                  M<UInt32>(mmioBase + regOffset2) =
+                       tilingRegValue << 0x18 | (tilingRegValue & 0xff00) << 8 | tilingRegValue >> 8 & 0xff00;
                   enforceInOrderExecutionIO();
-                  bVar5 = true;
-                  M<UInt32>(pAVar21 + 0xb28) = 1;
+                  swdsStarted = true;
+                  M<UInt32>(savedRegCursor + 0xb28) = 1;
                 }
               }
             }
@@ -481,42 +505,42 @@ LAB_00024750:
                    ((M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb34) != M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb38) ||
                     (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) != M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
             if (panel == 1) {
-              iVar9 = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
-              iVar8 = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress);
-              iVar26 = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferSize);
+              reserveBelow = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
+              otherBufferBase = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress);
+              otherBufferSize = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferSize);
 LAB_00024a0c:
-              uVar16 = ((uVar17 - iVar9) - uVar25) - 0x8000 & 0xffff8000;
-              if ((UInt32)(iVar8 + iVar26) < uVar16) goto LAB_00024750;
+              bufferBase = ((usableVram - reserveBelow) - bufferSize) - 0x8000 & 0xffff8000;
+              if ((UInt32)(otherBufferBase + otherBufferSize) < bufferBase) goto LAB_00024750;
             }
             else {
-              uVar16 = (M<SInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress) - uVar25) - 0x8000 & 0xffff8000;
-              if ((UInt32)(M<SInt32>(pAVar28 + 0x1ac) + M<SInt32>(pAVar28 + 0x1b4)) < uVar16)
+              bufferBase = (M<SInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress) - bufferSize) - 0x8000 & 0xffff8000;
+              if ((UInt32)(M<SInt32>(recordCursor + 0x1ac) + M<SInt32>(recordCursor + 0x1b4)) < bufferBase)
               goto LAB_00024750;
             }
           }
           else {
             if ((panel != 0) || ((M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferSize) == 0 || (M<SInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) != 0)))) {
-              iVar9 = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
-              iVar8 = M<SInt32>(pAVar28 + 0x1ac);
-              iVar26 = M<SInt32>(pAVar28 + 0x1b4);
+              reserveBelow = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
+              otherBufferBase = M<SInt32>(recordCursor + 0x1ac);
+              otherBufferSize = M<SInt32>(recordCursor + 0x1b4);
               goto LAB_00024a0c;
             }
-            uVar16 = M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferGpuBaseAddress) + M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferSize) + 0x8000U & 0xffff8000;
-            if (uVar25 + uVar16 < (M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress) & ~((uVar7 >> 1) - 1)))
+            bufferBase = M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferGpuBaseAddress) + M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferSize) + 0x8000U & 0xffff8000;
+            if (bufferSize + bufferBase < (M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress) & ~((usableVramAtEntry >> 1) - 1)))
             goto LAB_00024750;
           }
         }
       }
-      bVar1 = panel != 0;
+      morePanels = panel != 0;
       recordOffset = recordOffset + -0x78;
-      pGVar23 = pGVar23 + -0x78;
-      pGVar20 = pGVar20 + -0x10;
-      pAVar24 = pAVar24 + -4;
-      pAVar21 = pAVar21 + -0x18;
-      pAVar28 = pAVar28 + -0x78;
+      element = element + -0x78;
+      elementB = elementB + -0x10;
+      stateCursor = stateCursor + -4;
+      savedRegCursor = savedRegCursor + -0x18;
+      recordCursor = recordCursor + -0x78;
       panel = panel - 1;
-    } while (bVar1);
-    if (bVar5) {
+    } while (morePanels);
+    if (swdsStarted) {
       VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer), 300)
                 (M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer),M<UInt32>(self + kIOATIR500Accelerator_swdsPeriodMs));
       VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer), 0xec)(M<SInt32 *>(self + kIOATIR500Accelerator_swdsTimer));
