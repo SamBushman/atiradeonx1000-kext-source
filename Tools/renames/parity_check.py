@@ -29,11 +29,14 @@ def build(tree, out, work, env_extra):
 
 
 def warnings(logpath):
+    """{(file, kind): count} of the -Wuninitialized warnings. The variable name is NOT part of the key: a rename changes the text of a warning that
+    the stock-faithful code already had (a read of a never-written stack slot), and that must not count as a new one."""
     out = {}
     for ln in open(logpath, errors='replace'):
         m = re.match(r'^(.*?):(\d+): warning: (.*)$', ln)
-        if m and 'uninitialized' in m.group(3): out.setdefault((os.path.basename(m.group(1)), m.group(3)), 0)
-        if m and 'uninitialized' in m.group(3): out[(os.path.basename(m.group(1)), m.group(3))] += 1
+        if m and 'uninitialized' in m.group(3):
+            k = (os.path.basename(m.group(1)), 'may be used' if 'may be used' in m.group(3) else 'is used')
+            out[k] = out.get(k, 0) + 1
     return out
 
 
