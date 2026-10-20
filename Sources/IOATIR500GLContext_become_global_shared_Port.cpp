@@ -39,27 +39,27 @@ IOReturn IOATIR500GLContext::become_global_shared(UInt32 makeShared) {
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
   if (makeShared == 0) {
     accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-    globalShared = M<SInt32>(accel + kIOATIR500Accelerator_unknown_0x6c);
+    globalShared = M<SInt32>(accel + kIOATIR500Accelerator_globalSharedClient);
     if (((globalShared != 0) && (globalShared == M<SInt32>(self + kIOATIR500GLContext_clientHandle))) && (M<SInt32>(globalShared + 0x24) == 0)) {
-      M<UInt32>(accel + kIOATIR500Accelerator_unknown_0x6c) = 0;
+      M<UInt32>(accel + kIOATIR500Accelerator_globalSharedClient) = 0;
       M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x70) = 0;
       accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
       result = 0;
-      goto LAB_000096f8;
+      goto unlockAndReturn;
     }
   }
   else {
     accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-    if ((M<SInt32>(accel + kIOATIR500Accelerator_unknown_0x6c) == 0) && (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x24) == 0)) {
-      M<SInt32>(accel + kIOATIR500Accelerator_unknown_0x6c) = M<SInt32>(self + kIOATIR500GLContext_clientHandle);
+    if ((M<SInt32>(accel + kIOATIR500Accelerator_globalSharedClient) == 0) && (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_clientHandle) + 0x24) == 0)) {
+      M<SInt32>(accel + kIOATIR500Accelerator_globalSharedClient) = M<SInt32>(self + kIOATIR500GLContext_clientHandle);
       result = 0;
       M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x70) = 1;
       accel = M<SInt32>(self + kIOATIR500GLContext_accelerator);
-      goto LAB_000096f8;
+      goto unlockAndReturn;
     }
   }
   result = 0xe00002cc;
-LAB_000096f8:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(accel + kIOATIR500Accelerator_commandLock));
   return result;
 }

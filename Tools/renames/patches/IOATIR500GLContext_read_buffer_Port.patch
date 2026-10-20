@@ -1,0 +1,127 @@
+--- a/Sources/IOATIR500GLContext_read_buffer_Port.cpp	2026-10-20 10:28:32.646425935 -0700
++++ b/Sources/IOATIR500GLContext_read_buffer_Port.cpp	2026-10-20 10:28:32.647699772 -0700
+@@ -33,7 +33,6 @@
+ /* real addr 0x8d10 */
+ IOReturn IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData *readData, UInt32 structSize) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its readDataBytes (#86) */
+     UInt8 *readDataBytes = reinterpret_cast<UInt8 *>(readData);
+ 
+   SInt32 surfaceWidth;
+@@ -101,43 +100,43 @@
+   case 0xb:
+     attachment = 8;
+   }
+-  GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+-  surface = M<UInt8 *>(param_1 + kIOATIR500GLContext_boundSurface);
++  GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
++  surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
+   if (surface == (UInt8 *)0x0) goto unlockAndFail;
+   if ((0xff < M<UInt32>(surface + kIOATIR500Surface_requestedId)) &&
+-     (sourceBuffer = M<SInt32>(param_1 + kIOATIR500GLContext_accelerator), M<char>(sourceBuffer + 0x80) == '\0')) {
++     (sourceBuffer = M<SInt32>(self + kIOATIR500GLContext_accelerator), M<char>(sourceBuffer + 0x80) == '\0')) {
+     do {
+       GH_IOLockSleep(M<UInt32>(sourceBuffer + 0x840),sourceBuffer,0);
+     } while (M<char>(sourceBuffer + 0x80) == '\0');
+-    surface = M<UInt8 *>(param_1 + kIOATIR500GLContext_boundSurface);
++    surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
+     if (surface == (UInt8 *)0x0) goto unlockAndFail;
+   }
+   if ((((attachment != 0) || (M<SInt32>(surface + kIOATIR500Surface_panel) == 0xffff)) ||
+       (attachmentSurface = *(UInt8 **)
+-                 (M<SInt32>(surface + kIOATIR500Surface_panel) * 0x20 + M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0xe8),
++                 (M<SInt32>(surface + kIOATIR500Surface_panel) * 0x20 + M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xe8),
+       attachmentSurface == (UInt8 *)0x0)) || (surface == attachmentSurface)) {
+     attachmentSurface = surface + attachment * 4;
+   }
+   sourceBuffer = M<SInt32>(attachmentSurface + 0xb70);
+   attachmentMask = 0x40000000;
+   bufferIndex = (sourceBuffer - (SInt32)(surface + kIOATIR500Surface_buffers) >> 3) * -0x11111111;
+-  if ((bufferIndex < 0x17) && (attachmentMask = 1 << (bufferIndex & 0x3f) & M<UInt32>(param_1 + kIOATIR500GLContext_surfaceFlagsBitmask), attachmentMask == 0))
++  if ((bufferIndex < 0x17) && (attachmentMask = 1 << (bufferIndex & 0x3f) & M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask), attachmentMask == 0))
+   goto unlockAndFail;
+   if ((M<UInt32>(surface + kIOATIR500Surface_stateBits) & attachmentMask) == 0) {
+ checkSurfaceState:
+     if (((M<UInt32>(surface + kIOATIR500Surface_stateBits) & 0x20000000) != 0) || (M<SInt32>(sourceBuffer + 0x10) == 0)) {
+ unlockAndFail:
+-      GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
++      GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+       return 0xe00002cc;
+     }
+   }
+   else {
+     if (M<SInt32>(sourceBuffer + 0x24) == 0) goto unlockAndReturnZero;
+-    if ((M<char>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x80) == '\0') ||
++    if ((M<char>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x80) == '\0') ||
+        (M<char>(M<SInt32>(sourceBuffer + 0x24) + 0x58) != '\0')) goto checkSurfaceState;
+     sourceBuffer = ((IOATIR500Surface *)(surface))->alloc_surfaces_retry(attachmentMask, (eLockType)(0));
+     if (sourceBuffer != 0) goto unlockAndFail;
+-    surface = M<UInt8 *>(param_1 + kIOATIR500GLContext_boundSurface);
++    surface = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
+     sourceBuffer = M<SInt32>(surface + attachment * 4 + kIOATIR500Surface_attachmentBuffers);
+   }
+   attachment = x + width;
+@@ -171,12 +170,12 @@
+                                    (GH_page_size +
+                                    rowBytes * (height + -1) +
+                                    (UInt32)M<UInt16>(sourceBuffer + 0x16) * width + bufferIndex) - 1,0,
+-                                   M<UInt32>(param_1 + kIOATIR500GLContext_task));
++                                   M<UInt32>(self + kIOATIR500GLContext_task));
+     if (local_s.f40 == (SInt32 *)0x0) {
+       result = 0xe00002be;
+     }
+     else {
+-      surfaceObject = M<SInt32 *>(param_1 + kIOATIR500GLContext_boundSurface);
++      surfaceObject = M<SInt32 *>(self + kIOATIR500GLContext_boundSurface);
+       destAddress = surfaceObject[0x1f];
+       /* +0x5e8 is copy_from_buffer -> copy_buffer_using_DMA (ATIR500Surface_copy_buffer_using_DMA_Port.cpp):
+        * this is NOT a memcpy of sourceBuffer's backing bytes. It builds a real GPU 3D-render command
+@@ -187,37 +186,37 @@
+        * observable effect on what came back - don't assume a CPU-side write to the source surface
+        * is visible to this call, and don't assume the returned content is a literal byte copy. */
+       VCALL(*surfaceObject, 0x5e8)
+-                (surfaceObject,x,y,width,height,M<UInt32>(param_1 + kIOATIR500GLContext_surfaceIndex),
+-                 M<UInt32>(param_1 + kIOATIR500GLContext_mipLevel),sourceBuffer,M<UInt32>(param_1 + kIOATIR500GLContext_lastSubmitStamp),&local_s,
++                (surfaceObject,x,y,width,height,M<UInt32>(self + kIOATIR500GLContext_surfaceIndex),
++                 M<UInt32>(self + kIOATIR500GLContext_mipLevel),sourceBuffer,M<UInt32>(self + kIOATIR500GLContext_lastSubmitStamp),&local_s,
+                  bufferIndex,rowBytes,2);
+       height = 0xa0;
+       width = 0x17;
+       do {
+-        y = M<SInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_boundSurface) + height + 0x2c);
++        y = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + height + 0x2c);
+         if ((y != 0) && (destAddress == M<SInt32>(y + 0x54))) {
+-          M<UInt32>(y + 0x54) = M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_boundSurface) + 0x7c);
++          M<UInt32>(y + 0x54) = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0x7c);
+         }
+         height = height + 0x78;
+         width = width + -1;
+       } while (width != 0);
+       if (local_s.f44 != 0) {
+-        GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+-        acceleratorObject = M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator);
++        GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
++        acceleratorObject = M<SInt32 *>(self + kIOATIR500GLContext_accelerator);
+         width = acceleratorObject[0x1ed];
+         height = VCALL(*acceleratorObject, 0x55c)
+-                           (acceleratorObject,M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_boundSurface) + 0x7c));
++                           (acceleratorObject,M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0x7c));
+         acceleratorObject[0x1ed] = width + height;
+-        GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
+-        VCALL(*M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator), 0x5ac)(M<SInt32 *>(param_1 + kIOATIR500GLContext_accelerator),&local_s);
++        GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
++        VCALL(*M<SInt32 *>(self + kIOATIR500GLContext_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500GLContext_accelerator),&local_s);
+       }
+       result = 0;
+       VCALL(*local_s.f40, 0x18)(local_s.f40);
+     }
+     local_s.f40 = (SInt32 *)0x0;
+-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
++    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+     return result;
+   }
+ unlockAndReturnZero:
+-  GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500GLContext_accelerator) + 0x840));
++  GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x840));
+   return 0;
+ }

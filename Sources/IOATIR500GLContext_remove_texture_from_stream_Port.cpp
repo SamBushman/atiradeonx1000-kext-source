@@ -33,26 +33,26 @@ void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *texture
 
   UInt8 kind;
   UInt32 stamp;
-  SInt32 iVar3;
-  SInt32 *piVar4;
+  SInt32 linkedTexture;
+  SInt32 *backingDescriptor;
   
   do {
     stamp = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
     M<UInt32>(M<SInt32>(textureBytes + 0x14) + 8) = stamp;
     kind = textureBytes[0x20];
     if (kind == 0x6) {
-      iVar3 = M<SInt32>(textureBytes + 0x54);
-      M<UInt32>(M<SInt32>(iVar3 + 0x14) + 8) = stamp;
-      M<SInt16>(iVar3 + 0xe) = M<SInt16>(iVar3 + 0xe) + -1;
+      linkedTexture = M<SInt32>(textureBytes + 0x54);
+      M<UInt32>(M<SInt32>(linkedTexture + 0x14) + 8) = stamp;
+      M<SInt16>(linkedTexture + 0xe) = M<SInt16>(linkedTexture + 0xe) + -1;
       return;
     }
     if (kind == 0x0) {
-      piVar4 = M<SInt32 *>(textureBytes + 0x50);
-      if (piVar4 == (SInt32 *)0x0) {
+      backingDescriptor = M<SInt32 *>(textureBytes + 0x50);
+      if (backingDescriptor == (SInt32 *)0x0) {
         return;
       }
-      VCALL(*piVar4, 0x5b4)(piVar4,stamp,3);
-      VCALL(*piVar4, 0x5bc)(piVar4,3);
+      VCALL(*backingDescriptor, 0x5b4)(backingDescriptor,stamp,3);
+      VCALL(*backingDescriptor, 0x5bc)(backingDescriptor,3);
       return;
     }
     if (kind != 0x1) {

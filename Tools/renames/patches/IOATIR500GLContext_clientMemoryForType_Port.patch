@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500GLContext_clientMemoryForType_Port.cpp	2026-10-17 20:36:32.241425086 -0700
-+++ b/Sources/IOATIR500GLContext_clientMemoryForType_Port.cpp	2026-10-17 20:36:32.242807380 -0700
+--- a/Sources/IOATIR500GLContext_clientMemoryForType_Port.cpp	2026-10-20 09:39:01.608325773 -0700
++++ b/Sources/IOATIR500GLContext_clientMemoryForType_Port.cpp	2026-10-20 09:39:01.609766086 -0700
 @@ -33,6 +33,8 @@
  extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
  
@@ -9,3 +9,26 @@
  /* real addr 0xa160 */
  IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
+@@ -60,14 +62,8 @@
+   int allocStatus;
+   int pageSize;
+   UInt32 surfaceBits;   /* the shipped code passes convert_surface_bits' whole result on (no byte truncation) */
+-  int *piVar5;
+-  UInt32 uVar6;
+-  unsigned int uVar8;
+   unsigned int swapArg;
+   unsigned int allocatedMask;
+-  int iVar9;
+-  int iVar10;
+-  unsigned int uVar11;
+   unsigned int swapRequest;
+   unsigned int flipPanel;
+   unsigned int pendingSubmits;
+@@ -75,7 +71,6 @@
+   UInt8 *accel;
+   UInt8 *surface;
+   UInt8 *textureSlot;
+-  unsigned int uVar15;
+   unsigned int panel;
+   unsigned int retryCount;
+   int *ringSlot;

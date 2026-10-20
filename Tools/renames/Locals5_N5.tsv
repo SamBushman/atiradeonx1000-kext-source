@@ -1,0 +1,244 @@
+# N5: GL context locals (relaxed gate: difftest parity, not byte-identical)
+#!use-decl: end-drop
+use	ATIR500GLContext::load_texture	uVar24	faceCount	CONFIRMED	header byte 0x34: number of faces/slices whose dirty and loaded bit words are walked	^\s*uVar24\ =\ \(UInt32\)M<UInt8>\(header\ \+\ 0x34\);$	^\s*uVar24\ =\ 0;$
+use	ATIR500GLContext::load_texture	uVar24	samplePitch	INFERRED	surface pitch (+0x14) divided by the multisample count in flags bits 20-23	^\s*uVar24\ =\ 0;$	^\s*uVar24\ =\ recordIndex\ \+\ 2;$
+use	ATIR500GLContext::load_texture	uVar24	totalWords	CONFIRMED	packet word count including the 2-word address packet; later rounded up to even	^\s*uVar24\ =\ recordIndex\ \+\ 2;$	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$
+use	ATIR500GLContext::load_texture	uVar24	faceCount	CONFIRMED	header byte 0x34 (still the face count in the tiled path)	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$#3	^\s*uVar24\ =\ hwInfo\[2\];$
+use	ATIR500GLContext::load_texture	uVar24	totalWords	CONFIRMED	hwInfo[2]: packet word count of the tiled path	^\s*uVar24\ =\ hwInfo\[2\];$	-
+use	ATIR500GLContext::load_texture	uVar25	firstLevel	CONFIRMED	header byte 0x17: first mip level	^\s*uVar25\ =\ \(UInt32\)M<UInt8>\(header\ \+\ 0x17\);$	^\s*uVar25\ =\ 0x20\ /\ M<UInt16>\(currentSurfaceBuffer\ \+\ 0x16\);$
+use	ATIR500GLContext::load_texture	uVar25	pitchPixels	INFERRED	max(32 / bytesPerPixel, samplePitch): pitch in pixels, shifted into the pitch field of the address word	^\s*uVar25\ =\ 0x20\ /\ M<UInt16>\(currentSurfaceBuffer\ \+\ 0x16\);$	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$
+use	ATIR500GLContext::load_texture	uVar25	firstLevel	CONFIRMED	header byte 0x17: first mip level	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$#3	^\s*uVar25\ =\ uVar24;$
+use	ATIR500GLContext::load_texture	uVar25	paddedWords	CONFIRMED	totalWords rounded up to even before submit_buffer	^\s*uVar25\ =\ uVar24;$#2	-
+use	ATIR500GLContext::load_texture	lastLevel	macroTileFlag	INFERRED	0x80000000 when surface byte 0x38 >= 2, or'd into the address word	^\s*lastLevel\ =\ 0x80000000;$	^\s*goto\ LAB_00029cb4;$
+use	ATIR500GLContext::load_texture	uVar20	faceIndex	CONFIRMED	face loop counter of the dirty-bit scan	^\s*uVar20\ =\ 0;$	^\s*if\ \(!bVar4\)\ \{$
+use	ATIR500GLContext::load_texture	uVar20	faceIndex	CONFIRMED	face loop counter of the record writer	^\s*uVar20\ =\ 0;$#2	^\s*recordIndex\ =\ \*hwInfo;$
+use	ATIR500GLContext::load_texture	uVar20	blockShift	INFERRED	hwInfo byte 0x1a: shift applied to the level dimensions and tile sizes	^\s*uVar20\ =\ \(UInt32\)M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1a\);$	^\s*uVar20\ =\ \(UInt32\)hwInfo\[3\]\ >>\ \(uVar20\ \&\ 0x3f\);$
+use	ATIR500GLContext::load_texture	uVar20	blockShift	INFERRED	right-hand side: the shift applied to hwInfo[3]	^\s*uVar20\ =\ \(UInt32\)hwInfo\[3\]\ >>\ \(uVar20\ \&\ 0x3f\);$	^\s*if\ \(uVar25\ <=\ lastLevel\)\ \{$	2
+use	ATIR500GLContext::load_texture	uVar20	curWidth	INFERRED	hwInfo[3] shifted: the current level's width, halved per level	^\s*uVar20\ =\ \(UInt32\)hwInfo\[3\]\ >>\ \(uVar20\ \&\ 0x3f\);$	^\s*uVar20\ =\ uVar29\ >>\ 1;$
+use	ATIR500GLContext::load_texture	uVar20	halfHeight	INFERRED	levelHeight >> 1, compared against minHeight	^\s*uVar20\ =\ uVar29\ >>\ 1;$	^\s*uVar20\ =\ uVar21;$
+use	ATIR500GLContext::load_texture	uVar20	curWidth	INFERRED	max(minWidth, halfWidth): next level's width	^\s*uVar20\ =\ uVar21;$	^\s*uVar20\ =\ \(UInt32\)M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1a\);$
+use	ATIR500GLContext::load_texture	uVar20	blockShift	INFERRED	reloaded from hwInfo byte 0x1a for the next face	^\s*uVar20\ =\ \(UInt32\)M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1a\);$#4	^\s*uVar24\ =\ hwInfo\[2\];$
+use	ATIR500GLContext::load_texture	uVar23	minDim	INFERRED	max(1 << blockLog2, levelDim): minimum extent compared against the tile size	^\s*uVar23\ =\ 1\ <<\ iVar5;$	^\s*uVar23\ =\ uVar20\ >>\ 1;$
+use	ATIR500GLContext::load_texture	uVar23	halfWidth	INFERRED	curWidth >> 1	^\s*uVar23\ =\ uVar20\ >>\ 1;$	-
+use	ATIR500GLContext::load_texture	uVar18	levelIndex	CONFIRMED	level loop counter firstLevel..lastLevel	^\s*uVar18\ =\ uVar25;$	^\s*if\ \(!bVar4\)\ \{$
+use	ATIR500GLContext::load_texture	uVar18	levelIndex	CONFIRMED	level loop counter firstLevel..lastLevel	^\s*uVar18\ =\ uVar25;$#2	^\s*\}$#5
+use	ATIR500GLContext::load_texture	uVar18	minHeight	INFERRED	0x20 >> blockShift: lower bound of the halved level height	^\s*uVar18\ =\ 0x20\ >>\ \(uVar20\ \&\ 0x3f\);$	^\s*LAB_00029cb4:$
+use	ATIR500GLContext::load_texture	uVar14	sliceCount	INFERRED	u16 at level record +0x22 (hwInfo+0x42): packets written for this level, at least 1	^\s*uVar14\ =\ \(UInt32\)M<UInt16>\(\(SInt32\)hwInfo\ \+\ iVar5\ \*\ 0x20\ \+\ 0x42\);$	^\s*\}$#5
+use	ATIR500GLContext::load_texture	uVar14	tileFace	CONFIRMED	face loop counter of the tiled path	^\s*uVar14\ =\ 0;$	^\s*uVar24\ =\ hwInfo\[2\];$
+use	ATIR500GLContext::load_texture	uVar21	slotIndex	INFERRED	u16 at level record +0x00: index of the level's first packet in record[]	^\s*uVar21\ =\ \(UInt32\)M<UInt16>\(hwInfo\ \+\ iVar5\ \*\ 8\ \+\ 0x10\);$	^\s*\}$#5
+use	ATIR500GLContext::load_texture	uVar21	minWidth	INFERRED	1 << (tileSizeLog2 - blockShift): lower bound of the halved level width	^\s*uVar21\ =\ 1\ <<\ \(iVar8\ \-\ uVar20\ \&\ 0x3f\);$	^\s*LAB_00029cb4:$
+use	ATIR500GLContext::load_texture	iVar5	levelRecord	CONFIRMED	face * 13 + level: index of the level record in hwInfo (8 words each)	^\s*iVar5\ =\ uVar20\ \*\ 0xd\ \+\ uVar18;$	^\s*\}$#5
+use	ATIR500GLContext::load_texture	iVar5	blockLog2	INFERRED	0, 1 or 2 chosen from the tile mode and blockShift: log2 of the minimum extent	^\s*iVar5\ =\ 2;$	-
+use	ATIR500GLContext::load_texture	iVar8	faceBitsOffset	CONFIRMED	face * 2: byte offset of the face's dirty/loaded words in the header	^\s*iVar8\ =\ uVar20\ <<\ 1;$	^\s*iVar8\ =\ iVar8\ \+\ iVar32;$
+use	ATIR500GLContext::load_texture	iVar8	faceBitsOffset	CONFIRMED	right-hand side: the byte offset added to the header base	^\s*iVar8\ =\ iVar8\ \+\ iVar32;$	^\s*uVar20\ =\ uVar20\ \+\ 1;$	2
+use	ATIR500GLContext::load_texture	iVar8	faceBits	CONFIRMED	header + face * 2: the face's dirty (+0x1c) and loaded (+0x28) words	^\s*iVar8\ =\ iVar8\ \+\ iVar32;$	^\s*recordIndex\ =\ \*hwInfo;$
+use	ATIR500GLContext::load_texture	iVar8	negTileMode	INFERRED	minus the tile mode (header byte 0x15 >> 3 & 3)	^\s*iVar8\ =\ \-\(bVar1\ \&\ 3\);$	^\s*iVar5\ =\ 2;$
+use	ATIR500GLContext::load_texture	iVar8	tileSizeLog2	INFERRED	3, 4 or 5 chosen with blockLog2 from the tile mode	^\s*iVar5\ =\ 2;$	^\s*if\ \(iVar8\ <\ 0\)\ \{$
+use	ATIR500GLContext::load_texture	iVar8	negTileMode	INFERRED	minus the tile mode (header byte 0x15 >> 3 & 3)	^\s*if\ \(iVar8\ <\ 0\)\ \{$	^\s*uVar20\ =\ \(UInt32\)M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1a\);$
+use	ATIR500GLContext::load_texture	iVar8	tileSizeLog2	INFERRED	3, 4 or 5 chosen with blockLog2 from the tile mode	^\s*uVar20\ =\ \(UInt32\)M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1a\);$#2	^\s*while\(\ true\ \)\ \{$
+use	ATIR500GLContext::load_texture	iVar8	levelRecordOffset	CONFIRMED	levelRecord * 0x20: byte offset of the level record in hwInfo	^\s*while\(\ true\ \)\ \{$#2	-
+use	ATIR500GLContext::load_texture	iVar11	gartLevelOffset	INFERRED	hwInfo level record word 0x11: the level's GART offset, advanced by the slice stride	^\s*iVar11\ =\ hwInfo\[iVar5\ \*\ 8\ \+\ 0x11\];$	^\s*\}$#5
+use	ATIR500GLContext::load_texture	iVar11	levelRecord	CONFIRMED	face * 13 + level: index of the level record in hwInfo	^\s*iVar11\ =\ uVar14\ \*\ 0xd\ \+\ uVar31;$	^\s*uVar23\ =\ uVar20\ >>\ 1;$
+use	ATIR500GLContext::load_texture	iVar12	gartSlot	INFERRED	slotIndex + 4: the packet word that takes the GART address	^\s*iVar12\ =\ uVar21\ \+\ 4;$	^\s*\}$#5
+use	ATIR500GLContext::load_texture	iVar12	bigTileFlag	INFERRED	1 when both the width and the minimum extent reach the large-tile threshold; stored into bit 2 of tileFlags	^\s*if\ \(\(uVar20\ <\ uVar21\ <<\ 3\)\ \|\|\ \(iVar12\ =\ 1,\ uVar23\ <\ \(UInt32\)\(1\ <<\ iVar5\ \+\ 3\)\)\)\ \{$	^\s*\}$#2
+use	ATIR500GLContext::load_texture	iVar12	textureLevelCursor	INFERRED	hwInfo level record word 0x12: texture-memory offset of the slice, advanced by the slice stride	^\s*iVar12\ =\ hwInfo\[iVar11\ \*\ 8\ \+\ 0x12\];$	^\s*uVar23\ =\ uVar20\ >>\ 1;$
+use	ATIR500GLContext::load_texture	iVar13	offsetSlot	INFERRED	slotIndex + 7: the packet word that takes the texture offset	^\s*iVar13\ =\ uVar21\ \+\ 7;$	^\s*\}$#5
+use	ATIR500GLContext::load_texture	iVar13	sliceIndex	CONFIRMED	slice counter against the level record's slice count	^\s*iVar13\ =\ 0;$	^\s*uVar23\ =\ uVar20\ >>\ 1;$
+use	ATIR500GLContext::load_texture	iVar32	headerBase	CONFIRMED	texture header pointer (textureBytes+0x14)	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$	^\s*uVar20\ =\ uVar20\ \+\ 1;$
+use	ATIR500GLContext::load_texture	iVar32	faceHeader	CONFIRMED	texture header pointer, advanced to the face's bit words	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$#3	^\s*iVar32\ =\ hwInfo\[iVar11\ \*\ 8\ \+\ 0x11\];$
+use	ATIR500GLContext::load_texture	iVar32	gartLevelCursor	INFERRED	hwInfo level record word 0x11: the level's GART offset, advanced by the slice stride	^\s*iVar32\ =\ hwInfo\[iVar11\ \*\ 8\ \+\ 0x11\];$	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$
+use	ATIR500GLContext::load_texture	iVar32	faceHeader	CONFIRMED	texture header pointer, reloaded for the next level	^\s*iVar32\ =\ M<SInt32>\(textureBytes\ \+\ 0x14\);$#4	^\s*LAB_00029cb4:$
+use	ATIR500GLContext::load_texture	bVar1	tileModeBits	INFERRED	header byte 0x15 >> 3: tile mode in bits 0-1	^\s*bVar1\ =\ M<UInt8>\(iVar32\ \+\ 0x15\)\ >>\ 3;$	^\s*bVar1\ =\ M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1b\);$
+use	ATIR500GLContext::load_texture	bVar1	swizzleBits	INFERRED	hwInfo byte 0x1b; its low two bits are written into the address word	^\s*bVar1\ =\ M<UInt8>\(\(SInt32\)hwInfo\ \+\ 0x1b\);$	-
+use	ATIR500GLContext::load_texture	bVar4	needsLoad	CONFIRMED	true when some face has a level that is dirty and not yet loaded	^\s*bVar4\ =\ false;$	^\s*return;$
+use	ATIR500GLContext::load_texture	bVar4	useSmallBlock	INFERRED	selects blockLog2 2/tileSizeLog2 3 over 1/4	^\s*bVar4\ =\ false;$#2	^\s*if\ \(iVar8\ <\ 0\)\ \{$
+use	ATIR500GLContext::load_texture	uVar9	submitStamp	INFERRED	result of submit_buffer, stored at header+0xc (the stamp the texture waits on)	-	-
+use	ATIR500GLContext::load_texture	uVar19	levelDim	INFERRED	u16 at hwInfo+0x16 shifted right by the level: that level's size in the tiling decision	-	-
+use	ATIR500GLContext::load_texture	uVar28	tileFlags	INFERRED	texture header byte 0x15; bit 2 is rewritten per level, bits 3-4 select the tile mode	-	-
+use	ATIR500GLContext::load_texture	uVar29	levelHeight	INFERRED	hwInfo[4] (height) halved per level, floored at minHeight	-	-
+use	ATIR500GLContext::load_texture	uVar31	mipIndex	INFERRED	level loop counter of the second (tiled) path, firstLevel..lastLevel	-	-
+use	ATIR500GLContext::load_texture	iVar15	textureLevelOffset	INFERRED	hwInfo level record word 0x12: texture-memory offset of the slice, advanced by the slice stride	-	-
+use	ATIR500GLContext::submit_context_buffer	pAVar15	slotCursor	CONFIRMED	walks the texture slot pointers (self+0x2a4, 4 bytes apart)	^\s*pAVar15\ =\ self;$	^\s*if\ \(\(M<UInt32>\(M<SInt32>\(self\ \+\ (?:0x108|264)\)\ \+\ 0x1c\)\ \&\ 1\)\ ==\ 0\)\ \{$
+use	ATIR500GLContext::submit_context_buffer	pAVar15	ringEntry	CONFIRMED	self + contextBufferRingIndex * 0x18: the ring entry whose +0x10c transfer buffer, +0x11c stamp and +0x120 buffer are used	^\s*pAVar15\ =\ self\ \+\ M<SInt32>\(self\ \+\ (?:0x28c|652)\)\ \*\ 0x18;$	-
+use	ATIR500GLContext::submit_context_buffer	iVar3	waited	CONFIRMED	result of the accelerator's wait method, added to the wait total	^\s*iVar3\ =\ VCALL\(\*accelerator,\ 0x54c\)\(accelerator,M<UInt32>\(pAVar15\ \+\ 0x11c\)\);$	^\s*puVar2\ =\ M<UInt32\ \*>\(self\ \+\ (?:0x108|264)\);$
+use	ATIR500GLContext::submit_context_buffer	iVar3	copyByteOffset	CONFIRMED	byte offset of the register-list copy loop	^\s*iVar3\ =\ 0;$	^\s*uVar18\ =\ uVar18\ \-\ 1;$
+use	ATIR500GLContext::submit_context_buffer	iVar3	wordsWritten	CONFIRMED	words written by WriteTextureOffset	^\s*iVar3\ =\ this\->WriteTextureOffset\(uVar10,\(UInt32\ \*\)\(puVar13\),uVar18,$	^\s*\}$
+use	ATIR500GLContext::submit_context_buffer	iVar3	endIndex	CONFIRMED	words written so far, then the index of the 0x1040 terminator packet	^\s*iVar3\ =\ this\->WriteVertexArrayOffset\(\(UInt32\ \*\)\(puVar13\),uVar18\);$	-
+use	ATIR500GLContext::submit_context_buffer	uVar9	copyTempA	CONFIRMED	header words 1 and 4 in transit	^\s*uVar9\ =\ puVar2\[1\];$	^\s*uVar18\ =\ this\->write_kernel_context_buffer_regs\(\(UInt32\ \*\)\(puVar13\),uVar18,\*puVar5,puVar5\[1\]\);$
+use	ATIR500GLContext::submit_context_buffer	uVar8	copyTempB	CONFIRMED	header words 2 and 5 in transit	^\s*uVar8\ =\ puVar2\[2\];$	^\s*uVar18\ =\ this\->write_kernel_context_buffer_regs\(\(UInt32\ \*\)\(puVar13\),uVar18,\*puVar5,puVar5\[1\]\);$
+use	ATIR500GLContext::submit_context_buffer	uVar6	copyTempC	CONFIRMED	header words 3 and 6 in transit	^\s*uVar6\ =\ puVar2\[3\];$	^\s*puVar5\ =\ M<UInt32\ \*>\(self\ \+\ (?:0x108|264)\);$
+use	ATIR500GLContext::submit_context_buffer	uVar6	submitStamp	CONFIRMED	submit_buffer's result, stored in the ring entry and lastSubmitStamp	^\s*uVar6\ =\ \(\(ATIRadeonX1000\ \*\)\(M<UInt8\ \*>\(self\ \+\ (?:0xc8|200)\)\)\)\->submit_buffer\(\(UInt32\ \*\)\(M<SInt32>\(pAVar15\ \+\ 0x120\)\ \+\ 0x20\),$	-
+use	ATIR500GLContext::submit_context_buffer	uVar10	regWordCount	CONFIRMED	header word 5: number of register words to copy	^\s*uVar10\ =\ puVar5\[5\];$	^\s*uVar10\ =\ 0;$
+use	ATIR500GLContext::submit_context_buffer	uVar10	slotIndex	CONFIRMED	texture slot counter of the WriteTextureOffset loop	^\s*uVar10\ =\ 0;$	-
+use	ATIR500GLContext::submit_context_buffer	uVar18	regsLeft	CONFIRMED	register words still to copy, restored to the full count before the call	^\s*uVar18\ =\ 0;$	^\s*uVar18\ =\ this\->write_kernel_context_buffer_regs\(\(UInt32\ \*\)\(puVar13\),uVar18,\*puVar5,puVar5\[1\]\);$
+use	ATIR500GLContext::submit_context_buffer	uVar18	regsLeft	CONFIRMED	register word count passed to write_kernel_context_buffer_regs	^\s*uVar18\ =\ this\->write_kernel_context_buffer_regs\(\(UInt32\ \*\)\(puVar13\),uVar18,\*puVar5,puVar5\[1\]\);$	^\s*pAVar17\ =\ self;$	2
+use	ATIR500GLContext::submit_context_buffer	uVar18	wordCount	CONFIRMED	words built so far in commandWords	^\s*uVar18\ =\ this\->write_kernel_context_buffer_regs\(\(UInt32\ \*\)\(puVar13\),uVar18,\*puVar5,puVar5\[1\]\);$	-
+use	ATIR500GLContext::submit_context_buffer	uVar12	ringIndex	CONFIRMED	next contextBufferRingIndex, wrapped to 16	^\s*uVar12\ =\ M<SInt32>\(self\ \+\ (?:0x28c|652)\)\ \+\ 1U\ \&\ 0xf;$	^\s*iVar16\ =\ accelerator\[0x1e0\];$
+use	ATIR500GLContext::submit_context_buffer	uVar12	paddedWords	CONFIRMED	unpaddedWords rounded up to even, stored at buffer +0x14	^\s*uVar12\ =\ uVar11;$	^\s*M<UInt32>\(M<SInt32>\(self\ \+\ (?:0x108|264)\)\ \+\ 0x1c\)\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0x108|264)\)\ \+\ 0x1c\)\ \&\ 0xfffffffe$
+use	ATIR500GLContext::submit_context_buffer	pVVar4	texture	INFERRED	the VendorTextureBuffer in texture slot self+0x2a4+4k	-	-
+use	ATIR500GLContext::submit_context_buffer	puVar2	headerForCopy	INFERRED	contextBufferHeader as read for the 8-word header copy	-	-
+use	ATIR500GLContext::submit_context_buffer	puVar5	headerForRegs	INFERRED	contextBufferHeader as re-read for the register list copy	-	-
+use	ATIR500GLContext::submit_context_buffer	puVar7	destHeader	INFERRED	ring entry +0x120: the buffer the header is copied into	-	-
+use	ATIR500GLContext::submit_context_buffer	puVar13	commandWords	INFERRED	destHeader + 0x20: where the commands are built	-	-
+use	ATIR500GLContext::submit_context_buffer	iVar16	waitTotal	INFERRED	accelerator word 0x1e0, the wait-time total that the wait is added to	-	-
+use	ATIR500GLContext::submit_context_buffer	bVar1	notLastSlot	INFERRED	slot index != 0xf: more texture slots to write	-	-
+use	ATIR500GLContext::submit_context_buffer	uVar11	unpaddedWords	INFERRED	word count after the 0x1040 terminator packet, before padding to even	-	-
+use	ATIR500GLContext::submit_context_buffer	pAVar17	writeCursor	INFERRED	cursor over the texture slot pointers in the WriteTextureOffset loop	-	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar14	mipLevel	CONFIRMED	self mipLevel: selects the entry of the color buffer's per-level offset table	^\s*uVar14\ =\ M<UInt32>\(self\ \+\ (?:0x29c|668)\);$	^\s*uVar14\ =\ 0x20\ /\ M<UInt16>\(colorBuffer\ \+\ 0x16\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar14	minPitch	INFERRED	32 / bytesPerPixel: lower bound of the pitch in pixels	^\s*uVar14\ =\ 0x20\ /\ M<UInt16>\(colorBuffer\ \+\ 0x16\);$	^\s*formatIndexCopy\ =\ M<UInt8>\(colorBuffer\ \+\ 0x3a\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar14	sampledPitch	INFERRED	buffer pitch divided by the multisample count (flags bits 20-23)	^\s*uVar14\ =\ 0;$	^\s*formatIndexCopy\ =\ colorRecord\[0x3a\];$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar14	fmtField1	INFERRED	format table word >> 7 & 0x300, merged into register word +0x228	^\s*uVar14\ =\ FormatTableLookup_0x0004d2e0\(iVar8\)\ >>\ 7\ \&\ 0x300;$	^\s*uVar10\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0xb74\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar11	pitchPixels	INFERRED	pitch in pixels (at least minPitch), packed into the pitch field of +0x270	^\s*uVar11\ =\ 0;$	^\s*uVar11\ =\ FormatTableLookup_0x0004d2e0\(iVar8\)\ >>\ 0x11\ \&\ 0x1f;$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar11	fmtField0	INFERRED	format table word >> 0x11 & 0x1f, merged into register word +0x228	^\s*uVar11\ =\ FormatTableLookup_0x0004d2e0\(iVar8\)\ >>\ 0x11\ \&\ 0x1f;$	^\s*uVar10\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0xb74\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar11	slot0Offset	CONFIRMED	GetTextureOffset of the texture in slot 0	^\s*uVar11\ =\ this\->GetTextureOffset\(\(VendorTextureBuffer\ \*\)\(pVVar12\),false\);$	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar6	fmtField2	INFERRED	format table word >> 3 & 0xc00, merged into register word +0x228	^\s*uVar6\ =\ FormatTableLookup_0x0004d2e0\(iVar8\)\ >>\ 3\ \&\ 0xc00;$	^\s*uVar10\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0xb74\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar7	fmtField3	INFERRED	format table word & 0x1800, shifted, merged into register word +0x228	^\s*uVar7\ =\ \(FormatTableLookup_0x0004d2e0\(iVar8\)\ \&\ 0x1800\)\ <<\ 1;$	^\s*uVar10\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0xb74\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar9	oldFormatWord	CONFIRMED	register word +0x228 as it was before the format fields are merged in	-	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	iVar8	sliceOffset	CONFIRMED	color buffer per-level offset table entry (+0x40), the start of the current level	^\s*iVar8\ =\ M<SInt32>\(iVar15\ \+\ 0x40\);$	^\s*iVar8\ =\ \(UInt32\)\(UInt8\)formatIndex\ \*\ 0x1c;$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	iVar8	formatTableOffset	CONFIRMED	formatIndex * 0x1c: the entry of the format table	^\s*iVar8\ =\ \(UInt32\)\(UInt8\)formatIndex\ \*\ 0x1c;$	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	iVar15	mipOffsetEntry	CONFIRMED	colorBuffer + mipLevel * 4: the entry in the per-level offset table	-	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar10	stateWord	INFERRED	accelerator word 0xb74, stored at +0x2c	^\s*uVar10\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0xb74\);$	^\s*uVar10\ =\ this\->compute_sc_hyperz_en\(M<UInt32>\(packetBytes\ \+\ 0x48\)\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar10	hyperzEnable	CONFIRMED	compute_sc_hyperz_en result, stored at +0x48	^\s*uVar10\ =\ this\->compute_sc_hyperz_en\(M<UInt32>\(packetBytes\ \+\ 0x48\)\);$	^\s*uVar10\ =\ this\->compute_zb_bw_cntl\(M<UInt32>\(packetBytes\ \+\ 0x50\)\);$
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	uVar10	zbBwCntl	CONFIRMED	compute_zb_bw_cntl result, stored at +0x50	^\s*uVar10\ =\ this\->compute_zb_bw_cntl\(M<UInt32>\(packetBytes\ \+\ 0x50\)\);$	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	pVVar12	slot0Texture	CONFIRMED	texture in slot 0 (textureSlots)	-	-
+use	ATIR500GLContext::write_r500_3d_blit_state_packet	bVar5	textureFormatByte	INFERRED	byte 0x15 of the texture header; low 5 bits go into +0x280	-	-
+use	ATIR500GLContext::build_surface_from_texture	bVar1	tileBits	INFERRED	texture header byte 0x15 >> 2: tiling bits copied to surface byte 0x38	-	-
+use	ATIR500GLContext::build_surface_from_texture	AVar2	tilingMode	CONFIRMED	tileBits & 7, stored at surface byte 0x38	-	-
+use	ATIR500GLContext::build_surface_from_texture	uVar3	textureWord4c	INFERRED	texture +0x4c, copied to surface +0xc	-	-
+use	ATIR500GLContext::build_surface_from_texture	uVar5	textureWord40	INFERRED	texture +0x40, copied to surface +0x0	-	-
+use	ATIR500GLContext::build_surface_from_texture	uVar9	textureWord44	INFERRED	texture +0x44, copied to surface +0x4	-	-
+use	ATIR500GLContext::build_surface_from_texture	uVar10	formatInfo	INFERRED	format table word: bits 8-9 shift the block size, bits 12-14 give bytes-per-pixel log2	^\s*uVar10\ =\ FormatTableLookup_0x0004d2dc\(formatByteOffset\);$	^\s*uVar10\ =\ uVar6\ \&\ 0xffff;$
+use	ATIR500GLContext::build_surface_from_texture	uVar10	bytesPerPixelMasked	CONFIRMED	bytesPerPixel & 0xffff; zero selects the pitch fallback	^\s*uVar10\ =\ uVar6\ \&\ 0xffff;$	-
+use	ATIR500GLContext::build_surface_from_texture	uVar6	bytesPerPixel	CONFIRMED	1 << (formatInfo >> 12 & 7), stored at surface +0x16	-	-
+use	ATIR500GLContext::build_surface_from_texture	uVar7	bytesPerPixel16	CONFIRMED	bytesPerPixel as a 16-bit value, stored at surface +0x16 (and +0x14 when it is zero)	-	-
+use	ATIR500GLContext::build_surface_from_texture	iVar8	blockRows	INFERRED	1 or 1 << block shift: minimum row count for the tiled layout	-	-
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar4	halfPitch	INFERRED	(colorPitchPixels & 0x3ffe) >> 1: the pitch in 2-pixel units, used for the clear address and the extent word	-	-
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	iVar10	mipEntry	CONFIRMED	colorBuffer + mipLevel * 4: entry of the per-level offset table	^\s*iVar10\ =\ uVar16\ \*\ 4\ \+\ colorBuffer;$	^\s*gpuBaseAddress\ =\ M<SInt32>\(colorBuffer\ \+\ 8\);$	1,2,4
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	iVar10	nextMipOffset	CONFIRMED	the next level's offset (entry +0x44); with mipOffset it gives the slice offset interpolation	^\s*iVar10\ =\ M<SInt32>\(iVar10\ \+\ 0x44\);$	-
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar12	samplePitch	INFERRED	color pitch divided by the multisample count, shifted by the level	^\s*uVar12\ =\ 0;$	^\s*uVar12\ =\ FormatTableLookup_0x0004d2dc\(formatByteOffset\);$
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar12	formatInfo	INFERRED	format table word (FormatTableLookup_0x0004d2dc)	^\s*uVar12\ =\ FormatTableLookup_0x0004d2dc\(formatByteOffset\);$	^\s*uVar15\ =\ uVar15\ >>\ 1\ \&\ 0x1e00000;$	1,3
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar12	formatBitsA	INFERRED	(formatInfo & 0xc00) << 9: merged into the color pitch word	^\s*uVar12\ =\ \(uVar12\ \&\ 0xc00\)\ <<\ 9;$	-
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar14	tileRows16	INFERRED	level height + 15, or 16 for a zero height; aligned down to 16 for the clear extent	^\s*uVar14\ =\ 0x10;$	^\s*uVar14\ =\ 0x20\ /\ M<UInt16>\(depthBuffer\ \+\ 0x16\);$
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar14	depthMinPitch	INFERRED	32 / depth bytesPerPixel, at least the depth pitch	^\s*uVar14\ =\ 0x20\ /\ M<UInt16>\(depthBuffer\ \+\ 0x16\);$	-
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar15	formatInfoB	INFERRED	format table word (FormatTableLookup_0x0004d2e0)	^\s*uVar15\ =\ FormatTableLookup_0x0004d2e0\(formatByteOffset\);$	^\s*uVar4\ =\ \(uVar16\ \&\ 0x3ffe\)\ >>\ 1;$	1,3
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar15	formatBitsB	INFERRED	(formatInfoB >> 1) & 0x1e00000: merged into the color pitch word	^\s*uVar15\ =\ uVar15\ >>\ 1\ \&\ 0x1e00000;$	-
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar16	mipLevel	CONFIRMED	self mipLevel	^\s*uVar16\ =\ M<UInt32>\(self\ \+\ (?:0x29c|668)\);$	^\s*uVar16\ =\ 0x20\ /\ M<UInt16>\(colorBuffer\ \+\ 0x16\);$
+use	ATIR500GLContext::process_kATIGLStreamFastClearColor	uVar16	pitchPixels	INFERRED	32 / bytesPerPixel, at least samplePitch: the color pitch in pixels	^\s*uVar16\ =\ 0x20\ /\ M<UInt16>\(colorBuffer\ \+\ 0x16\);$	-
+use	IOATIR500GLContext::read_buffer	piVar5	surfaceObject	CONFIRMED	the bound surface, whose +0x5e8 method copies the buffer	^\s*piVar5\ =\ M<SInt32\ \*>\(param_1\ \+\ (?:0x290|656)\);$	^\s*piVar5\ =\ M<SInt32\ \*>\(param_1\ \+\ (?:0xc8|200)\);$
+use	IOATIR500GLContext::read_buffer	piVar5	acceleratorObject	CONFIRMED	the accelerator, whose +0x55c method waits on the surface stamp	^\s*piVar5\ =\ M<SInt32\ \*>\(param_1\ \+\ (?:0xc8|200)\);$	-
+use	IOATIR500GLContext::read_buffer	uVar6	attachmentMask	INFERRED	0x40000000, or the surface-flags bit of the source buffer's index	^\s*uVar6\ =\ 0x40000000;$	^\s*uVar6\ =\ destAddress\ \+\ iVar7;$
+use	IOATIR500GLContext::read_buffer	uVar6	userAddress	CONFIRMED	destAddress + the byte offset of the first pixel	^\s*uVar6\ =\ destAddress\ \+\ iVar7;$	-
+use	IOATIR500GLContext::read_buffer	iVar7	destOffset	CONFIRMED	byte offset into the destination of the first pixel read back (clipped x/y)	-	-
+use	IOATIR500GLContext::read_buffer	iVar9	bottomEdge	CONFIRMED	y + height before clipping	-	-
+use	IOATIR500GLContext::read_buffer	pIVar1	attachmentSurface	INFERRED	the surface that owns the attachment: the bound surface or its panel's surface	-	-
+use	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	iVar1	hzAlignment	INFERRED	0x20, or accelerator word 0xb98 << 4: the alignment of the pitch	-	-
+use	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	iVar4	alignedPitch	INFERRED	pitch rounded up to hzAlignment, stored at +0x18	-	-
+use	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	uVar2	depthPitch	INFERRED	32 / depth bytesPerPixel, at least samplePitch	-	-
+use	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	uVar3	hzBlockOffset	CONFIRMED	HZMEM_GetBlockOffset of the depth buffer, stored at +0x20	-	-
+use	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	uVar5	samplePitch	INFERRED	depth pitch divided by the multisample count (flags bits 20-23)	-	-
+use	IOATIR500GLContext::get_config	iVar2	queryResult	CONFIRMED	result of the accelerator's +0x540 buffer query; zero means this buffer fills the info record	^\s*iVar2\ =\ VCALL\(\*M<SInt32\ \*>\(self\ \+\ (?:0xc8|200)\),\ 0x540\)$	^\s*uVar3\ =\ 0;$
+use	IOATIR500GLContext::get_config	iVar2	infoByteOffset	CONFIRMED	lastIndex * 16: byte offset of the info record handed to +0x544	^\s*iVar2\ =\ iVar6\ <<\ 4;$	-
+use	IOATIR500GLContext::get_config	uVar3	out1Value	CONFIRMED	result of the accelerator's +0x548 call, stored through out1	-	-
+use	IOATIR500GLContext::get_config	iVar5	walkIndex	CONFIRMED	counts down the buffer indexes from lastIndex	-	-
+use	IOATIR500GLContext::get_config	iVar6	accelerator	CONFIRMED	the accelerator (while waiting for the busy flag)	^\s*iVar6\ =\ M<SInt32>\(self\ \+\ (?:0xc8|200)\);$	^\s*\*out2\ =\ M<UInt32>\(M<SInt32>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0x9c\);$
+use	IOATIR500GLContext::get_config	iVar6	recordOffset	CONFIRMED	byte offset of the buffer record in the bound surface (0x78 each)	^\s*iVar6\ =\ 0;$	^\s*iVar6\ =\ bufferIndex\ \-\ 1;$
+use	IOATIR500GLContext::get_config	iVar6	lastIndex	INFERRED	index of the last buffer record that was queried	^\s*iVar6\ =\ bufferIndex\ \-\ 1;$	^\s*iVar6\ =\ iVar6\ \+\ 0x78;$
+use	IOATIR500GLContext::get_config	iVar6	recordOffset	CONFIRMED	byte offset of the buffer record in the bound surface (0x78 each)	^\s*iVar6\ =\ iVar6\ \+\ 0x78;$	^\s*info\ =\ info\ \+\ 4;$
+use	IOATIR500GLContext::get_config	iVar6	lastIndex	INFERRED	index of the last buffer record that was queried (0x16 when all were)	^\s*iVar6\ =\ 0x16;$	-
+use	IOATIR500GLContext::get_surface_size	uVar1	outXValue	INFERRED	stored through outX	-	-
+use	IOATIR500GLContext::get_surface_size	uVar2	outHValue	INFERRED	stored through outH	-	-
+use	IOATIR500GLContext::get_surface_size	uVar5	outWValue	INFERRED	stored through outW	-	-
+use	IOATIR500GLContext::get_surface_size	uVar6	outYValue	INFERRED	stored through outY	-	-
+use	ATIR500GLContext::discard_command_buffer	bVar1	flag80Clear	CONFIRMED	surfaceFlagsBitmask bit 0x80 is clear	-	-
+use	ATIR500GLContext::discard_command_buffer	piVar5	refCountWord	CONFIRMED	texture header + 0x10, the shared reference count	-	-
+use	ATIR500GLContext::discard_command_buffer	iVar11	oldRefCount	CONFIRMED	reference count before the decrement; 1 means this was the last reference	^\s*iVar11\ =\ atomicAddReturningOld\(\(SInt32\ \*\)piVar5,\ \-1\);$	^\s*\(\(IOATIR500Shared\ \*\)\(shared\)\)\->delete_texture\(\(VendorTextureBuffer\ \*\)boundTexture\);$
+use	ATIR500GLContext::discard_command_buffer	iVar11	slotTexture	CONFIRMED	the texture just loaded from the packet's handle in this slot	^\s*\(iVar11\ =\ M<SInt32>\(slotOffset\ \+\ \(SInt32\)\(unsigned\ long\)textures\),\ M<char>\(iVar11\ \+\ 0x20\)\ ==\ '\\a'$	-
+use	ATIR500GLContext::discard_command_buffer	uVar13	packetWord4	CONFIRMED	packet[4]: stored at texture +100 of a type-7 texture when it changes	-	-
+use	ATIR500GLContext::discard_command_buffer	bVar18	crEqualBits	INFERRED	emulated condition-register EQ bit (x == 0) << 1 of the packet word tests	-	-
+use	IOATIR500GLContext::clientMemoryForType	iVar3	allocStatus	CONFIRMED	allocCommandBuffer's result; nonzero means failure	^\s*iVar3\ =\ \(\(IOATIR500Accelerator\ \*\)\(accel\)\)\->allocCommandBuffer\(\(VendorCommandBuffer\ \*\)\(\(UInt8\ \*\)\&cmdBufBlock\[0\]\),M<UInt32>\(accel\ \+\ (?:0x5c8|1480)\)\);$	^\s*accel\ =\ M<UInt8\ \*>\(self\ \+\ (?:0xc8|200)\);$
+use	IOATIR500GLContext::clientMemoryForType	iVar3	pageSize	CONFIRMED	GH_page_size, read once at entry	-	-
+use	ATIR500GLContext::build_scissor	uVar5	mipLevel	CONFIRMED	self mipLevel (0 when rendering to a texture)	^\s*uVar5\ =\ M<UInt32>\(self\ \+\ (?:0x29c|668)\);$	^\s*uVar5\ =\ 1;$
+use	ATIR500GLContext::build_scissor	uVar5	scissorHeight	CONFIRMED	level height (at least 1): the scissor's y field	^\s*uVar5\ =\ 1;$	-
+use	ATIR500GLContext::build_scissor	uVar2	levelHeight	CONFIRMED	color buffer height >> mipLevel	^\s*uVar2\ =\ \(SInt32\)\(UInt32\)M<UInt16>\(colorBuffer\ \+\ 0x1e\)\ >>\ \(uVar5\ \&\ 0x3f\);$	^\s*uVar2\ =\ FormatTableLookup_0x0004d2dc\(\(UInt32\)\(UInt8\)colorBuffer\[0x3a\]\ \*\ 0x1c\)\ >>\ 3\ \&\ 0x1f;$
+use	ATIR500GLContext::build_scissor	uVar2	formatClass	INFERRED	format table word >> 3 & 0x1f: selects the format shift adjustment	^\s*uVar2\ =\ FormatTableLookup_0x0004d2dc\(\(UInt32\)\(UInt8\)colorBuffer\[0x3a\]\ \*\ 0x1c\)\ >>\ 3\ \&\ 0x1f;$	-
+use	ATIR500GLContext::restore_state_destroyed_by_pageoff	uVar2	packetWords	CONFIRMED	size of the built packet in words, padded to even, stored at buffer +0x14	-	-
+use	ATIR500GLContext::restore_state_destroyed_by_pageoff	uVar8	copyTempA	CONFIRMED	header template words 1 and 4 in transit	-	-
+use	ATIR500GLContext::restore_state_destroyed_by_pageoff	uVar7	copyTempB	CONFIRMED	header template words 2 and 5 in transit	-	-
+use	ATIR500GLContext::setCompatibleSurfaceMode	uVar1	bitsToMerge	CONFIRMED	the requested bits of one field of mode, merged into mergedBits when the field is still empty	-	-
+use	ATIR500GLContext::start@0x28540	iVar3	baseResult	CONFIRMED	IOATIR500GLContext::start's result	^\s*iVar3\ =\ IOATIR500GLContext::start\(provider\);$	^\s*iVar3\ =\ 6;$
+use	ATIR500GLContext::start@0x28540	iVar3	attachmentsLeft	CONFIRMED	countdown over the 6 attachment records (0x78 bytes each)	^\s*iVar3\ =\ 6;$	^\s*iVar3\ =\ 4;$
+use	ATIR500GLContext::start@0x28540	iVar3	unitsLeft	CONFIRMED	countdown over the 4 texture units	^\s*iVar3\ =\ 4;$	-
+use	ATIR500GLContext::start@0x28540	pAVar2	attachmentCursor	CONFIRMED	walks the attachment records of the context (0x78 bytes each)	^\s*pAVar2\ =\ self;$	^\s*iVar3\ =\ 4;$
+use	ATIR500GLContext::start@0x28540	pAVar2	unitCursor	CONFIRMED	walks the per-unit u16 fields (2 bytes each)	^\s*pAVar2\ =\ self;$#2	-
+use	ATIR500GLContext::start@0x28540	pAVar5	bufferCursor	CONFIRMED	walks the perUnitTextureArray records (0x78 bytes each)	-	-
+use	ATIR500GLContext::update_surface	bVar1	attachmentEligible	INFERRED	render buffer index is 1, or 0 with surface flag 0x400 clear: the attachment may be used as the color buffer	-	-
+use	ATIR500GLContext::WriteTextureOffset	uVar2	textureOffset	CONFIRMED	GetTextureOffset result, merged with the format bits into packedOffset	^\s*uVar2\ =\ this\->GetTextureOffset\(\(VendorTextureBuffer\ \*\)\(textureBytes\),false\);$	^\s*outputBuffer\[index\]\ =\ unit\ \+\ 0x1150;$
+use	ATIR500GLContext::WriteTextureOffset	uVar2	sizeWord	INFERRED	texture +0x68: bits 30-31 select the size encoding, the low 22 bits are the size in 32-byte units	^\s*uVar2\ =\ M<UInt32>\(textureBytes\ \+\ 0x68\);$	-
+use	ATIR500GLContext::WriteVertexArrayOffset	bVar11	crEqualBits	INFERRED	emulated condition-register EQ bit (vertexArrayParam == 0) << 1	-	-
+use	IOATIR500GLContext::add_texture_to_stream	iVar4	linkedTexture	INFERRED	texture +0x54: the texture this one is linked to (gets a reference and the transfer-list refresh)	-	-
+use	IOATIR500GLContext::add_texture_to_stream	iVar3	textureHeader	CONFIRMED	texture +0x14	^\s*iVar3\ =\ M<int>\(textureBytes\ \+\ 0x14\);$	^\s*iVar3\ =\ M<int>\(iVar4\ \+\ 0x34\);$
+use	IOATIR500GLContext::add_texture_to_stream	iVar3	nextNode	CONFIRMED	the list node after linkedTexture, unlinked from the transfer list	^\s*iVar3\ =\ M<int>\(iVar4\ \+\ 0x34\);$	-
+use	IOATIR500GLContext::add_texture_to_stream	piVar2	backingDescriptor	INFERRED	texture +0x50: memory descriptor released through vtable +0x5b8	-	-
+use	IOATIR500GLContext::allocAllContextBuffers	bVar1	moreBuffers	CONFIRMED	bufferIndex != 0xf: more ring entries to allocate	-	-
+use	IOATIR500GLContext::allocAllContextBuffers	iVar5	releasedCount	CONFIRMED	number of already-allocated entries released in the failure path	-	-
+use	IOATIR500GLContext::allocAllContextBuffers	pIVar7	entryCursor	CONFIRMED	walks the ring entries forward (0x18 bytes each)	^\s*pIVar7\ =\ self;$	^\s*pIVar7\ =\ self\ \+\ \(bufferIndex\ \+\ \-1\)\ \*\ 0x18\ \+\ 0x114;$
+use	IOATIR500GLContext::allocAllContextBuffers	pIVar7	unwindCursor	CONFIRMED	walks the already-allocated ring entries backward to release them	^\s*pIVar7\ =\ self\ \+\ \(bufferIndex\ \+\ \-1\)\ \*\ 0x18\ \+\ 0x114;$	^\s*M<VendorContextBufferHeader\ \*>\(pIVar7\ \+\ 0x120\)\ =\ header;$
+use	IOATIR500GLContext::allocAllContextBuffers	pIVar7	entryCursor	CONFIRMED	walks the ring entries forward (0x18 bytes each)	^\s*M<VendorContextBufferHeader\ \*>\(pIVar7\ \+\ 0x120\)\ =\ header;$	-
+use	IOATIR500GLContext::freeAllContextBuffers	bVar1	moreBuffers	CONFIRMED	bufferIndex != 0xf: more ring entries to free	-	-
+use	IOATIR500GLContext::freeAllContextBuffers	iVar2	waited	CONFIRMED	result of the accelerator's wait method, added to the wait total	-	-
+use	IOATIR500GLContext::freeAllContextBuffers	iVar5	waitTotal	CONFIRMED	accelerator word 0x1e0, the wait-time total that the wait is added to	-	-
+use	IOATIR500GLContext::freeAllContextBuffers	pIVar7	entryCursor	CONFIRMED	walks the ring entries (0x18 bytes each)	-	-
+use	IOATIR500GLContext::freeToAllocGART	bVar1	moreCandidates	CONFIRMED	freed != 0xf: more ring entries to try	-	-
+use	IOATIR500GLContext::freeToAllocGART	iVar3	freeResult	CONFIRMED	freeTransferToAllocGART's result; nonzero means enough GART was freed	-	-
+use	IOATIR500GLContext::freeToAllocGART	pIVar5	entryCursor	CONFIRMED	walks the ring entries (0x18 bytes each)	-	-
+use	IOATIR500GLContext::get_data_buffer	iVar1	waitResult	CONFIRMED	result of the accelerator's +0x554 wait on the buffer's stamp; zero means it completed	^\s*iVar1\ =\ VCALL\(M<int>\(accel\),\ 0x554\)\(accel,M<UInt32>\(buffer\ \+\ 0x5c\)\);$	^\s*\(buffer\ =\ \(UInt8\ \*\)$
+use	IOATIR500GLContext::get_data_buffer	iVar1	nextNode	CONFIRMED	the list node after buffer, unlinked from its list	^\s*iVar1\ =\ M<int>\(buffer\ \+\ 0x28\);$	^\s*M<UInt8\ \*>\(buffer\ \+\ 0x24\)\ =\ buffer;$
+use	IOATIR500GLContext::get_data_buffer	iVar1	allocResult	CONFIRMED	allocDataBufferBacking's result; zero means the backing was allocated	^\s*iVar1\ =\ \(\(IOATIR500Accelerator\ \*\)\(accel\)\)\->allocDataBufferBacking\(\(VendorTextureBuffer\ \*\)\(buffer\)\);$	^\s*LAB_00009e94:$
+use	IOATIR500GLContext::get_data_buffer	iVar1	mappingTask	CONFIRMED	task that owns the buffer's memory map (vtable +0xdc)	^\s*iVar1\ =\ VCALL\(\*M<int\ \*>\(buffer\ \+\ 0x10\),\ 0xdc\)\(M<int\ \*>\(buffer\ \+\ 0x10\)\);$	^\s*VCALL\(\*M<int\ \*>\(buffer\ \+\ 0x10\),\ 0xf0\)$
+use	IOATIR500GLContext::get_data_buffer	iVar1	nextNode	CONFIRMED	the list node after buffer, unlinked from its list	^\s*iVar1\ =\ M<int>\(buffer\ \+\ 0x28\);$#2	^\s*M<UInt8\ \*>\(buffer\ \+\ 0x24\)\ =\ buffer;$
+use	IOATIR500GLContext::get_data_buffer	iVar1	submitResult	INFERRED	result of the accelerator's +0x528 call on the buffer; nonzero is the failure path	^\s*iVar1\ =\ VCALL\(M<int>\(accel\),\ 0x528\)\(accel,buffer\);$	^\s*if\ \(M<int>\(buffer\ \+\ 0x48\)\ !=\ 0\)\ \{$
+use	IOATIR500GLContext::get_data_buffer	iVar1	nextNode	CONFIRMED	the list node after buffer, unlinked from its list	^\s*iVar1\ =\ M<int>\(buffer\ \+\ 0x24\);$	^\s*M<UInt32>\(buffer\ \+\ 0x24\)\ =\ M<UInt32>\(M<int>\(self\ \+\ (?:0xc8|200)\)\ \+\ 0x600\);$
+use	IOATIR500GLContext::get_data_buffer	iVar1	mappingTask	CONFIRMED	task that owns the buffer's memory map (vtable +0xdc)	^\s*iVar1\ =\ VCALL\(\*M<int\ \*>\(buffer\ \+\ 0x10\),\ 0xdc\)\(M<int\ \*>\(buffer\ \+\ 0x10\)\);$#2	^\s*VCALL\(\*M<int\ \*>\(buffer\ \+\ 0x10\),\ 0xf0\)$
+use	IOATIR500GLContext::get_data_buffer	iVar1	allocResult	CONFIRMED	allocDataBufferBacking's result; zero means the backing was allocated	^\s*iVar1\ =\ \(\(IOATIR500Accelerator\ \*\)\(M<UInt8\ \*>\(self\ \+\ (?:0xc8|200)\)\)\)\->allocDataBufferBacking\(\(VendorTextureBuffer\ \*\)\(buffer\)\);$	^\s*goto\ LAB_00009fd0;$
+use	IOATIR500GLContext::get_data_buffer	iVar1	mappingTask	CONFIRMED	task that owns the buffer's memory map (vtable +0xdc)	^\s*\(iVar1\ =\ VCALL\(\*M<int\ \*>\(buffer\ \+\ 0x10\),\ 0xdc\)\(M<int\ \*>\(buffer\ \+\ 0x10\)\),\ iVar1\ !=\ M<int>\(self\ \+\ (?:0x78|120)\)\)\)\ \{$	^\s*VCALL\(\*M<int\ \*>\(buffer\ \+\ 0x10\),\ 0x18\)\(M<int\ \*>\(buffer\ \+\ 0x10\)\);$
+use	IOATIR500GLContext::get_data_buffer	iVar5	waitTotal	CONFIRMED	accelerator word 0x1de, the wait-time total that the wait is added to	^\s*iVar5\ =\ piVar4\[0x1de\];$	^\s*\}$
+use	IOATIR500GLContext::get_data_buffer	iVar5	prevNode	CONFIRMED	the list node before buffer, unlinked from its list	^\s*iVar5\ =\ M<int>\(buffer\ \+\ 0x24\);$	^\s*M<UInt8\ \*>\(buffer\ \+\ 0x24\)\ =\ buffer;$
+use	IOATIR500GLContext::get_data_buffer	iVar5	prevNode	CONFIRMED	the list node before buffer, unlinked from its list	^\s*iVar5\ =\ M<int>\(buffer\ \+\ 0x24\);$#2	^\s*M<UInt8\ \*>\(buffer\ \+\ 0x24\)\ =\ buffer;$
+use	IOATIR500GLContext::get_data_buffer	piVar4	accelPtr	CONFIRMED	the accelerator	^\s*piVar4\ =\ M<int\ \*>\(self\ \+\ (?:0xc8|200)\);$	^\s*\}$
+use	IOATIR500GLContext::get_data_buffer	piVar4	descriptor	INFERRED	buffer +8: the memory descriptor released when the buffer is recycled	^\s*piVar4\ =\ M<int\ \*>\(buffer\ \+\ 8\);$	^\s*M<UInt32>\(buffer\ \+\ 8\)\ =\ 0;$
+use	IOATIR500GLContext::get_data_buffer	piVar4	accelPtr	CONFIRMED	the accelerator	^\s*piVar4\ =\ M<int\ \*>\(self\ \+\ (?:0xc8|200)\);$#2	^\s*if\ \(M<int>\(buffer\ \+\ 8\)\ !=\ 0\)\ \{$
+use	IOATIR500GLContext::get_data_buffer	piVar4	mapping	CONFIRMED	buffer +0x10: the memory map of the buffer in this task	^\s*piVar4\ =\ M<int\ \*>\(buffer\ \+\ 0x10\);$	-
+use	IOATIR500GLContext::get_status	iVar2	surface	CONFIRMED	the bound surface	^\s*iVar2\ =\ M<SInt32>\(self\ \+\ (?:0x290|656)\);$	^\s*iVar2\ =\ 0;$
+use	IOATIR500GLContext::get_status	iVar2	recordOffset	CONFIRMED	byte offset of the buffer record in the bound surface (0x78 each)	^\s*iVar2\ =\ 0;$	^\s*iVar2\ =\ bufferIndex\ \-\ 1;$
+use	IOATIR500GLContext::get_status	iVar2	lastIndex	INFERRED	index of the last buffer record that was queried	^\s*iVar2\ =\ bufferIndex\ \-\ 1;$	^\s*iVar2\ =\ iVar2\ \+\ 0x78;$
+use	IOATIR500GLContext::get_status	iVar2	recordOffset	CONFIRMED	byte offset of the buffer record in the bound surface (0x78 each)	^\s*iVar2\ =\ iVar2\ \+\ 0x78;$	^\s*info\ =\ info\ \+\ 4;$
+use	IOATIR500GLContext::get_status	iVar2	lastIndex	INFERRED	index of the last buffer record that was queried (0x16 when all were)	^\s*iVar2\ =\ 0x16;$	-
+use	IOATIR500GLContext::get_status	iVar5	accelerator	CONFIRMED	the accelerator (while waiting for the busy flag)	^\s*\(iVar5\ =\ M<SInt32>\(self\ \+\ (?:0xc8|200)\),\ M<char>\(iVar5\ \+\ 0x80\)\ ==\ '\\0'\)\)\ \{$	^\s*iVar2\ =\ M<SInt32>\(self\ \+\ (?:0x290|656)\);$
+use	IOATIR500GLContext::get_status	iVar5	queryResult	CONFIRMED	result of the accelerator's +0x540 buffer query; zero means this buffer fills the info record	^\s*iVar5\ =\ VCALL\(\*M<SInt32\ \*>\(self\ \+\ (?:0xc8|200)\),\ 0x540\)$	^\s*iVar2\ =\ bufferIndex\ \-\ 1;$
+use	IOATIR500GLContext::get_status	iVar5	infoByteOffset	CONFIRMED	lastIndex * 16: byte offset of the info record handed to +0x544	^\s*iVar5\ =\ iVar2\ <<\ 4;$	-
+use	IOATIR500GLContext::get_status	iVar4	walkIndex	CONFIRMED	counts the buffer indexes walked back from lastIndex	-	-
+use	IOATIR500GLContext::start@0x7690	iVar3	baseResult	CONFIRMED	IOUserClient::start's result	^\s*iVar3\ =\ IOUserClient::start\(provider\);$	^\s*iVar3\ =\ 0x10;$
+use	IOATIR500GLContext::start@0x7690	iVar3	ringLeft	CONFIRMED	countdown over the 16 context buffer ring entries	^\s*iVar3\ =\ 0x10;$	^\s*M<UInt16>\(self\ \+\ (?:0x98|152)\)\ =\ 0;$
+use	IOATIR500GLContext::start@0x7690	iVar3	unitIndex	CONFIRMED	counter over the 3 words at self+0x9c	^\s*iVar3\ =\ 0;$	^\s*M<UInt32>\(self\ \+\ (?:0xc4|196)\)\ =\ 0;$
+use	IOATIR500GLContext::start@0x7690	iVar3	slotsLeft	CONFIRMED	countdown over the 42 texture slots	^\s*iVar3\ =\ 0x2a;$	^\s*shared\ =\ \(UInt8\ \*\)new\ IOATIR500Shared\(\);\ \ \ /\*\ real:\ OSObject::operator\ new\(0x28\)\ \+\ the\ IOATIR500Shared\ constructor\ \*/$
+use	IOATIR500GLContext::start@0x7690	iVar3	sharedResult	INFERRED	result of the shared object's +0x48 call	^\s*iVar3\ =\ VCALL\(M<SInt32>\(shared\),\ 0x48\)\(shared\);$	^\s*VCALL\(\*M<SInt32\ \*>\(self\ \+\ (?:0x88|136)\),\ 0x18\)\(M<SInt32\ \*>\(self\ \+\ (?:0x88|136)\)\);$
+use	IOATIR500GLContext::start@0x7690	iVar3	readyResult	INFERRED	result of the accelerator's +0x530 call	^\s*iVar3\ =\ VCALL\(\*accel,\ 0x530\)\(accel\);$	^\s*accel\ =\ M<SInt32\ \*>\(self\ \+\ (?:0xc8|200)\);$
+use	IOATIR500GLContext::start@0x7690	iVar3	setupResult	CONFIRMED	results of getVRAMDescriptors, allocCommandBuffer and allocAllContextBuffers; zero means failure	^\s*iVar3\ =\ \(\(IOATIR500Accelerator\ \*\)\(M<UInt8\ \*>\(self\ \+\ (?:0xc8|200)\)\)\)\->getVRAMDescriptors\(\);$	-
+use	IOATIR500GLContext::start@0x7690	pIVar2	entryCursor	CONFIRMED	walks the context buffer ring entries (0x18 bytes each)	^\s*pIVar2\ =\ self;$	^\s*M<UInt16>\(self\ \+\ (?:0x98|152)\)\ =\ 0;$
+use	IOATIR500GLContext::start@0x7690	pIVar2	unitCursor	CONFIRMED	walks the 3 words at self+0x9c	^\s*pIVar2\ =\ self;$#2	^\s*M<UInt32>\(self\ \+\ (?:0xc4|196)\)\ =\ 0;$
+use	IOATIR500GLContext::start@0x7690	pIVar2	slotCursor	CONFIRMED	walks the texture slot pointers (self+0x2a4)	^\s*pIVar2\ =\ self;$#3	^\s*shared\ =\ \(UInt8\ \*\)new\ IOATIR500Shared\(\);\ \ \ /\*\ real:\ OSObject::operator\ new\(0x28\)\ \+\ the\ IOATIR500Shared\ constructor\ \*/$
+use	IOATIR500GLContext::start@0x7690	bVar1	moreUnits	CONFIRMED	unitIndex != 2: more words to clear	-	-
+use	IOATIR500GLContext::start@0x7690	bVar5	crEqualBits	INFERRED	emulated condition-register EQ bit (shared == 0) << 1	-	-
+use	IOATIR500GLContext::stop	pIVar1	prevContext	CONFIRMED	the context before this one in the accelerator's live-context list	-	-
+use	IOATIR500GLContext::stop	pIVar8	contextCursor	CONFIRMED	walks the accelerator's live-context list (next link at +0x80)	^\s*pIVar8\ =\ \(UInt8\ \*\)accelWords\[0x18\];$	^\s*\}$#3
+use	IOATIR500GLContext::stop	pIVar8	slotCursor	CONFIRMED	walks the texture slot pointers (self+0x2a4)	^\s*pIVar8\ =\ self;$	-
+use	IOATIR500GLContext::stop	iVar3	mappingTask	CONFIRMED	task that owns the cached buffer's memory map (vtable +0xdc)	-	-
+use	IOATIR500GLContext::stop	iVar6	bufferCursor	CONFIRMED	walks the accelerator's data buffer cache list (next link at +0x3c)	^\s*iVar6\ =\ M<SInt32>\(accel\ \+\ (?:0x5cc|1484)\);$	^\s*accel\ =\ M<UInt8\ \*>\(self\ \+\ (?:0xc8|200)\);$
+use	IOATIR500GLContext::stop	iVar6	oldRefCount	CONFIRMED	reference count before the decrement; 1 means this was the last reference	^\s*iVar6\ =\ GH_OSDecrementAtomic\(M<SInt32>\(M<SInt32>\(pIVar8\ \+\ 0x2a4\)\ \+\ 0x14\)\ \+\ 0x10\);$	^\s*\(\(IOATIR500Shared\ \*\)\(M<UInt8\ \*>\(self\ \+\ (?:0x88|136)\)\)\)\->delete_texture\(\(VendorTextureBuffer\ \*\)\(M<UInt8\ \*>\(pIVar8\ \+\ 0x2a4\)\)\);$
+use	IOATIR500GLContext::reclaim_resources	iVar3	accelAddr	CONFIRMED	the accelerator	-	-
+use	IOATIR500GLContext::remove_texture_from_stream	iVar3	linkedTexture	INFERRED	texture +0x54: the texture this one is linked to	-	-
+use	IOATIR500GLContext::remove_texture_from_stream	piVar4	backingDescriptor	INFERRED	texture +0x50: memory descriptor that gets the stamp and is released	-	-
+use	IOATIR500GLContext::map_transfer_to_GART	iVar1	mapResult	CONFIRMED	the accelerator's +0x5a8 GART mapping result; zero means the transfer buffer was mapped	-	-
+use	IOATIR500GLContext::page_off_texture	iVar3	textureLookup	CONFIRMED	the texture found by textureID in the client handle table	^\s*iVar3\ =\ M<SInt32>\(textureID\ \*\ 4\ \+\ M<SInt32>\(M<SInt32>\(param_1\ \+\ (?:0x88|136)\)\ \+\ 0x10\)\);$	^\s*if\ \(\(\(\(UInt32\)M<UInt16>\(iVar3\ \+\ 0x28\)\ \&\ \~\(UInt32\)M<UInt16>\(iVar3\ \+\ 0x1c\)\)\ >>$	1,2,3,5
+use	IOATIR500GLContext::page_off_texture	iVar3	faceBits	CONFIRMED	texture header + face * 2: the face's dirty (+0x1c) and loaded (+0x28) words	^\s*iVar3\ =\ \(mipAndFace\ >>\ 0x10\)\ \*\ 2\ \+\ M<SInt32>\(iVar3\ \+\ 0x14\);$	-
+use	IOATIR500GLContext::get_data_buffer	iVar1	waited	CONFIRMED	result of the accelerator's wait method, added to the wait total	^\s*iVar1\ =\ VCALL\(\*piVar4,\ 0x54c\)\(piVar4,M<UInt32>\(buffer\ \+\ 0x5c\)\);$	^\s*\}$

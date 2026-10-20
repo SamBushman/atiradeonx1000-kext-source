@@ -1,0 +1,10 @@
+--- a/Sources/IOATIR500GLContext_new_texture_Port.cpp	2026-10-20 10:00:16.046632084 -0700
++++ b/Sources/IOATIR500GLContext_new_texture_Port.cpp	2026-10-20 10:00:16.047489169 -0700
+@@ -31,7 +31,6 @@
+ /* real addr 0x9320 */
+ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *newTextureData, sIOGLNewTextureReturnData *returnData, UInt32 structSize, UInt32 *sizeOut) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
+     UInt8 *newTextureDataBytes = reinterpret_cast<UInt8 *>(newTextureData);
+     UInt8 *returnDataBytes = reinterpret_cast<UInt8 *>(returnData);
+ 

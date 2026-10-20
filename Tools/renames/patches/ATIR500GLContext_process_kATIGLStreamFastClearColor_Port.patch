@@ -1,0 +1,10 @@
+--- a/Sources/ATIR500GLContext_process_kATIGLStreamFastClearColor_Port.cpp	2026-10-20 09:36:46.603299980 -0700
++++ b/Sources/ATIR500GLContext_process_kATIGLStreamFastClearColor_Port.cpp	2026-10-20 09:36:46.604573352 -0700
+@@ -37,7 +37,6 @@
+   UInt32 depthRowTiles;
+   SInt32 lodBlendWeight;
+   SInt32 formatByteOffset;
+-  SInt32 iVar9;
+   SInt32 mipOffset;
+   SInt32 surface;
+   SInt32 gpuBaseAddress;

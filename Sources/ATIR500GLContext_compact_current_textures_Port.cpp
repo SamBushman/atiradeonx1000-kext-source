@@ -69,7 +69,7 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
     slotTexture = M<SInt32>(slotCursor + 0x2a4);
     if (slotTexture != 0) {
       if (M<SInt32>(slotTexture + 0x48) == 0) {
-        if (M<char>(slotTexture + 0x20) != '\0') goto LAB_00029f5c;
+        if (M<char>(slotTexture + 0x20) != '\0') goto nextSlot;
         surface = M<UInt8 *>(slotTexture + 0x50);
         bufferIndex = 0;
         surfaceBuffer = (UInt8 *)(surface + 0xa8);
@@ -108,7 +108,7 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
       M<SInt32>(nextNode + 0x24) = prevNode;
       M<SInt32>(slotTexture + 0x24) = slotTexture;
     }
-LAB_00029f5c:
+nextSlot:
     more = slotIndex == 0x29;
     slotCursor = slotCursor + 4;
     slotIndex = slotIndex + 1;

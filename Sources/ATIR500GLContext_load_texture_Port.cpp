@@ -32,76 +32,99 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt8 bVar1;
   UInt16 loadedBits;
   UInt16 dirtyBits;
-  bool bVar4;
-  SInt32 iVar5;
   SInt32 *mapping;
   SInt32 *hwInfo;
-  SInt32 iVar8;
   SInt32 nextMipLevel;
   SInt32 waited;
-  UInt32 uVar9;
   UInt32 *record;
-  SInt32 iVar11;
-  SInt32 iVar12;
-  SInt32 iVar13;
-  UInt32 uVar14;
-  SInt32 iVar15;
   UInt32 *tileCursor;
-  SInt32 iVar17;
   SInt32 gartAddress;
   SInt32 gartOffset;
   SInt32 nextNode;
-  UInt32 uVar18;
-  UInt32 uVar19;
-  UInt32 uVar20;
-  UInt32 uVar21;
   UInt8 *currentSurfaceBuffer;
-  UInt32 uVar23;
-  UInt32 uVar24;
-  UInt32 uVar25;
   SInt32 textureOffset;
   SInt32 lodBlendWeight;
   UInt32 lastLevel;
-  UInt32 uVar28;
-  UInt32 uVar29;
   SInt32 *accelerator;
-  UInt32 uVar31;
-  SInt32 iVar32;
   SInt32 mipLevel;
   SInt32 waitTotal;
   UInt8 *innerBuffer;
   SInt32 payloadByteLen;
   SInt32 header;
   SInt32 recordIndex;
+  UInt32 faceCount;
+  UInt32 samplePitch;
+  UInt32 totalWords;
+  UInt32 firstLevel;
+  UInt32 pitchPixels;
+  UInt32 paddedWords;
+  UInt32 macroTileFlag;
+  UInt32 faceIndex;
+  UInt32 blockShift;
+  UInt32 curWidth;
+  UInt32 halfHeight;
+  UInt32 minDim;
+  UInt32 halfWidth;
+  UInt32 levelIndex;
+  UInt32 minHeight;
+  UInt32 sliceCount;
+  UInt32 tileFace;
+  UInt32 slotIndex;
+  UInt32 minWidth;
+  SInt32 levelRecord;
+  SInt32 blockLog2;
+  SInt32 faceBitsOffset;
+  SInt32 faceBits;
+  SInt32 negTileMode;
+  SInt32 tileSizeLog2;
+  SInt32 levelRecordOffset;
+  SInt32 gartLevelOffset;
+  SInt32 gartSlot;
+  SInt32 bigTileFlag;
+  SInt32 textureLevelCursor;
+  SInt32 offsetSlot;
+  SInt32 sliceIndex;
+  SInt32 headerBase;
+  SInt32 faceHeader;
+  SInt32 gartLevelCursor;
+  UInt8 tileModeBits;
+  UInt8 swizzleBits;
+  bool needsLoad;
+  bool useSmallBlock;
+  UInt32 submitStamp;
+  UInt32 levelDim;
+  UInt32 tileFlags;
+  UInt32 levelHeight;
+  UInt32 mipIndex;
+  SInt32 textureLevelOffset;
   
   header = M<SInt32>(textureBytes + 0x14);
   textureOffset = M<SInt32>(textureBytes + 0x48);
-  uVar24 = (UInt32)M<UInt8>(header + 0x34);
-  uVar25 = (UInt32)M<UInt8>(header + 0x17);
-  lastLevel = (uVar25 + M<UInt8>(header + 0x35)) - 1;
-  if (uVar24 == 0) {
+  faceCount = (UInt32)M<UInt8>(header + 0x34);
+  firstLevel = (UInt32)M<UInt8>(header + 0x17);
+  lastLevel = (firstLevel + M<UInt8>(header + 0x35)) - 1;
+  if (faceCount == 0) {
     return;
   }
-  uVar20 = 0;
-  bVar4 = false;
+  faceIndex = 0;
+  needsLoad = false;
   do {
-    if (uVar25 <= lastLevel) {
-      uVar18 = uVar25;
+    if (firstLevel <= lastLevel) {
+      levelIndex = firstLevel;
       do {
         if ((((UInt32)M<UInt16>(header + 0x1c) & ~(UInt32)M<UInt16>(header + 0x28)) >>
-             (uVar18 & 0x3f) & 1) != 0) {
-          bVar4 = true;
+             (levelIndex & 0x3f) & 1) != 0) {
+          needsLoad = true;
         }
-        uVar18 = uVar18 + 1;
-      } while (uVar18 <= lastLevel);
+        levelIndex = levelIndex + 1;
+      } while (levelIndex <= lastLevel);
     }
-    uVar20 = uVar20 + 1;
+    faceIndex = faceIndex + 1;
     header = header + 2;
-  } while (uVar20 < uVar24);
-  if (!bVar4) {
+  } while (faceIndex < faceCount);
+  if (!needsLoad) {
     return;
   }
   mapping = (SInt32 *)VCALL(*M<SInt32 *>(textureBytes + 8), 0x14c)
@@ -124,8 +147,8 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
       M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = textureBytes;
       M<UInt8 *>(M<SInt32>(textureBytes + 0x34) + 0x38) = textureBytes;
     }
-LAB_00029704:
-    if (textureBytes[0x20] != 0x7) goto LAB_00029724;
+checkInnerTransfer:
+    if (textureBytes[0x20] != 0x7) goto ownTransfer;
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
     gartAddress = M<SInt32>(M<SInt32>(textureBytes + 0x58) + 4);
   }
@@ -140,10 +163,10 @@ LAB_00029704:
         ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes));
         gartOffset = M<SInt32>(textureBytes + 4);
         M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + -1;
-        if (gartOffset != 0) goto LAB_00029660;
+        if (gartOffset != 0) goto moveToListHead;
       }
       else {
-LAB_00029660:
+moveToListHead:
         GH_IOGetTime(textureBytes + 0x2c);
         nextNode = M<SInt32>(textureBytes + 0x34);
         M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
@@ -163,9 +186,9 @@ LAB_00029660:
         M<UInt8 *>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x6d0) = innerBuffer;
         M<UInt8 *>(M<SInt32>(innerBuffer + 0x34) + 0x38) = innerBuffer;
       }
-      goto LAB_00029704;
+      goto checkInnerTransfer;
     }
-LAB_00029724:
+ownTransfer:
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
     gartAddress = M<SInt32>(textureBytes + 4);
   }
@@ -178,61 +201,61 @@ LAB_00029724:
   if (hwInfo[8] < 0) {
     if (M<SInt32>(textureBytes + 100) == 2) {
       hwInfo[0x285] = 1;
-      uVar20 = 0;
+      faceIndex = 0;
     }
     else {
-      uVar20 = 0;
+      faceIndex = 0;
       if (M<SInt32>(textureBytes + 100) == 4) {
         hwInfo[0x285] = 2;
-        uVar20 = 0;
+        faceIndex = 0;
       }
     }
     do {
-      if (lastLevel < uVar25) {
-        iVar32 = M<SInt32>(textureBytes + 0x14);
-        iVar8 = uVar20 << 1;
+      if (lastLevel < firstLevel) {
+        headerBase = M<SInt32>(textureBytes + 0x14);
+        faceBitsOffset = faceIndex << 1;
       }
       else {
-        iVar32 = M<SInt32>(textureBytes + 0x14);
-        iVar8 = uVar20 * 2;
-        loadedBits = M<UInt16>(iVar8 + iVar32 + 0x28);
-        dirtyBits = M<UInt16>(iVar8 + iVar32 + 0x1c);
-        uVar18 = uVar25;
+        headerBase = M<SInt32>(textureBytes + 0x14);
+        faceBitsOffset = faceIndex * 2;
+        loadedBits = M<UInt16>(faceBitsOffset + headerBase + 0x28);
+        dirtyBits = M<UInt16>(faceBitsOffset + headerBase + 0x1c);
+        levelIndex = firstLevel;
         do {
-          iVar5 = uVar20 * 0xd + uVar18;
-          uVar21 = (UInt32)M<UInt16>(hwInfo + iVar5 * 8 + 0x10);
-          uVar14 = (UInt32)M<UInt16>((SInt32)hwInfo + iVar5 * 0x20 + 0x42);
-          iVar11 = hwInfo[iVar5 * 8 + 0x11];
-          iVar12 = uVar21 + 4;
-          iVar13 = uVar21 + 7;
-          iVar15 = hwInfo[iVar5 * 8 + 0x12];
-          if (uVar14 == 0) {
-            uVar14 = 1;
+          levelRecord = faceIndex * 0xd + levelIndex;
+          slotIndex = (UInt32)M<UInt16>(hwInfo + levelRecord * 8 + 0x10);
+          sliceCount = (UInt32)M<UInt16>((SInt32)hwInfo + levelRecord * 0x20 + 0x42);
+          gartLevelOffset = hwInfo[levelRecord * 8 + 0x11];
+          gartSlot = slotIndex + 4;
+          offsetSlot = slotIndex + 7;
+          textureLevelOffset = hwInfo[levelRecord * 8 + 0x12];
+          if (sliceCount == 0) {
+            sliceCount = 1;
           }
           while( true ) {
-            if ((((UInt32)dirtyBits & ~(UInt32)loadedBits) >> (uVar18 & 0x3f) & 1) == 0) {
-              record[uVar21] = 0xc0101000;
+            if ((((UInt32)dirtyBits & ~(UInt32)loadedBits) >> (levelIndex & 0x3f) & 1) == 0) {
+              record[slotIndex] = 0xc0101000;
             }
             else {
-              record[uVar21] = 0x80000000;
-              record[iVar12] = iVar11 + gartAddress;
-              record[iVar13] = iVar15 + textureOffset;
+              record[slotIndex] = 0x80000000;
+              record[gartSlot] = gartLevelOffset + gartAddress;
+              record[offsetSlot] = textureLevelOffset + textureOffset;
             }
-            uVar14 = uVar14 - 1;
-            if (uVar14 == 0) break;
-            uVar21 = uVar21 + 0x12;
-            iVar12 = iVar12 + 0x12;
-            iVar13 = iVar13 + 0x12;
-            iVar11 = iVar11 + hwInfo[iVar5 * 8 + 0x13];
-            iVar15 = iVar15 + hwInfo[iVar5 * 8 + 0x14];
+            sliceCount = sliceCount - 1;
+            if (sliceCount == 0) break;
+            slotIndex = slotIndex + 0x12;
+            gartSlot = gartSlot + 0x12;
+            offsetSlot = offsetSlot + 0x12;
+            gartLevelOffset = gartLevelOffset + hwInfo[levelRecord * 8 + 0x13];
+            textureLevelOffset = textureLevelOffset + hwInfo[levelRecord * 8 + 0x14];
           }
-          uVar18 = uVar18 + 1;
-        } while (uVar18 <= lastLevel);
+          levelIndex = levelIndex + 1;
+        } while (levelIndex <= lastLevel);
       }
-      iVar8 = iVar8 + iVar32;
-      uVar20 = uVar20 + 1;
-      M<UInt16>(iVar8 + 0x28) = M<UInt16>(iVar8 + 0x28) | M<UInt16>(iVar8 + 0x1c);
-    } while (uVar20 < uVar24);
+      faceBits = faceBitsOffset + headerBase;
+      faceIndex = faceIndex + 1;
+      M<UInt16>(faceBits + 0x28) = M<UInt16>(faceBits + 0x28) | M<UInt16>(faceBits + 0x1c);
+    } while (faceIndex < faceCount);
     recordIndex = *hwInfo;
     record[recordIndex] = 0x50b;
     if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
@@ -248,156 +271,156 @@ LAB_00029724:
       nextMipLevel = 1;
       currentSurfaceBuffer = self + (UInt32)M<UInt16>(self + kATIR500GLContext_currentAttachment) * 0x78 + 0x3c0;
     }
-    uVar24 = 0;
+    samplePitch = 0;
     if ((M<UInt32>(currentSurfaceBuffer + 0x3c) & 0xf00000) != 0) {
-      uVar24 = (UInt32)M<UInt16>(currentSurfaceBuffer + 0x14) / (M<UInt32>(currentSurfaceBuffer + 0x3c) >> 0x14 & 0xf);
+      samplePitch = (UInt32)M<UInt16>(currentSurfaceBuffer + 0x14) / (M<UInt32>(currentSurfaceBuffer + 0x3c) >> 0x14 & 0xf);
     }
-    uVar25 = 0x20 / M<UInt16>(currentSurfaceBuffer + 0x16);
-    if (uVar25 <= uVar24) {
-      uVar25 = uVar24;
+    pitchPixels = 0x20 / M<UInt16>(currentSurfaceBuffer + 0x16);
+    if (pitchPixels <= samplePitch) {
+      pitchPixels = samplePitch;
     }
-    lastLevel = 0x80000000;
+    macroTileFlag = 0x80000000;
     if ((UInt8)currentSurfaceBuffer[0x38] < 2) {
-      lastLevel = 0;
+      macroTileFlag = 0;
     }
-    uVar24 = recordIndex + 2;
+    totalWords = recordIndex + 2;
     record[recordIndex + 1] =
-         lastLevel | M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40) * (UInt32)M<UInt16>(currentSurfaceBuffer + 0x20) +
+         macroTileFlag | M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40) * (UInt32)M<UInt16>(currentSurfaceBuffer + 0x20) +
                   lodBlendWeight * (M<SInt32>(currentSurfaceBuffer + nextMipLevel * 4 + 0x40) -
                            M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40)) + M<SInt32>(currentSurfaceBuffer + 8) >> 10 |
-                  uVar25 * M<UInt16>(currentSurfaceBuffer + 0x16) * 0x10000 & 0x3fc00000 |
+                  pitchPixels * M<UInt16>(currentSurfaceBuffer + 0x16) * 0x10000 & 0x3fc00000 |
                   ((UInt8)currentSurfaceBuffer[0x38] & 1) << 0x1e;
-    goto LAB_00029cb4;
+    goto submitPacket;
   }
   record = record + hwInfo[1];
   record[0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb74);
-  iVar32 = M<SInt32>(textureBytes + 0x14);
-  bVar1 = M<UInt8>(iVar32 + 0x15) >> 3;
-  iVar8 = -(bVar1 & 3);
-  if ((bVar1 & 2) == 0) {
-    if (-1 < iVar8) {
-      bVar4 = false;
-      goto LAB_00029a5c;
+  faceHeader = M<SInt32>(textureBytes + 0x14);
+  tileModeBits = M<UInt8>(faceHeader + 0x15) >> 3;
+  negTileMode = -(tileModeBits & 3);
+  if ((tileModeBits & 2) == 0) {
+    if (-1 < negTileMode) {
+      useSmallBlock = false;
+      goto tileModeKnown;
     }
-    uVar20 = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
-    bVar4 = uVar20 == 0;
-LAB_00029a64:
-    if (3 < uVar20) goto LAB_00029a94;
-    if (bVar4) {
-      iVar5 = 2;
-      iVar8 = 3;
+    blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
+    useSmallBlock = blockShift == 0;
+pickBlockSizes:
+    if (3 < blockShift) goto largeBlocks;
+    if (useSmallBlock) {
+      blockLog2 = 2;
+      tileSizeLog2 = 3;
     }
     else {
-      iVar5 = 1;
-      iVar8 = 4;
+      blockLog2 = 1;
+      tileSizeLog2 = 4;
     }
   }
   else {
-    bVar4 = true;
-LAB_00029a5c:
-    if (iVar8 < 0) {
-      uVar20 = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
-      goto LAB_00029a64;
+    useSmallBlock = true;
+tileModeKnown:
+    if (negTileMode < 0) {
+      blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
+      goto pickBlockSizes;
     }
-    uVar20 = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
-LAB_00029a94:
-    iVar5 = 0;
-    iVar8 = 5;
+    blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
+largeBlocks:
+    blockLog2 = 0;
+    tileSizeLog2 = 5;
   }
-  uVar14 = 0;
-  uVar18 = 0x20 >> (uVar20 & 0x3f);
-  uVar21 = 1 << (iVar8 - uVar20 & 0x3f);
+  tileFace = 0;
+  minHeight = 0x20 >> (blockShift & 0x3f);
+  minWidth = 1 << (tileSizeLog2 - blockShift & 0x3f);
   while( true ) {
-    uVar28 = (UInt32)M<UInt8>(iVar32 + 0x15);
-    uVar29 = (UInt32)hwInfo[4] >> (uVar20 & 0x3f);
-    uVar20 = (UInt32)hwInfo[3] >> (uVar20 & 0x3f);
-    if (uVar25 <= lastLevel) {
-      uVar31 = uVar25;
+    tileFlags = (UInt32)M<UInt8>(faceHeader + 0x15);
+    levelHeight = (UInt32)hwInfo[4] >> (blockShift & 0x3f);
+    curWidth = (UInt32)hwInfo[3] >> (blockShift & 0x3f);
+    if (firstLevel <= lastLevel) {
+      mipIndex = firstLevel;
       while( true ) {
-        iVar11 = uVar14 * 0xd + uVar31;
-        iVar8 = iVar11 * 0x20;
-        tileCursor = record + M<UInt16>(hwInfo + iVar11 * 8 + 0x16);
-        if ((uVar28 & 4) != 0) {
-          uVar19 = (SInt32)(UInt32)M<UInt16>((SInt32)hwInfo + 0x16) >> (uVar31 & 0x3f);
-          uVar23 = 1 << iVar5;
-          if (1 << iVar5 < (SInt32)uVar19) {
-            uVar23 = uVar19;
+        levelRecord = tileFace * 0xd + mipIndex;
+        levelRecordOffset = levelRecord * 0x20;
+        tileCursor = record + M<UInt16>(hwInfo + levelRecord * 8 + 0x16);
+        if ((tileFlags & 4) != 0) {
+          levelDim = (SInt32)(UInt32)M<UInt16>((SInt32)hwInfo + 0x16) >> (mipIndex & 0x3f);
+          minDim = 1 << blockLog2;
+          if (1 << blockLog2 < (SInt32)levelDim) {
+            minDim = levelDim;
           }
-          if ((uVar20 < uVar21 << 3) || (iVar12 = 1, uVar23 < (UInt32)(1 << iVar5 + 3))) {
-            iVar12 = 0;
+          if ((curWidth < minWidth << 3) || (bigTileFlag = 1, minDim < (UInt32)(1 << blockLog2 + 3))) {
+            bigTileFlag = 0;
           }
-          uVar28 = iVar12 << 2 | uVar28 & 0xfffffffb;
+          tileFlags = bigTileFlag << 2 | tileFlags & 0xfffffffb;
         }
-        iVar32 = uVar14 * 2 + iVar32;
-        if ((((UInt32)M<UInt16>(iVar32 + 0x1c) & ~(UInt32)M<UInt16>(iVar32 + 0x28)) >>
-             (uVar31 & 0x3f) & 1) == 0) {
-          *tileCursor = ((UInt32)M<UInt16>((SInt32)hwInfo + iVar8 + 0x42) * 0x1d + -2) * 0x10000 |
+        faceHeader = tileFace * 2 + faceHeader;
+        if ((((UInt32)M<UInt16>(faceHeader + 0x1c) & ~(UInt32)M<UInt16>(faceHeader + 0x28)) >>
+             (mipIndex & 0x3f) & 1) == 0) {
+          *tileCursor = ((UInt32)M<UInt16>((SInt32)hwInfo + levelRecordOffset + 0x42) * 0x1d + -2) * 0x10000 |
                      0xc0001000;
         }
         else {
-          iVar32 = hwInfo[iVar11 * 8 + 0x11];
-          iVar12 = hwInfo[iVar11 * 8 + 0x12];
+          gartLevelCursor = hwInfo[levelRecord * 8 + 0x11];
+          textureLevelCursor = hwInfo[levelRecord * 8 + 0x12];
           *tileCursor = 0x138a;
-          if (M<SInt16>((SInt32)hwInfo + iVar8 + 0x42) != 0) {
-            iVar13 = 0;
+          if (M<SInt16>((SInt32)hwInfo + levelRecordOffset + 0x42) != 0) {
+            sliceIndex = 0;
             do {
-              iVar13 = iVar13 + 1;
-              tileCursor[1] = iVar12 + textureOffset;
-              tileCursor[3] = (uVar20 >> 1 & 0x1fff) << 1 |
-                           (uVar28 >> 3 & 3) << 0x11 |
-                           (uVar28 >> 2 & 1) << 0x10 | tileCursor[3] & 0xffe0c001;
-              bVar1 = M<UInt8>((SInt32)hwInfo + 0x1b);
-              tileCursor[9] = uVar29 - 1 & 0x3fff | tileCursor[9] & 0xffffc000;
-              tileCursor[5] = iVar32 + gartAddress & 0xffffffe0U | bVar1 & 3;
+              sliceIndex = sliceIndex + 1;
+              tileCursor[1] = textureLevelCursor + textureOffset;
+              tileCursor[3] = (curWidth >> 1 & 0x1fff) << 1 |
+                           (tileFlags >> 3 & 3) << 0x11 |
+                           (tileFlags >> 2 & 1) << 0x10 | tileCursor[3] & 0xffe0c001;
+              swizzleBits = M<UInt8>((SInt32)hwInfo + 0x1b);
+              tileCursor[9] = levelHeight - 1 & 0x3fff | tileCursor[9] & 0xffffc000;
+              tileCursor[5] = gartLevelCursor + gartAddress & 0xffffffe0U | swizzleBits & 3;
               tileCursor = tileCursor + 0x1d;
-              iVar32 = iVar32 + hwInfo[iVar11 * 8 + 0x13];
-              iVar12 = iVar12 + hwInfo[iVar11 * 8 + 0x14];
-            } while (iVar13 < (SInt32)(UInt32)M<UInt16>((SInt32)hwInfo + iVar8 + 0x42));
+              gartLevelCursor = gartLevelCursor + hwInfo[levelRecord * 8 + 0x13];
+              textureLevelCursor = textureLevelCursor + hwInfo[levelRecord * 8 + 0x14];
+            } while (sliceIndex < (SInt32)(UInt32)M<UInt16>((SInt32)hwInfo + levelRecordOffset + 0x42));
           }
         }
-        uVar23 = uVar20 >> 1;
-        uVar20 = uVar29 >> 1;
-        uVar29 = uVar18;
-        if (uVar18 < uVar20) {
-          uVar29 = uVar20;
+        halfWidth = curWidth >> 1;
+        halfHeight = levelHeight >> 1;
+        levelHeight = minHeight;
+        if (minHeight < halfHeight) {
+          levelHeight = halfHeight;
         }
-        uVar20 = uVar21;
-        if (uVar21 < uVar23) {
-          uVar20 = uVar23;
+        curWidth = minWidth;
+        if (minWidth < halfWidth) {
+          curWidth = halfWidth;
         }
-        uVar31 = uVar31 + 1;
-        if (lastLevel < uVar31) break;
-        iVar32 = M<SInt32>(textureBytes + 0x14);
+        mipIndex = mipIndex + 1;
+        if (lastLevel < mipIndex) break;
+        faceHeader = M<SInt32>(textureBytes + 0x14);
       }
-      iVar32 = M<SInt32>(textureBytes + 0x14);
+      faceHeader = M<SInt32>(textureBytes + 0x14);
     }
-    iVar32 = uVar14 * 2 + iVar32;
-    uVar14 = uVar14 + 1;
-    M<UInt16>(iVar32 + 0x28) = M<UInt16>(iVar32 + 0x28) | M<UInt16>(iVar32 + 0x1c);
-    if (uVar24 <= uVar14) break;
-    iVar32 = M<SInt32>(textureBytes + 0x14);
-    uVar20 = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
+    faceHeader = tileFace * 2 + faceHeader;
+    tileFace = tileFace + 1;
+    M<UInt16>(faceHeader + 0x28) = M<UInt16>(faceHeader + 0x28) | M<UInt16>(faceHeader + 0x1c);
+    if (faceCount <= tileFace) break;
+    faceHeader = M<SInt32>(textureBytes + 0x14);
+    blockShift = (UInt32)M<UInt8>((SInt32)hwInfo + 0x1a);
   }
-  uVar24 = hwInfo[2];
+  totalWords = hwInfo[2];
   M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb90) = 1;
-LAB_00029cb4:
-  uVar25 = uVar24;
-  if ((uVar24 & 1) != 0) {
-    uVar25 = uVar24 + 1;
-    record[uVar24] = 0x80000000;
+submitPacket:
+  paddedWords = totalWords;
+  if ((totalWords & 1) != 0) {
+    paddedWords = totalWords + 1;
+    record[totalWords] = 0x80000000;
   }
-  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) = uVar25 * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+  M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) = paddedWords * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
   M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x71c) = payloadByteLen + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x71c);
   if (hwInfo[8] < 0) {
     header = M<SInt32>(textureBytes + 0x14);
-    uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
-    M<UInt32>(header + 0xc) = uVar9;
+    submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),M<SInt32>(textureBytes + 4) + 0xa00,paddedWords);
+    M<UInt32>(header + 0xc) = submitStamp;
   }
   else {
     header = M<SInt32>(textureBytes + 0x14);
-    uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),
-                       hwInfo[1] * 4 + M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
-    M<UInt32>(header + 0xc) = uVar9;
+    submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)(record),
+                       hwInfo[1] * 4 + M<SInt32>(textureBytes + 4) + 0xa00,paddedWords);
+    M<UInt32>(header + 0xc) = submitStamp;
   }
   if (textureBytes[0x20] == 0x7) {
     M<UInt32>(M<SInt32>(M<SInt32>(textureBytes + 0x58) + 0x14) + 8) =

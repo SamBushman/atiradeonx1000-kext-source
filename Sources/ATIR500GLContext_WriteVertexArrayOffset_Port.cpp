@@ -40,17 +40,17 @@ UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*outputBuffer, UInt32 star
   SInt32 slotB;
   SInt32 byteOffsetB;
   SInt32 byteOffsetA;
-  UInt8 bVar11;
+  UInt8 crEqualBits;
   
   pairIndex = 1;
   packetHeader = 0x832;
   extraOffsetB = self + 4;
   byteOffsetA = startIndex * 4 + 4;
-  bVar11 = (M<SInt32>(self + kATIR500GLContext_vertexArrayParam) == 0) << 1;
+  crEqualBits = (M<SInt32>(self + kATIR500GLContext_vertexArrayParam) == 0) << 1;
   extraOffsetA = self;
   byteOffsetB = startIndex * 4 + 8;
   do {
-    if ((bool)(bVar11 >> 1 & 1)) {
+    if ((bool)(crEqualBits >> 1 & 1)) {
       slotA = 0x10;
       slotB = 0x10;
     }

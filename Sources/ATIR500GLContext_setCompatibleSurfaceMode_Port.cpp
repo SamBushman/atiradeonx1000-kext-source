@@ -30,10 +30,10 @@
 bool ATIR500GLContext::setCompatibleSurfaceMode(SInt32*modeBits, eIOGLContextModeBits mode, SInt32 flags) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
   SInt32 baseResult;
   UInt32 mergedBits;
   UInt32 currentBits;
+  UInt32 bitsToMerge;
   UInt32 *modeBitsWords = reinterpret_cast<UInt32 *>(modeBits);
   UInt32 modeValue = (UInt32)mode;
   UInt32 flagsValue = (UInt32)flags;
@@ -46,31 +46,31 @@ bool ATIR500GLContext::setCompatibleSurfaceMode(SInt32*modeBits, eIOGLContextMod
       mergedBits = modeValue & 0x30000 | currentBits & 0xfffc7fc0;
     }
     else {
-      uVar1 = modeValue & 0x30000;
-      if ((currentBits & 0x30000) != uVar1) {
-        if (((currentBits & 0x30000) != 0) && (uVar1 != 0)) {
+      bitsToMerge = modeValue & 0x30000;
+      if ((currentBits & 0x30000) != bitsToMerge) {
+        if (((currentBits & 0x30000) != 0) && (bitsToMerge != 0)) {
           return 0;
         }
-        mergedBits = mergedBits | uVar1;
+        mergedBits = mergedBits | bitsToMerge;
       }
     }
     if ((flagsValue & 0x200) == 0) {
       mergedBits = modeValue & 0x7c0000 | mergedBits & 0xff83ffff;
     }
     else {
-      uVar1 = modeValue & 0x700000;
-      if ((mergedBits & 0x700000) != uVar1) {
-        if (((mergedBits & 0x700000) != 0) && (uVar1 != 0)) {
+      bitsToMerge = modeValue & 0x700000;
+      if ((mergedBits & 0x700000) != bitsToMerge) {
+        if (((mergedBits & 0x700000) != 0) && (bitsToMerge != 0)) {
           return 0;
         }
-        mergedBits = mergedBits | uVar1;
+        mergedBits = mergedBits | bitsToMerge;
       }
-      uVar1 = modeValue & 0xc0000;
-      if ((mergedBits & 0xc0000) != uVar1) {
-        if (((mergedBits & 0xc0000) != 0) && (uVar1 != 0)) {
+      bitsToMerge = modeValue & 0xc0000;
+      if ((mergedBits & 0xc0000) != bitsToMerge) {
+        if (((mergedBits & 0xc0000) != 0) && (bitsToMerge != 0)) {
           return 0;
         }
-        mergedBits = mergedBits | uVar1;
+        mergedBits = mergedBits | bitsToMerge;
       }
     }
     if ((mergedBits & 0xfffcffff) == (modeValue & 0xfffcc03f)) {

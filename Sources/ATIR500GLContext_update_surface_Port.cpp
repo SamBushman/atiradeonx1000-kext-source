@@ -30,20 +30,20 @@
 void ATIR500GLContext::update_surface() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
   SInt32 unitIndex;
   UInt32 surfaceFlags;
+  bool attachmentEligible;
   
   if (M<SInt32>(self + kIOATIR500GLContext_boundSurface) != 0) {
     unitIndex = M<SInt32>(self + kATIR500GLContext_renderBufferIndex);
     surfaceFlags = M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_boundSurface) + 0xbe8);
     if ((unitIndex == 1) || ((unitIndex == 0 && ((surfaceFlags & 0x400) == 0)))) {
-      bVar1 = true;
+      attachmentEligible = true;
     }
     else {
-      bVar1 = false;
+      attachmentEligible = false;
     }
-    if (((surfaceFlags & 0x7c0000) == 0) || (!bVar1)) {
+    if (((surfaceFlags & 0x7c0000) == 0) || (!attachmentEligible)) {
       M<SInt16>(self + kATIR500GLContext_attachmentBufferIds) = (SInt16)unitIndex;
       M<SInt16>(self + kIOATIR500GLContext_colorBufferIndex) = (SInt16)unitIndex;
     }

@@ -14,7 +14,7 @@ RENAMED text). They carry the structural edits that need more than a rename - su
 applied is skipped; one that applies neither way is an error (the re-ported text differs: redo the edit and regenerate the patch).
 
 Table format (tab separated, '#' starts a comment line):
-    #!use-decl: end|beside      (a line of its own in a table, before its `use` rows; default end)
+    #!use-decl: end|beside|end-drop      (a line of its own in a table, before its `use` rows; default end; end-drop = end, and the declaration of an `old` that no code uses any more is deleted)
     kind  target  old  new  tier  evidence  [from  to  [occ]]
   kind    def   rename an identifier inside one function DEFINITION in Sources/*.cpp (signature included)
           decl  rename a parameter name inside one function DECLARATION in Headers/<Class>.h
@@ -259,7 +259,7 @@ def decl_block(lines, decl_i):
     return j + 1, k
 
 
-def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_rows=()):
+def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_rows=(), def_pairs=()):
     """-> (pending, applied) for the `use` rows (see the module docstring); edits go into `files`."""
     pending = applied = 0
     groups = {}
@@ -282,6 +282,9 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_row
         redef_of = {}                                       # old -> its `redef` name (the Ghidra name is gone from the text once the redef is applied)
         for (_, _, _, rt, ro, rn) in redef_rows:
             if rt.split('@')[0] == target.split('@')[0]: redef_of[ro] = rn; revert.setdefault(rn, []).append(ro)
+        for (dc, dm, da, o, nw) in def_pairs:               # a `def` row of the same function renamed the line's identifiers first: an anchor may be written with the old or the new name
+            if dc == cls and dm == meth and (not addr or not da or da == addr) and nw not in revert:
+                revert[nw] = [nw, o]                           # either spelling matches: older tables wrote their anchors with the def'd (new) names
         for cname, off in (field_consts or {}).items():     # a `field` row turned `self + 0x238` into `self + k..._name`: anchors are written against the literal (hex or decimal)
             revert[cname] = [hex(off), str(off)]
         for (t, n, _, old, new, frm, to, occ, dmode) in rs:
@@ -298,8 +301,8 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_row
             if new in have and not declared: errors.append('%s: %s already occurs in the function and is not a variable declared by a use row' % (where, new)); continue
             norm = [line_variants(l, revert) for l in lines]
             decl_i = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l) or (old in redef_of and re.match(DECL_RE % re.escape(redef_of[old]), l))), None)
-            if decl_i is None and declared and old not in idents_in(scope, comments=False):
-                applied += 1; continue                         # the dead declaration of a fully split variable was deleted
+            if decl_i is None and declared:
+                applied += 1; continue                         # the dead declaration of a fully split variable was deleted / dropped once nothing used it
             if decl_i is None: errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
             decl_end, body0 = decl_block(lines, decl_i)
             if frm in ('', '-'): a = body0
@@ -335,9 +338,15 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None, redef_row
                 lines[a:b] = seg.split('\n')
             if not declared:
                 m = re.match(DECL_RE % re.escape(old), lines[decl_i])
-                lines.insert(decl_end if dmode == 'end' else decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
+                lines.insert(decl_end if dmode != 'beside' else decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
             scope = '\n'.join(lines)
             pending += 1
+        lines = scope.split('\n')                      # a variable that every `use` row has renamed away loses its (now unused) declaration
+        for old in sorted({r[3] for r in rs if r[8] == 'end-drop'}):
+            di = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
+            if di is not None and not code_idents('\n'.join(lines[:di] + lines[di + 1:]), {old}):
+                del lines[di]
+        scope = '\n'.join(lines)
         files[f] = s[:st] + scope + s[en:]
     return pending, applied
 
@@ -560,7 +569,7 @@ def main():
         for n, l in enumerate(open(t), 1):
             if l.startswith('#!use-decl:'):
                 dmode = l.split(':', 1)[1].strip()
-                if dmode not in ('end', 'beside'): sys.exit('%s:%d: #!use-decl must be end or beside' % (t, n))
+                if dmode not in ('end', 'beside', 'end-drop'): sys.exit('%s:%d: #!use-decl must be end, beside or end-drop' % (t, n))
                 continue
             if l.startswith('#') or not l.strip(): continue
             f = l.rstrip('\n').split('\t')
@@ -620,7 +629,13 @@ def main():
             files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
     apply_groups(rows)
     field_consts = {'k%s_%s' % (cl[0], nm): int(off, 16) for (_, _, cl, off, nm, _) in field_rows}
-    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, redef_rows)
+    def_pairs = []
+    for (_t, _n, kind, target, old, new) in rows:
+        if kind == 'def':
+            try: dc, dm, da, _nth = parse_target(target)
+            except Exception: continue
+            def_pairs.append((dc, dm, da, old, new))
+    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors, field_consts, redef_rows, def_pairs)
     pending += up; applied += ua
     apply_groups(redef_rows)
     if field_rows:
