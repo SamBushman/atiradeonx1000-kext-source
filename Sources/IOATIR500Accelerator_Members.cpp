@@ -49,17 +49,19 @@ bool IOATIR500Accelerator::foundFramebuffer(IOFramebuffer *framebuffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *framebufferBytes = reinterpret_cast<UInt8 *>(framebuffer);
 
-  UInt8 *pIVar1;
+  UInt8 *nextSlotFramebufferPtr;
   UInt8 *knownFramebuffer;
   UInt32 knownCount;
-  SInt32 iVar4;
-  UInt32 uVar5;
   UInt8 *slotCursor;
   code *setProperty;
   SInt32 index;
-  UInt32 uVar9;
+  UInt32 slotsLeft;
   UInt32 pathLength;
   UInt8 path [288];
+  SInt32 notification;
+  SInt32 pathOk;
+  UInt32 cfPlugInTypes;
+  UInt32 result;
   
   knownCount = M<UInt32>(self + kIOATIR500Accelerator_displayCount);
   pathLength = 0x100;
@@ -67,14 +69,14 @@ bool IOATIR500Accelerator::foundFramebuffer(IOFramebuffer *framebuffer) {
 LAB_000005a0:
     M<UInt8 *>(self + knownCount * 0x20 + 0xd4) = framebufferBytes;
     index = M<SInt32>(self + kIOATIR500Accelerator_displayCount);
-    iVar4 = GH_ZN13IOFramebuffer26addFramebufferNotificationEPFiP8OSObjectP(framebufferBytes,(UInt32)&IOATIR500Accelerator::display_change_handler,self,index);
-    M<SInt32>(self + index * 0x20 + 0xd8) = iVar4;
-    if (iVar4 != 0) {
+    notification = GH_ZN13IOFramebuffer26addFramebufferNotificationEPFiP8OSObjectP(framebufferBytes,(UInt32)&IOATIR500Accelerator::display_change_handler,self,index);
+    M<SInt32>(self + index * 0x20 + 0xd8) = notification;
+    if (notification != 0) {
       setProperty = M<code *>(M<SInt32>(framebufferBytes) + 0x160);
-      uVar5 = VCALL(M<SInt32>(self), 0x188)(self,"IOCFPlugInTypes");
-      (*setProperty)(framebufferBytes,"IOCFPlugInTypes",uVar5);
-      iVar4 = VCALL(M<SInt32>(self), 0x218)(self,path,&pathLength,GH_gIOServicePlane);
-      if (iVar4 != 0) {
+      cfPlugInTypes = VCALL(M<SInt32>(self), 0x188)(self,"IOCFPlugInTypes");
+      (*setProperty)(framebufferBytes,"IOCFPlugInTypes",cfPlugInTypes);
+      pathOk = VCALL(M<SInt32>(self), 0x218)(self,path,&pathLength,GH_gIOServicePlane);
+      if (pathOk != 0) {
         VCALL(M<SInt32>(framebufferBytes), 0x164)(framebufferBytes,"IOAccelTypes",path);
         VCALL(M<SInt32>(framebufferBytes), 0x16c)
                   (framebufferBytes,"IOAccelIndex",0,M<UInt32>(self + kIOATIR500Accelerator_displayCount),0x20);
@@ -84,27 +86,27 @@ LAB_000005a0:
         return 1;
       }
     }
-    uVar5 = 0;
+    result = 0;
   }
   else {
     knownFramebuffer = M<UInt8 *>(self + kIOATIR500Accelerator_framebuffer0);
-    uVar9 = knownCount;
+    slotsLeft = knownCount;
     slotCursor = self;
     while (framebufferBytes != knownFramebuffer) {
-      uVar9 = uVar9 - 1;
-      if (uVar9 == 0) {
+      slotsLeft = slotsLeft - 1;
+      if (slotsLeft == 0) {
         if (1 < knownCount) {
           return 0;
         }
         goto LAB_000005a0;
       }
-      pIVar1 = slotCursor + 0xf4;
+      nextSlotFramebufferPtr = slotCursor + 0xf4;
       slotCursor = slotCursor + 0x20;
-      knownFramebuffer = M<UInt8 *>(pIVar1);
+      knownFramebuffer = M<UInt8 *>(nextSlotFramebufferPtr);
     }
-    uVar5 = 1;
+    result = 1;
   }
-  return uVar5;
+  return result;
 }
 
 /* real addr 0x770 */
@@ -113,23 +115,26 @@ bool IOATIR500Accelerator::findFramebuffers() {
 
   SInt32 *iterator;
   SInt32 *framebufferClassName;
-  UInt32 uVar3;
   UInt8 *framebuffer;
-  SInt32 iVar5;
-  SInt32 *piVar6;
-  UInt8 bVar7;
+  SInt32 child;
+  UInt8 classNameNull;
+  UInt32 nextEntry;
+  UInt32 framebufferObject;
+  SInt32 *entryService;
+  SInt32 *entry;
+  SInt32 *childIterator;
   
   iterator = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x1bc)
                             (M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),GH_gIODTPlane);
   framebufferClassName = (SInt32 *)GH_ZN8OSSymbol11withCStringEPKc("IOFramebuffer");
-  bVar7 = (framebufferClassName == (SInt32 *)0x0) << 1;
+  classNameNull = (framebufferClassName == (SInt32 *)0x0) << 1;
   if ((iterator != (SInt32 *)0x0) && (framebufferClassName != (SInt32 *)0x0)) {
     while( true ) {
-      uVar3 = VCALL(*iterator, 0xd8)(iterator);
-      piVar6 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar3,GH_IOService_metaClass);
-      if (piVar6 == (SInt32 *)0x0) break;
-      uVar3 = VCALL(*piVar6, 0x444)(piVar6,framebufferClassName);
-      framebuffer = (UInt8 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar3,GH_IOFramebuffer_metaClass);
+      nextEntry = VCALL(*iterator, 0xd8)(iterator);
+      entryService = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(nextEntry,GH_IOService_metaClass);
+      if (entryService == (SInt32 *)0x0) break;
+      framebufferObject = VCALL(*entryService, 0x444)(entryService,framebufferClassName);
+      framebuffer = (UInt8 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(framebufferObject,GH_IOFramebuffer_metaClass);
       if (framebuffer != (UInt8 *)0x0) {
         ((IOATIR500Accelerator *)(self))->foundFramebuffer((IOFramebuffer *)framebuffer);
       }
@@ -138,17 +143,17 @@ bool IOATIR500Accelerator::findFramebuffers() {
   }
   iterator = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x3c0)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice));
   if (iterator != (SInt32 *)0x0) {
-    while (piVar6 = (SInt32 *)VCALL(*iterator, 0xd8)(iterator), piVar6 != (SInt32 *)0x0) {
-      framebuffer = (UInt8 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(piVar6,GH_IOFramebuffer_metaClass);
+    while (entry = (SInt32 *)VCALL(*iterator, 0xd8)(iterator), entry != (SInt32 *)0x0) {
+      framebuffer = (UInt8 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(entry,GH_IOFramebuffer_metaClass);
       if (framebuffer == (UInt8 *)0x0) {
-        piVar6 = (SInt32 *)VCALL(*piVar6, 0x3c0)(piVar6);
-        while (iVar5 = VCALL(*piVar6, 0xd8)(piVar6), iVar5 != 0) {
-          framebuffer = (UInt8 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(iVar5,GH_IOFramebuffer_metaClass);
+        childIterator = (SInt32 *)VCALL(*entry, 0x3c0)(entry);
+        while (child = VCALL(*childIterator, 0xd8)(childIterator), child != 0) {
+          framebuffer = (UInt8 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(child,GH_IOFramebuffer_metaClass);
           if (framebuffer != (UInt8 *)0x0) {
             ((IOATIR500Accelerator *)(self))->foundFramebuffer((IOFramebuffer *)framebuffer);
           }
         }
-        VCALL(*piVar6, 0x18)(piVar6);
+        VCALL(*childIterator, 0x18)(childIterator);
       }
       else {
         ((IOATIR500Accelerator *)(self))->foundFramebuffer((IOFramebuffer *)framebuffer);
@@ -156,7 +161,7 @@ bool IOATIR500Accelerator::findFramebuffers() {
     }
     VCALL(*iterator, 0x18)(iterator);
   }
-  if (!(bool)(bVar7 >> 1 & 1)) {
+  if (!(bool)(classNameNull >> 1 & 1)) {
     VCALL(*framebufferClassName, 0x18)(framebufferClassName);
   }
   return 1;
@@ -287,7 +292,7 @@ void IOATIR500Accelerator::unmapVendorTransferBuffer(VendorTransferBuffer *buffe
 /* real addr 0x5090 */
 void IOATIR500Accelerator::teardownAGP(IOService *real_provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
+    UInt8 *selfBytes = reinterpret_cast<UInt8 *>(this);
 
   SInt32 pageSize;
 
@@ -319,7 +324,7 @@ bool IOATIR500Accelerator::disp_mode_did_change() {
   UInt32 panelCount;
   UInt32 panelIndex;
   UInt32 panel;
-  UInt8 *pIVar6;
+  UInt8 *displayRecord;
   UInt8 *surface;
   UInt8 *perPanelCursor;
   
@@ -350,7 +355,7 @@ bool IOATIR500Accelerator::disp_mode_did_change() {
   }
   if (panelCount != 0) {
     panel = 0;
-    pIVar6 = self;
+    displayRecord = self;
     perPanelCursor = self;
     do {
       M<UInt32>(perPanelCursor + 0x114) = 1;
@@ -358,15 +363,15 @@ bool IOATIR500Accelerator::disp_mode_did_change() {
         ((IOATIR500Accelerator *)(self))->setup_stereo(panel, M<UInt32>(perPanelCursor + 0x124));
         M<UInt32>(perPanelCursor + 0x124) = 0;
       }
-      panelSurface = M<UInt32>(pIVar6 + 0xe8);
+      panelSurface = M<UInt32>(displayRecord + 0xe8);
       if (panelSurface != 0) {
         /* real: alloc_surfaces(surface->0xc18, false) - the decompile shows only the low byte and drops the retry argument */
         ((IOATIR500Surface *)(panelSurface))->alloc_surfaces(M<UInt32>(panelSurface + 0xc18), false);
-        VCALL(*M<SInt32 *>(pIVar6 + 0xe8), 0x5a4)(M<SInt32 *>(pIVar6 + 0xe8));
+        VCALL(*M<SInt32 *>(displayRecord + 0xe8), 0x5a4)(M<SInt32 *>(displayRecord + 0xe8));
       }
       panel = panel + 1;
       perPanelCursor = perPanelCursor + 4;
-      pIVar6 = pIVar6 + 0x20;
+      displayRecord = displayRecord + 0x20;
     } while (panel < M<UInt32>(self + kIOATIR500Accelerator_displayCount));
   }
   GH_IOLockWakeup(M<UInt32>(self + kIOATIR500Accelerator_commandLock),self,0);
@@ -405,12 +410,14 @@ bool IOATIR500Accelerator::disp_mode_will_change(SInt32 mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool notLastBuffer;
-  SInt32 iVar2;
   SInt32 prevNode;
   UInt8 *texvert;
   UInt8 *surface;
   UInt32 panel;
-  UInt8 *pIVar6;
+  UInt8 *textureNode;
+  UInt8 *displayRecord;
+  SInt32 bufferIndex;
+  SInt32 nextNode;
   UInt8 *surfaceBuffer;   /* #176: byte pointer - a typed ATIR500SurfaceBuffer* scaled the +0x78 slot stride by sizeof(ATIR500SurfaceBuffer)=0x80 */
   UInt8 *perPanelCursor;
   UInt8 *bufferSlot;
@@ -419,48 +426,48 @@ bool IOATIR500Accelerator::disp_mode_will_change(SInt32 mode) {
     VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
     if (M<SInt32>(self + kIOATIR500Accelerator_displayCount) != 0) {
       panel = 0;
-      pIVar6 = self;
+      displayRecord = self;
       perPanelCursor = self;
       do {
-        if (M<SInt32 *>(pIVar6 + 0xe8) != (SInt32 *)0x0) {
-          VCALL(*M<SInt32 *>(pIVar6 + 0xe8), 0x5a8)(M<SInt32 *>(pIVar6 + 0xe8));
+        if (M<SInt32 *>(displayRecord + 0xe8) != (SInt32 *)0x0) {
+          VCALL(*M<SInt32 *>(displayRecord + 0xe8), 0x5a8)(M<SInt32 *>(displayRecord + 0xe8));
         }
         if (M<SInt32>(perPanelCursor + 0x11c) != 0) {
           M<SInt32>(perPanelCursor + 0x124) = M<SInt32>(perPanelCursor + 0x11c);
           ((IOATIR500Accelerator *)(self))->setup_stereo(panel, 0);
         }
         panel = panel + 1;
-        pIVar6 = pIVar6 + 0x20;
+        displayRecord = displayRecord + 0x20;
         perPanelCursor = perPanelCursor + 4;
       } while (panel < M<UInt32>(self + kIOATIR500Accelerator_displayCount));
     }
-    pIVar6 = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
-    while (pIVar6 != self + kIOATIR500Accelerator_textureVramListSentinel) {
-      if (M<SInt32>(pIVar6 + 0x48) != 0) {
-        VCALL(M<SInt32>(self), 0x524)(self,pIVar6);
-        M<UInt8>(M<SInt32>(pIVar6 + 0x14) + 0x14) = 1;
-        M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x28) = 0;
-        M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x2a) = 0;
-        M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x2c) = 0;
-        M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x2e) = 0;
-        M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x30) = 0;
-        M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x32) = 0;
+    textureNode = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
+    while (textureNode != self + kIOATIR500Accelerator_textureVramListSentinel) {
+      if (M<SInt32>(textureNode + 0x48) != 0) {
+        VCALL(M<SInt32>(self), 0x524)(self,textureNode);
+        M<UInt8>(M<SInt32>(textureNode + 0x14) + 0x14) = 1;
+        M<UInt16>(M<SInt32>(textureNode + 0x14) + 0x28) = 0;
+        M<UInt16>(M<SInt32>(textureNode + 0x14) + 0x2a) = 0;
+        M<UInt16>(M<SInt32>(textureNode + 0x14) + 0x2c) = 0;
+        M<UInt16>(M<SInt32>(textureNode + 0x14) + 0x2e) = 0;
+        M<UInt16>(M<SInt32>(textureNode + 0x14) + 0x30) = 0;
+        M<UInt16>(M<SInt32>(textureNode + 0x14) + 0x32) = 0;
       }
-      prevNode = M<SInt32>(pIVar6 + 0x24);
-      M<UInt32>(prevNode + 0x28) = M<UInt32>(pIVar6 + 0x28);
-      iVar2 = M<SInt32>(pIVar6 + 0x28);
-      M<UInt8 *>(pIVar6 + 0x28) = pIVar6;
-      M<SInt32>(iVar2 + 0x24) = prevNode;
-      M<UInt8 *>(pIVar6 + 0x24) = pIVar6;
-      pIVar6 = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
+      prevNode = M<SInt32>(textureNode + 0x24);
+      M<UInt32>(prevNode + 0x28) = M<UInt32>(textureNode + 0x28);
+      nextNode = M<SInt32>(textureNode + 0x28);
+      M<UInt8 *>(textureNode + 0x28) = textureNode;
+      M<SInt32>(nextNode + 0x24) = prevNode;
+      M<UInt8 *>(textureNode + 0x24) = textureNode;
+      textureNode = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
     }
     texvert = M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next);
     while (texvert != (UInt8 *)(self + kIOATIR500Accelerator_orphanTextureList)) {
       prevNode = M<SInt32>(texvert + 0x24);
       M<UInt32>(prevNode + 0x28) = M<UInt32>(texvert + 0x28);
-      iVar2 = M<SInt32>(texvert + 0x28);
+      nextNode = M<SInt32>(texvert + 0x28);
       M<UInt8 *>(texvert + 0x28) = texvert;
-      M<SInt32>(iVar2 + 0x24) = prevNode;
+      M<SInt32>(nextNode + 0x24) = prevNode;
       M<UInt8 *>(texvert + 0x24) = texvert;
       GH_FreeTexvert(self,texvert);
       texvert = M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next);
@@ -468,17 +475,17 @@ bool IOATIR500Accelerator::disp_mode_will_change(SInt32 mode) {
     surface = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
     if (surface != (UInt8 *)0x0) {
       do {
-        iVar2 = 0;
+        bufferIndex = 0;
         surfaceBuffer = surface + 0xa8;
         bufferSlot = surface;
         do {
           if (M<SInt32>(bufferSlot + 0xb0) != 0) {
             ((IOATIR500Surface *)(surface))->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
           }
-          notLastBuffer = iVar2 != 0x16;
+          notLastBuffer = bufferIndex != 0x16;
           surfaceBuffer = surfaceBuffer + 0x78;
           bufferSlot = bufferSlot + 0x78;
-          iVar2 = iVar2 + 1;
+          bufferIndex = bufferIndex + 1;
         } while (notLastBuffer);
         surface = M<UInt8 *>(surface + 0x9c);
       } while (surface != M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead));

@@ -31,10 +31,11 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     PanelRecord *rec = PANEL_RECORD(self, panel);
 
-  SInt32 iVar2;
   SInt32 waitTotal;
   UInt32 bufferIndex;
   SInt32 *accelerator;
+  SInt32 slotNumber;
+  SInt32 waitTime;
   
   accelerator = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   if (accelerator[panel + 0x45] != 0) {
@@ -42,11 +43,11 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
     do {
       waitTotal = accelerator[0x1e2];
       /* the stamp of the submit slot (rec->slotIndex + bufferIndex), numbered from entries[1] */
-      iVar2 = rec->slotIndex + bufferIndex;
+      slotNumber = rec->slotIndex + bufferIndex;
       bufferIndex = bufferIndex + 1;
-      iVar2 = VCALL(*accelerator, 0x54c)
-                        (accelerator,rec->entries[iVar2 + 1].stamp);
-      accelerator[0x1e2] = waitTotal + iVar2;
+      waitTime = VCALL(*accelerator, 0x54c)
+                        (accelerator,rec->entries[slotNumber + 1].stamp);
+      accelerator[0x1e2] = waitTotal + waitTime;
       accelerator = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
     } while (bufferIndex < (UInt32)accelerator[panel + 0x45]);
     if (accelerator[panel + 0x45] != 0) {
@@ -54,7 +55,7 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
       do {
         /* the four submit slots entries[bufferIndex + 1 .. bufferIndex + 4]. With more than one buffer per panel this walks past the record into the next one (stock behaviour, kept) */
         SwapBufferEntry *slot = &rec->entries[bufferIndex + 1];
-        for (SInt32 iVar4 = 0; iVar4 != 4; iVar4 = iVar4 + 1, slot = slot + 1) {
+        for (SInt32 slotNo = 0; slotNo != 4; slotNo = slotNo + 1, slot = slot + 1) {
           if (slot->gartOffset != 0) {
             VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x5ac)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),slot);
           }

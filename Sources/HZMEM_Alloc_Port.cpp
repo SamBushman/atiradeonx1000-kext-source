@@ -31,20 +31,32 @@ UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind, UI
     UInt8 *hizDataBytes = reinterpret_cast<UInt8 *>(hizData);
 
   SInt32 kindOffset;
-  SInt32 iVar2;
-  SInt32 iVar3;
-  UInt32 uVar4;
-  SInt32 *piVar5;
-  SInt32 iVar6;
-  UInt8 *puVar7;
+  UInt8 *fillPtr;
   UInt32 blockSlot;
   SInt32 *pool;
-  UInt32 uVar10;
-  UInt32 uVar11;
-  SInt32 iVar12;
   UInt32 poolLimit;
-  UInt32 uVar14;
-  SInt32 iVar15;
+  SInt32 searchLeft;
+  UInt32 tileDimUnit;
+  UInt32 tileCount;
+  UInt32 blocksNeeded;
+  UInt32 sizeUnit;
+  UInt32 blockSize;
+  SInt32 remainder;
+  SInt32 slotsLeft;
+  SInt32 scanLeft;
+  SInt32 usageMap;
+  SInt32 startBlock;
+  SInt32 startOffset;
+  SInt32 scanIndex;
+  SInt32 mapBlocks;
+  SInt32 fillCount;
+  SInt32 prevIndex;
+  SInt32 mapCursor;
+  SInt32 *slotCursor;
+  SInt32 *kindPool;
+  UInt32 freeRun;
+  UInt32 fillLeft;
+  UInt32 runBlocks;
   
   if (hizDataBytes == (UInt8 *)0x0) {
     return 0xffffffff;
@@ -57,121 +69,121 @@ UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind, UI
   if (2 < blockKind) {
     return 0xffffffff;
   }
-  uVar11 = M<UInt32>(hizDataBytes + 4);
-  if (tileDim != (tileDim / uVar11) * uVar11) {
+  tileDimUnit = M<UInt32>(hizDataBytes + 4);
+  if (tileDim != (tileDim / tileDimUnit) * tileDimUnit) {
     return 0xffffffff;
   }
-  uVar4 = M<UInt32>(hizDataBytes + 8);
-  if (size != (size / uVar4) * uVar4) {
+  sizeUnit = M<UInt32>(hizDataBytes + 8);
+  if (size != (size / sizeUnit) * sizeUnit) {
     return 0xffffffff;
   }
-  if ((uVar11 == 0) || (uVar4 == 0)) {
-    uVar11 = 0;
+  if ((tileDimUnit == 0) || (sizeUnit == 0)) {
+    tileCount = 0;
   }
   else {
-    uVar11 = (tileDim / uVar11) * (size / uVar4);
+    tileCount = (tileDim / tileDimUnit) * (size / sizeUnit);
   }
-  uVar4 = pool[1];
+  blockSize = pool[1];
   poolLimit = pool[2];
-  iVar2 = uVar11 - (uVar11 / uVar4) * uVar4;
-  if (iVar2 != 0) {
-    uVar11 = uVar4 + (uVar11 - iVar2);
+  remainder = tileCount - (tileCount / blockSize) * blockSize;
+  if (remainder != 0) {
+    tileCount = blockSize + (tileCount - remainder);
   }
-  if (uVar4 == 0) {
-    uVar11 = 0;
+  if (blockSize == 0) {
+    blocksNeeded = 0;
   }
   else {
-    uVar11 = uVar11 / uVar4;
+    blocksNeeded = tileCount / blockSize;
   }
   if ((UInt32)pool[4] < 0x100) {
-    piVar5 = pool + 5;
+    slotCursor = pool + 5;
     blockSlot = 0;
-    iVar2 = 0x100;
+    slotsLeft = 0x100;
     do {
-      if (*piVar5 == 0) {
-        iVar2 = *pool;
-        uVar14 = uVar11;
-        if (iVar2 == 0) goto LAB_000454ac;
-        uVar10 = 0;
-        iVar3 = 0;
-        iVar12 = 0;
+      if (*slotCursor == 0) {
+        scanLeft = *pool;
+        runBlocks = blocksNeeded;
+        if (scanLeft == 0) goto LAB_000454ac;
+        freeRun = 0;
+        startBlock = 0;
+        scanIndex = 0;
         goto LAB_00045460;
       }
       blockSlot = blockSlot + 1;
-      piVar5 = piVar5 + 4;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      slotCursor = slotCursor + 4;
+      slotsLeft = slotsLeft + -1;
+    } while (slotsLeft != 0);
   }
   goto LAB_00045438;
 code_r0x00045488:
-  iVar12 = iVar12 + 1;
-  iVar2 = iVar2 + -1;
-  if (iVar2 == 0) goto LAB_000454ac;
+  scanIndex = scanIndex + 1;
+  scanLeft = scanLeft + -1;
+  if (scanLeft == 0) goto LAB_000454ac;
 LAB_00045460:
-  uVar10 = uVar10 + 1;
-  if (M<char>(iVar12 + pool[3]) == '\x01') {
-    iVar3 = iVar12 + 1;
-    uVar10 = 0;
+  freeRun = freeRun + 1;
+  if (M<char>(scanIndex + pool[3]) == '\x01') {
+    startBlock = scanIndex + 1;
+    freeRun = 0;
   }
-  if (uVar10 != uVar11) goto code_r0x00045488;
-  if (uVar11 != 0) {
-    puVar7 = (UInt8 *)(iVar3 + pool[3]);
-    uVar10 = uVar11;
+  if (freeRun != blocksNeeded) goto code_r0x00045488;
+  if (blocksNeeded != 0) {
+    fillPtr = (UInt8 *)(startBlock + pool[3]);
+    fillLeft = blocksNeeded;
     do {
-      *puVar7 = 1;
-      puVar7 = puVar7 + 1;
-      uVar10 = uVar10 - 1;
-    } while (uVar10 != 0);
+      *fillPtr = 1;
+      fillPtr = fillPtr + 1;
+      fillLeft = fillLeft - 1;
+    } while (fillLeft != 0);
   }
-  if (iVar3 != -1) {
-    iVar3 = uVar4 * iVar3;
+  if (startBlock != -1) {
+    startOffset = blockSize * startBlock;
 LAB_00045584:
-    pool[blockSlot * 4 + 6] = iVar3;
-    pool[blockSlot * 4 + 8] = uVar11 * uVar4;
-    pool[blockSlot * 4 + 7] = uVar4 * uVar14;
+    pool[blockSlot * 4 + 6] = startOffset;
+    pool[blockSlot * 4 + 8] = blocksNeeded * blockSize;
+    pool[blockSlot * 4 + 7] = blockSize * runBlocks;
     pool[blockSlot * 4 + 5] = 1;
     M<SInt32>(M<SInt32>(hizDataBytes + kindOffset + 0x10) + 0x10) =
          M<SInt32>(M<SInt32>(hizDataBytes + kindOffset + 0x10) + 0x10) + 1;
     goto LAB_0004543c;
   }
 LAB_000454ac:
-  piVar5 = M<SInt32 *>(hizDataBytes + kindOffset + 0x10);
-  if (((piVar5 == (SInt32 *)0x0) || (iVar2 = piVar5[3], iVar2 == 0)) || (iVar12 = *piVar5, iVar12 < 1))
+  kindPool = M<SInt32 *>(hizDataBytes + kindOffset + 0x10);
+  if (((kindPool == (SInt32 *)0x0) || (usageMap = kindPool[3], usageMap == 0)) || (mapBlocks = *kindPool, mapBlocks < 1))
   {
-    iVar3 = 0;
+    startOffset = 0;
     goto LAB_00045584;
   }
-  iVar3 = iVar12 + -1;
-  if (M<char>(iVar2 + iVar3) != '\0') goto LAB_00045438;
-  iVar6 = iVar12 + -2;
-  if ((iVar6 < 0) || (M<char>(iVar2 + iVar6) == '\x01')) {
-    uVar14 = 1;
+  startBlock = mapBlocks + -1;
+  if (M<char>(usageMap + startBlock) != '\0') goto LAB_00045438;
+  prevIndex = mapBlocks + -2;
+  if ((prevIndex < 0) || (M<char>(usageMap + prevIndex) == '\x01')) {
+    runBlocks = 1;
   }
   else {
-    uVar14 = 2;
-    if (2 < uVar11) {
-      iVar6 = iVar2 + iVar6;
-      iVar15 = iVar3;
+    runBlocks = 2;
+    if (2 < blocksNeeded) {
+      mapCursor = usageMap + prevIndex;
+      searchLeft = startBlock;
       do {
-        iVar3 = iVar3 + -1;
-        iVar15 = iVar15 + -1;
-        if ((iVar15 == 0) || (M<char>(iVar6 + -1) == '\x01')) break;
-        uVar14 = uVar14 + 1;
-        iVar6 = iVar6 + -1;
-      } while (uVar14 != uVar11);
+        startBlock = startBlock + -1;
+        searchLeft = searchLeft + -1;
+        if ((searchLeft == 0) || (M<char>(mapCursor + -1) == '\x01')) break;
+        runBlocks = runBlocks + 1;
+        mapCursor = mapCursor + -1;
+      } while (runBlocks != blocksNeeded);
     }
   }
-  if ((iVar3 != -1) && (uVar4 * (iVar3 + uVar11) <= poolLimit)) {
-    if (iVar3 < iVar12) {
-      iVar12 = iVar12 - iVar3;
-      puVar7 = (UInt8 *)(iVar3 + iVar2);
+  if ((startBlock != -1) && (blockSize * (startBlock + blocksNeeded) <= poolLimit)) {
+    if (startBlock < mapBlocks) {
+      fillCount = mapBlocks - startBlock;
+      fillPtr = (UInt8 *)(startBlock + usageMap);
       do {
-        *puVar7 = 1;
-        puVar7 = puVar7 + 1;
-        iVar12 = iVar12 + -1;
-      } while (iVar12 != 0);
+        *fillPtr = 1;
+        fillPtr = fillPtr + 1;
+        fillCount = fillCount + -1;
+      } while (fillCount != 0);
     }
-    iVar3 = uVar4 * iVar3;
+    startOffset = blockSize * startBlock;
     goto LAB_00045584;
   }
 LAB_00045438:

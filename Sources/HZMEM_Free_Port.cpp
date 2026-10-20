@@ -34,8 +34,9 @@ UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
   SInt32 unitsLeft;
   UInt8 *bitmapCursor;
   UInt32 startUnit;
-  UInt32 uVar5;
   UInt32 *pool;
+  UInt32 blockSize;
+  UInt32 endUnit;
   
   if (hizDataBytes != (UInt8 *)0x0) {
     pool = M<UInt32 *>(hizDataBytes + blockKind * 4 + 0x10);
@@ -53,21 +54,21 @@ UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
         }
       }
       if ((blockIndex != 0x3ff) && (pool + blockIndex * 4 + 5 != (UInt32 *)0x0)) {
-        uVar5 = pool[1];
-        if (uVar5 == 0) {
+        blockSize = pool[1];
+        if (blockSize == 0) {
           startUnit = 0;
-          uVar5 = 0;
+          endUnit = 0;
         }
         else {
-          startUnit = pool[blockIndex * 4 + 6] / uVar5;
-          uVar5 = startUnit + pool[blockIndex * 4 + 7] / uVar5;
-          if (*pool < uVar5) {
+          startUnit = pool[blockIndex * 4 + 6] / blockSize;
+          endUnit = startUnit + pool[blockIndex * 4 + 7] / blockSize;
+          if (*pool < endUnit) {
             return 1;
           }
         }
         if (pool[3] != 0) {
-          if (startUnit < uVar5) {
-            unitsLeft = uVar5 - startUnit;
+          if (startUnit < endUnit) {
+            unitsLeft = endUnit - startUnit;
             bitmapCursor = (UInt8 *)(startUnit + pool[3]);
             do {
               *bitmapCursor = 0;

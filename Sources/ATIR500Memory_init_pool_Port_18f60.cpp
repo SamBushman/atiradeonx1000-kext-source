@@ -31,78 +31,80 @@ extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 bool ATIR500Memory::init_pool(UInt32 poolSize, UInt32 reservedOffset, UInt32 reservedSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
   UInt32 *newChunk;
   UInt32 result;
   SInt32 *chunkEnd;
-  SInt32 *piVar5;
-  SInt32 *piVar7;
-  SInt32 *piVar6;
+  SInt32 *spareNode;
+  SInt32 *nextSpare;
+  SInt32 initOk;
+  SInt32 chunk;
+  SInt32 *poolNode;
+  SInt32 *spareLink;
   
-  iVar1 = VCALL(M<SInt32>(self), 0x48)(self);
-  if (iVar1 == 0) {
+  initOk = VCALL(M<SInt32>(self), 0x48)(self);
+  if (initOk == 0) {
 LAB_000190f0:
     result = 0;
   }
   else {
-    iVar1 = M<SInt32>(self + kATIR500Memory_chunkList);
+    chunk = M<SInt32>(self + kATIR500Memory_chunkList);
     M<UInt32>(self + kATIR500Memory_spareNodeStack) = 0;
     M<UInt32>(self + 8) = 0;
-    if (iVar1 == 0) {
+    if (chunk == 0) {
       newChunk = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
       M<UInt32 *>(self + kATIR500Memory_chunkList) = newChunk;
       if (newChunk != (UInt32 *)0x0) {
         *newChunk = 0;
       }
-      iVar1 = M<SInt32>(self + kATIR500Memory_chunkList);
-      if (iVar1 == 0) goto LAB_000190f0;
+      chunk = M<SInt32>(self + kATIR500Memory_chunkList);
+      if (chunk == 0) goto LAB_000190f0;
     }
-    piVar7 = (SInt32 *)(iVar1 + 0x24);
-    M<SInt32>(self + 8) = iVar1 + 4;
-    chunkEnd = (SInt32 *)(iVar1 + 500);
-    M<UInt32>(iVar1 + 0xc) = 0;
-    M<UInt32>(iVar1 + 8) = 0;
-    M<UInt32>(iVar1 + 0x10) = 0x80000000;
-    M<SInt32>(iVar1 + 0x18) = iVar1 + 4;
-    M<SInt32>(iVar1 + 4) = iVar1 + 0x14;
-    M<UInt32>(iVar1 + 0x1c) = 0;
-    M<UInt32>(iVar1 + 0x20) = 0;
-    M<SInt32 *>(iVar1 + 0x14) = piVar7;
+    poolNode = (SInt32 *)(chunk + 0x24);
+    M<SInt32>(self + 8) = chunk + 4;
+    chunkEnd = (SInt32 *)(chunk + 500);
+    M<UInt32>(chunk + 0xc) = 0;
+    M<UInt32>(chunk + 8) = 0;
+    M<UInt32>(chunk + 0x10) = 0x80000000;
+    M<SInt32>(chunk + 0x18) = chunk + 4;
+    M<SInt32>(chunk + 4) = chunk + 0x14;
+    M<UInt32>(chunk + 0x1c) = 0;
+    M<UInt32>(chunk + 0x20) = 0;
+    M<SInt32 *>(chunk + 0x14) = poolNode;
     if (reservedOffset != 0) {
-      piVar7 = (SInt32 *)(iVar1 + 0x34);
-      M<SInt32>(iVar1 + 0x28) = iVar1 + 0x14;
-      M<UInt32>(iVar1 + 0x2c) = 0;
-      M<UInt32>(iVar1 + 0x30) = 0x80000000;
-      M<SInt32 *>(iVar1 + 0x24) = piVar7;
+      poolNode = (SInt32 *)(chunk + 0x34);
+      M<SInt32>(chunk + 0x28) = chunk + 0x14;
+      M<UInt32>(chunk + 0x2c) = 0;
+      M<UInt32>(chunk + 0x30) = 0x80000000;
+      M<SInt32 *>(chunk + 0x24) = poolNode;
     }
-    piVar5 = piVar7 + 0xc;
-    piVar7[2] = reservedOffset;
-    piVar7[1] = (SInt32)(piVar7 + -4);
-    piVar7[3] = 0;
-    piVar7[8] = 0;
-    piVar7[5] = (SInt32)piVar7;
-    *piVar7 = (SInt32)(piVar7 + 4);
-    piVar7[9] = (SInt32)(piVar7 + 4);
-    piVar7[4] = (SInt32)(piVar7 + 8);
-    piVar7[6] = reservedOffset + reservedSize;
-    piVar7[7] = -0x80000000;
-    piVar7[10] = poolSize;
-    piVar7[0xb] = 0;
-    M<SInt32 *>(self + kATIR500Memory_spareNodeStack) = piVar5;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    if (chunkEnd != piVar5) {
-      piVar7 = piVar7 + 0x12;
+    spareNode = poolNode + 0xc;
+    poolNode[2] = reservedOffset;
+    poolNode[1] = (SInt32)(poolNode + -4);
+    poolNode[3] = 0;
+    poolNode[8] = 0;
+    poolNode[5] = (SInt32)poolNode;
+    *poolNode = (SInt32)(poolNode + 4);
+    poolNode[9] = (SInt32)(poolNode + 4);
+    poolNode[4] = (SInt32)(poolNode + 8);
+    poolNode[6] = reservedOffset + reservedSize;
+    poolNode[7] = -0x80000000;
+    poolNode[10] = poolSize;
+    poolNode[0xb] = 0;
+    M<SInt32 *>(self + kATIR500Memory_spareNodeStack) = spareNode;
+    poolNode[0xd] = 0;
+    poolNode[0xe] = 0;
+    poolNode[0xf] = 0;
+    if (chunkEnd != spareNode) {
+      spareLink = poolNode + 0x12;
       do {
-        piVar6 = piVar5 + 4;
-        *piVar7 = 0;
-        piVar7[1] = 0;
-        piVar7[-1] = 0;
-        *piVar5 = (SInt32)piVar6;
-        piVar7 = piVar7 + 4;
-        piVar5 = piVar6;
-      } while (chunkEnd != piVar6);
+        nextSpare = spareNode + 4;
+        *spareLink = 0;
+        spareLink[1] = 0;
+        spareLink[-1] = 0;
+        *spareNode = (SInt32)nextSpare;
+        spareLink = spareLink + 4;
+        spareNode = nextSpare;
+      } while (chunkEnd != nextSpare);
     }
     result = 1;
     *chunkEnd = 0;

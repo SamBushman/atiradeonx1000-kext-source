@@ -31,7 +31,7 @@ void IOATIR500Surface::reset_access() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 *descriptor;
-  UInt32 uVar2;
+  UInt32 mapAddress;
   SInt32 previous;
   
   previous = M<SInt32>(self + kIOATIR500Surface_accessDescriptor);
@@ -48,16 +48,16 @@ void IOATIR500Surface::reset_access() {
     descriptor = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accessDescriptor), 0x150)(M<SInt32 *>(self + kIOATIR500Surface_accessDescriptor),1);
     M<SInt32 *>(self + kIOATIR500Surface_kernelMap) = descriptor;
     if (descriptor != (SInt32 *)0x0) {
-      uVar2 = VCALL(*descriptor, 0xd0)(descriptor);
-      M<UInt32>(self + kIOATIR500Surface_kernelMapAddress) = uVar2;
+      mapAddress = VCALL(*descriptor, 0xd0)(descriptor);
+      M<UInt32>(self + kIOATIR500Surface_kernelMapAddress) = mapAddress;
     }
     if (self[0xbf4] != 0x0) {
       descriptor = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accessDescriptor), 0x14c)
                                 (M<SInt32 *>(self + kIOATIR500Surface_accessDescriptor),M<UInt32>(self + kIOATIR500Surface_task),0,1,0,0);
       M<SInt32 *>(self + kIOATIR500Surface_userMap) = descriptor;
       if (descriptor != (SInt32 *)0x0) {
-        uVar2 = VCALL(*descriptor, 0xd0)(descriptor);
-        M<UInt32>(self + kIOATIR500Surface_userMapAddress) = uVar2;
+        mapAddress = VCALL(*descriptor, 0xd0)(descriptor);
+        M<UInt32>(self + kIOATIR500Surface_userMapAddress) = mapAddress;
       }
     }
   }

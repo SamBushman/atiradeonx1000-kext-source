@@ -61,7 +61,7 @@ IOReturn IOATIR500Accelerator::newUserClient(task *owningTask, void*securityID, 
 
   code *factory;
   UInt8 *client;
-  SInt32 iVar3;
+  SInt32 clientStatus;
   SInt32 *properties;
   UInt8 noProperties;
 
@@ -118,13 +118,13 @@ IOReturn IOATIR500Accelerator::newUserClient(task *owningTask, void*securityID, 
   M<task *>(client + 0x78) = owningTask;
   noProperties = 2;
 LAB_000021d0:
-  iVar3 = VCALL(M<SInt32>(client), 0x150)(client,properties);
-  if (iVar3 != 0) {
-    iVar3 = VCALL(M<SInt32>(client), 0x3a4)(client,self);
+  clientStatus = VCALL(M<SInt32>(client), 0x150)(client,properties);
+  if (clientStatus != 0) {
+    clientStatus = VCALL(M<SInt32>(client), 0x3a4)(client,self);
   }
-  if (iVar3 != 0) {
-    iVar3 = VCALL(M<SInt32>(client), 0x348)(client,self);
-    if (iVar3 != 0) {
+  if (clientStatus != 0) {
+    clientStatus = VCALL(M<SInt32>(client), 0x348)(client,self);
+    if (clientStatus != 0) {
       *handler = (IOUserClient *)client;
       if (!(bool)(noProperties >> 1 & 1)) {
         VCALL(*properties, 0x18)(properties);

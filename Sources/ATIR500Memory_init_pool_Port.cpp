@@ -31,67 +31,69 @@ extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 bool ATIR500Memory::init_pool(UInt32 poolSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 *puVar1;
-  SInt32 iVar2;
-  UInt32 *puVar3;
+  UInt32 *spareLink;
   UInt32 result;
-  SInt32 iVar5;
+  SInt32 nodesLeft;
+  SInt32 initOk;
+  SInt32 chunk;
+  UInt32 *newChunk;
+  UInt32 *spareNode;
   
-  iVar2 = VCALL(M<SInt32>(self), 0x48)(self);
-  if (iVar2 == 0) {
+  initOk = VCALL(M<SInt32>(self), 0x48)(self);
+  if (initOk == 0) {
 LAB_00018f2c:
     result = 0;
   }
   else {
-    iVar2 = M<SInt32>(self + kATIR500Memory_chunkList);
+    chunk = M<SInt32>(self + kATIR500Memory_chunkList);
     M<UInt32>(self + kATIR500Memory_spareNodeStack) = 0;
     M<UInt32>(self + 8) = 0;
-    if (iVar2 == 0) {
-      puVar3 = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
-      M<UInt32 *>(self + kATIR500Memory_chunkList) = puVar3;
-      if (puVar3 != (UInt32 *)0x0) {
-        *puVar3 = 0;
+    if (chunk == 0) {
+      newChunk = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
+      M<UInt32 *>(self + kATIR500Memory_chunkList) = newChunk;
+      if (newChunk != (UInt32 *)0x0) {
+        *newChunk = 0;
       }
-      iVar2 = M<SInt32>(self + kATIR500Memory_chunkList);
-      if (iVar2 == 0) goto LAB_00018f2c;
+      chunk = M<SInt32>(self + kATIR500Memory_chunkList);
+      if (chunk == 0) goto LAB_00018f2c;
     }
-    puVar3 = (UInt32 *)(iVar2 + 0x44);
-    M<SInt32>(self + 8) = iVar2 + 4;
-    M<UInt32>(iVar2 + 0xc) = 0;
-    M<UInt32>(iVar2 + 8) = 0;
-    M<UInt32>(iVar2 + 0x1c) = 0;
-    M<SInt32>(iVar2 + 0x18) = iVar2 + 4;
-    M<UInt32>(iVar2 + 0x2c) = 0;
-    M<SInt32>(iVar2 + 0x28) = iVar2 + 0x14;
-    M<UInt32>(iVar2 + 0x3c) = poolSize;
-    M<SInt32>(iVar2 + 0x38) = iVar2 + 0x24;
-    M<SInt32>(iVar2 + 4) = iVar2 + 0x14;
-    M<SInt32>(iVar2 + 0x14) = iVar2 + 0x24;
-    M<SInt32>(iVar2 + 0x24) = iVar2 + 0x34;
-    M<UInt32>(iVar2 + 0x34) = 0;
-    M<UInt32>(iVar2 + 0x10) = 0x80000000;
-    M<UInt32>(iVar2 + 0x20) = 0;
-    M<UInt32>(iVar2 + 0x30) = 0x80000000;
-    M<UInt32>(iVar2 + 0x40) = 0;
-    M<UInt32 *>(self + kATIR500Memory_spareNodeStack) = puVar3;
-    M<UInt32>(iVar2 + 0x48) = 0;
-    M<UInt32>(iVar2 + 0x4c) = 0;
-    M<UInt32>(iVar2 + 0x50) = 0;
-    if ((UInt32 *)(iVar2 + 500) != puVar3) {
-      puVar1 = (UInt32 *)(iVar2 + 0x5c);
-      iVar5 = 0x1b;
+    spareNode = (UInt32 *)(chunk + 0x44);
+    M<SInt32>(self + 8) = chunk + 4;
+    M<UInt32>(chunk + 0xc) = 0;
+    M<UInt32>(chunk + 8) = 0;
+    M<UInt32>(chunk + 0x1c) = 0;
+    M<SInt32>(chunk + 0x18) = chunk + 4;
+    M<UInt32>(chunk + 0x2c) = 0;
+    M<SInt32>(chunk + 0x28) = chunk + 0x14;
+    M<UInt32>(chunk + 0x3c) = poolSize;
+    M<SInt32>(chunk + 0x38) = chunk + 0x24;
+    M<SInt32>(chunk + 4) = chunk + 0x14;
+    M<SInt32>(chunk + 0x14) = chunk + 0x24;
+    M<SInt32>(chunk + 0x24) = chunk + 0x34;
+    M<UInt32>(chunk + 0x34) = 0;
+    M<UInt32>(chunk + 0x10) = 0x80000000;
+    M<UInt32>(chunk + 0x20) = 0;
+    M<UInt32>(chunk + 0x30) = 0x80000000;
+    M<UInt32>(chunk + 0x40) = 0;
+    M<UInt32 *>(self + kATIR500Memory_spareNodeStack) = spareNode;
+    M<UInt32>(chunk + 0x48) = 0;
+    M<UInt32>(chunk + 0x4c) = 0;
+    M<UInt32>(chunk + 0x50) = 0;
+    if ((UInt32 *)(chunk + 500) != spareNode) {
+      spareLink = (UInt32 *)(chunk + 0x5c);
+      nodesLeft = 0x1b;
       do {
-        *puVar1 = 0;
-        puVar1[1] = 0;
-        puVar1[-1] = 0;
-        *puVar3 = (UInt32)(puVar3 + 4);
-        puVar1 = puVar1 + 4;
-        iVar5 = iVar5 + -1;
-        puVar3 = puVar3 + 4;
-      } while (iVar5 != 0);
+        *spareLink = 0;
+        spareLink[1] = 0;
+        spareLink[-1] = 0;
+        *spareNode = (UInt32)(spareNode + 4);
+        spareLink = spareLink + 4;
+        nodesLeft = nodesLeft + -1;
+        spareNode = spareNode + 4;
+      } while (nodesLeft != 0);
     }
     result = 1;
-    M<UInt32>(iVar2 + 500) = 0;
+    M<UInt32>(chunk + 500) = 0;
   }
   return result;
 }

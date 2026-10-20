@@ -32,7 +32,6 @@ UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignmen
     UInt8 *elemBytes = reinterpret_cast<UInt8 *>(elem);
 
   UInt32 oldSpareHead;
-  UInt32 *puVar2;
   SInt32 refilled;
   UInt32 result;
   UInt32 allocEnd;
@@ -40,6 +39,8 @@ UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignmen
   UInt32 *nextNode;
   UInt32 *freeNode;
   UInt32 alignMask;
+  UInt32 *prevNode;
+  UInt32 *spareNode;
   
   alignMask = 0;
   if (alignment != 0) {
@@ -63,13 +64,13 @@ LAB_000195bc:
     } while ((UInt32)nextNode[2] < allocEnd);
     M<UInt32>(elemBytes + 8) = allocOffset;
     M<UInt32>(elemBytes + 0xc) = alignMask & 0xffff;
-    puVar2 = (UInt32 *)freeNode[1];
+    prevNode = (UInt32 *)freeNode[1];
     if (freeNode[2] == allocOffset) {
       if (allocEnd == nextNode[2]) {
         M<UInt32 *>(elemBytes) = nextNode;
-        M<UInt32 *>(elemBytes + 4) = puVar2;
+        M<UInt32 *>(elemBytes + 4) = prevNode;
         result = 1;
-        *puVar2 = (UInt32)(elemBytes);
+        *prevNode = (UInt32)(elemBytes);
         nextNode[1] = (UInt32)(elemBytes);
         oldSpareHead = M<UInt32>(self + kATIR500Memory_spareNodeStack);
         freeNode[3] = 0;
@@ -81,9 +82,9 @@ LAB_000195bc:
       else {
         result = 1;
         M<UInt32 *>(elemBytes) = freeNode;
-        M<UInt32 *>(elemBytes + 4) = puVar2;
+        M<UInt32 *>(elemBytes + 4) = prevNode;
         freeNode[2] = allocEnd;
-        *puVar2 = (UInt32)(elemBytes);
+        *prevNode = (UInt32)(elemBytes);
         freeNode[1] = (UInt32)(elemBytes);
       }
     }
@@ -95,15 +96,15 @@ LAB_000195bc:
       nextNode[1] = (UInt32)(elemBytes);
     }
     else {
-      puVar2 = M<UInt32 *>(self + kATIR500Memory_spareNodeStack);
+      spareNode = M<UInt32 *>(self + kATIR500Memory_spareNodeStack);
       result = 1;
-      M<UInt32>(self + kATIR500Memory_spareNodeStack) = *puVar2;
-      *puVar2 = (UInt32)(nextNode);
-      nextNode[1] = (UInt32)(puVar2);
-      M<UInt32 *>(elemBytes) = puVar2;
-      puVar2[1] = (UInt32)(elemBytes);
-      puVar2[3] = 0x80000000;
-      puVar2[2] = allocEnd;
+      M<UInt32>(self + kATIR500Memory_spareNodeStack) = *spareNode;
+      *spareNode = (UInt32)(nextNode);
+      nextNode[1] = (UInt32)(spareNode);
+      M<UInt32 *>(elemBytes) = spareNode;
+      spareNode[1] = (UInt32)(elemBytes);
+      spareNode[3] = 0x80000000;
+      spareNode[2] = allocEnd;
       *freeNode = (UInt32)(elemBytes);
       M<UInt32 *>(elemBytes + 4) = freeNode;
     }

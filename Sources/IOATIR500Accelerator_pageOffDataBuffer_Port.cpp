@@ -31,45 +31,49 @@ void IOATIR500Accelerator::pageOffDataBuffer(VendorTextureBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
-  SInt32 *piVar2;
-  SInt32 iVar3;
   UInt32 wordIndex;
+  SInt32 backingStatus;
+  SInt32 nextNode;
+  SInt32 mappedAddress;
+  SInt32 prevNode;
+  SInt32 byteOffset;
+  SInt32 *backingObject;
+  SInt32 *cpuMapping;
   
-  iVar1 = this->allocDataBufferBacking((VendorTextureBuffer *)(bufferBytes));
-  if (iVar1 == 0) {
+  backingStatus = this->allocDataBufferBacking((VendorTextureBuffer *)(bufferBytes));
+  if (backingStatus == 0) {
     VCALL(M<SInt32>(self), 0x524)(self,bufferBytes);
-    iVar3 = M<SInt32>(bufferBytes + 0x24);
-    M<UInt32>(iVar3 + 0x28) = M<UInt32>(bufferBytes + 0x28);
-    iVar1 = M<SInt32>(bufferBytes + 0x28);
+    prevNode = M<SInt32>(bufferBytes + 0x24);
+    M<UInt32>(prevNode + 0x28) = M<UInt32>(bufferBytes + 0x28);
+    nextNode = M<SInt32>(bufferBytes + 0x28);
     M<UInt8 *>(bufferBytes + 0x28) = bufferBytes;
-    M<SInt32>(iVar1 + 0x24) = iVar3;
+    M<SInt32>(nextNode + 0x24) = prevNode;
     M<UInt8 *>(bufferBytes + 0x24) = bufferBytes;
   }
   else {
-    piVar2 = M<SInt32 *>(bufferBytes + 0x10);
-    if (piVar2 != (SInt32 *)0x0) {
-      VCALL(*piVar2, 0xf0)(piVar2,0,0x400,0);
+    backingObject = M<SInt32 *>(bufferBytes + 0x10);
+    if (backingObject != (SInt32 *)0x0) {
+      VCALL(*backingObject, 0xf0)(backingObject,0,0x400,0);
     }
-    piVar2 = (SInt32 *)VCALL(*M<SInt32 *>(bufferBytes + 8), 0x14c)
+    cpuMapping = (SInt32 *)VCALL(*M<SInt32 *>(bufferBytes + 8), 0x14c)
                               (M<SInt32 *>(bufferBytes + 8),GH_kernel_task,0,0x401,0,0);
-    if (piVar2 != (SInt32 *)0x0) {
-      iVar1 = VCALL(*piVar2, 0xd0)(piVar2);
+    if (cpuMapping != (SInt32 *)0x0) {
+      mappedAddress = VCALL(*cpuMapping, 0xd0)(cpuMapping);
       if (M<UInt32>(bufferBytes + 0x50) >> 2 != 0) {
         wordIndex = 0;
-        iVar3 = 0;
+        byteOffset = 0;
         do {
           wordIndex = wordIndex + 1;
-          M<UInt32>(iVar3 + iVar1) =
-               M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) + iVar3 + M<SInt32>(bufferBytes + 0x48));
-          iVar3 = iVar3 + 4;
+          M<UInt32>(byteOffset + mappedAddress) =
+               M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) + byteOffset + M<SInt32>(bufferBytes + 0x48));
+          byteOffset = byteOffset + 4;
         } while (wordIndex < M<UInt32>(bufferBytes + 0x50) >> 2);
       }
-      VCALL(*piVar2, 0x18)(piVar2);
+      VCALL(*cpuMapping, 0x18)(cpuMapping);
     }
-    piVar2 = M<SInt32 *>(bufferBytes + 0x10);
-    if (piVar2 != (SInt32 *)0x0) {
-      VCALL(*piVar2, 0xf0)(piVar2,M<UInt32>(bufferBytes + 8),0x400,0);
+    backingObject = M<SInt32 *>(bufferBytes + 0x10);
+    if (backingObject != (SInt32 *)0x0) {
+      VCALL(*backingObject, 0xf0)(backingObject,M<UInt32>(bufferBytes + 8),0x400,0);
     }
   }
   return;

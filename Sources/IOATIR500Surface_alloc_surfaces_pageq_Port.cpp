@@ -29,20 +29,22 @@
 /* real addr 0x12110 */
 UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 keepMask, bool unused) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
+    UInt8 *selfBytes = reinterpret_cast<UInt8 *>(this);
 
   int *prevLink;
   bool notLast;
-  unsigned int uVar3;
   bool movedAny;
   UInt32 result;
   UInt32 in_register_00000014;
   int listHead;
   unsigned int allAllocated;
   unsigned int pending;
-  int iVar9;
   unsigned int index;
   UInt32 cursor;
+  unsigned int bufferBit;
+  unsigned int allocOk;
+  int surfaceCursor;
+  int bufferIndex;
   
   this->invalidate_contexts();
   pending = mask & M<unsigned int>(self + kIOATIR500Surface_stateBits);
@@ -54,11 +56,11 @@ LAB_000122dc:
     index = 0;
     allAllocated = 1;
     do {
-      uVar3 = 1 << (index & 0x3f);
-      if ((pending & uVar3) != 0) {
-        uVar3 = VCALL(M<int>(self), 0x5f4)
-                          (self,index,(((UInt32)keepMask) & uVar3) == 0);
-        allAllocated = allAllocated & uVar3;
+      bufferBit = 1 << (index & 0x3f);
+      if ((pending & bufferBit) != 0) {
+        allocOk = VCALL(M<int>(self), 0x5f4)
+                          (self,index,(((UInt32)keepMask) & bufferBit) == 0);
+        allAllocated = allAllocated & allocOk;
       }
       index = index + 1;
       if ((pending >> (index & 0x3f) == 0) || (index == 0x17)) {
@@ -67,30 +69,30 @@ LAB_000122dc:
       }
     } while (allAllocated != 0);
     listHead = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x5c);
-    iVar9 = listHead;
+    surfaceCursor = listHead;
     if (listHead != 0) {
       do {
-        if (M<int>(iVar9 + 0xbd0) != 0) {
-          if (iVar9 != 0) {
+        if (M<int>(surfaceCursor + 0xbd0) != 0) {
+          if (surfaceCursor != 0) {
             return 1;
           }
           break;
         }
-        prevLink = (int *)(iVar9 + 0x9c);
-        iVar9 = *prevLink;
+        prevLink = (int *)(surfaceCursor + 0x9c);
+        surfaceCursor = *prevLink;
       } while (listHead != *prevLink);
     }
     movedAny = false;
-    iVar9 = 0;
+    bufferIndex = 0;
     cursor = (UInt32)self;
     do {
       if (M<int>(cursor + 0xb0) != 0) {
-        this->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(iVar9 * 0x78 + self + kIOATIR500Surface_buffers)));
+        this->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(bufferIndex * 0x78 + self + kIOATIR500Surface_buffers)));
         movedAny = true;
       }
-      notLast = iVar9 != 0x16;
+      notLast = bufferIndex != 0x16;
       cursor = cursor + 0x78;
-      iVar9 = iVar9 + 1;
+      bufferIndex = bufferIndex + 1;
     } while (notLast);
     if (movedAny) {
       pending = mask & M<unsigned int>(self + kIOATIR500Surface_stateBits);
@@ -98,11 +100,11 @@ LAB_000122dc:
       index = 0;
       allAllocated = 1;
       do {
-        uVar3 = 1 << (index & 0x3f);
-        if ((pending & uVar3) != 0) {
-          uVar3 = VCALL(M<int>(self), 0x5f4)
-                            (self,index,(uVar3 & ((UInt32)keepMask)) == 0);
-          allAllocated = allAllocated & uVar3;
+        bufferBit = 1 << (index & 0x3f);
+        if ((pending & bufferBit) != 0) {
+          allocOk = VCALL(M<int>(self), 0x5f4)
+                            (self,index,(bufferBit & ((UInt32)keepMask)) == 0);
+          allAllocated = allAllocated & allocOk;
         }
         index = index + 1;
         if ((pending >> (index & 0x3f) == 0) || (index == 0x17)) {

@@ -1,13 +1,54 @@
-diff --git a/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp b/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp
-index 4d67708..67433fd 100644
---- a/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp
-+++ b/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp
-@@ -169,7 +169,7 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
+--- a/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp	2026-10-20 10:47:13.853424601 -0700
++++ b/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp	2026-10-20 10:47:13.854705262 -0700
+@@ -40,7 +40,6 @@
+   char hardwareUp;
+   UInt16 regionWidth;
+   UInt16 regionHeight;
+-  UInt8 IVar5;
+   int rectIndex;
+   bool reshape;
+   UInt32 result;
+@@ -48,10 +47,7 @@
+   UInt8 noBacking;
+   UInt8 keepBacking;
+   UInt8 notReshaped;
+-  UInt32 local_48;
+-  UInt32 local_44;
+-  UInt32 local_40;
+-  UInt32 local_3c;
++  UInt32 vramElement[4];   /* ONE real 16-byte GLKMemoryElement: the decompile showed four separate locals and stock passes vramElement (stock's compiler placed them adjacently) */
+   UInt8 panelActive;
+   UInt8 scalingFlag;
+   int acceleratorBytes;
+@@ -184,7 +180,7 @@
    else {
-     IVar5 = 0x1;
+     panelActive = 0x1;
    }
 -  self[id * 0x94 + 0xcac] = IVar5;
-+  PANEL_RECORD(self, id)->active = IVar5;
++  PANEL_RECORD(self, id)->active = panelActive;
    if (self[0xbec] == 0x0) {
-     uVar3 = M<UInt16>(regionRaw + 2);
-     M<UInt16>(self + 0xbd4) = uVar3;
+     regionWidth = M<UInt16>(regionRaw + 2);
+     M<UInt16>(self + kIOATIR500Surface_width) = regionWidth;
+@@ -220,16 +216,16 @@
+   }
+   else {
+     if (!(bool)(notReshaped >> 1 & 1)) {
+-      local_3c = 0;
+-      local_48 = 0;
+-      local_44 = 0;
+-      local_40 = 0;
++      vramElement[3] = 0;
++      vramElement[0] = 0;
++      vramElement[1] = 0;
++      vramElement[2] = 0;
+       vramAllocOk = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x540)
+-                         (M<int *>(self + kIOATIR500Surface_accelerator),&local_48,
++                         (M<int *>(self + kIOATIR500Surface_accelerator),vramElement,
+                           M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
+       if (vramAllocOk == 0) goto LAB_00015720;
+       M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
+-      VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),&local_48);
++      VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),vramElement);
+     }
+     surfaceBuffer = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
+     if ((bool)(keepBacking >> 1 & 1)) {

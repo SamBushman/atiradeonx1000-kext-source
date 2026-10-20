@@ -30,40 +30,41 @@
 bool IOATIR500Shared::alloc_buf_handle(void*record, UInt32*outHandle) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
   UInt32 bitmapWord;
   UInt32 bitIndex;
-  SInt32 iVar4;
+  SInt32 wordByteOffset;
   UInt32 *bitmapCursor;
   UInt32 bit;
   UInt32 wordIndex;
   UInt32 handle;
+  SInt32 bitsLeft;
+  SInt32 wordsLeft;
   
   wordIndex = M<UInt32>(self + kIOATIR500Shared_handleHint) >> 5;
   do {
     if (wordIndex < M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 5) {
-      iVar4 = wordIndex * 4;
-      bitmapWord = M<UInt32>(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + iVar4);
+      wordByteOffset = wordIndex * 4;
+      bitmapWord = M<UInt32>(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + wordByteOffset);
       if (bitmapWord != 0xffffffff) {
 LAB_00016c4c:
         bitIndex = 0;
-        iVar1 = 0x20;
+        bitsLeft = 0x20;
         break;
       }
-      iVar1 = (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 5) - wordIndex;
-      bitmapCursor = (UInt32 *)(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + iVar4);
+      wordsLeft = (M<UInt32>(self + kIOATIR500Shared_handleCapacity) >> 5) - wordIndex;
+      bitmapCursor = (UInt32 *)(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + wordByteOffset);
       while( true ) {
-        iVar4 = iVar4 + 4;
+        wordByteOffset = wordByteOffset + 4;
         wordIndex = wordIndex + 1;
-        iVar1 = iVar1 + -1;
-        if (iVar1 == 0) break;
+        wordsLeft = wordsLeft + -1;
+        if (wordsLeft == 0) break;
         bitmapCursor = bitmapCursor + 1;
         bitmapWord = *bitmapCursor;
         if (bitmapWord != 0xffffffff) goto LAB_00016c4c;
       }
     }
-    iVar4 = this->alloc_handles();
-    if (iVar4 == 0) {
+    wordByteOffset = this->alloc_handles();
+    if (wordByteOffset == 0) {
       return 0;
     }
   } while( true );
@@ -71,16 +72,16 @@ LAB_00016c4c:
     bit = bitIndex;
     if ((bitmapWord >> (bitIndex & 0x3f) & 1) == 0) goto LAB_00016c7c;
     bitIndex = bitIndex + 1;
-    iVar1 = iVar1 + -1;
-    if (iVar1 == 0) break;
+    bitsLeft = bitsLeft + -1;
+    if (bitsLeft == 0) break;
   }
   bit = 0x20;
 LAB_00016c7c:
   handle = wordIndex * 0x20 + bitIndex;
   M<UInt32>(self + kIOATIR500Shared_handleHint) = handle + 1;
   M<void *>(handle * 4 + M<SInt32>(self + kIOATIR500Shared_handleTable)) = record;
-  M<UInt32>(iVar4 + M<SInt32>(self + kIOATIR500Shared_handleBitmap)) =
-       1 << (bit & 0x3f) | M<UInt32>(iVar4 + M<SInt32>(self + kIOATIR500Shared_handleBitmap));
+  M<UInt32>(wordByteOffset + M<SInt32>(self + kIOATIR500Shared_handleBitmap)) =
+       1 << (bit & 0x3f) | M<UInt32>(wordByteOffset + M<SInt32>(self + kIOATIR500Shared_handleBitmap));
   *outHandle = handle;
   return 1;
 }

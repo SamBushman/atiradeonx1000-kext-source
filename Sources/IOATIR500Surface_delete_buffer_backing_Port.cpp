@@ -31,22 +31,23 @@ void IOATIR500Surface::delete_buffer_backing(IOTextureBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
   SInt32 nextBuffer;
+  SInt32 stampReached;
+  SInt32 prevBuffer;
   
   if (M<SInt32>(bufferBytes + 4) != 0) {
-    iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
+    stampReached = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x554)
                       (M<SInt32 *>(self + kIOATIR500Surface_accelerator),M<UInt32>(M<SInt32>(bufferBytes + 0x14) + 8));
-    if (iVar1 == 0) {
+    if (stampReached == 0) {
       ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->addOrphanTexture((IOTextureBuffer *)(bufferBytes));
       if (bufferBytes[0x20] != 0x0) {
         return;
       }
-      iVar1 = M<SInt32>(bufferBytes + 0x24);
-      M<UInt32>(iVar1 + 0x28) = M<UInt32>(bufferBytes + 0x28);
+      prevBuffer = M<SInt32>(bufferBytes + 0x24);
+      M<UInt32>(prevBuffer + 0x28) = M<UInt32>(bufferBytes + 0x28);
       nextBuffer = M<SInt32>(bufferBytes + 0x28);
       M<UInt8 *>(bufferBytes + 0x28) = bufferBytes;
-      M<SInt32>(nextBuffer + 0x24) = iVar1;
+      M<SInt32>(nextBuffer + 0x24) = prevBuffer;
       M<UInt8 *>(bufferBytes + 0x24) = bufferBytes;
       return;
     }

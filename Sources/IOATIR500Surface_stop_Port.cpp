@@ -39,42 +39,48 @@ void IOATIR500Surface::stop(IOService *provider) {
   UInt8 *nextGL;
   UInt8 *next2D;
   SInt32 *backingMemory;
-  SInt32 iVar6;
-  SInt32 iVar7;
   UInt32 panelIndex;
   UInt8 *cursor;
   UInt8 *regionSlot;
   PanelRecord *panel;
+  SInt32 nextSurface;
+  SInt32 volatileCount;
+  SInt32 backingNode;
+  SInt32 attachment;
+  SInt32 bufferIndex;
+  SInt32 acceleratorBytes;
+  SInt32 accelerator;
+  SInt32 transferBuffer;
   
   M<UInt32>(self + kIOATIR500Surface_vramInitSucceeded) = 0;
-  iVar6 = M<SInt32>(self + kIOATIR500Surface_surfaceListNext);
-  iVar7 = M<SInt32>(self + kIOATIR500Surface_accelerator);
-  M<UInt32>(iVar6 + 0xa0) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
-  M<SInt32>(M<SInt32>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = iVar6;
-  if (self == M<UInt8 *>(iVar7 + 0x5c)) {
+  nextSurface = M<SInt32>(self + kIOATIR500Surface_surfaceListNext);
+  accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
+  M<UInt32>(nextSurface + kIOATIR500Surface_surfaceListPrev) = M<UInt32>(self + kIOATIR500Surface_surfaceListPrev);
+  M<SInt32>(M<SInt32>(self + kIOATIR500Surface_surfaceListPrev) + 0x9c) = nextSurface;
+  if (self == M<UInt8 *>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead)) {
     if (self == M<UInt8 *>(self + kIOATIR500Surface_surfaceListNext)) {
-      M<UInt32>(iVar7 + 0x5c) = 0;
-      iVar7 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+      M<UInt32>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead) = 0;
+      accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
     }
     else {
-      M<UInt8 *>(iVar7 + 0x5c) = M<UInt8 *>(self + kIOATIR500Surface_surfaceListNext);
-      iVar7 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+      M<UInt8 *>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead) = M<UInt8 *>(self + kIOATIR500Surface_surfaceListNext);
+      accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
     }
   }
-  M<SInt32>(iVar7 + 0x730) = M<SInt32>(iVar7 + 0x730) + -1;
+  M<SInt32>(accelerator + kIOATIR500Accelerator_surfaceCount) = M<SInt32>(accelerator + kIOATIR500Accelerator_surfaceCount) + -1;
   if (M<SInt32>(self + kIOATIR500Surface_volatileState) != 0) {
-    iVar6 = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x21c);
-    if (iVar6 != 0) {
-      M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x21c) = iVar6 + -1;
+    volatileCount = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x21c);
+    if (volatileCount != 0) {
+      M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x21c) = volatileCount + -1;
     }
   }
-  iVar6 = M<SInt32>(self + kIOATIR500Surface_backingStoreList);
-  while (iVar6 != 0) {
-    M<UInt32>(iVar6 + 0x50) = 0;
-    M<UInt8>(M<SInt32>(iVar6 + 0x14) + 0x14) = 1;
-    M<UInt32>(self + kIOATIR500Surface_backingStoreList) = M<UInt32>(iVar6 + 0x54);
-    M<UInt32>(iVar6 + 0x54) = 0;
-    iVar6 = M<SInt32>(self + kIOATIR500Surface_backingStoreList);
+  backingNode = M<SInt32>(self + kIOATIR500Surface_backingStoreList);
+  while (backingNode != 0) {
+    M<UInt32>(backingNode + 0x50) = 0;
+    M<UInt8>(M<SInt32>(backingNode + 0x14) + 0x14) = 1;
+    M<UInt32>(self + kIOATIR500Surface_backingStoreList) = M<UInt32>(backingNode + 0x54);
+    M<UInt32>(backingNode + 0x54) = 0;
+    backingNode = M<SInt32>(self + kIOATIR500Surface_backingStoreList);
   }
   if ((M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff) &&
      (self == M<UInt8 *>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xe8))
@@ -86,12 +92,12 @@ void IOATIR500Surface::stop(IOService *provider) {
   lockState = self[0xbd0];
   if (lockState != 0x0) {
     if (lockState == 0x3) {
-      iVar6 = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
+      attachment = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
       if (M<SInt32>(self + kIOATIR500Surface_orphanedBacking) == 0) {
-        iVar7 = M<SInt32>(iVar6 + 0x24);
-        if ((iVar7 != 0) && (backingMemory = M<SInt32 *>(iVar7 + 0x10), backingMemory != (SInt32 *)0x0)) {
+        transferBuffer = M<SInt32>(attachment + 0x24);
+        if ((transferBuffer != 0) && (backingMemory = M<SInt32 *>(transferBuffer + 0x10), backingMemory != (SInt32 *)0x0)) {
           VCALL(*backingMemory, 0x18)(backingMemory);
-          M<UInt32>(M<SInt32>(iVar6 + 0x24) + 0x10) = 0;
+          M<UInt32>(M<SInt32>(attachment + 0x24) + 0x10) = 0;
         }
       }
       else {
@@ -128,17 +134,17 @@ void IOATIR500Surface::stop(IOService *provider) {
   if (M<UInt8 *>(self + kIOATIR500Surface_boundDVDContext) != (UInt8 *)0x0) {
     ((IOATIR500DVDContext *)(M<UInt8 *>(self + kIOATIR500Surface_boundDVDContext)))->remove_surface();
   }
-  iVar6 = 0;
+  bufferIndex = 0;
   cursor = self;
   do {
-    VCALL(M<SInt32>(self), 0x5cc)(self,iVar6);
+    VCALL(M<SInt32>(self), 0x5cc)(self,bufferIndex);
     if (M<UInt8 *>(cursor + 0xcc) != (UInt8 *)0x0) {
       this->delete_buffer_backing((IOTextureBuffer *)(M<UInt8 *>(cursor + 0xcc)));
       M<UInt32>(cursor + 0xcc) = 0;
     }
-    notLast = iVar6 != 0x16;
+    notLast = bufferIndex != 0x16;
     cursor = cursor + 0x78;
-    iVar6 = iVar6 + 1;
+    bufferIndex = bufferIndex + 1;
   } while (notLast);
   if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xcc) != 0) {
     panelIndex = 0;
@@ -150,9 +156,9 @@ void IOATIR500Surface::stop(IOService *provider) {
       }
       if (M<SInt32>(regionSlot + 0xd60) != 0) {
         GH_IOFreeAligned(M<SInt32>(regionSlot + 0xd60),M<UInt32>(regionSlot + 0xd64));
-        iVar6 = M<SInt32>(self + kIOATIR500Surface_accelerator);
-        if (iVar6 != 0) {
-          M<SInt32>(iVar6 + 0x804) = M<SInt32>(iVar6 + 0x804) - M<SInt32>(regionSlot + 0xd64);
+        acceleratorBytes = M<SInt32>(self + kIOATIR500Surface_accelerator);
+        if (acceleratorBytes != 0) {
+          M<SInt32>(acceleratorBytes + 0x804) = M<SInt32>(acceleratorBytes + 0x804) - M<SInt32>(regionSlot + 0xd64);
         }
         M<UInt32>(regionSlot + 0xd64) = 0;
         M<UInt32>(regionSlot + 0xd60) = 0;

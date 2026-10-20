@@ -32,11 +32,10 @@ extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *r
 
 /* real addr 0x1b180 */
 extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32*rangeStart, UInt32*rangeEnd) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(state);
+    UInt8 *stateBytes = reinterpret_cast<UInt8 *>(state);
 
   UInt32 *secondValue;
   UInt32 countMinusOne;
-  UInt32 uVar3;
   UInt32 reg;
   UInt32 value;
   SInt32 written;

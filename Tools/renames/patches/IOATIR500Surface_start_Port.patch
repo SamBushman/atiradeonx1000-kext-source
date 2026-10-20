@@ -1,6 +1,6 @@
---- a/Sources/IOATIR500Surface_start_Port.cpp	2026-10-16 17:54:18.914100641 -0700
-+++ b/Sources/IOATIR500Surface_start_Port.cpp	2026-10-16 17:54:18.918648153 -0700
-@@ -28,6 +28,18 @@
+--- a/Sources/IOATIR500Surface_start_Port.cpp	2026-10-20 10:32:16.918617348 -0700
++++ b/Sources/IOATIR500Surface_start_Port.cpp	2026-10-20 10:32:16.919969421 -0700
+@@ -28,21 +28,33 @@
  extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
  extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
  
@@ -19,70 +19,98 @@
  /* real addr 0x119f0 */
  bool IOATIR500Surface::start(IOService *provider) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
-@@ -43,6 +55,7 @@
-   UInt8 *pIVar7;
-   UInt32 uVar8;
-   SInt32 iVar9;
+     UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
+ 
+   bool success;
+-  UInt8 *pIVar2;
+-  SInt32 iVar3;
++  SInt32 panelNo;
+   UInt32 lock;
+   UInt8 *accelerator;
+   UInt8 *formatSlot;
+   UInt8 *surfaceBuffer;
+   UInt8 *tilingCursor;
+   UInt32 panelIndex;
+-  SInt32 iVar9;
++  SInt32 entryIndex;
 +  PanelRecord *panel;
-   
-   iVar3 = IOUserClient::start(provider);
-   if (iVar3 == 0) {
-@@ -112,45 +125,19 @@
-     pIVar5 = pIVar5 + 4;
-     iVar3 = iVar3 + -1;
-   } while (iVar3 != 0);
+   SInt32 superStartOk;
+   SInt32 submitStamp;
+   SInt32 buffersLeft;
+@@ -123,45 +135,19 @@
+     formatSlot = formatSlot + 4;
+     buffersLeft = buffersLeft + -1;
+   } while (buffersLeft != 0);
 -  iVar3 = 0;
--  pIVar6 = self + 0xc30;
--  pIVar2 = self;
--  pIVar5 = self;
+-  surfaceBuffer = self + 0xc30;
+-  regionSlot = self;
+-  formatSlot = self;
 -  do {
 -    M<UInt32>(pIVar2 + 0xd60) = 0;
 -    M<UInt32>(pIVar2 + 0xd64) = 0;
--    pIVar7 = pIVar6 + 0xc;
--    pIVar5[0xcac] = 0x0;
--    pIVar5[0xcad] = 0x0;
+-    tilingCursor = surfaceBuffer + 0xc;
+-    formatSlot[0xcac] = 0x0;
+-    formatSlot[0xcad] = 0x0;
 -    iVar9 = 4;
--    M<UInt16>(pIVar5 + 0xcae) = 0;
--    M<UInt32>(pIVar5 + 0xcb0) = 0;
--    M<UInt32>(pIVar5 + 0xc20) = 0;
--    M<UInt32>(pIVar5 + 0xc24) = 0;
--    M<UInt32>(pIVar5 + 0xc28) = 0;
--    M<UInt16>(pIVar5 + 0xc2e) = 0;
--    M<UInt16>(pIVar5 + 0xc2c) = 2;
--    M<UInt32>(pIVar5 + 0xc30) = 0;
--    M<UInt32>(pIVar5 + 0xc34) = 0;
--    M<UInt32>(pIVar5 + 0xc38) = 0;
+-    M<UInt16>(formatSlot + 0xcae) = 0;
+-    M<UInt32>(formatSlot + 0xcb0) = 0;
+-    M<UInt32>(formatSlot + 0xc20) = 0;
+-    M<UInt32>(formatSlot + 0xc24) = 0;
+-    M<UInt32>(formatSlot + 0xc28) = 0;
+-    M<UInt16>(formatSlot + 0xc2e) = 0;
+-    M<UInt16>(formatSlot + 0xc2c) = 2;
+-    M<UInt32>(formatSlot + 0xc30) = 0;
+-    M<UInt32>(formatSlot + 0xc34) = 0;
+-    M<UInt32>(formatSlot + 0xc38) = 0;
 -    do {
--      M<UInt32>(pIVar7) = 0;
--      M<UInt32>(pIVar7 + 4) = 0;
--      M<UInt32>(pIVar7 + 8) = 0;
--      M<UInt16>(pIVar7 + 0xe) = 0;
--      M<UInt16>(pIVar7 + 0xc) = 2;
--      M<UInt32>(pIVar7 + 0x10) = 0;
--      M<UInt32>(pIVar7 + 0x14) = 0;
--      M<UInt32>(pIVar7 + 0x18) = 0;
--      pIVar7 = pIVar7 + 0x1c;
+-      M<UInt32>(tilingCursor) = 0;
+-      M<UInt32>(tilingCursor + 4) = 0;
+-      M<UInt32>(tilingCursor + 8) = 0;
+-      M<UInt16>(tilingCursor + 0xe) = 0;
+-      M<UInt16>(tilingCursor + 0xc) = 2;
+-      M<UInt32>(tilingCursor + 0x10) = 0;
+-      M<UInt32>(tilingCursor + 0x14) = 0;
+-      M<UInt32>(tilingCursor + 0x18) = 0;
+-      tilingCursor = tilingCursor + 0x1c;
 -      iVar9 = iVar9 + -1;
 -    } while (iVar9 != 0);
--    bVar1 = iVar3 != 1;
--    pIVar6 = pIVar6 + 0x94;
--    pIVar2 = pIVar2 + 8;
--    pIVar5 = pIVar5 + 0x94;
+-    success = iVar3 != 1;
+-    surfaceBuffer = surfaceBuffer + 0x94;
+-    regionSlot = regionSlot + 8;
+-    formatSlot = formatSlot + 0x94;
 -    iVar3 = iVar3 + 1;
--  } while (bVar1);
+-  } while (success);
 +  panel = PANEL_RECORD(self, 0);
-+  for (iVar3 = 0; iVar3 < 2; iVar3++, panel++) {
-+    M<UInt32>(self + iVar3 * 8 + 0xd60) = 0;                 /* the per-id region record pointer and size */
-+    M<UInt32>(self + iVar3 * 8 + 0xd64) = 0;
++  for (panelNo = 0; panelNo < 2; panelNo++, panel++) {
++    M<UInt32>(self + panelNo * 8 + 0xd60) = 0;                 /* the per-id region record pointer and size */
++    M<UInt32>(self + panelNo * 8 + 0xd64) = 0;
 +    panel->active = 0x0;
 +    panel->swapMode = 0x0;
 +    panel->slotIndex = 0;
 +    panel->swapBufferSize = 0;
 +    ClearSwapBufferEntry(&panel->entries[0]);
-+    for (iVar9 = 1; iVar9 < 5; iVar9++) {
-+      ClearSwapBufferEntry(&panel->entries[iVar9]);
++    for (entryIndex = 1; entryIndex < 5; entryIndex++) {
++      ClearSwapBufferEntry(&panel->entries[entryIndex]);
 +    }
 +  }
    self[0xbd1] = 0x0;
-   M<UInt16>(self + 0xbd2) = 0;
+   M<UInt16>(self + kIOATIR500Surface_memoryLockCount) = 0;
    self[0xc08] = 0x0;
+@@ -198,7 +184,7 @@
+   }
+   else {
+     panelIndex = 0;
+-    pIVar2 = self;
++    regionSlot = self;
+     do {
+       regionMemory = GH_IOMallocAligned(0xc,0x20);
+       M<SInt32>(regionSlot + 0xd60) = regionMemory;
+@@ -221,7 +207,7 @@
+       if (swapBufferOk == 0) goto LAB_00011d38;
+       accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
+       panelIndex = panelIndex + 1;
+-      pIVar2 = pIVar2 + 8;
++      regionSlot = regionSlot + 8;
+     } while (panelIndex < M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount));
+     if (M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount) == panelIndex) goto LAB_00011d4c;
+   }

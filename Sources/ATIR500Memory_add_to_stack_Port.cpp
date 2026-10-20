@@ -33,9 +33,9 @@ bool ATIR500Memory::add_to_stack() {
 
   UInt32 result;
   UInt32 *chunk;
-  UInt32 *puVar3;
+  UInt32 *linkWord;
   UInt32 *node;
-  SInt32 iVar5;
+  SInt32 nodesLeft;
   
   chunk = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
   result = 0;
@@ -48,17 +48,17 @@ bool ATIR500Memory::add_to_stack() {
     chunk[3] = 0;
     chunk[4] = 0;
     if (node != chunk + 0x7d) {
-      puVar3 = chunk + 7;
-      iVar5 = 0x1f;
+      linkWord = chunk + 7;
+      nodesLeft = 0x1f;
       do {
-        *puVar3 = 0;
-        puVar3[1] = 0;
-        puVar3[-1] = 0;
+        *linkWord = 0;
+        linkWord[1] = 0;
+        linkWord[-1] = 0;
         *node = (UInt32)(node + 4);
-        puVar3 = puVar3 + 4;
-        iVar5 = iVar5 + -1;
+        linkWord = linkWord + 4;
+        nodesLeft = nodesLeft + -1;
         node = node + 4;
-      } while (iVar5 != 0);
+      } while (nodesLeft != 0);
     }
     result = 1;
     chunk[0x7d] = 0;

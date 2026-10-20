@@ -31,16 +31,17 @@ void IOATIR500Surface::surface_write_lock_int(UInt32 bufferIndex, UInt32*outAddr
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 *accelerator;
-  SInt32 iVar2;
   SInt32 waitTotal;
+  SInt32 bufferRecord;
+  SInt32 waitTime;
   
-  iVar2 = M<SInt32>(self + bufferIndex * 4 + 0xb70);
-  VCALL(M<SInt32>(self), 0x5fc)(self,iVar2);
-  *outAddress = M<UInt32>(iVar2 + 8);
-  *outPitch = (UInt32)M<UInt16>(iVar2 + 0x18);
+  bufferRecord = M<SInt32>(self + bufferIndex * 4 + 0xb70);
+  VCALL(M<SInt32>(self), 0x5fc)(self,bufferRecord);
+  *outAddress = M<UInt32>(bufferRecord + 8);
+  *outPitch = (UInt32)M<UInt16>(bufferRecord + 0x18);
   accelerator = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
   waitTotal = accelerator[0x1ef];
-  iVar2 = VCALL(*accelerator, 0x558)(accelerator,accelerator[0x14] + -1);
-  accelerator[0x1ef] = waitTotal + iVar2;
+  waitTime = VCALL(*accelerator, 0x558)(accelerator,accelerator[0x14] + -1);
+  accelerator[0x1ef] = waitTotal + waitTime;
   return;
 }

@@ -31,7 +31,6 @@ bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 recordIndex, UInt32 si
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt16 oldCount16;
-  SInt32 iVar2;
   UInt32 result;
   UInt32 newCount;
   SInt32 recordOffset;
@@ -39,6 +38,8 @@ bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 recordIndex, UInt32 si
   UInt32 bufferIndex;
   UInt8 *commandBuffer;
   UInt8 *allocatedBuffer;
+  SInt32 freeIndex;
+  SInt32 allocStatus;
   
   recordOffset = recordIndex * 0x1c4;
   oldCount16 = M<UInt16>(self + recordOffset + 0x402);
@@ -56,16 +57,16 @@ LAB_00002580:
       commandBuffer = (UInt8 *)(self + currentCount * 0x1c + recordOffset + 0x240);
       bufferIndex = currentCount;
       do {
-        iVar2 = this->allocCommandBuffer((VendorCommandBuffer *)(commandBuffer),size);
-        if (iVar2 == 0) {
-          iVar2 = bufferIndex - 1;
-          if ((SInt32)currentCount <= iVar2) {
-            allocatedBuffer = self + iVar2 * 0x1c + recordOffset + 0x240;
+        allocStatus = this->allocCommandBuffer((VendorCommandBuffer *)(commandBuffer),size);
+        if (allocStatus == 0) {
+          freeIndex = bufferIndex - 1;
+          if ((SInt32)currentCount <= freeIndex) {
+            allocatedBuffer = self + freeIndex * 0x1c + recordOffset + 0x240;
             do {
-              iVar2 = iVar2 + -1;
+              freeIndex = freeIndex + -1;
               this->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)allocatedBuffer));
               allocatedBuffer = (UInt8 *)(allocatedBuffer + -0x1c);
-            } while ((SInt32)currentCount <= iVar2);
+            } while ((SInt32)currentCount <= freeIndex);
           }
           goto LAB_00002580;
         }

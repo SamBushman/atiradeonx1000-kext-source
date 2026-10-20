@@ -33,11 +33,14 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(.
 bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared**outKernelPtr, unsigned int*outUserAddr) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
-  UInt32 uVar2;
-  SInt32 iVar3;
   UInt32 *lastChunk;
   UInt32 *chunk;
+  SInt32 *bufferMemory;
+  SInt32 *clientMap;
+  UInt32 clientAddress;
+  UInt32 kernelAddress;
+  SInt32 kernelMap;
+  SInt32 acceleratorBytes;
   
   lastChunk = (UInt32 *)0x0;
   chunk = M<UInt32 *>(self + kIOATIR500Shared_chunkList);
@@ -80,24 +83,24 @@ LAB_00016f00:
   if (chunk == (UInt32 *)0x0) {
     return 0;
   }
-  piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),0x10022,0x2000,GH_page_size);
-  chunk[1] = (UInt32)(piVar1);
-  if (piVar1 == (SInt32 *)0x0) goto LAB_00016e80;
-  piVar1 = (SInt32 *)VCALL(*piVar1, 0x14c)(piVar1,M<UInt32>(self + 8),0,1,0,0);
-  chunk[2] = (UInt32)(piVar1);
-  if (piVar1 != (SInt32 *)0x0) {
-    uVar2 = VCALL(*piVar1, 0xd0)(piVar1);
-    chunk[5] = uVar2;
-    iVar3 = VCALL(*(SInt32 *)chunk[1], 0x14c)((SInt32 *)chunk[1],GH_kernel_task,0,1,0,0);
-    chunk[3] = iVar3;
-    if (iVar3 != 0) {
-      iVar3 = M<SInt32>(self + kIOATIR500Shared_accelerator);
-      if (iVar3 != 0) {
-        M<SInt32>(iVar3 + 0x808) = M<SInt32>(iVar3 + 0x808) + 0x1c;
+  bufferMemory = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),0x10022,0x2000,GH_page_size);
+  chunk[1] = (UInt32)(bufferMemory);
+  if (bufferMemory == (SInt32 *)0x0) goto LAB_00016e80;
+  clientMap = (SInt32 *)VCALL(*bufferMemory, 0x14c)(bufferMemory,M<UInt32>(self + 8),0,1,0,0);
+  chunk[2] = (UInt32)(clientMap);
+  if (clientMap != (SInt32 *)0x0) {
+    clientAddress = VCALL(*clientMap, 0xd0)(clientMap);
+    chunk[5] = clientAddress;
+    kernelMap = VCALL(*(SInt32 *)chunk[1], 0x14c)((SInt32 *)chunk[1],GH_kernel_task,0,1,0,0);
+    chunk[3] = kernelMap;
+    if (kernelMap != 0) {
+      acceleratorBytes = M<SInt32>(self + kIOATIR500Shared_accelerator);
+      if (acceleratorBytes != 0) {
+        M<SInt32>(acceleratorBytes + kIOATIR500Accelerator_vendorTextureBufferBytes) = M<SInt32>(acceleratorBytes + kIOATIR500Accelerator_vendorTextureBufferBytes) + 0x1c;
       }
-      uVar2 = VCALL(*(SInt32 *)chunk[3], 0xd0)(chunk[3]);
+      kernelAddress = VCALL(*(SInt32 *)chunk[3], 0xd0)(chunk[3]);
       *chunk = 0;
-      chunk[4] = uVar2;
+      chunk[4] = kernelAddress;
       chunk[6] = 0x80;
       if (lastChunk == (UInt32 *)0x0) {
         M<UInt32 *>(self + kIOATIR500Shared_chunkList) = chunk;

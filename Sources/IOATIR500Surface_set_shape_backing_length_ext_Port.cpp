@@ -36,31 +36,42 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     int *regionRaw = reinterpret_cast<int *>(region);
 
-  int *piVar1;
+  int *rectWordBPtr;
   char hardwareUp;
   UInt16 regionWidth;
   UInt16 regionHeight;
-  UInt8 IVar5;
-  int iVar6;
-  int iVar7;
   int rectIndex;
   bool reshape;
-  int iVar10;
-  int iVar11;
-  int *piVar12;
-  int iVar13;
   UInt32 result;
   UInt8 *surfaceBuffer;
   UInt8 noBacking;
   UInt8 keepBacking;
   UInt8 notReshaped;
-  UInt32 local_48;
-  UInt32 local_44;
-  UInt32 local_40;
-  UInt32 local_3c;
+  UInt32 vramElement[4];   /* ONE real 16-byte GLKMemoryElement: the decompile showed four separate locals and stock passes vramElement (stock's compiler placed them adjacently) */
+  UInt8 panelActive;
+  UInt8 scalingFlag;
+  int acceleratorBytes;
+  int regionBounds;
+  int rectsLeft;
+  int rectRecord;
+  int rectWordA;
+  int accelerator;
+  int idOffset;
+  int shapeOk;
+  int vramAllocOk;
+  int connectOk;
+  int stampValue;
+  int waitTime;
+  int newRegion;
+  int regionWord1;
+  int rectCount;
+  int waitBefore;
+  int *regionRecord;
+  int *rectCursor;
+  int *acceleratorObject;
   
-  iVar10 = M<int>(self + kIOATIR500Surface_accelerator);
-  if (((M<unsigned int>(iVar10 + 0xcc) <= id) || (M<SInt16>(regionRaw + 2) < 0)) ||
+  accelerator = M<int>(self + kIOATIR500Surface_accelerator);
+  if (((M<unsigned int>(accelerator + kIOATIR500Accelerator_displayCount) <= id) || (M<SInt16>(regionRaw + 2) < 0)) ||
      (M<SInt16>((int)regionRaw + 10) < 0)) {
     return 0xe00002bc;
   }
@@ -75,15 +86,15 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
     backingPitch = 0;
     M<UInt16>((int)regionRaw + 10) = 1;
     M<UInt16>(regionRaw + 2) = 1;
-    iVar10 = M<int>(self + kIOATIR500Surface_accelerator);
+    accelerator = M<int>(self + kIOATIR500Surface_accelerator);
   }
-  GH_IOLockLock(M<UInt32>(iVar10 + 0x840));
+  GH_IOLockLock(M<UInt32>(accelerator + kIOATIR500Accelerator_commandLock));
   if ((shapeBits & 0x80) != 0) {
-    iVar10 = M<int>(self + kIOATIR500Surface_accelerator);
-    hardwareUp = M<char>(iVar10 + 0x80);
+    accelerator = M<int>(self + kIOATIR500Surface_accelerator);
+    hardwareUp = M<char>(accelerator + kIOATIR500Accelerator_active);
     while (hardwareUp == '\0') {
-      GH_IOLockSleep(M<UInt32>(iVar10 + 0x840),iVar10,0);
-      hardwareUp = M<char>(iVar10 + 0x80);
+      GH_IOLockSleep(M<UInt32>(accelerator + kIOATIR500Accelerator_commandLock),accelerator,0);
+      hardwareUp = M<char>(accelerator + kIOATIR500Accelerator_active);
     }
   }
   keepBacking = (backingPitch == 0xffffffff) << 1;
@@ -106,70 +117,70 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
     reshape = true;
     self[0xbec] = 0x0;
   }
-  iVar10 = id * 8;
+  idOffset = id * 8;
   M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) | 0x10000000;
   if ((reshape) ||
      ((self[0xbec] == 0x0 &&
-      (M<int>(M<int>(self + iVar10 + 0xd60) + 8) != regionRaw[2])))) {
+      (M<int>(M<int>(self + idOffset + 0xd60) + 8) != regionRaw[2])))) {
     reshape = true;
   }
   else {
     reshape = false;
   }
-  if ((M<unsigned int>(self + iVar10 + 0xd64) < regionSize) ||
-     ((regionSize & 0xffffff00) != (M<unsigned int>(self + iVar10 + 0xd64) & 0xffffff00))) {
-    iVar13 = GH_IOMallocAligned(regionSize,0x20);
-    if (iVar13 == 0) {
+  if ((M<unsigned int>(self + idOffset + 0xd64) < regionSize) ||
+     ((regionSize & 0xffffff00) != (M<unsigned int>(self + idOffset + 0xd64) & 0xffffff00))) {
+    newRegion = GH_IOMallocAligned(regionSize,0x20);
+    if (newRegion == 0) {
       result = 0xe00002be;
       goto LAB_000157b4;
     }
-    iVar6 = M<int>(self + kIOATIR500Surface_accelerator);
-    if (iVar6 != 0) {
-      M<unsigned int>(iVar6 + 0x804) = regionSize + M<int>(iVar6 + 0x804);
+    acceleratorBytes = M<int>(self + kIOATIR500Surface_accelerator);
+    if (acceleratorBytes != 0) {
+      M<unsigned int>(acceleratorBytes + 0x804) = regionSize + M<int>(acceleratorBytes + 0x804);
     }
-    GH_IOFreeAligned(M<UInt32>(self + iVar10 + 0xd60),M<UInt32>(self + iVar10 + 0xd64));
-    iVar6 = M<int>(self + kIOATIR500Surface_accelerator);
-    if (iVar6 != 0) {
-      M<int>(iVar6 + 0x804) = M<int>(iVar6 + 0x804) - M<int>(self + iVar10 + 0xd64);
+    GH_IOFreeAligned(M<UInt32>(self + idOffset + 0xd60),M<UInt32>(self + idOffset + 0xd64));
+    acceleratorBytes = M<int>(self + kIOATIR500Surface_accelerator);
+    if (acceleratorBytes != 0) {
+      M<int>(acceleratorBytes + 0x804) = M<int>(acceleratorBytes + 0x804) - M<int>(self + idOffset + 0xd64);
     }
-    M<unsigned int>(self + iVar10 + 0xd64) = regionSize;
-    M<int>(self + iVar10 + 0xd60) = iVar13;
+    M<unsigned int>(self + idOffset + 0xd64) = regionSize;
+    M<int>(self + idOffset + 0xd60) = newRegion;
   }
-  iVar13 = regionRaw[1];
-  iVar6 = regionRaw[2];
-  piVar12 = M<int *>(self + iVar10 + 0xd60);
-  *piVar12 = *regionRaw;
-  piVar12[1] = iVar13;
-  piVar12[2] = iVar6;
-  iVar13 = *regionRaw;
-  if (iVar13 != 0) {
+  regionWord1 = regionRaw[1];
+  regionBounds = regionRaw[2];
+  regionRecord = M<int *>(self + idOffset + 0xd60);
+  *regionRecord = *regionRaw;
+  regionRecord[1] = regionWord1;
+  regionRecord[2] = regionBounds;
+  rectCount = *regionRaw;
+  if (rectCount != 0) {
     rectIndex = 0;
-    piVar12 = regionRaw;
-    iVar6 = iVar13;
-    if (iVar13 == 0) {
-      iVar6 = 1;
+    rectCursor = regionRaw;
+    rectsLeft = rectCount;
+    if (rectCount == 0) {
+      rectsLeft = 1;
     }
     do {
-      iVar11 = piVar12[3];
-      iVar7 = rectIndex * 8;
+      rectWordA = rectCursor[3];
+      rectRecord = rectIndex * 8;
       rectIndex = rectIndex + 1;
-      piVar1 = piVar12 + 4;
-      piVar12 = piVar12 + 2;
-      iVar7 = iVar7 + M<int>(self + iVar10 + 0xd60);
-      M<int>(iVar7 + 0x10) = *piVar1;
-      M<int>(iVar7 + 0xc) = iVar11;
-      iVar6 = iVar6 + -1;
-    } while (iVar6 != 0);
+      rectWordBPtr = rectCursor + 4;
+      rectCursor = rectCursor + 2;
+      rectRecord = rectRecord + M<int>(self + idOffset + 0xd60);
+      M<int>(rectRecord + 0x10) = *rectWordBPtr;
+      M<int>(rectRecord + 0xc) = rectWordA;
+      rectsLeft = rectsLeft + -1;
+    } while (rectsLeft != 0);
   }
   if (((1 << (id & 0x3f) & M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xd0)) == 0) ||
-     ((iVar13 == 1 && ((M<SInt16>(regionRaw + 4) == 0 || (M<SInt16>((int)regionRaw + 0x12) == 0))))))
+     ((rectCount == 1 && ((M<SInt16>(regionRaw + 4) == 0 || (M<SInt16>((int)regionRaw + 0x12) == 0))))))
   {
-    IVar5 = 0x0;
+    panelActive = 0x0;
   }
   else {
-    IVar5 = 0x1;
+    panelActive = 0x1;
   }
-  PANEL_RECORD(self, id)->active = IVar5;
+  PANEL_RECORD(self, id)->active = panelActive;
   if (self[0xbec] == 0x0) {
     regionWidth = M<UInt16>(regionRaw + 2);
     M<UInt16>(self + kIOATIR500Surface_width) = regionWidth;
@@ -196,25 +207,25 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
     VCALL(M<int>(self), 0x5c8)(self);
     this->update_contexts();
   }
-  iVar10 = VCALL(M<int>(self), 0x5b0)
+  shapeOk = VCALL(M<int>(self), 0x5b0)
                      (self,(int)M<SInt16>(self + kIOATIR500Surface_width),(int)M<SInt16>(self + kIOATIR500Surface_height));
-  if (iVar10 == 0) {
+  if (shapeOk == 0) {
 LAB_00015720:
     result = 0xe00002be;
     M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) | 0x20000000;
   }
   else {
     if (!(bool)(notReshaped >> 1 & 1)) {
-      local_3c = 0;
-      local_48 = 0;
-      local_44 = 0;
-      local_40 = 0;
-      iVar10 = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x540)
-                         (M<int *>(self + kIOATIR500Surface_accelerator),&local_48,
+      vramElement[3] = 0;
+      vramElement[0] = 0;
+      vramElement[1] = 0;
+      vramElement[2] = 0;
+      vramAllocOk = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x540)
+                         (M<int *>(self + kIOATIR500Surface_accelerator),vramElement,
                           M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
-      if (iVar10 == 0) goto LAB_00015720;
+      if (vramAllocOk == 0) goto LAB_00015720;
       M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
-      VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),&local_48);
+      VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),vramElement);
     }
     surfaceBuffer = M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffers);
     if ((bool)(keepBacking >> 1 & 1)) {
@@ -225,31 +236,31 @@ LAB_00015720:
       M<UInt32>(surfaceBuffer + 0x24) = 0;
     }
     if ((((bool)(noBacking >> 1 & 1)) || (backingPitch == 0)) ||
-       (iVar10 = this->connect_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer),backingAddress,backingPitch), iVar10 == 0)) {
+       (connectOk = this->connect_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer),backingAddress,backingPitch), connectOk == 0)) {
       result = 0;
     }
     else {
       if ((shapeBits & 0x20) == 0) {
-        iVar10 = M<int>(self + kIOATIR500Surface_stamp);
+        stampValue = M<int>(self + kIOATIR500Surface_stamp);
       }
       else {
-        iVar10 = M<int>(self + kIOATIR500Surface_stamp) + -1;
+        stampValue = M<int>(self + kIOATIR500Surface_stamp) + -1;
       }
       result = 0;
-      M<int>(M<int>(surfaceBuffer + 0x24) + 0x54) = iVar10;
+      M<int>(M<int>(surfaceBuffer + 0x24) + 0x54) = stampValue;
     }
   }
 LAB_000157b4:
   self[0xbef] = ((UInt8)(shapeBits >> 3) & 1);
-  if ((M<SInt16>(self + kIOATIR500Surface_scalingFlags) != 0) || (IVar5 = 0x0, (shapeBits & 0x10) != 0)) {
-    IVar5 = 0x1;
+  if ((M<SInt16>(self + kIOATIR500Surface_scalingFlags) != 0) || (scalingFlag = 0x0, (shapeBits & 0x10) != 0)) {
+    scalingFlag = 0x1;
   }
-  self[0xbed] = IVar5;
+  self[0xbed] = scalingFlag;
   if ((shapeBits & 1) == 0) {
-    piVar12 = M<int *>(self + kIOATIR500Surface_accelerator);
-    iVar13 = piVar12[0x1f0];
-    iVar10 = VCALL(*piVar12, 0x558)(piVar12,M<UInt32>(self + kIOATIR500Surface_submittedStamp));
-    piVar12[0x1f0] = iVar13 + iVar10;
+    acceleratorObject = M<int *>(self + kIOATIR500Surface_accelerator);
+    waitBefore = acceleratorObject[0x1f0];
+    waitTime = VCALL(*acceleratorObject, 0x558)(acceleratorObject,M<UInt32>(self + kIOATIR500Surface_submittedStamp));
+    acceleratorObject[0x1f0] = waitBefore + waitTime;
     self[0xbf2] = 0x0;
   }
   else {

@@ -38,7 +38,6 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
 
   UInt16 ringEntryCount;
   UInt8 *surfaceListHead;
-  SInt32 iVar3;
   UInt8 *shared;
   UInt32 ringIndex;
   UInt32 in_register_00000028;
@@ -48,11 +47,13 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
   UInt8 *contextGL;
   UInt8 *surface;
   UInt8 *dataBuffer;
+  SInt32 ringByteOffset;
+  SInt32 freed;
   
   if (M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next) != self + kIOATIR500Accelerator_orphanTextureList) {
     this->freeOrphanTexture(aggressive);
-    iVar3 = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);
-    if (iVar3 != 0) {
+    freed = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);
+    if (freed != 0) {
       return 1;
     }
   }
@@ -61,11 +62,11 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
     if (context2D != exclude2DBytes) {
       shared = M<UInt8 *>(context2D + 0x88);
       if (((shared != (UInt8 *)0x0) && (excludeSharedBytes != shared)) &&
-         (iVar3 = ((IOATIR500Shared *)(shared))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 != 0)) {
+         (freed = ((IOATIR500Shared *)(shared))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed != 0)) {
         return 1;
       }
-      iVar3 = ((IOATIR5002DContext *)(context2D))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
-      if (iVar3 != 0) {
+      freed = ((IOATIR5002DContext *)(context2D))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
+      if (freed != 0) {
         return 1;
       }
     }
@@ -75,11 +76,11 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
     if (contextDVD != excludeDVDBytes) {
       shared = M<UInt8 *>(contextDVD + 0x84);
       if (((shared != (UInt8 *)0x0) && (excludeSharedBytes != shared)) &&
-         (iVar3 = ((IOATIR500Shared *)(shared))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 != 0)) {
+         (freed = ((IOATIR500Shared *)(shared))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed != 0)) {
         return 1;
       }
-      iVar3 = ((IOATIR500DVDContext *)(contextDVD))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
-      if (iVar3 != 0) {
+      freed = ((IOATIR500DVDContext *)(contextDVD))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
+      if (freed != 0) {
         return 1;
       }
     }
@@ -88,11 +89,11 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
       contextGL = M<UInt8 *>(contextGL + 0x80)) {
     if (contextGL != excludeGLBytes) {
       if ((excludeSharedBytes != M<UInt8 *>(contextGL + 0x88)) &&
-         (iVar3 = ((IOATIR500Shared *)(M<UInt8 *>(contextGL + 0x88)))->freeToAllocGART((VendorTransferBuffer *)(neededBytes),aggressive), iVar3 != 0)) {
+         (freed = ((IOATIR500Shared *)(M<UInt8 *>(contextGL + 0x88)))->freeToAllocGART((VendorTransferBuffer *)(neededBytes),aggressive), freed != 0)) {
         return 1;
       }
-      iVar3 = ((IOATIR500GLContext *)(contextGL))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
-      if (iVar3 != 0) {
+      freed = ((IOATIR500GLContext *)(contextGL))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
+      if (freed != 0) {
         return 1;
       }
     }
@@ -103,8 +104,8 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
     do {
       surface = M<UInt8 *>(surface + 0xa0);
       if (excludeSurfaceBytes != surface) {
-        iVar3 = ((IOATIR500Surface *)(surface))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
-        if (iVar3 != 0) {
+        freed = ((IOATIR500Surface *)(surface))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
+        if (freed != 0) {
           return 1;
         }
         surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
@@ -112,7 +113,7 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
     } while (surface != surfaceListHead);
   }
   if ((excludeSharedBytes == (UInt8 *)0x0) ||
-     (iVar3 = ((IOATIR500Shared *)(excludeSharedBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)) {
+     (freed = ((IOATIR500Shared *)(excludeSharedBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed == 0)) {
     if (((UInt32)aggressive) == 0) {
       ringEntryCount = M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Count);
       ringIndex = (UInt32)M<UInt16>(self + kIOATIR500Accelerator_commandBufferRing1Head);
@@ -120,9 +121,9 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
         visited = 0;
         do {
           ringIndex = ringIndex - 1 & ringEntryCount - 1;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x1c + 0x404)),(VendorTransferBuffer *)(neededBytes),
+          freed = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x1c + 0x404)),(VendorTransferBuffer *)(neededBytes),
                              M<UInt32>(self + ringIndex * 0x1c + 0x414),false);
-          if (iVar3 != 0) {
+          if (freed != 0) {
             return 1;
           }
           visited = visited + 1;
@@ -134,9 +135,9 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
         visited = 0;
         do {
           ringIndex = ringIndex - 1 & ringEntryCount - 1;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x1c + 0x240)),(VendorTransferBuffer *)(neededBytes),
+          freed = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x1c + 0x240)),(VendorTransferBuffer *)(neededBytes),
                              M<UInt32>(self + ringIndex * 0x1c + 0x250),false);
-          if (iVar3 != 0) {
+          if (freed != 0) {
             return 1;
           }
           visited = visited + 1;
@@ -150,10 +151,10 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
         visited = 0;
         do {
           ringIndex = ringIndex & ringEntryCount - 1;
-          iVar3 = ringIndex * 0x1c;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar3 + 0x404)),(VendorTransferBuffer *)(neededBytes),
-                             M<UInt32>(self + iVar3 + 0x414),true);
-          if (iVar3 != 0) {
+          ringByteOffset = ringIndex * 0x1c;
+          freed = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringByteOffset + 0x404)),(VendorTransferBuffer *)(neededBytes),
+                             M<UInt32>(self + ringByteOffset + 0x414),true);
+          if (freed != 0) {
             return 1;
           }
           visited = visited + 1;
@@ -166,10 +167,10 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
         visited = 0;
         do {
           ringIndex = ringIndex & ringEntryCount - 1;
-          iVar3 = ringIndex * 0x1c;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar3 + 0x240)),(VendorTransferBuffer *)(neededBytes),
-                             M<UInt32>(self + iVar3 + 0x250),true);
-          if (iVar3 != 0) {
+          ringByteOffset = ringIndex * 0x1c;
+          freed = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringByteOffset + 0x240)),(VendorTransferBuffer *)(neededBytes),
+                             M<UInt32>(self + ringByteOffset + 0x250),true);
+          if (freed != 0) {
             return 1;
           }
           visited = visited + 1;
@@ -179,19 +180,19 @@ bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IO
     }
     for (dataBuffer = M<UInt8 *>(self + kIOATIR500Accelerator_dataBufferCacheHead); dataBuffer != (UInt8 *)0x0;
         dataBuffer = M<UInt8 *>(dataBuffer + 0x3c)) {
-      iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)(dataBuffer),(VendorTransferBuffer *)(neededBytes),M<UInt32>(dataBuffer + 0x5c),aggressive);
-      if (iVar3 != 0) {
+      freed = this->freeTransferToAllocGART((VendorTransferBuffer *)(dataBuffer),(VendorTransferBuffer *)(neededBytes),M<UInt32>(dataBuffer + 0x5c),aggressive);
+      if (freed != 0) {
         return 1;
       }
     }
     if (((((exclude2DBytes == (UInt8 *)0x0) ||
-          (iVar3 = ((IOATIR5002DContext *)(exclude2DBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)) &&
+          (freed = ((IOATIR5002DContext *)(exclude2DBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed == 0)) &&
          ((excludeDVDBytes == (UInt8 *)0x0 ||
-          (iVar3 = ((IOATIR500DVDContext *)(excludeDVDBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)))) &&
+          (freed = ((IOATIR500DVDContext *)(excludeDVDBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed == 0)))) &&
         ((excludeGLBytes == (UInt8 *)0x0 ||
-         (iVar3 = ((IOATIR500GLContext *)(excludeGLBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)))) &&
+         (freed = ((IOATIR500GLContext *)(excludeGLBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed == 0)))) &&
        ((excludeSurfaceBytes == (UInt8 *)0x0 ||
-        (iVar3 = ((IOATIR500Surface *)(excludeSurfaceBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)))) {
+        (freed = ((IOATIR500Surface *)(excludeSurfaceBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), freed == 0)))) {
       return 0;
     }
   }

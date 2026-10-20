@@ -35,11 +35,9 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
   UInt16 width;
   UInt16 height;
   UInt32 result;
-  SInt32 iVar5;
-  UInt32 local_28;
-  UInt32 local_24;
-  UInt32 local_20;
-  UInt32 local_1c;
+  UInt32 vramElement[4];   /* ONE real 16-byte GLKMemoryElement: the decompile showed four separate locals and stock passes vramElement (stock's compiler placed them adjacently) */
+  SInt32 shapeOk;
+  SInt32 vramAllocOk;
   
   scalingDisabled = (flags >> 1 & 1) == 0;
   if ((scalingDisabled) || (scalingBytes != (UInt8 *)0x0)) {
@@ -71,18 +69,18 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
     VCALL(M<SInt32>(self), 0x5c8)(self);
     this->update_contexts();
     M<UInt32>(self + kIOATIR500Surface_stateBits) = M<UInt32>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
-    iVar5 = VCALL(M<SInt32>(self), 0x5b0)
+    shapeOk = VCALL(M<SInt32>(self), 0x5b0)
                       (self,(SInt32)M<SInt16>(self + kIOATIR500Surface_width),(SInt32)M<SInt16>(self + kIOATIR500Surface_height));
-    if (iVar5 != 0) {
-      local_1c = 0;
-      local_28 = 0;
-      local_24 = 0;
-      local_20 = 0;
-      iVar5 = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x540)
-                        (M<SInt32 *>(self + kIOATIR500Surface_accelerator),&local_28,
+    if (shapeOk != 0) {
+      vramElement[3] = 0;
+      vramElement[0] = 0;
+      vramElement[1] = 0;
+      vramElement[2] = 0;
+      vramAllocOk = VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x540)
+                        (M<SInt32 *>(self + kIOATIR500Surface_accelerator),vramElement,
                          M<UInt32>(M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
-      if (iVar5 != 0) {
-        VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x544)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),&local_28);
+      if (vramAllocOk != 0) {
+        VCALL(*M<SInt32 *>(self + kIOATIR500Surface_accelerator), 0x544)(M<SInt32 *>(self + kIOATIR500Surface_accelerator),vramElement);
         return 0;
       }
     }

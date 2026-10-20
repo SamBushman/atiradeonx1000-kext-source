@@ -33,9 +33,9 @@ extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 v
 extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 value) {
     UInt8 *stateBytes = reinterpret_cast<UInt8 *>(state);
 
-  UInt32 uVar1;
-  UInt32 uVar2;
-  SInt32 iVar3;
+  UInt32 slot;
+  UInt32 controlWord;
+  SInt32 writeCount;
   
   if (regIndex == 0x10ea) {
     M<UInt32>(stateBytes) = value;
@@ -202,24 +202,24 @@ extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 v
   }
   if (0x1041 < regIndex) {
     if (regIndex == 0x1095) {
-      uVar2 = M<UInt32>(stateBytes + 0xfc);
-      if ((uVar2 & 0x10000) != 0) {
+      controlWord = M<UInt32>(stateBytes + 0xfc);
+      if ((controlWord & 0x10000) != 0) {
         return;
       }
-      uVar1 = uVar2 & 0x1ff;
-      if (uVar1 < 2) {
-        iVar3 = M<SInt32>(stateBytes + 0x100);
-        M<UInt32>(stateBytes + (uVar1 * 6 + iVar3) * 4 + 0x104) = value;
+      slot = controlWord & 0x1ff;
+      if (slot < 2) {
+        writeCount = M<SInt32>(stateBytes + 0x100);
+        M<UInt32>(stateBytes + (slot * 6 + writeCount) * 4 + 0x104) = value;
       }
       else {
-        iVar3 = M<SInt32>(stateBytes + 0x100);
+        writeCount = M<SInt32>(stateBytes + 0x100);
       }
-      M<UInt32>(stateBytes + 0x100) = iVar3 + 1U;
-      if (iVar3 + 1U < 6) {
+      M<UInt32>(stateBytes + 0x100) = writeCount + 1U;
+      if (writeCount + 1U < 6) {
         return;
       }
       M<UInt32>(stateBytes + 0x100) = 0;
-      M<UInt32>(stateBytes + 0xfc) = uVar2 & 0xfffffe00 | uVar1 + 1 & 0x1ff;
+      M<UInt32>(stateBytes + 0xfc) = controlWord & 0xfffffe00 | slot + 1 & 0x1ff;
       return;
     }
     if (0x1095 < regIndex) {
