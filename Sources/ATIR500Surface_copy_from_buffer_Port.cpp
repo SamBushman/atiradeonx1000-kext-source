@@ -34,47 +34,57 @@ void ATIR500Surface::copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UI
     UInt8 *transferBytes = reinterpret_cast<UInt8 *>(transfer);
 
   bool synchronous;
-  UInt8 uVar2;
+  UInt8 byteValue;
   UInt16 bytesPerPixel;
-  bool bVar4;
-  UInt32 uVar5;
-  unsigned int uVar6;
-  UInt32 uVar7;
-  int iVar8;
-  UInt64 *puVar9;
-  UInt64 *puVar10;
-  unsigned int uVar11;
-  int iVar12;
+  bool kernelMapped;
+  UInt32 dmaFlags;
+  unsigned int rowsFit;
+  unsigned int sampleScaleX;
+  unsigned int row;
+  UInt32 word;
+  int copied;
+  UInt64 *srcRowEnd;
+  UInt64 *texelDst;
+  UInt64 *srcCursor;
+  UInt64 *surfaceRowEnd;
+  unsigned int backingBytes;
+  unsigned int sampleScaleY;
+  int bytesLeft;
   int xScaled;
   int waited;
   int transferAddress;
   int dmaResult;
   int offsetAdjust;
   int *transferMap;
-  int iVar14;
-  int iVar15;
-  UInt8 *puVar16;
+  int mappedBase;
+  int heightRows;
+  int rowOffset;
+  int rowBytes;
+  int endY;
+  int sampleOffset;
+  int texelBytesLeft;
+  UInt8 *texelSrc;
   unsigned int tilingBits;
-  UInt64 *puVar18;
-  unsigned int uVar19;
-  UInt64 *puVar20;
-  int iVar21;
-  UInt64 *puVar22;
+  UInt64 *rowEnd;
+  UInt64 *dstCursor;
+  unsigned int levelPitchPixels;
+  int levelHeight;
+  int sampleX;
+  UInt64 *srcByteCursor;
   UInt64 *transferRow;
-  int *piVar24;
   int *backingMap;
   int *accel;
-  int iVar25;
+  int byteIndex;
   int surfaceY;
   int waitTotal;
   UInt64 *surfaceRow;
   UInt8 *backing;
-  unsigned int uVar28;
-  UInt8 bVar29;
-  UInt8 bVar30;
-  UInt8 bVar31;
+  unsigned int rowPitch;
+  UInt8 noBackingMap;
+  UInt8 kernelPathBits;
+  UInt8 hasColumns;
   
-  uVar5 = flags;
+  dmaFlags = flags;
   backing = M<UInt8 *>(bufferBytes + 0x24);
   synchronous = (flags & 1) == 0;
   if (synchronous) {
@@ -86,13 +96,13 @@ LAB_00043888:
   else {
     pitch = (UInt32)M<UInt16>(backing + 0x52);
     offset = (UInt32)M<UInt16>(backing + 0x50);
-    uVar11 = VCALL(*M<int *>(backing + 8), 0x128)(M<int *>(backing + 8));
-    uVar6 = 0;
+    backingBytes = VCALL(*M<int *>(backing + 8), 0x128)(M<int *>(backing + 8));
+    rowsFit = 0;
     if (pitch != 0) {
-      uVar6 = uVar11 / pitch;
+      rowsFit = backingBytes / pitch;
     }
-    if ((int)uVar6 < h) {
-      h = uVar6;
+    if ((int)rowsFit < h) {
+      h = rowsFit;
     }
     transferBytes = backing;
     if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) {
@@ -101,7 +111,7 @@ LAB_00043888:
     }
 LAB_00043834:
     dmaResult = this->copy_buffer_using_DMA(x,y,w,h,index,level,(ATIR500SurfaceBuffer *)(bufferBytes),(VendorTransferBuffer *)(transferBytes),
-                        offset,pitch,(IODirection)1,uVar5);
+                        offset,pitch,(IODirection)1,dmaFlags);
     if (dmaResult != 0) {
       return;
     }
@@ -119,112 +129,112 @@ LAB_00043834:
   waitTotal = accel[0x1ed];
   waited = VCALL(*accel, 0x558)(accel,stamp);
   accel[0x1ed] = waitTotal + waited;
-  if (((synchronous) && (uVar6 = M<unsigned int>(bufferBytes + 0x3c), (uVar6 & 0x800) != 0)) &&
+  if (((synchronous) && (sampleScaleX = M<unsigned int>(bufferBytes + 0x3c), (sampleScaleX & 0x800) != 0)) &&
      ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0xc0000) != 0)) {
-    uVar11 = uVar6 >> 0xc & 0xf;
-    uVar6 = uVar6 >> 0x10 & 0xf;
+    sampleScaleY = sampleScaleX >> 0xc & 0xf;
+    sampleScaleX = sampleScaleX >> 0x10 & 0xf;
   }
   else {
-    uVar6 = 1;
-    uVar11 = 1;
+    sampleScaleX = 1;
+    sampleScaleY = 1;
   }
-  xScaled = uVar6 * x;
-  surfaceY = uVar11 * y;
+  xScaled = sampleScaleX * x;
+  surfaceY = sampleScaleY * y;
   if (((synchronous) && (backing != (UInt8 *)0x0)) &&
      (M<int>(backing + 0x54) == M<int>(self + kIOATIR500Surface_stamp))) {
     backingMap = (int *)VCALL(*M<int *>(backing + 8), 0x150)
                                (M<int *>(backing + 8),M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1
                                );
-    bVar29 = (backingMap == (int *)0x0) << 1;
+    noBackingMap = (backingMap == (int *)0x0) << 1;
     if (backingMap == (int *)0x0) goto LAB_00043db4;
-    iVar14 = VCALL(*backingMap, 0xd0)(backingMap);
+    mappedBase = VCALL(*backingMap, 0xd0)(backingMap);
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
-    bVar4 = false;
-    uVar28 = (unsigned int)M<UInt16>(backing + 0x52);
+    kernelMapped = false;
+    rowPitch = (unsigned int)M<UInt16>(backing + 0x52);
     bytesPerPixel = M<UInt16>(bufferBytes + 0x16);
-    iVar14 = iVar14 + (unsigned int)M<UInt16>(backing + 0x50);
+    mappedBase = mappedBase + (unsigned int)M<UInt16>(backing + 0x50);
   }
   else {
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
-    uVar19 = 0;
-    iVar14 = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
+    levelPitchPixels = 0;
+    mappedBase = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
     if ((tilingBits & 0xf00000) != 0) {
-      uVar19 = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
+      levelPitchPixels = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
       ;
     }
     bytesPerPixel = M<UInt16>(bufferBytes + 0x16);
-    uVar28 = 0x20 / bytesPerPixel;
-    if (uVar28 <= uVar19) {
-      uVar28 = uVar19;
+    rowPitch = 0x20 / bytesPerPixel;
+    if (rowPitch <= levelPitchPixels) {
+      rowPitch = levelPitchPixels;
     }
     backingMap = (int *)0x0;
-    uVar28 = uVar28 * bytesPerPixel;
-    bVar4 = true;
-    bVar29 = 2;
+    rowPitch = rowPitch * bytesPerPixel;
+    kernelMapped = true;
+    noBackingMap = 2;
   }
-  iVar21 = (int)(unsigned int)M<UInt16>(bufferBytes + 0x1e) >> (level & 0x3f);
+  levelHeight = (int)(unsigned int)M<UInt16>(bufferBytes + 0x1e) >> (level & 0x3f);
   surfaceRow = (UInt64 *)
-            (iVar14 + M<int>(bufferBytes + level * 4 + 0x40) * (unsigned int)M<UInt16>(bufferBytes + 0x20) +
+            (mappedBase + M<int>(bufferBytes + level * 4 + 0x40) * (unsigned int)M<UInt16>(bufferBytes + 0x20) +
                       index * (M<int>(bufferBytes + level * 4 + 0x44) -
                                 M<int>(bufferBytes + level * 4 + 0x40)));
-  iVar14 = 1;
-  if (iVar21 != 0) {
-    iVar14 = iVar21;
+  heightRows = 1;
+  if (levelHeight != 0) {
+    heightRows = levelHeight;
   }
   if ((synchronous) && ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) == 0)) {
     if ((int)M<SInt16>(self + kIOATIR500Surface_height) != (int)M<SInt16>(self + kIOATIR500Surface_committedHeight)) {
-      iVar14 = (int)M<SInt16>(self + kIOATIR500Surface_committedHeight);
+      heightRows = (int)M<SInt16>(self + kIOATIR500Surface_committedHeight);
     }
-    surfaceY = (iVar14 - surfaceY) - uVar11;
+    surfaceY = (heightRows - surfaceY) - sampleScaleY;
   }
   if (((tilingBits & 0xf00000) == 0x100000) || (!synchronous)) {
-    iVar14 = surfaceY * uVar28;
-    uVar28 = -uVar28;
-    surfaceRow = (UInt64 *)((int)surfaceRow + iVar14 + xScaled * (unsigned int)bytesPerPixel);
+    rowOffset = surfaceY * rowPitch;
+    rowPitch = -rowPitch;
+    surfaceRow = (UInt64 *)((int)surfaceRow + rowOffset + xScaled * (unsigned int)bytesPerPixel);
     if (synchronous) goto LAB_00043ac4;
 LAB_00043ad0:
-    uVar28 = -uVar28;
+    rowPitch = -rowPitch;
   }
   else {
 LAB_00043ac4:
     if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto LAB_00043ad0;
   }
-  bVar30 = !bVar4 << 1;
-  iVar14 = uVar6 * (unsigned int)bytesPerPixel * w;
-  if (bVar4) {
+  kernelPathBits = !kernelMapped << 1;
+  rowBytes = sampleScaleX * (unsigned int)bytesPerPixel * w;
+  if (kernelMapped) {
     VCALL(M<int>(self), 0x5fc)(self,bufferBytes);
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
   }
   if (synchronous) {
     if ((tilingBits >> 0x14 & 0xf) < 2) goto LAB_00043b24;
-    iVar14 = surfaceY - h;
-    if (iVar14 < surfaceY) {
-      bVar31 = (xScaled < xScaled + w) << 3;
+    endY = surfaceY - h;
+    if (endY < surfaceY) {
+      hasColumns = (xScaled < xScaled + w) << 3;
       do {
-        iVar21 = xScaled;
-        puVar10 = transferRow;
-        if ((bool)(bVar31 >> 3 & 1)) {
+        sampleX = xScaled;
+        texelDst = transferRow;
+        if ((bool)(hasColumns >> 3 & 1)) {
           do {
-            iVar15 = get_offset_of_sample_0((ATIR500SurfaceBuffer *)bufferBytes,iVar21,surfaceY);
-            puVar16 = (UInt8 *)(iVar15 + (int)surfaceRow);
-            if (puVar10 < (UInt64 *)((int)puVar10 + (unsigned int)M<UInt16>(bufferBytes + 0x16))) {
-              iVar15 = (int)((int)puVar10 + (unsigned int)M<UInt16>(bufferBytes + 0x16)) - (int)puVar10;
-              iVar8 = 0;
+            sampleOffset = get_offset_of_sample_0((ATIR500SurfaceBuffer *)bufferBytes,sampleX,surfaceY);
+            texelSrc = (UInt8 *)(sampleOffset + (int)surfaceRow);
+            if (texelDst < (UInt64 *)((int)texelDst + (unsigned int)M<UInt16>(bufferBytes + 0x16))) {
+              texelBytesLeft = (int)((int)texelDst + (unsigned int)M<UInt16>(bufferBytes + 0x16)) - (int)texelDst;
+              copied = 0;
               do {
-                uVar2 = *puVar16;
-                puVar16 = puVar16 + 1;
-                M<UInt8>((int)puVar10 + iVar8) = uVar2;
-                iVar8 = iVar8 + 1;
-                iVar15 = iVar15 + -1;
-              } while (iVar15 != 0);
-              puVar10 = (UInt64 *)((int)puVar10 + iVar8);
+                byteValue = *texelSrc;
+                texelSrc = texelSrc + 1;
+                M<UInt8>((int)texelDst + copied) = byteValue;
+                copied = copied + 1;
+                texelBytesLeft = texelBytesLeft + -1;
+              } while (texelBytesLeft != 0);
+              texelDst = (UInt64 *)((int)texelDst + copied);
             }
-            iVar21 = iVar21 + 1;
-          } while (iVar21 < xScaled + w);
+            sampleX = sampleX + 1;
+          } while (sampleX < xScaled + w);
         }
         surfaceY = surfaceY + -1;
         transferRow = (UInt64 *)((int)transferRow + pitch);
-      } while (iVar14 < surfaceY);
+      } while (endY < surfaceY);
     }
   }
   else {
@@ -232,96 +242,96 @@ LAB_00043ac4:
       M<UInt8>(M<int>(bufferBytes + 0x24) + 0x58) = 0;
     }
 LAB_00043b24:
-    if (uVar6 == 1) {
+    if (sampleScaleX == 1) {
       if (0 < h) {
-        uVar6 = 0;
+        row = 0;
         do {
-          puVar18 = (UInt64 *)((int)transferRow + iVar14);
-          puVar10 = surfaceRow;
-          puVar20 = transferRow;
-          if ((transferRow < puVar18) && (((unsigned int)transferRow & 7) != 0)) {
-            puVar9 = (UInt64 *)((int)surfaceRow + ((int)puVar18 - (int)transferRow));
-            iVar12 = (int)puVar9 - (int)surfaceRow;
-            puVar22 = surfaceRow;
+          rowEnd = (UInt64 *)((int)transferRow + rowBytes);
+          srcCursor = surfaceRow;
+          dstCursor = transferRow;
+          if ((transferRow < rowEnd) && (((unsigned int)transferRow & 7) != 0)) {
+            srcRowEnd = (UInt64 *)((int)surfaceRow + ((int)rowEnd - (int)transferRow));
+            bytesLeft = (int)srcRowEnd - (int)surfaceRow;
+            srcByteCursor = surfaceRow;
             do {
-              uVar2 = M<UInt8>(puVar22);
-              puVar22 = (UInt64 *)((int)puVar22 + 1);
-              M<UInt8>(puVar20) = uVar2;
-              puVar20 = (UInt64 *)((int)puVar20 + 1);
-              iVar12 = iVar12 + -1;
-              puVar10 = puVar9;
-              if (iVar12 == 0) break;
-              puVar10 = puVar22;
-            } while (((unsigned int)puVar20 & 7) != 0);
+              byteValue = M<UInt8>(srcByteCursor);
+              srcByteCursor = (UInt64 *)((int)srcByteCursor + 1);
+              M<UInt8>(dstCursor) = byteValue;
+              dstCursor = (UInt64 *)((int)dstCursor + 1);
+              bytesLeft = bytesLeft + -1;
+              srcCursor = srcRowEnd;
+              if (bytesLeft == 0) break;
+              srcCursor = srcByteCursor;
+            } while (((unsigned int)dstCursor & 7) != 0);
           }
-          while (puVar20 + 4 <= puVar18) {
-            *puVar20 = *puVar10;
-            puVar20[1] = puVar10[1];
-            puVar20[2] = puVar10[2];
-            puVar20[3] = puVar10[3];
-            puVar10 = puVar10 + 4;
-            puVar20 = puVar20 + 4;
+          while (dstCursor + 4 <= rowEnd) {
+            *dstCursor = *srcCursor;
+            dstCursor[1] = srcCursor[1];
+            dstCursor[2] = srcCursor[2];
+            dstCursor[3] = srcCursor[3];
+            srcCursor = srcCursor + 4;
+            dstCursor = dstCursor + 4;
           }
-          while ((UInt64 *)((int)puVar20 + 4) <= puVar18) {
-            uVar7 = M<UInt32>(puVar10);
-            puVar10 = (UInt64 *)((int)puVar10 + 4);
-            M<UInt32>(puVar20) = uVar7;
-            puVar20 = (UInt64 *)((int)puVar20 + 4);
+          while ((UInt64 *)((int)dstCursor + 4) <= rowEnd) {
+            word = M<UInt32>(srcCursor);
+            srcCursor = (UInt64 *)((int)srcCursor + 4);
+            M<UInt32>(dstCursor) = word;
+            dstCursor = (UInt64 *)((int)dstCursor + 4);
           }
-          if (puVar20 < puVar18) {
-            iVar12 = (int)puVar18 - (int)puVar20;
-            iVar25 = 0;
+          if (dstCursor < rowEnd) {
+            bytesLeft = (int)rowEnd - (int)dstCursor;
+            byteIndex = 0;
             do {
-              uVar2 = M<UInt8>(puVar10);
-              puVar10 = (UInt64 *)((int)puVar10 + 1);
-              M<UInt8>(iVar25 + (int)puVar20) = uVar2;
-              iVar25 = iVar25 + 1;
-              iVar12 = iVar12 + -1;
-            } while (iVar12 != 0);
+              byteValue = M<UInt8>(srcCursor);
+              srcCursor = (UInt64 *)((int)srcCursor + 1);
+              M<UInt8>(byteIndex + (int)dstCursor) = byteValue;
+              byteIndex = byteIndex + 1;
+              bytesLeft = bytesLeft + -1;
+            } while (bytesLeft != 0);
           }
-          uVar6 = uVar6 + 1;
-          surfaceRow = (UInt64 *)((int)surfaceRow + uVar11 * uVar28);
+          row = row + 1;
+          surfaceRow = (UInt64 *)((int)surfaceRow + sampleScaleY * rowPitch);
           transferRow = (UInt64 *)((int)transferRow + pitch);
-        } while (h != uVar6);
+        } while (h != row);
       }
     }
     else if (0 < h) {
-      uVar6 = 0;
+      row = 0;
       do {
-        puVar10 = (UInt64 *)((int)surfaceRow + iVar14);
-        if (surfaceRow < puVar10) {
+        surfaceRowEnd = (UInt64 *)((int)surfaceRow + rowBytes);
+        if (surfaceRow < surfaceRowEnd) {
           tilingBits = (unsigned int)M<UInt16>(bufferBytes + 0x16);
-          puVar20 = surfaceRow;
-          puVar18 = transferRow;
+          srcCursor = surfaceRow;
+          dstCursor = transferRow;
           do {
-            if (puVar18 < (UInt64 *)((int)puVar18 + tilingBits)) {
-              iVar12 = (int)((int)puVar18 + tilingBits) - (int)puVar18;
-              iVar25 = 0;
+            if (dstCursor < (UInt64 *)((int)dstCursor + tilingBits)) {
+              bytesLeft = (int)((int)dstCursor + tilingBits) - (int)dstCursor;
+              byteIndex = 0;
               do {
-                uVar2 = M<UInt8>(puVar20);
-                puVar20 = (UInt64 *)((int)puVar20 + 1);
-                M<UInt8>(iVar25 + (int)puVar18) = uVar2;
-                iVar25 = iVar25 + 1;
-                iVar12 = iVar12 + -1;
-              } while (iVar12 != 0);
+                byteValue = M<UInt8>(srcCursor);
+                srcCursor = (UInt64 *)((int)srcCursor + 1);
+                M<UInt8>(byteIndex + (int)dstCursor) = byteValue;
+                byteIndex = byteIndex + 1;
+                bytesLeft = bytesLeft + -1;
+              } while (bytesLeft != 0);
               tilingBits = (unsigned int)M<UInt16>(bufferBytes + 0x16);
-              puVar18 = (UInt64 *)((int)puVar18 + iVar25);
+              dstCursor = (UInt64 *)((int)dstCursor + byteIndex);
             }
-            puVar20 = (UInt64 *)((int)puVar20 + tilingBits);
-          } while (puVar20 < puVar10);
+            srcCursor = (UInt64 *)((int)srcCursor + tilingBits);
+          } while (srcCursor < surfaceRowEnd);
         }
-        uVar6 = uVar6 + 1;
-        surfaceRow = (UInt64 *)((int)surfaceRow + uVar11 * uVar28);
+        row = row + 1;
+        surfaceRow = (UInt64 *)((int)surfaceRow + sampleScaleY * rowPitch);
         transferRow = (UInt64 *)((int)transferRow + pitch);
-      } while (h != uVar6);
+      } while (h != row);
     }
   }
-  if (!(bool)(bVar30 >> 1 & 1)) {
+  if (!(bool)(kernelPathBits >> 1 & 1)) {
     VCALL(M<int>(self), 0x600)(self,bufferBytes);
   }
 LAB_00043db4:
   VCALL(*transferMap, 0x18)(transferMap);
-  if (!(bool)(bVar29 >> 1 & 1)) {
+  if (!(bool)(noBackingMap >> 1 & 1)) {
     VCALL(*backingMap, 0x18)(backingMap);
   }
   return;

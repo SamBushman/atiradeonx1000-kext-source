@@ -30,7 +30,7 @@
 UInt32 ATIR500Surface::getFramebufferIndex() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool notLast;
   SInt32 index;
   SInt32 result;
   
@@ -41,9 +41,9 @@ UInt32 ATIR500Surface::getFramebufferIndex() {
        (M<SInt16>(M<SInt32>(self + kIOATIR500Surface_regionRecords) + 10) != 0)) {
       result = index;
     }
-    bVar1 = index != 1;
+    notLast = index != 1;
     self = self + 8;
     index = index + 1;
-  } while (bVar1);
+  } while (notLast);
   return result;
 }

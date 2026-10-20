@@ -35,44 +35,46 @@ void ATIR500Surface::stop(IOService *provider) {
 
   bool notLast;
   UInt32 stamp;
-  SInt32 iVar3;
+  SInt32 scratchRing;
   UInt32 wordCount;
-  SInt32 iVar5;
+  SInt32 bufferIndex;
+  SInt32 vtable5dcResult;
+  SInt32 panel;
   UInt8 *buffer;
-  UInt8 *pAVar7;
+  UInt8 *slotCursor;
   UInt32 *packet;
   
-  iVar5 = 0;
+  bufferIndex = 0;
   buffer = self + kIOATIR500Surface_buffers;
   GH_IOLockLock(M<UInt32>(providerBytes + 0x840));
-  pAVar7 = self;
+  slotCursor = self;
   do {
-    if (pAVar7[0xdf] != 0xff) {
+    if (slotCursor[0xdf] != 0xff) {
       VCALL(M<SInt32>(self), 0x600)(self,buffer);
     }
-    notLast = iVar5 != 0x16;
+    notLast = bufferIndex != 0x16;
     buffer = buffer + 0x78;
-    pAVar7 = pAVar7 + 0x78;
-    iVar5 = iVar5 + 1;
+    slotCursor = slotCursor + 0x78;
+    bufferIndex = bufferIndex + 1;
   } while (notLast);
   if (((providerBytes[0x80] != 0x0) && (M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff)) &&
      (M<UInt8 *>(providerBytes + M<SInt32>(self + kIOATIR500Surface_panel) * 0x20 + 0xe8) == self)) {
-    iVar3 = M<SInt32>(providerBytes + 0x238);
-    packet = (UInt32 *)(iVar3 + 0x120);
+    scratchRing = M<SInt32>(providerBytes + 0x238);
+    packet = (UInt32 *)(scratchRing + 0x120);
     VCALL(M<SInt32>(providerBytes), 0x54c)(providerBytes,M<UInt32>(providerBytes + 0x234));
     providerBytes[M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + 0x164] = SUB41m(M<UInt32>(self + kATIR500Surface_panelSide),0);
-    iVar5 = VCALL(M<SInt32>(self), 0x5dc)(self);
-    if ((iVar5 == 0) || (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) == self + kIOATIR500Surface_buffer1)) {
+    vtable5dcResult = VCALL(M<SInt32>(self), 0x5dc)(self);
+    if ((vtable5dcResult == 0) || (M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) == self + kIOATIR500Surface_buffer1)) {
       wordCount = 0;
     }
     else {
-      iVar5 = M<SInt32>(self + kIOATIR500Surface_panel);
+      panel = M<SInt32>(self + kIOATIR500Surface_panel);
       wordCount = 0x1844;
-      if (iVar5 != 0) {
+      if (panel != 0) {
         wordCount = 0x1a44;
       }
       *packet = wordCount;
-      M<UInt32>(iVar3 + 0x124) = M<UInt32>(providerBytes + iVar5 * 0x78 + 0x134);
+      M<UInt32>(scratchRing + 0x124) = M<UInt32>(providerBytes + panel * 0x78 + 0x134);
       wordCount = 2;
       M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = self + kIOATIR500Surface_buffer1;
     }

@@ -1,0 +1,35 @@
+--- a/Sources/ATIR500Surface_complete_vram_Port.cpp	2026-10-20 09:35:57.485118319 -0700
++++ b/Sources/ATIR500Surface_complete_vram_Port.cpp	2026-10-20 09:35:57.486461475 -0700
+@@ -33,13 +33,13 @@
+ 
+   UInt32 bitIndex;
+   SInt32 slotOffset;
+-  UInt32 uVar3;
++  UInt32 result;
+   UInt8 bufferSlot;
+   SInt32 *accel;
+   UInt8 *accelBytes;
+   SInt32 packet;
+   
+-  uVar3 = 0;
++  result = 0;
+   if (bufferBytes[0x3c] != 0x0) {
+     bufferSlot = ((char)bufferBytes[0x3c] + -1);
+     bufferBytes[0x3c] = bufferSlot;
+@@ -61,12 +61,12 @@
+         M<SInt32>(packet + 0x130) = slotOffset + 0x2c3;
+         M<UInt32>(packet + 0x134) = 0;
+         accelBytes = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
+-        uVar3 = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet + 0x120),M<SInt32>(accelBytes + kIOATIR500Accelerator_scratchBufferGartOffset) + 0x120,6);
+-        M<UInt32>(accelBytes + kIOATIR500Accelerator_scratchCommandBuffer_0x10) = uVar3;
++        result = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet + 0x120),M<SInt32>(accelBytes + kIOATIR500Accelerator_scratchBufferGartOffset) + 0x120,6);
++        M<UInt32>(accelBytes + kIOATIR500Accelerator_scratchCommandBuffer_0x10) = result;
+         return 1;
+       }
+     }
+-    uVar3 = 1;
++    result = 1;
+   }
+-  return uVar3;
++  return result;
+ }

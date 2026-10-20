@@ -1,6 +1,2 @@
 #!use-decl: end
 # second build_swap batch (parity gate OK).
-use	ATIR500Surface::build_swap	uVar14	bufferOriginY	INFERRED	ATIR500SurfaceBuffer +0x20: multiplied by the buffer stride (+0x40) and added to the buffer base (+8) to form the texture-offset word blitPacket[0xa0]	uVar14\ =\ M<UInt16>\(iVar43\ \+\ 0x20\);		
-use	ATIR500Surface::build_swap	uVar13	panelOriginY	INFERRED	the panel buffer record field +0x14c: multiplied by the pitch (+0x16c) and added to the base (+0x134) to form blitPacket[0x9a]	uVar13\ =\ M<UInt16>\(iVar32\ \+\ 0x14c\);		
-use	ATIR500Surface::build_swap	uVar42	bufferWidth	CONFIRMED	ATIR500SurfaceBuffer +0x1c: the width, divided by the sample count (+0x3c bits 20-23) for the packet size fields and converted to float for the texture coordinates	uVar42\ =\ \(UInt32\)M<UInt16>\(iVar43\ \+\ 0x1c\);	uVar42\ =\ \(SInt32\)dVar65\ \-\ uVar38;	
-use	ATIR500Surface::build_swap	uVar15	bufferHeight	CONFIRMED	ATIR500SurfaceBuffer +0x1e: the height; height - 1 goes into the packet size fields and the float is used for the vertical texture coordinate scale	uVar15\ =\ \(UInt32\)M<UInt16>\(iVar43\ \+\ 0x1e\);		

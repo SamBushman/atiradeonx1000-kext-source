@@ -33,41 +33,74 @@ extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 void ATIR500Surface::build_swap() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  bool bVar2;
-  float fVar3;
-  float fVar4;
-  UInt8 AVar5;
-  UInt8 bVar6;
-  UInt8 bVar7;
+  bool useBuffer1;
+  bool buffer1Untiled;
+  bool formatsDiffer;
+  bool dstUntiled;
+  bool srcUntiled;
+  float edgeDelta;
+  float columnOffsetB;
+  float bufferWidthFloat;
+  float halfF;
+  float columnOffsetA;
+  UInt8 buffer1FormatIndex;
+  UInt8 dstTilingByte1;
+  UInt8 srcTilingByte0;
   float widthRatio;
   SInt16 regionX;
   SInt16 regionWidth;
   SInt16 surfaceWidth;
   SInt16 surfaceHeight;
-  UInt16 uVar13;
-  UInt16 uVar14;
-  UInt32 uVar15;
-  UInt32 uVar16;
-  UInt32 uVar17;
-  SInt32 iVar18;
-  UInt32 uVar19;
+  UInt32 savedWord250;
+  UInt32 hwWordB74;
+  UInt32 gbTileConfig;
+  UInt32 fieldC;
+  UInt32 minPitch;
+  UInt32 panelHeight;
+  UInt32 formatIndexSrc;
+  UInt32 fmtE4;
+  UInt32 firstHeightPlus1;
+  UInt32 halfWidthPlus2;
+  SInt32 overlapFlag;
+  SInt32 dstBaseAddr;
+  UInt32 fieldB;
+  UInt32 columnDivA;
+  UInt32 pitchPerDegreeB;
+  UInt32 columnDivB;
+  UInt32 lastRowB;
+  UInt32 scissorEnd;
+  UInt32 dstFormatIndex;
+  UInt32 fmtE0;
+  UInt32 fmtDC;
+  UInt32 secondWidth;
   UInt32 dstPitchUnits;
-  UInt32 uVar21;
-  UInt32 uVar22;
   UInt32 srcLastColumn;
-  UInt32 uVar24;
   UInt32 srcLastColumnCopy;
-  SInt32 iVar26;
-  SInt32 *piVar27;
-  SInt32 iVar28;
-  UInt32 uVar29;
-  UInt32 uVar30;
+  SInt32 packetCursor;
+  SInt32 *regionArray;
+  SInt32 *regionCursor;
+  UInt32 fieldA;
+  UInt32 fmtE4B;
+  UInt32 tilingBitsB;
+  UInt32 lastColumnB;
+  UInt32 scissorStart;
+  UInt32 savedWordAA;
+  UInt32 srcFormatIndex;
   UInt32 srcPitchUnits;
-  SInt32 iVar32;
-  SInt32 iVar33;
-  SInt32 iVar34;
-  SInt32 iVar35;
+  SInt32 accelBase;
+  SInt32 panelAccel;
+  SInt32 mip0Offset;
+  SInt32 stripCursor;
+  SInt32 tileShift;
+  SInt32 texOffsetDelta;
+  SInt32 lengthIndex;
+  SInt32 columnCursor;
+  SInt32 rectCursor;
+  SInt32 srcGpuBase;
+  SInt32 regionCount;
+  SInt32 scalingMode;
+  SInt32 stripsLeft;
+  SInt32 columnsLeft;
   SInt32 formatOffset;
   SInt32 nextIndex;
   SInt32 accelerator;
@@ -88,40 +121,41 @@ void ATIR500Surface::build_swap() {
   UInt32 scissorBottom;
   SwapBufferEntry *batchEntry;     /* entries[0] of the panel being built: its `header` is the pending swap-write batch */
   PanelRecord *panelRec;
-  UInt32 uVar38;
+  UInt32 regionY;
+  UInt32 savedWordA2;
+  UInt32 firstHeight;
+  UInt32 halfWidth;
+  UInt32 bufferWidthInt;
   UInt32 *batchWords;
-  UInt32 uVar40;
+  UInt32 regionHeight;
+  UInt32 halfHeightRaw;
+  UInt32 savedWordA6;
+  UInt32 halfWidthRaw;
   float heightRatio;
-  UInt32 uVar42;
-  SInt32 iVar43;
-  SInt32 iVar44;
+  UInt32 fieldD;
+  UInt32 secondHeight;
+  SInt32 tearingWideBlit;
+  SInt32 regionsLeft;
+  SInt32 tileUnits;
   UInt32 *blitPacket;
-  UInt8 bVar46;
-  double dVar47;
-  double dVar48;
-  double dVar49;
-  double dVar50;
-  double dVar51;
-  double dVar52;
-  double dVar53;
-  double dVar54;
-  double dVar55;
+  UInt8 isPanel0Bits;
+  UInt8 dstTilingByte0;
+  double surfaceWidthF;
+  double splitThreshold;
+  double lit37c;
+  double surfaceHeightF;
+  double columnCenterX;
   double half;
   double one;
   double zero;
-  double dVar59;
   double signedIntBias;
-  double dVar61;
-  double dVar62;
-  double dVar63;
-  double dVar64;
-  double dVar65;
-  double dVar66;
-  double dVar67;
-  double dVar68;
-  UInt8 *local_108;
+  double secondColumnBiasX;
+  double secondStripBiasY;
+  double stripCenterY;
+  double intToFloatBias;
+  UInt8 *panelSlotCursor;
   UInt32 panel;
-  SInt32 *local_100;
+  SInt32 *regionDataPtr;
   SInt32 surfaceBuffer;
   SInt32 packetIndex;
   SInt32 textureOffsetWord;
@@ -194,56 +228,56 @@ void ATIR500Surface::build_swap() {
   double clipBottom;
   
   M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 0;
-  iVar32 = M<SInt32>(self + kIOATIR500Surface_accelerator);
-  if (M<SInt32>(iVar32 + 0xcc) != 0) {
+  accelBase = M<SInt32>(self + kIOATIR500Surface_accelerator);
+  if (M<SInt32>(accelBase + 0xcc) != 0) {
     panel = 0;
     zero = (double)FLOAT_0004c370;
     one = (double)FLOAT_0004c374;
     half = (double)FLOAT_0004c380;
     panelRec = PANEL_RECORD(self, 0);
     signedIntBias = DOUBLE_0004c3a8;
-    local_108 = self;
+    panelSlotCursor = self;
     do {
-      bVar1 = (M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x20) == 0;
-      if (bVar1) {
+      useBuffer1 = (M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x20) == 0;
+      if (useBuffer1) {
         surfaceBuffer = M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1);
       }
       else {
         surfaceBuffer = M<SInt32>(self + kIOATIR500Surface_attachmentBuffers);
       }
-      iVar32 = panel * 0x78 + iVar32;
+      panelAccel = panel * 0x78 + accelBase;
       if ((self[0xbf1] == 0x10) ||
          ((self[0xbf1] != 0x20 && (M<SInt32>(self + kIOATIR500Surface_scalingSourceWidth) == M<SInt32>(self + kIOATIR500Surface_regionWidth))
           ))) {
-        iVar35 = 1;
+        scalingMode = 1;
       }
       else {
-        iVar35 = 2;
+        scalingMode = 2;
       }
-      piVar27 = M<SInt32 *>(local_108 + 0xd60);
-      iVar34 = *piVar27;
-      local_100 = piVar27 + 3;
-      if (iVar34 == 0) {
-        local_100 = piVar27 + 1;
-        iVar34 = 1;
+      regionArray = M<SInt32 *>(panelSlotCursor + 0xd60);
+      regionCount = *regionArray;
+      regionDataPtr = regionArray + 3;
+      if (regionCount == 0) {
+        regionDataPtr = regionArray + 1;
+        regionCount = 1;
       }
-      uVar40 = (UInt32)M<SInt16>((SInt32)piVar27 + 10);
-      regionX = M<SInt16>(piVar27 + 1);
-      uVar38 = (UInt32)M<SInt16>((SInt32)piVar27 + 6);
-      regionWidth = M<SInt16>(piVar27 + 2);
+      regionHeight = (UInt32)M<SInt16>((SInt32)regionArray + 10);
+      regionX = M<SInt16>(regionArray + 1);
+      regionY = (UInt32)M<SInt16>((SInt32)regionArray + 6);
+      regionWidth = M<SInt16>(regionArray + 2);
       if ((M<SInt32>(self + kIOATIR500Surface_boundDVDContext) != 0) && (M<SInt32>(self + kATIR500Surface_overlayExists) != 0)) {
         if ((SInt32)regionWidth == 0) {
           return;
         }
-        if (uVar40 == 0) {
+        if (regionHeight == 0) {
           return;
         }
       }
       batchHeader = (SInt32)Vol(panelRec->entries[0].header);
       batchEntry = &panelRec->entries[0];
-      bVar46 = (panel == 0) << 1;
+      isPanel0Bits = (panel == 0) << 1;
       batchWords = (UInt32 *)(batchHeader + 0x20);
-      if (((panel != 0) || (M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) == M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1))) || (bVar1)) {
+      if (((panel != 0) || (M<SInt32>(self + kIOATIR500Surface_attachmentBuffers) == M<SInt32>(self + kIOATIR500Surface_attachmentBuffer1))) || (useBuffer1)) {
         batchIndex = 0;
       }
       else {
@@ -263,25 +297,25 @@ void ATIR500Surface::build_swap() {
         if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer0BytesPerPixel) <= widthUnits) {
           pitchUnits = widthUnits;
         }
-        uVar15 = M<UInt32>(batchHeader + 0x250);
+        savedWord250 = M<UInt32>(batchHeader + 0x250);
         M<UInt32>(batchHeader + 0x298) =
              pitchUnits & 0x3ffe | ((UInt8)self[0xe0] & 1) << 0x10 | ((UInt8)self[0xe0] & 6) << 0x10 |
              ((UInt8)self[0xe1] & 3) << 0x13 |
              FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[0xe2] * 0x1c) >> 1 & 0x1e00000;
-        uVar29 = FormatTableLookup_0x0004d2e0(formatOffset) >> 0x11 & 0x1f;
-        M<UInt32>(batchHeader + 0x250) = uVar29 | uVar15 & 0xffffffe0;
-        uVar19 = FormatTableLookup_0x0004d2e0(formatOffset) >> 7 & 0x300;
-        M<UInt32>(batchHeader + 0x250) = uVar19 | uVar29 | uVar15 & 0xfffffce0;
-        uVar17 = FormatTableLookup_0x0004d2e0(formatOffset) >> 3 & 0xc00;
-        M<UInt32>(batchHeader + 0x250) = uVar17 | uVar19 | uVar29 | uVar15 & 0xfffff0e0;
-        uVar42 = (FormatTableLookup_0x0004d2e0(formatOffset) & 0x1800) << 1;
-        M<UInt32>(batchHeader + 0x250) = uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffffc0e0;
+        fieldA = FormatTableLookup_0x0004d2e0(formatOffset) >> 0x11 & 0x1f;
+        M<UInt32>(batchHeader + 0x250) = fieldA | savedWord250 & 0xffffffe0;
+        fieldB = FormatTableLookup_0x0004d2e0(formatOffset) >> 7 & 0x300;
+        M<UInt32>(batchHeader + 0x250) = fieldB | fieldA | savedWord250 & 0xfffffce0;
+        fieldC = FormatTableLookup_0x0004d2e0(formatOffset) >> 3 & 0xc00;
+        M<UInt32>(batchHeader + 0x250) = fieldC | fieldB | fieldA | savedWord250 & 0xfffff0e0;
+        fieldD = (FormatTableLookup_0x0004d2e0(formatOffset) & 0x1800) << 1;
+        M<UInt32>(batchHeader + 0x250) = fieldD | fieldC | fieldB | fieldA | savedWord250 & 0xffffc0e0;
         M<UInt32>(batchHeader + 0x250) =
              (FormatTableLookup_0x0004d2e0(formatOffset) & 0x600) << 5 |
-             uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffff00e0;
+             fieldD | fieldC | fieldB | fieldA | savedWord250 & 0xffff00e0;
         if (((M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) & 0xf00000) == 0) ||
-           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0Width) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf),
-           lastColumn = uVar19 - 1, uVar19 == 0)) {
+           (columnDivA = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer0Width) / (M<UInt32>(self + kIOATIR500Surface_buffer0TilingDegreeBits) >> 0x14 & 0xf),
+           lastColumn = columnDivA - 1, columnDivA == 0)) {
           lastColumn = 0;
         }
         lastRow = 0;
@@ -289,14 +323,14 @@ void ATIR500Surface::build_swap() {
           lastRow = M<UInt16>(self + kIOATIR500Surface_buffer0Height) - 1;
         }
         M<UInt32>(batchHeader + 0x2f4) = lastColumn & 0x1fff | (lastRow & 0x1fff) << 0xd;
-        AVar5 = self[0x15a];
+        buffer1FormatIndex = self[0x15a];
         M<UInt32>(batchHeader + 0x2a8) =
              ((UInt8)self[0x158] & 7) << 2 |
              (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1BasePitch) * M<SInt32>(self + kIOATIR500Surface_buffer1MipOffset0) + M<SInt32>(self + kIOATIR500Surface_buffer1GpuBase) &
              0xffffffe0;
         if (((M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) == 0) ||
-           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf),
-           lastColumn = uVar19 - 1, uVar19 == 0)) {
+           (columnDivA = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits) >> 0x14 & 0xf),
+           lastColumn = columnDivA - 1, columnDivA == 0)) {
           lastColumn = 0;
         }
         lastRow = 0;
@@ -304,39 +338,39 @@ void ATIR500Surface::build_swap() {
           lastRow = M<UInt16>(self + kIOATIR500Surface_buffer1Height) - 1;
         }
         M<UInt32>(batchHeader + 0x2c0) = lastColumn & 0x7ff | (lastRow & 0x7ff) << 0xb | 0x80000000;
-        uVar29 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar5 * 0x1c);
+        fmtE4B = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)buffer1FormatIndex * 0x1c);
         M<UInt32>(batchHeader + 0x2c8) =
-             uVar29 >> 0x13 & 0x1f | (uVar29 & 0x40) << 0x10 | uVar29 >> 7 & 0xe00 |
-             uVar29 >> 1 & 0x7000 | (uVar29 & 0x1c00) << 5 | (uVar29 & 0x380) << 0xb;
-        uVar29 = M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits);
-        bVar1 = (uVar29 & 0xf00000) == 0;
-        if (bVar1) {
-          uVar19 = 0;
+             fmtE4B >> 0x13 & 0x1f | (fmtE4B & 0x40) << 0x10 | fmtE4B >> 7 & 0xe00 |
+             fmtE4B >> 1 & 0x7000 | (fmtE4B & 0x1c00) << 5 | (fmtE4B & 0x380) << 0xb;
+        tilingBitsB = M<UInt32>(self + kIOATIR500Surface_buffer1TilingDegreeBits);
+        buffer1Untiled = (tilingBitsB & 0xf00000) == 0;
+        if (buffer1Untiled) {
+          pitchPerDegreeB = 0;
         }
         else {
-          uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1PitchPixels) / (uVar29 >> 0x14 & 0xf);
+          pitchPerDegreeB = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1PitchPixels) / (tilingBitsB >> 0x14 & 0xf);
         }
-        uVar17 = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerPixel);
-        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerPixel) <= uVar19) {
-          uVar17 = uVar19;
+        minPitch = 0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerPixel);
+        if (0x20 / M<UInt16>(self + kIOATIR500Surface_buffer1BytesPerPixel) <= pitchPerDegreeB) {
+          minPitch = pitchPerDegreeB;
         }
-        if ((bVar1) ||
-           (uVar19 = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (uVar29 >> 0x14 & 0xf), uVar29 = uVar19 - 1,
-           uVar19 == 0)) {
-          uVar29 = 0;
+        if ((buffer1Untiled) ||
+           (columnDivB = (UInt32)M<UInt16>(self + kIOATIR500Surface_buffer1Width) / (tilingBitsB >> 0x14 & 0xf), lastColumnB = columnDivB - 1,
+           columnDivB == 0)) {
+          lastColumnB = 0;
         }
-        uVar19 = 0;
+        lastRowB = 0;
         if (M<UInt16>(self + kIOATIR500Surface_buffer1Height) != 0) {
-          uVar19 = M<UInt16>(self + kIOATIR500Surface_buffer1Height) - 1;
+          lastRowB = M<UInt16>(self + kIOATIR500Surface_buffer1Height) - 1;
         }
         M<UInt32>(batchHeader + 0x2d0) =
-             uVar17 - 1 & 0x3fff | (uVar29 & 0x800) << 4 | (uVar19 & 0x800) << 5;
-        dVar54 = (double)FLOAT_0004c37c;
+             minPitch - 1 & 0x3fff | (lastColumnB & 0x800) << 4 | (lastRowB & 0x800) << 5;
+        lit37c = (double)FLOAT_0004c37c;
         nextIndex = rectPacketIndex * 4 + 0x30 >> 2;
-        uVar16 = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
+        hwWordB74 = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
         M<UInt32>(batchHeader + 0x2b0) = M<UInt32>(batchHeader + 0x2b0) & 0xffffe1ff | 0x1400;
         M<UInt32>(batchHeader + 0x3c) = 0x70000;
-        M<UInt32>(batchHeader + 0x54) = uVar16;
+        M<UInt32>(batchHeader + 0x54) = hwWordB74;
         surfaceWidth = M<SInt16>(self + kIOATIR500Surface_width);
         surfaceHeight = M<SInt16>(self + kIOATIR500Surface_height);
         batchWords[rectPacketIndex] = 0x31080;
@@ -345,14 +379,14 @@ void ATIR500Surface::build_swap() {
         batchWords[rectPacketIndex + 2] = FBITS((float)one);
         batchWords[rectPacketIndex + 3] = FBITS((float)one);
         batchWords[rectPacketIndex + 4] = FBITS((float)zero);
-        dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceWidth ^ 0x80000000) - signedIntBias);
-        dVar55 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceHeight ^ 0x80000000) - signedIntBias);
+        surfaceWidthF = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceWidth ^ 0x80000000) - signedIntBias);
+        surfaceHeightF = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceHeight ^ 0x80000000) - signedIntBias);
         batchWords[rectPacketIndex + 7] = 0xc0033500;
         batchWords[rectPacketIndex + 8] = 0x10031;
-        batchWords[rectPacketIndex + 9] = FBITS((float)((double)(float)(dVar47 + zero) * half));
-        batchWords[rectPacketIndex + 10] = FBITS((float)((double)(float)(dVar55 + zero) * half));
+        batchWords[rectPacketIndex + 9] = FBITS((float)((double)(float)(surfaceWidthF + zero) * half));
+        batchWords[rectPacketIndex + 10] = FBITS((float)((double)(float)(surfaceHeightF + zero) * half));
         batchWords[rectPacketIndex + 0xb] = 0;
-        batchWords[rectPacketIndex + 6] = (SInt32)(dVar47 * dVar54) << 0x10 | (SInt32)(dVar55 * dVar54);
+        batchWords[rectPacketIndex + 6] = (SInt32)(surfaceWidthF * lit37c) << 0x10 | (SInt32)(surfaceHeightF * lit37c);
         batchWords[nextIndex] = 0x1393;
         batchWords[nextIndex + 1] = 10;
         batchWords[nextIndex + 2] = 0x5c8;
@@ -361,7 +395,7 @@ void ATIR500Surface::build_swap() {
       }
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0x18) = batchIndex;
       if (panelRec->active != 0x0) {
-        iVar26 = batchIndex;
+        packetCursor = batchIndex;
         if (self[0xbed] == 0x0) {
           accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
         }
@@ -369,57 +403,57 @@ void ATIR500Surface::build_swap() {
           accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
           if ((M<char>(accelerator + 0x9b0) == '\0') ||
              (M<SInt32>(panel * 0x18 + accelerator + kIOATIR500Accelerator_swdsPanel0Flag) == 0)) {
-            if ((SInt32)uVar38 < 0) {
-              uVar29 = 0;
-              uVar19 = uVar40;
+            if ((SInt32)regionY < 0) {
+              scissorStart = 0;
+              scissorEnd = regionHeight;
             }
             else {
-              uVar29 = uVar38;
-              uVar19 = uVar38 + uVar40;
+              scissorStart = regionY;
+              scissorEnd = regionY + regionHeight;
             }
-            uVar17 = (UInt32)M<UInt16>(iVar32 + 0x14a);
-            if (uVar17 < uVar29) {
-              uVar29 = uVar17;
+            panelHeight = (UInt32)M<UInt16>(panelAccel + 0x14a);
+            if (panelHeight < scissorStart) {
+              scissorStart = panelHeight;
             }
-            if (uVar17 < uVar19) {
-              uVar19 = uVar17;
+            if (panelHeight < scissorEnd) {
+              scissorEnd = panelHeight;
             }
             batchWords[batchIndex] = 0x1393;
             batchWords[batchIndex + 1] = 10;
             batchWords[batchIndex + 2] = 0xd0b;
             batchWords[batchIndex + 3] = 5;
             batchWords[batchIndex + 4] = 0x5c8;
-            iVar26 = batchIndex + 6;
+            packetCursor = batchIndex + 6;
             batchWords[batchIndex + 5] = 0x70000;
-            if ((bool)(bVar46 >> 1 & 1)) {
-              iVar18 = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
-              if (iVar18 == 0) {
-                batchWords[iVar26] = 0x194e;
+            if ((bool)(isPanel0Bits >> 1 & 1)) {
+              overlapFlag = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
+              if (overlapFlag == 0) {
+                batchWords[packetCursor] = 0x194e;
                 batchWords[batchIndex + 7] =
-                     uVar29 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display1Enabled) |
-                     (uVar19 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display1Enabled)) << 0x10 | 0x80000000;
+                     scissorStart & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display1Enabled) |
+                     (scissorEnd & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display1Enabled)) << 0x10 | 0x80000000;
                 batchWords[batchIndex + 8] = 0x5c8;
-                iVar26 = batchIndex + 10;
+                packetCursor = batchIndex + 10;
                 batchWords[batchIndex + 9] = 8;
               }
               else {
 LAB_0003f644:
-                if (iVar18 != 0) goto LAB_0003f654;
+                if (overlapFlag != 0) goto LAB_0003f654;
               }
             }
             else {
               if (panel != 1) {
-                iVar18 = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
+                overlapFlag = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
                 goto LAB_0003f644;
               }
 LAB_0003f654:
-              batchWords[iVar26] = 0x1b4e;
+              batchWords[packetCursor] = 0x1b4e;
               batchWords[batchIndex + 7] =
-                   uVar29 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled) |
-                   (uVar19 & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled)) << 0x10 | 0x80000000;
+                   scissorStart & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled) |
+                   (scissorEnd & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled)) << 0x10 | 0x80000000;
               batchWords[batchIndex + 8] = 0x5c8;
               batchWords[batchIndex + 9] = 0x80000008;
-              iVar26 = batchIndex + 10;
+              packetCursor = batchIndex + 10;
             }
           }
         }
@@ -443,52 +477,52 @@ LAB_0003f654:
                             - signedIntBias);
           }
         }
-        uVar29 = (UInt32)M<UInt8>(surfaceBuffer + 0x3a);
-        uVar19 = (UInt32)M<UInt8>(iVar32 + 0x166);
-        uVar16 = M<UInt32>(accelerator + kIOATIR500Accelerator_gbTileConfig);
-        if (uVar29 == uVar19) {
-          bVar1 = false;
-          uVar17 = uVar19;
+        srcFormatIndex = (UInt32)M<UInt8>(surfaceBuffer + 0x3a);
+        dstFormatIndex = (UInt32)M<UInt8>(panelAccel + 0x166);
+        gbTileConfig = M<UInt32>(accelerator + kIOATIR500Accelerator_gbTileConfig);
+        if (srcFormatIndex == dstFormatIndex) {
+          formatsDiffer = false;
+          formatIndexSrc = dstFormatIndex;
         }
         else {
-          bVar1 = ((FormatTableLookup_0x0004d2d8(uVar19 * 0x1c) ^
-                   FormatTableLookup_0x0004d2d8(uVar29 * 0x1c)) & 0xffffc000) != 0;
-          uVar17 = uVar29;
+          formatsDiffer = ((FormatTableLookup_0x0004d2d8(dstFormatIndex * 0x1c) ^
+                   FormatTableLookup_0x0004d2d8(srcFormatIndex * 0x1c)) & 0xffffc000) != 0;
+          formatIndexSrc = srcFormatIndex;
         }
         bufferHeight = (UInt32)M<UInt16>(surfaceBuffer + 0x1e);
         bufferWidth = (UInt32)M<UInt16>(surfaceBuffer + 0x1c);
-        pitch = M<SInt32>(iVar32 + 0x16c);
-        panelOriginY = M<UInt16>(iVar32 + 0x14c);
-        iVar18 = M<SInt32>(iVar32 + 0x134);
-        bVar2 = (M<UInt32>(iVar32 + 0x168) & 0xf00000) == 0;
-        if (bVar2) {
+        pitch = M<SInt32>(panelAccel + 0x16c);
+        panelOriginY = M<UInt16>(panelAccel + 0x14c);
+        dstBaseAddr = M<SInt32>(panelAccel + 0x134);
+        dstUntiled = (M<UInt32>(panelAccel + 0x168) & 0xf00000) == 0;
+        if (dstUntiled) {
           dstWidthUnits = 0;
         }
         else {
-          dstWidthUnits = (UInt32)M<UInt16>(iVar32 + 0x140) / (M<UInt32>(iVar32 + 0x168) >> 0x14 & 0xf);
+          dstWidthUnits = (UInt32)M<UInt16>(panelAccel + 0x140) / (M<UInt32>(panelAccel + 0x168) >> 0x14 & 0xf);
         }
-        dstPitchUnits = 0x20 / M<UInt16>(iVar32 + 0x142);
+        dstPitchUnits = 0x20 / M<UInt16>(panelAccel + 0x142);
         if (dstPitchUnits <= dstWidthUnits) {
           dstPitchUnits = dstWidthUnits;
         }
-        uVar19 = FormatTableLookup_0x0004d2e0(uVar19 * 0x1c);
-        bVar46 = M<UInt8>(iVar32 + 0x164);
-        bVar6 = M<UInt8>(iVar32 + 0x165);
-        if ((bVar2) ||
-           (scissorWidthUnits = (UInt32)M<UInt16>(iVar32 + 0x148) / (M<UInt32>(iVar32 + 0x168) >> 0x14 & 0xf),
+        fmtE0 = FormatTableLookup_0x0004d2e0(dstFormatIndex * 0x1c);
+        dstTilingByte0 = M<UInt8>(panelAccel + 0x164);
+        dstTilingByte1 = M<UInt8>(panelAccel + 0x165);
+        if ((dstUntiled) ||
+           (scissorWidthUnits = (UInt32)M<UInt16>(panelAccel + 0x148) / (M<UInt32>(panelAccel + 0x168) >> 0x14 & 0xf),
            scissorRight = scissorWidthUnits - 1, scissorWidthUnits == 0)) {
           scissorRight = 0;
         }
         scissorBottom = 0;
-        if (M<UInt16>(iVar32 + 0x14a) != 0) {
-          scissorBottom = M<UInt16>(iVar32 + 0x14a) - 1;
+        if (M<UInt16>(panelAccel + 0x14a) != 0) {
+          scissorBottom = M<UInt16>(panelAccel + 0x14a) - 1;
         }
         bufferOriginY = M<UInt16>(surfaceBuffer + 0x20);
-        iVar32 = M<SInt32>(surfaceBuffer + 0x40);
-        iVar33 = M<SInt32>(surfaceBuffer + 8);
-        bVar7 = M<UInt8>(surfaceBuffer + 0x38);
-        bVar2 = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
-        if ((bVar2) ||
+        mip0Offset = M<SInt32>(surfaceBuffer + 0x40);
+        srcGpuBase = M<SInt32>(surfaceBuffer + 8);
+        srcTilingByte0 = M<UInt8>(surfaceBuffer + 0x38);
+        srcUntiled = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
+        if ((srcUntiled) ||
            (srcWidthUnits = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), srcLastColumn = srcWidthUnits - 1,
            srcWidthUnits == 0)) {
           srcLastColumn = 0;
@@ -499,8 +533,8 @@ LAB_0003f654:
         else {
           srcLastRow = 0;
         }
-        uVar17 = FormatTableLookup_0x0004d2e4(uVar17 * 0x1c);
-        if (bVar2) {
+        fmtE4 = FormatTableLookup_0x0004d2e4(formatIndexSrc * 0x1c);
+        if (srcUntiled) {
           srcWidthUnits = 0;
         }
         else {
@@ -510,9 +544,9 @@ LAB_0003f654:
         if (srcPitchUnits <= srcWidthUnits) {
           srcPitchUnits = srcWidthUnits;
         }
-        if ((bVar2) ||
-           (uVar24 = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), srcLastColumnCopy = uVar24 - 1,
-           uVar24 == 0)) {
+        if ((srcUntiled) ||
+           (columnDivB = bufferWidth / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), srcLastColumnCopy = columnDivB - 1,
+           columnDivB == 0)) {
           srcLastColumnCopy = 0;
         }
         if (bufferHeight != 0) {
@@ -523,11 +557,11 @@ LAB_0003f654:
         }
         bufferWidthF = (double)(float)((double)CONCAT44d(0x43300000,bufferWidth) - DOUBLE_0004c3b0);
         regionXF = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionX ^ 0x80000000) - signedIntBias);
-        regionYF = (double)(float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias);
+        regionYF = (double)(float)((double)CONCAT44d(0x43300000,regionY ^ 0x80000000) - signedIntBias);
         regionWidthF = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)regionWidth ^ 0x80000000) - signedIntBias);
         invBufferWidthD = (double)FLOAT_0004c370;
-        blitPacket = batchWords + iVar26;
-        regionHeightF = (double)(float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias);
+        blitPacket = batchWords + packetCursor;
+        regionHeightF = (double)(float)((double)CONCAT44d(0x43300000,regionHeight ^ 0x80000000) - signedIntBias);
         bufferHeightF = (double)(float)((double)CONCAT44d(0x43300000,bufferHeight) - DOUBLE_0004c3b0);
         scalingBufferXF = (double)(float)((double)CONCAT44d(0x43300000,
                                                   (SInt32)M<SInt16>(self + kIOATIR500Surface_scalingBufferX) ^ 0x80000000) -
@@ -537,7 +571,7 @@ LAB_0003f654:
                                 signedIntBias);
         sourceScaleX = (double)widthRatio;
         sourceScaleY = (double)heightRatio;
-        iVar43 = M<SInt32>(accelerator + kIOATIR500Accelerator_tearingWideBlit);
+        tearingWideBlit = M<SInt32>(accelerator + kIOATIR500Accelerator_tearingWideBlit);
         if (bufferWidthF != invBufferWidthD) {
           invBufferWidthD = (double)(float)(one / bufferWidthF);
         }
@@ -545,128 +579,128 @@ LAB_0003f654:
         if (bufferHeightF != invBufferHeightD) {
           invBufferHeightD = (double)(float)(one / bufferHeightF);
         }
-        iVar26 = 0xbd;
+        packetCursor = 0xbd;
         GCopy(blitPacket,(&g_r500_3d_blit_state_packet),0x2f4);
-        uVar38 = blitPacket[0xa2];
-        blitPacket[0xa0] = (bVar7 & 7) << 2 | (UInt32)bufferOriginY * iVar32 + iVar33 & 0xffffffe0;
+        savedWordA2 = blitPacket[0xa2];
+        blitPacket[0xa0] = (srcTilingByte0 & 7) << 2 | (UInt32)bufferOriginY * mip0Offset + srcGpuBase & 0xffffffe0;
         blitPacket[0xa6] = srcLastColumn & 0x7ff | (srcLastRow & 0x7ff) << 0xb | 0x80000000;
         blitPacket[0xa8] =
-             uVar17 >> 0x13 & 0x1f | (uVar17 & 0x40) << 0x10 | uVar17 >> 7 & 0xe00 |
-             uVar17 >> 1 & 0x7000 | (uVar17 & 0x1c00) << 5 | (uVar17 & 0x380) << 0xb;
+             fmtE4 >> 0x13 & 0x1f | (fmtE4 & 0x40) << 0x10 | fmtE4 >> 7 & 0xe00 |
+             fmtE4 >> 1 & 0x7000 | (fmtE4 & 0x1c00) << 5 | (fmtE4 & 0x380) << 0xb;
         blitPacket[0xaa] = srcPitchUnits - 1 & 0x3fff | (srcLastColumnCopy & 0x800) << 4 | (srcLastRowCopy & 0x800) << 5;
         blitPacket[0x9c] =
-             dstPitchUnits & 0x3ffe | (bVar46 & 1) << 0x10 | (bVar46 & 6) << 0x10 | (bVar6 & 3) << 0x13 |
-             uVar19 >> 1 & 0x1e00000;
-        blitPacket[0x9a] = (UInt32)panelOriginY * pitch + iVar18 & 0xffffffe0;
+             dstPitchUnits & 0x3ffe | (dstTilingByte0 & 1) << 0x10 | (dstTilingByte0 & 6) << 0x10 | (dstTilingByte1 & 3) << 0x13 |
+             fmtE0 >> 1 & 0x1e00000;
+        blitPacket[0x9a] = (UInt32)panelOriginY * pitch + dstBaseAddr & 0xffffffe0;
         blitPacket[0x8a] =
-             (uVar19 & 0x600) << 5 |
-             (uVar19 & 0x1800) << 1 |
-             uVar19 >> 3 & 0xc00 | uVar19 >> 7 & 0x300 | uVar19 >> 0x11 & 0x1f;
+             (fmtE0 & 0x600) << 5 |
+             (fmtE0 & 0x1800) << 1 |
+             fmtE0 >> 3 & 0xc00 | fmtE0 >> 7 & 0x300 | fmtE0 >> 0x11 & 0x1f;
         blitPacket[0xb2] = 0;
         blitPacket[0xb3] = scissorRight & 0x1fff | (scissorBottom & 0x1fff) << 0xd;
-        blitPacket[0xb] = uVar16;
-        blitPacket[0xa2] = iVar35 << 9 | uVar38 & 0xfffff9ff;
-        blitPacket[0xa2] = iVar35 << 0xb | iVar35 << 9 | uVar38 & 0xffffe1ff;
-        if (bVar1) {
+        blitPacket[0xb] = gbTileConfig;
+        blitPacket[0xa2] = scalingMode << 9 | savedWordA2 & 0xfffff9ff;
+        blitPacket[0xa2] = scalingMode << 0xb | scalingMode << 9 | savedWordA2 & 0xffffe1ff;
+        if (formatsDiffer) {
           blitPacket[0x1e] = blitPacket[0x1e] & 0xfffffffc | 2;
         }
-        dVar48 = (double)FLOAT_0004c378;
-        if (((dVar48 < bufferWidthF) && (iVar43 != 0)) || (dVar48 < bufferHeightF)) {
+        splitThreshold = (double)FLOAT_0004c378;
+        if (((splitThreshold < bufferWidthF) && (tearingWideBlit != 0)) || (splitThreshold < bufferHeightF)) {
           if (bufferWidthF <= (double)FLOAT_0004c378) {
-            uVar19 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
-            uVar29 = blitPacket[0xaa];
-            uVar40 = (SInt32)bufferHeightF >> 1;
-            uVar38 = uVar40 & 0xffffffc0;
-            uVar42 = (SInt32)bufferHeightF - uVar38;
-            uVar17 = uVar38 + 1;
-            dVar65 = regionYF;
+            fmtDC = FormatTableLookup_0x0004d2dc(srcFormatIndex * 0x1c);
+            savedWordAA = blitPacket[0xaa];
+            halfHeightRaw = (SInt32)bufferHeightF >> 1;
+            firstHeight = halfHeightRaw & 0xffffffc0;
+            secondHeight = (SInt32)bufferHeightF - firstHeight;
+            firstHeightPlus1 = firstHeight + 1;
+            stripCenterY = regionYF;
             if (sourceScaleY != zero) {
-              dVar65 = (double)(float)(regionYF + (double)(float)((double)(float)((double)(float)((
+              stripCenterY = (double)(float)(regionYF + (double)(float)((double)(float)((double)(float)((
                                                   double)CONCAT44d(0x43300000,
-                                                                  uVar38 + uVar17 ^ 0x80000000) -
+                                                                  firstHeight + firstHeightPlus1 ^ 0x80000000) -
                                                   signedIntBias) * half + scalingBufferYF) / sourceScaleY));
             }
-            if (dVar65 <= zero) {
-              dVar65 = dVar65 - half;
+            if (stripCenterY <= zero) {
+              stripCenterY = stripCenterY - half;
             }
             else {
-              dVar65 = dVar65 + half;
+              stripCenterY = stripCenterY + half;
             }
             firstStripHeightF = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
-                                                                      (SInt32)dVar65 ^ 0x80000000) -
+                                                                      (SInt32)stripCenterY ^ 0x80000000) -
                                                     signedIntBias) - regionYF);
-            blitPacket[0xa6] = (uVar40 & 0x7c0) << 0xb | blitPacket[0xa6] & 0xffc007ff;
+            blitPacket[0xa6] = (halfHeightRaw & 0x7c0) << 0xb | blitPacket[0xa6] & 0xffc007ff;
             blitPacket[0xbd] = 0x1040;
-            iVar32 = 0xbf;
+            stripCursor = 0xbf;
             blitPacket[0xbe] = 0;
-            dVar65 = DOUBLE_0004c3a8;
-            fVar4 = FLOAT_0004c380;
+            intToFloatBias = DOUBLE_0004c3a8;
+            halfF = FLOAT_0004c380;
             heightRatio = FLOAT_0004c37c;
             widthRatio = FLOAT_0004c370;
-            if (uVar17 != 0) {
+            if (firstHeightPlus1 != 0) {
               widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
-                                                                        uVar17 ^ 0x80000000) -
+                                                                        firstHeightPlus1 ^ 0x80000000) -
                                                       signedIntBias));
             }
-            if (iVar34 != 0) {
+            if (regionCount != 0) {
               firstStripRight = (double)(float)(regionXF + regionWidthF);
               firstStripBottom = (double)(float)(regionYF + firstStripHeightF);
-              packetIndex = iVar32;
-              piVar27 = local_100;
-              iVar35 = iVar34;
+              packetIndex = stripCursor;
+              regionCursor = regionDataPtr;
+              stripsLeft = regionCount;
               do {
                 firstStripRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(piVar27) ^ 0x80000000) -
-                                        dVar65);
-                fVar3 = (float)(regionXF - firstStripRectLeftF);
+                                                          (SInt32)M<SInt16>(regionCursor) ^ 0x80000000) -
+                                        intToFloatBias);
+                edgeDelta = (float)(regionXF - firstStripRectLeftF);
                 firstStripClipLeft = regionXF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstStripClipLeft = firstStripRectLeftF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstStripClipLeft = regionXF;
                 }
                 firstStripRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*piVar27 ^ 0x80000000) -
-                                        dVar65);
-                fVar3 = (float)(regionYF - firstStripRectTopF);
+                                                          (SInt32)(SInt16)*regionCursor ^ 0x80000000) -
+                                        intToFloatBias);
+                edgeDelta = (float)(regionYF - firstStripRectTopF);
                 firstStripClipTop = regionYF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstStripClipTop = firstStripRectTopF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstStripClipTop = regionYF;
                 }
                 firstStripRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(piVar27) +
-                                                          (SInt32)M<SInt16>(piVar27 + 1) ^ 0x80000000)
-                                        - dVar65);
-                fVar3 = (float)(firstStripRectRightF - firstStripRight);
+                                                          (SInt32)M<SInt16>(regionCursor) +
+                                                          (SInt32)M<SInt16>(regionCursor + 1) ^ 0x80000000)
+                                        - intToFloatBias);
+                edgeDelta = (float)(firstStripRectRightF - firstStripRight);
                 firstStripClipRight = firstStripRight;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstStripClipRight = firstStripRectRightF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstStripClipRight = firstStripRight;
                 }
                 firstStripRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*piVar27 +
-                                                          (SInt32)M<SInt16>((SInt32)piVar27 + 6) ^
-                                                          0x80000000) - dVar65);
-                fVar3 = (float)(firstStripRectBottomF - firstStripBottom);
+                                                          (SInt32)(SInt16)*regionCursor +
+                                                          (SInt32)M<SInt16>((SInt32)regionCursor + 6) ^
+                                                          0x80000000) - intToFloatBias);
+                edgeDelta = (float)(firstStripRectBottomF - firstStripBottom);
                 firstStripClipBottom = firstStripBottom;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstStripClipBottom = firstStripRectBottomF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstStripClipBottom = firstStripBottom;
                 }
-                iVar32 = packetIndex;
+                stripCursor = packetIndex;
                 if ((FLOAT_0004c370 < (float)(firstStripClipRight - firstStripClipLeft)) &&
                    (FLOAT_0004c370 < (float)(firstStripClipBottom - firstStripClipTop))) {
                   blitPacket[packetIndex] = 0x31080;
                   blitPacket[packetIndex + 5] = 0x1087;
-                  iVar32 = packetIndex * 4 + 0x30 >> 2;
+                  stripCursor = packetIndex * 4 + 0x30 >> 2;
                   blitPacket[packetIndex + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(firstStripClipLeft - regionXF) -
                                                        scalingBufferXF)));
                   blitPacket[packetIndex + 2] =
@@ -676,225 +710,225 @@ LAB_0003f654:
                   blitPacket[packetIndex + 4] =
                        FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(firstStripClipTop - regionYF) - scalingBufferYF));
                   blitPacket[packetIndex + 7] = 0xc0033500;
-                  blitPacket[packetIndex + 9] = FBITS((float)(firstStripClipLeft + firstStripClipRight) * fVar4);
-                  blitPacket[packetIndex + 10] = FBITS((float)(firstStripClipTop + firstStripClipBottom) * fVar4);
+                  blitPacket[packetIndex + 9] = FBITS((float)(firstStripClipLeft + firstStripClipRight) * halfF);
+                  blitPacket[packetIndex + 10] = FBITS((float)(firstStripClipTop + firstStripClipBottom) * halfF);
                   blitPacket[packetIndex + 8] = 0x10031;
                   blitPacket[packetIndex + 0xb] = 0;
                   blitPacket[packetIndex + 6] =
                        (SInt32)((float)(firstStripClipRight - firstStripClipLeft) * heightRatio) << 0x10 |
                        (SInt32)((float)(firstStripClipBottom - firstStripClipTop) * heightRatio);
                 }
-                piVar27 = piVar27 + 2;
-                iVar35 = iVar35 + -1;
-                packetIndex = iVar32;
-              } while (iVar35 != 0);
+                regionCursor = regionCursor + 2;
+                stripsLeft = stripsLeft + -1;
+                packetIndex = stripCursor;
+              } while (stripsLeft != 0);
             }
             textureOffsetWord = blitPacket[0xa0];
-            blitPacket[iVar32] = 0x1150;
-            blitPacket[iVar32 + 1] =
-                 textureOffsetWord + (uVar38 * ((uVar29 & 0x3fff) + 1) << (uVar19 >> 0xc & 7) & 0xffffffe0);
-            uVar40 = blitPacket[0xa6];
-            blitPacket[iVar32 + 2] = 0x1120;
-            blitPacket[iVar32 + 3] = (uVar42 - 1) * 0x800 & 0x3ff800 | uVar40 & 0xffc007ff;
-            blitPacket[iVar32 + 4] = 0x1040;
-            iVar26 = iVar32 + 6;
-            blitPacket[iVar32 + 5] = 0;
-            dVar65 = DOUBLE_0004c3a8;
-            fVar4 = FLOAT_0004c380;
+            blitPacket[stripCursor] = 0x1150;
+            blitPacket[stripCursor + 1] =
+                 textureOffsetWord + (firstHeight * ((savedWordAA & 0x3fff) + 1) << (fmtDC >> 0xc & 7) & 0xffffffe0);
+            savedWordA6 = blitPacket[0xa6];
+            blitPacket[stripCursor + 2] = 0x1120;
+            blitPacket[stripCursor + 3] = (secondHeight - 1) * 0x800 & 0x3ff800 | savedWordA6 & 0xffc007ff;
+            blitPacket[stripCursor + 4] = 0x1040;
+            packetCursor = stripCursor + 6;
+            blitPacket[stripCursor + 5] = 0;
+            intToFloatBias = DOUBLE_0004c3a8;
+            halfF = FLOAT_0004c380;
             heightRatio = FLOAT_0004c37c;
             widthRatio = FLOAT_0004c370;
-            if (uVar42 != 0) {
+            if (secondHeight != 0) {
               widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
-                                                                        uVar42 ^ 0x80000000) -
+                                                                        secondHeight ^ 0x80000000) -
                                                       signedIntBias));
             }
-            dVar62 = (double)(float)(scalingBufferYF + (double)(float)((double)CONCAT44d(0x43300000,
-                                                                               uVar38 ^ 0x80000000)
+            secondStripBiasY = (double)(float)(scalingBufferYF + (double)(float)((double)CONCAT44d(0x43300000,
+                                                                               firstHeight ^ 0x80000000)
                                                              - signedIntBias));
-            if (iVar34 != 0) {
+            if (regionCount != 0) {
               secondStripTop = (double)(float)(regionYF + firstStripHeightF);
               regionRightF = (double)(float)(regionXF + regionWidthF);
               regionBottomF = (double)(float)(regionYF + regionHeightF);
-              iVar32 = iVar26;
-              iVar43 = iVar34;
+              stripCursor = packetCursor;
+              regionsLeft = regionCount;
               do {
                 secondStripRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(local_100) ^ 0x80000000) -
-                                        dVar65);
-                fVar3 = (float)(regionXF - secondStripRectLeftF);
+                                                          (SInt32)M<SInt16>(regionDataPtr) ^ 0x80000000) -
+                                        intToFloatBias);
+                edgeDelta = (float)(regionXF - secondStripRectLeftF);
                 secondStripClipLeft = regionXF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   secondStripClipLeft = secondStripRectLeftF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondStripClipLeft = regionXF;
                 }
                 secondStripRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*local_100 ^ 0x80000000) -
-                                        dVar65);
-                fVar3 = (float)(secondStripRectTopF - secondStripTop);
-                if (fVar3 < 0.0) {
+                                                          (SInt32)(SInt16)*regionDataPtr ^ 0x80000000) -
+                                        intToFloatBias);
+                edgeDelta = (float)(secondStripRectTopF - secondStripTop);
+                if (edgeDelta < 0.0) {
                   secondStripRectTopF = secondStripTop;
                 }
                 secondStripClipTop = secondStripTop;
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondStripClipTop = secondStripRectTopF;
                 }
                 secondStripRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(local_100) +
-                                                          (SInt32)M<SInt16>(local_100 + 1) ^
-                                                          0x80000000) - dVar65);
-                fVar3 = (float)(secondStripRectRightF - regionRightF);
+                                                          (SInt32)M<SInt16>(regionDataPtr) +
+                                                          (SInt32)M<SInt16>(regionDataPtr + 1) ^
+                                                          0x80000000) - intToFloatBias);
+                edgeDelta = (float)(secondStripRectRightF - regionRightF);
                 secondStripClipRight = regionRightF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   secondStripClipRight = secondStripRectRightF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondStripClipRight = regionRightF;
                 }
                 secondStripRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*local_100 +
-                                                          (SInt32)M<SInt16>((SInt32)local_100 + 6) ^
-                                                          0x80000000) - dVar65);
-                fVar3 = (float)(secondStripRectBottomF - regionBottomF);
+                                                          (SInt32)(SInt16)*regionDataPtr +
+                                                          (SInt32)M<SInt16>((SInt32)regionDataPtr + 6) ^
+                                                          0x80000000) - intToFloatBias);
+                edgeDelta = (float)(secondStripRectBottomF - regionBottomF);
                 secondStripClipBottom = regionBottomF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   secondStripClipBottom = secondStripRectBottomF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondStripClipBottom = regionBottomF;
                 }
-                iVar26 = iVar32;
+                packetCursor = stripCursor;
                 if ((FLOAT_0004c370 < (float)(secondStripClipRight - secondStripClipLeft)) &&
                    (FLOAT_0004c370 < (float)(secondStripClipBottom - secondStripClipTop))) {
-                  blitPacket[iVar32] = 0x31080;
-                  blitPacket[iVar32 + 5] = 0x1087;
-                  iVar26 = iVar32 * 4 + 0x30 >> 2;
-                  blitPacket[iVar32 + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(secondStripClipLeft - regionXF) -
+                  blitPacket[stripCursor] = 0x31080;
+                  blitPacket[stripCursor + 5] = 0x1087;
+                  packetCursor = stripCursor * 4 + 0x30 >> 2;
+                  blitPacket[stripCursor + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(secondStripClipLeft - regionXF) -
                                                        scalingBufferXF)));
-                  blitPacket[iVar32 + 2] =
-                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(secondStripClipBottom - regionYF) - dVar62));
-                  blitPacket[iVar32 + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(secondStripClipRight - regionXF) -
+                  blitPacket[stripCursor + 2] =
+                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(secondStripClipBottom - regionYF) - secondStripBiasY));
+                  blitPacket[stripCursor + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(secondStripClipRight - regionXF) -
                                                        scalingBufferXF)));
-                  blitPacket[iVar32 + 4] =
-                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(secondStripClipTop - regionYF) - dVar62));
-                  blitPacket[iVar32 + 7] = 0xc0033500;
-                  blitPacket[iVar32 + 9] = FBITS((float)(secondStripClipLeft + secondStripClipRight) * fVar4);
-                  blitPacket[iVar32 + 10] = FBITS((float)(secondStripClipTop + secondStripClipBottom) * fVar4);
-                  blitPacket[iVar32 + 8] = 0x10031;
-                  blitPacket[iVar32 + 0xb] = 0;
-                  blitPacket[iVar32 + 6] =
+                  blitPacket[stripCursor + 4] =
+                       FBITS(widthRatio * (float)(sourceScaleY * (double)(float)(secondStripClipTop - regionYF) - secondStripBiasY));
+                  blitPacket[stripCursor + 7] = 0xc0033500;
+                  blitPacket[stripCursor + 9] = FBITS((float)(secondStripClipLeft + secondStripClipRight) * halfF);
+                  blitPacket[stripCursor + 10] = FBITS((float)(secondStripClipTop + secondStripClipBottom) * halfF);
+                  blitPacket[stripCursor + 8] = 0x10031;
+                  blitPacket[stripCursor + 0xb] = 0;
+                  blitPacket[stripCursor + 6] =
                        (SInt32)((float)(secondStripClipRight - secondStripClipLeft) * heightRatio) << 0x10 |
                        (SInt32)((float)(secondStripClipBottom - secondStripClipTop) * heightRatio);
                 }
-                local_100 = local_100 + 2;
-                iVar43 = iVar43 + -1;
-                iVar32 = iVar26;
-              } while (iVar43 != 0);
+                regionDataPtr = regionDataPtr + 2;
+                regionsLeft = regionsLeft + -1;
+                stripCursor = packetCursor;
+              } while (regionsLeft != 0);
             }
           }
           else {
-            uVar38 = (SInt32)bufferWidthF >> 1 & 0xfffffe00;
-            uVar19 = (SInt32)bufferWidthF - uVar38;
-            uVar40 = uVar38 + 2;
+            halfWidth = (SInt32)bufferWidthF >> 1 & 0xfffffe00;
+            secondWidth = (SInt32)bufferWidthF - halfWidth;
+            halfWidthPlus2 = halfWidth + 2;
             if ((blitPacket[0xa0] & 0x18) == 0) {
-              uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
-              iVar32 = 0;
+              fmtDC = FormatTableLookup_0x0004d2dc(srcFormatIndex * 0x1c);
+              tileShift = 0;
             }
             else {
-              uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
-              iVar32 = -(uVar29 >> 8 & 3);
+              fmtDC = FormatTableLookup_0x0004d2dc(srcFormatIndex * 0x1c);
+              tileShift = -(fmtDC >> 8 & 3);
             }
-            iVar43 = (SInt32)uVar38 >> ((iVar32 - (uVar29 >> 0xc & 7)) + 5 & 0x3f);
-            iVar32 = iVar43 << 5;
+            tileUnits = (SInt32)halfWidth >> ((tileShift - (fmtDC >> 0xc & 7)) + 5 & 0x3f);
+            texOffsetDelta = tileUnits << 5;
             if (((UInt32)blitPacket[0xa0] >> 2 & 1) != 0) {
-              iVar32 = (iVar43 << 0xc) >> 3;
+              texOffsetDelta = (tileUnits << 0xc) >> 3;
             }
-            dVar55 = regionXF;
+            columnCenterX = regionXF;
             if (sourceScaleX != zero) {
-              dVar55 = (double)(float)(regionXF + (double)(float)((double)(float)((double)(float)((
+              columnCenterX = (double)(float)(regionXF + (double)(float)((double)(float)((double)(float)((
                                                   double)CONCAT44d(0x43300000,
-                                                                  uVar38 + uVar40 ^ 0x80000000) -
+                                                                  halfWidth + halfWidthPlus2 ^ 0x80000000) -
                                                   signedIntBias) * half + scalingBufferXF) / sourceScaleX));
             }
-            if (dVar55 <= zero) {
-              dVar55 = dVar55 - half;
+            if (columnCenterX <= zero) {
+              columnCenterX = columnCenterX - half;
             }
             else {
-              dVar55 = dVar55 + half;
+              columnCenterX = columnCenterX + half;
             }
             firstColumnWidthF = (double)(float)((double)(float)((double)CONCAT44d(0x43300000,
-                                                                      (SInt32)dVar55 ^ 0x80000000) -
+                                                                      (SInt32)columnCenterX ^ 0x80000000) -
                                                     signedIntBias) - regionXF);
-            blitPacket[0xa6] = uVar38 + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
+            blitPacket[0xa6] = halfWidth + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
             intToFloatBiasD = DOUBLE_0004c3a8;
-            fVar4 = FLOAT_0004c380;
+            halfF = FLOAT_0004c380;
             heightRatio = FLOAT_0004c37c;
             widthRatio = FLOAT_0004c370;
-            if (uVar40 != 0) {
+            if (halfWidthPlus2 != 0) {
               widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
-                                                                        uVar40 ^ 0x80000000) -
+                                                                        halfWidthPlus2 ^ 0x80000000) -
                                                       signedIntBias));
             }
-            if (iVar34 != 0) {
+            if (regionCount != 0) {
               firstColumnRight = (double)(float)(regionXF + firstColumnWidthF);
               firstColumnBottom = (double)(float)(regionYF + regionHeightF);
-              piVar27 = local_100;
-              packetIndex = iVar26;
-              iVar35 = iVar34;
+              regionCursor = regionDataPtr;
+              packetIndex = packetCursor;
+              columnsLeft = regionCount;
               do {
                 firstColumnRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(piVar27) ^ 0x80000000) -
+                                                          (SInt32)M<SInt16>(regionCursor) ^ 0x80000000) -
                                         intToFloatBiasD);
-                fVar3 = (float)(regionXF - firstColumnRectLeftF);
+                edgeDelta = (float)(regionXF - firstColumnRectLeftF);
                 firstColumnClipLeft = regionXF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstColumnClipLeft = firstColumnRectLeftF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstColumnClipLeft = regionXF;
                 }
                 firstColumnRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*piVar27 ^ 0x80000000) -
+                                                          (SInt32)(SInt16)*regionCursor ^ 0x80000000) -
                                         intToFloatBiasD);
-                fVar3 = (float)(regionYF - firstColumnRectTopF);
+                edgeDelta = (float)(regionYF - firstColumnRectTopF);
                 firstColumnClipTop = regionYF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstColumnClipTop = firstColumnRectTopF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstColumnClipTop = regionYF;
                 }
                 firstColumnRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(piVar27) +
-                                                          (SInt32)M<SInt16>(piVar27 + 1) ^ 0x80000000)
+                                                          (SInt32)M<SInt16>(regionCursor) +
+                                                          (SInt32)M<SInt16>(regionCursor + 1) ^ 0x80000000)
                                         - intToFloatBiasD);
-                fVar3 = (float)(firstColumnRectRightF - firstColumnRight);
+                edgeDelta = (float)(firstColumnRectRightF - firstColumnRight);
                 firstColumnClipRight = firstColumnRight;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   firstColumnClipRight = firstColumnRectRightF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstColumnClipRight = firstColumnRight;
                 }
                 firstColumnRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*piVar27 +
-                                                          (SInt32)M<SInt16>((SInt32)piVar27 + 6) ^
+                                                          (SInt32)(SInt16)*regionCursor +
+                                                          (SInt32)M<SInt16>((SInt32)regionCursor + 6) ^
                                                           0x80000000) - intToFloatBiasD);
-                fVar3 = (float)(firstColumnBottom - firstColumnRectBottomF);
-                if (fVar3 < 0.0) {
+                edgeDelta = (float)(firstColumnBottom - firstColumnRectBottomF);
+                if (edgeDelta < 0.0) {
                   firstColumnRectBottomF = firstColumnBottom;
                 }
                 firstColumnClipBottom = firstColumnBottom;
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   firstColumnClipBottom = firstColumnRectBottomF;
                 }
-                iVar26 = packetIndex;
+                packetCursor = packetIndex;
                 if ((FLOAT_0004c370 < (float)(firstColumnClipRight - firstColumnClipLeft)) &&
                    (FLOAT_0004c370 < (float)(firstColumnClipBottom - firstColumnClipTop))) {
                   blitPacket[packetIndex] = 0x31080;
                   blitPacket[packetIndex + 5] = 0x1087;
-                  iVar26 = packetIndex * 4 + 0x30 >> 2;
+                  packetCursor = packetIndex * 4 + 0x30 >> 2;
                   blitPacket[packetIndex + 1] =
                        FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(firstColumnClipLeft - regionXF) - scalingBufferXF));
                   blitPacket[packetIndex + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(firstColumnClipBottom - regionYF) -
@@ -904,159 +938,159 @@ LAB_0003f654:
                   blitPacket[packetIndex + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(firstColumnClipTop - regionYF) -
                                                        scalingBufferYF)));
                   blitPacket[packetIndex + 7] = 0xc0033500;
-                  blitPacket[packetIndex + 9] = FBITS((float)(firstColumnClipLeft + firstColumnClipRight) * fVar4);
-                  blitPacket[packetIndex + 10] = FBITS((float)(firstColumnClipTop + firstColumnClipBottom) * fVar4);
+                  blitPacket[packetIndex + 9] = FBITS((float)(firstColumnClipLeft + firstColumnClipRight) * halfF);
+                  blitPacket[packetIndex + 10] = FBITS((float)(firstColumnClipTop + firstColumnClipBottom) * halfF);
                   blitPacket[packetIndex + 8] = 0x10031;
                   blitPacket[packetIndex + 0xb] = 0;
                   blitPacket[packetIndex + 6] =
                        (SInt32)((float)(firstColumnClipRight - firstColumnClipLeft) * heightRatio) << 0x10 |
                        (SInt32)((float)(firstColumnClipBottom - firstColumnClipTop) * heightRatio);
                 }
-                piVar27 = piVar27 + 2;
-                iVar35 = iVar35 + -1;
-                packetIndex = iVar26;
-              } while (iVar35 != 0);
+                regionCursor = regionCursor + 2;
+                columnsLeft = columnsLeft + -1;
+                packetIndex = packetCursor;
+              } while (columnsLeft != 0);
             }
             textureOffsetWord = blitPacket[0xa0];
-            blitPacket[iVar26] = 0x1150;
-            blitPacket[iVar26 + 1] = textureOffsetWord + iVar32;
-            uVar40 = blitPacket[0xa6];
-            blitPacket[iVar26 + 2] = 0x1120;
-            iVar32 = iVar26 + 3;
-            iVar26 = iVar26 + 4;
-            blitPacket[iVar32] = uVar19 - 1 & 0x7ff | uVar40 & 0xfffff800;
+            blitPacket[packetCursor] = 0x1150;
+            blitPacket[packetCursor + 1] = textureOffsetWord + texOffsetDelta;
+            savedWordA6 = blitPacket[0xa6];
+            blitPacket[packetCursor + 2] = 0x1120;
+            lengthIndex = packetCursor + 3;
+            packetCursor = packetCursor + 4;
+            blitPacket[lengthIndex] = secondWidth - 1 & 0x7ff | savedWordA6 & 0xfffff800;
             intToFloatBiasD = DOUBLE_0004c3a8;
-            fVar4 = FLOAT_0004c380;
+            halfF = FLOAT_0004c380;
             heightRatio = FLOAT_0004c37c;
             widthRatio = FLOAT_0004c370;
-            if (uVar19 != 0) {
+            if (secondWidth != 0) {
               widthRatio = (float)(one / (double)(float)((double)CONCAT44d(0x43300000,
-                                                                        uVar19 ^ 0x80000000) -
+                                                                        secondWidth ^ 0x80000000) -
                                                       signedIntBias));
             }
-            dVar61 = (double)(float)(scalingBufferXF + (double)(float)((double)CONCAT44d(0x43300000,
-                                                                               uVar38 ^ 0x80000000)
+            secondColumnBiasX = (double)(float)(scalingBufferXF + (double)(float)((double)CONCAT44d(0x43300000,
+                                                                               halfWidth ^ 0x80000000)
                                                              - signedIntBias));
-            if (iVar34 != 0) {
+            if (regionCount != 0) {
               secondColumnLeft = (double)(float)(regionXF + firstColumnWidthF);
               regionRightF = (double)(float)(regionXF + regionWidthF);
               regionBottomF = (double)(float)(regionYF + regionHeightF);
-              iVar32 = iVar26;
-              iVar43 = iVar34;
+              columnCursor = packetCursor;
+              regionsLeft = regionCount;
               do {
                 secondColumnRectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(local_100) ^ 0x80000000) -
+                                                          (SInt32)M<SInt16>(regionDataPtr) ^ 0x80000000) -
                                         intToFloatBiasD);
-                fVar3 = (float)(secondColumnLeft - secondColumnRectLeftF);
+                edgeDelta = (float)(secondColumnLeft - secondColumnRectLeftF);
                 secondColumnClipLeft = secondColumnLeft;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   secondColumnClipLeft = secondColumnRectLeftF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondColumnClipLeft = secondColumnLeft;
                 }
                 secondColumnRectTopF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*local_100 ^ 0x80000000) -
+                                                          (SInt32)(SInt16)*regionDataPtr ^ 0x80000000) -
                                         intToFloatBiasD);
-                fVar3 = (float)(regionYF - secondColumnRectTopF);
+                edgeDelta = (float)(regionYF - secondColumnRectTopF);
                 secondColumnClipTop = regionYF;
-                if (fVar3 < 0.0) {
+                if (edgeDelta < 0.0) {
                   secondColumnClipTop = secondColumnRectTopF;
                 }
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondColumnClipTop = regionYF;
                 }
                 secondColumnRectRightF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)M<SInt16>(local_100) +
-                                                          (SInt32)M<SInt16>(local_100 + 1) ^
+                                                          (SInt32)M<SInt16>(regionDataPtr) +
+                                                          (SInt32)M<SInt16>(regionDataPtr + 1) ^
                                                           0x80000000) - intToFloatBiasD);
-                fVar3 = (float)(regionRightF - secondColumnRectRightF);
-                if (fVar3 < 0.0) {
+                edgeDelta = (float)(regionRightF - secondColumnRectRightF);
+                if (edgeDelta < 0.0) {
                   secondColumnRectRightF = regionRightF;
                 }
                 secondColumnClipRight = regionRightF;
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondColumnClipRight = secondColumnRectRightF;
                 }
                 secondColumnRectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                          (SInt32)(SInt16)*local_100 +
-                                                          (SInt32)M<SInt16>((SInt32)local_100 + 6) ^
+                                                          (SInt32)(SInt16)*regionDataPtr +
+                                                          (SInt32)M<SInt16>((SInt32)regionDataPtr + 6) ^
                                                           0x80000000) - intToFloatBiasD);
-                fVar3 = (float)(regionBottomF - secondColumnRectBottomF);
-                if (fVar3 < 0.0) {
+                edgeDelta = (float)(regionBottomF - secondColumnRectBottomF);
+                if (edgeDelta < 0.0) {
                   secondColumnRectBottomF = regionBottomF;
                 }
                 secondColumnClipBottom = regionBottomF;
-                if (-fVar3 < 0.0) {
+                if (-edgeDelta < 0.0) {
                   secondColumnClipBottom = secondColumnRectBottomF;
                 }
-                iVar26 = iVar32;
+                packetCursor = columnCursor;
                 if ((FLOAT_0004c370 < (float)(secondColumnClipRight - secondColumnClipLeft)) &&
                    (FLOAT_0004c370 < (float)(secondColumnClipBottom - secondColumnClipTop))) {
-                  blitPacket[iVar32] = 0x31080;
-                  blitPacket[iVar32 + 5] = 0x1087;
-                  iVar26 = iVar32 * 4 + 0x30 >> 2;
-                  blitPacket[iVar32 + 1] =
-                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(secondColumnClipLeft - regionXF) - dVar61));
-                  blitPacket[iVar32 + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(secondColumnClipBottom - regionYF) -
+                  blitPacket[columnCursor] = 0x31080;
+                  blitPacket[columnCursor + 5] = 0x1087;
+                  packetCursor = columnCursor * 4 + 0x30 >> 2;
+                  blitPacket[columnCursor + 1] =
+                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(secondColumnClipLeft - regionXF) - secondColumnBiasX));
+                  blitPacket[columnCursor + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(secondColumnClipBottom - regionYF) -
                                                        scalingBufferYF)));
-                  blitPacket[iVar32 + 3] =
-                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(secondColumnClipRight - regionXF) - dVar61));
-                  blitPacket[iVar32 + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(secondColumnClipTop - regionYF) -
+                  blitPacket[columnCursor + 3] =
+                       FBITS(widthRatio * (float)(sourceScaleX * (double)(float)(secondColumnClipRight - regionXF) - secondColumnBiasX));
+                  blitPacket[columnCursor + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(secondColumnClipTop - regionYF) -
                                                        scalingBufferYF)));
-                  blitPacket[iVar32 + 7] = 0xc0033500;
-                  blitPacket[iVar32 + 9] = FBITS((float)(secondColumnClipLeft + secondColumnClipRight) * fVar4);
-                  blitPacket[iVar32 + 10] = FBITS((float)(secondColumnClipTop + secondColumnClipBottom) * fVar4);
-                  blitPacket[iVar32 + 8] = 0x10031;
-                  blitPacket[iVar32 + 0xb] = 0;
-                  blitPacket[iVar32 + 6] =
+                  blitPacket[columnCursor + 7] = 0xc0033500;
+                  blitPacket[columnCursor + 9] = FBITS((float)(secondColumnClipLeft + secondColumnClipRight) * halfF);
+                  blitPacket[columnCursor + 10] = FBITS((float)(secondColumnClipTop + secondColumnClipBottom) * halfF);
+                  blitPacket[columnCursor + 8] = 0x10031;
+                  blitPacket[columnCursor + 0xb] = 0;
+                  blitPacket[columnCursor + 6] =
                        (SInt32)((float)(secondColumnClipRight - secondColumnClipLeft) * heightRatio) << 0x10 |
                        (SInt32)((float)(secondColumnClipBottom - secondColumnClipTop) * heightRatio);
                 }
-                local_100 = local_100 + 2;
-                iVar43 = iVar43 + -1;
-                iVar32 = iVar26;
-              } while (iVar43 != 0);
+                regionDataPtr = regionDataPtr + 2;
+                regionsLeft = regionsLeft + -1;
+                columnCursor = packetCursor;
+              } while (regionsLeft != 0);
             }
           }
         }
         else {
-          if (dVar48 < bufferWidthF) {
-            uVar38 = (UInt32)bufferWidthF;
-            uVar40 = (SInt32)uVar38 >> 1 & 0xfffffe00;
-            uVar17 = uVar40 + 2;
-            uVar19 = uVar38 - uVar40;
+          if (splitThreshold < bufferWidthF) {
+            bufferWidthInt = (UInt32)bufferWidthF;
+            halfWidthRaw = (SInt32)bufferWidthInt >> 1 & 0xfffffe00;
+            halfWidthPlus2 = halfWidthRaw + 2;
+            secondWidth = bufferWidthInt - halfWidthRaw;
             if ((blitPacket[0xa0] & 0x18) == 0) {
-              uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
-              iVar32 = 0;
+              fmtDC = FormatTableLookup_0x0004d2dc(srcFormatIndex * 0x1c);
+              tileShift = 0;
             }
             else {
-              uVar29 = FormatTableLookup_0x0004d2dc(uVar29 * 0x1c);
-              iVar32 = -(uVar29 >> 8 & 3);
+              fmtDC = FormatTableLookup_0x0004d2dc(srcFormatIndex * 0x1c);
+              tileShift = -(fmtDC >> 8 & 3);
             }
-            iVar43 = (SInt32)uVar40 >> ((iVar32 - (uVar29 >> 0xc & 7)) + 5 & 0x3f);
-            iVar32 = iVar43 << 5;
+            tileUnits = (SInt32)halfWidthRaw >> ((tileShift - (fmtDC >> 0xc & 7)) + 5 & 0x3f);
+            texOffsetDelta = tileUnits << 5;
             if (((UInt32)blitPacket[0xa0] >> 2 & 1) != 0) {
-              iVar32 = (iVar43 << 0xc) >> 3;
+              texOffsetDelta = (tileUnits << 0xc) >> 3;
             }
             widthRatio = FLOAT_0004c370;
-            if (uVar17 != 0) {
-              widthRatio = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias) /
-                      (float)((double)CONCAT44d(0x43300000,uVar17 ^ 0x80000000) - signedIntBias);
+            if (halfWidthPlus2 != 0) {
+              widthRatio = (float)((double)CONCAT44d(0x43300000,bufferWidthInt ^ 0x80000000) - signedIntBias) /
+                      (float)((double)CONCAT44d(0x43300000,halfWidthPlus2 ^ 0x80000000) - signedIntBias);
             }
             heightRatio = FLOAT_0004c370;
-            if (uVar19 != 0) {
-              heightRatio = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias) /
-                       (float)((double)CONCAT44d(0x43300000,uVar19 ^ 0x80000000) - signedIntBias);
+            if (secondWidth != 0) {
+              heightRatio = (float)((double)CONCAT44d(0x43300000,bufferWidthInt ^ 0x80000000) - signedIntBias) /
+                       (float)((double)CONCAT44d(0x43300000,secondWidth ^ 0x80000000) - signedIntBias);
             }
-            fVar4 = FLOAT_0004c3a0;
-            fVar3 = FLOAT_0004c3a0;
-            if (uVar38 != 0) {
-              fVar3 = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - signedIntBias);
-              fVar4 = -((float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - signedIntBias) / fVar3);
-              fVar3 = -((float)((double)(float)((double)CONCAT44d(0x43300000,
-                                                                 uVar40 + uVar17 ^ 0x80000000) -
-                                               signedIntBias) * half) / fVar3);
+            columnOffsetA = FLOAT_0004c3a0;
+            columnOffsetB = FLOAT_0004c3a0;
+            if (bufferWidthInt != 0) {
+              bufferWidthFloat = (float)((double)CONCAT44d(0x43300000,bufferWidthInt ^ 0x80000000) - signedIntBias);
+              columnOffsetA = -((float)((double)CONCAT44d(0x43300000,halfWidthRaw ^ 0x80000000) - signedIntBias) / bufferWidthFloat);
+              columnOffsetB = -((float)((double)(float)((double)CONCAT44d(0x43300000,
+                                                                 halfWidthRaw + halfWidthPlus2 ^ 0x80000000) -
+                                               signedIntBias) * half) / bufferWidthFloat);
             }
             blitPacket[0xdb] = 0x1040;
             blitPacket[0xcf] = 0x1101;
@@ -1064,9 +1098,9 @@ LAB_0003f654:
             blitPacket[0xd1] = 0x1111;
             blitPacket[0xc4] = 0x3f800000;
             blitPacket[0xd3] = 0x1121;
-            blitPacket[200] = FBITS(heightRatio * fVar4);
+            blitPacket[200] = FBITS(heightRatio * columnOffsetA);
             blitPacket[0xc6] = FBITS(heightRatio);
-            blitPacket[0xce] = FBITS(fVar3);
+            blitPacket[0xce] = FBITS(columnOffsetB);
             blitPacket[0xc2] = 0x3f800000;
             blitPacket[0xdc] = 0;
             blitPacket[0xbf] = 0x1095;
@@ -1086,15 +1120,15 @@ LAB_0003f654:
             blitPacket[0xcd] = 0x1095;
             blitPacket[0xd0] = blitPacket[0xa2];
             blitPacket[0xd2] = blitPacket[0xa4];
-            iVar26 = 0xdd;
+            packetCursor = 0xdd;
             blitPacket[0xd4] = blitPacket[0xa6];
             blitPacket[0xd6] = blitPacket[0xa8];
             blitPacket[0xd0] = blitPacket[0xa2] & 0xfffffff | 0x10000000;
             blitPacket[0xd8] = blitPacket[0xaa];
-            blitPacket[0xda] = blitPacket[0xa0] + iVar32;
+            blitPacket[0xda] = blitPacket[0xa0] + texOffsetDelta;
             blitPacket[0x3c] = 3;
-            blitPacket[0xa6] = uVar40 + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
-            blitPacket[0xd4] = uVar19 - 1 & 0x7ff | blitPacket[0xd4] & 0xfffff800;
+            blitPacket[0xa6] = halfWidthRaw + 1 & 0x7ff | blitPacket[0xa6] & 0xfffff800;
+            blitPacket[0xd4] = secondWidth - 1 & 0x7ff | blitPacket[0xd4] & 0xfffff800;
             blitPacket[0x42] = 0x7800;
             blitPacket[0x4c] = 0x1c490010;
             blitPacket[0x48] = 0x442220;
@@ -1165,104 +1199,104 @@ LAB_0003f654:
             blitPacket[0x87] = 0x118c;
             blitPacket[0x82] = 2;
           }
-          dVar65 = DOUBLE_0004c3a8;
+          intToFloatBias = DOUBLE_0004c3a8;
           heightRatio = FLOAT_0004c380;
           widthRatio = FLOAT_0004c37c;
-          if (iVar34 != 0) {
+          if (regionCount != 0) {
             regionRightF = (double)(float)(regionXF + regionWidthF);
             regionBottomF = (double)(float)(regionYF + regionHeightF);
-            iVar32 = iVar26;
-            iVar43 = iVar34;
+            rectCursor = packetCursor;
+            regionsLeft = regionCount;
             do {
               rectLeftF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                        (SInt32)M<SInt16>(local_100) ^ 0x80000000) -
-                                      dVar65);
-              fVar4 = (float)(regionXF - rectLeftF);
+                                                        (SInt32)M<SInt16>(regionDataPtr) ^ 0x80000000) -
+                                      intToFloatBias);
+              edgeDelta = (float)(regionXF - rectLeftF);
               clipLeft = regionXF;
-              if (fVar4 < 0.0) {
+              if (edgeDelta < 0.0) {
                 clipLeft = rectLeftF;
               }
-              if (-fVar4 < 0.0) {
+              if (-edgeDelta < 0.0) {
                 clipLeft = regionXF;
               }
               rectTopF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                        (SInt32)(SInt16)*local_100 ^ 0x80000000) -
-                                      dVar65);
-              fVar4 = (float)(regionYF - rectTopF);
+                                                        (SInt32)(SInt16)*regionDataPtr ^ 0x80000000) -
+                                      intToFloatBias);
+              edgeDelta = (float)(regionYF - rectTopF);
               clipTop = regionYF;
-              if (fVar4 < 0.0) {
+              if (edgeDelta < 0.0) {
                 clipTop = rectTopF;
               }
-              if (-fVar4 < 0.0) {
+              if (-edgeDelta < 0.0) {
                 clipTop = regionYF;
               }
               rectRightF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                        (SInt32)M<SInt16>(local_100) +
-                                                        (SInt32)M<SInt16>(local_100 + 1) ^ 0x80000000)
-                                      - dVar65);
-              fVar4 = (float)(rectRightF - regionRightF);
+                                                        (SInt32)M<SInt16>(regionDataPtr) +
+                                                        (SInt32)M<SInt16>(regionDataPtr + 1) ^ 0x80000000)
+                                      - intToFloatBias);
+              edgeDelta = (float)(rectRightF - regionRightF);
               clipRight = regionRightF;
-              if (fVar4 < 0.0) {
+              if (edgeDelta < 0.0) {
                 clipRight = rectRightF;
               }
-              if (-fVar4 < 0.0) {
+              if (-edgeDelta < 0.0) {
                 clipRight = regionRightF;
               }
               rectBottomF = (double)(float)((double)CONCAT44d(0x43300000,
-                                                        (SInt32)(SInt16)*local_100 +
-                                                        (SInt32)M<SInt16>((SInt32)local_100 + 6) ^
-                                                        0x80000000) - dVar65);
-              fVar4 = (float)(rectBottomF - regionBottomF);
+                                                        (SInt32)(SInt16)*regionDataPtr +
+                                                        (SInt32)M<SInt16>((SInt32)regionDataPtr + 6) ^
+                                                        0x80000000) - intToFloatBias);
+              edgeDelta = (float)(rectBottomF - regionBottomF);
               clipBottom = regionBottomF;
-              if (fVar4 < 0.0) {
+              if (edgeDelta < 0.0) {
                 clipBottom = rectBottomF;
               }
-              if (-fVar4 < 0.0) {
+              if (-edgeDelta < 0.0) {
                 clipBottom = regionBottomF;
               }
-              iVar26 = iVar32;
+              packetCursor = rectCursor;
               if ((FLOAT_0004c370 < (float)(clipRight - clipLeft)) &&
                  (FLOAT_0004c370 < (float)(clipBottom - clipTop))) {
-                blitPacket[iVar32] = 0x31080;
-                blitPacket[iVar32 + 5] = 0x1087;
-                iVar26 = iVar32 * 4 + 0x30 >> 2;
-                blitPacket[iVar32 + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(clipLeft - regionXF) -
+                blitPacket[rectCursor] = 0x31080;
+                blitPacket[rectCursor + 5] = 0x1087;
+                packetCursor = rectCursor * 4 + 0x30 >> 2;
+                blitPacket[rectCursor + 1] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(clipLeft - regionXF) -
                                                      scalingBufferXF)));
-                blitPacket[iVar32 + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(clipBottom - regionYF) -
+                blitPacket[rectCursor + 2] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(clipBottom - regionYF) -
                                                      scalingBufferYF)));
-                blitPacket[iVar32 + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(clipRight - regionXF) -
+                blitPacket[rectCursor + 3] = FBITS((float)(invBufferWidthD * (double)(float)(sourceScaleX * (double)(float)(clipRight - regionXF) -
                                                      scalingBufferXF)));
-                blitPacket[iVar32 + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(clipTop - regionYF) -
+                blitPacket[rectCursor + 4] = FBITS((float)(invBufferHeightD * (double)(float)(sourceScaleY * (double)(float)(clipTop - regionYF) -
                                                      scalingBufferYF)));
-                blitPacket[iVar32 + 7] = 0xc0033500;
-                blitPacket[iVar32 + 9] = FBITS((float)(clipLeft + clipRight) * heightRatio);
-                blitPacket[iVar32 + 10] = FBITS((float)(clipTop + clipBottom) * heightRatio);
-                blitPacket[iVar32 + 8] = 0x10031;
-                blitPacket[iVar32 + 0xb] = 0;
-                blitPacket[iVar32 + 6] =
+                blitPacket[rectCursor + 7] = 0xc0033500;
+                blitPacket[rectCursor + 9] = FBITS((float)(clipLeft + clipRight) * heightRatio);
+                blitPacket[rectCursor + 10] = FBITS((float)(clipTop + clipBottom) * heightRatio);
+                blitPacket[rectCursor + 8] = 0x10031;
+                blitPacket[rectCursor + 0xb] = 0;
+                blitPacket[rectCursor + 6] =
                      (SInt32)((float)(clipRight - clipLeft) * widthRatio) << 0x10 |
                      (SInt32)((float)(clipBottom - clipTop) * widthRatio);
               }
-              local_100 = local_100 + 2;
-              iVar43 = iVar43 + -1;
-              iVar32 = iVar26;
-            } while (iVar43 != 0);
+              regionDataPtr = regionDataPtr + 2;
+              regionsLeft = regionsLeft + -1;
+              rectCursor = packetCursor;
+            } while (regionsLeft != 0);
           }
         }
-        blitPacket[iVar26] = 0x1393;
-        blitPacket[iVar26 + 1] = 10;
+        blitPacket[packetCursor] = 0x1393;
+        blitPacket[packetCursor + 1] = 10;
         Vol(panelRec->entries[0].rectWordIndex) = (SInt32)blitPacket + (0x2c8 - (SInt32)batchWords) >> 2;
-        batchIndex = (SInt32)blitPacket + ((iVar26 + 2) * 4 - (SInt32)batchWords) >> 2;
+        batchIndex = (SInt32)blitPacket + ((packetCursor + 2) * 4 - (SInt32)batchWords) >> 2;
       }
       panelRec = panelRec + 1;
       panel = panel + 1;
-      M<SInt32>((SInt32)Vol(batchEntry->header) + 0xc) = iVar34;
-      local_108 = local_108 + 8;
+      M<SInt32>((SInt32)Vol(batchEntry->header) + 0xc) = regionCount;
+      panelSlotCursor = panelSlotCursor + 8;
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0x14) = batchIndex;
       M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) = M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) | 1;
       M<UInt16>(self + kATIR500Surface_swapBatchBuilt) = 1;
-      iVar32 = M<SInt32>(self + kIOATIR500Surface_accelerator);
-    } while (panel < M<UInt32>(iVar32 + 0xcc));
+      accelBase = M<SInt32>(self + kIOATIR500Surface_accelerator);
+    } while (panel < M<UInt32>(accelBase + 0xcc));
   }
   return;
 }

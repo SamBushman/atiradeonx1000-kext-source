@@ -1,0 +1,26 @@
+--- a/Sources/ATIR500Surface_is_flip_allowed_Port.cpp	2026-10-20 09:40:15.839780710 -0700
++++ b/Sources/ATIR500Surface_is_flip_allowed_Port.cpp	2026-10-20 09:40:15.840826323 -0700
+@@ -30,7 +30,7 @@
+ SInt32 ATIR500Surface::is_flip_allowed() {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+-  SInt32 iVar1;
++  SInt32 panelBlockOffset;
+   UInt32 baseResult;
+   UInt32 result;
+   SInt32 accel;
+@@ -40,11 +40,11 @@
+   if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003aec0;
+   if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
+     if (M<SInt32>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto LAB_0003aec0;
+-    iVar1 = 0xb18;
++    panelBlockOffset = 0xb18;
+     if (M<SInt32>(self + kIOATIR500Surface_panel) != 0) {
+-      iVar1 = 0xb00;
++      panelBlockOffset = 0xb00;
+     }
+-    if (M<SInt32>(accel + iVar1 + 0x10) == 0) goto LAB_0003aec0;
++    if (M<SInt32>(accel + panelBlockOffset + 0x10) == 0) goto LAB_0003aec0;
+   }
+   baseResult = 0;
+ LAB_0003aec0:

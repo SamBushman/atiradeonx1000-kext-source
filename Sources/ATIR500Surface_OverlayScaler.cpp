@@ -178,8 +178,8 @@ void ATIR500Surface::set_linear_transform(int matrixIndex, OverlayPictureControl
 UInt32 ATIR500Surface::calc_h_inc_step_by(int mode, float scale, int p3, int p4, int p5, UInt32 *o6, UInt32 *o7,
                                           UInt32 *o8, UInt32 *o9, UInt32 *o10, UInt32 *o11, UInt32 *o12,
                                           UInt32 *o13, UInt32 *o14) {
-    float fVar1 = static_cast<float>(1.0 / static_cast<double>(scale));
-    float fVar2 = fVar1;
+    float invScale = static_cast<float>(1.0 / static_cast<double>(scale));
+    float invScaleStep = invScale;
     const UInt32 *table;
     int last;
     switch (mode) {
@@ -197,38 +197,38 @@ UInt32 ATIR500Surface::calc_h_inc_step_by(int mode, float scale, int p3, int p4,
     case 9:
         last = 0xb;
         table = kMode9Table;
-        fVar2 = fVar1 * 4.0f;
+        invScaleStep = invScale * 4.0f;
         break;
     case 10:
         last = 0xb;
         table = kMode10Table;
-        fVar2 = fVar1 + fVar1;
+        invScaleStep = invScale + invScale;
         break;
     case 0xb:
     case 0xc:
         last = 7;
         table = kMode1112Table;
-        fVar2 = fVar1 + fVar1;
+        invScaleStep = invScale + invScale;
         break;
     case 0xd:
     case 0xe:
         last = 8;
         table = kMode1314Table;
-        fVar2 = fVar1 + fVar1;
+        invScaleStep = invScale + invScale;
         break;
     }
     UInt32 first = reinterpret_cast<UInt32>(this);
     int remaining = last + 1;
     int index = 0;
     do {
-        float fVar3 = (F(table, 0) + F(table, 1) + F(table, 2)) * 0.0625f;
-        double inc = (1.0 / static_cast<double>(fVar1 * static_cast<float>(UD(B(table, 0x14))))) * 4096.0;
+        float tapSum = (F(table, 0) + F(table, 1) + F(table, 2)) * 0.0625f;
+        double inc = (1.0 / static_cast<double>(invScale * static_cast<float>(UD(B(table, 0x14))))) * 4096.0;
         first = F2U(inc);
-        inc = (1.0 / static_cast<double>(static_cast<float>(UD(B(table, 0x16))) * fVar2)) * 4096.0;
+        inc = (1.0 / static_cast<double>(static_cast<float>(UD(B(table, 0x16))) * invScaleStep)) * 4096.0;
         UInt32 second = F2U(inc);
         bool okA = (B(table, 0x0c) == static_cast<UInt32>(p3)) || B(table, 0x0e) != 0;
         bool okB = (B(table, 0x0d) == static_cast<UInt32>(p4)) || B(table, 0x0f) != 0;
-        bool fits = (fVar3 <= fVar1) && okA && okB;
+        bool fits = (tapSum <= invScale) && okA && okB;
         if (fits || (last - index < 1)) {
             *o6 = B(table, 0x1a);
             *o7 = B(table, 0x10 + p5);
@@ -243,9 +243,9 @@ UInt32 ATIR500Surface::calc_h_inc_step_by(int mode, float scale, int p3, int p4,
                 *o12 = 0;
             }
             if (!fits) {
-                double a = (1.0 / static_cast<double>(static_cast<float>(UD(B(table, 0x14))) * fVar3)) * 4096.0;
+                double a = (1.0 / static_cast<double>(static_cast<float>(UD(B(table, 0x14))) * tapSum)) * 4096.0;
                 *o13 = F2U(a);
-                double b = (1.0 / static_cast<double>(static_cast<float>(UD(B(table, 0x16))) * fVar3)) * 4096.0;
+                double b = (1.0 / static_cast<double>(static_cast<float>(UD(B(table, 0x16))) * tapSum)) * 4096.0;
                 *o14 = F2U(b);
                 return first;
             }
@@ -271,32 +271,32 @@ void ATIR500Surface::calc_h_scaler_blank(OverlaySurfaceInfo *infoIn, OverlayBand
     UInt8 *info = reinterpret_cast<UInt8 *>(infoIn);
     UInt8 *bw = reinterpret_cast<UInt8 *>(bandwidth);
     SInt32 lineWidth = static_cast<SInt32>(U32At(info, 0x18));
-    float fVar1;
+    float scaledWidth;
     switch (U32At(info, 0x3c)) {
     case 3:
     case 4:
     case 0xb:
     case 0xc:
-        fVar1 = static_cast<float>(UD(p3 >> 3));
+        scaledWidth = static_cast<float>(UD(p3 >> 3));
         break;
     case 6:
-        fVar1 = static_cast<float>(UD(p3 >> 2));
+        scaledWidth = static_cast<float>(UD(p3 >> 2));
         break;
     case 9:
     case 10:
-        fVar1 = static_cast<float>(UD(p4 >> 4));
+        scaledWidth = static_cast<float>(UD(p4 >> 4));
         break;
     case 0xd:
     case 0xe:
-        fVar1 = static_cast<float>(UD(p3 >> 4));
+        scaledWidth = static_cast<float>(UD(p3 >> 4));
         break;
     default:
-        fVar1 = 0.0f;
+        scaledWidth = 0.0f;
         break;
     }
     SInt32 latency = 0xc;
     UInt32 mode = U32At(bw, 0x2c);
-    fVar1 = static_cast<float>(static_cast<double>(static_cast<float>(static_cast<double>(f6) * static_cast<double>(fVar1))) /
+    scaledWidth = static_cast<float>(static_cast<double>(static_cast<float>(static_cast<double>(f6) * static_cast<double>(scaledWidth))) /
                                static_cast<double>(f5));
     double span = SD(lineWidth - static_cast<SInt32>(U32At(info, 0x14)));
     if (mode != 2) {
@@ -325,10 +325,10 @@ void ATIR500Surface::calc_h_scaler_blank(OverlaySurfaceInfo *infoIn, OverlayBand
     }
     UInt32 blank = static_cast<UInt32>((latency - adjust) + 4);
     *o9 = blank;
-    if (!(static_cast<float>(span) > fVar1)) {      /* (not `<=`: with a NaN, the shipped code takes this branch) */
+    if (!(static_cast<float>(span) > scaledWidth)) {      /* (not `<=`: with a NaN, the shipped code takes this branch) */
         *o7 = static_cast<UInt32>(lineWidth) + blank;
     } else {
-        float rest = static_cast<float>(UD(static_cast<UInt32>(lineWidth))) - fVar1;
+        float rest = static_cast<float>(UD(static_cast<UInt32>(lineWidth))) - scaledWidth;
         *o7 = blank + F2UNotBelow(static_cast<double>(rest));
     }
     *o8 = ((U32At(bw, 0x24) * 8 + U32At(info, 0x14)) - static_cast<UInt32>(window)) + *o9 + 8;

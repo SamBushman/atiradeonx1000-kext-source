@@ -1,0 +1,187 @@
+--- a/Sources/ATIR500Surface_prepare_vram_Port.cpp	2026-10-20 09:42:26.922456449 -0700
++++ b/Sources/ATIR500Surface_prepare_vram_Port.cpp	2026-10-20 09:42:26.923872685 -0700
+@@ -31,112 +31,121 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+     UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
+ 
+-  UInt8 AVar1;
+-  UInt32 uVar2;
+-  SInt32 iVar3;
++  UInt8 prepareCount;
++  UInt8 tilingByte1;
++  UInt32 nextSlot;
++  SInt32 formatCode;
+   SInt32 *accel;
+   UInt32 stamp;
+-  SInt32 iVar6;
+-  UInt32 uVar7;
+-  SInt32 iVar8;
+-  UInt32 uVar9;
+-  SInt32 iVar10;
++  SInt32 scratchCmd;
++  SInt32 endIndex;
++  UInt32 slotIndex;
++  UInt32 formatBits;
++  UInt32 tailIndex;
++  SInt32 accelBase;
++  SInt32 slotOffset;
++  SInt32 endMarkerOffset;
++  UInt32 busyMask;
++  UInt32 sizeBits;
++  UInt32 packetWords;
++  SInt32 gpuBase;
++  SInt32 markerIndex;
+   UInt8 *accelBytes;
+   UInt32 *packet;
+   
+-  AVar1 = bufferBytes[0x3c];
+-  bufferBytes[0x3c] = ((char)AVar1 + 1U);
+-  if (1 < (UInt8)((char)AVar1 + 1U)) {
++  prepareCount = bufferBytes[0x3c];
++  bufferBytes[0x3c] = ((char)prepareCount + 1U);
++  if (1 < (UInt8)((char)prepareCount + 1U)) {
+     return 1;
+   }
+-  iVar8 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+-  if (M<UInt8>(iVar8 + 0x990) == 0) {
++  accelBase = M<SInt32>(self + kIOATIR500Surface_accelerator);
++  if (M<UInt8>(accelBase + 0x990) == 0) {
+ LAB_0003dcc0:
+     bufferBytes[0x3c] = 0x0;
+     return 0;
+   }
+-  uVar9 = M<UInt32>(iVar8 + 0x890);
+-  uVar7 = 0;
+-  if ((uVar9 & 1) == 0) {
+-    uVar7 = 0;
++  busyMask = M<UInt32>(accelBase + 0x890);
++  slotIndex = 0;
++  if ((busyMask & 1) == 0) {
++    slotIndex = 0;
+   }
+   else {
+     do {
+-      uVar2 = uVar7 + 1;
+-      uVar7 = uVar2 & 0xff;
+-      if (uVar7 == M<UInt8>(iVar8 + 0x990)) goto LAB_0003dcc0;
+-    } while ((uVar9 & 1 << (uVar2 & 0x3f)) != 0);
++      nextSlot = slotIndex + 1;
++      slotIndex = nextSlot & 0xff;
++      if (slotIndex == M<UInt8>(accelBase + 0x990)) goto LAB_0003dcc0;
++    } while ((busyMask & 1 << (nextSlot & 0x3f)) != 0);
+   }
+-  M<UInt32>(iVar8 + 0x890) = 1 << (uVar7 & 0x3f) | uVar9;
+-  bufferBytes[0x37] = SUB41m(uVar7,0);
++  M<UInt32>(accelBase + 0x890) = 1 << (slotIndex & 0x3f) | busyMask;
++  bufferBytes[0x37] = SUB41m(slotIndex,0);
+   accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
+   if (M<char>(accel + 0x20) == '\0') {
+     return 1;
+   }
+-  iVar6 = accel[0x8e];
+-  iVar8 = uVar7 * 4;
+-  iVar10 = M<SInt32>(bufferBytes + 8);
+-  packet = (UInt32 *)(iVar6 + 0x120);
++  scratchCmd = accel[0x8e];
++  slotOffset = slotIndex * 4;
++  gpuBase = M<SInt32>(bufferBytes + 8);
++  packet = (UInt32 *)(scratchCmd + 0x120);
+   if ((M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf) < 2) {
+     switch(bufferBytes[0x38]) {
+     default:
+       goto switchD_0003dd5c_caseD_0;
+     case 0x1:
+-      iVar3 = 1;
++      formatCode = 1;
+       break;
+     case 0x2:
+-      iVar3 = 2;
++      formatCode = 2;
+       break;
+     case 0x3:
+-      iVar3 = 3;
++      formatCode = 3;
+       break;
+     case 0x4:
+-      iVar3 = 6;
++      formatCode = 6;
+       break;
+     case 0x5:
+-      iVar3 = 7;
++      formatCode = 7;
+     }
+-    uVar7 = iVar3 << 0x10;
+-    uVar9 = (UInt32)(M<UInt16>(bufferBytes + 0x18) >> 3);
++    formatBits = formatCode << 0x10;
++    sizeBits = (UInt32)(M<UInt16>(bufferBytes + 0x18) >> 3);
+   }
+   else {
+ switchD_0003dd5c_caseD_0:
+-    uVar9 = 0;
+-    uVar7 = 0;
++    sizeBits = 0;
++    formatBits = 0;
+   }
+-  AVar1 = bufferBytes[0x39];
++  tilingByte1 = bufferBytes[0x39];
+   VCALL(*accel, 0x54c)(accel,accel[0x8d]);
+-  *packet = iVar8 + 0x2c1;
+-  M<SInt32>(iVar6 + 0x124) = iVar10;
+-  M<SInt32>(iVar6 + 0x128) = iVar8 + 0x2c2;
+-  M<SInt32>(iVar6 + 300) = iVar10 + M<SInt32>(bufferBytes + 0x10) + -1;
+-  M<SInt32>(iVar6 + 0x130) = iVar8 + 0x2c3;
+-  M<UInt32>(iVar6 + 0x134) = uVar7 | uVar9 | ((UInt8)AVar1 & 3) << 0x14 | ((UInt8)AVar1 & 3) << 0x16;
++  *packet = slotOffset + 0x2c1;
++  M<SInt32>(scratchCmd + 0x124) = gpuBase;
++  M<SInt32>(scratchCmd + 0x128) = slotOffset + 0x2c2;
++  M<SInt32>(scratchCmd + 300) = gpuBase + M<SInt32>(bufferBytes + 0x10) + -1;
++  M<SInt32>(scratchCmd + 0x130) = slotOffset + 0x2c3;
++  M<UInt32>(scratchCmd + 0x134) = formatBits | sizeBits | ((UInt8)tilingByte1 & 3) << 0x14 | ((UInt8)tilingByte1 & 3) << 0x16;
+   if ((M<UInt32>(bufferBytes + 0x3c) & 0x800) == 0) {
+-    M<UInt32>(iVar6 + 0x138) = 0xd0b;
+-    M<UInt32>(iVar6 + 0x13c) = 5;
+-    M<UInt32>(iVar6 + 0x140) = 0x1393;
+-    M<UInt32>(iVar6 + 0x144) = 10;
+-    iVar6 = 10;
+-    iVar8 = 0x28;
+-    iVar10 = 0xb;
+-    uVar7 = 0xc;
++    M<UInt32>(scratchCmd + 0x138) = 0xd0b;
++    M<UInt32>(scratchCmd + 0x13c) = 5;
++    M<UInt32>(scratchCmd + 0x140) = 0x1393;
++    M<UInt32>(scratchCmd + 0x144) = 10;
++    endIndex = 10;
++    endMarkerOffset = 0x28;
++    markerIndex = 0xb;
++    tailIndex = 0xc;
+   }
+   else {
+-    iVar6 = this->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(bufferBytes),6,(UInt32 *)(packet));
+-    iVar8 = iVar6 << 2;
+-    iVar10 = iVar6 + 1;
+-    uVar7 = iVar6 + 2;
+-  }
+-  M<UInt32>((SInt32)packet + iVar8) = 0x5c8;
+-  packet[iVar10] = 0x70000;
+-  uVar9 = uVar7;
+-  if ((uVar7 & 7) != 0) {
+-    uVar9 = iVar6 + 3;
+-    packet[uVar7] = 0x80000000;
++    endIndex = this->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(bufferBytes),6,(UInt32 *)(packet));
++    endMarkerOffset = endIndex << 2;
++    markerIndex = endIndex + 1;
++    tailIndex = endIndex + 2;
++  }
++  M<UInt32>((SInt32)packet + endMarkerOffset) = 0x5c8;
++  packet[markerIndex] = 0x70000;
++  packetWords = tailIndex;
++  if ((tailIndex & 7) != 0) {
++    packetWords = endIndex + 3;
++    packet[tailIndex] = 0x80000000;
+   }
+   accelBytes = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
+-  stamp = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet), M<SInt32>(accelBytes + kIOATIR500Accelerator_scratchBufferGartOffset) + 0x120, uVar9);
++  stamp = ((ATIRadeonX1000 *)(accelBytes))->submit_buffer((UInt32 *)(packet), M<SInt32>(accelBytes + kIOATIR500Accelerator_scratchBufferGartOffset) + 0x120, packetWords);
+   M<UInt32>(accelBytes + kIOATIR500Accelerator_scratchCommandBuffer_0x10) = stamp;
+   accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator);
+   VCALL(*accel, 0x54c)(accel,accel[0x8d]);

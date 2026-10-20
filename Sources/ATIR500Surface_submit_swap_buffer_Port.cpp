@@ -30,24 +30,36 @@
 void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  int iVar1;
-  UInt32 uVar2;
+  int dualMode;
+  UInt32 cmdWord;
   UInt32 *pendingBatch;
-  UInt32 *puVar5;
-  int iVar6;
+  UInt32 *dstCursor;
+  int allocResult;
+  int counterDelta;
+  int slotHeaderAddr;
+  int batchHeaderAddr;
+  int copiedCount;
   UInt8 *accelerator;
-  int iVar8;
-  unsigned int uVar9;
-  unsigned int uVar10;
-  UInt32 uVar11;
-  int iVar12;
+  int accelAddr;
+  unsigned int nextSlot;
+  unsigned int wordIndex;
+  unsigned int swapValue;
+  unsigned int paddedWords;
+  UInt32 batchWord3;
+  UInt32 batchWord6;
+  UInt32 swdsFlag;
+  UInt32 submitStamp;
+  int counterBefore;
+  int wordsLeft;
   UInt32 *slotHeader;
-  UInt32 *puVar14;
-  UInt32 uVar15;
-  UInt32 uVar16;
-  int *piVar17;
+  UInt32 *srcCursor;
+  UInt32 batchWord2;
+  UInt32 batchWord5;
+  UInt32 batchWord1;
+  UInt32 batchWord4;
+  int *accelObj;
   UInt32 *cmd;
-  UInt8 *pVVar19;
+  UInt8 *slotBytes;
   
   if (M<SInt16>(self + kATIR500Surface_swapBatchBuilt) != 0) {
     M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
@@ -61,155 +73,155 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
   SwapBufferEntry *slot;     /* the submit slot in use: entries[1 + slotIndex] */
   if ((M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 1) == 0) {
     slot = &rec->entries[1 + (unsigned int)Vol(rec->slotIndex)];
-    pVVar19 = (UInt8 *)slot;
+    slotBytes = (UInt8 *)slot;
     if (((int)Vol(slot->memory) == 0) &&
-       (iVar8 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(panel,Vol(rec->swapBufferSize)),
-       iVar8 == 0)) {
+       (allocResult = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(panel,Vol(rec->swapBufferSize)),
+       allocResult == 0)) {
       return;
     }
     goto LAB_0003be90;
   }
-  uVar9 = Vol(rec->slotIndex) + 1 & 3;
-  Vol(rec->slotIndex) = (UInt16)uVar9;
-  slot = &rec->entries[1 + uVar9];
-  pVVar19 = (UInt8 *)slot;
+  nextSlot = Vol(rec->slotIndex) + 1 & 3;
+  Vol(rec->slotIndex) = (UInt16)nextSlot;
+  slot = &rec->entries[1 + nextSlot];
+  slotBytes = (UInt8 *)slot;
   if ((int)Vol(slot->memory) == 0) {
-    iVar6 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(panel,Vol(rec->swapBufferSize));
-    if (iVar6 == 0) {
+    allocResult = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(panel,Vol(rec->swapBufferSize));
+    if (allocResult == 0) {
       return;
     }
   }
   else {
-    piVar17 = M<int *>(self + kIOATIR500Surface_accelerator);
-    iVar12 = piVar17[0x1e2];
-    iVar6 = VCALL(*piVar17, 0x54c)(piVar17,Vol(slot->stamp));
-    piVar17[0x1e2] = iVar12 + iVar6;
+    accelObj = M<int *>(self + kIOATIR500Surface_accelerator);
+    counterBefore = accelObj[0x1e2];
+    counterDelta = VCALL(*accelObj, 0x54c)(accelObj,Vol(slot->stamp));
+    accelObj[0x1e2] = counterBefore + counterDelta;
   }
   slotHeader = (UInt32 *)Vol(slot->header);
   pendingBatch = (UInt32 *)Vol(rec->entries[0].header);
-  uVar16 = pendingBatch[1];
-  uVar15 = pendingBatch[2];
-  uVar11 = pendingBatch[3];
+  batchWord1 = pendingBatch[1];
+  batchWord2 = pendingBatch[2];
+  batchWord3 = pendingBatch[3];
   *slotHeader = *pendingBatch;
-  slotHeader[1] = uVar16;
-  slotHeader[2] = uVar15;
-  slotHeader[3] = uVar11;
-  uVar16 = pendingBatch[4];
-  uVar15 = pendingBatch[5];
-  uVar11 = pendingBatch[6];
+  slotHeader[1] = batchWord1;
+  slotHeader[2] = batchWord2;
+  slotHeader[3] = batchWord3;
+  batchWord4 = pendingBatch[4];
+  batchWord5 = pendingBatch[5];
+  batchWord6 = pendingBatch[6];
   slotHeader[7] = pendingBatch[7];
-  slotHeader[4] = uVar16;
-  slotHeader[5] = uVar15;
-  slotHeader[6] = uVar11;
-  iVar6 = (int)Vol(slot->header);
-  cmd = (UInt32 *)(iVar6 + 0x20);
+  slotHeader[4] = batchWord4;
+  slotHeader[5] = batchWord5;
+  slotHeader[6] = batchWord6;
+  slotHeaderAddr = (int)Vol(slot->header);
+  cmd = (UInt32 *)(slotHeaderAddr + 0x20);
   if ((((swapArg & 0x18) == 0) || (M<SInt16>(self + kIOATIR500Surface_scalingFlags) != 0)) ||
-     ((iVar12 = M<int>(self + kIOATIR500Surface_accelerator), M<char>(iVar12 + 0x9b0) != '\0' &&
-      (M<int>(panel * 0x18 + iVar12 + 0xb10) != 0)))) {
-    uVar9 = 0;
+     ((accelAddr = M<int>(self + kIOATIR500Surface_accelerator), M<char>(accelAddr + 0x9b0) != '\0' &&
+      (M<int>(panel * 0x18 + accelAddr + 0xb10) != 0)))) {
+    wordIndex = 0;
   }
   else {
-    uVar10 = M<UInt16>(panel * 0x78 + iVar12 + 0x14a) & 0xfff;
+    swapValue = M<UInt16>(panel * 0x78 + accelAddr + 0x14a) & 0xfff;
     *cmd = 0x1393;
-    M<UInt32>(iVar6 + 0x24) = 10;
-    M<UInt32>(iVar6 + 0x28) = 0xd0b;
-    M<UInt32>(iVar6 + 0x2c) = 5;
-    M<UInt32>(iVar6 + 0x30) = 0x5c8;
-    M<UInt32>(iVar6 + 0x34) = 0x70000;
+    M<UInt32>(slotHeaderAddr + 0x24) = 10;
+    M<UInt32>(slotHeaderAddr + 0x28) = 0xd0b;
+    M<UInt32>(slotHeaderAddr + 0x2c) = 5;
+    M<UInt32>(slotHeaderAddr + 0x30) = 0x5c8;
+    M<UInt32>(slotHeaderAddr + 0x34) = 0x70000;
     if (panel == 0) {
-      iVar1 = M<int>(iVar12 + 0x894);
-      if (iVar1 == 0) {
-        M<UInt32>(iVar6 + 0x38) = 0x194e;
-        M<unsigned int>(iVar6 + 0x3c) = (uVar10 & ~M<unsigned int>(iVar12 + 0x898)) << 0x10 | 0x80000000;
-        M<UInt32>(iVar6 + 0x40) = 0x5c8;
-        M<UInt32>(iVar6 + 0x44) = 8;
-        uVar9 = 10;
+      dualMode = M<int>(accelAddr + 0x894);
+      if (dualMode == 0) {
+        M<UInt32>(slotHeaderAddr + 0x38) = 0x194e;
+        M<unsigned int>(slotHeaderAddr + 0x3c) = (swapValue & ~M<unsigned int>(accelAddr + 0x898)) << 0x10 | 0x80000000;
+        M<UInt32>(slotHeaderAddr + 0x40) = 0x5c8;
+        M<UInt32>(slotHeaderAddr + 0x44) = 8;
+        wordIndex = 10;
       }
       else {
 LAB_0003bcbc:
-        uVar9 = 6;
-        if (iVar1 != 0) goto LAB_0003bcc8;
+        wordIndex = 6;
+        if (dualMode != 0) goto LAB_0003bcc8;
       }
     }
     else {
       if (panel != 1) {
-        iVar1 = M<int>(iVar12 + 0x894);
+        dualMode = M<int>(accelAddr + 0x894);
         goto LAB_0003bcbc;
       }
 LAB_0003bcc8:
-      uVar9 = 10;
-      M<UInt32>(iVar6 + 0x38) = 0x1b4e;
-      M<unsigned int>(iVar6 + 0x3c) = (uVar10 & ~M<unsigned int>(iVar12 + 0x89c)) << 0x10 | 0x80000000;
-      M<UInt32>(iVar6 + 0x40) = 0x5c8;
-      M<UInt32>(iVar6 + 0x44) = 0x80000008;
+      wordIndex = 10;
+      M<UInt32>(slotHeaderAddr + 0x38) = 0x1b4e;
+      M<unsigned int>(slotHeaderAddr + 0x3c) = (swapValue & ~M<unsigned int>(accelAddr + 0x89c)) << 0x10 | 0x80000000;
+      M<UInt32>(slotHeaderAddr + 0x40) = 0x5c8;
+      M<UInt32>(slotHeaderAddr + 0x44) = 0x80000008;
     }
   }
-  iVar6 = (int)Vol(rec->entries[0].header);
-  iVar12 = M<int>(iVar6 + 0x14) - M<int>(iVar6 + 0x18);
-  puVar14 = (UInt32 *)(iVar6 + 0x20 + M<int>(iVar6 + 0x18) * 4);
-  if (iVar12 != 0) {
-    iVar6 = 0;
-    puVar5 = cmd + uVar9;
+  batchHeaderAddr = (int)Vol(rec->entries[0].header);
+  wordsLeft = M<int>(batchHeaderAddr + 0x14) - M<int>(batchHeaderAddr + 0x18);
+  srcCursor = (UInt32 *)(batchHeaderAddr + 0x20 + M<int>(batchHeaderAddr + 0x18) * 4);
+  if (wordsLeft != 0) {
+    copiedCount = 0;
+    dstCursor = cmd + wordIndex;
     do {
-      uVar2 = *puVar14;
-      iVar6 = iVar6 + 1;
-      puVar14 = puVar14 + 1;
-      *puVar5 = uVar2;
-      puVar5 = puVar5 + 1;
-      iVar12 = iVar12 + -1;
-    } while (iVar12 != 0);
-    uVar9 = uVar9 + iVar6;
+      cmdWord = *srcCursor;
+      copiedCount = copiedCount + 1;
+      srcCursor = srcCursor + 1;
+      *dstCursor = cmdWord;
+      dstCursor = dstCursor + 1;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
+    wordIndex = wordIndex + copiedCount;
   }
   accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   if (accelerator[0x9b0] == 0x0) {
-    uVar11 = 0;
+    swdsFlag = 0;
   }
   else if ((M<int>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) || (M<int>(accelerator + kIOATIR500Accelerator_swdsPanel1Flag) == 0)) {
     if (M<int>(accelerator + panel * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
-      uVar9 = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), uVar9, true, (unsigned int)(panel == 0));
-      uVar11 = 1;
+      wordIndex = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), wordIndex, true, (unsigned int)(panel == 0));
+      swdsFlag = 1;
     }
     else {
-      uVar9 = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), uVar9, true, panel);
-      uVar11 = 1;
+      wordIndex = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), wordIndex, true, panel);
+      swdsFlag = 1;
     }
   }
   else {
-    uVar9 = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), uVar9, true, 1);
-    uVar11 = 1;
+    wordIndex = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), wordIndex, true, 1);
+    swdsFlag = 1;
   }
-  *(UInt32 *)Vol(slot->header) = uVar11;
-  uVar10 = uVar9;
-  if ((uVar9 & 1) != 0) {
-    uVar10 = uVar9 + 1;
-    cmd[uVar9] = 0x80000000;
+  *(UInt32 *)Vol(slot->header) = swdsFlag;
+  paddedWords = wordIndex;
+  if ((wordIndex & 1) != 0) {
+    paddedWords = wordIndex + 1;
+    cmd[wordIndex] = 0x80000000;
   }
-  M<unsigned int>((int)Vol(slot->header) + 0x14) = uVar10;
+  M<unsigned int>((int)Vol(slot->header) + 0x14) = paddedWords;
   M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) =
        M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 0xfffffffe;
 LAB_0003be90:
-  if (M<int>(pVVar19 + 4) == 0) {
-    ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar19));
+  if (M<int>(slotBytes + 4) == 0) {
+    ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(slotBytes));
   }
   M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710) =
-       M<int>(M<int>(pVVar19 + 0x14) + 0x14) * 4 + M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710);
+       M<int>(M<int>(slotBytes + 0x14) + 0x14) * 4 + M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x710);
   accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
-  uVar11 = ((ATIRadeonX1000 *)(accelerator))->submit_buffer((UInt32 *)(M<int>(pVVar19 + 0x14) + 0x20),M<int>(pVVar19 + 4) + 0x20
-                      ,M<UInt32>(M<int>(pVVar19 + 0x14) + 0x14));
-  M<UInt32>(pVVar19 + 0x10) = uVar11;
-  M<UInt32>(self + kIOATIR500Surface_submittedStamp) = uVar11;
-  M<UInt32>(accelerator + panel * 0x20 + kIOATIR500Accelerator_framebuffer0SubmitStamp) = uVar11;
-  iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
-  if ((M<char>(iVar8 + 0x9b0) != '\0') && (*M<int *>(pVVar19 + 0x14) != 0)) {
-    if (M<int>(panel * 0x18 + iVar8 + 0xb10) == 0) {
-      if ((M<int>(iVar8 + 0x894) != 0) &&
-         (M<int>((unsigned int)(panel == 0) * 0x18 + iVar8 + 0xb10) != 0)) {
-        M<UInt32>((unsigned int)(panel == 0) * 4 + iVar8 + 0xad4) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
+  submitStamp = ((ATIRadeonX1000 *)(accelerator))->submit_buffer((UInt32 *)(M<int>(slotBytes + 0x14) + 0x20),M<int>(slotBytes + 4) + 0x20
+                      ,M<UInt32>(M<int>(slotBytes + 0x14) + 0x14));
+  M<UInt32>(slotBytes + 0x10) = submitStamp;
+  M<UInt32>(self + kIOATIR500Surface_submittedStamp) = submitStamp;
+  M<UInt32>(accelerator + panel * 0x20 + kIOATIR500Accelerator_framebuffer0SubmitStamp) = submitStamp;
+  accelAddr = M<int>(self + kIOATIR500Surface_accelerator);
+  if ((M<char>(accelAddr + 0x9b0) != '\0') && (*M<int *>(slotBytes + 0x14) != 0)) {
+    if (M<int>(panel * 0x18 + accelAddr + 0xb10) == 0) {
+      if ((M<int>(accelAddr + 0x894) != 0) &&
+         (M<int>((unsigned int)(panel == 0) * 0x18 + accelAddr + 0xb10) != 0)) {
+        M<UInt32>((unsigned int)(panel == 0) * 4 + accelAddr + 0xad4) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
         M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
       }
     }
     else {
-      M<UInt32>(panel * 4 + iVar8 + 0xad4) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
+      M<UInt32>(panel * 4 + accelAddr + 0xad4) = M<UInt32>(self + kIOATIR500Surface_submittedStamp);
       M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
     }
   }

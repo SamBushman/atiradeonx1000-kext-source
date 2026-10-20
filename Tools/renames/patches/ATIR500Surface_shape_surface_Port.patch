@@ -1,0 +1,813 @@
+--- a/Sources/ATIR500Surface_shape_surface_Port.cpp	2026-10-20 09:44:43.890267775 -0700
++++ b/Sources/ATIR500Surface_shape_surface_Port.cpp	2026-10-20 09:44:43.891671022 -0700
+@@ -34,35 +34,71 @@
+ void ATIR500Surface::shape_surface() {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+-  bool bVar1;
+-  SInt16 sVar2;
+-  UInt16 uVar3;
+-  UInt16 uVar4;
+-  UInt8 AVar5;
+-  UInt16 uVar6;
+-  UInt32 uVar7;
+-  UInt32 uVar8;
+-  SInt32 iVar9;
+-  UInt32 uVar10;
+-  SInt32 *piVar11;
+-  UInt8 AVar12;
+-  UInt32 uVar13;
++  bool notLast;
++  bool notFirstLevel;
++  bool isLast;
++  SInt16 surfaceWidth16;
++  SInt16 overlayRight;
++  UInt16 bufferWidth16;
++  UInt16 pitch16;
++  UInt16 height16;
++  UInt8 fmtBitsB;
++  UInt16 overlayWidth16;
++  UInt16 heightField;
++  UInt16 scaledHeight16;
++  UInt32 scaleCode;
++  UInt32 formatEntry1;
++  UInt32 modeBitsNow;
++  UInt32 faceCount;
++  UInt32 mipWidth;
++  UInt32 bytesPerPixelOv;
++  UInt32 levelCount;
++  UInt32 levelPitch;
++  SInt32 widthPixels;
++  SInt32 buffer9Storage;
++  SInt32 storageSize;
++  UInt32 levelAlign;
++  UInt32 levelAlignedHeight;
++  SInt32 *mipSource;
++  SInt32 *framebufferRecord;
++  UInt8 bufferFormatIndex;
++  UInt8 tilingMode;
++  UInt8 overlayAllocated;
++  UInt32 baseHeight;
++  UInt32 reqBits;
++  UInt32 mipIndex;
+   SInt32 surfaceWidth;
+-  UInt8 *pAVar15;
+-  SInt32 iVar16;
+-  SInt16 sVar18;
+-  UInt32 uVar17;
+-  UInt32 uVar19;
+-  UInt16 uVar20;
+-  UInt16 uVar21;
+-  UInt8 AVar22;
+-  SInt32 iVar23;
+-  UInt32 uVar24;
+-  SInt32 iVar25;
+-  UInt32 uVar26;
++  UInt8 *mipOffsetCursor;
++  UInt8 *bufferRecordPtr;
++  SInt32 ovFormatOffset;
++  SInt32 formatIdx;
++  SInt32 loopIndex;
++  SInt32 atiFormatIndex;
++  SInt16 surfaceHeight16;
++  SInt16 overlayLeft;
++  UInt32 levelIndex;
++  UInt32 bufferIdLocal;
++  UInt32 levelHeight;
++  UInt32 overlayHeightLow;
++  UInt32 bufferListIndex;
++  UInt16 heightValue;
++  UInt16 bytesPerPixel16;
++  UInt16 overlayHeight16;
++  UInt16 halfScaledHeight16;
++  UInt8 bufferTilingByte;
++  UInt8 fmtBitsA;
++  SInt32 panelAccel;
++  SInt32 alignUnit;
++  SInt32 overlayWidth;
++  SInt32 bufferRecord;
++  SInt32 overlayHeightPx;
++  SInt32 framebufferIndex;
++  UInt32 alignedHeight9;
++  UInt32 bufferRowBytes;
++  UInt32 alignedWidth;
++  SInt32 mipOffset;
++  UInt32 mipCount;
+   SInt32 bufferRecordOffset;
+-  UInt32 uVar28;
+-  UInt32 uVar29;
+   UInt8 bufferIds [8];
+   SInt32 mipOffsets [14];
+   UInt32 heightScale;
+@@ -105,15 +141,15 @@
+     heightScale = 1;
+   }
+   else {
+-    uVar7 = windowMode & 0x700000;
+-    if (uVar7 == 0) {
+-      uVar7 = windowMode & 0xc0000;
+-      if (uVar7 == 0) goto LAB_0003c260;
+-      if (uVar7 == 0x40000) {
++    scaleCode = windowMode & 0x700000;
++    if (scaleCode == 0) {
++      scaleCode = windowMode & 0xc0000;
++      if (scaleCode == 0) goto LAB_0003c260;
++      if (scaleCode == 0x40000) {
+         widthScale = 1;
+         heightScale = 2;
+       }
+-      else if (uVar7 == 0x80000) {
++      else if (scaleCode == 0x80000) {
+         widthScale = 2;
+         heightScale = 2;
+       }
+@@ -128,47 +164,47 @@
+         heightScale = 1;
+       }
+     }
+-    else if (uVar7 == 0x200000) {
++    else if (scaleCode == 0x200000) {
+       widthScale = 4;
+       heightScale = 1;
+     }
+-    else if (uVar7 == 0x400000) {
++    else if (scaleCode == 0x400000) {
+       widthScale = 6;
+       heightScale = 1;
+     }
+     else {
+-      if (uVar7 != 0x100000) goto LAB_0003c260;
++      if (scaleCode != 0x100000) goto LAB_0003c260;
+       widthScale = 2;
+       heightScale = 1;
+     }
+   }
+   if ((shapeMask & 0x1c0) != 0) {
+     if (((windowMode & 0x30000) == 0x20000) || ((windowMode & 0x30000) == 0x30000)) {
+-      AVar12 = 0x29;
+-      AVar22 = 0x3;
+-      iVar16 = 0x29;
++      bufferFormatIndex = 0x29;
++      bufferTilingByte = 0x3;
++      formatIdx = 0x29;
+     }
+     else {
+-      AVar12 = 0x10;
+-      AVar22 = 0x5;
+-      iVar16 = 0x10;
++      bufferFormatIndex = 0x10;
++      bufferTilingByte = 0x5;
++      formatIdx = 0x10;
+     }
+-    uVar7 = FormatTableLookup_0x0004d2dc(iVar16 * 0x1c);
+-    bytesPerPixel = 1 << (uVar7 >> 0xc & 7);
++    formatEntry1 = FormatTableLookup_0x0004d2dc(formatIdx * 0x1c);
++    bytesPerPixel = 1 << (formatEntry1 >> 0xc & 7);
+     if (M<SInt16>(self + kIOATIR500Surface_height) < 0x20) {
+-      if (AVar22 == 0x5) {
+-        AVar22 = 0x4;
++      if (bufferTilingByte == 0x5) {
++        bufferTilingByte = 0x4;
+       }
+       else {
+-        AVar22 = 0x2;
++        bufferTilingByte = 0x2;
+       }
+     }
+-    iVar16 = 0;
++    loopIndex = 0;
+     bufferIds[0] = 6;
+     bufferIds[1] = 7;
+     bufferIds[2] = 8;
+     do {
+-      bufferSlot = (UInt32)bufferIds[iVar16];
++      bufferSlot = (UInt32)bufferIds[loopIndex];
+       if ((shapeMask >> (bufferSlot & 0x3f) & 1) != 0) {
+         bufferHeightScale = heightScale;
+         bufferWidthScale = widthScale;
+@@ -217,10 +253,10 @@
+           M<SInt16>(self + bufferRecordOffset + 0xc4) = (SInt16)bufferWidthScale * M<SInt16>(self + kIOATIR500Surface_width);
+           M<SInt16>(self + bufferRecordOffset + 0xc6) = (SInt16)bufferHeightScale * M<SInt16>(self + kIOATIR500Surface_height);
+         }
+-        self[bufferRecordOffset + 0xe0] = AVar22;
+-        self[bufferRecordOffset + 0xe1] = ((UInt8)(uVar7 >> 10) & 3);
+-        self[bufferRecordOffset + 0xe3] = ((UInt8)(uVar7 >> 3) & 0x1f);
+-        self[bufferRecordOffset + 0xe2] = AVar12;
++        self[bufferRecordOffset + 0xe0] = bufferTilingByte;
++        self[bufferRecordOffset + 0xe1] = ((UInt8)(formatEntry1 >> 10) & 3);
++        self[bufferRecordOffset + 0xe3] = ((UInt8)(formatEntry1 >> 3) & 0x1f);
++        self[bufferRecordOffset + 0xe2] = bufferFormatIndex;
+         if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) {
+           if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0xc0000) == 0) {
+             M<UInt32>(self + bufferRecordOffset + 0xe4) =
+@@ -240,26 +276,26 @@
+         windowMode = M<UInt32>(self + kIOATIR500Surface_modeBits);
+         shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
+       }
+-      bVar1 = iVar16 != 2;
+-      iVar16 = iVar16 + 1;
+-    } while (bVar1);
++      notLast = loopIndex != 2;
++      loopIndex = loopIndex + 1;
++    } while (notLast);
+   }
+   if ((windowMode & 0xf) < 0xe) {
+     formatBit = 1 << (windowMode & 0xf);
+     if ((formatBit & 0x1c18) == 0) {
+       if (((formatBit & 0x2000) == 0) ||
+-         (AVar12 = 0x1, M<SInt16>(self + kIOATIR500Surface_height) < 0x10)) goto LAB_0003c52c;
++         (tilingMode = 0x1, M<SInt16>(self + kIOATIR500Surface_height) < 0x10)) goto LAB_0003c52c;
+     }
+     else {
+-      AVar12 = ((0xf < M<SInt16>(self + kIOATIR500Surface_height)) + '\x02');
++      tilingMode = ((0xf < M<SInt16>(self + kIOATIR500Surface_height)) + '\x02');
+     }
+   }
+   else {
+ LAB_0003c52c:
+-    AVar12 = 0x0;
++    tilingMode = 0x0;
+   }
+   if ((M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff) && ((shapeMask & 2) != 0)) {
+-    M<UInt8>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x164) = AVar12;
++    M<UInt8>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x164) = tilingMode;
+     shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
+   }
+   if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
+@@ -271,11 +307,11 @@
+   if (pendingMask == 0) {
+     return;
+   }
+-  uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
+-  iVar16 = window_mode_to_ati_format(uVar7 & 0xf);
+-  formatEntry = FormatTableLookup_0x0004d2dc(iVar16 * 0x1c);
+-  AVar22 = ((UInt8)(formatEntry >> 10) & 3);
+-  AVar5 = ((UInt8)(formatEntry >> 3) & 0x1f);
++  modeBitsNow = M<UInt32>(self + kIOATIR500Surface_modeBits);
++  atiFormatIndex = window_mode_to_ati_format(modeBitsNow & 0xf);
++  formatEntry = FormatTableLookup_0x0004d2dc(atiFormatIndex * 0x1c);
++  fmtBitsA = ((UInt8)(formatEntry >> 10) & 3);
++  fmtBitsB = ((UInt8)(formatEntry >> 3) & 0x1f);
+   bytesPerPixel = 1 << (formatEntry >> 0xc & 7);
+   if ((shapeMask & 0x200) != 0) {
+     if (((bytesPerPixel != M<UInt16>(self + kIOATIR500Surface_buffer9BytesPerPixel)) ||
+@@ -283,33 +319,33 @@
+        ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9Height) != heightScale * (SInt32)M<SInt16>(self + kIOATIR500Surface_height))) {
+       if (M<SInt32>(self + kIOATIR500Surface_buffer9BackingStore) != 0) {
+         ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + kIOATIR500Surface_buffer9)));
+-        uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
++        modeBitsNow = M<UInt32>(self + kIOATIR500Surface_modeBits);
+       }
+-      sVar2 = M<SInt16>(self + kIOATIR500Surface_width);
+-      iVar9 = (SInt32)sVar2;
+-      if ((uVar7 & 0x700000) != 0) {
+-        iVar9 = iVar9 + 0x18;
++      surfaceWidth16 = M<SInt16>(self + kIOATIR500Surface_width);
++      widthPixels = (SInt32)surfaceWidth16;
++      if ((modeBitsNow & 0x700000) != 0) {
++        widthPixels = widthPixels + 0x18;
+       }
+-      pitchBytes = iVar9 * bytesPerPixel;
++      pitchBytes = widthPixels * bytesPerPixel;
+       if ((pitchBytes & 0xff) != 0) {
+         pitchBytes = (pitchBytes & 0xffffff00) + 0x100;
+       }
+-      sVar18 = M<SInt16>(self + kIOATIR500Surface_height);
++      surfaceHeight16 = M<SInt16>(self + kIOATIR500Surface_height);
+       pitchBytes = widthScale * pitchBytes;
+-      uVar24 = (UInt32)sVar18;
+-      if ((uVar24 & 0x1f) != 0) {
+-        uVar24 = (uVar24 - (SInt32)(SInt16)(sVar18 + (SInt16)(((SInt32)uVar24 >> 5) +
+-                                                        (UInt32)((SInt32)uVar24 < 0 &&
+-                                                              (uVar24 & 0x1f) != 0)) * -0x20)) +
++      alignedHeight9 = (UInt32)surfaceHeight16;
++      if ((alignedHeight9 & 0x1f) != 0) {
++        alignedHeight9 = (alignedHeight9 - (SInt32)(SInt16)(surfaceHeight16 + (SInt16)(((SInt32)alignedHeight9 >> 5) +
++                                                        (UInt32)((SInt32)alignedHeight9 < 0 &&
++                                                              (alignedHeight9 & 0x1f) != 0)) * -0x20)) +
+                  0x20;
+       }
+-      iVar9 = pitchBytes * heightScale * uVar24;
+-      if (iVar9 != M<SInt32>(self + kIOATIR500Surface_buffer9StorageBytes)) {
++      buffer9Storage = pitchBytes * heightScale * alignedHeight9;
++      if (buffer9Storage != M<SInt32>(self + kIOATIR500Surface_buffer9StorageBytes)) {
+         VCALL(M<SInt32>(self), 0x5cc)(self,9);
+-        M<SInt32>(self + kIOATIR500Surface_buffer9StorageBytes) = iVar9;
+-        uVar7 = M<UInt32>(self + kIOATIR500Surface_modeBits);
+-        sVar2 = M<SInt16>(self + kIOATIR500Surface_width);
+-        sVar18 = M<SInt16>(self + kIOATIR500Surface_height);
++        M<SInt32>(self + kIOATIR500Surface_buffer9StorageBytes) = buffer9Storage;
++        modeBitsNow = M<UInt32>(self + kIOATIR500Surface_modeBits);
++        surfaceWidth16 = M<SInt16>(self + kIOATIR500Surface_width);
++        surfaceHeight16 = M<SInt16>(self + kIOATIR500Surface_height);
+       }
+       if (bytesPerPixel == 0) {
+         M<UInt16>(self + kIOATIR500Surface_buffer9PitchPixels) = 0;
+@@ -319,15 +355,15 @@
+       }
+       M<SInt16>(self + kIOATIR500Surface_buffer9PitchBytes) = (SInt16)pitchBytes;
+       M<SInt16>(self + kIOATIR500Surface_buffer9BytesPerPixel) = (SInt16)bytesPerPixel;
+-      M<SInt16>(self + kIOATIR500Surface_buffer9Width) = (SInt16)widthScale * sVar2;
+-      M<SInt16>(self + kIOATIR500Surface_buffer9Height) = (SInt16)heightScale * sVar18;
++      M<SInt16>(self + kIOATIR500Surface_buffer9Width) = (SInt16)widthScale * surfaceWidth16;
++      M<SInt16>(self + kIOATIR500Surface_buffer9Height) = (SInt16)heightScale * surfaceHeight16;
+     }
+-    self[0x518] = AVar12;
+-    self[0x519] = AVar22;
+-    self[0x51b] = AVar5;
+-    self[0x51a] = SUB41m(iVar16,0);
+-    if ((uVar7 & 0x700000) == 0) {
+-      if ((uVar7 & 0xc0000) == 0) {
++    self[0x518] = tilingMode;
++    self[0x519] = fmtBitsA;
++    self[0x51b] = fmtBitsB;
++    self[0x51a] = SUB41m(atiFormatIndex,0);
++    if ((modeBitsNow & 0x700000) == 0) {
++      if ((modeBitsNow & 0xc0000) == 0) {
+         M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) = M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x111000;
+       }
+       else {
+@@ -343,17 +379,17 @@
+   GH_memcpy(mipOffsets,kShapeSurfaceDefaultMipTable,0x38);
+   modeBits = M<UInt32>(self + kIOATIR500Surface_modeBits);
+   if ((modeBits & 0x20) == 0) {
+-    uVar26 = 0;
+-    uVar7 = 1;
+-    uVar8 = 1;
+-    iVar23 = M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator);
+-    iVar9 = M<SInt32>(iVar23 + 0x13c);
+-    uVar24 = (UInt32)M<UInt16>(iVar23 + 0x144);
++    mipCount = 0;
++    faceCount = 1;
++    levelCount = 1;
++    panelAccel = M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator);
++    storageSize = M<SInt32>(panelAccel + 0x13c);
++    bufferRowBytes = (UInt32)M<UInt16>(panelAccel + 0x144);
+   }
+   else if ((modeBits & 0x70000000) == 0) {
+-    uVar24 = bytesPerPixel * (SInt32)M<SInt16>(self + kIOATIR500Surface_width);
+-    if ((uVar24 & 0xff) != 0) {
+-      uVar24 = (uVar24 & 0xffffff00) + 0x100;
++    bufferRowBytes = bytesPerPixel * (SInt32)M<SInt16>(self + kIOATIR500Surface_width);
++    if ((bufferRowBytes & 0xff) != 0) {
++      bufferRowBytes = (bufferRowBytes & 0xffffff00) + 0x100;
+     }
+     alignedHeight = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
+     if ((alignedHeight & 0x1f) != 0) {
+@@ -362,99 +398,99 @@
+                                             (UInt32)((SInt32)alignedHeight < 0 && (alignedHeight & 0x1f) != 0)) * -0x20
+                                      )) + 0x20;
+     }
+-    iVar9 = uVar24 * alignedHeight;
+-    uVar26 = 0;
+-    uVar7 = 1;
+-    uVar8 = 1;
++    storageSize = bufferRowBytes * alignedHeight;
++    mipCount = 0;
++    faceCount = 1;
++    levelCount = 1;
+   }
+   else {
+-    uVar7 = (UInt32)M<SInt16>(self + kIOATIR500Surface_width);
+-    uVar8 = bytesPerPixel * uVar7;
+-    uVar24 = uVar8;
+-    if ((uVar8 & 0xff) != 0) {
+-      uVar24 = (uVar8 & 0xffffff00) + 0x100;
+-    }
+-    uVar13 = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
+-    uVar26 = modeBits >> 0x18 & 0xf;
+-    iVar9 = 0;
+-    uVar17 = 0;
+-    uVar19 = uVar13;
++    mipWidth = (UInt32)M<SInt16>(self + kIOATIR500Surface_width);
++    levelPitch = bytesPerPixel * mipWidth;
++    bufferRowBytes = levelPitch;
++    if ((levelPitch & 0xff) != 0) {
++      bufferRowBytes = (levelPitch & 0xffffff00) + 0x100;
++    }
++    baseHeight = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
++    mipCount = modeBits >> 0x18 & 0xf;
++    storageSize = 0;
++    levelIndex = 0;
++    levelHeight = baseHeight;
+     while( true ) {
+-      bVar1 = uVar17 != 0;
+-      mipOffsets[uVar17] = iVar9;
+-      if (bVar1) {
+-        uVar10 = 0x20;
++      notFirstLevel = levelIndex != 0;
++      mipOffsets[levelIndex] = storageSize;
++      if (notFirstLevel) {
++        levelAlign = 0x20;
+       }
+       else {
+-        uVar10 = 0x100;
++        levelAlign = 0x100;
+       }
+-      if (uVar8 != (uVar8 / uVar10) * uVar10) {
+-        if (bVar1) {
+-          uVar10 = 0x20;
+-          iVar23 = 0x20;
++      if (levelPitch != (levelPitch / levelAlign) * levelAlign) {
++        if (notFirstLevel) {
++          levelAlign = 0x20;
++          alignUnit = 0x20;
+         }
+         else {
+-          uVar10 = 0x100;
+-          iVar23 = 0x100;
++          levelAlign = 0x100;
++          alignUnit = 0x100;
+         }
+-        uVar8 = iVar23 + (uVar8 / uVar10) * uVar10;
++        levelPitch = alignUnit + (levelPitch / levelAlign) * levelAlign;
+       }
+-      uVar10 = uVar19;
+-      if ((!bVar1) && ((uVar19 & 0x1f) != 0)) {
+-        uVar10 = (uVar19 & 0xffffffe0) + 0x20;
++      levelAlignedHeight = levelHeight;
++      if ((!notFirstLevel) && ((levelHeight & 0x1f) != 0)) {
++        levelAlignedHeight = (levelHeight & 0xffffffe0) + 0x20;
+       }
+-      iVar9 = iVar9 + uVar8 * uVar10;
+-      if (1 < uVar7) {
+-        uVar7 = uVar7 >> 1;
++      storageSize = storageSize + levelPitch * levelAlignedHeight;
++      if (1 < mipWidth) {
++        mipWidth = mipWidth >> 1;
+       }
+-      if (1 < uVar19) {
+-        uVar19 = uVar19 >> 1;
++      if (1 < levelHeight) {
++        levelHeight = levelHeight >> 1;
+       }
+-      uVar17 = uVar17 + 1;
+-      if (uVar26 < uVar17) break;
+-      uVar8 = bytesPerPixel * uVar7;
++      levelIndex = levelIndex + 1;
++      if (mipCount < levelIndex) break;
++      levelPitch = bytesPerPixel * mipWidth;
+     }
+-    uVar8 = uVar26 + 1;
+-    uVar7 = 6;
+-    mipOffsets[uVar17] = iVar9;
++    levelCount = mipCount + 1;
++    faceCount = 6;
++    mipOffsets[levelIndex] = storageSize;
+     if ((modeBits & 0x70000000) != 0x30000000) {
+-      uVar7 = 1;
++      faceCount = 1;
+     }
+-    iVar9 = iVar9 * uVar7;
++    storageSize = storageSize * faceCount;
+     if (bytesPerPixel == 0x10) {
+-      if (uVar8 == 1) {
+-        if (uVar7 == 1) {
+-          if ((SInt32)uVar13 < 0x10) {
+-            AVar12 = 0x0;
+-            uVar7 = 1;
++      if (levelCount == 1) {
++        if (faceCount == 1) {
++          if ((SInt32)baseHeight < 0x10) {
++            tilingMode = 0x0;
++            faceCount = 1;
+           }
+           else {
+-            AVar12 = 0x1;
+-            uVar7 = 1;
+-            uVar8 = 1;
++            tilingMode = 0x1;
++            faceCount = 1;
++            levelCount = 1;
+           }
+         }
+         else {
+ LAB_0003c9c4:
+-          AVar12 = 0x0;
+-          uVar8 = 1;
++          tilingMode = 0x0;
++          levelCount = 1;
+         }
+       }
+       else {
+ LAB_0003c9d0:
+-        AVar12 = 0x0;
++        tilingMode = 0x0;
+       }
+     }
+     else {
+-      if (uVar8 != 1) goto LAB_0003c9d0;
+-      if (uVar7 != 1) goto LAB_0003c9c4;
+-      if ((SInt32)uVar13 < 0x10) {
+-        AVar12 = 0x2;
+-        uVar7 = 1;
++      if (levelCount != 1) goto LAB_0003c9d0;
++      if (faceCount != 1) goto LAB_0003c9c4;
++      if ((SInt32)baseHeight < 0x10) {
++        tilingMode = 0x2;
++        faceCount = 1;
+       }
+       else {
+-        AVar12 = 0x3;
+-        uVar7 = 1;
++        tilingMode = 0x3;
++        faceCount = 1;
+       }
+     }
+   }
+@@ -468,122 +504,122 @@
+     bufferIds[5] = 3;
+   }
+   else {
+-    iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayRight) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayLeft);
++    overlayWidth = (SInt32)M<SInt16>(self + kATIR500Surface_overlayRight) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayLeft);
+     overlayHeight = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
+-    if (iVar23 == 0) {
+-      iVar23 = 0x300;
+-      uVar6 = 0x300;
++    if (overlayWidth == 0) {
++      overlayWidth = 0x300;
++      overlayWidth16 = 0x300;
+     }
+     else {
+-      uVar6 = (UInt16)iVar23;
++      overlayWidth16 = (UInt16)overlayWidth;
+     }
+     if (overlayHeight == 0) {
+       overlayHeight = 0x240;
+-      uVar19 = 0;
+-      uVar21 = 0x240;
++      overlayHeightLow = 0;
++      overlayHeight16 = 0x240;
+     }
+     else {
+-      uVar19 = overlayHeight & 0xf;
+-      uVar21 = (UInt16)overlayHeight;
++      overlayHeightLow = overlayHeight & 0xf;
++      overlayHeight16 = (UInt16)overlayHeight;
+     }
+-    uVar24 = iVar23 * bytesPerPixel;
+-    if ((uVar24 & 0xff) != 0) {
+-      uVar24 = (uVar24 & 0xffffff00) + 0x100;
++    bufferRowBytes = overlayWidth * bytesPerPixel;
++    if ((bufferRowBytes & 0xff) != 0) {
++      bufferRowBytes = (bufferRowBytes & 0xffffff00) + 0x100;
+     }
+-    if (uVar19 != 0) {
++    if (overlayHeightLow != 0) {
+       overlayHeight = (overlayHeight & 0xfffffff0) + 0x10;
+     }
+-    iVar9 = uVar24 * overlayHeight;
+-    M<UInt16>(self + kIOATIR500Surface_scalingSourceWidth) = uVar6;
+-    M<UInt16>(self + kIOATIR500Surface_scalingSourceHeight) = uVar21;
++    storageSize = bufferRowBytes * overlayHeight;
++    M<UInt16>(self + kIOATIR500Surface_scalingSourceWidth) = overlayWidth16;
++    M<UInt16>(self + kIOATIR500Surface_scalingSourceHeight) = overlayHeight16;
+     self[0xbec] = 0x1;
+-    M<UInt16>(self + kIOATIR500Surface_width) = uVar6;
+-    M<UInt16>(self + kIOATIR500Surface_height) = uVar21;
++    M<UInt16>(self + kIOATIR500Surface_width) = overlayWidth16;
++    M<UInt16>(self + kIOATIR500Surface_height) = overlayHeight16;
+     bufferCount = 2;
+   }
+-  uVar13 = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
+-  uVar19 = 0;
++  reqBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
++  bufferListIndex = 0;
+   do {
+-    uVar17 = (UInt32)bufferIds[uVar19];
+-    if ((uVar13 >> (uVar17 & 0x3f) & 1) != 0) {
+-      iVar23 = uVar17 * 0x78;
+-      if (((bytesPerPixel != M<UInt16>(self + iVar23 + 0xbe)) ||
+-          ((UInt32)M<UInt16>(self + iVar23 + 0xc4) != (SInt32)M<SInt16>(self + kIOATIR500Surface_width))) ||
+-         (((UInt32)M<UInt16>(self + iVar23 + 0xc6) != (SInt32)M<SInt16>(self + kIOATIR500Surface_height) ||
+-          ((uVar7 != M<UInt16>(self + iVar23 + 200) ||
+-           (uVar8 != M<UInt16>(self + iVar23 + 0xca))))))) {
+-        if (M<SInt32>(self + iVar23 + 0xcc) != 0) {
+-          ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + iVar23 + 0xa8)));
+-        }
+-        if (iVar9 != M<SInt32>(self + iVar23 + 0xb8)) {
+-          VCALL(M<SInt32>(self), 0x5cc)(self,uVar17);
+-          M<SInt32>(self + iVar23 + 0xb8) = iVar9;
++    bufferIdLocal = (UInt32)bufferIds[bufferListIndex];
++    if ((reqBits >> (bufferIdLocal & 0x3f) & 1) != 0) {
++      bufferRecord = bufferIdLocal * 0x78;
++      if (((bytesPerPixel != M<UInt16>(self + bufferRecord + 0xbe)) ||
++          ((UInt32)M<UInt16>(self + bufferRecord + 0xc4) != (SInt32)M<SInt16>(self + kIOATIR500Surface_width))) ||
++         (((UInt32)M<UInt16>(self + bufferRecord + 0xc6) != (SInt32)M<SInt16>(self + kIOATIR500Surface_height) ||
++          ((faceCount != M<UInt16>(self + bufferRecord + 200) ||
++           (levelCount != M<UInt16>(self + bufferRecord + 0xca))))))) {
++        if (M<SInt32>(self + bufferRecord + 0xcc) != 0) {
++          ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + bufferRecord + 0xa8)));
++        }
++        if (storageSize != M<SInt32>(self + bufferRecord + 0xb8)) {
++          VCALL(M<SInt32>(self), 0x5cc)(self,bufferIdLocal);
++          M<SInt32>(self + bufferRecord + 0xb8) = storageSize;
+         }
+         if (bytesPerPixel == 0) {
+-          M<UInt16>(self + iVar23 + 0xbc) = 0;
++          M<UInt16>(self + bufferRecord + 0xbc) = 0;
+         }
+         else {
+-          M<SInt16>(self + iVar23 + 0xbc) = (SInt16)(uVar24 / bytesPerPixel);
++          M<SInt16>(self + bufferRecord + 0xbc) = (SInt16)(bufferRowBytes / bytesPerPixel);
+         }
+-        uVar13 = 0;
+-        M<SInt16>(self + iVar23 + 0xbe) = (SInt16)bytesPerPixel;
+-        M<SInt16>(self + iVar23 + 0xc0) = (SInt16)uVar24;
+-        pAVar15 = self + iVar23 + 0xe8;
+-        M<UInt16>(self + iVar23 + 0xc4) = M<UInt16>(self + kIOATIR500Surface_width);
+-        uVar6 = M<UInt16>(self + kIOATIR500Surface_height);
+-        M<SInt16>(self + iVar23 + 0xca) = (SInt16)uVar8;
+-        M<SInt16>(self + iVar23 + 200) = (SInt16)uVar7;
+-        M<UInt16>(self + iVar23 + 0xc6) = uVar6;
+-        piVar11 = mipOffsets;
++        mipIndex = 0;
++        M<SInt16>(self + bufferRecord + 0xbe) = (SInt16)bytesPerPixel;
++        M<SInt16>(self + bufferRecord + 0xc0) = (SInt16)bufferRowBytes;
++        mipOffsetCursor = self + bufferRecord + 0xe8;
++        M<UInt16>(self + bufferRecord + 0xc4) = M<UInt16>(self + kIOATIR500Surface_width);
++        heightField = M<UInt16>(self + kIOATIR500Surface_height);
++        M<SInt16>(self + bufferRecord + 0xca) = (SInt16)levelCount;
++        M<SInt16>(self + bufferRecord + 200) = (SInt16)faceCount;
++        M<UInt16>(self + bufferRecord + 0xc6) = heightField;
++        mipSource = mipOffsets;
+         do {
+-          uVar13 = uVar13 + 1;
+-          iVar25 = *piVar11;
+-          piVar11 = piVar11 + 1;
+-          M<SInt32>(pAVar15) = iVar25;
+-          pAVar15 = pAVar15 + 4;
+-        } while (uVar13 <= uVar26 + 1);
+-      }
+-      self[iVar23 + 0xe2] = SUB41m(iVar16,0);
+-      self[iVar23 + 0xe0] = AVar12;
+-      self[iVar23 + 0xe1] = AVar22;
+-      self[iVar23 + 0xe3] = AVar5;
+-      uVar13 = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
+-    }
+-    uVar19 = uVar19 + 1;
+-  } while (uVar19 < bufferCount);
+-  if ((uVar13 & 0x7ffc00) == 0) {
++          mipIndex = mipIndex + 1;
++          mipOffset = *mipSource;
++          mipSource = mipSource + 1;
++          M<SInt32>(mipOffsetCursor) = mipOffset;
++          mipOffsetCursor = mipOffsetCursor + 4;
++        } while (mipIndex <= mipCount + 1);
++      }
++      self[bufferRecord + 0xe2] = SUB41m(atiFormatIndex,0);
++      self[bufferRecord + 0xe0] = tilingMode;
++      self[bufferRecord + 0xe1] = fmtBitsA;
++      self[bufferRecord + 0xe3] = fmtBitsB;
++      reqBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
++    }
++    bufferListIndex = bufferListIndex + 1;
++  } while (bufferListIndex < bufferCount);
++  if ((reqBits & 0x7ffc00) == 0) {
+     return;
+   }
+   if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
+     return;
+   }
+-  sVar2 = M<SInt16>(self + kATIR500Surface_overlayRight);
+-  sVar18 = M<SInt16>(self + kATIR500Surface_overlayLeft);
++  overlayRight = M<SInt16>(self + kATIR500Surface_overlayRight);
++  overlayLeft = M<SInt16>(self + kATIR500Surface_overlayLeft);
+   bufferId = 10;
+-  iVar23 = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
+-  scaledHeight = iVar23 * 3;
+-  uVar6 = (UInt16)scaledHeight;
+-  uVar21 = (UInt16)(scaledHeight >> 1);
+-  pAVar15 = self;
++  overlayHeightPx = (SInt32)M<SInt16>(self + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(self + kATIR500Surface_overlayTop);
++  scaledHeight = overlayHeightPx * 3;
++  scaledHeight16 = (UInt16)scaledHeight;
++  halfScaledHeight16 = (UInt16)(scaledHeight >> 1);
++  bufferRecordPtr = self;
+   while( true ) {
+-    if ((1 << (bufferId & 0x3f) & uVar13) != 0) {
+-      if (M<SInt32>(pAVar15 + 0x57c) != 0) {
++    if ((1 << (bufferId & 0x3f) & reqBits) != 0) {
++      if (M<SInt32>(bufferRecordPtr + 0x57c) != 0) {
+         ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + bufferId * 0x78 + 0xa8)));
+       }
+-      M<SInt16>(pAVar15 + 0x574) = sVar2 - sVar18;
+-      uVar20 = uVar21;
++      M<SInt16>(bufferRecordPtr + 0x574) = overlayRight - overlayLeft;
++      heightValue = halfScaledHeight16;
+       if ((((M<SInt32>(self + kATIR500Surface_deintMode) != 0) && (9 < bufferId)) && (bufferId < 0xf)) &&
+-         ((uVar20 = uVar6, M<SInt32>(pAVar15 + 0x560) != 0 &&
+-          ((UInt32)M<UInt16>(pAVar15 + 0x576) != (scaledHeight & 0xffff))))) {
++         ((heightValue = scaledHeight16, M<SInt32>(bufferRecordPtr + 0x560) != 0 &&
++          ((UInt32)M<UInt16>(bufferRecordPtr + 0x576) != (scaledHeight & 0xffff))))) {
+         ((IOATIR500Surface *)((UInt8 *)self))->copy_buffer_to_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + bufferId * 0x78 + 0xa8)));
+       }
+-      M<UInt16>(pAVar15 + 0x576) = uVar20;
++      M<UInt16>(bufferRecordPtr + 0x576) = heightValue;
+       if (bufferId == 0x11) {
+         self[0x8da] = 0x2e;
+       }
+       else if (bufferId == 0x10) {
+         M<UInt16>(self + kIOATIR500Surface_buffer16Width) = 0x2d0;
+-        if ((iVar23 == 0x240) || (iVar23 == 0x120)) {
++        if ((overlayHeightPx == 0x240) || (overlayHeightPx == 0x120)) {
+           M<UInt16>(self + kIOATIR500Surface_buffer16Height) = 0x240;
+         }
+         else {
+@@ -592,62 +628,62 @@
+         self[0x862] = 0xb;
+       }
+       else if (bufferId == 0x12) {
+-        M<SInt16>(self + kIOATIR500Surface_buffer18Height) = (SInt16)iVar23;
++        M<SInt16>(self + kIOATIR500Surface_buffer18Height) = (SInt16)overlayHeightPx;
+         self[0x952] = 0xb;
+       }
+       else {
+-        pAVar15[0x592] = 0x2d;
++        bufferRecordPtr[0x592] = 0x2d;
+       }
+-      uVar3 = M<UInt16>(pAVar15 + 0x574);
+-      uVar24 = (UInt32)uVar3;
+-      iVar16 = (UInt32)(UInt8)pAVar15[0x592] * 0x1c;
+-      pAVar15[0x593] = ((UInt8)(FormatTableLookup_0x0004d2dc(iVar16) >> 3) & 0x1f);
+-      uVar7 = 1 << (FormatTableLookup_0x0004d2dc(iVar16) >> 0xc & 7);
+-      uVar20 = (UInt16)uVar7;
+-      M<UInt16>(pAVar15 + 0x56e) = uVar20;
+-      pAVar15[0x591] = ((UInt8)(FormatTableLookup_0x0004d2dc(iVar16) >> 10) & 3);
+-      if ((uVar3 & 0xff) != 0) {
+-        uVar24 = (uVar3 & 0xffffff00) + 0x100;
+-      }
+-      uVar7 = uVar7 & 0xffff;
+-      M<SInt16>(pAVar15 + 0x570) = (SInt16)(uVar24 * uVar7);
+-      if (uVar7 == 0) {
+-        M<UInt16>(pAVar15 + 0x56c) = uVar20;
++      bufferWidth16 = M<UInt16>(bufferRecordPtr + 0x574);
++      alignedWidth = (UInt32)bufferWidth16;
++      ovFormatOffset = (UInt32)(UInt8)bufferRecordPtr[0x592] * 0x1c;
++      bufferRecordPtr[0x593] = ((UInt8)(FormatTableLookup_0x0004d2dc(ovFormatOffset) >> 3) & 0x1f);
++      bytesPerPixelOv = 1 << (FormatTableLookup_0x0004d2dc(ovFormatOffset) >> 0xc & 7);
++      bytesPerPixel16 = (UInt16)bytesPerPixelOv;
++      M<UInt16>(bufferRecordPtr + 0x56e) = bytesPerPixel16;
++      bufferRecordPtr[0x591] = ((UInt8)(FormatTableLookup_0x0004d2dc(ovFormatOffset) >> 10) & 3);
++      if ((bufferWidth16 & 0xff) != 0) {
++        alignedWidth = (bufferWidth16 & 0xffffff00) + 0x100;
++      }
++      bytesPerPixelOv = bytesPerPixelOv & 0xffff;
++      M<SInt16>(bufferRecordPtr + 0x570) = (SInt16)(alignedWidth * bytesPerPixelOv);
++      if (bytesPerPixelOv == 0) {
++        M<UInt16>(bufferRecordPtr + 0x56c) = bytesPerPixel16;
+       }
+       else {
+-        M<SInt16>(pAVar15 + 0x56c) = (SInt16)((uVar24 * uVar7 & 0xffff) / uVar7);
++        M<SInt16>(bufferRecordPtr + 0x56c) = (SInt16)((alignedWidth * bytesPerPixelOv & 0xffff) / bytesPerPixelOv);
+       }
+       if (bufferId == 0x12) {
+-        self[0x950] = AVar12;
++        self[0x950] = tilingMode;
+       }
+       else {
+-        pAVar15[0x590] = 0x0;
++        bufferRecordPtr[0x590] = 0x0;
+       }
+-      uVar3 = M<UInt16>(pAVar15 + 0x570);
+-      uVar4 = M<UInt16>(pAVar15 + 0x576);
+-      if ((UInt32)uVar3 * (UInt32)uVar4 != M<SInt32>(pAVar15 + 0x568)) {
++      pitch16 = M<UInt16>(bufferRecordPtr + 0x570);
++      height16 = M<UInt16>(bufferRecordPtr + 0x576);
++      if ((UInt32)pitch16 * (UInt32)height16 != M<SInt32>(bufferRecordPtr + 0x568)) {
+         VCALL(M<SInt32>(self), 0x5cc)(self,bufferId);
+-        M<UInt32>(pAVar15 + 0x568) = (UInt32)uVar3 * (UInt32)uVar4;
++        M<UInt32>(bufferRecordPtr + 0x568) = (UInt32)pitch16 * (UInt32)height16;
+       }
+     }
+-    bVar1 = bufferId == 0x16;
+-    pAVar15 = pAVar15 + 0x78;
++    isLast = bufferId == 0x16;
++    bufferRecordPtr = bufferRecordPtr + 0x78;
+     bufferId = bufferId + 1;
+-    if (bVar1) break;
+-    uVar13 = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
++    if (isLast) break;
++    reqBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
+   }
+   if (M<SInt32>(self + kATIR500Surface_overlayExists) != 0) {
+     if (self[0xbf0] != 0x0) goto LAB_0003ce90;
+-    AVar12 = this->alloc_overlay();
+-    self[0xbf0] = AVar12;
++    overlayAllocated = this->alloc_overlay();
++    self[0xbf0] = overlayAllocated;
+   }
+   if (self[0xbf0] == 0x0) {
+     return;
+   }
+ LAB_0003ce90:
+-  iVar23 = this->getFramebufferIndex();
+-  piVar11 = M<SInt32 *>(self + iVar23 * 8 + 0xd60);
+-  if (((*piVar11 != 0) && (M<SInt16>(piVar11 + 4) != 0)) && (M<SInt16>((SInt32)piVar11 + 0x12) != 0))
++  framebufferIndex = this->getFramebufferIndex();
++  framebufferRecord = M<SInt32 *>(self + framebufferIndex * 8 + 0xd60);
++  if (((*framebufferRecord != 0) && (M<SInt16>(framebufferRecord + 4) != 0)) && (M<SInt16>((SInt32)framebufferRecord + 0x12) != 0))
+   {
+     setup_overlay();
+   }

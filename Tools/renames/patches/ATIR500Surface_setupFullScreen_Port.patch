@@ -1,16 +1,87 @@
---- a/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-17 19:56:11.981374447 -0700
-+++ b/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-17 19:56:11.982633223 -0700
-@@ -75,32 +75,14 @@
-   if (iVar8 == 0) {
-     iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
-     registers = M<int>(iVar8 + 0x860);
+--- a/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-20 09:44:45.149474668 -0700
++++ b/Sources/ATIR500Surface_setupFullScreen_Port.cpp	2026-10-20 09:44:45.150777950 -0700
+@@ -31,76 +31,58 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   UInt8 fullScreenValue;
+-  UInt8 bVar2;
+-  UInt8 bVar3;
+-  UInt8 bVar4;
+   unsigned int maskedValue;
+   unsigned int newValue;
+-  unsigned int uVar7;
+-  int iVar8;
+-  int iVar9;
++  unsigned int otherPanel;
++  unsigned int modeValue;
++  int panelRecord;
++  int otherRecord;
++  int accel;
++  int vtable5dcResult;
+   int registers;
+   int id;
+   
+   fullScreenValue = self[0x158];
+-  iVar8 = M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator);
+-  M<unsigned int>(self + kATIR500Surface_panelSide) = (unsigned int)M<UInt8>(iVar8 + 0x164);
+-  M<UInt8>(iVar8 + 0x164) = fullScreenValue;
++  panelRecord = M<int>(self + kIOATIR500Surface_panel) * 0x78 + M<int>(self + kIOATIR500Surface_accelerator);
++  M<unsigned int>(self + kATIR500Surface_panelSide) = (unsigned int)M<UInt8>(panelRecord + 0x164);
++  M<UInt8>(panelRecord + 0x164) = fullScreenValue;
+   if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x10) != 0) {
+     self[M<int>(self + kIOATIR500Surface_panel) + 0xdb6] = 0x1;
+   }
+-  iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
+-  if (M<char>(iVar8 + 0x9b0) == '\0') goto LAB_0003d310;
++  accel = M<int>(self + kIOATIR500Surface_accelerator);
++  if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003d310;
+   id = M<int>(self + kIOATIR500Surface_panel);
+-  if (M<int>(id * 0x18 + iVar8 + 0xb10) == 0) {
+-    if ((M<int>(iVar8 + 0x894) == 0) ||
+-       (uVar7 = (unsigned int)(id == 0), M<int>(uVar7 * 0x18 + iVar8 + 0xb10) == 0))
++  if (M<int>(id * 0x18 + accel + 0xb10) == 0) {
++    if ((M<int>(accel + 0x894) == 0) ||
++       (otherPanel = (unsigned int)(id == 0), M<int>(otherPanel * 0x18 + accel + 0xb10) == 0))
+     goto LAB_0003d310;
+   }
+   else {
+-    M<UInt8>(id * 0x78 + iVar8 + 0x9f4) = fullScreenValue;
+-    iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
+-    if (M<int>(iVar8 + 0x894) == 0) goto LAB_0003d310;
+-    uVar7 = (unsigned int)(M<int>(self + kIOATIR500Surface_panel) == 0);
+-    if (M<int>(uVar7 * 0x18 + iVar8 + 0xb10) == 0) {
+-      M<UInt8>(uVar7 * 0x78 + iVar8 + 0x164) = fullScreenValue;
++    M<UInt8>(id * 0x78 + accel + 0x9f4) = fullScreenValue;
++    accel = M<int>(self + kIOATIR500Surface_accelerator);
++    if (M<int>(accel + 0x894) == 0) goto LAB_0003d310;
++    otherPanel = (unsigned int)(M<int>(self + kIOATIR500Surface_panel) == 0);
++    if (M<int>(otherPanel * 0x18 + accel + 0xb10) == 0) {
++      M<UInt8>(otherPanel * 0x78 + accel + 0x164) = fullScreenValue;
+       goto LAB_0003d310;
+     }
+   }
+-  iVar8 = uVar7 * 0x78 + iVar8;
+-  M<UInt8>(iVar8 + 0x9f4) = fullScreenValue;
+-  M<UInt8>(iVar8 + 0x164) = fullScreenValue;
++  otherRecord = otherPanel * 0x78 + accel;
++  M<UInt8>(otherRecord + 0x9f4) = fullScreenValue;
++  M<UInt8>(otherRecord + 0x164) = fullScreenValue;
+ LAB_0003d310:
+-  iVar8 = VCALL(M<int>(self), 0x5dc)(self);
+-  if (iVar8 == 0) {
+-    iVar8 = M<int>(self + kIOATIR500Surface_accelerator);
+-    registers = M<int>(iVar8 + 0x860);
 -    bVar2 = M<UInt8>(registers + 0x6107);
 -    bVar3 = M<UInt8>(registers + 0x6105);
 -    bVar4 = M<UInt8>(registers + 0x6104);
++  vtable5dcResult = VCALL(M<int>(self), 0x5dc)(self);
++  if (vtable5dcResult == 0) {
++    accel = M<int>(self + kIOATIR500Surface_accelerator);
++    registers = M<int>(accel + 0x860);
 +    maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
      id = M<int>(self + kIOATIR500Surface_panel);
 -    maskedValue = (M<UInt8>(registers + 0x6106) & 0xffcf) << 0x10;
-     uVar7 = (unsigned int)M<UInt8>(id * 0x78 + iVar8 + 0x164);
+-    uVar7 = (unsigned int)M<UInt8>(id * 0x78 + iVar8 + 0x164);
 -    newValue = (uVar7 & 1) << 0x15;
 -    uVar7 = (unsigned int)(1 < uVar7) * 0x100000;
 -    if (id == 0) {
@@ -21,10 +92,11 @@
 -    }
 -    M<unsigned int>(registers + iVar9) =
 -         (unsigned int)bVar4 << 0x18 | (unsigned int)bVar3 << 0x10 | (uVar7 | maskedValue | newValue) >> 8 | (unsigned int)bVar2;
-+    newValue = maskedValue | (uVar7 & 1) << 0x15 | (unsigned int)(1 < uVar7) << 0x14;
++    modeValue = (unsigned int)M<UInt8>(id * 0x78 + accel + 0x164);
++    newValue = maskedValue | (modeValue & 1) << 0x15 | (unsigned int)(1 < modeValue) << 0x14;
 +    storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6104 : 0x6904)), newValue);
      enforceInOrderExecutionIO();
-     if (M<int>(iVar8 + 0x894) != 0) {
+-    if (M<int>(iVar8 + 0x894) != 0) {
 -      if (id == 0) {
 -        iVar8 = 0x6904;
 -      }
@@ -33,6 +105,7 @@
 -      }
 -      M<unsigned int>(registers + iVar8) =
 -           (unsigned int)bVar4 << 0x18 | (unsigned int)bVar3 << 0x10 | (uVar7 | maskedValue | newValue) >> 8 | (unsigned int)bVar2;
++    if (M<int>(accel + 0x894) != 0) {
 +      storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6904 : 0x6104)), newValue);
        enforceInOrderExecutionIO();
      }

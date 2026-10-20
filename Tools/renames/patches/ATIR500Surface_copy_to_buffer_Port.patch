@@ -1,0 +1,208 @@
+--- a/Sources/ATIR500Surface_copy_to_buffer_Port.cpp	2026-10-20 09:38:04.550792937 -0700
++++ b/Sources/ATIR500Surface_copy_to_buffer_Port.cpp	2026-10-20 09:38:04.552183993 -0700
+@@ -34,27 +34,36 @@
+     UInt8 *transferBytes = reinterpret_cast<UInt8 *>(transfer);
+ 
+   UInt16 bufferPitchPixels;
+-  bool bVar2;
+-  UInt32 uVar3;
+-  unsigned int uVar4;
+-  unsigned int uVar5;
+-  int iVar6;
++  bool flagsClear;
++  bool kernelMapped;
++  UInt32 dmaFlags;
++  unsigned int rowsFit;
++  unsigned int bytesPerPixel;
++  unsigned int backingBytes;
++  unsigned int row;
++  int levelOffset;
++  int dmaResult;
++  int mapAddress;
++  int counterDelta;
++  int surfaceBase;
++  int blocksLeft;
+   int *transferMap;
+   UInt32 *srcBlock;
+   UInt32 *dstBlock;
+-  int *piVar10;
+-  int iVar11;
++  int *accelPtr;
++  int *backingMap;
++  int counterBefore;
+   UInt32 *surfaceRow;
+   UInt8 *backing;
+   UInt32 *transferRow;
+-  UInt8 bVar15;
+-  UInt8 bVar16;
++  UInt8 noBackingMap;
++  UInt8 kernelPathBits;
+   
+-  uVar3 = flags;
++  dmaFlags = flags;
+   backing = M<UInt8 *>(bufferBytes + 0x24);
+-  bVar2 = (flags & 1) == 0;
+-  bVar15 = bVar2 << 1;
+-  if (bVar2) {
++  flagsClear = (flags & 1) == 0;
++  noBackingMap = flagsClear << 1;
++  if (flagsClear) {
+     if ((backing == (UInt8 *)0x0) ||
+        (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto LAB_00043444;
+ LAB_00043494:
+@@ -63,26 +72,26 @@
+   else {
+     pitch = (UInt32)M<UInt16>(backing + 0x52);
+     offset = (UInt32)M<UInt16>(backing + 0x50);
+-    uVar5 = VCALL(*M<int *>(backing + 8), 0x128)(M<int *>(backing + 8));
+-    uVar4 = 0;
++    backingBytes = VCALL(*M<int *>(backing + 8), 0x128)(M<int *>(backing + 8));
++    rowsFit = 0;
+     if (pitch != 0) {
+-      uVar4 = uVar5 / pitch;
++      rowsFit = backingBytes / pitch;
+     }
+-    if ((int)uVar4 < h) {
+-      h = uVar4;
++    if ((int)rowsFit < h) {
++      h = rowsFit;
+     }
+     transferBytes = backing;
+     if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) {
+-      iVar6 = VCALL(M<int>(self), 0x5f0)(self,bufferBytes,index,level,0,0,&pitch);
+-      offset = offset + iVar6;
++      levelOffset = VCALL(M<int>(self), 0x5f0)(self,bufferBytes,index,level,0,0,&pitch);
++      offset = offset + levelOffset;
+     }
+ LAB_00043444:
+-    iVar6 = this->copy_buffer_using_DMA(x,y,w,h,index,level,(ATIR500SurfaceBuffer *)(bufferBytes),(VendorTransferBuffer *)(transferBytes),offset
+-                       ,pitch,(IODirection)2,uVar3);
+-    if (iVar6 != 0) {
++    dmaResult = this->copy_buffer_using_DMA(x,y,w,h,index,level,(ATIR500SurfaceBuffer *)(bufferBytes),(VendorTransferBuffer *)(transferBytes),offset
++                       ,pitch,(IODirection)2,dmaFlags);
++    if (dmaResult != 0) {
+       return;
+     }
+-    if ((bool)(bVar15 >> 1 & 1)) goto LAB_00043494;
++    if ((bool)(noBackingMap >> 1 & 1)) goto LAB_00043494;
+     transferMap = M<int *>(backing + 8);
+   }
+   transferMap = (int *)VCALL(*transferMap, 0x150)
+@@ -90,37 +99,37 @@
+   if (transferMap == (int *)0x0) {
+     return;
+   }
+-  iVar6 = VCALL(*transferMap, 0xd0)(transferMap);
+-  piVar10 = M<int *>(self + kIOATIR500Surface_accelerator);
+-  transferRow = (UInt32 *)(iVar6 + offset);
+-  iVar11 = piVar10[0x1ec];
+-  iVar6 = VCALL(*piVar10, 0x558)(piVar10,stamp);
+-  piVar10[0x1ec] = iVar11 + iVar6;
+-  if ((((bool)(bVar15 >> 1 & 1)) && (backing != (UInt8 *)0x0)) &&
++  mapAddress = VCALL(*transferMap, 0xd0)(transferMap);
++  accelPtr = M<int *>(self + kIOATIR500Surface_accelerator);
++  transferRow = (UInt32 *)(mapAddress + offset);
++  counterBefore = accelPtr[0x1ec];
++  counterDelta = VCALL(*accelPtr, 0x558)(accelPtr,stamp);
++  accelPtr[0x1ec] = counterBefore + counterDelta;
++  if ((((bool)(noBackingMap >> 1 & 1)) && (backing != (UInt8 *)0x0)) &&
+      (M<int>(backing + 0x54) == M<int>(self + kIOATIR500Surface_stamp))) {
+-    piVar10 = (int *)VCALL(*M<int *>(backing + 8), 0x150)
++    backingMap = (int *)VCALL(*M<int *>(backing + 8), 0x150)
+                                (M<int *>(backing + 8),M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1
+                                );
+-    bVar15 = (piVar10 == (int *)0x0) << 1;
+-    if (piVar10 == (int *)0x0) goto LAB_000436cc;
+-    iVar6 = VCALL(*piVar10, 0xd0)(piVar10);
+-    bVar2 = false;
+-    iVar6 = iVar6 + (unsigned int)M<UInt16>(backing + 0x50);
++    noBackingMap = (backingMap == (int *)0x0) << 1;
++    if (backingMap == (int *)0x0) goto LAB_000436cc;
++    surfaceBase = VCALL(*backingMap, 0xd0)(backingMap);
++    kernelMapped = false;
++    surfaceBase = surfaceBase + (unsigned int)M<UInt16>(backing + 0x50);
+   }
+   else {
+-    piVar10 = (int *)0x0;
+-    bVar2 = true;
+-    bVar15 = 2;
+-    iVar6 = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
++    backingMap = (int *)0x0;
++    kernelMapped = true;
++    noBackingMap = 2;
++    surfaceBase = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
+   }
+   bufferPitchPixels = M<UInt16>(bufferBytes + 0x14);
+-  uVar4 = (unsigned int)M<UInt16>(bufferBytes + 0x16);
+-  surfaceRow = (UInt32 *)(iVar6 + uVar4 * ((unsigned int)bufferPitchPixels * y + x));
+-  if (uVar4 == 2) {
++  bytesPerPixel = (unsigned int)M<UInt16>(bufferBytes + 0x16);
++  surfaceRow = (UInt32 *)(surfaceBase + bytesPerPixel * ((unsigned int)bufferPitchPixels * y + x));
++  if (bytesPerPixel == 2) {
+     w = w + 7 >> 3;
+   }
+-  else if (uVar4 < 3) {
+-    if (uVar4 == 1) {
++  else if (bytesPerPixel < 3) {
++    if (bytesPerPixel == 1) {
+       w = w + 0xf >> 4;
+     }
+     else {
+@@ -128,43 +137,43 @@
+       w = w + 3 >> 2;
+     }
+   }
+-  else if (uVar4 == 8) {
++  else if (bytesPerPixel == 8) {
+     w = w + 1 >> 1;
+   }
+-  else if (uVar4 != 0x10) goto LAB_000435cc;
+-  bVar16 = !bVar2 << 1;
+-  if (bVar2) {
++  else if (bytesPerPixel != 0x10) goto LAB_000435cc;
++  kernelPathBits = !kernelMapped << 1;
++  if (kernelMapped) {
+     VCALL(M<int>(self), 0x5fc)(self,bufferBytes);
+   }
+   if (0 < h) {
+-    uVar5 = 0;
++    row = 0;
+     do {
+       srcBlock = transferRow;
+       dstBlock = surfaceRow;
+-      iVar6 = w;
++      blocksLeft = w;
+       if (0 < w) {
+         do {
+           *dstBlock = *srcBlock;
+           dstBlock[1] = srcBlock[1];
+           dstBlock[2] = srcBlock[2];
+           dstBlock[3] = srcBlock[3];
+-          iVar6 = iVar6 + -1;
++          blocksLeft = blocksLeft + -1;
+           srcBlock = srcBlock + 4;
+           dstBlock = dstBlock + 4;
+-        } while (iVar6 != 0);
++        } while (blocksLeft != 0);
+       }
+-      uVar5 = uVar5 + 1;
+-      surfaceRow = (UInt32 *)((int)surfaceRow + bufferPitchPixels * uVar4);
++      row = row + 1;
++      surfaceRow = (UInt32 *)((int)surfaceRow + bufferPitchPixels * bytesPerPixel);
+       transferRow = (UInt32 *)((int)transferRow + pitch);
+-    } while (uVar5 != h);
++    } while (row != h);
+   }
+-  if (!(bool)(bVar16 >> 1 & 1)) {
++  if (!(bool)(kernelPathBits >> 1 & 1)) {
+     VCALL(M<int>(self), 0x600)(self,bufferBytes);
+   }
+ LAB_000436cc:
+   VCALL(*transferMap, 0x18)(transferMap);
+-  if (!(bool)(bVar15 >> 1 & 1)) {
+-    VCALL(*piVar10, 0x18)(piVar10);
++  if (!(bool)(noBackingMap >> 1 & 1)) {
++    VCALL(*backingMap, 0x18)(backingMap);
+   }
+   return;
+ }

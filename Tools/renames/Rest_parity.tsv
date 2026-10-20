@@ -1,11 +1,6 @@
 #!use-decl: end
 # Rest_parity: per-use renames that were rejected by the byte-identical gate (gcc gives the split variable another register) and the goto-heavy functions, accepted under the PARITY gate (Tools/renames/parity_check.py)
 # kind	target	old	new	tier	evidence	from	to
-use	ATIR500Surface::submit_flip_buffer@0x3e5c0	uVar13	wordIndex	CONFIRMED	packet cursor in dwords: 6 when there is no context	^\s*uVar13 = 6;	^\s*sVar7 = 0;
-use	ATIR500Surface::submit_flip_buffer@0x3e5c0	uVar13	wordIndex	CONFIRMED	packet cursor in dwords, starts at 0xc and indexes packet[] to the end of the function	^\s*uVar13 = 0xc;
-use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar11	otherPanelRecord	INFERRED	byte offset into the accelerator's 0x18-byte per-panel records at +0xb00: the record of the panel that is not being flipped (0xb18 when panel == 0)	iVar11 = 0xb18;	^\s*goto LAB_0003ed40;
-use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar17	accel	CONFIRMED	this+0xd50, the accelerator	^\s*iVar17 = M<int>\(self \+ 0xd50\);	iVar17 = uVar13 \+ 1;
-use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar17	accel	CONFIRMED	this+0xd50, the accelerator (the panel record array at +0xb10 and the flag at +0x894 are read through it)	else if \(M<int>\(\(int\)panel \* 0x18 \+ iVar17 \+ 0xb10\) == 0\)	^LAB_0003eda0:
 use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar5	flushOffset	CONFIRMED	byte offset of the cache line being stored in the flush loop	^\s*iVar5 = 0;	^\s*ppcSync\(\);#2
 use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar5	flushOffset	CONFIRMED	byte offset of the cache line being stored in the ring flush loop	^\s*iVar5 = 0;#2	^\s*ppcSync\(\);#2
 use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar1	gartBase	INFERRED	self+0x8a4: added to the buffer's GART offset to form the address of the indirect-buffer packet	iVar1 = M<SInt32>\(self \+ 0x8a4\);	iVar1 = M<SInt32>\(self \+ 0x860\);

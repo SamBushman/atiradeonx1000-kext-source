@@ -1,74 +1,369 @@
---- a/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-16 20:25:14.604869222 -0700
-+++ b/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-16 20:25:14.605901068 -0700
-@@ -52,9 +52,7 @@
-   int iVar19;
-   int local_e8 [6];
-   int local_d0 [6];
+--- a/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-20 09:40:15.409677035 -0700
++++ b/Sources/ATIR500Surface_get_surf_desc_regs_Port.cpp	2026-10-20 09:40:15.411034434 -0700
+@@ -31,86 +31,89 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+     UInt8 *infoBytes = reinterpret_cast<UInt8 *>(info);
+ 
+-  float fVar1;
+-  float fVar2;
+-  float fVar3;
+-  float fVar4;
+-  UInt32 uVar5;
+-  unsigned int uVar6;
+-  int iVar7;
+-  unsigned int uVar8;
+-  int iVar9;
+-  UInt32 uVar10;
+-  UInt8 *pOVar11;
+-  unsigned int uVar12;
+-  int iVar13;
+-  int iVar14;
+-  unsigned int uVar15;
+-  int iVar16;
+-  int iVar17;
+-  unsigned int uVar18;
+-  int iVar19;
+-  int local_e8 [6];
+-  int local_d0 [6];
 -  unsigned int local_b8 [4];
 -  int local_a8;
 -  int local_a4;
-+  unsigned int local_b8 [6];
-   UInt32 local_98;
-   unsigned int uStack_94;
-   UInt32 local_90;
-@@ -101,8 +99,8 @@
-       local_b8[1] = ((int)uVar8 >> 4) + (unsigned int)((int)uVar8 < 0 && (uVar8 & 0xf) != 0);
-       local_b8[2] = ((int)uVar12 >> 4) + (unsigned int)((int)uVar12 < 0 && (uVar12 & 0xf) != 0);
-       local_b8[3] = local_b8[0];
+-  UInt32 local_98;
+-  unsigned int uStack_94;
+-  UInt32 local_90;
+-  UInt32 uStack_8c;
+-  SInt64 local_88;
+-  SInt64 local_80;
+-  UInt32 local_78;
+-  unsigned int uStack_74;
+-  SInt64 local_70;
+-  SInt64 local_68;
+-  UInt32 local_60;
+-  unsigned int uStack_5c;
+-  UInt32 local_58;
+-  UInt32 uStack_54;
+-  SInt64 local_50;
+-  SInt64 local_48;
+-  UInt32 local_40;
+-  unsigned int uStack_3c;
+-  SInt64 local_38;
+-  SInt64 local_30;
++  float heightScale;
++  float widthScaled;
++  float widthScaledAlt;
++  float rowOffsetF;
++  UInt32 gpuBase;
++  unsigned int sizeD4;
++  unsigned int srcWidth;
++  unsigned int halfHeightBits;
++  int rowPitch;
++  unsigned int sizeD8;
++  unsigned int heightBits;
++  int planeBase;
++  UInt32 infoField40;
++  UInt8 *infoCursor;
++  UInt8 *descWordSrc;
++  unsigned int sizeDC;
++  unsigned int planeIndex;
++  int colOffset;
++  int byteOffset;
++  unsigned int srcHeight;
++  int rowByteOffset;
++  int planeSelectValue;
++  int planesLeft;
++  unsigned int altPlaneMask;
++  int planeSelect[6];
++  int highField[6];
++  unsigned int baseAddr16[6];
++  UInt32 doubleHi0;
++  unsigned int doubleLo0;
++  UInt32 doubleHi1;
++  UInt32 doubleLo1;
++  SInt64 fctiwTmp1;
++  SInt64 fctiwTmp2;
++  UInt32 doubleHi2;
++  unsigned int doubleLo2;
++  SInt64 fctiwTmp3;
++  SInt64 fctiwTmp4;
++  UInt32 doubleHi3;
++  unsigned int doubleLo3;
++  UInt32 doubleHi4;
++  UInt32 doubleLo4;
++  SInt64 fctiwTmp5;
++  SInt64 fctiwTmp6;
++  UInt32 doubleHi5;
++  unsigned int doubleLo5;
++  SInt64 fctiwTmp7;
++  SInt64 fctiwTmp8;
+   
+   if (M<int>(infoBytes + 0x3c) - 9U < 2) {
+-    uVar10 = M<UInt32>(infoBytes + 0x40);
+-    iVar17 = M<int>(infoBytes + 0xe0);
+-    iVar14 = 0;
+-    iVar19 = 6;
+-    pOVar11 = infoBytes;
++    infoField40 = M<UInt32>(infoBytes + 0x40);
++    planeSelectValue = M<int>(infoBytes + 0xe0);
++    byteOffset = 0;
++    planesLeft = 6;
++    infoCursor = infoBytes;
+     do {
+-      uVar5 = M<UInt32>(self + M<int>(self + kATIR500Surface_currentBufferIndex) * 0x78 + 0x560);
+-      M<UInt32>(pOVar11 + 0x70) = uVar10;
+-      M<UInt32>(pOVar11 + 0x88) = 0;
+-      M<UInt32>(pOVar11 + 0x58) = uVar5;
+-      M<int>((int)local_e8 + iVar14) = iVar17;
+-      pOVar11 = pOVar11 + 4;
+-      M<UInt32>((int)local_d0 + iVar14) = 0;
+-      iVar14 = iVar14 + 4;
+-      iVar19 = iVar19 + -1;
+-    } while (iVar19 != 0);
+-    if (iVar17 == 0) {
+-      uVar6 = M<unsigned int>(infoBytes + 0xd4);
+-      uVar8 = M<unsigned int>(infoBytes + 0xd8);
+-      uVar12 = M<unsigned int>(infoBytes + 0xdc);
+-      local_b8[0] = ((int)uVar6 >> 4) + (unsigned int)((int)uVar6 < 0 && (uVar6 & 0xf) != 0);
+-      local_b8[1] = ((int)uVar8 >> 4) + (unsigned int)((int)uVar8 < 0 && (uVar8 & 0xf) != 0);
+-      local_b8[2] = ((int)uVar12 >> 4) + (unsigned int)((int)uVar12 < 0 && (uVar12 & 0xf) != 0);
+-      local_b8[3] = local_b8[0];
 -      local_a8 = local_b8[1];
 -      local_a4 = local_b8[2];
-+      local_b8[4] = local_b8[1];
-+      local_b8[5] = local_b8[2];
++      gpuBase = M<UInt32>(self + M<int>(self + kATIR500Surface_currentBufferIndex) * 0x78 + 0x560);
++      M<UInt32>(infoCursor + 0x70) = infoField40;
++      M<UInt32>(infoCursor + 0x88) = 0;
++      M<UInt32>(infoCursor + 0x58) = gpuBase;
++      M<int>((int)planeSelect + byteOffset) = planeSelectValue;
++      infoCursor = infoCursor + 4;
++      M<UInt32>((int)highField + byteOffset) = 0;
++      byteOffset = byteOffset + 4;
++      planesLeft = planesLeft + -1;
++    } while (planesLeft != 0);
++    if (planeSelectValue == 0) {
++      sizeD4 = M<unsigned int>(infoBytes + 0xd4);
++      sizeD8 = M<unsigned int>(infoBytes + 0xd8);
++      sizeDC = M<unsigned int>(infoBytes + 0xdc);
++      baseAddr16[0] = ((int)sizeD4 >> 4) + (unsigned int)((int)sizeD4 < 0 && (sizeD4 & 0xf) != 0);
++      baseAddr16[1] = ((int)sizeD8 >> 4) + (unsigned int)((int)sizeD8 < 0 && (sizeD8 & 0xf) != 0);
++      baseAddr16[2] = ((int)sizeDC >> 4) + (unsigned int)((int)sizeDC < 0 && (sizeDC & 0xf) != 0);
++      baseAddr16[3] = baseAddr16[0];
++      baseAddr16[4] = baseAddr16[1];
++      baseAddr16[5] = baseAddr16[2];
      }
      else {
-       uVar6 = M<unsigned int>(infoBytes + 0xd4);
-@@ -158,18 +156,18 @@
-         fVar4 = (float)((double)CONCAT44d(0x43300000,uVar8) - 4503601774854144.0) * fVar1 *
+-      uVar6 = M<unsigned int>(infoBytes + 0xd4);
+-      uVar8 = M<unsigned int>(infoBytes + 0xd8);
+-      uVar12 = M<unsigned int>(infoBytes + 0xdc);
+-      local_b8[0] = ((int)uVar6 >> 4) + (unsigned int)((int)uVar6 < 0 && (uVar6 & 0xf) != 0);
+-      local_b8[1] = ((int)uVar8 >> 4) + (unsigned int)((int)uVar8 < 0 && (uVar8 & 0xf) != 0);
+-      local_b8[2] = ((int)uVar12 >> 4) + (unsigned int)((int)uVar12 < 0 && (uVar12 & 0xf) != 0);
++      sizeD4 = M<unsigned int>(infoBytes + 0xd4);
++      sizeD8 = M<unsigned int>(infoBytes + 0xd8);
++      sizeDC = M<unsigned int>(infoBytes + 0xdc);
++      baseAddr16[0] = ((int)sizeD4 >> 4) + (unsigned int)((int)sizeD4 < 0 && (sizeD4 & 0xf) != 0);
++      baseAddr16[1] = ((int)sizeD8 >> 4) + (unsigned int)((int)sizeD8 < 0 && (sizeD8 & 0xf) != 0);
++      baseAddr16[2] = ((int)sizeDC >> 4) + (unsigned int)((int)sizeDC < 0 && (sizeDC & 0xf) != 0);
+     }
+     M<UInt32>(infoBytes + 0x90) = 1;
+     M<UInt32>(infoBytes + 0x98) = 1;
+@@ -118,117 +121,117 @@
+     M<UInt32>(infoBytes + 0x9c) = 1;
+   }
+   else {
+-    uVar6 = M<unsigned int>(infoBytes + 0x10);
+-    uVar15 = M<unsigned int>(infoBytes + 0x14);
+-    uVar12 = 0;
+-    local_40 = 0x43300000;
+-    local_60 = 0x43300000;
+-    iVar14 = 0;
+-    local_78 = 0x43300000;
+-    local_98 = 0x43300000;
+-    fVar1 = M<float>(infoBytes + 0x30);
+-    iVar17 = M<int>(infoBytes + 0xe0);
+-    uVar10 = M<UInt32>(infoBytes + 0x40);
+-    uVar18 = M<unsigned int>(infoBytes + 0x54);
+-    uStack_3c = (int)uVar6 >> 0x1f & -uVar6 ^ 0x80000000;
+-    uVar8 = (int)uVar15 >> 0x1f & -uVar15 ^ 0x80000000;
+-    uStack_5c = uVar8;
+-    iVar19 = 6;
+-    uStack_74 = (int)(uVar6 / M<unsigned int>(infoBytes + 0x50)) >> 0x1f &
+-                -(uVar6 / M<unsigned int>(infoBytes + 0x50)) ^ 0x80000000;
+-    fVar2 = (float)((double)CONCAT44d(0x43300000,uStack_3c) - 4503601774854144.0) *
++    srcWidth = M<unsigned int>(infoBytes + 0x10);
++    srcHeight = M<unsigned int>(infoBytes + 0x14);
++    planeIndex = 0;
++    doubleHi5 = 0x43300000;
++    doubleHi3 = 0x43300000;
++    byteOffset = 0;
++    doubleHi2 = 0x43300000;
++    doubleHi0 = 0x43300000;
++    heightScale = M<float>(infoBytes + 0x30);
++    planeSelectValue = M<int>(infoBytes + 0xe0);
++    infoField40 = M<UInt32>(infoBytes + 0x40);
++    altPlaneMask = M<unsigned int>(infoBytes + 0x54);
++    doubleLo5 = (int)srcWidth >> 0x1f & -srcWidth ^ 0x80000000;
++    heightBits = (int)srcHeight >> 0x1f & -srcHeight ^ 0x80000000;
++    doubleLo3 = heightBits;
++    planesLeft = 6;
++    doubleLo2 = (int)(srcWidth / M<unsigned int>(infoBytes + 0x50)) >> 0x1f &
++                -(srcWidth / M<unsigned int>(infoBytes + 0x50)) ^ 0x80000000;
++    widthScaled = (float)((double)CONCAT44d(0x43300000,doubleLo5) - 4503601774854144.0) *
+             M<float>(infoBytes + 0x34);
+-    uVar6 = (int)(uVar15 / M<unsigned int>(infoBytes + 0x4c)) >> 0x1f &
+-            -(uVar15 / M<unsigned int>(infoBytes + 0x4c)) ^ 0x80000000;
+-    uStack_94 = uVar6;
+-    fVar3 = (float)((double)CONCAT44d(0x43300000,uStack_74) - 4503601774854144.0) *
++    halfHeightBits = (int)(srcHeight / M<unsigned int>(infoBytes + 0x4c)) >> 0x1f &
++            -(srcHeight / M<unsigned int>(infoBytes + 0x4c)) ^ 0x80000000;
++    doubleLo0 = halfHeightBits;
++    widthScaledAlt = (float)((double)CONCAT44d(0x43300000,doubleLo2) - 4503601774854144.0) *
+             M<float>(infoBytes + 0x34);
+-    pOVar11 = infoBytes;
++    infoCursor = infoBytes;
+     do {
+-      M<int>((int)local_e8 + iVar14) = iVar17;
+-      uVar5 = M<UInt32>(self + kIOATIR500Surface_buffer1GpuBase);
+-      M<UInt32>(pOVar11 + 0x70) = uVar10;
+-      M<UInt32>(pOVar11 + 0x88) = 0;
+-      M<UInt32>(pOVar11 + 0xa0) = 0;
+-      M<UInt32>(pOVar11 + 0xb8) = 0;
+-      M<UInt32>(pOVar11 + 0x58) = uVar5;
+-      if ((uVar18 >> (uVar12 & 0x3f) & 1) == 0) {
+-        local_58 = 0x43300000;
+-        uStack_54 = M<UInt32>(infoBytes + 0x44);
+-        fVar4 = (float)((double)CONCAT44d(0x43300000,uVar8) - 4503601774854144.0) * fVar1 *
++      M<int>((int)planeSelect + byteOffset) = planeSelectValue;
++      gpuBase = M<UInt32>(self + kIOATIR500Surface_buffer1GpuBase);
++      M<UInt32>(infoCursor + 0x70) = infoField40;
++      M<UInt32>(infoCursor + 0x88) = 0;
++      M<UInt32>(infoCursor + 0xa0) = 0;
++      M<UInt32>(infoCursor + 0xb8) = 0;
++      M<UInt32>(infoCursor + 0x58) = gpuBase;
++      if ((altPlaneMask >> (planeIndex & 0x3f) & 1) == 0) {
++        doubleHi4 = 0x43300000;
++        doubleLo4 = M<UInt32>(infoBytes + 0x44);
++        rowOffsetF = (float)((double)CONCAT44d(0x43300000,heightBits) - 4503601774854144.0) * heightScale *
                  (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x44)) -
                         4503599627370496.0);
 -        if (2.1474836e+09 <= fVar4) {
 -          local_48 = (SInt64)(int)(fVar4 - 2.1474836e+09);
 -          iVar16 = (int)(fVar4 - 2.1474836e+09) + -0x80000000;
-+        if (2147483648.0 <= fVar4) {
-+          local_48 = (SInt64)(int)(fVar4 - 2147483648.0);
-+          iVar16 = (int)(fVar4 - 2147483648.0) + -0x80000000;
++        if (2147483648.0 <= rowOffsetF) {
++          fctiwTmp6 = (SInt64)(int)(rowOffsetF - 2147483648.0);
++          rowByteOffset = (int)(rowOffsetF - 2147483648.0) + -0x80000000;
          }
          else {
-           iVar16 = (int)fVar4;
-           local_50 = (SInt64)iVar16;
+-          iVar16 = (int)fVar4;
+-          local_50 = (SInt64)iVar16;
++          rowByteOffset = (int)rowOffsetF;
++          fctiwTmp5 = (SInt64)rowByteOffset;
          }
-         iVar16 = iVar16 + M<int>(pOVar11 + 0xa0);
+-        iVar16 = iVar16 + M<int>(pOVar11 + 0xa0);
 -        if (2.1474836e+09 <= fVar2) {
 -          local_30 = (SInt64)(int)(fVar2 - 2.1474836e+09);
 -          iVar13 = (int)(fVar2 - 2.1474836e+09) + -0x80000000;
-+        if (2147483648.0 <= fVar2) {
-+          local_30 = (SInt64)(int)(fVar2 - 2147483648.0);
-+          iVar13 = (int)(fVar2 - 2147483648.0) + -0x80000000;
++        rowByteOffset = rowByteOffset + M<int>(infoCursor + 0xa0);
++        if (2147483648.0 <= widthScaled) {
++          fctiwTmp8 = (SInt64)(int)(widthScaled - 2147483648.0);
++          colOffset = (int)(widthScaled - 2147483648.0) + -0x80000000;
          }
          else {
-           iVar13 = (int)fVar2;
-@@ -182,18 +180,18 @@
-         fVar4 = (float)((double)CONCAT44d(0x43300000,uVar6) - 4503601774854144.0) * fVar1 *
+-          iVar13 = (int)fVar2;
+-          local_38 = (SInt64)iVar13;
++          colOffset = (int)widthScaled;
++          fctiwTmp7 = (SInt64)colOffset;
+         }
+       }
+       else {
+-        local_90 = 0x43300000;
+-        uStack_8c = M<UInt32>(infoBytes + 0x48);
+-        fVar4 = (float)((double)CONCAT44d(0x43300000,uVar6) - 4503601774854144.0) * fVar1 *
++        doubleHi1 = 0x43300000;
++        doubleLo1 = M<UInt32>(infoBytes + 0x48);
++        rowOffsetF = (float)((double)CONCAT44d(0x43300000,halfHeightBits) - 4503601774854144.0) * heightScale *
                  (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x48)) -
                         4503599627370496.0);
 -        if (2.1474836e+09 <= fVar4) {
 -          local_80 = (SInt64)(int)(fVar4 - 2.1474836e+09);
 -          iVar16 = (int)(fVar4 - 2.1474836e+09) + -0x80000000;
-+        if (2147483648.0 <= fVar4) {
-+          local_80 = (SInt64)(int)(fVar4 - 2147483648.0);
-+          iVar16 = (int)(fVar4 - 2147483648.0) + -0x80000000;
++        if (2147483648.0 <= rowOffsetF) {
++          fctiwTmp2 = (SInt64)(int)(rowOffsetF - 2147483648.0);
++          rowByteOffset = (int)(rowOffsetF - 2147483648.0) + -0x80000000;
          }
          else {
-           iVar16 = (int)fVar4;
-           local_88 = (SInt64)iVar16;
+-          iVar16 = (int)fVar4;
+-          local_88 = (SInt64)iVar16;
++          rowByteOffset = (int)rowOffsetF;
++          fctiwTmp1 = (SInt64)rowByteOffset;
          }
-         iVar16 = iVar16 + M<int>(pOVar11 + 0xa0);
+-        iVar16 = iVar16 + M<int>(pOVar11 + 0xa0);
 -        if (2.1474836e+09 <= fVar3) {
 -          local_68 = (SInt64)(int)(fVar3 - 2.1474836e+09);
 -          iVar13 = (int)(fVar3 - 2.1474836e+09) + -0x80000000;
-+        if (2147483648.0 <= fVar3) {
-+          local_68 = (SInt64)(int)(fVar3 - 2147483648.0);
-+          iVar13 = (int)(fVar3 - 2147483648.0) + -0x80000000;
++        rowByteOffset = rowByteOffset + M<int>(infoCursor + 0xa0);
++        if (2147483648.0 <= widthScaledAlt) {
++          fctiwTmp4 = (SInt64)(int)(widthScaledAlt - 2147483648.0);
++          colOffset = (int)(widthScaledAlt - 2147483648.0) + -0x80000000;
          }
          else {
-           iVar13 = (int)fVar3;
+-          iVar13 = (int)fVar3;
+-          local_70 = (SInt64)iVar13;
++          colOffset = (int)widthScaledAlt;
++          fctiwTmp3 = (SInt64)colOffset;
+         }
+       }
+-      if (iVar17 == 0) {
+-        iVar7 = M<int>(pOVar11 + 0x70);
+-        iVar9 = M<int>(pOVar11 + 0x58);
+-        M<UInt32>((int)local_d0 + iVar14) = 0;
+-        iVar9 = iVar13 * iVar7 + iVar9;
++      if (planeSelectValue == 0) {
++        rowPitch = M<int>(infoCursor + 0x70);
++        planeBase = M<int>(infoCursor + 0x58);
++        M<UInt32>((int)highField + byteOffset) = 0;
++        planeBase = colOffset * rowPitch + planeBase;
+       }
+       else {
+-        iVar7 = M<int>(pOVar11 + 0x70);
+-        iVar9 = M<int>(pOVar11 + 0x58);
+-        M<UInt32>((int)local_d0 + iVar14) = 0;
+-        iVar9 = iVar13 * iVar7 + iVar9;
++        rowPitch = M<int>(infoCursor + 0x70);
++        planeBase = M<int>(infoCursor + 0x58);
++        M<UInt32>((int)highField + byteOffset) = 0;
++        planeBase = colOffset * rowPitch + planeBase;
+       }
+-      uVar12 = uVar12 + 1;
+-      pOVar11 = pOVar11 + 4;
+-      M<unsigned int>((int)local_b8 + iVar14) = (unsigned int)(iVar16 + iVar9) >> 4;
+-      iVar14 = iVar14 + 4;
+-      iVar19 = iVar19 + -1;
+-    } while (iVar19 != 0);
++      planeIndex = planeIndex + 1;
++      infoCursor = infoCursor + 4;
++      M<unsigned int>((int)baseAddr16 + byteOffset) = (unsigned int)(rowByteOffset + planeBase) >> 4;
++      byteOffset = byteOffset + 4;
++      planesLeft = planesLeft + -1;
++    } while (planesLeft != 0);
+   }
+-  iVar14 = 0;
+-  iVar17 = 6;
++  byteOffset = 0;
++  planesLeft = 6;
+   do {
+-    pOVar11 = infoBytes + 0x88;
++    descWordSrc = infoBytes + 0x88;
+     infoBytes = infoBytes + 4;
+-    M<unsigned int>((int)outRegs + iVar14) =
+-         M<int>((int)local_e8 + iVar14) << 1 | M<unsigned int>(pOVar11) |
+-         M<int>((int)local_b8 + iVar14) << 4 | M<int>((int)local_d0 + iVar14) << 0x1b;
+-    iVar14 = iVar14 + 4;
+-    iVar17 = iVar17 + -1;
+-  } while (iVar17 != 0);
++    M<unsigned int>((int)outRegs + byteOffset) =
++         M<int>((int)planeSelect + byteOffset) << 1 | M<unsigned int>(descWordSrc) |
++         M<int>((int)baseAddr16 + byteOffset) << 4 | M<int>((int)highField + byteOffset) << 0x1b;
++    byteOffset = byteOffset + 4;
++    planesLeft = planesLeft + -1;
++  } while (planesLeft != 0);
+   return;
+ }

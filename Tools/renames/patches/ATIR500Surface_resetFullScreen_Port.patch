@@ -1,16 +1,87 @@
---- a/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-17 19:55:37.994254883 -0700
-+++ b/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-17 19:55:37.995594072 -0700
-@@ -76,32 +76,14 @@
-   if (iVar9 == 0) {
-     iVar9 = M<SInt32>(self + kIOATIR500Surface_accelerator);
-     registers = M<SInt32>(iVar9 + 0x860);
+--- a/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-20 09:42:26.208161301 -0700
++++ b/Sources/ATIR500Surface_resetFullScreen_Port.cpp	2026-10-20 09:42:26.209436369 -0700
+@@ -31,77 +31,58 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   UInt8 savedValue;
+-  UInt8 bVar2;
+-  UInt8 bVar3;
+-  UInt8 bVar4;
+   UInt32 maskedValue;
+   UInt32 newValue;
+-  UInt32 uVar7;
+-  SInt32 iVar8;
+-  SInt32 iVar9;
++  UInt32 otherPanel;
++  UInt32 modeValue;
++  SInt32 otherRecord;
++  SInt32 accel;
++  SInt32 vtable5dcResult;
+   SInt32 registers;
+   SInt32 id;
+   
+   savedValue = self[0xdbb];
+   M<UInt8>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x78 + M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x164) = savedValue;
+   id = M<SInt32>(self + kIOATIR500Surface_panel);
+-  iVar9 = M<SInt32>(self + kIOATIR500Surface_accelerator);
++  accel = M<SInt32>(self + kIOATIR500Surface_accelerator);
+   self[id + 0xdb6] = 0x0;
+-  if (M<char>(iVar9 + 0x9b0) != '\0') {
+-    if (M<SInt32>(id * 0x18 + iVar9 + 0xb10) == 0) {
+-      if ((M<SInt32>(iVar9 + 0x894) != 0) &&
+-         (M<SInt32>((UInt32)(id == 0) * 0x18 + iVar9 + 0xb10) != 0)) {
+-        iVar9 = (UInt32)(id == 0) * 0x78 + iVar9;
+-        M<UInt8>(iVar9 + 0x9f4) = savedValue;
+-        M<UInt8>(iVar9 + 0x164) = savedValue;
++  if (M<char>(accel + 0x9b0) != '\0') {
++    if (M<SInt32>(id * 0x18 + accel + 0xb10) == 0) {
++      if ((M<SInt32>(accel + 0x894) != 0) &&
++         (M<SInt32>((UInt32)(id == 0) * 0x18 + accel + 0xb10) != 0)) {
++        otherRecord = (UInt32)(id == 0) * 0x78 + accel;
++        M<UInt8>(otherRecord + 0x9f4) = savedValue;
++        M<UInt8>(otherRecord + 0x164) = savedValue;
+       }
+     }
+     else {
+-      M<UInt8>(id * 0x78 + iVar9 + 0x9f4) = savedValue;
+-      iVar9 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+-      if (M<SInt32>(iVar9 + 0x894) != 0) {
+-        uVar7 = (UInt32)(M<SInt32>(self + kIOATIR500Surface_panel) == 0);
+-        if (M<SInt32>(uVar7 * 0x18 + iVar9 + 0xb10) == 0) {
+-          M<UInt8>(uVar7 * 0x78 + iVar9 + 0x164) = savedValue;
++      M<UInt8>(id * 0x78 + accel + 0x9f4) = savedValue;
++      accel = M<SInt32>(self + kIOATIR500Surface_accelerator);
++      if (M<SInt32>(accel + 0x894) != 0) {
++        otherPanel = (UInt32)(M<SInt32>(self + kIOATIR500Surface_panel) == 0);
++        if (M<SInt32>(otherPanel * 0x18 + accel + 0xb10) == 0) {
++          M<UInt8>(otherPanel * 0x78 + accel + 0x164) = savedValue;
+         }
+         else {
+-          iVar9 = uVar7 * 0x78 + iVar9;
+-          M<UInt8>(iVar9 + 0x164) = savedValue;
+-          M<UInt8>(iVar9 + 0x9f4) = savedValue;
++          otherRecord = otherPanel * 0x78 + accel;
++          M<UInt8>(otherRecord + 0x164) = savedValue;
++          M<UInt8>(otherRecord + 0x9f4) = savedValue;
+         }
+       }
+     }
+   }
+-  iVar9 = VCALL(M<SInt32>(self), 0x5dc)(self);
+-  if (iVar9 == 0) {
+-    iVar9 = M<SInt32>(self + kIOATIR500Surface_accelerator);
+-    registers = M<SInt32>(iVar9 + 0x860);
 -    bVar2 = M<UInt8>(registers + 0x6107);
 -    bVar3 = M<UInt8>(registers + 0x6105);
 -    bVar4 = M<UInt8>(registers + 0x6104);
++  vtable5dcResult = VCALL(M<SInt32>(self), 0x5dc)(self);
++  if (vtable5dcResult == 0) {
++    accel = M<SInt32>(self + kIOATIR500Surface_accelerator);
++    registers = M<SInt32>(accel + 0x860);
 +    maskedValue = loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0xffcfffff;
      id = M<SInt32>(self + kIOATIR500Surface_panel);
 -    maskedValue = (M<UInt8>(registers + 0x6106) & 0xffcf) << 0x10;
-     uVar7 = (UInt32)M<UInt8>(id * 0x78 + iVar9 + 0x164);
+-    uVar7 = (UInt32)M<UInt8>(id * 0x78 + iVar9 + 0x164);
 -    newValue = (uVar7 & 1) << 0x15;
 -    uVar7 = (UInt32)(1 < uVar7) * 0x100000;
 -    if (id == 0) {
@@ -21,10 +92,11 @@
 -    }
 -    M<UInt32>(registers + iVar8) =
 -         (UInt32)bVar4 << 0x18 | (UInt32)bVar3 << 0x10 | (uVar7 | maskedValue | newValue) >> 8 | (UInt32)bVar2;
-+    newValue = maskedValue | (uVar7 & 1) << 0x15 | (UInt32)(1 < uVar7) << 0x14;
++    modeValue = (UInt32)M<UInt8>(id * 0x78 + accel + 0x164);
++    newValue = maskedValue | (modeValue & 1) << 0x15 | (UInt32)(1 < modeValue) << 0x14;
 +    storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6104 : 0x6904)), newValue);
      enforceInOrderExecutionIO();
-     if (M<SInt32>(iVar9 + 0x894) != 0) {
+-    if (M<SInt32>(iVar9 + 0x894) != 0) {
 -      if (id == 0) {
 -        iVar9 = 0x6904;
 -      }
@@ -33,6 +105,7 @@
 -      }
 -      M<UInt32>(registers + iVar9) =
 -           (UInt32)bVar4 << 0x18 | (UInt32)bVar3 << 0x10 | (uVar7 | maskedValue | newValue) >> 8 | (UInt32)bVar2;
++    if (M<SInt32>(accel + 0x894) != 0) {
 +      storeWordByteReversed(&M<UInt8>(registers + (id == 0 ? 0x6904 : 0x6104)), newValue);
        enforceInOrderExecutionIO();
      }

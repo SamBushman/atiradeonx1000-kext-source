@@ -31,133 +31,145 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32*packet, bool clearFlag, SInt32 x, SInt32 y, SInt32 width, SInt32 height) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  UInt8 bVar6;
-  UInt16 uVar7;
-  UInt32 uVar8;
-  float fVar9;
-  float fVar10;
-  float fVar11;
-  double dVar12;
-  SInt32 iVar13;
-  UInt32 uVar14;
-  UInt32 uVar15;
-  UInt32 uVar16;
-  UInt32 uVar17;
-  UInt32 in_register_0000001c;
-  UInt32 uVar18;
-  UInt32 uVar19;
-  UInt32 *puVar20;
+  bool untiled;
+  float xLeftF;
+  float xRightF;
+  float invWidthF;
+  float yBottomF;
+  float lit380;
+  float yTopF;
+  UInt8 fixedFormat;
+  UInt16 formatPitchPixels;
+  UInt32 fieldD;
+  float invHeightF;
+  float lit37c;
+  double doubleBias;
+  SInt32 formatOffset;
+  SInt32 tileAlignment;
+  UInt32 savedWord;
+  UInt32 minPitch;
+  UInt32 fieldB;
+  UInt32 widthDiv;
+  UInt32 lastY;
+  UInt32 pitchPerDegree;
+  UInt32 fieldC;
+  UInt32 hzBlockOffset;
+  UInt32 fieldA;
+  UInt32 lastX;
+  UInt32 formatBitsB;
+  UInt32 tilingBits;
+  UInt32 samplesEntry;
+  UInt32 formatGpuBase;
+  UInt32 blockCount;
+  UInt32 alignedPitch;
+  UInt32 fixedWord30;
   SInt32 formatBuffer;
   SInt32 fixedBuffer;
-  UInt32 *puVar23;
+  UInt32 *nextCursor;
+  UInt32 *outCursor;
   
   fixedBuffer = M<SInt32>(self + kIOATIR500Surface_fixedSurfaceBuffer);
   formatBuffer = M<SInt32>(self + formatCode * 4 + 0xb70);
   GH_memcpy(packet,&g_r500_3d_blit_state_packet,0x2f4);
   packet[0xb] = M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb74);
   if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) {
-    uVar18 = 0;
-    iVar13 = (UInt32)M<UInt8>(formatBuffer + 0x3a) * 0x1c;
+    pitchPerDegree = 0;
+    formatOffset = (UInt32)M<UInt8>(formatBuffer + 0x3a) * 0x1c;
     packet[0x9a] =
          (UInt32)M<UInt16>(formatBuffer + 0x20) * M<SInt32>(formatBuffer + 0x40) + M<SInt32>(formatBuffer + 8) &
          0xffffffe0;
     if ((M<UInt32>(formatBuffer + 0x3c) & 0xf00000) != 0) {
-      uVar18 = (UInt32)M<UInt16>(formatBuffer + 0x14) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf);
+      pitchPerDegree = (UInt32)M<UInt16>(formatBuffer + 0x14) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf);
     }
-    uVar15 = 0x20 / M<UInt16>(formatBuffer + 0x16);
-    if (uVar15 <= uVar18) {
-      uVar15 = uVar18;
+    minPitch = 0x20 / M<UInt16>(formatBuffer + 0x16);
+    if (minPitch <= pitchPerDegree) {
+      minPitch = pitchPerDegree;
     }
-    uVar14 = packet[0x8a];
+    savedWord = packet[0x8a];
     packet[0x9c] =
-         uVar15 & 0x3ffe | (M<UInt8>(formatBuffer + 0x38) & 1) << 0x10 |
+         minPitch & 0x3ffe | (M<UInt8>(formatBuffer + 0x38) & 1) << 0x10 |
          (M<UInt8>(formatBuffer + 0x38) & 6) << 0x10 | (M<UInt8>(formatBuffer + 0x39) & 3) << 0x13 |
          FormatTableLookup_0x0004d2e0((UInt32)M<UInt8>(formatBuffer + 0x3a) * 0x1c) >> 1 & 0x1e00000;
-    uVar18 = FormatTableLookup_0x0004d2e0(iVar13) >> 0x11 & 0x1f;
-    packet[0x8a] = uVar18 | uVar14 & 0xffffffe0;
-    uVar15 = FormatTableLookup_0x0004d2e0(iVar13) >> 7 & 0x300;
-    packet[0x8a] = uVar15 | uVar18 | uVar14 & 0xfffffce0;
-    uVar16 = FormatTableLookup_0x0004d2e0(iVar13) >> 3 & 0xc00;
-    packet[0x8a] = uVar16 | uVar15 | uVar18 | uVar14 & 0xfffff0e0;
-    uVar8 = (FormatTableLookup_0x0004d2e0(iVar13) & 0x1800) << 1;
-    packet[0x8a] = uVar8 | uVar16 | uVar15 | uVar18 | uVar14 & 0xffffc0e0;
+    fieldA = FormatTableLookup_0x0004d2e0(formatOffset) >> 0x11 & 0x1f;
+    packet[0x8a] = fieldA | savedWord & 0xffffffe0;
+    fieldB = FormatTableLookup_0x0004d2e0(formatOffset) >> 7 & 0x300;
+    packet[0x8a] = fieldB | fieldA | savedWord & 0xfffffce0;
+    fieldC = FormatTableLookup_0x0004d2e0(formatOffset) >> 3 & 0xc00;
+    packet[0x8a] = fieldC | fieldB | fieldA | savedWord & 0xfffff0e0;
+    fieldD = (FormatTableLookup_0x0004d2e0(formatOffset) & 0x1800) << 1;
+    packet[0x8a] = fieldD | fieldC | fieldB | fieldA | savedWord & 0xffffc0e0;
     packet[0x8a] =
-         (FormatTableLookup_0x0004d2e0(iVar13) & 0x600) << 5 |
-         uVar8 | uVar16 | uVar15 | uVar18 | uVar14 & 0xffff00e0;
+         (FormatTableLookup_0x0004d2e0(formatOffset) & 0x600) << 5 |
+         fieldD | fieldC | fieldB | fieldA | savedWord & 0xffff00e0;
     if (((M<UInt32>(formatBuffer + 0x3c) & 0xf00000) == 0) ||
-       (uVar15 = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
-       uVar18 = uVar15 - 1, uVar15 == 0)) {
-      uVar18 = 0;
+       (widthDiv = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
+       lastX = widthDiv - 1, widthDiv == 0)) {
+      lastX = 0;
     }
-    uVar15 = 0;
+    lastY = 0;
     if (M<UInt16>(formatBuffer + 0x1e) != 0) {
-      uVar15 = M<UInt16>(formatBuffer + 0x1e) - 1;
+      lastY = M<UInt16>(formatBuffer + 0x1e) - 1;
     }
-    packet[0xb3] = uVar18 & 0x1fff | (uVar15 & 0x1fff) << 0xd;
-    bVar6 = M<UInt8>(fixedBuffer + 0x3a);
+    packet[0xb3] = lastX & 0x1fff | (lastY & 0x1fff) << 0xd;
+    fixedFormat = M<UInt8>(fixedBuffer + 0x3a);
     packet[0xa0] =
          (M<UInt8>(fixedBuffer + 0x38) & 7) << 2 |
          (UInt32)M<UInt16>(fixedBuffer + 0x20) * M<SInt32>(fixedBuffer + 0x40) + M<SInt32>(fixedBuffer + 8) &
          0xffffffe0;
     if (((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) == 0) ||
-       (uVar15 = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
-       uVar18 = uVar15 - 1, uVar15 == 0)) {
-      uVar18 = 0;
+       (widthDiv = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
+       lastX = widthDiv - 1, widthDiv == 0)) {
+      lastX = 0;
     }
-    uVar15 = 0;
+    lastY = 0;
     if (M<UInt16>(fixedBuffer + 0x1e) != 0) {
-      uVar15 = M<UInt16>(fixedBuffer + 0x1e) - 1;
+      lastY = M<UInt16>(fixedBuffer + 0x1e) - 1;
     }
-    packet[0xa6] = uVar18 & 0x7ff | (uVar15 & 0x7ff) << 0xb | 0x80000000;
-    uVar18 = FormatTableLookup_0x0004d2e4((UInt32)bVar6 * 0x1c);
+    packet[0xa6] = lastX & 0x7ff | (lastY & 0x7ff) << 0xb | 0x80000000;
+    formatBitsB = FormatTableLookup_0x0004d2e4((UInt32)fixedFormat * 0x1c);
     packet[0xa8] =
-         uVar18 >> 0x13 & 0x1f | (uVar18 & 0x40) << 0x10 | uVar18 >> 7 & 0xe00 |
-         uVar18 >> 1 & 0x7000 | (uVar18 & 0x1c00) << 5 | (uVar18 & 0x380) << 0xb;
-    uVar18 = M<UInt32>(fixedBuffer + 0x3c);
-    bVar1 = (uVar18 & 0xf00000) == 0;
-    if (bVar1) {
-      uVar15 = 0;
+         formatBitsB >> 0x13 & 0x1f | (formatBitsB & 0x40) << 0x10 | formatBitsB >> 7 & 0xe00 |
+         formatBitsB >> 1 & 0x7000 | (formatBitsB & 0x1c00) << 5 | (formatBitsB & 0x380) << 0xb;
+    tilingBits = M<UInt32>(fixedBuffer + 0x3c);
+    untiled = (tilingBits & 0xf00000) == 0;
+    if (untiled) {
+      pitchPerDegree = 0;
     }
     else {
-      uVar15 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (uVar18 >> 0x14 & 0xf);
+      pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
     }
-    uVar16 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
-    if (uVar16 <= uVar15) {
-      uVar16 = uVar15;
+    minPitch = 0x20 / M<UInt16>(fixedBuffer + 0x16);
+    if (minPitch <= pitchPerDegree) {
+      minPitch = pitchPerDegree;
     }
-    if ((bVar1) ||
-       (uVar15 = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (uVar18 >> 0x14 & 0xf), uVar18 = uVar15 - 1,
-       uVar15 == 0)) {
-      uVar18 = 0;
+    if ((untiled) ||
+       (widthDiv = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (tilingBits >> 0x14 & 0xf), lastX = widthDiv - 1,
+       widthDiv == 0)) {
+      lastX = 0;
     }
-    uVar15 = 0;
+    lastY = 0;
     if (M<UInt16>(fixedBuffer + 0x1e) != 0) {
-      uVar15 = M<UInt16>(fixedBuffer + 0x1e) - 1;
+      lastY = M<UInt16>(fixedBuffer + 0x1e) - 1;
     }
-    packet[0xaa] = uVar16 - 1 & 0x3fff | (uVar18 & 0x800) << 4 | (uVar15 & 0x800) << 5;
+    packet[0xaa] = minPitch - 1 & 0x3fff | (lastX & 0x800) << 4 | (lastY & 0x800) << 5;
     packet[0x1e] = packet[0x1e] & 0xfffffffc | 2;
     packet[0xa2] = packet[0xa2] & 0xffffe1ff | 0x1400;
-    dVar12 = DOUBLE_0004c3a8;
-    fVar11 = FLOAT_0004c380;
-    fVar10 = FLOAT_0004c37c;
-    fVar4 = FLOAT_0004c370;
+    doubleBias = DOUBLE_0004c3a8;
+    lit380 = FLOAT_0004c380;
+    lit37c = FLOAT_0004c37c;
+    invWidthF = FLOAT_0004c370;
     if (M<UInt16>(formatBuffer + 0x1c) != 0) {
-      fVar4 = FLOAT_0004c374 /
+      invWidthF = FLOAT_0004c374 /
               (float)((double)CONCAT44d(0x43300000,M<UInt16>(formatBuffer + 0x1c) ^ 0x80000000) -
                      DOUBLE_0004c3a8);
     }
-    fVar9 = FLOAT_0004c370;
+    invHeightF = FLOAT_0004c370;
     if (M<UInt16>(formatBuffer + 0x1e) != 0) {
-      fVar9 = FLOAT_0004c374 /
+      invHeightF = FLOAT_0004c374 /
               (float)((double)CONCAT44d(0x43300000,M<UInt16>(formatBuffer + 0x1e) ^ 0x80000000) -
                      DOUBLE_0004c3a8);
     }
-    puVar20 = packet + 0xcb;
+    outCursor = packet + 0xcb;
     packet[0xc2] = 0x1087;
     packet[0xc4] = 0xc0033500;
     packet[0xbd] = 0x31080;
@@ -165,20 +177,20 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     packet[0xc5] = 0x10031;
     packet[0xc9] = 0x1393;
     packet[0xca] = 10;
-    fVar2 = (float)((double)CONCAT44d(0x43300000,x ^ 0x80000000) - dVar12);
-    fVar3 = (float)((double)CONCAT44d(0x43300000,x + width ^ 0x80000000) - dVar12);
-    packet[0xc0] = FBITS((fVar4 * fVar3));
-    packet[0xbe] = FBITS((fVar4 * fVar2));
-    packet[0xc6] = FBITS(((fVar2 + fVar3) * fVar11));
-    fVar4 = (float)((double)CONCAT44d(0x43300000,y + height ^ 0x80000000) - dVar12);
-    fVar5 = (float)((double)CONCAT44d(0x43300000,y ^ 0x80000000) - dVar12);
-    packet[0xbf] = FBITS((fVar9 * fVar4));
-    packet[0xc1] = FBITS((fVar9 * fVar5));
-    packet[199] = FBITS(((fVar5 + fVar4) * fVar11));
-    packet[0xc3] = (SInt32)((fVar3 - fVar2) * fVar10) << 0x10 | (SInt32)((fVar4 - fVar5) * fVar10);
+    xLeftF = (float)((double)CONCAT44d(0x43300000,x ^ 0x80000000) - doubleBias);
+    xRightF = (float)((double)CONCAT44d(0x43300000,x + width ^ 0x80000000) - doubleBias);
+    packet[0xc0] = FBITS((invWidthF * xRightF));
+    packet[0xbe] = FBITS((invWidthF * xLeftF));
+    packet[0xc6] = FBITS(((xLeftF + xRightF) * lit380));
+    yBottomF = (float)((double)CONCAT44d(0x43300000,y + height ^ 0x80000000) - doubleBias);
+    yTopF = (float)((double)CONCAT44d(0x43300000,y ^ 0x80000000) - doubleBias);
+    packet[0xbf] = FBITS((invHeightF * yBottomF));
+    packet[0xc1] = FBITS((invHeightF * yTopF));
+    packet[199] = FBITS(((yTopF + yBottomF) * lit380));
+    packet[0xc3] = (SInt32)((xRightF - xLeftF) * lit37c) << 0x10 | (SInt32)((yBottomF - yTopF) * lit37c);
     goto LAB_0004481c;
   }
-  uVar18 = 0;
+  pitchPerDegree = 0;
   packet[0xa9] = 0xc0001000;
   packet[0x9d] = 0xc0001000;
   packet[0x9f] = 0xc0001000;
@@ -188,14 +200,14 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
   packet[0xa7] = 0xc0001000;
   packet[0x9a] = M<UInt32>(fixedBuffer + 8);
   if ((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) != 0) {
-    uVar18 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
+    pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
   }
-  uVar15 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
-  if (uVar15 <= uVar18) {
-    uVar15 = uVar18;
+  minPitch = 0x20 / M<UInt16>(fixedBuffer + 0x16);
+  if (minPitch <= pitchPerDegree) {
+    minPitch = pitchPerDegree;
   }
   packet[0x9c] =
-       uVar15 & 0x3ffe | (M<UInt8>(formatBuffer + 0x38) & 1) << 0x10 |
+       minPitch & 0x3ffe | (M<UInt8>(formatBuffer + 0x38) & 1) << 0x10 |
        (M<UInt8>(formatBuffer + 0x38) & 6) << 0x10 | (M<UInt8>(fixedBuffer + 0x39) & 3) << 0x13 |
        FormatTableLookup_0x0004d2e0((UInt32)M<UInt8>(fixedBuffer + 0x3a) * 0x1c) >> 1 & 0x1e00000;
   if (((M<UInt32>(fixedBuffer + 0x28) & 0x3ff00000) == 0x3ff00000) || (M<char>(fixedBuffer + 0x36) == '\0'))
@@ -205,13 +217,13 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
   else {
     packet[0x20] = 0x600;
   }
-  uVar18 = M<UInt32>(fixedBuffer + 0x3c);
+  tilingBits = M<UInt32>(fixedBuffer + 0x3c);
   packet[0x3c] = 0;
   packet[0x42] = packet[0x4e];
   packet[0x26] = 0;
   packet[0x44] = packet[0x50];
   packet[0x46] = packet[0x52];
-  uVar18 = SamplesTableLookup(uVar18 >> 0x12 & 0x3c);
+  samplesEntry = SamplesTableLookup(tilingBits >> 0x12 & 0x3c);
   packet[0x48] = packet[0x54];
   packet[0x4a] = packet[0x56];
   packet[0x4c] = packet[0x58];
@@ -223,103 +235,103 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
   packet[0x82] = 0;
   packet[0x92] = 0x80;
   packet[0x98] = 0x50000000;
-  packet[0x10] = (uVar18 & 3) << 1 | 1;
+  packet[0x10] = (samplesEntry & 3) << 1 | 1;
   packet[0x96] = 0x10000;
   if (((M<UInt32>(formatBuffer + 0x3c) & 0xf00000) == 0) ||
-     (uVar15 = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
-     uVar18 = uVar15 - 1, uVar15 == 0)) {
-    uVar18 = 0;
+     (widthDiv = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
+     lastX = widthDiv - 1, widthDiv == 0)) {
+    lastX = 0;
   }
-  uVar15 = 0;
+  lastY = 0;
   if (M<UInt16>(formatBuffer + 0x1e) != 0) {
-    uVar15 = M<UInt16>(formatBuffer + 0x1e) - 1;
+    lastY = M<UInt16>(formatBuffer + 0x1e) - 1;
   }
-  packet[0xb3] = uVar18 & 0x1fff | (uVar15 & 0x1fff) << 0xd;
-  uVar17 = HZMEM_GetBlockOffset
+  packet[0xb3] = lastX & 0x1fff | (lastY & 0x1fff) << 0xd;
+  hzBlockOffset = HZMEM_GetBlockOffset
                      ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),M<UInt32>(fixedBuffer + 0x28),2);
-  uVar18 = 0;
+  pitchPerDegree = 0;
   if ((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) != 0) {
-    uVar18 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
+    pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
   }
-  uVar15 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
-  if (uVar15 <= uVar18) {
-    uVar15 = uVar18;
+  minPitch = 0x20 / M<UInt16>(fixedBuffer + 0x16);
+  if (minPitch <= pitchPerDegree) {
+    minPitch = pitchPerDegree;
   }
-  iVar13 = 0x20;
+  tileAlignment = 0x20;
   if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) == 4) {
 LAB_00044100:
-    uVar19 = iVar13 * ((SInt32)(iVar13 + uVar15 + -1) / iVar13);
+    alignedPitch = tileAlignment * ((SInt32)(tileAlignment + minPitch + -1) / tileAlignment);
   }
   else {
-    iVar13 = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) << 4;
-    uVar19 = 0;
-    if (iVar13 != 0) goto LAB_00044100;
+    tileAlignment = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) << 4;
+    alignedPitch = 0;
+    if (tileAlignment != 0) goto LAB_00044100;
   }
-  packet[0xc0] = uVar19;
-  packet[0xbe] = uVar17;
+  packet[0xc0] = alignedPitch;
+  packet[0xbe] = hzBlockOffset;
   packet[0xbd] = 0x1395;
   packet[0xbf] = 0x1399;
   packet[0xc1] = 0x13a2;
   packet[0xc2] = 5;
   packet[0xc3] = 0x13a0;
-  puVar20 = packet + 0xc9;
-  uVar18 = M<UInt32>(formatBuffer + 8);
+  outCursor = packet + 0xc9;
+  formatGpuBase = M<UInt32>(formatBuffer + 8);
   packet[0xc5] = 0x13a1;
-  packet[0xc4] = uVar18 & 0xffffffe0;
-  uVar7 = M<UInt16>(formatBuffer + 0x14);
+  packet[0xc4] = formatGpuBase & 0xffffffe0;
+  formatPitchPixels = M<UInt16>(formatBuffer + 0x14);
   packet[199] = 0x1087;
   packet[200] = width * 0x60000 | height * 6 & 0xffffU;
-  packet[0xc6] = uVar7 & 0x3ffe;
+  packet[0xc6] = formatPitchPixels & 0x3ffe;
   if ((((M<UInt32>(fixedBuffer + 0x28) & 0x3ff00000) != 0x3ff00000) && (M<char>(fixedBuffer + 0x36) != '\0')
       ) && (M<UInt8>(formatBuffer + 0x38) < 2)) {
-    puVar20 = packet + 0xcb;
+    outCursor = packet + 0xcb;
     packet[0xc9] = 0x1392;
     packet[0xca] = 0x400300;
   }
-  dVar12 = DOUBLE_0004c3a8;
-  fVar4 = FLOAT_0004c380;
-  puVar23 = puVar20 + 0xb;
-  *puVar20 = 0xc0033500;
-  puVar20[1] = 0x10031;
-  puVar20[2] = FBITS(((float)((double)CONCAT44d(0x43300000,width + x * 2 ^ 0x80000000) -
-                              dVar12) * fVar4));
-  puVar20[4] = 0;
-  puVar20[3] = FBITS(((float)((double)CONCAT44d(0x43300000,height + y * 2 ^ 0x80000000) -
-                              dVar12) * fVar4));
-  puVar20[5] = 0x1393;
-  puVar20[6] = 10;
-  puVar20[7] = 0x13c6;
-  puVar20[8] = 3;
-  puVar20[9] = 0x13a2;
-  puVar20[10] = 0;
+  doubleBias = DOUBLE_0004c3a8;
+  lit380 = FLOAT_0004c380;
+  nextCursor = outCursor + 0xb;
+  *outCursor = 0xc0033500;
+  outCursor[1] = 0x10031;
+  outCursor[2] = FBITS(((float)((double)CONCAT44d(0x43300000,width + x * 2 ^ 0x80000000) -
+                              doubleBias) * lit380));
+  outCursor[4] = 0;
+  outCursor[3] = FBITS(((float)((double)CONCAT44d(0x43300000,height + y * 2 ^ 0x80000000) -
+                              doubleBias) * lit380));
+  outCursor[5] = 0x1393;
+  outCursor[6] = 10;
+  outCursor[7] = 0x13c6;
+  outCursor[8] = 3;
+  outCursor[9] = 0x13a2;
+  outCursor[10] = 0;
   if ((((M<UInt32>(fixedBuffer + 0x28) & 0x3ff00000) != 0x3ff00000) && (M<char>(fixedBuffer + 0x36) != '\0')
       ) && (M<UInt8>(formatBuffer + 0x38) < 2)) {
-    puVar23 = puVar20 + 0xd;
-    puVar20[0xb] = 0x1392;
-    puVar20[0xc] = 0x300;
+    nextCursor = outCursor + 0xd;
+    outCursor[0xb] = 0x1392;
+    outCursor[0xc] = 0x300;
   }
-  puVar20 = puVar23;
+  outCursor = nextCursor;
   if ((((UInt32)clearFlag) != 0) &&
      ((M<UInt32>(fixedBuffer + 0x28) & 0x3ff00000) != 0x3ff00000)) {
-    uVar18 = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),
+    blockCount = HZMEM_GetBlockCount((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),
                                  M<UInt32>(fixedBuffer + 0x28),2);
-    *puVar23 = 0x1385;
-    puVar20 = puVar23 + 6;
-    uVar19 = M<UInt32>(fixedBuffer + 0x30);
-    puVar23[2] = 0xc0023800;
-    puVar23[3] = uVar17;
-    puVar23[1] = uVar19;
+    *nextCursor = 0x1385;
+    outCursor = nextCursor + 6;
+    fixedWord30 = M<UInt32>(fixedBuffer + 0x30);
+    nextCursor[2] = 0xc0023800;
+    nextCursor[3] = hzBlockOffset;
+    nextCursor[1] = fixedWord30;
     formatBuffer = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98);
-    puVar23[5] = 0;
-    puVar23[4] = uVar18 / (UInt32)(formatBuffer << 4);
+    nextCursor[5] = 0;
+    nextCursor[4] = blockCount / (UInt32)(formatBuffer << 4);
     if (surfaceIndex == 9) {
-      puVar23[6] = 0x1380;
-      puVar23[7] = 0x600;
-      puVar20 = puVar23 + 8;
+      nextCursor[6] = 0x1380;
+      nextCursor[7] = 0x600;
+      outCursor = nextCursor + 8;
     }
     M<UInt8>(fixedBuffer + 0x36) = 1;
   }
 LAB_0004481c:
   M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
-  return puVar20;
+  return outCursor;
 }
