@@ -49,25 +49,39 @@
  * ClassName()`, which cannot compile against an abstract class. This is
  * Apple's own real, standard IOKit macro for exactly this situation.
  */
+/*
+ * OSDefineMetaClassAndStructors, except that MetaClass::alloc() tests the allocation before running the constructor, as the shipped code does
+ * (`OSObject::operator new; if (p) construct`). The stock macro's `return new className;` compiles under gcc 4.0.1 -fapple-kext to an unconditional
+ * constructor call, which writes through a null `this` when OSObject::operator new fails (the #187 bug class; difftest: MetaClass::alloc cases).
+ */
+inline void *operator new(size_t, void *where) { return where; }
+#define ATI_DefineMetaClassAndStructors(className, superClassName)		\
+    OSDefineMetaClass(className, superClassName)				\
+    OSObject * className ::MetaClass::alloc() const				\
+	{ void *mem = OSObject::operator new(sizeof(className));		\
+	  return mem ? ::new (mem) className() : 0; }				\
+    className :: className () : superClassName (&gMetaClass)			\
+	{ gMetaClass.instanceConstructed(); }
+
 OSDefineMetaClassAndAbstractStructors(IOATIR500Accelerator, IOAccelerator)
-OSDefineMetaClassAndStructors(ATIRadeonX1000, IOATIR500Accelerator)
+ATI_DefineMetaClassAndStructors(ATIRadeonX1000, IOATIR500Accelerator)
 
 OSDefineMetaClassAndAbstractStructors(IOATIR500GLContext, IOUserClient)
-OSDefineMetaClassAndStructors(ATIR500GLContext, IOATIR500GLContext)
+ATI_DefineMetaClassAndStructors(ATIR500GLContext, IOATIR500GLContext)
 
 OSDefineMetaClassAndAbstractStructors(IOATIR5002DContext, IOUserClient)
-OSDefineMetaClassAndStructors(ATIR5002DContext, IOATIR5002DContext)
+ATI_DefineMetaClassAndStructors(ATIR5002DContext, IOATIR5002DContext)
 
 OSDefineMetaClassAndAbstractStructors(IOATIR500DVDContext, IOUserClient)
-OSDefineMetaClassAndStructors(ATIR500DVDContext, IOATIR500DVDContext)
+ATI_DefineMetaClassAndStructors(ATIR500DVDContext, IOATIR500DVDContext)
 
 OSDefineMetaClassAndAbstractStructors(IOATIR500Surface, IOUserClient)
-OSDefineMetaClassAndStructors(ATIR500Surface, IOATIR500Surface)
+ATI_DefineMetaClassAndStructors(ATIR500Surface, IOATIR500Surface)
 
 /*
  * IOATIR500Shared and ATIR500Memory are plain OSObject subclasses (issue #58
  * follow-up: previously modelled as non-OSObject classes, which left their
  * metaclass globals and OSObject constructor/init calls unresolved).
  */
-OSDefineMetaClassAndStructors(IOATIR500Shared, OSObject)
-OSDefineMetaClassAndStructors(ATIR500Memory, OSObject)
+ATI_DefineMetaClassAndStructors(IOATIR500Shared, OSObject)
+ATI_DefineMetaClassAndStructors(ATIR500Memory, OSObject)
