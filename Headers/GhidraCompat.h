@@ -18,6 +18,20 @@ template <class T> inline volatile T &M(unsigned int address) { return *reinterp
 template <class T> inline volatile T &M(long address) { return *reinterpret_cast<volatile T *>(address); }
 template <class T> inline volatile T &M(unsigned long address) { return *reinterpret_cast<volatile T *>(address); }
 
+/* MN<T>: the same accessor without `volatile`. A source built with -DGH_PLAIN_MEMORY (every source except those listed in Tools/volatile_memory_sources.txt, which
+ * touch hardware registers) uses it for every M<T>: ordinary memory (objects, command buffers) was compiled by the shipped compiler as plain loads and stores it could
+ * combine and reorder, and re-reading each field through a volatile access made the rebuilt code up to 1.5x slower. Hardware registers are untouched: they go through
+ * the byte-reversed load/store intrinsics (asm volatile with a memory clobber) and the files that use them stay volatile. Tools/check_plain_memory_loops.py lists the
+ * loops that would need a volatile read. */
+template <class T, class A> inline T &MN(A address) { return *reinterpret_cast<T *>(static_cast<UInt32>(reinterpret_cast<unsigned long>(address))); }
+template <class T> inline T &MN(int address) { return *reinterpret_cast<T *>(address); }
+template <class T> inline T &MN(unsigned int address) { return *reinterpret_cast<T *>(address); }
+template <class T> inline T &MN(long address) { return *reinterpret_cast<T *>(address); }
+template <class T> inline T &MN(unsigned long address) { return *reinterpret_cast<T *>(address); }
+#ifdef GH_PLAIN_MEMORY
+#define M MN
+#endif
+
 typedef UInt32 (*GhidraVFn)(...);
 typedef UInt32 code(...);   /* Ghidra's `code` (a function of unknown signature): `code *p` is a pointer to a variadic function */
 #define VCALL(vt, off) ((GhidraVFn)(*reinterpret_cast<UInt32 *>(static_cast<UInt32>((vt)) + (off))))

@@ -42,7 +42,7 @@ KEXT_ID=${KEXT_ID:-com.apple.ATIRadeonX1000}
 KEXT_VERSION=${KEXT_VERSION:-4.1.9}
 KFW=/System/Library/Frameworks/Kernel.framework/Headers
 GCCLIB=/usr/lib/gcc/powerpc-apple-darwin8/4.0.1
-# #172/#173: optimized by default (-Os, like the shipped kext); the M<T> accessors are volatile so MMIO order is preserved. Use OPT= (set but empty) for the old unoptimized build
+# #172/#173: optimized by default (-Os, like the shipped kext); the M<T> accessors are volatile in the sources that program hardware (Tools/volatile_memory_sources.txt) so MMIO order is preserved, plain elsewhere. Use OPT= (set but empty) for the old unoptimized build
 # that Tools/callee_compare.py etc. expect.
 OPT=${OPT--Os}
 # WARN (default -w, no warnings) can be set to e.g. -Wuninitialized; Tools/renames/parity_check.py uses it to prove a variable split does not read an unassigned variable
@@ -51,9 +51,12 @@ CXXFLAGS="$COMMON -fno-rtti -fno-exceptions -fapple-kext -Doverride= -Dnullptr=0
 
 rm -rf "$OUT"; mkdir -p "$OUT/obj"
 fail=0
+# Sources that must keep volatile M<T> accessors (hardware register code): everything else is compiled with plain memory accessors, see Headers/GhidraCompat.h
+VOLATILE_SOURCES=" $(sed 's/#.*//' Tools/volatile_memory_sources.txt | tr -s ' \n' '  ') "
 for f in Sources/*.cpp; do
     b=$(basename "$f" .cpp)
-    g++ $CXXFLAGS -c "$f" -o "$OUT/obj/$b.o" 2>"$OUT/obj/$b.err" || { echo "FAIL $f"; head -5 "$OUT/obj/$b.err"; fail=1; }
+    case "$VOLATILE_SOURCES" in *" $b.cpp "*) PLAIN= ;; *) PLAIN=-DGH_PLAIN_MEMORY ;; esac
+    g++ $CXXFLAGS $PLAIN -c "$f" -o "$OUT/obj/$b.o" 2>"$OUT/obj/$b.err" || { echo "FAIL $f"; head -5 "$OUT/obj/$b.err"; fail=1; }
 done
 [ $fail -eq 0 ] || exit 1
 cat "$OUT"/obj/*.err > "$OUT/compile.err" 2>/dev/null   # all compiler diagnostics in one file (empty unless WARN enables some)

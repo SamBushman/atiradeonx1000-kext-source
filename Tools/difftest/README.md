@@ -103,3 +103,16 @@ pointers to LATER objects of the pool, so chains are valid and end). They reach 
 of one of its tables, where the two builds' data layouts differ: that is an artifact of the input, not a defect (`--explain` prints the reads and stores to
 check). NO-RESULT means no run finished (budget exceeded or a wild pointer): the function needs a hand-written world.
 To look at the machine code of a function in both builds: `Tools/difftest/disassemble.sh` makes the dump, `Tools/difftest/disfn.py NAME` prints it.
+
+## Where do the estimated cycles go? (`profile_case.py`, `trace_case.py`)
+
+    python3 Tools/difftest/profile_case.py Tests/difftest/hand_cases_C.py "opcode 0x06" [SEEDS]        # instructions by class, stock vs rebuilt
+    python3 Tools/difftest/trace_case.py   Tests/difftest/hand_cases_C.py "opcode 0x31" SEED [PREFIX]  # the executed streams + a register-blind diff
+
+`Tests/difftest/cycle_notes.md` records what these found and what is left above x1.10.
+
+## Words that look like addresses
+
+A stored word that is an address into the kext image is compared by the name of its target (so two layouts compare). A plain number that happens to equal an address in ONE of
+the two images is then named on that side only; a byte whose two sides stored the same raw bytes is therefore not reported as a difference ("memory left behind differs"
+needs different raw bytes). Cases whose words are never addresses can still say `plain_words=True`.

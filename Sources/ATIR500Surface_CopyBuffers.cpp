@@ -25,7 +25,6 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/IOATIR500Accelerator.h"
 
-extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
 extern "C" int kernelTaskRef asm("_kernel_task");
 int get_offset_of_sample_0(ATIR500SurfaceBuffer *buffer, int x, int y);
 UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accel, UInt32 *cmd, UInt32 depthWords, UInt32 a3,

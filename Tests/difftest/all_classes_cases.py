@@ -38,6 +38,8 @@ OPTIONS = {
     # polls a status word that never changes in the soup world: the bounded loop costs more instructions per pass in the shipped code, so give both sides room to finish
     'ATIRadeonX1000::submit_empty_buffer': dict(limit=400000),
     'IOATIR500GLContext::set_surface': dict(ignore_args={'setCompatibleSurfaceMode': [3]}),
+    # stores command-stream tokens (0x10832...) that are not pointers: a token equal to an address inside the kext image would be compared by symbol name (and differ with the layout)
+    'ATIR500GLContext::WriteVertexArrayOffset': dict(plain_words=True),
 }
 
 CASES = []

@@ -78,26 +78,7 @@ extern AtiFormatInfoEntry kAtiFormatInfoTable[48] = {
     { 0x2f000000, 0x00045a14, 0x00000000, 0x00000000, 0x0240aa00, 0x00000000, 0xff000000 }, // #47
 };
 
-/*
- * The three real FormatTableLookup accessors, matching this project's
- * long-established `formatTableIndex * 0x1c` calling convention at every
- * call site (dozens of them across the GL and DVD command-buffer opcode
- * handlers) - the `- 0xc` here is the real correction for these
- * accessors' own historical naming being offset from the real struct
- * base (see this function's own header comment).
- */
-extern "C" UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset) {
-    return kAtiFormatInfoTable[byteOffset / 0x1c].field08;
-}
-extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset) {
-    return kAtiFormatInfoTable[byteOffset / 0x1c].fieldDC;
-}
-extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset) {
-    return kAtiFormatInfoTable[byteOffset / 0x1c].fieldE0;
-}
-extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset) {
-    return kAtiFormatInfoTable[byteOffset / 0x1c].fieldE4;
-}
+/* The FormatTableLookup_* accessors are header inlines now (Headers/ATIRadeonX1000Registers.h). */
 
 /*
  * _samplesTable - real kext address 0x4c268. Only the real used range

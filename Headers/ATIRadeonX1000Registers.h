@@ -313,9 +313,16 @@ extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blo
  * addresses the right entry's own base; these functions internally
  * account for the real `0xc` struct-base correction).
  */
-extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
-extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
-extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
+/*
+ * The accessors are header inlines indexing the table by BYTE offset (callers pass `formatTableIndex * 0x1c`, so the address is
+ * table + byteOffset + field): stock reads the table directly the same way, with no call and no divide by the entry size. The table
+ * itself is defined (as `kAtiFormatInfoTable`, an AtiFormatInfoEntry[48]) in Sources/ATIRadeonX1000_DataTables.cpp.
+ */
+extern UInt8 gAtiFormatInfoBytes[] asm("_ati_format_info_table");
+static inline UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x08); }
+static inline UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x0c); }
+static inline UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x10); }
+static inline UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x14); }
 
 /*
  * SamplesTableLookup - RESOLVED (issue #14). Real table (`_samplesTable`,
