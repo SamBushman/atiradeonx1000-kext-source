@@ -89,6 +89,7 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   int oldHeader;
   int oldSize;
   UInt16 oldType;
+  int finalAllocResult;
   /* one 16-byte stack object filled by the +0x5ac/+0x5b4/+0x560 callees (Ghidra named its words descriptor and local_30; #85) */
   int descriptor[4];
   
@@ -193,7 +194,7 @@ checkPanelIndex:
 afterAllocation:
   if (999 < retries) {
     if ((1000 < retries) ||
-       (iVar16 = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces((M<UInt32>(self + kIOATIR5002DContext_surfaceFlagsBitmask) | M<UInt32>(surface + 0xc1c)) & 0x7fffff, true), iVar16 != 0))
+       (finalAllocResult = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces((M<UInt32>(self + kIOATIR5002DContext_surfaceFlagsBitmask) | M<UInt32>(surface + 0xc1c)) & 0x7fffff, true), finalAllocResult != 0))
     goto returnCommandBuffer;
     surfaceWords = M<int *>(self + kIOATIR5002DContext_boundSurface);
     if ((surfaceWords[0x2fe] & surfaceWords[0x307] & 0x10000000U) != 0) {

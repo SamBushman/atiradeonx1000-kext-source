@@ -35,6 +35,8 @@ IOReturn IOATIR5002DContext::declare_image(UInt32 unused, unsigned int address, 
   UInt8 *shared;
   SInt32 iVar1;
   UInt32 result;
+  SInt32 sharedCreated;
+  SInt32 newTextureResult;
   
   if ((length == 0) || (address == 0)) {
     result = 0xe00002c2;
@@ -43,17 +45,17 @@ IOReturn IOATIR5002DContext::declare_image(UInt32 unused, unsigned int address, 
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
     shared = M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator);
     if (shared == (UInt8 *)0x0) {
-      iVar1 = this->create_shared();
-      if (iVar1 == 0) {
+      sharedCreated = this->create_shared();
+      if (sharedCreated == 0) {
         GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
         return 0xe00002be;
       }
       shared = M<UInt8 *>(self + kIOATIR5002DContext_sharedAllocator);
     }
-    iVar1 = (SInt32)((IOATIR500Shared *)(shared))->new_agp_texture(address, length, (unsigned int *)(outUserAddr));
+    newTextureResult = (SInt32)((IOATIR500Shared *)(shared))->new_agp_texture(address, length, (unsigned int *)(outUserAddr));
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
     result = 0;
-    if (iVar1 == 0) {
+    if (newTextureResult == 0) {
       result = 0xe00002bd;
     }
   }

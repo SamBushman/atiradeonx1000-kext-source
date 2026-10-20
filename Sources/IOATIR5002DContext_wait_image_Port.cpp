@@ -34,23 +34,26 @@ IOReturn IOATIR5002DContext::wait_image(UInt32 textureID) {
 
   SInt32 iVar1;
   UInt32 result;
+  SInt32 sharedAllocator;
+  SInt32 texture;
+  SInt32 waited;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
-  iVar1 = M<SInt32>(self + kIOATIR5002DContext_sharedAllocator);
-  if (iVar1 == 0) {
+  sharedAllocator = M<SInt32>(self + kIOATIR5002DContext_sharedAllocator);
+  if (sharedAllocator == 0) {
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
     result = 0xe00002be;
   }
   else {
-    if ((textureID < M<UInt32>(iVar1 + 0x14)) &&
-       (iVar1 = M<SInt32>(textureID * 4 + M<SInt32>(iVar1 + 0x10)), iVar1 != 0)) {
+    if ((textureID < M<UInt32>(sharedAllocator + kIOATIR500Shared_handleCapacity)) &&
+       (texture = M<SInt32>(textureID * 4 + M<SInt32>(sharedAllocator + 0x10)), texture != 0)) {
       GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));
-      iVar1 = VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_accelerator), 0x550)
-                        (M<SInt32 *>(self + kIOATIR5002DContext_accelerator),M<UInt32>(M<SInt32>(iVar1 + 0x14) + 8));
-      if (iVar1 == -1) {
+      waited = VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_accelerator), 0x550)
+                        (M<SInt32 *>(self + kIOATIR5002DContext_accelerator),M<UInt32>(M<SInt32>(texture + 0x14) + 8));
+      if (waited == -1) {
         return 0xe00002d6;
       }
-      M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x75c) = iVar1 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x75c);
+      M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x75c) = waited + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x75c);
       return 0;
     }
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x840));

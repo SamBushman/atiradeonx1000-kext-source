@@ -37,14 +37,16 @@ void IOATIR500DVDContext::freeAllContextBuffers() {
   SInt32 *accel;
   SInt32 iVar6;
   UInt8 *slotBase;
+  SInt32 oldWaitCounter;
+  SInt32 counterAdvance;
   
   slot = self + kIOATIR500DVDContext_contextBufferRing;
   slotIndex = 0;
   accel = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
-  iVar6 = accel[0x1e1];
-  iVar2 = VCALL(*accel, 0x54c)
+  oldWaitCounter = accel[0x1e1];
+  counterAdvance = VCALL(*accel, 0x54c)
                     (accel,M<UInt32>(self + M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) * 0x18 + 0xd4));
-  accel[0x1e1] = iVar6 + iVar2;
+  accel[0x1e1] = oldWaitCounter + counterAdvance;
   slotBase = self;
   do {
     if (M<SInt32>(slotBase + 200) != 0) {

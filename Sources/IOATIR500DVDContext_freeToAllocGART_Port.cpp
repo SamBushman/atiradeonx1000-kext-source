@@ -36,21 +36,23 @@ bool IOATIR500DVDContext::freeToAllocGART(VendorTransferBuffer *needed, bool agg
   SInt32 freed;
   UInt8 *slot;
   UInt8 *slotBase;
+  SInt32 freedBuffer;
+  SInt32 ringIndex;
   
-  iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_contextBuffer)),
+  freedBuffer = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_contextBuffer)),
                      (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500DVDContext_contextBufferStamp),aggressive);
-  if ((iVar2 == 0) &&
-     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500DVDContext_commandBufferStamp),
-                         aggressive), iVar2 == 0)) {
-    iVar2 = 0;
+  if ((freedBuffer == 0) &&
+     (freedBuffer = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR500DVDContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR500DVDContext_commandBufferStamp),
+                         aggressive), freedBuffer == 0)) {
+    ringIndex = 0;
     slot = (UInt8 *)(self + kIOATIR500DVDContext_contextBufferRing);
     slotBase = self;
     while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
                               M<UInt32>(slotBase + 0xd4),aggressive), freed == 0) {
-      lastSlot = iVar2 == 1;
+      lastSlot = ringIndex == 1;
       slot = slot + 0x18;
       slotBase = slotBase + 0x18;
-      iVar2 = iVar2 + 1;
+      ringIndex = ringIndex + 1;
       if (lastSlot) {
         return 0;
       }

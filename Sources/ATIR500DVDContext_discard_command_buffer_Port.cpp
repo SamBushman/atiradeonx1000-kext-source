@@ -39,109 +39,113 @@ void ATIR500DVDContext::discard_command_buffer() {
   UInt32 recordLength;
   UInt32 recordWord;
   UInt32 *record;
+  SInt32 sharedTexture;
+  UInt32 opcode;
+  UInt32 textureSlotOffset;
+  SInt32 textureRefCount;
   
   record = (UInt32 *)(M<SInt32>(self + kIOATIR500DVDContext_commandBufferHeader) + 0x1c);
   do {
     recordWord = *record;
-    uVar1 = recordWord & 0xff000000;
-    if (uVar1 == 0x2a000000) {
+    opcode = recordWord & 0xff000000;
+    if (opcode == 0x2a000000) {
 LAB_00033ed0:
       if ((record[1] < M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x14)) &&
-         (iVar4 = M<SInt32>(record[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x10)), iVar4 != 0)) {
-        slotOffset = (uVar1 + 0xe7000000 >> 0x18) * 4;
+         (sharedTexture = M<SInt32>(record[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x10)), sharedTexture != 0)) {
+        slotOffset = (opcode + 0xe7000000 >> 0x18) * 4;
         if ((M<SInt32>(self + slotOffset + 0x104) != 0) &&
            (oldRefCount = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + slotOffset + 0x104) + 0x14) + 0x10), oldRefCount == 1
            )) {
           ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + slotOffset + 0x104)));
         }
-        GH_OSAddAtomic(0xffff0001,M<SInt32>(iVar4 + 0x14) + 0x10);
+        GH_OSAddAtomic(0xffff0001,M<SInt32>(sharedTexture + 0x14) + 0x10);
         recordLength = recordWord & 0xffffff;
-        M<SInt32>(self + slotOffset + 0x104) = iVar4;
+        M<SInt32>(self + slotOffset + 0x104) = sharedTexture;
       }
       else {
         recordLength = 0;
       }
     }
     else {
-      if (uVar1 < 0x2a000001) {
-        if (uVar1 != 0x21000000) {
-          if (uVar1 < 0x21000001) {
-            if (uVar1 != 0x1c000000) {
-              if (uVar1 < 0x1c000001) {
-                if (((uVar1 != 0x1a000000) && (uVar1 != 0x1b000000)) && (uVar1 != 0x19000000))
+      if (opcode < 0x2a000001) {
+        if (opcode != 0x21000000) {
+          if (opcode < 0x21000001) {
+            if (opcode != 0x1c000000) {
+              if (opcode < 0x1c000001) {
+                if (((opcode != 0x1a000000) && (opcode != 0x1b000000)) && (opcode != 0x19000000))
                 goto LAB_00033ec0;
               }
-              else if (uVar1 != 0x1e000000) {
-                if (uVar1 < 0x1e000001) {
-                  if (uVar1 == 0x1d000000) goto LAB_00033ed0;
+              else if (opcode != 0x1e000000) {
+                if (opcode < 0x1e000001) {
+                  if (opcode == 0x1d000000) goto LAB_00033ed0;
                 }
-                else if ((uVar1 == 0x1f000000) || (uVar1 == 0x20000000)) goto LAB_00033ed0;
+                else if ((opcode == 0x1f000000) || (opcode == 0x20000000)) goto LAB_00033ed0;
                 goto LAB_00033ec0;
               }
             }
           }
-          else if (uVar1 != 0x25000000) {
-            if (uVar1 < 0x25000001) {
-              if (((uVar1 != 0x23000000) && (uVar1 != 0x24000000)) && (uVar1 != 0x22000000))
+          else if (opcode != 0x25000000) {
+            if (opcode < 0x25000001) {
+              if (((opcode != 0x23000000) && (opcode != 0x24000000)) && (opcode != 0x22000000))
               goto LAB_00033ec0;
             }
-            else if (uVar1 != 0x27000000) {
-              if (uVar1 < 0x27000001) {
-                if (uVar1 == 0x26000000) goto LAB_00033ed0;
+            else if (opcode != 0x27000000) {
+              if (opcode < 0x27000001) {
+                if (opcode == 0x26000000) goto LAB_00033ed0;
               }
-              else if ((uVar1 == 0x28000000) || (uVar1 == 0x29000000)) goto LAB_00033ed0;
+              else if ((opcode == 0x28000000) || (opcode == 0x29000000)) goto LAB_00033ed0;
               goto LAB_00033ec0;
             }
           }
         }
         goto LAB_00033ed0;
       }
-      if (uVar1 == 0x33000000) {
+      if (opcode == 0x33000000) {
 LAB_00033f70:
         recordLength = recordWord & 0xffffff;
-        uVar1 = uVar1 + 0xd5000000 >> 0x16;
-        if (M<SInt32>(self + uVar1 + 0x104) != 0) {
-          iVar4 = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + uVar1 + 0x104) + 0x14) + 0x10);
-          if (iVar4 == 1) {
-            ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + uVar1 + 0x104)));
+        textureSlotOffset = opcode + 0xd5000000 >> 0x16;
+        if (M<SInt32>(self + textureSlotOffset + 0x104) != 0) {
+          textureRefCount = GH_OSDecrementAtomic(M<SInt32>(M<SInt32>(self + textureSlotOffset + 0x104) + 0x14) + 0x10);
+          if (textureRefCount == 1) {
+            ((IOATIR500Shared *)(M<UInt8 *>(self + kIOATIR500DVDContext_sharedAllocator)))->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + textureSlotOffset + 0x104)));
           }
           recordLength = recordWord & 0xffffff;
-          M<UInt32>(self + uVar1 + 0x104) = 0;
+          M<UInt32>(self + textureSlotOffset + 0x104) = 0;
         }
       }
       else {
-        if (uVar1 < 0x33000001) {
-          if (uVar1 != 0x2e000000) {
-            if (uVar1 < 0x2e000001) {
-              if (((uVar1 != 0x2c000000) && (uVar1 != 0x2d000000)) && (uVar1 != 0x2b000000))
+        if (opcode < 0x33000001) {
+          if (opcode != 0x2e000000) {
+            if (opcode < 0x2e000001) {
+              if (((opcode != 0x2c000000) && (opcode != 0x2d000000)) && (opcode != 0x2b000000))
               goto LAB_00033ec0;
             }
-            else if (uVar1 != 0x30000000) {
-              if (uVar1 < 0x30000001) {
-                if (uVar1 == 0x2f000000) goto LAB_00033f70;
+            else if (opcode != 0x30000000) {
+              if (opcode < 0x30000001) {
+                if (opcode == 0x2f000000) goto LAB_00033f70;
               }
-              else if ((uVar1 == 0x31000000) || (uVar1 == 0x32000000)) goto LAB_00033f70;
+              else if ((opcode == 0x31000000) || (opcode == 0x32000000)) goto LAB_00033f70;
               goto LAB_00033ec0;
             }
           }
           goto LAB_00033f70;
         }
-        if (uVar1 == 0x38000000) goto LAB_00033f70;
-        if (uVar1 < 0x38000001) {
-          if (uVar1 != 0x35000000) {
-            if (uVar1 < 0x35000001) {
-              if (uVar1 == 0x34000000) goto LAB_00033f70;
+        if (opcode == 0x38000000) goto LAB_00033f70;
+        if (opcode < 0x38000001) {
+          if (opcode != 0x35000000) {
+            if (opcode < 0x35000001) {
+              if (opcode == 0x34000000) goto LAB_00033f70;
             }
-            else if ((uVar1 == 0x36000000) || (uVar1 == 0x37000000)) goto LAB_00033f70;
+            else if ((opcode == 0x36000000) || (opcode == 0x37000000)) goto LAB_00033f70;
             goto LAB_00033ec0;
           }
           goto LAB_00033f70;
         }
-        if (uVar1 == 0x3a000000) goto LAB_00033f70;
-        if (uVar1 < 0x3a000001) {
-          if (uVar1 == 0x39000000) goto LAB_00033f70;
+        if (opcode == 0x3a000000) goto LAB_00033f70;
+        if (opcode < 0x3a000001) {
+          if (opcode == 0x39000000) goto LAB_00033f70;
         }
-        else if ((uVar1 == 0x3b000000) || (uVar1 == 0x3c000000)) goto LAB_00033f70;
+        else if ((opcode == 0x3b000000) || (opcode == 0x3c000000)) goto LAB_00033f70;
 LAB_00033ec0:
         recordLength = recordWord & 0xffffff;
       }

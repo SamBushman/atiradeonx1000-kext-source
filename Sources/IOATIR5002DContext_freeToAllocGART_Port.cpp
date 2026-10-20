@@ -36,21 +36,23 @@ bool IOATIR5002DContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
   SInt32 freed;
   UInt8 *candidate;
   UInt8 *ringEntry;
+  SInt32 freedBuffer;
+  SInt32 ringIndex;
   
-  iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR5002DContext_contextBuffer)),
+  freedBuffer = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR5002DContext_contextBuffer)),
                      (VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR5002DContext_contextBufferStamp),aggressive);
-  if ((iVar2 == 0) &&
-     (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR5002DContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR5002DContext_commandBufferStamp),
-                         aggressive), iVar2 == 0)) {
-    iVar2 = 0;
+  if ((freedBuffer == 0) &&
+     (freedBuffer = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + kIOATIR5002DContext_commandBuffer)),(VendorTransferBuffer *)(neededBytes),M<UInt32>(self + kIOATIR5002DContext_commandBufferStamp),
+                         aggressive), freedBuffer == 0)) {
+    ringIndex = 0;
     candidate = (UInt8 *)(self + kIOATIR5002DContext_contextBufferRing);
     ringEntry = self;
     while (freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR5002DContext_accelerator)))->freeTransferToAllocGART((VendorTransferBuffer *)(candidate),(VendorTransferBuffer *)(neededBytes),
                               M<UInt32>(ringEntry + 0xdc),aggressive), freed == 0) {
-      lastEntry = iVar2 == 1;
+      lastEntry = ringIndex == 1;
       candidate = candidate + 0x18;
       ringEntry = ringEntry + 0x18;
-      iVar2 = iVar2 + 1;
+      ringIndex = ringIndex + 1;
       if (lastEntry) {
         return 0;
       }
