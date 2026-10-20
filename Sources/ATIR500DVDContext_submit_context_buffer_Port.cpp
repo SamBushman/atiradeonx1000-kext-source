@@ -54,37 +54,67 @@ void ATIR500DVDContext::submit_context_buffer() {
   UInt8 *pAVar21;
   SInt32 iVar22;
   SInt32 iVar23;
+  UInt8 *slotCursor;
+  UInt8 *ringEntry;
+  SInt32 slotTexture;
+  UInt32 nextRingIndex;
+  SInt32 oldWaitCounter;
+  SInt32 counterAdvance;
+  UInt32 headerWord1;
+  UInt32 headerWord2;
+  UInt32 headerWord3;
+  UInt32 headerWord7;
+  UInt32 headerWord4;
+  UInt32 headerWord6;
+  SInt32 pendingHeader;
+  SInt32 entryHeaderBase;
+  SInt32 trailerByteOffset0;
+  SInt32 trailerIdx8;
+  SInt32 copyByteOffset;
+  SInt32 copyRemaining;
+  SInt32 delayCount;
+  SInt32 padByteOffset;
+  UInt32 submitStamp;
+  UInt32 packetWordCount;
+  SInt32 trailerIdx1;
+  SInt32 trailerIdx2;
+  SInt32 trailerIdx3;
+  SInt32 trailerIdx4;
+  SInt32 trailerIdx5;
+  SInt32 trailerIdx6;
+  SInt32 trailerIdx7;
+  SInt32 trailerIdx9;
   
-  pAVar21 = self;
+  slotCursor = self;
   do {
-    texture = M<UInt8 *>(pAVar21 + 0x104);
-    textureSlot = pAVar21 + 0x104;
+    texture = M<UInt8 *>(slotCursor + 0x104);
+    textureSlot = slotCursor + 0x104;
     if (texture != (UInt8 *)0x0) {
       if (M<char>(M<SInt32>(texture + 0x14) + 0x14) != '\0') {
         if (M<SInt32>(texture + 4) == 0) {
           ((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture));
-          texture = M<UInt8 *>(pAVar21 + 0x104);
+          texture = M<UInt8 *>(slotCursor + 0x104);
           if (M<SInt32>(texture + 4) != 0) goto LAB_000344b0;
         }
         else {
 LAB_000344b0:
           GH_IOGetTime(texture + 0x2c);
-          M<UInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) + 0x38) =
-               M<UInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38);
-          M<UInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38) + 0x34) =
-               M<UInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34);
-          M<UInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) =
+          M<UInt32>(M<SInt32>(M<SInt32>(slotCursor + 0x104) + 0x34) + 0x38) =
+               M<UInt32>(M<SInt32>(slotCursor + 0x104) + 0x38);
+          M<UInt32>(M<SInt32>(M<SInt32>(slotCursor + 0x104) + 0x38) + 0x34) =
+               M<UInt32>(M<SInt32>(slotCursor + 0x104) + 0x34);
+          M<UInt32>(M<SInt32>(slotCursor + 0x104) + 0x34) =
                M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0);
-          M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
-          M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = M<UInt32>(pAVar21 + 0x104);
-          M<SInt32>(M<SInt32>(M<SInt32>(pAVar21 + 0x104) + 0x34) + 0x38) = M<SInt32>(pAVar21 + 0x104);
+          M<SInt32>(M<SInt32>(slotCursor + 0x104) + 0x38) = M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x69c;
+          M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x6d0) = M<UInt32>(slotCursor + 0x104);
+          M<SInt32>(M<SInt32>(M<SInt32>(slotCursor + 0x104) + 0x34) + 0x38) = M<SInt32>(slotCursor + 0x104);
         }
         M<UInt8>(M<SInt32>(M<SInt32>(textureSlot) + 0x14) + 0x14) = 0;
         M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) | 1;
       }
-      iVar1 = M<SInt32>(textureSlot);
-      if (M<SInt32>(iVar1 + 0x48) != 0) {
-        M<UInt32>(M<SInt32>(iVar1 + 0x24) + 0x28) = M<UInt32>(iVar1 + 0x28);
+      slotTexture = M<SInt32>(textureSlot);
+      if (M<SInt32>(slotTexture + 0x48) != 0) {
+        M<UInt32>(M<SInt32>(slotTexture + 0x24) + 0x28) = M<UInt32>(slotTexture + 0x28);
         M<UInt32>(M<SInt32>(M<SInt32>(textureSlot) + 0x28) + 0x24) =
              M<UInt32>(M<SInt32>(textureSlot) + 0x24);
         M<UInt32>(M<SInt32>(textureSlot) + 0x24) = M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x600);
@@ -93,107 +123,107 @@ LAB_000344b0:
         M<SInt32>(M<SInt32>(M<SInt32>(textureSlot) + 0x24) + 0x28) = M<SInt32>(textureSlot);
       }
     }
-    pAVar21 = pAVar21 + 4;
-    if (pAVar21 == self + 0x48) {
+    slotCursor = slotCursor + 4;
+    if (slotCursor == self + 0x48) {
       if ((M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) & 1) == 0) {
-        pAVar21 = self + M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) * 0x18;
+        ringEntry = self + M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) * 0x18;
       }
       else {
         accel = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
-        uVar7 = M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) + 1U & 1;
-        M<UInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) = uVar7;
-        pAVar21 = self + uVar7 * 0x18;
-        iVar22 = accel[0x1e1];
-        iVar1 = VCALL(*accel, 0x54c)(accel,M<UInt32>(pAVar21 + 0xd4));
-        accel[0x1e1] = iVar22 + iVar1;
+        nextRingIndex = M<SInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) + 1U & 1;
+        M<UInt32>(self + kIOATIR500DVDContext_contextBufferRingIndex) = nextRingIndex;
+        ringEntry = self + nextRingIndex * 0x18;
+        oldWaitCounter = accel[0x1e1];
+        counterAdvance = VCALL(*accel, 0x54c)(accel,M<UInt32>(ringEntry + 0xd4));
+        accel[0x1e1] = oldWaitCounter + counterAdvance;
         header = M<UInt32 *>(self + kIOATIR500DVDContext_contextBufferHeader);
-        slotHeader = M<UInt32 *>(pAVar21 + 0xd8);
-        uVar13 = header[1];
-        uVar11 = header[2];
-        uVar8 = header[3];
+        slotHeader = M<UInt32 *>(ringEntry + 0xd8);
+        headerWord1 = header[1];
+        headerWord2 = header[2];
+        headerWord3 = header[3];
         *slotHeader = *header;
-        slotHeader[1] = uVar13;
-        slotHeader[2] = uVar11;
-        slotHeader[3] = uVar8;
-        uVar8 = header[7];
-        uVar13 = header[4];
-        uVar11 = header[6];
+        slotHeader[1] = headerWord1;
+        slotHeader[2] = headerWord2;
+        slotHeader[3] = headerWord3;
+        headerWord7 = header[7];
+        headerWord4 = header[4];
+        headerWord6 = header[6];
         slotHeader[5] = header[5];
-        slotHeader[7] = uVar8;
-        slotHeader[4] = uVar13;
-        slotHeader[6] = uVar11;
-        iVar1 = M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader);
-        iVar22 = M<SInt32>(pAVar21 + 0xd8);
-        dwordCount = M<SInt32>(iVar1 + 0x14);
-        payload = iVar22 + 0x20;
+        slotHeader[7] = headerWord7;
+        slotHeader[4] = headerWord4;
+        slotHeader[6] = headerWord6;
+        pendingHeader = M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader);
+        entryHeaderBase = M<SInt32>(ringEntry + 0xd8);
+        dwordCount = M<SInt32>(pendingHeader + 0x14);
+        payload = entryHeaderBase + 0x20;
         if (dwordCount == 0) {
           dwordCount = 0;
-          iVar1 = 0;
-          iVar5 = 1;
-          iVar14 = 2;
-          iVar6 = 3;
-          iVar17 = 4;
-          iVar15 = 5;
-          iVar20 = 6;
-          iVar23 = 7;
-          iVar3 = 8;
-          iVar16 = 9;
-          uVar7 = 10;
+          trailerByteOffset0 = 0;
+          trailerIdx1 = 1;
+          trailerIdx2 = 2;
+          trailerIdx3 = 3;
+          trailerIdx4 = 4;
+          trailerIdx5 = 5;
+          trailerIdx6 = 6;
+          trailerIdx7 = 7;
+          trailerIdx8 = 8;
+          trailerIdx9 = 9;
+          packetWordCount = 10;
         }
         else {
-          iVar3 = 0;
-          iVar22 = dwordCount;
+          copyByteOffset = 0;
+          copyRemaining = dwordCount;
           do {
-            M<UInt32>(payload + iVar3) = M<UInt32>(iVar1 + 0x20 + iVar3);
-            iVar3 = iVar3 + 4;
-            iVar22 = iVar22 + -1;
-          } while (iVar22 != 0);
-          iVar22 = M<SInt32>(pAVar21 + 0xd8);
-          iVar1 = dwordCount << 2;
-          iVar5 = dwordCount + 1;
-          iVar14 = dwordCount + 2;
-          iVar6 = dwordCount + 3;
-          iVar17 = dwordCount + 4;
-          iVar15 = dwordCount + 5;
-          iVar20 = dwordCount + 6;
-          iVar23 = dwordCount + 7;
-          iVar3 = dwordCount + 8;
-          iVar16 = dwordCount + 9;
-          uVar7 = dwordCount + 10;
+            M<UInt32>(payload + copyByteOffset) = M<UInt32>(pendingHeader + 0x20 + copyByteOffset);
+            copyByteOffset = copyByteOffset + 4;
+            copyRemaining = copyRemaining + -1;
+          } while (copyRemaining != 0);
+          entryHeaderBase = M<SInt32>(ringEntry + 0xd8);
+          trailerByteOffset0 = dwordCount << 2;
+          trailerIdx1 = dwordCount + 1;
+          trailerIdx2 = dwordCount + 2;
+          trailerIdx3 = dwordCount + 3;
+          trailerIdx4 = dwordCount + 4;
+          trailerIdx5 = dwordCount + 5;
+          trailerIdx6 = dwordCount + 6;
+          trailerIdx7 = dwordCount + 7;
+          trailerIdx8 = dwordCount + 8;
+          trailerIdx9 = dwordCount + 9;
+          packetWordCount = dwordCount + 10;
         }
-        M<UInt32>(payload + iVar1) = 0x1393;
-        M<UInt32>(payload + iVar5 * 4) = 10;
-        M<UInt32>(payload + iVar14 * 4) = 0xd0b;
-        M<UInt32>(payload + iVar6 * 4) = 5;
-        M<UInt32>(payload + iVar17 * 4) = 0x13c6;
-        M<UInt32>(payload + iVar15 * 4) = 3;
-        M<UInt32>(payload + iVar20 * 4) = 0x5c8;
-        M<UInt32>(payload + iVar23 * 4) = 0x70000;
-        M<UInt32>(payload + iVar3 * 4) = 0x1006;
-        M<UInt32>(payload + iVar16 * 4) =
+        M<UInt32>(payload + trailerByteOffset0) = 0x1393;
+        M<UInt32>(payload + trailerIdx1 * 4) = 10;
+        M<UInt32>(payload + trailerIdx2 * 4) = 0xd0b;
+        M<UInt32>(payload + trailerIdx3 * 4) = 5;
+        M<UInt32>(payload + trailerIdx4 * 4) = 0x13c6;
+        M<UInt32>(payload + trailerIdx5 * 4) = 3;
+        M<UInt32>(payload + trailerIdx6 * 4) = 0x5c8;
+        M<UInt32>(payload + trailerIdx7 * 4) = 0x70000;
+        M<UInt32>(payload + trailerIdx8 * 4) = 0x1006;
+        M<UInt32>(payload + trailerIdx9 * 4) =
              M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0xb74) & 0xfffeffff | 0x10000;
-        iVar1 = 0x12;
+        delayCount = 0x12;
         do {
-          iVar1 = iVar1 + -1;
-        } while (iVar1 != 0);
-        if ((uVar7 & 7) != 0) {
-          iVar1 = uVar7 * 4;
-          uVar7 = dwordCount + 0xb;
-          M<UInt32>(payload + iVar1) = 0x80000000;
+          delayCount = delayCount + -1;
+        } while (delayCount != 0);
+        if ((packetWordCount & 7) != 0) {
+          padByteOffset = packetWordCount * 4;
+          packetWordCount = dwordCount + 0xb;
+          M<UInt32>(payload + padByteOffset) = 0x80000000;
         }
-        M<UInt32>(iVar22 + 0x14) = uVar7;
+        M<UInt32>(entryHeaderBase + 0x14) = packetWordCount;
         M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) =
              M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_contextBufferHeader) + 0x1c) & 0xfffffffe;
       }
-      if (M<SInt32>(pAVar21 + 200) == 0) {
-        ((IOATIR500DVDContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(pAVar21 + 0xc4)));
+      if (M<SInt32>(ringEntry + 200) == 0) {
+        ((IOATIR500DVDContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(ringEntry + 0xc4)));
       }
       M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708) =
-           M<SInt32>(M<SInt32>(pAVar21 + 0xd8) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708);
-      uVar8 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(pAVar21 + 0xd8) + 0x20),M<SInt32>(pAVar21 + 200) + 0x20,
-                         M<UInt32>(M<SInt32>(pAVar21 + 0xd8) + 0x14));
-      M<UInt32>(pAVar21 + 0xd4) = uVar8;
-      M<UInt32>(self + kIOATIR500DVDContext_lastSubmitStamp) = uVar8;
+           M<SInt32>(M<SInt32>(ringEntry + 0xd8) + 0x14) * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x708);
+      submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->submit_buffer((UInt32 *)(M<SInt32>(ringEntry + 0xd8) + 0x20),M<SInt32>(ringEntry + 200) + 0x20,
+                         M<UInt32>(M<SInt32>(ringEntry + 0xd8) + 0x14));
+      M<UInt32>(ringEntry + 0xd4) = submitStamp;
+      M<UInt32>(self + kIOATIR500DVDContext_lastSubmitStamp) = submitStamp;
       return;
     }
   } while( true );

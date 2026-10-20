@@ -1,22 +1,22 @@
---- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-18 14:05:23.723690963 -0700
-+++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-18 14:05:23.725028883 -0700
-@@ -482,12 +482,12 @@
-               uStack_84 = pitch >> 2 ^ 0x80000000;
-               local_88 = 0x43300000;
+--- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-20 09:34:41.500636572 -0700
++++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-20 09:34:41.501349728 -0700
+@@ -527,12 +527,12 @@
+               doubleLo0 = pitch >> 2 ^ 0x80000000;
+               doubleHi0 = 0x43300000;
                recordCursor[0x61] =
--                   (UInt32)(float)((((double)CONCAT44d(0x43300000,uStack_84) - DOUBLE_0004c3a8) +
+-                   (UInt32)(float)((((double)CONCAT44d(0x43300000,doubleLo0) - DOUBLE_0004c3a8) +
 -                                 DOUBLE_0004c3c0) * DOUBLE_0004c3b8);
-+                   FBITS((float)((((double)CONCAT44d(0x43300000,uStack_84) - DOUBLE_0004c3a8) +
++                   FBITS((float)((((double)CONCAT44d(0x43300000,doubleLo0) - DOUBLE_0004c3a8) +
 +                                 DOUBLE_0004c3c0) * DOUBLE_0004c3b8));
-               local_80 = 0x43300000;
-               uStack_7c = M<UInt16>(bufferInfo + 0x576) >> 1 ^ 0x80000000;
+               doubleHi1 = 0x43300000;
+               doubleLo1 = M<UInt16>(bufferInfo + 0x576) >> 1 ^ 0x80000000;
                recordCursor[0x62] =
--                   (UInt32)(float)((((double)CONCAT44d(0x43300000,uStack_7c) - intToFloatBias) + zero) * half)
-+                   FBITS((float)((((double)CONCAT44d(0x43300000,uStack_7c) - intToFloatBias) + zero) * half))
+-                   (UInt32)(float)((((double)CONCAT44d(0x43300000,doubleLo1) - intToFloatBias) + zero) * half)
++                   FBITS((float)((((double)CONCAT44d(0x43300000,doubleLo1) - intToFloatBias) + zero) * half))
                ;
                recordWord = recordWord & 0xffffff;
              }
-@@ -890,7 +890,7 @@
+@@ -935,7 +935,7 @@
              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
              recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
              recordCursor[9] = clearByte | clearByte << 0x18 | clearByte << 0x10 |
@@ -25,7 +25,7 @@
              recordCursor[10] = 0;
              sizeWord = overlayHeight | (pitch & 0xfffc) << 0xe;
  LAB_00037c4c:
-@@ -931,7 +931,7 @@
+@@ -976,7 +976,7 @@
              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
              recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
              recordCursor[9] = clearByte | clearByte << 0x18 | clearByte << 0x10 |
