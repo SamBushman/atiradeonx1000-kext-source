@@ -1,87 +1,87 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 22:08:03.126237000 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-17 22:08:03.127810166 -0700
-@@ -737,8 +737,8 @@
-                          iVar48 * (uVar15 - hzBlockCount) >> 1 | recordCursor[uVar55 + 1] & 0xffff0000;
-                     local_1b8 = 0x43300000;
-                     recordCursor[uVar55 + 7] =
--                         (UInt32)(float)(((double)CONCAT44d(0x43300000,iStack_1b4) - DOUBLE_0004c3b0)
--                                       * dVar31);
-+                         FBITS((float)(((double)CONCAT44d(0x43300000,iStack_1b4) - DOUBLE_0004c3b0)
-+                                       * dVar31));
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 10:50:54.224864615 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 10:50:54.226243390 -0700
+@@ -1126,8 +1126,8 @@
+                          tileRowsScale * (surfaceHeight - hzBlockCount) >> 1 | recordCursor[statePacketIndex + 1] & 0xffff0000;
+                     hzExtentCvtHi = 0x43300000;
+                     recordCursor[statePacketIndex + 7] =
+-                         (UInt32)(float)(((double)CONCAT44d(0x43300000,hzExtentCvtLo) - DOUBLE_0004c3b0)
+-                                       * hzScaleFactor);
++                         FBITS((float)(((double)CONCAT44d(0x43300000,hzExtentCvtLo) - DOUBLE_0004c3b0)
++                                       * hzScaleFactor));
                    }
                    surfaceBuffer[0x36] = 0x1;
                  }
-@@ -2916,20 +2916,20 @@
-         *puVar42 = 0x31080;
+@@ -3305,20 +3305,20 @@
+         *tailCursor = 0x31080;
          recordCursor[0xc2] = 0x1087;
-         opcode = 0;
--        recordCursor[0xbe] = (UInt32)(fVar28 * (fVar6 + fVar5));
--        recordCursor[0xc0] = (UInt32)(fVar28 * (fVar7 + fVar5));
--        recordCursor[0xbf] = (UInt32)(fVar23 * (fVar8 + fVar9));
--        recordCursor[0xc1] = (UInt32)(fVar23 * (fVar4 + fVar9));
-+        recordCursor[0xbe] = FBITS(fVar28 * (fVar6 + fVar5));
-+        recordCursor[0xc0] = FBITS(fVar28 * (fVar7 + fVar5));
-+        recordCursor[0xbf] = FBITS(fVar23 * (fVar8 + fVar9));
-+        recordCursor[0xc1] = FBITS(fVar23 * (fVar4 + fVar9));
-         iVar59 = (SInt32)((fVar7 - fVar6) * fVar30);
--        uVar73 = (UInt32)((fVar8 - fVar4) * fVar30);
-+        uVar73 = (UInt32)(SInt32)((fVar8 - fVar4) * fVar30);
-         local_130 = (SInt64)iVar59;
-         local_128 = (SInt64)(SInt32)uVar73;
-         fVar5 = (fVar6 + fVar7) * FLOAT_0004c380;
-         fVar4 = (fVar4 + fVar8) * FLOAT_0004c380;
+         tileCount = 0;
+-        recordCursor[0xbe] = (UInt32)(scaleX * (dstLeftF + xOffsetF));
+-        recordCursor[0xc0] = (UInt32)(scaleX * (dstRightF + xOffsetF));
+-        recordCursor[0xbf] = (UInt32)(scaleY * (dstBottomF + yOffsetF));
+-        recordCursor[0xc1] = (UInt32)(scaleY * (dstTopF + yOffsetF));
++        recordCursor[0xbe] = FBITS(scaleX * (dstLeftF + xOffsetF));
++        recordCursor[0xc0] = FBITS(scaleX * (dstRightF + xOffsetF));
++        recordCursor[0xbf] = FBITS(scaleY * (dstBottomF + yOffsetF));
++        recordCursor[0xc1] = FBITS(scaleY * (dstTopF + yOffsetF));
+         quadWidthFixed = (SInt32)((dstRightF - dstLeftF) * subpixelScale);
+-        quadHeightFixed = (UInt32)((dstBottomF - dstTopF) * subpixelScale);
++        quadHeightFixed = (UInt32)(SInt32)((dstBottomF - dstTopF) * subpixelScale);
+         quadWidthSpill = (SInt64)quadWidthFixed;
+         quadHeightSpill = (SInt64)(SInt32)quadHeightFixed;
+         centerXF = (dstLeftF + dstRightF) * FLOAT_0004c380;
+         centerYF = (dstTopF + dstBottomF) * FLOAT_0004c380;
          recordCursor[0xc4] = 0xc0033500;
          recordCursor[0xc5] = 0x10031;
--        recordCursor[0xc6] = (UInt32)fVar5;
--        recordCursor[199] = (UInt32)fVar4;
-+        recordCursor[0xc6] = FBITS(fVar5);
-+        recordCursor[199] = FBITS(fVar4);
-         recordCursor[0xc3] = iVar59 << 0x10 | uVar73;
+-        recordCursor[0xc6] = (UInt32)centerXF;
+-        recordCursor[199] = (UInt32)centerYF;
++        recordCursor[0xc6] = FBITS(centerXF);
++        recordCursor[199] = FBITS(centerYF);
+         recordCursor[0xc3] = quadWidthFixed << 0x10 | quadHeightFixed;
          recordCursor[200] = 0;
        }
-@@ -2974,7 +2974,7 @@
+@@ -3363,7 +3363,7 @@
          }
-         pitchPixels = uVar53 - 1;
-         uVar34 = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
--        pitchPixels = (UInt32)fVar24;
-+        pitchPixels = (UInt32)(SInt32)fVar24;
-         local_160 = (SInt64)(SInt32)pitchPixels;
-         if (FLOAT_0004c370 < fVar24) {
-           uStack_154 = pitchPixels ^ 0x80000000;
-@@ -2997,7 +2997,7 @@
+         pitchPixels = mipHeightMinus1 - 1;
+         tileXEnd = (((SInt32)pitchPixels >> 9) + (UInt32)((SInt32)pitchPixels < 0 && (pitchPixels & 0x1ff) != 0)) * 0x200;
+-        pitchPixels = (UInt32)srcMaxX;
++        pitchPixels = (UInt32)(SInt32)srcMaxX;
+         srcRightSpill = (SInt64)(SInt32)pitchPixels;
+         if (FLOAT_0004c370 < srcMaxX) {
+           srcRightIntCvtLo = pitchPixels ^ 0x80000000;
+@@ -3386,7 +3386,7 @@
          }
-         uVar34 = uVar37 - 1;
-         uVar41 = (((SInt32)uVar34 >> 6) + (UInt32)((SInt32)uVar34 < 0 && (uVar34 & 0x3f) != 0)) * 0x40;
--        uVar34 = (UInt32)fVar18;
-+        uVar34 = (UInt32)(SInt32)fVar18;
-         local_150 = (SInt64)(SInt32)uVar34;
-         if (FLOAT_0004c370 < fVar18) {
-           local_148 = 0x43300000;
-@@ -3138,20 +3138,20 @@
-                 uVar47 = uVar47 + 0xc00;
-                 uVar46 = uVar46 - 0xc00;
-                 iVar74 = (SInt32)((fVar26 - fVar20) * fVar30);
--                uVar50 = (UInt32)((fVar19 - fVar29) * fVar30);
-+                uVar50 = (UInt32)(SInt32)((fVar19 - fVar29) * fVar30);
-                 puVar54[4] = 0x31080;
--                puVar54[6] = (UInt32)(fVar27 * (fVar21 - fVar4));
--                puVar54[8] = (UInt32)(fVar27 * (fVar7 - fVar4));
-+                puVar54[6] = FBITS(fVar27 * (fVar21 - fVar4));
-+                puVar54[8] = FBITS(fVar27 * (fVar7 - fVar4));
-                 puVar54[9] = 0x1087;
-                 fVar7 = (float)((double)CONCAT44d(0x43300000,uStack_ec) - dVar31);
--                puVar54[7] = (UInt32)(fVar25 * (fVar8 - fVar7));
--                puVar54[5] = (UInt32)(fVar25 * (fVar6 - fVar7));
-+                puVar54[7] = FBITS(fVar25 * (fVar8 - fVar7));
-+                puVar54[5] = FBITS(fVar25 * (fVar6 - fVar7));
-                 local_e8 = (SInt64)iVar74;
-                 local_e0 = (SInt64)(SInt32)uVar50;
-                 puVar54[0xb] = 0xc0033500;
-                 puVar54[0xc] = 0x10031;
--                puVar54[0xd] = (UInt32)((fVar20 + fVar26) * fVar23);
--                puVar54[0xe] = (UInt32)((fVar29 + fVar19) * fVar23);
-+                puVar54[0xd] = FBITS((fVar20 + fVar26) * fVar23);
-+                puVar54[0xe] = FBITS((fVar29 + fVar19) * fVar23);
-                 puVar54[10] = iVar74 << 0x10 | uVar50;
-                 puVar54[0xf] = 0;
-                 puVar54 = puVar54 + 0x10;
+         heightMinus1 = bufferHeightOp2d - 1;
+         tileYEnd = (((SInt32)heightMinus1 >> 6) + (UInt32)((SInt32)heightMinus1 < 0 && (heightMinus1 & 0x3f) != 0)) * 0x40;
+-        srcBottomInt = (UInt32)srcMaxY;
++        srcBottomInt = (UInt32)(SInt32)srcMaxY;
+         srcBottomSpill = (SInt64)(SInt32)srcBottomInt;
+         if (FLOAT_0004c370 < srcMaxY) {
+           srcBottomIntCvtHi = 0x43300000;
+@@ -3527,20 +3527,20 @@
+                 tileX = tileX + 0xc00;
+                 colWidthLeft = colWidthLeft - 0xc00;
+                 quadWidthFixedOp2d = (SInt32)((dstXMax - dstXMin) * subpixelScale);
+-                quadHeightFixedOp2d = (UInt32)((dstYMax - dstYMin) * subpixelScale);
++                quadHeightFixedOp2d = (UInt32)(SInt32)((dstYMax - dstYMin) * subpixelScale);
+                 quadCursor[4] = 0x31080;
+-                quadCursor[6] = (UInt32)(invQuadHeight * (srcYAtDstMax - rowYF));
+-                quadCursor[8] = (UInt32)(invQuadHeight * (clipTop - rowYF));
++                quadCursor[6] = FBITS(invQuadHeight * (srcYAtDstMax - rowYF));
++                quadCursor[8] = FBITS(invQuadHeight * (clipTop - rowYF));
+                 quadCursor[9] = 0x1087;
+                 tileXF = (float)((double)CONCAT44d(0x43300000,tileXCvtLo) - fpMagicBias);
+-                quadCursor[7] = (UInt32)(invQuadWidth * (srcXAtDstMax - tileXF));
+-                quadCursor[5] = (UInt32)(invQuadWidth * (clipLeft - tileXF));
++                quadCursor[7] = FBITS(invQuadWidth * (srcXAtDstMax - tileXF));
++                quadCursor[5] = FBITS(invQuadWidth * (clipLeft - tileXF));
+                 quadWidthFixSpill = (SInt64)quadWidthFixedOp2d;
+                 quadHeightFixSpill = (SInt64)(SInt32)quadHeightFixedOp2d;
+                 quadCursor[0xb] = 0xc0033500;
+                 quadCursor[0xc] = 0x10031;
+-                quadCursor[0xd] = (UInt32)((dstXMin + dstXMax) * scaleY);
+-                quadCursor[0xe] = (UInt32)((dstYMin + dstYMax) * scaleY);
++                quadCursor[0xd] = FBITS((dstXMin + dstXMax) * scaleY);
++                quadCursor[0xe] = FBITS((dstYMin + dstYMax) * scaleY);
+                 quadCursor[10] = quadWidthFixedOp2d << 0x10 | quadHeightFixedOp2d;
+                 quadCursor[0xf] = 0;
+                 quadCursor = quadCursor + 0x10;

@@ -284,7 +284,9 @@ def apply_uses(use_rows, root, read, files, errors, field_consts=None):
             if new in have and not declared: errors.append('%s: %s already occurs in the function and is not a variable declared by a use row' % (where, new)); continue
             norm = [line_variants(l, revert) for l in lines]
             decl_i = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
-            if decl_i is None: errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
+            if decl_i is None:
+                if declared and old not in idents_in(scope, comments=False): applied += 1; continue          # old was dropped after the row was applied
+                errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
             decl_end, body0 = decl_block(lines, decl_i)
             if frm in ('', '-'): a = body0
             else:
@@ -532,13 +534,45 @@ def apply_fieldvars(ptr_rows, var_rows, root, read, files, errors, by_off):
     return pending, 0
 
 
+def apply_drops(drop_rows, root, read, files, errors):
+    """-> (pending, applied): remove the declaration of each dropped placeholder; it must not occur anywhere else in the function (the use rows that renamed
+    its last roles have been applied by now). A declaration that is already gone counts as applied."""
+    pending = applied = 0
+    groups = {}
+    for (t, n, target, old) in drop_rows: groups.setdefault(target, []).append((t, n, old))
+    for target, rs in groups.items():
+        try:
+            cls, meth, addr, nth = parse_target(target)
+            spans = find_defs(root, cls, meth, addr, read)
+        except Exception as e:
+            errors.append('%s: %s' % (target, e)); continue
+        if len(spans) != 1:
+            errors.append('%s (drop): %d matches' % (target, len(spans))); continue
+        f, st, en = spans[0]
+        s = read(f); scope = s[st:en]; lines = scope.split('\n')
+        for (t, n, old) in rs:
+            pats = [DECL_RE % re.escape(old), r'^(\s*)((?:[A-Za-z_][\w:<>]*\s+)*[A-Za-z_][\w:<>]*(?:\s*\*+\s*|\s+))%s\s*\[[^\]]*\]\s*;\s*$' % re.escape(old)]
+            di = next((i for i, l in enumerate(lines) if any(re.match(p, l) for p in pats)), None)
+            if di is None:
+                if old in idents_in(scope, comments=False): errors.append('%s:%d: %s: no declaration of %s to drop' % (t, n, target, old))
+                else: applied += 1
+                continue
+            rest = '\n'.join(lines[:di] + lines[di + 1:])
+            if old in idents_in(rest, comments=False):
+                errors.append('%s:%d: %s: %s is still used' % (t, n, target, old)); continue
+            del lines[di]; pending += 1
+        scope = '\n'.join(lines)
+        files[f] = s[:st] + scope + s[en:]
+    return pending, applied
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--check', action='store_true'); ap.add_argument('--no-use', action='store_true', help='ignore the `use` rows (to see the text the anchors of the use rows are matched against)'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
-    rows, use_rows, field_rows, ptr_rows, var_rows = [], [], [], [], []
+    rows, use_rows, field_rows, ptr_rows, var_rows, drop_rows = [], [], [], [], [], []
     for t in tables:
         dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
         for n, l in enumerate(open(t), 1):
@@ -559,6 +593,9 @@ def main():
             if f[0] == 'fieldvar':                      # fieldvar CLASSES VAR SCOPE TIER EVIDENCE
                 if len(f) < 6 or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]): sys.exit('%s:%d: bad fieldvar row (fieldvar CLASSES var scope tier evidence)' % (t, n))
                 var_rows.append((t, n, f[1].split(','), f[2], f[3], f[4])); continue
+            if f[0] == 'drop':                          # drop TARGET OLD TIER EVIDENCE: remove the declaration of a placeholder no code mentions any more
+                if len(f) < 4 or f[3] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN') or not IDENT.fullmatch(f[2]): sys.exit('%s:%d: bad drop row (drop TARGET old tier [evidence])' % (t, n))
+                drop_rows.append((t, n, f[1], f[2])); continue
             if len(f) < 5 or f[0] not in ('def', 'decl', 'use') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
                 sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
             if f[0] == 'use':
@@ -608,6 +645,8 @@ def main():
         if ptr_rows or var_rows:
             vp, va = apply_fieldvars(ptr_rows, var_rows, a.root, read, files, errors, by_off)
             pending += vp; applied += va
+    dp, da = apply_drops(drop_rows, a.root, read, files, errors)
+    pending += dp; applied += da
     for e in errors: print('ERROR', e, file=sys.stderr)
     if not a.check and not errors:
         for f, s in files.items(): open(f, 'w').write(s)

@@ -625,3 +625,13 @@ CASES += [
 for _op in KNOWN_OPCODES:
     CASES.append(Case('ATIR500GLContext::process_command_buffer', pcb_world_with(lambda rng, _op=_op: _op, (1, 3), special=pcb_special), ret='u32', seeds=60, mock=scripted_mock,
                       plain_words=True, stack_args=PCB_TRACK_READS, name='process_command_buffer (opcode 0x%02x)' % _op))
+
+
+def pcb_bind_special(m, rng, op, texs):
+    """texture bind (opcodes 0x06-0x15) in the mode that derives the texture size field from the format table: [hdr, texture index, mode 1 << 30 | bits, format id << 24 | size]
+    - the shift applied to the size is (format table entry >> 12) & 7, so the format id (hence the table entry; ati_format_info_table has 48 entries) must vary and the mode must be 1"""
+    return [(op << 24) | 4, rng.randrange(len(texs)), (1 << 30) | rng.getrandbits(12), (rng.randrange(48) << 24) | rng.getrandbits(20)]
+
+
+CASES.append(Case('ATIR500GLContext::process_command_buffer', pcb_world_with(lambda rng: rng.randrange(6, 0x16), (1, 3), special=pcb_bind_special), ret='u32', seeds=120,
+                  mock=scripted_mock, plain_words=True, stack_args=PCB_TRACK_READS, name='process_command_buffer (texture bind, format-table size shift)'))
