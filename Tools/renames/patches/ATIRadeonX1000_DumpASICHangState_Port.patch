@@ -1,36 +1,53 @@
---- a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-17 20:03:09.509201546 -0700
-+++ b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-17 20:03:09.509288422 -0700
-@@ -67,29 +67,24 @@
-   UInt32 uVar30;
-   UInt32 uVar31;
-   UInt32 uVar32;
-+  UInt32 uVar33;
+--- a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-20 10:01:20.300412987 -0700
++++ b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-20 10:01:20.301716290 -0700
+@@ -36,12 +36,6 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   bool moreEntries;
+-  UInt8 uVar2;
+-  UInt8 uVar3;
+-  UInt8 bVar4;
+-  UInt8 bVar5;
+-  UInt8 bVar6;
+-  UInt8 bVar7;
+   UInt32 rbbmStatus;
+   UInt32 cpCsqStat;
+   UInt32 pcieReg10;
+@@ -67,6 +61,7 @@
+   UInt32 cpCsqAvail;
+   UInt32 pcieRegB4;
+   UInt32 reg5002Half;
++  UInt32 cpCsqStatBefore;
+   UInt32 queueAddress;
+   UInt32 csqData;
+   SInt32 pollCount;
+@@ -74,26 +69,20 @@
    
    this->disable_GPUSensor();
-   iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
--  bVar4 = M<UInt8>(iVar24 + 0x7fb);
--  bVar5 = M<UInt8>(iVar24 + 0x7fa);
--  bVar6 = M<UInt8>(iVar24 + 0x7f9);
--  bVar7 = M<UInt8>(iVar24 + 0x7f8);
-+  uVar33 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7f8));
-   iVar24 = 0;
+   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+-  bVar4 = M<UInt8>(mmioBase + 0x7fb);
+-  bVar5 = M<UInt8>(mmioBase + 0x7fa);
+-  bVar6 = M<UInt8>(mmioBase + 0x7f9);
+-  bVar7 = M<UInt8>(mmioBase + 0x7f8);
++  cpCsqStatBefore = loadWordByteReversed(&M<UInt8>(mmioBase + 0x7f8));
+   pollCount = 0;
    do {
      GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
      GH_thread_block(0);
-     iVar25 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+     registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
 -    if (((UInt32)bVar4 << 0x18 | (UInt32)bVar5 << 0x10 | (UInt32)bVar6 << 8 | (UInt32)bVar7) !=
--        (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
-+    if (uVar33 != (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
+-        (loadWordByteReversed(&M<UInt8>(registers + 0x7f8)))) {
++    if (cpCsqStatBefore != (loadWordByteReversed(&M<UInt8>(registers + 0x7f8)))) {
        this->enable_GPUSensor();
        return;
      }
-     iVar24 = iVar24 + 1;
-   } while (iVar24 != 0x186a1);
--  uVar2 = M<UInt8>(iVar25 + 0x5003);
--  uVar3 = M<UInt8>(iVar25 + 0x5002);
-+  uVar32 = loadHalfByteReversed(&M<UInt8>(iVar25 + 0x5002)) | 0x1000000;      /* one lhbrx, as the shipped code */
+     pollCount = pollCount + 1;
+   } while (pollCount != 0x186a1);
+-  uVar2 = M<UInt8>(registers + 0x5003);
+-  uVar3 = M<UInt8>(registers + 0x5002);
++  reg5002Half = loadHalfByteReversed(&M<UInt8>(registers + 0x5002)) | 0x1000000;      /* one lhbrx, as the shipped code */
    GH_IOSleep(10);
--  uVar32 = CONCAT11(uVar2,uVar3) | 0x1000000;
+-  reg5002Half = CONCAT11(uVar2,uVar3) | 0x1000000;
    GH_IOLog("** ASIC Hang Log Start **\n");
    GH_IOSleep(10);
-   iVar24 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);

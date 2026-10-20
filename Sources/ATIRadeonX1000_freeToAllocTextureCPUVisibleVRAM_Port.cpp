@@ -31,14 +31,16 @@ UInt32 ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM(VendorTextureBuffer *tex
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt16 *puVar1;
-  UInt16 *puVar2;
+  UInt16 *nextFaceMaskPtr;
+  UInt16 *nextFaceDirtyPtr;
   UInt32 faceCount;
-  SInt32 iVar4;
-  UInt32 uVar5;
-  SInt32 iVar6;
+  SInt32 infoCursor;
+  UInt32 faceIndex;
+  SInt32 prevEntry;
   UInt8 *candidate;
-  UInt32 uVar8;
+  UInt32 facesLeft;
+  SInt32 nextEntry;
+  SInt32 allocResult;
   
   VCALL(M<SInt32>(self), 0x558)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
   candidate = M<UInt8 *>(self + kIOATIR500Accelerator_textureVramListFirst);
@@ -51,8 +53,8 @@ UInt32 ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM(VendorTextureBuffer *tex
 LAB_0001e480:
       candidate = M<UInt8 *>(candidate + 0x28);
     }
-    iVar4 = M<SInt32>(candidate + 0x14);
-    if (iVar4 == 0) {
+    infoCursor = M<SInt32>(candidate + 0x14);
+    if (infoCursor == 0) {
 LAB_0001e3c8:
       VCALL(M<SInt32>(self), 0x524)(self,candidate);
       M<UInt8>(M<SInt32>(candidate + 0x14) + 0x14) = 1;
@@ -62,40 +64,40 @@ LAB_0001e3c8:
       M<UInt16>(M<SInt32>(candidate + 0x14) + 0x2e) = 0;
       M<UInt16>(M<SInt32>(candidate + 0x14) + 0x30) = 0;
       M<UInt16>(M<SInt32>(candidate + 0x14) + 0x32) = 0;
-      iVar6 = M<SInt32>(candidate + 0x24);
-      M<UInt32>(iVar6 + 0x28) = M<UInt32>(candidate + 0x28);
-      iVar4 = M<SInt32>(candidate + 0x28);
+      prevEntry = M<SInt32>(candidate + 0x24);
+      M<UInt32>(prevEntry + 0x28) = M<UInt32>(candidate + 0x28);
+      nextEntry = M<SInt32>(candidate + 0x28);
       M<UInt8 *>(candidate + 0x28) = candidate;
-      M<SInt32>(iVar4 + 0x24) = iVar6;
+      M<SInt32>(nextEntry + 0x24) = prevEntry;
       M<UInt8 *>(candidate + 0x24) = candidate;
       M<SInt32>(self + kIOATIR500Accelerator_unknown_0x7e0) = M<SInt32>(self + kIOATIR500Accelerator_unknown_0x7e0) + 1;
-      iVar4 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),
+      allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),
                          size,0x1000,0,M<UInt32>(self + kIOATIR500Accelerator_usableVramSize));
-      if (iVar4 != 0) {
+      if (allocResult != 0) {
         return 1;
       }
       goto LAB_0001e480;
     }
-    faceCount = (UInt32)M<UInt8>(iVar4 + 0x34);
-    uVar5 = 0;
+    faceCount = (UInt32)M<UInt8>(infoCursor + 0x34);
+    faceIndex = 0;
     if (faceCount == 0) {
 LAB_0001e3c0:
-      if (uVar5 == faceCount) goto LAB_0001e3c8;
+      if (faceIndex == faceCount) goto LAB_0001e3c8;
     }
-    else if ((M<UInt16>(iVar4 + 0x28) & ~M<UInt16>(iVar4 + 0x1c)) == 0) {
-      uVar5 = 0;
-      uVar8 = faceCount;
+    else if ((M<UInt16>(infoCursor + 0x28) & ~M<UInt16>(infoCursor + 0x1c)) == 0) {
+      faceIndex = 0;
+      facesLeft = faceCount;
       if (faceCount == 0) {
-        uVar8 = 1;
+        facesLeft = 1;
       }
       do {
-        uVar5 = uVar5 + 1;
-        uVar8 = uVar8 - 1;
-        if (uVar8 == 0) goto LAB_0001e3c0;
-        puVar1 = (UInt16 *)(iVar4 + 0x2a);
-        puVar2 = (UInt16 *)(iVar4 + 0x1e);
-        iVar4 = iVar4 + 2;
-      } while ((*puVar1 & ~*puVar2) == 0);
+        faceIndex = faceIndex + 1;
+        facesLeft = facesLeft - 1;
+        if (facesLeft == 0) goto LAB_0001e3c0;
+        nextFaceMaskPtr = (UInt16 *)(infoCursor + 0x2a);
+        nextFaceDirtyPtr = (UInt16 *)(infoCursor + 0x1e);
+        infoCursor = infoCursor + 2;
+      } while ((*nextFaceMaskPtr & ~*nextFaceDirtyPtr) == 0);
     }
   } while( true );
 }

@@ -1,23 +1,23 @@
---- a/Sources/ATIRadeonX1000_stop_Port.cpp	2026-10-17 19:49:20.314276466 -0700
-+++ b/Sources/ATIRadeonX1000_stop_Port.cpp	2026-10-17 19:49:20.315613463 -0700
-@@ -185,19 +185,19 @@
-           iVar2 = iVar4 - iVar7;
-           iVar7 = iVar7 + 1;
+--- a/Sources/ATIRadeonX1000_stop_Port.cpp	2026-10-20 09:50:46.222744390 -0700
++++ b/Sources/ATIRadeonX1000_stop_Port.cpp	2026-10-20 09:50:46.224082946 -0700
+@@ -191,19 +191,19 @@
+           pageFromEnd = lastScratchPage - pageIndex;
+           pageIndex = pageIndex + 1;
            VCALL(M<int>(self), 0x5a4)
--                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar2 << (GH_page_size & 0x3f));
-+                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar2 << (GH_page_shift & 0x3f));
-         } while (iVar4 != iVar7);
+-                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),pageFromEnd << (GH_page_size & 0x3f));
++                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),pageFromEnd << (GH_page_shift & 0x3f));
+         } while (lastScratchPage != pageIndex);
        }
      }
      else {
-       iVar4 = (unsigned int)(UInt8)self[0x8cc] * 2;
-       while (iVar7 = iVar4 + -2, 0 < iVar7) {
--        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_size & 0x3f));
-+        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_shift & 0x3f));
+       pageCursor = (unsigned int)(UInt8)self[0x8cc] * 2;
+       while (previousCursor = pageCursor + -2, 0 < previousCursor) {
+-        VCALL(M<int>(self), 0x598)(self,pageCursor + -1 << (GH_page_size & 0x3f));
++        VCALL(M<int>(self), 0x598)(self,pageCursor + -1 << (GH_page_shift & 0x3f));
          VCALL(M<int>(self), 0x5a4)
--                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar7 << (GH_page_size & 0x3f));
-+                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar7 << (GH_page_shift & 0x3f));
-         iVar4 = iVar7;
+-                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),previousCursor << (GH_page_size & 0x3f));
++                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),previousCursor << (GH_page_shift & 0x3f));
+         pageCursor = previousCursor;
        }
 -      VCALL(M<int>(self), 0x598)(self,1 << (GH_page_size & 0x3f));
 +      VCALL(M<int>(self), 0x598)(self,1 << (GH_page_shift & 0x3f));

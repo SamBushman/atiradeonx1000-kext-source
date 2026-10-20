@@ -1,0 +1,712 @@
+#!use-decl: end
+# Locals5_N2: placeholder cleanup of the ATIRadeonX1000_* sources, gated by Tools/renames/parity_check.py (difftest) instead of the byte-identical build.
+# kind	target	old	new	tier	evidence	from	to	occ
+use	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar2	pipeMask	CONFIRMED	(1 << (pipeCountCode+1)) - 1: one bit per enabled pipe, written to reg 0x42c8 (byte-swapped)	uVar2 = \(1 << pipeCountCode	if \(pipeCountCode == 1\)
+use	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar2	tilePipeBits	CONFIRMED	6/0/0xc/0xe chosen from pipeCountCode, ORed with 0xc00011 into gbTileConfig	if \(pipeCountCode == 1\)	savedStrobeWord = loadWordByteReversed
+redef	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar2	zPipeConfig	INFERRED	the z-pipe code read from reg 0xc under the strobe, which (for codes 1 and 2) is itself the value written (<< 0x18) to regs 0x4124 and 0x4be8; codes 0 and 3 are replaced by 1/3
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	bVar1	crtc2Enable	CONFIRMED	bit 0 of reg 0x6880 (second CRTC control), tested together with the display-2 surface address	bVar1 = loadWordByteReversed\(&M<UInt8>\(registers \+ 0x6880\)\)	bVar1 = loadWordByteReversed\(&M<UInt8>\(registers \+ 0x6904\)\) & 3;
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	bVar1	graphDepth	INFERRED	bits 0-1 of the graphics control register (0x6104 / 0x6904): colour depth class that selects the pixel format
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	bVar2	graphFormat	INFERRED	bits 8-10 of the graphics control register (0x6104 / 0x6904): sub-format within the depth class
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar3	alignedHeight2	CONFIRMED	display-2 active height rounded up to a multiple of 16; times pitch2 gives the buffer size
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar4	display1BaseKiB	INFERRED	display-1 base address >> 10, byte-swapped into reg 0x16e0	uVar4 = uVar4 >> 10;	-	1,3,4,5
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar4	display1Base	CONFIRMED	display1SurfaceAddress: the scanout-1 base, becomes scanout1BufferGpuBaseAddress and the reserve offset
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar5	scanout1Size	CONFIRMED	alignedHeight1 * pitch; stored to scanout1BufferSize and reserved from the VRAM pool
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	AVar6	pixelFormatByte2	CONFIRMED	display-2 pixel format code (4/3/0xf/9/6/5/0xa/0xff), stored at +0x1df	bVar1 = loadWordByteReversed\(&M<UInt8>\(registers \+ 0x6904\)\) & 3;	-
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	AVar6	storageFormat1	INFERRED	display-1 storage format 0xb/7/1 chosen from the bytes per pixel, stored at +0x166
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	AVar7	storageFormat2	INFERRED	display-2 storage format 0xb/7/1 chosen from the bytes per pixel, stored at +0x1de
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar9	bytesPerPixel16	CONFIRMED	bytes per pixel (4/2/1) stored as the 16-bit scanoutNBufferBytesPerPixel
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar8	alignedHeight1	CONFIRMED	display-1 active height (L.f50) rounded up to a multiple of 16	uVar8 = L\.f50;	M<UInt16>\(self \+ 0x142\) = uVar9;
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar8	pixelFormat2	CONFIRMED	display-2 pixel format code, tested by the branches that pick the bytes per pixel	bVar1 = loadWordByteReversed\(&M<UInt8>\(registers \+ 0x6904\)\) & 3;	uVar14 = uVar14 \+ uVar13 \* uVar8	1,2,3,4,5,6,7,8,9,11,13
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar8	bytesPerPixel2	CONFIRMED	display-2 bytes per pixel (1/2/4) derived from the pixel format; divides the pitch into the width
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar11	reg16c4Bits	INFERRED	reg 0x16c4 with its low nibble replaced by the format flags (2/3/6), written back byte-swapped
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar12	scanout1PadSize	CONFIRMED	display-1 base & halfVramMask: the alignment pad reserved below the scanout-1 buffer	uVar12 = uVar12 & uVar4;	registers = M<SInt32>\(self \+ 0x860\);	1,3,4,5,6,7
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar12	pitchRegBits	INFERRED	(pitch & 0x3f00) << 0x10: pitch field merged into the regs 0x16e0/0x16f8 values	uVar12 = \(uVar11 & 0x3f00\) << 0x10;	-
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar12	halfVramMask	CONFIRMED	(usableVramSize >> 1) - 1: the alignment mask used to size the pad elements below each scanout buffer
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar13	scanout2PadSize	CONFIRMED	display-2 base & halfVramMask: the alignment pad reserved below the scanout-2 buffer	uVar13 = uVar12 & uVar16;	^    uVar14 = 0xa00000;
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar13	display2Width	CONFIRMED	display-2 width in pixels (active width, else the secondary surface address), then the padded width
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar14	display1Width	CONFIRMED	display-1 width in pixels (L.f54 when non-zero); padded to the 256-byte pitch and stored as scanout1BufferWidth	uVar14 = M<UInt32>\(self \+ 0xb0c\);	uVar14 = 0xff;	1,2,4,5,6
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar14	pitchAlignMask	CONFIRMED	0 when display 1 is off: the pitch alignment mask that later reaches (width2*bpp2 + mask) & ~mask unchanged	uVar14 = M<UInt32>\(self \+ 0xb0c\);	uVar14 = 0xff;	3
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar14	pitchAlignMask	CONFIRMED	0xff when display 1 is on: the 256-byte pitch alignment, used as (width2*bpp2 + mask) & ~mask	uVar14 = 0xff;	-	1,5,6
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar14	pitch2	CONFIRMED	display-2 pitch in bytes ((width2*bytesPerPixel2 + 0xff) & ~0xff)	uVar14 = 0xff;	-	4,7,8,9
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar14	mcRegionSize	INFERRED	0x200000 (one display) or 0xa00000 (two); written as (value >> 8) | 0x1000000 to reg 0xb00
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar15	scanout2Size	CONFIRMED	alignedHeight2 * pitch2; stored to scanout2BufferSize and reserved from the VRAM pool
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar16	display2BaseKiB	INFERRED	display-2 base address >> 10, byte-swapped into reg 0x16f8	uVar16 = uVar16 >> 10;	-	1,3,4,5
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar16	display2Base	CONFIRMED	display2SurfaceAddress: the scanout-2 base, becomes scanout2BufferGpuBaseAddress and the reserve offset
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	f54	activeWidth	CONFIRMED	stored as scanoutNBufferActiveWidth; the IOPixelInformation tail word getPixelInformation writes
+redef	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	f50	activeHeight	CONFIRMED	stored as scanoutNBufferActiveHeight; the IOPixelInformation tail word getPixelInformation writes
+redef	ATIRadeonX1000::start_promo4_engine@0x1cd90	bVar1	notLastDisplay	CONFIRMED	displayIndex != 1: the display-record loop continues while true
+redef	ATIRadeonX1000::start_promo4_engine@0x1cd90	uVar7	rptrWritebackAddress	INFERRED	value written (byte-swapped, low bits cleared) to reg 0x70c, the ring read-pointer writeback address
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	bVar1	mcIndexIsR520	INFERRED	chipFlags bit 0x400000 clear: selects MC index 0x4 (R520 FB location) rather than 0x1
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar2	display1Address	CONFIRMED	reg 0x6110 (display-1 surface address), rebased by -fbStart16 << 16 and written back
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar3	display2Address	CONFIRMED	reg 0x6910 (display-2 surface address), rebased by -fbStart16 << 16 and written back
+use	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar4	stampPageAddress	CONFIRMED	fbEnd + stampPageGartOffset: the address written to reg 0x774 with the stamp page offset	uVar4 = uVar8 \+ iVar6;	-
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar4	fbStart16	CONFIRMED	low 16 bits of the MC FB location (framebuffer start in 64KB units); display addresses are rebased by it
+use	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar8	mainRingAddress	CONFIRMED	fbEnd + mainRingGartOffset, written byte-swapped to reg 0x700	uVar8 = uVar8 \+ M<SInt32>\(self \+ 0x904\);	-	1,3,4,5
+use	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar8	vramLimit	INFERRED	VRAM size read from reg 0xf8 (0x8000000 if zero), lowered to the probed size	uVar8 = loadWordByteReversed\(&M<UInt8>\(mmioBase \+ 0xf8\)\);	iVar6 = M<SInt32>\(self \+ 0x8d4\);
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar8	fbEnd	CONFIRMED	(MC FB location & 0xffff0000) + 0x10000: the end of the framebuffer aperture, stored as vramSizeProgrammed; GART/ring offsets are added to it
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar9	mcSizeReg108	INFERRED	reg 0x108, doubled when reg 0x104 == reg 0x108 + reg 0x100; compared with the VRAM size
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar10	newReg130	INFERRED	reg 0x130 value with bit 0x800000 cleared, or set when the doubled size was used; written back
+use	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar11	display2AddressRebased	CONFIRMED	display2Address rebased by -fbStart16 << 16, written back to reg 0x6910	uVar11 = uVar3 \+ uVar4 \* -0x10000;	-
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar11	reg130Value	INFERRED	reg 0x130 as read, before bit 0x800000 is adjusted
+use	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar7	gartEnd	CONFIRMED	fbEnd + gartSizeKB * 0x400: end of the GART aperture, written byte-swapped to MC register 0x16	uVar7 = uVar8 \+ M<SInt32>\(self \+ 0x830\) \* 0x400;	M<UInt32>\(mmioBase \+ 0x30\) = 0x15000000;
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	uVar7	gartTableOffset	CONFIRMED	gartTableVramOffset, written byte-swapped to the PCIe index register data
+redef	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	iVar6	stampPageGartOffset	CONFIRMED	self+stampPageGartOffset: the stamp page offset added to the framebuffer end
+use	ATIRadeonX1000::initialize_hardware@0x1f3c0	uVar6	retiredStampValue	CONFIRMED	retiredStampCounter, written byte-swapped to reg 0x15e4	uVar6 = M<UInt32>\(self \+ 0x850\);	\+ 0x16e8\)
+use	ATIRadeonX1000::initialize_hardware@0x1f3c0	uVar6	hwCaps	CONFIRMED	hwCapabilityBits, tested for the 0x200000/0x400000/0x800000 chip classes	uVar6 = M<UInt32>\(self \+ 0x98\);	-
+redef	ATIRadeonX1000::initialize_hardware@0x1f3c0	uVar6	submitStampValue	CONFIRMED	submitStamp - 1, written byte-swapped to reg 0x15e0
+redef	ATIRadeonX1000::initialize_hardware@0x1f3c0	uVar9	reg1724Value	INFERRED	reg 0x1724 read, ORed with 3 and queued as the data word of ring packet 0x5c9
+redef	ATIRadeonX1000::removeFromPCIeGART@0x1b540	uVar9	entryPage	CONFIRMED	GART entry index: gartOffset >> page_shift (the descriptor first entry), advanced past the entries cleared so the flush can read the last one
+use	ATIRadeonX1000::removeFromPCIeGART@0x1b540	uVar1	descriptorLength	CONFIRMED	IOMemoryDescriptor::getLength (vtable+0x128), shifted to pages	uVar1 = VCALL\(M<SInt32>\(descriptorBytes\), 0x128\)	iVar6 = uVar1 - uVar9;	1,3
+redef	ATIRadeonX1000::removeFromPCIeGART@0x1b540	uVar1	endPage	CONFIRMED	firstPage + descriptor length in pages: one past the last GART entry of the descriptor
+use	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar6	mmioBase	CONFIRMED	self+mmioBase, the register window used to flush the GART	iVar6 = M<SInt32>\(self \+ 0x860\)	-
+redef	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar6	pagesLeft	CONFIRMED	pages still to clear: endPage - firstPage, counted down by the clearing loop
+use	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar2	secondTableEnd	CONFIRMED	secondTable + (endPage * 4): one past the last cleared entry, read back to flush the write	iVar2 = uVar9 \* 4 \+ iVar2;	uVar9 = gartOffset	1,3
+redef	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar2	secondTable	CONFIRMED	gartTableCpuAddress: the CPU-visible copy of the GART table (0 when there is none)
+use	ATIRadeonX1000::removeFromPCIeGART@0x1b540	uVar8	flushValue	CONFIRMED	gartFlushScratch: reg 0x130 as read back, written again with bit 0x8000000 set and then as read	uVar8 = M<UInt32>\(self \+ 0xc5c\);	iVar2 = uVar9 \* 4
+redef	ATIRadeonX1000::removeFromPCIeGART@0x1b540	uVar8	emptyEntry	CONFIRMED	gartEmptyEntry: the value written (byte-swapped) over every cleared GART entry
+use	ATIRadeonX1000::reserveInGART@0x1b6d0	iVar2	baseResult	CONFIRMED	BASE_reserveInGART(gartOffset): non-zero when the base class reserved the range	iVar2 = BASE_reserveInGART	iVar2 = \(gartOffset >> \(GH_page_shift & 0x3f\)\) \* 4;
+use	ATIRadeonX1000::reserveInGART@0x1b6d0	iVar2	mmioBase	CONFIRMED	self+mmioBase, the register window used to flush the GART	iVar2 = M<SInt32>\(self \+ 0x860\);	-
+redef	ATIRadeonX1000::reserveInGART@0x1b6d0	iVar2	entryOffset	CONFIRMED	(gartOffset >> page_shift) * 4: byte offset of the entry in both GART tables
+use	ATIRadeonX1000::reserveInGART@0x1b6d0	uVar1	flushValue	CONFIRMED	gartFlushScratch: reg 0x130 as read back, written again with bit 0x8000000 set and then as read	uVar1 = M<UInt32>\(self \+ 0xc5c\);	-
+redef	ATIRadeonX1000::reserveInGART@0x1b6d0	uVar1	reservedEntry	CONFIRMED	gartReservedEntry: the value written (byte-swapped) to the reserved GART entry
+use	ATIRadeonX1000::clearInGART@0x1b7f0	uVar2	flushValue	CONFIRMED	gartFlushScratch: reg 0x130 as read back, written again with bit 0x8000000 set and then as read	uVar2 = M<UInt32>\(self \+ 0xc5c\);	-
+redef	ATIRadeonX1000::clearInGART@0x1b7f0	uVar2	emptyEntry	CONFIRMED	gartEmptyEntry: the value written (byte-swapped) to the cleared GART entry
+use	ATIRadeonX1000::clearInGART@0x1b7f0	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window used to flush the GART	iVar3 = M<SInt32>\(self \+ 0x860\);	-
+redef	ATIRadeonX1000::clearInGART@0x1b7f0	iVar3	entryOffset	CONFIRMED	(gartOffset >> page_shift) * 4: byte offset of the entry in both GART tables
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar4	tableGpuBase	CONFIRMED	gartTableBufferGpuBaseAddress, written byte-swapped to reg 0xb54	uVar4 = M<UInt32>\(self \+ 0xbcc\);	-	1,2,3,4,5,7
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar4	tableGpuEnd	CONFIRMED	gpu base + gartTableBufferSize - 1, written byte-swapped to reg 0xb58	uVar4 = M<UInt32>\(self \+ 0xbcc\);	-	6,8,9,10,11
+redef	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar4	gartSize	CONFIRMED	gartSizeKB as read: the table size that is allocated, divided into entries and fitted to a surface width
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar1	vramSize	CONFIRMED	VRAM size read from reg 0xf8, clamped to 128 MB; the table sits at its top	uVar1 = loadWordByteReversed\(&M<UInt8>\(iVar3 \+ 0xf8\)\);	if \(M<SInt32>\(self \+ 0xc4c\) == 0\)
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar1	entriesLeft	CONFIRMED	gartSize >> 2: the number of 4-byte GART entries, counted down while the table is filled with the empty entry	uVar1 = uVar4 >> 2;	registers = M<SInt32>
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar1	flushValue	CONFIRMED	gartFlushScratch: reg 0x130 as read back, written again with bit 0x8000000 set and then as read	uVar1 = M<UInt32>\(self \+ 0xc5c\);	iVar3 = 0xc;
+redef	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar1	tableWidth	INFERRED	candidate surface width of the table buffer: starts at 0x800 and is halved until it divides gartSize
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar3	capabilityOffset	CONFIRMED	pciDevice->findPCICapability(kIOPCIPCIExpressCapability) result (0 = not found, ignored)	iVar3 = VCALL\(\*M<SInt32 \*>	uVar4 = M<UInt32>\(self \+ 0x830\);
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar3 = M<SInt32>\(self \+ 0x860\);	if \(M<SInt32>\(self \+ 0xc4c\) == 0\)
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar3	entriesFilled	CONFIRMED	entries written to the second table, then *4: the byte offset just past the last entry (read back to flush)	iVar3 = 0;	iVar3 = 0xc;
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar3	widthTriesLeft	CONFIRMED	how many times the width is still halved (starts at 0xc)	iVar3 = 0xc;	iVar3 = M<SInt32>\(self \+ 0x860\);
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar3 = M<SInt32>\(self \+ 0x860\);#2	uVar1 = uVar1 >> 1;
+use	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar3	widthTriesLeft	CONFIRMED	how many times the width is still halved (starts at 0xc)	iVar3 = iVar3 \+ -1;	-
+use	ATIRadeonX1000::pageOnPCIeGART@0x1dcd0	iVar1	copiedBytes	CONFIRMED	entries copied * 4: the offset just past the last copied entry	iVar1 = 0;	-	1,2,4
+use	ATIRadeonX1000::pageOnPCIeGART@0x1dcd0	iVar1	lastEntryEnd	CONFIRMED	secondTable + copiedBytes: one past the last entry, read back to flush the copy	iVar1 = 0;	-	3,5
+use	ATIRadeonX1000::pageOnPCIeGART@0x1dcd0	uVar4	flushValue	CONFIRMED	gartFlushScratch: reg 0x130 as read back, written again with bit 0x8000000 set and then as read	uVar4 = M<UInt32>\(self \+ 0xc5c\);	-
+redef	ATIRadeonX1000::pageOnPCIeGART@0x1dcd0	uVar4	entryIndex	CONFIRMED	index of the GART entry being copied from the primary to the CPU-visible table
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar1	pageSize	CONFIRMED	GH_page_size: bytes mapped by one GART entry (stock uses _page_size, not _page_shift: #167)	uVar1 = GH_page_size, uVar10 != 0	enforceInOrderExecutionIO\(\);
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar1	flushValue	CONFIRMED	gartFlushScratch: reg 0x130 as read back, written again with bit 0x8000000 set and then as read	uVar1 = M<UInt32>\(self \+ 0xc5c\);	VCALL\(M<SInt32>\(self\), 0x59c\)
+redef	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar1	gartEntries	CONFIRMED	gartSizeKB >> 2: the number of entries in the table, counted down by the free-run scan
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar10	pageShift	CONFIRMED	GH_page_shift, used to turn the descriptor length into pages	uVar10 = GH_page_shift;	if \(uVar1 == 0\) \{
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar10	segmentAddress	CONFIRMED	physical address of the current segment (getPhysicalSegment, vtable+0x13c), advanced one page per entry	while \(uVar10 = VCALL	enforceInOrderExecutionIO\(\);
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar10	freeRun	CONFIRMED	number of consecutive empty entries seen so far; reset by a used entry	uVar10 = 0;	-
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar4	prepareResult	CONFIRMED	descriptor->prepare(3) result (vtable+0x144); 0 = success	iVar4 = VCALL\(M<UInt32>\(descriptorBytes\), 0x144\)	iVar4 = 0;
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar4	segmentOffset	CONFIRMED	byte offset into the descriptor passed to getPhysicalSegment, advanced by each segment length	iVar4 = 0;	enforceInOrderExecutionIO\(\);
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar4	secondTableBase	CONFIRMED	gartTableCpuAddress: the CPU-visible table (0 when there is none)	iVar4 = M<SInt32>\(self \+ 0xbb8\);	-	1,2,4
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar4	secondTableEnd	CONFIRMED	secondTableBase + pageIndex * 4: one past the last written entry, read back to flush	iVar4 = M<SInt32>\(self \+ 0xbb8\);	-	3,5
+use	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar9	mmioBase	CONFIRMED	self+mmioBase, the register window used to flush the GART	iVar9 = M<SInt32>\(self \+ 0x860\);	-
+redef	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar9	entryOffset	CONFIRMED	pageIndex * 4: byte offset of the entry being written in both tables
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	bVar1	morePanels	CONFIRMED	panel != 1: the loop runs for panels 0 and 1
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	iVar6	regOffset0	INFERRED	first of the three per-panel display registers (0xb64 for panel 1, 0xb74 for panel 0) restored from the saved copy
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	iVar5	regOffset1	INFERRED	second of the three per-panel display registers (0xb68 / 0xb78) restored from the saved copy
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	iVar3	regOffset2	INFERRED	third of the three per-panel display registers (0xb6c / 0xb7c) restored from the saved copy
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	pGVar8	bufferCursor	CONFIRMED	walks the swdsBuffer elements (stride 0x78), the element handed to ATIR500Memory::dealloc
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	pAVar9	recordCursor	CONFIRMED	walks the per-panel buffer records (stride 0x78) whose 0x9bc/0x9c0 words say the buffer is allocated
+redef	ATIRadeonX1000::SWDSShutdown@0x1d350	pAVar10	stateCursor	CONFIRMED	walks the per-panel SWDS state (stride 0x18): the active flag at 0xb10 and the three saved register values at 0xafc..0xb04
+redef	ATIRadeonX1000::SWDSFunc@0x24340	bVar3	panelStatusMask	CONFIRMED	0x80 for panel 0, 0x40 for panel 1: the bit of the status register read from 0xbf8 that says the panel is busy
+redef	ATIRadeonX1000::SWDSFunc@0x24340	uVar4	stampBusy	INFERRED	checkForTimeStamp(pending stamp) result, ORed into stampPending
+redef	ATIRadeonX1000::SWDSFunc@0x24340	uVar9	stampPending	INFERRED	non-zero while a panel is still waiting for its previous blit (status bit set or checkForTimeStamp true)
+redef	ATIRadeonX1000::SWDSFunc@0x24340	bVar14	noBlitYet	INFERRED	bit 1 set until the first panel has started its blit command buffer; cleared once a buffer is open
+redef	ATIRadeonX1000::SWDSFunc@0x24340	bVar15	isPanel0Flag	CONFIRMED	(panel == 0) << 1: bit 1 selects the 0x80 or 0x40 completion marker
+use	ATIRadeonX1000::SWDSFunc@0x24340	iVar5	latestStamp	INFERRED	the accelerator stamp counter (+0xec / +0x10c) recorded as the panel pending stamp	iVar5 = M<SInt32>\(ownerBytes \+ 0xec\);	uVar4 = VCALL
+use	ATIRadeonX1000::SWDSFunc@0x24340	iVar5	entryRetired	CONFIRMED	checkForTimeStamp(entry stamp) result: non-zero when the SWDS command buffer entry has retired	iVar5 = VCALL	iVar5 = \(\(ATIRadeonX1000 \*\)ownerBytes\)->SWDSWriteBlitToCmdBuf\(cmdBuffer,cmdWordCount
+redef	ATIRadeonX1000::SWDSFunc@0x24340	iVar5	appendWordCount	CONFIRMED	SWDSWriteBlitToCmdBuf result when appending a second panel blit: words written, followed by the 0x2ff marker pair
+use	ATIRadeonX1000::SWDSFunc@0x24340	iVar11	blitWordCount	CONFIRMED	SWDSWriteBlitToCmdBuf result for the first panel blit: words written, followed by the 0x2ff marker pair	iVar11 = \(\(ATIRadeonX1000 \*\)ownerBytes\)->SWDSWriteBlitToCmdBuf\(cmdBuffer,0,false,panel\);	iVar11 = panel \+ 1;
+redef	ATIRadeonX1000::SWDSFunc@0x24340	iVar11	nextPanel	INFERRED	panel + 1 of the panel whose blit opened the buffer (0 if none): selects the stamp slot 0xad0 + 4 * nextPanel
+redef	ATIRadeonX1000::SWDSInit@0x24670	bVar1	morePanels	CONFIRMED	panel != 0: the loop runs for panel 1 then panel 0
+redef	ATIRadeonX1000::SWDSInit@0x24670	bVar5	swdsStarted	CONFIRMED	set once a panel buffer was placed and its display registers programmed; arms the SWDS timer
+redef	ATIRadeonX1000::SWDSInit@0x24670	bVar6	panel1Placed	INFERRED	panel 1 was placed in the free area above, so panel 0 is placed below its base
+redef	ATIRadeonX1000::SWDSInit@0x24670	AVar2	tilingMode	INFERRED	record+0x164: 0 linear, 1/2/3 tiling mode, selects the 0x10000/0x20000/0x30000 register bits
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar3	bytesPerPixel16	CONFIRMED	the panel buffer record bytes-per-pixel (+0x1ba), stored to the new record at +0xa4a
+redef	ATIRadeonX1000::SWDSInit@0x24670	pbVar4	regPtr	CONFIRMED	address of the display register being saved before it is overwritten
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar7	usableVramAtEntry	CONFIRMED	usableVramSize read once at entry; (usableVramAtEntry >> 1) - 1 is the alignment mask
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar10	stamp	CONFIRMED	submit_buffer result: the stamp of the clear/flip command buffer
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar15	placementLimit	INFERRED	top of the free VRAM area the buffer is placed under: vramSize, or the panel 1 buffer base once panel 1 was placed
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar17	usableVram	CONFIRMED	usableVramSize
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar25	bufferSize	CONFIRMED	alignedHeight * pitch: the size of the SWDS buffer in bytes
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar18	paddedWidth	CONFIRMED	pitch / bytesPerPixel: the width in pixels after padding the pitch to 256 bytes
+redef	ATIRadeonX1000::SWDSInit@0x24670	puVar27	cmdWords	CONFIRMED	the command buffer words (buffer + 0x20) the clear packet and blit are written to
+redef	ATIRadeonX1000::SWDSInit@0x24670	pGVar20	elementB	CONFIRMED	walks the pool-B elements of the SWDS buffers (stride 0x10)
+redef	ATIRadeonX1000::SWDSInit@0x24670	pGVar23	element	CONFIRMED	walks the pool-A elements of the SWDS buffers (stride 0x78)
+redef	ATIRadeonX1000::SWDSInit@0x24670	pAVar21	savedRegCursor	CONFIRMED	walks the per-panel saved display register copies at 0xb14..0xb1c (stride 0x18) and the 0xb28 flag
+redef	ATIRadeonX1000::SWDSInit@0x24670	pAVar24	stateCursor	CONFIRMED	walks the per-panel SWDS state words (stride 4): 0xb30..0xb40 requested size, 0xad8 stamp, 0xb70 base
+redef	ATIRadeonX1000::SWDSInit@0x24670	pAVar28	recordCursor	CONFIRMED	walks the per-panel buffer records (stride 0x78): the new SWDS buffer record at 0xa34.. and the scanout record at 0x1ac..
+redef	ATIRadeonX1000::SWDSInit@0x24670	iVar13	regOffset2	INFERRED	third per-panel display register (0xb6c / 0xb7c)
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar12	swdsWidth	CONFIRMED	requested SWDS buffer width (state +0xb38), stored as the record width at +0xa50	uVar12 = M<UInt32>\(pAVar24 \+ 0xb38\);	uVar12 = M<UInt32>\(pGVar23 \+ -0x854\);
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar12	tileBits	INFERRED	tiling/format bits of the scanout record copied into the new record flags at +0x3c	uVar12 = M<UInt32>\(pGVar23 \+ -0x854\);	->reserve\(\(GLKMemoryElement \*\)pGVar23, uVar16
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar12	secondaryWord	INFERRED	record +0xa48 (padded width) shifted into the secondary surface registers 0x6120/0x6920	uVar12 = \(UInt32\)M<UInt16>\(pAVar28 \+ 0xa48\);	M<UInt32>\(self \+ 0xb6c\) = uVar14;
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar12	buffer0Base	CONFIRMED	swdsBuffer0GpuBaseAddress, programmed into the panel 0 surface register 0x6110	uVar12 = M<UInt32>\(self \+ 0x9c4\);	uVar12 = M<UInt32>\(pAVar28 \+ 0xa3c\);
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar12	newRecordBase	CONFIRMED	the new record GPU base address (+0xa3c), stored as the panel state base at +0xb70	uVar12 = M<UInt32>\(pAVar28 \+ 0xa3c\);	uVar12 = 0;
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar12	tilingRegValue	INFERRED	pitch/8 | tiling bits | macro-tile bits: the value written to the third display register of the panel
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar14	swdsHeight	CONFIRMED	requested SWDS buffer height (state +0xb40), stored as the record height at +0xa52	uVar14 = M<UInt32>\(pAVar24 \+ 0xb40\);	uVar14 = M<UInt32>\(pAVar28 \+ 0xa3c\);
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar14	baseWord	CONFIRMED	the new record GPU base address (+0xa3c), programmed into both panels surface registers	uVar14 = M<UInt32>\(pAVar28 \+ 0xa3c\);	M<UInt32>\(self \+ 0xb70\)
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar14	tilingBits	INFERRED	0x10000/0x20000/0x30000 for tiling mode 1/2/3: ORed into the third display register value	uVar14 = 0;	pbVar4 = \(UInt8 \*\)\(iVar8 \+ iVar26\);
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar14	endAddress	CONFIRMED	recordBase + size - 1: the end address written to the second display register
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar11	pitch	CONFIRMED	width * bytesPerPixel rounded up to 256 bytes	uVar11 = uVar12 \* uVar16	uVar11 = M<UInt32>\(self \+ recordOffset \+ 0x134\);
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar11	recordBase	CONFIRMED	scanout record base offset (+0x134): programmed into the first display register
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar16	bytesPerPixel32	CONFIRMED	bytes per pixel as a word (the divisor of the pitch)	uVar16 = \(UInt32\)uVar3;	uVar16 = uVar14;
+use	ATIRadeonX1000::SWDSInit@0x24670	uVar16	alignedHeight	CONFIRMED	requested height rounded up to a multiple of 16	uVar16 = uVar14;	uVar16 = iVar8 - 0x8000U
+redef	ATIRadeonX1000::SWDSInit@0x24670	uVar16	bufferBase	CONFIRMED	(placement - 0x8000) & 0xffff8000: the 32KB-aligned base of the new SWDS buffer
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar8	unalignedBase	CONFIRMED	placementLimit - bufferSize: the unaligned base of the new buffer, aligned down by 0x8000	iVar8 = uVar15 - uVar25;	if \(uVar17 <= uVar16\)
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar8	reserveResult	CONFIRMED	ATIR500Memory::reserve results for pool A and pool B	iVar8 = \(\(ATIR500Memory \*\)\(M<UInt8 \*>\(self \+ 0x7c\)\)\)->reserve	iVar8 = M<SInt32>\(self \+ 0xadc\) \* 0x1c;
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar8	entryOffset	CONFIRMED	swdsEntryIndex * 0x1c: byte offset of the current SWDS command buffer entry	iVar8 = M<SInt32>\(self \+ 0xadc\) \* 0x1c;	iVar8 = M<SInt32>\(self \+ 0x860\);
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar8	otherBufferBase	CONFIRMED	base of the other panel buffer the new one must stay clear of (scanout 2, or the panel record at +0x1ac)	iVar8 = M<SInt32>\(self \+ 0x1ac\);	uVar16 = M<SInt32>\(self \+ 0x134\)
+redef	ATIRadeonX1000::SWDSInit@0x24670	iVar8	mmioBase	CONFIRMED	self+mmioBase, the register window
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar9	entryRetired	CONFIRMED	checkForTimeStamp(entry stamp) result: non-zero when the previous command buffer entry has retired	iVar9 = VCALL	iVar9 = M<SInt32>\(self \+ iVar8 \+ 0xaf4\);
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar9	cmdBufferAddr	CONFIRMED	address of the SWDS command buffer entry (entry+0xaf4); the words start at +0x20	iVar9 = M<SInt32>\(self \+ iVar8 \+ 0xaf4\);	iVar9 = this->SWDSWriteBlitToCmdBuf
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar9	blitWordCount	CONFIRMED	SWDSWriteBlitToCmdBuf result: words written, followed by the 0x2ff marker and two register writes	iVar9 = this->SWDSWriteBlitToCmdBuf	M<UInt32>\(self \+ iVar8 \+ 0xaf0\) = uVar10;
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar9	reserveBelow	INFERRED	gartReserveSize: space kept free below the buffer	iVar9 = M<SInt32>\(self \+ 0xbac\);	uVar16 = M<SInt32>\(self \+ 0x134\)
+redef	ATIRadeonX1000::SWDSInit@0x24670	iVar9	regOffset1	INFERRED	second per-panel display register (0xb68 / 0xb78)
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar26	cmdBufferOffset	CONFIRMED	VRAM offset of the SWDS command buffer entry (entry+0xae4); the words start at +0x20	iVar26 = M<SInt32>\(self \+ iVar8 \+ 0xae4\);	M<UInt32>\(self \+ iVar8 \+ 0xaf0\) = uVar10;
+use	ATIRadeonX1000::SWDSInit@0x24670	iVar26	otherBufferSize	CONFIRMED	size of the other panel buffer (scanout 2, or the panel record at +0x1b4)	iVar26 = M<SInt32>\(self \+ 0x1b4\);	uVar16 = M<SInt32>\(self \+ 0x134\)
+redef	ATIRadeonX1000::SWDSInit@0x24670	iVar26	regOffset0	INFERRED	first per-panel display register (0xb64 / 0xb74)
+redef	ATIRadeonX1000::start@0x1f750	bVar1	moreRecords	CONFIRMED	index != 1: the loop clears the two 0x20-byte records at +0x940
+redef	ATIRadeonX1000::start@0x1f750	pAVar4	recordCursor	CONFIRMED	walks the two 0x20-byte state records at +0x940 (stride 0x20)
+redef	ATIRadeonX1000::start@0x1f750	iVar5	pciBar0	CONFIRMED	pciDevice->configRead32(0x18) (vtable+0x578): the BAR0 config word, kept in pciBar0Config
+use	ATIRadeonX1000::start@0x1f750	uVar6	accelCaps	CONFIRMED	virtual getAccelCapsBits() (vtable+0x5d0), published as the AccelCaps property	uVar6 = VCALL\(M<SInt32>\(self\), 0x5d0\)	-	1,2
+use	ATIRadeonX1000::start@0x1f750	uVar6	sensorProperties	CONFIRMED	the "sensor-properties" property, cast to an OSArray	uVar6 = VCALL\(M<SInt32>\(self\), 0x5d0\)	-	3,4
+use	ATIRadeonX1000::start@0x1f750	uVar6	sensorElement	CONFIRMED	OSArray::getObject(index) of sensor-properties, cast to an OSDictionary	uVar6 = VCALL\(M<SInt32>\(self\), 0x5d0\)	-	5,6
+redef	ATIRadeonX1000::start@0x1f750	uVar6	startResult	CONFIRMED	the value start() returns: 1 on success, 0 after the failure paths
+redef	ATIRadeonX1000::start@0x1f750	uVar8	sensorFunctionSymbol	CONFIRMED	OSSymbol::withCStringNoCopy("getSensorValue"), kept in gpuSensorFunction
+use	ATIRadeonX1000::start@0x1f750	iVar9	scratchMapResult	CONFIRMED	virtual map of the scratch page at gartOffset (vtable+0x590): 0 on failure	iVar9 = VCALL\(M<SInt32>\(self\), 0x590\)	iVar9 = 0;
+use	ATIRadeonX1000::start@0x1f750	iVar9	unmapCount	CONFIRMED	how many pages of the scratch run have been unmapped again so far	iVar9 = 0;	iVar9 = VCALL\(M<SInt32>\(self\), 0x590\)
+use	ATIRadeonX1000::start@0x1f750	iVar9	scratchMapResult	CONFIRMED	virtual map of the scratch page at gartOffset (vtable+0x590): 0 on failure	iVar9 = VCALL\(M<SInt32>\(self\), 0x590\)#2	iVar9 = iVar5 \+ 1;
+use	ATIRadeonX1000::start@0x1f750	iVar9	nextPage	CONFIRMED	pageIndex + 1: the odd page of the pair that is unmapped again	iVar9 = iVar5 \+ 1;	uVar11 = \(UInt32\)\(UInt8\)self\[0x84\];
+use	ATIRadeonX1000::start@0x1f750	iVar9	flushOffset	CONFIRMED	offset into the scratch header range of the cache lines flushed so far	iVar9 = 0;#2	iVar9 = M<SInt32>\(self \+ 0x900\);
+use	ATIRadeonX1000::start@0x1f750	iVar9	ringMemory	CONFIRMED	the main ring / idct ring memory that is filled with the 0x80000000 no-op word	iVar9 = M<SInt32>\(self \+ 0x900\);	iVar9 = GH_ZN15OSMetaClassBase12safeMetaCast
+use	ATIRadeonX1000::start@0x1f750	iVar9	sensorDictionary	CONFIRMED	the sensor-properties element cast to an OSDictionary (0 ends the loop)	iVar9 = GH_ZN15OSMetaClassBase12safeMetaCast	if \(\(piVar15 != \(SInt32 \*\)0x0\) &&	1,2,4
+use	ATIRadeonX1000::start@0x1f750	iVar9	initResult	CONFIRMED	IOService::init(dictionary) result (vtable+0x150): 0 on failure	iVar9 = GH_ZN15OSMetaClassBase12safeMetaCast	if \(\(piVar15 != \(SInt32 \*\)0x0\) &&	3,5
+redef	ATIRadeonX1000::start@0x1f750	iVar9	prevPage	CONFIRMED	pageIndex - 2: the pair of scratch pages unmapped again by the failure path
+redef	ATIRadeonX1000::start@0x1f750	piVar10	sensorObject	CONFIRMED	the new sensor IOService allocated for each sensor-properties dictionary
+redef	ATIRadeonX1000::start@0x1f750	uVar11	boolMetaClass	CONFIRMED	GH_OSBoolean_metaClass, used to cast the two boolean properties
+redef	ATIRadeonX1000::start@0x1f750	uVar13	chipClass	INFERRED	0 unknown, 1 R520-class, 2 RV515/R5xx class, 3 R580-class: chosen from the chip ID, passed to HZMEM_Init
+redef	ATIRadeonX1000::start@0x1f750	pcVar14	setPropertyFn	CONFIRMED	vtable+0x16c: setProperty(key, value, length)
+redef	ATIRadeonX1000::start@0x1f750	piVar15	sensorProvider	CONFIRMED	the last sensor IOService that initialised successfully; becomes gpuSensorProvider
+redef	ATIRadeonX1000::start@0x1f750	iVar16	dwordsLeft	CONFIRMED	0x800: the ring dwords still to fill with the no-op word
+use	ATIRadeonX1000::start@0x1f750	uVar11	cacheLineSize	CONFIRMED	the data cache line size (self+0x84)	uVar11 = \(UInt32\)\(UInt8\)self\[0x84\];	-
+use	ATIRadeonX1000::start@0x1f750	iVar16	pageNumber	CONFIRMED	the scratch page being unmapped again: (pageIndex - 1) - unmapCount	iVar16 = \(iVar5 \+ -1\) - iVar9;	iVar16 = 0x800;
+redef	ATIRadeonX1000::start@0x1f750	local_34	fedInfoPointer	CONFIRMED	pointer to the 4 words at swdsState_0xb2c, passed as the data of the ATIFEDSInfo property
+redef	ATIRadeonX1000::display_mode_did_change@0x24e40	bVar1	moreCluts	CONFIRMED	clutIndex != 1: SWDSEnableCLUT runs for CLUT 0 and 1
+use	ATIRadeonX1000::display_mode_did_change@0x24e40	iVar2	gartStartResult	CONFIRMED	startupPCIeGART() result (-1 = failure)	iVar2 = startupPCIeGART\(\);	iVar2 = initialize_hardware\(\);
+redef	ATIRadeonX1000::display_mode_did_change@0x24e40	iVar2	hardwareOk	CONFIRMED	initialize_hardware() result, cleared when SWDSInit fails; the function result needs it non-zero
+use	ATIRadeonX1000::display_mode_did_change@0x24e40	iVar3	swdsRequired	CONFIRMED	SWDSIsRequired()	iVar3 = SWDSIsRequired\(\);	iVar3 = SWDSInit\(\);
+use	ATIRadeonX1000::display_mode_did_change@0x24e40	iVar3	swdsInitResult	CONFIRMED	SWDSInit() result	iVar3 = SWDSInit\(\);	iVar3 = \(\(IOATIR500Accelerator \*\)\(self\)\)->disp_mode_did_change
+redef	ATIRadeonX1000::display_mode_did_change@0x24e40	iVar3	baseDidChange	CONFIRMED	IOATIR500Accelerator::disp_mode_did_change() result
+redef	ATIRadeonX1000::display_mode_will_change@0x25f00	bVar1	loopContinues	CONFIRMED	the remaining-tries test of the idct wait loop and the display-record loop test
+use	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar3	ringIndexOld	CONFIRMED	ringIndex before the fence packets are written	iVar3 = M<SInt32>\(self \+ 0x914\);	iVar3 = M<SInt32>\(self \+ 0x860\);
+use	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar3 = M<SInt32>\(self \+ 0x860\);	iVar3 = 999;
+use	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar3	triesLeft	CONFIRMED	999: the 100us waits left for reg 0x1fb4 to go negative	iVar3 = 999;	iVar3 = stop_xdct_engine\(\);
+redef	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar3	stopResult	CONFIRMED	stop_xdct_engine() / stop_promo4_engine() result
+use	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar4	displayIndex	CONFIRMED	index of the display record being released	iVar4 = 0;#2	-
+redef	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar4	modeChangeOk	CONFIRMED	disp_mode_will_change result, cleared when stopping the xdct engine failed
+use	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar6	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar6 = M<SInt32>\(self \+ 0x860\);	-
+redef	ATIRadeonX1000::display_mode_will_change@0x25f00	iVar6	ringMemory	CONFIRMED	mainRingMemory: the ring the fence packets are written to
+use	ATIRadeonX1000::start_xdct_engine@0x25c60	uVar3	ringCursor	CONFIRMED	idctRingCursor, written byte-swapped to the idct ring read/write registers 0x1f9c and 0x1fa0	uVar3 = M<UInt32>\(self \+ 0x930\);	uVar3 = iVar4 \+ M<SInt32>\(self \+ 0x228\)
+use	ATIRadeonX1000::start_xdct_engine@0x25c60	uVar3	rptrWritebackAddress	INFERRED	vramBase + scratch GART offset + the idct pointer offset: the read-pointer writeback address (reg 0x1f98)	uVar3 = iVar4 \+ M<SInt32>\(self \+ 0x228\)	uVar3 = iVar4 \+ M<SInt32>\(self \+ 0x920\);
+redef	ATIRadeonX1000::start_xdct_engine@0x25c60	uVar3	ringBaseAddress	CONFIRMED	vramBase + idctRingGartOffset: the idct ring base address (reg 0x1f90)
+use	ATIRadeonX1000::start_xdct_engine@0x25c60	iVar4	pollCount	CONFIRMED	how many times the idct ring wait loop has slept	iVar4 = 0;	-
+redef	ATIRadeonX1000::start_xdct_engine@0x25c60	iVar4	vramBase	CONFIRMED	vramSizeProgrammed: the framebuffer end the GART offsets are added to
+use	ATIRadeonX1000::start_xdct_engine@0x25c60	uVar6	idctStamp	CONFIRMED	idctSubmitBaseCounter - 1, written byte-swapped to reg 0x1fa8	uVar6 = M<SInt32>\(self \+ 0x854\) - 1;	-
+redef	ATIRadeonX1000::start_xdct_engine@0x25c60	uVar6	ringControl	CONFIRMED	reg 0x1f94 (idct ring control) with the enable bits ORed in; written twice
+use	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	iVar1	initialMmioBase	CONFIRMED	self+mmioBase, read once to fetch the first consumed idct stamp (reg 0x1fa8)	iVar1 = M<SInt32>\(self \+ 0x860\);	iVar1 = 0;
+redef	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	iVar1	pollCount	CONFIRMED	how many times the wait loop has slept (0xc351 = gave up)
+use	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	iVar1	initialMmioBase	CONFIRMED	self+mmioBase, read once to fetch the first consumed idct stamp (reg 0x1fa8)	iVar1 = M<SInt32>\(self \+ 0x860\);	iVar1 = 0;
+redef	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	iVar1	pollCount	CONFIRMED	how many times the wait loop has slept (0xc351 = gave up)
+redef	ATIRadeonX1000::system_will_change_speed@0x1f1e0	bVar1	loopContinues	CONFIRMED	the remaining-tries test of the idct wait loop
+use	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar3	previousDepth	CONFIRMED	OSIncrementAtomic(displayChangeDepth) result: 0 for the first change	iVar3 = GH_OSIncrementAtomic	iVar3 = M<SInt32>\(self \+ 0x914\);
+use	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar3	ringIndexOld	CONFIRMED	ringIndex before the fence packets are written	iVar3 = M<SInt32>\(self \+ 0x914\);	iVar3 = M<SInt32>\(self \+ 0x860\);
+use	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar3 = M<SInt32>\(self \+ 0x860\);	iVar3 = 999;
+redef	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar3	triesLeft	CONFIRMED	999: the 50us waits left for reg 0x1fb4 to go negative
+use	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar5	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar5 = M<SInt32>\(self \+ 0x860\);	-
+redef	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar5	ringMemory	CONFIRMED	mainRingMemory: the ring the fence packets are written to
+use	ATIRadeonX1000::submit_buffer@0x20980	iVar1	cacheBytes	CONFIRMED	bytes of the buffer still to flush from the data cache after the first line	iVar1 = \(dwordCount \* 4 \+	dataCacheBlockFlush\(
+redef	ATIRadeonX1000::submit_buffer@0x20980	iVar1	freeSpace	CONFIRMED	ring free dwords minus 7 ((rptr - wptr - 1) & 0x7ff) - 7, the number printed as "Have"
+use	ATIRadeonX1000::submit_buffer@0x20980	iVar3	ringPointerBase	CONFIRMED	ringPointerBase: where the read pointer writeback lives	iVar3 = M<SInt32>\(self \+ 0x90c\);	if \(M<SInt32>\(self \+ 0x8d0\) == 0\) \{
+use	ATIRadeonX1000::submit_buffer@0x20980	iVar3	ringMemory	CONFIRMED	mainRingMemory: the ring the packets are written to	iVar3 = M<SInt32>\(self \+ 0x900\);	iVar3 = M<SInt32>\(self \+ 0x50\);
+use	ATIRadeonX1000::submit_buffer@0x20980	iVar3	submittedStamp	CONFIRMED	the stamp of this submission, returned	iVar3 = M<SInt32>\(self \+ 0x50\);	iVar3 = M<SInt32>\(self \+ 0x860\);
+redef	ATIRadeonX1000::submit_buffer@0x20980	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window printed with RBBM_STATUS on the overflow path
+use	ATIRadeonX1000::submit_buffer@0x20980	iVar7	waitTries	CONFIRMED	how many 1ms sleeps the wait for ring space has taken (1000 = gave up)	iVar7 = 0;	uVar6 = \(UInt32\)\(UInt8\)self\[0x84\];
+use	ATIRadeonX1000::submit_buffer@0x20980	iVar7	flushOffset	CONFIRMED	offset of the cache line being stored/flushed	iVar7 = 0;#2	iVar7 = M<SInt32>\(self \+ 0x8a4\);
+redef	ATIRadeonX1000::submit_buffer@0x20980	iVar7	vramBase	CONFIRMED	vramSizeProgrammed: added to the buffer GART offset to give the address the ring packet points at
+use	ATIRadeonX1000::submit_buffer@0x20980	uVar6	cacheLineSize	CONFIRMED	the data cache line size (self+0x84)	uVar6 = \(UInt32\)\(UInt8\)self\[0x84\];	if \(M<SInt32>\(self \+ 0x8a0\) != 0\) \{
+redef	ATIRadeonX1000::submit_buffer@0x20980	uVar6	nextIndex	CONFIRMED	ring index of the next packet word (writeIndex + 1, masked)
+redef	ATIRadeonX1000::stop@0x26250	bVar1	notLastRecord	CONFIRMED	iVar4 != 1: the loop frees the two scanout records
+redef	ATIRadeonX1000::stop@0x26250	iVar2	pageFromEnd	CONFIRMED	iVar4 - iVar7: the page unmapped on this pass (counts down from the last page)
+use	ATIRadeonX1000::stop@0x26250	iVar4	recordIndex	CONFIRMED	index of the display record whose scanout buffer is freed	iVar4 = 0;	iVar4 = M<int>\(self \+ 0x860\);
+use	ATIRadeonX1000::stop@0x26250	iVar4	mmioBase	CONFIRMED	self+mmioBase, the register window the display surface registers are restored through	iVar4 = M<int>\(self \+ 0x860\);	iVar4 = 0;
+use	ATIRadeonX1000::stop@0x26250	iVar4	ringPageOffset	CONFIRMED	byte offset of the idct ring page being unmapped from the GART	iVar4 = 0;#3	\(UInt8\)self\[0x8cc\] != 0\)
+use	ATIRadeonX1000::stop@0x26250	iVar4	lastScratchPage	CONFIRMED	scratch page count - 1: the highest page unmapped one by one	\(UInt8\)self\[0x8cc\] != 0\)	iVar4 = \(unsigned int\)\(UInt8\)self\[0x8cc\] \* 2;
+redef	ATIRadeonX1000::stop@0x26250	iVar4	pageCursor	CONFIRMED	twice the scratch page count, stepped down by 2 while the page pairs are unmapped
+use	ATIRadeonX1000::stop@0x26250	iVar7	previousCursor	CONFIRMED	pageCursor - 2: the next lower pair of scratch pages	while \(iVar7 = iVar4	-
+redef	ATIRadeonX1000::stop@0x26250	iVar7	pageIndex	CONFIRMED	how many scratch pages have been unmapped so far
+use	ATIRadeonX1000::stop@0x26250	uVar3	ringOffset	CONFIRMED	byte offset of the main ring page being unmapped from the GART	uVar3 = 0;	-
+redef	ATIRadeonX1000::stop@0x26250	uVar3	surfaceAddress	CONFIRMED	display surface address, written byte-swapped back to reg 0x6110/0x6120 (display 1) or 0x6910/0x6920 (display 2)
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	bVar1	moreEntries	CONFIRMED	uVar9 != 0xffc: the command queue dump covers 1024 entries
+use	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar9	queueAddress	CONFIRMED	byte address of the command queue (CP_CSQ) entry being read through regs 0x7f0/0x7f4	uVar9 = 0;	-
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar9	cpCsqStat	CONFIRMED	reg 0x7f8, CP_CSQ_STAT
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar32	reg5002Half	INFERRED	half word at +0x5002 with bit 0x1000000 set: the first word of the first log line
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar14	pcieReg21	CONFIRMED	PCIe indirect register 0x21 (reg 0x30 index, reg 0x34 data)
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar20	pcieReg18	CONFIRMED	PCIe indirect register 0x18
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar26	reg7fc	CONFIRMED	reg 0x7fc
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar15	cpStat	CONFIRMED	reg 0x7c0, CP_STAT
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar21	reg790	CONFIRMED	reg 0x790
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar27	reg7b0	CONFIRMED	reg 0x7b0
+use	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar10	csqData	CONFIRMED	reg 0x7f4: the command queue entry selected through reg 0x7f0	uVar10 = loadWordByteReversed\(&M<UInt8>\(iVar25 \+ 0x7f4\)\);	-
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar10	pcieReg10	CONFIRMED	PCIe indirect register 0x10
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar16	mcData	INFERRED	reg 0x74 (MC data) after selecting MC register 0 / 0x8000000 in reg 0x70
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar22	regE7C	CONFIRMED	reg 0xe7c
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar8	rbbmStatus	CONFIRMED	reg 0xe40, RBBM_STATUS
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar11	vapCntlStatus	CONFIRMED	reg 0x2140, VAP_CNTL_STATUS
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar17	pcieReg104	CONFIRMED	PCIe indirect register 0x104
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar23	reg4c	CONFIRMED	reg 0x4c
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar28	cpCsqCntl	CONFIRMED	reg 0x740, CP_CSQ_CNTL
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar12	cpMeCntl	CONFIRMED	reg 0x7d0, CP_ME_CNTL
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar18	cpRbCntl	CONFIRMED	reg 0x704, CP_RB_CNTL
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar31	pcieRegB4	CONFIRMED	PCIe indirect register 0xb4
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar29	reg130	CONFIRMED	reg 0x130
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar13	reg1724	CONFIRMED	reg 0x1724
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar19	regEC	CONFIRMED	reg 0xec
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	uVar30	cpCsqAvail	CONFIRMED	reg 0x7b8, CP_CSQ_AVAIL
+use	ATIRadeonX1000::DumpASICHangState@0x1d480	iVar24	pollCount	CONFIRMED	how many 100us waits for CP_CSQ_STAT to change (0x186a1 = gave up: the engine is hung)	iVar24 = 0;	GH_IOSleep\(10\);
+use	ATIRadeonX1000::DumpASICHangState@0x1d480	iVar24	checksum	CONFIRMED	sum of every register value printed, then of the queue entries; printed at the end	iVar24 = uVar32 \+ uVar14	-
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	iVar24	mmioBase	CONFIRMED	self+mmioBase, the register window
+redef	ATIRadeonX1000::DumpASICHangState@0x1d480	iVar25	registers	CONFIRMED	the register window re-read inside the wait loop
+redef	ATIRadeonX1000::submit_empty_buffer@0x1bca0	iVar1	mmioBase	CONFIRMED	self+mmioBase, the register window
+redef	ATIRadeonX1000::submit_empty_buffer@0x1bca0	uVar2	pcieIndirectValue	CONFIRMED	pcieIndirectRegValue: the value written (with bit 0x100 set, then plain) to PCIe indirect register 0x10 before polling register 0x22
+redef	ATIRadeonX1000::submit_empty_buffer@0x1bca0	iVar3	triesLeft	CONFIRMED	0x2711: how many times the PCIe register 0x22 poll is repeated
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	pbVar2	regPtr	CONFIRMED	address of the surface limit register, read back after it is written
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	bVar17	macroTiled	INFERRED	the level is large enough for macro tiling (width/height >= the tile size and the texture allows it)
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	bVar18	tileFlags	INFERRED	texture info flags >> 3: bit 1 macro tiling, bits 0-1 micro tiling
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar19	slotsLeft	CONFIRMED	number of surface register slots still to test while searching for a free one	uVar19 = \(UInt32\)\(UInt8\)self\[0x990\];	iVar31 = M<SInt32>\(self \+ 0x860\);
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar19	levelDepth	CONFIRMED	depth of the current mip level (halved per level)
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar20	negTileBits	INFERRED	-(tileFlags & 3): negative when any tiling flag is set	iVar20 = -\(bVar18 & 3\);	-	1,2,5
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar20	tileRowShift	INFERRED	log2 of the tile rows (2, 1 or 0) that scales the row granularity
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar26	textureInfo	CONFIRMED	the texture info block (texture+0x14): base level, level count, face count, flags	iVar26 = M<SInt32>\(textureBytes \+ 0x14\);	iVar26 = 0;
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar26	slotOffset	CONFIRMED	4 * the free surface register slot (0 if none): the offset of its register triple	iVar26 = 0;	-	1,2,3,4,6
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar26	surfaceUpperOffset	CONFIRMED	register offset of the surface upper limit register ((slot + 0x2c2) * 4)
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar35	freeSlot	CONFIRMED	index of the first free surface register slot	uVar35 = 0;	iVar31 = M<SInt32>\(self \+ 0x860\);
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar35	levelHeight	CONFIRMED	height of the current mip level (halved per level)
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar37	levelWidth	CONFIRMED	width of the current mip level (halved per level)
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar40	srcPitch	CONFIRMED	pitch of the current level in the VRAM source, stepped per row and halved per level
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar33	macroTileWidthShift	INFERRED	3, 4 or 5: log2 of the macro tile width in 8-pixel units
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	local_7c	macroTileHeightShift	INFERRED	2, 1 or 0: log2 of the macro tile height in 8-pixel units
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	AVar25	pixelShiftByte	CONFIRMED	hwInfo+0x1a: log2 of the bytes per pixel, re-read after each row copy
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar22	repeatCount	CONFIRMED	number of repeats of this mip level (tile record word)	uVar22 = \(UInt32\)M<UInt16>\(tileRecord\);	\(\(SInt32\)uVar40 < 1 << iVar33 \+ 3\)
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar22	macroTileFlag	INFERRED	1 when macro tiling applies to this level, else 0 (the same value as macroTiled)	\(\(SInt32\)uVar40 < 1 << iVar33 \+ 3\)	uVar22 = \(uVar32 \+ iVar28	1,2,3
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar22	tilingBits	INFERRED	tiling field (0, 0x10000 ... 0x70000) chosen from the tile shape, merged into the surface info register	\(\(SInt32\)uVar40 < 1 << iVar33 \+ 3\)	uVar22 = \(uVar32 \+ iVar28	4,5,6,7,8,9,10
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar22	endAddress	CONFIRMED	last byte of the destination range, written to the surface upper limit register	uVar22 = \(uVar32 \+ iVar28	pbVar2 = \(UInt8 \*\)\(iVar27 \+ iVar26\);
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar22	cacheLine	CONFIRMED	the data cache line size, used to store/flush the copied row	uVar22 = \(UInt32\)\(UInt8\)hwInfoBytes\[0x1a\];	-	4,5,6,7,8,9
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar22	pixelShift	CONFIRMED	log2 of the bytes per pixel: converts the level width to the bytes per row
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar32	vramOffset	CONFIRMED	the source address relative to the VRAM aperture: the surface lower limit
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar27	flushOffset	CONFIRMED	offset of the cache line being stored	iVar27 = 0;	-
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar27	registerWindow	CONFIRMED	self+mmioBase read inside the copy loop: the window the surface registers are programmed through
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar28	rowIndex	CONFIRMED	row of the level being copied	iVar28 = 0;	-
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar28	rowGranularity	INFERRED	rows per tile (8 when macro tiled, else 1) scaled by the tile row shift
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar29	flushBytes	CONFIRMED	bytes of the destination row still to flush after its first cache line
+use	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar31	destPitch	CONFIRMED	destination pitch of the current level, halved per level down to 0x20	iVar31 = M<SInt32>\(hwInfoBytes \+ 0x10\);	iVar31 = M<SInt32>\(self \+ 0x860\);
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar31	mmioBase	CONFIRMED	self+mmioBase, the register window
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	AVar2	formatBits	INFERRED	hwInfo+0x1b & 3: the surface format field merged into the blit packet
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	bVar3	macroTiled	INFERRED	the level is large enough for macro tiling
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	bVar4	tileFlags	INFERRED	texture info flags >> 3: bit 1 macro tiling, bits 0-1 micro tiling
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar5	heightAtLevel	CONFIRMED	hwInfo height (+0x16) shifted down by the mip level
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	sVar10	mapCount	CONFIRMED	the inner buffer map count (+0xe), incremented while the outer buffer is mapped and decremented after
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar8	vramBase	CONFIRMED	vramSizeProgrammed: added to the GART offset to give the address the packet reads from
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar20	macroTileHeightShift	INFERRED	2, 1 or 0: log2 of the macro tile height in 8-line units
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar22	minHeight	CONFIRMED	0x20 >> pixelShift: the smallest level height that is still emitted
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar23	minWidth	CONFIRMED	1 << (macroTileWidthShift - pixelShift): the smallest level width
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar26	texFlags	CONFIRMED	texture info flags byte (+0x15): bit 2 macro tiling, bits 3-4 micro tiling; bit 2 is updated per level
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	textureInfo	CONFIRMED	the texture info block (texture+0x14)	-	-	1,2,3,4,13,32,34,52,53
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	mapResult	CONFIRMED	virtual map to GART (vtable+0x5a8) and freeToAllocGART results: 0 means failure, try again	-	-	5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,24,25,26,27,28,29,30,31
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	bufferGartOffset	CONFIRMED	texture+4: the GART offset of the buffer (0 = not mapped yet)	-	-	22,23
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	waitStampResult	CONFIRMED	the time spent waiting for the previous submission (waitForTimeStamp result), added to texturePageOutWaitTime
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	negTileBits	INFERRED	-(tileFlags & 3): negative when any tiling flag is set	-	-	36,37,40
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	macroTileWidthShift	INFERRED	3, 4 or 5: log2 of the macro tile width in 8-pixel units	-	-	38,39,41,42
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	macroTileBit	INFERRED	1 when the level is big enough for macro tiling, else 0; stored into bit 2 of texFlags	-	-	43,44,45
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	tileGartAddress	CONFIRMED	GART offset of the current tile within the texture, advanced by the repeat stride	-	-	46,47,48,49
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar15	emptyWordOffset	CONFIRMED	wordCount * 4: where the 0x80000000 pad word goes when the word count is odd	-	-	50,51
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar28	waitTimeBefore	CONFIRMED	texturePageOutWaitTime before this submission	iVar28 = M<int>\(self \+ 0x758\);	iVar28 = M<int>\(textureBytes \+ 0x14\);
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar28	infoBlock	CONFIRMED	the texture info block (texture+0x14), re-read for the tile loop	-	-	3,4,5,10
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar28	tileVramOffset	CONFIRMED	offset of the current tile in the texture VRAM copy, advanced by the repeat stride
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar9	heightRows	INFERRED	level height, at least one macro tile high	-	-	1,2,3
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar9	halfHeight	INFERRED	level height / 2: the height field of the blit packet	-	-	4,5,6,7
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar9	halfWidth	INFERRED	level width / 2, the width of the next level before clamping
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar19	packetWord	CONFIRMED	the packet word (tileOut+0xc) being edited	-	-	3,4,5
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar19	levelHeight	CONFIRMED	height of the current mip level, halved per level down to minHeight
+use	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar18	pixelShift	CONFIRMED	hwInfo+0x1a: log2 of the bytes per pixel	-	-	1,2,3,4,5,6,7,8,10,16
+redef	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar18	levelWidth	CONFIRMED	width of the current mip level, halved per level down to minWidth
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	bVar2	macroTiled	INFERRED	the level is large enough for macro tiling
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	bVar3	tileFlags	INFERRED	texture info flags >> 3: bit 1 macro tiling, bits 0-1 micro tiling
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar13	macroTileHeightShift	INFERRED	2, 1 or 0: log2 of the macro tile height in 8-line units
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar17	minWidth	CONFIRMED	1 << (macroTileWidthShift - pixelShift): the smallest level width
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar21	microTiling	CONFIRMED	(texFlags >> 3) & 3: the micro tiling field copied into the packet words
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	allocResult	CONFIRMED	ATIR500Memory::alloc / freeToAllocTextureCPUVisibleVRAM result: 0 means no CPU-invisible VRAM was found	-	-	1,2,3,4
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	textureInfo	CONFIRMED	the texture info block (texture+0x14)	-	-	5,6,7,8,9,10,28,29
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	negTileBits	INFERRED	-(tileFlags & 3): negative when any tiling flag is set	-	-	11,12,15
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	macroTileWidthShift	INFERRED	3, 4 or 5: log2 of the macro tile width in 8-pixel units	-	-	13,14,16,17
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	macroTileBit	INFERRED	1 when the level is big enough for macro tiling, else 0; stored into bit 2 of mipFlags	-	-	18,19,20
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	tileOffset	CONFIRMED	offset of the current tile in the texture, advanced by the repeat stride	-	-	21,22,23,24,25
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar6	emptyWordOffset	CONFIRMED	wordCount * 4: where the 0x80000000 pad word goes when the word count is odd	-	-	26,27
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar4	macroBit	CONFIRMED	(mipFlags >> 2) & 1: the macro tiling bit copied into the packet words	-	-	4,5,6
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar4	heightAtLevel	CONFIRMED	hwInfo height (+0x16) shifted down by the mip level
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar5	halfWidth	INFERRED	level width / 2: the width field of the blit packet	-	-	4,5,6,7
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar5	heightRows	INFERRED	level height, at least one macro tile high
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar11	pixelShift	CONFIRMED	hwInfo+0x1a: log2 of the bytes per pixel	-	-	1,2,3,4,5,6,8,14
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar11	levelWidth	CONFIRMED	width of the current mip level, halved per level down to minWidth
+use	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar22	textureSize	CONFIRMED	texture+0x50: bytes to allocate in CPU-invisible VRAM	-	-	1,2,3
+redef	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar22	wordCount	CONFIRMED	number of command words in the page-out buffer (hwInfo+8), padded to even
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	sVar3	mapCount	CONFIRMED	the inner buffer map count (+0xe), incremented while the outer buffer is mapped and decremented after
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar1	vramBase	CONFIRMED	vramSizeProgrammed: added to the GART offset to give the address the packet reads from
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar2	burstsLeft	CONFIRMED	number of copy bursts still to emit after the first
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar9	vramWordIndex	CONFIRMED	index of the destination (VRAM) address word of the current burst in the packet buffer
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar10	gartWordIndex	CONFIRMED	index of the source (GART) address word of the current burst in the packet buffer
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar13	vramStride	CONFIRMED	hwInfo+0x50: VRAM bytes between bursts
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar15	gartStride	CONFIRMED	hwInfo+0x4c: GART bytes between bursts
+use	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar4	mapResult	CONFIRMED	virtual map to GART (vtable+0x5a8) and freeToAllocGART results: 0 means failure, try again	-	-	1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,19,20,21,22,23,24,25,26
+use	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar4	bufferGartOffset	CONFIRMED	texture+4: the GART offset of the buffer (0 = not mapped yet)	-	-	17,18
+use	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar4	size	CONFIRMED	texture+0x50: bytes copied, added to texturePageOutBytesPerSample	-	-	27,28,29
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar4	textureInfo	CONFIRMED	the texture info block (texture+0x14)
+use	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar5	waitStampResult	CONFIRMED	the time spent waiting for the previous submission (waitForTimeStamp result)	-	-	1,2
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar5	gartOffsetInBurst	CONFIRMED	hwInfo+0x44: GART offset of the current burst, advanced by gartStride
+use	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar14	waitTimeBefore	CONFIRMED	texturePageOutWaitTime before this submission	-	-	1,2
+redef	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar14	vramOffsetInBurst	CONFIRMED	hwInfo+0x48: VRAM offset of the current burst, advanced by vramStride
+redef	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	puVar1	nextFaceMaskPtr	INFERRED	address of the next face 16-bit mask word (+0x2a): the faces are compared pairwise with the dirty mask
+redef	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	puVar2	nextFaceDirtyPtr	INFERRED	address of the next face 16-bit word (+0x1e) tested against that mask
+redef	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	uVar5	faceIndex	CONFIRMED	number of faces checked so far
+redef	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	uVar8	facesLeft	CONFIRMED	faces still to check (at least 1)
+redef	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	iVar6	prevEntry	CONFIRMED	candidate->prev (+0x24) in the texture VRAM list the candidate is unlinked from
+use	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	iVar4	nextEntry	CONFIRMED	candidate->next (+0x28) in the texture VRAM list the candidate is unlinked from	-	-	3,4
+use	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	iVar4	allocResult	CONFIRMED	ATIR500Memory::alloc result for the new texture in the VRAM the candidate released	-	-	5,6
+redef	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	iVar4	infoCursor	CONFIRMED	the candidate texture info block (+0x14), advanced 2 bytes per face while its per-face masks are tested
+redef	ATIRadeonX1000::deallocate_texture@0x1a620	puVar1	nextFaceMaskPtr	INFERRED	address of the next face 16-bit mask word (+0x2a): the faces are compared pairwise with the dirty mask
+redef	ATIRadeonX1000::deallocate_texture@0x1a620	puVar2	nextFaceDirtyPtr	INFERRED	address of the next face 16-bit word (+0x1e) tested against that mask
+redef	ATIRadeonX1000::deallocate_texture@0x1a620	iVar6	infoCursor	CONFIRMED	the texture info block (+0x14), advanced 2 bytes per face while its per-face masks are tested
+redef	ATIRadeonX1000::deallocate_texture@0x1a620	uVar7	faceIndex	CONFIRMED	number of faces checked so far
+redef	ATIRadeonX1000::deallocate_texture@0x1a620	uVar8	facesLeft	CONFIRMED	faces still to check (at least 1)
+redef	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	uVar1	facesLeft	CONFIRMED	faces still to merge the dirty masks of (at least 1)
+redef	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	iVar2	faceMasks	CONFIRMED	texture info + 2 * face: the face 16-bit dirty and valid mask words (+0x1c, +0x28)
+use	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	iVar5	textureInfo	CONFIRMED	the texture info block (texture+0x14)	iVar5 = M<int>\(textureBytes \+ 0x14\);	-
+redef	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	iVar5	pageoffResult	CONFIRMED	pageoff_dirty_texture_with_gpu / prepare_texture_for_pageoff_with_cpu result: non-zero when the next step is needed
+redef	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	param_3	startOffset	INFERRED	second argument of the virtual (vtable+0x52c): deallocate_texture passes -1, -1 meaning the whole texture
+redef	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	param_4	length	INFERRED	third argument of the virtual (vtable+0x52c): deallocate_texture passes -1, -1 meaning the whole texture
+use	ATIRadeonX1000::allocate_texture@0x1a800	iVar3	hwInfo	CONFIRMED	the mapped hardware texture info (mapping->getAddress()); +0x20 holds the buffer flags	-	-	4,5
+redef	ATIRadeonX1000::allocate_texture@0x1a800	iVar3	allocResult	CONFIRMED	ATIR500Memory::alloc result: 0 means the VRAM range is taken
+redef	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	uVar2	ringLineStart	CONFIRMED	the first data cache line of the idct ring words just written
+redef	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	uVar4	ringCacheLine	CONFIRMED	the data cache line size (self+0x84)
+redef	::DumpPCIeGART	pbVar1	entryByte2	CONFIRMED	byte 2 of the entry
+redef	::DumpPCIeGART	pbVar2	entryByte1	CONFIRMED	byte 1 of the entry
+redef	::DumpPCIeGART	bVar3	entryByte0	CONFIRMED	byte 0 of the entry
+redef	::DumpPCIeGART	uVar4	entryWord	CONFIRMED	the entry as stored (printed byte-swapped)
+redef	::HZMEM_InitAllocationTable	param_1	hzBytes	CONFIRMED	the _HZDATA block as bytes: +0xc the block count, +0x10 the block pointers
+redef	::HZMEM_InitAllocationTable	uVar2	blockIndex	CONFIRMED	number of blocks cleared so far
+redef	::HZMEM_InitAllocationTable	p_Var1	blockSlot	CONFIRMED	address of the pointer to the block just cleared
+redef	::HZMEM_InitAllocationTable	p_Var3	blockSlotCursor	CONFIRMED	the _HZDATA block advanced 4 bytes per block: its +0x10 is the pointer of the block being cleared
+redef	::HZMEM_Init	param_1	hzBytes	CONFIRMED	the _HZDATA block as bytes: +0 the chip class
+redef	::HZMEM_Init	param_2	chipClass	INFERRED	the chip class code (0..3) start() chose from the chip ID; stored at hz+0 and handed to HZMEM_InitMemResource
+redef	::HZMEM_Init	param_3	numPipes	INFERRED	numPipes, handed to HZMEM_InitMemResource
+redef	::HZMEM_Init	param_4	numZPipes	INFERRED	numZPipes, handed to HZMEM_InitMemResource
+redef	::HZMEM_Init	iVar1	initResult	CONFIRMED	HZMEM_InitMemResource result: 0 on success
+redef	::HZMEM_Init	uVar2	tableResult	CONFIRMED	HZMEM_InitAllocationTable result (always 0)
+redef	ATIRadeonX1000::enable_GPUSensor@0x19f30	piVar1	sensorTimer	CONFIRMED	gpuSensorTimer: the timer event source armed with the sampling period
+redef	ATIRadeonX1000::start@0x1f750	piVar7	registerMapObject	CONFIRMED	pciDevice->mapDeviceMemoryWithRegister(BAR0) (vtable+0x57c): the register map, kept in registerMap
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	bVar1	noFormatBits	CONFIRMED	the buffer format word has no block-size nibble (bits 20-23 are zero), so the widths are not divided
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	AVar2	dstFormat	CONFIRMED	panel record +0x166: the destination format index into the format table
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar4	dstColumnUnits	INFERRED	panel record +0x144 (a column offset in 4KB units added to the destination address)
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	iVar14	packetWordIndex	CONFIRMED	index in buffer of the next packet to write: past the state packet, then past each rotation fix-up packet
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	iVar14	formatTableOffset	CONFIRMED	format index * 0x1c: the offset of the format in the ati_format_info_table	-	-	1,2,3,4,5,6
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar8	lastColumnRot	CONFIRMED	last column of the rotated source: width / units - 1 (or - 0x1001 for the wrapped case), 0 when the width is zero
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar12	columnCountRot	CONFIRMED	source width in block units for the rotated fix-up packet
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar3	dstRow	CONFIRMED	panel record +0x14c: the destination row, multiplied by the pitch
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar3	panelHeight16	CONFIRMED	panel height (+0x9da) as 16 bits, masked and shifted into the flip-wait register write	-	-	1,2,3
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar25	magicBias	CONFIRMED	DOUBLE_0004c3b0 = 2^52: the bias that turns the 0x43300000:int pairs into doubles	-	-	1,2,3
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar25	heightD	CONFIRMED	the source height (+0x9da) as a double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar24	widthD	CONFIRMED	the source width (+0x9d8) as a double
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar23	vertexScaleA	INFERRED	FLOAT_0004c37c (6.0): scale applied to the width/height to give the packet vertex coordinates	-	-	1,2,3,4,5,6,7,8,12,13,14
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar23	vertexBiasA	INFERRED	FLOAT_0004c378: the offset subtracted from the width for the rotated packets	-	-	9,10,11
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar22	vertexScaleB	INFERRED	FLOAT_0004c37c (6.0): scale applied to the width/height to give the packet vertex coordinates	-	-	4,5,6
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar22	vertexBiasB	INFERRED	FLOAT_0004c378: the offset subtracted from the width for the rotated packets	-	-	1,2,3,7,8,9
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	fVar5	vertexY1	INFERRED	(height + 0) * 0.5: the vertical vertex coordinate written to the packet	-	-	1,2,3,4,5,6,9,10
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	fVar5	vertexX1	INFERRED	(width + offset) * 0.5: the horizontal vertex coordinate written to the packet	-	-	7,8
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	fVar6	vertexX2	INFERRED	(width + offset) * 0.5: the horizontal vertex coordinate written to the packet	-	-	1,2,3,4,7,8
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	fVar6	vertexY2	INFERRED	(height + 0) * 0.5: the vertical vertex coordinate written to the packet	-	-	5,6
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar15	tileConfig	CONFIRMED	gbTileConfig, stored in the state packet at word 0xb	-	-	1,2
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar15	texCoordWord4	INFERRED	fourth texture coordinate word of the rotation packet (0 or 1.0f)
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar18	texCoordWord3	INFERRED	third texture coordinate word of the rotation packet (0 or 1.0f)
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar19	texCoordWord2	INFERRED	second texture coordinate word of the rotation packet (0 or 1.0f)
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar20	texCoordWord1	INFERRED	first texture coordinate word of the rotation packet (0 or 1.0f)
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar7	packetWord8a	CONFIRMED	state packet word 0x8a before the format fields are merged in	-	-	1,2,3,4,5,6
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar7	packetWordA0	CONFIRMED	state packet word 0xa0 (destination address / tiling), re-used for the fix-up packet	-	-	7,8,9,10
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar17	formatField0	CONFIRMED	format table field E0 >> 0x11 & 0x1f: bits 0-4 of packet word 0x8a	-	-	1,2,3,4,5,6
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar17	dstColumnCount	CONFIRMED	destination width / block units	-	-	7,8,9
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar17	lastRowRot	CONFIRMED	panel height - 1 (0 when zero): the last row for the 90 degree fix-up	-	-	10,11,12
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar17	packetWord98	CONFIRMED	state packet word 0x98 before its low bits are cleared and bit 0 set	-	-	13,17,18
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar17	columnOffsetRot	CONFIRMED	width / units - 0x1001 (or -0x1000 when zero): the wrapped column for the 270 degree fix-up	-	-	14,15,16
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar17	dstHeight	CONFIRMED	destination height (+0x14a): more than 0x1000 needs the fix-up packets
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar10	columnCount	CONFIRMED	width / block units (bits 20-23 of the format word); the last column is this minus one	-	-	1,2,3,4,5,6,7,8,9,15,16,17,18,19,20,21,22,23
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar10	formatField1	CONFIRMED	format table field E0 >> 7 & 0x300: bits 8-9 of packet word 0x8a	-	-	10,11,12,13,14
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar10	lastColumnLarge	CONFIRMED	destination width / units - 1 (0 when zero): the last column of the destination for the large-height case	-	-	24,25,26
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar10	columnCountWrap	CONFIRMED	source width / block units, used to wrap the column for the 270 degree fix-up	-	-	27,28,29
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar10	packetWordB3	CONFIRMED	state packet word 0xb3 (last column / last row), re-used for the fix-up packet	-	-	30,31,32,33
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar11	formatField2	CONFIRMED	format table field E0 >> 3 & 0xc00: bits 10-11 of packet word 0x8a	-	-	1,2,3,4
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar11	packetWordB2	CONFIRMED	state packet word 0xb2, re-used for the fix-up packet	-	-	5,6,7,8
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar13	formatField3	CONFIRMED	(format table field E0 & 0x1800) << 1: bits 12-15 of packet word 0x8a	-	-	1,2,3
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar13	packetWordA6	CONFIRMED	state packet word 0xa6, re-used for the fix-up packet	-	-	4,5,6,7
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	local_a8	magicHi0	CONFIRMED	0x43300000: the exponent word of the 2^52 + width double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uStack_a4	widthLo	CONFIRMED	the width (+0x9d8) as the low word of the 2^52 + width double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	local_a0	magicHi1	CONFIRMED	0x43300000: the exponent word of the 2^52 + height double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uStack_9c	heightLo	CONFIRMED	the height (+0x9da) as the low word of the 2^52 + height double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	local_98	magicHi2	CONFIRMED	0x43300000: the exponent word of the 2^52 + destination width double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uStack_94	dstWidthLo	CONFIRMED	the destination width (+0x148) as the low word of the 2^52 + width double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	local_90	magicHi3	CONFIRMED	0x43300000: the exponent word of the 2^52 + destination height double
+redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uStack_8c	dstHeightLo	CONFIRMED	the destination height (+0x14a) as the low word of the 2^52 + height double
+redef	::pcl_CopyPix@0x21e30	bVar1	flipX	CONFIRMED	flipHorizontally as a flag
+use	::pcl_CopyPix@0x21e30	dVar51	scaleX	CONFIRMED	params+0x6c: the horizontal scale of the copy (1.0 = unscaled); also the integer copy width in the large path	-	-	1,2,3,4,5,6,7,8,9
+use	::pcl_CopyPix@0x21e30	dVar51	rectRightD	CONFIRMED	x + width of the source rectangle as a double (unscaled path)	-	-	10,11
+use	::pcl_CopyPix@0x21e30	dVar50	scaleY	CONFIRMED	params+0x70: the vertical scale of the copy; also the integer copy height in the large path	-	-	1,2,3,4,5,6
+use	::pcl_CopyPix@0x21e30	dVar50	ySecondD1	CONFIRMED	the second source y (y or y+h, by the vertical flip) as a double, strip path	-	-	7,8
+use	::pcl_CopyPix@0x21e30	dVar50	ySecondD2	CONFIRMED	the second source y as a double, second strip	-	-	9,10
+use	::pcl_CopyPix@0x21e30	dVar50	rectXD	CONFIRMED	source rectangle x as a double (unscaled path)	-	-	11,12
+use	::pcl_CopyPix@0x21e30	dVar49	invScaleX	CONFIRMED	1/scaleX (0 when scaleX is 0)	-	-	1,2,3,10,11
+use	::pcl_CopyPix@0x21e30	dVar49	chunkLeftD	CONFIRMED	the chunk left edge as a double (unbiased)	-	-	4,5
+use	::pcl_CopyPix@0x21e30	dVar49	yFirstD1	CONFIRMED	the first source y as a double, strip path	-	-	6,7
+use	::pcl_CopyPix@0x21e30	dVar49	yFirstD2	CONFIRMED	the first source y as a double, second strip	-	-	8,9
+redef	::pcl_CopyPix@0x21e30	dVar48	invScaleY	CONFIRMED	1/scaleY (0 when scaleY is 0)
+redef	::pcl_CopyPix@0x21e30	dVar47	ySecondDC	CONFIRMED	the second source y as a double, unscaled path
+use	::pcl_CopyPix@0x21e30	dVar46	biasD	CONFIRMED	DOUBLE_0004c3a8: the int-to-double conversion bias	-	-	1,2
+use	::pcl_CopyPix@0x21e30	dVar46	yFirstDC	CONFIRMED	the first source y as a double, unscaled path	-	-	3,4
+use	::pcl_CopyPix@0x21e30	fVar2	vertexScale	CONFIRMED	FLOAT_0004c37c (6.0): scale applied to rectangle sizes to give packet vertex sizes	-	-	1,18,19
+use	::pcl_CopyPix@0x21e30	fVar2	halfWidthPlus2F	INFERRED	the half width plus two as a float, the width of the first strip	-	-	2,3,4
+use	::pcl_CopyPix@0x21e30	fVar2	rectRightF	INFERRED	right edge of the destination part covered by this strip	-	-	5,6,7,8
+use	::pcl_CopyPix@0x21e30	fVar2	centerYB1	INFERRED	(2 * y + h) * 0.5: the vertical centre written to the first strip packet	-	-	9,10
+use	::pcl_CopyPix@0x21e30	fVar2	invWidth2	INFERRED	1 / the second strip width (0 when zero)	-	-	11,12,13,15
+use	::pcl_CopyPix@0x21e30	fVar2	texRight2	INFERRED	right texture coordinate of the second strip	-	-	14,16,17
+use	::pcl_CopyPix@0x21e30	fVar3	chunkMaxX	CONFIRMED	right edge of the current chunk in source coordinates (clamped to the source maximum)	-	-	1,2,3,4,5,6,7,8,9
+use	::pcl_CopyPix@0x21e30	fVar3	scaledHeightB	INFERRED	destination height scaled by 6.0, packed in the low half of the size word	-	-	10,11,12,13
+use	::pcl_CopyPix@0x21e30	fVar4	dstWidth	CONFIRMED	params+0x5c: the destination rectangle width	-	-	2,3,4,5
+use	::pcl_CopyPix@0x21e30	fVar4	srcXAtLeft	CONFIRMED	source x at the destination left edge: dstX * srcPerDstX + srcOffsetX	-	-	6,7,8,9
+use	::pcl_CopyPix@0x21e30	fVar4	invHalfWidth	INFERRED	1 / the first strip width (0.0 when it is zero)	-	-	1,10,11,12,14
+use	::pcl_CopyPix@0x21e30	fVar4	texLeft	INFERRED	left texture coordinate of the first strip	-	-	13,15,16
+use	::pcl_CopyPix@0x21e30	fVar4	secondHalfWidthF	INFERRED	the second strip width as a float	-	-	17,18,19
+use	::pcl_CopyPix@0x21e30	fVar4	leftEdgeF	INFERRED	left edge of the second strip in destination coordinates	-	-	20,21,22,24
+use	::pcl_CopyPix@0x21e30	fVar4	centerXB2	INFERRED	(left + right) * 0.5: the horizontal centre written to the second strip packet	-	-	23,25
+use	::pcl_CopyPix@0x21e30	fVar4	rectX	CONFIRMED	params+0x54: the destination rectangle x (unscaled path)	-	-	26,27,28,29,30
+use	::pcl_CopyPix@0x21e30	fVar5	dstXB	CONFIRMED	params+0x54: the destination rectangle x (strip path)	-	-	1,2,3,4,6,8,9,10,11
+use	::pcl_CopyPix@0x21e30	fVar5	centerXB1	INFERRED	(left + right) * 0.5: the horizontal centre written to the first strip packet	-	-	5,7
+use	::pcl_CopyPix@0x21e30	fVar5	rectY	CONFIRMED	params+0x58: the destination rectangle y (unscaled path)	-	-	12,13,14,15,16
+use	::pcl_CopyPix@0x21e30	fVar6	dstHeight	CONFIRMED	params+0x60: the destination rectangle height	-	-	1,2,3,4
+use	::pcl_CopyPix@0x21e30	fVar6	texRight1	INFERRED	right texture coordinate of the first strip	-	-	5,6,7
+use	::pcl_CopyPix@0x21e30	fVar6	texLeft2	INFERRED	left texture coordinate of the second strip	-	-	8,9,10
+use	::pcl_CopyPix@0x21e30	fVar6	rectW	CONFIRMED	params+0x5c: the destination rectangle width (unscaled path)	-	-	11,12,13
+use	::pcl_CopyPix@0x21e30	fVar7	chunkMinX	CONFIRMED	left edge of the current chunk in source coordinates (clamped to the source minimum); swapped with chunkMaxX when the destination x order is reversed	-	-	1,2,3,4,5,6,7,8,9,10
+use	::pcl_CopyPix@0x21e30	fVar7	dstYB	CONFIRMED	params+0x58: the destination rectangle y (strip path)	-	-	11,12,13,14,15,16,17,18,20,21
+use	::pcl_CopyPix@0x21e30	fVar7	centerYB2	INFERRED	(2 * y + h) * 0.5: the vertical centre written to the second strip packet	-	-	19,22
+use	::pcl_CopyPix@0x21e30	fVar7	rectH	CONFIRMED	params+0x60: the destination rectangle height (unscaled path)	-	-	23,24,25
+use	::pcl_CopyPix@0x21e30	fVar8	chunkMinY	CONFIRMED	top edge of the current chunk in source coordinates (clamped to the source minimum); swapped with the bottom edge when the destination y order is reversed	-	-	1,2,3,4,5,6,7,8,9,10
+use	::pcl_CopyPix@0x21e30	fVar8	chunkLeftF	CONFIRMED	the chunk left edge as a float (unbiased)	-	-	11,12,13
+use	::pcl_CopyPix@0x21e30	fVar8	dstHeightB	CONFIRMED	params+0x60: the destination rectangle height (strip path)	-	-	14,15,16,17,18,19
+use	::pcl_CopyPix@0x21e30	fVar8	halfConst	CONFIRMED	FLOAT_0004c380 (0.5)	-	-	20,21,22
+redef	::pcl_CopyPix@0x21e30	fVar9	scaledWidthB	INFERRED	destination width scaled by 6.0, packed in the high half of the size word
+use	::pcl_CopyPix@0x21e30	fVar10	chunkMaxY	CONFIRMED	bottom edge of the current chunk in source coordinates (clamped to the source maximum)	-	-	1,2,3,4,5,6
+use	::pcl_CopyPix@0x21e30	fVar10	dstXMax	CONFIRMED	the larger destination x of the chunk	-	-	7,8,9,10,11,12
+use	::pcl_CopyPix@0x21e30	fVar11	clampTmpMinY	CONFIRMED	scratch of the min/max clamp of the chunk top edge	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	fVar11	dstXFirst	CONFIRMED	destination x of the chunk left source edge (before ordering)	-	-	4,5,6,7
+use	::pcl_CopyPix@0x21e30	fVar12	clampedMaxY	CONFIRMED	the chunk bottom edge clamped against the source maximum	-	-	1,2,3,4,5,6
+use	::pcl_CopyPix@0x21e30	fVar12	srcXAtDstMin	CONFIRMED	source x at the smaller destination x of the chunk	-	-	7,8,9
+use	::pcl_CopyPix@0x21e30	fVar13	clampTmpMinX	CONFIRMED	scratch of the min/max clamp of the chunk left edge	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	fVar13	srcYAtDstMin	CONFIRMED	source y at the smaller destination y of the chunk	-	-	4,5,6
+redef	::pcl_CopyPix@0x21e30	fVar14	srcYAtDstTop	CONFIRMED	source y at the destination top edge: srcPerDstY * dstY + srcOffsetY
+use	::pcl_CopyPix@0x21e30	fVar15	clampTmpMaxX	CONFIRMED	scratch of the min/max clamp of the chunk right edge	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	fVar15	dstYFirst	CONFIRMED	destination y of the chunk top source edge (before ordering)	-	-	4,5,6,7
+use	::pcl_CopyPix@0x21e30	fVar15	dstXMin	CONFIRMED	the smaller destination x of the chunk	-	-	8,9,10,11
+redef	::pcl_CopyPix@0x21e30	fVar17	dstYMax	CONFIRMED	the larger destination y of the chunk
+redef	::pcl_CopyPix@0x21e30	fVar20	dstYMin	CONFIRMED	the smaller destination y of the chunk
+use	::pcl_CopyPix@0x21e30	uVar23	tilingBits	INFERRED	params+0x10: tiling bits merged into the destination state word 0xa2	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	uVar23	halfWidthAligned	INFERRED	half of the copy width, rounded down to 0x200: the width of the first strip	-	-	4,5,6,7,8,9,10,11,12,13,14
+use	::pcl_CopyPix@0x21e30	uVar23	yBottomB2	CONFIRMED	the second source y (y or y+h, by the vertical flip), strip and unscaled paths	-	-	15,16,17,18,19,20,21,22
+use	::pcl_CopyPix@0x21e30	uVar38	stateWordA2	CONFIRMED	state packet word 0xa2 as copied	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	uVar38	secondHalfWidth	INFERRED	copy width minus the first strip width: the second strip width	-	-	4,5,6
+use	::pcl_CopyPix@0x21e30	uVar38	leftMax	INFERRED	max(strip split, source x): the left edge of the second part	-	-	7,8,9
+use	::pcl_CopyPix@0x21e30	uVar38	yTopB2	CONFIRMED	the first source y (y or y+h, by the vertical flip), strip and unscaled paths	-	-	10,11,12,13,14,15,16,17
+use	::pcl_CopyPix@0x21e30	uVar40	columnCandidate	CONFIRMED	source min x - 1 rounded towards zero to 0x200: candidate first chunk column	-	-	1,2,3,4,5,6,7,8
+use	::pcl_CopyPix@0x21e30	uVar40	alignedHeightLimit	INFERRED	copy height aligned down to 0x40 (minus 0x40 when the tail is short)	-	-	9,10,11,12,13,14,15
+use	::pcl_CopyPix@0x21e30	uVar40	columnBase	CONFIRMED	first column used to count the column chunks (at least 0x200)	-	-	16,17,18,19
+use	::pcl_CopyPix@0x21e30	uVar40	rowBase	CONFIRMED	first row used to count the row chunks (at least 0x40)	-	-	20,21,22,23
+use	::pcl_CopyPix@0x21e30	uVar40	halfWidthPlus2	INFERRED	halfWidthAligned + 2: the right bound of the first strip	-	-	24,25,26,27,28,29
+use	::pcl_CopyPix@0x21e30	uVar40	ySecondB1	CONFIRMED	the second source y, first strip	-	-	30,31,32,33
+use	::pcl_CopyPix@0x21e30	uVar40	rectX2	CONFIRMED	source rectangle x	-	-	34,35,36,37,38,39
+use	::pcl_CopyPix@0x21e30	uVar27	alignedWidthLimit	INFERRED	copy width aligned down to 0x200	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	uVar27	rowCandidate	CONFIRMED	source min y - 1 rounded towards zero to 0x40: candidate first chunk row	-	-	4,5,6,7,8,9,10,11
+use	::pcl_CopyPix@0x21e30	uVar27	widthMinusOne	CONFIRMED	copy width - 1	-	-	12,13,14,15
+use	::pcl_CopyPix@0x21e30	uVar27	srcMaxXInt	CONFIRMED	the source max x truncated, plus one when it has a fraction	-	-	16,17,18,19,20,21
+use	::pcl_CopyPix@0x21e30	uVar27	macroTileBit	INFERRED	bit 2 of the destination word 0xa0: the macro tiling flag	-	-	22,23,24
+use	::pcl_CopyPix@0x21e30	uVar27	rightLimit	INFERRED	min(bound, source right edge) for the first strip	-	-	25,26,27
+use	::pcl_CopyPix@0x21e30	uVar27	yFirstB1	CONFIRMED	the first source y, first strip	-	-	28,29,30,31
+use	::pcl_CopyPix@0x21e30	uVar39	columnEnd	CONFIRMED	last column used to count the column chunks	-	-	1,2,3,4,5
+use	::pcl_CopyPix@0x21e30	uVar39	heightMinusOne	CONFIRMED	copy height - 1	-	-	6,7,8,9
+use	::pcl_CopyPix@0x21e30	uVar39	srcMaxYInt	CONFIRMED	the source max y truncated, plus one when it has a fraction	-	-	10,11,12,13,14,15
+use	::pcl_CopyPix@0x21e30	uVar39	rectX3	CONFIRMED	source rectangle x	-	-	16,17,18,19
+use	::pcl_CopyPix@0x21e30	uVar33	rowEnd	CONFIRMED	last row used to count the row chunks	-	-	1,2,3,4,5
+use	::pcl_CopyPix@0x21e30	uVar33	rowsLeft	CONFIRMED	rows of the copy not yet covered by chunks	-	-	6,7,8,9
+use	::pcl_CopyPix@0x21e30	uVar36	chunkTopRow	CONFIRMED	top row of the current chunk row	-	-	1,2,3,4
+use	::pcl_CopyPix@0x21e30	uVar36	chunkWidthWord	CONFIRMED	the chunk width word read back from the quad packet	-	-	5,6
+use	::pcl_CopyPix@0x21e30	uVar36	stateWordA0	CONFIRMED	state packet word 0xa0 (destination address / tiling)	-	-	7,8,9,10,11
+use	::pcl_CopyPix@0x21e30	uVar26	formatInfo	CONFIRMED	format table field (FormatTableLookup_0x0004d2dc): bits 8-9 and 12-14 give the bias and the pixel size shift	-	-	1,2,3,5
+use	::pcl_CopyPix@0x21e30	uVar26	bppShift	CONFIRMED	log2 of the bytes per pixel from the format table	-	-	4,6,7
+use	::pcl_CopyPix@0x21e30	uVar26	stateWordA6	CONFIRMED	state packet word 0xa6 (scissor size)	-	-	8,9
+use	::pcl_CopyPix@0x21e30	uVar26	rectRight	CONFIRMED	x + width of the source rectangle (strip path)	-	-	10,11,12,13
+use	::pcl_CopyPix@0x21e30	uVar30	microTiling	INFERRED	(destination word 0xa0 >> 3) & 3: the micro tiling field	-	-	1,2,3
+use	::pcl_CopyPix@0x21e30	uVar30	formatInfoB	CONFIRMED	format table field (FormatTableLookup_0x0004d2dc) of the destination format	-	-	4,5,6,7
+use	::pcl_CopyPix@0x21e30	uVar30	stateWordA6B	CONFIRMED	state packet word 0xa6 with the strip width merged in	-	-	8,9,10,11
+use	::pcl_CopyPix@0x21e30	iVar24	tileBias	INFERRED	0, or minus the format table bits 8-9: the tile size bias	-	-	1,2,4
+use	::pcl_CopyPix@0x21e30	iVar24	columnByteOffset	CONFIRMED	the chunk column converted to a byte offset in the tiled surface	-	-	3,5,6,7,8,9
+use	::pcl_CopyPix@0x21e30	iVar24	tileBiasB	INFERRED	0, or minus the format table bits 8-9: the tile size bias	-	-	10,11,12
+use	::pcl_CopyPix@0x21e30	iVar24	leftByteOffset	CONFIRMED	the first strip width converted to a byte offset in the tiled surface	-	-	13,14,15
+use	::pcl_CopyPix@0x21e30	iVar24	nextPacketIndex	CONFIRMED	index of the next packet to write after the fix-up packets	-	-	16,17,18,19
+redef	::pcl_CopyPix@0x21e30	iVar25	leftUnits	CONFIRMED	the first strip width in tile units
+use	::pcl_CopyPix@0x21e30	iVar31	columnIndex	CONFIRMED	column of the current chunk within its chunk row	-	-	2,3,4,5,6
+use	::pcl_CopyPix@0x21e30	iVar31	formatTableOffset	CONFIRMED	destination format * 0x1c: the offset of the format in the format table	-	-	7,8,9
+redef	::pcl_CopyPix@0x21e30	iVar31	packetIndex	CONFIRMED	index in cmd of the packet being written (past the first quad, then past each fix-up)
+use	::pcl_CopyPix@0x21e30	iVar32	flipV	CONFIRMED	flipVertically as an integer	-	-	1,2,15,16,19
+use	::pcl_CopyPix@0x21e30	iVar32	rowOffset	CONFIRMED	the chunk row offset in rows (0xf80 per row)	-	-	3,4,5,6
+use	::pcl_CopyPix@0x21e30	iVar32	quadWordCount	CONFIRMED	number of fixed-up quad packets, then times 0x10: the words they take	-	-	7,8,9,10,11,12,13
+redef	::pcl_CopyPix@0x21e30	iVar32	endIndex	CONFIRMED	index in cmd of the end of the packet stream, where the 0x1393 terminator is written
+use	::pcl_CopyPix@0x21e30	uVar28	chunkW	CONFIRMED	width of the current chunk (at most 0x1000)	-	-	1,2,3,4,5
+use	::pcl_CopyPix@0x21e30	uVar28	chunkLeftBiased	CONFIRMED	chunkLeft ^ 0x80000000: the biased integer for the int-to-double conversion	-	-	6,7
+redef	::pcl_CopyPix@0x21e30	uVar41	chunkH	CONFIRMED	height of the current chunk (at most 0x1000)
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_330	paramsWord30	CONFIRMED	params+0x30: the unused12 argument, not read by the copy
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_31c	paramsWord44	CONFIRMED	params+0x44: never initialised, ORed with 0xf8000000 and not read by the copy
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_318	paramsWord48	CONFIRMED	params+0x48: set to 1
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_314	paramsWord4c	CONFIRMED	params+0x4c: set to 0
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_310	rectPtr	CONFIRMED	params+0x50: pointer to the {x, y, width, height} 16-bit rectangle
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2fc	paramsFloat64	CONFIRMED	params+0x64: 0.0f
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2f8	paramsFloat68	CONFIRMED	params+0x68: 0.0f
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2ec	paramsWord74	CONFIRMED	params+0x74: 1.0f
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2e8	paramsWord78	CONFIRMED	params+0x78: 1.0f
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2e4	paramsWord7c	CONFIRMED	params+0x7c: 1.0f
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2e0	paramsWord80	CONFIRMED	params+0x80: 1.0f
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2dc	paramsWord84	CONFIRMED	params+0x84: 1
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2d8	paramsFlag88	CONFIRMED	params+0x88: when non-zero the state word 0x1e gets 2 in its low bits
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_300	quadHeight	CONFIRMED	params+0x60: the destination rectangle height as a float	-	-	1,2,3,4,6,11,12
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_300	quadBottomB	CONFIRMED	quadTop + quadHeight: the bottom edge, after it is computed in place for the strip path	-	-	5,7,8,9,10
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2c8	magicHi0	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2c0	magicHi1	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2b8	magicHi2	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2b0	magicHi3	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2a8	magicHi4	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_2a0	magicHi5	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_298	magicHi6	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_290	magicHi7	CONFIRMED	0x43300000: the exponent word of a 2^52 + integer pair used for an int-to-double conversion
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_288	fctiwzSpill0	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_280	fctiwzSpill1	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_278	fctiwzSpill2	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_270	fctiwzSpill3	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_268	fctiwzSpill4	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_260	fctiwzSpill5	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_258	fctiwzSpill6	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	local_250	fctiwzSpill7	CONFIRMED	stack slot the compiler spills a float-to-int conversion to; never read
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uStack_2a4	widthLo	CONFIRMED	the width as the low word of the 2^52 + width double
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uStack_29c	heightLo	CONFIRMED	the height as the low word of the 2^52 + height double
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uStack_294	srcWidthLo	CONFIRMED	the source width as the low word of the 2^52 + source width double
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uStack_28c	srcHeightLo	CONFIRMED	the source height as the low word of the 2^52 + source height double
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar44	invSrcWidthD	CONFIRMED	1 / the source width (0 when zero)	-	-	1,2,3,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar44	chunkLeftD	CONFIRMED	the chunk left edge as a double (unbiased)	-	-	4,5
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar44	yFirstD1	CONFIRMED	the first source y as a double, strip path	-	-	6,7
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar44	yFirstD2	CONFIRMED	the first source y as a double, second strip	-	-	8,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar45	ySecondD1	CONFIRMED	the second source y as a double, strip path	-	-	1,2
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar45	ySecondD2	CONFIRMED	the second source y as a double, second strip	-	-	3,4
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar45	rectXD	CONFIRMED	destination rectangle x as a double (unscaled path)	-	-	5,6
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar46	rectRightD	CONFIRMED	destination rectangle x + width as a double (unscaled path)
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar48	yFirstDC	CONFIRMED	the first source y as a double, unscaled path
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	dVar49	ySecondDC	CONFIRMED	the second source y as a double, unscaled path
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar1	vertexScale	CONFIRMED	FLOAT_0004c37c (6.0): scale applied to rectangle sizes to give packet vertex sizes	-	-	1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar1	halfWidthPlus2F	INFERRED	the half width plus two as a float, the width of the first strip	-	-	2,3,4
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar1	rectRightF	INFERRED	right edge of the destination part covered by this strip	-	-	5,6,7,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar1	centerXB1	INFERRED	(left + right) * 0.5: the horizontal centre written to the first strip packet	-	-	8,10
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar1	invWidth2	INFERRED	1 / the second strip width (0 when zero)	-	-	11,12,13,15
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar1	texRight2	INFERRED	right texture coordinate of the second strip	-	-	14,16,17
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar2	invHalfWidth	INFERRED	1 / the first strip width (0.0 when it is zero)	-	-	1,2,3,4,6
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar2	texLeft	INFERRED	left texture coordinate of the first strip	-	-	5,7,8
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar2	secondHalfWidthF	INFERRED	the second strip width as a float	-	-	9,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar2	leftEdgeF	INFERRED	left edge of the second strip in destination coordinates	-	-	12,13,14,16
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar2	centerXB2	INFERRED	(left + right) * 0.5: the horizontal centre written to the second strip packet	-	-	15,17
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar3	srcXAtLeft	CONFIRMED	source x at the destination left edge: quadLeft * srcPerQuadX + srcOffsetX	-	-	1,2,3,4
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar3	chunkMaxX	CONFIRMED	right edge of the current chunk in source coordinates (clamped to the source maximum)	-	-	5,6,7,8,9,10,11,12,13
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar4	chunkMinX	CONFIRMED	left edge of the current chunk in source coordinates (clamped to the source minimum)	-	-	1,2,3,4,5,6
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar4	dstXMax	CONFIRMED	the larger destination x of the chunk	-	-	7,8,9,10,11,12
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar4	scaledWidthB	INFERRED	destination width scaled by 6.0, packed in the high half of the size word	-	-	13,14,15,16
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar5	halfConst	CONFIRMED	FLOAT_0004c380 (0.5)	-	-	1
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar5	texRight1	INFERRED	right texture coordinate of the first strip	-	-	2,3,4
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar5	texLeft2	INFERRED	left texture coordinate of the second strip	-	-	5,6,7
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar6	scaledHeightB	INFERRED	destination height scaled by 6.0, packed in the low half of the size word
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar7	chunkMinY	CONFIRMED	top edge of the current chunk in source coordinates (clamped to the source minimum)	-	-	1,2,3,4,5,6
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar7	dstXFirst	CONFIRMED	destination x of the chunk left source edge (before ordering)	-	-	7,8,9,10
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar7	vertexCenterY	INFERRED	(top + bottom) * 0.5: the vertical centre written to the strip packet	-	-	11,12,13,14
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar9	chunkMaxY	CONFIRMED	bottom edge of the current chunk in source coordinates (clamped to the source maximum)	-	-	1,2,3,4,5,6,7,8,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar9	srcXAtDstMin	CONFIRMED	source x at the smaller destination x of the chunk	-	-	10,11,12
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar10	clampedMinX	CONFIRMED	the chunk left edge clamped against the source minimum; replaced by the source x of the larger destination x when the order is reversed	-	-	1,2,3,4,5,6,7
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar11	srcYAtDstTop	CONFIRMED	source y at the destination top edge: srcPerQuadY * quadTop + srcOffsetY
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar12	clampTmpMaxX	CONFIRMED	scratch of the min/max clamp of the chunk right edge	-	-	1,2,3
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar12	dstYFirst	CONFIRMED	destination y of the chunk top source edge (before ordering)	-	-	4,5,6,7
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar12	dstXMin	CONFIRMED	the smaller destination x of the chunk	-	-	8,9,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar14	clampTmpMaxY	CONFIRMED	scratch of the min/max clamp of the chunk bottom edge	-	-	1,2,3
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar14	srcYAtDstMin	CONFIRMED	source y at the smaller destination y of the chunk	-	-	4,5,6
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar15	clampedMinY	CONFIRMED	the chunk top edge clamped against the source minimum; replaced by the source y of the larger destination y when the order is reversed	-	-	1,2,3,4,5,6,7
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar16	dstYMax	CONFIRMED	the larger destination y of the chunk
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	fVar19	dstYMin	CONFIRMED	the smaller destination y of the chunk
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	alignedWidthLimit	INFERRED	source width aligned down to 0x200	-	-	1,2,3
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	rowCandidate	CONFIRMED	source min y - 1 rounded towards zero to 0x40: candidate first chunk row	-	-	4,5,6,7,8,9,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	widthMinusOne	CONFIRMED	copy width - 1	-	-	12,13,14,15
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	srcMaxXInt	CONFIRMED	the source max x truncated, plus one when it has a fraction	-	-	16,17,18,19,20,21
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	microTiling	INFERRED	(texture offset word >> 3) & 3: the micro tiling field	-	-	22,23,24
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	rightLimit	INFERRED	min(bound, source right edge) for the first strip	-	-	25,26,27
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar25	yFirstB1	CONFIRMED	the first source y, first strip	-	-	28,29,30,31
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar28	macroTileBit	INFERRED	bit 2 of the texture offset word: the macro tiling flag	-	-	1,2,3
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar28	formatInfoB	CONFIRMED	format table field (FormatTableLookup_0x0004d2dc) of the format	-	-	4,5,6,7
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar28	stateWordA6B	CONFIRMED	state packet word 0xa6 with the strip width merged in	-	-	8,9,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar24	formatInfo	CONFIRMED	format table field (FormatTableLookup_0x0004d2dc): bits 8-9 and 12-14 give the bias and the pixel size shift	-	-	1,2,3,5
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar24	bppShift	CONFIRMED	log2 of the bytes per pixel from the format table	-	-	4,6,7
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar24	stateWordA6	CONFIRMED	state packet word 0xa6 (scissor size)	-	-	8,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar24	rectRight	CONFIRMED	x + width of the destination rectangle (strip path)	-	-	10,11,12,13
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar26	chunkW	CONFIRMED	width of the current chunk (at most 0x1000)	-	-	1,2,3,4,5
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar26	chunkLeftBiased	CONFIRMED	chunkLeft ^ 0x80000000: the biased integer for the int-to-double conversion	-	-	6,7
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar36	chunkH	CONFIRMED	height of the current chunk (at most 0x1000)
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar32	halfWidthAligned	INFERRED	half of the source width, rounded down to 0x200: the width of the first strip	-	-	1,2,3,4,5,6,7,8,9,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar32	yBottomB2	CONFIRMED	the second source y (y or y+h, by the flip), strip and unscaled paths	-	-	12,13,14,15,16,17,18,19
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar34	halfWidthPlus2	INFERRED	halfWidthAligned + 2: the right bound of the first strip	-	-	1,2,3,4,5,6
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar34	ySecondB1	CONFIRMED	the second source y, first strip	-	-	7,8,9,10
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar34	leftMax	INFERRED	max(strip split, destination x): the left edge of the second part	-	-	11,12,13
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar34	yTopB2	CONFIRMED	the first source y (y or y+h, by the flip), strip and unscaled paths	-	-	14,15,16,17,18,19,20,21
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar35	columnEnd	CONFIRMED	last column used to count the column chunks	-	-	1,2,3,4,5
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar35	heightMinusOne	CONFIRMED	copy height - 1	-	-	6,7,8,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar35	srcMaxYInt	CONFIRMED	the source max y truncated, plus one when it has a fraction	-	-	10,11,12,13,14,15
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar35	rectX3	CONFIRMED	destination rectangle x	-	-	16,17,18,19
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar37	rowEnd	CONFIRMED	last row used to count the row chunks	-	-	1,2,3,4,5
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar37	rowsLeft	CONFIRMED	rows of the copy not yet covered by chunks	-	-	6,7,8,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar39	chunkTopRow	CONFIRMED	top row of the current chunk row	-	-	1,2,3,4
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar39	chunkWidthWord	CONFIRMED	the chunk width word read back from the quad packet	-	-	5,6
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar39	stateWordA0	CONFIRMED	state packet word 0xa0 (destination address / tiling)	-	-	7,8,9,10,11
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar42	columnCandidate	CONFIRMED	source min x - 1 rounded towards zero to 0x200: candidate first chunk column	-	-	1,2,3,4,5,6,7,8
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar42	alignedHeightLimit	INFERRED	copy height aligned down to 0x40 (minus 0x40 when the tail is short)	-	-	9,10,11,12,13,14,15
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar42	columnBase	CONFIRMED	first column used to count the column chunks (at least 0x200)	-	-	16,17,18,19
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar42	rowBase	CONFIRMED	first row used to count the row chunks (at least 0x40)	-	-	20,21,22,23
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar42	secondHalfWidth	INFERRED	source width minus the first strip width: the second strip width	-	-	24,25,26
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	uVar42	rectX2	CONFIRMED	destination rectangle x	-	-	27,28,29,30,31,32
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar22	columnIndex	CONFIRMED	column of the current chunk within its chunk row	-	-	1,2,3,4,5
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar22	formatTableOffset	CONFIRMED	format index * 0x1c: the offset of the format in the format table	-	-	6,7,8,10,11,13
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar22	tileBiasB	INFERRED	0, or minus the format table bits 8-9: the tile size bias	-	-	12,14,15
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar22	leftByteOffset	CONFIRMED	the first strip width converted to a byte offset in the tiled surface	-	-	16,17,18
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar22	packetEndIndex	CONFIRMED	index in packet of the end of the packet stream, where the 0x1393 terminator is written
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar23	tileBias	INFERRED	0, or minus the format table bits 8-9: the tile size bias	-	-	1,2,4
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar23	columnByteOffset	CONFIRMED	the chunk column converted to a byte offset in the tiled surface	-	-	3,5,6,7,8,9
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar23	leftUnits	CONFIRMED	the first strip width in tile units	-	-	10,11,12
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar23	nextPacketIndex	CONFIRMED	index of the next packet to write after the fix-up packets
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar30	unbiasedInt	CONFIRMED	float-to-int conversion result (before the 0x80000000 bias is added back)	-	-	1,2,3,4,5,6,7,8,9,10,11,12
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar30	rowOffset	CONFIRMED	the chunk row offset in rows (0xf80 per row)	-	-	14,15,16,17
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar30	quadWordCount	CONFIRMED	number of fixed-up quad packets, then times 0x10: the words they take	-	-	18,19,20,21,22,23,24
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar30	packetIndex	CONFIRMED	index in packet of the packet being written: 0xbd (the first quad), or past it after the fix-up packets	-	-	13,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41
+redef	::write_3dtexquad_cmds_for_copy_buffer_using_DMA@0x41150	iVar30	cmdEndIndex	CONFIRMED	index in cmd of the end of the stream, where the second 0x1393 terminator and the flush packet are written

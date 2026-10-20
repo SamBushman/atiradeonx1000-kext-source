@@ -85,32 +85,35 @@ void ATIRadeonX1000::system_did_change_speed() {
 void ATIRadeonX1000::system_will_change_speed() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool loopContinues;
   UInt32 ringIndex;
-  SInt32 iVar3;
+  SInt32 triesLeft;
   UInt32 nextRingIndex;
-  SInt32 iVar5;
+  SInt32 ringMemory;
+  SInt32 previousDepth;
+  SInt32 ringIndexOld;
+  SInt32 mmioBase;
   
-  iVar3 = GH_OSIncrementAtomic(self + kIOATIR500Accelerator_displayChangeDepth);
-  if (iVar3 == 0) {
+  previousDepth = GH_OSIncrementAtomic(self + kIOATIR500Accelerator_displayChangeDepth);
+  if (previousDepth == 0) {
     GH_IOLockLock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
     if (M<SInt32>(self + kIOATIR500Accelerator_gpuSensorProvider) != 0) {
       ((ATIRadeonX1000 *)(self))->disable_GPUSensor();
     }
     if (self[0x80] != 0x0) {
-      iVar3 = M<SInt32>(self + kIOATIR500Accelerator_ringIndex);
-      iVar5 = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
-      M<UInt32>(iVar5 + iVar3 * 4) = 0x5c8;
-      ringIndex = iVar3 + 1U & 0x7ff;
+      ringIndexOld = M<SInt32>(self + kIOATIR500Accelerator_ringIndex);
+      ringMemory = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
+      M<UInt32>(ringMemory + ringIndexOld * 4) = 0x5c8;
+      ringIndex = ringIndexOld + 1U & 0x7ff;
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
-      M<UInt32>(iVar5 + ringIndex * 4) = 0x70000;
+      M<UInt32>(ringMemory + ringIndex * 4) = 0x70000;
       ringIndex = ringIndex + 1 & 0x7ff;
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
-      M<UInt32>(iVar5 + ringIndex * 4) = 0x578;
+      M<UInt32>(ringMemory + ringIndex * 4) = 0x578;
       ringIndex = ringIndex + 1 & 0x7ff;
       nextRingIndex = ringIndex + 1;
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextRingIndex;
-      M<UInt32>(iVar5 + ringIndex * 4) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
+      M<UInt32>(ringMemory + ringIndex * 4) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
       M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextRingIndex & 0x7ff;
       ((ATIRadeonX1000 *)(self))->submit_ring_data();
       VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + kIOATIR500Accelerator_submitStamp));
@@ -118,18 +121,18 @@ void ATIRadeonX1000::system_will_change_speed() {
       if (M<SInt32>(self + kIOATIR500Accelerator_xdctEngineRunning) != 0) {
         VCALL(M<SInt32>(self), 0x5ec)(self,M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) + -1);
         enforceInOrderExecutionIO();
-        iVar3 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-        if (-1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0x1fb4)))) {
-          iVar3 = 999;
+        mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+        if (-1 < (SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fb4)))) {
+          triesLeft = 999;
           do {
             GH_IODelay(0x32);
-            iVar5 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-            if ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar5 + 0x1fb4))) < 0) {
+            mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+            if ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fb4))) < 0) {
               return;
             }
-            bVar1 = iVar3 != 0;
-            iVar3 = iVar3 + -1;
-          } while (bVar1);
+            loopContinues = triesLeft != 0;
+            triesLeft = triesLeft + -1;
+          } while (loopContinues);
         }
       }
     }

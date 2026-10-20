@@ -31,19 +31,19 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 extern "C" UInt32 GH_memset(...) asm("_memset");
 
 struct _HZDATA;
-UInt32 HZMEM_Init(_HZDATA *hz, UInt32 param_2, UInt32 param_3, UInt32 param_4);
+UInt32 HZMEM_Init(_HZDATA *hz, UInt32 chipClass, UInt32 numPipes, UInt32 numZPipes);
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 
 /* real addr 0x1f750 */
 bool ATIRadeonX1000::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool moreRecords;
   UInt32 savedStrobeWord;
   UInt32 chipWord;
   UInt8 *chipID;
-  UInt8 *pAVar4;
-  SInt32 iVar5;
+  UInt8 *recordCursor;
+  SInt32 pciBar0;
   SInt32 swdsTimer;
   SInt32 hzmemResult;
   SInt32 flushLength;
@@ -54,24 +54,24 @@ bool ATIRadeonX1000::start(IOService *provider) {
   SInt32 poolReady;
   SInt32 index;
   SInt32 baseStarted;
-  UInt32 uVar6;
+  UInt32 startResult;
   UInt32 flag;
   UInt32 property;
-  SInt32 *piVar7;
+  SInt32 *registerMapObject;
   SInt32 *period;
   SInt32 *booleanObject;
   UInt8 *memoryPool;
-  UInt32 uVar8;
-  SInt32 iVar9;
-  SInt32 *piVar10;
-  UInt32 uVar11;
+  UInt32 sensorFunctionSymbol;
+  SInt32 prevPage;
+  SInt32 *sensorObject;
+  UInt32 boolMetaClass;
   UInt32 cacheFlushStart;
-  UInt32 uVar13;
-  code *pcVar14;
-  SInt32 *piVar15;
-  SInt32 iVar16;
+  UInt32 chipClass;
+  code *setPropertyFn;
+  SInt32 *sensorProvider;
+  SInt32 dwordsLeft;
   SInt32 gartOffset;
-  UInt8 *local_34 [6];
+  UInt8 *fedInfoPointer [6];
   SInt32 *sensorArray;
   SInt32 bufferMemory;
   SInt32 bufferDescriptor;
@@ -81,6 +81,18 @@ bool ATIRadeonX1000::start(IOService *provider) {
   SInt32 attached;
   SInt32 gpuSensorTimer;
   SInt32 addResult;
+  UInt32 accelCaps;
+  UInt32 sensorProperties;
+  UInt32 sensorElement;
+  SInt32 scratchMapResult;
+  SInt32 unmapCount;
+  SInt32 nextPage;
+  SInt32 flushOffset;
+  SInt32 ringMemory;
+  SInt32 sensorDictionary;
+  SInt32 initResult;
+  UInt32 cacheLineSize;
+  SInt32 pageNumber;
   
   gartOffset = 0;
   baseStarted = IOATIR500Accelerator::start(provider);
@@ -131,31 +143,31 @@ bool ATIRadeonX1000::start(IOService *provider) {
   ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->init_pool(0);
   M<UInt32>(self + kIOATIR500Accelerator_vramPoolB) = 0;
   index = 0;
-  pAVar4 = self;
+  recordCursor = self;
   do {
-    bVar1 = index != 1;
-    M<UInt32>(pAVar4 + 0x940) = 0;
-    M<UInt32>(pAVar4 + 0x944) = 0;
-    M<UInt32>(pAVar4 + 0x948) = 0;
-    M<UInt32>(pAVar4 + 0x94c) = 0;
-    M<UInt32>(pAVar4 + 0x950) = 0;
-    M<UInt32>(pAVar4 + 0x954) = 0;
-    M<UInt32>(pAVar4 + 0x958) = 0;
-    M<UInt32>(pAVar4 + 0x95c) = 0;
+    moreRecords = index != 1;
+    M<UInt32>(recordCursor + 0x940) = 0;
+    M<UInt32>(recordCursor + 0x944) = 0;
+    M<UInt32>(recordCursor + 0x948) = 0;
+    M<UInt32>(recordCursor + 0x94c) = 0;
+    M<UInt32>(recordCursor + 0x950) = 0;
+    M<UInt32>(recordCursor + 0x954) = 0;
+    M<UInt32>(recordCursor + 0x958) = 0;
+    M<UInt32>(recordCursor + 0x95c) = 0;
     index = index + 1;
-    pAVar4 = pAVar4 + 0x20;
-  } while (bVar1);
+    recordCursor = recordCursor + 0x20;
+  } while (moreRecords);
   M<UInt32>(self + kIOATIR500Accelerator_tearingWideBlit) = 0;
   M<UInt32>(self + kIOATIR500Accelerator_wideBlitSupport) = 0;
   property = VCALL(M<SInt32>(self), 0x188)(self,"ATIEnableWideBlitSupport");
-  uVar11 = GH_OSBoolean_metaClass;
+  boolMetaClass = GH_OSBoolean_metaClass;
   booleanObject = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(property,GH_OSBoolean_metaClass);
   if (booleanObject != (SInt32 *)0x0) {
     flag = VCALL(*booleanObject, 0xd8)(booleanObject);
     M<UInt32>(self + kIOATIR500Accelerator_wideBlitSupport) = flag;
   }
   property = VCALL(M<SInt32>(self), 0x188)(self,"ATIUseTearingWideBlit");
-  booleanObject = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(property,uVar11);
+  booleanObject = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(property,boolMetaClass);
   if (booleanObject != (SInt32 *)0x0) {
     flag = VCALL(*booleanObject, 0xd8)(booleanObject);
     M<UInt32>(self + kIOATIR500Accelerator_tearingWideBlit) = flag;
@@ -180,14 +192,14 @@ bool ATIRadeonX1000::start(IOService *provider) {
       M<UInt32>(self + kIOATIR500Accelerator_vramPoolB) = 0;
     }
     else {
-      iVar5 = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x578)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x18);
-      M<SInt32>(self + kIOATIR500Accelerator_pciBar0Config) = iVar5;
-      if (iVar5 != 0) {
-        piVar7 = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x57c)
+      pciBar0 = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x578)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x18);
+      M<SInt32>(self + kIOATIR500Accelerator_pciBar0Config) = pciBar0;
+      if (pciBar0 != 0) {
+        registerMapObject = (SInt32 *)VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x57c)
                                   (M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),0x18,0);
-        M<SInt32 *>(self + kIOATIR500Accelerator_registerMap) = piVar7;
-        if (piVar7 != (SInt32 *)0x0) {
-          registers = VCALL(*piVar7, 0xd0)(piVar7);
+        M<SInt32 *>(self + kIOATIR500Accelerator_registerMap) = registerMapObject;
+        if (registerMapObject != (SInt32 *)0x0) {
+          registers = VCALL(*registerMapObject, 0xd0)(registerMapObject);
           M<SInt32>(self + kIOATIR500Accelerator_mmioBase) = registers;
           if (registers != 0) {
             /* #147/#155/#156 root cause (corrected 2026-10-08 - the prior version of this comment,
@@ -228,7 +240,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
                 if ((chipID < (UInt8 *)0x7144) && (chipID != (UInt8 *)0x7140)) {
                   if (chipID < (UInt8 *)0x7141) {
                     if (chipID + -0x7100 < (UInt8 *)0x10) {
-                      uVar13 = 0;
+                      chipClass = 0;
                       M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x110000;
                       this->setupR520Pipes();
                       goto LAB_0001fc04;
@@ -248,7 +260,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
                 goto LAB_0001fbc8;
               }
 LAB_0001fafc:
-              uVar13 = 2;
+              chipClass = 2;
               M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x410000;
               this->setupR520Pipes();
             }
@@ -258,7 +270,7 @@ LAB_0001fafc:
                   if (chipID < (UInt8 *)0x7250) {
                     if ((UInt8 *)0x723f < chipID) {
 LAB_0001fbec:
-                      uVar13 = 3;
+                      chipClass = 3;
                       M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x810000;
                       this->setupR520Pipes();
                       goto LAB_0001fc04;
@@ -269,7 +281,7 @@ LAB_0001fbec:
                           (((UInt8 *)0x725f < chipID && (chipID + -0x7263 < (UInt8 *)0xd))))
                   goto LAB_0001fbec;
 LAB_0001fbc8:
-                  uVar13 = 0;
+                  chipClass = 0;
                   goto LAB_0001fc04;
                 }
                 if (chipID != (UInt8 *)0x71c2) {
@@ -283,7 +295,7 @@ LAB_0001fbc8:
                 }
               }
 LAB_0001fbd0:
-              uVar13 = 1;
+              chipClass = 1;
               M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x210000;
               this->setupR520Pipes();
             }
@@ -305,20 +317,20 @@ LAB_0001fc04:
                     pageIndex = 1;
                     do {
                       gartOffset = pageIndex << (GH_page_shift & 0x3f);
-                      iVar9 = VCALL(M<SInt32>(self), 0x590)
+                      scratchMapResult = VCALL(M<SInt32>(self), 0x590)
                                         (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
-                      if (iVar9 == 0) {
+                      if (scratchMapResult == 0) {
                         if (pageIndex < (SInt32)(UInt32)(UInt8)self[0x8cc]) {
                           if (-1 < pageIndex + -1) {
-                            iVar9 = 0;
+                            unmapCount = 0;
                             do {
-                              iVar16 = (pageIndex + -1) - iVar9;
-                              iVar9 = iVar9 + 1;
+                              pageNumber = (pageIndex + -1) - unmapCount;
+                              unmapCount = unmapCount + 1;
                               VCALL(M<SInt32>(self), 0x5a4)
                                         (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),
-                                         iVar16 << (GH_page_shift & 0x3f));
-                            } while (pageIndex != iVar9);
+                                         pageNumber << (GH_page_shift & 0x3f));
+                            } while (pageIndex != unmapCount);
                           }
                           goto LAB_0001f9a0;
                         }
@@ -334,39 +346,39 @@ LAB_0001fc04:
                     pageIndex = 2;
                     do {
                       gartOffset = pageIndex << (GH_page_shift & 0x3f);
-                      iVar9 = VCALL(M<SInt32>(self), 0x590)
+                      scratchMapResult = VCALL(M<SInt32>(self), 0x590)
                                         (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
-                      if (iVar9 == 0) {
+                      if (scratchMapResult == 0) {
                         if (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto LAB_0001fd88;
                         break;
                       }
-                      iVar9 = pageIndex + 1;
+                      nextPage = pageIndex + 1;
                       pageIndex = pageIndex + 2;
-                      VCALL(M<SInt32>(self), 0x594)(self,iVar9 << (GH_page_shift & 0x3f));
+                      VCALL(M<SInt32>(self), 0x594)(self,nextPage << (GH_page_shift & 0x3f));
                     } while (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1));
                   }
                 }
                 M<UInt32>(self + kIOATIR500Accelerator_idctEngineActive) = 1;
                 if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) != 0) {
-                  uVar11 = (UInt32)(UInt8)self[0x84];
-                  iVar9 = 0;
-                  cacheFlushStart = -uVar11 & M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 0x20U;
-                  flushLength = ((M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 0x20U & uVar11 - 1) + 0x20) - uVar11;
+                  cacheLineSize = (UInt32)(UInt8)self[0x84];
+                  flushOffset = 0;
+                  cacheFlushStart = -cacheLineSize & M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 0x20U;
+                  flushLength = ((M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 0x20U & cacheLineSize - 1) + 0x20) - cacheLineSize;
                   if (0 < flushLength) {
-                    iVar9 = 0;
+                    flushOffset = 0;
                     do {
-                      dataCacheBlockStore(cacheFlushStart + iVar9);
-                      iVar9 = iVar9 + uVar11;
-                    } while (iVar9 < flushLength);
+                      dataCacheBlockStore(cacheFlushStart + flushOffset);
+                      flushOffset = flushOffset + cacheLineSize;
+                    } while (flushOffset < flushLength);
                   }
                   ppcSync();
                   instructionSynchronize();
-                  dataCacheBlockFlush(cacheFlushStart + iVar9);
+                  dataCacheBlockFlush(cacheFlushStart + flushOffset);
                   ppcSync();
                   instructionSynchronize();
                   /* shipped code: lwzx from the just-flushed line (result unused), then isync - the decompile dropped the load */
-                  (void)*reinterpret_cast<volatile UInt32 *>(cacheFlushStart + iVar9);
+                  (void)*reinterpret_cast<volatile UInt32 *>(cacheFlushStart + flushOffset);
                   instructionSynchronize();
                 }
                 if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
@@ -386,14 +398,14 @@ LAB_0001fc04:
                   if (bufferDescriptor != 0) {
                     mapResult = VCALL(M<SInt32>(self), 0x5a0)(self,bufferDescriptor,self + kIOATIR500Accelerator_mainRingGartOffset);
                     if (mapResult != 0) {
-                      iVar9 = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
+                      ringMemory = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
                       index = 0;
-                      iVar16 = 0x800;
+                      dwordsLeft = 0x800;
                       do {
-                        M<UInt32>(iVar9 + index * 4) = 0x80000000;
+                        M<UInt32>(ringMemory + index * 4) = 0x80000000;
                         index = index + 1;
-                        iVar16 = iVar16 + -1;
-                      } while (iVar16 != 0);
+                        dwordsLeft = dwordsLeft + -1;
+                      } while (dwordsLeft != 0);
                       if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
                         M<UInt32>(self + kIOATIR500Accelerator_idctPointerOffset) = 0;
                         M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) = M<SInt32>(self + kIOATIR500Accelerator_scratchHeader) + 4;
@@ -410,14 +422,14 @@ LAB_0001fc04:
                         if (bufferDescriptor != 0) {
                           mapResult = VCALL(M<SInt32>(self), 0x5a0)(self,bufferDescriptor,self + kIOATIR500Accelerator_idctRingGartOffset);
                           if (mapResult != 0) {
-                            iVar9 = M<SInt32>(self + kIOATIR500Accelerator_idctRingMemory);
+                            ringMemory = M<SInt32>(self + kIOATIR500Accelerator_idctRingMemory);
                             index = 0;
-                            iVar16 = 0x800;
+                            dwordsLeft = 0x800;
                             do {
-                              M<UInt32>(iVar9 + index * 4) = 0x80000000;
+                              M<UInt32>(ringMemory + index * 4) = 0x80000000;
                               index = index + 1;
-                              iVar16 = iVar16 + -1;
-                            } while (iVar16 != 0);
+                              dwordsLeft = dwordsLeft + -1;
+                            } while (dwordsLeft != 0);
                             M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig) = 0x11;
                             if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
                               bufferMemory = GH_IOMallocAligned(GH_page_size,GH_page_size);
@@ -450,7 +462,7 @@ LAB_0001fc04:
                             M<UInt32>(self + kIOATIR500Accelerator_unknown_0x980) = 0x7b8;
                             M<UInt32>(self + kIOATIR500Accelerator_unknown_0x984) = 0x3ff;
                             M<UInt32>(self + kIOATIR500Accelerator_unknown_0x988) = 0;
-                            hzmemResult = HZMEM_Init((_HZDATA *)(self + kIOATIR500Accelerator_hzmem),uVar13,
+                            hzmemResult = HZMEM_Init((_HZDATA *)(self + kIOATIR500Accelerator_hzmem),chipClass,
                                                M<UInt32>(self + kIOATIR500Accelerator_numPipes),M<UInt32>(self + kIOATIR500Accelerator_numZPipes));
                             if (hzmemResult == 0) {
                               GH_memset(self + kIOATIR500Accelerator_swdsState_0xb2c,0,0x40);
@@ -491,45 +503,45 @@ LAB_0001fc04:
                                                        self + kIOATIR500Accelerator_swdsEntry0GartOffset), mapResult != 0)) {
                                   M<UInt32>(self + kIOATIR500Accelerator_unknown_0xb58) = 7;
                                   M<UInt32>(self + kIOATIR500Accelerator_unknown_0xb54) = 7;
-                                  local_34[0] = self + kIOATIR500Accelerator_swdsState_0xb2c;
+                                  fedInfoPointer[0] = self + kIOATIR500Accelerator_swdsState_0xb2c;
                                   VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x170)
-                                            (M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),"ATIFEDSInfo",local_34,4);
+                                            (M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),"ATIFEDSInfo",fedInfoPointer,4);
                                   if ((M<SInt32>(self + kIOATIR500Accelerator_displayCount) == 0) ||
                                      ((M<SInt32>(self + kIOATIR500Accelerator_vramApertureBase) == 0 ||
                                       (hardwareReady = this->initialize_hardware(), hardwareReady != 0)))) {
-                                    pcVar14 = M<code *>(M<SInt32>(self) + 0x16c);
-                                    uVar6 = VCALL(M<SInt32>(self), 0x5d0)(self);
-                                    (*pcVar14)(self,"AccelCaps",0,uVar6,0x20);
+                                    setPropertyFn = M<code *>(M<SInt32>(self) + 0x16c);
+                                    accelCaps = VCALL(M<SInt32>(self), 0x5d0)(self);
+                                    (*setPropertyFn)(self,"AccelCaps",0,accelCaps,0x20);
                                     VCALL(M<SInt32>(self), 0x340)(self,0);
                                     M<UInt32>(self + kIOATIR500Accelerator_gpuSensorProvider) = 0;
-                                    uVar6 = VCALL(M<SInt32>(self), 0x188)
+                                    sensorProperties = VCALL(M<SInt32>(self), 0x188)
                                                       (self,"sensor-properties");
-                                    sensorArray = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSArray_metaClass);
+                                    sensorArray = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(sensorProperties,GH_OSArray_metaClass);
                                     if (sensorArray != (SInt32 *)0x0) {
-                                      piVar15 = (SInt32 *)0x0;
+                                      sensorProvider = (SInt32 *)0x0;
                                       index = 0;
                                       while( true ) {
-                                        uVar6 = VCALL(*sensorArray, 0x138)(sensorArray,index);
-                                        iVar9 = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSDictionary_metaClass);
-                                        if (iVar9 == 0) break;
-                                        piVar10 = (SInt32 *)GH_ZN8OSObjectnwEm(0x50);
-                                        piVar15 = piVar10;
-                                        if (piVar10 != (SInt32 *)0x0) {
-                                          GH_ZN9IOServiceC1Ev(piVar10);
-                                          iVar9 = VCALL(*piVar10, 0x150)(piVar10,iVar9);
-                                          if (iVar9 == 0) {
-                                            piVar15 = (SInt32 *)0x0;
-                                            VCALL(*piVar10, 0x4c)(piVar10);
+                                        sensorElement = VCALL(*sensorArray, 0x138)(sensorArray,index);
+                                        sensorDictionary = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(sensorElement,GH_OSDictionary_metaClass);
+                                        if (sensorDictionary == 0) break;
+                                        sensorObject = (SInt32 *)GH_ZN8OSObjectnwEm(0x50);
+                                        sensorProvider = sensorObject;
+                                        if (sensorObject != (SInt32 *)0x0) {
+                                          GH_ZN9IOServiceC1Ev(sensorObject);
+                                          initResult = VCALL(*sensorObject, 0x150)(sensorObject,sensorDictionary);
+                                          if (initResult == 0) {
+                                            sensorProvider = (SInt32 *)0x0;
+                                            VCALL(*sensorObject, 0x4c)(sensorObject);
                                           }
                                         }
                                         index = index + 1;
                                       }
-                                      if ((piVar15 != (SInt32 *)0x0) &&
-                                         (attached = VCALL(*piVar15, 0x1d8)
-                                                            (piVar15,self,GH_gIOServicePlane),
+                                      if ((sensorProvider != (SInt32 *)0x0) &&
+                                         (attached = VCALL(*sensorProvider, 0x1d8)
+                                                            (sensorProvider,self,GH_gIOServicePlane),
                                          attached != 0)) {
-                                        M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorProvider) = piVar15;
-                                        VCALL(*piVar15, 0x340)(piVar15,0);
+                                        M<SInt32 *>(self + kIOATIR500Accelerator_gpuSensorProvider) = sensorProvider;
+                                        VCALL(*sensorProvider, 0x340)(sensorProvider,0);
                                       }
                                     }
                                     if (M<SInt32>(self + kIOATIR500Accelerator_gpuSensorProvider) != 0) {
@@ -559,7 +571,7 @@ LAB_0001fc04:
                                         }
                                       }
                                     }
-                                    uVar6 = 1;
+                                    startResult = 1;
                                     goto LAB_0001f9c0;
                                   }
                                 }
@@ -587,18 +599,18 @@ LAB_0001fc04:
     }
   }
 LAB_0001f9a0:
-  uVar6 = 0;
+  startResult = 0;
   VCALL(M<SInt32>(self), 0x34c)(self,provider);
 LAB_0001f9c0:
-  uVar8 = GH_ZN8OSSymbol17withCStringNoCopyEPKc("getSensorValue");
-  M<UInt32>(self + kIOATIR500Accelerator_gpuSensorFunction) = uVar8;
-  return uVar6;
+  sensorFunctionSymbol = GH_ZN8OSSymbol17withCStringNoCopyEPKc("getSensorValue");
+  M<UInt32>(self + kIOATIR500Accelerator_gpuSensorFunction) = sensorFunctionSymbol;
+  return startResult;
 LAB_0001fd88:
-  while (iVar9 = pageIndex + -2, -1 < iVar9) {
+  while (prevPage = pageIndex + -2, -1 < prevPage) {
     VCALL(M<SInt32>(self), 0x598)(self,pageIndex + -1 << (GH_page_shift & 0x3f));
     VCALL(M<SInt32>(self), 0x5a4)
-              (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar9 << (GH_page_shift & 0x3f));
-    pageIndex = iVar9;
+              (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),prevPage << (GH_page_shift & 0x3f));
+    pageIndex = prevPage;
   }
   goto LAB_0001f9a0;
 }

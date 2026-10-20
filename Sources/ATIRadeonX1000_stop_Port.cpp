@@ -47,13 +47,19 @@ void ATIRadeonX1000::stop(IOService *provider) {
     UInt32 field_0x74_vtable = field_0x74 ? *(UInt32 *)field_0x74 : 0;
   }
 
-  bool bVar1;
-  int iVar2;
-  unsigned int uVar3;
-  int iVar4;
+  bool notLastRecord;
+  int pageFromEnd;
+  unsigned int surfaceAddress;
+  int pageCursor;
   UInt8 *memoryElement;
   UInt8 *displayRecord;
-  int iVar7;
+  int pageIndex;
+  int recordIndex;
+  int mmioBase;
+  int ringPageOffset;
+  int lastScratchPage;
+  int previousCursor;
+  unsigned int ringOffset;
   
   if (M<int>(self + kIOATIR500Accelerator_gpuSensorTimer) != 0) {
     /* #155 FIX: real IOWorkLoop::removeEventSource(IOEventSource*) at vtable+0xe8 takes TWO args
@@ -73,7 +79,7 @@ void ATIRadeonX1000::stop(IOService *provider) {
     VCALL(*M<int *>(self + kIOATIR500Accelerator_swdsTimer), 0x18)(M<int *>(self + kIOATIR500Accelerator_swdsTimer));
     M<UInt32>(self + kIOATIR500Accelerator_swdsTimer) = 0;
   }
-  iVar4 = 0;
+  recordIndex = 0;
   memoryElement = (UInt8 *)(self + kIOATIR500Accelerator_swdsBuffer0);
   VCALL(*M<int *>(self + kIOATIR500Accelerator_pciDevice), 0x17c)(M<int *>(self + kIOATIR500Accelerator_pciDevice),"ATIFEDSInfo");
   displayRecord = self;
@@ -81,11 +87,11 @@ void ATIRadeonX1000::stop(IOService *provider) {
     if ((M<int>(displayRecord + 0x9c0) != 0) && (M<int>(displayRecord + 0x9bc) != 0)) {
       ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(memoryElement));
     }
-    bVar1 = iVar4 != 1;
+    notLastRecord = recordIndex != 1;
     memoryElement = memoryElement + 0x78;
     displayRecord = displayRecord + 0x78;
-    iVar4 = iVar4 + 1;
-  } while (bVar1);
+    recordIndex = recordIndex + 1;
+  } while (notLastRecord);
   if (M<int>(self + kIOATIR500Accelerator_swdsEntry0Memory) != 0) {
     ((IOATIR500Accelerator *)((UInt8 *)self))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + kIOATIR500Accelerator_swdsEntry0)));
   }
@@ -95,47 +101,47 @@ void ATIRadeonX1000::stop(IOService *provider) {
   if ((M<int>(self + kIOATIR500Accelerator_scanout1PadElementPrev) != 0) && (M<int>(self + kIOATIR500Accelerator_scanout1PadElement) != 0)) {
     ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + kIOATIR500Accelerator_scanout1PadElement)));
   }
-  iVar4 = 0;
+  recordIndex = 0;
   memoryElement = (UInt8 *)(self + kIOATIR500Accelerator_scanout1Buffer);
   displayRecord = self;
   do {
     if ((M<int>(displayRecord + 0x130) != 0) && (M<int>(displayRecord + 300) != 0)) {
       ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(memoryElement));
     }
-    bVar1 = iVar4 != 1;
+    notLastRecord = recordIndex != 1;
     memoryElement = memoryElement + 0x78;
     displayRecord = displayRecord + 0x78;
-    iVar4 = iVar4 + 1;
-  } while (bVar1);
+    recordIndex = recordIndex + 1;
+  } while (notLastRecord);
   VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
   if (M<int>(self + kIOATIR500Accelerator_xdctEngineRunning) != 0) {
     this->stop_xdct_engine();
   }
   this->stop_promo4_engine();
   if (M<int>(self + kIOATIR500Accelerator_swdsPanel0Flag) != 0) {
-    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddress);
-    iVar4 = M<int>(self + kIOATIR500Accelerator_mmioBase);
-    M<unsigned int>(iVar4 + 0x6110) =
-         uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+    surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddress);
+    mmioBase = M<int>(self + kIOATIR500Accelerator_mmioBase);
+    M<unsigned int>(mmioBase + 0x6110) =
+         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
     enforceInOrderExecutionIO();
-    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddressB);
+    surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddressB);
     M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddress) = 0;
-    M<unsigned int>(iVar4 + 0x6120) =
-         uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+    M<unsigned int>(mmioBase + 0x6120) =
+         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
     enforceInOrderExecutionIO();
     M<UInt32>(self + kIOATIR500Accelerator_swdsPanel0Flag) = 0;
     M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressB) = 0;
   }
   if (M<int>(self + kIOATIR500Accelerator_swdsPanel1Flag) != 0) {
-    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddress);
-    iVar4 = M<int>(self + kIOATIR500Accelerator_mmioBase);
-    M<unsigned int>(iVar4 + 0x6910) =
-         uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+    surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddress);
+    mmioBase = M<int>(self + kIOATIR500Accelerator_mmioBase);
+    M<unsigned int>(mmioBase + 0x6910) =
+         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
     enforceInOrderExecutionIO();
-    uVar3 = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddressB);
+    surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddressB);
     M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddress) = 0;
-    M<unsigned int>(iVar4 + 0x6920) =
-         uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
+    M<unsigned int>(mmioBase + 0x6920) =
+         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
     enforceInOrderExecutionIO();
     M<UInt32>(self + kIOATIR500Accelerator_swdsPanel1Flag) = 0;
     M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressB) = 0;
@@ -155,11 +161,11 @@ void ATIRadeonX1000::stop(IOService *provider) {
   }
   if (M<int>(self + kIOATIR500Accelerator_mainRingMemory) != 0) {
     if (M<int>(self + kIOATIR500Accelerator_mainRingSize) != 0) {
-      uVar3 = 0;
+      ringOffset = 0;
       do {
-        VCALL(M<int>(self), 0x598)(self,uVar3 + M<int>(self + kIOATIR500Accelerator_mainRingGartOffset) + 0x1000000);
-        uVar3 = uVar3 + GH_page_size;
-      } while (uVar3 < M<unsigned int>(self + kIOATIR500Accelerator_mainRingSize));
+        VCALL(M<int>(self), 0x598)(self,ringOffset + M<int>(self + kIOATIR500Accelerator_mainRingGartOffset) + 0x1000000);
+        ringOffset = ringOffset + GH_page_size;
+      } while (ringOffset < M<unsigned int>(self + kIOATIR500Accelerator_mainRingSize));
     }
     VCALL(M<int>(self), 0x5a4)
               (self,M<UInt32>(self + kIOATIR500Accelerator_mainRingDescriptor),M<UInt32>(self + kIOATIR500Accelerator_mainRingGartOffset));
@@ -167,11 +173,11 @@ void ATIRadeonX1000::stop(IOService *provider) {
     M<UInt32>(self + kIOATIR500Accelerator_mainRingMemory) = 0;
   }
   if (M<int>(self + kIOATIR500Accelerator_idctRingMemory) != 0) {
-    iVar4 = 0;
+    ringPageOffset = 0;
     do {
-      VCALL(M<int>(self), 0x598)(self,iVar4 + M<int>(self + kIOATIR500Accelerator_idctRingGartOffset) + 0x1000000);
-      iVar4 = iVar4 + GH_page_size;
-    } while (iVar4 < 0x2000);
+      VCALL(M<int>(self), 0x598)(self,ringPageOffset + M<int>(self + kIOATIR500Accelerator_idctRingGartOffset) + 0x1000000);
+      ringPageOffset = ringPageOffset + GH_page_size;
+    } while (ringPageOffset < 0x2000);
     VCALL(M<int>(self), 0x5a4)
               (self,M<UInt32>(self + kIOATIR500Accelerator_idctRingDescriptor),M<UInt32>(self + kIOATIR500Accelerator_idctRingGartOffset));
     GH_IOFreeAligned(M<UInt32>(self + kIOATIR500Accelerator_idctRingMemory),0x2000);
@@ -179,23 +185,23 @@ void ATIRadeonX1000::stop(IOService *provider) {
   }
   if (M<int>(self + kIOATIR500Accelerator_idctEngineActive) != 0) {
     if (M<int>(self + kIOATIR500Accelerator_unknown_0x8c8) == 0) {
-      if (((UInt8)self[0x8cc] != 0) && (iVar4 = (UInt8)self[0x8cc] - 1, 0 < iVar4)) {
-        iVar7 = 0;
+      if (((UInt8)self[0x8cc] != 0) && (lastScratchPage = (UInt8)self[0x8cc] - 1, 0 < lastScratchPage)) {
+        pageIndex = 0;
         do {
-          iVar2 = iVar4 - iVar7;
-          iVar7 = iVar7 + 1;
+          pageFromEnd = lastScratchPage - pageIndex;
+          pageIndex = pageIndex + 1;
           VCALL(M<int>(self), 0x5a4)
-                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar2 << (GH_page_shift & 0x3f));
-        } while (iVar4 != iVar7);
+                    (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),pageFromEnd << (GH_page_shift & 0x3f));
+        } while (lastScratchPage != pageIndex);
       }
     }
     else {
-      iVar4 = (unsigned int)(UInt8)self[0x8cc] * 2;
-      while (iVar7 = iVar4 + -2, 0 < iVar7) {
-        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_shift & 0x3f));
+      pageCursor = (unsigned int)(UInt8)self[0x8cc] * 2;
+      while (previousCursor = pageCursor + -2, 0 < previousCursor) {
+        VCALL(M<int>(self), 0x598)(self,pageCursor + -1 << (GH_page_shift & 0x3f));
         VCALL(M<int>(self), 0x5a4)
-                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),iVar7 << (GH_page_shift & 0x3f));
-        iVar4 = iVar7;
+                  (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),previousCursor << (GH_page_shift & 0x3f));
+        pageCursor = previousCursor;
       }
       VCALL(M<int>(self), 0x598)(self,1 << (GH_page_shift & 0x3f));
     }

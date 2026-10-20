@@ -30,32 +30,35 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 bool ATIRadeonX1000::display_mode_did_change() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
+  bool moreCluts;
+  SInt32 hardwareOk;
+  SInt32 baseDidChange;
   SInt32 *period;
   UInt32 clutIndex;
   UInt32 result;
+  SInt32 gartStartResult;
+  SInt32 swdsRequired;
+  SInt32 swdsInitResult;
   
   GH_IOLockLock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
-  iVar2 = startupPCIeGART();
-  if (iVar2 != -1) {
+  gartStartResult = startupPCIeGART();
+  if (gartStartResult != -1) {
     pageOnPCIeGART();
-    iVar2 = initialize_hardware();
-    iVar3 = SWDSIsRequired();
-    if (iVar3 != 0) {
-      iVar3 = SWDSInit();
-      if ((iVar3 == 0) || (iVar2 == 0)) {
-        iVar2 = 0;
+    hardwareOk = initialize_hardware();
+    swdsRequired = SWDSIsRequired();
+    if (swdsRequired != 0) {
+      swdsInitResult = SWDSInit();
+      if ((swdsInitResult == 0) || (hardwareOk == 0)) {
+        hardwareOk = 0;
       }
       else {
         clutIndex = 0;
         do {
           this->SWDSEnableCLUT(clutIndex);
-          bVar1 = clutIndex != 1;
+          moreCluts = clutIndex != 1;
           clutIndex = clutIndex + 1;
-        } while (bVar1);
-        iVar2 = 1;
+        } while (moreCluts);
+        hardwareOk = 1;
       }
     }
     if (M<SInt32>(self + kIOATIR500Accelerator_gpuSensorProvider) != 0) {
@@ -69,8 +72,8 @@ bool ATIRadeonX1000::display_mode_did_change() {
       }
       this->enable_GPUSensor();
     }
-    iVar3 = ((IOATIR500Accelerator *)(self))->disp_mode_did_change();
-    if ((iVar3 != 0) && (result = 1, iVar2 != 0)) goto LAB_00024fa4;
+    baseDidChange = ((IOATIR500Accelerator *)(self))->disp_mode_did_change();
+    if ((baseDidChange != 0) && (result = 1, hardwareOk != 0)) goto LAB_00024fa4;
   }
   result = 0;
 LAB_00024fa4:
@@ -82,36 +85,40 @@ LAB_00024fa4:
 bool ATIRadeonX1000::display_mode_will_change(SInt32 mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool loopContinues;
   UInt32 ringIndex;
-  SInt32 iVar3;
-  SInt32 iVar4;
+  SInt32 stopResult;
+  SInt32 modeChangeOk;
   UInt32 nextRingIndex;
-  SInt32 iVar6;
+  SInt32 ringMemory;
   UInt32 result;
   UInt8 *displayElement;
   UInt8 *displayRecord;
+  SInt32 ringIndexOld;
+  SInt32 mmioBase;
+  SInt32 triesLeft;
+  SInt32 displayIndex;
   
   GH_IOLockLock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
   if (M<SInt32>(self + kIOATIR500Accelerator_gpuSensorProvider) != 0) {
     this->disable_GPUSensor();
   }
-  iVar4 = ((IOATIR500Accelerator *)(self))->disp_mode_will_change(mode);
+  modeChangeOk = ((IOATIR500Accelerator *)(self))->disp_mode_will_change(mode);
   SWDSShutdown();
   if (M<SInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) != 0) {
-    iVar3 = M<SInt32>(self + kIOATIR500Accelerator_ringIndex);
-    iVar6 = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
-    M<UInt32>(iVar6 + iVar3 * 4) = 0x5c8;
-    ringIndex = iVar3 + 1U & 0x7ff;
+    ringIndexOld = M<SInt32>(self + kIOATIR500Accelerator_ringIndex);
+    ringMemory = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
+    M<UInt32>(ringMemory + ringIndexOld * 4) = 0x5c8;
+    ringIndex = ringIndexOld + 1U & 0x7ff;
     M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
-    M<UInt32>(iVar6 + ringIndex * 4) = 0x30000;
+    M<UInt32>(ringMemory + ringIndex * 4) = 0x30000;
     ringIndex = ringIndex + 1 & 0x7ff;
     M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = ringIndex;
-    M<UInt32>(iVar6 + ringIndex * 4) = 0x578;
+    M<UInt32>(ringMemory + ringIndex * 4) = 0x578;
     ringIndex = ringIndex + 1 & 0x7ff;
     nextRingIndex = ringIndex + 1;
     M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextRingIndex;
-    M<UInt32>(iVar6 + ringIndex * 4) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
+    M<UInt32>(ringMemory + ringIndex * 4) = M<UInt32>(self + kIOATIR500Accelerator_submitStamp);
     M<UInt32>(self + kIOATIR500Accelerator_ringIndex) = nextRingIndex & 0x7ff;
     this->submit_ring_data();
     /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x25f00+0xcc) loads the
@@ -127,28 +134,28 @@ bool ATIRadeonX1000::display_mode_will_change(SInt32 mode) {
   if (M<SInt32>(self + kIOATIR500Accelerator_xdctEngineRunning) != 0) {
     VCALL(M<SInt32>(self), 0x5ec)(self,M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) + -1);
     enforceInOrderExecutionIO();
-    iVar3 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-    if (-1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0x1fb4)))) {
-      iVar3 = 999;
+    mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+    if (-1 < (SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fb4)))) {
+      triesLeft = 999;
       do {
         GH_IODelay(100);
-        iVar6 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-        if ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar6 + 0x1fb4))) < 0)
+        mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+        if ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fb4))) < 0)
         break;
-        bVar1 = iVar3 != 0;
-        iVar3 = iVar3 + -1;
-      } while (bVar1);
+        loopContinues = triesLeft != 0;
+        triesLeft = triesLeft + -1;
+      } while (loopContinues);
     }
-    iVar3 = stop_xdct_engine();
-    if ((iVar3 == 0) || (iVar4 == 0)) {
-      iVar4 = 0;
+    stopResult = stop_xdct_engine();
+    if ((stopResult == 0) || (modeChangeOk == 0)) {
+      modeChangeOk = 0;
     }
     else {
-      iVar4 = 1;
+      modeChangeOk = 1;
     }
   }
-  iVar3 = stop_promo4_engine();
-  if ((iVar3 == 0) || (result = 1, iVar4 == 0)) {
+  stopResult = stop_promo4_engine();
+  if ((stopResult == 0) || (result = 1, modeChangeOk == 0)) {
     result = 0;
   }
   this->shutdownPCIeGART();
@@ -159,18 +166,18 @@ bool ATIRadeonX1000::display_mode_will_change(SInt32 mode) {
   if ((M<SInt32>(self + kIOATIR500Accelerator_scanout1PadElementPrev) != 0) && (M<SInt32>(self + kIOATIR500Accelerator_scanout1PadElement) != 0)) {
     ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout1PadElement));
   }
-  iVar4 = 0;
+  displayIndex = 0;
   displayElement = (self + kIOATIR500Accelerator_scanout1Buffer);
   displayRecord = self;
   do {
     if ((M<SInt32>(displayRecord + 0x130) != 0) && (M<SInt32>(displayRecord + 300) != 0)) {
       ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)displayElement);
     }
-    bVar1 = iVar4 != 1;
+    loopContinues = displayIndex != 1;
     displayElement = displayElement + 0x78;
     displayRecord = displayRecord + 0x78;
-    iVar4 = iVar4 + 1;
-  } while (bVar1);
+    displayIndex = displayIndex + 1;
+  } while (loopContinues);
   ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->init_pool(0);
   GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
   return result;

@@ -33,12 +33,13 @@ IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
 
   UInt8 type;
   int *mapping;
-  int iVar3;
+  int allocResult;
   UInt8 *memory;
   UInt32 result;
   UInt32 cpuVisibleSize;
   UInt32 size;
   unsigned int flags;
+  int hwInfo;
   
   type = textureBytes[0x20];
   if ((type == 0x3) || (type == 0x7)) {
@@ -48,15 +49,15 @@ LAB_0001a84c:
     if (cpuVisibleSize == M<UInt32>(self + kIOATIR500Accelerator_vramSize)) {
 LAB_0001a8f0:
       if (M<int>(self + kIOATIR500Accelerator_displayConfigBits) == 0) {
-        iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),
+        allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),
                            size,0x1000,0x10000,cpuVisibleSize - 0x10000);
       }
       else {
         memory = M<UInt8 *>(self + kIOATIR500Accelerator_vramPool);
 LAB_0001a980:
-        iVar3 = ((ATIR500Memory *)(memory))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size,0x1000,0,cpuVisibleSize);
+        allocResult = ((ATIR500Memory *)(memory))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size,0x1000,0,cpuVisibleSize);
       }
-      if (iVar3 == 0) goto LAB_0001a994;
+      if (allocResult == 0) goto LAB_0001a994;
     }
     else {
       mapping = (int *)VCALL(*M<int *>(textureBytes + 8), 0x14c)
@@ -65,14 +66,14 @@ LAB_0001a980:
         cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
         goto LAB_0001a8f0;
       }
-      iVar3 = VCALL(*mapping, 0xd0)(mapping);
-      flags = M<unsigned int>(iVar3 + 0x20);
+      hwInfo = VCALL(*mapping, 0xd0)(mapping);
+      flags = M<unsigned int>(hwInfo + 0x20);
       VCALL(*mapping, 0x18)(mapping);
       cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
       if (((flags ^ 0x40000000) >> 0x1e & 1) != 0) goto LAB_0001a8f0;
-      iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
+      allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
                          ,0x1000,cpuVisibleSize,M<int>(self + kIOATIR500Accelerator_vramSize) - cpuVisibleSize);
-      if (iVar3 == 0) {
+      if (allocResult == 0) {
         cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
         memory = M<UInt8 *>(self + kIOATIR500Accelerator_vramPool);
         goto LAB_0001a980;

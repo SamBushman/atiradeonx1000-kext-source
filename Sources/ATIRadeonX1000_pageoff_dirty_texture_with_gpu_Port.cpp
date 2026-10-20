@@ -33,42 +33,56 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *textu
     UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
 
   UInt8 faceCount;
-  UInt8 AVar2;
-  bool bVar3;
-  UInt8 bVar4;
-  unsigned int uVar5;
+  UInt8 formatBits;
+  bool macroTiled;
+  UInt8 tileFlags;
+  unsigned int heightAtLevel;
   unsigned int baseLevel;
   unsigned int lastLevel;
-  SInt16 sVar10;
-  int iVar8;
-  unsigned int uVar9;
+  SInt16 mapCount;
+  int vramBase;
+  unsigned int halfWidth;
   int repeat;
   UInt32 stamp;
   UInt32 wordCount;
   UInt8 *tileRecord;
-  int iVar15;
+  int waitStampResult;
   UInt8 *tileOut;
   UInt8 type;
-  unsigned int uVar18;
-  unsigned int uVar19;
-  int iVar20;
+  unsigned int levelWidth;
+  unsigned int levelHeight;
+  int macroTileHeightShift;
   unsigned int face;
-  unsigned int uVar22;
-  unsigned int uVar23;
+  unsigned int minHeight;
+  unsigned int minWidth;
   int vramOffset;
   UInt8 *record;
-  unsigned int uVar26;
+  unsigned int texFlags;
   unsigned int level;
-  int iVar28;
+  int tileVramOffset;
   UInt8 *innerBuffer;
   int gartOffset;
   int size;
+  int textureInfo;
+  int mapResult;
+  int bufferGartOffset;
+  int negTileBits;
+  int macroTileWidthShift;
+  int macroTileBit;
+  int tileGartAddress;
+  int emptyWordOffset;
+  int waitTimeBefore;
+  int infoBlock;
+  unsigned int heightRows;
+  unsigned int halfHeight;
+  unsigned int packetWord;
+  unsigned int pixelShift;
   
-  iVar15 = M<int>(textureBytes + 0x14);
+  textureInfo = M<int>(textureBytes + 0x14);
   vramOffset = M<int>(textureBytes + 0x48);
-  baseLevel = (unsigned int)M<UInt8>(iVar15 + 0x17);
-  faceCount = M<UInt8>(iVar15 + 0x34);
-  lastLevel = (baseLevel + M<UInt8>(iVar15 + 0x35)) - 1;
+  baseLevel = (unsigned int)M<UInt8>(textureInfo + 0x17);
+  faceCount = M<UInt8>(textureInfo + 0x34);
+  lastLevel = (baseLevel + M<UInt8>(textureInfo + 0x35)) - 1;
   if (textureBytes[0x20] == 0x3) {
     type = 0x3;
     if (M<int>(textureBytes + 4) == 0) {
@@ -79,23 +93,23 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *textu
        * already correctly ported with the textureBytes argument; only this first, bare occurrence
        * was missing it (same defect class as pageoff_linear_buffer and the four
        * map_transfer_to_GART overrides). */
-      iVar15 = VCALL(M<int>(self), 0x5a8)(self, textureBytes);
-      if ((iVar15 == 0) &&
-         (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+      mapResult = VCALL(M<int>(self), 0x5a8)(self, textureBytes);
+      if ((mapResult == 0) &&
+         (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                               (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                               (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                              (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar15 == 0)) {
+                              (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
         VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-        iVar15 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
-        if ((iVar15 == 0) &&
-           (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+        mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
+        if ((mapResult == 0) &&
+           (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                                 (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                                 (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                                (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar15 == 0)) {
+                                (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
           return 0;
         }
       }
-      iVar15 = M<int>(textureBytes + 0x14);
+      textureInfo = M<int>(textureBytes + 0x14);
       type = textureBytes[0x20];
     }
   }
@@ -105,46 +119,46 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *textu
     }
     innerBuffer = M<UInt8 *>(textureBytes + 0x58);
     if (((M<int>(innerBuffer + 4) == 0) &&
-        (iVar15 = VCALL(M<int>(self), 0x5a8)(self,innerBuffer), iVar15 == 0)) &&
-       (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+        (mapResult = VCALL(M<int>(self), 0x5a8)(self,innerBuffer), mapResult == 0)) &&
+       (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                             (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
-                            (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), iVar15 == 0)) {
+                            (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), mapResult == 0)) {
       VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-      iVar15 = VCALL(M<int>(self), 0x5a8)(self,innerBuffer);
-      if ((iVar15 == 0) &&
-         (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+      mapResult = VCALL(M<int>(self), 0x5a8)(self,innerBuffer);
+      if ((mapResult == 0) &&
+         (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                               (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
-                              (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), iVar15 == 0))
+                              (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), mapResult == 0))
       {
         return 0;
       }
     }
-    iVar15 = M<int>(textureBytes + 4);
-    sVar10 = M<SInt16>(innerBuffer + 0xe) + 1;
-    M<SInt16>(innerBuffer + 0xe) = sVar10;
-    if (iVar15 == 0) {
-      iVar15 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
-      if ((iVar15 == 0) &&
-         (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+    bufferGartOffset = M<int>(textureBytes + 4);
+    mapCount = M<SInt16>(innerBuffer + 0xe) + 1;
+    M<SInt16>(innerBuffer + 0xe) = mapCount;
+    if (bufferGartOffset == 0) {
+      mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
+      if ((mapResult == 0) &&
+         (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                               (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                               (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                              (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar15 == 0)) {
+                              (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
         VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-        iVar15 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
-        if ((iVar15 == 0) &&
-           (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+        mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
+        if ((mapResult == 0) &&
+           (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                                 (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                                 (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                                (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar15 == 0)) {
+                                (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
           M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + -1;
           return 0;
         }
       }
-      sVar10 = M<SInt16>(innerBuffer + 0xe);
+      mapCount = M<SInt16>(innerBuffer + 0xe);
     }
-    iVar15 = M<int>(textureBytes + 0x14);
+    textureInfo = M<int>(textureBytes + 0x14);
     type = textureBytes[0x20];
-    M<SInt16>(innerBuffer + 0xe) = sVar10 + -1;
+    M<SInt16>(innerBuffer + 0xe) = mapCount + -1;
   }
   if (type == 0x7) {
     size = M<int>(textureBytes + 0x50);
@@ -154,102 +168,102 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *textu
     size = M<int>(textureBytes + 0x50);
     gartOffset = M<int>(textureBytes + 4);
   }
-  iVar28 = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
-  iVar15 = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(iVar15 + 0xc));
-  iVar8 = M<int>(self + kIOATIR500Accelerator_vramSizeProgrammed);
-  M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = iVar28 + iVar15;
+  waitTimeBefore = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
+  waitStampResult = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(textureInfo + 0xc));
+  vramBase = M<int>(self + kIOATIR500Accelerator_vramSizeProgrammed);
+  M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = waitTimeBefore + waitStampResult;
   record = hwInfoBytes + M<int>(hwInfoBytes + 4) * 4 + 0xa00;
   M<UInt32>(record + 0x2c) = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
-  iVar28 = M<int>(textureBytes + 0x14);
-  bVar4 = M<UInt8>(iVar28 + 0x15) >> 3;
-  iVar15 = -(bVar4 & 3);
-  if ((bVar4 & 2) == 0) {
-    if (-1 < iVar15) {
-      bVar3 = false;
+  infoBlock = M<int>(textureBytes + 0x14);
+  tileFlags = M<UInt8>(infoBlock + 0x15) >> 3;
+  negTileBits = -(tileFlags & 3);
+  if ((tileFlags & 2) == 0) {
+    if (-1 < negTileBits) {
+      macroTiled = false;
       goto LAB_000214a0;
     }
-    uVar18 = (unsigned int)(UInt8)hwInfoBytes[0x1a];
-    bVar3 = uVar18 == 0;
+    pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
+    macroTiled = pixelShift == 0;
 LAB_000214a8:
-    if (uVar18 < 4) {
-      if (bVar3) {
-        iVar20 = 2;
-        iVar15 = 3;
+    if (pixelShift < 4) {
+      if (macroTiled) {
+        macroTileHeightShift = 2;
+        macroTileWidthShift = 3;
       }
       else {
-        iVar20 = 1;
-        iVar15 = 4;
+        macroTileHeightShift = 1;
+        macroTileWidthShift = 4;
       }
       goto LAB_000214e0;
     }
   }
   else {
-    bVar3 = true;
+    macroTiled = true;
 LAB_000214a0:
-    if (iVar15 < 0) {
-      uVar18 = (unsigned int)(UInt8)hwInfoBytes[0x1a];
+    if (negTileBits < 0) {
+      pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
       goto LAB_000214a8;
     }
-    uVar18 = (unsigned int)(UInt8)hwInfoBytes[0x1a];
+    pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
   }
-  iVar20 = 0;
-  iVar15 = 5;
+  macroTileHeightShift = 0;
+  macroTileWidthShift = 5;
 LAB_000214e0:
   face = 0;
-  uVar23 = 1 << (iVar15 - uVar18 & 0x3f);
-  uVar22 = 0x20 >> (uVar18 & 0x3f);
+  minWidth = 1 << (macroTileWidthShift - pixelShift & 0x3f);
+  minHeight = 0x20 >> (pixelShift & 0x3f);
   if (faceCount != 0) {
     while( true ) {
-      uVar26 = (unsigned int)M<UInt8>(iVar28 + 0x15);
-      uVar19 = M<unsigned int>(hwInfoBytes + 0x10) >> (uVar18 & 0x3f);
-      uVar18 = M<unsigned int>(hwInfoBytes + 0xc) >> (uVar18 & 0x3f);
+      texFlags = (unsigned int)M<UInt8>(infoBlock + 0x15);
+      levelHeight = M<unsigned int>(hwInfoBytes + 0x10) >> (pixelShift & 0x3f);
+      levelWidth = M<unsigned int>(hwInfoBytes + 0xc) >> (pixelShift & 0x3f);
       if (baseLevel <= lastLevel) {
         tileRecord = hwInfoBytes + baseLevel * 0x20 + face * 0x1a0 + 0x40;
         level = baseLevel;
         do {
           tileOut = record + (unsigned int)M<UInt16>(tileRecord + 0x18) * 4;
-          if ((uVar26 & 4) != 0) {
-            uVar5 = (int)(unsigned int)M<UInt16>(hwInfoBytes + 0x16) >> (level & 0x3f);
-            uVar9 = 1 << iVar20;
-            if (1 << iVar20 < (int)uVar5) {
-              uVar9 = uVar5;
+          if ((texFlags & 4) != 0) {
+            heightAtLevel = (int)(unsigned int)M<UInt16>(hwInfoBytes + 0x16) >> (level & 0x3f);
+            heightRows = 1 << macroTileHeightShift;
+            if (1 << macroTileHeightShift < (int)heightAtLevel) {
+              heightRows = heightAtLevel;
             }
-            if ((uVar18 < uVar23 << 3) || (iVar15 = 1, uVar9 < (unsigned int)(1 << iVar20 + 3))) {
-              iVar15 = 0;
+            if ((levelWidth < minWidth << 3) || (macroTileBit = 1, heightRows < (unsigned int)(1 << macroTileHeightShift + 3))) {
+              macroTileBit = 0;
             }
-            uVar26 = iVar15 << 2 | uVar26 & 0xfffffffb;
+            texFlags = macroTileBit << 2 | texFlags & 0xfffffffb;
           }
-          iVar15 = M<int>(tileRecord + 4);
-          iVar28 = M<int>(tileRecord + 8);
-          uVar9 = uVar19 >> 1;
+          tileGartAddress = M<int>(tileRecord + 4);
+          tileVramOffset = M<int>(tileRecord + 8);
+          halfHeight = levelHeight >> 1;
           M<UInt32>(tileOut) = 0x138a;
           if (M<SInt16>(tileRecord + 2) != 0) {
             repeat = 0;
             do {
-              uVar19 = M<unsigned int>(tileOut + 0xc);
+              packetWord = M<unsigned int>(tileOut + 0xc);
               repeat = repeat + 1;
-              M<int>(tileOut + 4) = iVar15 + gartOffset + iVar8;
-              M<unsigned int>(tileOut + 0xc) = uVar19 & 0xfff8ffff;
-              AVar2 = hwInfoBytes[0x1b];
+              M<int>(tileOut + 4) = tileGartAddress + gartOffset + vramBase;
+              M<unsigned int>(tileOut + 0xc) = packetWord & 0xfff8ffff;
+              formatBits = hwInfoBytes[0x1b];
               M<unsigned int>(tileOut + 0x24) =
-                   uVar18 - 1 & 0x3fff | M<unsigned int>(tileOut + 0x24) & 0xffffc000;
+                   levelWidth - 1 & 0x3fff | M<unsigned int>(tileOut + 0x24) & 0xffffc000;
               M<unsigned int>(tileOut + 0x14) =
-                   iVar28 + vramOffset & 0xffffffe0U | (uVar26 >> 3 & 3) << 3 | (uVar26 >> 2 & 1) << 2;
+                   tileVramOffset + vramOffset & 0xffffffe0U | (texFlags >> 3 & 3) << 3 | (texFlags >> 2 & 1) << 2;
               M<unsigned int>(tileOut + 0xc) =
-                   (uVar9 & 0x1fff) << 1 | ((UInt8)AVar2 & 3) << 0x13 | uVar19 & 0xffe0c001;
+                   (halfHeight & 0x1fff) << 1 | ((UInt8)formatBits & 3) << 0x13 | packetWord & 0xffe0c001;
               tileOut = tileOut + 0x74;
-              iVar15 = iVar15 + M<int>(tileRecord + 0xc);
-              iVar28 = iVar28 + M<int>(tileRecord + 0x10);
+              tileGartAddress = tileGartAddress + M<int>(tileRecord + 0xc);
+              tileVramOffset = tileVramOffset + M<int>(tileRecord + 0x10);
             } while (repeat < (int)(unsigned int)M<UInt16>(tileRecord + 2));
           }
-          uVar19 = uVar22;
-          if (uVar22 < uVar9) {
-            uVar19 = uVar9;
+          levelHeight = minHeight;
+          if (minHeight < halfHeight) {
+            levelHeight = halfHeight;
           }
-          uVar9 = uVar18 >> 1;
-          uVar18 = uVar23;
-          if (uVar23 < uVar9) {
-            uVar18 = uVar9;
+          halfWidth = levelWidth >> 1;
+          levelWidth = minWidth;
+          if (minWidth < halfWidth) {
+            levelWidth = halfWidth;
           }
           level = level + 1;
           tileRecord = tileRecord + 0x20;
@@ -257,24 +271,24 @@ LAB_000214e0:
       }
       face = face + 1;
       if (faceCount <= face) break;
-      iVar28 = M<int>(textureBytes + 0x14);
-      uVar18 = (unsigned int)(UInt8)hwInfoBytes[0x1a];
+      infoBlock = M<int>(textureBytes + 0x14);
+      pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
     }
   }
   wordCount = M<UInt32>(hwInfoBytes + 8);
   M<UInt32>(self + kIOATIR500Accelerator_stateDestroyedByPageoff) = 1;
   M<UInt32>(self + kIOATIR500Accelerator_unknown_0x78) = 0;
   if ((wordCount & 1) != 0) {
-    iVar15 = wordCount * 4;
+    emptyWordOffset = wordCount * 4;
     wordCount = wordCount + 1;
-    M<UInt32>(record + iVar15) = 0x80000000;
+    M<UInt32>(record + emptyWordOffset) = 0x80000000;
   }
   M<UInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample) = wordCount * 4 + M<int>(self + kIOATIR500Accelerator_commandGLBytesPerSample);
   M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = size + M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
-  iVar15 = M<int>(textureBytes + 0x14);
+  textureInfo = M<int>(textureBytes + 0x14);
   stamp = this->submit_buffer((UInt32 *)record,
                          M<int>(hwInfoBytes + 4) * 4 + M<int>(textureBytes + 4) + 0xa00,wordCount);
-  M<UInt32>(iVar15 + 0xc) = stamp;
+  M<UInt32>(textureInfo + 0xc) = stamp;
   if (textureBytes[0x20] == 0x7) {
     M<UInt32>(M<int>(M<int>(textureBytes + 0x58) + 0x14) + 8) =
          M<UInt32>(M<int>(textureBytes + 0x14) + 0xc);

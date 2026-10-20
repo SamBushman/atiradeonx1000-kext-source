@@ -30,34 +30,34 @@
 void ATIRadeonX1000::submit_empty_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
-  SInt32 iVar3;
+  SInt32 mmioBase;
+  UInt32 pcieIndirectValue;
+  SInt32 triesLeft;
   
   if (self[0x80] == 0x0) {
     return;
   }
-  uVar2 = M<UInt32>(self + kIOATIR500Accelerator_pcieIndirectRegValue);
+  pcieIndirectValue = M<UInt32>(self + kIOATIR500Accelerator_pcieIndirectRegValue);
   M<UInt32>(self + kIOATIR500Accelerator_transferMappedFlag) = 0;
-  iVar1 = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-  iVar3 = 0x2711;
+  mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+  triesLeft = 0x2711;
   do {
-    M<UInt32>(iVar1 + 0x30) = 0x10000000;
+    M<UInt32>(mmioBase + 0x30) = 0x10000000;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar1 + 0x34) =
-         uVar2 << 0x18 | (uVar2 & 0xff00 | 0x100) << 8 | (uVar2 & 0xff0000) >> 8 | uVar2 >> 0x18;
+    M<UInt32>(mmioBase + 0x34) =
+         pcieIndirectValue << 0x18 | (pcieIndirectValue & 0xff00 | 0x100) << 8 | (pcieIndirectValue & 0xff0000) >> 8 | pcieIndirectValue >> 0x18;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar1 + 0x30) = 0x10000000;
+    M<UInt32>(mmioBase + 0x30) = 0x10000000;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar1 + 0x34) =
-         uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+    M<UInt32>(mmioBase + 0x34) =
+         pcieIndirectValue << 0x18 | (pcieIndirectValue & 0xff00) << 8 | pcieIndirectValue >> 8 & 0xff00 | pcieIndirectValue >> 0x18;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar1 + 0x30) = 0x22000000;
+    M<UInt32>(mmioBase + 0x30) = 0x22000000;
     enforceInOrderExecutionIO();
-    if (loadWordByteReversed(&M<UInt8>(iVar1 + 0x34)) == 0) {      /* one byte-reversed read, as the shipped code (Ghidra showed four byte loads) */
+    if (loadWordByteReversed(&M<UInt8>(mmioBase + 0x34)) == 0) {      /* one byte-reversed read, as the shipped code (Ghidra showed four byte loads) */
       return;
     }
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    triesLeft = triesLeft + -1;
+  } while (triesLeft != 0);
   return;
 }

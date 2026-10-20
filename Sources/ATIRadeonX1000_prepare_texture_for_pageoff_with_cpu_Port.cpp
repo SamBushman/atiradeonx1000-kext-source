@@ -34,29 +34,39 @@ UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer 
     UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
 
   UInt8 faceCount;
-  bool bVar2;
-  UInt8 bVar3;
-  UInt32 uVar4;
-  UInt32 uVar5;
-  SInt32 iVar6;
+  bool macroTiled;
+  UInt8 tileFlags;
+  UInt32 heightAtLevel;
+  UInt32 heightRows;
   UInt32 stamp;
   SInt32 repeat;
   UInt8 *tileRecord;
   UInt8 *tileOut;
-  UInt32 uVar11;
+  UInt32 levelWidth;
   UInt32 mipFlags;
-  SInt32 iVar13;
+  SInt32 macroTileHeightShift;
   UInt32 baseLevel;
   UInt32 face;
   UInt32 lastLevel;
-  UInt32 uVar17;
+  UInt32 minWidth;
   UInt8 *record;
   UInt32 oldVramOffset;
   SInt32 newVramOffset;
-  UInt32 uVar21;
-  UInt32 uVar22;
+  UInt32 microTiling;
+  UInt32 wordCount;
   UInt32 level;
   UInt8 oldElement[28];
+  SInt32 allocResult;
+  SInt32 textureInfo;
+  SInt32 negTileBits;
+  SInt32 macroTileWidthShift;
+  SInt32 macroTileBit;
+  SInt32 tileOffset;
+  SInt32 emptyWordOffset;
+  UInt32 macroBit;
+  UInt32 halfWidth;
+  UInt32 pixelShift;
+  UInt32 textureSize;
   
   oldVramOffset = M<UInt32>(textureBytes + 0x48);
   if (oldVramOffset < M<UInt32>(self + kIOATIR500Accelerator_usableVramSize)) {
@@ -65,99 +75,99 @@ UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer 
   if ((textureBytes[0x20] != 0x3) && (textureBytes[0x20] != 0x7)) {
     return 0;
   }
-  uVar22 = M<UInt32>(textureBytes + 0x50);
+  textureSize = M<UInt32>(textureBytes + 0x50);
   GH_memcpy(oldElement,(UInt8 *)(textureBytes + 0x40),0x10);
-  iVar6 = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),uVar22,
+  allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),textureSize,
                      0x1000,0,M<UInt32>(self + kIOATIR500Accelerator_usableVramSize));
-  if ((iVar6 == 0) && (iVar6 = this->freeToAllocTextureCPUVisibleVRAM((VendorTextureBuffer *)(textureBytes),uVar22), iVar6 == 0)) {
+  if ((allocResult == 0) && (allocResult = this->freeToAllocTextureCPUVisibleVRAM((VendorTextureBuffer *)(textureBytes),textureSize), allocResult == 0)) {
     return 0;
   }
   newVramOffset = M<SInt32>(textureBytes + 0x48);
   record = hwInfoBytes + M<SInt32>(hwInfoBytes + 4) * 4 + 0xa00;
   M<UInt32>(record + 0x2c) = M<UInt32>(self + kIOATIR500Accelerator_gbTileConfig);
-  iVar6 = M<SInt32>(textureBytes + 0x14);
-  mipFlags = (UInt32)M<UInt8>(iVar6 + 0x15);
-  baseLevel = (UInt32)M<UInt8>(iVar6 + 0x17);
-  faceCount = M<UInt8>(iVar6 + 0x34);
-  bVar3 = M<UInt8>(iVar6 + 0x15) >> 3;
-  lastLevel = (baseLevel + M<UInt8>(iVar6 + 0x35)) - 1;
-  iVar6 = -(bVar3 & 3);
-  if ((bVar3 & 2) == 0) {
-    if (-1 < iVar6) {
-      bVar2 = false;
+  textureInfo = M<SInt32>(textureBytes + 0x14);
+  mipFlags = (UInt32)M<UInt8>(textureInfo + 0x15);
+  baseLevel = (UInt32)M<UInt8>(textureInfo + 0x17);
+  faceCount = M<UInt8>(textureInfo + 0x34);
+  tileFlags = M<UInt8>(textureInfo + 0x15) >> 3;
+  lastLevel = (baseLevel + M<UInt8>(textureInfo + 0x35)) - 1;
+  negTileBits = -(tileFlags & 3);
+  if ((tileFlags & 2) == 0) {
+    if (-1 < negTileBits) {
+      macroTiled = false;
       goto LAB_00020e40;
     }
-    uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
-    bVar2 = uVar11 == 0;
+    pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
+    macroTiled = pixelShift == 0;
 LAB_00020e48:
-    if (uVar11 < 4) {
-      if (bVar2) {
-        iVar13 = 2;
-        iVar6 = 3;
+    if (pixelShift < 4) {
+      if (macroTiled) {
+        macroTileHeightShift = 2;
+        macroTileWidthShift = 3;
       }
       else {
-        iVar13 = 1;
-        iVar6 = 4;
+        macroTileHeightShift = 1;
+        macroTileWidthShift = 4;
       }
       goto LAB_00020e80;
     }
   }
   else {
-    bVar2 = true;
+    macroTiled = true;
 LAB_00020e40:
-    if (iVar6 < 0) {
-      uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
+    if (negTileBits < 0) {
+      pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
       goto LAB_00020e48;
     }
-    uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
+    pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
   }
-  iVar13 = 0;
-  iVar6 = 5;
+  macroTileHeightShift = 0;
+  macroTileWidthShift = 5;
 LAB_00020e80:
   face = 0;
-  uVar17 = 1 << (iVar6 - uVar11 & 0x3f);
+  minWidth = 1 << (macroTileWidthShift - pixelShift & 0x3f);
   if (faceCount != 0) {
     while( true ) {
-      uVar11 = M<UInt32>(hwInfoBytes + 0xc) >> (uVar11 & 0x3f);
+      levelWidth = M<UInt32>(hwInfoBytes + 0xc) >> (pixelShift & 0x3f);
       if (baseLevel <= lastLevel) {
         tileRecord = hwInfoBytes + baseLevel * 0x20 + face * 0x1a0 + 0x40;
         level = baseLevel;
         do {
           tileOut = record + (UInt32)M<UInt16>(tileRecord + 0x18) * 4;
           if ((mipFlags & 4) != 0) {
-            uVar4 = (SInt32)(UInt32)M<UInt16>(hwInfoBytes + 0x16) >> (level & 0x3f);
-            uVar5 = 1 << iVar13;
-            if (1 << iVar13 < (SInt32)uVar4) {
-              uVar5 = uVar4;
+            heightAtLevel = (SInt32)(UInt32)M<UInt16>(hwInfoBytes + 0x16) >> (level & 0x3f);
+            heightRows = 1 << macroTileHeightShift;
+            if (1 << macroTileHeightShift < (SInt32)heightAtLevel) {
+              heightRows = heightAtLevel;
             }
-            if ((uVar11 < uVar17 << 3) || (iVar6 = 1, uVar5 < (UInt32)(1 << iVar13 + 3))) {
-              iVar6 = 0;
+            if ((levelWidth < minWidth << 3) || (macroTileBit = 1, heightRows < (UInt32)(1 << macroTileHeightShift + 3))) {
+              macroTileBit = 0;
             }
-            mipFlags = iVar6 << 2 | mipFlags & 0xfffffffb;
+            mipFlags = macroTileBit << 2 | mipFlags & 0xfffffffb;
           }
-          iVar6 = M<SInt32>(tileRecord + 8);
+          tileOffset = M<SInt32>(tileRecord + 8);
           M<UInt32>(tileOut) = 0x138a;
-          uVar5 = uVar11 >> 1;
+          halfWidth = levelWidth >> 1;
           if (M<SInt16>(tileRecord + 2) != 0) {
-            uVar4 = mipFlags >> 2 & 1;
-            uVar21 = mipFlags >> 3 & 3;
+            macroBit = mipFlags >> 2 & 1;
+            microTiling = mipFlags >> 3 & 3;
             repeat = 0;
             do {
               repeat = repeat + 1;
-              M<SInt32>(tileOut + 4) = iVar6 + newVramOffset;
+              M<SInt32>(tileOut + 4) = tileOffset + newVramOffset;
               M<UInt32>(tileOut + 0x24) =
-                   uVar11 - 1 & 0x3fff | M<UInt32>(tileOut + 0x24) & 0xffffc000;
+                   levelWidth - 1 & 0x3fff | M<UInt32>(tileOut + 0x24) & 0xffffc000;
               M<UInt32>(tileOut + 0xc) =
-                   (uVar5 & 0x1fff) << 1 |
-                   uVar21 << 0x11 | uVar4 << 0x10 | M<UInt32>(tileOut + 0xc) & 0xffe0c001;
-              M<UInt32>(tileOut + 0x14) = iVar6 + oldVramOffset & 0xffffffe0 | uVar21 << 3 | uVar4 << 2;
+                   (halfWidth & 0x1fff) << 1 |
+                   microTiling << 0x11 | macroBit << 0x10 | M<UInt32>(tileOut + 0xc) & 0xffe0c001;
+              M<UInt32>(tileOut + 0x14) = tileOffset + oldVramOffset & 0xffffffe0 | microTiling << 3 | macroBit << 2;
               tileOut = tileOut + 0x74;
-              iVar6 = iVar6 + M<SInt32>(tileRecord + 0x10);
+              tileOffset = tileOffset + M<SInt32>(tileRecord + 0x10);
             } while (repeat < (SInt32)(UInt32)M<UInt16>(tileRecord + 2));
           }
-          uVar11 = uVar17;
-          if (uVar17 < uVar5) {
-            uVar11 = uVar5;
+          levelWidth = minWidth;
+          if (minWidth < halfWidth) {
+            levelWidth = halfWidth;
           }
           level = level + 1;
           tileRecord = tileRecord + 0x20;
@@ -165,21 +175,21 @@ LAB_00020e80:
       }
       face = face + 1;
       if (faceCount <= face) break;
-      uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
+      pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
     }
   }
-  uVar22 = M<UInt32>(hwInfoBytes + 8);
+  wordCount = M<UInt32>(hwInfoBytes + 8);
   M<UInt32>(self + kIOATIR500Accelerator_stateDestroyedByPageoff) = 1;
-  if ((uVar22 & 1) != 0) {
-    iVar6 = uVar22 * 4;
-    uVar22 = uVar22 + 1;
-    M<UInt32>(record + iVar6) = 0x80000000;
+  if ((wordCount & 1) != 0) {
+    emptyWordOffset = wordCount * 4;
+    wordCount = wordCount + 1;
+    M<UInt32>(record + emptyWordOffset) = 0x80000000;
   }
-  M<UInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample) = uVar22 * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample);
-  iVar6 = M<SInt32>(textureBytes + 0x14);
+  M<UInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample) = wordCount * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample);
+  textureInfo = M<SInt32>(textureBytes + 0x14);
   stamp = this->submit_buffer((UInt32 *)record,
-                        M<SInt32>(hwInfoBytes + 4) * 4 + M<SInt32>(textureBytes + 4) + 0xa00,uVar22);
-  M<UInt32>(iVar6 + 0xc) = stamp;
+                        M<SInt32>(hwInfoBytes + 4) * 4 + M<SInt32>(textureBytes + 4) + 0xa00,wordCount);
+  M<UInt32>(textureInfo + 0xc) = stamp;
   VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0xc));
   ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)(oldElement));
   return 1;

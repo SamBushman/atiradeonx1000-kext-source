@@ -32,24 +32,29 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
     UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
 
-  SInt16 sVar3;
-  int iVar1;
-  int iVar2;
-  int iVar4;
-  int iVar5;
+  SInt16 mapCount;
+  int vramBase;
+  int burstsLeft;
+  int textureInfo;
+  int gartOffsetInBurst;
   UInt32 stamp;
   UInt8 *record;
   UInt32 wordCount;
-  int iVar9;
-  int iVar10;
+  int vramWordIndex;
+  int gartWordIndex;
   UInt8 type;
   unsigned int burstIndex;
-  int iVar13;
-  int iVar14;
-  int iVar15;
+  int vramStride;
+  int vramOffsetInBurst;
+  int gartStride;
   UInt8 *innerBuffer;
   int gartOffset;
   int vramOffset;
+  int mapResult;
+  int bufferGartOffset;
+  int size;
+  int waitStampResult;
+  int waitTimeBefore;
   
   if (textureBytes[0x20] == 0x3) {
     type = 0x3;
@@ -60,19 +65,19 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
        * explicitly in the real binary, because the intervening freeToAllocGART call clobbers it -
        * that one was already correctly ported with the textureBytes argument; only this first, bare
        * occurrence was missing it. */
-      iVar4 = VCALL(M<int>(self), 0x5a8)(self, textureBytes);
-      if ((iVar4 == 0) &&
-         (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+      mapResult = VCALL(M<int>(self), 0x5a8)(self, textureBytes);
+      if ((mapResult == 0) &&
+         (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                              (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                              (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                             (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar4 == 0)) {
+                             (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
         VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-        iVar4 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
-        if ((iVar4 == 0) &&
-           (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+        mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
+        if ((mapResult == 0) &&
+           (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                                (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                                (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                               (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar4 == 0)) {
+                               (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
           return 0;
         }
       }
@@ -85,82 +90,82 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
     }
     innerBuffer = M<UInt8 *>(textureBytes + 0x58);
     if (((M<int>(innerBuffer + 4) == 0) &&
-        (iVar4 = VCALL(M<int>(self), 0x5a8)(self,innerBuffer), iVar4 == 0)) &&
-       (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+        (mapResult = VCALL(M<int>(self), 0x5a8)(self,innerBuffer), mapResult == 0)) &&
+       (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                            (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
-                           (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), iVar4 == 0)) {
+                           (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), mapResult == 0)) {
       VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-      iVar4 = VCALL(M<int>(self), 0x5a8)(self,innerBuffer);
-      if ((iVar4 == 0) &&
-         (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+      mapResult = VCALL(M<int>(self), 0x5a8)(self,innerBuffer);
+      if ((mapResult == 0) &&
+         (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                              (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
-                             (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), iVar4 == 0)) {
+                             (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),(VendorTransferBuffer *)(innerBuffer)), mapResult == 0)) {
         return 0;
       }
     }
-    iVar4 = M<int>(textureBytes + 4);
-    sVar3 = M<SInt16>(innerBuffer + 0xe) + 1;
-    M<SInt16>(innerBuffer + 0xe) = sVar3;
-    if (iVar4 == 0) {
-      iVar4 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
-      if ((iVar4 == 0) &&
-         (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+    bufferGartOffset = M<int>(textureBytes + 4);
+    mapCount = M<SInt16>(innerBuffer + 0xe) + 1;
+    M<SInt16>(innerBuffer + 0xe) = mapCount;
+    if (bufferGartOffset == 0) {
+      mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
+      if ((mapResult == 0) &&
+         (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                              (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                              (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                             (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar4 == 0)) {
+                             (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
         VCALL(M<int>(self), 0x54c)(self,M<int>(self + kIOATIR500Accelerator_submitStamp) + -1);
-        iVar4 = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
-        if ((iVar4 == 0) &&
-           (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
+        mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
+        if ((mapResult == 0) &&
+           (mapResult = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                                (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                                (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
-                               (VendorTransferBuffer *)((UInt8 *)textureBytes)), iVar4 == 0)) {
+                               (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
           M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + -1;
           return 0;
         }
       }
-      sVar3 = M<SInt16>(innerBuffer + 0xe);
+      mapCount = M<SInt16>(innerBuffer + 0xe);
     }
     type = textureBytes[0x20];
-    M<SInt16>(innerBuffer + 0xe) = sVar3 + -1;
+    M<SInt16>(innerBuffer + 0xe) = mapCount + -1;
   }
   if (type == 0x7) {
-    iVar4 = M<int>(textureBytes + 0x50);
+    size = M<int>(textureBytes + 0x50);
     gartOffset = M<int>(M<int>(textureBytes + 0x58) + 4);
   }
   else {
     gartOffset = M<int>(textureBytes + 4);
-    iVar4 = M<int>(textureBytes + 0x50);
+    size = M<int>(textureBytes + 0x50);
   }
-  iVar14 = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
-  iVar5 = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(M<int>(textureBytes + 0x14) + 0xc));
-  iVar1 = M<int>(self + kIOATIR500Accelerator_vramSizeProgrammed);
+  waitTimeBefore = M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime);
+  waitStampResult = VCALL(M<int>(self), 0x54c)(self,M<UInt32>(M<int>(textureBytes + 0x14) + 0xc));
+  vramBase = M<int>(self + kIOATIR500Accelerator_vramSizeProgrammed);
   record = hwInfoBytes + 0xa00;
-  M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = iVar14 + iVar5;
+  M<int>(self + kIOATIR500Accelerator_texturePageOutWaitTime) = waitTimeBefore + waitStampResult;
   burstIndex = (unsigned int)M<UInt16>(hwInfoBytes + 0x40);
-  iVar5 = M<int>(hwInfoBytes + 0x44);
-  iVar14 = M<int>(hwInfoBytes + 0x48);
-  iVar9 = burstIndex + 4;
-  iVar10 = burstIndex + 7;
+  gartOffsetInBurst = M<int>(hwInfoBytes + 0x44);
+  vramOffsetInBurst = M<int>(hwInfoBytes + 0x48);
+  vramWordIndex = burstIndex + 4;
+  gartWordIndex = burstIndex + 7;
   M<UInt32>(record + burstIndex * 4) = 0x80000000;
   vramOffset = M<int>(textureBytes + 0x48);
-  M<int>(record + iVar9 * 4) = iVar14 + vramOffset;
-  M<int>(record + iVar10 * 4) = gartOffset + iVar1 + iVar5;
+  M<int>(record + vramWordIndex * 4) = vramOffsetInBurst + vramOffset;
+  M<int>(record + gartWordIndex * 4) = gartOffset + vramBase + gartOffsetInBurst;
   if (1 < M<UInt16>(hwInfoBytes + 0x42)) {
-    iVar2 = M<UInt16>(hwInfoBytes + 0x42) - 1;
-    iVar13 = M<int>(hwInfoBytes + 0x50);
-    iVar15 = M<int>(hwInfoBytes + 0x4c);
+    burstsLeft = M<UInt16>(hwInfoBytes + 0x42) - 1;
+    vramStride = M<int>(hwInfoBytes + 0x50);
+    gartStride = M<int>(hwInfoBytes + 0x4c);
     do {
       burstIndex = burstIndex + 0x12;
-      iVar9 = iVar9 + 0x12;
-      iVar10 = iVar10 + 0x12;
-      iVar5 = iVar5 + iVar15;
-      iVar14 = iVar14 + iVar13;
+      vramWordIndex = vramWordIndex + 0x12;
+      gartWordIndex = gartWordIndex + 0x12;
+      gartOffsetInBurst = gartOffsetInBurst + gartStride;
+      vramOffsetInBurst = vramOffsetInBurst + vramStride;
       M<UInt32>(record + burstIndex * 4) = 0x80000000;
-      M<int>(record + iVar9 * 4) = iVar14 + vramOffset;
-      M<int>(record + iVar10 * 4) = gartOffset + iVar1 + iVar5;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      M<int>(record + vramWordIndex * 4) = vramOffsetInBurst + vramOffset;
+      M<int>(record + gartWordIndex * 4) = gartOffset + vramBase + gartOffsetInBurst;
+      burstsLeft = burstsLeft + -1;
+    } while (burstsLeft != 0);
   }
   gartOffset = M<int>(textureBytes + 0x14);
   M<UInt16>(gartOffset + 0x1c) = M<UInt16>(gartOffset + 0x1c) | M<UInt16>(gartOffset + 0x28);
@@ -171,10 +176,10 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
     M<UInt32>(record + gartOffset) = 0x80000000;
   }
   M<UInt32>(self + kIOATIR500Accelerator_commandGLBytesPerSample) = wordCount * 4 + M<int>(self + kIOATIR500Accelerator_commandGLBytesPerSample);
-  M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = iVar4 + M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
-  iVar4 = M<int>(textureBytes + 0x14);
+  M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample) = size + M<int>(self + kIOATIR500Accelerator_texturePageOutBytesPerSample);
+  textureInfo = M<int>(textureBytes + 0x14);
   stamp = this->submit_buffer((UInt32 *)record,M<int>(textureBytes + 4) + 0xa00,wordCount);
-  M<UInt32>(iVar4 + 0xc) = stamp;
+  M<UInt32>(textureInfo + 0xc) = stamp;
   if (textureBytes[0x20] == 0x7) {
     M<UInt32>(M<int>(M<int>(textureBytes + 0x58) + 0x14) + 8) =
          M<UInt32>(M<int>(textureBytes + 0x14) + 0xc);
