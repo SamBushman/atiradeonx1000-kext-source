@@ -60,7 +60,7 @@ UInt32 ATIR500Surface::prepare_vram(ATIR500SurfaceBuffer *buffer) {
   }
   accelBase = M<SInt32>(self + kIOATIR500Surface_accelerator);
   if (M<UInt8>(accelBase + 0x990) == 0) {
-LAB_0003dcc0:
+noFreeSlot:
     bufferBytes[0x3c] = 0x0;
     return 0;
   }
@@ -73,7 +73,7 @@ LAB_0003dcc0:
     do {
       nextSlot = slotIndex + 1;
       slotIndex = nextSlot & 0xff;
-      if (slotIndex == M<UInt8>(accelBase + 0x990)) goto LAB_0003dcc0;
+      if (slotIndex == M<UInt8>(accelBase + 0x990)) goto noFreeSlot;
     } while ((busyMask & 1 << (nextSlot & 0x3f)) != 0);
   }
   M<UInt32>(accelBase + kIOATIR500Accelerator_vramPreparedMask) = 1 << (slotIndex & 0x3f) | busyMask;
@@ -89,7 +89,7 @@ LAB_0003dcc0:
   if ((M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf) < 2) {
     switch(bufferBytes[0x38]) {
     default:
-      goto switchD_0003dd5c_caseD_0;
+      goto unknownFormat;
     case 0x1:
       formatCode = 1;
       break;
@@ -109,7 +109,7 @@ LAB_0003dcc0:
     sizeBits = (UInt32)(M<UInt16>(bufferBytes + 0x18) >> 3);
   }
   else {
-switchD_0003dd5c_caseD_0:
+unknownFormat:
     sizeBits = 0;
     formatBits = 0;
   }

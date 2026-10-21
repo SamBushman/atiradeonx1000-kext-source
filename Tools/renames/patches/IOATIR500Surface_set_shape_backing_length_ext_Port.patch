@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp	2026-10-20 10:47:13.853424601 -0700
-+++ b/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp	2026-10-20 10:47:13.854705262 -0700
+--- a/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp	2026-10-20 21:14:15.139946030 -0700
++++ b/Sources/IOATIR500Surface_set_shape_backing_length_ext_Port.cpp	2026-10-20 21:14:15.141335891 -0700
 @@ -40,7 +40,6 @@
    char hardwareUp;
    UInt16 regionWidth;
@@ -45,7 +45,7 @@
 -                         (M<int *>(self + kIOATIR500Surface_accelerator),&local_48,
 +                         (M<int *>(self + kIOATIR500Surface_accelerator),vramElement,
                            M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
-       if (vramAllocOk == 0) goto LAB_00015720;
+       if (vramAllocOk == 0) goto shapeFailed;
        M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
 -      VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),&local_48);
 +      VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),vramElement);

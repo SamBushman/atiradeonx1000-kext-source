@@ -27,7 +27,7 @@
 
 
 /* real addr 0x3a700 */
-void ATIR500Surface::dvd_setup_subpicture(int param_1, int param_2, int param_3, int param_4) {
+void ATIR500Surface::dvd_setup_subpicture(int ignored1, int ignored2, int ignored3, int ignored4) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   return;

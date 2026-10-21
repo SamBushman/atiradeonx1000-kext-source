@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 16:35:11.281789203 -0700
-+++ b/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 16:35:11.282854933 -0700
+--- a/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 20:45:57.205455274 -0700
++++ b/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 20:45:57.206727584 -0700
 @@ -31,133 +31,141 @@
  void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32*packet, bool clearFlag, SInt32 x, SInt32 y, SInt32 width, SInt32 height) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -252,7 +252,7 @@
 +    packet[0xc1] = FBITS((invHeightF * yTopF));
 +    packet[199] = FBITS(((yTopF + yBottomF) * lit380));
 +    packet[0xc3] = (SInt32)((xRightF - xLeftF) * lit37c) << 0x10 | (SInt32)((yBottomF - yTopF) * lit37c);
-     goto LAB_0004481c;
+     goto finishResolve;
    }
 -  uVar18 = 0;
 +  pitchPerDegree = 0;
@@ -337,17 +337,17 @@
 -  iVar13 = 0x20;
 +  tileAlignment = 0x20;
    if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) == 4) {
- LAB_00044100:
+ roundTilePitch:
 -    uVar19 = iVar13 * ((SInt32)(iVar13 + uVar15 + -1) / iVar13);
 +    alignedPitch = tileAlignment * ((SInt32)(tileAlignment + minPitch + -1) / tileAlignment);
    }
    else {
 -    iVar13 = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) << 4;
 -    uVar19 = 0;
--    if (iVar13 != 0) goto LAB_00044100;
+-    if (iVar13 != 0) goto roundTilePitch;
 +    tileAlignment = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) << 4;
 +    alignedPitch = 0;
-+    if (tileAlignment != 0) goto LAB_00044100;
++    if (tileAlignment != 0) goto roundTilePitch;
    }
 -  packet[0xc0] = uVar19;
 -  packet[0xbe] = uVar17;
@@ -450,7 +450,7 @@
      }
      M<UInt8>(fixedBuffer + 0x36) = 1;
    }
- LAB_0004481c:
+ finishResolve:
    M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
 -  return puVar20;
 +  return outCursor;

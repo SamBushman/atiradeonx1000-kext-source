@@ -37,17 +37,17 @@ SInt32 ATIR500Surface::is_flip_allowed() {
   
   baseResult = IOATIR500Surface::is_flip_allowed();
   accel = M<SInt32>(self + kIOATIR500Surface_accelerator);
-  if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003aec0;
+  if (M<char>(accel + 0x9b0) == '\0') goto checkModeBits;
   if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_panel) * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
-    if (M<SInt32>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto LAB_0003aec0;
+    if (M<SInt32>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto checkModeBits;
     panelBlockOffset = 0xb18;
     if (M<SInt32>(self + kIOATIR500Surface_panel) != 0) {
       panelBlockOffset = 0xb00;
     }
-    if (M<SInt32>(accel + panelBlockOffset + 0x10) == 0) goto LAB_0003aec0;
+    if (M<SInt32>(accel + panelBlockOffset + 0x10) == 0) goto checkModeBits;
   }
   baseResult = 0;
-LAB_0003aec0:
+checkModeBits:
   result = 0;
   if (-1 < M<SInt32>(self + kIOATIR500Surface_modeBits)) {
     result = baseResult;

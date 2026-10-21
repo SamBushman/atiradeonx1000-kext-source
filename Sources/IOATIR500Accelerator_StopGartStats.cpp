@@ -83,13 +83,13 @@ void IOATIR500Accelerator::stop(IOService *provider) {
   ((IOATIR500Accelerator *)(self))->freeAllDataBuffers();
   if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 1) != 0) {
     commandBufferMemory = M<SInt32 *>(self + kIOATIR500Accelerator_scratchBufferDescriptor);
-    if (commandBufferMemory == (SInt32 *)0x0) goto LAB_000067e8;
+    if (commandBufferMemory == (SInt32 *)0x0) goto freeDisplayRecords;
     VCALL(*commandBufferMemory, 0x148)(commandBufferMemory,3);
   }
   if (M<SInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor) != 0) {
     ((IOATIR500Accelerator *)(self))->freeCommandBuffer((VendorCommandBuffer *)(self + kIOATIR500Accelerator_scratchCommandBuffer));
   }
-LAB_000067e8:
+freeDisplayRecords:
   if (M<SInt32>(self + kIOATIR500Accelerator_displayCount) != 0) {
     panelIndex = 0;
     panelRecordCursor = self;
@@ -171,7 +171,7 @@ IOReturn IOATIR500Accelerator::addToMinMaxGART(IOMemoryDescriptor *memory, UInt3
       if (pageCount != freeRun) {
         return 0;
       }
-      goto LAB_000060d8;
+      goto lockPages;
     }
     if ((M<SInt32>(tableByteOffset + M<SInt32>(self + kIOATIR500Accelerator_gartTable)) == M<SInt32>(self + kIOATIR500Accelerator_gartEmptyEntry)) &&
        ((freeRun != 0 || ((firstEntry & 1) == 0)))) {
@@ -184,7 +184,7 @@ IOReturn IOATIR500Accelerator::addToMinMaxGART(IOMemoryDescriptor *memory, UInt3
     tableByteOffset = tableByteOffset + 4;
   } while (freeRun != pageCount);
   firstEntry = firstEntry - pageCount;
-LAB_000060d8:
+lockPages:
   status = VCALL(M<SInt32>(memoryBytes), 0x144)(memoryBytes,3);
   if (status == 0) {
     if (((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 2) == 0) ||

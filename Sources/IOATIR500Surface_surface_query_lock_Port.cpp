@@ -51,18 +51,18 @@ IOReturn IOATIR500Surface::surface_query_lock() {
           if (allocated != 0) {
             result = 0;
             VCALL(M<SInt32>(self), 0x5cc)(self,bufferIndex);
-            goto LAB_00015280;
+            goto unlockAndReturn;
           }
-          goto LAB_00015270;
+          goto failBusy;
         }
       }
       result = 0;
-      goto LAB_00015280;
+      goto unlockAndReturn;
     }
   }
-LAB_00015270:
+failBusy:
   result = 0xe00002cc;
-LAB_00015280:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x840));
   return result;
 }

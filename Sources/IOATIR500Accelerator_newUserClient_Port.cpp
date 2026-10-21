@@ -84,7 +84,7 @@ IOReturn IOATIR500Accelerator::newUserClient(task *owningTask, void*securityID, 
         return 0xe00002be;
       }
       M<task *>(client + 0x78) = owningTask;
-      goto LAB_000021d0;
+      goto attachClient;
     }
     if (type != 2) {
       if (type != 3) {
@@ -97,7 +97,7 @@ IOReturn IOATIR500Accelerator::newUserClient(task *owningTask, void*securityID, 
       M<task *>(client + 0x78) = owningTask;
       properties = (SInt32 *)0x0;
       noProperties = 2;
-      goto LAB_000021d0;
+      goto attachClient;
     }
     factory = M<code *>(M<SInt32>(self) + 0x5d8);
   }
@@ -117,7 +117,7 @@ IOReturn IOATIR500Accelerator::newUserClient(task *owningTask, void*securityID, 
   properties = (SInt32 *)0x0;
   M<task *>(client + 0x78) = owningTask;
   noProperties = 2;
-LAB_000021d0:
+attachClient:
   clientStatus = VCALL(M<SInt32>(client), 0x150)(client,properties);
   if (clientStatus != 0) {
     clientStatus = VCALL(M<SInt32>(client), 0x3a4)(client,self);

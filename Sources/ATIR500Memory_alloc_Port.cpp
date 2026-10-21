@@ -48,7 +48,7 @@ UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignmen
   }
   if (((M<SInt32>(self + kATIR500Memory_spareNodeStack) == 0) && (refilled = this->add_to_stack(), refilled == 0)) ||
      (*(UInt32 **)*M<UInt32 *>(self + 8) == (UInt32 *)0x0)) {
-LAB_000195bc:
+allocFailed:
     result = 0;
   }
   else {
@@ -56,7 +56,7 @@ LAB_000195bc:
     do {
       while (freeNode = nextNode, -1 < (SInt32)freeNode[3]) {
         nextNode = (UInt32 *)*freeNode;
-        if ((UInt32 *)*freeNode == (UInt32 *)0x0) goto LAB_000195bc;
+        if ((UInt32 *)*freeNode == (UInt32 *)0x0) goto allocFailed;
       }
       nextNode = (UInt32 *)*freeNode;
       allocOffset = alignMask + freeNode[2] & ~alignMask;

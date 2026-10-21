@@ -60,11 +60,11 @@ UInt32 IOATIR500Accelerator::tossSurfacesForVRAM(IOATIR500Surface *excludeSurfac
             excludeCursor = excludeCursor + 1;
             if (((excludedTexture != (UInt8 *)0x0) &&
                 (excludedTexture[0x20] == 0x0)) &&
-               (surface == M<UInt8 *>(excludedTexture + 0x50))) goto LAB_00003f10;
+               (surface == M<UInt8 *>(excludedTexture + 0x50))) goto nextSurface;
             excludeLeft = excludeLeft + -1;
           } while (excludeLeft != 0);
         }
-        else if (!(bool)(excludeFlags >> 1 & 1)) goto LAB_00003f10;
+        else if (!(bool)(excludeFlags >> 1 & 1)) goto nextSurface;
         bufferIndex = 0;
         surfaceBuffer = (UInt8 *)(surface + 0xa8);
         do {
@@ -74,28 +74,28 @@ UInt32 IOATIR500Accelerator::tossSurfacesForVRAM(IOATIR500Surface *excludeSurfac
               (surfaceBuffer != M<UInt8 *>(surface + 0xb70))))) {
             if (M<SInt32>(surface + 0xd48) == 0) {
               ((IOATIR500Surface *)(surface))->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
-LAB_00003ec0:
+allocAfterToss:
               VCALL(M<SInt32>(self), 0x528)(self,neededBytes);
             }
             else if (M<SInt32>(surface + 0xbcc) == 0) {
               VCALL(M<SInt32>(surface), 0x5cc)(surface,bufferIndex);
-              goto LAB_00003ec0;
+              goto allocAfterToss;
             }
-            if (M<SInt32>(neededBytes + 0x48) != 0) goto LAB_00003f28;
+            if (M<SInt32>(neededBytes + 0x48) != 0) goto tossSucceeded;
           }
           notLastBuffer = bufferIndex != 0x16;
           surfaceBuffer = surfaceBuffer + 0x78;
           bufferIndex = bufferIndex + 1;
         } while (notLastBuffer);
-        if (M<SInt32>(neededBytes + 0x48) != 0) goto LAB_00003f28;
+        if (M<SInt32>(neededBytes + 0x48) != 0) goto tossSucceeded;
         surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
       }
-LAB_00003f10: ;
+nextSurface: ;
     } while (surface != surfaceListHead);
   }
   result = 0;
   if (M<SInt32>(neededBytes + 0x48) != 0) {
-LAB_00003f28:
+tossSucceeded:
     result = 1;
   }
   return result;

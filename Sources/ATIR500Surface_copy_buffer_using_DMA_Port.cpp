@@ -118,30 +118,30 @@ UInt32 ATIR500Surface::copy_buffer_using_DMA(SInt32 x, SInt32 y, SInt32 w, SInt3
   if (synchronous) {
     if (!hzClear) {
       condOk = (M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x7c0000) == 0;
-joined_r0x00042bb8:
+checkCopyAllowed:
       if (!condOk) {
         return 0;
       }
     }
-LAB_00042bcc:
+useBackingStore:
     backingFlag = 1;
   }
   else if (direction != 1) {
     condOk = hzClear;
-    if (M<char>(M<int>(bufferBytes + 0x24) + 0x58) != '\0') goto joined_r0x00042bb8;
-    goto LAB_00042bcc;
+    if (M<char>(M<int>(bufferBytes + 0x24) + 0x58) != '\0') goto checkCopyAllowed;
+    goto useBackingStore;
   }
   isWrite = direction != 1;
   if (isWrite) {
-    if (direction != 2) goto LAB_00042bf0;
+    if (direction != 2) goto mappingNotNeeded;
   }
   else if ((M<unsigned int>(accel + kIOATIR500Accelerator_hwCapabilityBits) >> 3 & 1) == 0) {
-LAB_00042bf0:
+mappingNotNeeded:
     needsMapping = false;
-    goto LAB_00042bf4;
+    goto checkMapping;
   }
   needsMapping = true;
-LAB_00042bf4:
+checkMapping:
   if (((M<unsigned int>(accel + kIOATIR500Accelerator_hwCapabilityBits) & 0x20000) != 0) && (!needsMapping)) {
     return 0;
   }

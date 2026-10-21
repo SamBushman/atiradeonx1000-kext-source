@@ -103,11 +103,11 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
   }
   if ((M<unsigned int>(self + kIOATIR500Surface_lockFlags) & 0xffff0000) != 0) {
     result = 0xe00002cc;
-    goto LAB_000157b4;
+    goto storeShapeFlags;
   }
   if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x20) == 0) {
     result = 0xe00002bc;
-    goto LAB_000157b4;
+    goto storeShapeFlags;
   }
   M<unsigned int>(self + kIOATIR500Surface_shapeBits) = shapeBits;
   if ((self[0xbec] == 0x0) || ((shapeBits & 4) == 0)) {
@@ -132,7 +132,7 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
     newRegion = GH_IOMallocAligned(regionSize,0x20);
     if (newRegion == 0) {
       result = 0xe00002be;
-      goto LAB_000157b4;
+      goto storeShapeFlags;
     }
     acceleratorBytes = M<int>(self + kIOATIR500Surface_accelerator);
     if (acceleratorBytes != 0) {
@@ -210,7 +210,7 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
   shapeOk = VCALL(M<int>(self), 0x5b0)
                      (self,(int)M<SInt16>(self + kIOATIR500Surface_width),(int)M<SInt16>(self + kIOATIR500Surface_height));
   if (shapeOk == 0) {
-LAB_00015720:
+shapeFailed:
     result = 0xe00002be;
     M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) | 0x20000000;
   }
@@ -223,7 +223,7 @@ LAB_00015720:
       vramAllocOk = VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x540)
                          (M<int *>(self + kIOATIR500Surface_accelerator),vramElement,
                           M<UInt32>(M<int>(self + kIOATIR500Surface_attachmentBuffers) + 0x10),0x1000);
-      if (vramAllocOk == 0) goto LAB_00015720;
+      if (vramAllocOk == 0) goto shapeFailed;
       M<unsigned int>(self + kIOATIR500Surface_stateBits) = M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0xdfffffff;
       VCALL(*M<int *>(self + kIOATIR500Surface_accelerator), 0x544)(M<int *>(self + kIOATIR500Surface_accelerator),vramElement);
     }
@@ -250,7 +250,7 @@ LAB_00015720:
       M<int>(M<int>(surfaceBuffer + 0x24) + 0x54) = stampValue;
     }
   }
-LAB_000157b4:
+storeShapeFlags:
   self[0xbef] = ((UInt8)(shapeBits >> 3) & 1);
   if ((M<SInt16>(self + kIOATIR500Surface_scalingFlags) != 0) || (scalingFlag = 0x0, (shapeBits & 0x10) != 0)) {
     scalingFlag = 0x1;

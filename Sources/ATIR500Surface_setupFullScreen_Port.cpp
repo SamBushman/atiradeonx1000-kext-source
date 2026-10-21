@@ -50,27 +50,27 @@ void ATIR500Surface::setupFullScreen() {
     self[M<int>(self + kIOATIR500Surface_panel) + 0xdb6] = 0x1;
   }
   accel = M<int>(self + kIOATIR500Surface_accelerator);
-  if (M<char>(accel + 0x9b0) == '\0') goto LAB_0003d310;
+  if (M<char>(accel + 0x9b0) == '\0') goto finishSetup;
   id = M<int>(self + kIOATIR500Surface_panel);
   if (M<int>(id * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
     if ((M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) ||
        (otherPanel = (unsigned int)(id == 0), M<int>(otherPanel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0))
-    goto LAB_0003d310;
+    goto finishSetup;
   }
   else {
     M<UInt8>(id * 0x78 + accel + 0x9f4) = fullScreenValue;
     accel = M<int>(self + kIOATIR500Surface_accelerator);
-    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto LAB_0003d310;
+    if (M<int>(accel + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) goto finishSetup;
     otherPanel = (unsigned int)(M<int>(self + kIOATIR500Surface_panel) == 0);
     if (M<int>(otherPanel * 0x18 + accel + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
       M<UInt8>(otherPanel * 0x78 + accel + 0x164) = fullScreenValue;
-      goto LAB_0003d310;
+      goto finishSetup;
     }
   }
   otherRecord = otherPanel * 0x78 + accel;
   M<UInt8>(otherRecord + 0x9f4) = fullScreenValue;
   M<UInt8>(otherRecord + 0x164) = fullScreenValue;
-LAB_0003d310:
+finishSetup:
   vtable5dcResult = VCALL(M<int>(self), 0x5dc)(self);
   if (vtable5dcResult == 0) {
     accel = M<int>(self + kIOATIR500Surface_accelerator);

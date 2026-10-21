@@ -63,29 +63,29 @@ IOReturn IOATIR500Accelerator::setup_stereo(UInt32 panel, UInt32 stereoMode) {
                              (ATIR500SurfaceBuffer *)((UInt8 *)(self + panel * 0x78 + 0x1a4))), result == 0))
       {
         result = -0x1ffffd43;
-        goto LAB_0000561c;
+        goto updateSurfaces;
       }
     }
     M<UInt32>(self + panelOffset + 0x114) = 2;
   }
   if (((stereoMode ^ M<UInt32>(self + panelOffset + 0x11c)) & 2) == 0) {
     result = 0;
-LAB_000055e0:
-    if ((stereoMode & 1) == 0) goto LAB_000055e8;
+checkStereoBit:
+    if ((stereoMode & 1) == 0) goto freeStereoBuffer;
   }
   else {
     VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
     result = VCALL(M<SInt32>(self), 0x5cc)(self,panel,stereoMode);
-    if (result == 0) goto LAB_000055e0;
+    if (result == 0) goto checkStereoBit;
     stereoMode = 0;
-LAB_000055e8:
+freeStereoBuffer:
     if (M<SInt32>(self + panel * 0x78 + 0x1ac) != 0) {
       ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + panel * 0x78 + 0x1a4)));
     }
     M<UInt32>(self + panelOffset + 0x114) = 1;
   }
   M<UInt32>(self + panelOffset + 0x11c) = stereoMode;
-LAB_0000561c:
+updateSurfaces:
   if ((oldBufferCount != M<SInt32>(self + panelOffset + 0x114)) &&
      (surface = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead), surface != (UInt8 *)0x0)) {
     do {

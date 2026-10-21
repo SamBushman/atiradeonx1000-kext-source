@@ -129,10 +129,10 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
   if (numPipes != 4) {
     tileAlignment = numPipes << 4;
     alignedPitch = 0;
-    if (tileAlignment == 0) goto LAB_0003d700;
+    if (tileAlignment == 0) goto writePitchPacket;
   }
   alignedPitch = tileAlignment * ((SInt32)(minPitchFloor + tileAlignment + -1) / tileAlignment);
-LAB_0003d700:
+writePitchPacket:
   dest[0x1a] = 0x13cd;
   dest[0x1b] = alignedPitch;
   hzBlockOffset = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(accelerator + kIOATIR500Accelerator_hzmem)),M<UInt32>(bufferBytes + 0x28),0);

@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-20 09:46:52.101448233 -0700
-+++ b/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-20 09:46:52.102869569 -0700
+--- a/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-20 20:56:38.887780882 -0700
++++ b/Sources/ATIR500Surface_submit_swap_buffer_Port_3b310.cpp	2026-10-20 20:56:38.888689529 -0700
 @@ -32,34 +32,53 @@
      /* Ghidra numbers the real arguments by register slot: panel = panel (r4), doSwap = doSwap (r5), context = contextAddress (r6) */
      UInt32 contextAddress = reinterpret_cast<UInt32>(context);
@@ -114,7 +114,7 @@
 +       batchHeaderAddr == 0)) {
        return;
      }
-     goto LAB_0003b900;
+     goto submitSlot;
    }
 -  bVar28 = (doSwap == 1) << 1;
 +  swapFirstOnly = (doSwap == 1) << 1;
@@ -242,20 +242,20 @@
 +        wordIndex = 10;
        }
        else {
- LAB_0003b5e0:
+ checkDualMode:
 -        iVar8 = 6;
--        if (iVar2 != 0) goto LAB_0003b5ec;
+-        if (iVar2 != 0) goto writePanel1SwapRegs;
 +        wordIndex = 6;
-+        if (dualMode != 0) goto LAB_0003b5ec;
++        if (dualMode != 0) goto writePanel1SwapRegs;
        }
      }
      else {
        if (panel != 1) {
 -        iVar2 = M<int>(iVar12 + 0x894);
 +        dualMode = M<int>(accelAddr + 0x894);
-         goto LAB_0003b5e0;
+         goto checkDualMode;
        }
- LAB_0003b5ec:
+ writePanel1SwapRegs:
 -      iVar8 = 10;
 -      M<UInt32>(iVar6 + 0x38) = 0x1b4e;
 -      M<unsigned int>(iVar6 + 0x3c) = (uVar9 & ~M<unsigned int>(iVar12 + 0x89c)) << 0x10 | 0x80000000;
@@ -383,13 +383,13 @@
    }
 -  if ((accelerator[0x9b0] == 0x0) || (!bVar1)) {
 +  if ((accelerator[0x9b0] == 0x0) || (!swdsActive)) {
- LAB_0003b870:
+ noSwdsBlit:
 -    uVar11 = 0;
 +    swdsFlag = 0;
    }
    else if (M<int>(accelerator + panel * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
      if ((M<int>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) ||
-        (M<int>(accelerator + (unsigned int)(panel == 0) * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0)) goto LAB_0003b870;
+        (M<int>(accelerator + (unsigned int)(panel == 0) * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0)) goto noSwdsBlit;
 -    uVar9 = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), uVar9, true, (unsigned int)(panel == 0));
 -    uVar11 = 1;
 +    cmdWords = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), cmdWords, true, (unsigned int)(panel == 0));
@@ -419,7 +419,7 @@
 +  M<unsigned int>((int)Vol(slot->header) + 0x14) = paddedWords;
 +  M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) =
 +       M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 0xfffffffe;
- LAB_0003b900:
+ submitSlot:
 -  iVar17 = M<int>(pVVar27 + 0x14);
 -  if (M<int>(iVar17 + 0x14) != 0) {
 -    if (M<int>(pVVar27 + 4) == 0) {

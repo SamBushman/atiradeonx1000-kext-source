@@ -184,7 +184,7 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     packet[0xc1] = FBITS((invHeightF * yTopF));
     packet[199] = FBITS(((yTopF + yBottomF) * lit380));
     packet[0xc3] = (SInt32)((xRightF - xLeftF) * lit37c) << 0x10 | (SInt32)((yBottomF - yTopF) * lit37c);
-    goto LAB_0004481c;
+    goto finishResolve;
   }
   pitchPerDegree = 0;
   packet[0xa9] = 0xc0001000;
@@ -255,13 +255,13 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
   }
   tileAlignment = 0x20;
   if (M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) == 4) {
-LAB_00044100:
+roundTilePitch:
     alignedPitch = tileAlignment * ((SInt32)(tileAlignment + minPitch + -1) / tileAlignment);
   }
   else {
     tileAlignment = M<SInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0xb98) << 4;
     alignedPitch = 0;
-    if (tileAlignment != 0) goto LAB_00044100;
+    if (tileAlignment != 0) goto roundTilePitch;
   }
   packet[0xc0] = alignedPitch;
   packet[0xbe] = hzBlockOffset;
@@ -324,7 +324,7 @@ LAB_00044100:
     }
     M<UInt8>(fixedBuffer + 0x36) = 1;
   }
-LAB_0004481c:
+finishResolve:
   M<UInt32>(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x78) = 0;
   return outCursor;
 }

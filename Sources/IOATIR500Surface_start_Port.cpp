@@ -33,8 +33,8 @@ static inline void ClearSwapBufferEntry(SwapBufferEntry *e) {
     e->unknown_0x00 = 0;
     e->gartOffset = 0;
     e->memory = 0;
-    e->unknown_0x0e = 0;
-    e->unknown_0x0c = 2;
+    e->lockCount = 0;
+    e->usageKind = 2;
     e->stamp = 0;
     e->header = 0;
     e->rectWordIndex = 0;
@@ -173,12 +173,12 @@ bool IOATIR500Surface::start(IOService *provider) {
   M<UInt32>(self + kIOATIR500Surface_stateBits) = 0x307fffff;
   M<UInt32>(self + kIOATIR500Surface_panel) = 0xffff;
   if (M<SInt32>(accelerator + kIOATIR500Accelerator_displayCount) == 0) {
-LAB_00011d4c:
+getVramDescriptors:
     haveVram = ((IOATIR500Accelerator *)(accelerator))->getVRAMDescriptors();
     if (haveVram != 0) {
       accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       success = true;
-      goto LAB_00011d6c;
+      goto registerSurface;
     }
     accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
   }
@@ -189,7 +189,7 @@ LAB_00011d4c:
       regionMemory = GH_IOMallocAligned(0xc,0x20);
       M<SInt32>(regionSlot + 0xd60) = regionMemory;
       if (regionMemory == 0) {
-LAB_00011d38:
+failCleanup:
         accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
         break;
       }
@@ -204,15 +204,15 @@ LAB_00011d38:
       M<UInt16>(M<SInt32>(regionSlot + 0xd60) + 8) = 0;
       M<UInt16>(M<SInt32>(regionSlot + 0xd60) + 10) = 0;
       swapBufferOk = this->allocMasterSwapBuffer(panelIndex,0x9000);
-      if (swapBufferOk == 0) goto LAB_00011d38;
+      if (swapBufferOk == 0) goto failCleanup;
       accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
       panelIndex = panelIndex + 1;
       regionSlot = regionSlot + 8;
     } while (panelIndex < M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount));
-    if (M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount) == panelIndex) goto LAB_00011d4c;
+    if (M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount) == panelIndex) goto getVramDescriptors;
   }
   success = false;
-LAB_00011d6c:
+registerSurface:
   M<UInt8 **>(self + kIOATIR500Surface_methodTable) = (UInt8 **)kSurfaceMethods; /* IOATIR500Surface::start(IOService*)::methodDescs */
   firstSurface = M<SInt32>(accelerator + kIOATIR500Accelerator_liveSurfaceListHead);
   if (firstSurface == 0) {

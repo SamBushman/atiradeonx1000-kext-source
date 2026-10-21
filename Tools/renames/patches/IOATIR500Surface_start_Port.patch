@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_start_Port.cpp	2026-10-20 10:32:16.918617348 -0700
-+++ b/Sources/IOATIR500Surface_start_Port.cpp	2026-10-20 10:32:16.919969421 -0700
+--- a/Sources/IOATIR500Surface_start_Port.cpp	2026-10-20 21:14:17.195812341 -0700
++++ b/Sources/IOATIR500Surface_start_Port.cpp	2026-10-20 21:14:17.197156343 -0700
 @@ -28,21 +28,33 @@
  extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
  extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
@@ -9,8 +9,8 @@
 +    e->unknown_0x00 = 0;
 +    e->gartOffset = 0;
 +    e->memory = 0;
-+    e->unknown_0x0e = 0;
-+    e->unknown_0x0c = 2;
++    e->lockCount = 0;
++    e->usageKind = 2;
 +    e->stamp = 0;
 +    e->header = 0;
 +    e->rectWordIndex = 0;
@@ -106,11 +106,11 @@
        regionMemory = GH_IOMallocAligned(0xc,0x20);
        M<SInt32>(regionSlot + 0xd60) = regionMemory;
 @@ -221,7 +207,7 @@
-       if (swapBufferOk == 0) goto LAB_00011d38;
+       if (swapBufferOk == 0) goto failCleanup;
        accelerator = M<UInt8 *>(self + kIOATIR500Surface_accelerator);
        panelIndex = panelIndex + 1;
 -      pIVar2 = pIVar2 + 8;
 +      regionSlot = regionSlot + 8;
      } while (panelIndex < M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount));
-     if (M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount) == panelIndex) goto LAB_00011d4c;
+     if (M<UInt32>(accelerator + kIOATIR500Accelerator_displayCount) == panelIndex) goto getVramDescriptors;
    }

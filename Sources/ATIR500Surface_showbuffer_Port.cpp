@@ -27,7 +27,7 @@
 
 
 /* real addr 0x3a6d0 */
-void ATIR500Surface::showbuffer(int bufferIndex, int param_2) {
+void ATIR500Surface::showbuffer(int bufferIndex, int ignored) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   return;

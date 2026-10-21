@@ -42,21 +42,21 @@ IOReturn IOATIR500Accelerator::display_change_handler(OSObject *owner, void *ref
   ((IOATIR500Accelerator *)ownerBytes)->getVRAMDescriptor((UInt32)ref);   /* stub 0x534 -> local 0x290; r3/r4 are the untouched arguments */
   switch(event) {
   default:
-    goto LAB_00000500;
+    goto failUnsupported;
   case 1:
-    goto switchD_000003b0_caseD_1;
+    goto beginModeChange;
   case 3:
     if (info != (void *)0x0) {
       VCALL(M<int>(ownerBytes), 0x5bc)(ownerBytes);
       return 0;
     }
-switchD_000003b0_caseD_1:
+beginModeChange:
     prevOutstanding = GH_OSIncrementAtomic(ownerBytes + 200);
     if (prevOutstanding == 0) {
       modeChangeStatus = VCALL(M<int>(ownerBytes), 0x5b4)(ownerBytes,event);
-joined_r0x000004a0:
+checkModeChangeStatus:
       if (modeChangeStatus == 0) {
-LAB_00000500:
+failUnsupported:
         return 0xe00002bc;
       }
     }
@@ -72,7 +72,7 @@ LAB_00000500:
       return 0;
     }
     modeChangeStatus = VCALL(M<int>(ownerBytes), 0x5b8)(ownerBytes);
-    goto joined_r0x000004a0;
+    goto checkModeChangeStatus;
   case 9:
     VCALL(M<int>(ownerBytes), 0x5c4)(ownerBytes);
     return 0;

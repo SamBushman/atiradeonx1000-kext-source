@@ -70,7 +70,7 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
       do {
         do {
           while( true ) {
-            if (self + kIOATIR500Accelerator_textureVramListSentinel == texture) goto LAB_00004794;
+            if (self + kIOATIR500Accelerator_textureVramListSentinel == texture) goto afterTextureScan;
             if (excludeCount < 1) break;
             if (texture != (UInt8 *)*excludeList) {
               excludeIndex = 0;
@@ -78,14 +78,14 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
               do {
                 excludeIndex = excludeIndex + 1;
                 excludeLeft = excludeLeft + -1;
-                if (excludeLeft == 0) goto LAB_00004654;
+                if (excludeLeft == 0) goto examineTexture;
               } while (texture != (UInt8 *)excludeList[excludeIndex]);
             }
-LAB_000046a0:
+nextTexture:
             texture = M<UInt8 *>(texture + 0x28);
           }
         } while (excludeCount != 0);
-LAB_00004654:
+examineTexture:
         if ((secondPass) || (faceCursor = M<int>(texture + 0x14), faceCursor == 0)) break;
         faceCount = (unsigned int)M<UInt8>(faceCursor + 0x34);
         faceIndex = 0;
@@ -99,15 +99,15 @@ LAB_00004654:
             do {
               faceIndex = faceIndex + 1;
               facesLeft = facesLeft - 1;
-              if (facesLeft == 0) goto LAB_000046b8;
+              if (facesLeft == 0) goto facesDone;
               faceFieldAPtr = (UInt16 *)(faceCursor + 0x1e);
               faceFieldBPtr = (UInt16 *)(faceCursor + 0x2a);
               faceCursor = faceCursor + 2;
             } while ((*faceFieldBPtr & ~*faceFieldAPtr) == 0);
           }
-          goto LAB_000046a0;
+          goto nextTexture;
         }
-LAB_000046b8: ;
+facesDone: ;
       } while (faceIndex != faceCount);
       if (M<int>(texture + 0x48) != 0) {
         VCALL(M<int>(self), 0x524)(self,texture);
@@ -126,7 +126,7 @@ LAB_000046b8: ;
       M<int>(nextNode + 0x24) = prevNode;
       M<UInt8 *>(texture + 0x24) = texture;
     }
-LAB_00004794:
+afterTextureScan:
     if (M<int>(neededBytes + 8) != 0) {
       return 1;
     }
@@ -148,11 +148,11 @@ LAB_00004794:
               excludeCursor = excludeCursor + 1;
               if (((excludedTexture != (UInt8 *)0x0) &&
                   (excludedTexture[0x20] == 0x0)) &&
-                 (surface == M<UInt8 *>(excludedTexture + 0x50))) goto LAB_0000492c;
+                 (surface == M<UInt8 *>(excludedTexture + 0x50))) goto nextSurface;
               excludeLeft = excludeLeft + -1;
             } while (excludeLeft != 0);
           }
-          else if (!(bool)(excludeFlags >> 1 & 1)) goto LAB_0000492c;
+          else if (!(bool)(excludeFlags >> 1 & 1)) goto nextSurface;
           bufferIndex = 0;
           surfaceBuffer = (UInt8 *)(surface + 0xa8);
           do {
@@ -182,7 +182,7 @@ LAB_00004794:
           } while (secondPass);
           surfaceListHead = M<UInt8 *>(self + kIOATIR500Accelerator_liveSurfaceListHead);
         }
-LAB_0000492c: ;
+nextSurface: ;
       } while (surface != surfaceListHead);
     }
     secondPass = true;

@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp	2026-10-20 16:47:30.645587435 -0700
-+++ b/Sources/IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp	2026-10-20 16:47:30.646791916 -0700
+--- a/Sources/IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp	2026-10-20 20:57:17.735905974 -0700
++++ b/Sources/IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp	2026-10-20 20:57:17.736829380 -0700
 @@ -75,7 +75,7 @@
        } while (newCount != bufferIndex);
      }

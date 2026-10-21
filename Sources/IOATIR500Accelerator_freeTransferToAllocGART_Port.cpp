@@ -39,13 +39,13 @@ bool IOATIR500Accelerator::freeTransferToAllocGART(VendorTransferBuffer *candida
   SInt32 waitTime;
   
   if ((M<SInt32>(candidateBytes + 4) == 0) || (M<SInt16>(candidateBytes + 0xe) != 0)) {
-LAB_00003650:
+notFreed:
     result = 0;
   }
   else {
     if (((UInt32)aggressive) == 0) {
       stampReached = VCALL(M<SInt32>(self), 0x554)(self,stamp);
-      if (stampReached == 0) goto LAB_00003650;
+      if (stampReached == 0) goto notFreed;
     }
     else {
       /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3580) shows stamp

@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 16:29:01.066384773 -0700
-+++ b/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 16:29:01.067807006 -0700
+--- a/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 20:35:22.543110044 -0700
++++ b/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 20:35:22.543914422 -0700
 @@ -35,37 +35,50 @@
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
      UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
@@ -123,38 +123,38 @@
 -      bVar7 = (M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x7c0000) == 0;
 +    if (!hzClear) {
 +      condOk = (M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x7c0000) == 0;
- joined_r0x00042bb8:
+ checkCopyAllowed:
 -      if (!bVar7) {
 +      if (!condOk) {
          return 0;
        }
      }
- LAB_00042bcc:
+ useBackingStore:
 -    bVar16 = 1;
 +    backingFlag = 1;
    }
    else if (direction != 1) {
 -    bVar7 = bVar1;
 +    condOk = hzClear;
-     if (M<char>(M<int>(bufferBytes + 0x24) + 0x58) != '\0') goto joined_r0x00042bb8;
-     goto LAB_00042bcc;
+     if (M<char>(M<int>(bufferBytes + 0x24) + 0x58) != '\0') goto checkCopyAllowed;
+     goto useBackingStore;
    }
 -  bVar7 = direction != 1;
 -  if (bVar7) {
 +  isWrite = direction != 1;
 +  if (isWrite) {
-     if (direction != 2) goto LAB_00042bf0;
+     if (direction != 2) goto mappingNotNeeded;
    }
 -  else if ((M<unsigned int>(iVar14 + 0x98) >> 3 & 1) == 0) {
 +  else if ((M<unsigned int>(accel + kIOATIR500Accelerator_hwCapabilityBits) >> 3 & 1) == 0) {
- LAB_00042bf0:
+ mappingNotNeeded:
 -    bVar3 = false;
 +    needsMapping = false;
-     goto LAB_00042bf4;
+     goto checkMapping;
    }
 -  bVar3 = true;
 +  needsMapping = true;
- LAB_00042bf4:
+ checkMapping:
 -  if (((M<unsigned int>(iVar14 + 0x98) & 0x20000) != 0) && (!bVar3)) {
 +  if (((M<unsigned int>(accel + kIOATIR500Accelerator_hwCapabilityBits) & 0x20000) != 0) && (!needsMapping)) {
      return 0;

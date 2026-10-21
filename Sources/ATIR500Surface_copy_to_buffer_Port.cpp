@@ -65,8 +65,8 @@ void ATIR500Surface::copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt
   noBackingMap = flagsClear << 1;
   if (flagsClear) {
     if ((backing == (UInt8 *)0x0) ||
-       (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto LAB_00043444;
-LAB_00043494:
+       (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto copyViaDMA;
+mapTransferBuffer:
     transferMap = M<int *>(transferBytes + 8);
   }
   else {
@@ -85,13 +85,13 @@ LAB_00043494:
       levelOffset = VCALL(M<int>(self), 0x5f0)(self,bufferBytes,index,level,0,0,&pitch);
       offset = offset + levelOffset;
     }
-LAB_00043444:
+copyViaDMA:
     dmaResult = this->copy_buffer_using_DMA(x,y,w,h,index,level,(ATIR500SurfaceBuffer *)(bufferBytes),(VendorTransferBuffer *)(transferBytes),offset
                        ,pitch,(IODirection)2,dmaFlags);
     if (dmaResult != 0) {
       return;
     }
-    if ((bool)(noBackingMap >> 1 & 1)) goto LAB_00043494;
+    if ((bool)(noBackingMap >> 1 & 1)) goto mapTransferBuffer;
     transferMap = M<int *>(backing + 8);
   }
   transferMap = (int *)VCALL(*transferMap, 0x150)
@@ -111,7 +111,7 @@ LAB_00043444:
                                (M<int *>(backing + 8),M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1
                                );
     noBackingMap = (backingMap == (int *)0x0) << 1;
-    if (backingMap == (int *)0x0) goto LAB_000436cc;
+    if (backingMap == (int *)0x0) goto unmapAndRelease;
     surfaceBase = VCALL(*backingMap, 0xd0)(backingMap);
     kernelMapped = false;
     surfaceBase = surfaceBase + (unsigned int)M<UInt16>(backing + 0x50);
@@ -133,14 +133,14 @@ LAB_00043444:
       w = w + 0xf >> 4;
     }
     else {
-LAB_000435cc:
+blockWidth4:
       w = w + 3 >> 2;
     }
   }
   else if (bytesPerPixel == 8) {
     w = w + 1 >> 1;
   }
-  else if (bytesPerPixel != 0x10) goto LAB_000435cc;
+  else if (bytesPerPixel != 0x10) goto blockWidth4;
   kernelPathBits = !kernelMapped << 1;
   if (kernelMapped) {
     VCALL(M<int>(self), 0x5fc)(self,bufferBytes);
@@ -170,7 +170,7 @@ LAB_000435cc:
   if (!(bool)(kernelPathBits >> 1 & 1)) {
     VCALL(M<int>(self), 0x600)(self,bufferBytes);
   }
-LAB_000436cc:
+unmapAndRelease:
   VCALL(*transferMap, 0x18)(transferMap);
   if (!(bool)(noBackingMap >> 1 & 1)) {
     VCALL(*backingMap, 0x18)(backingMap);

@@ -89,10 +89,10 @@ field	IOATIR500Surface,ATIR500Surface	0xd5c	methodTable	CONFIRMED	Headers/IOATIR
 field	IOATIR500Surface,ATIR500Surface	0xd60	regionRecords	CONFIRMED	array of {region record pointer, size} per id (id * 8 + 0xd60); the record holds the id's width/height at +8/+10 (set_scaling, start)
 field	IOATIR500Surface,ATIR500Surface	0xd64	regionRecordSize0	INFERRED	size word of regionRecords[0]; getFramebufferIndex tests it
 field	IOATIR500Surface,ATIR500Surface	0xd70	lockDataFlags	INFERRED	returned in IOAccelSurfaceData word 8 by surface_lock_options; bit 2 forces a reshape in set_shape_backing_length_ext; start() clears it
-field	IOATIR500Surface,ATIR500Surface	0xd74	unknown_0xd74	UNKNOWN	copied to IOAccelSurfaceData word 0xd by surface_lock_options; meaning not established
-field	IOATIR500Surface,ATIR500Surface	0xd78	unknown_0xd78	UNKNOWN	copied to IOAccelSurfaceData word 0xe
-field	IOATIR500Surface,ATIR500Surface	0xd7c	unknown_0xd7c	UNKNOWN	copied to IOAccelSurfaceData word 0xf
-field	IOATIR500Surface,ATIR500Surface	0xd80	unknown_0xd80	UNKNOWN	read by surface_lock_options after the lock; meaning not established
+field	IOATIR500Surface,ATIR500Surface	0xd74	lockDataWord13	UNKNOWN	copied verbatim to IOAccelSurfaceData word 0xd by surface_lock_options (lock output tail); what it holds is not established
+field	IOATIR500Surface,ATIR500Surface	0xd78	lockDataWord14	UNKNOWN	copied verbatim to IOAccelSurfaceData word 0xe by surface_lock_options
+field	IOATIR500Surface,ATIR500Surface	0xd7c	lockDataWord15	UNKNOWN	copied verbatim to IOAccelSurfaceData word 0xf by surface_lock_options
+field	IOATIR500Surface,ATIR500Surface	0xd80	lockDataWord16	UNKNOWN	copied (through a local) to IOAccelSurfaceData word 0x10 by surface_lock_options
 field	IOATIR500Surface,ATIR500Surface	0xd84	userMap	CONFIRMED	reset_access: IOMemoryMap* of accessDescriptor in the user task (vtable +0x14c); released through vtable +0x18
 field	IOATIR500Surface,ATIR500Surface	0xd88	kernelMap	CONFIRMED	reset_access: IOMemoryMap* in the kernel task (vtable +0x150)
 field	IOATIR500Surface,ATIR500Surface	0xd8c	orphanedBacking	INFERRED	free_buffer_backing_store parks a backing store that is still referenced here; free_buffer_backing_orphans frees it

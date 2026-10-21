@@ -43,7 +43,7 @@ bool ATIR500Memory::init_pool(UInt32 poolSize, UInt32 reservedOffset, UInt32 res
   
   initOk = VCALL(M<SInt32>(self), 0x48)(self);
   if (initOk == 0) {
-LAB_000190f0:
+initFailed:
     result = 0;
   }
   else {
@@ -57,7 +57,7 @@ LAB_000190f0:
         *newChunk = 0;
       }
       chunk = M<SInt32>(self + kATIR500Memory_chunkList);
-      if (chunk == 0) goto LAB_000190f0;
+      if (chunk == 0) goto initFailed;
     }
     poolNode = (SInt32 *)(chunk + 0x24);
     M<SInt32>(self + 8) = chunk + 4;

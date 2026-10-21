@@ -49,7 +49,7 @@ UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 keepMask, bool
   this->invalidate_contexts();
   pending = mask & M<unsigned int>(self + kIOATIR500Surface_stateBits);
   if (pending == 0) {
-LAB_000122dc:
+everythingResident:
     result = 0;
   }
   else {
@@ -64,7 +64,7 @@ LAB_000122dc:
       }
       index = index + 1;
       if ((pending >> (index & 0x3f) == 0) || (index == 0x17)) {
-        if (allAllocated != 0) goto LAB_000122dc;
+        if (allAllocated != 0) goto everythingResident;
         break;
       }
     } while (allAllocated != 0);
@@ -96,7 +96,7 @@ LAB_000122dc:
     } while (notLast);
     if (movedAny) {
       pending = mask & M<unsigned int>(self + kIOATIR500Surface_stateBits);
-      if (pending == 0) goto LAB_000122dc;
+      if (pending == 0) goto everythingResident;
       index = 0;
       allAllocated = 1;
       do {
@@ -108,7 +108,7 @@ LAB_000122dc:
         }
         index = index + 1;
         if ((pending >> (index & 0x3f) == 0) || (index == 0x17)) {
-          if (allAllocated != 0) goto LAB_000122dc;
+          if (allAllocated != 0) goto everythingResident;
           break;
         }
       } while (allAllocated != 0);

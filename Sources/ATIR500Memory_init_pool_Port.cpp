@@ -41,7 +41,7 @@ bool ATIR500Memory::init_pool(UInt32 poolSize) {
   
   initOk = VCALL(M<SInt32>(self), 0x48)(self);
   if (initOk == 0) {
-LAB_00018f2c:
+initFailed:
     result = 0;
   }
   else {
@@ -55,7 +55,7 @@ LAB_00018f2c:
         *newChunk = 0;
       }
       chunk = M<SInt32>(self + kATIR500Memory_chunkList);
-      if (chunk == 0) goto LAB_00018f2c;
+      if (chunk == 0) goto initFailed;
     }
     spareNode = (UInt32 *)(chunk + 0x44);
     M<SInt32>(self + 8) = chunk + 4;

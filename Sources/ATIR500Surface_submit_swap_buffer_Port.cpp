@@ -79,7 +79,7 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
        allocResult == 0)) {
       return;
     }
-    goto LAB_0003be90;
+    goto submitSlot;
   }
   nextSlot = Vol(rec->slotIndex) + 1 & 3;
   Vol(rec->slotIndex) = (UInt16)nextSlot;
@@ -138,17 +138,17 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
         wordIndex = 10;
       }
       else {
-LAB_0003bcbc:
+checkDualMode:
         wordIndex = 6;
-        if (dualMode != 0) goto LAB_0003bcc8;
+        if (dualMode != 0) goto writePanel1SwapRegs;
       }
     }
     else {
       if (panel != 1) {
         dualMode = M<int>(accelAddr + 0x894);
-        goto LAB_0003bcbc;
+        goto checkDualMode;
       }
-LAB_0003bcc8:
+writePanel1SwapRegs:
       wordIndex = 10;
       M<UInt32>(slotHeaderAddr + 0x38) = 0x1b4e;
       M<unsigned int>(slotHeaderAddr + 0x3c) = (swapValue & ~M<unsigned int>(accelAddr + 0x89c)) << 0x10 | 0x80000000;
@@ -199,7 +199,7 @@ LAB_0003bcc8:
   M<unsigned int>((int)Vol(slot->header) + 0x14) = paddedWords;
   M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) =
        M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 0xfffffffe;
-LAB_0003be90:
+submitSlot:
   if (M<int>(slotBytes + 4) == 0) {
     ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(slotBytes));
   }
