@@ -44,39 +44,39 @@ IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
   type = textureBytes[0x20];
   if ((type == 0x3) || (type == 0x7)) {
     size = M<UInt32>(textureBytes + 0x50);
-LAB_0001a84c:
+allocateInVram:
     cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
     if (cpuVisibleSize == M<UInt32>(self + kIOATIR500Accelerator_vramSize)) {
-LAB_0001a8f0:
+allocateFromPool:
       if (M<int>(self + kIOATIR500Accelerator_displayConfigBits) == 0) {
         allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),
                            size,0x1000,0x10000,cpuVisibleSize - 0x10000);
       }
       else {
         memory = M<UInt8 *>(self + kIOATIR500Accelerator_vramPool);
-LAB_0001a980:
+poolAlloc:
         allocResult = ((ATIR500Memory *)(memory))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size,0x1000,0,cpuVisibleSize);
       }
-      if (allocResult == 0) goto LAB_0001a994;
+      if (allocResult == 0) goto allocFailed;
     }
     else {
       mapping = (int *)VCALL(*M<int *>(textureBytes + 8), 0x14c)
                                 (M<int *>(textureBytes + 8),GH_kernel_task,0,1,0,0);
       if (mapping == (int *)0x0) {
         cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
-        goto LAB_0001a8f0;
+        goto allocateFromPool;
       }
       hwInfo = VCALL(*mapping, 0xd0)(mapping);
       flags = M<unsigned int>(hwInfo + 0x20);
       VCALL(*mapping, 0x18)(mapping);
       cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
-      if (((flags ^ 0x40000000) >> 0x1e & 1) != 0) goto LAB_0001a8f0;
+      if (((flags ^ 0x40000000) >> 0x1e & 1) != 0) goto allocateFromPool;
       allocResult = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
                          ,0x1000,cpuVisibleSize,M<int>(self + kIOATIR500Accelerator_vramSize) - cpuVisibleSize);
       if (allocResult == 0) {
         cpuVisibleSize = M<UInt32>(self + kIOATIR500Accelerator_usableVramSize);
         memory = M<UInt8 *>(self + kIOATIR500Accelerator_vramPool);
-        goto LAB_0001a980;
+        goto poolAlloc;
       }
     }
     result = 1;
@@ -84,9 +84,9 @@ LAB_0001a980:
   else {
     if (type != 0x8) {
       size = 0;
-      goto LAB_0001a84c;
+      goto allocateInVram;
     }
-LAB_0001a994:
+allocFailed:
     result = 0;
   }
   return result;

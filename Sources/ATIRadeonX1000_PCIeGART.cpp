@@ -455,7 +455,7 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *descriptor, UInt32 *o
       if (pageCount == 0) {
         pageIndex = 0;
         pageCount = 0;
-LAB_0001de4c:
+prepareDescriptor:
         prepareResult = VCALL(M<UInt32>(descriptorBytes), 0x144)(descriptorBytes,3);
         if (prepareResult == 0) {
           segmentOffset = 0;
@@ -518,7 +518,7 @@ LAB_0001de4c:
         pageIndex = pageIndex + 1;
         if (freeRun == pageCount) {
           pageIndex = pageIndex - pageCount;
-          goto LAB_0001de4c;
+          goto prepareDescriptor;
         }
         entryScan = entryScan + 4;
         gartEntries = gartEntries - 1;

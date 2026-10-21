@@ -84,7 +84,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
     rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_idctPointerOffset);
     while (((loadWordByteReversedIndexed(rptrBase, rptrOffset) - writeIndex) - 1 & 0x7ff) < 0x20) {
       spinCount = spinCount + 1;
-      if (spinCount == 0xf4241) goto LAB_0001ef58;
+      if (spinCount == 0xf4241) goto dumpHangState;
       do {
         u32Dummy =
              u32Dummy +
@@ -230,7 +230,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
       M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) = stamp + 1;
       return stamp;
     }
-LAB_0001ef58:
+dumpHangState:
     this->DumpASICHangState();
   }
   return *(SInt32 *)(self + kIOATIR500Accelerator_idctSubmitBaseCounter) + -1;

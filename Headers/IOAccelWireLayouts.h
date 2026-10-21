@@ -20,7 +20,7 @@ typedef struct { short w, h; } IOAccelSize_Wire;                              /*
 
 /* IOAccelSurfaceReadData (Apple): `long x, y, w, h; void *client_addr; unsigned long client_row_bytes;` = 24 bytes.
  * Kernel evidence: IOATIR500Surface::surface_read (0x14a30) loads +0,+4,+8,+0xc (x,y,w,h), +0x10 (client address, passed to IOMemoryDescriptor::withAddress)
- * and +0x14 (row bytes, the `iVar10` multiplier). */
+ * and +0x14 (row bytes, the row-pitch multiplier). */
 typedef struct { int x, y, w, h; unsigned int client_addr; unsigned int client_row_bytes; } IOAccelSurfaceReadData_Wire;
 
 /* IOAccelSurfaceScaling (Apple): { IOAccelBounds buffer; IOAccelSize source; UInt32 reserved[8]; } = 0x2c bytes, the size set_scale requires

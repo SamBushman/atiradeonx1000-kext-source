@@ -55,7 +55,7 @@ void ATIRadeonX1000::deallocate_texture(VendorTextureBuffer *texture) {
           faceIndex = faceIndex + 1;
           facesLeft = facesLeft - 1;
           if (facesLeft == 0) {
-            if (faceCount == faceIndex) goto LAB_0001a700;
+            if (faceCount == faceIndex) goto freeHzHandles;
             break;
           }
           nextFaceMaskPtr = (UInt16 *)(infoCursor + 0x2a);
@@ -77,7 +77,7 @@ void ATIRadeonX1000::deallocate_texture(VendorTextureBuffer *texture) {
       ((IOATIR500Accelerator *)(self))->pageOffDataBuffer((VendorTextureBuffer *)(textureBytes));
     }
   }
-LAB_0001a700:
+freeHzHandles:
   hzHandle = M<UInt32>(textureBytes + 0x6c);
   if (hzHandle != 0xffffffff) {
     if ((hzHandle & 0x3ff) != 0x3ff) {

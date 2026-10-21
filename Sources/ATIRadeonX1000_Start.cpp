@@ -234,7 +234,7 @@ bool ATIRadeonX1000::start(IOService *provider) {
             M<UInt32>(self + kIOATIR500Accelerator_chipRev) = chipWord >> 24 & 0xf;
             chipID = (UInt8 *)(chipWord & 0xffff);
             M<UInt8 *>(self + kIOATIR500Accelerator_chipID) = chipID;
-            if (chipID == (UInt8 *)0x7157) goto LAB_0001fafc;
+            if (chipID == (UInt8 *)0x7157) goto chipClass2Setup;
             if (chipID < (UInt8 *)0x7158) {
               if (chipID < (UInt8 *)0x7147) {
                 if ((chipID < (UInt8 *)0x7144) && (chipID != (UInt8 *)0x7140)) {
@@ -243,23 +243,23 @@ bool ATIRadeonX1000::start(IOService *provider) {
                       chipClass = 0;
                       M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x110000;
                       this->setupR520Pipes();
-                      goto LAB_0001fc04;
+                      goto startGart;
                     }
                   }
-                  else if (chipID == (UInt8 *)0x7142) goto LAB_0001fafc;
-                  goto LAB_0001fbc8;
+                  else if (chipID == (UInt8 *)0x7142) goto chipClass2Setup;
+                  goto unknownChipClass;
                 }
               }
               else if (chipID != (UInt8 *)0x714e) {
                 if (chipID < (UInt8 *)0x714f) {
-                  if (chipID + -29000 < (UInt8 *)0x3) goto LAB_0001fafc;
+                  if (chipID + -29000 < (UInt8 *)0x3) goto chipClass2Setup;
                 }
                 else if ((chipID == (UInt8 *)0x7150) ||
                         (((UInt8 *)0x714f < chipID && (chipID + -0x7152 < (UInt8 *)0x2))))
-                goto LAB_0001fafc;
-                goto LAB_0001fbc8;
+                goto chipClass2Setup;
+                goto unknownChipClass;
               }
-LAB_0001fafc:
+chipClass2Setup:
               chipClass = 2;
               M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x410000;
               this->setupR520Pipes();
@@ -269,37 +269,37 @@ LAB_0001fafc:
                 if ((UInt8 *)0x71d2 < chipID) {
                   if (chipID < (UInt8 *)0x7250) {
                     if ((UInt8 *)0x723f < chipID) {
-LAB_0001fbec:
+chipClass3Setup:
                       chipClass = 3;
                       M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x810000;
                       this->setupR520Pipes();
-                      goto LAB_0001fc04;
+                      goto startGart;
                     }
-                    if (chipID == (UInt8 *)0x71de) goto LAB_0001fbd0;
+                    if (chipID == (UInt8 *)0x71de) goto chipClass1Setup;
                   }
                   else if ((chipID == (UInt8 *)0x7260) ||
                           (((UInt8 *)0x725f < chipID && (chipID + -0x7263 < (UInt8 *)0xd))))
-                  goto LAB_0001fbec;
-LAB_0001fbc8:
+                  goto chipClass3Setup;
+unknownChipClass:
                   chipClass = 0;
-                  goto LAB_0001fc04;
+                  goto startGart;
                 }
                 if (chipID != (UInt8 *)0x71c2) {
                   if (chipID < (UInt8 *)0x71c3) {
-                    if (chipID == (UInt8 *)0x715e) goto LAB_0001fafc;
-                    if (chipID != (UInt8 *)0x71c0) goto LAB_0001fbc8;
+                    if (chipID == (UInt8 *)0x715e) goto chipClass2Setup;
+                    if (chipID != (UInt8 *)0x71c0) goto unknownChipClass;
                   }
                   else if ((chipID < (UInt8 *)0x71c4) ||
                           (((UInt8 *)0x71c6 < chipID && (chipID != (UInt8 *)0x71ce))))
-                  goto LAB_0001fbc8;
+                  goto unknownChipClass;
                 }
               }
-LAB_0001fbd0:
+chipClass1Setup:
               chipClass = 1;
               M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) = M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) | 0x210000;
               this->setupR520Pipes();
             }
-LAB_0001fc04:
+startGart:
             self[0x990] = 0x6;
             gartStartResult = this->startupPCIeGART();
             if (gartStartResult != -1) {
@@ -332,7 +332,7 @@ LAB_0001fc04:
                                          pageNumber << (GH_page_shift & 0x3f));
                             } while (pageIndex != unmapCount);
                           }
-                          goto LAB_0001f9a0;
+                          goto startFailed;
                         }
                         break;
                       }
@@ -350,7 +350,7 @@ LAB_0001fc04:
                                         (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
                       if (scratchMapResult == 0) {
-                        if (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto LAB_0001fd88;
+                        if (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto unwindScratchPages;
                         break;
                       }
                       nextPage = pageIndex + 1;
@@ -572,19 +572,19 @@ LAB_0001fc04:
                                       }
                                     }
                                     startResult = 1;
-                                    goto LAB_0001f9c0;
+                                    goto registerSensorFunction;
                                   }
                                 }
                               }
                             }
-                            goto LAB_0001f9a0;
+                            goto startFailed;
                           }
                           VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_idctRingDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR500Accelerator_idctRingDescriptor));
                         }
                         GH_IOFreeAligned(M<UInt32>(self + kIOATIR500Accelerator_idctRingMemory),0x2000);
                         M<UInt32>(self + kIOATIR500Accelerator_idctRingMemory) = 0;
                       }
-                      goto LAB_0001f9a0;
+                      goto startFailed;
                     }
                     VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_mainRingDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR500Accelerator_mainRingDescriptor));
                   }
@@ -598,20 +598,20 @@ LAB_0001fc04:
       }
     }
   }
-LAB_0001f9a0:
+startFailed:
   startResult = 0;
   VCALL(M<SInt32>(self), 0x34c)(self,provider);
-LAB_0001f9c0:
+registerSensorFunction:
   sensorFunctionSymbol = GH_ZN8OSSymbol17withCStringNoCopyEPKc("getSensorValue");
   M<UInt32>(self + kIOATIR500Accelerator_gpuSensorFunction) = sensorFunctionSymbol;
   return startResult;
-LAB_0001fd88:
+unwindScratchPages:
   while (prevPage = pageIndex + -2, -1 < prevPage) {
     VCALL(M<SInt32>(self), 0x598)(self,pageIndex + -1 << (GH_page_shift & 0x3f));
     VCALL(M<SInt32>(self), 0x5a4)
               (self,M<UInt32>(self + kIOATIR500Accelerator_scratchBufferDescriptor),prevPage << (GH_page_shift & 0x3f));
     pageIndex = prevPage;
   }
-  goto LAB_0001f9a0;
+  goto startFailed;
 }
 

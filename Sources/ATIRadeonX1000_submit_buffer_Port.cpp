@@ -65,11 +65,11 @@ UInt32 ATIRadeonX1000::submit_buffer(UInt32*bufferStart, UInt32 gartOffset, UInt
       writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
       freeSpace = (((loadWordByteReversed((UInt8 *)(ringPointerBase + rptrOffset)) & 0xffff) - writeIndex)
                - 1 & 0x7ff) - 7;
-      if (4 < freeSpace) goto LAB_00020a3c;
+      if (4 < freeSpace) goto accountAndFlush;
     } while (waitTries != 1000);
   }
   else {
-LAB_00020a3c:
+accountAndFlush:
     M<UInt32>(self + kIOATIR500Accelerator_commandBytesPerSample) = dwordCount * 4 + M<SInt32>(self + kIOATIR500Accelerator_commandBytesPerSample);
     if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80) == 0) {
       ppcSync();
@@ -104,7 +104,7 @@ LAB_00020a3c:
     spinCount = 0;
     if (4 < (SInt32)((((loadWordByteReversed((UInt8 *)(ringPointerBase + rptrOffset)) & 0xffff) -
                    writeIndex) - 1 & 0x7ff) - 7)) {
-LAB_00020b4c:
+emitStamp:
       if (M<SInt32>(self + kIOATIR500Accelerator_stampPageMemory) == 0) {
         ringMemory = M<SInt32>(self + kIOATIR500Accelerator_mainRingMemory);
         M<UInt32>(ringMemory + writeIndex * 4) = 0x57f;
@@ -149,7 +149,7 @@ LAB_00020b4c:
       writeIndex = M<UInt32>(self + kIOATIR500Accelerator_ringIndex);
       freeSpace = (((loadWordByteReversed((UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase) + M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset))) & 0xffff) - writeIndex)
                - 1 & 0x7ff) - 7;
-      if (4 < freeSpace) goto LAB_00020b4c;
+      if (4 < freeSpace) goto emitStamp;
     } while (spinCount != 1000);
   }
   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);

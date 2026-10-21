@@ -95,11 +95,11 @@ UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer 
   if ((tileFlags & 2) == 0) {
     if (-1 < negTileBits) {
       macroTiled = false;
-      goto LAB_00020e40;
+      goto checkLinearTiling;
     }
     pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
     macroTiled = pixelShift == 0;
-LAB_00020e48:
+pickMacroTileShifts:
     if (pixelShift < 4) {
       if (macroTiled) {
         macroTileHeightShift = 2;
@@ -109,21 +109,21 @@ LAB_00020e48:
         macroTileHeightShift = 1;
         macroTileWidthShift = 4;
       }
-      goto LAB_00020e80;
+      goto walkFaces;
     }
   }
   else {
     macroTiled = true;
-LAB_00020e40:
+checkLinearTiling:
     if (negTileBits < 0) {
       pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
-      goto LAB_00020e48;
+      goto pickMacroTileShifts;
     }
     pixelShift = (UInt32)(UInt8)hwInfoBytes[0x1a];
   }
   macroTileHeightShift = 0;
   macroTileWidthShift = 5;
-LAB_00020e80:
+walkFaces:
   face = 0;
   minWidth = 1 << (macroTileWidthShift - pixelShift & 0x3f);
   if (faceCount != 0) {

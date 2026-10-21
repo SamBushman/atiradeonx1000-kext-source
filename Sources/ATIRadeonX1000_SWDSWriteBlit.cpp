@@ -341,7 +341,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   blitPacket[5] = 0x30000;
   blitPacket[0xb] = tileConfig;
   if (M<UInt16>(self + panel * 0x78 + 0x14a) < 0x1001) {
-LAB_00023ca0:
+coordsRotate0Or180:
     if (rotation == 0xb4) {
       texCoordWord1 = 0x3f800000;
       texCoordWord3 = 0;
@@ -349,8 +349,8 @@ LAB_00023ca0:
       texCoordWord2 = 0;
     }
     else {
-      if (rotation == 0x10e) goto LAB_00023c68;
-      if (rotation == 0x5a) goto LAB_00023c18;
+      if (rotation == 0x10e) goto coordsRotate270;
+      if (rotation == 0x5a) goto coordsRotate90;
       texCoordWord1 = 0;
       texCoordWord3 = 0x3f800000;
       texCoordWord4 = 0;
@@ -370,20 +370,20 @@ LAB_00023ca0:
         lastRowRot = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
       }
       blitPacket[0xb3] = (lastRowRot & 0x1fff) << 0xd | 0xfff;
-LAB_00023c18:
+coordsRotate90:
       packetWord98 = blitPacket[0x98];
       texCoordWord2 = 0;
       texCoordWord3 = 0x3f800000;
     }
     else {
-      if (rotation != 0x10e) goto LAB_00023ca0;
+      if (rotation != 0x10e) goto coordsRotate0Or180;
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
          (columnCountWrap = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf),
          columnOffsetRot = columnCountWrap - 0x1001, columnCountWrap == 0)) {
         columnOffsetRot = 0xfffff000;
       }
       blitPacket[0xb2] = columnOffsetRot & 0x1fff;
-LAB_00023c68:
+coordsRotate270:
       packetWord98 = blitPacket[0x98];
       texCoordWord2 = 0x3f800000;
       texCoordWord3 = 0;
@@ -409,7 +409,7 @@ LAB_00023c68:
       buffer[packetEnd + 4] = texCoordWord4;
       buffer[packetEnd + 0xb] = 0;
       buffer[packetEnd + 6] = (SInt32)(heightD * vertexScaleA) | 0x60000000;
-      goto LAB_00023f44;
+      goto writeDestinationRect;
     }
     if (rotation == 0x10e) {
       vertexScaleA = FLOAT_0004c37c;
@@ -431,7 +431,7 @@ LAB_00023c68:
       buffer[packetEnd + 6] =
            (SInt32)((widthD - (widthD - vertexBiasB)) * vertexScaleA) << 0x10 |
            (SInt32)(heightD * vertexScaleA);
-      goto LAB_00023f44;
+      goto writeDestinationRect;
     }
   }
   vertexScaleA = FLOAT_0004c37c;
@@ -450,7 +450,7 @@ LAB_00023c68:
   buffer[packetEnd + 0xb] = 0;
   buffer[packetEnd + 6] = (SInt32)(widthD * vertexScaleA) << 0x10 | (SInt32)(heightD * vertexScaleA);
   packetWordIndex = packetEnd * 4 + 0x30 >> 2;
-LAB_00023f44:
+writeDestinationRect:
   dstHeight = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
   if (0x1000 < dstHeight) {
     if (rotation == 0x5a) {

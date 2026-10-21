@@ -1,5 +1,5 @@
---- a/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-20 16:35:13.914754804 -0700
-+++ b/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-20 16:35:13.916100499 -0700
+--- a/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-20 20:28:44.027404793 -0700
++++ b/Sources/ATIRadeonX1000_pageoff_dirty_texture_with_cpu_Port.cpp	2026-10-20 20:28:44.028523816 -0700
 @@ -36,18 +36,9 @@
  
    UInt8 faceCount;
@@ -51,7 +51,7 @@
    negTileBits = -(tileFlags & 3);
    if ((tileFlags & 2) == 0) {
 @@ -142,7 +122,7 @@
- LAB_0001e624:
+ pickMacroTileShifts:
      if ((UInt8)pixelShiftByte < 4) {
        if (macroTiled) {
 -        negTileBits = 2;
@@ -62,11 +62,11 @@
 @@ -157,7 +137,7 @@
    else {
      macroTiled = true;
- LAB_0001e61c:
+ checkLinearTiling:
 -    if (tileRowShift < 0) {
 +    if (negTileBits < 0) {
        pixelShiftByte = hwInfoBytes[0x1a];
-       goto LAB_0001e624;
+       goto pickMacroTileShifts;
      }
 @@ -243,14 +223,10 @@
                     (tilingBits | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x14 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x16)

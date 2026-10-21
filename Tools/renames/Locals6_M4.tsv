@@ -1,0 +1,49 @@
+# M4: goto labels of the ATIRadeonX1000_* sources (def rows; use-row anchors in older tables still use the old names)
+def	ATIRadeonX1000::start	LAB_0001fafc	chipClass2Setup	INFERRED	chipClass = 2 (hwCapabilityBits |= 0x410000), setupR520Pipes
+def	ATIRadeonX1000::start	LAB_0001fbec	chipClass3Setup	INFERRED	chipClass = 3 (hwCapabilityBits |= 0x810000), setupR520Pipes
+def	ATIRadeonX1000::start	LAB_0001fbc8	unknownChipClass	INFERRED	chipClass = 0 for a chip ID not in the table, then continues to startupPCIeGART
+def	ATIRadeonX1000::start	LAB_0001fbd0	chipClass1Setup	INFERRED	chipClass = 1 (hwCapabilityBits |= 0x210000), setupR520Pipes
+def	ATIRadeonX1000::start	LAB_0001fc04	startGart	CONFIRMED	calls startupPCIeGART after the chip class is set
+def	ATIRadeonX1000::start	LAB_0001f9a0	startFailed	INFERRED	startResult = 0 and a vtable call (slot 0x34c) on self before the common exit
+def	ATIRadeonX1000::start	LAB_0001f9c0	registerSensorFunction	CONFIRMED	creates the getSensorValue symbol, stores it in gpuSensorFunction and returns startResult
+def	ATIRadeonX1000::start	LAB_0001fd88	unwindScratchPages	INFERRED	loop walking pageIndex back two pages at a time, calling vtable 0x598/0x5a4, then falling into startFailed
+def	ATIRadeonX1000::setupR520Pipes	LAB_0001bea0	onePipeConfig	CONFIRMED	tilePipeBits = 0, numPipes = 1
+def	ATIRadeonX1000::setupR520Pipes	LAB_0001c040	programZPipeConfig	CONFIRMED	writes zPipeConfig << 0x18 to register 0x4124 and waits for the engine to go idle
+def	ATIRadeonX1000::set_display_mode_and_vram	LAB_0001c414	unknownPixelFormat1	CONFIRMED	pixelFormat = 0xff for a display 1 mode that has no hardware format
+def	ATIRadeonX1000::set_display_mode_and_vram	LAB_0001c418	setupDisplay1Format	INFERRED	reads display 1 enable (register 0x6088 bit 0) and selects the storage format from pixelFormat
+def	ATIRadeonX1000::set_display_mode_and_vram	LAB_0001c54c	commitDisplay1Format	INFERRED	writes reg16c4Bits to register 0x16c4, then computes the display 1 pitch
+def	ATIRadeonX1000::set_display_mode_and_vram	LAB_0001c710	unknownPixelFormat2	CONFIRMED	pixelFormat2 = 0xff for a display 2 mode that has no hardware format
+def	ATIRadeonX1000::set_display_mode_and_vram	LAB_0001c7d0	display2Format8bpp	CONFIRMED	pixelFormat2 < 3: storageFormat2 = 1, one byte per pixel
+def	ATIRadeonX1000::set_display_mode_and_vram	LAB_0001c9b0	reserveScanoutBuffers	INFERRED	reserves the display 1 scanout buffer in the VRAM pools when scanout1Size is not 0
+def	ATIRadeonX1000::display_mode_did_change	LAB_00024fa4	unlockAndReturn	CONFIRMED	releases the command lock and returns result
+def	ATIRadeonX1000::addToPCIeGART	LAB_0001de4c	prepareDescriptor	CONFIRMED	calls the descriptor prepare method (vtable 0x144) with 3
+def	ATIRadeonX1000::SWDSFunc	LAB_00024480	checkStampPending	INFERRED	skips to the next panel when no stamp is pending
+def	ATIRadeonX1000::SWDSFunc	LAB_00024584	advancePanel	CONFIRMED	panel = panel + 1 and the loop test panel < 2
+def	ATIRadeonX1000::SWDSInit	LAB_00024750	clearBufferRecord	INFERRED	zeroes the panel record fields (+0xa48..) when the buffer does not fit below the other buffer
+def	ATIRadeonX1000::SWDSInit	LAB_00024a0c	placeBufferBelowReserve	INFERRED	bufferBase = usableVram - reserveBelow - bufferSize aligned down, tested against the other buffer
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	LAB_00023ca0	coordsRotate0Or180	INFERRED	rotation 0 or 0xb4: texture coordinates (0,1,1,0) / (1,0,0,1)
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	LAB_00023c18	coordsRotate90	INFERRED	texCoordWord2 = 0, texCoordWord3 = 1.0 after the 90 degree column and row setup
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	LAB_00023c68	coordsRotate270	INFERRED	rotation 0x10e: texCoordWord2 = 1.0, texCoordWord3 = 0
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	LAB_00023f44	writeDestinationRect	INFERRED	reads the destination height and packs the rotated destination rectangle
+def	ATIRadeonX1000::submit_buffer_retired	LAB_000208e8	reportFifoOverflow	CONFIRMED	logs "Overflowed block waiting for FIFO space" and calls DumpASICHangState
+def	ATIRadeonX1000::allocate_texture	LAB_0001a84c	allocateInVram	INFERRED	reads usableVramSize and chooses the VRAM pool allocation path
+def	ATIRadeonX1000::allocate_texture	LAB_0001a8f0	allocateFromPool	INFERRED	allocates from the VRAM pool (restricted below 64 KiB when displayConfigBits is 0)
+def	ATIRadeonX1000::allocate_texture	LAB_0001a980	poolAlloc	CONFIRMED	calls ATIR500Memory::alloc on the chosen pool
+def	ATIRadeonX1000::allocate_texture	LAB_0001a994	allocFailed	CONFIRMED	result = 0
+def	ATIRadeonX1000::deallocate_texture	LAB_0001a700	freeHzHandles	CONFIRMED	frees the HZMEM handles at texture +0x6c
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM	LAB_0001e480	nextCandidate	CONFIRMED	candidate = candidate->next (+0x28)
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM	LAB_0001e3c8	evictCandidate	CONFIRMED	calls vtable 0x524 on the candidate and clears its info block fields
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM	LAB_0001e3c0	checkAllFacesFree	INFERRED	faceIndex == faceCount means every face passed, so the candidate can be evicted
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu	LAB_0001e594	noPreparedSlot	INFERRED	slotOffset = 0 when no free prepared slot exists
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu	LAB_0001e624	pickMacroTileShifts	CONFIRMED	selects tileRowShift and the macro tile width and height shifts from pixelShiftByte
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu	LAB_0001e61c	checkLinearTiling	INFERRED	negTileBits < 0 selects the macro tile shifts, otherwise the linear defaults
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu	LAB_0001e668	copyFaces	CONFIRMED	loops over the faces copying the dirty levels
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu	LAB_000214a8	pickMacroTileShifts	CONFIRMED	selects the macro tile width and height shifts from pixelShift
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu	LAB_000214a0	checkLinearTiling	INFERRED	negTileBits < 0 selects the macro tile shifts, otherwise the linear defaults
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu	LAB_000214e0	walkFaces	CONFIRMED	face = 0, computes minWidth and minHeight, loops over the faces
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	LAB_00020e48	pickMacroTileShifts	CONFIRMED	selects the macro tile width and height shifts from pixelShift
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	LAB_00020e40	checkLinearTiling	INFERRED	negTileBits < 0 selects the macro tile shifts, otherwise the linear defaults
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	LAB_00020e80	walkFaces	CONFIRMED	face = 0, computes minWidth, loops over the faces
+def	ATIRadeonX1000::submit_buffer	LAB_00020a3c	accountAndFlush	INFERRED	adds dwordCount*4 to commandBytesPerSample, then syncs or flushes the cache lines
+def	ATIRadeonX1000::submit_buffer	LAB_00020b4c	emitStamp	INFERRED	writes the stamp packet (0x57f, submitStamp) to the ring when there is no stamp page
+def	ATIRadeonX1000::submit_idct_buffer_consumed	LAB_0001ef58	dumpHangState	CONFIRMED	calls DumpASICHangState on the timeout path

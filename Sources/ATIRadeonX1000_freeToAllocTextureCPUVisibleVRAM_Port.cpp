@@ -50,12 +50,12 @@ UInt32 ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM(VendorTextureBuffer *tex
         return 0;
       }
       if (M<UInt32>(candidate + 0x48) < M<UInt32>(self + kIOATIR500Accelerator_usableVramSize)) break;
-LAB_0001e480:
+nextCandidate:
       candidate = M<UInt8 *>(candidate + 0x28);
     }
     infoCursor = M<SInt32>(candidate + 0x14);
     if (infoCursor == 0) {
-LAB_0001e3c8:
+evictCandidate:
       VCALL(M<SInt32>(self), 0x524)(self,candidate);
       M<UInt8>(M<SInt32>(candidate + 0x14) + 0x14) = 1;
       M<UInt16>(M<SInt32>(candidate + 0x14) + 0x28) = 0;
@@ -76,13 +76,13 @@ LAB_0001e3c8:
       if (allocResult != 0) {
         return 1;
       }
-      goto LAB_0001e480;
+      goto nextCandidate;
     }
     faceCount = (UInt32)M<UInt8>(infoCursor + 0x34);
     faceIndex = 0;
     if (faceCount == 0) {
-LAB_0001e3c0:
-      if (faceIndex == faceCount) goto LAB_0001e3c8;
+checkAllFacesFree:
+      if (faceIndex == faceCount) goto evictCandidate;
     }
     else if ((M<UInt16>(infoCursor + 0x28) & ~M<UInt16>(infoCursor + 0x1c)) == 0) {
       faceIndex = 0;
@@ -93,7 +93,7 @@ LAB_0001e3c0:
       do {
         faceIndex = faceIndex + 1;
         facesLeft = facesLeft - 1;
-        if (facesLeft == 0) goto LAB_0001e3c0;
+        if (facesLeft == 0) goto checkAllFacesFree;
         nextFaceMaskPtr = (UInt16 *)(infoCursor + 0x2a);
         nextFaceDirtyPtr = (UInt16 *)(infoCursor + 0x1e);
         infoCursor = infoCursor + 2;

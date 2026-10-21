@@ -139,7 +139,7 @@ void ATIRadeonX1000::SWDSFunc(OSObject *owner, IOTimerEventSource *source) {
               latestStamp = M<SInt32>(ownerBytes + 0xec);
               if (latestStamp - M<SInt32>(ownerBytes + 0x10c) < 1) {
                 M<SInt32>(ownerBytes + panel * 4 + 0xacc) = M<SInt32>(ownerBytes + 0x10c);
-                goto LAB_00024480;
+                goto checkStampPending;
               }
             }
             else {
@@ -152,8 +152,8 @@ void ATIRadeonX1000::SWDSFunc(OSObject *owner, IOTimerEventSource *source) {
             stampBusy = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(ownerBytes + panel * 4 + 0xacc));
             stampPending = stampPending | stampBusy;
           }
-LAB_00024480:
-          if (stampPending == 0) goto LAB_00024584;
+checkStampPending:
+          if (stampPending == 0) goto advancePanel;
         }
         else {
           stampPending = 1;
@@ -185,7 +185,7 @@ LAB_00024480:
           cmdBuffer[appendWordCount + 1] = 0x40;
         }
       }
-LAB_00024584:
+advancePanel:
       panel = panel + 1;
     } while (panel < 2);
     if (!(bool)(noBlitYet >> 1 & 1)) {
@@ -310,7 +310,7 @@ bool ATIRadeonX1000::SWDSInit() {
             }
             bufferBase = unalignedBase - 0x8000U & 0xffff8000;
             if (usableVram <= bufferBase) {
-LAB_00024750:
+clearBufferRecord:
               M<UInt16>(recordCursor + 0xa48) = 0;
               M<UInt16>(recordCursor + 0xa4a) = 0;
               M<UInt16>(recordCursor + 0xa4c) = 0;
@@ -488,14 +488,14 @@ LAB_00024750:
               reserveBelow = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
               otherBufferBase = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress);
               otherBufferSize = M<SInt32>(self + kIOATIR500Accelerator_scanout2BufferSize);
-LAB_00024a0c:
+placeBufferBelowReserve:
               bufferBase = ((usableVram - reserveBelow) - bufferSize) - 0x8000 & 0xffff8000;
-              if ((UInt32)(otherBufferBase + otherBufferSize) < bufferBase) goto LAB_00024750;
+              if ((UInt32)(otherBufferBase + otherBufferSize) < bufferBase) goto clearBufferRecord;
             }
             else {
               bufferBase = (M<SInt32>(self + kIOATIR500Accelerator_swdsBuffer1GpuBaseAddress) - bufferSize) - 0x8000 & 0xffff8000;
               if ((UInt32)(M<SInt32>(recordCursor + 0x1ac) + M<SInt32>(recordCursor + 0x1b4)) < bufferBase)
-              goto LAB_00024750;
+              goto clearBufferRecord;
             }
           }
           else {
@@ -503,11 +503,11 @@ LAB_00024a0c:
               reserveBelow = M<SInt32>(self + kIOATIR500Accelerator_gartReserveSize);
               otherBufferBase = M<SInt32>(recordCursor + 0x1ac);
               otherBufferSize = M<SInt32>(recordCursor + 0x1b4);
-              goto LAB_00024a0c;
+              goto placeBufferBelowReserve;
             }
             bufferBase = M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferGpuBaseAddress) + M<SInt32>(self + kIOATIR500Accelerator_scanout1BufferSize) + 0x8000U & 0xffff8000;
             if (bufferSize + bufferBase < (M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress) & ~((usableVramAtEntry >> 1) - 1)))
-            goto LAB_00024750;
+            goto clearBufferRecord;
           }
         }
       }

@@ -73,10 +73,10 @@ bool ATIRadeonX1000::display_mode_did_change() {
       this->enable_GPUSensor();
     }
     baseDidChange = ((IOATIR500Accelerator *)(self))->disp_mode_did_change();
-    if ((baseDidChange != 0) && (result = 1, hardwareOk != 0)) goto LAB_00024fa4;
+    if ((baseDidChange != 0) && (result = 1, hardwareOk != 0)) goto unlockAndReturn;
   }
   result = 0;
-LAB_00024fa4:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(self + kIOATIR500Accelerator_commandLock));
   return result;
 }

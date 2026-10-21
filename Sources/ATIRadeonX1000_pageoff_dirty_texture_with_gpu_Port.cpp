@@ -180,11 +180,11 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *textu
   if ((tileFlags & 2) == 0) {
     if (-1 < negTileBits) {
       macroTiled = false;
-      goto LAB_000214a0;
+      goto checkLinearTiling;
     }
     pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
     macroTiled = pixelShift == 0;
-LAB_000214a8:
+pickMacroTileShifts:
     if (pixelShift < 4) {
       if (macroTiled) {
         macroTileHeightShift = 2;
@@ -194,21 +194,21 @@ LAB_000214a8:
         macroTileHeightShift = 1;
         macroTileWidthShift = 4;
       }
-      goto LAB_000214e0;
+      goto walkFaces;
     }
   }
   else {
     macroTiled = true;
-LAB_000214a0:
+checkLinearTiling:
     if (negTileBits < 0) {
       pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
-      goto LAB_000214a8;
+      goto pickMacroTileShifts;
     }
     pixelShift = (unsigned int)(UInt8)hwInfoBytes[0x1a];
   }
   macroTileHeightShift = 0;
   macroTileWidthShift = 5;
-LAB_000214e0:
+walkFaces:
   face = 0;
   minWidth = 1 << (macroTileWidthShift - pixelShift & 0x3f);
   minHeight = 0x20 >> (pixelShift & 0x3f);

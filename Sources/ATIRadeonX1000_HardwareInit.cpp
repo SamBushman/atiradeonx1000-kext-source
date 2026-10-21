@@ -69,7 +69,7 @@ void ATIRadeonX1000::setupR520Pipes() {
     M<UInt32>(self + kIOATIR500Accelerator_numPipes) = 2;
   }
   else if (pipeCountCode == 0) {
-LAB_0001bea0:
+onePipeConfig:
     tilePipeBits = 0;
     M<UInt32>(self + kIOATIR500Accelerator_numPipes) = 1;
   }
@@ -78,7 +78,7 @@ LAB_0001bea0:
     M<UInt32>(self + kIOATIR500Accelerator_numPipes) = 3;
   }
   else {
-    if (pipeCountCode != 3) goto LAB_0001bea0;
+    if (pipeCountCode != 3) goto onePipeConfig;
     tilePipeBits = 0xe;
     M<UInt32>(self + kIOATIR500Accelerator_numPipes) = 4;
   }
@@ -129,7 +129,7 @@ LAB_0001bea0:
   if (zPipeConfig != 0) {
     if (zPipeConfig < 3) {
       M<UInt32>(self + kIOATIR500Accelerator_numZPipes) = 1;
-      goto LAB_0001c040;
+      goto programZPipeConfig;
     }
     if (zPipeConfig == 3) {
       if (M<UInt32>(self + kIOATIR500Accelerator_chipRev) < 4) {
@@ -140,12 +140,12 @@ LAB_0001bea0:
         zPipeConfig = 3;
         M<UInt32>(self + kIOATIR500Accelerator_numZPipes) = 2;
       }
-      goto LAB_0001c040;
+      goto programZPipeConfig;
     }
   }
   M<UInt32>(self + kIOATIR500Accelerator_numZPipes) = 1;
   zPipeConfig = 1;
-LAB_0001c040:
+programZPipeConfig:
   M<UInt32>(mmioBase + 0x4124) = zPipeConfig << 0x18;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
@@ -317,26 +317,26 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
     if (graphDepth == 1) {
       pixelFormat = 4;
       if (((graphFormat != 1) && (pixelFormat = 3, graphFormat != 0)) && (pixelFormat = 0xf, graphFormat != 2))
-      goto LAB_0001c414;
+      goto unknownPixelFormat1;
     }
     else {
       if (graphDepth == 0) {
         pixelFormat = 9;
 joined_r0x0001c43c:
-        if (graphFormat == 0) goto LAB_0001c418;
+        if (graphFormat == 0) goto setupDisplay1Format;
       }
       else if (graphDepth == 2) {
         pixelFormat = 6;
-        if ((graphFormat == 0) || (pixelFormat = 5, graphFormat == 1)) goto LAB_0001c418;
+        if ((graphFormat == 0) || (pixelFormat = 5, graphFormat == 1)) goto setupDisplay1Format;
       }
       else if (graphDepth == 3) {
         pixelFormat = 10;
         goto joined_r0x0001c43c;
       }
-LAB_0001c414:
+unknownPixelFormat1:
       pixelFormat = 0xff;
     }
-LAB_0001c418:
+setupDisplay1Format:
     M<UInt32>(self + kIOATIR500Accelerator_display1Enabled) = loadWordByteReversed(&M<UInt8>(registers + 0x6088)) & 1;
     if (pixelFormat == 6) {
       reg16c4Bits = reg16c4Bits | 6;
@@ -359,7 +359,7 @@ LAB_0001c418:
           storageFormat1 = 0x7;
           bytesPerPixel = 2;
           bytesPerPixel16 = 2;
-          goto LAB_0001c54c;
+          goto commitDisplay1Format;
         }
       }
       else if (pixelFormat == 9) {
@@ -373,7 +373,7 @@ LAB_0001c418:
       bytesPerPixel = 1;
       bytesPerPixel16 = 1;
     }
-LAB_0001c54c:
+commitDisplay1Format:
     storeWordByteReversed(&M<UInt8>(registers + 0x16c4), reg16c4Bits);
     enforceInOrderExecutionIO();
     pitch = display1Width * bytesPerPixel + 0xff & 0xffffff00;
@@ -408,7 +408,7 @@ LAB_0001c54c:
   if (((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x10000) == 0) || (M<UInt32>(self + kIOATIR500Accelerator_displayCount) < 2)) {
     display2Base = 0;
     mcRegionSize = 0x200000;
-    goto LAB_0001c9b0;
+    goto reserveScanoutBuffers;
   }
   crtc2Enable = loadWordByteReversed(&M<UInt8>(registers + 0x6880)) & 1;
   M<UInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) = 0;
@@ -430,7 +430,7 @@ LAB_0001c54c:
     mcRegionSize = 0x200000;
     M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferSize) = 0;
     M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress) = 0;
-    goto LAB_0001c9b0;
+    goto reserveScanoutBuffers;
   }
   if (L.activeWidth != 0) {
     display2Width = L.activeWidth;
@@ -448,7 +448,7 @@ LAB_0001c54c:
       pixelFormatByte2 = 0x3;
     }
     else {
-      if (graphFormat != 2) goto LAB_0001c710;
+      if (graphFormat != 2) goto unknownPixelFormat2;
       pixelFormat2 = 0xf;
       pixelFormatByte2 = 0xf;
     }
@@ -459,7 +459,7 @@ LAB_0001c54c:
       pixelFormatByte2 = 0x9;
     }
     else {
-LAB_0001c710:
+unknownPixelFormat2:
       pixelFormat2 = 0xff;
       pixelFormatByte2 = 0xff;
     }
@@ -470,19 +470,19 @@ LAB_0001c710:
       pixelFormatByte2 = 0x6;
     }
     else {
-      if (graphFormat != 1) goto LAB_0001c710;
+      if (graphFormat != 1) goto unknownPixelFormat2;
       pixelFormat2 = 5;
       pixelFormatByte2 = 0x5;
     }
   }
   else {
-    if ((graphDepth != 3) || (graphFormat != 0)) goto LAB_0001c710;
+    if ((graphDepth != 3) || (graphFormat != 0)) goto unknownPixelFormat2;
     pixelFormat2 = 10;
     pixelFormatByte2 = 0xa;
   }
   M<UInt32>(self + kIOATIR500Accelerator_display2Enabled) = loadWordByteReversed(&M<UInt8>(registers + 0x6888)) & 1;
   if (pixelFormat2 < 3) {
-LAB_0001c7d0:
+display2Format8bpp:
     storageFormat2 = 0x1;
     bytesPerPixel2 = 1;
     bytesPerPixel16 = 1;
@@ -493,7 +493,7 @@ LAB_0001c7d0:
     bytesPerPixel16 = 2;
   }
   else {
-    if (pixelFormat2 != 6) goto LAB_0001c7d0;
+    if (pixelFormat2 != 6) goto display2Format8bpp;
     storageFormat2 = 0xb;
     bytesPerPixel2 = 4;
     bytesPerPixel16 = 4;
@@ -551,7 +551,7 @@ LAB_0001c7d0:
         mcRegionSize = 0xa00000;
         ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPoolB)))->reserve((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout2PadElementB),
                    display2Base - scanout2PadSize,scanout2PadSize);
-        goto LAB_0001c9b0;
+        goto reserveScanoutBuffers;
       }
     }
     mcRegionSize = 0xa00000;
@@ -563,7 +563,7 @@ LAB_0001c7d0:
     mcRegionSize = 0xa00000;
     M<UInt32>(self + kIOATIR500Accelerator_scanoutOverlapsVram) = 1;
   }
-LAB_0001c9b0:
+reserveScanoutBuffers:
   if (scanout1Size != 0) {
     reserved = ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->reserve((GLKMemoryElement *)(self + kIOATIR500Accelerator_scanout1Buffer),display1Base,
                         scanout1Size);

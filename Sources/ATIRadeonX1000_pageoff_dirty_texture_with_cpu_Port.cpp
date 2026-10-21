@@ -90,7 +90,7 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
   VCALL(M<SInt32>(self), 0x558)(self,M<SInt32>(self + kIOATIR500Accelerator_submitStamp) + -1);
   slotsLeft = (UInt32)(UInt8)self[0x990];
   if ((slotsLeft == 0) || ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1) == 0)) {
-LAB_0001e594:
+noPreparedSlot:
     slotOffset = 0;
   }
   else {
@@ -98,7 +98,7 @@ LAB_0001e594:
     do {
       freeSlot = freeSlot + 1;
       slotsLeft = slotsLeft - 1;
-      if (slotsLeft == 0) goto LAB_0001e594;
+      if (slotsLeft == 0) goto noPreparedSlot;
     } while ((M<UInt32>(self + kIOATIR500Accelerator_vramPreparedMask) & 1 << (freeSlot & 0x3f)) != 0);
     slotOffset = freeSlot * 4;
   }
@@ -115,11 +115,11 @@ LAB_0001e594:
   if ((tileFlags & 2) == 0) {
     if (-1 < negTileBits) {
       macroTiled = false;
-      goto LAB_0001e61c;
+      goto checkLinearTiling;
     }
     pixelShiftByte = hwInfoBytes[0x1a];
     macroTiled = pixelShiftByte == 0x0;
-LAB_0001e624:
+pickMacroTileShifts:
     if ((UInt8)pixelShiftByte < 4) {
       if (macroTiled) {
         tileRowShift = 2;
@@ -131,21 +131,21 @@ LAB_0001e624:
         macroTileWidthShift = 4;
         macroTileHeightShift = 1;
       }
-      goto LAB_0001e668;
+      goto copyFaces;
     }
   }
   else {
     macroTiled = true;
-LAB_0001e61c:
+checkLinearTiling:
     if (negTileBits < 0) {
       pixelShiftByte = hwInfoBytes[0x1a];
-      goto LAB_0001e624;
+      goto pickMacroTileShifts;
     }
   }
   tileRowShift = 0;
   macroTileWidthShift = 5;
   macroTileHeightShift = 0;
-LAB_0001e668:
+copyFaces:
   if (faceCount == 0) {
     innerMapping = (SInt32 *)0x0;
     bytesCopied = 0;

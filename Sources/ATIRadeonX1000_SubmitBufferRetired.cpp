@@ -78,7 +78,7 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
   rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset);
   while (freeDwords = ((loadWordByteReversedIndexed(rptrBase, rptrOffset) - writeIndex) - 1 & 0x7ff) - 7, freeDwords < 8) {
     spinCount = spinCount + 1;
-    if (spinCount == 0xf4241) goto LAB_000208e8;
+    if (spinCount == 0xf4241) goto reportFifoOverflow;
     do {
       u32Dummy =
            u32Dummy + 1;
@@ -86,7 +86,7 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
              0);
   }
   if (spinCount == 0xf4241) {
-LAB_000208e8:
+reportFifoOverflow:
     registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
     GH_IOLog("ATIRadeon::submit_buffer: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
                  ,freeDwords,8,loadWordByteReversed(&M<UInt8>(registers + 0xe40)));
