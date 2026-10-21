@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 13:04:46.132860707 -0700
-+++ b/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 13:04:46.134271129 -0700
+--- a/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 16:22:50.711891599 -0700
++++ b/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 16:22:50.713265845 -0700
 @@ -33,151 +33,158 @@
  
    UInt16 height;
@@ -46,7 +46,7 @@
 -    if (((uVar6 & 0xf00000) != 0) &&
 -       (0x1000 < (unsigned int)M<UInt16>(bufferBytes + 0x1c) / (uVar6 >> 0x14 & 0xf))) {
 +    if (((tilingBits & 0xf00000) != 0) &&
-+       (0x1000 < (unsigned int)M<UInt16>(bufferBytes + 0x1c) / (tilingBits >> 0x14 & 0xf))) {
++       (0x1000 < (SInt32)M<UInt16>(bufferBytes + 0x1c) / (SInt32)(tilingBits >> 0x14 & 0xf))) {
        return 0;
      }
      if (0x1000 < M<UInt16>(bufferBytes + 0x1e)) {
@@ -104,13 +104,13 @@
 +    numPipes = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
      if ((M<unsigned int>(bufferBytes + 0x3c) & 0xf00000) != 0) {
 -      uVar6 = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
-+      pitchPerDegree = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
++      pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
      }
 -    uVar8 = 0x20 / M<UInt16>(bufferBytes + 0x16);
 -    if (0x20 / M<UInt16>(bufferBytes + 0x16) <= uVar6) {
 -      uVar8 = uVar6;
 +    minPitch = 0x20 / M<UInt16>(bufferBytes + 0x16);
-+    if (0x20 / M<UInt16>(bufferBytes + 0x16) <= pitchPerDegree) {
++    if (minPitch <= pitchPerDegree) {
 +      minPitch = pitchPerDegree;
      }
      alignment = 0x20;
@@ -146,13 +146,13 @@
 +  numPipes = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
    if ((M<unsigned int>(bufferBytes + 0x3c) & 0xf00000) != 0) {
 -    uVar6 = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
-+    pitchPerDegree = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
++    pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
    }
 -  uVar8 = 0x20 / M<UInt16>(bufferBytes + 0x16);
 -  if (0x20 / M<UInt16>(bufferBytes + 0x16) <= uVar6) {
 -    uVar8 = uVar6;
 +  minPitch = 0x20 / M<UInt16>(bufferBytes + 0x16);
-+  if (0x20 / M<UInt16>(bufferBytes + 0x16) <= pitchPerDegree) {
++  if (minPitch <= pitchPerDegree) {
 +    minPitch = pitchPerDegree;
    }
    alignment = 0x20;
@@ -205,7 +205,7 @@
 +  pitchPerDegree = 0;
 +  numPipes = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
 +  if ((tilingBits & 0xf00000) != 0) {
-+    pitchPerDegree = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf);
++    pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
 +  }
 +  minPitch = 0x20 / M<UInt16>(bufferBytes + 0x16);
 +  if (minPitch <= pitchPerDegree) {

@@ -31,6 +31,6 @@ void IOATIR500DVDContext::add_texture_to_stream(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  M<SInt16>(textureBytes + 0xe) = M<SInt16>(textureBytes + 0xe) + 1;
+  storeHalf(&M<UInt16>(textureBytes + 0xe), M<SInt16>(textureBytes + 0xe) + 1);
   return;
 }

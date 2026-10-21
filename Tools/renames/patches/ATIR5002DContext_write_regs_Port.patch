@@ -1,0 +1,12 @@
+--- a/Sources/ATIR5002DContext_write_regs_Port.cpp	2026-10-20 16:22:50.720881960 -0700
++++ b/Sources/ATIR5002DContext_write_regs_Port.cpp	2026-10-20 16:22:50.721701420 -0700
+@@ -50,8 +50,7 @@
+         wordsDone = 0;
+         do {
+           value = offsetValuePairs[1];
+-          M<UInt32>(registers + (*offsetValuePairs & 0x1ffc)) =
+-               value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
++          storeWordByteReversed(&M<UInt8>(registers + (*offsetValuePairs & 0x1ffc)), value);
+           wordsDone = wordsDone + 2;
+           offsetValuePairs = offsetValuePairs + 2;
+         } while (wordsDone < pairByteCount >> 3);

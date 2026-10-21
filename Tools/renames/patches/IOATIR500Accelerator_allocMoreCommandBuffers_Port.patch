@@ -1,0 +1,11 @@
+--- a/Sources/IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp	2026-10-20 16:47:30.645587435 -0700
++++ b/Sources/IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp	2026-10-20 16:47:30.646791916 -0700
+@@ -75,7 +75,7 @@
+       } while (newCount != bufferIndex);
+     }
+     result = 1;
+-    M<SInt16>(self + recordOffset + 0x402) = (SInt16)newCount;
++    storeHalf(&M<UInt16>(self + recordOffset + 0x402), newCount);
+     M<UInt16>(self + recordOffset + 0x400) = oldCount16;
+   }
+   return result;

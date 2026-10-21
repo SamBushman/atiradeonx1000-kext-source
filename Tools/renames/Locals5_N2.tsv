@@ -73,8 +73,6 @@ use	ATIRadeonX1000::clearInGART@0x1b7f0	uVar2	flushValue	CONFIRMED	gartFlushScra
 redef	ATIRadeonX1000::clearInGART@0x1b7f0	uVar2	emptyEntry	CONFIRMED	gartEmptyEntry: the value written (byte-swapped) to the cleared GART entry
 use	ATIRadeonX1000::clearInGART@0x1b7f0	iVar3	mmioBase	CONFIRMED	self+mmioBase, the register window used to flush the GART	iVar3 = M<SInt32>\(self \+ 0x860\);	-
 redef	ATIRadeonX1000::clearInGART@0x1b7f0	iVar3	entryOffset	CONFIRMED	(gartOffset >> page_shift) * 4: byte offset of the entry in both GART tables
-use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar4	tableGpuBase	CONFIRMED	gartTableBufferGpuBaseAddress, written byte-swapped to reg 0xb54	uVar4 = M<UInt32>\(self \+ 0xbcc\);	-	1,2,3,4,5,7
-use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar4	tableGpuEnd	CONFIRMED	gpu base + gartTableBufferSize - 1, written byte-swapped to reg 0xb58	uVar4 = M<UInt32>\(self \+ 0xbcc\);	-	6,8,9,10,11
 redef	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar4	gartSize	CONFIRMED	gartSizeKB as read: the table size that is allocated, divided into entries and fitted to a surface width
 use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar1	vramSize	CONFIRMED	VRAM size read from reg 0xf8, clamped to 128 MB; the table sits at its top	uVar1 = loadWordByteReversed\(&M<UInt8>\(iVar3 \+ 0xf8\)\);	if \(M<SInt32>\(self \+ 0xc4c\) == 0\)
 use	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar1	entriesLeft	CONFIRMED	gartSize >> 2: the number of 4-byte GART entries, counted down while the table is filled with the empty entry	uVar1 = uVar4 >> 2;	registers = M<SInt32>
@@ -225,7 +223,6 @@ use	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar3	mmioBase	CONFIRMED	se
 redef	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar3	triesLeft	CONFIRMED	999: the 50us waits left for reg 0x1fb4 to go negative
 use	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar5	mmioBase	CONFIRMED	self+mmioBase, the register window	iVar5 = M<SInt32>\(self \+ 0x860\);	-
 redef	ATIRadeonX1000::system_will_change_speed@0x1f1e0	iVar5	ringMemory	CONFIRMED	mainRingMemory: the ring the fence packets are written to
-use	ATIRadeonX1000::submit_buffer@0x20980	iVar1	cacheBytes	CONFIRMED	bytes of the buffer still to flush from the data cache after the first line	iVar1 = \(dwordCount \* 4 \+	dataCacheBlockFlush\(
 redef	ATIRadeonX1000::submit_buffer@0x20980	iVar1	freeSpace	CONFIRMED	ring free dwords minus 7 ((rptr - wptr - 1) & 0x7ff) - 7, the number printed as "Have"
 use	ATIRadeonX1000::submit_buffer@0x20980	iVar3	ringPointerBase	CONFIRMED	ringPointerBase: where the read pointer writeback lives	iVar3 = M<SInt32>\(self \+ 0x90c\);	if \(M<SInt32>\(self \+ 0x8d0\) == 0\) \{
 use	ATIRadeonX1000::submit_buffer@0x20980	iVar3	ringMemory	CONFIRMED	mainRingMemory: the ring the packets are written to	iVar3 = M<SInt32>\(self \+ 0x900\);	iVar3 = M<SInt32>\(self \+ 0x50\);
@@ -423,7 +420,6 @@ redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar8	lastColumnRot	CONFIRMED	last c
 redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar12	columnCountRot	CONFIRMED	source width in block units for the rotated fix-up packet
 redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar3	dstRow	CONFIRMED	panel record +0x14c: the destination row, multiplied by the pitch
 use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	uVar3	panelHeight16	CONFIRMED	panel height (+0x9da) as 16 bits, masked and shifted into the flip-wait register write	-	-	1,2,3
-use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar25	magicBias	CONFIRMED	DOUBLE_0004c3b0 = 2^52: the bias that turns the 0x43300000:int pairs into doubles	-	-	1,2,3
 redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar25	heightD	CONFIRMED	the source height (+0x9da) as a double
 redef	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar24	widthD	CONFIRMED	the source width (+0x9d8) as a double
 use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	dVar23	vertexScaleA	INFERRED	FLOAT_0004c37c (6.0): scale applied to the width/height to give the packet vertex coordinates	-	-	1,2,3,4,5,6,7,8,12,13,14
@@ -477,7 +473,6 @@ use	::pcl_CopyPix@0x21e30	dVar49	yFirstD1	CONFIRMED	the first source y as a doub
 use	::pcl_CopyPix@0x21e30	dVar49	yFirstD2	CONFIRMED	the first source y as a double, second strip	-	-	8,9
 redef	::pcl_CopyPix@0x21e30	dVar48	invScaleY	CONFIRMED	1/scaleY (0 when scaleY is 0)
 redef	::pcl_CopyPix@0x21e30	dVar47	ySecondDC	CONFIRMED	the second source y as a double, unscaled path
-use	::pcl_CopyPix@0x21e30	dVar46	biasD	CONFIRMED	DOUBLE_0004c3a8: the int-to-double conversion bias	-	-	1,2
 use	::pcl_CopyPix@0x21e30	dVar46	yFirstDC	CONFIRMED	the first source y as a double, unscaled path	-	-	3,4
 use	::pcl_CopyPix@0x21e30	fVar2	vertexScale	CONFIRMED	FLOAT_0004c37c (6.0): scale applied to rectangle sizes to give packet vertex sizes	-	-	1,18,19
 use	::pcl_CopyPix@0x21e30	fVar2	halfWidthPlus2F	INFERRED	the half width plus two as a float, the width of the first strip	-	-	2,3,4

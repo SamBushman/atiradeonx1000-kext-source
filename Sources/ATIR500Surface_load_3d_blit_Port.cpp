@@ -41,7 +41,6 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
 
   bool hasTiling;
   UInt16 bufferHeight;
-  double doubleBias;
   UInt32 tilingDegree;
   UInt32 tilingBitsCopy;
   UInt32 tilingBits;
@@ -103,7 +102,7 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
   tilingBits = M<UInt32>(bufferBytes + 0x3c);
   hasTiling = (tilingBits & 0xf00000) != 0;
   if (hasTiling) {
-    minPitch = (UInt32)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf);
+    minPitch = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
   }
   else {
     minPitch = 0;
@@ -118,7 +117,7 @@ UInt32 *ATIR500Surface::load_3d_blit(UInt32*dest, ATIR500SurfaceBuffer *buffer) 
   accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
   numPipes = M<SInt32>(accelerator + kIOATIR500Accelerator_numPipes);
   if (hasTiling) {
-    pitchPerDegree = (UInt32)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf);
+    pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
   }
   else {
     pitchPerDegree = 0;
@@ -212,14 +211,14 @@ LAB_0003d700:
   }
   else {
     dest[0x62] =
-         (UInt32)M<UInt16>(bufferBytes + 0x1c) / (M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf) & 0x1fff |
+         (SInt32)M<UInt16>(bufferBytes + 0x1c) / (SInt32)(M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf) & 0x1fff |
          (M<UInt16>(bufferBytes + 0x1e) & 0x1fff) << 0xd;
   }
   if ((M<UInt32>(bufferBytes + 0x3c) & 0xf00000) == 0) {
     degreeWidthBits = 0;
   }
   else {
-    degreeWidthBits = ((UInt32)M<UInt16>(bufferBytes + 0x1c) / (M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf)) *
+    degreeWidthBits = ((SInt32)M<UInt16>(bufferBytes + 0x1c) / (SInt32)(M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf)) *
             0x60000;
   }
   bufferHeight = M<UInt16>(bufferBytes + 0x1e);
@@ -232,18 +231,14 @@ LAB_0003d700:
   }
   else {
     dest[0x67] =
-         FBITS((float)((double)CONCAT44d(0x43300000,
-                                         (SInt32)((UInt32)M<UInt16>(bufferBytes + 0x1c) /
-                                              (M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf)) >> 1 ^
-                                         0x80000000) - DOUBLE_0004c3a8));
+         FBITS((float)(SInt32)((SInt32)((SInt32)M<UInt16>(bufferBytes + 0x1c) / (SInt32)(M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf)) >> 1));
   }
-  doubleBias = DOUBLE_0004c3a8;
   bufferHeight = M<UInt16>(bufferBytes + 0x1e);
   zbBwBits = 0;
   dest[0x69] = 0;
   dest[0x6a] = 0x13c6;
   dest[0x6b] = 3;
-  dest[0x68] = FBITS((float)((double)CONCAT44d(0x43300000,bufferHeight >> 1 ^ 0x80000000) - doubleBias));
+  dest[0x68] = FBITS((float)(SInt32)(bufferHeight >> 1));
   if ((bufferBytes[0x34] != 0x0) &&
      ((2 < M<UInt16>(bufferBytes + 0x16) ||
       (zbBwBits = 4, 2 < (M<UInt32>(bufferBytes + 0x3c) >> 0x14 & 0xf))))) {

@@ -1,7 +1,6 @@
 # DVD process_command_buffer round 3: scratch locals that carry one role each inside a handler (0x0d, 0x13, 0x14, 0x12)
 use	ATIR500DVDContext::process_command_buffer@0x357c0	dVar9	zero	CONFIRMED	DOUBLE_0004c3c0 = 0.0 (value read from the stock binary)	recordCursor\[3\] = uVar17 \& 0xffffffe0;@11	if \(uVar17 != 0x14000000\) \{@-4
 use	ATIR500DVDContext::process_command_buffer@0x357c0	dVar8	half	CONFIRMED	DOUBLE_0004c3b8 = 0.5 (value read from the stock binary)	recordCursor\[3\] = uVar17 \& 0xffffffe0;@12	if \(uVar17 != 0x14000000\) \{@-4
-use	ATIR500DVDContext::process_command_buffer@0x357c0	dVar7	intToFloatBias	CONFIRMED	DOUBLE_0004c3a8 = 0x4330000080000000, the signed int-to-double conversion bias	recordCursor\[3\] = uVar17 \& 0xffffffe0;@13	if \(uVar17 != 0x14000000\) \{@-4
 use	ATIR500DVDContext::process_command_buffer@0x357c0	uVar17	targetWidth	INFERRED	record word 3: high halfword of the size word (the else path loads the surface buffer's +0x1c/+0x1e pair the same way)	if \(uVar17 == 0xd000000\) \{@1	goto LAB_00038f80;@1
 use	ATIR500DVDContext::process_command_buffer@0x357c0	uVar21	targetHeight	INFERRED	record word 4: low halfword of the size word	uVar11 = recordCursor\[5\];@-1	goto LAB_00038f80;@1
 use	ATIR500DVDContext::process_command_buffer@0x357c0	uVar11	targetPitch	INFERRED	record word 5: (pitch & 0xff0) << 0x12 goes into the offset/pitch word, like (+0x840 & 0x3fc0) << 0x10 on the surface path	uVar11 = recordCursor\[5\];	uVar19 = uVar19 \| \(uVar11 \& 0xff0\) << 0x12;@1

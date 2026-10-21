@@ -1,0 +1,11 @@
+--- a/Sources/IOATIR500DVDContext_unlock_memory_Port.cpp	2026-10-20 16:47:34.821027227 -0700
++++ b/Sources/IOATIR500DVDContext_unlock_memory_Port.cpp	2026-10-20 16:47:34.822266960 -0700
+@@ -42,7 +42,7 @@
+   }
+   else {
+     result = 0;
+-    M<SInt16>(surface + kIOATIR500Surface_memoryLockCount) = M<SInt16>(surface + kIOATIR500Surface_memoryLockCount) + -1;
++    storeHalf(&M<UInt16>(surface + kIOATIR500Surface_memoryLockCount), M<SInt16>(surface + kIOATIR500Surface_memoryLockCount) + -1);
+   }
+   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+   if ((result == 0) && ((SInt32)lockType < 0)) {

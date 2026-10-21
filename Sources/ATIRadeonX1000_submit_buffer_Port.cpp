@@ -82,15 +82,16 @@ LAB_00020a3c:
       if (0 < cacheBytes) {
         flushOffset = 0;
         do {
-          dataCacheBlockStore((-cacheLineSize & (UInt32)bufferStart) + flushOffset);
+          dataCacheBlockStoreIndexed((-cacheLineSize & (UInt32)bufferStart), flushOffset);
           flushOffset = flushOffset + cacheLineSize;
         } while (flushOffset < cacheBytes);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush((-cacheLineSize & (UInt32)bufferStart) + flushOffset);
+      dataCacheBlockFlushIndexed((-cacheLineSize & (UInt32)bufferStart), flushOffset);
       ppcSync();
       instructionSynchronize();
+      touchWordIndexed((-cacheLineSize & (UInt32)bufferStart), flushOffset);
       instructionSynchronize();
     }
     if (M<SInt32>(self + kIOATIR500Accelerator_transferMappedFlag) != 0) {

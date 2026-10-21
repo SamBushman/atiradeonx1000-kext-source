@@ -1,6 +1,6 @@
---- a/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-20 09:35:57.121327959 -0700
-+++ b/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-20 09:35:57.122485711 -0700
-@@ -31,153 +31,162 @@
+--- a/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-20 16:28:59.249451028 -0700
++++ b/Sources/ATIR500Surface_back_resolve_fsaa_buffer_Port.cpp	2026-10-20 16:28:59.250796431 -0700
+@@ -31,153 +31,158 @@
  void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, UInt32*packet) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
@@ -32,7 +32,6 @@
 +  float lit37c;
 +  float heightScaled;
 +  float lit380;
-+  double doubleBias;
 +  UInt32 savedWord;
 +  SInt32 formatOffset;
 +  UInt32 minPitch;
@@ -61,7 +60,7 @@
         0xffffffe0;
    if ((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) != 0) {
 -    uVar16 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
-+    pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
++    pitchPerDegree = (SInt32)M<UInt16>(fixedBuffer + 0x14) / (SInt32)(M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
    }
 -  uVar14 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
 -  if (uVar14 <= uVar16) {
@@ -102,7 +101,7 @@
 -     (uVar14 = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
 -     uVar16 = uVar14 - 1, uVar14 == 0)) {
 -    uVar16 = 0;
-+     (widthDiv = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
++     (widthDiv = (SInt32)M<UInt16>(fixedBuffer + 0x1c) / (SInt32)(M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
 +     lastX = widthDiv - 1, widthDiv == 0)) {
 +    lastX = 0;
    }
@@ -124,7 +123,7 @@
 -     (uVar14 = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
 -     uVar16 = uVar14 - 1, uVar14 == 0)) {
 -    uVar16 = 0;
-+     (widthDiv = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
++     (widthDiv = (SInt32)M<UInt16>(formatBuffer + 0x1c) / (SInt32)(M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
 +     lastX = widthDiv - 1, widthDiv == 0)) {
 +    lastX = 0;
    }
@@ -154,7 +153,7 @@
    }
    else {
 -    uVar14 = (UInt32)M<UInt16>(formatBuffer + 0x14) / (uVar16 >> 0x14 & 0xf);
-+    pitchPerDegree = (UInt32)M<UInt16>(formatBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
++    pitchPerDegree = (SInt32)M<UInt16>(formatBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
    }
 -  uVar15 = 0x20 / M<UInt16>(formatBuffer + 0x16);
 -  if (uVar15 <= uVar14) {
@@ -169,7 +168,7 @@
 +    minPitch = pitchPerDegree;
 +  }
 +  if ((untiled) ||
-+     (widthDiv = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (lastX >> 0x14 & 0xf), lastX = widthDiv - 1,
++     (widthDiv = (SInt32)M<UInt16>(formatBuffer + 0x1c) / (SInt32)(lastX >> 0x14 & 0xf), lastX = widthDiv - 1,
 +     widthDiv == 0)) {
 +    lastX = 0;
    }
@@ -191,7 +190,6 @@
 -  uVar16 = M<UInt32>(fixedBuffer + 0x3c);
 -  if ((uVar16 & 0xf00000) == 0) {
 -    uVar6 = M<UInt16>(fixedBuffer + 0x1e);
-+  doubleBias = DOUBLE_0004c3a8;
 +  lit380 = FLOAT_0004c380;
 +  lit37c = FLOAT_0004c37c;
 +  lit370 = FLOAT_0004c370;
@@ -207,7 +205,6 @@
 +    lit370 = FLOAT_0004c370;
      packet[0xc2] = 0x1087;
 -    dVar11 = DOUBLE_0004c3b0;
-+    doubleBias = DOUBLE_0004c3b0;
      packet[0xc4] = 0xc0033500;
 -    packet[0xbe] = (UInt32)fVar10;
 -    packet[0xc1] = (UInt32)fVar10;
@@ -219,7 +216,7 @@
 +    packet[0xbe] = FBITS(lit370);
 +    packet[0xc1] = FBITS(lit370);
 +    packet[0xc6] = FBITS(lit370);
-+    heightF = (float)((double)CONCAT44d(0x43300000,(UInt32)heightField) - doubleBias);
++    heightF = (float)(UInt32)((UInt32)heightField);
 +    heightScaled = heightF * FLOAT_0004c37c;
 +    packet[199] = FBITS(((heightF + lit370) * FLOAT_0004c380));
 +    packet[0xc3] = (SInt32)heightScaled;
@@ -246,9 +243,8 @@
 -    packet[199] = (UInt32)((fVar3 + fVar4) * fVar10);
 -    packet[0xc3] = (SInt32)(fVar2 * fVar9) << 0x10 | (SInt32)(fVar3 * fVar9);
 +    packet[0xc1] = FBITS(lit370);
-+    scaledW = (float)((double)CONCAT44d(0x43300000,(UInt32)widthField / (tilingBits >> 0x14 & 0xf) ^ 0x80000000) -
-+                   doubleBias);
-+    scaledH = (float)((double)CONCAT44d(0x43300000,(UInt32)heightField) - DOUBLE_0004c3b0);
++    scaledW = (float)(SInt32)((SInt32)widthField / (SInt32)(tilingBits >> 0x14 & 0xf));
++    scaledH = (float)(UInt32)((UInt32)heightField);
 +    packet[0xc6] = FBITS(((scaledW + lit370) * lit380));
 +    packet[199] = FBITS(((scaledH + lit370) * lit380));
 +    packet[0xc3] = (SInt32)(scaledW * lit37c) << 0x10 | (SInt32)(scaledH * lit37c);

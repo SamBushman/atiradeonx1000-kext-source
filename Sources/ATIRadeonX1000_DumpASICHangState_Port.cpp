@@ -149,8 +149,7 @@ void ATIRadeonX1000::DumpASICHangState() {
   GH_IOSleep(10);
   do {
     registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-    M<UInt32>(registers + 0x7f0) =
-         queueAddress << 0x18 | (queueAddress & 0xff00) << 8 | queueAddress >> 8 & 0xff00 | queueAddress >> 0x18;
+    storeWordByteReversed(&M<UInt8>(registers + 0x7f0), queueAddress);
     enforceInOrderExecutionIO();
     csqData = loadWordByteReversed(&M<UInt8>(registers + 0x7f4));
     checksum = checksum + csqData;

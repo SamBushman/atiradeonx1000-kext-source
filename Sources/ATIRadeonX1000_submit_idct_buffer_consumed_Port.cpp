@@ -42,6 +42,8 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
   SInt32 writeIndex;
   SInt32 ringBase;
   SInt32 spinCount;
+  SInt32 rptrBase;
+  SInt32 rptrOffset;
   UInt32 ringAddress;
   UInt32 nextIndex;
   SInt32 ringFlushEnd;
@@ -59,15 +61,16 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
     bufferFlushEnd = (M<SInt32>(infoBytes + 0x10) * 4 + ((UInt32)buffer & cacheLine - 1)) - cacheLine;
     if (0 < bufferFlushEnd) {
       do {
-        dataCacheBlockStore((-cacheLine & (UInt32)buffer) + flushOffset);
+        dataCacheBlockStoreIndexed((-cacheLine & (UInt32)buffer), flushOffset);
         flushOffset = flushOffset + cacheLine;
       } while (flushOffset < bufferFlushEnd);
     }
     ppcSync();
     instructionSynchronize();
-    dataCacheBlockFlush((-cacheLine & (UInt32)buffer) + flushOffset);
+    dataCacheBlockFlushIndexed((-cacheLine & (UInt32)buffer), flushOffset);
     ppcSync();
     instructionSynchronize();
+    touchWordIndexed((-cacheLine & (UInt32)buffer), flushOffset);
     instructionSynchronize();
   }
   if (M<SInt32>(self + kIOATIR500Accelerator_transferMappedFlag) != 0) {
@@ -77,8 +80,9 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
   if (M<SInt32>(self + kIOATIR500Accelerator_xdctEngineRunning) != 0) {
     writeIndex = M<SInt32>(self + kIOATIR500Accelerator_idctRingCursor);
     spinCount = 0;
-    while ((((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) + M<SInt32>(self + kIOATIR500Accelerator_idctPointerOffset))) & 0xffff) -
-            writeIndex) - 1 & 0x7ff) < 0x20) {
+    rptrBase = M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase);
+    rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_idctPointerOffset);
+    while (((loadWordByteReversedIndexed(rptrBase, rptrOffset) - writeIndex) - 1 & 0x7ff) < 0x20) {
       spinCount = spinCount + 1;
       if (spinCount == 0xf4241) goto LAB_0001ef58;
       do {
@@ -209,18 +213,19 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
         ringFlushEnd = ((ringAddress & ringCacheLine - 1) + 0x80) - ringCacheLine;
         if (0 < ringFlushEnd) {
           do {
-            dataCacheBlockStore(ringLineStart + flushOffset);
+            dataCacheBlockStoreIndexed(ringLineStart, flushOffset);
             flushOffset = flushOffset + ringCacheLine;
           } while (flushOffset < ringFlushEnd);
         }
         ppcSync();
         instructionSynchronize();
-        dataCacheBlockFlush(ringLineStart + flushOffset);
+        dataCacheBlockFlushIndexed(ringLineStart, flushOffset);
         ppcSync();
         instructionSynchronize();
+        touchWordIndexed(ringLineStart, flushOffset);
         instructionSynchronize();
       }
-      M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + 0x1fa0) = ringIndex * 0x1000000 | (ringIndex & 0x700) << 8;
+      storeWordByteReversed(&M<UInt8>(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + 0x1fa0), ringIndex & 0x7ff);
       enforceInOrderExecutionIO();
       M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) = stamp + 1;
       return stamp;

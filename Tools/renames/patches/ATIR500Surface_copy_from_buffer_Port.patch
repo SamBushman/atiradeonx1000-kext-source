@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 09:38:04.332820932 -0700
-+++ b/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 09:38:04.334262723 -0700
+--- a/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 16:29:00.412784914 -0700
++++ b/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 16:29:00.414107296 -0700
 @@ -34,47 +34,57 @@
      UInt8 *transferBytes = reinterpret_cast<UInt8 *>(transfer);
  
@@ -160,7 +160,7 @@
 +    mappedBase = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
      if ((tilingBits & 0xf00000) != 0) {
 -      uVar19 = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
-+      levelPitchPixels = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
++      levelPitchPixels = (int)((SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
        ;
      }
      bytesPerPixel = M<UInt16>(bufferBytes + 0x16);

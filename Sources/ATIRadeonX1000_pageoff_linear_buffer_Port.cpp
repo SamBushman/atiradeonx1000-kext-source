@@ -105,7 +105,7 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
     }
     bufferGartOffset = M<int>(textureBytes + 4);
     mapCount = M<SInt16>(innerBuffer + 0xe) + 1;
-    M<SInt16>(innerBuffer + 0xe) = mapCount;
+    storeHalf(&M<UInt16>(innerBuffer + 0xe), mapCount);
     if (bufferGartOffset == 0) {
       mapResult = VCALL(M<int>(self), 0x5a8)(self,textureBytes);
       if ((mapResult == 0) &&
@@ -120,14 +120,14 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *texture, ATITe
                                (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
                                (IOATIR500Surface *)((UInt8 *)0x0),(IOATIR500Shared *)((UInt8 *)0x0),
                                (VendorTransferBuffer *)((UInt8 *)textureBytes)), mapResult == 0)) {
-          M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + -1;
+          storeHalf(&M<UInt16>(innerBuffer + 0xe), M<SInt16>(innerBuffer + 0xe) + -1);
           return 0;
         }
       }
       mapCount = M<SInt16>(innerBuffer + 0xe);
     }
     type = textureBytes[0x20];
-    M<SInt16>(innerBuffer + 0xe) = mapCount + -1;
+    storeHalf(&M<UInt16>(innerBuffer + 0xe), mapCount + -1);
   }
   if (type == 0x7) {
     size = M<int>(textureBytes + 0x50);

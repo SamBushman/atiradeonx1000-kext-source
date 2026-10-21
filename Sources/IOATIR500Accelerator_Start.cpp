@@ -16,6 +16,7 @@
 
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h"
 
 inline void *operator new(size_t, void *where) { return where; }   /* placement new (the same inline definition as ATIRadeonX1000_Start.cpp) */
 
@@ -526,13 +527,11 @@ bool IOATIR500Accelerator::configureAGP(IOService *real_provider) {
   M<UInt32>(self + kIOATIR500Accelerator_gartTable) = gartTableMemory;
   gartEntry = VCALL(M<SInt32>(self), 0x5b0)
                     (self,M<SInt32>(self + kIOATIR500Accelerator_gartTablePhysical) + M<SInt32>(self + kIOATIR500Accelerator_gartSizeKB));
-  M<UInt32>(self + kIOATIR500Accelerator_gartEmptyEntry) =
-       gartEntry << 0x18 | (gartEntry & 0xff00) << 8 | gartEntry >> 8 & 0xff00 | gartEntry >> 0x18;
+  storeWordByteReversed(&M<UInt8>(self + kIOATIR500Accelerator_gartEmptyEntry), gartEntry);
   gartEntry = VCALL(M<SInt32>(self), 0x5b0)
                     (self,M<SInt32>(self + kIOATIR500Accelerator_gartTablePhysical) + M<SInt32>(self + kIOATIR500Accelerator_gartSizeKB) +
                              GH_page_size);
-  M<UInt32>(self + kIOATIR500Accelerator_gartReservedEntry) =
-       gartEntry << 0x18 | (gartEntry & 0xff00) << 8 | gartEntry >> 8 & 0xff00 | gartEntry >> 0x18;
+  storeWordByteReversed(&M<UInt8>(self + kIOATIR500Accelerator_gartReservedEntry), gartEntry);
   gartTable = M<SInt32>(self + kIOATIR500Accelerator_gartTable);
   if (gartTable == 0) {
     return 0;

@@ -66,6 +66,8 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs
   SInt64 fctiwTmp2;
   UInt32 doubleHi2;
   unsigned int doubleLo2;
+  unsigned int widthQuotient;
+  unsigned int heightQuotient;
   SInt64 fctiwTmp3;
   SInt64 fctiwTmp4;
   UInt32 doubleHi3;
@@ -137,14 +139,14 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs
     heightBits = (int)srcHeight >> 0x1f & -srcHeight ^ 0x80000000;
     doubleLo3 = heightBits;
     planesLeft = 6;
-    doubleLo2 = (int)(srcWidth / M<unsigned int>(infoBytes + 0x50)) >> 0x1f &
-                -(srcWidth / M<unsigned int>(infoBytes + 0x50)) ^ 0x80000000;
-    widthScaled = (float)((double)CONCAT44d(0x43300000,doubleLo5) - 4503601774854144.0) *
+    widthQuotient = srcWidth / M<unsigned int>(infoBytes + 0x50);
+    doubleLo2 = (int)widthQuotient >> 0x1f & -widthQuotient ^ 0x80000000;
+    widthScaled = (float)(SInt32)(doubleLo5 ^ 0x80000000) *
             M<float>(infoBytes + 0x34);
-    halfHeightBits = (int)(srcHeight / M<unsigned int>(infoBytes + 0x4c)) >> 0x1f &
-            -(srcHeight / M<unsigned int>(infoBytes + 0x4c)) ^ 0x80000000;
+    heightQuotient = srcHeight / M<unsigned int>(infoBytes + 0x4c);
+    halfHeightBits = (int)heightQuotient >> 0x1f & -heightQuotient ^ 0x80000000;
     doubleLo0 = halfHeightBits;
-    widthScaledAlt = (float)((double)CONCAT44d(0x43300000,doubleLo2) - 4503601774854144.0) *
+    widthScaledAlt = (float)(SInt32)(doubleLo2 ^ 0x80000000) *
             M<float>(infoBytes + 0x34);
     infoCursor = infoBytes;
     do {
@@ -158,9 +160,8 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs
       if ((altPlaneMask >> (planeIndex & 0x3f) & 1) == 0) {
         doubleHi4 = 0x43300000;
         doubleLo4 = M<UInt32>(infoBytes + 0x44);
-        rowOffsetF = (float)((double)CONCAT44d(0x43300000,heightBits) - 4503601774854144.0) * heightScale *
-                (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x44)) -
-                       4503599627370496.0);
+        rowOffsetF = (float)(SInt32)(heightBits ^ 0x80000000) * heightScale *
+                (float)(UInt32)(M<UInt32>(infoBytes + 0x44));
         if (2147483648.0 <= rowOffsetF) {
           fctiwTmp6 = (SInt64)(int)(rowOffsetF - 2147483648.0);
           rowByteOffset = (int)(rowOffsetF - 2147483648.0) + -0x80000000;
@@ -182,9 +183,8 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32*outRegs
       else {
         doubleHi1 = 0x43300000;
         doubleLo1 = M<UInt32>(infoBytes + 0x48);
-        rowOffsetF = (float)((double)CONCAT44d(0x43300000,halfHeightBits) - 4503601774854144.0) * heightScale *
-                (float)((double)CONCAT44d(0x43300000,M<UInt32>(infoBytes + 0x48)) -
-                       4503599627370496.0);
+        rowOffsetF = (float)(SInt32)(halfHeightBits ^ 0x80000000) * heightScale *
+                (float)(UInt32)(M<UInt32>(infoBytes + 0x48));
         if (2147483648.0 <= rowOffsetF) {
           fctiwTmp2 = (SInt64)(int)(rowOffsetF - 2147483648.0);
           rowByteOffset = (int)(rowOffsetF - 2147483648.0) + -0x80000000;

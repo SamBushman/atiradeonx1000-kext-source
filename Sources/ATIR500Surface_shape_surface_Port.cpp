@@ -246,12 +246,12 @@ LAB_0003c260:
             M<UInt16>(self + bufferRecordOffset + 0xbc) = 0;
           }
           else {
-            M<SInt16>(self + bufferRecordOffset + 0xbc) = (SInt16)(rowBytes / bytesPerPixel);
+            storeHalf(&M<UInt16>(self + bufferRecordOffset + 0xbc), (rowBytes / bytesPerPixel));
           }
-          M<SInt16>(self + bufferRecordOffset + 0xc0) = (SInt16)rowBytes;
-          M<SInt16>(self + bufferRecordOffset + 0xbe) = (SInt16)bytesPerPixel;
-          M<SInt16>(self + bufferRecordOffset + 0xc4) = (SInt16)bufferWidthScale * M<SInt16>(self + kIOATIR500Surface_width);
-          M<SInt16>(self + bufferRecordOffset + 0xc6) = (SInt16)bufferHeightScale * M<SInt16>(self + kIOATIR500Surface_height);
+          storeHalf(&M<UInt16>(self + bufferRecordOffset + 0xc0), rowBytes);
+          storeHalf(&M<UInt16>(self + bufferRecordOffset + 0xbe), bytesPerPixel);
+          storeHalf(&M<UInt16>(self + bufferRecordOffset + 0xc4), (SInt16)bufferWidthScale * M<SInt16>(self + kIOATIR500Surface_width));
+          storeHalf(&M<UInt16>(self + bufferRecordOffset + 0xc6), (SInt16)bufferHeightScale * M<SInt16>(self + kIOATIR500Surface_height));
         }
         self[bufferRecordOffset + 0xe0] = bufferTilingByte;
         self[bufferRecordOffset + 0xe1] = ((UInt8)(formatEntry1 >> 10) & 3);
@@ -351,12 +351,12 @@ LAB_0003c52c:
         M<UInt16>(self + kIOATIR500Surface_buffer9PitchPixels) = 0;
       }
       else {
-        M<SInt16>(self + kIOATIR500Surface_buffer9PitchPixels) = (SInt16)(pitchBytes / bytesPerPixel);
+        storeHalf(&M<UInt16>(self + kIOATIR500Surface_buffer9PitchPixels), (pitchBytes / bytesPerPixel));
       }
-      M<SInt16>(self + kIOATIR500Surface_buffer9PitchBytes) = (SInt16)pitchBytes;
-      M<SInt16>(self + kIOATIR500Surface_buffer9BytesPerPixel) = (SInt16)bytesPerPixel;
-      M<SInt16>(self + kIOATIR500Surface_buffer9Width) = (SInt16)widthScale * surfaceWidth16;
-      M<SInt16>(self + kIOATIR500Surface_buffer9Height) = (SInt16)heightScale * surfaceHeight16;
+      storeHalf(&M<UInt16>(self + kIOATIR500Surface_buffer9PitchBytes), pitchBytes);
+      storeHalf(&M<UInt16>(self + kIOATIR500Surface_buffer9BytesPerPixel), bytesPerPixel);
+      storeHalf(&M<UInt16>(self + kIOATIR500Surface_buffer9Width), (SInt16)widthScale * surfaceWidth16);
+      storeHalf(&M<UInt16>(self + kIOATIR500Surface_buffer9Height), (SInt16)heightScale * surfaceHeight16);
     }
     self[0x518] = tilingMode;
     self[0x519] = fmtBitsA;
@@ -559,16 +559,16 @@ LAB_0003c9d0:
           M<UInt16>(self + bufferRecord + 0xbc) = 0;
         }
         else {
-          M<SInt16>(self + bufferRecord + 0xbc) = (SInt16)(bufferRowBytes / bytesPerPixel);
+          storeHalf(&M<UInt16>(self + bufferRecord + 0xbc), (bufferRowBytes / bytesPerPixel));
         }
         mipIndex = 0;
-        M<SInt16>(self + bufferRecord + 0xbe) = (SInt16)bytesPerPixel;
-        M<SInt16>(self + bufferRecord + 0xc0) = (SInt16)bufferRowBytes;
+        storeHalf(&M<UInt16>(self + bufferRecord + 0xbe), bytesPerPixel);
+        storeHalf(&M<UInt16>(self + bufferRecord + 0xc0), bufferRowBytes);
         mipOffsetCursor = self + bufferRecord + 0xe8;
         M<UInt16>(self + bufferRecord + 0xc4) = M<UInt16>(self + kIOATIR500Surface_width);
         heightField = M<UInt16>(self + kIOATIR500Surface_height);
-        M<SInt16>(self + bufferRecord + 0xca) = (SInt16)levelCount;
-        M<SInt16>(self + bufferRecord + 200) = (SInt16)faceCount;
+        storeHalf(&M<UInt16>(self + bufferRecord + 0xca), levelCount);
+        storeHalf(&M<UInt16>(self + bufferRecord + 200), faceCount);
         M<UInt16>(self + bufferRecord + 0xc6) = heightField;
         mipSource = mipOffsets;
         do {
@@ -606,7 +606,7 @@ LAB_0003c9d0:
       if (M<SInt32>(bufferRecordPtr + 0x57c) != 0) {
         ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + bufferId * 0x78 + 0xa8)));
       }
-      M<SInt16>(bufferRecordPtr + 0x574) = overlayRight - overlayLeft;
+      storeHalf(&M<UInt16>(bufferRecordPtr + 0x574), overlayRight - overlayLeft);
       heightValue = halfScaledHeight16;
       if ((((M<SInt32>(self + kATIR500Surface_deintMode) != 0) && (9 < bufferId)) && (bufferId < 0xf)) &&
          ((heightValue = scaledHeight16, M<SInt32>(bufferRecordPtr + 0x560) != 0 &&
@@ -628,7 +628,7 @@ LAB_0003c9d0:
         self[0x862] = 0xb;
       }
       else if (bufferId == 0x12) {
-        M<SInt16>(self + kIOATIR500Surface_buffer18Height) = (SInt16)overlayHeightPx;
+        storeHalf(&M<UInt16>(self + kIOATIR500Surface_buffer18Height), overlayHeightPx);
         self[0x952] = 0xb;
       }
       else {
@@ -646,12 +646,12 @@ LAB_0003c9d0:
         alignedWidth = (bufferWidth16 & 0xffffff00) + 0x100;
       }
       bytesPerPixelOv = bytesPerPixelOv & 0xffff;
-      M<SInt16>(bufferRecordPtr + 0x570) = (SInt16)(alignedWidth * bytesPerPixelOv);
+      storeHalf(&M<UInt16>(bufferRecordPtr + 0x570), (alignedWidth * bytesPerPixelOv));
       if (bytesPerPixelOv == 0) {
         M<UInt16>(bufferRecordPtr + 0x56c) = bytesPerPixel16;
       }
       else {
-        M<SInt16>(bufferRecordPtr + 0x56c) = (SInt16)((alignedWidth * bytesPerPixelOv & 0xffff) / bytesPerPixelOv);
+        storeHalf(&M<UInt16>(bufferRecordPtr + 0x56c), ((alignedWidth * bytesPerPixelOv & 0xffff) / bytesPerPixelOv));
       }
       if (bufferId == 0x12) {
         self[0x950] = tilingMode;

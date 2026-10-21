@@ -67,8 +67,8 @@ UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *buffe
     M<UInt8 *>(backingStore + 8) = (UInt8 *)memory;
     M<UInt8>(M<SInt32>(backingStore + 0x14) + 0x16) = 5;
     M<UInt8>(backingStore + 0x20) = 5;
-    M<SInt16>(backingStore + 0x50) = (SInt16)pageOffset;
-    M<SInt16>(backingStore + 0x52) = (SInt16)alignedPitch;
+    storeHalf(&M<UInt16>(backingStore + 0x50), pageOffset);
+    storeHalf(&M<UInt16>(backingStore + 0x52), alignedPitch);
     M<UInt8>(backingStore + 0x58) = 1;
     M<UInt32>(backingStore + 0x54) = M<UInt32>(self + kIOATIR500Surface_stamp);
     if (((self[0xbf7] == 0x0) || (M<SInt32>(bufferBytes + 0x24) == 0)) ||

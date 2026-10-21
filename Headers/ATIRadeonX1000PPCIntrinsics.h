@@ -27,16 +27,25 @@ static inline void dataCacheBlockFlush(UInt32 addr) { __asm__ __volatile__("dcbf
 static inline void dataCacheBlockTouch(UInt32 addr) { __asm__ __volatile__("dcbt 0,%0" : : "r"(addr) : "memory"); }
 static inline void dataCacheBlockTouch(const void *addr) { dataCacheBlockTouch(reinterpret_cast<UInt32>(addr)); }
 static inline void dataCacheBlockStore(UInt32 addr) { __asm__ __volatile__("dcbst 0,%0" : : "r"(addr) : "memory"); }
+/* The indexed forms: the shipped flush loops use `dcbf rA,rB` / `dcbst rA,rB` with the line base in rA and the running offset in rB (no per-iteration add), and
+ * end the "out" flush with a dummy `lwzx` of the flushed line. `base` must not be r0 ("b" constraint: rA = 0 would mean a literal zero). */
+static inline void dataCacheBlockFlushIndexed(UInt32 base, UInt32 offset) { __asm__ __volatile__("dcbf %0,%1" : : "b"(base), "r"(offset) : "memory"); }
+static inline void dataCacheBlockStoreIndexed(UInt32 base, UInt32 offset) { __asm__ __volatile__("dcbst %0,%1" : : "b"(base), "r"(offset) : "memory"); }
+static inline void touchWordIndexed(UInt32 base, UInt32 offset) { UInt32 v; __asm__ __volatile__("lwzx %0,%1,%2" : "=r"(v) : "b"(base), "r"(offset) : "memory"); }
 /* lwbrx: ONE byte-reversed 32-bit load (the shipped code reads little-endian hardware registers this way). Ghidra expands it to
  * four byte loads at A+3,A+2,A+1,A shifted together, which on MMIO is four bus transactions instead of one (#172). */
 static inline UInt32 loadWordByteReversed(const volatile void *addr) { UInt32 v; __asm__ __volatile__("lwbrx %0,0,%1" : "=r"(v) : "r"(addr) : "memory"); return v; }
 /* stwbrx / lhbrx / sthbrx: the byte-reversed store and the byte-reversed halfword load/store (little-endian hardware registers). One bus transaction each;
  * the Ghidra expansion into per-byte accesses is not equivalent for MMIO (Tools/difftest finds it as a different register access pattern). */
 static inline void storeWordByteReversed(volatile void *addr, UInt32 v) { __asm__ __volatile__("stwbrx %0,0,%1" : : "r"(v), "r"(addr) : "memory"); }
+static inline UInt32 loadWordByteReversedIndexed(UInt32 base, UInt32 offset) { UInt32 v; __asm__ __volatile__("lwbrx %0,%1,%2" : "=r"(v) : "b"(base), "r"(offset) : "memory"); return v; }  /* lwbrx rD,rA,rB (the polling loops of the shipped code keep base and offset in registers) */
 static inline UInt32 loadHalfByteReversed(const volatile void *addr) { UInt32 v; __asm__ __volatile__("lhbrx %0,0,%1" : "=r"(v) : "r"(addr) : "memory"); return v; }
-static inline void storeHalfByteReversed(volatile void *addr, UInt32 v) { __asm__ __volatile__("sthbrx %0,0,%1" : : "r"(v), "r"(addr) : "memory"); }
+static inline void storeHalf(volatile UInt16 *addr, UInt32 v) { __asm__ __volatile__("sth %1,%0" : "=m"(*addr) : "r"(v)); }
 static inline void enforceInOrderExecutionIO(void) { __asm__ __volatile__("eieio" : : : "memory"); }
 static inline void ppcSync(void) { __asm__ __volatile__("sync" : : : "memory"); }
+/* storeHalf: ONE `sth` of the low halfword of an int. gcc 4.0.1 emits `extsh` before the store when an int is assigned to a volatile 16-bit lvalue (M<SInt16>), which the shipped code
+ * (a plain struct-member store) does not. Same bytes written, one instruction fewer per store. */
+static inline void storeHalf(volatile void *addr, UInt32 v) { __asm__ __volatile__("sth %0,0(%1)" : : "r"(v), "b"(addr) : "memory"); }
 static inline void instructionSynchronize(void) { __asm__ __volatile__("isync" : : : "memory"); }
 
 /* lwarx / stwcx. read-modify-write loop: Ghidra shows it as

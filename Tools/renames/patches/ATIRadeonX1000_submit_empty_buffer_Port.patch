@@ -1,6 +1,18 @@
---- a/Sources/ATIRadeonX1000_submit_empty_buffer_Port.cpp	2026-10-20 09:58:31.973611510 -0700
-+++ b/Sources/ATIRadeonX1000_submit_empty_buffer_Port.cpp	2026-10-20 09:58:31.974527806 -0700
-@@ -54,8 +54,7 @@
+--- a/Sources/ATIRadeonX1000_submit_empty_buffer_Port.cpp	2026-10-20 16:41:22.970350586 -0700
++++ b/Sources/ATIRadeonX1000_submit_empty_buffer_Port.cpp	2026-10-20 16:41:22.971682353 -0700
+@@ -44,18 +44,15 @@
+   do {
+     M<UInt32>(mmioBase + 0x30) = 0x10000000;
+     enforceInOrderExecutionIO();
+-    M<UInt32>(mmioBase + 0x34) =
+-         pcieIndirectValue << 0x18 | (pcieIndirectValue & 0xff00 | 0x100) << 8 | (pcieIndirectValue & 0xff0000) >> 8 | pcieIndirectValue >> 0x18;
++    storeWordByteReversed(&M<UInt8>(mmioBase + 0x34), (pcieIndirectValue & 0xff) | (pcieIndirectValue & 0xff00 | 0x100) | (pcieIndirectValue & 0xff0000) | (pcieIndirectValue & 0xff000000));
+     enforceInOrderExecutionIO();
+     M<UInt32>(mmioBase + 0x30) = 0x10000000;
+     enforceInOrderExecutionIO();
+-    M<UInt32>(mmioBase + 0x34) =
+-         pcieIndirectValue << 0x18 | (pcieIndirectValue & 0xff00) << 8 | pcieIndirectValue >> 8 & 0xff00 | pcieIndirectValue >> 0x18;
++    storeWordByteReversed(&M<UInt8>(mmioBase + 0x34), pcieIndirectValue);
      enforceInOrderExecutionIO();
      M<UInt32>(mmioBase + 0x30) = 0x22000000;
      enforceInOrderExecutionIO();

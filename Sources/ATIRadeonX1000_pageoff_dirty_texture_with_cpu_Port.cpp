@@ -223,14 +223,10 @@ LAB_0001e668:
                    (tilingBits | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x14 | ((UInt8)hwInfoBytes[0x1b] & 3) << 0x16)
                    >> 8;
               enforceInOrderExecutionIO();
-              M<UInt32>(registerWindow + surfaceLowerOffset) =
-                   vramOffset * 0x1000000 | (vramOffset & 0xff00) << 8 | vramOffset >> 8 & 0xff00 |
-                   vramOffset >> 0x18;
+              storeWordByteReversed(&M<UInt8>(registerWindow + surfaceLowerOffset), vramOffset);
               enforceInOrderExecutionIO();
               endAddress = (vramOffset + rowGranularity * srcPitch * ((rowCount + rowGranularity + -1) / rowGranularity)) - 1;
-              M<UInt32>(registerWindow + surfaceUpperOffset) =
-                   endAddress * 0x1000000 | (endAddress & 0xff00) << 8 | endAddress >> 8 & 0xff00 |
-                   endAddress >> 0x18;
+              storeWordByteReversed(&M<UInt8>(registerWindow + surfaceUpperOffset), endAddress);
               enforceInOrderExecutionIO();
               regPtr = (UInt8 *)(registerWindow + surfaceUpperOffset);
               global_dummy_read_back_a_register =
@@ -255,15 +251,16 @@ LAB_0001e668:
                     if (0 < flushBytes) {
                       flushOffset = 0;
                       do {
-                        dataCacheBlockStore((-cacheLine & (UInt32)destination) + flushOffset);
+                        dataCacheBlockStoreIndexed((-cacheLine & (UInt32)destination), flushOffset);
                         flushOffset = flushOffset + cacheLine;
                       } while (flushOffset < flushBytes);
                     }
                     ppcSync();
                     instructionSynchronize();
-                    dataCacheBlockFlush((-cacheLine & (UInt32)destination) + flushOffset);
+                    dataCacheBlockFlushIndexed((-cacheLine & (UInt32)destination), flushOffset);
                     ppcSync();
                     instructionSynchronize();
+                    touchWordIndexed((-cacheLine & (UInt32)destination), flushOffset);
                     instructionSynchronize();
                   }
                   pixelShift = (UInt32)(UInt8)pixelShiftByte;

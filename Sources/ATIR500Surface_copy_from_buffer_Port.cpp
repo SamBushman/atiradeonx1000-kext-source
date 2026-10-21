@@ -159,7 +159,7 @@ LAB_00043834:
     levelPitchPixels = 0;
     mappedBase = M<int>(bufferBytes + 8) + M<int>(self + kIOATIR500Surface_kernelMapAddress);
     if ((tilingBits & 0xf00000) != 0) {
-      levelPitchPixels = (int)((unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
+      levelPitchPixels = (int)((SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf)) >> (level & 0x3f)
       ;
     }
     bytesPerPixel = M<UInt16>(bufferBytes + 0x16);

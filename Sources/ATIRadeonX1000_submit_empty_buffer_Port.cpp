@@ -44,13 +44,11 @@ void ATIRadeonX1000::submit_empty_buffer() {
   do {
     M<UInt32>(mmioBase + 0x30) = 0x10000000;
     enforceInOrderExecutionIO();
-    M<UInt32>(mmioBase + 0x34) =
-         pcieIndirectValue << 0x18 | (pcieIndirectValue & 0xff00 | 0x100) << 8 | (pcieIndirectValue & 0xff0000) >> 8 | pcieIndirectValue >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x34), (pcieIndirectValue & 0xff) | (pcieIndirectValue & 0xff00 | 0x100) | (pcieIndirectValue & 0xff0000) | (pcieIndirectValue & 0xff000000));
     enforceInOrderExecutionIO();
     M<UInt32>(mmioBase + 0x30) = 0x10000000;
     enforceInOrderExecutionIO();
-    M<UInt32>(mmioBase + 0x34) =
-         pcieIndirectValue << 0x18 | (pcieIndirectValue & 0xff00) << 8 | pcieIndirectValue >> 8 & 0xff00 | pcieIndirectValue >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x34), pcieIndirectValue);
     enforceInOrderExecutionIO();
     M<UInt32>(mmioBase + 0x30) = 0x22000000;
     enforceInOrderExecutionIO();

@@ -312,13 +312,13 @@ LAB_00042bf4:
   M<unsigned int>((int)Vol(rec0->entries[1 + slot].header) + 0x14) = paddedWordCount;
   gartOffset = (int)Vol(rec0->entries[1 + slot].gartOffset);
   useCount = M<SInt16>(transferBytes + 0xe) + 1;
-  M<SInt16>(transferBytes + 0xe) = useCount;
+  storeHalf(&M<UInt16>(transferBytes + 0xe), useCount);
   if (gartOffset == 0) {
     ((IOATIR500Surface *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)&rec0->entries[1 + slot]));
     useCount = M<SInt16>(transferBytes + 0xe);
     gartOffset = (int)Vol(rec0->entries[1 + slot].gartOffset);
   }
-  M<SInt16>(transferBytes + 0xe) = useCount + -1;
+  storeHalf(&M<UInt16>(transferBytes + 0xe), useCount + -1);
   submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->submit_buffer((UInt32 *)((int)Vol(rec0->entries[1 + slot].header) + 0x20),gartOffset + 0x20,
                       M<UInt32>((int)Vol(rec0->entries[1 + slot].header) + 0x14));
   M<UInt32>(self + kIOATIR500Surface_stamp) = submitStamp;

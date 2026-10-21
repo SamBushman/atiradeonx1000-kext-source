@@ -87,8 +87,8 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   UInt32 packetWordA6;
   UInt32 blk[35];   /* the pcl_ParamsR500_t block on the shipped stack: 0x8c bytes at sp+0x40 (Ghidra blk[0] .. blk[34]) */
   UInt16 rect[4];   /* the 8-byte rectangle at sp+0x38 (Ghidra rect[0] .. rect[3]) */
-  double widthD;
-  double heightD;
+  float widthD;
+  float heightD;
   UInt32 magicHi0;
   UInt32 widthLo;
   UInt32 magicHi1;
@@ -97,22 +97,19 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   UInt32 dstWidthLo;
   UInt32 magicHi3;
   UInt32 dstHeightLo;
-  double magicBias;
-  double vertexScaleA;
-  double vertexBiasA;
-  double vertexScaleB;
-  double vertexBiasB;
-  
-  magicBias = DOUBLE_0004c3b0;
+  float vertexScaleA;
+  float vertexBiasA;
+  float vertexScaleB;
+  float vertexBiasB;
   widthLo = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8);
   rotation = M<SInt32>(self + panel * 4 + 0xb5c);
   magicHi0 = 0x43300000;
   heightLo = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9da);
   magicHi1 = 0x43300000;
   M<UInt32>(self + kIOATIR500Accelerator_unknown_0x78) = 0;
-  BF(blk[23]) = (float)((double)CONCAT44d(0x43300000,widthLo) - magicBias);
+  BF(blk[23]) = (float)(UInt32)(widthLo);
   widthD = (double)BF(blk[23]);
-  BF(blk[24]) = (float)((double)CONCAT44d(0x43300000,heightLo) - magicBias);
+  BF(blk[24]) = (float)(UInt32)(heightLo);
   heightD = (double)BF(blk[24]);
   if (((UInt32)flag) != 0) {
     panelHeight16 = M<UInt16>(self + panel * 0x78 + 0x9da);
@@ -163,17 +160,16 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     blk[29] = 0x3f800000;
     blk[30] = 0x3f800000;
     blk[31] = 0x3f800000;
-    BF(blk[27]) = (float)((double)CONCAT44d(0x43300000,dstWidthLo) - DOUBLE_0004c3b0);
-    BF(blk[28]) = (float)((double)CONCAT44d(0x43300000,dstHeightLo) - DOUBLE_0004c3b0);
+    BF(blk[27]) = (float)(UInt32)(dstWidthLo);
+    BF(blk[28]) = (float)(UInt32)(dstHeightLo);
     blk[6] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9dc) *
                 M<SInt32>(self + panel * 0x78 + 0x9fc) + M<SInt32>(self + panel * 0x78 + 0x9c4) &
                 0xffffffe0;
     if ((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) != 0) {
-      widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) /
-               (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf);
+      widthUnits = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf);
     }
     pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2);
-    if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= widthUnits) {
+    if (pitchUnits <= widthUnits) {
       pitchUnits = widthUnits;
     }
     blkFormatFieldE0 = FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c);
@@ -186,8 +182,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
                 (blkFormatFieldE0 & 0x1800) << 1 |
                 blkFormatFieldE0 >> 3 & 0xc00 | blkFormatFieldE0 >> 7 & 0x300 | blkFormatFieldE0 >> 0x11 & 0x1f;
     if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-       (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                 (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+       (columnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = columnCount - 1,
        columnCount == 0)) {
       lastColumn = 0;
     }
@@ -201,8 +196,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
                 M<SInt32>(self + panel * 0x78 + 0x16c) + M<SInt32>(self + panel * 0x78 + 0x134) &
                 0xffffffe0;
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-       (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+       (columnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = columnCount - 1,
        columnCount == 0)) {
       lastColumn = 0;
     }
@@ -220,14 +214,14 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
       widthUnits = 0;
     }
     else {
-      widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (bufferFormatWord >> 0x14 & 0xf);
+      widthUnits = (SInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (SInt32)(bufferFormatWord >> 0x14 & 0xf);
     }
     pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x142);
-    if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= widthUnits) {
+    if (pitchUnits <= widthUnits) {
       pitchUnits = widthUnits;
     }
     if ((noFormatBits) ||
-       (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
+       (columnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (SInt32)(bufferFormatWord >> 0x14 & 0xf),
        lastColumn = columnCount - 1, columnCount == 0)) {
       lastColumn = 0;
     }
@@ -237,8 +231,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     }
     blk[3] = pitchUnits - 1 & 0x3fff | (lastColumn & 0x800) << 4 | (lastRow & 0x800) << 5;
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-       (blk[13] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-                    (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), blk[13] == 0)) {
+       (blk[13] = (SInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), blk[13] == 0)) {
       blk[13] = 1;
     }
     blk[14] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
@@ -269,11 +262,10 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
        (UInt32)M<UInt16>(self + panel * 0x78 + 0x9dc) * M<SInt32>(self + panel * 0x78 + 0x9fc) +
        M<SInt32>(self + panel * 0x78 + 0x9c4) & 0xffffffe0;
   if ((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) != 0) {
-    widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) /
-             (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf);
+    widthUnits = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d0) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf);
   }
   pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2);
-  if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= widthUnits) {
+  if (pitchUnits <= widthUnits) {
     pitchUnits = widthUnits;
   }
   packetWord8a = blitPacket[0x8a];
@@ -294,8 +286,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
        (FormatTableLookup_0x0004d2e0(formatTableOffset) & 0x600) << 5 |
        formatField3 | formatField2 | formatField1 | formatField0 | packetWord8a & 0xffff00e0;
   if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-     (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-               (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+     (columnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumn = columnCount - 1,
      columnCount == 0)) {
     lastColumn = 0;
   }
@@ -310,8 +301,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
        (UInt32)M<UInt16>(self + panel * 0x78 + 0x14c) * M<SInt32>(self + panel * 0x78 + 0x16c) +
        M<SInt32>(self + panel * 0x78 + 0x134) & 0xffffffe0;
   if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-     (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-               (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = columnCount - 1,
+     (columnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumn = columnCount - 1,
      columnCount == 0)) {
     lastColumn = 0;
   }
@@ -330,14 +320,14 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     widthUnits = 0;
   }
   else {
-    widthUnits = (UInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (bufferFormatWord >> 0x14 & 0xf);
+    widthUnits = (SInt32)M<UInt16>(self + panel * 0x78 + 0x140) / (SInt32)(bufferFormatWord >> 0x14 & 0xf);
   }
   pitchUnits = 0x20 / M<UInt16>(self + panel * 0x78 + 0x142);
-  if (0x20 / M<UInt16>(self + panel * 0x78 + 0x142) <= widthUnits) {
+  if (pitchUnits <= widthUnits) {
     pitchUnits = widthUnits;
   }
   if ((noFormatBits) ||
-     (columnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (bufferFormatWord >> 0x14 & 0xf),
+     (columnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (SInt32)(bufferFormatWord >> 0x14 & 0xf),
      lastColumn = columnCount - 1, columnCount == 0)) {
     lastColumn = 0;
   }
@@ -369,8 +359,7 @@ LAB_00023ca0:
   }
   else {
     if (((M<UInt32>(self + panel * 0x78 + 0x168) & 0xf00000) == 0) ||
-       (dstColumnCount = (UInt32)M<UInt16>(self + panel * 0x78 + 0x148) /
-                 (M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumnLarge = dstColumnCount - 1,
+       (dstColumnCount = (SInt32)M<UInt16>(self + panel * 0x78 + 0x148) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x168) >> 0x14 & 0xf), lastColumnLarge = dstColumnCount - 1,
        dstColumnCount == 0)) {
       lastColumnLarge = 0;
     }
@@ -389,8 +378,7 @@ LAB_00023c18:
     else {
       if (rotation != 0x10e) goto LAB_00023ca0;
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-         (columnCountWrap = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf),
+         (columnCountWrap = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf),
          columnOffsetRot = columnCountWrap - 0x1001, columnCountWrap == 0)) {
         columnOffsetRot = 0xfffff000;
       }
@@ -406,9 +394,9 @@ LAB_00023c68:
   }
   if (0x1000 < M<UInt16>(self + panel * 0x78 + 0x14a)) {
     if (rotation == 0x5a) {
-      vertexScaleA = (double)FLOAT_0004c37c;
+      vertexScaleA = FLOAT_0004c37c;
       packetWordIndex = packetEnd * 4 + 0x30 >> 2;
-      vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      vertexY1 = (float)(heightD + FLOAT_0004c370) * FLOAT_0004c380;
       buffer[packetEnd] = 0x31080;
       buffer[packetEnd + 5] = 0x1087;
       buffer[packetEnd + 7] = 0xc0033500;
@@ -424,11 +412,11 @@ LAB_00023c68:
       goto LAB_00023f44;
     }
     if (rotation == 0x10e) {
-      vertexScaleA = (double)FLOAT_0004c37c;
-      vertexBiasB = (double)FLOAT_0004c378;
+      vertexScaleA = FLOAT_0004c37c;
+      vertexBiasB = FLOAT_0004c378;
       packetWordIndex = packetEnd * 4 + 0x30 >> 2;
-      vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      vertexX2 = (float)(widthD + (double)(float)(widthD - vertexBiasB)) * FLOAT_0004c380;
+      vertexY1 = (float)(heightD + FLOAT_0004c370) * FLOAT_0004c380;
+      vertexX2 = (float)(widthD + (widthD - vertexBiasB)) * FLOAT_0004c380;
       buffer[packetEnd] = 0x31080;
       buffer[packetEnd + 7] = 0xc0033500;
       buffer[packetEnd + 5] = 0x1087;
@@ -441,14 +429,14 @@ LAB_00023c68:
       buffer[packetEnd + 3] = texCoordWord3;
       buffer[packetEnd + 4] = texCoordWord4;
       buffer[packetEnd + 6] =
-           (SInt32)((double)(float)(widthD - (double)(float)(widthD - vertexBiasB)) * vertexScaleA) << 0x10 |
+           (SInt32)((widthD - (widthD - vertexBiasB)) * vertexScaleA) << 0x10 |
            (SInt32)(heightD * vertexScaleA);
       goto LAB_00023f44;
     }
   }
-  vertexScaleA = (double)FLOAT_0004c37c;
-  vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
-  vertexX2 = (float)(widthD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+  vertexScaleA = FLOAT_0004c37c;
+  vertexY1 = (float)(heightD + FLOAT_0004c370) * FLOAT_0004c380;
+  vertexX2 = (float)(widthD + FLOAT_0004c370) * FLOAT_0004c380;
   buffer[packetEnd] = 0x31080;
   buffer[packetEnd + 7] = 0xc0033500;
   buffer[packetEnd + 8] = 0x10031;
@@ -475,8 +463,7 @@ LAB_00023f44:
       packetWordB2 = blitPacket[0xb2];
       packetWordB3 = blitPacket[0xb3];
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-         (columnCountRot = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumnRot = columnCountRot - 1,
+         (columnCountRot = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumnRot = columnCountRot - 1,
          columnCountRot == 0)) {
         lastColumnRot = 0;
       }
@@ -489,10 +476,10 @@ LAB_00023f44:
       buffer[packetWordIndex + 5] = packetWordB2 & 0xffffe000 | 0xfff;
       buffer[packetWordIndex + 6] = 0x10f9;
       buffer[packetWordIndex + 7] = lastColumnRot & 0x1fff | packetWordB3 & 0xffffe000;
-      vertexBiasA = (double)FLOAT_0004c378;
-      vertexScaleB = (double)FLOAT_0004c37c;
+      vertexBiasA = FLOAT_0004c378;
+      vertexScaleB = FLOAT_0004c37c;
       vertexX1 = (float)(widthD + vertexBiasA) * FLOAT_0004c380;
-      vertexY2 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      vertexY2 = (float)(heightD + FLOAT_0004c370) * FLOAT_0004c380;
       buffer[packetWordIndex + 8] = 0x31080;
       buffer[packetWordIndex + 0xd] = 0x1087;
       buffer[packetWordIndex + 9] = texCoordWord1;
@@ -505,7 +492,7 @@ LAB_00023f44:
       buffer[packetWordIndex + 0x12] = FBITS(vertexY2);
       buffer[packetWordIndex + 0x13] = 0;
       buffer[packetWordIndex + 0xe] =
-           (SInt32)((double)(float)(widthD - vertexBiasA) * vertexScaleB) << 0x10 | (SInt32)(heightD * vertexScaleB);
+           (SInt32)((widthD - vertexBiasA) * vertexScaleB) << 0x10 | (SInt32)(heightD * vertexScaleB);
       packetWordIndex = (packetWordIndex + 8) * 4 + 0x30 >> 2;
     }
     else if (rotation == 0x10e) {
@@ -518,8 +505,7 @@ LAB_00023f44:
       packetWordB2 = blitPacket[0xb2];
       packetWordB3 = blitPacket[0xb3];
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
-         (columnCountRot = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
-                   (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumnRot = columnCountRot - 0x1001
+         (columnCountRot = (SInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) / (SInt32)(M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), lastColumnRot = columnCountRot - 0x1001
          , columnCountRot == 0)) {
         lastColumnRot = 0xfffff000;
       }
@@ -532,10 +518,10 @@ LAB_00023f44:
       buffer[packetWordIndex + 5] = packetWordB2 & 0xffffe000;
       buffer[packetWordIndex + 6] = 0x10f9;
       buffer[packetWordIndex + 7] = lastColumnRot & 0x1fff | packetWordB3 & 0xffffe000;
-      vertexScaleA = (double)FLOAT_0004c37c;
-      vertexBiasB = (double)FLOAT_0004c378;
-      vertexY1 = (float)(heightD + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      vertexX2 = (float)((double)(float)(widthD - vertexBiasB) + (double)FLOAT_0004c370) * FLOAT_0004c380;
+      vertexScaleA = FLOAT_0004c37c;
+      vertexBiasB = FLOAT_0004c378;
+      vertexY1 = (float)(heightD + FLOAT_0004c370) * FLOAT_0004c380;
+      vertexX2 = (float)((widthD - vertexBiasB) + FLOAT_0004c370) * FLOAT_0004c380;
       buffer[packetWordIndex + 8] = 0x31080;
       buffer[packetWordIndex + 0xd] = 0x1087;
       buffer[packetWordIndex + 9] = texCoordWord1;
@@ -548,7 +534,7 @@ LAB_00023f44:
       buffer[packetWordIndex + 0x12] = FBITS(vertexY1);
       buffer[packetWordIndex + 0x13] = 0;
       buffer[packetWordIndex + 0xe] =
-           (SInt32)((double)(float)(widthD - vertexBiasB) * vertexScaleA) << 0x10 | (SInt32)(heightD * vertexScaleA);
+           (SInt32)((widthD - vertexBiasB) * vertexScaleA) << 0x10 | (SInt32)(heightD * vertexScaleA);
       packetWordIndex = (packetWordIndex + 8) * 4 + 0x30 >> 2;
     }
   }

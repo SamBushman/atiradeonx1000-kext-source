@@ -121,13 +121,11 @@ void ATIRadeonX1000::stop(IOService *provider) {
   if (M<int>(self + kIOATIR500Accelerator_swdsPanel0Flag) != 0) {
     surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddress);
     mmioBase = M<int>(self + kIOATIR500Accelerator_mmioBase);
-    M<unsigned int>(mmioBase + 0x6110) =
-         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6110), surfaceAddress);
     enforceInOrderExecutionIO();
     surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddressB);
     M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddress) = 0;
-    M<unsigned int>(mmioBase + 0x6120) =
-         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6120), surfaceAddress);
     enforceInOrderExecutionIO();
     M<UInt32>(self + kIOATIR500Accelerator_swdsPanel0Flag) = 0;
     M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressB) = 0;
@@ -135,13 +133,11 @@ void ATIRadeonX1000::stop(IOService *provider) {
   if (M<int>(self + kIOATIR500Accelerator_swdsPanel1Flag) != 0) {
     surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddress);
     mmioBase = M<int>(self + kIOATIR500Accelerator_mmioBase);
-    M<unsigned int>(mmioBase + 0x6910) =
-         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6910), surfaceAddress);
     enforceInOrderExecutionIO();
     surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display2SurfaceAddressB);
     M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddress) = 0;
-    M<unsigned int>(mmioBase + 0x6920) =
-         surfaceAddress << 0x18 | (surfaceAddress & 0xff00) << 8 | surfaceAddress >> 8 & 0xff00 | surfaceAddress >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6920), surfaceAddress);
     enforceInOrderExecutionIO();
     M<UInt32>(self + kIOATIR500Accelerator_swdsPanel1Flag) = 0;
     M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressB) = 0;

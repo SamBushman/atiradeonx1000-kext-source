@@ -150,7 +150,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     bufferGpuBase = M<int>(attachBuffer + 8);
     hasTiling = (tilingBits & 0xf00000) != 0;
     if (hasTiling) {
-      minPitch = (unsigned int)M<UInt16>(attachBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
+      minPitch = (SInt32)M<UInt16>(attachBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
     }
     else {
       minPitch = 0;
@@ -167,7 +167,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     }
     formatOffset = (unsigned int)M<UInt8>(attachBuffer + 0x3a) * 0x1c;
     if (hasTiling) {
-      pitchPerDegree = (unsigned int)M<UInt16>(attachBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
+      pitchPerDegree = (SInt32)M<UInt16>(attachBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
     }
     else {
       pitchPerDegree = 0;
