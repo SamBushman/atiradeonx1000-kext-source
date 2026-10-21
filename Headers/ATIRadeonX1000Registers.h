@@ -319,10 +319,17 @@ extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blo
  * itself is defined (as `kAtiFormatInfoTable`, an AtiFormatInfoEntry[48]) in Sources/ATIRadeonX1000_DataTables.cpp.
  */
 extern UInt8 gAtiFormatInfoBytes[] asm("_ati_format_info_table");
-static inline UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x08); }
-static inline UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x0c); }
-static inline UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x10); }
-static inline UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset) { return *(const UInt32 *)(gAtiFormatInfoBytes + byteOffset + 0x14); }
+/*
+ * The table base is materialized with an explicit lis/addi pair (ha16/lo16 relocations) at each use. Plain `gAtiFormatInfoBytes + n` lets gcc 4.0.1 hoist the
+ * address of this extern into a constant-pool word in __TEXT,__const (seen in the huge DVD process_command_buffer); a relocation against a data symbol
+ * in __const makes Tiger's kextload crash in kld_file_prepare_for_link (NULL dereference) before anything reaches the kernel. Tools/check_const_relocs.sh
+ * (run by build_kext.sh) rejects any object that still has one.
+ */
+static inline const UInt8 *FormatInfoBase(void) { const UInt8 *p; __asm__("lis %0,ha16(_ati_format_info_table)\n\taddi %0,%0,lo16(_ati_format_info_table)" : "=b"(p)); return p; }
+static inline UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset) { return *(const UInt32 *)(FormatInfoBase() + byteOffset + 0x08); }
+static inline UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset) { return *(const UInt32 *)(FormatInfoBase() + byteOffset + 0x0c); }
+static inline UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset) { return *(const UInt32 *)(FormatInfoBase() + byteOffset + 0x10); }
+static inline UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset) { return *(const UInt32 *)(FormatInfoBase() + byteOffset + 0x14); }
 
 /*
  * SamplesTableLookup - RESOLVED (issue #14). Real table (`_samplesTable`,
