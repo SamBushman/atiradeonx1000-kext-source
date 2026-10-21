@@ -50,11 +50,9 @@ IOReturn ATIR5002DContext::write_2_regs(UInt32 offset1, UInt32 offset2, UInt32*v
         wordsDone = 0;
         do {
           value = *values;
-          M<UInt32>(registers + (offset1 & 0x1ffc)) =
-               value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+          storeWordByteReversed(&M<UInt8>(registers + (offset1 & 0x1ffc)), value);
           value = values[1];
-          M<UInt32>(registers + (offset2 & 0x1ffc)) =
-               value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+          storeWordByteReversed(&M<UInt8>(registers + (offset2 & 0x1ffc)), value);
           wordsDone = wordsDone + 2;
           values = values + 2;
         } while (wordsDone < byteCount >> 3);

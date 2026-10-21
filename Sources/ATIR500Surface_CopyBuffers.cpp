@@ -68,7 +68,7 @@ int get_offset_of_sample_0(ATIR500SurfaceBuffer *bufferIn, int x, int y) {
     }
     int rowBase = 0;
     if ((flags & 0xf00000) != 0) {
-        rowBase = (y >> 3) * scale * static_cast<int>(samples) * (static_cast<int>(U16At(buffer, 0x14) / samples) >> 2) * 2;
+        rowBase = (y >> 3) * scale * static_cast<int>(samples) * ((static_cast<int>(U16At(buffer, 0x14)) / static_cast<int>(samples)) >> 2) * 2;
     }
     UInt32 bitX = (static_cast<UInt32>(x) >> 1) & 1;
     UInt32 bitY = (static_cast<UInt32>(y) >> 1) & 1;

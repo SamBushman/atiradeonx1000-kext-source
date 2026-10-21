@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-20 09:44:45.926661556 -0700
-+++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-20 09:44:45.927649187 -0700
+--- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-20 16:35:10.885763292 -0700
++++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-20 16:35:10.886835571 -0700
 @@ -29,38 +29,50 @@
  /* real addr 0x3e5c0 */
  void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *context, UInt32 unused4) {
@@ -193,7 +193,7 @@
 +    bufferGpuBase = M<int>(attachBuffer + 8);
 +    hasTiling = (tilingBits & 0xf00000) != 0;
 +    if (hasTiling) {
-+      minPitch = (unsigned int)M<UInt16>(attachBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
++      minPitch = (SInt32)M<UInt16>(attachBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
      }
      else {
 -      uVar16 = 0;
@@ -224,7 +224,7 @@
 +    }
 +    formatOffset = (unsigned int)M<UInt8>(attachBuffer + 0x3a) * 0x1c;
 +    if (hasTiling) {
-+      pitchPerDegree = (unsigned int)M<UInt16>(attachBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
++      pitchPerDegree = (SInt32)M<UInt16>(attachBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
      }
      else {
 -      uVar13 = 0;

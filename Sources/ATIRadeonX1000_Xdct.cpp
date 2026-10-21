@@ -50,20 +50,16 @@ bool ATIRadeonX1000::start_xdct_engine() {
   storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), ringControl);
   enforceInOrderExecutionIO();
   ringCursor = M<UInt32>(self + kIOATIR500Accelerator_idctRingCursor);
-  M<UInt32>(mmioBase + 0x1f9c) =
-       ringCursor << 0x18 | (ringCursor & 0xff00) << 8 | ringCursor >> 8 & 0xff00 | ringCursor >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c), ringCursor);
   enforceInOrderExecutionIO();
-  M<UInt32>(mmioBase + 0x1fa0) =
-       ringCursor << 0x18 | (ringCursor & 0xff00) << 8 | ringCursor >> 8 & 0xff00 | ringCursor >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0), ringCursor);
   enforceInOrderExecutionIO();
   vramBase = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
   rptrWritebackAddress = vramBase + M<SInt32>(self + kIOATIR500Accelerator_scratchBufferGartOffset) + (M<SInt32>(self + kIOATIR500Accelerator_idctPointerBase) - M<SInt32>(self + kIOATIR500Accelerator_scratchHeader));
-  M<UInt32>(mmioBase + 0x1f98) =
-       (rptrWritebackAddress & 0xfffffffc) << 0x18 | (rptrWritebackAddress & 0xff00) << 8 | rptrWritebackAddress >> 8 & 0xff00 | rptrWritebackAddress >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f98), ((rptrWritebackAddress & 0xfffffffc) & 0xff) | (rptrWritebackAddress & 0xff00) | (rptrWritebackAddress & 0xff0000) | (rptrWritebackAddress & 0xff000000));
   enforceInOrderExecutionIO();
   ringBaseAddress = vramBase + M<SInt32>(self + kIOATIR500Accelerator_idctRingGartOffset);
-  M<UInt32>(mmioBase + 0x1f90) =
-       ringBaseAddress * 0x1000000 | (ringBaseAddress & 0xff00) << 8 | ringBaseAddress >> 8 & 0xff00 | ringBaseAddress >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f90), ringBaseAddress);
   enforceInOrderExecutionIO();
   ringControl = ringControl & 0x67fcc0ff | 0x2002030a;
   storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), ringControl);
@@ -71,8 +67,7 @@ bool ATIRadeonX1000::start_xdct_engine() {
   M<UInt32>(mmioBase + 0x1f80) = 0x40;
   enforceInOrderExecutionIO();
   idctStamp = M<SInt32>(self + kIOATIR500Accelerator_idctSubmitBaseCounter) - 1;
-  M<UInt32>(mmioBase + 0x1fa8) =
-       idctStamp * 0x1000000 | (idctStamp & 0xff00) << 8 | idctStamp >> 8 & 0xff00 | idctStamp >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1fa8), idctStamp);
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x1f80) = 0xa000580;
   enforceInOrderExecutionIO();

@@ -61,7 +61,7 @@ UInt32 ATIR500Surface::alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) {
   }
   else {
     if (((tilingBits & 0xf00000) != 0) &&
-       (0x1000 < (unsigned int)M<UInt16>(bufferBytes + 0x1c) / (tilingBits >> 0x14 & 0xf))) {
+       (0x1000 < (SInt32)M<UInt16>(bufferBytes + 0x1c) / (SInt32)(tilingBits >> 0x14 & 0xf))) {
       return 0;
     }
     if (0x1000 < M<UInt16>(bufferBytes + 0x1e)) {
@@ -102,10 +102,10 @@ LAB_0003e330:
     pitchPerDegree = 0;
     numPipes = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
     if ((M<unsigned int>(bufferBytes + 0x3c) & 0xf00000) != 0) {
-      pitchPerDegree = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
+      pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
     }
     minPitch = 0x20 / M<UInt16>(bufferBytes + 0x16);
-    if (0x20 / M<UInt16>(bufferBytes + 0x16) <= pitchPerDegree) {
+    if (minPitch <= pitchPerDegree) {
       minPitch = pitchPerDegree;
     }
     alignment = 0x20;
@@ -129,10 +129,10 @@ LAB_0003e544:
   pitchPerDegree = 0;
   numPipes = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
   if ((M<unsigned int>(bufferBytes + 0x3c) & 0xf00000) != 0) {
-    pitchPerDegree = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
+    pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(M<unsigned int>(bufferBytes + 0x3c) >> 0x14 & 0xf);
   }
   minPitch = 0x20 / M<UInt16>(bufferBytes + 0x16);
-  if (0x20 / M<UInt16>(bufferBytes + 0x16) <= pitchPerDegree) {
+  if (minPitch <= pitchPerDegree) {
     minPitch = pitchPerDegree;
   }
   alignment = 0x20;
@@ -165,7 +165,7 @@ LAB_0003e3e8:
   pitchPerDegree = 0;
   numPipes = M<int>(M<int>(self + kIOATIR500Surface_accelerator) + 0xb98);
   if ((tilingBits & 0xf00000) != 0) {
-    pitchPerDegree = (unsigned int)M<UInt16>(bufferBytes + 0x14) / (tilingBits >> 0x14 & 0xf);
+    pitchPerDegree = (SInt32)M<UInt16>(bufferBytes + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
   }
   minPitch = 0x20 / M<UInt16>(bufferBytes + 0x16);
   if (minPitch <= pitchPerDegree) {

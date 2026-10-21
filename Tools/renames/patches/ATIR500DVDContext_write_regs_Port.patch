@@ -1,0 +1,12 @@
+--- a/Sources/ATIR500DVDContext_write_regs_Port.cpp	2026-10-20 16:22:49.673533723 -0700
++++ b/Sources/ATIR500DVDContext_write_regs_Port.cpp	2026-10-20 16:22:49.674922627 -0700
+@@ -43,8 +43,7 @@
+     result = 0xe00002d8;
+   }
+   else {
+-    M<UInt32>(registers + (offset & 0x1ffc)) =
+-         value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
++    storeWordByteReversed(&M<UInt8>(registers + (offset & 0x1ffc)), value);
+     result = 0;
+   }
+   GH_IOLockUnlock(M<UInt32>(accel + kIOATIR500Accelerator_commandLock));

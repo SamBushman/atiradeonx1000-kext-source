@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 13:04:46.476867603 -0700
-+++ b/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 13:04:46.478267751 -0700
+--- a/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 16:29:01.066384773 -0700
++++ b/Sources/ATIR500Surface_copy_buffer_using_DMA_Port.cpp	2026-10-20 16:29:01.067807006 -0700
 @@ -35,37 +35,50 @@
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
      UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
@@ -429,13 +429,13 @@
 +  M<unsigned int>((int)Vol(rec0->entries[1 + slot].header) + 0x14) = paddedWordCount;
 +  gartOffset = (int)Vol(rec0->entries[1 + slot].gartOffset);
 +  useCount = M<SInt16>(transferBytes + 0xe) + 1;
-+  M<SInt16>(transferBytes + 0xe) = useCount;
++  storeHalf(&M<UInt16>(transferBytes + 0xe), useCount);
 +  if (gartOffset == 0) {
 +    ((IOATIR500Surface *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)&rec0->entries[1 + slot]));
 +    useCount = M<SInt16>(transferBytes + 0xe);
 +    gartOffset = (int)Vol(rec0->entries[1 + slot].gartOffset);
 +  }
-+  M<SInt16>(transferBytes + 0xe) = useCount + -1;
++  storeHalf(&M<UInt16>(transferBytes + 0xe), useCount + -1);
 +  submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500Surface_accelerator)))->submit_buffer((UInt32 *)((int)Vol(rec0->entries[1 + slot].header) + 0x20),gartOffset + 0x20,
 +                      M<UInt32>((int)Vol(rec0->entries[1 + slot].header) + 0x14));
    M<UInt32>(self + kIOATIR500Surface_stamp) = submitStamp;

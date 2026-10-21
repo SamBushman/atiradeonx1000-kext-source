@@ -69,7 +69,6 @@ def	ATIR500Surface::build_swap	local_104	panel	CONFIRMED	loop counter over the a
 def	ATIR500Surface::build_swap	dVar58	zero	CONFIRMED	FLOAT_0004c370 = 0.0f
 def	ATIR500Surface::build_swap	dVar57	one	CONFIRMED	FLOAT_0004c374 = 1.0f
 def	ATIR500Surface::build_swap	dVar56	half	CONFIRMED	FLOAT_0004c380 = 0.5f
-def	ATIR500Surface::build_swap	dVar60	signedIntBias	CONFIRMED	DOUBLE_0004c3a8 = 2^52 + 2^31: the bias of the signed-int to double conversion idiom
 def	ATIR500Surface::build_swap	puVar45	blitPacket	CONFIRMED	the copy of g_r500_3d_blit_state_packet being built for the scaled-blit path (batch words + iVar26)
 def	ATIR500Surface::build_swap	puVar39	batchWords	CONFIRMED	the panel's pending swap-write batch: header + 0x20, indexed by word
 def	ATIR500Surface::build_swap	sVar9	regionX	INFERRED	panel region record (self+0xd60 entry) +4

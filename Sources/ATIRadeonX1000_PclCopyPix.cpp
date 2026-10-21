@@ -43,8 +43,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
   UInt32 rowIndex;
   SInt16 *rect;
   UInt32 columnsLeft;
-  double ySecondDC;
-  double invScaleY;
+  float ySecondDC;
+  float invScaleY;
   UInt32 columnChunks;
   UInt32 rowChunks;
   UInt32 chunkCount;
@@ -77,18 +77,17 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
   float centerX;
   float invCopyWidth;
   float invCopyHeight;
-  double scaleX;
-  double rectRightD;
-  double scaleY;
-  double ySecondD1;
-  double ySecondD2;
-  double rectXD;
-  double invScaleX;
-  double chunkLeftD;
-  double yFirstD1;
-  double yFirstD2;
-  double biasD;
-  double yFirstDC;
+  float scaleX;
+  float rectRightD;
+  float scaleY;
+  float ySecondD1;
+  float ySecondD2;
+  float rectXD;
+  float invScaleX;
+  float chunkLeftD;
+  float yFirstD1;
+  float yFirstD2;
+  float yFirstDC;
   float vertexScale;
   float halfWidthPlus2F;
   float rectRightF;
@@ -182,16 +181,16 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
   UInt32 chunkLeftBiased;
   
   flipV = ((UInt32)flipVertically);
-  invScaleX = (double)FLOAT_0004c370;
+  invScaleX = FLOAT_0004c370;
   scaleX = (double)M<float>(paramsBytes + 0x6c);
   rect = M<SInt16 *>(paramsBytes + 0x50);
   scaleY = (double)M<float>(paramsBytes + 0x70);
   if (scaleX != invScaleX) {
-    invScaleX = (double)(float)((double)FLOAT_0004c374 / scaleX);
+    invScaleX = (FLOAT_0004c374 / scaleX);
   }
-  invScaleY = (double)FLOAT_0004c370;
+  invScaleY = FLOAT_0004c370;
   if (scaleY != invScaleY) {
-    invScaleY = (double)(float)((double)FLOAT_0004c374 / scaleY);
+    invScaleY = (FLOAT_0004c374 / scaleY);
   }
   GCopy(cmd,(&g_r500_3d_blit_state_packet),0x2f4);
   stateWordA2 = cmd[0xa2];
@@ -212,12 +211,11 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
   if (M<SInt32>(paramsBytes + 0x88) != 0) {
     cmd[0x1e] = cmd[0x1e] & 0xfffffffc | 2;
   }
-  biasD = DOUBLE_0004c3a8;
   vertexScale = FLOAT_0004c37c;
   invHalfWidth = FLOAT_0004c370;
-  if (((double)FLOAT_0004c378 < scaleX) || ((double)FLOAT_0004c378 < scaleY)) {
+  if ((FLOAT_0004c378 < scaleX) || (FLOAT_0004c378 < scaleY)) {
     flipX = ((UInt32)flipHorizontally) != 0;
-    if ((flipX) || (scaleX <= (double)FLOAT_0004c378)) {
+    if ((flipX) || (scaleX <= FLOAT_0004c378)) {
       dstWidth = M<float>(paramsBytes + 0x5c);
       dstX = M<float>(paramsBytes + 0x54);
       dstY = M<float>(paramsBytes + 0x58);
@@ -226,27 +224,25 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
       dstBottom = dstY + dstHeight;
       srcPerDstX = FLOAT_0004c370;
       if (dstWidth != FLOAT_0004c370) {
-        srcPerDstX = (float)((double)CONCAT44d(0x43300000,(SInt32)rect[2] ^ 0x80000000) - DOUBLE_0004c3a8)
+        srcPerDstX = (float)(SInt32)((SInt32)rect[2])
                 / dstWidth;
       }
-      srcRectX = (float)((double)CONCAT44d(0x43300000,(SInt32)*rect ^ 0x80000000) - DOUBLE_0004c3a8);
+      srcRectX = (float)(SInt32)((SInt32)*rect);
       srcOffsetX = -(srcPerDstX * dstX - srcRectX);
       srcPerDstY = FLOAT_0004c370;
       if (dstHeight != FLOAT_0004c370) {
-        srcPerDstY = (float)((double)CONCAT44d(0x43300000,(SInt32)rect[3] ^ 0x80000000) - DOUBLE_0004c3a8
+        srcPerDstY = (float)((double)(SInt32)((SInt32)rect[3])
                         ) / dstHeight;
       }
-      srcRectY = (float)((double)CONCAT44d(0x43300000,(SInt32)rect[1] ^ 0x80000000) - DOUBLE_0004c3a8);
+      srcRectY = (float)(SInt32)((SInt32)rect[1]);
       srcOffsetY = -(dstY * srcPerDstY - srcRectY);
       if (flipV != 0) {
         srcPerDstY = -srcPerDstY;
-        srcOffsetY = (float)((double)CONCAT44d(0x43300000,(SInt32)rect[1] + (SInt32)rect[3] ^ 0x80000000)
-                        - DOUBLE_0004c3a8) - (srcOffsetY - srcRectY);
+        srcOffsetY = (float)(SInt32)((SInt32)rect[1] + (SInt32)rect[3]) - (srcOffsetY - srcRectY);
       }
       if (flipX) {
         srcPerDstX = -srcPerDstX;
-        srcOffsetX = (float)((double)CONCAT44d(0x43300000,(SInt32)*rect + (SInt32)rect[2] ^ 0x80000000) -
-                       DOUBLE_0004c3a8) - (srcOffsetX - srcRectX);
+        srcOffsetX = (float)(SInt32)((SInt32)*rect + (SInt32)rect[2]) - (srcOffsetX - srcRectX);
       }
       copyWidth = (SInt32)scaleX & 0xffff;
       copyHeight = (SInt32)scaleY & 0xffff;
@@ -301,7 +297,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         columnEnd = (((SInt32)widthMinusOne >> 9) + (UInt32)((SInt32)widthMinusOne < 0 && (widthMinusOne & 0x1ff) != 0)) * 0x200;
         srcMaxXInt = (UInt32)srcMaxX;
         if ((FLOAT_0004c370 < srcMaxX) &&
-           ((float)((double)CONCAT44d(0x43300000,srcMaxXInt ^ 0x80000000) - DOUBLE_0004c3a8) < srcMaxX)) {
+           ((float)(SInt32)(srcMaxXInt) < srcMaxX)) {
           srcMaxXInt = srcMaxXInt + 1;
         }
         if ((SInt32)srcMaxXInt <= (SInt32)columnEnd) {
@@ -319,7 +315,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         rowEnd = (((SInt32)heightMinusOne >> 6) + (UInt32)((SInt32)heightMinusOne < 0 && (heightMinusOne & 0x3f) != 0)) * 0x40;
         srcMaxYInt = (UInt32)srcMaxY;
         if ((FLOAT_0004c370 < srcMaxY) &&
-           ((float)((double)CONCAT44d(0x43300000,srcMaxYInt ^ 0x80000000) - DOUBLE_0004c3a8) < srcMaxY)) {
+           ((float)(SInt32)(srcMaxYInt) < srcMaxY)) {
           srcMaxYInt = srcMaxYInt + 1;
         }
         if ((SInt32)srcMaxYInt <= (SInt32)rowEnd) {
@@ -352,7 +348,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
               chunkTop = firstRow + rowOffset;
               columnWidthLeft = copyWidth - firstColumn;
               columnIndex = 0;
-              chunkTopF = (float)((double)CONCAT44d(0x43300000,chunkTop ^ 0x80000000) - DOUBLE_0004c3a8);
+              chunkTopF = (float)(SInt32)(chunkTop);
               chunkLeft = firstColumn;
               columnsLeft = columnChunks;
               do {
@@ -370,23 +366,19 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
                 chunkPacket[3] = chunkH;
                 chunkMinX = srcMinX;
                 if (columnIndex != 0) {
-                  chunkMinX = (float)((double)CONCAT44d(0x43300000,chunkLeft + 0x200 ^ 0x80000000) -
-                                 DOUBLE_0004c3a8);
+                  chunkMinX = (float)(SInt32)(chunkLeft + 0x200);
                 }
                 chunkMinY = srcMinY;
                 if (rowIndex != 0) {
-                  chunkMinY = (float)((double)CONCAT44d(0x43300000,chunkTop + 0x40 ^ 0x80000000) -
-                                 DOUBLE_0004c3a8);
+                  chunkMinY = (float)(SInt32)(chunkTop + 0x40);
                 }
                 chunkMaxX = srcMaxX;
                 if (columnIndex != columnChunks - 1) {
-                  chunkMaxX = (float)((double)CONCAT44d(0x43300000,chunkLeft + 0xe00 ^ 0x80000000) -
-                                 DOUBLE_0004c3a8);
+                  chunkMaxX = (float)(SInt32)(chunkLeft + 0xe00);
                 }
                 chunkMaxY = srcMaxY;
                 if (rowIndex != rowChunks - 1) {
-                  chunkMaxY = (float)((double)CONCAT44d(0x43300000,chunkTop + 0xfc0 ^ 0x80000000) -
-                                  DOUBLE_0004c3a8);
+                  chunkMaxY = (float)(SInt32)(chunkTop + 0xfc0);
                 }
                 clampTmpMinY = srcMinY;
                 if (srcMinY - chunkMinY < 0.0) {
@@ -439,14 +431,13 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
                 invChunkWidth = FLOAT_0004c370;
                 if (chunkW != 0) {
                   invChunkWidth = FLOAT_0004c374 /
-                          (float)((double)CONCAT44d(0x43300000,chunkW ^ 0x80000000) - DOUBLE_0004c3a8
+                          (float)((double)(SInt32)(chunkW)
                                  );
                 }
                 invChunkHeight = FLOAT_0004c370;
                 if (chunkH != 0) {
                   invChunkHeight = FLOAT_0004c374 /
-                           (float)((double)CONCAT44d(0x43300000,chunkH ^ 0x80000000) -
-                                  DOUBLE_0004c3a8);
+                           (float)(SInt32)(chunkH);
                 }
                 chunkLeftBiased = chunkLeft ^ 0x80000000;
                 columnIndex = columnIndex + 1;
@@ -456,7 +447,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
                 scaledWidth = (dstXMax - dstXMin) * FLOAT_0004c37c;
                 centerY = (dstYMin + dstYMax) * FLOAT_0004c380;
                 centerX = (dstXMin + dstXMax) * FLOAT_0004c380;
-                chunkLeftD = (double)CONCAT44d(0x43300000,chunkLeftBiased) - DOUBLE_0004c3a8;
+                chunkLeftD = (double)(SInt32)(chunkLeftBiased ^ 0x80000000);
                 chunkPacket[4] = 0x31080;
                 chunkPacket[6] = FBITS((invChunkHeight * (srcYAtDstMin - chunkTopF)));
                 chunkPacket[8] = FBITS((invChunkHeight * (chunkMinY - chunkTopF)));
@@ -485,12 +476,12 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         invCopyWidth = FLOAT_0004c370;
         if (copyWidth != 0) {
           invCopyWidth = FLOAT_0004c374 /
-                  (float)((double)CONCAT44d(0x43300000,copyWidth ^ 0x80000000) - DOUBLE_0004c3a8);
+                  (float)(SInt32)(copyWidth);
         }
         invCopyHeight = FLOAT_0004c370;
         if (copyHeight != 0) {
           invCopyHeight = FLOAT_0004c374 /
-                  (float)((double)CONCAT44d(0x43300000,copyHeight ^ 0x80000000) - DOUBLE_0004c3a8);
+                  (float)(SInt32)(copyHeight);
         }
         scaledWidth = (dstRight - dstX) * FLOAT_0004c37c;
         scaledHeight = (dstBottom - dstY) * FLOAT_0004c37c;
@@ -580,7 +571,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
       }
       stateWordA6B = halfWidthAligned + 1 & 0x7ff | cmd[0xa6] & 0xfffff800;
       cmd[0xa6] = stateWordA6B;
-      halfWidthPlus2F = (float)((double)CONCAT44d(0x43300000,halfWidthPlus2 ^ 0x80000000) - biasD);
+      halfWidthPlus2F = (float)(SInt32)(halfWidthPlus2);
       if (halfWidthPlus2F != invHalfWidth) {
         invHalfWidth = FLOAT_0004c374 / halfWidthPlus2F;
       }
@@ -592,15 +583,15 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
       }
       if ((SInt32)halfWidthPlus2 < (SInt32)rectRight) {
         dstXB = M<float>(paramsBytes + 0x54);
-        rectRightF = (float)((double)CONCAT44d(0x43300000,halfWidthPlus2 - rectX3 ^ 0x80000000) - DOUBLE_0004c3a8)
+        rectRightF = (float)(SInt32)(halfWidthPlus2 - rectX3)
         ;
       }
       else {
         dstXB = M<float>(paramsBytes + 0x54);
         rectRightF = dstXB + M<float>(paramsBytes + 0x5c);
       }
-      texRight1 = invHalfWidth * (float)((double)CONCAT44d(0x43300000,rightLimit ^ 0x80000000) - DOUBLE_0004c3a8);
-      texLeft = invHalfWidth * (float)((double)CONCAT44d(0x43300000,rectX3 ^ 0x80000000) - DOUBLE_0004c3a8);
+      texRight1 = invHalfWidth * (float)(SInt32)(rightLimit);
+      texLeft = invHalfWidth * (float)(SInt32)(rectX3);
       if (flipV == 0) {
         yFirstB1 = (UInt32)rect[1];
         ySecondB1 = yFirstB1 + (SInt32)rect[3];
@@ -609,8 +600,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         ySecondB1 = (UInt32)rect[1];
         yFirstB1 = ySecondB1 + (SInt32)rect[3];
       }
-      yFirstD1 = (double)CONCAT44d(0x43300000,yFirstB1 ^ 0x80000000) - DOUBLE_0004c3a8;
-      ySecondD1 = (double)CONCAT44d(0x43300000,ySecondB1 ^ 0x80000000) - DOUBLE_0004c3a8;
+      yFirstD1 = (double)(SInt32)(yFirstB1);
+      ySecondD1 = (double)(SInt32)(ySecondB1);
       dstYB = M<float>(paramsBytes + 0x58);
       dstHeightB = M<float>(paramsBytes + 0x60);
       if (texLeft < texRight1) {
@@ -621,9 +612,9 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         cmd[0xbd] = 0x31080;
         cmd[0xbe] = FBITS(texLeft);
         cmd[0xc2] = 0x1087;
-        cmd[0xbf] = FBITS((float)(invScaleY * (double)(float)ySecondD1));
+        cmd[0xbf] = FBITS((float)(invScaleY * ySecondD1));
         cmd[0xc0] = FBITS(texRight1);
-        cmd[0xc1] = FBITS((float)(invScaleY * (double)(float)yFirstD1));
+        cmd[0xc1] = FBITS((float)(invScaleY * yFirstD1));
         cmd[0xc4] = 0xc0033500;
         cmd[0xc5] = 0x10031;
         cmd[0xc6] = FBITS(centerXB1);
@@ -642,7 +633,7 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
       cmd[packetIndex + 2] = 0x1120;
       nextPacketIndex = packetIndex + 4;
       cmd[packetIndex + 3] = secondHalfWidth - 1 & 0x7ff | stateWordA6B & 0xfffff800;
-      secondHalfWidthF = (float)((double)CONCAT44d(0x43300000,secondHalfWidth ^ 0x80000000) - DOUBLE_0004c3a8);
+      secondHalfWidthF = (float)(SInt32)(secondHalfWidth);
       invWidth2 = FLOAT_0004c370;
       if (secondHalfWidthF != FLOAT_0004c370) {
         invWidth2 = FLOAT_0004c374 / secondHalfWidthF;
@@ -654,14 +645,12 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
       }
       leftEdgeF = dstXB;
       if ((SInt32)rectX2 <= (SInt32)halfWidthAligned) {
-        leftEdgeF = (float)((double)CONCAT44d(0x43300000,halfWidthAligned - rectX2 ^ 0x80000000) - DOUBLE_0004c3a8)
+        leftEdgeF = (float)(SInt32)(halfWidthAligned - rectX2)
         ;
       }
-      texLeft2 = invWidth2 * ((float)((double)CONCAT44d(0x43300000,leftMax ^ 0x80000000) - DOUBLE_0004c3a8) -
-                      (float)((double)CONCAT44d(0x43300000,halfWidthAligned ^ 0x80000000) - DOUBLE_0004c3a8));
-      texRight2 = invWidth2 * (float)((double)CONCAT44d(0x43300000,
-                                               (rectX2 + (SInt32)rect[2]) - halfWidthAligned ^ 0x80000000) -
-                             DOUBLE_0004c3a8);
+      texLeft2 = invWidth2 * ((float)(SInt32)(leftMax) -
+                      (float)(SInt32)(halfWidthAligned));
+      texRight2 = invWidth2 * (float)(SInt32)((rectX2 + (SInt32)rect[2]) - halfWidthAligned);
       if (flipV == 0) {
         yTopB2 = (UInt32)rect[1];
         yBottomB2 = yTopB2 + (SInt32)rect[3];
@@ -670,8 +659,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         yBottomB2 = (UInt32)rect[1];
         yTopB2 = yBottomB2 + (SInt32)rect[3];
       }
-      yFirstD2 = (double)CONCAT44d(0x43300000,yTopB2 ^ 0x80000000) - DOUBLE_0004c3a8;
-      ySecondD2 = (double)CONCAT44d(0x43300000,yBottomB2 ^ 0x80000000) - DOUBLE_0004c3a8;
+      yFirstD2 = (double)(SInt32)(yTopB2);
+      ySecondD2 = (double)(SInt32)(yBottomB2);
       endIndex = nextPacketIndex;
       if (texLeft2 < texRight2) {
         scaledWidthB = ((dstXB + M<float>(paramsBytes + 0x5c)) - leftEdgeF) * FLOAT_0004c37c;
@@ -681,10 +670,10 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
         centerXB2 = (leftEdgeF + dstXB + M<float>(paramsBytes + 0x5c)) * FLOAT_0004c380;
         cmd[nextPacketIndex] = 0x31080;
         cmd[packetIndex + 5] = FBITS(texLeft2);
-        cmd[packetIndex + 6] = FBITS((float)(invScaleY * (double)(float)ySecondD2));
+        cmd[packetIndex + 6] = FBITS((float)(invScaleY * ySecondD2));
         cmd[packetIndex + 7] = FBITS(texRight2);
         cmd[packetIndex + 9] = 0x1087;
-        cmd[packetIndex + 8] = FBITS((float)(invScaleY * (double)(float)yFirstD2));
+        cmd[packetIndex + 8] = FBITS((float)(invScaleY * yFirstD2));
         cmd[packetIndex + 0xb] = 0xc0033500;
         cmd[packetIndex + 0xc] = 0x10031;
         cmd[packetIndex + 0xd] = FBITS(centerXB2);
@@ -695,9 +684,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
     }
   }
   else {
-    rectXD = (double)CONCAT44d(0x43300000,(SInt32)*rect ^ 0x80000000) - DOUBLE_0004c3a8;
-    rectRightD = (double)CONCAT44d(0x43300000,(SInt32)*rect + (SInt32)rect[2] ^ 0x80000000) -
-             DOUBLE_0004c3a8;
+    rectXD = (double)(SInt32)((SInt32)*rect);
+    rectRightD = (double)(SInt32)((SInt32)*rect + (SInt32)rect[2]);
     if (flipV == 0) {
       yTopB2 = (UInt32)rect[1];
       yBottomB2 = yTopB2 + (SInt32)rect[3];
@@ -706,18 +694,18 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally
       yBottomB2 = (UInt32)rect[1];
       yTopB2 = yBottomB2 + (SInt32)rect[3];
     }
-    yFirstDC = (double)CONCAT44d(0x43300000,yTopB2 ^ 0x80000000) - DOUBLE_0004c3a8;
-    ySecondDC = (double)CONCAT44d(0x43300000,yBottomB2 ^ 0x80000000) - DOUBLE_0004c3a8;
+    yFirstDC = (double)(SInt32)(yTopB2);
+    ySecondDC = (double)(SInt32)(yBottomB2);
     rectX = M<float>(paramsBytes + 0x54);
     rectY = M<float>(paramsBytes + 0x58);
     rectW = M<float>(paramsBytes + 0x5c);
     rectH = M<float>(paramsBytes + 0x60);
     cmd[0xbd] = 0x31080;
     halfConst = FLOAT_0004c380;
-    cmd[0xbe] = FBITS((float)(invScaleX * (double)(float)rectXD));
-    cmd[0xbf] = FBITS((float)(invScaleY * (double)(float)ySecondDC));
-    cmd[0xc0] = FBITS((float)(invScaleX * (double)(float)rectRightD));
-    cmd[0xc1] = FBITS((float)(invScaleY * (double)(float)yFirstDC));
+    cmd[0xbe] = FBITS((float)(invScaleX * rectXD));
+    cmd[0xbf] = FBITS((float)(invScaleY * ySecondDC));
+    cmd[0xc0] = FBITS((float)(invScaleX * rectRightD));
+    cmd[0xc1] = FBITS((float)(invScaleY * yFirstDC));
     cmd[0xc2] = 0x1087;
     cmd[0xc4] = 0xc0033500;
     cmd[0xc5] = 0x10031;

@@ -68,15 +68,16 @@ void ATIRadeonX1000::submit_ring_data() {
       flushEnd = ((writeIndex - submittedIndex) * 4 + (rangeStart & cacheLine - 1)) - cacheLine;
       if (0 < flushEnd) {
         do {
-          dataCacheBlockStore(lineBase + flushOffset);
+          dataCacheBlockStoreIndexed(lineBase, flushOffset);
           flushOffset = flushOffset + cacheLine;
         } while (flushOffset < flushEnd);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush(lineBase + flushOffset);
+      dataCacheBlockFlushIndexed(lineBase, flushOffset);
       ppcSync();
       instructionSynchronize();
+      touchWordIndexed(lineBase, flushOffset);
       instructionSynchronize();
     }
     else {
@@ -88,33 +89,35 @@ void ATIRadeonX1000::submit_ring_data() {
       flushEnd = ((0x800 - submittedIndex) * 4 + (rangeStart & lineSize - 1)) - lineSize;
       if (0 < flushEnd) {
         do {
-          dataCacheBlockStore(tailLineBase + flushOffset);
+          dataCacheBlockStoreIndexed(tailLineBase, flushOffset);
           flushOffset = flushOffset + lineSize;
         } while (flushOffset < flushEnd);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush(tailLineBase + flushOffset);
+      dataCacheBlockFlushIndexed(tailLineBase, flushOffset);
       ppcSync();
       instructionSynchronize();
+      touchWordIndexed(tailLineBase, flushOffset);
       instructionSynchronize();
       headLineBase = -lineSize & ringBase;
       flushOffset = 0;
       flushEnd = (writeIndex * 4 + (lineSize - 1 & ringBase)) - lineSize;
       if (0 < flushEnd) {
         do {
-          dataCacheBlockStore(headLineBase + flushOffset);
+          dataCacheBlockStoreIndexed(headLineBase, flushOffset);
           flushOffset = flushOffset + lineSize;
         } while (flushOffset < flushEnd);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush(headLineBase + flushOffset);
+      dataCacheBlockFlushIndexed(headLineBase, flushOffset);
       ppcSync();
       instructionSynchronize();
+      touchWordIndexed(headLineBase, flushOffset);
       instructionSynchronize();
     }
-    M<UInt32>(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + 0x714) = writeIndex << 0x18 | (writeIndex & 0x700) << 8;
+    storeWordByteReversed(&M<UInt8>(M<SInt32>(self + kIOATIR500Accelerator_mmioBase) + 0x714), writeIndex & 0x7ff);
     enforceInOrderExecutionIO();
     M<UInt32>(self + kIOATIR500Accelerator_mainRingCursor) = writeIndex;
     return;

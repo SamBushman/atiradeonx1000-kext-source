@@ -134,11 +134,11 @@ void IOATIR500Accelerator::flush_memory_for_in(const void *address, UInt32 lengt
     SInt32 limit = static_cast<SInt32>(((base & (line - 1)) + length) - line);
     if (0 < limit) {
         do {
-            dataCacheBlockFlush((-line & base) + offset);
+            dataCacheBlockFlushIndexed(-line & base, offset);
             offset += line;
         } while (offset < limit);
     }
-    dataCacheBlockFlush((-line & base) + offset);
+    dataCacheBlockFlushIndexed(-line & base, offset);
     __asm__ __volatile__("sync" : : : "memory");
     instructionSynchronize();
 }
@@ -150,15 +150,16 @@ void IOATIR500Accelerator::flush_memory_for_out(const void *address, UInt32 leng
     SInt32 limit = static_cast<SInt32>(((base & (line - 1)) + length) - line);
     if (0 < limit) {
         do {
-            dataCacheBlockStore((-line & base) + offset);
+            dataCacheBlockStoreIndexed(-line & base, offset);
             offset += line;
         } while (offset < limit);
     }
     __asm__ __volatile__("sync" : : : "memory");
     instructionSynchronize();
-    dataCacheBlockFlush((-line & base) + offset);
+    dataCacheBlockFlushIndexed(-line & base, offset);
     __asm__ __volatile__("sync" : : : "memory");
     instructionSynchronize();
+    touchWordIndexed(-line & base, offset);
     instructionSynchronize();
 }
 

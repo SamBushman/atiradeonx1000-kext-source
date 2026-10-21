@@ -56,8 +56,7 @@ void ATIRadeonX1000::setupR520Pipes() {
           (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))));
   pipeCountCode = loadWordByteReversed(&M<UInt8>(mmioBase + 0x402c)) >> 0xc & 3;
   pipeMask = (1 << pipeCountCode + 1) - 1;
-  M<UInt32>(mmioBase + 0x42c8) =
-       pipeMask * 0x1000000 | (pipeMask & 0xff00) << 8 | pipeMask >> 8 & 0xff00 | pipeMask >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x42c8), pipeMask);
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
@@ -375,8 +374,7 @@ LAB_0001c418:
       bytesPerPixel16 = 1;
     }
 LAB_0001c54c:
-    M<UInt32>(registers + 0x16c4) =
-         reg16c4Bits << 0x18 | (reg16c4Bits & 0xff00) << 8 | reg16c4Bits >> 8 & 0xff00 | reg16c4Bits >> 0x18;
+    storeWordByteReversed(&M<UInt8>(registers + 0x16c4), reg16c4Bits);
     enforceInOrderExecutionIO();
     pitch = display1Width * bytesPerPixel + 0xff & 0xffffff00;
     if (bytesPerPixel != 0) {
@@ -388,12 +386,12 @@ LAB_0001c54c:
     }
     scanout1Size = alignedHeight1 * pitch;
     M<UInt16>(self + kIOATIR500Accelerator_scanout1BufferBytesPerPixel) = bytesPerPixel16;
-    M<SInt16>(self + kIOATIR500Accelerator_scanout1BufferWidth) = (SInt16)display1Width;
-    M<SInt16>(self + kIOATIR500Accelerator_scanout1BufferActiveWidth) = (SInt16)L.activeWidth;
-    M<SInt16>(self + kIOATIR500Accelerator_scanout1BufferActiveHeight) = (SInt16)L.activeHeight;
+    storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout1BufferWidth), display1Width);
+    storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout1BufferActiveWidth), (SInt16)L.activeWidth);
+    storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout1BufferActiveHeight), (SInt16)L.activeHeight);
     self[0x163] = 0xff;
     M<UInt32>(self + kIOATIR500Accelerator_scanout1BufferGpuBaseAddress) = display1Base;
-    M<SInt16>(self + kIOATIR500Accelerator_scanout1BufferPitch) = (SInt16)pitch;
+    storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout1BufferPitch), pitch);
     M<UInt32>(self + kIOATIR500Accelerator_scanout1BufferSize) = scanout1Size;
     if ((loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0x100000) == 0) {
       self[0x164] = (loadWordByteReversed(&M<UInt8>(registers + 0x6104)) >> 0x15 & 1);
@@ -509,11 +507,11 @@ LAB_0001c7d0:
     alignedHeight2 = (L.activeHeight & 0xfffffff0) + 0x10;
   }
   scanout2Size = alignedHeight2 * pitch2;
-  M<SInt16>(self + kIOATIR500Accelerator_scanout2BufferPitch) = (SInt16)pitch2;
+  storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout2BufferPitch), pitch2);
   M<UInt16>(self + kIOATIR500Accelerator_scanout2BufferBytesPerPixel) = bytesPerPixel16;
-  M<SInt16>(self + kIOATIR500Accelerator_scanout2BufferWidth) = (SInt16)display2Width;
-  M<SInt16>(self + kIOATIR500Accelerator_scanout2BufferActiveWidth) = (SInt16)L.activeWidth;
-  M<SInt16>(self + kIOATIR500Accelerator_scanout2BufferActiveHeight) = (SInt16)L.activeHeight;
+  storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout2BufferWidth), display2Width);
+  storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout2BufferActiveWidth), (SInt16)L.activeWidth);
+  storeHalf(&M<UInt16>(self + kIOATIR500Accelerator_scanout2BufferActiveHeight), (SInt16)L.activeHeight);
   self[0x1db] = 0xff;
   M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferGpuBaseAddress) = display2Base;
   M<UInt32>(self + kIOATIR500Accelerator_scanout2BufferSize) = scanout2Size;
@@ -588,15 +586,11 @@ LAB_0001c9b0:
   M<UInt32>(registers + 0xb00) = mcRegionSize >> 8 | 0x1000000;
   pitchRegBits = (pitch & 0x3f00) << 0x10;
   display1BaseKiB = display1Base >> 10;
-  M<UInt32>(registers + 0x16e0) =
-       display1BaseKiB << 0x18 | (display1BaseKiB & 0xff00) << 8 | (display1BaseKiB & 0x3f0000) >> 8 |
-       (pitchRegBits | 0x40000000) >> 0x18;
+  storeWordByteReversed(&M<UInt8>(registers + 0x16e0), (display1BaseKiB & 0xff) | (display1BaseKiB & 0xff00) | (display1BaseKiB & 0x3f0000) | ((pitchRegBits | 0x40000000) & 0xff000000));
   enforceInOrderExecutionIO();
   if (display2Base != 0) {
     display2BaseKiB = display2Base >> 10;
-    M<UInt32>(registers + 0x16f8) =
-         display2BaseKiB << 0x18 | (display2BaseKiB & 0xff00) << 8 | (display2BaseKiB & 0x3f0000) >> 8 |
-         (pitchRegBits | 0x40000000) >> 0x18;
+    storeWordByteReversed(&M<UInt8>(registers + 0x16f8), (display2BaseKiB & 0xff) | (display2BaseKiB & 0xff00) | (display2BaseKiB & 0x3f0000) | ((pitchRegBits | 0x40000000) & 0xff000000));
     enforceInOrderExecutionIO();
     return 1;
   }
@@ -679,12 +673,10 @@ void ATIRadeonX1000::load_promo4_micro_code() {
   microcodeCursor = aPM4_Microcode_R520 + 1;
   do {
     microcodeWord = *microcodeCursor;
-    M<UInt32>(mmioBase + 0x7dc) =
-         microcodeWord << 0x18 | (microcodeWord & 0xff00) << 8 | microcodeWord >> 8 & 0xff00 | microcodeWord >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x7dc), microcodeWord);
     enforceInOrderExecutionIO();
     microcodeWord = microcodeCursor[-1];
-    M<UInt32>(mmioBase + 0x7e0) =
-         microcodeWord << 0x18 | (microcodeWord & 0xff00) << 8 | microcodeWord >> 8 & 0xff00 | microcodeWord >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x7e0), microcodeWord);
     enforceInOrderExecutionIO();
     microcodeCursor = microcodeCursor + 2;
     pairsLeft = pairsLeft + -1;
@@ -730,9 +722,7 @@ bool ATIRadeonX1000::start_promo4_engine(UInt32 mode) {
     enforceInOrderExecutionIO();
     if ((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 0x80000) == 0) {
       rptrWritebackAddress = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed) + M<SInt32>(self + kIOATIR500Accelerator_scratchBufferGartOffset) + (ringPointerBase - M<SInt32>(self + kIOATIR500Accelerator_scratchHeader));
-      M<UInt32>(mmioBase + 0x70c) =
-           (rptrWritebackAddress & 0xfffffffc) << 0x18 | (rptrWritebackAddress & 0xff00) << 8 | rptrWritebackAddress >> 8 & 0xff00 |
-           rptrWritebackAddress >> 0x18;
+      storeWordByteReversed(&M<UInt8>(mmioBase + 0x70c), ((rptrWritebackAddress & 0xfffffffc) & 0xff) | (rptrWritebackAddress & 0xff00) | (rptrWritebackAddress & 0xff0000) | (rptrWritebackAddress & 0xff000000));
       enforceInOrderExecutionIO();
     }
     M<UInt32>(mmioBase + 0x740) = 0x40;
@@ -826,15 +816,13 @@ void ATIRadeonX1000::setup_R500_internal_space() {
       newReg130 = reg130Value | 0x800000;
     }
     if (mcSizeReg108 < vramLimit) {
-      M<UInt32>(mmioBase + 0xf8) =
-           mcSizeReg108 << 0x18 | (mcSizeReg108 & 0xff00) << 8 | mcSizeReg108 >> 8 & 0xff00 | mcSizeReg108 >> 0x18;
+      storeWordByteReversed(&M<UInt8>(mmioBase + 0xf8), mcSizeReg108);
       enforceInOrderExecutionIO();
       M<UInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed) =
            loadWordByteReversed(&M<UInt8>(mmioBase + 0xf8));
       vramLimit = mcSizeReg108;
     }
-    M<UInt32>(mmioBase + 0x130) =
-         newReg130 << 0x18 | (newReg130 & 0xff00) << 8 | newReg130 >> 8 & 0xff00 | newReg130 >> 0x18;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x130), newReg130);
     enforceInOrderExecutionIO();
     mcIndexIsR520 = (chipFlags & 0x400000) == 0;
     display1Address = loadWordByteReversed(&M<UInt8>(mmioBase + 0x6110));
@@ -883,8 +871,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   M<UInt32>(mmioBase + 0x30) = 0x13000000;
   enforceInOrderExecutionIO();
   gartTableOffset = M<UInt32>(self + kIOATIR500Accelerator_gartTableVramOffset);
-  M<UInt32>(mmioBase + 0x34) =
-       gartTableOffset << 0x18 | (gartTableOffset & 0xff00) << 8 | gartTableOffset >> 8 & 0xff00 | gartTableOffset >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x34), gartTableOffset);
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x30) = 0x17000000;
   enforceInOrderExecutionIO();
@@ -921,8 +908,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   M<UInt32>(mmioBase + 0x34) = 0x47000000;
   enforceInOrderExecutionIO();
   mainRingAddress = fbEnd + M<SInt32>(self + kIOATIR500Accelerator_mainRingGartOffset);
-  M<UInt32>(mmioBase + 0x700) =
-       M<SInt32>(self + kIOATIR500Accelerator_mainRingGartOffset) << 0x18 | (mainRingAddress & 0xff00) << 8 | mainRingAddress >> 8 & 0xff00 | mainRingAddress >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x700), ((M<SInt32>(self + kIOATIR500Accelerator_mainRingGartOffset)) & 0xff) | (mainRingAddress & 0xff00) | (mainRingAddress & 0xff0000) | (mainRingAddress & 0xff000000));
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x15e0) = 0;
   enforceInOrderExecutionIO();
@@ -942,8 +928,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   enforceInOrderExecutionIO();
   M<UInt32>(mmioBase + 0x1fa8) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(mmioBase + 0x774) =
-       stampPageGartOffset << 0x18 | (stampPageAddress & 0xff00) << 8 | stampPageAddress >> 8 & 0xff00 | stampPageAddress >> 0x18;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x774), (stampPageGartOffset & 0xff) | (stampPageAddress & 0xff00) | (stampPageAddress & 0xff0000) | (stampPageAddress & 0xff000000));
   enforceInOrderExecutionIO();
   if (M<SInt32>(self + kIOATIR500Accelerator_stampPageMemory) != 0) {
     M<UInt32>(mmioBase + 0x770) = 0xff000000;
@@ -987,12 +972,10 @@ bool ATIRadeonX1000::initialize_hardware() {
     else {
       registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
       submitStampValue = M<SInt32>(self + kIOATIR500Accelerator_submitStamp) - 1;
-      M<UInt32>(registers + 0x15e0) =
-           submitStampValue * 0x1000000 | (submitStampValue & 0xff00) << 8 | submitStampValue >> 8 & 0xff00 | submitStampValue >> 0x18;
+      storeWordByteReversed(&M<UInt8>(registers + 0x15e0), submitStampValue);
       enforceInOrderExecutionIO();
       retiredStampValue = M<UInt32>(self + kIOATIR500Accelerator_retiredStampCounter);
-      M<UInt32>(registers + 0x15e4) =
-           retiredStampValue << 0x18 | (retiredStampValue & 0xff00) << 8 | retiredStampValue >> 8 & 0xff00 | retiredStampValue >> 0x18;
+      storeWordByteReversed(&M<UInt8>(registers + 0x15e4), retiredStampValue);
       enforceInOrderExecutionIO();
       M<UInt32>(registers + 0x16e8) = 0xff1fff1f;
       enforceInOrderExecutionIO();

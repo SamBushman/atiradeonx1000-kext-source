@@ -42,6 +42,8 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
   UInt32 cacheLine;
   SInt32 ringBase;
   SInt32 spinCount;
+  SInt32 rptrBase;
+  SInt32 rptrOffset;
   SInt32 gartBase;
   SInt32 stamp;
   
@@ -57,22 +59,24 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
     if (0 < flushEnd) {
       flushOffset = 0;
       do {
-        dataCacheBlockStore((-cacheLine & (UInt32)bufferStart) + flushOffset);
+        dataCacheBlockStoreIndexed((-cacheLine & (UInt32)bufferStart), flushOffset);
         flushOffset = flushOffset + cacheLine;
       } while (flushOffset < flushEnd);
     }
     ppcSync();
     instructionSynchronize();
-    dataCacheBlockFlush((-cacheLine & (UInt32)bufferStart) + flushOffset);
+    dataCacheBlockFlushIndexed((-cacheLine & (UInt32)bufferStart), flushOffset);
     ppcSync();
     instructionSynchronize();
+    touchWordIndexed((-cacheLine & (UInt32)bufferStart), flushOffset);
     instructionSynchronize();
   }
   gartBase = M<SInt32>(self + kIOATIR500Accelerator_vramSizeProgrammed);
   spinCount = 0;
   writeIndex = M<SInt32>(self + kIOATIR500Accelerator_ringIndex);
-  while (freeDwords = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase) + M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset))) & 0xffff) - writeIndex) -
-                  1 & 0x7ff) - 7, freeDwords < 8) {
+  rptrBase = M<SInt32>(self + kIOATIR500Accelerator_ringPointerBase);
+  rptrOffset = M<SInt32>(self + kIOATIR500Accelerator_ringWritePointerOffset);
+  while (freeDwords = ((loadWordByteReversedIndexed(rptrBase, rptrOffset) - writeIndex) - 1 & 0x7ff) - 7, freeDwords < 8) {
     spinCount = spinCount + 1;
     if (spinCount == 0xf4241) goto LAB_000208e8;
     do {

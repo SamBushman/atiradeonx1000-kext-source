@@ -65,16 +65,13 @@ bool ATIRadeonX1000::SWDSShutdown() {
         }
         registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
         savedValue = M<UInt32>(stateCursor + 0xafc);
-        M<UInt32>(registers + regOffset0) =
-             savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
+        storeWordByteReversed(&M<UInt8>(registers + regOffset0), savedValue);
         enforceInOrderExecutionIO();
         savedValue = M<UInt32>(stateCursor + 0xb00);
-        M<UInt32>(registers + regOffset1) =
-             savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
+        storeWordByteReversed(&M<UInt8>(registers + regOffset1), savedValue);
         enforceInOrderExecutionIO();
         savedValue = M<UInt32>(stateCursor + 0xb04);
-        M<UInt32>(registers + regOffset2) =
-             savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
+        storeWordByteReversed(&M<UInt8>(registers + regOffset2), savedValue);
         enforceInOrderExecutionIO();
         if ((M<SInt32>(recordCursor + 0x9c0) != 0) && (M<SInt32>(recordCursor + 0x9bc) != 0)) {
           ((ATIR500Memory *)(M<UInt8 *>(self + kIOATIR500Accelerator_vramPool)))->dealloc((GLKMemoryElement *)bufferCursor);
@@ -340,14 +337,14 @@ LAB_00024750:
               M<UInt32>(recordCursor + 0xa5c) = 0xffffffff;
               M<UInt32>(element + 0x3c) = M<UInt32>(element + 0x3c) & 0xff0007ff | 0x111000;
               M<UInt16>(recordCursor + 0xa4a) = bytesPerPixel16;
-              M<SInt16>(recordCursor + 0xa4c) = (SInt16)pitch;
+              storeHalf(&M<UInt16>(recordCursor + 0xa4c), pitch);
               M<UInt32>(recordCursor + 0xa74) = 0;
               M<UInt32>(recordCursor + 0xa78) = 0;
               M<UInt32>(recordCursor + 0xa3c) = bufferBase;
               M<UInt32>(recordCursor + 0xa44) = bufferSize;
-              M<SInt16>(recordCursor + 0xa48) = (SInt16)paddedWidth;
-              M<SInt16>(recordCursor + 0xa50) = (SInt16)swdsWidth;
-              M<SInt16>(recordCursor + 0xa52) = (SInt16)swdsHeight;
+              storeHalf(&M<UInt16>(recordCursor + 0xa48), paddedWidth);
+              storeHalf(&M<UInt16>(recordCursor + 0xa50), swdsWidth);
+              storeHalf(&M<UInt16>(recordCursor + 0xa52), swdsHeight);
               recordCursor[0xa6b] = recordCursor[0x1db];
               recordCursor[0xa6c] = recordCursor[0x1dc];
               recordCursor[0xa6d] = recordCursor[0x1dd];
@@ -395,18 +392,14 @@ LAB_00024750:
                        (M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb3c) == M<SInt32>(self + kIOATIR500Accelerator_swdsState_0xb40))))))) {
                     mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
                     baseWord = M<UInt32>(recordCursor + 0xa3c);
-                    M<UInt32>(mmioBase + 0x6110) =
-                         baseWord << 0x18 | (baseWord & 0xff00) << 8 | baseWord >> 8 & 0xff00 |
-                         baseWord >> 0x18;
+                    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6110), baseWord);
                     enforceInOrderExecutionIO();
                     secondaryWord = (UInt32)M<UInt16>(recordCursor + 0xa48);
-                    M<UInt32>(mmioBase + 0x6120) = secondaryWord << 0x18 | (secondaryWord & 0xff00) << 8;
+                    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6120), secondaryWord & 0xffff);
                     enforceInOrderExecutionIO();
-                    M<UInt32>(mmioBase + 0x6910) =
-                         baseWord << 0x18 | (baseWord & 0xff00) << 8 | baseWord >> 8 & 0xff00 |
-                         baseWord >> 0x18;
+                    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6910), baseWord);
                     enforceInOrderExecutionIO();
-                    M<UInt32>(mmioBase + 0x6920) = secondaryWord << 0x18 | (secondaryWord & 0xff00) << 8;
+                    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6920), secondaryWord & 0xffff);
                     enforceInOrderExecutionIO();
                     M<UInt32>(self + kIOATIR500Accelerator_display1SurfaceAddressSeen) = baseWord;
                     M<UInt32>(self + kIOATIR500Accelerator_display2SurfaceAddressSeen) = M<UInt32>(recordCursor + 0xa3c);
@@ -415,26 +408,18 @@ LAB_00024750:
                     if (panel == 0) {
                       mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
                       buffer0Base = M<UInt32>(self + kIOATIR500Accelerator_swdsBuffer0GpuBaseAddress);
-                      M<UInt32>(mmioBase + 0x6110) =
-                           buffer0Base << 0x18 | (buffer0Base & 0xff00) << 8 | buffer0Base >> 8 & 0xff00 |
-                           buffer0Base >> 0x18;
+                      storeWordByteReversed(&M<UInt8>(mmioBase + 0x6110), buffer0Base);
                       enforceInOrderExecutionIO();
-                      M<UInt32>(mmioBase + 0x6120) =
-                           (UInt32)M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width) << 0x18 |
-                           (M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width) & 0xff00) << 8;
+                      storeWordByteReversed(&M<UInt8>(mmioBase + 0x6120), (((UInt32)M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width)) & 0xff) | ((M<UInt16>(self + kIOATIR500Accelerator_swdsBuffer0Width)) & 0xff00));
                       enforceInOrderExecutionIO();
                       newRecordBase = M<UInt32>(recordCursor + 0xa3c);
                     }
                     else {
                       newRecordBase = M<UInt32>(recordCursor + 0xa3c);
                       mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-                      M<UInt32>(mmioBase + 0x6910) =
-                           newRecordBase << 0x18 | (newRecordBase & 0xff00) << 8 | newRecordBase >> 8 & 0xff00 |
-                           newRecordBase >> 0x18;
+                      storeWordByteReversed(&M<UInt8>(mmioBase + 0x6910), newRecordBase);
                       enforceInOrderExecutionIO();
-                      M<UInt32>(mmioBase + 0x6920) =
-                           (UInt32)M<UInt16>(recordCursor + 0xa48) << 0x18 |
-                           (M<UInt16>(recordCursor + 0xa48) & 0xff00) << 8;
+                      storeWordByteReversed(&M<UInt8>(mmioBase + 0x6920), (((UInt32)M<UInt16>(recordCursor + 0xa48)) & 0xff) | ((M<UInt16>(recordCursor + 0xa48)) & 0xff00));
                       enforceInOrderExecutionIO();
                     }
                     M<UInt32>(stateCursor + 0xb70) = newRecordBase;
@@ -482,17 +467,12 @@ LAB_00024750:
                   M<UInt32>(savedRegCursor + 0xb1c) =
                        loadWordByteReversed(regPtr);
                   mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
-                  M<UInt32>(mmioBase + regOffset0) =
-                       recordBase << 0x18 | (recordBase & 0xff00) << 8 | recordBase >> 8 & 0xff00 |
-                       recordBase >> 0x18;
+                  storeWordByteReversed(&M<UInt8>(mmioBase + regOffset0), recordBase);
                   enforceInOrderExecutionIO();
                   endAddress = (recordBase + M<SInt32>(self + recordOffset + 0x13c)) - 1;
-                  M<UInt32>(mmioBase + regOffset1) =
-                       endAddress * 0x1000000 | (endAddress & 0xff00) << 8 | endAddress >> 8 & 0xff00 |
-                       endAddress >> 0x18;
+                  storeWordByteReversed(&M<UInt8>(mmioBase + regOffset1), endAddress);
                   enforceInOrderExecutionIO();
-                  M<UInt32>(mmioBase + regOffset2) =
-                       tilingRegValue << 0x18 | (tilingRegValue & 0xff00) << 8 | tilingRegValue >> 8 & 0xff00;
+                  storeWordByteReversed(&M<UInt8>(mmioBase + regOffset2), tilingRegValue & 0xffffff);
                   enforceInOrderExecutionIO();
                   swdsStarted = true;
                   M<UInt32>(savedRegCursor + 0xb28) = 1;

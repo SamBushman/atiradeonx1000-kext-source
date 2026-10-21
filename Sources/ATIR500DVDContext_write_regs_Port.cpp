@@ -43,8 +43,7 @@ IOReturn ATIR500DVDContext::write_regs(UInt32 offset, UInt32 value) {
     result = 0xe00002d8;
   }
   else {
-    M<UInt32>(registers + (offset & 0x1ffc)) =
-         value << 0x18 | (value & 0xff00) << 8 | value >> 8 & 0xff00 | value >> 0x18;
+    storeWordByteReversed(&M<UInt8>(registers + (offset & 0x1ffc)), value);
     result = 0;
   }
   GH_IOLockUnlock(M<UInt32>(accel + kIOATIR500Accelerator_commandLock));

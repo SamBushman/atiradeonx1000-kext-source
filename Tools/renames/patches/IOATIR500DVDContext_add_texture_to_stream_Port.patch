@@ -1,0 +1,10 @@
+--- a/Sources/IOATIR500DVDContext_add_texture_to_stream_Port.cpp	2026-10-20 16:47:32.644908822 -0700
++++ b/Sources/IOATIR500DVDContext_add_texture_to_stream_Port.cpp	2026-10-20 16:47:32.646387898 -0700
+@@ -31,6 +31,6 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
+ 
+-  M<SInt16>(textureBytes + 0xe) = M<SInt16>(textureBytes + 0xe) + 1;
++  storeHalf(&M<UInt16>(textureBytes + 0xe), M<SInt16>(textureBytes + 0xe) + 1);
+   return;
+ }

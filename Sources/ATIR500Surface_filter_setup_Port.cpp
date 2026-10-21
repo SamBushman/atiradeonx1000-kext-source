@@ -52,9 +52,9 @@ void ATIR500Surface::filter_setup(UInt32 scale, OverlayRegisters *regs) {
   UInt8 setByte16;
   UInt8 setByte17;
   int setOffset;
-  double ratio;
+  float ratio;
   
-  ratio = (double)(4096.0 / (float)((double)CONCAT44d(0x43300000,scale) - 4503599627370496.0));
+  ratio = (double)(4096.0 / (float)(UInt32)(scale));
   if (0.25 <= ratio) {
     if (1.0 < ratio) {
       ratio = 1.0;

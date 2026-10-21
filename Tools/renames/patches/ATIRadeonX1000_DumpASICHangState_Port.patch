@@ -1,5 +1,5 @@
---- a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-20 10:01:20.300412987 -0700
-+++ b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-20 10:01:20.301716290 -0700
+--- a/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-20 16:35:11.441705013 -0700
++++ b/Sources/ATIRadeonX1000_DumpASICHangState_Port.cpp	2026-10-20 16:35:11.443021513 -0700
 @@ -36,12 +36,6 @@
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
@@ -51,3 +51,13 @@
    GH_IOLog("** ASIC Hang Log Start **\n");
    GH_IOSleep(10);
    mmioBase = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+@@ -160,8 +149,7 @@
+   GH_IOSleep(10);
+   do {
+     registers = M<SInt32>(self + kIOATIR500Accelerator_mmioBase);
+-    M<UInt32>(registers + 0x7f0) =
+-         queueAddress << 0x18 | (queueAddress & 0xff00) << 8 | queueAddress >> 8 & 0xff00 | queueAddress >> 0x18;
++    storeWordByteReversed(&M<UInt8>(registers + 0x7f0), queueAddress);
+     enforceInOrderExecutionIO();
+     csqData = loadWordByteReversed(&M<UInt8>(registers + 0x7f4));
+     checksum = checksum + csqData;

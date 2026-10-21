@@ -75,7 +75,7 @@ LAB_00002580:
       } while (newCount != bufferIndex);
     }
     result = 1;
-    M<SInt16>(self + recordOffset + 0x402) = (SInt16)newCount;
+    storeHalf(&M<UInt16>(self + recordOffset + 0x402), newCount);
     M<UInt16>(self + recordOffset + 0x400) = oldCount16;
   }
   return result;

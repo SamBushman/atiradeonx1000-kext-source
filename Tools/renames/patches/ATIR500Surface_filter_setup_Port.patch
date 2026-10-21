@@ -1,6 +1,6 @@
---- a/Sources/ATIR500Surface_filter_setup_Port.cpp	2026-10-20 09:38:05.157603099 -0700
-+++ b/Sources/ATIR500Surface_filter_setup_Port.cpp	2026-10-20 09:38:05.158302838 -0700
-@@ -32,21 +32,25 @@
+--- a/Sources/ATIR500Surface_filter_setup_Port.cpp	2026-10-20 16:29:01.136223382 -0700
++++ b/Sources/ATIR500Surface_filter_setup_Port.cpp	2026-10-20 16:29:01.137532071 -0700
+@@ -32,25 +32,29 @@
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
      UInt8 *regsBytes = reinterpret_cast<UInt8 *>(regs);
  
@@ -39,8 +39,14 @@
 +  UInt8 setByte16;
 +  UInt8 setByte17;
    int setOffset;
-   double ratio;
+-  double ratio;
++  float ratio;
    
+-  ratio = (double)(4096.0 / (float)((double)CONCAT44d(0x43300000,scale) - 4503599627370496.0));
++  ratio = (double)(4096.0 / (float)(UInt32)(scale));
+   if (0.25 <= ratio) {
+     if (1.0 < ratio) {
+       ratio = 1.0;
 @@ -60,44 +64,44 @@
      ratio = 0.25;
    }

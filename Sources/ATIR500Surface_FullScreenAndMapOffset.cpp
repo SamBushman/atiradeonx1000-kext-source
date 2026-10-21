@@ -36,7 +36,7 @@ SInt32 ATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *bufferIn, UInt32 
         if ((flags & 0xf00000) == 0) {
             width = 1;
         } else {
-            width = static_cast<SInt32>(U16At(buffer, 0x1c) / ((flags >> 0x14) & 0xf)) >> (level & 0x3f);
+            width = static_cast<SInt32>(U16At(buffer, 0x1c)) / static_cast<SInt32>((flags >> 0x14) & 0xf) >> (level & 0x3f);
             if (width == 0) {
                 width = 1;
             }

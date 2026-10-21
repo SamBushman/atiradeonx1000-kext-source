@@ -30,10 +30,10 @@
 void ATIR500Surface::dvd_setup_overlay(int top, int right, int bottom, int left) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  M<SInt16>(self + kATIR500Surface_overlayTop) = (SInt16)top;
-  M<SInt16>(self + kATIR500Surface_overlayLeft) = (SInt16)left;
-  M<SInt16>(self + kATIR500Surface_overlayBottom) = (SInt16)bottom;
-  M<SInt16>(self + kATIR500Surface_overlayRight) = (SInt16)right;
+  storeHalf(&M<UInt16>(self + kATIR500Surface_overlayTop), top);
+  storeHalf(&M<UInt16>(self + kATIR500Surface_overlayLeft), left);
+  storeHalf(&M<UInt16>(self + kATIR500Surface_overlayBottom), bottom);
+  storeHalf(&M<UInt16>(self + kATIR500Surface_overlayRight), right);
   M<UInt32>(self + kATIR500Surface_overlayHandle) = 1;
   return;
 }

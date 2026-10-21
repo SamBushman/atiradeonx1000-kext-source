@@ -14,6 +14,7 @@
 
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h"
 
 static inline void GH_FreeTexvert(void *accelerator, void *texture) { IOATIR500Shared::free_texvert(reinterpret_cast<IOATIR500Accelerator *>(accelerator), reinterpret_cast<IOTextureBuffer *>(texture)); }
 
@@ -197,8 +198,7 @@ LAB_000060d8:
         if (GH_page_size <= segmentLength[0]) {
           gartTable = M<SInt32>(self + kIOATIR500Accelerator_gartTable);
           do {
-            M<UInt32>(gartTable + firstEntry * 4) =
-                 physAddress << 0x18 | (physAddress & 0xff00) << 8 | physAddress >> 8 & 0xff00 | physAddress >> 0x18;
+            storeWordByteReversed(&M<UInt8>(gartTable + firstEntry * 4), physAddress);
             segmentLength[0] = segmentLength[0] - pageSize;
             physAddress = physAddress + pageSize;
             firstEntry = firstEntry + 1;

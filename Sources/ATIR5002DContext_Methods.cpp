@@ -91,7 +91,7 @@ IOReturn ATIR5002DContext::get_buffer_info(IOATIR500Surface *surface, UInt32 ind
         UInt32 quotient = 0;
         if (divisor != 0) {
             UInt32 value = U32At(entry, 0x134) & 0x3ff;
-            quotient = value / divisor;
+            quotient = static_cast<SInt32>(value) / static_cast<SInt32>(divisor);
             if (U16At(entry, 0x142) != 0) {
                 quotient2 = static_cast<SInt32>(value - divisor * quotient) / static_cast<SInt32>(U16At(entry, 0x142));
             }

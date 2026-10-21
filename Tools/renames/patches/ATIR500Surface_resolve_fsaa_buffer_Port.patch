@@ -1,6 +1,6 @@
---- a/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 09:42:26.762215713 -0700
-+++ b/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 09:42:26.763696112 -0700
-@@ -31,133 +31,145 @@
+--- a/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 16:35:11.281789203 -0700
++++ b/Sources/ATIR500Surface_resolve_fsaa_buffer_Port.cpp	2026-10-20 16:35:11.282854933 -0700
+@@ -31,133 +31,141 @@
  void* ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32*packet, bool clearFlag, SInt32 x, SInt32 y, SInt32 width, SInt32 height) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
@@ -37,7 +37,6 @@
 +  UInt32 fieldD;
 +  float invHeightF;
 +  float lit37c;
-+  double doubleBias;
 +  SInt32 formatOffset;
 +  SInt32 tileAlignment;
 +  UInt32 savedWord;
@@ -77,7 +76,7 @@
           0xffffffe0;
      if ((M<UInt32>(formatBuffer + 0x3c) & 0xf00000) != 0) {
 -      uVar18 = (UInt32)M<UInt16>(formatBuffer + 0x14) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf);
-+      pitchPerDegree = (UInt32)M<UInt16>(formatBuffer + 0x14) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf);
++      pitchPerDegree = (SInt32)M<UInt16>(formatBuffer + 0x14) / (SInt32)(M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf);
      }
 -    uVar15 = 0x20 / M<UInt16>(formatBuffer + 0x16);
 -    if (uVar15 <= uVar18) {
@@ -118,7 +117,7 @@
 -       (uVar15 = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
 -       uVar18 = uVar15 - 1, uVar15 == 0)) {
 -      uVar18 = 0;
-+       (widthDiv = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
++       (widthDiv = (SInt32)M<UInt16>(formatBuffer + 0x1c) / (SInt32)(M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
 +       lastX = widthDiv - 1, widthDiv == 0)) {
 +      lastX = 0;
      }
@@ -140,7 +139,7 @@
 -       (uVar15 = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
 -       uVar18 = uVar15 - 1, uVar15 == 0)) {
 -      uVar18 = 0;
-+       (widthDiv = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
++       (widthDiv = (SInt32)M<UInt16>(fixedBuffer + 0x1c) / (SInt32)(M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf),
 +       lastX = widthDiv - 1, widthDiv == 0)) {
 +      lastX = 0;
      }
@@ -170,7 +169,7 @@
      }
      else {
 -      uVar15 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (uVar18 >> 0x14 & 0xf);
-+      pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (tilingBits >> 0x14 & 0xf);
++      pitchPerDegree = (SInt32)M<UInt16>(fixedBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
      }
 -    uVar16 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
 -    if (uVar16 <= uVar15) {
@@ -185,7 +184,7 @@
 +      minPitch = pitchPerDegree;
 +    }
 +    if ((untiled) ||
-+       (widthDiv = (UInt32)M<UInt16>(fixedBuffer + 0x1c) / (tilingBits >> 0x14 & 0xf), lastX = widthDiv - 1,
++       (widthDiv = (SInt32)M<UInt16>(fixedBuffer + 0x1c) / (SInt32)(tilingBits >> 0x14 & 0xf), lastX = widthDiv - 1,
 +       widthDiv == 0)) {
 +      lastX = 0;
      }
@@ -203,30 +202,31 @@
 -    fVar11 = FLOAT_0004c380;
 -    fVar10 = FLOAT_0004c37c;
 -    fVar4 = FLOAT_0004c370;
-+    doubleBias = DOUBLE_0004c3a8;
 +    lit380 = FLOAT_0004c380;
 +    lit37c = FLOAT_0004c37c;
 +    invWidthF = FLOAT_0004c370;
      if (M<UInt16>(formatBuffer + 0x1c) != 0) {
 -      fVar4 = FLOAT_0004c374 /
+-              (float)((double)CONCAT44d(0x43300000,M<UInt16>(formatBuffer + 0x1c) ^ 0x80000000) -
+-                     DOUBLE_0004c3a8);
 +      invWidthF = FLOAT_0004c374 /
-               (float)((double)CONCAT44d(0x43300000,M<UInt16>(formatBuffer + 0x1c) ^ 0x80000000) -
-                      DOUBLE_0004c3a8);
++              (float)(SInt32)(M<UInt16>(formatBuffer + 0x1c));
      }
 -    fVar9 = FLOAT_0004c370;
 +    invHeightF = FLOAT_0004c370;
      if (M<UInt16>(formatBuffer + 0x1e) != 0) {
 -      fVar9 = FLOAT_0004c374 /
+-              (float)((double)CONCAT44d(0x43300000,M<UInt16>(formatBuffer + 0x1e) ^ 0x80000000) -
+-                     DOUBLE_0004c3a8);
 +      invHeightF = FLOAT_0004c374 /
-               (float)((double)CONCAT44d(0x43300000,M<UInt16>(formatBuffer + 0x1e) ^ 0x80000000) -
-                      DOUBLE_0004c3a8);
++              (float)(SInt32)(M<UInt16>(formatBuffer + 0x1e));
      }
 -    puVar20 = packet + 0xcb;
 +    outCursor = packet + 0xcb;
      packet[0xc2] = 0x1087;
      packet[0xc4] = 0xc0033500;
      packet[0xbd] = 0x31080;
-@@ -165,20 +177,20 @@
+@@ -165,20 +173,20 @@
      packet[0xc5] = 0x10031;
      packet[0xc9] = 0x1393;
      packet[0xca] = 10;
@@ -241,13 +241,13 @@
 -    packet[0xc1] = (UInt32)(fVar9 * fVar5);
 -    packet[199] = (UInt32)((fVar5 + fVar4) * fVar11);
 -    packet[0xc3] = (SInt32)((fVar3 - fVar2) * fVar10) << 0x10 | (SInt32)((fVar4 - fVar5) * fVar10);
-+    xLeftF = (float)((double)CONCAT44d(0x43300000,x ^ 0x80000000) - doubleBias);
-+    xRightF = (float)((double)CONCAT44d(0x43300000,x + width ^ 0x80000000) - doubleBias);
++    xLeftF = (float)(SInt32)(x);
++    xRightF = (float)(SInt32)(x + width);
 +    packet[0xc0] = FBITS((invWidthF * xRightF));
 +    packet[0xbe] = FBITS((invWidthF * xLeftF));
 +    packet[0xc6] = FBITS(((xLeftF + xRightF) * lit380));
-+    yBottomF = (float)((double)CONCAT44d(0x43300000,y + height ^ 0x80000000) - doubleBias);
-+    yTopF = (float)((double)CONCAT44d(0x43300000,y ^ 0x80000000) - doubleBias);
++    yBottomF = (float)(SInt32)(y + height);
++    yTopF = (float)(SInt32)(y);
 +    packet[0xbf] = FBITS((invHeightF * yBottomF));
 +    packet[0xc1] = FBITS((invHeightF * yTopF));
 +    packet[199] = FBITS(((yTopF + yBottomF) * lit380));
@@ -259,12 +259,12 @@
    packet[0xa9] = 0xc0001000;
    packet[0x9d] = 0xc0001000;
    packet[0x9f] = 0xc0001000;
-@@ -188,14 +200,14 @@
+@@ -188,14 +196,14 @@
    packet[0xa7] = 0xc0001000;
    packet[0x9a] = M<UInt32>(fixedBuffer + 8);
    if ((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) != 0) {
 -    uVar18 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
-+    pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
++    pitchPerDegree = (SInt32)M<UInt16>(fixedBuffer + 0x14) / (SInt32)(M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
    }
 -  uVar15 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
 -  if (uVar15 <= uVar18) {
@@ -279,7 +279,7 @@
         (M<UInt8>(formatBuffer + 0x38) & 6) << 0x10 | (M<UInt8>(fixedBuffer + 0x39) & 3) << 0x13 |
         FormatTableLookup_0x0004d2e0((UInt32)M<UInt8>(fixedBuffer + 0x3a) * 0x1c) >> 1 & 0x1e00000;
    if (((M<UInt32>(fixedBuffer + 0x28) & 0x3ff00000) == 0x3ff00000) || (M<char>(fixedBuffer + 0x36) == '\0'))
-@@ -205,13 +217,13 @@
+@@ -205,13 +213,13 @@
    else {
      packet[0x20] = 0x600;
    }
@@ -295,7 +295,7 @@
    packet[0x48] = packet[0x54];
    packet[0x4a] = packet[0x56];
    packet[0x4c] = packet[0x58];
-@@ -223,103 +235,103 @@
+@@ -223,103 +231,100 @@
    packet[0x82] = 0;
    packet[0x92] = 0x80;
    packet[0x98] = 0x50000000;
@@ -306,7 +306,7 @@
 -     (uVar15 = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
 -     uVar18 = uVar15 - 1, uVar15 == 0)) {
 -    uVar18 = 0;
-+     (widthDiv = (UInt32)M<UInt16>(formatBuffer + 0x1c) / (M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
++     (widthDiv = (SInt32)M<UInt16>(formatBuffer + 0x1c) / (SInt32)(M<UInt32>(formatBuffer + 0x3c) >> 0x14 & 0xf),
 +     lastX = widthDiv - 1, widthDiv == 0)) {
 +    lastX = 0;
    }
@@ -325,7 +325,7 @@
 +  pitchPerDegree = 0;
    if ((M<UInt32>(fixedBuffer + 0x3c) & 0xf00000) != 0) {
 -    uVar18 = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
-+    pitchPerDegree = (UInt32)M<UInt16>(fixedBuffer + 0x14) / (M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
++    pitchPerDegree = (SInt32)M<UInt16>(fixedBuffer + 0x14) / (SInt32)(M<UInt32>(fixedBuffer + 0x3c) >> 0x14 & 0xf);
    }
 -  uVar15 = 0x20 / M<UInt16>(fixedBuffer + 0x16);
 -  if (uVar15 <= uVar18) {
@@ -394,16 +394,13 @@
 -  puVar20[8] = 3;
 -  puVar20[9] = 0x13a2;
 -  puVar20[10] = 0;
-+  doubleBias = DOUBLE_0004c3a8;
 +  lit380 = FLOAT_0004c380;
 +  nextCursor = outCursor + 0xb;
 +  *outCursor = 0xc0033500;
 +  outCursor[1] = 0x10031;
-+  outCursor[2] = FBITS(((float)((double)CONCAT44d(0x43300000,width + x * 2 ^ 0x80000000) -
-+                              doubleBias) * lit380));
++  outCursor[2] = FBITS(((float)(SInt32)(width + x * 2) * lit380));
 +  outCursor[4] = 0;
-+  outCursor[3] = FBITS(((float)((double)CONCAT44d(0x43300000,height + y * 2 ^ 0x80000000) -
-+                              doubleBias) * lit380));
++  outCursor[3] = FBITS(((float)(SInt32)(height + y * 2) * lit380));
 +  outCursor[5] = 0x1393;
 +  outCursor[6] = 10;
 +  outCursor[7] = 0x13c6;

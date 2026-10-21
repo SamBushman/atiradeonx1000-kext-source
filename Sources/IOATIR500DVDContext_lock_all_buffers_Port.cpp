@@ -68,7 +68,7 @@ LAB_0000fe04:
         surface = M<UInt32>(self + kIOATIR500DVDContext_boundSurface);
       }
       result = 0;
-      M<SInt16>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xbd2) = M<SInt16>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xbd2) + 1;
+      storeHalf(&M<UInt16>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xbd2), M<SInt16>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xbd2) + 1);
       goto LAB_0000fea0;
     }
     if ((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & 0x20000000) != 0) break;
