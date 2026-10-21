@@ -26,6 +26,9 @@
 
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.13-1.14 (400 against 454 over the sampled seeds). Cause: 18 more loads than stock, from volatile
+ * re-reads of the sensor register and accelerator fields that the shipped code reads once. Closing it: read each into a local once, which must keep the
+ * register access sequence identical (difftest compares it strictly). A few cycles per call; not worth distorting the register sequence. */
 /* real addr 0x19fd0 */
 void ATIRadeonX1000::disable_GPUSensor() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

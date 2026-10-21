@@ -30,6 +30,9 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");
 extern const UInt32 kShapeSurfaceDefaultMipTable[14] asm("__ZZN14ATIR500Surface13shape_surfaceEvE5C.146");   /* shape_surface()::C.146 (real 0x4c284, 0x38 bytes, all zero), defined in ATIR500Surface_ShapeSurface.cpp */
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.10-1.13 (1.30 before the float/divide/halfword-store fixes). Cause: the shipped code builds its
+ * register images with 18 rlwimi (bitfield insert); gcc 4.0.1 does not form rlwimi from the `a & mask | b & mask` chains used here. Closing it: write the
+ * format and pitch words as bitfield structs with the real register layouts (needs the layouts; the named locals stay). */
 /* real addr 0x3c130 */
 void ATIR500Surface::shape_surface() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

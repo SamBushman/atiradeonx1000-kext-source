@@ -27,6 +27,11 @@
 extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 
 
+/* PERF NOTE (NOT APPLIED: kept named locals). Estimated cycles rebuilt/stock: 1.10-1.17 on the short opcodes (worst 1.17: 0x09, 0x0b-0x0f, 0x39 with
+ * high-bit operands); the long opcodes 0x2d/0x31/0x32/0x33/0x3f are at 1.03-1.10. Cause: the prologue saves f15-f31 where stock saves f21-f31 (about 13 extra
+ * instructions per call), nop padding falls elsewhere, and the 38 float locals (srcTopF, srcMinX, scaleY, dstXMax ...) that the variable splits created keep more
+ * values live than stock. Closing it: merge the float temporaries of different opcode handlers back into a few shared variables (stock reuses f0-f13);
+ * the cost is losing those names, for 5-8% on a short path. Details and measurements: Tests/difftest/cycle_notes.md. */
 /* real addr 0x2b820 */
 IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

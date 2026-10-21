@@ -26,6 +26,10 @@
 
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.12-1.15. Cause: +74 loads and +76 stores over the sampled seeds: every object field the Ghidra text
+ * touches is a volatile M<T> access, so fields the shipped code keeps in registers (and repeated stores it folds) are reloaded and rewritten. Closing it: a
+ * non-volatile field accessor for the self + k... forms, as -DGH_PLAIN_MEMORY does for other files, after reviewing this function's loops for polled
+ * fields; this file stays volatile because it also programs registers (Tools/volatile_memory_sources.txt). */
 /* real addr 0x31e90 */
 void ATIR5002DContext::submit_context_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

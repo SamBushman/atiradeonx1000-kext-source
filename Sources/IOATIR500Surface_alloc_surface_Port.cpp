@@ -26,6 +26,9 @@
 
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.13-1.14. Cause: loads and stores equal stock; the rebuilt code has 17 more branches and 66 more
+ * register-to-register instructions over the sampled seeds (probably early-exit tests compiled as separate compare/branch pairs plus result copies; not traced to a line). Closing it, if that is the cause:
+ * fold the early-exit tests into one return path as the shipped code does; a small function, so a few cycles per call. */
 /* real addr 0x13360 */
 bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

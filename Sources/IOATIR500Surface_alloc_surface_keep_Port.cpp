@@ -26,6 +26,8 @@
 
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.10. Cause: loads and stores equal stock; 13 more branches and 43 more register-to-register
+ * instructions over the sampled seeds (probably the compare/branch shape of the buffer walk; not traced to a line). Closing it, if so: as for alloc_surface, one shared return path. */
 /* real addr 0x13210 */
 bool IOATIR500Surface::alloc_surface_keep(IOATIR500Surface *other, VendorTextureBuffer**texture, SInt32 excludeCount, UInt32 index) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

@@ -26,6 +26,8 @@
 
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.11-1.12 (52 against 58). Cause: 6 nops that gcc 4.0.1 inserts for G5 dispatch groups after a
+ * volatile access; the shipped build places them elsewhere. Same instruction mix otherwise. No source change closes it short of reordering code. */
 /* real addr 0x19f30 */
 void ATIRadeonX1000::enable_GPUSensor() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

@@ -414,6 +414,8 @@ void ATIRadeonX1000::pageOnPCIeGART() {
   return;
 }
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.11 (5840 estimated cycles). Not profiled to a single cause: a handful of extra spills and
+ * compare/branch shape differences in the page-table fill loop. Closing it would need a per-loop comparison with the shipped disassembly; the gap is small. */
 /* real addr 0x1dd80 */
 IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *descriptor, UInt32 *outOffset, UInt32 minOffset, UInt32 maxOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

@@ -1,6 +1,13 @@
---- a/Sources/ATIR500Surface_shape_surface_Port.cpp	2026-10-20 16:35:11.365519606 -0700
-+++ b/Sources/ATIR500Surface_shape_surface_Port.cpp	2026-10-20 16:35:11.366839758 -0700
-@@ -34,35 +34,71 @@
+--- a/Sources/ATIR500Surface_shape_surface_Port.cpp	2026-10-20 19:02:22.489506543 -0700
++++ b/Sources/ATIR500Surface_shape_surface_Port.cpp	2026-10-20 19:02:22.491089358 -0700
+@@ -30,39 +30,78 @@
+ extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");
+ extern const UInt32 kShapeSurfaceDefaultMipTable[14] asm("__ZZN14ATIR500Surface13shape_surfaceEvE5C.146");   /* shape_surface()::C.146 (real 0x4c284, 0x38 bytes, all zero), defined in ATIR500Surface_ShapeSurface.cpp */
+ 
++/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.10-1.13 (1.30 before the float/divide/halfword-store fixes). Cause: the shipped code builds its
++ * register images with 18 rlwimi (bitfield insert); gcc 4.0.1 does not form rlwimi from the `a & mask | b & mask` chains used here. Closing it: write the
++ * format and pitch words as bitfield structs with the real register layouts (needs the layouts; the named locals stay). */
+ /* real addr 0x3c130 */
  void ATIR500Surface::shape_surface() {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
@@ -99,7 +106,7 @@
    UInt8 bufferIds [8];
    SInt32 mipOffsets [14];
    UInt32 heightScale;
-@@ -105,15 +141,15 @@
+@@ -105,15 +144,15 @@
      heightScale = 1;
    }
    else {
@@ -121,7 +128,7 @@
          widthScale = 2;
          heightScale = 2;
        }
-@@ -128,47 +164,47 @@
+@@ -128,47 +167,47 @@
          heightScale = 1;
        }
      }
@@ -185,7 +192,7 @@
        if ((shapeMask >> (bufferSlot & 0x3f) & 1) != 0) {
          bufferHeightScale = heightScale;
          bufferWidthScale = widthScale;
-@@ -210,17 +246,17 @@
+@@ -210,17 +249,17 @@
              M<UInt16>(self + bufferRecordOffset + 0xbc) = 0;
            }
            else {
@@ -213,7 +220,7 @@
          if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0x700000) == 0) {
            if ((M<UInt32>(self + kIOATIR500Surface_modeBits) & 0xc0000) == 0) {
              M<UInt32>(self + bufferRecordOffset + 0xe4) =
-@@ -240,26 +276,26 @@
+@@ -240,26 +279,26 @@
          windowMode = M<UInt32>(self + kIOATIR500Surface_modeBits);
          shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
        }
@@ -247,7 +254,7 @@
      shapeMask = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
    }
    if (M<SInt32>(self + kIOATIR500Surface_boundDVDContext) == 0) {
-@@ -271,11 +307,11 @@
+@@ -271,11 +310,11 @@
    if (pendingMask == 0) {
      return;
    }
@@ -264,7 +271,7 @@
    bytesPerPixel = 1 << (formatEntry >> 0xc & 7);
    if ((shapeMask & 0x200) != 0) {
      if (((bytesPerPixel != M<UInt16>(self + kIOATIR500Surface_buffer9BytesPerPixel)) ||
-@@ -283,51 +319,51 @@
+@@ -283,51 +322,51 @@
         ((UInt32)M<UInt16>(self + kIOATIR500Surface_buffer9Height) != heightScale * (SInt32)M<SInt16>(self + kIOATIR500Surface_height))) {
        if (M<SInt32>(self + kIOATIR500Surface_buffer9BackingStore) != 0) {
          ((IOATIR500Surface *)((UInt8 *)self))->free_buffer_backing_store((ATIR500SurfaceBuffer *)((UInt8 *)(self + kIOATIR500Surface_buffer9)));
@@ -346,7 +353,7 @@
          M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) = M<UInt32>(self + kIOATIR500Surface_buffer9TilingDegreeBits) & 0xff000fff | 0x111000;
        }
        else {
-@@ -343,17 +379,17 @@
+@@ -343,17 +382,17 @@
    GH_memcpy(mipOffsets,kShapeSurfaceDefaultMipTable,0x38);
    modeBits = M<UInt32>(self + kIOATIR500Surface_modeBits);
    if ((modeBits & 0x20) == 0) {
@@ -373,7 +380,7 @@
      }
      alignedHeight = (UInt32)M<SInt16>(self + kIOATIR500Surface_height);
      if ((alignedHeight & 0x1f) != 0) {
-@@ -362,99 +398,99 @@
+@@ -362,99 +401,99 @@
                                              (UInt32)((SInt32)alignedHeight < 0 && (alignedHeight & 0x1f) != 0)) * -0x20
                                       )) + 0x20;
      }
@@ -534,7 +541,7 @@
        }
      }
    }
-@@ -468,122 +504,122 @@
+@@ -468,122 +507,122 @@
      bufferIds[5] = 3;
    }
    else {
@@ -734,7 +741,7 @@
            M<UInt16>(self + kIOATIR500Surface_buffer16Height) = 0x240;
          }
          else {
-@@ -592,62 +628,62 @@
+@@ -592,62 +631,62 @@
          self[0x862] = 0xb;
        }
        else if (bufferId == 0x12) {

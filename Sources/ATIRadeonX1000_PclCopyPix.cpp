@@ -20,6 +20,10 @@
 struct pcl_ParamsR500_t;
 extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.10-1.14. Cause: 79 loads against 49 in stock, because the volatile reads of the parameter block
+ * are repeated where the shipped code reads each field once; 7 rlwimi (register image built by bitfield insert) that gcc 4.0.1 does not form from the
+ * `a & mask | b & mask` form used here; 71 more nops over the sampled seeds. Closing it: read each pcl_ParamsR500_t field into a local once (keeps the names),
+ * and model the blit-state words as bitfield structs with the real register layout (needs the layouts; not a mechanical rewrite). */
 /* real addr 0x21e30 */
 UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipHorizontally, bool flipVertically) {
     UInt8 *paramsBytes = reinterpret_cast<UInt8 *>(params);

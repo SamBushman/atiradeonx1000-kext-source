@@ -27,6 +27,9 @@
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.10 (2238 against 2462). Cause: loads and stores are identical to stock; the rebuilt loop runs 232
+ * more register-to-register and arithmetic instructions plus 8 branches, so the loop body is shaped differently (probably extra moves of the loop pointers/counters; not traced to a line).
+ * Closing it, if so: rewrite the element loop with a pointer walk instead of the decompile's index copies (keeps the names). */
 /* real addr 0x191b0 */
 bool ATIR500Memory::add_to_stack() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

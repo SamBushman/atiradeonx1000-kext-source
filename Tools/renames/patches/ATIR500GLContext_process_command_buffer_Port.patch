@@ -1,6 +1,18 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 13:36:42.512541276 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 13:36:42.513952439 -0700
-@@ -991,8 +991,8 @@
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 18:56:11.194495430 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-20 18:56:11.195767261 -0700
+@@ -27,6 +27,11 @@
+ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
+ 
+ 
++/* PERF NOTE (NOT APPLIED: kept named locals). Estimated cycles rebuilt/stock: 1.10-1.17 on the short opcodes (worst 1.17: 0x09, 0x0b-0x0f, 0x39 with
++ * high-bit operands); the long opcodes 0x2d/0x31/0x32/0x33/0x3f are at 1.03-1.10. Cause: the prologue saves f15-f31 where stock saves f21-f31 (about 13 extra
++ * instructions per call), nop padding falls elsewhere, and the 38 float locals (srcTopF, srcMinX, scaleY, dstXMax ...) that the variable splits created keep more
++ * values live than stock. Closing it: merge the float temporaries of different opcode handlers back into a few shared variables (stock reuses f0-f13);
++ * the cost is losing those names, for 5-8% on a short path. Details and measurements: Tests/difftest/cycle_notes.md. */
+ /* real addr 0x2b820 */
+ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+@@ -991,8 +996,8 @@
                           tileRowsScale * (surfaceHeight - hzBlockCount) >> 1 | recordCursor[statePacketIndex + 1] & 0xffff0000;
                      hzExtentCvtHi = 0x43300000;
                      recordCursor[statePacketIndex + 7] =
@@ -11,7 +23,7 @@
                    }
                    surfaceBuffer[0x36] = 0x1;
                  }
-@@ -3170,20 +3170,20 @@
+@@ -3170,20 +3175,20 @@
          *tailCursor = 0x31080;
          recordCursor[0xc2] = 0x1087;
          tileCount = 0;
@@ -39,7 +51,7 @@
          recordCursor[0xc3] = quadWidthFixed << 0x10 | quadHeightFixed;
          recordCursor[200] = 0;
        }
-@@ -3226,9 +3226,9 @@
+@@ -3226,9 +3231,9 @@
          if (0x1ff < tileXStart) {
            tileXMin = tileXStart;
          }
@@ -51,7 +63,7 @@
          srcRightSpill = (SInt64)(SInt32)pitchPixels;
          if (FLOAT_0004c370 < srcMaxX) {
            srcRightIntCvtLo = pitchPixels ^ 0x80000000;
-@@ -3251,7 +3251,7 @@
+@@ -3251,7 +3256,7 @@
          }
          heightMinus1 = bufferHeightOp2d - 1;
          tileYEnd = (((SInt32)heightMinus1 >> 6) + (UInt32)((SInt32)heightMinus1 < 0 && (heightMinus1 & 0x3f) != 0)) * 0x40;
@@ -60,7 +72,7 @@
          srcBottomSpill = (SInt64)(SInt32)srcBottomInt;
          if (FLOAT_0004c370 < srcMaxY) {
            srcBottomIntCvtHi = 0x43300000;
-@@ -3281,7 +3281,7 @@
+@@ -3281,7 +3286,7 @@
              if (pitchPixels != 0) {
                rowY = rowOffsetY + tileYStart;
                rowYCvtHi = 0x43300000;
@@ -69,7 +81,7 @@
                tileCol = 0;
                rowYCvtLo = rowY ^ 0x80000000;
                rowYF = (float)((double)CONCAT44d(0x43300000,rowY ^ 0x80000000) - fpMagicBias);
-@@ -3291,7 +3291,7 @@
+@@ -3291,7 +3296,7 @@
                  *quadCursor = tileX;
                  quadCursor[1] = quadY;
                  quadWidth = colWidthLeft;
@@ -78,7 +90,7 @@
                    quadWidth = 0x1000;
                  }
                  quadHeight = rowHeightLeft;
-@@ -3392,20 +3392,20 @@
+@@ -3392,20 +3397,20 @@
                  tileX = tileX + 0xc00;
                  colWidthLeft = colWidthLeft - 0xc00;
                  quadWidthFixedOp2d = (SInt32)((dstXMax - dstXMin) * subpixelScale);

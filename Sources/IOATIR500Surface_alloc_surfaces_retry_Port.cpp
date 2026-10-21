@@ -30,6 +30,9 @@ extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
+/* PERF NOTE (NOT APPLIED). Estimated cycles rebuilt/stock 1.12-1.14. Cause: loads and stores equal stock; 13 more branches and 93 more register-to-register
+ * instructions over the sampled seeds (probably the retry loop's result and lock-type copies; not traced to a line). Closing it, if so: share the result variable
+ * across the retry iterations; a few cycles per call. */
 /* real addr 0x14860 */
 IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 flags, eLockType lockType) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
