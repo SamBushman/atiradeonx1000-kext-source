@@ -100,7 +100,7 @@ def w_store_reg(m, rng):
 
 
 CASES = [
-    Case('__Z11HZMEM_AllocP7_HZDATAmmmm', w_alloc, ret='u32', seeds=300),
+    Case('__Z11HZMEM_AllocP7_HZDATAmmmm', w_alloc, ret='u32', seeds=300, plain_words=True),
     Case('__Z10HZMEM_FreeP7_HZDATAmm', w_free, ret='u32', seeds=300),
     Case('__Z9store_regP20tracked_register_setmm', w_store_reg, ret='void', seeds=500, plain_words=True),
     Case('__Z21HZMEM_InitMemResourceP7_HZDATAmmm', w_init, ret='u32', seeds=120, mock=init_mock, plain_words=True),

@@ -24,10 +24,6 @@
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
 
-extern "C" UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset);
-extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
-extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
-extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
 extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
 void ATIR500Surface::build_swap() {

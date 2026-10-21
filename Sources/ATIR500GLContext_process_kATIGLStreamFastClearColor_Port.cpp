@@ -55,6 +55,8 @@ void ATIR500GLContext::process_kATIGLStreamFastClearColor(UInt32*record) {
   UInt32 formatBitsB;
   UInt32 mipLevel;
   UInt32 pitchPixels;
+  UInt32 colorTilingBits;
+  UInt32 depthTilingBits;
   
   clearWordIndex = record[1];
   surface = M<SInt32>(self + kIOATIR500GLContext_boundSurface);
@@ -69,17 +71,17 @@ void ATIR500GLContext::process_kATIGLStreamFastClearColor(UInt32*record) {
   mipOffset = M<SInt32>(mipEntry + 0x40);
   nextMipOffset = M<SInt32>(mipEntry + 0x44);
   gpuBaseAddress = M<SInt32>(colorBuffer + 8);
-  formatByteOffset = (SInt32)(UInt32)M<UInt16>(colorBuffer + 0x1e) >> (mipLevel & 0x3f);
+  formatByteOffset = (SInt32)(UInt32)M<UInt16>(colorBuffer + 0x1e) >> mipLevel;
   if (formatByteOffset != 0) {
     tileRows16 = formatByteOffset + 0xf;
   }
   samplePitch = 0;
   formatByteOffset = (UInt32)M<UInt8>(colorBuffer + 0x3a) * 0x1c;
-  if ((M<UInt32>(colorBuffer + 0x3c) & 0xf00000) != 0) {
-    samplePitch = (SInt32)((UInt32)M<UInt16>(colorBuffer + 0x14) / (M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf)) >>
-             (mipLevel & 0x3f);
+  colorTilingBits = M<UInt32>(colorBuffer + 0x3c);
+  if ((colorTilingBits & 0xf00000) != 0) {
+    samplePitch = (SInt32)M<UInt16>(colorBuffer + 0x14) / (SInt32)(colorTilingBits >> 0x14 & 0xf) >> mipLevel;
   }
-  pitchPixels = 0x20 / M<UInt16>(colorBuffer + 0x16);
+  pitchPixels = (SInt32)0x20 / (SInt32)M<UInt16>(colorBuffer + 0x16);
   if (pitchPixels <= samplePitch) {
     pitchPixels = samplePitch;
   }
@@ -98,10 +100,11 @@ void ATIR500GLContext::process_kATIGLStreamFastClearColor(UInt32*record) {
   record[3] = colorPitchWord;
   record[5] = (((tileRows16 & 0xfffffff0) >> 1) - 1) * 0x2000 & 0x3ffe000 | halfPitch * 2 - 1 & 0x1fff;
   record[clearWordIndex] = M<UInt32>(depthRecord + 0xb0);
-  if ((M<UInt32>(depthBuffer + 0x3c) & 0xf00000) != 0) {
-    depthRowTiles = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
+  depthTilingBits = M<UInt32>(depthBuffer + 0x3c);
+  if ((depthTilingBits & 0xf00000) != 0) {
+    depthRowTiles = (SInt32)M<UInt16>(depthBuffer + 0x14) / (SInt32)(depthTilingBits >> 0x14 & 0xf);
   }
-  depthMinPitch = 0x20 / M<UInt16>(depthBuffer + 0x16);
+  depthMinPitch = (SInt32)0x20 / (SInt32)M<UInt16>(depthBuffer + 0x16);
   if (depthMinPitch <= depthRowTiles) {
     depthMinPitch = depthRowTiles;
   }

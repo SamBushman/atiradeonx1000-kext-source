@@ -362,6 +362,7 @@ class Machine:
         self.hw = []                  # register windows: (base, end, model)
         self.events = []              # calls and register accesses, in order
         self.write_log = []           # [addr, size, old bytes, new bytes]
+        self.raw_new = {}             # write_log index -> the new bytes before address-looking words are canonicalised (see _flush)
         self.pending = None           # index in write_log of the store whose result has not been read back yet
         self.snapshots = []
         self.status = '?'
@@ -440,6 +441,7 @@ class Machine:
             i, hwidx = self.pending
             ent = self.write_log[i]
             ent[3] = bytes(self.uc.mem_read(ent[0], ent[1]))
+            self.raw_new[i] = ent[3]            # the bytes as stored, before a word that looks like an address into the image is replaced by the name of what it points at
             if ent[1] == 4 and STACK_TOP - STACK_SIZE <= struct.unpack('>I', ent[3])[0] < STACK_TOP and not (STACK_TOP - STACK_SIZE <= ent[0] < STACK_TOP):
                 ent[3] = STACKPTR_MARK         # the address of a local of the function: differs between builds by construction
             elif ent[1] == 4 and not self.plain_words:
@@ -650,12 +652,14 @@ class Machine:
         """{address: byte} of every byte outside the function's own stack frame whose value now differs from before the call"""
         initial, final = {}, {}
         lo, hi = STACK_TOP - STACK_SIZE, ENTRY_SP + CALLER_SCRATCH
-        for addr, size, old, new in self.write_log:
+        self.final_raw = {}
+        for n, (addr, size, old, new) in enumerate(self.write_log):
             if new is None or lo <= addr < hi:
                 continue
+            raw = self.raw_new.get(n, new)
             for i in range(size):
                 k = self.image.canon(addr + i)
-                initial.setdefault(k, old[i]); final[k] = new[i]
+                initial.setdefault(k, old[i]); final[k] = new[i]; self.final_raw[k] = raw[i]
         return {a: b for a, b in final.items() if b != initial[a]}
 
     def result(self):
@@ -678,6 +682,7 @@ class Machine:
                     r.abi.append('r%d not preserved' % i)
         self._flush()
         r.writes = self.memory_diff()
+        r.writes_raw = dict(self.final_raw)
         r.write_order = [(self.image.canon(a), n, b) for a, n, o, b in self.write_log if not (STACK_TOP - STACK_SIZE <= a < ENTRY_SP + CALLER_SCRATCH)]
         r.events = [tuple(e) for e in self.events]
         r.snapshots = list(self.snapshots)
@@ -893,9 +898,12 @@ def compare(case, st, rb, strict_order=False, strict_calls=False):
         if a != b:
             probs.append('return value differs: stock %s, rebuilt %s' % (hexs(a), hexs(b)))
     # writes
-    if st.writes != rb.writes:
-        keys = sorted(set(st.writes) | set(rb.writes), key=str)
-        d = [(k, st.writes.get(k), rb.writes.get(k)) for k in keys if st.writes.get(k) != rb.writes.get(k)]
+    # a word that is an address into one kext image is compared by the name of its target; a plain number that happens to equal an address in ONE of the two
+    # layouts is then named on that side only. Such a byte is not a difference when both sides stored the same raw bytes.
+    d = [(k, st.writes.get(k), rb.writes.get(k)) for k in sorted(set(st.writes) | set(rb.writes), key=str) if st.writes.get(k) != rb.writes.get(k)]
+    if not os.environ.get('DT_CANON_ONLY'):          # DT_CANON_ONLY=1 restores the old rule (canonical names only), for Tools/difftest/negative_control.py
+        d = [x for x in d if st.writes_raw.get(x[0]) != rb.writes_raw.get(x[0])]
+    if d:
         probs.append('memory left behind differs at %d byte(s), first: %s' % (len(d), ', '.join('%s stock %s rebuilt %s' % (fmt_key(k), hexs(a), hexs(b)) for k, a, b in d[:4])))
     elif strict_order and st.write_order != rb.write_order:
         probs.append('same final memory but different write order/granularity (stock %d stores, rebuilt %d)' % (len(st.write_order), len(rb.write_order)))

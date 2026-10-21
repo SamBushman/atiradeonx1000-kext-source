@@ -1,0 +1,68 @@
+--- a/Sources/ATIR500GLContext_write_r500_zdecompress_restore_add_on_packet_Port.cpp	2026-10-20 16:14:03.780955884 -0700
++++ b/Sources/ATIR500GLContext_write_r500_zdecompress_restore_add_on_packet_Port.cpp	2026-10-20 16:14:03.781869576 -0700
+@@ -37,6 +37,10 @@
+   UInt32 depthPitch;
+   UInt32 hzBlockOffset;
+   UInt32 samplePitch;
++  UInt32 tilingBits;
++  UInt32 bytesPerPixel;
++  SInt32 accelerator;
++  SInt32 hzMode;
+   
+   depthBuffer = self + kATIR500GLContext_textureDepthBuffer;
+   if (M<SInt32>(self + kATIR500GLContext_renderToTexture) == 0) {
+@@ -46,27 +50,33 @@
+   samplePitch = 0;
+   M<UInt32>(packetBytes + 4) = -((UInt8)depthBuffer[0x3a] ^ 0x10) >> 0x1e & 2;
+   M<UInt32>(packetBytes + 0xc) = M<UInt32>(depthBuffer + 8);
+-  if ((M<UInt32>(depthBuffer + 0x3c) & 0xf00000) != 0) {
+-    samplePitch = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
+-  }
+-  depthPitch = 0x20 / M<UInt16>(depthBuffer + 0x16);
+-  if (0x20 / M<UInt16>(depthBuffer + 0x16) <= samplePitch) {
++  tilingBits = M<UInt32>(depthBuffer + 0x3c);
++  if ((tilingBits & 0xf00000) != 0) {
++    samplePitch = (SInt32)M<UInt16>(depthBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
++  }
++  bytesPerPixel = M<UInt16>(depthBuffer + 0x16);
++  depthPitch = (SInt32)0x20 / (SInt32)bytesPerPixel;
++  if (depthPitch <= samplePitch) {
+     depthPitch = samplePitch;
+   }
+   samplePitch = 0;
+   M<UInt32>(packetBytes + 0x10) =
+        ((UInt8)depthBuffer[0x38] & 6) << 0x10 |
+        ((UInt8)depthBuffer[0x38] & 1) << 0x10 | ((UInt8)depthBuffer[0x39] & 3) << 0x13 | depthPitch & 0x3ffc;
+-  if ((M<UInt32>(depthBuffer + 0x3c) & 0xf00000) != 0) {
+-    samplePitch = (UInt32)M<UInt16>(depthBuffer + 0x14) / (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf);
+-  }
+-  depthPitch = 0x20 / M<UInt16>(depthBuffer + 0x16);
+-  if (0x20 / M<UInt16>(depthBuffer + 0x16) <= samplePitch) {
++  tilingBits = M<UInt32>(depthBuffer + 0x3c);
++  accelerator = M<SInt32>(self + kIOATIR500GLContext_accelerator);
++  hzMode = M<SInt32>(accelerator + kIOATIR500Accelerator_numPipes);
++  if ((tilingBits & 0xf00000) != 0) {
++    samplePitch = (SInt32)M<UInt16>(depthBuffer + 0x14) / (SInt32)(tilingBits >> 0x14 & 0xf);
++  }
++  bytesPerPixel = M<UInt16>(depthBuffer + 0x16);
++  depthPitch = (SInt32)0x20 / (SInt32)bytesPerPixel;
++  if (depthPitch <= samplePitch) {
+     depthPitch = samplePitch;
+   }
+   hzAlignment = 0x20;
+-  if (M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) != 4) {
+-    hzAlignment = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98) << 4;
++  if (hzMode != 4) {
++    hzAlignment = hzMode << 4;
+     alignedPitch = 0;
+     if (hzAlignment == 0) goto storePitch;
+   }
+@@ -74,7 +84,7 @@
+ storePitch:
+   M<SInt32>(packetBytes + 0x18) = alignedPitch;
+   hzBlockOffset = HZMEM_GetBlockOffset
+-                    ((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x870)),M<UInt32>(depthBuffer + 0x28),0);
++                    ((_HZDATA *)((UInt8 *)(accelerator + kIOATIR500Accelerator_hzmem)),M<UInt32>(depthBuffer + 0x28),0);
+   M<UInt32>(packetBytes + 0x20) = hzBlockOffset;
+   M<UInt32>(packetBytes + 0x28) = M<UInt32>(depthBuffer + 0x2c);
+   return;
