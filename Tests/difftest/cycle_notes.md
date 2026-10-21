@@ -32,3 +32,23 @@
 
 Matching stock exactly would mean un-splitting float temporaries (undoing names) for a change that is small against the cost of any single opcode (hundreds to 100k+ estimated
 cycles). Not changed; the long opcodes (0x2d, 0x31, 0x32, 0x33, 0x3f) are at 1.03-1.10.
+
+## After integration of R1-R4 (main be49733 + wt-R1..R4; wt-INT2)
+
+Cases whose estimated cycles are still more than 1.10x stock (cycles_stock > 50): **126 of 906** (209 before the R work). The full list with ratios is in
+`~/g5logs/INT2/cycles_final_over_1.10.tsv`; all 906 cases pass difftest (the 2D process_command_buffer hand world needs a run of its own: it exceeds the 120 s
+limit when 14+ cases run in parallel; alone it passes 400/400).
+
+| group | cases | worst | cause |
+|---|---|---|---|
+| GL `process_command_buffer` opcodes (random streams + H1 hand worlds) | 112 | 1.17 | prologue/epilogue: the rebuilt function saves f15-f20 (and more) with `stfd` and uses a bigger frame; stock saves no FP registers. The FP register pressure comes from the float locals the variable splits created (one FP register per split float); the extra ~13 instructions per call are all of the gap on short opcodes (stock 130 insns, rebuilt 153 for opcode 0x0d). Removing it means merging the float splits back, which undoes named locals for 5-8%. |
+| `pcl_CopyPix`, `shape_surface`, `alloc_surface*`, `submit_context_buffer` (2D), `addToPCIeGART`, `ATIR500Memory::add_to_stack`, `enable/disable_GPUSensor` | 14 | 1.14 | 2-8 extra spills / nop padding differences / compare+branch shape; each case under 1.15, small functions (tens of cycles) |
+
+Fixed in the integration: the DVD `process_command_buffer` opcode cases (67 cases, 1.20-1.30) are now 0.88-1.05. Cause: float locals `zero` and `half` assigned from
+`DOUBLE_0004c3c0`/`DOUBLE_0004c3b8` made gcc load both constants (plus their `frsp` copies) into f28-f31 in the prologue of the whole function. Using the constants at
+their one use site, as the decompile's other use already did, removes the four FP saves/restores and the hoisted loads (identical values: 0.5 and 2^52+2^31 are exact
+in float and double).
+
+Checked and not an issue: excess `extsh` (R4's `storeHalf`): whole-kext count is 11 in stock, 14 rebuilt, no function with 3 or more extra, so nothing left to convert in the GL files.
+Plain-memory loops (`Tools/check_plain_memory_loops.py`): 21 call-free loops with memory in the condition, the same 21 R1 reviewed; none is new, none waits on
+memory another agent writes (counted loops, list walks, the DVD command-chain walk over records the function wrote itself).
