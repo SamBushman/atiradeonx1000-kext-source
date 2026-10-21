@@ -110,8 +110,6 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
   UInt32 plane1Address;
   UInt32 widthUnits;
   UInt32 pitchUnits;
-  float zero;
-  float half;
   UInt32 targetWidth;
   UInt32 targetHeight;
   UInt32 targetPitch;
@@ -518,8 +516,6 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(bufferInfo + 0x590) & 1) << 0x10 |
                            (M<UInt8>(bufferInfo + 0x590) & 6) << 0x10 |
                            (M<UInt8>(bufferInfo + 0x591) & 3) << 0x13 | 0xc00000;
-              zero = DOUBLE_0004c3c0;
-              half = DOUBLE_0004c3b8;
               doubleLo0 = pitch >> 2 ^ 0x80000000;
               doubleHi0 = 0x43300000;
               recordCursor[0x61] =
@@ -528,7 +524,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               doubleHi1 = 0x43300000;
               doubleLo1 = M<UInt16>(bufferInfo + 0x576) >> 1 ^ 0x80000000;
               recordCursor[0x62] =
-                   FBITS((float)((((double)(SInt32)(doubleLo1 ^ 0x80000000)) + zero) * half))
+                   FBITS((float)((((double)(SInt32)(doubleLo1 ^ 0x80000000)) + DOUBLE_0004c3c0) * DOUBLE_0004c3b8))
               ;
               recordWord = recordWord & 0xffffff;
             }

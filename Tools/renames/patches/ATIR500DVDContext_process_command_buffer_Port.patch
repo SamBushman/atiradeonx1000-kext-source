@@ -1,5 +1,5 @@
---- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-20 16:22:50.952575719 -0700
-+++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-20 16:22:50.953964993 -0700
+--- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-20 17:48:21.691408708 -0700
++++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-20 17:48:21.692835679 -0700
 @@ -40,9 +40,9 @@
    UInt16 pitch;
    UInt32 tilingByte0Shifted;
@@ -13,19 +13,17 @@
    UInt32 wordsToSubmit;
    UInt32 uVar11;
    SInt32 iVar12;
-@@ -110,9 +110,8 @@
+@@ -110,9 +110,6 @@
    UInt32 plane1Address;
    UInt32 widthUnits;
    UInt32 pitchUnits;
 -  double zero;
 -  double half;
 -  double intToFloatBias;
-+  float zero;
-+  float half;
    UInt32 targetWidth;
    UInt32 targetHeight;
    UInt32 targetPitch;
-@@ -427,8 +426,7 @@
+@@ -427,8 +424,7 @@
                        widthUnits = 0;
                        formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
                        if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
@@ -35,7 +33,7 @@
                        }
                        pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerPixel);
                        if (pitchUnits <= widthUnits) {
-@@ -487,8 +485,7 @@
+@@ -487,8 +483,7 @@
                widthUnits = 0;
                formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
                if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
@@ -45,10 +43,12 @@
                }
                pitchUnits = 0x20 / M<UInt16>(surfaceInfo + kIOATIR500Surface_buffer1BytesPerPixel);
                if (pitchUnits <= widthUnits) {
-@@ -523,16 +520,15 @@
+@@ -521,18 +516,15 @@
+               recordCursor[9] = pitch >> 2 & 0x3ffe | (M<UInt8>(bufferInfo + 0x590) & 1) << 0x10 |
+                            (M<UInt8>(bufferInfo + 0x590) & 6) << 0x10 |
                             (M<UInt8>(bufferInfo + 0x591) & 3) << 0x13 | 0xc00000;
-               zero = DOUBLE_0004c3c0;
-               half = DOUBLE_0004c3b8;
+-              zero = DOUBLE_0004c3c0;
+-              half = DOUBLE_0004c3b8;
 -              intToFloatBias = DOUBLE_0004c3a8;
                doubleLo0 = pitch >> 2 ^ 0x80000000;
                doubleHi0 = 0x43300000;
@@ -61,11 +61,11 @@
                doubleLo1 = M<UInt16>(bufferInfo + 0x576) >> 1 ^ 0x80000000;
                recordCursor[0x62] =
 -                   (UInt32)(float)((((double)CONCAT44d(0x43300000,doubleLo1) - intToFloatBias) + zero) * half)
-+                   FBITS((float)((((double)(SInt32)(doubleLo1 ^ 0x80000000)) + zero) * half))
++                   FBITS((float)((((double)(SInt32)(doubleLo1 ^ 0x80000000)) + DOUBLE_0004c3c0) * DOUBLE_0004c3b8))
                ;
                recordWord = recordWord & 0xffffff;
              }
-@@ -935,7 +931,7 @@
+@@ -935,7 +927,7 @@
              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
              recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
              recordCursor[9] = clearByte | clearByte << 0x18 | clearByte << 0x10 |
@@ -74,7 +74,7 @@
              recordCursor[10] = 0;
              sizeWord = overlayHeight | (pitch & 0xfffc) << 0xe;
  LAB_00037c4c:
-@@ -976,7 +972,7 @@
+@@ -976,7 +968,7 @@
              recordCursor[7] = M<UInt32>(self + kATIR500DVDContext_scissorTopLeft);
              recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
              recordCursor[9] = clearByte | clearByte << 0x18 | clearByte << 0x10 |
@@ -83,7 +83,7 @@
              recordCursor[10] = 0;
              sizeWord = (pitch & 0xfffc) << 0xe | overlayHeight >> 1;
              goto LAB_00037c4c;
-@@ -1898,11 +1894,11 @@
+@@ -1898,11 +1890,11 @@
              buffer1PitchBlocks = 0;
              formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x15a) * 0x1c;
              if ((M<UInt32>(surfaceInfo + kIOATIR500Surface_buffer1TilingDegreeBits) & 0xf00000) != 0) {
@@ -98,7 +98,7 @@
                buffer1PitchField = buffer1PitchBlocks;
              }
              buffer1PitchFormatWord = FormatTableLookup_0x0004d2e0(formatOffset) >> 1 & 0x1e00000 |
-@@ -1916,11 +1912,11 @@
+@@ -1916,11 +1908,11 @@
              buffer18PitchBlocks = 0;
              formatOffset = (UInt32)M<UInt8>(surfaceInfo + 0x952) * 0x1c;
              if ((M<UInt32>(surfaceInfo + 0x954) & 0xf00000) != 0) {
