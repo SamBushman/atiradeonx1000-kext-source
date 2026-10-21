@@ -52,14 +52,11 @@ class IOATIR500DVDContext : public IOUserClient {
     friend void handle_texture_unbind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record);
     friend void handle_texture_sampler_state(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record);
     friend void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record);
-    friend bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_64);
-    friend void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_58);
     friend void handle_opcode_13(ATIR500DVDContext *ctx, UInt32 *record);
     friend void handle_opcode_3f(ATIR500DVDContext *ctx, UInt32 *record);
     friend void handle_opcode_42(ATIR500DVDContext *ctx, UInt32 *record);
     friend void handle_opcode_3e(ATIR500DVDContext *ctx, UInt32 *record);
     friend void handle_opcode_43_44(ATIR500DVDContext *ctx, UInt32 *record);
-    friend void handle_opcode_46(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_60, UInt32 &local_5c);
     friend void handle_opcode_47(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard);
     friend void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset);
     friend void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record);

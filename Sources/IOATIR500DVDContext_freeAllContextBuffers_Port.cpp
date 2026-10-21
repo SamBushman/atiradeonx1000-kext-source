@@ -31,11 +31,9 @@ void IOATIR500DVDContext::freeAllContextBuffers() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool more;
-  SInt32 iVar2;
   SInt32 slotIndex;
   UInt8 *slot;
   SInt32 *accel;
-  SInt32 iVar6;
   UInt8 *slotBase;
   SInt32 oldWaitCounter;
   SInt32 counterAdvance;

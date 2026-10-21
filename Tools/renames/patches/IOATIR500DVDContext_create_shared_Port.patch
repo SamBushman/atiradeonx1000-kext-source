@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-20 10:04:29.792666804 -0700
-+++ b/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-20 10:04:29.793976912 -0700
+--- a/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-20 20:45:56.716949495 -0700
++++ b/Sources/IOATIR500DVDContext_create_shared_Port.cpp	2026-10-20 20:45:56.718121039 -0700
 @@ -27,6 +27,8 @@
  extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
  
@@ -9,8 +9,11 @@
  /* real addr 0xee60 */
  bool IOATIR500DVDContext::create_shared() {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
-@@ -37,7 +39,10 @@
-   UInt8 bVar3;
+@@ -34,10 +36,12 @@
+   UInt8 *shared;
+   UInt32 result;
+   SInt32 initialised;
+-  UInt8 bVar3;
    UInt8 allocFailedFlag;
    
 -  shared = (UInt8 *)new IOATIR500Shared();   /* real: OSObject::operator new(0x28) + the IOATIR500Shared constructor */

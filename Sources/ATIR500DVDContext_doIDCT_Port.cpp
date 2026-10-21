@@ -31,14 +31,9 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 /* real addr 0x35540 */
 IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its infoBytes (#86) */
     UInt8 *infoBytes = reinterpret_cast<UInt8 *>(info);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
-  UInt32 uVar3;
   UInt8 *bufferSlot;
-  UInt32 uVar5;
   SInt32 accelAddr;
   SInt32 surfaceInfo;
   SInt32 bufferInfo;
@@ -49,18 +44,18 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
   UInt32 lineStride;
   UInt32 minimumStamp;
   
-  VCALL(*M<SInt32 *>(param_1 + kIOATIR500DVDContext_accelerator), 0x54c)
-            (M<SInt32 *>(param_1 + kIOATIR500DVDContext_accelerator),M<UInt32>(param_1 + kIOATIR500DVDContext_lastSubmitStamp));
-  if (((M<SInt32>(param_1 + kIOATIR500DVDContext_boundSurface) != 0) &&
-      (accelAddr = M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator), M<char>(accelAddr + 0x80) != '\0')) &&
+  VCALL(*M<SInt32 *>(self + kIOATIR500DVDContext_accelerator), 0x54c)
+            (M<SInt32 *>(self + kIOATIR500DVDContext_accelerator),M<UInt32>(self + kIOATIR500DVDContext_lastSubmitStamp));
+  if (((M<SInt32>(self + kIOATIR500DVDContext_boundSurface) != 0) &&
+      (accelAddr = M<SInt32>(self + kIOATIR500DVDContext_accelerator), M<char>(accelAddr + 0x80) != '\0')) &&
      (M<SInt32>(accelAddr + 0x8bc) != 0)) {
     GH_IOLockLock(M<UInt32>(accelAddr + 0x840));
-    surfaceInfo = M<SInt32>(param_1 + kIOATIR500DVDContext_boundSurface);
+    surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
     overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
     if (M<SInt32>(infoBytes + 0xc) == 0) {
-      bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctLumaBuffer0);
-      if (M<SInt32>(param_1 + kATIR500DVDContext_lumaBufferToggle) != 0) {
-        bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctLumaBuffer1);
+      bufferSlot = (UInt8 *)(self + kATIR500DVDContext_idctLumaBuffer0);
+      if (M<SInt32>(self + kATIR500DVDContext_lumaBufferToggle) != 0) {
+        bufferSlot = (UInt8 *)(self + kATIR500DVDContext_idctLumaBuffer1);
       }
       bufferInfo = M<SInt32>(infoBytes + 8) * 0x78 + surfaceInfo + kIOATIR500Surface_buffer10;
     }
@@ -68,9 +63,9 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
       if (M<SInt32>(infoBytes + 0xc) != 1) {
         return 0xe00002c2;
       }
-      bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctChromaBuffer0);
-      if (M<SInt32>(param_1 + kATIR500DVDContext_chromaBufferToggle) != 0) {
-        bufferSlot = (UInt8 *)(param_1 + kATIR500DVDContext_idctChromaBuffer1);
+      bufferSlot = (UInt8 *)(self + kATIR500DVDContext_idctChromaBuffer0);
+      if (M<SInt32>(self + kATIR500DVDContext_chromaBufferToggle) != 0) {
+        bufferSlot = (UInt8 *)(self + kATIR500DVDContext_idctChromaBuffer1);
       }
       bufferInfo = surfaceInfo + 0x8a0;
     }
@@ -98,23 +93,23 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
     if (M<SInt32>(infoBytes + 0x2c) != 0) {
       gartOffset = M<SInt32>(bufferSlot + 4);
       if (gartOffset == 0) {
-        ((IOATIR500DVDContext *)(param_1))->map_transfer_to_GART((VendorTransferBuffer *)(bufferSlot));
+        ((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(bufferSlot));
         gartOffset = M<SInt32>(bufferSlot + 4);
       }
-      minimumStamp = M<UInt32>(M<UInt8 *>(param_1 + kIOATIR500DVDContext_accelerator) + 0x854);
-      consumedStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(param_1 + kIOATIR500DVDContext_accelerator)))->submit_idct_buffer_consumed((UInt32 *)(M<SInt32>(bufferSlot + 0x14) + 0x20),gartOffset + 0x20,
+      minimumStamp = M<UInt32>(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator) + 0x854);
+      consumedStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500DVDContext_accelerator)))->submit_idct_buffer_consumed((UInt32 *)(M<SInt32>(bufferSlot + 0x14) + 0x20),gartOffset + 0x20,
                          (sATIDVDIDCTInfo *)infoBytes);
-      M<UInt32>(param_1 + kATIR500DVDContext_idctTimeStampCounter) = consumedStamp;
+      M<UInt32>(self + kATIR500DVDContext_idctTimeStampCounter) = consumedStamp;
       if (minimumStamp <= consumedStamp) {
         M<UInt32>(bufferSlot + 0x10) = consumedStamp;
         if (M<SInt32>(infoBytes + 0xc) == 0) {
-          M<UInt32>(param_1 + kATIR500DVDContext_idctTimeStamp) = M<UInt32>(param_1 + kATIR500DVDContext_idctTimeStampCounter);
+          M<UInt32>(self + kATIR500DVDContext_idctTimeStamp) = M<UInt32>(self + kATIR500DVDContext_idctTimeStampCounter);
         }
-        GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
+        GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
         return 0;
       }
     }
-    GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   }
   return 0xe00002d8;
 }

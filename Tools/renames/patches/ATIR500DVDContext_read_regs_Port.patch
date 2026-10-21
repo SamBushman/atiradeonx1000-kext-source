@@ -1,0 +1,12 @@
+--- a/Sources/ATIR500DVDContext_read_regs_Port.cpp	2026-10-20 20:34:08.664206745 -0700
++++ b/Sources/ATIR500DVDContext_read_regs_Port.cpp	2026-10-20 20:34:08.665548316 -0700
+@@ -33,9 +33,7 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   UInt8 *registerAddress;
+-  SInt32 iVar2;
+   SInt32 registers;
+-  UInt32 uVar4;
+   UInt32 result;
+   UInt32 actualBytes;
+   UInt32 dwordsLeft;

@@ -1,6 +1,6 @@
---- a/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 20:34:03.621729252 -0700
-+++ b/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-17 20:34:03.623122597 -0700
-@@ -31,6 +31,8 @@
+--- a/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-20 20:46:49.601592485 -0700
++++ b/Sources/IOATIR500DVDContext_clientMemoryForType_Port.cpp	2026-10-20 20:46:49.602852285 -0700
+@@ -31,19 +31,17 @@
  extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
  
  
@@ -9,3 +9,16 @@
  /* real addr 0xf0c0 */
  IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   unsigned int neededMask;
+-  int *piVar2;
+   unsigned int allocatedMask;
+-  int iVar4;
+-  int iVar5;
+   UInt32 commandBufferFlags;
+   unsigned int retryCount;
+   UInt8 *surface;
+-  int iVar8;
+   UInt8 *textureSlot;
+   int *accelWords;
+   UInt8 *accelBytes;

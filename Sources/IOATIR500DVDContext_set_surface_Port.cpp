@@ -33,8 +33,6 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool unbind;
-  unsigned int uVar2;
-  unsigned int uVar3;
   int accepted;
   unsigned int bufferMask;
   UInt32 result;
@@ -87,7 +85,7 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
         }
         M<UInt32>(self + kIOATIR500DVDContext_boundSurface) = 0;
         result = 0xe00002c2;
-        goto LAB_0000fc30;
+        goto finishSetSurface;
       }
     }
     M<unsigned int>(newSurface + 0xbe8) = currentModeBits[0];
@@ -106,7 +104,7 @@ IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBit
     M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface) = newSurface;
     ((IOATIR500Surface *)(newSurface))->prune_buffers();
   }
-LAB_0000fc30:
+finishSetSurface:
   if (self == M<UInt8 *>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x78)) {
     M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x78) = 0;
   }

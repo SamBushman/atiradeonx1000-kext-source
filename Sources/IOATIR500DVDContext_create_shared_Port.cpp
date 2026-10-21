@@ -36,7 +36,6 @@ bool IOATIR500DVDContext::create_shared() {
   UInt8 *shared;
   UInt32 result;
   SInt32 initialised;
-  UInt8 bVar3;
   UInt8 allocFailedFlag;
   
   /* gcc 4.0.1 emits no null test after an unconditional `new T()` here; the shipped code tests the allocation before running the constructor (difftest:

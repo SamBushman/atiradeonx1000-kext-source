@@ -34,66 +34,23 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *descriptorBytes = reinterpret_cast<UInt8 *>(descriptor);
 
-  SInt16 sVar1;
-  SInt16 sVar2;
   UInt16 otherPitch;
   UInt16 pitch;
   UInt32 tilingByte0Shifted;
   UInt32 tilingBit0At2;
-  float dVar7;
-  float dVar8;
-  float dVar9;
   UInt32 wordsToSubmit;
-  UInt32 uVar11;
-  SInt32 iVar12;
-  UInt32 uVar13;
   SInt32 *accelerator;
   UInt32 stamp;
-  UInt32 *puVar16;
-  UInt32 uVar17;
-  SInt32 iVar18;
-  UInt32 uVar19;
-  UInt32 *puVar20;
-  UInt32 uVar21;
-  SInt32 iVar22;
-  SInt32 iVar23;
   UInt32 tilingBit0;
-  SInt32 iVar25;
-  UInt32 *puVar26;
   UInt32 tilingBitsAt3;
-  UInt32 uVar28;
-  UInt32 uVar29;
-  UInt32 uVar30;
-  UInt32 uVar31;
-  UInt32 uVar32;
-  UInt32 uVar33;
-  UInt32 uVar34;
-  UInt32 uVar35;
-  UInt32 uVar36;
   UInt32 recordWord;
-  UInt32 uVar38;
-  UInt32 uVar39;
   UInt32 *recordCursor;
-  UInt32 uVar41;
   UInt8 *texture;
-  bool bVar43;
-  UInt8 bVar44;
-  SInt32 iVar45;
   UInt32 firstBlockAddresses [4];
   UInt32 secondBlockAddresses [7];
-  UInt32 local_88;
-  UInt32 uStack_84;
-  UInt32 local_80;
-  UInt32 uStack_7c;
-  UInt32 local_78;
-  UInt32 local_74;
   UInt32 streamOffset;
   UInt32 pendingWords;
   UInt32 result;
-  UInt32 local_64;
-  UInt32 local_60;
-  UInt32 local_5c;
-  UInt32 local_58;
   SInt32 prevNode;
   SInt32 submitBytes;
   UInt32 alignedOffset;
@@ -307,11 +264,11 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
     wordsToSubmit = pendingWords;
     recordWord = *recordCursor;
     opcode = recordWord & 0xff000000;
-    if (opcode == 0x25000000) goto LAB_00037620;
+    if (opcode == 0x25000000) goto bindTextureToSlot;
     if (opcode < 0x25000001) {
       if (opcode != 0x15000000) {
         if (opcode < 0x15000001) {
-          if (opcode == 0x9000000) goto LAB_00039030;
+          if (opcode == 0x9000000) goto endStream;
           if (0x9000000 < opcode) {
             if (opcode == 0xd000000) {
               targetWidth = recordCursor[3];
@@ -365,12 +322,12 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               else {
                 recordCursor[0xb] = M<UInt32>(targetBuffer + 0x1c);
               }
-              goto LAB_00038f80;
+              goto appendFillTrailer;
             }
             if (opcode < 0xd000001) {
               if (opcode != 0xb000000) {
                 if (opcode != 0xc000000) {
-                  if (opcode != 0xa000000) goto LAB_00039028;
+                  if (opcode != 0xa000000) goto keepRecordLength;
                   accelerator = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
                   if (accelerator[0x22f] != 0) {
                     VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + kATIR500DVDContext_idctTimeStamp));
@@ -437,11 +394,11 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                                  pitchUnits & 0x3ffe | pitchFormatWordOp0a & 0xfe00c001;
                       recordCursor[0xd] = pitchFormatWordOp0a;
                       recordWord = recordWord & 0xffffff;
-                      goto LAB_0003903c;
+                      goto advanceRecord;
                     }
                   }
                 }
-                goto LAB_00039030;
+                goto endStream;
               }
               if (recordCursor[2] == 0) {
                 texture = M<UInt8 *>(self + recordCursor[1] * 4 + 0x104);
@@ -534,7 +491,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   accelerator = M<SInt32 *>(self + kIOATIR500DVDContext_accelerator);
                   if ((accelerator[0x22f] == 0) ||
                      (VCALL(*accelerator, 0x5ec)(accelerator,M<UInt32>(self + kATIR500DVDContext_idctTimeStamp)),
-                     recordCursor[0xd] == 0)) goto LAB_00039030;
+                     recordCursor[0xd] == 0)) goto endStream;
                   surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                   recordWord2 = recordCursor[2];
                   recordWord3 = recordCursor[3];
@@ -780,7 +737,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   *secondChainCursor = 0x80000000;
                   *recordCursor = 0xc00c1000;
                 }
-                goto LAB_00039028;
+                goto keepRecordLength;
               }
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
@@ -897,7 +854,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               recordCursor[0x17] = overlayBuffer15Address;
               recordWord = recordWord & 0xffffff;
             }
-            goto LAB_0003903c;
+            goto advanceRecord;
           }
           if (opcode == 0x5000000) {
             clearByte = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
@@ -930,17 +887,17 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                                   clearByte << 8;   /* the byte replicated four times: clearByte holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
             recordCursor[10] = 0;
             sizeWord = overlayHeight | (pitch & 0xfffc) << 0xe;
-LAB_00037c4c:
+writeFillSize:
             recordCursor[0xb] = sizeWord;
             recordCursor[0xc] = 0xd0b;
             recordCursor[0xd] = 5;
             recordCursor[0xe] = 0x5c8;
             recordCursor[0xf] = 0x10000;
-            goto LAB_00039028;
+            goto keepRecordLength;
           }
           if (0x5000000 < opcode) {
-            if ((opcode == 0x7000000) || (opcode == 0x8000000)) goto LAB_00039030;
-            if (opcode != 0x6000000) goto LAB_00039028;
+            if ((opcode == 0x7000000) || (opcode == 0x8000000)) goto endStream;
+            if (opcode != 0x6000000) goto keepRecordLength;
             clearByte = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
@@ -971,14 +928,14 @@ LAB_00037c4c:
                                   clearByte << 8;   /* the byte replicated four times: clearByte holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
             recordCursor[10] = 0;
             sizeWord = (pitch & 0xfffc) << 0xe | overlayHeight >> 1;
-            goto LAB_00037c4c;
+            goto writeFillSize;
           }
           if (opcode == 0x2000000) {
             recordWord = recordWord & 0xffffff;
             result = 3;
-            goto LAB_0003903c;
+            goto advanceRecord;
           }
-          if (opcode != 0x4000000) goto LAB_00039028;
+          if (opcode != 0x4000000) goto keepRecordLength;
           if (pendingWords != 0) {
             submitBytes = pendingWords * 4;
             pendingWords = 0;
@@ -991,10 +948,10 @@ LAB_00037c4c:
                                 wordsToSubmit);
             M<UInt32>(self + kIOATIR500DVDContext_commandBufferStamp) = stamp;
           }
-          goto LAB_00039020;
+          goto nopOutRecord;
         }
         if (opcode == 0x1d000000) {
-LAB_00037620:
+bindTextureToSlot:
           if ((recordCursor[1] < M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x14)) &&
              (texture = *(UInt8 **)
                          (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x10)),
@@ -1052,23 +1009,23 @@ LAB_00037620:
             recordCursor[1] = 0x80000000;
             recordWord = recordWord & 0xffffff;
             M<UInt8 *>(self + slotOffset + 0x104) = texture;
-            goto LAB_0003903c;
+            goto advanceRecord;
           }
-          goto LAB_00039030;
+          goto endStream;
         }
         if (0x1d000000 < opcode) {
           if (opcode != 0x21000000) {
             if (opcode < 0x21000001) {
               if (((opcode == 0x1f000000) || (opcode == 0x20000000)) || (opcode == 0x1e000000))
-              goto LAB_00037620;
+              goto bindTextureToSlot;
             }
             else if (((opcode == 0x23000000) || (opcode == 0x24000000)) || (opcode == 0x22000000))
-            goto LAB_00037620;
-            goto LAB_00039028;
+            goto bindTextureToSlot;
+            goto keepRecordLength;
           }
-          goto LAB_00037620;
+          goto bindTextureToSlot;
         }
-        if (opcode == 0x19000000) goto LAB_00037620;
+        if (opcode == 0x19000000) goto bindTextureToSlot;
         if (opcode < 0x19000001) {
           if (opcode != 0x17000000) {
             if (opcode == 0x18000000) {
@@ -1132,7 +1089,7 @@ LAB_00037620:
               }
             }
             else {
-              if (opcode != 0x16000000) goto LAB_00039028;
+              if (opcode != 0x16000000) goto keepRecordLength;
               boundSurface = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               chromaFormat = recordCursor[1];
               parityFlag = recordCursor[4];
@@ -1288,7 +1245,7 @@ LAB_00037620:
                              (M<UInt8>(firstBufferInfo + 0x591) & 3) << 0x13 | 0xc00000;
               recordWord = recordWord & 0xffffff;
             }
-            goto LAB_0003903c;
+            goto advanceRecord;
           }
           boundSurface = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
           chromaFormat17 = recordCursor[1];
@@ -1407,12 +1364,12 @@ LAB_00037620:
           recordCursor[8] = 0x138e;
           tilingByte1 = M<UInt8>(firstBufferInfo + 0x591);
           colorPitchWord = colorPitch17 & 0x3ffe | tilingBitZero17 << 0x10 | (tilingByteHalf & 3) << 0x11;
-LAB_00038870:
+storeColorPitchWord:
           recordCursor[9] = colorPitchWord | (tilingByte1 & 3) << 0x13 | 0xc00000;
         }
         else if (((opcode == 0x1b000000) || (opcode == 0x1c000000)) || (opcode == 0x1a000000))
-        goto LAB_00037620;
-        goto LAB_00039028;
+        goto bindTextureToSlot;
+        goto keepRecordLength;
       }
       surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
       fillValue = recordCursor[1];
@@ -1437,15 +1394,15 @@ LAB_00038870:
         recordCursor[9] = fillValue;
         recordCursor[10] = 0;
         recordCursor[0xb] = (UInt32)otherPitch | (pitch & 0xfffc) << 0xe;
-LAB_00038f80:
+appendFillTrailer:
         recordCursor[0xc] = 0xd0b;
         recordCursor[0xd] = 5;
         recordCursor[0xe] = 0x5c8;
         recordCursor[0xf] = 0x10000;
         recordWord = recordWord & 0xffffff;
-        goto LAB_0003903c;
+        goto advanceRecord;
       }
-LAB_00039030:
+endStream:
       recordWord = 0;
       pendingWords = 0;
     }
@@ -1622,19 +1579,19 @@ LAB_00039030:
             secondBlock[0x16] = 0x138c;
             secondBlock[0x17] = secondTexOffset0 & 0xffffffe0;
             recordWord = recordWord & 0xffffff;
-            goto LAB_0003903c;
+            goto advanceRecord;
           }
           if (opcode < 0x3d000001) {
             if (opcode != 0x39000000) {
               if (opcode < 0x39000001) {
                 if (((opcode == 0x37000000) || (opcode == 0x38000000)) || (opcode == 0x36000000))
-                goto LAB_00037880;
+                goto releaseTextureSlot;
               }
               else if (((opcode == 0x3b000000) || (opcode == 0x3c000000)) || (opcode == 0x3a000000))
-              goto LAB_00037880;
-              goto LAB_00039028;
+              goto releaseTextureSlot;
+              goto keepRecordLength;
             }
-            goto LAB_00037880;
+            goto releaseTextureSlot;
           }
           if (opcode == 0x43000000) {
             selectFlags = recordCursor[4];
@@ -1753,7 +1710,7 @@ joined_r0x000381c4:
               recordWord = recordWord & 0xffffff;
             }
             else {
-              if (opcode != 0x3e000000) goto LAB_00039028;
+              if (opcode != 0x3e000000) goto keepRecordLength;
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               targetPitch = recordCursor[3];
               overlayTop = M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
@@ -1807,11 +1764,11 @@ joined_r0x000381c4:
                 if (sourceBufferIndex == 0) {
                   sourceBufferIndex = 1;
                 }
-                else if (0xc < sourceBufferIndex - 10) goto LAB_00039030;
+                else if (0xc < sourceBufferIndex - 10) goto endStream;
                 if (targetBufferIndex == 0) {
                   targetBufferIndex = 1;
                 }
-                else if (0xc < targetBufferIndex - 10) goto LAB_00039030;
+                else if (0xc < targetBufferIndex - 10) goto endStream;
                 targetBufferInfo = targetBufferIndex * 0x78 + M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                 sourceBufferInfo = sourceBufferIndex * 0x78 + M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                 *recordCursor = 0x1140;
@@ -1829,9 +1786,9 @@ joined_r0x000381c4:
                 colorPitchWord = M<UInt16>(targetBufferInfo + 0xc0) >> 2 & 0x3ffe |
                          (M<UInt8>(targetBufferInfo + 0xe0) & 1) << 0x10 |
                          (M<UInt8>(targetBufferInfo + 0xe0) & 6) << 0x10;
-                goto LAB_00038870;
+                goto storeColorPitchWord;
               }
-              if (opcode != 0x44000000) goto LAB_00039028;
+              if (opcode != 0x44000000) goto keepRecordLength;
               selectFlags = recordCursor[4];
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
@@ -1922,35 +1879,35 @@ joined_r0x000381c4:
             recordCursor[0x11] = buffer18PitchFormatWord;
             recordWord = recordWord & 0xffffff;
           }
-          goto LAB_0003903c;
+          goto advanceRecord;
         }
         if (opcode != 0x2d000000) {
           if (opcode < 0x2d000001) {
             if (opcode != 0x29000000) {
               if (opcode < 0x29000001) {
                 if (((opcode == 0x27000000) || (opcode == 0x28000000)) || (opcode == 0x26000000))
-                goto LAB_00037620;
+                goto bindTextureToSlot;
               }
               else {
-                if ((opcode == 0x2b000000) || (opcode == 0x2c000000)) goto LAB_00037880;
-                if (opcode == 0x2a000000) goto LAB_00037620;
+                if ((opcode == 0x2b000000) || (opcode == 0x2c000000)) goto releaseTextureSlot;
+                if (opcode == 0x2a000000) goto bindTextureToSlot;
               }
-              goto LAB_00039028;
+              goto keepRecordLength;
             }
-            goto LAB_00037620;
+            goto bindTextureToSlot;
           }
           if (opcode != 0x31000000) {
             if (opcode < 0x31000001) {
               if (((opcode == 0x2f000000) || (opcode == 0x30000000)) || (opcode == 0x2e000000))
-              goto LAB_00037880;
+              goto releaseTextureSlot;
             }
             else if (((opcode == 0x33000000) || (opcode == 0x34000000)) || (opcode == 0x32000000))
-            goto LAB_00037880;
-            goto LAB_00039028;
+            goto releaseTextureSlot;
+            goto keepRecordLength;
           }
         }
       }
-LAB_00037880:
+releaseTextureSlot:
       textureSlotOffset = opcode + 0xd5000000 >> 0x16;
       if (M<UInt8 *>(self + textureSlotOffset + 0x104) != (UInt8 *)0x0) {
         ((IOATIR500DVDContext *)((UInt8 *)self))->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(self + textureSlotOffset + 0x104)));
@@ -1960,12 +1917,12 @@ LAB_00037880:
         }
         M<UInt32>(self + textureSlotOffset + 0x104) = 0;
       }
-LAB_00039020:
+nopOutRecord:
       *recordCursor = 0x80000000;
-LAB_00039028:
+keepRecordLength:
       recordWord = recordWord & 0xffffff;
     }
-LAB_0003903c:
+advanceRecord:
     recordCursor = recordCursor + recordWord;
     pendingWords = pendingWords + recordWord;
     if (recordWord == 0) {

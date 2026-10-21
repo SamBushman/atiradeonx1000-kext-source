@@ -31,29 +31,14 @@ extern "C" UInt32 GH_IOGetTime(...) asm("_IOGetTime");
 void ATIR500DVDContext::submit_context_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
   UInt32 *header;
-  SInt32 iVar3;
   UInt8 *texture;
-  SInt32 iVar5;
-  SInt32 iVar6;
-  UInt32 uVar7;
-  UInt32 uVar8;
   UInt32 *slotHeader;
   SInt32 dwordCount;
-  UInt32 uVar11;
   SInt32 payload;
-  UInt32 uVar13;
-  SInt32 iVar14;
-  SInt32 iVar15;
-  SInt32 iVar16;
-  SInt32 iVar17;
   UInt8 *textureSlot;
   SInt32 *accel;
-  SInt32 iVar20;
   UInt8 *pAVar21;
-  SInt32 iVar22;
-  SInt32 iVar23;
   UInt8 *slotCursor;
   UInt8 *ringEntry;
   SInt32 slotTexture;
@@ -94,10 +79,10 @@ void ATIR500DVDContext::submit_context_buffer() {
         if (M<SInt32>(texture + 4) == 0) {
           ((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture));
           texture = M<UInt8 *>(slotCursor + 0x104);
-          if (M<SInt32>(texture + 4) != 0) goto LAB_000344b0;
+          if (M<SInt32>(texture + 4) != 0) goto stampAndRelink;
         }
         else {
-LAB_000344b0:
+stampAndRelink:
           GH_IOGetTime(texture + 0x2c);
           M<UInt32>(M<SInt32>(M<SInt32>(slotCursor + 0x104) + 0x34) + 0x38) =
                M<UInt32>(M<SInt32>(slotCursor + 0x104) + 0x38);

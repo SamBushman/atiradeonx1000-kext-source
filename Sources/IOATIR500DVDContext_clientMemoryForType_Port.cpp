@@ -38,14 +38,10 @@ IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32*options, I
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   unsigned int neededMask;
-  int *piVar2;
   unsigned int allocatedMask;
-  int iVar4;
-  int iVar5;
   UInt32 commandBufferFlags;
   unsigned int retryCount;
   UInt8 *surface;
-  int iVar8;
   UInt8 *textureSlot;
   int *accelWords;
   UInt8 *accelBytes;

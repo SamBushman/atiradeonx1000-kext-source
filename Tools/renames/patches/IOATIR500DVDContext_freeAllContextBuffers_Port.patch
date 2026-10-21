@@ -1,0 +1,14 @@
+--- a/Sources/IOATIR500DVDContext_freeAllContextBuffers_Port.cpp	2026-10-20 20:46:40.460139739 -0700
++++ b/Sources/IOATIR500DVDContext_freeAllContextBuffers_Port.cpp	2026-10-20 20:46:40.461397619 -0700
+@@ -31,11 +31,9 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   bool more;
+-  SInt32 iVar2;
+   SInt32 slotIndex;
+   UInt8 *slot;
+   SInt32 *accel;
+-  SInt32 iVar6;
+   UInt8 *slotBase;
+   SInt32 oldWaitCounter;
+   SInt32 counterAdvance;

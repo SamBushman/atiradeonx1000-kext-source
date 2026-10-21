@@ -32,23 +32,13 @@ extern "C" UInt32 GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(.
 /* real addr 0xffe0 */
 IOReturn IOATIR500DVDContext::write_buffer(sIODVDContextWriteBufferData *data, UInt32 byteCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its dataBytes (#86) */
     UInt8 *dataBytes = reinterpret_cast<UInt8 *>(data);
 
   UInt8 *surface;
-  int iVar2;
-  int *piVar3;
-  unsigned int uVar4;
   int rectBottom;
-  unsigned int uVar6;
-  int iVar7;
   int srcPitch;
-  int iVar9;
-  int iVar10;
-  int iVar11;
   int rectY;
   int rectX;
-  int iVar14;
   UInt32 result;
   int bufferSlotOffset;
   int rectRight;
@@ -89,30 +79,30 @@ IOReturn IOATIR500DVDContext::write_buffer(sIODVDContextWriteBufferData *data, U
   rectHeight = M<int>(dataBytes + 0xc);
   sourceBase = M<int>(dataBytes + 0x14);
   bufferSlotOffset = (0x10 - (unsigned int)(M<int>(dataBytes + 0x10) == 0)) * 4;
-  GH_IOLockLock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
-  surface = M<UInt8 *>(param_1 + kIOATIR500DVDContext_boundSurface);
+  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+  surface = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
   bufferBit = 0x40000000;
   surfaceBuffer = M<int>(surface + bufferSlotOffset + 0xb70);
   bufferIndex = (surfaceBuffer - (int)(surface + kIOATIR500Surface_buffers) >> 3) * -0x11111111;
   if (bufferIndex < 0x17) {
-    bufferBit = 1 << (bufferIndex & 0x3f) & M<unsigned int>(param_1 + kIOATIR500DVDContext_surfaceFlagsBitmask);
+    bufferBit = 1 << (bufferIndex & 0x3f) & M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask);
   }
-  if ((surface == (UInt8 *)0x0) || (bufferBit == 0)) goto LAB_00010120;
+  if ((surface == (UInt8 *)0x0) || (bufferBit == 0)) goto unlockAndFail;
   if ((bufferBit & M<unsigned int>(surface + kIOATIR500Surface_stateBits)) == 0) {
-LAB_00010100:
+checkBufferUsable:
     if (((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & 0x20000000) != 0) || (M<int>(surfaceBuffer + 0x10) == 0)) {
-LAB_00010120:
-      GH_IOLockUnlock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
+unlockAndFail:
+      GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
       return 0xe00002cc;
     }
   }
   else {
-    if (M<int>(surfaceBuffer + 0x24) == 0) goto LAB_00010160;
-    if ((M<char>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x80) == '\0') ||
-       (M<char>(M<int>(surfaceBuffer + 0x24) + 0x58) != '\0')) goto LAB_00010100;
+    if (M<int>(surfaceBuffer + 0x24) == 0) goto unlockAndSucceed;
+    if ((M<char>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x80) == '\0') ||
+       (M<char>(M<int>(surfaceBuffer + 0x24) + 0x58) != '\0')) goto checkBufferUsable;
     retryResult = ((IOATIR500Surface *)(surface))->alloc_surfaces_retry(bufferBit, (eLockType)(0));
-    if (retryResult != 0) goto LAB_00010120;
-    surfaceBuffer = M<int>(bufferSlotOffset + M<int>(param_1 + kIOATIR500DVDContext_boundSurface) + 0xb70);
+    if (retryResult != 0) goto unlockAndFail;
+    surfaceBuffer = M<int>(bufferSlotOffset + M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xb70);
   }
   rectRight = rectX + rectWidth;
   if ((((0 < rectRight) && (rectBottom = rectY + rectHeight, 0 < rectBottom)) &&
@@ -144,44 +134,44 @@ LAB_00010120:
                                    -GH_page_size &
                                    (GH_page_size +
                                    srcPitch * (rectHeight + -1) + (unsigned int)M<UInt16>(surfaceBuffer + 0x16) * rectWidth
-                                   + pageOffset) - 1,0,M<UInt32>(param_1 + kIOATIR500DVDContext_task));
+                                   + pageOffset) - 1,0,M<UInt32>(self + kIOATIR500DVDContext_task));
     if (local_s.f40 == (int *)0x0) {
       result = 0xe00002be;
     }
     else {
-      surfaceWords = M<int *>(param_1 + kIOATIR500DVDContext_boundSurface);
+      surfaceWords = M<int *>(self + kIOATIR500DVDContext_boundSurface);
       savedStamp = surfaceWords[0x1f];
       VCALL(*surfaceWords, 0x5ec)
                 (surfaceWords,rectX,rectY,rectWidth,rectHeight,0,0,surfaceBuffer,
-                 M<int>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x50) + -1,&local_s,pageOffset,srcPitch,0);
+                 M<int>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x50) + -1,&local_s,pageOffset,srcPitch,0);
       bufferOffset = 0xa0;
       buffersLeft = 0x17;
       do {
-        bufferStamp = M<int>(M<int>(param_1 + kIOATIR500DVDContext_boundSurface) + bufferOffset + 0x2c);
+        bufferStamp = M<int>(M<int>(self + kIOATIR500DVDContext_boundSurface) + bufferOffset + 0x2c);
         if ((bufferStamp != 0) && (savedStamp == M<int>(bufferStamp + 0x54))) {
-          M<UInt32>(bufferStamp + 0x54) = M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_boundSurface) + 0x7c);
+          M<UInt32>(bufferStamp + 0x54) = M<UInt32>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0x7c);
         }
         bufferOffset = bufferOffset + 0x78;
         buffersLeft = buffersLeft + -1;
       } while (buffersLeft != 0);
       if (local_s.f44 != 0) {
-        GH_IOLockUnlock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
-        accelWords = M<int *>(param_1 + kIOATIR500DVDContext_accelerator);
+        GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+        accelWords = M<int *>(self + kIOATIR500DVDContext_accelerator);
         oldWaitCounter = accelWords[0x1ec];
         waited = VCALL(*accelWords, 0x55c)
-                          (accelWords,M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_boundSurface) + 0x7c));
+                          (accelWords,M<UInt32>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0x7c));
         accelWords[0x1ec] = oldWaitCounter + waited;
-        GH_IOLockLock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
-        VCALL(*M<int *>(param_1 + kIOATIR500DVDContext_accelerator), 0x5ac)(M<int *>(param_1 + kIOATIR500DVDContext_accelerator),&local_s);
+        GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
+        VCALL(*M<int *>(self + kIOATIR500DVDContext_accelerator), 0x5ac)(M<int *>(self + kIOATIR500DVDContext_accelerator),&local_s);
       }
       result = 0;
       VCALL(*local_s.f40, 0x18)(local_s.f40);
     }
     local_s.f40 = (int *)0x0;
-    GH_IOLockUnlock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
+    GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
     return result;
   }
-LAB_00010160:
-  GH_IOLockUnlock(M<UInt32>(M<int>(param_1 + kIOATIR500DVDContext_accelerator) + 0x840));
+unlockAndSucceed:
+  GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   return 0;
 }
