@@ -1,7 +1,7 @@
 #!/bin/sh
 # video_fresh_boots.sh OUTROOT: QuickTime Player and VLC under the passive IOKit recorder (Tools/video_consumer_compare.sh), each side from a FRESH BOOT (boot-time stock, then rebuilt hot-swapped); ends with a reboot to stock.
 O=${1:?outroot}; mkdir -p "$O"
-reboot_wait() { ssh G5 'sudo reboot' > /dev/null 2>&1; sleep 90; until ssh -o ConnectTimeout=5 G5 'uptime' > /dev/null 2>&1; do sleep 10; done; sleep 30; }
+. "$(dirname "$0")/reboot_wait.sh"
 n=0
 for side in ${SIDES:-boot rebuilt}; do
   n=$((n+1)); OUT="$O/${n}_$side"
