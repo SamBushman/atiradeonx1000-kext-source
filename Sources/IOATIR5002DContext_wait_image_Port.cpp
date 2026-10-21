@@ -32,7 +32,6 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 IOReturn IOATIR5002DContext::wait_image(UInt32 textureID) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
   UInt32 result;
   SInt32 sharedAllocator;
   SInt32 texture;

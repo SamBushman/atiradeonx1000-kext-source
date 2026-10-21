@@ -38,17 +38,12 @@ void ATIR5002DContext::submit_context_buffer() {
   UInt8 *entry;
   UInt32 *pendingWrites;
   UInt32 tilingEnableBit;
-  SInt32 iVar5;
-  UInt32 uVar6;
   UInt8 *texture;
   SInt32 trailerIdx4;
   SInt32 surfaceBuffer;
-  UInt32 uVar10;
   SInt32 packet;
   UInt32 *entryHeader;
-  UInt32 uVar13;
   SInt32 accel;
-  UInt32 uVar15;
   SInt32 trailerIdx2;
   UInt32 gpuBase;
   SInt32 trailerIdx8;
@@ -69,9 +64,7 @@ void ATIR5002DContext::submit_context_buffer() {
   SInt32 trailerIdx7;
   SInt32 *accelWords;
   SInt32 trailerIdx1;
-  SInt32 iVar36;
   SInt32 trailerIdx3;
-  SInt32 iVar38;
   SInt32 trailerIdx19;
   SInt32 pendingWordCount;
   SInt32 trailerIdx39;

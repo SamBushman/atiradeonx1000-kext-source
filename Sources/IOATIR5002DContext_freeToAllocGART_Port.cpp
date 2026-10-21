@@ -32,7 +32,6 @@ bool IOATIR5002DContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggr
     UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
   bool lastEntry;
-  SInt32 iVar2;
   SInt32 freed;
   UInt8 *candidate;
   UInt8 *ringEntry;

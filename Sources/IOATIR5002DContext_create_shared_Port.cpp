@@ -34,9 +34,6 @@ bool IOATIR5002DContext::create_shared() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt8 *this_00;
-  UInt32 uVar1;
-  SInt32 iVar2;
-  UInt8 bVar3;
   UInt32 result;
   SInt32 initResult;
   UInt8 allocFailedFlag;

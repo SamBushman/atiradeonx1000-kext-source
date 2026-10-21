@@ -32,7 +32,6 @@ void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  int iVar1;
   int prevNode;
   int allocResult;
   

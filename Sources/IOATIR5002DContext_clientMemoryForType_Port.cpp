@@ -37,27 +37,16 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt16 uVar1;
   UInt16 savedInFlight;
   unsigned int surfaceMask;
-  int *piVar3;
-  int iVar4;
-  int *piVar5;
   int *surfaceForPanel;
   int *ringSlot;
-  int iVar6;
-  int iVar7;
   unsigned int allocatedMask;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
   UInt32 savedStamp;
   UInt32 bufferFlags;
   unsigned int retries;
   unsigned int panel;
   UInt8 *surface;
-  int iVar16;
   UInt8 *accel;
   int *surfaceWords;
   int *accelWords;

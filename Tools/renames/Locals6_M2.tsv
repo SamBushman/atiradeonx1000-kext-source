@@ -1,0 +1,54 @@
+# M2: unused decompile declarations of the 2D context functions (declared, never read or written)
+drop	ATIR5002DContext::alloc_and_load_image	iVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::read_regs	iVar2	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::read_regs	uVar4	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::create_image	iVar2	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::create_shared	uVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::create_shared	iVar2	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::create_shared	bVar3	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::declare_image	iVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::finish	pcVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::finish	piVar2	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::finish	iVar3	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::freeToAllocGART	iVar2	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::wait_image	iVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	iVar5	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	uVar6	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	uVar10	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	uVar13	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	uVar15	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	iVar36	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::submit_context_buffer	iVar38	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	uVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar4	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar6	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar7	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar9	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar10	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar11	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar12	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	iVar16	-	CONFIRMED	the name occurs once in the function: its declaration
+# M2: goto labels of the 2D process_command_buffer
+def	ATIR5002DContext::process_command_buffer	LAB_00032d30	lookupBufferEntry	INFERRED	opcode 0x9/0xa: bufferIndex = record[1] clamped to the entry count, surfaceBuffer = accelerator + 300 + index * 0x78
+def	ATIR5002DContext::process_command_buffer	LAB_00032f30	emitOffsetRegisterRecord	INFERRED	rewrites the record as the 0x1150 register write (offset word) from the surface buffer base address and tiling byte
+def	ATIR5002DContext::process_command_buffer	LAB_00032f3c	storeOffsetWord	INFERRED	stores record[1] = base address & ~0x1f | tiling bits of the 0x1150 write
+def	ATIR5002DContext::process_command_buffer	LAB_00032ee0	emitTiledPacketRecord	INFERRED	rewrites the record as the 0x575 packet (record[5] holds base, pitch and tiling), also reached from the 0xd/0xe cases
+def	ATIR5002DContext::process_command_buffer	LAB_00032ef4	storeTiledPitchWord	INFERRED	builds record[5] = tiling enable | base >> 10 | pitch << 16 | tiling bit, then ends the record
+def	ATIR5002DContext::process_command_buffer	LAB_00032a78	bindTextureRecord	CONFIRMED	opcodes 0x7/0x8: sets the context-buffer dirty bit, resolves record[1] to a texture, loads it and rewrites the record
+def	ATIR5002DContext::process_command_buffer	LAB_00033400	recordLastBoundTexture	CONFIRMED	stores bindTexture in lastBoundTexture and its submit stamp in the texture info (+8)
+def	ATIR5002DContext::process_command_buffer	LAB_00032f54	finishRecord	CONFIRMED	header &= 0xffffff: the record length for opcodes that need no rewrite
+def	ATIR5002DContext::process_command_buffer	LAB_00032ea0	selectCurrentSurface	INFERRED	opcodes 0xd/0xe: the bound surface buffer, or the panelIndex entry of the accelerator when no surface is bound
+def	ATIR5002DContext::process_command_buffer	LAB_00032e64	useDefaultSurfaceBuffer	INFERRED	falls back to accelerator + 300 (entry 0) when the surface has no backing address
+def	ATIR5002DContext::process_command_buffer	LAB_0003323c	storePitchTilingRecord	INFERRED	record[3] = pitch/tiling word | tiling config << 0x13 | sub-format << 0x15 of the 0x138a/0x138e writes (opcodes 0x11, 0x12)
+def	ATIR5002DContext::process_command_buffer	LAB_00033420	abortStream	CONFIRMED	unknown texture id: pendingWords = 0 and header = 0, ending the stream
+def	ATIR5002DContext::process_command_buffer	LAB_00033430	advanceRecord	CONFIRMED	pendingWords += header; recordCursor += header; ends the stream when header is 0 (pads to an even count and fills the descriptor)
+drop	ATIR5002DContext::process_command_buffer	bVar1	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	bVar2	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	iVar4	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	uVar6	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	uVar7	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	uVar8	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	iVar11	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	ATIR5002DContext::process_command_buffer	iVar12	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	piVar3	-	CONFIRMED	the name occurs once in the function: its declaration
+drop	IOATIR5002DContext::clientMemoryForType	piVar5	-	CONFIRMED	the name occurs once in the function: its declaration
