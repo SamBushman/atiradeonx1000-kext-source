@@ -30,9 +30,6 @@
 IOReturn IOATIR5002DContext::finish(UInt32 mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  code *pcVar1;
-  SInt32 *piVar2;
-  SInt32 iVar3;
   SInt32 currentStamp;
   SInt32 waited;
   SInt32 *accelWords;

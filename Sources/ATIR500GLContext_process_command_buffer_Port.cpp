@@ -2081,15 +2081,15 @@ renderTargetsBound:
             }
             texture = depthTexture;
             if (depthTexture != (UInt8 *)0x0) {
-              if ((M<SInt32>(depthTexture + 0x6c) == -1) && (0x20 < M<UInt16>(self + kATIR500GLContext_unknown_0x5bc))) {
-                hzHeight = M<UInt16>(self + kATIR500GLContext_unknown_0x5be);
+              if ((M<SInt32>(depthTexture + 0x6c) == -1) && (0x20 < M<UInt16>(self + kATIR500GLContext_hzRegionField70))) {
+                hzHeight = M<UInt16>(self + kATIR500GLContext_hzRegionHeight);
                 hzAllocHeight = (UInt32)hzHeight;
                 if (0x10 < hzAllocHeight) {
                   hzAlignment = 0x20;
                   numPipesOp41 = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98);
                   if (numPipesOp41 == 4) {
 hzAllocWidthAligned:
-                    hzAllocWidth = ((SInt32)((UInt32)M<UInt16>(self + kATIR500GLContext_unknown_0x5b4) + hzAlignment + -1) / hzAlignment) *
+                    hzAllocWidth = ((SInt32)((UInt32)M<UInt16>(self + kATIR500GLContext_hzRegionWidth) + hzAlignment + -1) / hzAlignment) *
                              hzAlignment;
                   }
                   else {
@@ -2111,7 +2111,7 @@ hzAllocWidthAligned:
                     numPipesOp41 = M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0xb98);
                     if (numPipesOp41 == 4) {
 hzAllocWidthAligned2:
-                      hzAllocWidthOp41 = ((SInt32)((UInt32)M<UInt16>(self + kATIR500GLContext_unknown_0x5b4) + hzAlignment + -1) / hzAlignment) *
+                      hzAllocWidthOp41 = ((SInt32)((UInt32)M<UInt16>(self + kATIR500GLContext_hzRegionWidth) + hzAlignment + -1) / hzAlignment) *
                                hzAlignment;
                     }
                     else {
@@ -2119,7 +2119,7 @@ hzAllocWidthAligned2:
                       hzAllocWidthOp41 = 0;
                       if (hzAlignment != 0) goto hzAllocWidthAligned2;
                     }
-                    hzHeight = M<UInt16>(self + kATIR500GLContext_unknown_0x5be);
+                    hzHeight = M<UInt16>(self + kATIR500GLContext_hzRegionHeight);
                     hzAllocHeightOp41 = (UInt32)hzHeight;
                     heightIsAligned = (hzHeight & 0x1f) == 0;
                     cr0Bits = heightIsAligned << 1;
@@ -2130,9 +2130,9 @@ hzAllocWidthAligned2:
                                          M<UInt32>(depthTexture + 0x6c),1,hzAllocWidthOp41,hzAllocHeightOp41);
                     M<UInt32>(hzTexture + 0x6c) = hzMemHandle;
                   }
-                  M<UInt16>(depthTexture + 0x70) = M<UInt16>(self + kATIR500GLContext_unknown_0x5bc);
-                  M<UInt16>(depthTexture + 0x72) = M<UInt16>(self + kATIR500GLContext_unknown_0x5be);
-                  M<UInt16>(depthTexture + 0x78) = M<UInt16>(self + kATIR500GLContext_unknown_0x5b8);
+                  M<UInt16>(depthTexture + 0x70) = M<UInt16>(self + kATIR500GLContext_hzRegionField70);
+                  M<UInt16>(depthTexture + 0x72) = M<UInt16>(self + kATIR500GLContext_hzRegionHeight);
+                  M<UInt16>(depthTexture + 0x78) = M<UInt16>(self + kATIR500GLContext_hzRegionField78);
                   M<UInt16>(depthTexture + 0x7a) = 0;
                   M<UInt32>(depthTexture + 0x74) = M<UInt32>((SInt32)recordCursor + entryByteOffsetOp41 + 4);
                 }
@@ -2142,7 +2142,7 @@ hzAllocWidthAligned2:
               self[0x5d5] = SUB21((UInt16)M<UInt16>(depthTexture + 0x7a) >> 8,0);
               textureWord7c = M<UInt32>(depthTexture + 0x7c);
               M<UInt8 *>(self + kATIR500GLContext_renderTargetTexture) = depthTexture;
-              M<UInt32>(self + kATIR500GLContext_unknown_0x5cc) = textureWord7c;
+              M<UInt32>(self + kATIR500GLContext_renderTargetTextureWord7c) = textureWord7c;
             }
             depthTexture = (UInt8 *)0x0;
             renderTargetEntry = recordCursor + entryWordIndexOp41 + 6;

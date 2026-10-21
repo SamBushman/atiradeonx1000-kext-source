@@ -34,7 +34,6 @@ IOReturn IOATIR5002DContext::create_image(UInt32 size, UInt32 auxValue, unsigned
 
   UInt32 result;
   UInt8 *shared;
-  SInt32 iVar2;
   SInt32 sharedCreated;
   SInt32 newTextureResult;
   

@@ -46,12 +46,12 @@ field	ATIR500GLContext	0x3bc	renderToTexture	INFERRED	cleared by opcode 0x29, se
 field	ATIR500GLContext	0x3c0	unitBuffers	CONFIRMED	base of the six 0x78-byte buffer records (0x3c0..0x690, the end of the object) addressed by currentAttachment; entry 4 is textureDepthBuffer (+0x5a0), entry 5 textureSurfaceBuffer (+0x618)
 field	ATIR500GLContext	0x3f0	perUnitTextureArray	CONFIRMED	Headers/ATIR500GLContext.h: start() initialises the per-unit default blend/format words from here
 field	ATIR500GLContext	0x5a0	textureDepthBuffer	CONFIRMED	ATIR500SurfaceBuffer built by build_surface_from_texture for a depth render target; compute_sc_hyperz_en/compute_zb_bw_cntl/write_r500_zdecompress_restore_add_on_packet use it when renderToTexture is set
-field	ATIR500GLContext	0x5b4	unknown_0x5b4	UNKNOWN	halfword used as the width of the hyper-z allocation ((w + align - 1) / align * align) in the render-target path of process_command_buffer
-field	ATIR500GLContext	0x5b8	unknown_0x5b8	UNKNOWN	halfword copied to textureBuffer+0x78 in the same path
-field	ATIR500GLContext	0x5bc	unknown_0x5bc	UNKNOWN	halfword copied to textureBuffer+0x70; gate (> 0x20) of the hyper-z allocation
-field	ATIR500GLContext	0x5be	unknown_0x5be	UNKNOWN	halfword rounded up to 32 for HZMEM_Alloc and copied to textureBuffer+0x72
+field	ATIR500GLContext	0x5b4	hzRegionWidth	INFERRED	halfword used as the width of both HZMEM_Alloc calls of the depth render target ((w + align - 1) / align * align; align 0x20 or numPipes << 4) in process_command_buffer | renamed from unknown_0x5b4
+field	ATIR500GLContext	0x5b8	hzRegionField78	INFERRED	halfword copied to the depth texture +0x78 when its hyper-z block is allocated (meaning of the texture field not established) | renamed from unknown_0x5b8
+field	ATIR500GLContext	0x5bc	hzRegionField70	INFERRED	halfword that gates the hyper-z allocation (> 0x20) and is copied to the depth texture +0x70 | renamed from unknown_0x5bc
+field	ATIR500GLContext	0x5be	hzRegionHeight	INFERRED	halfword height of the hyper-z allocation: rounded up to a multiple of 0x20 for HZMEM_Alloc (only when > 0x10) and copied to the depth texture +0x72 | renamed from unknown_0x5be
 field	ATIR500GLContext	0x5c8	hzMemoryHandle	INFERRED	cached textureBuffer+0x6c (the HZMEM_Alloc result); reset to 0xffffffff when the render target is replaced
-field	ATIR500GLContext	0x5cc	unknown_0x5cc	UNKNOWN	cached textureBuffer+0x7c of the render-target texture
+field	ATIR500GLContext	0x5cc	renderTargetTextureWord7c	CONFIRMED	stores the depth/render-target texture +0x7c word (textureWord7c) next to renderTargetTexture | renamed from unknown_0x5cc
 field	ATIR500GLContext	0x618	textureSurfaceBuffer	INFERRED	ATIR500SurfaceBuffer built by build_surface_from_texture for a colour render target (unitBuffers entry 5)
 field	IOATIR5002DContext	0x78	task	CONFIRMED	create_shared stores it into the IOATIR500Shared (+8), same as the GL/DVD contexts
 field	IOATIR5002DContext,ATIR5002DContext	0x7c	lastSubmitStamp	CONFIRMED	clientMemoryForType/finish wait on it; submit_context_buffer stores the submit_buffer result
