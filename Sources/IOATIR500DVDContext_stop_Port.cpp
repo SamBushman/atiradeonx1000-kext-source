@@ -34,10 +34,6 @@ void IOATIR500DVDContext::stop(IOService *provider) {
     UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
   UInt8 *previous;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  UInt8 *pIVar5;
   int *accelWords;
   int *mapping;
   UInt8 *liveContext;
@@ -71,7 +67,7 @@ void IOATIR500DVDContext::stop(IOService *provider) {
     accelAddr = M<int>(self + kIOATIR500DVDContext_accelerator);
     clientNode = M<int>(accelAddr + kIOATIR500Accelerator_liveGLContextListHead);
     if (clientNode == 0) {
-      if (M<int>(accelAddr + kIOATIR500Accelerator_liveDVDContextListHead) == 0) goto LAB_0000e548;
+      if (M<int>(accelAddr + kIOATIR500Accelerator_liveDVDContextListHead) == 0) goto freeContextBuffers;
     }
     else {
       while( true ) {
@@ -104,7 +100,7 @@ void IOATIR500DVDContext::stop(IOService *provider) {
       }
     }
   }
-LAB_0000e548:
+freeContextBuffers:
   if (M<int>(self + kIOATIR500DVDContext_contextBufferDescriptor) != 0) {
     this->freeAllContextBuffers();
   }

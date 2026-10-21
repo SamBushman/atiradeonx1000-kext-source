@@ -32,10 +32,8 @@ extern "C" UInt32 GH_OSDecrementAtomic(...) asm("_OSDecrementAtomic");
 void ATIR500DVDContext::discard_command_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
   SInt32 slotOffset;
   SInt32 oldRefCount;
-  SInt32 iVar4;
   UInt32 recordLength;
   UInt32 recordWord;
   UInt32 *record;
@@ -49,7 +47,7 @@ void ATIR500DVDContext::discard_command_buffer() {
     recordWord = *record;
     opcode = recordWord & 0xff000000;
     if (opcode == 0x2a000000) {
-LAB_00033ed0:
+bindSharedTexture:
       if ((record[1] < M<UInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x14)) &&
          (sharedTexture = M<SInt32>(record[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_sharedAllocator) + 0x10)), sharedTexture != 0)) {
         slotOffset = (opcode + 0xe7000000 >> 0x18) * 4;
@@ -73,35 +71,35 @@ LAB_00033ed0:
             if (opcode != 0x1c000000) {
               if (opcode < 0x1c000001) {
                 if (((opcode != 0x1a000000) && (opcode != 0x1b000000)) && (opcode != 0x19000000))
-                goto LAB_00033ec0;
+                goto skipRecord;
               }
               else if (opcode != 0x1e000000) {
                 if (opcode < 0x1e000001) {
-                  if (opcode == 0x1d000000) goto LAB_00033ed0;
+                  if (opcode == 0x1d000000) goto bindSharedTexture;
                 }
-                else if ((opcode == 0x1f000000) || (opcode == 0x20000000)) goto LAB_00033ed0;
-                goto LAB_00033ec0;
+                else if ((opcode == 0x1f000000) || (opcode == 0x20000000)) goto bindSharedTexture;
+                goto skipRecord;
               }
             }
           }
           else if (opcode != 0x25000000) {
             if (opcode < 0x25000001) {
               if (((opcode != 0x23000000) && (opcode != 0x24000000)) && (opcode != 0x22000000))
-              goto LAB_00033ec0;
+              goto skipRecord;
             }
             else if (opcode != 0x27000000) {
               if (opcode < 0x27000001) {
-                if (opcode == 0x26000000) goto LAB_00033ed0;
+                if (opcode == 0x26000000) goto bindSharedTexture;
               }
-              else if ((opcode == 0x28000000) || (opcode == 0x29000000)) goto LAB_00033ed0;
-              goto LAB_00033ec0;
+              else if ((opcode == 0x28000000) || (opcode == 0x29000000)) goto bindSharedTexture;
+              goto skipRecord;
             }
           }
         }
-        goto LAB_00033ed0;
+        goto bindSharedTexture;
       }
       if (opcode == 0x33000000) {
-LAB_00033f70:
+releaseTextureSlot:
         recordLength = recordWord & 0xffffff;
         textureSlotOffset = opcode + 0xd5000000 >> 0x16;
         if (M<SInt32>(self + textureSlotOffset + 0x104) != 0) {
@@ -118,35 +116,35 @@ LAB_00033f70:
           if (opcode != 0x2e000000) {
             if (opcode < 0x2e000001) {
               if (((opcode != 0x2c000000) && (opcode != 0x2d000000)) && (opcode != 0x2b000000))
-              goto LAB_00033ec0;
+              goto skipRecord;
             }
             else if (opcode != 0x30000000) {
               if (opcode < 0x30000001) {
-                if (opcode == 0x2f000000) goto LAB_00033f70;
+                if (opcode == 0x2f000000) goto releaseTextureSlot;
               }
-              else if ((opcode == 0x31000000) || (opcode == 0x32000000)) goto LAB_00033f70;
-              goto LAB_00033ec0;
+              else if ((opcode == 0x31000000) || (opcode == 0x32000000)) goto releaseTextureSlot;
+              goto skipRecord;
             }
           }
-          goto LAB_00033f70;
+          goto releaseTextureSlot;
         }
-        if (opcode == 0x38000000) goto LAB_00033f70;
+        if (opcode == 0x38000000) goto releaseTextureSlot;
         if (opcode < 0x38000001) {
           if (opcode != 0x35000000) {
             if (opcode < 0x35000001) {
-              if (opcode == 0x34000000) goto LAB_00033f70;
+              if (opcode == 0x34000000) goto releaseTextureSlot;
             }
-            else if ((opcode == 0x36000000) || (opcode == 0x37000000)) goto LAB_00033f70;
-            goto LAB_00033ec0;
+            else if ((opcode == 0x36000000) || (opcode == 0x37000000)) goto releaseTextureSlot;
+            goto skipRecord;
           }
-          goto LAB_00033f70;
+          goto releaseTextureSlot;
         }
-        if (opcode == 0x3a000000) goto LAB_00033f70;
+        if (opcode == 0x3a000000) goto releaseTextureSlot;
         if (opcode < 0x3a000001) {
-          if (opcode == 0x39000000) goto LAB_00033f70;
+          if (opcode == 0x39000000) goto releaseTextureSlot;
         }
-        else if ((opcode == 0x3b000000) || (opcode == 0x3c000000)) goto LAB_00033f70;
-LAB_00033ec0:
+        else if ((opcode == 0x3b000000) || (opcode == 0x3c000000)) goto releaseTextureSlot;
+skipRecord:
         recordLength = recordWord & 0xffffff;
       }
     }

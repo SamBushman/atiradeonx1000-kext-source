@@ -1,0 +1,10 @@
+--- a/Sources/IOATIR500DVDContext_declare_image_Port.cpp	2026-10-20 20:47:36.170979784 -0700
++++ b/Sources/IOATIR500DVDContext_declare_image_Port.cpp	2026-10-20 20:47:36.172253817 -0700
+@@ -33,7 +33,6 @@
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+ 
+   UInt8 *shared;
+-  SInt32 iVar1;
+   UInt32 result;
+   SInt32 sharedCreated;
+   SInt32 newTextureResult;

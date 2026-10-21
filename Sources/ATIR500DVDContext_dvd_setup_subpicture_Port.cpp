@@ -31,7 +31,6 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 /* real addr 0x34e50 */
 IOReturn ATIR500DVDContext::dvd_setup_subpicture(int unknownArg1, int unknownArg2, int unknownArg3, int unknownArg4) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
   int accel;
   UInt32 result;

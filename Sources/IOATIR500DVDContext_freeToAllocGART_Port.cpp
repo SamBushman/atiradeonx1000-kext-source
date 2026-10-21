@@ -32,7 +32,6 @@ bool IOATIR500DVDContext::freeToAllocGART(VendorTransferBuffer *needed, bool agg
     UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
   bool lastSlot;
-  SInt32 iVar2;
   SInt32 freed;
   UInt8 *slot;
   UInt8 *slotBase;

@@ -37,8 +37,6 @@ IOReturn IOATIR500DVDContext::lock_all_buffers(UInt32 unused1, sIODVDContextLock
 
   int entryOffset;
   UInt32 surface;
-  int iVar3;
-  int iVar4;
   UInt32 result;
   int retries;
   int lastResortResult;
@@ -53,7 +51,7 @@ IOReturn IOATIR500DVDContext::lock_all_buffers(UInt32 unused1, sIODVDContextLock
     surface = M<UInt32>(self + kIOATIR500DVDContext_boundSurface);
     if (surface == 0) break;
     if ((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & M<unsigned int>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) & 0x207ffc00) == 0) {
-LAB_0000fe04:
+copyBufferEntries:
       entryIndex = 10;
       entriesLeft = 0xd;
       while( true ) {
@@ -69,19 +67,19 @@ LAB_0000fe04:
       }
       result = 0;
       storeHalf(&M<UInt16>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xbd2), M<SInt16>(M<int>(self + kIOATIR500DVDContext_boundSurface) + 0xbd2) + 1);
-      goto LAB_0000fea0;
+      goto unlockAndReturn;
     }
     if ((M<unsigned int>(surface + kIOATIR500Surface_stateBits) & 0x20000000) != 0) break;
     allocResult = ((IOATIR500Surface *)(surface))->alloc_surfaces(M<UInt32>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) & 0x207ffc00, false);
     if (allocResult == 0) {
-LAB_0000fe00:
+reloadBoundSurface:
       surface = M<UInt32>(self + kIOATIR500DVDContext_boundSurface);
-      goto LAB_0000fe04;
+      goto copyBufferEntries;
     }
     if (allocResult == 2) break;
     if (retries == 1000) {
       lastResortResult = ((IOATIR500Surface *)(M<UInt32>(self + kIOATIR500DVDContext_boundSurface)))->alloc_surfaces(M<UInt32>(self + kIOATIR500DVDContext_surfaceFlagsBitmask) & 0x207ffc00, true);
-      if (lastResortResult == 0) goto LAB_0000fe00;
+      if (lastResortResult == 0) goto reloadBoundSurface;
       fillCount = 0xd;
       do {
         M<UInt32>(outCursor + 4) = 0;
@@ -89,7 +87,7 @@ LAB_0000fe00:
         outCursor = outCursor + 8;
         fillCount = fillCount + -1;
       } while (fillCount != 0);
-      goto LAB_0000fdd0;
+      goto failNoBuffers;
     }
     retries = retries + 1;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
@@ -103,9 +101,9 @@ LAB_0000fe00:
     outCursor = outCursor + 8;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-LAB_0000fdd0:
+failNoBuffers:
   result = 0xe00002cc;
-LAB_0000fea0:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   return result;
 }

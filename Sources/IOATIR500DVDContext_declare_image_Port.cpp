@@ -33,7 +33,6 @@ IOReturn IOATIR500DVDContext::declare_image(UInt32 unused1, unsigned int address
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt8 *shared;
-  SInt32 iVar1;
   UInt32 result;
   SInt32 sharedCreated;
   SInt32 newTextureResult;

@@ -33,9 +33,7 @@ IOReturn ATIR500DVDContext::read_regs(UInt32*offsets, UInt32*outValues, UInt32 b
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt8 *registerAddress;
-  SInt32 iVar2;
   SInt32 registers;
-  UInt32 uVar4;
   UInt32 result;
   UInt32 actualBytes;
   UInt32 dwordsLeft;

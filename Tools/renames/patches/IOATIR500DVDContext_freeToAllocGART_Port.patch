@@ -1,0 +1,10 @@
+--- a/Sources/IOATIR500DVDContext_freeToAllocGART_Port.cpp	2026-10-20 20:48:24.576116471 -0700
++++ b/Sources/IOATIR500DVDContext_freeToAllocGART_Port.cpp	2026-10-20 20:48:24.577445655 -0700
+@@ -32,7 +32,6 @@
+     UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
+ 
+   bool lastSlot;
+-  SInt32 iVar2;
+   SInt32 freed;
+   UInt8 *slot;
+   UInt8 *slotBase;
