@@ -65,8 +65,8 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
           slot->unknown_0x00 = 0;
           slot->gartOffset = 0;
           slot->memory = (void *)0x0;
-          slot->unknown_0x0e = 0;
-          slot->unknown_0x0c = 2;
+          slot->lockCount = 0;
+          slot->usageKind = 2;
           slot->stamp = 0;
           slot->header = (VendorSwapBufferHeader *)0x0;
           slot->rectWordIndex = 0;
@@ -75,8 +75,8 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
         if (master->memory != (void *)0x0) {
           VCALL(*(SInt32 *)master->memory, 0x18)((SInt32 *)master->memory);
         }
-        master->unknown_0x0c = 2;
-        master->unknown_0x0e = 0;
+        master->usageKind = 2;
+        master->lockCount = 0;
         bufferIndex = bufferIndex + 1;
         master->rectWordIndex = 0;
         master->unknown_0x00 = 0;

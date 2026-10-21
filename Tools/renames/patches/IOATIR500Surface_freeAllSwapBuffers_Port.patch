@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-20 10:49:30.941562340 -0700
-+++ b/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-20 10:49:30.942920375 -0700
+--- a/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-20 21:12:05.338396449 -0700
++++ b/Sources/IOATIR500Surface_freeAllSwapBuffers_Port.cpp	2026-10-20 21:12:05.342258796 -0700
 @@ -29,86 +29,65 @@
  /* real addr 0x10860 */
  void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
@@ -82,8 +82,8 @@
 +          slot->unknown_0x00 = 0;
 +          slot->gartOffset = 0;
 +          slot->memory = (void *)0x0;
-+          slot->unknown_0x0e = 0;
-+          slot->unknown_0x0c = 2;
++          slot->lockCount = 0;
++          slot->usageKind = 2;
 +          slot->stamp = 0;
 +          slot->header = (VendorSwapBufferHeader *)0x0;
 +          slot->rectWordIndex = 0;
@@ -94,8 +94,8 @@
 +        if (master->memory != (void *)0x0) {
 +          VCALL(*(SInt32 *)master->memory, 0x18)((SInt32 *)master->memory);
 +        }
-+        master->unknown_0x0c = 2;
-+        master->unknown_0x0e = 0;
++        master->usageKind = 2;
++        master->lockCount = 0;
          bufferIndex = bufferIndex + 1;
 -        pIVar3 = pIVar3 + 0x1c;
 -        M<UInt32>(pIVar7 + 0x18) = 0;

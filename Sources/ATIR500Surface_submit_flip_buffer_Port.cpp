@@ -96,7 +96,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
        allocResult == 0)) {
       return;
     }
-    goto LAB_0003ee00;
+    goto submitSlot;
   }
   nextSlot = Vol(rec->slotIndex) + 1 & 3;
   Vol(rec->slotIndex) = (UInt16)nextSlot;
@@ -302,7 +302,7 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     }
   }
   if (M<char>(accel + 0x9b0) == '\0') {
-LAB_0003ed40:
+appendFlipMarker:
     if (isPanel0) {
       packet[wordIndex] = 0x5c8;
       markerValueIndex = wordIndex + 1;
@@ -324,18 +324,18 @@ LAB_0003ed40:
       else {
         otherPanelRecord = 0xb00;
       }
-      if (M<int>(accel + otherPanelRecord + 0x10) != 0) goto LAB_0003eda0;
+      if (M<int>(accel + otherPanelRecord + 0x10) != 0) goto padPacket;
     }
-    goto LAB_0003ed40;
+    goto appendFlipMarker;
   }
-LAB_0003eda0:
+padPacket:
   paddedWordCount = wordIndex;
   if ((wordIndex & 7) != 0) {
     paddedWordCount = wordIndex + 1;
     packet[wordIndex] = 0x80000000;
   }
   M<unsigned int>((int)Vol(slot->header) + 0x14) = paddedWordCount;
-LAB_0003ee00:
+submitSlot:
   if (M<int>(slotBytes + 4) == 0) {
     ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(slotBytes));
   }

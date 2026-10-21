@@ -1,0 +1,139 @@
+# M3: final placeholder round (goto labels and the last locals) of the accelerator / surface / shared / memory sources
+def	IOATIR500Surface::surface_lock_options	LAB_00016360	unlockAndReturn	CONFIRMED	common exit: stores newLockState into the read/write lock-state byte, unlocks the accelerator lock and returns result
+def	IOATIR500Surface::surface_lock_options	LAB_00016330	rejectLock	INFERRED	state bit 0x20000000 set (or no attachment buffer): result -0x1ffffd34, lock state 0
+def	IOATIR500Surface::surface_lock_options	LAB_00016344	allocFailed	CONFIRMED	alloc_surfaces_retry failed: lock state 0, return its error
+def	IOATIR500Surface::surface_lock_options	LAB_00015e70	lockWithoutMapping	INFERRED	options 3 or nothing to map: lock state 2, result 0
+def	IOATIR500Surface::surface_lock_options	LAB_00015e7c	fillLockData	CONFIRMED	fills the IOAccelSurfaceData words 5..16 (size, pixel format, flags, surface tail words)
+def	IOATIR500Surface::surface_lock_options	LAB_00015ec8	lockResidentBuffer	INFERRED	options 1/2 path: allocate buffers if needed, map the attachment buffer, lock state 1 and wait on the stamp
+def	IOATIR500Surface::surface_lock_options	LAB_00015fe4	lockViaTransferBuffer	INFERRED	options 0/2 path that goes through the buffer transfer record (+0x24)
+def	IOATIR500Surface::surface_lock_options	LAB_000160bc	checkTransferBuffer	INFERRED	tests the transfer buffer pointer after the memory descriptor query
+def	IOATIR500Surface::surface_lock_options	LAB_000160c4	checkTransferStamp	INFERRED	compares the transfer buffer stamp with the surface stamp and reallocates the buffers when it is current
+def	IOATIR500Surface::surface_lock_options	LAB_00016170	noTransferBuffer	INFERRED	no transfer buffer: result 0, fall into the backing-store copy
+def	IOATIR500Surface::surface_lock_options	LAB_00016174	moveToBackingStore	CONFIRMED	copies or moves the attachment buffer to its backing store (copy_buffer_to_backing_store / move_buffer_to_backing_store)
+def	IOATIR500Surface::surface_lock_options	LAB_00016350	failNoTransferBuffer	CONFIRMED	no transfer buffer or mapping failed: lock state 0, result -0x1ffffd43
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004450	retryAlloc	INFERRED	after a scan pass: retry the allocation through vtable +0x528
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004294	tailScanLoop	INFERRED	head of the backward (tail) walk over the texture VRAM list
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_000042b8	tailExamine	INFERRED	tail node is not on the exclusion list: examine it for eviction
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_0000428c	tailAdvance	CONFIRMED	tailNode = tailNode->prev and recompute tailAtSentinel
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004314	tailFacesDone	INFERRED	all faces of the tail texture were checked
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004040	headScanLoop	INFERRED	head of the forward walk over the texture VRAM list
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_000040b8	headExamine	INFERRED	node is not on the exclusion list: examine it for eviction
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004124	headStampCheck	INFERRED	asks vtable +0x554 whether the texture stamp has been reached
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004430	passEndCheck	INFERRED	after an eviction: continue the pass unless the walk ended
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004448	passDone	INFERRED	a scan pass finished: start the second pass or go to tossSurfaces
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	LAB_00004474	tossSurfaces	CONFIRMED	last resort: tossSurfacesForVRAM then report the result
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	code_r0x00004264	tailNoExcludeList	INFERRED	tail walk with an empty exclusion list
+def	IOATIR500Accelerator::freeToAllocTextureVRAM	joined_r0x00004360	tailEvictBusy	INFERRED	tail texture still busy: remember the first node and unlink it
+def	::HZMEM_Alloc	code_r0x00045488	nextBlock	CONFIRMED	advances the usage-map scan cursor
+def	::HZMEM_Alloc	LAB_00045460	scanBlock	CONFIRMED	counts a free run in the usage map; a used byte (1) restarts the run after it
+def	::HZMEM_Alloc	LAB_00045584	recordSlot	CONFIRMED	fills the pool slot record (offset, sizes, in-use flag) and bumps the pool slot count
+def	::HZMEM_Alloc	LAB_000454ac	allocAtPoolEnd	INFERRED	no free run in the map: try to extend an allocation at the end of the usage map up to the pool limit
+def	::HZMEM_Alloc	LAB_00045438	allocFailed	CONFIRMED	blockSlot = -1
+def	::HZMEM_Alloc	LAB_0004543c	packHandle	CONFIRMED	packs blockSlot into the HZ handle word according to blockKind
+def	ATIR500Surface::copy_from_buffer	LAB_00043834	copyViaDMA	CONFIRMED	calls copy_buffer_using_DMA; returns when it succeeded
+def	ATIR500Surface::copy_from_buffer	LAB_00043888	mapTransferBuffer	CONFIRMED	synchronous path: the transfer buffer's memory descriptor (+8) is mapped for the CPU copy
+def	ATIR500Surface::copy_from_buffer	LAB_00043db4	unmapAndRelease	CONFIRMED	releases the transfer mapping (vtable +0x18) and the optional backing mapping
+def	ATIR500Surface::copy_from_buffer	LAB_00043ac4	checkRowFlip	INFERRED	mode bits 0x70000000 set: the row pitch is negated again
+def	ATIR500Surface::copy_from_buffer	LAB_00043ad0	flipRowPitch	CONFIRMED	rowPitch = -rowPitch
+def	ATIR500Surface::copy_from_buffer	LAB_00043b24	copyRows	INFERRED	the row copy loops for the sample scale (1 or 2) cases
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM	LAB_00004794	afterTextureScan	INFERRED	texture list scanned: succeed when the needed texture has memory, else scan the surface list
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM	LAB_00004654	examineTexture	INFERRED	texture is not on the exclusion list: check whether it can be evicted
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM	LAB_000046a0	nextTexture	CONFIRMED	texture = texture->next (+0x28)
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM	LAB_000046b8	facesDone	INFERRED	all faces of the texture were checked
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM	LAB_0000492c	nextSurface	INFERRED	end of the per-surface body of the surface walk
+def	IOATIR500Accelerator::start	LAB_00002f98	failStart	CONFIRMED	any setup failure: stop(provider) and return 0
+def	IOATIR500Accelerator::start	LAB_00002f28	skipFramebufferScan	INFERRED	registry root or IOKitBuildVersion unusable: framebuffersOk = 1 without scanning
+def	ATIR500Surface::shape_surface	LAB_0003c260	noWindowScale	CONFIRMED	widthScale = heightScale = 1
+def	ATIR500Surface::shape_surface	LAB_0003c52c	linearTiling	CONFIRMED	tilingMode = 0
+def	ATIR500Surface::shape_surface	LAB_0003c9c4	linearSingleLevel	INFERRED	tilingMode = 0 and a single mip level
+def	ATIR500Surface::shape_surface	LAB_0003c9d0	linearMipChain	INFERRED	tilingMode = 0 for a surface with several levels or faces
+def	ATIR500Surface::shape_surface	LAB_0003ce90	updateOverlayRect	INFERRED	overlay exists: look up the framebuffer record and update the overlay rectangle
+def	IOATIR500Surface::convert_surface_bits	LAB_00012420	setSlotBit	CONFIRMED	result |= 1 << (index of the surface buffer held in the format slot)
+def	IOATIR500Surface::convert_surface_bits	LAB_00012454	nextSelectorBit	CONFIRMED	selectorBit <<= 1; returns when it passes selectorBits
+def	IOATIR500Surface::set_id_mode	LAB_000147d0	unlockAndReturn	CONFIRMED	unlocks the accelerator command lock and returns result
+def	IOATIR500Surface::set_id_mode	LAB_00014370	applyModeBits	INFERRED	mode bits accepted: a planar format (0x20) uses panel 0xffff, else the requested id
+def	IOATIR500Surface::set_id_mode	LAB_00014454	switchPanel	INFERRED	moves the surface from its current panel to the requested one
+def	IOATIR500Surface::set_id_mode	LAB_0001460c	resultOk	CONFIRMED	result = 0
+def	IOATIR500Surface::alloc_surfaces_retry	LAB_000148e0	tryAllocate	INFERRED	checks the state bits and calls alloc_surfaces_pageq
+def	IOATIR500Surface::alloc_surfaces_retry	LAB_00014970	failBusy	CONFIRMED	result 0xe00002cc
+def	IOATIR500Surface::alloc_surfaces_retry	LAB_00014968	succeed	CONFIRMED	result 0
+def	IOATIR500Shared::delete_texture	LAB_00017ac4	releaseReferencedTexture	CONFIRMED	atomically decrements the use count of the referenced texture and deletes it at zero
+def	IOATIR500Shared::delete_texture	LAB_00017b60	checkStamp	CONFIRMED	asks the accelerator (vtable +0x554) whether the texture's stamp was reached; if not it becomes an orphan texture
+def	IOATIR500Shared::delete_texture	LAB_00017cf0	finishDelete	CONFIRMED	decrements the accelerator's live texture count and returns 0
+def	IOATIR500Shared::delete_texture	LAB_00017ba0	freeHandle	CONFIRMED	free_buf_handle, then releases the texture's memory descriptor
+def	ATIR500Surface::alloc_surface_buffer	LAB_0003e330	allocFromPool	CONFIRMED	allocates the buffer from the VRAM pool below the usable-size limit
+def	ATIR500Surface::alloc_surface_buffer	LAB_0003e544	alignHeight	INFERRED	after the pitch is aligned: align the height to 32 rows
+def	ATIR500Surface::alloc_surface_buffer	LAB_0003e3e8	roundPitch	CONFIRMED	alignedPitch = alignment * ceil(minPitch / alignment)
+def	ATIR500Surface::alloc_surface_buffer	LAB_0003e4a4	alignChromaHeight	INFERRED	after the chroma pitch is aligned: align the height to 32 rows
+def	IOATIR500Accelerator::tossSurfacesForVRAM	LAB_00003f10	nextSurface	CONFIRMED	end of the per-surface body of the walk
+def	IOATIR500Accelerator::tossSurfacesForVRAM	LAB_00003ec0	allocAfterToss	CONFIRMED	retries the allocation (vtable +0x528) after a buffer was moved to its backing store
+def	IOATIR500Accelerator::tossSurfacesForVRAM	LAB_00003f28	tossSucceeded	CONFIRMED	result = 1: the needed buffer now has memory
+def	ATIR500Surface::submit_swap_buffer@0x3b310	LAB_0003b900	submitSlot	CONFIRMED	submits the slot's command buffer: maps it to the GART if needed, calls submit_buffer and records the stamps
+def	ATIR500Surface::submit_swap_buffer@0x3b310	LAB_0003b5e0	checkDualMode	INFERRED	panel other than 1 (or panel 0 in dual mode): the swap command words go to panel 0 unless dualMode is set
+def	ATIR500Surface::submit_swap_buffer@0x3b310	LAB_0003b5ec	writePanel1SwapRegs	INFERRED	swap packet for panel 1 (register 0x1b4e) and 10 header words
+def	ATIR500Surface::submit_swap_buffer@0x3b310	LAB_0003b870	noSwdsBlit	CONFIRMED	swdsFlag = 0: no software-dual-screen blit is appended
+def	ATIR500Surface::copy_to_buffer	LAB_00043444	copyViaDMA	CONFIRMED	calls copy_buffer_using_DMA (direction 2); returns when it succeeded
+def	ATIR500Surface::copy_to_buffer	LAB_00043494	mapTransferBuffer	CONFIRMED	the transfer buffer's memory descriptor (+8) is mapped for the CPU copy
+def	ATIR500Surface::copy_to_buffer	LAB_000435cc	blockWidth4	INFERRED	width in 4-texel blocks: w = (w + 3) >> 2 for the compressed formats other than 8 and 16 bytes per block
+def	ATIR500Surface::copy_to_buffer	LAB_000436cc	unmapAndRelease	CONFIRMED	releases the transfer mapping (vtable +0x18) and the optional backing mapping
+def	IOATIR500Surface::surface_read	LAB_00014ae0	checkBufferState	INFERRED	state bit 0x20000000 or no memory descriptor on the read buffer: fail with busy
+def	IOATIR500Surface::surface_read	LAB_00014af4	unlockBusy	CONFIRMED	unlocks the accelerator command lock and returns 0xe00002cc
+def	IOATIR500Surface::surface_read	LAB_00014b30	unlockOk	CONFIRMED	unlocks the accelerator command lock and returns 0
+def	IOATIR500Surface::start	LAB_00011d4c	getVramDescriptors	CONFIRMED	calls getVRAMDescriptors on the accelerator
+def	IOATIR500Surface::start	LAB_00011d38	failCleanup	INFERRED	a region or swap buffer allocation failed: reload the accelerator pointer and leave the loop
+def	IOATIR500Surface::start	LAB_00011d6c	registerSurface	CONFIRMED	installs the method table and links the surface into the accelerator's live surface list
+def	IOATIR500Surface::set_shape_backing_length_ext	LAB_000157b4	storeShapeFlags	CONFIRMED	stores the shape flags (bit 3 and the scaling flag) before returning result
+def	IOATIR500Surface::set_shape_backing_length_ext	LAB_00015720	shapeFailed	CONFIRMED	result 0xe00002be and state bit 0x20000000 set
+def	IOATIR500Accelerator::setup_stereo	LAB_0000561c	updateSurfaces	INFERRED	after the stereo setup: walk the live surfaces when the buffer count changed
+def	IOATIR500Accelerator::setup_stereo	LAB_000055e0	checkStereoBit	INFERRED	stereo mode bit 0 decides whether the second buffer is kept
+def	IOATIR500Accelerator::setup_stereo	LAB_000055e8	freeStereoBuffer	CONFIRMED	deallocates the second panel buffer and sets the buffer count to 1
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	LAB_0003be90	submitSlot	CONFIRMED	maps the slot's transfer buffer to the GART when needed and submits it
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	LAB_0003bcbc	checkDualMode	INFERRED	swap packet goes to panel 0 unless dualMode is set (same shape as submit_swap_buffer@0x3b310)
+def	ATIR500Surface::submit_swap_buffer@0x3ba80	LAB_0003bcc8	writePanel1SwapRegs	INFERRED	swap packet for panel 1 (register 0x1b4e) and 10 header words
+def	ATIR500Surface::submit_flip_buffer	LAB_0003ee00	submitSlot	CONFIRMED	maps the slot's transfer buffer to the GART when needed and submits it
+def	ATIR500Surface::submit_flip_buffer	LAB_0003ed40	appendFlipMarker	INFERRED	appends the 0x5c8 marker packet for the flipped panel
+def	ATIR500Surface::submit_flip_buffer	LAB_0003eda0	padPacket	CONFIRMED	pads the packet to a multiple of 8 words with 0x80000000 and stores the word count in the slot header
+def	ATIR500Surface::copy_buffer_using_DMA	LAB_00042bcc	useBackingStore	INFERRED	backingFlag = 1: the copy goes through the backing store
+def	ATIR500Surface::copy_buffer_using_DMA	joined_r0x00042bb8	checkCopyAllowed	INFERRED	returns 0 (no DMA) when the mode bits forbid it
+def	ATIR500Surface::copy_buffer_using_DMA	LAB_00042bf0	mappingNotNeeded	CONFIRMED	needsMapping = false
+def	ATIR500Surface::copy_buffer_using_DMA	LAB_00042bf4	checkMapping	INFERRED	hardware capability bit 0x20000 set and no mapping needed: no DMA
+def	IOATIR500Surface::surface_query_lock	LAB_00015270	failBusy	CONFIRMED	result 0xe00002cc
+def	IOATIR500Surface::surface_query_lock	LAB_00015280	unlockAndReturn	CONFIRMED	unlocks the accelerator command lock and returns result
+def	ATIR500Surface::setupFullScreen	LAB_0003d310	finishSetup	INFERRED	after the software-dual-screen flags: calls vtable +0x5dc
+def	IOATIR500Accelerator::display_change_handler	LAB_00000500	failUnsupported	CONFIRMED	returns 0xe00002bc
+def	IOATIR500Accelerator::display_change_handler	joined_r0x000004a0	checkModeChangeStatus	CONFIRMED	status 0 from the mode-change vtable call (+0x5b4/+0x5b8) means failure
+def	IOATIR500Accelerator::display_change_handler	switchD_000003b0_caseD_1	beginModeChange	INFERRED	events 1 and 3 (with info): atomically count one more outstanding change and call vtable +0x5b4 on the first
+def	IOATIR500Surface::prune_buffers	LAB_00012fec	walkBuffers	INFERRED	loop over the surface's buffers after the request bits were merged
+def	IOATIR500Surface::prune_buffers	LAB_00012f00	mergeRequestBits	CONFIRMED	contextReqBits |= reqBits
+def	IOATIR500Surface::alloc_surfaces_pageq	LAB_000122dc	everythingResident	CONFIRMED	result = 0: every requested buffer has memory
+def	IOATIR500Surface::alloc_surface	LAB_00013448	clearStateBit	CONFIRMED	clears the buffer's bit in stateBits and returns 1
+def	IOATIR500Shared::alloc_client_shared	LAB_00016f00	checkChunk	CONFIRMED	looks for the requested client-shared index in this chunk
+def	IOATIR500Shared::alloc_client_shared	LAB_00016e80	freeChunk	CONFIRMED	frees the new chunk record (0x1c bytes) and returns 0
+def	IOATIR500Shared::alloc_buf_handle	LAB_00016c4c	scanBitmapWord	CONFIRMED	a bitmap word that is not all ones: scan its 32 bits for a free handle
+def	IOATIR500Shared::alloc_buf_handle	LAB_00016c7c	claimHandle	CONFIRMED	handle = wordIndex * 32 + bitIndex; stores the record in the handle table
+def	IOATIR500Accelerator::stop	LAB_000067e8	freeDisplayRecords	INFERRED	scratch command buffer released: free the per-display records
+def	IOATIR500Accelerator::addToMinMaxGART	LAB_000060d8	lockPages	CONFIRMED	vtable +0x144 on the memory descriptor (prepare/wire) with direction 3
+def	ATIR500Surface::resolve_fsaa_buffer	LAB_0004481c	finishResolve	CONFIRMED	clears the accelerator's pending word (+0x78) and returns the packet end
+def	ATIR500Surface::resolve_fsaa_buffer	LAB_00044100	roundTilePitch	CONFIRMED	alignedPitch = tileAlignment * ceil(minPitch / tileAlignment)
+def	ATIR500Surface::build_swap	LAB_0003f644	checkOverlap	INFERRED	panel 0 case: the second-panel swap packet is added only when the scanouts overlap
+def	ATIR500Surface::build_swap	LAB_0003f654	writePanel1Swap	INFERRED	swap packet for panel 1 (register 0x1b4e)
+def	ATIR500Surface::is_flip_allowed	LAB_0003aec0	checkModeBits	INFERRED	flip is allowed only when the sign bit of the mode bits is clear
+def	IOATIR500Shared::new_agp_texture	LAB_00017310	createTextureBuffer	CONFIRMED	allocates the texture buffer object through the accelerator (vtable +0x570) around the memory descriptor
+def	IOATIR500Accelerator::newUserClient	LAB_000021d0	attachClient	CONFIRMED	vtable +0x150 (init with properties) then +0x3a4 (attach to the accelerator)
+def	IOATIR500Surface::allocAllSlaveSwapBuffers	LAB_00011f54	unwindSlots	CONFIRMED	failure unwind: releases the slots allocated so far (issue #32 loop)
+def	IOATIR500Accelerator::freeTransferToAllocGART	LAB_00003650	notFreed	CONFIRMED	result 0: the candidate transfer buffer was not freed
+def	IOATIR500Accelerator::allocMoreCommandBuffers	LAB_00002580	returnFailure	CONFIRMED	result 0: already 16 command buffers, or the allocation failed and was undone
+def	IOATIR500Accelerator::foundFramebuffer	LAB_000005a0	addFramebuffer	CONFIRMED	records the framebuffer in the next display slot and registers display_change_handler for it
+def	ATIR500Surface::prepare_vram	LAB_0003dcc0	noFreeSlot	CONFIRMED	no free prepared-VRAM slot: clears buffer +0x3c and returns 0
+def	ATIR500Surface::load_3d_blit	LAB_0003d700	writePitchPacket	CONFIRMED	emits the 0x13cd pitch register write with alignedPitch
+def	ATIR500Memory::init_pool@0x18f60	LAB_000190f0	initFailed	CONFIRMED	result 0
+def	ATIR500Memory::init_pool@0x18e00	LAB_00018f2c	initFailed	CONFIRMED	result 0
+def	ATIR500Memory::alloc@0x19430	LAB_000195bc	allocFailed	CONFIRMED	result 0: no free node fits
+def	ATIR500Surface::dvd_setup_subpicture	param_1	ignored1	CONFIRMED	the shipped function is an empty no-op
+def	ATIR500Surface::dvd_setup_subpicture	param_2	ignored2	CONFIRMED	the shipped function is an empty no-op
+def	ATIR500Surface::dvd_setup_subpicture	param_3	ignored3	CONFIRMED	the shipped function is an empty no-op
+def	ATIR500Surface::dvd_setup_subpicture	param_4	ignored4	CONFIRMED	the shipped function is an empty no-op
+def	ATIR500Surface::showbuffer	param_2	ignored	CONFIRMED	the shipped function is an empty no-op
+def	ATIR500Surface::dealloc_surface	LAB_0003e028	mapSlotToGART	CONFIRMED	maps the submit slot's transfer buffer to the GART when it has no GART offset yet
+def	ATIR500Surface::dealloc_surface	LAB_0003e150	freeBuffer9Hz	CONFIRMED	surfaceIndex 9: frees the buffer's HZ block through HZMEM_Free
+def	ATIR500Surface::prepare_vram	switchD_0003dd5c_caseD_0	unknownFormat	CONFIRMED	buffer format code 0 or unrecognised: sizeBits = formatBits = 0

@@ -116,8 +116,8 @@ field	IOATIR500Accelerator,ATIRadeonX1000	0xadc	swdsEntryIndex	INFERRED	SWDSInit
 field	IOATIR500Accelerator,ATIRadeonX1000	0xae0	swdsEntry0	CONFIRMED	start(): allocCommandBuffer((VendorCommandBuffer *)(self + 0xae0), 0x1000); stop() freeCommandBuffer; 0x1c-byte SwapBufferEntry-shaped entries (stride in SWDSInit)
 field	IOATIR500Accelerator,ATIRadeonX1000	0xae4	swdsEntry0GartOffset	CONFIRMED	SwapBufferEntry +4 (gartOffset): SWDSInit reads (this + idx * 0x1c + 0xae4) as the GART address
 field	IOATIR500Accelerator,ATIRadeonX1000	0xae8	swdsEntry0Memory	INFERRED	SwapBufferEntry +8 (memory descriptor): stop() frees the command buffer when nonzero
-field	IOATIR500Accelerator,ATIRadeonX1000	0xaec	swdsEntry0Field0c	UNKNOWN	SwapBufferEntry unknown_0x0c; start() stores 1
-field	IOATIR500Accelerator,ATIRadeonX1000	0xaee	swdsEntry0Field0e	UNKNOWN	SwapBufferEntry unknown_0x0e; start() stores 0
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaec	swdsEntry0UsageKind	INFERRED	SwapBufferEntry usageKind (+0x0c): start() stores 1 for the SWDS entry, the swap buffer alloc/free paths store 2, surface_read stores 3 in its stack transfer buffer
+field	IOATIR500Accelerator,ATIRadeonX1000	0xaee	swdsEntry0LockCount	CONFIRMED	SwapBufferEntry lockCount (+0x0e): freeTransferToAllocGART refuses to free a buffer whose +0xe is non-zero; start() stores 0
 field	IOATIR500Accelerator,ATIRadeonX1000	0xaf0	swdsEntry0Stamp	CONFIRMED	SwapBufferEntry +0x10 (stamp): SWDSInit calls vtable +0x554 (waitForTimeStamp) with (this + idx * 0x1c + 0xaf0)
 field	IOATIR500Accelerator,ATIRadeonX1000	0xaf4	swdsEntry0Header	CONFIRMED	SwapBufferEntry +0x14 (mapped header): SWDSInit writes the packet words at (header + 0x20)
 field	IOATIR500Accelerator,ATIRadeonX1000	0xaf8	swdsEntry0RectWordIndex	INFERRED	SwapBufferEntry +0x18; start() zeroes it

@@ -45,7 +45,7 @@ bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared**outKern
   lastChunk = (UInt32 *)0x0;
   chunk = M<UInt32 *>(self + kIOATIR500Shared_chunkList);
   while (chunk != (UInt32 *)0x0) {
-LAB_00016f00:
+checkChunk:
     lastChunk = chunk;
     if (index < (UInt32)lastChunk[6]) {
       *outKernelPtr = (sIOClientShared *)(index * 0x40 + lastChunk[4]);
@@ -85,7 +85,7 @@ LAB_00016f00:
   }
   bufferMemory = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),0x10022,0x2000,GH_page_size);
   chunk[1] = (UInt32)(bufferMemory);
-  if (bufferMemory == (SInt32 *)0x0) goto LAB_00016e80;
+  if (bufferMemory == (SInt32 *)0x0) goto freeChunk;
   clientMap = (SInt32 *)VCALL(*bufferMemory, 0x14c)(bufferMemory,M<UInt32>(self + 8),0,1,0,0);
   chunk[2] = (UInt32)(clientMap);
   if (clientMap != (SInt32 *)0x0) {
@@ -108,12 +108,12 @@ LAB_00016f00:
       else {
         *lastChunk = (UInt32)(chunk);
       }
-      goto LAB_00016f00;
+      goto checkChunk;
     }
     VCALL(*(SInt32 *)chunk[2], 0x18)(chunk[2]);
   }
   VCALL(*(SInt32 *)chunk[1], 0x18)(chunk[1]);
-LAB_00016e80:
+freeChunk:
   GH_IOFree(chunk,0x1c);
   return 0;
 }

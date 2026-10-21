@@ -62,7 +62,7 @@ UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *surface, V
       (allocStatus = VCALL(M<SInt32>(self), 0x528)(self,neededBytes), allocStatus != 0)) ||
      (tossStatus = this->tossSurfacesForVRAM((IOATIR500Surface *)(surfaceBytes),(VendorTextureBuffer **)(excludeList),excludeCount,(VendorTextureBuffer *)(neededBytes),true), tossStatus == 0)) {
     secondPass = false;
-LAB_00004450:
+retryAlloc:
     allocStatus = VCALL(M<SInt32>(self), 0x528)(self,neededBytes);
     if (allocStatus == 0) {
       M<SInt32>(self + kIOATIR500Accelerator_textureVRAMAllocFailCount) = M<SInt32>(self + kIOATIR500Accelerator_textureVRAMAllocFailCount) + 1;
@@ -78,40 +78,40 @@ LAB_00004450:
           firstPassFlags = !secondPass << 1;
           node = (UInt8 *)0x0;
           tailAtSentinel = tailNode == tailSentinel;
-LAB_00004294:
+tailScanLoop:
           if ((!tailAtSentinel) && (walkEndFlags = (tailNode == node) << 1, tailNode != node)) {
             M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExaminedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExaminedCount) + 1;
-            if (excludeCount < 1) goto code_r0x00004264;
+            if (excludeCount < 1) goto tailNoExcludeList;
             if (tailNode != (UInt8 *)*excludeList) {
               excludeIndex = 0;
               excludeLeft = excludeCount;
               do {
                 excludeIndex = excludeIndex + 1;
                 excludeLeft = excludeLeft + -1;
-                if (excludeLeft == 0) goto LAB_000042b8;
+                if (excludeLeft == 0) goto tailExamine;
               } while ((UInt8 *)excludeList[excludeIndex] != tailNode);
             }
             M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExcludedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailExcludedCount) + 1;
-            goto LAB_0000428c;
+            goto tailAdvance;
           }
-          goto LAB_00004448;
+          goto passDone;
         }
       }
       listSentinel = self + kIOATIR500Accelerator_textureVramListSentinel;
       firstPassFlags = !secondPass << 1;
       firstSkipped = (UInt8 *)0x0;
-LAB_00004040:
+headScanLoop:
       do {
         if ((node == listSentinel) || (walkEndFlags = (firstSkipped == node) << 1, firstSkipped == node))
-        goto LAB_00004448;
+        goto passDone;
         M<SInt32>(self + kIOATIR500Accelerator_vramScanExaminedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanExaminedCount) + 1;
         if (excludeCount < 1) {
           if (excludeCount == 0) {
-LAB_000040b8:
+headExamine:
             if ((bool)(firstPassFlags >> 1 & 1)) {
               textureRecord = M<SInt32>(node + 0x14);
               if ((textureRecord == 0) || (faceCount = (UInt32)M<UInt8>(textureRecord + 0x34), faceCount == 0))
-              goto LAB_00004124;
+              goto headStampCheck;
               if ((M<UInt16>(textureRecord + 0x28) & ~M<UInt16>(textureRecord + 0x1c)) == 0) {
                 facesChecked = 0;
                 faceCursor = textureRecord;
@@ -123,8 +123,8 @@ LAB_000040b8:
                   facesChecked = facesChecked + 1;
                   facesLeft = facesLeft - 1;
                   if (facesLeft == 0) {
-                    if (faceCount == facesChecked) goto LAB_00004124;
-                    goto LAB_00004040;
+                    if (faceCount == facesChecked) goto headStampCheck;
+                    goto headScanLoop;
                   }
                   faceFieldAPtr = (UInt16 *)(faceCursor + 0x1e);
                   faceFieldBPtr = (UInt16 *)(faceCursor + 0x2a);
@@ -135,7 +135,7 @@ LAB_000040b8:
             }
             else {
               textureRecord = M<SInt32>(node + 0x14);
-LAB_00004124:
+headStampCheck:
               stampReached = VCALL(M<SInt32>(self), 0x554)(self,M<UInt32>(textureRecord + 0xc));
               if (stampReached != 0) {
                 if (M<SInt32>(node + 0x48) != 0) {
@@ -155,8 +155,8 @@ LAB_00004124:
                 M<SInt32>(nextNode + 0x24) = prevNode;
                 M<UInt8 *>(node + 0x24) = node;
                 M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanEvictedCount) + 1;
-                if (listSentinel != node) goto LAB_00004430;
-                goto LAB_00004448;
+                if (listSentinel != node) goto passEndCheck;
+                goto passDone;
               }
               M<SInt32>(self + kIOATIR500Accelerator_vramScanBusyCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanBusyCount) + 1;
             }
@@ -175,7 +175,7 @@ LAB_00004124:
             }
             node = M<UInt8 *>(node + 0x28);
           }
-          goto LAB_00004040;
+          goto headScanLoop;
         }
         if ((UInt8 *)*excludeList != node) {
           excludeIndex = 0;
@@ -183,23 +183,23 @@ LAB_00004124:
           do {
             excludeIndex = excludeIndex + 1;
             excludeLeft = excludeLeft + -1;
-            if (excludeLeft == 0) goto LAB_000040b8;
+            if (excludeLeft == 0) goto headExamine;
           } while ((UInt8 *)excludeList[excludeIndex] != node);
         }
         M<SInt32>(self + kIOATIR500Accelerator_vramScanExcludedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanExcludedCount) + 1;
         node = M<UInt8 *>(node + 0x28);
       } while( true );
     }
-LAB_00004474:
+tossSurfaces:
     if ((M<SInt32>(neededBytes + 0x48) == 0) &&
        (tossStatus = this->tossSurfacesForVRAM((IOATIR500Surface *)(surfaceBytes),(VendorTextureBuffer **)(excludeList),excludeCount,(VendorTextureBuffer *)(neededBytes),false), tossStatus == 0)) {
       return 0;
     }
   }
   return 1;
-code_r0x00004264:
-  if (excludeCount != 0) goto LAB_00004294;
-LAB_000042b8:
+tailNoExcludeList:
+  if (excludeCount != 0) goto tailScanLoop;
+tailExamine:
   if ((bool)(firstPassFlags >> 1 & 1)) {
     textureRecord = M<SInt32>(tailNode + 0x14);
     if (textureRecord != 0) {
@@ -216,22 +216,22 @@ LAB_000042b8:
           do {
             tailFacesChecked = tailFacesChecked + 1;
             tailFacesLeft = tailFacesLeft - 1;
-            if (tailFacesLeft == 0) goto LAB_00004314;
+            if (tailFacesLeft == 0) goto tailFacesDone;
             faceFieldAPtr = (UInt16 *)(faceCursor + 0x1e);
             faceFieldBPtr = (UInt16 *)(faceCursor + 0x2a);
             faceCursor = faceCursor + 2;
           } while ((*faceFieldBPtr & ~*faceFieldAPtr) == 0);
         }
         M<SInt32>(self + kIOATIR500Accelerator_vramScanTailInUseCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailInUseCount) + 1;
-        goto joined_r0x00004360;
+        goto tailEvictBusy;
       }
-LAB_00004314:
-      if (tailFacesChecked != faceCount) goto LAB_00004294;
+tailFacesDone:
+      if (tailFacesChecked != faceCount) goto tailScanLoop;
     }
     stampReached = VCALL(M<SInt32>(self), 0x554)(self,M<UInt32>(textureRecord + 0xc));
     if (stampReached == 0) {
       M<SInt32>(self + kIOATIR500Accelerator_vramScanTailBusyCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailBusyCount) + 1;
-joined_r0x00004360:
+tailEvictBusy:
       if (node == (UInt8 *)0x0) {
         node = tailNode;
       }
@@ -245,10 +245,10 @@ joined_r0x00004360:
         M<UInt8 *>(tailNode + 0x24) = tailSentinel;
         M<UInt8 *>(M<SInt32>(tailNode + 0x28) + 0x24) = tailNode;
       }
-LAB_0000428c:
+tailAdvance:
       tailNode = M<UInt8 *>(tailNode + 0x24);
       tailAtSentinel = tailNode == tailSentinel;
-      goto LAB_00004294;
+      goto tailScanLoop;
     }
   }
   if (M<SInt32>(tailNode + 0x48) != 0) {
@@ -268,13 +268,13 @@ LAB_0000428c:
   M<SInt32>(nextNode + 0x24) = prevNode;
   M<UInt8 *>(tailNode + 0x24) = tailNode;
   M<SInt32>(self + kIOATIR500Accelerator_vramScanTailEvictedCount) = M<SInt32>(self + kIOATIR500Accelerator_vramScanTailEvictedCount) + 1;
-  if (tailSentinel != tailNode) goto LAB_00004430;
-  goto LAB_00004448;
-LAB_00004430:
+  if (tailSentinel != tailNode) goto passEndCheck;
+  goto passDone;
+passEndCheck:
   if ((bool)(walkEndFlags >> 1 & 1)) {
-LAB_00004448:
-    if (!(bool)(firstPassFlags >> 1 & 1)) goto LAB_00004474;
+passDone:
+    if (!(bool)(firstPassFlags >> 1 & 1)) goto tossSurfaces;
     secondPass = true;
   }
-  goto LAB_00004450;
+  goto retryAlloc;
 }

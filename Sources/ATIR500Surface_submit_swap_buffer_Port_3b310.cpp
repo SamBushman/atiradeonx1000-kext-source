@@ -106,7 +106,7 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, eDoSwap doSwap, IOATIR500G
        batchHeaderAddr == 0)) {
       return;
     }
-    goto LAB_0003b900;
+    goto submitSlot;
   }
   swapFirstOnly = (doSwap == 1) << 1;
   if (doSwap == 1) {
@@ -181,17 +181,17 @@ void ATIR500Surface::submit_swap_buffer(UInt32 panel, eDoSwap doSwap, IOATIR500G
         wordIndex = 10;
       }
       else {
-LAB_0003b5e0:
+checkDualMode:
         wordIndex = 6;
-        if (dualMode != 0) goto LAB_0003b5ec;
+        if (dualMode != 0) goto writePanel1SwapRegs;
       }
     }
     else {
       if (panel != 1) {
         dualMode = M<int>(accelAddr + 0x894);
-        goto LAB_0003b5e0;
+        goto checkDualMode;
       }
-LAB_0003b5ec:
+writePanel1SwapRegs:
       wordIndex = 10;
       M<UInt32>(slotHeaderAddr + 0x38) = 0x1b4e;
       M<unsigned int>(slotHeaderAddr + 0x3c) = (swapValue & ~M<unsigned int>(accelAddr + 0x89c)) << 0x10 | 0x80000000;
@@ -263,12 +263,12 @@ LAB_0003b5ec:
     swdsActive = true;
   }
   if ((accelerator[0x9b0] == 0x0) || (!swdsActive)) {
-LAB_0003b870:
+noSwdsBlit:
     swdsFlag = 0;
   }
   else if (M<int>(accelerator + panel * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0) {
     if ((M<int>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram) == 0) ||
-       (M<int>(accelerator + (unsigned int)(panel == 0) * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0)) goto LAB_0003b870;
+       (M<int>(accelerator + (unsigned int)(panel == 0) * 0x18 + kIOATIR500Accelerator_swdsPanel0Flag) == 0)) goto noSwdsBlit;
     cmdWords = ((ATIRadeonX1000 *)(accelerator))->SWDSWriteBlitToCmdBuf((UInt32 *)(cmd), cmdWords, true, (unsigned int)(panel == 0));
     swdsFlag = 1;
   }
@@ -285,7 +285,7 @@ LAB_0003b870:
   M<unsigned int>((int)Vol(slot->header) + 0x14) = paddedWords;
   M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) =
        M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 0xfffffffe;
-LAB_0003b900:
+submitSlot:
   cmdBuffer = M<int>(slotBytes + 0x14);
   if (M<int>(cmdBuffer + 0x14) != 0) {
     if (M<int>(slotBytes + 4) == 0) {

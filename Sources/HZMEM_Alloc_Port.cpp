@@ -103,29 +103,29 @@ UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind, UI
       if (*slotCursor == 0) {
         scanLeft = *pool;
         runBlocks = blocksNeeded;
-        if (scanLeft == 0) goto LAB_000454ac;
+        if (scanLeft == 0) goto allocAtPoolEnd;
         freeRun = 0;
         startBlock = 0;
         scanIndex = 0;
-        goto LAB_00045460;
+        goto scanBlock;
       }
       blockSlot = blockSlot + 1;
       slotCursor = slotCursor + 4;
       slotsLeft = slotsLeft + -1;
     } while (slotsLeft != 0);
   }
-  goto LAB_00045438;
-code_r0x00045488:
+  goto allocFailed;
+nextBlock:
   scanIndex = scanIndex + 1;
   scanLeft = scanLeft + -1;
-  if (scanLeft == 0) goto LAB_000454ac;
-LAB_00045460:
+  if (scanLeft == 0) goto allocAtPoolEnd;
+scanBlock:
   freeRun = freeRun + 1;
   if (M<char>(scanIndex + pool[3]) == '\x01') {
     startBlock = scanIndex + 1;
     freeRun = 0;
   }
-  if (freeRun != blocksNeeded) goto code_r0x00045488;
+  if (freeRun != blocksNeeded) goto nextBlock;
   if (blocksNeeded != 0) {
     fillPtr = (UInt8 *)(startBlock + pool[3]);
     fillLeft = blocksNeeded;
@@ -137,24 +137,24 @@ LAB_00045460:
   }
   if (startBlock != -1) {
     startOffset = blockSize * startBlock;
-LAB_00045584:
+recordSlot:
     pool[blockSlot * 4 + 6] = startOffset;
     pool[blockSlot * 4 + 8] = blocksNeeded * blockSize;
     pool[blockSlot * 4 + 7] = blockSize * runBlocks;
     pool[blockSlot * 4 + 5] = 1;
     M<SInt32>(M<SInt32>(hizDataBytes + kindOffset + 0x10) + 0x10) =
          M<SInt32>(M<SInt32>(hizDataBytes + kindOffset + 0x10) + 0x10) + 1;
-    goto LAB_0004543c;
+    goto packHandle;
   }
-LAB_000454ac:
+allocAtPoolEnd:
   kindPool = M<SInt32 *>(hizDataBytes + kindOffset + 0x10);
   if (((kindPool == (SInt32 *)0x0) || (usageMap = kindPool[3], usageMap == 0)) || (mapBlocks = *kindPool, mapBlocks < 1))
   {
     startOffset = 0;
-    goto LAB_00045584;
+    goto recordSlot;
   }
   startBlock = mapBlocks + -1;
-  if (M<char>(usageMap + startBlock) != '\0') goto LAB_00045438;
+  if (M<char>(usageMap + startBlock) != '\0') goto allocFailed;
   prevIndex = mapBlocks + -2;
   if ((prevIndex < 0) || (M<char>(usageMap + prevIndex) == '\x01')) {
     runBlocks = 1;
@@ -184,11 +184,11 @@ LAB_000454ac:
       } while (fillCount != 0);
     }
     startOffset = blockSize * startBlock;
-    goto LAB_00045584;
+    goto recordSlot;
   }
-LAB_00045438:
+allocFailed:
   blockSlot = 0xffffffff;
-LAB_0004543c:
+packHandle:
   if (blockKind == 1) {
     return surfaceHzField & 0x3ff | (blockSlot & 0x3ff) << 10 | surfaceHzField & 0x3ff00000;
   }

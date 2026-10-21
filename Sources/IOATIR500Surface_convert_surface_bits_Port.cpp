@@ -40,10 +40,10 @@ UInt32 IOATIR500Surface::convert_surface_bits(UInt32 selectorBits) {
   }
   selectorBit = 1;
   do {
-    if ((selectorBit & selectorBits) == 0) goto LAB_00012454;
+    if ((selectorBit & selectorBits) == 0) goto nextSelectorBit;
     if (selectorBit == 0x10) {
       formatSlot = 6;
-LAB_00012420:
+setSlotBit:
       result = result | 1 << ((M<SInt32>(self + formatSlot * 4 + 0xb70) - (SInt32)(self + kIOATIR500Surface_buffers)) / 0x78 & 0x3fU
                            );
     }
@@ -57,7 +57,7 @@ LAB_00012420:
             formatSlot = 2;
           }
           else {
-            if (selectorBit != 0x100) goto LAB_00012454;
+            if (selectorBit != 0x100) goto nextSelectorBit;
             formatSlot = 3;
           }
         }
@@ -65,31 +65,31 @@ LAB_00012420:
           formatSlot = 8;
         }
         else {
-          if (selectorBit != 0x10000) goto LAB_00012454;
+          if (selectorBit != 0x10000) goto nextSelectorBit;
           formatSlot = 9;
         }
-        goto LAB_00012420;
+        goto setSlotBit;
       }
       if (selectorBit == 2) {
         formatSlot = 0;
-        goto LAB_00012420;
+        goto setSlotBit;
       }
       if (2 < selectorBit) {
         if (selectorBit == 4) {
           formatSlot = 4;
         }
         else {
-          if (selectorBit != 8) goto LAB_00012454;
+          if (selectorBit != 8) goto nextSelectorBit;
           formatSlot = 5;
         }
-        goto LAB_00012420;
+        goto setSlotBit;
       }
       if (selectorBit == 1) {
         formatSlot = 1;
-        goto LAB_00012420;
+        goto setSlotBit;
       }
     }
-LAB_00012454:
+nextSelectorBit:
     selectorBit = selectorBit << 1;
     if (selectorBits < selectorBit) {
       return result;

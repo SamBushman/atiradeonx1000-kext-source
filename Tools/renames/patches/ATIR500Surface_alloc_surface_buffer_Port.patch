@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 16:22:50.711891599 -0700
-+++ b/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 16:22:50.713265845 -0700
+--- a/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 20:36:39.384398601 -0700
++++ b/Sources/ATIR500Surface_alloc_surface_buffer_Port.cpp	2026-10-20 20:36:39.385497312 -0700
 @@ -33,151 +33,158 @@
  
    UInt16 height;
@@ -56,7 +56,7 @@
 +    accel = M<int>(self + kIOATIR500Surface_accelerator);
    }
    if (M<int>(self + kIOATIR500Surface_boundDVDContext) == 0) {
- LAB_0003e330:
+ allocFromPool:
 -    if (M<int>(iVar7 + 0xd0) == 0) {
 -      iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
 -                         M<UInt32>(bufferBytes + 0x10),0x1000,0x10000,M<int>(iVar7 + 0x84c) - 0x10000);
@@ -81,7 +81,7 @@
 +    vramLimit = M<UInt32>(accel + kIOATIR500Accelerator_usableVramSize);
 +    if ((M<unsigned int>(accel + kIOATIR500Accelerator_vramSize) <= vramLimit) ||
         ((1 < (UInt8)((char)bufferBytes[0x3a] - 0x2dU) && (bufferBytes[0x3a] != 0xb))))
-     goto LAB_0003e330;
+     goto allocFromPool;
 -    iVar7 = ((ATIR500Memory *)(M<UInt8 *>(iVar7 + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)bufferBytes),
 -                       M<UInt32>(bufferBytes + 0x10),0x1000,uVar5,M<unsigned int>(iVar7 + 0x9c) - uVar5);
 -    if (iVar7 == 0) {
@@ -90,7 +90,7 @@
 +                       M<UInt32>(bufferBytes + 0x10),0x1000,vramLimit,M<unsigned int>(accel + kIOATIR500Accelerator_vramSize) - vramLimit);
 +    if (allocOk == 0) {
 +      accel = M<int>(self + kIOATIR500Surface_accelerator);
-       goto LAB_0003e330;
+       goto allocFromPool;
      }
    }
 -  if (uVar8 == 0) {
@@ -120,11 +120,11 @@
 +    if (numPipes != 4) {
 +      alignment = numPipes << 4;
 +      alignedPitch = 0;
-       if (alignment == 0) goto LAB_0003e544;
+       if (alignment == 0) goto alignHeight;
      }
 -    uVar5 = alignment * ((int)(alignment + uVar8 + -1) / alignment);
 +    alignedPitch = alignment * ((int)(alignment + minPitch + -1) / alignment);
- LAB_0003e544:
+ alignHeight:
      height = M<UInt16>(bufferBytes + 0x1e);
 -    uVar6 = (unsigned int)height;
 +    alignedHeight = (unsigned int)height;
@@ -158,7 +158,7 @@
    alignment = 0x20;
 -  if (iVar7 == 4) {
 +  if (numPipes == 4) {
- LAB_0003e3e8:
+ roundPitch:
 -    uVar5 = alignment * ((int)(alignment + uVar8 + -1) / alignment);
 +    alignedPitch = alignment * ((int)(alignment + minPitch + -1) / alignment);
    }
@@ -167,7 +167,7 @@
 -    uVar5 = 0;
 +    alignment = numPipes << 4;
 +    alignedPitch = 0;
-     if (alignment != 0) goto LAB_0003e3e8;
+     if (alignment != 0) goto roundPitch;
    }
    height = M<UInt16>(bufferBytes + 0x1e);
 -  uVar6 = (unsigned int)height;
@@ -218,11 +218,11 @@
 +  if (numPipes != 4) {
 +    alignment = numPipes << 4;
 +    chromaPitch = 0;
-     if (alignment == 0) goto LAB_0003e4a4;
+     if (alignment == 0) goto alignChromaHeight;
    }
 -  uVar4 = alignment * ((int)(alignment + uVar6 + -1) / alignment);
 +  chromaPitch = alignment * ((int)(alignment + minPitch + -1) / alignment);
- LAB_0003e4a4:
+ alignChromaHeight:
    height = M<UInt16>(bufferBytes + 0x1e);
 -  uVar6 = (unsigned int)height;
 +  alignedHeight = (unsigned int)height;

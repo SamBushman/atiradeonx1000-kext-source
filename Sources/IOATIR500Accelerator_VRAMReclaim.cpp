@@ -14,9 +14,9 @@
  * real VRAM-reclamation problem and share real field/list conventions.
  *
  * `freeToAllocTextureVRAM` is transcribed AS LITERALLY AS POSSIBLE,
- * preserving the real decompile's own Ghidra-assigned label names
- * (`LAB_00004040` etc.) and variable names as real C++ `goto` labels/
- * locals verbatim, rather than force-restructuring them into "clean"
+ * preserving the real decompile's own label structure (Ghidra's
+ * `LAB_00004040` etc., since given purpose names such as `headScanLoop`)
+ * and variable names as real C++ `goto` labels/locals, rather than force-restructuring them into "clean"
  * control flow - the same discipline `IOATIR500Surface_
  * AllocAllSlaveSwapBuffers.cpp` already established for a function this
  * dense, and doubly important here: an earlier draft of this exact

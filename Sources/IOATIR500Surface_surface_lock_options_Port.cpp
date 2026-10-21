@@ -66,21 +66,21 @@ IOReturn IOATIR500Surface::surface_lock_options(eLockType lockType, UInt32 lockO
   if (newLockState != 0x0) {
     stampPending = false;
     result = -0x1ffffd34;
-    goto LAB_00016360;
+    goto unlockAndReturn;
   }
   stateBits = M<unsigned int>(self + kIOATIR500Surface_stateBits);
   if ((stateBits & 0x20000000) != 0) {
-LAB_00016330:
+rejectLock:
     stampPending = false;
     newLockState = 0x0;
     result = -0x1ffffd34;
-    goto LAB_00016360;
+    goto unlockAndReturn;
   }
   if (((((bool)(isReadLock >> 1 & 1)) && ((M<unsigned int>(self + kIOATIR500Surface_contextReqBits) & 0x7ffc00) != 0)) &&
       (M<int>(self + kIOATIR500Surface_boundDVDContext) != 0)) && (self[0xbf0] != 0x0)) {
     lockOptions = lockOptions | 3;
   }
-  else if (M<int>(surfaceBuffer + 0x10) == 0) goto LAB_00016330;
+  else if (M<int>(surfaceBuffer + 0x10) == 0) goto rejectLock;
   transferBuffer = M<int>(surfaceBuffer + 0x24);
   neededBuffers = M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3;
   if ((transferBuffer == 0) || (stampPending = true, M<int>(transferBuffer + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) {
@@ -90,8 +90,8 @@ LAB_00016330:
   buffersResident = (stateBits & neededBuffers) == 0;
   if (lockOptions == 1) {
     if ((((lockType != 2) && (!buffersResident)) && (!stampPending)) || (self[0xbf4] == 0x0))
-    goto LAB_00015e70;
-LAB_00015ec8:
+    goto lockWithoutMapping;
+lockResidentBuffer:
     self[0xc08] = 0x1;
     if ((neededBuffers & stateBits) == 0) {
       result = 0;
@@ -99,10 +99,10 @@ LAB_00015ec8:
     else {
       result = this->alloc_surfaces_retry(neededBuffers,(eLockType)(lockType));
       if (result != 0) {
-LAB_00016344:
+allocFailed:
         stampPending = false;
         newLockState = 0x0;
-        goto LAB_00016360;
+        goto unlockAndReturn;
       }
     }
     dataRaw[4] = (unsigned int)M<UInt16>(surfaceBuffer + 0x18);
@@ -127,21 +127,21 @@ LAB_00016344:
   }
   else {
     if (lockOptions == 0) {
-      if (((lockType == 2) || (buffersResident)) || (stampPending)) goto LAB_00015fe4;
+      if (((lockType == 2) || (buffersResident)) || (stampPending)) goto lockViaTransferBuffer;
     }
     else {
       if (lockOptions == 2) {
         if ((!stampPending) || (M<char>(transferBuffer + 0x58) == '\0')) {
-          if ((buffersResident) && (self[0xbf4] != 0x0)) goto LAB_00015ec8;
-          if (((lockType != 2) && (!buffersResident)) && (!stampPending)) goto LAB_00015e70;
+          if ((buffersResident) && (self[0xbf4] != 0x0)) goto lockResidentBuffer;
+          if (((lockType != 2) && (!buffersResident)) && (!stampPending)) goto lockWithoutMapping;
         }
-LAB_00015fe4:
+lockViaTransferBuffer:
         if ((self[0xbf7] == 0x0) || (self[0xc08] != 0x0))
-        goto LAB_000160bc;
+        goto checkTransferBuffer;
         if (transferBuffer == 0) {
-LAB_00016170:
+noTransferBuffer:
           result = 0;
-LAB_00016174:
+moveToBackingStore:
           if (M<int>(surfaceBuffer + 8) != 0) {
             if ((bool)(isReadLock >> 1 & 1)) {
               copyOk = this->copy_buffer_to_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
@@ -153,7 +153,7 @@ LAB_00016174:
               stampPending = false;
               newLockState = 0x3;
               result = -0x1ffffd38;
-              goto LAB_00016360;
+              goto unlockAndReturn;
             }
           }
           stampPending = true;
@@ -174,7 +174,7 @@ LAB_00016174:
               else {
                 transferBuffer = M<int>(surfaceBuffer + 0x24);
               }
-              if (M<int *>(transferBuffer + 0x10) == (int *)0x0) goto LAB_000160c4;
+              if (M<int *>(transferBuffer + 0x10) == (int *)0x0) goto checkTransferStamp;
               VCALL(*M<int *>(transferBuffer + 0x10), 0x18)(M<int *>(transferBuffer + 0x10));
               M<UInt32>(M<int>(surfaceBuffer + 0x24) + 0x10) = 0;
               transferBuffer = M<int>(surfaceBuffer + 0x24);
@@ -182,10 +182,10 @@ LAB_00016174:
             else {
               transferBuffer = M<int>(surfaceBuffer + 0x24);
             }
-LAB_000160bc:
-            if (transferBuffer == 0) goto LAB_00016170;
+checkTransferBuffer:
+            if (transferBuffer == 0) goto noTransferBuffer;
           }
-LAB_000160c4:
+checkTransferStamp:
           if ((M<int>(transferBuffer + 0x54) == M<int>(self + kIOATIR500Surface_stamp)) &&
              (M<char>(transferBuffer + 0x58) == '\0')) {
             if ((bool)(isReadLock >> 1 & 1)) {
@@ -201,14 +201,14 @@ LAB_000160c4:
             else {
               self[0xbd1] = 0x0;
             }
-            if (result != 0) goto LAB_00016344;
+            if (result != 0) goto allocFailed;
             transferBuffer = M<int>(surfaceBuffer + 0x24);
           }
           else {
             result = 0;
           }
           if (((transferBuffer == 0) || (M<int>(transferBuffer + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) ||
-             (stampPending = false, M<char>(transferBuffer + 0x58) == '\0')) goto LAB_00016174;
+             (stampPending = false, M<char>(transferBuffer + 0x58) == '\0')) goto moveToBackingStore;
         }
         if (lockType == 2) {
           VCALL(M<int>(self), 0x5cc)
@@ -216,17 +216,17 @@ LAB_000160c4:
         }
         transferBuffer = M<int>(surfaceBuffer + 0x24);
         if (transferBuffer == 0) {
-LAB_00016350:
+failNoTransferBuffer:
           newLockState = 0x0;
           result = -0x1ffffd43;
-          goto LAB_00016360;
+          goto unlockAndReturn;
         }
         if (M<int>(transferBuffer + 0x10) == 0) {
           mapping = VCALL(*M<int *>(transferBuffer + 8), 0x14c)
                             (M<int *>(transferBuffer + 8),M<UInt32>(self + kIOATIR500Surface_task),0,1,0,0);
           M<UInt32>(transferBuffer + 0x10) = mapping;
           transferBuffer = M<int>(surfaceBuffer + 0x24);
-          if (M<int>(transferBuffer + 0x10) == 0) goto LAB_00016350;
+          if (M<int>(transferBuffer + 0x10) == 0) goto failNoTransferBuffer;
           if (M<char>(transferBuffer + 0x59) == '\0') {
             self[0xc09] = 0x1;
             transferBuffer = M<int>(surfaceBuffer + 0x24);
@@ -236,21 +236,21 @@ LAB_00016350:
         mapAddress = VCALL(*M<int *>(M<int>(surfaceBuffer + 0x24) + 0x10), 0xd0)(M<int *>(M<int>(surfaceBuffer + 0x24) + 0x10));
         newLockState = 0x3;
         *dataRaw = mapAddress + (unsigned int)M<UInt16>(M<int>(surfaceBuffer + 0x24) + 0x50);
-        goto LAB_00015e7c;
+        goto fillLockData;
       }
       if (lockOptions != 3) {
         stampPending = false;
         newLockState = 0x0;
         result = -0x1ffffd3e;
-        goto LAB_00016360;
+        goto unlockAndReturn;
       }
     }
-LAB_00015e70:
+lockWithoutMapping:
     stampPending = false;
     result = 0;
     newLockState = 0x2;
   }
-LAB_00015e7c:
+fillLockData:
   dataRaw[5] = (unsigned int)M<UInt16>(surfaceBuffer + 0x1c);
   dataRaw[6] = (unsigned int)M<UInt16>(surfaceBuffer + 0x1e);
   pixelFormat = M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0xf;
@@ -265,13 +265,13 @@ LAB_00015e7c:
     dataRaw[7] = 4;
   }
   dataRaw[8] = M<int>(self + kIOATIR500Surface_lockDataFlags);
-  dataRaw[0xd] = M<int>(self + kIOATIR500Surface_unknown_0xd74);
-  dataRaw[0xe] = M<int>(self + kIOATIR500Surface_unknown_0xd78);
-  dataRaw[0xf] = M<int>(self + kIOATIR500Surface_unknown_0xd7c);
-  dataWord16 = M<int>(self + kIOATIR500Surface_unknown_0xd80);
+  dataRaw[0xd] = M<int>(self + kIOATIR500Surface_lockDataWord13);
+  dataRaw[0xe] = M<int>(self + kIOATIR500Surface_lockDataWord14);
+  dataRaw[0xf] = M<int>(self + kIOATIR500Surface_lockDataWord15);
+  dataWord16 = M<int>(self + kIOATIR500Surface_lockDataWord16);
   dataRaw[9] = 0x1cccc;
   dataRaw[0x10] = dataWord16;
-LAB_00016360:
+unlockAndReturn:
   if ((bool)(isReadLock >> 1 & 1)) {
     self[0xbd0] = newLockState;
   }

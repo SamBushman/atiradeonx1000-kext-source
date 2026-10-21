@@ -52,7 +52,7 @@ void IOATIR500Surface::prune_buffers() {
       M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer1) = self + kIOATIR500Surface_buffer1;
       M<UInt8 *>(self + kIOATIR500Surface_attachmentBuffer4) = self + kIOATIR500Surface_buffer4;
     }
-    goto LAB_00012fec;
+    goto walkBuffers;
   }
   requiredBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   if ((requiredBits & 1) == 0) {
@@ -61,7 +61,7 @@ void IOATIR500Surface::prune_buffers() {
       if ((stateBits & 2) != 0) {
         requestedBits = M<UInt32>(self + kIOATIR500Surface_reqBits) | 1;
         M<UInt32>(self + kIOATIR500Surface_reqBits) = requestedBits;
-        goto LAB_00012f00;
+        goto mergeRequestBits;
       }
     }
     else {
@@ -75,7 +75,7 @@ void IOATIR500Surface::prune_buffers() {
     requestedBits = M<UInt32>(self + kIOATIR500Surface_reqBits) | 1;
     M<UInt32>(self + kIOATIR500Surface_reqBits) = requestedBits;
   }
-LAB_00012f00:
+mergeRequestBits:
   requiredBits = requiredBits | requestedBits;
   M<UInt32>(self + kIOATIR500Surface_contextReqBits) = requiredBits;
   if ((requiredBits & 1) == 0) {
@@ -105,7 +105,7 @@ LAB_00012f00:
     }
   }
   M<UInt32>(self + kIOATIR500Surface_stateBits) = stateBits | 0x10000000;
-LAB_00012fec:
+walkBuffers:
   bufferIndex = 0;
   cursor = self;
   while( true ) {

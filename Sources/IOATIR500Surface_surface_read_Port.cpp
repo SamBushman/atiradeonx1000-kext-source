@@ -99,18 +99,18 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32
   GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   readBuffer = M<int>(self + kIOATIR500Surface_attachmentBuffers);
   if ((M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3 & M<unsigned int>(self + kIOATIR500Surface_stateBits)) == 0) {
-LAB_00014ae0:
+checkBufferState:
     if (((M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0x20000000) != 0) || (M<int>(readBuffer + 0x10) == 0)) {
-LAB_00014af4:
+unlockBusy:
       GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
       return 0xe00002cc;
     }
   }
   else {
-    if (M<int>(readBuffer + 0x24) == 0) goto LAB_00014b30;
-    if (M<char>(M<int>(readBuffer + 0x24) + 0x58) != '\0') goto LAB_00014ae0;
+    if (M<int>(readBuffer + 0x24) == 0) goto unlockOk;
+    if (M<char>(M<int>(readBuffer + 0x24) + 0x58) != '\0') goto checkBufferState;
     retryStatus = this->alloc_surfaces_retry(M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3,(eLockType)(0));
-    if (retryStatus != 0) goto LAB_00014af4;
+    if (retryStatus != 0) goto unlockBusy;
     readBuffer = M<int>(self + kIOATIR500Surface_attachmentBuffers);
   }
   rightEdge = x + copyWidth;
@@ -200,7 +200,7 @@ LAB_00014af4:
     GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
     return result;
   }
-LAB_00014b30:
+unlockOk:
   GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500Surface_accelerator) + 0x840));
   return 0;
 }

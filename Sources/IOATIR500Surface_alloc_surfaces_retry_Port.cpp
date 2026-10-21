@@ -60,30 +60,30 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 flags, eLockType lockType
         lockState = self[0xbd0];
       }
       else {
-        if (!(bool)(isWriteLock >> 1 & 1)) goto LAB_000148e0;
+        if (!(bool)(isWriteLock >> 1 & 1)) goto tryAllocate;
         lockState = self[0xbd1];
       }
-      if (lockState != 0x0) goto LAB_00014970;
+      if (lockState != 0x0) goto failBusy;
     }
-LAB_000148e0:
-    if ((M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0x20000000) != 0) goto LAB_00014970;
-    if ((M<unsigned int>(self + kIOATIR500Surface_stateBits) & flags) == 0) goto LAB_00014968;
+tryAllocate:
+    if ((M<unsigned int>(self + kIOATIR500Surface_stateBits) & 0x20000000) != 0) goto failBusy;
+    if ((M<unsigned int>(self + kIOATIR500Surface_stateBits) & flags) == 0) goto succeed;
     if ((!(bool)(isNoLock >> 1 & 1)) && (M<char>(M<int>(self + kIOATIR500Surface_accelerator) + 0x80) == '\0')) {
       return 0xe00002be;
     }
     /* the decompile passed `this` as a leading argument and dropped the last one: shipped asm 0x14910 is (this, mask = flags, keepMask = 0, bool = 0) */
     pageqResult = this->alloc_surfaces_pageq(flags,0,false);
-    if (pageqResult == 0) goto LAB_00014968;
-    if (pageqResult == 2) goto LAB_00014970;
+    if (pageqResult == 0) goto succeed;
+    if (pageqResult == 2) goto failBusy;
     retriesLeft = retriesLeft + -1;
     if (retriesLeft == 0) {
       retriesLeft = this->alloc_surfaces_pageq(M<unsigned int>(self + kIOATIR500Surface_reqBits) & 3,0,true);   /* shipped asm 0x14988: r4 = self[0xc1c] & 3, r5 = 0, r6 = 1 */
       if (retriesLeft == 0) {
-LAB_00014968:
+succeed:
         result = 0;
       }
       else {
-LAB_00014970:
+failBusy:
         result = 0xe00002cc;
       }
       return result;

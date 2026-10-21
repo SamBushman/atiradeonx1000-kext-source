@@ -66,7 +66,7 @@ bool IOATIR500Accelerator::foundFramebuffer(IOFramebuffer *framebuffer) {
   knownCount = M<UInt32>(self + kIOATIR500Accelerator_displayCount);
   pathLength = 0x100;
   if (knownCount == 0) {
-LAB_000005a0:
+addFramebuffer:
     M<UInt8 *>(self + knownCount * 0x20 + 0xd4) = framebufferBytes;
     index = M<SInt32>(self + kIOATIR500Accelerator_displayCount);
     notification = GH_ZN13IOFramebuffer26addFramebufferNotificationEPFiP8OSObjectP(framebufferBytes,(UInt32)&IOATIR500Accelerator::display_change_handler,self,index);
@@ -98,7 +98,7 @@ LAB_000005a0:
         if (1 < knownCount) {
           return 0;
         }
-        goto LAB_000005a0;
+        goto addFramebuffer;
       }
       nextSlotFramebufferPtr = slotCursor + 0xf4;
       slotCursor = slotCursor + 0x20;

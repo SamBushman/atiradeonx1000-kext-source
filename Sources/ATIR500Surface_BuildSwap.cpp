@@ -429,16 +429,16 @@ void ATIR500Surface::build_swap() {
                 batchWords[batchIndex + 9] = 8;
               }
               else {
-LAB_0003f644:
-                if (overlapFlag != 0) goto LAB_0003f654;
+checkOverlap:
+                if (overlapFlag != 0) goto writePanel1Swap;
               }
             }
             else {
               if (panel != 1) {
                 overlapFlag = M<SInt32>(accelerator + kIOATIR500Accelerator_scanoutOverlapsVram);
-                goto LAB_0003f644;
+                goto checkOverlap;
               }
-LAB_0003f654:
+writePanel1Swap:
               batchWords[packetCursor] = 0x1b4e;
               batchWords[batchIndex + 7] =
                    scissorStart & ~M<UInt32>(accelerator + kIOATIR500Accelerator_display2Enabled) |

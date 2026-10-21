@@ -89,8 +89,8 @@ void ATIR500Surface::copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UI
   synchronous = (flags & 1) == 0;
   if (synchronous) {
     if ((backing == (UInt8 *)0x0) ||
-       (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto LAB_00043834;
-LAB_00043888:
+       (M<int>(backing + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) goto copyViaDMA;
+mapTransferBuffer:
     transferMap = M<int *>(transferBytes + 8);
   }
   else {
@@ -109,13 +109,13 @@ LAB_00043888:
       offsetAdjust = VCALL(M<int>(self), 0x5f0)(self,bufferBytes,index,level,0,0,&pitch);
       offset = offset + offsetAdjust;
     }
-LAB_00043834:
+copyViaDMA:
     dmaResult = this->copy_buffer_using_DMA(x,y,w,h,index,level,(ATIR500SurfaceBuffer *)(bufferBytes),(VendorTransferBuffer *)(transferBytes),
                         offset,pitch,(IODirection)1,dmaFlags);
     if (dmaResult != 0) {
       return;
     }
-    if (synchronous) goto LAB_00043888;
+    if (synchronous) goto mapTransferBuffer;
     transferMap = M<int *>(backing + 8);
   }
   transferMap = (int *)VCALL(*transferMap, 0x150)
@@ -146,7 +146,7 @@ LAB_00043834:
                                (M<int *>(backing + 8),M<unsigned int>(M<int>(self + kIOATIR500Surface_accelerator) + 0x82c) | 1
                                );
     noBackingMap = (backingMap == (int *)0x0) << 1;
-    if (backingMap == (int *)0x0) goto LAB_00043db4;
+    if (backingMap == (int *)0x0) goto unmapAndRelease;
     mappedBase = VCALL(*backingMap, 0xd0)(backingMap);
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
     kernelMapped = false;
@@ -191,13 +191,13 @@ LAB_00043834:
     rowOffset = surfaceY * rowPitch;
     rowPitch = -rowPitch;
     surfaceRow = (UInt64 *)((int)surfaceRow + rowOffset + xScaled * (unsigned int)bytesPerPixel);
-    if (synchronous) goto LAB_00043ac4;
-LAB_00043ad0:
+    if (synchronous) goto checkRowFlip;
+flipRowPitch:
     rowPitch = -rowPitch;
   }
   else {
-LAB_00043ac4:
-    if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto LAB_00043ad0;
+checkRowFlip:
+    if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto flipRowPitch;
   }
   kernelPathBits = !kernelMapped << 1;
   rowBytes = sampleScaleX * (unsigned int)bytesPerPixel * w;
@@ -206,7 +206,7 @@ LAB_00043ac4:
     tilingBits = M<unsigned int>(bufferBytes + 0x3c);
   }
   if (synchronous) {
-    if ((tilingBits >> 0x14 & 0xf) < 2) goto LAB_00043b24;
+    if ((tilingBits >> 0x14 & 0xf) < 2) goto copyRows;
     endY = surfaceY - h;
     if (endY < surfaceY) {
       hasColumns = (xScaled < xScaled + w) << 3;
@@ -241,7 +241,7 @@ LAB_00043ac4:
     if (1 < (tilingBits >> 0x14 & 0xf)) {
       M<UInt8>(M<int>(bufferBytes + 0x24) + 0x58) = 0;
     }
-LAB_00043b24:
+copyRows:
     if (sampleScaleX == 1) {
       if (0 < h) {
         row = 0;
@@ -329,7 +329,7 @@ LAB_00043b24:
   if (!(bool)(kernelPathBits >> 1 & 1)) {
     VCALL(M<int>(self), 0x600)(self,bufferBytes);
   }
-LAB_00043db4:
+unmapAndRelease:
   VCALL(*transferMap, 0x18)(transferMap);
   if (!(bool)(noBackingMap >> 1 & 1)) {
     VCALL(*backingMap, 0x18)(backingMap);

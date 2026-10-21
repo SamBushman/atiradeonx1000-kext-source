@@ -51,7 +51,7 @@ UInt32 IOATIR500Surface::allocAllSlaveSwapBuffers(UInt32 panel, UInt32 swapBuffe
   do {
     if (M<SInt32>(counterOffset + accelerator + 0x114) == 0) {
       if (memoryDescriptor == (SInt32 *)0x0) {
-LAB_00011f54:
+unwindSlots:
         /* Failure unwind: release the slots allocated so far, walking backwards from entries[slotNumber]. The shipped code has no exit condition here
            (issue #32: it keeps walking down through memory until it faults); the loop is kept exactly that way. */
         victim = &rec->entries[slotNumber];
@@ -63,8 +63,8 @@ LAB_00011f54:
               if (v->memory != (void *)0x0) {
                 VCALL(*(SInt32 *)v->memory, 0x18)((SInt32 *)v->memory);
               }
-              v->unknown_0x0e = 0;
-              v->unknown_0x0c = 2;
+              v->lockCount = 0;
+              v->usageKind = 2;
               slotNumber = slotNumber + 1;
               v->unknown_0x00 = 0;
               v->gartOffset = 0;
@@ -91,7 +91,7 @@ LAB_00011f54:
             return 1;
           }
           accelerator = M<SInt32>(self + kIOATIR500Surface_accelerator);
-          goto LAB_00011f54;
+          goto unwindSlots;
         }
         bufferIndex = bufferIndex + 1;
         swapHeader = (VendorSwapBufferHeader *)VCALL(*memoryDescriptor, 0x1cc)(memoryDescriptor);

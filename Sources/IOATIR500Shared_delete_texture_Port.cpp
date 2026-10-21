@@ -98,7 +98,7 @@ IOReturn IOATIR500Shared::delete_texture(VendorTextureBuffer *texture) {
     if (textureBytes[0x20] == 0x7) {
       refTexture = M<UInt8 *>(textureBytes + 0x58);
       M<UInt32>(textureBytes + 0x58) = 0;
-LAB_00017ac4:
+releaseReferencedTexture:
       refCount = GH_OSDecrementAtomic(M<int>(refTexture + 0x14) + 0x10);
       if (refCount == 1) {
         this->delete_texture((VendorTextureBuffer *)(refTexture));
@@ -107,23 +107,23 @@ LAB_00017ac4:
     else if (textureBytes[0x20] == 0x6) {
       refTexture = M<UInt8 *>(textureBytes + 0x54);
       M<UInt32>(textureBytes + 0x54) = 0;
-      goto LAB_00017ac4;
+      goto releaseReferencedTexture;
     }
     if (M<int>(textureBytes + 4) != 0) {
       accel = M<int *>(self + kIOATIR500Shared_accelerator);
       accelVtable = *accel;
       stamp = M<UInt32>(M<int>(textureBytes + 0x14) + 0xc);
-LAB_00017b60:
+checkStamp:
       stampReached = VCALL(accelVtable, 0x554)(accel,stamp);
       if (stampReached == 0) {
         ((IOATIR500Accelerator *)(M<UInt8 *>(self + kIOATIR500Shared_accelerator)))->addOrphanTexture((IOTextureBuffer *)((UInt8 *)textureBytes));
-        goto LAB_00017cf0;
+        goto finishDelete;
       }
       if (M<int>(textureBytes + 4) != 0) {
         VCALL(*M<int *>(self + kIOATIR500Shared_accelerator), 0x5ac)(M<int *>(self + kIOATIR500Shared_accelerator),textureBytes);
       }
     }
-LAB_00017ba0:
+freeHandle:
     this->free_buf_handle(textureBytes,*M<UInt32 *>(textureBytes + 0x14));
     if (M<int *>(textureBytes + 8) != (int *)0x0) {
       VCALL(*M<int *>(textureBytes + 8), 0x18)(M<int *>(textureBytes + 8));
@@ -140,9 +140,9 @@ LAB_00017ba0:
         accel = M<int *>(self + kIOATIR500Shared_accelerator);
         accelVtable = *accel;
         stamp = M<UInt32>(M<int>(textureBytes + 0x14) + 8);
-        goto LAB_00017b60;
+        goto checkStamp;
       }
-      goto LAB_00017ba0;
+      goto freeHandle;
     }
     if (bufferType == 0x0) {
       surface = M<UInt8 *>(textureBytes + 0x50);
@@ -164,7 +164,7 @@ LAB_00017ba0:
       }
     }
     else {
-      if (bufferType != 0x1) goto LAB_00017cf0;
+      if (bufferType != 0x1) goto finishDelete;
       refTexture = M<UInt8 *>(textureBytes + 0x50);
       if (refTexture != (UInt8 *)0x0) {
         refCount = GH_OSDecrementAtomic(M<int>(refTexture + 0x14) + 0x10);
@@ -178,7 +178,7 @@ LAB_00017ba0:
     this->free_buf_handle(textureBytes,*M<UInt32 *>(textureBytes + 0x14));
   }
   VCALL(*M<int *>(self + kIOATIR500Shared_accelerator), 0x574)(M<int *>(self + kIOATIR500Shared_accelerator),textureBytes,0x80);
-LAB_00017cf0:
+finishDelete:
   M<int>(M<int>(self + kIOATIR500Shared_accelerator) + 0x72c) = M<int>(M<int>(self + kIOATIR500Shared_accelerator) + 0x72c) + -1;
   return 0;
 }

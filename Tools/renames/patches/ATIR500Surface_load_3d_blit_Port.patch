@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_load_3d_blit_Port.cpp	2026-10-20 16:35:09.748979600 -0700
-+++ b/Sources/ATIR500Surface_load_3d_blit_Port.cpp	2026-10-20 16:35:09.750298188 -0700
+--- a/Sources/ATIR500Surface_load_3d_blit_Port.cpp	2026-10-20 20:44:49.058317488 -0700
++++ b/Sources/ATIR500Surface_load_3d_blit_Port.cpp	2026-10-20 20:44:49.059590588 -0700
 @@ -39,30 +39,38 @@
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
      UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
@@ -129,16 +129,16 @@
 -  if (iVar8 != 4) {
 -    iVar5 = iVar8 << 4;
 -    uVar10 = 0;
--    if (iVar5 == 0) goto LAB_0003d700;
+-    if (iVar5 == 0) goto writePitchPacket;
 +  tileAlignment = 0x20;
 +  if (numPipes != 4) {
 +    tileAlignment = numPipes << 4;
 +    alignedPitch = 0;
-+    if (tileAlignment == 0) goto LAB_0003d700;
++    if (tileAlignment == 0) goto writePitchPacket;
    }
 -  uVar10 = iVar5 * ((SInt32)(uVar9 + iVar5 + -1) / iVar5);
 +  alignedPitch = tileAlignment * ((SInt32)(minPitchFloor + tileAlignment + -1) / tileAlignment);
- LAB_0003d700:
+ writePitchPacket:
    dest[0x1a] = 0x13cd;
 -  dest[0x1b] = uVar10;
 -  uVar10 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(accelerator + kIOATIR500Accelerator_hzmem)),M<UInt32>(bufferBytes + 0x28),0);

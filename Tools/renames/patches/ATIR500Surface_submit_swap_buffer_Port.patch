@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-20 09:46:51.693376344 -0700
-+++ b/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-20 09:46:51.694578778 -0700
+--- a/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-20 20:57:58.206939924 -0700
++++ b/Sources/ATIR500Surface_submit_swap_buffer_Port.cpp	2026-10-20 20:57:58.207904223 -0700
 @@ -30,186 +30,198 @@
  void ATIR500Surface::submit_swap_buffer(UInt32 panel, UInt32 swapArg) {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -77,7 +77,7 @@
 +       allocResult == 0)) {
        return;
      }
-     goto LAB_0003be90;
+     goto submitSlot;
    }
 -  uVar9 = M<UInt16>(self + iVar8 + 0xcae) + 1 & 3;
 -  M<SInt16>(self + iVar8 + 0xcae) = (SInt16)uVar9;
@@ -180,20 +180,20 @@
 +        wordIndex = 10;
        }
        else {
- LAB_0003bcbc:
+ checkDualMode:
 -        uVar9 = 6;
--        if (iVar1 != 0) goto LAB_0003bcc8;
+-        if (iVar1 != 0) goto writePanel1SwapRegs;
 +        wordIndex = 6;
-+        if (dualMode != 0) goto LAB_0003bcc8;
++        if (dualMode != 0) goto writePanel1SwapRegs;
        }
      }
      else {
        if (panel != 1) {
 -        iVar1 = M<int>(iVar12 + 0x894);
 +        dualMode = M<int>(accelAddr + 0x894);
-         goto LAB_0003bcbc;
+         goto checkDualMode;
        }
- LAB_0003bcc8:
+ writePanel1SwapRegs:
 -      uVar9 = 10;
 -      M<UInt32>(iVar6 + 0x38) = 0x1b4e;
 -      M<unsigned int>(iVar6 + 0x3c) = (uVar10 & ~M<unsigned int>(iVar12 + 0x89c)) << 0x10 | 0x80000000;
@@ -279,7 +279,7 @@
 +  M<unsigned int>((int)Vol(slot->header) + 0x14) = paddedWords;
 +  M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) =
 +       M<unsigned int>((int)Vol(rec->entries[0].header) + 0x1c) & 0xfffffffe;
- LAB_0003be90:
+ submitSlot:
 -  if (M<int>(pVVar19 + 4) == 0) {
 -    ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar19));
 +  if (M<int>(slotBytes + 4) == 0) {

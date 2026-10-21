@@ -1,5 +1,5 @@
---- a/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 16:29:00.412784914 -0700
-+++ b/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 16:29:00.414107296 -0700
+--- a/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 20:36:30.660802175 -0700
++++ b/Sources/ATIR500Surface_copy_from_buffer_Port.cpp	2026-10-20 20:36:30.661938703 -0700
 @@ -34,47 +34,57 @@
      UInt8 *transferBytes = reinterpret_cast<UInt8 *>(transfer);
  
@@ -104,7 +104,7 @@
      if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) {
 @@ -101,7 +111,7 @@
      }
- LAB_00043834:
+ copyViaDMA:
      dmaResult = this->copy_buffer_using_DMA(x,y,w,h,index,level,(ATIR500SurfaceBuffer *)(bufferBytes),(VendorTransferBuffer *)(transferBytes),
 -                        offset,pitch,(IODirection)1,uVar5);
 +                        offset,pitch,(IODirection)1,dmaFlags);
@@ -140,7 +140,7 @@
                                 );
 -    bVar29 = (backingMap == (int *)0x0) << 1;
 +    noBackingMap = (backingMap == (int *)0x0) << 1;
-     if (backingMap == (int *)0x0) goto LAB_00043db4;
+     if (backingMap == (int *)0x0) goto unmapAndRelease;
 -    iVar14 = VCALL(*backingMap, 0xd0)(backingMap);
 +    mappedBase = VCALL(*backingMap, 0xd0)(backingMap);
      tilingBits = M<unsigned int>(bufferBytes + 0x3c);
@@ -208,14 +208,14 @@
 +    rowOffset = surfaceY * rowPitch;
 +    rowPitch = -rowPitch;
 +    surfaceRow = (UInt64 *)((int)surfaceRow + rowOffset + xScaled * (unsigned int)bytesPerPixel);
-     if (synchronous) goto LAB_00043ac4;
- LAB_00043ad0:
+     if (synchronous) goto checkRowFlip;
+ flipRowPitch:
 -    uVar28 = -uVar28;
 +    rowPitch = -rowPitch;
    }
    else {
- LAB_00043ac4:
-     if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto LAB_00043ad0;
+ checkRowFlip:
+     if ((M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0x70000000) != 0) goto flipRowPitch;
    }
 -  bVar30 = !bVar4 << 1;
 -  iVar14 = uVar6 * (unsigned int)bytesPerPixel * w;
@@ -227,7 +227,7 @@
      tilingBits = M<unsigned int>(bufferBytes + 0x3c);
    }
    if (synchronous) {
-     if ((tilingBits >> 0x14 & 0xf) < 2) goto LAB_00043b24;
+     if ((tilingBits >> 0x14 & 0xf) < 2) goto copyRows;
 -    iVar14 = surfaceY - h;
 -    if (iVar14 < surfaceY) {
 -      bVar31 = (xScaled < xScaled + w) << 3;
@@ -283,7 +283,7 @@
 @@ -232,96 +242,96 @@
        M<UInt8>(M<int>(bufferBytes + 0x24) + 0x58) = 0;
      }
- LAB_00043b24:
+ copyRows:
 -    if (uVar6 == 1) {
 +    if (sampleScaleX == 1) {
        if (0 < h) {
@@ -434,7 +434,7 @@
 +  if (!(bool)(kernelPathBits >> 1 & 1)) {
      VCALL(M<int>(self), 0x600)(self,bufferBytes);
    }
- LAB_00043db4:
+ unmapAndRelease:
    VCALL(*transferMap, 0x18)(transferMap);
 -  if (!(bool)(bVar29 >> 1 & 1)) {
 +  if (!(bool)(noBackingMap >> 1 & 1)) {

@@ -45,7 +45,7 @@ bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 recordIndex, UInt32 si
   oldCount16 = M<UInt16>(self + recordOffset + 0x402);
   currentCount = (UInt32)oldCount16;
   if (currentCount == 0x10) {
-LAB_00002580:
+returnFailure:
     result = 0;
   }
   else {
@@ -68,7 +68,7 @@ LAB_00002580:
               allocatedBuffer = (UInt8 *)(allocatedBuffer + -0x1c);
             } while ((SInt32)currentCount <= freeIndex);
           }
-          goto LAB_00002580;
+          goto returnFailure;
         }
         bufferIndex = bufferIndex + 1;
         commandBuffer = commandBuffer + 0x1c;

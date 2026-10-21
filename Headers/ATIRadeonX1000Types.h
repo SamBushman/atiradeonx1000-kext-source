@@ -604,8 +604,8 @@ struct SwapBufferEntry {
     UInt32  unknown_0x00;                 /* +0x00, zeroed with the entry, no reader found */
     UInt32  gartOffset;                   /* +0x04, CONFIRMED: the buffer's address in the GART once mapped (submit_buffer is given gartOffset + 0x20); 0 = not mapped yet, so map_transfer_to_GART runs first. Same field as VendorTransferBuffer's +0x04 */
     void   *memory;                       /* +0x08, CONFIRMED: the IOBufferMemoryDescriptor allocated by alloc{Master,AllSlave}SwapBuffer(s); released with vtable +0x18 */
-    UInt16  unknown_0x0c;                 /* +0x0c, set to 2 on init and free (a state or count) */
-    UInt16  unknown_0x0e;                 /* +0x0e, set to 0 on init and free */
+    UInt16  usageKind;                 /* +0x0c, INFERRED: what the buffer is used as (1 SWDS entry, 2 swap buffer on init and free, 3 the stack transfer buffer of surface_read) */
+    UInt16  lockCount;                 /* +0x0e, CONFIRMED: lock count; freeTransferToAllocGART refuses to free a buffer while it is non-zero; 0 on init and free */
     UInt32  stamp;                        /* +0x10, CONFIRMED: the submit stamp of the last use (RecordSubmit), the wait target of PrepareSlot */
     VendorSwapBufferHeader *header;       /* +0x14, CONFIRMED: the mapped address of `memory` (descriptor vtable +0x1cc), where the batch is written */
     UInt32  rectWordIndex;                /* +0x18, INFERRED from the layout note in SubmitSwapBuffer.cpp (entries[0] only is known to use it) */

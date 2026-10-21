@@ -40,7 +40,7 @@ bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
   surfaceBuffer = (UInt8 *)(self + index * 0x78 + 0xa8);
   if ((M<SInt32>(self + index * 0x78 + 0xb8) == 0) || (M<SInt32>(self + index * 0x78 + 0xb0) != 0)
      ) {
-    if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto LAB_00013448;
+    if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto clearStateBit;
   }
   else {
     allocated = VCALL(M<SInt32>(self), 0x5d0)(self,surfaceBuffer);
@@ -52,14 +52,14 @@ bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
     if ((3U >> (index & 0x3f) & 1) != 0) {
       M<UInt32>(self + kIOATIR500Surface_stateBits) = M<UInt32>(self + kIOATIR500Surface_stateBits) | 0x10000000;
     }
-    if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto LAB_00013448;
+    if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto clearStateBit;
     if (((UInt32)moveFromBacking) != 0) {
       this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
-      goto LAB_00013448;
+      goto clearStateBit;
     }
   }
   this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
-LAB_00013448:
+clearStateBit:
   M<UInt32>(self + kIOATIR500Surface_stateBits) =
        (-2 << (index & 0x1f) | 0xfffffffeU >> 0x20 - (index & 0x1f)) & M<UInt32>(self + kIOATIR500Surface_stateBits);
   return 1;

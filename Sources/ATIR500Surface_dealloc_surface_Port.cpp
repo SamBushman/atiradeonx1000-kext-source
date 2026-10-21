@@ -43,7 +43,7 @@ UInt32 ATIR500Surface::dealloc_surface(UInt32 surfaceIndex) {
   SInt32 *accel;
   PanelRecord *rec0 = PANEL_RECORD(self, 0);     /* the surface's first panel */
   
-  if (2 < surfaceIndex - 6) goto LAB_0003e150;
+  if (2 < surfaceIndex - 6) goto freeBuffer9Hz;
   bufferOffset = surfaceIndex * 0x78;
   if ((M<SInt32>(self + bufferOffset + 0xb0) != 0) && (accel = M<SInt32 *>(self + kIOATIR500Surface_accelerator), accel[0x2e5] != 0)
      ) {
@@ -52,14 +52,14 @@ UInt32 ATIR500Surface::dealloc_surface(UInt32 surfaceIndex) {
     entry = (UInt8 *)&rec0->entries[1 + slot];     /* the submit slot in use */
     if ((SInt32)Vol(rec0->entries[1 + slot].memory) == 0) {
       allocResult = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(0,Vol(rec0->swapBufferSize));
-      if (allocResult != 0) goto LAB_0003e028;
+      if (allocResult != 0) goto mapSlotToGART;
       entry = (UInt8 *)0x0;
     }
     else {
       counterBefore = accel[0x1e2];
       counterDelta = VCALL(*accel, 0x54c)(accel,Vol(rec0->entries[1 + slot].stamp));
       accel[0x1e2] = counterBefore + counterDelta;
-LAB_0003e028:
+mapSlotToGART:
       if ((SInt32)Vol(rec0->entries[1 + slot].gartOffset) == 0) {
         ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(entry));
       }
@@ -92,7 +92,7 @@ LAB_0003e028:
     self[bufferOffset + 0xdd] = 0x0;
     M<UInt32>(self + bufferOffset + 0xd0) = M<UInt32>(self + bufferOffset + 0xd0) & 0xfff003ff | 0xffc00;
   }
-LAB_0003e150:
+freeBuffer9Hz:
   if ((surfaceIndex == 9) && ((M<UInt32>(self + kIOATIR500Surface_buffer9HzBlockField) & 0x3ff00000) != 0x3ff00000)) {
     HZMEM_Free((_HZDATA *)((UInt8 *)(M<SInt32>(self + kIOATIR500Surface_accelerator) + 0x870)),M<UInt32>(self + kIOATIR500Surface_buffer9HzBlockField),2);
     self[0x516] = 0x0;

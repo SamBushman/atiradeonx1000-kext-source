@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500Surface_alloc_surfaces_retry_Port.cpp	2026-10-20 19:39:27.206517290 -0700
-+++ b/Sources/IOATIR500Surface_alloc_surfaces_retry_Port.cpp	2026-10-20 19:39:27.207559088 -0700
+--- a/Sources/IOATIR500Surface_alloc_surfaces_retry_Port.cpp	2026-10-20 20:59:53.314606498 -0700
++++ b/Sources/IOATIR500Surface_alloc_surfaces_retry_Port.cpp	2026-10-20 20:59:53.315905673 -0700
 @@ -30,6 +30,9 @@
  extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
  

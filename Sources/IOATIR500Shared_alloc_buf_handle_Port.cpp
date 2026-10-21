@@ -46,7 +46,7 @@ bool IOATIR500Shared::alloc_buf_handle(void*record, UInt32*outHandle) {
       wordByteOffset = wordIndex * 4;
       bitmapWord = M<UInt32>(M<SInt32>(self + kIOATIR500Shared_handleBitmap) + wordByteOffset);
       if (bitmapWord != 0xffffffff) {
-LAB_00016c4c:
+scanBitmapWord:
         bitIndex = 0;
         bitsLeft = 0x20;
         break;
@@ -60,7 +60,7 @@ LAB_00016c4c:
         if (wordsLeft == 0) break;
         bitmapCursor = bitmapCursor + 1;
         bitmapWord = *bitmapCursor;
-        if (bitmapWord != 0xffffffff) goto LAB_00016c4c;
+        if (bitmapWord != 0xffffffff) goto scanBitmapWord;
       }
     }
     wordByteOffset = this->alloc_handles();
@@ -70,13 +70,13 @@ LAB_00016c4c:
   } while( true );
   while( true ) {
     bit = bitIndex;
-    if ((bitmapWord >> (bitIndex & 0x3f) & 1) == 0) goto LAB_00016c7c;
+    if ((bitmapWord >> (bitIndex & 0x3f) & 1) == 0) goto claimHandle;
     bitIndex = bitIndex + 1;
     bitsLeft = bitsLeft + -1;
     if (bitsLeft == 0) break;
   }
   bit = 0x20;
-LAB_00016c7c:
+claimHandle:
   handle = wordIndex * 0x20 + bitIndex;
   M<UInt32>(self + kIOATIR500Shared_handleHint) = handle + 1;
   M<void *>(handle * 4 + M<SInt32>(self + kIOATIR500Shared_handleTable)) = record;

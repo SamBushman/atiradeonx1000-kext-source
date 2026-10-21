@@ -139,7 +139,7 @@ void ATIR500Surface::shape_surface() {
     M<UInt32>(self + kIOATIR500Surface_contextReqBits) = shapeMask;
   }
   if ((windowMode & 0x7c0000) == 0) {
-LAB_0003c260:
+noWindowScale:
     widthScale = 1;
     heightScale = 1;
   }
@@ -147,7 +147,7 @@ LAB_0003c260:
     scaleCode = windowMode & 0x700000;
     if (scaleCode == 0) {
       scaleCode = windowMode & 0xc0000;
-      if (scaleCode == 0) goto LAB_0003c260;
+      if (scaleCode == 0) goto noWindowScale;
       if (scaleCode == 0x40000) {
         widthScale = 1;
         heightScale = 2;
@@ -176,7 +176,7 @@ LAB_0003c260:
       heightScale = 1;
     }
     else {
-      if (scaleCode != 0x100000) goto LAB_0003c260;
+      if (scaleCode != 0x100000) goto noWindowScale;
       widthScale = 2;
       heightScale = 1;
     }
@@ -287,14 +287,14 @@ LAB_0003c260:
     formatBit = 1 << (windowMode & 0xf);
     if ((formatBit & 0x1c18) == 0) {
       if (((formatBit & 0x2000) == 0) ||
-         (tilingMode = 0x1, M<SInt16>(self + kIOATIR500Surface_height) < 0x10)) goto LAB_0003c52c;
+         (tilingMode = 0x1, M<SInt16>(self + kIOATIR500Surface_height) < 0x10)) goto linearTiling;
     }
     else {
       tilingMode = ((0xf < M<SInt16>(self + kIOATIR500Surface_height)) + '\x02');
     }
   }
   else {
-LAB_0003c52c:
+linearTiling:
     tilingMode = 0x0;
   }
   if ((M<SInt32>(self + kIOATIR500Surface_panel) != 0xffff) && ((shapeMask & 2) != 0)) {
@@ -474,19 +474,19 @@ LAB_0003c52c:
           }
         }
         else {
-LAB_0003c9c4:
+linearSingleLevel:
           tilingMode = 0x0;
           levelCount = 1;
         }
       }
       else {
-LAB_0003c9d0:
+linearMipChain:
         tilingMode = 0x0;
       }
     }
     else {
-      if (levelCount != 1) goto LAB_0003c9d0;
-      if (faceCount != 1) goto LAB_0003c9c4;
+      if (levelCount != 1) goto linearMipChain;
+      if (faceCount != 1) goto linearSingleLevel;
       if ((SInt32)baseHeight < 0x10) {
         tilingMode = 0x2;
         faceCount = 1;
@@ -676,14 +676,14 @@ LAB_0003c9d0:
     reqBits = M<UInt32>(self + kIOATIR500Surface_contextReqBits);
   }
   if (M<SInt32>(self + kATIR500Surface_overlayExists) != 0) {
-    if (self[0xbf0] != 0x0) goto LAB_0003ce90;
+    if (self[0xbf0] != 0x0) goto updateOverlayRect;
     overlayAllocated = this->alloc_overlay();
     self[0xbf0] = overlayAllocated;
   }
   if (self[0xbf0] == 0x0) {
     return;
   }
-LAB_0003ce90:
+updateOverlayRect:
   framebufferIndex = this->getFramebufferIndex();
   framebufferRecord = M<SInt32 *>(self + framebufferIndex * 8 + 0xd60);
   if (((*framebufferRecord != 0) && (M<SInt16>(framebufferRecord + 4) != 0)) && (M<SInt16>((SInt32)framebufferRecord + 0x12) != 0))

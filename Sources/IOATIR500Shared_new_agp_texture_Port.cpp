@@ -60,7 +60,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
                                    GH_page_size);
       if (memory != (SInt32 *)0x0) {
         pageAddress = VCALL(*memory, 0x1cc)(memory);
-        goto LAB_00017310;
+        goto createTextureBuffer;
       }
     }
     else {
@@ -84,7 +84,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
             return (VendorTextureBuffer *)(candidate);
           }
           M<UInt32>((SInt32)candidate + 0x54) = 1;
-          if (memory != (SInt32 *)0x0) goto LAB_00017310;
+          if (memory != (SInt32 *)0x0) goto createTextureBuffer;
           break;
         }
         prevCandidate = candidate;
@@ -92,7 +92,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt
       }
       memory = (SInt32 *)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(pageAddress,roundedLength,0x10002,M<UInt32>(self + 8));
       if (memory != (SInt32 *)0x0) {
-LAB_00017310:
+createTextureBuffer:
         newTexture = (void *)VCALL(*M<SInt32 *>(self + kIOATIR500Shared_accelerator), 0x570)(M<SInt32 *>(self + kIOATIR500Shared_accelerator),0x80);
         if (newTexture == (void *)0x0) {
           VCALL(*memory, 0x18)(memory);

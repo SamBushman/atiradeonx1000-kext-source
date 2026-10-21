@@ -58,15 +58,15 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, eIOSurfaceModeBits modeBits)
   if ((M<unsigned int>(self + kIOATIR500Surface_lockFlags) & 0xffff0000) != 0) {
     acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
     result = 0xe00002cc;
-    goto LAB_000147d0;
+    goto unlockAndReturn;
   }
   if (((M<int>(self + kIOATIR500Surface_boundDVDContext) == 0) && (M<int>(self + kIOATIR500Surface_glContextList) == 0)) && (M<int>(self + kIOATIR500Surface_context2DList) == 0)
      ) {
-LAB_00014370:
+applyModeBits:
     if ((modeBitsValue & 0x20) != 0) {
       requestedId = mode;
       mode = 0xffff;
-LAB_00014454:
+switchPanel:
       currentPanel = M<unsigned int>(self + kIOATIR500Surface_panel);
       if (((currentPanel != 0xffff) && (mode != currentPanel)) &&
          (self == M<UInt8 *>(currentPanel * 0x20 + M<int>(self + kIOATIR500Surface_accelerator) + 0xe8))) {
@@ -93,7 +93,7 @@ LAB_00014454:
         M<UInt32>(self + kIOATIR500Surface_shapeBits) = 0;
         panelNo = M<int>(self + kIOATIR500Surface_panel);
         if (M<int>(self + panelNo * 8 + 0xd64) == 0xc) {
-LAB_0001460c:
+resultOk:
           result = 0;
         }
         else {
@@ -115,7 +115,7 @@ LAB_0001460c:
             acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
             if (acceleratorPtr == 0) {
               panelNo = M<int>(self + kIOATIR500Surface_panel);
-              goto LAB_0001460c;
+              goto resultOk;
             }
             result = 0;
             M<int>(acceleratorPtr + 0x804) = M<int>(acceleratorPtr + 0x804) + 0xc;
@@ -171,7 +171,7 @@ LAB_0001460c:
           acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
         }
       }
-      goto LAB_000147d0;
+      goto unlockAndReturn;
     }
     acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
     if (mode < M<unsigned int>(acceleratorPtr + kIOATIR500Accelerator_displayCount)) {
@@ -195,19 +195,19 @@ LAB_0001460c:
         case 0xd:
           requiredKind = 0x10;
         }
-        if (M<SInt16>(mode * 0x78 + acceleratorPtr + kIOATIR500Accelerator_scanout1BufferBytesPerPixel) == requiredKind) goto LAB_00014454;
+        if (M<SInt16>(mode * 0x78 + acceleratorPtr + kIOATIR500Accelerator_scanout1BufferBytesPerPixel) == requiredKind) goto switchPanel;
       }
     }
   }
   else {
     if (((modeBitsValue ^ M<unsigned int>(self + kIOATIR500Surface_modeBits)) & 0x803f) == 0) {
       modeBitsValue = modeBitsValue | M<unsigned int>(self + kIOATIR500Surface_modeBits) & 0xffff7fc0;
-      goto LAB_00014370;
+      goto applyModeBits;
     }
     acceleratorPtr = M<int>(self + kIOATIR500Surface_accelerator);
   }
   result = 0xe00002bc;
-LAB_000147d0:
+unlockAndReturn:
   GH_IOLockUnlock(M<UInt32>(acceleratorPtr + kIOATIR500Accelerator_commandLock));
   return result;
 }

@@ -269,7 +269,7 @@ bool IOATIR500Accelerator::start(IOService *provider) {
   M<UInt32>(self + kIOATIR500Accelerator_unknown_0x220) = 0;
   workLoop = GH_ZN10IOWorkLoop8workLoopEv();
   M<SInt32>(self + kIOATIR500Accelerator_workLoop) = workLoop;
-  if (workLoop == 0) goto LAB_00002f98;
+  if (workLoop == 0) goto failStart;
   garbageCollectorSource = GH_ZN22IOInterruptEventSource20interruptEventSourceEP8OSObjectP(self,garbage_collector,0,0);
   M<SInt32>(self + kIOATIR500Accelerator_garbageCollectorSource) = garbageCollectorSource;
   if (garbageCollectorSource != 0) {
@@ -344,13 +344,13 @@ bool IOATIR500Accelerator::start(IOService *provider) {
   }
   pciDevice = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(provider,GH_IOPCIDevice_metaClass);
   M<SInt32>(self + kIOATIR500Accelerator_pciDevice) = pciDevice;
-  if (pciDevice == 0) goto LAB_00002f98;
+  if (pciDevice == 0) goto failStart;
   commandLock = GH_IOLockAlloc();
   M<SInt32>(self + kIOATIR500Accelerator_commandLock) = commandLock;
-  if (commandLock == 0) goto LAB_00002f98;
+  if (commandLock == 0) goto failStart;
   M<UInt32>(self + kIOATIR500Accelerator_commandBufferMemoryOptions) = 0;
   agpConfigured = VCALL(M<SInt32>(self), 0x580)(self,provider);
-  if (agpConfigured == 0) goto LAB_00002f98;
+  if (agpConfigured == 0) goto failStart;
   serializer = (SInt32 *)GH_ZN12OSSerializer9forTargetEPvPFbS0_S0_P11OSSerializeES0_(self,(void *)&IOATIR500Accelerator::serializePerformanceStats,0);
   if (serializer != (SInt32 *)0x0) {
     VCALL(M<SInt32>(self), 0x160)(self,"PerformanceStatistics",serializer);
@@ -361,15 +361,15 @@ bool IOATIR500Accelerator::start(IOService *provider) {
   { void *mem = OSObject::operator new(0x14);   /* real: OSObject::operator new(0x14) + the ATIR500Memory constructor; the null check must be explicit: `new T()` compiled to an unconditional constructor call (the #187 bug class; found by the IOATIR500Accelerator::start hand world) */
     memoryManager = (UInt8 *)(mem ? ::new (mem) ATIR500Memory() : 0); }
   M<UInt8 *>(self + kIOATIR500Accelerator_vramPool) = memoryManager;
-  if (memoryManager == (UInt8 *)0x0) goto LAB_00002f98;
+  if (memoryManager == (UInt8 *)0x0) goto failStart;
   poolInitialized = VCALL(M<SInt32>(memoryManager), 0x48)(memoryManager);
   if (poolInitialized == 0) {
     VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_vramPool), 0x18)(M<SInt32 *>(self + kIOATIR500Accelerator_vramPool));
     M<UInt32>(self + kIOATIR500Accelerator_vramPool) = 0;
-    goto LAB_00002f98;
+    goto failStart;
   }
   scratchAllocated = ((IOATIR500Accelerator *)(self))->allocCommandBuffer((VendorCommandBuffer *)(self + kIOATIR500Accelerator_scratchCommandBuffer), 0x1000);
-  if (scratchAllocated == 0) goto LAB_00002f98;
+  if (scratchAllocated == 0) goto failStart;
   if (((M<UInt32>(self + kIOATIR500Accelerator_hwCapabilityBits) & 1) != 0) &&
      (VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_scratchBufferDescriptor), 0x144)(M<SInt32 *>(self + kIOATIR500Accelerator_scratchBufferDescriptor),3),
      M<UInt32>(self + kIOATIR500Accelerator_gartSizeKB) >> 2 != 0)) {
@@ -383,16 +383,16 @@ bool IOATIR500Accelerator::start(IOService *provider) {
   VCALL(M<SInt32>(self), 0x16c)(self,"IOAccelRevision",0,2,0x20);
   registryRoot = (SInt32 *)GH_ZN15IORegistryEntry15getRegistryRootEv();
   if (registryRoot == (SInt32 *)0x0) {
-LAB_00002f28:
+skipFramebufferScan:
     framebuffersOk = 1;
   }
   else {
     property = VCALL(*registryRoot, 0x188)(registryRoot,"IOKitBuildVersion");
     buildVersionString = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(property,GH_OSString_metaClass);
-    if (buildVersionString == (SInt32 *)0x0) goto LAB_00002f28;
+    if (buildVersionString == (SInt32 *)0x0) goto skipFramebufferScan;
     buildVersion = VCALL(*buildVersionString, 0xe8)(buildVersionString);
     scanCount = GH_sscanf(buildVersion,"IOKit Component Version %d.%d:",kextMajorVersion,kextMinorVersion);
-    if ((scanCount != 2) || (6 < kextMajorVersion[0])) goto LAB_00002f28;
+    if ((scanCount != 2) || (6 < kextMajorVersion[0])) goto skipFramebufferScan;
     framebuffersOk = ((IOATIR500Accelerator *)(self))->findFramebuffers();
   }
   property = VCALL(*M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice), 0x188)(M<SInt32 *>(self + kIOATIR500Accelerator_pciDevice),"IOAGPCommandValue")
@@ -405,7 +405,7 @@ LAB_00002f28:
   if (framebuffersOk != 0) {
     return framebuffersOk;
   }
-LAB_00002f98:
+failStart:
   IOATIR500Accelerator::stop(provider);
   return 0;
 }

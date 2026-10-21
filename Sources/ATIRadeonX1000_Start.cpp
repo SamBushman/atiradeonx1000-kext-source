@@ -491,9 +491,9 @@ LAB_0001fc04:
                                 M<UInt32>(self + kIOATIR500Accelerator_swdsEntryIndex) = 0;
                                 M<UInt32>(self + kIOATIR500Accelerator_swdsEntry0) = 0;
                                 M<UInt32>(self + kIOATIR500Accelerator_swdsEntry0GartOffset) = 0;
-                                M<UInt16>(self + kIOATIR500Accelerator_swdsEntry0Field0c) = 1;
+                                M<UInt16>(self + kIOATIR500Accelerator_swdsEntry0UsageKind) = 1;
                                 M<UInt32>(self + kIOATIR500Accelerator_swdsEntry0Memory) = 0;
-                                M<UInt16>(self + kIOATIR500Accelerator_swdsEntry0Field0e) = 0;
+                                M<UInt16>(self + kIOATIR500Accelerator_swdsEntry0LockCount) = 0;
                                 M<UInt32>(self + kIOATIR500Accelerator_swdsEntry0Stamp) = 0;
                                 M<UInt32>(self + kIOATIR500Accelerator_swdsEntry0Header) = 0;
                                 commandBufferAllocated = IOATIR500Accelerator::allocCommandBuffer((VendorCommandBuffer *)(self + kIOATIR500Accelerator_swdsEntry0),0x1000);
