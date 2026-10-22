@@ -365,11 +365,11 @@ use	FUN_00009c80	iVar10	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory	iVar1
 use	FUN_00009c80	iVar10	fillCount	INFERRED	loop counter of the padding words	iVar10 = 7;	iVar10 = \(uVar12 >> 2\) - 1;
 use	FUN_00009c80	iVar10	pitchWordsMinus1	INFERRED	(pitch in words) - 1, registers 0x1140/0x1141	iVar10 = \(uVar12 >> 2\) - 1;	iVar10 = \*\(int \*\)\(param_1 \+ 0x40\);
 use	FUN_00009c80	iVar10	mapBase	INFERRED	ctx+0x40 after the final IOConnectMapMemory	iVar10 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
-use	FUN_0000a110	iVar6	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@1	iVar6 = \d+;
-use	FUN_0000a110	iVar6	fillCount	INFERRED	command-buffer idiom (see FUN_0000ae80): counter of the padding words	iVar6 = \d+;	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000a110	iVar6	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@1	iVar6 = (?:0x[0-9a-f]+|\d+);
+use	FUN_0000a110	iVar6	fillCount	INFERRED	command-buffer idiom (see FUN_0000ae80): counter of the padding words	iVar6 = (?:0x[0-9a-f]+|\d+);	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);
 use	FUN_0000a110	iVar6	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after the closing IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
-use	FUN_0000cb00	iVar7	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after IOConnectMapMemory	iVar7 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar7 = \d+;
-use	FUN_0000cb00	iVar7	fillCount	INFERRED	command-buffer idiom (see FUN_0000ae80): counter of the padding words	iVar7 = \d+;	
+use	FUN_0000cb00	iVar7	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after IOConnectMapMemory	iVar7 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar7 = (?:0x[0-9a-f]+|\d+);
+use	FUN_0000cb00	iVar7	fillCount	INFERRED	command-buffer idiom (see FUN_0000ae80): counter of the padding words	iVar7 = (?:0x[0-9a-f]+|\d+);	
 local	FUN_0000a110	param_2	headerWord	UNKNOWN	stored as word 1 of the packet header (cmdWrite[1])
 local	FUN_0000a110	param_3	enableFlag	INFERRED	stored as (param_3 != 0) in word 2
 local	FUN_0000a110	uVar1	quadWidth	INFERRED	ctx+0x578 >> 2: target width in 4-pixel units
@@ -389,3 +389,77 @@ local	FUN_0000cb00	uVar3	srcWidth	INFERRED	ctx+0x60
 local	FUN_0000cb00	uVar5	cmdAfterClear	CONFIRMED	FUN_000096a0's return
 use	FUN_0000cb00	iVar8	srcHeight	INFERRED	ctx+0x64, used as the height of the packet and source	iVar8 = \*\(int \*\)\(param_1 \+ 100\);	iVar8 = \*\(int \*\)\(param_1 \+ 0x40\);
 use	FUN_0000cb00	iVar8	closingMapBase	INFERRED	ctx+0x40 after the closing IOConnectMapMemory	iVar8 = \*\(int \*\)\(param_1 \+ 0x40\);	
+local	FUN_0000a4e0	param_2	slotIndex	INFERRED	index into the per-slot table at ctx+0xab0 (4 bytes each); also stored as packet word 1
+local	FUN_0000a4e0	param_3	pixelDesc	INFERRED	source descriptor: +0x8 pitch, +0xc FourCC ('argb' 0x61726762, 'ar15' 0x61723135, 'rgba' 0x72676261)
+local	FUN_0000a4e0	uVar3	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+local	FUN_0000a4e0	uVar7	surfaceHeight	INFERRED	ctx+0x57c
+local	FUN_0000a4e0	uVar4	surfaceWidth	INFERRED	ctx+0x578
+local	FUN_0000a4e0	uVar5	pitchBytes	INFERRED	ctx+0x588
+local	FUN_0000a4e0	local_48	dstLeft	INFERRED	4-float array {left, right, top, bottom} passed as &local_48
+local	FUN_0000a4e0	local_44	dstRight	INFERRED	second word
+local	FUN_0000a4e0	local_40	dstTop	INFERRED	third word
+local	FUN_0000a4e0	local_3c	dstBottom	INFERRED	fourth word
+use	FUN_0000a4e0	iVar6	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@1	iVar6 = (?:0x[0-9a-f]+|\d+);
+use	FUN_0000a4e0	iVar6	fillCount	INFERRED	counter of the padding words	iVar6 = (?:0x[0-9a-f]+|\d+);	iVar6 = \*\(int \*\)\(param_3 \+ 0xc\);
+use	FUN_0000a4e0	iVar6	formatCode	INFERRED	pixelDesc FourCC selecting the 0x680000/0xd00000 pitch encoding	iVar6 = \*\(int \*\)\(param_3 \+ 0xc\);	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000a4e0	iVar6	mapBase	INFERRED	ctx+0x40 after the closing IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
+local	FUN_0000aa00	param_2	slotIndex	INFERRED	index into the per-slot table at ctx+0xab0; also stored as packet word 1
+local	FUN_0000aa00	param_3	pixelDesc	INFERRED	source descriptor, +0x8 pitch
+local	FUN_0000aa00	uVar1	halfWidth	INFERRED	ctx+0x578 >> 1
+local	FUN_0000aa00	uVar3	pitchBytes	INFERRED	ctx+0x588
+local	FUN_0000aa00	uVar8	surfaceHeight	INFERRED	ctx+0x57c
+local	FUN_0000aa00	uVar5	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+local	FUN_0000aa00	local_58	dstLeft	INFERRED	4-float array {left, right, top, bottom} passed as &local_58
+local	FUN_0000aa00	local_54	dstRight	INFERRED	second word
+local	FUN_0000aa00	local_50	dstTop	INFERRED	third word
+local	FUN_0000aa00	local_4c	dstBottom	INFERRED	fourth word
+use	FUN_0000aa00	iVar7	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory	iVar7 = \*\(int \*\)\(param_1 \+ 0x40\);@1	iVar7 = (?:0x[0-9a-f]+|\d+);
+use	FUN_0000aa00	iVar7	fillCount	INFERRED	counter of the padding words	iVar7 = (?:0x[0-9a-f]+|\d+);	iVar7 = \(uVar3 >> 1\) - 1;
+use	FUN_0000aa00	iVar7	pitchWordsMinus1	INFERRED	(pitchBytes >> 1) - 1 written to registers 0x1140/0x1141	iVar7 = \(uVar3 >> 1\) - 1;	iVar7 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000aa00	iVar7	mapBase	INFERRED	ctx+0x40 after the closing IOConnectMapMemory	iVar7 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
+local	FUN_0000b7f0	param_2	headerWord	UNKNOWN	stored as word 1 of the packet header
+local	FUN_0000b7f0	param_3	enableFlag	INFERRED	stored as (param_3 != 0) in word 2
+local	FUN_0000b7f0	uVar3	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+local	FUN_0000b7f0	uVar4	surfaceWidth	INFERRED	ctx+0x578
+local	FUN_0000b7f0	uVar7	surfaceHeight	INFERRED	ctx+0x57c
+local	FUN_0000b7f0	local_78	srcLeft	INFERRED	4-float array {left, right, top, bottom} passed as &local_78 (FUN_00009ac0 srcCoords)
+local	FUN_0000b7f0	local_74	srcRight	INFERRED	second word
+local	FUN_0000b7f0	local_70	srcTop	INFERRED	third word
+local	FUN_0000b7f0	local_6c	srcBottom	INFERRED	fourth word
+local	FUN_0000b7f0	local_68	dstLeft	INFERRED	4-float array passed as &local_68 (FUN_00009ac0 dstCoords)
+local	FUN_0000b7f0	local_64	dstRight	INFERRED	second word
+local	FUN_0000b7f0	local_60	dstTop	INFERRED	third word
+local	FUN_0000b7f0	local_5c	dstBottom	INFERRED	fourth word
+use	FUN_0000b7f0	iVar5	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory	iVar5 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar5 = (?:0x[0-9a-f]+|\d+);
+use	FUN_0000b7f0	iVar5	fillCount	INFERRED	counter of the padding words	iVar5 = (?:0x[0-9a-f]+|\d+);	
+local	FUN_0000bbc0	param_2	headerWord	UNKNOWN	stored as word 1 of the packet header
+local	FUN_0000bbc0	param_3	secondWord	UNKNOWN	stored as word 2
+local	FUN_0000bbc0	param_4	widthPixels	INFERRED	width in pixels, converted to 32-bit words
+local	FUN_0000bbc0	param_5	height	INFERRED	rows; (height-1)<<11 in the size register
+local	FUN_0000bbc0	param_6	bytesPerPixel	INFERRED	< 5: pixels share a word, else whole words per pixel
+local	FUN_0000bbc0	uVar4	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+local	FUN_0000bbc0	uVar6	widthWords	INFERRED	row width in 32-bit words, passed to FUN_00009ac0 as source width
+local	FUN_0000bbc0	local_58	dstLeft	INFERRED	4-float array {left, right, top, bottom} passed as &local_58
+local	FUN_0000bbc0	local_54	dstRight	INFERRED	second word
+local	FUN_0000bbc0	local_50	dstTop	INFERRED	third word
+local	FUN_0000bbc0	local_4c	dstBottom	INFERRED	fourth word
+use	FUN_0000bbc0	iVar2	wholeWords	INFERRED	param_4 / pixels-per-word (rounded down; the +1 test makes it a ceiling)	iVar2 = param_4 / \(4 / param_6\);	iVar2 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000bbc0	iVar2	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory	iVar2 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar2 = (?:0x[0-9a-f]+|\d+);
+use	FUN_0000bbc0	iVar2	fillCount	INFERRED	counter of the padding words	iVar2 = (?:0x[0-9a-f]+|\d+);	iVar2 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000bbc0	iVar2	closingMapBase	INFERRED	ctx+0x40 after the closing IOConnectMapMemory	iVar2 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
+local	FUN_0000c160	param_1	ctx	INFERRED	VA context: +0x578 width, +0x57c height, +0x588 pitch
+local	FUN_0000c160	param_2	cmdPtr	CONFIRMED	command-stream write pointer; the function returns param_2 + 0x42 words
+local	FUN_0000c160	param_3	srcDesc	INFERRED	descriptor whose +0x8 word selects the vertical offset direction
+local	FUN_0000c160	param_4	fieldMode	INFERRED	1: height/2, otherwise height/4
+local	FUN_0000c160	param_5	flipFlag	INFERRED	1 inverts the +0x8 test below
+local	FUN_0000c160	uVar3	pitchBytes	INFERRED	ctx+0x588
+local	FUN_0000c160	uVar4	quadWidth	INFERRED	ctx+0x578 >> 2
+local	FUN_0000c160	uVar7	fieldHeight	INFERRED	ctx+0x57c >> 1 or >> 2 depending on fieldMode
+local	FUN_0000c160	puVar5	padCursor	INFERRED	walks the padding words
+local	FUN_0000c160	uVar6	sizeWord	INFERRED	(quadWidth-1) | (fieldHeight-1)<<11 | 0x80000000
+local	FUN_0000c160	fVar1	vertexConstA	UNKNOWN	FLOAT_0000d430, used as the first vertex coordinate
+local	FUN_0000c160	fVar2	vertexConstB	UNKNOWN	FLOAT_0000d43c, used as the second vertex coordinate
+local	FUN_0000c160	local_44	texOffsetA	INFERRED	FLOAT_0000d43c or d438 over fieldHeight, plus d430
+local	FUN_0000c160	local_3c	texOffsetB	INFERRED	the same offset plus d43c
+use	FUN_0000c160	iVar8	fillCount	INFERRED	counter of the padding words	iVar8 = [0-9]\w*;	iVar8 = \(uVar3 >> 1 & 0x7ffffffe\) - 1;
+use	FUN_0000c160	iVar8	pitchWordsMinus1	INFERRED	(pitchBytes >> 1) - 1 written to the pitch registers	iVar8 = \(uVar3 >> 1 & 0x7ffffffe\) - 1;	
