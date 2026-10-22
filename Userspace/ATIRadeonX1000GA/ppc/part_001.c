@@ -1,16 +1,16 @@
 #include "decls.h"
 
 /* __AllocateSurface @ 0x2750 (1420 bytes) */
-int __AllocateSurface(param_1, param_2, param_3, param_4)
-  int param_1;
-  uint param_2;
-  uint *param_3;
-  undefined4 param_4;
+int __AllocateSurface(accel, flags, surfaceDesc, userArg)
+  int accel;
+  uint flags;
+  uint *surfaceDesc;
+  undefined4 userArg;
 {
   uint uVar1;
   uint uVar2;
-  undefined4 *puVar3;
-  int iVar4;
+  undefined4 *record;
+  int status;
   uint uVar5;
   uint uVar6;
   int iVar7;
@@ -21,86 +21,86 @@ int __AllocateSurface(param_1, param_2, param_3, param_4)
   uint uVar12;
   uint uVar13;
   int *piVar14;
-  uint local_78;
-  int local_74;
-  uint local_70;
-  int *local_6c;
-  undefined4 local_68;
-  uint local_64;
-  uint local_60;
-  uint local_5c;
+  uint tiledFormatCode;
+  int outCount;
+  uint formatCode;
+  int *scalarOut0;
+  undefined4 scalarOut1;
+  uint scalarIn0;
+  uint scalarIn1;
+  uint scalarIn2;
   
-  puVar3 = (undefined4 *)_calloc(1,0x3c);
-  if ((param_2 & 1) == 0) {
-    if ((param_2 & 8) == 0) {
-      iVar4 = __DecodePixelFormat(param_3[1],puVar3 + 0xc,puVar3 + 0xd,puVar3 + 10,&local_70,
-                                  puVar3 + 0xb,0,puVar3 + 0xe);
-      if (iVar4 == 0) goto LAB_00002cb0;
-      uVar1 = param_3[6];
-      uVar12 = puVar3[10];
-      iVar4 = 1;
-      *(undefined2 *)((int)puVar3 + 0xe) = 0;
-      *(undefined2 *)(puVar3 + 3) = 0;
-      puVar3[7] = uVar1 / uVar12;
-      uVar2 = param_3[4];
-      *(short *)(puVar3 + 4) = (short)uVar2;
-      uVar1 = param_3[5];
-      puVar3[5] = uVar2;
-      *(short *)((int)puVar3 + 0x12) = (short)uVar1;
-      puVar3[6] = uVar1;
+  record = (undefined4 *)_calloc(1,0x3c);
+  if ((flags & 1) == 0) {
+    if ((flags & 8) == 0) {
+      status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,&formatCode,
+                                  record + 0xb,0,record + 0xe);
+      if (status == 0) goto LAB_00002cb0;
+      uVar1 = surfaceDesc[6];
+      uVar12 = record[10];
+      status = 1;
+      *(undefined2 *)((int)record + 0xe) = 0;
+      *(undefined2 *)(record + 3) = 0;
+      record[7] = uVar1 / uVar12;
+      uVar2 = surfaceDesc[4];
+      *(short *)(record + 4) = (short)uVar2;
+      uVar1 = surfaceDesc[5];
+      record[5] = uVar2;
+      *(short *)((int)record + 0x12) = (short)uVar1;
+      record[6] = uVar1;
       uVar1 = uVar12 * uVar2 * uVar1 + 3;
-      local_60 = (uVar1 & 0xfffffffc) + 0xfff & 0xfffff000;
+      scalarIn1 = (uVar1 & 0xfffffffc) + 0xfff & 0xfffff000;
       for (uVar1 = uVar1 >> 2; 0x3fff < uVar1; uVar1 = uVar1 >> 1) {
-        iVar4 = iVar4 << 1;
+        status = status << 1;
       }
-      local_74 = 2;
-      local_64 = ((uVar1 + 0xd) * iVar4 + 0x27) * 4 & 0xffffffe0;
-      iVar4 = _io_connect_method_scalarI_scalarO
-                        (*(undefined4 *)(param_1 + 0xc),9,&local_64,2,&local_6c,&local_74);
-      if (iVar4 == 0) {
-        *puVar3 = local_68;
-        uVar5 = param_3[4];
-        uVar2 = param_3[5];
-        uVar10 = *param_3;
+      outCount = 2;
+      scalarIn0 = ((uVar1 + 0xd) * status + 0x27) * 4 & 0xffffffe0;
+      status = _io_connect_method_scalarI_scalarO
+                        (*(undefined4 *)(accel + 0xc),9,&scalarIn0,2,&scalarOut0,&outCount);
+      if (status == 0) {
+        *record = scalarOut1;
+        uVar5 = surfaceDesc[4];
+        uVar2 = surfaceDesc[5];
+        uVar10 = *surfaceDesc;
         uVar9 = uVar12 * uVar5;
         uVar1 = uVar12 * uVar5 * uVar2 >> 2;
         uVar12 = uVar2;
         if (uVar1 < 0x4000) {
-          iVar4 = 1;
+          status = 1;
         }
         else {
-          iVar4 = 1;
+          status = 1;
           do {
             uVar1 = uVar1 >> 1;
             uVar2 = uVar2 >> 1;
             uVar12 = uVar12 >> 1;
-            iVar4 = iVar4 << 1;
+            status = status << 1;
           } while (0x3fff < uVar1);
         }
         uVar6 = 0x20;
         if (0x1f < uVar9) {
           uVar6 = uVar9;
         }
-        *local_6c = (uVar1 + 0xd) * iVar4 + 8;
-        local_6c[6] = uVar1 + 0xd;
-        local_6c[7] = iVar4;
-        local_6c[5] = uVar6 * uVar2;
-        local_6c[0x20] = 0x1393;
-        local_6c[0x21] = 10;
-        local_6c[0x22] = 0x5c8;
-        piVar14 = local_6c + 0x24;
-        local_6c[0x23] = 0x20000;
+        *scalarOut0 = (uVar1 + 0xd) * status + 8;
+        scalarOut0[6] = uVar1 + 0xd;
+        scalarOut0[7] = status;
+        scalarOut0[5] = uVar6 * uVar2;
+        scalarOut0[0x20] = 0x1393;
+        scalarOut0[0x21] = 10;
+        scalarOut0[0x22] = 0x5c8;
+        piVar14 = scalarOut0 + 0x24;
+        scalarOut0[0x23] = 0x20000;
         iVar7 = 3;
-        if (local_70 != 3) {
+        if (formatCode != 3) {
           iVar7 = 0;
         }
-        if (iVar4 != 0) {
+        if (status != 0) {
           iVar8 = 0;
           do {
             *piVar14 = 0x5cb;
             piVar14[1] = iVar7;
             piVar14[2] = 0x51b;
-            piVar14[3] = (local_70 & 0xf) << 8 | 0x53cc30f2;
+            piVar14[3] = (formatCode & 0xf) << 8 | 0x53cc30f2;
             piVar14[4] = 0x10501;
             piVar14[5] = 0;
             piVar14[6] = uVar6;
@@ -123,94 +123,94 @@ int __AllocateSurface(param_1, param_2, param_3, param_4)
               } while (uVar13 != uVar12);
             }
             iVar8 = iVar8 + 1;
-          } while (iVar4 != iVar8);
+          } while (status != iVar8);
         }
         *piVar14 = 0xd0b;
         piVar14[1] = 5;
         piVar14[2] = 0x5c8;
         piVar14[3] = 0x10000;
-        iVar4 = 0;
+        status = 0;
         goto LAB_00002ce0;
       }
     }
-    else if (((param_3[6] & 0x3f) == 0) &&
-            (iVar4 = __DecodePixelFormat(param_3[1],puVar3 + 0xc,puVar3 + 0xd,puVar3 + 10,0,
-                                         puVar3 + 0xb,0,puVar3 + 0xe), iVar4 != 0)) {
-      uVar2 = param_3[6];
-      *(undefined2 *)((int)puVar3 + 0xe) = 0;
-      *(undefined2 *)(puVar3 + 3) = 0;
-      puVar3[7] = uVar2 / (uint)puVar3[10];
-      uVar1 = param_3[4];
-      *(short *)(puVar3 + 4) = (short)uVar1;
-      local_5c = param_3[5];
-      puVar3[5] = uVar1;
-      *(short *)((int)puVar3 + 0x12) = (short)local_5c;
-      puVar3[6] = local_5c;
-      local_74 = 1;
-      local_5c = local_5c * uVar2;
-      local_60 = *param_3;
-      local_64 = param_2;
-      iVar4 = _io_connect_method_scalarI_scalarO
-                        (*(undefined4 *)(param_1 + 0xc),8,&local_64,3,puVar3,&local_74);
-      if (iVar4 == 0) goto LAB_00002ce0;
+    else if (((surfaceDesc[6] & 0x3f) == 0) &&
+            (status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,0,
+                                         record + 0xb,0,record + 0xe), status != 0)) {
+      uVar2 = surfaceDesc[6];
+      *(undefined2 *)((int)record + 0xe) = 0;
+      *(undefined2 *)(record + 3) = 0;
+      record[7] = uVar2 / (uint)record[10];
+      uVar1 = surfaceDesc[4];
+      *(short *)(record + 4) = (short)uVar1;
+      scalarIn2 = surfaceDesc[5];
+      record[5] = uVar1;
+      *(short *)((int)record + 0x12) = (short)scalarIn2;
+      record[6] = scalarIn2;
+      outCount = 1;
+      scalarIn2 = scalarIn2 * uVar2;
+      scalarIn1 = *surfaceDesc;
+      scalarIn0 = flags;
+      status = _io_connect_method_scalarI_scalarO
+                        (*(undefined4 *)(accel + 0xc),8,&scalarIn0,3,record,&outCount);
+      if (status == 0) goto LAB_00002ce0;
     }
     else {
 LAB_00002cb0:
-      iVar4 = -0x1ffffd39;
+      status = -0x1ffffd39;
     }
   }
   else {
-    puVar3[2] = param_4;
-    param_3[10] = (uint)puVar3;
-    iVar4 = __SetDestination(param_1,1,param_3);
-    if (iVar4 == 0) {
-      if ((param_2 & 2) != 0) {
-        local_60 = param_3[4];
-        local_5c = param_3[5];
-        local_74 = iVar4;
-        local_64 = param_2;
-        iVar4 = _io_connect_method_scalarI_scalarO
-                          (*(undefined4 *)(param_1 + 0xc),4,&local_64,3,0,&local_74);
-        if (iVar4 != 0) goto LAB_00002cb8;
+    record[2] = userArg;
+    surfaceDesc[10] = (uint)record;
+    status = __SetDestination(accel,1,surfaceDesc);
+    if (status == 0) {
+      if ((flags & 2) != 0) {
+        scalarIn1 = surfaceDesc[4];
+        scalarIn2 = surfaceDesc[5];
+        outCount = status;
+        scalarIn0 = flags;
+        status = _io_connect_method_scalarI_scalarO
+                          (*(undefined4 *)(accel + 0xc),4,&scalarIn0,3,0,&outCount);
+        if (status != 0) goto LAB_00002cb8;
       }
-      if (((param_2 & 0x10) != 0) &&
-         (iVar4 = __DecodePixelFormat(param_3[1],puVar3 + 0xc,puVar3 + 0xd,puVar3 + 10,0,
-                                      puVar3 + 0xb,&local_78,puVar3 + 0xe), iVar4 != 0)) {
-        uVar1 = param_3[4] * puVar3[10] + 0x7f & 0xffffff80;
-        local_60 = (param_3[5] + 1) * uVar1;
-        param_3[6] = uVar1;
-        local_64 = local_78;
-        local_74 = 2;
-        iVar4 = _io_connect_method_scalarI_scalarO
-                          (*(undefined4 *)(param_1 + 0xc),10,&local_64,2,&local_6c,&local_74);
-        if (iVar4 == 0) {
-          iVar4 = 0;
-          *puVar3 = local_68;
-          uVar1 = param_3[6];
-          *(undefined2 *)((int)puVar3 + 0xe) = 0;
-          *(undefined2 *)(puVar3 + 3) = 0;
-          puVar3[7] = uVar1 / (uint)puVar3[10];
-          uVar1 = param_3[4];
-          *(short *)(puVar3 + 4) = (short)uVar1;
-          uVar2 = param_3[5];
-          puVar3[5] = uVar1;
-          *(short *)((int)puVar3 + 0x12) = (short)uVar2;
-          puVar3[6] = uVar2;
-          puVar3[1] = local_6c;
-          param_3[9] = 2;
+      if (((flags & 0x10) != 0) &&
+         (status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,0,
+                                      record + 0xb,&tiledFormatCode,record + 0xe), status != 0)) {
+        uVar1 = surfaceDesc[4] * record[10] + 0x7f & 0xffffff80;
+        scalarIn1 = (surfaceDesc[5] + 1) * uVar1;
+        surfaceDesc[6] = uVar1;
+        scalarIn0 = tiledFormatCode;
+        outCount = 2;
+        status = _io_connect_method_scalarI_scalarO
+                          (*(undefined4 *)(accel + 0xc),10,&scalarIn0,2,&scalarOut0,&outCount);
+        if (status == 0) {
+          status = 0;
+          *record = scalarOut1;
+          uVar1 = surfaceDesc[6];
+          *(undefined2 *)((int)record + 0xe) = 0;
+          *(undefined2 *)(record + 3) = 0;
+          record[7] = uVar1 / (uint)record[10];
+          uVar1 = surfaceDesc[4];
+          *(short *)(record + 4) = (short)uVar1;
+          uVar2 = surfaceDesc[5];
+          record[5] = uVar1;
+          *(short *)((int)record + 0x12) = (short)uVar2;
+          record[6] = uVar2;
+          record[1] = scalarOut0;
+          surfaceDesc[9] = 2;
           goto LAB_00002ce0;
         }
       }
-      iVar4 = 0;
+      status = 0;
       goto LAB_00002ce0;
     }
   }
 LAB_00002cb8:
-  _free(puVar3);
-  puVar3 = (undefined4 *)0x0;
+  _free(record);
+  record = (undefined4 *)0x0;
 LAB_00002ce0:
-  param_3[10] = (uint)puVar3;
-  return iVar4;
+  surfaceDesc[10] = (uint)record;
+  return status;
 }
 
 /* _radeon3DCopySetup @ 0x2d10 (2048 bytes) */
