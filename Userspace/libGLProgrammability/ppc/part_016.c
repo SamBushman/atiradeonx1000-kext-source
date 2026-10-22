@@ -2915,9 +2915,9 @@ int _glpPPDisassemble(program)
   int tempNumbers;
   int tempArrayPos;
   int *arraySizes;
-  int reserved9;
-  int local_70;
-  int local_6c;
+  int labelIds;
+  int labelValues;
+  int labelCount;
   int nextLabelNumber;
   uint printOptions;
   char *dataBase;
@@ -2934,9 +2934,9 @@ int _glpPPDisassemble(program)
   tempNumbers = 0;
   tempArrayPos = 0;
   arraySizes = (int *)0x0;
-  reserved9 = 0;
-  local_70 = 0;
-  local_6c = 0;
+  labelIds = 0;
+  labelValues = 0;
+  labelCount = 0;
   nextLabelNumber = 0;
   if (outBuf == (int *)0x0) {
     return (void *)0x0;
@@ -5322,43 +5322,43 @@ LAB_97bedcb4:
   if (0 < (int)instructionCount) {
     do {
       if ((program[instructionOffset * 2 + iVar22 * 2] >> 0x12 & 0xff) - 0x4b < 2) {
-        local_6c = local_6c + 1;
+        labelCount = labelCount + 1;
       }
       iVar22 = iVar22 + (program[instructionOffset * 2 + iVar22 * 2] >> 0x1d) + 2;
       uVar19 = uVar19 - 1;
     } while (uVar19 != 0);
   }
-  bVar4 = local_6c == 0;
+  bVar4 = labelCount == 0;
   if (!bVar4) {
-    allocation2 = local_6c << 2;
+    allocation2 = labelCount << 2;
     loopIndex2 = 0;
     loopIndex4 = 0;
-    reserved9 = _malloc(allocation2);
-    _memset(reserved9,0,local_6c);
-    local_70 = _malloc(allocation2);
-    memsetResult = _memset(local_70,0,local_6c);
+    labelIds = _malloc(allocation2);
+    _memset(labelIds,0,labelCount);
+    labelValues = _malloc(allocation2);
+    memsetResult = _memset(labelValues,0,labelCount);
     uVar26 = CONCAT44(memsetResult,extraout_r4_06);
-    local_6c = 0;
+    labelCount = 0;
     bVar4 = true;
     if (0 < (int)instructionCount) {
       do {
         uVar19 = program[instructionOffset * 2 + loopIndex4 * 2];
         if ((uVar19 >> 0x12 & 0xff) - 0x4b < 2) {
-          uVar26 = ((int (*)())_InsertLabel)(reserved9,local_70,program[instructionOffset * 2 + loopIndex4 * 2 + 1] & 0x3ffff,
-                                uVar19 & 0x3ffff,local_6c);
-          local_6c = (int)((ulonglong)uVar26 >> 0x20);
+          uVar26 = ((int (*)())_InsertLabel)(labelIds,labelValues,program[instructionOffset * 2 + loopIndex4 * 2 + 1] & 0x3ffff,
+                                uVar19 & 0x3ffff,labelCount);
+          labelCount = (int)((ulonglong)uVar26 >> 0x20);
           uVar19 = program[instructionOffset * 2 + loopIndex4 * 2];
         }
         loopIndex2 = loopIndex2 + 1;
         loopIndex4 = loopIndex4 + (uVar19 >> 0x1d) + 2;
-        bVar4 = local_6c == 0;
+        bVar4 = labelCount == 0;
       } while (loopIndex2 < (int)instructionCount);
     }
   }
   loopIndex = 0;
   loopIndex5 = 0;
   if (0 < (int)instructionCount) {
-    puVar21 = (uint *)(nextLabelNumber * 4 + reserved9);
+    puVar21 = (uint *)(nextLabelNumber * 4 + labelIds);
     do {
       if (((program[instructionOffset * 2 + loopIndex5 * 2] & 0x3ffff) == 0) && (!bVar2)) {
         ch = 'm';
@@ -5371,7 +5371,7 @@ LAB_97bedcb4:
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
       }
-      if (((!bVar4) && (nextLabelNumber < local_6c)) &&
+      if (((!bVar4) && (nextLabelNumber < labelCount)) &&
          ((program[instructionOffset * 2 + loopIndex5 * 2] & 0x3ffff) == *puVar21)) {
         loopIndex3 = 0;
         indentDepth = indentDepth + -1;
@@ -5418,7 +5418,7 @@ LAB_97bedcb4:
         indentDepth = indentDepth + -1;
       }
       ((int (*)())_glpDisassemble1Op)(program + instructionOffset * 2 + loopIndex5 * 2,outCursor,&outWordCount,&outTextLength,paramNumbers,
-                         paramArrayPos,tempNumbers,tempArrayPos,reserved9,&indentDepth,printOptions);
+                         paramArrayPos,tempNumbers,tempArrayPos,labelIds,&indentDepth,printOptions);
       outCursor = (int *)((int)outCursor + outTextLength);
       loopIndex5 = loopIndex5 + outWordCount;
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
@@ -5434,8 +5434,8 @@ LAB_97bedcb4:
           _free(tempArrayPos);
         }
         if (bVar4) goto LAB_97bf0cec;
-        _free(reserved9);
-        iVar22 = local_70;
+        _free(labelIds);
+        iVar22 = labelValues;
         goto LAB_97bee10c;
       }
       loopIndex = loopIndex + 1;
@@ -5443,7 +5443,7 @@ LAB_97bedcb4:
     } while (loopIndex < (int)instructionCount);
   }
   if (!bVar4) {
-    if ((nextLabelNumber < local_6c) && (loopIndex + 1 == *(int *)(reserved9 + nextLabelNumber * 4))) {
+    if ((nextLabelNumber < labelCount) && (loopIndex + 1 == *(int *)(labelIds + nextLabelNumber * 4))) {
       ch = ' ';
       copyIndex4 = 0;
       do {
@@ -5464,8 +5464,8 @@ LAB_97bedcb4:
       } while (ch != '\0');
       outCursor = (int *)((int)outCursor + copyLength2 + copyEnd3);
     }
-    _free(reserved9);
-    _free(local_70);
+    _free(labelIds);
+    _free(labelValues);
     uVar26 = CONCAT44(extraout_r3_01,extraout_r4_07);
   }
   ch = 'E';
