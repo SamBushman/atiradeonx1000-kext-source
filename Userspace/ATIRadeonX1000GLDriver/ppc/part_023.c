@@ -406,9 +406,9 @@ int FUN_000e9f00(this, param_2)
 }
 
 /* FUN_000ea020 @ 0xea020 (260 bytes) */
-int FUN_000ea020(this, param_2)
+int FUN_000ea020(this, compiler)
   undefined4 *this;
-  int param_2;
+  int compiler;
 {
   undefined4 *puVar1;
   undefined4 uVar2;
@@ -424,11 +424,11 @@ int FUN_000ea020(this, param_2)
   this[3] = 0;
   *this = &PTR_FUN_001e9b08;
   FUN_001940a8(this + 0x24);
-  this[0x2a] = param_2;
+  this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(param_2 + 0x32c);
+  iVar3 = *(int *)(compiler + 0x32c);
   this[0x2c] = iVar3;
-  *(int *)(param_2 + 0x32c) = iVar3 + 1;
+  *(int *)(compiler + 0x32c) = iVar3 + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -461,9 +461,9 @@ int FUN_000ea020(this, param_2)
 }
 
 /* FUN_000ea148 @ 0xea148 (260 bytes) */
-int FUN_000ea148(this, param_2)
+int FUN_000ea148(this, compiler)
   undefined4 *this;
-  int param_2;
+  int compiler;
 {
   undefined4 *puVar1;
   undefined4 uVar2;
@@ -479,11 +479,11 @@ int FUN_000ea148(this, param_2)
   this[3] = 0;
   *this = &PTR_FUN_001e9b08;
   FUN_001940a8(this + 0x24);
-  this[0x2a] = param_2;
+  this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(param_2 + 0x32c);
+  iVar3 = *(int *)(compiler + 0x32c);
   this[0x2c] = iVar3;
-  *(int *)(param_2 + 0x32c) = iVar3 + 1;
+  *(int *)(compiler + 0x32c) = iVar3 + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
