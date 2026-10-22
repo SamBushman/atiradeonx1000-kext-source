@@ -268,8 +268,9 @@ def apply_funcs(d, funcs, decl, check):
     texts = {f: open(f, errors='surrogateescape').read() for f in sorted(files)}
     ids = set()
     for f_, t in texts.items():    # the alias symbols of the .globl/.set blocks stay under the Ghidra name: they do not count as a use of it; nor does a C string literal ("_atexit")
+        t = '\n'.join('' if ALIAS_G.match(l) else ALIAS_S.sub(lambda m: ' ' + m.group(2) + ' ', l) for l in t.split('\n'))     # alias lines first: strip_strings can lose its quote pairing in a file with a stray quote
         if f_.endswith(('.c', '.h')): t = strip_strings(t)
-        ids.update(IDENT.findall('\n'.join('' if ALIAS_G.match(l) else ALIAS_S.sub(lambda m: ' ' + m.group(2) + ' ', l) for l in t.split('\n'))))
+        ids.update(IDENT.findall(t))
     pend, appl, err = {}, 0, 0
     seen_new = {}
     succ = {r[2]: r[3] for r in funcs}             # old -> new, to follow chained rows
