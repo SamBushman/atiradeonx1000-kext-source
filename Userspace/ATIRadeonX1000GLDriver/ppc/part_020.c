@@ -1015,7 +1015,7 @@ int FUN_000dd1f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint uVar7;
   uint uVar8;
   uint unaff_r28;
-  uint uVar9;
+  uint loopIndex;
   uint uVar10;
   undefined1 auStack_b8 [64];
   undefined2 local_78 [36];
@@ -1037,7 +1037,7 @@ int FUN_000dd1f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uVar3 = uVar10 & 0x2000000;
   if (uVar7 != 0xffffffff) {
     bVar2 = false;
-    uVar9 = 0;
+    loopIndex = 0;
     do {
       ((int (*)())FUN_000dcef4)(param_1,uVar10 >> 0x10 & 0x3f,param_3,param_4,param_5,param_6,param_7);
       if (((undefined4 *)(uVar10 & 0x3f0000) == 0x001b0000) ||
@@ -1120,9 +1120,9 @@ LAB_000dd4f0:
         FUN_000da904(param_1,"]",param_3,param_4,param_5,param_6,param_7,in_r10);
       }
 LAB_000dd51c:
-      uVar9 = uVar9 + 1;
-      if (uVar7 + 1 <= uVar9) goto LAB_000dd530;
-    } while (uVar9 == 0);
+      loopIndex = loopIndex + 1;
+      if (uVar7 + 1 <= loopIndex) goto LAB_000dd530;
+    } while (loopIndex == 0);
     param_7 = (uint *)param_1[2];
     uVar10 = *param_7;
     param_1[2] = (int)(param_7 + 1);
@@ -3570,159 +3570,160 @@ int FUN_000e0ee8(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
+  int compareResult;
   bool bVar1;
-  undefined4 uVar2;
+  undefined4 length;
   int iVar3;
   int iVar4;
   undefined **ppuVar5;
   
-  uVar2 = _strlen(param_2);
+  length = _strlen(param_2);
   ppuVar5 = &PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444;
   iVar4 = 0;
-  while (iVar3 = _strncmp(*ppuVar5,param_2,uVar2), iVar3 != 0) {
+  while (iVar3 = _strncmp(*ppuVar5,param_2,length), iVar3 != 0) {
     bVar1 = iVar4 == 0x4f;
     ppuVar5 = ppuVar5 + 1;
     iVar4 = iVar4 + 1;
     if (bVar1) {
-      iVar4 = _strncmp("opt_flatten_if_state",param_2,uVar2);
-      if (iVar4 == 0) {
+      compareResult = _strncmp("opt_flatten_if_state",param_2,length);
+      if (compareResult == 0) {
         *(int *)(param_1 + 0x64c) = param_3;
       }
       else {
-        iVar4 = _strncmp("max_copy_folds",param_2,uVar2);
-        if (iVar4 == 0) {
+        compareResult = _strncmp("max_copy_folds",param_2,length);
+        if (compareResult == 0) {
           *(int *)(param_1 + 0x650) = param_3;
         }
         else {
-          iVar4 = _strncmp("max_vn_kills",param_2,uVar2);
-          if (iVar4 == 0) {
+          compareResult = _strncmp("max_vn_kills",param_2,length);
+          if (compareResult == 0) {
             *(int *)(param_1 + 0x654) = param_3;
           }
           else {
-            iVar4 = _strncmp("max_vn_transforms",param_2,uVar2);
-            if (iVar4 == 0) {
+            compareResult = _strncmp("max_vn_transforms",param_2,length);
+            if (compareResult == 0) {
               *(int *)(param_1 + 0x658) = param_3;
             }
             else {
-              iVar4 = _strncmp("max_copy_merges",param_2,uVar2);
-              if (iVar4 == 0) {
+              compareResult = _strncmp("max_copy_merges",param_2,length);
+              if (compareResult == 0) {
                 *(int *)(param_1 + 0x65c) = param_3;
               }
               else {
-                iVar4 = _strncmp("max_copy_props",param_2,uVar2);
-                if (iVar4 == 0) {
+                compareResult = _strncmp("max_copy_props",param_2,length);
+                if (compareResult == 0) {
                   *(int *)(param_1 + 0x660) = param_3;
                 }
                 else {
-                  iVar4 = _strncmp("max_mix_insts",param_2,uVar2);
-                  if (iVar4 == 0) {
+                  compareResult = _strncmp("max_mix_insts",param_2,length);
+                  if (compareResult == 0) {
                     *(int *)(param_1 + 0x664) = param_3;
                   }
                   else {
-                    iVar4 = _strncmp("max_presubs",param_2,uVar2);
-                    if (iVar4 == 0) {
+                    compareResult = _strncmp("max_presubs",param_2,length);
+                    if (compareResult == 0) {
                       *(int *)(param_1 + 0x668) = param_3;
                     }
                     else {
-                      iVar4 = _strncmp("max_mov_and_shift",param_2,uVar2);
-                      if (iVar4 == 0) {
+                      compareResult = _strncmp("max_mov_and_shift",param_2,length);
+                      if (compareResult == 0) {
                         *(int *)(param_1 + 0x670) = param_3;
                       }
                       else {
-                        iVar4 = _strncmp("max_useless_phis",param_2,uVar2);
-                        if (iVar4 == 0) {
+                        compareResult = _strncmp("max_useless_phis",param_2,length);
+                        if (compareResult == 0) {
                           *(int *)(param_1 + 0x66c) = param_3;
                         }
                         else {
-                          iVar4 = _strncmp("max_balance_conversions",param_2,uVar2);
-                          if (iVar4 == 0) {
+                          compareResult = _strncmp("max_balance_conversions",param_2,length);
+                          if (compareResult == 0) {
                             *(int *)(param_1 + 0x674) = param_3;
                           }
                           else {
-                            iVar4 = _strncmp("max_coalesce_loops",param_2,uVar2);
-                            if (iVar4 == 0) {
+                            compareResult = _strncmp("max_coalesce_loops",param_2,length);
+                            if (compareResult == 0) {
                               *(int *)(param_1 + 0x678) = param_3;
                             }
                             else {
-                              iVar4 = _strncmp("max_spill_loops",param_2,uVar2);
-                              if (iVar4 == 0) {
+                              compareResult = _strncmp("max_spill_loops",param_2,length);
+                              if (compareResult == 0) {
                                 *(int *)(param_1 + 0x67c) = param_3;
                               }
                               else {
-                                iVar4 = _strncmp("max_inst_hoists",param_2,uVar2);
-                                if (iVar4 == 0) {
+                                compareResult = _strncmp("max_inst_hoists",param_2,length);
+                                if (compareResult == 0) {
                                   *(int *)(param_1 + 0x680) = param_3;
                                 }
                                 else {
-                                  iVar4 = _strncmp("max_mad_mul_to_d2a",param_2,uVar2);
-                                  if (iVar4 == 0) {
+                                  compareResult = _strncmp("max_mad_mul_to_d2a",param_2,length);
+                                  if (compareResult == 0) {
                                     *(int *)(param_1 + 0x684) = param_3;
                                   }
                                   else {
-                                    iVar4 = _strncmp("max_mad_d2a_to_dp3",param_2,uVar2);
-                                    if (iVar4 == 0) {
+                                    compareResult = _strncmp("max_mad_d2a_to_dp3",param_2,length);
+                                    if (compareResult == 0) {
                                       *(int *)(param_1 + 0x688) = param_3;
                                     }
                                     else {
-                                      iVar4 = _strncmp("max_add_add_to_dp3",param_2,uVar2);
-                                      if (iVar4 == 0) {
+                                      compareResult = _strncmp("max_add_add_to_dp3",param_2,length);
+                                      if (compareResult == 0) {
                                         *(int *)(param_1 + 0x68c) = param_3;
                                       }
                                       else {
-                                        iVar4 = _strncmp("max_add_mul_to_mad",param_2,uVar2);
-                                        if (iVar4 == 0) {
+                                        compareResult = _strncmp("max_add_mul_to_mad",param_2,length);
+                                        if (compareResult == 0) {
                                           *(int *)(param_1 + 0x690) = param_3;
                                         }
                                         else {
-                                          iVar4 = _strncmp("max_add_mad_mul_to_mov_mad_mad",param_2,
-                                                           uVar2);
-                                          if (iVar4 == 0) {
+                                          compareResult = _strncmp("max_add_mad_mul_to_mov_mad_mad",param_2,
+                                                           length);
+                                          if (compareResult == 0) {
                                             *(int *)(param_1 + 0x694) = param_3;
                                           }
                                           else {
-                                            iVar4 = _strncmp("max_reassociate",param_2,uVar2);
-                                            if (iVar4 == 0) {
+                                            compareResult = _strncmp("max_reassociate",param_2,length);
+                                            if (compareResult == 0) {
                                               *(int *)(param_1 + 0x698) = param_3;
                                             }
                                             else {
-                                              iVar4 = _strncmp("max_reconst_alu",param_2,uVar2);
-                                              if (iVar4 == 0) {
+                                              compareResult = _strncmp("max_reconst_alu",param_2,length);
+                                              if (compareResult == 0) {
                                                 *(int *)(param_1 + 0x69c) = param_3;
                                               }
                                               else {
-                                                iVar4 = _strncmp("max_remove_cnd_input",param_2,
-                                                                 uVar2);
-                                                if (iVar4 == 0) {
+                                                compareResult = _strncmp("max_remove_cnd_input",param_2,
+                                                                 length);
+                                                if (compareResult == 0) {
                                                   *(int *)(param_1 + 0x6a0) = param_3;
                                                 }
                                                 else {
-                                                  iVar4 = _strncmp("max_r600_minimize_cf_attempts",
-                                                                   param_2,uVar2);
-                                                  if (iVar4 == 0) {
+                                                  compareResult = _strncmp("max_r600_minimize_cf_attempts",
+                                                                   param_2,length);
+                                                  if (compareResult == 0) {
                                                     *(int *)(param_1 + 0x6a4) = param_3;
                                                   }
                                                   else {
-                                                    iVar4 = _strncmp("max_flatten_if",param_2,uVar2)
+                                                    compareResult = _strncmp("max_flatten_if",param_2,length)
                                                     ;
-                                                    if (iVar4 == 0) {
+                                                    if (compareResult == 0) {
                                                       *(int *)(param_1 + 0x6a8) = param_3;
                                                     }
                                                     else {
-                                                      iVar4 = _strncmp("rearrange_tree_depth",
-                                                                       param_2,uVar2);
-                                                      if (iVar4 == 0) {
+                                                      compareResult = _strncmp("rearrange_tree_depth",
+                                                                       param_2,length);
+                                                      if (compareResult == 0) {
                                                         *(int *)(param_1 + 0x6ac) = param_3;
                                                       }
                                                       else {
-                                                        iVar4 = _strncmp("limit_registers",param_2,
-                                                                         uVar2);
-                                                        if (iVar4 == 0) {
+                                                        compareResult = _strncmp("limit_registers",param_2,
+                                                                         length);
+                                                        if (compareResult == 0) {
                                                           *(int *)(param_1 + 0x6b0) = param_3;
                                                         }
                                                         else {
-                                                          iVar4 = _strncmp("limit_instructions",
-                                                                           param_2,uVar2);
-                                                          if (iVar4 == 0) {
+                                                          compareResult = _strncmp("limit_instructions",
+                                                                           param_2,length);
+                                                          if (compareResult == 0) {
                                                             *(int *)(param_1 + 0x6b4) = param_3;
                                                           }
                                                         }

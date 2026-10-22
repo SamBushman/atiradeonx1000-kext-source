@@ -328,22 +328,22 @@ int FUN_001042bc(param_1, param_2)
 {
   char cVar1;
   int iVar2;
-  int iVar3;
+  int loopIndex;
   char *pcVar4;
   
   pcVar4 = (char *)((int)param_1 + param_2 + 0xb4);
-  iVar3 = 1;
+  loopIndex = 1;
   while( true ) {
     iVar2 = (**(code **)(*param_1 + 0x14))(param_1);
-    if (iVar2 < iVar3) {
+    if (iVar2 < loopIndex) {
       return -1;
     }
     cVar1 = *pcVar4;
     pcVar4 = pcVar4 + 0x18;
     if (cVar1 != '\x04') break;
-    iVar3 = iVar3 + 1;
+    loopIndex = loopIndex + 1;
   }
-  return iVar3;
+  return loopIndex;
 }
 
 /* FUN_00104330 @ 0x104330 (52 bytes) */
@@ -386,19 +386,19 @@ int FUN_001043a0()
 {
   int iVar1;
   int *piVar2;
-  int iVar3;
+  int loopIndex;
   int iVar4;
   
-  iVar3 = 0;
+  loopIndex = 0;
   iVar4 = 0x15;
   piVar2 = &DAT_001ea500;
   do {
     iVar1 = *piVar2;
     piVar2 = piVar2 + 2;
-    if (iVar1 != iVar3) {
+    if (iVar1 != loopIndex) {
       return 0;
     }
-    iVar3 = iVar3 + 1;
+    loopIndex = loopIndex + 1;
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
   return 1;
@@ -837,6 +837,7 @@ int FUN_00104bf8(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
+  int loopIndex;
   bool bVar1;
   uint uVar2;
   undefined4 uVar3;
@@ -855,14 +856,14 @@ int FUN_00104bf8(param_1, param_2)
   *(undefined4 *)(param_1 + 0x9c) = DAT_001af9c0;
   *(undefined4 *)(param_1 + 0x154) = uVar3;
   *(undefined4 *)(param_1 + 0xc) = 0;
-  iVar7 = 1;
+  loopIndex = 1;
   iVar8 = param_1;
   do {
-    ((int (*)())FUN_00104be8)(param_1,iVar7);
+    ((int (*)())FUN_00104be8)(param_1,loopIndex);
     *(undefined4 *)(iVar8 + 0xb4) = DAT_001af9bc;
     iVar4 = FUN_0011346c(param_2,param_1);
     if (iVar4 != 0) {
-      if (iVar7 == 1) {
+      if (loopIndex == 1) {
         puVar5 = &DAT_001af9d0;
       }
       else {
@@ -870,9 +871,9 @@ int FUN_00104bf8(param_1, param_2)
       }
       *(undefined4 *)(iVar8 + 0xb4) = *puVar5;
     }
-    bVar1 = iVar7 != 4;
+    bVar1 = loopIndex != 4;
     iVar8 = iVar8 + 0x18;
-    iVar7 = iVar7 + 1;
+    loopIndex = loopIndex + 1;
   } while (bVar1);
   *(undefined4 *)(param_1 + 0x124) = 0;
   uVar6 = 0;

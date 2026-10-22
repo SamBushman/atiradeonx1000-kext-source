@@ -87,6 +87,7 @@ int FUN_00001830(cxaAtexitFn, cxaFinalizeFn)
 /* FUN_000018fc @ 0x18fc (504 bytes) */
 int FUN_000018fc()
 {
+  int compareResult;
   undefined4 uVar1;
   uint imageCount;
   int iVar3;
@@ -107,8 +108,8 @@ int FUN_000018fc()
     imageCount = (*imageCountFn)(uVar1);
     for (imageIndex = 0; imageIndex < imageCount; imageIndex = imageIndex + 1) {
       uVar1 = (*imageNameFn)(imageIndex);
-      iVar3 = _strcmp(uVar1,"/usr/lib/libSystem.B.dylib");
-      if (iVar3 == 0) {
+      compareResult = _strcmp(uVar1,"/usr/lib/libSystem.B.dylib");
+      if (compareResult == 0) {
         iVar3 = (*imageHeaderFn)(imageIndex);
         if (iVar3 == 0) {
           return 0;
@@ -244,6 +245,7 @@ int FUN_00001d84()
 /* FUN_00001da4 @ 0x1da4 (32 bytes) */
 int FUN_00001da4()
 {
+  int compareResult;
   uint uVar1;
   char *pcVar2;
   int iVar3;
@@ -265,8 +267,8 @@ int FUN_00001da4()
     uVar1 = (*pcStack_34)();
     for (uStack_38 = 0; uStack_38 < uVar1; uStack_38 = uStack_38 + 1) {
       pcVar2 = (char *)(*pcStack_30)(uStack_38);
-      iVar3 = _strcmp(pcVar2,"/usr/lib/libSystem.B.dylib");
-      if (iVar3 == 0) {
+      compareResult = _strcmp(pcVar2,"/usr/lib/libSystem.B.dylib");
+      if (compareResult == 0) {
         iVar3 = (*pcStack_2c)(uStack_38);
         if (iVar3 == 0) {
           return 0;
@@ -670,7 +672,7 @@ int FUN_00002688(param_1, param_2)
   undefined4 *param_2;
 {
   undefined4 uVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   int iVar3;
   undefined4 uVar4;
   int iStack00000018;
@@ -680,19 +682,19 @@ int FUN_00002688(param_1, param_2)
   
   iStack00000018 = param_1;
   puStack0000001c = param_2;
-  puVar2 = _malloc(0x10);
-  if (puVar2 == (undefined4 *)0x0) {
+  allocation = _malloc(0x10);
+  if (allocation == (undefined4 *)0x0) {
     __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
     uStack_14 = 0xffffffff;
   }
   else {
     uVar4 = puStack0000001c[1];
     uVar1 = puStack0000001c[2];
-    puVar2[1] = *puStack0000001c;
-    puVar2[2] = uVar4;
-    puVar2[3] = uVar1;
-    *puVar2 = *(undefined4 *)(iStack00000018 + 4);
-    *(undefined4 **)(iStack00000018 + 4) = puVar2;
+    allocation[1] = *puStack0000001c;
+    allocation[2] = uVar4;
+    allocation[3] = uVar1;
+    *allocation = *(undefined4 *)(iStack00000018 + 4);
+    *(undefined4 **)(iStack00000018 + 4) = allocation;
     iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
     if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
       uStack_18 = 0;
@@ -791,7 +793,7 @@ int FUN_00002728(param_1, param_2)
   code *pcVar1;
   undefined4 uVar2;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *allocation;
   undefined4 uVar5;
   undefined4 *puStack00000018;
   undefined4 uStack0000001c;
@@ -808,17 +810,17 @@ int FUN_00002728(param_1, param_2)
       pcVar1 = *(code **)(iVar3 + 8);
       iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
-        puVar4 = _malloc(0xc);
-        if (puVar4 == (undefined4 *)0x0) {
+        allocation = _malloc(0xc);
+        if (allocation == (undefined4 *)0x0) {
           uStack_18 = 0xffffffff;
         }
         else {
           uVar5 = puStack00000018[1];
           uVar2 = puStack00000018[2];
-          *puVar4 = *puStack00000018;
-          puVar4[1] = uVar5;
-          puVar4[2] = uVar2;
-          uStack_18 = (*pcVar1)(FUN_000020f4,puVar4,uStack0000001c);
+          *allocation = *puStack00000018;
+          allocation[1] = uVar5;
+          allocation[2] = uVar2;
+          uStack_18 = (*pcVar1)(FUN_000020f4,allocation,uStack0000001c);
         }
       }
       else {
@@ -876,7 +878,7 @@ int FUN_000027a4(param_1, param_2)
   code *pcVar1;
   undefined4 uVar2;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *allocation;
   undefined4 uVar5;
   undefined4 *puStack00000018;
   undefined4 uStack0000001c;
@@ -893,17 +895,17 @@ int FUN_000027a4(param_1, param_2)
       pcVar1 = *(code **)(iVar3 + 8);
       iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
-        puVar4 = _malloc(0xc);
-        if (puVar4 == (undefined4 *)0x0) {
+        allocation = _malloc(0xc);
+        if (allocation == (undefined4 *)0x0) {
           uStack_18 = 0xffffffff;
         }
         else {
           uVar5 = puStack00000018[1];
           uVar2 = puStack00000018[2];
-          *puVar4 = *puStack00000018;
-          puVar4[1] = uVar5;
-          puVar4[2] = uVar2;
-          uStack_18 = (*pcVar1)(FUN_000020f4,puVar4,uStack0000001c);
+          *allocation = *puStack00000018;
+          allocation[1] = uVar5;
+          allocation[2] = uVar2;
+          uStack_18 = (*pcVar1)(FUN_000020f4,allocation,uStack0000001c);
         }
       }
       else {
@@ -942,6 +944,7 @@ int FUN_000027d0(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int loopIndex;
   uint uVar1;
   undefined4 uVar2;
   undefined8 uVar3;
@@ -1023,7 +1026,7 @@ int FUN_000027d0(param_1, param_2)
         }
       }
       else {
-        iVar14 = 0;
+        loopIndex = 0;
         uVar16 = uVar12;
         puVar7 = puVar6;
         do {
@@ -1032,11 +1035,11 @@ int FUN_000027d0(param_1, param_2)
             puVar6 = puVar6 + 1;
             uVar16 = uVar16 - 1;
           } while (uVar16 != 0);
-          iVar14 = iVar14 + 1;
+          loopIndex = loopIndex + 1;
           puVar6 = puVar7 + uVar1;
           uVar16 = uVar12;
           puVar7 = puVar6;
-        } while (iVar13 != iVar14);
+        } while (iVar13 != loopIndex);
       }
     }
     else if (*(char *)(param_1 + 0x141) == '\x02') {
@@ -1059,7 +1062,7 @@ int FUN_000027d0(param_1, param_2)
         }
       }
       else {
-        iVar14 = 0;
+        loopIndex = 0;
         uVar16 = uVar12;
         puVar9 = puVar8;
         do {
@@ -1068,11 +1071,11 @@ int FUN_000027d0(param_1, param_2)
             puVar8 = puVar8 + 1;
             uVar16 = uVar16 - 1;
           } while (uVar16 != 0);
-          iVar14 = iVar14 + 1;
+          loopIndex = loopIndex + 1;
           puVar8 = puVar9 + uVar1;
           uVar16 = uVar12;
           puVar9 = puVar8;
-        } while (iVar13 != iVar14);
+        } while (iVar13 != loopIndex);
       }
     }
   }
