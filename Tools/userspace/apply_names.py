@@ -72,7 +72,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             print('%s:%d: %s: new name %s is used for both %s and %s' % (r[0], r[1], name, r[4], o, r[3])); return 0, 0, 1
     brace = next((i for i in range(s, e) if lines[i] == '{'), None)
     if brace is None: print('%s: no body' % name); return 0, 0, 1
-    norm = lambda l: re.sub('|'.join(wb(k) for k in back), lambda m: back[m.group(0)], l) if back else l
+    norm = (lambda l: IDENT.sub(lambda m: back.get(m.group(0), m.group(0)), l)) if back else (lambda l: l)
     napp = npend = nerr = 0
     DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)(\[\w+\])?;$'
     def declblock():                           # (first, last+1) line of the declarations right after the `{`

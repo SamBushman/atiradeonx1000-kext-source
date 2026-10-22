@@ -15,6 +15,7 @@ import re, sys, os, glob
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import apply_names as A
 
+CURRENT = []
 ASSIGN_OPS = r'(?:=|\+=|-=|\|=|&=|\^=|<<=|>>=|\*=|/=)'
 
 
@@ -29,7 +30,9 @@ def load(d, fn):
             if name == fn:
                 body = lines[s:e]
                 brace = next(i for i, l in enumerate(body) if l == '{')
-                norm = (lambda l: re.sub('|'.join(A.wb(k) for k in back), lambda m: back[m.group(0)], l)) if back else (lambda l: l)
+                norm = (lambda l: A.IDENT.sub(lambda m: back.get(m.group(0), m.group(0)), l)) if back else (lambda l: l)
+                global CURRENT
+                CURRENT = body
                 return [norm(l) for l in body], brace
     sys.exit('function %s not found' % fn)
 
@@ -324,6 +327,18 @@ def main():
                     frm = '^\\s*' + re.escape(txt) + '$' + ('@%d' % nth if nth > 1 else '')
                     rows.append('use\t%s\t%s\t%s\t%s\t%s\t%s\t+%d' % (fn, var, new, tier, ev, frm, y - x + 1))
         print('\n'.join(rows))
+        return
+    if a[2] == '--all':                              # every placeholder variable still present, one line per web
+        P = re.compile(r'\b(param_[0-9]+|[a-zA-Z]{0,4}Var[0-9]+|local_[0-9a-f]+|[a-z]Stack_?[0-9a-f]+|fparam_[0-9]+|in_[A-Za-z0-9]+|extraout_\w+)\b')
+        names = sorted({m for l in CURRENT[brace + 1:] if not re.match(r'\s*(/\*|\*|//)', l) for m in P.findall(l)})
+        for var in names:
+            try: ws, er = webs(nodes, entry, var)
+            except SystemExit as ex: print('== %s: %s' % (var, ex)); continue
+            print('== %s (%d webs)' % (var, len(ws)))
+            for k, ls in enumerate(ws):
+                first = [x for x in ls if re.search(r'(?<![\w])%s\s*=(?!=)' % re.escape(var), body[x])]
+                x = first[0] if first else ls[0]
+                print('  %d: %d lines, %d..%d  %s' % (k, len(ls), ls[0], ls[-1], ' '.join(body[x].split())[:100]))
         return
     for var in a[2:]:
         ws, entry_reach = webs(nodes, entry, var)
