@@ -1,0 +1,68 @@
+# local	FUNCTION	old	new	tier	evidence   (D7: the operand-printer family of _glpPPDisassemble)
+local	_glpWriteDestinationOperand_97be6730	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteDestinationOperand_97be6730	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteDestinationOperand_97be6730	param_3	tempNumberMap	INFERRED	register-number -> printed-number table used for "tmp"; printed as "tmp<N>": N is looked up in this table by the operand's register number when it is non-null (_ncpy of the table entry)
+local	_glpWriteDestinationOperand_97be6730	param_4	tempArrayMap	INFERRED	second table: when the entry is not -1 the register prints as tmp<N>[<entry>] (array element)
+local	_glpWriteDestinationOperand_97be6730	param_5	operandIndex	CONFIRMED	iVar3 = param_5 * 8 is the byte offset into the operand records
+local	_glpWriteDestinationOperand_97be6730	param_6	printSwizzle	INFERRED	zero: prints the destination write mask letters (x y z w from bits 0x2000..0x10000); non-zero: prints [adr..] relative addressing and the per-component select letters
+local	_glpWriteDestinationOperand_97be6730	iVar3	operandByteOffset	CONFIRMED	= operandIndex * 8
+local	_glpWriteDestinationOperand_97be6730	pcVar8	textCursor	CONFIRMED	cursor after the register name, passed to _ncpy and advanced
+local	_glpWriteDestinationOperand_97be6730	uVar2	registerNumber	CONFIRMED	*(ushort *)(operand + 6), the register number printed after tmp/res
+local	_glpWriteDestinationOperand_97be6730	iVar7	relativeOffset	INFERRED	constant added inside [adr.x + k]: the array start from tempArrayMap (when the file is tmp) plus the signed offset field of the operand index word (<<4 >>0x18)
+local	_glpWriteAddressOperand	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteAddressOperand	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteAddressOperand	param_3	operandIndex	CONFIRMED	iVar2 = param_3 * 8
+local	_glpWriteAddressOperand	param_4	printSwizzle	INFERRED	zero: write mask letters x/y/z/w; non-zero: component select letters
+local	_glpWriteAddressOperand	iVar2	operandByteOffset	CONFIRMED	= operandIndex * 8
+local	_glpWriteAddressOperand	iVar4	textCursor	CONFIRMED	cursor after "adr<N>."
+local	_glpWriteSourceOperandType	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteSourceOperandType	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteSourceOperandType	param_3	paramNumberMap	INFERRED	case 2 ("prm"): printed number of a program parameter register, looked up by register number
+local	_glpWriteSourceOperandType	param_4	paramArrayMap	INFERRED	case 2 ("prm"): when the entry is not -1 the register prints as prm<N>[<entry>]
+local	_glpWriteSourceOperandType	param_5	tempNumberMap	INFERRED	case 1 ("tmp"): printed number lookup, printed as "tmp<N>": N is looked up in this table by the operand's register number when it is non-null (_ncpy of the table entry)
+local	_glpWriteSourceOperandType	param_6	tempArrayMap	INFERRED	case 1 ("tmp"): array element lookup, entry != -1 prints tmp<N>[<entry>]
+local	_glpWriteSourceOperandType	param_7	operandIndex	CONFIRMED	iVar4 = param_7 * 8
+local	_glpWriteSourceOperandType	iVar4	operandByteOffset	CONFIRMED	= operandIndex * 8
+local	_glpWriteSourceOperandType	uVar2	displayNumber	CONFIRMED	the number printed after tmp: the register number itself or its tempNumberMap entry
+local	_glpWriteSourceOperandSwizzle	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteSourceOperandSwizzle	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteSourceOperandSwizzle	param_3	operandIndex	CONFIRMED	iVar3/iVar2 = param_3 * 8
+local	_glpWriteSourceOperandSwizzle	param_4	printSize	INFERRED	_glpWriteSourceOperand_97be7fc0 passes its param_8 here and also calls _glpWriteOperandSize when it is non-zero: zero prints the collapsed swizzle (".x" when all four selects are equal), non-zero prints one letter per component up to the operand size
+local	_glpWriteSourceOperandSwizzle	iVar3	operandByteOffset	CONFIRMED	= operandIndex * 8 (zero-printSize path)
+local	_glpWriteSourceOperandSwizzle	iVar2	operandByteOffset2	CONFIRMED	= operandIndex * 8 (sized path)
+local	_glpWriteSourceOperandSwizzle	pcVar5	textCursor	CONFIRMED	cursor after ".", advanced one letter at a time
+local	_glpWriteSourceOperandSwizzle	uVar4	operandWord	CONFIRMED	*(uint *)(operand) re-read before each field test
+local	_glpWriteSourceOperandSwizzle	uVar6	xSelect	CONFIRMED	operand word >> 0x15 & 3: the x component select, compared with the y (>>0x13), z (>>0x11) and w (>>0xf) selects to collapse a uniform swizzle
+local	_glpWriteSourceOperandExtendedSwizzle	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteSourceOperandExtendedSwizzle	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteSourceOperandExtendedSwizzle	param_3	operandIndex	CONFIRMED	param_3 * 8 indexes the operand records
+local	_glpWriteSourceOperandExtendedSwizzle	uVar3	componentSelect	CONFIRMED	4-bit selector read per component (>>0xc, >>8, >>4, &0xf): 0..3 = x y z w, 4..7 = -x -y -z -w, 8 = 1, 9 = 0, 10 = -1 (the switch prints these strings)
+local	_glpWriteOperandSize	param_1	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteOperandSize	param_2	sizeCode	INFERRED	printed as ":<sizeCode + 1>"
+local	_glpWriteOperandSize	param_3	repeatSize	INFERRED	when 1 the ":<size>" suffix is written a second time (and is written even for sizeCode 3)
+local	_glpWriteSourceOperand_97be7fc0	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteSourceOperand_97be7fc0	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value)
+local	_glpWriteSourceOperand_97be7fc0	param_3	paramNumberMap	INFERRED	forwarded unchanged to _glpWriteSourceOperandType (prm number lookup)
+local	_glpWriteSourceOperand_97be7fc0	param_4	paramArrayMap	INFERRED	forwarded unchanged to _glpWriteSourceOperandType (prm array lookup)
+local	_glpWriteSourceOperand_97be7fc0	param_5	tempNumberMap	INFERRED	forwarded unchanged to _glpWriteSourceOperandType (tmp number lookup)
+local	_glpWriteSourceOperand_97be7fc0	param_6	tempArrayMap	INFERRED	forwarded unchanged to _glpWriteSourceOperandType (tmp array lookup)
+local	_glpWriteSourceOperand_97be7fc0	param_7	operandIndex	CONFIRMED	iVar2 = param_7 * 8; passed on as the operand index
+local	_glpWriteSourceOperand_97be7fc0	param_8	printSize	INFERRED	non-zero: _glpWriteOperandSize is called and the value is passed to _glpWriteSourceOperandSwizzle
+local	_glpWriteSourceOperand_97be7fc0	param_9	useExtendedSwizzle	CONFIRMED	non-zero selects _glpWriteSourceOperandExtendedSwizzle(operands, cursor, operandIndex + 1) instead of the plain swizzle
+local	_glpWriteSourceOperand_97be7fc0	iVar2	operandByteOffset	CONFIRMED	= operandIndex * 8
+local	_glpWriteSourceOperand_97be7fc0	iVar3	textCursor	CONFIRMED	cursor returned by each writer in turn
+local	_glpWriteBranchOperand	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteBranchOperand	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value); here it receives "label_%i"
+local	_glpWriteBranchOperand	param_3	labelTable	INFERRED	array of label ids scanned until it equals the 18-bit target field of the previous operand word; the position is printed as label_<index> (-1 when the table is NULL)
+local	_glpWriteBranchOperand	param_4	operandIndex	CONFIRMED	param_4 * 8 indexes the operand records
+local	_glpWriteBranchOperand	param_5	printCondition	CONFIRMED	zero returns right after the label; non-zero appends the condition code " (TR/EQ/GE/GT/LE/LT/NE/FL" chosen by operand word >> 0x1c & 7
+local	_glpWriteBranchOperand	pcVar3	textCursor	CONFIRMED	cursor after the sprintf of the label, advanced by the condition string
+local	_glpWriteBranchOperand	uVar4	labelEntry	CONFIRMED	current element of labelTable compared with the branch target
+local	_glpWriteTextureOperand_97be8478	param_1	operands	INFERRED	operand records of the instruction being printed: 8-byte entries addressed as operands + operandIndex*8 (every writer computes param*8 + base); word +0 bit fields (file at >>0x11 or >>0x17, write/select bits), +4 index word, +6 register number
+local	_glpWriteTextureOperand_97be8478	param_2	outCursor	CONFIRMED	output text cursor: characters are stored at the cursor and the advanced cursor is returned (every caller threads the return value); here it receives "texture["
+local	_glpWriteTextureOperand_97be8478	param_3	paramNumberMap	INFERRED	forwarded to _glpWriteSourceOperand_97be7fc0
+local	_glpWriteTextureOperand_97be8478	param_4	paramArrayMap	INFERRED	forwarded to _glpWriteSourceOperand_97be7fc0
+local	_glpWriteTextureOperand_97be8478	param_5	tempNumberMap	INFERRED	forwarded to _glpWriteSourceOperand_97be7fc0
+local	_glpWriteTextureOperand_97be8478	param_6	tempArrayMap	INFERRED	forwarded to _glpWriteSourceOperand_97be7fc0
+local	_glpWriteTextureOperand_97be8478	param_7	operandIndex	CONFIRMED	param_7 * 8 indexes the operand records
+local	_glpWriteTextureOperand_97be8478	param_8	indirectUnit	INFERRED	zero: prints texture[<unit>] with the unit in the low 5 bits of the operand word; non-zero: the unit comes from a source operand (printed with _glpWriteSourceOperand_97be7fc0) and the target field is read from the next operand record
