@@ -32,6 +32,7 @@ def split_functions(text):
 
 
 def strip_strings(s):
+    s = re.sub(r'/\*.*?\*/', ' ', s, flags=re.S)      # words in comments are not identifiers
     return re.sub(r'"(\\.|[^"\\])*"', lambda m: '"' + 'x' * (len(m.group(0)) - 2) + '"', s)
 
 
@@ -51,7 +52,8 @@ def main():
     a = sys.argv[1:]; check = '--check' in a; a = [x for x in a if x != '--check']
     d = a[0]
     rows = load_rows(d)
-    decl = set(IDENT.findall(open(os.path.join(d, 'decls.h')).read()))
+    dtext = re.sub(r'/\*.*?\*/|//[^\n]*', ' ', open(os.path.join(d, 'decls.h')).read(), flags=re.S)   # identifiers declared, not words in comments
+    decl = set(IDENT.findall(dtext))
     byfn = {}
     for r in rows: byfn.setdefault(r[2], []).append(r)
     pending = applied = errors = 0

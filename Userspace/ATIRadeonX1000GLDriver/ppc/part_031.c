@@ -999,60 +999,60 @@ int FUN_0010da84(param_1)
 }
 
 /* FUN_0010dad8 @ 0x10dad8 (128 bytes) */
-int FUN_0010dad8(param_1)
-  undefined4 *param_1;
+int FUN_0010dad8(this)
+  undefined4 *this;
 {
-  param_1[5] = 1;
-  param_1[4] = 1;
-  param_1[0x19] = 0;
-  param_1[2] = 0;
-  param_1[6] = 0;
-  *param_1 = &PTR_FUN_001ea5b0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x14] = 0;
-  param_1[0x15] = 0;
-  param_1[0x16] = 0;
-  param_1[0x17] = 0;
-  param_1[0x18] = 0;
+  this[5] = 1;
+  this[4] = 1;
+  this[0x19] = 0;
+  this[2] = 0;
+  this[6] = 0;
+  *this = &PTR_FUN_001ea5b0;
+  this[9] = 0;
+  this[10] = 0;
+  this[0xb] = 0;
+  this[0xc] = 0;
+  this[0xd] = 0;
+  this[0xe] = 0;
+  this[0xf] = 0;
+  this[0x10] = 0;
+  this[0x11] = 0;
+  this[0x12] = 0;
+  this[0x13] = 0;
+  this[0x14] = 0;
+  this[0x15] = 0;
+  this[0x16] = 0;
+  this[0x17] = 0;
+  this[0x18] = 0;
   return;
 }
 
 /* FUN_0010db58 @ 0x10db58 (128 bytes) */
-int FUN_0010db58(param_1)
-  undefined4 *param_1;
+int FUN_0010db58(this)
+  undefined4 *this;
 {
-  param_1[5] = 1;
-  param_1[4] = 1;
-  param_1[0x19] = 0;
-  param_1[2] = 0;
-  param_1[6] = 0;
-  *param_1 = &PTR_FUN_001ea5b0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x14] = 0;
-  param_1[0x15] = 0;
-  param_1[0x16] = 0;
-  param_1[0x17] = 0;
-  param_1[0x18] = 0;
+  this[5] = 1;
+  this[4] = 1;
+  this[0x19] = 0;
+  this[2] = 0;
+  this[6] = 0;
+  *this = &PTR_FUN_001ea5b0;
+  this[9] = 0;
+  this[10] = 0;
+  this[0xb] = 0;
+  this[0xc] = 0;
+  this[0xd] = 0;
+  this[0xe] = 0;
+  this[0xf] = 0;
+  this[0x10] = 0;
+  this[0x11] = 0;
+  this[0x12] = 0;
+  this[0x13] = 0;
+  this[0x14] = 0;
+  this[0x15] = 0;
+  this[0x16] = 0;
+  this[0x17] = 0;
+  this[0x18] = 0;
   return;
 }
 
@@ -1306,60 +1306,60 @@ int FUN_0010defc(param_1, param_2)
 }
 
 /* FUN_0010e050 @ 0x10e050 (172 bytes) */
-int FUN_0010e050(param_1, param_2)
-  undefined4 *param_1;
+int FUN_0010e050(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
   undefined *puVar1;
   int iVar2;
   
-  param_1[2] = 0;
+  this[2] = 0;
   puVar1 = PTR_DAT_001e8c88;
-  param_1[1] = 0;
-  *param_1 = puVar1 + 8;
-  *param_1 = PTR_DAT_001e8c74 + 8;
+  this[1] = 0;
+  *this = puVar1 + 8;
+  *this = PTR_DAT_001e8c74 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a578(iVar2,param_2,1);
   }
-  param_1[1] = iVar2;
+  this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1744);
   if (iVar2 != 0) {
     FUN_00129130(iVar2,param_2,1);
   }
-  param_1[2] = iVar2;
+  this[2] = iVar2;
   return;
 }
 
 /* FUN_0010e114 @ 0x10e114 (172 bytes) */
-int FUN_0010e114(param_1, param_2)
-  undefined4 *param_1;
+int FUN_0010e114(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
   undefined *puVar1;
   int iVar2;
   
-  param_1[2] = 0;
+  this[2] = 0;
   puVar1 = PTR_DAT_001e8c88;
-  param_1[1] = 0;
-  *param_1 = puVar1 + 8;
-  *param_1 = PTR_DAT_001e8c74 + 8;
+  this[1] = 0;
+  *this = puVar1 + 8;
+  *this = PTR_DAT_001e8c74 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a578(iVar2,param_2,1);
   }
-  param_1[1] = iVar2;
+  this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1744);
   if (iVar2 != 0) {
     FUN_00129130(iVar2,param_2,1);
   }
-  param_1[2] = iVar2;
+  this[2] = iVar2;
   return;
 }
 
 /* FUN_0010e1d8 @ 0x10e1d8 (176 bytes) */
-int FUN_0010e1d8(param_1, param_2)
-  undefined4 *param_1;
+int FUN_0010e1d8(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
   undefined *puVar1;
@@ -1368,26 +1368,26 @@ int FUN_0010e1d8(param_1, param_2)
   
   puVar1 = PTR_DAT_001e8c80;
   puVar3 = PTR_DAT_001e8c74 + 8;
-  param_1[2] = 0;
-  *param_1 = puVar3;
-  param_1[1] = 0;
-  *param_1 = puVar1 + 8;
+  this[2] = 0;
+  *this = puVar3;
+  this[1] = 0;
+  *this = puVar1 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a8bc(iVar2,param_2,1);
   }
-  param_1[1] = iVar2;
+  this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1944);
   if (iVar2 != 0) {
     FUN_001920e0(iVar2,param_2,1);
   }
-  param_1[2] = iVar2;
+  this[2] = iVar2;
   return;
 }
 
 /* FUN_0010e2a0 @ 0x10e2a0 (176 bytes) */
-int FUN_0010e2a0(param_1, param_2)
-  undefined4 *param_1;
+int FUN_0010e2a0(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
   undefined *puVar1;
@@ -1396,20 +1396,20 @@ int FUN_0010e2a0(param_1, param_2)
   
   puVar1 = PTR_DAT_001e8c80;
   puVar3 = PTR_DAT_001e8c74 + 8;
-  param_1[2] = 0;
-  *param_1 = puVar3;
-  param_1[1] = 0;
-  *param_1 = puVar1 + 8;
+  this[2] = 0;
+  *this = puVar3;
+  this[1] = 0;
+  *this = puVar1 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a8bc(iVar2,param_2,1);
   }
-  param_1[1] = iVar2;
+  this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1944);
   if (iVar2 != 0) {
     FUN_001920e0(iVar2,param_2,1);
   }
-  param_1[2] = iVar2;
+  this[2] = iVar2;
   return;
 }
 
