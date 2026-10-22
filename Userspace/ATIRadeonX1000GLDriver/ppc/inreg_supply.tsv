@@ -22,11 +22,11 @@
 120cd4	FUN_00120cd4	r8	PASS-deep	GARBAGE	
 120cd4	FUN_00120cd4	r9	PASS-deep	GARBAGE	
 120cd4	FUN_00120cd4	r10	PASS-deep	GARBAGE	
-1214fc	FUN_001214fc	r6	PASS-indirect	GARBAGE	
-1214fc	FUN_001214fc	r7	PASS-indirect	GARBAGE	
-1214fc	FUN_001214fc	r8	PASS-indirect	GARBAGE	
-12499c	FUN_0012499c	r8	PASS-deep	GARBAGE	
-125db8	FUN_00125db8	r8	PASS-deep	GARBAGE	
+1214fc	pass_ssa_build	r6	PASS-indirect	GARBAGE	
+1214fc	pass_ssa_build	r7	PASS-indirect	GARBAGE	
+1214fc	pass_ssa_build	r8	PASS-indirect	GARBAGE	
+12499c	PrimitiveIndex__ctor_12499c	r8	PASS-deep	GARBAGE	
+125db8	PrimitiveIndex__ctor_125db8	r8	PASS-deep	GARBAGE	
 12bb48	FUN_0012bb48	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 12bb88 bctrl via +0x24 (argument registers up to r5)
 12bb48	FUN_0012bb48	r6	PASS-indirect	GARBAGE	
 12bb48	FUN_0012bb48	r7	PASS-indirect	GARBAGE	
@@ -36,22 +36,22 @@
 12c2dc	FUN_0012c2dc	r7	PASS-deep	GARBAGE	
 12c2dc	FUN_0012c2dc	r8	PASS-deep	GARBAGE	
 12c2dc	FUN_0012c2dc	r9	PASS-deep	GARBAGE	
-12ccc0	FUN_0012ccc0	r5	PASS-indirect	GARBAGE	
-12ccc0	FUN_0012ccc0	r6	PASS-indirect	GARBAGE	
-12ccc0	FUN_0012ccc0	r7	PASS-indirect	GARBAGE	
-12ccc0	FUN_0012ccc0	r8	PASS-indirect	GARBAGE	
-12ccc0	FUN_0012ccc0	r9	PASS-indirect	GARBAGE	
-12d2f0	FUN_0012d2f0	r6	PASS-indirect	GARBAGE	
-12d2f0	FUN_0012d2f0	r7	PASS-indirect	GARBAGE	
-12d2f0	FUN_0012d2f0	r8	PASS-indirect	GARBAGE	
+12ccc0	pass_loop_trans	r5	PASS-indirect	GARBAGE	
+12ccc0	pass_loop_trans	r6	PASS-indirect	GARBAGE	
+12ccc0	pass_loop_trans	r7	PASS-indirect	GARBAGE	
+12ccc0	pass_loop_trans	r8	PASS-indirect	GARBAGE	
+12ccc0	pass_loop_trans	r9	PASS-indirect	GARBAGE	
+12d2f0	pass_flatten_ifs	r6	PASS-indirect	GARBAGE	
+12d2f0	pass_flatten_ifs	r7	PASS-indirect	GARBAGE	
+12d2f0	pass_flatten_ifs	r8	PASS-indirect	GARBAGE	
 12dd58	FUN_0012dd58	r6	PASS-indirect	GARBAGE	
 12dd58	FUN_0012dd58	r7	PASS-indirect	GARBAGE	
 12dd58	FUN_0012dd58	r8	PASS-indirect	GARBAGE	
 12df90	FUN_0012df90	r8	PASS-indirect	GARBAGE	
-1300b0	FUN_001300b0	r6	PASS-indirect	GARBAGE	
-1300b0	FUN_001300b0	r7	PASS-indirect	GARBAGE	
-1300b0	FUN_001300b0	r8	PASS-indirect	GARBAGE	
-1300b0	FUN_001300b0	r9	PASS-indirect	GARBAGE	
+1300b0	pass_remove_empty_graphs	r6	PASS-indirect	GARBAGE	
+1300b0	pass_remove_empty_graphs	r7	PASS-indirect	GARBAGE	
+1300b0	pass_remove_empty_graphs	r8	PASS-indirect	GARBAGE	
+1300b0	pass_remove_empty_graphs	r9	PASS-indirect	GARBAGE	
 131d08	FUN_00131d08	r8	PASS-indirect	GARBAGE	
 131d08	FUN_00131d08	r10	PASS-indirect	GARBAGE	
 139f84	FUN_00139f84	r6	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 139fb0 bctrl via +0x40 (argument registers up to r6)
@@ -139,8 +139,8 @@
 18b9cc	FUN_0018b9cc	r7	PASS-indirect	GARBAGE	
 18b9cc	FUN_0018b9cc	r8	PASS-indirect	GARBAGE	
 18d4b4	FUN_0018d4b4	r8	PASS-indirect	GARBAGE	
-1906c8	FUN_001906c8	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 190720 bctrl via +0x4c (argument registers up to r5)
-1906c8	FUN_001906c8	r6	PASS-indirect	GARBAGE	
+1906c8	R300VSchedModel__vslot3	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 190720 bctrl via +0x4c (argument registers up to r5)
+1906c8	R300VSchedModel__vslot3	r6	PASS-indirect	GARBAGE	
 190990	FUN_00190990	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 1909d4 bctrl via +0x80 (argument registers up to r5)
 190990	FUN_00190990	r6	PASS-indirect	GARBAGE	
 190990	FUN_00190990	r7	PASS-indirect	GARBAGE	

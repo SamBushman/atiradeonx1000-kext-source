@@ -262,7 +262,7 @@ int eh_pad_19dd38(param_1)
 {
   undefined4 unaff_r30;
   
-  FUN_0019b91c(unaff_r30);
+  MachineAssembler__dtor_19b91c(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -287,7 +287,7 @@ int eh_pad_19df28(param_1)
 {
   undefined4 unaff_r30;
   
-  FUN_0019b91c(unaff_r30);
+  MachineAssembler__dtor_19b91c(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -298,7 +298,7 @@ int eh_pad_19dfcc(param_1)
 {
   undefined4 unaff_r30;
   
-  FUN_0019b91c(unaff_r30);
+  MachineAssembler__dtor_19b91c(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }

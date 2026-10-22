@@ -139,8 +139,8 @@ int FUN_00109d50(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_00109dcc @ 0x109dcc (92 bytes) */
-int FUN_00109dcc(this, kind, compiler)
+/* IRProjection__ctor_109dcc @ 0x109dcc (92 bytes) */
+int IRProjection__ctor_109dcc(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -154,8 +154,8 @@ int FUN_00109dcc(this, kind, compiler)
   return;
 }
 
-/* FUN_00109e28 @ 0x109e28 (92 bytes) */
-int FUN_00109e28(this, kind, compiler)
+/* IRProjection__ctor_109e28 @ 0x109e28 (92 bytes) */
+int IRProjection__ctor_109e28(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -180,12 +180,12 @@ int FUN_00109e84(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00109e28)(allocation + 1,param_1,compiler);
+  ((int (*)())IRProjection__ctor_109e28)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
-/* FUN_00109f00 @ 0x109f00 (80 bytes) */
-int FUN_00109f00(this, kind, compiler)
+/* IRPresub1__ctor_109f00 @ 0x109f00 (80 bytes) */
+int IRPresub1__ctor_109f00(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -197,8 +197,8 @@ int FUN_00109f00(this, kind, compiler)
   return;
 }
 
-/* FUN_00109f50 @ 0x109f50 (80 bytes) */
-int FUN_00109f50(this, kind, compiler)
+/* IRPresub1__ctor_109f50 @ 0x109f50 (80 bytes) */
+int IRPresub1__ctor_109f50(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -221,12 +221,12 @@ int FUN_00109fa0(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00109f50)(allocation + 1,param_1,compiler);
+  ((int (*)())IRPresub1__ctor_109f50)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
-/* FUN_0010a01c @ 0x10a01c (84 bytes) */
-int FUN_0010a01c(this, kind, compiler)
+/* IRPresub2__ctor_10a01c @ 0x10a01c (84 bytes) */
+int IRPresub2__ctor_10a01c(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -238,8 +238,8 @@ int FUN_0010a01c(this, kind, compiler)
   return;
 }
 
-/* FUN_0010a070 @ 0x10a070 (84 bytes) */
-int FUN_0010a070(this, kind, compiler)
+/* IRPresub2__ctor_10a070 @ 0x10a070 (84 bytes) */
+int IRPresub2__ctor_10a070(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -262,12 +262,12 @@ int FUN_0010a0c4(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_0010a070)(allocation + 1,param_1,compiler);
+  ((int (*)())IRPresub2__ctor_10a070)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
-/* FUN_0010a140 @ 0x10a140 (128 bytes) */
-int FUN_0010a140(this, kind, compiler)
+/* IRMix__ctor_10a140 @ 0x10a140 (128 bytes) */
+int IRMix__ctor_10a140(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -293,8 +293,8 @@ int FUN_0010a140(this, kind, compiler)
   return;
 }
 
-/* FUN_0010a1c0 @ 0x10a1c0 (128 bytes) */
-int FUN_0010a1c0(this, kind, compiler)
+/* IRMix__ctor_10a1c0 @ 0x10a1c0 (128 bytes) */
+int IRMix__ctor_10a1c0(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
@@ -331,12 +331,12 @@ int FUN_0010a240(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_0010a1c0)(allocation + 1,param_1,compiler);
+  ((int (*)())IRMix__ctor_10a1c0)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
-/* FUN_0010a2bc @ 0x10a2bc (184 bytes) */
-int FUN_0010a2bc(this, compiler)
+/* IRPhiNode__ctor_10a2bc @ 0x10a2bc (184 bytes) */
+int IRPhiNode__ctor_10a2bc(this, compiler)
   undefined4 *this;
   int compiler;
 {
@@ -370,8 +370,8 @@ int FUN_0010a2bc(this, compiler)
   return;
 }
 
-/* FUN_0010a398 @ 0x10a398 (184 bytes) */
-int FUN_0010a398(this, compiler)
+/* IRPhiNode__ctor_10a398 @ 0x10a398 (184 bytes) */
+int IRPhiNode__ctor_10a398(this, compiler)
   undefined4 *this;
   int compiler;
 {
@@ -767,7 +767,7 @@ int FUN_0010ad68(param_1, compiler)
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   puVar4 = allocation + 1;
   *allocation = arena;
-  FUN_0010502c(puVar4,0x8c,compiler);
+  IRInst__ctor_10502c(puVar4,0x8c,compiler);
   operandRecord = FUN_001054ec(puVar4,1);
   *(undefined4 *)(operandRecord + 8) = param_1;
   *(undefined4 *)(operandRecord + 0xc) = 0;

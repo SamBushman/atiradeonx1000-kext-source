@@ -2853,8 +2853,8 @@ int FUN_00170e6c(compiler, param_2)
   return FUN_00166cfc(compiler);
 }
 
-/* FUN_00171714 @ 0x171714 (408 bytes) */
-int FUN_00171714(compiler, program)
+/* pass_sched_preprocess_and_schedule_inst @ 0x171714 (408 bytes) */
+int pass_sched_preprocess_and_schedule_inst(compiler, program)
   int *compiler;
   int program;
 {
@@ -3036,7 +3036,7 @@ code_r0x00171ba0:
   FUN_000ed7e4(compiler[1],(int)"sched_preprocess");
   iVar8 = FUN_000e07dc(*compiler,0x43);
   if (iVar8 != 0) {
-    FUN_00184ab4(compiler,program);
+    pass_minreg_order(compiler,program);
   }
   FUN_00169e30(compiler);
   FUN_00165014(compiler);
@@ -3180,7 +3180,7 @@ int FUN_00171e68(param_1)
   if (iVar4 != 0) {
     FUN_0018401c(auStack_1d8,param_1,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
-  ((int (*)())FUN_00171714)(auStack_1d8,param_1);
+  ((int (*)())pass_sched_preprocess_and_schedule_inst)(auStack_1d8,param_1);
   puVar2 = &uStack_e4;
   do {
     puVar3 = puVar2 + -6;
@@ -3449,7 +3449,7 @@ int FUN_00172474(param_1, inst, param_3)
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     *allocation = arena;
     inst = allocation + 1;
-    FUN_0010502c(inst,uVar2,*(undefined4 *)(param_1 + 8));
+    IRInst__ctor_10502c(inst,uVar2,*(undefined4 *)(param_1 + 8));
   }
   else {
     FUN_00104f34(inst,param_3);

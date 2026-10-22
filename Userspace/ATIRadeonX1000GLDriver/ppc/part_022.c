@@ -1945,8 +1945,8 @@ int FUN_000e7c98(param_1)
   return piVar1;
 }
 
-/* FUN_000e7cf0 @ 0xe7cf0 (108 bytes) */
-int FUN_000e7cf0(param_1, inst)
+/* EntryBlock__vslot3 @ 0xe7cf0 (108 bytes) */
+int EntryBlock__vslot3(param_1, inst)
   int param_1;
   int inst;
 {
@@ -2527,7 +2527,7 @@ int FUN_000e8938(block)
   instAlloc = (undefined4 *)FUN_00193e18(arenaAt374,0x168);
   *instAlloc = arenaAt374;
   puVar1 = instAlloc + 1;
-  FUN_00108d5c(puVar1,*(undefined4 *)(block + 0xa8));
+  IREntry__ctor_108d5c(puVar1,*(undefined4 *)(block + 0xa8));
   *(undefined4 **)(block + 200) = puVar1;
   FUN_00193f94(block + 0x90,puVar1);
   *(int *)(*(int *)(block + 200) + 0x158) = block;
@@ -2535,7 +2535,7 @@ int FUN_000e8938(block)
   instAlloc = (undefined4 *)FUN_00193e18(arenaAt374,0x168);
   *instAlloc = arenaAt374;
   puVar1 = instAlloc + 1;
-  FUN_00108df4(puVar1,*(undefined4 *)(block + 0xa8));
+  IRExit__ctor_108df4(puVar1,*(undefined4 *)(block + 0xa8));
   *(undefined4 **)(block + 0xcc) = puVar1;
   FUN_00193f64(block + 0x90,puVar1);
   *(int *)(*(int *)(block + 0xcc) + 0x158) = block;
@@ -3083,7 +3083,7 @@ LAB_000e9610:
 asm(".globl FUN_000e77c0");
 asm(".set FUN_000e77c0, _FUN_000e77c0");
 asm(".globl FUN_000e7cf0");
-asm(".set FUN_000e7cf0, _FUN_000e7cf0");
+asm(".set FUN_000e7cf0, _EntryBlock__vslot3");
 asm(".globl FUN_000e84fc");
 asm(".set FUN_000e84fc, _FUN_000e84fc");
 asm(".globl FUN_000e86f0");

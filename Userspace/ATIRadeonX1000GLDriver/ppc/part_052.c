@@ -1259,8 +1259,8 @@ int FUN_0019a568(param_1, param_2)
   return;
 }
 
-/* FUN_0019a618 @ 0x19a618 (120 bytes) */
-int FUN_0019a618(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* R300VMachineAssembler__vslot2 @ 0x19a618 (120 bytes) */
+int R300VMachineAssembler__vslot2(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2067,8 +2067,8 @@ int FUN_0019b8bc(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_0019b91c @ 0x19b91c (124 bytes) */
-int FUN_0019b91c(this)
+/* MachineAssembler__dtor_19b91c @ 0x19b91c (124 bytes) */
+int MachineAssembler__dtor_19b91c(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001eb808;
@@ -2080,8 +2080,8 @@ int FUN_0019b91c(this)
   return;
 }
 
-/* FUN_0019b9ac @ 0x19b9ac (124 bytes) */
-int FUN_0019b9ac(this)
+/* MachineAssembler__dtor_19b9ac @ 0x19b9ac (124 bytes) */
+int MachineAssembler__dtor_19b9ac(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001eb808;
@@ -2093,8 +2093,8 @@ int FUN_0019b9ac(this)
   return;
 }
 
-/* FUN_0019ba3c @ 0x19ba3c (136 bytes) */
-int FUN_0019ba3c(this)
+/* R300VMachineAssembler__deleting_dtor @ 0x19ba3c (136 bytes) */
+int R300VMachineAssembler__deleting_dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -3247,7 +3247,7 @@ asm(".set FUN_0019a484, _FUN_0019a484");
 asm(".globl FUN_0019a510");
 asm(".set FUN_0019a510, _FUN_0019a510");
 asm(".globl FUN_0019a618");
-asm(".set FUN_0019a618, _FUN_0019a618");
+asm(".set FUN_0019a618, _R300VMachineAssembler__vslot2");
 asm(".globl FUN_0019a690");
 asm(".set FUN_0019a690, _FUN_0019a690");
 asm(".globl FUN_0019a6a0");
@@ -3299,9 +3299,9 @@ asm(".set FUN_0019b808, _FUN_0019b808");
 asm(".globl FUN_0019b8bc");
 asm(".set FUN_0019b8bc, _FUN_0019b8bc");
 asm(".globl FUN_0019b9ac");
-asm(".set FUN_0019b9ac, _FUN_0019b9ac");
+asm(".set FUN_0019b9ac, _MachineAssembler__dtor_19b9ac");
 asm(".globl FUN_0019ba3c");
-asm(".set FUN_0019ba3c, _FUN_0019ba3c");
+asm(".set FUN_0019ba3c, _R300VMachineAssembler__deleting_dtor");
 asm(".globl FUN_0019d1f4");
 asm(".set FUN_0019d1f4, _FUN_0019d1f4");
 asm(".globl FUN_0019d474");

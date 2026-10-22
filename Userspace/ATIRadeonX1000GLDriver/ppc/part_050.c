@@ -272,8 +272,8 @@ LAB_00191c54:
   return uVar4;
 }
 
-/* FUN_00191c6c @ 0x191c6c (16 bytes) */
-int FUN_00191c6c(param_1)
+/* FudoChip__vslot2 @ 0x191c6c (16 bytes) */
+int FudoChip__vslot2(param_1)
   int param_1;
 {
   *(undefined4 *)(*(int *)(param_1 + 8) + 0x2c) = 0x100;
@@ -375,7 +375,7 @@ int FUN_00191e28(param_1, param_2)
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
   FUN_00189560(puVar2 + 10);
-  FUN_00189604(puVar2);
+  R520SchedModel__vslot2(puVar2);
   puVar2[0x1a] = 0;
   *puVar2 = PTR_DAT_001e9148 + 8;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
@@ -388,8 +388,8 @@ int FUN_00191e28(param_1, param_2)
   return;
 }
 
-/* FUN_00191efc @ 0x191efc (448 bytes) */
-int FUN_00191efc(this, param_2, param_3)
+/* FudoPs__ctor_191efc @ 0x191efc (448 bytes) */
+int FudoPs__ctor_191efc(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
@@ -407,7 +407,7 @@ int FUN_00191efc(this, param_2, param_3)
   float *loopIndex;
   double dVar12;
   
-  FUN_00128fd0(this,param_2,0);
+  KhanPs__ctor_128fd0(this,param_2,0);
   this[7] = 0;
   this[0x10] = 0x200;
   *this = &PTR_FUN_001eb450;
@@ -482,8 +482,8 @@ int FUN_00191efc(this, param_2, param_3)
   return;
 }
 
-/* FUN_001920e0 @ 0x1920e0 (748 bytes) */
-int FUN_001920e0(this, param_2, param_3)
+/* FudoPs__ctor_1920e0 @ 0x1920e0 (748 bytes) */
+int FudoPs__ctor_1920e0(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
@@ -501,7 +501,7 @@ int FUN_001920e0(this, param_2, param_3)
   float *loopIndex;
   double dVar12;
   
-  FUN_00128fd0(this,param_2,0);
+  KhanPs__ctor_128fd0(this,param_2,0);
   this[7] = 0;
   this[0x10] = 0x200;
   *this = &PTR_FUN_001eb450;
@@ -2515,7 +2515,7 @@ asm(".set FUN_001919d8, _FUN_001919d8");
 asm(".globl FUN_00191b30");
 asm(".set FUN_00191b30, _FUN_00191b30");
 asm(".globl FUN_00191c6c");
-asm(".set FUN_00191c6c, _FUN_00191c6c");
+asm(".set FUN_00191c6c, _FudoChip__vslot2");
 asm(".globl FUN_00191c7c");
 asm(".set FUN_00191c7c, _FUN_00191c7c");
 asm(".globl FUN_00191e28");

@@ -176,7 +176,7 @@ int FUN_000f4fdc(compiler, param_2, param_3, param_4, param_5, param_6, param_7,
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     *allocation = arena;
     puVar3 = allocation + 1;
-    FUN_00109938(puVar3,*compiler);
+    IRLoadConst__ctor_109938(puVar3,*compiler);
     if ((*(uint *)(*(int *)(*compiler + 0x6c4) + 0x30) & 0x10000) == 0) {
       arena = FUN_000f4a5c(compiler);
       allocation[0x26] = arena;
@@ -1125,7 +1125,7 @@ LAB_000f6b68:
       allocation = (undefined4 *)FUN_00193e18(arena,0x168);
       *allocation = arena;
       puVar10 = allocation + 1;
-      FUN_00109938(puVar10,*(undefined4 *)(param_1 + 8));
+      IRLoadConst__ctor_109938(puVar10,*(undefined4 *)(param_1 + 8));
       arena = FUN_000f4a5c(*(undefined4 *)(param_1 + 0x3ac));
       allocation[0x26] = arena;
       allocation[0x27] = 0x33;
@@ -2910,7 +2910,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
   allocation = (undefined4 *)FUN_00193e18(arenaAt374,0x168);
   *allocation = arenaAt374;
   puVar12 = allocation + 1;
-  FUN_00109e28(puVar12,0x84,*(undefined4 *)(compiler + 8));
+  IRProjection__ctor_109e28(puVar12,0x84,*(undefined4 *)(compiler + 8));
   iVar11 = *(int *)(*(int *)(compiler + 8) + 0x3b4) + 1;
   *(int *)(*(int *)(compiler + 8) + 0x3b4) = iVar11;
   iVar4 = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0x3a,iVar11,0);
@@ -3612,7 +3612,7 @@ int FUN_000fadc4(param_1, inst, param_3, param_4, vector, param_6, param_7)
   allocation = (undefined4 *)FUN_00193e18(arena,0x15c);
   *allocation = arena;
   puVar6 = allocation + 1;
-  FUN_000ea6d0(puVar6,inst,param_4,0,*(undefined4 *)(param_1 + 8));
+  IfHeader__ctor_ea6d0(puVar6,inst,param_4,0,*(undefined4 *)(param_1 + 8));
   FUN_000e78c0(puVar6,param_3);
   local_48[0] = DAT_001aa9a8;
   ((int (*)())FUN_000fa958)(param_1,5,1,param_7,inst,1,DAT_001aa9dc,local_48,param_6,1,puVar6);
@@ -3948,7 +3948,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       allocation = (undefined4 *)FUN_00193e18(arena,0x168);
       *allocation = arena;
       puVar33 = allocation + 1;
-      FUN_00109e28(puVar33,0x84,*(undefined4 *)(param_1 + 8));
+      IRProjection__ctor_109e28(puVar33,0x84,*(undefined4 *)(param_1 + 8));
       FUN_001046c8(puVar33,0,iVar20);
       pdVar18 = (dword *)0x0;
       uVar24 = 0x22;
@@ -3982,7 +3982,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         allocation = (undefined4 *)FUN_00193e18(arenaAt374,0x168);
         *allocation = arenaAt374;
         pdVar17 = allocation + 1;
-        FUN_0010502c(pdVar17,0x82,*(undefined4 *)(param_1 + 8));
+        IRInst__ctor_10502c(pdVar17,0x82,*(undefined4 *)(param_1 + 8));
         FUN_001046c8(pdVar17,0,iVar6);
         FUN_001046c8(pdVar17,1,arena);
         uVar24 = 0x23;
@@ -4018,7 +4018,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         allocation = (undefined4 *)FUN_00193e18(arenaAt374,0x168);
         *allocation = arenaAt374;
         pdVar17 = allocation + 1;
-        FUN_0010502c(pdVar17,0x82,*(undefined4 *)(param_1 + 8));
+        IRInst__ctor_10502c(pdVar17,0x82,*(undefined4 *)(param_1 + 8));
         FUN_001046c8(pdVar17,0,iVar6);
         FUN_001046c8(pdVar17,1,arena);
         uVar24 = 0x24;
@@ -5222,7 +5222,7 @@ int FUN_000fd5c8(param_1, param_2)
   puVar14 = (undefined4 *)FUN_00193e18(arena,0x130);
   *puVar14 = arena;
   ppppppuVar49 = (uint ******)(puVar14 + 1);
-  FUN_000ea020(ppppppuVar49,*(undefined4 *)(param_1 + 8));
+  Block__ctor_ea020(ppppppuVar49,*(undefined4 *)(param_1 + 8));
   local_180 = (uint *****)ppppppuVar49;
   FUN_000ec3ac(param_1,local_184,ppppppuVar49);
   local_6c = auStack_16c;
@@ -5628,7 +5628,7 @@ code_r0x000fed00:
       puVar14 = (undefined4 *)FUN_00193e18(arena,0x168);
       *puVar14 = arena;
       piVar18 = puVar14 + 1;
-      FUN_0010502c(piVar18,0x94,*(undefined4 *)(param_1 + 8));
+      IRInst__ctor_10502c(piVar18,0x94,*(undefined4 *)(param_1 + 8));
       arena = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x2f,0,0);
       FUN_001046c8(piVar18,0,arena);
       puVar14[0x4c] = 0;
@@ -5737,7 +5737,7 @@ code_r0x000fed00:
       puVar14 = (undefined4 *)FUN_00193e18(arena,0x134);
       *puVar14 = arena;
       pppppuVar52 = (uint *****)(puVar14 + 1);
-      FUN_000ea148(pppppuVar52,*(undefined4 *)(param_1 + 8));
+      Block__ctor_ea148(pppppuVar52,*(undefined4 *)(param_1 + 8));
       puVar14[0x4c] = pppppuVar15;
       puVar14[1] = PTR_DAT_001e8bd0 + 8;
       local_180 = pppppuVar52;
@@ -5748,7 +5748,7 @@ code_r0x000fed00:
       puVar14 = (undefined4 *)FUN_00193e18(arena,0x130);
       *puVar14 = arena;
       ppppppuVar49 = (uint ******)(puVar14 + 1);
-      FUN_000ea020(ppppppuVar49,*(undefined4 *)(param_1 + 8));
+      Block__ctor_ea020(ppppppuVar49,*(undefined4 *)(param_1 + 8));
       local_180 = (uint *****)ppppppuVar49;
       FUN_000ec3ac(param_1,local_184,ppppppuVar49);
       FUN_000e8e4c(local_184,local_180);
@@ -5807,7 +5807,7 @@ code_r0x000fed00:
       puVar14 = (undefined4 *)FUN_00193e18(arena,0x168);
       *puVar14 = arena;
       piVar18 = puVar14 + 1;
-      FUN_0010502c(piVar18,0xf8,*(undefined4 *)(param_1 + 8));
+      IRInst__ctor_10502c(piVar18,0xf8,*(undefined4 *)(param_1 + 8));
       puVar14[0x4c] = param_2[(int)param_2[0x16] + 0x23];
       ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
       break;
@@ -6221,7 +6221,7 @@ code_r0x000ff070:
       puVar14 = (undefined4 *)FUN_00193e18(arena,0x168);
       *puVar14 = arena;
       ppppppuVar19 = (uint ******)(puVar14 + 1);
-      FUN_0010502c(ppppppuVar19,0xb4,*(undefined4 *)(param_1 + 8));
+      IRInst__ctor_10502c(ppppppuVar19,0xb4,*(undefined4 *)(param_1 + 8));
       if (((uint)*ppppppuVar49 & 0x3fff0000) != 0) {
         puVar14[0x4c] = 1;
       }
@@ -6242,7 +6242,7 @@ code_r0x000ff070:
         puVar14 = (undefined4 *)FUN_00193e18(arena,0x168);
         *puVar14 = arena;
         puVar24 = puVar14 + 1;
-        FUN_00108918(puVar24,*(undefined4 *)(param_1 + 8));
+        IRExport__ctor_108918(puVar24,*(undefined4 *)(param_1 + 8));
         puVar14[6] = puVar14[6] | 0x10000;
         *(undefined4 **)(param_1 + 0x350) = puVar24;
         puVar14[0x28] = 0;
@@ -6292,7 +6292,7 @@ code_r0x000ff070:
       puVar14 = (undefined4 *)FUN_00193e18(arena,0x168);
       *puVar14 = arena;
       piVar18 = puVar14 + 1;
-      FUN_0010502c(piVar18,0x106,*(undefined4 *)(param_1 + 8));
+      IRInst__ctor_10502c(piVar18,0x106,*(undefined4 *)(param_1 + 8));
       ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
     }
     puVar12 = *(uint **)(param_1 + 0x414);
@@ -6475,7 +6475,7 @@ code_r0x001005f4:
               *puVar32 = uVar50;
               ppppppuVar48 = (uint ******)(puVar32 + 1);
               in_r6 = *(uint *******)(param_1 + 8);
-              FUN_000ec0c8(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),in_r6);
+              BreakBlock__ctor_ec0c8(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),in_r6);
               puVar32[0x2f] = local_188;
               FUN_000ec3ac(param_1,local_184,ppppppuVar48);
               FUN_000e8e4c(local_184,ppppppuVar48);
@@ -6649,7 +6649,7 @@ code_r0x00102220:
             *puVar32 = uVar50;
             ppppppuVar48 = (uint ******)(puVar32 + 1);
             in_r6 = *(uint *******)(param_1 + 8);
-            FUN_000ec178(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),in_r6);
+            ContinueBlock__ctor_ec178(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),in_r6);
             puVar32[0x2f] = local_188;
             FUN_000ec3ac(param_1,local_184,ppppppuVar48);
             FUN_000e8e4c(local_184,ppppppuVar48);
@@ -6694,7 +6694,7 @@ code_r0x00102220:
       puVar32 = (undefined4 *)FUN_00193e18(arena,0x130);
       *puVar32 = arena;
       ppppppuVar48 = (uint ******)(puVar32 + 1);
-      FUN_000ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
+      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
       puVar32[0x2f] = local_188;
       ppppuVar45[0x4e] = (uint ***)ppppppuVar48;
       local_180 = (uint *****)ppppppuVar48;
@@ -6739,7 +6739,7 @@ joined_r0x00103afc:
         puVar32 = (undefined4 *)FUN_00193e18(arena,0x130);
         *puVar32 = arena;
         ppppuVar51 = (uint ****)(puVar32 + 1);
-        FUN_000ea020(ppppuVar51,*(undefined4 *)(param_1 + 8));
+        Block__ctor_ea020(ppppuVar51,*(undefined4 *)(param_1 + 8));
         puVar32[0x2f] = local_188;
         ppppuVar30[0x4e] = (uint ***)ppppuVar51;
         FUN_000e8e4c(ppppuVar30,ppppuVar51);
@@ -6753,7 +6753,7 @@ joined_r0x00103afc:
       puVar32 = (undefined4 *)FUN_00193e18(arena,0x130);
       *puVar32 = arena;
       ppppppuVar48 = (uint ******)(puVar32 + 1);
-      FUN_000ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
+      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
       puVar32[0x2f] = local_188;
       local_180 = (uint *****)ppppppuVar48;
       FUN_000ec3ac(param_1,pppuVar42,ppppppuVar48);
@@ -7352,7 +7352,7 @@ code_r0x00101cbc:
         pppppuVar15 = (uint *****)(puVar32 + 1);
         in_r6 = (uint ******)0x0;
         in_r7 = *(uint *******)(param_1 + 8);
-        FUN_000ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
+        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
         break;
       case 99:
         iVar43 = *(int *)(param_1 + 8);
@@ -7376,7 +7376,7 @@ code_r0x00101cbc:
         *puVar32 = arena;
         pppppuVar15 = (uint *****)(puVar32 + 1);
         in_r6 = *(uint *******)(param_1 + 8);
-        FUN_000ebac8(pppppuVar15,pvVar16,ppppppuVar48,in_r6);
+        IfHeaderStatic__ctor_ebac8(pppppuVar15,pvVar16,ppppppuVar48,in_r6);
         FUN_000e78c0(pppppuVar15,local_188);
         FUN_000ed63c(param_1,pvVar16);
         pppppuVar52 = (uint *****)0x0;
@@ -7429,14 +7429,14 @@ code_r0x00100810:
         pppppuVar15 = (uint *****)(puVar32 + 1);
         in_r6 = (uint ******)0x0;
         in_r7 = *(uint *******)(param_1 + 8);
-        FUN_000ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
+        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
         break;
       case 0x65:
         arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
         puVar32 = (undefined4 *)FUN_00193e18(arena,0x168);
         *puVar32 = arena;
         puVar32 = puVar32 + 1;
-        FUN_0010502c(puVar32,0x8c,*(undefined4 *)(param_1 + 8));
+        IRInst__ctor_10502c(puVar32,0x8c,*(undefined4 *)(param_1 + 8));
         arena = 6;
         goto code_r0x00102c90;
       case 0x66:
@@ -7444,7 +7444,7 @@ code_r0x00100810:
         puVar32 = (undefined4 *)FUN_00193e18(arena,0x168);
         *puVar32 = arena;
         puVar32 = puVar32 + 1;
-        FUN_0010502c(puVar32,0x8c,*(undefined4 *)(param_1 + 8));
+        IRInst__ctor_10502c(puVar32,0x8c,*(undefined4 *)(param_1 + 8));
         arena = 7;
 code_r0x00102c90:
         puVar32[0x4b] = arena;
@@ -7475,7 +7475,7 @@ code_r0x00102c90:
         pppppuVar15 = (uint *****)(puVar32 + 1);
         in_r6 = (uint ******)0x0;
         in_r7 = *(uint *******)(param_1 + 8);
-        FUN_000ea6d0(pppppuVar15,arena,ppppppuVar48,0,in_r7);
+        IfHeader__ctor_ea6d0(pppppuVar15,arena,ppppppuVar48,0,in_r7);
         uVar10 = local_b0[1] - 1;
         if (uVar10 < local_b0[1]) {
           piVar18 = (int *)(uVar10 * 4 + local_b0[2]);
@@ -7512,7 +7512,7 @@ code_r0x0010082c:
         pppppuVar15 = (uint *****)(puVar32 + 1);
         in_r6 = (uint ******)0x0;
         in_r7 = *(uint *******)(param_1 + 8);
-        FUN_000ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
+        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
       }
       FUN_000e78c0(pppppuVar15,local_188);
       FUN_000ed63c(param_1,pvVar16);
@@ -7584,7 +7584,7 @@ code_r0x00103300:
         puVar32 = (undefined4 *)FUN_00193e18(arena,0x130);
         *puVar32 = arena;
         puVar29 = puVar32 + 1;
-        FUN_000ea020(puVar29,*(undefined4 *)(param_1 + 8));
+        Block__ctor_ea020(puVar29,*(undefined4 *)(param_1 + 8));
         FUN_000e8e4c(iVar20,puVar29);
         FUN_000ec3ac(param_1,iVar21,puVar29);
         iVar43 = *(int *)(iVar20 + 0x154);
@@ -7594,7 +7594,7 @@ code_r0x00103300:
         puVar29 = (undefined4 *)FUN_00193e18(arena,0x130);
         *puVar29 = arena;
         ppppppuVar48 = (uint ******)(puVar29 + 1);
-        FUN_000ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
+        Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
         local_180 = (uint *****)ppppppuVar48;
         FUN_000ec3ac(param_1,iVar43,ppppppuVar48);
         FUN_000e8e4c(iVar43,local_180);
@@ -7659,7 +7659,7 @@ code_r0x00103300:
       *puVar32 = uVar50;
       puVar29 = puVar32 + 1;
       in_r7 = *(uint *******)(param_1 + 8);
-      FUN_000ea828(puVar29,uVar10,arena,in_r6,in_r7);
+      PostLoopFooter__ctor_ea828(puVar29,uVar10,arena,in_r6,in_r7);
       puVar32[0x2f] = local_188;
       if (((uint)*ppppppuVar49 & 0x10000) != 0) {
         puVar32[0x4e] = 1;
@@ -7682,7 +7682,7 @@ code_r0x00103300:
       puVar28 = (undefined4 *)FUN_00193e18(arena,0x130);
       *puVar28 = arena;
       ppppppuVar48 = (uint ******)(puVar28 + 1);
-      FUN_000ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
+      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
       puVar28[0x2f] = local_188;
       local_180 = (uint *****)ppppppuVar48;
       FUN_000ec3ac(param_1,puVar29,ppppppuVar48);

@@ -149,8 +149,8 @@ int FUN_00105930(inst, param_2)
   return;
 }
 
-/* FUN_00105a44 @ 0x105a44 (224 bytes) */
-int FUN_00105a44(param_1, param_2)
+/* IRStartCallRoutine__vslot4 @ 0x105a44 (224 bytes) */
+int IRStartCallRoutine__vslot4(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -191,8 +191,8 @@ int FUN_00105b24(param_1, param_2)
   return;
 }
 
-/* FUN_00105b7c @ 0x105b7c (224 bytes) */
-int FUN_00105b7c(param_1, param_2, param_3)
+/* IRStartCallRoutine__vslot3 @ 0x105b7c (224 bytes) */
+int IRStartCallRoutine__vslot3(param_1, param_2, param_3)
   int *param_1;
   undefined4 param_2;
   int param_3;
@@ -570,8 +570,8 @@ int FUN_001062c0(param_1, param_2, param_3, compiler)
   return;
 }
 
-/* FUN_0010647c @ 0x10647c (620 bytes) */
-int FUN_0010647c(inst, param_2)
+/* IRStartCallRoutine__vslot2 @ 0x10647c (620 bytes) */
+int IRStartCallRoutine__vslot2(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -655,8 +655,8 @@ LAB_0010663c:
   return 1;
 }
 
-/* FUN_001066e8 @ 0x1066e8 (84 bytes) */
-int FUN_001066e8(inst, param_2)
+/* IRProjection__vslot2 @ 0x1066e8 (84 bytes) */
+int IRProjection__vslot2(inst, param_2)
   undefined4 inst;
   undefined4 param_2;
 {
@@ -667,20 +667,20 @@ int FUN_001066e8(inst, param_2)
     iVar1 = FUN_001054ec(inst,1);
     FUN_000f2c5c(*(undefined4 *)(iVar1 + 0x10));
   }
-  return ((int (*)())FUN_0010647c)(inst,param_2);
+  return ((int (*)())IRStartCallRoutine__vslot2)(inst,param_2);
 }
 
-/* FUN_0010673c @ 0x10673c (68 bytes) */
-int FUN_0010673c(param_1, param_2)
+/* IRPresub2__vslot2 @ 0x10673c (68 bytes) */
+int IRPresub2__vslot2(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
   (**(code **)(*param_1 + 0x14))(param_1,param_2);
-  return ((int (*)())FUN_0010647c)(param_1,param_2);
+  return ((int (*)())IRStartCallRoutine__vslot2)(param_1,param_2);
 }
 
-/* FUN_00106780 @ 0x106780 (128 bytes) */
-int FUN_00106780(inst, param_2)
+/* IRPhiNode__vslot2 @ 0x106780 (128 bytes) */
+int IRPhiNode__vslot2(inst, param_2)
   int inst;
   undefined4 param_2;
 {
@@ -704,7 +704,7 @@ int FUN_00106780(inst, param_2)
       iVar2 = iVar2 + 1;
     } while (iVar2 <= iVar1);
   }
-  return ((int (*)())FUN_0010647c)(inst,param_2);
+  return ((int (*)())IRStartCallRoutine__vslot2)(inst,param_2);
 }
 
 /* FUN_00106804 @ 0x106804 (484 bytes) */
@@ -870,8 +870,8 @@ int FUN_00106b48(inst, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_00106ba0 @ 0x106ba0 (276 bytes) */
-int FUN_00106ba0(inst, param_2, param_3, param_4, param_5, param_6, param_7)
+/* IRMix__vslot2 @ 0x106ba0 (276 bytes) */
+int IRMix__vslot2(inst, param_2, param_3, param_4, param_5, param_6, param_7)
   int *inst;
   int param_2;
   undefined4 param_3;
@@ -918,16 +918,16 @@ int FUN_00106ba0(inst, param_2, param_3, param_4, param_5, param_6, param_7)
     iVar2 = iVar2 + 1;
   } while (bVar1);
   (**(code **)(*inst + 0x14))(inst);
-  return ((int (*)())FUN_0010647c)(inst,param_2);
+  return ((int (*)())IRStartCallRoutine__vslot2)(inst,param_2);
 }
 
-/* FUN_00106cb4 @ 0x106cb4 (68 bytes) */
-int FUN_00106cb4(param_1, param_2)
+/* IRPresub1__vslot2 @ 0x106cb4 (68 bytes) */
+int IRPresub1__vslot2(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
   (**(code **)(*param_1 + 0x14))(param_1,param_2);
-  return ((int (*)())FUN_0010647c)(param_1,param_2);
+  return ((int (*)())IRStartCallRoutine__vslot2)(param_1,param_2);
 }
 
 /* FUN_00106cf8 @ 0x106cf8 (772 bytes) */
@@ -1031,7 +1031,7 @@ int FUN_00106ffc(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001051b0(inst,param_2,compiler);
+  IRInst__ctor_1051b0(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8c64;
   inst[0x20] = 1;
   inst[0x21] = 1;
@@ -1047,7 +1047,7 @@ int FUN_0010704c(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001051b0(inst,param_2,compiler);
+  IRInst__ctor_1051b0(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8c64;
   inst[0x20] = 1;
   inst[0x21] = 1;
@@ -1063,7 +1063,7 @@ int FUN_0010709c(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001051b0(inst,param_2,compiler);
+  IRInst__ctor_1051b0(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8b50;
   inst[5] = inst[5] | 0x18000;
   *inst = puVar1 + 8;
@@ -1079,7 +1079,7 @@ int FUN_001070f8(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001051b0(inst,param_2,compiler);
+  IRInst__ctor_1051b0(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8b50;
   inst[5] = inst[5] | 0x18000;
   *inst = puVar1 + 8;
@@ -1095,7 +1095,7 @@ int FUN_00107154(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001051b0(inst,param_2,compiler);
+  IRInst__ctor_1051b0(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8c58;
   inst[0x4b] = 0;
   inst[0x20] = 1;
@@ -1111,7 +1111,7 @@ int FUN_001071a8(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001051b0(inst,param_2,compiler);
+  IRInst__ctor_1051b0(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8c58;
   inst[0x4b] = 0;
   inst[0x20] = 1;
@@ -1200,8 +1200,8 @@ int FUN_00107350(param_1, compiler, param_3, param_4)
   return allocation + 1;
 }
 
-/* FUN_001073dc @ 0x1073dc (68 bytes) */
-int FUN_001073dc(this, param_2, param_3)
+/* IRVertexFetch__ctor_1073dc @ 0x1073dc (68 bytes) */
+int IRVertexFetch__ctor_1073dc(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -1211,8 +1211,8 @@ int FUN_001073dc(this, param_2, param_3)
   return;
 }
 
-/* FUN_00107420 @ 0x107420 (68 bytes) */
-int FUN_00107420(this, param_2, compiler)
+/* IRVertexFetch__ctor_107420 @ 0x107420 (68 bytes) */
+int IRVertexFetch__ctor_107420(this, param_2, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 compiler;
@@ -1233,7 +1233,7 @@ int FUN_00107464(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00107420)(allocation + 1,param_1,compiler);
+  ((int (*)())IRVertexFetch__ctor_107420)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
@@ -1627,25 +1627,25 @@ int FUN_00107da8(param_1, param_2, param_3)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00105a44");
-asm(".set FUN_00105a44, _FUN_00105a44");
+asm(".set FUN_00105a44, _IRStartCallRoutine__vslot4");
 asm(".globl FUN_00105b7c");
-asm(".set FUN_00105b7c, _FUN_00105b7c");
+asm(".set FUN_00105b7c, _IRStartCallRoutine__vslot3");
 asm(".globl FUN_00105e9c");
 asm(".set FUN_00105e9c, _FUN_00105e9c");
 asm(".globl FUN_0010647c");
-asm(".set FUN_0010647c, _FUN_0010647c");
+asm(".set FUN_0010647c, _IRStartCallRoutine__vslot2");
 asm(".globl FUN_001066e8");
-asm(".set FUN_001066e8, _FUN_001066e8");
+asm(".set FUN_001066e8, _IRProjection__vslot2");
 asm(".globl FUN_0010673c");
-asm(".set FUN_0010673c, _FUN_0010673c");
+asm(".set FUN_0010673c, _IRPresub2__vslot2");
 asm(".globl FUN_00106780");
-asm(".set FUN_00106780, _FUN_00106780");
+asm(".set FUN_00106780, _IRPhiNode__vslot2");
 asm(".globl FUN_001069e8");
 asm(".set FUN_001069e8, _FUN_001069e8");
 asm(".globl FUN_00106ba0");
-asm(".set FUN_00106ba0, _FUN_00106ba0");
+asm(".set FUN_00106ba0, _IRMix__vslot2");
 asm(".globl FUN_00106cb4");
-asm(".set FUN_00106cb4, _FUN_00106cb4");
+asm(".set FUN_00106cb4, _IRPresub1__vslot2");
 asm(".globl FUN_00107464");
 asm(".set FUN_00107464, _FUN_00107464");
 asm(".globl FUN_0010776c");

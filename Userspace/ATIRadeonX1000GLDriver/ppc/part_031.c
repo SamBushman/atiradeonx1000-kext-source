@@ -1001,8 +1001,8 @@ int FUN_0010da84(param_1)
   return _memset(param_1 + 0xd68,0,0x9c0);
 }
 
-/* FUN_0010dad8 @ 0x10dad8 (128 bytes) */
-int FUN_0010dad8(this)
+/* HwLimits__dtor_10dad8 @ 0x10dad8 (128 bytes) */
+int HwLimits__dtor_10dad8(this)
   undefined4 *this;
 {
   this[5] = 1;
@@ -1030,8 +1030,8 @@ int FUN_0010dad8(this)
   return;
 }
 
-/* FUN_0010db58 @ 0x10db58 (128 bytes) */
-int FUN_0010db58(this)
+/* HwLimits__dtor_10db58 @ 0x10db58 (128 bytes) */
+int HwLimits__dtor_10db58(this)
   undefined4 *this;
 {
   this[5] = 1;
@@ -1308,8 +1308,8 @@ int FUN_0010defc(param_1, param_2)
   return;
 }
 
-/* FUN_0010e050 @ 0x10e050 (172 bytes) */
-int FUN_0010e050(this, param_2)
+/* KhanChip__ctor_10e050 @ 0x10e050 (172 bytes) */
+int KhanChip__ctor_10e050(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
@@ -1323,19 +1323,19 @@ int FUN_0010e050(this, param_2)
   *this = PTR_DAT_001e8c74 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
-    FUN_0012a578(iVar2,param_2,1);
+    KhanVs__ctor_12a578(iVar2,param_2,1);
   }
   this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1744);
   if (iVar2 != 0) {
-    FUN_00129130(iVar2,param_2,1);
+    KhanPs__ctor_129130(iVar2,param_2,1);
   }
   this[2] = iVar2;
   return;
 }
 
-/* FUN_0010e114 @ 0x10e114 (172 bytes) */
-int FUN_0010e114(this, param_2)
+/* KhanChip__ctor_10e114 @ 0x10e114 (172 bytes) */
+int KhanChip__ctor_10e114(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
@@ -1349,12 +1349,12 @@ int FUN_0010e114(this, param_2)
   *this = PTR_DAT_001e8c74 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
-    FUN_0012a578(iVar2,param_2,1);
+    KhanVs__ctor_12a578(iVar2,param_2,1);
   }
   this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1744);
   if (iVar2 != 0) {
-    FUN_00129130(iVar2,param_2,1);
+    KhanPs__ctor_129130(iVar2,param_2,1);
   }
   this[2] = iVar2;
   return;
@@ -1377,12 +1377,12 @@ int FUN_0010e1d8(this, param_2)
   *this = puVar1 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
-    FUN_0012a8bc(iVar2,param_2,1);
+    FudoVs__ctor_12a8bc(iVar2,param_2,1);
   }
   this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1944);
   if (iVar2 != 0) {
-    FUN_001920e0(iVar2,param_2,1);
+    FudoPs__ctor_1920e0(iVar2,param_2,1);
   }
   this[2] = iVar2;
   return;
@@ -1405,12 +1405,12 @@ int FUN_0010e2a0(this, param_2)
   *this = puVar1 + 8;
   iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
-    FUN_0012a8bc(iVar2,param_2,1);
+    FudoVs__ctor_12a8bc(iVar2,param_2,1);
   }
   this[1] = iVar2;
   iVar2 = FUN_000e1564(param_2,0x1944);
   if (iVar2 != 0) {
-    FUN_001920e0(iVar2,param_2,1);
+    FudoPs__ctor_1920e0(iVar2,param_2,1);
   }
   this[2] = iVar2;
   return;

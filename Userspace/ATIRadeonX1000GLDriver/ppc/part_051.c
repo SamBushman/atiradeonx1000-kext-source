@@ -52,26 +52,26 @@ int FUN_00195474(param_1, param_2)
   return;
 }
 
-/* FUN_00195574 @ 0x195574 (4 bytes) */
-int FUN_00195574()
+/* R300MachineAssembler__vslot6 @ 0x195574 (4 bytes) */
+int R300MachineAssembler__vslot6()
 {
   return;
 }
 
-/* FUN_00195578 @ 0x195578 (8 bytes) */
-int FUN_00195578()
+/* R300MachineAssembler__vslot8 @ 0x195578 (8 bytes) */
+int R300MachineAssembler__vslot8()
 {
   return 1;
 }
 
-/* FUN_00195580 @ 0x195580 (4 bytes) */
-int FUN_00195580()
+/* R300MachineAssembler__vslot3 @ 0x195580 (4 bytes) */
+int R300MachineAssembler__vslot3()
 {
   return;
 }
 
-/* FUN_00195584 @ 0x195584 (12 bytes) */
-int FUN_00195584(param_1, param_2)
+/* R300MachineAssembler__vslot9 @ 0x195584 (12 bytes) */
+int R300MachineAssembler__vslot9(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
@@ -127,8 +127,8 @@ int FUN_001955dc(param_1, param_2, param_3)
   return FUN_000e2c78(param_2,param_1,param_3);
 }
 
-/* FUN_001955f8 @ 0x1955f8 (36 bytes) */
-int FUN_001955f8(param_1)
+/* R300MachineAssembler__vslot2 @ 0x1955f8 (36 bytes) */
+int R300MachineAssembler__vslot2(param_1)
   int param_1;
 {
   return *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40) + 1 < *(int *)(param_1 + 0x60);
@@ -732,8 +732,8 @@ int FUN_00196070(param_1)
   return;
 }
 
-/* FUN_001961c8 @ 0x1961c8 (296 bytes) */
-int FUN_001961c8(param_1)
+/* R300MachineAssembler__vslot4 @ 0x1961c8 (296 bytes) */
+int R300MachineAssembler__vslot4(param_1)
   int *param_1;
 {
   uint uVar1;
@@ -808,8 +808,8 @@ int FUN_00196370(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_001963b0 @ 0x1963b0 (236 bytes) */
-int FUN_001963b0(param_1, param_2, param_3, param_4)
+/* R300MachineAssembler__vslot5 @ 0x1963b0 (236 bytes) */
+int R300MachineAssembler__vslot5(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1166,8 +1166,8 @@ int FUN_00196d5c(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_00196dbc @ 0x196dbc (64 bytes) */
-int FUN_00196dbc(this)
+/* R300MachineAssembler__dtor_196dbc @ 0x196dbc (64 bytes) */
+int R300MachineAssembler__dtor_196dbc(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -1180,8 +1180,8 @@ int FUN_00196dbc(this)
   return;
 }
 
-/* FUN_00196dfc @ 0x196dfc (64 bytes) */
-int FUN_00196dfc(this)
+/* R300MachineAssembler__dtor @ 0x196dfc (64 bytes) */
+int R300MachineAssembler__dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -1194,8 +1194,8 @@ int FUN_00196dfc(this)
   return;
 }
 
-/* FUN_00196e3c @ 0x196e3c (84 bytes) */
-int FUN_00196e3c(this)
+/* MachineAssembler__dtor_196e3c @ 0x196e3c (84 bytes) */
+int MachineAssembler__dtor_196e3c(this)
   undefined4 *this;
 {
   this[0x16] = 0;
@@ -1680,19 +1680,19 @@ LAB_00197aa4:
 asm(".globl FUN_00195474");
 asm(".set FUN_00195474, _FUN_00195474");
 asm(".globl FUN_00195574");
-asm(".set FUN_00195574, _FUN_00195574");
+asm(".set FUN_00195574, _R300MachineAssembler__vslot6");
 asm(".globl FUN_00195578");
-asm(".set FUN_00195578, _FUN_00195578");
+asm(".set FUN_00195578, _R300MachineAssembler__vslot8");
 asm(".globl FUN_00195580");
-asm(".set FUN_00195580, _FUN_00195580");
+asm(".set FUN_00195580, _R300MachineAssembler__vslot3");
 asm(".globl FUN_00195584");
-asm(".set FUN_00195584, _FUN_00195584");
+asm(".set FUN_00195584, _R300MachineAssembler__vslot9");
 asm(".globl FUN_00195590");
 asm(".set FUN_00195590, _FUN_00195590");
 asm(".globl FUN_001955dc");
 asm(".set FUN_001955dc, _FUN_001955dc");
 asm(".globl FUN_001955f8");
-asm(".set FUN_001955f8, _FUN_001955f8");
+asm(".set FUN_001955f8, _R300MachineAssembler__vslot2");
 asm(".globl FUN_0019561c");
 asm(".set FUN_0019561c, _FUN_0019561c");
 asm(".globl FUN_00195624");
@@ -1754,11 +1754,11 @@ asm(".set FUN_00195fd8, _FUN_00195fd8");
 asm(".globl FUN_00196070");
 asm(".set FUN_00196070, _FUN_00196070");
 asm(".globl FUN_001961c8");
-asm(".set FUN_001961c8, _FUN_001961c8");
+asm(".set FUN_001961c8, _R300MachineAssembler__vslot4");
 asm(".globl FUN_001962f0");
 asm(".set FUN_001962f0, _FUN_001962f0");
 asm(".globl FUN_001963b0");
-asm(".set FUN_001963b0, _FUN_001963b0");
+asm(".set FUN_001963b0, _R300MachineAssembler__vslot5");
 asm(".globl FUN_0019649c");
 asm(".set FUN_0019649c, _FUN_0019649c");
 asm(".globl FUN_0019679c");
@@ -1770,8 +1770,8 @@ asm(".set FUN_00196ad8, _FUN_00196ad8");
 asm(".globl FUN_00196d5c");
 asm(".set FUN_00196d5c, _FUN_00196d5c");
 asm(".globl FUN_00196dfc");
-asm(".set FUN_00196dfc, _FUN_00196dfc");
+asm(".set FUN_00196dfc, _R300MachineAssembler__dtor");
 asm(".globl FUN_00196e3c");
-asm(".set FUN_00196e3c, _FUN_00196e3c");
+asm(".set FUN_00196e3c, _MachineAssembler__dtor_196e3c");
 asm(".globl FUN_001971f8");
 asm(".set FUN_001971f8, _FUN_001971f8");

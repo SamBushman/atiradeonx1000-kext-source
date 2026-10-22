@@ -269,8 +269,8 @@ int FUN_00108534(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_001085b0 @ 0x1085b0 (276 bytes) */
-int FUN_001085b0(this, compiler)
+/* IRExport__ctor_1085b0 @ 0x1085b0 (276 bytes) */
+int IRExport__ctor_1085b0(this, compiler)
   undefined4 *this;
   int compiler;
 {
@@ -309,7 +309,7 @@ int FUN_001086e8(param_1, param_2, param_3)
   undefined *puVar1;
   undefined4 opcodeInfo;
   
-  ((int (*)())FUN_001085b0)(param_1,param_3);
+  ((int (*)())IRExport__ctor_1085b0)(param_1,param_3);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
@@ -327,7 +327,7 @@ int FUN_00108770(param_1, param_2)
   undefined *puVar1;
   undefined4 opcodeInfo;
   
-  ((int (*)())FUN_001085b0)(param_1,param_2);
+  ((int (*)())IRExport__ctor_1085b0)(param_1,param_2);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
@@ -345,7 +345,7 @@ int FUN_001087f0(param_1, param_2)
   undefined *puVar1;
   undefined4 opcodeInfo;
   
-  ((int (*)())FUN_001085b0)(param_1,param_2);
+  ((int (*)())IRExport__ctor_1085b0)(param_1,param_2);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
@@ -362,7 +362,7 @@ int FUN_00108870(param_1, param_2)
 {
   undefined *puVar1;
   
-  ((int (*)())FUN_001085b0)(param_1,param_2);
+  ((int (*)())IRExport__ctor_1085b0)(param_1,param_2);
   puVar1 = PTR_DAT_001e8c28;
   param_1[0x21] = 2;
   param_1[0x26] = 0x16;
@@ -377,7 +377,7 @@ int FUN_001088c4(param_1, param_2)
 {
   undefined *puVar1;
   
-  ((int (*)())FUN_001085b0)(param_1,param_2);
+  ((int (*)())IRExport__ctor_1085b0)(param_1,param_2);
   puVar1 = PTR_DAT_001e8c28;
   param_1[0x21] = 2;
   param_1[0x26] = 0x16;
@@ -385,8 +385,8 @@ int FUN_001088c4(param_1, param_2)
   return;
 }
 
-/* FUN_00108918 @ 0x108918 (276 bytes) */
-int FUN_00108918(this, compiler)
+/* IRExport__ctor_108918 @ 0x108918 (276 bytes) */
+int IRExport__ctor_108918(this, compiler)
   undefined4 *this;
   int compiler;
 {
@@ -425,7 +425,7 @@ int FUN_00108a50(param_1, param_2, compiler)
   undefined *puVar1;
   undefined4 opcodeInfo;
   
-  ((int (*)())FUN_001085b0)(param_1,compiler);
+  ((int (*)())IRExport__ctor_1085b0)(param_1,compiler);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
@@ -510,8 +510,8 @@ int FUN_00108cbc(this, compiler)
   return;
 }
 
-/* FUN_00108d10 @ 0x108d10 (76 bytes) */
-int FUN_00108d10(this, compiler)
+/* IREntry__ctor_108d10 @ 0x108d10 (76 bytes) */
+int IREntry__ctor_108d10(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
@@ -520,8 +520,8 @@ int FUN_00108d10(this, compiler)
   return;
 }
 
-/* FUN_00108d5c @ 0x108d5c (76 bytes) */
-int FUN_00108d5c(this, compiler)
+/* IREntry__ctor_108d5c @ 0x108d5c (76 bytes) */
+int IREntry__ctor_108d5c(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
@@ -530,8 +530,8 @@ int FUN_00108d5c(this, compiler)
   return;
 }
 
-/* FUN_00108da8 @ 0x108da8 (76 bytes) */
-int FUN_00108da8(this, compiler)
+/* IRExit__ctor_108da8 @ 0x108da8 (76 bytes) */
+int IRExit__ctor_108da8(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
@@ -540,8 +540,8 @@ int FUN_00108da8(this, compiler)
   return;
 }
 
-/* FUN_00108df4 @ 0x108df4 (76 bytes) */
-int FUN_00108df4(this, compiler)
+/* IRExit__ctor_108df4 @ 0x108df4 (76 bytes) */
+int IRExit__ctor_108df4(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
@@ -642,8 +642,8 @@ int FUN_0010900c(param_1, param_2)
   return;
 }
 
-/* FUN_00109068 @ 0x109068 (76 bytes) */
-int FUN_00109068(this, param_2)
+/* IRLoadMemBufferIndex__ctor_109068 @ 0x109068 (76 bytes) */
+int IRLoadMemBufferIndex__ctor_109068(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
@@ -652,8 +652,8 @@ int FUN_00109068(this, param_2)
   return;
 }
 
-/* FUN_001090b4 @ 0x1090b4 (76 bytes) */
-int FUN_001090b4(this, param_2)
+/* IRLoadMemBufferIndex__ctor_1090b4 @ 0x1090b4 (76 bytes) */
+int IRLoadMemBufferIndex__ctor_1090b4(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
@@ -662,8 +662,8 @@ int FUN_001090b4(this, param_2)
   return;
 }
 
-/* FUN_00109100 @ 0x109100 (76 bytes) */
-int FUN_00109100(this, param_2)
+/* IRLoadMemBuffer__ctor_109100 @ 0x109100 (76 bytes) */
+int IRLoadMemBuffer__ctor_109100(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
@@ -672,8 +672,8 @@ int FUN_00109100(this, param_2)
   return;
 }
 
-/* FUN_0010914c @ 0x10914c (76 bytes) */
-int FUN_0010914c(this, param_2)
+/* IRLoadMemBuffer__ctor_10914c @ 0x10914c (76 bytes) */
+int IRLoadMemBuffer__ctor_10914c(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
@@ -851,8 +851,8 @@ int FUN_001095b4(param_1, param_2)
   return;
 }
 
-/* FUN_00109614 @ 0x109614 (112 bytes) */
-int FUN_00109614(this, param_2, param_3)
+/* IRLoadConst__ctor_109614 @ 0x109614 (112 bytes) */
+int IRLoadConst__ctor_109614(this, param_2, param_3)
   undefined4 *this;
   int param_2;
   int param_3;
@@ -870,8 +870,8 @@ int FUN_00109614(this, param_2, param_3)
   return FUN_000ef8f8(*(undefined4 *)(param_3 + 0x6c4),this);
 }
 
-/* FUN_001096bc @ 0x1096bc (112 bytes) */
-int FUN_001096bc(this, param_2, param_3)
+/* IRLoadConst__ctor_1096bc @ 0x1096bc (112 bytes) */
+int IRLoadConst__ctor_1096bc(this, param_2, param_3)
   undefined4 *this;
   int param_2;
   int param_3;
@@ -950,8 +950,8 @@ int FUN_0010988c(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00109938 @ 0x109938 (108 bytes) */
-int FUN_00109938(this, param_2)
+/* IRLoadConst__ctor_109938 @ 0x109938 (108 bytes) */
+int IRLoadConst__ctor_109938(this, param_2)
   undefined4 *this;
   int param_2;
 {
@@ -964,8 +964,8 @@ int FUN_00109938(this, param_2)
   return FUN_000ef8f8(*(undefined4 *)(param_2 + 0x6c4),this);
 }
 
-/* FUN_001099dc @ 0x1099dc (108 bytes) */
-int FUN_001099dc(this, param_2)
+/* IRLoadConst__ctor_1099dc @ 0x1099dc (108 bytes) */
+int IRLoadConst__ctor_1099dc(this, param_2)
   undefined4 *this;
   int param_2;
 {

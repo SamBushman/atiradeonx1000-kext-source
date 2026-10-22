@@ -5578,8 +5578,8 @@ code_r0x00184480:
   goto code_r0x00184480;
 }
 
-/* FUN_00184ab4 @ 0x184ab4 (280 bytes) */
-int FUN_00184ab4(param_1, program)
+/* pass_minreg_order @ 0x184ab4 (280 bytes) */
+int pass_minreg_order(param_1, program)
   undefined4 param_1;
   int program;
 {

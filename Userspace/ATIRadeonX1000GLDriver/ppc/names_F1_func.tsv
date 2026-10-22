@@ -1,0 +1,880 @@
+# func rows for Userspace/ATIRadeonX1000GLDriver/ppc (Tools/userspace/gen_func_rows.py); func<TAB>old<TAB>new<TAB>tier<TAB>evidence
+func	FUN_000e7cf0	EntryBlock__vslot3	UNKNOWN	vtable of EntryBlock slot 3 (R2b class_methods.tsv: vtable slot of EntryBlock[3])
+func	FUN_000e9d68	Block__ctor_e9d68	CONFIRMED	stores the Block vtable at *this (ctor); stores vtable of Block at *this
+func	FUN_000e9e88	Block__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000e9f00	Block__ctor_e9f00	CONFIRMED	stores the Block vtable at *this (ctor); stores vtable of Block at *this
+func	FUN_000ea020	Block__ctor_ea020	CONFIRMED	stores the Block vtable at *this (ctor); stores vtable of Block at *this
+func	FUN_000ea148	Block__ctor_ea148	CONFIRMED	stores the Block vtable at *this (ctor); stores vtable of Block at *this
+func	FUN_000ea270	Block__dtor_ea270	CONFIRMED	stores the Block vtable at *this (dtor); stores vtable of Block at *this
+func	FUN_000ea3c0	AnyBlock__ctor_ea3c0	CONFIRMED	stores the AnyBlock vtable at *this (ctor); stores vtable of AnyBlock at *this
+func	FUN_000ea478	AnyBlock__ctor_ea478	CONFIRMED	stores the AnyBlock vtable at *this (ctor); stores vtable of AnyBlock at *this
+func	FUN_000ea530	IfHeader__ctor_ea530	CONFIRMED	stores the IfHeader vtable at *this (ctor); stores vtable of IfHeader at *this
+func	FUN_000ea600	IfHeader__ctor_ea600	CONFIRMED	stores the IfHeader vtable at *this (ctor); stores vtable of IfHeader at *this
+func	FUN_000ea6d0	IfHeader__ctor_ea6d0	CONFIRMED	stores the IfHeader vtable at *this (ctor); stores vtable of IfHeader at *this
+func	FUN_000ea828	PostLoopFooter__ctor_ea828	CONFIRMED	stores the PostLoopFooter vtable at *this (ctor); stores vtable of LoopHeader>PostLoopFooter at *this
+func	FUN_000eaae8	ExitBlock__ctor_eaae8	CONFIRMED	stores the ExitBlock vtable at *this (ctor); stores vtable of ExitBlock at *this
+func	FUN_000eab2c	ExitBlock__ctor_eab2c	CONFIRMED	stores the ExitBlock vtable at *this (ctor); stores vtable of ExitBlock at *this
+func	FUN_000eab70	EntryBlock__ctor_eab70	CONFIRMED	stores the EntryBlock vtable at *this (ctor); stores vtable of EntryBlock at *this
+func	FUN_000eabbc	EntryBlock__ctor_eabbc	CONFIRMED	stores the EntryBlock vtable at *this (ctor); stores vtable of EntryBlock at *this
+func	FUN_000eacb8	PostLoopFooter__ctor_eacb8	CONFIRMED	stores the PostLoopFooter vtable at *this (ctor); stores vtable of PostLoopFooter at *this
+func	FUN_000ead08	PostLoopFooter__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000ead80	PostLoopFooter__ctor_ead80	CONFIRMED	stores the PostLoopFooter vtable at *this (ctor); stores vtable of PostLoopFooter at *this
+func	FUN_000eadd0	LoopFooter__ctor_eadd0	CONFIRMED	stores the LoopFooter vtable at *this (ctor); stores vtable of LoopFooter at *this
+func	FUN_000eae20	LoopFooter__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eae98	LoopFooter__ctor_eae98	CONFIRMED	stores the LoopFooter vtable at *this (ctor); stores vtable of LoopFooter at *this
+func	FUN_000eaee8	LoopHeader__ctor_eaee8	CONFIRMED	stores the LoopHeader vtable at *this (ctor); stores vtable of LoopHeader at *this
+func	FUN_000eaf6c	LoopHeader__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eafe4	LoopHeader__ctor_eafe4	CONFIRMED	stores the LoopHeader vtable at *this (ctor); stores vtable of LoopHeader at *this
+func	FUN_000eb068	IfFooter__ctor_eb068	CONFIRMED	stores the IfFooter vtable at *this (ctor); stores vtable of IfFooter at *this
+func	FUN_000eb0ac	IfFooter__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eb124	IfFooter__ctor_eb124	CONFIRMED	stores the IfFooter vtable at *this (ctor); stores vtable of IfFooter at *this
+func	FUN_000eb168	IfHeader__ctor_eb168	CONFIRMED	stores the IfHeader vtable at *this (ctor); stores vtable of IfHeader at *this
+func	FUN_000eb1d0	IfHeader__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eb248	IfHeader__ctor_eb248	CONFIRMED	stores the IfHeader vtable at *this (ctor); stores vtable of IfHeader at *this
+func	FUN_000eb2b0	FuncEndBlock__ctor_eb2b0	CONFIRMED	stores the FuncEndBlock vtable at *this (ctor); stores vtable of FuncEndBlock at *this
+func	FUN_000eb300	FuncEndBlock__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eb378	FuncEndBlock__ctor_eb378	CONFIRMED	stores the FuncEndBlock vtable at *this (ctor); stores vtable of FuncEndBlock at *this
+func	FUN_000eb3c8	PostLoopFooter__ctor_eb3c8	CONFIRMED	stores the PostLoopFooter vtable at *this (ctor); stores vtable of LoopHeader>PostLoopFooter at *this
+func	FUN_000eb688	IfHeader__ctor_eb688	CONFIRMED	stores the IfHeader vtable at *this (ctor); stores vtable of IfHeader at *this
+func	FUN_000eb7e0	IfFooterStatic__ctor_eb7e0	CONFIRMED	stores the IfFooterStatic vtable at *this (ctor); stores vtable of IfFooterStatic at *this
+func	FUN_000eb824	IfFooterStatic__ctor_eb824	CONFIRMED	stores the IfFooterStatic vtable at *this (ctor); stores vtable of IfFooterStatic at *this
+func	FUN_000eb868	IfFooterStatic__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eb8e0	IfHeaderStatic__ctor_eb8e0	CONFIRMED	stores the IfHeaderStatic vtable at *this (ctor); stores vtable of IfHeaderStatic at *this
+func	FUN_000eb924	IfHeaderStatic__ctor_eb924	CONFIRMED	stores the IfHeaderStatic vtable at *this (ctor); stores vtable of IfHeaderStatic at *this
+func	FUN_000eb968	IfHeaderStatic__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000eb9e0	IfHeaderStatic__ctor_eb9e0	CONFIRMED	stores the IfHeaderStatic vtable at *this (ctor); stores vtable of IfHeaderStatic at *this
+func	FUN_000ebac8	IfHeaderStatic__ctor_ebac8	CONFIRMED	stores the IfHeaderStatic vtable at *this (ctor); stores vtable of IfHeaderStatic at *this
+func	FUN_000ebbb0	Block__dtor	CONFIRMED	vtable slot 0 of Block = complete destructor (GCC 4 layout); stores vtable of Block at *this; vtable slot of Block[0]
+func	FUN_000ebd00	Block__deleting_dtor	CONFIRMED	vtable slot 1 of Block = deleting destructor (GCC 4 layout); stores vtable of Block at *this; vtable slot of Block[1]
+func	FUN_000ebe70	BreakBlock__ctor_ebe70	CONFIRMED	stores the BreakBlock vtable at *this (ctor); stores vtable of BreakBlock at *this
+func	FUN_000ebeb4	BreakBlock__ctor_ebeb4	CONFIRMED	stores the BreakBlock vtable at *this (ctor); stores vtable of BreakBlock at *this
+func	FUN_000ebef8	BreakBlock__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000ebf70	ContinueBlock__ctor_ebf70	CONFIRMED	stores the ContinueBlock vtable at *this (ctor); stores vtable of ContinueBlock at *this
+func	FUN_000ebfb4	ContinueBlock__ctor_ebfb4	CONFIRMED	stores the ContinueBlock vtable at *this (ctor); stores vtable of ContinueBlock at *this
+func	FUN_000ebff8	ContinueBlock__clone	INFERRED	Block-family vtable slot 2: allocates a block of the same class from the compiler arena and copy-constructs it (notes_compiler_ir.md 4.1); name is ours
+func	FUN_000ec070	BreakBlock__ctor_ec070	CONFIRMED	stores the BreakBlock vtable at *this (ctor); stores vtable of BreakBlock at *this
+func	FUN_000ec0c8	BreakBlock__ctor_ec0c8	CONFIRMED	stores the BreakBlock vtable at *this (ctor); stores vtable of BreakBlock at *this
+func	FUN_000ec120	ContinueBlock__ctor_ec120	CONFIRMED	stores the ContinueBlock vtable at *this (ctor); stores vtable of ContinueBlock at *this
+func	FUN_000ec178	ContinueBlock__ctor_ec178	CONFIRMED	stores the ContinueBlock vtable at *this (ctor); stores vtable of ContinueBlock at *this
+func	FUN_00104e20	IRLoadConst__vslot3	UNKNOWN	vtable of IRLoadConst slot 3 (R2b class_methods.tsv: vtable slot of IRLoadConst[3])
+func	FUN_0010502c	IRInst__ctor_10502c	CONFIRMED	stores the IRInst vtable at *this (ctor); stores vtable of IRInst at *this
+func	FUN_001051b0	IRInst__ctor_1051b0	CONFIRMED	stores the IRInst vtable at *this (ctor); stores vtable of IRInst at *this
+func	FUN_00105a44	IRStartCallRoutine__vslot4	UNKNOWN	vtable of IRStartCallRoutine slot 4 (R2b class_methods.tsv: vtable slot of IRStartCallRoutine[4],IREndCallRoutine[4],IRStartMakeCall[4],IREndMakeCall[4],IRInst[4])
+func	FUN_00105b7c	IRStartCallRoutine__vslot3	UNKNOWN	vtable of IRStartCallRoutine slot 3 (R2b class_methods.tsv: vtable slot of IRStartCallRoutine[3],IREndCallRoutine[3],IRStartMakeCall[3],IREndMakeCall[3],IRInst[3])
+func	FUN_0010647c	IRStartCallRoutine__vslot2	UNKNOWN	vtable of IRStartCallRoutine slot 2 (R2b class_methods.tsv: vtable slot of IRStartCallRoutine[2],IREndCallRoutine[2],IRStartMakeCall[2],IREndMakeCall[2],IRInst[2])
+func	FUN_001066e8	IRProjection__vslot2	UNKNOWN	vtable of IRProjection slot 2 (R2b class_methods.tsv: vtable slot of IRProjection[2])
+func	FUN_0010673c	IRPresub2__vslot2	UNKNOWN	vtable of IRPresub2 slot 2 (R2b class_methods.tsv: vtable slot of IRPresub2[2])
+func	FUN_00106780	IRPhiNode__vslot2	UNKNOWN	vtable of IRPhiNode slot 2 (R2b class_methods.tsv: vtable slot of IRPhiNode[2])
+func	FUN_00106ba0	IRMix__vslot2	UNKNOWN	vtable of IRMix slot 2 (R2b class_methods.tsv: vtable slot of IRMix[2])
+func	FUN_00106cb4	IRPresub1__vslot2	UNKNOWN	vtable of IRPresub1 slot 2 (R2b class_methods.tsv: vtable slot of IRPresub1[2])
+func	FUN_001073dc	IRVertexFetch__ctor_1073dc	CONFIRMED	stores the IRVertexFetch vtable at *this (ctor); stores vtable of IRVertexFetch at *this
+func	FUN_00107420	IRVertexFetch__ctor_107420	CONFIRMED	stores the IRVertexFetch vtable at *this (ctor); stores vtable of IRVertexFetch at *this
+func	FUN_001085b0	IRExport__ctor_1085b0	CONFIRMED	stores the IRExport vtable at *this (ctor); stores vtable of IRExport at *this
+func	FUN_00108918	IRExport__ctor_108918	CONFIRMED	stores the IRExport vtable at *this (ctor); stores vtable of IRExport at *this
+func	FUN_00108d10	IREntry__ctor_108d10	CONFIRMED	stores the IREntry vtable at *this (ctor); stores vtable of IREntry at *this
+func	FUN_00108d5c	IREntry__ctor_108d5c	CONFIRMED	stores the IREntry vtable at *this (ctor); stores vtable of IREntry at *this
+func	FUN_00108da8	IRExit__ctor_108da8	CONFIRMED	stores the IRExit vtable at *this (ctor); stores vtable of IRExit at *this
+func	FUN_00108df4	IRExit__ctor_108df4	CONFIRMED	stores the IRExit vtable at *this (ctor); stores vtable of IRExit at *this
+func	FUN_00109068	IRLoadMemBufferIndex__ctor_109068	CONFIRMED	stores the IRLoadMemBufferIndex vtable at *this (ctor); stores vtable of IRLoadMemBufferIndex at *this
+func	FUN_001090b4	IRLoadMemBufferIndex__ctor_1090b4	CONFIRMED	stores the IRLoadMemBufferIndex vtable at *this (ctor); stores vtable of IRLoadMemBufferIndex at *this
+func	FUN_00109100	IRLoadMemBuffer__ctor_109100	CONFIRMED	stores the IRLoadMemBuffer vtable at *this (ctor); stores vtable of IRLoadMemBuffer at *this
+func	FUN_0010914c	IRLoadMemBuffer__ctor_10914c	CONFIRMED	stores the IRLoadMemBuffer vtable at *this (ctor); stores vtable of IRLoadMemBuffer at *this
+func	FUN_00109614	IRLoadConst__ctor_109614	CONFIRMED	stores the IRLoadConst vtable at *this (ctor); stores vtable of IRLoadConst at *this
+func	FUN_001096bc	IRLoadConst__ctor_1096bc	CONFIRMED	stores the IRLoadConst vtable at *this (ctor); stores vtable of IRLoadConst at *this
+func	FUN_00109938	IRLoadConst__ctor_109938	CONFIRMED	stores the IRLoadConst vtable at *this (ctor); stores vtable of IRLoadConst at *this
+func	FUN_001099dc	IRLoadConst__ctor_1099dc	CONFIRMED	stores the IRLoadConst vtable at *this (ctor); stores vtable of IRLoadConst at *this
+func	FUN_00109dcc	IRProjection__ctor_109dcc	CONFIRMED	stores the IRProjection vtable at *this (ctor); stores vtable of IRProjection at *this
+func	FUN_00109e28	IRProjection__ctor_109e28	CONFIRMED	stores the IRProjection vtable at *this (ctor); stores vtable of IRProjection at *this
+func	FUN_00109f00	IRPresub1__ctor_109f00	CONFIRMED	stores the IRPresub1 vtable at *this (ctor); stores vtable of IRPresub1 at *this
+func	FUN_00109f50	IRPresub1__ctor_109f50	CONFIRMED	stores the IRPresub1 vtable at *this (ctor); stores vtable of IRPresub1 at *this
+func	FUN_0010a01c	IRPresub2__ctor_10a01c	CONFIRMED	stores the IRPresub2 vtable at *this (ctor); stores vtable of IRPresub2 at *this
+func	FUN_0010a070	IRPresub2__ctor_10a070	CONFIRMED	stores the IRPresub2 vtable at *this (ctor); stores vtable of IRPresub2 at *this
+func	FUN_0010a140	IRMix__ctor_10a140	CONFIRMED	stores the IRMix vtable at *this (ctor); stores vtable of IRMix at *this
+func	FUN_0010a1c0	IRMix__ctor_10a1c0	CONFIRMED	stores the IRMix vtable at *this (ctor); stores vtable of IRMix at *this
+func	FUN_0010a2bc	IRPhiNode__ctor_10a2bc	CONFIRMED	stores the IRPhiNode vtable at *this (ctor); stores vtable of IRPhiNode at *this
+func	FUN_0010a398	IRPhiNode__ctor_10a398	CONFIRMED	stores the IRPhiNode vtable at *this (ctor); stores vtable of IRPhiNode at *this
+func	FUN_0010dad8	HwLimits__dtor_10dad8	CONFIRMED	stores the HwLimits vtable at *this (dtor); stores vtable of HwLimits at *this
+func	FUN_0010db58	HwLimits__dtor_10db58	CONFIRMED	stores the HwLimits vtable at *this (dtor); stores vtable of HwLimits at *this
+func	FUN_0010e050	KhanChip__ctor_10e050	CONFIRMED	stores the KhanChip vtable at *this (ctor); stores vtable of KhanChip at *this
+func	FUN_0010e114	KhanChip__ctor_10e114	CONFIRMED	stores the KhanChip vtable at *this (ctor); stores vtable of KhanChip at *this
+func	FUN_001214fc	pass_ssa_build	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "ssa_build") with the literal(s) ssa_build (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_001230e4	ImmedConstBuffer__vslot2	UNKNOWN	vtable of ImmedConstBuffer slot 2 (R2b class_methods.tsv: vtable slot of ImmedConstBuffer[2])
+func	FUN_00123288	VertexRegister__vslot2	UNKNOWN	vtable of VertexRegister slot 2 (R2b class_methods.tsv: vtable slot of VertexRegister[2])
+func	FUN_001240a8	TempValue__vslot2	UNKNOWN	vtable of TempValue slot 2 (R2b class_methods.tsv: vtable slot of TempValue[2],PrimitiveIndex[2],StandardIndex[2])
+func	FUN_001241fc	ExportSlot__vslot2	UNKNOWN	vtable of ExportSlot slot 2 (R2b class_methods.tsv: vtable slot of ExportSlot[2])
+func	FUN_0012434c	Resource__vslot2	UNKNOWN	vtable of Resource slot 2 (R2b class_methods.tsv: vtable slot of Resource[2])
+func	FUN_0012447c	FixedValue__vslot2	UNKNOWN	vtable of FixedValue slot 2 (R2b class_methods.tsv: vtable slot of FixedValue[2])
+func	FUN_001245a8	FixedValue__ctor_1245a8	CONFIRMED	stores the FixedValue vtable at *this (ctor); stores vtable of FixedValue at *this
+func	FUN_00124724	FixedValue__ctor_124724	CONFIRMED	stores the FixedValue vtable at *this (ctor); stores vtable of FixedValue at *this
+func	FUN_001248a0	VertexRegister__ctor_1248a0	CONFIRMED	stores the VertexRegister vtable at *this (ctor); stores vtable of VertexRegister at *this
+func	FUN_001248ec	VertexRegister__ctor_1248ec	CONFIRMED	stores the VertexRegister vtable at *this (ctor); stores vtable of VertexRegister at *this
+func	FUN_00124938	TempValue__ctor_124938	CONFIRMED	stores the TempValue vtable at *this (ctor); stores vtable of TempValue at *this
+func	FUN_0012499c	PrimitiveIndex__ctor_12499c	CONFIRMED	stores the PrimitiveIndex vtable at *this (ctor); stores vtable of PrimitiveIndex at *this
+func	FUN_00124b24	StandardIndex__ctor_124b24	CONFIRMED	stores the StandardIndex vtable at *this (ctor); stores vtable of StandardIndex at *this
+func	FUN_00124c94	StandardIndex__ctor_124c94	CONFIRMED	stores the StandardIndex vtable at *this (ctor); stores vtable of StandardIndex at *this
+func	FUN_00124e04	TempValue__ctor_124e04	CONFIRMED	stores the TempValue vtable at *this (ctor); stores vtable of TempValue at *this
+func	FUN_00124e68	ExportValue__ctor_124e68	CONFIRMED	stores the ExportValue vtable at *this (ctor); stores vtable of ExportValue at *this
+func	FUN_001250dc	ExportValue__ctor_1250dc	CONFIRMED	stores the ExportValue vtable at *this (ctor); stores vtable of ExportValue at *this
+func	FUN_00125350	Interpolator__ctor_125350	CONFIRMED	stores the Interpolator vtable at *this (ctor); stores vtable of Interpolator at *this
+func	FUN_001257b0	Interpolator__ctor_1257b0	CONFIRMED	stores the Interpolator vtable at *this (ctor); stores vtable of Interpolator at *this
+func	FUN_00125c10	Physical__ctor_125c10	CONFIRMED	stores the Physical vtable at *this (ctor); stores vtable of Physical at *this
+func	FUN_00125c8c	Physical__ctor_125c8c	CONFIRMED	stores the Physical vtable at *this (ctor); stores vtable of Physical at *this
+func	FUN_00125d08	Resource__ctor_125d08	CONFIRMED	stores the Resource vtable at *this (ctor); stores vtable of Resource at *this
+func	FUN_00125d60	Resource__ctor_125d60	CONFIRMED	stores the Resource vtable at *this (ctor); stores vtable of Resource at *this
+func	FUN_00125db8	PrimitiveIndex__ctor_125db8	CONFIRMED	stores the PrimitiveIndex vtable at *this (ctor); stores vtable of PrimitiveIndex at *this
+func	FUN_00126080	LoopIndexedOutputSet__ctor_126080	CONFIRMED	stores the LoopIndexedOutputSet vtable at *this (ctor); stores vtable of LoopIndexedOutputSet at *this
+func	FUN_001261a4	ImmedConstBuffer__ctor_1261a4	CONFIRMED	stores the ImmedConstBuffer vtable at *this (ctor); stores vtable of ImmedConstBuffer at *this
+func	FUN_001261e8	ImmedConstBuffer__ctor_1261e8	CONFIRMED	stores the ImmedConstBuffer vtable at *this (ctor); stores vtable of ImmedConstBuffer at *this
+func	FUN_0012622c	ExportSlot__ctor_12622c	CONFIRMED	stores the ExportSlot vtable at *this (ctor); stores vtable of ExportSlot at *this
+func	FUN_00126378	ExportSlot__ctor_126378	CONFIRMED	stores the ExportSlot vtable at *this (ctor); stores vtable of ExportSlot at *this
+func	FUN_001264c4	LoopIndexedConstSet__ctor_1264c4	CONFIRMED	stores the LoopIndexedConstSet vtable at *this (ctor); stores vtable of LoopIndexedConstSet at *this
+func	FUN_00126538	LoopIndexedConstSet__ctor_126538	CONFIRMED	stores the LoopIndexedConstSet vtable at *this (ctor); stores vtable of LoopIndexedConstSet at *this
+func	FUN_001265ac	LoopIndexedInputSet__ctor_1265ac	CONFIRMED	stores the LoopIndexedInputSet vtable at *this (ctor); stores vtable of LoopIndexedInputSet at *this
+func	FUN_00126620	LoopIndexedInputSet__ctor_126620	CONFIRMED	stores the LoopIndexedInputSet vtable at *this (ctor); stores vtable of LoopIndexedInputSet at *this
+func	FUN_00126694	LoopIndexedOutputSet__ctor_126694	CONFIRMED	stores the LoopIndexedOutputSet vtable at *this (ctor); stores vtable of LoopIndexedOutputSet at *this
+func	FUN_00128fd0	KhanPs__ctor_128fd0	CONFIRMED	stores the KhanPs vtable at *this (ctor); stores vtable of KhanPs at *this
+func	FUN_00129130	KhanPs__ctor_129130	CONFIRMED	stores the KhanPs vtable at *this (ctor); stores vtable of KhanPs at *this
+func	FUN_0012a578	KhanVs__ctor_12a578	CONFIRMED	stores the KhanVs vtable at *this (ctor); stores vtable of KhanVs at *this
+func	FUN_0012a6c0	KhanVs__ctor_12a6c0	CONFIRMED	stores the KhanVs vtable at *this (ctor); stores vtable of KhanVs at *this
+func	FUN_0012a808	FudoVs__ctor_12a808	CONFIRMED	stores the FudoVs vtable at *this (ctor); stores vtable of FudoVs at *this
+func	FUN_0012a8bc	FudoVs__ctor_12a8bc	CONFIRMED	stores the FudoVs vtable at *this (ctor); stores vtable of FudoVs at *this
+func	FUN_0012ab80	pass_optimize_control_flow	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "optimize_control_flow") with the literal(s) optimize_control_flow (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_0012ccc0	pass_loop_trans	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "loop_trans") with the literal(s) loop_trans (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_0012d2f0	pass_flatten_ifs	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "flatten_ifs") with the literal(s) flatten_ifs (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_001300b0	pass_remove_empty_graphs	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "remove_empty_graphs") with the literal(s) remove_empty_graphs (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_00135fb0	pass_color_graph	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "color_graph") with the literal(s) color_graph (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_0013d160	pass_rewrite	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "rewrite") with the literal(s) rewrite (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_00145670	pass_post_pack_insts	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "post_pack_insts") with the literal(s) post_pack_insts (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_00171714	pass_sched_preprocess_and_schedule_inst	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "sched_preprocess" / "schedule_inst") with the literal(s) sched_preprocess, schedule_inst (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_00184ab4	pass_minreg_order	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "minreg_order") with the literal(s) minreg_order (R2b notes_compiler_ir.md section 6); the name is the pass string
+func	FUN_00189604	R520SchedModel__vslot2	UNKNOWN	vtable of R520SchedModel slot 2 (R2b class_methods.tsv: vtable slot of R520SchedModel[2])
+func	FUN_0018f42c	R520SchedModel__vslot4	UNKNOWN	vtable of R520SchedModel slot 4 (R2b class_methods.tsv: vtable slot of R520SchedModel[4])
+func	FUN_0018f55c	R520SchedModel__vslot3	UNKNOWN	vtable of R520SchedModel slot 3 (R2b class_methods.tsv: vtable slot of R520SchedModel[3])
+func	FUN_0018f824	R300VSchedModel__vslot2	UNKNOWN	vtable of R300VSchedModel slot 2 (R2b class_methods.tsv: vtable slot of R300VSchedModel[2])
+func	FUN_001904b8	R300VSchedModel__vslot4	UNKNOWN	vtable of R300VSchedModel slot 4 (R2b class_methods.tsv: vtable slot of R300VSchedModel[4])
+func	FUN_001906c8	R300VSchedModel__vslot3	UNKNOWN	vtable of R300VSchedModel slot 3 (R2b class_methods.tsv: vtable slot of R300VSchedModel[3])
+func	FUN_00191c6c	FudoChip__vslot2	UNKNOWN	vtable of FudoChip slot 2 (R2b class_methods.tsv: vtable slot of FudoChip[2])
+func	FUN_00191efc	FudoPs__ctor_191efc	CONFIRMED	stores the FudoPs vtable at *this (ctor); stores vtable of FudoPs at *this
+func	FUN_001920e0	FudoPs__ctor_1920e0	CONFIRMED	stores the FudoPs vtable at *this (ctor); stores vtable of FudoPs at *this
+func	FUN_00195574	R300MachineAssembler__vslot6	UNKNOWN	vtable of R300MachineAssembler slot 6 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[6],R520MachineAssembler[6])
+func	FUN_00195578	R300MachineAssembler__vslot8	UNKNOWN	vtable of R300MachineAssembler slot 8 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[8],R520MachineAssembler[8])
+func	FUN_00195580	R300MachineAssembler__vslot3	UNKNOWN	vtable of R300MachineAssembler slot 3 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[3],R520MachineAssembler[3])
+func	FUN_00195584	R300MachineAssembler__vslot9	UNKNOWN	vtable of R300MachineAssembler slot 9 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[9])
+func	FUN_001955f8	R300MachineAssembler__vslot2	UNKNOWN	vtable of R300MachineAssembler slot 2 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[2],R520MachineAssembler[2])
+func	FUN_001961c8	R300MachineAssembler__vslot4	UNKNOWN	vtable of R300MachineAssembler slot 4 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[4])
+func	FUN_001963b0	R300MachineAssembler__vslot5	UNKNOWN	vtable of R300MachineAssembler slot 5 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[5])
+func	FUN_00196dbc	R300MachineAssembler__dtor_196dbc	CONFIRMED	stores the R300MachineAssembler vtable at *this (dtor); stores vtable of R300MachineAssembler at *this
+func	FUN_00196dfc	R300MachineAssembler__dtor	CONFIRMED	vtable slot 0 of R300MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R300MachineAssembler at *this; vtable slot of R300MachineAssembler[0]
+func	FUN_00196e3c	MachineAssembler__dtor_196e3c	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R300MachineAssembler>MachineAssembler at *this; vtable slot of R300MachineAssembler[1]
+func	FUN_0019a618	R300VMachineAssembler__vslot2	UNKNOWN	vtable of R300VMachineAssembler slot 2 (R2b class_methods.tsv: vtable slot of R300VMachineAssembler[2],R520VMachineAssembler[2])
+func	FUN_0019b91c	MachineAssembler__dtor_19b91c	CONFIRMED	stores the MachineAssembler vtable at *this (dtor); stores vtable of R300VMachineAssembler>MachineAssembler at *this
+func	FUN_0019b9ac	MachineAssembler__dtor_19b9ac	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R300VMachineAssembler>MachineAssembler at *this; vtable slot of R300VMachineAssembler[0]
+func	FUN_0019ba3c	R300VMachineAssembler__deleting_dtor	CONFIRMED	vtable slot 1 of R300VMachineAssembler = deleting destructor (GCC 4 layout); stores vtable of R300VMachineAssembler at *this; vtable slot of R300VMachineAssembler[1]
+func	FUN_0019dcb0	R520VMachineAssembler__deleting_dtor	CONFIRMED	vtable slot 1 of R520VMachineAssembler = deleting destructor (GCC 4 layout); stores vtable of R520VMachineAssembler at *this; vtable slot of R520VMachineAssembler[1]
+func	FUN_0019deb0	MachineAssembler__dtor_19deb0	CONFIRMED	stores the MachineAssembler vtable at *this (dtor); stores vtable of R520VMachineAssembler>R300VMachineAssembler>MachineAssembler at *this
+func	FUN_0019df54	MachineAssembler__dtor_19df54	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R520VMachineAssembler>R300VMachineAssembler>MachineAssembler at *this; vtable slot of R520VMachineAssembler[0]
+func	FUN_0019ef50	R520MachineAssembler__vslot5	UNKNOWN	vtable of R520MachineAssembler slot 5 (R2b class_methods.tsv: vtable slot of R520MachineAssembler[5])
+func	FUN_0019f860	R520MachineAssembler__vslot9	UNKNOWN	vtable of R520MachineAssembler slot 9 (R2b class_methods.tsv: vtable slot of R520MachineAssembler[9])
+func	FUN_0019fccc	R520MachineAssembler__vslot4	UNKNOWN	vtable of R520MachineAssembler slot 4 (R2b class_methods.tsv: vtable slot of R520MachineAssembler[4])
+func	FUN_001cd7ec	MachineAssembler__dtor_1cd7ec	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of MachineAssembler at *this; vtable slot of MachineAssembler[0]
+func	FUN_001cd810	DListNode__dtor	CONFIRMED	vtable slot 0 of DListNode = complete destructor (GCC 4 layout); stores vtable of DListNode at *this; vtable slot of DListNode[0]
+func	FUN_001cd834	DListNode__deleting_dtor	CONFIRMED	vtable slot 1 of DListNode = deleting destructor (GCC 4 layout); stores vtable of DListNode at *this; vtable slot of DListNode[1]
+func	FUN_001cd86c	IRPseudo__dtor	CONFIRMED	vtable slot 0 of IRPseudo = complete destructor (GCC 4 layout); stores vtable of IRPseudo at *this; vtable slot of IRPseudo[0]
+func	FUN_001cd8b0	IRPseudo__deleting_dtor	CONFIRMED	vtable slot 1 of IRPseudo = deleting destructor (GCC 4 layout); stores vtable of IRPseudo at *this; vtable slot of IRPseudo[1]
+func	FUN_001cd908	IRInst__dtor_1cd908	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IREndMakeCall>IRInst at *this; vtable slot of IREndMakeCall[1]
+func	FUN_001cd970	IRInst__dtor_1cd970	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRStartCallRoutine>IRInst at *this; vtable slot of IRStartCallRoutine[0]
+func	FUN_001cd9c4	IRInst__dtor_1cd9c4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRStartCallRoutine>IRInst at *this; vtable slot of IRStartCallRoutine[1]
+func	FUN_001cda2c	IRInst__dtor_1cda2c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IREndCallRoutine>IRInst at *this; vtable slot of IREndCallRoutine[0]
+func	FUN_001cda80	IRInst__dtor_1cda80	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IREndCallRoutine>IRInst at *this; vtable slot of IREndCallRoutine[1]
+func	FUN_001cdae8	IRInst__dtor_1cdae8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRStartMakeCall>IRInst at *this; vtable slot of IRStartMakeCall[0]
+func	FUN_001cdb3c	IRInst__dtor_1cdb3c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRStartMakeCall>IRInst at *this; vtable slot of IRStartMakeCall[1]
+func	FUN_001cdba4	IRInst__dtor_1cdba4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IREndMakeCall>IRInst at *this; vtable slot of IREndMakeCall[0]
+func	FUN_001cde34	EntryBlock__deleting_dtor	CONFIRMED	vtable slot 1 of EntryBlock = deleting destructor (GCC 4 layout); stores vtable of EntryBlock at *this; vtable slot of EntryBlock[1]
+func	FUN_001cde9c	AnyBlock__dtor	CONFIRMED	vtable slot 0 of AnyBlock = complete destructor (GCC 4 layout); stores vtable of AnyBlock at *this; vtable slot of AnyBlock[0]
+func	FUN_001cdec0	AnyBlock__deleting_dtor	CONFIRMED	vtable slot 1 of AnyBlock = deleting destructor (GCC 4 layout); stores vtable of AnyBlock at *this; vtable slot of AnyBlock[1]
+func	FUN_001cdf28	FuncEndBlock__dtor	CONFIRMED	vtable slot 0 of FuncEndBlock = complete destructor (GCC 4 layout); stores vtable of FuncEndBlock at *this; vtable slot of FuncEndBlock[0]
+func	FUN_001cdf4c	FuncEndBlock__deleting_dtor	CONFIRMED	vtable slot 1 of FuncEndBlock = deleting destructor (GCC 4 layout); stores vtable of FuncEndBlock at *this; vtable slot of FuncEndBlock[1]
+func	FUN_001cdfb4	LoopHeader__dtor	CONFIRMED	vtable slot 0 of LoopHeader = complete destructor (GCC 4 layout); stores vtable of LoopHeader at *this; vtable slot of LoopHeader[0]
+func	FUN_001cdfd8	LoopHeader__deleting_dtor	CONFIRMED	vtable slot 1 of LoopHeader = deleting destructor (GCC 4 layout); stores vtable of LoopHeader at *this; vtable slot of LoopHeader[1]
+func	FUN_001ce040	LoopFooter__dtor	CONFIRMED	vtable slot 0 of LoopFooter = complete destructor (GCC 4 layout); stores vtable of LoopFooter at *this; vtable slot of LoopFooter[0]
+func	FUN_001ce064	LoopFooter__deleting_dtor	CONFIRMED	vtable slot 1 of LoopFooter = deleting destructor (GCC 4 layout); stores vtable of LoopFooter at *this; vtable slot of LoopFooter[1]
+func	FUN_001ce0cc	PostLoopFooter__dtor	CONFIRMED	vtable slot 0 of PostLoopFooter = complete destructor (GCC 4 layout); stores vtable of PostLoopFooter at *this; vtable slot of PostLoopFooter[0]
+func	FUN_001ce0f0	PostLoopFooter__deleting_dtor	CONFIRMED	vtable slot 1 of PostLoopFooter = deleting destructor (GCC 4 layout); stores vtable of PostLoopFooter at *this; vtable slot of PostLoopFooter[1]
+func	FUN_001ce158	IfHeader__dtor_1ce158	CONFIRMED	vtable slot 0 of IfHeader = complete destructor (GCC 4 layout); stores vtable of IfHeader at *this; vtable slot of IfHeader[0]
+func	FUN_001ce17c	IfHeader__deleting_dtor	CONFIRMED	vtable slot 1 of IfHeader = deleting destructor (GCC 4 layout); stores vtable of IfHeader at *this; vtable slot of IfHeader[1]
+func	FUN_001ce1e4	IfHeader__dtor_1ce1e4	CONFIRMED	vtable slot 0 of IfHeader = complete destructor (GCC 4 layout); stores vtable of IfHeader at *this; vtable slot of IfHeaderStatic[0]
+func	FUN_001ce208	IfHeader__dtor_1ce208	CONFIRMED	vtable slot 0 of IfHeader = complete destructor (GCC 4 layout); stores vtable of IfHeader at *this; vtable slot of IfHeaderStatic[1]
+func	FUN_001ce270	IfFooter__dtor_1ce270	CONFIRMED	vtable slot 0 of IfFooter = complete destructor (GCC 4 layout); stores vtable of IfFooter at *this; vtable slot of IfFooter[0]
+func	FUN_001ce294	IfFooter__deleting_dtor	CONFIRMED	vtable slot 1 of IfFooter = deleting destructor (GCC 4 layout); stores vtable of IfFooter at *this; vtable slot of IfFooter[1]
+func	FUN_001ce2fc	IfFooter__dtor_1ce2fc	CONFIRMED	vtable slot 0 of IfFooter = complete destructor (GCC 4 layout); stores vtable of IfFooter at *this; vtable slot of IfFooterStatic[0]
+func	FUN_001ce320	IfFooter__dtor_1ce320	CONFIRMED	vtable slot 0 of IfFooter = complete destructor (GCC 4 layout); stores vtable of IfFooter at *this; vtable slot of IfFooterStatic[1]
+func	FUN_001ce388	BreakOrContinueBlock__dtor	CONFIRMED	vtable slot 0 of BreakOrContinueBlock = complete destructor (GCC 4 layout); stores vtable of BreakOrContinueBlock at *this; vtable slot of BreakOrContinueBlock[0]
+func	FUN_001ce3ac	BreakOrContinueBlock__deleting_dtor	CONFIRMED	vtable slot 1 of BreakOrContinueBlock = deleting destructor (GCC 4 layout); stores vtable of BreakOrContinueBlock at *this; vtable slot of BreakOrContinueBlock[1]
+func	FUN_001ce414	ContinueBlock__deleting_dtor	CONFIRMED	vtable slot 1 of ContinueBlock = deleting destructor (GCC 4 layout); stores vtable of ContinueBlock at *this; vtable slot of ContinueBlock[1]
+func	FUN_001ce48c	ExitBlock__dtor	CONFIRMED	vtable slot 0 of ExitBlock = complete destructor (GCC 4 layout); stores vtable of ExitBlock at *this; vtable slot of ExitBlock[0]
+func	FUN_001ce4b0	ExitBlock__deleting_dtor	CONFIRMED	vtable slot 1 of ExitBlock = deleting destructor (GCC 4 layout); stores vtable of ExitBlock at *this; vtable slot of ExitBlock[1]
+func	FUN_001ce518	EntryBlock__dtor	CONFIRMED	vtable slot 0 of EntryBlock = complete destructor (GCC 4 layout); stores vtable of EntryBlock at *this; vtable slot of EntryBlock[0]
+func	FUN_001ce53c	BreakBlock__dtor	CONFIRMED	vtable slot 0 of BreakBlock = complete destructor (GCC 4 layout); stores vtable of BreakBlock at *this; vtable slot of BreakBlock[0]
+func	FUN_001ce570	BreakBlock__deleting_dtor	CONFIRMED	vtable slot 1 of BreakBlock = deleting destructor (GCC 4 layout); stores vtable of BreakBlock at *this; vtable slot of BreakBlock[1]
+func	FUN_001ce5e8	ContinueBlock__dtor	CONFIRMED	vtable slot 0 of ContinueBlock = complete destructor (GCC 4 layout); stores vtable of ContinueBlock at *this; vtable slot of ContinueBlock[0]
+func	FUN_001cecc0	IRInst__dtor_1cecc0	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRFetch[0]
+func	FUN_001cecf4	IRInst__dtor_1cecf4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRFetch[1]
+func	FUN_001ced3c	IRInst__dtor_1ced3c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRInst[0]
+func	FUN_001ced70	IRInst__deleting_dtor	CONFIRMED	vtable slot 1 of IRInst = deleting destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRInst[1]
+func	FUN_001cedb8	IRInst__dtor_1cedb8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRAlu[0]
+func	FUN_001cedec	IRInst__dtor_1cedec	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRAlu[1]
+func	FUN_001cee34	IRInst__dtor_1cee34	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRExport[1]
+func	FUN_001cee7c	IRInst__dtor_1cee7c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadConst[1]
+func	FUN_001ceec4	IRInst__dtor_1ceec4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRTextureFetchGradients[1]
+func	FUN_001cef0c	IRInst__dtor_1cef0c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRTextureFetchGradients[0]
+func	FUN_001cef40	IRInst__dtor_1cef40	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRVertexFetch[0]
+func	FUN_001cef74	IRInst__dtor_1cef74	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRVertexFetch[1]
+func	FUN_001cefbc	IRInst__dtor_1cefbc	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRTextureFetch[0]
+func	FUN_001ceff0	IRInst__dtor_1ceff0	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRTextureFetch[1]
+func	FUN_001cf038	IRInst__dtor_1cf038	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMemLoad[0]
+func	FUN_001cf06c	IRInst__dtor_1cf06c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMemLoad[1]
+func	FUN_001cf0b4	IRInst__dtor_1cf0b4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMemStore[0]
+func	FUN_001cf0e8	IRInst__dtor_1cf0e8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMemStore[1]
+func	FUN_001cf130	IRInst__dtor_1cf130	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRGeomExport[1]
+func	FUN_001cf178	IRInst__dtor_1cf178	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRGeomExport[0]
+func	FUN_001cf1ac	IRInst__dtor_1cf1ac	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRExportColorAndFog[1]
+func	FUN_001cf1f4	IRInst__dtor_1cf1f4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRExportColorAndFog[0]
+func	FUN_001cf228	IRInst__dtor_1cf228	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRKill2[1]
+func	FUN_001cf270	IRInst__dtor_1cf270	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRKill2[0]
+func	FUN_001cf2a4	IRInst__dtor_1cf2a4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRCmp2[1]
+func	FUN_001cf2ec	IRInst__dtor_1cf2ec	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRCmp2[0]
+func	FUN_001cf320	IRInst__dtor_1cf320	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMov[1]
+func	FUN_001cf368	IRInst__dtor_1cf368	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMov[0]
+func	FUN_001cf39c	IRInst__dtor_1cf39c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRNop[1]
+func	FUN_001cf3e4	IRInst__dtor_1cf3e4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRNop[0]
+func	FUN_001cf418	IRInst__dtor_1cf418	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRZeroary[0]
+func	FUN_001cf44c	IRInst__dtor_1cf44c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRZeroary[1]
+func	FUN_001cf494	IRInst__dtor_1cf494	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRTrinary[0]
+func	FUN_001cf4c8	IRInst__dtor_1cf4c8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRTrinary[1]
+func	FUN_001cf510	IRInst__dtor_1cf510	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRUnary[0]
+func	FUN_001cf544	IRInst__dtor_1cf544	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRUnary[1]
+func	FUN_001cf58c	IRInst__dtor_1cf58c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRBinary[0]
+func	FUN_001cf5c0	IRInst__dtor_1cf5c0	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRBinary[1]
+func	FUN_001cf608	IRInst__dtor_1cf608	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRExport[0]
+func	FUN_001cf63c	IRInst__dtor_1cf63c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadConst[0]
+func	FUN_001cf670	IRInst__dtor_1cf670	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRUndefined[1]
+func	FUN_001cf6b8	IRInst__dtor_1cf6b8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRUndefined[0]
+func	FUN_001cf6ec	IRInst__dtor_1cf6ec	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadMemBufferIndex[1]
+func	FUN_001cf734	IRInst__dtor_1cf734	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadMemBufferIndex[0]
+func	FUN_001cf768	IRInst__dtor_1cf768	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadMemBuffer[1]
+func	FUN_001cf7b0	IRInst__dtor_1cf7b0	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadMemBuffer[0]
+func	FUN_001cf7e4	IRInst__dtor_1cf7e4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadInterp[1]
+func	FUN_001cf82c	IRInst__dtor_1cf82c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadInterp[0]
+func	FUN_001cf860	IRInst__dtor_1cf860	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadTemp[1]
+func	FUN_001cf8a8	IRInst__dtor_1cf8a8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadTemp[0]
+func	FUN_001cf8dc	IRInst__dtor_1cf8dc	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadVertex[1]
+func	FUN_001cf924	IRInst__dtor_1cf924	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoadVertex[0]
+func	FUN_001cf958	IRInst__dtor_1cf958	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRHeader[0]
+func	FUN_001cf98c	IRInst__dtor_1cf98c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRHeader[1]
+func	FUN_001cf9d4	IRInst__dtor_1cf9d4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IREntry[0]
+func	FUN_001cfa08	IRInst__dtor_1cfa08	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IREntry[1]
+func	FUN_001cfa50	IRInst__dtor_1cfa50	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRExit[0]
+func	FUN_001cfa84	IRInst__dtor_1cfa84	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRExit[1]
+func	FUN_001cfacc	IRInst__dtor_1cfacc	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRImmedConstBuff[0]
+func	FUN_001cfb00	IRInst__dtor_1cfb00	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRImmedConstBuff[1]
+func	FUN_001cfb48	IRInst__dtor_1cfb48	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMerge[0]
+func	FUN_001cfb7c	IRInst__dtor_1cfb7c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMerge[1]
+func	FUN_001cfbc4	IRInst__dtor_1cfbc4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoopStart[0]
+func	FUN_001cfbf8	IRInst__dtor_1cfbf8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoopStart[1]
+func	FUN_001cfc40	IRInst__dtor_1cfc40	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRCmp1S[0]
+func	FUN_001cfc74	IRInst__dtor_1cfc74	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRCmp1S[1]
+func	FUN_001cfcbc	IRInst__dtor_1cfcbc	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMix[0]
+func	FUN_001cfcf0	IRInst__dtor_1cfcf0	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRMix[1]
+func	FUN_001cfd38	IRInst__dtor_1cfd38	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRPhiNode[0]
+func	FUN_001cfd6c	IRInst__dtor_1cfd6c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRPhiNode[1]
+func	FUN_001cfdb4	IRInst__dtor_1cfdb4	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRPresub1[0]
+func	FUN_001cfde8	IRInst__dtor_1cfde8	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRPresub1[1]
+func	FUN_001cfe30	IRInst__dtor_1cfe30	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRPresub2[0]
+func	FUN_001cfe64	IRInst__dtor_1cfe64	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRPresub2[1]
+func	FUN_001cfeac	IRInst__dtor_1cfeac	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRProjection[0]
+func	FUN_001cfee0	IRInst__dtor_1cfee0	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRProjection[1]
+func	FUN_001cff28	IRInst__dtor_1cff28	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoad[0]
+func	FUN_001cff5c	IRInst__dtor_1cff5c	CONFIRMED	vtable slot 0 of IRInst = complete destructor (GCC 4 layout); stores vtable of IRInst at *this; vtable slot of IRLoad[1]
+func	FUN_001cffa4	HwLimits__dtor	CONFIRMED	vtable slot 0 of HwLimits = complete destructor (GCC 4 layout); stores vtable of HwLimits at *this; vtable slot of HwLimits[0]
+func	FUN_001cffc8	HwLimits__deleting_dtor	CONFIRMED	vtable slot 1 of HwLimits = deleting destructor (GCC 4 layout); stores vtable of HwLimits at *this; vtable slot of HwLimits[1]
+func	FUN_001d01b0	HwChip__dtor	CONFIRMED	vtable slot 0 of HwChip = complete destructor (GCC 4 layout); stores vtable of HwChip at *this; vtable slot of HwChip[0]
+func	FUN_001d01d4	HwChip__deleting_dtor	CONFIRMED	vtable slot 1 of HwChip = deleting destructor (GCC 4 layout); stores vtable of HwChip at *this; vtable slot of HwChip[1]
+func	FUN_001d0208	OpcodeInfo__dtor	CONFIRMED	stores the OpcodeInfo vtable at *this (dtor); stores vtable of OpcodeInfo at *this
+func	FUN_001d022c	OpcodeInfo__deleting_dtor	CONFIRMED	stores the OpcodeInfo vtable at *this and ends in operator delete (deleting destructor); stores vtable of OpcodeInfo at *this
+func	FUN_001d0f28	IrRecipSqrtClamp__deleting_dtor	CONFIRMED	stores the IrRecipSqrtClamp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipSqrtClamp at *this
+func	FUN_001d0f6c	IrRecipSqrtClamp__dtor	CONFIRMED	stores the IrRecipSqrtClamp vtable at *this (dtor); stores vtable of IrRecipSqrtClamp at *this
+func	FUN_001d0fb0	IrRecipSqrtFF__deleting_dtor	CONFIRMED	stores the IrRecipSqrtFF vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipSqrtFF at *this
+func	FUN_001d0ff4	IrRecipSqrtFF__dtor	CONFIRMED	stores the IrRecipSqrtFF vtable at *this (dtor); stores vtable of IrRecipSqrtFF at *this
+func	FUN_001d1038	IrRecipSqrtIEEE__deleting_dtor	CONFIRMED	stores the IrRecipSqrtIEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipSqrtIEEE at *this
+func	FUN_001d107c	IrRecipSqrtIEEE__dtor	CONFIRMED	stores the IrRecipSqrtIEEE vtable at *this (dtor); stores vtable of IrRecipSqrtIEEE at *this
+func	FUN_001d10c0	IrRecipClamp__deleting_dtor	CONFIRMED	stores the IrRecipClamp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipClamp at *this
+func	FUN_001d1104	IrRecipClamp__dtor	CONFIRMED	stores the IrRecipClamp vtable at *this (dtor); stores vtable of IrRecipClamp at *this
+func	FUN_001d1148	IrRecipFF__deleting_dtor	CONFIRMED	stores the IrRecipFF vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipFF at *this
+func	FUN_001d118c	IrRecipFF__dtor	CONFIRMED	stores the IrRecipFF vtable at *this (dtor); stores vtable of IrRecipFF at *this
+func	FUN_001d11d0	IrRecipIEEE__deleting_dtor	CONFIRMED	stores the IrRecipIEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipIEEE at *this
+func	FUN_001d1214	IrRecipIEEE__dtor	CONFIRMED	stores the IrRecipIEEE vtable at *this (dtor); stores vtable of IrRecipIEEE at *this
+func	FUN_001d1258	IrMulFloat__deleting_dtor	CONFIRMED	stores the IrMulFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulFloat at *this
+func	FUN_001d129c	IrMulFloat__dtor	CONFIRMED	stores the IrMulFloat vtable at *this (dtor); stores vtable of IrMulFloat at *this
+func	FUN_001d12e0	IrMul__deleting_dtor	CONFIRMED	stores the IrMul vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMul at *this
+func	FUN_001d1324	IrMul__dtor	CONFIRMED	stores the IrMul vtable at *this (dtor); stores vtable of IrMul at *this
+func	FUN_001d1368	IrLogClamp__deleting_dtor	CONFIRMED	stores the IrLogClamp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLogClamp at *this
+func	FUN_001d13ac	IrLogClamp__dtor	CONFIRMED	stores the IrLogClamp vtable at *this (dtor); stores vtable of IrLogClamp at *this
+func	FUN_001d13f0	IrLogIEEE__deleting_dtor	CONFIRMED	stores the IrLogIEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLogIEEE at *this
+func	FUN_001d1434	IrLogIEEE__dtor	CONFIRMED	stores the IrLogIEEE vtable at *this (dtor); stores vtable of IrLogIEEE at *this
+func	FUN_001d1478	IrDot2Add__deleting_dtor	CONFIRMED	stores the IrDot2Add vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDot2Add at *this
+func	FUN_001d14bc	IrDot2Add__dtor	CONFIRMED	stores the IrDot2Add vtable at *this (dtor); stores vtable of IrDot2Add at *this
+func	FUN_001d1500	IrAdd__deleting_dtor	CONFIRMED	stores the IrAdd vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAdd at *this
+func	FUN_001d1544	IrAdd__dtor	CONFIRMED	stores the IrAdd vtable at *this (dtor); stores vtable of IrAdd at *this
+func	FUN_001d1588	IrImmedConstLoad__dtor	CONFIRMED	stores the IrImmedConstLoad vtable at *this (dtor); stores vtable of IrImmedConstLoad at *this
+func	FUN_001d15bc	IrImmedConstLoad__deleting_dtor	CONFIRMED	stores the IrImmedConstLoad vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrImmedConstLoad at *this
+func	FUN_001d15f0	IrImmedConstBuffer__dtor	CONFIRMED	stores the IrImmedConstBuffer vtable at *this (dtor); stores vtable of IrImmedConstBuffer at *this
+func	FUN_001d1624	IrImmedConstBuffer__deleting_dtor	CONFIRMED	stores the IrImmedConstBuffer vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrImmedConstBuffer at *this
+func	FUN_001d1658	IrGetResource__dtor	CONFIRMED	stores the IrGetResource vtable at *this (dtor); stores vtable of IrGetResource at *this
+func	FUN_001d168c	IrGetResource__deleting_dtor	CONFIRMED	stores the IrGetResource vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrGetResource at *this
+func	FUN_001d16c0	IrEmitThenCut__dtor	CONFIRMED	stores the IrEmitThenCut vtable at *this (dtor); stores vtable of IrEmitThenCut at *this
+func	FUN_001d16f4	IrEmitThenCut__deleting_dtor	CONFIRMED	stores the IrEmitThenCut vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrEmitThenCut at *this
+func	FUN_001d1728	IrDyamicReturnSwitch__dtor	CONFIRMED	stores the IrDyamicReturnSwitch vtable at *this (dtor); stores vtable of IrDyamicReturnSwitch at *this
+func	FUN_001d175c	IrDyamicReturnSwitch__deleting_dtor	CONFIRMED	stores the IrDyamicReturnSwitch vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDyamicReturnSwitch at *this
+func	FUN_001d1790	IrCut__dtor	CONFIRMED	stores the IrCut vtable at *this (dtor); stores vtable of IrCut at *this
+func	FUN_001d17c4	IrCut__deleting_dtor	CONFIRMED	stores the IrCut vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCut at *this
+func	FUN_001d17f8	IrLdBuffer__dtor	CONFIRMED	stores the IrLdBuffer vtable at *this (dtor); stores vtable of IrLdBuffer at *this
+func	FUN_001d182c	IrLdBuffer__deleting_dtor	CONFIRMED	stores the IrLdBuffer vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLdBuffer at *this
+func	FUN_001d1860	IrSampleG__dtor	CONFIRMED	stores the IrSampleG vtable at *this (dtor); stores vtable of IrSampleG at *this
+func	FUN_001d1894	IrSampleG__deleting_dtor	CONFIRMED	stores the IrSampleG vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSampleG at *this
+func	FUN_001d18c8	IrSampleCLZ__dtor	CONFIRMED	stores the IrSampleCLZ vtable at *this (dtor); stores vtable of IrSampleCLZ at *this
+func	FUN_001d18fc	IrSampleCLZ__deleting_dtor	CONFIRMED	stores the IrSampleCLZ vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSampleCLZ at *this
+func	FUN_001d1930	IrSampleL__dtor	CONFIRMED	stores the IrSampleL vtable at *this (dtor); stores vtable of IrSampleL at *this
+func	FUN_001d1964	IrSampleL__deleting_dtor	CONFIRMED	stores the IrSampleL vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSampleL at *this
+func	FUN_001d1998	IrSampleC__dtor	CONFIRMED	stores the IrSampleC vtable at *this (dtor); stores vtable of IrSampleC at *this
+func	FUN_001d19cc	IrSampleC__deleting_dtor	CONFIRMED	stores the IrSampleC vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSampleC at *this
+func	FUN_001d1a00	IrFetchLoad__dtor	CONFIRMED	stores the IrFetchLoad vtable at *this (dtor); stores vtable of IrFetchLoad at *this
+func	FUN_001d1a34	IrFetchLoad__deleting_dtor	CONFIRMED	stores the IrFetchLoad vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchLoad at *this
+func	FUN_001d1a68	IrCbLoad__dtor	CONFIRMED	stores the IrCbLoad vtable at *this (dtor); stores vtable of IrCbLoad at *this
+func	FUN_001d1a9c	IrCbLoad__deleting_dtor	CONFIRMED	stores the IrCbLoad vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCbLoad at *this
+func	FUN_001d1ad0	IrWhileStart__dtor	CONFIRMED	stores the IrWhileStart vtable at *this (dtor); stores vtable of IrWhileStart at *this
+func	FUN_001d1b04	IrWhileStart__deleting_dtor	CONFIRMED	stores the IrWhileStart vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrWhileStart at *this
+func	FUN_001d1b38	IrScratchStore__dtor	CONFIRMED	stores the IrScratchStore vtable at *this (dtor); stores vtable of IrScratchStore at *this
+func	FUN_001d1b6c	IrScratchStore__deleting_dtor	CONFIRMED	stores the IrScratchStore vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrScratchStore at *this
+func	FUN_001d1ba0	IrScratchLoad__dtor	CONFIRMED	stores the IrScratchLoad vtable at *this (dtor); stores vtable of IrScratchLoad at *this
+func	FUN_001d1bd4	IrScratchLoad__deleting_dtor	CONFIRMED	stores the IrScratchLoad vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrScratchLoad at *this
+func	FUN_001d1c08	IrMemInit__dtor	CONFIRMED	stores the IrMemInit vtable at *this (dtor); stores vtable of IrMemInit at *this
+func	FUN_001d1c3c	IrMemInit__deleting_dtor	CONFIRMED	stores the IrMemInit vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMemInit at *this
+func	FUN_001d1c70	IrDyamicReturn__dtor	CONFIRMED	stores the IrDyamicReturn vtable at *this (dtor); stores vtable of IrDyamicReturn at *this
+func	FUN_001d1ca4	IrDyamicReturn__deleting_dtor	CONFIRMED	stores the IrDyamicReturn vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDyamicReturn at *this
+func	FUN_001d1cd8	IrEmit__dtor	CONFIRMED	stores the IrEmit vtable at *this (dtor); stores vtable of IrEmit at *this
+func	FUN_001d1d0c	IrEmit__deleting_dtor	CONFIRMED	stores the IrEmit vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrEmit at *this
+func	FUN_001d1d40	IrPsColorFog__dtor	CONFIRMED	stores the IrPsColorFog vtable at *this (dtor); stores vtable of IrPsColorFog at *this
+func	FUN_001d1d74	IrPsColorFog__deleting_dtor	CONFIRMED	stores the IrPsColorFog vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPsColorFog at *this
+func	FUN_001d1da8	IrMulLit__dtor	CONFIRMED	stores the IrMulLit vtable at *this (dtor); stores vtable of IrMulLit at *this
+func	FUN_001d1ddc	IrMulLit__deleting_dtor	CONFIRMED	stores the IrMulLit vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulLit at *this
+func	FUN_001d1e10	IrNotInt__dtor	CONFIRMED	stores the IrNotInt vtable at *this (dtor); stores vtable of IrNotInt at *this
+func	FUN_001d1e44	IrNotInt__deleting_dtor	CONFIRMED	stores the IrNotInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrNotInt at *this
+func	FUN_001d1e78	IrXorInt__dtor	CONFIRMED	stores the IrXorInt vtable at *this (dtor); stores vtable of IrXorInt at *this
+func	FUN_001d1eac	IrXorInt__deleting_dtor	CONFIRMED	stores the IrXorInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrXorInt at *this
+func	FUN_001d1ee0	IrOrInt__dtor	CONFIRMED	stores the IrOrInt vtable at *this (dtor); stores vtable of IrOrInt at *this
+func	FUN_001d1f14	IrOrInt__deleting_dtor	CONFIRMED	stores the IrOrInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrOrInt at *this
+func	FUN_001d1f48	IrAndInt__dtor	CONFIRMED	stores the IrAndInt vtable at *this (dtor); stores vtable of IrAndInt at *this
+func	FUN_001d1f7c	IrAndInt__deleting_dtor	CONFIRMED	stores the IrAndInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAndInt at *this
+func	FUN_001d1fb0	IrRoundNearestEven__dtor	CONFIRMED	stores the IrRoundNearestEven vtable at *this (dtor); stores vtable of IrRoundNearestEven at *this
+func	FUN_001d1fe4	IrRoundNearestEven__deleting_dtor	CONFIRMED	stores the IrRoundNearestEven vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRoundNearestEven at *this
+func	FUN_001d2018	IrCeil__dtor	CONFIRMED	stores the IrCeil vtable at *this (dtor); stores vtable of IrCeil at *this
+func	FUN_001d204c	IrCeil__deleting_dtor	CONFIRMED	stores the IrCeil vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCeil at *this
+func	FUN_001d2080	IrSetNE_Dx10__dtor	CONFIRMED	stores the IrSetNE_Dx10 vtable at *this (dtor); stores vtable of IrSetNE_Dx10 at *this
+func	FUN_001d20b4	IrSetNE_Dx10__deleting_dtor	CONFIRMED	stores the IrSetNE_Dx10 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetNE_Dx10 at *this
+func	FUN_001d20e8	IrSetGE_Dx10__dtor	CONFIRMED	stores the IrSetGE_Dx10 vtable at *this (dtor); stores vtable of IrSetGE_Dx10 at *this
+func	FUN_001d211c	IrSetGE_Dx10__deleting_dtor	CONFIRMED	stores the IrSetGE_Dx10 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGE_Dx10 at *this
+func	FUN_001d2150	IrSetE_Dx10__dtor	CONFIRMED	stores the IrSetE_Dx10 vtable at *this (dtor); stores vtable of IrSetE_Dx10 at *this
+func	FUN_001d2184	IrSetE_Dx10__deleting_dtor	CONFIRMED	stores the IrSetE_Dx10 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetE_Dx10 at *this
+func	FUN_001d21b8	IrFetchShaderCall__dtor	CONFIRMED	stores the IrFetchShaderCall vtable at *this (dtor); stores vtable of IrFetchShaderCall at *this
+func	FUN_001d21ec	IrFetchShaderCall__deleting_dtor	CONFIRMED	stores the IrFetchShaderCall vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchShaderCall at *this
+func	FUN_001d2220	IrScatter__dtor	CONFIRMED	stores the IrScatter vtable at *this (dtor); stores vtable of IrScatter at *this
+func	FUN_001d2254	IrScatter__deleting_dtor	CONFIRMED	stores the IrScatter vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrScatter at *this
+func	FUN_001d2288	IrCmovNE__dtor	CONFIRMED	stores the IrCmovNE vtable at *this (dtor); stores vtable of IrCmovNE at *this
+func	FUN_001d22bc	IrCmovNE__deleting_dtor	CONFIRMED	stores the IrCmovNE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmovNE at *this
+func	FUN_001d22f0	IrCmovGT__dtor	CONFIRMED	stores the IrCmovGT vtable at *this (dtor); stores vtable of IrCmovGT at *this
+func	FUN_001d2324	IrCmovGT__deleting_dtor	CONFIRMED	stores the IrCmovGT vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmovGT at *this
+func	FUN_001d2358	IrCmovGE__dtor	CONFIRMED	stores the IrCmovGE vtable at *this (dtor); stores vtable of IrCmovGE at *this
+func	FUN_001d238c	IrCmovGE__deleting_dtor	CONFIRMED	stores the IrCmovGE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmovGE at *this
+func	FUN_001d23c0	IrCmovEQ__dtor	CONFIRMED	stores the IrCmovEQ vtable at *this (dtor); stores vtable of IrCmovEQ at *this
+func	FUN_001d23f4	IrCmovEQ__deleting_dtor	CONFIRMED	stores the IrCmovEQ vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmovEQ at *this
+func	FUN_001d2428	IrFetchTextureUncached__dtor	CONFIRMED	stores the IrFetchTextureUncached vtable at *this (dtor); stores vtable of IrFetchTextureUncached at *this
+func	FUN_001d245c	IrFetchTextureUncached__deleting_dtor	CONFIRMED	stores the IrFetchTextureUncached vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureUncached at *this
+func	FUN_001d2490	IrFetchTextureLOD__dtor	CONFIRMED	stores the IrFetchTextureLOD vtable at *this (dtor); stores vtable of IrFetchTextureLOD at *this
+func	FUN_001d24c4	IrFetchTextureLOD__deleting_dtor	CONFIRMED	stores the IrFetchTextureLOD vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureLOD at *this
+func	FUN_001d24f8	IrCndGEInt__dtor	CONFIRMED	stores the IrCndGEInt vtable at *this (dtor); stores vtable of IrCndGEInt at *this
+func	FUN_001d252c	IrCndGEInt__deleting_dtor	CONFIRMED	stores the IrCndGEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGEInt at *this
+func	FUN_001d2560	IrCndGE1__dtor	CONFIRMED	stores the IrCndGE1 vtable at *this (dtor); stores vtable of IrCndGE1 at *this
+func	FUN_001d2594	IrCndGE1__deleting_dtor	CONFIRMED	stores the IrCndGE1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGE1 at *this
+func	FUN_001d25c8	IrCndGE__dtor	CONFIRMED	stores the IrCndGE vtable at *this (dtor); stores vtable of IrCndGE at *this
+func	FUN_001d25fc	IrCndGE__deleting_dtor	CONFIRMED	stores the IrCndGE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGE at *this
+func	FUN_001d2630	IrCndGEFloat__dtor	CONFIRMED	stores the IrCndGEFloat vtable at *this (dtor); stores vtable of IrCndGEFloat at *this
+func	FUN_001d2664	IrCndGEFloat__deleting_dtor	CONFIRMED	stores the IrCndGEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGEFloat at *this
+func	FUN_001d2698	IrMad__dtor	CONFIRMED	stores the IrMad vtable at *this (dtor); stores vtable of IrMad at *this
+func	FUN_001d26cc	IrMad__deleting_dtor	CONFIRMED	stores the IrMad vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMad at *this
+func	FUN_001d2700	IrR300ExpBaseE__dtor	CONFIRMED	stores the IrR300ExpBaseE vtable at *this (dtor); stores vtable of IrR300ExpBaseE at *this
+func	FUN_001d2734	IrR300ExpBaseE__deleting_dtor	CONFIRMED	stores the IrR300ExpBaseE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrR300ExpBaseE at *this
+func	FUN_001d2768	IrDxLogp__dtor	CONFIRMED	stores the IrDxLogp vtable at *this (dtor); stores vtable of IrDxLogp at *this
+func	FUN_001d279c	IrDxLogp__deleting_dtor	CONFIRMED	stores the IrDxLogp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDxLogp at *this
+func	FUN_001d27d0	IrR300Expp__dtor	CONFIRMED	stores the IrR300Expp vtable at *this (dtor); stores vtable of IrR300Expp at *this
+func	FUN_001d2804	IrR300Expp__deleting_dtor	CONFIRMED	stores the IrR300Expp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrR300Expp at *this
+func	FUN_001d2838	IrPow__dtor	CONFIRMED	stores the IrPow vtable at *this (dtor); stores vtable of IrPow at *this
+func	FUN_001d286c	IrPow__deleting_dtor	CONFIRMED	stores the IrPow vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPow at *this
+func	FUN_001d28a0	IrLoad__dtor	CONFIRMED	stores the IrLoad vtable at *this (dtor); stores vtable of IrLoad at *this
+func	FUN_001d28d4	IrLoad__deleting_dtor	CONFIRMED	stores the IrLoad vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoad at *this
+func	FUN_001d2908	IrDp3Add__dtor	CONFIRMED	stores the IrDp3Add vtable at *this (dtor); stores vtable of IrDp3Add at *this
+func	FUN_001d293c	IrDp3Add__deleting_dtor	CONFIRMED	stores the IrDp3Add vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDp3Add at *this
+func	FUN_001d2970	IrMix__dtor	CONFIRMED	stores the IrMix vtable at *this (dtor); stores vtable of IrMix at *this
+func	FUN_001d29a4	IrMix__deleting_dtor	CONFIRMED	stores the IrMix vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMix at *this
+func	FUN_001d29d8	IrDsy1__dtor	CONFIRMED	stores the IrDsy1 vtable at *this (dtor); stores vtable of IrDsy1 at *this
+func	FUN_001d2a0c	IrDsy1__deleting_dtor	CONFIRMED	stores the IrDsy1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDsy1 at *this
+func	FUN_001d2a40	IrDsy__dtor	CONFIRMED	stores the IrDsy vtable at *this (dtor); stores vtable of IrDsy at *this
+func	FUN_001d2a74	IrDsy__deleting_dtor	CONFIRMED	stores the IrDsy vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDsy at *this
+func	FUN_001d2aa8	IrDsx1__dtor	CONFIRMED	stores the IrDsx1 vtable at *this (dtor); stores vtable of IrDsx1 at *this
+func	FUN_001d2adc	IrDsx1__deleting_dtor	CONFIRMED	stores the IrDsx1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDsx1 at *this
+func	FUN_001d2b10	IrDsx__dtor	CONFIRMED	stores the IrDsx vtable at *this (dtor); stores vtable of IrDsx at *this
+func	FUN_001d2b44	IrDsx__deleting_dtor	CONFIRMED	stores the IrDsx vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDsx at *this
+func	FUN_001d2b78	IrCnd05__dtor	CONFIRMED	stores the IrCnd05 vtable at *this (dtor); stores vtable of IrCnd05 at *this
+func	FUN_001d2bac	IrCnd05__deleting_dtor	CONFIRMED	stores the IrCnd05 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCnd05 at *this
+func	FUN_001d2be0	IrPresubInvert__dtor	CONFIRMED	stores the IrPresubInvert vtable at *this (dtor); stores vtable of IrPresubInvert at *this
+func	FUN_001d2c14	IrPresubInvert__deleting_dtor	CONFIRMED	stores the IrPresubInvert vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPresubInvert at *this
+func	FUN_001d2c48	IrPresubAdd__dtor	CONFIRMED	stores the IrPresubAdd vtable at *this (dtor); stores vtable of IrPresubAdd at *this
+func	FUN_001d2c7c	IrPresubAdd__deleting_dtor	CONFIRMED	stores the IrPresubAdd vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPresubAdd at *this
+func	FUN_001d2cb0	IrPresubSub__dtor	CONFIRMED	stores the IrPresubSub vtable at *this (dtor); stores vtable of IrPresubSub at *this
+func	FUN_001d2ce4	IrPresubSub__deleting_dtor	CONFIRMED	stores the IrPresubSub vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPresubSub at *this
+func	FUN_001d2d18	IrPresubBX2Neg__dtor	CONFIRMED	stores the IrPresubBX2Neg vtable at *this (dtor); stores vtable of IrPresubBX2Neg at *this
+func	FUN_001d2d4c	IrPresubBX2Neg__deleting_dtor	CONFIRMED	stores the IrPresubBX2Neg vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPresubBX2Neg at *this
+func	FUN_001d2d80	IrOpSop__dtor	CONFIRMED	stores the IrOpSop vtable at *this (dtor); stores vtable of IrOpSop at *this
+func	FUN_001d2db4	IrOpSop__deleting_dtor	CONFIRMED	stores the IrOpSop vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrOpSop at *this
+func	FUN_001d2de8	IrOpDp__dtor	CONFIRMED	stores the IrOpDp vtable at *this (dtor); stores vtable of IrOpDp at *this
+func	FUN_001d2e1c	IrOpDp__deleting_dtor	CONFIRMED	stores the IrOpDp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrOpDp at *this
+func	FUN_001d2e50	IrAllocInterp__dtor	CONFIRMED	stores the IrAllocInterp vtable at *this (dtor); stores vtable of IrAllocInterp at *this
+func	FUN_001d2e84	IrAllocInterp__deleting_dtor	CONFIRMED	stores the IrAllocInterp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAllocInterp at *this
+func	FUN_001d2eb8	IrAllocColor__dtor	CONFIRMED	stores the IrAllocColor vtable at *this (dtor); stores vtable of IrAllocColor at *this
+func	FUN_001d2eec	IrAllocColor__deleting_dtor	CONFIRMED	stores the IrAllocColor vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAllocColor at *this
+func	FUN_001d2f20	IrAllocMem__dtor	CONFIRMED	stores the IrAllocMem vtable at *this (dtor); stores vtable of IrAllocMem at *this
+func	FUN_001d2f54	IrAllocMem__deleting_dtor	CONFIRMED	stores the IrAllocMem vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAllocMem at *this
+func	FUN_001d2f88	IrAllocPos__dtor	CONFIRMED	stores the IrAllocPos vtable at *this (dtor); stores vtable of IrAllocPos at *this
+func	FUN_001d2fbc	IrAllocPos__deleting_dtor	CONFIRMED	stores the IrAllocPos vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAllocPos at *this
+func	FUN_001d2ff0	IrEndMakeCall__dtor	CONFIRMED	stores the IrEndMakeCall vtable at *this (dtor); stores vtable of IrEndMakeCall at *this
+func	FUN_001d3024	IrEndMakeCall__deleting_dtor	CONFIRMED	stores the IrEndMakeCall vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrEndMakeCall at *this
+func	FUN_001d3058	IrEndCall__dtor	CONFIRMED	stores the IrEndCall vtable at *this (dtor); stores vtable of IrEndCall at *this
+func	FUN_001d308c	IrEndCall__deleting_dtor	CONFIRMED	stores the IrEndCall vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrEndCall at *this
+func	FUN_001d30c0	IrStartMakeCall__dtor	CONFIRMED	stores the IrStartMakeCall vtable at *this (dtor); stores vtable of IrStartMakeCall at *this
+func	FUN_001d30f4	IrStartMakeCall__deleting_dtor	CONFIRMED	stores the IrStartMakeCall vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrStartMakeCall at *this
+func	FUN_001d3128	IrStartCallRoutine__dtor	CONFIRMED	stores the IrStartCallRoutine vtable at *this (dtor); stores vtable of IrStartCallRoutine at *this
+func	FUN_001d315c	IrStartCallRoutine__deleting_dtor	CONFIRMED	stores the IrStartCallRoutine vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrStartCallRoutine at *this
+func	FUN_001d3190	IrPhi__dtor	CONFIRMED	stores the IrPhi vtable at *this (dtor); stores vtable of IrPhi at *this
+func	FUN_001d31c4	IrPhi__deleting_dtor	CONFIRMED	stores the IrPhi vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPhi at *this
+func	FUN_001d31f8	IrCmp1S__dtor	CONFIRMED	stores the IrCmp1S vtable at *this (dtor); stores vtable of IrCmp1S at *this
+func	FUN_001d322c	IrCmp1S__deleting_dtor	CONFIRMED	stores the IrCmp1S vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmp1S at *this
+func	FUN_001d3260	IrCmp1D__dtor	CONFIRMED	stores the IrCmp1D vtable at *this (dtor); stores vtable of IrCmp1D at *this
+func	FUN_001d3294	IrCmp1D__deleting_dtor	CONFIRMED	stores the IrCmp1D vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmp1D at *this
+func	FUN_001d32c8	IrCmp2__dtor	CONFIRMED	stores the IrCmp2 vtable at *this (dtor); stores vtable of IrCmp2 at *this
+func	FUN_001d32fc	IrCmp2__deleting_dtor	CONFIRMED	stores the IrCmp2 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCmp2 at *this
+func	FUN_001d3330	IrEpilog__dtor	CONFIRMED	stores the IrEpilog vtable at *this (dtor); stores vtable of IrEpilog at *this
+func	FUN_001d3364	IrEpilog__deleting_dtor	CONFIRMED	stores the IrEpilog vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrEpilog at *this
+func	FUN_001d3398	IrProlog__dtor	CONFIRMED	stores the IrProlog vtable at *this (dtor); stores vtable of IrProlog at *this
+func	FUN_001d33cc	IrProlog__deleting_dtor	CONFIRMED	stores the IrProlog vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrProlog at *this
+func	FUN_001d3400	IrExit__dtor	CONFIRMED	stores the IrExit vtable at *this (dtor); stores vtable of IrExit at *this
+func	FUN_001d3434	IrExit__deleting_dtor	CONFIRMED	stores the IrExit vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrExit at *this
+func	FUN_001d3468	IrEntry__dtor	CONFIRMED	stores the IrEntry vtable at *this (dtor); stores vtable of IrEntry at *this
+func	FUN_001d349c	IrEntry__deleting_dtor	CONFIRMED	stores the IrEntry vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrEntry at *this
+func	FUN_001d34d0	IrHeader__dtor	CONFIRMED	stores the IrHeader vtable at *this (dtor); stores vtable of IrHeader at *this
+func	FUN_001d3504	IrHeader__deleting_dtor	CONFIRMED	stores the IrHeader vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrHeader at *this
+func	FUN_001d3538	IrUndefined__dtor	CONFIRMED	stores the IrUndefined vtable at *this (dtor); stores vtable of IrUndefined at *this
+func	FUN_001d356c	IrUndefined__deleting_dtor	CONFIRMED	stores the IrUndefined vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrUndefined at *this
+func	FUN_001d35a0	IrProjection__dtor	CONFIRMED	stores the IrProjection vtable at *this (dtor); stores vtable of IrProjection at *this
+func	FUN_001d35d4	IrProjection__deleting_dtor	CONFIRMED	stores the IrProjection vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrProjection at *this
+func	FUN_001d3608	IrMerge__dtor	CONFIRMED	stores the IrMerge vtable at *this (dtor); stores vtable of IrMerge at *this
+func	FUN_001d363c	IrMerge__deleting_dtor	CONFIRMED	stores the IrMerge vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMerge at *this
+func	FUN_001d3670	IrLoopIndex__dtor	CONFIRMED	stores the IrLoopIndex vtable at *this (dtor); stores vtable of IrLoopIndex at *this
+func	FUN_001d36a4	IrLoopIndex__deleting_dtor	CONFIRMED	stores the IrLoopIndex vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoopIndex at *this
+func	FUN_001d36d8	IrLoopStart__dtor	CONFIRMED	stores the IrLoopStart vtable at *this (dtor); stores vtable of IrLoopStart at *this
+func	FUN_001d370c	IrLoopStart__deleting_dtor	CONFIRMED	stores the IrLoopStart vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoopStart at *this
+func	FUN_001d3740	IrPixelLoopFetch__dtor	CONFIRMED	stores the IrPixelLoopFetch vtable at *this (dtor); stores vtable of IrPixelLoopFetch at *this
+func	FUN_001d3774	IrPixelLoopFetch__deleting_dtor	CONFIRMED	stores the IrPixelLoopFetch vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPixelLoopFetch at *this
+func	FUN_001d37a8	IrVertexLoopFetch__dtor	CONFIRMED	stores the IrVertexLoopFetch vtable at *this (dtor); stores vtable of IrVertexLoopFetch at *this
+func	FUN_001d37dc	IrVertexLoopFetch__deleting_dtor	CONFIRMED	stores the IrVertexLoopFetch vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrVertexLoopFetch at *this
+func	FUN_001d3810	IrLoadInterp__dtor	CONFIRMED	stores the IrLoadInterp vtable at *this (dtor); stores vtable of IrLoadInterp at *this
+func	FUN_001d3844	IrLoadInterp__deleting_dtor	CONFIRMED	stores the IrLoadInterp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoadInterp at *this
+func	FUN_001d3878	IrLoadTempDefault__dtor	CONFIRMED	stores the IrLoadTempDefault vtable at *this (dtor); stores vtable of IrLoadTempDefault at *this
+func	FUN_001d38ac	IrLoadTempDefault__deleting_dtor	CONFIRMED	stores the IrLoadTempDefault vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoadTempDefault at *this
+func	FUN_001d38e0	IrLoadAbstractState__dtor	CONFIRMED	stores the IrLoadAbstractState vtable at *this (dtor); stores vtable of IrLoadAbstractState at *this
+func	FUN_001d3914	IrLoadAbstractState__deleting_dtor	CONFIRMED	stores the IrLoadAbstractState vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoadAbstractState at *this
+func	FUN_001d3948	IrLoadPhysical__dtor	CONFIRMED	stores the IrLoadPhysical vtable at *this (dtor); stores vtable of IrLoadPhysical at *this
+func	FUN_001d397c	IrLoadPhysical__deleting_dtor	CONFIRMED	stores the IrLoadPhysical vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoadPhysical at *this
+func	FUN_001d39b0	IrLoadTemp__dtor	CONFIRMED	stores the IrLoadTemp vtable at *this (dtor); stores vtable of IrLoadTemp at *this
+func	FUN_001d39e4	IrLoadTemp__deleting_dtor	CONFIRMED	stores the IrLoadTemp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoadTemp at *this
+func	FUN_001d3a18	IrLoadConst__dtor	CONFIRMED	stores the IrLoadConst vtable at *this (dtor); stores vtable of IrLoadConst at *this
+func	FUN_001d3a4c	IrLoadConst__deleting_dtor	CONFIRMED	stores the IrLoadConst vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLoadConst at *this
+func	FUN_001d3a80	IrMovaFloorInt__dtor	CONFIRMED	stores the IrMovaFloorInt vtable at *this (dtor); stores vtable of IrMovaFloorInt at *this
+func	FUN_001d3ab4	IrMovaFloorInt__deleting_dtor	CONFIRMED	stores the IrMovaFloorInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaFloorInt at *this
+func	FUN_001d3ae8	IrMovaFloorGprInt__dtor	CONFIRMED	stores the IrMovaFloorGprInt vtable at *this (dtor); stores vtable of IrMovaFloorGprInt at *this
+func	FUN_001d3b1c	IrMovaFloorGprInt__deleting_dtor	CONFIRMED	stores the IrMovaFloorGprInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaFloorGprInt at *this
+func	FUN_001d3b50	IrMovaFloorFloat__dtor	CONFIRMED	stores the IrMovaFloorFloat vtable at *this (dtor); stores vtable of IrMovaFloorFloat at *this
+func	FUN_001d3b84	IrMovaFloorFloat__deleting_dtor	CONFIRMED	stores the IrMovaFloorFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaFloorFloat at *this
+func	FUN_001d3bb8	IrMovaFlr__dtor	CONFIRMED	stores the IrMovaFlr vtable at *this (dtor); stores vtable of IrMovaFlr at *this
+func	FUN_001d3bec	IrMovaFlr__deleting_dtor	CONFIRMED	stores the IrMovaFlr vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaFlr at *this
+func	FUN_001d3c20	IrMovaFloor__dtor	CONFIRMED	stores the IrMovaFloor vtable at *this (dtor); stores vtable of IrMovaFloor at *this
+func	FUN_001d3c54	IrMovaFloor__deleting_dtor	CONFIRMED	stores the IrMovaFloor vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaFloor at *this
+func	FUN_001d3c88	IrSubPrev__dtor	CONFIRMED	stores the IrSubPrev vtable at *this (dtor); stores vtable of IrSubPrev at *this
+func	FUN_001d3cbc	IrSubPrev__deleting_dtor	CONFIRMED	stores the IrSubPrev vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSubPrev at *this
+func	FUN_001d3cf0	IrMulPrev2__dtor	CONFIRMED	stores the IrMulPrev2 vtable at *this (dtor); stores vtable of IrMulPrev2 at *this
+func	FUN_001d3d24	IrMulPrev2__deleting_dtor	CONFIRMED	stores the IrMulPrev2 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulPrev2 at *this
+func	FUN_001d3d58	IrMulPrev__dtor	CONFIRMED	stores the IrMulPrev vtable at *this (dtor); stores vtable of IrMulPrev at *this
+func	FUN_001d3d8c	IrMulPrev__deleting_dtor	CONFIRMED	stores the IrMulPrev vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulPrev at *this
+func	FUN_001d3dc0	IrAddPrev__dtor	CONFIRMED	stores the IrAddPrev vtable at *this (dtor); stores vtable of IrAddPrev at *this
+func	FUN_001d3df4	IrAddPrev__deleting_dtor	CONFIRMED	stores the IrAddPrev vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAddPrev at *this
+func	FUN_001d3e28	IrPredSetRst__dtor	CONFIRMED	stores the IrPredSetRst vtable at *this (dtor); stores vtable of IrPredSetRst at *this
+func	FUN_001d3e5c	IrPredSetRst__deleting_dtor	CONFIRMED	stores the IrPredSetRst vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetRst at *this
+func	FUN_001d3e90	IrPredSetClr__dtor	CONFIRMED	stores the IrPredSetClr vtable at *this (dtor); stores vtable of IrPredSetClr at *this
+func	FUN_001d3ec4	IrPredSetClr__deleting_dtor	CONFIRMED	stores the IrPredSetClr vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetClr at *this
+func	FUN_001d3ef8	IrPredSetPop__dtor	CONFIRMED	stores the IrPredSetPop vtable at *this (dtor); stores vtable of IrPredSetPop at *this
+func	FUN_001d3f2c	IrPredSetPop__deleting_dtor	CONFIRMED	stores the IrPredSetPop vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetPop at *this
+func	FUN_001d3f60	IrPredSetInv__dtor	CONFIRMED	stores the IrPredSetInv vtable at *this (dtor); stores vtable of IrPredSetInv at *this
+func	FUN_001d3f94	IrPredSetInv__deleting_dtor	CONFIRMED	stores the IrPredSetInv vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetInv at *this
+func	FUN_001d3fc8	IrPredSetGEInt__dtor	CONFIRMED	stores the IrPredSetGEInt vtable at *this (dtor); stores vtable of IrPredSetGEInt at *this
+func	FUN_001d3ffc	IrPredSetGEInt__deleting_dtor	CONFIRMED	stores the IrPredSetGEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGEInt at *this
+func	FUN_001d4030	IrPredSetGE__dtor	CONFIRMED	stores the IrPredSetGE vtable at *this (dtor); stores vtable of IrPredSetGE at *this
+func	FUN_001d4064	IrPredSetGE__deleting_dtor	CONFIRMED	stores the IrPredSetGE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGE at *this
+func	FUN_001d4098	IrPredSetLEInt__dtor	CONFIRMED	stores the IrPredSetLEInt vtable at *this (dtor); stores vtable of IrPredSetLEInt at *this
+func	FUN_001d40cc	IrPredSetLEInt__deleting_dtor	CONFIRMED	stores the IrPredSetLEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetLEInt at *this
+func	FUN_001d4100	IrPredSetLTInt__dtor	CONFIRMED	stores the IrPredSetLTInt vtable at *this (dtor); stores vtable of IrPredSetLTInt at *this
+func	FUN_001d4134	IrPredSetLTInt__deleting_dtor	CONFIRMED	stores the IrPredSetLTInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetLTInt at *this
+func	FUN_001d4168	IrPredSetGTInt__dtor	CONFIRMED	stores the IrPredSetGTInt vtable at *this (dtor); stores vtable of IrPredSetGTInt at *this
+func	FUN_001d419c	IrPredSetGTInt__deleting_dtor	CONFIRMED	stores the IrPredSetGTInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGTInt at *this
+func	FUN_001d41d0	IrPredSetGT__dtor	CONFIRMED	stores the IrPredSetGT vtable at *this (dtor); stores vtable of IrPredSetGT at *this
+func	FUN_001d4204	IrPredSetGT__deleting_dtor	CONFIRMED	stores the IrPredSetGT vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGT at *this
+func	FUN_001d4238	IrPredSetNEInt__dtor	CONFIRMED	stores the IrPredSetNEInt vtable at *this (dtor); stores vtable of IrPredSetNEInt at *this
+func	FUN_001d426c	IrPredSetNEInt__deleting_dtor	CONFIRMED	stores the IrPredSetNEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetNEInt at *this
+func	FUN_001d42a0	IrPredSetNE__dtor	CONFIRMED	stores the IrPredSetNE vtable at *this (dtor); stores vtable of IrPredSetNE at *this
+func	FUN_001d42d4	IrPredSetNE__deleting_dtor	CONFIRMED	stores the IrPredSetNE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetNE at *this
+func	FUN_001d4308	IrPredSetEInt__dtor	CONFIRMED	stores the IrPredSetEInt vtable at *this (dtor); stores vtable of IrPredSetEInt at *this
+func	FUN_001d433c	IrPredSetEInt__deleting_dtor	CONFIRMED	stores the IrPredSetEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetEInt at *this
+func	FUN_001d4370	IrPredSetE__dtor	CONFIRMED	stores the IrPredSetE vtable at *this (dtor); stores vtable of IrPredSetE at *this
+func	FUN_001d43a4	IrPredSetE__deleting_dtor	CONFIRMED	stores the IrPredSetE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetE at *this
+func	FUN_001d43d8	IrKillOne__dtor	CONFIRMED	stores the IrKillOne vtable at *this (dtor); stores vtable of IrKillOne at *this
+func	FUN_001d440c	IrKillOne__deleting_dtor	CONFIRMED	stores the IrKillOne vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillOne at *this
+func	FUN_001d4440	IrCos__dtor	CONFIRMED	stores the IrCos vtable at *this (dtor); stores vtable of IrCos at *this
+func	FUN_001d4474	IrCos__deleting_dtor	CONFIRMED	stores the IrCos vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCos at *this
+func	FUN_001d44a8	IrSin__dtor	CONFIRMED	stores the IrSin vtable at *this (dtor); stores vtable of IrSin at *this
+func	FUN_001d44dc	IrSin__deleting_dtor	CONFIRMED	stores the IrSin vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSin at *this
+func	FUN_001d4510	IrSubConst1__dtor	CONFIRMED	stores the IrSubConst1 vtable at *this (dtor); stores vtable of IrSubConst1 at *this
+func	FUN_001d4544	IrSubConst1__deleting_dtor	CONFIRMED	stores the IrSubConst1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSubConst1 at *this
+func	FUN_001d4578	IrMulConst1__dtor	CONFIRMED	stores the IrMulConst1 vtable at *this (dtor); stores vtable of IrMulConst1 at *this
+func	FUN_001d45ac	IrMulConst1__deleting_dtor	CONFIRMED	stores the IrMulConst1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulConst1 at *this
+func	FUN_001d45e0	IrAddConst1__dtor	CONFIRMED	stores the IrAddConst1 vtable at *this (dtor); stores vtable of IrAddConst1 at *this
+func	FUN_001d4614	IrAddConst1__deleting_dtor	CONFIRMED	stores the IrAddConst1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAddConst1 at *this
+func	FUN_001d4648	IrSubConst0__dtor	CONFIRMED	stores the IrSubConst0 vtable at *this (dtor); stores vtable of IrSubConst0 at *this
+func	FUN_001d467c	IrSubConst0__deleting_dtor	CONFIRMED	stores the IrSubConst0 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSubConst0 at *this
+func	FUN_001d46b0	IrMulConst0__dtor	CONFIRMED	stores the IrMulConst0 vtable at *this (dtor); stores vtable of IrMulConst0 at *this
+func	FUN_001d46e4	IrMulConst0__deleting_dtor	CONFIRMED	stores the IrMulConst0 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulConst0 at *this
+func	FUN_001d4718	IrAddConst0__dtor	CONFIRMED	stores the IrAddConst0 vtable at *this (dtor); stores vtable of IrAddConst0 at *this
+func	FUN_001d474c	IrAddConst0__deleting_dtor	CONFIRMED	stores the IrAddConst0 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAddConst0 at *this
+func	FUN_001d4780	IrFetchTextureMapGradients__dtor	CONFIRMED	stores the IrFetchTextureMapGradients vtable at *this (dtor); stores vtable of IrFetchTextureMapGradients at *this
+func	FUN_001d47b4	IrFetchTextureMapGradients__deleting_dtor	CONFIRMED	stores the IrFetchTextureMapGradients vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureMapGradients at *this
+func	FUN_001d47e8	IrFetchTextureMapKill__dtor	CONFIRMED	stores the IrFetchTextureMapKill vtable at *this (dtor); stores vtable of IrFetchTextureMapKill at *this
+func	FUN_001d481c	IrFetchTextureMapKill__deleting_dtor	CONFIRMED	stores the IrFetchTextureMapKill vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureMapKill at *this
+func	FUN_001d4850	IrFetchTextureMapBias__dtor	CONFIRMED	stores the IrFetchTextureMapBias vtable at *this (dtor); stores vtable of IrFetchTextureMapBias at *this
+func	FUN_001d4884	IrFetchTextureMapBias__deleting_dtor	CONFIRMED	stores the IrFetchTextureMapBias vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureMapBias at *this
+func	FUN_001d48b8	IrFetchTextureMapProj__dtor	CONFIRMED	stores the IrFetchTextureMapProj vtable at *this (dtor); stores vtable of IrFetchTextureMapProj at *this
+func	FUN_001d48ec	IrFetchTextureMapProj__deleting_dtor	CONFIRMED	stores the IrFetchTextureMapProj vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureMapProj at *this
+func	FUN_001d4920	IrSetFilter4Weights__dtor	CONFIRMED	stores the IrSetFilter4Weights vtable at *this (dtor); stores vtable of IrSetFilter4Weights at *this
+func	FUN_001d4954	IrSetFilter4Weights__deleting_dtor	CONFIRMED	stores the IrSetFilter4Weights vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetFilter4Weights at *this
+func	FUN_001d4988	IrSetGradientsV__dtor	CONFIRMED	stores the IrSetGradientsV vtable at *this (dtor); stores vtable of IrSetGradientsV at *this
+func	FUN_001d49bc	IrSetGradientsV__deleting_dtor	CONFIRMED	stores the IrSetGradientsV vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGradientsV at *this
+func	FUN_001d49f0	IrSetGradientsH__dtor	CONFIRMED	stores the IrSetGradientsH vtable at *this (dtor); stores vtable of IrSetGradientsH at *this
+func	FUN_001d4a24	IrSetGradientsH__deleting_dtor	CONFIRMED	stores the IrSetGradientsH vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGradientsH at *this
+func	FUN_001d4a58	IrSetTexLod__dtor	CONFIRMED	stores the IrSetTexLod vtable at *this (dtor); stores vtable of IrSetTexLod at *this
+func	FUN_001d4a8c	IrSetTexLod__deleting_dtor	CONFIRMED	stores the IrSetTexLod vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetTexLod at *this
+func	FUN_001d4ac0	IrGetWeights__dtor	CONFIRMED	stores the IrGetWeights vtable at *this (dtor); stores vtable of IrGetWeights at *this
+func	FUN_001d4af4	IrGetWeights__deleting_dtor	CONFIRMED	stores the IrGetWeights vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrGetWeights at *this
+func	FUN_001d4b28	IrGetGradients__dtor	CONFIRMED	stores the IrGetGradients vtable at *this (dtor); stores vtable of IrGetGradients at *this
+func	FUN_001d4b5c	IrGetGradients__deleting_dtor	CONFIRMED	stores the IrGetGradients vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrGetGradients at *this
+func	FUN_001d4b90	IrGetCompTexLod__dtor	CONFIRMED	stores the IrGetCompTexLod vtable at *this (dtor); stores vtable of IrGetCompTexLod at *this
+func	FUN_001d4bc4	IrGetCompTexLod__deleting_dtor	CONFIRMED	stores the IrGetCompTexLod vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrGetCompTexLod at *this
+func	FUN_001d4bf8	IrGetBorderColorFraction__dtor	CONFIRMED	stores the IrGetBorderColorFraction vtable at *this (dtor); stores vtable of IrGetBorderColorFraction at *this
+func	FUN_001d4c2c	IrGetBorderColorFraction__deleting_dtor	CONFIRMED	stores the IrGetBorderColorFraction vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrGetBorderColorFraction at *this
+func	FUN_001d4c60	IrFetchMultiSample__dtor	CONFIRMED	stores the IrFetchMultiSample vtable at *this (dtor); stores vtable of IrFetchMultiSample at *this
+func	FUN_001d4c94	IrFetchMultiSample__deleting_dtor	CONFIRMED	stores the IrFetchMultiSample vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchMultiSample at *this
+func	FUN_001d4cc8	IrFetchShadowMap__dtor	CONFIRMED	stores the IrFetchShadowMap vtable at *this (dtor); stores vtable of IrFetchShadowMap at *this
+func	FUN_001d4cfc	IrFetchShadowMap__deleting_dtor	CONFIRMED	stores the IrFetchShadowMap vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchShadowMap at *this
+func	FUN_001d4d30	IrFetch3DNoiseMap__dtor	CONFIRMED	stores the IrFetch3DNoiseMap vtable at *this (dtor); stores vtable of IrFetch3DNoiseMap at *this
+func	FUN_001d4d64	IrFetch3DNoiseMap__deleting_dtor	CONFIRMED	stores the IrFetch3DNoiseMap vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetch3DNoiseMap at *this
+func	FUN_001d4d98	IrFetchTextureMap__dtor	CONFIRMED	stores the IrFetchTextureMap vtable at *this (dtor); stores vtable of IrFetchTextureMap at *this
+func	FUN_001d4dcc	IrFetchTextureMap__deleting_dtor	CONFIRMED	stores the IrFetchTextureMap vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchTextureMap at *this
+func	FUN_001d4e00	IrFetchVertex__dtor	CONFIRMED	stores the IrFetchVertex vtable at *this (dtor); stores vtable of IrFetchVertex at *this
+func	FUN_001d4e34	IrFetchVertex__deleting_dtor	CONFIRMED	stores the IrFetchVertex vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFetchVertex at *this
+func	FUN_001d4e68	IrSqrt__dtor	CONFIRMED	stores the IrSqrt vtable at *this (dtor); stores vtable of IrSqrt at *this
+func	FUN_001d4e9c	IrSqrt__deleting_dtor	CONFIRMED	stores the IrSqrt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSqrt at *this
+func	FUN_001d4ed0	IrRecipSqrtInternal__dtor	CONFIRMED	stores the IrRecipSqrtInternal vtable at *this (dtor); stores vtable of IrRecipSqrtInternal at *this
+func	FUN_001d4f04	IrRecipSqrtInternal__deleting_dtor	CONFIRMED	stores the IrRecipSqrtInternal vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipSqrtInternal at *this
+func	FUN_001d4f38	IrLogInternal__dtor	CONFIRMED	stores the IrLogInternal vtable at *this (dtor); stores vtable of IrLogInternal at *this
+func	FUN_001d4f6c	IrLogInternal__deleting_dtor	CONFIRMED	stores the IrLogInternal vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLogInternal at *this
+func	FUN_001d4fa0	IrExp__dtor	CONFIRMED	stores the IrExp vtable at *this (dtor); stores vtable of IrExp at *this
+func	FUN_001d4fd4	IrExp__deleting_dtor	CONFIRMED	stores the IrExp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrExp at *this
+func	FUN_001d5008	IrSub__dtor	CONFIRMED	stores the IrSub vtable at *this (dtor); stores vtable of IrSub at *this
+func	FUN_001d503c	IrSub__deleting_dtor	CONFIRMED	stores the IrSub vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSub at *this
+func	FUN_001d5070	IrNop1__dtor	CONFIRMED	stores the IrNop1 vtable at *this (dtor); stores vtable of IrNop1 at *this
+func	FUN_001d50a4	IrNop1__deleting_dtor	CONFIRMED	stores the IrNop1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrNop1 at *this
+func	FUN_001d50d8	IrNop__dtor	CONFIRMED	stores the IrNop vtable at *this (dtor); stores vtable of IrNop at *this
+func	FUN_001d510c	IrNop__deleting_dtor	CONFIRMED	stores the IrNop vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrNop at *this
+func	FUN_001d5140	IrLit__dtor	CONFIRMED	stores the IrLit vtable at *this (dtor); stores vtable of IrLit at *this
+func	FUN_001d5174	IrLit__deleting_dtor	CONFIRMED	stores the IrLit vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLit at *this
+func	FUN_001d51a8	IrMov__dtor	CONFIRMED	stores the IrMov vtable at *this (dtor); stores vtable of IrMov at *this
+func	FUN_001d51dc	IrMov__deleting_dtor	CONFIRMED	stores the IrMov vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMov at *this
+func	FUN_001d5210	IrMovFloat__dtor	CONFIRMED	stores the IrMovFloat vtable at *this (dtor); stores vtable of IrMovFloat at *this
+func	FUN_001d5244	IrMovFloat__deleting_dtor	CONFIRMED	stores the IrMovFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovFloat at *this
+func	FUN_001d5278	IrExportRing__dtor	CONFIRMED	stores the IrExportRing vtable at *this (dtor); stores vtable of IrExportRing at *this
+func	FUN_001d52ac	IrExportRing__deleting_dtor	CONFIRMED	stores the IrExportRing vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrExportRing at *this
+func	FUN_001d52e0	IrExport__dtor	CONFIRMED	stores the IrExport vtable at *this (dtor); stores vtable of IrExport at *this
+func	FUN_001d5314	IrExport__deleting_dtor	CONFIRMED	stores the IrExport vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrExport at *this
+func	FUN_001d5348	IrExportFloat__dtor	CONFIRMED	stores the IrExportFloat vtable at *this (dtor); stores vtable of IrExportFloat at *this
+func	FUN_001d537c	IrExportFloat__deleting_dtor	CONFIRMED	stores the IrExportFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrExportFloat at *this
+func	FUN_001d53b0	IrPredSetGEPushInt__dtor	CONFIRMED	stores the IrPredSetGEPushInt vtable at *this (dtor); stores vtable of IrPredSetGEPushInt at *this
+func	FUN_001d53e4	IrPredSetGEPushInt__deleting_dtor	CONFIRMED	stores the IrPredSetGEPushInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGEPushInt at *this
+func	FUN_001d5418	IrPredSetGEPush__dtor	CONFIRMED	stores the IrPredSetGEPush vtable at *this (dtor); stores vtable of IrPredSetGEPush at *this
+func	FUN_001d544c	IrPredSetGEPush__deleting_dtor	CONFIRMED	stores the IrPredSetGEPush vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGEPush at *this
+func	FUN_001d5480	IrPredSetGTPushInt__dtor	CONFIRMED	stores the IrPredSetGTPushInt vtable at *this (dtor); stores vtable of IrPredSetGTPushInt at *this
+func	FUN_001d54b4	IrPredSetGTPushInt__deleting_dtor	CONFIRMED	stores the IrPredSetGTPushInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGTPushInt at *this
+func	FUN_001d54e8	IrPredSetGTPush__dtor	CONFIRMED	stores the IrPredSetGTPush vtable at *this (dtor); stores vtable of IrPredSetGTPush at *this
+func	FUN_001d551c	IrPredSetGTPush__deleting_dtor	CONFIRMED	stores the IrPredSetGTPush vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetGTPush at *this
+func	FUN_001d5550	IrPredSetNEPushInt__dtor	CONFIRMED	stores the IrPredSetNEPushInt vtable at *this (dtor); stores vtable of IrPredSetNEPushInt at *this
+func	FUN_001d5584	IrPredSetNEPushInt__deleting_dtor	CONFIRMED	stores the IrPredSetNEPushInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetNEPushInt at *this
+func	FUN_001d55b8	IrPredSetNEPush__dtor	CONFIRMED	stores the IrPredSetNEPush vtable at *this (dtor); stores vtable of IrPredSetNEPush at *this
+func	FUN_001d55ec	IrPredSetNEPush__deleting_dtor	CONFIRMED	stores the IrPredSetNEPush vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetNEPush at *this
+func	FUN_001d5620	IrPredSetLEPushInt__dtor	CONFIRMED	stores the IrPredSetLEPushInt vtable at *this (dtor); stores vtable of IrPredSetLEPushInt at *this
+func	FUN_001d5654	IrPredSetLEPushInt__deleting_dtor	CONFIRMED	stores the IrPredSetLEPushInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetLEPushInt at *this
+func	FUN_001d5688	IrPredSetLTPushInt__dtor	CONFIRMED	stores the IrPredSetLTPushInt vtable at *this (dtor); stores vtable of IrPredSetLTPushInt at *this
+func	FUN_001d56bc	IrPredSetLTPushInt__deleting_dtor	CONFIRMED	stores the IrPredSetLTPushInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetLTPushInt at *this
+func	FUN_001d56f0	IrPredSetEPushInt__dtor	CONFIRMED	stores the IrPredSetEPushInt vtable at *this (dtor); stores vtable of IrPredSetEPushInt at *this
+func	FUN_001d5724	IrPredSetEPushInt__deleting_dtor	CONFIRMED	stores the IrPredSetEPushInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetEPushInt at *this
+func	FUN_001d5758	IrPredSetEPush__dtor	CONFIRMED	stores the IrPredSetEPush vtable at *this (dtor); stores vtable of IrPredSetEPush at *this
+func	FUN_001d578c	IrPredSetEPush__deleting_dtor	CONFIRMED	stores the IrPredSetEPush vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrPredSetEPush at *this
+func	FUN_001d57c0	IrMovaRound__dtor	CONFIRMED	stores the IrMovaRound vtable at *this (dtor); stores vtable of IrMovaRound at *this
+func	FUN_001d57f4	IrMovaRound__deleting_dtor	CONFIRMED	stores the IrMovaRound vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaRound at *this
+func	FUN_001d5828	IrMovaRoundFloat__dtor	CONFIRMED	stores the IrMovaRoundFloat vtable at *this (dtor); stores vtable of IrMovaRoundFloat at *this
+func	FUN_001d585c	IrMovaRoundFloat__deleting_dtor	CONFIRMED	stores the IrMovaRoundFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMovaRoundFloat at *this
+func	FUN_001d5890	IrSetNEInt__dtor	CONFIRMED	stores the IrSetNEInt vtable at *this (dtor); stores vtable of IrSetNEInt at *this
+func	FUN_001d58c4	IrSetNEInt__deleting_dtor	CONFIRMED	stores the IrSetNEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetNEInt at *this
+func	FUN_001d58f8	IrSetNE__dtor	CONFIRMED	stores the IrSetNE vtable at *this (dtor); stores vtable of IrSetNE at *this
+func	FUN_001d592c	IrSetNE__deleting_dtor	CONFIRMED	stores the IrSetNE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetNE at *this
+func	FUN_001d5960	IrSetNEFloat__dtor	CONFIRMED	stores the IrSetNEFloat vtable at *this (dtor); stores vtable of IrSetNEFloat at *this
+func	FUN_001d5994	IrSetNEFloat__deleting_dtor	CONFIRMED	stores the IrSetNEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetNEFloat at *this
+func	FUN_001d59c8	IrSetGE_uint__dtor	CONFIRMED	stores the IrSetGE_uint vtable at *this (dtor); stores vtable of IrSetGE_uint at *this
+func	FUN_001d59fc	IrSetGE_uint__deleting_dtor	CONFIRMED	stores the IrSetGE_uint vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGE_uint at *this
+func	FUN_001d5a30	IrSetGEInt__dtor	CONFIRMED	stores the IrSetGEInt vtable at *this (dtor); stores vtable of IrSetGEInt at *this
+func	FUN_001d5a64	IrSetGEInt__deleting_dtor	CONFIRMED	stores the IrSetGEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGEInt at *this
+func	FUN_001d5a98	IrSetGE__dtor	CONFIRMED	stores the IrSetGE vtable at *this (dtor); stores vtable of IrSetGE at *this
+func	FUN_001d5acc	IrSetGE__deleting_dtor	CONFIRMED	stores the IrSetGE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGE at *this
+func	FUN_001d5b00	IrSetGEFloat__dtor	CONFIRMED	stores the IrSetGEFloat vtable at *this (dtor); stores vtable of IrSetGEFloat at *this
+func	FUN_001d5b34	IrSetGEFloat__deleting_dtor	CONFIRMED	stores the IrSetGEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGEFloat at *this
+func	FUN_001d5b68	IrSetGTUint__dtor	CONFIRMED	stores the IrSetGTUint vtable at *this (dtor); stores vtable of IrSetGTUint at *this
+func	FUN_001d5b9c	IrSetGTUint__deleting_dtor	CONFIRMED	stores the IrSetGTUint vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGTUint at *this
+func	FUN_001d5bd0	IrSetGTInt__dtor	CONFIRMED	stores the IrSetGTInt vtable at *this (dtor); stores vtable of IrSetGTInt at *this
+func	FUN_001d5c04	IrSetGTInt__deleting_dtor	CONFIRMED	stores the IrSetGTInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGTInt at *this
+func	FUN_001d5c38	IrSetGTDx10__dtor	CONFIRMED	stores the IrSetGTDx10 vtable at *this (dtor); stores vtable of IrSetGTDx10 at *this
+func	FUN_001d5c6c	IrSetGTDx10__deleting_dtor	CONFIRMED	stores the IrSetGTDx10 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGTDx10 at *this
+func	FUN_001d5ca0	IrSetGT__dtor	CONFIRMED	stores the IrSetGT vtable at *this (dtor); stores vtable of IrSetGT at *this
+func	FUN_001d5cd4	IrSetGT__deleting_dtor	CONFIRMED	stores the IrSetGT vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGT at *this
+func	FUN_001d5d08	IrSetGTFloat__dtor	CONFIRMED	stores the IrSetGTFloat vtable at *this (dtor); stores vtable of IrSetGTFloat at *this
+func	FUN_001d5d3c	IrSetGTFloat__deleting_dtor	CONFIRMED	stores the IrSetGTFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetGTFloat at *this
+func	FUN_001d5d70	IrSetEInt__dtor	CONFIRMED	stores the IrSetEInt vtable at *this (dtor); stores vtable of IrSetEInt at *this
+func	FUN_001d5da4	IrSetEInt__deleting_dtor	CONFIRMED	stores the IrSetEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetEInt at *this
+func	FUN_001d5dd8	IrSetE__dtor	CONFIRMED	stores the IrSetE vtable at *this (dtor); stores vtable of IrSetE at *this
+func	FUN_001d5e0c	IrSetE__deleting_dtor	CONFIRMED	stores the IrSetE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetE at *this
+func	FUN_001d5e40	IrSetEFloat__dtor	CONFIRMED	stores the IrSetEFloat vtable at *this (dtor); stores vtable of IrSetEFloat at *this
+func	FUN_001d5e74	IrSetEFloat__deleting_dtor	CONFIRMED	stores the IrSetEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSetEFloat at *this
+func	FUN_001d5ea8	IrCndGT1__dtor	CONFIRMED	stores the IrCndGT1 vtable at *this (dtor); stores vtable of IrCndGT1 at *this
+func	FUN_001d5edc	IrCndGT1__deleting_dtor	CONFIRMED	stores the IrCndGT1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGT1 at *this
+func	FUN_001d5f10	IrCndGTInt__dtor	CONFIRMED	stores the IrCndGTInt vtable at *this (dtor); stores vtable of IrCndGTInt at *this
+func	FUN_001d5f44	IrCndGTInt__deleting_dtor	CONFIRMED	stores the IrCndGTInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGTInt at *this
+func	FUN_001d5f78	IrCndGT__dtor	CONFIRMED	stores the IrCndGT vtable at *this (dtor); stores vtable of IrCndGT at *this
+func	FUN_001d5fac	IrCndGT__deleting_dtor	CONFIRMED	stores the IrCndGT vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGT at *this
+func	FUN_001d5fe0	IrCndGTFloat__dtor	CONFIRMED	stores the IrCndGTFloat vtable at *this (dtor); stores vtable of IrCndGTFloat at *this
+func	FUN_001d6014	IrCndGTFloat__deleting_dtor	CONFIRMED	stores the IrCndGTFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndGTFloat at *this
+func	FUN_001d6048	IrCndE1__dtor	CONFIRMED	stores the IrCndE1 vtable at *this (dtor); stores vtable of IrCndE1 at *this
+func	FUN_001d607c	IrCndE1__deleting_dtor	CONFIRMED	stores the IrCndE1 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndE1 at *this
+func	FUN_001d60b0	IrCndEInt__dtor	CONFIRMED	stores the IrCndEInt vtable at *this (dtor); stores vtable of IrCndEInt at *this
+func	FUN_001d60e4	IrCndEInt__deleting_dtor	CONFIRMED	stores the IrCndEInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndEInt at *this
+func	FUN_001d6118	IrCndE__dtor	CONFIRMED	stores the IrCndE vtable at *this (dtor); stores vtable of IrCndE at *this
+func	FUN_001d614c	IrCndE__deleting_dtor	CONFIRMED	stores the IrCndE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndE at *this
+func	FUN_001d6180	IrCndEFloat__dtor	CONFIRMED	stores the IrCndEFloat vtable at *this (dtor); stores vtable of IrCndEFloat at *this
+func	FUN_001d61b4	IrCndEFloat__deleting_dtor	CONFIRMED	stores the IrCndEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCndEFloat at *this
+func	FUN_001d61e8	IrKillNE__dtor	CONFIRMED	stores the IrKillNE vtable at *this (dtor); stores vtable of IrKillNE at *this
+func	FUN_001d621c	IrKillNE__deleting_dtor	CONFIRMED	stores the IrKillNE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillNE at *this
+func	FUN_001d6250	IrKillNEFloat__dtor	CONFIRMED	stores the IrKillNEFloat vtable at *this (dtor); stores vtable of IrKillNEFloat at *this
+func	FUN_001d6284	IrKillNEFloat__deleting_dtor	CONFIRMED	stores the IrKillNEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillNEFloat at *this
+func	FUN_001d62b8	IrKillGE__dtor	CONFIRMED	stores the IrKillGE vtable at *this (dtor); stores vtable of IrKillGE at *this
+func	FUN_001d62ec	IrKillGE__deleting_dtor	CONFIRMED	stores the IrKillGE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillGE at *this
+func	FUN_001d6320	IrKillGEFloat__dtor	CONFIRMED	stores the IrKillGEFloat vtable at *this (dtor); stores vtable of IrKillGEFloat at *this
+func	FUN_001d6354	IrKillGEFloat__deleting_dtor	CONFIRMED	stores the IrKillGEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillGEFloat at *this
+func	FUN_001d6388	IrKillGT__dtor	CONFIRMED	stores the IrKillGT vtable at *this (dtor); stores vtable of IrKillGT at *this
+func	FUN_001d63bc	IrKillGT__deleting_dtor	CONFIRMED	stores the IrKillGT vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillGT at *this
+func	FUN_001d63f0	IrKillGTFloat__dtor	CONFIRMED	stores the IrKillGTFloat vtable at *this (dtor); stores vtable of IrKillGTFloat at *this
+func	FUN_001d6424	IrKillGTFloat__deleting_dtor	CONFIRMED	stores the IrKillGTFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillGTFloat at *this
+func	FUN_001d6458	IrKillE__dtor	CONFIRMED	stores the IrKillE vtable at *this (dtor); stores vtable of IrKillE at *this
+func	FUN_001d648c	IrKillE__deleting_dtor	CONFIRMED	stores the IrKillE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillE at *this
+func	FUN_001d64c0	IrKillEFloat__dtor	CONFIRMED	stores the IrKillEFloat vtable at *this (dtor); stores vtable of IrKillEFloat at *this
+func	FUN_001d64f4	IrKillEFloat__deleting_dtor	CONFIRMED	stores the IrKillEFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrKillEFloat at *this
+func	FUN_001d6528	IrDst__dtor	CONFIRMED	stores the IrDst vtable at *this (dtor); stores vtable of IrDst at *this
+func	FUN_001d655c	IrDst__deleting_dtor	CONFIRMED	stores the IrDst vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDst at *this
+func	FUN_001d6590	IrDot2AddIEEE__dtor	CONFIRMED	stores the IrDot2AddIEEE vtable at *this (dtor); stores vtable of IrDot2AddIEEE at *this
+func	FUN_001d65c4	IrDot2AddIEEE__deleting_dtor	CONFIRMED	stores the IrDot2AddIEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDot2AddIEEE at *this
+func	FUN_001d65f8	IrDot4IEEE__dtor	CONFIRMED	stores the IrDot4IEEE vtable at *this (dtor); stores vtable of IrDot4IEEE at *this
+func	FUN_001d662c	IrDot4IEEE__deleting_dtor	CONFIRMED	stores the IrDot4IEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDot4IEEE at *this
+func	FUN_001d6660	IrDot4__dtor	CONFIRMED	stores the IrDot4 vtable at *this (dtor); stores vtable of IrDot4 at *this
+func	FUN_001d6694	IrDot4__deleting_dtor	CONFIRMED	stores the IrDot4 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDot4 at *this
+func	FUN_001d66c8	IrMulHiUInt__dtor	CONFIRMED	stores the IrMulHiUInt vtable at *this (dtor); stores vtable of IrMulHiUInt at *this
+func	FUN_001d66fc	IrMulHiUInt__deleting_dtor	CONFIRMED	stores the IrMulHiUInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulHiUInt at *this
+func	FUN_001d6730	IrMulLowUInt__dtor	CONFIRMED	stores the IrMulLowUInt vtable at *this (dtor); stores vtable of IrMulLowUInt at *this
+func	FUN_001d6764	IrMulLowUInt__deleting_dtor	CONFIRMED	stores the IrMulLowUInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulLowUInt at *this
+func	FUN_001d6798	IrMulHiInt__dtor	CONFIRMED	stores the IrMulHiInt vtable at *this (dtor); stores vtable of IrMulHiInt at *this
+func	FUN_001d67cc	IrMulHiInt__deleting_dtor	CONFIRMED	stores the IrMulHiInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulHiInt at *this
+func	FUN_001d6800	IrMulLowInt__dtor	CONFIRMED	stores the IrMulLowInt vtable at *this (dtor); stores vtable of IrMulLowInt at *this
+func	FUN_001d6834	IrMulLowInt__deleting_dtor	CONFIRMED	stores the IrMulLowInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulLowInt at *this
+func	FUN_001d6868	IrLshlInt__dtor	CONFIRMED	stores the IrLshlInt vtable at *this (dtor); stores vtable of IrLshlInt at *this
+func	FUN_001d689c	IrLshlInt__deleting_dtor	CONFIRMED	stores the IrLshlInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLshlInt at *this
+func	FUN_001d68d0	IrLshrInt__dtor	CONFIRMED	stores the IrLshrInt vtable at *this (dtor); stores vtable of IrLshrInt at *this
+func	FUN_001d6904	IrLshrInt__deleting_dtor	CONFIRMED	stores the IrLshrInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrLshrInt at *this
+func	FUN_001d6938	IrAshrInt__dtor	CONFIRMED	stores the IrAshrInt vtable at *this (dtor); stores vtable of IrAshrInt at *this
+func	FUN_001d696c	IrAshrInt__deleting_dtor	CONFIRMED	stores the IrAshrInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAshrInt at *this
+func	FUN_001d69a0	IrUInt2F__dtor	CONFIRMED	stores the IrUInt2F vtable at *this (dtor); stores vtable of IrUInt2F at *this
+func	FUN_001d69d4	IrUInt2F__deleting_dtor	CONFIRMED	stores the IrUInt2F vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrUInt2F at *this
+func	FUN_001d6a08	IrInt2F__dtor	CONFIRMED	stores the IrInt2F vtable at *this (dtor); stores vtable of IrInt2F at *this
+func	FUN_001d6a3c	IrInt2F__deleting_dtor	CONFIRMED	stores the IrInt2F vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrInt2F at *this
+func	FUN_001d6a70	IrF2UInt__dtor	CONFIRMED	stores the IrF2UInt vtable at *this (dtor); stores vtable of IrF2UInt at *this
+func	FUN_001d6aa4	IrF2UInt__deleting_dtor	CONFIRMED	stores the IrF2UInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrF2UInt at *this
+func	FUN_001d6ad8	IrF2Int__dtor	CONFIRMED	stores the IrF2Int vtable at *this (dtor); stores vtable of IrF2Int at *this
+func	FUN_001d6b0c	IrF2Int__deleting_dtor	CONFIRMED	stores the IrF2Int vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrF2Int at *this
+func	FUN_001d6b40	IrDot3IEEE__dtor	CONFIRMED	stores the IrDot3IEEE vtable at *this (dtor); stores vtable of IrDot3IEEE at *this
+func	FUN_001d6b74	IrDot3IEEE__deleting_dtor	CONFIRMED	stores the IrDot3IEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDot3IEEE at *this
+func	FUN_001d6ba8	IrDot3__dtor	CONFIRMED	stores the IrDot3 vtable at *this (dtor); stores vtable of IrDot3 at *this
+func	FUN_001d6bdc	IrDot3__deleting_dtor	CONFIRMED	stores the IrDot3 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrDot3 at *this
+func	FUN_001d6c10	IrCube__dtor	CONFIRMED	stores the IrCube vtable at *this (dtor); stores vtable of IrCube at *this
+func	FUN_001d6c44	IrCube__deleting_dtor	CONFIRMED	stores the IrCube vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCube at *this
+func	FUN_001d6c78	IrTrunc__dtor	CONFIRMED	stores the IrTrunc vtable at *this (dtor); stores vtable of IrTrunc at *this
+func	FUN_001d6cac	IrTrunc__deleting_dtor	CONFIRMED	stores the IrTrunc vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrTrunc at *this
+func	FUN_001d6ce0	IrTruncFloat__dtor	CONFIRMED	stores the IrTruncFloat vtable at *this (dtor); stores vtable of IrTruncFloat at *this
+func	FUN_001d6d14	IrTruncFloat__deleting_dtor	CONFIRMED	stores the IrTruncFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrTruncFloat at *this
+func	FUN_001d6d48	IrRecipUInt__dtor	CONFIRMED	stores the IrRecipUInt vtable at *this (dtor); stores vtable of IrRecipUInt at *this
+func	FUN_001d6d7c	IrRecipUInt__deleting_dtor	CONFIRMED	stores the IrRecipUInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipUInt at *this
+func	FUN_001d6db0	IrRecipInt__dtor	CONFIRMED	stores the IrRecipInt vtable at *this (dtor); stores vtable of IrRecipInt at *this
+func	FUN_001d6de4	IrRecipInt__deleting_dtor	CONFIRMED	stores the IrRecipInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipInt at *this
+func	FUN_001d6e18	IrRecipInternal__dtor	CONFIRMED	stores the IrRecipInternal vtable at *this (dtor); stores vtable of IrRecipInternal at *this
+func	FUN_001d6e4c	IrRecipInternal__deleting_dtor	CONFIRMED	stores the IrRecipInternal vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRecipInternal at *this
+func	FUN_001d6e80	IrMinDx10__dtor	CONFIRMED	stores the IrMinDx10 vtable at *this (dtor); stores vtable of IrMinDx10 at *this
+func	FUN_001d6eb4	IrMinDx10__deleting_dtor	CONFIRMED	stores the IrMinDx10 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMinDx10 at *this
+func	FUN_001d6ee8	IrMinUInt__dtor	CONFIRMED	stores the IrMinUInt vtable at *this (dtor); stores vtable of IrMinUInt at *this
+func	FUN_001d6f1c	IrMinUInt__deleting_dtor	CONFIRMED	stores the IrMinUInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMinUInt at *this
+func	FUN_001d6f50	IrMinInt__dtor	CONFIRMED	stores the IrMinInt vtable at *this (dtor); stores vtable of IrMinInt at *this
+func	FUN_001d6f84	IrMinInt__deleting_dtor	CONFIRMED	stores the IrMinInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMinInt at *this
+func	FUN_001d6fb8	IrMin__dtor	CONFIRMED	stores the IrMin vtable at *this (dtor); stores vtable of IrMin at *this
+func	FUN_001d6fec	IrMin__deleting_dtor	CONFIRMED	stores the IrMin vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMin at *this
+func	FUN_001d7020	IrMinFloat__dtor	CONFIRMED	stores the IrMinFloat vtable at *this (dtor); stores vtable of IrMinFloat at *this
+func	FUN_001d7054	IrMinFloat__deleting_dtor	CONFIRMED	stores the IrMinFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMinFloat at *this
+func	FUN_001d7088	IrMax4__dtor	CONFIRMED	stores the IrMax4 vtable at *this (dtor); stores vtable of IrMax4 at *this
+func	FUN_001d70bc	IrMax4__deleting_dtor	CONFIRMED	stores the IrMax4 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMax4 at *this
+func	FUN_001d70f0	IrMaxDx10__dtor	CONFIRMED	stores the IrMaxDx10 vtable at *this (dtor); stores vtable of IrMaxDx10 at *this
+func	FUN_001d7124	IrMaxDx10__deleting_dtor	CONFIRMED	stores the IrMaxDx10 vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMaxDx10 at *this
+func	FUN_001d7158	IrMax__dtor	CONFIRMED	stores the IrMax vtable at *this (dtor); stores vtable of IrMax at *this
+func	FUN_001d718c	IrMax__deleting_dtor	CONFIRMED	stores the IrMax vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMax at *this
+func	FUN_001d71c0	IrMaxUInt__dtor	CONFIRMED	stores the IrMaxUInt vtable at *this (dtor); stores vtable of IrMaxUInt at *this
+func	FUN_001d71f4	IrMaxUInt__deleting_dtor	CONFIRMED	stores the IrMaxUInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMaxUInt at *this
+func	FUN_001d7228	IrMaxInt__dtor	CONFIRMED	stores the IrMaxInt vtable at *this (dtor); stores vtable of IrMaxInt at *this
+func	FUN_001d725c	IrMaxInt__deleting_dtor	CONFIRMED	stores the IrMaxInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMaxInt at *this
+func	FUN_001d7290	IrMaxFloat__dtor	CONFIRMED	stores the IrMaxFloat vtable at *this (dtor); stores vtable of IrMaxFloat at *this
+func	FUN_001d72c4	IrMaxFloat__deleting_dtor	CONFIRMED	stores the IrMaxFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMaxFloat at *this
+func	FUN_001d72f8	IrFract__dtor	CONFIRMED	stores the IrFract vtable at *this (dtor); stores vtable of IrFract at *this
+func	FUN_001d732c	IrFract__deleting_dtor	CONFIRMED	stores the IrFract vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFract at *this
+func	FUN_001d7360	IrFractFloat__dtor	CONFIRMED	stores the IrFractFloat vtable at *this (dtor); stores vtable of IrFractFloat at *this
+func	FUN_001d7394	IrFractFloat__deleting_dtor	CONFIRMED	stores the IrFractFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFractFloat at *this
+func	FUN_001d73c8	IrFloor__dtor	CONFIRMED	stores the IrFloor vtable at *this (dtor); stores vtable of IrFloor at *this
+func	FUN_001d73fc	IrFloor__deleting_dtor	CONFIRMED	stores the IrFloor vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFloor at *this
+func	FUN_001d7430	IrFloorFloat__dtor	CONFIRMED	stores the IrFloorFloat vtable at *this (dtor); stores vtable of IrFloorFloat at *this
+func	FUN_001d7464	IrFloorFloat__deleting_dtor	CONFIRMED	stores the IrFloorFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrFloorFloat at *this
+func	FUN_001d7498	IrMulAddIEEE__dtor	CONFIRMED	stores the IrMulAddIEEE vtable at *this (dtor); stores vtable of IrMulAddIEEE at *this
+func	FUN_001d74cc	IrMulAddIEEE__deleting_dtor	CONFIRMED	stores the IrMulAddIEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulAddIEEE at *this
+func	FUN_001d7500	IrMulAdd__dtor	CONFIRMED	stores the IrMulAdd vtable at *this (dtor); stores vtable of IrMulAdd at *this
+func	FUN_001d7534	IrMulAdd__deleting_dtor	CONFIRMED	stores the IrMulAdd vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulAdd at *this
+func	FUN_001d7568	IrMulAddFloat__dtor	CONFIRMED	stores the IrMulAddFloat vtable at *this (dtor); stores vtable of IrMulAddFloat at *this
+func	FUN_001d759c	IrMulAddFloat__deleting_dtor	CONFIRMED	stores the IrMulAddFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulAddFloat at *this
+func	FUN_001d75d0	IrMulIEEE__dtor	CONFIRMED	stores the IrMulIEEE vtable at *this (dtor); stores vtable of IrMulIEEE at *this
+func	FUN_001d7604	IrMulIEEE__deleting_dtor	CONFIRMED	stores the IrMulIEEE vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrMulIEEE at *this
+func	FUN_001d7638	IrSubInt__dtor	CONFIRMED	stores the IrSubInt vtable at *this (dtor); stores vtable of IrSubInt at *this
+func	FUN_001d766c	IrSubInt__deleting_dtor	CONFIRMED	stores the IrSubInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrSubInt at *this
+func	FUN_001d76a0	IrAddInt__dtor	CONFIRMED	stores the IrAddInt vtable at *this (dtor); stores vtable of IrAddInt at *this
+func	FUN_001d76d4	IrAddInt__deleting_dtor	CONFIRMED	stores the IrAddInt vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAddInt at *this
+func	FUN_001d7708	IrAddFloat__dtor	CONFIRMED	stores the IrAddFloat vtable at *this (dtor); stores vtable of IrAddFloat at *this
+func	FUN_001d773c	IrAddFloat__deleting_dtor	CONFIRMED	stores the IrAddFloat vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAddFloat at *this
+func	FUN_001d7770	IrAlloc__dtor	CONFIRMED	stores the IrAlloc vtable at *this (dtor); stores vtable of IrAlloc at *this
+func	FUN_001d77a4	IrAlloc__deleting_dtor	CONFIRMED	stores the IrAlloc vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrAlloc at *this
+func	FUN_001d77d8	IrCondJmp__dtor	CONFIRMED	stores the IrCondJmp vtable at *this (dtor); stores vtable of IrCondJmp at *this
+func	FUN_001d780c	IrCondJmp__deleting_dtor	CONFIRMED	stores the IrCondJmp vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrCondJmp at *this
+func	FUN_001d7840	IrRet__dtor	CONFIRMED	stores the IrRet vtable at *this (dtor); stores vtable of IrRet at *this
+func	FUN_001d7874	IrRet__deleting_dtor	CONFIRMED	stores the IrRet vtable at *this and ends in operator delete (deleting destructor); stores vtable of IrRet at *this
+func	FUN_001d7950	VRegInfo__dtor	CONFIRMED	vtable slot 0 of VRegInfo = complete destructor (GCC 4 layout); stores vtable of VRegInfo at *this; vtable slot of VRegInfo[0]
+func	FUN_001d7974	VRegInfo__deleting_dtor	CONFIRMED	vtable slot 1 of VRegInfo = deleting destructor (GCC 4 layout); stores vtable of VRegInfo at *this; vtable slot of VRegInfo[1]
+func	FUN_001d79ac	ImmedConstBuffer__deleting_dtor	CONFIRMED	vtable slot 1 of ImmedConstBuffer = deleting destructor (GCC 4 layout); stores vtable of ImmedConstBuffer at *this; vtable slot of ImmedConstBuffer[1]
+func	FUN_001d79f4	TempValue__dtor_1d79f4	CONFIRMED	vtable slot 0 of TempValue = complete destructor (GCC 4 layout); stores vtable of TempValue at *this; vtable slot of PrimitiveIndex[1]
+func	FUN_001d7a3c	TempValue__dtor_1d7a3c	CONFIRMED	vtable slot 0 of TempValue = complete destructor (GCC 4 layout); stores vtable of TempValue at *this; vtable slot of PrimitiveIndex[0]
+func	FUN_001d7a70	TempValue__dtor_1d7a70	CONFIRMED	vtable slot 0 of TempValue = complete destructor (GCC 4 layout); stores vtable of TempValue at *this; vtable slot of StandardIndex[1]
+func	FUN_001d7ab8	TempValue__dtor_1d7ab8	CONFIRMED	vtable slot 0 of TempValue = complete destructor (GCC 4 layout); stores vtable of TempValue at *this; vtable slot of StandardIndex[0]
+func	FUN_001d7aec	Physical__dtor	CONFIRMED	vtable slot 0 of Physical = complete destructor (GCC 4 layout); stores vtable of Physical at *this; vtable slot of Physical[0]
+func	FUN_001d7b20	Physical__deleting_dtor	CONFIRMED	vtable slot 1 of Physical = deleting destructor (GCC 4 layout); stores vtable of Physical at *this; vtable slot of Physical[1]
+func	FUN_001d7b68	AddrIndexedSet__dtor	CONFIRMED	vtable slot 0 of AddrIndexedSet = complete destructor (GCC 4 layout); stores vtable of AddrIndexedSet at *this; vtable slot of AddrIndexedSet[0]
+func	FUN_001d7b9c	AddrIndexedSet__deleting_dtor	CONFIRMED	vtable slot 1 of AddrIndexedSet = deleting destructor (GCC 4 layout); stores vtable of AddrIndexedSet at *this; vtable slot of AddrIndexedSet[1]
+func	FUN_001d7be4	LoopRegister__dtor	CONFIRMED	vtable slot 0 of LoopRegister = complete destructor (GCC 4 layout); stores vtable of LoopRegister at *this; vtable slot of LoopRegister[0]
+func	FUN_001d7c18	LoopRegister__deleting_dtor	CONFIRMED	vtable slot 1 of LoopRegister = deleting destructor (GCC 4 layout); stores vtable of LoopRegister at *this; vtable slot of LoopRegister[1]
+func	FUN_001d7c60	LoopIndexedSet__dtor	CONFIRMED	vtable slot 0 of LoopIndexedSet = complete destructor (GCC 4 layout); stores vtable of LoopIndexedSet at *this; vtable slot of LoopIndexedSet[0]
+func	FUN_001d7c94	LoopIndexedSet__deleting_dtor	CONFIRMED	vtable slot 1 of LoopIndexedSet = deleting destructor (GCC 4 layout); stores vtable of LoopIndexedSet at *this; vtable slot of LoopIndexedSet[1]
+func	FUN_001d7cdc	ExportAddress__dtor	CONFIRMED	vtable slot 0 of ExportAddress = complete destructor (GCC 4 layout); stores vtable of ExportAddress at *this; vtable slot of ExportAddress[0]
+func	FUN_001d7d10	ExportAddress__deleting_dtor	CONFIRMED	vtable slot 1 of ExportAddress = deleting destructor (GCC 4 layout); stores vtable of ExportAddress at *this; vtable slot of ExportAddress[1]
+func	FUN_001d7d58	ExportValue__dtor	CONFIRMED	vtable slot 0 of ExportValue = complete destructor (GCC 4 layout); stores vtable of ExportValue at *this; vtable slot of ExportValue[0]
+func	FUN_001d7d8c	ExportValue__deleting_dtor	CONFIRMED	vtable slot 1 of ExportValue = deleting destructor (GCC 4 layout); stores vtable of ExportValue at *this; vtable slot of ExportValue[1]
+func	FUN_001d7dd4	Interpolator__dtor	CONFIRMED	vtable slot 0 of Interpolator = complete destructor (GCC 4 layout); stores vtable of Interpolator at *this; vtable slot of Interpolator[0]
+func	FUN_001d7e08	Interpolator__deleting_dtor	CONFIRMED	vtable slot 1 of Interpolator = deleting destructor (GCC 4 layout); stores vtable of Interpolator at *this; vtable slot of Interpolator[1]
+func	FUN_001d7e50	TempValue__dtor_1d7e50	CONFIRMED	vtable slot 0 of TempValue = complete destructor (GCC 4 layout); stores vtable of TempValue at *this; vtable slot of TempValue[0]
+func	FUN_001d7e84	TempValue__deleting_dtor	CONFIRMED	vtable slot 1 of TempValue = deleting destructor (GCC 4 layout); stores vtable of TempValue at *this; vtable slot of TempValue[1]
+func	FUN_001d7ecc	ExportSlot__dtor	CONFIRMED	vtable slot 0 of ExportSlot = complete destructor (GCC 4 layout); stores vtable of ExportSlot at *this; vtable slot of ExportSlot[0]
+func	FUN_001d7f00	ExportSlot__deleting_dtor	CONFIRMED	vtable slot 1 of ExportSlot = deleting destructor (GCC 4 layout); stores vtable of ExportSlot at *this; vtable slot of ExportSlot[1]
+func	FUN_001d7f48	Resource__dtor	CONFIRMED	vtable slot 0 of Resource = complete destructor (GCC 4 layout); stores vtable of Resource at *this; vtable slot of Resource[0]
+func	FUN_001d7f7c	Resource__deleting_dtor	CONFIRMED	vtable slot 1 of Resource = deleting destructor (GCC 4 layout); stores vtable of Resource at *this; vtable slot of Resource[1]
+func	FUN_001d7fc4	VertexRegister__dtor	CONFIRMED	vtable slot 0 of VertexRegister = complete destructor (GCC 4 layout); stores vtable of VertexRegister at *this; vtable slot of VertexRegister[0]
+func	FUN_001d7ff8	VertexRegister__deleting_dtor	CONFIRMED	vtable slot 1 of VertexRegister = deleting destructor (GCC 4 layout); stores vtable of VertexRegister at *this; vtable slot of VertexRegister[1]
+func	FUN_001d8040	FixedValue__dtor	CONFIRMED	vtable slot 0 of FixedValue = complete destructor (GCC 4 layout); stores vtable of FixedValue at *this; vtable slot of FixedValue[0]
+func	FUN_001d8074	FixedValue__deleting_dtor	CONFIRMED	vtable slot 1 of FixedValue = deleting destructor (GCC 4 layout); stores vtable of FixedValue at *this; vtable slot of FixedValue[1]
+func	FUN_001d80bc	ImmedConstBuffer__dtor	CONFIRMED	vtable slot 0 of ImmedConstBuffer = complete destructor (GCC 4 layout); stores vtable of ImmedConstBuffer at *this; vtable slot of ImmedConstBuffer[0]
+func	FUN_001d80f0	LoopIndexedConstSet__dtor	CONFIRMED	vtable slot 0 of LoopIndexedConstSet = complete destructor (GCC 4 layout); stores vtable of LoopIndexedConstSet at *this; vtable slot of LoopIndexedConstSet[0]
+func	FUN_001d8134	LoopIndexedConstSet__deleting_dtor	CONFIRMED	vtable slot 1 of LoopIndexedConstSet = deleting destructor (GCC 4 layout); stores vtable of LoopIndexedConstSet at *this; vtable slot of LoopIndexedConstSet[1]
+func	FUN_001d818c	LoopIndexedInputSet__dtor	CONFIRMED	vtable slot 0 of LoopIndexedInputSet = complete destructor (GCC 4 layout); stores vtable of LoopIndexedInputSet at *this; vtable slot of LoopIndexedInputSet[0]
+func	FUN_001d81d0	LoopIndexedInputSet__deleting_dtor	CONFIRMED	vtable slot 1 of LoopIndexedInputSet = deleting destructor (GCC 4 layout); stores vtable of LoopIndexedInputSet at *this; vtable slot of LoopIndexedInputSet[1]
+func	FUN_001d8228	LoopIndexedOutputSet__dtor	CONFIRMED	vtable slot 0 of LoopIndexedOutputSet = complete destructor (GCC 4 layout); stores vtable of LoopIndexedOutputSet at *this; vtable slot of LoopIndexedOutputSet[0]
+func	FUN_001d826c	LoopIndexedOutputSet__deleting_dtor	CONFIRMED	vtable slot 1 of LoopIndexedOutputSet = deleting destructor (GCC 4 layout); stores vtable of LoopIndexedOutputSet at *this; vtable slot of LoopIndexedOutputSet[1]
+func	FUN_001d8318	KhanPs__deleting_dtor	CONFIRMED	vtable slot 1 of KhanPs = deleting destructor (GCC 4 layout); stores vtable of KhanPs at *this; vtable slot of KhanPs[1]
+func	FUN_001d834c	KhanChip__deleting_dtor	CONFIRMED	vtable slot 1 of KhanChip = deleting destructor (GCC 4 layout); stores vtable of KhanChip at *this; vtable slot of KhanChip[1]
+func	FUN_001d8380	KhanChip__dtor	CONFIRMED	vtable slot 0 of KhanChip = complete destructor (GCC 4 layout); stores vtable of KhanChip at *this; vtable slot of KhanChip[0]
+func	FUN_001d83b4	KhanPs__dtor	CONFIRMED	vtable slot 0 of KhanPs = complete destructor (GCC 4 layout); stores vtable of KhanPs at *this; vtable slot of KhanPs[0]
+func	FUN_001d84ac	KhanVs__deleting_dtor_1d84ac	CONFIRMED	vtable slot 1 of KhanVs = deleting destructor (GCC 4 layout); stores vtable of KhanVs at *this; vtable slot of FudoVs[1]
+func	FUN_001d84e0	KhanVs__dtor_1d84e0	CONFIRMED	vtable slot 0 of KhanVs = complete destructor (GCC 4 layout); stores vtable of KhanVs at *this; vtable slot of KhanVs[0]
+func	FUN_001d8514	KhanVs__deleting_dtor_1d8514	CONFIRMED	vtable slot 1 of KhanVs = deleting destructor (GCC 4 layout); stores vtable of KhanVs at *this; vtable slot of KhanVs[1]
+func	FUN_001d8548	KhanVs__dtor_1d8548	CONFIRMED	vtable slot 0 of KhanVs = complete destructor (GCC 4 layout); stores vtable of KhanVs at *this; vtable slot of FudoVs[0]
+func	FUN_001d85a0	MirrorBlock__deleting_dtor	CONFIRMED	vtable slot 1 of MirrorBlock = deleting destructor (GCC 4 layout); stores vtable of MirrorBlock at *this; vtable slot of MirrorBlock[1]
+func	FUN_001d8608	MirrorBlock__dtor	CONFIRMED	vtable slot 0 of MirrorBlock = complete destructor (GCC 4 layout); stores vtable of MirrorBlock at *this; vtable slot of MirrorBlock[0]
+func	FUN_001d862c	SchedNode__dtor	CONFIRMED	vtable slot 0 of SchedNode = complete destructor (GCC 4 layout); stores vtable of SchedNode at *this; vtable slot of SchedNode[0]
+func	FUN_001d8660	SchedNode__deleting_dtor	CONFIRMED	vtable slot 1 of SchedNode = deleting destructor (GCC 4 layout); stores vtable of SchedNode at *this; vtable slot of SchedNode[1]
+func	FUN_001d86b4	ResourceModel__deleting_dtor	CONFIRMED	vtable slot 1 of ResourceModel = deleting destructor (GCC 4 layout); stores vtable of ResourceModel at *this; vtable slot of ResourceModel[1]
+func	FUN_001d87a8	ThreadModel__deleting_dtor	CONFIRMED	vtable slot 1 of ThreadModel = deleting destructor (GCC 4 layout); stores vtable of ThreadModel at *this; vtable slot of ThreadModel[1]
+func	FUN_001d8850	ThreadModel__dtor	CONFIRMED	vtable slot 0 of ThreadModel = complete destructor (GCC 4 layout); stores vtable of ThreadModel at *this; vtable slot of ThreadModel[0]
+func	FUN_001d8874	ResourceModel__dtor	CONFIRMED	vtable slot 0 of ResourceModel = complete destructor (GCC 4 layout); stores vtable of ResourceModel at *this; vtable slot of ResourceModel[0]
+func	FUN_001d8944	R300SchedModel__dtor	CONFIRMED	stores the R300SchedModel vtable at *this (dtor); stores vtable of R300SchedModel at *this
+func	FUN_001d8a28	R300VSchedModel__dtor	CONFIRMED	vtable slot 0 of R300VSchedModel = complete destructor (GCC 4 layout); stores vtable of R300VSchedModel at *this; vtable slot of R300VSchedModel[0]
+func	FUN_001d8a5c	R300VSchedModel__deleting_dtor	CONFIRMED	vtable slot 1 of R300VSchedModel = deleting destructor (GCC 4 layout); stores vtable of R300VSchedModel at *this; vtable slot of R300VSchedModel[1]
+func	FUN_001d8af4	FudoChip__deleting_dtor	CONFIRMED	vtable slot 1 of FudoChip = deleting destructor (GCC 4 layout); stores vtable of FudoChip at *this; vtable slot of FudoChip[1]
+func	FUN_001d8b38	FudoPs__deleting_dtor	CONFIRMED	vtable slot 1 of FudoPs = deleting destructor (GCC 4 layout); stores vtable of FudoPs at *this; vtable slot of FudoPs[1]
+func	FUN_001d8b7c	FudoChip__dtor	CONFIRMED	vtable slot 0 of FudoChip = complete destructor (GCC 4 layout); stores vtable of FudoChip at *this; vtable slot of FudoChip[0]
+func	FUN_001d8bc0	FudoPs__dtor	CONFIRMED	vtable slot 0 of FudoPs = complete destructor (GCC 4 layout); stores vtable of FudoPs at *this; vtable slot of FudoPs[0]
+func	FUN_001d8c18	R520SchedModel__deleting_dtor	CONFIRMED	vtable slot 1 of R520SchedModel = deleting destructor (GCC 4 layout); stores vtable of R520SchedModel at *this; vtable slot of R520SchedModel[1]
+func	FUN_001d8c70	R520SchedModel__dtor	CONFIRMED	vtable slot 0 of R520SchedModel = complete destructor (GCC 4 layout); stores vtable of R520SchedModel at *this; vtable slot of R520SchedModel[0]
+func	FUN_001d8f58	R520MachineAssembler__deleting_dtor	CONFIRMED	vtable slot 1 of R520MachineAssembler = deleting destructor (GCC 4 layout); stores vtable of R520MachineAssembler at *this; vtable slot of R520MachineAssembler[1]
+func	FUN_001d8fc0	R520MachineAssembler__dtor	CONFIRMED	vtable slot 0 of R520MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R520MachineAssembler at *this; vtable slot of R520MachineAssembler[0]

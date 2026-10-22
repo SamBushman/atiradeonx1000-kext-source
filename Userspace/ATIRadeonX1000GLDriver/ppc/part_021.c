@@ -247,7 +247,7 @@ int FUN_000e1920(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     puStack00000018[0xc5] = 2;
   }
   else {
-    FUN_00129130(iVar1,puStack00000018,0);
+    KhanPs__ctor_129130(iVar1,puStack00000018,0);
     puStack00000018[0xc3] = iVar1;
     iVar1 = _setjmp(puStack00000018[1]);
     if (iVar1 == 0) {
@@ -307,7 +307,7 @@ int FUN_000e1a48(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     puStack00000018[0xc5] = 2;
   }
   else {
-    FUN_00129130(iVar1,puStack00000018,0);
+    KhanPs__ctor_129130(iVar1,puStack00000018,0);
     puStack00000018[0xc3] = iVar1;
     iVar1 = _setjmp(puStack00000018[1]);
     if (iVar1 == 0) {
@@ -333,7 +333,7 @@ int FUN_000e1b70(param_1, param_2)
     if (param_2 < 4) {
       iVar1 = FUN_000e1564(param_1,0x10);
       if (iVar1 != 0) {
-        FUN_0010e114(iVar1,param_1);
+        KhanChip__ctor_10e114(iVar1,param_1);
       }
       *(int *)(param_1 + 0x310) = iVar1;
       if (param_2 == 2) {
@@ -621,11 +621,11 @@ int FUN_000e2094(compiler, param_2)
            *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0xffffff7f;
     }
     else {
-      FUN_0013d160(*(undefined4 *)(compiler + 0x6c4));
+      pass_rewrite(*(undefined4 *)(compiler + 0x6c4));
     }
     iVar1 = FUN_000e07dc(compiler,0x20);
     if (iVar1 != 0) {
-      FUN_001300b0(*(undefined4 *)(compiler + 0x6c4));
+      pass_remove_empty_graphs(*(undefined4 *)(compiler + 0x6c4));
     }
     iVar1 = FUN_000e07dc(compiler,0x12);
     if (iVar1 != 0) {
@@ -655,7 +655,7 @@ int FUN_000e2094(compiler, param_2)
     FUN_000f60c4(*(undefined4 *)(compiler + 0x6c4),compiler);
     *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
          *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x10000;
-    FUN_0012ab80(*(undefined4 *)(compiler + 0x6c4));
+    pass_optimize_control_flow(*(undefined4 *)(compiler + 0x6c4));
     ((int (*)())FUN_000e36bc)(*(undefined4 *)(compiler + 0x6c4),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
                  *(int *)(compiler + 0x52c));
     FUN_00193d18(*(undefined4 *)(compiler + 0x378));

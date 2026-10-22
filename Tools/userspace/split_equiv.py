@@ -38,6 +38,8 @@ def funcs(path):
     out = {}; cur = None; META.clear(); pend = []; lastb = None
     for l in open(path, errors='replace'):
         l = l.rstrip('\n')
+        m = re.match(r'^(L_[A-Za-z0-9_$.]*\$stub):$', l)     # a PIC stub is its own block (it sits after the last function of the file: stub order follows the callee NAMES)
+        if m: cur = m.group(1); out[cur] = []; META[cur] = ({}, {}); pend = []; lastb = None; continue
         m = re.match(r'^(_[A-Za-z0-9_$.]*):$', l)
         if m: cur = m.group(1); out[cur] = []; META[cur] = ({}, {}); pend = []; lastb = None; continue
         if cur is None: continue
@@ -49,7 +51,7 @@ def funcs(path):
         if m:
             for lab in pend: META[cur][0][lab] = len(out[cur])
             pend = []
-            ins = m.group(1) + ('\t' + m.group(2).replace(' ', '') if m.group(2) else '')
+            ins = m.group(1) + ('\t' + re.sub(r'"L\d+\$spb"', '"L$spb"', m.group(2)).replace(' ', '') if m.group(2) else '')   # stub PC-base labels are numbered in stub order
             out[cur].append(ins)
             lastb = len(out[cur]) - 1 if m.group(1) == 'bctr' else None
         elif l.startswith('\t.') and not l.startswith('\t.long'): pass

@@ -943,8 +943,8 @@ int FUN_00104d68(param_1, param_2)
   return;
 }
 
-/* FUN_00104e20 @ 0x104e20 (196 bytes) */
-int FUN_00104e20(param_1, param_2, param_3)
+/* IRLoadConst__vslot3 @ 0x104e20 (196 bytes) */
+int IRLoadConst__vslot3(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1056,8 +1056,8 @@ int FUN_00104fd0(param_1)
   return 0;
 }
 
-/* FUN_0010502c @ 0x10502c (312 bytes) */
-int FUN_0010502c(this, param_2, compiler)
+/* IRInst__ctor_10502c @ 0x10502c (312 bytes) */
+int IRInst__ctor_10502c(this, param_2, compiler)
   undefined4 *this;
   undefined4 param_2;
   int compiler;
@@ -1114,8 +1114,8 @@ int FUN_0010502c(this, param_2, compiler)
   return;
 }
 
-/* FUN_001051b0 @ 0x1051b0 (312 bytes) */
-int FUN_001051b0(this, param_2, compiler)
+/* IRInst__ctor_1051b0 @ 0x1051b0 (312 bytes) */
+int IRInst__ctor_1051b0(this, param_2, compiler)
   undefined4 *this;
   undefined4 param_2;
   int compiler;
@@ -1318,4 +1318,4 @@ int FUN_001055cc(param_1)
 asm(".globl FUN_0010437c");
 asm(".set FUN_0010437c, _FUN_0010437c");
 asm(".globl FUN_00104e20");
-asm(".set FUN_00104e20, _FUN_00104e20");
+asm(".set FUN_00104e20, _IRLoadConst__vslot3");

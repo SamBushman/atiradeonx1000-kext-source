@@ -505,7 +505,7 @@ extern int FUN_0010defc();
 extern int FUN_001135ec();
 extern int FUN_0011363c();
 extern int FUN_00113690();
-extern int FUN_0012d2f0();
+extern int pass_flatten_ifs();
 extern int FUN_00172514();
 extern int FUN_00173330();
 extern int FUN_00186a88();
