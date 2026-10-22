@@ -2939,7 +2939,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   int iVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
+  int removeMatrixConstNodeResult;
   unsigned char * poolAllocator;
   undefined4 *puVar11;
   int *a0;
@@ -2977,8 +2977,8 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
     if (*(int *)(iVar8 + 8) - *(int *)(iVar8 + 4) >> 2 == 1) {
       a4 = *param_4;
       a3 = intermAggregate;
-      iVar9 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,a4);
-      if (iVar9 == 0) {
+      removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,a4);
+      if (removeMatrixConstNodeResult == 0) {
         loopIndex = 0;
         puVar13 = PTR_vtable_a7b7c0c8 + 8;
         while( true ) {
@@ -3066,6 +3066,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   unsigned char * type;
   unsigned char * intermAggregate;
 {
+  int removeMatrixConstNodeResult;
   undefined4 *puVar1;
   int iVar2;
   int iVar3;
@@ -3096,8 +3097,8 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
     this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
     iVar4 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     if (*(int *)(iVar4 + 8) - *(int *)(iVar4 + 4) >> 2 == 1) {
-      iVar3 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)this_00,type,intermAggregate,1);
-      if (iVar3 == 0) {
+      removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)this_00,type,intermAggregate,1);
+      if (removeMatrixConstNodeResult == 0) {
         iVar3 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
         puVar1 = *(undefined4 **)(this_00 + 8);
         if (puVar1 == *(undefined4 **)(this_00 + 0xc)) {
@@ -3314,6 +3315,7 @@ int TType__getCompleteString(param_1, param_2)
   void *param_1;
   int param_2;
 {
+  int sprintfResult;
   undefined4 basicString;
   undefined4 qualifierString;
   int iVar2;
@@ -3326,26 +3328,26 @@ int TType__getCompleteString(param_1, param_2)
   pcVar4 = acStack_90;
   if (1 < uVar3 >> 0x19) {
     qualifierString = getQualifierString(uVar3 >> 0x19);
-    iVar2 = _sprintf(pcVar4,"%s ",qualifierString);
+    sprintfResult = _sprintf(pcVar4,"%s ",qualifierString);
     uVar3 = *(uint *)(param_2 + 0x24);
-    pcVar4 = pcVar4 + iVar2;
+    pcVar4 = pcVar4 + sprintfResult;
   }
   if ((uVar3 & 0x200) != 0) {
-    iVar2 = _sprintf(pcVar4,"array of ");
+    sprintfResult = _sprintf(pcVar4,"array of ");
     uVar3 = *(uint *)(param_2 + 0x24);
-    pcVar4 = pcVar4 + iVar2;
+    pcVar4 = pcVar4 + sprintfResult;
   }
   if ((uVar3 & 0x400) == 0) {
     iVar2 = (int)(uVar3 << 0xd | uVar3 >> 0x13) >> 0x18;
     if (iVar2 < 2) goto LAB_97b96e98;
-    iVar2 = _sprintf(pcVar4,"%d-component vector of ",iVar2);
+    sprintfResult = _sprintf(pcVar4,"%d-component vector of ",iVar2);
   }
   else {
     iVar2 = (int)(uVar3 << 0xd | uVar3 >> 0x13) >> 0x18;
-    iVar2 = _sprintf(pcVar4,"%dX%d matrix of ",iVar2,iVar2);
+    sprintfResult = _sprintf(pcVar4,"%dX%d matrix of ",iVar2,iVar2);
   }
   uVar3 = *(uint *)(param_2 + 0x24);
-  pcVar4 = pcVar4 + iVar2;
+  pcVar4 = pcVar4 + sprintfResult;
 LAB_97b96e98:
   basicString = TType__getBasicString(uVar3 >> 0x13 & 0x3f);
   _sprintf(pcVar4,"%s",basicString);
@@ -5914,6 +5916,7 @@ int TParseContext__lValueErrorCheck(this, param_2, str, intermTyped, param_5, pa
   uint param_7;
   undefined4 param_8;
 {
+  int lValueErrorCheckResult;
   bool bVar1;
   int iVar2;
   int *piVar3;
@@ -6018,8 +6021,8 @@ LAB_97b9ae0c:
     if (iVar2 < 0x2d) goto LAB_97b9ae0c;
     if (iVar2 < 0x30) {
       pTVar5 = (unsigned char *)(**(code **)(*piVar4 + 0x68))(piVar4);
-      iVar2 = ((int (*)())TParseContext__lValueErrorCheck)(this,param_2,str,pTVar5,param_5,param_6,param_7,param_8);
-      return iVar2;
+      lValueErrorCheckResult = ((int (*)())TParseContext__lValueErrorCheck)(this,param_2,str,pTVar5,param_5,param_6,param_7,param_8);
+      return lValueErrorCheckResult;
     }
     if (iVar2 != 0x30) goto LAB_97b9ae0c;
     pTVar5 = (unsigned char *)(**(code **)(*piVar4 + 0x68))(piVar4);

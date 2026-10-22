@@ -1057,6 +1057,8 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
   unsigned char ** parseOperand2;
   int param_5;
 {
+  int generateAddressLoadResult2;
+  int generateAddressLoadResult;
   int logicalSize;
   int length;
   short sVar1;
@@ -1125,15 +1127,15 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
   local_68[1] = *parseOperand2;
   if ((*(int *)local_68[0] != 0) &&
      ((sVar1 = *(short *)(*(int *)local_68[0] + 0x2c), sVar1 == 0x7ffe || (sVar1 == 0x7fff)))) {
-    iVar4 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_68[0]);
-    if (iVar4 != 0) {
+    generateAddressLoadResult = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_68[0]);
+    if (generateAddressLoadResult != 0) {
       TPPStreamCompiler__equalOperands__source0Indirect = 1;
     }
-    iVar5 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_68[1]);
-    if (iVar5 != 0) {
+    generateAddressLoadResult2 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_68[1]);
+    if (generateAddressLoadResult2 != 0) {
       TPPStreamCompiler__equalOperands__source1Indirect = 1;
     }
-    bVar3 = iVar5 != 0 || iVar4 != 0;
+    bVar3 = generateAddressLoadResult2 != 0 || generateAddressLoadResult != 0;
   }
   uVar19 = CONCAT44(local_70[0],local_68[0]);
   iVar4 = *(int *)local_68[0];
@@ -1596,6 +1598,8 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, param_
   unsigned char ** parseOperand2;
   int param_4;
 {
+  int generateAddressLoadResult2;
+  int generateAddressLoadResult;
   uint streamType;
   ushort uVar1;
   bool bVar2;
@@ -1653,15 +1657,15 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, param_
   local_60[1] = *parseOperand2;
   if ((*(short *)(*(int *)local_60[0] + 0x2c) == 0x7ffe) ||
      (*(short *)(*(int *)local_60[0] + 0x2c) == 0x7fff)) {
-    iVar4 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_60[0]);
-    if (iVar4 != 0) {
+    generateAddressLoadResult = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_60[0]);
+    if (generateAddressLoadResult != 0) {
       TPPStreamCompiler__assignOperands__destIndirect = 1;
     }
-    iVar5 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_60[1]);
-    if (iVar5 != 0) {
+    generateAddressLoadResult2 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_60[1]);
+    if (generateAddressLoadResult2 != 0) {
       TPPStreamCompiler__assignOperands__sourceIndirect = 1;
     }
-    bVar2 = iVar5 != 0 || iVar4 != 0;
+    bVar2 = generateAddressLoadResult2 != 0 || generateAddressLoadResult != 0;
   }
   iVar4 = *(int *)local_60[0];
   if (*(short *)(iVar4 + 0x2c) == 0x7ffe) {
@@ -3774,10 +3778,10 @@ int TPPStreamCompiler__getOperandAsDestVar(this, parseOperand, param_3, param_4,
   undefined4 param_5;
   undefined4 param_6;
 {
-  undefined4 uVar1;
+  undefined4 generateAddressLoadResult;
   
-  uVar1 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(parseOperand,param_3);
-  ParseOperand__GetAsDestVar(this,param_3,uVar1);
+  generateAddressLoadResult = ((int (*)())TPPStreamCompiler__generateAddressLoad)(parseOperand,param_3);
+  ParseOperand__GetAsDestVar(this,param_3,generateAddressLoadResult);
   return this;
 }
 
@@ -3792,6 +3796,7 @@ int TPPStreamCompiler__getOperandAsSourceVar(this, parseOperand, param_3, param_
   undefined4 param_7;
   undefined4 param_8;
 {
+  undefined4 generateAddressLoadResult;
   undefined4 logicalSize;
   bool bVar1;
   ushort uVar2;
@@ -3856,8 +3861,8 @@ int TPPStreamCompiler__getOperandAsSourceVar(this, parseOperand, param_3, param_
     ((int (*)())TPPStreamCompiler__getConstantAsSourceVar)((unsigned char *)&local_40,(uint)parseOperand,local_50,logicalSize,(uint)uVar2);
   }
   else {
-    uVar5 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(parseOperand,param_3);
-    ParseOperand__GetAsSourceVar(local_50,param_3,uVar5);
+    generateAddressLoadResult = ((int (*)())TPPStreamCompiler__generateAddressLoad)(parseOperand,param_3);
+    ParseOperand__GetAsSourceVar(local_50,param_3,generateAddressLoadResult);
     local_40 = local_50[0];
     local_3c = local_50[1];
   }
@@ -4220,6 +4225,7 @@ int TPPStreamCompiler__parseIntermediateTree(this, intermNode)
   unsigned char * this;
   unsigned char * intermNode;
 {
+  void *position;
   void *allocation;
   int iVar1;
   undefined4 in_r5;
@@ -4269,10 +4275,10 @@ int TPPStreamCompiler__parseIntermediateTree(this, intermNode)
       ((int (*)())ParseFunctionStack__pop)((unsigned char *)(this + 0x58));
     }
     if (*(int *)(this + 8) == 0) {
-      pvVar2 = (void *)((int (*)())TPPStreamCompiler__getPosition)(this);
-      if (pvVar2 != (void *)0x0) {
-        __ZN12ParseOperandD1Ev(pvVar2);
-        __ZdlPv(pvVar2);
+      position = (void *)((int (*)())TPPStreamCompiler__getPosition)(this);
+      if (position != (void *)0x0) {
+        __ZN12ParseOperandD1Ev(position);
+        __ZdlPv(position);
       }
     }
     *(undefined4 *)(*(int *)(this + 0x68) + 0x50) = 1;

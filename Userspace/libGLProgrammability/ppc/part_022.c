@@ -46,12 +46,12 @@ int __ZNKSs13find_first_ofEPKcmm(this, str, param_3, param_4)
   ulong param_4;
 {
   int iVar1;
-  void *pvVar2;
+  void *memchrResult;
   
   if ((param_4 != 0) && (iVar1 = *(int *)this, param_3 < *(uint *)(iVar1 + -0xc))) {
     do {
-      pvVar2 = _memchr(str,(int)*(char *)(iVar1 + param_3),param_4);
-      if (pvVar2 != (void *)0x0) {
+      memchrResult = _memchr(str,(int)*(char *)(iVar1 + param_3),param_4);
+      if (memchrResult != (void *)0x0) {
         return param_3;
       }
       param_3 = param_3 + 1;
@@ -161,13 +161,13 @@ int __ZNKSs17find_first_not_ofEPKcmm(this, str, param_3, param_4)
   ulong param_4;
 {
   int iVar1;
-  void *pvVar2;
+  void *memchrResult;
   
   iVar1 = *(int *)this;
   if (param_3 < *(uint *)(iVar1 + -0xc)) {
     do {
-      pvVar2 = _memchr(str,(int)*(char *)(iVar1 + param_3),param_4);
-      if (pvVar2 == (void *)0x0) {
+      memchrResult = _memchr(str,(int)*(char *)(iVar1 + param_3),param_4);
+      if (memchrResult == (void *)0x0) {
         return param_3;
       }
       iVar1 = *(int *)this;
@@ -563,6 +563,7 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(this, param_2)
   ulong this;
   unsigned char * param_2;
 {
+  int getenvResult;
   undefined4 atomicStore;
   undefined *puVar2;
   uint uVar3;
@@ -591,8 +592,8 @@ LAB_97c164a4:
   puVar4 = (undefined4 *)0x0;
   if (uVar6 != 0) {
     if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-      iVar5 = _getenv("GLIBCPP_FORCE_NEW");
-      if (iVar5 == 0) {
+      getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+      if (getenvResult == 0) {
         do {
           if (in_RESERVE != '\0') {
             atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
@@ -767,10 +768,10 @@ int __ZNSsC1IPcEET_S1_RKSaIcE(this, str1, str2, allocator)
   char *str2;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *string___S_construct_char__Result;
   
-  pcVar1 = ((int (*)())std__string___S_construct_char__)(str1,str2,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  string___S_construct_char__Result = ((int (*)())std__string___S_construct_char__)(str1,str2,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,string___S_construct_char__Result,allocator);
 }
 
 /* __ZNSsC4IPcEET_S1_RKSaIcE @ 0x97c168dc (80 bytes) */
@@ -780,10 +781,10 @@ int __ZNSsC4IPcEET_S1_RKSaIcE(this, str1, str2, allocator)
   char *str2;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *string___S_construct_char__Result;
   
-  pcVar1 = ((int (*)())std__string___S_construct_char__)(str1,str2,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  string___S_construct_char__Result = ((int (*)())std__string___S_construct_char__)(str1,str2,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,string___S_construct_char__Result,allocator);
 }
 
 /* __ZNSsC2IPKcEET_S2_RKSaIcE @ 0x97c1692c (4 bytes) */
@@ -875,10 +876,10 @@ int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
   undefined4 param_3;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result;
   
-  pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result,allocator);
 }
 
 /* __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE @ 0x97c169e4 (80 bytes) */
@@ -888,10 +889,10 @@ int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
   undefined4 param_3;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result;
   
-  pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result,allocator);
 }
 
 /* std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__ @ 0x97c16a34 (108 bytes) */

@@ -457,11 +457,11 @@ int _HashTableNew(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined4 *allocation;
-  undefined4 uVar2;
+  undefined4 hashSetNewResult;
   
   allocation = (undefined4 *)_malloc(4);
-  uVar2 = ((int (*)())_HashSetNew)(param_1,param_2,param_3);
-  *allocation = uVar2;
+  hashSetNewResult = ((int (*)())_HashSetNew)(param_1,param_2,param_3);
+  *allocation = hashSetNewResult;
   return allocation;
 }
 
@@ -780,6 +780,7 @@ int _GetRegister(param_1, param_2, param_3, param_4)
 int _BuildGenKill(param_1)
   int param_1;
 {
+  uint bitSetNewResult;
   uint loopIndex;
   uint uVar1;
   int bitSetEquals;
@@ -799,13 +800,13 @@ int _BuildGenKill(param_1)
       iVar8 = *(int *)(param_1 + 8);
       loopIndex4 = 0;
       puVar6 = (uint *)(iVar8 + iVar4);
-      uVar1 = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
-      puVar6[9] = uVar1;
-      uVar1 = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
-      puVar6[10] = uVar1;
-      uVar1 = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
+      bitSetNewResult = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
+      puVar6[9] = bitSetNewResult;
+      bitSetNewResult = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
+      puVar6[10] = bitSetNewResult;
+      bitSetNewResult = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
       iVar8 = *(int *)(iVar8 + iVar4);
-      puVar6[6] = uVar1;
+      puVar6[6] = bitSetNewResult;
       if (iVar8 != 0) {
         iVar8 = 0;
         do {
@@ -854,11 +855,12 @@ int _BuildGenKill(param_1)
 int _BuildLiveOut(param_1)
   int param_1;
 {
+  int bitSetEqualsTestResult;
   uint loopIndex;
   bool bVar1;
   uint uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 bitSetCloneResult2;
+  undefined4 bitSetCloneResult;
   uint loopIndex2;
   int iVar6;
   int iVar7;
@@ -873,24 +875,24 @@ int _BuildLiveOut(param_1)
       do {
         loopIndex = 0;
         iVar8 = *(int *)(param_1 + 8) + iVar6;
-        uVar3 = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
+        bitSetCloneResult2 = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
         if (*(int *)(iVar8 + 0x10) != 0) {
           do {
             iVar7 = loopIndex * 4;
             loopIndex = loopIndex + 1;
             iVar7 = *(int *)(iVar7 + *(int *)(iVar8 + 0x14));
-            uVar4 = _BitSetClone(*(undefined4 *)(iVar7 + 0x18));
-            _BitSetAndNotEquals(uVar4,*(undefined4 *)(iVar7 + 0x28));
-            _BitSetOrEquals(uVar4,*(undefined4 *)(iVar7 + 0x24));
-            _BitSetOrEquals(*(undefined4 *)(iVar8 + 0x18),uVar4);
-            _BitSetFree(uVar4);
+            bitSetCloneResult = _BitSetClone(*(undefined4 *)(iVar7 + 0x18));
+            _BitSetAndNotEquals(bitSetCloneResult,*(undefined4 *)(iVar7 + 0x28));
+            _BitSetOrEquals(bitSetCloneResult,*(undefined4 *)(iVar7 + 0x24));
+            _BitSetOrEquals(*(undefined4 *)(iVar8 + 0x18),bitSetCloneResult);
+            _BitSetFree(bitSetCloneResult);
           } while (loopIndex < *(uint *)(iVar8 + 0x10));
         }
         loopIndex2 = loopIndex2 + 1;
         iVar6 = iVar6 + 0x2c;
-        iVar8 = ((int (*)())_BitSetEqualsTest)(uVar3,*(undefined4 *)(iVar8 + 0x18));
-        bVar1 = (bool)(bVar1 | iVar8 == 0);
-        _BitSetFree(uVar3);
+        bitSetEqualsTestResult = ((int (*)())_BitSetEqualsTest)(bitSetCloneResult2,*(undefined4 *)(iVar8 + 0x18));
+        bVar1 = (bool)(bVar1 | bitSetEqualsTestResult == 0);
+        _BitSetFree(bitSetCloneResult2);
         uVar2 = *(uint *)(param_1 + 4);
       } while (loopIndex2 < uVar2);
     }
@@ -902,7 +904,7 @@ int _BuildLiveOut(param_1)
 int _BuildInterferenceSets(param_1)
   int param_1;
 {
-  undefined4 uVar1;
+  undefined4 bitSetCloneResult;
   int iVar2;
   uint uVar3;
   uint loopIndex2;
@@ -921,7 +923,7 @@ int _BuildInterferenceSets(param_1)
     do {
       iVar11 = *(int *)(param_1 + 8);
       iVar6 = iVar11 + iVar5;
-      uVar1 = _BitSetClone(*(undefined4 *)(iVar6 + 0x18));
+      bitSetCloneResult = _BitSetClone(*(undefined4 *)(iVar6 + 0x18));
       iVar11 = *(int *)(iVar11 + iVar5) + -1;
       if (-1 < iVar11) {
         iVar7 = iVar11 * 0x1c;
@@ -934,8 +936,8 @@ int _BuildInterferenceSets(param_1)
               do {
                 puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[3]);
                 if (puVar9[6] == 0) {
-                  for (iVar2 = _BitSetFirstSetBit(uVar1); iVar2 != -1;
-                      iVar2 = _BitSetNextSetBit(uVar1,iVar2)) {
+                  for (iVar2 = _BitSetFirstSetBit(bitSetCloneResult); iVar2 != -1;
+                      iVar2 = _BitSetNextSetBit(bitSetCloneResult,iVar2)) {
                     iVar12 = *(int *)(param_1 + 0x10) + iVar2 * 0x2c;
                     if (*(int *)(iVar12 + 0x18) == 0) {
                       _BitSetSetEquals(puVar9[2],
@@ -953,7 +955,7 @@ int _BuildInterferenceSets(param_1)
               do {
                 puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[3]);
                 if (puVar9[6] == 0) {
-                  _BitSetClearEquals(uVar1,*puVar9);
+                  _BitSetClearEquals(bitSetCloneResult,*puVar9);
                   uVar3 = puVar8[2];
                 }
                 loopIndex = loopIndex + 1;
@@ -965,7 +967,7 @@ int _BuildInterferenceSets(param_1)
               do {
                 puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[1]);
                 if (puVar9[6] == 0) {
-                  _BitSetSetEquals(uVar1,*puVar9);
+                  _BitSetSetEquals(bitSetCloneResult,*puVar9);
                   uVar3 = *puVar8;
                 }
                 loopIndex = loopIndex + 1;
@@ -977,7 +979,7 @@ int _BuildInterferenceSets(param_1)
         } while (-1 < iVar11);
       }
       loopIndex2 = loopIndex2 + 1;
-      _BitSetFree(uVar1);
+      _BitSetFree(bitSetCloneResult);
       iVar5 = iVar5 + 0x2c;
     } while (loopIndex2 < *(uint *)(param_1 + 4));
   }
@@ -988,6 +990,8 @@ int _BuildInterferenceSets(param_1)
 int _RegistersMerge(param_1)
   int param_1;
 {
+  int registerVectorCanMergeResult;
+  int registerVectorIsFixedResult;
   undefined4 *puVar1;
   bool bVar2;
   int iVar3;
@@ -1035,14 +1039,14 @@ int _RegistersMerge(param_1)
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
       bVar2 = false;
-      iVar16 = ((int (*)())_RegisterVectorIsFixed)(local_50);
-      if (iVar16 == 0) {
+      registerVectorIsFixedResult = ((int (*)())_RegisterVectorIsFixed)(local_50);
+      if (registerVectorIsFixedResult == 0) {
         uVar14 = 0;
         piVar4 = allocation;
         if (loopIndex != 0) {
 LAB_97c09514:
-          iVar16 = ((int (*)())_RegisterVectorCanMerge)(piVar4,local_50);
-          if (iVar16 == 0) goto LAB_97c09608;
+          registerVectorCanMergeResult = ((int (*)())_RegisterVectorCanMerge)(piVar4,local_50);
+          if (registerVectorCanMergeResult == 0) goto LAB_97c09608;
           iVar3 = 0;
           iVar16 = 3;
           do {
@@ -1116,7 +1120,7 @@ int _DeadCodeEliminationSimple(param_1)
 {
   uint loopIndex;
   bool bVar1;
-  undefined4 uVar2;
+  undefined4 bitSetCloneResult;
   int bitSetEquals;
   undefined4 *puVar4;
   uint uVar5;
@@ -1134,7 +1138,7 @@ int _DeadCodeEliminationSimple(param_1)
     do {
       iVar10 = param_1[2];
       iVar8 = iVar10 + iVar7;
-      uVar2 = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
+      bitSetCloneResult = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
       iVar10 = *(int *)(iVar10 + iVar7) + -1;
       if (-1 < iVar10) {
         iVar9 = iVar10 * 0x1c;
@@ -1158,7 +1162,7 @@ LAB_97c0978c:
                 do {
                   puVar4 = *(undefined4 **)(uVar11 * 4 + puVar12[3]);
                   if (puVar4[6] == 0) {
-                    bitSetEquals = _BitSetGetEquals(uVar2,*puVar4);
+                    bitSetEquals = _BitSetGetEquals(bitSetCloneResult,*puVar4);
                     if (bitSetEquals != 0) {
                       bVar1 = false;
                     }
@@ -1174,7 +1178,7 @@ LAB_97c0978c:
               do {
                 puVar4 = *(undefined4 **)(loopIndex * 4 + puVar12[3]);
                 if (puVar4[6] == 0) {
-                  _BitSetClearEquals(uVar2,*puVar4);
+                  _BitSetClearEquals(bitSetCloneResult,*puVar4);
                   uVar5 = puVar12[2];
                 }
                 loopIndex = loopIndex + 1;
@@ -1186,7 +1190,7 @@ LAB_97c0978c:
               do {
                 puVar4 = *(undefined4 **)(loopIndex * 4 + puVar12[1]);
                 if (puVar4[6] == 0) {
-                  _BitSetSetEquals(uVar2,*puVar4);
+                  _BitSetSetEquals(bitSetCloneResult,*puVar4);
                   uVar5 = *puVar12;
                 }
                 loopIndex = loopIndex + 1;
@@ -1199,7 +1203,7 @@ LAB_97c09828:
         } while (-1 < iVar10);
       }
       loopIndex2 = loopIndex2 + 1;
-      _BitSetFree(uVar2);
+      _BitSetFree(bitSetCloneResult);
       iVar7 = iVar7 + 0x2c;
     } while (loopIndex2 < (uint)param_1[1]);
   }
@@ -1593,6 +1597,7 @@ int _InstructionAdd(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int validArgs;
   int loopIndex;
   int loopIndex3;
   undefined4 allocation;
@@ -1655,10 +1660,10 @@ int _InstructionAdd(param_1, param_2, param_3)
   *(undefined4 *)(iVar3 + -8) = 0;
   allocation = _malloc(4);
   *(undefined4 *)(iVar3 + -0x18) = allocation;
-  iVar6 = ((int (*)())_GetValidArgs)(param_3);
+  validArgs = ((int (*)())_GetValidArgs)(param_3);
   iVar12 = param_3;
   iVar15 = param_3;
-  if (0 < iVar6) {
+  if (0 < validArgs) {
     do {
       uVar4 = *(uint *)(iVar15 + 0x1c);
       local_70[0] = 0;
@@ -1724,7 +1729,7 @@ LAB_97c0a29c:
       loopIndex3 = loopIndex3 + 1;
       iVar12 = iVar12 + 8;
       iVar15 = iVar15 + 8;
-    } while (loopIndex3 < iVar6);
+    } while (loopIndex3 < validArgs);
   }
   uVar2 = *(uint *)(param_3 + 0x14);
   local_70[1] = uVar2 >> 0xe & 1;
@@ -1889,7 +1894,7 @@ int _RegistersInitialize(param_1)
   int param_1;
 {
   uint uVar1;
-  undefined4 uVar2;
+  undefined4 bitSetNewResult;
   int iVar3;
   int iVar4;
   uint loopIndex;
@@ -1900,11 +1905,11 @@ int _RegistersInitialize(param_1)
     iVar3 = 0;
     do {
       iVar4 = *(int *)(param_1 + 0x10);
-      uVar2 = _BitSetNew(uVar1);
+      bitSetNewResult = _BitSetNew(uVar1);
       iVar4 = iVar4 + iVar3;
       iVar3 = iVar3 + 0x2c;
-      *(undefined4 *)(iVar4 + 8) = uVar2;
-      _BitSetSetEquals(uVar2,loopIndex);
+      *(undefined4 *)(iVar4 + 8) = bitSetNewResult;
+      _BitSetSetEquals(bitSetNewResult,loopIndex);
       uVar1 = *(uint *)(param_1 + 0xc);
       loopIndex = loopIndex + 1;
     } while (loopIndex < uVar1);
@@ -1917,7 +1922,7 @@ int _Registerify(param_1)
   int *param_1;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 registersInitializeResult;
   int iVar3;
   int iVar4;
   
@@ -1981,8 +1986,8 @@ int _Registerify(param_1)
     iVar1 = param_1[3];
   }
   param_1[0x10] = iVar1;
-  uVar2 = ((int (*)())_RegistersInitialize)(param_1);
-  return uVar2;
+  registersInitializeResult = ((int (*)())_RegistersInitialize)(param_1);
+  return registersInitializeResult;
 }
 
 /* _RegistersFree @ 0x97c0aa50 (124 bytes) */
@@ -2017,7 +2022,7 @@ int _GetOrAddBlock(param_1, param_2)
 {
   int iVar1;
   int allocation;
-  undefined4 uVar3;
+  undefined4 blockAddResult;
   
   iVar1 = param_2 * 4;
   if (*(uint *)(param_1 + 0x14) < param_2 + 1U) {
@@ -2027,8 +2032,8 @@ int _GetOrAddBlock(param_1, param_2)
     *(uint *)(param_1 + 0x14) = param_2 + 1U;
   }
   if (*(int *)(iVar1 + *(int *)(param_1 + 0x18)) == 0) {
-    uVar3 = ((int (*)())_BlockAdd)(param_1);
-    *(undefined4 *)(iVar1 + *(int *)(param_1 + 0x18)) = uVar3;
+    blockAddResult = ((int (*)())_BlockAdd)(param_1);
+    *(undefined4 *)(iVar1 + *(int *)(param_1 + 0x18)) = blockAddResult;
   }
   return;
 }

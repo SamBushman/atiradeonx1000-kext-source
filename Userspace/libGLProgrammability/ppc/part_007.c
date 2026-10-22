@@ -99,31 +99,32 @@ int yy_scan_bytes(str, param_2)
   char *str;
   int param_2;
 {
+  int yy_scan_bufferResult;
   int iVar1;
-  char *pcVar2;
+  char *yy_flex_allocResult;
   int iVar3;
   
-  pcVar2 = (char *)((int (*)())yy_flex_alloc)(param_2 + 2U);
-  if (pcVar2 == (char *)0x0) {
+  yy_flex_allocResult = (char *)((int (*)())yy_flex_alloc)(param_2 + 2U);
+  if (yy_flex_allocResult == (char *)0x0) {
     ((int (*)())yy_fatal_error)("out of dynamic memory in yy_scan_bytes()");
   }
   iVar1 = 0;
   iVar3 = param_2;
   if (0 < param_2) {
     do {
-      pcVar2[iVar1] = str[iVar1];
+      yy_flex_allocResult[iVar1] = str[iVar1];
       iVar1 = iVar1 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
   }
-  pcVar2[param_2 + 1] = '\0';
-  pcVar2[param_2] = '\0';
-  iVar3 = ((int (*)())yy_scan_buffer)(pcVar2,param_2 + 2U);
-  if (iVar3 == 0) {
+  yy_flex_allocResult[param_2 + 1] = '\0';
+  yy_flex_allocResult[param_2] = '\0';
+  yy_scan_bufferResult = ((int (*)())yy_scan_buffer)(yy_flex_allocResult,param_2 + 2U);
+  if (yy_scan_bufferResult == 0) {
     ((int (*)())yy_fatal_error)("bad buffer in yy_scan_bytes()");
   }
-  *(undefined4 *)(iVar3 + 0x14) = 1;
-  return iVar3;
+  *(undefined4 *)(yy_scan_bufferResult + 0x14) = 1;
+  return yy_scan_bufferResult;
 }
 
 /* yy_fatal_error @ 0x97badd94 (60 bytes) */
@@ -329,7 +330,7 @@ int PaParseComment(param_1, parseContext)
   int *param_1;
   unsigned char * parseContext;
 {
-  int iVar1;
+  int yyinputResult;
   undefined4 in_r9;
   undefined4 in_r10;
   int iVar2;
@@ -337,15 +338,15 @@ int PaParseComment(param_1, parseContext)
   iVar2 = 0;
   do {
     while( true ) {
-      iVar1 = yyinput();
-      if (iVar1 == 10) {
+      yyinputResult = yyinput();
+      if (yyinputResult == 10) {
         *param_1 = *param_1 + 1;
       }
-      if (iVar1 != 0x2a) break;
+      if (yyinputResult != 0x2a) break;
       iVar2 = 1;
     }
-    if (iVar1 < 0x2b) {
-      if (iVar1 == -1) {
+    if (yyinputResult < 0x2b) {
+      if (yyinputResult == -1) {
         TParseContext__error
                   ((int)parseContext,_yylineno,"End of shader found before end of comment.","","","",
                    in_r9,in_r10);
@@ -356,7 +357,7 @@ LAB_97bae268:
       iVar2 = 0;
     }
     else {
-      if (iVar1 != 0x2f) goto LAB_97bae268;
+      if (yyinputResult != 0x2f) goto LAB_97bae268;
       if (iVar2 == 1) {
         return 1;
       }
@@ -1815,6 +1816,7 @@ int __ZN7BindingC2ERKS_(this, binding)
   void *this;
   unsigned char * binding;
 {
+  bool isClientRequest;
   ulong actualSize;
   int activeIndex;
   int location;
@@ -1832,8 +1834,8 @@ int __ZN7BindingC2ERKS_(this, binding)
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,activeIndex);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(binding);
-  ((int (*)())Binding__SetClientRequest)(this,bVar4);
+  isClientRequest = (bool)((int (*)())Binding__IsClientRequest)(binding);
+  ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
   bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
   openGLType = Binding__GetOpenGLType(binding);
@@ -1854,6 +1856,7 @@ int __ZN7BindingC1ERKS_(this, binding)
   void *this;
   unsigned char * binding;
 {
+  bool isClientRequest;
   ulong actualSize;
   int activeIndex;
   int location;
@@ -1871,8 +1874,8 @@ int __ZN7BindingC1ERKS_(this, binding)
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,activeIndex);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(binding);
-  ((int (*)())Binding__SetClientRequest)(this,bVar4);
+  isClientRequest = (bool)((int (*)())Binding__IsClientRequest)(binding);
+  ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
   bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
   openGLType = Binding__GetOpenGLType(binding);

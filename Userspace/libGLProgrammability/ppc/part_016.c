@@ -224,7 +224,7 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
   bool bVar1;
   undefined *puVar2;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 ppcRuntimeCompilerCreateResult;
   undefined4 compiledResult;
   int a6;
   code *UNRECOVERED_JUMPTABLE;
@@ -256,44 +256,44 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
   }
   if ((uVar6 & 2) != 0) {
     if ((uVar6 & 8) == 0) {
-      uVar4 = _PPCRuntimeCompilerCreate();
-      _PPCRuntimeCompilerAttachEmulatorContext(uVar4,emulator);
-      _PPCRuntimeCompilerAttachEmulatorProgram(uVar4,iVar7);
+      ppcRuntimeCompilerCreateResult = _PPCRuntimeCompilerCreate();
+      _PPCRuntimeCompilerAttachEmulatorContext(ppcRuntimeCompilerCreateResult,emulator);
+      _PPCRuntimeCompilerAttachEmulatorProgram(ppcRuntimeCompilerCreateResult,iVar7);
       if ((uVar6 & 4) != 0) {
-        _PPCRuntimeCompilerSetOptionFlags(uVar4,7);
+        _PPCRuntimeCompilerSetOptionFlags(ppcRuntimeCompilerCreateResult,7);
       }
       if (bVar1) {
-        _PPCRuntimeCompilerCompileNO(uVar4);
-        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        _PPCRuntimeCompilerCompileNO(ppcRuntimeCompilerCreateResult);
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(ppcRuntimeCompilerCreateResult);
         *(undefined4 *)(iVar7 + 0x1c) = compiledResult;
       }
       else {
-        _PPCRuntimeCompilerSetOptionFlags(uVar4,8);
-        _PPCRuntimeCompilerCompileNO(uVar4);
-        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        _PPCRuntimeCompilerSetOptionFlags(ppcRuntimeCompilerCreateResult,8);
+        _PPCRuntimeCompilerCompileNO(ppcRuntimeCompilerCreateResult);
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(ppcRuntimeCompilerCreateResult);
         *(undefined4 *)(iVar7 + 0x20) = compiledResult;
       }
-      _PPCRuntimeCompilerFree(uVar4);
+      _PPCRuntimeCompilerFree(ppcRuntimeCompilerCreateResult);
     }
     if ((uVar6 & 8) != 0) {
-      uVar4 = _PPCRuntimeCompilerCreate();
-      _PPCRuntimeCompilerAttachEmulatorContext(uVar4,emulator);
-      _PPCRuntimeCompilerAttachEmulatorProgram(uVar4,iVar7);
+      ppcRuntimeCompilerCreateResult = _PPCRuntimeCompilerCreate();
+      _PPCRuntimeCompilerAttachEmulatorContext(ppcRuntimeCompilerCreateResult,emulator);
+      _PPCRuntimeCompilerAttachEmulatorProgram(ppcRuntimeCompilerCreateResult,iVar7);
       if ((uVar6 & 4) != 0) {
-        _PPCRuntimeCompilerSetOptionFlags(uVar4,7);
+        _PPCRuntimeCompilerSetOptionFlags(ppcRuntimeCompilerCreateResult,7);
       }
       if (bVar1) {
-        _PPCRuntimeCompilerCompileAV(uVar4);
-        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        _PPCRuntimeCompilerCompileAV(ppcRuntimeCompilerCreateResult);
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(ppcRuntimeCompilerCreateResult);
         *(undefined4 *)(iVar7 + 0x14) = compiledResult;
       }
       else {
-        _PPCRuntimeCompilerSetOptionFlags(uVar4,8);
-        _PPCRuntimeCompilerCompileAV(uVar4);
-        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        _PPCRuntimeCompilerSetOptionFlags(ppcRuntimeCompilerCreateResult,8);
+        _PPCRuntimeCompilerCompileAV(ppcRuntimeCompilerCreateResult);
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(ppcRuntimeCompilerCreateResult);
         *(undefined4 *)(iVar7 + 0x18) = compiledResult;
       }
-      _PPCRuntimeCompilerFree(uVar4);
+      _PPCRuntimeCompilerFree(ppcRuntimeCompilerCreateResult);
     }
   }
   puVar2 = PTR__InterpreterRun_a7b7c104;
@@ -1747,6 +1747,7 @@ int _glpWriteBranchOperand(param_1, param_2, param_3, param_4, param_5)
   int param_4;
   int param_5;
 {
+  int sprintfResult;
   char ch;
   int copyIndex;
   char *pcVar3;
@@ -1765,8 +1766,8 @@ int _glpWriteBranchOperand(param_1, param_2, param_3, param_4, param_5)
       uVar4 = *param_3;
     }
   }
-  iVar5 = _sprintf(param_2,"label_%i",iVar5);
-  pcVar3 = param_2 + iVar5;
+  sprintfResult = _sprintf(param_2,"label_%i",iVar5);
+  pcVar3 = param_2 + sprintfResult;
   if (param_5 == 0) {
     return pcVar3;
   }
@@ -2023,7 +2024,7 @@ int _glpDisassemble1Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   uint branchWord;
   int iVar4;
   int iVar5;
-  undefined4 uVar6;
+  undefined4 glpWritePrecisionResult;
   uint uVar7;
   char *pcVar8;
   int copyIndex4;
@@ -2114,9 +2115,9 @@ int _glpDisassemble1Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   case 0x6c:
   case 0x6f:
   case 0x70:
-    uVar6 = ((int (*)())_glpWritePrecision)(textPtr,inst[1] >> 0x12 & 3);
+    glpWritePrecisionResult = ((int (*)())_glpWritePrecision)(textPtr,inst[1] >> 0x12 & 3);
     uVar7 = inst[1];
-    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar7 >> 0x16 & 1,uVar7 >> 0x15 & 1,uVar7 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(glpWritePrecisionResult,uVar7 >> 0x16 & 1,uVar7 >> 0x15 & 1,uVar7 >> 0x14 & 1);
     if (printSuffixes != 0) {
       uVar7 = inst[1];
       outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar7 >> 0x1a & 3,uVar7 >> 0x1c & 1,uVar7 >> 0x17 & 7);
@@ -2179,9 +2180,9 @@ int _glpDisassemble1Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   case 0x4e:
   case 0x52:
   case 0x6d:
-    uVar6 = ((int (*)())_glpWritePrecision)(textPtr,inst[1] >> 0x12 & 3);
+    glpWritePrecisionResult = ((int (*)())_glpWritePrecision)(textPtr,inst[1] >> 0x12 & 3);
     instWord1 = inst[1];
-    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,instWord1 >> 0x16 & 1,instWord1 >> 0x15 & 1,instWord1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(glpWritePrecisionResult,instWord1 >> 0x16 & 1,instWord1 >> 0x15 & 1,instWord1 >> 0x14 & 1);
     if (printSuffixes != 0) {
       instWord1 = inst[1];
       outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,instWord1 >> 0x1a & 3,instWord1 >> 0x1c & 1,instWord1 >> 0x17 & 7);
@@ -2221,9 +2222,9 @@ int _glpDisassemble1Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   case 0x53:
   case 0x67:
   case 0x68:
-    uVar6 = ((int (*)())_glpWritePrecision)(textPtr,inst[1] >> 0x12 & 3);
+    glpWritePrecisionResult = ((int (*)())_glpWritePrecision)(textPtr,inst[1] >> 0x12 & 3);
     instWord1 = inst[1];
-    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,instWord1 >> 0x16 & 1,instWord1 >> 0x15 & 1,instWord1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(glpWritePrecisionResult,instWord1 >> 0x16 & 1,instWord1 >> 0x15 & 1,instWord1 >> 0x14 & 1);
     if (printSuffixes != 0) {
       instWord1 = inst[1];
       outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,instWord1 >> 0x1a & 3,instWord1 >> 0x1c & 1,instWord1 >> 0x17 & 7);
@@ -2806,6 +2807,7 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
 int _glpPPDisassemble(program)
   uint *program;
 {
+  undefined4 memsetResult;
   uint loopIndex10;
   uint *nextIndex5;
   int loopIndex5;
@@ -5334,8 +5336,8 @@ LAB_97bedcb4:
     local_74 = _malloc(allocation2);
     _memset(local_74,0,local_6c);
     local_70 = _malloc(allocation2);
-    uVar16 = _memset(local_70,0,local_6c);
-    uVar26 = CONCAT44(uVar16,extraout_r4_06);
+    memsetResult = _memset(local_70,0,local_6c);
+    uVar26 = CONCAT44(memsetResult,extraout_r4_06);
     local_6c = 0;
     bVar4 = true;
     if (0 < (int)instructionCount) {
@@ -7344,7 +7346,7 @@ int _PPStreamChunkListCompare(stream, param_2)
   int *param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int ppStreamChunkCompareResult;
   int iVar3;
   int iVar4;
   
@@ -7353,8 +7355,8 @@ int _PPStreamChunkListCompare(stream, param_2)
   iVar4 = *param_2;
   if (stream[2] == param_2[2]) {
     for (; (iVar3 != 0 && (iVar4 != 0)); iVar4 = *(int *)(iVar4 + 8)) {
-      iVar2 = ((int (*)())_PPStreamChunkCompare)(iVar3,iVar4);
-      if (iVar2 != 0) {
+      ppStreamChunkCompareResult = ((int (*)())_PPStreamChunkCompare)(iVar3,iVar4);
+      if (ppStreamChunkCompareResult != 0) {
         return 1;
       }
       iVar3 = *(int *)(iVar3 + 8);
@@ -8263,7 +8265,7 @@ int _PPStreamFindDuplicateChunk(stream, param_2)
   undefined1 *param_2;
 {
   int *piVar1;
-  int iVar2;
+  int ppStreamChunkCompareResult;
   int iVar3;
   
   piVar1 = (int *)0x0;
@@ -8309,8 +8311,8 @@ int _PPStreamFindDuplicateChunk(stream, param_2)
     if (iVar3 == 0) {
       return 0;
     }
-    iVar2 = ((int (*)())_PPStreamChunkCompare)(iVar3,param_2);
-    if (iVar2 == 0) break;
+    ppStreamChunkCompareResult = ((int (*)())_PPStreamChunkCompare)(iVar3,param_2);
+    if (ppStreamChunkCompareResult == 0) break;
     iVar3 = *(int *)(iVar3 + 8);
   }
   return iVar3;

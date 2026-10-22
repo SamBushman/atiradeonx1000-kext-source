@@ -1230,7 +1230,7 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
   int iVar3;
   undefined4 uVar4;
   undefined4 uVar5;
-  char *pcVar6;
+  char *getenvResult;
   void *pvVar7;
   int iVar8;
   undefined4 *puVar9;
@@ -1258,8 +1258,8 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
     if (iVar3 != 0) {
       uVar12 = iVar3 * 8;
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-        pcVar6 = _getenv("GLIBCPP_FORCE_NEW");
-        if (pcVar6 == (char *)0x0) {
+        getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+        if (getenvResult == (char *)0x0) {
           do {
             if (in_RESERVE != '\0') {
               atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
@@ -1426,7 +1426,7 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
   int iVar2;
   undefined4 *puVar3;
   int iVar4;
-  char *pcVar5;
+  char *getenvResult;
   void *pvVar6;
   uint uVar7;
   undefined4 uVar8;
@@ -1449,8 +1449,8 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
     if (iVar4 != 0) {
       uVar7 = iVar4 * 4;
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-        pcVar5 = _getenv("GLIBCPP_FORCE_NEW");
-        if (pcVar5 == (char *)0x0) {
+        getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+        if (getenvResult == (char *)0x0) {
           do {
             if (in_RESERVE != '\0') {
               atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);

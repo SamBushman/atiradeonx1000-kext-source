@@ -1136,7 +1136,7 @@ int __ZNKSs4findEcm(this, param_2, param_3)
   int param_2;
   ulong param_3;
 {
-  void *pvVar1;
+  void *memchrResult;
   int iVar2;
   int iVar3;
   char cStack0000001c;
@@ -1145,9 +1145,9 @@ int __ZNKSs4findEcm(this, param_2, param_3)
   iVar3 = *(int *)this;
   if ((param_3 < *(uint *)(iVar3 + -0xc)) &&
      (cStack0000001c = param_2,
-     pvVar1 = _memchr((void *)(iVar3 + param_3),(int)param_2,*(uint *)(iVar3 + -0xc) - param_3),
-     pvVar1 != (void *)0x0)) {
-    iVar2 = (int)pvVar1 - iVar3;
+     memchrResult = _memchr((void *)(iVar3 + param_3),(int)param_2,*(uint *)(iVar3 + -0xc) - param_3),
+     memchrResult != (void *)0x0)) {
+    iVar2 = (int)memchrResult - iVar3;
   }
   return iVar2;
 }

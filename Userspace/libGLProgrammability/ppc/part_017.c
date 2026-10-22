@@ -473,12 +473,14 @@ int _glpWriteSourceOperand_97bf30b8(param_1, param_2, param_3, param_4, param_5,
   undefined4 param_7;
   undefined4 param_8;
 {
-  undefined4 uVar1;
+  undefined4 glpSourceComponentsResult;
+  undefined4 glpSourceTypeResult;
+  undefined4 glpSourceSignResult;
   
-  uVar1 = ((int (*)())_glpSourceSign)(param_1,param_2,param_5,param_8);
-  uVar1 = ((int (*)())_glpSourceType)(param_1,uVar1,param_3,param_4,param_5,param_6,param_8);
-  uVar1 = ((int (*)())_glpSourceComponents)(param_1,uVar1,param_5,param_7,param_8);
-  return uVar1;
+  glpSourceSignResult = ((int (*)())_glpSourceSign)(param_1,param_2,param_5,param_8);
+  glpSourceTypeResult = ((int (*)())_glpSourceType)(param_1,glpSourceSignResult,param_3,param_4,param_5,param_6,param_8);
+  glpSourceComponentsResult = ((int (*)())_glpSourceComponents)(param_1,glpSourceTypeResult,param_5,param_7,param_8);
+  return glpSourceComponentsResult;
 }
 
 /* _glpWriteDestinationMask @ 0x97bf3138 (1312 bytes) */
@@ -7725,6 +7727,11 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   undefined4 printOptions;
   uint printFlags;
 {
+  undefined8 glp_dtostrResult;
+  undefined8 adjustAllocationResult;
+  int adjustAllocationResult3;
+  int glpDisassemble2OpResult;
+  int adjustAllocationResult2;
   int nextIndex4;
   int nextIndex3;
   int loopIndex7;
@@ -7889,10 +7896,10 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
       copyIndex5 = copyLength7;
     } while (ch != '\0');
     outCursor = outCursor + copyLength7;
-    uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-    uVar11 = (undefined4)uVar25;
+    adjustAllocationResult = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
+    uVar11 = (undefined4)adjustAllocationResult;
     allocation8 = outBuffer;
-    if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
+    if ((int)((ulonglong)adjustAllocationResult >> 0x20) == 0) goto LAB_97c04d50;
     ch = '\n';
     copyIndex5 = 0;
     do {
@@ -7935,10 +7942,10 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
         copyIndex4 = copyLength3;
       } while (ch != '\0');
       outCursor = outCursor + copyLength3 + copyEnd3;
-      uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-      uVar11 = (undefined4)uVar25;
+      adjustAllocationResult = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
+      uVar11 = (undefined4)adjustAllocationResult;
       allocation8 = outBuffer;
-      if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
+      if ((int)((ulonglong)adjustAllocationResult >> 0x20) == 0) goto LAB_97c04d50;
       loopIndex2 = loopIndex2 + 1;
       piVar18 = piVar18 + 2;
     } while (loopIndex2 < tempCount);
@@ -8243,10 +8250,10 @@ switchD_97c01d20_caseD_0:
         copyIndex3 = copyLength3;
       } while (ch != '\0');
       outCursor = outCursor + copyLength3;
-      uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-      uVar11 = (undefined4)uVar25;
+      adjustAllocationResult = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
+      uVar11 = (undefined4)adjustAllocationResult;
       allocation8 = outBuffer;
-      if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
+      if ((int)((ulonglong)adjustAllocationResult >> 0x20) == 0) goto LAB_97c04d50;
 LAB_97c0239c:
       loopIndex3 = loopIndex3 + 1;
     } while (loopIndex3 < attribCount);
@@ -9226,11 +9233,11 @@ LAB_97c040c4:
               copyIndex = copyLength;
             } while (ch != '\0');
             outCursor = outCursor + copyLength;
-            uVar25 = ((char * (*)())_glp_dtostr)((int)((ulonglong)uVar25 >> 0x20),(int)uVar25,outCursor,
+            glp_dtostrResult = ((char * (*)())_glp_dtostr)((int)((ulonglong)uVar25 >> 0x20),(int)uVar25,outCursor,
                                  outBuffer + (outCapacity - (int)outCursor),(double)*pfVar24,1e-07,in_f3,
                                  in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff48,in_stack_ffffff50,
                                  in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
-            iVar7 = (int)((ulonglong)uVar25 >> 0x20);
+            iVar7 = (int)((ulonglong)glp_dtostrResult >> 0x20);
             ch = ',';
             copyIndex = 0;
             do {
@@ -9240,11 +9247,11 @@ LAB_97c040c4:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = (char *)(iVar7 + copyLength6);
-            uVar25 = ((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,outCursor,outBuffer + (outCapacity - (int)outCursor),
+            glp_dtostrResult = ((char * (*)())_glp_dtostr)(iVar7,(int)glp_dtostrResult,outCursor,outBuffer + (outCapacity - (int)outCursor),
                                  (double)pfVar24[1],1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                  in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                  in_stack_ffffff60,in_stack_ffffff68);
-            iVar7 = (int)((ulonglong)uVar25 >> 0x20);
+            iVar7 = (int)((ulonglong)glp_dtostrResult >> 0x20);
             ch = ',';
             copyIndex = 0;
             do {
@@ -9254,11 +9261,11 @@ LAB_97c040c4:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = (char *)(iVar7 + copyLength6);
-            uVar25 = ((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,outCursor,outBuffer + (outCapacity - (int)outCursor),
+            glp_dtostrResult = ((char * (*)())_glp_dtostr)(iVar7,(int)glp_dtostrResult,outCursor,outBuffer + (outCapacity - (int)outCursor),
                                  (double)pfVar24[2],1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                  in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                  in_stack_ffffff60,in_stack_ffffff68);
-            iVar7 = (int)((ulonglong)uVar25 >> 0x20);
+            iVar7 = (int)((ulonglong)glp_dtostrResult >> 0x20);
             ch = ',';
             copyIndex = 0;
             do {
@@ -9268,7 +9275,7 @@ LAB_97c040c4:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = (char *)(iVar7 + copyLength6);
-            outCursor = (char *)((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,outCursor,
+            outCursor = (char *)((char * (*)())_glp_dtostr)(iVar7,(int)glp_dtostrResult,outCursor,
                                            outBuffer + (outCapacity - (int)outCursor),(double)pfVar24[3],
                                            1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                            in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
@@ -9650,8 +9657,8 @@ switchD_97c04350_caseD_0:
         copyIndex4 = copyLength5;
       } while (ch != '\0');
       outCursor = outCursor + copyLength5;
-      iVar3 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-      if (iVar3 == 0) {
+      adjustAllocationResult2 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
+      if (adjustAllocationResult2 == 0) {
         allocation9 = allocation10;
         allocation8 = outBuffer;
         if (allocation3 != 0) {
@@ -9683,9 +9690,9 @@ LAB_97c04904:
   bodyStart = bodyCursor[0];
   if (0 < instructionCount) {
     do {
-      iVar4 = ((int (*)())_glpDisassemble2Op)(shader + iVar13 * 2 + loopIndex7 * 2,bodyCursor[0],&wordsConsumed,&charsWritten,
+      glpDisassemble2OpResult = ((int (*)())_glpDisassemble2Op)(shader + iVar13 * 2 + loopIndex7 * 2,bodyCursor[0],&wordsConsumed,&charsWritten,
                                  allocation3,allocation10,0,&outFlagWord,&usageFlags,shaderTarget,printOptions);
-      if (iVar4 == -1) {
+      if (glpDisassemble2OpResult == -1) {
 LAB_97c04a0c:
         if (allocation3 != 0) {
           _free(allocation3);
@@ -9697,8 +9704,8 @@ LAB_97c04a0c:
       }
       bodyCursor[0] = bodyCursor[0] + charsWritten;
       loopIndex7 = loopIndex7 + wordsConsumed;
-      iVar4 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&bodyStart,bodyCursor);
-      if (iVar4 == 0) goto LAB_97c04a0c;
+      adjustAllocationResult3 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&bodyStart,bodyCursor);
+      if (adjustAllocationResult3 == 0) goto LAB_97c04a0c;
       loopIndex2 = loopIndex2 + 1;
       loopIndex7 = loopIndex7 + 1;
     } while (loopIndex2 < instructionCount);
@@ -10256,10 +10263,10 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  int iVar1;
+  int glpPPShaderToProgramStringResult;
   undefined4 allocation2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 ppStreamCreateResult;
+  int ppParserParseResult;
   int iVar5;
   undefined4 local_70;
   undefined4 local_6c;
@@ -10279,10 +10286,10 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
   undefined4 local_30 [5];
   
   _memset(&local_70,0,0x3c);
-  iVar1 = ((int (*)())_glpPPShaderToProgramString)(param_1,param_2,param_3);
+  glpPPShaderToProgramStringResult = ((int (*)())_glpPPShaderToProgramString)(param_1,param_2,param_3);
   iVar5 = 0;
   allocation2 = 0;
-  if (iVar1 != 0) {
+  if (glpPPShaderToProgramStringResult != 0) {
     if (*param_1 == 0x8b30) {
       iVar5 = _PPParserCreate(2);
       local_60 = 0x100;
@@ -10305,8 +10312,8 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
       local_6c = 0x100;
       local_60 = 0x100;
     }
-    uVar3 = _PPStreamCreate();
-    _PPParserAttachStream(iVar5,uVar3);
+    ppStreamCreateResult = _PPStreamCreate();
+    _PPParserAttachStream(iVar5,ppStreamCreateResult);
     local_4c = 0x10;
     local_48 = 4;
     local_44 = 1;
@@ -10315,16 +10322,16 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
     local_68 = 8;
     local_50 = 8;
     _memcpy(iVar5 + 0x450,&local_70,0x3c);
-    _PPParserAttachString(iVar5,iVar1,1);
-    iVar4 = _PPParserParse(iVar5);
+    _PPParserAttachString(iVar5,glpPPShaderToProgramStringResult,1);
+    ppParserParseResult = _PPParserParse(iVar5);
     allocation2 = 0;
-    if (iVar4 == 0) {
-      _PPStreamGetStream(uVar3,0,local_30);
+    if (ppParserParseResult == 0) {
+      _PPStreamGetStream(ppStreamCreateResult,0,local_30);
       allocation2 = _calloc(local_30[0],8);
-      _PPStreamGetStream(uVar3,allocation2,local_30);
-      _PPStreamFree(uVar3);
+      _PPStreamGetStream(ppStreamCreateResult,allocation2,local_30);
+      _PPStreamFree(ppStreamCreateResult);
       _PPParserFree(iVar5);
-      _free(iVar1);
+      _free(glpPPShaderToProgramStringResult);
     }
   }
   return allocation2;
@@ -10695,6 +10702,7 @@ int _FindFunctionIndex(param_1, param_2, param_3)
 int _InlineFunctionsBranch(param_1)
   int param_1;
 {
+  int findFunctionIndexResult;
   bool bVar1;
   uint uVar2;
   int *piVar3;
@@ -10758,11 +10766,11 @@ int _InlineFunctionsBranch(param_1)
         if ((*(uint *)(iVar15 + 0xc) >> 0x12 & 0xff) == 0x4c) {
           uVar8 = 0xffffffff;
           loopIndex = 0;
-          iVar6 = ((int (*)())_FindFunctionIndex)(*(uint *)(iVar15 + 0x10) & 0x3ffff,local_50[0],uVar13);
+          findFunctionIndexResult = ((int (*)())_FindFunctionIndex)(*(uint *)(iVar15 + 0x10) & 0x3ffff,local_50[0],uVar13);
           uVar10 = *(uint *)(*(int *)(iVar15 + 8) + 0xc);
           uVar17 = *(uint *)(iVar15 + 0xc) & 0x3ffff;
           iVar18 = *(int *)(iVar15 + 4);
-          iVar6 = iVar6 * 0x20;
+          iVar6 = findFunctionIndexResult * 0x20;
           _PPStreamChunkListRemoveChunk(*(undefined4 *)(param_1 + 0x20),iVar15);
           iVar15 = **(int **)(param_1 + 0x20);
           uVar2 = *(uint *)(iVar15 + 0xc);
@@ -11069,6 +11077,8 @@ int _AddToAvailableCopyTable(param_1, param_2, param_3)
   uint *param_2;
   undefined4 param_3;
 {
+  int updateACUsingAvailableCopyTableResult;
+  int findMatchingAvailableCopyResult;
   int loopIndex;
   uint uVar1;
   undefined4 uVar2;
@@ -11172,8 +11182,8 @@ int _AddToAvailableCopyTable(param_1, param_2, param_3)
         local_48[3] = ((int (*)())_GetStreamArray_97c06668)(local_74,local_70,param_3);
         if (((param_1[1] & 0x10000000) != 0) && (loopIndex2 == 0)) {
           local_48[1] = 1;
-          iVar7 = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
-          if (iVar7 == 0) {
+          findMatchingAvailableCopyResult = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
+          if (findMatchingAvailableCopyResult == 0) {
             uVar9 = *param_2;
             if ((uVar9 & 7) == 0) {
               uVar6 = 0;
@@ -11203,13 +11213,13 @@ int _AddToAvailableCopyTable(param_1, param_2, param_3)
           else {
             iVar14 = 4;
             puVar3 = &local_80;
-            iVar13 = iVar7;
+            iVar13 = findMatchingAvailableCopyResult;
             do {
               if ((puVar3[10] == 1) && (*(int *)(iVar13 + 0x28) == 0)) {
-                iVar5 = *(int *)(iVar7 + 0x14);
+                iVar5 = *(int *)(findMatchingAvailableCopyResult + 0x14);
                 uVar2 = puVar3[6];
                 *(undefined4 *)(iVar13 + 0x28) = 1;
-                *(int *)(iVar7 + 0x14) = iVar5 + 1;
+                *(int *)(findMatchingAvailableCopyResult + 0x14) = iVar5 + 1;
 LAB_97c06bf0:
                 *(undefined4 *)(iVar13 + 0x18) = uVar2;
               }
@@ -11225,10 +11235,10 @@ LAB_97c06bf0:
         }
         local_48[1] = 0;
         do {
-          iVar7 = ((int (*)())_UpdateACUsingAvailableCopyTable)(&local_80,param_2,param_3);
-        } while (iVar7 != 0);
-        iVar7 = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
-        if (iVar7 == 0) {
+          updateACUsingAvailableCopyTableResult = ((int (*)())_UpdateACUsingAvailableCopyTable)(&local_80,param_2,param_3);
+        } while (updateACUsingAvailableCopyTableResult != 0);
+        findMatchingAvailableCopyResult = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
+        if (findMatchingAvailableCopyResult == 0) {
           uVar9 = *param_2;
           if ((uVar9 & 7) == 0) {
             uVar6 = 0;
@@ -11256,13 +11266,13 @@ LAB_97c06bf0:
         else {
           iVar14 = 4;
           puVar3 = &local_80;
-          iVar13 = iVar7;
+          iVar13 = findMatchingAvailableCopyResult;
           do {
             if ((puVar3[10] == 1) && (*(int *)(iVar13 + 0x28) == 0)) {
-              iVar5 = *(int *)(iVar7 + 0x14);
+              iVar5 = *(int *)(findMatchingAvailableCopyResult + 0x14);
               uVar2 = puVar3[6];
               *(undefined4 *)(iVar13 + 0x28) = 1;
-              *(int *)(iVar7 + 0x14) = iVar5 + 1;
+              *(int *)(findMatchingAvailableCopyResult + 0x14) = iVar5 + 1;
 LAB_97c06d30:
               *(undefined4 *)(iVar13 + 0x18) = uVar2;
             }
@@ -11674,6 +11684,7 @@ int _EndLocalAvailableCopyList(param_1)
 int _LocalCopyPropagator(param_1)
   int param_1;
 {
+  int endLocalAvailableCopyListResult;
   uint *allocation;
   int iVar2;
   int isParamSampler;
@@ -11685,8 +11696,8 @@ int _LocalCopyPropagator(param_1)
   allocation[1] = 0;
   *allocation = 0;
   for (; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    iVar2 = ((int (*)())_EndLocalAvailableCopyList)(iVar4 + 0xc);
-    if ((iVar2 != 0) && (uVar5 = 0, *allocation != 0)) {
+    endLocalAvailableCopyListResult = ((int (*)())_EndLocalAvailableCopyList)(iVar4 + 0xc);
+    if ((endLocalAvailableCopyListResult != 0) && (uVar5 = 0, *allocation != 0)) {
       iVar2 = 0;
       do {
         isParamSampler = ((int (*)())_IsParamSampler)(*(undefined4 *)(iVar2 + allocation[1] + 0xc),
@@ -11957,21 +11968,21 @@ int _glpPPShaderLinearize(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  undefined4 uVar1;
+  undefined4 ppStreamCreateResult;
   undefined4 uVar2;
   int local_30 [7];
   
   uVar2 = 0;
   local_30[0] = 0;
-  uVar1 = _PPStreamCreate();
-  _PPStreamAttachStream(uVar1,param_1);
-  ((int (*)())_glpPPShaderLinearizeStreamMgr)(uVar1,param_2);
-  _PPStreamGetStream(uVar1,0,local_30);
+  ppStreamCreateResult = _PPStreamCreate();
+  _PPStreamAttachStream(ppStreamCreateResult,param_1);
+  ((int (*)())_glpPPShaderLinearizeStreamMgr)(ppStreamCreateResult,param_2);
+  _PPStreamGetStream(ppStreamCreateResult,0,local_30);
   if (local_30[0] != 0) {
     uVar2 = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
-    _PPStreamGetStream(uVar1,uVar2,local_30);
+    _PPStreamGetStream(ppStreamCreateResult,uVar2,local_30);
   }
-  _PPStreamFree(uVar1);
+  _PPStreamFree(ppStreamCreateResult);
   return uVar2;
 }
 
@@ -12007,11 +12018,11 @@ int _BitSetNew(param_1)
 int _BitSetClone(bitSet)
   undefined4 *bitSet;
 {
-  undefined4 uVar1;
+  undefined4 bitSetNewResult;
   
-  uVar1 = ((int (*)())_BitSetNew)(*bitSet);
-  _BitSetCopyEquals(uVar1,bitSet);
-  return uVar1;
+  bitSetNewResult = ((int (*)())_BitSetNew)(*bitSet);
+  _BitSetCopyEquals(bitSetNewResult,bitSet);
+  return bitSetNewResult;
 }
 
 /* _BitSetFree @ 0x97c07d80 (52 bytes) */

@@ -285,6 +285,7 @@ int TPPStreamCompiler__reportStats()
 int TPPStreamCompiler__reset(this)
   unsigned char * this;
 {
+  undefined4 ppStreamCreateResult;
   void *allocation;
   undefined4 *puVar1;
   undefined4 uVar2;
@@ -328,9 +329,9 @@ int TPPStreamCompiler__reset(this)
   if (*(int *)(this + 0x70) != 0) {
     _PPStreamFree(*(int *)(this + 0x70));
   }
-  uVar2 = _PPStreamCreate();
-  *(undefined4 *)(this + 0x70) = uVar2;
-  *(undefined4 *)(*(int *)(this + 0x68) + 0xc) = uVar2;
+  ppStreamCreateResult = _PPStreamCreate();
+  *(undefined4 *)(this + 0x70) = ppStreamCreateResult;
+  *(undefined4 *)(*(int *)(this + 0x68) + 0xc) = ppStreamCreateResult;
   iVar3 = *(int *)(this + 8);
   if (iVar3 == 0) {
     puVar1 = *(undefined4 **)(this + 0x70);
@@ -353,6 +354,7 @@ int TPPStreamCompiler__compile(this, intermNode)
   unsigned char * this;
   unsigned char * intermNode;
 {
+  int parseIntermediateTreeResult;
   uint uVar1;
   int iVar2;
   int iVar3;
@@ -361,9 +363,9 @@ int TPPStreamCompiler__compile(this, intermNode)
   uint uVar6;
   int local_20 [5];
   
-  iVar2 = TPPStreamCompiler__parseIntermediateTree(this,intermNode);
-  *(int *)(this + 0xc) = iVar2;
-  if (iVar2 != 0) {
+  parseIntermediateTreeResult = TPPStreamCompiler__parseIntermediateTree(this,intermNode);
+  *(int *)(this + 0xc) = parseIntermediateTreeResult;
+  if (parseIntermediateTreeResult != 0) {
     iVar3 = *(int *)(this + 0x70);
     uVar6 = 0;
     iVar2 = **(int **)(iVar3 + 0x20);
@@ -2567,11 +2569,11 @@ int _InterpreterFree(param_1)
 int _InterpreterInit(param_1)
   int param_1;
 {
-  undefined4 uVar1;
+  undefined4 interpreterTextureSamplerCreateResult;
   
   _memset(param_1,0,0xa70);
-  uVar1 = ((int (*)())_InterpreterTextureSamplerCreate)();
-  *(undefined4 *)(param_1 + 0xa2c) = uVar1;
+  interpreterTextureSamplerCreateResult = ((int (*)())_InterpreterTextureSamplerCreate)();
+  *(undefined4 *)(param_1 + 0xa2c) = interpreterTextureSamplerCreateResult;
   _InterpreterNoiseGeneratorInitialise(param_1 + 4);
   return _InterpreterRasterOpMachineInitialise(param_1 + 0xa24);
 }
@@ -2580,10 +2582,10 @@ int _InterpreterInit(param_1)
 int _InterpreterShutdown(param_1)
   int param_1;
 {
-  undefined4 uVar1;
+  undefined4 interpreterTextureSamplerFreeResult;
   
-  uVar1 = _InterpreterTextureSamplerFree(*(undefined4 *)(param_1 + 0xa2c));
-  return uVar1;
+  interpreterTextureSamplerFreeResult = _InterpreterTextureSamplerFree(*(undefined4 *)(param_1 + 0xa2c));
+  return interpreterTextureSamplerFreeResult;
 }
 
 /* _InterpreterAttachEmulatorContext @ 0x97bcce68 (12 bytes) */

@@ -637,12 +637,14 @@ int ___cxa_throw(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  uint terminateResult;
+  int cxa_get_globalsResult;
   undefined *puVar1;
   undefined *puVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   int iVar5;
-  int *piVar6;
+  int *cxa_get_globalsResult2;
   uint uVar7;
   
   puVar2 = PTR___unexpected_handler_a7b7c18c;
@@ -656,22 +658,22 @@ int ___cxa_throw(param_1, param_2, param_3)
   *(undefined4 *)(param_1 + -0x1c) = 0x432b2b00;
   *(undefined4 *)(param_1 + -0x18) = uVar4;
   *(undefined4 *)(param_1 + -0x44) = uVar3;
-  iVar5 = ((int (*)())___cxa_get_globals)();
-  *(int *)(iVar5 + 4) = *(int *)(iVar5 + 4) + 1;
+  cxa_get_globalsResult = ((int (*)())___cxa_get_globals)();
+  *(int *)(cxa_get_globalsResult + 4) = *(int *)(cxa_get_globalsResult + 4) + 1;
   __Unwind_RaiseException((_Unwind_Exception *)(param_1 + -0x20));
   ((int (*)())___cxa_begin_catch)((_Unwind_Exception *)(param_1 + -0x20));
   ((int (*)())std__terminate)();
-  piVar6 = (int *)((int (*)())___cxa_get_globals)();
-  iVar5 = *piVar6;
+  cxa_get_globalsResult2 = (int *)((int (*)())___cxa_get_globals)();
+  iVar5 = *cxa_get_globalsResult2;
   if (iVar5 != 0) {
     *(int *)(iVar5 + 0x14) = -*(int *)(iVar5 + 0x14);
     __Unwind_RaiseException((_Unwind_Exception *)(iVar5 + 0x30));
     ((int (*)())___cxa_begin_catch)((_Unwind_Exception *)(iVar5 + 0x30));
   }
-  uVar7 = ((int (*)())std__terminate)();
+  terminateResult = ((int (*)())std__terminate)();
   uVar4 = 0;
-  if (uVar7 != 0xff) {
-    uVar7 = uVar7 & 7;
+  if (terminateResult != 0xff) {
+    uVar7 = terminateResult & 7;
     uVar4 = 2;
     if (uVar7 != 2) {
       if (uVar7 < 3) {
@@ -999,7 +1001,7 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
   unsigned char * param_6;
 {
   bool bVar1;
-  uchar *puVar2;
+  uchar *unwind_GetLanguageSpecificDataResult;
   uchar *puVar3;
   unsigned char iP;
   uint uVar5;
@@ -1036,12 +1038,12 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
     bVar1 = new_value == 0;
     goto LAB_97c19c74;
   }
-  puVar2 = (uchar *)((int (*)())__Unwind_GetLanguageSpecificData)(param_6);
-  if (puVar2 == (uchar *)0x0) {
+  unwind_GetLanguageSpecificDataResult = (uchar *)((int (*)())__Unwind_GetLanguageSpecificData)(param_6);
+  if (unwind_GetLanguageSpecificDataResult == (uchar *)0x0) {
     return 8;
   }
   new_value = 0;
-  puVar3 = (uchar *)((int (*)())parse_lsda_header)(param_6,puVar2,(unsigned char *)&iStack_80);
+  puVar3 = (uchar *)((int (*)())parse_lsda_header)(param_6,unwind_GetLanguageSpecificDataResult,(unsigned char *)&iStack_80);
   puVar10 = (uchar *)0x0;
   new_value_00 = 0;
   uStack_78 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)bStack_6c,param_6);
@@ -1096,7 +1098,7 @@ LAB_97c19c1c:
         *(unsigned char *)(param_5 - 0xc) = new_value;
         *(unsigned char *)(param_5 - 0x18) = new_value_00;
         *(uchar **)(param_5 - 0x14) = puVar10;
-        *(uchar **)(param_5 - 0x10) = puVar2;
+        *(uchar **)(param_5 - 0x10) = unwind_GetLanguageSpecificDataResult;
         *(void **)(param_5 - 8) = apvStack_48[0];
       }
       return 6;
@@ -1159,11 +1161,13 @@ LAB_97c19bfc:
 int FUN_97c19d00(param_1)
   int param_1;
 {
+  undefined4 __terminateResult;
+  undefined4 *cxa_get_globals_fastResult;
   undefined *puVar1;
   undefined *puVar2;
-  undefined4 uVar3;
+  undefined4 __unexpectedResult;
   undefined4 *puVar4;
-  int iVar5;
+  int check_exception_specResult;
   code *extraout_r3;
   unsigned char * p_Var6;
   int iVar7;
@@ -1176,28 +1180,28 @@ int FUN_97c19d00(param_1)
   puVar8 = *(uchar **)(param_1 + -0x10);
   iVar7 = *(int *)(param_1 + -0x18);
   p_Var6 = *(unsigned char **)(param_1 + -0x24);
-  uVar3 = ((int (*)())__cxxabiv1____unexpected)(*(unsigned char **)(param_1 + -0x28));
-  ((int (*)())___cxa_begin_catch)(uVar3);
-  puVar4 = (undefined4 *)((int (*)())___cxa_get_globals_fast)();
-  puVar4 = (undefined4 *)*puVar4;
+  __unexpectedResult = ((int (*)())__cxxabiv1____unexpected)(*(unsigned char **)(param_1 + -0x28));
+  ((int (*)())___cxa_begin_catch)(__unexpectedResult);
+  cxa_get_globals_fastResult = (undefined4 *)((int (*)())___cxa_get_globals_fast)();
+  puVar4 = (undefined4 *)*cxa_get_globals_fastResult;
   ((int (*)())parse_lsda_header)((unsigned char *)0x0,puVar8,alStack_40);
-  iVar5 = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*puVar4,puVar4 + 0x14,iVar7);
-  if (iVar5 != 0) {
+  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*puVar4,puVar4 + 0x14,iVar7);
+  if (check_exception_specResult != 0) {
     ___cxa_rethrow();
   }
   puVar2 = PTR_typeinfo_a7b7c180;
-  iVar5 = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,iVar7);
-  if (iVar5 != 0) {
+  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,iVar7);
+  if (check_exception_specResult != 0) {
     puVar4 = (undefined4 *)___cxa_allocate_exception(4);
     puVar1 = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
     *puVar4 = PTR_vtable_a7b7c184 + 8;
                     
     ((int (*)())___cxa_throw)(puVar4,puVar2,puVar1);
   }
-  uVar3 = ((int (*)())__cxxabiv1____terminate)(p_Var6);
+  __terminateResult = ((int (*)())__cxxabiv1____terminate)(p_Var6);
   ((int (*)())___cxa_end_catch)();
   ((int (*)())___cxa_end_catch)();
-  __Unwind_Resume(uVar3);
+  __Unwind_Resume(__terminateResult);
   (*extraout_r3)();
                     
   _abort();
@@ -1306,19 +1310,19 @@ int ___cxa_begin_catch(param_1)
 {
   int iVar1;
   int iVar2;
-  int *piVar3;
+  int *cxa_get_globalsResult;
   
-  piVar3 = (int *)((int (*)())___cxa_get_globals)();
+  cxa_get_globalsResult = (int *)((int (*)())___cxa_get_globals)();
   iVar2 = *(int *)(param_1 + -0x1c);
-  iVar1 = *piVar3;
+  iVar1 = *cxa_get_globalsResult;
   if (iVar2 < 0) {
     iVar2 = -iVar2;
   }
   *(int *)(param_1 + -0x1c) = iVar2 + 1;
-  piVar3[1] = piVar3[1] + -1;
+  cxa_get_globalsResult[1] = cxa_get_globalsResult[1] + -1;
   if (param_1 + -0x30 != iVar1) {
     *(int *)(param_1 + -0x20) = iVar1;
-    *piVar3 = param_1 + -0x30;
+    *cxa_get_globalsResult = param_1 + -0x30;
   }
   return *(undefined4 *)(param_1 + -8);
 }
@@ -1326,25 +1330,25 @@ int ___cxa_begin_catch(param_1)
 /* ___cxa_end_catch @ 0x97c19fec (144 bytes) */
 int ___cxa_end_catch()
 {
-  int *piVar1;
+  int *cxa_get_globals_fastResult;
   int iVar2;
   undefined4 extraout_r3;
   int iVar3;
   
-  piVar1 = (int *)((int (*)())___cxa_get_globals_fast)();
-  iVar2 = *piVar1;
+  cxa_get_globals_fastResult = (int *)((int (*)())___cxa_get_globals_fast)();
+  iVar2 = *cxa_get_globals_fastResult;
   iVar3 = *(int *)(iVar2 + 0x14);
   if (iVar3 < 0) {
     iVar3 = iVar3 + 1;
     if (iVar3 == 0) {
-      piVar1[1] = piVar1[1] + 1;
-      *piVar1 = *(int *)(iVar2 + 0x10);
+      cxa_get_globals_fastResult[1] = cxa_get_globals_fastResult[1] + 1;
+      *cxa_get_globals_fastResult = *(int *)(iVar2 + 0x10);
     }
   }
   else {
     iVar3 = iVar3 + -1;
     if (iVar3 == 0) {
-      *piVar1 = *(int *)(iVar2 + 0x10);
+      *cxa_get_globals_fastResult = *(int *)(iVar2 + 0x10);
       __Unwind_DeleteException((_Unwind_Exception *)(iVar2 + 0x30));
       return extraout_r3;
     }
@@ -1360,10 +1364,10 @@ int ___cxa_end_catch()
 /* __ZSt18uncaught_exceptionv @ 0x97c1a07c (44 bytes) */
 int __ZSt18uncaught_exceptionv()
 {
-  int iVar1;
+  int cxa_get_globalsResult;
   
-  iVar1 = ((int (*)())___cxa_get_globals)();
-  return *(int *)(iVar1 + 4) != 0;
+  cxa_get_globalsResult = ((int (*)())___cxa_get_globals)();
+  return *(int *)(cxa_get_globalsResult + 4) != 0;
 }
 
 /* __Z21get_globals_init_oncev @ 0x97c1a0a8 (32 bytes) */
@@ -1376,11 +1380,11 @@ int __Z21get_globals_init_oncev()
 /* ___cxa_get_globals_fast @ 0x97c1a0c8 (52 bytes) */
 int ___cxa_get_globals_fast()
 {
-  undefined4 uVar1;
+  undefined4 keymgr_get_per_thread_dataResult;
   
   if (_use_thread_key != 0) {
-    uVar1 = __keymgr_get_per_thread_data(0xd);
-    return uVar1;
+    keymgr_get_per_thread_dataResult = __keymgr_get_per_thread_data(0xd);
+    return keymgr_get_per_thread_dataResult;
   }
   return &_globals_static;
 }
@@ -1388,16 +1392,17 @@ int ___cxa_get_globals_fast()
 /* ___cxa_get_globals @ 0x97c1a0fc (220 bytes) */
 int ___cxa_get_globals()
 {
-  int iVar1;
+  int keymgr_set_per_thread_dataResult;
+  int keymgr_get_per_thread_dataResult;
   undefined4 *allocation;
   
   if ((_use_thread_key == 0) ||
      ((_use_thread_key < 0 && (((int (*)())__Z21get_globals_init_oncev)(), _use_thread_key == 0)))) {
     return (undefined4 *)&_globals_static;
   }
-  iVar1 = __keymgr_get_per_thread_data(0xd);
-  if (iVar1 != 0) {
-    return (undefined4 *)iVar1;
+  keymgr_get_per_thread_dataResult = __keymgr_get_per_thread_data(0xd);
+  if (keymgr_get_per_thread_dataResult != 0) {
+    return (undefined4 *)keymgr_get_per_thread_dataResult;
   }
   allocation = (undefined4 *)_malloc(8);
   if (allocation != (undefined4 *)0x0) {
@@ -1406,8 +1411,8 @@ int ___cxa_get_globals()
       __keymgr_set_per_thread_data(0xd,allocation);
       goto LAB_97c1a1b4;
     }
-    iVar1 = __keymgr_set_per_thread_data(0xd,allocation);
-    if (iVar1 == 0) goto LAB_97c1a1b4;
+    keymgr_set_per_thread_dataResult = __keymgr_set_per_thread_data(0xd,allocation);
+    if (keymgr_set_per_thread_dataResult == 0) goto LAB_97c1a1b4;
   }
   ((int (*)())std__terminate)();
 LAB_97c1a1b4:

@@ -1445,13 +1445,13 @@ int TGenericLinker__InsertClientAttribBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int findAttribBindingResult;
+  undefined4 insertClientAttribBindingResult;
   
-  iVar1 = BindingTable__FindAttribBinding(*(unsigned char **)(this + 4),binding);
-  if (iVar1 == 0) {
-    uVar2 = BindingTable__InsertClientAttribBinding(*(unsigned char **)(this + 4),binding);
-    return uVar2;
+  findAttribBindingResult = BindingTable__FindAttribBinding(*(unsigned char **)(this + 4),binding);
+  if (findAttribBindingResult == 0) {
+    insertClientAttribBindingResult = BindingTable__InsertClientAttribBinding(*(unsigned char **)(this + 4),binding);
+    return insertClientAttribBindingResult;
   }
   return 0;
 }
@@ -3186,7 +3186,8 @@ int TGenericLinker__BuildProcessingComponents(this, param_2)
   void **this;
   int param_2;
 {
-  void *pvVar1;
+  void *createFromStreamWithSymbolTableUpdateResult;
+  void *createFunctionTableResult;
   unsigned char * pPVar2;
   undefined4 uVar3;
   int iVar4;
@@ -3197,9 +3198,9 @@ int TGenericLinker__BuildProcessingComponents(this, param_2)
   ppvVar5 = this;
   do {
     if (0 < (int)ppvVar5[8]) {
-      pvVar1 = (void *)((int (*)())TGenericLinker__CreateFunctionTable)((unsigned char *)this,iVar4);
-      ppvVar5[0xe] = pvVar1;
-      if (pvVar1 == (void *)0x0) {
+      createFunctionTableResult = (void *)((int (*)())TGenericLinker__CreateFunctionTable)((unsigned char *)this,iVar4);
+      ppvVar5[0xe] = createFunctionTableResult;
+      if (createFunctionTableResult == (void *)0x0) {
         uVar3 = 0;
       }
       else if (ppvVar5[8] == (void *)0x1) {
@@ -3207,9 +3208,9 @@ int TGenericLinker__BuildProcessingComponents(this, param_2)
                  ParseSymbolTable__CopySymbolTable
                            (*(unsigned char **)(*(int *)ppvVar5[2] + 0x68));
         ppvVar5[10] = pPVar2;
-        pvVar1 = (void *)((int (*)())TGenericLinker__CreateFromStreamWithSymbolTableUpdate)((unsigned char *)this,
+        createFromStreamWithSymbolTableUpdateResult = (void *)((int (*)())TGenericLinker__CreateFromStreamWithSymbolTableUpdate)((unsigned char *)this,
                                     *(unsigned char **)(*(int *)ppvVar5[2] + 0x70),pPVar2);
-        ppvVar5[0xc] = pvVar1;
+        ppvVar5[0xc] = createFromStreamWithSymbolTableUpdateResult;
       }
       else if (1 < (int)ppvVar5[8]) {
         uVar3 = ((int (*)())TGenericLinker__MergeCompilers)((unsigned char *)this,iVar4);
@@ -3525,7 +3526,7 @@ int TGenericLinker__attributeBindingRequest(this, param_2, str)
   char *str;
 {
   int compareResult;
-  int iVar1;
+  int insertAttribRequestBindingResult;
   unsigned char * this_00;
   
   compareResult = _memcmp(str,"gl_",3);
@@ -3535,8 +3536,8 @@ int TGenericLinker__attributeBindingRequest(this, param_2, str)
     Binding__SetName(this_00,str);
     Binding__SetLocation(this_00,param_2);
     Binding__SetClientRequest(this_00,1);
-    iVar1 = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4),this_00);
-    if ((iVar1 == 0) && (this_00 != (unsigned char *)0x0)) {
+    insertAttribRequestBindingResult = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4),this_00);
+    if ((insertAttribRequestBindingResult == 0) && (this_00 != (unsigned char *)0x0)) {
       __ZN7BindingD1Ev(this_00);
       __ZdlPv(this_00);
       return;
@@ -3771,6 +3772,14 @@ int TGenericLinker__link(this, param_2, param_3)
   void **param_2;
   int param_3;
 {
+  int numActiveVertexSamplers3;
+  int numActiveFragmentSamplers3;
+  int buildUniformRemapTablesResult;
+  int remapVertexAttributesResult;
+  int collectUniformBindingsResult;
+  int collectAttributeBindingsResult;
+  int collectClientAttributeBindingsResult;
+  int allocateTextureUnitsForVaryingsResult;
   int loopIndex;
   undefined4 numActiveFragmentSamplers2;
   undefined4 numActiveVertexSamplers2;
@@ -3797,8 +3806,8 @@ int TGenericLinker__link(this, param_2, param_3)
     {
       ((int (*)())TGenericLinker__RemoveExtraVertexOutputs)(this);
       ((int (*)())TGenericLinker__FixOutputReads)(this);
-      iVar2 = ((int (*)())TGenericLinker__AllocateTextureUnitsForVaryings)(this);
-      if (iVar2 == 0) {
+      allocateTextureUnitsForVaryingsResult = ((int (*)())TGenericLinker__AllocateTextureUnitsForVaryings)(this);
+      if (allocateTextureUnitsForVaryingsResult == 0) {
         iVar6 = 0;
       }
       if (1 < *(int *)(this + 0x80)) {
@@ -3817,7 +3826,7 @@ int TGenericLinker__link(this, param_2, param_3)
         }
         pTVar7 = pTVar7 + 4;
       } while ((int)pTVar7 <= (int)(this + 4));
-      if (iVar2 != 0) {
+      if (allocateTextureUnitsForVaryingsResult != 0) {
         loopIndex = 0;
         do {
           if ((*(int *)(this + loopIndex * 4 + 0x30) != 0) &&
@@ -3837,16 +3846,16 @@ int TGenericLinker__link(this, param_2, param_3)
           loopIndex = loopIndex + 1;
         } while (loopIndex < 2);
         if (iVar6 == 1) {
-          iVar2 = ((int (*)())TGenericLinker__CollectClientAttributeBindings)(this);
-          if (iVar2 == 0) {
+          collectClientAttributeBindingsResult = ((int (*)())TGenericLinker__CollectClientAttributeBindings)(this);
+          if (collectClientAttributeBindingsResult == 0) {
             iVar6 = 0;
           }
-          iVar2 = ((int (*)())TGenericLinker__CollectAttributeBindings)(this);
-          if (iVar2 == 0) {
+          collectAttributeBindingsResult = ((int (*)())TGenericLinker__CollectAttributeBindings)(this);
+          if (collectAttributeBindingsResult == 0) {
             iVar6 = 0;
           }
-          iVar2 = ((int (*)())TGenericLinker__CollectUniformBindings)(this);
-          if (iVar2 == 0) {
+          collectUniformBindingsResult = ((int (*)())TGenericLinker__CollectUniformBindings)(this);
+          if (collectUniformBindingsResult == 0) {
             iVar6 = 0;
           }
           sizeActiveAttributes = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
@@ -3920,13 +3929,13 @@ int TGenericLinker__link(this, param_2, param_3)
             iVar6 = 0;
           }
           numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
-          iVar3 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
-          if (0x10 < numActiveVertexSamplers + iVar3) {
+          numActiveFragmentSamplers3 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
+          if (0x10 < numActiveVertexSamplers + numActiveFragmentSamplers3) {
             iVar6 = _strlen(UNK_a7b7bafc);
             allocation = (char *)_malloc(iVar6 + 0x11);
-            iVar6 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
+            numActiveVertexSamplers3 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
             numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
-            _sprintf(allocation,UNK_a7b7bafc,0x10,iVar6 + numActiveFragmentSamplers);
+            _sprintf(allocation,UNK_a7b7bafc,0x10,numActiveVertexSamplers3 + numActiveFragmentSamplers);
             pvVar8 = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
@@ -3936,16 +3945,16 @@ int TGenericLinker__link(this, param_2, param_3)
             iVar6 = 0;
           }
           if (iVar6 == 1) {
-            iVar2 = ((int (*)())TGenericLinker__RemapVertexAttributes)(this);
-            if (iVar2 == 0) {
+            remapVertexAttributesResult = ((int (*)())TGenericLinker__RemapVertexAttributes)(this);
+            if (remapVertexAttributesResult == 0) {
               iVar6 = 0;
             }
             bVar1 = iVar6 == 1;
-            iVar2 = ((int (*)())TGenericLinker__BuildUniformRemapTables)(this);
-            if (iVar2 == 0) {
+            buildUniformRemapTablesResult = ((int (*)())TGenericLinker__BuildUniformRemapTables)(this);
+            if (buildUniformRemapTablesResult == 0) {
               iVar6 = 0;
             }
-            if ((iVar2 != 0 && bVar1) && (3 < *(int *)(this + 0x80))) {
+            if ((buildUniformRemapTablesResult != 0 && bVar1) && (3 < *(int *)(this + 0x80))) {
               pTVar7 = this + 0x30;
               iVar2 = 1;
               do {
@@ -4080,7 +4089,7 @@ int TGenericLinker__getShaderToProgramString(this)
   bool bVar1;
   int iVar2;
   undefined4 allocation;
-  int iVar4;
+  int glpPPShaderLinearizeResult;
   char *allocation2;
   int iVar6;
   int iVar7;
@@ -4107,11 +4116,11 @@ int TGenericLinker__getShaderToProgramString(this)
         iVar6 = _glpPPShaderToProgramString(allocation,0,0);
       }
       else {
-        iVar4 = _glpPPShaderLinearize(allocation,0xff);
+        glpPPShaderLinearizeResult = _glpPPShaderLinearize(allocation,0xff);
         iVar6 = 0;
-        if (iVar4 != 0) {
-          iVar6 = _glpPPShaderToProgramString(iVar4,0,0);
-          _glpFreePPShaderLinearize(iVar4);
+        if (glpPPShaderLinearizeResult != 0) {
+          iVar6 = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
+          _glpFreePPShaderLinearize(glpPPShaderLinearizeResult);
         }
       }
       _free(allocation);
@@ -4137,11 +4146,11 @@ int TGenericLinker__getShaderToProgramString(this)
         iVar7 = _glpPPShaderToProgramString(allocation,0,0);
       }
       else {
-        iVar4 = _glpPPShaderLinearize(allocation,0xff);
+        glpPPShaderLinearizeResult = _glpPPShaderLinearize(allocation,0xff);
         iVar7 = 0;
-        if (iVar4 != 0) {
-          iVar7 = _glpPPShaderToProgramString(iVar4,0,0);
-          _glpFreePPShaderLinearize(iVar4);
+        if (glpPPShaderLinearizeResult != 0) {
+          iVar7 = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
+          _glpFreePPShaderLinearize(glpPPShaderLinearizeResult);
         }
       }
       _free(allocation);

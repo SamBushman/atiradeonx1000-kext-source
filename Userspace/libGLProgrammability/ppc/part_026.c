@@ -4,13 +4,13 @@
 int __Unwind_FindEnclosingFunction(pc)
   void *pc;
 {
-  void *pvVar1;
+  void *unwind_Find_FDEResult;
   void *pvVar2;
   dwarf_eh_bases adStack_20 [2];
   
-  pvVar1 = ((int (*)())__Unwind_Find_FDE)((void *)((int)pc + -1),adStack_20);
+  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)((int)pc + -1),adStack_20);
   pvVar2 = (void *)0x0;
-  if (pvVar1 != (void *)0x0) {
+  if (unwind_Find_FDEResult != (void *)0x0) {
     pvVar2 = (void *)adStack_20[0].func;
   }
   return pvVar2;
@@ -42,7 +42,7 @@ int _extract_cie_info(param_1, param_2, param_3)
   char cVar3;
   byte bVar4;
   int length;
-  undefined4 uVar6;
+  undefined4 base_of_encoded_valueResult;
   undefined1 *puVar7;
   byte *pbVar8;
   char *pcVar9;
@@ -95,9 +95,9 @@ LAB_97c1a718:
         return pbVar8;
       }
       bVar4 = *pbVar10;
-      uVar6 = _base_of_encoded_value((uint)bVar4,param_2);
+      base_of_encoded_valueResult = _base_of_encoded_value((uint)bVar4,param_2);
       pbVar10 = (byte *)_read_encoded_value_with_base_97c1a468
-                                  ((uint)bVar4,uVar6,pbVar10 + 1,param_3 + 0x390);
+                                  ((uint)bVar4,base_of_encoded_valueResult,pbVar10 + 1,param_3 + 0x390);
     }
     pcVar11 = pcVar11 + 1;
     cVar3 = *pcVar11;
@@ -710,10 +710,12 @@ int _uw_frame_state_for(param_1, param_2)
   int param_1;
   int param_2;
 {
+  undefined4 base_of_encoded_valueResult;
+  int size_of_encoded_valueResult;
   undefined4 uVar1;
   int iVar2;
-  int *piVar3;
-  int iVar4;
+  int *unwind_Find_FDEResult;
+  int extract_cie_infoResult;
   int iVar5;
   int iVar6;
   uint uVar7;
@@ -722,33 +724,33 @@ int _uw_frame_state_for(param_1, param_2)
   _memset(param_2,0,0x3a4);
   *(undefined4 *)(param_1 + 0x1c4) = 0;
   *(undefined4 *)(param_1 + 0x1d4) = 0;
-  piVar3 = ((int (*)())__Unwind_Find_FDE)((void *)(*(int *)(param_1 + 0x1c0) + -1),
+  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)(*(int *)(param_1 + 0x1c0) + -1),
                              (dwarf_eh_bases *)(param_1 + 0x1c8));
   uVar1 = 5;
-  if (piVar3 != (int *)0x0) {
+  if (unwind_Find_FDEResult != (int *)0x0) {
     *(undefined4 *)(param_2 + 0x38c) = *(undefined4 *)(param_1 + 0x1d0);
-    iVar2 = piVar3[1];
-    iVar6 = (int)piVar3 + (4 - iVar2);
-    iVar4 = ((int (*)())_extract_cie_info)(iVar6,param_1,param_2);
+    iVar2 = unwind_Find_FDEResult[1];
+    iVar6 = (int)unwind_Find_FDEResult + (4 - iVar2);
+    extract_cie_infoResult = ((int (*)())_extract_cie_info)(iVar6,param_1,param_2);
     uVar1 = 3;
-    if (iVar4 != 0) {
+    if (extract_cie_infoResult != 0) {
       iVar5 = 0;
-      ((int (*)())_execute_cfa_program)(iVar4,iVar6 + *(int *)((int)piVar3 + (4 - iVar2)) + 4,param_1,param_2);
-      iVar2 = _size_of_encoded_value_97c1a2c8((uint)*(byte *)(param_2 + 0x39d));
-      iVar2 = (int)piVar3 + iVar2 * 2 + 8;
+      ((int (*)())_execute_cfa_program)(extract_cie_infoResult,iVar6 + *(int *)((int)unwind_Find_FDEResult + (4 - iVar2)) + 4,param_1,param_2);
+      size_of_encoded_valueResult = _size_of_encoded_value_97c1a2c8((uint)*(byte *)(param_2 + 0x39d));
+      iVar2 = (int)unwind_Find_FDEResult + size_of_encoded_valueResult * 2 + 8;
       if (*(char *)(param_2 + 0x39f) != '\0') {
         iVar2 = _read_uleb128_97c1a3ec(iVar2,local_30);
         iVar5 = iVar2 + local_30[0];
       }
       uVar7 = (uint)*(byte *)(param_2 + 0x39e);
       if (uVar7 != 0xff) {
-        uVar1 = _base_of_encoded_value(uVar7,param_1);
-        iVar2 = _read_encoded_value_with_base_97c1a468(uVar7,uVar1,iVar2,param_1 + 0x1c4);
+        base_of_encoded_valueResult = _base_of_encoded_value(uVar7,param_1);
+        iVar2 = _read_encoded_value_with_base_97c1a468(uVar7,base_of_encoded_valueResult,iVar2,param_1 + 0x1c4);
       }
       if (iVar5 == 0) {
         iVar5 = iVar2;
       }
-      ((int (*)())_execute_cfa_program)(iVar5,(int)piVar3 + *piVar3 + 4,param_1,param_2);
+      ((int (*)())_execute_cfa_program)(iVar5,(int)unwind_Find_FDEResult + *unwind_Find_FDEResult + 4,param_1,param_2);
       uVar1 = 0;
     }
   }
@@ -761,7 +763,7 @@ int ___frame_state_for(param_1, param_2)
   int param_2;
 {
   char cVar1;
-  int iVar2;
+  int uw_frame_state_forResult;
   undefined1 *puVar3;
   char *pcVar4;
   undefined4 *puVar5;
@@ -780,9 +782,9 @@ int ___frame_state_for(param_1, param_2)
   puVar3 = auStack_5a0;
   _memset(puVar3,0,0x1d8);
   local_3e0 = param_1 + 1;
-  iVar2 = ((int (*)())_uw_frame_state_for)(puVar3,&local_3c0);
+  uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(puVar3,&local_3c0);
   iVar6 = 0;
-  if ((iVar2 == 0) && (local_38 != 2)) {
+  if ((uw_frame_state_forResult == 0) && (local_38 != 2)) {
     iVar6 = 0x4e;
     puVar5 = (undefined4 *)(param_2 + 0x10);
     pcVar4 = (char *)(param_2 + 0x14c);
@@ -910,13 +912,14 @@ int _uw_install_context_1(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int pthread_onceResult;
   byte *pbVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   
-  iVar2 = _pthread_once((pthread_once_t *)&_once_regsizes_0,DAT_a7b7c084);
-  if ((iVar2 != 0) || (_dwarf_reg_size_table == '\0')) {
+  pthread_onceResult = _pthread_once((pthread_once_t *)&_once_regsizes_0,DAT_a7b7c084);
+  if ((pthread_onceResult != 0) || (_dwarf_reg_size_table == '\0')) {
     _dwarf_reg_size_table = '\x04';
     DAT_a7b7ea7d = 4;
     DAT_a7b7ea7e = 4;
@@ -1049,16 +1052,16 @@ int __Unwind_RaiseException_Phase2(param_1, param_2)
 {
   uint uVar1;
   bool bVar2;
-  int iVar3;
+  int uw_frame_state_forResult;
   int iVar4;
   undefined1 auStack_3c0 [912];
   code *local_30;
   
   while( true ) {
-    iVar3 = ((int (*)())_uw_frame_state_for)(param_2,auStack_3c0);
+    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(param_2,auStack_3c0);
     iVar4 = 2;
     uVar1 = (uint)(*(int *)(param_2 + 0x1c0) == param_1[4]);
-    if ((iVar3 != 0) ||
+    if ((uw_frame_state_forResult != 0) ||
        ((local_30 != (code *)0x0 &&
         ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,param_2,2), iVar4 == 7 ||
          (bVar2 = iVar4 != 8, iVar4 = 2, bVar2)))))) break;
@@ -1109,6 +1112,7 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  int uw_frame_state_forResult;
   int iVar1;
   int iVar2;
   undefined4 a1;
@@ -1120,17 +1124,17 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
   pcVar3 = (code *)param_1[3];
   a6 = param_1[4];
   while( true ) {
-    iVar1 = ((int (*)())_uw_frame_state_for)(param_2,auStack_3d0);
-    if ((iVar1 != 0) && (iVar1 != 5)) {
+    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(param_2,auStack_3d0);
+    if ((uw_frame_state_forResult != 0) && (uw_frame_state_forResult != 5)) {
       return 2;
     }
     a1 = 10;
-    if (iVar1 == 5) {
+    if (uw_frame_state_forResult == 5) {
       a1 = 0x1a;
     }
     iVar2 = (*pcVar3)(1,a1,*param_1,param_1[1],param_1,param_2,a6);
     if (iVar2 != 0) break;
-    if (iVar1 == 5) {
+    if (uw_frame_state_forResult == 5) {
       return 5;
     }
     if (local_40 != (code *)0x0) {
@@ -1611,12 +1615,12 @@ LAB_97c1c810:
 int ___deregister_frame(fde)
   void *fde;
 {
-  void *pvVar1;
+  void *deregister_frame_infoResult;
   undefined4 extraout_r3;
   
   if (*(int *)fde != 0) {
-    pvVar1 = ___deregister_frame_info(fde);
-    _free(pvVar1);
+    deregister_frame_infoResult = ___deregister_frame_info(fde);
+    _free(deregister_frame_infoResult);
     return extraout_r3;
   }
   return fde;
@@ -1662,8 +1666,8 @@ int _get_cie_encoding(param_1)
 {
   int length;
   char cVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int read_sleb128Result;
+  undefined4 read_uleb128Result;
   byte *pbVar4;
   byte bVar5;
   char *pcVar6;
@@ -1674,9 +1678,9 @@ int _get_cie_encoding(param_1)
   bVar5 = 0;
   if (*(char *)(param_1 + 9) == 'z') {
     length = _strlen(param_1 + 9);
-    uVar3 = ((int (*)())_read_uleb128_97c1c41c)(param_1 + 9 + length + 1,auStack_20);
-    iVar2 = ((int (*)())_read_sleb128_97c1c44c)(uVar3,auStack_1c);
-    pbVar4 = (byte *)((int (*)())_read_uleb128_97c1c41c)(iVar2 + 1,auStack_20);
+    read_uleb128Result = ((int (*)())_read_uleb128_97c1c41c)(param_1 + 9 + length + 1,auStack_20);
+    read_sleb128Result = ((int (*)())_read_sleb128_97c1c44c)(read_uleb128Result,auStack_1c);
+    pbVar4 = (byte *)((int (*)())_read_uleb128_97c1c41c)(read_sleb128Result + 1,auStack_20);
     for (pcVar6 = (char *)(param_1 + 10); cVar1 = *pcVar6, cVar1 != 'R'; pcVar6 = pcVar6 + 1) {
       if (cVar1 == 'P') {
         pbVar4 = (byte *)((int (*)())_read_encoded_value_with_base_97c1c498)(*pbVar4 & 0x7f,0,pbVar4 + 1,auStack_18);
@@ -1741,17 +1745,17 @@ int _fde_mixed_encoding_compare(param_1, param_2, param_3)
   int param_3;
 {
   undefined4 baseAddress;
-  uint uVar1;
+  uint get_cie_encodingResult;
   undefined4 uVar2;
   uint local_30;
   uint local_2c [5];
   
-  uVar1 = ((int (*)())_get_cie_encoding)((param_2 - *(int *)(param_2 + 4)) + 4);
-  baseAddress = ((int (*)())_base_from_object)(uVar1 & 0xff,param_1);
-  ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 & 0xff,baseAddress,param_2 + 8,&local_30);
-  uVar1 = ((int (*)())_get_cie_encoding)((param_3 - *(int *)(param_3 + 4)) + 4);
-  baseAddress = ((int (*)())_base_from_object)(uVar1 & 0xff,param_1);
-  ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 & 0xff,baseAddress,param_3 + 8,local_2c);
+  get_cie_encodingResult = ((int (*)())_get_cie_encoding)((param_2 - *(int *)(param_2 + 4)) + 4);
+  baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
+  ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,param_2 + 8,&local_30);
+  get_cie_encodingResult = ((int (*)())_get_cie_encoding)((param_3 - *(int *)(param_3 + 4)) + 4);
+  baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
+  ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,param_3 + 8,local_2c);
   uVar2 = 1;
   if (local_30 <= local_2c[0]) {
     if (local_30 < local_2c[0]) {
@@ -1999,7 +2003,7 @@ int _linear_search_fdes(param_1, param_2, param_3)
   int iVar1;
   undefined4 baseAddress;
   uint uVar3;
-  undefined4 uVar4;
+  undefined4 read_encoded_value_with_baseResult;
   uint uVar5;
   int *piVar6;
   int iVar7;
@@ -2030,8 +2034,8 @@ int _linear_search_fdes(param_1, param_2, param_3)
         uVar5 = local_40;
       }
       else {
-        uVar4 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar8,baseAddress,param_2 + 2,&local_40);
-        ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar3 & 0xf,0,uVar4,local_3c);
+        read_encoded_value_with_baseResult = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar8,baseAddress,param_2 + 2,&local_40);
+        ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar3 & 0xf,0,read_encoded_value_with_baseResult,local_3c);
         uVar5 = ((int (*)())_size_of_encoded_value_97c1c3a4)(uVar8);
         if (uVar5 < 4) {
           uVar5 = (1 << ((uVar5 & 7) << 3)) - 1;
@@ -2055,11 +2059,13 @@ int _search_object(param_1, param_2)
   uint *param_1;
   uint param_2;
 {
+  uint get_cie_encodingResult;
+  int linear_search_fdesResult;
   undefined4 baseAddress;
   uint uVar1;
   uint uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 read_encoded_value_with_baseResult;
+  undefined4 read_encoded_value_with_baseResult2;
   uint uVar5;
   uint uVar6;
   uint uVar7;
@@ -2107,8 +2113,8 @@ int _search_object(param_1, param_2)
           do {
             uVar8 = uVar2 + uVar7 >> 1;
             iVar10 = *(int *)(uVar8 * 4 + uVar6 + 8);
-            uVar4 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar5,baseAddress,iVar10 + 8,&local_38);
-            ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 >> 0x15 & 0xf,0,uVar4,local_34);
+            read_encoded_value_with_baseResult2 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar5,baseAddress,iVar10 + 8,&local_38);
+            ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 >> 0x15 & 0xf,0,read_encoded_value_with_baseResult2,local_34);
             if ((local_38 <= param_2) &&
                (uVar2 = uVar8 + 1, uVar8 = uVar7, param_2 < local_38 + local_34[0])) {
               return iVar10;
@@ -2126,10 +2132,10 @@ int _search_object(param_1, param_2)
         do {
           uVar6 = uVar7 + uVar1 >> 1;
           iVar10 = *(int *)(uVar6 * 4 + uVar5 + 8);
-          uVar2 = ((int (*)())_get_cie_encoding)((iVar10 - *(int *)(iVar10 + 4)) + 4);
-          baseAddress = ((int (*)())_base_from_object)(uVar2 & 0xff,param_1);
-          uVar3 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar2 & 0xff,baseAddress,iVar10 + 8,&local_40);
-          ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar2 & 0xf,0,uVar3,&local_3c);
+          get_cie_encodingResult = ((int (*)())_get_cie_encoding)((iVar10 - *(int *)(iVar10 + 4)) + 4);
+          baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
+          read_encoded_value_with_baseResult = ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,iVar10 + 8,&local_40);
+          ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xf,0,read_encoded_value_with_baseResult,&local_3c);
           if ((local_40 <= param_2) &&
              (uVar7 = uVar6 + 1, uVar6 = uVar1, param_2 < local_40 + local_3c)) {
             return iVar10;
@@ -2141,15 +2147,15 @@ int _search_object(param_1, param_2)
   }
   else {
     if ((uVar1 & 0x40000000) == 0) {
-      iVar10 = ((int (*)())_linear_search_fdes)(param_1,param_1[3],param_2);
-      return iVar10;
+      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(param_1,param_1[3],param_2);
+      return linear_search_fdesResult;
     }
     piVar9 = (int *)param_1[3];
     iVar10 = *piVar9;
     while (iVar10 != 0) {
-      iVar10 = ((int (*)())_linear_search_fdes)(param_1,iVar10,param_2);
-      if (iVar10 != 0) {
-        return iVar10;
+      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(param_1,iVar10,param_2);
+      if (linear_search_fdesResult != 0) {
+        return linear_search_fdesResult;
       }
       piVar9 = piVar9 + 1;
       iVar10 = *piVar9;
@@ -2429,7 +2435,7 @@ int _examine_objects(param_1, param_2, param_3)
   uint *puVar1;
   uint *puVar2;
   int iVar3;
-  int iVar4;
+  int getsectdatafromheaderResult;
   undefined4 uVar5;
   uint *puVar6;
   uint *puVar7;
@@ -2448,10 +2454,10 @@ LAB_97c1dbb0:
       return iVar8;
     }
     if ((*(uint *)(iVar3 + 0x14) & 1) == 0) {
-      iVar4 = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__DATA","__eh_frame",local_40);
-      if (iVar4 == 0) {
-        iVar4 = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__TEXT","__eh_frame",local_40);
-        if (iVar4 != 0) {
+      getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__DATA","__eh_frame",local_40);
+      if (getsectdatafromheaderResult == 0) {
+        getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__TEXT","__eh_frame",local_40);
+        if (getsectdatafromheaderResult != 0) {
           *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 4;
           goto LAB_97c1da58;
         }
@@ -2460,7 +2466,7 @@ LAB_97c1dbb0:
 LAB_97c1da58:
         if (local_40[0] != 0) {
           puVar7 = (uint *)0x0;
-          uVar9 = iVar4 + *(int *)(iVar3 + 8);
+          uVar9 = getsectdatafromheaderResult + *(int *)(iVar3 + 8);
           if (param_3 == 0) {
             puVar7 = (uint *)_calloc(1,0x1c);
           }

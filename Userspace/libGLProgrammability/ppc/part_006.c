@@ -1545,6 +1545,7 @@ int TSymbolTable__copyTable(this, symbolTable)
   unsigned char * this;
   unsigned char * symbolTable;
 {
+  int getenvResult;
   undefined4 atomicStore;
   undefined *puVar2;
   int iVar3;
@@ -1559,8 +1560,8 @@ int TSymbolTable__copyTable(this, symbolTable)
   puVar2 = PTR__S_force_new_a7b7c0e8;
   local_60 = (undefined4 *)0x0;
   if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-    iVar3 = _getenv("GLIBCPP_FORCE_NEW");
-    if (iVar3 == 0) {
+    getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+    if (getenvResult == 0) {
       do {
         if (in_RESERVE != '\0') {
           atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
@@ -8789,7 +8790,7 @@ int yy_get_next_buffer()
   int iVar2;
   int iVar3;
   void *pvVar4;
-  undefined4 uVar5;
+  undefined4 yy_flex_reallocResult;
   uint uVar6;
   undefined1 *puVar7;
   undefined1 *puVar8;
@@ -8835,8 +8836,8 @@ int yy_get_next_buffer()
             iVar3 = uVar6 + (uVar6 >> 3);
           }
           *(int *)(iVar2 + 0xc) = iVar3;
-          uVar5 = yy_flex_realloc(pvVar4,*(int *)(iVar2 + 0xc) + 2);
-          *(undefined4 *)(iVar2 + 4) = uVar5;
+          yy_flex_reallocResult = yy_flex_realloc(pvVar4,*(int *)(iVar2 + 0xc) + 2);
+          *(undefined4 *)(iVar2 + 4) = yy_flex_reallocResult;
         }
         iVar3 = *(int *)(iVar2 + 4);
         if (iVar3 == 0) {
@@ -8947,7 +8948,7 @@ int yyinput()
   byte *pbVar1;
   byte bVar2;
   int iVar3;
-  int iVar4;
+  int yy_get_next_bufferResult;
   
   *_yy_c_buf_p = _yy_hold_char;
   pbVar1 = _yy_c_buf_p;
@@ -8958,16 +8959,16 @@ int yyinput()
     }
     else {
       _yy_c_buf_p = _yy_c_buf_p + 1;
-      iVar4 = ((int (*)())yy_get_next_buffer)();
-      if (iVar4 == 1) {
+      yy_get_next_bufferResult = ((int (*)())yy_get_next_buffer)();
+      if (yy_get_next_bufferResult == 1) {
         return 0xffffffff;
       }
-      if (iVar4 < 2) {
-        if (iVar4 == 0) {
+      if (yy_get_next_bufferResult < 2) {
+        if (yy_get_next_bufferResult == 0) {
           _yy_c_buf_p = pbVar1 + (_yytext - iVar3);
         }
       }
-      else if (iVar4 == 2) {
+      else if (yy_get_next_bufferResult == 2) {
         ((int (*)())yyrestart)(_yyin);
         return 0xffffffff;
       }
