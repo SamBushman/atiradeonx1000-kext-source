@@ -175,6 +175,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             else: print('%s:%d: %s: neither %s nor %s in the segment' % (f, n, fn, old, new)); nerr += 1
             continue
         if new in declset: print('%s:%d: %s: new name %s collides with a declaration' % (f, n, fn, new)); nerr += 1; continue
+        if any(r[4] == new and r[3] != old for r in allrows):
+            print('%s:%d: %s: new name %s is already the name of another variable of the function' % (f, n, fn, new)); nerr += 1; continue
         if new not in {x for v_ in created.values() for x in v_} and olds.get(new) != old and any(re.search(wb(new), strip_strings(l)) for l in lines[s:e]):
             print('%s:%d: %s: new name %s is already used in the function' % (f, n, fn, new)); nerr += 1; continue
         for i, pt in todo: lines[i] = sub_part(lines[i], pt, old, new)

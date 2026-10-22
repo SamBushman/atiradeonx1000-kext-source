@@ -3083,26 +3083,40 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
   undefined4 opWord8;
   int element;
 {
+  int *vectorRegRecord;
+  int swizzleDiffers;
+  int variableInfo;
+  int vectorRegIndex;
+  int recordDirtyFlag;
+  uint firstWord;
+  uint loadWordTemplate;
+  uint rtField;
+  uint firstOffset;
+  uint offsetFromTable;
+  uint scanRegister;
+  uint scanIndex;
+  uint cacheLookupIndex;
+  uint *opOffsetList;
   unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  byte bVar1;
-  uint *puVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  undefined4 *puVar6;
-  uint *puVar7;
+  byte swizzleComponent;
+  uint *codeCursor;
+  int containsResult;
+  int elementCopy;
+  uint optionFlags;
+  undefined4 *emitCursorB;
+  uint *emitCursor;
   undefined4 uVar8;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
-  int *piVar12;
+  uint foundRegister;
+  uint matchRegister;
+  int bestPartialState;
+  int *regRecord;
   undefined1 auStack_40 [28];
   
-  iVar4 = element;
+  elementCopy = element;
   uVar8 = 0;
-  uVar9 = 0;
+  foundRegister = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opSwizzle;
-  iVar11 = 0;
+  bestPartialState = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = opIndexInfo;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opStorage;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = opFlags5;
@@ -3110,184 +3124,184 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
     regIndex = regIndex + 0x20;
   }
   compiler[regIndex * 0xe + 0xc] = compiler[0x391];
-  uVar5 = compiler[0x394];
+  optionFlags = compiler[0x394];
   compiler[0x391] = compiler[0x391] + 1;
   (*(uint * *)((unsigned char *)ghidra_home + 8)) = opOffsets;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opBank;
-  if ((uVar5 & 4) != 0) {
-    uVar5 = regIndex;
+  if ((optionFlags & 4) != 0) {
+    cacheLookupIndex = regIndex;
     if (compiler[0x393] != 0) {
-      uVar5 = regIndex - 0x20;
+      cacheLookupIndex = regIndex - 0x20;
     }
-    iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar5,opOffsets,opBank,opSwizzle,opIndexInfo,opStorage,opFlags5,opType,
+    containsResult = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,cacheLookupIndex,opOffsets,opBank,opSwizzle,opIndexInfo,opStorage,opFlags5,opType,
                        opWord7,opWord8,element);
-    if (iVar3 == 1) {
+    if (containsResult == 1) {
       return;
     }
-    uVar5 = compiler[0x394];
+    optionFlags = compiler[0x394];
   }
   if (compiler[0x393] == 0) {
-    if ((uVar5 & 4) != 0) {
-      uVar9 = 0;
-      piVar12 = compiler;
+    if ((optionFlags & 4) != 0) {
+      scanRegister = 0;
+      regRecord = compiler;
       do {
-        if ((*piVar12 == 0) &&
-           (iVar11 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar9,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+        if ((*regRecord == 0) &&
+           (bestPartialState = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,scanRegister,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
                                 (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,
-                                opWord8,iVar4), iVar11 == 1)) {
-          if (uVar9 != regIndex) {
-            puVar2 = (uint *)compiler[0x38c];
-            *puVar2 = regIndex << 0x15 | uVar9 << 0xb | 0xfc000090;
-            compiler[0x38c] = (int)(puVar2 + 1);
+                                opWord8,elementCopy), bestPartialState == 1)) {
+          if (scanRegister != regIndex) {
+            codeCursor = (uint *)compiler[0x38c];
+            *codeCursor = regIndex << 0x15 | scanRegister << 0xb | 0xfc000090;
+            compiler[0x38c] = (int)(codeCursor + 1);
             ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-                       (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,iVar4);
-            piVar12[0xc] = compiler[0x391];
+                       (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
+            regRecord[0xc] = compiler[0x391];
             goto LAB_97bd8938;
           }
-          if (*(char *)((int)piVar12 + 0x1a) == (*(char *)((unsigned char *)ghidra_home + 26))) {
+          if (*(char *)((int)regRecord + 0x1a) == (*(char *)((unsigned char *)ghidra_home + 26))) {
             return;
           }
         }
-        uVar9 = uVar9 + 1;
-        piVar12 = piVar12 + 0xe;
-      } while (uVar9 < 0x20);
+        scanRegister = scanRegister + 1;
+        regRecord = regRecord + 0xe;
+      } while (scanRegister < 0x20);
     }
     if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
       if (((*(int *)(compiler[0x389] + 0x38) == 0x8804) ||
           (*(int *)(compiler[0x389] + 0x38) == 0x8b30)) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
-        puVar7 = (uint *)compiler[0x38c];
-        *puVar7 = (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc10d0000;
-        bVar1 = *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4);
-        compiler[0x38c] = (int)(puVar7 + 1);
-        uVar9 = (*(uint * *)((unsigned char *)ghidra_home + 8))[bVar1];
-        puVar2 = puVar7 + 3;
-        puVar7[2] = regIndex << 0x15 | 0xec09433a;
-        puVar7[1] = uVar9 & 0xffff | 0xc12c0000;
+        emitCursor = (uint *)compiler[0x38c];
+        *emitCursor = (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy)] & 0xffff | 0xc10d0000;
+        swizzleComponent = *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy);
+        compiler[0x38c] = (int)(emitCursor + 1);
+        offsetFromTable = (*(uint * *)((unsigned char *)ghidra_home + 8))[swizzleComponent];
+        codeCursor = emitCursor + 3;
+        emitCursor[2] = regIndex << 0x15 | 0xec09433a;
+        emitCursor[1] = offsetFromTable & 0xffff | 0xc12c0000;
       }
       else {
-        puVar2 = (uint *)compiler[0x38c];
-        *puVar2 = regIndex << 0x15 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 |
-                  (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc0000000;
-        puVar2 = puVar2 + 1;
+        codeCursor = (uint *)compiler[0x38c];
+        *codeCursor = regIndex << 0x15 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 |
+                  (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy)] & 0xffff | 0xc0000000;
+        codeCursor = codeCursor + 1;
       }
-      compiler[0x38c] = (int)puVar2;
+      compiler[0x38c] = (int)codeCursor;
     }
     else {
       ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                  (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4) << 2 | 0x82ef0000;
-      puVar2[1] = regIndex << 0x15 | (((*(unsigned int *)((unsigned char *)ghidra_home + 24)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
-      compiler[0x38c] = (int)(puVar2 + 2);
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy) << 2 | 0x82ef0000;
+      codeCursor[1] = regIndex << 0x15 | (((*(unsigned int *)((unsigned char *)ghidra_home + 24)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
+      compiler[0x38c] = (int)(codeCursor + 2);
     }
     ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-               (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,iVar4);
+               (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
     return;
   }
-  if ((uVar5 & 4) != 0) {
-    piVar12 = compiler + 0x1c0;
-    uVar5 = 0;
+  if ((optionFlags & 4) != 0) {
+    vectorRegRecord = compiler + 0x1c0;
+    scanIndex = 0;
     do {
-      uVar10 = uVar5;
-      iVar3 = *piVar12;
-      piVar12 = piVar12 + 0xe;
-      if (iVar3 == 0) {
-        iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar10,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+      matchRegister = scanIndex;
+      recordDirtyFlag = *vectorRegRecord;
+      vectorRegRecord = vectorRegRecord + 0xe;
+      if (recordDirtyFlag == 0) {
+        containsResult = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,matchRegister,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
                            (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,
-                           iVar4);
-        if ((iVar3 == 3) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0)) {
-          iVar11 = 3;
-          uVar9 = uVar10;
+                           elementCopy);
+        if ((containsResult == 3) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0)) {
+          bestPartialState = 3;
+          foundRegister = matchRegister;
         }
-        else if (iVar3 - 1U < 2) break;
+        else if (containsResult - 1U < 2) break;
       }
-      uVar5 = uVar10 + 1;
-      uVar10 = uVar9;
-      iVar3 = iVar11;
-    } while (uVar5 < 0x20);
-    if (iVar3 != 0) {
-      iVar3 = regIndex - 0x20;
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = iVar3 * 0x200000 | uVar10 << 0x10 | uVar10 << 0xb | 0x10000484;
-      compiler[0x38c] = (int)(puVar2 + 1);
-      iVar11 = _memcmp(compiler + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
-      if (iVar11 != 0) {
+      scanIndex = matchRegister + 1;
+      matchRegister = foundRegister;
+      containsResult = bestPartialState;
+    } while (scanIndex < 0x20);
+    if (containsResult != 0) {
+      vectorRegIndex = regIndex - 0x20;
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = vectorRegIndex * 0x200000 | matchRegister << 0x10 | matchRegister << 0xb | 0x10000484;
+      compiler[0x38c] = (int)(codeCursor + 1);
+      swizzleDiffers = _memcmp(compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
+      if (swizzleDiffers != 0) {
         _PPCRuntimeCompilerBuildTransferSwizzle
-                  (auStack_40,compiler + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,iVar3,auStack_40);
+                  (auStack_40,compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,auStack_40);
       }
-      ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,iVar3,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-                 (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,iVar4);
-      compiler[uVar10 * 0xe + 0x1cc] = compiler[0x391];
+      ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,vectorRegIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+                 (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
+      compiler[matchRegister * 0xe + 0x1cc] = compiler[0x391];
 LAB_97bd8938:
       compiler[0x391] = compiler[0x391] + 1;
       return;
     }
   }
-  puVar2 = (*(uint * *)((unsigned char *)ghidra_home + 8));
+  opOffsetList = (*(uint * *)((unsigned char *)ghidra_home + 8));
   if (((*(int *)(compiler[0x389] + 0x38) == 0x8804) || (*(int *)(compiler[0x389] + 0x38) == 0x8b30))
      && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
     if ((compiler[0x394] & 8U) == 0) {
-      uVar9 = *(*(uint * *)((unsigned char *)ghidra_home + 8));
+      firstOffset = *(*(uint * *)((unsigned char *)ghidra_home + 8));
     }
     else {
-      uVar9 = 0;
+      firstOffset = 0;
       if (*(*(uint * *)((unsigned char *)ghidra_home + 8)) != 0) {
-        puVar2 = (uint *)compiler[0x38c];
-        *puVar2 = *(*(uint * *)((unsigned char *)ghidra_home + 8)) & 0xffff | 0x39e00000;
-        puVar2[1] = 0x10c0728c;
-        uVar9 = (regIndex - 0x20) * 0x200000;
-        puVar2[2] = 0x7c6d78ce;
-        puVar2[3] = 0x10a3728c;
-        puVar2[4] = 0x7c8c78ce;
-        puVar2[5] = uVar9 | 0x100419ae;
-        puVar2[6] = uVar9 | (regIndex - 0x20) * 0x10000 | 0x1000396e;
-        compiler[0x38c] = (int)(puVar2 + 7);
+        codeCursor = (uint *)compiler[0x38c];
+        *codeCursor = *(*(uint * *)((unsigned char *)ghidra_home + 8)) & 0xffff | 0x39e00000;
+        codeCursor[1] = 0x10c0728c;
+        rtField = (regIndex - 0x20) * 0x200000;
+        codeCursor[2] = 0x7c6d78ce;
+        codeCursor[3] = 0x10a3728c;
+        codeCursor[4] = 0x7c8c78ce;
+        codeCursor[5] = rtField | 0x100419ae;
+        codeCursor[6] = rtField | (regIndex - 0x20) * 0x10000 | 0x1000396e;
+        compiler[0x38c] = (int)(codeCursor + 7);
         goto LAB_97bd87b4;
       }
     }
-    puVar2 = (uint *)compiler[0x38c];
-    *puVar2 = uVar9 & 0xffff | 0x39e00000;
-    puVar2[1] = 0x7c6d78ce;
-    puVar2[2] = 0x7c8c78ce;
-    puVar2[3] = 0x10c0728c;
-    puVar2[4] = (regIndex - 0x20) * 0x200000 | 0x100419ae;
-    compiler[0x38c] = (int)(puVar2 + 5);
+    codeCursor = (uint *)compiler[0x38c];
+    *codeCursor = firstOffset & 0xffff | 0x39e00000;
+    codeCursor[1] = 0x7c6d78ce;
+    codeCursor[2] = 0x7c8c78ce;
+    codeCursor[3] = 0x10c0728c;
+    codeCursor[4] = (regIndex - 0x20) * 0x200000 | 0x100419ae;
+    compiler[0x38c] = (int)(codeCursor + 5);
     goto LAB_97bd87b4;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
-    uVar9 = *(*(uint * *)((unsigned char *)ghidra_home + 8));
-    if (((((uVar9 & 0xf) != 0) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[1] != uVar9 + 4)) ||
-        ((*(uint * *)((unsigned char *)ghidra_home + 8))[2] != uVar9 + 8)) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[3] != uVar9 + 0xc)) {
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | uVar9 & 0xffff | 0xc0000000;
-      compiler[0x38c] = (int)(puVar2 + 1);
-      puVar2[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 6) |
+    firstOffset = *(*(uint * *)((unsigned char *)ghidra_home + 8));
+    if (((((firstOffset & 0xf) != 0) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[1] != firstOffset + 4)) ||
+        ((*(uint * *)((unsigned char *)ghidra_home + 8))[2] != firstOffset + 8)) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[3] != firstOffset + 0xc)) {
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | firstOffset & 0xffff | 0xc0000000;
+      compiler[0x38c] = (int)(codeCursor + 1);
+      codeCursor[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 6) |
                   0xc0200000;
-      compiler[0x38c] = (int)(puVar2 + 2);
-      puVar2[2] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 10) |
+      compiler[0x38c] = (int)(codeCursor + 2);
+      codeCursor[2] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 10) |
                   0xc0400000;
-      compiler[0x38c] = (int)(puVar2 + 3);
-      puVar2[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 0xe) |
+      compiler[0x38c] = (int)(codeCursor + 3);
+      codeCursor[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 0xe) |
                   0xc0600000;
-      puVar2[4] = 0xd0030200;
-      puVar2[5] = 0xd0230204;
-      puVar2[6] = 0xd0430208;
-      puVar2[7] = 0xd063020c;
-      puVar2[8] = 0x39e00200;
-      puVar2[9] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
-      compiler[0x38c] = (int)(puVar2 + 10);
+      codeCursor[4] = 0xd0030200;
+      codeCursor[5] = 0xd0230204;
+      codeCursor[6] = 0xd0430208;
+      codeCursor[7] = 0xd063020c;
+      codeCursor[8] = 0x39e00200;
+      codeCursor[9] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
+      compiler[0x38c] = (int)(codeCursor + 10);
       goto LAB_97bd877c;
     }
-    if (uVar9 != 0) {
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = uVar9 & 0xffff | 0x39e00000;
-      uVar9 = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c0078ce;
+    if (firstOffset != 0) {
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = firstOffset & 0xffff | 0x39e00000;
+      loadWordTemplate = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c0078ce;
       goto LAB_97bd8640;
     }
-    puVar2 = (uint *)compiler[0x38c];
-    *puVar2 = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x800 | 0x7c0000ce;
-    compiler[0x38c] = (int)(puVar2 + 1);
+    codeCursor = (uint *)compiler[0x38c];
+    *codeCursor = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x800 | 0x7c0000ce;
+    compiler[0x38c] = (int)(codeCursor + 1);
   }
   else {
     if ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0) {
@@ -3295,50 +3309,50 @@ LAB_97bd8938:
     }
     ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),
                (*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
-    uVar9 = *puVar2;
-    if ((((uVar9 & 0xf) == 0) && (puVar2[1] == uVar9 + 4)) &&
-       ((puVar2[2] == uVar9 + 8 && (puVar2[3] == uVar9 + 0xc)))) {
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = 0x82ef0000;
-      uVar9 = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00b8ce;
+    firstWord = *opOffsetList;
+    if ((((firstWord & 0xf) == 0) && (opOffsetList[1] == firstWord + 4)) &&
+       ((opOffsetList[2] == firstWord + 8 && (opOffsetList[3] == firstWord + 0xc)))) {
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = 0x82ef0000;
+      loadWordTemplate = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00b8ce;
 LAB_97bd8640:
-      puVar2[1] = uVar9;
-      compiler[0x38c] = (int)(puVar2 + 2);
+      codeCursor[1] = loadWordTemplate;
+      compiler[0x38c] = (int)(codeCursor + 2);
     }
     else {
-      puVar6 = (undefined4 *)compiler[0x38c];
-      *puVar6 = 0x82ef0000;
-      puVar6[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00bc2e;
-      puVar6[2] = 0x82ef0004;
-      puVar6[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c20bc2e;
-      puVar6[4] = 0x82ef0008;
-      puVar6[5] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c40bc2e;
-      puVar6[6] = 0x82ef000c;
-      puVar6[7] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c60bc2e;
-      puVar6[8] = 0xd0030200;
-      puVar6[9] = 0xd0230204;
-      puVar6[10] = 0xd0430208;
-      puVar6[0xb] = 0xd063020c;
-      puVar6[0xc] = 0x39e00200;
-      puVar6[0xd] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
-      compiler[0x38c] = (int)(puVar6 + 0xe);
+      emitCursorB = (undefined4 *)compiler[0x38c];
+      *emitCursorB = 0x82ef0000;
+      emitCursorB[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00bc2e;
+      emitCursorB[2] = 0x82ef0004;
+      emitCursorB[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c20bc2e;
+      emitCursorB[4] = 0x82ef0008;
+      emitCursorB[5] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c40bc2e;
+      emitCursorB[6] = 0x82ef000c;
+      emitCursorB[7] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c60bc2e;
+      emitCursorB[8] = 0xd0030200;
+      emitCursorB[9] = 0xd0230204;
+      emitCursorB[10] = 0xd0430208;
+      emitCursorB[0xb] = 0xd063020c;
+      emitCursorB[0xc] = 0x39e00200;
+      emitCursorB[0xd] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
+      compiler[0x38c] = (int)(emitCursorB + 0xe);
 LAB_97bd877c:
       uVar8 = 1;
     }
   }
   if (opType - 3U < 2) {
-    puVar2 = (uint *)compiler[0x38c];
-    *puVar2 = (regIndex - 0x20) * 0x200000 | (regIndex - 0x20) * 0x800 | 0x1000034a;
-    compiler[0x38c] = (int)(puVar2 + 1);
+    codeCursor = (uint *)compiler[0x38c];
+    *codeCursor = (regIndex - 0x20) * 0x200000 | (regIndex - 0x20) * 0x800 | 0x1000034a;
+    compiler[0x38c] = (int)(codeCursor + 1);
   }
 LAB_97bd87b4:
   _PPCRuntimeCompilerSwizzleRegisterAV(compiler,regIndex - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex - 0x20,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,uVar8,iVar4);
-  iVar4 = _PPCRuntimeCompilerFindVariableInfo
+             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,uVar8,elementCopy);
+  variableInfo = _PPCRuntimeCompilerFindVariableInfo
                     (compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                      (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
-  *(undefined4 *)(iVar4 + 4) = 0;
+  *(undefined4 *)(variableInfo + 4) = 0;
   return;
 }
 
