@@ -7206,6 +7206,98 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   char *argR9;
   byte *argR10;
 {
+  undefined4 cfNameLength;
+  uint psnRecordIndex;
+  bool rgbSelectBNotSrcp;
+  bool rgbOperandBUsed;
+  bool rgbSrcpNeededFlag;
+  bool depthWriteFlag2;
+  bool rgbSelectCNotSrcp;
+  bool rgbOperandCUsed;
+  bool texEnableG;
+  uint rgbOutputWriteMask;
+  char cfAddressByte;
+  char rsColorSource;
+  char rgbPreOpKind;
+  int cfOpTableIndex;
+  int rgbDestMaskOffset;
+  int instructionNumberArg;
+  byte *rgbOpcodePtr;
+  byte *predicateControlPtr;
+  byte *dySwizzleTextZ;
+  char *dySwizzleTextX;
+  char *dySwizzleTextW;
+  char *dxSwizzleTextX;
+  char *dySwizzleTextY;
+  char *dxSwizzleTextW;
+  char *srcSwizzleTextX;
+  char *dxSwizzleTextY;
+  char *srcSwizzleTextZ;
+  int rsRecordNumber2;
+  int rgbThirdOperandUsed;
+  uint *semWaitTextPtr;
+  uint *alphaOpcodePtr;
+  uint *alphaOutIndexArg;
+  uint psnRecordKind;
+  uint alphaOperandUseMask;
+  bool alphaOutputEnableFlag2;
+  bool alphaSrcpNeededFlag;
+  bool rgbSelectANotSrcp;
+  bool rgbOperandAUsed;
+  bool texSwizzleEnabled;
+  bool texEnableR;
+  bool alphaOutputEnableFlag;
+  bool alphaSrcpNeededFmt1;
+  uint rgbSelectCRaw;
+  uint recordKind2;
+  uint rsColorWriteMask;
+  uint psnRecordCount;
+  uint *srcSwizzleTextPtr;
+  uint *registerTextPtr;
+  uint *rsNextRecordCopy2;
+  uint *alphaAddrAFmt1;
+  byte predicateModeByteAlpha2;
+  byte alphaOutputScaleByte2;
+  byte alphaOpcodeByte2;
+  byte predicateModeByte2;
+  byte rgbOutputScaleByte2;
+  byte rgbOpcodeByte2;
+  byte rgbTempWriteMask2;
+  byte srcpNeedBit;
+  byte predicateModeByteAlpha;
+  byte predicateModeByte;
+  byte texDySwizzleByte;
+  byte texDxSwizzleByte;
+  byte texOpcodeByte;
+  byte texSrcSwizzleByte2;
+  byte texSrcSwizzleByte;
+  byte texEnableBits;
+  byte alphaOutputScaleByte;
+  byte alphaOpcodeByte;
+  byte rgbOutputScaleByte;
+  byte rgbOpcodeByte;
+  uint *operandText1Ptr;
+  uint *alphaUseBitB;
+  uint *operandText5PtrFmt1;
+  uint *rgbOutIndexArg;
+  uint *operandText5Ptr;
+  uint *rgbDestMaskTextPtr;
+  uint *aluIndexArg;
+  uint *operandText0Ptr;
+  uint *operandText4Ptr2;
+  uint *neutralLineArg0;
+  uint *psnLineArg1;
+  uint *alphaSrcpTextPtr;
+  uint alphaSelectCBaseArg;
+  uint rgbOpcodeBit;
+  uint dySwizzleWOffset;
+  uint dxSwizzleWOffset;
+  uint texComponentEnableBits;
+  uint neutralRecordCountArg;
+  uint psnLineArg0;
+  uint rgbOperandUseMask;
+  uint usListStaleZero;
+  uint nominalCycleCount;
   uint *alphaAddrA;
   uint *texUnit2;
   uint *texOpcode;
@@ -7233,51 +7325,51 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   char rgbOutIndex;
   char alphaTempEnable;
   char alphaPreOp;
-  bool bVar1;
-  bool bVar2;
-  byte bVar3;
+  bool texEnableA;
+  bool depthWriteFlag;
+  byte rgbTempWriteMask;
   byte texWriteMask;
   char depthWrite;
   char alphaOutIndex;
   ushort texSrcReg2;
   ushort texDestReg2;
-  char cVar9;
-  int iVar10;
-  undefined4 uVar11;
-  int iVar12;
-  uint *puVar13;
-  char *pcVar14;
-  uint uVar15;
-  char *pcVar16;
-  uint *puVar17;
-  uint uVar18;
-  uint uVar19;
-  char *pcVar20;
-  uint *puVar21;
-  char *pcVar22;
-  bool bVar24;
-  uint uVar23;
-  byte *pbVar25;
-  uint uVar26;
-  uint uVar27;
-  uint uVar28;
+  char levelLetter;
+  int auxCheckResult;
+  undefined4 operandAuxWord;
+  int cfNameCompare;
+  uint *dumpIdArg;
+  char *maskTextX;
+  uint rgbSelectCRawFmt1;
+  char *maskTextY;
+  uint *aluNumberArg;
+  uint rgbOutputMaskText;
+  uint dumpLabelArg;
+  char *maskTextZ;
+  uint *srcpTextAPtr;
+  char *maskTextW;
+  bool statsLoopMore;
+  uint rgbSrcpNeeded;
+  byte *dxSwizzleTextZ;
+  uint levelNumber;
+  uint recordKind;
+  uint alphaOpcodeBit;
   uint rgbSelectB;
   uint uVar30;
-  int iVar31;
-  uint *puVar32;
-  uint *puVar33;
+  int statsIndex;
+  uint *rgbAddrCFmt1;
+  uint *rgbAddrBFmt1;
   uint texUnit;
-  uint *puVar35;
+  uint *rsNextRecordCopy;
   uint rgbAddrA2;
-  uint uVar37;
-  undefined **ppuVar38;
-  bool bVar40;
-  undefined *puVar39;
+  uint rsRecordNumber;
+  undefined **cfOpNameCursor;
+  bool texEnableB;
+  undefined *cfOpNameEntry;
   uint *statByteCursor;
-  double dVar42;
+  double printfResultScratch;
   uint dumpLabelSlot;
   uint *dumpIdSlot;
-  undefined2 uVar43;
+  undefined2 operandAuxHigh;
   uint *in_stack_fffffd2c;
   undefined4 predicateText;
   uint semWaitText;
@@ -7311,19 +7403,19 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   int cfIndex;
   int texIndex;
   uint *aluIndex;
-  uint local_ec;
+  uint cfCompareCode;
   int texNumber;
   uint rgbSelectABase;
   uint rgbSelectBBase;
-  uint local_dc;
+  uint rgbSelectCBase;
   uint alphaSelectABase;
   uint alphaSelectBBase;
   uint alphaSelectCBase;
-  byte *local_cc;
-  uint *local_c8;
+  byte *rgbOpcodePtr2;
+  uint *alphaOpcodePtr2;
   uint alphaModC;
   uint alphaModB;
-  uint local_bc;
+  uint alphaModA;
   uint rgbModC;
   uint rgbModB;
   uint rgbModA;
@@ -7331,674 +7423,674 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   uint previousIsAlu;
   uint *aluNumber;
   uint recordCount;
-  uint *local_9c;
-  uint local_98;
+  uint *alphaAuxD;
+  uint alphaUseMaskNeutral;
   uint alphaModC2;
   uint alphaModB2;
-  uint local_8c;
+  uint alphaModA2;
   uint rgbModC2;
   uint rgbModB2;
   uint rgbModA2;
   uint recordCount2;
-  uint local_78;
-  uint local_74;
+  uint texFlagsByte;
+  uint cfPrevAluDest;
   int instructionNumber;
   ushort rgbAuxC;
-  uint *local_68;
-  uint *local_64;
-  uint *local_60;
-  int local_5c;
+  uint *operandText2Ptr;
+  uint *operandText3Ptr;
+  uint *operandText4Ptr;
+  int blankLineFormatOffset;
   
   dumpLabelSlot = dumpLabel;
   dumpIdSlot = dumpId;
   ((int (*)())FUN_000d0b68)(pixelShader,1,dumpId,argR6,argR7,argR8,argR9,argR10);
   if ((*(byte *)((int)pixelShader + 0xf) & 0x10) == 0) {
     recordCount = pixelShader[2];
-    uVar19 = dumpLabelSlot;
-    puVar13 = dumpIdSlot;
+    dumpLabelArg = dumpLabelSlot;
+    dumpIdArg = dumpIdSlot;
     ((int (*)())FUN_000d03b4)(0,"======== Begin Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
     if (*(short *)(pixelShader + 5) == 0) {
-      ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
     }
     else {
-      iVar31 = 0;
-      ((int (*)())FUN_000d03b4)(0," Shader stats:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      statsIndex = 0;
+      ((int (*)())FUN_000d03b4)(0," Shader stats:\n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     Levels:                 %2d\n",(uint)*(ushort *)((int)pixelShader + 0x16),
-                   puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),puVar13,
+                   dumpIdArg,argR7,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),dumpIdArg,
                    argR7,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
-                   puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),puVar13,
+                   dumpIdArg,argR7,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),dumpIdArg,
                    argR7,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
-                   puVar13,argR7,argR8,argR9,argR10);
+                   dumpIdArg,argR7,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
-                   puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),puVar13,
+                   dumpIdArg,argR7,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),dumpIdArg,
                    argR7,argR8,argR9,argR10);
-      uVar19 = (uint)*(ushort *)((int)pixelShader + 0x26);
-      ((int (*)())FUN_000d03b4)(0,"     Nominal cycle count:    %2d\n",uVar19,puVar13,argR7,argR8,argR9,
+      nominalCycleCount = (uint)*(ushort *)((int)pixelShader + 0x26);
+      ((int (*)())FUN_000d03b4)(0,"     Nominal cycle count:    %2d\n",nominalCycleCount,dumpIdArg,argR7,argR8,argR9,
                    argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Tex lookup counts:     ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0,"     Tex lookup counts:     ",nominalCycleCount,dumpIdArg,argR7,argR8,argR9,argR10);
       statByteCursor = pixelShader;
       do {
-        uVar19 = (uint)*(byte *)((int)statByteCursor + 0x2a);
-        ((int (*)())FUN_000d03b4)(0," %2d",uVar19,puVar13,argR7,argR8,argR9,argR10);
-        bVar24 = iVar31 != 0xf;
+        dumpLabelArg = (uint)*(byte *)((int)statByteCursor + 0x2a);
+        ((int (*)())FUN_000d03b4)(0," %2d",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
+        statsLoopMore = statsIndex != 0xf;
         statByteCursor = (uint *)((int)statByteCursor + 1);
-        iVar31 = iVar31 + 1;
-      } while (bVar24);
-      ((int (*)())FUN_000d03b4)(0,"\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+        statsIndex = statsIndex + 1;
+      } while (statsLoopMore);
+      ((int (*)())FUN_000d03b4)(0,"\n \n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
     }
-    ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+    ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
     if ((pixelShader[0x12] == 1) && (recordCount != 0)) {
       rsScanRecord = pixelShader + 0x24;
-      uVar37 = 1;
+      rsRecordNumber = 1;
       rsNextRecord = rsScanRecord;
       rsRecord = pixelShader + 0x12;
       do {
-        puVar35 = rsNextRecord;
-        uVar19 = uVar37 - 1;
-        ((int (*)())FUN_000d03b4)(0,"   rs %02d:",uVar19,puVar13,argR7,argR8,argR9,argR10);
+        rsNextRecordCopy = rsNextRecord;
+        dumpLabelArg = rsRecordNumber - 1;
+        ((int (*)())FUN_000d03b4)(0,"   rs %02d:",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
         if (*(char *)((int)rsRecord + 0xb) == '\0') {
           if (*(char *)((int)rsRecord + 9) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"                         ",uVar19,puVar13,argR7,argR8,argR9,
+            ((int (*)())FUN_000d03b4)(0,"                         ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,
                          argR10);
             goto LAB_000d3b80;
           }
 LAB_000d3be0:
-          ((int (*)())FUN_000d03b4)(0,"\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0,"\n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
         }
         else {
-          uVar19 = (uint)*(ushort *)((int)rsRecord + 6);
+          dumpLabelArg = (uint)*(ushort *)((int)rsRecord + 6);
           argR7 = (uint)*(byte *)((int)rsRecord + 10);
-          puVar13 = (uint *)((*(byte *)((int)rsRecord + 0xf) & 0xf ^ 0xf) * 5 + 0x1dc279);
-          ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          dumpIdArg = (uint *)((*(byte *)((int)rsRecord + 0xf) & 0xf ^ 0xf) * 5 + 0x1dc279);
+          ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
           if (*(char *)((int)rsRecord + 0xd) == '\0') {
             if (*(char *)((int)rsRecord + 0xb) == '\x02') {
-              ((int (*)())FUN_000d03b4)(0," fbuf  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0," fbuf  ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
             }
             else if (*(char *)((int)rsRecord + 0xb) == '\x03') {
-              ((int (*)())FUN_000d03b4)(0," back  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0," back  ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
             }
             else {
               if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
-              ((int (*)())FUN_000d03b4)(0,"       ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"       ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0," biased",uVar19,puVar13,argR7,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0," biased",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
           }
 LAB_000d3b80:
           if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
-          uVar19 = (uint)*(ushort *)(rsRecord + 1);
+          dumpLabelArg = (uint)*(ushort *)(rsRecord + 1);
           argR7 = (uint)*(byte *)(rsRecord + 2);
-          puVar13 = (uint *)((*(byte *)((int)rsRecord + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
-          ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          dumpIdArg = (uint *)((*(byte *)((int)rsRecord + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
+          ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
           if (*(char *)(rsRecord + 3) == '\0') goto LAB_000d3be0;
-          ((int (*)())FUN_000d03b4)(0," adjusted\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0," adjusted\n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
         }
-        uVar37 = uVar37 + 1;
+        rsRecordNumber = rsRecordNumber + 1;
         if (*rsScanRecord != 1) break;
         rsScanRecord = rsScanRecord + 0x12;
-        rsNextRecord = puVar35 + 0x12;
-        rsRecord = puVar35;
-      } while (uVar37 <= recordCount);
+        rsNextRecord = rsNextRecordCopy + 0x12;
+        rsRecord = rsNextRecordCopy;
+      } while (rsRecordNumber <= recordCount);
     }
     else {
-      uVar37 = 1;
+      rsRecordNumber = 1;
     }
-    ((int (*)())FUN_000d03b4)(0," \n US Program:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
-    if (uVar37 <= recordCount) {
-      uVar26 = 0;
-      instructionRecord = pixelShader + uVar37 * 0x12;
+    ((int (*)())FUN_000d03b4)(0," \n US Program:\n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
+    if (rsRecordNumber <= recordCount) {
+      levelNumber = 0;
+      instructionRecord = pixelShader + rsRecordNumber * 0x12;
       previousIsAlu = 1;
       aluNumber = (uint *)0x0;
       texNumber = 0;
-      uVar19 = 0;
+      usListStaleZero = 0;
       do {
-        uVar27 = *instructionRecord;
-        if (((uVar27 == 2) && ((previousIsAlu != 0 || (*(char *)(instructionRecord + 8) != '\0')))) ||
-           (uVar26 == 0)) {
-          if (uVar26 < 0x34) {
+        recordKind = *instructionRecord;
+        if (((recordKind == 2) && ((previousIsAlu != 0 || (*(char *)(instructionRecord + 8) != '\0')))) ||
+           (levelNumber == 0)) {
+          if (levelNumber < 0x34) {
             (*(unsigned short *)((unsigned char *)&(predicateText) + 1)) = (ushort)(*(unsigned int *)((unsigned char *)&(predicateText) + 0)) & 0xff;
           }
           else {
-            (*(unsigned short *)((unsigned char *)&(predicateText) + 1)) = (ushort)(byte)((char)(uVar26 / 0x34) + 0x2f) << 8;
+            (*(unsigned short *)((unsigned char *)&(predicateText) + 1)) = (ushort)(byte)((char)(levelNumber / 0x34) + 0x2f) << 8;
           }
-          cVar9 = (char)(uVar26 % 0x34);
-          if (uVar26 % 0x34 < 0x1a) {
-            cVar9 = cVar9 + 'A';
+          levelLetter = (char)(levelNumber % 0x34);
+          if (levelNumber % 0x34 < 0x1a) {
+            levelLetter = levelLetter + 'A';
           }
           else {
-            cVar9 = cVar9 + 'G';
+            levelLetter = levelLetter + 'G';
           }
-          (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(cVar9,(*(unsigned short *)((unsigned char *)&(predicateText) + 1)));
-          ((int (*)())FUN_000d03b4)(0," \n   Level %s:\n",&predicateText,puVar13,uVar19,argR8,argR9,argR10);
-          uVar26 = uVar26 + 1;
-          uVar27 = *instructionRecord;
+          (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(levelLetter,(*(unsigned short *)((unsigned char *)&(predicateText) + 1)));
+          ((int (*)())FUN_000d03b4)(0," \n   Level %s:\n",&predicateText,dumpIdArg,usListStaleZero,argR8,argR9,argR10);
+          levelNumber = levelNumber + 1;
+          recordKind = *instructionRecord;
         }
-        previousIsAlu = (uint)(uVar27 - 3 < 2);
-        if (uVar27 == 2) {
-          ((int (*)())FUN_000d03b4)(0,"     tex %02d    :  ",texNumber,puVar13,uVar19,argR8,argR9,argR10);
+        previousIsAlu = (uint)(recordKind - 3 < 2);
+        if (recordKind == 2) {
+          ((int (*)())FUN_000d03b4)(0,"     tex %02d    :  ",texNumber,dumpIdArg,usListStaleZero,argR8,argR9,argR10);
           texSrcReg = (uint)*(ushort *)((int)instructionRecord + 0xe);
           texDestReg = (uint)*(ushort *)(instructionRecord + 3);
           texUnit = (uint)*(byte *)((int)instructionRecord + 0x19);
           if ((*(byte *)((int)instructionRecord + 0x1a) < 5) &&
              ((1 << ((int)(char)*(byte *)((int)instructionRecord + 0x1a) & 0x3fU) & 0x1aU) != 0)) {
-            ((int (*)())FUN_000d03b4)(0,"r%02d.rgba = ",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"r%02d.rgba = ",texDestReg,dumpIdArg,usListStaleZero,argR8,argR9,argR10);
           }
           texOpcode = (uint *)(uint)*(byte *)((int)instructionRecord + 0x1a);
-          puVar13 = (uint *)(*(byte *)((int)instructionRecord + 0x1f) & 0xf ^ 0xf);
+          dumpIdArg = (uint *)(*(byte *)((int)instructionRecord + 0x1f) & 0xf ^ 0xf);
           if (((unsigned char *)0x4) < texOpcode) {
-            ((int (*)())FUN_000d03b4)(0,"???()\n",texDestReg,puVar13,uVar19,argR8,texOpcode,argR10);
+            ((int (*)())FUN_000d03b4)(0,"???()\n",texDestReg,dumpIdArg,usListStaleZero,argR8,texOpcode,argR10);
             argR9 = (char *)texOpcode;
           }
           else {
             argR9 = (char *)(0);
             switch((int)texOpcode) {
             case 0x0:
-              ((int (*)())FUN_000d03b4)(0,"NOP\n",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"NOP\n",texDestReg,dumpIdArg,usListStaleZero,argR8,argR9,argR10);
               break;
             case 0x1:
-              puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"lookup(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,argR9,
+              dumpIdArg = (uint *)((int)dumpIdArg * 5 + 0x1dc279);
+              ((int (*)())FUN_000d03b4)(0,"lookup(r%02d.%s, tex%02d)\n",texSrcReg,dumpIdArg,texUnit,argR8,argR9,
                            argR10);
               break;
             case 0x2:
-              puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"kill(r%02d.%s)\n",texSrcReg,puVar13,uVar19,argR8,argR9,argR10);
+              dumpIdArg = (uint *)((int)dumpIdArg * 5 + 0x1dc279);
+              ((int (*)())FUN_000d03b4)(0,"kill(r%02d.%s)\n",texSrcReg,dumpIdArg,usListStaleZero,argR8,argR9,argR10);
               break;
             case 0x3:
-              puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"lookup_proj(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,
+              dumpIdArg = (uint *)((int)dumpIdArg * 5 + 0x1dc279);
+              ((int (*)())FUN_000d03b4)(0,"lookup_proj(r%02d.%s, tex%02d)\n",texSrcReg,dumpIdArg,texUnit,argR8,
                            argR9,argR10);
               break;
             case 0x4:
-              puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,
+              dumpIdArg = (uint *)((int)dumpIdArg * 5 + 0x1dc279);
+              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(r%02d.%s, tex%02d)\n",texSrcReg,dumpIdArg,texUnit,argR8,
                            argR9,argR10);
             }
           }
           texNumber = texNumber + 1;
         }
-        else if ((1 < uVar27) && (uVar27 < 5)) {
-          local_cc = (byte *)((int)instructionRecord + 0x31);
+        else if ((1 < recordKind) && (recordKind < 5)) {
+          rgbOpcodePtr2 = (byte *)((int)instructionRecord + 0x31);
           switch(*(undefined1 *)((int)instructionRecord + 0x31)) {
           case 0:
           case 3:
           case 7:
           case 8:
-            uVar27 = 0;
-            bVar24 = true;
-            uVar19 = 3;
-            iVar31 = 1;
+            alphaOperandUseMask = 0;
+            alphaSrcpNeededFmt1 = true;
+            rgbOperandUseMask = 3;
+            rgbThirdOperandUsed = 1;
             break;
           case 1:
           case 4:
           case 5:
-            uVar27 = 0;
-            bVar24 = true;
-            uVar19 = 1;
-            iVar31 = 0;
+            alphaOperandUseMask = 0;
+            alphaSrcpNeededFmt1 = true;
+            rgbOperandUseMask = 1;
+            rgbThirdOperandUsed = 0;
             break;
           case 2:
-            uVar27 = 3;
-            bVar24 = true;
-            uVar19 = 1;
-            iVar31 = 0;
+            alphaOperandUseMask = 3;
+            alphaSrcpNeededFmt1 = true;
+            rgbOperandUseMask = 1;
+            rgbThirdOperandUsed = 0;
             break;
           default:
-            uVar27 = 0;
-            bVar24 = false;
-            uVar19 = 0;
-            iVar31 = 0;
+            alphaOperandUseMask = 0;
+            alphaSrcpNeededFmt1 = false;
+            rgbOperandUseMask = 0;
+            rgbThirdOperandUsed = 0;
             break;
           case 9:
-            uVar27 = 0;
-            bVar24 = true;
-            uVar19 = 0;
-            iVar31 = 0;
+            alphaOperandUseMask = 0;
+            alphaSrcpNeededFmt1 = true;
+            rgbOperandUseMask = 0;
+            rgbThirdOperandUsed = 0;
           }
-          local_c8 = instructionRecord + 0x10;
+          alphaOpcodePtr2 = instructionRecord + 0x10;
           if (*(byte *)(instructionRecord + 0x10) < 0xc) {
-            uVar28 = 1 << ((int)(char)*(byte *)(instructionRecord + 0x10) & 0x3fU);
-            if ((uVar28 & 0x61) == 0) {
-              if ((uVar28 & 0xc) == 0) {
-                if ((uVar28 & 0xf80) != 0) {
-                  uVar27 = uVar27 | 1;
+            alphaOpcodeBit = 1 << ((int)(char)*(byte *)(instructionRecord + 0x10) & 0x3fU);
+            if ((alphaOpcodeBit & 0x61) == 0) {
+              if ((alphaOpcodeBit & 0xc) == 0) {
+                if ((alphaOpcodeBit & 0xf80) != 0) {
+                  alphaOperandUseMask = alphaOperandUseMask | 1;
                 }
               }
               else {
-                uVar27 = 3;
+                alphaOperandUseMask = 3;
               }
             }
             else {
-              uVar27 = 7;
+              alphaOperandUseMask = 7;
             }
           }
           alphaSelectC2 = (byte *)(uint)*(byte *)((int)instructionRecord + 0x3b);
           rgbAddrA2 = (uint)*(ushort *)((int)instructionRecord + 0xe);
-          puVar33 = (uint *)(uint)*(ushort *)(instructionRecord + 4);
-          puVar32 = (uint *)(uint)*(ushort *)((int)instructionRecord + 0x12);
-          puVar35 = (uint *)(uint)*(ushort *)((int)instructionRecord + 0x1a);
+          rgbAddrBFmt1 = (uint *)(uint)*(ushort *)(instructionRecord + 4);
+          rgbAddrCFmt1 = (uint *)(uint)*(ushort *)((int)instructionRecord + 0x12);
+          alphaAddrAFmt1 = (uint *)(uint)*(ushort *)((int)instructionRecord + 0x1a);
           argR8 = (uint *)(uint)*(ushort *)(instructionRecord + 7);
           argR9 = (char *)(uint)*(ushort *)((int)instructionRecord + 0x1e);
           uVar30 = (uint)*(byte *)((int)instructionRecord + 0x2a);
           rgbSelectB = (uint)*(byte *)((int)instructionRecord + 0x2b);
-          uVar15 = (uint)*(byte *)(instructionRecord + 0xb);
+          rgbSelectCRawFmt1 = (uint)*(byte *)(instructionRecord + 0xb);
           alphaSelectA = (uint)*(byte *)((int)instructionRecord + 0x39);
           alphaSelectB2 = (uint)*(byte *)((int)instructionRecord + 0x3a);
           rgbModA = (uint)*(byte *)((int)instructionRecord + 0x2d);
           rgbModB = (uint)*(byte *)((int)instructionRecord + 0x2e);
           rgbModC = (uint)*(byte *)((int)instructionRecord + 0x2f);
-          local_bc = (uint)*(byte *)(instructionRecord + 0xf);
+          alphaModA = (uint)*(byte *)(instructionRecord + 0xf);
           alphaModB = (uint)*(byte *)((int)instructionRecord + 0x3d);
           alphaModC = (uint)*(byte *)((int)instructionRecord + 0x3e);
-          if (bVar24) {
-            uVar23 = (uint)(uVar30 - 0xf < 4);
+          if (alphaSrcpNeededFmt1) {
+            rgbSrcpNeeded = (uint)(uVar30 - 0xf < 4);
           }
           else {
-            uVar23 = 0;
+            rgbSrcpNeeded = 0;
           }
-          bVar24 = bVar24 && uVar30 == 0x13;
-          uVar19 = uVar19 & 1;
-          if (uVar19 != 0) {
-            uVar23 = uVar23 | rgbSelectB - 0xf < 4;
-            bVar24 = bVar24 || rgbSelectB == 0x13;
+          alphaSrcpNeededFmt1 = alphaSrcpNeededFmt1 && uVar30 == 0x13;
+          rgbOperandUseMask = rgbOperandUseMask & 1;
+          if (rgbOperandUseMask != 0) {
+            rgbSrcpNeeded = rgbSrcpNeeded | rgbSelectB - 0xf < 4;
+            alphaSrcpNeededFmt1 = alphaSrcpNeededFmt1 || rgbSelectB == 0x13;
           }
-          if (iVar31 != 0) {
-            uVar19 = -(uVar15 ^ 0x13);
-            uVar23 = uVar23 | uVar15 - 0xf < 4;
-            bVar24 = (bool)(bVar24 | (uVar15 ^ 0x13) == 0);
+          if (rgbThirdOperandUsed != 0) {
+            rgbOperandUseMask = -(rgbSelectCRawFmt1 ^ 0x13);
+            rgbSrcpNeeded = rgbSrcpNeeded | rgbSelectCRawFmt1 - 0xf < 4;
+            alphaSrcpNeededFmt1 = (bool)(alphaSrcpNeededFmt1 | (rgbSelectCRawFmt1 ^ 0x13) == 0);
           }
-          if ((uVar27 & 1) != 0) {
-            uVar19 = -(alphaSelectA ^ 0xf);
-            uVar23 = uVar23 | alphaSelectA - 0xc < 3;
-            bVar24 = (bool)(bVar24 | (alphaSelectA ^ 0xf) == 0);
+          if ((alphaOperandUseMask & 1) != 0) {
+            rgbOperandUseMask = -(alphaSelectA ^ 0xf);
+            rgbSrcpNeeded = rgbSrcpNeeded | alphaSelectA - 0xc < 3;
+            alphaSrcpNeededFmt1 = (bool)(alphaSrcpNeededFmt1 | (alphaSelectA ^ 0xf) == 0);
           }
-          if ((uVar27 & 2) != 0) {
-            uVar19 = -(alphaSelectB2 ^ 0xf);
-            uVar23 = uVar23 | alphaSelectB2 - 0xc < 3;
-            bVar24 = (bool)(bVar24 | (alphaSelectB2 ^ 0xf) == 0);
+          if ((alphaOperandUseMask & 2) != 0) {
+            rgbOperandUseMask = -(alphaSelectB2 ^ 0xf);
+            rgbSrcpNeeded = rgbSrcpNeeded | alphaSelectB2 - 0xc < 3;
+            alphaSrcpNeededFmt1 = (bool)(alphaSrcpNeededFmt1 | (alphaSelectB2 ^ 0xf) == 0);
           }
-          if ((uVar27 & 4) != 0) {
-            uVar19 = -((uint)alphaSelectC2 ^ 0xf);
-            uVar23 = uVar23 | alphaSelectC2 + -0xc < (byte *)((int)((unsigned char *)0x0) + 3);
-            bVar24 = (bool)(bVar24 | ((uint)alphaSelectC2 ^ 0xf) == 0);
+          if ((alphaOperandUseMask & 4) != 0) {
+            rgbOperandUseMask = -((uint)alphaSelectC2 ^ 0xf);
+            rgbSrcpNeeded = rgbSrcpNeeded | alphaSelectC2 + -0xc < (byte *)((int)((unsigned char *)0x0) + 3);
+            alphaSrcpNeededFmt1 = (bool)(alphaSrcpNeededFmt1 | ((uint)alphaSelectC2 ^ 0xf) == 0);
           }
-          puVar21 = puVar13;
-          if (uVar23 != 0) {
-            puVar17 = aluNumber;
-            ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.rgb = ",aluNumber,puVar13,uVar19,uVar27,uVar23,
-                         iVar31);
-            cVar9 = *(char *)(instructionRecord + 0xc);
-            if (cVar9 == '\x01') {
-              puVar21 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,puVar33,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextB,puVar21,uVar19,uVar27,uVar23,iVar31);
+          srcpTextAPtr = dumpIdArg;
+          if (rgbSrcpNeeded != 0) {
+            aluNumberArg = aluNumber;
+            ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.rgb = ",aluNumber,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,
+                         rgbThirdOperandUsed);
+            rgbPreOpKind = *(char *)(instructionRecord + 0xc);
+            if (rgbPreOpKind == '\x01') {
+              srcpTextAPtr = &srcpTextA;
+              ((int (*)())FUN_000d0450)(srcpTextAPtr,rgbAddrA2,aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d0450)(&srcpTextB,rgbAddrBFmt1,aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextB,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
             }
-            else if (cVar9 == '\0') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.rgb\n",&srcpTextA,puVar13,uVar19,uVar27,uVar23,iVar31);
-              puVar21 = puVar13;
+            else if (rgbPreOpKind == '\0') {
+              ((int (*)())FUN_000d0450)(&srcpTextA,rgbAddrA2,aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.rgb\n",&srcpTextA,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+              srcpTextAPtr = dumpIdArg;
             }
-            else if (cVar9 == '\x02') {
-              puVar21 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,puVar33,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextB,puVar21,uVar19,uVar27,uVar23,iVar31);
+            else if (rgbPreOpKind == '\x02') {
+              srcpTextAPtr = &srcpTextA;
+              ((int (*)())FUN_000d0450)(srcpTextAPtr,rgbAddrA2,aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d0450)(&srcpTextB,rgbAddrBFmt1,aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextB,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
             }
-            else if (cVar9 == '\x03') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.rgb\n",&srcpTextA,puVar13,uVar19,uVar27,uVar23,iVar31);
-              puVar21 = puVar13;
+            else if (rgbPreOpKind == '\x03') {
+              ((int (*)())FUN_000d0450)(&srcpTextA,rgbAddrA2,aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"1.0-%s.rgb\n",&srcpTextA,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+              srcpTextAPtr = dumpIdArg;
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",puVar17,puVar13,uVar19,uVar27,uVar23,iVar31);
-              puVar21 = puVar13;
+              ((int (*)())FUN_000d03b4)(0,"???\n",aluNumberArg,dumpIdArg,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+              srcpTextAPtr = dumpIdArg;
             }
           }
-          puVar13 = puVar21;
-          if (bVar24) {
-            puVar17 = aluNumber;
-            ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.a   = ",aluNumber,puVar21,uVar19,uVar27,uVar23,
-                         iVar31);
+          alphaSrcpTextPtr = srcpTextAPtr;
+          if (alphaSrcpNeededFmt1) {
+            aluNumberArg = aluNumber;
+            ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.a   = ",aluNumber,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,
+                         rgbThirdOperandUsed);
             alphaPreOp = *(char *)((int)instructionRecord + 0x3f);
             if (alphaPreOp == '\x01') {
-              puVar13 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,argR8,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextB,puVar13,uVar19,uVar27,uVar23,iVar31);
+              alphaSrcpTextPtr = &srcpTextA;
+              ((int (*)())FUN_000d0450)(alphaSrcpTextPtr,alphaAddrAFmt1,aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d0450)(&srcpTextB,argR8,aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextB,alphaSrcpTextPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
             }
             else if (alphaPreOp == '\0') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextA,puVar21,uVar19,uVar27,uVar23,iVar31);
-              puVar13 = puVar21;
+              ((int (*)())FUN_000d0450)(&srcpTextA,alphaAddrAFmt1,aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextA,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+              alphaSrcpTextPtr = srcpTextAPtr;
             }
             else if (alphaPreOp == '\x02') {
-              puVar13 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,argR8,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextB,puVar13,uVar19,uVar27,uVar23,iVar31);
+              alphaSrcpTextPtr = &srcpTextA;
+              ((int (*)())FUN_000d0450)(alphaSrcpTextPtr,alphaAddrAFmt1,aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d0450)(&srcpTextB,argR8,aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextB,alphaSrcpTextPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
             }
             else if (alphaPreOp == '\x03') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextA,puVar21,uVar19,uVar27,uVar23,iVar31);
-              puVar13 = puVar21;
+              ((int (*)())FUN_000d0450)(&srcpTextA,alphaAddrAFmt1,aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded);
+              ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextA,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+              alphaSrcpTextPtr = srcpTextAPtr;
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",puVar17,puVar21,uVar19,uVar27,uVar23,iVar31);
-              puVar13 = puVar21;
+              ((int (*)())FUN_000d03b4)(0,"???\n",aluNumberArg,srcpTextAPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+              alphaSrcpTextPtr = srcpTextAPtr;
             }
           }
-          puVar21 = aluNumber;
-          ((int (*)())FUN_000d03b4)(0,"     alu %02d rgb:  ",aluNumber,puVar13,uVar19,uVar27,uVar23,iVar31);
-          uVar18 = (uint)*(byte *)((int)instructionRecord + 0x15);
-          bVar3 = *(byte *)(instructionRecord + 5);
-          if (uVar18 == 0) {
-            ((int (*)())FUN_000d03b4)(0,"           ",puVar21,0,uVar19,uVar27,uVar23,iVar31);
+          rgbOutIndexArg = aluNumber;
+          ((int (*)())FUN_000d03b4)(0,"     alu %02d rgb:  ",aluNumber,alphaSrcpTextPtr,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
+          rgbOutputMaskText = (uint)*(byte *)((int)instructionRecord + 0x15);
+          rgbTempWriteMask = *(byte *)(instructionRecord + 5);
+          if (rgbOutputMaskText == 0) {
+            ((int (*)())FUN_000d03b4)(0,"           ",rgbOutIndexArg,0,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
           }
           else {
-            puVar21 = (uint *)(uint)*(byte *)((int)instructionRecord + 0x16);
-            uVar18 = uVar18 * 4 + 0x1dc239;
-            ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            rgbOutIndexArg = (uint *)(uint)*(byte *)((int)instructionRecord + 0x16);
+            rgbOutputMaskText = rgbOutputMaskText * 4 + 0x1dc239;
+            ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",rgbOutIndexArg,rgbOutputMaskText,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
           }
-          if (bVar3 == 0) {
-            ((int (*)())FUN_000d03b4)(0,"          ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+          if (rgbTempWriteMask == 0) {
+            ((int (*)())FUN_000d03b4)(0,"          ",rgbOutIndexArg,rgbOutputMaskText,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
           }
           else {
-            puVar21 = (uint *)(uint)*(ushort *)(instructionRecord + 3);
-            uVar18 = (uint)bVar3 * 4 + 0x1dc239;
-            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            rgbOutIndexArg = (uint *)(uint)*(ushort *)(instructionRecord + 3);
+            rgbOutputMaskText = (uint)rgbTempWriteMask * 4 + 0x1dc239;
+            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",rgbOutIndexArg,rgbOutputMaskText,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
           }
           if (*(char *)((int)instructionRecord + 0x33) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            ((int (*)())FUN_000d03b4)(0,"clamped ",rgbOutIndexArg,rgbOutputMaskText,rgbOperandUseMask,alphaOperandUseMask,rgbSrcpNeeded,rgbThirdOperandUsed);
           }
-          local_68 = operandText2;
-          local_64 = operandText3;
-          ((int (*)())FUN_000d0488)(local_68,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,uVar30,rgbModA);
-          local_60 = operandText4;
-          puVar21 = operandText5;
-          ((int (*)())FUN_000d0488)(local_64,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,rgbSelectB,rgbModB);
-          ((int (*)())FUN_000d0488)(local_60,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,uVar15,rgbModC);
-          puVar13 = operandText6;
-          ((int (*)())FUN_000d0888)(puVar21,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectA,local_bc);
-          puVar17 = operandText0;
-          ((int (*)())FUN_000d0888)(puVar13,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectB2,alphaModB);
+          operandText2Ptr = operandText2;
+          operandText3Ptr = operandText3;
+          ((int (*)())FUN_000d0488)(operandText2Ptr,rgbAddrA2,rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,uVar30,rgbModA);
+          operandText4Ptr = operandText4;
+          operandText5PtrFmt1 = operandText5;
+          ((int (*)())FUN_000d0488)(operandText3Ptr,rgbAddrA2,rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,rgbSelectB,rgbModB);
+          ((int (*)())FUN_000d0488)(operandText4Ptr,rgbAddrA2,rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,rgbSelectCRawFmt1,rgbModC);
+          dumpIdArg = operandText6;
+          ((int (*)())FUN_000d0888)(operandText5PtrFmt1,rgbAddrA2,rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,alphaSelectA,alphaModA);
+          operandText0Ptr = operandText0;
+          ((int (*)())FUN_000d0888)(dumpIdArg,rgbAddrA2,rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,alphaSelectB2,alphaModB);
           argR10 = alphaSelectC2;
-          ((int (*)())FUN_000d0888)(puVar17,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectC2,alphaModC);
-          bVar3 = *local_cc;
-          if (bVar3 < 0xb) {
+          ((int (*)())FUN_000d0888)(operandText0Ptr,rgbAddrA2,rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,alphaSelectC2,alphaModC);
+          rgbOpcodeByte = *rgbOpcodePtr2;
+          if (rgbOpcodeByte < 0xb) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(rgbOpcodeByte) {
             case 0:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              alphaAddrAFmt1 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",operandText2Ptr,operandText3Ptr,operandText4Ptr,argR8,argR9,argR10);
               break;
             case 1:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",operandText2Ptr,operandText3Ptr,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 2:
-              puVar33 = local_68;
-              puVar32 = puVar21;
-              puVar35 = local_64;
-              argR8 = puVar13;
-              ((int (*)())FUN_000d03b4)(0,"dp4(%s:%s, %s:%s)",local_68,puVar21,local_64,puVar13,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText5PtrFmt1;
+              alphaAddrAFmt1 = operandText3Ptr;
+              argR8 = dumpIdArg;
+              ((int (*)())FUN_000d03b4)(0,"dp4(%s:%s, %s:%s)",operandText2Ptr,operandText5PtrFmt1,operandText3Ptr,dumpIdArg,argR9,argR10);
               break;
             case 3:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              alphaAddrAFmt1 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",operandText2Ptr,operandText3Ptr,operandText4Ptr,argR8,argR9,argR10);
               break;
             case 4:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",operandText2Ptr,operandText3Ptr,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 5:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",operandText2Ptr,operandText3Ptr,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 6:
               goto switchD_000d4578_caseD_6;
             case 7:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              alphaAddrAFmt1 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",operandText2Ptr,operandText3Ptr,operandText4Ptr,argR8,argR9,argR10);
               break;
             case 8:
-              puVar33 = local_68;
-              puVar32 = local_64;
-              puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              rgbAddrCFmt1 = operandText3Ptr;
+              alphaAddrAFmt1 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",operandText2Ptr,operandText3Ptr,operandText4Ptr,argR8,argR9,argR10);
               break;
             case 9:
-              puVar33 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",local_68,puVar32,puVar35,argR8,argR9,argR10);
+              rgbAddrBFmt1 = operandText2Ptr;
+              ((int (*)())FUN_000d03b4)(0,"frc(%s)",operandText2Ptr,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"sop()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"sop()",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
             }
           }
           else {
 switchD_000d4578_caseD_6:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"???()",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
-          bVar3 = *(byte *)((int)instructionRecord + 0x32);
-          if (bVar3 < 7) {
+          rgbOutputScaleByte = *(byte *)((int)instructionRecord + 0x32);
+          if (rgbOutputScaleByte < 7) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(rgbOutputScaleByte) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*2\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*4\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*8\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/2\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/4\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/8\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"*???\n",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
-          puVar33 = aluNumber;
-          ((int (*)())FUN_000d03b4)(0,"          alpha:  ",aluNumber,puVar32,puVar35,argR8,argR9,argR10);
+          alphaOutIndexArg = aluNumber;
+          ((int (*)())FUN_000d03b4)(0,"          alpha:  ",aluNumber,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           alphaTempEnable = *(char *)(instructionRecord + 8);
-          bVar24 = *(char *)((int)instructionRecord + 0x21) != '\0';
+          alphaOutputEnableFlag = *(char *)((int)instructionRecord + 0x21) != '\0';
           depthWrite = *(char *)((int)instructionRecord + 0x23);
-          if (bVar24) {
-            puVar33 = (uint *)(uint)*(byte *)((int)instructionRecord + 0x22);
-            ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+          if (alphaOutputEnableFlag) {
+            alphaOutIndexArg = (uint *)(uint)*(byte *)((int)instructionRecord + 0x22);
+            ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
-          bVar2 = depthWrite != '\0';
-          if (bVar2) {
-            ((int (*)())FUN_000d03b4)(0,"depth    = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+          depthWriteFlag = depthWrite != '\0';
+          if (depthWriteFlag) {
+            ((int (*)())FUN_000d03b4)(0,"depth    = ",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
-          if ((!bVar24) && (!bVar2)) {
-            ((int (*)())FUN_000d03b4)(0,"           ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+          if ((!alphaOutputEnableFlag) && (!depthWriteFlag)) {
+            ((int (*)())FUN_000d03b4)(0,"           ",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
           if (alphaTempEnable == '\0') {
-            ((int (*)())FUN_000d03b4)(0,"          ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"          ",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
           else {
-            puVar33 = (uint *)(uint)*(ushort *)(instructionRecord + 6);
-            ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            alphaOutIndexArg = (uint *)(uint)*(ushort *)(instructionRecord + 6);
+            ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
           if (*(char *)((int)instructionRecord + 0x42) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"clamped ",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
-          bVar3 = *(byte *)local_c8;
-          if (bVar3 < 0xc) {
+          alphaOpcodeByte = *(byte *)alphaOpcodePtr2;
+          if (alphaOpcodeByte < 0xc) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(alphaOpcodeByte) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
-              puVar21 = puVar33;
-              puVar13 = puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"dp()",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+              operandText5PtrFmt1 = alphaOutIndexArg;
+              dumpIdArg = rgbAddrCFmt1;
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",puVar21,puVar13,puVar35,argR8,argR9,argR10);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",operandText5PtrFmt1,dumpIdArg,alphaAddrAFmt1,argR8,argR9,argR10);
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",puVar21,puVar13,puVar35,argR8,argR9,argR10);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",operandText5PtrFmt1,dumpIdArg,alphaAddrAFmt1,argR8,argR9,argR10);
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 4:
               goto switchD_000d489c_caseD_4;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 7:
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
-              puVar13 = puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"frc(%s)",operandText5PtrFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+              dumpIdArg = rgbAddrCFmt1;
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 8:
-              ((int (*)())FUN_000d03b4)(0,"ex2(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
-              puVar13 = puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"ex2(%s)",operandText5PtrFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+              dumpIdArg = rgbAddrCFmt1;
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 9:
-              ((int (*)())FUN_000d03b4)(0,"ln2(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
-              puVar13 = puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"ln2(%s)",operandText5PtrFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+              dumpIdArg = rgbAddrCFmt1;
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"rcp(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
-              puVar13 = puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"rcp(%s)",operandText5PtrFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+              dumpIdArg = rgbAddrCFmt1;
+              operandText0Ptr = alphaAddrAFmt1;
               break;
             case 0xb:
-              ((int (*)())FUN_000d03b4)(0,"rsq(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
-              puVar13 = puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"rsq(%s)",operandText5PtrFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+              dumpIdArg = rgbAddrCFmt1;
+              operandText0Ptr = alphaAddrAFmt1;
             }
           }
           else {
 switchD_000d489c_caseD_4:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
-            puVar21 = puVar33;
-            puVar13 = puVar32;
-            puVar17 = puVar35;
+            ((int (*)())FUN_000d03b4)(0,"???()",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
+            operandText5PtrFmt1 = alphaOutIndexArg;
+            dumpIdArg = rgbAddrCFmt1;
+            operandText0Ptr = alphaAddrAFmt1;
           }
-          bVar3 = *(byte *)((int)instructionRecord + 0x41);
-          if (bVar3 < 7) {
+          alphaOutputScaleByte = *(byte *)((int)instructionRecord + 0x41);
+          if (alphaOutputScaleByte < 7) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(alphaOutputScaleByte) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*2\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*4\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*8\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/2\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/4\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/8\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"*???\n",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
           }
           if (*(char *)(instructionRecord + 0xd) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"     alu %02d post-NOP\n",aluNumber,puVar13,puVar17,argR8,argR9,
+            ((int (*)())FUN_000d03b4)(0,"     alu %02d post-NOP\n",aluNumber,dumpIdArg,operandText0Ptr,argR8,argR9,
                          argR10);
           }
           aluNumber = (uint *)((int)aluNumber + 1);
         }
-        uVar37 = uVar37 + 1;
+        rsRecordNumber = rsRecordNumber + 1;
         instructionRecord = instructionRecord + 0x12;
         argR7 = recordCount;
-        uVar19 = recordCount;
-      } while (uVar37 <= recordCount);
+        usListStaleZero = recordCount;
+      } while (rsRecordNumber <= recordCount);
     }
-    uVar26 = 0;
+    psnRecordIndex = 0;
     ((int (*)())FUN_000d03b4)(0,"======== End   Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
-    uVar37 = pixelShader[2];
-    uVar19 = dumpLabelSlot;
-    puVar13 = dumpIdSlot;
+    psnRecordCount = pixelShader[2];
+    psnLineArg0 = dumpLabelSlot;
+    psnLineArg1 = dumpIdSlot;
     ((int (*)())FUN_000d03b4)(0,"+++ BEGIN_PSN                       # \"%s\" %d\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
     do {
-      uVar27 = *pixelShader;
-      if (uVar27 < 5) {
-        switch(uVar27) {
+      psnRecordKind = *pixelShader;
+      if (psnRecordKind < 5) {
+        switch(psnRecordKind) {
         case 0:
-          uVar19 = pixelShader[1];
-          puVar13 = (uint *)pixelShader[2];
+          psnLineArg0 = pixelShader[1];
+          psnLineArg1 = (uint *)pixelShader[2];
           argR7 = (uint)*(byte *)(pixelShader + 3);
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 0xd);
           argR9 = (char *)(uint)*(ushort *)(pixelShader + 5);
           argR10 = (byte *)(uint)*(ushort *)((int)pixelShader + 0x16);
           ((int (*)())FUN_000d03b4)(0,
                        "+++ R300PSN_INST_HEADER : %08x %08x %02x %02x %04x %04x %04x %04x %04x %04x %04x\n"
-                       ,uVar19,puVar13,argR7,argR8,argR9,argR10);
+                       ,psnLineArg0,psnLineArg1,argR7,argR8,argR9,argR10);
           break;
         case 1:
-          uVar19 = (uint)*(ushort *)(pixelShader + 1);
-          puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 6);
+          psnLineArg0 = (uint)*(ushort *)(pixelShader + 1);
+          psnLineArg1 = (uint *)(uint)*(ushort *)((int)pixelShader + 6);
           argR7 = (uint)*(byte *)(pixelShader + 2);
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 9);
           argR9 = (char *)(uint)*(byte *)((int)pixelShader + 10);
           argR10 = (byte *)(uint)*(byte *)((int)pixelShader + 0xb);
           ((int (*)())FUN_000d03b4)(0,
                        "+++ R300PSN_INST_RS     : %04x %04x %02x %02x %02x %02x %02x %02x %02x %02x\n"
-                       ,uVar19,puVar13,argR7,argR8,argR9,argR10);
+                       ,psnLineArg0,psnLineArg1,argR7,argR8,argR9,argR10);
           break;
         case 2:
-          uVar19 = (uint)*(ushort *)(pixelShader + 3);
-          puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 0xe);
+          psnLineArg0 = (uint)*(ushort *)(pixelShader + 3);
+          psnLineArg1 = (uint *)(uint)*(ushort *)((int)pixelShader + 0xe);
           argR7 = (uint)*(byte *)((int)pixelShader + 0x19);
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 0x1a);
           argR9 = (char *)(uint)*(byte *)((int)pixelShader + 0x1f);
           argR10 = (byte *)(uint)*(byte *)(pixelShader + 8);
-          ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_TEX    : %04x %04x %02x %02x %02x %02x\n",uVar19,puVar13,
+          ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_TEX    : %04x %04x %02x %02x %02x %02x\n",psnLineArg0,psnLineArg1,
                        argR7,argR8,argR9,argR10);
           break;
         default:
-          ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_ALU    : \n",uVar19,puVar13,argR7,argR8,
+          ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_ALU    : \n",psnLineArg0,psnLineArg1,argR7,argR8,
                        0,argR10);
           ((int (*)())FUN_000d03b4)(0,"+++ RGB_ADDR            : %04x %04x %04x %04x %02x %02x %02x\n",
                        (uint)*(ushort *)(pixelShader + 3),(uint)*(ushort *)((int)pixelShader + 0xe),
@@ -8013,139 +8105,139 @@ switchD_000d489c_caseD_4:
                        ,(uint)*(byte *)((int)pixelShader + 0x2a),(uint)*(byte *)((int)pixelShader + 0x2d),
                        (uint)*(byte *)((int)pixelShader + 0x2b),(uint)*(byte *)((int)pixelShader + 0x2e),
                        (uint)*(byte *)(pixelShader + 0xb),(uint)*(byte *)((int)pixelShader + 0x2f));
-          uVar19 = (uint)*(byte *)((int)pixelShader + 0x39);
-          puVar13 = (uint *)(uint)*(byte *)(pixelShader + 0xf);
+          psnLineArg0 = (uint)*(byte *)((int)pixelShader + 0x39);
+          psnLineArg1 = (uint *)(uint)*(byte *)(pixelShader + 0xf);
           argR7 = (uint)*(byte *)((int)pixelShader + 0x3a);
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 0x3d);
           argR9 = (char *)(uint)*(byte *)((int)pixelShader + 0x3b);
           argR10 = (byte *)(uint)*(byte *)((int)pixelShader + 0x3e);
           ((int (*)())FUN_000d03b4)(0,
                        "+++ ALPHA_INST          : %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n"
-                       ,uVar19,puVar13,argR7,argR8,argR9,argR10);
+                       ,psnLineArg0,psnLineArg1,argR7,argR8,argR9,argR10);
         }
       }
-      uVar26 = uVar26 + 1;
+      psnRecordIndex = psnRecordIndex + 1;
       pixelShader = pixelShader + 0x12;
-    } while (uVar26 <= uVar37);
+    } while (psnRecordIndex <= psnRecordCount);
     ((int (*)())FUN_000d03b4)(0,"+++ END_PSN                         # \"%s\" %d\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
   }
   else {
-    uVar19 = pixelShader[2];
-    puVar13 = dumpIdSlot;
-    recordCount2 = uVar19;
+    neutralRecordCountArg = pixelShader[2];
+    neutralLineArg0 = dumpIdSlot;
+    recordCount2 = neutralRecordCountArg;
     ((int (*)())FUN_000d03b4)(0,"======== Begin r520 neutral format pixel shader: %d =============\n",
-                 dumpIdSlot,argR6,uVar19,argR8,argR9,argR10);
+                 dumpIdSlot,argR6,neutralRecordCountArg,argR8,argR9,argR10);
     if (*(short *)(pixelShader + 5) == 0) {
-      ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
     }
     else {
-      ((int (*)())FUN_000d03b4)(0," Shader stats:\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0," Shader stats:\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),argR6,
-                   uVar19,argR8,argR9,argR10);
+                   neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
-                   argR6,uVar19,argR8,argR9,argR10);
+                   argR6,neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),argR6,
-                   uVar19,argR8,argR9,argR10);
+                   neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
-                   argR6,uVar19,argR8,argR9,argR10);
+                   argR6,neutralRecordCountArg,argR8,argR9,argR10);
       if (*(byte *)((int)pixelShader + 0xe) != 0) {
         ((int (*)())FUN_000d03b4)(0,"     UMRT_EN:               %3d\n",(uint)*(byte *)((int)pixelShader + 0xe),
-                     argR6,uVar19,argR8,argR9,argR10);
+                     argR6,neutralRecordCountArg,argR8,argR9,argR10);
       }
       ((int (*)())FUN_000d03b4)(0,"     CF Instructions:       %3d\n",(uint)*(ushort *)(pixelShader + 8),argR6,
-                   uVar19,argR8,argR9,argR10);
+                   neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
-                   argR6,uVar19,argR8,argR9,argR10);
+                   argR6,neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),argR6,
-                   uVar19,argR8,argR9,argR10);
+                   neutralRecordCountArg,argR8,argR9,argR10);
       ((int (*)())FUN_000d03b4)(0,"     Start Addr:            %3d\n",(uint)*(ushort *)(pixelShader + 4),argR6,
-                   uVar19,argR8,argR9,argR10);
-      puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 0x12);
-      ((int (*)())FUN_000d03b4)(0,"     End Addr:              %3d\n",puVar13,argR6,uVar19,argR8,argR9,
+                   neutralRecordCountArg,argR8,argR9,argR10);
+      neutralLineArg0 = (uint *)(uint)*(ushort *)((int)pixelShader + 0x12);
+      ((int (*)())FUN_000d03b4)(0,"     End Addr:              %3d\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,
                    argR10);
-      ((int (*)())FUN_000d03b4)(0," \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+      ((int (*)())FUN_000d03b4)(0," \n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
     }
-    ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+    ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
     if ((pixelShader[0x12] == 1) && (0 < (int)recordCount2)) {
       rsScanRecord2 = pixelShader + 0x24;
-      iVar31 = 1;
+      rsRecordNumber2 = 1;
       rsNextRecord2 = rsScanRecord2;
       rsRecord2 = pixelShader + 0x12;
       do {
-        puVar35 = rsNextRecord2;
-        puVar13 = (uint *)(iVar31 + -1);
-        ((int (*)())FUN_000d03b4)(0,"   rs %02d:",puVar13,argR6,uVar19,argR8,argR9,argR10);
-        cVar9 = *(char *)((int)rsRecord2 + 0xb);
-        if (cVar9 == '\0') {
+        rsNextRecordCopy2 = rsNextRecord2;
+        neutralLineArg0 = (uint *)(rsRecordNumber2 + -1);
+        ((int (*)())FUN_000d03b4)(0,"   rs %02d:",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
+        rsColorSource = *(char *)((int)rsRecord2 + 0xb);
+        if (rsColorSource == '\0') {
           if (*(char *)((int)rsRecord2 + 9) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"                         ",puVar13,argR6,uVar19,argR8,argR9,
+            ((int (*)())FUN_000d03b4)(0,"                         ",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,
                          argR10);
             goto LAB_000d1afc;
           }
 LAB_000d1b5c:
-          ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0,"\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
         }
         else {
-          uVar37 = *(byte *)((int)rsRecord2 + 0xf) & 0xf ^ 0xf;
-          if (cVar9 == '\x01') {
-            puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
-            uVar19 = (uint)*(byte *)((int)rsRecord2 + 10);
-            argR6 = (char *)(uVar37 * 5 + 0x1dc279);
-            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          rsColorWriteMask = *(byte *)((int)rsRecord2 + 0xf) & 0xf ^ 0xf;
+          if (rsColorSource == '\x01') {
+            neutralLineArg0 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
+            neutralRecordCountArg = (uint)*(byte *)((int)rsRecord2 + 10);
+            argR6 = (char *)(rsColorWriteMask * 5 + 0x1dc279);
+            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
             if (*(char *)((int)rsRecord2 + 0xd) == '\0') {
-              cVar9 = *(char *)((int)rsRecord2 + 0xb);
+              rsColorSource = *(char *)((int)rsRecord2 + 0xb);
             }
             else {
-              ((int (*)())FUN_000d03b4)(0," biased",puVar13,argR6,uVar19,argR8,argR9,argR10);
-              cVar9 = *(char *)((int)rsRecord2 + 0xb);
+              ((int (*)())FUN_000d03b4)(0," biased",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
+              rsColorSource = *(char *)((int)rsRecord2 + 0xb);
             }
           }
-          if (cVar9 == '\x02') {
-            puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
-            argR6 = (char *)(uVar37 * 5 + 0x1dc279);
-            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = fbuf",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          if (rsColorSource == '\x02') {
+            neutralLineArg0 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
+            argR6 = (char *)(rsColorWriteMask * 5 + 0x1dc279);
+            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = fbuf",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
           }
-          else if (cVar9 == '\x03') {
-            puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
-            argR6 = (char *)(uVar37 * 5 + 0x1dc279);
-            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = back",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          else if (rsColorSource == '\x03') {
+            neutralLineArg0 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
+            argR6 = (char *)(rsColorWriteMask * 5 + 0x1dc279);
+            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = back",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
           }
           else {
             if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
-            ((int (*)())FUN_000d03b4)(0,"       ",puVar13,argR6,uVar19,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"       ",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
           }
 LAB_000d1afc:
           if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
-          puVar13 = (uint *)(uint)*(ushort *)(rsRecord2 + 1);
-          uVar19 = (uint)*(byte *)(rsRecord2 + 2);
+          neutralLineArg0 = (uint *)(uint)*(ushort *)(rsRecord2 + 1);
+          neutralRecordCountArg = (uint)*(byte *)(rsRecord2 + 2);
           argR6 = (char *)((*(byte *)((int)rsRecord2 + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
-          ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
           if (*(char *)(rsRecord2 + 3) == '\0') goto LAB_000d1b5c;
-          ((int (*)())FUN_000d03b4)(0," adjusted\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0," adjusted\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
         }
-        iVar31 = iVar31 + 1;
+        rsRecordNumber2 = rsRecordNumber2 + 1;
         if (*rsScanRecord2 != 1) break;
         rsScanRecord2 = rsScanRecord2 + 0x12;
-        rsNextRecord2 = puVar35 + 0x12;
-        rsRecord2 = puVar35;
-      } while (iVar31 <= (int)recordCount2);
+        rsNextRecord2 = rsNextRecordCopy2 + 0x12;
+        rsRecord2 = rsNextRecordCopy2;
+      } while (rsRecordNumber2 <= (int)recordCount2);
     }
     else {
-      iVar31 = 1;
+      rsRecordNumber2 = 1;
     }
-    local_5c = 0x1a1848;
-    ((int (*)())FUN_000d03b4)(0," \n US Program:\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
-    ((int (*)())FUN_000d03b4)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
-    if (iVar31 <= (int)recordCount2) {
-      local_78 = 0;
-      instructionRecord2 = pixelShader + iVar31 * 0x12;
+    blankLineFormatOffset = 0x1a1848;
+    ((int (*)())FUN_000d03b4)(0," \n US Program:\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
+    ((int (*)())FUN_000d03b4)(0,blankLineFormatOffset + 0x5b00,neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
+    if (rsRecordNumber2 <= (int)recordCount2) {
+      texFlagsByte = 0;
+      instructionRecord2 = pixelShader + rsRecordNumber2 * 0x12;
       instructionNumber = 0;
       aluIndex = (uint *)0x0;
       texIndex = 0;
       cfIndex = 0;
-      local_74 = 0;
-      local_ec = 0;
+      cfPrevAluDest = 0;
+      cfCompareCode = 0;
       do {
         if (*(char *)(instructionRecord2 + 7) == '\0') {
           ignUncText = ignUncText & 0xffffff;
@@ -8194,71 +8286,71 @@ LAB_000d1afc:
           aluWaitText8[0] = s_alu_wait_001a7364[8];
           aluWaitText8[1] = s_alu_wait_001a7364[9];
         }
-        uVar37 = *instructionRecord2;
-        if (uVar37 == 2) {
-          ((int (*)())FUN_000d03b4)(0,"  %d tex %02d    :  ",instructionNumber,texIndex,uVar19,argR8,argR9,argR10);
-          bVar3 = *(byte *)((int)instructionRecord2 + 0x1d);
+        recordKind2 = *instructionRecord2;
+        if (recordKind2 == 2) {
+          ((int (*)())FUN_000d03b4)(0,"  %d tex %02d    :  ",instructionNumber,texIndex,neutralRecordCountArg,argR8,argR9,argR10);
+          texEnableBits = *(byte *)((int)instructionRecord2 + 0x1d);
           texSrcReg2 = *(ushort *)((int)instructionRecord2 + 0xe);
-          puVar13 = (uint *)(uint)texSrcReg2;
+          neutralLineArg0 = (uint *)(uint)texSrcReg2;
           texDestReg2 = *(ushort *)(instructionRecord2 + 3);
-          uVar19 = (*(byte *)((int)instructionRecord2 + 0x1e) & 0x1f) << 3 | (uint)bVar3;
+          texComponentEnableBits = (*(byte *)((int)instructionRecord2 + 0x1e) & 0x1f) << 3 | (uint)texEnableBits;
           texUnit2 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x19);
-          bVar24 = (bVar3 & 1) != 0;
+          texEnableR = (texEnableBits & 1) != 0;
           texWriteMask = *(byte *)(instructionRecord2 + 5);
-          if (bVar24) {
-            pcVar14 = (char *)((texWriteMask >> 4 & 0xc) + 0x1dc259);
+          if (texEnableR) {
+            maskTextX = (char *)((texWriteMask >> 4 & 0xc) + 0x1dc259);
           }
           else {
-            pcVar14 = "_";
+            maskTextX = "_";
           }
-          bVar2 = (bVar3 & 2) != 0;
-          if (bVar2) {
-            pcVar16 = (char *)((texWriteMask >> 2 & 0xc) + 0x1dc259);
-          }
-          else {
-            pcVar16 = "_";
-          }
-          bVar40 = (bVar3 & 4) != 0;
-          if (bVar40) {
-            pcVar20 = (char *)((texWriteMask & 0xc) + 0x1dc259);
+          texEnableG = (texEnableBits & 2) != 0;
+          if (texEnableG) {
+            maskTextY = (char *)((texWriteMask >> 2 & 0xc) + 0x1dc259);
           }
           else {
-            pcVar20 = "_";
+            maskTextY = "_";
           }
-          bVar1 = (uVar19 >> 3 & 1) != 0;
-          if (bVar1) {
-            pcVar22 = (char *)((texWriteMask & 3) * 4 + 0x1dc259);
+          texEnableB = (texEnableBits & 4) != 0;
+          if (texEnableB) {
+            maskTextZ = (char *)((texWriteMask & 0xc) + 0x1dc259);
           }
           else {
-            pcVar22 = "_";
+            maskTextZ = "_";
           }
-          FUN_001a32d0(writeMaskText,"%s%s%s%s",pcVar14,pcVar16,pcVar20,pcVar22,uVar19,argR10);
+          texEnableA = (texComponentEnableBits >> 3 & 1) != 0;
+          if (texEnableA) {
+            maskTextW = (char *)((texWriteMask & 3) * 4 + 0x1dc259);
+          }
+          else {
+            maskTextW = "_";
+          }
+          FUN_001a32d0(writeMaskText,"%s%s%s%s",maskTextX,maskTextY,maskTextZ,maskTextW,texComponentEnableBits,argR10);
           if ((*(byte *)((int)instructionRecord2 + 0x1a) < 7) &&
              ((1 << ((int)(char)*(byte *)((int)instructionRecord2 + 0x1a) & 0x3fU) & 0x7aU) != 0)) {
-            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",(uint)texDestReg2,writeMaskText,pcVar20,pcVar22,uVar19,argR10);
+            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",(uint)texDestReg2,writeMaskText,maskTextZ,maskTextW,texComponentEnableBits,argR10);
           }
           if (*(byte *)((int)instructionRecord2 + 0x1a) == 2) {
-            bVar3 = *(byte *)((int)instructionRecord2 + 0x15);
-            argR9 = (char *)(uint)bVar3;
-            if (bVar24) {
-              pcVar16 = (char *)((bVar3 >> 4 & 0xc) + 0x1dc259);
+            texSrcSwizzleByte = *(byte *)((int)instructionRecord2 + 0x15);
+            argR9 = (char *)(uint)texSrcSwizzleByte;
+            if (texEnableR) {
+              srcSwizzleTextX = (char *)((texSrcSwizzleByte >> 4 & 0xc) + 0x1dc259);
             }
             else {
-              pcVar16 = "-";
+              srcSwizzleTextX = "-";
             }
-            if (bVar2) {
-              argR6 = (char *)((bVar3 >> 2 & 0xc) + 0x1dc259);
+            if (texEnableG) {
+              argR6 = (char *)((texSrcSwizzleByte >> 2 & 0xc) + 0x1dc259);
             }
             else {
               argR6 = "-";
             }
-            if (bVar40) {
-              pcVar14 = (char *)((bVar3 & 0xc) + 0x1dc259);
+            if (texEnableB) {
+              srcSwizzleTextZ = (char *)((texSrcSwizzleByte & 0xc) + 0x1dc259);
             }
             else {
-              pcVar14 = "-";
+              srcSwizzleTextZ = "-";
             }
-            if (bVar1) {
+            if (texEnableA) {
               argR8 = (uint *)(((uint)argR9 & 3) * 4 + 0x1dc259);
             }
             else {
@@ -8266,34 +8358,34 @@ LAB_000d1afc:
             }
           }
           else {
-            local_78 = (uint)*(byte *)((int)instructionRecord2 + 0x1f);
-            bVar3 = *(byte *)((int)instructionRecord2 + 0x15);
-            argR9 = (char *)(uint)bVar3;
+            texFlagsByte = (uint)*(byte *)((int)instructionRecord2 + 0x1f);
+            texSrcSwizzleByte2 = *(byte *)((int)instructionRecord2 + 0x15);
+            argR9 = (char *)(uint)texSrcSwizzleByte2;
             if ((*(byte *)((int)instructionRecord2 + 0x1f) & 1) == 0) {
-              argR10 = (byte *)(bVar3 & 0xc);
+              argR10 = (byte *)(texSrcSwizzleByte2 & 0xc);
               argR9 = (char *)(((uint)argR9 & 3) * 4);
               argR8 = (uint *)((int)argR9 + 0x1dc259);
-              pcVar16 = (char *)((bVar3 >> 4 & 0xc) + 0x1dc259);
-              argR6 = (char *)((bVar3 >> 2 & 0xc) + 0x1dc259);
-              pcVar14 = (char *)(argR10 + 0x1dc259);
+              srcSwizzleTextX = (char *)((texSrcSwizzleByte2 >> 4 & 0xc) + 0x1dc259);
+              argR6 = (char *)((texSrcSwizzleByte2 >> 2 & 0xc) + 0x1dc259);
+              srcSwizzleTextZ = (char *)(argR10 + 0x1dc259);
             }
             else {
-              pcVar16 = "-";
-              argR6 = pcVar16;
-              pcVar14 = pcVar16;
-              argR8 = (uint *)pcVar16;
+              srcSwizzleTextX = "-";
+              argR6 = srcSwizzleTextX;
+              srcSwizzleTextZ = srcSwizzleTextX;
+              argR8 = (uint *)srcSwizzleTextX;
             }
           }
-          puVar32 = srcSwizzleText;
-          FUN_001a32d0(puVar32,"%s%s%s%s",pcVar16,argR6,pcVar14,argR8,argR9,argR10);
+          srcSwizzleTextPtr = srcSwizzleText;
+          FUN_001a32d0(srcSwizzleTextPtr,"%s%s%s%s",srcSwizzleTextX,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           if ((texSrcReg2 & 0x4000) == 0) {
-            FUN_001a32d0(registerText,"r%02d",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+            FUN_001a32d0(registerText,"r%02d",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           }
           else {
-            puVar13 = (uint *)((uint)puVar13 & 0xbfff);
-            FUN_001a32d0(registerText,"r[AL+%02d]",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+            neutralLineArg0 = (uint *)((uint)neutralLineArg0 & 0xbfff);
+            FUN_001a32d0(registerText,"r[AL+%02d]",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           }
-          puVar35 = registerText;
+          registerTextPtr = registerText;
           if (*(char *)((int)instructionRecord2 + 0x1b) == '\0') {
             semGrabText = semGrabText & 0xffffff;
           }
@@ -8310,120 +8402,120 @@ LAB_000d1afc:
             semGrabText8[0] = s_sem_grab_001a73ac[8];
             semGrabText8[1] = s_sem_grab_001a73ac[9];
           }
-          bVar3 = *(byte *)((int)instructionRecord2 + 0x1a);
-          if (bVar3 < 8) {
+          texOpcodeByte = *(byte *)((int)instructionRecord2 + 0x1a);
+          if (texOpcodeByte < 8) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(texOpcodeByte) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"NOP\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"NOP\n",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
               break;
             case 1:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
+              ((int (*)())FUN_000d03b4)(0,"lookup(%s.%s, tex%02d)%s%s%s%s",registerTextPtr,srcSwizzleTextPtr,texUnit2,argR8,
                            argR9,&aluWaitText);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
-              pcVar14 = (char *)texUnit2;
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
+              srcSwizzleTextZ = (char *)texUnit2;
               break;
             case 2:
-              pcVar14 = (char *)&semWaitText;
+              srcSwizzleTextZ = (char *)&semWaitText;
               argR8 = &semGrabText;
               argR9 = (char *)&aluWaitText;
-              ((int (*)())FUN_000d03b4)(0,"kill(%s.%s)%s%s%s",puVar35,puVar32,pcVar14,argR8,argR9,argR10);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
+              ((int (*)())FUN_000d03b4)(0,"kill(%s.%s)%s%s%s",registerTextPtr,srcSwizzleTextPtr,srcSwizzleTextZ,argR8,argR9,argR10);
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
               break;
             case 3:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_proj(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
+              ((int (*)())FUN_000d03b4)(0,"lookup_proj(%s.%s, tex%02d)%s%s%s%s",registerTextPtr,srcSwizzleTextPtr,texUnit2,argR8,
                            argR9,&aluWaitText);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
-              pcVar14 = (char *)texUnit2;
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
+              srcSwizzleTextZ = (char *)texUnit2;
               break;
             case 4:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
+              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(%s.%s, tex%02d)%s%s%s%s",registerTextPtr,srcSwizzleTextPtr,texUnit2,
                            argR8,argR9,&aluWaitText);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
-              pcVar14 = (char *)texUnit2;
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
+              srcSwizzleTextZ = (char *)texUnit2;
               break;
             case 5:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_lod(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
+              ((int (*)())FUN_000d03b4)(0,"lookup_lod(%s.%s, tex%02d)%s%s%s%s",registerTextPtr,srcSwizzleTextPtr,texUnit2,argR8,
                            argR9,&aluWaitText);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
-              pcVar14 = (char *)texUnit2;
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
+              srcSwizzleTextZ = (char *)texUnit2;
               break;
             case 6:
-              bVar3 = *(byte *)((int)instructionRecord2 + 0x16);
-              uVar19 = (uint)bVar3;
-              bVar24 = (local_78 & 1) == 0;
-              if (bVar24) {
-                argR10 = (byte *)(bVar3 & 0xc);
-                uVar19 = (uVar19 & 3) * 4;
-                pcVar16 = (char *)(uVar19 + 0x1dc259);
-                pcVar20 = (char *)((bVar3 >> 4 & 0xc) + 0x1dc259);
-                pcVar14 = (char *)((bVar3 >> 2 & 0xc) + 0x1dc259);
-                pbVar25 = argR10 + 0x1dc259;
+              texDxSwizzleByte = *(byte *)((int)instructionRecord2 + 0x16);
+              dxSwizzleWOffset = (uint)texDxSwizzleByte;
+              texSwizzleEnabled = (texFlagsByte & 1) == 0;
+              if (texSwizzleEnabled) {
+                argR10 = (byte *)(texDxSwizzleByte & 0xc);
+                dxSwizzleWOffset = (dxSwizzleWOffset & 3) * 4;
+                dxSwizzleTextW = (char *)(dxSwizzleWOffset + 0x1dc259);
+                dxSwizzleTextX = (char *)((texDxSwizzleByte >> 4 & 0xc) + 0x1dc259);
+                dxSwizzleTextY = (char *)((texDxSwizzleByte >> 2 & 0xc) + 0x1dc259);
+                dxSwizzleTextZ = argR10 + 0x1dc259;
               }
               else {
-                pcVar20 = "-";
-                pcVar14 = pcVar20;
-                pbVar25 = (byte *)pcVar20;
-                pcVar16 = pcVar20;
+                dxSwizzleTextX = "-";
+                dxSwizzleTextY = dxSwizzleTextX;
+                dxSwizzleTextZ = (byte *)dxSwizzleTextX;
+                dxSwizzleTextW = dxSwizzleTextX;
               }
               argR8 = dxSwizzleTextA;
-              FUN_001a32d0(argR8,"%s%s%s%s",pcVar20,pcVar14,pbVar25,pcVar16,uVar19,argR10);
-              bVar3 = *(byte *)((int)instructionRecord2 + 0x16);
-              uVar19 = (uint)bVar3;
-              pcVar14 = (char *)(uint)*(ushort *)(instructionRecord2 + 4);
-              if (bVar24) {
-                argR10 = (byte *)(bVar3 & 0xc);
-                uVar19 = (uVar19 & 3) * 4;
-                pcVar20 = (char *)(uVar19 + 0x1dc259);
-                pcVar22 = (char *)((bVar3 >> 4 & 0xc) + 0x1dc259);
-                pcVar16 = (char *)((bVar3 >> 2 & 0xc) + 0x1dc259);
-                pbVar25 = argR10 + 0x1dc259;
+              FUN_001a32d0(argR8,"%s%s%s%s",dxSwizzleTextX,dxSwizzleTextY,dxSwizzleTextZ,dxSwizzleTextW,dxSwizzleWOffset,argR10);
+              texDySwizzleByte = *(byte *)((int)instructionRecord2 + 0x16);
+              dySwizzleWOffset = (uint)texDySwizzleByte;
+              srcSwizzleTextZ = (char *)(uint)*(ushort *)(instructionRecord2 + 4);
+              if (texSwizzleEnabled) {
+                argR10 = (byte *)(texDySwizzleByte & 0xc);
+                dySwizzleWOffset = (dySwizzleWOffset & 3) * 4;
+                dySwizzleTextW = (char *)(dySwizzleWOffset + 0x1dc259);
+                dySwizzleTextX = (char *)((texDySwizzleByte >> 4 & 0xc) + 0x1dc259);
+                dySwizzleTextY = (char *)((texDySwizzleByte >> 2 & 0xc) + 0x1dc259);
+                dySwizzleTextZ = argR10 + 0x1dc259;
               }
               else {
-                pcVar22 = "-";
-                pcVar16 = pcVar22;
-                pbVar25 = (byte *)pcVar22;
-                pcVar20 = pcVar22;
+                dySwizzleTextX = "-";
+                dySwizzleTextY = dySwizzleTextX;
+                dySwizzleTextZ = (byte *)dySwizzleTextX;
+                dySwizzleTextW = dySwizzleTextX;
               }
-              FUN_001a32d0(operandText0,"%s%s%s%s",pcVar22,pcVar16,pbVar25,pcVar20,uVar19,argR10);
+              FUN_001a32d0(operandText0,"%s%s%s%s",dySwizzleTextX,dySwizzleTextY,dySwizzleTextZ,dySwizzleTextW,dySwizzleWOffset,argR10);
               argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x12);
               in_stack_fffffd2c = &semWaitText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",puVar35,
-                           puVar32,pcVar14,argR8,argR9,operandText0);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
+              ((int (*)())FUN_000d03b4)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",registerTextPtr,
+                           srcSwizzleTextPtr,srcSwizzleTextZ,argR8,argR9,operandText0);
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
               break;
             case 7:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_uncached(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
+              ((int (*)())FUN_000d03b4)(0,"lookup_uncached(%s.%s, tex%02d)%s%s%s%s",registerTextPtr,srcSwizzleTextPtr,texUnit2,
                            argR8,argR9,&aluWaitText);
-              puVar13 = puVar35;
-              argR6 = (char *)puVar32;
-              pcVar14 = (char *)texUnit2;
+              neutralLineArg0 = registerTextPtr;
+              argR6 = (char *)srcSwizzleTextPtr;
+              srcSwizzleTextZ = (char *)texUnit2;
             }
           }
           else {
-            puVar13 = &semWaitText;
+            neutralLineArg0 = &semWaitText;
             argR6 = (char *)&semGrabText;
-            pcVar14 = (char *)&aluWaitText;
+            srcSwizzleTextZ = (char *)&aluWaitText;
             argR8 = &ignUncText;
-            ((int (*)())FUN_000d03b4)(0,"UNKNOWN_OP%s%s%s%s",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"UNKNOWN_OP%s%s%s%s",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           }
-          pbVar25 = (byte *)((int)instructionRecord2 + 5);
+          predicateControlPtr = (byte *)((int)instructionRecord2 + 5);
           if (*(char *)((int)instructionRecord2 + 5) != '\0') {
             if (*(char *)((int)instructionRecord2 + 6) == '\0') {
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT21(0x7000,(*(unsigned char *)((unsigned char *)&(predicateText) + 2)));
@@ -8432,29 +8524,29 @@ LAB_000d1afc:
               argR9 = "!p";
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(s__p_001a74dc[0],(*(unsigned short *)((unsigned char *)&(s__p_001a74dc) + 1)));
             }
-            bVar3 = *pbVar25;
-            if (bVar3 < 6) {
+            predicateModeByte = *predicateControlPtr;
+            if (predicateModeByte < 6) {
               argR9 = (char *)(0);
-              switch(bVar3) {
+              switch(predicateModeByte) {
               case 1:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rgb",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.rgb",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,predicateControlPtr);
                 break;
               case 2:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rrr",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.rrr",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,predicateControlPtr);
                 break;
               case 3:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.ggg",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.ggg",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,predicateControlPtr);
                 break;
               case 4:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.bbb",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.bbb",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,predicateControlPtr);
                 break;
               case 5:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.aaa",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.aaa",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,predicateControlPtr);
               }
             }
           }
@@ -8467,103 +8559,103 @@ LAB_000d1afc:
               argR9 = "!p";
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(s__p_001a74dc[0],(*(unsigned short *)((unsigned char *)&(s__p_001a74dc) + 1)));
             }
-            bVar3 = *argR10;
-            if (bVar3 < 6) {
+            predicateModeByteAlpha = *argR10;
+            if (predicateModeByteAlpha < 6) {
               argR9 = (char *)(0);
-              switch(bVar3) {
+              switch(predicateModeByteAlpha) {
               case 0:
                 break;
               default:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.a",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.a",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
                 break;
               case 2:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.r",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.r",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
                 break;
               case 3:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.g",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.g",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
                 break;
               case 4:
-                puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.b",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                neutralLineArg0 = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.b",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
               }
             }
           }
           if (*(char *)((int)instructionRecord2 + 9) != '\0') {
-            ((int (*)())FUN_000d03b4)(0," write_inactive",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0," write_inactive",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           }
-          ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
-          uVar37 = *instructionRecord2;
+          ((int (*)())FUN_000d03b4)(0,"\n",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
+          recordKind2 = *instructionRecord2;
           texIndex = texIndex + 1;
         }
-        uVar43 = (undefined2)((uint)in_stack_fffffd2c >> 0x10);
-        if ((uVar37 == 3) || (uVar37 == 4)) {
-          pbVar25 = (byte *)((int)instructionRecord2 + 0x31);
-          local_74 = (uint)*(byte *)((int)instructionRecord2 + 0x43);
-          local_ec = (uint)*(byte *)(instructionRecord2 + 0x11);
+        operandAuxHigh = (undefined2)((uint)in_stack_fffffd2c >> 0x10);
+        if ((recordKind2 == 3) || (recordKind2 == 4)) {
+          rgbOpcodePtr = (byte *)((int)instructionRecord2 + 0x31);
+          cfPrevAluDest = (uint)*(byte *)((int)instructionRecord2 + 0x43);
+          cfCompareCode = (uint)*(byte *)(instructionRecord2 + 0x11);
           switch(*(undefined1 *)((int)instructionRecord2 + 0x31)) {
           case 0:
           case 3:
           case 7:
           case 8:
-            bVar24 = true;
-            bVar40 = true;
-            bVar2 = true;
-            local_98 = 0;
+            rgbOperandAUsed = true;
+            rgbOperandBUsed = true;
+            rgbOperandCUsed = true;
+            alphaUseMaskNeutral = 0;
             break;
           case 1:
           case 4:
           case 5:
           case 0xb:
           case 0xc:
-            bVar24 = true;
-            bVar40 = true;
-            bVar2 = false;
-            local_98 = 0;
+            rgbOperandAUsed = true;
+            rgbOperandBUsed = true;
+            rgbOperandCUsed = false;
+            alphaUseMaskNeutral = 0;
             break;
           case 2:
-            bVar24 = true;
-            local_98 = 3;
-            bVar40 = true;
-            bVar2 = false;
+            rgbOperandAUsed = true;
+            alphaUseMaskNeutral = 3;
+            rgbOperandBUsed = true;
+            rgbOperandCUsed = false;
             break;
           default:
-            bVar24 = false;
-            bVar40 = false;
-            bVar2 = false;
-            local_98 = 0;
+            rgbOperandAUsed = false;
+            rgbOperandBUsed = false;
+            rgbOperandCUsed = false;
+            alphaUseMaskNeutral = 0;
             break;
           case 9:
-            bVar24 = true;
-            bVar40 = false;
-            bVar2 = false;
-            local_98 = 0;
+            rgbOperandAUsed = true;
+            rgbOperandBUsed = false;
+            rgbOperandCUsed = false;
+            alphaUseMaskNeutral = 0;
           }
-          puVar33 = instructionRecord2 + 0x10;
+          alphaOpcodePtr = instructionRecord2 + 0x10;
           if (*(byte *)(instructionRecord2 + 0x10) < 0x10) {
-            uVar19 = 1 << ((int)(char)*(byte *)(instructionRecord2 + 0x10) & 0x3fU);
-            if ((uVar19 & 0x61) == 0) {
-              if ((uVar19 & 0xc00c) == 0) {
-                if ((uVar19 & 0x3f80) != 0) {
-                  local_98 = local_98 | 1;
+            rgbOpcodeBit = 1 << ((int)(char)*(byte *)(instructionRecord2 + 0x10) & 0x3fU);
+            if ((rgbOpcodeBit & 0x61) == 0) {
+              if ((rgbOpcodeBit & 0xc00c) == 0) {
+                if ((rgbOpcodeBit & 0x3f80) != 0) {
+                  alphaUseMaskNeutral = alphaUseMaskNeutral | 1;
                 }
               }
               else {
-                local_98 = 3;
+                alphaUseMaskNeutral = 3;
               }
             }
             else {
-              local_98 = 7;
+              alphaUseMaskNeutral = 7;
             }
           }
           rgbSelectABase = *(byte *)((int)instructionRecord2 + 0x2a) & 0xffffff7f;
-          uVar37 = (uint)*(byte *)(instructionRecord2 + 0xb);
+          rgbSelectCRaw = (uint)*(byte *)(instructionRecord2 + 0xb);
           rgbSelectBBase = *(byte *)((int)instructionRecord2 + 0x2b) & 0xffffff7f;
           alphaSelectB = (uint)*(byte *)((int)instructionRecord2 + 0x3a);
           alphaSelectC = (uint)*(byte *)((int)instructionRecord2 + 0x3b);
-          local_dc = *(byte *)(instructionRecord2 + 0xb) & 0xffffff7f;
+          rgbSelectCBase = *(byte *)(instructionRecord2 + 0xb) & 0xffffff7f;
           alphaSelectABase = *(byte *)((int)instructionRecord2 + 0x39) & 0xffffff7f;
           alphaSelectBBase = *(byte *)((int)instructionRecord2 + 0x3a) & 0xffffff7f;
           alphaSelectCBase = *(byte *)((int)instructionRecord2 + 0x3b) & 0xffffff7f;
@@ -8576,335 +8668,335 @@ LAB_000d1afc:
           argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x1e);
           rgbAuxA = *(ushort *)(instructionRecord2 + 9);
           rgbAuxB = *(ushort *)((int)instructionRecord2 + 0x26);
-          local_9c = (uint *)(uint)*(byte *)(instructionRecord2 + 0xe);
+          alphaAuxD = (uint *)(uint)*(byte *)(instructionRecord2 + 0xe);
           alphaAuxB = (uint)*(byte *)((int)instructionRecord2 + 0x36);
           alphaAuxC = (uint)*(byte *)((int)instructionRecord2 + 0x37);
           rgbModA2 = (uint)*(byte *)((int)instructionRecord2 + 0x2d);
           rgbModB2 = (uint)*(byte *)((int)instructionRecord2 + 0x2e);
           rgbModC2 = (uint)*(byte *)((int)instructionRecord2 + 0x2f);
-          local_8c = (uint)*(byte *)(instructionRecord2 + 0xf);
+          alphaModA2 = (uint)*(byte *)(instructionRecord2 + 0xf);
           alphaModB2 = (uint)*(byte *)((int)instructionRecord2 + 0x3d);
           alphaModC2 = (uint)*(byte *)((int)instructionRecord2 + 0x3e);
-          if (bVar24) {
-            bVar24 = rgbSelectABase != 3;
-            if (bVar24) {
+          if (rgbOperandAUsed) {
+            rgbSelectANotSrcp = rgbSelectABase != 3;
+            if (rgbSelectANotSrcp) {
 LAB_000d2654:
-              bVar1 = false;
+              rgbSrcpNeededFlag = false;
             }
             else {
-              iVar10 = ((int (*)())FUN_000d10a8)((uint)rgbAuxA);
-              bVar1 = true;
-              if (iVar10 != 0) goto LAB_000d2654;
+              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxA);
+              rgbSrcpNeededFlag = true;
+              if (auxCheckResult != 0) goto LAB_000d2654;
             }
-            if (!bVar24) {
-              bVar24 = true;
-              iVar10 = ((int (*)())FUN_000d10a8)((uint)rgbAuxA);
-              if (iVar10 != 0) goto LAB_000d2674;
+            if (!rgbSelectANotSrcp) {
+              alphaSrcpNeededFlag = true;
+              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxA);
+              if (auxCheckResult != 0) goto LAB_000d2674;
             }
-            bVar24 = false;
+            alphaSrcpNeededFlag = false;
           }
           else {
-            bVar24 = false;
-            bVar1 = false;
+            alphaSrcpNeededFlag = false;
+            rgbSrcpNeededFlag = false;
           }
 LAB_000d2674:
-          if (bVar40) {
-            bVar40 = rgbSelectBBase != 3;
-            if (bVar40) {
+          if (rgbOperandBUsed) {
+            rgbSelectBNotSrcp = rgbSelectBBase != 3;
+            if (rgbSelectBNotSrcp) {
 LAB_000d269c:
-              bVar3 = 0;
+              srcpNeedBit = 0;
             }
             else {
-              iVar10 = ((int (*)())FUN_000d10a8)((uint)rgbAuxB);
-              bVar3 = 1;
-              if (iVar10 != 0) goto LAB_000d269c;
+              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxB);
+              srcpNeedBit = 1;
+              if (auxCheckResult != 0) goto LAB_000d269c;
             }
-            bVar1 = (bool)(bVar1 | bVar3);
-            if (bVar40) {
+            rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
+            if (rgbSelectBNotSrcp) {
 LAB_000d26bc:
-              bVar3 = 0;
+              srcpNeedBit = 0;
             }
             else {
-              iVar10 = ((int (*)())FUN_000d10a8)((uint)rgbAuxB);
-              bVar3 = 1;
-              if (iVar10 == 0) goto LAB_000d26bc;
+              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxB);
+              srcpNeedBit = 1;
+              if (auxCheckResult == 0) goto LAB_000d26bc;
             }
-            bVar24 = (bool)(bVar24 | bVar3);
+            alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
-          if (bVar2) {
-            bVar2 = local_dc != 3;
-            if (bVar2) {
+          if (rgbOperandCUsed) {
+            rgbSelectCNotSrcp = rgbSelectCBase != 3;
+            if (rgbSelectCNotSrcp) {
 LAB_000d26ec:
-              bVar3 = 0;
+              srcpNeedBit = 0;
             }
             else {
-              iVar10 = ((int (*)())FUN_000d10a8)((uint)rgbAuxC);
-              bVar3 = 1;
-              if (iVar10 != 0) goto LAB_000d26ec;
+              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxC);
+              srcpNeedBit = 1;
+              if (auxCheckResult != 0) goto LAB_000d26ec;
             }
-            bVar1 = (bool)(bVar1 | bVar3);
-            if (bVar2) {
+            rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
+            if (rgbSelectCNotSrcp) {
 LAB_000d270c:
-              bVar3 = 0;
+              srcpNeedBit = 0;
             }
             else {
-              iVar10 = ((int (*)())FUN_000d10a8)((uint)rgbAuxC);
-              bVar3 = 1;
-              if (iVar10 == 0) goto LAB_000d270c;
+              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxC);
+              srcpNeedBit = 1;
+              if (auxCheckResult == 0) goto LAB_000d270c;
             }
-            bVar24 = (bool)(bVar24 | bVar3);
+            alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
-          if ((local_98 & 1) != 0) {
-            if ((alphaSelectABase != 3) || (bVar3 = 1, alphaAuxB == 3)) {
-              bVar3 = 0;
+          if ((alphaUseMaskNeutral & 1) != 0) {
+            if ((alphaSelectABase != 3) || (srcpNeedBit = 1, alphaAuxB == 3)) {
+              srcpNeedBit = 0;
             }
-            bVar1 = (bool)(bVar1 | bVar3);
-            if ((alphaSelectABase != 3) || (bVar3 = 1, alphaAuxB != 3)) {
-              bVar3 = 0;
+            rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
+            if ((alphaSelectABase != 3) || (srcpNeedBit = 1, alphaAuxB != 3)) {
+              srcpNeedBit = 0;
             }
-            bVar24 = (bool)(bVar24 | bVar3);
+            alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
-          puVar21 = (uint *)(local_98 & 2);
-          if (puVar21 != (uint *)0x0) {
-            if ((alphaSelectBBase != 3) || (bVar3 = 1, alphaAuxC == 3)) {
-              bVar3 = 0;
+          alphaUseBitB = (uint *)(alphaUseMaskNeutral & 2);
+          if (alphaUseBitB != (uint *)0x0) {
+            if ((alphaSelectBBase != 3) || (srcpNeedBit = 1, alphaAuxC == 3)) {
+              srcpNeedBit = 0;
             }
-            bVar1 = (bool)(bVar1 | bVar3);
-            if ((alphaSelectBBase != 3) || (bVar3 = 1, alphaAuxC != 3)) {
-              bVar3 = 0;
+            rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
+            if ((alphaSelectBBase != 3) || (srcpNeedBit = 1, alphaAuxC != 3)) {
+              srcpNeedBit = 0;
             }
-            bVar24 = (bool)(bVar24 | bVar3);
+            alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
-          if ((local_98 & 4) != 0) {
+          if ((alphaUseMaskNeutral & 4) != 0) {
             if ((alphaSelectCBase != 3) ||
-               (bVar3 = 1, puVar21 = local_9c, local_9c == (uint *)((int)((unsigned char *)0x0) + 3))) {
-              bVar3 = 0;
+               (srcpNeedBit = 1, alphaUseBitB = alphaAuxD, alphaAuxD == (uint *)((int)((unsigned char *)0x0) + 3))) {
+              srcpNeedBit = 0;
             }
-            bVar1 = (bool)(bVar1 | bVar3);
-            if ((alphaSelectCBase != 3) || (bVar3 = 1, local_9c != (uint *)((int)((unsigned char *)0x0) + 3))) {
-              bVar3 = 0;
+            rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
+            if ((alphaSelectCBase != 3) || (srcpNeedBit = 1, alphaAuxD != (uint *)((int)((unsigned char *)0x0) + 3))) {
+              srcpNeedBit = 0;
             }
-            bVar24 = (bool)(bVar24 | bVar3);
+            alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
-          if (bVar1) {
-            iVar10 = instructionNumber;
-            puVar17 = aluIndex;
-            dVar42 = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.rgb = ",instructionNumber,aluIndex,
-                                          puVar21,alphaSelectC,uVar37,alphaSelectB);
-            cVar9 = *(char *)(instructionRecord2 + 0xc);
-            if (cVar9 == '\x01') {
-              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
-                                            alphaSelectB,dVar42);
-              ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+          if (rgbSrcpNeededFlag) {
+            instructionNumberArg = instructionNumber;
+            aluIndexArg = aluIndex;
+            printfResultScratch = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.rgb = ",instructionNumber,aluIndex,
+                                          alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
+            rgbPreOpKind = *(char *)(instructionRecord2 + 0xc);
+            if (rgbPreOpKind == '\x01') {
+              printfResultScratch = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
+                                            alphaSelectB,printfResultScratch);
+              ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
-            else if (cVar9 == '\0') {
-              ((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.rgb\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            else if (rgbPreOpKind == '\0') {
+              ((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.rgb\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
-            else if (cVar9 == '\x02') {
-              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
-                                            alphaSelectB,dVar42);
-              ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            else if (rgbPreOpKind == '\x02') {
+              printfResultScratch = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
+                                            alphaSelectB,printfResultScratch);
+              ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
-            else if (cVar9 == '\x03') {
-              ((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.rgb\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            else if (rgbPreOpKind == '\x03') {
+              ((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"1.0-%s.rgb\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())FUN_000d03b4)(0,"???\n",instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
           }
-          if (bVar24) {
-            iVar10 = instructionNumber;
-            puVar17 = aluIndex;
-            dVar42 = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.a   = ",instructionNumber,aluIndex,
-                                          puVar21,alphaSelectC,uVar37,alphaSelectB);
+          if (alphaSrcpNeededFlag) {
+            instructionNumberArg = instructionNumber;
+            aluIndexArg = aluIndex;
+            printfResultScratch = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.a   = ",instructionNumber,aluIndex,
+                                          alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             alphaPreOp = *(char *)((int)instructionRecord2 + 0x3f);
             if (alphaPreOp == '\x01') {
-              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
-                                            alphaSelectB,dVar42);
-              ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              printfResultScratch = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
+                                            alphaSelectB,printfResultScratch);
+              ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (alphaPreOp == '\0') {
-              ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (alphaPreOp == '\x02') {
-              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
-                                            alphaSelectB,dVar42);
-              ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              printfResultScratch = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
+                                            alphaSelectB,printfResultScratch);
+              ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (alphaPreOp == '\x03') {
-              ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())FUN_000d03b4)(0,"???\n",instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
           }
-          puVar17 = aluIndex;
-          ((int (*)())FUN_000d03b4)(0,"  %d alu %02d rgb:  ",instructionNumber,aluIndex,puVar21,alphaSelectC,uVar37,alphaSelectB);
-          uVar15 = (uint)*(byte *)((int)instructionRecord2 + 0x15);
-          bVar3 = *(byte *)(instructionRecord2 + 5);
-          if (uVar15 == 0) {
+          rgbDestMaskTextPtr = aluIndex;
+          ((int (*)())FUN_000d03b4)(0,"  %d alu %02d rgb:  ",instructionNumber,aluIndex,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
+          rgbOutputWriteMask = (uint)*(byte *)((int)instructionRecord2 + 0x15);
+          rgbTempWriteMask2 = *(byte *)(instructionRecord2 + 5);
+          if (rgbOutputWriteMask == 0) {
 LAB_000d2b24:
-            ((int (*)())FUN_000d03b4)(0,"           ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())FUN_000d03b4)(0,"           ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
           else if (*instructionRecord2 == 3) {
-            iVar10 = uVar15 * 4;
-            uVar15 = (uint)*(byte *)((int)instructionRecord2 + 0x16);
-            puVar17 = (uint *)(iVar10 + 0x1dc239);
-            ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            rgbDestMaskOffset = rgbOutputWriteMask * 4;
+            rgbOutputWriteMask = (uint)*(byte *)((int)instructionRecord2 + 0x16);
+            rgbDestMaskTextPtr = (uint *)(rgbDestMaskOffset + 0x1dc239);
+            ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
           else {
             if (*instructionRecord2 != 4) goto LAB_000d2b24;
-            uVar15 = uVar15 * 4 + 0x1dc239;
-            ((int (*)())FUN_000d03b4)(0,"pred.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            rgbOutputWriteMask = rgbOutputWriteMask * 4 + 0x1dc239;
+            ((int (*)())FUN_000d03b4)(0,"pred.%s = ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             rgbOutIndex = *(char *)((int)instructionRecord2 + 0x16);
             if (rgbOutIndex == '\x01') {
-              ((int (*)())FUN_000d03b4)(0,"(<) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())FUN_000d03b4)(0,"(<) ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (rgbOutIndex == '\0') {
-              ((int (*)())FUN_000d03b4)(0,"(==) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())FUN_000d03b4)(0,"(==) ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (rgbOutIndex == '\x02') {
-              ((int (*)())FUN_000d03b4)(0,"(>=) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())FUN_000d03b4)(0,"(>=) ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (rgbOutIndex == '\x03') {
-              ((int (*)())FUN_000d03b4)(0,"(!=) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())FUN_000d03b4)(0,"(!=) ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
           }
-          if (bVar3 == 0) {
-            ((int (*)())FUN_000d03b4)(0,"          ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+          if (rgbTempWriteMask2 == 0) {
+            ((int (*)())FUN_000d03b4)(0,"          ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
           else {
-            uVar15 = (uint)*(ushort *)(instructionRecord2 + 3);
-            puVar17 = (uint *)((uint)bVar3 * 4 + 0x1dc239);
-            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            rgbOutputWriteMask = (uint)*(ushort *)(instructionRecord2 + 3);
+            rgbDestMaskTextPtr = (uint *)((uint)rgbTempWriteMask2 * 4 + 0x1dc239);
+            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
           if (*(char *)((int)instructionRecord2 + 0x33) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())FUN_000d03b4)(0,"clamped ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
-          puVar21 = operandText1;
-          uVar11 = CONCAT22(uVar43,rgbAuxA);
-          ((int (*)())FUN_000d13a4)(puVar21,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,rgbSelectABase,rgbModA2,
-                       uVar11,(uint)*pbVar25);
-          uVar11 = CONCAT22((short)((uint)uVar11 >> 0x10),rgbAuxB);
+          operandText1Ptr = operandText1;
+          operandAuxWord = CONCAT22(operandAuxHigh,rgbAuxA);
+          ((int (*)())FUN_000d13a4)(operandText1Ptr,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,rgbSelectABase,rgbModA2,
+                       operandAuxWord,(uint)*rgbOpcodePtr);
+          operandAuxWord = CONCAT22((short)((uint)operandAuxWord >> 0x10),rgbAuxB);
           argR6 = (char *)operandText6;
           ((int (*)())FUN_000d13a4)(argR6,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,rgbSelectBBase,rgbModB2,
-                       uVar11,(uint)*pbVar25);
-          puVar17 = operandText5;
-          ((int (*)())FUN_000d13a4)(puVar17,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,local_dc,rgbModC2,
-                       CONCAT22((short)((uint)uVar11 >> 0x10),rgbAuxC),(uint)*pbVar25);
-          local_60 = operandText4;
-          ((int (*)())FUN_000d1624)(local_60,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectABase,local_8c,
-                       alphaAuxB,(uint)*(byte *)puVar33);
-          local_64 = operandText3;
-          ((int (*)())FUN_000d1624)(local_64,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectBBase,alphaModB2,
-                       alphaAuxC,(uint)*(byte *)puVar33);
-          local_68 = operandText2;
-          uVar19 = alphaSelectCBase;
-          in_stack_fffffd2c = local_9c;
-          ((int (*)())FUN_000d1624)(local_68,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBase,alphaModC2,
-                       local_9c,(uint)*(byte *)puVar33);
-          bVar3 = *pbVar25;
-          if (bVar3 < 0xd) {
+                       operandAuxWord,(uint)*rgbOpcodePtr);
+          operandText5Ptr = operandText5;
+          ((int (*)())FUN_000d13a4)(operandText5Ptr,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,rgbSelectCBase,rgbModC2,
+                       CONCAT22((short)((uint)operandAuxWord >> 0x10),rgbAuxC),(uint)*rgbOpcodePtr);
+          operandText4Ptr = operandText4;
+          ((int (*)())FUN_000d1624)(operandText4Ptr,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectABase,alphaModA2,
+                       alphaAuxB,(uint)*(byte *)alphaOpcodePtr);
+          operandText3Ptr = operandText3;
+          ((int (*)())FUN_000d1624)(operandText3Ptr,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectBBase,alphaModB2,
+                       alphaAuxC,(uint)*(byte *)alphaOpcodePtr);
+          operandText2Ptr = operandText2;
+          alphaSelectCBaseArg = alphaSelectCBase;
+          in_stack_fffffd2c = alphaAuxD;
+          ((int (*)())FUN_000d1624)(operandText2Ptr,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBase,alphaModC2,
+                       alphaAuxD,(uint)*(byte *)alphaOpcodePtr);
+          rgbOpcodeByte2 = *rgbOpcodePtr;
+          if (rgbOpcodeByte2 < 0xd) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(rgbOpcodeByte2) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
-              puVar17 = alphaAddrA;
+              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",operandText1Ptr,argR6,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+              operandText5Ptr = alphaAddrA;
               break;
             case 2:
-              puVar13 = local_60;
-              puVar17 = (uint *)argR6;
-              argR8 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"dp4(%s:%s, %s:%s)",puVar21,local_60,argR6,local_64,argR9,uVar19);
-              argR6 = (char *)puVar13;
+              operandText4Ptr2 = operandText4Ptr;
+              operandText5Ptr = (uint *)argR6;
+              argR8 = operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"dp4(%s:%s, %s:%s)",operandText1Ptr,operandText4Ptr,argR6,operandText3Ptr,argR9,alphaSelectCBaseArg);
+              argR6 = (char *)operandText4Ptr2;
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
-              puVar17 = alphaAddrA;
+              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",operandText1Ptr,argR6,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+              operandText5Ptr = alphaAddrA;
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
-              puVar17 = alphaAddrA;
+              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",operandText1Ptr,argR6,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+              operandText5Ptr = alphaAddrA;
               break;
             case 6:
               goto switchD_000d2d30_caseD_6;
             case 7:
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 8:
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 9:
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",puVar21,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"frc(%s)",operandText1Ptr,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
               argR6 = (char *)rgbAddrC;
-              puVar17 = alphaAddrA;
+              operandText5Ptr = alphaAddrA;
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"sop()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
-              puVar21 = rgbAddrB;
+              ((int (*)())FUN_000d03b4)(0,"sop()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+              operandText1Ptr = rgbAddrB;
               argR6 = (char *)rgbAddrC;
-              puVar17 = alphaAddrA;
+              operandText5Ptr = alphaAddrA;
               break;
             case 0xb:
-              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
-              puVar17 = alphaAddrA;
+              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",operandText1Ptr,argR6,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+              operandText5Ptr = alphaAddrA;
               break;
             case 0xc:
-              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
-              puVar17 = alphaAddrA;
+              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",operandText1Ptr,argR6,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+              operandText5Ptr = alphaAddrA;
             }
           }
           else {
 switchD_000d2d30_caseD_6:
-            ((int (*)())FUN_000d03b4)(0,"???()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
-            puVar21 = rgbAddrB;
+            ((int (*)())FUN_000d03b4)(0,"???()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
+            operandText1Ptr = rgbAddrB;
             argR6 = (char *)rgbAddrC;
-            puVar17 = alphaAddrA;
+            operandText5Ptr = alphaAddrA;
           }
-          bVar3 = *(byte *)((int)instructionRecord2 + 0x32);
-          if (bVar3 < 7) {
+          rgbOutputScaleByte2 = *(byte *)((int)instructionRecord2 + 0x32);
+          if (rgbOutputScaleByte2 < 7) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(rgbOutputScaleByte2) {
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"*2",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"*4",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"*8",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"/2",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"/4",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())FUN_000d03b4)(0,"/8",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+            ((int (*)())FUN_000d03b4)(0,"*???",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
           }
           if (((*(unsigned char *)((unsigned char *)&(semWaitText) + 0)) != '\0') || ((*(unsigned char *)((unsigned char *)&(aluWaitText) + 0)) != '\0')) {
-            puVar21 = &semWaitText;
+            operandText1Ptr = &semWaitText;
             argR6 = (char *)&aluWaitText;
-            ((int (*)())FUN_000d03b4)(0,"%s%s",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+            ((int (*)())FUN_000d03b4)(0,"%s%s",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
           }
           argR10 = (byte *)((int)instructionRecord2 + 5);
           if (*(char *)((int)instructionRecord2 + 5) != '\0') {
@@ -8915,185 +9007,185 @@ switchD_000d2d30_caseD_6:
               argR9 = "!p";
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(s__p_001a74dc[0],(*(unsigned short *)((unsigned char *)&(s__p_001a74dc) + 1)));
             }
-            bVar3 = *argR10;
-            if (bVar3 < 6) {
+            predicateModeByte2 = *argR10;
+            if (predicateModeByte2 < 6) {
               argR9 = (char *)(0);
-              switch(bVar3) {
+              switch(predicateModeByte2) {
               case 1:
-                puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rgb",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                operandText1Ptr = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.rgb",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
                 break;
               case 2:
-                puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rrr",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                operandText1Ptr = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.rrr",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
                 break;
               case 3:
-                puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.ggg",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                operandText1Ptr = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.ggg",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
                 break;
               case 4:
-                puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.bbb",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                operandText1Ptr = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.bbb",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
                 break;
               case 5:
-                puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.aaa",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                operandText1Ptr = &predicateText;
+                ((int (*)())FUN_000d03b4)(0," %s.aaa",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               }
             }
           }
-          ((int (*)())FUN_000d03b4)(0,"\n",puVar21,argR6,puVar17,argR8,argR9,argR10);
-          puVar13 = aluIndex;
-          ((int (*)())FUN_000d03b4)(0,"         alpha:  ",aluIndex,argR6,puVar17,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0,"\n",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
+          neutralLineArg0 = aluIndex;
+          ((int (*)())FUN_000d03b4)(0,"         alpha:  ",aluIndex,argR6,operandText5Ptr,argR8,argR9,argR10);
           alphaTempEnable = *(char *)(instructionRecord2 + 8);
-          bVar24 = *(char *)((int)instructionRecord2 + 0x21) != '\0';
+          alphaOutputEnableFlag2 = *(char *)((int)instructionRecord2 + 0x21) != '\0';
           depthWrite = *(char *)((int)instructionRecord2 + 0x23);
-          if (bVar24) {
+          if (alphaOutputEnableFlag2) {
             if (*instructionRecord2 == 3) {
-              puVar13 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x22);
-              ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x22);
+              ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
             }
             else if (*instructionRecord2 == 4) {
-              ((int (*)())FUN_000d03b4)(0,"pred.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"pred.a   = ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               alphaOutIndex = *(char *)((int)instructionRecord2 + 0x22);
               if (alphaOutIndex == '\x01') {
-                ((int (*)())FUN_000d03b4)(0,"(<) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())FUN_000d03b4)(0,"(<) ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               }
               else if (alphaOutIndex == '\0') {
-                ((int (*)())FUN_000d03b4)(0,"(==) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())FUN_000d03b4)(0,"(==) ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               }
               else if (alphaOutIndex == '\x02') {
-                ((int (*)())FUN_000d03b4)(0,"(>=) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())FUN_000d03b4)(0,"(>=) ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               }
               else if (alphaOutIndex == '\x03') {
-                ((int (*)())FUN_000d03b4)(0,"(!=) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())FUN_000d03b4)(0,"(!=) ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               }
             }
           }
-          bVar2 = depthWrite != '\0';
-          if (bVar2) {
-            ((int (*)())FUN_000d03b4)(0,"depth    = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+          depthWriteFlag2 = depthWrite != '\0';
+          if (depthWriteFlag2) {
+            ((int (*)())FUN_000d03b4)(0,"depth    = ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
-          if ((!bVar24) && (!bVar2)) {
-            ((int (*)())FUN_000d03b4)(0,"           ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+          if ((!alphaOutputEnableFlag2) && (!depthWriteFlag2)) {
+            ((int (*)())FUN_000d03b4)(0,"           ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           if (alphaTempEnable == '\0') {
-            ((int (*)())FUN_000d03b4)(0,"          ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"          ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           else {
-            puVar13 = (uint *)(uint)*(ushort *)(instructionRecord2 + 6);
-            ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            neutralLineArg0 = (uint *)(uint)*(ushort *)(instructionRecord2 + 6);
+            ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           if (*(char *)((int)instructionRecord2 + 0x42) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"clamped ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
-          bVar3 = *(byte *)puVar33;
-          if (bVar3 < 0x10) {
+          alphaOpcodeByte2 = *(byte *)alphaOpcodePtr;
+          if (alphaOpcodeByte2 < 0x10) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(alphaOpcodeByte2) {
             case 0:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              puVar17 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              operandText5Ptr = operandText2Ptr;
+              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",operandText4Ptr,operandText3Ptr,operandText2Ptr,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp()",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"dp()",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 2:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",operandText4Ptr,operandText3Ptr,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 3:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",operandText4Ptr,operandText3Ptr,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 4:
               goto switchD_000d324c_caseD_4;
             case 5:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              puVar17 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              operandText5Ptr = operandText2Ptr;
+              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",operandText4Ptr,operandText3Ptr,operandText2Ptr,argR8,argR9,argR10);
               break;
             case 6:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              puVar17 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              operandText5Ptr = operandText2Ptr;
+              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",operandText4Ptr,operandText3Ptr,operandText2Ptr,argR8,argR9,argR10);
               break;
             case 7:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"frc(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 8:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"ex2(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"ex2(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 9:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"ln2(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"ln2(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 10:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"rcp(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"rcp(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 0xb:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"rsq(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"rsq(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 0xc:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"sin(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"sin(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 0xd:
-              puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"cos(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              ((int (*)())FUN_000d03b4)(0,"cos(%s)",operandText4Ptr,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 0xe:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",operandText4Ptr,operandText3Ptr,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 0xf:
-              puVar13 = local_60;
-              argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              neutralLineArg0 = operandText4Ptr;
+              argR6 = (char *)operandText3Ptr;
+              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",operandText4Ptr,operandText3Ptr,operandText5Ptr,argR8,argR9,argR10);
             }
           }
           else {
 switchD_000d324c_caseD_4:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"???()",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
-          bVar3 = *(byte *)((int)instructionRecord2 + 0x41);
-          if (bVar3 < 7) {
+          alphaOutputScaleByte2 = *(byte *)((int)instructionRecord2 + 0x41);
+          if (alphaOutputScaleByte2 < 7) {
             argR9 = (char *)(0);
-            switch(bVar3) {
+            switch(alphaOutputScaleByte2) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0," ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0," ",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*2",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*4",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"*8",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/2",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/4",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0,"/8",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"*???",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           if (*(char *)((int)instructionRecord2 + 10) == '\0') {
             argR10 = (byte *)((int)instructionRecord2 + 7);
@@ -9105,70 +9197,70 @@ switchD_000d324c_caseD_4:
                 argR9 = "!p";
                 (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(s__p_001a74dc[0],(*(unsigned short *)((unsigned char *)&(s__p_001a74dc) + 1)));
               }
-              bVar3 = *argR10;
-              if (bVar3 < 6) {
+              predicateModeByteAlpha2 = *argR10;
+              if (predicateModeByteAlpha2 < 6) {
                 argR9 = (char *)(0);
-                switch(bVar3) {
+                switch(predicateModeByteAlpha2) {
                 case 0:
                   break;
                 default:
-                  puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.a",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  neutralLineArg0 = &predicateText;
+                  ((int (*)())FUN_000d03b4)(0," %s.a",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
                   break;
                 case 2:
-                  puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.r",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  neutralLineArg0 = &predicateText;
+                  ((int (*)())FUN_000d03b4)(0," %s.r",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
                   break;
                 case 3:
-                  puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.g",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  neutralLineArg0 = &predicateText;
+                  ((int (*)())FUN_000d03b4)(0," %s.g",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
                   break;
                 case 4:
-                  puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.b",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  neutralLineArg0 = &predicateText;
+                  ((int (*)())FUN_000d03b4)(0," %s.b",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
                 }
               }
             }
             if (*(char *)((int)instructionRecord2 + 9) != '\0') {
-              ((int (*)())FUN_000d03b4)(0," write_inactive",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())FUN_000d03b4)(0," write_inactive",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
             }
-            ((int (*)())FUN_000d03b4)(0," \n",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0," \n",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           else {
-            ((int (*)())FUN_000d03b4)(0," last\n",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0," last\n",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           if (*(char *)(instructionRecord2 + 0xd) != '\0') {
-            puVar13 = aluIndex;
-            ((int (*)())FUN_000d03b4)(0,"   alu %02d post-NOP\n",aluIndex,argR6,puVar17,argR8,argR9,argR10
+            neutralLineArg0 = aluIndex;
+            ((int (*)())FUN_000d03b4)(0,"   alu %02d post-NOP\n",aluIndex,argR6,operandText5Ptr,argR8,argR9,argR10
                         );
           }
-          uVar37 = *instructionRecord2;
+          recordKind2 = *instructionRecord2;
           aluIndex = (uint *)((int)aluIndex + 1);
         }
-        if (uVar37 == 5) {
-          if (local_ec == 1) {
+        if (recordKind2 == 5) {
+          if (cfCompareCode == 1) {
             argR9 = "lt";
             srcpTextB = CONCAT12(s_lt_001a77dc[0],(*(unsigned short *)((unsigned char *)&(s_lt_001a77dc) + 1)));
           }
-          else if (local_ec == 0) {
+          else if (cfCompareCode == 0) {
             argR9 = "eq";
             srcpTextB = CONCAT12(s_eq_001a77d8[0],(*(unsigned short *)((unsigned char *)&(s_eq_001a77d8) + 1)));
           }
-          else if (local_ec == 2) {
+          else if (cfCompareCode == 2) {
             argR9 = "ge";
             srcpTextB = CONCAT12(s_ge_001a77e0[0],(*(unsigned short *)((unsigned char *)&(s_ge_001a77e0) + 1)));
           }
-          else if (local_ec == 3) {
+          else if (cfCompareCode == 3) {
             argR9 = "ne";
             srcpTextB = CONCAT12(s_ne_001a77e4[0],(*(unsigned short *)((unsigned char *)&(s_ne_001a77e4) + 1)));
           }
           else {
             srcpTextB = CONCAT21(0x2000,uStack_29e);
           }
-          if (local_74 == 0) {
+          if (cfPrevAluDest == 0) {
             srcpTextA = 0x72656400;
           }
-          else if (local_74 == 1) {
+          else if (cfPrevAluDest == 1) {
             argR9 = "alpha";
             (*(unsigned char *)((unsigned char *)&(srcpTextA) + 0)) = s_alpha_001a77e8[0];
             (*(unsigned char *)((unsigned char *)&(srcpTextA) + 1)) = s_alpha_001a77e8[1];
@@ -9181,7 +9273,7 @@ switchD_000d324c_caseD_4:
             srcpTextA = CONCAT22(0x2000,(*(unsigned short *)((unsigned char *)&(srcpTextA) + 2)));
           }
           argR6 = (char *)cfWordText;
-          ((int (*)())FUN_000d03b4)(0,"  %d cf  %02d    :  ",instructionNumber,cfIndex,local_ec,argR8,argR9,argR10);
+          ((int (*)())FUN_000d03b4)(0,"  %d cf  %02d    :  ",instructionNumber,cfIndex,cfCompareCode,argR8,argR9,argR10);
           in_stack_fffffd2c = (uint *)0x0;
           argR10 = (byte *)((uint)*(byte *)((int)instructionRecord2 + 0x15) * 10 + 0x1dc1bc);
           argR9 = (char *)((uint)*(byte *)(instructionRecord2 + 5) * 10 + 0x1dc1bc);
@@ -9190,49 +9282,49 @@ switchD_000d324c_caseD_4:
                        (uint)*(byte *)((int)instructionRecord2 + 0xe) * 10 + 0x1dc1e9,
                        (uint)*(byte *)((int)instructionRecord2 + 0x11) * 5 + 0x1dc1da,argR9,argR10);
           if (PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0 == (undefined *)0x0) {
-            iVar10 = 0;
+            cfOpTableIndex = 0;
           }
           else {
-            ppuVar38 = &PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8;
-            iVar10 = 0;
-            puVar39 = PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0;
+            cfOpNameCursor = &PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8;
+            cfOpTableIndex = 0;
+            cfOpNameEntry = PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0;
             do {
-              uVar11 = _strlen(puVar39);
-              iVar12 = _strncmp(puVar39,argR6,uVar11);
-              if (iVar12 == 0) break;
-              puVar39 = *ppuVar38;
-              iVar10 = iVar10 + 2;
-              ppuVar38 = ppuVar38 + 2;
-            } while (puVar39 != (undefined *)0x0);
+              cfNameLength = _strlen(cfOpNameEntry);
+              cfNameCompare = _strncmp(cfOpNameEntry,argR6,cfNameLength);
+              if (cfNameCompare == 0) break;
+              cfOpNameEntry = *cfOpNameCursor;
+              cfOpTableIndex = cfOpTableIndex + 2;
+              cfOpNameCursor = cfOpNameCursor + 2;
+            } while (cfOpNameEntry != (undefined *)0x0);
           }
-          puVar13 = (uint *)(PTR_s_IF_b_001dc2cc)[iVar10];
-          puVar33 = &semWaitText;
+          neutralLineArg0 = (uint *)(PTR_s_IF_b_001dc2cc)[cfOpTableIndex];
+          semWaitTextPtr = &semWaitText;
           argR8 = &aluWaitText;
-          ((int (*)())FUN_000d03b4)(0,"%s(%s)%s%s",puVar13,argR6,puVar33,argR8,argR9,argR10);
-          cVar9 = *(char *)((int)instructionRecord2 + 0x12);
-          if ((cVar9 == -0x10) || (cVar9 == '\x0f')) {
-            puVar13 = &srcpTextA;
+          ((int (*)())FUN_000d03b4)(0,"%s(%s)%s%s",neutralLineArg0,argR6,semWaitTextPtr,argR8,argR9,argR10);
+          cfAddressByte = *(char *)((int)instructionRecord2 + 0x12);
+          if ((cfAddressByte == -0x10) || (cfAddressByte == '\x0f')) {
+            neutralLineArg0 = &srcpTextA;
             argR6 = (char *)&srcpTextB;
-            ((int (*)())FUN_000d03b4)(0,"( prev_alu: %s %s )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"( prev_alu: %s %s )\n",neutralLineArg0,argR6,semWaitTextPtr,argR8,argR9,argR10);
           }
-          else if ((cVar9 == -0x56) || (cVar9 == 'U')) {
-            puVar13 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x17);
-            ((int (*)())FUN_000d03b4)(0,"( bool_addr: %d )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
+          else if ((cfAddressByte == -0x56) || (cfAddressByte == 'U')) {
+            neutralLineArg0 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x17);
+            ((int (*)())FUN_000d03b4)(0,"( bool_addr: %d )\n",neutralLineArg0,argR6,semWaitTextPtr,argR8,argR9,argR10);
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
+            ((int (*)())FUN_000d03b4)(0,"\n",neutralLineArg0,argR6,semWaitTextPtr,argR8,argR9,argR10);
           }
           cfIndex = cfIndex + 1;
         }
-        iVar31 = iVar31 + 1;
+        rsRecordNumber2 = rsRecordNumber2 + 1;
         instructionRecord2 = instructionRecord2 + 0x12;
         instructionNumber = instructionNumber + 1;
-        uVar19 = recordCount2;
-      } while (iVar31 <= (int)recordCount2);
+        neutralRecordCountArg = recordCount2;
+      } while (rsRecordNumber2 <= (int)recordCount2);
     }
-    ((int (*)())FUN_000d03b4)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
-    ((int (*)())FUN_000d03b4)(0,"======== End r520 neutral format pixel shader =============\n",puVar13,argR6,
-                 uVar19,argR8,argR9,argR10);
+    ((int (*)())FUN_000d03b4)(0,blankLineFormatOffset + 0x5b00,neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
+    ((int (*)())FUN_000d03b4)(0,"======== End r520 neutral format pixel shader =============\n",neutralLineArg0,argR6,
+                 neutralRecordCountArg,argR8,argR9,argR10);
   }
   return;
 }
