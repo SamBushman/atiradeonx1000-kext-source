@@ -5577,22 +5577,22 @@ LAB_00035dd8:
 }
 
 /* FUN_000369f0 @ 0x369f0 (9972 bytes) */
-int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, height, depth, pixelFormat, pixelType, param_13, param_14, param_15)
+int FUN_000369f0(ctx, texture, face, level, xOffset, yOffset, zOffset, width, height, depth, pixelFormat, pixelType, pixels, rawTransfer, sourceSurface)
   int ctx;
   int *texture;
   int face;
   uint level;
-  uint param_5;
-  uint param_6;
-  int param_7;
+  uint xOffset;
+  uint yOffset;
+  int zOffset;
   uint width;
   uint height;
   int depth;
   int pixelFormat;
   undefined *pixelType;
-  uint param_13;
-  undefined4 param_14;
-  undefined4 *param_15;
+  uint pixels;
+  undefined4 rawTransfer;
+  undefined4 *sourceSurface;
 {
   undefined4 *packet;
   uint fg_alpha_func;
@@ -5645,7 +5645,7 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   float fVar7;
   short sVar8;
   ushort uVar9;
-  ushort uVar10;
+  ushort levelWidthB;
   short sVar11;
   float fVar12;
   float fVar13;
@@ -5665,7 +5665,7 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   int iVar27;
   undefined4 uVar28;
   uint *puVar29;
-  undefined4 *puVar30;
+  undefined4 *texPacket;
   undefined *a2;
   undefined4 uVar31;
   int iVar32;
@@ -5677,7 +5677,7 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   uint *puVar38;
   int iVar39;
   undefined4 *puVar40;
-  undefined *puVar41;
+  undefined *bytesLeft;
   uint uVar42;
   int iVar43;
   uint uVar44;
@@ -5685,21 +5685,21 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   char reservation;
   byte bVar46;
   uint uStack_248;
-  int iStack_244;
-  uint uStack_240;
+  int srcSkipBytes;
+  uint srcBytesPerPixel;
   uint *puStack_23c;
-  uint uStack_238;
+  uint srcRowBytes;
   uint uStack_234;
   uint uStack_230;
   uint *puStack_22c;
   uint uStack_228;
-  uint uStack_224;
-  uint uStack_220;
+  uint procChannelFormat;
+  uint procChannelSize;
   undefined4 uStack_21c;
-  uint uStack_218;
+  uint procFlags;
   undefined *puStack_214;
-  uint uStack_210;
-  uint uStack_20c;
+  uint procWidth;
+  uint procHeight;
   undefined4 uStack_208;
   undefined4 uStack_204;
   undefined1 uStack_1d0;
@@ -5707,51 +5707,51 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   uint uStack_1c4;
   undefined4 uStack_1c0;
   uint uStack_1bc;
-  undefined4 uStack_1b8;
-  uint uStack_1b4;
-  undefined4 uStack_1b0;
-  uint uStack_1ac;
-  undefined4 uStack_1a8;
-  uint uStack_1a4;
-  undefined4 uStack_1a0;
-  uint uStack_19c;
-  longlong lStack_198;
-  longlong lStack_190;
-  longlong lStack_188;
-  longlong lStack_180;
-  longlong lStack_178;
-  longlong lStack_170;
-  longlong lStack_168;
-  longlong lStack_160;
-  longlong lStack_158;
-  longlong lStack_150;
-  undefined4 uStack_148;
-  uint uStack_144;
-  undefined4 uStack_140;
-  uint uStack_13c;
-  longlong lStack_138;
-  undefined4 uStack_130;
-  uint uStack_12c;
-  undefined4 uStack_128;
-  uint uStack_124;
-  longlong lStack_120;
-  uint uStack_118;
-  int iStack_114;
-  int iStack_110;
+  undefined4 xoffsetI2dHiB;
+  uint xoffsetI2dLoB;
+  undefined4 yoffsetI2dHiB;
+  uint yoffsetI2dLoB;
+  undefined4 widthI2dHiB;
+  uint widthI2dLoB;
+  undefined4 heightI2dHiB;
+  uint heightI2dLoB;
+  longlong fctiwzSlot0;
+  longlong fctiwzSlot1;
+  longlong fctiwzSlot2;
+  longlong fctiwzSlot3;
+  longlong fctiwzSlot4;
+  longlong fctiwzSlot5;
+  longlong fctiwzSlot6;
+  longlong fctiwzSlot7;
+  longlong fctiwzSlot8;
+  longlong fctiwzSlot9;
+  undefined4 yStartI2dHi;
+  uint yStartI2dLo;
+  undefined4 yEndI2dHi;
+  uint yEndI2dLo;
+  longlong fctiwzSlot10;
+  undefined4 xoffsetI2dHi;
+  uint xoffsetI2dLo;
+  undefined4 xEndI2dHi;
+  uint xEndI2dLo;
+  longlong fctiwzSlot11;
+  uint chunkRowsHw;
+  int rowEnd;
+  int rowEndB;
   uint *puStack_10c;
   uint uStack_108;
-  uint uStack_104;
-  uint uStack_100;
+  uint widthMask;
+  uint levelFaceWord;
   int *piStack_fc;
-  uint uStack_f8;
-  int iStack_f4;
-  uint uStack_f0;
-  uint uStack_ec;
-  uint uStack_e8;
-  int iStack_e4;
-  uint uStack_e0;
-  int iStack_dc;
-  int iStack_d8;
+  uint levelHeight;
+  int mappingOffsetB;
+  uint dstPitchCopy;
+  uint chunkHeight;
+  uint levelWidth;
+  int rowsDone;
+  uint chunkRows;
+  int mappingOffset;
+  int chunkBytes;
   code *pcStack_d4;
   code *pcStack_d0;
   int iStack_cc;
@@ -5762,14 +5762,14 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   uint *puStack_b8;
   uint *puStack_b4;
   code *pcStack_b0;
-  uint uStack_ac;
+  uint levelId;
   code *pcStack_a8;
   int iStack_a4;
-  uint uStack_a0;
+  uint faceId;
   int iStack_9c;
   
-  if (param_15 == (undefined4 *)0x0) {
-    uVar42 = param_6;
+  if (sourceSurface == (undefined4 *)0x0) {
+    uVar42 = yOffset;
     _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
     uVar44 = 0;
     iVar43 = face;
@@ -5793,35 +5793,35 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
           uVar28 = ((int (*)())FUN_00030840)(ctx,uVar28,texture);
           *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
           (**(code **)(ctx + GLD_streamSetCurrent))(iVar43,uVar28);
-          uStack_e0 = 0x1e000 / uVar24;
+          chunkRows = 0x1e000 / uVar24;
           uVar42 = ((int (*)())FUN_0002f7c0)(pixelFormat,pixelType);
           if ((uVar42 == *(byte *)(texture + 0xe)) && ((*(uint *)(iVar39 + 0x14) & 7) < 3)) {
-            uStack_118 = 0x10000 / uVar24;
+            chunkRowsHw = 0x10000 / uVar24;
             if (0 < (int)height) {
               iStack_a4 = level * 0x18;
               iStack_cc = face * 0x168;
-              uStack_ac = level & 0xffff;
-              iStack_dc = (face * 0xd + level) * 0x20;
-              puStack_c4 = &uStack_240;
-              piStack_c8 = &iStack_244;
-              uStack_a0 = face << 0x10;
-              iStack_e4 = 0;
-              puStack_bc = &uStack_238;
+              levelId = level & 0xffff;
+              mappingOffset = (face * 0xd + level) * 0x20;
+              puStack_c4 = &srcBytesPerPixel;
+              piStack_c8 = &srcSkipBytes;
+              faceId = face << 0x10;
+              rowsDone = 0;
+              puStack_bc = &srcRowBytes;
               do {
-                iStack_114 = iStack_e4 + uStack_118;
-                bVar1 = (int)height <= iStack_114;
-                if ((int)height < iStack_114) {
-                  uStack_ec = height - iStack_e4;
+                rowEnd = rowsDone + chunkRowsHw;
+                bVar1 = (int)height <= rowEnd;
+                if ((int)height < rowEnd) {
+                  chunkHeight = height - rowsDone;
                 }
                 else {
-                  uStack_ec = uStack_118;
+                  chunkHeight = chunkRowsHw;
                 }
-                iStack_d8 = uVar24 * uStack_ec;
+                chunkBytes = uVar24 * chunkHeight;
                 puVar23 = *(uint **)(ctx + GLD_dataCursor);
                 uVar26 = *(uint *)(iVar39 + 0x18) >> 0x1e ^ 2;
                 if (*(undefined1 **)(ctx + GLD_dataLimit) <=
-                    (undefined1 *)((int)puVar23 + iStack_d8 + 0x80)) {
-                  iStack_244 = 2;
+                    (undefined1 *)((int)puVar23 + chunkBytes + 0x80)) {
+                  srcSkipBytes = 2;
                   uVar44 = *(int *)(ctx + GLD_dataRefillCount) + 1;
                   *(uint *)(ctx + GLD_dataRefillCount) = uVar44;
                   if (2 < uVar44) {
@@ -5839,7 +5839,7 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
                   *(uint **)(ctx + GLD_dataBase) = puStack_23c;
                   *(uint **)(ctx + GLD_dataCursor) = puStack_23c;
                   *(undefined1 **)(ctx + GLD_dataLimit) =
-                       (undefined1 *)((int)puStack_23c + (uStack_238 & 0xfffffffc));
+                       (undefined1 *)((int)puStack_23c + (srcRowBytes & 0xfffffffc));
                   uVar28 = *(undefined4 *)(*(int *)(ctx + GLD_contextBufferMap) + 8);
                   *(uint *)(0x000026c8 + ctx) = uVar44 | 1;
                   *(undefined4 *)(ctx + GLD_dataBufferId) = uVar28;
@@ -5849,18 +5849,18 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
                 puStack_22c = (uint *)((uint)((int)puVar23 + 0x7f) & 0xffffff80);
                 *(uint **)(ctx + GLD_dataCursor) = puStack_22c;
                 uStack_21c = 2;
-                uStack_20c = uStack_ec;
+                procHeight = chunkHeight;
                 uStack_234 = *(uint *)(iVar39 + 0x10) >> 0x1b;
                 uStack_204 = 0;
                 uStack_208 = 0;
                 puStack_214 = (undefined *)0x0;
-                uStack_218 = 0;
+                procFlags = 0;
                 uStack_230 = *(uint *)(iVar39 + 0x10) >> 0x16 & 0x1f;
-                if ((char)param_14 == '\0') {
+                if ((char)rawTransfer == '\0') {
                   engineState = *(int *)(ctx + GLD_engineState);
                   puVar25 = ((unsigned char *)0x00002e6c) + engineState;
                   if (((unsigned char *)0x00002e84)[engineState] != '\0') {
-                    uStack_218 = 1;
+                    procFlags = 1;
                     if (pixelType < (undefined *)0x8037) {
                       if (pixelType < (undefined *)0x8035) {
                         if (((unsigned char *)0x00001406) < pixelType) {
@@ -5894,7 +5894,7 @@ LAB_00037c6c:
                     uVar26 = uVar26 ^ uVar44;
                   }
                   if (((unsigned char *)0x00002e85)[engineState] != '\0') {
-                    uStack_218 = uStack_218 | 4;
+                    procFlags = procFlags | 4;
                   }
                 }
                 else {
@@ -5902,20 +5902,20 @@ LAB_00037c6c:
                 }
                 a2 = pixelType;
                 uStack_228 = uVar24;
-                uStack_224 = uStack_234;
-                uStack_220 = uStack_230;
-                uStack_210 = width;
+                procChannelFormat = uStack_234;
+                procChannelSize = uStack_230;
+                procWidth = width;
                 puStack_10c = puStack_22c;
                 FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puStack_bc,puStack_c4,
                              piStack_c8,puVar25);
-                uVar44 = uStack_238;
-                puStack_23c = (uint *)(param_13 + iStack_244 + iStack_e4 * uStack_238);
+                uVar44 = srcRowBytes;
+                puStack_23c = (uint *)(pixels + srcSkipBytes + rowsDone * srcRowBytes);
                 if (uVar26 == 2) {
-                  a2 = (undefined *)(uStack_240 * uStack_210);
-                  if (0 < (int)uStack_20c) {
+                  a2 = (undefined *)(srcBytesPerPixel * procWidth);
+                  if (0 < (int)procHeight) {
                     puVar23 = puStack_23c;
                     puVar29 = puStack_22c;
-                    uVar26 = uStack_20c;
+                    uVar26 = procHeight;
                     do {
                       uVar26 = uVar26 - 1;
                       if (0 < (int)a2) {
@@ -5934,17 +5934,17 @@ LAB_00037c6c:
                           iVar22 = iVar22 + -1;
                         } while (iVar22 != 0);
                       }
-                      puVar23 = (uint *)((int)puVar23 + uStack_238);
+                      puVar23 = (uint *)((int)puVar23 + srcRowBytes);
                       puVar29 = (uint *)((int)puVar29 + uStack_228);
                     } while (0 < (int)uVar26);
                   }
                 }
                 else if (uVar26 == 3) {
-                  iVar22 = uStack_240 * uStack_210;
-                  if (0 < (int)uStack_20c) {
+                  iVar22 = srcBytesPerPixel * procWidth;
+                  if (0 < (int)procHeight) {
                     puVar23 = puStack_23c;
                     puVar29 = puStack_22c;
-                    uVar26 = uStack_20c;
+                    uVar26 = procHeight;
                     do {
                       uVar26 = uVar26 - 1;
                       if (0 < iVar22) {
@@ -5962,17 +5962,17 @@ LAB_00037c6c:
                           iVar45 = iVar45 + -1;
                         } while (iVar45 != 0);
                       }
-                      puVar23 = (uint *)((int)puVar23 + uStack_238);
+                      puVar23 = (uint *)((int)puVar23 + srcRowBytes);
                       puVar29 = (uint *)((int)puVar29 + uStack_228);
                     } while (0 < (int)uVar26);
                   }
                 }
                 else if (uVar26 == 1) {
-                  iVar22 = uStack_240 * uStack_210;
-                  if (0 < (int)uStack_20c) {
+                  iVar22 = srcBytesPerPixel * procWidth;
+                  if (0 < (int)procHeight) {
                     puVar23 = puStack_23c;
                     puVar29 = puStack_22c;
-                    uVar26 = uStack_20c;
+                    uVar26 = procHeight;
                     do {
                       uVar26 = uVar26 - 1;
                       if (0 < iVar22) {
@@ -5990,40 +5990,40 @@ LAB_00037c6c:
                           iVar45 = iVar45 + -1;
                         } while (iVar45 != 0);
                       }
-                      puVar23 = (uint *)((int)puVar23 + uStack_238);
+                      puVar23 = (uint *)((int)puVar23 + srcRowBytes);
                       puVar29 = (uint *)((int)puVar29 + uStack_228);
                     } while (0 < (int)uVar26);
                   }
                 }
                 else {
-                  puVar25 = (undefined *)(uStack_240 * uStack_210);
-                  uStack_f0 = uStack_228;
+                  puVar25 = (undefined *)(srcBytesPerPixel * procWidth);
+                  dstPitchCopy = uStack_228;
                   puVar23 = puStack_23c;
                   puVar29 = puStack_22c;
-                  uVar26 = uStack_20c;
+                  uVar26 = procHeight;
                   if ((int)puVar25 < 0x11) {
                     while (0 < (int)uVar26) {
                       puVar33 = puVar23;
                       puVar37 = puVar29;
-                      puVar41 = puVar25;
+                      bytesLeft = puVar25;
                       if ((((uint)puVar29 & 1) != 0) && (puVar25 != (undefined *)0x0)) {
                         *(undefined1 *)puVar29 = *(undefined1 *)puVar23;
                         puVar33 = (uint *)((int)puVar23 + 1);
                         puVar37 = (uint *)((int)puVar29 + 1);
-                        puVar41 = puVar25 + -1;
+                        bytesLeft = puVar25 + -1;
                       }
-                      if ((((uint)puVar37 & 2) != 0) && ((undefined *)0x1 < puVar41)) {
+                      if ((((uint)puVar37 & 2) != 0) && ((undefined *)0x1 < bytesLeft)) {
                         uVar9 = *(ushort *)puVar33;
-                        puVar41 = puVar41 + -2;
+                        bytesLeft = bytesLeft + -2;
                         puVar33 = (uint *)((int)puVar33 + 2);
                         *(ushort *)puVar37 = uVar9;
                         puVar37 = (uint *)((int)puVar37 + 2);
                       }
-                      if ((undefined *)0x3 < puVar41) {
+                      if ((undefined *)0x3 < bytesLeft) {
                         iVar45 = 0;
-                        iVar22 = ((uint)(puVar41 + -4) >> 2) + 1;
+                        iVar22 = ((uint)(bytesLeft + -4) >> 2) + 1;
                         do {
-                          puVar41 = puVar41 + -4;
+                          bytesLeft = bytesLeft + -4;
                           *(undefined4 *)((int)puVar37 + iVar45) =
                                *(undefined4 *)((int)puVar33 + iVar45);
                           iVar45 = iVar45 + 4;
@@ -6032,17 +6032,17 @@ LAB_00037c6c:
                         puVar37 = (uint *)((int)puVar37 + iVar45);
                         puVar33 = (uint *)((int)puVar33 + iVar45);
                       }
-                      if ((undefined *)0x1 < puVar41) {
+                      if ((undefined *)0x1 < bytesLeft) {
                         uVar9 = *(ushort *)puVar33;
-                        puVar41 = puVar41 + -2;
+                        bytesLeft = bytesLeft + -2;
                         puVar33 = (uint *)((int)puVar33 + 2);
                         *(ushort *)puVar37 = uVar9;
                         puVar37 = (uint *)((int)puVar37 + 2);
                       }
-                      if (puVar41 != (undefined *)0x0) {
+                      if (bytesLeft != (undefined *)0x0) {
                         *(undefined1 *)puVar37 = *(undefined1 *)puVar33;
                       }
-                      puVar23 = (uint *)((int)puVar23 + uStack_238);
+                      puVar23 = (uint *)((int)puVar23 + srcRowBytes);
                       puVar29 = (uint *)((int)puVar29 + uStack_228);
                       uVar26 = uVar26 - 1;
                     }
@@ -6052,20 +6052,20 @@ LAB_00037c6c:
                       a2 = puVar25;
                       _memcpy(puVar29,puVar23,puVar25);
                       puVar23 = (uint *)((int)puVar23 + uVar44);
-                      puVar29 = (uint *)((int)puVar29 + uStack_f0);
+                      puVar29 = (uint *)((int)puVar29 + dstPitchCopy);
                     }
                   }
                 }
                 iVar22 = (int)puStack_10c - *(int *)(ctx + GLD_dataBase);
-                *(int *)(ctx + GLD_dataCursor) = (int)puStack_10c + iStack_d8;
+                *(int *)(ctx + GLD_dataCursor) = (int)puStack_10c + chunkBytes;
                 packet = (undefined4 *)
-                          (**(code **)(ctx + GLD_streamAllocate))(iVar43,0x2a,a2,puStack_10c,iStack_d8);
+                          (**(code **)(ctx + GLD_streamAllocate))(iVar43,0x2a,a2,puStack_10c,chunkBytes);
                 uVar42 = 0;
                 *(undefined4 **)(ctx + GLD_streamCurrent) = packet;
                 lastHeader = *(uint **)(ctx + GLD_lastHeader);
                 *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
                 *(undefined4 **)(ctx + GLD_lastHeader) = packet;
-                packet[2] = uStack_a0 | uStack_ac;
+                packet[2] = faceId | levelId;
                 *packet = 0x44000000;
                 packet[1] = 0x2a;
                 dataBufferId = *(undefined4 *)(ctx + GLD_dataBufferId);
@@ -6090,8 +6090,8 @@ LAB_00037c6c:
                 packet[0x15] = 0x501;
                 packet[0xe] = uVar26 >> 0xf & 0xf00 | 0x2cc30fb;
                 if ((texture[0xd] == 0) || (*(char *)(texture[0xd] + 0x16) != '\x06')) {
-                  iVar22 = *texture + 0x40 + iStack_dc;
-                  packet[0x16] = param_7 * *(int *)(iVar22 + 0x14) + *(int *)(iVar22 + 8);
+                  iVar22 = *texture + 0x40 + mappingOffset;
+                  packet[0x16] = zOffset * *(int *)(iVar22 + 0x14) + *(int *)(iVar22 + 8);
                 }
                 else {
                   packet[0x16] = 0;
@@ -6099,7 +6099,7 @@ LAB_00037c6c:
                 iVar22 = iStack_a4 + iStack_cc + texture[0xc];
                 uVar9 = *(ushort *)(iVar22 + 0xa6);
                 uVar44 = (uint)uVar9;
-                uVar10 = *(ushort *)(iVar22 + 0xa4);
+                levelWidthB = *(ushort *)(iVar22 + 0xa4);
                 if (*(char *)(texture[0xc] + 0x6d) == '\0') {
                   if ((texture[0xd] == 0) || ((*(byte *)(texture[0xd] + 0x15) & 0x18) == 0)) {
                     iVar22 = 0x20;
@@ -6111,7 +6111,7 @@ LAB_00037c6c:
                   }
                   uVar26 = *(uint *)(iVar39 + 0x14) & 7;
                   iVar22 = iVar22 >> uVar26;
-                  iVar22 = (((uint)uVar10 + iVar22) - 1 & -iVar22) << uVar26;
+                  iVar22 = (((uint)levelWidthB + iVar22) - 1 & -iVar22) << uVar26;
                 }
                 else {
                   iVar22 = (uint)*(ushort *)((int)texture + 0x3e) << (*(uint *)(iVar39 + 0x14) & 7);
@@ -6145,7 +6145,7 @@ LAB_00037c6c:
                 packet[0x1a] = uVar26;
                 packet[0x1b] = 0x5bb;
                 packet[0x1d] = 0x5bc;
-                packet[0x1e] = CONCAT22(uVar9,uVar10);
+                packet[0x1e] = CONCAT22(uVar9,levelWidthB);
                 packet[0x1c] = 0;
                 uVar26 = *(uint *)(iVar39 + 0x18) >> 0x17 & 0x1f;
                 if ((uVar26 < 3) || ((iVar22 = 1, 4 < uVar26 && (iVar22 = 2, uVar26 != 6)))) {
@@ -6153,9 +6153,9 @@ LAB_00037c6c:
                 }
                 uVar35 = (*(uint *)(iVar39 + 0x14) & 7) - iVar22;
                 uVar26 = 0;
-                uVar21 = (iStack_e4 + param_6) * 0x10000 | param_5 << (uVar35 & 0x3f) & 0xffff;
+                uVar21 = (rowsDone + yOffset) * 0x10000 | xOffset << (uVar35 & 0x3f) & 0xffff;
                 packet[0x24] = 0xd0b;
-                packet[0x22] = uStack_ec << 0x10 | width << (uVar35 & 0x3f) & 0xffff;
+                packet[0x22] = chunkHeight << 0x10 | width << (uVar35 & 0x3f) & 0xffff;
                 packet[0x1f] = 0x50e;
                 packet[0x20] = uVar21;
                 packet[0x21] = 0x50f;
@@ -6169,42 +6169,42 @@ LAB_00037c6c:
                 (**(code **)(ctx + GLD_streamSetCurrent))
                           (iVar43,packet + 0x2a,a2,0,uVar44,uVar42,uVar21,packet + 0x24);
                 if (bVar1) break;
-                iStack_e4 = iStack_114;
+                rowsDone = rowEnd;
               } while( true );
             }
           }
           else if (0 < (int)height) {
-            uStack_12c = param_5 ^ 0x80000000;
-            uStack_124 = width + param_5 ^ 0x80000000;
-            uStack_128 = 0x43300000;
-            uStack_130 = 0x43300000;
+            xoffsetI2dLo = xOffset ^ 0x80000000;
+            xEndI2dLo = width + xOffset ^ 0x80000000;
+            xEndI2dHi = 0x43300000;
+            xoffsetI2dHi = 0x43300000;
             pcStack_a8 = IrInt2F__dtor;
             iStack_9c = 0x1e6a08;
             iStack_a4 = level * 0x18;
             iStack_cc = face * 0x168;
-            iStack_f4 = (face * 0xd + level) * 0x20;
-            uStack_104 = width - 1 & 0x7ff;
-            uStack_100 = level | face << 0x10;
-            puStack_c4 = &uStack_240;
+            mappingOffsetB = (face * 0xd + level) * 0x20;
+            widthMask = width - 1 & 0x7ff;
+            levelFaceWord = level | face << 0x10;
+            puStack_c4 = &srcBytesPerPixel;
             puStack_b8 = &uStack_234;
-            piStack_c8 = &iStack_244;
+            piStack_c8 = &srcSkipBytes;
             ppuStack_c0 = &puStack_23c;
-            puStack_bc = &uStack_238;
+            puStack_bc = &srcRowBytes;
             pcStack_d0 = IrInt2F__dtor;
             puStack_b4 = &uStack_230;
             pcStack_d4 = IrInt2F__dtor;
             pcStack_b0 = IrInt2F__dtor;
-            fVar4 = (float)((double)CONCAT44(0x43300000,uStack_12c) - 4503601774854144.0);
-            fVar5 = (float)((double)CONCAT44(0x43300000,uStack_124) - 4503601774854144.0);
+            fVar4 = (float)((double)CONCAT44(0x43300000,xoffsetI2dLo) - 4503601774854144.0);
+            fVar5 = (float)((double)CONCAT44(0x43300000,xEndI2dLo) - 4503601774854144.0);
             iVar22 = (int)((fVar5 - fVar4) * 6.0);
-            lStack_120 = (longlong)iVar22;
+            fctiwzSlot11 = (longlong)iVar22;
             uStack_108 = iVar22 << 0x10;
             iVar22 = 0;
             do {
-              iStack_110 = iVar22 + uStack_e0;
-              bVar1 = iStack_110 < (int)height;
-              uVar42 = uStack_e0;
-              if ((int)height < iStack_110) {
+              rowEndB = iVar22 + chunkRows;
+              bVar1 = rowEndB < (int)height;
+              uVar42 = chunkRows;
+              if ((int)height < rowEndB) {
                 uVar42 = height - iVar22;
               }
               uVar26 = (width << (*(uint *)(iVar39 + 0x14) & 7)) + 0x23 & 0xffffffe0;
@@ -6215,15 +6215,15 @@ LAB_00037c6c:
               lastHeader = *(uint **)(ctx + GLD_lastHeader);
               uVar28 = *(undefined4 *)(iStack_9c + 0x1ec8);
               iVar45 = iStack_a4 + iStack_cc + texture[0xc];
-              uStack_f8 = (uint)*(ushort *)(iVar45 + 0xa6);
+              levelHeight = (uint)*(ushort *)(iVar45 + 0xa6);
               uVar9 = *(ushort *)(iVar45 + 0xa4);
               *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
               *(undefined4 **)(ctx + GLD_lastHeader) = packet;
               *packet = 0x35000000;
-              packet[2] = uStack_100;
+              packet[2] = levelFaceWord;
               _memcpy(packet + 3,uVar28,0x2f4);
               uVar44 = *(uint *)(iVar39 + 0x18);
-              packet[0xa9] = (uVar42 - 1) * 0x800 & 0x3ff800 | uStack_104 | 0x80000000;
+              packet[0xa9] = (uVar42 - 1) * 0x800 & 0x3ff800 | widthMask | 0x80000000;
               packet[0xa3] = uVar44 >> 0x1e | packet[0xa3] & 0xfffffffc;
               uVar44 = *(uint *)(((unsigned char *)0x00003c14) +
                                 (int)(pcStack_d0 + (*(uint *)(iVar39 + 0x14) & 7) * 4));
@@ -6252,8 +6252,8 @@ LAB_00037c6c:
               iVar27 = iVar27 >> (*(uint *)(iVar39 + 0x14) & 7);
               if ((iVar45 == 0) || (*(char *)(iVar45 + 0x16) != '\x06')) {
                 uVar44 = 0;
-                iVar45 = *texture + 0x40 + iStack_f4;
-                iVar45 = param_7 * *(int *)(iVar45 + 0x14) + *(int *)(iVar45 + 8);
+                iVar45 = *texture + 0x40 + mappingOffsetB;
+                iVar45 = zOffset * *(int *)(iVar45 + 0x14) + *(int *)(iVar45 + 8);
               }
               else {
                 iVar45 = 0;
@@ -6294,24 +6294,24 @@ LAB_00038698:
               }
               uVar21 = *(uint *)(((unsigned char *)0x00003bec) +
                                 (int)(pcStack_b0 + (*(uint *)(iVar39 + 0x14) & 7) * 4));
-              uStack_144 = iVar22 + param_6 ^ 0x80000000;
-              uStack_13c = uVar42 + iVar22 + param_6 ^ 0x80000000;
-              packet[0xb6] = uVar24 - 1 & 0x1fff | (uStack_f8 - 1) * 0x2000 & 0x3ffe000;
+              yStartI2dLo = iVar22 + yOffset ^ 0x80000000;
+              yEndI2dLo = uVar42 + iVar22 + yOffset ^ 0x80000000;
+              packet[0xb6] = uVar24 - 1 & 0x1fff | (levelHeight - 1) * 0x2000 & 0x3ffe000;
               puVar40 = packet + 0xcc;
               packet[0x9f] =
                    uVar35 | uVar24 & 0x3ffe | iVar27 << 0x10 | uVar44 | (uVar21 & 0xf) << 0x15;
-              uStack_140 = 0x43300000;
-              uStack_148 = 0x43300000;
+              yEndI2dHi = 0x43300000;
+              yStartI2dHi = 0x43300000;
               packet[0xc0] = 0x31080;
               packet[0xc4] = 0;
               packet[0xc1] = 0;
               packet[0xc5] = ((unsigned char *)0x00001087U);
               packet[0xc3] = 0x3f800000;
               packet[0xc2] = 0x3f800000;
-              fVar2 = (float)((double)CONCAT44(0x43300000,uStack_13c) - 4503601774854144.0);
-              fVar3 = (float)((double)CONCAT44(0x43300000,uStack_144) - 4503601774854144.0);
+              fVar2 = (float)((double)CONCAT44(0x43300000,yEndI2dLo) - 4503601774854144.0);
+              fVar3 = (float)((double)CONCAT44(0x43300000,yStartI2dLo) - 4503601774854144.0);
               uVar44 = (uint)(int)((fVar2 - fVar3) * 6.0);
-              lStack_138 = (longlong)(int)uVar44;
+              fctiwzSlot10 = (longlong)(int)uVar44;
               packet[199] = 0xc0033500;
               packet[200] = 0x10031;
               packet[0xca] = (fVar3 + fVar2) * 0.5;
@@ -6544,20 +6544,20 @@ LAB_00038698:
                   iVar45 = iVar45 + -1;
                 } while (iVar45 != 0);
               }
-              uStack_224 = *(uint *)(iVar39 + 0x10) >> 0x1b;
+              procChannelFormat = *(uint *)(iVar39 + 0x10) >> 0x1b;
               sVar8 = *(short *)(texture[0xc] + 0x1a);
               sVar11 = *(short *)(texture[0xc] + 2);
               uStack_204 = 0;
-              uStack_218 = 0;
+              procFlags = 0;
               puStack_214 = ((unsigned char *)0x0007efffU);
               uStack_208 = 0;
-              uStack_220 = *(uint *)(iVar39 + 0x10) >> 0x16 & 0x1f;
-              if ((char)param_14 == '\0') {
+              procChannelSize = *(uint *)(iVar39 + 0x10) >> 0x16 & 0x1f;
+              if ((char)rawTransfer == '\0') {
                 iVar45 = *(int *)(ctx + GLD_engineState);
                 puVar25 = ((unsigned char *)0x00002e6c) + iVar45;
-                uStack_218 = (uint)(((unsigned char *)0x00002e84)[iVar45] != '\0');
+                procFlags = (uint)(((unsigned char *)0x00002e84)[iVar45] != '\0');
                 if (((unsigned char *)0x00002e85)[iVar45] != '\0') {
-                  uStack_218 = uStack_218 | 4;
+                  procFlags = procFlags | 4;
                 }
               }
               else {
@@ -6575,21 +6575,21 @@ LAB_00038698:
                              );
               if ((((sVar11 != 0x1908) && (sVar8 != -0x7a43)) && (sVar11 != 0x1906)) &&
                  ((sVar11 != 0x190a &&
-                  ((0x15 < uStack_224 || ((1 << (uStack_224 & 0x3f) & 0x3ff707U) == 0)))))) {
-                uStack_218 = uStack_218 | 0x8000;
+                  ((0x15 < procChannelFormat || ((1 << (procChannelFormat & 0x3f) & 0x3ff707U) == 0)))))) {
+                procFlags = procFlags | 0x8000;
               }
               uStack_21c = 2;
               uStack_1d0 = 0;
-              puStack_23c = (uint *)(param_13 + uStack_240 + iVar22 * uStack_238);
-              uVar26 = param_13;
+              puStack_23c = (uint *)(pixels + srcBytesPerPixel + iVar22 * srcRowBytes);
+              uVar26 = pixels;
               puStack_22c = puVar23;
-              uStack_210 = width;
-              uStack_20c = uVar42;
+              procWidth = width;
+              procHeight = uVar42;
               _glgProcessPixels(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState),ppuStack_c0,puVar33,
-                                param_13,uVar44,puVar37,iVar22 * uStack_238,puVar38);
+                                pixels,uVar44,puVar37,iVar22 * srcRowBytes,puVar38);
               *(uint **)(ctx + GLD_streamCurrent) = puVar29;
               (**(code **)(ctx + GLD_streamSetCurrent))(iVar43,puVar29);
-              iVar22 = iStack_110;
+              iVar22 = rowEndB;
             } while (bVar1);
           }
           uVar28 = (**(code **)(ctx + GLD_streamAllocate))(iVar43,0xe0);
@@ -6619,11 +6619,11 @@ LAB_00037930:
     return 0;
   }
   puVar23 = &uStack_248;
-  FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puVar23,&uStack_240,&iStack_244,
+  FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puVar23,&srcBytesPerPixel,&srcSkipBytes,
                ((unsigned char *)0x00002e6c) + *(int *)(ctx + GLD_engineState));
-  iVar39 = *(int *)*param_15;
-  uVar44 = param_13 + iStack_244;
-  if (0x1000 < (int)uStack_248 >> (uStack_240 & 0x3f)) {
+  iVar39 = *(int *)*sourceSurface;
+  uVar44 = pixels + srcSkipBytes;
+  if (0x1000 < (int)uStack_248 >> (srcBytesPerPixel & 0x3f)) {
     return 0;
   }
   if (0x1000 < (int)height) {
@@ -6642,15 +6642,15 @@ LAB_00037930:
   iVar27 = ((int (*)())FUN_00031220)(ctx,texture,face,level,0);
   if ((iVar27 == 0) || ((*(uint *)(iVar27 + 0x18) & 0x10000) == 0)) goto LAB_00037930;
   iVar45 = iVar45 + texture[0xc];
-  uStack_e8 = (uint)*(ushort *)(iVar45 + 0xa4);
+  levelWidth = (uint)*(ushort *)(iVar45 + 0xa4);
   uVar42 = (uint)*(ushort *)(iVar45 + 0xa6);
-  if (uStack_e8 == 0) {
+  if (levelWidth == 0) {
     fVar4 = 1.0;
-    uStack_e8 = 1;
+    levelWidth = 1;
   }
   else {
     uStack_1c8 = 0x43300000;
-    uStack_1c4 = uStack_e8 ^ 0x80000000;
+    uStack_1c4 = levelWidth ^ 0x80000000;
     fVar4 = (float)((double)CONCAT44(0x43300000,uStack_1c4) - 4503601774854144.0);
   }
   if (uVar42 == 0) {
@@ -6662,21 +6662,21 @@ LAB_00037930:
     uStack_1c0 = 0x43300000;
     fVar5 = (float)((double)CONCAT44(0x43300000,uStack_1bc) - 4503601774854144.0);
   }
-  uStack_1b4 = param_5 ^ 0x80000000;
-  uStack_1a4 = width ^ 0x80000000;
-  uStack_1b8 = 0x43300000;
-  uStack_1ac = param_6 ^ 0x80000000;
-  uStack_1a0 = 0x43300000;
-  uStack_1b0 = 0x43300000;
-  uStack_1a8 = 0x43300000;
-  uStack_19c = height ^ 0x80000000;
+  xoffsetI2dLoB = xOffset ^ 0x80000000;
+  widthI2dLoB = width ^ 0x80000000;
+  xoffsetI2dHiB = 0x43300000;
+  yoffsetI2dLoB = yOffset ^ 0x80000000;
+  heightI2dHiB = 0x43300000;
+  yoffsetI2dHiB = 0x43300000;
+  widthI2dHiB = 0x43300000;
+  heightI2dLoB = height ^ 0x80000000;
   fVar6 = 0.0;
-  fVar2 = (float)((double)CONCAT44(0x43300000,uStack_1b4) - 4503601774854144.0);
-  fVar3 = (float)((double)CONCAT44(0x43300000,uStack_1ac) - 4503601774854144.0);
+  fVar2 = (float)((double)CONCAT44(0x43300000,xoffsetI2dLoB) - 4503601774854144.0);
+  fVar3 = (float)((double)CONCAT44(0x43300000,yoffsetI2dLoB) - 4503601774854144.0);
   fVar7 = fVar2 + 0.0;
   fVar16 = fVar3 + 0.0;
-  fVar17 = (float)((double)CONCAT44(0x43300000,uStack_19c) - 4503601774854144.0) + fVar3;
-  fVar14 = (float)((double)CONCAT44(0x43300000,uStack_1a4) - 4503601774854144.0) + fVar2;
+  fVar17 = (float)((double)CONCAT44(0x43300000,heightI2dLoB) - 4503601774854144.0) + fVar3;
+  fVar14 = (float)((double)CONCAT44(0x43300000,widthI2dLoB) - 4503601774854144.0) + fVar2;
   fVar15 = fVar7;
   if (0.0 < fVar7) {
     fVar15 = fVar2 + fVar7;
@@ -6710,8 +6710,8 @@ LAB_00037930:
   if (((((*(byte *)((int)texture + 0x39) & 7) != 0) &&
        (iVar22 = ((int (*)())FUN_00032100)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",puVar23),
        iVar22 == 0)) ||
-      ((*(int *)param_15[1] != 0 && (iVar22 = FUN_0001e280(ctx,param_15,1), iVar22 == 0)))) ||
-     (((int *)param_15[2] == (int *)0x0 || (iVar22 = *(int *)param_15[2], iVar22 == 0))))
+      ((*(int *)sourceSurface[1] != 0 && (iVar22 = FUN_0001e280(ctx,sourceSurface,1), iVar22 == 0)))) ||
+     (((int *)sourceSurface[2] == (int *)0x0 || (iVar22 = *(int *)sourceSurface[2], iVar22 == 0))))
   goto LAB_00037930;
   if (*(char *)(iVar22 + 0x16) != '\x06') {
     if (pixelFormat == 0x1908) {
@@ -6728,14 +6728,14 @@ LAB_00037930:
   uVar28 = (**(code **)(ctx + GLD_streamAllocate))(iVar45,0x343);
   *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
   puVar29 = (uint *)((int (*)())FUN_00030840)(ctx,uVar28,texture);
-  puVar30 = (undefined4 *)((uint)(puVar29 + 0xb) & 0xffffffe0);
-  *puVar29 = (((int)puVar30 - (int)puVar29) + -8) * 0x4000 | 0xc0001000;
-  puVar30[-1] = (int)puVar30 - (int)puVar29;
+  texPacket = (undefined4 *)((uint)(puVar29 + 0xb) & 0xffffffe0);
+  *puVar29 = (((int)texPacket - (int)puVar29) + -8) * 0x4000 | 0xc0001000;
+  texPacket[-1] = (int)texPacket - (int)puVar29;
   lastHeader = *(uint **)(ctx + GLD_lastHeader);
-  *lastHeader = (int)puVar30 - (int)lastHeader >> 2 | *lastHeader;
-  *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
-  *puVar30 = 0x3e000000;
-  puVar40 = *(undefined4 **)param_15[2];
+  *lastHeader = (int)texPacket - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + GLD_lastHeader) = texPacket;
+  *texPacket = 0x3e000000;
+  puVar40 = *(undefined4 **)sourceSurface[2];
   piVar36 = puVar40 + 4;
   do {
     if (reservation != '\0') {
@@ -6745,11 +6745,11 @@ LAB_00037930:
     }
     puVar25 = PTR_DAT_001e88d0;
   } while (!(bool)(bVar46 >> 1 & 1));
-  puVar30[2] = *puVar40;
-  iVar20 = *(int *)*param_15;
-  puVar30[4] = level | face << 0x10;
-  puVar30[3] = uVar44 - iVar20;
-  _memcpy(puVar30 + 5,puVar25,0x2f4);
+  texPacket[2] = *puVar40;
+  iVar20 = *(int *)*sourceSurface;
+  texPacket[4] = level | face << 0x10;
+  texPacket[3] = uVar44 - iVar20;
+  _memcpy(texPacket + 5,puVar25,0x2f4);
   iVar20 = texture[0xd];
   if ((iVar20 == 0) || ((*(byte *)(iVar20 + 0x15) & 0x18) == 0)) {
     iVar34 = 0x20;
@@ -6761,10 +6761,10 @@ LAB_00037930:
   iVar34 = iVar34 >> (*(uint *)(iVar27 + 0x14) & 7);
   if ((iVar20 == 0) || (iVar32 = 0, *(char *)(iVar20 + 0x16) != '\x06')) {
     iVar20 = *texture + 0x40 + (face * 0xd + level) * 0x20;
-    iVar32 = param_7 * *(int *)(iVar20 + 0x14) + *(int *)(iVar20 + 8);
+    iVar32 = zOffset * *(int *)(iVar20 + 0x14) + *(int *)(iVar20 + 8);
   }
   if (*(char *)(texture[0xc] + 0x6d) == '\0') {
-    uVar26 = (uStack_e8 + iVar34) - 1 & -iVar34;
+    uVar26 = (levelWidth + iVar34) - 1 & -iVar34;
   }
   else {
     uVar26 = (uint)*(ushort *)((int)texture + 0x3e);
@@ -6772,52 +6772,52 @@ LAB_00037930:
   fVar4 = (fVar13 + fVar2) - fVar15;
   fVar5 = (fVar14 + fVar3) - fVar16;
   fVar17 = fVar4 - 1.0;
-  puVar30[0xa5] = *(uint *)(&DAT_001d9f4c + iVar22) >> 0x1e | puVar30[0xa5] & 0xfffffffc;
+  texPacket[0xa5] = *(uint *)(&DAT_001d9f4c + iVar22) >> 0x1e | texPacket[0xa5] & 0xfffffffc;
   if (2.1474836e+09 <= fVar17) {
-    lStack_190 = (longlong)(int)(fVar17 - 2.1474836e+09);
+    fctiwzSlot1 = (longlong)(int)(fVar17 - 2.1474836e+09);
     uVar24 = (int)(fVar17 - 2.1474836e+09) + 0x80000000;
   }
   else {
     uVar24 = (uint)(int)fVar17;
-    lStack_198 = (longlong)(int)uVar24;
+    fctiwzSlot0 = (longlong)(int)uVar24;
   }
   fVar17 = fVar5 - 1.0;
   if (2.1474836e+09 <= fVar17) {
-    lStack_180 = (longlong)(int)(fVar17 - 2.1474836e+09);
+    fctiwzSlot3 = (longlong)(int)(fVar17 - 2.1474836e+09);
     uVar35 = (int)(fVar17 - 2.1474836e+09) + 0x80000000;
   }
   else {
     uVar35 = (uint)(int)fVar17;
-    lStack_188 = (longlong)(int)uVar35;
+    fctiwzSlot2 = (longlong)(int)uVar35;
   }
-  puVar30[0xab] = uVar24 & 0x7ff | (uVar35 & 0x7ff) << 0xb | 0x80000000;
+  texPacket[0xab] = uVar24 & 0x7ff | (uVar35 & 0x7ff) << 0xb | 0x80000000;
   uVar24 = *(uint *)(&DAT_001d9f50 + iVar22);
   uVar35 = *(uint *)(&DAT_001d9f54 + iVar22);
-  puVar30[0xad] =
+  texPacket[0xad] =
        uVar24 >> 7 & 0x1f | uVar35 >> 3 & 0x400000 | (uVar24 & 0x70) << 5 | (uVar24 & 0xe) << 0xb |
        uVar35 >> 0xe & 0x38000 | uVar35 >> 8 & 0x1c0000;
   uVar24 = *(uint *)(&DAT_001d9f48 + iVar22);
   if (2.1474836e+09 <= fVar4) {
-    lStack_170 = (longlong)(int)(fVar4 - 2.1474836e+09);
+    fctiwzSlot5 = (longlong)(int)(fVar4 - 2.1474836e+09);
     iVar22 = (int)(fVar4 - 2.1474836e+09) + -0x80000000;
   }
   else {
     iVar22 = (int)fVar4;
-    lStack_178 = (longlong)iVar22;
+    fctiwzSlot4 = (longlong)iVar22;
   }
   if (2.1474836e+09 <= fVar5) {
-    lStack_160 = (longlong)(int)(fVar5 - 2.1474836e+09);
+    fctiwzSlot7 = (longlong)(int)(fVar5 - 2.1474836e+09);
     iVar20 = (int)(fVar5 - 2.1474836e+09) + -0x80000000;
   }
   else {
     iVar20 = (int)fVar5;
-    lStack_168 = (longlong)iVar20;
+    fctiwzSlot6 = (longlong)iVar20;
   }
-  puVar30[0x9f] = iVar32;
-  puVar30[0xaf] =
+  texPacket[0x9f] = iVar32;
+  texPacket[0xaf] =
        ((int)uStack_248 >> (uVar24 & 7)) - 1U & 0x3fff | (iVar22 + -1) * 0x10 & 0xffff8000U |
        (iVar20 + -1) * 0x20 & 0xffff0000U;
-  puVar30[0xa5] = (uVar44 - iVar39) * 0x20 | puVar30[0xa5] & 0x1f;
+  texPacket[0xa5] = (uVar44 - iVar39) * 0x20 | texPacket[0xa5] & 0x1f;
   iVar39 = texture[0xd];
   if ((iVar39 != 0) && ((*(byte *)(iVar39 + 0x15) & 4) != 0)) {
     uVar44 = level - *(byte *)(texture[0xc] + 0x69);
@@ -6843,247 +6843,247 @@ LAB_000371ac:
   else {
     uVar44 = 0;
   }
-  uVar21 = puVar30[0x8f];
-  puVar30[0xa1] =
+  uVar21 = texPacket[0x8f];
+  texPacket[0xa1] =
        uVar44 | uVar26 & 0x3ffe | iVar22 << 0x10 | *(uint *)(iVar27 + 0x18) >> 0xb & 0x180000 |
        (*(uint *)(iVar27 + 0x18) & 0x3c00) << 0xb;
   uVar26 = (*(uint *)(iVar27 + 0x18) & 0x18) << 5;
-  puVar30[0x8f] = uVar26 | uVar21 & 0xfffffcff;
+  texPacket[0x8f] = uVar26 | uVar21 & 0xfffffcff;
   uVar44 = (*(uint *)(iVar27 + 0x18) & 6) << 9;
-  puVar30[0x8f] = uVar44 | uVar26 | uVar21 & 0xfffff0ff;
+  texPacket[0x8f] = uVar44 | uVar26 | uVar21 & 0xfffff0ff;
   uVar24 = *(uint *)(iVar27 + 0x1c) >> 0x12 & 0x3000;
-  puVar30[0x8f] = uVar24 | uVar44 | uVar26 | uVar21 & 0xffffc0ff;
+  texPacket[0x8f] = uVar24 | uVar44 | uVar26 | uVar21 & 0xffffc0ff;
   uVar35 = *(uint *)(iVar27 + 0x1c) >> 0xe & 0xc000;
-  puVar30[0x8f] = uVar35 | uVar24 | uVar44 | uVar26 | uVar21 & 0xffff00ff;
-  puVar30[0x8f] =
+  texPacket[0x8f] = uVar35 | uVar24 | uVar44 | uVar26 | uVar21 & 0xffff00ff;
+  texPacket[0x8f] =
        *(uint *)(iVar27 + 0x18) >> 5 & 0x1f |
        uVar35 | uVar24 | uVar44 | uVar26 | uVar21 & 0xffff00e0;
   sVar8 = *(short *)(iVar43 + 2);
   if (((sVar8 != 0x1908) && (sVar8 != 0x1906)) && (sVar8 != 0x190a)) {
-    puVar30[0x5b] = puVar30[0x5b] & 0xfffe3fff | 0x18000;
+    texPacket[0x5b] = texPacket[0x5b] & 0xfffe3fff | 0x18000;
   }
-  puVar30[0xb8] = uStack_e8 - 1 & 0x1fff | (uVar42 - 1) * 0x2000 & 0x3ffe000;
+  texPacket[0xb8] = levelWidth - 1 & 0x1fff | (uVar42 - 1) * 0x2000 & 0x3ffe000;
   if ((*(uint *)(iVar27 + 0x20) & 0x400000) != 0) {
-    puVar30[0x23] = 0;
+    texPacket[0x23] = 0;
   }
-  puVar40 = puVar30 + 0xce;
-  puVar30[199] = ((unsigned char *)0x00001087U);
-  puVar30[0xc2] = 0x31080;
-  puVar30[0xc6] = (1.0 / fVar5) * fVar16;
+  puVar40 = texPacket + 0xce;
+  texPacket[199] = ((unsigned char *)0x00001087U);
+  texPacket[0xc2] = 0x31080;
+  texPacket[0xc6] = (1.0 / fVar5) * fVar16;
   iVar43 = (int)((fVar13 - fVar6) * 6.0);
-  lStack_158 = (longlong)iVar43;
-  puVar30[0xc5] = (fVar13 + fVar2) * (1.0 / fVar4);
-  puVar30[0xc3] = fVar15 * (1.0 / fVar4);
-  puVar30[0xc4] = (fVar14 + fVar3) * (1.0 / fVar5);
+  fctiwzSlot8 = (longlong)iVar43;
+  texPacket[0xc5] = (fVar13 + fVar2) * (1.0 / fVar4);
+  texPacket[0xc3] = fVar15 * (1.0 / fVar4);
+  texPacket[0xc4] = (fVar14 + fVar3) * (1.0 / fVar5);
   uVar26 = (uint)(int)((fVar14 - fVar7) * 6.0);
-  lStack_150 = (longlong)(int)uVar26;
-  puVar30[0xca] = 0x10031;
-  puVar30[0xc9] = 0xc0033500;
-  puVar30[0xcb] = (fVar6 + fVar13) * 0.5;
-  puVar30[0xcc] = (fVar7 + fVar14) * 0.5;
-  puVar30[0xcd] = 0;
-  puVar30[200] = iVar43 << 0x10 | uVar26;
-  puVar30[1] = (int)puVar40 - (int)puVar29 >> 2;
+  fctiwzSlot9 = (longlong)(int)uVar26;
+  texPacket[0xca] = 0x10031;
+  texPacket[0xc9] = 0xc0033500;
+  texPacket[0xcb] = (fVar6 + fVar13) * 0.5;
+  texPacket[0xcc] = (fVar7 + fVar14) * 0.5;
+  texPacket[0xcd] = 0;
+  texPacket[200] = iVar43 << 0x10 | uVar26;
+  texPacket[1] = (int)puVar40 - (int)puVar29 >> 2;
   lastHeader = *(uint **)(ctx + GLD_lastHeader);
   *lastHeader = (int)puVar40 - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + GLD_lastHeader) = puVar40;
-  puVar30[0xcf] = 0;
-  puVar30[0xce] = 0x33000000;
-  puVar30[0xd0] = ((unsigned char *)0x00001393U);
-  puVar30[0xd1] = 10;
-  puVar30[0xd2] = ((unsigned char *)0x000013c6U);
-  puVar30[0xd3] = 3;
-  puVar30[0xd4] = 0x5c8;
-  puVar30[0xd5] = 0x20000;
-  puVar30[0xd6] = ((unsigned char *)0x000010eaU);
+  texPacket[0xcf] = 0;
+  texPacket[0xce] = 0x33000000;
+  texPacket[0xd0] = ((unsigned char *)0x00001393U);
+  texPacket[0xd1] = 10;
+  texPacket[0xd2] = ((unsigned char *)0x000013c6U);
+  texPacket[0xd3] = 3;
+  texPacket[0xd4] = 0x5c8;
+  texPacket[0xd5] = 0x20000;
+  texPacket[0xd6] = ((unsigned char *)0x000010eaU);
   sc_edgerule = *(undefined4 *)(ctx + GLD_sc_edgerule);
-  puVar30[0xd8] = ((unsigned char *)0x000010faU);
-  puVar30[0xd7] = sc_edgerule;
+  texPacket[0xd8] = ((unsigned char *)0x000010faU);
+  texPacket[0xd7] = sc_edgerule;
   sc_screendoor = *(undefined4 *)(ctx + GLD_sc_screendoor);
-  puVar30[0xda] = 0xc0001000;
-  puVar30[0xdc] = 0x11004;
-  puVar30[0xd9] = sc_screendoor;
-  puVar30[0xdd] = *(undefined4 *)(ctx + GLD_gb_mspos0);
+  texPacket[0xda] = 0xc0001000;
+  texPacket[0xdc] = 0x11004;
+  texPacket[0xd9] = sc_screendoor;
+  texPacket[0xdd] = *(undefined4 *)(ctx + GLD_gb_mspos0);
   gb_mspos1 = *(undefined4 *)(ctx + GLD_gb_mspos1);
-  puVar30[0xdf] = ((unsigned char *)0x00001008U);
-  puVar30[0xde] = gb_mspos1;
+  texPacket[0xdf] = ((unsigned char *)0x00001008U);
+  texPacket[0xde] = gb_mspos1;
   gb_aa_config = *(undefined4 *)(ctx + GLD_gb_aa_config);
-  puVar30[0xe1] = ((unsigned char *)0x000010e9U);
-  puVar30[0xe0] = gb_aa_config;
+  texPacket[0xe1] = ((unsigned char *)0x000010e9U);
+  texPacket[0xe0] = gb_aa_config;
   sc_hyperz_en = *(undefined4 *)(ctx + GLD_sc_hyperz_en);
-  puVar30[0xe3] = ((unsigned char *)0x000013c7U);
-  puVar30[0xe2] = sc_hyperz_en;
+  texPacket[0xe3] = ((unsigned char *)0x000013c7U);
+  texPacket[0xe2] = sc_hyperz_en;
   zb_bw_cntl = *(undefined4 *)(ctx + GLD_zb_bw_cntl);
-  puVar30[0xe5] = ((unsigned char *)0x000013c1U);
-  puVar30[0xe4] = zb_bw_cntl;
+  texPacket[0xe5] = ((unsigned char *)0x000013c1U);
+  texPacket[0xe4] = zb_bw_cntl;
   zb_zstencilcntl = *(undefined4 *)(ctx + GLD_zb_zstencilcntl);
-  puVar30[0xe7] = 0x850;
-  puVar30[0xe6] = zb_zstencilcntl;
+  texPacket[0xe7] = 0x850;
+  texPacket[0xe6] = zb_zstencilcntl;
   vap_cntl_status = *(undefined4 *)(ctx + GLD_vap_cntl_status);
-  puVar30[0xe9] = 0x887;
-  puVar30[0xe8] = vap_cntl_status;
+  texPacket[0xe9] = 0x887;
+  texPacket[0xe8] = vap_cntl_status;
   vap_clip_cntl = *(undefined4 *)(ctx + GLD_vap_clip_cntl);
-  puVar30[0x18b] = 0x82c;
-  puVar30[0xea] = vap_clip_cntl;
+  texPacket[0x18b] = 0x82c;
+  texPacket[0xea] = vap_clip_cntl;
   uVar28 = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
-  puVar30[0xeb] = ((unsigned char *)0x000010aeU);
-  puVar30[0x18c] = uVar28;
+  texPacket[0xeb] = ((unsigned char *)0x000010aeU);
+  texPacket[0x18c] = uVar28;
   su_cull_mode = *(undefined4 *)(ctx + GLD_su_cull_mode);
-  puVar30[0xed] = ((unsigned char *)0x00001394U);
-  puVar30[0xec] = su_cull_mode;
+  texPacket[0xed] = ((unsigned char *)0x00001394U);
+  texPacket[0xec] = su_cull_mode;
   rb3d_dither_ctl = *(undefined4 *)(ctx + GLD_rb3d_dither_ctl);
-  puVar30[0xef] = ((unsigned char *)0x00001380U);
-  puVar30[0xf1] = ((unsigned char *)0x00001002U);
-  puVar30[0xf0] = 0;
-  puVar30[0xee] = rb3d_dither_ctl;
-  puVar30[0xf2] = *(undefined4 *)(ctx + GLD_gb_enable);
+  texPacket[0xef] = ((unsigned char *)0x00001380U);
+  texPacket[0xf1] = ((unsigned char *)0x00001002U);
+  texPacket[0xf0] = 0;
+  texPacket[0xee] = rb3d_dither_ctl;
+  texPacket[0xf2] = *(undefined4 *)(ctx + GLD_gb_enable);
   gb_enable = *(undefined4 *)(ctx + GLD_gb_enable);
-  puVar30[0xf3] = 0x824;
-  puVar30[0xf2] = gb_enable;
+  texPacket[0xf3] = 0x824;
+  texPacket[0xf2] = gb_enable;
   vap_out_vtx_fmt_0 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_0);
-  puVar30[0xf5] = 0x825;
-  puVar30[0xf4] = vap_out_vtx_fmt_0;
+  texPacket[0xf5] = 0x825;
+  texPacket[0xf4] = vap_out_vtx_fmt_0;
   vap_out_vtx_fmt_1 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_1);
-  puVar30[0xf7] = 0x82d;
-  puVar30[0xf6] = vap_out_vtx_fmt_1;
+  texPacket[0xf7] = 0x82d;
+  texPacket[0xf6] = vap_out_vtx_fmt_1;
   vap_vtx_size = *(undefined4 *)(ctx + GLD_vap_vtx_size);
-  puVar30[0xf9] = 0x854;
-  puVar30[0xf8] = vap_vtx_size;
+  texPacket[0xf9] = 0x854;
+  texPacket[0xf8] = vap_vtx_size;
   vap_prog_stream_cntl_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_0_ptr);
-  puVar30[0xfb] = 0x878;
-  puVar30[0xfa] = vap_prog_stream_cntl_0_ptr;
+  texPacket[0xfb] = 0x878;
+  texPacket[0xfa] = vap_prog_stream_cntl_0_ptr;
   vap_prog_stream_cntl_ext_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr);
-  puVar30[0xfd] = ((unsigned char *)0x000013c0U);
-  puVar30[0xfc] = vap_prog_stream_cntl_ext_0_ptr;
+  texPacket[0xfd] = ((unsigned char *)0x000013c0U);
+  texPacket[0xfc] = vap_prog_stream_cntl_ext_0_ptr;
   zb_cntl = *(undefined4 *)(ctx + GLD_zb_cntl);
-  puVar30[0xff] = ((unsigned char *)0x000012f0U);
-  puVar30[0xfe] = zb_cntl;
+  texPacket[0xff] = ((unsigned char *)0x000012f0U);
+  texPacket[0xfe] = zb_cntl;
   fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
-  puVar30[0x100] = fg_fog_blend;
+  texPacket[0x100] = fg_fog_blend;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
                 (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x8000) ==
       0) {
-    puVar30[0x100] = fg_fog_blend & 0xfffffffe;
+    texPacket[0x100] = fg_fog_blend & 0xfffffffe;
   }
-  puVar30[0x101] = ((unsigned char *)0x000012f5U);
+  texPacket[0x101] = ((unsigned char *)0x000012f5U);
   fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
-  puVar30[0x102] = fg_alpha_func;
+  texPacket[0x102] = fg_alpha_func;
   uVar26 = *(uint *)(((unsigned char *)0x0000352c) +
                     (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x8000
   ;
   if (uVar26 == 0) {
-    puVar30[0x102] = fg_alpha_func & 0xfffff7ff;
+    texPacket[0x102] = fg_alpha_func & 0xfffff7ff;
   }
-  puVar30[0x103] = ((unsigned char *)0x000010a2U);
+  texPacket[0x103] = ((unsigned char *)0x000010a2U);
   ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
-  puVar30[0x105] = ((unsigned char *)0x00001381U);
-  puVar30[0x104] = ga_poly_mode;
+  texPacket[0x105] = ((unsigned char *)0x00001381U);
+  texPacket[0x104] = ga_poly_mode;
   uVar44 = *(uint *)(ctx + 0x1cc0);
-  puVar30[0x106] = uVar44;
+  texPacket[0x106] = uVar44;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
                 (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x4000) ==
       0) {
-    puVar30[0x106] = uVar44 & 0xfffffffc;
+    texPacket[0x106] = uVar44 & 0xfffffffc;
   }
-  puVar30[0x107] = ((unsigned char *)0x0000109eU);
+  texPacket[0x107] = ((unsigned char *)0x0000109eU);
   uVar31 = 0x110f8;
   uVar28 = *(undefined4 *)(ctx + 0x1d6c);
-  puVar30[0x109] = ((unsigned char *)0x00001096U);
-  puVar30[0x108] = uVar28;
+  texPacket[0x109] = ((unsigned char *)0x00001096U);
+  texPacket[0x108] = uVar28;
   ga_color_control = *(undefined4 *)(ctx + GLD_ga_color_control);
-  puVar30[0x10b] = ((unsigned char *)0x00001041U);
-  puVar30[0x108] = ga_color_control;
+  texPacket[0x10b] = ((unsigned char *)0x00001041U);
+  texPacket[0x108] = ga_color_control;
   tx_enable = *(undefined4 *)(ctx + GLD_tx_enable);
-  puVar30[0x10d] = ((unsigned char *)0x00001046U);
-  puVar30[0x10c] = tx_enable;
+  texPacket[0x10d] = ((unsigned char *)0x00001046U);
+  texPacket[0x10c] = tx_enable;
   gb_ps3_enable = *(undefined4 *)(ctx + GLD_gb_ps3_enable);
-  puVar30[0x10f] = ((unsigned char *)0x00001094U);
-  puVar30[0x14e] = 2;
-  puVar30[0x129] = 0xc0221000;
-  puVar30[0x14d] = ((unsigned char *)0x00001180U);
-  puVar30[0x127] = ((unsigned char *)0x00001095U);
-  puVar30[0x151] = ((unsigned char *)0x00001181U);
-  puVar30[0x111] = ((unsigned char *)0x00001095U);
-  puVar30[0x10e] = gb_ps3_enable;
-  puVar30[0x113] = ((unsigned char *)0x00001095U);
-  puVar30[0x115] = ((unsigned char *)0x00001095U);
-  puVar30[0x117] = ((unsigned char *)0x00001095U);
-  puVar30[0x119] = ((unsigned char *)0x00001095U);
-  puVar30[0x11b] = ((unsigned char *)0x00001095U);
-  puVar30[0x11d] = ((unsigned char *)0x00001095U);
-  puVar30[0x11f] = ((unsigned char *)0x00001095U);
-  puVar30[0x121] = ((unsigned char *)0x00001095U);
-  puVar30[0x123] = ((unsigned char *)0x00001095U);
-  puVar30[0x125] = ((unsigned char *)0x00001095U);
-  puVar30[0x110] = 0;
-  puVar30[0x14f] = ((unsigned char *)0x00001189U);
-  puVar30[0x155] = ((unsigned char *)0x0000118eU);
-  puVar30[0x153] = ((unsigned char *)0x0000118dU);
-  puVar30[0x157] = ((unsigned char *)0x0000118cU);
-  puVar30[0x159] = ((unsigned char *)0x000011a9U);
+  texPacket[0x10f] = ((unsigned char *)0x00001094U);
+  texPacket[0x14e] = 2;
+  texPacket[0x129] = 0xc0221000;
+  texPacket[0x14d] = ((unsigned char *)0x00001180U);
+  texPacket[0x127] = ((unsigned char *)0x00001095U);
+  texPacket[0x151] = ((unsigned char *)0x00001181U);
+  texPacket[0x111] = ((unsigned char *)0x00001095U);
+  texPacket[0x10e] = gb_ps3_enable;
+  texPacket[0x113] = ((unsigned char *)0x00001095U);
+  texPacket[0x115] = ((unsigned char *)0x00001095U);
+  texPacket[0x117] = ((unsigned char *)0x00001095U);
+  texPacket[0x119] = ((unsigned char *)0x00001095U);
+  texPacket[0x11b] = ((unsigned char *)0x00001095U);
+  texPacket[0x11d] = ((unsigned char *)0x00001095U);
+  texPacket[0x11f] = ((unsigned char *)0x00001095U);
+  texPacket[0x121] = ((unsigned char *)0x00001095U);
+  texPacket[0x123] = ((unsigned char *)0x00001095U);
+  texPacket[0x125] = ((unsigned char *)0x00001095U);
+  texPacket[0x110] = 0;
+  texPacket[0x14f] = ((unsigned char *)0x00001189U);
+  texPacket[0x155] = ((unsigned char *)0x0000118eU);
+  texPacket[0x153] = ((unsigned char *)0x0000118dU);
+  texPacket[0x157] = ((unsigned char *)0x0000118cU);
+  texPacket[0x159] = ((unsigned char *)0x000011a9U);
   us_out_fmt_0 = *(undefined4 *)(ctx + GLD_us_out_fmt_0);
-  puVar30[0x15b] = ((unsigned char *)0x000011aaU);
-  puVar30[0x15a] = us_out_fmt_0;
+  texPacket[0x15b] = ((unsigned char *)0x000011aaU);
+  texPacket[0x15a] = us_out_fmt_0;
   us_out_fmt_1 = *(undefined4 *)(ctx + GLD_us_out_fmt_1);
-  puVar30[0x15d] = ((unsigned char *)0x000011abU);
-  puVar30[0x15c] = us_out_fmt_1;
+  texPacket[0x15d] = ((unsigned char *)0x000011abU);
+  texPacket[0x15c] = us_out_fmt_1;
   us_out_fmt_2 = *(undefined4 *)(ctx + GLD_us_out_fmt_2);
-  puVar30[0x15f] = ((unsigned char *)0x000011acU);
-  puVar30[0x15e] = us_out_fmt_2;
+  texPacket[0x15f] = ((unsigned char *)0x000011acU);
+  texPacket[0x15e] = us_out_fmt_2;
   us_out_fmt_3 = *(undefined4 *)(ctx + GLD_us_out_fmt_3);
-  puVar30[0x161] = ((unsigned char *)0x000010c0U);
-  puVar30[0x160] = us_out_fmt_3;
+  texPacket[0x161] = ((unsigned char *)0x000010c0U);
+  texPacket[0x160] = us_out_fmt_3;
   rs_count = *(undefined4 *)(ctx + GLD_rs_count);
-  puVar30[0x163] = ((unsigned char *)0x000010c1U);
-  puVar30[0x165] = ((unsigned char *)0x000010c8U);
-  puVar30[0x167] = ((unsigned char *)0x0000101dU);
-  puVar30[0x162] = rs_count;
+  texPacket[0x163] = ((unsigned char *)0x000010c1U);
+  texPacket[0x165] = ((unsigned char *)0x000010c8U);
+  texPacket[0x167] = ((unsigned char *)0x0000101dU);
+  texPacket[0x162] = rs_count;
   rs_ip_0 = *(undefined4 *)(ctx + GLD_rs_ip_0);
-  puVar30[0x169] = ((unsigned char *)0x0000138aU);
-  puVar30[0x16b] = ((unsigned char *)0x0000138eU);
-  puVar30[0x170] = 0;
-  puVar30[0x16d] = ((unsigned char *)0x00001040U);
-  puVar30[0x16a] = 0;
-  puVar30[0x16c] = 0;
-  puVar30[0x16e] = 0;
-  puVar30[0x168] = rs_ip_0;
-  puVar30[0x16f] = ((unsigned char *)0x00001150U);
-  puVar30[0x171] = ((unsigned char *)0x00001100U);
+  texPacket[0x169] = ((unsigned char *)0x0000138aU);
+  texPacket[0x16b] = ((unsigned char *)0x0000138eU);
+  texPacket[0x170] = 0;
+  texPacket[0x16d] = ((unsigned char *)0x00001040U);
+  texPacket[0x16a] = 0;
+  texPacket[0x16c] = 0;
+  texPacket[0x16e] = 0;
+  texPacket[0x168] = rs_ip_0;
+  texPacket[0x16f] = ((unsigned char *)0x00001150U);
+  texPacket[0x171] = ((unsigned char *)0x00001100U);
   tx_filter0 = *(undefined4 *)(ctx + GLD_tx_filter0);
-  puVar30[0x173] = ((unsigned char *)0x00001110U);
-  puVar30[0x172] = tx_filter0;
-  puVar30[0x174] = *(undefined4 *)(ctx + GLD_tx_filter1);
-  puVar30[0x175] = ((unsigned char *)0x00001120U);
+  texPacket[0x173] = ((unsigned char *)0x00001110U);
+  texPacket[0x172] = tx_filter0;
+  texPacket[0x174] = *(undefined4 *)(ctx + GLD_tx_filter1);
+  texPacket[0x175] = ((unsigned char *)0x00001120U);
   tx_format0 = *(undefined4 *)(ctx + GLD_tx_format0);
-  puVar30[0x177] = ((unsigned char *)0x00001130U);
-  puVar30[0x176] = tx_format0;
+  texPacket[0x177] = ((unsigned char *)0x00001130U);
+  texPacket[0x176] = tx_format0;
   tx_format1 = *(undefined4 *)(ctx + GLD_tx_format1);
-  puVar30[0x179] = ((unsigned char *)0x00001140U);
-  puVar30[0x178] = tx_format1;
+  texPacket[0x179] = ((unsigned char *)0x00001140U);
+  texPacket[0x178] = tx_format1;
   tx_format2 = *(undefined4 *)(ctx + GLD_tx_format2);
-  puVar30[0x17b] = ((unsigned char *)0x000010f4U);
-  puVar30[0x17c] = 0xaaaa;
-  puVar30[0x17d] = ((unsigned char *)0x00001383U);
-  puVar30[0x17a] = tx_format2;
+  texPacket[0x17b] = ((unsigned char *)0x000010f4U);
+  texPacket[0x17c] = 0xaaaa;
+  texPacket[0x17d] = ((unsigned char *)0x00001383U);
+  texPacket[0x17a] = tx_format2;
   rb3d_color_channel_mask = *(undefined4 *)(ctx + GLD_rb3d_color_channel_mask);
-  puVar30[0x17f] = ((unsigned char *)0x00001386U);
-  puVar30[0x17e] = rb3d_color_channel_mask;
+  texPacket[0x17f] = ((unsigned char *)0x00001386U);
+  texPacket[0x17e] = rb3d_color_channel_mask;
   rb3d_ropcntl = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
-  puVar30[0x181] = 0x110f8;
-  puVar30[0x180] = rb3d_ropcntl;
-  puVar30[0x182] = *(undefined4 *)(ctx + GLD_sc_scissor0);
+  texPacket[0x181] = 0x110f8;
+  texPacket[0x180] = rb3d_ropcntl;
+  texPacket[0x182] = *(undefined4 *)(ctx + GLD_sc_scissor0);
   sc_scissor1 = *(undefined4 *)(ctx + GLD_sc_scissor1);
-  puVar30[0x184] = ((unsigned char *)0x00001087U);
-  puVar30[0x183] = sc_scissor1;
+  texPacket[0x184] = ((unsigned char *)0x00001087U);
+  texPacket[0x183] = sc_scissor1;
   ga_point_size = *(undefined4 *)(ctx + GLD_ga_point_size);
-  puVar30[0x186] = 0x31080;
-  puVar30[0x185] = ga_point_size;
-  puVar30[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s0);
-  puVar30[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t0);
-  puVar30[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
-  puVar30[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-  FUN_0004c100(puVar30 + 0xd0,iVar45);
-  uVar28 = ((int (*)())FUN_000308c0)(ctx,puVar30 + 0x18d);
+  texPacket[0x186] = 0x31080;
+  texPacket[0x185] = ga_point_size;
+  texPacket[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s0);
+  texPacket[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t0);
+  texPacket[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
+  texPacket[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
+  FUN_0004c100(texPacket + 0xd0,iVar45);
+  uVar28 = ((int (*)())FUN_000308c0)(ctx,texPacket + 0x18d);
   *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
   (**(code **)(ctx + GLD_streamSetCurrent))(iVar45,uVar28);
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
