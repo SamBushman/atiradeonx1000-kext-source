@@ -307,3 +307,35 @@ local	_PPParserParseBranchCondition	param_1	parser	INFERRED	dereferenced as the 
 local	_PPParserParseMacroDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (13 field accesses); every PPParser* function takes it first
 local	_PPParserExpandMacro	param_1	parser	INFERRED	dereferenced as the PPParser object (11 field accesses); every PPParser* function takes it first
 local	_PPParserBuildErrorString	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	piVar7	symbol	INFERRED	0x40-byte object from TPoolAllocator::allocate, vtable set to the TSymbol-family vtable and inserted into the symbol table, once per built-in
+local	_EmulateOp	param_2	inst	INFERRED	instruction record: [3..] operands, +0x10/+0x14 packed flags, passed to _GetValidArgs
+local	_EmulateOp	param_3	hashSet	CONFIRMED	first argument of _HashSetGet/_HashSetAdd
+local	_EmulateOp	local_d0	operandIds	INFERRED	operand register ids (from *(ushort*)(operand+0x16)) added to the hash set; [0..2] sources, [3] destination, [4] scratch
+local	_EmulateOp	pfVar22	src0	INFERRED	float vector of operand local_d0[0] (record + 0x18), 0 when the operand has no value
+local	_EmulateOp	pfVar19	src1	INFERRED	float vector of operand local_d0[1]
+local	_EmulateOp	pfVar15	src2	INFERRED	float vector of operand local_d0[2]
+local	TParseContext__executeInitializer	param_2	line	CONFIRMED	passed as the line argument of reservedErrorCheck/voidErrorCheck/addAssign
+local	TParseContext__executeInitializer	param_3	identifier	CONFIRMED	second argument of TParseContext__reservedErrorCheck(this, line, identifier)
+local	TParseContext__executeInitializer	param_4	publicType	INFERRED	third argument of voidErrorCheck(this, line, identifier, publicType); fields +0x14/+0x18 read
+local	TParseContext__executeInitializer	param_5	initializer	CONFIRMED	right-hand side of TIntermediate__addAssign(.., symbol, param_5, line) and TType__getCompleteString(param_5 + 8)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	pTVar6	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (14)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__setAggregateOperator	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__addConversion	pTVar9	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__addSwizzle	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermConstantUnion__fold	pTVar16	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (33)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	pTVar10	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__removeMatrixConstNode	pTVar9	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TSymbolTableLevel__clone	pTVar3	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	yyparse	pTVar17	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (49)
+local	yylex	pTVar6	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermBinary__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 7 field accesses
+local	TIntermUnary__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 3 field accesses
+local	TIntermAggregate__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 28 field accesses
+local	TIntermSelection__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 6 field accesses
+local	TIntermLoop__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 9 field accesses
+local	TIntermBranch__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 6 field accesses
+local	TType__copyType	pTVar8	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (5)

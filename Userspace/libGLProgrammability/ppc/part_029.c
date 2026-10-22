@@ -238,7 +238,7 @@ int TType__copyType(this, param_2, param_3)
   void *pvVar5;
   int iVar6;
   undefined4 uVar7;
-  unsigned char * pTVar8;
+  unsigned char * poolAllocator;
   undefined4 *puVar9;
   unsigned char * this_00;
   unsigned char * this_01;
@@ -277,8 +277,8 @@ int TType__copyType(this, param_2, param_3)
     ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(local_a0,param_3,this + 8);
     local_90 = *(unsigned char **)param_3;
     if (local_a0[0] == local_90) {
-      pTVar8 = (unsigned char *)GetGlobalPoolAllocator();
-      puVar9 = (undefined4 *)TPoolAllocator__allocate(pTVar8,0x10);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      puVar9 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
       puVar11 = (undefined4 *)0x0;
       if (puVar9 != (undefined4 *)0x0) {
         local_80 = GetGlobalPoolAllocator();
@@ -293,8 +293,8 @@ int TType__copyType(this, param_2, param_3)
           uVar13 < (uint)(*(int *)(*(int *)(param_2 + 8) + 8) - iVar6 >> 3); uVar13 = uVar13 + 1) {
         local_6c = *(undefined4 *)(iVar6 + uVar13 * 8 + 4);
         pTVar15 = *(unsigned char **)(*(int *)(*(int *)(param_2 + 8) + 4) + uVar13 * 8);
-        pTVar8 = (unsigned char *)GetGlobalPoolAllocator();
-        this_00 = (unsigned char *)TPoolAllocator__allocate(pTVar8,0x28);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        this_00 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
         *(undefined ***)this_00 = &PTR___ZN5TTypeD1Ev_a7b7d590;
         ((int (*)())TType__copyType)(this_00,pTVar15,param_3);
         this_01 = *(unsigned char **)(this + 8);
@@ -324,8 +324,8 @@ int TType__copyType(this, param_2, param_3)
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
-    pTVar8 = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar10 = (void *)TPoolAllocator__allocate(pTVar8,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pvVar10 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar5 = (void *)0x0;
     if (pvVar10 != (void *)0x0) {
       local_60[0] = GetGlobalPoolAllocator();
@@ -340,8 +340,8 @@ int TType__copyType(this, param_2, param_3)
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
-    pTVar8 = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar10 = (void *)TPoolAllocator__allocate(pTVar8,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pvVar10 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar5 = (void *)0x0;
     if (pvVar10 != (void *)0x0) {
       local_50[0] = GetGlobalPoolAllocator();
@@ -356,8 +356,8 @@ int TType__copyType(this, param_2, param_3)
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
-    pTVar8 = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar10 = (void *)TPoolAllocator__allocate(pTVar8,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pvVar10 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar5 = (void *)0x0;
     if (pvVar10 != (void *)0x0) {
       local_40[0] = GetGlobalPoolAllocator();

@@ -1164,7 +1164,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   int *piVar2;
   void *pvVar3;
   undefined4 uVar4;
-  unsigned char * pTVar5;
+  unsigned char * poolAllocator;
   void *this_00;
   unsigned char * this_01;
   int iVar6;
@@ -1224,8 +1224,8 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     iVar9 = *(int *)(iVar10 + 4);
     *(undefined1 *)(iVar9 + *(int *)(iVar9 + -0xc)) = *puVar1;
     pcVar12 = *(char **)(iVar10 + 4);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    this_00 = (void *)TPoolAllocator__allocate(pTVar5,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_00 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar3 = (void *)0x0;
     if (this_00 != (void *)0x0) {
       auStack_50[0] = GetGlobalPoolAllocator();
@@ -1235,8 +1235,8 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     }
     *(void **)(iVar8 + -8) = pvVar3;
     pTVar13 = *(unsigned char **)(iVar6 + uVar11 * 8 + 4);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    this_01 = (unsigned char *)TPoolAllocator__allocate(pTVar5,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_01 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)this_01 = &PTR___ZN5TTypeD1Ev_a7b7d590;
     TType__copyType(this_01,pTVar13,param_3);
     *(unsigned char **)(iVar8 + -4) = this_01;
@@ -1260,7 +1260,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   int *piVar2;
   void *pvVar3;
   undefined4 uVar4;
-  unsigned char * pTVar5;
+  unsigned char * poolAllocator;
   void *this_00;
   unsigned char * this_01;
   int iVar6;
@@ -1320,8 +1320,8 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     iVar9 = *(int *)(iVar10 + 4);
     *(undefined1 *)(iVar9 + *(int *)(iVar9 + -0xc)) = *puVar1;
     pcVar12 = *(char **)(iVar10 + 4);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    this_00 = (void *)TPoolAllocator__allocate(pTVar5,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_00 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar3 = (void *)0x0;
     if (this_00 != (void *)0x0) {
       auStack_50[0] = GetGlobalPoolAllocator();
@@ -1331,8 +1331,8 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     }
     *(void **)(iVar8 + -8) = pvVar3;
     pTVar13 = *(unsigned char **)(iVar6 + uVar11 * 8 + 4);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    this_01 = (unsigned char *)TPoolAllocator__allocate(pTVar5,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_01 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)this_01 = &PTR___ZN5TTypeD1Ev_a7b7d590;
     TType__copyType(this_01,pTVar13,param_3);
     *(unsigned char **)(iVar8 + -4) = this_01;
@@ -1356,7 +1356,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   int *piVar2;
   void *pvVar3;
   undefined4 uVar4;
-  unsigned char * pTVar5;
+  unsigned char * poolAllocator;
   void *this_00;
   unsigned char * this_01;
   int iVar6;
@@ -1417,8 +1417,8 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     iVar9 = *(int *)(iVar10 + 4);
     *(undefined1 *)(iVar9 + *(int *)(iVar9 + -0xc)) = *puVar1;
     pcVar12 = *(char **)(iVar10 + 4);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    this_00 = (void *)TPoolAllocator__allocate(pTVar5,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_00 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar3 = (void *)0x0;
     if (this_00 != (void *)0x0) {
       local_50[0] = GetGlobalPoolAllocator();
@@ -1428,8 +1428,8 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     }
     *(void **)(iVar8 + -8) = pvVar3;
     pTVar13 = *(unsigned char **)(iVar6 + uVar11 * 8 + 4);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    this_01 = (unsigned char *)TPoolAllocator__allocate(pTVar5,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_01 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)this_01 = &PTR___ZN5TTypeD1Ev_a7b7d590;
     TType__copyType(this_01,pTVar13,param_3);
     *(unsigned char **)(iVar8 + -4) = this_01;
@@ -1464,7 +1464,7 @@ int TSymbolTableLevel__clone(this, param_2)
 {
   int iVar1;
   int iVar2;
-  unsigned char * pTVar3;
+  unsigned char * poolAllocator;
   undefined4 *puVar4;
   undefined4 *puVar5;
   int *piVar6;
@@ -1487,12 +1487,12 @@ int TSymbolTableLevel__clone(this, param_2)
   int *local_48;
   undefined4 local_40 [6];
   
-  pTVar3 = (unsigned char *)GetGlobalPoolAllocator();
-  puVar4 = (undefined4 *)TPoolAllocator__allocate(pTVar3,0x10);
-  pTVar3 = (unsigned char *)GetGlobalPoolAllocator();
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  puVar4 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   puVar4[1] = 0;
-  *puVar4 = pTVar3;
-  puVar5 = (undefined4 *)TPoolAllocator__allocate(pTVar3,0x1c);
+  *puVar4 = poolAllocator;
+  puVar5 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x1c);
   puVar4[2] = 0;
   puVar4[1] = puVar5;
   *puVar5 = 0;
@@ -1658,7 +1658,7 @@ int yyparse(parseContext, param_2, param_3, param_4, param_5, param_6, param_7, 
   unsigned char * pvVar14;
   unsigned char * pTVar15;
   undefined4 uVar16;
-  unsigned char * pTVar17;
+  unsigned char * poolAllocator;
   undefined4 *puVar18;
   undefined4 *puVar19;
   unsigned char * pTVar20;
@@ -2108,8 +2108,8 @@ LAB_97ba3970:
       local_838 = pTVar3;
       local_834 = pTVar3;
       local_830 = pTVar3;
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      uVar64 = TPoolAllocator__allocate(pTVar17,0x40);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      uVar64 = TPoolAllocator__allocate(poolAllocator,0x40);
       pTVar7 = (unsigned char *)((ulonglong)uVar64 >> 0x20);
       uVar57 = *(uint *)(yyvsp + 4);
       puVar5 = PTR_vtable_a7b7c0b4 + 8;
@@ -2227,8 +2227,8 @@ LAB_97ba4158:
                  param_8);
       TParseContext__recover(parseContext);
     }
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(uint *)pcVar9 = *(uint *)(yyvsp + 4);
     local_82c = (unsigned char *)((uint)local_82c & 0x9ff | 0x4100800);
     local_84c = (unsigned char *)0x0;
@@ -2241,14 +2241,14 @@ LAB_97ba4158:
     local_830 = (unsigned char *)0x0;
     goto LAB_97ba4158;
   case 4:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(uint *)pcVar9 = *(uint *)(yyvsp + 4);
     uVar57 = (uint)local_82c & 0x7ff | 0x4080000;
     goto LAB_97ba41e8;
   case 5:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(uint *)pcVar9 = *(uint *)(yyvsp + 4);
     local_5c = (unsigned char *)0xa7b8374c;
     uVar57 = (uint)local_82c & 0x1807ff | 0x4180000;
@@ -2462,8 +2462,8 @@ LAB_97ba47fc:
     local_878 = (unsigned char *)((ulonglong)uVar64 >> 0x20);
     pTVar3 = local_878;
     if (local_878 == (unsigned char *)0x0) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
       *(undefined4 *)pcVar9 = 0;
       local_850 = local_5c + -0x610c;
       local_82c = (unsigned char *)((uint)local_82c & 0x1ff | 0x4080800);
@@ -2626,8 +2626,8 @@ LAB_97ba4bc0:
     local_808 = (unsigned char *)TType__setStructSize((unsigned char *)&local_820,(unsigned char *)pTVar3);
     pcVar62 = local_7ac;
     local_7ac[*(int *)(local_7ac + -0xc)] = **(char **)(local_64 + -0x7cc4);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
     in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
     pTVar3 = (unsigned char *)0x0;
     if (pTVar7 != (unsigned char *)0x0) {
@@ -2726,8 +2726,8 @@ LAB_97ba4bc0:
       }
       pTVar7 = local_84c;
       if ((local_850 == (unsigned char *)0x0) && (local_84c == (unsigned char *)0x0)) {
-        pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-        pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
         local_5c = (unsigned char *)0xa7b8374c;
         iVar55 = (**(code **)(**(int **)(yyvsp + -0x50) + 0x48))(*(int **)(yyvsp + -0x50));
         pTVar33 = local_5c + -0x610c;
@@ -2773,8 +2773,8 @@ LAB_97ba4bc0:
                   ((int)parseContext,*(char **)(yyvsp + -0x2c)," non-scalar fields not implemented yet"
                    ,".","",pTVar33,pTVar34,param_8);
         TParseContext__recover(parseContext);
-        pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-        pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
         *(undefined4 *)pcVar9 = 0;
         local_81c = (unsigned char *)((uint)local_81c & 0x9ff | 0x4100800);
         local_840 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -2865,8 +2865,8 @@ LAB_97ba50cc:
       break;
     }
     if (local_840 == (unsigned char *)0x1) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
       *(unsigned char **)pcVar9 = local_850;
       local_7dc = (unsigned char *)((uint)local_7dc & 0x1ff | 0x4100800);
       local_7fc = (unsigned char *)0x0;
@@ -3057,8 +3057,8 @@ switchD_97ba39c8_caseD_6:
                        (parseContext,*(uint *)yyvsp,a0,(bool *)&local_88,param_5,pTVar33);
     in_cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
     if (pTVar3 == (unsigned char *)0x0) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
       *(undefined4 *)pcVar9 = 0;
       local_82c = (unsigned char *)((uint)local_82c & 0x1ff | 0x4080800);
       local_850 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -3226,8 +3226,8 @@ LAB_97ba5e64:
     break;
   case 0x13:
     local_840 = (unsigned char *)0x0;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar3 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar3 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     (**(code **)(**(int **)(yyvsp + 8) + 0x38))(pTVar3,*(int **)(yyvsp + 8));
     local_850 = local_840;
     uVar57 = *(uint *)(yyvsp + -0x1c);
@@ -3251,8 +3251,8 @@ LAB_97ba5e64:
     pTVar3 = local_84c;
     iVar55 = *(int *)(local_84c + 0x14);
     if (iVar55 == 0) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
@@ -3291,8 +3291,8 @@ LAB_97ba5e64:
     break;
   case 0x14:
     local_840 = (unsigned char *)0x0;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar3 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar3 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     (**(code **)(**(int **)(yyvsp + 8) + 0x38))(pTVar3,*(int **)(yyvsp + 8));
     local_850 = local_840;
     uVar57 = *(uint *)(yyvsp + -0x48);
@@ -3316,8 +3316,8 @@ LAB_97ba5e64:
     pTVar3 = local_84c;
     iVar55 = *(int *)(local_84c + 0x14);
     if (iVar55 == 0) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
@@ -3365,8 +3365,8 @@ LAB_97ba97d8:
     break;
   case 0x16:
     if (*(uint *)(yyvsp + 4) != 0x75) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x54);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x54);
       uVar28 = *(uint *)(yyvsp + 4);
       puVar5 = PTR_vtable_a7b7c0f4 + 8;
       *(uint *)(pTVar7 + 4) = 0;
@@ -3412,8 +3412,8 @@ LAB_97ba97d8:
     local_670[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
               ((unsigned char *)&local_850,"",(unsigned char *)local_670);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x54);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x54);
     uVar2 = *(uint *)(yyvsp + 0x24);
     pTVar47 = *(unsigned char **)(yyvsp + 4);
     *(unsigned char **)pTVar7 = (unsigned char *)(PTR_vtable_a7b7c0f4 + 8);
@@ -3491,8 +3491,8 @@ LAB_97ba97d8:
     local_838 = (unsigned char *)0x0;
     local_834 = (unsigned char *)0x0;
     local_830 = (unsigned char *)0x0;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x54);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x54);
     psVar21 = *(unsigned char **)(yyvsp + 4);
     *(undefined **)pTVar7 = PTR_vtable_a7b7c0f4 + 8;
     *(unsigned char **)(pTVar7 + 4) = psVar21;
@@ -4705,8 +4705,8 @@ LAB_97ba7c88:
 LAB_97ba7c8c:
     pTVar3 = (unsigned char *)0x0;
     TParseContext__recover(parseContext);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(undefined4 *)pcVar9 = 0;
     local_82c = (unsigned char *)((uint)local_82c & 0x1801ff | 0x4180800);
     local_850 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -5141,8 +5141,8 @@ LAB_97ba86ec:
     pTVar12 = *(unsigned char **)(yyvsp + 0x14);
     iVar55 = *(int *)(pTVar12 + 0x14);
     if (iVar55 == 0) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
@@ -5218,8 +5218,8 @@ LAB_97ba8824:
     pTVar12 = *(unsigned char **)(yyvsp + 0x14);
     iVar55 = *(int *)(pTVar12 + 0x14);
     if (iVar55 == 0) {
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
@@ -5314,8 +5314,8 @@ LAB_97ba8824:
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(local_64 + -0x7cc4);
       pcVar62 = *(char **)(iVar55 + 4);
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
       pTVar3 = (unsigned char *)0x0;
       if (pTVar7 != (unsigned char *)0x0) {
@@ -5326,8 +5326,8 @@ LAB_97ba8824:
       }
     }
     local_840 = pTVar3;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x54);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x54);
     psVar21 = *(unsigned char **)(yyvsp + -0x28);
     *(undefined **)pTVar7 = PTR_vtable_a7b7c0f4 + 8;
     *(unsigned char **)(pTVar7 + 4) = psVar21;
@@ -5384,8 +5384,8 @@ LAB_97ba8824:
     }
     local_840 = *(unsigned char **)(yyvsp + 4);
     local_5c = (unsigned char *)0xa7b8374c;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_830 = *(unsigned char **)(yyvsp + -0x1c);
     local_82c = *(unsigned char **)(yyvsp + -0x18);
     local_828 = *(unsigned char **)(yyvsp + -0x14);
@@ -5431,8 +5431,8 @@ LAB_97ba8824:
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(local_64 + -0x7cc4);
       pcVar62 = *(char **)(iVar55 + 4);
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pvVar13 = (void *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
@@ -5502,8 +5502,8 @@ LAB_97ba8824:
         *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
              **(undefined1 **)(local_64 + -0x7cc4);
         pcVar62 = *(char **)(iVar55 + 4);
-        pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-        pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
         in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
         pTVar3 = (unsigned char *)0x0;
         if (pTVar7 != (unsigned char *)0x0) {
@@ -5542,8 +5542,8 @@ LAB_97ba8824:
       TParseContext__recover(parseContext);
     }
     *(uint *)(yyvsp + -0x90) = 1;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_850 = *(unsigned char **)(yyvsp + -0xa0);
     local_84c = *(unsigned char **)(yyvsp + -0x9c);
     local_848 = *(unsigned char **)(yyvsp + -0x98);
@@ -5589,8 +5589,8 @@ LAB_97ba8824:
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(local_64 + -0x7cc4);
       pcVar62 = *(char **)(iVar55 + 4);
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pvVar13 = (void *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
@@ -5664,8 +5664,8 @@ LAB_97bab5f4:
     break;
   case 0x72:
     local_840 = (unsigned char *)0x0;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_830 = *(unsigned char **)(yyvsp + 0x10);
     local_82c = *(unsigned char **)(yyvsp + 0x14);
     local_828 = *(unsigned char **)(yyvsp + 0x18);
@@ -5712,8 +5712,8 @@ LAB_97bab5f4:
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(local_64 + -0x7cc4);
       pcVar62 = *(char **)(iVar55 + 4);
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pvVar13 = (void *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
@@ -5782,8 +5782,8 @@ LAB_97bab5f4:
         *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
              **(undefined1 **)(local_64 + -0x7cc4);
         pcVar62 = *(char **)(iVar55 + 4);
-        pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-        pTVar7 = (unsigned char *)TPoolAllocator__allocate(pTVar17,8);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
         in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
         pTVar3 = (unsigned char *)0x0;
         if (pTVar7 != (unsigned char *)0x0) {
@@ -5817,8 +5817,8 @@ LAB_97bab5f4:
       TParseContext__recover(parseContext);
     }
     *(uint *)(yyvsp + -100) = 1;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_850 = *(unsigned char **)(yyvsp + -0x74);
     local_84c = *(unsigned char **)(yyvsp + -0x70);
     local_848 = *(unsigned char **)(yyvsp + -0x6c);
@@ -5864,8 +5864,8 @@ LAB_97bab5f4:
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(local_64 + -0x7cc4);
       pcVar62 = *(char **)(iVar55 + 4);
-      pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-      pvVar13 = (void *)TPoolAllocator__allocate(pTVar17,8);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
       in_cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
@@ -6539,8 +6539,8 @@ LAB_97baa46c:
     local_818 = local_858;
     break;
   case 0x9e:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     pTVar52 = *(unsigned char **)(yyvsp + -0x1c);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
               ((unsigned char *)&local_850,*(unsigned char **)(yyvsp + -0x80));
@@ -6559,8 +6559,8 @@ LAB_97baa46c:
     local_64 = (unsigned char *)0xa7b8374c;
     *(undefined4 *)(pTVar12 + 0x18) = uVar16;
     local_83c[(int)*(unsigned char **)(local_83c + -0xc)] = *DAT_a7b7ba88;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar13 = (void *)TPoolAllocator__allocate(pTVar17,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     in_cr0 = (pvVar13 == (void *)0x0) << 1;
     pvVar23 = (void *)0x0;
     if (pvVar13 != (void *)0x0) {
@@ -6598,8 +6598,8 @@ LAB_97baa46c:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_84c + -0xc),local_1f0);
     }
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar61 = (int *)TPoolAllocator__allocate(pTVar17,0x40);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    piVar61 = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     puVar5 = PTR_vtable_a7b7c0b4 + 8;
     piVar61[1] = *(uint *)(yyvsp + -0x80);
     *piVar61 = (int)puVar5;
@@ -6698,8 +6698,8 @@ LAB_97baa46c:
     pTVar32 = local_750[0];
     break;
   case 0x9f:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     pTVar52 = *(unsigned char **)(yyvsp + -0x1c);
     local_1c0[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
@@ -6719,8 +6719,8 @@ LAB_97baa46c:
     *(undefined4 *)(pTVar12 + 0x18) = uVar16;
     local_64 = (unsigned char *)0xa7b8374c;
     local_83c[(int)*(unsigned char **)(local_83c + -0xc)] = *DAT_a7b7ba88;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar13 = (void *)TPoolAllocator__allocate(pTVar17,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     in_cr0 = (pvVar13 == (void *)0x0) << 1;
     pvVar23 = (void *)0x0;
     if (pvVar13 != (void *)0x0) {
@@ -6880,8 +6880,8 @@ LAB_97baa46c:
     }
     break;
   case 0xa3:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar14 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x10);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pvVar14 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x10);
     in_cr0 = (pvVar14 == (unsigned char *)0x0) << 1;
     pTVar3 = (unsigned char *)(unsigned char *)0x0;
     if (pvVar14 != (unsigned char *)0x0) {
@@ -6920,8 +6920,8 @@ LAB_97baadbc:
     }
     break;
   case 0xa5:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar33 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar33 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     pTVar3 = (unsigned char *)0xa7b8374c;
     ppuVar35 = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(undefined ***)pTVar33 = &PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -6942,8 +6942,8 @@ LAB_97baadbc:
     local_870 = pTVar33;
     goto LAB_97baae6c;
   case 0xa6:
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    local_870 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x28);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    local_870 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     pTVar33 = (unsigned char *)0xa7b8374c;
     ppuVar35 = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(undefined ***)local_870 = &PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -6993,8 +6993,8 @@ LAB_97baadbc:
     goto LAB_97bab5e8;
   case 0xb1:
     pvVar51 = *(unsigned char **)((int)parseContext + 4);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    puVar18 = (undefined4 *)TPoolAllocator__allocate(pTVar17,0x10);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     local_170 = (unsigned char *)GetGlobalPoolAllocator();
     *puVar18 = local_170;
     puVar18[1] = 0;
@@ -7124,10 +7124,10 @@ LAB_97bab1f4:
     break;
   case 0xc1:
     pvVar51 = *(unsigned char **)((int)parseContext + 4);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    puVar18 = (undefined4 *)TPoolAllocator__allocate(pTVar17,0x10);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    local_150 = pTVar17;
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    local_150 = poolAllocator;
     goto LAB_97bab2e8;
   case 0xc2:
     piVar61 = *(int **)((int)parseContext + 4);
@@ -7168,14 +7168,14 @@ LAB_97bab40c:
     goto LAB_97bab410;
   case 0xc5:
     pvVar51 = *(unsigned char **)((int)parseContext + 4);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    puVar18 = (undefined4 *)TPoolAllocator__allocate(pTVar17,0x10);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    local_140 = pTVar17;
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    local_140 = poolAllocator;
 LAB_97bab2e8:
-    *puVar18 = pTVar17;
+    *puVar18 = poolAllocator;
     puVar18[1] = 0;
-    puVar19 = (undefined4 *)TPoolAllocator__allocate(pTVar17,0x1c);
+    puVar19 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x1c);
     puVar18[2] = 0;
     puVar18[1] = puVar19;
     *puVar19 = 0;
@@ -7404,8 +7404,8 @@ LAB_97bab674:
       }
     }
     pvVar51 = *(unsigned char **)((int)parseContext + 4);
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    puVar18 = (undefined4 *)TPoolAllocator__allocate(pTVar17,0x10);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     local_130 = (unsigned char *)GetGlobalPoolAllocator();
     *puVar18 = local_130;
     puVar18[1] = 0;
@@ -7432,8 +7432,8 @@ LAB_97bab674:
     }
     *(int *)((int)parseContext + 0x28) = iVar55 + 0x1c;
     *(undefined4 *)((int)parseContext + 0x2c) = 0;
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar20 = (unsigned char *)TPoolAllocator__allocate(pTVar17,0x6c);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar20 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x6c);
     local_5c = (unsigned char *)0xa7b8374c;
     local_850 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
     local_82c = (unsigned char *)((uint)local_82c & 0x1ff | 0x80800);
@@ -7522,8 +7522,8 @@ LAB_97bab674:
         }
       }
       else {
-        pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-        a0_00 = (int *)TPoolAllocator__allocate(pTVar17,0x40);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        a0_00 = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
         puVar5 = PTR_vtable_a7b7c0b4 + 8;
         iVar36 = *(int *)(iVar60 + iVar54 + 4);
         a0_00[1] = *(int *)(iVar60 + iVar54);
@@ -7845,8 +7845,8 @@ LAB_97ba55dc:
     pcVar40 = *(code **)(*(unsigned char **)pTVar33 + 0x28);
   }
   else {
-    pTVar17 = (unsigned char *)GetGlobalPoolAllocator();
-    pcVar9 = (unsigned char *)TPoolAllocator__allocate(pTVar17,4);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(uint *)pcVar9 = uVar57;
     local_81c = (unsigned char *)0x0;
     local_818 = (unsigned char *)0x0;
@@ -7903,7 +7903,7 @@ int yylex(param_1, param_2)
   unsigned char * this;
   unsigned char * psVar4;
   long lVar5;
-  unsigned char * pTVar6;
+  unsigned char * poolAllocator;
   void *this_00;
   undefined4 uVar7;
   int iVar8;
@@ -8354,8 +8354,8 @@ LAB_97bad2c8:
   case 0x56:
     *(char **)param_1 = _yylineno;
     pbVar11 = _yytext;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    this = (unsigned char *)TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
     psVar4 = (unsigned char *)0x0;
     if (this != (unsigned char *)0x0) {
       local_70[0] = GetGlobalPoolAllocator();
@@ -8608,8 +8608,8 @@ LAB_97bad2c8:
     _yy_start = 1;
     *(char **)param_1 = _yylineno;
     pbVar11 = _yytext;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    this_00 = (void *)TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    this_00 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     pvVar13 = (void *)0x0;
     if (this_00 != (void *)0x0) {
       local_60[0] = GetGlobalPoolAllocator();
