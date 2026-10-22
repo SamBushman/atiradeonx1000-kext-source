@@ -3,786 +3,786 @@
 /* _glPopAttrib @ 0x92f2984c (112 bytes) */
 int _glPopAttrib()
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffb0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffb0);
   }
                     
                     
-  (*(code *)puVar2[0xcc])(*puVar2);
+  (*(code *)glContext[0xcc])(*glContext);
   return;
 }
 
 /* _glTexEnvf @ 0x92f298bc (148 bytes) */
-void _glTexEnvf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+void _glTexEnvf(undefined4 target,undefined4 pname,undefined4 paramShadow,undefined4 fwdReg4,undefined4 fwdReg5,undefined4 fwdReg6,undefined4 fwdReg7,double param)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x123])(fparam_1,*puVar2,param_1,param_2);
+  (*(code *)glContext[0x123])(param,*glContext,target,pname);
   return;
 }
 
 /* _glAlphaFunc @ 0x92f29950 (140 bytes) */
-void _glAlphaFunc(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+void _glAlphaFunc(undefined4 func,undefined4 refShadow,undefined4 fwdReg3,undefined4 fwdReg4,undefined4 fwdReg5,undefined4 fwdReg6,undefined4 fwdReg7,double ref)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[2])(fparam_1,*puVar2,param_1);
+  (*(code *)glContext[2])(ref,*glContext,func);
   return;
 }
 
 /* _glEnableClientState @ 0x92f299dc (124 bytes) */
-int _glEnableClientState(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glEnableClientState(cap, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 cap;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x4a])(*puVar2,param_1);
+  (*(code *)glContext[0x4a])(*glContext,cap);
   return;
 }
 
 /* _glGetError @ 0x92f29a58 (112 bytes) */
 int _glGetError()
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffb0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffb0);
   }
                     
                     
-  (*(code *)puVar2[0x67])(*puVar2);
+  (*(code *)glContext[0x67])(*glContext);
   return;
 }
 
 /* _glFlush @ 0x92f29ac8 (112 bytes) */
 int _glFlush()
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffb0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffb0);
   }
                     
                     
-  (*(code *)puVar2[0x5b])(*puVar2);
+  (*(code *)glContext[0x5b])(*glContext);
   return;
 }
 
 /* _glScissor @ 0x92f29b38 (148 bytes) */
-int _glScissor(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glScissor(x, y, width, height, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 x;
+  undefined4 y;
+  undefined4 width;
+  undefined4 height;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0xfc])(*puVar2,param_1,param_2,param_3,param_4);
+  (*(code *)glContext[0xfc])(*glContext,x,y,width,height);
   return;
 }
 
 /* _glGetDoublev @ 0x92f29bcc (132 bytes) */
-int _glGetDoublev(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glGetDoublev(pname, params, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 pname;
+  undefined4 params;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x66])(*puVar2,param_1,param_2);
+  (*(code *)glContext[0x66])(*glContext,pname,params);
   return;
 }
 
 /* _glRectd @ 0x92f29c50 (140 bytes) */
-void _glRectd(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glRectd(double x1,double y1,double x2,double y2)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff80);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0xef])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2);
+  (*(code *)glContext[0xef])(x1,y1,x2,y2,*glContext);
   return;
 }
 
 /* _glColorPointer @ 0x92f29cdc (148 bytes) */
-int _glColorPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColorPointer(size, type, stride, ptr, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 size;
+  undefined4 type;
+  undefined4 stride;
+  undefined4 ptr;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x34])(*puVar2,param_1,param_2,param_3,param_4);
+  (*(code *)glContext[0x34])(*glContext,size,type,stride,ptr);
   return;
 }
 
 /* _glVertexPointer @ 0x92f29d70 (148 bytes) */
-int _glVertexPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glVertexPointer(size, type, stride, ptr, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 size;
+  undefined4 type;
+  undefined4 stride;
+  undefined4 ptr;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x14f])(*puVar2,param_1,param_2,param_3,param_4);
+  (*(code *)glContext[0x14f])(*glContext,size,type,stride,ptr);
   return;
 }
 
 /* _glTexCoordPointer @ 0x92f29e04 (148 bytes) */
-int _glTexCoordPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glTexCoordPointer(size, type, stride, ptr, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 size;
+  undefined4 type;
+  undefined4 stride;
+  undefined4 ptr;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x122])(*puVar2,param_1,param_2,param_3,param_4);
+  (*(code *)glContext[0x122])(*glContext,size,type,stride,ptr);
   return;
 }
 
 /* _glDrawArrays @ 0x92f29e98 (140 bytes) */
-int _glDrawArrays(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glDrawArrays(mode, first, count, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 mode;
+  undefined4 first;
+  undefined4 count;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x42])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x42])(*glContext,mode,first,count);
   return;
 }
 
 /* _glPrioritizeTextures @ 0x92f29f24 (140 bytes) */
-int _glPrioritizeTextures(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glPrioritizeTextures(n, textures, priorities, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 n;
+  undefined4 textures;
+  undefined4 priorities;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0xd0])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0xd0])(*glContext,n,textures,priorities);
   return;
 }
 
 /* _glTexImage2D @ 0x92f29fb0 (192 bytes) */
-int _glTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int _glTexImage2D(target, level, internalFormat, width, height, border, format, type)
+  undefined4 target;
+  undefined4 level;
+  undefined4 internalFormat;
+  undefined4 width;
+  undefined4 height;
+  undefined4 border;
+  undefined4 format;
+  undefined4 type;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff80);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff80);
   }
-  return (*(code *)puVar2[0x12e])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  return (*(code *)glContext[0x12e])(*glContext,target,level,internalFormat,width,height,border,format);
 }
 
 /* _glFrustum @ 0x92f2a070 (156 bytes) */
-void _glFrustum(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6)
+void _glFrustum(double left,double right,double bottom,double top,double near_val,double far_val)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff60)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff60);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff60)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff60);
   }
-  (*(code *)puVar2[0x61])(fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,*puVar2);
+  (*(code *)glContext[0x61])(left,right,bottom,top,near_val,far_val,*glContext);
   FUN_92f27b4c();
   return;
 }
 
 /* _glLoadMatrixf @ 0x92f2a10c (124 bytes) */
-int _glLoadMatrixf(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glLoadMatrixf(m, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 m;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0xa0])(*puVar2,param_1);
+  (*(code *)glContext[0xa0])(*glContext,m);
   return;
 }
 
 /* _glPassThrough @ 0x92f2a188 (128 bytes) */
-void _glPassThrough(double fparam_1)
+void _glPassThrough(double token)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0xbf])(fparam_1,*puVar2);
+  (*(code *)glContext[0xbf])(token,*glContext);
   return;
 }
 
 /* _glActiveTextureARB @ 0x92f2a208 (124 bytes) */
-int _glActiveTextureARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glActiveTextureARB(texture, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 texture;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x157])(*puVar2,param_1);
+  (*(code *)glContext[0x157])(*glContext,texture);
   return;
 }
 
 /* _glVertex2f @ 0x92f2a284 (144 bytes) */
-void _glVertex2f(double fparam_1,double fparam_2)
+void _glVertex2f(double x,double y)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x139])(fparam_1,fparam_2,*puVar2);
+  (*(code *)glContext[0x139])(x,y,*glContext);
   return;
 }
 
 /* _glMultiTexCoord2f @ 0x92f2a314 (156 bytes) */
-void _glMultiTexCoord2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
+void _glMultiTexCoord2f(undefined4 target,undefined4 sShadow,undefined4 tShadow,undefined4 fwdReg4,undefined4 fwdReg5,undefined4 fwdReg6,undefined4 fwdReg7,double s,double t)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
-  (*(code *)puVar2[0x162])(fparam_1,fparam_2,*puVar2,param_1);
+  (*(code *)glContext[0x162])(s,t,*glContext,target);
   return;
 }
 
 /* _glDeleteTextures @ 0x92f2a3b0 (132 bytes) */
-int _glDeleteTextures(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glDeleteTextures(n, textures, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 n;
+  undefined4 textures;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x3c])(*puVar2,param_1,param_2);
+  (*(code *)glContext[0x3c])(*glContext,n,textures);
   return;
 }
 
 /* _glFeedbackBuffer @ 0x92f2a434 (140 bytes) */
-int _glFeedbackBuffer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glFeedbackBuffer(size, type, buffer, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 size;
+  undefined4 type;
+  undefined4 buffer;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x59])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x59])(*glContext,size,type,buffer);
   return;
 }
 
 /* _glRenderMode @ 0x92f2a4c0 (124 bytes) */
-int _glRenderMode(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glRenderMode(mode, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 mode;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0xf7])(*puVar2,param_1);
+  (*(code *)glContext[0xf7])(*glContext,mode);
   return;
 }
 
 /* _glFogi @ 0x92f2a53c (132 bytes) */
-int _glFogi(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glFogi(pname, param, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 pname;
+  undefined4 param;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x5e])(*puVar2,param_1,param_2);
+  (*(code *)glContext[0x5e])(*glContext,pname,param);
   return;
 }
 
 /* _glFogfv @ 0x92f2a5c0 (132 bytes) */
-int _glFogfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glFogfv(pname, params, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 pname;
+  undefined4 params;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x5d])(*puVar2,param_1,param_2);
+  (*(code *)glContext[0x5d])(*glContext,pname,params);
   return;
 }
 
 /* _glFogf @ 0x92f2a644 (140 bytes) */
-void _glFogf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+void _glFogf(undefined4 pname,undefined4 paramShadow,undefined4 fwdReg3,undefined4 fwdReg4,undefined4 fwdReg5,undefined4 fwdReg6,undefined4 fwdReg7,double param)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x5c])(fparam_1,*puVar2,param_1);
+  (*(code *)glContext[0x5c])(param,*glContext,pname);
   return;
 }
 
 /* _glFrontFace @ 0x92f2a6d0 (124 bytes) */
-int _glFrontFace(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glFrontFace(mode, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 mode;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x60])(*puVar2,param_1);
+  (*(code *)glContext[0x60])(*glContext,mode);
   return;
 }
 
 /* _glTexParameterf @ 0x92f2a74c (148 bytes) */
-void _glTexParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+void _glTexParameterf(undefined4 target,undefined4 pname,undefined4 paramShadow,undefined4 fwdReg4,undefined4 fwdReg5,undefined4 fwdReg6,undefined4 fwdReg7,double param)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x12f])(fparam_1,*puVar2,param_1,param_2);
+  (*(code *)glContext[0x12f])(param,*glContext,target,pname);
   return;
 }
 
 /* _glGetTexLevelParameteriv @ 0x92f2a7e0 (148 bytes) */
-int _glGetTexLevelParameteriv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glGetTexLevelParameteriv(target, level, pname, params, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 target;
+  undefined4 level;
+  undefined4 pname;
+  undefined4 params;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x7e])(*puVar2,param_1,param_2,param_3,param_4);
+  (*(code *)glContext[0x7e])(*glContext,target,level,pname,params);
   return;
 }
 
 /* _glGetFloatv @ 0x92f2a874 (132 bytes) */
-int _glGetFloatv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glGetFloatv(pname, params, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 pname;
+  undefined4 params;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x68])(*puVar2,param_1,param_2);
+  (*(code *)glContext[0x68])(*glContext,pname,params);
   return;
 }
 
 /* _glTexSubImage2D @ 0x92f2a8f8 (192 bytes) */
-int _glTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int _glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type)
+  undefined4 target;
+  undefined4 level;
+  undefined4 xoffset;
+  undefined4 yoffset;
+  undefined4 width;
+  undefined4 height;
+  undefined4 format;
+  undefined4 type;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff80);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff80);
   }
-  return (*(code *)puVar2[0x134])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  return (*(code *)glContext[0x134])(*glContext,target,level,xoffset,yoffset,width,height,format);
 }
 
 /* _glTexCoord3f @ 0x92f2a9b8 (160 bytes) */
-void _glTexCoord3f(double fparam_1,double fparam_2,double fparam_3)
+void _glTexCoord3f(double s,double t,double r)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
-  (*(code *)puVar2[0x114])(fparam_1,fparam_2,fparam_3,*puVar2);
+  (*(code *)glContext[0x114])(s,t,r,*glContext);
   return;
 }
 
 /* _glTextureRangeAPPLE @ 0x92f2aa58 (140 bytes) */
-int _glTextureRangeAPPLE(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glTextureRangeAPPLE(target, length, pointer, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 target;
+  undefined4 length;
+  undefined4 pointer;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1c9])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x1c9])(*glContext,target,length,pointer);
   return;
 }
 
@@ -798,11 +798,11 @@ int __dyld_func_lookup()
 /* ___initialize_Cplusplus @ 0x92f2ab0c (88 bytes) */
 int ___initialize_Cplusplus()
 {
-  code *local_28 [9];
+  code *moduleInitializerEntry [9];
   
-  ((int (*)())__dyld_func_lookup)("__dyld_call_module_initializers_for_dylib",local_28);
-  if (local_28[0] != (code *)0x0) {
-    (*local_28[0])(PTR___mh_dylib_header_a2f27018);
+  ((int (*)())__dyld_func_lookup)("__dyld_call_module_initializers_for_dylib",moduleInitializerEntry);
+  if (moduleInitializerEntry[0] != (code *)0x0) {
+    (*moduleInitializerEntry[0])(PTR___mh_dylib_header_a2f27018);
   }
   return;
 }
@@ -815,555 +815,555 @@ int FUN_92f2ab64()
 }
 
 /* _glAccum @ 0x92f2ab84 (140 bytes) */
-void _glAccum(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+void _glAccum(undefined4 op,undefined4 valueShadow,undefined4 fwdReg3,undefined4 fwdReg4,undefined4 fwdReg5,undefined4 fwdReg6,undefined4 fwdReg7,double value)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[1])(fparam_1,*puVar2,param_1);
+  (*(code *)glContext[1])(value,*glContext,op);
   return;
 }
 
 /* _glAreTexturesResident @ 0x92f2ac10 (144 bytes) */
-int _glAreTexturesResident(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glAreTexturesResident(n, textures, residences, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 n;
+  undefined4 textures;
+  undefined4 residences;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
-  return (*(code *)puVar2[3])(*puVar2,param_1,param_2,param_3);
+  return (*(code *)glContext[3])(*glContext,n,textures,residences);
 }
 
 /* _glArrayElement @ 0x92f2aca0 (124 bytes) */
-int _glArrayElement(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glArrayElement(i, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 i;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[4])(*puVar2,param_1);
+  (*(code *)glContext[4])(*glContext,i);
   return;
 }
 
 /* _glBitmap @ 0x92f2ad1c (188 bytes) */
-void _glBitmap(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glBitmap(undefined4 width,undefined4 height,undefined4 xorigShadow,undefined4 yorigShadow,undefined4 xmoveShadow,undefined4 ymoveShadow,undefined4 bitmap,double xorig,double yorig,double xmove,double ymove)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff80);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff80);
   }
                     
                     
-  (*(code *)puVar2[7])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2,param_1,param_2);
+  (*(code *)glContext[7])(xorig,yorig,xmove,ymove,*glContext,width,height);
   return;
 }
 
 /* _glCallLists @ 0x92f2add8 (140 bytes) */
-int _glCallLists(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glCallLists(n, type, lists, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 n;
+  undefined4 type;
+  undefined4 lists;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[10])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[10])(*glContext,n,type,lists);
   return;
 }
 
 /* _glClearAccum @ 0x92f2ae64 (160 bytes) */
-void _glClearAccum(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glClearAccum(double red,double green,double blue,double alpha)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
-  (*(code *)puVar2[0xc])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2);
+  (*(code *)glContext[0xc])(red,green,blue,alpha,*glContext);
   return;
 }
 
 /* _glClearIndex @ 0x92f2af04 (128 bytes) */
-void _glClearIndex(double fparam_1)
+void _glClearIndex(double c)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0xf])(fparam_1,*puVar2);
+  (*(code *)glContext[0xf])(c,*glContext);
   return;
 }
 
 /* _glClearStencil @ 0x92f2af84 (124 bytes) */
-int _glClearStencil(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glClearStencil(s, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 s;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x10])(*puVar2,param_1);
+  (*(code *)glContext[0x10])(*glContext,s);
   return;
 }
 
 /* _glClipPlane @ 0x92f2b000 (132 bytes) */
-int _glClipPlane(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glClipPlane(plane, equation, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 plane;
+  undefined4 equation;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x11])(*puVar2,param_1,param_2);
+  (*(code *)glContext[0x11])(*glContext,plane,equation);
   return;
 }
 
 /* _glColor3b @ 0x92f2b084 (140 bytes) */
-int _glColor3b(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3b(red, green, blue, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x12])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x12])(*glContext,red,green,blue);
   return;
 }
 
 /* _glColor3bv @ 0x92f2b110 (124 bytes) */
-int _glColor3bv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3bv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x13])(*puVar2,param_1);
+  (*(code *)glContext[0x13])(*glContext,v);
   return;
 }
 
 /* _glColor3d @ 0x92f2b18c (160 bytes) */
-void _glColor3d(double fparam_1,double fparam_2,double fparam_3)
+void _glColor3d(double red,double green,double blue)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
-  (*(code *)puVar2[0x14])(fparam_1,fparam_2,fparam_3,*puVar2);
+  (*(code *)glContext[0x14])(red,green,blue,*glContext);
   return;
 }
 
 /* _glColor3dv @ 0x92f2b22c (124 bytes) */
-int _glColor3dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3dv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x15])(*puVar2,param_1);
+  (*(code *)glContext[0x15])(*glContext,v);
   return;
 }
 
 /* _glColor3f @ 0x92f2b2a8 (160 bytes) */
-void _glColor3f(double fparam_1,double fparam_2,double fparam_3)
+void _glColor3f(double red,double green,double blue)
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
-  (*(code *)puVar2[0x16])(fparam_1,fparam_2,fparam_3,*puVar2);
+  (*(code *)glContext[0x16])(red,green,blue,*glContext);
   return;
 }
 
 /* _glColor3fv @ 0x92f2b348 (124 bytes) */
-int _glColor3fv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3fv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x17])(*puVar2,param_1);
+  (*(code *)glContext[0x17])(*glContext,v);
   return;
 }
 
 /* _glColor3i @ 0x92f2b3c4 (140 bytes) */
-int _glColor3i(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3i(red, green, blue, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x18])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x18])(*glContext,red,green,blue);
   return;
 }
 
 /* _glColor3iv @ 0x92f2b450 (124 bytes) */
-int _glColor3iv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3iv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x19])(*puVar2,param_1);
+  (*(code *)glContext[0x19])(*glContext,v);
   return;
 }
 
 /* _glColor3s @ 0x92f2b4cc (140 bytes) */
-int _glColor3s(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3s(red, green, blue, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1a])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x1a])(*glContext,red,green,blue);
   return;
 }
 
 /* _glColor3sv @ 0x92f2b558 (124 bytes) */
-int _glColor3sv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3sv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1b])(*puVar2,param_1);
+  (*(code *)glContext[0x1b])(*glContext,v);
   return;
 }
 
 /* _glColor3ub @ 0x92f2b5d4 (140 bytes) */
-int _glColor3ub(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3ub(red, green, blue, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1c])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x1c])(*glContext,red,green,blue);
   return;
 }
 
 /* _glColor3ubv @ 0x92f2b660 (124 bytes) */
-int _glColor3ubv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3ubv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1d])(*puVar2,param_1);
+  (*(code *)glContext[0x1d])(*glContext,v);
   return;
 }
 
 /* _glColor3ui @ 0x92f2b6dc (140 bytes) */
-int _glColor3ui(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3ui(red, green, blue, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 red;
+  undefined4 green;
+  undefined4 blue;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1e])(*puVar2,param_1,param_2,param_3);
+  (*(code *)glContext[0x1e])(*glContext,red,green,blue);
   return;
 }
 
 /* _glColor3uiv @ 0x92f2b768 (124 bytes) */
-int _glColor3uiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _glColor3uiv(v, fwdReg2, fwdReg3, fwdReg4, fwdReg5, fwdReg6, fwdReg7)
+  undefined4 v;
+  undefined4 fwdReg2;
+  undefined4 fwdReg3;
+  undefined4 fwdReg4;
+  undefined4 fwdReg5;
+  undefined4 fwdReg6;
+  undefined4 fwdReg7;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
+  undefined *currentContextSlot;
+  undefined4 *glContext;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffffa0);
+  currentContextSlot = PTR__gll_cc_a2f27020;
+  glContext = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((glContext[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
+    glContext = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)currentContextSlot = glContext;
+    glContext[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
-  (*(code *)puVar2[0x1f])(*puVar2,param_1);
+  (*(code *)glContext[0x1f])(*glContext,v);
   return;
 }
 
