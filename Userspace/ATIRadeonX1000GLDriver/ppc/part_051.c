@@ -774,10 +774,10 @@ int FUN_001962f0(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
-  undefined4 uVar1;
+  undefined4 opcodeInfo;
   
-  uVar1 = FUN_00112f54(0x31);
-  *(undefined4 *)(param_2 + 0x88) = uVar1;
+  opcodeInfo = FUN_00112f54(0x31);
+  *(undefined4 *)(param_2 + 0x88) = opcodeInfo;
   if (*(int *)(param_2 + 0x98) != 0x2c) {
                     
                     
@@ -1217,11 +1217,11 @@ int FUN_00196e90(param_1, inst, param_3)
   uint uVar1;
   int iVar2;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 operandVReg;
   int *a0;
   int callResult;
-  int *piVar6;
-  undefined4 uVar7;
+  int *operandVReg2;
+  undefined4 operandVReg3;
   int iVar8;
   uint local_28 [3];
   
@@ -1231,16 +1231,16 @@ int FUN_00196e90(param_1, inst, param_3)
     if (((*(char *)(iVar2 + 0x10) == '\0') ||
         (iVar2 = FUN_001054ec(inst,0), *(char *)(iVar2 + 0x11) == '\0')) ||
        (iVar2 = FUN_001054ec(inst,0), *(char *)(iVar2 + 0x12) == '\0')) {
-      uVar4 = FUN_00105594(inst,1);
-      iVar2 = FUN_0018d388(param_3,uVar4,0);
+      operandVReg = FUN_00105594(inst,1);
+      iVar2 = FUN_0018d388(param_3,operandVReg,0);
       if (iVar2 == 0) {
         return 0;
       }
     }
     iVar2 = FUN_001054ec(inst,0);
     if (*(char *)(iVar2 + 0x13) == '\0') {
-      uVar4 = FUN_00105594(inst,1);
-      iVar2 = FUN_0018d388(param_3,uVar4,1);
+      operandVReg = FUN_00105594(inst,1);
+      iVar2 = FUN_0018d388(param_3,operandVReg,1);
       if (iVar2 == 0) {
         return 0;
       }
@@ -1253,10 +1253,10 @@ int FUN_00196e90(param_1, inst, param_3)
       piVar3 = inst;
       iVar2 = iVar8;
       if (callResult != 0) {
-        piVar6 = (int *)FUN_00105594(a0,1);
+        operandVReg2 = (int *)FUN_00105594(a0,1);
         piVar3 = a0;
         iVar2 = 1;
-        a0 = piVar6;
+        a0 = operandVReg2;
       }
       iVar2 = FUN_001054ec(piVar3,iVar2);
       FUN_000f3398(local_28,*(undefined4 *)(iVar2 + 0x10));
@@ -1284,13 +1284,13 @@ joined_r0x00197160:
         if ((uVar1 & 0xffffff00) != 0) {
           iVar2 = (**(code **)(*a0 + 0x14))(a0);
           if (iVar2 == 1) {
-            uVar4 = FUN_00105594(a0,1);
-            iVar2 = FUN_0018d388(param_3,uVar4,0);
+            operandVReg = FUN_00105594(a0,1);
+            iVar2 = FUN_0018d388(param_3,operandVReg,0);
           }
           else {
-            uVar4 = FUN_00105594(a0,1);
-            uVar7 = FUN_00105594(a0,2);
-            iVar2 = FUN_0018cdd8(param_3,uVar4,uVar7,0);
+            operandVReg = FUN_00105594(a0,1);
+            operandVReg3 = FUN_00105594(a0,2);
+            iVar2 = FUN_0018cdd8(param_3,operandVReg,operandVReg3,0);
           }
           if (iVar2 == 0) {
             return 0;
@@ -1299,13 +1299,13 @@ joined_r0x00197160:
         if ((uVar1 & 0xff) != 0) {
           iVar2 = (**(code **)(*a0 + 0x14))(a0);
           if (iVar2 == 1) {
-            uVar4 = FUN_00105594(a0,1);
-            iVar2 = FUN_0018d388(param_3,uVar4,1);
+            operandVReg = FUN_00105594(a0,1);
+            iVar2 = FUN_0018d388(param_3,operandVReg,1);
           }
           else {
-            uVar4 = FUN_00105594(a0,1);
-            uVar7 = FUN_00105594(a0,2);
-            iVar2 = FUN_0018cdd8(param_3,uVar4,uVar7,1);
+            operandVReg = FUN_00105594(a0,1);
+            operandVReg3 = FUN_00105594(a0,2);
+            iVar2 = FUN_0018cdd8(param_3,operandVReg,operandVReg3,1);
           }
           goto joined_r0x00197160;
         }

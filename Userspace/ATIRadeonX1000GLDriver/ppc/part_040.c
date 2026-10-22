@@ -8,7 +8,7 @@ int FUN_0012b35c(param_1, inst)
   bool bVar1;
   int iVar2;
   undefined4 uVar3;
-  int iVar4;
+  int operandRecord;
   
   iVar2 = FUN_000f3a30(inst);
   uVar3 = 0;
@@ -17,8 +17,8 @@ int FUN_0012b35c(param_1, inst)
     param_1[0xe] = 0xffffffff;
     iVar2 = 0;
     do {
-      iVar4 = FUN_001054ec(inst,0);
-      if (*(char *)(iVar2 + iVar4 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(inst,0);
+      if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
         param_1[0xe] = iVar2;
       }
       bVar1 = iVar2 != 3;
@@ -742,7 +742,7 @@ int FUN_0012c7c0(param_1, inst)
   int loopIndex2;
   bool bVar1;
   uint uVar2;
-  int iVar3;
+  int operandRecord;
   int *a0;
   int iVar4;
   int iVar5;
@@ -754,8 +754,8 @@ int FUN_0012c7c0(param_1, inst)
     iVar4 = -1;
     loopIndex = 0;
     do {
-      iVar3 = FUN_001054ec(inst,0);
-      if (*(char *)(loopIndex + iVar3 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(inst,0);
+      if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         iVar4 = param_1[0xe];
         loopIndex2 = loopIndex2 + 1;
         if (iVar4 != loopIndex) {
@@ -1181,8 +1181,8 @@ int FUN_0012d2f0(flattenPass)
   int iVar6;
   uint uVar7;
   int *piVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
+  undefined4 operandVReg2;
+  undefined4 operandVReg3;
   undefined4 extraout_r4;
   uint in_r6;
   undefined4 in_r7;
@@ -1426,8 +1426,8 @@ int FUN_0012d2f0(flattenPass)
           if (*(int *)(piVar2[0x22] + 8) == 0x8e) {
             iVar5 = FUN_001054ec(piVar2,0);
             local_60[0] = *(int *)(iVar5 + 0x10);
-            uVar9 = FUN_00105594(piVar2,1);
-            uVar10 = FUN_00105594(piVar2,2);
+            operandVReg2 = FUN_00105594(piVar2,1);
+            operandVReg3 = FUN_00105594(piVar2,2);
             iVar6 = 4;
             iVar5 = 0;
             local_64 = uVar13;
@@ -1464,13 +1464,13 @@ int FUN_0012d2f0(flattenPass)
             *(undefined4 *)(iVar5 + 0x10) = uVar4;
             FUN_00103d50(piVar2 + 0x29,1,uVar7);
             FUN_00103d50(piVar2 + 0x29,2,uVar14);
-            FUN_00106004(piVar2,2,uVar9,*(uint *)(flattenPass + 0x30) >> 7 & 1,
+            FUN_00106004(piVar2,2,operandVReg2,*(uint *)(flattenPass + 0x30) >> 7 & 1,
                          *(undefined4 *)(flattenPass + 8));
             iVar5 = FUN_001054ec(piVar2,2);
             *(undefined4 *)(iVar5 + 0x10) = uVar17;
             in_r7 = *(undefined4 *)(flattenPass + 8);
             in_r6 = *(uint *)(flattenPass + 0x30) >> 7 & 1;
-            FUN_00106004(piVar2,3,uVar10,in_r6,in_r7);
+            FUN_00106004(piVar2,3,operandVReg3,in_r6,in_r7);
             iVar5 = FUN_001054ec(piVar2,3);
             *(undefined4 *)(iVar5 + 0x10) = uVar15;
             piVar18 = piVar2;
@@ -3545,7 +3545,7 @@ int FUN_00131008(param_1, inst, param_3)
 {
   bool bVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 operandVReg;
   undefined4 uVar4;
   int *a0;
   int iVar5;
@@ -3557,11 +3557,11 @@ int FUN_00131008(param_1, inst, param_3)
   iVar2 = FUN_001054ec(inst,param_3);
   FUN_000f3398(local_38,*(undefined4 *)(iVar2 + 0x10));
   local_48 = local_38[0];
-  uVar3 = FUN_00105594(inst,param_3);
+  operandVReg = FUN_00105594(inst,param_3);
   iVar2 = 0;
   do {
     if ((auStack_44[iVar2 + -4] != '\0') &&
-       (uVar4 = FUN_001382b8(uVar3,iVar2,auStack_44), -1 < param_1)) {
+       (uVar4 = FUN_001382b8(operandVReg,iVar2,auStack_44), -1 < param_1)) {
       loopIndex = 0;
       a0 = inst;
       do {
@@ -3605,7 +3605,7 @@ int FUN_001311cc(param_1, param_2, param_3, param_4, param_5, compiler)
   int compiler;
 {
   undefined4 *allocation;
-  int iVar2;
+  int operandRecord;
   undefined4 arena;
   undefined4 *puVar4;
   
@@ -3620,12 +3620,12 @@ int FUN_001311cc(param_1, param_2, param_3, param_4, param_5, compiler)
   allocation[0x26] = param_1;
   FUN_00106004(puVar4,1,param_3,0,compiler);
   arena = UNK_001affe0;
-  iVar2 = FUN_001054ec(puVar4,1);
-  *(undefined4 *)(iVar2 + 0x10) = arena;
+  operandRecord = FUN_001054ec(puVar4,1);
+  *(undefined4 *)(operandRecord + 0x10) = arena;
   FUN_00106004(puVar4,2,param_4,0,compiler);
   arena = UNK_001affdc;
-  iVar2 = FUN_001054ec(puVar4,2);
-  *(undefined4 *)(iVar2 + 0x10) = arena;
+  operandRecord = FUN_001054ec(puVar4,2);
+  *(undefined4 *)(operandRecord + 0x10) = arena;
   FUN_000e7738(*(undefined4 *)(param_5 + 0x158),param_5,puVar4);
   allocation[6] = allocation[6] | 0x8001000;
   return puVar4;
@@ -3640,8 +3640,8 @@ int FUN_001312f4(inst, param_2, param_3, param_4, compiler)
   int compiler;
 {
   bool bVar1;
-  int iVar2;
-  int iVar3;
+  int operandRecord;
+  int operandRecord2;
   undefined4 *allocation;
   int iVar5;
   undefined4 arena;
@@ -3650,15 +3650,15 @@ int FUN_001312f4(inst, param_2, param_3, param_4, compiler)
   undefined4 local_38;
   undefined4 local_34 [3];
   
-  iVar2 = FUN_001054ec(inst,0);
-  local_48[0] = *(undefined4 *)(iVar2 + 0x10);
+  operandRecord = FUN_001054ec(inst,0);
+  local_48[0] = *(undefined4 *)(operandRecord + 0x10);
   if (((*(uint *)(inst + 0x14) & 0x200) != 0) &&
-     (iVar2 = FUN_00105594(inst,*(undefined4 *)(inst + 0x84)), iVar2 != 0)) {
+     (operandRecord = FUN_00105594(inst,*(undefined4 *)(inst + 0x84)), operandRecord != 0)) {
     iVar5 = 0;
     do {
-      iVar3 = FUN_001054ec(inst,0);
-      if ((*(char *)(iVar5 + iVar3 + 0x10) == '\x01') &&
-         (iVar3 = FUN_00138240(iVar2,iVar5), iVar3 != 0)) {
+      operandRecord2 = FUN_001054ec(inst,0);
+      if ((*(char *)(iVar5 + operandRecord2 + 0x10) == '\x01') &&
+         (operandRecord2 = FUN_00138240(operandRecord,iVar5), operandRecord2 != 0)) {
         *(undefined1 *)((int)local_48 + iVar5) = 0;
       }
       bVar1 = iVar5 != 3;
@@ -3677,12 +3677,12 @@ int FUN_001312f4(inst, param_2, param_3, param_4, compiler)
   FUN_000f36b8(local_34,local_38);
   allocation[0x28] = local_34[0];
   FUN_00106004(puVar7,1,inst,0,compiler);
-  iVar2 = FUN_001054ec(puVar7,1);
-  *(undefined4 *)(iVar2 + 0x10) = local_38;
+  operandRecord = FUN_001054ec(puVar7,1);
+  *(undefined4 *)(operandRecord + 0x10) = local_38;
   FUN_00106004(puVar7,2,param_3,0,compiler);
   arena = UNK_001affdc;
-  iVar2 = FUN_001054ec(puVar7,2);
-  *(undefined4 *)(iVar2 + 0x10) = arena;
+  operandRecord = FUN_001054ec(puVar7,2);
+  *(undefined4 *)(operandRecord + 0x10) = arena;
   FUN_00106004(puVar7,3,param_2,0,compiler);
   arena = *(undefined4 *)(param_4 + 0x158);
   allocation[6] = allocation[6] | 0x1000;

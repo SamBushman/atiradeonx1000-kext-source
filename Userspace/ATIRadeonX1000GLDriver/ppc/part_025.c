@@ -860,15 +860,15 @@ int FUN_000f3a30(inst)
   undefined4 inst;
 {
   bool bVar1;
-  int iVar2;
+  int operandRecord;
   int iVar3;
   int iVar4;
   
   iVar3 = 0;
   iVar4 = 0;
   do {
-    iVar2 = FUN_001054ec(inst,0);
-    if (*(char *)(iVar4 + iVar2 + 0x10) != '\x01') {
+    operandRecord = FUN_001054ec(inst,0);
+    if (*(char *)(iVar4 + operandRecord + 0x10) != '\x01') {
       iVar3 = iVar3 + 1;
     }
     bVar1 = iVar4 != 3;
@@ -882,11 +882,11 @@ int FUN_000f3a90(inst)
   undefined4 inst;
 {
   uint uVar1;
-  int iVar2;
+  int operandRecord;
   undefined4 uVar3;
   
-  iVar2 = FUN_001054ec(inst,0);
-  uVar1 = *(uint *)(iVar2 + 0x10);
+  operandRecord = FUN_001054ec(inst,0);
+  uVar1 = *(uint *)(operandRecord + 0x10);
   if (((uVar1 >> 0x18 == 0) || ((uVar1 >> 0x10 & 0xff) == 0)) ||
      (uVar3 = 0, (uVar1 >> 8 & 0xff) == 0)) {
     uVar3 = 1;
@@ -898,10 +898,10 @@ int FUN_000f3a90(inst)
 int FUN_000f3ae0(inst)
   undefined4 inst;
 {
-  int iVar1;
+  int operandRecord;
   
-  iVar1 = FUN_001054ec(inst,0);
-  return *(char *)(iVar1 + 0x13) == '\0';
+  operandRecord = FUN_001054ec(inst,0);
+  return *(char *)(operandRecord + 0x13) == '\0';
 }
 
 /* FUN_000f3b10 @ 0xf3b10 (88 bytes) */
@@ -955,16 +955,16 @@ int FUN_000f3bc0(inst, param_2)
   undefined4 inst;
   int param_2;
 {
-  int iVar1;
+  int operandRecord;
   bool bVar2;
   
   if (param_2 == 0) {
-    iVar1 = FUN_001054ec(inst,0);
-    bVar2 = *(int *)(iVar1 + 0x10) == _UNK_001aa84c;
+    operandRecord = FUN_001054ec(inst,0);
+    bVar2 = *(int *)(operandRecord + 0x10) == _UNK_001aa84c;
   }
   else {
-    iVar1 = FUN_001054ec(inst,param_2);
-    bVar2 = *(int *)(iVar1 + 0x10) == _UNK_001aa848;
+    operandRecord = FUN_001054ec(inst,param_2);
+    bVar2 = *(int *)(operandRecord + 0x10) == _UNK_001aa848;
   }
   return 1 - (uint)bVar2;
 }
@@ -1452,20 +1452,20 @@ int FUN_000f4698(inst, param_2, param_3)
   int param_2;
   undefined4 param_3;
 {
-  int iVar1;
+  int operandRecord;
   undefined4 local_18;
   undefined4 local_14;
   
-  iVar1 = FUN_001054ec(inst,0);
-  ((int (*)())FUN_000f3c30)(&local_18,inst,param_2,param_3,*(undefined4 *)(iVar1 + 0x10));
-  iVar1 = FUN_001054ec(inst,param_2);
-  ((int (*)())FUN_000f3340)(&local_14,*(undefined4 *)(iVar1 + 0x10),local_18);
+  operandRecord = FUN_001054ec(inst,0);
+  ((int (*)())FUN_000f3c30)(&local_18,inst,param_2,param_3,*(undefined4 *)(operandRecord + 0x10));
+  operandRecord = FUN_001054ec(inst,param_2);
+  ((int (*)())FUN_000f3340)(&local_14,*(undefined4 *)(operandRecord + 0x10),local_18);
   if (param_2 == 0) {
     *(undefined4 *)(inst + 0x9c) = local_14;
   }
   else {
-    iVar1 = FUN_001054ec(inst,param_2);
-    *(undefined4 *)(iVar1 + 0x10) = local_14;
+    operandRecord = FUN_001054ec(inst,param_2);
+    *(undefined4 *)(operandRecord + 0x10) = local_14;
   }
   return;
 }
@@ -1540,17 +1540,17 @@ int FUN_000f485c(inst, param_2)
 {
   bool bVar1;
   byte bVar2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 operandVReg;
+  int operandRecord;
   int iVar5;
   undefined4 local_38 [9];
   
-  uVar3 = FUN_00105594(inst,param_2);
-  iVar4 = FUN_001054ec(inst,param_2);
+  operandVReg = FUN_00105594(inst,param_2);
+  operandRecord = FUN_001054ec(inst,param_2);
   iVar5 = 0;
-  local_38[0] = *(undefined4 *)(iVar4 + 0x10);
+  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
   while ((bVar2 = *(byte *)((int)local_38 + iVar5), bVar2 == 4 ||
-         (iVar4 = FUN_001054ec(uVar3,0), *(char *)((uint)bVar2 + iVar4 + 0x10) == '\x01'))) {
+         (operandRecord = FUN_001054ec(operandVReg,0), *(char *)((uint)bVar2 + operandRecord + 0x10) == '\x01'))) {
     bVar1 = iVar5 == 3;
     iVar5 = iVar5 + 1;
     if (bVar1) {
@@ -1567,17 +1567,17 @@ int FUN_000f48ec(inst, param_2)
 {
   bool bVar1;
   byte bVar2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined4 operandVReg;
+  int operandRecord;
   int iVar5;
   undefined4 local_38 [9];
   
-  uVar3 = FUN_00105594(inst,param_2);
-  iVar4 = FUN_001054ec(inst,param_2);
+  operandVReg = FUN_00105594(inst,param_2);
+  operandRecord = FUN_001054ec(inst,param_2);
   iVar5 = 0;
-  local_38[0] = *(undefined4 *)(iVar4 + 0x10);
+  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
   while ((bVar2 = *(byte *)((int)local_38 + iVar5), bVar2 == 4 ||
-         (iVar4 = FUN_001054ec(uVar3,0), *(char *)((uint)bVar2 + iVar4 + 0x10) != '\x01'))) {
+         (operandRecord = FUN_001054ec(operandVReg,0), *(char *)((uint)bVar2 + operandRecord + 0x10) != '\x01'))) {
     bVar1 = iVar5 == 3;
     iVar5 = iVar5 + 1;
     if (bVar1) {

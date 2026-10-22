@@ -82,12 +82,12 @@ int FUN_00197de4(param_1, param_2, param_3, param_4, inst)
 {
   float fVar1;
   uint uVar2;
-  int iVar3;
+  int operandVReg;
   int loopRemaining;
   int loopIndex;
   undefined4 local_38 [9];
   
-  iVar3 = FUN_00105594(inst,param_2);
+  operandVReg = FUN_00105594(inst,param_2);
   loopRemaining = FUN_001054ec(inst,param_2);
   loopIndex = 0;
   local_38[0] = *(undefined4 *)(loopRemaining + 0x10);
@@ -100,7 +100,7 @@ int FUN_00197de4(param_1, param_2, param_3, param_4, inst)
   } while (loopRemaining != 0);
   uVar2 = 0;
 LAB_00197e50:
-  fVar1 = *(float *)(uVar2 * 0x18 + iVar3 + 0x20);
+  fVar1 = *(float *)(uVar2 * 0x18 + operandVReg + 0x20);
   if (fVar1 == FLOAT_001aa0d4) {
     *(undefined4 *)(param_2 * 4 + param_3) = 0x14;
   }
@@ -123,12 +123,12 @@ int FUN_00197ecc(param_1, param_2, param_3, param_4, inst)
 {
   float fVar1;
   uint uVar2;
-  int iVar3;
+  int operandVReg;
   int loopRemaining;
   int loopIndex;
   undefined4 local_38 [9];
   
-  iVar3 = FUN_00105594(inst,param_2);
+  operandVReg = FUN_00105594(inst,param_2);
   loopRemaining = FUN_001054ec(inst,param_2);
   loopIndex = 0;
   local_38[0] = *(undefined4 *)(loopRemaining + 0x10);
@@ -141,7 +141,7 @@ int FUN_00197ecc(param_1, param_2, param_3, param_4, inst)
   } while (loopRemaining != 0);
   uVar2 = 0;
 LAB_00197f38:
-  fVar1 = *(float *)(uVar2 * 0x18 + iVar3 + 0x20);
+  fVar1 = *(float *)(uVar2 * 0x18 + operandVReg + 0x20);
   if (fVar1 == FLOAT_001aa0d4) {
     *(undefined4 *)(param_2 * 4 + param_3) = 0x10;
   }
@@ -163,7 +163,7 @@ int FUN_00197fb4(param_1, param_2, param_3, inst, param_5)
   undefined4 param_5;
 {
   int iVar1;
-  int iVar2;
+  int operandRecord;
   undefined1 uVar3;
   int iVar4;
   
@@ -172,8 +172,8 @@ int FUN_00197fb4(param_1, param_2, param_3, inst, param_5)
          (*(unsigned short *)((unsigned char *)&(param_5) + 2));
     iVar4 = *(int *)(param_1 + 0x60);
     iVar1 = *(int *)(param_1 + 0x58);
-    iVar2 = FUN_001054ec(inst,0);
-    uVar3 = FUN_00195424(*(undefined4 *)(iVar2 + 0x10));
+    operandRecord = FUN_001054ec(inst,0);
+    uVar3 = FUN_00195424(*(undefined4 *)(operandRecord + 0x10));
     *(undefined1 *)(iVar4 * 0x48 + iVar1 + 0x14) = uVar3;
   }
   if (param_3 != 0) {
@@ -181,8 +181,8 @@ int FUN_00197fb4(param_1, param_2, param_3, inst, param_5)
          (*(unsigned short *)((unsigned char *)&(param_5) + 2));
     iVar4 = *(int *)(param_1 + 0x60);
     iVar1 = *(int *)(param_1 + 0x58);
-    iVar2 = FUN_001054ec(inst,0);
-    *(bool *)(iVar4 * 0x48 + iVar1 + 0x20) = *(char *)(iVar2 + 0x13) == '\0';
+    operandRecord = FUN_001054ec(inst,0);
+    *(bool *)(iVar4 * 0x48 + iVar1 + 0x20) = *(char *)(operandRecord + 0x13) == '\0';
   }
   return;
 }
@@ -270,7 +270,7 @@ int FUN_001981ac(inst, inst2)
   int *piVar25;
   byte in_xer_so = 0;
   int loopRemaining;
-  undefined8 uVar27;
+  undefined8 operandVReg;
   int local_f8;
   int local_f4;
   int local_f0;
@@ -333,10 +333,10 @@ LAB_00198290:
       loopRemaining = FUN_001054ec(inst2,piVar22);
       piVar23 = *(int **)(loopRemaining + 0x10);
       local_f0 = -1;
-      uVar27 = FUN_00105594(inst2,piVar22);
-      a0 = (int *)((ulonglong)uVar27 >> 0x20);
+      operandVReg = FUN_00105594(inst2,piVar22);
+      a0 = (int *)((ulonglong)operandVReg >> 0x20);
       iVar20 = *(int *)(local_60 + -0x56f8);
-      loopRemaining = (**(code **)(*a0 + 0x60))(a0,(int)uVar27,loopIndex,loopIndex2,a4,piVar25,local_60);
+      loopRemaining = (**(code **)(*a0 + 0x60))(a0,(int)operandVReg,loopIndex,loopIndex2,a4,piVar25,local_60);
       if (loopRemaining == 0) {
         local_7c = 0;
         local_80 = (int *)0x0;

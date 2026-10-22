@@ -453,7 +453,7 @@ int FUN_00110020(param_1, param_2)
   bool bVar1;
   int iVar2;
   undefined4 *allocation;
-  int iVar4;
+  int operandRecord;
   undefined4 uVar5;
   undefined4 uVar6;
   undefined4 *puVar7;
@@ -520,8 +520,8 @@ LAB_001101ac:
   }
   iVar2 = 0;
   do {
-    iVar4 = FUN_001054ec(*piVar8,0);
-    if (*(char *)(iVar2 + iVar4 + 0x10) != '\x01') {
+    operandRecord = FUN_001054ec(*piVar8,0);
+    if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
       uVar9 = *(undefined4 *)(param_2 + 0x20);
       arena = FUN_00104ee4(*piVar8,iVar2);
       uVar5 = FUN_00104180(*piVar8,iVar2);
@@ -1721,7 +1721,7 @@ int FUN_001121b4(param_1)
   undefined4 uVar8;
   uint uVar9;
   int iVar10;
-  int iVar11;
+  int operandRecord;
   undefined4 uVar12;
   undefined4 *puVar13;
   uint uVar14;
@@ -1826,8 +1826,8 @@ int FUN_001121b4(param_1)
                   iVar10 = 0;
                   puVar15 = local_58 + iVar19 * 4;
                   do {
-                    iVar11 = FUN_001054ec(iVar25,0);
-                    if (*(char *)(iVar10 + iVar11 + 0x10) != '\x01') {
+                    operandRecord = FUN_001054ec(iVar25,0);
+                    if (*(char *)(iVar10 + operandRecord + 0x10) != '\x01') {
                       uVar12 = FUN_00104b6c(iVar25,iVar10);
                       *(undefined4 *)(puVar15 + 8) = uVar12;
                       uVar12 = FUN_0010426c(iVar25,iVar10);

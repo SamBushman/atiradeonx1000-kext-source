@@ -71,7 +71,7 @@ int FUN_0012622c(this, param_2, param_3, param_4, compiler)
   int compiler;
 {
   undefined4 *allocation;
-  int iVar2;
+  int operandRecord;
   undefined4 *puVar3;
   undefined4 arena;
   
@@ -90,8 +90,8 @@ int FUN_0012622c(this, param_2, param_3, param_4, compiler)
     FUN_0012306c(this,puVar3);
     FUN_001046c8(puVar3,1,this);
     arena = DAT_001afeec;
-    iVar2 = FUN_001054ec(puVar3,1);
-    *(undefined4 *)(iVar2 + 0x10) = arena;
+    operandRecord = FUN_001054ec(puVar3,1);
+    *(undefined4 *)(operandRecord + 0x10) = arena;
     FUN_001236e4(this,1,puVar3);
     FUN_000ee9ac(*(undefined4 *)(compiler + 0x6c4),puVar3);
     FUN_000e7688(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);
@@ -108,7 +108,7 @@ int FUN_00126378(this, param_2, param_3, param_4, compiler)
   int compiler;
 {
   undefined4 *allocation;
-  int iVar2;
+  int operandRecord;
   undefined4 *puVar3;
   undefined4 arena;
   
@@ -127,8 +127,8 @@ int FUN_00126378(this, param_2, param_3, param_4, compiler)
     FUN_0012306c(this,puVar3);
     FUN_001046c8(puVar3,1,this);
     arena = DAT_001afeec;
-    iVar2 = FUN_001054ec(puVar3,1);
-    *(undefined4 *)(iVar2 + 0x10) = arena;
+    operandRecord = FUN_001054ec(puVar3,1);
+    *(undefined4 *)(operandRecord + 0x10) = arena;
     FUN_001236e4(this,1,puVar3);
     FUN_000ee9ac(*(undefined4 *)(compiler + 0x6c4),puVar3);
     FUN_000e7688(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);

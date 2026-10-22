@@ -410,12 +410,12 @@ int FUN_001043f0(param_1, compiler)
   undefined4 compiler;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   iVar1 = FUN_00113388(param_1,compiler);
   iVar1 = (**(code **)(&DAT_001ea4fc + iVar1 * 8))(param_1,compiler);
-  uVar2 = FUN_00112f54(param_1);
-  *(undefined4 *)(iVar1 + 0x88) = uVar2;
+  opcodeInfo = FUN_00112f54(param_1);
+  *(undefined4 *)(iVar1 + 0x88) = opcodeInfo;
   return iVar1;
 }
 
@@ -1006,28 +1006,28 @@ int FUN_00104f34(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   if (param_2 == 0) {
     iVar1 = *(int *)(*(int *)(param_1 + 0x88) + 8);
     if (iVar1 == 0x2b) {
-      uVar2 = FUN_00112f54(0xa6);
-      *(undefined4 *)(param_1 + 0x88) = uVar2;
+      opcodeInfo = FUN_00112f54(0xa6);
+      *(undefined4 *)(param_1 + 0x88) = opcodeInfo;
     }
     else if (iVar1 == 99) {
-      uVar2 = FUN_00112f54(100);
-      *(undefined4 *)(param_1 + 0x88) = uVar2;
+      opcodeInfo = FUN_00112f54(100);
+      *(undefined4 *)(param_1 + 0x88) = opcodeInfo;
     }
   }
   else {
     iVar1 = *(int *)(*(int *)(param_1 + 0x88) + 8);
     if (iVar1 == 0xa6) {
-      uVar2 = FUN_00112f54(0x2b);
-      *(undefined4 *)(param_1 + 0x88) = uVar2;
+      opcodeInfo = FUN_00112f54(0x2b);
+      *(undefined4 *)(param_1 + 0x88) = opcodeInfo;
     }
     else if (iVar1 == 100) {
-      uVar2 = FUN_00112f54(99);
-      *(undefined4 *)(param_1 + 0x88) = uVar2;
+      opcodeInfo = FUN_00112f54(99);
+      *(undefined4 *)(param_1 + 0x88) = opcodeInfo;
     }
   }
   return;

@@ -5,16 +5,16 @@ int FUN_0011e7ec(inst)
   int inst;
 {
   int iVar1;
-  int iVar2;
-  int iVar3;
+  int operandVReg;
+  int operandVReg2;
   
   if (((*(int *)(inst + 0x84) != 1) || (iVar1 = FUN_00105594(inst,1), iVar1 == 0)) &&
      (1 < *(int *)(inst + 0x84))) {
     iVar1 = 2;
     do {
-      iVar2 = FUN_00105594(inst,iVar1 + -1);
-      iVar3 = FUN_00105594(inst,iVar1);
-      if ((iVar2 != iVar3) || (iVar2 = FUN_00105594(inst,iVar1), iVar2 == 0)) {
+      operandVReg = FUN_00105594(inst,iVar1 + -1);
+      operandVReg2 = FUN_00105594(inst,iVar1);
+      if ((operandVReg != operandVReg2) || (operandVReg = FUN_00105594(inst,iVar1), operandVReg == 0)) {
         return 0;
       }
       iVar1 = iVar1 + 1;
@@ -690,7 +690,7 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, param_6, compiler, 
   uint uVar3;
   undefined4 *puVar4;
   int iVar5;
-  int iVar6;
+  int operandRecord;
   undefined4 uVar7;
   code *pcVar8;
   int *piVar9;
@@ -748,8 +748,8 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, param_6, compiler, 
     newInst[0x27] = *param_3;
     iVar5 = 0;
     do {
-      iVar6 = FUN_001054ec(newInst,0);
-      if (*(char *)(iVar5 + iVar6 + 0x10) == '\x01') {
+      operandRecord = FUN_001054ec(newInst,0);
+      if (*(char *)(iVar5 + operandRecord + 0x10) == '\x01') {
         (**(code **)(*newInst + 0x88))(newInst,1,iVar5,4);
       }
       bVar1 = iVar5 != 3;
@@ -927,7 +927,7 @@ int FUN_0011ff7c(pass, param_2, vector, vector2, vector3, vector4, vector5, para
   undefined4 uVar1;
   int *piVar2;
   int iVar3;
-  int iVar4;
+  int operandRecord;
   uint uVar5;
   uint uVar6;
   uint *puVar7;
@@ -974,8 +974,8 @@ LAB_001203fc:
             goto LAB_001203fc;
           }
           iVar3 = FUN_001054ec(iVar11,0);
-          iVar4 = FUN_001054ec(operandVReg,0);
-          if (((iVar3 == iVar4) && (*(int *)(iVar11 + 0x98) == operandVReg[0x26])) &&
+          operandRecord = FUN_001054ec(operandVReg,0);
+          if (((iVar3 == operandRecord) && (*(int *)(iVar11 + 0x98) == operandVReg[0x26])) &&
              ((*(uint *)(iVar11 + 0x14) >> 6 & 1) == ((uint)operandVReg[5] >> 6 & 1))) goto LAB_001203fc;
 LAB_001200cc:
           uVar5 = ((int (*)())FUN_0011f7fc)(pass,iVar11,vector5);

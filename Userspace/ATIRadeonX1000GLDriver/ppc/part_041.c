@@ -4054,15 +4054,15 @@ int FUN_00137e98(inst, param_2, param_3)
   uint param_3;
 {
   uint uVar1;
-  uint uVar2;
+  uint operandVReg;
   
-  uVar2 = FUN_00105594(inst,param_2);
+  operandVReg = FUN_00105594(inst,param_2);
   uVar1 = param_3;
   while( true ) {
     if (uVar1 == 0) {
       return 0;
     }
-    if (((*(uint *)(param_3 + 0x14) & 1) != 0) && (param_3 == uVar2)) break;
+    if (((*(uint *)(param_3 + 0x14) & 1) != 0) && (param_3 == operandVReg)) break;
     param_3 = *(uint *)(param_3 + 4);
     uVar1 = *(uint *)(param_3 + 0x14) & 4;
     if (param_3 == 0) {
@@ -4224,11 +4224,11 @@ int FUN_00138240(inst, param_2)
   int inst;
   int param_2;
 {
-  int iVar1;
+  int operandRecord;
   
   do {
-    iVar1 = FUN_001054ec(inst,0);
-    if (*(char *)(param_2 + iVar1 + 0x10) == '\0') {
+    operandRecord = FUN_001054ec(inst,0);
+    if (*(char *)(param_2 + operandRecord + 0x10) == '\0') {
       return 1;
     }
   } while (((*(uint *)(inst + 0x14) & 0x200) != 0) &&

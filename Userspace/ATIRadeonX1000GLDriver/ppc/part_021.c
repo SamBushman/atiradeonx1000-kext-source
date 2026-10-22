@@ -1165,11 +1165,11 @@ int FUN_000e2f8c(inst, param_2, param_3)
   int param_2;
   int param_3;
 {
-  undefined4 uVar1;
+  undefined4 operandVReg;
   int iVar2;
   
-  uVar1 = FUN_00105594(inst,*(undefined4 *)(inst + 0x84));
-  iVar2 = thunk_FUN_00134de8(*(undefined4 *)(param_3 + 0x6c4),uVar1);
+  operandVReg = FUN_00105594(inst,*(undefined4 *)(inst + 0x84));
+  iVar2 = thunk_FUN_00134de8(*(undefined4 *)(param_3 + 0x6c4),operandVReg);
   return iVar2 == param_2;
 }
 
@@ -1181,15 +1181,15 @@ int FUN_000e2fd8(param_1, inst)
   bool bVar1;
   int iVar2;
   undefined4 uVar3;
-  int iVar4;
+  int operandRecord;
   
   iVar2 = *(int *)(inst + 0x98);
   if ((iVar2 == 2) || (iVar2 == 0xc)) {
     iVar2 = 0;
     uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),inst);
     do {
-      iVar4 = FUN_001054ec(inst,0);
-      if (*(char *)(iVar2 + iVar4 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(inst,0);
+      if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
         ((int (*)())FUN_000e17b4)(*(undefined4 *)(param_1 + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
@@ -1200,8 +1200,8 @@ int FUN_000e2fd8(param_1, inst)
     iVar2 = 0;
     uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),inst);
     do {
-      iVar4 = FUN_001054ec(inst,0);
-      if (*(char *)(iVar2 + iVar4 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(inst,0);
+      if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
         ((int (*)())FUN_000e175c)(*(undefined4 *)(param_1 + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
@@ -1212,8 +1212,8 @@ int FUN_000e2fd8(param_1, inst)
     iVar2 = 0;
     uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),inst);
     do {
-      iVar4 = FUN_001054ec(inst,0);
-      if (*(char *)(iVar2 + iVar4 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(inst,0);
+      if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
         ((int (*)())FUN_000e1704)(*(undefined4 *)(param_1 + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;

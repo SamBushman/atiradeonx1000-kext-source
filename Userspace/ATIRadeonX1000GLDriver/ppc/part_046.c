@@ -322,7 +322,7 @@ int FUN_00173af8(ctx, param_2)
 {
   bool bVar1;
   int loopIndex;
-  int iVar3;
+  int operandRecord;
   undefined4 local_38 [9];
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) &&
@@ -330,8 +330,8 @@ int FUN_00173af8(ctx, param_2)
   {
     loopIndex = 0;
     do {
-      iVar3 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
-      local_38[0] = *(undefined4 *)(iVar3 + 0x10);
+      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      local_38[0] = *(undefined4 *)(operandRecord + 0x10);
       if ((*(char *)((int)local_38 + loopIndex) == '\0') && (*param_2 != 0)) {
         return;
       }
@@ -947,7 +947,7 @@ int FUN_0017494c(ctx, param_2, param_3)
   bool bVar1;
   int iVar2;
   undefined4 *allocation;
-  int iVar4;
+  int operandRecord;
   int *piVar5;
   int loopIndex;
   uint uVar7;
@@ -968,8 +968,8 @@ int FUN_0017494c(ctx, param_2, param_3)
     loopIndex2 = allocation + 1;
     iVar2 = ctx;
     do {
-      iVar4 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
-      if (*(char *)(loopIndex + iVar4 + 0x10) == '\x01') {
+      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
         loopIndex2[8] = 3;
       }
       else {

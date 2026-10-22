@@ -275,7 +275,7 @@ int FUN_001085b0(this, compiler)
   int compiler;
 {
   undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   FUN_001071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
@@ -284,12 +284,12 @@ int FUN_001085b0(this, compiler)
     FUN_000ee9ac(*(int *)(compiler + 0x6c4),this);
   }
   uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x178))(*(int **)(compiler + 0x30c),compiler);
-  uVar2 = FUN_00112f54(uVar1);
+  opcodeInfo = FUN_00112f54(uVar1);
   uVar1 = DAT_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
   this[0x27] = uVar1;
-  this[0x22] = uVar2;
+  this[0x22] = opcodeInfo;
   this[0x20] = 0;
   this[0x50] = 0;
   FUN_00104104(this,0,5,0);
@@ -307,15 +307,15 @@ int FUN_001086e8(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined *puVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   ((int (*)())FUN_001085b0)(param_1,param_3);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  uVar2 = FUN_00112f54(param_2);
-  param_1[0x22] = uVar2;
+  opcodeInfo = FUN_00112f54(param_2);
+  param_1[0x22] = opcodeInfo;
   return;
 }
 
@@ -325,15 +325,15 @@ int FUN_00108770(param_1, param_2)
   undefined4 param_2;
 {
   undefined *puVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   ((int (*)())FUN_001085b0)(param_1,param_2);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  uVar2 = FUN_00112f54(0xf9);
-  param_1[0x22] = uVar2;
+  opcodeInfo = FUN_00112f54(0xf9);
+  param_1[0x22] = opcodeInfo;
   return;
 }
 
@@ -343,15 +343,15 @@ int FUN_001087f0(param_1, param_2)
   undefined4 param_2;
 {
   undefined *puVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   ((int (*)())FUN_001085b0)(param_1,param_2);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  uVar2 = FUN_00112f54(0xf9);
-  param_1[0x22] = uVar2;
+  opcodeInfo = FUN_00112f54(0xf9);
+  param_1[0x22] = opcodeInfo;
   return;
 }
 
@@ -391,7 +391,7 @@ int FUN_00108918(this, compiler)
   int compiler;
 {
   undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   FUN_001071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
@@ -400,12 +400,12 @@ int FUN_00108918(this, compiler)
     FUN_000ee9ac(*(int *)(compiler + 0x6c4),this);
   }
   uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x178))(*(int **)(compiler + 0x30c),compiler);
-  uVar2 = FUN_00112f54(uVar1);
+  opcodeInfo = FUN_00112f54(uVar1);
   uVar1 = DAT_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
   this[0x27] = uVar1;
-  this[0x22] = uVar2;
+  this[0x22] = opcodeInfo;
   this[0x20] = 0;
   this[0x50] = 0;
   FUN_00104104(this,0,5,0);
@@ -423,15 +423,15 @@ int FUN_00108a50(param_1, param_2, compiler)
   undefined4 compiler;
 {
   undefined *puVar1;
-  undefined4 uVar2;
+  undefined4 opcodeInfo;
   
   ((int (*)())FUN_001085b0)(param_1,compiler);
   puVar1 = PTR_DAT_001e8bfc;
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  uVar2 = FUN_00112f54(param_2);
-  param_1[0x22] = uVar2;
+  opcodeInfo = FUN_00112f54(param_2);
+  param_1[0x22] = opcodeInfo;
   return;
 }
 

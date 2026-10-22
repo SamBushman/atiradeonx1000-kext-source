@@ -124,7 +124,7 @@ int FUN_001770e4(param_1, param_2, param_3)
   bool bVar1;
   bool bVar2;
   bool bVar3;
-  int iVar4;
+  int operandRecord;
   undefined4 *puVar5;
   int iVar6;
   int loopIndex;
@@ -136,8 +136,8 @@ int FUN_001770e4(param_1, param_2, param_3)
   loopIndex2 = (int *)(param_3 * 0x10 + param_2 + 0x168);
   loopIndex = 0;
   do {
-    iVar4 = FUN_001054ec(*(undefined4 *)(param_2 + 0xb0),0);
-    if (*(char *)(loopIndex + iVar4 + 0x10) != '\x01') {
+    operandRecord = FUN_001054ec(*(undefined4 *)(param_2 + 0xb0),0);
+    if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
       if (bVar2) {
         iVar6 = *loopIndex2;
         bVar1 = iVar6 < 0;
@@ -327,13 +327,13 @@ int FUN_00177548(ctx)
   int ctx;
 {
   bool bVar1;
-  int iVar2;
+  int operandRecord;
   int loopIndex;
   
   loopIndex = 0;
   do {
-    iVar2 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
-    if (*(char *)(loopIndex + iVar2 + 0x10) == '\0') {
+    operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+    if (*(char *)(loopIndex + operandRecord + 0x10) == '\0') {
       *(undefined1 *)(loopIndex + *(int *)(ctx + 0xb0) + 0x9c) = 1;
     }
     bVar1 = loopIndex != 3;
@@ -419,7 +419,7 @@ int FUN_00177748(ctx)
   int callResult;
   int *piVar4;
   int iVar5;
-  int iVar6;
+  int operandRecord;
   undefined4 *puVar7;
   int iVar8;
   int loopIndex;
@@ -437,9 +437,9 @@ int FUN_00177748(ctx)
     iVar5 = 0;
     iVar10 = ctx;
     do {
-      iVar6 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
       iVar8 = iVar5;
-      if (*(char *)(loopIndex + iVar6 + 0x10) != '\x01') {
+      if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         iVar8 = *(int *)(iVar10 + 0x178);
         if (iVar8 < 0) {
           puVar7 = (undefined4 *)FUN_00173360(*(undefined4 *)(ctx + 0x238),iVar8);
