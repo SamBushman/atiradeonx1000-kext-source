@@ -2810,47 +2810,47 @@ int _PPCRuntimeCompilerCreate()
 }
 
 /* _PPCRuntimeCompilerInitialise @ 0x97bd7d44 (76 bytes) */
-int _PPCRuntimeCompilerInitialise(param_1, param_2)
-  int param_1;
+int _PPCRuntimeCompilerInitialise(compiler, param_2)
+  int compiler;
   undefined4 param_2;
 {
-  *(undefined4 *)(param_1 + 0xe0c) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0xe08) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0xe4c) = param_2;
-  _PPCTextureSamplerInitialise(*(undefined4 *)(param_1 + 0xe1c));
-  ((int (*)())_PPCRuntimeCompilerInitialiseRegisterAllocator)(param_1);
-  return ((int (*)())_PPCRuntimeCompilerInitialiseVariableInfo)(param_1);
+  *(undefined4 *)(compiler + 0xe0c) = 0xffffffff;
+  *(undefined4 *)(compiler + 0xe08) = 0xffffffff;
+  *(undefined4 *)(compiler + 0xe4c) = param_2;
+  _PPCTextureSamplerInitialise(*(undefined4 *)(compiler + 0xe1c));
+  ((int (*)())_PPCRuntimeCompilerInitialiseRegisterAllocator)(compiler);
+  return ((int (*)())_PPCRuntimeCompilerInitialiseVariableInfo)(compiler);
 }
 
 /* _PPCRuntimeCompilerInitialiseRegisterAllocator @ 0x97bd7d90 (156 bytes) */
-int _PPCRuntimeCompilerInitialiseRegisterAllocator(param_1)
-  int param_1;
+int _PPCRuntimeCompilerInitialiseRegisterAllocator(compiler)
+  int compiler;
 {
   uint uVar1;
   undefined4 *puVar2;
   uint uVar3;
   int iVar4;
   
-  *(undefined4 *)(param_1 + 0xe44) = 0;
+  *(undefined4 *)(compiler + 0xe44) = 0;
   uVar1 = 0;
   do {
     uVar3 = uVar1 + 1;
-    ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,uVar1);
+    ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,uVar1);
     uVar1 = uVar3;
   } while (uVar3 < 0x20);
-  uVar1 = *(uint *)(param_1 + 0xe50);
+  uVar1 = *(uint *)(compiler + 0xe50);
   if ((uVar1 & 1) != 0) {
     iVar4 = 0xc;
-    puVar2 = (undefined4 *)(param_1 + 0x48c);
+    puVar2 = (undefined4 *)(compiler + 0x48c);
     do {
       *puVar2 = 1;
       puVar2 = puVar2 + 0xe;
       iVar4 = iVar4 + -1;
     } while (iVar4 != 0);
-    uVar1 = *(uint *)(param_1 + 0xe50);
+    uVar1 = *(uint *)(compiler + 0xe50);
   }
   if ((uVar1 & 2) != 0) {
-    puVar2 = (undefined4 *)(param_1 + 0xbc4);
+    puVar2 = (undefined4 *)(compiler + 0xbc4);
     iVar4 = 0xb;
     do {
       *puVar2 = 1;
@@ -2862,8 +2862,8 @@ int _PPCRuntimeCompilerInitialiseRegisterAllocator(param_1)
 }
 
 /* _PPCRuntimeCompilerInitialiseVariableInfo @ 0x97bd7e2c (224 bytes) */
-int _PPCRuntimeCompilerInitialiseVariableInfo(param_1)
-  int param_1;
+int _PPCRuntimeCompilerInitialiseVariableInfo(compiler)
+  int compiler;
 {
   int iVar1;
   undefined4 uVar2;
@@ -2874,26 +2874,26 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(param_1)
   int iVar7;
   int iVar8;
   
-  if (*(int *)(param_1 + 0xe00) != 0) {
-    _free(*(int *)(param_1 + 0xe00));
-    *(undefined4 *)(param_1 + 0xe04) = 0;
-    *(undefined4 *)(param_1 + 0xe00) = 0;
+  if (*(int *)(compiler + 0xe00) != 0) {
+    _free(*(int *)(compiler + 0xe00));
+    *(undefined4 *)(compiler + 0xe04) = 0;
+    *(undefined4 *)(compiler + 0xe00) = 0;
   }
-  iVar6 = *(int *)(param_1 + 0xe24);
+  iVar6 = *(int *)(compiler + 0xe24);
   if (iVar6 != 0) {
     iVar7 = 0;
     iVar8 = 4;
-    *(undefined4 *)(param_1 + 0xe04) = 0;
+    *(undefined4 *)(compiler + 0xe04) = 0;
     piVar4 = (int *)(iVar6 + 0x84);
     do {
       iVar1 = *piVar4;
       piVar4 = piVar4 + 3;
-      iVar1 = *(int *)(param_1 + 0xe04) + iVar1;
-      *(int *)(param_1 + 0xe04) = iVar1;
+      iVar1 = *(int *)(compiler + 0xe04) + iVar1;
+      *(int *)(compiler + 0xe04) = iVar1;
       iVar8 = iVar8 + -1;
     } while (iVar8 != 0);
     uVar2 = _calloc(iVar1,8);
-    *(undefined4 *)(param_1 + 0xe00) = uVar2;
+    *(undefined4 *)(compiler + 0xe00) = uVar2;
     uVar3 = 0;
     do {
       uVar5 = 0;
@@ -2901,7 +2901,7 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(param_1)
         do {
           iVar8 = uVar5 * 0x10;
           uVar5 = uVar5 + 1;
-          *(int *)(iVar7 * 8 + *(int *)(param_1 + 0xe00)) = *(int *)(iVar6 + 0x80) + iVar8;
+          *(int *)(iVar7 * 8 + *(int *)(compiler + 0xe00)) = *(int *)(iVar6 + 0x80) + iVar8;
           iVar7 = iVar7 + 1;
         } while (uVar5 < *(uint *)(iVar6 + 0x84));
       }
@@ -2913,16 +2913,16 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(param_1)
 }
 
 /* _PPCRuntimeCompilerFree @ 0x97bd7f0c (80 bytes) */
-int _PPCRuntimeCompilerFree(param_1)
-  int param_1;
+int _PPCRuntimeCompilerFree(compiler)
+  int compiler;
 {
-  if (*(int *)(param_1 + 0xe00) != 0) {
-    _free(*(int *)(param_1 + 0xe00));
-    *(undefined4 *)(param_1 + 0xe04) = 0;
-    *(undefined4 *)(param_1 + 0xe00) = 0;
+  if (*(int *)(compiler + 0xe00) != 0) {
+    _free(*(int *)(compiler + 0xe00));
+    *(undefined4 *)(compiler + 0xe04) = 0;
+    *(undefined4 *)(compiler + 0xe00) = 0;
   }
-  _PPCTextureSamplerFree(*(undefined4 *)(param_1 + 0xe1c));
-  return _free(param_1);
+  _PPCTextureSamplerFree(*(undefined4 *)(compiler + 0xe1c));
+  return _free(compiler);
 }
 
 /* _PPCRuntimeCompilerOutputAllRegisters @ 0x97bd7f5c (4 bytes) */
@@ -2950,17 +2950,17 @@ int _PPCRuntimeCompilerAttachEmulatorProgram(param_1, param_2)
 }
 
 /* _PPCRuntimeCompilerSetOptionFlags @ 0x97bd7f74 (16 bytes) */
-int _PPCRuntimeCompilerSetOptionFlags(param_1, param_2)
-  int param_1;
+int _PPCRuntimeCompilerSetOptionFlags(compiler, param_2)
+  int compiler;
   uint param_2;
 {
-  *(uint *)(param_1 + 0xe50) = *(uint *)(param_1 + 0xe50) | param_2;
+  *(uint *)(compiler + 0xe50) = *(uint *)(compiler + 0xe50) | param_2;
   return;
 }
 
 /* _PPCRuntimeCompilerCalculateIndirectAddress @ 0x97bd7f84 (224 bytes) */
-int _PPCRuntimeCompilerCalculateIndirectAddress(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
+int _PPCRuntimeCompilerCalculateIndirectAddress(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+  int compiler;
   int param_2;
   int param_3;
   undefined4 param_4;
@@ -2974,25 +2974,25 @@ int _PPCRuntimeCompilerCalculateIndirectAddress(param_1, param_2, param_3, param
   short sStack00000028;
   
   sStack00000028 = (short)((uint)param_5 >> 0x10);
-  puVar2 = *(uint **)(param_1 + 0xe30);
-  *puVar2 = ((uint)(param_2 - *(int *)(param_3 * 0xc + *(int *)(param_1 + 0xe24) + 0x80)) >> 4) +
+  puVar2 = *(uint **)(compiler + 0xe30);
+  *puVar2 = ((uint)(param_2 - *(int *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80)) >> 4) +
             (int)sStack00000028 & 0xffff | 0x39f00000;
-  *(uint **)(param_1 + 0xe30) = puVar2 + 1;
-  uVar1 = *(ushort *)(param_3 * 0xc + *(int *)(param_1 + 0xe24) + 0x8a);
+  *(uint **)(compiler + 0xe30) = puVar2 + 1;
+  uVar1 = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x8a);
   puVar2[2] = 0x1def0010;
   puVar2[1] = uVar1 | 0x71ef0000;
-  *(uint **)(param_1 + 0xe30) = puVar2 + 3;
-  puVar2[3] = *(ushort *)(param_3 * 0xc + *(int *)(param_1 + 0xe24) + 0x80) | 0x3ee00000;
-  *(uint **)(param_1 + 0xe30) = puVar2 + 4;
-  puVar2[4] = *(ushort *)(param_3 * 0xc + *(int *)(param_1 + 0xe24) + 0x82) | 0x62f70000;
+  *(uint **)(compiler + 0xe30) = puVar2 + 3;
+  puVar2[3] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80) | 0x3ee00000;
+  *(uint **)(compiler + 0xe30) = puVar2 + 4;
+  puVar2[4] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x82) | 0x62f70000;
   puVar2[5] = 0x7defba14;
-  *(uint **)(param_1 + 0xe30) = puVar2 + 6;
+  *(uint **)(compiler + 0xe30) = puVar2 + 6;
   return;
 }
 
 /* _PPCRuntimeCompilerLoadRegister @ 0x97bd8064 (2736 bytes) */
-int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int *param_1;
+int _PPCRuntimeCompilerLoadRegister(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+  int *compiler;
   uint param_2;
   uint *param_3;
   undefined4 param_4;
@@ -3005,7 +3005,7 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
   undefined4 param_11;
   int param_12;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte bVar1;
   uint *puVar2;
   int iVar3;
@@ -3028,42 +3028,42 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  if (param_1[0x393] != 0) {
+  if (compiler[0x393] != 0) {
     param_2 = param_2 + 0x20;
   }
-  param_1[param_2 * 0xe + 0xc] = param_1[0x391];
-  uVar5 = param_1[0x394];
-  param_1[0x391] = param_1[0x391] + 1;
+  compiler[param_2 * 0xe + 0xc] = compiler[0x391];
+  uVar5 = compiler[0x394];
+  compiler[0x391] = compiler[0x391] + 1;
   (*(uint * *)((unsigned char *)ghidra_home + 8)) = param_3;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
   if ((uVar5 & 4) != 0) {
     uVar5 = param_2;
-    if (param_1[0x393] != 0) {
+    if (compiler[0x393] != 0) {
       uVar5 = param_2 - 0x20;
     }
-    iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar5,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
+    iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar5,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
                        param_10,param_11,param_12);
     if (iVar3 == 1) {
       return;
     }
-    uVar5 = param_1[0x394];
+    uVar5 = compiler[0x394];
   }
-  if (param_1[0x393] == 0) {
+  if (compiler[0x393] == 0) {
     if ((uVar5 & 4) != 0) {
       uVar9 = 0;
-      piVar12 = param_1;
+      piVar12 = compiler;
       do {
         if ((*piVar12 == 0) &&
-           (iVar11 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar9,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+           (iVar11 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar9,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
                                 (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,
                                 param_11,iVar4), iVar11 == 1)) {
           if (uVar9 != param_2) {
-            puVar2 = (uint *)param_1[0x38c];
+            puVar2 = (uint *)compiler[0x38c];
             *puVar2 = param_2 << 0x15 | uVar9 << 0xb | 0xfc000090;
-            param_1[0x38c] = (int)(puVar2 + 1);
-            ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+            compiler[0x38c] = (int)(puVar2 + 1);
+            ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,param_2,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                        (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,param_11,0,iVar4);
-            piVar12[0xc] = param_1[0x391];
+            piVar12[0xc] = compiler[0x391];
             goto LAB_97bd8938;
           }
           if (*(char *)((int)piVar12 + 0x1a) == (*(char *)((unsigned char *)ghidra_home + 26))) {
@@ -3075,46 +3075,46 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
       } while (uVar9 < 0x20);
     }
     if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
-      if (((*(int *)(param_1[0x389] + 0x38) == 0x8804) ||
-          (*(int *)(param_1[0x389] + 0x38) == 0x8b30)) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
-        puVar7 = (uint *)param_1[0x38c];
+      if (((*(int *)(compiler[0x389] + 0x38) == 0x8804) ||
+          (*(int *)(compiler[0x389] + 0x38) == 0x8b30)) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
+        puVar7 = (uint *)compiler[0x38c];
         *puVar7 = (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc10d0000;
         bVar1 = *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4);
-        param_1[0x38c] = (int)(puVar7 + 1);
+        compiler[0x38c] = (int)(puVar7 + 1);
         uVar9 = (*(uint * *)((unsigned char *)ghidra_home + 8))[bVar1];
         puVar2 = puVar7 + 3;
         puVar7[2] = param_2 << 0x15 | 0xec09433a;
         puVar7[1] = uVar9 & 0xffff | 0xc12c0000;
       }
       else {
-        puVar2 = (uint *)param_1[0x38c];
+        puVar2 = (uint *)compiler[0x38c];
         *puVar2 = param_2 << 0x15 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 |
                   (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc0000000;
         puVar2 = puVar2 + 1;
       }
-      param_1[0x38c] = (int)puVar2;
+      compiler[0x38c] = (int)puVar2;
     }
     else {
-      ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+      ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                  (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9);
-      puVar2 = (uint *)param_1[0x38c];
+      puVar2 = (uint *)compiler[0x38c];
       *puVar2 = (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4) << 2 | 0x82ef0000;
       puVar2[1] = param_2 << 0x15 | (((*(unsigned int *)((unsigned char *)ghidra_home + 24)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
-      param_1[0x38c] = (int)(puVar2 + 2);
+      compiler[0x38c] = (int)(puVar2 + 2);
     }
-    ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+    ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,param_2,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,param_11,0,iVar4);
     return;
   }
   if ((uVar5 & 4) != 0) {
-    piVar12 = param_1 + 0x1c0;
+    piVar12 = compiler + 0x1c0;
     uVar5 = 0;
     do {
       uVar10 = uVar5;
       iVar3 = *piVar12;
       piVar12 = piVar12 + 0xe;
       if (iVar3 == 0) {
-        iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar10,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+        iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar10,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
                            (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,param_11,
                            iVar4);
         if ((iVar3 == 3) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0)) {
@@ -3129,33 +3129,33 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
     } while (uVar5 < 0x20);
     if (iVar3 != 0) {
       iVar3 = param_2 - 0x20;
-      puVar2 = (uint *)param_1[0x38c];
+      puVar2 = (uint *)compiler[0x38c];
       *puVar2 = iVar3 * 0x200000 | uVar10 << 0x10 | uVar10 << 0xb | 0x10000484;
-      param_1[0x38c] = (int)(puVar2 + 1);
-      iVar11 = _memcmp(param_1 + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
+      compiler[0x38c] = (int)(puVar2 + 1);
+      iVar11 = _memcmp(compiler + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
       if (iVar11 != 0) {
         _PPCRuntimeCompilerBuildTransferSwizzle
-                  (auStack_40,param_1 + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-        _PPCRuntimeCompilerSwizzleRegisterAV(param_1,iVar3,auStack_40);
+                  (auStack_40,compiler + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,iVar3,auStack_40);
       }
-      ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,iVar3,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+      ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,iVar3,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                  (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,param_11,0,iVar4);
-      param_1[uVar10 * 0xe + 0x1cc] = param_1[0x391];
+      compiler[uVar10 * 0xe + 0x1cc] = compiler[0x391];
 LAB_97bd8938:
-      param_1[0x391] = param_1[0x391] + 1;
+      compiler[0x391] = compiler[0x391] + 1;
       return;
     }
   }
   puVar2 = (*(uint * *)((unsigned char *)ghidra_home + 8));
-  if (((*(int *)(param_1[0x389] + 0x38) == 0x8804) || (*(int *)(param_1[0x389] + 0x38) == 0x8b30))
+  if (((*(int *)(compiler[0x389] + 0x38) == 0x8804) || (*(int *)(compiler[0x389] + 0x38) == 0x8b30))
      && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
-    if ((param_1[0x394] & 8U) == 0) {
+    if ((compiler[0x394] & 8U) == 0) {
       uVar9 = *(*(uint * *)((unsigned char *)ghidra_home + 8));
     }
     else {
       uVar9 = 0;
       if (*(*(uint * *)((unsigned char *)ghidra_home + 8)) != 0) {
-        puVar2 = (uint *)param_1[0x38c];
+        puVar2 = (uint *)compiler[0x38c];
         *puVar2 = *(*(uint * *)((unsigned char *)ghidra_home + 8)) & 0xffff | 0x39e00000;
         puVar2[1] = 0x10c0728c;
         uVar9 = (param_2 - 0x20) * 0x200000;
@@ -3164,32 +3164,32 @@ LAB_97bd8938:
         puVar2[4] = 0x7c8c78ce;
         puVar2[5] = uVar9 | 0x100419ae;
         puVar2[6] = uVar9 | (param_2 - 0x20) * 0x10000 | 0x1000396e;
-        param_1[0x38c] = (int)(puVar2 + 7);
+        compiler[0x38c] = (int)(puVar2 + 7);
         goto LAB_97bd87b4;
       }
     }
-    puVar2 = (uint *)param_1[0x38c];
+    puVar2 = (uint *)compiler[0x38c];
     *puVar2 = uVar9 & 0xffff | 0x39e00000;
     puVar2[1] = 0x7c6d78ce;
     puVar2[2] = 0x7c8c78ce;
     puVar2[3] = 0x10c0728c;
     puVar2[4] = (param_2 - 0x20) * 0x200000 | 0x100419ae;
-    param_1[0x38c] = (int)(puVar2 + 5);
+    compiler[0x38c] = (int)(puVar2 + 5);
     goto LAB_97bd87b4;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
     uVar9 = *(*(uint * *)((unsigned char *)ghidra_home + 8));
     if (((((uVar9 & 0xf) != 0) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[1] != uVar9 + 4)) ||
         ((*(uint * *)((unsigned char *)ghidra_home + 8))[2] != uVar9 + 8)) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[3] != uVar9 + 0xc)) {
-      puVar2 = (uint *)param_1[0x38c];
+      puVar2 = (uint *)compiler[0x38c];
       *puVar2 = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | uVar9 & 0xffff | 0xc0000000;
-      param_1[0x38c] = (int)(puVar2 + 1);
+      compiler[0x38c] = (int)(puVar2 + 1);
       puVar2[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 6) |
                   0xc0200000;
-      param_1[0x38c] = (int)(puVar2 + 2);
+      compiler[0x38c] = (int)(puVar2 + 2);
       puVar2[2] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 10) |
                   0xc0400000;
-      param_1[0x38c] = (int)(puVar2 + 3);
+      compiler[0x38c] = (int)(puVar2 + 3);
       puVar2[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 0xe) |
                   0xc0600000;
       puVar2[4] = 0xd0030200;
@@ -3198,37 +3198,37 @@ LAB_97bd8938:
       puVar2[7] = 0xd063020c;
       puVar2[8] = 0x39e00200;
       puVar2[9] = (param_2 - 0x20) * 0x200000 | 0x7c0378ce;
-      param_1[0x38c] = (int)(puVar2 + 10);
+      compiler[0x38c] = (int)(puVar2 + 10);
       goto LAB_97bd877c;
     }
     if (uVar9 != 0) {
-      puVar2 = (uint *)param_1[0x38c];
+      puVar2 = (uint *)compiler[0x38c];
       *puVar2 = uVar9 & 0xffff | 0x39e00000;
       uVar9 = (param_2 - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c0078ce;
       goto LAB_97bd8640;
     }
-    puVar2 = (uint *)param_1[0x38c];
+    puVar2 = (uint *)compiler[0x38c];
     *puVar2 = (param_2 - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x800 | 0x7c0000ce;
-    param_1[0x38c] = (int)(puVar2 + 1);
+    compiler[0x38c] = (int)(puVar2 + 1);
   }
   else {
     if ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0) {
-      ((int (*)())_PPCRuntimeCompilerSaveAllTemporariesToMemory)(param_1);
+      ((int (*)())_PPCRuntimeCompilerSaveAllTemporariesToMemory)(compiler);
     }
-    ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),
+    ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),
                (*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9);
     uVar9 = *puVar2;
     if ((((uVar9 & 0xf) == 0) && (puVar2[1] == uVar9 + 4)) &&
        ((puVar2[2] == uVar9 + 8 && (puVar2[3] == uVar9 + 0xc)))) {
-      puVar2 = (uint *)param_1[0x38c];
+      puVar2 = (uint *)compiler[0x38c];
       *puVar2 = 0x82ef0000;
       uVar9 = (param_2 - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00b8ce;
 LAB_97bd8640:
       puVar2[1] = uVar9;
-      param_1[0x38c] = (int)(puVar2 + 2);
+      compiler[0x38c] = (int)(puVar2 + 2);
     }
     else {
-      puVar6 = (undefined4 *)param_1[0x38c];
+      puVar6 = (undefined4 *)compiler[0x38c];
       *puVar6 = 0x82ef0000;
       puVar6[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00bc2e;
       puVar6[2] = 0x82ef0004;
@@ -3243,30 +3243,30 @@ LAB_97bd8640:
       puVar6[0xb] = 0xd063020c;
       puVar6[0xc] = 0x39e00200;
       puVar6[0xd] = (param_2 - 0x20) * 0x200000 | 0x7c0378ce;
-      param_1[0x38c] = (int)(puVar6 + 0xe);
+      compiler[0x38c] = (int)(puVar6 + 0xe);
 LAB_97bd877c:
       uVar8 = 1;
     }
   }
   if (param_9 - 3U < 2) {
-    puVar2 = (uint *)param_1[0x38c];
+    puVar2 = (uint *)compiler[0x38c];
     *puVar2 = (param_2 - 0x20) * 0x200000 | (param_2 - 0x20) * 0x800 | 0x1000034a;
-    param_1[0x38c] = (int)(puVar2 + 1);
+    compiler[0x38c] = (int)(puVar2 + 1);
   }
 LAB_97bd87b4:
-  _PPCRuntimeCompilerSwizzleRegisterAV(param_1,param_2 - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-  ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2 - 0x20,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+  _PPCRuntimeCompilerSwizzleRegisterAV(compiler,param_2 - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+  ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,param_2 - 0x20,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
              (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,param_11,uVar8,iVar4);
   iVar4 = _PPCRuntimeCompilerFindVariableInfo
-                    (param_1,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+                    (compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                      (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9);
   *(undefined4 *)(iVar4 + 4) = 0;
   return;
 }
 
 /* _PPCRuntimeCompilerBackupRegister @ 0x97bd8b14 (2144 bytes) */
-int _PPCRuntimeCompilerBackupRegister(param_1, param_2)
-  int *param_1;
+int _PPCRuntimeCompilerBackupRegister(compiler, param_2)
+  int *compiler;
   uint param_2;
 {
   char cVar1;
@@ -3297,7 +3297,7 @@ int _PPCRuntimeCompilerBackupRegister(param_1, param_2)
   undefined4 local_4c;
   undefined4 local_48;
   
-  iVar15 = param_1[0x393];
+  iVar15 = compiler[0x393];
   uVar17 = 0;
   iVar16 = 0;
   bVar3 = false;
@@ -3305,17 +3305,17 @@ int _PPCRuntimeCompilerBackupRegister(param_1, param_2)
     param_2 = param_2 + 0x20;
   }
   iVar18 = param_2 * 0x38;
-  if (param_1[param_2 * 0xe] == 0) {
+  if (compiler[param_2 * 0xe] == 0) {
     uVar19 = 0;
-    piVar11 = param_1;
+    piVar11 = compiler;
     do {
       if (iVar15 == 0) {
         if (((uVar19 != param_2) && (*piVar11 == 0)) && (piVar11[0xb] != 0)) {
-          iVar15 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
-                              param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],
-                              param_1[param_2 * 0xe + 6],param_1[param_2 * 0xe + 7],
-                              param_1[param_2 * 0xe + 8],param_1[param_2 * 0xe + 9],
-                              param_1[param_2 * 0xe + 10],param_1[param_2 * 0xe + 1]);
+          iVar15 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar19,compiler[param_2 * 0xe + 2],compiler[param_2 * 0xe + 3],
+                              compiler[param_2 * 0xe + 4],compiler[param_2 * 0xe + 5],
+                              compiler[param_2 * 0xe + 6],compiler[param_2 * 0xe + 7],
+                              compiler[param_2 * 0xe + 8],compiler[param_2 * 0xe + 9],
+                              compiler[param_2 * 0xe + 10],compiler[param_2 * 0xe + 1]);
           if (iVar15 == 1) {
             return;
           }
@@ -3323,16 +3323,16 @@ int _PPCRuntimeCompilerBackupRegister(param_1, param_2)
         }
       }
       else if (((uVar19 != param_2 - 0x20) && (piVar11[0x1c0] == 0)) && (piVar11[0x1cb] != 0)) {
-        iVar15 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
-                            param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],
-                            param_1[param_2 * 0xe + 6],param_1[param_2 * 0xe + 7],
-                            param_1[param_2 * 0xe + 8],param_1[param_2 * 0xe + 9],
-                            param_1[param_2 * 0xe + 10],param_1[param_2 * 0xe + 1]);
+        iVar15 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar19,compiler[param_2 * 0xe + 2],compiler[param_2 * 0xe + 3],
+                            compiler[param_2 * 0xe + 4],compiler[param_2 * 0xe + 5],
+                            compiler[param_2 * 0xe + 6],compiler[param_2 * 0xe + 7],
+                            compiler[param_2 * 0xe + 8],compiler[param_2 * 0xe + 9],
+                            compiler[param_2 * 0xe + 10],compiler[param_2 * 0xe + 1]);
         if (iVar15 - 1U < 2) {
           return;
         }
 LAB_97bd8c50:
-        iVar15 = param_1[0x393];
+        iVar15 = compiler[0x393];
       }
       uVar19 = uVar19 + 1;
       piVar11 = piVar11 + 0xe;
@@ -3342,34 +3342,34 @@ LAB_97bd8c50:
       uVar19 = param_2 - 0x20;
       uVar20 = 0;
       iVar15 = uVar19 * 0x38 + 0x708;
-      piVar11 = param_1;
+      piVar11 = compiler;
       do {
         if (((uVar20 != uVar19) && (piVar11[0x1c0] == 0)) &&
            ((piVar11[0x1cb] != 0 &&
-            ((iVar10 = _memcmp(piVar11[0x1c2],param_1[param_2 * 0xe + 2],0x10), iVar10 == 0 &&
-             (*(short *)(piVar11 + 0x1c6) == *(short *)(param_1 + param_2 * 0xe + 6))))))) {
+            ((iVar10 = _memcmp(piVar11[0x1c2],compiler[param_2 * 0xe + 2],0x10), iVar10 == 0 &&
+             (*(short *)(piVar11 + 0x1c6) == *(short *)(compiler + param_2 * 0xe + 6))))))) {
           local_4c = 0x10203;
-          if (((uint)param_1[uVar19 * 0xe + 0x1c4] >> 8 !=
-               (param_1[uVar19 * 0xe + 0x1c4] & 0xffffffU)) &&
-             (((*(char *)(param_1 + uVar19 * 0xe + 0x1c4) != '\0' &&
-               (*(char *)(param_1 + uVar19 * 0xe + 0x1c4) != -1)) ||
-              ((((cVar1 = *(char *)((int)param_1 + uVar19 * 0x38 + 0x711), cVar1 != '\x01' &&
+          if (((uint)compiler[uVar19 * 0xe + 0x1c4] >> 8 !=
+               (compiler[uVar19 * 0xe + 0x1c4] & 0xffffffU)) &&
+             (((*(char *)(compiler + uVar19 * 0xe + 0x1c4) != '\0' &&
+               (*(char *)(compiler + uVar19 * 0xe + 0x1c4) != -1)) ||
+              ((((cVar1 = *(char *)((int)compiler + uVar19 * 0x38 + 0x711), cVar1 != '\x01' &&
                  (cVar1 != -1)) ||
-                ((cVar1 = *(char *)((int)param_1 + uVar19 * 0x38 + 0x712), cVar1 != '\x02' &&
+                ((cVar1 = *(char *)((int)compiler + uVar19 * 0x38 + 0x712), cVar1 != '\x02' &&
                  (cVar1 != -1)))) ||
-               ((cVar1 = *(char *)((int)param_1 + uVar19 * 0x38 + 0x713), cVar1 != '\x03' &&
+               ((cVar1 = *(char *)((int)compiler + uVar19 * 0x38 + 0x713), cVar1 != '\x03' &&
                 (cVar1 != -1)))))))) {
             _PPCRuntimeCompilerBuildTransferSwizzle
-                      (&local_50,param_1 + uVar19 * 0xe + 0x1c4,&local_4c);
-            _PPCRuntimeCompilerSwizzleRegisterAV(param_1,uVar19,&local_50);
+                      (&local_50,compiler + uVar19 * 0xe + 0x1c4,&local_4c);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,uVar19,&local_50);
             local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)
-                                                   ((int)param_1 + (uint)local_50 + iVar15 + 8),
+                                                   ((int)compiler + (uint)local_50 + iVar15 + 8),
                                                   *(undefined1 *)
-                                                   ((int)param_1 + (uint)local_4f + iVar15 + 8)),
-                                         *(undefined1 *)((int)param_1 + (uint)local_4e + iVar15 + 8)
+                                                   ((int)compiler + (uint)local_4f + iVar15 + 8)),
+                                         *(undefined1 *)((int)compiler + (uint)local_4e + iVar15 + 8)
                                         ),
-                                *(undefined1 *)((int)param_1 + (uint)local_4d + iVar15 + 8));
-            param_1[uVar19 * 0xe + 0x1c4] = local_48;
+                                *(undefined1 *)((int)compiler + (uint)local_4d + iVar15 + 8));
+            compiler[uVar19 * 0xe + 0x1c4] = local_48;
           }
           if (((uint)piVar11[0x1c4] >> 8 != (piVar11[0x1c4] & 0xffffffU)) &&
              (((((*(char *)(piVar11 + 0x1c4) != '\0' && (*(char *)(piVar11 + 0x1c4) != -1)) ||
@@ -3380,7 +3380,7 @@ LAB_97bd8c50:
               ((*(char *)((int)piVar11 + 0x713) != '\x03' && (*(char *)((int)piVar11 + 0x713) != -1)
                ))))) {
             _PPCRuntimeCompilerBuildTransferSwizzle(&local_50,piVar11 + 0x1c4,&local_4c);
-            _PPCRuntimeCompilerSwizzleRegisterAV(param_1,uVar20,&local_50);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,uVar20,&local_50);
             local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)piVar11 + local_50 + 0x710),
                                                   *(undefined1 *)((int)piVar11 + local_4f + 0x710)),
                                          *(undefined1 *)((int)piVar11 + local_4e + 0x710)),
@@ -3393,7 +3393,7 @@ LAB_97bd8c50:
           local_60[1] = 0;
           piVar13 = local_60;
           local_60[2] = 0;
-          pbVar5 = (byte *)(param_1 + uVar19 * 0xe + 0x1c4);
+          pbVar5 = (byte *)(compiler + uVar19 * 0xe + 0x1c4);
           do {
             bVar2 = *pbVar5;
             pbVar5 = pbVar5 + 1;
@@ -3407,31 +3407,31 @@ LAB_97bd8c50:
               if (local_60[1] == 0) {
                 if (local_60[2] == 0) {
                   if (local_60[3] == 0) goto LAB_97bd9024;
-                  puVar6 = (undefined4 *)param_1[0x38c];
+                  puVar6 = (undefined4 *)compiler[0x38c];
                   uVar4 = 0x106d6c84;
                 }
                 else {
-                  puVar6 = (undefined4 *)param_1[0x38c];
+                  puVar6 = (undefined4 *)compiler[0x38c];
                   uVar4 = 0x106d492c;
                 }
               }
               else {
-                puVar6 = (undefined4 *)param_1[0x38c];
+                puVar6 = (undefined4 *)compiler[0x38c];
                 uVar4 = 0x106d4a2c;
               }
             }
             else {
-              puVar6 = (undefined4 *)param_1[0x38c];
+              puVar6 = (undefined4 *)compiler[0x38c];
               uVar4 = 0x106d4b2c;
             }
             *puVar6 = uVar4;
-            param_1[0x38c] = (int)(puVar6 + 1);
+            compiler[0x38c] = (int)(puVar6 + 1);
           }
           else {
-            puVar6 = (undefined4 *)param_1[0x38c];
+            puVar6 = (undefined4 *)compiler[0x38c];
             *puVar6 = 0x10836a8c;
             puVar6[1] = 0x10694c84;
-            param_1[0x38c] = (int)(puVar6 + 2);
+            compiler[0x38c] = (int)(puVar6 + 2);
             uVar17 = 0;
             do {
               uVar12 = uVar17 + 1;
@@ -3450,24 +3450,24 @@ LAB_97bd8c50:
                     uVar7 = uVar7 + 1;
                   } while (uVar7 < 4);
                 }
-                puVar6 = (undefined4 *)param_1[0x38c];
+                puVar6 = (undefined4 *)compiler[0x38c];
                 *puVar6 = 0x1063212c;
-                param_1[0x38c] = (int)(puVar6 + 1);
+                compiler[0x38c] = (int)(puVar6 + 1);
                 if (uVar14 != 0) {
                   puVar6[1] = (uVar14 & 3) << 8 | 0x1063482c;
-                  param_1[0x38c] = (int)(puVar6 + 2);
+                  compiler[0x38c] = (int)(puVar6 + 2);
                 }
               }
               uVar17 = uVar12;
             } while (uVar12 < 4);
           }
 LAB_97bd9024:
-          puVar8 = (uint *)param_1[0x38c];
+          puVar8 = (uint *)compiler[0x38c];
           piVar11 = piVar11 + 0x1c4;
           *puVar8 = uVar20 << 0x15 | uVar20 << 0x10 | uVar19 * 0x800 | 0x100000ea;
           iVar16 = 4;
-          param_1[0x38c] = (int)(puVar8 + 1);
-          piVar9 = param_1 + uVar19 * 0xe + 0x1c4;
+          compiler[0x38c] = (int)(puVar8 + 1);
+          piVar9 = compiler + uVar19 * 0xe + 0x1c4;
           do {
             iVar15 = *piVar13;
             piVar13 = piVar13 + 1;
@@ -3483,24 +3483,24 @@ LAB_97bd9024:
         uVar20 = uVar20 + 1;
         piVar11 = piVar11 + 0xe;
       } while (uVar20 < 0x20);
-      iVar10 = param_1[0x393];
+      iVar10 = compiler[0x393];
     }
-    if (((iVar10 != 0) && (*(short *)(param_1 + param_2 * 0xe + 6) == 0)) &&
-       ((*(char *)(param_1 + param_2 * 0xe + 4) == -1 ||
-        (((*(char *)((int)param_1 + iVar18 + 0x11) == -1 ||
-          (*(char *)((int)param_1 + iVar18 + 0x12) == -1)) ||
-         (*(char *)((int)param_1 + iVar18 + 0x13) == -1)))))) {
+    if (((iVar10 != 0) && (*(short *)(compiler + param_2 * 0xe + 6) == 0)) &&
+       ((*(char *)(compiler + param_2 * 0xe + 4) == -1 ||
+        (((*(char *)((int)compiler + iVar18 + 0x11) == -1 ||
+          (*(char *)((int)compiler + iVar18 + 0x12) == -1)) ||
+         (*(char *)((int)compiler + iVar18 + 0x13) == -1)))))) {
       iVar15 = _PPCRuntimeCompilerFindVariableInfo
-                         (param_1,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
-                          param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],
-                          param_1[param_2 * 0xe + 6],param_1[param_2 * 0xe + 7],
-                          param_1[param_2 * 0xe + 8]);
+                         (compiler,compiler[param_2 * 0xe + 2],compiler[param_2 * 0xe + 3],
+                          compiler[param_2 * 0xe + 4],compiler[param_2 * 0xe + 5],
+                          compiler[param_2 * 0xe + 6],compiler[param_2 * 0xe + 7],
+                          compiler[param_2 * 0xe + 8]);
       if (*(int *)(iVar15 + 4) != 0) {
-        ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,param_2 - 0x20);
-        ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,param_2 - 0x20);
+        ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,param_2 - 0x20);
+        ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,param_2 - 0x20);
         return;
       }
-      iVar10 = param_1[0x393];
+      iVar10 = compiler[0x393];
     }
     uVar20 = (uint)(iVar10 != 0);
     uVar19 = uVar20 * 0x20;
@@ -3512,12 +3512,12 @@ LAB_97bd9024:
     }
     if (uVar19 < uVar12) {
       iVar15 = uVar12 + uVar20 * -0x20;
-      piVar11 = param_1 + uVar20 * 0x1c0;
+      piVar11 = compiler + uVar20 * 0x1c0;
       do {
         if (((uVar19 != param_2) && (piVar11[0xb] != 0)) &&
-           ((iVar16 <= param_1[0x391] - piVar11[0xc] && (piVar11[0xd] == 0)))) {
+           ((iVar16 <= compiler[0x391] - piVar11[0xc] && (piVar11[0xd] == 0)))) {
           bVar3 = true;
-          iVar16 = param_1[0x391] - piVar11[0xc];
+          iVar16 = compiler[0x391] - piVar11[0xc];
           uVar17 = uVar19;
         }
         uVar19 = uVar19 + 1;
@@ -3525,53 +3525,53 @@ LAB_97bd9024:
         iVar15 = iVar15 + -1;
       } while (iVar15 != 0);
       if (bVar3) {
-        if ((*(short *)(param_1 + uVar17 * 0xe + 6) == 0) && (param_1[uVar17 * 0xe] == 0)) {
+        if ((*(short *)(compiler + uVar17 * 0xe + 6) == 0) && (compiler[uVar17 * 0xe] == 0)) {
           if (iVar10 == 0) {
-            ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,uVar17);
+            ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,uVar17);
           }
           else {
-            ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,uVar17 - 0x20);
+            ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,uVar17 - 0x20);
             iVar16 = _PPCRuntimeCompilerFindVariableInfo
-                               (param_1,param_1[uVar17 * 0xe + 2],param_1[uVar17 * 0xe + 3],
-                                param_1[uVar17 * 0xe + 4],param_1[uVar17 * 0xe + 5],
-                                param_1[uVar17 * 0xe + 6],param_1[uVar17 * 0xe + 7],
-                                param_1[uVar17 * 0xe + 8]);
+                               (compiler,compiler[uVar17 * 0xe + 2],compiler[uVar17 * 0xe + 3],
+                                compiler[uVar17 * 0xe + 4],compiler[uVar17 * 0xe + 5],
+                                compiler[uVar17 * 0xe + 6],compiler[uVar17 * 0xe + 7],
+                                compiler[uVar17 * 0xe + 8]);
             *(undefined4 *)(iVar16 + 4) = 1;
           }
-          iVar10 = param_1[0x393];
+          iVar10 = compiler[0x393];
         }
         if (iVar10 == 0) {
-          iVar16 = param_1[param_2 * 0xe + 7];
+          iVar16 = compiler[param_2 * 0xe + 7];
           uVar19 = uVar17;
         }
         else {
-          iVar16 = param_1[param_2 * 0xe + 7];
+          iVar16 = compiler[param_2 * 0xe + 7];
           uVar19 = uVar17 - 0x20;
         }
-        ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
-                   param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],param_1[param_2 * 0xe + 6],
-                   iVar16,param_1[param_2 * 0xe + 8],param_1[param_2 * 0xe + 9],
-                   param_1[param_2 * 0xe + 10],param_1[param_2 * 0xe + 0xd],
-                   param_1[param_2 * 0xe + 1]);
-        if (param_1[0x393] == 0) {
-          puVar8 = (uint *)param_1[0x38c];
+        ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,uVar19,compiler[param_2 * 0xe + 2],compiler[param_2 * 0xe + 3],
+                   compiler[param_2 * 0xe + 4],compiler[param_2 * 0xe + 5],compiler[param_2 * 0xe + 6],
+                   iVar16,compiler[param_2 * 0xe + 8],compiler[param_2 * 0xe + 9],
+                   compiler[param_2 * 0xe + 10],compiler[param_2 * 0xe + 0xd],
+                   compiler[param_2 * 0xe + 1]);
+        if (compiler[0x393] == 0) {
+          puVar8 = (uint *)compiler[0x38c];
           uVar17 = uVar17 << 0x15 | param_2 << 0xb | 0xfc000090;
         }
         else {
-          puVar8 = (uint *)param_1[0x38c];
+          puVar8 = (uint *)compiler[0x38c];
           uVar17 = (uVar17 - 0x20) * 0x200000 | (param_2 - 0x20) * 0x10000 |
                    (param_2 - 0x20) * 0x800 | 0x10000484;
         }
         *puVar8 = uVar17;
-        param_1[0x38c] = (int)(puVar8 + 1);
+        compiler[0x38c] = (int)(puVar8 + 1);
         return;
       }
     }
-    if (*(short *)(param_1 + param_2 * 0xe + 6) == 0) {
+    if (*(short *)(compiler + param_2 * 0xe + 6) == 0) {
       if (iVar10 != 0) {
         param_2 = param_2 - 0x20;
       }
-      ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,param_2);
+      ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,param_2);
     }
   }
   return;
@@ -3600,8 +3600,8 @@ int _PPCRuntimeCompilerSaveAllTemporariesToMemory(param_1)
 }
 
 /* _PPCRuntimeCompilerSaveRegisterToMemory @ 0x97bd93ec (1400 bytes) */
-int _PPCRuntimeCompilerSaveRegisterToMemory(param_1, param_2)
-  int param_1;
+int _PPCRuntimeCompilerSaveRegisterToMemory(compiler, param_2)
+  int compiler;
   int param_2;
 {
   uint *puVar1;
@@ -3621,12 +3621,12 @@ int _PPCRuntimeCompilerSaveRegisterToMemory(param_1, param_2)
   undefined4 local_38;
   uint local_34;
   
-  if (*(int *)(param_1 + 0xe4c) == 0) {
-    iVar8 = param_2 * 0x38 + param_1;
-    if (*(int *)(param_1 + param_2 * 0x38) != 0) {
+  if (*(int *)(compiler + 0xe4c) == 0) {
+    iVar8 = param_2 * 0x38 + compiler;
+    if (*(int *)(compiler + param_2 * 0x38) != 0) {
       return;
     }
-    puVar6 = *(uint **)(param_1 + 0xe30);
+    puVar6 = *(uint **)(compiler + 0xe30);
     uVar2 = param_2 << 0x15 | (*(ushort *)(iVar8 + 0x18) + 5) * 0x10000 |
             *(uint *)((uint)*(byte *)(iVar8 + *(int *)(iVar8 + 4) + 0x10) * 4 + *(int *)(iVar8 + 8))
             & 0xffff | 0xd0000000;
@@ -3634,7 +3634,7 @@ LAB_97bd9944:
     *puVar6 = uVar2;
   }
   else {
-    iVar8 = param_2 * 0x38 + param_1;
+    iVar8 = param_2 * 0x38 + compiler;
     if (*(int *)(iVar8 + 0x700) != 0) {
       return;
     }
@@ -3643,70 +3643,70 @@ LAB_97bd9944:
     iVar8 = *(ushort *)(iVar8 + 0x718) + 5;
     _PPEmulatorVariableMaskFromSwizzle(&local_50);
     if ((*(unsigned char *)((unsigned char *)&(local_34) + 0)) == '\x0f') {
-      iVar4 = *(int *)(*(int *)(param_1 + 0xe24) + 0x38);
+      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if ((((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) && (*puVar1 == 0)) {
-        puVar6 = *(uint **)(param_1 + 0xe30);
+        puVar6 = *(uint **)(compiler + 0xe30);
         *puVar6 = param_2 << 0x10 | param_2 << 0xb | 0x12600484;
-        *(uint **)(param_1 + 0xe30) = puVar6 + 1;
+        *(uint **)(compiler + 0xe30) = puVar6 + 1;
         return;
       }
       if ((char)local_40 == '\0') {
         if (*puVar1 == 0) {
-          puVar6 = *(uint **)(param_1 + 0xe30);
+          puVar6 = *(uint **)(compiler + 0xe30);
           uVar2 = param_2 << 0x15 | iVar8 * 0x800 | 0x7c0001ce;
           goto LAB_97bd9944;
         }
-        puVar6 = *(uint **)(param_1 + 0xe30);
+        puVar6 = *(uint **)(compiler + 0xe30);
         uVar7 = *puVar1 & 0xffff | 0x39e00000;
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c0079ce;
       }
       else {
-        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
+        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
         uVar7 = 0x82ef0000;
-        puVar6 = *(uint **)(param_1 + 0xe30);
+        puVar6 = *(uint **)(compiler + 0xe30);
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b9ce;
       }
     }
     else {
-      iVar4 = *(int *)(*(int *)(param_1 + 0xe24) + 0x38);
+      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) {
-        puVar5 = *(undefined4 **)(param_1 + 0xe30);
+        puVar5 = *(undefined4 **)(compiler + 0xe30);
         puVar5[1] = 0x10836a8c;
         *puVar5 = 0x10694c84;
-        *(undefined4 **)(param_1 + 0xe30) = puVar5 + 3;
+        *(undefined4 **)(compiler + 0xe30) = puVar5 + 3;
         uVar3 = 0x1063212c;
         if ((local_34 & 0x1000000) == 0) {
           uVar3 = 0x1063492c;
         }
         puVar5[2] = uVar3;
-        puVar5 = *(undefined4 **)(param_1 + 0xe30);
+        puVar5 = *(undefined4 **)(compiler + 0xe30);
         uVar3 = 0x1063212c;
-        *(undefined4 **)(param_1 + 0xe30) = puVar5 + 1;
+        *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
         if ((local_34 & 0x2000000) == 0) {
           uVar3 = 0x1063492c;
         }
         *puVar5 = uVar3;
-        puVar5 = *(undefined4 **)(param_1 + 0xe30);
+        puVar5 = *(undefined4 **)(compiler + 0xe30);
         uVar3 = 0x1063212c;
-        *(undefined4 **)(param_1 + 0xe30) = puVar5 + 1;
+        *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
         if ((local_34 & 0x4000000) == 0) {
           uVar3 = 0x1063492c;
         }
         *puVar5 = uVar3;
-        puVar5 = *(undefined4 **)(param_1 + 0xe30);
+        puVar5 = *(undefined4 **)(compiler + 0xe30);
         uVar3 = 0x1063212c;
-        *(undefined4 **)(param_1 + 0xe30) = puVar5 + 1;
+        *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
         if ((local_34 & 0x8000000) == 0) {
           uVar3 = 0x1063492c;
         }
         *puVar5 = uVar3;
-        puVar6 = *(uint **)(param_1 + 0xe30);
+        puVar6 = *(uint **)(compiler + 0xe30);
         uVar2 = param_2 << 0xb | 0x127300ea;
         goto LAB_97bd9944;
       }
-      iVar4 = *(int *)(*(int *)(param_1 + 0xe24) + 0x38);
+      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 9)) {
-        puVar5 = *(undefined4 **)(param_1 + 0xe30);
+        puVar5 = *(undefined4 **)(compiler + 0xe30);
         *puVar5 = 0x39e00210;
         puVar5[1] = param_2 << 0x15 | 0x7c0379ce;
         puVar6 = puVar5 + 3;
@@ -3715,54 +3715,54 @@ LAB_97bd9944:
       }
       if ((char)local_40 == '\0') {
         if ((local_34 & 0x1000000) != 0) {
-          puVar6 = *(uint **)(param_1 + 0xe30);
+          puVar6 = *(uint **)(compiler + 0xe30);
           *puVar6 = (ushort)*puVar1 | 0x39e00000;
           puVar6[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
-          *(uint **)(param_1 + 0xe30) = puVar6 + 2;
+          *(uint **)(compiler + 0xe30) = puVar6 + 2;
         }
         if ((local_34 & 0x2000000) != 0) {
-          puVar6 = *(uint **)(param_1 + 0xe30);
+          puVar6 = *(uint **)(compiler + 0xe30);
           *puVar6 = *(ushort *)((int)puVar1 + 6) | 0x39e00000;
           puVar6[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
-          *(uint **)(param_1 + 0xe30) = puVar6 + 2;
+          *(uint **)(compiler + 0xe30) = puVar6 + 2;
         }
         if ((local_34 & 0x4000000) != 0) {
-          puVar6 = *(uint **)(param_1 + 0xe30);
+          puVar6 = *(uint **)(compiler + 0xe30);
           *puVar6 = *(ushort *)((int)puVar1 + 10) | 0x39e00000;
           puVar6[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
-          *(uint **)(param_1 + 0xe30) = puVar6 + 2;
+          *(uint **)(compiler + 0xe30) = puVar6 + 2;
         }
         if ((local_34 & 0x8000000) == 0) {
           return;
         }
-        puVar6 = *(uint **)(param_1 + 0xe30);
+        puVar6 = *(uint **)(compiler + 0xe30);
         uVar7 = *(ushort *)((int)puVar1 + 0xe) | 0x39e00000;
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
       }
       else {
-        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
+        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
         if ((local_34 & 0x1000000) != 0) {
-          puVar5 = *(undefined4 **)(param_1 + 0xe30);
+          puVar5 = *(undefined4 **)(compiler + 0xe30);
           *puVar5 = 0x82ef0000;
           puVar5[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
-          *(undefined4 **)(param_1 + 0xe30) = puVar5 + 2;
+          *(undefined4 **)(compiler + 0xe30) = puVar5 + 2;
         }
         if ((local_34 & 0x2000000) != 0) {
-          puVar5 = *(undefined4 **)(param_1 + 0xe30);
+          puVar5 = *(undefined4 **)(compiler + 0xe30);
           *puVar5 = 0x82ef0004;
           puVar5[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
-          *(undefined4 **)(param_1 + 0xe30) = puVar5 + 2;
+          *(undefined4 **)(compiler + 0xe30) = puVar5 + 2;
         }
         if ((local_34 & 0x4000000) != 0) {
-          puVar5 = *(undefined4 **)(param_1 + 0xe30);
+          puVar5 = *(undefined4 **)(compiler + 0xe30);
           *puVar5 = 0x82ef0008;
           puVar5[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
-          *(undefined4 **)(param_1 + 0xe30) = puVar5 + 2;
+          *(undefined4 **)(compiler + 0xe30) = puVar5 + 2;
         }
         if ((local_34 & 0x8000000) == 0) {
           return;
         }
-        puVar6 = *(uint **)(param_1 + 0xe30);
+        puVar6 = *(uint **)(compiler + 0xe30);
         uVar7 = 0x82ef000c;
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
       }
@@ -3773,7 +3773,7 @@ LAB_97bd9944:
   }
   puVar6 = puVar6 + 1;
 LAB_97bd994c:
-  *(uint **)(param_1 + 0xe30) = puVar6;
+  *(uint **)(compiler + 0xe30) = puVar6;
   return;
 }
 
@@ -3989,8 +3989,8 @@ int _PPCRuntimeCompilerDirtyRegistersContainingParams(param_1)
 }
 
 /* _PPCRuntimeCompilerSetRegister @ 0x97bd9da8 (148 bytes) */
-int _PPCRuntimeCompilerSetRegister(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13)
-  int param_1;
+int _PPCRuntimeCompilerSetRegister(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13)
+  int compiler;
   int param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -4004,14 +4004,14 @@ int _PPCRuntimeCompilerSetRegister(param_1, param_2, param_3, param_4, param_5, 
   undefined4 param_12;
   undefined4 param_13;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   
-  if (*(int *)(param_1 + 0xe4c) != 0) {
+  if (*(int *)(compiler + 0xe4c) != 0) {
     param_2 = param_2 + 0x20;
   }
-  *(undefined4 *)(param_2 * 0x38 + param_1) = 0;
-  iVar1 = param_2 * 0x38 + param_1;
+  *(undefined4 *)(param_2 * 0x38 + compiler) = 0;
+  iVar1 = param_2 * 0x38 + compiler;
   *(undefined4 *)(iVar1 + 4) = param_13;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
@@ -4021,8 +4021,8 @@ int _PPCRuntimeCompilerSetRegister(param_1, param_2, param_3, param_4, param_5, 
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   _memcpy(iVar1 + 8,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),0x24);
   *(undefined4 *)(iVar1 + 0x34) = param_12;
-  *(undefined4 *)(iVar1 + 0x30) = *(undefined4 *)(param_1 + 0xe44);
-  *(int *)(param_1 + 0xe44) = *(int *)(param_1 + 0xe44) + 1;
+  *(undefined4 *)(iVar1 + 0x30) = *(undefined4 *)(compiler + 0xe44);
+  *(int *)(compiler + 0xe44) = *(int *)(compiler + 0xe44) + 1;
   return;
 }
 

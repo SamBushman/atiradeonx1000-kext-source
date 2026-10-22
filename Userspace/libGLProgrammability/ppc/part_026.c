@@ -2616,12 +2616,12 @@ int eh_rest_world_r10(param_1, param_2, param_3, param_4, param_5, param_6, para
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_ @ 0x97c30ae0 (4 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this, param_2, param_3)
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this, str, param_3)
   void *this;
-  char *param_2;
+  char *str;
   unsigned char * param_3;
 {
-  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_)(this,param_2,param_3);
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_)(this,str,param_3);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_ @ 0x97c30ae4 (100 bytes) */

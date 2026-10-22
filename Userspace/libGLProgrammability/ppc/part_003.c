@@ -1637,17 +1637,17 @@ int __ZN9TBuiltIns10initializeERK16TBuiltInResource(param_1)
 }
 
 /* __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable @ 0x97b8b11c (5284 bytes) */
-int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
-  int param_1;
-  int *param_2;
+int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
+  int language;
+  int *symbolTable;
 {
   int iVar1;
   uint uVar2;
   uint uVar3;
   int iVar4;
   undefined4 *puVar5;
-  unsigned char * pTVar6;
-  int *piVar7;
+  unsigned char * poolAllocator;
+  int *symbol;
   unsigned char * psVar8;
   void *pvVar9;
   undefined4 extraout_r4;
@@ -1804,12 +1804,12 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
   int *local_48;
   undefined4 local_40 [6];
   
-  if (param_1 == 0) {
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+  if (language == 0) {
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = DAT_a7b7b708;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -1833,46 +1833,46 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_184 = 0;
     local_180 = 0;
     local_1a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar2 = piVar7[0xc];
-    piVar7[0xc] = uVar2 & 0x1ffffff | 0x1a000000;
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar2 = symbol[0xc];
+    symbol[0xc] = uVar2 & 0x1ffffff | 0x1a000000;
     uVar3 = (local_17c >> 0x13 & 0x3f) << 0x13;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ffff | 0x1a000000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ff | 0x1a000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x3ff | 0x1a000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x1ff | 0x1a000000 | 0x2000;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x1a000000;
+    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x1a000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x1a000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x1a000000 | 0x2000;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_16c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,in_r5,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,in_r5,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar11,psVar8);
-    local_148 = piVar7;
+    local_148 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_160,uVar16,paVar11);
     local_170 = local_160;
-    piVar7 = (int *)(local_14c + -4);
+    symbol = (int *)(local_14c + -4);
     local_16c = local_15c;
     local_140[0] = local_150;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -1881,11 +1881,11 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
                 ((unsigned char *)(local_14c + -0xc),local_140);
     }
     local_1a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = DAT_a7b7b70c;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -1909,45 +1909,45 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_104 = 0;
     local_100 = 0;
     local_120 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar3 = piVar7[0xc];
-    piVar7[0xc] = uVar3 & 0x1ffffff | 0x1c000000;
-    piVar7[0xc] = uVar3 & 0x7ffff | 0x1c080000;
-    piVar7[0xc] = uVar3 & 0x7ff | 0x1c080800;
-    piVar7[0xc] = uVar3 & 0x3ff | 0x1c080800;
-    piVar7[0xc] = uVar3 & 0x1ff | 0x1c080800;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar3 = symbol[0xc];
+    symbol[0xc] = uVar3 & 0x1ffffff | 0x1c000000;
+    symbol[0xc] = uVar3 & 0x7ffff | 0x1c080000;
+    symbol[0xc] = uVar3 & 0x7ff | 0x1c080800;
+    symbol[0xc] = uVar3 & 0x3ff | 0x1c080800;
+    symbol[0xc] = uVar3 & 0x1ff | 0x1c080800;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_ec = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar12,psVar8);
-    local_c8 = piVar7;
+    local_c8 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_e0,uVar16,paVar12);
     local_f0 = local_e0;
-    piVar7 = (int *)(local_cc + -4);
+    symbol = (int *)(local_cc + -4);
     local_ec = local_dc;
     local_c0[0] = local_d0;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -1956,11 +1956,11 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
                 ((unsigned char *)(local_cc + -0xc),local_c0);
     }
     local_120 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = DAT_a7b7b710;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -1983,46 +1983,46 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_84 = 0;
     local_80 = 0;
     local_a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar2 = piVar7[0xc];
-    piVar7[0xc] = uVar2 & 0x1ffffff | 0x1e000000;
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar2 = symbol[0xc];
+    symbol[0xc] = uVar2 & 0x1ffffff | 0x1e000000;
     uVar3 = (local_7c >> 0x13 & 0x3f) << 0x13;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ffff | 0x1e000000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ff | 0x1e000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x3ff | 0x1e000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x1ff | 0x1e000000 | 0x2000;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x1e000000;
+    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x1e000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x1e000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x1e000000 | 0x2000;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_6c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,paVar12,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar12,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_50,psVar8);
-    local_48 = piVar7;
+    local_48 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_60,uVar16,&local_50);
     local_70 = local_60;
-    piVar7 = (int *)(local_4c + -4);
+    symbol = (int *)(local_4c + -4);
     local_6c = local_5c;
     local_40[0] = local_50;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2032,12 +2032,12 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     }
     local_a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
   }
-  else if (param_1 == 1) {
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+  else if (language == 1) {
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = _strSpecialBuiltIn;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -2061,46 +2061,46 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_384 = 0;
     local_380 = 0;
     local_3a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar2 = piVar7[0xc];
-    piVar7[0xc] = uVar2 & 0x1ffffff | 0x20000000;
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar2 = symbol[0xc];
+    symbol[0xc] = uVar2 & 0x1ffffff | 0x20000000;
     uVar3 = (local_37c >> 0x13 & 0x3f) << 0x13;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ffff | 0x20000000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ff | 0x20000000 | 0x800;
-    piVar7[0xc] = uVar3 | uVar2 & 0x3ff | 0x20000000 | 0x800;
-    piVar7[0xc] = uVar3 | uVar2 & 0x1ff | 0x20000000 | 0x800;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x20000000;
+    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x20000000 | 0x800;
+    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x20000000 | 0x800;
+    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x20000000 | 0x800;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_36c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,in_r5,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,in_r5,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar11,psVar8);
-    local_348 = piVar7;
+    local_348 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_360,uVar16,paVar11);
     local_370 = local_360;
-    piVar7 = (int *)(local_34c + -4);
+    symbol = (int *)(local_34c + -4);
     local_36c = local_35c;
     local_340[0] = local_350;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2109,11 +2109,11 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
                 ((unsigned char *)(local_34c + -0xc),local_340);
     }
     local_3a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = DAT_a7b7b6f8;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -2137,46 +2137,46 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_304 = 0;
     local_300 = 0;
     local_320 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar2 = piVar7[0xc];
-    piVar7[0xc] = uVar2 & 0x1ffffff | 0x22000000;
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar2 = symbol[0xc];
+    symbol[0xc] = uVar2 & 0x1ffffff | 0x22000000;
     uVar3 = (local_2fc >> 0x13 & 0x3f) << 0x13;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ffff | 0x22000000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ff | 0x22000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x3ff | 0x22000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x1ff | 0x22000000 | 0x2000;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x22000000;
+    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x22000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x22000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x22000000 | 0x2000;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_2ec = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar12,psVar8);
-    local_2c8 = piVar7;
+    local_2c8 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_2e0,uVar16,paVar12);
     local_2f0 = local_2e0;
-    piVar7 = (int *)(local_2cc + -4);
+    symbol = (int *)(local_2cc + -4);
     local_2ec = local_2dc;
     local_2c0[0] = local_2d0;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2185,11 +2185,11 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
                 ((unsigned char *)(local_2cc + -0xc),local_2c0);
     }
     local_320 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = DAT_a7b7b6fc;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -2213,46 +2213,46 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_284 = 0;
     local_280 = 0;
     local_2a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar2 = piVar7[0xc];
-    piVar7[0xc] = uVar2 & 0x1ffffff | 0x24000000;
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar2 = symbol[0xc];
+    symbol[0xc] = uVar2 & 0x1ffffff | 0x24000000;
     uVar3 = (local_27c >> 0x13 & 0x3f) << 0x13;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ffff | 0x24000000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x7ff | 0x24000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x3ff | 0x24000000 | 0x2000;
-    piVar7[0xc] = uVar3 | uVar2 & 0x1ff | 0x24000000 | 0x2000;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x24000000;
+    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x24000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x24000000 | 0x2000;
+    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x24000000 | 0x2000;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_26c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,paVar12,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar12,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar11,psVar8);
-    local_248 = piVar7;
+    local_248 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_260,uVar16,paVar11);
     local_270 = local_260;
-    piVar7 = (int *)(local_24c + -4);
+    symbol = (int *)(local_24c + -4);
     local_26c = local_25c;
     local_240[0] = local_250;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2261,11 +2261,11 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
                 ((unsigned char *)(local_24c + -0xc),local_240);
     }
     local_2a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar7 = (int *)TPoolAllocator__allocate(pTVar6,0x40);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar10 = DAT_a7b7b700;
-    pTVar6 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(pTVar6,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
     pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
     uVar13 = (undefined4)uVar18;
     bVar17 = (pvVar9 == (void *)0x0) << 1;
@@ -2288,45 +2288,45 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
     local_204 = 0;
     local_200 = 0;
     local_220 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[1] = (int)pvVar14;
-    *piVar7 = (int)puVar15;
-    piVar7[4] = 0;
-    piVar7[5] = 0;
-    piVar7[6] = 0;
-    piVar7[7] = 0;
-    piVar7[8] = 0;
-    piVar7[9] = 0;
-    piVar7[10] = 0;
-    piVar7[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
-    piVar7[0xb] = 0;
-    uVar3 = piVar7[0xc];
-    piVar7[0xc] = uVar3 & 0x1ffffff | 0x26000000;
-    piVar7[0xc] = uVar3 & 0x7ffff | 0x26080000;
-    piVar7[0xc] = uVar3 & 0x7ff | 0x26080800;
-    piVar7[0xc] = uVar3 & 0x3ff | 0x26080800;
-    piVar7[0xc] = uVar3 & 0x1ff | 0x26080800;
-    piVar7[0xd] = 0;
-    piVar7[0xe] = 0;
-    piVar7[0xf] = 0;
-    iVar4 = param_2[3];
-    param_2[3] = iVar4 + 1;
-    piVar7[2] = iVar4 + 1;
-    iVar4 = *param_2;
-    uVar16 = *(undefined4 *)(iVar4 + ((param_2[1] - iVar4 & 0xfffffffcU) - 4));
+    symbol[1] = (int)pvVar14;
+    *symbol = (int)puVar15;
+    symbol[4] = 0;
+    symbol[5] = 0;
+    symbol[6] = 0;
+    symbol[7] = 0;
+    symbol[8] = 0;
+    symbol[9] = 0;
+    symbol[10] = 0;
+    symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[0xb] = 0;
+    uVar3 = symbol[0xc];
+    symbol[0xc] = uVar3 & 0x1ffffff | 0x26000000;
+    symbol[0xc] = uVar3 & 0x7ffff | 0x26080000;
+    symbol[0xc] = uVar3 & 0x7ff | 0x26080800;
+    symbol[0xc] = uVar3 & 0x3ff | 0x26080800;
+    symbol[0xc] = uVar3 & 0x1ff | 0x26080800;
+    symbol[0xd] = 0;
+    symbol[0xe] = 0;
+    symbol[0xf] = 0;
+    iVar4 = symbolTable[3];
+    symbolTable[3] = iVar4 + 1;
+    symbol[2] = iVar4 + 1;
+    iVar4 = *symbolTable;
+    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
     local_1ec = 0;
-    psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
+    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_1d0,psVar8);
-    local_1c8 = piVar7;
+    local_1c8 = symbol;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_1e0,uVar16,&local_1d0);
     local_1f0 = local_1e0;
-    piVar7 = (int *)(local_1cc + -4);
+    symbol = (int *)(local_1cc + -4);
     local_1ec = local_1dc;
     local_1c0[0] = local_1d0;
     do {
-      iVar4 = *piVar7;
+      iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar7);
-        *piVar7 = iVar1;
+        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = iVar1;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2338,169 +2338,169 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
   }
   puVar15 = PTR__operatorStrings_a7b7c0b0;
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(PTR__operatorStrings_a7b7c0b0 + 0x1c),7);
+            (*(unsigned char **)*symbolTable,*(char **)(PTR__operatorStrings_a7b7c0b0 + 0x1c),7);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x54),0x15);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x54),0x15);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x5c),0x17);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x5c),0x17);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x7c),0x1f);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x7c),0x1f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x80),0x20);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x80),0x20);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x84),0x21);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x84),0x21);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x88),0x22);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x88),0x22);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x8c),0x23);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x8c),0x23);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x90),0x24);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x90),0x24);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xc4),0x31);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xc4),0x31);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 200),0x32);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 200),0x32);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xcc),0x33);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xcc),0x33);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xd0),0x34);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xd0),0x34);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xd4),0x35);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xd4),0x35);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xd8),0x36);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xd8),0x36);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xdc),0x37);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xdc),0x37);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xe0),0x38);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xe0),0x38);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xe4),0x39);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xe4),0x39);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xf0),0x3c);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xf0),0x3c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xec),0x3b);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xec),0x3b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xe8),0x3a);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xe8),0x3a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xf4),0x3d);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xf4),0x3d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xf8),0x3e);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xf8),0x3e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0xfc),0x3f);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xfc),0x3f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x100),0x40);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x100),0x40);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x104),0x41);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x104),0x41);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x108),0x42);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x108),0x42);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x10c),0x43);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x10c),0x43);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x110),0x44);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x110),0x44);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x114),0x45);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x114),0x45);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x118),0x46);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x118),0x46);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x11c),0x47);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x11c),0x47);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x120),0x48);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x120),0x48);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x124),0x49);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x124),0x49);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x128),0x4a);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x128),0x4a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 300),0x4b);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 300),0x4b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x130),0x4c);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x130),0x4c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x134),0x4d);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x134),0x4d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x138),0x4e);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x138),0x4e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x13c),0x4f);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x13c),0x4f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x140),0x50);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x140),0x50);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x144),0x51);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x144),0x51);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x148),0x52);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x148),0x52);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x15c),0x57);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x15c),0x57);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x160),0x58);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x160),0x58);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x218),0x86);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x218),0x86);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x21c),0x87);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x21c),0x87);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x220),0x88);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x220),0x88);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x224),0x89);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x224),0x89);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x228),0x8a);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x228),0x8a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x22c),0x8b);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x22c),0x8b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x230),0x8c);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x230),0x8c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x234),0x8d);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x234),0x8d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x238),0x8e);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x238),0x8e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x23c),0x8f);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x23c),0x8f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x240),0x90);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x240),0x90);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x244),0x91);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x244),0x91);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x248),0x92);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x248),0x92);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x24c),0x93);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x24c),0x93);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x250),0x94);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x250),0x94);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x254),0x95);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x254),0x95);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 600),0x96);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 600),0x96);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x25c),0x97);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x25c),0x97);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x260),0x98);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x260),0x98);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x264),0x99);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x264),0x99);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x268),0x9a);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x268),0x9a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x26c),0x9b);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x26c),0x9b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x270),0x9c);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x270),0x9c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x274),0x9d);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x274),0x9d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x278),0x9e);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x278),0x9e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x27c),0x9f);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x27c),0x9f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x280),0xa0);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x280),0xa0);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x284),0xa1);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x284),0xa1);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x288),0xa2);
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x288),0xa2);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x28c),0xa3);
-  if (param_1 == 0) {
-    puVar5 = (undefined4 *)*param_2;
+            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x28c),0xa3);
+  if (language == 0) {
+    puVar5 = (undefined4 *)*symbolTable;
     uVar13 = 0x85;
     pcVar10 = *(char **)(puVar15 + 0x214);
   }
   else {
-    if (param_1 != 1) {
+    if (language != 1) {
       return;
     }
     TSymbolTableLevel__relateToOperator
-              (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x14c),0x53);
+              (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x14c),0x53);
     TSymbolTableLevel__relateToOperator
-              (*(unsigned char **)*param_2,*(char **)(puVar15 + 0x150),0x54);
-    puVar5 = (undefined4 *)*param_2;
+              (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x150),0x54);
+    puVar5 = (undefined4 *)*symbolTable;
     pcVar10 = *(char **)(puVar15 + 0x154);
     uVar13 = 0x55;
   }
@@ -2509,16 +2509,16 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(param_1, param_2)
 }
 
 /* __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource @ 0x97b8c5c0 (600 bytes) */
-int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  unsigned char * param_3;
+int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(language, symbolTable, builtInResource)
+  int language;
+  int *symbolTable;
+  unsigned char * builtInResource;
 {
   int iVar1;
   char *pcVar2;
   void *pvVar3;
   uint uVar4;
-  unsigned char * pTVar5;
+  unsigned char * poolAllocator;
   int *piVar6;
   void *this;
   unsigned char * psVar7;
@@ -2542,21 +2542,21 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(param_
   int *local_38;
   undefined4 local_30 [6];
   
-  if (param_1 == 1) {
-    iVar8 = *(int *)(param_3 + 0x2c);
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    piVar6 = (int *)TPoolAllocator__allocate(pTVar5,0x40);
+  if (language == 1) {
+    iVar8 = *(int *)(builtInResource + 0x2c);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    piVar6 = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
     pcVar2 = DAT_a7b7b704;
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar11 = TPoolAllocator__allocate(pTVar5,8);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    uVar11 = TPoolAllocator__allocate(poolAllocator,8);
     this = (void *)((ulonglong)uVar11 >> 0x20);
     a1 = (undefined4)uVar11;
     bVar10 = (this == (void *)0x0) << 1;
     pvVar3 = (void *)0x0;
     if (this != (void *)0x0) {
       local_70[0] = GetGlobalPoolAllocator();
-      param_3 = (unsigned char *)local_70;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this,pcVar2,param_3);
+      builtInResource = (unsigned char *)local_70;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this,pcVar2,builtInResource);
       pvVar3 = this;
       a1 = extraout_r4;
     }
@@ -2580,12 +2580,12 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(param_
     piVar6[0xd] = 0;
     piVar6[0xe] = 0;
     piVar6[0xf] = 0;
-    iVar8 = param_2[3];
-    param_2[3] = iVar8 + 1;
+    iVar8 = symbolTable[3];
+    symbolTable[3] = iVar8 + 1;
     piVar6[2] = iVar8 + 1;
-    uVar9 = *(undefined4 *)(*param_2 + ((param_2[1] - *param_2 & 0xfffffffcU) - 4));
+    uVar9 = *(undefined4 *)(*symbolTable + ((symbolTable[1] - *symbolTable & 0xfffffffcU) - 4));
     local_5c = 0;
-    psVar7 = (unsigned char *)(**(code **)(*piVar6 + 8))(piVar6,a1,param_3,in_r6,in_r7,in_r8,0);
+    psVar7 = (unsigned char *)(**(code **)(*piVar6 + 8))(piVar6,a1,builtInResource,in_r6,in_r7,in_r8,0);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_40,psVar7);
     local_38 = piVar6;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_50,uVar9,&local_40);
@@ -2616,9 +2616,9 @@ int GetPreprocessorBuiltinString()
 }
 
 /* __ZN13TInfoSinkBase6appendEPKc @ 0x97b8c834 (196 bytes) */
-int __ZN13TInfoSinkBase6appendEPKc(this, param_2)
+int __ZN13TInfoSinkBase6appendEPKc(this, str)
   void *this;
-  char *param_2;
+  char *str;
 {
   uint uVar1;
   int iVar2;
@@ -2626,17 +2626,17 @@ int __ZN13TInfoSinkBase6appendEPKc(this, param_2)
   
   uVar1 = *(uint *)((int)this + 4);
   if ((uVar1 & 4) != 0) {
-    iVar2 = _strlen(param_2);
+    iVar2 = _strlen(str);
     uVar1 = *(uint *)(*(int *)this + -8);
     if (uVar1 < *(int *)(*(int *)this + -0xc) + iVar2 + 2U) {
       __ZNSs7reserveEm(this,uVar1 + (uVar1 >> 1));
     }
-    uVar3 = _strlen(param_2);
-    __ZNSs6appendEPKcm(this,param_2,uVar3);
+    uVar3 = _strlen(str);
+    __ZNSs6appendEPKcm(this,str,uVar3);
     uVar1 = *(uint *)((int)this + 4);
   }
   if ((uVar1 & 2) != 0) {
-    _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0x58),"%s",param_2);
+    _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0x58),"%s",str);
     return;
   }
   return;
@@ -3549,7 +3549,7 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
   uint uVar3;
   int *piVar4;
   int *a0;
-  unsigned char * pTVar5;
+  unsigned char * poolAllocator;
   int iVar6;
   int iVar7;
   unsigned char * this_00;
@@ -3562,8 +3562,8 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
   bVar10 = (param_2 == (unsigned char *)0x0) << 1;
   pTStack0000001c = param_2;
   if (param_2 == (unsigned char *)0x0) {
-    pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-    a0 = (int *)TPoolAllocator__allocate(pTVar5,0x6c);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
     a0[1] = 0;
     *a0 = (int)&PTR_getLine_a7b7cf90;
     a0[3] = 0;
@@ -3614,8 +3614,8 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
     a0 = (int *)(**(code **)(*(int *)param_2 + 0x1c))(param_2);
     bVar10 = (a0 == (int *)0x0) << 1;
     if ((a0 == (int *)0x0) || (bVar1 = param_4 == 0, a0[0xc] != 0)) {
-      pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-      a0 = (int *)TPoolAllocator__allocate(pTVar5,0x6c);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
       a0[1] = 0;
       *a0 = (int)&PTR_getLine_a7b7cf90;
       a0[3] = 0;
@@ -3704,7 +3704,7 @@ int TIntermediate__addConversion(this, param_2, param_3, param_4)
   int iVar6;
   uint uVar7;
   int *piVar8;
-  unsigned char * pTVar9;
+  unsigned char * poolAllocator;
   unsigned char * pcVar10;
   int iVar11;
   int *piVar12;
@@ -3814,8 +3814,8 @@ LAB_97b8e8ac:
           piVar12 = (int *)(**(code **)(*param_4 + 0x1c))(param_4);
           return piVar12;
         }
-        pTVar9 = (unsigned char *)GetGlobalPoolAllocator();
-        pcVar10 = (unsigned char *)TPoolAllocator__allocate(pTVar9,4);
+        poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+        pcVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
         if (uVar7 != 2) break;
         piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
         (**(code **)(*piVar8 + 0x38))(&local_c0,piVar8);
@@ -4061,8 +4061,8 @@ LAB_97b8f1ac:
   local_a8 = 0;
   local_a4 = 0;
   local_a0 = 0;
-  pTVar9 = (unsigned char *)GetGlobalPoolAllocator();
-  piVar12 = (int *)TPoolAllocator__allocate(pTVar9,0x38);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  piVar12 = (int *)TPoolAllocator__allocate(poolAllocator,0x38);
   piVar12[1] = 0;
   *piVar12 = (int)&PTR_getLine_a7b7cf90;
   piVar12[3] = local_bc;
@@ -4421,11 +4421,11 @@ int TIntermediate__addComma(this, param_2, param_3, param_4)
 }
 
 /* __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i @ 0x97b8fc3c (628 bytes) */
-int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, param_2, param_3, param_4, param_5)
+int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1, intermTyped2, intermTyped3, param_5)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
-  unsigned char * param_4;
+  unsigned char * intermTyped1;
+  unsigned char * intermTyped2;
+  unsigned char * intermTyped3;
   int param_5;
 {
   uint uVar1;
@@ -4458,32 +4458,32 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, param_2, para
   
   a0 = &local_60;
   iVar8 = param_5;
-  (**(code **)(*(int *)param_3 + 0x38))(&local_60,param_3,param_3,param_4,param_5);
+  (**(code **)(*(int *)intermTyped2 + 0x38))(&local_60,intermTyped2,intermTyped2,intermTyped3,param_5);
   a2 = &local_60;
-  a3 = param_4;
-  uVar10 = ((int (*)())TIntermediate__addConversion)(this,1,a2,param_4);
+  a3 = intermTyped3;
+  uVar10 = ((int (*)())TIntermediate__addConversion)(this,1,a2,intermTyped3);
   a0_00 = (unsigned char *)((ulonglong)uVar10 >> 0x20);
   a1 = (undefined4)uVar10;
   local_60 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a0_00 == (unsigned char *)0x0) {
-    (**(code **)(*(int *)param_4 + 0x38))(a0,param_4);
-    pTVar9 = (unsigned char *)((int (*)())TIntermediate__addConversion)(this,1,a0,param_3);
+    (**(code **)(*(int *)intermTyped3 + 0x38))(a0,intermTyped3);
+    pTVar9 = (unsigned char *)((int (*)())TIntermediate__addConversion)(this,1,a0,intermTyped2);
     a1 = 0;
     a2 = a0;
-    a3 = param_3;
-    a0_00 = param_4;
-    param_3 = pTVar9;
+    a3 = intermTyped2;
+    a0_00 = intermTyped3;
+    intermTyped2 = pTVar9;
     if (pTVar9 == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
     }
   }
   local_60 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  iVar7 = (**(code **)(*(int *)param_2 + 0x18))(param_2,a1);
-  if (((iVar7 == 0) || (iVar7 = (**(code **)(*(int *)param_3 + 0x18))(param_3), iVar7 == 0)) ||
+  iVar7 = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1,a1);
+  if (((iVar7 == 0) || (iVar7 = (**(code **)(*(int *)intermTyped2 + 0x18))(intermTyped2), iVar7 == 0)) ||
      (iVar7 = (**(code **)(*(int *)a0_00 + 0x18))(a0_00), iVar7 == 0)) {
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
     pTVar9 = (unsigned char *)TPoolAllocator__allocate(this_00,0x3c);
-    (**(code **)(*(int *)param_3 + 0x38))(&local_60,param_3);
+    (**(code **)(*(int *)intermTyped2 + 0x38))(&local_60,intermTyped2);
     *(int *)(pTVar9 + 4) = 0;
     *(undefined ***)pTVar9 = &PTR_getLine_a7b7cf90;
     *(int *)(pTVar9 + 0xc) = local_5c;
@@ -4507,16 +4507,16 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, param_2, para
     puVar5 = PTR_vtable_a7b7c0cc;
     *(uint *)(pTVar9 + 0x2c) =
          (local_3c >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
-    *(unsigned char **)(pTVar9 + 0x30) = param_2;
+    *(unsigned char **)(pTVar9 + 0x30) = intermTyped1;
     *(undefined **)pTVar9 = puVar5 + 8;
-    *(unsigned char **)(pTVar9 + 0x34) = param_3;
+    *(unsigned char **)(pTVar9 + 0x34) = intermTyped2;
     *(unsigned char **)(pTVar9 + 0x38) = a0_00;
     local_60 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     (**(code **)(*(int *)pTVar9 + 4))(pTVar9,param_5,a2,a3,iVar8,in_r8,pTVar9 + 8);
   }
   else {
-    iVar8 = (**(code **)(*(int *)param_2 + 0x18))(param_2);
-    pTVar9 = param_3;
+    iVar8 = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1);
+    pTVar9 = intermTyped2;
     if (**(int **)(iVar8 + 0x30) == 0) {
       pTVar9 = a0_00;
     }
@@ -4600,7 +4600,7 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
   uint uVar2;
   int *piVar3;
   int iVar4;
-  unsigned char * pTVar5;
+  unsigned char * poolAllocator;
   int *a0;
   unsigned char * this_00;
   unsigned char * pcVar6;
@@ -4625,8 +4625,8 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
   int local_60;
   undefined4 local_50 [6];
   
-  pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (int *)TPoolAllocator__allocate(pTVar5,0x6c);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
   local_8c = local_8c & 0x1ff | 0x80800;
   local_ac = 0;
   local_a8 = 0;
@@ -4687,8 +4687,8 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
   if (0 < *(int *)(param_2 + 0x10)) {
     pTVar10 = param_2;
     do {
-      pTVar5 = (unsigned char *)GetGlobalPoolAllocator();
-      pcVar6 = (unsigned char *)TPoolAllocator__allocate(pTVar5,4);
+      poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+      pcVar6 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
       *(undefined4 *)pcVar6 = *(undefined4 *)pTVar10;
       local_8c = local_8c & 0x1ff | 0x4100800;
       pTVar10 = pTVar10 + 4;
@@ -4751,19 +4751,19 @@ int TIntermediate__addLoop(this, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* __ZN13TIntermediate9addBranchE9TOperatori @ 0x97b90350 (12 bytes) */
-int __ZN13TIntermediate9addBranchE9TOperatori(this, param_2, param_3)
+int __ZN13TIntermediate9addBranchE9TOperatori(this, op, param_3)
   void *this;
-  undefined4 param_2;
+  undefined4 op;
   undefined4 param_3;
 {
-  return ((int (*)())__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)(this,param_2,0,param_3);
+  return ((int (*)())__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)(this,op,0,param_3);
 }
 
 /* __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi @ 0x97b9035c (124 bytes) */
-int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, param_2, param_3, param_4)
+int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, op, intermTyped, param_4)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 op;
+  undefined4 intermTyped;
   undefined4 param_4;
 {
   undefined *puVar1;
@@ -4775,9 +4775,9 @@ int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, param_2, para
   a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x10);
   puVar1 = PTR_vtable_a7b7c0c0;
   a0[1] = 0;
-  a0[2] = param_2;
+  a0[2] = op;
   pcVar2 = *(code **)(puVar1 + 0xc);
-  a0[3] = param_3;
+  a0[3] = intermTyped;
   *a0 = puVar1 + 8;
   (*pcVar2)(a0,param_4);
   return a0;

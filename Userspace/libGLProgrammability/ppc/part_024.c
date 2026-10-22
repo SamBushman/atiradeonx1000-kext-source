@@ -340,16 +340,16 @@ int __ZNSt10bad_typeidD4Ev(this, param_2)
 }
 
 /* __ZNKSt9type_infoeqERKS_ @ 0x97c1810c (76 bytes) */
-int __ZNKSt9type_infoeqERKS_(this, param_2)
+int __ZNKSt9type_infoeqERKS_(this, type_info)
   void *this;
-  unsigned char * param_2;
+  unsigned char * type_info;
 {
   int iVar1;
   undefined4 uVar2;
   
   uVar2 = 0;
-  if ((param_2 == this) ||
-     (iVar1 = _strcmp(*(undefined4 *)((int)this + 4),*(undefined4 *)(param_2 + 4)), iVar1 == 0)) {
+  if ((type_info == this) ||
+     (iVar1 = _strcmp(*(undefined4 *)((int)this + 4),*(undefined4 *)(type_info + 4)), iVar1 == 0)) {
     uVar2 = 1;
   }
   return uVar2;
@@ -540,11 +540,11 @@ int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv(this, param_2, pa
 }
 
 /* __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_ @ 0x97c183e8 (20 bytes) */
-int __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_(this, param_2, param_3, param_4, param_5)
+int __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_(this, param_2, param_3, __class_type_info, param_5)
   void *this;
   int param_2;
   void *param_3;
-  unsigned char * param_4;
+  unsigned char * __class_type_info;
   void *param_5;
 {
   if (param_5 == param_3) {
@@ -554,24 +554,24 @@ int __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_(this
 }
 
 /* __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_ @ 0x97c183fc (136 bytes) */
-int __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_(this, param_2, param_3, param_4, param_5)
+int __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_(this, param_2, param_3, __class_type_info, param_5)
   void *this;
   int param_2;
   void *param_3;
-  unsigned char * param_4;
+  unsigned char * __class_type_info;
   void *param_5;
 {
   int iVar1;
   undefined4 uVar2;
   
   if ((param_5 == param_3) &&
-     (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)param_4), iVar1 != 0)) {
+     (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)__class_type_info), iVar1 != 0)) {
     return 6;
   }
                     
                     
   uVar2 = (**(code **)(**(int **)((int)this + 8) + 0x20))
-                    (*(int **)((int)this + 8),param_2,param_3,param_4,param_5);
+                    (*(int **)((int)this + 8),param_2,param_3,__class_type_info,param_5);
   return uVar2;
 }
 
@@ -620,27 +620,27 @@ int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param
 }
 
 /* __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE @ 0x97c1857c (128 bytes) */
-int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, param_2, __sub_kind, __class_type_info1, param_5, __class_type_info2, param_7, __dyncast_result)
   void *this;
   int param_2;
-  int param_3;
-  unsigned char * param_4;
+  int __sub_kind;
+  unsigned char * __class_type_info1;
   int param_5;
-  unsigned char * param_6;
+  unsigned char * __class_type_info2;
   int param_7;
-  int *param_8;
+  int *__dyncast_result;
 {
   int iVar1;
   
-  if ((param_5 == param_7) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,param_6), iVar1 != 0)) {
-    param_8[2] = param_3;
+  if ((param_5 == param_7) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,__class_type_info2), iVar1 != 0)) {
+    __dyncast_result[2] = __sub_kind;
   }
   else {
-    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,param_4);
+    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,__class_type_info1);
     if (iVar1 != 0) {
-      *param_8 = param_5;
-      param_8[3] = 1;
-      param_8[1] = param_3;
+      *__dyncast_result = param_5;
+      __dyncast_result[3] = 1;
+      __dyncast_result[1] = __sub_kind;
     }
   }
   return 0;

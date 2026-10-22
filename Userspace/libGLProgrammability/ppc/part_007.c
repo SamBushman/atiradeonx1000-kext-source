@@ -82,14 +82,14 @@ int yy_scan_buffer(param_1, param_2)
 int yy_scan_string(param_1)
   char *param_1;
 {
-  char cVar1;
+  char ch;
   int iVar2;
   
   iVar2 = 0;
-  cVar1 = *param_1;
-  while (cVar1 != '\0') {
+  ch = *param_1;
+  while (ch != '\0') {
     iVar2 = iVar2 + 1;
-    cVar1 = param_1[iVar2];
+    ch = param_1[iVar2];
   }
   return ((int (*)())yy_scan_bytes)(param_1,iVar2);
 }
@@ -1218,17 +1218,17 @@ int scpy(param_1, param_2)
   char *param_1;
   char *param_2;
 {
-  char cVar1;
+  char ch;
   int iVar2;
   
-  cVar1 = *param_2;
+  ch = *param_2;
   iVar2 = 0;
-  if (cVar1 != '\0') {
+  if (ch != '\0') {
     do {
-      param_1[iVar2] = cVar1;
+      param_1[iVar2] = ch;
       iVar2 = iVar2 + 1;
-      cVar1 = param_2[iVar2];
-    } while (cVar1 != '\0');
+      ch = param_2[iVar2];
+    } while (ch != '\0');
     return iVar2;
   }
   return iVar2;
@@ -1808,9 +1808,9 @@ int __ZN7BindingD4Ev(this)
 }
 
 /* __ZN7BindingC2ERKS_ @ 0x97bafec0 (4 bytes) */
-int __ZN7BindingC2ERKS_(this, param_2)
+int __ZN7BindingC2ERKS_(this, binding)
   void *this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   int iVar1;
   bool bVar4;
@@ -1819,23 +1819,23 @@ int __ZN7BindingC2ERKS_(this, param_2)
   char *pcVar5;
   
   *(undefined4 *)((int)this + 8) = 0;
-  pcVar5 = *(char **)(param_2 + 8);
+  pcVar5 = *(char **)(binding + 8);
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   ((int (*)())Binding__SetName)(this,pcVar5);
-  iVar1 = Binding__GetLocation(param_2);
+  iVar1 = Binding__GetLocation(binding);
   Binding__SetLocation(this,iVar1);
-  iVar1 = Binding__GetActiveIndex(param_2);
+  iVar1 = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,iVar1);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_2);
+  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(binding);
   ((int (*)())Binding__SetClientRequest)(this,bVar4);
-  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_2);
+  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
-  uVar3 = Binding__GetOpenGLType(param_2);
+  uVar3 = Binding__GetOpenGLType(binding);
   Binding__SetOpenGLType(this,uVar3);
-  uVar2 = Binding__GetDecSize(param_2);
+  uVar2 = Binding__GetDecSize(binding);
   Binding__SetDecSize(this,uVar2);
-  uVar2 = Binding__GetActualSize(param_2);
+  uVar2 = Binding__GetActualSize(binding);
   Binding__SetActualSize(this,uVar2);
   *(undefined1 *)((int)this + 0x35) = 0;
   *(undefined4 *)this = 0;
@@ -1845,9 +1845,9 @@ int __ZN7BindingC2ERKS_(this, param_2)
 }
 
 /* __ZN7BindingC1ERKS_ @ 0x97bafec4 (4 bytes) */
-int __ZN7BindingC1ERKS_(this, param_2)
+int __ZN7BindingC1ERKS_(this, binding)
   void *this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   int iVar1;
   bool bVar4;
@@ -1856,23 +1856,23 @@ int __ZN7BindingC1ERKS_(this, param_2)
   char *pcVar5;
   
   *(undefined4 *)((int)this + 8) = 0;
-  pcVar5 = *(char **)(param_2 + 8);
+  pcVar5 = *(char **)(binding + 8);
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   ((int (*)())Binding__SetName)(this,pcVar5);
-  iVar1 = Binding__GetLocation(param_2);
+  iVar1 = Binding__GetLocation(binding);
   Binding__SetLocation(this,iVar1);
-  iVar1 = Binding__GetActiveIndex(param_2);
+  iVar1 = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,iVar1);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_2);
+  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(binding);
   ((int (*)())Binding__SetClientRequest)(this,bVar4);
-  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_2);
+  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
-  uVar3 = Binding__GetOpenGLType(param_2);
+  uVar3 = Binding__GetOpenGLType(binding);
   Binding__SetOpenGLType(this,uVar3);
-  uVar2 = Binding__GetDecSize(param_2);
+  uVar2 = Binding__GetDecSize(binding);
   Binding__SetDecSize(this,uVar2);
-  uVar2 = Binding__GetActualSize(param_2);
+  uVar2 = Binding__GetActualSize(binding);
   Binding__SetActualSize(this,uVar2);
   *(undefined1 *)((int)this + 0x35) = 0;
   *(undefined4 *)this = 0;

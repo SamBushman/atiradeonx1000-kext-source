@@ -3139,9 +3139,9 @@ int TPPStreamCompiler__AddOperation(this, param_2, param_3, param_4, param_5)
 }
 
 /* __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi @ 0x97bc7d5c (952 bytes) */
-int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, param_2, param_3)
+int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, parseOperand, param_3)
   void *this;
-  unsigned char ** param_2;
+  unsigned char ** parseOperand;
   int param_3;
 {
   ushort uVar1;
@@ -3177,19 +3177,19 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, para
   unsigned char * local_4c;
   unsigned char * local_48 [5];
   
-  pPVar3 = *param_2;
+  pPVar3 = *parseOperand;
   if ((pPVar3 != (unsigned char *)0x0) && (*(int *)(pPVar3 + 0xc) != 0)) {
     *(unsigned char **)((int)this + 0x88) = pPVar3;
-    pTVar5 = (unsigned char *)((int (*)())TPPStreamCompiler__newNodeFromOperand)(this,*param_2);
+    pTVar5 = (unsigned char *)((int (*)())TPPStreamCompiler__newNodeFromOperand)(this,*parseOperand);
     pPVar3 = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,pTVar5);
-    *param_2 = pPVar3;
+    *parseOperand = pPVar3;
   }
   iVar10 = 1;
   if (1 < param_3) {
     do {
-      pPVar3 = *(unsigned char **)(param_2[iVar10] + 0xc);
+      pPVar3 = *(unsigned char **)(parseOperand[iVar10] + 0xc);
       if (pPVar3 != (unsigned char *)0x0) {
-        *(undefined4 *)(param_2[iVar10] + 0xc) = 0;
+        *(undefined4 *)(parseOperand[iVar10] + 0xc) = 0;
         local_9c = 0;
         uVar8 = *(undefined4 *)((int)this + 0x90);
         local_a0 = 0x40000000;
@@ -3206,16 +3206,16 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, para
         local_6c = 0;
         local_70 = uVar8;
         local_4c = pPVar3;
-        pTVar5 = (unsigned char *)((int (*)())TPPStreamCompiler__newNodeFromOperand)(this,param_2[iVar10]);
+        pTVar5 = (unsigned char *)((int (*)())TPPStreamCompiler__newNodeFromOperand)(this,parseOperand[iVar10]);
         local_50 = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,pTVar5);
         ppPVar4 = &local_4c;
-        ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,&local_50,param_2 + iVar10,ppPVar4);
+        ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,&local_50,parseOperand + iVar10,ppPVar4);
         local_a0 = local_a0 & 0xfc03ffff | 0xe40000;
         ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&local_60,this,local_50,ppPVar4,in_r7,in_r8);
         local_98 = local_60;
         local_94 = local_5c;
-        ParseOperand__RemoveDirectIndex(param_2[iVar10]);
-        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_60,this,param_2[iVar10],ppPVar4,in_r7,in_r8,uVar8,in_r10);
+        ParseOperand__RemoveDirectIndex(parseOperand[iVar10]);
+        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_60,this,parseOperand[iVar10],ppPVar4,in_r7,in_r8,uVar8,in_r10);
         local_90 = local_60;
         local_8c = local_5c;
         ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_60,this,local_4c,ppPVar4,in_r7,in_r8,uVar8,in_r10);
@@ -3234,18 +3234,18 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, para
         local_9c = (iVar7 + -1) * 0x4000000 & 0xc000000U | local_9c & 0xf3f3ffff;
         _PPStreamAddOperation(*(undefined4 *)((int)this + 0x70),&local_a0,0,0);
         iVar7 = 0;
-        ppPVar4 = param_2;
+        ppPVar4 = parseOperand;
         if (0 < param_3) {
           do {
-            if ((iVar7 != iVar10) && (param_2[iVar10] == *ppPVar4)) {
-              *(unsigned char **)(param_2[iVar10] + 0xc) = local_4c;
+            if ((iVar7 != iVar10) && (parseOperand[iVar10] == *ppPVar4)) {
+              *(unsigned char **)(parseOperand[iVar10] + 0xc) = local_4c;
               goto LAB_97bc7fe0;
             }
             iVar7 = iVar7 + 1;
             ppPVar4 = ppPVar4 + 1;
           } while (iVar7 < param_3);
         }
-        pPVar3 = param_2[iVar10];
+        pPVar3 = parseOperand[iVar10];
         if (pPVar3 != (unsigned char *)0x0) {
           __ZN12ParseOperandD1Ev(pPVar3);
           __ZdlPv(pPVar3);
@@ -3256,12 +3256,12 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, para
           __ZdlPv(pPVar3);
         }
 LAB_97bc7fe0:
-        param_2[iVar10] = local_50;
+        parseOperand[iVar10] = local_50;
       }
       iVar10 = iVar10 + 1;
     } while (iVar10 < param_3);
   }
-  ppPVar4 = param_2;
+  ppPVar4 = parseOperand;
   iVar10 = param_3;
   iVar7 = 0;
   if (0 < param_3) {
@@ -3278,17 +3278,17 @@ LAB_97bc7fe0:
     if (param_3 <= iVar10) {
       return;
     }
-    if (*(int *)(param_2[iVar10] + 8) != 0) {
-      pTVar5 = (unsigned char *)((int (*)())TPPStreamCompiler__newNodeFromOperand)(this,param_2[iVar10]);
+    if (*(int *)(parseOperand[iVar10] + 8) != 0) {
+      pTVar5 = (unsigned char *)((int (*)())TPPStreamCompiler__newNodeFromOperand)(this,parseOperand[iVar10]);
       local_48[0] = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,pTVar5);
       bVar2 = false;
-      ((int (*)())TPPStreamCompiler__assignOperands)(this,local_48,param_2 + iVar10,0);
+      ((int (*)())TPPStreamCompiler__assignOperands)(this,local_48,parseOperand + iVar10,0);
       iVar9 = 0;
-      ppPVar4 = param_2;
+      ppPVar4 = parseOperand;
       iVar7 = param_3;
       if (param_3 < 1) {
 LAB_97bc80d0:
-        pPVar3 = param_2[iVar10];
+        pPVar3 = parseOperand[iVar10];
         if (pPVar3 != (unsigned char *)0x0) {
           __ZN12ParseOperandD1Ev(pPVar3);
           __ZdlPv(pPVar3);
@@ -3296,7 +3296,7 @@ LAB_97bc80d0:
       }
       else {
         do {
-          if ((iVar9 != iVar10) && (param_2[iVar10] == *ppPVar4)) {
+          if ((iVar9 != iVar10) && (parseOperand[iVar10] == *ppPVar4)) {
             bVar2 = true;
           }
           iVar9 = iVar9 + 1;
@@ -3305,80 +3305,80 @@ LAB_97bc80d0:
         } while (iVar7 != 0);
         if (!bVar2) goto LAB_97bc80d0;
       }
-      param_2[iVar10] = local_48[0];
+      parseOperand[iVar10] = local_48[0];
     }
     iVar10 = iVar10 + 1;
   } while( true );
 }
 
 /* __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_ @ 0x97bc8114 (88 bytes) */
-int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_(this, param_2, param_3)
+int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_(this, parseOperand1, parseOperand2)
   void *this;
-  unsigned char ** param_2;
-  unsigned char ** param_3;
+  unsigned char ** parseOperand1;
+  unsigned char ** parseOperand2;
 {
   unsigned char * local_20;
   unsigned char * local_1c;
   
-  local_20 = *param_2;
-  local_1c = *param_3;
+  local_20 = *parseOperand1;
+  local_1c = *parseOperand2;
   ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi)(this,&local_20,2);
-  *param_2 = local_20;
-  *param_3 = local_1c;
+  *parseOperand1 = local_20;
+  *parseOperand2 = local_1c;
   return;
 }
 
 /* __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_ @ 0x97bc816c (108 bytes) */
-int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_(this, param_2, param_3, param_4)
+int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_(this, parseOperand1, parseOperand2, parseOperand3)
   void *this;
-  unsigned char ** param_2;
-  unsigned char ** param_3;
-  unsigned char ** param_4;
+  unsigned char ** parseOperand1;
+  unsigned char ** parseOperand2;
+  unsigned char ** parseOperand3;
 {
   unsigned char * local_30;
   unsigned char * local_2c;
   unsigned char * local_28;
   
-  local_30 = *param_2;
-  local_2c = *param_3;
-  local_28 = *param_4;
+  local_30 = *parseOperand1;
+  local_2c = *parseOperand2;
+  local_28 = *parseOperand3;
   ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi)(this,&local_30,3);
-  *param_2 = local_30;
-  *param_3 = local_2c;
-  *param_4 = local_28;
+  *parseOperand1 = local_30;
+  *parseOperand2 = local_2c;
+  *parseOperand3 = local_28;
   return;
 }
 
 /* __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_ @ 0x97bc81d8 (128 bytes) */
-int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_(this, param_2, param_3, param_4, param_5)
+int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_(this, parseOperand1, parseOperand2, parseOperand3, parseOperand4)
   void *this;
-  unsigned char ** param_2;
-  unsigned char ** param_3;
-  unsigned char ** param_4;
-  unsigned char ** param_5;
+  unsigned char ** parseOperand1;
+  unsigned char ** parseOperand2;
+  unsigned char ** parseOperand3;
+  unsigned char ** parseOperand4;
 {
   unsigned char * local_30;
   unsigned char * local_2c;
   unsigned char * local_28;
   unsigned char * local_24;
   
-  local_30 = *param_2;
-  local_2c = *param_3;
-  local_28 = *param_4;
-  local_24 = *param_5;
+  local_30 = *parseOperand1;
+  local_2c = *parseOperand2;
+  local_28 = *parseOperand3;
+  local_24 = *parseOperand4;
   ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi)(this,&local_30,4);
-  *param_2 = local_30;
-  *param_3 = local_2c;
-  *param_4 = local_28;
-  *param_5 = local_24;
+  *parseOperand1 = local_30;
+  *parseOperand2 = local_2c;
+  *parseOperand3 = local_28;
+  *parseOperand4 = local_24;
   return;
 }
 
 /* __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i @ 0x97bc8258 (188 bytes) */
-int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i(this, param_2, param_3, param_4)
+int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i(this, parseOperand1, parseOperand2, param_4)
   void *this;
-  unsigned char ** param_2;
-  unsigned char ** param_3;
+  unsigned char ** parseOperand1;
+  unsigned char ** parseOperand2;
   int param_4;
 {
   unsigned char ** ppPVar1;
@@ -3390,8 +3390,8 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i(this, p
   iVar2 = -(param_4 * 4 + 0x22U & 0xfffffff0);
   *(unsigned char **)(&STACKARG(0xffffffa0) + iVar2) = ((unsigned int)__builtin_frame_address(0));
   ppPVar4 = (unsigned char **)((int)apPStack_20 + iVar2);
-  *ppPVar4 = *param_2;
-  ppPVar3 = param_3;
+  *ppPVar4 = *parseOperand1;
+  ppPVar3 = parseOperand2;
   iVar2 = param_4;
   ppPVar1 = ppPVar4;
   if (0 < param_4) {
@@ -3403,12 +3403,12 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i(this, p
     } while (iVar2 != 0);
   }
   ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi)(this,ppPVar4,param_4 + 1);
-  *param_2 = *ppPVar4;
+  *parseOperand1 = *ppPVar4;
   if (0 < param_4) {
     do {
       ppPVar4 = ppPVar4 + 1;
-      *param_3 = *ppPVar4;
-      param_3 = param_3 + 1;
+      *parseOperand2 = *ppPVar4;
+      parseOperand2 = parseOperand2 + 1;
       param_4 = param_4 + -1;
     } while (param_4 != 0);
   }
@@ -4279,9 +4279,9 @@ int TPPStreamCompiler__parseIntermediateTree(this, param_2)
 }
 
 /* __ZN17TPPStreamCompilerC2E11EShLanguagei @ 0x97bc96b0 (4 bytes) */
-int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
+int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, param_3)
   void *this;
-  undefined4 param_2;
+  undefined4 language;
   undefined4 param_3;
 {
   int iVar1;
@@ -4290,7 +4290,7 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
   char in_RESERVE;
   byte in_cr0;
   
-  *(undefined4 *)((int)this + 8) = param_2;
+  *(undefined4 *)((int)this + 8) = language;
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
   *(int *)((int)this + 4) = (int)this + 0xb0;
   *(undefined4 *)((int)this + 0xc) = 0;
@@ -4337,9 +4337,9 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
 }
 
 /* __ZN17TPPStreamCompilerC1E11EShLanguagei @ 0x97bc96b4 (4 bytes) */
-int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, param_2, param_3)
+int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, param_3)
   void *this;
-  undefined4 param_2;
+  undefined4 language;
   undefined4 param_3;
 {
   int iVar1;
@@ -4348,7 +4348,7 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, param_2, param_3)
   char in_RESERVE;
   byte in_cr0;
   
-  *(undefined4 *)((int)this + 8) = param_2;
+  *(undefined4 *)((int)this + 8) = language;
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
   *(int *)((int)this + 4) = (int)this + 0xb0;
   *(undefined4 *)((int)this + 0xc) = 0;
