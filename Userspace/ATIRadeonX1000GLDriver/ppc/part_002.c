@@ -3623,50 +3623,119 @@ switchD_0000f394_default:
 int FUN_0000f620(program)
   uint *program;
 {
+  uint *labelsRemaining;
+  int ensureOk;
+  int emitLength7;
+  uint maxTempId;
+  uint tmpRegisterNumbers;
+  uint *tempScanEntry;
+  char *labelTarget;
+  bool moreLabels;
+  bool groupEnded;
+  uint paramWord2;
+  uint paramArraysLeft;
+  uint tempArrayEndId;
+  uint entriesRemaining;
+  uint matrixModifier;
+  uint texgenComponent;
+  uint lightColorKind;
+  uint lightFace;
+  uint paramWord;
+  uint paramRegisterId;
+  uint branchWord;
+  uint opcodeBits;
+  uint swapSource;
+  uint outputPrecision;
+  uint tempArraysLeft;
+  int floatTextCursor;
+  int entriesLeft;
+  int emitLength6;
+  int labelNumberLength;
+  int labelIndex;
+  int scanEntryIndex;
+  int paramArrayIndex;
+  int descriptorByteOffset;
+  int idTableBytes;
+  int tmpArrayLengths;
+  int labelSearchIndex;
+  int indentIndex;
+  int descriptorOffset;
+  int groupIndex;
+  int nestingDepth;
+  int branchTargetCount;
+  int groupIndexCounter;
+  int groupElementIndex;
+  int registerNumberLength;
+  int reallocOk;
+  uint loopIndex;
+  uint *labelInsertCursor;
+  uint *arrayLengthCursor;
+  uint *paramRemaining;
+  uint *firstOperand;
+  uint *swapTemp;
+  uint *branchTarget;
+  uint *paramArrayLengths;
+  uint *paramScanEntry;
+  uint *labelCount;
+  uint *outputEntry;
+  uint *paramCount;
+  uint *attribEntry;
+  uint *tempEntry;
+  uint *optionEntry;
+  uint *labelCountNext;
+  uint *paramEntry;
+  uint *nextTempEntry;
+  uint *tempArrayTable;
+  uint *labelSourceCursor;
+  int emitLength3;
+  int emitLength5;
+  int emitLength4;
+  int emitLength2;
+  int emitLength;
   uint *isShaderObject;
-  bool bVar2;
+  bool separatorNotEmpty;
   bool isAssemblyProgram;
-  bool bVar4;
-  ushort uVar5;
-  undefined1 *puVar6;
-  int iVar7;
-  uint uVar8;
-  char acVar9;
+  bool noLabels;
+  ushort entryHalfword;
+  undefined1 *lineStart;
+  int bufferOk;
+  uint entryWord;
+  char copyChar;
   char nextChar;
   char *srcCursor;
-  char *pcVar12;
-  undefined1 *puVar13;
-  char *pcVar14;
-  undefined4 uVar15;
-  uint uVar16;
-  uint *in_r6;
-  uint uVar17;
-  uint in_r7;
-  uint *in_r8;
-  uint *puVar18;
+  char *separatorSrc;
+  undefined1 *lineCursor;
+  char *indentLength;
+  undefined4 cursorAfterPrecision;
+  uint modifierWord;
+  uint *argReg6;
+  uint declWord;
+  uint argReg7;
+  uint *argReg8;
+  uint *paramArrayTable;
   char curChar;
-  int iVar19;
-  int iVar20;
-  int *piVar21;
-  uint *puVar22;
-  char *in_r10;
-  int iVar24;
-  undefined1 *puVar25;
-  uint *puVar26;
-  int iVar27;
-  uint *puVar28;
-  uint uVar29;
-  uint *puVar31;
-  uint *puVar32;
-  uint uVar33;
-  float *pfVar34;
-  uint uVar35;
-  dword *pdVar36;
-  uint uVar37;
-  ushort uVar38;
-  uint *puVar39;
-  ulonglong uVar40;
-  undefined8 uVar41;
+  int groupByteOffset;
+  int elementsSoFar;
+  int *branchTargetCursor;
+  uint *paramScanCursor;
+  char *argReg10;
+  int labelsToShift;
+  undefined1 *entryIndex;
+  uint *tmpGroupState;
+  int tmpArrayByteOffset;
+  uint *currentTempEntry;
+  uint opcode;
+  uint *instructionRecord;
+  uint *arrayDescriptor;
+  uint paramArrayEndId;
+  float *constantVector;
+  uint addressRegIndex;
+  dword *operandEntriesUsed;
+  uint loopCounter;
+  ushort paramKind;
+  uint *paramLoopCursor;
+  ulonglong printResult;
+  undefined8 floatPrintResult;
   int outBuffer;
   undefined1 *outCursor;
   uint programTarget;
@@ -3678,16 +3747,16 @@ int FUN_0000f620(program)
   uint outputCount;
   uint instructionCount;
   int outCapacity [2];
-  uint *local_78;
-  int *local_74;
-  uint *local_70;
-  int local_6c;
-  int local_68;
-  char *local_64;
-  int local_60;
+  uint *branchSources;
+  int *branchTargets;
+  uint *paramGroupState;
+  int paramRegisterNumbers;
+  int semicolonBase;
+  char *mnemonicTableBase;
+  int commaSeparatorBase;
   undefined1 **outCursorPtr;
   int *outCapacityPtr;
-  int local_54;
+  int newlineBase;
   
   outCapacity[0] = 0x800;
   outBuffer = _malloc(0x800);
@@ -3697,30 +3766,30 @@ int FUN_0000f620(program)
   programTarget = *program;
   isShaderObject = (uint *)(uint)(programTarget - 0x8b30 < 2);
   if (programTarget == 0x8804) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s___ARBfp1_0_001a4584[0] != '\0') {
       srcCursor = "!!ARBfp1.0\n";
       curChar = s___ARBfp1_0_001a4584[0];
       do {
         srcCursor = srcCursor + 1;
         nextChar = *srcCursor;
-        *(char *)(outBuffer + iVar7) = curChar;
-        iVar7 = iVar7 + 1;
+        *(char *)(outBuffer + emitLength) = curChar;
+        emitLength = emitLength + 1;
         curChar = nextChar;
       } while (nextChar != '\0');
     }
   }
   else if (programTarget < 0x8805) {
     if (programTarget == 0x8620) {
-      iVar7 = 0;
+      emitLength = 0;
       if (s___ARBvp1_0_001a4564[0] != '\0') {
         srcCursor = "!!ARBvp1.0\n";
         curChar = s___ARBvp1_0_001a4564[0];
         do {
           srcCursor = srcCursor + 1;
           nextChar = *srcCursor;
-          *(char *)(outBuffer + iVar7) = curChar;
-          iVar7 = iVar7 + 1;
+          *(char *)(outBuffer + emitLength) = curChar;
+          emitLength = emitLength + 1;
           curChar = nextChar;
         } while (nextChar != '\0');
       }
@@ -3728,268 +3797,268 @@ int FUN_0000f620(program)
     else {
 LAB_0000f6a4:
       if (s_Unkown_Target__error__001a45a8[0] == '\0') {
-        iVar7 = 0;
+        emitLength = 0;
       }
       else {
         srcCursor = "Unkown Target (error)\n";
-        iVar7 = 0;
+        emitLength = 0;
         curChar = s_Unkown_Target__error__001a45a8[0];
         do {
           srcCursor = srcCursor + 1;
           nextChar = *srcCursor;
-          *(char *)(outBuffer + iVar7) = curChar;
-          iVar7 = iVar7 + 1;
+          *(char *)(outBuffer + emitLength) = curChar;
+          emitLength = emitLength + 1;
           curChar = nextChar;
         } while (nextChar != '\0');
       }
     }
   }
   else if (programTarget == 0x8b30) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s___ARBfragmentshader_001a4590[0] != '\0') {
       srcCursor = "!!ARBfragmentshader\n";
       curChar = s___ARBfragmentshader_001a4590[0];
       do {
         srcCursor = srcCursor + 1;
         nextChar = *srcCursor;
-        *(char *)(outBuffer + iVar7) = curChar;
-        iVar7 = iVar7 + 1;
+        *(char *)(outBuffer + emitLength) = curChar;
+        emitLength = emitLength + 1;
         curChar = nextChar;
       } while (nextChar != '\0');
     }
   }
   else {
     if (programTarget != 0x8b31) goto LAB_0000f6a4;
-    iVar7 = 0;
+    emitLength = 0;
     if (s___ARBvertexshader_001a4570[0] != '\0') {
       srcCursor = "!!ARBvertexshader\n";
       curChar = s___ARBvertexshader_001a4570[0];
       do {
         srcCursor = srcCursor + 1;
         nextChar = *srcCursor;
-        *(char *)(outBuffer + iVar7) = curChar;
-        iVar7 = iVar7 + 1;
+        *(char *)(outBuffer + emitLength) = curChar;
+        emitLength = emitLength + 1;
         curChar = nextChar;
       } while (nextChar != '\0');
     }
   }
-  outCursor = (undefined1 *)(iVar7 + outBuffer);
+  outCursor = (undefined1 *)(emitLength + outBuffer);
   isAssemblyProgram = isShaderObject == (uint *)0x0;
   if (!isAssemblyProgram) {
-    local_54 = 0x19f634;
-    iVar7 = 0;
+    newlineBase = 0x19f634;
+    emitLength = 0;
     if (s__001a45c0[0] != '\0') {
       srcCursor = "\n";
-      iVar7 = 0;
+      emitLength = 0;
       curChar = s__001a45c0[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
+    outCursor = outCursor + emitLength;
   }
   optionCount = program[0x12];
-  puVar31 = program + program[0x13] * 2;
+  optionEntry = program + program[0x13] * 2;
   if (0 < (int)optionCount) {
     outCursorPtr = &outCursor;
     outCapacityPtr = outCapacity;
-    uVar35 = 0;
+    loopIndex = 0;
     do {
-      iVar7 = 0;
+      emitLength = 0;
       if (s_OPTION_001a45c4[0] != '\0') {
         srcCursor = "OPTION ";
-        iVar7 = 0;
+        emitLength = 0;
         curChar = s_OPTION_001a45c4[0];
         do {
           srcCursor = srcCursor + 1;
-          outCursor[iVar7] = curChar;
-          iVar7 = iVar7 + 1;
+          outCursor[emitLength] = curChar;
+          emitLength = emitLength + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-      outCursor = outCursor + iVar7;
-      switch((char)*puVar31) {
+      outCursor = outCursor + emitLength;
+      switch((char)*optionEntry) {
       case '\0':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_position_invariant_001a45cc[0] != '\0') {
           srcCursor = "ARB_position_invariant";
           curChar = s_ARB_position_invariant_001a45cc[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\x01':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_fog_exp_001a45e4[0] != '\0') {
           srcCursor = "ARB_fog_exp";
           curChar = s_ARB_fog_exp_001a45e4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\x02':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_fog_exp2_001a45f0[0] != '\0') {
           srcCursor = "ARB_fog_exp2";
           curChar = s_ARB_fog_exp2_001a45f0[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\x03':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_fog_linear_001a4600[0] != '\0') {
           srcCursor = "ARB_fog_linear";
           curChar = s_ARB_fog_linear_001a4600[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\x04':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_precision_hint_fastest_001a4610[0] != '\0') {
           srcCursor = "ARB_precision_hint_fastest";
           curChar = s_ARB_precision_hint_fastest_001a4610[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\x05':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_precision_hint_nicest_001a462c[0] != '\0') {
           srcCursor = "ARB_precision_hint_nicest";
           curChar = s_ARB_precision_hint_nicest_001a462c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\x06':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_APPLE_no_runtime_compile_001a4648[0] != '\0') {
           srcCursor = "APPLE_no_runtime_compile";
           curChar = s_APPLE_no_runtime_compile_001a4648[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\a':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_APPLE_no_altivec_001a4664[0] != '\0') {
           srcCursor = "APPLE_no_altivec";
           curChar = s_APPLE_no_altivec_001a4664[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\b':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_NV_fragment_program_001a4678[0] != '\0') {
           srcCursor = "NV_fragment_program";
           curChar = s_NV_fragment_program_001a4678[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\t':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_NV_fragment_program2_001a468c[0] != '\0') {
           srcCursor = "NV_fragment_program2";
           curChar = s_NV_fragment_program2_001a468c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\n':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_NV_vertex_program2_001a46c0[0] != '\0') {
           srcCursor = "NV_vertex_program2";
           curChar = s_NV_vertex_program2_001a46c0[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\v':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_NV_vertex_program3_001a46d4[0] != '\0') {
           srcCursor = "NV_vertex_program3";
           curChar = s_NV_vertex_program3_001a46d4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\f':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_draw_buffers_001a46e8[0] != '\0') {
           srcCursor = "ARB_draw_buffers";
           curChar = s_ARB_draw_buffers_001a46e8[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case '\r':
-        iVar7 = 0;
+        emitLength = 0;
         if (s_ARB_fragment_program_shadow_001a46a4[0] != '\0') {
           srcCursor = "ARB_fragment_program_shadow";
           curChar = s_ARB_fragment_program_shadow_001a46a4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
@@ -3997,296 +4066,296 @@ LAB_0000f6a4:
       default:
         goto switchD_0000f958_default;
       }
-      outCursor = outCursor + iVar7;
+      outCursor = outCursor + emitLength;
 switchD_0000f958_default:
-      iVar7 = 0;
+      emitLength = 0;
       if (s___001a46fc[0] != '\0') {
         srcCursor = ";\n";
-        iVar7 = 0;
+        emitLength = 0;
         curChar = s___001a46fc[0];
         do {
           srcCursor = srcCursor + 1;
-          outCursor[iVar7] = curChar;
-          iVar7 = iVar7 + 1;
+          outCursor[emitLength] = curChar;
+          emitLength = emitLength + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-      outCursor = outCursor + iVar7;
-      iVar7 = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
-      if (iVar7 == 0) goto LAB_00016630;
-      uVar35 = uVar35 + 1;
-      puVar31 = puVar31 + 2;
-    } while (optionCount != uVar35);
+      outCursor = outCursor + emitLength;
+      bufferOk = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
+      if (bufferOk == 0) goto LAB_00016630;
+      loopIndex = loopIndex + 1;
+      optionEntry = optionEntry + 2;
+    } while (optionCount != loopIndex);
   }
   if ((optionCount != 0) && (!isAssemblyProgram)) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s__001a45c0[0] != '\0') {
       srcCursor = "\n";
-      iVar7 = 0;
+      emitLength = 0;
       curChar = s__001a45c0[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
+    outCursor = outCursor + emitLength;
   }
   addressRegCount = program[6];
   if (addressRegCount != 0) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s_ADDRESS_adr0_001a4700[0] != '\0') {
       srcCursor = "ADDRESS adr0";
       curChar = s_ADDRESS_adr0_001a4700[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
+    outCursor = outCursor + emitLength;
     if (1 < (int)addressRegCount) {
-      uVar35 = 1;
+      addressRegIndex = 1;
       do {
-        iVar7 = 0;
+        emitLength = 0;
         if (s___adr_001a4710[0] != '\0') {
           srcCursor = ", adr";
-          iVar7 = 0;
+          emitLength = 0;
           curChar = s___adr_001a4710[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
-        uVar37 = uVar35 + 1;
-        iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,uVar35);
-        outCursor = outCursor + iVar7;
-        uVar35 = uVar37;
-      } while (addressRegCount != uVar37);
+        outCursor = outCursor + emitLength;
+        loopCounter = addressRegIndex + 1;
+        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,addressRegIndex);
+        outCursor = outCursor + emitLength;
+        addressRegIndex = loopCounter;
+      } while (addressRegCount != loopCounter);
     }
-    iVar7 = 0;
+    emitLength = 0;
     if (s___001a46fc[0] != '\0') {
       srcCursor = ";\n";
       curChar = s___001a46fc[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
-    iVar7 = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
-    if (iVar7 == 0) goto LAB_00016630;
+    outCursor = outCursor + emitLength;
+    bufferOk = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+    if (bufferOk == 0) goto LAB_00016630;
     if (!isAssemblyProgram) {
-      iVar7 = 0;
+      emitLength = 0;
       if (s__001a45c0[0] != '\0') {
         srcCursor = "\n";
-        iVar7 = 0;
+        emitLength = 0;
         curChar = s__001a45c0[0];
         do {
           srcCursor = srcCursor + 1;
-          outCursor[iVar7] = curChar;
-          iVar7 = iVar7 + 1;
+          outCursor[emitLength] = curChar;
+          emitLength = emitLength + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-      outCursor = outCursor + iVar7;
+      outCursor = outCursor + emitLength;
     }
   }
   tempCount = program[4];
-  puVar31 = program + program[5] * 2;
+  tempEntry = program + program[5] * 2;
   if (isAssemblyProgram) {
     if (0 < (int)tempCount) {
-      uVar35 = 0;
-      puVar26 = (uint *)0x0;
-      iVar7 = 0;
+      tmpRegisterNumbers = 0;
+      tmpGroupState = (uint *)0x0;
+      tmpArrayLengths = 0;
 LAB_0001025c:
       outCapacityPtr = outCapacity;
       outCursorPtr = &outCursor;
-      iVar27 = 0;
-      uVar37 = 0;
-      iVar24 = -1;
+      groupIndex = 0;
+      loopCounter = 0;
+      groupElementIndex = -1;
       do {
-        in_r6 = puVar31 + uVar37 * 2;
-        uVar8 = puVar31[uVar37 * 2] >> 0x1d;
-        if (uVar8 == 1) {
-          iVar19 = 0;
+        argReg6 = tempEntry + loopCounter * 2;
+        entryWord = tempEntry[loopCounter * 2] >> 0x1d;
+        if (entryWord == 1) {
+          emitLength2 = 0;
           if (s_LONG_TEMP_001a4720[0] != '\0') {
             srcCursor = "LONG TEMP ";
             curChar = s_LONG_TEMP_001a4720[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
 LAB_00010394:
-          outCursor = outCursor + iVar19;
+          outCursor = outCursor + emitLength2;
         }
         else {
-          if (uVar8 == 2) {
-            iVar19 = 0;
+          if (entryWord == 2) {
+            emitLength2 = 0;
             if (s_SHORT_TEMP_001a472c[0] != '\0') {
               srcCursor = "SHORT TEMP ";
               curChar = s_SHORT_TEMP_001a472c[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar19] = curChar;
-                iVar19 = iVar19 + 1;
+                outCursor[emitLength2] = curChar;
+                emitLength2 = emitLength2 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             goto LAB_00010394;
           }
-          if (uVar8 == 0) {
-            iVar19 = 0;
+          if (entryWord == 0) {
+            emitLength2 = 0;
             if (s_TEMP_001a4718[0] != '\0') {
               srcCursor = "TEMP ";
               curChar = s_TEMP_001a4718[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar19] = curChar;
-                iVar19 = iVar19 + 1;
+                outCursor[emitLength2] = curChar;
+                emitLength2 = emitLength2 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             goto LAB_00010394;
           }
         }
-        uVar8 = *in_r6;
-        puVar28 = in_r6;
+        entryWord = *argReg6;
+        currentTempEntry = argReg6;
         do {
           if (isAssemblyProgram) {
-            iVar19 = 0;
+            emitLength2 = 0;
             if (s_tmp_001a4460[0] != '\0') {
               srcCursor = "tmp";
               curChar = s_tmp_001a4460[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar19] = curChar;
-                iVar19 = iVar19 + 1;
+                outCursor[emitLength2] = curChar;
+                emitLength2 = emitLength2 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            outCursor = outCursor + iVar19;
-            iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)puVar28 + 6));
-            outCursor = outCursor + iVar19;
+            outCursor = outCursor + emitLength2;
+            emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)currentTempEntry + 6));
+            outCursor = outCursor + emitLength2;
           }
-          else if (puVar26[*(ushort *)((int)puVar28 + 6)] == 0xffffffff) {
-            iVar19 = 0;
+          else if (tmpGroupState[*(ushort *)((int)currentTempEntry + 6)] == 0xffffffff) {
+            emitLength2 = 0;
             if (s_tmp_001a4460[0] != '\0') {
               srcCursor = "tmp";
               curChar = s_tmp_001a4460[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar19] = curChar;
-                iVar19 = iVar19 + 1;
+                outCursor[emitLength2] = curChar;
+                emitLength2 = emitLength2 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            outCursor = outCursor + iVar19;
-            iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)
-                                            (uVar35 + (uint)*(ushort *)((int)puVar28 + 6) * 4));
-            outCursor = outCursor + iVar19;
-            uVar17 = *puVar28;
-            in_r7 = uVar17 >> 0x1d;
-            in_r6 = (uint *)(uVar17 >> 0x1a & 7);
-            outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,uVar17 >> 0x18 & 3,0,in_r6,in_r7);
+            outCursor = outCursor + emitLength2;
+            emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)
+                                            (tmpRegisterNumbers + (uint)*(ushort *)((int)currentTempEntry + 6) * 4));
+            outCursor = outCursor + emitLength2;
+            declWord = *currentTempEntry;
+            argReg7 = declWord >> 0x1d;
+            argReg6 = (uint *)(declWord >> 0x1a & 7);
+            outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
           }
           else {
-            if (puVar26[*(ushort *)((int)puVar28 + 6)] == 0) {
-              iVar24 = 0;
+            if (tmpGroupState[*(ushort *)((int)currentTempEntry + 6)] == 0) {
+              emitLength5 = 0;
               if (s_tmp_001a4460[0] != '\0') {
                 srcCursor = "tmp";
                 curChar = s_tmp_001a4460[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  outCursor[iVar24] = curChar;
-                  iVar24 = iVar24 + 1;
+                  outCursor[emitLength5] = curChar;
+                  emitLength5 = emitLength5 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-              outCursor = outCursor + iVar24;
-              iVar24 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)
-                                              (uVar35 + (uint)*(ushort *)((int)puVar28 + 6) * 4));
-              iVar19 = 0;
+              outCursor = outCursor + emitLength5;
+              emitLength6 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)
+                                              (tmpRegisterNumbers + (uint)*(ushort *)((int)currentTempEntry + 6) * 4));
+              emitLength2 = 0;
               if (s___001a4464[0] != '\0') {
                 srcCursor = "[";
                 curChar = s___001a4464[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  outCursor[iVar19 + iVar24] = curChar;
-                  iVar19 = iVar19 + 1;
+                  outCursor[emitLength2 + emitLength6] = curChar;
+                  emitLength2 = emitLength2 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-              outCursor = outCursor + iVar19 + iVar24;
-              iVar19 = iVar27 * 4;
-              iVar24 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(iVar7 + iVar19));
-              iVar20 = 0;
+              outCursor = outCursor + emitLength2 + emitLength6;
+              groupByteOffset = groupIndex * 4;
+              emitLength6 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(tmpArrayLengths + groupByteOffset));
+              emitLength4 = 0;
               if (s___001a4468[0] != '\0') {
                 srcCursor = "]";
                 curChar = s___001a4468[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  outCursor[iVar20 + iVar24] = curChar;
-                  iVar20 = iVar20 + 1;
+                  outCursor[emitLength4 + emitLength6] = curChar;
+                  emitLength4 = emitLength4 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-              outCursor = outCursor + iVar20 + iVar24;
-              uVar17 = *puVar28;
-              in_r7 = uVar17 >> 0x1d;
-              in_r6 = (uint *)(uVar17 >> 0x1a & 7);
-              outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,uVar17 >> 0x18 & 3,0,in_r6,in_r7);
-              iVar24 = 0;
-              iVar20 = 1;
+              outCursor = outCursor + emitLength4 + emitLength6;
+              declWord = *currentTempEntry;
+              argReg7 = declWord >> 0x1d;
+              argReg6 = (uint *)(declWord >> 0x1a & 7);
+              outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
+              groupElementIndex = 0;
+              elementsSoFar = 1;
             }
             else {
-              iVar19 = iVar27 << 2;
-              iVar20 = iVar24 + 2;
-              iVar24 = iVar24 + 1;
+              groupByteOffset = groupIndex << 2;
+              elementsSoFar = groupElementIndex + 2;
+              groupElementIndex = groupElementIndex + 1;
             }
-            if (iVar20 == *(int *)(iVar7 + iVar19)) {
-              iVar27 = iVar27 + 1;
-              iVar24 = -1;
+            if (elementsSoFar == *(int *)(tmpArrayLengths + groupByteOffset)) {
+              groupIndex = groupIndex + 1;
+              groupElementIndex = -1;
             }
           }
-          uVar37 = uVar37 + 1;
-          if (tempCount == uVar37) {
-            iVar19 = 0;
+          loopCounter = loopCounter + 1;
+          if (tempCount == loopCounter) {
+            emitLength2 = 0;
             if (s___001a46fc[0] != '\0') {
               srcCursor = ";\n";
               curChar = s___001a46fc[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar19] = curChar;
-                iVar19 = iVar19 + 1;
+                outCursor[emitLength2] = curChar;
+                emitLength2 = emitLength2 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
 LAB_00010780:
-            outCursor = outCursor + iVar19;
-            bVar2 = false;
+            outCursor = outCursor + emitLength2;
+            groupEnded = false;
           }
-          else if (puVar28[2] >> 0x1d == uVar8 >> 0x1d) {
-            bVar2 = false;
-            if (iVar24 == -1) {
-              iVar19 = 0;
+          else if (currentTempEntry[2] >> 0x1d == entryWord >> 0x1d) {
+            groupEnded = false;
+            if (groupElementIndex == -1) {
+              emitLength2 = 0;
               if (s___001a44f4[0] != '\0') {
                 srcCursor = ", ";
                 curChar = s___001a44f4[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  outCursor[iVar19] = curChar;
-                  iVar19 = iVar19 + 1;
+                  outCursor[emitLength2] = curChar;
+                  emitLength2 = emitLength2 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
@@ -4294,210 +4363,210 @@ LAB_00010780:
             }
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
             if (s___001a46fc[0] != '\0') {
               srcCursor = ";\n";
               curChar = s___001a46fc[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar19] = curChar;
-                iVar19 = iVar19 + 1;
+                outCursor[emitLength2] = curChar;
+                emitLength2 = emitLength2 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            outCursor = outCursor + iVar19;
-            bVar2 = true;
+            outCursor = outCursor + emitLength2;
+            groupEnded = true;
           }
-          iVar19 = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
-          if (iVar19 == 0) goto LAB_00014070;
-          if ((int)tempCount <= (int)uVar37) goto LAB_000107a8;
-          puVar28 = puVar28 + 2;
-        } while (!bVar2);
+          reallocOk = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
+          if (reallocOk == 0) goto LAB_00014070;
+          if ((int)tempCount <= (int)loopCounter) goto LAB_000107a8;
+          currentTempEntry = currentTempEntry + 2;
+        } while (!groupEnded);
       } while( true );
     }
-    iVar24 = -1;
-    puVar26 = (uint *)0x0;
-    uVar35 = 0;
+    groupElementIndex = -1;
+    tmpGroupState = (uint *)0x0;
+    tmpRegisterNumbers = 0;
   }
   else {
     if (0 < (int)tempCount) {
-      uVar35 = 0xffffffff;
-      puVar26 = puVar31;
-      uVar37 = tempCount;
+      maxTempId = 0xffffffff;
+      tempScanEntry = tempEntry;
+      entriesRemaining = tempCount;
       do {
-        if ((int)uVar35 < (int)(uint)*(ushort *)((int)puVar26 + 6)) {
-          uVar35 = (uint)*(ushort *)((int)puVar26 + 6);
+        if ((int)maxTempId < (int)(uint)*(ushort *)((int)tempScanEntry + 6)) {
+          maxTempId = (uint)*(ushort *)((int)tempScanEntry + 6);
         }
-        puVar26 = puVar26 + 2;
-        uVar37 = uVar37 - 1;
-      } while (uVar37 != 0);
-      if (uVar35 == 0xffffffff) goto LAB_000100c0;
-      iVar7 = uVar35 * 4 + 4;
-      uVar35 = _malloc(iVar7);
-      puVar26 = (uint *)_malloc(iVar7);
-      if (uVar35 == 0) {
-        if (puVar26 != (uint *)0x0) {
+        tempScanEntry = tempScanEntry + 2;
+        entriesRemaining = entriesRemaining - 1;
+      } while (entriesRemaining != 0);
+      if (maxTempId == 0xffffffff) goto LAB_000100c0;
+      idTableBytes = maxTempId * 4 + 4;
+      tmpRegisterNumbers = _malloc(idTableBytes);
+      tmpGroupState = (uint *)_malloc(idTableBytes);
+      if (tmpRegisterNumbers == 0) {
+        if (tmpGroupState != (uint *)0x0) {
 LAB_000163f0:
-          _free(puVar26);
+          _free(tmpGroupState);
         }
         goto LAB_00016630;
       }
-      if (puVar26 == (uint *)0x0) {
-        _free(uVar35);
+      if (tmpGroupState == (uint *)0x0) {
+        _free(tmpRegisterNumbers);
         goto LAB_00016630;
       }
     }
     else {
 LAB_000100c0:
-      uVar35 = 0;
-      puVar26 = (uint *)0x0;
+      tmpRegisterNumbers = 0;
+      tmpGroupState = (uint *)0x0;
     }
-    iVar7 = 0;
+    tmpArrayLengths = 0;
     if (program[0x10] != 0) {
-      iVar7 = _malloc(program[0x10] << 2);
+      tmpArrayLengths = _malloc(program[0x10] << 2);
     }
     if (0 < (int)tempCount) {
-      iVar24 = 0;
-      in_r8 = (uint *)0x0;
-      in_r7 = 0xffffffff;
-      uVar37 = 0xffffffff;
+      groupIndexCounter = 0;
+      argReg8 = (uint *)0x0;
+      argReg7 = 0xffffffff;
+      tempArrayEndId = 0xffffffff;
       do {
-        in_r10 = (char *)(puVar31 + (int)in_r8 * 2);
-        *(uint *)((uint)*(ushort *)((int)in_r10 + 6) * 4 + uVar35) =
-             (uint)*(ushort *)((int)in_r10 + 6);
-        uVar17 = program[0x10];
-        uVar8 = (uint)*(ushort *)((int)in_r10 + 6);
-        puVar28 = program + program[0x11] * 2;
-        if ((uVar17 == 0) || ((int)uVar17 < 1)) {
+        argReg10 = (char *)(tempEntry + (int)argReg8 * 2);
+        *(uint *)((uint)*(ushort *)((int)argReg10 + 6) * 4 + tmpRegisterNumbers) =
+             (uint)*(ushort *)((int)argReg10 + 6);
+        tempArraysLeft = program[0x10];
+        entryWord = (uint)*(ushort *)((int)argReg10 + 6);
+        tempArrayTable = program + program[0x11] * 2;
+        if ((tempArraysLeft == 0) || ((int)tempArraysLeft < 1)) {
 LAB_00010194:
-          puVar26[uVar8] = in_r7;
-          uVar8 = 0xffffffff;
+          tmpGroupState[entryWord] = argReg7;
+          entryWord = 0xffffffff;
         }
         else {
-          puVar32 = puVar28;
-          if (uVar8 != (ushort)*puVar28) {
-            iVar27 = 8;
+          arrayDescriptor = tempArrayTable;
+          if (entryWord != (ushort)*tempArrayTable) {
+            descriptorOffset = 8;
             do {
-              uVar17 = uVar17 - 1;
-              if (uVar17 == 0) goto LAB_00010194;
-              puVar32 = (uint *)((int)puVar28 + iVar27);
-              iVar27 = iVar27 + 8;
-            } while (uVar8 != (ushort)*puVar32);
+              tempArraysLeft = tempArraysLeft - 1;
+              if (tempArraysLeft == 0) goto LAB_00010194;
+              arrayDescriptor = (uint *)((int)tempArrayTable + descriptorOffset);
+              descriptorOffset = descriptorOffset + 8;
+            } while (entryWord != (ushort)*arrayDescriptor);
           }
-          uVar37 = (uint)*(ushort *)((int)puVar32 + 6);
-          in_r7 = 1;
-          puVar26[uVar8] = 0;
+          tempArrayEndId = (uint)*(ushort *)((int)arrayDescriptor + 6);
+          argReg7 = 1;
+          tmpGroupState[entryWord] = 0;
         }
-        if (*(ushort *)((int)in_r10 + 6) == uVar37) {
-          iVar27 = iVar24 * 4;
-          uVar8 = 0xffffffff;
-          iVar24 = iVar24 + 1;
-          uVar37 = 0xffffffff;
-          *(uint *)(iVar7 + iVar27) = in_r7;
-          in_r7 = 0xffffffff;
+        if (*(ushort *)((int)argReg10 + 6) == tempArrayEndId) {
+          tmpArrayByteOffset = groupIndexCounter * 4;
+          entryWord = 0xffffffff;
+          groupIndexCounter = groupIndexCounter + 1;
+          tempArrayEndId = 0xffffffff;
+          *(uint *)(tmpArrayLengths + tmpArrayByteOffset) = argReg7;
+          argReg7 = 0xffffffff;
         }
-        iVar27 = tempCount - (int)in_r8;
-        puVar28 = puVar31 + (int)in_r8 * 2 + 2;
-        if (((int)tempCount < (int)in_r8 + 1) || (tempCount == 0x80000000)) {
-          iVar27 = 1;
+        entriesLeft = tempCount - (int)argReg8;
+        nextTempEntry = tempEntry + (int)argReg8 * 2 + 2;
+        if (((int)tempCount < (int)argReg8 + 1) || (tempCount == 0x80000000)) {
+          entriesLeft = 1;
         }
         while( true ) {
-          in_r8 = (uint *)((int)in_r8 + 1);
-          iVar27 = iVar27 + -1;
-          if (iVar27 == 0) goto LAB_0001025c;
-          if (uVar8 == 0xffffffff) break;
-          if ((int)(uint)*(ushort *)((int)puVar28 + 6) <= (int)uVar37) {
-            *(uint *)((uint)*(ushort *)((int)puVar28 + 6) * 4 + uVar35) = uVar8;
-            puVar26[*(ushort *)((int)puVar28 + 6)] = in_r7;
-            in_r7 = in_r7 + 1;
-            if (*(ushort *)((int)puVar28 + 6) == uVar37) {
-              iVar19 = iVar24 * 4;
-              uVar8 = 0xffffffff;
-              iVar24 = iVar24 + 1;
-              uVar37 = 0xffffffff;
-              *(uint *)(iVar7 + iVar19) = in_r7;
-              in_r7 = 0xffffffff;
+          argReg8 = (uint *)((int)argReg8 + 1);
+          entriesLeft = entriesLeft + -1;
+          if (entriesLeft == 0) goto LAB_0001025c;
+          if (entryWord == 0xffffffff) break;
+          if ((int)(uint)*(ushort *)((int)nextTempEntry + 6) <= (int)tempArrayEndId) {
+            *(uint *)((uint)*(ushort *)((int)nextTempEntry + 6) * 4 + tmpRegisterNumbers) = entryWord;
+            tmpGroupState[*(ushort *)((int)nextTempEntry + 6)] = argReg7;
+            argReg7 = argReg7 + 1;
+            if (*(ushort *)((int)nextTempEntry + 6) == tempArrayEndId) {
+              groupByteOffset = groupIndexCounter * 4;
+              entryWord = 0xffffffff;
+              groupIndexCounter = groupIndexCounter + 1;
+              tempArrayEndId = 0xffffffff;
+              *(uint *)(tmpArrayLengths + groupByteOffset) = argReg7;
+              argReg7 = 0xffffffff;
             }
           }
-          puVar28 = puVar28 + 2;
+          nextTempEntry = nextTempEntry + 2;
         }
       } while( true );
     }
-    iVar24 = -1;
+    groupElementIndex = -1;
 LAB_000107a8:
-    if (iVar7 != 0) {
-      _free(iVar7);
+    if (tmpArrayLengths != 0) {
+      _free(tmpArrayLengths);
     }
   }
   if ((tempCount != 0) && (!isAssemblyProgram)) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s__001a45c0[0] != '\0') {
       srcCursor = "\n";
-      iVar7 = 0;
+      emitLength = 0;
       curChar = s__001a45c0[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
+    outCursor = outCursor + emitLength;
   }
   attribCount = program[8];
-  puVar31 = program + program[9] * 2;
+  attribEntry = program + program[9] * 2;
   if (0 < (int)attribCount) {
-    uVar37 = 0;
+    loopCounter = 0;
     do {
-      uVar5 = *(ushort *)puVar31;
-      if ((uVar5 & 0xf) != 0) {
-        iVar7 = 0;
+      entryHalfword = *(ushort *)attribEntry;
+      if ((entryHalfword & 0xf) != 0) {
+        emitLength = 0;
         if (s_ATTRIB_att_001a4738[0] != '\0') {
           srcCursor = "ATTRIB att";
           curChar = s_ATTRIB_att_001a4738[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
-        iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)puVar31 + 6));
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
+        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)attribEntry + 6));
+        outCursor = outCursor + emitLength;
         if (!isAssemblyProgram) {
-          uVar8 = *puVar31;
-          in_r7 = uVar8 >> 0x1d;
-          in_r6 = (uint *)(uVar8 >> 0x1a & 7);
-          outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,uVar8 >> 0x18 & 3,0,in_r6,in_r7);
+          entryWord = *attribEntry;
+          argReg7 = entryWord >> 0x1d;
+          argReg6 = (uint *)(entryWord >> 0x1a & 7);
+          outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,entryWord >> 0x18 & 3,0,argReg6,argReg7);
         }
         if (programTarget == 0x8804) {
 LAB_00010974:
-          iVar7 = 0;
+          emitLength = 0;
           if (s___fragment__001a4750[0] != '\0') {
             srcCursor = " = fragment.";
             curChar = s___fragment__001a4750[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
 LAB_000109bc:
-          outCursor = outCursor + iVar7;
+          outCursor = outCursor + emitLength;
         }
         else if (programTarget < 0x8805) {
           if (programTarget == 0x8620) {
 LAB_0001092c:
-            iVar7 = 0;
+            emitLength = 0;
             if (s___vertex__001a4744[0] != '\0') {
               srcCursor = " = vertex.";
               curChar = s___vertex__001a4744[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
@@ -4508,291 +4577,291 @@ LAB_0001092c:
           if (programTarget == 0x8b30) goto LAB_00010974;
           if (programTarget == 0x8b31) goto LAB_0001092c;
         }
-        switch(uVar5 & 0xf) {
+        switch(entryHalfword & 0xf) {
         default:
           goto switchD_000109e4_caseD_0;
         case 1:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_position_001a4760[0] != '\0') {
             srcCursor = "position";
             curChar = s_position_001a4760[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 2:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_color_primary_001a476c[0] != '\0') {
             srcCursor = "color.primary";
             curChar = s_color_primary_001a476c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 3:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_color_secondary_001a477c[0] != '\0') {
             srcCursor = "color.secondary";
             curChar = s_color_secondary_001a477c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 4:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_normal_001a478c[0] != '\0') {
             srcCursor = "normal";
             curChar = s_normal_001a478c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 5:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_fogcoord_001a4794[0] != '\0') {
             srcCursor = "fogcoord";
             curChar = s_fogcoord_001a4794[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 6:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_weight__001a47b8[0] != '\0') {
             srcCursor = "weight[";
             curChar = s_weight__001a47b8[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar7;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar31 & 0x1f);
-          iVar7 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength = 0;
+          outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
             srcCursor = "]";
             curChar = s___001a4468[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 7:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_texcoord__001a47ac[0] != '\0') {
             srcCursor = "texcoord[";
             curChar = s_texcoord__001a47ac[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar7;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar31 & 0x1f);
-          iVar7 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength = 0;
+          outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
             srcCursor = "]";
             curChar = s___001a4468[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 8:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_matrixindex__001a47c0[0] != '\0') {
             srcCursor = "matrixindex[";
             curChar = s_matrixindex__001a47c0[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar7;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar31 & 0x1f);
-          iVar7 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength = 0;
+          outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
             srcCursor = "]";
             curChar = s___001a4468[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 9:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_attrib__001a47d0[0] != '\0') {
             srcCursor = "attrib[";
             curChar = s_attrib__001a47d0[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar7;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar31 & 0x1f);
-          iVar7 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength = 0;
+          outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
             srcCursor = "]";
             curChar = s___001a4468[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 10:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_material__001a47d8[0] != '\0') {
             srcCursor = "material.";
-            iVar7 = 0;
+            emitLength = 0;
             curChar = s_material__001a47d8[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          uVar8 = *puVar31;
-          outCursor = outCursor + iVar7;
-          if ((uVar8 & 1) == 0) {
-            iVar7 = 0;
+          entryWord = *attribEntry;
+          outCursor = outCursor + emitLength;
+          if ((entryWord & 1) == 0) {
+            emitLength = 0;
             if (s_front__001a47e4[0] != '\0') {
               srcCursor = "front.";
               curChar = s_front__001a47e4[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
 LAB_00010f94:
-              uVar8 = *puVar31;
+              entryWord = *attribEntry;
             }
 LAB_00010f9c:
-            outCursor = outCursor + iVar7;
+            outCursor = outCursor + emitLength;
           }
-          else if ((uVar8 & 1) == 1) {
-            iVar7 = 0;
+          else if ((entryWord & 1) == 1) {
+            emitLength = 0;
             if (s_back__001a47ec[0] != '\0') {
               srcCursor = "back.";
               curChar = s_back__001a47ec[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
               goto LAB_00010f94;
             }
             goto LAB_00010f9c;
           }
-          switch(uVar8 >> 0xc & 0xf) {
+          switch(entryWord >> 0xc & 0xf) {
           case 0:
-            iVar7 = 0;
+            emitLength = 0;
             if (s_ambient_001a47f4[0] != '\0') {
               srcCursor = "ambient";
               curChar = s_ambient_001a47f4[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             break;
           case 1:
-            iVar7 = 0;
+            emitLength = 0;
             if (s_diffuse_001a47fc[0] != '\0') {
               srcCursor = "diffuse";
               curChar = s_diffuse_001a47fc[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             break;
           case 2:
-            iVar7 = 0;
+            emitLength = 0;
             if (s_specular_001a4804[0] != '\0') {
               srcCursor = "specular";
               curChar = s_specular_001a4804[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             break;
           case 3:
-            iVar7 = 0;
+            emitLength = 0;
             if (s_emission_001a4810[0] != '\0') {
               srcCursor = "emission";
               curChar = s_emission_001a4810[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             break;
           case 4:
-            iVar7 = 0;
+            emitLength = 0;
             if (s_shininess_001a481c[0] != '\0') {
               srcCursor = "shininess";
               curChar = s_shininess_001a481c[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar7] = curChar;
-                iVar7 = iVar7 + 1;
+                outCursor[emitLength] = curChar;
+                emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
@@ -4802,473 +4871,473 @@ LAB_00010f9c:
           }
           break;
         case 0xb:
-          iVar7 = 0;
+          emitLength = 0;
           if (s_frontfacing_001a47a0[0] != '\0') {
             srcCursor = "frontfacing";
             curChar = s_frontfacing_001a47a0[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
 switchD_000109e4_caseD_0:
-        iVar7 = 0;
+        emitLength = 0;
         if (s___001a46fc[0] != '\0') {
           srcCursor = ";\n";
           curChar = s___001a46fc[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
-        iVar7 = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
-        if (iVar7 == 0) goto LAB_00014070;
+        outCursor = outCursor + emitLength;
+        bufferOk = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+        if (bufferOk == 0) goto LAB_00014070;
       }
-      uVar37 = uVar37 + 1;
-      puVar31 = puVar31 + 2;
-    } while (attribCount != uVar37);
+      loopCounter = loopCounter + 1;
+      attribEntry = attribEntry + 2;
+    } while (attribCount != loopCounter);
   }
   if ((attribCount != 0) && (!isAssemblyProgram)) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s__001a45c0[0] != '\0') {
       srcCursor = "\n";
-      iVar7 = 0;
+      emitLength = 0;
       curChar = s__001a45c0[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
+    outCursor = outCursor + emitLength;
   }
-  puVar31 = (uint *)program[10];
-  puVar28 = program + program[0xb] * 2;
-  if (puVar31 == (uint *)0x0) {
-    local_6c = 0;
-    local_70 = (uint *)0x0;
+  paramCount = (uint *)program[10];
+  paramEntry = program + program[0xb] * 2;
+  if (paramCount == (uint *)0x0) {
+    paramRegisterNumbers = 0;
+    paramGroupState = (uint *)0x0;
     goto LAB_0001376c;
   }
-  if ((int)puVar31 < 1) {
+  if ((int)paramCount < 1) {
 LAB_000112d0:
-    local_6c = 0;
-    local_70 = (uint *)0x0;
+    paramRegisterNumbers = 0;
+    paramGroupState = (uint *)0x0;
   }
   else {
-    uVar33 = 0xffffffff;
-    puVar32 = puVar28;
-    puVar39 = puVar31;
+    paramArrayEndId = 0xffffffff;
+    paramScanEntry = paramEntry;
+    paramRemaining = paramCount;
     do {
-      if ((int)uVar33 < (int)(uint)*(ushort *)((int)puVar32 + 6)) {
-        uVar33 = (uint)*(ushort *)((int)puVar32 + 6);
+      if ((int)paramArrayEndId < (int)(uint)*(ushort *)((int)paramScanEntry + 6)) {
+        paramArrayEndId = (uint)*(ushort *)((int)paramScanEntry + 6);
       }
-      puVar32 = puVar32 + 2;
-      puVar39 = (uint *)((int)puVar39 - 1);
-    } while (puVar39 != (uint *)0x0);
-    if (uVar33 == 0xffffffff) goto LAB_000112d0;
-    iVar7 = uVar33 * 4 + 4;
-    local_6c = _malloc(iVar7);
-    local_70 = (uint *)_malloc(iVar7);
-    if (local_6c == 0) goto joined_r0x000112bc;
-    if (local_70 == (uint *)0x0) {
-      _free(local_6c);
+      paramScanEntry = paramScanEntry + 2;
+      paramRemaining = (uint *)((int)paramRemaining - 1);
+    } while (paramRemaining != (uint *)0x0);
+    if (paramArrayEndId == 0xffffffff) goto LAB_000112d0;
+    idTableBytes = paramArrayEndId * 4 + 4;
+    paramRegisterNumbers = _malloc(idTableBytes);
+    paramGroupState = (uint *)_malloc(idTableBytes);
+    if (paramRegisterNumbers == 0) goto joined_r0x000112bc;
+    if (paramGroupState == (uint *)0x0) {
+      _free(paramRegisterNumbers);
       goto LAB_00014070;
     }
   }
-  puVar32 = (uint *)0x0;
+  paramArrayLengths = (uint *)0x0;
   if (program[0xe] != 0) {
-    puVar32 = (uint *)_malloc(program[0xe] << 2);
+    paramArrayLengths = (uint *)_malloc(program[0xe] << 2);
   }
-  if ((int)puVar31 >= 1) {
-    in_r10 = (char *)0x0;
-    in_r7 = 0xffffffff;
-    in_r6 = (uint *)0xffffffff;
-    uVar33 = 0xffffffff;
-    puVar39 = puVar32;
-    puVar22 = puVar28;
+  if ((int)paramCount >= 1) {
+    argReg10 = (char *)0x0;
+    argReg7 = 0xffffffff;
+    argReg6 = (uint *)0xffffffff;
+    paramArrayEndId = 0xffffffff;
+    arrayLengthCursor = paramArrayLengths;
+    paramScanCursor = paramEntry;
     do {
-      if ((*puVar22 & 0x1f0000) != 0) {
-        if (in_r6 == (uint *)0xffffffff) {
-          *(uint *)((uint)*(ushort *)((int)puVar22 + 6) * 4 + local_6c) =
-               (uint)*(ushort *)((int)puVar22 + 6);
-          uVar37 = program[0xe];
-          in_r6 = (uint *)(uint)*(ushort *)((int)puVar22 + 6);
-          puVar18 = program + program[0xf] * 2;
-          if ((uVar37 == 0) || ((int)uVar37 < 1)) {
+      if ((*paramScanCursor & 0x1f0000) != 0) {
+        if (argReg6 == (uint *)0xffffffff) {
+          *(uint *)((uint)*(ushort *)((int)paramScanCursor + 6) * 4 + paramRegisterNumbers) =
+               (uint)*(ushort *)((int)paramScanCursor + 6);
+          paramArraysLeft = program[0xe];
+          argReg6 = (uint *)(uint)*(ushort *)((int)paramScanCursor + 6);
+          paramArrayTable = program + program[0xf] * 2;
+          if ((paramArraysLeft == 0) || ((int)paramArraysLeft < 1)) {
 LAB_000113ac:
-            local_70[(int)in_r6] = in_r7;
-            in_r6 = (uint *)0xffffffff;
-            in_r8 = puVar18;
+            paramGroupState[(int)argReg6] = argReg7;
+            argReg6 = (uint *)0xffffffff;
+            argReg8 = paramArrayTable;
           }
           else {
-            in_r8 = puVar18;
-            if (in_r6 != (uint *)(uint)(ushort)*puVar18) {
-              iVar7 = 8;
+            argReg8 = paramArrayTable;
+            if (argReg6 != (uint *)(uint)(ushort)*paramArrayTable) {
+              descriptorByteOffset = 8;
               do {
-                uVar37 = uVar37 - 1;
-                if (uVar37 == 0) goto LAB_000113ac;
-                in_r8 = (uint *)((int)puVar18 + iVar7);
-                iVar7 = iVar7 + 8;
-              } while (in_r6 != (uint *)(uint)(ushort)*in_r8);
+                paramArraysLeft = paramArraysLeft - 1;
+                if (paramArraysLeft == 0) goto LAB_000113ac;
+                argReg8 = (uint *)((int)paramArrayTable + descriptorByteOffset);
+                descriptorByteOffset = descriptorByteOffset + 8;
+              } while (argReg6 != (uint *)(uint)(ushort)*argReg8);
             }
-            uVar33 = (uint)*(ushort *)((int)in_r8 + 6);
-            in_r7 = 1;
-            local_70[(int)in_r6] = 0;
+            paramArrayEndId = (uint)*(ushort *)((int)argReg8 + 6);
+            argReg7 = 1;
+            paramGroupState[(int)argReg6] = 0;
           }
-          if (*(ushort *)((int)puVar22 + 6) == uVar33) {
+          if (*(ushort *)((int)paramScanCursor + 6) == paramArrayEndId) {
 LAB_00011410:
-            *puVar39 = in_r7;
-            in_r6 = (uint *)0xffffffff;
-            puVar39 = puVar39 + 1;
-            in_r7 = 0xffffffff;
-            uVar33 = 0xffffffff;
+            *arrayLengthCursor = argReg7;
+            argReg6 = (uint *)0xffffffff;
+            arrayLengthCursor = arrayLengthCursor + 1;
+            argReg7 = 0xffffffff;
+            paramArrayEndId = 0xffffffff;
           }
         }
-        else if ((int)(uint)*(ushort *)((int)puVar22 + 6) <= (int)uVar33) {
-          *(uint **)((uint)*(ushort *)((int)puVar22 + 6) * 4 + local_6c) = in_r6;
-          local_70[*(ushort *)((int)puVar22 + 6)] = in_r7;
-          in_r7 = in_r7 + 1;
-          if (*(ushort *)((int)puVar22 + 6) == uVar33) goto LAB_00011410;
+        else if ((int)(uint)*(ushort *)((int)paramScanCursor + 6) <= (int)paramArrayEndId) {
+          *(uint **)((uint)*(ushort *)((int)paramScanCursor + 6) * 4 + paramRegisterNumbers) = argReg6;
+          paramGroupState[*(ushort *)((int)paramScanCursor + 6)] = argReg7;
+          argReg7 = argReg7 + 1;
+          if (*(ushort *)((int)paramScanCursor + 6) == paramArrayEndId) goto LAB_00011410;
         }
       }
-      uVar40 = (ulonglong)uVar33;
-      in_r10 = (char *)((int)in_r10 + 1);
-      puVar22 = puVar22 + 2;
-    } while (puVar31 != (uint *)in_r10);
-    iVar7 = 0;
-    puVar39 = (uint *)0x0;
+      printResult = (ulonglong)paramArrayEndId;
+      argReg10 = (char *)((int)argReg10 + 1);
+      paramScanCursor = paramScanCursor + 2;
+    } while (paramCount != (uint *)argReg10);
+    paramArrayIndex = 0;
+    paramLoopCursor = (uint *)0x0;
     do {
-      uVar5 = *(ushort *)puVar28;
-      uVar38 = uVar5 & 0x1f;
-      if ((uVar5 & 0x1f) == 0) goto LAB_000136f0;
-      uVar33 = (uint)*(ushort *)((int)puVar28 + 6);
-      if (local_70[uVar33] == 0xffffffff) {
-        iVar27 = 0;
+      entryHalfword = *(ushort *)paramEntry;
+      paramKind = entryHalfword & 0x1f;
+      if ((entryHalfword & 0x1f) == 0) goto LAB_000136f0;
+      paramRegisterId = (uint)*(ushort *)((int)paramEntry + 6);
+      if (paramGroupState[paramRegisterId] == 0xffffffff) {
+        emitLength3 = 0;
         if (s_PARAM_prm_001a4828[0] != '\0') {
           srcCursor = "PARAM prm";
           curChar = s_PARAM_prm_001a4828[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
-          uVar33 = (uint)*(ushort *)((int)puVar28 + 6);
+          paramRegisterId = (uint)*(ushort *)((int)paramEntry + 6);
         }
-        outCursor = outCursor + iVar27;
-        uVar40 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(local_6c + uVar33 * 4));
-        outCursor = outCursor + (int)(uVar40 >> 0x20);
+        outCursor = outCursor + emitLength3;
+        printResult = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(paramRegisterNumbers + paramRegisterId * 4));
+        outCursor = outCursor + (int)(printResult >> 0x20);
         if (!isAssemblyProgram) {
-          uVar33 = *puVar28;
-          in_r7 = uVar33 >> 0x1d;
-          in_r6 = (uint *)(uVar33 >> 0x1a & 7);
-          uVar40 = ((int (*)())FUN_0000ce90)(outCursor,uVar33 >> 0x18 & 3,0,in_r6,in_r7);
-          outCursor = (undefined1 *)(uVar40 >> 0x20);
+          paramWord = *paramEntry;
+          argReg7 = paramWord >> 0x1d;
+          argReg6 = (uint *)(paramWord >> 0x1a & 7);
+          printResult = ((int (*)())FUN_0000ce90)(outCursor,paramWord >> 0x18 & 3,0,argReg6,argReg7);
+          outCursor = (undefined1 *)(printResult >> 0x20);
         }
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s___001a4834[0] != '\0') {
           srcCursor = " = ";
           curChar = s___001a4834[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
 LAB_00011758:
-        outCursor = outCursor + iVar27;
+        outCursor = outCursor + emitLength3;
       }
       else {
-        if (local_70[uVar33] != 0) {
-          iVar24 = iVar24 + 1;
-          iVar27 = 0;
+        if (paramGroupState[paramRegisterId] != 0) {
+          groupElementIndex = groupElementIndex + 1;
+          emitLength3 = 0;
           if (s__001a4844[0] != '\0') {
             srcCursor = "    ";
             curChar = s__001a4844[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_00011758;
         }
-        iVar24 = 0;
+        emitLength5 = 0;
         if (s_PARAM_prm_001a4828[0] != '\0') {
           srcCursor = "PARAM prm";
           curChar = s_PARAM_prm_001a4828[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[emitLength5] = curChar;
+            emitLength5 = emitLength5 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
-          uVar33 = (uint)*(ushort *)((int)puVar28 + 6);
+          paramRegisterId = (uint)*(ushort *)((int)paramEntry + 6);
         }
-        outCursor = outCursor + iVar24;
-        iVar24 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(local_6c + uVar33 * 4));
-        iVar27 = 0;
+        outCursor = outCursor + emitLength5;
+        emitLength6 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(paramRegisterNumbers + paramRegisterId * 4));
+        emitLength3 = 0;
         if (s___001a4464[0] != '\0') {
           srcCursor = "[";
           curChar = s___001a4464[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27 + iVar24] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3 + emitLength6] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27 + iVar24;
-        uVar40 = ((int (*)())FUN_0000cdf0)(outCursor,puVar32[iVar7]);
-        iVar24 = (int)(uVar40 >> 0x20);
-        iVar27 = 0;
+        outCursor = outCursor + emitLength3 + emitLength6;
+        printResult = ((int (*)())FUN_0000cdf0)(outCursor,paramArrayLengths[paramArrayIndex]);
+        emitLength6 = (int)(printResult >> 0x20);
+        emitLength3 = 0;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
           curChar = s___001a4468[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27 + iVar24] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3 + emitLength6] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27 + iVar24;
+        outCursor = outCursor + emitLength3 + emitLength6;
         if (!isAssemblyProgram) {
-          uVar33 = *puVar28;
-          in_r7 = uVar33 >> 0x1d;
-          in_r6 = (uint *)(uVar33 >> 0x1a & 7);
-          uVar40 = ((int (*)())FUN_0000ce90)(outCursor,uVar33 >> 0x18 & 3,0,in_r6,in_r7);
-          outCursor = (undefined1 *)(uVar40 >> 0x20);
+          paramWord = *paramEntry;
+          argReg7 = paramWord >> 0x1d;
+          argReg6 = (uint *)(paramWord >> 0x1a & 7);
+          printResult = ((int (*)())FUN_0000ce90)(outCursor,paramWord >> 0x18 & 3,0,argReg6,argReg7);
+          outCursor = (undefined1 *)(printResult >> 0x20);
         }
-        iVar24 = 0;
+        emitLength5 = 0;
         if (s_____001a4838[0] != '\0') {
           srcCursor = " = {\n    ";
           curChar = s_____001a4838[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[emitLength5] = curChar;
+            emitLength5 = emitLength5 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar24;
-        iVar24 = 0;
+        outCursor = outCursor + emitLength5;
+        groupElementIndex = 0;
       }
-      if ((uVar5 & 0x1f) != 0) {
-        if (uVar38 < 3) {
-          iVar27 = 0;
+      if ((entryHalfword & 0x1f) != 0) {
+        if (paramKind < 3) {
+          emitLength3 = 0;
           if (s_program__001a484c[0] != '\0') {
             srcCursor = "program.";
             curChar = s_program__001a484c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_000118a8;
         }
-        if (uVar38 != 0x11) goto LAB_00011778;
-        iVar27 = 0;
+        if (paramKind != 0x11) goto LAB_00011778;
+        emitLength3 = 0;
         if (s__001a4134[0] != '\0') {
           srcCursor = "";
-          acVar9 = s__001a4134[0];
+          copyChar = s__001a4134[0];
           do {
-            outCursor[iVar27] = acVar9;
-            iVar27 = iVar27 + 1;
-            acVar9 = *srcCursor;
+            outCursor[emitLength3] = copyChar;
+            emitLength3 = emitLength3 + 1;
+            copyChar = *srcCursor;
             srcCursor = srcCursor + 1;
-          } while (acVar9 != '\0');
+          } while (copyChar != '\0');
         }
-        outCursor = outCursor + iVar27;
+        outCursor = outCursor + emitLength3;
 switchD_000118c8_caseD_11:
-        pfVar34 = (float *)(program + program[0x1b] * 2 + (uint)(ushort)*puVar28 * 4);
-        switch(*puVar28 >> 0x1a & 7) {
+        constantVector = (float *)(program + program[0x1b] * 2 + (uint)(ushort)*paramEntry * 4);
+        switch(*paramEntry >> 0x1a & 7) {
         case 0:
         case 1:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s___001a49dc[0] != '\0') {
             srcCursor = "{";
             curChar = s___001a49dc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          local_60 = 0x19f634;
-          uVar41 = ((char * (*)())FUN_0000bfa0)((int)(uVar40 >> 0x20),(int)uVar40,outCursor,
-                                (outBuffer + outCapacity[0]) - (int)outCursor,(double)*pfVar34,
+          outCursor = outCursor + emitLength3;
+          commaSeparatorBase = 0x19f634;
+          floatPrintResult = ((char * (*)())FUN_0000bfa0)((int)(printResult >> 0x20),(int)printResult,outCursor,
+                                (outBuffer + outCapacity[0]) - (int)outCursor,(double)*constantVector,
                                 DOUBLE_001aa248);
-          iVar27 = (int)((ulonglong)uVar41 >> 0x20);
-          curChar = ((unsigned char *)0x00004ec0)[local_60];
-          bVar2 = curChar != '\0';
-          if (bVar2) {
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-            iVar19 = 0;
+          floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
+          curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
+          separatorNotEmpty = curChar != '\0';
+          if (separatorNotEmpty) {
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+            emitLength2 = 0;
             nextChar = curChar;
             do {
-              *(char *)(iVar27 + iVar19) = nextChar;
-              iVar19 = iVar19 + 1;
+              *(char *)(floatTextCursor + emitLength2) = nextChar;
+              emitLength2 = emitLength2 + 1;
               nextChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (nextChar != '\0');
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
           }
-          outCursor = (undefined1 *)(iVar19 + iVar27);
-          uVar41 = ((char * (*)())FUN_0000bfa0)(iVar27,(int)uVar41,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
-                                ,(double)pfVar34[1],DOUBLE_001aa248);
-          iVar27 = (int)((ulonglong)uVar41 >> 0x20);
-          if (bVar2) {
-            iVar19 = 0;
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
+          floatPrintResult = ((char * (*)())FUN_0000bfa0)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
+                                ,(double)constantVector[1],DOUBLE_001aa248);
+          floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
+          if (separatorNotEmpty) {
+            emitLength2 = 0;
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
             nextChar = curChar;
             do {
-              *(char *)(iVar27 + iVar19) = nextChar;
-              iVar19 = iVar19 + 1;
+              *(char *)(floatTextCursor + emitLength2) = nextChar;
+              emitLength2 = emitLength2 + 1;
               nextChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (nextChar != '\0');
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
           }
-          outCursor = (undefined1 *)(iVar19 + iVar27);
-          uVar41 = ((char * (*)())FUN_0000bfa0)(iVar27,(int)uVar41,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
-                                ,(double)pfVar34[2],DOUBLE_001aa248);
-          iVar27 = (int)((ulonglong)uVar41 >> 0x20);
-          if (bVar2) {
-            iVar19 = 0;
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
+          floatPrintResult = ((char * (*)())FUN_0000bfa0)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
+                                ,(double)constantVector[2],DOUBLE_001aa248);
+          floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
+          if (separatorNotEmpty) {
+            emitLength2 = 0;
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
             do {
-              *(char *)(iVar27 + iVar19) = curChar;
-              iVar19 = iVar19 + 1;
+              *(char *)(floatTextCursor + emitLength2) = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (curChar != '\0');
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
           }
-          outCursor = (undefined1 *)(iVar19 + iVar27);
-          in_r6 = (uint *)((outBuffer + outCapacity[0]) - (int)outCursor);
-          iVar27 = ((char * (*)())FUN_0000bfa0)(iVar27,(int)uVar41,outCursor,in_r6,(double)pfVar34[3],DOUBLE_001aa248
+          outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
+          argReg6 = (uint *)((outBuffer + outCapacity[0]) - (int)outCursor);
+          floatTextCursor = ((char * (*)())FUN_0000bfa0)(floatTextCursor,(int)floatPrintResult,outCursor,argReg6,(double)constantVector[3],DOUBLE_001aa248
                                );
-          iVar19 = 0;
+          emitLength2 = 0;
           if (s___001a49e0[0] != '\0') {
             srcCursor = "}";
             curChar = s___001a49e0[0];
             do {
               srcCursor = srcCursor + 1;
-              *(char *)(iVar27 + iVar19) = curChar;
-              iVar19 = iVar19 + 1;
+              *(char *)(floatTextCursor + emitLength2) = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = (undefined1 *)(iVar19 + iVar27);
+          outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
           break;
         case 2:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_____Fixed_constant_data_not_curr_001a49e4[0] != '\0') {
             srcCursor = "{-- Fixed constant data not currently supported --}";
             curChar = s_____Fixed_constant_data_not_curr_001a49e4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_000135c0;
         case 3:
         case 4:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s___001a49dc[0] != '\0') {
             srcCursor = "{";
             curChar = s___001a49dc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          local_60 = 0x19f634;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor, *(unsigned int *)pfVar34);
-          curChar = ((unsigned char *)0x00004ec0)[local_60];
-          bVar2 = curChar != '\0';
-          if (bVar2) {
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-            iVar19 = 0;
+          outCursor = outCursor + emitLength3;
+          commaSeparatorBase = 0x19f634;
+          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor, *(unsigned int *)constantVector);
+          curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
+          separatorNotEmpty = curChar != '\0';
+          if (separatorNotEmpty) {
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+            emitLength2 = 0;
             nextChar = curChar;
             do {
-              outCursor[iVar19 + iVar27] = nextChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2 + emitLength7] = nextChar;
+              emitLength2 = emitLength2 + 1;
               nextChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (nextChar != '\0');
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
           }
-          outCursor = outCursor + iVar19 + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)pfVar34)[1]);
-          if (bVar2) {
-            iVar19 = 0;
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          outCursor = outCursor + emitLength2 + emitLength7;
+          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)constantVector)[1]);
+          if (separatorNotEmpty) {
+            emitLength2 = 0;
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
             nextChar = curChar;
             do {
-              outCursor[iVar19 + iVar27] = nextChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2 + emitLength7] = nextChar;
+              emitLength2 = emitLength2 + 1;
               nextChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (nextChar != '\0');
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
           }
-          outCursor = outCursor + iVar19 + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)pfVar34)[2]);
-          if (bVar2) {
-            iVar19 = 0;
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          outCursor = outCursor + emitLength2 + emitLength7;
+          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)constantVector)[2]);
+          if (separatorNotEmpty) {
+            emitLength2 = 0;
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
             do {
-              outCursor[iVar19 + iVar27] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2 + emitLength7] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (curChar != '\0');
           }
           else {
-            iVar19 = 0;
+            emitLength2 = 0;
           }
-          outCursor = outCursor + iVar19 + iVar27;
-          iVar19 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)pfVar34)[3]);
-          iVar27 = 0;
-          outCursor = outCursor + iVar19;
+          outCursor = outCursor + emitLength2 + emitLength7;
+          emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)constantVector)[3]);
+          emitLength3 = 0;
+          outCursor = outCursor + emitLength2;
           if (s___001a49e0[0] != '\0') {
             srcCursor = "}";
             curChar = s___001a49e0[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
@@ -5278,205 +5347,205 @@ switchD_000118c8_caseD_11:
       }
 LAB_00011778:
       if (s_state__001a4858[0] == '\0') {
-        iVar27 = 0;
+        emitLength3 = 0;
       }
       else {
         srcCursor = "state.";
-        iVar27 = 0;
+        emitLength3 = 0;
         curChar = s_state__001a4858[0];
         do {
           srcCursor = srcCursor + 1;
-          outCursor[iVar27] = curChar;
-          iVar27 = iVar27 + 1;
+          outCursor[emitLength3] = curChar;
+          emitLength3 = emitLength3 + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
 LAB_000118a8:
-      outCursor = outCursor + iVar27;
-      switch(uVar38) {
+      outCursor = outCursor + emitLength3;
+      switch(paramKind) {
       default:
         goto switchD_000118c8_caseD_0;
       case 1:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_local__001a4860[0] != '\0') {
           srcCursor = "local[";
           curChar = s_local__001a4860[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(ushort)*puVar28);
-        iVar27 = 0;
-        outCursor = outCursor + iVar19;
+        outCursor = outCursor + emitLength3;
+        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(ushort)*paramEntry);
+        emitLength3 = 0;
+        outCursor = outCursor + emitLength2;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
           curChar = s___001a4468[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 2:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_env__001a4868[0] != '\0') {
           srcCursor = "env[";
           curChar = s_env__001a4868[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(ushort)*puVar28);
-        iVar27 = 0;
-        outCursor = outCursor + iVar19;
+        outCursor = outCursor + emitLength3;
+        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(ushort)*paramEntry);
+        emitLength3 = 0;
+        outCursor = outCursor + emitLength2;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
           curChar = s___001a4468[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 3:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_light__001a4870[0] != '\0') {
           srcCursor = "light[";
           curChar = s_light__001a4870[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-        iVar19 = 0;
+        outCursor = outCursor + emitLength3;
+        emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+        emitLength2 = 0;
         if (s____001a4878[0] != '\0') {
           srcCursor = "].";
           curChar = s____001a4878[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar19 + iVar27] = curChar;
-            iVar19 = iVar19 + 1;
+            outCursor[emitLength2 + emitLength3] = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar19 + iVar27;
-        switch(*puVar28 >> 8 & 0xf) {
+        outCursor = outCursor + emitLength2 + emitLength3;
+        switch(*paramEntry >> 8 & 0xf) {
         case 0:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_ambient_001a47f4[0] != '\0') {
             srcCursor = "ambient";
             curChar = s_ambient_001a47f4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 1:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_diffuse_001a47fc[0] != '\0') {
             srcCursor = "diffuse";
             curChar = s_diffuse_001a47fc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 2:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_specular_001a4804[0] != '\0') {
             srcCursor = "specular";
             curChar = s_specular_001a4804[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 3:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_position_001a4760[0] != '\0') {
             srcCursor = "position";
             curChar = s_position_001a4760[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 4:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_spot_direction_001a487c[0] != '\0') {
             srcCursor = "spot.direction";
             curChar = s_spot_direction_001a487c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 5:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_attenuation_001a488c[0] != '\0') {
             srcCursor = "attenuation";
             curChar = s_attenuation_001a488c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 6:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_half_001a4898[0] != '\0') {
             srcCursor = "half";
             curChar = s_half_001a4898[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 7:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_spotcutoff_001a48a0[0] != '\0') {
             srcCursor = "spotcutoff";
             curChar = s_spotcutoff_001a48a0[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
@@ -5486,246 +5555,246 @@ LAB_000118a8:
         }
         break;
       case 4:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_lightprod__001a48ac[0] != '\0') {
           srcCursor = "lightprod[";
           curChar = s_lightprod__001a48ac[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-        iVar19 = 0;
+        outCursor = outCursor + emitLength3;
+        emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+        emitLength2 = 0;
         if (s____001a4878[0] != '\0') {
           srcCursor = "].";
           curChar = s____001a4878[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar19 + iVar27] = curChar;
-            iVar19 = iVar19 + 1;
+            outCursor[emitLength2 + emitLength7] = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        uVar37 = *puVar28;
-        outCursor = outCursor + iVar19 + iVar27;
-        uVar33 = uVar37 >> 8 & 1;
-        if (uVar33 == 0) {
-          iVar27 = 0;
+        paramWord2 = *paramEntry;
+        outCursor = outCursor + emitLength2 + emitLength7;
+        lightFace = paramWord2 >> 8 & 1;
+        if (lightFace == 0) {
+          emitLength3 = 0;
           if (s_front__001a47e4[0] != '\0') {
             srcCursor = "front.";
             curChar = s_front__001a47e4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
 LAB_00011f20:
-            uVar37 = *puVar28;
+            paramWord2 = *paramEntry;
           }
 LAB_00011f28:
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength3;
         }
-        else if (uVar33 == 1) {
-          iVar27 = 0;
+        else if (lightFace == 1) {
+          emitLength3 = 0;
           if (s_back__001a47ec[0] != '\0') {
             srcCursor = "back.";
             curChar = s_back__001a47ec[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
             goto LAB_00011f20;
           }
           goto LAB_00011f28;
         }
-        uVar33 = uVar37 >> 9 & 3;
-        if (uVar33 == 1) {
-          iVar27 = 0;
+        lightColorKind = paramWord2 >> 9 & 3;
+        if (lightColorKind == 1) {
+          emitLength3 = 0;
           if (s_diffuse_001a47fc[0] != '\0') {
             srcCursor = "diffuse";
             curChar = s_diffuse_001a47fc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
-        else if (uVar33 == 2) {
-          iVar27 = 0;
+        else if (lightColorKind == 2) {
+          emitLength3 = 0;
           if (s_specular_001a4804[0] != '\0') {
             srcCursor = "specular";
             curChar = s_specular_001a4804[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         else {
-          if (uVar33 != 0) goto switchD_000118c8_caseD_0;
-          iVar27 = 0;
+          if (lightColorKind != 0) goto switchD_000118c8_caseD_0;
+          emitLength3 = 0;
           if (s_ambient_001a47f4[0] != '\0') {
             srcCursor = "ambient";
             curChar = s_ambient_001a47f4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         break;
       case 5:
-        uVar33 = *puVar28;
-        if ((uVar33 >> 1 & 7) == 5) {
-          iVar27 = 0;
+        paramWord = *paramEntry;
+        if ((paramWord >> 1 & 7) == 5) {
+          emitLength3 = 0;
           if (s_lightmodel__001a48cc[0] != '\0') {
             srcCursor = "lightmodel.";
             curChar = s_lightmodel__001a48cc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
 LAB_00012114:
-            uVar33 = *puVar28;
+            paramWord = *paramEntry;
           }
         }
         else {
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_material__001a47d8[0] != '\0') {
             srcCursor = "material.";
             curChar = s_material__001a47d8[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
             goto LAB_00012114;
           }
         }
-        outCursor = outCursor + iVar27;
-        if ((uVar33 & 1) == 0) {
-          iVar27 = 0;
+        outCursor = outCursor + emitLength3;
+        if ((paramWord & 1) == 0) {
+          emitLength3 = 0;
           if (s_front__001a47e4[0] != '\0') {
             srcCursor = "front.";
             curChar = s_front__001a47e4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
 LAB_000121c4:
-            uVar33 = *puVar28;
+            paramWord = *paramEntry;
           }
 LAB_000121cc:
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength3;
         }
-        else if ((uVar33 & 1) == 1) {
-          iVar27 = 0;
+        else if ((paramWord & 1) == 1) {
+          emitLength3 = 0;
           if (s_back__001a47ec[0] != '\0') {
             srcCursor = "back.";
             curChar = s_back__001a47ec[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
             goto LAB_000121c4;
           }
           goto LAB_000121cc;
         }
-        switch(uVar33 >> 1 & 7) {
+        switch(paramWord >> 1 & 7) {
         case 0:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_ambient_001a47f4[0] != '\0') {
             srcCursor = "ambient";
             curChar = s_ambient_001a47f4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 1:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_diffuse_001a47fc[0] != '\0') {
             srcCursor = "diffuse";
             curChar = s_diffuse_001a47fc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 2:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_specular_001a4804[0] != '\0') {
             srcCursor = "specular";
             curChar = s_specular_001a4804[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 3:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_emission_001a4810[0] != '\0') {
             srcCursor = "emission";
             curChar = s_emission_001a4810[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 4:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_shininess_001a481c[0] != '\0') {
             srcCursor = "shininess";
             curChar = s_shininess_001a481c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 5:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_scenecolor_001a48d8[0] != '\0') {
             srcCursor = "scenecolor";
             curChar = s_scenecolor_001a48d8[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
@@ -5735,528 +5804,528 @@ LAB_000121cc:
         }
         break;
       case 6:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_lightmodel_ambient_001a48b8[0] != '\0') {
           srcCursor = "lightmodel.ambient";
           curChar = s_lightmodel_ambient_001a48b8[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 7:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_texgen__001a48e4[0] != '\0') {
           srcCursor = "texgen[";
           curChar = s_texgen__001a48e4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar28 & 0x1f);
-        iVar19 = 0;
+        outCursor = outCursor + emitLength3;
+        emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry & 0x1f);
+        emitLength2 = 0;
         if (s___eye__001a48ec[0] != '\0') {
           srcCursor = "].eye.";
           curChar = s___eye__001a48ec[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar19 + iVar27] = curChar;
-            iVar19 = iVar19 + 1;
+            outCursor[emitLength2 + emitLength7] = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar19 + iVar27;
-        uVar33 = *puVar28 >> 5 & 7;
-        if (uVar33 == 1) {
-          iVar27 = 0;
+        outCursor = outCursor + emitLength2 + emitLength7;
+        texgenComponent = *paramEntry >> 5 & 7;
+        if (texgenComponent == 1) {
+          emitLength3 = 0;
           if (s_t_001a48f8[0] != '\0') {
             srcCursor = "t";
             curChar = s_t_001a48f8[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
-        else if (uVar33 < 2) {
-          if (uVar33 != 0) goto switchD_000118c8_caseD_0;
-          iVar27 = 0;
+        else if (texgenComponent < 2) {
+          if (texgenComponent != 0) goto switchD_000118c8_caseD_0;
+          emitLength3 = 0;
           if (s_s_001a48f4[0] != '\0') {
             srcCursor = "s";
             curChar = s_s_001a48f4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
-        else if (uVar33 == 2) {
-          iVar27 = 0;
+        else if (texgenComponent == 2) {
+          emitLength3 = 0;
           if (s_r_001a48fc[0] != '\0') {
             srcCursor = "r";
             curChar = s_r_001a48fc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         else {
-          if (uVar33 != 3) goto switchD_000118c8_caseD_0;
-          iVar27 = 0;
+          if (texgenComponent != 3) goto switchD_000118c8_caseD_0;
+          emitLength3 = 0;
           if (s_q_001a4900[0] != '\0') {
             srcCursor = "q";
             curChar = s_q_001a4900[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         break;
       case 8:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_texgen__001a48e4[0] != '\0') {
           srcCursor = "texgen[";
           curChar = s_texgen__001a48e4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar28 & 0x1f);
-        iVar19 = 0;
+        outCursor = outCursor + emitLength3;
+        emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry & 0x1f);
+        emitLength2 = 0;
         if (s___object__001a4904[0] != '\0') {
           srcCursor = "].object.";
           curChar = s___object__001a4904[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar19 + iVar27] = curChar;
-            iVar19 = iVar19 + 1;
+            outCursor[emitLength2 + emitLength7] = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar19 + iVar27;
-        uVar33 = *puVar28 >> 5 & 7;
-        if (uVar33 == 1) {
-          iVar27 = 0;
+        outCursor = outCursor + emitLength2 + emitLength7;
+        texgenComponent = *paramEntry >> 5 & 7;
+        if (texgenComponent == 1) {
+          emitLength3 = 0;
           if (s_t_001a48f8[0] != '\0') {
             srcCursor = "t";
             curChar = s_t_001a48f8[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
-        else if (uVar33 < 2) {
-          if (uVar33 != 0) goto switchD_000118c8_caseD_0;
-          iVar27 = 0;
+        else if (texgenComponent < 2) {
+          if (texgenComponent != 0) goto switchD_000118c8_caseD_0;
+          emitLength3 = 0;
           if (s_s_001a48f4[0] != '\0') {
             srcCursor = "s";
             curChar = s_s_001a48f4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
-        else if (uVar33 == 2) {
-          iVar27 = 0;
+        else if (texgenComponent == 2) {
+          emitLength3 = 0;
           if (s_r_001a48fc[0] != '\0') {
             srcCursor = "r";
             curChar = s_r_001a48fc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         else {
-          if (uVar33 != 3) goto switchD_000118c8_caseD_0;
-          iVar27 = 0;
+          if (texgenComponent != 3) goto switchD_000118c8_caseD_0;
+          emitLength3 = 0;
           if (s_q_001a4900[0] != '\0') {
             srcCursor = "q";
             curChar = s_q_001a4900[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         break;
       case 9:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_texenv__001a4910[0] != '\0') {
           srcCursor = "texenv[";
           curChar = s_texenv__001a4910[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar28 & 0x1f);
-        iVar27 = 0;
-        outCursor = outCursor + iVar19;
+        outCursor = outCursor + emitLength3;
+        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry & 0x1f);
+        emitLength3 = 0;
+        outCursor = outCursor + emitLength2;
         if (s___color_001a4918[0] != '\0') {
           srcCursor = "].color";
           curChar = s___color_001a4918[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 10:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_clip__001a4920[0] != '\0') {
           srcCursor = "clip[";
           curChar = s_clip__001a4920[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-        iVar27 = 0;
-        outCursor = outCursor + iVar19;
+        outCursor = outCursor + emitLength3;
+        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+        emitLength3 = 0;
+        outCursor = outCursor + emitLength2;
         if (s___plane_001a4928[0] != '\0') {
           srcCursor = "].plane";
           curChar = s___plane_001a4928[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 0xb:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_fog_color_001a4930[0] != '\0') {
           srcCursor = "fog.color";
           curChar = s_fog_color_001a4930[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 0xc:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_fog_params_001a493c[0] != '\0') {
           srcCursor = "fog.params";
           curChar = s_fog_params_001a493c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 0xd:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_point_size_001a4954[0] != '\0') {
           srcCursor = "point.size";
           curChar = s_point_size_001a4954[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 0xe:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_point_attenuation_001a4960[0] != '\0') {
           srcCursor = "point.attenuation";
           curChar = s_point_attenuation_001a4960[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 0xf:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_depth_range_001a4948[0] != '\0') {
           srcCursor = "depth.range";
           curChar = s_depth_range_001a4948[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 0x10:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_matrix__001a4974[0] != '\0') {
           srcCursor = "matrix.";
           curChar = s_matrix__001a4974[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        uVar33 = *puVar28;
-        outCursor = outCursor + iVar27;
-        switch(uVar33 >> 8 & 7) {
+        paramWord = *paramEntry;
+        outCursor = outCursor + emitLength3;
+        switch(paramWord >> 8 & 7) {
         case 0:
-          iVar19 = 0;
+          emitLength2 = 0;
           if (s_mvp__001a4988[0] != '\0') {
             srcCursor = "mvp.";
             curChar = s_mvp__001a4988[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
 LAB_00012bfc:
-            uVar33 = *puVar28;
+            paramWord = *paramEntry;
           }
           goto LAB_00012e2c;
         case 1:
-          iVar19 = 0;
+          emitLength2 = 0;
           if (s_projection__001a497c[0] != '\0') {
             srcCursor = "projection.";
             curChar = s_projection__001a497c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
             goto LAB_00012bfc;
           }
           goto LAB_00012e2c;
         case 2:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_color__001a4990[0] != '\0') {
             srcCursor = "color[";
             curChar = s_color__001a4990[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-          iVar19 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength3;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength2 = 0;
+          outCursor = outCursor + emitLength3;
           if (s____001a4878[0] != '\0') {
             srcCursor = "].";
             curChar = s____001a4878[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_00012d68;
         case 3:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_modelview__001a4998[0] != '\0') {
             srcCursor = "modelview[";
             curChar = s_modelview__001a4998[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-          iVar19 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength3;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength2 = 0;
+          outCursor = outCursor + emitLength3;
           if (s____001a4878[0] != '\0') {
             srcCursor = "].";
             curChar = s____001a4878[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
 LAB_00012d68:
-          uVar33 = *puVar28;
-          outCursor = outCursor + iVar19;
+          paramWord = *paramEntry;
+          outCursor = outCursor + emitLength2;
           break;
         case 4:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_texture__001a4514[0] != '\0') {
             srcCursor = "texture[";
             curChar = s_texture__001a4514[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-          iVar19 = 0;
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength3;
+          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength2 = 0;
+          outCursor = outCursor + emitLength3;
           if (s____001a4878[0] != '\0') {
             srcCursor = "].";
             curChar = s____001a4878[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          uVar33 = *puVar28;
+          paramWord = *paramEntry;
 LAB_00012e2c:
-          outCursor = outCursor + iVar19;
+          outCursor = outCursor + emitLength2;
           break;
         case 5:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_program__001a49a4[0] != '\0') {
             srcCursor = "program[";
             curChar = s_program__001a49a4[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*puVar28);
-          iVar19 = 0;
+          outCursor = outCursor + emitLength3;
+          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength2 = 0;
           if (s____001a4878[0] != '\0') {
             srcCursor = "].";
             curChar = s____001a4878[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19 + iVar27] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2 + emitLength7] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar19 + iVar27;
-          uVar33 = *puVar28;
+          outCursor = outCursor + emitLength2 + emitLength7;
+          paramWord = *paramEntry;
         }
-        uVar33 = uVar33 >> 0xe & 3;
-        if (uVar33 == 2) {
-          iVar27 = 0;
+        matrixModifier = paramWord >> 0xe & 3;
+        if (matrixModifier == 2) {
+          emitLength3 = 0;
           if (s_inverse__001a49bc[0] != '\0') {
             srcCursor = "inverse.";
             curChar = s_inverse__001a49bc[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
 LAB_00012ff0:
-          outCursor = outCursor + iVar27;
+          outCursor = outCursor + emitLength3;
         }
         else {
-          if (uVar33 == 3) {
-            iVar27 = 0;
+          if (matrixModifier == 3) {
+            emitLength3 = 0;
             if (s_invtrans__001a49c8[0] != '\0') {
               srcCursor = "invtrans.";
               curChar = s_invtrans__001a49c8[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar27] = curChar;
-                iVar27 = iVar27 + 1;
+                outCursor[emitLength3] = curChar;
+                emitLength3 = emitLength3 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             goto LAB_00012ff0;
           }
-          if (uVar33 == 1) {
-            iVar27 = 0;
+          if (matrixModifier == 1) {
+            emitLength3 = 0;
             if (s_transpose__001a49b0[0] != '\0') {
               srcCursor = "transpose.";
               curChar = s_transpose__001a49b0[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar27] = curChar;
-                iVar27 = iVar27 + 1;
+                outCursor[emitLength3] = curChar;
+                emitLength3 = emitLength3 + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
             goto LAB_00012ff0;
           }
         }
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_row__001a49d4[0] != '\0') {
           srcCursor = "row[";
           curChar = s_row__001a49d4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
-        iVar19 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar28 >> 0xc & 3);
-        iVar27 = 0;
-        outCursor = outCursor + iVar19;
+        outCursor = outCursor + emitLength3;
+        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry >> 0xc & 3);
+        emitLength3 = 0;
+        outCursor = outCursor + emitLength2;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
           curChar = s___001a4468[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
@@ -6264,311 +6333,311 @@ LAB_00012ff0:
       case 0x11:
         goto switchD_000118c8_caseD_11;
       case 0x12:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s_normalscale_001a4a18[0] != '\0') {
           srcCursor = "normalscale";
           curChar = s_normalscale_001a4a18[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
       }
 LAB_000135c0:
-      outCursor = outCursor + iVar27;
+      outCursor = outCursor + emitLength3;
 switchD_000118c8_caseD_0:
-      if (local_70[*(ushort *)((int)puVar28 + 6)] == 0xffffffff) {
-        iVar27 = 0;
+      if (paramGroupState[*(ushort *)((int)paramEntry + 6)] == 0xffffffff) {
+        emitLength3 = 0;
         if (s___001a46fc[0] != '\0') {
           srcCursor = ";\n";
           curChar = s___001a46fc[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
       }
-      else if (iVar24 + 1U == puVar32[iVar7]) {
-        iVar7 = iVar7 + 1;
-        iVar27 = 0;
+      else if (groupElementIndex + 1U == paramArrayLengths[paramArrayIndex]) {
+        paramArrayIndex = paramArrayIndex + 1;
+        emitLength3 = 0;
         if (s____001a4a24[0] != '\0') {
           srcCursor = "\n};\n";
           curChar = s____001a4a24[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
       }
       else {
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s___001a4a2c[0] != '\0') {
           srcCursor = ",\n";
           curChar = s___001a4a2c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
       }
-      outCursor = outCursor + iVar27;
-      uVar40 = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
-      if ((int)(uVar40 >> 0x20) == 0) goto LAB_00014048;
+      outCursor = outCursor + emitLength3;
+      printResult = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+      if ((int)(printResult >> 0x20) == 0) goto LAB_00014048;
 LAB_000136f0:
-      puVar39 = (uint *)((int)puVar39 + 1);
-      puVar28 = puVar28 + 2;
-    } while (puVar31 != puVar39);
+      paramLoopCursor = (uint *)((int)paramLoopCursor + 1);
+      paramEntry = paramEntry + 2;
+    } while (paramCount != paramLoopCursor);
   }
-  if (puVar32 != (uint *)0x0) {
-    _free(puVar32);
+  if (paramArrayLengths != (uint *)0x0) {
+    _free(paramArrayLengths);
   }
-  iVar7 = 0;
+  emitLength = 0;
   if (s__001a45c0[0] != '\0') {
     srcCursor = "\n";
-    iVar7 = 0;
+    emitLength = 0;
     curChar = s__001a45c0[0];
     do {
       srcCursor = srcCursor + 1;
-      outCursor[iVar7] = curChar;
-      iVar7 = iVar7 + 1;
+      outCursor[emitLength] = curChar;
+      emitLength = emitLength + 1;
       curChar = *srcCursor;
     } while (curChar != '\0');
   }
-  outCursor = outCursor + iVar7;
+  outCursor = outCursor + emitLength;
 LAB_0001376c:
   outputCount = program[0xc];
-  puVar31 = program + program[0xd] * 2;
+  outputEntry = program + program[0xd] * 2;
   if (0 < (int)outputCount) {
-    uVar37 = 0;
+    loopCounter = 0;
     do {
-      uVar8 = *puVar31 >> 0x10 & 0xf;
-      if (uVar8 == 0) goto LAB_000140a0;
-      uVar17 = *puVar31 >> 0x1d;
-      if (uVar17 == 1) {
-        iVar7 = 0;
+      entryWord = *outputEntry >> 0x10 & 0xf;
+      if (entryWord == 0) goto LAB_000140a0;
+      outputPrecision = *outputEntry >> 0x1d;
+      if (outputPrecision == 1) {
+        emitLength = 0;
         if (s_LONG_OUTPUT_res_001a4a3c[0] != '\0') {
           srcCursor = "LONG OUTPUT res";
           curChar = s_LONG_OUTPUT_res_001a4a3c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
 LAB_0001389c:
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
       }
       else {
-        if (uVar17 == 2) {
-          iVar7 = 0;
+        if (outputPrecision == 2) {
+          emitLength = 0;
           if (s_SHORT_OUTPUT_res_001a4a4c[0] != '\0') {
             srcCursor = "SHORT OUTPUT res";
             curChar = s_SHORT_OUTPUT_res_001a4a4c[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_0001389c;
         }
-        if (uVar17 == 0) {
-          iVar7 = 0;
+        if (outputPrecision == 0) {
+          emitLength = 0;
           if (s_OUTPUT_res_001a4a30[0] != '\0') {
             srcCursor = "OUTPUT res";
             curChar = s_OUTPUT_res_001a4a30[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_0001389c;
         }
       }
-      iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)puVar31 + 6));
-      outCursor = outCursor + iVar7;
+      emitLength = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)outputEntry + 6));
+      outCursor = outCursor + emitLength;
       if (!isAssemblyProgram) {
-        uVar17 = *puVar31;
-        in_r7 = uVar17 >> 0x1d;
-        in_r6 = (uint *)(uVar17 >> 0x1a & 7);
-        outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,uVar17 >> 0x18 & 3,0,in_r6,in_r7);
+        declWord = *outputEntry;
+        argReg7 = declWord >> 0x1d;
+        argReg6 = (uint *)(declWord >> 0x1a & 7);
+        outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
       }
-      iVar7 = 0;
+      emitLength = 0;
       if (s___001a4834[0] != '\0') {
         srcCursor = " = ";
         curChar = s___001a4834[0];
         do {
           srcCursor = srcCursor + 1;
-          outCursor[iVar7] = curChar;
-          iVar7 = iVar7 + 1;
+          outCursor[emitLength] = curChar;
+          emitLength = emitLength + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-      outCursor = outCursor + iVar7;
-      switch(uVar8) {
+      outCursor = outCursor + emitLength;
+      switch(entryWord) {
       default:
         goto switchD_00013960_caseD_0;
       case 1:
-        iVar24 = 0;
+        groupElementIndex = 0;
         if (s_result_position_001a4a60[0] != '\0') {
           srcCursor = "result.position";
           curChar = s_result_position_001a4a60[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 2:
-        iVar24 = 0;
+        groupElementIndex = 0;
         if (s_result_fogcoord_001a4a70[0] != '\0') {
           srcCursor = "result.fogcoord";
           curChar = s_result_fogcoord_001a4a70[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 3:
-        iVar24 = 0;
+        groupElementIndex = 0;
         if (s_result_pointsize_001a4a80[0] != '\0') {
           srcCursor = "result.pointsize";
           curChar = s_result_pointsize_001a4a80[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 4:
-        iVar7 = 0;
+        emitLength = 0;
         if (s_result_color_001a4a94[0] != '\0') {
           srcCursor = "result.color";
           curChar = s_result_color_001a4a94[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
         if ((programTarget == 0x8620) || (programTarget == 0x8b31)) {
-          if ((*puVar31 & 1) == 0) {
-            iVar24 = 0;
+          if ((*outputEntry & 1) == 0) {
+            groupElementIndex = 0;
             if (s__front_primary_001a4aa4[0] != '\0') {
               srcCursor = ".front.primary";
               curChar = s__front_primary_001a4aa4[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar24] = curChar;
-                iVar24 = iVar24 + 1;
+                outCursor[groupElementIndex] = curChar;
+                groupElementIndex = groupElementIndex + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
           }
           else {
-            if ((*puVar31 & 1) != 1) goto switchD_00013960_caseD_0;
-            iVar24 = 0;
+            if ((*outputEntry & 1) != 1) goto switchD_00013960_caseD_0;
+            groupElementIndex = 0;
             if (s__back_primary_001a4ab4[0] != '\0') {
               srcCursor = ".back.primary";
               curChar = s__back_primary_001a4ab4[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar24] = curChar;
-                iVar24 = iVar24 + 1;
+                outCursor[groupElementIndex] = curChar;
+                groupElementIndex = groupElementIndex + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
           }
         }
         else {
-          if (((programTarget != 0x8804) && (programTarget != 0x8b30)) || (uVar8 = *puVar31, (uVar8 >> 1 & 7) < 2)
+          if (((programTarget != 0x8804) && (programTarget != 0x8b30)) || (entryWord = *outputEntry, (entryWord >> 1 & 7) < 2)
              ) goto switchD_00013960_caseD_0;
-          iVar7 = 0;
+          emitLength = 0;
           if (s___001a4464[0] != '\0') {
             srcCursor = "[";
             curChar = s___001a4464[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar7] = curChar;
-              iVar7 = iVar7 + 1;
+              outCursor[emitLength] = curChar;
+              emitLength = emitLength + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            uVar8 = *puVar31;
+            entryWord = *outputEntry;
           }
-          outCursor = outCursor + iVar7;
-          iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,uVar8 >> 1 & 7);
-          iVar24 = 0;
-          outCursor = outCursor + iVar7;
+          outCursor = outCursor + emitLength;
+          emitLength = ((int (*)())FUN_0000cdf0)(outCursor,entryWord >> 1 & 7);
+          groupElementIndex = 0;
+          outCursor = outCursor + emitLength;
           if (s___001a4468[0] != '\0') {
             srcCursor = "]";
             curChar = s___001a4468[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar24] = curChar;
-              iVar24 = iVar24 + 1;
+              outCursor[groupElementIndex] = curChar;
+              groupElementIndex = groupElementIndex + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
         }
         break;
       case 5:
-        iVar7 = 0;
+        emitLength = 0;
         if (s_result_color_001a4a94[0] != '\0') {
           srcCursor = "result.color";
           curChar = s_result_color_001a4a94[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
         if ((programTarget == 0x8620) || (programTarget == 0x8b31)) {
-          if ((*puVar31 & 1) == 0) {
-            iVar24 = 0;
+          if ((*outputEntry & 1) == 0) {
+            groupElementIndex = 0;
             if (s__front_secondary_001a4ac4[0] != '\0') {
               srcCursor = ".front.secondary";
               curChar = s__front_secondary_001a4ac4[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar24] = curChar;
-                iVar24 = iVar24 + 1;
+                outCursor[groupElementIndex] = curChar;
+                groupElementIndex = groupElementIndex + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
           }
           else {
-            if ((*puVar31 & 1) != 1) goto switchD_00013960_caseD_0;
-            iVar24 = 0;
+            if ((*outputEntry & 1) != 1) goto switchD_00013960_caseD_0;
+            groupElementIndex = 0;
             if (s__back_secondary_001a4ad8[0] != '\0') {
               srcCursor = ".back.secondary";
               curChar = s__back_secondary_001a4ad8[0];
               do {
                 srcCursor = srcCursor + 1;
-                outCursor[iVar24] = curChar;
-                iVar24 = iVar24 + 1;
+                outCursor[groupElementIndex] = curChar;
+                groupElementIndex = groupElementIndex + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
@@ -6577,361 +6646,361 @@ LAB_0001389c:
         }
         goto switchD_00013960_caseD_0;
       case 6:
-        iVar7 = 0;
+        emitLength = 0;
         if (s_result_texcoord__001a4ae8[0] != '\0') {
           srcCursor = "result.texcoord[";
           curChar = s_result_texcoord__001a4ae8[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
-        iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar31 & 0x1f);
-        iVar24 = 0;
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
+        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,*outputEntry & 0x1f);
+        groupElementIndex = 0;
+        outCursor = outCursor + emitLength;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
           curChar = s___001a4468[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 7:
-        iVar24 = 0;
+        groupElementIndex = 0;
         if (s_result_depth_001a4afc[0] != '\0') {
           srcCursor = "result.depth";
           curChar = s_result_depth_001a4afc[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 8:
-        iVar24 = 0;
+        groupElementIndex = 0;
         if (s_result_eyePosition_001a4b1c[0] != '\0') {
           srcCursor = "result.eyePosition";
           curChar = s_result_eyePosition_001a4b1c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 9:
-        iVar24 = 0;
+        groupElementIndex = 0;
         if (s_result_clipVertex_001a4b30[0] != '\0') {
           srcCursor = "result.clipVertex";
           curChar = s_result_clipVertex_001a4b30[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         break;
       case 10:
-        iVar7 = 0;
+        emitLength = 0;
         if (s_result_attrib__001a4b0c[0] != '\0') {
           srcCursor = "result.attrib[";
           curChar = s_result_attrib__001a4b0c[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar7] = curChar;
-            iVar7 = iVar7 + 1;
+            outCursor[emitLength] = curChar;
+            emitLength = emitLength + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar7;
-        iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,*puVar31 & 0x1f);
-        iVar24 = 0;
-        outCursor = outCursor + iVar7;
+        outCursor = outCursor + emitLength;
+        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,*outputEntry & 0x1f);
+        groupElementIndex = 0;
+        outCursor = outCursor + emitLength;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
           curChar = s___001a4468[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[groupElementIndex] = curChar;
+            groupElementIndex = groupElementIndex + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
       }
-      outCursor = outCursor + iVar24;
+      outCursor = outCursor + groupElementIndex;
 switchD_00013960_caseD_0:
-      iVar7 = 0;
+      emitLength = 0;
       if (s___001a46fc[0] != '\0') {
         srcCursor = ";\n";
         curChar = s___001a46fc[0];
         do {
           srcCursor = srcCursor + 1;
-          outCursor[iVar7] = curChar;
-          iVar7 = iVar7 + 1;
+          outCursor[emitLength] = curChar;
+          emitLength = emitLength + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-      outCursor = outCursor + iVar7;
-      iVar7 = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
-      if (iVar7 == 0) goto LAB_00014048;
+      outCursor = outCursor + emitLength;
+      bufferOk = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+      if (bufferOk == 0) goto LAB_00014048;
 LAB_000140a0:
-      uVar37 = uVar37 + 1;
-      puVar31 = puVar31 + 2;
-    } while (outputCount != uVar37);
+      loopCounter = loopCounter + 1;
+      outputEntry = outputEntry + 2;
+    } while (outputCount != loopCounter);
   }
   if ((outputCount != 0) || (isAssemblyProgram)) {
-    iVar7 = 0;
+    emitLength = 0;
     if (s__001a45c0[0] != '\0') {
       srcCursor = "\n";
-      iVar7 = 0;
+      emitLength = 0;
       curChar = s__001a45c0[0];
       do {
         srcCursor = srcCursor + 1;
-        outCursor[iVar7] = curChar;
-        iVar7 = iVar7 + 1;
+        outCursor[emitLength] = curChar;
+        emitLength = emitLength + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    outCursor = outCursor + iVar7;
+    outCursor = outCursor + emitLength;
   }
   instructionCount = program[0x14];
   instructionOffset = program[0x15];
   if (0 < (int)instructionCount) {
-    iVar7 = 0;
-    iVar24 = 0;
-    uVar37 = instructionCount;
+    scanEntryIndex = 0;
+    branchTargetCount = 0;
+    entriesRemaining = instructionCount;
     do {
-      if ((program[instructionOffset * 2 + iVar7 * 2] >> 0x12 & 0xff) - 0x4b < 2) {
-        iVar24 = iVar24 + 1;
+      if ((program[instructionOffset * 2 + scanEntryIndex * 2] >> 0x12 & 0xff) - 0x4b < 2) {
+        branchTargetCount = branchTargetCount + 1;
       }
-      iVar7 = iVar7 + (program[instructionOffset * 2 + iVar7 * 2] >> 0x1d) + 2;
-      uVar37 = uVar37 - 1;
-    } while (uVar37 != 0);
-    if (iVar24 == 0) {
-      local_74 = (int *)0x0;
-      local_78 = (uint *)0x0;
-      puVar28 = (uint *)0x0;
-      bVar4 = true;
+      scanEntryIndex = scanEntryIndex + (program[instructionOffset * 2 + scanEntryIndex * 2] >> 0x1d) + 2;
+      entriesRemaining = entriesRemaining - 1;
+    } while (entriesRemaining != 0);
+    if (branchTargetCount == 0) {
+      branchTargets = (int *)0x0;
+      branchSources = (uint *)0x0;
+      labelCountNext = (uint *)0x0;
+      noLabels = true;
     }
     else {
-      local_74 = (int *)_malloc(iVar24 << 2);
-      _memset(local_74,0,iVar24);
-      local_78 = (uint *)_malloc(iVar24 << 2);
-      bVar2 = false;
-      bVar4 = true;
-      _memset(local_78,0,iVar24);
-      uVar37 = 0;
-      iVar7 = 0;
-      puVar31 = (uint *)0x0;
+      branchTargets = (int *)_malloc(branchTargetCount << 2);
+      _memset(branchTargets,0,branchTargetCount);
+      branchSources = (uint *)_malloc(branchTargetCount << 2);
+      moreLabels = false;
+      noLabels = true;
+      _memset(branchSources,0,branchTargetCount);
+      loopCounter = 0;
+      scanEntryIndex = 0;
+      labelCount = (uint *)0x0;
       do {
-        puVar28 = puVar31;
-        if ((program[instructionOffset * 2 + iVar7 * 2] >> 0x12 & 0xff) - 0x4b < 2) {
-          uVar8 = program[instructionOffset * 2 + iVar7 * 2] & 0x3ffff;
-          puVar32 = (uint *)((program + instructionOffset * 2 + iVar7 * 2)[1] & 0x3ffff);
-          if (bVar2) {
-            if (*local_74 < (int)puVar32) {
-              in_r8 = (uint *)0x0;
-              piVar21 = local_74;
-              puVar39 = puVar31;
+        labelCountNext = labelCount;
+        if ((program[instructionOffset * 2 + scanEntryIndex * 2] >> 0x12 & 0xff) - 0x4b < 2) {
+          entryWord = program[instructionOffset * 2 + scanEntryIndex * 2] & 0x3ffff;
+          branchTarget = (uint *)((program + instructionOffset * 2 + scanEntryIndex * 2)[1] & 0x3ffff);
+          if (moreLabels) {
+            if (*branchTargets < (int)branchTarget) {
+              argReg8 = (uint *)0x0;
+              branchTargetCursor = branchTargets;
+              labelsRemaining = labelCount;
               do {
-                in_r8 = (uint *)((int)in_r8 + 1);
-                puVar39 = (uint *)((int)puVar39 + -1);
-                if (puVar39 == (uint *)0x0) goto LAB_00014230;
-                piVar21 = piVar21 + 1;
-              } while (*piVar21 < (int)puVar32);
+                argReg8 = (uint *)((int)argReg8 + 1);
+                labelsRemaining = (uint *)((int)labelsRemaining + -1);
+                if (labelsRemaining == (uint *)0x0) goto LAB_00014230;
+                branchTargetCursor = branchTargetCursor + 1;
+              } while (*branchTargetCursor < (int)branchTarget);
             }
             else {
-              in_r8 = (uint *)0x0;
+              argReg8 = (uint *)0x0;
             }
           }
           else {
-            if (bVar4) {
+            if (noLabels) {
 LAB_00014230:
-              puVar28 = (uint *)((int)puVar31 + 1);
-              bVar2 = 0 < (int)puVar28;
-              bVar4 = puVar28 == (uint *)0x0;
-              local_74[(int)puVar31] = (int)puVar32;
-              local_78[(int)puVar31] = uVar8;
+              labelCountNext = (uint *)((int)labelCount + 1);
+              moreLabels = 0 < (int)labelCountNext;
+              noLabels = labelCountNext == (uint *)0x0;
+              branchTargets[(int)labelCount] = (int)branchTarget;
+              branchSources[(int)labelCount] = entryWord;
               goto LAB_00014300;
             }
-            in_r8 = (uint *)0x0;
+            argReg8 = (uint *)0x0;
           }
-          in_r10 = (char *)local_74[(int)in_r8];
-          if (puVar32 != (uint *)in_r10) {
-            local_74[(int)in_r8] = (int)puVar32;
-            puVar28 = (uint *)((int)puVar31 + 1);
-            in_r6 = (uint *)((int)in_r8 + 1);
-            uVar17 = local_78[(int)in_r8];
-            local_78[(int)in_r8] = uVar8;
-            if ((int)in_r6 < (int)puVar31) {
-              iVar24 = (int)puVar31 - (int)in_r6;
-              puVar31 = (uint *)0x0;
-              puVar22 = local_78 + (int)in_r6;
-              puVar39 = (uint *)(local_74 + (int)in_r6);
-              puVar32 = (uint *)in_r10;
+          argReg10 = (char *)branchTargets[(int)argReg8];
+          if (branchTarget != (uint *)argReg10) {
+            branchTargets[(int)argReg8] = (int)branchTarget;
+            labelCountNext = (uint *)((int)labelCount + 1);
+            argReg6 = (uint *)((int)argReg8 + 1);
+            swapSource = branchSources[(int)argReg8];
+            branchSources[(int)argReg8] = entryWord;
+            if ((int)argReg6 < (int)labelCount) {
+              labelsToShift = (int)labelCount - (int)argReg6;
+              labelCount = (uint *)0x0;
+              labelSourceCursor = branchSources + (int)argReg6;
+              labelInsertCursor = (uint *)(branchTargets + (int)argReg6);
+              swapTemp = (uint *)argReg10;
               do {
-                in_r7 = uVar17;
-                in_r10 = (char *)*puVar39;
-                *puVar39 = (uint)puVar32;
-                puVar31 = (uint *)((int)puVar31 + 1);
-                puVar39 = puVar39 + 1;
-                uVar17 = *puVar22;
-                *puVar22 = in_r7;
-                puVar22 = puVar22 + 1;
-                iVar24 = iVar24 + -1;
-                puVar32 = (uint *)in_r10;
-              } while (iVar24 != 0);
-              in_r6 = (uint *)((int)in_r6 + (int)puVar31);
+                argReg7 = swapSource;
+                argReg10 = (char *)*labelInsertCursor;
+                *labelInsertCursor = (uint)swapTemp;
+                labelCount = (uint *)((int)labelCount + 1);
+                labelInsertCursor = labelInsertCursor + 1;
+                swapSource = *labelSourceCursor;
+                *labelSourceCursor = argReg7;
+                labelSourceCursor = labelSourceCursor + 1;
+                labelsToShift = labelsToShift + -1;
+                swapTemp = (uint *)argReg10;
+              } while (labelsToShift != 0);
+              argReg6 = (uint *)((int)argReg6 + (int)labelCount);
             }
-            bVar2 = 0 < (int)puVar28;
-            bVar4 = puVar28 == (uint *)0x0;
-            local_74[(int)in_r6] = (int)in_r10;
-            local_78[(int)in_r6] = uVar17;
-            in_r8 = puVar31;
+            moreLabels = 0 < (int)labelCountNext;
+            noLabels = labelCountNext == (uint *)0x0;
+            branchTargets[(int)argReg6] = (int)argReg10;
+            branchSources[(int)argReg6] = swapSource;
+            argReg8 = labelCount;
           }
         }
 LAB_00014300:
-        uVar37 = uVar37 + 1;
-        iVar7 = iVar7 + (program[instructionOffset * 2 + iVar7 * 2] >> 0x1d) + 2;
-        puVar31 = puVar28;
-      } while (instructionCount != uVar37);
+        loopCounter = loopCounter + 1;
+        scanEntryIndex = scanEntryIndex + (program[instructionOffset * 2 + scanEntryIndex * 2] >> 0x1d) + 2;
+        labelCount = labelCountNext;
+      } while (instructionCount != loopCounter);
     }
     outCapacityPtr = outCapacity;
     outCursorPtr = &outCursor;
-    local_54 = 0x19f634;
-    puVar25 = (undefined1 *)0x0;
-    local_64 = s_MUL_V_001df634;
-    local_68 = 0x19f634;
-    iVar7 = 0;
-    uVar37 = 0;
-    iVar24 = 1;
+    newlineBase = 0x19f634;
+    entryIndex = (undefined1 *)0x0;
+    mnemonicTableBase = s_MUL_V_001df634;
+    semicolonBase = 0x19f634;
+    labelIndex = 0;
+    loopCounter = 0;
+    nestingDepth = 1;
     do {
-      puVar31 = program + instructionOffset * 2 + (int)puVar25 * 2;
-      if (((program[instructionOffset * 2 + (int)puVar25 * 2] & 0x3ffff) == 0) && (!isAssemblyProgram)) {
-        iVar27 = 0;
+      instructionRecord = program + instructionOffset * 2 + (int)entryIndex * 2;
+      if (((program[instructionOffset * 2 + (int)entryIndex * 2] & 0x3ffff) == 0) && (!isAssemblyProgram)) {
+        emitLength3 = 0;
         if (s_main__001a4b44[0] != '\0') {
           srcCursor = "main:\n";
-          iVar27 = 0;
+          emitLength3 = 0;
           curChar = s_main__001a4b44[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            outCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar27;
+        outCursor = outCursor + emitLength3;
       }
-      if ((bVar4) || ((int)puVar28 <= iVar7)) {
-        uVar8 = *puVar31;
+      if ((noLabels) || ((int)labelCountNext <= labelIndex)) {
+        entryWord = *instructionRecord;
       }
       else {
-        uVar8 = *puVar31;
-        if ((uVar8 & 0x3ffff) == local_74[iVar7]) {
-          if (0 < iVar24 + -1) {
-            in_r8 = (uint *)0x19f634;
-            iVar27 = 0;
-            in_r10 = "  ";
+        entryWord = *instructionRecord;
+        if ((entryWord & 0x3ffff) == branchTargets[labelIndex]) {
+          if (0 < nestingDepth + -1) {
+            argReg8 = (uint *)0x19f634;
+            indentIndex = 0;
+            argReg10 = "  ";
             do {
-              iVar19 = 0;
+              emitLength2 = 0;
               if (s__001a4b4c[0] != '\0') {
                 srcCursor = "  ";
-                iVar19 = 0;
+                emitLength2 = 0;
                 curChar = s__001a4b4c[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  outCursor[iVar19] = curChar;
-                  iVar19 = iVar19 + 1;
+                  outCursor[emitLength2] = curChar;
+                  emitLength2 = emitLength2 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-              iVar27 = iVar27 + 1;
-              outCursor = outCursor + iVar19;
-            } while (iVar24 + -1 != iVar27);
+              indentIndex = indentIndex + 1;
+              outCursor = outCursor + emitLength2;
+            } while (nestingDepth + -1 != indentIndex);
           }
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_label__001a4b50[0] != '\0') {
             srcCursor = "label_";
             curChar = s_label__001a4b50[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              outCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          outCursor = outCursor + iVar27;
-          iVar27 = ((int (*)())FUN_0000cdf0)(outCursor,iVar7);
-          iVar7 = iVar7 + 1;
-          iVar19 = 0;
+          outCursor = outCursor + emitLength3;
+          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,labelIndex);
+          labelIndex = labelIndex + 1;
+          emitLength2 = 0;
           if (s___001a4b58[0] != '\0') {
             srcCursor = ":\n";
             curChar = s___001a4b58[0];
             do {
               srcCursor = srcCursor + 1;
-              outCursor[iVar19 + iVar27] = curChar;
-              iVar19 = iVar19 + 1;
+              outCursor[emitLength2 + emitLength7] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          uVar8 = *puVar31;
-          outCursor = outCursor + iVar19 + iVar27;
+          entryWord = *instructionRecord;
+          outCursor = outCursor + emitLength2 + emitLength7;
         }
       }
-      puVar6 = outCursor;
-      uVar17 = uVar8 & 0x3fc0000;
-      if ((((uVar17 == 0x1ac0000) || (uVar17 == 0x1600000)) || (uVar17 == 0x1640000)) ||
-         ((uVar17 == 0x1680000 || (uVar17 == 0x16c0000)))) {
-        iVar24 = iVar24 + -1;
+      lineStart = outCursor;
+      opcodeBits = entryWord & 0x3fc0000;
+      if ((((opcodeBits == 0x1ac0000) || (opcodeBits == 0x1600000)) || (opcodeBits == 0x1640000)) ||
+         ((opcodeBits == 0x1680000 || (opcodeBits == 0x16c0000)))) {
+        nestingDepth = nestingDepth + -1;
       }
-      uVar17 = puVar31[1];
-      uVar29 = uVar8 >> 0x12 & 0xff;
-      puVar13 = outCursor;
-      if (0 < iVar24) {
-        in_r8 = (uint *)0x19f634;
-        iVar27 = 0;
-        in_r10 = "  ";
+      branchWord = instructionRecord[1];
+      opcode = entryWord >> 0x12 & 0xff;
+      lineCursor = outCursor;
+      if (0 < nestingDepth) {
+        argReg8 = (uint *)0x19f634;
+        indentIndex = 0;
+        argReg10 = "  ";
         do {
-          iVar19 = 0;
+          emitLength2 = 0;
           if (s__001a4b4c[0] != '\0') {
             srcCursor = "  ";
             curChar = s__001a4b4c[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar19] = curChar;
-              iVar19 = iVar19 + 1;
+              lineCursor[emitLength2] = curChar;
+              emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          iVar27 = iVar27 + 1;
-          puVar13 = puVar13 + iVar19;
-        } while (iVar27 != iVar24);
+          indentIndex = indentIndex + 1;
+          lineCursor = lineCursor + emitLength2;
+        } while (indentIndex != nestingDepth);
       }
-      iVar27 = 0;
-      srcCursor = *(char **)(local_64 + uVar29 * 4 + -0x6630);
+      emitLength3 = 0;
+      srcCursor = *(char **)(mnemonicTableBase + opcode * 4 + -0x6630);
       curChar = *srcCursor;
       if (curChar != '\0') {
-        iVar27 = 0;
+        emitLength3 = 0;
         do {
-          puVar13[iVar27] = curChar;
-          iVar27 = iVar27 + 1;
-          curChar = srcCursor[iVar27];
+          lineCursor[emitLength3] = curChar;
+          emitLength3 = emitLength3 + 1;
+          curChar = srcCursor[emitLength3];
         } while (curChar != '\0');
       }
-      puVar13 = puVar13 + iVar27;
-      pdVar36 = (dword *)0x0;
-      switch(uVar29) {
+      lineCursor = lineCursor + emitLength3;
+      operandEntriesUsed = (dword *)0x0;
+      switch(opcode) {
       case 0:
       case 1:
       case 2:
@@ -6976,63 +7045,63 @@ LAB_00014300:
       case 0x6c:
       case 0x6f:
       case 0x70:
-        uVar15 = ((int (*)())FUN_0000ca50)(puVar13,puVar31[1] >> 0x12 & 3);
-        uVar16 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(uVar15,uVar16 >> 0x16 & 1,uVar16 >> 0x15 & 1,uVar16 >> 0x14 & 1);
+        cursorAfterPrecision = ((int (*)())FUN_0000ca50)(lineCursor,instructionRecord[1] >> 0x12 & 3);
+        modifierWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(cursorAfterPrecision,modifierWord >> 0x16 & 1,modifierWord >> 0x15 & 1,modifierWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar16 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar16 >> 0x1a & 3,uVar16 >> 0x1c & 1,uVar16 >> 0x17 & 7);
+          modifierWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,modifierWord >> 0x1a & 3,modifierWord >> 0x1c & 1,modifierWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        local_60 = 0x19f634;
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        curChar = ((unsigned char *)0x00004ec0)[local_60];
+        commaSeparatorBase = 0x19f634;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         if (curChar != '\0') {
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-          iVar19 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+          emitLength2 = 0;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 2);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
-        if (uVar8 >> 0x1d == 2) {
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 2);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        if (entryWord >> 0x1d == 2) {
           if (curChar != '\0') {
-            iVar27 = 0;
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+            emitLength3 = 0;
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
             do {
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (curChar != '\0');
           }
           else {
-            iVar27 = 0;
+            emitLength3 = 0;
           }
-          puVar13 = puVar13 + iVar27;
+          lineCursor = lineCursor + emitLength3;
           goto LAB_000154ec;
         }
         break;
@@ -7067,64 +7136,64 @@ LAB_00014300:
       case 0x4e:
       case 0x52:
       case 0x6d:
-        uVar15 = ((int (*)())FUN_0000ca50)(puVar13,puVar31[1] >> 0x12 & 3);
-        uVar8 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(uVar15,uVar8 >> 0x16 & 1,uVar8 >> 0x15 & 1,uVar8 >> 0x14 & 1);
+        cursorAfterPrecision = ((int (*)())FUN_0000ca50)(lineCursor,instructionRecord[1] >> 0x12 & 3);
+        entryWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(cursorAfterPrecision,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        local_60 = 0x19f634;
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        curChar = ((unsigned char *)0x00004ec0)[local_60];
+        commaSeparatorBase = 0x19f634;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         if (curChar != '\0') {
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-          iVar19 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+          emitLength2 = 0;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (curChar != '\0') {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           do {
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (curChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        puVar13 = (undefined1 *)(iVar27 + iVar19);
+        lineCursor = (undefined1 *)(emitLength3 + emitLength2);
 LAB_000154ec:
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 3);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(puVar31,puVar13,local_6c,local_70,uVar35,puVar26,3,isShaderObject,0);
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 3);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000e1f0)(instructionRecord,lineCursor,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
         break;
       case 0x3b:
       case 0x3c:
@@ -7135,259 +7204,259 @@ LAB_000154ec:
       case 0x53:
       case 0x67:
       case 0x68:
-        uVar15 = ((int (*)())FUN_0000ca50)(puVar13,puVar31[1] >> 0x12 & 3);
-        uVar8 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(uVar15,uVar8 >> 0x16 & 1,uVar8 >> 0x15 & 1,uVar8 >> 0x14 & 1);
+        cursorAfterPrecision = ((int (*)())FUN_0000ca50)(lineCursor,instructionRecord[1] >> 0x12 & 3);
+        entryWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(cursorAfterPrecision,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        local_60 = 0x19f634;
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        curChar = ((unsigned char *)0x00004ec0)[local_60];
-        bVar2 = curChar != '\0';
-        if (bVar2) {
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-          iVar19 = 0;
+        commaSeparatorBase = 0x19f634;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
+        separatorNotEmpty = curChar != '\0';
+        if (separatorNotEmpty) {
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+          emitLength2 = 0;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
-        if (bVar2) {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        if (separatorNotEmpty) {
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,3,isShaderObject,0);
-        if (bVar2) {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
+        if (separatorNotEmpty) {
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           do {
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (curChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        pdVar36 = ((unsigned char *)0x4);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,4,isShaderObject,0);
+        operandEntriesUsed = ((unsigned char *)0x4);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,4,isShaderObject,0);
         break;
       case 0x41:
-        uVar8 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(puVar13,uVar8 >> 0x16 & 1,uVar8 >> 0x15 & 1,uVar8 >> 0x14 & 1);
+        entryWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        iVar19 = 0;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength2 = 0;
         if (s___001a44f4[0] != '\0') {
           srcCursor = ", ";
           curChar = s___001a44f4[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 3);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,1);
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 3);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,1);
         break;
       case 0x42:
       case 0x43:
-        uVar8 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(puVar13,uVar8 >> 0x16 & 1,uVar8 >> 0x15 & 1,uVar8 >> 0x14 & 1);
+        entryWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        local_60 = 0x19f634;
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        curChar = ((unsigned char *)0x00004ec0)[local_60];
+        commaSeparatorBase = 0x19f634;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         if (curChar != '\0') {
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-          iVar19 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+          emitLength2 = 0;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (curChar != '\0') {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           do {
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (curChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        pdVar36 = (dword *)((int)isShaderObject + 3);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000f250)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,3,isShaderObject);
+        operandEntriesUsed = (dword *)((int)isShaderObject + 3);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000f250)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject);
         break;
       case 0x44:
       case 0x45:
       case 0x46:
       case 0x47:
-        uVar8 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(puVar13,uVar8 >> 0x16 & 1,uVar8 >> 0x15 & 1,uVar8 >> 0x14 & 1);
+        entryWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        local_60 = 0x19f634;
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        curChar = ((unsigned char *)0x00004ec0)[local_60];
-        bVar2 = curChar != '\0';
-        if (bVar2) {
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-          iVar19 = 0;
+        commaSeparatorBase = 0x19f634;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
+        separatorNotEmpty = curChar != '\0';
+        if (separatorNotEmpty) {
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+          emitLength2 = 0;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
-        if (bVar2) {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        if (separatorNotEmpty) {
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000f250)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,3,isShaderObject);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000f250)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject);
         if (isAssemblyProgram) {
-          pdVar36 = (dword *)((int)((unsigned char *)0x0) + 3);
+          operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 3);
         }
         else {
-          if (bVar2) {
-            iVar27 = 0;
-            srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+          if (separatorNotEmpty) {
+            emitLength3 = 0;
+            srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
             do {
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
               srcCursor = srcCursor + 1;
             } while (curChar != '\0');
           }
           else {
-            iVar27 = 0;
+            emitLength3 = 0;
           }
-          pdVar36 = isShaderObject + 1;
-          in_r6 = local_70;
-          in_r7 = uVar35;
-          in_r8 = puVar26;
-          in_r10 = (char *)isShaderObject;
-          puVar13 = (undefined1 *)
-                    ((int (*)())FUN_0000e1f0)(puVar31,puVar13 + iVar27,local_6c,local_70,uVar35,puVar26,pdVar36,
+          operandEntriesUsed = isShaderObject + 1;
+          argReg6 = paramGroupState;
+          argReg7 = tmpRegisterNumbers;
+          argReg8 = tmpGroupState;
+          argReg10 = (char *)isShaderObject;
+          lineCursor = (undefined1 *)
+                    ((int (*)())FUN_0000e1f0)(instructionRecord,lineCursor + emitLength3,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,operandEntriesUsed,
                                  isShaderObject,0);
         }
         break;
@@ -7395,110 +7464,110 @@ LAB_000154ec:
       case 0x49:
       case 0x4a:
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          puVar13 = (undefined1 *)
-                    ((int (*)())FUN_0000df50)(puVar13,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          lineCursor = (undefined1 *)
+                    ((int (*)())FUN_0000df50)(lineCursor,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
-          iVar27 = 0;
+          emitLength3 = 0;
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            puVar13[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            lineCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        puVar13 = puVar13 + iVar27;
-        puVar32 = puVar31 + 2;
-        if ((puVar31[2] & 0xe0000) == 0x80000) {
-          iVar27 = 0;
+        lineCursor = lineCursor + emitLength3;
+        firstOperand = instructionRecord + 2;
+        if ((instructionRecord[2] & 0xe0000) == 0x80000) {
+          emitLength3 = 0;
           if (s_adr_001a44f0[0] != '\0') {
             srcCursor = "adr";
-            iVar27 = 0;
+            emitLength3 = 0;
             curChar = s_adr_001a44f0[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          iVar19 = ((int (*)())FUN_0000cdf0)(puVar13 + iVar27,(uint)*(ushort *)((int)puVar31 + 0xe));
-          puVar13 = puVar13 + iVar27 + iVar19;
+          registerNumberLength = ((int (*)())FUN_0000cdf0)(lineCursor + emitLength3,(uint)*(ushort *)((int)instructionRecord + 0xe));
+          lineCursor = lineCursor + emitLength3 + registerNumberLength;
         }
-        uVar8 = *puVar32;
-        if ((uVar8 & 0x1e000) != 0x1e000) {
-          iVar27 = 0;
+        entryWord = *firstOperand;
+        if ((entryWord & 0x1e000) != 0x1e000) {
+          emitLength3 = 0;
           if (s___001a448c[0] != '\0') {
             srcCursor = ".";
             curChar = s___001a448c[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            uVar8 = *puVar32;
+            entryWord = *firstOperand;
           }
-          puVar13 = puVar13 + iVar27;
+          lineCursor = lineCursor + emitLength3;
           if (isAssemblyProgram) {
-            if ((uVar8 & 0x2000) != 0) {
-              iVar27 = 0;
+            if ((entryWord & 0x2000) != 0) {
+              emitLength3 = 0;
               if (s_x_001a4490[0] != '\0') {
                 srcCursor = "x";
                 curChar = s_x_001a4490[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
-                uVar8 = *puVar32;
+                entryWord = *firstOperand;
               }
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
-            if ((uVar8 & 0x4000) != 0) {
-              iVar27 = 0;
+            if ((entryWord & 0x4000) != 0) {
+              emitLength3 = 0;
               if (s_y_001a4494[0] != '\0') {
                 srcCursor = "y";
                 curChar = s_y_001a4494[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
-                uVar8 = *puVar32;
+                entryWord = *firstOperand;
               }
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
-            if ((uVar8 & 0x8000) != 0) {
-              iVar27 = 0;
+            if ((entryWord & 0x8000) != 0) {
+              emitLength3 = 0;
               if (s_z_001a4498[0] != '\0') {
                 srcCursor = "z";
                 curChar = s_z_001a4498[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
-                uVar8 = *puVar32;
+                entryWord = *firstOperand;
               }
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
-            if ((uVar8 & 0x10000) != 0) {
-              iVar27 = 0;
+            if ((entryWord & 0x10000) != 0) {
+              emitLength3 = 0;
               if (s_w_001a449c[0] != '\0') {
                 srcCursor = "w";
                 curChar = s_w_001a449c[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
@@ -7506,213 +7575,213 @@ LAB_000154ec:
             }
           }
           else {
-            if ((uVar8 & 0x2000) != 0) {
-              iVar27 = 0;
+            if ((entryWord & 0x2000) != 0) {
+              emitLength3 = 0;
               if (s_x_001a4490[0] != '\0') {
                 srcCursor = "x";
                 curChar = s_x_001a4490[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
-                uVar8 = *puVar32;
+                entryWord = *firstOperand;
               }
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
-            if (((uVar8 & 0xc00) != 0) && ((uVar8 & 0x4000) != 0)) {
-              iVar27 = 0;
+            if (((entryWord & 0xc00) != 0) && ((entryWord & 0x4000) != 0)) {
+              emitLength3 = 0;
               if (s_y_001a4494[0] != '\0') {
                 srcCursor = "y";
                 curChar = s_y_001a4494[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
-                uVar8 = *puVar32;
+                entryWord = *firstOperand;
               }
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
-            if ((1 < (uVar8 >> 10 & 3)) && ((uVar8 & 0x8000) != 0)) {
-              iVar27 = 0;
+            if ((1 < (entryWord >> 10 & 3)) && ((entryWord & 0x8000) != 0)) {
+              emitLength3 = 0;
               if (s_z_001a4498[0] != '\0') {
                 srcCursor = "z";
                 curChar = s_z_001a4498[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
-                uVar8 = *puVar32;
+                entryWord = *firstOperand;
               }
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
-            if ((2 < (uVar8 >> 10 & 3)) && ((uVar8 & 0x10000) != 0)) {
-              iVar27 = 0;
+            if ((2 < (entryWord >> 10 & 3)) && ((entryWord & 0x10000) != 0)) {
+              emitLength3 = 0;
               if (s_w_001a449c[0] != '\0') {
                 srcCursor = "w";
                 curChar = s_w_001a449c[0];
                 do {
                   srcCursor = srcCursor + 1;
-                  puVar13[iVar27] = curChar;
-                  iVar27 = iVar27 + 1;
+                  lineCursor[emitLength3] = curChar;
+                  emitLength3 = emitLength3 + 1;
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
 LAB_00016158:
-              puVar13 = puVar13 + iVar27;
+              lineCursor = lineCursor + emitLength3;
             }
           }
         }
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s___001a44f4[0] != '\0') {
           srcCursor = ", ";
           curChar = s___001a44f4[0];
           do {
             srcCursor = srcCursor + 1;
-            puVar13[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            lineCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
 LAB_000161a0:
-        puVar13 = puVar13 + iVar27;
+        lineCursor = lineCursor + emitLength3;
         goto LAB_00014cb8;
       case 0x4b:
       case 0x4c:
-        pcVar14 = (char *)0x0;
+        indentLength = (char *)0x0;
         if (s__001a4b5c[0] != '\0') {
-          pcVar12 = " ";
-          pcVar14 = (char *)0x0;
+          separatorSrc = " ";
+          indentLength = (char *)0x0;
           curChar = s__001a4b5c[0];
           do {
-            pcVar12 = pcVar12 + 1;
-            puVar13[(int)pcVar14] = curChar;
-            pcVar14 = pcVar14 + 1;
-            curChar = *pcVar12;
-            srcCursor = pcVar14;
+            separatorSrc = separatorSrc + 1;
+            lineCursor[(int)indentLength] = curChar;
+            indentLength = indentLength + 1;
+            curChar = *separatorSrc;
+            srcCursor = indentLength;
           } while (curChar != '\0');
         }
-        iVar27 = -1;
-        if (local_74 != (int *)0x0) {
-          iVar27 = 0;
-          srcCursor = (char *)(puVar31[1] & 0x3ffff);
-          pcVar12 = (char *)*local_74;
-          while (srcCursor != pcVar12) {
-            iVar27 = iVar27 + 1;
-            pcVar12 = (char *)local_74[iVar27];
+        labelSearchIndex = -1;
+        if (branchTargets != (int *)0x0) {
+          labelSearchIndex = 0;
+          srcCursor = (char *)(instructionRecord[1] & 0x3ffff);
+          labelTarget = (char *)*branchTargets;
+          while (srcCursor != labelTarget) {
+            labelSearchIndex = labelSearchIndex + 1;
+            labelTarget = (char *)branchTargets[labelSearchIndex];
           }
         }
-        iVar27 = FUN_001a32d0(puVar13 + (int)pcVar14,"label_%i",iVar27,in_r6,in_r7,in_r8,srcCursor,
-                              in_r10);
-        puVar13 = puVar13 + (int)pcVar14 + iVar27;
-        if (uVar29 != 0x4b) goto switchD_000146d8_caseD_4d;
-        puVar32 = puVar31 + 2;
-        switch(puVar31[2] >> 0x1c & 7) {
+        emitLength3 = FUN_001a32d0(lineCursor + (int)indentLength,"label_%i",labelSearchIndex,argReg6,argReg7,argReg8,srcCursor,
+                              argReg10);
+        lineCursor = lineCursor + (int)indentLength + emitLength3;
+        if (opcode != 0x4b) goto switchD_000146d8_caseD_4d;
+        firstOperand = instructionRecord + 2;
+        switch(instructionRecord[2] >> 0x1c & 7) {
         case 0:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__TR_001a44a0[0] != '\0') {
             srcCursor = " (TR";
             curChar = s__TR_001a44a0[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 1:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__EQ_001a44a8[0] != '\0') {
             srcCursor = " (EQ";
             curChar = s__EQ_001a44a8[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 2:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__GE_001a44b0[0] != '\0') {
             srcCursor = " (GE";
             curChar = s__GE_001a44b0[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 3:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__GT_001a44b8[0] != '\0') {
             srcCursor = " (GT";
             curChar = s__GT_001a44b8[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 4:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__LE_001a44c0[0] != '\0') {
             srcCursor = " (LE";
             curChar = s__LE_001a44c0[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 5:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__LT_001a44c8[0] != '\0') {
             srcCursor = " (LT";
             curChar = s__LT_001a44c8[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 6:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__NE_001a44d0[0] != '\0') {
             srcCursor = " (NE";
             curChar = s__NE_001a44d0[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 7:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s__FL_001a44d8[0] != '\0') {
             srcCursor = " (FL";
             curChar = s__FL_001a44d8[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
@@ -7720,21 +7789,21 @@ LAB_000161a0:
         default:
           goto switchD_00014df8_default;
         }
-        puVar13 = puVar13 + iVar27;
+        lineCursor = lineCursor + emitLength3;
 switchD_00014df8_default:
-        if ((int)*puVar32 < 0) {
-          *puVar13 = 0x31;
-          puVar13 = puVar13 + 1;
+        if ((int)*firstOperand < 0) {
+          *lineCursor = 0x31;
+          lineCursor = lineCursor + 1;
         }
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 1);
-        *puVar13 = 0x2e;
-        puVar13[1] = (((byte)(*puVar32 >> 0x1a) & 3) + 1 & 3) + 0x77;
-        puVar13[2] = (*(char *)puVar32 + 1U & 3) + 0x77;
-        puVar13[3] = (((byte)(*puVar32 >> 0x16) & 3) + 1 & 3) + 0x77;
-        uVar8 = *puVar32;
-        puVar13[5] = 0x29;
-        puVar13[4] = (((byte)(uVar8 >> 0x14) & 3) + 1 & 3) + 0x77;
-        puVar13 = puVar13 + 6;
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 1);
+        *lineCursor = 0x2e;
+        lineCursor[1] = (((byte)(*firstOperand >> 0x1a) & 3) + 1 & 3) + 0x77;
+        lineCursor[2] = (*(char *)firstOperand + 1U & 3) + 0x77;
+        lineCursor[3] = (((byte)(*firstOperand >> 0x16) & 3) + 1 & 3) + 0x77;
+        entryWord = *firstOperand;
+        lineCursor[5] = 0x29;
+        lineCursor[4] = (((byte)(entryWord >> 0x14) & 3) + 1 & 3) + 0x77;
+        lineCursor = lineCursor + 6;
         break;
       case 0x4d:
       case 0x54:
@@ -7745,142 +7814,142 @@ switchD_00014df8_default:
       case 0x6b:
       case 0x6e:
 switchD_000146d8_caseD_4d:
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 1);
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 1);
         break;
       case 0x4f:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            puVar13[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            lineCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         goto LAB_00014cb4;
       case 0x55:
-        iVar24 = iVar24 + 1;
+        nestingDepth = nestingDepth + 1;
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          puVar13 = (undefined1 *)
-                    ((int (*)())FUN_0000df50)(puVar13,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
-          iVar27 = 0;
+          entryWord = instructionRecord[1];
+          lineCursor = (undefined1 *)
+                    ((int (*)())FUN_0000df50)(lineCursor,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = 0;
           if (s__001a4b5c[0] != '\0') {
             srcCursor = " ";
             curChar = s__001a4b5c[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           goto LAB_000161a0;
         }
-        puVar32 = puVar31 + 2;
-        switch(puVar31[2] >> 0x1c & 7) {
+        firstOperand = instructionRecord + 2;
+        switch(instructionRecord[2] >> 0x1c & 7) {
         case 0:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_TR_001a4b60[0] != '\0') {
             srcCursor = " TR";
             curChar = s_TR_001a4b60[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 1:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_EQ_001a4b64[0] != '\0') {
             srcCursor = " EQ";
             curChar = s_EQ_001a4b64[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 2:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_GE_001a4b68[0] != '\0') {
             srcCursor = " GE";
             curChar = s_GE_001a4b68[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 3:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_GT_001a4b6c[0] != '\0') {
             srcCursor = " GT";
             curChar = s_GT_001a4b6c[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 4:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_LE_001a4b70[0] != '\0') {
             srcCursor = " LE";
             curChar = s_LE_001a4b70[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 5:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_LT_001a4b74[0] != '\0') {
             srcCursor = " LT";
             curChar = s_LT_001a4b74[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 6:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_NE_001a4b78[0] != '\0') {
             srcCursor = " NE";
             curChar = s_NE_001a4b78[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
           break;
         case 7:
-          iVar27 = 0;
+          emitLength3 = 0;
           if (s_FL_001a4b7c[0] != '\0') {
             srcCursor = " FL";
             curChar = s_FL_001a4b7c[0];
             do {
               srcCursor = srcCursor + 1;
-              puVar13[iVar27] = curChar;
-              iVar27 = iVar27 + 1;
+              lineCursor[emitLength3] = curChar;
+              emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
@@ -7888,167 +7957,167 @@ switchD_000146d8_caseD_4d:
         default:
           goto switchD_00014940_default;
         }
-        puVar13 = puVar13 + iVar27;
+        lineCursor = lineCursor + emitLength3;
 switchD_00014940_default:
-        if ((int)*puVar32 < 0) {
-          *puVar13 = 0x31;
-          puVar13 = puVar13 + 1;
+        if ((int)*firstOperand < 0) {
+          *lineCursor = 0x31;
+          lineCursor = lineCursor + 1;
         }
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 1);
-        *puVar13 = 0x2e;
-        puVar13[1] = (((byte)(*puVar32 >> 0x1a) & 3) + 1 & 3) + 0x77;
-        puVar13[2] = (*(char *)puVar32 + 1U & 3) + 0x77;
-        puVar13[3] = (((byte)(*puVar32 >> 0x16) & 3) + 1 & 3) + 0x77;
-        puVar13[4] = (((byte)(*puVar32 >> 0x14) & 3) + 1 & 3) + 0x77;
-        puVar13 = puVar13 + 5;
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 1);
+        *lineCursor = 0x2e;
+        lineCursor[1] = (((byte)(*firstOperand >> 0x1a) & 3) + 1 & 3) + 0x77;
+        lineCursor[2] = (*(char *)firstOperand + 1U & 3) + 0x77;
+        lineCursor[3] = (((byte)(*firstOperand >> 0x16) & 3) + 1 & 3) + 0x77;
+        lineCursor[4] = (((byte)(*firstOperand >> 0x14) & 3) + 1 & 3) + 0x77;
+        lineCursor = lineCursor + 5;
         break;
       case 0x56:
       case 0x57:
-        iVar24 = iVar24 + 1;
-        iVar27 = 0;
+        nestingDepth = nestingDepth + 1;
+        emitLength3 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            puVar13[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            lineCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
         goto LAB_00014cb4;
       case 0x58:
       case 0x6a:
-        iVar24 = iVar24 + 1;
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 1);
+        nestingDepth = nestingDepth + 1;
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 1);
         break;
       case 0x60:
       case 0x61:
-        iVar27 = 0;
+        emitLength3 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            puVar13[iVar27] = curChar;
-            iVar27 = iVar27 + 1;
+            lineCursor[emitLength3] = curChar;
+            emitLength3 = emitLength3 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
 LAB_00014cb4:
-        puVar13 = puVar13 + iVar27;
+        lineCursor = lineCursor + emitLength3;
 LAB_00014cb8:
-        pdVar36 = (dword *)((int)((unsigned char *)0x0) + 2);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(puVar31,puVar13,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
+        operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 2);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000e1f0)(instructionRecord,lineCursor,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         break;
       case 0x62:
-        uVar8 = puVar31[1];
-        iVar27 = ((int (*)())FUN_0000c930)(puVar13,uVar8 >> 0x16 & 1,uVar8 >> 0x15 & 1,uVar8 >> 0x14 & 1);
+        entryWord = instructionRecord[1];
+        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
-          uVar8 = puVar31[1];
-          iVar27 = ((int (*)())FUN_0000df50)(iVar27,uVar8 >> 0x1a & 3,uVar8 >> 0x1c & 1,uVar8 >> 0x17 & 7);
+          entryWord = instructionRecord[1];
+          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
-        iVar19 = 0;
+        emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
           srcCursor = " ";
           curChar = s__001a4b5c[0];
           do {
             srcCursor = srcCursor + 1;
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        local_60 = 0x19f634;
-        iVar27 = ((int (*)())FUN_0000d380)(puVar31,iVar27 + iVar19,uVar35,puVar26,1,isShaderObject);
-        curChar = ((unsigned char *)0x00004ec0)[local_60];
-        bVar2 = curChar != '\0';
-        if (bVar2) {
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
-          iVar19 = 0;
+        commaSeparatorBase = 0x19f634;
+        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
+        separatorNotEmpty = curChar != '\0';
+        if (separatorNotEmpty) {
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
+          emitLength2 = 0;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,2,isShaderObject,0);
-        if (bVar2) {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        if (separatorNotEmpty) {
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,3,isShaderObject,0);
-        if (bVar2) {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
+        if (separatorNotEmpty) {
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           nextChar = curChar;
           do {
-            *(char *)(iVar27 + iVar19) = nextChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = nextChar;
+            emitLength2 = emitLength2 + 1;
             nextChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (nextChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        iVar27 = ((int (*)())FUN_0000e1f0)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,4,isShaderObject,0);
-        if (bVar2) {
-          iVar19 = 0;
-          srcCursor = ((unsigned char *)0x00004ec1) + local_60;
+        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,4,isShaderObject,0);
+        if (separatorNotEmpty) {
+          emitLength2 = 0;
+          srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
           do {
-            *(char *)(iVar27 + iVar19) = curChar;
-            iVar19 = iVar19 + 1;
+            *(char *)(emitLength3 + emitLength2) = curChar;
+            emitLength2 = emitLength2 + 1;
             curChar = *srcCursor;
             srcCursor = srcCursor + 1;
           } while (curChar != '\0');
         }
         else {
-          iVar19 = 0;
+          emitLength2 = 0;
         }
-        pdVar36 = (dword *)((int)isShaderObject + 5);
-        in_r6 = local_70;
-        in_r7 = uVar35;
-        in_r8 = puVar26;
-        in_r10 = (char *)isShaderObject;
-        puVar13 = (undefined1 *)
-                  ((int (*)())FUN_0000f250)(puVar31,iVar27 + iVar19,local_6c,local_70,uVar35,puVar26,5,isShaderObject);
+        operandEntriesUsed = (dword *)((int)isShaderObject + 5);
+        argReg6 = paramGroupState;
+        argReg7 = tmpRegisterNumbers;
+        argReg8 = tmpGroupState;
+        argReg10 = (char *)isShaderObject;
+        lineCursor = (undefined1 *)
+                  ((int (*)())FUN_0000f250)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,5,isShaderObject);
       }
-      iVar27 = 0;
-      curChar = ((unsigned char *)0x00005558)[local_68];
+      emitLength3 = 0;
+      curChar = ((unsigned char *)0x00005558)[semicolonBase];
       if (curChar != '\0') {
-        srcCursor = ((unsigned char *)0x00005559) + local_68;
-        iVar27 = 0;
+        srcCursor = ((unsigned char *)0x00005559) + semicolonBase;
+        emitLength3 = 0;
         do {
-          puVar13[iVar27] = curChar;
-          iVar27 = iVar27 + 1;
+          lineCursor[emitLength3] = curChar;
+          emitLength3 = emitLength3 + 1;
           curChar = *srcCursor;
           srcCursor = srcCursor + 1;
         } while (curChar != '\0');
       }
-      puVar13 = puVar13 + iVar27;
-      if ((!isAssemblyProgram) && (uVar29 - 0x4b < 0x21)) {
-        switch(uVar29) {
+      lineCursor = lineCursor + emitLength3;
+      if ((!isAssemblyProgram) && (opcode - 0x4b < 0x21)) {
+        switch(opcode) {
         case 0x4b:
         case 0x4c:
         case 0x54:
@@ -8061,103 +8130,103 @@ LAB_00014cb8:
         case 0x69:
         case 0x6a:
         case 0x6b:
-          iVar27 = FUN_001a32d0(puVar13,"    # Target: %d",uVar17 & 0x3ffff,in_r6,in_r7,in_r8,
-                                (uVar29 - 0x4b) * 4,in_r10);
-          puVar13 = puVar13 + iVar27;
+          emitLength3 = FUN_001a32d0(lineCursor,"    # Target: %d",branchWord & 0x3ffff,argReg6,argReg7,argReg8,
+                                (opcode - 0x4b) * 4,argReg10);
+          lineCursor = lineCursor + emitLength3;
         }
       }
-      iVar27 = 0;
-      curChar = ((unsigned char *)0x00004f8c)[local_54];
+      emitLength3 = 0;
+      curChar = ((unsigned char *)0x00004f8c)[newlineBase];
       if (curChar != '\0') {
-        srcCursor = ((unsigned char *)0x00004f8d) + local_54;
-        iVar27 = 0;
+        srcCursor = ((unsigned char *)0x00004f8d) + newlineBase;
+        emitLength3 = 0;
         do {
-          puVar13[iVar27] = curChar;
-          iVar27 = iVar27 + 1;
+          lineCursor[emitLength3] = curChar;
+          emitLength3 = emitLength3 + 1;
           curChar = *srcCursor;
           srcCursor = srcCursor + 1;
         } while (curChar != '\0');
       }
-      outCursor = puVar13 + (int)(outCursor + (iVar27 - (int)puVar6));
-      iVar27 = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
-      if (iVar27 == 0) {
-        if (local_6c != 0) {
-          _free(local_6c);
+      outCursor = lineCursor + (int)(outCursor + (emitLength3 - (int)lineStart));
+      ensureOk = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
+      if (ensureOk == 0) {
+        if (paramRegisterNumbers != 0) {
+          _free(paramRegisterNumbers);
         }
-        if (local_70 != (uint *)0x0) {
-          _free(local_70);
+        if (paramGroupState != (uint *)0x0) {
+          _free(paramGroupState);
         }
-        if (uVar35 != 0) {
-          _free(uVar35);
+        if (tmpRegisterNumbers != 0) {
+          _free(tmpRegisterNumbers);
         }
-        if (puVar26 != (uint *)0x0) {
-          _free(puVar26);
+        if (tmpGroupState != (uint *)0x0) {
+          _free(tmpGroupState);
         }
-        if (bVar4) goto LAB_00016630;
-        _free(local_74);
-        puVar26 = local_78;
+        if (noLabels) goto LAB_00016630;
+        _free(branchTargets);
+        tmpGroupState = branchSources;
         goto LAB_000163f0;
       }
-      uVar37 = uVar37 + 1;
-      puVar25 = (undefined1 *)((int)pdVar36 + (int)(puVar25 + 1));
-    } while (instructionCount != uVar37);
-    if (!bVar4) {
-      if ((iVar7 < (int)puVar28) && (instructionCount + 1 == local_74[iVar7])) {
-        iVar24 = 0;
+      loopCounter = loopCounter + 1;
+      entryIndex = (undefined1 *)((int)operandEntriesUsed + (int)(entryIndex + 1));
+    } while (instructionCount != loopCounter);
+    if (!noLabels) {
+      if ((labelIndex < (int)labelCountNext) && (instructionCount + 1 == branchTargets[labelIndex])) {
+        emitLength5 = 0;
         if (s_label__001a4ba4[0] != '\0') {
           srcCursor = "  label_";
           curChar = s_label__001a4ba4[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[emitLength5] = curChar;
+            emitLength5 = emitLength5 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar24;
-        iVar7 = ((int (*)())FUN_0000cdf0)(outCursor,iVar7);
-        iVar24 = 0;
+        outCursor = outCursor + emitLength5;
+        labelNumberLength = ((int (*)())FUN_0000cdf0)(outCursor,labelIndex);
+        emitLength5 = 0;
         if (s___001a4b58[0] != '\0') {
           srcCursor = ":\n";
           curChar = s___001a4b58[0];
           do {
             srcCursor = srcCursor + 1;
-            outCursor[iVar24 + iVar7] = curChar;
-            iVar24 = iVar24 + 1;
+            outCursor[emitLength5 + labelNumberLength] = curChar;
+            emitLength5 = emitLength5 + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        outCursor = outCursor + iVar24 + iVar7;
+        outCursor = outCursor + emitLength5 + labelNumberLength;
       }
-      _free(local_74);
-      _free(local_78);
+      _free(branchTargets);
+      _free(branchSources);
     }
   }
-  iVar7 = 0;
+  emitLength = 0;
   if (s_END_001a4bb0[0] != '\0') {
     srcCursor = "END\n";
-    iVar7 = 0;
+    emitLength = 0;
     curChar = s_END_001a4bb0[0];
     do {
       srcCursor = srcCursor + 1;
-      outCursor[iVar7] = curChar;
-      iVar7 = iVar7 + 1;
+      outCursor[emitLength] = curChar;
+      emitLength = emitLength + 1;
       curChar = *srcCursor;
     } while (curChar != '\0');
   }
-  outCursor[iVar7] = 0;
-  outCursor = outCursor + iVar7 + 1;
-  if (local_6c != 0) {
-    _free(local_6c);
+  outCursor[emitLength] = 0;
+  outCursor = outCursor + emitLength + 1;
+  if (paramRegisterNumbers != 0) {
+    _free(paramRegisterNumbers);
   }
-  if (local_70 != (uint *)0x0) {
-    _free(local_70);
+  if (paramGroupState != (uint *)0x0) {
+    _free(paramGroupState);
   }
-  if (uVar35 != 0) {
-    _free(uVar35);
+  if (tmpRegisterNumbers != 0) {
+    _free(tmpRegisterNumbers);
   }
-  if (puVar26 != (uint *)0x0) {
-    _free(puVar26);
+  if (tmpGroupState != (uint *)0x0) {
+    _free(tmpGroupState);
   }
   if ((int)outCursor - outBuffer < 1) {
     _free(outBuffer);
@@ -8168,19 +8237,19 @@ LAB_00014cb8:
   }
   return outBuffer;
 LAB_00014048:
-  if (local_6c != 0) {
-    _free(local_6c);
+  if (paramRegisterNumbers != 0) {
+    _free(paramRegisterNumbers);
   }
 joined_r0x000112bc:
-  if (local_70 != (uint *)0x0) {
-    _free(local_70);
+  if (paramGroupState != (uint *)0x0) {
+    _free(paramGroupState);
   }
 LAB_00014070:
-  if (uVar35 != 0) {
-    _free(uVar35);
+  if (tmpRegisterNumbers != 0) {
+    _free(tmpRegisterNumbers);
   }
-  if (puVar26 != (uint *)0x0) {
-    _free(puVar26);
+  if (tmpGroupState != (uint *)0x0) {
+    _free(tmpGroupState);
   }
 LAB_00016630:
   _free(outBuffer);
