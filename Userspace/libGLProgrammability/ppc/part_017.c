@@ -4025,15 +4025,15 @@ LAB_97bfb2c8:
                     copyIndex2 = copyIndex2 + 1;
                   }
                 }
-                iVar5 = ((int (*)())_glpWriteDestinationMask)(inst,iVar11 + copyIndex2,iVar6,2);
+                outCursor2 = ((int (*)())_glpWriteDestinationMask)(inst,iVar11 + copyIndex2,iVar6,2);
                 copyIndex = 0;
                 ch = s___97c2d7ec[0];
                 while (ch != '\0') {
-                  *(char *)(iVar5 + copyIndex) = ch;
+                  *(char *)(outCursor2 + copyIndex) = ch;
                   ch = ", "[copyIndex + 1];
                   copyIndex = copyIndex + 1;
                 }
-                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar5 + copyIndex,param_5,param_6,2,0,0,0);
+                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,2,0,0,0);
                 copyIndex = 0;
                 ch = s___97c2d7ec[0];
                 while (ch != '\0') {
@@ -4109,16 +4109,16 @@ LAB_97bfb2c8:
                   ch = "ADD scratch1"[copyIndex4 + 1];
                   copyIndex4 = copyIndex4 + 1;
                 }
-                iVar11 = ((int (*)())_glpWriteDestinationMask)(inst,outCursor2 + copyIndex + copyIndex4,iVar6,2);
+                outCursor3 = ((int (*)())_glpWriteDestinationMask)(inst,outCursor2 + copyIndex + copyIndex4,iVar6,2);
                 copyIndex2 = 0;
                 ch = s___scratch_x__scratch_y__97c2e524[0];
                 while (ch != '\0') {
-                  *(char *)(iVar11 + copyIndex2) = ch;
+                  *(char *)(outCursor3 + copyIndex2) = ch;
                   ch = ", scratch.x, scratch.y;\n"[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
                 uVar8 = inst[2];
-                iVar11 = iVar11 + copyIndex2;
+                iVar11 = outCursor3 + copyIndex2;
               }
               iVar6 = iVar6 + 1;
               uVar9 = (int)uVar9 >> 1;
@@ -7438,15 +7438,15 @@ LAB_97c00620:
       ch = "SUB scratch, kSEL"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outText + copyIndex);
+    outCursor = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outText + copyIndex);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + copyIndex) = ch;
+      *(char *)(outCursor + copyIndex) = ch;
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {

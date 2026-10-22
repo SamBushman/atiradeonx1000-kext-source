@@ -1999,6 +1999,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   int outCursor;
   int copyIndex2;
   int copyIndex;
+  int outCursor2;
   uint uVar1;
   char ch;
   uint uVar3;
@@ -2097,19 +2098,19 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x70:
     uVar6 = ((int (*)())_glpWritePrecision)(puVar15,param_1[1] >> 0x12 & 3);
     uVar7 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(uVar6,uVar7 >> 0x16 & 1,uVar7 >> 0x15 & 1,uVar7 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar7 >> 0x16 & 1,uVar7 >> 0x15 & 1,uVar7 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar7 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar7 >> 0x1a & 3,uVar7 >> 0x1c & 1,uVar7 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar7 >> 0x1a & 3,uVar7 >> 0x1c & 1,uVar7 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2162,19 +2163,19 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x6d:
     uVar6 = ((int (*)())_glpWritePrecision)(puVar15,param_1[1] >> 0x12 & 3);
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2204,19 +2205,19 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x68:
     uVar6 = ((int (*)())_glpWritePrecision)(puVar15,param_1[1] >> 0x12 & 3);
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2245,19 +2246,19 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
     goto LAB_97be9620;
   case 0x41:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2272,19 +2273,19 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x42:
   case 0x43:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2307,19 +2308,19 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x46:
   case 0x47:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2366,16 +2367,16 @@ LAB_97be9620:
       ch = " "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteAddressOperand)(param_1,puVar15 + copyIndex,1,uVar12);
+    outCursor = ((int (*)())_glpWriteAddressOperand)(param_1,puVar15 + copyIndex,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + copyIndex) = ch;
+      *(char *)(outCursor + copyIndex) = ch;
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
 LAB_97be9928:
-    puVar15 = (undefined1 *)(iVar9 + copyIndex);
+    puVar15 = (undefined1 *)(outCursor + copyIndex);
     goto LAB_97be99b4;
   case 0x4b:
   case 0x4c:
@@ -2412,11 +2413,11 @@ LAB_97be8e48:
     *param_10 = *param_10 + 1;
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar9 = ((int (*)())_glpWriteSizeType)(puVar15,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor = ((int (*)())_glpWriteSizeType)(puVar15,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
       copyIndex = 0;
       ch = s__97c291c0[0];
       while (ch != '\0') {
-        *(char *)(iVar9 + copyIndex) = ch;
+        *(char *)(outCursor + copyIndex) = ch;
         ch = " "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
@@ -2545,19 +2546,19 @@ LAB_97be99b4:
     break;
   case 0x62:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
     copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + copyIndex2) = ch;
+      *(char *)(outCursor2 + copyIndex2) = ch;
       ch = " "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + copyIndex2,param_7,param_8,1,uVar12);
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
