@@ -6754,8 +6754,8 @@ LAB_000676b4:
 }
 
 /* FUN_00067ac0 @ 0x67ac0 (2516 bytes) */
-int FUN_00067ac0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
+int FUN_00067ac0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
+  int ctx;
   uint param_2;
   uint param_3;
   int *param_4;
@@ -6790,11 +6790,11 @@ int FUN_00067ac0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar16;
   uint uVar17;
   uint uVar18;
-  int iVar19;
-  uint *puVar20;
+  int allocator;
+  uint *instrCountPtr;
   
   uVar13 = (param_2 & 0x3f) << 0x10 | param_3 & 0xffff;
-  puVar20 = (uint *)(param_1 + 0x754);
+  instrCountPtr = (uint *)(ctx + 0x754);
   uVar16 = 0;
   uVar17 = 0;
   uVar18 = 0;
@@ -6804,28 +6804,28 @@ int FUN_00067ac0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uVar15 = 0x55;
   }
   if (*param_4 == 0) {
-    iVar19 = param_4[3];
+    allocator = param_4[3];
     iVar8 = param_4[1];
     iVar2 = param_4[2];
 LAB_00067bc0:
     uVar13 = uVar13 | 0x400000;
-    uVar15 = (uint)(iVar19 != 0) * 0x40 |
+    uVar15 = (uint)(allocator != 0) * 0x40 |
              (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*param_4 != 0);
   }
   else {
     iVar8 = param_4[1];
     if (iVar8 == 0) {
-      iVar19 = param_4[3];
+      allocator = param_4[3];
       iVar2 = param_4[2];
       goto LAB_00067bc0;
     }
     iVar2 = param_4[2];
     if (iVar2 == 0) {
-      iVar19 = param_4[3];
+      allocator = param_4[3];
       goto LAB_00067bc0;
     }
     if (param_4[3] == 0) {
-      iVar19 = 0;
+      allocator = 0;
       goto LAB_00067bc0;
     }
   }
@@ -7033,173 +7033,173 @@ LAB_00067e40:
            (uVar5 & 7) << 8 |
            (uVar11 & 1) << 7 | (uVar6 & 7) << 4 | (*param_16 & 1) << 3 | uVar12 & 7;
 LAB_00067f94:
-  uVar5 = *puVar20;
-  iVar19 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-      (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  uVar5 = *instrCountPtr;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar5) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar20;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    uVar5 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined4 *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = 0x40;
-  uVar5 = *puVar20 + 1;
-  *puVar20 = uVar5;
-  iVar19 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-      (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined4 *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = 0x40;
+  uVar5 = *instrCountPtr + 1;
+  *instrCountPtr = uVar5;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar5) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar20;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    uVar5 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar13;
-  uVar5 = *puVar20 + 1;
-  *puVar20 = uVar5;
+  *(uint *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = uVar13;
+  uVar5 = *instrCountPtr + 1;
+  *instrCountPtr = uVar5;
   if ((uVar13 & 0x400000) != 0) {
-    iVar19 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar5) {
-      uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-        (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= uVar5) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar5 = *puVar20;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      uVar5 = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar15;
-    uVar5 = *puVar20 + 1;
-    *puVar20 = uVar5;
+    *(uint *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+    uVar5 = *instrCountPtr + 1;
+    *instrCountPtr = uVar5;
   }
-  iVar19 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-      (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar5) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar20;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    uVar5 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar14;
-  uVar13 = *puVar20 + 1;
-  *puVar20 = uVar13;
+  *(uint *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = uVar14;
+  uVar13 = *instrCountPtr + 1;
+  *instrCountPtr = uVar13;
   if ((uVar14 & 0x400000) != 0) {
-    iVar19 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar13) {
-      uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-        (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= uVar13) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar13 = *puVar20;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      uVar13 = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar13 * 4 + *(int *)(param_1 + 0x75c)) = uVar18;
-    uVar13 = *puVar20 + 1;
-    *puVar20 = uVar13;
+    *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar18;
+    uVar13 = *instrCountPtr + 1;
+    *instrCountPtr = uVar13;
   }
-  iVar19 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar13) {
-    uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-      (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar13) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar13 = *puVar20;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    uVar13 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar13 * 4 + *(int *)(param_1 + 0x75c)) = uVar1;
-  uVar13 = *puVar20 + 1;
-  *puVar20 = uVar13;
+  *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  uVar13 = *instrCountPtr + 1;
+  *instrCountPtr = uVar13;
   if ((uVar1 & 0x400000) != 0) {
-    iVar19 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar13) {
-      uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-        (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= uVar13) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar13 = *puVar20;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      uVar13 = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar13 * 4 + *(int *)(param_1 + 0x75c)) = uVar17;
-    uVar13 = *puVar20 + 1;
-    *puVar20 = uVar13;
+    *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar17;
+    uVar13 = *instrCountPtr + 1;
+    *instrCountPtr = uVar13;
   }
-  iVar19 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar13) {
-    uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-      (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar13) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar13 = *puVar20;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    uVar13 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar13 * 4 + *(int *)(param_1 + 0x75c)) = uVar3;
-  uVar13 = *puVar20 + 1;
-  *puVar20 = uVar13;
+  *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar3;
+  uVar13 = *instrCountPtr + 1;
+  *instrCountPtr = uVar13;
   if ((uVar3 & 0x400000) != 0) {
-    iVar19 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar13) {
-      uVar4 = (**(code **)(iVar19 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar20 << 2);
-        (**(code **)(iVar19 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= uVar13) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar13 = *puVar20;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      uVar13 = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar13 * 4 + *(int *)(param_1 + 0x75c)) = uVar16;
-    *puVar20 = *puVar20 + 1;
+    *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    *instrCountPtr = *instrCountPtr + 1;
   }
   return;
 }
 
 /* FUN_000684c0 @ 0x684c0 (3632 bytes) */
-int FUN_000684c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
+int FUN_000684c0(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, src0Flags, param_9, param_10, src1Words, src1Flags, param_13, param_14, src2Words, src2Flags)
+  int ctx;
   uint param_2;
   uint param_3;
   int *param_4;
   uint param_5;
   uint param_6;
-  uint *param_7;
-  uint *param_8;
+  uint *src0Words;
+  uint *src0Flags;
   uint param_9;
   uint param_10;
-  uint *param_11;
-  uint *param_12;
+  uint *src1Words;
+  uint *src1Flags;
   uint param_13;
   uint param_14;
-  uint *param_15;
-  uint *param_16;
+  uint *src2Words;
+  uint *src2Flags;
 {
   uint uVar1;
   int iVar2;
   uint uVar3;
-  undefined4 uVar4;
+  undefined4 newBuffer;
   uint uVar5;
   uint uVar6;
   uint uVar7;
   int iVar8;
   uint uVar9;
   uint uVar10;
-  uint uVar11;
+  uint instrWord;
   uint uVar12;
   uint uVar13;
   uint uVar14;
@@ -7208,79 +7208,79 @@ int FUN_000684c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar17;
   uint uVar18;
   uint uVar19;
-  int iVar20;
-  uint *puVar21;
+  int allocator;
+  uint *instrCountPtr;
   uint uStack0000001c;
   uint uStack00000020;
   undefined1 auStack_88 [4];
   uint uStack_84;
   uint uStack_58;
   
-  puVar21 = (uint *)(param_1 + 0x754);
+  instrCountPtr = (uint *)(ctx + 0x754);
   uVar17 = 0;
   uVar16 = 0;
   uVar18 = 0;
   uVar15 = 0;
   uStack0000001c = param_2;
   uStack00000020 = param_3;
-  (**(code **)(param_1 + 0x748))(param_1,0,auStack_88,param_4,param_5,param_6,param_7,param_8);
-  uVar11 = uStack_84 & 0xffff;
+  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,param_4,param_5,param_6,src0Words,src0Flags);
+  instrWord = uStack_84 & 0xffff;
   uStack_58 = 3;
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= *(uint *)(param_1 + 0x754)) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*(int *)(param_1 + 0x754) << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= *(uint *)(ctx + 0x754)) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*(int *)(ctx + 0x754) << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(*puVar21 * 4 + *(int *)(param_1 + 0x75c)) = uStack_58;
-  uVar10 = *puVar21 + 1;
-  *puVar21 = uVar10;
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar10) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(*instrCountPtr * 4 + *(int *)(ctx + 0x75c)) = uStack_58;
+  uVar10 = *instrCountPtr + 1;
+  *instrCountPtr = uVar10;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar10) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar10 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    uVar10 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar10 * 4 + *(int *)(param_1 + 0x75c)) = uVar11 | 0x40000;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(uVar10 * 4 + *(int *)(ctx + 0x75c)) = instrWord | 0x40000;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   uStack_58 = uStack_58 & 0xffff0000 | 0x40;
   uVar10 = (uStack0000001c & 0x3f) << 0x10 | uStack00000020 & 0xffff;
   if ((uStack0000001c == 0x12) || (uStack0000001c == 0x13)) {
@@ -7288,388 +7288,388 @@ int FUN_000684c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uVar15 = 0x55;
   }
   if (*param_4 == 0) {
-    iVar20 = param_4[3];
+    allocator = param_4[3];
     iVar8 = param_4[1];
     iVar2 = param_4[2];
 LAB_00068a20:
     uVar10 = uVar10 | 0x400000;
-    uVar15 = (uint)(iVar20 != 0) * 0x40 |
+    uVar15 = (uint)(allocator != 0) * 0x40 |
              (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*param_4 != 0);
   }
   else {
     iVar8 = param_4[1];
     if (iVar8 == 0) {
-      iVar20 = param_4[3];
+      allocator = param_4[3];
       iVar2 = param_4[2];
       goto LAB_00068a20;
     }
     iVar2 = param_4[2];
     if (iVar2 == 0) {
-      iVar20 = param_4[3];
+      allocator = param_4[3];
       goto LAB_00068a20;
     }
     if (param_4[3] == 0) {
-      iVar20 = 0;
+      allocator = 0;
       goto LAB_00068a20;
     }
   }
   uVar19 = (param_5 & 0x3f) << 0x10 | uStack_84 & 0xffff;
-  if (*param_8 == 0) {
-    uVar7 = param_8[1];
+  if (*src0Flags == 0) {
+    uVar7 = src0Flags[1];
     if (uVar7 != 0) {
-      uVar5 = param_8[3];
-      uVar9 = param_7[3];
-      uVar6 = param_8[2];
-      uVar12 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar5 = src0Flags[3];
+      uVar9 = src0Words[3];
+      uVar6 = src0Flags[2];
+      uVar12 = *src0Words;
+      uVar3 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar6 = param_8[2];
+    uVar6 = src0Flags[2];
     if (uVar6 != 0) {
-      uVar5 = param_8[3];
-      uVar9 = param_7[3];
-      uVar12 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar5 = src0Flags[3];
+      uVar9 = src0Words[3];
+      uVar12 = *src0Words;
+      uVar3 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar5 = param_8[3];
+    uVar5 = src0Flags[3];
     if (uVar5 != 0) {
-      uVar9 = param_7[3];
-      uVar12 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar9 = src0Words[3];
+      uVar12 = *src0Words;
+      uVar3 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar12 = *param_7;
+    uVar12 = *src0Words;
     if (uVar12 != 0) {
-      uVar9 = param_7[3];
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar9 = src0Words[3];
+      uVar3 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar3 = param_7[1];
+    uVar3 = src0Words[1];
     if (uVar3 != 1) {
-      uVar9 = param_7[3];
-      uVar1 = param_7[2];
+      uVar9 = src0Words[3];
+      uVar1 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar1 = param_7[2];
+    uVar1 = src0Words[2];
     if (uVar1 != 2) {
-      uVar9 = param_7[3];
+      uVar9 = src0Words[3];
       goto LAB_00068b70;
     }
-    uVar9 = param_7[3];
+    uVar9 = src0Words[3];
     if (uVar9 != 3) goto LAB_00068b70;
   }
   else {
-    uVar5 = param_8[3];
-    uVar9 = param_7[3];
-    uVar7 = param_8[1];
-    uVar6 = param_8[2];
-    uVar12 = *param_7;
-    uVar3 = param_7[1];
-    uVar1 = param_7[2];
+    uVar5 = src0Flags[3];
+    uVar9 = src0Words[3];
+    uVar7 = src0Flags[1];
+    uVar6 = src0Flags[2];
+    uVar12 = *src0Words;
+    uVar3 = src0Words[1];
+    uVar1 = src0Words[2];
 LAB_00068b70:
     uVar19 = uVar19 | 0x400000;
     uVar18 = (uVar5 & 1) << 0xf |
              (uVar9 & 7) << 0xc |
              (uVar6 & 1) << 0xb |
              (uVar1 & 7) << 8 |
-             (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*param_8 & 1) << 3 | uVar12 & 7;
+             (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*src0Flags & 1) << 3 | uVar12 & 7;
   }
   uVar1 = (param_9 & 0x3f) << 0x10 | param_10 & 0xffff;
-  if (*param_12 == 0) {
-    uVar5 = param_12[1];
+  if (*src1Flags == 0) {
+    uVar5 = src1Flags[1];
     if (uVar5 != 0) {
-      uVar6 = param_11[3];
-      uVar3 = param_12[3];
+      uVar6 = src1Words[3];
+      uVar3 = src1Flags[3];
       goto LAB_00068c4c;
     }
-    uVar12 = param_12[2];
+    uVar12 = src1Flags[2];
     if (uVar12 != 0) {
-      uVar6 = param_11[3];
-      uVar13 = *param_11;
-      uVar7 = param_11[2];
-      uVar3 = param_12[3];
-      uVar9 = param_11[1];
+      uVar6 = src1Words[3];
+      uVar13 = *src1Words;
+      uVar7 = src1Words[2];
+      uVar3 = src1Flags[3];
+      uVar9 = src1Words[1];
       goto LAB_00068cb0;
     }
-    uVar3 = param_12[3];
+    uVar3 = src1Flags[3];
     if (uVar3 != 0) {
-      uVar6 = param_11[3];
-      uVar13 = *param_11;
-      uVar9 = param_11[1];
-      uVar7 = param_11[2];
+      uVar6 = src1Words[3];
+      uVar13 = *src1Words;
+      uVar9 = src1Words[1];
+      uVar7 = src1Words[2];
       goto LAB_00068cb0;
     }
-    uVar13 = *param_11;
+    uVar13 = *src1Words;
     if (uVar13 != 0) {
-      uVar6 = param_11[3];
-      uVar9 = param_11[1];
-      uVar7 = param_11[2];
+      uVar6 = src1Words[3];
+      uVar9 = src1Words[1];
+      uVar7 = src1Words[2];
       goto LAB_00068cb0;
     }
-    uVar9 = param_11[1];
+    uVar9 = src1Words[1];
     if (uVar9 != 1) {
-      uVar6 = param_11[3];
-      uVar7 = param_11[2];
+      uVar6 = src1Words[3];
+      uVar7 = src1Words[2];
       goto LAB_00068cb0;
     }
-    uVar7 = param_11[2];
+    uVar7 = src1Words[2];
     if (uVar7 != 2) {
-      uVar6 = param_11[3];
+      uVar6 = src1Words[3];
       goto LAB_00068cb0;
     }
-    uVar6 = param_11[3];
+    uVar6 = src1Words[3];
     if (uVar6 != 3) goto LAB_00068cb0;
   }
   else {
-    uVar6 = param_11[3];
-    uVar3 = param_12[3];
-    uVar5 = param_12[1];
+    uVar6 = src1Words[3];
+    uVar3 = src1Flags[3];
+    uVar5 = src1Flags[1];
 LAB_00068c4c:
-    uVar12 = param_12[2];
-    uVar13 = *param_11;
-    uVar9 = param_11[1];
-    uVar7 = param_11[2];
+    uVar12 = src1Flags[2];
+    uVar13 = *src1Words;
+    uVar9 = src1Words[1];
+    uVar7 = src1Words[2];
 LAB_00068cb0:
     uVar1 = uVar1 | 0x400000;
     uVar16 = (uVar3 & 1) << 0xf |
              (uVar6 & 7) << 0xc |
              (uVar12 & 1) << 0xb |
              (uVar7 & 7) << 8 |
-             (uVar5 & 1) << 7 | (uVar9 & 7) << 4 | (*param_12 & 1) << 3 | uVar13 & 7;
+             (uVar5 & 1) << 7 | (uVar9 & 7) << 4 | (*src1Flags & 1) << 3 | uVar13 & 7;
   }
   uVar3 = (param_13 & 0x3f) << 0x10 | param_14 & 0xffff;
-  if (*param_16 == 0) {
-    uVar6 = param_16[1];
+  if (*src2Flags == 0) {
+    uVar6 = src2Flags[1];
     if (uVar6 != 0) {
-      uVar7 = param_15[3];
-      uVar5 = param_16[3];
+      uVar7 = src2Words[3];
+      uVar5 = src2Flags[3];
       goto LAB_00068d8c;
     }
-    uVar13 = param_16[2];
+    uVar13 = src2Flags[2];
     if (uVar13 == 0) {
-      uVar5 = param_16[3];
+      uVar5 = src2Flags[3];
       if (uVar5 == 0) {
-        uVar14 = *param_15;
+        uVar14 = *src2Words;
         if (uVar14 == 0) {
-          uVar12 = param_15[1];
+          uVar12 = src2Words[1];
           if (uVar12 == 1) {
-            uVar9 = param_15[2];
+            uVar9 = src2Words[2];
             if (uVar9 == 2) {
-              uVar7 = param_15[3];
+              uVar7 = src2Words[3];
               if (uVar7 == 3) goto LAB_00068e14;
             }
             else {
-              uVar7 = param_15[3];
+              uVar7 = src2Words[3];
             }
           }
           else {
-            uVar7 = param_15[3];
-            uVar9 = param_15[2];
+            uVar7 = src2Words[3];
+            uVar9 = src2Words[2];
           }
         }
         else {
-          uVar7 = param_15[3];
-          uVar12 = param_15[1];
-          uVar9 = param_15[2];
+          uVar7 = src2Words[3];
+          uVar12 = src2Words[1];
+          uVar9 = src2Words[2];
         }
       }
       else {
-        uVar7 = param_15[3];
-        uVar14 = *param_15;
-        uVar12 = param_15[1];
-        uVar9 = param_15[2];
+        uVar7 = src2Words[3];
+        uVar14 = *src2Words;
+        uVar12 = src2Words[1];
+        uVar9 = src2Words[2];
       }
     }
     else {
-      uVar7 = param_15[3];
-      uVar14 = *param_15;
-      uVar9 = param_15[2];
-      uVar5 = param_16[3];
-      uVar12 = param_15[1];
+      uVar7 = src2Words[3];
+      uVar14 = *src2Words;
+      uVar9 = src2Words[2];
+      uVar5 = src2Flags[3];
+      uVar12 = src2Words[1];
     }
   }
   else {
-    uVar7 = param_15[3];
-    uVar5 = param_16[3];
-    uVar6 = param_16[1];
+    uVar7 = src2Words[3];
+    uVar5 = src2Flags[3];
+    uVar6 = src2Flags[1];
 LAB_00068d8c:
-    uVar13 = param_16[2];
-    uVar14 = *param_15;
-    uVar12 = param_15[1];
-    uVar9 = param_15[2];
+    uVar13 = src2Flags[2];
+    uVar14 = *src2Words;
+    uVar12 = src2Words[1];
+    uVar9 = src2Words[2];
   }
   uVar3 = uVar3 | 0x400000;
   uVar17 = (uVar5 & 1) << 0xf |
            (uVar7 & 7) << 0xc |
            (uVar13 & 1) << 0xb |
            (uVar9 & 7) << 8 |
-           (uVar6 & 1) << 7 | (uVar12 & 7) << 4 | (*param_16 & 1) << 3 | uVar14 & 7;
+           (uVar6 & 1) << 7 | (uVar12 & 7) << 4 | (*src2Flags & 1) << 3 | uVar14 & 7;
 LAB_00068e14:
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uStack_58;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uStack_58;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar10;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar10;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar10 & 0x400000) != 0) {
-    iVar20 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar11) {
-      uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-        (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar11 = *puVar21;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar15;
-    uVar11 = *puVar21 + 1;
-    *puVar21 = uVar11;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+    instrWord = *instrCountPtr + 1;
+    *instrCountPtr = instrWord;
   }
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar19;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar19;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar19 & 0x400000) != 0) {
-    iVar20 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar11) {
-      uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-        (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar11 = *puVar21;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar18;
-    uVar11 = *puVar21 + 1;
-    *puVar21 = uVar11;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar18;
+    instrWord = *instrCountPtr + 1;
+    *instrCountPtr = instrWord;
   }
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar1;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar1 & 0x400000) != 0) {
-    iVar20 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar11) {
-      uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-        (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar11 = *puVar21;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar16;
-    uVar11 = *puVar21 + 1;
-    *puVar21 = uVar11;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    instrWord = *instrCountPtr + 1;
+    *instrCountPtr = instrWord;
   }
-  iVar20 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar11) {
-    uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-      (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar11 = *puVar21;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar3;
-  uVar11 = *puVar21 + 1;
-  *puVar21 = uVar11;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar3;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar3 & 0x400000) != 0) {
-    iVar20 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar11) {
-      uVar4 = (**(code **)(iVar20 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar21 << 2);
-        (**(code **)(iVar20 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar11 = *puVar21;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar11 * 4 + *(int *)(param_1 + 0x75c)) = uVar17;
-    *puVar21 = *puVar21 + 1;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar17;
+    *instrCountPtr = *instrCountPtr + 1;
   }
   return;
 }
 
 /* FUN_00069330 @ 0x69330 (4280 bytes) */
-int FUN_00069330(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
+int FUN_00069330(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, src0Flags, param_9, param_10, src1Words, src1Flags, param_13, param_14, src2Words, src2Flags)
+  int ctx;
   uint param_2;
   uint param_3;
   int *param_4;
   uint param_5;
   uint param_6;
-  uint *param_7;
-  uint *param_8;
+  uint *src0Words;
+  uint *src0Flags;
   uint param_9;
   uint param_10;
-  uint *param_11;
-  uint *param_12;
+  uint *src1Words;
+  uint *src1Flags;
   uint param_13;
   uint param_14;
-  uint *param_15;
-  uint *param_16;
+  uint *src2Words;
+  uint *src2Flags;
 {
   uint uVar1;
   uint uVar2;
   int iVar3;
-  undefined4 uVar4;
-  uint uVar5;
+  undefined4 newBuffer;
+  uint instrWord;
   uint uVar6;
   uint uVar7;
   uint uVar8;
@@ -7681,475 +7681,475 @@ int FUN_00069330(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar14;
   uint uVar15;
   uint uVar16;
-  uint *puVar17;
-  int iVar18;
+  uint *instrCountPtr;
+  int allocator;
   undefined1 auStack_88 [4];
   uint uStack_84;
   
-  puVar17 = (uint *)(param_1 + 0x754);
+  instrCountPtr = (uint *)(ctx + 0x754);
   uVar15 = 0;
   uVar13 = 0;
   uVar14 = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
   uVar16 = 0;
-  (**(code **)(param_1 + 0x748))(param_1,0,auStack_88,param_4,param_5,param_6,param_7,param_8);
-  uVar5 = uStack_84 & 0xffff;
-  if (*param_8 == 0) {
-    uVar10 = param_8[1];
+  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,param_4,param_5,param_6,src0Words,src0Flags);
+  instrWord = uStack_84 & 0xffff;
+  if (*src0Flags == 0) {
+    uVar10 = src0Flags[1];
     if (uVar10 != 0) {
-      uVar6 = param_8[3];
-      uVar8 = param_7[3];
-      uVar7 = param_8[2];
-      uVar11 = *param_7;
-      uVar2 = param_7[1];
-      uVar1 = param_7[2];
+      uVar6 = src0Flags[3];
+      uVar8 = src0Words[3];
+      uVar7 = src0Flags[2];
+      uVar11 = *src0Words;
+      uVar2 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar7 = param_8[2];
+    uVar7 = src0Flags[2];
     if (uVar7 != 0) {
-      uVar6 = param_8[3];
-      uVar8 = param_7[3];
-      uVar11 = *param_7;
-      uVar2 = param_7[1];
-      uVar1 = param_7[2];
+      uVar6 = src0Flags[3];
+      uVar8 = src0Words[3];
+      uVar11 = *src0Words;
+      uVar2 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar6 = param_8[3];
+    uVar6 = src0Flags[3];
     if (uVar6 != 0) {
-      uVar8 = param_7[3];
-      uVar11 = *param_7;
-      uVar2 = param_7[1];
-      uVar1 = param_7[2];
+      uVar8 = src0Words[3];
+      uVar11 = *src0Words;
+      uVar2 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar11 = *param_7;
+    uVar11 = *src0Words;
     if (uVar11 != 0) {
-      uVar8 = param_7[3];
-      uVar2 = param_7[1];
-      uVar1 = param_7[2];
+      uVar8 = src0Words[3];
+      uVar2 = src0Words[1];
+      uVar1 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar2 = param_7[1];
+    uVar2 = src0Words[1];
     if (uVar2 != 1) {
-      uVar8 = param_7[3];
-      uVar1 = param_7[2];
+      uVar8 = src0Words[3];
+      uVar1 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar1 = param_7[2];
+    uVar1 = src0Words[2];
     if (uVar1 != 2) {
-      uVar8 = param_7[3];
+      uVar8 = src0Words[3];
       goto LAB_000694c0;
     }
-    uVar8 = param_7[3];
+    uVar8 = src0Words[3];
     if (uVar8 != 3) goto LAB_000694c0;
   }
   else {
-    uVar6 = param_8[3];
-    uVar8 = param_7[3];
-    uVar10 = param_8[1];
-    uVar7 = param_8[2];
-    uVar11 = *param_7;
-    uVar2 = param_7[1];
-    uVar1 = param_7[2];
+    uVar6 = src0Flags[3];
+    uVar8 = src0Words[3];
+    uVar10 = src0Flags[1];
+    uVar7 = src0Flags[2];
+    uVar11 = *src0Words;
+    uVar2 = src0Words[1];
+    uVar1 = src0Words[2];
 LAB_000694c0:
     uVar14 = uVar14 | 0x400000;
     uVar15 = (uVar6 & 1) << 0xf |
              (uVar8 & 7) << 0xc |
              (uVar7 & 1) << 0xb |
              (uVar1 & 7) << 8 |
-             (uVar10 & 1) << 7 | (uVar2 & 7) << 4 | (*param_8 & 1) << 3 | uVar11 & 7;
+             (uVar10 & 1) << 7 | (uVar2 & 7) << 4 | (*src0Flags & 1) << 3 | uVar11 & 7;
   }
   uVar1 = (param_9 & 0x3f) << 0x10 | param_10 & 0xffff;
-  if (*param_12 == 0) {
-    uVar11 = param_12[1];
+  if (*src1Flags == 0) {
+    uVar11 = src1Flags[1];
     if (uVar11 != 0) {
-      uVar7 = param_12[3];
-      uVar10 = param_11[3];
-      uVar8 = param_12[2];
-      uVar12 = *param_11;
-      uVar6 = param_11[1];
-      uVar2 = param_11[2];
+      uVar7 = src1Flags[3];
+      uVar10 = src1Words[3];
+      uVar8 = src1Flags[2];
+      uVar12 = *src1Words;
+      uVar6 = src1Words[1];
+      uVar2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar8 = param_12[2];
+    uVar8 = src1Flags[2];
     if (uVar8 != 0) {
-      uVar7 = param_12[3];
-      uVar10 = param_11[3];
-      uVar12 = *param_11;
-      uVar6 = param_11[1];
-      uVar2 = param_11[2];
+      uVar7 = src1Flags[3];
+      uVar10 = src1Words[3];
+      uVar12 = *src1Words;
+      uVar6 = src1Words[1];
+      uVar2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar7 = param_12[3];
+    uVar7 = src1Flags[3];
     if (uVar7 != 0) {
-      uVar10 = param_11[3];
-      uVar12 = *param_11;
-      uVar6 = param_11[1];
-      uVar2 = param_11[2];
+      uVar10 = src1Words[3];
+      uVar12 = *src1Words;
+      uVar6 = src1Words[1];
+      uVar2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar12 = *param_11;
+    uVar12 = *src1Words;
     if (uVar12 != 0) {
-      uVar10 = param_11[3];
-      uVar6 = param_11[1];
-      uVar2 = param_11[2];
+      uVar10 = src1Words[3];
+      uVar6 = src1Words[1];
+      uVar2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar6 = param_11[1];
+    uVar6 = src1Words[1];
     if (uVar6 != 1) {
-      uVar10 = param_11[3];
-      uVar2 = param_11[2];
+      uVar10 = src1Words[3];
+      uVar2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar2 = param_11[2];
+    uVar2 = src1Words[2];
     if (uVar2 != 2) {
-      uVar10 = param_11[3];
+      uVar10 = src1Words[3];
       goto LAB_000695f0;
     }
-    uVar10 = param_11[3];
+    uVar10 = src1Words[3];
     if (uVar10 != 3) goto LAB_000695f0;
   }
   else {
-    uVar7 = param_12[3];
-    uVar10 = param_11[3];
-    uVar11 = param_12[1];
-    uVar8 = param_12[2];
-    uVar12 = *param_11;
-    uVar6 = param_11[1];
-    uVar2 = param_11[2];
+    uVar7 = src1Flags[3];
+    uVar10 = src1Words[3];
+    uVar11 = src1Flags[1];
+    uVar8 = src1Flags[2];
+    uVar12 = *src1Words;
+    uVar6 = src1Words[1];
+    uVar2 = src1Words[2];
 LAB_000695f0:
     uVar1 = uVar1 | 0x400000;
     uVar16 = (uVar7 & 1) << 0xf |
              (uVar10 & 7) << 0xc |
              (uVar8 & 1) << 0xb |
              (uVar2 & 7) << 8 |
-             (uVar11 & 1) << 7 | (uVar6 & 7) << 4 | (*param_12 & 1) << 3 | uVar12 & 7;
+             (uVar11 & 1) << 7 | (uVar6 & 7) << 4 | (*src1Flags & 1) << 3 | uVar12 & 7;
   }
-  uVar2 = *puVar17;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar2) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  uVar2 = *instrCountPtr;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar2) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar2 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    uVar2 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined4 *)(uVar2 * 4 + *(int *)(param_1 + 0x75c)) = 0x49;
-  uVar2 = *puVar17 + 1;
-  *puVar17 = uVar2;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar2) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined4 *)(uVar2 * 4 + *(int *)(ctx + 0x75c)) = 0x49;
+  uVar2 = *instrCountPtr + 1;
+  *instrCountPtr = uVar2;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= uVar2) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar2 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    uVar2 = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar2 * 4 + *(int *)(param_1 + 0x75c)) = uVar5 | 0x40000;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(uVar2 * 4 + *(int *)(ctx + 0x75c)) = instrWord | 0x40000;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar14;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar14;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar14 & 0x400000) != 0) {
-    iVar18 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar5) {
-      uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-        (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar5 = *puVar17;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar15;
-    uVar5 = *puVar17 + 1;
-    *puVar17 = uVar5;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+    instrWord = *instrCountPtr + 1;
+    *instrCountPtr = instrWord;
   }
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar1;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar1 & 0x400000) != 0) {
-    iVar18 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar5) {
-      uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-        (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar5 = *puVar17;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar16;
-    uVar5 = *puVar17 + 1;
-    *puVar17 = uVar5;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    instrWord = *instrCountPtr + 1;
+    *instrCountPtr = instrWord;
   }
-  uVar6 = *param_15;
-  uVar2 = *param_16;
-  uVar7 = param_16[1];
-  uVar8 = param_16[2];
-  iVar18 = *(int *)(param_1 + 0x3d4);
+  uVar6 = *src2Words;
+  uVar2 = *src2Flags;
+  uVar7 = src2Flags[1];
+  uVar8 = src2Flags[2];
+  allocator = *(int *)(ctx + 0x3d4);
   uVar15 = uStack_84 & 0xffff;
   uVar16 = uStack_84 & 0xffff;
-  uVar10 = param_16[3];
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  uVar10 = src2Flags[3];
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined4 *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = 0x41;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x41;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar16 | 0x40000;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16 | 0x40000;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar15 | uVar14 & 0xfe400000 | 0x440000;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15 | uVar14 & 0xfe400000 | 0x440000;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined **)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = ((unsigned char *)0x00003333);
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined **)(instrWord * 4 + *(int *)(ctx + 0x75c)) = ((unsigned char *)0x00003333);
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) =
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
        (param_13 & 0x3f) << 0x10 | param_14 & 0xffff | uVar1 & 0xfe400000 | 0x400000;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) =
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
        (uVar10 & 1) << 0xf |
        (uVar6 & 7) << 0xc |
        (uVar8 & 1) << 0xb |
        (uVar6 & 7) << 8 | (uVar7 & 1) << 7 | (uVar6 & 7) << 4 | (uVar2 & 1) << 3 | uVar6 & 7;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  uVar14 = param_15[3];
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  uVar14 = src2Words[3];
   uVar15 = (param_2 & 0x3f) << 0x10 | param_3 & 0xffff;
   if ((param_2 == 0x12) || (param_2 == 0x13)) {
     uVar15 = uVar15 | 0x400000;
     uVar13 = 0x55;
   }
   if (*param_4 == 0) {
-    iVar18 = param_4[3];
+    allocator = param_4[3];
     iVar9 = param_4[1];
     iVar3 = param_4[2];
   }
   else {
     iVar9 = param_4[1];
     if (iVar9 == 0) {
-      iVar18 = param_4[3];
+      allocator = param_4[3];
       iVar3 = param_4[2];
     }
     else {
       iVar3 = param_4[2];
       if (iVar3 == 0) {
-        iVar18 = param_4[3];
+        allocator = param_4[3];
       }
       else {
         if (param_4[3] != 0) goto LAB_00069f70;
-        iVar18 = 0;
+        allocator = 0;
       }
     }
   }
   uVar15 = uVar15 | 0x400000;
-  uVar13 = (uint)(iVar18 != 0) * 0x40 |
+  uVar13 = (uint)(allocator != 0) * 0x40 |
            (uint)(iVar3 != 0) * 0x10 | (uint)(iVar9 != 0) * 4 | (uint)(*param_4 != 0);
 LAB_00069f70:
-  uVar16 = *param_16;
-  uVar6 = param_16[1];
-  uVar2 = param_16[2];
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  uVar1 = param_16[3];
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  uVar16 = *src2Flags;
+  uVar6 = src2Flags[1];
+  uVar2 = src2Flags[2];
+  allocator = *(int *)(ctx + 0x3d4);
+  uVar1 = src2Flags[3];
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined4 *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = 0x44;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x44;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar15;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
   if ((uVar15 & 0x400000) != 0) {
-    iVar18 = *(int *)(param_1 + 0x3d4);
-    if (*(uint *)(param_1 + 0x758) <= uVar5) {
-      uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-      if (*(int *)(param_1 + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-        (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+    allocator = *(int *)(ctx + 0x3d4);
+    if (*(uint *)(ctx + 0x758) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+      if (*(int *)(ctx + 0x75c) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
       }
-      *(undefined4 *)(param_1 + 0x75c) = uVar4;
-      uVar5 = *puVar17;
-      *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      instrWord = *instrCountPtr;
+      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uVar13;
-    uVar5 = *puVar17 + 1;
-    *puVar17 = uVar5;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar13;
+    instrWord = *instrCountPtr + 1;
+    *instrCountPtr = instrWord;
   }
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = uStack_84 & 0xffff | 0x440000;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uStack_84 & 0xffff | 0x440000;
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(undefined **)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) = ((unsigned char *)0x00003333);
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  *(undefined **)(instrWord * 4 + *(int *)(ctx + 0x75c)) = ((unsigned char *)0x00003333);
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) =
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
        (param_13 & 0x3f) << 0x10 | param_14 & 0xffff | 0x400000 | 0x400000;
-  uVar5 = *puVar17 + 1;
-  *puVar17 = uVar5;
-  iVar18 = *(int *)(param_1 + 0x3d4);
-  if (*(uint *)(param_1 + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(iVar18 + 0xc))(*(uint *)(param_1 + 0x758) * 4 + 0x200);
-    if (*(int *)(param_1 + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(param_1 + 0x75c),*puVar17 << 2);
-      (**(code **)(iVar18 + 0x18))(*(undefined4 *)(param_1 + 0x75c));
+  instrWord = *instrCountPtr + 1;
+  *instrCountPtr = instrWord;
+  allocator = *(int *)(ctx + 0x3d4);
+  if (*(uint *)(ctx + 0x758) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
+    if (*(int *)(ctx + 0x75c) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
     }
-    *(undefined4 *)(param_1 + 0x75c) = uVar4;
-    uVar5 = *puVar17;
-    *(int *)(param_1 + 0x758) = *(int *)(param_1 + 0x758) + 0x80;
+    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    instrWord = *instrCountPtr;
+    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(param_1 + 0x75c)) =
+  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
        (uVar1 & 1) << 0xf |
        (uVar14 & 7) << 0xc |
        (uVar2 & 1) << 0xb |
        (uVar14 & 7) << 8 | (uVar6 & 1) << 7 | (uVar14 & 7) << 4 | (uVar16 & 1) << 3 | uVar14 & 7;
-  *puVar17 = *puVar17 + 1;
-  (**(code **)(param_1 + 0x74c))(param_1,auStack_88);
+  *instrCountPtr = *instrCountPtr + 1;
+  (**(code **)(ctx + 0x74c))(ctx,auStack_88);
   return;
 }
 

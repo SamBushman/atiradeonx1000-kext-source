@@ -2609,17 +2609,17 @@ LAB_00041b48:
 }
 
 /* FUN_00041c00 @ 0x41c00 (4544 bytes) */
-int FUN_00041c00(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  int param_3;
+int FUN_00041c00(emitter, slot, instr)
+  int *emitter;
+  int slot;
+  int instr;
 {
   undefined4 *puVar1;
   uint *puVar2;
   undefined **ppuVar3;
   undefined *puVar4;
-  uint uVar5;
-  int iVar6;
+  uint capacity;
+  int bufferCount;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -2639,8 +2639,8 @@ int FUN_00041c00(param_1, param_2, param_3)
   uint *puVar16;
   undefined4 *puVar18;
   int iVar19;
-  int *piVar20;
-  undefined4 uStack_68;
+  int *bufferDataPtr;
+  undefined4 entryHeader;
   undefined4 uStack_64;
   uint uStack_60;
   undefined4 uStack_5c;
@@ -2648,61 +2648,61 @@ int FUN_00041c00(param_1, param_2, param_3)
   undefined4 uStack_54;
   undefined *apuStack_50 [11];
   
-  if ((*(uint *)((param_2 + *(int *)(*param_1 + 0x54)) * 8 + *param_1) & 0xe0000000) == 0x20000000)
+  if ((*(uint *)((slot + *(int *)(*emitter + 0x54)) * 8 + *emitter) & 0xe0000000) == 0x20000000)
   {
-    *(undefined4 *)(param_3 + 0x10) = 0x40000;
-    *(undefined2 *)(param_3 + 0x12) = 0;
-    *(undefined **)(param_3 + 0x1c) = ((unsigned char *)0x00005555);
-    *(uint *)(param_3 + 0x10) = *(uint *)(param_3 + 0x10) | 0x400000;
+    *(undefined4 *)(instr + 0x10) = 0x40000;
+    *(undefined2 *)(instr + 0x12) = 0;
+    *(undefined **)(instr + 0x1c) = ((unsigned char *)0x00005555);
+    *(uint *)(instr + 0x10) = *(uint *)(instr + 0x10) | 0x400000;
   }
-  _memset(&uStack_68,0,0x24);
-  iVar19 = param_1[8];
-  iVar6 = param_1[9];
+  _memset(&entryHeader,0,0x24);
+  iVar19 = emitter[8];
+  bufferCount = emitter[9];
   uStack_64 = CONCAT22(4,(short)iVar19);
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0x5b);
-  uVar8 = *(uint *)(param_3 + 0x10);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
+  uVar8 = *(uint *)(instr + 0x10);
   uStack_60 = 0x55;
-  apuStack_50[0] = (undefined *)(*(uint *)(param_3 + 0x18) & 0xffff7777 | 0x100000);
-  apuStack_50[1] = (undefined *)(*(uint *)(param_3 + 0x1c) & 0xffff7777 | 0x100000);
-  uStack_5c = *(undefined **)(param_3 + 0xc);
+  apuStack_50[0] = (undefined *)(*(uint *)(instr + 0x18) & 0xffff7777 | 0x100000);
+  apuStack_50[1] = (undefined *)(*(uint *)(instr + 0x1c) & 0xffff7777 | 0x100000);
+  uStack_5c = *(undefined **)(instr + 0xc);
   uStack_58 = (undefined *)uVar8;
   uStack_64 = uStack_64 | 0x400000;
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar5 = param_1[0xc];
-    if (uVar5 < iVar6 + 7U) {
-      if (uVar5 == 0) {
-        uVar5 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar5 = uVar5 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar5 < iVar6 + 7U; uVar5 = uVar5 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar5 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar5 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar6 == 0) {
-        iVar6 = param_1[9];
-        if (iVar6 == 0) {
-          iVar6 = 1;
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        bufferCount = emitter[9];
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          emitter[9] = 1;
         }
-        iVar19 = param_1[8];
+        iVar19 = emitter[8];
         goto LAB_00041e30;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar5;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
     puVar14 = &uStack_5c;
-    param_1[0xb] = iVar6 + 7;
-    puVar18 = (undefined4 *)(iVar6 * 4 + *piVar20);
-    *puVar18 = uStack_68;
+    emitter[0xb] = bufferCount + 7;
+    puVar18 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar18 = entryHeader;
     puVar18[1] = uStack_64;
     puVar18[2] = uStack_60;
     do {
@@ -2712,14 +2712,14 @@ int FUN_00041c00(param_1, param_2, param_3)
       puVar18[4] = *puVar1;
       puVar18 = puVar18 + 2;
     } while (&uStack_54 != puVar14);
-    iVar19 = param_1[8];
-    iVar6 = param_1[9];
+    iVar19 = emitter[8];
+    bufferCount = emitter[9];
   }
 LAB_00041e30:
   puVar4 = apuStack_50[0];
   uStack_54 = (uint *)uStack_58;
   puVar9 = uStack_5c;
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0xd);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
   uStack_64 = CONCAT22(4,(short)iVar19 + 1);
   uStack_5c = (undefined *)CONCAT22(4,(short)iVar19);
   uStack_58 = puVar9;
@@ -2727,45 +2727,45 @@ LAB_00041e30:
   apuStack_50[2] = apuStack_50[1];
   apuStack_50[0] = ((unsigned char *)0x00003210);
   apuStack_50[1] = puVar4;
-  uStack_68 = uStack_68 & 0xc000ffff | 0x30000;
+  entryHeader = entryHeader & 0xc000ffff | 0x30000;
   uStack_64 = uStack_64 | 0x400000;
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar5 = param_1[0xc];
-    if (uVar5 < iVar6 + 9U) {
-      if (uVar5 == 0) {
-        uVar5 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar5 = uVar5 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar5 < iVar6 + 9U; uVar5 = uVar5 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar5 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar5 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar6 == 0) {
-        iVar6 = param_1[9];
-        if (iVar6 == 0) {
-          iVar6 = 1;
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        bufferCount = emitter[9];
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          emitter[9] = 1;
         }
-        iVar19 = param_1[8];
+        iVar19 = emitter[8];
         goto LAB_00042000;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar5;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
     ppuVar11 = (undefined **)&uStack_5c;
-    param_1[0xb] = iVar6 + 9;
-    puVar13 = (uint *)(iVar6 * 4 + *piVar20);
-    *puVar13 = uStack_68;
+    emitter[0xb] = bufferCount + 9;
+    puVar13 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar13 = entryHeader;
     puVar13[1] = uStack_64;
     puVar13[2] = uStack_60;
     do {
@@ -2775,53 +2775,53 @@ LAB_00041e30:
       puVar13[4] = (uint)*ppuVar15;
       puVar13 = puVar13 + 2;
     } while (apuStack_50 != ppuVar11);
-    iVar19 = param_1[8];
-    iVar6 = param_1[9];
+    iVar19 = emitter[8];
+    bufferCount = emitter[9];
   }
 LAB_00042000:
   uStack_5c = (undefined *)CONCAT22(4,(short)iVar19);
   uStack_64 = CONCAT22(4,(short)iVar19 + 2);
-  uStack_68 = uStack_68 & 0xc000ffff | 0x40000;
+  entryHeader = entryHeader & 0xc000ffff | 0x40000;
   uStack_60 = 0x55;
   apuStack_50[0] = ((unsigned char *)0x00003210);
   uStack_64 = uStack_64 | 0x400000;
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar5 = param_1[0xc];
-    if (uVar5 < iVar6 + 9U) {
-      if (uVar5 == 0) {
-        uVar5 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar5 = uVar5 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar5 < iVar6 + 9U; uVar5 = uVar5 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar5 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar5 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar6 == 0) {
-        iVar6 = param_1[9];
-        if (iVar6 == 0) {
-          iVar6 = 1;
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        bufferCount = emitter[9];
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          emitter[9] = 1;
         }
-        iVar19 = param_1[8];
+        iVar19 = emitter[8];
         goto LAB_000421a0;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar5;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
     ppuVar11 = (undefined **)&uStack_5c;
-    param_1[0xb] = iVar6 + 9;
-    puVar13 = (uint *)(iVar6 * 4 + *piVar20);
-    *puVar13 = uStack_68;
+    emitter[0xb] = bufferCount + 9;
+    puVar13 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar13 = entryHeader;
     puVar13[1] = uStack_64;
     puVar13[2] = uStack_60;
     do {
@@ -2831,12 +2831,12 @@ LAB_00042000:
       puVar13[4] = (uint)*ppuVar15;
       puVar13 = puVar13 + 2;
     } while (apuStack_50 != ppuVar11);
-    iVar19 = param_1[8];
-    iVar6 = param_1[9];
+    iVar19 = emitter[8];
+    bufferCount = emitter[9];
   }
 LAB_000421a0:
   sVar17 = (short)iVar19 + 1;
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0x20);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x20);
   uStack_5c = (undefined *)CONCAT22(4,(short)iVar19 + 2);
   uStack_64 = CONCAT22(4,sVar17);
   uStack_58 = (undefined *)CONCAT22(4,sVar17);
@@ -2844,46 +2844,46 @@ LAB_000421a0:
   uStack_60 = 0x55;
   apuStack_50[0] = ((unsigned char *)0x00003210);
   apuStack_50[1] = ((unsigned char *)0x00003210);
-  uStack_68 = uStack_68 & 0xc000ffff;
+  entryHeader = entryHeader & 0xc000ffff;
   uStack_64 = uStack_64 | 0x400000;
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
   uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar5 = param_1[0xc];
-    if (uVar5 < iVar6 + 7U) {
-      if (uVar5 == 0) {
-        uVar5 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar5 = uVar5 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar5 < iVar6 + 7U; uVar5 = uVar5 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar5 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar5 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar6 != 0) {
-        *piVar20 = iVar6;
-        param_1[0xc] = uVar5;
-        iVar6 = param_1[0xb];
+      if (bufferCount != 0) {
+        *bufferDataPtr = bufferCount;
+        emitter[0xc] = capacity;
+        bufferCount = emitter[0xb];
         goto LAB_000422f0;
       }
-      if (param_1[9] == 0) {
-        param_1[9] = 1;
+      if (emitter[9] == 0) {
+        emitter[9] = 1;
       }
     }
     else {
 LAB_000422f0:
       puVar16 = &uStack_5c;
       pcVar10 = (char *)&uStack_54;
-      param_1[0xb] = iVar6 + 7;
-      puVar13 = (uint *)(iVar6 * 4 + *piVar20);
-      *puVar13 = uStack_68;
+      emitter[0xb] = bufferCount + 7;
+      puVar13 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+      *puVar13 = entryHeader;
       puVar13[1] = uStack_64;
       puVar13[2] = uStack_60;
       do {
@@ -2894,25 +2894,25 @@ LAB_000422f0:
         puVar13 = puVar13 + 2;
       } while ((uint *)pcVar10 != puVar16);
     }
-    iVar19 = param_1[8];
+    iVar19 = emitter[8];
   }
   uStack_5c = (undefined *)CONCAT22(4,(short)iVar19 + 1);
-  param_1[8] = iVar19 + 3;
-  (*(unsigned short *)((unsigned char *)&(uStack_68) + 2)) = 5;
+  emitter[8] = iVar19 + 3;
+  (*(unsigned short *)((unsigned char *)&(entryHeader) + 2)) = 5;
   uVar12 = 0xffff7777;
   apuStack_50[0] = ((unsigned char *)0x00003210);
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  ((int (*)())FUN_00040370)(param_1,param_2,&uStack_68);
+  ((int (*)())FUN_00040370)(emitter,slot,&entryHeader);
   uVar7 = 0x24;
-  param_1[8] = param_1[8] + -3;
-  _memset(&uStack_68,0,0x24);
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0x5b);
-  ((int (*)())FUN_0003eca0)(param_1,extraout_r4,uVar7,uVar8,puVar9,pcVar10,uVar12);
-  sVar17 = (short)param_1[8];
+  emitter[8] = emitter[8] + -3;
+  _memset(&entryHeader,0,0x24);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
+  ((int (*)())FUN_0003eca0)(emitter,extraout_r4,uVar7,uVar8,puVar9,pcVar10,uVar12);
+  sVar17 = (short)emitter[8];
   uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
   uStack_64 = CONCAT22(4,sVar17 + 2);
-  uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*param_1 + 0x28));
-  iVar6 = param_1[9];
+  uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
+  bufferCount = emitter[9];
   apuStack_50[1] = ((unsigned char *)0x00003210);
   uStack_60 = 0x55;
   uStack_64 = uStack_64 | 0x400000;
@@ -2920,44 +2920,44 @@ LAB_000422f0:
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
   apuStack_50[0] = ((unsigned char *)0x00001111);
   uVar7 = extraout_r4_00;
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar8 = param_1[0xc];
-    if (uVar8 < iVar6 + 7U) {
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    uVar8 = emitter[0xc];
+    if (uVar8 < bufferCount + 7U) {
       if (uVar8 == 0) {
         uVar8 = 0x10;
       }
       else {
         uVar8 = uVar8 << 1;
       }
-      for (; uVar8 < iVar6 + 7U; uVar8 = uVar8 << 1) {
+      for (; uVar8 < bufferCount + 7U; uVar8 = uVar8 << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar8 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(uVar8 << 2);
         uVar7 = extraout_r4_01;
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
         uVar7 = extraout_r4_02;
       }
-      if (iVar6 == 0) {
-        iVar6 = param_1[9];
-        if (iVar6 == 0) {
-          iVar6 = 1;
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        bufferCount = emitter[9];
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          emitter[9] = 1;
         }
-        sVar17 = (short)param_1[8];
+        sVar17 = (short)emitter[8];
         goto LAB_00042600;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar8;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = uVar8;
+      bufferCount = emitter[0xb];
     }
     puVar14 = &uStack_5c;
-    param_1[0xb] = iVar6 + 7;
-    puVar18 = (undefined4 *)(iVar6 * 4 + *piVar20);
-    *puVar18 = uStack_68;
+    emitter[0xb] = bufferCount + 7;
+    puVar18 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar18 = entryHeader;
     puVar18[1] = uStack_64;
     puVar18[2] = uStack_60;
     do {
@@ -2967,11 +2967,11 @@ LAB_000422f0:
       puVar18[4] = *puVar1;
       puVar18 = puVar18 + 2;
     } while (&uStack_54 != puVar14);
-    sVar17 = (short)param_1[8];
-    iVar6 = param_1[9];
+    sVar17 = (short)emitter[8];
+    bufferCount = emitter[9];
   }
 LAB_00042600:
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0xd);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
   uStack_5c = (undefined *)CONCAT22(4,sVar17);
   uStack_58 = (undefined *)CONCAT22(4,sVar17 + 2);
   uStack_64 = CONCAT22(4,sVar17 + 1);
@@ -2983,16 +2983,16 @@ LAB_00042600:
   apuStack_50[2] = ((unsigned char *)0x00003210);
   apuStack_50[1] = ((unsigned char *)0x00003210);
   apuStack_50[0] = ((unsigned char *)0x00003210);
-  uStack_68 = uStack_68 & 0xc000ffff | 0x30000;
+  entryHeader = entryHeader & 0xc000ffff | 0x30000;
   uStack_64 = uStack_64 | 0x400000;
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
   uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
   puVar13 = (uint *)((uint)uStack_54 | 0x400000);
   uStack_54 = puVar13;
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    puVar13 = (uint *)param_1[0xb];
-    uVar8 = param_1[0xc];
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    puVar13 = (uint *)emitter[0xb];
+    uVar8 = emitter[0xc];
     if (uVar8 < (int)puVar13 + 9U) {
       if (uVar8 == 0) {
         uVar8 = 0x10;
@@ -3002,29 +3002,29 @@ LAB_00042600:
       }
       for (; uVar8 < (int)puVar13 + 9U; uVar8 = uVar8 << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar8 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(uVar8 << 2);
         uVar7 = extraout_r4_03;
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
         uVar7 = extraout_r4_04;
       }
-      if (iVar6 == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        if (emitter[9] == 0) {
+          emitter[9] = 1;
         }
         goto LAB_00042800;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar8;
-      puVar13 = (uint *)param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = uVar8;
+      puVar13 = (uint *)emitter[0xb];
     }
     ppuVar15 = (undefined **)&uStack_5c;
     ppuVar11 = apuStack_50;
-    param_1[0xb] = (int)puVar13 + 9;
-    puVar13 = (uint *)((int)puVar13 * 4 + *piVar20);
-    *puVar13 = uStack_68;
+    emitter[0xb] = (int)puVar13 + 9;
+    puVar13 = (uint *)((int)puVar13 * 4 + *bufferDataPtr);
+    *puVar13 = entryHeader;
     puVar13[1] = uStack_64;
     puVar13[2] = uStack_60;
     puVar16 = puVar13;
@@ -3037,56 +3037,56 @@ LAB_00042600:
     } while (ppuVar11 != ppuVar15);
   }
 LAB_00042800:
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0x5b);
-  uStack_68 = uStack_68 & 0xc000ffff;
-  ((int (*)())FUN_0003eca0)(param_1,uVar7,uStack_68,uVar12,puVar9,ppuVar11,puVar13);
-  sVar17 = (short)param_1[8];
-  uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*param_1 + 0x28));
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
+  entryHeader = entryHeader & 0xc000ffff;
+  ((int (*)())FUN_0003eca0)(emitter,uVar7,entryHeader,uVar12,puVar9,ppuVar11,puVar13);
+  sVar17 = (short)emitter[8];
+  uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
   uStack_64 = CONCAT22(4,sVar17 + 2);
   uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
-  iVar6 = param_1[9];
+  bufferCount = emitter[9];
   apuStack_50[0] = (undefined *)0x0;
   apuStack_50[1] = ((unsigned char *)0x00003210);
   uStack_60 = 0x55;
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
   uStack_64 = uStack_64 | 0x400000;
   uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar8 = param_1[0xc];
-    if (uVar8 < iVar6 + 7U) {
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    uVar8 = emitter[0xc];
+    if (uVar8 < bufferCount + 7U) {
       if (uVar8 == 0) {
         uVar8 = 0x10;
       }
       else {
         uVar8 = uVar8 << 1;
       }
-      for (; uVar8 < iVar6 + 7U; uVar8 = uVar8 << 1) {
+      for (; uVar8 < bufferCount + 7U; uVar8 = uVar8 << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar8 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(uVar8 << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
       }
-      if (iVar6 == 0) {
-        iVar6 = param_1[9];
-        if (iVar6 == 0) {
-          iVar6 = 1;
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        bufferCount = emitter[9];
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          emitter[9] = 1;
         }
-        sVar17 = (short)param_1[8];
+        sVar17 = (short)emitter[8];
         goto LAB_000429f0;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar8;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = uVar8;
+      bufferCount = emitter[0xb];
     }
     puVar16 = &uStack_5c;
-    param_1[0xb] = iVar6 + 7;
-    puVar13 = (uint *)(iVar6 * 4 + *piVar20);
-    *puVar13 = uStack_68;
+    emitter[0xb] = bufferCount + 7;
+    puVar13 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar13 = entryHeader;
     puVar13[1] = uStack_64;
     puVar13[2] = uStack_60;
     do {
@@ -3096,59 +3096,59 @@ LAB_00042800:
       puVar13[4] = *puVar2;
       puVar13 = puVar13 + 2;
     } while (puVar16 != &uStack_54);
-    sVar17 = (short)param_1[8];
-    iVar6 = param_1[9];
+    sVar17 = (short)emitter[8];
+    bufferCount = emitter[9];
   }
 LAB_000429f0:
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0xd);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
   uStack_58 = (undefined *)CONCAT22(4,sVar17 + 2);
   uStack_54 = (uint *)CONCAT22(4,sVar17 + 1);
   uStack_64 = CONCAT22(4,sVar17 + 1);
-  uStack_68 = uStack_68 & 0xc000ffff | 0x50000;
+  entryHeader = entryHeader & 0xc000ffff | 0x50000;
   uStack_60 = 0x55;
   apuStack_50[1] = ((unsigned char *)0x00003210);
   apuStack_50[2] = ((unsigned char *)0x00003210);
-  uStack_5c = *(undefined **)(param_3 + 0x10);
-  apuStack_50[0] = *(undefined **)(param_3 + 0x1c);
+  uStack_5c = *(undefined **)(instr + 0x10);
+  apuStack_50[0] = *(undefined **)(instr + 0x1c);
   uStack_64 = uStack_64 | 0x400000;
   uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
   uStack_54 = (uint *)((uint)uStack_54 | 0x400000);
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar8 = param_1[0xc];
-    if (uVar8 < iVar6 + 9U) {
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    uVar8 = emitter[0xc];
+    if (uVar8 < bufferCount + 9U) {
       if (uVar8 == 0) {
         uVar8 = 0x10;
       }
       else {
         uVar8 = uVar8 << 1;
       }
-      for (; uVar8 < iVar6 + 9U; uVar8 = uVar8 << 1) {
+      for (; uVar8 < bufferCount + 9U; uVar8 = uVar8 << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar8 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(uVar8 << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
       }
-      if (iVar6 == 0) {
-        iVar6 = param_1[9];
-        if (iVar6 == 0) {
-          iVar6 = 1;
-          param_1[9] = 1;
+      if (bufferCount == 0) {
+        bufferCount = emitter[9];
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          emitter[9] = 1;
         }
-        sVar17 = (short)param_1[8];
+        sVar17 = (short)emitter[8];
         goto LAB_00042bf0;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar8;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = uVar8;
+      bufferCount = emitter[0xb];
     }
     ppuVar11 = (undefined **)&uStack_5c;
-    param_1[0xb] = iVar6 + 9;
-    puVar13 = (uint *)(iVar6 * 4 + *piVar20);
-    *puVar13 = uStack_68;
+    emitter[0xb] = bufferCount + 9;
+    puVar13 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar13 = entryHeader;
     puVar13[1] = uStack_64;
     puVar13[2] = uStack_60;
     do {
@@ -3158,56 +3158,56 @@ LAB_000429f0:
       puVar13[4] = (uint)*ppuVar15;
       puVar13 = puVar13 + 2;
     } while (apuStack_50 != ppuVar11);
-    sVar17 = (short)param_1[8];
-    iVar6 = param_1[9];
+    sVar17 = (short)emitter[8];
+    bufferCount = emitter[9];
   }
 LAB_00042bf0:
-  uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0xd);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
   uStack_54 = (uint *)CONCAT22(4,sVar17 + 1);
   uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
-  uStack_68 = uStack_68 & 0xc000ffff | 0x50000;
-  uStack_60 = *(uint *)(param_3 + 8);
-  uStack_64 = *(uint *)(param_3 + 4);
+  entryHeader = entryHeader & 0xc000ffff | 0x50000;
+  uStack_60 = *(uint *)(instr + 8);
+  uStack_64 = *(uint *)(instr + 4);
   apuStack_50[2] = ((unsigned char *)0x00003210);
-  uStack_5c = *(undefined **)(param_3 + 0xc);
-  apuStack_50[0] = *(undefined **)(param_3 + 0x18);
+  uStack_5c = *(undefined **)(instr + 0xc);
+  apuStack_50[0] = *(undefined **)(instr + 0x18);
   uStack_58 = (undefined *)((uint)uStack_58 | 0x400000);
   uStack_54 = (uint *)((uint)uStack_54 | 0x400000);
   apuStack_50[1] = (undefined *)0xba98;
-  if (iVar6 == 0) {
-    piVar20 = param_1 + 10;
-    iVar6 = param_1[0xb];
-    uVar8 = param_1[0xc];
-    if (uVar8 < iVar6 + 9U) {
+  if (bufferCount == 0) {
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    uVar8 = emitter[0xc];
+    if (uVar8 < bufferCount + 9U) {
       if (uVar8 == 0) {
         uVar8 = 0x10;
       }
       else {
         uVar8 = uVar8 << 1;
       }
-      for (; uVar8 < iVar6 + 9U; uVar8 = uVar8 << 1) {
+      for (; uVar8 < bufferCount + 9U; uVar8 = uVar8 << 1) {
       }
-      if (*piVar20 == 0) {
-        iVar6 = _malloc(uVar8 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(uVar8 << 2);
       }
       else {
-        iVar6 = _realloc(*piVar20,uVar8 << 2);
+        bufferCount = _realloc(*bufferDataPtr,uVar8 << 2);
       }
-      if (iVar6 == 0) {
-        if (param_1[9] != 0) {
-          return param_1[9];
+      if (bufferCount == 0) {
+        if (emitter[9] != 0) {
+          return emitter[9];
         }
-        param_1[9] = 1;
+        emitter[9] = 1;
         return 1;
       }
-      *piVar20 = iVar6;
-      param_1[0xc] = uVar8;
-      iVar6 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = uVar8;
+      bufferCount = emitter[0xb];
     }
     ppuVar11 = (undefined **)&uStack_5c;
-    param_1[0xb] = iVar6 + 9;
-    puVar13 = (uint *)(iVar6 * 4 + *piVar20);
-    *puVar13 = uStack_68;
+    emitter[0xb] = bufferCount + 9;
+    puVar13 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar13 = entryHeader;
     puVar13[1] = uStack_64;
     puVar13[2] = uStack_60;
     do {
@@ -3217,28 +3217,28 @@ LAB_00042bf0:
       puVar13[4] = (uint)*ppuVar15;
       puVar13 = puVar13 + 2;
     } while (apuStack_50 != ppuVar11);
-    iVar6 = param_1[9];
+    bufferCount = emitter[9];
   }
-  return iVar6;
+  return bufferCount;
 }
 
 /* FUN_00042e00 @ 0x42e00 (4024 bytes) */
-int FUN_00042e00(param_1, param_2, param_3)
-  int param_1;
+int FUN_00042e00(emitter, param_2, instr)
+  int emitter;
   undefined4 param_2;
-  int param_3;
+  int instr;
 {
   undefined4 *puVar1;
   undefined **ppuVar2;
-  uint uVar3;
-  int iVar4;
+  uint capacity;
+  int bufferCount;
   undefined4 *puVar5;
   undefined **ppuVar6;
   undefined4 *puVar7;
   uint *puVar8;
-  int *piVar9;
+  int *bufferDataPtr;
   short sVar10;
-  undefined4 uStack_58;
+  undefined4 entryHeader;
   undefined4 uStack_54;
   uint uStack_50;
   undefined4 uStack_4c;
@@ -3246,53 +3246,53 @@ int FUN_00042e00(param_1, param_2, param_3)
   undefined4 uStack_44;
   undefined *apuStack_40 [11];
   
-  _memset(&uStack_58,0,0x24);
-  iVar4 = *(int *)(param_1 + 0x24);
-  sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+  _memset(&entryHeader,0,0x24);
+  bufferCount = *(int *)(emitter + 0x24);
+  sVar10 = (short)*(undefined4 *)(emitter + 0x20);
   uStack_54 = CONCAT22(4,sVar10);
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x23);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x23);
   uStack_50 = 0x55;
-  uStack_4c = *(undefined **)(param_3 + 0xc);
-  apuStack_40[0] = *(undefined **)(param_3 + 0x18);
-  uStack_48 = (undefined *)*(undefined4 *)(param_3 + 0x10);
-  apuStack_40[1] = (undefined *)*(undefined4 *)(param_3 + 0x1c);
+  uStack_4c = *(undefined **)(instr + 0xc);
+  apuStack_40[0] = *(undefined **)(instr + 0x18);
+  uStack_48 = (undefined *)*(undefined4 *)(instr + 0x10);
+  apuStack_40[1] = (undefined *)*(undefined4 *)(instr + 0x1c);
   uStack_54 = uStack_54 | 0x400000;
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 7U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00042fa0;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 7;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 7;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3302,8 +3302,8 @@ int FUN_00042e00(param_1, param_2, param_3)
       puVar7[4] = *puVar1;
       puVar7 = puVar7 + 2;
     } while (&uStack_44 != puVar5);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00042fa0:
   uStack_54 = CONCAT22(4,sVar10 + 1);
@@ -3311,49 +3311,49 @@ LAB_00042fa0:
   uStack_48 = (undefined *)CONCAT22(4,sVar10);
   uStack_50 = 0x55;
   apuStack_40[0] = ((unsigned char *)0x00003210);
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x40);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
   apuStack_40[1] = ((unsigned char *)0x00003210);
   apuStack_40[2] = (undefined *)0xdddd;
   uStack_54 = uStack_54 | 0x400000;
   uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
   uStack_44 = 0x440000;
   uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 9U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_000431b0;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     ppuVar6 = (undefined **)&uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 9;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 9;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3363,54 +3363,54 @@ LAB_00042fa0:
       puVar7[4] = *ppuVar2;
       puVar7 = puVar7 + 2;
     } while (apuStack_40 != ppuVar6);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_000431b0:
   uStack_54 = CONCAT22(4,sVar10 + 2);
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x49);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x49);
   uStack_50 = 0x55;
-  uStack_48 = *(undefined **)(param_3 + 0x14);
-  apuStack_40[1] = *(undefined **)(param_3 + 0x20);
-  uStack_4c = *(undefined **)(param_3 + 0x14);
-  apuStack_40[0] = *(undefined **)(param_3 + 0x20);
+  uStack_48 = *(undefined **)(instr + 0x14);
+  apuStack_40[1] = *(undefined **)(instr + 0x20);
+  uStack_4c = *(undefined **)(instr + 0x14);
+  apuStack_40[0] = *(undefined **)(instr + 0x20);
   uStack_54 = uStack_54 | 0x400000;
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 7U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00043320;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 7;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 7;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3420,15 +3420,15 @@ LAB_000431b0:
       puVar7[4] = *puVar1;
       puVar7 = puVar7 + 2;
     } while (&uStack_44 != puVar5);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043320:
   uStack_54 = CONCAT22(4,sVar10 + 1);
   uStack_4c = (undefined *)CONCAT22(4,sVar10 + 2);
   uStack_48 = (undefined *)CONCAT22(4,sVar10 + 1);
   uStack_50 = 0x55;
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x40);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
   apuStack_40[1] = ((unsigned char *)0x00003210);
   apuStack_40[0] = ((unsigned char *)0x00003210);
   uStack_54 = uStack_54 | 0x400000;
@@ -3436,42 +3436,42 @@ LAB_00043320:
   uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
   apuStack_40[2] = ((unsigned char *)0x00005555U);
   uStack_44 = 0x440000;
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 9U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00043510;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     ppuVar6 = (undefined **)&uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 9;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 9;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3481,108 +3481,108 @@ LAB_00043320:
       puVar7[4] = *ppuVar2;
       puVar7 = puVar7 + 2;
     } while (apuStack_40 != ppuVar6);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043510:
   uStack_54 = CONCAT22(4,sVar10 + 2);
   uStack_4c = (undefined *)CONCAT22(4,sVar10 + 1);
   uStack_50 = 0x55;
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x5a);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5a);
   apuStack_40[0] = ((unsigned char *)0x00003210);
   uStack_54 = uStack_54 | 0x400000;
   uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 5U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 5U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 5U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00043670;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
-    *(int *)(param_1 + 0x2c) = iVar4 + 5;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 5;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     puVar7[3] = uStack_4c;
     puVar7[4] = apuStack_40[0];
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043670:
   uStack_54 = CONCAT22(4,sVar10 + 2);
   uStack_44 = CONCAT22(4,sVar10 + 2);
   uStack_48 = (undefined *)CONCAT22(4,sVar10);
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x40);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
   uStack_54 = uStack_54 | 0x400000;
   uStack_50 = 0x55;
   apuStack_40[1] = ((unsigned char *)0x00003210);
   apuStack_40[2] = ((unsigned char *)0x00003210);
-  uStack_4c = *(undefined **)(param_3 + 0x14);
-  apuStack_40[0] = *(undefined **)(param_3 + 0x20);
+  uStack_4c = *(undefined **)(instr + 0x14);
+  apuStack_40[0] = *(undefined **)(instr + 0x20);
   uStack_44 = uStack_44 | 0x400000;
   uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 9U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00043870;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     ppuVar6 = (undefined **)&uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 9;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 9;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3592,55 +3592,55 @@ LAB_00043670:
       puVar7[4] = *ppuVar2;
       puVar7 = puVar7 + 2;
     } while (apuStack_40 != ppuVar6);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043870:
   uStack_54 = CONCAT22(4,sVar10 + 2);
   uStack_4c = (undefined *)CONCAT22(4,sVar10 + 2);
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x49);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x49);
   apuStack_40[0] = ((unsigned char *)0x00003210);
   uStack_50 = 0x55;
   uStack_54 = uStack_54 | 0x400000;
-  uStack_48 = (undefined *)*(undefined4 *)(param_3 + 0x10);
-  apuStack_40[1] = (undefined *)*(undefined4 *)(param_3 + 0x1c);
+  uStack_48 = (undefined *)*(undefined4 *)(instr + 0x10);
+  apuStack_40[1] = (undefined *)*(undefined4 *)(instr + 0x1c);
   uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 7U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00043a10;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 7;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 7;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3650,57 +3650,57 @@ LAB_00043870:
       puVar7[4] = *puVar1;
       puVar7 = puVar7 + 2;
     } while (puVar5 != &uStack_44);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043a10:
   uStack_54 = CONCAT22(4,sVar10 + 2);
   uStack_44 = CONCAT22(4,sVar10 + 2);
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x40);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x40);
   uStack_50 = 0x55;
   uStack_54 = uStack_54 | 0x400000;
   apuStack_40[2] = (undefined *)0xba98;
-  uStack_4c = *(undefined **)(param_3 + 0x14);
-  apuStack_40[0] = *(undefined **)(param_3 + 0x20);
-  uStack_48 = (undefined *)*(undefined4 *)(param_3 + 0xc);
-  apuStack_40[1] = (undefined *)*(undefined4 *)(param_3 + 0x18);
+  uStack_4c = *(undefined **)(instr + 0x14);
+  apuStack_40[0] = *(undefined **)(instr + 0x20);
+  uStack_48 = (undefined *)*(undefined4 *)(instr + 0xc);
+  apuStack_40[1] = (undefined *)*(undefined4 *)(instr + 0x18);
   uStack_44 = uStack_44 | 0x400000;
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 9U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        iVar4 = *(int *)(param_1 + 0x24);
-        if (iVar4 == 0) {
-          iVar4 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+      if (bufferCount == 0) {
+        bufferCount = *(int *)(emitter + 0x24);
+        if (bufferCount == 0) {
+          bufferCount = 1;
+          *(undefined4 *)(emitter + 0x24) = 1;
         }
-        sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
+        sVar10 = (short)*(undefined4 *)(emitter + 0x20);
         goto LAB_00043be0;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     ppuVar6 = (undefined **)&uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 9;
-    puVar7 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar7 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 9;
+    puVar7 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar7 = entryHeader;
     puVar7[1] = uStack_54;
     puVar7[2] = uStack_50;
     do {
@@ -3710,56 +3710,56 @@ LAB_00043a10:
       puVar7[4] = *ppuVar2;
       puVar7 = puVar7 + 2;
     } while (apuStack_40 != ppuVar6);
-    sVar10 = (short)*(undefined4 *)(param_1 + 0x20);
-    iVar4 = *(int *)(param_1 + 0x24);
+    sVar10 = (short)*(undefined4 *)(emitter + 0x20);
+    bufferCount = *(int *)(emitter + 0x24);
   }
 LAB_00043be0:
-  uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0xd);
+  entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0xd);
   uStack_4c = (undefined *)CONCAT22(4,sVar10 + 1);
   uStack_44 = CONCAT22(4,sVar10 + 2);
-  uStack_58 = uStack_58 & 0xc000ffff | 0x50000;
-  uStack_50 = *(uint *)(param_3 + 8);
-  uStack_54 = *(uint *)(param_3 + 4);
+  entryHeader = entryHeader & 0xc000ffff | 0x50000;
+  uStack_50 = *(uint *)(instr + 8);
+  uStack_54 = *(uint *)(instr + 4);
   apuStack_40[1] = ((unsigned char *)0x00004444);
   apuStack_40[0] = ((unsigned char *)0x00003210);
   apuStack_40[2] = ((unsigned char *)0x00003210);
   uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
   uStack_48 = (undefined *)0x440000;
   uStack_44 = uStack_44 | 0x400000;
-  if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
-    if (uVar3 < iVar4 + 9U) {
-      if (uVar3 == 0) {
-        uVar3 = 0x10;
+  if (bufferCount == 0) {
+    bufferDataPtr = (int *)(emitter + 0x28);
+    bufferCount = *(int *)(emitter + 0x2c);
+    capacity = *(uint *)(emitter + 0x30);
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar3 = uVar3 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar4 == 0) {
-        if (*(int *)(param_1 + 0x24) != 0) {
-          return *(int *)(param_1 + 0x24);
+      if (bufferCount == 0) {
+        if (*(int *)(emitter + 0x24) != 0) {
+          return *(int *)(emitter + 0x24);
         }
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(emitter + 0x24) = 1;
         return 1;
       }
-      *piVar9 = iVar4;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *bufferDataPtr = bufferCount;
+      *(uint *)(emitter + 0x30) = capacity;
+      bufferCount = *(int *)(emitter + 0x2c);
     }
     ppuVar6 = (undefined **)&uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar4 + 9;
-    puVar8 = (uint *)(iVar4 * 4 + *piVar9);
-    *puVar8 = uStack_58;
+    *(int *)(emitter + 0x2c) = bufferCount + 9;
+    puVar8 = (uint *)(bufferCount * 4 + *bufferDataPtr);
+    *puVar8 = entryHeader;
     puVar8[1] = uStack_54;
     puVar8[2] = uStack_50;
     do {
@@ -3769,9 +3769,9 @@ LAB_00043be0:
       puVar8[4] = (uint)*ppuVar2;
       puVar8 = puVar8 + 2;
     } while (apuStack_40 != ppuVar6);
-    iVar4 = *(int *)(param_1 + 0x24);
+    bufferCount = *(int *)(emitter + 0x24);
   }
-  return iVar4;
+  return bufferCount;
 }
 
 /* FUN_00043df0 @ 0x43df0 (352 bytes) */
@@ -4406,14 +4406,14 @@ LAB_00044c08:
 }
 
 /* FUN_00044c90 @ 0x44c90 (2856 bytes) */
-int FUN_00044c90(param_1, param_2)
-  int *param_1;
+int FUN_00044c90(emitter, param_2)
+  int *emitter;
   int param_2;
 {
   undefined4 *puVar1;
   undefined **ppuVar2;
-  int iVar3;
-  uint uVar4;
+  int bufferCount;
+  uint capacity;
   undefined4 *puVar5;
   undefined4 *puVar6;
   undefined **ppuVar7;
@@ -4421,7 +4421,7 @@ int FUN_00044c90(param_1, param_2)
   undefined4 *puVar9;
   uint *puVar10;
   int iVar11;
-  int *piVar12;
+  int *bufferDataPtr;
   undefined1 auStack_b8 [2];
   ushort local_b6;
   undefined1 auStack_b4 [4];
@@ -4451,48 +4451,48 @@ int FUN_00044c90(param_1, param_2)
   undefined1 auStack_48 [4];
   undefined *local_44;
   
-  iVar11 = *param_1;
+  iVar11 = *emitter;
   puVar5 = &local_a0;
-  iVar3 = *(int *)(iVar11 + 0x54);
+  bufferCount = *(int *)(iVar11 + 0x54);
   _memset(&local_ac,0,0x24);
-  iVar11 = iVar11 + iVar3 * 8 + param_2 * 8;
+  iVar11 = iVar11 + bufferCount * 8 + param_2 * 8;
   _memset(&local_88,0,0x24);
-  local_a8 = CONCAT22(4,(short)param_1[8]);
+  local_a8 = CONCAT22(4,(short)emitter[8]);
   local_ac = CONCAT22((*(unsigned short *)((unsigned char *)&(local_ac) + 0)),0x5b);
   local_a4 = 0x55;
   local_a8 = local_a8 | 0x400000;
-  iVar3 = ((int (*)())FUN_0003f1c0)(param_1,iVar11 + 0x18,puVar5,&local_94);
-  if (iVar3 == 0) {
+  bufferCount = ((int (*)())FUN_0003f1c0)(emitter,iVar11 + 0x18,puVar5,&local_94);
+  if (bufferCount == 0) {
     local_90 = ((unsigned char *)0x00005555U);
     local_9c = 0x440000;
-    if (param_1[9] != 0) {
-      return param_1[9];
+    if (emitter[9] != 0) {
+      return emitter[9];
     }
-    piVar12 = param_1 + 10;
-    iVar3 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar3 + 7U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    bufferDataPtr = emitter + 10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar4 < iVar3 + 7U; uVar4 = uVar4 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar12 == 0) {
-        iVar3 = _malloc(uVar4 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar3 = _realloc(*piVar12,uVar4 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar3 == 0) goto LAB_000457a8;
-      *piVar12 = iVar3;
-      param_1[0xc] = uVar4;
-      iVar3 = param_1[0xb];
+      if (bufferCount == 0) goto LAB_000457a8;
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
-    param_1[0xb] = iVar3 + 7;
-    puVar9 = (undefined4 *)(iVar3 * 4 + *piVar12);
+    emitter[0xb] = bufferCount + 7;
+    puVar9 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *puVar9 = local_ac;
     puVar9[1] = local_a8;
     puVar9[2] = local_a4;
@@ -4505,8 +4505,8 @@ int FUN_00044c90(param_1, param_2)
       puVar9 = puVar9 + 2;
     } while (&uStack_98 != puVar6);
     local_88 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_88) + 0)),0xd);
-    local_84 = CONCAT22(4,(short)param_1[8] + 1);
-    local_7c = (undefined *)CONCAT22(4,(short)param_1[8]);
+    local_84 = CONCAT22(4,(short)emitter[8] + 1);
+    local_7c = (undefined *)CONCAT22(4,(short)emitter[8]);
     local_88 = local_88 & 0xc000ffff | 0x20000;
     local_84 = local_84 | 0x400000;
     local_80 = 0x55;
@@ -4516,34 +4516,34 @@ int FUN_00044c90(param_1, param_2)
     local_7c = (undefined *)((uint)local_7c | 0x400000);
     local_78 = 0x440000;
     local_74 = 0x440000;
-    if (param_1[9] != 0) {
-      return param_1[9];
+    if (emitter[9] != 0) {
+      return emitter[9];
     }
-    iVar3 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar3 + 9U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar12 == 0) {
-        iVar3 = _malloc(uVar4 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar3 = _realloc(*piVar12,uVar4 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar3 == 0) goto LAB_000457a8;
-      *piVar12 = iVar3;
-      param_1[0xc] = uVar4;
-      iVar3 = param_1[0xb];
+      if (bufferCount == 0) goto LAB_000457a8;
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
     ppuVar8 = (undefined **)&local_7c;
-    param_1[0xb] = iVar3 + 9;
-    puVar10 = (uint *)(iVar3 * 4 + *piVar12);
+    emitter[0xb] = bufferCount + 9;
+    puVar10 = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *puVar10 = local_88;
     puVar10[1] = local_84;
     puVar10[2] = local_80;
@@ -4556,36 +4556,36 @@ int FUN_00044c90(param_1, param_2)
       puVar10 = puVar10 + 2;
     } while (local_70 != ppuVar7);
     if (1 < (*(uint *)(iVar11 + 4) >> 0x1a & 3)) {
-      local_a0 = CONCAT22(4,(short)param_1[8]);
+      local_a0 = CONCAT22(4,(short)emitter[8]);
       local_94 = ((unsigned char *)0x00003210);
       local_a0 = local_a0 | 0x400000;
-      if (param_1[9] != 0) {
-        return param_1[9];
+      if (emitter[9] != 0) {
+        return emitter[9];
       }
-      iVar3 = param_1[0xb];
-      uVar4 = param_1[0xc];
-      if (uVar4 < iVar3 + 7U) {
-        if (uVar4 == 0) {
-          uVar4 = 0x10;
+      bufferCount = emitter[0xb];
+      capacity = emitter[0xc];
+      if (capacity < bufferCount + 7U) {
+        if (capacity == 0) {
+          capacity = 0x10;
         }
         else {
-          uVar4 = uVar4 << 1;
+          capacity = capacity << 1;
         }
-        for (; uVar4 < iVar3 + 7U; uVar4 = uVar4 << 1) {
+        for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
         }
-        if (*piVar12 == 0) {
-          iVar3 = _malloc(uVar4 << 2);
+        if (*bufferDataPtr == 0) {
+          bufferCount = _malloc(capacity << 2);
         }
         else {
-          iVar3 = _realloc(*piVar12,uVar4 << 2);
+          bufferCount = _realloc(*bufferDataPtr,capacity << 2);
         }
-        if (iVar3 == 0) goto LAB_000457a8;
-        *piVar12 = iVar3;
-        param_1[0xc] = uVar4;
-        iVar3 = param_1[0xb];
+        if (bufferCount == 0) goto LAB_000457a8;
+        *bufferDataPtr = bufferCount;
+        emitter[0xc] = capacity;
+        bufferCount = emitter[0xb];
       }
-      param_1[0xb] = iVar3 + 7;
-      puVar9 = (undefined4 *)(iVar3 * 4 + *piVar12);
+      emitter[0xb] = bufferCount + 7;
+      puVar9 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
       *puVar9 = local_ac;
       puVar9[1] = local_a8;
       puVar9[2] = local_a4;
@@ -4597,37 +4597,37 @@ int FUN_00044c90(param_1, param_2)
         puVar9[4] = *puVar1;
         puVar9 = puVar9 + 2;
       } while (&uStack_98 != puVar6);
-      local_74 = CONCAT22(4,(short)param_1[8] + 1);
+      local_74 = CONCAT22(4,(short)emitter[8] + 1);
       local_70[1] = (undefined *)((uint)local_70[1] & 0xfffff88f | 0x540);
       local_70[2] = ((unsigned char *)0x00003210);
       local_74 = local_74 | 0x400000;
-      if (param_1[9] != 0) {
-        return param_1[9];
+      if (emitter[9] != 0) {
+        return emitter[9];
       }
-      iVar3 = param_1[0xb];
-      uVar4 = param_1[0xc];
-      if (uVar4 < iVar3 + 9U) {
-        if (uVar4 == 0) {
-          uVar4 = 0x10;
+      bufferCount = emitter[0xb];
+      capacity = emitter[0xc];
+      if (capacity < bufferCount + 9U) {
+        if (capacity == 0) {
+          capacity = 0x10;
         }
         else {
-          uVar4 = uVar4 << 1;
+          capacity = capacity << 1;
         }
-        for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+        for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
         }
-        if (*piVar12 == 0) {
-          iVar3 = _malloc(uVar4 << 2);
+        if (*bufferDataPtr == 0) {
+          bufferCount = _malloc(capacity << 2);
         }
         else {
-          iVar3 = _realloc(*piVar12,uVar4 << 2);
+          bufferCount = _realloc(*bufferDataPtr,capacity << 2);
         }
-        if (iVar3 == 0) goto LAB_000457a8;
-        *piVar12 = iVar3;
-        param_1[0xc] = uVar4;
-        iVar3 = param_1[0xb];
+        if (bufferCount == 0) goto LAB_000457a8;
+        *bufferDataPtr = bufferCount;
+        emitter[0xc] = capacity;
+        bufferCount = emitter[0xb];
       }
-      param_1[0xb] = iVar3 + 9;
-      puVar10 = (uint *)(iVar3 * 4 + *piVar12);
+      emitter[0xb] = bufferCount + 9;
+      puVar10 = (uint *)(bufferCount * 4 + *bufferDataPtr);
       *puVar10 = local_88;
       puVar10[1] = local_84;
       puVar10[2] = local_80;
@@ -4640,33 +4640,33 @@ int FUN_00044c90(param_1, param_2)
         puVar10 = puVar10 + 2;
       } while (local_70 != ppuVar7);
       if ((*(uint *)(iVar11 + 4) & 0xc000000) == 0xc000000) {
-        if (param_1[9] != 0) {
-          return param_1[9];
+        if (emitter[9] != 0) {
+          return emitter[9];
         }
-        iVar3 = param_1[0xb];
-        uVar4 = param_1[0xc];
-        if (uVar4 < iVar3 + 7U) {
-          if (uVar4 == 0) {
-            uVar4 = 0x10;
+        bufferCount = emitter[0xb];
+        capacity = emitter[0xc];
+        if (capacity < bufferCount + 7U) {
+          if (capacity == 0) {
+            capacity = 0x10;
           }
           else {
-            uVar4 = uVar4 << 1;
+            capacity = capacity << 1;
           }
-          for (; uVar4 < iVar3 + 7U; uVar4 = uVar4 << 1) {
+          for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
           }
-          if (*piVar12 == 0) {
-            iVar3 = _malloc(uVar4 << 2);
+          if (*bufferDataPtr == 0) {
+            bufferCount = _malloc(capacity << 2);
           }
           else {
-            iVar3 = _realloc(*piVar12,uVar4 << 2);
+            bufferCount = _realloc(*bufferDataPtr,capacity << 2);
           }
-          if (iVar3 == 0) goto LAB_000457a8;
-          *piVar12 = iVar3;
-          param_1[0xc] = uVar4;
-          iVar3 = param_1[0xb];
+          if (bufferCount == 0) goto LAB_000457a8;
+          *bufferDataPtr = bufferCount;
+          emitter[0xc] = capacity;
+          bufferCount = emitter[0xb];
         }
-        param_1[0xb] = iVar3 + 7;
-        puVar9 = (undefined4 *)(iVar3 * 4 + *piVar12);
+        emitter[0xb] = bufferCount + 7;
+        puVar9 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
         *puVar9 = local_ac;
         puVar9[1] = local_a8;
         puVar9[2] = local_a4;
@@ -4678,33 +4678,33 @@ int FUN_00044c90(param_1, param_2)
           puVar9 = puVar9 + 2;
         } while (&uStack_98 != puVar5);
         local_70[1] = (undefined *)((uint)local_70[1] & 0xffff88ff | 0x5400);
-        if (param_1[9] != 0) {
-          return param_1[9];
+        if (emitter[9] != 0) {
+          return emitter[9];
         }
-        iVar3 = param_1[0xb];
-        uVar4 = param_1[0xc];
-        if (uVar4 < iVar3 + 9U) {
-          if (uVar4 == 0) {
-            uVar4 = 0x10;
+        bufferCount = emitter[0xb];
+        capacity = emitter[0xc];
+        if (capacity < bufferCount + 9U) {
+          if (capacity == 0) {
+            capacity = 0x10;
           }
           else {
-            uVar4 = uVar4 << 1;
+            capacity = capacity << 1;
           }
-          for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+          for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
           }
-          if (*piVar12 == 0) {
-            iVar3 = _malloc(uVar4 << 2);
+          if (*bufferDataPtr == 0) {
+            bufferCount = _malloc(capacity << 2);
           }
           else {
-            iVar3 = _realloc(*piVar12,uVar4 << 2);
+            bufferCount = _realloc(*bufferDataPtr,capacity << 2);
           }
-          if (iVar3 == 0) goto LAB_000457a8;
-          *piVar12 = iVar3;
-          param_1[0xc] = uVar4;
-          iVar3 = param_1[0xb];
+          if (bufferCount == 0) goto LAB_000457a8;
+          *bufferDataPtr = bufferCount;
+          emitter[0xc] = capacity;
+          bufferCount = emitter[0xb];
         }
-        param_1[0xb] = iVar3 + 9;
-        puVar10 = (uint *)(iVar3 * 4 + *piVar12);
+        emitter[0xb] = bufferCount + 9;
+        puVar10 = (uint *)(bufferCount * 4 + *bufferDataPtr);
         *puVar10 = local_88;
         puVar10[1] = local_84;
         puVar10[2] = local_80;
@@ -4720,74 +4720,74 @@ int FUN_00044c90(param_1, param_2)
     _memset(&local_64,0,0x24);
     local_64 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_64) + 0)),0xd);
     local_88 = local_88 & 0xc000ffff | 0x30000;
-    iVar3 = ((int (*)())FUN_0003f750)(param_1,iVar11 + 8,&local_60,&local_5c,*(uint *)(iVar11 + 4) >> 0x14 & 1);
-    if (iVar3 == 0) {
-      local_58 = (undefined *)CONCAT22(4,(short)param_1[8] + 1);
+    bufferCount = ((int (*)())FUN_0003f750)(emitter,iVar11 + 8,&local_60,&local_5c,*(uint *)(iVar11 + 4) >> 0x14 & 1);
+    if (bufferCount == 0) {
+      local_58 = (undefined *)CONCAT22(4,(short)emitter[8] + 1);
       local_4c = ((unsigned char *)0x00003210);
       local_58 = (undefined *)((uint)local_58 | 0x400000);
-      iVar3 = ((int (*)())FUN_0003f1c0)(param_1,iVar11 + 0x10,auStack_54,auStack_48);
-      if (iVar3 == 0) {
-        iVar3 = ((int (*)())FUN_0003ed90)(param_1,iVar11 + 8,auStack_b8,auStack_b4,0);
-        if (iVar3 == 0) {
+      bufferCount = ((int (*)())FUN_0003f1c0)(emitter,iVar11 + 0x10,auStack_54,auStack_48);
+      if (bufferCount == 0) {
+        bufferCount = ((int (*)())FUN_0003ed90)(emitter,iVar11 + 8,auStack_b8,auStack_b4,0);
+        if (bufferCount == 0) {
           local_b0 = ((unsigned char *)0x00003210);
-          uVar4 = *(uint *)(iVar11 + 8);
-          if ((uVar4 & 0x2000) != 0) {
-            ((int (*)())FUN_0003ee30)(0,uVar4 >> 8 & 3,&local_b0);
-            uVar4 = *(uint *)(iVar11 + 8);
+          capacity = *(uint *)(iVar11 + 8);
+          if ((capacity & 0x2000) != 0) {
+            ((int (*)())FUN_0003ee30)(0,capacity >> 8 & 3,&local_b0);
+            capacity = *(uint *)(iVar11 + 8);
           }
-          if ((uVar4 & 0x4000) != 0) {
-            ((int (*)())FUN_0003ee30)(1,uVar4 >> 6 & 3,&local_b0);
-            uVar4 = *(uint *)(iVar11 + 8);
+          if ((capacity & 0x4000) != 0) {
+            ((int (*)())FUN_0003ee30)(1,capacity >> 6 & 3,&local_b0);
+            capacity = *(uint *)(iVar11 + 8);
           }
-          if ((uVar4 & 0x8000) != 0) {
-            ((int (*)())FUN_0003ee30)(2,uVar4 >> 4 & 3,&local_b0);
-            uVar4 = *(uint *)(iVar11 + 8);
+          if ((capacity & 0x8000) != 0) {
+            ((int (*)())FUN_0003ee30)(2,capacity >> 4 & 3,&local_b0);
+            capacity = *(uint *)(iVar11 + 8);
           }
-          if ((uVar4 & 0x10000) != 0) {
-            ((int (*)())FUN_0003ee30)(3,uVar4 >> 2 & 3,&local_b0);
+          if ((capacity & 0x10000) != 0) {
+            ((int (*)())FUN_0003ee30)(3,capacity >> 2 & 3,&local_b0);
           }
-          iVar3 = param_1[9];
+          bufferCount = emitter[9];
           local_50 = local_b6 | 0x440000;
           local_44 = local_b0;
         }
         else {
-          iVar3 = param_1[9];
+          bufferCount = emitter[9];
         }
-        if (iVar3 != 0) {
-          return iVar3;
+        if (bufferCount != 0) {
+          return bufferCount;
         }
-        iVar3 = param_1[0xb];
-        uVar4 = param_1[0xc];
-        if (uVar4 < iVar3 + 9U) {
-          if (uVar4 == 0) {
-            uVar4 = 0x10;
+        bufferCount = emitter[0xb];
+        capacity = emitter[0xc];
+        if (capacity < bufferCount + 9U) {
+          if (capacity == 0) {
+            capacity = 0x10;
           }
           else {
-            uVar4 = uVar4 << 1;
+            capacity = capacity << 1;
           }
-          for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+          for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
           }
-          if (*piVar12 == 0) {
-            iVar3 = _malloc(uVar4 << 2);
+          if (*bufferDataPtr == 0) {
+            bufferCount = _malloc(capacity << 2);
           }
           else {
-            iVar3 = _realloc(*piVar12,uVar4 << 2);
+            bufferCount = _realloc(*bufferDataPtr,capacity << 2);
           }
-          if (iVar3 == 0) {
+          if (bufferCount == 0) {
 LAB_000457a8:
-            if (param_1[9] != 0) {
-              return param_1[9];
+            if (emitter[9] != 0) {
+              return emitter[9];
             }
-            param_1[9] = 1;
+            emitter[9] = 1;
             return 1;
           }
-          *piVar12 = iVar3;
-          param_1[0xc] = uVar4;
-          iVar3 = param_1[0xb];
+          *bufferDataPtr = bufferCount;
+          emitter[0xc] = capacity;
+          bufferCount = emitter[0xb];
         }
         ppuVar7 = (undefined **)&local_58;
-        param_1[0xb] = iVar3 + 9;
-        puVar5 = (undefined4 *)(iVar3 * 4 + *piVar12);
+        emitter[0xb] = bufferCount + 9;
+        puVar5 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
         *puVar5 = local_64;
         puVar5[1] = local_60;
         puVar5[2] = local_5c;
@@ -4802,18 +4802,18 @@ LAB_000457a8:
       }
     }
   }
-  return param_1[9];
+  return emitter[9];
 }
 
 /* FUN_000457f0 @ 0x457f0 (2412 bytes) */
-int FUN_000457f0(param_1, param_2)
-  int *param_1;
+int FUN_000457f0(emitter, param_2)
+  int *emitter;
   int param_2;
 {
   undefined4 *puVar1;
   undefined **ppuVar2;
-  int iVar3;
-  uint uVar4;
+  int bufferCount;
+  uint capacity;
   short sVar5;
   undefined4 *puVar6;
   uint uVar7;
@@ -4824,7 +4824,7 @@ int FUN_000457f0(param_1, param_2)
   uint *puVar12;
   undefined4 *puVar13;
   uint *puVar14;
-  int *piVar15;
+  int *bufferDataPtr;
   int iVar16;
   uint local_98;
   uint local_94;
@@ -4848,56 +4848,56 @@ int FUN_000457f0(param_1, param_2)
   uint local_48;
   undefined *local_44;
   
-  iVar16 = *param_1;
-  iVar3 = *(int *)(iVar16 + 0x54);
+  iVar16 = *emitter;
+  bufferCount = *(int *)(iVar16 + 0x54);
   _memset(&local_88,0,0x24);
-  iVar16 = iVar16 + iVar3 * 8 + param_2 * 8;
+  iVar16 = iVar16 + bufferCount * 8 + param_2 * 8;
   _memset(&local_64,0,0x24);
-  iVar3 = ((int (*)())FUN_0003f750)(param_1,iVar16 + 8,&local_98,&local_94,*(uint *)(iVar16 + 4) >> 0x14 & 1);
-  if (iVar3 != 0) {
+  bufferCount = ((int (*)())FUN_0003f750)(emitter,iVar16 + 8,&local_98,&local_94,*(uint *)(iVar16 + 4) >> 0x14 & 1);
+  if (bufferCount != 0) {
 LAB_000458f0:
-    return param_1[9];
+    return emitter[9];
   }
   puVar14 = (uint *)(iVar16 + 0x10);
-  iVar3 = ((int (*)())FUN_0003f1c0)(param_1,puVar14,&local_90,&local_8c);
-  if (iVar3 != 0) goto LAB_000458f0;
+  bufferCount = ((int (*)())FUN_0003f1c0)(emitter,puVar14,&local_90,&local_8c);
+  if (bufferCount != 0) goto LAB_000458f0;
   puVar6 = &local_7c;
-  local_84 = CONCAT22(4,(short)param_1[8]);
+  local_84 = CONCAT22(4,(short)emitter[8]);
   local_88 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_88) + 0)),0x5b);
   local_80 = 0x55;
   local_84 = local_84 | 0x400000;
-  iVar3 = ((int (*)())FUN_0003f1c0)(param_1,iVar16 + 0x18,puVar6,&local_70);
-  if (iVar3 != 0) goto LAB_000458f0;
+  bufferCount = ((int (*)())FUN_0003f1c0)(emitter,iVar16 + 0x18,puVar6,&local_70);
+  if (bufferCount != 0) goto LAB_000458f0;
   local_6c = ((unsigned char *)0x00005555U);
   local_78 = 0x440000;
-  if (param_1[9] != 0) {
-    return param_1[9];
+  if (emitter[9] != 0) {
+    return emitter[9];
   }
-  piVar15 = param_1 + 10;
-  iVar3 = param_1[0xb];
-  uVar4 = param_1[0xc];
-  if (uVar4 < iVar3 + 7U) {
-    if (uVar4 == 0) {
-      uVar4 = 0x10;
+  bufferDataPtr = emitter + 10;
+  bufferCount = emitter[0xb];
+  capacity = emitter[0xc];
+  if (capacity < bufferCount + 7U) {
+    if (capacity == 0) {
+      capacity = 0x10;
     }
     else {
-      uVar4 = uVar4 << 1;
+      capacity = capacity << 1;
     }
-    for (; uVar4 < iVar3 + 7U; uVar4 = uVar4 << 1) {
+    for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
     }
-    if (*piVar15 == 0) {
-      iVar3 = _malloc(uVar4 << 2);
+    if (*bufferDataPtr == 0) {
+      bufferCount = _malloc(capacity << 2);
     }
     else {
-      iVar3 = _realloc(*piVar15,uVar4 << 2);
+      bufferCount = _realloc(*bufferDataPtr,capacity << 2);
     }
-    if (iVar3 == 0) goto LAB_00046124;
-    *piVar15 = iVar3;
-    param_1[0xc] = uVar4;
-    iVar3 = param_1[0xb];
+    if (bufferCount == 0) goto LAB_00046124;
+    *bufferDataPtr = bufferCount;
+    emitter[0xc] = capacity;
+    bufferCount = emitter[0xb];
   }
-  param_1[0xb] = iVar3 + 7;
-  puVar13 = (undefined4 *)(iVar3 * 4 + *piVar15);
+  emitter[0xb] = bufferCount + 7;
+  puVar13 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
   *puVar13 = local_88;
   puVar13[1] = local_84;
   puVar13[2] = local_80;
@@ -4912,12 +4912,12 @@ LAB_000458f0:
   local_64 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_64) + 0)),0xd);
   local_64 = local_64 & 0xc000ffff | 0x20000;
   if ((*puVar14 & 0x3000) == 0x1000) {
-    sVar5 = (short)param_1[8];
+    sVar5 = (short)emitter[8];
     local_60 = local_98;
     local_5c = local_94;
   }
   else {
-    sVar5 = (short)param_1[8];
+    sVar5 = (short)emitter[8];
     local_60 = CONCAT22(4,sVar5 + 1);
     local_5c = 0x55;
     local_60 = local_60 | 0x400000;
@@ -4925,48 +4925,48 @@ LAB_000458f0:
   uVar8 = local_8c >> 4 & 7;
   uVar7 = local_8c >> 7 & 1;
   local_58 = (undefined *)CONCAT22(4,sVar5);
-  uVar4 = local_8c >> 3 & 1;
+  capacity = local_8c >> 3 & 1;
   local_4c = ((unsigned char *)0x00003210);
   local_50 = local_90;
   local_44 = (undefined *)
-             (uVar4 << 0xf |
+             (capacity << 0xf |
              (local_8c & 7) << 0xc |
-             uVar4 << 0xb |
-             (local_8c & 7) << 8 | uVar4 << 7 | (local_8c & 7) << 4 | local_8c & 0xffff000f);
+             capacity << 0xb |
+             (local_8c & 7) << 8 | capacity << 7 | (local_8c & 7) << 4 | local_8c & 0xffff000f);
   local_54 = local_90;
   local_58 = (undefined *)((uint)local_58 | 0x400000);
   local_48 = uVar7 << 0xf |
              uVar8 << 0xc |
              uVar7 << 0xb |
              uVar8 << 8 | uVar7 << 7 | uVar8 << 4 | uVar7 << 3 | local_8c & 0xffff0000 | uVar8;
-  if (param_1[9] != 0) {
-    return param_1[9];
+  if (emitter[9] != 0) {
+    return emitter[9];
   }
-  iVar3 = param_1[0xb];
-  uVar4 = param_1[0xc];
-  if (uVar4 < iVar3 + 9U) {
-    if (uVar4 == 0) {
-      uVar4 = 0x10;
+  bufferCount = emitter[0xb];
+  capacity = emitter[0xc];
+  if (capacity < bufferCount + 9U) {
+    if (capacity == 0) {
+      capacity = 0x10;
     }
     else {
-      uVar4 = uVar4 << 1;
+      capacity = capacity << 1;
     }
-    for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+    for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
     }
-    if (*piVar15 == 0) {
-      iVar3 = _malloc(uVar4 << 2);
+    if (*bufferDataPtr == 0) {
+      bufferCount = _malloc(capacity << 2);
     }
     else {
-      iVar3 = _realloc(*piVar15,uVar4 << 2);
+      bufferCount = _realloc(*bufferDataPtr,capacity << 2);
     }
-    if (iVar3 == 0) goto LAB_00046124;
-    *piVar15 = iVar3;
-    param_1[0xc] = uVar4;
-    iVar3 = param_1[0xb];
+    if (bufferCount == 0) goto LAB_00046124;
+    *bufferDataPtr = bufferCount;
+    emitter[0xc] = capacity;
+    bufferCount = emitter[0xb];
   }
   ppuVar11 = (undefined **)&local_58;
-  param_1[0xb] = iVar3 + 9;
-  puVar12 = (uint *)(iVar3 * 4 + *piVar15);
+  emitter[0xb] = bufferCount + 9;
+  puVar12 = (uint *)(bufferCount * 4 + *bufferDataPtr);
   *puVar12 = local_64;
   puVar12[1] = local_60;
   puVar12[2] = local_5c;
@@ -4979,36 +4979,36 @@ LAB_000458f0:
     puVar12 = puVar12 + 2;
   } while (&local_4c != ppuVar10);
   if (1 < (*puVar14 >> 0xc & 3)) {
-    local_7c = CONCAT22(4,(short)param_1[8]);
+    local_7c = CONCAT22(4,(short)emitter[8]);
     local_70 = ((unsigned char *)0x00003210);
     local_7c = local_7c | 0x400000;
-    if (param_1[9] != 0) {
-      return param_1[9];
+    if (emitter[9] != 0) {
+      return emitter[9];
     }
-    iVar3 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar3 + 7U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar4 < iVar3 + 7U; uVar4 = uVar4 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar15 == 0) {
-        iVar3 = _malloc(uVar4 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar3 = _realloc(*piVar15,uVar4 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar3 == 0) goto LAB_00046124;
-      *piVar15 = iVar3;
-      param_1[0xc] = uVar4;
-      iVar3 = param_1[0xb];
+      if (bufferCount == 0) goto LAB_00046124;
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
-    param_1[0xb] = iVar3 + 7;
-    puVar13 = (undefined4 *)(iVar3 * 4 + *piVar15);
+    emitter[0xb] = bufferCount + 7;
+    puVar13 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *puVar13 = local_88;
     puVar13[1] = local_84;
     puVar13[2] = local_80;
@@ -5024,42 +5024,42 @@ LAB_000458f0:
       local_60 = local_98;
       local_5c = local_94;
     }
-    uVar4 = local_8c >> 8 & 7;
+    capacity = local_8c >> 8 & 7;
     uVar7 = local_8c >> 0xb & 1;
-    local_50 = CONCAT22(4,(short)param_1[8] + 1);
+    local_50 = CONCAT22(4,(short)emitter[8] + 1);
     local_44 = ((unsigned char *)0x00003210);
     local_50 = local_50 | 0x400000;
     local_48 = uVar7 << 0xf |
-               uVar4 << 0xc |
+               capacity << 0xc |
                uVar7 << 0xb |
-               uVar4 << 8 | uVar7 << 7 | uVar4 << 4 | uVar7 << 3 | uVar4 | local_48 & 0xffff0000;
-    if (param_1[9] != 0) {
-      return param_1[9];
+               capacity << 8 | uVar7 << 7 | capacity << 4 | uVar7 << 3 | capacity | local_48 & 0xffff0000;
+    if (emitter[9] != 0) {
+      return emitter[9];
     }
-    iVar3 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar3 + 9U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar15 == 0) {
-        iVar3 = _malloc(uVar4 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar3 = _realloc(*piVar15,uVar4 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar3 == 0) goto LAB_00046124;
-      *piVar15 = iVar3;
-      param_1[0xc] = uVar4;
-      iVar3 = param_1[0xb];
+      if (bufferCount == 0) goto LAB_00046124;
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
-    param_1[0xb] = iVar3 + 9;
-    puVar12 = (uint *)(iVar3 * 4 + *piVar15);
+    emitter[0xb] = bufferCount + 9;
+    puVar12 = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *puVar12 = local_64;
     puVar12[1] = local_60;
     puVar12[2] = local_5c;
@@ -5074,33 +5074,33 @@ LAB_000458f0:
     if ((*puVar14 & 0x3000) != 0x3000) {
       return 0;
     }
-    if (param_1[9] != 0) {
-      return param_1[9];
+    if (emitter[9] != 0) {
+      return emitter[9];
     }
-    iVar3 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar3 + 7U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 7U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar4 < iVar3 + 7U; uVar4 = uVar4 << 1) {
+      for (; capacity < bufferCount + 7U; capacity = capacity << 1) {
       }
-      if (*piVar15 == 0) {
-        iVar3 = _malloc(uVar4 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar3 = _realloc(*piVar15,uVar4 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar3 == 0) goto LAB_00046124;
-      *piVar15 = iVar3;
-      param_1[0xc] = uVar4;
-      iVar3 = param_1[0xb];
+      if (bufferCount == 0) goto LAB_00046124;
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
-    param_1[0xb] = iVar3 + 7;
-    puVar13 = (undefined4 *)(iVar3 * 4 + *piVar15);
+    emitter[0xb] = bufferCount + 7;
+    puVar13 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
     *puVar13 = local_88;
     puVar13[1] = local_84;
     puVar13[2] = local_80;
@@ -5112,47 +5112,47 @@ LAB_000458f0:
       puVar13 = puVar13 + 2;
     } while (&uStack_74 != puVar6);
     uVar7 = local_8c >> 0xc & 7;
-    uVar4 = local_8c >> 0xf & 1;
+    capacity = local_8c >> 0xf & 1;
     local_60 = local_98;
     local_5c = local_94;
-    local_48 = uVar4 << 0xf |
+    local_48 = capacity << 0xf |
                uVar7 << 0xc |
-               uVar4 << 0xb |
-               uVar7 << 8 | uVar4 << 7 | uVar7 << 4 | uVar4 << 3 | uVar7 | local_48 & 0xffff0000;
-    if (param_1[9] != 0) {
-      return param_1[9];
+               capacity << 0xb |
+               uVar7 << 8 | capacity << 7 | uVar7 << 4 | capacity << 3 | uVar7 | local_48 & 0xffff0000;
+    if (emitter[9] != 0) {
+      return emitter[9];
     }
-    iVar3 = param_1[0xb];
-    uVar4 = param_1[0xc];
-    if (uVar4 < iVar3 + 9U) {
-      if (uVar4 == 0) {
-        uVar4 = 0x10;
+    bufferCount = emitter[0xb];
+    capacity = emitter[0xc];
+    if (capacity < bufferCount + 9U) {
+      if (capacity == 0) {
+        capacity = 0x10;
       }
       else {
-        uVar4 = uVar4 << 1;
+        capacity = capacity << 1;
       }
-      for (; uVar4 < iVar3 + 9U; uVar4 = uVar4 << 1) {
+      for (; capacity < bufferCount + 9U; capacity = capacity << 1) {
       }
-      if (*piVar15 == 0) {
-        iVar3 = _malloc(uVar4 << 2);
+      if (*bufferDataPtr == 0) {
+        bufferCount = _malloc(capacity << 2);
       }
       else {
-        iVar3 = _realloc(*piVar15,uVar4 << 2);
+        bufferCount = _realloc(*bufferDataPtr,capacity << 2);
       }
-      if (iVar3 == 0) {
+      if (bufferCount == 0) {
 LAB_00046124:
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (emitter[9] == 0) {
+          emitter[9] = 1;
           return 1;
         }
-        return param_1[9];
+        return emitter[9];
       }
-      *piVar15 = iVar3;
-      param_1[0xc] = uVar4;
-      iVar3 = param_1[0xb];
+      *bufferDataPtr = bufferCount;
+      emitter[0xc] = capacity;
+      bufferCount = emitter[0xb];
     }
-    param_1[0xb] = iVar3 + 9;
-    puVar14 = (uint *)(iVar3 * 4 + *piVar15);
+    emitter[0xb] = bufferCount + 9;
+    puVar14 = (uint *)(bufferCount * 4 + *bufferDataPtr);
     *puVar14 = local_64;
     puVar14[1] = local_60;
     puVar14[2] = local_5c;

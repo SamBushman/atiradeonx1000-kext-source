@@ -1,0 +1,156 @@
+# local	FUNCTION	old	new	tier	evidence
+local	FUN_00034200	param_1	ctx	INFERRED	*(ctx+0xc) is the shared record whose pthread mutex is locked for the whole call and unlocked on every exit
+local	FUN_00034200	param_2	texture	INFERRED	texture record; texture[0xc] (+0x30) is the level table (as _gldGetTextureLevel)
+local	FUN_00034200	param_3	face	INFERRED	passed through to FUN_00030b50/FUN_00031220/FUN_00032100 with texture; same slot as face in _gldCreateTextureLevel
+local	FUN_00034200	param_4	passThroughArg4	UNKNOWN	only forwarded to FUN_00030b50
+local	FUN_00034200	param_5	passThroughArg5	UNKNOWN	only forwarded to FUN_00030b50
+local	FUN_00034200	puVar36	levelTable	INFERRED	texture[0xc]: byte fields at +0x5e/+0x5f/+0x60..0x62/+0x6b are base/max level and log2 sizes
+local	FUN_00034200	uVar35	baseLevel	INFERRED	byte at levelTable+0x5e; subtracted from every per-dimension log2 size and from the max level
+local	FUN_00034200	uVar37	levelCount	INFERRED	max level byte (+0x5f, or +0x6b when flag 0x8000 of levelTable+0x48 is set) minus baseLevel
+local	FUN_00034200	uVar22	baseWidth	INFERRED	1 << (log2 width byte +0x60 - baseLevel), clamped at 0
+local	FUN_00034200	uVar28	baseHeight	INFERRED	1 << (log2 height byte +0x61 - baseLevel), clamped at 0
+local	FUN_00034200	uStack_84	halfWidth	INFERRED	baseWidth >> 1, clamped to at least 1
+local	FUN_00034200	uStack_88	halfHeight	INFERRED	baseHeight >> 1, clamped to at least 1
+local	FUN_00034200	uVar14	halfDepth	INFERRED	1 << max(0, log2 depth - 1)
+local	FUN_00034200	puVar18	packet	INFERRED	result of FUN_00030840(ctx,1,texture); packet fields [2] = levelCount | ... | (baseLevel+1)*0x100
+local	FUN_00034200	puVar11	stateTemplate	INFERRED	source of the 0x2f4-byte memcpy into the packet state block
+local	FUN_00034200	piVar34	packetState	INFERRED	destination of the 0x2f4-byte memcpy
+local	FUN_00034200	iVar17	levelRecord	INFERRED	FUN_00031220(ctx,texture,face,baseLevel,1) result; flag 0x10000 of +0x18 is required
+local	FUN_000c1780	param_1	decoded	INFERRED	output record: memset(0x80) then ushort fields; int at ushort[0x46] is the mode (0/1/2) and int at [0x48] the instruction index, both read first
+local	FUN_000c1780	param_2	wordsMode0	UNKNOWN	read as param_2[instrIndex*4+4] in mode 0
+local	FUN_000c1780	param_3	wordsMode2	UNKNOWN	mode 2: four words per instruction at +0x98/+0x198/+0x298/+0x398 from param_3+instrIndex*4
+local	FUN_000c1780	iVar22	modeOrEntry	INFERRED	starts as the mode read from decoded[0x46]; reused as a pointer into wordsMode0 and as a small loop counter
+local	FUN_000c1780	iVar6	instrIndexOrEntry	INFERRED	starts as decoded[0x48]; reused as the entry pointer / byte offset
+local	FUN_000c1780	uVar14	word98	UNKNOWN	*(entry+0x98) in mode 2 (bits 0..5, 6..11, 12..17 are stored as three 6-bit fields); reused later
+local	FUN_000c1780	uVar12	word198	UNKNOWN	*(entry+0x198) in mode 2 (three 6-bit fields)
+local	FUN_000c1780	uVar11	word298	UNKNOWN	*(entry+0x298) in mode 2 (5-bit selector, 2-bit field, table indices)
+local	FUN_000c1780	uVar8	word398	UNKNOWN	*(entry+0x398) in mode 2; in mode 0 holds the 32-bit word at entry+4
+local	FUN_000c1780	iVar23	innerIndex	INFERRED	inner loop counter 0..2
+local	FUN_00018a40	param_1	ctx	INFERRED	same first parameter as the other pixel entry points; *(ctx+0x10) and +0x2a5e are read as context state
+local	FUN_00018a40	param_2	rasterPos	INFERRED	float* stored to pfStack and passed down with the pixel parameters (x/y/z raster position)
+local	FUN_00018a40	param_3	width	INFERRED	FUN_0000a6e0(ctx,format,type,width,height,...) and FUN_00018a40 returns early when 0; converted to float with the 0x80000000 xor trick
+local	FUN_00018a40	param_4	height	INFERRED	second dimension of the same FUN_0000a6e0 call; zero returns early
+local	FUN_00018a40	param_5	format	CONFIRMED	compared with GL_STENCIL_INDEX 0x1901 and GL_DEPTH_COMPONENT 0x1902
+local	FUN_00018a40	param_6	pixelType	INFERRED	passed with format to FUN_0000a6e0/FUN_0000a3f0/_glgConvertType
+local	FUN_00018a40	param_7	pixels	INFERRED	local_420 = param_7 + local_424 is the source address handed to _glgProcessPixels
+local	FUN_00028350	param_1	ctx	INFERRED	*(ctx+0xc) pthread mutex locked at entry; ctx+0x240 command state, ctx+0x1d8 last command header
+local	FUN_00028350	param_2	rectX	INFERRED	unsigned, converted to float with the 0x80000000 xor trick and clipped against the rectangle
+local	FUN_00028350	param_3	rectY	INFERRED	second of four unsigned rectangle values
+local	FUN_00028350	param_4	width	INFERRED	third rectangle value (also masked with 0x3ffe into the packet)
+local	FUN_00028350	param_5	height	INFERRED	fourth rectangle value (converted to float with the xor trick)
+local	FUN_00028350	param_6	format	CONFIRMED	compared with GL_LUMINANCE 0x1909, GL_ALPHA 0x1906, GL_RGB 0x1907, GL_RGBA 0x1908, GL_STENCIL.. and 0x80e1 GL_BGRA, 0x85b9
+local	FUN_00028350	param_7	pixelType	CONFIRMED	compared with GL_UNSIGNED_BYTE 0x1401, GL_UNSIGNED_SHORT 0x1403, GL_FLOAT 0x1406, 0x140b GL_HALF_FLOAT, 0x8363 UNSIGNED_SHORT_5_6_5, 0x8032 UNSIGNED_BYTE_3_3_2
+local	FUN_00028350	param_10	surfaceInfo	INFERRED	param_10[0..2] are tested/dereferenced as the destination surface description
+local	FUN_00028350	iVar41	hwFormat	INFERRED	index chosen from the (format,type) switch; used as table index *0x24 into the format table
+local	FUN_00028350	puVar26	packet	INFERRED	32-byte aligned command packet: header word 0xc0001000, state memcpy'd in at +5
+local	FUN_00028350	puVar25	packetRaw	INFERRED	FUN_0002cd50 result the packet pointer is aligned from
+local	FUN_00028350	puVar22	lastHeader	INFERRED	*(ctx+0x1d8): its size bits are OR-ed with the new packet offset, then ctx+0x1d8 = packet end
+local	FUN_0002a3d0	param_1	ctx	INFERRED	*(ctx+0xc) pthread mutex locked at entry (same shape as FUN_00028350)
+local	FUN_0002a3d0	param_3	width	INFERRED	FUN_0000a6e0(ctx,format,type,param_3,param_4,...) argument pair
+local	FUN_0002a3d0	param_4	height	INFERRED	second dimension of the FUN_0000a6e0 pair
+local	FUN_0002a3d0	param_5	format	CONFIRMED	compared with GL_LUMINANCE 0x1909, GL_ALPHA 0x1906, GL_RGB 0x1907, GL_RGBA 0x1908, 0x80e1 GL_BGRA
+local	FUN_0002a3d0	param_6	pixelType	CONFIRMED	compared with GL_UNSIGNED_BYTE 0x1401, GL_UNSIGNED_SHORT 0x1403, GL_FLOAT 0x1406, 0x140b, 0x8363, 0x8032, 0x8366/0x8368
+local	FUN_0002a3d0	param_9	surfaceInfo	INFERRED	param_9[0..2] are tested/dereferenced as the surface description (same as param_10 of FUN_00028350)
+local	FUN_0002a3d0	iVar32	hwFormat	INFERRED	index chosen from the (format,type) switch
+local	FUN_0002a3d0	puVar24	packet	INFERRED	32-byte aligned command packet, header 0xc0001000
+local	FUN_0002a3d0	puVar23	packetRaw	INFERRED	FUN_0002cd50 result the packet pointer is aligned from
+local	FUN_00135fb0	param_1	colorGraph	INFERRED	function carries the string "color_graph"; *(param_1+0x2c) is the compiler whose +0x378 is the arena (as named by W5)
+local	FUN_00135fb0	iVar20	nodeCount	INFERRED	*(*(compiler+0x30c)+0x14); every per-node array below is allocated nodeCount*4 bytes from the arena
+local	FUN_00135fb0	uVar26	bitsetWords	INFERRED	(n + 31) >> 5: words of a per-node bit set allocated as bitsetWords*4+0xc bytes and cleared in a loop
+local	FUN_00135fb0	puVar21	bitsetData	INFERRED	start of the cleared bit set words (allocation+1)
+local	FUN_00135fb0	iVar25	byteOffset	INFERRED	node index * 4 stepped by 4 each iteration over the nodes
+local	FUN_00135fb0	iVar3	nodeIndex	INFERRED	loop counter over the nodes (reused earlier as the length of the cleared header array)
+local	FUN_0012d2f0	param_1	flattenPass	INFERRED	function carries the string "flatten_ifs"; *(param_1+8) is the compiler (+0x30c, +0x6a8, +0x6c4 are read as in other compiler passes) and *(param_1+900) the node being flattened
+local	FUN_0012d2f0	piVar20	node	INFERRED	*(flattenPass+900); virtual methods at +0x28/+0x40 are asked before flattening, field [2] is the child list head, [0x4b] the condition value
+local	FUN_0012d2f0	bVar1	changed	INFERRED	set when a flatten step succeeded
+local	FUN_0008c590	param_1	callbacks	INFERRED	table whose +0xc entry allocates (called with 0x24a30 first) and +0x18 entry releases the old program pointer
+local	FUN_0008c590	param_2	program	INFERRED	output record zeroed field by field at entry (flag byte at +0x54, pointer at +0x60 released)
+local	FUN_0008c590	piVar9	workArea	INFERRED	allocation of 0x24a30 bytes from callbacks[3], freed with _free before returning
+local	FUN_00041c00	param_1	emitter	INFERRED	record whose int fields [10],[11],[12] are a growable word array: data pointer, used count, capacity (malloc/realloc, capacity doubled from 0x10 until count+7 fits)
+local	FUN_00041c00	param_2	slot	INFERRED	index added to *(*param_1+0x54) to look up the 8-byte table entry whose top 3 bits are tested against 0x20000000
+local	FUN_00041c00	param_3	instr	INFERRED	record whose +0xc/+0x10/+0x18/+0x1c words are copied into the emitted 0x24-byte entry
+local	FUN_00041c00	piVar20	bufferDataPtr	INFERRED	&emitter[10]: address of the growable array's data pointer
+local	FUN_00041c00	uVar5	capacity	INFERRED	emitter[0xc], doubled (starting at 0x10) until it holds count+7 words
+local	FUN_00041c00	iVar6	bufferCount	INFERRED	emitter[0xb] used word count (first holds emitter[9], a mode flag tested against 0)
+local	FUN_00041c00	uStack_68	entryHeader	INFERRED	first word of the 0x24-byte entry built on the stack (memset 0x24, low half 0x5b)
+local	FUN_00042e00	param_1	emitter	INFERRED	record with a growable word array at +0x28 (data), +0x2c (count), +0x30 (capacity), as FUN_00041c00 uses ints [10..12]
+local	FUN_00042e00	param_3	instr	INFERRED	record whose +0xc/+0x10/+0x18/+0x1c words are copied into the 0x24-byte entry
+local	FUN_00042e00	piVar9	bufferDataPtr	INFERRED	&emitter+0x28: address of the growable array's data pointer
+local	FUN_00042e00	uVar3	capacity	INFERRED	emitter+0x30, doubled until it holds count+7 words
+local	FUN_00042e00	iVar4	bufferCount	INFERRED	emitter+0x2c used word count (first holds emitter+0x24, a mode flag tested against 0)
+local	FUN_00042e00	uStack_58	entryHeader	INFERRED	first word of the 0x24-byte entry built on the stack (memset 0x24, low half 0x23)
+local	FUN_00044c90	param_1	emitter	INFERRED	record with the same growable word array as FUN_00041c00 (ints [10..12]); returns param_1[9]
+local	FUN_00044c90	uVar4	capacity	INFERRED	growable array capacity, doubled while smaller than the required word count
+local	FUN_00044c90	iVar3	bufferCount	INFERRED	used word count of the growable array
+local	FUN_00044c90	piVar12	bufferDataPtr	INFERRED	address of the array's data pointer
+local	FUN_000457f0	param_1	emitter	INFERRED	record with the same growable word array as FUN_00041c00 (ints [10..12]); returns param_1[9]
+local	FUN_000457f0	uVar4	capacity	INFERRED	growable array capacity, doubled while smaller than the required word count
+local	FUN_000457f0	iVar3	bufferCount	INFERRED	used word count of the growable array
+local	FUN_000457f0	piVar15	bufferDataPtr	INFERRED	address of the array's data pointer
+local	FUN_0013fc38	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_00155a60	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0015a68c	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0015ceb0	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_00163994	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_00156d48	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0015f44c	param_4	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0012f0f8	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_001541f0	param_3	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0013323c	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_000f07a8	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0014e9e4	param_3	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_001621c8	param_3	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_000f9a58	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0013a8a4	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0014d8f8	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_00160320	param_4	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_00161748	param_3	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0015ea3c	param_4	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0015bd40	param_2	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_00159b58	param_3	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0011ff7c	param_1	pass	INFERRED	*(param+8) is read as the compiler whose +0x30c/+0x378/+0x6a8 fields the compiler passes use (arena at +0x378)
+local	FUN_0015ceb0	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_00163994	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_0015f44c	param_3	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_001541f0	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_0014d8f8	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_00160320	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_0015ea3c	param_3	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_00159b58	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_0015bd40	param_1	node	INFERRED	IR node: *(*(node+0x88)+8) is read as its kind and node+0x84 as an index handed to FUN_00105594/FUN_001054ec
+local	FUN_0006ec10	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
+local	FUN_0006ec10	puVar17	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
+local	FUN_0006ec10	iVar15	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
+local	FUN_00069330	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
+local	FUN_00069330	puVar17	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
+local	FUN_00069330	iVar18	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
+local	FUN_000684c0	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
+local	FUN_000684c0	puVar21	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
+local	FUN_000684c0	iVar20	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
+local	FUN_00067ac0	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
+local	FUN_00067ac0	puVar20	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
+local	FUN_00067ac0	iVar19	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
+local	FUN_0006ec10	uVar4	newBuffer	INFERRED	allocation of capacity*4+0x200 bytes that receives the old instruction words
+local	FUN_0006ec10	uVar10	instrWord	INFERRED	uStack_84 & 0xffff (halfword result of the ctx+0x748 callback) or-ed into every emitted word (0x440000 flag)
+local	FUN_0006ec10	param_7	src0Words	INFERRED	four-word operand record (word [0..3]); param_8 holds its companion flags
+local	FUN_0006ec10	param_8	src0Flags	INFERRED	four words tested one by one for non-zero before the matching param_7 words are used
+local	FUN_0006ec10	param_11	src1Words	INFERRED	four-word operand record, same layout as param_7
+local	FUN_0006ec10	param_12	src1Flags	INFERRED	companion flags of param_11, tested word by word
+local	FUN_0006ec10	param_15	src2Words	INFERRED	four-word operand record, same layout as param_7
+local	FUN_0006ec10	param_16	src2Flags	INFERRED	companion flags of param_15
+local	FUN_00069330	uVar4	newBuffer	INFERRED	allocation of capacity*4+0x200 bytes that receives the old instruction words
+local	FUN_00069330	uVar5	instrWord	INFERRED	uStack_84 & 0xffff (halfword result of the ctx+0x748 callback) or-ed into every emitted word (0x40000 flag)
+local	FUN_00069330	param_7	src0Words	INFERRED	four-word operand record; param_8 holds its companion flags
+local	FUN_00069330	param_8	src0Flags	INFERRED	four words tested one by one for non-zero before the matching param_7 words are used
+local	FUN_00069330	param_11	src1Words	INFERRED	four-word operand record, same layout as param_7
+local	FUN_00069330	param_12	src1Flags	INFERRED	companion flags of param_11
+local	FUN_00069330	param_15	src2Words	INFERRED	four-word operand record, same layout as param_7
+local	FUN_00069330	param_16	src2Flags	INFERRED	companion flags of param_15
+local	FUN_000684c0	uVar4	newBuffer	INFERRED	allocation of capacity*4+0x200 bytes that receives the old instruction words
+local	FUN_000684c0	uVar11	instrWord	INFERRED	uStack_84 & 0xffff (halfword result of the ctx+0x748 callback)
+local	FUN_000684c0	param_7	src0Words	INFERRED	four-word operand record; param_8 holds its companion flags
+local	FUN_000684c0	param_8	src0Flags	INFERRED	companion flags of param_7
+local	FUN_000684c0	param_11	src1Words	INFERRED	four-word operand record, same layout as param_7
+local	FUN_000684c0	param_12	src1Flags	INFERRED	companion flags of param_11
+local	FUN_000684c0	param_15	src2Words	INFERRED	four-word operand record, same layout as param_7
+local	FUN_000684c0	param_16	src2Flags	INFERRED	companion flags of param_15
