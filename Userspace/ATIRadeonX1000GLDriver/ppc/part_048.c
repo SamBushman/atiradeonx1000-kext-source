@@ -3228,7 +3228,7 @@ int FUN_00180830(ctx)
   float *pfVar5;
   int loopIndex5;
   void *pvVar7;
-  int *piVar8;
+  int *callResult;
   void *pvVar9;
   int loopRemaining;
   undefined4 *loopIndex9;
@@ -3512,15 +3512,15 @@ LAB_00181100:
                 pvVar25 = pvVar7;
                 do {
                   iVar19 = loopIndex5;
-                  piVar8 = (int *)((int (*)())FUN_0017bc58)(loopIndex8,local_9c,0,*(undefined4 *)(ctx + 0x238));
-                  if (piVar8 == (int *)0x0) goto LAB_00181220;
+                  callResult = (int *)((int (*)())FUN_0017bc58)(loopIndex8,local_9c,0,*(undefined4 *)(ctx + 0x238));
+                  if (callResult == (int *)0x0) goto LAB_00181220;
                   pvVar9 = FUN_001043f0(0x31,*(undefined4 *)(ctx + 0x238));
                   FUN_001046c8(pvVar9,0,loopIndex8[0x23]);
                   *(undefined4 *)((int)pvVar9 + 0x98) = 0;
                   *(undefined4 *)((int)pvVar9 + 0x94) = *(undefined4 *)((int)pvVar9 + 0x14c);
                   FUN_001049e8(pvVar25,*(undefined4 *)((int)pvVar9 + 0x8c));
                   FUN_00106804(pvVar25,pvVar9,0,*(undefined4 *)(ctx + 0x238));
-                  loopIndex5 = FUN_001054ec(piVar8,0);
+                  loopIndex5 = FUN_001054ec(callResult,0);
                   FUN_000f3908(&local_68,*(undefined4 *)(loopIndex5 + 0x10));
                   uVar18 = local_68 & local_9c;
                   FUN_000f3764(&local_64,uVar18);
@@ -3529,9 +3529,9 @@ LAB_00181100:
                   uVar22 = local_60;
                   loopIndex5 = FUN_001054ec(pvVar9,1);
                   *(undefined4 *)(loopIndex5 + 0x10) = uVar22;
-                  loopIndex5 = (**(code **)(*piVar8 + 0x40))(piVar8);
+                  loopIndex5 = (**(code **)(*callResult + 0x40))(callResult);
                   if (loopIndex5 == 0) {
-                    loopIndex5 = FUN_00105594(piVar8,1);
+                    loopIndex5 = FUN_00105594(callResult,1);
                     FUN_001046c8(pvVar9,1,*(undefined4 *)(loopIndex5 + 0x8c));
                     FUN_00106004(pvVar9,1,loopIndex5,0,*(undefined4 *)(ctx + 0x238));
                   }
@@ -5200,7 +5200,7 @@ int FUN_0018401c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   char *pcVar5;
   undefined4 uVar6;
   int *piVar7;
-  uint uVar8;
+  uint loopIndex;
   
   param_1[1] = param_2;
   iVar3 = *(int *)(param_2 + 8);
@@ -5242,7 +5242,7 @@ int FUN_0018401c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   }
   iVar3 = *(int *)(param_2 + 0x3c4);
   iVar1 = 0;
-  for (uVar8 = 1; uVar8 <= *(uint *)(iVar3 + 4); uVar8 = uVar8 + 1) {
+  for (loopIndex = 1; loopIndex <= *(uint *)(iVar3 + 4); loopIndex = loopIndex + 1) {
     iVar2 = *(int *)(*(int *)(iVar3 + 8) + iVar1);
     if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
       FUN_001054ec(iVar2,0);

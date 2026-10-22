@@ -746,7 +746,7 @@ int FUN_00127470(param_1)
   int iVar2;
   uint uVar3;
   uint *puVar4;
-  uint uVar5;
+  uint loopIndex;
   
   ((int (*)())FUN_0012740c)(param_1);
   puVar4 = *(uint **)(param_1 + 4);
@@ -757,16 +757,16 @@ int FUN_00127470(param_1)
     }
     else {
       uVar3 = puVar4[2];
-      uVar5 = 0;
+      loopIndex = 0;
       do {
-        iVar2 = *(int *)(uVar5 * 4 + uVar3);
+        iVar2 = *(int *)(loopIndex * 4 + uVar3);
         if (iVar2 != 0) {
           FUN_00193cc0(puVar4[5],iVar2);
           uVar1 = *puVar4;
           uVar3 = puVar4[2];
         }
-        uVar5 = uVar5 + 1;
-      } while (uVar5 < uVar1);
+        loopIndex = loopIndex + 1;
+      } while (loopIndex < uVar1);
     }
     FUN_00193cc0(puVar4[5],uVar3);
     FUN_00193cc0(puVar4[-1],puVar4 + -1);
@@ -783,7 +783,7 @@ int FUN_00127534(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined4 uVar1;
+  undefined4 callResult;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
@@ -791,8 +791,8 @@ int FUN_00127534(param_1, param_2, param_3, param_4)
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 0xc) = param_4;
-  uVar1 = FUN_00194834(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
-  return uVar1;
+  callResult = FUN_00194834(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
+  return callResult;
 }
 
 /* FUN_001275a0 @ 0x1275a0 (104 bytes) */
@@ -803,14 +803,14 @@ int FUN_001275a0(param_1, param_2, param_3, param_4)
   uint param_4;
 {
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined4 uVar1;
+  undefined4 callResult;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  uVar1 = FUN_00122e90((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),param_4,*param_1);
-  FUN_00194d44(param_1[1],uVar1);
-  return uVar1;
+  callResult = FUN_00122e90((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),param_4,*param_1);
+  FUN_00194d44(param_1[1],callResult);
+  return callResult;
 }
 
 /* FUN_00127608 @ 0x127608 (100 bytes) */
@@ -820,15 +820,15 @@ int FUN_00127608(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int callResult;
+  undefined4 callResult2;
   
-  iVar1 = ((int (*)())FUN_00127534)(param_1,param_2,param_3,param_4);
-  if (iVar1 == 0) {
-    uVar2 = ((int (*)())FUN_001275a0)(param_1,param_2,param_3,param_4);
-    return uVar2;
+  callResult = ((int (*)())FUN_00127534)(param_1,param_2,param_3,param_4);
+  if (callResult == 0) {
+    callResult2 = ((int (*)())FUN_001275a0)(param_1,param_2,param_3,param_4);
+    return callResult2;
   }
-  return iVar1;
+  return callResult;
 }
 
 /* FUN_0012766c @ 0x12766c (52 bytes) */
@@ -952,7 +952,7 @@ int FUN_001278d0(param_1)
   int iVar2;
   uint uVar3;
   uint *puVar4;
-  uint uVar5;
+  uint loopIndex;
   
   ((int (*)())FUN_0012740c)(param_1);
   puVar4 = *(uint **)(param_1 + 4);
@@ -963,16 +963,16 @@ int FUN_001278d0(param_1)
     }
     else {
       uVar3 = puVar4[2];
-      uVar5 = 0;
+      loopIndex = 0;
       do {
-        iVar2 = *(int *)(uVar5 * 4 + uVar3);
+        iVar2 = *(int *)(loopIndex * 4 + uVar3);
         if (iVar2 != 0) {
           FUN_00193cc0(puVar4[5],iVar2);
           uVar1 = *puVar4;
           uVar3 = puVar4[2];
         }
-        uVar5 = uVar5 + 1;
-      } while (uVar5 < uVar1);
+        loopIndex = loopIndex + 1;
+      } while (loopIndex < uVar1);
     }
     FUN_00193cc0(puVar4[5],uVar3);
     FUN_00193cc0(puVar4[-1],puVar4 + -1);

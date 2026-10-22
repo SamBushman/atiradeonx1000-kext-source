@@ -2556,27 +2556,27 @@ int FUN_0017ad24(ctx, param_2, param_3)
 }
 
 /* FUN_0017ae28 @ 0x17ae28 (172 bytes) */
-int FUN_0017ae28(ctx, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_0017ae28(ctx, param_2, param_3, param_4, param_5, param_6, compiler)
   int ctx;
   int param_2;
   int param_3;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
-  int param_7;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   int iVar3;
   undefined4 *puVar4;
   
   iVar3 = *(int *)(param_3 + 0x8c);
   if (*(int *)(*(int *)(iVar3 + 0x2c) + 4) == 0) {
-    uVar2 = *(undefined4 *)(param_7 + 0x378);
-    puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x240);
-    puVar4 = puVar1 + 1;
-    *puVar1 = uVar2;
-    FUN_00173938(puVar4,param_3,param_7);
+    arena = *(undefined4 *)(compiler + 0x378);
+    allocation = (undefined4 *)FUN_00193e18(arena,0x240);
+    puVar4 = allocation + 1;
+    *allocation = arena;
+    FUN_00173938(puVar4,param_3,compiler);
     FUN_00174e0c(puVar4);
     FUN_00173278(puVar4);
     FUN_00123424(iVar3,*(undefined4 *)(*(int *)(param_3 + 0x158) + 0xb0),puVar4);
