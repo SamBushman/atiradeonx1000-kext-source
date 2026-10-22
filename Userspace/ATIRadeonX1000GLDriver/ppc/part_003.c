@@ -842,7 +842,7 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
   byte *retireCounter;
   undefined4 kernelKind;
   int currentChunk;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   undefined4 structOutSize;
   int chunk;
@@ -891,7 +891,7 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
     refCountSlot = (int *)(chunkMemory + 0x10);
     *(int *)(chunk + 0x1c) = chunkMemory;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         requestedSize = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
         *refCountSlot = requestedSize;
         crBits = 2;
@@ -920,7 +920,7 @@ LAB_0001b494:
     refCountSlot = (int *)(chunkMemory + 0x10);
     *(int *)(chunk + 0x1c) = chunkMemory;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         requestedSize = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
         *refCountSlot = requestedSize;
         crBits = 2;
@@ -3591,7 +3591,7 @@ int FUN_0001ecd0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   undefined *puVar32;
   uint *puVar33;
   int ring;
-  char in_RESERVE;
+  char reservation;
   uint uVar35;
   int iVar36;
   double in_f1;
@@ -3821,7 +3821,7 @@ code_r0x0001f1ac:
           puVar16 = puVar30 + 9;
           puVar30[8] = *(undefined4 *)(*(int **)(ctx + GLD_currentVertexArray))[0x8a];
           piVar28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             iVar12 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
             *piVar28 = iVar12;
           }
@@ -3829,7 +3829,7 @@ code_r0x0001f1ac:
             puVar16 = puVar30 + 10;
             puVar30[9] = **(undefined4 **)(*(int *)(ctx + GLD_currentVertexArray) + 0x228);
             piVar28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
-            if (in_RESERVE != '\0') {
+            if (reservation != '\0') {
               iVar12 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
               *piVar28 = iVar12;
             }
@@ -3850,7 +3850,7 @@ code_r0x0001f1ac:
               *puVar16 = *puVar15;
               puVar16 = puVar16 + 1;
               do {
-                if (in_RESERVE != '\0') {
+                if (reservation != '\0') {
                   uVar24 = storeWordConditionalIndexed(*puVar33 + 0x10000,0,puVar33);
                   *puVar33 = uVar24;
                   bVar14 = true;
@@ -3866,7 +3866,7 @@ code_r0x0001f1ac:
             piVar28 = (int *)(**(int **)(*(int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 4) + 0x80) +
                                         8) + 0x10);
             do {
-              if (in_RESERVE != '\0') {
+              if (reservation != '\0') {
                 iVar12 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
                 *piVar28 = iVar12;
                 bVar14 = true;

@@ -1136,7 +1136,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
   int *refCountSlot;
   int backing;
   int oldRefCount;
-  char in_RESERVE;
+  char reservation;
   
   _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   backing = vertexArray[0x8a];
@@ -1154,7 +1154,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
     refCountSlot = (int *)(backing + 0x10);
     do {
       oldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         retired = true;
@@ -1179,7 +1179,7 @@ int _gldReclaimVertexArray(ctx, vertexArray)
   int *refCountSlot;
   int oldRefCount;
   int backing;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   if (*(int *)(ctx + GLD_currentVertexArray) == vertexArray) {
@@ -1195,7 +1195,7 @@ int _gldReclaimVertexArray(ctx, vertexArray)
     refCountSlot = (int *)(backing + 0x10);
     do {
       oldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
@@ -8564,68 +8564,68 @@ LAB_00016a6c:
 }
 
 /* FUN_00016fc0 @ 0x16fc0 (272 bytes) */
-int FUN_00016fc0(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int FUN_00016fc0(bufferEnum, drawableFlags)
+  uint bufferEnum;
+  uint drawableFlags;
 {
-  if (param_1 != 0x405) {
-    if (param_1 < 0x406) {
-      if (param_1 == 0x401) {
+  if (bufferEnum != 0x405) {
+    if (bufferEnum < 0x406) {
+      if (bufferEnum == 0x401) {
 LAB_00017070:
-        if ((param_2 & 0x10) == 0) {
+        if ((drawableFlags & 0x10) == 0) {
           return 1;
         }
         return 3;
       }
-      if (param_1 < 0x402) {
-        if (param_1 == 0) {
+      if (bufferEnum < 0x402) {
+        if (bufferEnum == 0) {
           return 0x11;
         }
-        if (param_1 == 0x400) {
+        if (bufferEnum == 0x400) {
           return 1;
         }
       }
       else {
-        if (param_1 == 0x403) {
-          if ((param_2 & 0x400) == 0) {
+        if (bufferEnum == 0x403) {
+          if ((drawableFlags & 0x400) == 0) {
             return 1;
           }
-          if ((param_2 & 0x10) == 0) {
+          if ((drawableFlags & 0x10) == 0) {
             return 0;
           }
           return 2;
         }
-        if (0x403 < param_1) {
+        if (0x403 < bufferEnum) {
           return 1;
         }
       }
     }
     else {
-      if (param_1 == 0x408) {
+      if (bufferEnum == 0x408) {
         return 1;
       }
-      if (param_1 < 0x409) {
-        if (param_1 == 0x406) {
+      if (bufferEnum < 0x409) {
+        if (bufferEnum == 0x406) {
           return 1;
         }
-        if (param_1 == 0x407) goto LAB_00017070;
+        if (bufferEnum == 0x407) goto LAB_00017070;
       }
-      else if (param_1 == 0x40a) {
-        if (0x1ff < (param_2 & 0x300)) {
+      else if (bufferEnum == 0x40a) {
+        if (0x1ff < (drawableFlags & 0x300)) {
           return 8;
         }
       }
-      else if (param_1 < 0x40a) {
-        if (0xff < (param_2 & 0x300)) {
+      else if (bufferEnum < 0x40a) {
+        if (0xff < (drawableFlags & 0x300)) {
           return 7;
         }
       }
-      else if ((param_1 == 0x40b) && (0x2ff < (param_2 & 0x300))) {
+      else if ((bufferEnum == 0x40b) && (0x2ff < (drawableFlags & 0x300))) {
         return 9;
       }
     }
   }
-  if ((param_2 & 0x400) == 0) {
+  if ((drawableFlags & 0x400) == 0) {
     return 1;
   }
   return 0;

@@ -3056,7 +3056,7 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
   int *refCountSlot;
   int oldRefCount;
   int pluginRecord;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   crBits = (pluginData == (int *)0x0) << 1;
@@ -3070,7 +3070,7 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
       refCountSlot = (int *)(pluginRecord + 0x10);
       do {
         oldRefCount = *refCountSlot;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
           *refCountSlot = updatedRefCount;
           crBits = 2;
@@ -3096,7 +3096,7 @@ int _gldReclaimBuffer(ctx, buffer)
   int *pluginData;
   int oldRefCount;
   int pluginRecord;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   pluginData = *(int **)(buffer + 8);
@@ -3110,7 +3110,7 @@ int _gldReclaimBuffer(ctx, buffer)
       pluginData = (int *)(pluginRecord + 0x10);
       do {
         oldRefCount = *pluginData;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,pluginData);
           *pluginData = updatedRefCount;
           crBits = 2;

@@ -2489,7 +2489,7 @@ int FUN_00028350(ctx, rectX, rectY, width, height, format, pixelType, param_8, p
   int iVar39;
   int ring;
   int hwFormat;
-  char in_RESERVE;
+  char reservation;
   byte bVar42;
   int iVar43;
   uint local_108;
@@ -2822,7 +2822,7 @@ LAB_000284b0:
   puVar32 = *(undefined4 **)surfaceInfo[2];
   piVar23 = puVar32 + 4;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       iVar24 = storeWordConditionalIndexed(*piVar23 + 0x10000,0,piVar23);
       *piVar23 = iVar24;
       bVar42 = 2;
@@ -4304,7 +4304,7 @@ int FUN_0002a3d0(ctx, param_2, width, height, format, pixelType, param_7, param_
   int hwFormat;
   int ring;
   int iVar34;
-  char in_RESERVE;
+  char reservation;
   byte bVar35;
   int iVar36;
   double dVar37;
@@ -4571,7 +4571,7 @@ LAB_0002a520:
       puVar30 = *(undefined4 **)surfaceInfo[2];
       piVar21 = puVar30 + 4;
       do {
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           iVar22 = storeWordConditionalIndexed(*piVar21 + 0x10000,0,piVar21);
           *piVar21 = iVar22;
           bVar35 = 2;

@@ -1594,7 +1594,7 @@ int _gldDeleteTextureLevel(ctx, texture, face, level)
   int *refCountSlot;
   int oldRefCount;
   int faceEntry;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   if (level == 0xffffffff) {
@@ -1614,7 +1614,7 @@ int _gldDeleteTextureLevel(ctx, texture, face, level)
     refCountSlot = (int *)(faceEntry + 0x10);
     do {
       oldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
@@ -1639,7 +1639,7 @@ int _gldReclaimTexture(ctx, texture)
   int *listNeighbour;
   int unitOrOldRefCount;
   int unitSlotCursor;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   unitOrOldRefCount = 0;
@@ -1662,7 +1662,7 @@ int _gldReclaimTexture(ctx, texture)
     refCountSlot = (int *)(unitSlotCursor + 0x10);
     do {
       unitOrOldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(unitOrOldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
@@ -1687,7 +1687,7 @@ int _gldReclaimTexture(ctx, texture)
     listNeighbour = (int *)(unitSlotCursor + 0x10);
     do {
       unitOrOldRefCount = *listNeighbour;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(unitOrOldRefCount + -0x10000,0,listNeighbour);
         *listNeighbour = updatedRefCount;
         crBits = 2;
@@ -2299,7 +2299,7 @@ int FUN_00009cd0(ctx)
   int *refCountSlot;
   int oldRefCount;
   int memory;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   memory = **(int **)(ctx + GLD_queryRecord);
@@ -2308,7 +2308,7 @@ int FUN_00009cd0(ctx)
     refCountSlot = (int *)(memory + 0x10);
     do {
       oldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
@@ -2334,7 +2334,7 @@ int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
   int *refCountSlot;
   int status;
   int oldMemory;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   undefined4 structOutSize;
   undefined1 structOut0 [4];
@@ -2353,7 +2353,7 @@ int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
     *record = newMemory;
     refCountSlot = (int *)(newMemory + 0x10);
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         status = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
         *refCountSlot = status;
         crBits = 2;
@@ -2365,7 +2365,7 @@ int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
     refCountSlot = (int *)(oldMemory + 0x10);
     do {
       status = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(status + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;

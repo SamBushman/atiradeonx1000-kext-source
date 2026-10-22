@@ -5682,7 +5682,7 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   int iVar43;
   uint uVar44;
   int iVar45;
-  char in_RESERVE;
+  char reservation;
   byte bVar46;
   uint uStack_248;
   int iStack_244;
@@ -6738,7 +6738,7 @@ LAB_00037930:
   puVar40 = *(undefined4 **)param_15[2];
   piVar36 = puVar40 + 4;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       iVar20 = storeWordConditionalIndexed(*piVar36 + 0x10000,0,piVar36);
       *piVar36 = iVar20;
       bVar46 = 2;
