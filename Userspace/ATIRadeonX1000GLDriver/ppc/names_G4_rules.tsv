@@ -1,0 +1,1367 @@
+# local	FUNCTION	old	new	tier	evidence   (machine-written whole-function rows from idioms; see the evidence column)
+local	FUN_0011e6f4	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0011e780	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0011e988	param_1	ctx	INFERRED	param_1 is dereferenced at +0xb0 and +0x238 at least twice (the per-context layout used across this family)
+local	FUN_0011eec8	param_1	ctx	INFERRED	param_1 is dereferenced at +0xb0 and +0x238 at least twice (the per-context layout used across this family)
+local	FUN_00123288	iVar3	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001240a8	iVar3	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001241fc	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0012434c	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0012447c	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00125350	uVar6	arena2	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_00125350	puVar5	allocation2	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_001257b0	uVar6	arena2	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_001257b0	puVar5	allocation2	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_00127534	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001275a0	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00127608	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00127608	uVar2	callResult2	INFERRED	holds one call's result that is tested or returned
+local	FUN_00128930	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00128ad4	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0012b2d8	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0012b6a8	piVar7	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0012c908	iVar8	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0012dcf0	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00130594	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0013061c	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00130690	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001307cc	uVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00130904	uVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00130c8c	iVar3	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00130da0	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00134bf0	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00134c18	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0013555c	iVar5	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00135a2c	iVar5	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00135c20	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001398b4	iVar5	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00139d40	iVar7	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0013c210	iVar5	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0013d820	piVar5	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00143664	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00146610	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00146788	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00146de0	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00147398	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00147b8c	piVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00147b8c	piVar2	callResult2	INFERRED	holds one call's result that is tested or returned
+local	FUN_0014c604	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_0014c604	iVar3	callResult2	INFERRED	holds one call's result that is tested or returned
+local	FUN_0014c604	iVar4	callResult3	INFERRED	holds one call's result that is tested or returned
+local	FUN_001506d0	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00151318	uVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00151a74	uVar7	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00158c3c	piVar5	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00162dfc	piVar3	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001633f8	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00167e1c	uVar3	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00172b70	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00173018	param_1	ctx	INFERRED	param_1 is dereferenced at +0xb0 and +0x238 at least twice (the per-context layout used across this family)
+local	FUN_00173330	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00173360	uVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001746c8	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_001746c8	puVar2	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_001746c8	param_1	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_0017494c	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_0017494c	puVar3	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_00175a3c	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_00175a3c	puVar2	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_00175a3c	param_1	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_0017ae28	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_0017ae28	puVar1	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_0017ae28	param_7	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_00180830	piVar8	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00191940	uVar3	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_00191efc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001920e0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00196d5c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_00196d5c	puVar1	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_00196d5c	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_00196dbc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00196dfc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00196e3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0019b8bc	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_0019b8bc	puVar1	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_0019b8bc	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_0019b91c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0019b9ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0019ba3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0019dcb0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0019de50	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_0019de50	puVar1	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_0019de50	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_0019deb0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0019df54	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001a06c4	piVar1	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001a1338	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
+local	FUN_001a1338	puVar1	allocation	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
+local	FUN_001a1338	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18
+local	FUN_001cd7ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cd908	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cd970	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cd9c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cda2c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cda80	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdae8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdb3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdba4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cde34	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdf28	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdf4c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdfb4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cdfd8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce040	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce064	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce0cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce0f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce158	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce17c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce1e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce208	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce270	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce294	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce2fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce320	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce414	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ce414	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce48c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce4b0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce518	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce53c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ce53c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce570	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ce570	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ce5e8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ce5e8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cecc0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cecc0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cecf4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cecf4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ced3c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ced3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ced70	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ced70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cedb8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cedb8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cedec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cedec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cee34	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cee34	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cee7c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cee7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ceec4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ceec4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cef0c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cef0c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cef40	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cef40	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cef74	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cef74	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cefbc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cefbc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001ceff0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001ceff0	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf038	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf038	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf06c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf06c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf0b4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf0b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf0e8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf0e8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf130	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf130	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf178	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf178	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf1ac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf1ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf1f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf1f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf228	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf228	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf270	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf270	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf2a4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf2a4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf2ec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf2ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf320	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf320	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf368	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf368	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf39c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf39c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf3e4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf3e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf418	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf418	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf44c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf44c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf494	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf494	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf4c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf4c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf510	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf510	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf544	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf544	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf58c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf58c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf5c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf5c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf608	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf608	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf63c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf63c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf670	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf670	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf6b8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf6b8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf6ec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf6ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf734	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf734	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf768	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf768	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf7b0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf7b0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf7e4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf7e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf82c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf82c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf860	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf860	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf8a8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf8a8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf8dc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf8dc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf924	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf924	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf958	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf958	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf98c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf98c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cf9d4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cf9d4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfa08	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfa08	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfa50	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfa50	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfa84	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfa84	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfacc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfacc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfb00	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfb00	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfb48	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfb48	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfb7c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfb7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfbc4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfbc4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfbf8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfbf8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfc40	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfc40	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfc74	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfc74	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfcbc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfcbc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfcf0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfcf0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfd38	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfd38	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfd6c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfd6c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfdb4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfdb4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfde8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfde8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfe30	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfe30	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfe64	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfe64	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfeac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfeac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cfee0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cfee0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cff28	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cff28	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cff5c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001cff5c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cffa4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001cffc8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1588	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1588	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d15bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d15bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d15f0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d15f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1624	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1624	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1658	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1658	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d168c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d168c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d16c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d16c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d16f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d16f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1728	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1728	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d175c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d175c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1790	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1790	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d17c4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d17c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d17f8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d17f8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d182c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d182c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1860	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1860	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1894	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1894	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d18c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d18c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d18fc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d18fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1930	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1930	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1964	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1964	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1998	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1998	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d19cc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d19cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1a00	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1a00	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1a34	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1a34	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1a68	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1a68	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1a9c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1a9c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1ad0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1ad0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1b04	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1b04	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1b38	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1b38	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1b6c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1b6c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1ba0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1ba0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1bd4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1bd4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1c08	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1c08	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1c3c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1c3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1c70	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1c70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1ca4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1ca4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1cd8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1cd8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1d0c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1d0c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1d40	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1d40	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1d74	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1d74	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1da8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1da8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1ddc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1ddc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1e10	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1e10	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1e44	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1e44	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1e78	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1e78	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1eac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1eac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1ee0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1ee0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1f14	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1f14	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1f48	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1f48	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1f7c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1f7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1fb0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1fb0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d1fe4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d1fe4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2018	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2018	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d204c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d204c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2080	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2080	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d20b4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d20b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d20e8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d20e8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d211c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d211c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2150	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2150	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2184	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2184	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d21b8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d21b8	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d21ec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d21ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2220	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2220	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2254	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2254	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2288	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2288	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d22bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d22bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d22f0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d22f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2324	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2324	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2358	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2358	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d238c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d238c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d23c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d23c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d23f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d23f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2428	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2428	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d245c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d245c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2490	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2490	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d24c4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d24c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d24f8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d24f8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d252c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d252c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2560	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2560	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2594	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2594	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d25c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d25c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d25fc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d25fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2630	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2630	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2664	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2664	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2698	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2698	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d26cc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d26cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2700	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2700	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2734	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2734	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2768	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2768	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d279c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d279c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d27d0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d27d0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2804	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2804	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2838	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2838	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d286c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d286c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d28a0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d28a0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d28d4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d28d4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2908	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2908	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d293c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d293c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2970	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2970	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d29a4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d29a4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d29d8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d29d8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2a0c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2a0c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2a40	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2a40	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2a74	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2a74	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2aa8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2aa8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2adc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2adc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2b10	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2b10	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2b44	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2b44	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2b78	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2b78	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2bac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2bac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2be0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2be0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2c14	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2c14	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2c48	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2c48	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2c7c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2c7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2cb0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2cb0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2ce4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2ce4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2d18	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2d18	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2d4c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2d4c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2d80	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2d80	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2db4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2db4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2de8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2de8	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2e1c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2e1c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2e50	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2e50	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2e84	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2e84	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2eb8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2eb8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2eec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2eec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2f20	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2f20	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2f54	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2f54	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2f88	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2f88	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2fbc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2fbc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d2ff0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d2ff0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3024	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3024	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3058	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3058	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d308c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d308c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d30c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d30c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d30f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d30f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3128	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3128	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d315c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d315c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3190	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3190	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d31c4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d31c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d31f8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d31f8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d322c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d322c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3260	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3260	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3294	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3294	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d32c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d32c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d32fc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d32fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3330	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3330	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3364	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3364	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3398	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3398	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d33cc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d33cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3400	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3400	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3434	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3434	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3468	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3468	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d349c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d349c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d34d0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d34d0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3504	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3504	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3538	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3538	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d356c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d356c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d35a0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d35a0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d35d4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d35d4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3608	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3608	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d363c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d363c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3670	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3670	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d36a4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d36a4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d36d8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d36d8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d370c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d370c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3740	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3740	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3774	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3774	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d37a8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d37a8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d37dc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d37dc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3810	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3810	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3844	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3844	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3878	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3878	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d38ac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d38ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d38e0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d38e0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3914	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3914	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3948	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3948	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d397c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d397c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d39b0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d39b0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d39e4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d39e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3a18	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3a18	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3a4c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3a4c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3a80	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3a80	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3ab4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3ab4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3ae8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3ae8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3b1c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3b1c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3b50	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3b50	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3b84	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3b84	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3bb8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3bb8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3bec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3bec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3c20	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3c20	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3c54	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3c54	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3c88	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3c88	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3cbc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3cbc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3cf0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3cf0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3d24	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3d24	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3d58	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3d58	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3d8c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3d8c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3dc0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3dc0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3df4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3df4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3e28	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3e28	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3e5c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3e5c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3e90	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3e90	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3ec4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3ec4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3ef8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3ef8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3f2c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3f2c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3f60	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3f60	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3f94	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3f94	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3fc8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3fc8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d3ffc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d3ffc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4030	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4030	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4064	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4064	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4098	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4098	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d40cc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d40cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4100	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4100	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4134	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4134	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4168	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4168	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d419c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d419c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d41d0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d41d0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4204	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4204	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4238	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4238	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d426c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d426c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d42a0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d42a0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d42d4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d42d4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4308	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4308	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d433c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d433c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4370	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4370	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d43a4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d43a4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d43d8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d43d8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d440c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d440c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4440	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4440	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4474	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4474	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d44a8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d44a8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d44dc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d44dc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4510	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4510	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4544	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4544	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4578	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4578	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d45ac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d45ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d45e0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d45e0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4614	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4614	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4648	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4648	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d467c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d467c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d46b0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d46b0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d46e4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d46e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4718	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4718	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d474c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d474c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4780	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4780	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d47b4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d47b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d47e8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d47e8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d481c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d481c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4850	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4850	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4884	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4884	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d48b8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d48b8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d48ec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d48ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4920	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4920	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4954	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4954	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4988	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4988	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d49bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d49bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d49f0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d49f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4a24	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4a24	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4a58	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4a58	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4a8c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4a8c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4ac0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4ac0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4af4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4af4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4b28	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4b28	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4b5c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4b5c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4b90	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4b90	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4bc4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4bc4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4bf8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4bf8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4c2c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4c2c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4c60	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4c60	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4c94	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4c94	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4cc8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4cc8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4cfc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4cfc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4d30	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4d30	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4d64	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4d64	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4d98	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4d98	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4dcc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4dcc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4e00	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4e00	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4e34	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4e34	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4e68	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4e68	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4e9c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4e9c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4ed0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4ed0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4f04	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4f04	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4f38	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4f38	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4f6c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4f6c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4fa0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4fa0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d4fd4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d4fd4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5008	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5008	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d503c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d503c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5070	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5070	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d50a4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d50a4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d50d8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d50d8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d510c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d510c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5140	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5140	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5174	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5174	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d51a8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d51a8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d51dc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d51dc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5210	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5210	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5244	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5244	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5278	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5278	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d52ac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d52ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d52e0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d52e0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5314	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5314	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5348	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5348	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d537c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d537c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d53b0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d53b0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d53e4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d53e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5418	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5418	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d544c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d544c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5480	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5480	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d54b4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d54b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d54e8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d54e8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d551c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d551c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5550	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5550	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5584	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5584	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d55b8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d55b8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d55ec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d55ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5620	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5620	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5654	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5654	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5688	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5688	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d56bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d56bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d56f0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d56f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5724	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5724	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5758	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5758	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d578c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d578c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d57c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d57c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d57f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d57f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5828	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5828	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d585c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d585c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5890	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5890	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d58c4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d58c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d58f8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d58f8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d592c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d592c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5960	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5960	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5994	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5994	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d59c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d59c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d59fc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d59fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5a30	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5a30	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5a64	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5a64	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5a98	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5a98	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5acc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5acc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5b00	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5b00	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5b34	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5b34	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5b68	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5b68	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5b9c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5b9c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5bd0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5bd0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5c04	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5c04	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5c38	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5c38	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5c6c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5c6c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5ca0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5ca0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5cd4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5cd4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5d08	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5d08	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5d3c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5d3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5d70	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5d70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5da4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5da4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5dd8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5dd8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5e0c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5e0c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5e40	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5e40	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5e74	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5e74	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5ea8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5ea8	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5edc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5edc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5f10	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5f10	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5f44	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5f44	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5f78	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5f78	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5fac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5fac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d5fe0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d5fe0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6014	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6014	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6048	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6048	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d607c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d607c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d60b0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d60b0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d60e4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d60e4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6118	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6118	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d614c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d614c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6180	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6180	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d61b4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d61b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d61e8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d61e8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d621c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d621c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6250	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6250	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6284	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6284	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d62b8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d62b8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d62ec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d62ec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6320	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6320	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6354	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6354	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6388	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6388	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d63bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d63bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d63f0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d63f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6424	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6424	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6458	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6458	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d648c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d648c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d64c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d64c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d64f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d64f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6528	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6528	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d655c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d655c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6590	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6590	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d65c4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d65c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d65f8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d65f8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d662c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d662c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6660	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6660	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6694	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6694	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d66c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d66c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d66fc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d66fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6730	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6730	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6764	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6764	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6798	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6798	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d67cc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d67cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6800	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6800	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6834	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6834	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6868	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6868	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d689c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d689c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d68d0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d68d0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6904	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6904	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6938	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6938	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d696c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d696c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d69a0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d69a0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d69d4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d69d4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6a08	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6a08	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6a3c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6a3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6a70	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6a70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6aa4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6aa4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6ad8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6ad8	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6b0c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6b0c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6b40	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6b40	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6b74	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6b74	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6ba8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6ba8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6bdc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6bdc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6c10	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6c10	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6c44	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6c44	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6c78	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6c78	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6cac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6cac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6ce0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6ce0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6d14	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6d14	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6d48	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6d48	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6d7c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6d7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6db0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6db0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6de4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6de4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6e18	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6e18	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6e4c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6e4c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6e80	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6e80	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6eb4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6eb4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6ee8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6ee8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6f1c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6f1c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6f50	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6f50	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6f84	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6f84	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6fb8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6fb8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d6fec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d6fec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7020	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7020	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7054	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7054	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7088	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7088	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d70bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d70bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d70f0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d70f0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7124	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7124	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7158	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7158	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d718c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d718c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d71c0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d71c0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d71f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d71f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7228	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7228	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d725c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d725c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7290	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7290	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d72c4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d72c4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d72f8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d72f8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d732c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d732c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7360	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7360	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7394	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7394	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d73c8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d73c8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d73fc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d73fc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7430	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7430	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7464	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7464	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7498	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7498	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d74cc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d74cc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7500	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7500	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7534	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7534	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7568	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7568	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d759c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d759c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d75d0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d75d0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7604	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7604	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7638	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7638	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d766c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d766c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d76a0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d76a0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d76d4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d76d4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7708	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7708	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d773c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d773c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7770	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7770	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d77a4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d77a4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d77d8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d77d8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d780c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d780c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7840	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7840	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7874	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7874	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d79ac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d79ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d79f4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d79f4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7a3c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7a3c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7a70	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7a70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7ab8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7ab8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7aec	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7aec	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7b20	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7b20	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7b68	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7b68	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7b9c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7b9c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7be4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7be4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7c18	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7c18	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7c60	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7c60	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7c94	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7c94	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7cdc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7cdc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7d10	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7d10	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7d58	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7d58	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7d8c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7d8c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7dd4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7dd4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7e08	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7e08	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7e50	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7e50	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7e84	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7e84	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7ecc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7ecc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7f00	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7f00	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7f48	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7f48	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7f7c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7f7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7fc4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7fc4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d7ff8	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d7ff8	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8040	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8040	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8074	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8074	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d80bc	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d80bc	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8318	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8318	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d834c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d834c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8380	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8380	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d83b4	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d83b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d84ac	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d84ac	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d84e0	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d84e0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8514	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8514	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8548	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8548	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d862c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d862c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8660	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8660	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d86b4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d87a8	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8850	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8874	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8944	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8944	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8a28	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8a28	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8a5c	puVar1	vtable	INFERRED	assigned PTR_DAT_xxx + 8 and stored at *this: the object's vtable pointer
+local	FUN_001d8a5c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8af4	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8b38	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8b7c	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8bc0	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8c18	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8c70	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8f58	param_1	this	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001d8fc0	param_1	this2	CONFIRMED	stores a vtable pointer at *param_1 (offset 0)

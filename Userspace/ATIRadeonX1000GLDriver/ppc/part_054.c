@@ -1105,6 +1105,7 @@ int FUN_001a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 int FUN_001a3580(param_1)
   undefined4 param_1;
 {
+  int length;
   int iVar1;
   int callResult;
   undefined4 callResult2;
@@ -1124,13 +1125,13 @@ int FUN_001a3580(param_1)
 
   local_58[0] = '_';
   _strcpy(local_58 + 1,param_1);
-  iVar1 = _strlen(local_58);
-  *(undefined4 *)(local_58 + iVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 0));
-  acStack_50[iVar1] = s__LDBL128_001aa0b4[8];
-  *(undefined4 *)(acStack_54 + iVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 4));
+  length = _strlen(local_58);
+  *(undefined4 *)(local_58 + length) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 0));
+  acStack_50[length] = s__LDBL128_001aa0b4[8];
+  *(undefined4 *)(acStack_54 + length) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 4));
   callResult = _NSIsSymbolNameDefinedWithHint(local_58,"libSystem.");
   if (callResult == 0) {
-    local_58[iVar1] = '\0';
+    local_58[length] = '\0';
   }
   callResult2 = _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
   callResult2 = _NSAddressOfSymbol(callResult2);
@@ -1144,10 +1145,10 @@ int FUN_001cd7bc()
 }
 
 /* FUN_001cd7ec @ 0x1cd7ec (36 bytes) */
-int FUN_001cd7ec(param_1)
-  undefined4 *param_1;
+int FUN_001cd7ec(this)
+  undefined4 *this;
 {
-  *param_1 = &PTR_FUN_001e9a40;
+  *this = &PTR_FUN_001e9a40;
   return;
 }
 
@@ -1204,134 +1205,134 @@ int FUN_001cd8b0(param_1)
 }
 
 /* FUN_001cd908 @ 0x1cd908 (104 bytes) */
-int FUN_001cd908(param_1)
-  undefined4 *param_1;
+int FUN_001cd908(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e9998;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e9998;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001cd970 @ 0x1cd970 (84 bytes) */
-int FUN_001cd970(param_1)
-  undefined4 *param_1;
+int FUN_001cd970(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e97a0;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e97a0;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
   return;
 }
 
 /* FUN_001cd9c4 @ 0x1cd9c4 (104 bytes) */
-int FUN_001cd9c4(param_1)
-  undefined4 *param_1;
+int FUN_001cd9c4(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e97a0;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e97a0;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001cda2c @ 0x1cda2c (84 bytes) */
-int FUN_001cda2c(param_1)
-  undefined4 *param_1;
+int FUN_001cda2c(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e9848;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e9848;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
   return;
 }
 
 /* FUN_001cda80 @ 0x1cda80 (104 bytes) */
-int FUN_001cda80(param_1)
-  undefined4 *param_1;
+int FUN_001cda80(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e9848;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e9848;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001cdae8 @ 0x1cdae8 (84 bytes) */
-int FUN_001cdae8(param_1)
-  undefined4 *param_1;
+int FUN_001cdae8(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e98f0;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e98f0;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
   return;
 }
 
 /* FUN_001cdb3c @ 0x1cdb3c (104 bytes) */
-int FUN_001cdb3c(param_1)
-  undefined4 *param_1;
+int FUN_001cdb3c(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e98f0;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e98f0;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001cdba4 @ 0x1cdba4 (84 bytes) */
-int FUN_001cdba4(param_1)
-  undefined4 *param_1;
+int FUN_001cdba4(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e8b50 + 8;
-  *param_1 = &PTR_FUN_001e9998;
-  *param_1 = puVar1;
+  *this = &PTR_FUN_001e9998;
+  *this = puVar1;
   puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e8b4c + 8;
-  *param_1 = puVar1;
+  *this = PTR_DAT_001e8b4c + 8;
+  *this = puVar1;
   return;
 }
 
@@ -1414,13 +1415,13 @@ int FUN_001cde18()
 }
 
 /* FUN_001cde34 @ 0x1cde34 (104 bytes) */
-int FUN_001cde34(param_1)
-  undefined4 *param_1;
+int FUN_001cde34(this)
+  undefined4 *this;
 {
-  *param_1 = &PTR_FUN_001e9f28;
-  FUN_000ea270(param_1);
-  if (param_1 != (undefined4 *)0x0) {
-    FUN_00193cc0(param_1[-1],param_1 + -1);
+  *this = &PTR_FUN_001e9f28;
+  FUN_000ea270(this);
+  if (this != (undefined4 *)0x0) {
+    FUN_00193cc0(this[-1],this + -1);
     return;
   }
   return;
@@ -1448,11 +1449,11 @@ int FUN_001cdec0(param_1)
 }
 
 /* FUN_001cdf28 @ 0x1cdf28 (36 bytes) */
-int FUN_001cdf28(param_1)
-  undefined4 *param_1;
+int FUN_001cdf28(this2)
+  undefined4 *this2;
 {
-  *param_1 = &PTR_FUN_001e9b60;
-  return FUN_000ea270(param_1);
+  *this2 = &PTR_FUN_001e9b60;
+  return FUN_000ea270(this2);
 }
 
 

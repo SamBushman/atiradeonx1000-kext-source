@@ -3961,26 +3961,26 @@ int FUN_0011e6ec(param_1)
 int FUN_0011e6f4(param_1)
   int param_1;
 {
-  int iVar1;
+  int callResult;
   int iVar2;
   int iVar3;
-  int iVar4;
+  int loopIndex;
   
   if (*(int *)(param_1 + 0x84) < 1) {
 LAB_0011e764:
     iVar3 = 0;
   }
   else {
-    iVar4 = 1;
+    loopIndex = 1;
     iVar2 = 0;
     do {
-      iVar1 = FUN_00105594(param_1,iVar4);
+      callResult = FUN_00105594(param_1,loopIndex);
       iVar3 = iVar2;
-      if ((((iVar1 != 0) && (param_1 != iVar1)) && (iVar3 = iVar1, iVar2 != 0)) &&
-         (iVar3 = iVar2, iVar2 != iVar1)) goto LAB_0011e764;
-      iVar4 = iVar4 + 1;
+      if ((((callResult != 0) && (param_1 != callResult)) && (iVar3 = callResult, iVar2 != 0)) &&
+         (iVar3 = iVar2, iVar2 != callResult)) goto LAB_0011e764;
+      loopIndex = loopIndex + 1;
       iVar2 = iVar3;
-    } while (iVar4 <= *(int *)(param_1 + 0x84));
+    } while (loopIndex <= *(int *)(param_1 + 0x84));
   }
   return iVar3;
 }
@@ -3989,18 +3989,18 @@ LAB_0011e764:
 int FUN_0011e780(param_1)
   int param_1;
 {
-  int iVar1;
-  int iVar2;
+  int callResult;
+  int loopIndex;
   
   if (0 < *(int *)(param_1 + 0x84)) {
-    iVar2 = 1;
+    loopIndex = 1;
     do {
-      iVar1 = FUN_00105594(param_1,iVar2);
-      if (iVar1 == 0) {
+      callResult = FUN_00105594(param_1,loopIndex);
+      if (callResult == 0) {
         return 0;
       }
-      iVar2 = iVar2 + 1;
-    } while (iVar2 <= *(int *)(param_1 + 0x84));
+      loopIndex = loopIndex + 1;
+    } while (loopIndex <= *(int *)(param_1 + 0x84));
   }
   return 1;
 }

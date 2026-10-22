@@ -1,0 +1,3 @@
+# use	FUNCTION	old	new	tier	evidence	from	to	first	last   (machine-written: webs named by the API their definitions call; #L = lines after the declarations, +N = lines to the end line)
+use	FUN_00172dc4	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#0	+1	all	all
+use	FUN_001a3580	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#6	+6	all	all

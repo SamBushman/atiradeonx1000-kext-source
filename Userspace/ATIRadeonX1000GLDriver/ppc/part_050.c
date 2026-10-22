@@ -102,7 +102,7 @@ int FUN_00191940(param_1, param_2, param_3)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   char *loopIndex;
-  undefined4 uVar3;
+  undefined4 callResult;
   int loopRemaining;
   double fparam_1;
   undefined1 auStack_28 [4];
@@ -130,8 +130,8 @@ int FUN_00191940(param_1, param_2, param_3)
     param_2 = param_2 + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  uVar3 = ((undefined4 (*)())FUN_00191888)(param_1,param_2,auStack_28,auStack_24,fparam_1);
-  return uVar3;
+  callResult = ((undefined4 (*)())FUN_00191888)(param_1,param_2,auStack_28,auStack_24,fparam_1);
+  return callResult;
 }
 
 /* FUN_001919d8 @ 0x1919d8 (344 bytes) */
@@ -389,8 +389,8 @@ int FUN_00191e28(param_1, param_2)
 }
 
 /* FUN_00191efc @ 0x191efc (448 bytes) */
-int FUN_00191efc(param_1, param_2, param_3)
-  undefined4 *param_1;
+int FUN_00191efc(this, param_2, param_3)
+  undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
@@ -407,51 +407,51 @@ int FUN_00191efc(param_1, param_2, param_3)
   float *loopIndex;
   double dVar12;
   
-  FUN_00128fd0(param_1,param_2,0);
-  param_1[7] = 0;
-  param_1[0x10] = 0x200;
-  *param_1 = &PTR_FUN_001eb450;
-  param_1[0xb] = 0x100;
-  param_1[8] = 0x7fffffff;
-  param_1[0x13] = 4;
-  param_1[9] = 0x20;
-  param_1[10] = 0x10;
-  param_1[0xe] = 0x89;
-  param_1[0x15] = 0x400;
-  param_1[0xf] = 0x10;
-  param_1[0x11] = 4;
-  param_1[0x12] = 4;
-  param_1[0x14] = 0x20;
-  FUN_0010dc20(param_1);
-  FUN_0010dbd8(param_1,0x2f);
-  FUN_0010dbd8(param_1,0x30);
-  FUN_0010dbd8(param_1,0x31);
-  FUN_0010dbd8(param_1,0x34);
-  FUN_0010dbd8(param_1,0x35);
-  FUN_0010dbd8(param_1,0x36);
-  FUN_0010dbd8(param_1,0x37);
-  FUN_0010dbd8(param_1,0x38);
-  FUN_0010dbd8(param_1,0x39);
-  FUN_0010dbd8(param_1,0x3a);
-  FUN_0010dbd8(param_1,0x3b);
-  FUN_0010dbd8(param_1,0x3c);
-  FUN_0010dbd8(param_1,0x3d);
-  FUN_0010dbd8(param_1,0x40);
-  FUN_0010dbd8(param_1,0x42);
-  FUN_0010dbd8(param_1,0x47);
-  FUN_0010dbd8(param_1,0x4a);
-  FUN_0010dbd8(param_1,0x4b);
-  param_1[2] = param_1[2] & 0xfffdffff | 0x1d80;
-  FUN_0019ef2c(param_1);
+  FUN_00128fd0(this,param_2,0);
+  this[7] = 0;
+  this[0x10] = 0x200;
+  *this = &PTR_FUN_001eb450;
+  this[0xb] = 0x100;
+  this[8] = 0x7fffffff;
+  this[0x13] = 4;
+  this[9] = 0x20;
+  this[10] = 0x10;
+  this[0xe] = 0x89;
+  this[0x15] = 0x400;
+  this[0xf] = 0x10;
+  this[0x11] = 4;
+  this[0x12] = 4;
+  this[0x14] = 0x20;
+  FUN_0010dc20(this);
+  FUN_0010dbd8(this,0x2f);
+  FUN_0010dbd8(this,0x30);
+  FUN_0010dbd8(this,0x31);
+  FUN_0010dbd8(this,0x34);
+  FUN_0010dbd8(this,0x35);
+  FUN_0010dbd8(this,0x36);
+  FUN_0010dbd8(this,0x37);
+  FUN_0010dbd8(this,0x38);
+  FUN_0010dbd8(this,0x39);
+  FUN_0010dbd8(this,0x3a);
+  FUN_0010dbd8(this,0x3b);
+  FUN_0010dbd8(this,0x3c);
+  FUN_0010dbd8(this,0x3d);
+  FUN_0010dbd8(this,0x40);
+  FUN_0010dbd8(this,0x42);
+  FUN_0010dbd8(this,0x47);
+  FUN_0010dbd8(this,0x4a);
+  FUN_0010dbd8(this,0x4b);
+  this[2] = this[2] & 0xfffdffff | 0x1d80;
+  FUN_0019ef2c(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_00191e28)(param_1,param_2);
+    ((int (*)())FUN_00191e28)(this,param_2);
   }
   dVar7 = DOUBLE_001aa2a8[0];
   dVar6 = DOUBLE_001aa1e0;
   fVar5 = FLOAT_001aa1c4;
   fVar4 = FLOAT_001aa170;
   fVar3 = FLOAT_001aa0e8;
-  pfVar9 = (float *)(param_1 + 0x5d0);
+  pfVar9 = (float *)(this + 0x5d0);
   loopIndex3 = 0;
   do {
     loopIndex2 = 0;
@@ -483,8 +483,8 @@ int FUN_00191efc(param_1, param_2, param_3)
 }
 
 /* FUN_001920e0 @ 0x1920e0 (748 bytes) */
-int FUN_001920e0(param_1, param_2, param_3)
-  undefined4 *param_1;
+int FUN_001920e0(this, param_2, param_3)
+  undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
@@ -501,51 +501,51 @@ int FUN_001920e0(param_1, param_2, param_3)
   float *loopIndex;
   double dVar12;
   
-  FUN_00128fd0(param_1,param_2,0);
-  param_1[7] = 0;
-  param_1[0x10] = 0x200;
-  *param_1 = &PTR_FUN_001eb450;
-  param_1[0xb] = 0x100;
-  param_1[8] = 0x7fffffff;
-  param_1[0x13] = 4;
-  param_1[9] = 0x20;
-  param_1[10] = 0x10;
-  param_1[0xe] = 0x89;
-  param_1[0x15] = 0x400;
-  param_1[0xf] = 0x10;
-  param_1[0x11] = 4;
-  param_1[0x12] = 4;
-  param_1[0x14] = 0x20;
-  FUN_0010dc20(param_1);
-  FUN_0010dbd8(param_1,0x2f);
-  FUN_0010dbd8(param_1,0x30);
-  FUN_0010dbd8(param_1,0x31);
-  FUN_0010dbd8(param_1,0x34);
-  FUN_0010dbd8(param_1,0x35);
-  FUN_0010dbd8(param_1,0x36);
-  FUN_0010dbd8(param_1,0x37);
-  FUN_0010dbd8(param_1,0x38);
-  FUN_0010dbd8(param_1,0x39);
-  FUN_0010dbd8(param_1,0x3a);
-  FUN_0010dbd8(param_1,0x3b);
-  FUN_0010dbd8(param_1,0x3c);
-  FUN_0010dbd8(param_1,0x3d);
-  FUN_0010dbd8(param_1,0x40);
-  FUN_0010dbd8(param_1,0x42);
-  FUN_0010dbd8(param_1,0x47);
-  FUN_0010dbd8(param_1,0x4a);
-  FUN_0010dbd8(param_1,0x4b);
-  param_1[2] = param_1[2] & 0xfffdffff | 0x1d80;
-  FUN_0019ef2c(param_1);
+  FUN_00128fd0(this,param_2,0);
+  this[7] = 0;
+  this[0x10] = 0x200;
+  *this = &PTR_FUN_001eb450;
+  this[0xb] = 0x100;
+  this[8] = 0x7fffffff;
+  this[0x13] = 4;
+  this[9] = 0x20;
+  this[10] = 0x10;
+  this[0xe] = 0x89;
+  this[0x15] = 0x400;
+  this[0xf] = 0x10;
+  this[0x11] = 4;
+  this[0x12] = 4;
+  this[0x14] = 0x20;
+  FUN_0010dc20(this);
+  FUN_0010dbd8(this,0x2f);
+  FUN_0010dbd8(this,0x30);
+  FUN_0010dbd8(this,0x31);
+  FUN_0010dbd8(this,0x34);
+  FUN_0010dbd8(this,0x35);
+  FUN_0010dbd8(this,0x36);
+  FUN_0010dbd8(this,0x37);
+  FUN_0010dbd8(this,0x38);
+  FUN_0010dbd8(this,0x39);
+  FUN_0010dbd8(this,0x3a);
+  FUN_0010dbd8(this,0x3b);
+  FUN_0010dbd8(this,0x3c);
+  FUN_0010dbd8(this,0x3d);
+  FUN_0010dbd8(this,0x40);
+  FUN_0010dbd8(this,0x42);
+  FUN_0010dbd8(this,0x47);
+  FUN_0010dbd8(this,0x4a);
+  FUN_0010dbd8(this,0x4b);
+  this[2] = this[2] & 0xfffdffff | 0x1d80;
+  FUN_0019ef2c(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_00191e28)(param_1,param_2);
+    ((int (*)())FUN_00191e28)(this,param_2);
   }
   dVar7 = DOUBLE_001aa2a8[0];
   dVar6 = DOUBLE_001aa1e0;
   fVar5 = FLOAT_001aa1c4;
   fVar4 = FLOAT_001aa170;
   fVar3 = FLOAT_001aa0e8;
-  pfVar9 = (float *)(param_1 + 0x5d0);
+  pfVar9 = (float *)(this + 0x5d0);
   loopIndex3 = 0;
   do {
     loopIndex2 = 0;

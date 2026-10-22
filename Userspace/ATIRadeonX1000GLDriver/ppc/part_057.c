@@ -1,73 +1,73 @@
 #include "decls.h"
 
 /* FUN_001cfeac @ 0x1cfeac (52 bytes) */
-int FUN_001cfeac(param_1)
-  undefined4 *param_1;
+int FUN_001cfeac(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = &PTR_FUN_001e9fc8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8b48 + 8;
+  *this = &PTR_FUN_001e9fc8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001cfee0 @ 0x1cfee0 (72 bytes) */
-int FUN_001cfee0(param_1)
-  undefined4 *param_1;
+int FUN_001cfee0(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = &PTR_FUN_001e9fc8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e8b48 + 8;
+  *this = &PTR_FUN_001e9fc8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001cff28 @ 0x1cff28 (52 bytes) */
-int FUN_001cff28(param_1)
-  undefined4 *param_1;
+int FUN_001cff28(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = &PTR_FUN_001e9fc8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8b48 + 8;
+  *this = &PTR_FUN_001e9fc8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001cff5c @ 0x1cff5c (72 bytes) */
-int FUN_001cff5c(param_1)
-  undefined4 *param_1;
+int FUN_001cff5c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = &PTR_FUN_001e9fc8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e8b48 + 8;
+  *this = &PTR_FUN_001e9fc8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001cffa4 @ 0x1cffa4 (36 bytes) */
-int FUN_001cffa4(param_1)
-  undefined4 *param_1;
+int FUN_001cffa4(this)
+  undefined4 *this;
 {
-  *param_1 = &PTR_FUN_001ea5b0;
+  *this = &PTR_FUN_001ea5b0;
   return;
 }
 
 /* FUN_001cffc8 @ 0x1cffc8 (36 bytes) */
-int FUN_001cffc8(param_1)
-  undefined4 *param_1;
+int FUN_001cffc8(this)
+  undefined4 *this;
 {
-  *param_1 = &PTR_FUN_001ea5b0;
-  return operator_delete(param_1);
+  *this = &PTR_FUN_001ea5b0;
+  return operator_delete(this);
 }
 
 /* FUN_001d0000 @ 0x1d0000 (32 bytes) */
@@ -924,14 +924,14 @@ int FUN_001d1544(param_1)
 }
 
 /* FUN_001d1588 @ 0x1d1588 (52 bytes) */
-int FUN_001d1588(param_1)
-  undefined4 *param_1;
+int FUN_001d1588(this2)
+  undefined4 *this2;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e8db0 + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this2 = PTR_DAT_001e8db0 + 8;
+  *this2 = vtable;
   return;
 }
 

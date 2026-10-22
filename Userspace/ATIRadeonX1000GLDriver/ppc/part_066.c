@@ -1,87 +1,87 @@
 #include "decls.h"
 
 /* FUN_001d773c @ 0x1d773c (52 bytes) */
-int FUN_001d773c(param_1)
-  undefined4 *param_1;
+int FUN_001d773c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e907c + 8;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e907c + 8;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d7770 @ 0x1d7770 (52 bytes) */
-int FUN_001d7770(param_1)
-  undefined4 *param_1;
+int FUN_001d7770(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e8f08 + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e8f08 + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d77a4 @ 0x1d77a4 (52 bytes) */
-int FUN_001d77a4(param_1)
-  undefined4 *param_1;
+int FUN_001d77a4(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e8f08 + 8;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e8f08 + 8;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d77d8 @ 0x1d77d8 (52 bytes) */
-int FUN_001d77d8(param_1)
-  undefined4 *param_1;
+int FUN_001d77d8(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e905c + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e905c + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d780c @ 0x1d780c (52 bytes) */
-int FUN_001d780c(param_1)
-  undefined4 *param_1;
+int FUN_001d780c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e905c + 8;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e905c + 8;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d7840 @ 0x1d7840 (52 bytes) */
-int FUN_001d7840(param_1)
-  undefined4 *param_1;
+int FUN_001d7840(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e8efc + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e8efc + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7874 @ 0x1d7874 (52 bytes) */
-int FUN_001d7874(param_1)
-  undefined4 *param_1;
+int FUN_001d7874(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8f28 + 8;
-  *param_1 = PTR_DAT_001e8efc + 8;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e8efc + 8;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d7950 @ 0x1d7950 (36 bytes) */
@@ -104,407 +104,407 @@ int FUN_001d7974(param_1)
 }
 
 /* FUN_001d79ac @ 0x1d79ac (72 bytes) */
-int FUN_001d79ac(param_1)
-  undefined4 *param_1;
+int FUN_001d79ac(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea8d0;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea8d0;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d79f4 @ 0x1d79f4 (72 bytes) */
-int FUN_001d79f4(param_1)
-  undefined4 *param_1;
+int FUN_001d79f4(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7b8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7b8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7a3c @ 0x1d7a3c (52 bytes) */
-int FUN_001d7a3c(param_1)
-  undefined4 *param_1;
+int FUN_001d7a3c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7b8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7b8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7a70 @ 0x1d7a70 (72 bytes) */
-int FUN_001d7a70(param_1)
-  undefined4 *param_1;
+int FUN_001d7a70(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7b8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7b8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7ab8 @ 0x1d7ab8 (52 bytes) */
-int FUN_001d7ab8(param_1)
-  undefined4 *param_1;
+int FUN_001d7ab8(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7b8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7b8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7aec @ 0x1d7aec (52 bytes) */
-int FUN_001d7aec(param_1)
-  undefined4 *param_1;
+int FUN_001d7aec(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90d8 + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90d8 + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7b20 @ 0x1d7b20 (72 bytes) */
-int FUN_001d7b20(param_1)
-  undefined4 *param_1;
+int FUN_001d7b20(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90d8 + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90d8 + 8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7b68 @ 0x1d7b68 (52 bytes) */
-int FUN_001d7b68(param_1)
-  undefined4 *param_1;
+int FUN_001d7b68(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90cc + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90cc + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7b9c @ 0x1d7b9c (72 bytes) */
-int FUN_001d7b9c(param_1)
-  undefined4 *param_1;
+int FUN_001d7b9c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90cc + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90cc + 8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7be4 @ 0x1d7be4 (52 bytes) */
-int FUN_001d7be4(param_1)
-  undefined4 *param_1;
+int FUN_001d7be4(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90e8 + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90e8 + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7c18 @ 0x1d7c18 (72 bytes) */
-int FUN_001d7c18(param_1)
-  undefined4 *param_1;
+int FUN_001d7c18(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90e8 + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90e8 + 8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7c60 @ 0x1d7c60 (52 bytes) */
-int FUN_001d7c60(param_1)
-  undefined4 *param_1;
+int FUN_001d7c60(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90ec + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90ec + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7c94 @ 0x1d7c94 (72 bytes) */
-int FUN_001d7c94(param_1)
-  undefined4 *param_1;
+int FUN_001d7c94(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90ec + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90ec + 8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7cdc @ 0x1d7cdc (52 bytes) */
-int FUN_001d7cdc(param_1)
-  undefined4 *param_1;
+int FUN_001d7cdc(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90d0 + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90d0 + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7d10 @ 0x1d7d10 (72 bytes) */
-int FUN_001d7d10(param_1)
-  undefined4 *param_1;
+int FUN_001d7d10(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = PTR_DAT_001e90d0 + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = PTR_DAT_001e90d0 + 8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7d58 @ 0x1d7d58 (52 bytes) */
-int FUN_001d7d58(param_1)
-  undefined4 *param_1;
+int FUN_001d7d58(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea748;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea748;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7d8c @ 0x1d7d8c (72 bytes) */
-int FUN_001d7d8c(param_1)
-  undefined4 *param_1;
+int FUN_001d7d8c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea748;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea748;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7dd4 @ 0x1d7dd4 (52 bytes) */
-int FUN_001d7dd4(param_1)
-  undefined4 *param_1;
+int FUN_001d7dd4(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea780;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea780;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7e08 @ 0x1d7e08 (72 bytes) */
-int FUN_001d7e08(param_1)
-  undefined4 *param_1;
+int FUN_001d7e08(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea780;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea780;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7e50 @ 0x1d7e50 (52 bytes) */
-int FUN_001d7e50(param_1)
-  undefined4 *param_1;
+int FUN_001d7e50(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7b8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7b8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7e84 @ 0x1d7e84 (72 bytes) */
-int FUN_001d7e84(param_1)
-  undefined4 *param_1;
+int FUN_001d7e84(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7b8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7b8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7ecc @ 0x1d7ecc (52 bytes) */
-int FUN_001d7ecc(param_1)
-  undefined4 *param_1;
+int FUN_001d7ecc(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7f0;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7f0;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7f00 @ 0x1d7f00 (72 bytes) */
-int FUN_001d7f00(param_1)
-  undefined4 *param_1;
+int FUN_001d7f00(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea7f0;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea7f0;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7f48 @ 0x1d7f48 (52 bytes) */
-int FUN_001d7f48(param_1)
-  undefined4 *param_1;
+int FUN_001d7f48(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea828;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea828;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7f7c @ 0x1d7f7c (72 bytes) */
-int FUN_001d7f7c(param_1)
-  undefined4 *param_1;
+int FUN_001d7f7c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea828;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea828;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d7fc4 @ 0x1d7fc4 (52 bytes) */
-int FUN_001d7fc4(param_1)
-  undefined4 *param_1;
+int FUN_001d7fc4(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea860;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea860;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d7ff8 @ 0x1d7ff8 (72 bytes) */
-int FUN_001d7ff8(param_1)
-  undefined4 *param_1;
+int FUN_001d7ff8(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea860;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea860;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d8040 @ 0x1d8040 (52 bytes) */
-int FUN_001d8040(param_1)
-  undefined4 *param_1;
+int FUN_001d8040(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea898;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea898;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d8074 @ 0x1d8074 (72 bytes) */
-int FUN_001d8074(param_1)
-  undefined4 *param_1;
+int FUN_001d8074(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea898;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea898;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d80bc @ 0x1d80bc (52 bytes) */
-int FUN_001d80bc(param_1)
-  undefined4 *param_1;
+int FUN_001d80bc(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e90f0 + 8;
-  *param_1 = &PTR_FUN_001ea8d0;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e90f0 + 8;
+  *this = &PTR_FUN_001ea8d0;
+  *this = vtable;
   return;
 }
 
@@ -608,98 +608,98 @@ int FUN_001d826c(param_1)
 }
 
 /* FUN_001d8318 @ 0x1d8318 (52 bytes) */
-int FUN_001d8318(param_1)
-  undefined4 *param_1;
+int FUN_001d8318(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e9108 + 8;
-  *param_1 = &PTR_FUN_001ead88;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e9108 + 8;
+  *this = &PTR_FUN_001ead88;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d834c @ 0x1d834c (52 bytes) */
-int FUN_001d834c(param_1)
-  undefined4 *param_1;
+int FUN_001d834c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8c88 + 8;
-  *param_1 = &PTR_FUN_001ead68;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e8c88 + 8;
+  *this = &PTR_FUN_001ead68;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d8380 @ 0x1d8380 (52 bytes) */
-int FUN_001d8380(param_1)
-  undefined4 *param_1;
+int FUN_001d8380(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8c88 + 8;
-  *param_1 = &PTR_FUN_001ead68;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8c88 + 8;
+  *this = &PTR_FUN_001ead68;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d83b4 @ 0x1d83b4 (52 bytes) */
-int FUN_001d83b4(param_1)
-  undefined4 *param_1;
+int FUN_001d83b4(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e9108 + 8;
-  *param_1 = &PTR_FUN_001ead88;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e9108 + 8;
+  *this = &PTR_FUN_001ead88;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d84ac @ 0x1d84ac (52 bytes) */
-int FUN_001d84ac(param_1)
-  undefined4 *param_1;
+int FUN_001d84ac(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e9108 + 8;
-  *param_1 = &PTR_FUN_001eaf20;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e9108 + 8;
+  *this = &PTR_FUN_001eaf20;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d84e0 @ 0x1d84e0 (52 bytes) */
-int FUN_001d84e0(param_1)
-  undefined4 *param_1;
+int FUN_001d84e0(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e9108 + 8;
-  *param_1 = &PTR_FUN_001eaf20;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e9108 + 8;
+  *this = &PTR_FUN_001eaf20;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d8514 @ 0x1d8514 (52 bytes) */
-int FUN_001d8514(param_1)
-  undefined4 *param_1;
+int FUN_001d8514(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e9108 + 8;
-  *param_1 = &PTR_FUN_001eaf20;
-  *param_1 = puVar1;
-  return operator_delete(param_1);
+  vtable = PTR_DAT_001e9108 + 8;
+  *this = &PTR_FUN_001eaf20;
+  *this = vtable;
+  return operator_delete(this);
 }
 
 /* FUN_001d8548 @ 0x1d8548 (52 bytes) */
-int FUN_001d8548(param_1)
-  undefined4 *param_1;
+int FUN_001d8548(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e9108 + 8;
-  *param_1 = &PTR_FUN_001eaf20;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e9108 + 8;
+  *this = &PTR_FUN_001eaf20;
+  *this = vtable;
   return;
 }
 
@@ -731,52 +731,52 @@ int FUN_001d8608(param_1)
 }
 
 /* FUN_001d862c @ 0x1d862c (52 bytes) */
-int FUN_001d862c(param_1)
-  undefined4 *param_1;
+int FUN_001d862c(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e9138 + 8;
-  *param_1 = puVar1;
+  vtable = PTR_DAT_001e8b48 + 8;
+  *this = PTR_DAT_001e9138 + 8;
+  *this = vtable;
   return;
 }
 
 /* FUN_001d8660 @ 0x1d8660 (72 bytes) */
-int FUN_001d8660(param_1)
-  undefined4 *param_1;
+int FUN_001d8660(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  puVar1 = PTR_DAT_001e8b48 + 8;
-  *param_1 = PTR_DAT_001e9138 + 8;
-  *param_1 = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  vtable = PTR_DAT_001e8b48 + 8;
+  *this = PTR_DAT_001e9138 + 8;
+  *this = vtable;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d86b4 @ 0x1d86b4 (56 bytes) */
-int FUN_001d86b4(param_1)
-  undefined4 *param_1;
+int FUN_001d86b4(this)
+  undefined4 *this;
 {
-  *param_1 = &PTR_FUN_001eb260;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = &PTR_FUN_001eb260;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this[-1],this + -1);
 }
 
 /* FUN_001d87a8 @ 0x1d87a8 (56 bytes) */
-int FUN_001d87a8(param_1)
-  undefined4 *param_1;
+int FUN_001d87a8(this2)
+  undefined4 *this2;
 {
-  *param_1 = &PTR_FUN_001eb2f0;
-  if (param_1 == (undefined4 *)0x0) {
+  *this2 = &PTR_FUN_001eb2f0;
+  if (this2 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return FUN_00193cc0(this2[-1],this2 + -1);
 }
 
 
