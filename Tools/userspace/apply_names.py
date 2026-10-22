@@ -100,15 +100,22 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         i = brace + 1
         while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1
         return brace + 1, i
-    Ncache = None
+    Ncache = None; created = {}
     for (f, n, fn, old, new, tier, frm, to, first, last) in uses:
         if Ncache is None or len(Ncache) != len(lines): Ncache = [norm(l) for l in lines]    # renames do not change normalised text
         N = Ncache
-        m = re.match(r'(.*)@(\d+)$', frm); pat, k = (m.group(1), int(m.group(2))) if m else (frm, 1)
-        hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
-        if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
-        a = hits[k - 1]; z = e
-        if to:
+        d0, d1 = declblock()
+        if frm.startswith('#'):                # '#L': L lines after the end of the declarations (machine-written rows); '+N' as `to`: N lines after `from`
+            a = d1 + int(frm[1:])
+            if a >= e: print('%s:%d: %s: line anchor %s beyond the function' % (f, n, fn, frm)); nerr += 1; continue
+        else:
+            m = re.match(r'(.*)@(\d+)$', frm); pat, k = (m.group(1), int(m.group(2))) if m else (frm, 1)
+            hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
+            if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
+            a = hits[k - 1]
+        z = e
+        if to.startswith('+'): z = min(a + int(to[1:]), e)
+        elif to:
             tz = [i for i in range(a + 1, e) if re.search(to, N[i])]
             if not tz: print('%s:%d: %s: end anchor %r not found' % (f, n, fn, to)); nerr += 1; continue
             z = tz[0]
@@ -130,15 +137,23 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             if di is None: print('%s:%d: %s: no simple declaration of %s' % (f, n, fn, old)); nerr += 1; continue
             m = re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[di])
             at = di + 1
-            if os.environ.get('USE_DECL', 'end') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
+            if os.environ.get('USE_DECL', 'beside') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
                 at = max(i for i in range(d0, d1) if re.match(DECL, lines[i])) + 1
             lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); e += 1
-    # drop old declarations nothing uses any more
-    for old in {r[3] for r in uses}:
+            created.setdefault(old, []).append(new)
+    # when nothing uses `old` any more, its first new name takes over old's declaration slot (gcc -O0 orders commutative operands, and allocates frame
+    # slots, by declaration order: keeping the order keeps the object code); otherwise old stays declared
+    for old in sorted({r[3] for r in uses}):
         d0, d1 = declblock()
         di = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]%s;$' % re.escape(old), lines[i])), None)
-        if di is not None and not any(re.search(wb(old), strip_strings(lines[i])) for i in range(brace + 1, e) if i != di):
-            del lines[di]; e -= 1
+        if di is None or any(re.search(wb(old), strip_strings(lines[i])) for i in range(brace + 1, e) if i != di): continue
+        nn = created.get(old)
+        if nn:
+            dj = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]%s;$' % re.escape(nn[0]), lines[i])), None)
+            if dj is not None and dj != di:
+                lines[di] = lines[dj]; del lines[dj]; e -= 1
+                continue
+        del lines[di]; e -= 1
     return napp, npend, nerr
 
 

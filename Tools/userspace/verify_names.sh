@@ -14,7 +14,7 @@ if tail -1 $T/result.txt | grep -q ' 0 different$'; then echo IDENTICAL; exit 0;
 # many-to-one slot map and no new -Wuninitialized warning (compiled -O1) for every differing part
 H=$(dirname $0); rc=0
 for part in $(grep '^DIFFERENT' $T/result.txt | awk '{print $2}' | sed 's/\.o$//'); do
-  ssh G5 "cd $R && for s in base cand; do (cd \$s/$D && otool -arch ppc -tV $part.o > $part.dis; gcc -arch ppc -O1 -Wuninitialized -c $part.c -o /dev/null 2> $part.warn); done"
+  ssh G5 "cd $R && for s in base cand; do (cd \$s/$D && gcc -arch ppc -w -S $part.c -o $part.dis; gcc -arch ppc -O1 -Wuninitialized -c $part.c -o /dev/null 2> $part.warn); done"
   for s in base cand; do scp -q G5:$R/$s/$D/$part.dis $T/$s.$part.dis; scp -q G5:$R/$s/$D/$part.warn $T/$s.$part.warn; done
   python3 $H/split_equiv.py $T/base.$part.dis $T/cand.$part.dis $T/base.$part.warn $T/cand.$part.warn | tail -8 || rc=1
   python3 $H/split_equiv.py $T/base.$part.dis $T/cand.$part.dis $T/base.$part.warn $T/cand.$part.warn > /dev/null || rc=1
