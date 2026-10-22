@@ -238,3 +238,24 @@ primary-opcode-4 words and `lvx/stvx` (0x7c..). The buffer starts as 0x2000 byte
 ## 5. Tables
 
 `names_R5_interp.tsv`, `names_R5_emu.tsv`, `names_R5_jit.tsv` hold the renames; tiers: CONFIRMED (the code shows it), INFERRED, UNKNOWN.
+
+## 6. Texture sampler (interpreter side)
+
+`_InterpreterTextureSamplerSampleTexel{1D,2D,3D,RECT}FromLevel(sampler, textureUnit, level, texCoord, texelOut)`: `textureUnit` is clamped to 7 and
+indexes the 8-entry texture object table at `*sampler`; the object keeps its sampler state in `*object` (+0x10 / +0x12 wrap modes S/T,
++0x16 minification filter using the GL enums 0x2600..0x2703, 0x2900 CLAMP, 0x812d CLAMP_TO_BORDER), and a record per mip level of 0xd0 bytes
+starting at object +0x120. `sampler[1]`/`sampler[2]` cache the current object and level record, `sampler[8]` enables projective coordinates
+(s,t,r divided by q), `sampler[10]` marks that a level of detail was computed (`_InterpreterTextureSamplerCalculateLambda{1,2,3}D`).
+
+## 7. The leftovers named in the task
+
+* `_glpDisassemble2Op` `param_5` / `param_6`: the two tables built by `_glpPPShaderToProgramString` (constant-register id -> `prmN` number, and the
+  per-register parameter-array position: -1 plain, 0 array head, k inside) that decide whether `PARAM prmN` or `PARAM prmN[size]` is printed.
+  `param_7`/`param_8` are a literal 0 and a scratch word of the caller.
+* `_EmulateOp` `fVar7` and `_PPCRuntimeCompilerCompileAV` `iVar9` were "unsplittable" for a mundane reason: `Tools/userspace/find_webs.py` had
+  no `switch` support (a def in one `case` ending in `break` never reached the use after the switch, so the webs were wrong and the gate's
+  dataflow check rejected them), and it could not parse `if (c)` / `for (...)` followed by the body or `{` on the next line. Both are fixed;
+  `fVar7` (193 uses) is now split into the result lanes, accumulator and float-to-int sources, and `iVar9` (334 uses) into the instruction
+  pointer, program info, chunk word count, emitted word, code cursor address and source count.
+* `webs.py` (S3's generator) still reports `fVar7` unsplittable because an assignment sits inside a condition (`(fVar4 = fVar3, ...)`);
+  `find_webs.py` handles that form.
