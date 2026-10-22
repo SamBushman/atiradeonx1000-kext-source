@@ -1468,7 +1468,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
    * corrupting its r30 and causing a second crash further into gldCreateContext). Those extra words are
    * never read back by any other statement in this function (no name exists for them, hence no overflow
    * was visible from local C code alone) - only sized correctly by checking the callee's real write range
-   * against stock disassembly. Same defect class as the Scheduler__run/Scheduler__scheduleBlock/FUN_00169b70/
+   * against stock disassembly. Same defect class as the Scheduler__run/Scheduler__scheduleBlock/Scheduler__packDotProductCandidates/
    * FUN_00158c3c fixes already landed on this issue. */
   undefined1 auStack_e36bc_combined [0x40];
 #define auStack_78 (auStack_e36bc_combined + 0x0)

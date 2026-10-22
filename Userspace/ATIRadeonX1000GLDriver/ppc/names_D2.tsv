@@ -100,3 +100,49 @@ local	FUN_00170da0	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=pro
 local	FUN_00170e6c	param_2	block	CONFIRMED	the basic block being scheduled (block+0x104, +0xd0 used)
 local	FUN_00171e68	param_1	program	CONFIRMED	passed through as the program argument
 local	FUN_0016a568	puVar24	schedNode	CONFIRMED	Scheduler node of the instruction being processed (allocation+1 of the 0x74-byte Arena__alloc)
+local	FUN_001670fc	iVar12	node	CONFIRMED	current SchedNode of the reverse walk (vector scheduler[6])
+local	FUN_001670fc	uVar15	nodeIndex	CONFIRMED	reverse index stored at node+0x10
+local	FUN_001670fc	uVar18	nodeCount	CONFIRMED	size of scheduler[6]
+local	FUN_001670fc	iVar6	descendantMasks	INFERRED	arena array of one 32-bit mask per node (bit k = node index+k+1 is a descendant)
+local	FUN_001670fc	puVar16	descendantMask	INFERRED	cursor into descendantMasks for the current node
+local	FUN_001670fc	iVar8	edge	CONFIRMED	edge of the successor or predecessor vector
+local	FUN_001670fc	iVar22	neighbourNode	CONFIRMED	edge.to / edge.from
+local	FUN_001670fc	local_58	maxDepth	CONFIRMED	maximum node+0x14, stored in scheduler[0x44]
+local	FUN_001670fc	iVar21	maxHeight	CONFIRMED	maximum node+0xc; compared with the target limit hwLimits+0x54
+local	FUN_00168d80	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_00168d80	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_00168d80	piVar25	inst	CONFIRMED	node.+0x38: instruction being transformed
+local	FUN_00168d80	iVar6	helperInst	CONFIRMED	instruction returned by resource model slot 0x40
+local	FUN_00168d80	iVar7	helperNode	CONFIRMED	Scheduler__createNode of helperInst
+local	FUN_00168d80	local_88	outCount	UNKNOWN	out parameter 1 of resource model slot 0x40
+local	FUN_00168d80	local_84	outSelector	UNKNOWN	out parameter 2 of resource model slot 0x40, passed to inst slot 0x88
+local	FUN_00169b70	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016bd70	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016bd70	puVar10	groupRecord	INFERRED	0x2c-byte record stored at node+0x60: [0]=component mask union, [4]=-1 register, [0x10]=member count
+local	FUN_0016bd70	iVar13	node	CONFIRMED	node examined from scheduler[6]
+local	FUN_00164bec	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_00164bec	param_2	componentMask	INFERRED	four component flag bytes that the register must be free for
+local	FUN_00164bec	param_3	cycle	INFERRED	cycle that the register must be free at
+local	FUN_00164bec	param_4	useConstantFile	INFERRED	0 = temporary file (arrays scheduler[0x54..], live-out set, high-water [0x68]), non-0 = the other file (arrays [0x58..], count hwLimits+0x13c, high-water [0x69])
+local	FUN_00164bec	uVar5	registerCount	INFERRED	number of registers in the chosen file
+local	FUN_00164bec	uVar8	reg	INFERRED	register being tested
+local	FUN_00164bec	uVar7	bestReg	INFERRED	register with the least slack so far, -1 if none
+local	FUN_00164bec	iVar13	bestSlack	INFERRED	slack of bestReg
+local	FUN_00164bec	iVar11	minSlack	INFERRED	smallest cycle - lastUse over the masked components
+local	FUN_00164bec	bVar2	isTempFile	INFERRED	param_4 == 0
+local	FUN_001659fc	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_001659fc	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_001659fc	piVar7	inst	CONFIRMED	node.+0x38
+local	FUN_0016c970	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016c970	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016c970	pcVar10	groupRecord	INFERRED	node+0x60 (Scheduler__buildCoScheduleGroups record)
+local	FUN_0016c970	piVar9	inst	CONFIRMED	node.+0x38
+local	FUN_00164df4	param_1	inst	INFERRED	instruction whose virtual slot 0x7c and class +0x88 are tested
+local	FUN_0016d538	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016d538	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016d538	piVar5	addressRegisterSlot	INFERRED	cursor over scheduler[0x5c..]: current address-register load node
+local	FUN_0016d538	uVar6	componentSelect	INFERRED	component byte of the load selected from the operand record
+local	FUN_0016dd04	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016dd04	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016dd04	uVar7	inst	CONFIRMED	node.+0x38
+local	FUN_0016bd70	local_5c	compilerArena	CONFIRMED	compiler arena (+0x378) used for the group record and the work vector

@@ -129,8 +129,8 @@
 169e30	Scheduler__markGlobalValues	r7	PASS-indirect	169e60 bl 0x193e18
 169e30	Scheduler__markGlobalValues	r8	PASS-indirect	169e60 bl 0x193e18
 169e30	Scheduler__markGlobalValues	r10	PASS-indirect	169e60 bl 0x193e18
-16d538	FUN_0016d538	r7	PASS-indirect	16d55c bl 0x1045e4
-16d538	FUN_0016d538	r8	PASS-indirect	16d55c bl 0x1045e4
+16d538	Scheduler__tryReuseAddressRegister	r7	PASS-indirect	16d55c bl 0x1045e4
+16d538	Scheduler__tryReuseAddressRegister	r8	PASS-indirect	16d55c bl 0x1045e4
 171714	pass_sched_preprocess_and_schedule_inst	r6	PASS-no	171750 bl 0x10ddcc
 171714	pass_sched_preprocess_and_schedule_inst	r7	PASS-no	171750 bl 0x10ddcc
 171714	pass_sched_preprocess_and_schedule_inst	r8	PASS-no	171750 bl 0x10ddcc

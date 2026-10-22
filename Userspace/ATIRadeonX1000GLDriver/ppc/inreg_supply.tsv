@@ -106,8 +106,8 @@
 169e30	Scheduler__markGlobalValues	r7	PASS-indirect	GARBAGE	
 169e30	Scheduler__markGlobalValues	r8	PASS-indirect	GARBAGE	
 169e30	Scheduler__markGlobalValues	r10	PASS-indirect	GARBAGE	
-16d538	FUN_0016d538	r7	PASS-indirect	GARBAGE	
-16d538	FUN_0016d538	r8	PASS-indirect	GARBAGE	
+16d538	Scheduler__tryReuseAddressRegister	r7	PASS-indirect	GARBAGE	
+16d538	Scheduler__tryReuseAddressRegister	r8	PASS-indirect	GARBAGE	
 173b98	FUN_00173b98	r7	PASS-indirect	GARBAGE	
 173b98	FUN_00173b98	r8	PASS-indirect	GARBAGE	
 173f1c	FUN_00173f1c	r5	PASS-indirect	GARBAGE	

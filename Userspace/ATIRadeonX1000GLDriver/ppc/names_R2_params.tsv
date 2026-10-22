@@ -299,7 +299,7 @@ local	FUN_001633f8	param_1	inst	INFERRED	FUN_001633f8 passes it as arg 0 of FUN_
 local	FUN_00163478	param_3	inst	INFERRED	FUN_00163478 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00165604	param_2	inst	INFERRED	FUN_00165604 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00165788	param_1	inst	INFERRED	FUN_00165788 passes it as arg 0 of FUN_00105594 (typed Inst)
-local	FUN_001670fc	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
+local	FUN_001670fc	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
 local	FUN_00168468	param_3	inst	INFERRED	FUN_00168468 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00169e30	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
 local	FUN_0016a568	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)

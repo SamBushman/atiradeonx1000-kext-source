@@ -3373,18 +3373,18 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 165f38	165f58	eh-pad	Scheduler__createNode	8	0x193cc0,__Unwind_Resume
 166220	166224	millicode	Scheduler__findOrCreateExternalNode	1	
 166238	166258	eh-pad	Scheduler__findOrCreateExternalNode	8	0x193cc0,__Unwind_Resume
-168f84	168f88	millicode	FUN_00168d80	1	
-1690f8	1690fc	millicode	FUN_00168d80	1	
-169358	16935c	millicode	FUN_00168d80	1	
-1693b8	1693bc	millicode	FUN_00168d80	1	
-1697fc	169800	eh-pad	FUN_00168d80	1	__Unwind_Resume
-169e18	169e1c	eh-pad	FUN_00169b70	1	__Unwind_Resume
+168f84	168f88	millicode	Scheduler__transformDotProduct	1	
+1690f8	1690fc	millicode	Scheduler__transformDotProduct	1	
+169358	16935c	millicode	Scheduler__transformDotProduct	1	
+1693b8	1693bc	millicode	Scheduler__transformDotProduct	1	
+1697fc	169800	eh-pad	Scheduler__transformDotProduct	1	__Unwind_Resume
+169e18	169e1c	eh-pad	Scheduler__packDotProductCandidates	1	__Unwind_Resume
 16a874	16a878	millicode	Scheduler__buildDependencyGraph	1	
 16a890	16a8ac	other	Scheduler__buildDependencyGraph	7	0x193cc0
 16b0e8	16b104	other	Scheduler__buildDependencyGraph	7	0x193cc0
 16bd48	16bd54	eh-pad	Scheduler__buildDependencyGraph	3	__Unwind_Resume
-16c1e4	16c1fc	eh-pad	FUN_0016bd70	6	0x193cc0,__Unwind_Resume
-16df58	16df78	eh-pad	FUN_0016dd04	8	0x193cc0,__Unwind_Resume
+16c1e4	16c1fc	eh-pad	Scheduler__buildCoScheduleGroups	6	0x193cc0,__Unwind_Resume
+16df58	16df78	eh-pad	Scheduler__tryReuseLoopIndexLoad	8	0x193cc0,__Unwind_Resume
 16fee8	16ff10	other	Scheduler__selectNextNode	10	0x193cc0
 16ff24	16ff3c	eh-pad	Scheduler__selectNextNode	6	0x193cc0,__Unwind_Resume
 1716ec	1716f0	eh-pad	Scheduler__scheduleBlock	1	__Unwind_Resume
