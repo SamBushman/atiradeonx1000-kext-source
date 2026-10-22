@@ -51,3 +51,12 @@ Object layout of the pool-allocated 0x40-byte `TVariable`/`TIntermSymbol`-style 
 ## Calls whose argument roles name register leftovers
 
 `TParseContext__error` is `(parseContext, line, reason, token, extraInfo, ...)`: in every action `param_4`/`param_5` (registers r6/r7) are loaded with the string literal passed as `token`/`extraInfo` just before the call; they are call-argument scratch (Ghidra shows the unused register parameters of `yyparse`, which really takes only `parseContext`).
+
+## The overlapping stack temporaries `local_850 .. local_818` (why they have no single name)  (CONFIRMED overlaps)
+
+The decompile shows one stack area `local_850 .. local_818` (and `local_7f0`, `local_750`) that the compiler reuses for different objects in different rules, so no whole-function or whole-web name is true for all uses:
+
+* `std::basic_string<char, ..., pool_allocator>` objects are 8 bytes `{pool_allocator *, _M_p}`: `TType__getCompleteString(&local_850, ...)` / `(&local_840, ...)` (rule 94 error path, `case 0x5e`) fill the strings at `&local_850` (+ `local_84c` = its `_M_p`) and `&local_840` (+ `local_83c` = its `_M_p`); the refcount decrement idiom `pTVar3 = local_83c + -4; ... storeWordConditionalIndexed(refcount - 1)` is `_M_p - 4` (the string rep's refcount), and `_Rep::_M_destroy(local_83c + -0xc, ...)` frees `_M_p - 0xc`.
+* The same words hold a seven-word `TPublicType` copy (`local_850 type, local_84c qualifier, local_848 size, local_844 matrix, local_840 array, local_83c userDef, local_838 line`; defs such as `local_84c = yyvalQualifierOrParamType`, `local_848 = yyvalSize`, `local_844 = yyvalMatrix`, `local_83c = yyvalUserDef`) in the declaration rules, and the first TType words (vtable `&PTR___ZN5TTypeD1Ev`, then +0x10 .. +0x2c) in rules 1 and 3-5.
+
+A web analysis (`Tools/userspace/webs.py`) joins these roles into one web because the copies flow through the same variables, so renaming them needs a per-rule split with the roles written by hand; that is not done for these words.
