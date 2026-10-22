@@ -701,11 +701,34 @@ int _ClearRegisterState(param_1)
 }
 
 /* _EmulateOp @ 0x97c0c8dc (8892 bytes) */
-int _EmulateOp(param_1, inst, hashSet)
-  int *param_1;
+int _EmulateOp(compileContext, inst, hashSet)
+  int *compileContext;
   int inst;
   undefined4 hashSet;
 {
+  undefined4 resultZBits;
+  undefined4 resultYBits;
+  int intComponent2;
+  int componentIndex2;
+  int remainingCount;
+  int currentInst;
+  int componentIndex;
+  int intComponent;
+  int remainingComponents;
+  uint boolBit;
+  float operandComponent;
+  double powValue;
+  double log2Value;
+  double exp2Value;
+  double sqrtValue;
+  double mathAccumulator;
+  float accumulator;
+  float floatToInt;
+  float scalarResult;
+  float resultX;
+  float resultW;
+  float resultZ;
+  float resultY;
   int isBadUsage;
   int chunk;
   double exp2Result2;
@@ -724,36 +747,36 @@ int _EmulateOp(param_1, inst, hashSet)
   double powResult;
   int loopIndex;
   int allocation;
-  bool bVar1;
-  bool bVar2;
+  bool noDestination;
+  bool foldFailedOrCompare;
   float fVar3;
   float fVar4;
   float fVar5;
-  bool bVar6;
+  bool foldFailed;
   float fVar7;
-  undefined4 uVar8;
-  uint uVar9;
+  undefined4 resultWBits;
+  uint sizeMinusOne;
   float *pfVar10;
   uint uVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
+  int validArgCount;
+  int hashEntry;
+  int nextComponent;
   float *src2;
-  uint *puVar16;
-  int *piVar17;
-  int iVar18;
+  uint *instWords;
+  int *operandKey;
+  int destInfo;
   float *src1;
-  uint *puVar20;
-  float *pfVar21;
+  uint *operandWordCursor;
+  float *destValue;
   float *src0;
   double dVar23;
   double dVar24;
   int operandIds [5];
-  uint local_bc;
-  undefined4 local_90;
-  uint uStack_8c;
-  longlong local_88;
-  longlong local_80;
+  uint operandType;
+  undefined4 intToFloatHigh;
+  uint intToFloatLow;
+  longlong intPairHi;
+  longlong intPairLo;
   longlong local_78;
   longlong local_70;
   float local_60;
@@ -763,41 +786,41 @@ int _EmulateOp(param_1, inst, hashSet)
   operandIds[1] = 0;
   operandIds[2] = 0;
   loopIndex = 0;
-  iVar12 = _GetValidArgs(inst);
-  puVar16 = (uint *)(inst + 0xc);
-  if (0 < iVar12) {
-    piVar17 = operandIds + 4;
-    puVar20 = puVar16;
+  validArgCount = _GetValidArgs(inst);
+  instWords = (uint *)(inst + 0xc);
+  if (0 < validArgCount) {
+    operandKey = operandIds + 4;
+    operandWordCursor = instWords;
     do {
-      operandIds[4] = (int)*(ushort *)((int)puVar20 + 0x16);
-      local_bc = puVar20[4] >> 0x17 & 7;
-      iVar13 = _HashSetGet(hashSet,piVar17);
-      operandIds[loopIndex] = iVar13;
-      if (iVar13 == 0) {
-        ((int (*)())_GetRegisterTypeInfo)(param_1,piVar17);
+      operandIds[4] = (int)*(ushort *)((int)operandWordCursor + 0x16);
+      operandType = operandWordCursor[4] >> 0x17 & 7;
+      hashEntry = _HashSetGet(hashSet,operandKey);
+      operandIds[loopIndex] = hashEntry;
+      if (hashEntry == 0) {
+        ((int (*)())_GetRegisterTypeInfo)(compileContext,operandKey);
         allocation = _malloc(0x28);
         operandIds[loopIndex] = allocation;
-        _memcpy(allocation,piVar17,0x28);
+        _memcpy(allocation,operandKey,0x28);
         _HashSetAdd(hashSet,operandIds[loopIndex]);
       }
       loopIndex = loopIndex + 1;
-      puVar20 = puVar20 + 2;
-    } while (loopIndex < iVar12);
+      operandWordCursor = operandWordCursor + 2;
+    } while (loopIndex < validArgCount);
   }
-  iVar18 = 0;
-  bVar1 = true;
+  destInfo = 0;
+  noDestination = true;
   if ((*(uint *)(inst + 0x14) & 0x1e000) != 0) {
     operandIds[4] = (int)*(ushort *)(inst + 0x1a);
-    piVar17 = operandIds + 4;
-    local_bc = *(uint *)(inst + 0x14) >> 0x11 & 7;
-    iVar18 = _HashSetGet(hashSet,piVar17);
-    bVar1 = false;
-    if (iVar18 == 0) {
-      ((int (*)())_GetRegisterTypeInfo)(param_1,piVar17);
-      iVar18 = _malloc(0x28);
-      _memcpy(iVar18,piVar17,0x28);
-      _HashSetAdd(hashSet,iVar18);
-      bVar1 = iVar18 == 0;
+    operandKey = operandIds + 4;
+    operandType = *(uint *)(inst + 0x14) >> 0x11 & 7;
+    destInfo = _HashSetGet(hashSet,operandKey);
+    noDestination = false;
+    if (destInfo == 0) {
+      ((int (*)())_GetRegisterTypeInfo)(compileContext,operandKey);
+      destInfo = _malloc(0x28);
+      _memcpy(destInfo,operandKey,0x28);
+      _HashSetAdd(hashSet,destInfo);
+      noDestination = destInfo == 0;
     }
   }
   if ((operandIds[0] == 0) ||
@@ -812,561 +835,561 @@ int _EmulateOp(param_1, inst, hashSet)
      (src2 = (float *)(operandIds[2] + 0x18), *(int *)(operandIds[2] + 0x14) == 0)) {
     src2 = (float *)0x0;
   }
-  bVar6 = true;
+  foldFailed = true;
   isBadUsage = ((int (*)())_IsBadUsage)(inst);
-  pfVar21 = (float *)(iVar18 + 0x18);
-  bVar2 = false;
+  destValue = (float *)(destInfo + 0x18);
+  foldFailedOrCompare = false;
   if (isBadUsage != 0) goto LAB_97c0ee84;
-  if (((iVar12 != 1) || (bVar1)) || (src0 == (float *)0x0)) goto LAB_97c0d82c;
-  bVar6 = false;
-  switch(*puVar16 >> 0x12 & 0xff) {
+  if (((validArgCount != 1) || (noDestination)) || (src0 == (float *)0x0)) goto LAB_97c0d82c;
+  foldFailed = false;
+  switch(*instWords >> 0x12 & 0xff) {
   case 0:
     goto switchD_97c0cae8_caseD_0;
   case 1:
-    *pfVar21 = 1.0;
-    fVar7 = *src0;
-    fVar3 = fVar7;
-    if (fVar7 <= 0.0) {
-      fVar7 = 0.0;
+    *destValue = 1.0;
+    resultY = *src0;
+    fVar3 = resultY;
+    if (resultY <= 0.0) {
+      resultY = 0.0;
       fVar3 = local_60;
     }
     local_60 = fVar3;
-    *(float *)(iVar18 + 0x1c) = fVar7;
+    *(float *)(destInfo + 0x1c) = resultY;
     if (*src0 <= 0.0) {
-      fVar7 = 0.0;
+      resultZ = 0.0;
     }
     else {
       powResult = _pow((double)src0[1],(double)src0[3]);
-      fVar7 = (float)powResult;
+      resultZ = (float)powResult;
     }
-    *(float *)(iVar18 + 0x20) = fVar7;
+    *(float *)(destInfo + 0x20) = resultZ;
 LAB_97c0d000:
-    uVar8 = 0x3f800000;
+    resultWBits = 0x3f800000;
     goto LAB_97c0d128;
   case 2:
-    *pfVar21 = ABS(*src0);
-    *(float *)(iVar18 + 0x1c) = ABS(src0[1]);
-    *(float *)(iVar18 + 0x20) = ABS(src0[2]);
-    fVar7 = ABS(src0[3]);
+    *destValue = ABS(*src0);
+    *(float *)(destInfo + 0x1c) = ABS(src0[1]);
+    *(float *)(destInfo + 0x20) = ABS(src0[2]);
+    resultW = ABS(src0[3]);
     goto LAB_97c0ce78;
   case 3:
     ceilResult = _ceil((double)*src0);
-    *pfVar21 = (float)ceilResult;
+    *destValue = (float)ceilResult;
     ceilResult = _ceil((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)ceilResult;
+    *(float *)(destInfo + 0x1c) = (float)ceilResult;
     ceilResult = _ceil((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)ceilResult;
-    dVar23 = _ceil((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)ceilResult;
+    mathAccumulator = _ceil((double)src0[3]);
     break;
   case 4:
-    fVar7 = *src0;
-    floorResult = _floor((double)fVar7);
-    *pfVar21 = (float)((double)fVar7 - floorResult);
-    fVar7 = src0[1];
-    floorResult = _floor((double)fVar7);
-    *(float *)(iVar18 + 0x1c) = (float)((double)fVar7 - floorResult);
-    fVar7 = src0[2];
-    floorResult = _floor((double)fVar7);
-    *(float *)(iVar18 + 0x20) = (float)((double)fVar7 - floorResult);
-    fVar7 = src0[3];
-    floorResult = _floor((double)fVar7);
-    *(float *)(iVar18 + 0x24) = (float)((double)fVar7 - floorResult);
+    resultX = *src0;
+    floorResult = _floor((double)resultX);
+    *destValue = (float)((double)resultX - floorResult);
+    resultY = src0[1];
+    floorResult = _floor((double)resultY);
+    *(float *)(destInfo + 0x1c) = (float)((double)resultY - floorResult);
+    resultZ = src0[2];
+    floorResult = _floor((double)resultZ);
+    *(float *)(destInfo + 0x20) = (float)((double)resultZ - floorResult);
+    resultW = src0[3];
+    floorResult = _floor((double)resultW);
+    *(float *)(destInfo + 0x24) = (float)((double)resultW - floorResult);
     goto LAB_97c0d82c;
   case 5:
     floorResult = _floor((double)*src0);
-    *pfVar21 = (float)floorResult;
+    *destValue = (float)floorResult;
     floorResult = _floor((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)floorResult;
+    *(float *)(destInfo + 0x1c) = (float)floorResult;
     floorResult = _floor((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)floorResult;
-    dVar23 = _floor((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)floorResult;
+    mathAccumulator = _floor((double)src0[3]);
     break;
   default:
-    bVar6 = true;
+    foldFailed = true;
     goto LAB_97c0d82c;
   case 7:
     if (*src0 <= 0.0) {
       if (0.0 <= *src0) {
-        fVar7 = 0.0;
+        resultX = 0.0;
       }
       else {
-        fVar7 = -1.0;
+        resultX = -1.0;
       }
     }
     else {
-      fVar7 = 1.0;
+      resultX = 1.0;
     }
-    *pfVar21 = fVar7;
+    *destValue = resultX;
     if (src0[1] <= 0.0) {
       if (0.0 <= src0[1]) {
-        uVar8 = 0;
+        resultYBits = 0;
       }
       else {
-        uVar8 = 0xbf800000;
+        resultYBits = 0xbf800000;
       }
     }
     else {
-      uVar8 = 0x3f800000;
+      resultYBits = 0x3f800000;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
     if (src0[2] <= 0.0) {
       if (0.0 <= src0[2]) {
-        uVar8 = 0;
+        resultZBits = 0;
       }
       else {
-        uVar8 = 0xbf800000;
+        resultZBits = 0xbf800000;
       }
     }
     else {
-      uVar8 = 0x3f800000;
+      resultZBits = 0x3f800000;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
     if (0.0 < src0[3]) goto LAB_97c0d000;
     if (0.0 <= src0[3]) goto LAB_97c0d124;
-    uVar8 = 0xbf800000;
+    resultWBits = 0xbf800000;
     goto LAB_97c0d128;
   case 8:
     if (((*src0 == 0.0) && (src0[1] == 0.0)) && (src0[2] == 0.0)) {
 LAB_97c0d078:
-      uStack_8c = 0;
+      intToFloatLow = 0;
       if (src0[3] == 0.0) goto LAB_97c0d088;
     }
-    uStack_8c = 1;
+    intToFloatLow = 1;
     goto LAB_97c0d088;
   case 9:
-    uStack_8c = 0;
+    intToFloatLow = 0;
     if (((*src0 != 0.0) && (src0[1] != 0.0)) && (src0[2] != 0.0)) goto LAB_97c0d078;
 LAB_97c0d088:
-    uStack_8c = uStack_8c ^ 0x80000000;
-    local_90 = 0x43300000;
-    dVar23 = (double)CONCAT44(0x43300000,uStack_8c) - 4503601774854144.0;
+    intToFloatLow = intToFloatLow ^ 0x80000000;
+    intToFloatHigh = 0x43300000;
+    sqrtValue = (double)CONCAT44(0x43300000,intToFloatLow) - 4503601774854144.0;
 LAB_97c0d214:
-    fVar7 = (float)dVar23;
+    scalarResult = (float)sqrtValue;
     goto LAB_97c0d71c;
   case 10:
-    fVar7 = 1.0;
+    resultX = 1.0;
     if (*src0 != 0.0) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
-    *pfVar21 = fVar7;
-    uVar8 = 0x3f800000;
+    *destValue = resultX;
+    resultYBits = 0x3f800000;
     if (src0[1] != 0.0) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
+    resultZBits = 0x3f800000;
     if (src0[2] != 0.0) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
+    resultWBits = 0x3f800000;
     if (src0[3] != 0.0) {
 LAB_97c0d124:
-      uVar8 = 0;
+      resultWBits = 0;
     }
 LAB_97c0d128:
-    *(undefined4 *)(iVar18 + 0x24) = uVar8;
+    *(undefined4 *)(destInfo + 0x24) = resultWBits;
     goto LAB_97c0d82c;
   case 0xc:
     sqrtResult = _sqrt(ABS((double)*src0));
-    *pfVar21 = (float)sqrtResult;
+    *destValue = (float)sqrtResult;
     sqrtResult = _sqrt(ABS((double)src0[1]));
-    *(float *)(iVar18 + 0x1c) = (float)sqrtResult;
+    *(float *)(destInfo + 0x1c) = (float)sqrtResult;
     sqrtResult = _sqrt(ABS((double)src0[2]));
-    *(float *)(iVar18 + 0x20) = (float)sqrtResult;
-    dVar23 = _sqrt(ABS((double)src0[3]));
+    *(float *)(destInfo + 0x20) = (float)sqrtResult;
+    mathAccumulator = _sqrt(ABS((double)src0[3]));
     break;
   case 0xd:
-    if (*param_1 - 0x8b30U < 2) {
+    if (*compileContext - 0x8b30U < 2) {
       sqrtResult = _sqrt(ABS((double)*src0));
-      *pfVar21 = (float)(1.0 / sqrtResult);
+      *destValue = (float)(1.0 / sqrtResult);
       sqrtResult = _sqrt(ABS((double)src0[1]));
-      *(float *)(iVar18 + 0x1c) = (float)(1.0 / sqrtResult);
+      *(float *)(destInfo + 0x1c) = (float)(1.0 / sqrtResult);
       sqrtResult = _sqrt(ABS((double)src0[2]));
-      *(float *)(iVar18 + 0x20) = (float)(1.0 / sqrtResult);
+      *(float *)(destInfo + 0x20) = (float)(1.0 / sqrtResult);
       sqrtResult = _sqrt(ABS((double)src0[3]));
-      *(float *)(iVar18 + 0x24) = (float)(1.0 / sqrtResult);
+      *(float *)(destInfo + 0x24) = (float)(1.0 / sqrtResult);
       goto LAB_97c0d82c;
     }
     sqrtResult = _sqrt(ABS((double)src0[3]));
-    dVar23 = 1.0 / sqrtResult;
+    sqrtValue = 1.0 / sqrtResult;
     goto LAB_97c0d214;
   case 0xe:
-    fVar7 = 1.0 / src0[3];
+    scalarResult = 1.0 / src0[3];
     goto LAB_97c0d71c;
   case 0xf:
-    fVar3 = src0[3];
-    if (fVar3 <= 1.8446744e+19) {
-      if (fVar3 < 5.421011e-20) {
-        fVar7 = 1.8446744e+19;
-        if (fVar3 < 0.0) {
-          if (fVar3 <= -5.421011e-20) {
-            fVar7 = -5.421011e-20;
-            if (-1.8446744e+19 <= fVar3) goto LAB_97c0d2cc;
+    operandComponent = src0[3];
+    if (operandComponent <= 1.8446744e+19) {
+      if (operandComponent < 5.421011e-20) {
+        scalarResult = 1.8446744e+19;
+        if (operandComponent < 0.0) {
+          if (operandComponent <= -5.421011e-20) {
+            scalarResult = -5.421011e-20;
+            if (-1.8446744e+19 <= operandComponent) goto LAB_97c0d2cc;
           }
           else {
-            fVar7 = -1.8446744e+19;
+            scalarResult = -1.8446744e+19;
           }
         }
       }
       else {
 LAB_97c0d2cc:
-        fVar7 = 1.0 / fVar3;
+        scalarResult = 1.0 / operandComponent;
       }
     }
     else {
-      fVar7 = 5.421011e-20;
+      scalarResult = 5.421011e-20;
     }
     goto LAB_97c0d71c;
   case 0x10:
-    if (1 < *param_1 - 0x8b30U) {
-      dVar23 = _exp2((double)src0[3]);
+    if (1 < *compileContext - 0x8b30U) {
+      mathAccumulator = _exp2((double)src0[3]);
       goto LAB_97c0d718;
     }
     exp2Result = _exp2((double)*src0);
-    *pfVar21 = (float)exp2Result;
+    *destValue = (float)exp2Result;
     exp2Result = _exp2((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)exp2Result;
+    *(float *)(destInfo + 0x1c) = (float)exp2Result;
     exp2Result = _exp2((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)exp2Result;
-    dVar23 = _exp2((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)exp2Result;
+    mathAccumulator = _exp2((double)src0[3]);
     break;
   case 0x11:
     floorResult = _floor((double)src0[3]);
     exp2Result2 = _exp2((double)(float)floorResult);
-    *pfVar21 = (float)exp2Result2;
-    *(float *)(iVar18 + 0x1c) = (float)((double)src0[3] - (double)(float)floorResult);
-    dVar23 = _exp2((double)src0[3]);
+    *destValue = (float)exp2Result2;
+    *(float *)(destInfo + 0x1c) = (float)((double)src0[3] - (double)(float)floorResult);
+    exp2Value = _exp2((double)src0[3]);
     goto LAB_97c0d51c;
   case 0x12:
-    dVar23 = 0.0;
-    uVar9 = *(uint *)(inst + 0x10) >> 0x1a & 3;
-    if (uVar9 != 0xffffffff) {
-      iVar13 = uVar9 + 1;
+    mathAccumulator = 0.0;
+    sizeMinusOne = *(uint *)(inst + 0x10) >> 0x1a & 3;
+    if (sizeMinusOne != 0xffffffff) {
+      remainingCount = sizeMinusOne + 1;
       pfVar10 = src0;
       do {
         fVar7 = *pfVar10;
         pfVar10 = pfVar10 + 1;
-        dVar23 = (double)(float)((double)fVar7 * (double)fVar7 + dVar23);
-        iVar13 = iVar13 + -1;
-      } while (iVar13 != 0);
+        mathAccumulator = (double)(float)((double)fVar7 * (double)fVar7 + mathAccumulator);
+        remainingCount = remainingCount + -1;
+      } while (remainingCount != 0);
     }
-    dVar23 = _sqrt(dVar23);
+    mathAccumulator = _sqrt(mathAccumulator);
 LAB_97c0d718:
-    fVar7 = (float)dVar23;
+    scalarResult = (float)mathAccumulator;
 LAB_97c0d71c:
-    *(float *)(iVar18 + 0x24) = fVar7;
-    *pfVar21 = fVar7;
-    *(float *)(iVar18 + 0x1c) = fVar7;
-    *(float *)(iVar18 + 0x20) = fVar7;
+    *(float *)(destInfo + 0x24) = scalarResult;
+    *destValue = scalarResult;
+    *(float *)(destInfo + 0x1c) = scalarResult;
+    *(float *)(destInfo + 0x20) = scalarResult;
     goto LAB_97c0d82c;
   case 0x13:
-    if (1 < *param_1 - 0x8b30U) {
-      dVar23 = (double)src0[3];
-      if (dVar23 < 0.0) {
-        dVar23 = 0.0;
+    if (1 < *compileContext - 0x8b30U) {
+      mathAccumulator = (double)src0[3];
+      if (mathAccumulator < 0.0) {
+        mathAccumulator = 0.0;
       }
-      dVar23 = _log2(dVar23);
+      mathAccumulator = _log2(mathAccumulator);
       goto LAB_97c0d718;
     }
-    dVar23 = (double)*src0;
-    if (dVar23 < 0.0) {
-      dVar23 = 0.0;
+    log2Value = (double)*src0;
+    if (log2Value < 0.0) {
+      log2Value = 0.0;
     }
-    log2Result = _log2(dVar23);
-    *pfVar21 = (float)log2Result;
-    dVar23 = (double)src0[1];
-    if (dVar23 < 0.0) {
-      dVar23 = 0.0;
+    log2Result = _log2(log2Value);
+    *destValue = (float)log2Result;
+    log2Value = (double)src0[1];
+    if (log2Value < 0.0) {
+      log2Value = 0.0;
     }
-    log2Result = _log2(dVar23);
-    *(float *)(iVar18 + 0x1c) = (float)log2Result;
-    dVar23 = (double)src0[2];
-    if (dVar23 < 0.0) {
-      dVar23 = 0.0;
+    log2Result = _log2(log2Value);
+    *(float *)(destInfo + 0x1c) = (float)log2Result;
+    log2Value = (double)src0[2];
+    if (log2Value < 0.0) {
+      log2Value = 0.0;
     }
-    log2Result = _log2(dVar23);
-    *(float *)(iVar18 + 0x20) = (float)log2Result;
-    dVar23 = (double)src0[3];
-    if (dVar23 < 0.0) {
-      dVar23 = 0.0;
+    log2Result = _log2(log2Value);
+    *(float *)(destInfo + 0x20) = (float)log2Result;
+    mathAccumulator = (double)src0[3];
+    if (mathAccumulator < 0.0) {
+      mathAccumulator = 0.0;
     }
-    dVar23 = _log2(dVar23);
+    mathAccumulator = _log2(mathAccumulator);
     break;
   case 0x14:
     dVar24 = ABS((double)src0[3]);
     log2Result = _log2(dVar24);
     floorResult = _floor(log2Result);
-    *pfVar21 = (float)floorResult;
+    *destValue = (float)floorResult;
     exp2Result = _exp2((double)(float)floorResult);
-    *(float *)(iVar18 + 0x1c) = (float)(dVar24 / exp2Result);
+    *(float *)(destInfo + 0x1c) = (float)(dVar24 / exp2Result);
     if (dVar24 < 0.0) {
       dVar24 = 0.0;
     }
-    dVar23 = _log2(dVar24);
+    exp2Value = _log2(dVar24);
 LAB_97c0d51c:
-    *(undefined4 *)(iVar18 + 0x24) = 0x3f800000;
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    *(undefined4 *)(destInfo + 0x24) = 0x3f800000;
+    *(float *)(destInfo + 0x20) = (float)exp2Value;
     goto LAB_97c0d82c;
   case 0x15:
-    dVar23 = 0.0;
-    uVar9 = *(uint *)(inst + 0x10) >> 0x1a & 3;
-    if (uVar9 != 0xffffffff) {
-      iVar13 = uVar9 + 1;
+    sqrtValue = 0.0;
+    sizeMinusOne = *(uint *)(inst + 0x10) >> 0x1a & 3;
+    if (sizeMinusOne != 0xffffffff) {
+      remainingCount = sizeMinusOne + 1;
       pfVar10 = src0;
       do {
         fVar7 = *pfVar10;
         pfVar10 = pfVar10 + 1;
-        dVar23 = (double)(float)((double)fVar7 * (double)fVar7 + dVar23);
-        iVar13 = iVar13 + -1;
-      } while (iVar13 != 0);
+        sqrtValue = (double)(float)((double)fVar7 * (double)fVar7 + sqrtValue);
+        remainingCount = remainingCount + -1;
+      } while (remainingCount != 0);
     }
-    sqrtResult = _sqrt(dVar23);
-    iVar13 = 0;
+    sqrtResult = _sqrt(sqrtValue);
+    componentIndex2 = 0;
     if ((*(uint *)(inst + 0x10) >> 0x1a & 3) != 0xffffffff) {
       do {
-        iVar14 = iVar13 + 1;
-        pfVar21[iVar13] = src0[iVar13] / (float)sqrtResult;
-        iVar13 = iVar14;
-      } while (iVar14 < (int)((*(uint *)(inst + 0x10) >> 0x1a & 3) + 1));
+        nextComponent = componentIndex2 + 1;
+        destValue[componentIndex2] = src0[componentIndex2] / (float)sqrtResult;
+        componentIndex2 = nextComponent;
+      } while (nextComponent < (int)((*(uint *)(inst + 0x10) >> 0x1a & 3) + 1));
     }
     goto LAB_97c0d82c;
   case 0x16:
-    fVar7 = 0.017453292;
+    scalarResult = 0.017453292;
     goto LAB_97c0d600;
   case 0x17:
-    fVar7 = 57.29578;
+    scalarResult = 57.29578;
 LAB_97c0d600:
-    *pfVar21 = *src0 * fVar7;
-    *(float *)(iVar18 + 0x1c) = src0[1] * fVar7;
-    *(float *)(iVar18 + 0x20) = src0[2] * fVar7;
-    *(float *)(iVar18 + 0x24) = src0[3] * fVar7;
+    *destValue = *src0 * scalarResult;
+    *(float *)(destInfo + 0x1c) = src0[1] * scalarResult;
+    *(float *)(destInfo + 0x20) = src0[2] * scalarResult;
+    *(float *)(destInfo + 0x24) = src0[3] * scalarResult;
     goto LAB_97c0d82c;
   case 0x18:
     cosResult = _cos((double)*src0);
-    *pfVar21 = (float)cosResult;
+    *destValue = (float)cosResult;
     sinResult = _sin((double)*src0);
-    *(undefined4 *)(iVar18 + 0x24) = 0;
-    *(undefined4 *)(iVar18 + 0x20) = 0;
-    *(float *)(iVar18 + 0x1c) = (float)sinResult;
+    *(undefined4 *)(destInfo + 0x24) = 0;
+    *(undefined4 *)(destInfo + 0x20) = 0;
+    *(float *)(destInfo + 0x1c) = (float)sinResult;
     goto LAB_97c0d82c;
   case 0x19:
-    if (1 < *param_1 - 0x8b30U) {
-      dVar23 = _sin((double)src0[3]);
+    if (1 < *compileContext - 0x8b30U) {
+      mathAccumulator = _sin((double)src0[3]);
       goto LAB_97c0d718;
     }
     sinResult = _sin((double)*src0);
-    *pfVar21 = (float)sinResult;
+    *destValue = (float)sinResult;
     sinResult = _sin((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)sinResult;
+    *(float *)(destInfo + 0x1c) = (float)sinResult;
     sinResult = _sin((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)sinResult;
-    dVar23 = _sin((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)sinResult;
+    mathAccumulator = _sin((double)src0[3]);
     break;
   case 0x1a:
-    if (1 < *param_1 - 0x8b30U) {
-      dVar23 = _cos((double)src0[3]);
+    if (1 < *compileContext - 0x8b30U) {
+      mathAccumulator = _cos((double)src0[3]);
       goto LAB_97c0d718;
     }
     cosResult = _cos((double)*src0);
-    *pfVar21 = (float)cosResult;
+    *destValue = (float)cosResult;
     cosResult = _cos((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)cosResult;
+    *(float *)(destInfo + 0x1c) = (float)cosResult;
     cosResult = _cos((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)cosResult;
-    dVar23 = _cos((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)cosResult;
+    mathAccumulator = _cos((double)src0[3]);
     break;
   case 0x1b:
     tanResult = _tan((double)*src0);
-    *pfVar21 = (float)tanResult;
+    *destValue = (float)tanResult;
     tanResult = _tan((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)tanResult;
+    *(float *)(destInfo + 0x1c) = (float)tanResult;
     tanResult = _tan((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)tanResult;
-    dVar23 = _tan((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)tanResult;
+    mathAccumulator = _tan((double)src0[3]);
     break;
   case 0x1c:
     asinResult = _asin((double)*src0);
-    *pfVar21 = (float)asinResult;
+    *destValue = (float)asinResult;
     asinResult = _asin((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)asinResult;
+    *(float *)(destInfo + 0x1c) = (float)asinResult;
     asinResult = _asin((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)asinResult;
-    dVar23 = _asin((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)asinResult;
+    mathAccumulator = _asin((double)src0[3]);
     break;
   case 0x1d:
     acosResult = _acos((double)*src0);
-    *pfVar21 = (float)acosResult;
+    *destValue = (float)acosResult;
     acosResult = _acos((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)acosResult;
+    *(float *)(destInfo + 0x1c) = (float)acosResult;
     acosResult = _acos((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)acosResult;
-    dVar23 = _acos((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)acosResult;
+    mathAccumulator = _acos((double)src0[3]);
     break;
   case 0x1e:
     atanResult = _atan((double)*src0);
-    *pfVar21 = (float)atanResult;
+    *destValue = (float)atanResult;
     atanResult = _atan((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)atanResult;
+    *(float *)(destInfo + 0x1c) = (float)atanResult;
     atanResult = _atan((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)atanResult;
-    dVar23 = _atan((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)atanResult;
+    mathAccumulator = _atan((double)src0[3]);
     break;
   case 0x48:
-    *pfVar21 = *src0;
-    *(float *)(iVar18 + 0x1c) = *src0;
-    *(float *)(iVar18 + 0x20) = *src0;
-    fVar7 = *src0;
+    *destValue = *src0;
+    *(float *)(destInfo + 0x1c) = *src0;
+    *(float *)(destInfo + 0x20) = *src0;
+    resultW = *src0;
     goto LAB_97c0ce78;
   case 0x6c:
-    if ((*(int *)(iVar18 + 0xc) == 3) && (*(int *)(operandIds[0] + 0xc) == 1)) {
+    if ((*(int *)(destInfo + 0xc) == 3) && (*(int *)(operandIds[0] + 0xc) == 1)) {
       truncResult = _trunc((double)*src0);
-      *pfVar21 = (float)truncResult;
+      *destValue = (float)truncResult;
       truncResult = _trunc((double)src0[1]);
-      *(float *)(iVar18 + 0x1c) = (float)truncResult;
+      *(float *)(destInfo + 0x1c) = (float)truncResult;
       truncResult = _trunc((double)src0[2]);
-      *(float *)(iVar18 + 0x20) = (float)truncResult;
-      dVar23 = _trunc((double)src0[3]);
+      *(float *)(destInfo + 0x20) = (float)truncResult;
+      mathAccumulator = _trunc((double)src0[3]);
       break;
     }
-    if ((*(int *)(iVar18 + 0xc) == 4) &&
+    if ((*(int *)(destInfo + 0xc) == 4) &&
        ((*(int *)(operandIds[0] + 0xc) == 1 || (*(int *)(operandIds[0] + 0xc) == 3)))) {
-      fVar7 = 1.0;
+      resultX = 1.0;
       if (*src0 == 0.0) {
-        fVar7 = 0.0;
+        resultX = 0.0;
       }
-      *pfVar21 = fVar7;
-      uVar8 = 0x3f800000;
+      *destValue = resultX;
+      resultYBits = 0x3f800000;
       if (src0[1] == 0.0) {
-        uVar8 = 0;
+        resultYBits = 0;
       }
-      *(undefined4 *)(iVar18 + 0x1c) = uVar8;
-      uVar8 = 0x3f800000;
+      *(undefined4 *)(destInfo + 0x1c) = resultYBits;
+      resultZBits = 0x3f800000;
       if (src0[2] == 0.0) {
-        uVar8 = 0;
+        resultZBits = 0;
       }
-      *(undefined4 *)(iVar18 + 0x20) = uVar8;
-      uVar8 = 0x3f800000;
+      *(undefined4 *)(destInfo + 0x20) = resultZBits;
+      resultWBits = 0x3f800000;
       if (src0[3] == 0.0) goto LAB_97c0d124;
       goto LAB_97c0d128;
     }
     goto switchD_97c0cae8_caseD_0;
   case 0x6f:
     dVar23 = _exp((double)*src0);
-    *pfVar21 = (float)dVar23;
+    *destValue = (float)dVar23;
     dVar23 = _exp((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
+    *(float *)(destInfo + 0x1c) = (float)dVar23;
     dVar23 = _exp((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
-    dVar23 = _exp((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)dVar23;
+    mathAccumulator = _exp((double)src0[3]);
     break;
   case 0x70:
     dVar23 = _log((double)*src0);
-    *pfVar21 = (float)dVar23;
+    *destValue = (float)dVar23;
     dVar23 = _log((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
+    *(float *)(destInfo + 0x1c) = (float)dVar23;
     dVar23 = _log((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
-    dVar23 = _log((double)src0[3]);
+    *(float *)(destInfo + 0x20) = (float)dVar23;
+    mathAccumulator = _log((double)src0[3]);
   }
-  *(float *)(iVar18 + 0x24) = (float)dVar23;
+  *(float *)(destInfo + 0x24) = (float)mathAccumulator;
 LAB_97c0d82c:
-  if (!bVar6) goto LAB_97c0eea8;
-  bVar6 = false;
-  if (((iVar12 != 2) || (bVar1)) || ((src0 == (float *)0x0 || (src1 == (float *)0x0))))
+  if (!foldFailed) goto LAB_97c0eea8;
+  foldFailed = false;
+  if (((validArgCount != 2) || (noDestination)) || ((src0 == (float *)0x0 || (src1 == (float *)0x0))))
   goto LAB_97c0e77c;
-  bVar6 = false;
-  switch(*puVar16 >> 0x12 & 0xff) {
+  foldFailed = false;
+  switch(*instWords >> 0x12 & 0xff) {
   case 0x1e:
-    fVar7 = _atan2f(*src0,*src1);
-    *pfVar21 = fVar7;
-    fVar7 = _atan2f(src0[1],src1[1]);
-    *(float *)(iVar18 + 0x1c) = fVar7;
-    fVar7 = _atan2f(src0[2],src1[2]);
-    *(float *)(iVar18 + 0x20) = fVar7;
-    fVar7 = _atan2f(src0[3],src1[3]);
-    *(float *)(iVar18 + 0x24) = fVar7;
+    resultX = _atan2f(*src0,*src1);
+    *destValue = resultX;
+    resultY = _atan2f(src0[1],src1[1]);
+    *(float *)(destInfo + 0x1c) = resultY;
+    resultZ = _atan2f(src0[2],src1[2]);
+    *(float *)(destInfo + 0x20) = resultZ;
+    resultW = _atan2f(src0[3],src1[3]);
+    *(float *)(destInfo + 0x24) = resultW;
     goto LAB_97c0e778;
   case 0x1f:
-    *pfVar21 = *src0 + *src1;
-    *(float *)(iVar18 + 0x1c) = src0[1] + src1[1];
-    *(float *)(iVar18 + 0x20) = src0[2] + src1[2];
-    fVar7 = src0[3] + src1[3];
+    *destValue = *src0 + *src1;
+    *(float *)(destInfo + 0x1c) = src0[1] + src1[1];
+    *(float *)(destInfo + 0x20) = src0[2] + src1[2];
+    resultW = src0[3] + src1[3];
     goto LAB_97c0e6f8;
   case 0x20:
-    *pfVar21 = *src0 - *src1;
-    *(float *)(iVar18 + 0x1c) = src0[1] - src1[1];
-    *(float *)(iVar18 + 0x20) = src0[2] - src1[2];
-    fVar7 = src0[3] - src1[3];
+    *destValue = *src0 - *src1;
+    *(float *)(destInfo + 0x1c) = src0[1] - src1[1];
+    *(float *)(destInfo + 0x20) = src0[2] - src1[2];
+    resultW = src0[3] - src1[3];
     goto LAB_97c0e6f8;
   default:
-    bVar6 = true;
+    foldFailed = true;
     goto LAB_97c0e778;
   case 0x22:
   case 0x23:
-    *pfVar21 = *src0 * *src1;
-    *(float *)(iVar18 + 0x1c) = src0[1] * src1[1];
-    *(float *)(iVar18 + 0x20) = src0[2] * src1[2];
-    fVar7 = src0[3] * src1[3];
+    *destValue = *src0 * *src1;
+    *(float *)(destInfo + 0x1c) = src0[1] * src1[1];
+    *(float *)(destInfo + 0x20) = src0[2] * src1[2];
+    resultW = src0[3] * src1[3];
     goto LAB_97c0e6f8;
   case 0x24:
-    uVar9 = 0;
+    boolBit = 0;
     if ((*src0 != 0.0) && (*src1 != 0.0)) {
-      uVar9 = 1;
+      boolBit = 1;
     }
     uVar11 = 0;
-    *pfVar21 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+    *destValue = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if ((src0[1] != 0.0) && (src1[1] != 0.0)) {
       uVar11 = 1;
     }
-    uVar9 = 0;
-    *(float *)(iVar18 + 0x1c) =
+    boolBit = 0;
+    *(float *)(destInfo + 0x1c) =
          (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - 4503601774854144.0);
     if ((src0[2] != 0.0) && (src1[2] != 0.0)) {
-      uVar9 = 1;
+      boolBit = 1;
     }
-    uStack_8c = 0;
-    *(float *)(iVar18 + 0x20) =
-         (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+    intToFloatLow = 0;
+    *(float *)(destInfo + 0x20) =
+         (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if (src0[3] != 0.0) {
 LAB_97c0de28:
-      uStack_8c = 0;
+      intToFloatLow = 0;
       if (src1[3] != 0.0) goto LAB_97c0de44;
     }
     goto LAB_97c0de48;
   case 0x25:
-    uVar9 = 0;
+    boolBit = 0;
     if ((*src0 != 0.0) || (*src1 != 0.0)) {
-      uVar9 = 1;
+      boolBit = 1;
     }
     uVar11 = 0;
-    *pfVar21 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+    *destValue = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if ((src0[1] != 0.0) || (src1[1] != 0.0)) {
       uVar11 = 1;
     }
-    uVar9 = 0;
-    *(float *)(iVar18 + 0x1c) =
+    boolBit = 0;
+    *(float *)(destInfo + 0x1c) =
          (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - 4503601774854144.0);
     if ((src0[2] != 0.0) || (src1[2] != 0.0)) {
-      uVar9 = 1;
+      boolBit = 1;
     }
-    *(float *)(iVar18 + 0x20) =
-         (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+    *(float *)(destInfo + 0x20) =
+         (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if (src0[3] == 0.0) goto LAB_97c0de28;
 LAB_97c0de44:
-    uStack_8c = 1;
+    intToFloatLow = 1;
     goto LAB_97c0de48;
   case 0x26:
-    uVar9 = 0;
+    boolBit = 0;
     if (*src0 == 0.0) {
       if (*src1 != 0.0) {
 LAB_97c0dd24:
-        uVar9 = 1;
+        boolBit = 1;
       }
     }
     else if (*src1 == 0.0) goto LAB_97c0dd24;
     uVar11 = 0;
-    *pfVar21 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+    *destValue = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if (src0[1] == 0.0) {
       if (src1[1] != 0.0) {
 LAB_97c0dd84:
@@ -1374,591 +1397,591 @@ LAB_97c0dd84:
       }
     }
     else if (src1[1] == 0.0) goto LAB_97c0dd84;
-    uVar9 = 0;
-    *(float *)(iVar18 + 0x1c) =
+    boolBit = 0;
+    *(float *)(destInfo + 0x1c) =
          (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - 4503601774854144.0);
     if (src0[2] == 0.0) {
       if (src1[2] != 0.0) {
 LAB_97c0dde4:
-        uVar9 = 1;
+        boolBit = 1;
       }
     }
     else if (src1[2] == 0.0) goto LAB_97c0dde4;
-    uStack_8c = 0;
-    *(float *)(iVar18 + 0x20) =
-         (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+    intToFloatLow = 0;
+    *(float *)(destInfo + 0x20) =
+         (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if (src0[3] == 0.0) goto LAB_97c0de28;
     if (src1[3] == 0.0) goto LAB_97c0de44;
 LAB_97c0de48:
-    uStack_8c = uStack_8c ^ 0x80000000;
-    local_90 = 0x43300000;
-    fVar7 = (float)((double)CONCAT44(0x43300000,uStack_8c) - 4503601774854144.0);
+    intToFloatLow = intToFloatLow ^ 0x80000000;
+    intToFloatHigh = 0x43300000;
+    resultW = (float)((double)CONCAT44(0x43300000,intToFloatLow) - 4503601774854144.0);
     goto LAB_97c0e6f8;
   case 0x27:
-    fVar7 = 0.0;
-    iVar13 = 0;
-    for (iVar14 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; iVar14 != 0; iVar14 = iVar14 + -1) {
-      fVar7 = src0[iVar13] * src1[iVar13] + fVar7;
-      iVar13 = iVar13 + 1;
+    scalarResult = 0.0;
+    componentIndex2 = 0;
+    for (remainingComponents = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; remainingComponents != 0; remainingComponents = remainingComponents + -1) {
+      scalarResult = src0[componentIndex2] * src1[componentIndex2] + scalarResult;
+      componentIndex2 = componentIndex2 + 1;
     }
     goto LAB_97c0e18c;
   case 0x28:
-    fVar7 = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
+    scalarResult = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
     goto LAB_97c0e4e0;
   case 0x29:
-    fVar7 = src0[3] * src1[3] +
+    scalarResult = src0[3] * src1[3] +
             src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
     goto LAB_97c0e4e0;
   case 0x2a:
-    fVar7 = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1] + src1[3];
+    scalarResult = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1] + src1[3];
 LAB_97c0e4e0:
-    bVar6 = true;
-    *(float *)(iVar18 + 0x24) = fVar7;
-    *pfVar21 = fVar7;
-    *(float *)(iVar18 + 0x1c) = fVar7;
-    *(float *)(iVar18 + 0x20) = fVar7;
+    foldFailed = true;
+    *(float *)(destInfo + 0x24) = scalarResult;
+    *destValue = scalarResult;
+    *(float *)(destInfo + 0x1c) = scalarResult;
+    *(float *)(destInfo + 0x20) = scalarResult;
     break;
   case 0x2b:
-    if (*param_1 - 0x8b30U < 2) {
-      dVar23 = 0.0;
-      iVar13 = 0;
-      for (iVar14 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; iVar14 != 0; iVar14 = iVar14 + -1)
+    if (*compileContext - 0x8b30U < 2) {
+      mathAccumulator = 0.0;
+      componentIndex2 = 0;
+      for (remainingComponents = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; remainingComponents != 0; remainingComponents = remainingComponents + -1)
       {
-        dVar23 = (double)(float)((double)(src0[iVar13] - src1[iVar13]) *
-                                 (double)(src0[iVar13] - src1[iVar13]) + dVar23);
-        iVar13 = iVar13 + 1;
+        mathAccumulator = (double)(float)((double)(src0[componentIndex2] - src1[componentIndex2]) *
+                                 (double)(src0[componentIndex2] - src1[componentIndex2]) + mathAccumulator);
+        componentIndex2 = componentIndex2 + 1;
       }
-      dVar23 = _sqrt(dVar23);
+      mathAccumulator = _sqrt(mathAccumulator);
 LAB_97c0e4d8:
-      fVar7 = (float)dVar23;
+      scalarResult = (float)mathAccumulator;
       goto LAB_97c0e4e0;
     }
-    *pfVar21 = 1.0;
-    *(float *)(iVar18 + 0x1c) = src0[1] * src1[1];
-    *(float *)(iVar18 + 0x20) = src0[2];
-    fVar7 = src1[3];
+    *destValue = 1.0;
+    *(float *)(destInfo + 0x1c) = src0[1] * src1[1];
+    *(float *)(destInfo + 0x20) = src0[2];
+    resultW = src1[3];
     goto LAB_97c0e6f8;
   case 0x2c:
-    fVar7 = *src1;
+    resultX = *src1;
     if (*src0 < *src1) {
-      fVar7 = *src0;
+      resultX = *src0;
     }
-    *pfVar21 = fVar7;
-    fVar7 = src1[1];
+    *destValue = resultX;
+    resultY = src1[1];
     if (src0[1] < src1[1]) {
-      fVar7 = src0[1];
+      resultY = src0[1];
     }
-    *(float *)(iVar18 + 0x1c) = fVar7;
-    fVar7 = src1[2];
+    *(float *)(destInfo + 0x1c) = resultY;
+    resultZ = src1[2];
     if (src0[2] < src1[2]) {
-      fVar7 = src0[2];
+      resultZ = src0[2];
     }
-    *(float *)(iVar18 + 0x20) = fVar7;
-    fVar3 = src0[3];
-    fVar7 = src1[3];
-    if (fVar3 < fVar7) {
+    *(float *)(destInfo + 0x20) = resultZ;
+    operandComponent = src0[3];
+    resultW = src1[3];
+    if (operandComponent < resultW) {
 LAB_97c0e08c:
-      fVar7 = fVar3;
+      resultW = operandComponent;
     }
     goto LAB_97c0e090;
   case 0x2d:
-    fVar7 = *src1;
+    resultX = *src1;
     if (*src1 < *src0) {
-      fVar7 = *src0;
+      resultX = *src0;
     }
-    *pfVar21 = fVar7;
-    fVar7 = src1[1];
+    *destValue = resultX;
+    resultY = src1[1];
     if (src1[1] < src0[1]) {
-      fVar7 = src0[1];
+      resultY = src0[1];
     }
-    *(float *)(iVar18 + 0x1c) = fVar7;
-    fVar7 = src1[2];
+    *(float *)(destInfo + 0x1c) = resultY;
+    resultZ = src1[2];
     if (src1[2] < src0[2]) {
-      fVar7 = src0[2];
+      resultZ = src0[2];
     }
-    *(float *)(iVar18 + 0x20) = fVar7;
-    fVar3 = src0[3];
-    fVar7 = src1[3];
-    if (src1[3] < fVar3) goto LAB_97c0e08c;
+    *(float *)(destInfo + 0x20) = resultZ;
+    operandComponent = src0[3];
+    resultW = src1[3];
+    if (src1[3] < operandComponent) goto LAB_97c0e08c;
 LAB_97c0e090:
-    *(float *)(iVar18 + 0x24) = fVar7;
+    *(float *)(destInfo + 0x24) = resultW;
     goto LAB_97c0e778;
   case 0x2e:
-    bVar6 = true;
-    *pfVar21 = src0[1] * src1[2] - src1[1] * src0[2];
-    *(float *)(iVar18 + 0x1c) = src0[2] * *src1 - src1[2] * *src0;
-    fVar7 = *src1;
-    fVar3 = src0[1];
+    foldFailed = true;
+    *destValue = src0[1] * src1[2] - src1[1] * src0[2];
+    *(float *)(destInfo + 0x1c) = src0[2] * *src1 - src1[2] * *src0;
+    resultZ = *src1;
+    operandComponent = src0[1];
     fVar4 = *src0;
     fVar5 = src1[1];
-    *(undefined4 *)(iVar18 + 0x24) = 0;
-    *(float *)(iVar18 + 0x20) = fVar4 * fVar5 - fVar7 * fVar3;
+    *(undefined4 *)(destInfo + 0x24) = 0;
+    *(float *)(destInfo + 0x20) = fVar4 * fVar5 - resultZ * operandComponent;
     break;
   case 0x2f:
-    fVar7 = 0.0;
-    iVar13 = 0;
-    for (iVar14 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; iVar14 != 0; iVar14 = iVar14 + -1) {
-      fVar7 = src0[iVar13] * src1[iVar13] + fVar7;
-      iVar13 = iVar13 + 1;
+    scalarResult = 0.0;
+    componentIndex2 = 0;
+    for (remainingComponents = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; remainingComponents != 0; remainingComponents = remainingComponents + -1) {
+      scalarResult = src0[componentIndex2] * src1[componentIndex2] + scalarResult;
+      componentIndex2 = componentIndex2 + 1;
     }
-    fVar7 = fVar7 + fVar7;
-    bVar6 = true;
-    *pfVar21 = -(fVar7 * *src1 - *src0);
-    *(float *)(iVar18 + 0x1c) = -(fVar7 * src1[1] - src0[1]);
-    *(float *)(iVar18 + 0x20) = -(fVar7 * src1[2] - src0[2]);
-    *(float *)(iVar18 + 0x24) = -(fVar7 * src1[3] - src0[3]);
+    scalarResult = scalarResult + scalarResult;
+    foldFailed = true;
+    *destValue = -(scalarResult * *src1 - *src0);
+    *(float *)(destInfo + 0x1c) = -(scalarResult * src1[1] - src0[1]);
+    *(float *)(destInfo + 0x20) = -(scalarResult * src1[2] - src0[2]);
+    *(float *)(destInfo + 0x24) = -(scalarResult * src1[3] - src0[3]);
     break;
   case 0x30:
-    fVar7 = 1.0;
+    scalarResult = 1.0;
     goto LAB_97c0e18c;
   case 0x31:
-    fVar7 = 1.0;
+    resultX = 1.0;
     if (*src0 != *src1) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
-    *pfVar21 = fVar7;
-    uVar8 = 0x3f800000;
+    *destValue = resultX;
+    resultYBits = 0x3f800000;
     if (src0[1] != src1[1]) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
+    resultZBits = 0x3f800000;
     if (src0[2] != src1[2]) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
+    resultWBits = 0x3f800000;
     if (src0[3] != src1[3]) goto LAB_97c0e454;
     goto LAB_97c0e458;
   case 0x32:
-    fVar7 = 1.0;
+    resultX = 1.0;
     if (*src0 < *src1) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
-    *pfVar21 = fVar7;
-    uVar8 = 0x3f800000;
+    *destValue = resultX;
+    resultYBits = 0x3f800000;
     if (src0[1] < src1[1]) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
+    resultZBits = 0x3f800000;
     if (src0[2] < src1[2]) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
-    bVar2 = src1[3] <= src0[3];
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
+    foldFailedOrCompare = src1[3] <= src0[3];
     goto LAB_97c0e36c;
   case 0x33:
     if (*src0 <= *src1) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
     else {
-      fVar7 = 1.0;
+      resultX = 1.0;
     }
-    *pfVar21 = fVar7;
+    *destValue = resultX;
     if (src0[1] <= src1[1]) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
     else {
-      uVar8 = 0x3f800000;
+      resultYBits = 0x3f800000;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
     if (src0[2] <= src1[2]) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
     else {
-      uVar8 = 0x3f800000;
+      resultZBits = 0x3f800000;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
     if (src1[3] < src0[3]) {
 LAB_97c0e3e4:
-      uVar8 = 0x3f800000;
+      resultWBits = 0x3f800000;
       goto LAB_97c0e458;
     }
     goto LAB_97c0e454;
   case 0x34:
-    fVar7 = 1.0;
+    resultX = 1.0;
     if (*src1 < *src0) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
-    *pfVar21 = fVar7;
-    uVar8 = 0x3f800000;
+    *destValue = resultX;
+    resultYBits = 0x3f800000;
     if (src1[1] < src0[1]) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
+    resultZBits = 0x3f800000;
     if (src1[2] < src0[2]) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
-    bVar2 = src0[3] <= src1[3];
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
+    foldFailedOrCompare = src0[3] <= src1[3];
 LAB_97c0e36c:
-    uVar8 = 0x3f800000;
-    if (!bVar2) goto LAB_97c0e454;
+    resultWBits = 0x3f800000;
+    if (!foldFailedOrCompare) goto LAB_97c0e454;
     goto LAB_97c0e458;
   case 0x35:
     if (*src1 <= *src0) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
     else {
-      fVar7 = 1.0;
+      resultX = 1.0;
     }
-    *pfVar21 = fVar7;
+    *destValue = resultX;
     if (src1[1] <= src0[1]) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
     else {
-      uVar8 = 0x3f800000;
+      resultYBits = 0x3f800000;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
     if (src1[2] <= src0[2]) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
     else {
-      uVar8 = 0x3f800000;
+      resultZBits = 0x3f800000;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
     if (src0[3] < src1[3]) goto LAB_97c0e3e4;
     goto LAB_97c0e454;
   case 0x36:
-    fVar7 = 1.0;
+    resultX = 1.0;
     if (*src0 == *src1) {
-      fVar7 = 0.0;
+      resultX = 0.0;
     }
-    *pfVar21 = fVar7;
-    uVar8 = 0x3f800000;
+    *destValue = resultX;
+    resultYBits = 0x3f800000;
     if (src0[1] == src1[1]) {
-      uVar8 = 0;
+      resultYBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x1c) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x1c) = resultYBits;
+    resultZBits = 0x3f800000;
     if (src0[2] == src1[2]) {
-      uVar8 = 0;
+      resultZBits = 0;
     }
-    *(undefined4 *)(iVar18 + 0x20) = uVar8;
-    uVar8 = 0x3f800000;
+    *(undefined4 *)(destInfo + 0x20) = resultZBits;
+    resultWBits = 0x3f800000;
     if (src0[3] != src1[3]) goto LAB_97c0e458;
 LAB_97c0e454:
-    uVar8 = 0;
+    resultWBits = 0;
 LAB_97c0e458:
-    *(undefined4 *)(iVar18 + 0x24) = uVar8;
+    *(undefined4 *)(destInfo + 0x24) = resultWBits;
     goto LAB_97c0e778;
   case 0x37:
-    fVar7 = 0.0;
+    scalarResult = 0.0;
 LAB_97c0e18c:
-    *(float *)(iVar18 + 0x24) = fVar7;
-    *pfVar21 = fVar7;
-    *(float *)(iVar18 + 0x1c) = fVar7;
-    *(float *)(iVar18 + 0x20) = fVar7;
+    *(float *)(destInfo + 0x24) = scalarResult;
+    *destValue = scalarResult;
+    *(float *)(destInfo + 0x1c) = scalarResult;
+    *(float *)(destInfo + 0x20) = scalarResult;
 LAB_97c0e778:
-    bVar6 = !bVar6;
+    foldFailed = !foldFailed;
     break;
   case 0x38:
-    if (1 < *param_1 - 0x8b30U) {
-      dVar23 = _pow((double)src0[3],(double)src1[3]);
+    if (1 < *compileContext - 0x8b30U) {
+      mathAccumulator = _pow((double)src0[3],(double)src1[3]);
       goto LAB_97c0e4d8;
     }
     powResult = _pow((double)*src0,(double)*src1);
-    *pfVar21 = (float)powResult;
+    *destValue = (float)powResult;
     powResult = _pow((double)src0[1],(double)src1[1]);
-    *(float *)(iVar18 + 0x1c) = (float)powResult;
+    *(float *)(destInfo + 0x1c) = (float)powResult;
     powResult = _pow((double)src0[2],(double)src1[2]);
-    *(float *)(iVar18 + 0x20) = (float)powResult;
-    dVar23 = _pow((double)src0[3],(double)src1[3]);
+    *(float *)(destInfo + 0x20) = (float)powResult;
+    powValue = _pow((double)src0[3],(double)src1[3]);
 LAB_97c0e764:
-    bVar6 = true;
-    *(float *)(iVar18 + 0x24) = (float)dVar23;
+    foldFailed = true;
+    *(float *)(destInfo + 0x24) = (float)powValue;
     break;
   case 0x39:
-    fVar7 = *src1;
-    if (2.1474836e+09 <= fVar7) {
-      iVar13 = (int)(fVar7 - 2.1474836e+09);
-      local_80 = (longlong)iVar13;
+    floatToInt = *src1;
+    if (2.1474836e+09 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+      intPairLo = (longlong)intComponent2;
     }
     else {
-      iVar13 = (int)fVar7;
-      local_88 = (longlong)iVar13;
+      intComponent2 = (int)floatToInt;
+      intPairHi = (longlong)intComponent2;
     }
-    *pfVar21 = src0[iVar13];
-    fVar7 = *src1;
-    if (2.1474836e+09 <= fVar7) {
-      iVar13 = (int)(fVar7 - 2.1474836e+09);
-      local_88 = (longlong)iVar13;
-    }
-    else {
-      iVar13 = (int)fVar7;
-      local_80 = (longlong)iVar13;
-    }
-    *(float *)(iVar18 + 0x1c) = src0[iVar13];
-    fVar7 = *src1;
-    if (2.1474836e+09 <= fVar7) {
-      iVar13 = (int)(fVar7 - 2.1474836e+09);
-      local_88 = (longlong)iVar13;
+    *destValue = src0[intComponent2];
+    floatToInt = *src1;
+    if (2.1474836e+09 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+      intPairHi = (longlong)intComponent2;
     }
     else {
-      iVar13 = (int)fVar7;
-      local_80 = (longlong)iVar13;
+      intComponent2 = (int)floatToInt;
+      intPairLo = (longlong)intComponent2;
     }
-    *(float *)(iVar18 + 0x20) = src0[iVar13];
-    fVar7 = *src1;
-    if (2.1474836e+09 <= fVar7) {
-      iVar13 = (int)(fVar7 - 2.1474836e+09);
-      local_88 = (longlong)iVar13;
+    *(float *)(destInfo + 0x1c) = src0[intComponent2];
+    floatToInt = *src1;
+    if (2.1474836e+09 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+      intPairHi = (longlong)intComponent2;
     }
     else {
-      iVar13 = (int)fVar7;
-      local_80 = (longlong)iVar13;
+      intComponent2 = (int)floatToInt;
+      intPairLo = (longlong)intComponent2;
     }
-    fVar7 = src0[iVar13];
+    *(float *)(destInfo + 0x20) = src0[intComponent2];
+    floatToInt = *src1;
+    if (2.1474836e+09 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+      intPairHi = (longlong)intComponent2;
+    }
+    else {
+      intComponent2 = (int)floatToInt;
+      intPairLo = (longlong)intComponent2;
+    }
+    resultW = src0[intComponent2];
 LAB_97c0e6f8:
-    bVar6 = true;
-    *(float *)(iVar18 + 0x24) = fVar7;
+    foldFailed = true;
+    *(float *)(destInfo + 0x24) = resultW;
     break;
   case 0x3a:
-    if (*(int *)(iVar18 + 0xc) == 1) {
-      *pfVar21 = *src0 / *src1;
-      *(float *)(iVar18 + 0x1c) = src0[1] / src1[1];
-      *(float *)(iVar18 + 0x20) = src0[2] / src1[2];
-      fVar7 = src0[3] / src1[3];
+    if (*(int *)(destInfo + 0xc) == 1) {
+      *destValue = *src0 / *src1;
+      *(float *)(destInfo + 0x1c) = src0[1] / src1[1];
+      *(float *)(destInfo + 0x20) = src0[2] / src1[2];
+      resultW = src0[3] / src1[3];
       goto LAB_97c0e6f8;
     }
-    bVar6 = true;
-    if (*(int *)(iVar18 + 0xc) == 3) {
+    foldFailed = true;
+    if (*(int *)(destInfo + 0xc) == 3) {
       truncResult = _trunc((double)(*src0 / *src1));
-      *pfVar21 = (float)truncResult;
+      *destValue = (float)truncResult;
       truncResult = _trunc((double)(src0[1] / src1[1]));
-      *(float *)(iVar18 + 0x1c) = (float)truncResult;
+      *(float *)(destInfo + 0x1c) = (float)truncResult;
       truncResult = _trunc((double)(src0[2] / src1[2]));
-      *(float *)(iVar18 + 0x20) = (float)truncResult;
-      dVar23 = _trunc((double)(src0[3] / src1[3]));
+      *(float *)(destInfo + 0x20) = (float)truncResult;
+      powValue = _trunc((double)(src0[3] / src1[3]));
       goto LAB_97c0e764;
     }
     break;
   case 0x6d:
-    fVar7 = *src1;
-    if (2.1474836e+09 <= fVar7) {
-      iVar13 = (int)(fVar7 - 2.1474836e+09);
-      local_88 = (longlong)iVar13;
+    floatToInt = *src1;
+    if (2.1474836e+09 <= floatToInt) {
+      intComponent2 = (int)(floatToInt - 2.1474836e+09);
+      intPairHi = (longlong)intComponent2;
     }
     else {
-      iVar13 = (int)fVar7;
-      local_80 = (longlong)iVar13;
+      intComponent2 = (int)floatToInt;
+      intPairLo = (longlong)intComponent2;
     }
-    fVar7 = *src1;
-    if (2.1474836e+09 <= fVar7) {
-      iVar14 = (int)(fVar7 - 2.1474836e+09);
-      local_70 = (longlong)iVar14;
+    floatToInt = *src1;
+    if (2.1474836e+09 <= floatToInt) {
+      intComponent = (int)(floatToInt - 2.1474836e+09);
+      local_70 = (longlong)intComponent;
     }
     else {
-      iVar14 = (int)fVar7;
-      local_78 = (longlong)iVar14;
+      intComponent = (int)floatToInt;
+      local_78 = (longlong)intComponent;
     }
-    bVar6 = true;
-    pfVar21[iVar13] = src0[iVar14];
+    foldFailed = true;
+    destValue[intComponent2] = src0[intComponent];
   }
 LAB_97c0e77c:
-  if (bVar6) goto LAB_97c0eea8;
-  bVar2 = false;
-  if ((((iVar12 != 3) || (bVar1)) || (src0 == (float *)0x0)) ||
+  if (foldFailed) goto LAB_97c0eea8;
+  foldFailedOrCompare = false;
+  if ((((validArgCount != 3) || (noDestination)) || (src0 == (float *)0x0)) ||
      ((src1 == (float *)0x0 || (src2 == (float *)0x0)))) goto LAB_97c0ee84;
-  bVar2 = false;
-  switch(*puVar16 >> 0x12 & 0xff) {
+  foldFailedOrCompare = false;
+  switch(*instWords >> 0x12 & 0xff) {
   case 0x3b:
-    fVar7 = 0.0;
-    iVar12 = 0;
-    for (iVar13 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; iVar13 != 0; iVar13 = iVar13 + -1) {
-      fVar7 = src2[iVar12] * src1[iVar12] + fVar7;
-      iVar12 = iVar12 + 1;
+    accumulator = 0.0;
+    componentIndex = 0;
+    for (componentIndex2 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; componentIndex2 != 0; componentIndex2 = componentIndex2 + -1) {
+      accumulator = src2[componentIndex] * src1[componentIndex] + accumulator;
+      componentIndex = componentIndex + 1;
     }
-    if (0.0 <= fVar7) {
-      *pfVar21 = -*src0;
-      *(float *)(iVar18 + 0x1c) = -src0[1];
-      *(float *)(iVar18 + 0x20) = -src0[2];
-      fVar7 = -src0[3];
+    if (0.0 <= accumulator) {
+      *destValue = -*src0;
+      *(float *)(destInfo + 0x1c) = -src0[1];
+      *(float *)(destInfo + 0x20) = -src0[2];
+      resultW = -src0[3];
     }
     else {
-      *pfVar21 = *src0;
-      *(float *)(iVar18 + 0x1c) = src0[1];
-      *(float *)(iVar18 + 0x20) = src0[2];
-      fVar7 = src0[3];
+      *destValue = *src0;
+      *(float *)(destInfo + 0x1c) = src0[1];
+      *(float *)(destInfo + 0x20) = src0[2];
+      resultW = src0[3];
     }
     break;
   case 0x3c:
-    *pfVar21 = *src0 * *src1 + (1.0 - *src0) * *src2;
-    *(float *)(iVar18 + 0x1c) = src0[1] * src1[1] + (1.0 - src0[1]) * src2[1];
-    *(float *)(iVar18 + 0x20) = src0[2] * src1[2] + (1.0 - src0[2]) * src2[2];
-    fVar7 = src0[3] * src1[3] + (1.0 - src0[3]) * src2[3];
+    *destValue = *src0 * *src1 + (1.0 - *src0) * *src2;
+    *(float *)(destInfo + 0x1c) = src0[1] * src1[1] + (1.0 - src0[1]) * src2[1];
+    *(float *)(destInfo + 0x20) = src0[2] * src1[2] + (1.0 - src0[2]) * src2[2];
+    resultW = src0[3] * src1[3] + (1.0 - src0[3]) * src2[3];
     break;
   case 0x3d:
     fVar7 = *src0;
-    fVar3 = *src1;
+    operandComponent = *src1;
     fVar4 = *src2;
-    fVar5 = fVar3;
-    if (fVar3 < fVar7) {
+    fVar5 = operandComponent;
+    if (operandComponent < fVar7) {
       fVar5 = fVar7;
     }
-    if ((fVar5 < fVar4) && (fVar4 = fVar3, fVar3 < fVar7)) {
+    if ((fVar5 < fVar4) && (fVar4 = operandComponent, operandComponent < fVar7)) {
       fVar4 = fVar7;
     }
-    *pfVar21 = fVar4;
+    *destValue = fVar4;
     fVar7 = src0[1];
-    fVar3 = src1[1];
+    operandComponent = src1[1];
     fVar4 = src2[1];
-    fVar5 = fVar3;
-    if (fVar3 < fVar7) {
+    fVar5 = operandComponent;
+    if (operandComponent < fVar7) {
       fVar5 = fVar7;
     }
-    if ((fVar5 < fVar4) && (fVar4 = fVar3, fVar3 < fVar7)) {
+    if ((fVar5 < fVar4) && (fVar4 = operandComponent, operandComponent < fVar7)) {
       fVar4 = fVar7;
     }
-    *(float *)(iVar18 + 0x1c) = fVar4;
+    *(float *)(destInfo + 0x1c) = fVar4;
     fVar7 = src0[2];
-    fVar3 = src1[2];
+    operandComponent = src1[2];
     fVar4 = src2[2];
-    fVar5 = fVar3;
-    if (fVar3 < fVar7) {
+    fVar5 = operandComponent;
+    if (operandComponent < fVar7) {
       fVar5 = fVar7;
     }
-    if ((fVar5 < fVar4) && (fVar4 = fVar3, fVar3 < fVar7)) {
+    if ((fVar5 < fVar4) && (fVar4 = operandComponent, operandComponent < fVar7)) {
       fVar4 = fVar7;
     }
-    *(float *)(iVar18 + 0x20) = fVar4;
-    fVar3 = src0[3];
+    *(float *)(destInfo + 0x20) = fVar4;
+    operandComponent = src0[3];
     fVar4 = src1[3];
-    fVar7 = src2[3];
+    resultW = src2[3];
     fVar5 = fVar4;
-    if (fVar4 < fVar3) {
-      fVar5 = fVar3;
+    if (fVar4 < operandComponent) {
+      fVar5 = operandComponent;
     }
-    if ((fVar5 < fVar7) && (fVar7 = fVar4, fVar4 < fVar3)) {
-      fVar7 = fVar3;
+    if ((fVar5 < resultW) && (resultW = fVar4, fVar4 < operandComponent)) {
+      resultW = operandComponent;
     }
     goto LAB_97c0eb30;
   case 0x3e:
     if (0.0 <= *src0) {
-      fVar7 = *src2;
+      resultX = *src2;
     }
     else {
-      fVar7 = *src1;
+      resultX = *src1;
     }
-    *pfVar21 = fVar7;
+    *destValue = resultX;
     if (0.0 <= src0[1]) {
-      fVar7 = src2[1];
+      resultY = src2[1];
     }
     else {
-      fVar7 = src1[1];
+      resultY = src1[1];
     }
-    *(float *)(iVar18 + 0x1c) = fVar7;
+    *(float *)(destInfo + 0x1c) = resultY;
     if (0.0 <= src0[2]) {
-      fVar7 = src2[2];
+      resultZ = src2[2];
     }
     else {
-      fVar7 = src1[2];
+      resultZ = src1[2];
     }
-    *(float *)(iVar18 + 0x20) = fVar7;
+    *(float *)(destInfo + 0x20) = resultZ;
     if (0.0 <= src0[3]) {
-      fVar7 = src2[3];
+      resultW = src2[3];
     }
     else {
-      fVar7 = src1[3];
+      resultW = src1[3];
     }
 LAB_97c0eb30:
-    *(float *)(iVar18 + 0x24) = fVar7;
+    *(float *)(destInfo + 0x24) = resultW;
     goto LAB_97c0ee80;
   case 0x3f:
-    *pfVar21 = *src0 * *src1 + *src2;
-    *(float *)(iVar18 + 0x1c) = src0[1] * src1[1] + src2[1];
-    *(float *)(iVar18 + 0x20) = src0[2] * src1[2] + src2[2];
-    fVar7 = src0[3] * src1[3] + src2[3];
+    *destValue = *src0 * *src1 + *src2;
+    *(float *)(destInfo + 0x1c) = src0[1] * src1[1] + src2[1];
+    *(float *)(destInfo + 0x20) = src0[2] * src1[2] + src2[2];
+    resultW = src0[3] * src1[3] + src2[3];
     break;
   case 0x40:
-    fVar7 = (*src2 - *src0) / (*src1 - *src0);
-    if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-      if (fVar7 <= 0.0) {
-        fVar7 = 0.0;
+    resultX = (*src2 - *src0) / (*src1 - *src0);
+    if ((resultX <= 0.0) || (resultX < 1.0)) {
+      if (resultX <= 0.0) {
+        resultX = 0.0;
       }
     }
     else {
-      fVar7 = 1.0;
+      resultX = 1.0;
     }
-    *pfVar21 = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
-    fVar7 = (src2[1] - src0[1]) / (src1[1] - src0[1]);
-    if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-      if (fVar7 <= 0.0) {
-        fVar7 = 0.0;
+    *destValue = resultX * resultX * (3.0 - (resultX + resultX));
+    resultY = (src2[1] - src0[1]) / (src1[1] - src0[1]);
+    if ((resultY <= 0.0) || (resultY < 1.0)) {
+      if (resultY <= 0.0) {
+        resultY = 0.0;
       }
     }
     else {
-      fVar7 = 1.0;
+      resultY = 1.0;
     }
-    *(float *)(iVar18 + 0x1c) = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
-    fVar7 = (src2[2] - src0[2]) / (src1[2] - src0[2]);
-    if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-      if (fVar7 <= 0.0) {
-        fVar7 = 0.0;
+    *(float *)(destInfo + 0x1c) = resultY * resultY * (3.0 - (resultY + resultY));
+    resultZ = (src2[2] - src0[2]) / (src1[2] - src0[2]);
+    if ((resultZ <= 0.0) || (resultZ < 1.0)) {
+      if (resultZ <= 0.0) {
+        resultZ = 0.0;
       }
     }
     else {
-      fVar7 = 1.0;
+      resultZ = 1.0;
     }
-    *(float *)(iVar18 + 0x20) = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
-    fVar7 = (src2[3] - src0[3]) / (src1[3] - src0[3]);
-    if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-      if (fVar7 <= 0.0) {
-        fVar7 = 0.0;
+    *(float *)(destInfo + 0x20) = resultZ * resultZ * (3.0 - (resultZ + resultZ));
+    scalarResult = (src2[3] - src0[3]) / (src1[3] - src0[3]);
+    if ((scalarResult <= 0.0) || (scalarResult < 1.0)) {
+      if (scalarResult <= 0.0) {
+        scalarResult = 0.0;
       }
     }
     else {
-      fVar7 = 1.0;
+      scalarResult = 1.0;
     }
-    fVar7 = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
+    scalarResult = scalarResult * scalarResult * (3.0 - (scalarResult + scalarResult));
 LAB_97c0ee74:
-    bVar2 = true;
-    *(float *)(iVar18 + 0x24) = fVar7;
+    foldFailedOrCompare = true;
+    *(float *)(destInfo + 0x24) = scalarResult;
     goto LAB_97c0ee84;
   default:
-    bVar2 = true;
+    foldFailedOrCompare = true;
     goto LAB_97c0ee80;
   case 0x68:
-    fVar7 = 0.0;
-    iVar12 = 0;
-    for (iVar13 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; iVar13 != 0; iVar13 = iVar13 + -1) {
-      fVar7 = src0[iVar12] * src1[iVar12] + fVar7;
-      iVar12 = iVar12 + 1;
+    scalarResult = 0.0;
+    componentIndex = 0;
+    for (componentIndex2 = (*(uint *)(inst + 0x10) >> 0x1a & 3) + 1; componentIndex2 != 0; componentIndex2 = componentIndex2 + -1) {
+      scalarResult = src0[componentIndex] * src1[componentIndex] + scalarResult;
+      componentIndex = componentIndex + 1;
     }
-    fVar3 = *src2;
-    dVar23 = (double)-(fVar3 * fVar3 * (1.0 - fVar7 * fVar7) - 1.0);
-    if (0.0 <= dVar23) {
-      sqrtResult = _sqrt(dVar23);
-      fVar7 = (float)((double)(fVar3 * fVar7) + sqrtResult);
-      *pfVar21 = *src2 * *src0 - fVar7 * *src1;
-      *(float *)(iVar18 + 0x1c) = *src2 * src0[1] - fVar7 * src1[1];
-      *(float *)(iVar18 + 0x20) = *src2 * src0[2] - fVar7 * src1[2];
-      fVar7 = *src2 * src0[3] - fVar7 * src1[3];
+    operandComponent = *src2;
+    sqrtValue = (double)-(operandComponent * operandComponent * (1.0 - scalarResult * scalarResult) - 1.0);
+    if (0.0 <= sqrtValue) {
+      sqrtResult = _sqrt(sqrtValue);
+      scalarResult = (float)((double)(operandComponent * scalarResult) + sqrtResult);
+      *destValue = *src2 * *src0 - scalarResult * *src1;
+      *(float *)(destInfo + 0x1c) = *src2 * src0[1] - scalarResult * src1[1];
+      *(float *)(destInfo + 0x20) = *src2 * src0[2] - scalarResult * src1[2];
+      scalarResult = *src2 * src0[3] - scalarResult * src1[3];
       goto LAB_97c0ee74;
     }
-    *(float *)(iVar18 + 0x24) = 0.0;
-    *pfVar21 = 0.0;
-    *(float *)(iVar18 + 0x1c) = 0.0;
-    *(float *)(iVar18 + 0x20) = 0.0;
+    *(float *)(destInfo + 0x24) = 0.0;
+    *destValue = 0.0;
+    *(float *)(destInfo + 0x1c) = 0.0;
+    *(float *)(destInfo + 0x20) = 0.0;
 LAB_97c0ee80:
-    bVar2 = !bVar2;
+    foldFailedOrCompare = !foldFailedOrCompare;
     goto LAB_97c0ee84;
   }
-  bVar2 = true;
-  *(float *)(iVar18 + 0x24) = fVar7;
+  foldFailedOrCompare = true;
+  *(float *)(destInfo + 0x24) = resultW;
 LAB_97c0ee84:
-  if (bVar2) {
+  if (foldFailedOrCompare) {
 LAB_97c0eea8:
-    if (!bVar1) {
-      *(undefined4 *)(iVar18 + 0x14) = 1;
+    if (!noDestination) {
+      *(undefined4 *)(destInfo + 0x14) = 1;
     }
   }
-  else if (!bVar1) {
-    ((int (*)())_ClearDestedOpRegisters)(param_1,hashSet,inst,0);
+  else if (!noDestination) {
+    ((int (*)())_ClearDestedOpRegisters)(compileContext,hashSet,inst,0);
   }
-  switch(*puVar16 >> 0x12 & 0xff) {
+  switch(*instWords >> 0x12 & 0xff) {
   case 0x4b:
   case 0x4c:
   case 0x4d:
@@ -1974,27 +1997,27 @@ LAB_97c0eea8:
   case 0x56:
   case 0x57:
   case 0x6a:
-    chunk = _PPStreamChunkListChunkAtIndex(param_1[8],*(uint *)(inst + 0x10) & 0x3ffff);
-    iVar18 = *(int *)(chunk + 4);
-    iVar12 = inst;
+    chunk = _PPStreamChunkListChunkAtIndex(compileContext[8],*(uint *)(inst + 0x10) & 0x3ffff);
+    destInfo = *(int *)(chunk + 4);
+    currentInst = inst;
     break;
   case 0x5a:
   case 0x5b:
   case 0x6b:
-    chunk = _PPStreamChunkListChunkAtIndex(param_1[8],*(uint *)(inst + 0x10) & 0x3ffff);
-    iVar12 = *(int *)(chunk + 4);
-    iVar18 = inst;
+    chunk = _PPStreamChunkListChunkAtIndex(compileContext[8],*(uint *)(inst + 0x10) & 0x3ffff);
+    currentInst = *(int *)(chunk + 4);
+    destInfo = inst;
   }
-  ((int (*)())_ClearDestedRegisters)(param_1,hashSet,iVar12,iVar18);
+  ((int (*)())_ClearDestedRegisters)(compileContext,hashSet,currentInst,destInfo);
 switchD_97c0eee4_caseD_4e:
   return;
 switchD_97c0cae8_caseD_0:
-  *pfVar21 = *src0;
-  *(float *)(iVar18 + 0x1c) = src0[1];
-  *(float *)(iVar18 + 0x20) = src0[2];
-  fVar7 = src0[3];
+  *destValue = *src0;
+  *(float *)(destInfo + 0x1c) = src0[1];
+  *(float *)(destInfo + 0x20) = src0[2];
+  resultW = src0[3];
 LAB_97c0ce78:
-  *(float *)(iVar18 + 0x24) = fVar7;
+  *(float *)(destInfo + 0x24) = resultW;
   goto LAB_97c0d82c;
 }
 

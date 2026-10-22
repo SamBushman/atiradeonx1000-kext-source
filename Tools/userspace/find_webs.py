@@ -95,7 +95,23 @@ def build_cfg(body, brace):
 
     def stmt(loopstack):
         lines, t = units[pos[0]]; pos[0] += 1
-        m = re.match(r'^(LAB_\w+):$', t)
+        if re.match(r'^switch\s*\(', t):
+            c, rest = cond_then(t[6:].strip())
+            if rest == '' and pos[0] < len(units) and units[pos[0]][1] == '{': pos[0] += 1; rest = '{'
+            if rest != '{': raise SystemExit('unhandled switch form: ' + t)
+            cn = new(lines, c, 'cond')
+            ls = (None, [], loopstack[-1][2] if loopstack else [])      # `break` leaves the switch, `continue` the enclosing loop
+            prev = []; has_default = False
+            while pos[0] < len(units):
+                lines2, t2 = units[pos[0]]
+                if t2 == '}': pos[0] += 1; break
+                if re.match(r'^(case\b.*|default):$', t2):
+                    pos[0] += 1; cs = new(lines2, t2, 'label'); cn.succ.append(cs); link(prev, cs); prev = [cs]
+                    has_default = has_default or t2.startswith('default'); continue
+                ent, ex = stmt(loopstack + [ls])
+                link(prev, ent); prev = ex
+            return cn, prev + ls[1] + ([] if has_default else [cn])
+        m = re.match(r'^((?!case\b|default\b)[A-Za-z_]\w*):$', t)
         if m:
             n = new(lines, t, 'label'); labels[m.group(1)] = n; return n, [n]
         if t.startswith('return'):
@@ -117,10 +133,7 @@ def build_cfg(body, brace):
         if t.startswith('if'):
             c, rest = cond_then(t[2:].strip())
             cn = new(lines, c, 'cond')
-            if rest == '' and pos[0] < len(units) and re.match(r'(goto |return|break;|continue;)', units[pos[0]][1]):
-                rest = units[pos[0]][1]; pos[0] += 1               # `if (long condition)` and its one-line body on the next line
-            if rest == '' and pos[0] < len(units) and units[pos[0]][1] == '{':
-                pos[0] += 1; rest = '{'      # Ghidra puts the brace of a wrapped condition on its own line
+            if rest == '' and pos[0] < len(units) and units[pos[0]][1] == '{': pos[0] += 1; rest = '{'
             if rest == '{':
                 te, tx = block(loopstack)
                 if te: cn.succ.append(te)
@@ -140,20 +153,25 @@ def build_cfg(body, brace):
                 else:
                     exits.append(cn)
                 return cn, exits
+            if rest == '' and pos[0] < len(units):
+                # `if (cond)` with its one-statement body (no braces) on the next unit
+                nl, nt = units[pos[0]]
+                if re.match(r'(goto |return|break;|continue;)', nt):
+                    pos[0] += 1; rest = nt; cn.lines = list(cn.lines) + list(nl or [])
+                elif nt not in ('{', '}') and not nt.startswith(('if', 'while', 'for', 'do', 'else', 'switch', 'case', 'default')) and nt.endswith(';'):
+                    pos[0] += 1; sn = new(nl, nt, 'stmt'); cn.succ.append(sn)
+                    return cn, [sn, cn]
             if rest.startswith('goto '):
                 pending_gotos.append((cn, rest.split()[1].rstrip(';'))); return cn, [cn]
             if rest.startswith('return'):
                 return cn, [cn]
             if rest.startswith('break') and loopstack:
                 loopstack[-1][1].append(cn); return cn, [cn]
-            if rest == '' and pos[0] < len(units) and units[pos[0]][1] not in ('{', '}'):
-                te, tx = stmt(loopstack)            # `if (cond)` with the one-statement body on the next line (Ghidra wraps long conditions)
-                cn.succ.append(te)
-                return cn, list(tx) + [cn]
             raise SystemExit('unhandled if form: ' + t)
         if t.startswith('while') or t.startswith('for'):
             kw = t.split('(')[0].strip()
             c, rest = cond_then(t[len(kw):].strip())
+            if rest == '' and pos[0] < len(units) and units[pos[0]][1] == '{': pos[0] += 1; rest = '{'
             if rest != '{': raise SystemExit('unhandled loop form: ' + t)
             ls = (None, [], [])
             if kw == 'for':

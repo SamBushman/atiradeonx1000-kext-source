@@ -2596,10 +2596,10 @@ int _InterpreterAttachEmulatorContext(param_1, param_2)
 }
 
 /* _InterpreterPackPixel @ 0x97bcce74 (1208 bytes) */
-int _InterpreterPackPixel(param_1, param_2, param_3)
-  int *param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterPackPixel(machine, color, pixelOut)
+  int *machine;
+  float *color;
+  float *pixelOut;
 {
   uint framebufferFormat;
   float floatValue;
@@ -2611,31 +2611,31 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
   uint uVar6;
   float fVar7;
   uint uVar8;
-  int iVar9;
+  int emulator;
   bool bVar10;
   double dVar11;
   double dVar12;
   
-  iVar9 = *param_1;
-  if (*(int *)(iVar9 + 0xd9c) != 0) {
-    framebufferFormat = _PPEmulatorFramebufferFormat(iVar9);
+  emulator = *machine;
+  if (*(int *)(emulator + 0xd9c) != 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
     if ((framebufferFormat & 0x8000000) == 0) {
-      framebufferFormat = _PPEmulatorFramebufferFormat(iVar9);
+      framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
       fVar5 = FLOAT_97c3acc0;
       fVar2 = FLOAT_97c3acbc;
       if ((framebufferFormat & 0x8000) == 0) {
-        framebufferFormat = _PPEmulatorFramebufferFormat(iVar9);
+        framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
         fVar5 = FLOAT_97c3acc4;
         fVar2 = FLOAT_97c3acc0;
         if ((framebufferFormat & 0x400) == 0) {
           return;
         }
-        fVar7 = *param_2 * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        fVar1 = param_2[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
+        fVar7 = *color * FLOAT_97c3acc4 + FLOAT_97c3acc0;
+        fVar1 = color[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
         bVar10 = TAllocation__guardBlockSize <= fVar7;
-        *param_2 = fVar7;
-        param_2[1] = fVar1;
-        param_2[2] = param_2[2] * fVar5 + fVar2;
+        *color = fVar7;
+        color[1] = fVar1;
+        color[2] = color[2] * fVar5 + fVar2;
         fVar2 = TAllocation__guardBlockSize;
         if (bVar10) {
           if (fVar5 < fVar7) {
@@ -2645,8 +2645,8 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar7 = 0.0;
         }
-        fVar5 = param_2[1];
-        *param_2 = fVar7;
+        fVar5 = color[1];
+        *color = fVar7;
         fVar7 = TAllocation__guardBlockSize;
         if (fVar2 <= fVar5) {
           if (FLOAT_97c3acc4 < fVar5) {
@@ -2656,8 +2656,8 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar5 = 0.0;
         }
-        fVar2 = param_2[2];
-        param_2[1] = fVar5;
+        fVar2 = color[2];
+        color[1] = fVar5;
         dVar12 = DOUBLE_97c30a78;
         if (fVar7 <= fVar2) {
           if (FLOAT_97c3acc4 < fVar2) {
@@ -2667,29 +2667,29 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar2 = 0.0;
         }
-        dVar11 = (double)*param_2;
-        param_2[2] = fVar2;
+        dVar11 = (double)*color;
+        color[2] = fVar2;
         if (dVar12 <= dVar11) {
           uVar4 = (uint)(int)(dVar11 - dVar12);
         }
         else {
-          uVar4 = (uint)(int)*param_2;
+          uVar4 = (uint)(int)*color;
         }
-        dVar12 = (double)param_2[1];
+        dVar12 = (double)color[1];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar6 = (uint)(int)param_2[1];
+          uVar6 = (uint)(int)color[1];
         }
-        dVar12 = (double)param_2[2];
+        dVar12 = (double)color[2];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)(int)param_2[2];
+          uVar8 = (uint)(int)color[2];
         }
-        if (FLOAT_97c3acc0 <= param_2[3]) {
+        if (FLOAT_97c3acc0 <= color[3]) {
           uVar3 = 0x8000;
         }
         else {
@@ -2698,13 +2698,13 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         floatValue = GH_U2F((unsigned int)((uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f)));
       }
       else {
-        fVar7 = *param_2 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        fVar1 = param_2[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
+        fVar7 = *color * FLOAT_97c3acbc + FLOAT_97c3acc0;
+        fVar1 = color[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
         bVar10 = TAllocation__guardBlockSize <= fVar7;
-        *param_2 = fVar7;
-        param_2[1] = fVar1;
-        param_2[3] = param_2[3] * fVar2 + fVar5;
-        param_2[2] = param_2[2] * fVar2 + fVar5;
+        *color = fVar7;
+        color[1] = fVar1;
+        color[3] = color[3] * fVar2 + fVar5;
+        color[2] = color[2] * fVar2 + fVar5;
         fVar5 = TAllocation__guardBlockSize;
         if (bVar10) {
           if (fVar2 < fVar7) {
@@ -2714,8 +2714,8 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar7 = 0.0;
         }
-        fVar2 = param_2[1];
-        *param_2 = fVar7;
+        fVar2 = color[1];
+        *color = fVar7;
         fVar7 = TAllocation__guardBlockSize;
         if (fVar5 <= fVar2) {
           if (FLOAT_97c3acbc < fVar2) {
@@ -2725,8 +2725,8 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar2 = 0.0;
         }
-        fVar5 = param_2[2];
-        param_2[1] = fVar2;
+        fVar5 = color[2];
+        color[1] = fVar2;
         fVar2 = TAllocation__guardBlockSize;
         if (fVar7 <= fVar5) {
           if (FLOAT_97c3acbc < fVar5) {
@@ -2736,8 +2736,8 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar5 = 0.0;
         }
-        fVar7 = param_2[3];
-        param_2[2] = fVar5;
+        fVar7 = color[3];
+        color[2] = fVar5;
         dVar12 = DOUBLE_97c30a78;
         if (fVar2 <= fVar7) {
           if (FLOAT_97c3acbc < fVar7) {
@@ -2747,410 +2747,439 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           fVar7 = 0.0;
         }
-        dVar11 = (double)*param_2;
-        param_2[3] = fVar7;
+        dVar11 = (double)*color;
+        color[3] = fVar7;
         if (dVar12 <= dVar11) {
           uVar4 = (uint)(int)(dVar11 - dVar12);
         }
         else {
-          uVar4 = (uint)(int)*param_2;
+          uVar4 = (uint)(int)*color;
         }
-        dVar12 = (double)param_2[1];
+        dVar12 = (double)color[1];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar6 = (uint)(int)param_2[1];
+          uVar6 = (uint)(int)color[1];
         }
-        dVar12 = (double)param_2[2];
+        dVar12 = (double)color[2];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)(int)param_2[2];
+          uVar8 = (uint)(int)color[2];
         }
-        dVar12 = (double)param_2[3];
+        dVar12 = (double)color[3];
         if (DOUBLE_97c30a78 <= dVar12) {
-          iVar9 = (int)(dVar12 - DOUBLE_97c30a78);
+          emulator = (int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          iVar9 = (int)param_2[3];
+          emulator = (int)color[3];
         }
-        floatValue = GH_U2F((unsigned int)((iVar9 << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
+        floatValue = GH_U2F((unsigned int)((emulator << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
         ;
       }
-      *param_3 = floatValue;
+      *pixelOut = floatValue;
     }
     else {
-      fVar2 = *param_2;
-      fVar5 = param_2[1];
-      fVar7 = param_2[2];
-      param_3[3] = param_2[3];
-      *param_3 = fVar2;
-      param_3[1] = fVar5;
-      param_3[2] = fVar7;
+      fVar2 = *color;
+      fVar5 = color[1];
+      fVar7 = color[2];
+      pixelOut[3] = color[3];
+      *pixelOut = fVar2;
+      pixelOut[1] = fVar5;
+      pixelOut[2] = fVar7;
     }
   }
   return;
 }
 
 /* _InterpreterUnpackPixel @ 0x97bcd32c (428 bytes) */
-int _InterpreterUnpackPixel(param_1, param_2, param_3)
-  int *param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterUnpackPixel(machine, color, pixelIn)
+  int *machine;
+  float *color;
+  float *pixelIn;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float channelScale;
+  float alpha;
+  float red;
   uint framebufferFormat;
-  float fVar5;
-  float fVar6;
-  int iVar7;
+  float green;
+  float blue;
+  int emulator;
   
-  iVar7 = *param_1;
-  if (*(int *)(iVar7 + 0xd9c) != 0) {
-    framebufferFormat = _PPEmulatorFramebufferFormat(iVar7);
+  emulator = *machine;
+  if (*(int *)(emulator + 0xd9c) != 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
     if ((framebufferFormat & 0x8000000) == 0) {
-      framebufferFormat = _PPEmulatorFramebufferFormat(iVar7);
+      framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
       if ((framebufferFormat & 0x8000) == 0) {
-        framebufferFormat = _PPEmulatorFramebufferFormat(iVar7);
+        framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
         if ((framebufferFormat & 0x400) == 0) {
           return;
         }
-        fVar6 = *param_3;
-        fVar3 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) >> 10 & 0x1f) - DOUBLE_97c30a68) -
+        blue = *pixelIn;
+        red = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(blue) >> 10 & 0x1f) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar5 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) >> 5 & 0x1f) - DOUBLE_97c30a68) -
+        green = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(blue) >> 5 & 0x1f) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar2 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) >> 0xf & 1) - DOUBLE_97c30a68) -
+        alpha = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(blue) >> 0xf & 1) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar6 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) & 0x1f) - DOUBLE_97c30a68) -
+        blue = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(blue) & 0x1f) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar1 = FLOAT_97c3accc;
+        channelScale = FLOAT_97c3accc;
       }
       else {
-        fVar2 = *param_3;
-        fVar3 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) >> 0x10 & 0xff) - DOUBLE_97c30a68);
-        fVar5 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) >> 8 & 0xff) - DOUBLE_97c30a68);
-        fVar6 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) & 0xff) - DOUBLE_97c30a68);
-        fVar2 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) >> 0x18) - DOUBLE_97c30a68);
-        fVar1 = FLOAT_97c3acc8;
+        alpha = *pixelIn;
+        red = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(alpha) >> 0x10 & 0xff) - DOUBLE_97c30a68);
+        green = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(alpha) >> 8 & 0xff) - DOUBLE_97c30a68);
+        blue = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(alpha) & 0xff) - DOUBLE_97c30a68);
+        alpha = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(alpha) >> 0x18) - DOUBLE_97c30a68);
+        channelScale = FLOAT_97c3acc8;
       }
-      param_2[3] = fVar2 * fVar1;
-      *param_2 = fVar3 * fVar1;
-      param_2[1] = fVar5 * fVar1;
-      param_2[2] = fVar6 * fVar1;
+      color[3] = alpha * channelScale;
+      *color = red * channelScale;
+      color[1] = green * channelScale;
+      color[2] = blue * channelScale;
     }
     else {
-      fVar3 = *param_3;
-      fVar5 = param_3[1];
-      fVar6 = param_3[2];
-      param_2[3] = param_3[3];
-      *param_2 = fVar3;
-      param_2[1] = fVar5;
-      param_2[2] = fVar6;
+      red = *pixelIn;
+      green = pixelIn[1];
+      blue = pixelIn[2];
+      color[3] = pixelIn[3];
+      *color = red;
+      color[1] = green;
+      color[2] = blue;
     }
   }
   return;
 }
 
 /* _InterpreterWriteDestination @ 0x97bcd4d8 (1100 bytes) */
-int _InterpreterWriteDestination(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13)
-  int *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  uint param_9;
-  undefined4 param_10;
-  int param_11;
-  float *param_12;
-  undefined4 param_13;
+int _InterpreterWriteDestination(machine, componentOffsets, bankIndex, swizzle, indexInfo, storageFlags, operandWord5, operandWord6, writeMaskFlags, conditionSwizzleZW, element, value, updateConditionCode)
+  int *machine;
+  int componentOffsets;
+  int bankIndex;
+  uint swizzle;
+  undefined4 indexInfo;
+  undefined4 storageFlags;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
+  uint writeMaskFlags;
+  undefined4 conditionSwizzleZW;
+  int element;
+  float *value;
+  undefined4 updateConditionCode;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  int iVar1;
-  int iVar2;
-  float *pfVar3;
-  float *pfVar4;
-  float *pfVar5;
-  int *piVar6;
-  float *pfVar7;
-  int *piVar8;
-  undefined1 uVar9;
-  float local_50 [4];
-  float local_40;
-  float local_3c;
-  float local_38;
-  float local_34;
+  unsigned int ghidra_home[8] = { machine, componentOffsets, bankIndex, swizzle, indexInfo, storageFlags, operandWord5, operandWord6 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  int emulator;
+  int programInfo;
+  float *targetZ;
+  float *targetX;
+  float *componentTarget;
+  int *storageBase;
+  float *targetY;
+  int *componentSlot;
+  undefined1 conditionCode;
+  float scratch [4];
+  float swizzledX;
+  float swizzledY;
+  float swizzledZ;
+  float swizzledW;
   
-  pfVar5 = local_50;
-  local_40 = param_12[param_4 >> 0x18];
-  local_3c = param_12[param_4 >> 0x10 & 0xff];
-  local_38 = param_12[param_4 >> 8 & 0xff];
-  local_34 = param_12[param_4 & 0xff];
-  iVar1 = *param_1;
-  *param_12 = local_40;
-  param_12[1] = local_3c;
-  param_12[2] = local_38;
-  param_12[3] = local_34;
-  iVar2 = *(int *)(iVar1 + 0xd80);
-  (*(ushort *)((unsigned char *)ghidra_home + 20)) = (ushort)((uint)param_6 >> 0x10);
-  if (((*(int *)(iVar2 + 0x38) == 0x8804) || (*(int *)(iVar2 + 0x38) == 0x8b30)) &&
+  componentTarget = scratch;
+  swizzledX = value[swizzle >> 0x18];
+  swizzledY = value[swizzle >> 0x10 & 0xff];
+  swizzledZ = value[swizzle >> 8 & 0xff];
+  swizzledW = value[swizzle & 0xff];
+  emulator = *machine;
+  *value = swizzledX;
+  value[1] = swizzledY;
+  value[2] = swizzledZ;
+  value[3] = swizzledW;
+  programInfo = *(int *)(emulator + 0xd80);
+  (*(ushort *)((unsigned char *)ghidra_home + 20)) = (ushort)((uint)storageFlags >> 0x10);
+  if (((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) &&
      ((*(ushort *)((unsigned char *)ghidra_home + 20)) == 1)) {
-    piVar6 = param_1 + 0x292;
-    piVar8 = (int *)(param_2 + param_11 * 0x10);
+    storageBase = machine + 0x292;
+    componentSlot = (int *)(componentOffsets + element * 0x10);
   }
   else {
-    if (((*(int *)(iVar2 + 0x38) == 0x8804) || (*(int *)(iVar2 + 0x38) == 0x8b30)) &&
+    if (((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) &&
        ((*(ushort *)((unsigned char *)ghidra_home + 20)) == 9)) {
-      piVar6 = param_1 + 0x28c;
+      storageBase = machine + 0x28c;
     }
     else {
-      (*(char *)((unsigned char *)ghidra_home + 23)) = (char)param_6;
-      piVar6 = *(int **)((uint)(*(ushort *)((unsigned char *)ghidra_home + 20)) * 4 + iVar1 + 0xd84);
+      (*(char *)((unsigned char *)ghidra_home + 23)) = (char)storageFlags;
+      storageBase = *(int **)((uint)(*(ushort *)((unsigned char *)ghidra_home + 20)) * 4 + emulator + 0xd84);
       if ((*(char *)((unsigned char *)ghidra_home + 23)) != '\0') {
-        iVar2 = param_3 * 0xc + iVar2;
-        (*(short *)((unsigned char *)ghidra_home + 16)) = (short)((uint)param_5 >> 0x10);
-        iVar1 = *(int *)(iVar2 + 0x80);
-        piVar8 = (int *)(iVar1 + (((uint)((param_2 + param_11 * 0x10) - iVar1) >> 4) +
-                                  param_1[0x290] + (int)(*(short *)((unsigned char *)ghidra_home + 16)) & *(uint *)(iVar2 + 0x88)) *
+        programInfo = bankIndex * 0xc + programInfo;
+        (*(short *)((unsigned char *)ghidra_home + 16)) = (short)((uint)indexInfo >> 0x10);
+        emulator = *(int *)(programInfo + 0x80);
+        componentSlot = (int *)(emulator + (((uint)((componentOffsets + element * 0x10) - emulator) >> 4) +
+                                  machine[0x290] + (int)(*(short *)((unsigned char *)ghidra_home + 16)) & *(uint *)(programInfo + 0x88)) *
                                  0x10);
         goto LAB_97bcd680;
       }
     }
-    piVar8 = (int *)(param_2 + param_11 * 0x10);
+    componentSlot = (int *)(componentOffsets + element * 0x10);
   }
 LAB_97bcd680:
-  pfVar4 = pfVar5;
-  (*(int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  (*(uint *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  if ((((param_9 & 0x1000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,
-                                  param_9,param_10,0), iVar1 != 0)) &&
-     (pfVar4 = (float *)((int)piVar6 + *piVar8), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf(iVar1);
-    uVar9 = 3;
-    if ((iVar1 == 0) && (uVar9 = 0.0 < *param_12, *param_12 < 0.0)) {
-      uVar9 = 2;
+  targetX = componentTarget;
+  (*(int *)((unsigned char *)ghidra_home + 4)) = componentOffsets;
+  (*(int *)((unsigned char *)ghidra_home + 8)) = bankIndex;
+  (*(uint *)((unsigned char *)ghidra_home + 12)) = swizzle;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = indexInfo;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = storageFlags;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = operandWord5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = operandWord6;
+  if ((((writeMaskFlags & 0x1000000) != 0) &&
+      (emulator = ((int (*)())_InterpreterTestCR)(machine,componentOffsets,bankIndex,swizzle,indexInfo,storageFlags,operandWord5,operandWord6,
+                                  writeMaskFlags,conditionSwizzleZW,0), emulator != 0)) &&
+     (targetX = (float *)((int)storageBase + *componentSlot), (char)updateConditionCode != '\0')) {
+    emulator = ___isnanf(emulator);
+    conditionCode = 3;
+    if ((emulator == 0) && (conditionCode = 0.0 < *value, *value < 0.0)) {
+      conditionCode = 2;
     }
-    *(undefined1 *)(param_1 + 0x291) = uVar9;
+    *(undefined1 *)(machine + 0x291) = conditionCode;
   }
-  pfVar7 = pfVar5;
-  if ((((param_9 & 0x2000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
+  targetY = componentTarget;
+  if ((((writeMaskFlags & 0x2000000) != 0) &&
+      (emulator = ((int (*)())_InterpreterTestCR)(machine,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
                                   (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),
-                                  param_9,param_10,1), iVar1 != 0)) &&
-     (pfVar7 = (float *)((int)piVar6 + piVar8[1]), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf(iVar1);
-    uVar9 = 3;
-    if ((iVar1 == 0) && (uVar9 = 0.0 < param_12[1], param_12[1] < 0.0)) {
-      uVar9 = 2;
+                                  writeMaskFlags,conditionSwizzleZW,1), emulator != 0)) &&
+     (targetY = (float *)((int)storageBase + componentSlot[1]), (char)updateConditionCode != '\0')) {
+    emulator = ___isnanf(emulator);
+    conditionCode = 3;
+    if ((emulator == 0) && (conditionCode = 0.0 < value[1], value[1] < 0.0)) {
+      conditionCode = 2;
     }
-    *(undefined1 *)((int)param_1 + 0xa45) = uVar9;
+    *(undefined1 *)((int)machine + 0xa45) = conditionCode;
   }
-  pfVar3 = pfVar5;
-  if ((((param_9 & 0x4000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
+  targetZ = componentTarget;
+  if ((((writeMaskFlags & 0x4000000) != 0) &&
+      (emulator = ((int (*)())_InterpreterTestCR)(machine,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
                                   (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),
-                                  param_9,param_10,2), iVar1 != 0)) &&
-     (pfVar3 = (float *)((int)piVar6 + piVar8[2]), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf(iVar1);
-    uVar9 = 3;
-    if ((iVar1 == 0) && (uVar9 = 0.0 < param_12[2], param_12[2] < 0.0)) {
-      uVar9 = 2;
+                                  writeMaskFlags,conditionSwizzleZW,2), emulator != 0)) &&
+     (targetZ = (float *)((int)storageBase + componentSlot[2]), (char)updateConditionCode != '\0')) {
+    emulator = ___isnanf(emulator);
+    conditionCode = 3;
+    if ((emulator == 0) && (conditionCode = 0.0 < value[2], value[2] < 0.0)) {
+      conditionCode = 2;
     }
-    *(undefined1 *)((int)param_1 + 0xa46) = uVar9;
+    *(undefined1 *)((int)machine + 0xa46) = conditionCode;
   }
-  if ((((param_9 & 0x8000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
+  if ((((writeMaskFlags & 0x8000000) != 0) &&
+      (emulator = ((int (*)())_InterpreterTestCR)(machine,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
                                   (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),
-                                  param_9,param_10,3), iVar1 != 0)) &&
-     (pfVar5 = (float *)((int)piVar6 + piVar8[3]), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf(iVar1);
-    uVar9 = 3;
-    if ((iVar1 == 0) && (uVar9 = 0.0 < param_12[3], param_12[3] < 0.0)) {
-      uVar9 = 2;
+                                  writeMaskFlags,conditionSwizzleZW,3), emulator != 0)) &&
+     (componentTarget = (float *)((int)storageBase + componentSlot[3]), (char)updateConditionCode != '\0')) {
+    emulator = ___isnanf(emulator);
+    conditionCode = 3;
+    if ((emulator == 0) && (conditionCode = 0.0 < value[3], value[3] < 0.0)) {
+      conditionCode = 2;
     }
-    *(undefined1 *)((int)param_1 + 0xa47) = uVar9;
+    *(undefined1 *)((int)machine + 0xa47) = conditionCode;
   }
-  *pfVar4 = *param_12;
-  *pfVar7 = param_12[1];
-  *pfVar3 = param_12[2];
-  *pfVar5 = param_12[3];
+  *targetX = *value;
+  *targetY = value[1];
+  *targetZ = value[2];
+  *componentTarget = value[3];
   return;
 }
 
 /* _InterpreterLoadSource @ 0x97bcd924 (796 bytes) */
-int _InterpreterLoadSource(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int *param_1;
-  int *param_2;
-  int param_3;
-  uint param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  uint param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  int param_11;
-  float *param_12;
+int _InterpreterLoadSource(machine, componentOffsets, bankIndex, swizzle, indexInfo, storageFlags, operandWord5, valueType, operandWord7, operandWord8, element, result)
+  int *machine;
+  int *componentOffsets;
+  int bankIndex;
+  uint swizzle;
+  undefined4 indexInfo;
+  undefined4 storageFlags;
+  undefined4 operandWord5;
+  uint valueType;
+  undefined4 operandWord7;
+  undefined4 operandWord8;
+  int element;
+  float *result;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  double dVar5;
+  float x;
+  float y;
+  float z;
+  float w;
+  double intToFloatBias;
   int iVar6;
-  int *piVar7;
+  int *componentSlot;
   int iVar8;
-  int iVar9;
-  byte bStack00000024;
-  byte bStack00000025;
-  byte bStack00000026;
-  short sStack00000028;
-  ushort uStack0000002c;
-  char cStack0000002e;
-  char cStack0000002f;
+  int emulator;
+  byte swizzleX;
+  byte swizzleY;
+  byte swizzleZ;
+  short relativeOffset;
+  ushort storageClass;
+  char negate;
+  char relativeAddressing;
   
-  dVar5 = DOUBLE_97c30a58;
-  iVar9 = *param_1;
-  iVar6 = *(int *)(*(int *)(iVar9 + 0xd80) + 0x38);
-  uStack0000002c = (ushort)((uint)param_6 >> 0x10);
-  bStack00000026 = (byte)(param_4 >> 8);
-  bStack00000025 = (byte)(param_4 >> 0x10);
-  bStack00000024 = (byte)(param_4 >> 0x18);
-  if (((iVar6 == 0x8804) || (iVar6 == 0x8b30)) && (uStack0000002c == 2)) {
-    iVar6 = *(int *)(iVar9 + 0xda4);
-    iVar9 = *(int *)(iVar9 + 0xda0);
-    fVar1 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000024]) * GH_U2F((unsigned int)(param_1[0x28c]))
-            + *(float *)(iVar9 + param_2[param_11 * 4 + (uint)bStack00000024]);
-    *param_12 = fVar1;
-    fVar2 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000025]) * GH_U2F((unsigned int)(param_1[0x28c]))
-            + *(float *)(iVar9 + param_2[param_11 * 4 + (uint)bStack00000025]);
-    param_12[1] = fVar2;
-    fVar3 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000026]) * GH_U2F((unsigned int)(param_1[0x28c]))
-            + *(float *)(iVar9 + param_2[param_11 * 4 + (uint)bStack00000026]);
-    param_12[2] = fVar3;
-    fVar4 = *(float *)(iVar6 + param_2[param_11 * 4 + (param_4 & 0xff)]) * GH_U2F((unsigned int)(param_1[0x28c])) +
-            *(float *)(iVar9 + param_2[param_11 * 4 + (param_4 & 0xff)]);
-    param_12[3] = fVar4;
-    if (*param_2 != 0) {
-      *param_12 = fVar1 * GH_U2F((unsigned int)(param_1[0x28f]));
-      param_12[1] = fVar2 * GH_U2F((unsigned int)(param_1[0x28f]));
-      param_12[2] = fVar3 * GH_U2F((unsigned int)(param_1[0x28f]));
-      param_12[3] = fVar4 * GH_U2F((unsigned int)(param_1[0x28f]));
+  intToFloatBias = DOUBLE_97c30a58;
+  emulator = *machine;
+  iVar6 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  storageClass = (ushort)((uint)storageFlags >> 0x10);
+  swizzleZ = (byte)(swizzle >> 8);
+  swizzleY = (byte)(swizzle >> 0x10);
+  swizzleX = (byte)(swizzle >> 0x18);
+  if (((iVar6 == 0x8804) || (iVar6 == 0x8b30)) && (storageClass == 2)) {
+    iVar6 = *(int *)(emulator + 0xda4);
+    emulator = *(int *)(emulator + 0xda0);
+    x = *(float *)(iVar6 + componentOffsets[element * 4 + (uint)swizzleX]) * GH_U2F((unsigned int)(machine[0x28c]))
+            + *(float *)(emulator + componentOffsets[element * 4 + (uint)swizzleX]);
+    *result = x;
+    y = *(float *)(iVar6 + componentOffsets[element * 4 + (uint)swizzleY]) * GH_U2F((unsigned int)(machine[0x28c]))
+            + *(float *)(emulator + componentOffsets[element * 4 + (uint)swizzleY]);
+    result[1] = y;
+    z = *(float *)(iVar6 + componentOffsets[element * 4 + (uint)swizzleZ]) * GH_U2F((unsigned int)(machine[0x28c]))
+            + *(float *)(emulator + componentOffsets[element * 4 + (uint)swizzleZ]);
+    result[2] = z;
+    w = *(float *)(iVar6 + componentOffsets[element * 4 + (swizzle & 0xff)]) * GH_U2F((unsigned int)(machine[0x28c])) +
+            *(float *)(emulator + componentOffsets[element * 4 + (swizzle & 0xff)]);
+    result[3] = w;
+    if (*componentOffsets != 0) {
+      *result = x * GH_U2F((unsigned int)(machine[0x28f]));
+      result[1] = y * GH_U2F((unsigned int)(machine[0x28f]));
+      result[2] = z * GH_U2F((unsigned int)(machine[0x28f]));
+      result[3] = w * GH_U2F((unsigned int)(machine[0x28f]));
     }
   }
   else {
-    cStack0000002f = (char)param_6;
-    if (cStack0000002f == '\0') {
-      piVar7 = param_2 + param_11 * 4;
+    relativeAddressing = (char)storageFlags;
+    if (relativeAddressing == '\0') {
+      componentSlot = componentOffsets + element * 4;
     }
     else {
-      iVar8 = param_3 * 0xc + *(int *)(iVar9 + 0xd80);
-      sStack00000028 = (short)((uint)param_5 >> 0x10);
+      iVar8 = bankIndex * 0xc + *(int *)(emulator + 0xd80);
+      relativeOffset = (short)((uint)indexInfo >> 0x10);
       iVar6 = *(int *)(iVar8 + 0x80);
-      piVar7 = (int *)(iVar6 + (((uint)((int)param_2 + (param_11 * 0x10 - iVar6)) >> 4) +
-                                param_1[0x290] + (int)sStack00000028 & *(uint *)(iVar8 + 0x88)) *
+      componentSlot = (int *)(iVar6 + (((uint)((int)componentOffsets + (element * 0x10 - iVar6)) >> 4) +
+                                machine[0x290] + (int)relativeOffset & *(uint *)(iVar8 + 0x88)) *
                                0x10);
     }
-    iVar6 = *(int *)((uint)uStack0000002c * 4 + iVar9 + 0xd84);
-    if (param_8 < 2) {
-      *param_12 = *(float *)(iVar6 + piVar7[bStack00000024]);
-      param_12[1] = *(float *)(iVar6 + piVar7[bStack00000025]);
-      param_12[2] = *(float *)(iVar6 + piVar7[bStack00000026]);
-      fVar1 = *(float *)(iVar6 + piVar7[param_4 & 0xff]);
+    iVar6 = *(int *)((uint)storageClass * 4 + emulator + 0xd84);
+    if (valueType < 2) {
+      *result = *(float *)(iVar6 + componentSlot[swizzleX]);
+      result[1] = *(float *)(iVar6 + componentSlot[swizzleY]);
+      result[2] = *(float *)(iVar6 + componentSlot[swizzleZ]);
+      x = *(float *)(iVar6 + componentSlot[swizzle & 0xff]);
     }
     else {
-      if (1 < param_8 - 3) goto LAB_97bcdbfc;
-      *param_12 = (float)((double)CONCAT44(0x43300000,
-                                           *(uint *)(iVar6 + piVar7[bStack00000024]) ^ 0x80000000) -
+      if (1 < valueType - 3) goto LAB_97bcdbfc;
+      *result = (float)((double)CONCAT44(0x43300000,
+                                           *(uint *)(iVar6 + componentSlot[swizzleX]) ^ 0x80000000) -
                          DOUBLE_97c30a58);
-      param_12[1] = (float)((double)CONCAT44(0x43300000,
-                                             *(uint *)(iVar6 + piVar7[bStack00000025]) ^ 0x80000000)
-                           - dVar5);
-      param_12[2] = (float)((double)CONCAT44(0x43300000,
-                                             *(uint *)(iVar6 + piVar7[bStack00000026]) ^ 0x80000000)
-                           - dVar5);
-      fVar1 = (float)((double)CONCAT44(0x43300000,
-                                       *(uint *)(iVar6 + piVar7[param_4 & 0xff]) ^ 0x80000000) -
-                     dVar5);
+      result[1] = (float)((double)CONCAT44(0x43300000,
+                                             *(uint *)(iVar6 + componentSlot[swizzleY]) ^ 0x80000000)
+                           - intToFloatBias);
+      result[2] = (float)((double)CONCAT44(0x43300000,
+                                             *(uint *)(iVar6 + componentSlot[swizzleZ]) ^ 0x80000000)
+                           - intToFloatBias);
+      x = (float)((double)CONCAT44(0x43300000,
+                                       *(uint *)(iVar6 + componentSlot[swizzle & 0xff]) ^ 0x80000000) -
+                     intToFloatBias);
     }
-    param_12[3] = fVar1;
+    result[3] = x;
   }
 LAB_97bcdbfc:
-  cStack0000002e = (char)((uint)param_6 >> 8);
-  if (cStack0000002e != '\0') {
-    *param_12 = -*param_12;
-    param_12[1] = -param_12[1];
-    param_12[2] = -param_12[2];
-    param_12[3] = -param_12[3];
+  negate = (char)((uint)storageFlags >> 8);
+  if (negate != '\0') {
+    *result = -*result;
+    result[1] = -result[1];
+    result[2] = -result[2];
+    result[3] = -result[3];
   }
   return;
 }
 
 /* _InterpreterTestCR @ 0x97bcdc40 (240 bytes) */
-int _InterpreterTestCR(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  uint param_9;
-  undefined4 param_10;
-  int param_11;
+int _InterpreterTestCR(machine, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6, conditionWord, conditionSwizzleZW, component)
+  int machine;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
+  uint conditionWord;
+  undefined4 conditionSwizzleZW;
+  int component;
 {
-  uint uVar1;
-  uint uVar2;
+  uint passes;
+  uint conditionCode;
   
-  uVar1 = 0;
-  uVar2 = (uint)*(byte *)((uint)*(byte *)((int)&param_9 + param_11 + 2) + param_1 + 0xa44);
-  switch(param_9 >> 0x10 & 0xff) {
+  passes = 0;
+  conditionCode = (uint)*(byte *)((uint)*(byte *)((int)&conditionWord + component + 2) + machine + 0xa44);
+  switch(conditionWord >> 0x10 & 0xff) {
   case 0:
-    uVar1 = 1;
+    passes = 1;
     break;
   case 1:
-    uVar1 = (uint)(uVar2 == 0);
+    passes = (uint)(conditionCode == 0);
     break;
   case 2:
-    uVar1 = (uint)(uVar2 < 2);
+    passes = (uint)(conditionCode < 2);
     break;
   case 3:
-    uVar1 = (uint)(uVar2 == 1);
+    passes = (uint)(conditionCode == 1);
     break;
   case 4:
-    uVar1 = 0;
-    if ((uVar2 == 2) || (uVar2 == 0)) {
-      uVar1 = 1;
+    passes = 0;
+    if ((conditionCode == 2) || (conditionCode == 0)) {
+      passes = 1;
     }
     break;
   case 5:
-    uVar1 = (uint)(uVar2 == 2);
+    passes = (uint)(conditionCode == 2);
     break;
   case 6:
-    uVar1 = -uVar2 >> 0x1f;
+    passes = -conditionCode >> 0x1f;
     break;
   case 7:
-    uVar1 = 0;
+    passes = 0;
   }
-  return uVar1;
+  return passes;
 }
 
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  uint textureTarget;
+  float *srcElementPtr;
+  uint destUpdatesCC;
+  int sourceOffset;
+  int destWriteMask;
+  int intComponentI26;
+  int destSwizzle;
+  int destBankIndex;
+  uint sourceElement2;
+  int programInfo;
+  int intComponentI14;
+  int destOffsetTable;
+  int sourceCount;
+  double logValue;
+  double expValue;
+  double sqrtValue;
+  double log2Value;
+  double exp2Value;
+  double mathAccumulator;
+  double intAsDouble;
+  double floorValue;
+  double powValue;
+  uint intComponent;
+  uint dimension;
+  uint boolBit;
+  float *componentCursor;
+  float degRadFactor;
+  float squaredComponent;
+  float operandComponent;
   int conditionResult;
   double exp2Result2;
   double floorResult2;
@@ -3171,60 +3200,60 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   uint loopIndex2;
   float *pfVar1;
   bool bVar2;
-  char cVar3;
+  char saturate;
   byte bVar4;
-  char cVar5;
+  char swizzleSelect;
   float fVar6;
   float fVar7;
-  uint uVar8;
+  uint boolBit8;
   byte *pbVar9;
-  float *pfVar10;
+  float *operandScratch;
   int *piVar11;
-  float *in_r5;
-  int iVar12;
-  int iVar13;
+  float *in_r5_artifact;
+  int destIndexInfo;
+  int destStorageFlags;
   int iVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
-  int *piVar18;
-  int iVar19;
-  uint uVar20;
-  int iVar21;
-  int iVar22;
-  float *pfVar23;
-  uint uVar24;
+  int destWord5;
+  int destValueType;
+  uint scalarSourceIndex;
+  int *nextInst;
+  int emulator;
+  uint elementCount;
+  int opcode;
+  int destConditionSwizzleZW;
+  float *srcAPtr;
+  uint sourceElement;
   bool bVar25;
-  int iVar26;
+  int sourcesRemaining;
   double dVar27;
   double dVar28;
-  double dVar29;
-  double dVar30;
-  double dVar31;
+  double floorValue_29;
+  double floorValue_30;
+  double floorValue_31;
   double in_stack_fffffe78;
   double in_stack_fffffe80;
   double in_stack_fffffe88;
   double in_stack_fffffe90;
   double in_stack_fffffe98;
-  undefined4 uVar32;
+  undefined4 destElement;
   float opVec [12];
-  float local_100 [4];
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e4;
-  float local_e0;
-  float local_dc;
-  float local_d8;
-  float local_d4;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c4;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  float local_b4;
+  float srcC [4];
+  float prodC0R0;
+  float prodC0R1;
+  float prodC0R2;
+  float prodC0R3;
+  float prodC1R0;
+  float prodC1R1;
+  float prodC1R2;
+  float prodC1R3;
+  float prodC2R0;
+  float prodC2R1;
+  float prodC2R2;
+  float prodC2R3;
+  float prodC3R0;
+  float prodC3R1;
+  float prodC3R2;
+  float prodC3R3;
   undefined4 local_b0;
   uint uStack_ac;
   longlong local_a8;
@@ -3237,147 +3266,147 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   float local_74;
   float local_70;
   
-  iVar19 = *machine;
-  piVar18 = inst + 0x47;
-  if (inst == *(int **)(*(int *)(iVar19 + 0xd80) + 4)) {
-    piVar18 = (int *)0x0;
+  emulator = *machine;
+  nextInst = inst + 0x47;
+  if (inst == *(int **)(*(int *)(emulator + 0xd80) + 4)) {
+    nextInst = (int *)0x0;
   }
-  iVar14 = inst[0xc];
+  sourceCount = inst[0xc];
   opVec[3] = 0.0;
-  uVar20 = 1;
+  elementCount = 1;
   opVec[0] = 0.0;
   opVec[1] = 0.0;
   bVar25 = true;
   opVec[2] = 0.0;
-  iVar21 = *inst;
-  cVar3 = *(char *)(inst + 1);
-  if (iVar14 != 0) {
+  opcode = *inst;
+  saturate = *(char *)(inst + 1);
+  if (sourceCount != 0) {
     pbVar9 = (byte *)((int)inst + 0x49);
-    iVar26 = iVar14;
+    sourcesRemaining = sourceCount;
     do {
-      if ((pbVar9[-1] != 0) && (uVar20 < *pbVar9)) {
-        uVar20 = (uint)*pbVar9;
+      if ((pbVar9[-1] != 0) && (elementCount < *pbVar9)) {
+        elementCount = (uint)*pbVar9;
       }
       pbVar9 = pbVar9 + 0x24;
-      iVar26 = iVar26 + -1;
-    } while (iVar26 != 0);
+      sourcesRemaining = sourcesRemaining + -1;
+    } while (sourcesRemaining != 0);
   }
-  if (iVar21 == 0x22) {
-    cVar3 = *(char *)(inst + 0x12);
-    if ((cVar3 == '\0') && (*(char *)(inst + 0x1b) == '\0')) {
+  if (opcode == 0x22) {
+    saturate = *(char *)(inst + 0x12);
+    if ((saturate == '\0') && (*(char *)(inst + 0x1b) == '\0')) {
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                  inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,opVec + 4);
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                  inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,opVec + 8);
-      pfVar10 = opVec;
+      operandScratch = opVec;
       opVec[0] = opVec[4] * opVec[8];
       opVec[1] = opVec[5] * opVec[9];
       opVec[2] = opVec[6] * opVec[10];
-      iVar16 = inst[9];
+      destValueType = inst[9];
       opVec[3] = opVec[7] * opVec[0xb];
-      uVar20 = (uint)*(byte *)((int)inst + 6);
-      iVar19 = inst[10];
-      iVar22 = inst[0xb];
-      iVar14 = inst[3];
-      iVar21 = inst[4];
-      iVar26 = inst[5];
-      iVar12 = inst[6];
-      iVar13 = inst[7];
-      iVar15 = inst[8];
-      uVar32 = 0;
+      destUpdatesCC = (uint)*(byte *)((int)inst + 6);
+      destWriteMask = inst[10];
+      destConditionSwizzleZW = inst[0xb];
+      destOffsetTable = inst[3];
+      destBankIndex = inst[4];
+      destSwizzle = inst[5];
+      destIndexInfo = inst[6];
+      destStorageFlags = inst[7];
+      destWord5 = inst[8];
+      destElement = 0;
     }
-    else if ((cVar3 == '\0') ||
+    else if ((saturate == '\0') ||
             ((*(char *)(inst + 0x1b) == '\0' ||
              (*(char *)((int)inst + 0x49) != *(char *)((int)inst + 0x6d))))) {
-      if ((cVar3 == '\0') || (*(byte *)((int)inst + 0x6d) < 2)) {
+      if ((saturate == '\0') || (*(byte *)((int)inst + 0x6d) < 2)) {
         if ((*(char *)(inst + 0x1b) == '\0') || (*(byte *)((int)inst + 0x49) < 2)) {
-          uVar17 = (uint)(cVar3 == '\0');
-          if (uVar17 == 0) {
-            iVar19 = 0x54;
+          scalarSourceIndex = (uint)(saturate == '\0');
+          if (scalarSourceIndex == 0) {
+            sourceOffset = 0x54;
           }
           else {
-            iVar19 = 0x30;
+            sourceOffset = 0x30;
           }
-          pfVar10 = opVec + 8;
-          ((int (*)())_InterpreterLoadSource)(machine,*(undefined4 *)((int)inst + iVar19 + 4),
-                     *(undefined4 *)((int)inst + iVar19 + 8),
-                     *(undefined4 *)((int)inst + iVar19 + 0xc),
-                     *(undefined4 *)((int)inst + iVar19 + 0x10),
-                     *(undefined4 *)((int)inst + iVar19 + 0x14),
-                     *(undefined4 *)((int)inst + iVar19 + 0x18),
-                     *(undefined4 *)((int)inst + iVar19 + 0x1c),
-                     *(undefined4 *)((int)inst + iVar19 + 0x20),
-                     *(undefined4 *)((int)inst + iVar19 + 0x24),0,opVec + 4);
-          ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                     inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],inst[uVar17 * 9 + 0x11]
-                     ,inst[uVar17 * 9 + 0x12],inst[uVar17 * 9 + 0x13],
-                     inst[uVar17 * 9 + 0x14],inst[uVar17 * 9 + 0x15],0,pfVar10);
-          if (uVar20 == 2) {
-            uVar32 = 1;
+          operandScratch = opVec + 8;
+          ((int (*)())_InterpreterLoadSource)(machine,*(undefined4 *)((int)inst + sourceOffset + 4),
+                     *(undefined4 *)((int)inst + sourceOffset + 8),
+                     *(undefined4 *)((int)inst + sourceOffset + 0xc),
+                     *(undefined4 *)((int)inst + sourceOffset + 0x10),
+                     *(undefined4 *)((int)inst + sourceOffset + 0x14),
+                     *(undefined4 *)((int)inst + sourceOffset + 0x18),
+                     *(undefined4 *)((int)inst + sourceOffset + 0x1c),
+                     *(undefined4 *)((int)inst + sourceOffset + 0x20),
+                     *(undefined4 *)((int)inst + sourceOffset + 0x24),0,opVec + 4);
+          ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                     inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],inst[scalarSourceIndex * 9 + 0x11]
+                     ,inst[scalarSourceIndex * 9 + 0x12],inst[scalarSourceIndex * 9 + 0x13],
+                     inst[scalarSourceIndex * 9 + 0x14],inst[scalarSourceIndex * 9 + 0x15],0,operandScratch);
+          if (elementCount == 2) {
+            destElement = 1;
             opVec[0] = opVec[4] * opVec[8];
             opVec[1] = opVec[4] * opVec[9];
             ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
                        inst[9],inst[10],inst[0xb],0,opVec,
                        (uint)*(byte *)((int)inst + 6));
-            ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                       inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],
-                       inst[uVar17 * 9 + 0x11],inst[uVar17 * 9 + 0x12],
-                       inst[uVar17 * 9 + 0x13],inst[uVar17 * 9 + 0x14],
-                       inst[uVar17 * 9 + 0x15],1,pfVar10);
+            ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                       inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],
+                       inst[scalarSourceIndex * 9 + 0x11],inst[scalarSourceIndex * 9 + 0x12],
+                       inst[scalarSourceIndex * 9 + 0x13],inst[scalarSourceIndex * 9 + 0x14],
+                       inst[scalarSourceIndex * 9 + 0x15],1,operandScratch);
             opVec[0] = opVec[4] * opVec[8];
-            iVar16 = inst[9];
+            destValueType = inst[9];
             opVec[1] = opVec[4] * opVec[9];
             bVar4 = *(byte *)((int)inst + 6);
-            iVar19 = inst[10];
-            iVar22 = inst[0xb];
-            iVar14 = inst[3];
-            iVar21 = inst[4];
-            iVar26 = inst[5];
-            iVar12 = inst[6];
-            iVar13 = inst[7];
-            iVar15 = inst[8];
+            destWriteMask = inst[10];
+            destConditionSwizzleZW = inst[0xb];
+            destOffsetTable = inst[3];
+            destBankIndex = inst[4];
+            destSwizzle = inst[5];
+            destIndexInfo = inst[6];
+            destStorageFlags = inst[7];
+            destWord5 = inst[8];
           }
-          else if (uVar20 == 3) {
+          else if (elementCount == 3) {
             opVec[0] = opVec[4] * opVec[8];
             opVec[2] = opVec[4] * opVec[10];
             opVec[1] = opVec[4] * opVec[9];
             ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
                        inst[9],inst[10],inst[0xb],0,opVec,
                        (uint)*(byte *)((int)inst + 6));
-            ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                       inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],
-                       inst[uVar17 * 9 + 0x11],inst[uVar17 * 9 + 0x12],
-                       inst[uVar17 * 9 + 0x13],inst[uVar17 * 9 + 0x14],
-                       inst[uVar17 * 9 + 0x15],1,pfVar10);
+            ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                       inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],
+                       inst[scalarSourceIndex * 9 + 0x11],inst[scalarSourceIndex * 9 + 0x12],
+                       inst[scalarSourceIndex * 9 + 0x13],inst[scalarSourceIndex * 9 + 0x14],
+                       inst[scalarSourceIndex * 9 + 0x15],1,operandScratch);
             opVec[0] = opVec[4] * opVec[8];
             opVec[2] = opVec[4] * opVec[10];
             opVec[1] = opVec[4] * opVec[9];
             ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
                        inst[9],inst[10],inst[0xb],1,opVec,
                        (uint)*(byte *)((int)inst + 6));
-            ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                       inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],
-                       inst[uVar17 * 9 + 0x11],inst[uVar17 * 9 + 0x12],
-                       inst[uVar17 * 9 + 0x13],inst[uVar17 * 9 + 0x14],
-                       inst[uVar17 * 9 + 0x15],2,pfVar10);
+            ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                       inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],
+                       inst[scalarSourceIndex * 9 + 0x11],inst[scalarSourceIndex * 9 + 0x12],
+                       inst[scalarSourceIndex * 9 + 0x13],inst[scalarSourceIndex * 9 + 0x14],
+                       inst[scalarSourceIndex * 9 + 0x15],2,operandScratch);
             opVec[0] = opVec[4] * opVec[8];
             opVec[2] = opVec[4] * opVec[10];
-            iVar16 = inst[9];
+            destValueType = inst[9];
             opVec[1] = opVec[4] * opVec[9];
             bVar4 = *(byte *)((int)inst + 6);
-            iVar19 = inst[10];
-            iVar22 = inst[0xb];
-            iVar14 = inst[3];
-            iVar21 = inst[4];
-            iVar26 = inst[5];
-            iVar12 = inst[6];
-            iVar13 = inst[7];
-            iVar15 = inst[8];
-            uVar32 = 2;
+            destWriteMask = inst[10];
+            destConditionSwizzleZW = inst[0xb];
+            destOffsetTable = inst[3];
+            destBankIndex = inst[4];
+            destSwizzle = inst[5];
+            destIndexInfo = inst[6];
+            destStorageFlags = inst[7];
+            destWord5 = inst[8];
+            destElement = 2;
           }
           else {
-            if (uVar20 != 4) {
-              return piVar18;
+            if (elementCount != 4) {
+              return nextInst;
             }
             opVec[0] = opVec[4] * opVec[8];
             opVec[3] = opVec[4] * opVec[0xb];
@@ -3386,24 +3415,24 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
                        inst[9],inst[10],inst[0xb],0,opVec,
                        (uint)*(byte *)((int)inst + 6));
-            ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                       inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],
-                       inst[uVar17 * 9 + 0x11],inst[uVar17 * 9 + 0x12],
-                       inst[uVar17 * 9 + 0x13],inst[uVar17 * 9 + 0x14],
-                       inst[uVar17 * 9 + 0x15],1,pfVar10);
+            ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                       inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],
+                       inst[scalarSourceIndex * 9 + 0x11],inst[scalarSourceIndex * 9 + 0x12],
+                       inst[scalarSourceIndex * 9 + 0x13],inst[scalarSourceIndex * 9 + 0x14],
+                       inst[scalarSourceIndex * 9 + 0x15],1,operandScratch);
             opVec[0] = opVec[4] * opVec[8];
             opVec[3] = opVec[4] * opVec[0xb];
             opVec[1] = opVec[4] * opVec[9];
             opVec[2] = opVec[4] * opVec[10];
-            uVar32 = 3;
+            destElement = 3;
             ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
                        inst[9],inst[10],inst[0xb],1,opVec,
                        (uint)*(byte *)((int)inst + 6));
-            ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                       inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],
-                       inst[uVar17 * 9 + 0x11],inst[uVar17 * 9 + 0x12],
-                       inst[uVar17 * 9 + 0x13],inst[uVar17 * 9 + 0x14],
-                       inst[uVar17 * 9 + 0x15],2,pfVar10);
+            ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                       inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],
+                       inst[scalarSourceIndex * 9 + 0x11],inst[scalarSourceIndex * 9 + 0x12],
+                       inst[scalarSourceIndex * 9 + 0x13],inst[scalarSourceIndex * 9 + 0x14],
+                       inst[scalarSourceIndex * 9 + 0x15],2,operandScratch);
             opVec[0] = opVec[4] * opVec[8];
             opVec[3] = opVec[4] * opVec[0xb];
             opVec[1] = opVec[4] * opVec[9];
@@ -3411,403 +3440,403 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
                        inst[9],inst[10],inst[0xb],2,opVec,
                        (uint)*(byte *)((int)inst + 6));
-            ((int (*)())_InterpreterLoadSource)(machine,inst[uVar17 * 9 + 0xd],inst[uVar17 * 9 + 0xe],
-                       inst[uVar17 * 9 + 0xf],inst[uVar17 * 9 + 0x10],
-                       inst[uVar17 * 9 + 0x11],inst[uVar17 * 9 + 0x12],
-                       inst[uVar17 * 9 + 0x13],inst[uVar17 * 9 + 0x14],
-                       inst[uVar17 * 9 + 0x15],3,pfVar10);
+            ((int (*)())_InterpreterLoadSource)(machine,inst[scalarSourceIndex * 9 + 0xd],inst[scalarSourceIndex * 9 + 0xe],
+                       inst[scalarSourceIndex * 9 + 0xf],inst[scalarSourceIndex * 9 + 0x10],
+                       inst[scalarSourceIndex * 9 + 0x11],inst[scalarSourceIndex * 9 + 0x12],
+                       inst[scalarSourceIndex * 9 + 0x13],inst[scalarSourceIndex * 9 + 0x14],
+                       inst[scalarSourceIndex * 9 + 0x15],3,operandScratch);
             opVec[0] = opVec[4] * opVec[8];
             opVec[3] = opVec[4] * opVec[0xb];
             opVec[1] = opVec[4] * opVec[9];
-            iVar16 = inst[9];
+            destValueType = inst[9];
             opVec[2] = opVec[4] * opVec[10];
             bVar4 = *(byte *)((int)inst + 6);
-            iVar19 = inst[10];
-            iVar22 = inst[0xb];
-            iVar14 = inst[3];
-            iVar21 = inst[4];
-            iVar26 = inst[5];
-            iVar12 = inst[6];
-            iVar13 = inst[7];
-            iVar15 = inst[8];
+            destWriteMask = inst[10];
+            destConditionSwizzleZW = inst[0xb];
+            destOffsetTable = inst[3];
+            destBankIndex = inst[4];
+            destSwizzle = inst[5];
+            destIndexInfo = inst[6];
+            destStorageFlags = inst[7];
+            destWord5 = inst[8];
           }
-          pfVar10 = opVec;
-          uVar20 = (uint)bVar4;
+          operandScratch = opVec;
+          destUpdatesCC = (uint)bVar4;
           goto LAB_97bd043c;
         }
-        pfVar10 = opVec + 8;
+        operandScratch = opVec + 8;
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                    inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,opVec + 4);
         ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,pfVar10);
-        if (uVar20 == 2) {
+                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,operandScratch);
+        if (elementCount == 2) {
           opVec[0] = opVec[4] * opVec[8] + opVec[5] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,pfVar10);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
           opVec[1] = opVec[4] * opVec[8] + opVec[5] * opVec[9];
         }
-        else if (uVar20 == 3) {
+        else if (elementCount == 3) {
           opVec[0] = opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,pfVar10);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
           opVec[1] = opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,pfVar10);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,operandScratch);
           opVec[2] = opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
         }
-        else if (uVar20 == 4) {
+        else if (elementCount == 4) {
           opVec[0] = opVec[7] * opVec[0xb] +
                          opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,pfVar10);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
           opVec[1] = opVec[7] * opVec[0xb] +
                          opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,pfVar10);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,operandScratch);
           opVec[2] = opVec[7] * opVec[0xb] +
                          opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],3,pfVar10);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],3,operandScratch);
           opVec[3] = opVec[7] * opVec[0xb] +
                          opVec[6] * opVec[10] +
                          opVec[4] * opVec[8] + opVec[5] * opVec[9];
         }
       }
       else {
-        pfVar10 = opVec + 8;
+        operandScratch = opVec + 8;
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar10);
+                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,operandScratch);
         ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                    inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,opVec + 4);
-        if (uVar20 == 2) {
+        if (elementCount == 2) {
           opVec[0] = opVec[4] * opVec[8];
           opVec[1] = opVec[4] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar10);
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,operandScratch);
           opVec[0] = opVec[5] * opVec[8] + opVec[0];
           opVec[1] = opVec[5] * opVec[9] + opVec[1];
         }
-        else if (uVar20 == 3) {
+        else if (elementCount == 3) {
           opVec[0] = opVec[4] * opVec[8];
           opVec[2] = opVec[4] * opVec[10];
           opVec[1] = opVec[4] * opVec[9];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar10);
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,operandScratch);
           opVec[0] = opVec[5] * opVec[8] + opVec[0];
           opVec[2] = opVec[5] * opVec[10] + opVec[2];
           opVec[1] = opVec[5] * opVec[9] + opVec[1];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar10);
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,operandScratch);
           opVec[0] = opVec[6] * opVec[8] + opVec[0];
           opVec[2] = opVec[6] * opVec[10] + opVec[2];
           opVec[1] = opVec[6] * opVec[9] + opVec[1];
         }
-        else if (uVar20 == 4) {
+        else if (elementCount == 4) {
           opVec[0] = opVec[4] * opVec[8];
           opVec[3] = opVec[4] * opVec[0xb];
           opVec[1] = opVec[4] * opVec[9];
           opVec[2] = opVec[4] * opVec[10];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar10);
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,operandScratch);
           opVec[0] = opVec[5] * opVec[8] + opVec[0];
           opVec[3] = opVec[5] * opVec[0xb] + opVec[3];
           opVec[1] = opVec[5] * opVec[9] + opVec[1];
           opVec[2] = opVec[5] * opVec[10] + opVec[2];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar10);
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,operandScratch);
           opVec[0] = opVec[6] * opVec[8] + opVec[0];
           opVec[3] = opVec[6] * opVec[0xb] + opVec[3];
           opVec[1] = opVec[6] * opVec[9] + opVec[1];
           opVec[2] = opVec[6] * opVec[10] + opVec[2];
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],3,pfVar10);
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],3,operandScratch);
           opVec[0] = opVec[7] * opVec[8] + opVec[0];
           opVec[3] = opVec[7] * opVec[0xb] + opVec[3];
           opVec[1] = opVec[7] * opVec[9] + opVec[1];
           opVec[2] = opVec[7] * opVec[10] + opVec[2];
         }
       }
-      uVar20 = (uint)*(byte *)((int)inst + 6);
-      iVar19 = inst[10];
-      pfVar10 = opVec;
-      iVar22 = inst[0xb];
-      iVar16 = inst[9];
-      iVar14 = inst[3];
-      iVar21 = inst[4];
-      iVar26 = inst[5];
-      iVar12 = inst[6];
-      iVar13 = inst[7];
-      iVar15 = inst[8];
-      uVar32 = 0;
+      destUpdatesCC = (uint)*(byte *)((int)inst + 6);
+      destWriteMask = inst[10];
+      operandScratch = opVec;
+      destConditionSwizzleZW = inst[0xb];
+      destValueType = inst[9];
+      destOffsetTable = inst[3];
+      destBankIndex = inst[4];
+      destSwizzle = inst[5];
+      destIndexInfo = inst[6];
+      destStorageFlags = inst[7];
+      destWord5 = inst[8];
+      destElement = 0;
     }
-    else if (uVar20 == 2) {
-      pfVar10 = opVec + 4;
+    else if (elementCount == 2) {
+      operandScratch = opVec + 4;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar10);
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,operandScratch);
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                  inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,opVec + 8);
-      local_f0 = opVec[4] * opVec[8];
-      local_ec = opVec[5] * opVec[8];
+      prodC0R0 = opVec[4] * opVec[8];
+      prodC0R1 = opVec[5] * opVec[8];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar10);
-      local_f0 = opVec[4] * opVec[9] + local_f0;
-      local_ec = opVec[5] * opVec[9] + local_ec;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,operandScratch);
+      prodC0R0 = opVec[4] * opVec[9] + prodC0R0;
+      prodC0R1 = opVec[5] * opVec[9] + prodC0R1;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                  inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,opVec + 8);
-      local_e0 = opVec[4] * opVec[9];
-      local_dc = opVec[5] * opVec[9];
+      prodC1R0 = opVec[4] * opVec[9];
+      prodC1R1 = opVec[5] * opVec[9];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar10);
-      local_e0 = opVec[4] * opVec[8] + local_e0;
-      local_dc = opVec[5] * opVec[8] + local_dc;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,operandScratch);
+      prodC1R0 = opVec[4] * opVec[8] + prodC1R0;
+      prodC1R1 = opVec[5] * opVec[8] + prodC1R1;
       ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
-                 inst[9],inst[10],inst[0xb],0,&local_f0,(uint)*(byte *)((int)inst + 6));
-      iVar16 = inst[9];
-      uVar20 = (uint)*(byte *)((int)inst + 6);
-      pfVar10 = &local_e0;
-      iVar19 = inst[10];
-      iVar22 = inst[0xb];
-      iVar14 = inst[3];
-      iVar21 = inst[4];
-      iVar26 = inst[5];
-      iVar12 = inst[6];
-      iVar13 = inst[7];
-      iVar15 = inst[8];
-      uVar32 = 1;
+                 inst[9],inst[10],inst[0xb],0,&prodC0R0,(uint)*(byte *)((int)inst + 6));
+      destValueType = inst[9];
+      destUpdatesCC = (uint)*(byte *)((int)inst + 6);
+      operandScratch = &prodC1R0;
+      destWriteMask = inst[10];
+      destConditionSwizzleZW = inst[0xb];
+      destOffsetTable = inst[3];
+      destBankIndex = inst[4];
+      destSwizzle = inst[5];
+      destIndexInfo = inst[6];
+      destStorageFlags = inst[7];
+      destWord5 = inst[8];
+      destElement = 1;
     }
-    else if (uVar20 == 3) {
-      pfVar23 = opVec + 4;
-      pfVar10 = opVec + 8;
+    else if (elementCount == 3) {
+      srcAPtr = opVec + 4;
+      operandScratch = opVec + 8;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar23);
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,srcAPtr);
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,pfVar10);
-      local_f0 = opVec[4] * opVec[8];
-      local_e8 = opVec[6] * opVec[8];
-      local_ec = opVec[5] * opVec[8];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,operandScratch);
+      prodC0R0 = opVec[4] * opVec[8];
+      prodC0R2 = opVec[6] * opVec[8];
+      prodC0R1 = opVec[5] * opVec[8];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_f0 = opVec[4] * opVec[9] + local_f0;
-      local_e8 = opVec[6] * opVec[9] + local_e8;
-      local_ec = opVec[5] * opVec[9] + local_ec;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC0R0 = opVec[4] * opVec[9] + prodC0R0;
+      prodC0R2 = opVec[6] * opVec[9] + prodC0R2;
+      prodC0R1 = opVec[5] * opVec[9] + prodC0R1;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar23);
-      local_f0 = opVec[4] * opVec[10] + local_f0;
-      local_e8 = opVec[6] * opVec[10] + local_e8;
-      local_ec = opVec[5] * opVec[10] + local_ec;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,srcAPtr);
+      prodC0R0 = opVec[4] * opVec[10] + prodC0R0;
+      prodC0R2 = opVec[6] * opVec[10] + prodC0R2;
+      prodC0R1 = opVec[5] * opVec[10] + prodC0R1;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,pfVar10);
-      local_e0 = opVec[4] * opVec[10];
-      local_d8 = opVec[6] * opVec[10];
-      local_dc = opVec[5] * opVec[10];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
+      prodC1R0 = opVec[4] * opVec[10];
+      prodC1R2 = opVec[6] * opVec[10];
+      prodC1R1 = opVec[5] * opVec[10];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_e0 = opVec[4] * opVec[9] + local_e0;
-      local_d8 = opVec[6] * opVec[9] + local_d8;
-      local_dc = opVec[5] * opVec[9] + local_dc;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC1R0 = opVec[4] * opVec[9] + prodC1R0;
+      prodC1R2 = opVec[6] * opVec[9] + prodC1R2;
+      prodC1R1 = opVec[5] * opVec[9] + prodC1R1;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar23);
-      local_e0 = opVec[4] * opVec[8] + local_e0;
-      local_d8 = opVec[6] * opVec[8] + local_d8;
-      local_dc = opVec[5] * opVec[8] + local_dc;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,srcAPtr);
+      prodC1R0 = opVec[4] * opVec[8] + prodC1R0;
+      prodC1R2 = opVec[6] * opVec[8] + prodC1R2;
+      prodC1R1 = opVec[5] * opVec[8] + prodC1R1;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,pfVar10);
-      local_d0 = opVec[4] * opVec[8];
-      local_c8 = opVec[6] * opVec[8];
-      local_cc = opVec[5] * opVec[8];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,operandScratch);
+      prodC2R0 = opVec[4] * opVec[8];
+      prodC2R2 = opVec[6] * opVec[8];
+      prodC2R1 = opVec[5] * opVec[8];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_d0 = opVec[4] * opVec[9] + local_d0;
-      local_c8 = opVec[6] * opVec[9] + local_c8;
-      local_cc = opVec[5] * opVec[9] + local_cc;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC2R0 = opVec[4] * opVec[9] + prodC2R0;
+      prodC2R2 = opVec[6] * opVec[9] + prodC2R2;
+      prodC2R1 = opVec[5] * opVec[9] + prodC2R1;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar23);
-      local_d0 = opVec[4] * opVec[10] + local_d0;
-      local_c8 = opVec[6] * opVec[10] + local_c8;
-      local_cc = opVec[5] * opVec[10] + local_cc;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,srcAPtr);
+      prodC2R0 = opVec[4] * opVec[10] + prodC2R0;
+      prodC2R2 = opVec[6] * opVec[10] + prodC2R2;
+      prodC2R1 = opVec[5] * opVec[10] + prodC2R1;
       ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
-                 inst[9],inst[10],inst[0xb],0,&local_f0,(uint)*(byte *)((int)inst + 6));
+                 inst[9],inst[10],inst[0xb],0,&prodC0R0,(uint)*(byte *)((int)inst + 6));
       ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
-                 inst[9],inst[10],inst[0xb],1,&local_e0,(uint)*(byte *)((int)inst + 6));
-      iVar16 = inst[9];
-      uVar20 = (uint)*(byte *)((int)inst + 6);
-      pfVar10 = &local_d0;
-      iVar19 = inst[10];
-      iVar22 = inst[0xb];
-      iVar14 = inst[3];
-      iVar21 = inst[4];
-      iVar26 = inst[5];
-      iVar12 = inst[6];
-      iVar13 = inst[7];
-      iVar15 = inst[8];
-      uVar32 = 2;
+                 inst[9],inst[10],inst[0xb],1,&prodC1R0,(uint)*(byte *)((int)inst + 6));
+      destValueType = inst[9];
+      destUpdatesCC = (uint)*(byte *)((int)inst + 6);
+      operandScratch = &prodC2R0;
+      destWriteMask = inst[10];
+      destConditionSwizzleZW = inst[0xb];
+      destOffsetTable = inst[3];
+      destBankIndex = inst[4];
+      destSwizzle = inst[5];
+      destIndexInfo = inst[6];
+      destStorageFlags = inst[7];
+      destWord5 = inst[8];
+      destElement = 2;
     }
     else {
-      if (uVar20 != 4) {
-        return piVar18;
+      if (elementCount != 4) {
+        return nextInst;
       }
-      pfVar23 = opVec + 4;
-      pfVar10 = opVec + 8;
+      srcAPtr = opVec + 4;
+      operandScratch = opVec + 8;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar23);
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,srcAPtr);
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,pfVar10);
-      local_f0 = opVec[4] * opVec[8];
-      local_e4 = opVec[7] * opVec[8];
-      local_ec = opVec[5] * opVec[8];
-      local_e8 = opVec[6] * opVec[8];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,operandScratch);
+      prodC0R0 = opVec[4] * opVec[8];
+      prodC0R3 = opVec[7] * opVec[8];
+      prodC0R1 = opVec[5] * opVec[8];
+      prodC0R2 = opVec[6] * opVec[8];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_f0 = opVec[4] * opVec[9] + local_f0;
-      local_e4 = opVec[7] * opVec[9] + local_e4;
-      local_ec = opVec[5] * opVec[9] + local_ec;
-      local_e8 = opVec[6] * opVec[9] + local_e8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC0R0 = opVec[4] * opVec[9] + prodC0R0;
+      prodC0R3 = opVec[7] * opVec[9] + prodC0R3;
+      prodC0R1 = opVec[5] * opVec[9] + prodC0R1;
+      prodC0R2 = opVec[6] * opVec[9] + prodC0R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar23);
-      local_f0 = opVec[4] * opVec[10] + local_f0;
-      local_e4 = opVec[7] * opVec[10] + local_e4;
-      local_ec = opVec[5] * opVec[10] + local_ec;
-      local_e8 = opVec[6] * opVec[10] + local_e8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,srcAPtr);
+      prodC0R0 = opVec[4] * opVec[10] + prodC0R0;
+      prodC0R3 = opVec[7] * opVec[10] + prodC0R3;
+      prodC0R1 = opVec[5] * opVec[10] + prodC0R1;
+      prodC0R2 = opVec[6] * opVec[10] + prodC0R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],3,pfVar23);
-      local_f0 = opVec[4] * opVec[0xb] + local_f0;
-      local_e4 = opVec[7] * opVec[0xb] + local_e4;
-      local_ec = opVec[5] * opVec[0xb] + local_ec;
-      local_e8 = opVec[6] * opVec[0xb] + local_e8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],3,srcAPtr);
+      prodC0R0 = opVec[4] * opVec[0xb] + prodC0R0;
+      prodC0R3 = opVec[7] * opVec[0xb] + prodC0R3;
+      prodC0R1 = opVec[5] * opVec[0xb] + prodC0R1;
+      prodC0R2 = opVec[6] * opVec[0xb] + prodC0R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,pfVar10);
-      local_e0 = opVec[4] * opVec[0xb];
-      local_d4 = opVec[7] * opVec[0xb];
-      local_dc = opVec[5] * opVec[0xb];
-      local_d8 = opVec[6] * opVec[0xb];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],1,operandScratch);
+      prodC1R0 = opVec[4] * opVec[0xb];
+      prodC1R3 = opVec[7] * opVec[0xb];
+      prodC1R1 = opVec[5] * opVec[0xb];
+      prodC1R2 = opVec[6] * opVec[0xb];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar23);
-      local_e0 = opVec[4] * opVec[10] + local_e0;
-      local_d4 = opVec[7] * opVec[10] + local_d4;
-      local_dc = opVec[5] * opVec[10] + local_dc;
-      local_d8 = opVec[6] * opVec[10] + local_d8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,srcAPtr);
+      prodC1R0 = opVec[4] * opVec[10] + prodC1R0;
+      prodC1R3 = opVec[7] * opVec[10] + prodC1R3;
+      prodC1R1 = opVec[5] * opVec[10] + prodC1R1;
+      prodC1R2 = opVec[6] * opVec[10] + prodC1R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_e0 = opVec[4] * opVec[9] + local_e0;
-      local_d4 = opVec[7] * opVec[9] + local_d4;
-      local_dc = opVec[5] * opVec[9] + local_dc;
-      local_d8 = opVec[6] * opVec[9] + local_d8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC1R0 = opVec[4] * opVec[9] + prodC1R0;
+      prodC1R3 = opVec[7] * opVec[9] + prodC1R3;
+      prodC1R1 = opVec[5] * opVec[9] + prodC1R1;
+      prodC1R2 = opVec[6] * opVec[9] + prodC1R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar23);
-      local_e0 = opVec[4] * opVec[8] + local_e0;
-      local_d4 = opVec[7] * opVec[8] + local_d4;
-      local_dc = opVec[5] * opVec[8] + local_dc;
-      local_d8 = opVec[6] * opVec[8] + local_d8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,srcAPtr);
+      prodC1R0 = opVec[4] * opVec[8] + prodC1R0;
+      prodC1R3 = opVec[7] * opVec[8] + prodC1R3;
+      prodC1R1 = opVec[5] * opVec[8] + prodC1R1;
+      prodC1R2 = opVec[6] * opVec[8] + prodC1R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,pfVar10);
-      local_d0 = opVec[4] * opVec[8];
-      local_c4 = opVec[7] * opVec[8];
-      local_cc = opVec[5] * opVec[8];
-      local_c8 = opVec[6] * opVec[8];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],2,operandScratch);
+      prodC2R0 = opVec[4] * opVec[8];
+      prodC2R3 = opVec[7] * opVec[8];
+      prodC2R1 = opVec[5] * opVec[8];
+      prodC2R2 = opVec[6] * opVec[8];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_d0 = opVec[4] * opVec[9] + local_d0;
-      local_c4 = opVec[7] * opVec[9] + local_c4;
-      local_cc = opVec[5] * opVec[9] + local_cc;
-      local_c8 = opVec[6] * opVec[9] + local_c8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC2R0 = opVec[4] * opVec[9] + prodC2R0;
+      prodC2R3 = opVec[7] * opVec[9] + prodC2R3;
+      prodC2R1 = opVec[5] * opVec[9] + prodC2R1;
+      prodC2R2 = opVec[6] * opVec[9] + prodC2R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar23);
-      local_d0 = opVec[4] * opVec[10] + local_d0;
-      local_c4 = opVec[7] * opVec[10] + local_c4;
-      local_cc = opVec[5] * opVec[10] + local_cc;
-      local_c8 = opVec[6] * opVec[10] + local_c8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,srcAPtr);
+      prodC2R0 = opVec[4] * opVec[10] + prodC2R0;
+      prodC2R3 = opVec[7] * opVec[10] + prodC2R3;
+      prodC2R1 = opVec[5] * opVec[10] + prodC2R1;
+      prodC2R2 = opVec[6] * opVec[10] + prodC2R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],3,pfVar23);
-      local_d0 = opVec[4] * opVec[0xb] + local_d0;
-      local_c4 = opVec[7] * opVec[0xb] + local_c4;
-      local_cc = opVec[5] * opVec[0xb] + local_cc;
-      local_c8 = opVec[6] * opVec[0xb] + local_c8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],3,srcAPtr);
+      prodC2R0 = opVec[4] * opVec[0xb] + prodC2R0;
+      prodC2R3 = opVec[7] * opVec[0xb] + prodC2R3;
+      prodC2R1 = opVec[5] * opVec[0xb] + prodC2R1;
+      prodC2R2 = opVec[6] * opVec[0xb] + prodC2R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],3,pfVar10);
-      local_c0 = opVec[4] * opVec[0xb];
-      local_b4 = opVec[7] * opVec[0xb];
-      local_bc = opVec[5] * opVec[0xb];
-      local_b8 = opVec[6] * opVec[0xb];
+                 inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],3,operandScratch);
+      prodC3R0 = opVec[4] * opVec[0xb];
+      prodC3R3 = opVec[7] * opVec[0xb];
+      prodC3R1 = opVec[5] * opVec[0xb];
+      prodC3R2 = opVec[6] * opVec[0xb];
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,pfVar23);
-      local_c0 = opVec[4] * opVec[10] + local_c0;
-      local_b4 = opVec[7] * opVec[10] + local_b4;
-      local_bc = opVec[5] * opVec[10] + local_bc;
-      local_b8 = opVec[6] * opVec[10] + local_b8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],2,srcAPtr);
+      prodC3R0 = opVec[4] * opVec[10] + prodC3R0;
+      prodC3R3 = opVec[7] * opVec[10] + prodC3R3;
+      prodC3R1 = opVec[5] * opVec[10] + prodC3R1;
+      prodC3R2 = opVec[6] * opVec[10] + prodC3R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,pfVar23);
-      local_c0 = opVec[4] * opVec[9] + local_c0;
-      local_b4 = opVec[7] * opVec[9] + local_b4;
-      local_bc = opVec[5] * opVec[9] + local_bc;
-      local_b8 = opVec[6] * opVec[9] + local_b8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],1,srcAPtr);
+      prodC3R0 = opVec[4] * opVec[9] + prodC3R0;
+      prodC3R3 = opVec[7] * opVec[9] + prodC3R3;
+      prodC3R1 = opVec[5] * opVec[9] + prodC3R1;
+      prodC3R2 = opVec[6] * opVec[9] + prodC3R2;
       ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,pfVar23);
-      local_c0 = opVec[4] * opVec[8] + local_c0;
-      local_b4 = opVec[7] * opVec[8] + local_b4;
-      local_bc = opVec[5] * opVec[8] + local_bc;
-      local_b8 = opVec[6] * opVec[8] + local_b8;
+                 inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,srcAPtr);
+      prodC3R0 = opVec[4] * opVec[8] + prodC3R0;
+      prodC3R3 = opVec[7] * opVec[8] + prodC3R3;
+      prodC3R1 = opVec[5] * opVec[8] + prodC3R1;
+      prodC3R2 = opVec[6] * opVec[8] + prodC3R2;
       ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
-                 inst[9],inst[10],inst[0xb],0,&local_f0,(uint)*(byte *)((int)inst + 6));
+                 inst[9],inst[10],inst[0xb],0,&prodC0R0,(uint)*(byte *)((int)inst + 6));
       ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
-                 inst[9],inst[10],inst[0xb],1,&local_e0,(uint)*(byte *)((int)inst + 6));
+                 inst[9],inst[10],inst[0xb],1,&prodC1R0,(uint)*(byte *)((int)inst + 6));
       ((int (*)())_InterpreterWriteDestination)(machine,inst[3],inst[4],inst[5],inst[6],inst[7],inst[8],
-                 inst[9],inst[10],inst[0xb],2,&local_d0,(uint)*(byte *)((int)inst + 6));
-      iVar16 = inst[9];
-      uVar20 = (uint)*(byte *)((int)inst + 6);
-      pfVar10 = &local_c0;
-      iVar19 = inst[10];
-      iVar22 = inst[0xb];
-      iVar14 = inst[3];
-      iVar21 = inst[4];
-      iVar26 = inst[5];
-      iVar12 = inst[6];
-      iVar13 = inst[7];
-      iVar15 = inst[8];
-      uVar32 = 3;
+                 inst[9],inst[10],inst[0xb],2,&prodC2R0,(uint)*(byte *)((int)inst + 6));
+      destValueType = inst[9];
+      destUpdatesCC = (uint)*(byte *)((int)inst + 6);
+      operandScratch = &prodC3R0;
+      destWriteMask = inst[10];
+      destConditionSwizzleZW = inst[0xb];
+      destOffsetTable = inst[3];
+      destBankIndex = inst[4];
+      destSwizzle = inst[5];
+      destIndexInfo = inst[6];
+      destStorageFlags = inst[7];
+      destWord5 = inst[8];
+      destElement = 3;
     }
     goto LAB_97bd043c;
   }
-  if ((iVar21 != 0x31) && (iVar21 != 0x36)) {
+  if ((opcode != 0x31) && (opcode != 0x36)) {
     loopIndex2 = 0;
-    if (uVar20 == 0) {
-      return piVar18;
+    if (elementCount == 0) {
+      return nextInst;
     }
     do {
-      if (iVar14 != 0) {
-        uVar24 = loopIndex2;
+      if (sourceCount != 0) {
+        sourceElement = loopIndex2;
         if (*(char *)(inst + 0x12) == '\0') {
-          uVar24 = 0;
+          sourceElement = 0;
         }
-        in_r5 = (float *)inst[0xe];
-        ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],in_r5,inst[0xf],inst[0x10],inst[0x11],inst[0x12]
-                   ,inst[0x13],inst[0x14],inst[0x15],uVar24,opVec + 4);
+        in_r5_artifact = (float *)inst[0xe];
+        ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],in_r5_artifact,inst[0xf],inst[0x10],inst[0x11],inst[0x12]
+                   ,inst[0x13],inst[0x14],inst[0x15],sourceElement,opVec + 4);
         if (1 < (uint)inst[0xc]) {
-          uVar24 = loopIndex2;
+          sourceElement = loopIndex2;
           if (*(char *)(inst + 0x1b) == '\0') {
-            uVar24 = 0;
+            sourceElement = 0;
           }
-          in_r5 = (float *)inst[0x17];
-          ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],in_r5,inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],uVar24,opVec + 8);
+          in_r5_artifact = (float *)inst[0x17];
+          ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],in_r5_artifact,inst[0x18],inst[0x19],inst[0x1a],
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement,opVec + 8);
           if (2 < (uint)inst[0xc]) {
-            uVar24 = loopIndex2;
+            sourceElement = loopIndex2;
             if (*(char *)(inst + 0x24) == '\0') {
-              uVar24 = 0;
+              sourceElement = 0;
             }
-            in_r5 = (float *)inst[0x20];
-            ((int (*)())_InterpreterLoadSource)(machine,inst[0x1f],in_r5,inst[0x21],inst[0x22],inst[0x23],
-                       inst[0x24],inst[0x25],inst[0x26],inst[0x27],uVar24,local_100);
+            in_r5_artifact = (float *)inst[0x20];
+            ((int (*)())_InterpreterLoadSource)(machine,inst[0x1f],in_r5_artifact,inst[0x21],inst[0x22],inst[0x23],
+                       inst[0x24],inst[0x25],inst[0x26],inst[0x27],sourceElement,srcC);
           }
         }
       }
-      fVar6 = opVec[7];
-      switch(iVar21) {
+      operandComponent = opVec[7];
+      switch(opcode) {
       case 0:
 switchD_97bd0598_caseD_0:
         opVec[0] = opVec[4];
@@ -3842,21 +3871,21 @@ switchD_97bd0598_caseD_0:
         opVec[1] = (float)ceilResult;
         ceilResult = _ceil((double)opVec[6]);
         opVec[2] = (float)ceilResult;
-        dVar27 = _ceil((double)opVec[7]);
+        powValue = _ceil((double)opVec[7]);
         goto LAB_97bd2010;
       case 4:
-        dVar29 = (double)opVec[4];
-        floorResult = _floor(dVar29);
+        floorValue_29 = (double)opVec[4];
+        floorResult = _floor(floorValue_29);
         dVar28 = (double)opVec[5];
-        opVec[0] = (float)(dVar29 - floorResult);
+        opVec[0] = (float)(floorValue_29 - floorResult);
         floorResult = _floor(dVar28);
-        dVar29 = (double)opVec[6];
+        floorValue_29 = (double)opVec[6];
         opVec[1] = (float)(dVar28 - floorResult);
-        floorResult2 = _floor(dVar29);
-        dVar27 = (double)opVec[7];
-        opVec[2] = (float)(dVar29 - floorResult2);
-        floorResult2 = _floor(dVar27);
-        dVar27 = dVar27 - floorResult2;
+        floorResult2 = _floor(floorValue_29);
+        floorValue = (double)opVec[7];
+        opVec[2] = (float)(floorValue_29 - floorResult2);
+        floorResult2 = _floor(floorValue);
+        floorValue = floorValue - floorResult2;
         goto LAB_97bd1440;
       case 5:
         floorResult = _floor((double)opVec[4]);
@@ -3865,7 +3894,7 @@ switchD_97bd0598_caseD_0:
         opVec[1] = (float)floorResult;
         floorResult = _floor((double)opVec[6]);
         opVec[2] = (float)floorResult;
-        dVar27 = _floor((double)opVec[7]);
+        powValue = _floor((double)opVec[7]);
         goto LAB_97bd2010;
       default:
         goto switchD_97bd0598_caseD_6;
@@ -3910,21 +3939,21 @@ switchD_97bd0598_caseD_0:
       case 8:
         if (((opVec[4] == 0.0) && (opVec[5] == 0.0)) && (opVec[6] == 0.0)) {
 LAB_97bd0ab8:
-          uVar24 = 0;
+          boolBit = 0;
           if (opVec[7] == 0.0) goto LAB_97bd0ac8;
         }
-        uVar24 = 1;
+        boolBit = 1;
         goto LAB_97bd0ac8;
       case 9:
-        uVar24 = 0;
+        boolBit = 0;
         if (((opVec[4] != 0.0) && (opVec[5] != 0.0)) && (opVec[6] != 0.0))
         goto LAB_97bd0ab8;
 LAB_97bd0ac8:
-        uStack_ac = uVar24 ^ 0x80000000;
+        uStack_ac = boolBit ^ 0x80000000;
         local_b0 = 0x43300000;
-        dVar27 = (double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0;
+        intAsDouble = (double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0;
 LAB_97bd0cc8:
-        opVec[0] = (float)dVar27;
+        opVec[0] = (float)intAsDouble;
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
         opVec[3] = opVec[0];
@@ -3948,21 +3977,21 @@ LAB_97bd0cc8:
       case 0xb:
         bVar4 = *(byte *)((int)inst + 5);
         if (bVar4 == 2) {
-          in_r5 = opVec;
+          in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate2D(machine + 1,opVec + 4,opVec);
         }
         else if (bVar4 < 3) {
           if (bVar4 == 1) {
-            in_r5 = opVec;
+            in_r5_artifact = opVec;
             _InterpreterNoiseGeneratorCalculate1D(machine + 1,opVec + 4,opVec);
           }
         }
         else if (bVar4 == 3) {
-          in_r5 = opVec;
+          in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate3D(machine + 1,opVec + 4,opVec);
         }
         else if (bVar4 == 4) {
-          in_r5 = opVec;
+          in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate4D(machine + 1,opVec + 4,opVec);
         }
         break;
@@ -3973,10 +4002,10 @@ LAB_97bd0cc8:
         opVec[1] = (float)sqrtResult;
         sqrtResult = _sqrt(ABS((double)opVec[6]));
         opVec[2] = (float)sqrtResult;
-        dVar27 = _sqrt(ABS((double)opVec[7]));
+        powValue = _sqrt(ABS((double)opVec[7]));
         goto LAB_97bd2010;
       case 0xd:
-        if (*(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U < 2) {
+        if (*(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U < 2) {
           sqrtResult = _sqrt(ABS((double)opVec[4]));
           opVec[0] = (float)(1.0 / sqrtResult);
           sqrtResult = _sqrt(ABS((double)opVec[5]));
@@ -3984,11 +4013,11 @@ LAB_97bd0cc8:
           sqrtResult = _sqrt(ABS((double)opVec[6]));
           opVec[2] = (float)(1.0 / sqrtResult);
           sqrtResult = _sqrt(ABS((double)opVec[7]));
-          dVar27 = 1.0 / sqrtResult;
+          floorValue = 1.0 / sqrtResult;
           goto LAB_97bd1440;
         }
         sqrtResult = _sqrt(ABS((double)opVec[7]));
-        dVar27 = 1.0 / sqrtResult;
+        intAsDouble = 1.0 / sqrtResult;
         goto LAB_97bd0cc8;
       case 0xe:
         opVec[0] = 1.0 / opVec[7];
@@ -4035,8 +4064,8 @@ LAB_97bd0d80:
         }
         break;
       case 0x10:
-        if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          dVar27 = _exp2((double)opVec[7]);
+        if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
+          mathAccumulator = _exp2((double)opVec[7]);
           goto LAB_97bd1d68;
         }
         exp2Result = _exp2((double)opVec[4]);
@@ -4045,49 +4074,49 @@ LAB_97bd0d80:
         opVec[1] = (float)exp2Result;
         exp2Result = _exp2((double)opVec[6]);
         opVec[2] = (float)exp2Result;
-        dVar27 = _exp2((double)opVec[7]);
+        powValue = _exp2((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x11:
         floorResult = _floor((double)opVec[7]);
         exp2Result2 = _exp2((double)(float)floorResult);
         opVec[0] = (float)exp2Result2;
         opVec[1] = (float)((double)opVec[7] - (double)(float)floorResult);
-        dVar27 = _exp2((double)opVec[7]);
+        exp2Value = _exp2((double)opVec[7]);
         goto LAB_97bd0fd4;
       case 0x12:
-        uVar24 = (uint)*(byte *)((int)inst + 5);
-        dVar27 = 0.0;
-        if (uVar24 != 0) {
-          pfVar10 = opVec + 4;
+        dimension = (uint)*(byte *)((int)inst + 5);
+        mathAccumulator = 0.0;
+        if (dimension != 0) {
+          componentCursor = opVec + 4;
           do {
-            fVar6 = *pfVar10;
-            pfVar10 = pfVar10 + 1;
-            dVar27 = (double)(float)((double)fVar6 * (double)fVar6 + dVar27);
-            uVar24 = uVar24 - 1;
-          } while (uVar24 != 0);
+            squaredComponent = *componentCursor;
+            componentCursor = componentCursor + 1;
+            mathAccumulator = (double)(float)((double)squaredComponent * (double)squaredComponent + mathAccumulator);
+            dimension = dimension - 1;
+          } while (dimension != 0);
         }
 LAB_97bd1924:
-        dVar27 = _sqrt(dVar27);
+        mathAccumulator = _sqrt(mathAccumulator);
 LAB_97bd1d68:
-        opVec[0] = (float)dVar27;
+        opVec[0] = (float)mathAccumulator;
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
         opVec[3] = opVec[0];
         break;
       case 0x13:
-        if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          dVar27 = (double)opVec[7];
-          if (dVar27 < 0.0) {
-            dVar27 = 0.0;
+        if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
+          mathAccumulator = (double)opVec[7];
+          if (mathAccumulator < 0.0) {
+            mathAccumulator = 0.0;
           }
-          dVar27 = _log2(dVar27);
+          mathAccumulator = _log2(mathAccumulator);
           goto LAB_97bd1d68;
         }
-        dVar27 = (double)opVec[4];
-        if (dVar27 < 0.0) {
-          dVar27 = 0.0;
+        log2Value = (double)opVec[4];
+        if (log2Value < 0.0) {
+          log2Value = 0.0;
         }
-        log2Result = _log2(dVar27);
+        log2Result = _log2(log2Value);
         dVar28 = (double)opVec[5];
         opVec[0] = (float)log2Result;
         if (dVar28 < 0.0) {
@@ -4105,7 +4134,7 @@ LAB_97bd1d68:
         if (dVar28 < 0.0) {
           dVar28 = 0.0;
         }
-        dVar27 = _log2(dVar28);
+        powValue = _log2(dVar28);
         goto LAB_97bd2010;
       case 0x14:
         dVar28 = ABS((double)opVec[7]);
@@ -4117,44 +4146,44 @@ LAB_97bd1d68:
         if (dVar28 < 0.0) {
           dVar28 = 0.0;
         }
-        dVar27 = _log2(dVar28);
+        exp2Value = _log2(dVar28);
 LAB_97bd0fd4:
-        opVec[2] = (float)dVar27;
+        opVec[2] = (float)exp2Value;
         opVec[3] = 1.0;
         break;
       case 0x15:
-        uVar24 = (uint)*(byte *)((int)inst + 5);
-        dVar27 = 0.0;
-        if (uVar24 != 0) {
-          pfVar10 = opVec + 4;
+        dimension = (uint)*(byte *)((int)inst + 5);
+        sqrtValue = 0.0;
+        if (dimension != 0) {
+          componentCursor = opVec + 4;
           do {
-            fVar6 = *pfVar10;
-            pfVar10 = pfVar10 + 1;
-            dVar27 = (double)(float)((double)fVar6 * (double)fVar6 + dVar27);
-            uVar24 = uVar24 - 1;
-          } while (uVar24 != 0);
+            squaredComponent = *componentCursor;
+            componentCursor = componentCursor + 1;
+            sqrtValue = (double)(float)((double)squaredComponent * (double)squaredComponent + sqrtValue);
+            dimension = dimension - 1;
+          } while (dimension != 0);
         }
-        sqrtResult = _sqrt(dVar27);
-        uVar24 = (uint)*(byte *)((int)inst + 5);
-        if (uVar24 != 0) {
-          pfVar10 = opVec;
+        sqrtResult = _sqrt(sqrtValue);
+        dimension = (uint)*(byte *)((int)inst + 5);
+        if (dimension != 0) {
+          componentCursor = opVec;
           do {
-            *pfVar10 = pfVar10[4] / (float)sqrtResult;
-            pfVar10 = pfVar10 + 1;
-            uVar24 = uVar24 - 1;
-          } while (uVar24 != 0);
+            *componentCursor = componentCursor[4] / (float)sqrtResult;
+            componentCursor = componentCursor + 1;
+            dimension = dimension - 1;
+          } while (dimension != 0);
         }
         break;
       case 0x16:
-        fVar6 = 0.017453292;
+        degRadFactor = 0.017453292;
         goto LAB_97bd109c;
       case 0x17:
-        fVar6 = 57.29578;
+        degRadFactor = 57.29578;
 LAB_97bd109c:
-        opVec[0] = opVec[4] * fVar6;
-        opVec[1] = opVec[5] * fVar6;
-        opVec[2] = opVec[6] * fVar6;
-        opVec[3] = opVec[7] * fVar6;
+        opVec[0] = opVec[4] * degRadFactor;
+        opVec[1] = opVec[5] * degRadFactor;
+        opVec[2] = opVec[6] * degRadFactor;
+        opVec[3] = opVec[7] * degRadFactor;
         break;
       case 0x18:
         cosResult = _cos((double)opVec[4]);
@@ -4165,8 +4194,8 @@ LAB_97bd109c:
         opVec[2] = 0.0;
         break;
       case 0x19:
-        if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          dVar27 = _sin((double)opVec[7]);
+        if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
+          mathAccumulator = _sin((double)opVec[7]);
           goto LAB_97bd1d68;
         }
         sinResult = _sin((double)opVec[4]);
@@ -4175,11 +4204,11 @@ LAB_97bd109c:
         opVec[1] = (float)sinResult;
         sinResult = _sin((double)opVec[6]);
         opVec[2] = (float)sinResult;
-        dVar27 = _sin((double)opVec[7]);
+        powValue = _sin((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1a:
-        if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          dVar27 = _cos((double)opVec[7]);
+        if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
+          mathAccumulator = _cos((double)opVec[7]);
           goto LAB_97bd1d68;
         }
         cosResult = _cos((double)opVec[4]);
@@ -4188,7 +4217,7 @@ LAB_97bd109c:
         opVec[1] = (float)cosResult;
         cosResult = _cos((double)opVec[6]);
         opVec[2] = (float)cosResult;
-        dVar27 = _cos((double)opVec[7]);
+        powValue = _cos((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1b:
         tanResult = _tan((double)opVec[4]);
@@ -4197,7 +4226,7 @@ LAB_97bd109c:
         opVec[1] = (float)tanResult;
         tanResult = _tan((double)opVec[6]);
         opVec[2] = (float)tanResult;
-        dVar27 = _tan((double)opVec[7]);
+        powValue = _tan((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1c:
         asinResult = _asin((double)opVec[4]);
@@ -4206,7 +4235,7 @@ LAB_97bd109c:
         opVec[1] = (float)asinResult;
         asinResult = _asin((double)opVec[6]);
         opVec[2] = (float)asinResult;
-        dVar27 = _asin((double)opVec[7]);
+        powValue = _asin((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1d:
         acosResult = _acos((double)opVec[4]);
@@ -4215,7 +4244,7 @@ LAB_97bd109c:
         opVec[1] = (float)acosResult;
         acosResult = _acos((double)opVec[6]);
         opVec[2] = (float)acosResult;
-        dVar27 = _acos((double)opVec[7]);
+        powValue = _acos((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1e:
         if (inst[0xc] == 1) {
@@ -4225,7 +4254,7 @@ LAB_97bd109c:
           opVec[1] = (float)atanResult;
           atanResult = _atan((double)opVec[6]);
           opVec[2] = (float)atanResult;
-          dVar27 = _atan((double)opVec[7]);
+          powValue = _atan((double)opVec[7]);
           goto LAB_97bd2010;
         }
         opVec[0] = _atan2f(opVec[4],opVec[8]);
@@ -4248,39 +4277,39 @@ LAB_97bd109c:
         break;
       case 0x21:
         if (*(char *)((int)inst + 0x6d) == '\x01') {
-          dVar27 = (double)opVec[4];
-          dVar31 = (double)opVec[8];
-          floorResult2 = _floor((double)(float)(dVar27 / dVar31));
-          dVar29 = (double)opVec[5];
-          dVar30 = (double)opVec[8];
-          opVec[0] = (float)-(dVar31 * floorResult2 - dVar27);
-          floorResult = _floor((double)(float)(dVar29 / dVar30));
+          floorValue = (double)opVec[4];
+          floorValue_31 = (double)opVec[8];
+          floorResult2 = _floor((double)(float)(floorValue / floorValue_31));
+          floorValue_29 = (double)opVec[5];
+          floorValue_30 = (double)opVec[8];
+          opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
+          floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
           dVar28 = (double)opVec[6];
-          dVar31 = (double)opVec[8];
-          opVec[1] = (float)-(dVar30 * floorResult - dVar29);
-          floorResult = _floor((double)(float)(dVar28 / dVar31));
-          fVar6 = opVec[8];
+          floorValue_31 = (double)opVec[8];
+          opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
+          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
+          operandComponent = opVec[8];
         }
         else {
-          dVar27 = (double)opVec[4];
-          dVar31 = (double)opVec[8];
-          floorResult2 = _floor((double)(float)(dVar27 / dVar31));
-          dVar29 = (double)opVec[5];
-          dVar30 = (double)opVec[9];
-          opVec[0] = (float)-(dVar31 * floorResult2 - dVar27);
-          floorResult = _floor((double)(float)(dVar29 / dVar30));
+          floorValue = (double)opVec[4];
+          floorValue_31 = (double)opVec[8];
+          floorResult2 = _floor((double)(float)(floorValue / floorValue_31));
+          floorValue_29 = (double)opVec[5];
+          floorValue_30 = (double)opVec[9];
+          opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
+          floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
           dVar28 = (double)opVec[6];
-          dVar31 = (double)opVec[10];
-          opVec[1] = (float)-(dVar30 * floorResult - dVar29);
-          floorResult = _floor((double)(float)(dVar28 / dVar31));
-          fVar6 = opVec[0xb];
+          floorValue_31 = (double)opVec[10];
+          opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
+          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
+          operandComponent = opVec[0xb];
         }
-        dVar29 = (double)opVec[7];
-        opVec[2] = (float)-(dVar31 * floorResult - dVar28);
-        floorResult = _floor((double)(float)(dVar29 / (double)fVar6));
-        dVar27 = -((double)fVar6 * floorResult - dVar29);
+        floorValue_29 = (double)opVec[7];
+        opVec[2] = (float)-(floorValue_31 * floorResult - dVar28);
+        floorResult = _floor((double)(float)(floorValue_29 / (double)operandComponent));
+        floorValue = -((double)operandComponent * floorResult - floorValue_29);
 LAB_97bd1440:
-        opVec[3] = (float)dVar27;
+        opVec[3] = (float)floorValue;
         break;
       case 0x22:
       case 0x31:
@@ -4293,112 +4322,112 @@ LAB_97bd1440:
         opVec[3] = opVec[7] * opVec[0xb];
         break;
       case 0x24:
-        uVar24 = 0;
+        boolBit = 0;
         if ((opVec[4] != 0.0) && (opVec[8] != 0.0)) {
-          uVar24 = 1;
+          boolBit = 1;
         }
-        uVar8 = 0;
-        opVec[0] = (float)((double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0
+        boolBit8 = 0;
+        opVec[0] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if ((opVec[5] != 0.0) && (opVec[9] != 0.0)) {
-          uVar8 = 1;
+          boolBit8 = 1;
         }
-        uVar24 = 0;
-        opVec[1] = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - 4503601774854144.0)
+        boolBit = 0;
+        opVec[1] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         if ((opVec[6] != 0.0) && (opVec[10] != 0.0)) {
-          uVar24 = 1;
+          boolBit = 1;
         }
-        uVar8 = 0;
-        opVec[2] = (float)((double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0
+        boolBit8 = 0;
+        opVec[2] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if (opVec[7] != 0.0) {
 LAB_97bd17d0:
-          uVar8 = 0;
+          boolBit8 = 0;
           if (opVec[0xb] != 0.0) goto LAB_97bd17ec;
         }
         goto LAB_97bd17f0;
       case 0x25:
-        uVar24 = 0;
+        boolBit = 0;
         if ((opVec[4] != 0.0) || (opVec[8] != 0.0)) {
-          uVar24 = 1;
+          boolBit = 1;
         }
-        uVar8 = 0;
-        opVec[0] = (float)((double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0
+        boolBit8 = 0;
+        opVec[0] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if ((opVec[5] != 0.0) || (opVec[9] != 0.0)) {
-          uVar8 = 1;
+          boolBit8 = 1;
         }
-        uVar24 = 0;
-        opVec[1] = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - 4503601774854144.0)
+        boolBit = 0;
+        opVec[1] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         if ((opVec[6] != 0.0) || (opVec[10] != 0.0)) {
-          uVar24 = 1;
+          boolBit = 1;
         }
-        opVec[2] = (float)((double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0
+        opVec[2] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if (opVec[7] == 0.0) goto LAB_97bd17d0;
 LAB_97bd17ec:
-        uVar8 = 1;
+        boolBit8 = 1;
         goto LAB_97bd17f0;
       case 0x26:
-        uVar24 = 0;
+        boolBit = 0;
         if (opVec[4] == 0.0) {
           if (opVec[8] != 0.0) {
 LAB_97bd16cc:
-            uVar24 = 1;
+            boolBit = 1;
           }
         }
         else if (opVec[8] == 0.0) goto LAB_97bd16cc;
-        uVar8 = 0;
-        opVec[0] = (float)((double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0
+        boolBit8 = 0;
+        opVec[0] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if (opVec[5] == 0.0) {
           if (opVec[9] != 0.0) {
 LAB_97bd172c:
-            uVar8 = 1;
+            boolBit8 = 1;
           }
         }
         else if (opVec[9] == 0.0) goto LAB_97bd172c;
-        uVar24 = 0;
-        opVec[1] = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - 4503601774854144.0)
+        boolBit = 0;
+        opVec[1] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         if (opVec[6] == 0.0) {
           if (opVec[10] != 0.0) {
 LAB_97bd178c:
-            uVar24 = 1;
+            boolBit = 1;
           }
         }
         else if (opVec[10] == 0.0) goto LAB_97bd178c;
-        uVar8 = 0;
-        opVec[2] = (float)((double)CONCAT44(0x43300000,uVar24 ^ 0x80000000) - 4503601774854144.0
+        boolBit8 = 0;
+        opVec[2] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if (opVec[7] == 0.0) goto LAB_97bd17d0;
         if (opVec[0xb] == 0.0) goto LAB_97bd17ec;
 LAB_97bd17f0:
-        uStack_ac = uVar8 ^ 0x80000000;
+        uStack_ac = boolBit8 ^ 0x80000000;
         local_b0 = 0x43300000;
-        opVec[3] = (float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - 4503601774854144.0)
+        opVec[3] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         break;
       case 0x27:
-        uVar24 = (uint)*(byte *)((int)inst + 5);
+        dimension = (uint)*(byte *)((int)inst + 5);
         opVec[0] = 0.0;
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
         opVec[3] = opVec[0];
-        if (uVar24 != 0) {
-          pfVar10 = opVec;
+        if (dimension != 0) {
+          componentCursor = opVec;
           do {
-            pfVar23 = pfVar10 + 4;
-            pfVar1 = pfVar10 + 8;
-            pfVar10 = pfVar10 + 1;
-            opVec[0] = *pfVar23 * *pfVar1 + opVec[0];
-            uVar24 = uVar24 - 1;
+            srcElementPtr = componentCursor + 4;
+            pfVar1 = componentCursor + 8;
+            componentCursor = componentCursor + 1;
+            opVec[0] = *srcElementPtr * *pfVar1 + opVec[0];
+            dimension = dimension - 1;
             opVec[1] = opVec[0];
             opVec[2] = opVec[0];
             opVec[3] = opVec[0];
-          } while (uVar24 != 0);
+          } while (dimension != 0);
         }
         break;
       case 0x28:
@@ -4424,19 +4453,19 @@ LAB_97bd17f0:
         opVec[3] = opVec[0];
         break;
       case 0x2b:
-        if (*(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U < 2) {
-          uVar24 = (uint)*(byte *)((int)inst + 5);
-          dVar27 = 0.0;
-          if (uVar24 != 0) {
-            pfVar10 = opVec;
+        if (*(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U < 2) {
+          dimension = (uint)*(byte *)((int)inst + 5);
+          mathAccumulator = 0.0;
+          if (dimension != 0) {
+            componentCursor = opVec;
             do {
-              pfVar23 = pfVar10 + 4;
-              pfVar1 = pfVar10 + 8;
-              pfVar10 = pfVar10 + 1;
-              dVar27 = (double)(float)((double)(*pfVar23 - *pfVar1) * (double)(*pfVar23 - *pfVar1) +
-                                      dVar27);
-              uVar24 = uVar24 - 1;
-            } while (uVar24 != 0);
+              srcElementPtr = componentCursor + 4;
+              pfVar1 = componentCursor + 8;
+              componentCursor = componentCursor + 1;
+              mathAccumulator = (double)(float)((double)(*srcElementPtr - *pfVar1) * (double)(*srcElementPtr - *pfVar1) +
+                                      mathAccumulator);
+              dimension = dimension - 1;
+            } while (dimension != 0);
           }
           goto LAB_97bd1924;
         }
@@ -4461,7 +4490,7 @@ LAB_97bd17f0:
         opVec[3] = opVec[0xb];
         if (opVec[7] < opVec[0xb]) {
 LAB_97bd2210:
-          opVec[3] = fVar6;
+          opVec[3] = operandComponent;
         }
         break;
       case 0x2d:
@@ -4492,17 +4521,17 @@ LAB_97bd2210:
                               (double)(float)(fparam_6 * (double)opVec[4]));
         goto LAB_97bd1ce0;
       case 0x2f:
-        uVar24 = (uint)*(byte *)((int)inst + 5);
+        dimension = (uint)*(byte *)((int)inst + 5);
         fVar6 = 0.0;
-        if (uVar24 != 0) {
-          pfVar10 = opVec;
+        if (dimension != 0) {
+          componentCursor = opVec;
           do {
-            pfVar23 = pfVar10 + 4;
-            pfVar1 = pfVar10 + 8;
-            pfVar10 = pfVar10 + 1;
-            fVar6 = *pfVar23 * *pfVar1 + fVar6;
-            uVar24 = uVar24 - 1;
-          } while (uVar24 != 0);
+            srcElementPtr = componentCursor + 4;
+            pfVar1 = componentCursor + 8;
+            componentCursor = componentCursor + 1;
+            fVar6 = *srcElementPtr * *pfVar1 + fVar6;
+            dimension = dimension - 1;
+          } while (dimension != 0);
         }
         fVar6 = fVar6 + fVar6;
         opVec[0] = -(fVar6 * opVec[8] - opVec[4]);
@@ -4603,9 +4632,9 @@ LAB_97bd1cd8:
         opVec[3] = opVec[0];
         break;
       case 0x38:
-        if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
+        if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
           fparam_2 = (double)opVec[0xb];
-          dVar27 = _pow((double)opVec[7],fparam_2);
+          mathAccumulator = _pow((double)opVec[7],fparam_2);
           goto LAB_97bd1d68;
         }
         powResult = _pow((double)opVec[4],(double)opVec[8]);
@@ -4615,45 +4644,45 @@ LAB_97bd1cd8:
         powResult = _pow((double)opVec[6],(double)opVec[10]);
         fparam_2 = (double)opVec[0xb];
         opVec[2] = (float)powResult;
-        dVar27 = _pow((double)opVec[7],fparam_2);
+        powValue = _pow((double)opVec[7],fparam_2);
         goto LAB_97bd2010;
       case 0x39:
         if (2.1474836e+09 <= opVec[8]) {
-          iVar14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a0 = (longlong)iVar14;
+          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+          local_a0 = (longlong)intComponentI14;
         }
         else {
-          iVar14 = (int)opVec[8];
-          local_a8 = (longlong)iVar14;
+          intComponentI14 = (int)opVec[8];
+          local_a8 = (longlong)intComponentI14;
         }
-        opVec[0] = opVec[iVar14 + 4];
+        opVec[0] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
-          iVar14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)iVar14;
+          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+          local_a8 = (longlong)intComponentI14;
         }
         else {
-          iVar14 = (int)opVec[8];
-          local_a0 = (longlong)iVar14;
+          intComponentI14 = (int)opVec[8];
+          local_a0 = (longlong)intComponentI14;
         }
-        opVec[1] = opVec[iVar14 + 4];
+        opVec[1] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
-          iVar14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)iVar14;
+          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+          local_a8 = (longlong)intComponentI14;
         }
         else {
-          iVar14 = (int)opVec[8];
-          local_a0 = (longlong)iVar14;
+          intComponentI14 = (int)opVec[8];
+          local_a0 = (longlong)intComponentI14;
         }
-        opVec[2] = opVec[iVar14 + 4];
+        opVec[2] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
-          iVar14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)iVar14;
+          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+          local_a8 = (longlong)intComponentI14;
         }
         else {
-          iVar14 = (int)opVec[8];
-          local_a0 = (longlong)iVar14;
+          intComponentI14 = (int)opVec[8];
+          local_a0 = (longlong)intComponentI14;
         }
-        opVec[3] = opVec[iVar14 + 4];
+        opVec[3] = opVec[intComponentI14 + 4];
         break;
       case 0x3a:
         if (inst[9] == 1) {
@@ -4668,22 +4697,22 @@ LAB_97bd1cd8:
           truncResult = _trunc((double)(opVec[5] / opVec[9]));
           opVec[1] = (float)truncResult;
           truncResult = _trunc((double)(opVec[6] / opVec[10]));
-          fVar6 = opVec[7] / opVec[0xb];
+          operandComponent = opVec[7] / opVec[0xb];
           goto LAB_97bd200c;
         }
         break;
       case 0x3b:
-        uVar24 = (uint)*(byte *)((int)inst + 5);
+        dimension = (uint)*(byte *)((int)inst + 5);
         fVar6 = 0.0;
-        if (uVar24 != 0) {
-          pfVar10 = opVec;
+        if (dimension != 0) {
+          componentCursor = opVec;
           do {
-            pfVar23 = pfVar10 + 0xc;
-            pfVar1 = pfVar10 + 8;
-            pfVar10 = pfVar10 + 1;
-            fVar6 = *pfVar23 * *pfVar1 + fVar6;
-            uVar24 = uVar24 - 1;
-          } while (uVar24 != 0);
+            srcElementPtr = componentCursor + 0xc;
+            pfVar1 = componentCursor + 8;
+            componentCursor = componentCursor + 1;
+            fVar6 = *srcElementPtr * *pfVar1 + fVar6;
+            dimension = dimension - 1;
+          } while (dimension != 0);
         }
         if (fVar6 < 0.0) goto switchD_97bd0598_caseD_0;
         opVec[0] = -opVec[4];
@@ -4692,86 +4721,86 @@ LAB_97bd1cd8:
         opVec[3] = -opVec[7];
         break;
       case 0x3c:
-        fparam_5 = (double)((float)(1.0 - (double)opVec[7]) * local_100[3]);
-        opVec[0] = opVec[4] * opVec[8] + (1.0 - opVec[4]) * local_100[0];
-        opVec[1] = opVec[5] * opVec[9] + (1.0 - opVec[5]) * local_100[1];
+        fparam_5 = (double)((float)(1.0 - (double)opVec[7]) * srcC[3]);
+        opVec[0] = opVec[4] * opVec[8] + (1.0 - opVec[4]) * srcC[0];
+        opVec[1] = opVec[5] * opVec[9] + (1.0 - opVec[5]) * srcC[1];
         fparam_8 = (double)opVec[1];
-        opVec[2] = opVec[6] * opVec[10] + (1.0 - opVec[6]) * local_100[2];
+        opVec[2] = opVec[6] * opVec[10] + (1.0 - opVec[6]) * srcC[2];
         fparam_7 = (double)opVec[2];
         opVec[3] = (float)((double)opVec[7] * (double)opVec[0xb] + fparam_5);
         fparam_6 = (double)opVec[3];
         break;
       case 0x3d:
-        fVar6 = opVec[8];
+        operandComponent = opVec[8];
         if (opVec[8] < opVec[4]) {
-          fVar6 = opVec[4];
+          operandComponent = opVec[4];
         }
-        opVec[0] = local_100[0];
-        if ((fVar6 < local_100[0]) && (opVec[0] = opVec[8], opVec[8] < opVec[4])) {
+        opVec[0] = srcC[0];
+        if ((operandComponent < srcC[0]) && (opVec[0] = opVec[8], opVec[8] < opVec[4])) {
           opVec[0] = opVec[4];
         }
-        fVar6 = opVec[9];
+        operandComponent = opVec[9];
         if (opVec[9] < opVec[5]) {
-          fVar6 = opVec[5];
+          operandComponent = opVec[5];
         }
-        opVec[1] = local_100[1];
-        if ((fVar6 < local_100[1]) && (opVec[1] = opVec[9], opVec[9] < opVec[5])) {
+        opVec[1] = srcC[1];
+        if ((operandComponent < srcC[1]) && (opVec[1] = opVec[9], opVec[9] < opVec[5])) {
           opVec[1] = opVec[5];
         }
-        fVar6 = opVec[10];
+        operandComponent = opVec[10];
         if (opVec[10] < opVec[6]) {
-          fVar6 = opVec[6];
+          operandComponent = opVec[6];
         }
-        opVec[2] = local_100[2];
-        if ((fVar6 < local_100[2]) && (opVec[2] = opVec[10], opVec[10] < opVec[6]))
+        opVec[2] = srcC[2];
+        if ((operandComponent < srcC[2]) && (opVec[2] = opVec[10], opVec[10] < opVec[6]))
         {
           opVec[2] = opVec[6];
         }
-        fVar6 = opVec[0xb];
+        operandComponent = opVec[0xb];
         if (opVec[0xb] < opVec[7]) {
-          fVar6 = opVec[7];
+          operandComponent = opVec[7];
         }
-        opVec[3] = local_100[3];
-        if ((fVar6 < local_100[3]) &&
-           (fVar6 = opVec[0xb], opVec[3] = opVec[7], opVec[7] <= opVec[0xb]))
+        opVec[3] = srcC[3];
+        if ((operandComponent < srcC[3]) &&
+           (operandComponent = opVec[0xb], opVec[3] = opVec[7], opVec[7] <= opVec[0xb]))
         goto LAB_97bd2210;
         break;
       case 0x3e:
-        opVec[0] = local_100[0];
+        opVec[0] = srcC[0];
         if (opVec[4] < 0.0) {
           opVec[0] = opVec[8];
         }
-        opVec[1] = local_100[1];
+        opVec[1] = srcC[1];
         if (opVec[5] < 0.0) {
           opVec[1] = opVec[9];
         }
-        opVec[2] = local_100[2];
+        opVec[2] = srcC[2];
         if (opVec[6] < 0.0) {
           opVec[2] = opVec[10];
         }
-        opVec[3] = local_100[3];
+        opVec[3] = srcC[3];
         if (opVec[7] < 0.0) {
           opVec[3] = opVec[0xb];
         }
         break;
       case 0x3f:
-        opVec[0] = opVec[4] * opVec[8] + local_100[0];
-        opVec[1] = opVec[5] * opVec[9] + local_100[1];
-        opVec[2] = opVec[6] * opVec[10] + local_100[2];
-        opVec[3] = opVec[7] * opVec[0xb] + local_100[3];
+        opVec[0] = opVec[4] * opVec[8] + srcC[0];
+        opVec[1] = opVec[5] * opVec[9] + srcC[1];
+        opVec[2] = opVec[6] * opVec[10] + srcC[2];
+        opVec[3] = opVec[7] * opVec[0xb] + srcC[3];
         break;
       case 0x40:
-        fVar6 = (local_100[0] - opVec[4]) / (opVec[8] - opVec[4]);
-        if ((fVar6 <= 0.0) || (fVar6 < 1.0)) {
-          if (fVar6 <= 0.0) {
-            fVar6 = 0.0;
+        operandComponent = (srcC[0] - opVec[4]) / (opVec[8] - opVec[4]);
+        if ((operandComponent <= 0.0) || (operandComponent < 1.0)) {
+          if (operandComponent <= 0.0) {
+            operandComponent = 0.0;
           }
         }
         else {
-          fVar6 = 1.0;
+          operandComponent = 1.0;
         }
-        fVar7 = (local_100[1] - opVec[5]) / (opVec[9] - opVec[5]);
-        opVec[0] = fVar6 * fVar6 * (3.0 - (fVar6 + fVar6));
+        fVar7 = (srcC[1] - opVec[5]) / (opVec[9] - opVec[5]);
+        opVec[0] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
         if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
           if (fVar7 <= 0.0) {
             fVar7 = 0.0;
@@ -4780,18 +4809,18 @@ LAB_97bd1cd8:
         else {
           fVar7 = 1.0;
         }
-        fVar6 = (local_100[2] - opVec[6]) / (opVec[10] - opVec[6]);
+        operandComponent = (srcC[2] - opVec[6]) / (opVec[10] - opVec[6]);
         opVec[1] = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
-        if ((fVar6 <= 0.0) || (fVar6 < 1.0)) {
-          if (fVar6 <= 0.0) {
-            fVar6 = 0.0;
+        if ((operandComponent <= 0.0) || (operandComponent < 1.0)) {
+          if (operandComponent <= 0.0) {
+            operandComponent = 0.0;
           }
         }
         else {
-          fVar6 = 1.0;
+          operandComponent = 1.0;
         }
-        fVar7 = (local_100[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
-        opVec[2] = fVar6 * fVar6 * (3.0 - (fVar6 + fVar6));
+        fVar7 = (srcC[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
+        opVec[2] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
         if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
           if (fVar7 <= 0.0) {
             fVar7 = 0.0;
@@ -4803,74 +4832,74 @@ LAB_97bd1cd8:
         opVec[3] = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
         break;
       case 0x41:
-        cVar5 = *(char *)(inst + 0x18);
+        swizzleSelect = *(char *)(inst + 0x18);
         opVec[0] = opVec[4];
-        if ((((cVar5 != '\0') && (opVec[0] = opVec[5], cVar5 != '\x01')) &&
-            (opVec[0] = opVec[6], cVar5 != '\x02')) &&
-           (opVec[0] = opVec[7], cVar5 != '\x03')) {
-          fVar6 = opVec[4];
-          if (((cVar5 == '\x04') || (fVar6 = opVec[5], cVar5 == '\x05')) ||
-             ((fVar6 = opVec[6], cVar5 == '\x06' || (fVar6 = opVec[7], cVar5 == '\a')))) {
-            opVec[0] = -fVar6;
+        if ((((swizzleSelect != '\0') && (opVec[0] = opVec[5], swizzleSelect != '\x01')) &&
+            (opVec[0] = opVec[6], swizzleSelect != '\x02')) &&
+           (opVec[0] = opVec[7], swizzleSelect != '\x03')) {
+          operandComponent = opVec[4];
+          if (((swizzleSelect == '\x04') || (operandComponent = opVec[5], swizzleSelect == '\x05')) ||
+             ((operandComponent = opVec[6], swizzleSelect == '\x06' || (operandComponent = opVec[7], swizzleSelect == '\a')))) {
+            opVec[0] = -operandComponent;
           }
           else {
             opVec[0] = 0.0;
-            if (((cVar5 != '\t') && (opVec[0] = 1.0, cVar5 != '\b')) &&
-               (opVec[0] = -1.0, cVar5 != '\n')) {
+            if (((swizzleSelect != '\t') && (opVec[0] = 1.0, swizzleSelect != '\b')) &&
+               (opVec[0] = -1.0, swizzleSelect != '\n')) {
               opVec[0] = 0.0;
             }
           }
         }
-        cVar5 = *(char *)((int)inst + 0x61);
+        swizzleSelect = *(char *)((int)inst + 0x61);
         opVec[1] = opVec[4];
-        if ((((cVar5 != '\0') && (opVec[1] = opVec[5], cVar5 != '\x01')) &&
-            (opVec[1] = opVec[6], cVar5 != '\x02')) &&
-           (opVec[1] = opVec[7], cVar5 != '\x03')) {
-          fVar6 = opVec[4];
-          if (((cVar5 == '\x04') || (fVar6 = opVec[5], cVar5 == '\x05')) ||
-             ((fVar6 = opVec[6], cVar5 == '\x06' || (fVar6 = opVec[7], cVar5 == '\a')))) {
-            opVec[1] = -fVar6;
+        if ((((swizzleSelect != '\0') && (opVec[1] = opVec[5], swizzleSelect != '\x01')) &&
+            (opVec[1] = opVec[6], swizzleSelect != '\x02')) &&
+           (opVec[1] = opVec[7], swizzleSelect != '\x03')) {
+          operandComponent = opVec[4];
+          if (((swizzleSelect == '\x04') || (operandComponent = opVec[5], swizzleSelect == '\x05')) ||
+             ((operandComponent = opVec[6], swizzleSelect == '\x06' || (operandComponent = opVec[7], swizzleSelect == '\a')))) {
+            opVec[1] = -operandComponent;
           }
           else {
             opVec[1] = 0.0;
-            if (((cVar5 != '\t') && (opVec[1] = 1.0, cVar5 != '\b')) &&
-               (opVec[1] = -1.0, cVar5 != '\n')) {
+            if (((swizzleSelect != '\t') && (opVec[1] = 1.0, swizzleSelect != '\b')) &&
+               (opVec[1] = -1.0, swizzleSelect != '\n')) {
               opVec[1] = 0.0;
             }
           }
         }
-        cVar5 = *(char *)((int)inst + 0x62);
+        swizzleSelect = *(char *)((int)inst + 0x62);
         opVec[2] = opVec[4];
-        if ((((cVar5 != '\0') && (opVec[2] = opVec[5], cVar5 != '\x01')) &&
-            (opVec[2] = opVec[6], cVar5 != '\x02')) &&
-           (opVec[2] = opVec[7], cVar5 != '\x03')) {
-          fVar6 = opVec[4];
-          if (((cVar5 == '\x04') || (fVar6 = opVec[5], cVar5 == '\x05')) ||
-             ((fVar6 = opVec[6], cVar5 == '\x06' || (fVar6 = opVec[7], cVar5 == '\a')))) {
-            opVec[2] = -fVar6;
+        if ((((swizzleSelect != '\0') && (opVec[2] = opVec[5], swizzleSelect != '\x01')) &&
+            (opVec[2] = opVec[6], swizzleSelect != '\x02')) &&
+           (opVec[2] = opVec[7], swizzleSelect != '\x03')) {
+          operandComponent = opVec[4];
+          if (((swizzleSelect == '\x04') || (operandComponent = opVec[5], swizzleSelect == '\x05')) ||
+             ((operandComponent = opVec[6], swizzleSelect == '\x06' || (operandComponent = opVec[7], swizzleSelect == '\a')))) {
+            opVec[2] = -operandComponent;
           }
           else {
             opVec[2] = 0.0;
-            if (((cVar5 != '\t') && (opVec[2] = 1.0, cVar5 != '\b')) &&
-               (opVec[2] = -1.0, cVar5 != '\n')) {
+            if (((swizzleSelect != '\t') && (opVec[2] = 1.0, swizzleSelect != '\b')) &&
+               (opVec[2] = -1.0, swizzleSelect != '\n')) {
               opVec[2] = 0.0;
             }
           }
         }
-        cVar5 = *(char *)((int)inst + 99);
+        swizzleSelect = *(char *)((int)inst + 99);
         opVec[3] = opVec[4];
-        if ((((cVar5 != '\0') && (opVec[3] = opVec[5], cVar5 != '\x01')) &&
-            (opVec[3] = opVec[6], cVar5 != '\x02')) &&
-           (opVec[3] = opVec[7], cVar5 != '\x03')) {
-          fVar6 = opVec[4];
-          if (((cVar5 == '\x04') || (fVar6 = opVec[5], cVar5 == '\x05')) ||
-             ((fVar6 = opVec[6], cVar5 == '\x06' || (fVar6 = opVec[7], cVar5 == '\a')))) {
-            opVec[3] = -fVar6;
+        if ((((swizzleSelect != '\0') && (opVec[3] = opVec[5], swizzleSelect != '\x01')) &&
+            (opVec[3] = opVec[6], swizzleSelect != '\x02')) &&
+           (opVec[3] = opVec[7], swizzleSelect != '\x03')) {
+          operandComponent = opVec[4];
+          if (((swizzleSelect == '\x04') || (operandComponent = opVec[5], swizzleSelect == '\x05')) ||
+             ((operandComponent = opVec[6], swizzleSelect == '\x06' || (operandComponent = opVec[7], swizzleSelect == '\a')))) {
+            opVec[3] = -operandComponent;
           }
           else {
             opVec[3] = 0.0;
-            if (((cVar5 != '\t') && (opVec[3] = 1.0, cVar5 != '\b')) &&
-               (opVec[3] = -1.0, cVar5 != '\n')) {
+            if (((swizzleSelect != '\t') && (opVec[3] = 1.0, swizzleSelect != '\b')) &&
+               (opVec[3] = -1.0, swizzleSelect != '\n')) {
               opVec[3] = 0.0;
             }
           }
@@ -4880,62 +4909,62 @@ LAB_97bd1cd8:
       case 0x43:
       case 0x44:
       case 0x45:
-        ((int (*)())_InterpreterTextureSamplerAttachGLDContext)(machine[0x28b],*(undefined4 *)(iVar19 + 0xd9c));
-        uVar32 = 0;
-        if ((iVar21 == 0x43) || (iVar21 == 0x45)) {
-          uVar32 = 1;
+        ((int (*)())_InterpreterTextureSamplerAttachGLDContext)(machine[0x28b],*(undefined4 *)(emulator + 0xd9c));
+        destElement = 0;
+        if ((opcode == 0x43) || (opcode == 0x45)) {
+          destElement = 1;
         }
-        ((int (*)())_InterpreterTextureSamplerSetProjectionEnabled)(machine[0x28b],uVar32);
-        ((int (*)())_InterpreterTextureSamplerSetLodBiasEnabled)(machine[0x28b],(uint)(iVar21 == 0x44 || iVar21 - 0x44U == 1));
-        ((void (*)())_InterpreterTextureSamplerAttachDerivatives)(machine[0x28b],*(undefined4 *)(iVar19 + 0xda4),(double)GH_U2F((unsigned int)(machine[0x28f])));
+        ((int (*)())_InterpreterTextureSamplerSetProjectionEnabled)(machine[0x28b],destElement);
+        ((int (*)())_InterpreterTextureSamplerSetLodBiasEnabled)(machine[0x28b],(uint)(opcode == 0x44 || opcode - 0x44U == 1));
+        ((void (*)())_InterpreterTextureSamplerAttachDerivatives)(machine[0x28b],*(undefined4 *)(emulator + 0xda4),(double)GH_U2F((unsigned int)(machine[0x28f])));
         fVar7 = opVec[7];
-        fVar6 = 0.0;
-        if (iVar21 - 0x44U < 2) {
-          iVar14 = *(int *)(iVar19 + 0xd80);
-          fVar6 = local_100[0];
-          if (1 < *(int *)(iVar14 + 0x38) - 0x8b30U) {
+        operandComponent = 0.0;
+        if (opcode - 0x44U < 2) {
+          programInfo = *(int *)(emulator + 0xd80);
+          operandComponent = srcC[0];
+          if (1 < *(int *)(programInfo + 0x38) - 0x8b30U) {
             opVec[7] = 1.0;
-            fVar6 = fVar7;
+            operandComponent = fVar7;
             goto LAB_97bd29a8;
           }
         }
         else {
 LAB_97bd29a8:
-          iVar14 = *(int *)(iVar19 + 0xd80);
+          programInfo = *(int *)(emulator + 0xd80);
         }
-        dVar27 = (double)fVar6;
-        if (*(int *)(iVar14 + 0x38) - 0x8b30U < 2) {
+        dVar27 = (double)operandComponent;
+        if (*(int *)(programInfo + 0x38) - 0x8b30U < 2) {
           if (2.1474836e+09 <= opVec[8]) {
             local_98 = (longlong)(int)(opVec[8] - 2.1474836e+09);
-            uVar24 = (int)(opVec[8] - 2.1474836e+09) ^ 0x80000000;
+            intComponent = (int)(opVec[8] - 2.1474836e+09) ^ 0x80000000;
           }
           else {
-            uVar24 = (uint)(int)opVec[8];
-            local_90 = (longlong)(int)uVar24;
+            intComponent = (uint)(int)opVec[8];
+            local_90 = (longlong)(int)intComponent;
           }
         }
         else {
-          uVar24 = inst[0x43];
+          intComponent = inst[0x43];
         }
-        uVar8 = inst[0x44];
-        if (uVar8 == 2) {
+        textureTarget = inst[0x44];
+        if (textureTarget == 2) {
           _InterpreterTextureSamplerSampleTexelRECT
-                    (machine[0x28b],uVar24,in_r5,opVec + 4,&local_80);
+                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80);
         }
-        else if (uVar8 < 3) {
-          if (uVar8 == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],uVar24,in_r5,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+        else if (textureTarget < 3) {
+          if (textureTarget == 1) {
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
                        fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                        in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
           }
         }
-        else if (uVar8 == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],uVar24,in_r5,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+        else if (textureTarget == 3) {
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                      in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90,in_stack_fffffe98);
         }
-        else if (uVar8 == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],uVar24,in_r5,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+        else if (textureTarget == 4) {
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                      in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
         }
@@ -4949,29 +4978,29 @@ LAB_97bd29a8:
         floorResult = _floor((double)opVec[4]);
         if (2147483648.0 <= floorResult) {
           local_98 = (longlong)(int)(floorResult - 2147483648.0);
-          uVar24 = (int)(floorResult - 2147483648.0) ^ 0x80000000;
+          intComponent = (int)(floorResult - 2147483648.0) ^ 0x80000000;
         }
         else {
-          uVar24 = (uint)(int)floorResult;
-          local_90 = (longlong)(int)uVar24;
+          intComponent = (uint)(int)floorResult;
+          local_90 = (longlong)(int)intComponent;
         }
-        machine[0x290] = uVar24;
+        machine[0x290] = intComponent;
         goto switchD_97bd0598_caseD_6;
       case 0x4b:
-        in_r5 = (float *)inst[4];
-        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+        in_r5_artifact = (float *)inst[4];
+        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                     inst[8],inst[9],inst[10],inst[0xb],0);
         if (conditionResult == 0) {
-          in_r5 = (float *)inst[4];
-          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+          in_r5_artifact = (float *)inst[4];
+          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                       inst[8],inst[9],inst[10],inst[0xb],1);
           if (conditionResult == 0) {
-            in_r5 = (float *)inst[4];
-            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+            in_r5_artifact = (float *)inst[4];
+            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                         inst[8],inst[9],inst[10],inst[0xb],2);
             if (conditionResult == 0) {
-              in_r5 = (float *)inst[4];
-              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+              in_r5_artifact = (float *)inst[4];
+              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
               if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
             }
@@ -4981,65 +5010,65 @@ LAB_97bd29a8:
       case 0x58:
       case 0x6b:
 switchD_97bd0598_caseD_54:
-        piVar18 = (int *)((**(int **)(iVar19 + 0xd80) + inst[2] * 0x11c) - 0x11c);
-        if ((int *)(*(int **)(iVar19 + 0xd80))[1] < piVar18) {
-          piVar18 = (int *)0x0;
+        nextInst = (int *)((**(int **)(emulator + 0xd80) + inst[2] * 0x11c) - 0x11c);
+        if ((int *)(*(int **)(emulator + 0xd80))[1] < nextInst) {
+          nextInst = (int *)0x0;
         }
 switchD_97bd0598_caseD_6:
         bVar25 = false;
         break;
       case 0x4c:
-        in_r5 = (float *)inst[4];
-        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+        in_r5_artifact = (float *)inst[4];
+        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                     inst[8],inst[9],inst[10],inst[0xb],0);
         if (conditionResult == 0) {
-          in_r5 = (float *)inst[4];
-          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+          in_r5_artifact = (float *)inst[4];
+          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                       inst[8],inst[9],inst[10],inst[0xb],1);
           if (conditionResult == 0) {
-            in_r5 = (float *)inst[4];
-            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+            in_r5_artifact = (float *)inst[4];
+            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                         inst[8],inst[9],inst[10],inst[0xb],2);
             if (conditionResult == 0) {
-              in_r5 = (float *)inst[4];
-              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+              in_r5_artifact = (float *)inst[4];
+              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
               if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
             }
           }
         }
         if ((uint *)machine[0x29b] + 1 <= machine + 0x29b) {
-          *(uint *)machine[0x29b] = (uint)piVar18;
+          *(uint *)machine[0x29b] = (uint)nextInst;
           machine[0x29b] = machine[0x29b] + 4;
           goto switchD_97bd0598_caseD_54;
         }
         break;
       case 0x4d:
-        in_r5 = (float *)inst[4];
-        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+        in_r5_artifact = (float *)inst[4];
+        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                     inst[8],inst[9],inst[10],inst[0xb],0);
         if (conditionResult == 0) {
-          in_r5 = (float *)inst[4];
-          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+          in_r5_artifact = (float *)inst[4];
+          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                       inst[8],inst[9],inst[10],inst[0xb],1);
           if (conditionResult == 0) {
-            in_r5 = (float *)inst[4];
-            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+            in_r5_artifact = (float *)inst[4];
+            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                         inst[8],inst[9],inst[10],inst[0xb],2);
             if (conditionResult == 0) {
-              in_r5 = (float *)inst[4];
-              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+              in_r5_artifact = (float *)inst[4];
+              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
               if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
             }
           }
         }
         iVar14 = machine[0x29b];
-        piVar18 = (int *)0x0;
+        nextInst = (int *)0x0;
         piVar11 = (int *)(iVar14 - 4);
         if (machine + 0x297 <= piVar11) {
           machine[0x29b] = (int)piVar11;
-          piVar18 = *(int **)(iVar14 + -4);
+          nextInst = *(int **)(iVar14 + -4);
         }
         goto switchD_97bd0598_caseD_6;
       case 0x4f:
@@ -5053,28 +5082,28 @@ switchD_97bd0598_caseD_6:
            (opVec[7] == 0.0)) goto switchD_97bd0598_caseD_54;
         break;
       case 0x68:
-        uVar24 = (uint)*(byte *)((int)inst + 5);
-        fVar6 = 0.0;
-        if (uVar24 != 0) {
-          pfVar10 = opVec;
+        dimension = (uint)*(byte *)((int)inst + 5);
+        operandComponent = 0.0;
+        if (dimension != 0) {
+          componentCursor = opVec;
           do {
-            pfVar23 = pfVar10 + 4;
-            pfVar1 = pfVar10 + 8;
-            pfVar10 = pfVar10 + 1;
-            fVar6 = *pfVar23 * *pfVar1 + fVar6;
-            uVar24 = uVar24 - 1;
-          } while (uVar24 != 0);
+            srcElementPtr = componentCursor + 4;
+            pfVar1 = componentCursor + 8;
+            componentCursor = componentCursor + 1;
+            operandComponent = *srcElementPtr * *pfVar1 + operandComponent;
+            dimension = dimension - 1;
+          } while (dimension != 0);
         }
-        dVar27 = (double)-(local_100[0] * local_100[0] * (1.0 - fVar6 * fVar6) - 1.0);
-        if (0.0 <= dVar27) {
-          fVar6 = local_100[0] * fVar6;
-          sqrtResult = _sqrt(dVar27);
-          dVar28 = (double)local_100[0];
-          fVar6 = (float)((double)fVar6 + sqrtResult);
-          fparam_7 = (double)(fVar6 * opVec[0xb]);
-          opVec[0] = (float)(dVar28 * (double)opVec[4] - (double)(fVar6 * opVec[8]));
-          opVec[1] = (float)(dVar28 * (double)opVec[5] - (double)(fVar6 * opVec[9]));
-          opVec[2] = (float)(dVar28 * (double)opVec[6] - (double)(fVar6 * opVec[10]));
+        sqrtValue = (double)-(srcC[0] * srcC[0] * (1.0 - operandComponent * operandComponent) - 1.0);
+        if (0.0 <= sqrtValue) {
+          operandComponent = srcC[0] * operandComponent;
+          sqrtResult = _sqrt(sqrtValue);
+          dVar28 = (double)srcC[0];
+          operandComponent = (float)((double)operandComponent + sqrtResult);
+          fparam_7 = (double)(operandComponent * opVec[0xb]);
+          opVec[0] = (float)(dVar28 * (double)opVec[4] - (double)(operandComponent * opVec[8]));
+          opVec[1] = (float)(dVar28 * (double)opVec[5] - (double)(operandComponent * opVec[9]));
+          opVec[2] = (float)(dVar28 * (double)opVec[6] - (double)(operandComponent * opVec[10]));
           fparam_8 = (double)opVec[2];
           opVec[3] = (float)(dVar28 * (double)opVec[7] - fparam_7);
         }
@@ -5092,10 +5121,10 @@ switchD_97bd0598_caseD_6:
           truncResult = _trunc((double)opVec[5]);
           opVec[1] = (float)truncResult;
           truncResult = _trunc((double)opVec[6]);
-          fVar6 = opVec[7];
+          operandComponent = opVec[7];
 LAB_97bd200c:
           opVec[2] = (float)truncResult;
-          dVar27 = _trunc((double)fVar6);
+          powValue = _trunc((double)operandComponent);
           goto LAB_97bd2010;
         }
         if ((inst[9] != 4) || ((inst[0x13] != 1 && (inst[0x13] != 3))))
@@ -5116,49 +5145,49 @@ LAB_97bd200c:
         if (opVec[7] == 0.0) goto LAB_97bd1ce0;
         break;
       case 0x6d:
-        opVec[0] = local_100[0];
-        opVec[1] = local_100[1];
-        opVec[2] = local_100[2];
-        opVec[3] = local_100[3];
+        opVec[0] = srcC[0];
+        opVec[1] = srcC[1];
+        opVec[2] = srcC[2];
+        opVec[3] = srcC[3];
         if (2.1474836e+09 <= opVec[8]) {
-          iVar14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)iVar14;
+          intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
+          local_a8 = (longlong)intComponentI14;
         }
         else {
-          iVar14 = (int)opVec[8];
-          local_a0 = (longlong)iVar14;
+          intComponentI14 = (int)opVec[8];
+          local_a0 = (longlong)intComponentI14;
         }
         if (2.1474836e+09 <= opVec[8]) {
-          iVar26 = (int)(opVec[8] - 2.1474836e+09);
-          local_90 = (longlong)iVar26;
+          intComponentI26 = (int)(opVec[8] - 2.1474836e+09);
+          local_90 = (longlong)intComponentI26;
         }
         else {
-          iVar26 = (int)opVec[8];
-          local_98 = (longlong)iVar26;
+          intComponentI26 = (int)opVec[8];
+          local_98 = (longlong)intComponentI26;
         }
-        opVec[iVar14] = opVec[iVar26 + 4];
+        opVec[intComponentI14] = opVec[intComponentI26 + 4];
         break;
       case 0x6f:
-        dVar27 = _exp((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _exp((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _exp((double)opVec[6]);
-        opVec[2] = (float)dVar27;
-        dVar27 = _exp((double)opVec[7]);
+        expValue = _exp((double)opVec[4]);
+        opVec[0] = (float)expValue;
+        expValue = _exp((double)opVec[5]);
+        opVec[1] = (float)expValue;
+        expValue = _exp((double)opVec[6]);
+        opVec[2] = (float)expValue;
+        powValue = _exp((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x70:
-        dVar27 = _log((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _log((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _log((double)opVec[6]);
-        opVec[2] = (float)dVar27;
-        dVar27 = _log((double)opVec[7]);
+        logValue = _log((double)opVec[4]);
+        opVec[0] = (float)logValue;
+        logValue = _log((double)opVec[5]);
+        opVec[1] = (float)logValue;
+        logValue = _log((double)opVec[6]);
+        opVec[2] = (float)logValue;
+        powValue = _log((double)opVec[7]);
 LAB_97bd2010:
-        opVec[3] = (float)dVar27;
+        opVec[3] = (float)powValue;
       }
-      if (cVar3 != '\0') {
+      if (saturate != '\0') {
         if (0.0 <= opVec[0]) {
           if (opVec[0] <= 1.0) {
             local_70 = opVec[0];
@@ -5205,43 +5234,43 @@ LAB_97bd2010:
         }
       }
       if (bVar25) {
-        uVar24 = loopIndex2;
+        sourceElement = loopIndex2;
         if (*(char *)(inst + 8) == '\0') {
-          uVar24 = 0;
+          sourceElement = 0;
         }
-        in_r5 = (float *)inst[4];
-        ((int (*)())_InterpreterWriteDestination)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],inst[8],inst[9],
-                   inst[10],inst[0xb],uVar24,opVec,(uint)*(byte *)((int)inst + 6));
+        in_r5_artifact = (float *)inst[4];
+        ((int (*)())_InterpreterWriteDestination)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],inst[8],inst[9],
+                   inst[10],inst[0xb],sourceElement,opVec,(uint)*(byte *)((int)inst + 6));
       }
       loopIndex2 = loopIndex2 + 1;
-      if (uVar20 <= loopIndex2) {
-        return piVar18;
+      if (elementCount <= loopIndex2) {
+        return nextInst;
       }
-      iVar14 = inst[0xc];
+      sourceCount = inst[0xc];
     } while( true );
   }
-  if (uVar20 < 2) {
+  if (elementCount < 2) {
     ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                inst[0x12],inst[0x13],inst[0x14],inst[0x15],0,opVec + 4);
     ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
                inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],0,opVec + 8);
     if (*(char *)((int)inst + 0x21) == '\x01') {
-      cVar3 = *(char *)((int)inst + 5);
-      if (cVar3 == '\x01') {
+      saturate = *(char *)((int)inst + 5);
+      if (saturate == '\x01') {
 LAB_97bd0310:
         opVec[0] = 1.0;
         if (opVec[5] == opVec[9]) goto LAB_97bd0328;
       }
-      else if (cVar3 == '\x02') {
+      else if (saturate == '\x02') {
         if (opVec[4] == opVec[8]) goto LAB_97bd0310;
       }
-      else if (cVar3 == '\x03') {
+      else if (saturate == '\x03') {
         if ((opVec[4] == opVec[8]) &&
            (bVar25 = opVec[5] == opVec[9], opVec[5] = opVec[6],
            opVec[9] = opVec[10], bVar25)) goto LAB_97bd0310;
       }
       else {
-        if (cVar3 != '\x04') goto LAB_97bd0328;
+        if (saturate != '\x04') goto LAB_97bd0328;
         if (((opVec[4] == opVec[8]) && (opVec[5] == opVec[9])) &&
            (opVec[5] = opVec[7], opVec[9] = opVec[0xb],
            opVec[6] == opVec[10])) goto LAB_97bd0310;
@@ -5267,32 +5296,32 @@ LAB_97bd0310:
     }
   }
   else {
-    if (uVar20 == 3) {
-      pfVar10 = opVec;
+    if (elementCount == 3) {
+      componentCursor = opVec;
       loopIndex = 0;
       do {
-        uVar17 = loopIndex;
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
-          uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-        uVar17 = loopIndex;
+                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement2,opVec + 4);
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
-          uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],uVar17,opVec + 8);
+                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement2,opVec + 8);
         if (((opVec[4] != opVec[8]) || (opVec[5] != opVec[9])) ||
-           (fVar6 = 1.0, opVec[6] != opVec[10])) {
-          fVar6 = 0.0;
+           (operandComponent = 1.0, opVec[6] != opVec[10])) {
+          operandComponent = 0.0;
         }
         loopIndex = loopIndex + 1;
-        *pfVar10 = fVar6;
-        pfVar10 = pfVar10 + 1;
+        *componentCursor = operandComponent;
+        componentCursor = componentCursor + 1;
       } while (loopIndex < 3);
       uStack_ac = 0;
-      fVar6 = opVec[2];
+      operandComponent = opVec[2];
       fVar7 = opVec[1];
       if (opVec[0] != 0.0) goto joined_r0x97bd003c;
 LAB_97bd01a0:
@@ -5300,66 +5329,66 @@ LAB_97bd01a0:
       local_b0 = 0x43300000;
       opVec[0] = (float)((double)CONCAT44(0x43300000,uStack_ac) - 4503601774854144.0);
     }
-    else if (uVar20 < 4) {
-      if (uVar20 == 2) {
-        pfVar10 = opVec;
+    else if (elementCount < 4) {
+      if (elementCount == 2) {
+        componentCursor = opVec;
         loopIndex = 0;
         do {
-          uVar17 = loopIndex;
+          sourceElement2 = loopIndex;
           if (*(char *)(inst + 0x12) == '\0') {
-            uVar17 = 0;
+            sourceElement2 = 0;
           }
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-          uVar17 = loopIndex;
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement2,opVec + 4);
+          sourceElement2 = loopIndex;
           if (*(char *)(inst + 0x1b) == '\0') {
-            uVar17 = 0;
+            sourceElement2 = 0;
           }
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],uVar17,opVec + 8);
-          if ((opVec[4] != opVec[8]) || (fVar6 = 1.0, opVec[5] != opVec[9])) {
-            fVar6 = 0.0;
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement2,opVec + 8);
+          if ((opVec[4] != opVec[8]) || (operandComponent = 1.0, opVec[5] != opVec[9])) {
+            operandComponent = 0.0;
           }
           loopIndex = loopIndex + 1;
-          *pfVar10 = fVar6;
-          pfVar10 = pfVar10 + 1;
-          fVar6 = opVec[1];
+          *componentCursor = operandComponent;
+          componentCursor = componentCursor + 1;
+          operandComponent = opVec[1];
           fVar7 = opVec[0];
         } while (loopIndex < 2);
 joined_r0x97bd003c:
         uStack_ac = 0;
-        if ((fVar7 != 0.0) && (uStack_ac = 0, fVar6 != 0.0)) {
+        if ((fVar7 != 0.0) && (uStack_ac = 0, operandComponent != 0.0)) {
           uStack_ac = 1;
         }
         goto LAB_97bd01a0;
       }
     }
-    else if (uVar20 == 4) {
-      pfVar10 = opVec;
+    else if (elementCount == 4) {
+      componentCursor = opVec;
       loopIndex = 0;
       do {
-        uVar17 = loopIndex;
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
-          uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-        uVar17 = loopIndex;
+                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement2,opVec + 4);
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
-          uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],uVar17,opVec + 8);
+                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement2,opVec + 8);
         if (((opVec[4] != opVec[8]) || (opVec[5] != opVec[9])) ||
-           ((opVec[6] != opVec[10] || (fVar6 = 1.0, opVec[7] != opVec[0xb])))) {
-          fVar6 = 0.0;
+           ((opVec[6] != opVec[10] || (operandComponent = 1.0, opVec[7] != opVec[0xb])))) {
+          operandComponent = 0.0;
         }
         loopIndex = loopIndex + 1;
-        *pfVar10 = fVar6;
-        pfVar10 = pfVar10 + 1;
+        *componentCursor = operandComponent;
+        componentCursor = componentCursor + 1;
       } while (loopIndex < 4);
       uStack_ac = 0;
-      if ((opVec[0] == 0.0) || (fVar6 = opVec[3], fVar7 = opVec[2], opVec[1] == 0.0)
+      if ((opVec[0] == 0.0) || (operandComponent = opVec[3], fVar7 = opVec[2], opVec[1] == 0.0)
          ) goto LAB_97bd01a0;
       goto joined_r0x97bd003c;
     }
@@ -5368,118 +5397,118 @@ LAB_97bd0328:
     opVec[1] = opVec[0];
     opVec[2] = opVec[0];
   }
-  pfVar10 = opVec;
-  if (iVar21 == 0x36) {
+  operandScratch = opVec;
+  if (opcode == 0x36) {
     opVec[0] = 1.0 - opVec[0];
     opVec[1] = 1.0 - opVec[1];
     opVec[3] = 1.0 - opVec[3];
     opVec[2] = 1.0 - opVec[2];
   }
-  iVar16 = inst[9];
-  uVar20 = (uint)*(byte *)((int)inst + 6);
-  iVar19 = inst[10];
-  iVar22 = inst[0xb];
-  iVar14 = inst[3];
-  iVar21 = inst[4];
-  iVar26 = inst[5];
-  iVar12 = inst[6];
-  iVar13 = inst[7];
-  iVar15 = inst[8];
-  uVar32 = 0;
+  destValueType = inst[9];
+  destUpdatesCC = (uint)*(byte *)((int)inst + 6);
+  destWriteMask = inst[10];
+  destConditionSwizzleZW = inst[0xb];
+  destOffsetTable = inst[3];
+  destBankIndex = inst[4];
+  destSwizzle = inst[5];
+  destIndexInfo = inst[6];
+  destStorageFlags = inst[7];
+  destWord5 = inst[8];
+  destElement = 0;
 LAB_97bd043c:
-  ((int (*)())_InterpreterWriteDestination)(machine,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,
-             uVar20);
-  return piVar18;
+  ((int (*)())_InterpreterWriteDestination)(machine,destOffsetTable,destBankIndex,destSwizzle,destIndexInfo,destStorageFlags,destWord5,destValueType,destWriteMask,destConditionSwizzleZW,destElement,operandScratch,
+             destUpdatesCC);
+  return nextInst;
 }
 
 /* _InterpreterWriteFinalFragmentToBuffer @ 0x97bd3068 (376 bytes) */
-int _InterpreterWriteFinalFragmentToBuffer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int _InterpreterWriteFinalFragmentToBuffer(machine, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, viewportScaleBias)
+  int *machine;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 viewportScaleBias;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  undefined1 auStack_40 [16];
-  int local_30;
-  int local_2c;
-  int local_28;
-  int local_24;
+  int programInfo;
+  int emulator;
+  int *fragmentColor;
+  undefined1 destinationColor [16];
+  int resultR;
+  int resultG;
+  int resultB;
+  int resultA;
   
-  piVar3 = param_1 + 0x292;
-  iVar2 = *param_1;
-  iVar1 = *(int *)(iVar2 + 0xd80);
-  if ((*(uint *)(iVar1 + 0x3c) & 1) != 0) {
-    iVar1 = _InterpreterRasterOpMachine_AlphaTest(param_1 + 0x289,piVar3);
-    if (iVar1 != 0) {
+  fragmentColor = machine + 0x292;
+  emulator = *machine;
+  programInfo = *(int *)(emulator + 0xd80);
+  if ((*(uint *)(programInfo + 0x3c) & 1) != 0) {
+    programInfo = _InterpreterRasterOpMachine_AlphaTest(machine + 0x289,fragmentColor);
+    if (programInfo != 0) {
       return;
     }
-    iVar1 = *(int *)(iVar2 + 0xd80);
+    programInfo = *(int *)(emulator + 0xd80);
   }
-  if ((*(uint *)(iVar1 + 0x3c) & 6) != 0) {
-    iVar1 = _InterpreterRasterOpMachine_DepthAndStencilTest(param_1 + 0x289);
-    if (iVar1 != 0) {
+  if ((*(uint *)(programInfo + 0x3c) & 6) != 0) {
+    programInfo = _InterpreterRasterOpMachine_DepthAndStencilTest(machine + 0x289);
+    if (programInfo != 0) {
       return;
     }
-    iVar1 = *(int *)(iVar2 + 0xd80);
+    programInfo = *(int *)(emulator + 0xd80);
   }
-  if ((*(uint *)(iVar1 + 0x3c) & 0x68) != 0) {
-    ((int (*)())_InterpreterUnpackPixel)(param_1,auStack_40,*(undefined4 *)(iVar2 + 0xd88));
-    iVar1 = *(int *)(iVar2 + 0xd80);
+  if ((*(uint *)(programInfo + 0x3c) & 0x68) != 0) {
+    ((int (*)())_InterpreterUnpackPixel)(machine,destinationColor,*(undefined4 *)(emulator + 0xd88));
+    programInfo = *(int *)(emulator + 0xd80);
   }
-  if ((*(uint *)(iVar1 + 0x3c) & 8) != 0) {
-    _InterpreterRasterOpMachine_Blending(param_1 + 0x289,piVar3,auStack_40,&local_30);
-    param_1[0x292] = local_30;
-    param_1[0x293] = local_2c;
-    param_1[0x294] = local_28;
-    param_1[0x295] = local_24;
-    iVar1 = *(int *)(iVar2 + 0xd80);
+  if ((*(uint *)(programInfo + 0x3c) & 8) != 0) {
+    _InterpreterRasterOpMachine_Blending(machine + 0x289,fragmentColor,destinationColor,&resultR);
+    machine[0x292] = resultR;
+    machine[0x293] = resultG;
+    machine[0x294] = resultB;
+    machine[0x295] = resultA;
+    programInfo = *(int *)(emulator + 0xd80);
   }
-  if ((*(uint *)(iVar1 + 0x3c) & 0x20) != 0) {
-    _InterpreterRasterOpMachine_LogicOp(param_1 + 0x289,piVar3,auStack_40,&local_30);
-    param_1[0x292] = local_30;
-    param_1[0x293] = local_2c;
-    param_1[0x294] = local_28;
-    param_1[0x295] = local_24;
-    iVar1 = *(int *)(iVar2 + 0xd80);
+  if ((*(uint *)(programInfo + 0x3c) & 0x20) != 0) {
+    _InterpreterRasterOpMachine_LogicOp(machine + 0x289,fragmentColor,destinationColor,&resultR);
+    machine[0x292] = resultR;
+    machine[0x293] = resultG;
+    machine[0x294] = resultB;
+    machine[0x295] = resultA;
+    programInfo = *(int *)(emulator + 0xd80);
   }
-  if ((*(uint *)(iVar1 + 0x3c) & 0x40) == 0) {
-    local_24 = param_1[0x295];
-    local_30 = param_1[0x292];
-    local_2c = param_1[0x293];
-    local_28 = param_1[0x294];
+  if ((*(uint *)(programInfo + 0x3c) & 0x40) == 0) {
+    resultA = machine[0x295];
+    resultR = machine[0x292];
+    resultG = machine[0x293];
+    resultB = machine[0x294];
   }
   else {
-    _InterpreterRasterOpMachine_BufferMask(param_1 + 0x289,piVar3,auStack_40,&local_30);
+    _InterpreterRasterOpMachine_BufferMask(machine + 0x289,fragmentColor,destinationColor,&resultR);
   }
-  ((int (*)())_InterpreterPackPixel)(param_1,&local_30,*(undefined4 *)(iVar2 + 0xd88));
+  ((int (*)())_InterpreterPackPixel)(machine,&resultR,*(undefined4 *)(emulator + 0xd88));
   return;
 }
 
 /* _InterpreterRun @ 0x97bd31e0 (1020 bytes) */
-void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
-  bool bVar1;
+  bool wSafeToDivide;
   float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  float fVar10;
-  float fVar11;
-  float fVar12;
-  double dVar13;
-  float fVar14;
+  float clipX;
+  float clipY;
+  float clipZ;
+  float viewportZBias;
+  float viewportZScale;
+  float viewportXScale;
+  float viewportXBias;
+  float viewportYBias;
+  float viewportYScale;
+  float negW;
+  double one;
+  float zero;
   int iVar15;
-  float *pfVar16;
+  float *vertexOutput;
   uint uVar17;
   int iVar18;
   int extraout_r4;
@@ -5491,175 +5520,175 @@ void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,dou
   undefined4 in_r8;
   int iVar19;
   int iVar20;
-  uint uVar21;
-  uint uVar22;
-  int iVar23;
+  uint clipOrMask;
+  uint clipAndMask;
+  int machine;
   double dVar24;
   double extraout_f1;
   double extraout_f1_00;
-  double dVar25;
-  double dVar26;
-  double dVar27;
-  double dVar28;
+  double xScale;
+  double xBias;
+  double invWScale;
+  double invWBias;
   double in_stack_ffffff38;
   double in_stack_ffffff40;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   
-  dVar13 = DOUBLE_97c30a60;
-  iVar19 = *(int *)(*(int *)(param_1 + 0xd80) + 0x38);
-  iVar23 = *(int *)(param_1 + 0xdf0);
-  iVar15 = *(int *)(param_1 + 0xd9c);
-  uVar22 = 0xff;
-  uVar21 = 0;
+  one = DOUBLE_97c30a60;
+  iVar19 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  machine = *(int *)(emulator + 0xdf0);
+  iVar15 = *(int *)(emulator + 0xd9c);
+  clipAndMask = 0xff;
+  clipOrMask = 0;
   if ((iVar19 == 0x8804) || (iVar19 == 0x8b30)) {
-    dVar28 = (double)*(float *)(*(int *)(param_1 + 0xda0) + 0xc);
-    dVar26 = (double)*(float *)(*(int *)(param_1 + 0xda0) + 8);
-    dVar27 = (double)*(float *)(*(int *)(param_1 + 0xda4) + 0xc);
-    dVar25 = (double)*(float *)(*(int *)(param_1 + 0xda4) + 8);
-    fVar6 = TAllocation__guardBlockSize;
-    fVar7 = TAllocation__guardBlockSize;
-    fVar8 = TAllocation__guardBlockSize;
-    fVar9 = TAllocation__guardBlockSize;
-    fVar10 = TAllocation__guardBlockSize;
-    fVar11 = TAllocation__guardBlockSize;
+    invWBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 0xc);
+    xBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 8);
+    invWScale = (double)*(float *)(*(int *)(emulator + 0xda4) + 0xc);
+    xScale = (double)*(float *)(*(int *)(emulator + 0xda4) + 8);
+    viewportZBias = TAllocation__guardBlockSize;
+    viewportZScale = TAllocation__guardBlockSize;
+    viewportXScale = TAllocation__guardBlockSize;
+    viewportXBias = TAllocation__guardBlockSize;
+    viewportYBias = TAllocation__guardBlockSize;
+    viewportYScale = TAllocation__guardBlockSize;
   }
   else {
-    dVar27 = (double)TAllocation__guardBlockSize;
-    dVar25 = dVar27;
-    dVar26 = dVar27;
-    dVar28 = dVar27;
-    fVar6 = *(float *)(iVar15 + 0x1b88);
-    fVar7 = *(float *)(iVar15 + 0x1b78);
-    fVar8 = *(float *)(iVar15 + 0x1b70);
-    fVar9 = *(float *)(iVar15 + 0x1b80);
-    fVar10 = *(float *)(iVar15 + 0x1b84);
-    fVar11 = *(float *)(iVar15 + 0x1b74);
+    invWScale = (double)TAllocation__guardBlockSize;
+    xScale = invWScale;
+    xBias = invWScale;
+    invWBias = invWScale;
+    viewportZBias = *(float *)(iVar15 + 0x1b88);
+    viewportZScale = *(float *)(iVar15 + 0x1b78);
+    viewportXScale = *(float *)(iVar15 + 0x1b70);
+    viewportXBias = *(float *)(iVar15 + 0x1b80);
+    viewportYBias = *(float *)(iVar15 + 0x1b84);
+    viewportYScale = *(float *)(iVar15 + 0x1b74);
   }
-  iVar15 = *(int *)(*(int *)(param_1 + 0xd80) + 0x38);
+  iVar15 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
   if ((iVar15 == 0x8804) || (iVar15 == 0x8b30)) {
-    *(undefined4 *)(iVar23 + 0xa30) = 0;
-    *(float *)(iVar23 + 0xa38) = (float)dVar26;
-    *(float *)(iVar23 + 0xa3c) = (float)(dVar13 / dVar28);
+    *(undefined4 *)(machine + 0xa30) = 0;
+    *(float *)(machine + 0xa38) = (float)xBias;
+    *(float *)(machine + 0xa3c) = (float)(one / invWBias);
   }
-  iVar15 = iVar23 + 0xa5c;
-  *(undefined1 *)(iVar23 + 0xa47) = 0;
-  *(undefined4 *)(iVar23 + 0xa68) = 0;
-  *(int *)(iVar23 + 0xa6c) = iVar15;
-  *(undefined1 *)(iVar23 + 0xa44) = 0;
-  *(undefined1 *)(iVar23 + 0xa45) = 0;
-  *(undefined1 *)(iVar23 + 0xa46) = 0;
-  *(undefined4 *)(iVar23 + 0xa5c) = 0;
-  *(undefined4 *)(iVar23 + 0xa60) = 0;
-  *(undefined4 *)(iVar23 + 0xa64) = 0;
-  fVar14 = TAllocation__guardBlockSize;
-  dVar13 = DOUBLE_97c30a60;
-  iVar19 = param_2;
+  iVar15 = machine + 0xa5c;
+  *(undefined1 *)(machine + 0xa47) = 0;
+  *(undefined4 *)(machine + 0xa68) = 0;
+  *(int *)(machine + 0xa6c) = iVar15;
+  *(undefined1 *)(machine + 0xa44) = 0;
+  *(undefined1 *)(machine + 0xa45) = 0;
+  *(undefined1 *)(machine + 0xa46) = 0;
+  *(undefined4 *)(machine + 0xa5c) = 0;
+  *(undefined4 *)(machine + 0xa60) = 0;
+  *(undefined4 *)(machine + 0xa64) = 0;
+  zero = TAllocation__guardBlockSize;
+  one = DOUBLE_97c30a60;
+  iVar19 = elementCount;
   do {
     if (iVar19 == 0) {
-      iVar15 = *(int *)(*(int *)(param_1 + 0xd80) + 0x38);
+      iVar15 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
       if ((iVar15 == 0x8804) || (iVar15 == 0x8b30)) {
-        uVar21 = 0;
+        clipOrMask = 0;
       }
       else {
-        uVar21 = uVar22 << 8 | uVar21;
+        clipOrMask = clipAndMask << 8 | clipOrMask;
       }
-      FUN_97c1a28c(uVar21);
+      FUN_97c1a28c(clipOrMask);
       return;
     }
     iVar19 = iVar19 + -1;
-    *(undefined4 *)(iVar23 + 0xa58) = 0;
-    iVar20 = *(int *)(param_1 + 0xd80);
+    *(undefined4 *)(machine + 0xa58) = 0;
+    iVar20 = *(int *)(emulator + 0xd80);
     if (((*(uint *)(iVar20 + 0x3c) & 6) == 4) && ((*(uint *)(iVar20 + 0x34) & 0xa000) == 0)) {
-      uVar17 = _InterpreterRasterOpMachine_DepthTest(iVar23 + 0xa24);
-      *(uint *)(iVar23 + 0xa58) = *(uint *)(iVar23 + 0xa58) | uVar17;
-      iVar20 = *(int *)(param_1 + 0xd80);
-      param_2 = extraout_r4;
+      uVar17 = _InterpreterRasterOpMachine_DepthTest(machine + 0xa24);
+      *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | uVar17;
+      iVar20 = *(int *)(emulator + 0xd80);
+      elementCount = extraout_r4;
       fparam_1 = extraout_f1;
     }
     iVar18 = *(int *)(iVar20 + 0x120);
-    if ((iVar18 != 0) && (*(int *)(iVar23 + 0xa58) == 0)) {
+    if ((iVar18 != 0) && (*(int *)(machine + 0xa58) == 0)) {
       do {
-        iVar18 = ((int * (*)())_InterpreterEmulateOp)(iVar23,iVar18,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
+        iVar18 = ((int * (*)())_InterpreterEmulateOp)(machine,iVar18,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
                             fparam_7,fparam_8,in_stack_ffffff38,in_stack_ffffff40,in_stack_ffffff48,
                             in_stack_ffffff50,in_stack_ffffff58);
         fparam_1 = extraout_f1_00;
         if (iVar18 == 0) break;
-      } while (*(int *)(iVar23 + 0xa58) == 0);
-      iVar20 = *(int *)(param_1 + 0xd80);
-      param_2 = extraout_r4_00;
+      } while (*(int *)(machine + 0xa58) == 0);
+      iVar20 = *(int *)(emulator + 0xd80);
+      elementCount = extraout_r4_00;
     }
     if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
-      if (*(int *)(iVar23 + 0xa58) == 0) {
-        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(iVar23,param_2,in_r5,in_r6,in_r7,in_r8,iVar15);
-        iVar20 = *(int *)(param_1 + 0xd80);
-        param_2 = extraout_r4_01;
+      if (*(int *)(machine + 0xa58) == 0) {
+        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,in_r5,in_r6,in_r7,in_r8,iVar15);
+        iVar20 = *(int *)(emulator + 0xd80);
+        elementCount = extraout_r4_01;
       }
     }
     else {
-      pfVar16 = *(float **)(param_1 + 0xd88);
+      vertexOutput = *(float **)(emulator + 0xd88);
       uVar17 = 0;
-      fVar2 = pfVar16[7];
-      fVar3 = pfVar16[4];
-      fVar12 = -fVar2;
-      fVar4 = pfVar16[5];
-      fVar5 = pfVar16[6];
-      if (fVar3 < fVar12) {
+      fVar2 = vertexOutput[7];
+      clipX = vertexOutput[4];
+      negW = -fVar2;
+      clipY = vertexOutput[5];
+      clipZ = vertexOutput[6];
+      if (clipX < negW) {
         uVar17 = 0x10;
       }
-      if (fVar2 <= fVar3) {
+      if (fVar2 <= clipX) {
         uVar17 = uVar17 | 0x20;
       }
-      if (fVar4 < fVar12) {
+      if (clipY < negW) {
         uVar17 = uVar17 | 4;
       }
-      if (fVar2 <= fVar4) {
+      if (fVar2 <= clipY) {
         uVar17 = uVar17 | 8;
       }
-      if (fVar5 < fVar12) {
+      if (clipZ < negW) {
         uVar17 = uVar17 | 1;
       }
-      if (fVar2 < fVar5) {
+      if (fVar2 < clipZ) {
         uVar17 = uVar17 | 2;
       }
-      pfVar16[0x1f] = GH_U2F((unsigned int)((uVar17 | 0x1000000)));
+      vertexOutput[0x1f] = GH_U2F((unsigned int)((uVar17 | 0x1000000)));
       if (uVar17 == 0) {
-        if (fVar2 < fVar14) {
-          bVar1 = fVar2 <= FLOAT_97c3acf4;
+        if (fVar2 < zero) {
+          wSafeToDivide = fVar2 <= FLOAT_97c3acf4;
         }
         else {
-          bVar1 = FLOAT_97c3acf0 <= fVar2;
+          wSafeToDivide = FLOAT_97c3acf0 <= fVar2;
         }
-        if (bVar1) {
-          fVar12 = FLOAT_97c3acd8 / fVar2;
+        if (wSafeToDivide) {
+          negW = FLOAT_97c3acd8 / fVar2;
         }
         else {
-          fVar12 = FLOAT_97c3acfc;
-          if (fVar14 <= fVar2) {
-            fVar12 = FLOAT_97c3acf8;
+          negW = FLOAT_97c3acfc;
+          if (zero <= fVar2) {
+            negW = FLOAT_97c3acf8;
           }
         }
-        pfVar16[3] = fVar12;
-        *pfVar16 = fVar3 * fVar12 * fVar8 + fVar9;
-        pfVar16[1] = fVar4 * fVar12 * fVar11 + fVar10;
-        pfVar16[2] = fVar5 * fVar12 * fVar7 + fVar6;
+        vertexOutput[3] = negW;
+        *vertexOutput = clipX * negW * viewportXScale + viewportXBias;
+        vertexOutput[1] = clipY * negW * viewportYScale + viewportYBias;
+        vertexOutput[2] = clipZ * negW * viewportZScale + viewportZBias;
       }
-      iVar20 = *(int *)(param_1 + 0xd80);
-      uVar22 = uVar22 & uVar17;
-      uVar21 = uVar21 | uVar17;
+      iVar20 = *(int *)(emulator + 0xd80);
+      clipAndMask = clipAndMask & uVar17;
+      clipOrMask = clipOrMask | uVar17;
     }
-    *(int *)(param_1 + 0xd8c) = *(int *)(param_1 + 0xd8c) + *(int *)(iVar20 + 0xbc);
-    *(int *)(param_1 + 0xd88) = *(int *)(param_1 + 0xd88) + *(int *)(iVar20 + 0xb8);
-    iVar15 = *(int *)(param_1 + 0xda8) + *(int *)(iVar20 + 0xd8);
-    *(int *)(param_1 + 0xda8) = iVar15;
-    *(int *)(param_1 + 0xdac) = *(int *)(param_1 + 0xdac) + *(int *)(iVar20 + 0xdc);
+    *(int *)(emulator + 0xd8c) = *(int *)(emulator + 0xd8c) + *(int *)(iVar20 + 0xbc);
+    *(int *)(emulator + 0xd88) = *(int *)(emulator + 0xd88) + *(int *)(iVar20 + 0xb8);
+    iVar15 = *(int *)(emulator + 0xda8) + *(int *)(iVar20 + 0xd8);
+    *(int *)(emulator + 0xda8) = iVar15;
+    *(int *)(emulator + 0xdac) = *(int *)(emulator + 0xdac) + *(int *)(iVar20 + 0xdc);
     if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
-      fVar2 = (float)((double)*(float *)(iVar23 + 0xa30) + dVar13);
+      fVar2 = (float)((double)*(float *)(machine + 0xa30) + one);
       dVar24 = (double)fVar2;
-      *(float *)(iVar23 + 0xa30) = fVar2;
-      *(float *)(iVar23 + 0xa38) = (float)(dVar25 * dVar24 + dVar26);
-      *(float *)(iVar23 + 0xa3c) = (float)(dVar13 / (double)(float)(dVar27 * dVar24 + dVar28));
+      *(float *)(machine + 0xa30) = fVar2;
+      *(float *)(machine + 0xa38) = (float)(xScale * dVar24 + xBias);
+      *(float *)(machine + 0xa3c) = (float)(one / (double)(float)(invWScale * dVar24 + invWBias));
     }
   } while( true );
 }

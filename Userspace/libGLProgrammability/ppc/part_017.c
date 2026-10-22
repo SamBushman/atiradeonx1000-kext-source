@@ -911,19 +911,35 @@ switchD_97bf38d0_default:
 }
 
 /* _glpDisassemble2Op @ 0x97bf3acc (56112 bytes) */
-int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, param_5, param_6, param_7, param_8, stateFlags, shaderType, param_11)
+int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, paramNumbers, paramArrayPos, reserved7, outFlagWord, stateFlags, shaderType, optionFlags)
   uint *inst;
   int outText;
   int *outWordCount;
   int *outTextLength;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 paramNumbers;
+  undefined4 paramArrayPos;
+  undefined4 reserved7;
+  undefined4 outFlagWord;
   uint *stateFlags;
   int shaderType;
-  undefined4 param_11;
+  undefined4 optionFlags;
 {
+  int swizzleSelect;
+  int nextComponent;
+  int outLen;
+  int outBase;
+  int componentCount;
+  int typeTextLength;
+  uint writeMaskBits2;
+  uint instWord2b;
+  uint sourceMode2;
+  uint flagWord2;
+  uint opcode;
+  uint flagWord;
+  uint sizeMinusOne;
+  uint writeMaskBits;
+  uint sourceMode;
+  uint instWord0;
   char *outPtr;
   int outPos;
   int opOffsetOrTailLength;
@@ -953,50 +969,50 @@ int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, param_5, para
   undefined *opStringTable;
   char ch;
   char *mnemonic;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int outLen2;
+  int outStart;
+  int swizzleSelect2;
   uint uVar8;
   uint uVar9;
-  uint uVar10;
+  uint writeMaskBits3;
   int iVar11;
-  int iVar12;
+  int nextComponent2;
   int iVar13;
   
   opStringTable = PTR__ppstreamOpString_a7b7c108;
-  uVar8 = *inst;
-  uVar9 = uVar8 >> 0x12 & 0xff;
+  instWord0 = *inst;
+  opcode = instWord0 >> 0x12 & 0xff;
   if ((int)inst[3] < 0) {
     return 0xffffffff;
   }
-  if (((((uVar8 >> 0x1d != 0) && ((int)inst[4] < 0)) &&
+  if (((((instWord0 >> 0x1d != 0) && ((int)inst[4] < 0)) &&
        (((inst[4] >> 0x17 & 7) != 2 || (shaderType == 0x8b30)))) ||
-      (((1 < uVar8 >> 0x1d && ((int)inst[6] < 0)) &&
+      (((1 < instWord0 >> 0x1d && ((int)inst[6] < 0)) &&
        (((inst[6] >> 0x17 & 7) != 2 || (shaderType == 0x8b30)))))) ||
-     ((((2 < uVar8 >> 0x1d && ((int)inst[8] < 0)) &&
-       (((inst[8] >> 0x17 & 7) != 2 || (shaderType == 0x8b30)))) || (0x70 < uVar9)))) {
+     ((((2 < instWord0 >> 0x1d && ((int)inst[8] < 0)) &&
+       (((inst[8] >> 0x17 & 7) != 2 || (shaderType == 0x8b30)))) || (0x70 < opcode)))) {
 LAB_97c017a4:
     return 0xffffffff;
   }
-  opOffsetOrTailLength = uVar9 * 4;
-  iVar6 = outText;
-  switch(uVar9) {
+  opOffsetOrTailLength = opcode * 4;
+  outStart = outText;
+  switch(opcode) {
   case 0:
-    iVar11 = 1;
+    componentCount = 1;
     if ((inst[2] & 0x1000) != 0) {
-      iVar11 = (inst[2] >> 10 & 3) + 1;
+      componentCount = (inst[2] >> 10 & 3) + 1;
     }
     loopIndex3 = 0;
-    if (iVar11 == 0) goto LAB_97c0178c;
+    if (componentCount == 0) goto LAB_97c0178c;
     do {
       copyIndex4 = 0;
       ch = s_MOV_97c2e430[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex4) = ch;
+        *(char *)(outStart + copyIndex4) = ch;
         ch = "MOV "[copyIndex4 + 1];
         copyIndex4 = copyIndex4 + 1;
       }
-      outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex4,loopIndex3,0,0);
+      outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex4,loopIndex3,0,0);
       copyIndex3 = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -1004,7 +1020,7 @@ LAB_97c017a4:
         ch = ", "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,param_5,param_6,2,loopIndex3,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,paramNumbers,paramArrayPos,2,loopIndex3,0,8);
       copyIndex4 = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -1013,8 +1029,8 @@ LAB_97c017a4:
         copyIndex4 = copyIndex4 + 1;
       }
       loopIndex3 = loopIndex3 + 1;
-      iVar6 = outCursor + copyIndex4;
-    } while (loopIndex3 < iVar11);
+      outStart = outCursor + copyIndex4;
+    } while (loopIndex3 < componentCount);
     goto LAB_97c01788;
   default:
     goto LAB_97c017a4;
@@ -1044,11 +1060,11 @@ LAB_97c017a4:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -1062,7 +1078,7 @@ LAB_97c017a4:
       ch = "FLR scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,9);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,9);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -1077,11 +1093,11 @@ LAB_97c017a4:
       ch = "MOV "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s____scratch__97c2e438[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", -scratch;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -1101,7 +1117,7 @@ LAB_97c017a4:
       ch = "DDX scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -1124,7 +1140,7 @@ LAB_97c017a4:
       ch = "DDY scratch1, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -1147,11 +1163,11 @@ LAB_97c017a4:
       ch = "ADD "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -1166,7 +1182,7 @@ LAB_97c017a4:
         ch = "SLT scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -1181,7 +1197,7 @@ LAB_97c017a4:
         ch = "SLT scratch1, "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,2,0,0,9);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,2,0,0,9);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -1196,11 +1212,11 @@ LAB_97c017a4:
         ch = "SUB "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch1__scratch__97c2e93c[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch1, scratch;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -1222,22 +1238,22 @@ LAB_97c017a4:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       opOffsetOrTailLength = 0;
       ch = s_____end_97c2e910[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n# end\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
     }
     break;
   case 8:
-    uVar9 = *stateFlags;
-    *stateFlags = uVar9 | 0x2000;
-    uVar8 = inst[4] >> 0xc & 3;
-    if (uVar8 == 2) {
-      *stateFlags = uVar9 | 0x3001;
+    flagWord2 = *stateFlags;
+    *stateFlags = flagWord2 | 0x2000;
+    sourceMode = inst[4] >> 0xc & 3;
+    if (sourceMode == 2) {
+      *stateFlags = flagWord2 | 0x3001;
       copyIndex = 0;
       ch = s_DP3_scratch_x__97c2e734[0];
       while (ch != '\0') {
@@ -1245,7 +1261,7 @@ LAB_97c017a4:
         ch = "DP3 scratch.x, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___kONE__97c2e9b0[0];
       while (ch != '\0') {
@@ -1254,13 +1270,13 @@ LAB_97c017a4:
         copyIndex = copyIndex + 1;
       }
 LAB_97bfb2c8:
-      iVar11 = outCursor + copyIndex;
+      outBase = outCursor + copyIndex;
     }
     else {
-      iVar11 = outText;
-      if (uVar8 < 3) {
-        if (uVar8 == 1) {
-          *stateFlags = uVar9 | 0x2001;
+      outBase = outText;
+      if (sourceMode < 3) {
+        if (sourceMode == 1) {
+          *stateFlags = flagWord2 | 0x2001;
           copyIndex = 0;
           ch = s_ADD_scratch_x__97c2e960[0];
           while (ch != '\0') {
@@ -1268,7 +1284,7 @@ LAB_97bfb2c8:
             ch = "ADD scratch.x, "[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,2);
           copyIndex = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -1276,7 +1292,7 @@ LAB_97bfb2c8:
             ch = ", "[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,2);
           copyIndex = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -1287,8 +1303,8 @@ LAB_97bfb2c8:
           goto LAB_97bfb2c8;
         }
       }
-      else if (uVar8 == 3) {
-        *stateFlags = uVar9 | 0x3001;
+      else if (sourceMode == 3) {
+        *stateFlags = flagWord2 | 0x3001;
         copyIndex = 0;
         ch = s_DP4_scratch_x__97c2e744[0];
         while (ch != '\0') {
@@ -1296,7 +1312,7 @@ LAB_97bfb2c8:
           ch = "DP4 scratch.x, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___kONE__97c2e9b0[0];
         while (ch != '\0') {
@@ -1310,22 +1326,22 @@ LAB_97bfb2c8:
     copyIndex3 = 0;
     ch = s_SGE_97c2e91c[0];
     while (ch != '\0') {
-      *(char *)(iVar11 + copyIndex3) = ch;
+      *(char *)(outBase + copyIndex3) = ch;
       ch = "SGE "[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar11 + copyIndex3,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch_x__kHALF__97c2e970[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch.x, kHALF;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
     break;
   case 9:
-    uVar9 = inst[4] >> 0xc & 3;
-    if (uVar9 == 2) {
+    sourceMode2 = inst[4] >> 0xc & 3;
+    if (sourceMode2 == 2) {
       *stateFlags = *stateFlags | 1;
       copyIndex = 0;
       ch = s_MUL_scratch_x__97c2e6fc[0];
@@ -1334,7 +1350,7 @@ LAB_97bfb2c8:
         ch = "MUL scratch.x, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,2);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,2);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -1342,7 +1358,7 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,1,2);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,1,2);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -1365,17 +1381,17 @@ LAB_97bfb2c8:
         ch = ", scratch.x, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,2,2);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,2,2);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
     }
-    else if (uVar9 < 3) {
-      if (uVar9 != 1) goto LAB_97c0178c;
+    else if (sourceMode2 < 3) {
+      if (sourceMode2 != 1) goto LAB_97c0178c;
       copyIndex = 0;
       ch = s_MUL_97c2e4f0[0];
       while (ch != '\0') {
@@ -1391,7 +1407,7 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,2);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,2);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -1399,17 +1415,17 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,1,2);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,1,2);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
     }
     else {
-      if (uVar9 != 3) goto LAB_97c0178c;
+      if (sourceMode2 != 3) goto LAB_97c0178c;
       *stateFlags = *stateFlags | 1;
       copyIndex = 0;
       ch = s_MUL_scratch_xy__97c2e510[0];
@@ -1418,7 +1434,7 @@ LAB_97bfb2c8:
         ch = "MUL scratch.xy, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0x3210,4)
+      outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0x3210,4)
       ;
       copyIndex = 0;
       ch = s___97c2d7ec[0];
@@ -1427,7 +1443,7 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor6 + copyIndex,param_5,param_6,2,0,0x3232,4);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor6 + copyIndex,paramNumbers,paramArrayPos,2,0,0x3232,4);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -1442,11 +1458,11 @@ LAB_97bfb2c8:
         ch = "MUL "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch_x__scratch_y__97c2e524[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch.x, scratch.y;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -1469,31 +1485,31 @@ LAB_97bfb2c8:
       ch = ", kONE, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
     break;
   case 0xc:
-    uVar8 = inst[2];
+    writeMaskBits = inst[2];
     *stateFlags = *stateFlags | 1;
-    uVar9 = inst[2];
-    uVar8 = uVar8 >> 0xd & 0xf;
+    instWord2b = inst[2];
+    writeMaskBits = writeMaskBits >> 0xd & 0xf;
     loopIndex = 0;
     do {
-      if ((uVar8 & 1) != 0) {
+      if ((writeMaskBits & 1) != 0) {
         copyIndex2 = 0;
         ch = s_RSQ_scratch_x__97c2e57c[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "RSQ scratch.x, "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex2,param_5,param_6,2,0,loopIndex,10)
+        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex2,paramNumbers,paramArrayPos,2,0,loopIndex,10)
         ;
         copyIndex3 = 0;
         ch = s___97c2d8f8[0];
@@ -1517,37 +1533,37 @@ LAB_97bfb2c8:
           ch = ", scratch.x;\n"[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        uVar9 = inst[2];
-        iVar6 = outCursor + copyIndex2;
+        instWord2b = inst[2];
+        outStart = outCursor + copyIndex2;
       }
       loopIndex = loopIndex + 1;
-      uVar8 = (int)uVar8 >> 1;
-    } while (loopIndex <= (int)(uVar9 >> 10 & 3));
+      writeMaskBits = (int)writeMaskBits >> 1;
+    } while (loopIndex <= (int)(instWord2b >> 10 & 3));
     goto LAB_97c01788;
   case 0xd:
   case 0x10:
   case 0x13:
-    uVar8 = inst[2];
-    uVar9 = uVar8 >> 0xd & 0xf;
+    writeMaskBits = inst[2];
+    writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
     loopIndex3 = 0;
     do {
-      if ((uVar9 & 1) != 0) {
+      if ((writeMaskBits2 & 1) != 0) {
         mnemonic = *(char **)(opStringTable + opOffsetOrTailLength);
         copyIndex10 = 0;
         ch = *mnemonic;
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex10) = ch;
+          *(char *)(outStart + copyIndex10) = ch;
           copyIndex10 = copyIndex10 + 1;
           ch = mnemonic[copyIndex10];
         }
         copyIndex5 = 0;
         ch = s__97c291c0[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex10 + copyIndex5) = ch;
+          *(char *)(outStart + copyIndex10 + copyIndex5) = ch;
           ch = " "[copyIndex5 + 1];
           copyIndex5 = copyIndex5 + 1;
         }
-        outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex10 + copyIndex5,0,loopIndex3,2);
+        outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex10 + copyIndex5,0,loopIndex3,2);
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -1555,7 +1571,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,param_5,param_6,2,0,loopIndex3,10)
+        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex3,10)
         ;
         copyIndex4 = 0;
         ch = s___97c2d8f8[0];
@@ -1564,17 +1580,17 @@ LAB_97bfb2c8:
           ch = ";\n"[copyIndex4 + 1];
           copyIndex4 = copyIndex4 + 1;
         }
-        uVar8 = inst[2];
-        iVar6 = outCursor6 + copyIndex4;
+        writeMaskBits = inst[2];
+        outStart = outCursor6 + copyIndex4;
       }
       loopIndex3 = loopIndex3 + 1;
-      uVar9 = (int)uVar9 >> 1;
-    } while (loopIndex3 <= (int)(uVar8 >> 10 & 3));
+      writeMaskBits2 = (int)writeMaskBits2 >> 1;
+    } while (loopIndex3 <= (int)(writeMaskBits >> 10 & 3));
     goto LAB_97c01788;
   case 0x12:
     *stateFlags = *stateFlags | 1;
-    uVar8 = inst[4] >> 0xc & 3;
-    if (uVar8 == 1) {
+    sourceMode = inst[4] >> 0xc & 3;
+    if (sourceMode == 1) {
       copyIndex = 0;
       ch = s_SWZ_scratch__97c2e79c[0];
       while (ch != '\0') {
@@ -1582,15 +1598,15 @@ LAB_97bfb2c8:
         ch = "SWZ scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpSourceType)(inst,outText + copyIndex,param_5,param_6,2,0,0);
+      typeTextLength = ((int (*)())_glpSourceType)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0);
       copyIndex = 0;
       ch = s___x__y__0__0__97c2e7ac[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex) = ch;
+        *(char *)(typeTextLength + copyIndex) = ch;
         ch = ", x, y, 0, 0;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = iVar6 + copyIndex;
+      outCursor = typeTextLength + copyIndex;
       copyIndex = 0;
       ch = s_DP3_scratch_x__scratch__scratch__97c2e7bc[0];
       while (ch != '\0') {
@@ -1600,7 +1616,7 @@ LAB_97bfb2c8:
       }
     }
     else {
-      if (uVar8 == 0) {
+      if (sourceMode == 0) {
         copyIndex = 0;
         ch = s_MUL_scratch_x__97c2e6fc[0];
         while (ch != '\0') {
@@ -1609,7 +1625,7 @@ LAB_97bfb2c8:
           copyIndex = copyIndex + 1;
         }
       }
-      else if (uVar8 == 2) {
+      else if (sourceMode == 2) {
         copyIndex = 0;
         ch = s_DP3_scratch_x__97c2e734[0];
         while (ch != '\0') {
@@ -1627,7 +1643,7 @@ LAB_97bfb2c8:
           copyIndex = copyIndex + 1;
         }
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -1635,7 +1651,7 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -1659,11 +1675,11 @@ LAB_97bfb2c8:
       ch = "RCP "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -1672,8 +1688,8 @@ LAB_97bfb2c8:
     if ((((inst[4] >> 0xc & 3) == 3) || ((stateFlags[1] & 0x800000) == 0)) || (shaderType != 0x8b30))
     {
       *stateFlags = *stateFlags | 1;
-      uVar8 = inst[2] >> 10 & 3;
-      if (uVar8 == 0) {
+      sizeMinusOne = inst[2] >> 10 & 3;
+      if (sizeMinusOne == 0) {
         copyIndex = 0;
         ch = s_MUL_scratch_x__97c2e6fc[0];
         while (ch != '\0') {
@@ -1681,7 +1697,7 @@ LAB_97bfb2c8:
           ch = "MUL scratch.x, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -1689,7 +1705,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -1698,7 +1714,7 @@ LAB_97bfb2c8:
           copyIndex = copyIndex + 1;
         }
       }
-      else if (uVar8 == 1) {
+      else if (sizeMinusOne == 1) {
         copyIndex = 0;
         ch = s_MUL_scratch_xy__97c2e510[0];
         while (ch != '\0') {
@@ -1706,7 +1722,7 @@ LAB_97bfb2c8:
           ch = "MUL scratch.xy, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -1714,7 +1730,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -1732,7 +1748,7 @@ LAB_97bfb2c8:
         }
       }
       else {
-        if (uVar8 == 2) {
+        if (sizeMinusOne == 2) {
           copyIndex = 0;
           ch = s_DP3_scratch_x__97c2e734[0];
           while (ch != '\0') {
@@ -1750,7 +1766,7 @@ LAB_97bfb2c8:
             copyIndex = copyIndex + 1;
           }
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -1758,7 +1774,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -1790,18 +1806,18 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       opOffsetOrTailLength = 0;
       ch = s___scratch_x__97c2e594[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
     }
     else {
-      uVar8 = *stateFlags;
-      *stateFlags = uVar8 | 0x800000;
+      flagWord = *stateFlags;
+      *stateFlags = flagWord | 0x800000;
       if ((inst[4] >> 0xc & 3) == 2) {
         copyIndex = 0;
         ch = s_NRM_97c2e6dc[0];
@@ -1810,19 +1826,19 @@ LAB_97bfb2c8:
           ch = "NRM "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar11 = outText + copyIndex;
+        outBase = outText + copyIndex;
         if ((inst[2] & 0x3fc) == 0x6c) {
-          outCursor3 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar11,0,0,0);
+          outCursor3 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase,0,0,0);
         }
         else {
           copyIndex3 = 0;
           ch = s_scratch_97c2e63c[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex3) = ch;
+            *(char *)(outBase + copyIndex3) = ch;
             ch = "scratch"[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor3 = iVar11 + copyIndex3;
+          outCursor3 = outBase + copyIndex3;
         }
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
@@ -1831,7 +1847,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor3 + copyIndex3,param_5,param_6,2,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor3 + copyIndex3,paramNumbers,paramArrayPos,2,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -1841,7 +1857,7 @@ LAB_97bfb2c8:
         }
       }
       else {
-        *stateFlags = uVar8 | 0x800001;
+        *stateFlags = flagWord | 0x800001;
         copyIndex = 0;
         ch = s_MUL_scratch__97c2e62c[0];
         while (ch != '\0') {
@@ -1849,7 +1865,7 @@ LAB_97bfb2c8:
           ch = "MUL scratch, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
         if ((inst[4] & 0x3000) == 0) {
           *stateFlags = *stateFlags | 0x1000;
           copyIndex2 = 0;
@@ -1899,16 +1915,16 @@ LAB_97bfb2c8:
           copyIndex = copyIndex + 1;
         }
       }
-      iVar6 = outCursor + copyIndex;
+      outStart = outCursor + copyIndex;
       if ((inst[2] & 0x3fc) == 0x6c) goto LAB_97c01788;
       copyIndex = 0;
       ch = s_MOV_97c2e430[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex) = ch;
+        *(char *)(outStart + copyIndex) = ch;
         ch = "MOV "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex,0,0,0);
+      outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex,0,0,0);
       copyIndex = 0;
       ch = s___scratch_97c2e65c[0];
       while (ch != '\0') {
@@ -1916,11 +1932,11 @@ LAB_97bfb2c8:
         ch = ", scratch"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outCursor + copyIndex);
+      outStart = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outCursor + copyIndex);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -1942,11 +1958,11 @@ LAB_97bfb2c8:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___0_0174532925199__97c2e9d0[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", 0.0174532925199;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -1967,11 +1983,11 @@ LAB_97bfb2c8:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___57_295779513082__97c2e9bc[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", 57.295779513082;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -1983,11 +1999,11 @@ LAB_97bfb2c8:
         copyIndex2 = 0;
         ch = s_SIN_97c2eb80[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "SIN "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,0,loopIndex,2);
+        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,0,loopIndex,2);
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -1995,7 +2011,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,loopIndex,10)
+        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex,10)
         ;
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
@@ -2005,12 +2021,12 @@ LAB_97bfb2c8:
           copyIndex2 = copyIndex2 + 1;
         }
         loopIndex = loopIndex + 1;
-        iVar6 = outCursor6 + copyIndex2;
+        outStart = outCursor6 + copyIndex2;
       } while (loopIndex <= (int)(inst[2] >> 10 & 3));
       opOffsetOrTailLength = 0;
       ch = s___end_97c2eb88[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = "# end\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -2025,17 +2041,17 @@ LAB_97bfb2c8:
           ch = "# sine (SIN) using NV_vertex_program2_option\n"[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        iVar6 = outText + copyIndex3;
+        outStart = outText + copyIndex3;
         loopIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_SIN_97c2eb80[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "SIN "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,0,loopIndex,2);
+          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,0,loopIndex,2);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -2043,7 +2059,7 @@ LAB_97bfb2c8:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,loopIndex,10);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex,10);
           copyIndex2 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -2052,7 +2068,7 @@ LAB_97bfb2c8:
             copyIndex2 = copyIndex2 + 1;
           }
           loopIndex = loopIndex + 1;
-          iVar6 = outCursor + copyIndex2;
+          outStart = outCursor + copyIndex2;
         } while (loopIndex <= (int)(inst[2] >> 10 & 3));
         goto LAB_97c01788;
       }
@@ -2064,7 +2080,7 @@ LAB_97bfb2c8:
         ch = "MAD scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___k2PI_RCP__kHALF__97c2ebc0[0];
       while (ch != '\0') {
@@ -2175,11 +2191,11 @@ LAB_97bfb2c8:
         ch = "MUL "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch2__scratch1__97c2ed08[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch2, scratch1;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -2194,17 +2210,17 @@ LAB_97bfb2c8:
         ch = "# cosine (COS)\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      iVar6 = outText + copyIndex3;
+      outStart = outText + copyIndex3;
       loopIndex = 0;
       do {
         copyIndex2 = 0;
         ch = s_COS_97c2ed30[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "COS "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,0,loopIndex,2);
+        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,0,loopIndex,2);
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -2212,7 +2228,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,loopIndex,10)
+        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex,10)
         ;
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
@@ -2222,12 +2238,12 @@ LAB_97bfb2c8:
           copyIndex2 = copyIndex2 + 1;
         }
         loopIndex = loopIndex + 1;
-        iVar6 = outCursor6 + copyIndex2;
+        outStart = outCursor6 + copyIndex2;
       } while (loopIndex <= (int)(inst[2] >> 10 & 3));
       opOffsetOrTailLength = 0;
       ch = s___end_97c2eb88[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = "# end\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -2242,17 +2258,17 @@ LAB_97bfb2c8:
           ch = "# cosine (COS) using NV_vertex_program2_option\n"[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        iVar6 = outText + copyIndex3;
+        outStart = outText + copyIndex3;
         loopIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_COS_97c2ed30[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "COS "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,0,loopIndex,2);
+          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,0,loopIndex,2);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -2260,7 +2276,7 @@ LAB_97bfb2c8:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,loopIndex,10);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex,10);
           copyIndex2 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -2269,7 +2285,7 @@ LAB_97bfb2c8:
             copyIndex2 = copyIndex2 + 1;
           }
           loopIndex = loopIndex + 1;
-          iVar6 = outCursor + copyIndex2;
+          outStart = outCursor + copyIndex2;
         } while (loopIndex <= (int)(inst[2] >> 10 & 3));
         goto LAB_97c01788;
       }
@@ -2281,7 +2297,7 @@ LAB_97bfb2c8:
         ch = "MAD scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___k2PI_RCP__kHALF__97c2ebc0[0];
       while (ch != '\0') {
@@ -2352,11 +2368,11 @@ LAB_97bfb2c8:
         ch = "MAD "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch1___kHALF__kONE__97c2edac[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch1, -kHALF, kONE;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -2371,7 +2387,7 @@ LAB_97bfb2c8:
       ch = "MAD scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___kPI_RCP__kHALF__97c2edc8[0];
     while (ch != '\0') {
@@ -2492,11 +2508,11 @@ LAB_97bfb2c8:
       ch = "MUL "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -2510,7 +2526,7 @@ LAB_97bfb2c8:
       ch = "SLT scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___kZERO__97c2e484[0];
     while (ch != '\0') {
@@ -2525,7 +2541,7 @@ LAB_97bfb2c8:
       ch = "MUL scratch1, "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2533,7 +2549,7 @@ LAB_97bfb2c8:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -2594,7 +2610,7 @@ LAB_97bfb2c8:
       ch = "MUL scratch2, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___scratch1__97c2e684[0];
     while (ch != '\0') {
@@ -2669,23 +2685,23 @@ LAB_97bfb2c8:
       ch = "MUL scratch1, scratch2, scratch2;\n"[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+    outLen2 = copyIndex2 + copyIndex3 + copyIndex;
     copyIndex = 0;
     ch = s_MUL_scratch3__scratch1__scratch2_97c2f05c[0];
     while (ch != '\0') {
-      outPtr[copyIndex + iVar5] = ch;
+      outPtr[copyIndex + outLen2] = ch;
       ch = "MUL scratch3, scratch1, scratch2;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + iVar5;
+    outLen = copyIndex + outLen2;
     copyIndex3 = 0;
     ch = s_MUL_scratch4__scratch1__scratch1_97c2f080[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MUL scratch4, scratch1, scratch1;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_MUL_scratch2__kATAN_K1__scratch2_97c2f0a4[0];
     while (ch != '\0') {
@@ -2693,15 +2709,15 @@ LAB_97bfb2c8:
       ch = "MUL scratch2, kATAN_K1, scratch2;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + outPos;
+    outLen = copyIndex + outPos;
     copyIndex3 = 0;
     ch = s_MAD_scratch2__kATAN_K3__scratch3_97c2f0c8[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MAD scratch2, kATAN_K3, scratch3, scratch2;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_MAD_scratch1__kATAN_K2__scratch1_97c2f0f8[0];
     while (ch != '\0') {
@@ -2709,15 +2725,15 @@ LAB_97bfb2c8:
       ch = "MAD scratch1, kATAN_K2, scratch1, kONE;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + outPos;
+    outLen = copyIndex + outPos;
     copyIndex3 = 0;
     ch = s_MAD_scratch1__kATAN_K4__scratch4_97c2f124[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MAD scratch1, kATAN_K4, scratch4, scratch1;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPtr = outPtr + copyIndex3 + iVar11;
+    outPtr = outPtr + copyIndex3 + outLen;
     loopIndex = 0;
     do {
       copyIndex3 = 0;
@@ -2769,23 +2785,23 @@ LAB_97bfb2c8:
       ch = "MAD scratch2, scratch6, scratch1, scratch2;\n"[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+    outLen2 = copyIndex2 + copyIndex3 + copyIndex;
     copyIndex = 0;
     ch = s_SUB_scratch1__kHALFPI__scratch2__97c2f1d4[0];
     while (ch != '\0') {
-      outPtr[copyIndex + iVar5] = ch;
+      outPtr[copyIndex + outLen2] = ch;
       ch = "SUB scratch1, kHALFPI, scratch2;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + iVar5;
+    outLen = copyIndex + outLen2;
     copyIndex3 = 0;
     ch = s_MAD_scratch2__scratch5__scratch1_97c2f1f8[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MAD scratch2, scratch5, scratch1, scratch2;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_MAD_scratch__scratch___kTWO__kON_97c2f228[0];
     while (ch != '\0') {
@@ -2793,19 +2809,19 @@ LAB_97bfb2c8:
       ch = "MAD scratch, scratch, -kTWO, kONE;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + outPos;
+    outLen = copyIndex + outPos;
     copyIndex3 = 0;
     ch = s_MUL_97c2e4f0[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MUL "[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex3 + iVar11,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex3 + outLen,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch2__scratch__97c2f24c[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch2, scratch;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -2819,7 +2835,7 @@ LAB_97bfb2c8:
       ch = "SLT scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___kZERO__97c2e484[0];
     while (ch != '\0') {
@@ -2834,7 +2850,7 @@ LAB_97bfb2c8:
       ch = "MUL scratch1, "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -2842,7 +2858,7 @@ LAB_97bfb2c8:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -2903,7 +2919,7 @@ LAB_97bfb2c8:
       ch = "MUL scratch2, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___scratch1__97c2e684[0];
     while (ch != '\0') {
@@ -2986,23 +3002,23 @@ LAB_97bfb2c8:
       ch = "MUL scratch1, scratch2, scratch2;\n"[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+    outLen2 = copyIndex2 + copyIndex3 + copyIndex;
     copyIndex = 0;
     ch = s_MUL_scratch3__scratch1__scratch2_97c2f05c[0];
     while (ch != '\0') {
-      outPtr[copyIndex + iVar5] = ch;
+      outPtr[copyIndex + outLen2] = ch;
       ch = "MUL scratch3, scratch1, scratch2;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + iVar5;
+    outLen = copyIndex + outLen2;
     copyIndex3 = 0;
     ch = s_MUL_scratch4__scratch1__scratch1_97c2f080[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MUL scratch4, scratch1, scratch1;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_MUL_scratch2__kATAN_K1__scratch2_97c2f0a4[0];
     while (ch != '\0') {
@@ -3010,15 +3026,15 @@ LAB_97bfb2c8:
       ch = "MUL scratch2, kATAN_K1, scratch2;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + outPos;
+    outLen = copyIndex + outPos;
     copyIndex3 = 0;
     ch = s_MAD_scratch2__kATAN_K3__scratch3_97c2f0c8[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MAD scratch2, kATAN_K3, scratch3, scratch2;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_MAD_scratch1__kATAN_K2__scratch1_97c2f0f8[0];
     while (ch != '\0') {
@@ -3026,15 +3042,15 @@ LAB_97bfb2c8:
       ch = "MAD scratch1, kATAN_K2, scratch1, kONE;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + outPos;
+    outLen = copyIndex + outPos;
     copyIndex3 = 0;
     ch = s_MAD_scratch1__kATAN_K4__scratch4_97c2f124[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MAD scratch1, kATAN_K4, scratch4, scratch1;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPtr = outPtr + copyIndex3 + iVar11;
+    outPtr = outPtr + copyIndex3 + outLen;
     loopIndex = 0;
     do {
       copyIndex3 = 0;
@@ -3086,23 +3102,23 @@ LAB_97bfb2c8:
       ch = "MAD scratch2, scratch6, scratch1, scratch2;\n"[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+    outLen2 = copyIndex2 + copyIndex3 + copyIndex;
     copyIndex = 0;
     ch = s_SUB_scratch1__kHALFPI__scratch2__97c2f1d4[0];
     while (ch != '\0') {
-      outPtr[copyIndex + iVar5] = ch;
+      outPtr[copyIndex + outLen2] = ch;
       ch = "SUB scratch1, kHALFPI, scratch2;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + iVar5;
+    outLen = copyIndex + outLen2;
     copyIndex3 = 0;
     ch = s_MAD_scratch2__scratch5__scratch1_97c2f1f8[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MAD scratch2, scratch5, scratch1, scratch2;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_MAD_scratch__scratch___kTWO__kON_97c2f228[0];
     while (ch != '\0') {
@@ -3110,15 +3126,15 @@ LAB_97bfb2c8:
       ch = "MAD scratch, scratch, -kTWO, kONE;\n"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar11 = copyIndex + outPos;
+    outLen = copyIndex + outPos;
     copyIndex3 = 0;
     ch = s_MUL_scratch__scratch2__scratch__97c2f5e4[0];
     while (ch != '\0') {
-      outPtr[copyIndex3 + iVar11] = ch;
+      outPtr[copyIndex3 + outLen] = ch;
       ch = "MUL scratch, scratch2, scratch;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    outPos = copyIndex3 + iVar11;
+    outPos = copyIndex3 + outLen;
     copyIndex = 0;
     ch = s_SUB_97c2e934[0];
     while (ch != '\0') {
@@ -3126,11 +3142,11 @@ LAB_97bfb2c8:
       ch = "SUB "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex + outPos,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex + outPos,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___kHALFPI__scratch__97c2f608[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", kHALFPI, scratch;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -3145,7 +3161,7 @@ LAB_97bfb2c8:
         ch = "SGE scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -3168,7 +3184,7 @@ LAB_97bfb2c8:
         ch = "SLT scratch1, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,3,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -3191,7 +3207,7 @@ LAB_97bfb2c8:
         ch = "ABS scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,3,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -3214,7 +3230,7 @@ LAB_97bfb2c8:
         ch = "SLT scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -3237,7 +3253,7 @@ LAB_97bfb2c8:
         ch = "MAD scratch1, scratch5, kOFFSET, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,3,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -3283,7 +3299,7 @@ LAB_97bfb2c8:
         ch = "MUL scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___scratch__97c2e620[0];
       while (ch != '\0') {
@@ -3382,23 +3398,23 @@ LAB_97bfb2c8:
         ch = "MUL scratch1, scratch, scratch;\n"[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+      outLen2 = copyIndex2 + copyIndex3 + copyIndex;
       copyIndex = 0;
       ch = s_MUL_scratch2__scratch1__scratch__97c2ee28[0];
       while (ch != '\0') {
-        outPtr[copyIndex + iVar5] = ch;
+        outPtr[copyIndex + outLen2] = ch;
         ch = "MUL scratch2, scratch1, scratch;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + iVar5;
+      outLen = copyIndex + outLen2;
       copyIndex3 = 0;
       ch = s_MUL_scratch3__scratch1__scratch1_97c2ee4c[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MUL scratch3, scratch1, scratch1;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPos = copyIndex3 + iVar11;
+      outPos = copyIndex3 + outLen;
       copyIndex = 0;
       ch = s_MUL_scratch__kATAN_K1__scratch__97c2f3e0[0];
       while (ch != '\0') {
@@ -3406,15 +3422,15 @@ LAB_97bfb2c8:
         ch = "MUL scratch, kATAN_K1, scratch;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + outPos;
+      outLen = copyIndex + outPos;
       copyIndex3 = 0;
       ch = s_MAD_scratch2__kATAN_K3__scratch2_97c2f404[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MAD scratch2, kATAN_K3, scratch2, scratch;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPos = copyIndex3 + iVar11;
+      outPos = copyIndex3 + outLen;
       copyIndex = 0;
       ch = s_MAD_scratch__kATAN_K2__scratch1__97c2f430[0];
       while (ch != '\0') {
@@ -3422,15 +3438,15 @@ LAB_97bfb2c8:
         ch = "MAD scratch, kATAN_K2, scratch1, kONE;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + outPos;
+      outLen = copyIndex + outPos;
       copyIndex3 = 0;
       ch = s_MAD_scratch__kATAN_K4__scratch3__97c2f458[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MAD scratch, kATAN_K4, scratch3, scratch;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPtr = outPtr + copyIndex3 + iVar11;
+      outPtr = outPtr + copyIndex3 + outLen;
       loopIndex = 0;
       do {
         copyIndex3 = 0;
@@ -3482,23 +3498,23 @@ LAB_97bfb2c8:
         ch = "MAD scratch, scratch8, scratch, scratch1;\n"[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+      outLen2 = copyIndex2 + copyIndex3 + copyIndex;
       copyIndex = 0;
       ch = s_MAD_scratch2__scratch7___kTWO__k_97c2f4fc[0];
       while (ch != '\0') {
-        outPtr[copyIndex + iVar5] = ch;
+        outPtr[copyIndex + outLen2] = ch;
         ch = "MAD scratch2, scratch7, -kTWO, kONE;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + iVar5;
+      outLen = copyIndex + outLen2;
       copyIndex3 = 0;
       ch = s_MUL_scratch__scratch__scratch2__97c2f524[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MUL scratch, scratch, scratch2;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPos = copyIndex3 + iVar11;
+      outPos = copyIndex3 + outLen;
       copyIndex = 0;
       ch = s_ADD_scratch__scratch__scratch4__97c2f548[0];
       while (ch != '\0') {
@@ -3506,15 +3522,15 @@ LAB_97bfb2c8:
         ch = "ADD scratch, scratch, scratch4;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + outPos;
+      outLen = copyIndex + outPos;
       copyIndex3 = 0;
       ch = s_SUB_scratch1__scratch6__scratch__97c2f56c[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "SUB scratch1, scratch6, scratch;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPos = copyIndex3 + iVar11;
+      outPos = copyIndex3 + outLen;
       copyIndex = 0;
       ch = s_MAD_97c2e644[0];
       while (ch != '\0') {
@@ -3522,11 +3538,11 @@ LAB_97bfb2c8:
         ch = "MAD "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex + outPos,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex + outPos,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch5__scratch1__scratch__97c2f590[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch5, scratch1, scratch;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -3539,7 +3555,7 @@ LAB_97bfb2c8:
         ch = "SLT scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -3554,7 +3570,7 @@ LAB_97bfb2c8:
         ch = "ABS scratch2, "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -3621,23 +3637,23 @@ LAB_97bfb2c8:
         ch = "MUL scratch1, scratch2, scratch2;\n"[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+      outLen2 = copyIndex2 + copyIndex3 + copyIndex;
       copyIndex = 0;
       ch = s_MUL_scratch3__scratch1__scratch2_97c2f05c[0];
       while (ch != '\0') {
-        outPtr[copyIndex + iVar5] = ch;
+        outPtr[copyIndex + outLen2] = ch;
         ch = "MUL scratch3, scratch1, scratch2;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + iVar5;
+      outLen = copyIndex + outLen2;
       copyIndex3 = 0;
       ch = s_MUL_scratch4__scratch1__scratch1_97c2f080[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MUL scratch4, scratch1, scratch1;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPos = copyIndex3 + iVar11;
+      outPos = copyIndex3 + outLen;
       copyIndex = 0;
       ch = s_MUL_scratch2__kATAN_K1__scratch2_97c2f0a4[0];
       while (ch != '\0') {
@@ -3645,15 +3661,15 @@ LAB_97bfb2c8:
         ch = "MUL scratch2, kATAN_K1, scratch2;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + outPos;
+      outLen = copyIndex + outPos;
       copyIndex3 = 0;
       ch = s_MAD_scratch2__kATAN_K3__scratch3_97c2f0c8[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MAD scratch2, kATAN_K3, scratch3, scratch2;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPos = copyIndex3 + iVar11;
+      outPos = copyIndex3 + outLen;
       copyIndex = 0;
       ch = s_MAD_scratch1__kATAN_K2__scratch1_97c2f0f8[0];
       while (ch != '\0') {
@@ -3661,15 +3677,15 @@ LAB_97bfb2c8:
         ch = "MAD scratch1, kATAN_K2, scratch1, kONE;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + outPos;
+      outLen = copyIndex + outPos;
       copyIndex3 = 0;
       ch = s_MAD_scratch1__kATAN_K4__scratch4_97c2f124[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MAD scratch1, kATAN_K4, scratch4, scratch1;\n"[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outPtr = outPtr + copyIndex3 + iVar11;
+      outPtr = outPtr + copyIndex3 + outLen;
       loopIndex = 0;
       do {
         copyIndex3 = 0;
@@ -3721,27 +3737,27 @@ LAB_97bfb2c8:
         ch = "MAD scratch2, scratch6, scratch1, scratch2;\n"[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar5 = copyIndex2 + copyIndex3 + copyIndex;
+      outLen2 = copyIndex2 + copyIndex3 + copyIndex;
       copyIndex = 0;
       ch = s_MAD_scratch__scratch___kTWO__kON_97c2f228[0];
       while (ch != '\0') {
-        outPtr[copyIndex + iVar5] = ch;
+        outPtr[copyIndex + outLen2] = ch;
         ch = "MAD scratch, scratch, -kTWO, kONE;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar11 = copyIndex + iVar5;
+      outLen = copyIndex + outLen2;
       copyIndex3 = 0;
       ch = s_MUL_97c2e4f0[0];
       while (ch != '\0') {
-        outPtr[copyIndex3 + iVar11] = ch;
+        outPtr[copyIndex3 + outLen] = ch;
         ch = "MUL "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex3 + iVar11,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex3 + outLen,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch2__scratch__97c2f24c[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch2, scratch;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -3749,29 +3765,29 @@ LAB_97bfb2c8:
     break;
   case 0x1f:
   case 0x20:
-    iVar5 = 1;
+    outLen2 = 1;
     if ((inst[2] & 0x1000) != 0) {
-      iVar5 = (inst[2] >> 10 & 3) + 1;
+      outLen2 = (inst[2] >> 10 & 3) + 1;
     }
     loopIndex4 = 0;
-    if (iVar5 == 0) goto LAB_97c0178c;
+    if (outLen2 == 0) goto LAB_97c0178c;
     do {
       copyIndex11 = 0;
       mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
       ch = *mnemonic;
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex11) = ch;
+        *(char *)(outStart + copyIndex11) = ch;
         copyIndex11 = copyIndex11 + 1;
         ch = mnemonic[copyIndex11];
       }
       copyIndex6 = 0;
       ch = s__97c291c0[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex11 + copyIndex6) = ch;
+        *(char *)(outStart + copyIndex11 + copyIndex6) = ch;
         ch = " "[copyIndex6 + 1];
         copyIndex6 = copyIndex6 + 1;
       }
-      outCursor5 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex11 + copyIndex6,loopIndex4,0,0);
+      outCursor5 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex11 + copyIndex6,loopIndex4,0,0);
       copyIndex3 = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -3779,11 +3795,11 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      iVar7 = loopIndex4;
+      swizzleSelect2 = loopIndex4;
       if ((inst[4] & 0x4000) == 0) {
-        iVar7 = 0;
+        swizzleSelect2 = 0;
       }
-      outCursor5 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor5 + copyIndex3,param_5,param_6,2,iVar7,0,8);
+      outCursor5 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor5 + copyIndex3,paramNumbers,paramArrayPos,2,swizzleSelect2,0,8);
       copyIndex3 = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -3791,11 +3807,11 @@ LAB_97bfb2c8:
         ch = ", "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      iVar7 = loopIndex4;
+      swizzleSelect2 = loopIndex4;
       if ((inst[6] & 0x4000) == 0) {
-        iVar7 = 0;
+        swizzleSelect2 = 0;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor5 + copyIndex3,param_5,param_6,3,iVar7,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor5 + copyIndex3,paramNumbers,paramArrayPos,3,swizzleSelect2,0,8);
       copyIndex5 = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -3804,8 +3820,8 @@ LAB_97bfb2c8:
         copyIndex5 = copyIndex5 + 1;
       }
       loopIndex4 = loopIndex4 + 1;
-      iVar6 = outCursor + copyIndex5;
-    } while (loopIndex4 < iVar5);
+      outStart = outCursor + copyIndex5;
+    } while (loopIndex4 < outLen2);
     goto LAB_97c01788;
   case 0x21:
     *stateFlags = *stateFlags | 1;
@@ -3817,7 +3833,7 @@ LAB_97bfb2c8:
         ch = "RCP scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,3,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -3825,7 +3841,7 @@ LAB_97bfb2c8:
         ch = ";\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = outCursor + copyIndex;
+      outStart = outCursor + copyIndex;
     }
     else {
       iVar11 = 0;
@@ -3833,13 +3849,13 @@ LAB_97bfb2c8:
         copyIndex2 = 0;
         ch = s_RCP_scratch__97c2e5f0[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "RCP scratch."[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        iVar13 = iVar11 + 1;
-        outPtr = (char *)(iVar6 + copyIndex2);
-        *outPtr = ((byte)iVar13 & 3) + 0x77;
+        nextComponent = iVar11 + 1;
+        outPtr = (char *)(outStart + copyIndex2);
+        *outPtr = ((byte)nextComponent & 3) + 0x77;
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -3847,7 +3863,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,param_5,param_6,3,0,iVar11,10);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,paramNumbers,paramArrayPos,3,0,iVar11,10);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -3855,18 +3871,18 @@ LAB_97bfb2c8:
           ch = ";\n"[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = outCursor + copyIndex;
-        iVar11 = iVar13;
-      } while (iVar13 <= (int)(inst[6] >> 0xc & 3));
+        outStart = outCursor + copyIndex;
+        iVar11 = nextComponent;
+      } while (nextComponent <= (int)(inst[6] >> 0xc & 3));
     }
     copyIndex = 0;
     ch = s_MUL_scratch__scratch__97c2e9ec[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + copyIndex) = ch;
+      *(char *)(outStart + copyIndex) = ch;
       ch = "MUL scratch, scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -3897,7 +3913,7 @@ LAB_97bfb2c8:
       ch = ", scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,9);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,9);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -3905,11 +3921,11 @@ LAB_97bfb2c8:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -3939,7 +3955,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -3947,27 +3963,27 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+        outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
         opOffsetOrTailLength = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ";\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
         break;
       }
-      if (((uVar8 & 0x3000) == 0) || (uVar9 = inst[6] >> 0xc & 3, uVar9 == 0)) {
+      if (((uVar8 & 0x3000) == 0) || (opcode = inst[6] >> 0xc & 3, opcode == 0)) {
         loopIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_97c2e4f0[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "MUL "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,loopIndex,0,0);
+          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,loopIndex,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -3975,11 +3991,11 @@ LAB_97bfb2c8:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          iVar13 = loopIndex;
+          swizzleSelect = loopIndex;
           if ((inst[4] & 0x4000) == 0) {
-            iVar13 = 0;
+            swizzleSelect = 0;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,iVar13,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,swizzleSelect,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -3987,11 +4003,11 @@ LAB_97bfb2c8:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          iVar13 = loopIndex;
+          swizzleSelect = loopIndex;
           if ((inst[6] & 0x4000) == 0) {
-            iVar13 = 0;
+            swizzleSelect = 0;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,iVar13,0,0);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,swizzleSelect,0,0);
           copyIndex2 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4000,25 +4016,25 @@ LAB_97bfb2c8:
             copyIndex2 = copyIndex2 + 1;
           }
           loopIndex = loopIndex + 1;
-          iVar6 = outCursor + copyIndex2;
+          outStart = outCursor + copyIndex2;
         } while (loopIndex <= (int)(inst[2] >> 10 & 3));
       }
       else if ((uVar8 & 0x4000) == 0) {
         if (bVar1) {
-          if ((uVar9 != 1) || (((stateFlags[1] & 0x800000) != 0 && (shaderType == 0x8b30)))) {
+          if ((opcode != 1) || (((stateFlags[1] & 0x800000) != 0 && (shaderType == 0x8b30)))) {
             *stateFlags = *stateFlags | 1;
-            uVar8 = inst[2];
-            uVar10 = uVar8 >> 0xd & 0xf;
+            writeMaskBits = inst[2];
+            writeMaskBits3 = writeMaskBits >> 0xd & 0xf;
             loopIndex2 = 0;
-            iVar11 = outText;
+            outBase = outText;
             do {
-              if ((uVar10 & 1) != 0) {
-                if (uVar9 != 1) {
-                  if (uVar9 == 2) {
+              if ((writeMaskBits3 & 1) != 0) {
+                if (opcode != 1) {
+                  if (opcode == 2) {
                     copyIndex2 = 0;
                     ch = s_DP3_scratch_97c2e6bc[0];
                     while (ch != '\0') {
-                      *(char *)(iVar11 + copyIndex2) = ch;
+                      *(char *)(outBase + copyIndex2) = ch;
                       ch = "DP3 scratch"[copyIndex2 + 1];
                       copyIndex2 = copyIndex2 + 1;
                     }
@@ -4027,7 +4043,7 @@ LAB_97bfb2c8:
                     copyIndex2 = 0;
                     ch = s_DP4_scratch_97c2e6c8[0];
                     while (ch != '\0') {
-                      *(char *)(iVar11 + copyIndex2) = ch;
+                      *(char *)(outBase + copyIndex2) = ch;
                       ch = "DP4 scratch"[copyIndex2 + 1];
                       copyIndex2 = copyIndex2 + 1;
                     }
@@ -4038,20 +4054,20 @@ LAB_97bfb2c8:
                   copyIndex2 = 0;
                   ch = s___NV_fragment_program2_DP2_97c2e694[0];
                   while (ch != '\0') {
-                    *(char *)(iVar11 + copyIndex2) = ch;
+                    *(char *)(outBase + copyIndex2) = ch;
                     ch = "# NV_fragment_program2:DP2\n"[copyIndex2 + 1];
                     copyIndex2 = copyIndex2 + 1;
                   }
-                  iVar11 = iVar11 + copyIndex2;
+                  outBase = outBase + copyIndex2;
                   copyIndex2 = 0;
                   ch = s_DP2_scratch_97c2e6b0[0];
                   while (ch != '\0') {
-                    *(char *)(iVar11 + copyIndex2) = ch;
+                    *(char *)(outBase + copyIndex2) = ch;
                     ch = "DP2 scratch"[copyIndex2 + 1];
                     copyIndex2 = copyIndex2 + 1;
                   }
                 }
-                outCursor2 = ((int (*)())_glpWriteDestinationMask)(inst,iVar11 + copyIndex2,loopIndex2,2);
+                outCursor2 = ((int (*)())_glpWriteDestinationMask)(inst,outBase + copyIndex2,loopIndex2,2);
                 copyIndex = 0;
                 ch = s___97c2d7ec[0];
                 while (ch != '\0') {
@@ -4059,7 +4075,7 @@ LAB_97bfb2c8:
                   ch = ", "[copyIndex + 1];
                   copyIndex = copyIndex + 1;
                 }
-                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,2,0,0,0);
+                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
                 copyIndex = 0;
                 ch = s___97c2d7ec[0];
                 while (ch != '\0') {
@@ -4067,7 +4083,7 @@ LAB_97bfb2c8:
                   ch = ", "[copyIndex + 1];
                   copyIndex = copyIndex + 1;
                 }
-                outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,3,loopIndex2,0,0x10);
+                outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,3,loopIndex2,0,0x10);
                 copyIndex2 = 0;
                 ch = s___97c2d8f8[0];
                 while (ch != '\0') {
@@ -4075,44 +4091,44 @@ LAB_97bfb2c8:
                   ch = ";\n"[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
-                uVar8 = inst[2];
-                iVar11 = outCursor3 + copyIndex2;
+                writeMaskBits = inst[2];
+                outBase = outCursor3 + copyIndex2;
               }
               loopIndex2 = loopIndex2 + 1;
-              uVar10 = (int)uVar10 >> 1;
-            } while (loopIndex2 <= (int)(uVar8 >> 10 & 3));
+              writeMaskBits3 = (int)writeMaskBits3 >> 1;
+            } while (loopIndex2 <= (int)(writeMaskBits >> 10 & 3));
             copyIndex3 = 0;
             ch = s_MOV_97c2e430[0];
             while (ch != '\0') {
-              *(char *)(iVar11 + copyIndex3) = ch;
+              *(char *)(outBase + copyIndex3) = ch;
               ch = "MOV "[copyIndex3 + 1];
               copyIndex3 = copyIndex3 + 1;
             }
-            iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar11 + copyIndex3,0,0,0);
+            outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
             opOffsetOrTailLength = 0;
             ch = s___scratch__97c2e620[0];
             while (ch != '\0') {
-              *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+              *(char *)(outStart + opOffsetOrTailLength) = ch;
               ch = ", scratch;\n"[opOffsetOrTailLength + 1];
               opOffsetOrTailLength = opOffsetOrTailLength + 1;
             }
           }
           else {
             *stateFlags = *stateFlags | 3;
-            uVar8 = inst[2];
-            uVar9 = uVar8 >> 0xd & 0xf;
+            writeMaskBits = inst[2];
+            writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
             loopIndex2 = 0;
-            iVar11 = outText;
+            outBase = outText;
             do {
-              if ((uVar9 & 1) != 0) {
+              if ((writeMaskBits2 & 1) != 0) {
                 copyIndex2 = 0;
                 ch = s_MUL_scratch__97c2e62c[0];
                 while (ch != '\0') {
-                  *(char *)(iVar11 + copyIndex2) = ch;
+                  *(char *)(outBase + copyIndex2) = ch;
                   ch = "MUL scratch, "[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
-                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar11 + copyIndex2,param_5,param_6,2,0,0,0);
+                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,0,0,0);
                 copyIndex = 0;
                 ch = s___97c2d7ec[0];
                 while (ch != '\0') {
@@ -4120,7 +4136,7 @@ LAB_97bfb2c8:
                   ch = ", "[copyIndex + 1];
                   copyIndex = copyIndex + 1;
                 }
-                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,3,loopIndex2,0,0x10);
+                outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,3,loopIndex2,0,0x10);
                 copyIndex = 0;
                 ch = s___97c2d8f8[0];
                 while (ch != '\0') {
@@ -4143,42 +4159,42 @@ LAB_97bfb2c8:
                   ch = ", scratch.x, scratch.y;\n"[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
-                uVar8 = inst[2];
-                iVar11 = outCursor3 + copyIndex2;
+                writeMaskBits = inst[2];
+                outBase = outCursor3 + copyIndex2;
               }
               loopIndex2 = loopIndex2 + 1;
-              uVar9 = (int)uVar9 >> 1;
-            } while (loopIndex2 <= (int)(uVar8 >> 10 & 3));
+              writeMaskBits2 = (int)writeMaskBits2 >> 1;
+            } while (loopIndex2 <= (int)(writeMaskBits >> 10 & 3));
             copyIndex3 = 0;
             ch = s_MOV_97c2e430[0];
             while (ch != '\0') {
-              *(char *)(iVar11 + copyIndex3) = ch;
+              *(char *)(outBase + copyIndex3) = ch;
               ch = "MOV "[copyIndex3 + 1];
               copyIndex3 = copyIndex3 + 1;
             }
-            iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar11 + copyIndex3,0,0,0);
+            outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
             opOffsetOrTailLength = 0;
             ch = s___scratch1__97c2e684[0];
             while (ch != '\0') {
-              *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+              *(char *)(outStart + opOffsetOrTailLength) = ch;
               ch = ", scratch1;\n"[opOffsetOrTailLength + 1];
               opOffsetOrTailLength = opOffsetOrTailLength + 1;
             }
           }
           break;
         }
-        if ((uVar9 != 1) || (((stateFlags[1] & 0x800000) != 0 && (shaderType == 0x8b30)))) {
-          uVar8 = inst[2];
-          uVar10 = uVar8 >> 0xd & 0xf;
+        if ((opcode != 1) || (((stateFlags[1] & 0x800000) != 0 && (shaderType == 0x8b30)))) {
+          writeMaskBits = inst[2];
+          writeMaskBits3 = writeMaskBits >> 0xd & 0xf;
           loopIndex = 0;
           do {
-            if ((uVar10 & 1) != 0) {
-              if (uVar9 != 1) {
-                if (uVar9 == 2) {
+            if ((writeMaskBits3 & 1) != 0) {
+              if (opcode != 1) {
+                if (opcode == 2) {
                   copyIndex2 = 0;
                   ch = s_DP3_97c2e548[0];
                   while (ch != '\0') {
-                    *(char *)(iVar6 + copyIndex2) = ch;
+                    *(char *)(outStart + copyIndex2) = ch;
                     ch = "DP3 "[copyIndex2 + 1];
                     copyIndex2 = copyIndex2 + 1;
                   }
@@ -4187,7 +4203,7 @@ LAB_97bfb2c8:
                   copyIndex2 = 0;
                   ch = s_DP4_97c2e550[0];
                   while (ch != '\0') {
-                    *(char *)(iVar6 + copyIndex2) = ch;
+                    *(char *)(outStart + copyIndex2) = ch;
                     ch = "DP4 "[copyIndex2 + 1];
                     copyIndex2 = copyIndex2 + 1;
                   }
@@ -4198,20 +4214,20 @@ LAB_97bfb2c8:
                 copyIndex2 = 0;
                 ch = s___NV_fragment_program2_DP2_97c2e694[0];
                 while (ch != '\0') {
-                  *(char *)(iVar6 + copyIndex2) = ch;
+                  *(char *)(outStart + copyIndex2) = ch;
                   ch = "# NV_fragment_program2:DP2\n"[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
-                iVar6 = iVar6 + copyIndex2;
+                outStart = outStart + copyIndex2;
                 copyIndex2 = 0;
                 ch = s_DP2_97c2e540[0];
                 while (ch != '\0') {
-                  *(char *)(iVar6 + copyIndex2) = ch;
+                  *(char *)(outStart + copyIndex2) = ch;
                   ch = "DP2 "[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
               }
-              outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,0,loopIndex,2);
+              outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,0,loopIndex,2);
               copyIndex3 = 0;
               ch = s___97c2d7ec[0];
               while (ch != '\0') {
@@ -4219,7 +4235,7 @@ LAB_97bfb2c8:
                 ch = ", "[copyIndex3 + 1];
                 copyIndex3 = copyIndex3 + 1;
               }
-              outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,0,0)
+              outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,0,0)
               ;
               copyIndex3 = 0;
               ch = s___97c2d7ec[0];
@@ -4228,7 +4244,7 @@ LAB_97bfb2c8:
                 ch = ", "[copyIndex3 + 1];
                 copyIndex3 = copyIndex3 + 1;
               }
-              outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex3,param_5,param_6,3,loopIndex,0,0x10);
+              outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex3,paramNumbers,paramArrayPos,3,loopIndex,0,0x10);
               copyIndex2 = 0;
               ch = s___97c2d8f8[0];
               while (ch != '\0') {
@@ -4236,28 +4252,28 @@ LAB_97bfb2c8:
                 ch = ";\n"[copyIndex2 + 1];
                 copyIndex2 = copyIndex2 + 1;
               }
-              uVar8 = inst[2];
-              iVar6 = outCursor + copyIndex2;
+              writeMaskBits = inst[2];
+              outStart = outCursor + copyIndex2;
             }
             loopIndex = loopIndex + 1;
-            uVar10 = (int)uVar10 >> 1;
-          } while (loopIndex <= (int)(uVar8 >> 10 & 3));
+            writeMaskBits3 = (int)writeMaskBits3 >> 1;
+          } while (loopIndex <= (int)(writeMaskBits >> 10 & 3));
         }
         else {
           *stateFlags = *stateFlags | 1;
-          uVar8 = inst[2];
-          uVar9 = uVar8 >> 0xd & 0xf;
+          writeMaskBits = inst[2];
+          writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
           loopIndex = 0;
           do {
-            if ((uVar9 & 1) != 0) {
+            if ((writeMaskBits2 & 1) != 0) {
               copyIndex2 = 0;
               ch = s_MUL_scratch__97c2e62c[0];
               while (ch != '\0') {
-                *(char *)(iVar6 + copyIndex2) = ch;
+                *(char *)(outStart + copyIndex2) = ch;
                 ch = "MUL scratch, "[copyIndex2 + 1];
                 copyIndex2 = copyIndex2 + 1;
               }
-              outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex2,param_5,param_6,2,0,0,0)
+              outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex2,paramNumbers,paramArrayPos,2,0,0,0)
               ;
               copyIndex3 = 0;
               ch = s___97c2d7ec[0];
@@ -4266,7 +4282,7 @@ LAB_97bfb2c8:
                 ch = ", "[copyIndex3 + 1];
                 copyIndex3 = copyIndex3 + 1;
               }
-              outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex3,param_5,param_6,3,loopIndex,0,0x10);
+              outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex3,paramNumbers,paramArrayPos,3,loopIndex,0,0x10);
               copyIndex3 = 0;
               ch = s___97c2d8f8[0];
               while (ch != '\0') {
@@ -4289,12 +4305,12 @@ LAB_97bfb2c8:
                 ch = ", scratch.x, scratch.y;\n"[copyIndex2 + 1];
                 copyIndex2 = copyIndex2 + 1;
               }
-              uVar8 = inst[2];
-              iVar6 = outCursor + copyIndex2;
+              writeMaskBits = inst[2];
+              outStart = outCursor + copyIndex2;
             }
             loopIndex = loopIndex + 1;
-            uVar9 = (int)uVar9 >> 1;
-          } while (loopIndex <= (int)(uVar8 >> 10 & 3));
+            writeMaskBits2 = (int)writeMaskBits2 >> 1;
+          } while (loopIndex <= (int)(writeMaskBits >> 10 & 3));
         }
       }
       else {
@@ -4303,35 +4319,35 @@ LAB_97bfb2c8:
         uVar9 = 0;
         do {
           if (uVar9 == 0) {
-            iVar5 = 0;
-            iVar11 = iVar5;
+            outLen2 = 0;
+            iVar11 = outLen2;
             ch = s_MUL_97c2e4f0[0];
             if (s_MUL_97c2e4f0[0] != '\0') {
               do {
-                *(char *)(iVar6 + iVar11) = ch;
-                iVar5 = iVar11 + 1;
+                *(char *)(outStart + iVar11) = ch;
+                outLen2 = iVar11 + 1;
                 ch = "MUL "[iVar11 + 1];
-                iVar11 = iVar5;
+                iVar11 = outLen2;
               } while (ch != '\0');
               goto LAB_97bf6dac;
             }
           }
           else {
-            iVar5 = 0;
-            iVar11 = iVar5;
+            outLen2 = 0;
+            iVar11 = outLen2;
             ch = s_MAD_97c2e644[0];
             if (s_MAD_97c2e644[0] != '\0') {
               do {
-                *(char *)(iVar6 + iVar11) = ch;
-                iVar5 = iVar11 + 1;
+                *(char *)(outStart + iVar11) = ch;
+                outLen2 = iVar11 + 1;
                 ch = "MAD "[iVar11 + 1];
-                iVar11 = iVar5;
+                iVar11 = outLen2;
               } while (ch != '\0');
 LAB_97bf6dac:
               uVar8 = inst[4];
             }
           }
-          outCursor = iVar6 + iVar5;
+          outCursor = outStart + outLen2;
           if (uVar9 == (uVar8 >> 0xc & 3)) {
             outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor,0,0,0);
             copyIndex = 0;
@@ -4351,7 +4367,7 @@ LAB_97bf6dac:
               copyIndex = copyIndex + 1;
             }
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,uVar9,0,8);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,uVar9,0,8);
           copyIndex = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4359,7 +4375,7 @@ LAB_97bf6dac:
             ch = ", "[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,uVar9,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,uVar9,2);
           if (uVar9 == 0) {
             copyIndex = 0;
             ch = s___97c2d8f8[0];
@@ -4379,25 +4395,25 @@ LAB_97bf6dac:
             }
           }
           uVar8 = inst[4];
-          iVar6 = outCursor + copyIndex;
+          outStart = outCursor + copyIndex;
           uVar9 = uVar9 + 1;
         } while ((int)uVar9 <= (int)(uVar8 >> 0xc & 3));
       }
     }
     else {
       *stateFlags = *stateFlags | 1;
-      uVar8 = inst[2] >> 10 & 3;
-      if (uVar8 == 1) {
+      sizeMinusOne = inst[2] >> 10 & 3;
+      if (sizeMinusOne == 1) {
         iVar11 = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_scratch__97c2e62c[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "MUL scratch, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex2,param_5,param_6,2,0,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex2,paramNumbers,paramArrayPos,2,0,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4405,7 +4421,7 @@ LAB_97bf6dac:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,0,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,iVar11,2);
           copyIndex3 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4435,7 +4451,7 @@ LAB_97bf6dac:
             copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,iVar11 + 1);
             outCursor = outCursor4 + copyIndex2 + copyEnd;
           }
-          iVar13 = iVar11 + 1;
+          nextComponent = iVar11 + 1;
           copyIndex2 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4443,7 +4459,7 @@ LAB_97bf6dac:
             ch = ", "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,param_5,param_6,2,1,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,paramNumbers,paramArrayPos,2,1,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4451,7 +4467,7 @@ LAB_97bf6dac:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,1,iVar11,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,iVar11,2);
           copyIndex = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4459,13 +4475,13 @@ LAB_97bf6dac:
             ch = ", scratch;\n"[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          iVar6 = outCursor + copyIndex;
-          iVar11 = iVar13;
-        } while (iVar13 <= (int)(inst[2] >> 10 & 3));
+          outStart = outCursor + copyIndex;
+          iVar11 = nextComponent;
+        } while (nextComponent <= (int)(inst[2] >> 10 & 3));
         if (bVar1) {
-          uVar8 = *stateFlags | 6;
+          flagWord = *stateFlags | 6;
 LAB_97bf68e0:
-          *stateFlags = uVar8;
+          *stateFlags = flagWord;
 LAB_97bf68e4:
           if (bVar1) {
             loopIndex = 0;
@@ -4473,11 +4489,11 @@ LAB_97bf68e4:
               copyIndex2 = 0;
               ch = s_MOV_97c2e430[0];
               while (ch != '\0') {
-                *(char *)(iVar6 + copyIndex2) = ch;
+                *(char *)(outStart + copyIndex2) = ch;
                 ch = "MOV "[copyIndex2 + 1];
                 copyIndex2 = copyIndex2 + 1;
               }
-              outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,loopIndex,0,0);
+              outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,loopIndex,0,0);
               copyIndex2 = 0;
               ch = s___scratch_97c2e65c[0];
               while (ch != '\0') {
@@ -4495,22 +4511,22 @@ LAB_97bf68e4:
                 ch = ";\n"[copyIndex2 + 1];
                 copyIndex2 = copyIndex2 + 1;
               }
-              iVar6 = outCursor + copyIndex2;
+              outStart = outCursor + copyIndex2;
             } while (loopIndex <= (int)(inst[2] >> 10 & 3));
           }
         }
       }
-      else if (uVar8 == 2) {
+      else if (sizeMinusOne == 2) {
         iVar11 = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_scratch__97c2e62c[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "MUL scratch, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex2,param_5,param_6,2,0,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex2,paramNumbers,paramArrayPos,2,0,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4518,7 +4534,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,0,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,iVar11,2);
           copyIndex3 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4533,7 +4549,7 @@ LAB_97bf68e4:
             ch = "MAD scratch, "[copyIndex4 + 1];
             copyIndex4 = copyIndex4 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3 + copyIndex4,param_5,param_6,2,1,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3 + copyIndex4,paramNumbers,paramArrayPos,2,1,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4541,7 +4557,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,1,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,iVar11,2);
           copyIndex3 = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4571,7 +4587,7 @@ LAB_97bf68e4:
             copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,iVar11 + 1);
             outCursor = outCursor4 + copyIndex2 + copyEnd;
           }
-          iVar13 = iVar11 + 1;
+          nextComponent = iVar11 + 1;
           copyIndex2 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4579,7 +4595,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,param_5,param_6,2,2,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,paramNumbers,paramArrayPos,2,2,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4587,7 +4603,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,2,iVar11,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,2,iVar11,2);
           copyIndex = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4595,26 +4611,26 @@ LAB_97bf68e4:
             ch = ", scratch;\n"[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          iVar6 = outCursor + copyIndex;
-          iVar11 = iVar13;
-        } while (iVar13 <= (int)(inst[2] >> 10 & 3));
+          outStart = outCursor + copyIndex;
+          iVar11 = nextComponent;
+        } while (nextComponent <= (int)(inst[2] >> 10 & 3));
         if (bVar1) {
-          uVar8 = *stateFlags | 0xe;
+          flagWord = *stateFlags | 0xe;
           goto LAB_97bf68e0;
         }
       }
       else {
-        if (uVar8 != 3) goto LAB_97bf68e4;
+        if (sizeMinusOne != 3) goto LAB_97bf68e4;
         iVar11 = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_scratch__97c2e62c[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "MUL scratch, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex2,param_5,param_6,2,0,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex2,paramNumbers,paramArrayPos,2,0,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4622,7 +4638,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,0,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,iVar11,2);
           copyIndex3 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4637,7 +4653,7 @@ LAB_97bf68e4:
             ch = "MAD scratch, "[copyIndex4 + 1];
             copyIndex4 = copyIndex4 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3 + copyIndex4,param_5,param_6,2,1,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3 + copyIndex4,paramNumbers,paramArrayPos,2,1,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4645,7 +4661,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,1,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,iVar11,2);
           copyIndex3 = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4660,7 +4676,7 @@ LAB_97bf68e4:
             ch = "MAD scratch, "[copyIndex4 + 1];
             copyIndex4 = copyIndex4 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3 + copyIndex4,param_5,param_6,2,2,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3 + copyIndex4,paramNumbers,paramArrayPos,2,2,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4668,7 +4684,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,2,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,2,iVar11,2);
           copyIndex3 = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4698,7 +4714,7 @@ LAB_97bf68e4:
             copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,iVar11 + 1);
             outCursor = outCursor4 + copyIndex2 + copyEnd;
           }
-          iVar13 = iVar11 + 1;
+          nextComponent = iVar11 + 1;
           copyIndex2 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4706,7 +4722,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,param_5,param_6,2,3,0,0);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,paramNumbers,paramArrayPos,2,3,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4714,7 +4730,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,3,iVar11,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,3,iVar11,2);
           copyIndex = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4722,11 +4738,11 @@ LAB_97bf68e4:
             ch = ", scratch;\n"[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          iVar6 = outCursor + copyIndex;
-          iVar11 = iVar13;
-        } while (iVar13 <= (int)(inst[2] >> 10 & 3));
+          outStart = outCursor + copyIndex;
+          iVar11 = nextComponent;
+        } while (nextComponent <= (int)(inst[2] >> 10 & 3));
         if (bVar1) {
-          uVar8 = *stateFlags | 0x1e;
+          flagWord = *stateFlags | 0x1e;
           goto LAB_97bf68e0;
         }
       }
@@ -4743,11 +4759,11 @@ LAB_97bf68e4:
       copyIndex2 = 0;
       ch = s_MUL_97c2e4f0[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex2) = ch;
+        *(char *)(outStart + copyIndex2) = ch;
         ch = "MUL "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      outCursor = iVar6 + copyIndex2;
+      outCursor = outStart + copyIndex2;
       if (!bVar1) {
         outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor,loopIndex,0,0);
       }
@@ -4772,7 +4788,7 @@ LAB_97bf68e4:
         ch = ", "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,param_5,param_6,2,loopIndex,0,0);
+      outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex2,paramNumbers,paramArrayPos,2,loopIndex,0,0);
       copyIndex3 = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -4780,7 +4796,7 @@ LAB_97bf68e4:
         ch = ", "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,3,loopIndex,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,loopIndex,0,0);
       copyIndex2 = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -4789,22 +4805,22 @@ LAB_97bf68e4:
         copyIndex2 = copyIndex2 + 1;
       }
       loopIndex = loopIndex + 1;
-      iVar6 = outCursor + copyIndex2;
-      uVar8 = inst[2] >> 10 & 3;
-    } while (loopIndex <= (int)uVar8);
+      outStart = outCursor + copyIndex2;
+      sizeMinusOne = inst[2] >> 10 & 3;
+    } while (loopIndex <= (int)sizeMinusOne);
     if (bVar1) {
-      if (uVar8 == 1) {
-        uVar8 = *stateFlags | 3;
+      if (sizeMinusOne == 1) {
+        flagWord = *stateFlags | 3;
 LAB_97bf7aec:
-        *stateFlags = uVar8;
+        *stateFlags = flagWord;
       }
       else {
-        if (uVar8 == 2) {
-          uVar8 = *stateFlags | 7;
+        if (sizeMinusOne == 2) {
+          flagWord = *stateFlags | 7;
           goto LAB_97bf7aec;
         }
-        if (uVar8 == 3) {
-          uVar8 = *stateFlags | 0xf;
+        if (sizeMinusOne == 3) {
+          flagWord = *stateFlags | 0xf;
           goto LAB_97bf7aec;
         }
       }
@@ -4813,11 +4829,11 @@ LAB_97bf7aec:
         copyIndex2 = 0;
         ch = s_MOV_97c2e430[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "MOV "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,loopIndex,0,0);
+        outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,loopIndex,0,0);
         copyIndex2 = 0;
         ch = s___scratch_97c2e65c[0];
         while (ch != '\0') {
@@ -4838,7 +4854,7 @@ LAB_97bf7aec:
           copyIndex2 = copyIndex2 + 1;
         }
         loopIndex = loopIndex + 1;
-        iVar6 = outCursor + copyIndex2;
+        outStart = outCursor + copyIndex2;
       } while (loopIndex <= (int)(inst[2] >> 10 & 3));
     }
     goto LAB_97c01788;
@@ -4858,7 +4874,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -4866,11 +4882,11 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -4884,7 +4900,7 @@ LAB_97bf7aec:
       ch = "ADD scratch.x, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -4892,7 +4908,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -4907,11 +4923,11 @@ LAB_97bf7aec:
       ch = "SGE "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch_x__kHALF__97c2e970[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch.x, kHALF;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -4925,7 +4941,7 @@ LAB_97bf7aec:
       ch = "SUB scratch.x, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -4933,7 +4949,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -4948,11 +4964,11 @@ LAB_97bf7aec:
       ch = "ABS "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -4967,7 +4983,7 @@ LAB_97bf7aec:
         ch = "MUL scratch.xy, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -4975,7 +4991,7 @@ LAB_97bf7aec:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -4990,11 +5006,11 @@ LAB_97bf7aec:
         ch = "MUL "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch_x__scratch_y__97c2e524[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch.x, scratch.y;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -5049,7 +5065,7 @@ LAB_97bf7aec:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -5057,11 +5073,11 @@ LAB_97bf7aec:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -5076,7 +5092,7 @@ LAB_97bf7aec:
       ch = "ADD scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -5084,7 +5100,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,1);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,1);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -5093,8 +5109,8 @@ LAB_97bf7aec:
       copyIndex = copyIndex + 1;
     }
     outCursor = outCursor + copyIndex;
-    uVar8 = inst[4] >> 0xc & 3;
-    if (uVar8 == 1) {
+    sourceMode = inst[4] >> 0xc & 3;
+    if (sourceMode == 1) {
       copyIndex = 0;
       ch = s_SWZ_scratch__scratch__x__y__0__0_97c2e7f0[0];
       while (ch != '\0') {
@@ -5111,7 +5127,7 @@ LAB_97bf7aec:
         copyIndex = copyIndex + 1;
       }
     }
-    else if (uVar8 == 0) {
+    else if (sourceMode == 0) {
       copyIndex = 0;
       ch = s_MUL_scratch_x__scratch_x__scratc_97c2e814[0];
       while (ch != '\0') {
@@ -5120,7 +5136,7 @@ LAB_97bf7aec:
         copyIndex = copyIndex + 1;
       }
     }
-    else if (uVar8 == 2) {
+    else if (sourceMode == 2) {
       copyIndex = 0;
       ch = s_DP3_scratch_x__scratch__scratch__97c2e7bc[0];
       while (ch != '\0') {
@@ -5153,11 +5169,11 @@ LAB_97bf7aec:
       ch = "RCP "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -5187,7 +5203,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -5195,11 +5211,11 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -5230,7 +5246,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -5238,11 +5254,11 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -5267,7 +5283,7 @@ LAB_97bf7aec:
         copyIndex = copyIndex + 1;
       }
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -5275,7 +5291,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -5290,7 +5306,7 @@ LAB_97bf7aec:
       ch = "MUL scratch, "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,3,0,0,0);
     copyIndex = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
@@ -5321,7 +5337,7 @@ LAB_97bf7aec:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s____scratch_97c2e790[0];
     while (ch != '\0') {
@@ -5329,11 +5345,11 @@ LAB_97bf7aec:
       ch = ", -scratch"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outCursor + copyIndex);
+    outStart = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outCursor + copyIndex);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -5350,7 +5366,7 @@ LAB_97bf7aec:
           ch = "SUB scratch, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -5358,7 +5374,7 @@ LAB_97bf7aec:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -5381,23 +5397,23 @@ LAB_97bf7aec:
           ch = "SGE "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+        outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
         opOffsetOrTailLength = 0;
         ch = s____scratch__kZERO__97c2e460[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
       }
       else {
         if (shaderType == 0x8b31) {
-          uVar8 = *stateFlags | 0x100000;
+          flagWord = *stateFlags | 0x100000;
         }
         else {
-          uVar8 = *stateFlags | 0x400000;
+          flagWord = *stateFlags | 0x400000;
         }
-        *stateFlags = uVar8;
+        *stateFlags = flagWord;
         copyIndex = 0;
         ch = s_SEQ_97c2e924[0];
         while (ch != '\0') {
@@ -5413,7 +5429,7 @@ LAB_97bf7aec:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -5421,11 +5437,11 @@ LAB_97bf7aec:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+        outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
         opOffsetOrTailLength = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ";\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
@@ -5439,14 +5455,14 @@ LAB_97bf7aec:
       }
       uVar8 = uVar8 >> 0xc & 3;
       loopIndex2 = 0;
-      iVar11 = outText;
+      outBase = outText;
       do {
         bVar1 = loopIndex2 == 0;
         if (bVar1) {
           copyIndex2 = 0;
           ch = s_SUB_scratch__97c2e870[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex2) = ch;
+            *(char *)(outBase + copyIndex2) = ch;
             ch = "SUB scratch, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
@@ -5455,7 +5471,7 @@ LAB_97bf7aec:
           copyIndex2 = 0;
           ch = s_SUB_scratch1__97c2e860[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex2) = ch;
+            *(char *)(outBase + copyIndex2) = ch;
             ch = "SUB scratch1, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
@@ -5464,7 +5480,7 @@ LAB_97bf7aec:
         if ((inst[4] & 0x4000) == 0) {
           iVar13 = 0;
         }
-        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar11 + copyIndex2,param_5,param_6,2,iVar13,0,0)
+        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,iVar13,0,0)
         ;
         copyIndex = 0;
         ch = s___97c2d7ec[0];
@@ -5477,7 +5493,7 @@ LAB_97bf7aec:
         if ((inst[6] & 0x4000) == 0) {
           iVar13 = 0;
         }
-        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,param_5,param_6,3,iVar13,0,0);
+        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,paramNumbers,paramArrayPos,3,iVar13,0,0);
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -5504,27 +5520,27 @@ LAB_97bf7aec:
             copyIndex2 = copyIndex2 + 1;
           }
         }
-        iVar11 = outCursor3 + copyIndex2;
+        outBase = outCursor3 + copyIndex2;
         if (!bVar1) {
           copyIndex2 = 0;
           ch = s_ADD_scratch__scratch__scratch1__97c2e89c[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex2) = ch;
+            *(char *)(outBase + copyIndex2) = ch;
             ch = "ADD scratch, scratch, scratch1;\n"[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          iVar11 = iVar11 + copyIndex2;
+          outBase = outBase + copyIndex2;
         }
         loopIndex2 = loopIndex2 + 1;
       } while (loopIndex2 <= (int)uVar8);
       copyIndex3 = 0;
       ch = s_DP4_scratch__scratch__97c2e8d8[0];
       while (ch != '\0') {
-        *(char *)(iVar11 + copyIndex3) = ch;
+        *(char *)(outBase + copyIndex3) = ch;
         ch = "DP4 scratch, scratch, "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outCursor3 = iVar11 + copyIndex3;
+      outCursor3 = outBase + copyIndex3;
       if (uVar8 == 1) {
         *stateFlags = *stateFlags | 0x1000;
         copyIndex3 = 0;
@@ -5583,11 +5599,11 @@ LAB_97bf9b6c:
         ch = "SGE "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s____scratch__kZERO__97c2e460[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -5609,7 +5625,7 @@ LAB_97bf9b6c:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,1);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,1);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -5617,11 +5633,11 @@ LAB_97bf9b6c:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,1);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,1);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -5642,7 +5658,7 @@ LAB_97bf9b6c:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,1);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,1);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -5650,11 +5666,11 @@ LAB_97bf9b6c:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,1);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,1);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -5671,7 +5687,7 @@ LAB_97bf9b6c:
           ch = "SUB scratch, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -5679,7 +5695,7 @@ LAB_97bf9b6c:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -5702,23 +5718,23 @@ LAB_97bf9b6c:
           ch = "SLT "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+        outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
         opOffsetOrTailLength = 0;
         ch = s____scratch__kZERO__97c2e460[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
       }
       else {
         if (shaderType == 0x8b31) {
-          uVar8 = *stateFlags | 0x100000;
+          flagWord = *stateFlags | 0x100000;
         }
         else {
-          uVar8 = *stateFlags | 0x400000;
+          flagWord = *stateFlags | 0x400000;
         }
-        *stateFlags = uVar8;
+        *stateFlags = flagWord;
         copyIndex = 0;
         ch = s_SNE_97c2e908[0];
         while (ch != '\0') {
@@ -5734,7 +5750,7 @@ LAB_97bf9b6c:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -5742,11 +5758,11 @@ LAB_97bf9b6c:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+        outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
         opOffsetOrTailLength = 0;
         ch = s_____end_97c2e910[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ";\n# end\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
@@ -5760,14 +5776,14 @@ LAB_97bf9b6c:
       }
       uVar8 = uVar8 >> 0xc & 3;
       loopIndex2 = 0;
-      iVar11 = outText;
+      outBase = outText;
       do {
         bVar1 = loopIndex2 == 0;
         if (bVar1) {
           copyIndex2 = 0;
           ch = s_SUB_scratch__97c2e870[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex2) = ch;
+            *(char *)(outBase + copyIndex2) = ch;
             ch = "SUB scratch, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
@@ -5776,7 +5792,7 @@ LAB_97bf9b6c:
           copyIndex2 = 0;
           ch = s_SUB_scratch1__97c2e860[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex2) = ch;
+            *(char *)(outBase + copyIndex2) = ch;
             ch = "SUB scratch1, "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
@@ -5785,7 +5801,7 @@ LAB_97bf9b6c:
         if ((inst[4] & 0x4000) == 0) {
           iVar13 = 0;
         }
-        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar11 + copyIndex2,param_5,param_6,2,iVar13,0,0)
+        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,iVar13,0,0)
         ;
         copyIndex = 0;
         ch = s___97c2d7ec[0];
@@ -5798,7 +5814,7 @@ LAB_97bf9b6c:
         if ((inst[6] & 0x4000) == 0) {
           iVar13 = 0;
         }
-        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,param_5,param_6,3,iVar13,0,0);
+        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,paramNumbers,paramArrayPos,3,iVar13,0,0);
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -5825,27 +5841,27 @@ LAB_97bf9b6c:
             copyIndex2 = copyIndex2 + 1;
           }
         }
-        iVar11 = outCursor3 + copyIndex2;
+        outBase = outCursor3 + copyIndex2;
         if (!bVar1) {
           copyIndex2 = 0;
           ch = s_ADD_scratch__scratch__scratch1__97c2e89c[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex2) = ch;
+            *(char *)(outBase + copyIndex2) = ch;
             ch = "ADD scratch, scratch, scratch1;\n"[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          iVar11 = iVar11 + copyIndex2;
+          outBase = outBase + copyIndex2;
         }
         loopIndex2 = loopIndex2 + 1;
       } while (loopIndex2 <= (int)uVar8);
       copyIndex3 = 0;
       ch = s_DP4_scratch__scratch__97c2e8d8[0];
       while (ch != '\0') {
-        *(char *)(iVar11 + copyIndex3) = ch;
+        *(char *)(outBase + copyIndex3) = ch;
         ch = "DP4 scratch, scratch, "[copyIndex3 + 1];
         copyIndex3 = copyIndex3 + 1;
       }
-      outCursor3 = iVar11 + copyIndex3;
+      outCursor3 = outBase + copyIndex3;
       if (uVar8 == 1) {
         *stateFlags = *stateFlags | 0x1000;
         copyIndex3 = 0;
@@ -5904,38 +5920,38 @@ LAB_97bf9370:
         ch = "SLT "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s____scratch__kZERO__97c2e460[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
     }
     break;
   case 0x38:
-    uVar8 = inst[2];
-    uVar9 = uVar8 >> 0xd & 0xf;
+    writeMaskBits = inst[2];
+    writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
     loopIndex3 = 0;
     do {
-      if ((uVar9 & 1) != 0) {
+      if ((writeMaskBits2 & 1) != 0) {
         mnemonic = *(char **)(opStringTable + opOffsetOrTailLength);
         copyIndex10 = 0;
         ch = *mnemonic;
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex10) = ch;
+          *(char *)(outStart + copyIndex10) = ch;
           copyIndex10 = copyIndex10 + 1;
           ch = mnemonic[copyIndex10];
         }
         copyIndex5 = 0;
         ch = s__97c291c0[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex10 + copyIndex5) = ch;
+          *(char *)(outStart + copyIndex10 + copyIndex5) = ch;
           ch = " "[copyIndex5 + 1];
           copyIndex5 = copyIndex5 + 1;
         }
-        outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex10 + copyIndex5,0,loopIndex3,2);
+        outCursor4 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex10 + copyIndex5,0,loopIndex3,2);
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -5943,7 +5959,7 @@ LAB_97bf9370:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor4 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,param_5,param_6,2,0,loopIndex3,10);
+        outCursor4 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex3,10);
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -5951,7 +5967,7 @@ LAB_97bf9370:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,param_5,param_6,3,0,loopIndex3,10)
+        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor4 + copyIndex3,paramNumbers,paramArrayPos,3,0,loopIndex3,10)
         ;
         copyIndex4 = 0;
         ch = s___97c2d8f8[0];
@@ -5960,12 +5976,12 @@ LAB_97bf9370:
           ch = ";\n"[copyIndex4 + 1];
           copyIndex4 = copyIndex4 + 1;
         }
-        uVar8 = inst[2];
-        iVar6 = outCursor6 + copyIndex4;
+        writeMaskBits = inst[2];
+        outStart = outCursor6 + copyIndex4;
       }
       loopIndex3 = loopIndex3 + 1;
-      uVar9 = (int)uVar9 >> 1;
-    } while (loopIndex3 <= (int)(uVar8 >> 10 & 3));
+      writeMaskBits2 = (int)writeMaskBits2 >> 1;
+    } while (loopIndex3 <= (int)(writeMaskBits >> 10 & 3));
     goto LAB_97c01788;
   case 0x39:
     *stateFlags = *stateFlags | 0x1001;
@@ -5976,7 +5992,7 @@ LAB_97bf9370:
       ch = "SUB scratch, kSEL, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -6015,11 +6031,11 @@ LAB_97bf9370:
       ch = ", scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -6037,7 +6053,7 @@ LAB_97bf9370:
               ch = "RCP scratch, "[copyIndex + 1];
               copyIndex = copyIndex + 1;
             }
-            outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,3,0,0,0);
+            outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
             copyIndex3 = 0;
             ch = s___97c2d8f8[0];
             while (ch != '\0') {
@@ -6045,23 +6061,23 @@ LAB_97bf9370:
               ch = ";\n"[copyIndex3 + 1];
               copyIndex3 = copyIndex3 + 1;
             }
-            iVar11 = outCursor3 + copyIndex3;
+            outBase = outCursor3 + copyIndex3;
           }
           else {
-            uVar8 = inst[2];
-            uVar9 = uVar8 >> 0xd & 0xf;
+            writeMaskBits = inst[2];
+            writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
             loopIndex2 = 0;
-            iVar11 = outText;
+            outBase = outText;
             do {
-              if ((uVar9 & 1) != 0) {
+              if ((writeMaskBits2 & 1) != 0) {
                 copyIndex2 = 0;
                 ch = s_RCP_scratch__97c2e5f0[0];
                 while (ch != '\0') {
-                  *(char *)(iVar11 + copyIndex2) = ch;
+                  *(char *)(outBase + copyIndex2) = ch;
                   ch = "RCP scratch."[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
-                outPtr = (char *)(iVar11 + copyIndex2);
+                outPtr = (char *)(outBase + copyIndex2);
                 *outPtr = ((char)loopIndex2 + 1U & 3) + 0x77;
                 copyIndex = 0;
                 ch = s___97c2d7ec[0];
@@ -6070,7 +6086,7 @@ LAB_97bf9370:
                   ch = ", "[copyIndex + 1];
                   copyIndex = copyIndex + 1;
                 }
-                outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex + 1,param_5,param_6,3,0,loopIndex2,10);
+                outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex + 1,paramNumbers,paramArrayPos,3,0,loopIndex2,10);
                 copyIndex2 = 0;
                 ch = s___97c2d8f8[0];
                 while (ch != '\0') {
@@ -6078,21 +6094,21 @@ LAB_97bf9370:
                   ch = ";\n"[copyIndex2 + 1];
                   copyIndex2 = copyIndex2 + 1;
                 }
-                uVar8 = inst[2];
-                iVar11 = outCursor3 + copyIndex2;
+                writeMaskBits = inst[2];
+                outBase = outCursor3 + copyIndex2;
               }
               loopIndex2 = loopIndex2 + 1;
-              uVar9 = (int)uVar9 >> 1;
-            } while (loopIndex2 <= (int)(uVar8 >> 10 & 3));
+              writeMaskBits2 = (int)writeMaskBits2 >> 1;
+            } while (loopIndex2 <= (int)(writeMaskBits >> 10 & 3));
           }
           copyIndex3 = 0;
           ch = s_MUL_97c2e4f0[0];
           while (ch != '\0') {
-            *(char *)(iVar11 + copyIndex3) = ch;
+            *(char *)(outBase + copyIndex3) = ch;
             ch = "MUL "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar11 + copyIndex3,0,0,0);
+          outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
           copyIndex = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -6100,11 +6116,11 @@ LAB_97bf9370:
             ch = ", "[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+          outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
           opOffsetOrTailLength = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+            *(char *)(outStart + opOffsetOrTailLength) = ch;
             ch = ", scratch;\n"[opOffsetOrTailLength + 1];
             opOffsetOrTailLength = opOffsetOrTailLength + 1;
           }
@@ -6112,18 +6128,18 @@ LAB_97bf9370:
         }
         loopIndex = 0;
         do {
-          iVar5 = 0;
+          outLen2 = 0;
           do {
             copyIndex4 = 0;
             ch = s_RCP_scratch__97c2e5f0[0];
             while (ch != '\0') {
-              *(char *)(iVar6 + copyIndex4) = ch;
+              *(char *)(outStart + copyIndex4) = ch;
               ch = "RCP scratch."[copyIndex4 + 1];
               copyIndex4 = copyIndex4 + 1;
             }
-            iVar12 = iVar5 + 1;
-            outPtr = (char *)(iVar6 + copyIndex4);
-            *outPtr = ((byte)iVar12 & 3) + 0x77;
+            nextComponent2 = outLen2 + 1;
+            outPtr = (char *)(outStart + copyIndex4);
+            *outPtr = ((byte)nextComponent2 & 3) + 0x77;
             copyIndex3 = 0;
             ch = s___97c2d7ec[0];
             while (ch != '\0') {
@@ -6131,7 +6147,7 @@ LAB_97bf9370:
               ch = ", "[copyIndex3 + 1];
               copyIndex3 = copyIndex3 + 1;
             }
-            outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,param_5,param_6,3,loopIndex,iVar5,2);
+            outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,paramNumbers,paramArrayPos,3,loopIndex,outLen2,2);
             copyIndex2 = 0;
             ch = s___97c2d8f8[0];
             while (ch != '\0') {
@@ -6139,17 +6155,17 @@ LAB_97bf9370:
               ch = ";\n"[copyIndex2 + 1];
               copyIndex2 = copyIndex2 + 1;
             }
-            iVar6 = outCursor + copyIndex2;
-            iVar5 = iVar12;
-          } while (iVar12 <= (int)(inst[6] >> 0xc & 3));
+            outStart = outCursor + copyIndex2;
+            outLen2 = nextComponent2;
+          } while (nextComponent2 <= (int)(inst[6] >> 0xc & 3));
           copyIndex2 = 0;
           ch = s_MUL_97c2e4f0[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "MUL "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,loopIndex,0,0);
+          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,loopIndex,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -6157,7 +6173,7 @@ LAB_97bf9370:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,0,0);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,0,0);
           copyIndex2 = 0;
           ch = s___scratch__97c2e5e0[0];
           while (ch != '\0') {
@@ -6166,7 +6182,7 @@ LAB_97bf9370:
             copyIndex2 = copyIndex2 + 1;
           }
           loopIndex = loopIndex + 1;
-          iVar6 = outCursor + copyIndex2;
+          outStart = outCursor + copyIndex2;
         } while (loopIndex <= (int)(inst[6] >> 0xc & 3));
       }
       else {
@@ -6177,7 +6193,7 @@ LAB_97bf9370:
           ch = "RCP scratch, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,3,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -6185,17 +6201,17 @@ LAB_97bf9370:
           ch = ";\n"[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = outCursor + copyIndex;
+        outStart = outCursor + copyIndex;
         loopIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_97c2e4f0[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex2) = ch;
+            *(char *)(outStart + copyIndex2) = ch;
             ch = "MUL "[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,loopIndex,0,0);
+          outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,loopIndex,0,0);
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -6203,7 +6219,7 @@ LAB_97bf9370:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,loopIndex,0,0);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,loopIndex,0,0);
           copyIndex2 = 0;
           ch = s___scratch_x__97c2e610[0];
           while (ch != '\0') {
@@ -6212,25 +6228,25 @@ LAB_97bf9370:
             copyIndex2 = copyIndex2 + 1;
           }
           loopIndex = loopIndex + 1;
-          iVar6 = outCursor + copyIndex2;
+          outStart = outCursor + copyIndex2;
         } while (loopIndex <= (int)(inst[2] >> 10 & 3));
       }
     }
     else {
       loopIndex = 0;
       do {
-        iVar5 = 0;
+        outLen2 = 0;
         do {
           copyIndex4 = 0;
           ch = s_RCP_scratch__97c2e5f0[0];
           while (ch != '\0') {
-            *(char *)(iVar6 + copyIndex4) = ch;
+            *(char *)(outStart + copyIndex4) = ch;
             ch = "RCP scratch."[copyIndex4 + 1];
             copyIndex4 = copyIndex4 + 1;
           }
-          iVar12 = iVar5 + 1;
-          outPtr = (char *)(iVar6 + copyIndex4);
-          *outPtr = ((byte)iVar12 & 3) + 0x77;
+          nextComponent2 = outLen2 + 1;
+          outPtr = (char *)(outStart + copyIndex4);
+          *outPtr = ((byte)nextComponent2 & 3) + 0x77;
           copyIndex3 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -6238,7 +6254,7 @@ LAB_97bf9370:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,param_5,param_6,3,loopIndex,iVar5,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,paramNumbers,paramArrayPos,3,loopIndex,outLen2,2);
           copyIndex2 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -6246,17 +6262,17 @@ LAB_97bf9370:
             ch = ";\n"[copyIndex2 + 1];
             copyIndex2 = copyIndex2 + 1;
           }
-          iVar6 = outCursor + copyIndex2;
-          iVar5 = iVar12;
-        } while (iVar12 <= (int)(inst[6] >> 0xc & 3));
+          outStart = outCursor + copyIndex2;
+          outLen2 = nextComponent2;
+        } while (nextComponent2 <= (int)(inst[6] >> 0xc & 3));
         copyIndex2 = 0;
         ch = s_MUL_97c2e4f0[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "MUL "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,loopIndex,0,0);
+        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,loopIndex,0,0);
         copyIndex3 = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -6264,7 +6280,7 @@ LAB_97bf9370:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,loopIndex,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,loopIndex,0,0);
         copyIndex2 = 0;
         ch = s___scratch__97c2e5e0[0];
         while (ch != '\0') {
@@ -6273,7 +6289,7 @@ LAB_97bf9370:
           copyIndex2 = copyIndex2 + 1;
         }
         loopIndex = loopIndex + 1;
-        iVar6 = outCursor + copyIndex2;
+        outStart = outCursor + copyIndex2;
       } while (loopIndex <= (int)(inst[6] >> 0xc & 3));
     }
     goto LAB_97c01788;
@@ -6288,22 +6304,22 @@ LAB_97bf9370:
         ch = "SWZ scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpSourceType)(inst,outText + copyIndex,param_5,param_6,4,0,0);
+      typeTextLength = ((int (*)())_glpSourceType)(inst,outText + copyIndex,paramNumbers,paramArrayPos,4,0,0);
       copyIndex = 0;
       ch = s___x__y__0__0__97c2e7ac[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex) = ch;
+        *(char *)(typeTextLength + copyIndex) = ch;
         ch = ", x, y, 0, 0;\n"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
       copyIndex2 = 0;
       ch = s_DP3_scratch_x__scratch__97c2ea1c[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + copyIndex + copyIndex2) = ch;
+        *(char *)(typeTextLength + copyIndex + copyIndex2) = ch;
         ch = "DP3 scratch.x, scratch, "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex + copyIndex2,param_5,param_6,3,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,typeTextLength + copyIndex + copyIndex2,paramNumbers,paramArrayPos,3,0,0,0);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -6340,7 +6356,7 @@ LAB_97bf9370:
           copyIndex = copyIndex + 1;
         }
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,4,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6348,7 +6364,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -6388,11 +6404,11 @@ LAB_97bf9370:
       ch = ", scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -6414,7 +6430,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6422,7 +6438,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6430,11 +6446,11 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,8);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -6448,7 +6464,7 @@ LAB_97bf9370:
         ch = "MAD scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,4,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6456,7 +6472,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,9);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,9);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6464,7 +6480,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -6487,7 +6503,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6495,11 +6511,11 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       opOffsetOrTailLength = 0;
       ch = s___scratch__97c2e620[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -6514,7 +6530,7 @@ LAB_97bf9370:
       ch = "MAX scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -6522,7 +6538,7 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -6545,11 +6561,11 @@ LAB_97bf9370:
       ch = ", scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -6571,7 +6587,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6579,7 +6595,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -6587,11 +6603,11 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,0);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -6605,7 +6621,7 @@ LAB_97bf9370:
         ch = "SLT scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -6630,7 +6646,7 @@ LAB_97bf9370:
           ch = ", scratch, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
         copyIndex = 0;
         ch = s___97c2d7ec[0];
         while (ch != '\0') {
@@ -6638,11 +6654,11 @@ LAB_97bf9370:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,0);
+        outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
         opOffsetOrTailLength = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ";\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
@@ -6663,7 +6679,7 @@ LAB_97bf9370:
           ch = "MUL scratch, scratch, "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,3,0,0,0);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,3,0,0,0);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -6686,11 +6702,11 @@ LAB_97bf9370:
           ch = ", scratch1, "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,0);
+        outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
         opOffsetOrTailLength = 0;
         ch = s___scratch__97c2e620[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+          *(char *)(outStart + opOffsetOrTailLength) = ch;
           ch = ", scratch;\n"[opOffsetOrTailLength + 1];
           opOffsetOrTailLength = opOffsetOrTailLength + 1;
         }
@@ -6706,7 +6722,7 @@ LAB_97bf9370:
       ch = "SUB scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,3,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -6714,7 +6730,7 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -6772,7 +6788,7 @@ LAB_97bf9370:
       ch = "SUB scratch, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,param_5,param_6,4,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -6780,7 +6796,7 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -6843,11 +6859,11 @@ LAB_97bf9370:
       ch = "MUL "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -6901,7 +6917,7 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -6909,11 +6925,11 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteTextureOperand_97bf37b4)(inst,outCursor + copyIndex,4,param_11);
+    outStart = ((int (*)())_glpWriteTextureOperand_97bf37b4)(inst,outCursor + copyIndex,4,optionFlags);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -6937,29 +6953,29 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
     break;
   case 0x4d:
-    iVar6 = 0;
-    iVar11 = iVar6;
+    outStart = 0;
+    iVar11 = outStart;
     ch = s__97c26c38[0];
     if (s__97c26c38[0] != '\0') {
       do {
         *(char *)(outText + iVar11) = ch;
-        iVar6 = iVar11 + 1;
+        outStart = iVar11 + 1;
         ch = "\n"[iVar11 + 1];
-        iVar11 = iVar6;
+        iVar11 = outStart;
       } while (ch != '\0');
-      uVar8 = *inst;
+      instWord0 = *inst;
     }
-    iVar6 = outText + iVar6;
+    outStart = outText + outStart;
     goto LAB_97c0178c;
   case 0x4f:
     copyIndex9 = 0;
@@ -6977,11 +6993,11 @@ LAB_97bf9370:
       ch = " "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex9 + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex9 + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -7009,11 +7025,11 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -7041,11 +7057,11 @@ LAB_97bf9370:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -7065,11 +7081,11 @@ LAB_97bf9370:
       ch = "REP "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+    outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ";\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -7089,12 +7105,12 @@ LAB_97bf9370:
       ch = "ENDREP;\n"[copyIndex3 + 1];
       copyIndex3 = copyIndex3 + 1;
     }
-    iVar6 = outText + copyIndex3;
+    outStart = outText + copyIndex3;
     goto LAB_97c01788;
   case 0x68:
     *stateFlags = *stateFlags | 0x1007;
-    uVar8 = inst[2] >> 10 & 3;
-    if (uVar8 == 1) {
+    sizeMinusOne = inst[2] >> 10 & 3;
+    if (sizeMinusOne == 1) {
       copyIndex = 0;
       ch = s_MUL_scratch_xy__97c2e510[0];
       while (ch != '\0') {
@@ -7102,7 +7118,7 @@ LAB_97bf9370:
         ch = "MUL scratch.xy, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -7110,7 +7126,7 @@ LAB_97bf9370:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+      outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
       copyIndex3 = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -7128,7 +7144,7 @@ LAB_97bf9370:
       outCursor3 = outCursor2 + copyIndex3 + copyIndex;
     }
     else {
-      if (uVar8 == 0) {
+      if (sizeMinusOne == 0) {
         copyIndex = 0;
         ch = s_MUL_scratch__97c2e62c[0];
         while (ch != '\0') {
@@ -7137,10 +7153,10 @@ LAB_97bf9370:
           copyIndex = copyIndex + 1;
         }
 LAB_97c00620:
-        iVar11 = outText + copyIndex;
+        outBase = outText + copyIndex;
       }
       else {
-        if (uVar8 == 2) {
+        if (sizeMinusOne == 2) {
           copyIndex = 0;
           ch = s_DP3_scratch__97c2f6d8[0];
           while (ch != '\0') {
@@ -7150,8 +7166,8 @@ LAB_97c00620:
           }
           goto LAB_97c00620;
         }
-        iVar11 = outText;
-        if (uVar8 == 3) {
+        outBase = outText;
+        if (sizeMinusOne == 3) {
           copyIndex = 0;
           ch = s_DP4_scratch__97c2f6e8[0];
           while (ch != '\0') {
@@ -7162,7 +7178,7 @@ LAB_97c00620:
           goto LAB_97c00620;
         }
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar11,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d7ec[0];
       while (ch != '\0') {
@@ -7170,7 +7186,7 @@ LAB_97c00620:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+      outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     }
     copyIndex3 = 0;
     ch = s___97c2d8f8[0];
@@ -7194,7 +7210,7 @@ LAB_97c00620:
       ch = "MUL scratch2, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,4,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -7202,7 +7218,7 @@ LAB_97c00620:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -7241,7 +7257,7 @@ LAB_97c00620:
       ch = "MAD scratch2, scratch.x, "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,4,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
     copyIndex = 0;
     ch = s___scratch2_x__97c2f7a0[0];
     while (ch != '\0') {
@@ -7256,7 +7272,7 @@ LAB_97c00620:
       ch = "MUL scratch2, "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,3,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,3,0,0,8);
     copyIndex = 0;
     ch = s___scratch2_x__97c2f7a0[0];
     while (ch != '\0') {
@@ -7271,7 +7287,7 @@ LAB_97c00620:
       ch = "MAD scratch, "[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,2,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,2,0,0,8);
     copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
@@ -7279,7 +7295,7 @@ LAB_97c00620:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,4,0,0,8);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
     copyIndex = 0;
     ch = s____scratch2__97c2f7b0[0];
     while (ch != '\0') {
@@ -7302,11 +7318,11 @@ LAB_97c00620:
       ch = "MUL "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+    outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
     opOffsetOrTailLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+      *(char *)(outStart + opOffsetOrTailLength) = ch;
       ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
       opOffsetOrTailLength = opOffsetOrTailLength + 1;
     }
@@ -7322,7 +7338,7 @@ LAB_97c00620:
         ch = "ABS scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -7337,11 +7353,11 @@ LAB_97c00620:
         ch = "SLT "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s____scratch__kZERO__97c2e460[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -7355,7 +7371,7 @@ LAB_97c00620:
         ch = "SLT scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -7370,7 +7386,7 @@ LAB_97c00620:
         ch = "SLT scratch1, "[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,param_5,param_6,2,0,0,9);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex + copyIndex2,paramNumbers,paramArrayPos,2,0,0,9);
       copyIndex = 0;
       ch = s___kZERO__97c2e484[0];
       while (ch != '\0') {
@@ -7393,7 +7409,7 @@ LAB_97c00620:
         ch = "ABS scratch1, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,2,0,0,8);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -7416,11 +7432,11 @@ LAB_97c00620:
         ch = "MUL "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___scratch__scratch1__97c2e4f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -7442,11 +7458,11 @@ LAB_97c00620:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,8);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -7472,7 +7488,7 @@ LAB_97c00620:
       ch = ", "[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,3,0,0,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
     copyIndex = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
@@ -7513,7 +7529,7 @@ LAB_97c00620:
         ch = "MUL scratch, scratch, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,param_5,param_6,2,0,0,0);
+      outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       copyIndex = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
@@ -7536,11 +7552,11 @@ LAB_97c00620:
         ch = ", scratch1, "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex,0,0,0x40);
+      outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex,0,0,0x40);
       opOffsetOrTailLength = 0;
       ch = s___scratch__97c2e620[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ", scratch;\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -7576,11 +7592,11 @@ LAB_97c00620:
         ch = ", "[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
-      iVar6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,param_5,param_6,2,0,0,0);
+      outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
       opOffsetOrTailLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(iVar6 + opOffsetOrTailLength) = ch;
+        *(char *)(outStart + opOffsetOrTailLength) = ch;
         ch = ";\n"[opOffsetOrTailLength + 1];
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
@@ -7588,19 +7604,19 @@ LAB_97c00620:
     break;
   case 0x6f:
     *stateFlags = *stateFlags | 0x20000;
-    uVar8 = inst[2];
+    writeMaskBits = inst[2];
     loopIndex = 0;
-    uVar9 = uVar8 >> 0xd & 0xf;
+    writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
     do {
-      if ((uVar9 & 1) != 0) {
+      if ((writeMaskBits2 & 1) != 0) {
         copyIndex2 = 0;
         ch = s_POW_97c2e5a4[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "POW "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,iVar6 + copyIndex2,0,loopIndex,2);
+        outCursor2 = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outStart + copyIndex2,0,loopIndex,2);
         copyIndex3 = 0;
         ch = s___kE__97c2e5ac[0];
         while (ch != '\0') {
@@ -7608,7 +7624,7 @@ LAB_97c00620:
           ch = ", kE, "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,param_5,param_6,2,0,loopIndex,10)
+        outCursor6 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,2,0,loopIndex,10)
         ;
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
@@ -7617,28 +7633,28 @@ LAB_97c00620:
           ch = ";\n"[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        uVar8 = inst[2];
-        iVar6 = outCursor6 + copyIndex2;
+        writeMaskBits = inst[2];
+        outStart = outCursor6 + copyIndex2;
       }
       loopIndex = loopIndex + 1;
-      uVar9 = (int)uVar9 >> 1;
-    } while (loopIndex <= (int)(uVar8 >> 10 & 3));
+      writeMaskBits2 = (int)writeMaskBits2 >> 1;
+    } while (loopIndex <= (int)(writeMaskBits >> 10 & 3));
     goto LAB_97c01788;
   case 0x70:
     *stateFlags = *stateFlags | 0x20001;
-    uVar8 = inst[2];
+    writeMaskBits = inst[2];
     loopIndex = 0;
-    uVar9 = uVar8 >> 0xd & 0xf;
+    writeMaskBits2 = writeMaskBits >> 0xd & 0xf;
     do {
-      if ((uVar9 & 1) != 0) {
+      if ((writeMaskBits2 & 1) != 0) {
         copyIndex2 = 0;
         ch = s_LG2_scratch__97c2e5b4[0];
         while (ch != '\0') {
-          *(char *)(iVar6 + copyIndex2) = ch;
+          *(char *)(outStart + copyIndex2) = ch;
           ch = "LG2 scratch, "[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,iVar6 + copyIndex2,param_5,param_6,2,0,loopIndex,10)
+        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outStart + copyIndex2,paramNumbers,paramArrayPos,2,0,loopIndex,10)
         ;
         copyIndex3 = 0;
         ch = s___97c2d8f8[0];
@@ -7662,20 +7678,20 @@ LAB_97c00620:
           ch = ", scratch, k1_OVER_LOG2_E;\n"[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        uVar8 = inst[2];
-        iVar6 = outCursor + copyIndex2;
+        writeMaskBits = inst[2];
+        outStart = outCursor + copyIndex2;
       }
       loopIndex = loopIndex + 1;
-      uVar9 = (int)uVar9 >> 1;
-    } while (loopIndex <= (int)(uVar8 >> 10 & 3));
+      writeMaskBits2 = (int)writeMaskBits2 >> 1;
+    } while (loopIndex <= (int)(writeMaskBits >> 10 & 3));
     goto LAB_97c01788;
   }
-  iVar6 = iVar6 + opOffsetOrTailLength;
+  outStart = outStart + opOffsetOrTailLength;
 LAB_97c01788:
-  uVar8 = *inst;
+  instWord0 = *inst;
 LAB_97c0178c:
-  *outWordCount = (uVar8 >> 0x1d) + 1;
-  *outTextLength = iVar6 - outText;
+  *outWordCount = (instWord0 >> 0x1d) + 1;
+  *outTextLength = outStart - outText;
   return 0;
 }
 
@@ -7704,11 +7720,26 @@ int _isParamArrayStart_97c017c0(param_1, param_2, param_3)
 }
 
 /* _glpPPShaderToProgramString @ 0x97c01820 (15972 bytes) */
-int _glpPPShaderToProgramString(shader, param_2, param_3)
+int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   int *shader;
-  undefined4 param_2;
-  uint param_3;
+  undefined4 printOptions;
+  uint printFlags;
 {
+  int nextIndex4;
+  int nextIndex3;
+  int loopIndex7;
+  int allocation4;
+  int nextIndex2;
+  int loopIndex6;
+  int nextIndex;
+  int loopIndex5;
+  int instructionCount;
+  int outputCount;
+  int paramOffset;
+  int attribOffset;
+  int tempCount;
+  int paramCount;
+  int attribCount;
   int copyIndex10;
   int copyIndex9;
   int copyEnd;
@@ -7746,7 +7777,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   uint *puVar6;
   int iVar7;
   int copyEnd2;
-  char *pcVar9;
+  char *allocation8;
   char *allocation;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
@@ -7754,15 +7785,15 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   undefined4 extraout_r4_01;
   int copyLength6;
   int iVar13;
-  int *piVar14;
-  int *piVar15;
-  int iVar16;
-  int iVar17;
+  int *allocation9;
+  int *allocation10;
+  int allocation3;
+  int shaderTarget;
   int *piVar18;
-  int iVar19;
-  char *pcVar20;
+  int addressRegCount;
+  char *allocation6;
   int iVar21;
-  char *pcVar22;
+  char *allocation7;
   uint uVar23;
   float *pfVar24;
   double in_f3;
@@ -7777,110 +7808,110 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   double in_stack_ffffff58;
   double in_stack_ffffff60;
   double in_stack_ffffff68;
-  uint local_70;
-  uint local_6c;
-  int local_68;
-  char *local_64;
-  char *local_60;
-  uint local_5c;
-  int local_58;
-  int local_54;
-  undefined4 local_50;
-  char *local_4c;
-  char *local_48 [2];
+  uint usageFlags;
+  uint requestedFlags;
+  int outCapacity;
+  char *outBuffer;
+  char *outCursor;
+  uint arrayEnd;
+  int wordsConsumed;
+  int charsWritten;
+  undefined4 outFlagWord;
+  char *bodyStart;
+  char *bodyCursor [2];
   
-  local_68 = 0x1000;
-  local_50 = 1;
-  local_70 = 0;
-  local_6c = 0;
-  local_64 = (char *)_malloc(0x1000);
-  iVar13 = 0;
-  iVar16 = 0;
-  piVar15 = (int *)0x0;
-  piVar14 = (int *)0x0;
-  if (local_64 == (char *)0x0) {
+  outCapacity = 0x1000;
+  outFlagWord = 1;
+  usageFlags = 0;
+  requestedFlags = 0;
+  outBuffer = (char *)_malloc(0x1000);
+  loopIndex5 = 0;
+  allocation3 = 0;
+  allocation10 = (int *)0x0;
+  allocation9 = (int *)0x0;
+  if (outBuffer == (char *)0x0) {
     return 0;
   }
-  iVar17 = *shader;
-  if ((param_3 & 2) == 0) {
-    if ((param_3 & 1) != 0) {
-      local_6c = local_6c | 0x100000;
+  shaderTarget = *shader;
+  if ((printFlags & 2) == 0) {
+    if ((printFlags & 1) != 0) {
+      requestedFlags = requestedFlags | 0x100000;
     }
   }
   else {
-    local_6c = local_6c | 0x300000;
+    requestedFlags = requestedFlags | 0x300000;
   }
-  if ((param_3 & 8) == 0) {
-    if ((param_3 & 4) != 0) {
-      local_6c = local_6c | 0x400000;
+  if ((printFlags & 8) == 0) {
+    if ((printFlags & 4) != 0) {
+      requestedFlags = requestedFlags | 0x400000;
     }
   }
   else {
-    local_6c = local_6c | 0xc00000;
+    requestedFlags = requestedFlags | 0xc00000;
   }
-  iVar19 = shader[6];
+  addressRegCount = shader[6];
   uVar11 = extraout_r4;
-  local_60 = local_64;
-  if (iVar19 != 0) {
+  outCursor = outBuffer;
+  if (addressRegCount != 0) {
     ch = 'A';
     copyIndex8 = 0;
     do {
-      local_64[copyIndex8] = ch;
+      outBuffer[copyIndex8] = ch;
       copyLength10 = copyIndex8 + 1;
       ch = "ADDRESS adr0"[copyIndex8 + 1];
       copyIndex8 = copyLength10;
     } while (ch != '\0');
     iVar21 = 1;
-    local_60 = local_64 + copyLength10;
-    if (1 < iVar19) {
+    outCursor = outBuffer + copyLength10;
+    if (1 < addressRegCount) {
       do {
         ch = ',';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = ", adr"[copyIndex4 + 1];
           copyIndex4 = copyLength5;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength5;
-        iVar3 = iVar21 + 1;
-        copyEnd6 = ((int (*)())_ncpy_97bf2850)(local_60,iVar21);
-        local_60 = local_60 + copyEnd6;
-        iVar21 = iVar3;
-      } while (iVar3 < iVar19);
+        outCursor = outCursor + copyLength5;
+        nextIndex2 = iVar21 + 1;
+        copyEnd6 = ((int (*)())_ncpy_97bf2850)(outCursor,iVar21);
+        outCursor = outCursor + copyEnd6;
+        iVar21 = nextIndex2;
+      } while (nextIndex2 < addressRegCount);
     }
     ch = ';';
     copyIndex5 = 0;
     do {
-      local_60[copyIndex5] = ch;
+      outCursor[copyIndex5] = ch;
       copyLength7 = copyIndex5 + 1;
       ch = ";\n"[copyIndex5 + 1];
       copyIndex5 = copyLength7;
     } while (ch != '\0');
-    local_60 = local_60 + copyLength7;
-    uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&local_68,&local_64,&local_60);
+    outCursor = outCursor + copyLength7;
+    uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
     uVar11 = (undefined4)uVar25;
-    pcVar9 = local_64;
+    allocation8 = outBuffer;
     if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
     ch = '\n';
     copyIndex5 = 0;
     do {
-      local_60[copyIndex5] = ch;
+      outCursor[copyIndex5] = ch;
       copyLength7 = copyIndex5 + 1;
       ch = "\n"[copyIndex5 + 1];
       copyIndex5 = copyLength7;
     } while (ch != '\0');
-    local_60 = local_60 + copyLength7;
+    outCursor = outCursor + copyLength7;
   }
-  iVar19 = shader[4];
+  tempCount = shader[4];
   loopIndex2 = 0;
-  if (0 < iVar19) {
+  if (0 < tempCount) {
     piVar18 = shader + shader[5] * 2 + 1;
     do {
       ch = 'T';
       copyIndex4 = 0;
       do {
-        local_60[copyIndex4] = ch;
+        outCursor[copyIndex4] = ch;
         copyLength5 = copyIndex4 + 1;
         ch = "TEMP "[copyIndex4 + 1];
         copyIndex4 = copyLength5;
@@ -7888,76 +7919,76 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
       ch = 't';
       copyIndex4 = 0;
       do {
-        local_60[copyIndex4 + copyLength5] = ch;
+        outCursor[copyIndex4 + copyLength5] = ch;
         copyLength3 = copyIndex4 + 1;
         ch = "tmp"[copyIndex4 + 1];
         copyIndex4 = copyLength3;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength3 + copyLength5;
-      copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)(ushort)*piVar18);
+      outCursor = outCursor + copyLength3 + copyLength5;
+      copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)(ushort)*piVar18);
       ch = ';';
       copyIndex4 = 0;
       do {
-        local_60[copyIndex4 + copyEnd3] = ch;
+        outCursor[copyIndex4 + copyEnd3] = ch;
         copyLength3 = copyIndex4 + 1;
         ch = ";\n"[copyIndex4 + 1];
         copyIndex4 = copyLength3;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength3 + copyEnd3;
-      uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&local_68,&local_64,&local_60);
+      outCursor = outCursor + copyLength3 + copyEnd3;
+      uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
       uVar11 = (undefined4)uVar25;
-      pcVar9 = local_64;
+      allocation8 = outBuffer;
       if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
       loopIndex2 = loopIndex2 + 1;
       piVar18 = piVar18 + 2;
-    } while (loopIndex2 < iVar19);
+    } while (loopIndex2 < tempCount);
   }
-  if (iVar19 != 0) {
+  if (tempCount != 0) {
     ch = '\n';
     copyIndex5 = 0;
     do {
-      local_60[copyIndex5] = ch;
+      outCursor[copyIndex5] = ch;
       copyLength7 = copyIndex5 + 1;
       ch = "\n"[copyIndex5 + 1];
       copyIndex5 = copyLength7;
     } while (ch != '\0');
-    local_60 = local_60 + copyLength7;
+    outCursor = outCursor + copyLength7;
   }
-  iVar21 = shader[8];
+  attribCount = shader[8];
   loopIndex3 = 0;
-  iVar19 = shader[9];
-  if (0 < iVar21) {
+  attribOffset = shader[9];
+  if (0 < attribCount) {
     do {
-      uVar23 = (uint)shader[iVar19 * 2 + loopIndex3 * 2] >> 0x10 & 0xf;
+      uVar23 = (uint)shader[attribOffset * 2 + loopIndex3 * 2] >> 0x10 & 0xf;
       if (uVar23 == 0) goto LAB_97c0239c;
       ch = 'A';
       copyIndex3 = 0;
       do {
-        local_60[copyIndex3] = ch;
+        outCursor[copyIndex3] = ch;
         copyLength3 = copyIndex3 + 1;
         ch = "ATTRIB att"[copyIndex3 + 1];
         copyIndex3 = copyLength3;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength3;
-      copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)*(ushort *)((int)shader + loopIndex3 * 8 + iVar19 * 8 + 6));
-      local_60 = local_60 + copyEnd3;
-      if (iVar17 == 0x8b30) {
+      outCursor = outCursor + copyLength3;
+      copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)*(ushort *)((int)shader + loopIndex3 * 8 + attribOffset * 8 + 6));
+      outCursor = outCursor + copyEnd3;
+      if (shaderTarget == 0x8b30) {
         ch = ' ';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = " = fragment."[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
 LAB_97c01cf4:
-        local_60 = local_60 + copyLength3;
+        outCursor = outCursor + copyLength3;
       }
-      else if (iVar17 == 0x8b31) {
+      else if (shaderTarget == 0x8b31) {
         ch = ' ';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = " = vertex."[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -7971,7 +8002,7 @@ LAB_97c01cf4:
         ch = 'p';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "position"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -7981,7 +8012,7 @@ LAB_97c01cf4:
         ch = 'c';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "color.primary"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -7991,7 +8022,7 @@ LAB_97c01cf4:
         ch = 'c';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "color.secondary"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -8001,7 +8032,7 @@ LAB_97c01cf4:
         ch = 'n';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "normal"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -8011,7 +8042,7 @@ LAB_97c01cf4:
         ch = 'f';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "fogcoord"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -8021,18 +8052,18 @@ LAB_97c01cf4:
         ch = 'w';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "weight["[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        outCursor = outCursor + copyLength3;
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
-        local_60 = local_60 + copyEnd3;
+        outCursor = outCursor + copyEnd3;
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "]"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -8042,18 +8073,18 @@ LAB_97c01cf4:
         ch = 't';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "texcoord["[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        outCursor = outCursor + copyLength3;
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
-        local_60 = local_60 + copyEnd3;
+        outCursor = outCursor + copyEnd3;
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "]"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -8063,18 +8094,18 @@ LAB_97c01cf4:
         ch = 'm';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "matrixindex["[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        outCursor = outCursor + copyLength3;
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
-        local_60 = local_60 + copyEnd3;
+        outCursor = outCursor + copyEnd3;
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "]"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
@@ -8084,64 +8115,64 @@ LAB_97c01cf4:
         ch = 'a';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "attrib["[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        outCursor = outCursor + copyLength3;
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
-        local_60 = local_60 + copyEnd3;
+        outCursor = outCursor + copyEnd3;
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "]"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
 LAB_97c02100:
-        local_60 = local_60 + copyLength3;
+        outCursor = outCursor + copyLength3;
         goto switchD_97c01d20_caseD_0;
       case 10:
         ch = 'm';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "material."[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength3;
-        if ((shader[iVar19 * 2 + loopIndex3 * 2] & 1U) == 0) {
+        outCursor = outCursor + copyLength3;
+        if ((shader[attribOffset * 2 + loopIndex3 * 2] & 1U) == 0) {
           ch = 'f';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "front."[copyIndex3 + 1];
             copyIndex3 = copyLength3;
           } while (ch != '\0');
 LAB_97c021d8:
-          local_60 = local_60 + copyLength3;
+          outCursor = outCursor + copyLength3;
         }
-        else if ((shader[iVar19 * 2 + loopIndex3 * 2] & 1U) == 1) {
+        else if ((shader[attribOffset * 2 + loopIndex3 * 2] & 1U) == 1) {
           ch = 'b';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "back."[copyIndex3 + 1];
             copyIndex3 = copyLength3;
           } while (ch != '\0');
           goto LAB_97c021d8;
         }
-        switch((uint)shader[iVar19 * 2 + loopIndex3 * 2] >> 0xc & 0xf) {
+        switch((uint)shader[attribOffset * 2 + loopIndex3 * 2] >> 0xc & 0xf) {
         case 0:
           ch = 'a';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "ambient"[copyIndex3 + 1];
             copyIndex3 = copyLength3;
@@ -8151,7 +8182,7 @@ LAB_97c021d8:
           ch = 'd';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "diffuse"[copyIndex3 + 1];
             copyIndex3 = copyLength3;
@@ -8161,7 +8192,7 @@ LAB_97c021d8:
           ch = 's';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "specular"[copyIndex3 + 1];
             copyIndex3 = copyLength3;
@@ -8171,7 +8202,7 @@ LAB_97c021d8:
           ch = 'e';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "emission"[copyIndex3 + 1];
             copyIndex3 = copyLength3;
@@ -8181,7 +8212,7 @@ LAB_97c021d8:
           ch = 's';
           copyIndex3 = 0;
           do {
-            local_60[copyIndex3] = ch;
+            outCursor[copyIndex3] = ch;
             copyLength3 = copyIndex3 + 1;
             ch = "shininess"[copyIndex3 + 1];
             copyIndex3 = copyLength3;
@@ -8195,49 +8226,49 @@ LAB_97c021d8:
         ch = 'f';
         copyIndex3 = 0;
         do {
-          local_60[copyIndex3] = ch;
+          outCursor[copyIndex3] = ch;
           copyLength3 = copyIndex3 + 1;
           ch = "frontfacing"[copyIndex3 + 1];
           copyIndex3 = copyLength3;
         } while (ch != '\0');
       }
-      local_60 = local_60 + copyLength3;
+      outCursor = outCursor + copyLength3;
 switchD_97c01d20_caseD_0:
       ch = ';';
       copyIndex3 = 0;
       do {
-        local_60[copyIndex3] = ch;
+        outCursor[copyIndex3] = ch;
         copyLength3 = copyIndex3 + 1;
         ch = ";\n"[copyIndex3 + 1];
         copyIndex3 = copyLength3;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength3;
-      uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&local_68,&local_64,&local_60);
+      outCursor = outCursor + copyLength3;
+      uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
       uVar11 = (undefined4)uVar25;
-      pcVar9 = local_64;
+      allocation8 = outBuffer;
       if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
 LAB_97c0239c:
       loopIndex3 = loopIndex3 + 1;
-    } while (loopIndex3 < iVar21);
+    } while (loopIndex3 < attribCount);
   }
-  if (iVar21 != 0) {
+  if (attribCount != 0) {
     ch = '\n';
     copyIndex5 = 0;
     do {
-      local_60[copyIndex5] = ch;
+      outCursor[copyIndex5] = ch;
       copyLength7 = copyIndex5 + 1;
       ch = "\n"[copyIndex5 + 1];
       copyIndex5 = copyLength7;
     } while (ch != '\0');
-    local_60 = local_60 + copyLength7;
+    outCursor = outCursor + copyLength7;
   }
-  iVar21 = shader[10];
-  iVar19 = shader[0xb];
-  if (iVar21 != 0) {
+  paramCount = shader[10];
+  paramOffset = shader[0xb];
+  if (paramCount != 0) {
     uVar23 = 0xffffffff;
-    if (0 < iVar21) {
-      puVar6 = (uint *)(shader + iVar19 * 2 + 1);
-      iVar3 = iVar21;
+    if (0 < paramCount) {
+      puVar6 = (uint *)(shader + paramOffset * 2 + 1);
+      iVar3 = paramCount;
       do {
         uVar1 = *puVar6;
         puVar6 = puVar6 + 2;
@@ -8247,62 +8278,62 @@ LAB_97c0239c:
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
       if (uVar23 != 0xffffffff) {
-        iVar3 = uVar23 * 4 + 4;
-        iVar16 = _malloc(iVar3);
-        piVar15 = (int *)_malloc(iVar3);
-        if ((iVar16 == 0) || (uVar11 = extraout_r4_00, piVar15 == (int *)0x0)) {
-          piVar14 = piVar15;
-          pcVar9 = local_64;
-          if (iVar16 != 0) {
-            _free(iVar16);
-            pcVar9 = local_64;
+        allocation4 = uVar23 * 4 + 4;
+        allocation3 = _malloc(allocation4);
+        allocation10 = (int *)_malloc(allocation4);
+        if ((allocation3 == 0) || (uVar11 = extraout_r4_00, allocation10 == (int *)0x0)) {
+          allocation9 = allocation10;
+          allocation8 = outBuffer;
+          if (allocation3 != 0) {
+            _free(allocation3);
+            allocation8 = outBuffer;
           }
 joined_r0x97c02488:
-          local_64 = pcVar9;
-          if (piVar14 != (int *)0x0) {
-            _free(piVar14);
-            pcVar9 = local_64;
+          outBuffer = allocation8;
+          if (allocation9 != (int *)0x0) {
+            _free(allocation9);
+            allocation8 = outBuffer;
           }
           goto LAB_97c04d50;
         }
       }
     }
     if (shader[0xe] != 0) {
-      piVar14 = (int *)_malloc(shader[0xe] << 2);
+      allocation9 = (int *)_malloc(shader[0xe] << 2);
       uVar11 = extraout_r4_01;
     }
-    uVar25 = CONCAT44(piVar14,uVar11);
+    uVar25 = CONCAT44(allocation9,uVar11);
     loopIndex3 = 0;
     iVar4 = -1;
-    local_5c = 0xffffffff;
+    arrayEnd = 0xffffffff;
     uVar23 = 0xffffffff;
-    piVar18 = piVar14;
-    if (0 < iVar21) {
+    piVar18 = allocation9;
+    if (0 < paramCount) {
       do {
-        iVar5 = loopIndex3 * 8 + iVar19 * 8;
-        if ((shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f0000U) != 0) {
+        iVar5 = loopIndex3 * 8 + paramOffset * 8;
+        if ((shader[paramOffset * 2 + loopIndex3 * 2] & 0x1f0000U) != 0) {
           if (uVar23 == 0xffffffff) {
             uVar1 = (uint)*(ushort *)((int)shader + iVar5 + 6);
-            *(uint *)(uVar1 * 4 + iVar16) = uVar1;
-            uVar25 = ((int (*)())_isParamArrayStart_97c017c0)(shader,(uint)*(ushort *)((int)shader + iVar5 + 6),&local_5c);
+            *(uint *)(uVar1 * 4 + allocation3) = uVar1;
+            uVar25 = ((int (*)())_isParamArrayStart_97c017c0)(shader,(uint)*(ushort *)((int)shader + iVar5 + 6),&arrayEnd);
             if ((int)((ulonglong)uVar25 >> 0x20) == 0) {
-              piVar15[*(ushort *)((int)shader + iVar5 + 6)] = iVar4;
+              allocation10[*(ushort *)((int)shader + iVar5 + 6)] = iVar4;
             }
             else {
               uVar23 = (uint)*(ushort *)((int)shader + iVar5 + 6);
-              piVar15[uVar23] = 0;
+              allocation10[uVar23] = 0;
               iVar4 = 1;
             }
           }
           else {
             uVar1 = (uint)*(ushort *)((int)shader + iVar5 + 6);
-            if ((int)uVar1 <= (int)local_5c) {
-              *(uint *)(uVar1 * 4 + iVar16) = uVar23;
-              piVar15[*(ushort *)((int)shader + iVar5 + 6)] = iVar4;
+            if ((int)uVar1 <= (int)arrayEnd) {
+              *(uint *)(uVar1 * 4 + allocation3) = uVar23;
+              allocation10[*(ushort *)((int)shader + iVar5 + 6)] = iVar4;
               iVar4 = iVar4 + 1;
-              if (*(ushort *)((int)shader + iVar5 + 6) == local_5c) {
+              if (*(ushort *)((int)shader + iVar5 + 6) == arrayEnd) {
                 uVar23 = 0xffffffff;
-                local_5c = 0xffffffff;
+                arrayEnd = 0xffffffff;
                 *piVar18 = iVar4;
                 piVar18 = piVar18 + 1;
                 iVar4 = -1;
@@ -8311,122 +8342,122 @@ joined_r0x97c02488:
           }
         }
         loopIndex3 = loopIndex3 + 1;
-      } while (loopIndex3 < iVar21);
+      } while (loopIndex3 < paramCount);
     }
     loopIndex = 0;
-    iVar3 = 0;
-    if (0 < iVar21) {
+    loopIndex7 = 0;
+    if (0 < paramCount) {
       do {
         iVar5 = loopIndex * 8;
-        uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 0x10 & 0x1f;
+        uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x10 & 0x1f;
         if (uVar23 == 0) goto LAB_97c04238;
-        if (piVar15[*(ushort *)((int)shader + iVar5 + iVar19 * 8 + 6)] == -1) {
+        if (allocation10[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == -1) {
           ch = 'P';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PARAM prm"[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          uVar25 = ((int (*)())_ncpy_97bf2850)(local_60,*(undefined4 *)
-                                            (iVar16 + (uint)*(ushort *)
-                                                             ((int)shader + iVar5 + iVar19 * 8 + 6)
+          outCursor = outCursor + copyLength;
+          uVar25 = ((int (*)())_ncpy_97bf2850)(outCursor,*(undefined4 *)
+                                            (allocation3 + (uint)*(ushort *)
+                                                             ((int)shader + iVar5 + paramOffset * 8 + 6)
                                                       * 4));
           ch = ' ';
           copyIndex = 0;
           do {
-            (local_60 + (int)((ulonglong)uVar25 >> 0x20))[copyIndex] = ch;
+            (outCursor + (int)((ulonglong)uVar25 >> 0x20))[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = " = "[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
+          outCursor = outCursor + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
         }
         else {
-          if (piVar15[*(ushort *)((int)shader + iVar5 + iVar19 * 8 + 6)] == 0) {
-            iVar13 = 0;
+          if (allocation10[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == 0) {
+            loopIndex5 = 0;
             ch = 'P';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "PARAM prm"[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,*(undefined4 *)
-                                             (iVar16 + (uint)*(ushort *)
-                                                              ((int)shader + iVar5 + iVar19 * 8 + 6
+            outCursor = outCursor + copyLength;
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor,*(undefined4 *)
+                                             (allocation3 + (uint)*(ushort *)
+                                                              ((int)shader + iVar5 + paramOffset * 8 + 6
                                                               ) * 4));
             ch = '[';
             copyIndex = 0;
             do {
-              local_60[copyIndex + copyEnd] = ch;
+              outCursor[copyIndex + copyEnd] = ch;
               copyLength6 = copyIndex + 1;
               ch = "["[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength6 + copyEnd;
-            uVar25 = ((int (*)())_ncpy_97bf2850)(local_60,piVar14[iVar3]);
+            outCursor = outCursor + copyLength6 + copyEnd;
+            uVar25 = ((int (*)())_ncpy_97bf2850)(outCursor,allocation9[loopIndex7]);
             ch = ']';
             copyIndex = 0;
             do {
-              (local_60 + (int)((ulonglong)uVar25 >> 0x20))[copyIndex] = ch;
+              (outCursor + (int)((ulonglong)uVar25 >> 0x20))[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "]"[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
+            outCursor = outCursor + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
             ch = ' ';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = " = {\n    "[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
           }
           else {
-            iVar13 = iVar13 + 1;
+            loopIndex5 = loopIndex5 + 1;
             ch = ' ';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "    "[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
           }
-          local_60 = local_60 + copyLength;
+          outCursor = outCursor + copyLength;
         }
         if (uVar23 == 0) {
 LAB_97c028a4:
           ch = 's';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "state."[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
         }
         else if (uVar23 < 3) {
           ch = 'p';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "program."[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
         }
         else {
           if (uVar23 != 0x11) goto LAB_97c028a4;
-          iVar7 = 0;
+          nextIndex4 = 0;
         }
-        local_60 = local_60 + iVar7;
+        outCursor = outCursor + nextIndex4;
         switch(uVar23) {
         default:
           goto switchD_97c02904_caseD_0;
@@ -8434,18 +8465,18 @@ LAB_97c028a4:
           ch = 'l';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "local["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xffff);
+          outCursor = outCursor + copyLength;
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xffff);
           ch = ']';
-          local_60 = local_60 + copyEnd2;
+          outCursor = outCursor + copyEnd2;
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "]"[copyIndex + 1];
             copyIndex = copyLength;
@@ -8455,18 +8486,18 @@ LAB_97c028a4:
           ch = 'e';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "env["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xffff);
+          outCursor = outCursor + copyLength;
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xffff);
           ch = ']';
-          local_60 = local_60 + copyEnd2;
+          outCursor = outCursor + copyEnd2;
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "]"[copyIndex + 1];
             copyIndex = copyLength;
@@ -8476,101 +8507,101 @@ LAB_97c028a4:
           ch = 'l';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "light["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          iVar7 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+          outCursor = outCursor + copyLength;
+          iVar7 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
           copyIndex = 0;
           do {
-            local_60[copyIndex + iVar7] = ch;
+            outCursor[copyIndex + iVar7] = ch;
             copyLength6 = copyIndex + 1;
             ch = "]."[copyIndex + 1];
             copyIndex = copyLength6;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength6 + iVar7;
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 8 & 0xf) {
+          outCursor = outCursor + copyLength6 + iVar7;
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 0xf) {
           case 0:
             ch = 'a';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "ambient"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 1:
             ch = 'd';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "diffuse"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 2:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "specular"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 3:
             ch = 'p';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "position"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 4:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "spot.direction"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 5:
             ch = 'a';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "attenuation"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 6:
             ch = 'h';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "half"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 7:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "spotcutoff"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           default:
@@ -8581,55 +8612,55 @@ LAB_97c028a4:
           ch = 'l';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "lightprod["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+          outCursor = outCursor + copyLength;
+          copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
           copyIndex = 0;
           do {
-            local_60[copyIndex + copyEnd] = ch;
+            outCursor[copyIndex + copyEnd] = ch;
             copyLength6 = copyIndex + 1;
             ch = "]."[copyIndex + 1];
             copyIndex = copyLength6;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 8 & 1;
+          outCursor = outCursor + copyLength6 + copyEnd;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 1;
           if (uVar23 == 0) {
             ch = 'f';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "front."[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
 LAB_97c02e60:
-            local_60 = local_60 + copyLength;
+            outCursor = outCursor + copyLength;
           }
           else if (uVar23 == 1) {
             ch = 'b';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "back."[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
             goto LAB_97c02e60;
           }
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 9 & 3;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 9 & 3;
           if (uVar23 == 1) {
             ch = 'd';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "diffuse"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           }
@@ -8638,10 +8669,10 @@ LAB_97c02e60:
               ch = 'a';
               copyIndex = 0;
               do {
-                local_60[copyIndex] = ch;
-                iVar7 = copyIndex + 1;
+                outCursor[copyIndex] = ch;
+                nextIndex4 = copyIndex + 1;
                 ch = "ambient"[copyIndex + 1];
-                copyIndex = iVar7;
+                copyIndex = nextIndex4;
               } while (ch != '\0');
               break;
             }
@@ -8650,118 +8681,118 @@ LAB_97c02e60:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "specular"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           }
           goto switchD_97c02904_caseD_0;
         case 5:
-          if (((uint)shader[iVar19 * 2 + loopIndex * 2] >> 1 & 7) == 5) {
+          if (((uint)shader[paramOffset * 2 + loopIndex * 2] >> 1 & 7) == 5) {
             ch = 'l';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "lightmodel."[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else {
             ch = 'm';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "material."[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
-          local_60 = local_60 + iVar7;
-          if ((shader[iVar19 * 2 + loopIndex * 2] & 1U) == 0) {
+          outCursor = outCursor + nextIndex4;
+          if ((shader[paramOffset * 2 + loopIndex * 2] & 1U) == 0) {
             ch = 'f';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "front."[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
 LAB_97c03088:
-            local_60 = local_60 + iVar7;
+            outCursor = outCursor + nextIndex4;
           }
-          else if ((shader[iVar19 * 2 + loopIndex * 2] & 1U) == 1) {
+          else if ((shader[paramOffset * 2 + loopIndex * 2] & 1U) == 1) {
             ch = 'b';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "back."[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             goto LAB_97c03088;
           }
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 1 & 7) {
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 1 & 7) {
           case 0:
             ch = 'a';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "ambient"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 1:
             ch = 'd';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "diffuse"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 2:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "specular"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 3:
             ch = 'e';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "emission"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 4:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "shininess"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 5:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "scenecolor"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           default:
@@ -8772,41 +8803,41 @@ LAB_97c03088:
           ch = 'l';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "lightmodel.ambient"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
           break;
         case 7:
           ch = 't';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "texgen["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0x1f);
+          outCursor = outCursor + copyLength;
+          copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           copyIndex = 0;
           do {
-            local_60[copyIndex + copyEnd] = ch;
+            outCursor[copyIndex + copyEnd] = ch;
             copyLength6 = copyIndex + 1;
             ch = "].eye."[copyIndex + 1];
             copyIndex = copyLength6;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 5 & 7;
+          outCursor = outCursor + copyLength6 + copyEnd;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
           if (uVar23 == 1) {
             ch = 't';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "t"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else if (uVar23 < 2) {
@@ -8814,20 +8845,20 @@ LAB_97c03088:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "s"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else if (uVar23 == 2) {
             ch = 'r';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "r"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else {
@@ -8835,10 +8866,10 @@ LAB_97c03088:
             ch = 'q';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "q"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           break;
@@ -8846,31 +8877,31 @@ LAB_97c03088:
           ch = 't';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "texgen["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0x1f);
+          outCursor = outCursor + copyLength;
+          copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           copyIndex = 0;
           do {
-            local_60[copyIndex + copyEnd] = ch;
+            outCursor[copyIndex + copyEnd] = ch;
             copyLength6 = copyIndex + 1;
             ch = "].object."[copyIndex + 1];
             copyIndex = copyLength6;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 5 & 7;
+          outCursor = outCursor + copyLength6 + copyEnd;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
           if (uVar23 == 1) {
             ch = 't';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "t"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else if (uVar23 < 2) {
@@ -8878,20 +8909,20 @@ LAB_97c03088:
             ch = 's';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "s"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else if (uVar23 == 2) {
             ch = 'r';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "r"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           else {
@@ -8899,10 +8930,10 @@ LAB_97c03088:
             ch = 'q';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "q"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
           }
           break;
@@ -8910,18 +8941,18 @@ LAB_97c03088:
           ch = 't';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "texenv["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0x1f);
+          outCursor = outCursor + copyLength;
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
-          local_60 = local_60 + copyEnd2;
+          outCursor = outCursor + copyEnd2;
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "].color"[copyIndex + 1];
             copyIndex = copyLength;
@@ -8931,18 +8962,18 @@ LAB_97c03088:
           ch = 'c';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "clip["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+          outCursor = outCursor + copyLength;
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
-          local_60 = local_60 + copyEnd2;
+          outCursor = outCursor + copyEnd2;
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "].plane"[copyIndex + 1];
             copyIndex = copyLength;
@@ -8952,68 +8983,68 @@ LAB_97c03088:
           ch = 'f';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "fog.color"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
           break;
         case 0xc:
           ch = 'f';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "fog.params"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
           break;
         case 0xd:
           ch = 'p';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "point.size"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
           break;
         case 0xe:
           ch = 'p';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "point.attenuation"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
           break;
         case 0xf:
           ch = 'd';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "depth.range"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
           break;
         case 0x10:
           ch = 'm';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "matrix."[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 8 & 7) {
+          outCursor = outCursor + copyLength;
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 7) {
           case 0:
             ch = 'm';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "mvp."[copyIndex + 1];
               copyIndex = copyLength;
@@ -9023,30 +9054,30 @@ LAB_97c03088:
             ch = 'p';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "projection."[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
 LAB_97c038d4:
-            local_60 = local_60 + copyLength;
+            outCursor = outCursor + copyLength;
             goto switchD_97c0384c_default;
           case 2:
             ch = 'c';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "color["[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            outCursor = outCursor + copyLength;
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
-            local_60 = local_60 + copyEnd2;
+            outCursor = outCursor + copyEnd2;
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "]."[copyIndex + 1];
               copyIndex = copyLength;
@@ -9056,18 +9087,18 @@ LAB_97c038d4:
             ch = 'm';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "modelview["[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            outCursor = outCursor + copyLength;
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
-            local_60 = local_60 + copyEnd2;
+            outCursor = outCursor + copyEnd2;
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "]."[copyIndex + 1];
               copyIndex = copyLength;
@@ -9077,18 +9108,18 @@ LAB_97c038d4:
             ch = 't';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "texture["[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            outCursor = outCursor + copyLength;
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
-            local_60 = local_60 + copyEnd2;
+            outCursor = outCursor + copyEnd2;
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "]."[copyIndex + 1];
               copyIndex = copyLength;
@@ -9098,18 +9129,18 @@ LAB_97c038d4:
             ch = 'p';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "program["[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            outCursor = outCursor + copyLength;
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
-            local_60 = local_60 + copyEnd2;
+            outCursor = outCursor + copyEnd2;
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "]."[copyIndex + 1];
               copyIndex = copyLength;
@@ -9118,27 +9149,27 @@ LAB_97c038d4:
           default:
             goto switchD_97c0384c_default;
           }
-          local_60 = local_60 + copyLength;
+          outCursor = outCursor + copyLength;
 switchD_97c0384c_default:
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 0xe & 3;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0xe & 3;
           if (uVar23 == 1) {
             ch = 't';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "transpose."[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
 LAB_97c03c14:
-            local_60 = local_60 + copyLength;
+            outCursor = outCursor + copyLength;
           }
           else if (1 < uVar23) {
             if (uVar23 == 2) {
               ch = 'i';
               copyIndex = 0;
               do {
-                local_60[copyIndex] = ch;
+                outCursor[copyIndex] = ch;
                 copyLength = copyIndex + 1;
                 ch = "inverse."[copyIndex + 1];
                 copyIndex = copyLength;
@@ -9149,7 +9180,7 @@ LAB_97c03c14:
               ch = 'i';
               copyIndex = 0;
               do {
-                local_60[copyIndex] = ch;
+                outCursor[copyIndex] = ch;
                 copyLength = copyIndex + 1;
                 ch = "invtrans."[copyIndex + 1];
                 copyIndex = copyLength;
@@ -9161,42 +9192,42 @@ LAB_97c03c20:
           ch = 'r';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "row["[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)shader[iVar19 * 2 + loopIndex * 2] >> 0xc & 3);
+          outCursor = outCursor + copyLength;
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)shader[paramOffset * 2 + loopIndex * 2] >> 0xc & 3);
           ch = ']';
-          local_60 = local_60 + copyEnd2;
+          outCursor = outCursor + copyEnd2;
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
+            outCursor[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "]"[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
 LAB_97c040c4:
-          local_60 = local_60 + copyLength;
+          outCursor = outCursor + copyLength;
           goto switchD_97c02904_caseD_0;
         case 0x11:
           pfVar24 = (float *)(shader +
-                             shader[0x1b] * 2 + (shader[iVar19 * 2 + loopIndex * 2] & 0xffffU) * 4);
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 0x1a & 7) {
+                             shader[0x1b] * 2 + (shader[paramOffset * 2 + loopIndex * 2] & 0xffffU) * 4);
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x1a & 7) {
           case 0:
           case 1:
             ch = '{';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "{"[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            uVar25 = ((char * (*)())_glp_dtostr)((int)((ulonglong)uVar25 >> 0x20),(int)uVar25,local_60,
-                                 local_64 + (local_68 - (int)local_60),(double)*pfVar24,1e-07,in_f3,
+            outCursor = outCursor + copyLength;
+            uVar25 = ((char * (*)())_glp_dtostr)((int)((ulonglong)uVar25 >> 0x20),(int)uVar25,outCursor,
+                                 outBuffer + (outCapacity - (int)outCursor),(double)*pfVar24,1e-07,in_f3,
                                  in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff48,in_stack_ffffff50,
                                  in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
             iVar7 = (int)((ulonglong)uVar25 >> 0x20);
@@ -9208,8 +9239,8 @@ LAB_97c040c4:
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = (char *)(iVar7 + copyLength6);
-            uVar25 = ((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,local_60,local_64 + (local_68 - (int)local_60),
+            outCursor = (char *)(iVar7 + copyLength6);
+            uVar25 = ((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,outCursor,outBuffer + (outCapacity - (int)outCursor),
                                  (double)pfVar24[1],1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                  in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                  in_stack_ffffff60,in_stack_ffffff68);
@@ -9222,8 +9253,8 @@ LAB_97c040c4:
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = (char *)(iVar7 + copyLength6);
-            uVar25 = ((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,local_60,local_64 + (local_68 - (int)local_60),
+            outCursor = (char *)(iVar7 + copyLength6);
+            uVar25 = ((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,outCursor,outBuffer + (outCapacity - (int)outCursor),
                                  (double)pfVar24[2],1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                  in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                  in_stack_ffffff60,in_stack_ffffff68);
@@ -9236,29 +9267,29 @@ LAB_97c040c4:
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = (char *)(iVar7 + copyLength6);
-            local_60 = (char *)((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,local_60,
-                                           local_64 + (local_68 - (int)local_60),(double)pfVar24[3],
+            outCursor = (char *)(iVar7 + copyLength6);
+            outCursor = (char *)((char * (*)())_glp_dtostr)(iVar7,(int)uVar25,outCursor,
+                                           outBuffer + (outCapacity - (int)outCursor),(double)pfVar24[3],
                                            1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                            in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                            in_stack_ffffff60,in_stack_ffffff68);
             ch = '}';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "}"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 2:
             ch = '{';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
-              iVar7 = copyIndex + 1;
+              outCursor[copyIndex] = ch;
+              nextIndex4 = copyIndex + 1;
               ch = "{-- Fixed constant data not currently supported --}"[copyIndex + 1];
-              copyIndex = iVar7;
+              copyIndex = nextIndex4;
             } while (ch != '\0');
             break;
           case 3:
@@ -9266,48 +9297,48 @@ LAB_97c040c4:
             ch = '{';
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "{"[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(local_60, *(unsigned int *)pfVar24);
+            outCursor = outCursor + copyLength;
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, *(unsigned int *)pfVar24);
             ch = ',';
             copyIndex = 0;
             do {
-              local_60[copyIndex + copyEnd] = ch;
+              outCursor[copyIndex + copyEnd] = ch;
               copyLength6 = copyIndex + 1;
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength6 + copyEnd;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(local_60, ((unsigned int *)pfVar24)[1]);
+            outCursor = outCursor + copyLength6 + copyEnd;
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)pfVar24)[1]);
             ch = ',';
             copyIndex = 0;
             do {
-              local_60[copyIndex + copyEnd] = ch;
+              outCursor[copyIndex + copyEnd] = ch;
               copyLength6 = copyIndex + 1;
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength6 + copyEnd;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(local_60, ((unsigned int *)pfVar24)[2]);
+            outCursor = outCursor + copyLength6 + copyEnd;
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)pfVar24)[2]);
             ch = ',';
             copyIndex = 0;
             do {
-              local_60[copyIndex + copyEnd] = ch;
+              outCursor[copyIndex + copyEnd] = ch;
               copyLength6 = copyIndex + 1;
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            local_60 = local_60 + copyLength6 + copyEnd;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60, ((unsigned int *)pfVar24)[3]);
+            outCursor = outCursor + copyLength6 + copyEnd;
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)pfVar24)[3]);
             ch = '}';
-            local_60 = local_60 + copyEnd2;
+            outCursor = outCursor + copyEnd2;
             copyIndex = 0;
             do {
-              local_60[copyIndex] = ch;
+              outCursor[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "}"[copyIndex + 1];
               copyIndex = copyLength;
@@ -9321,30 +9352,30 @@ LAB_97c040c4:
           ch = 'n';
           copyIndex = 0;
           do {
-            local_60[copyIndex] = ch;
-            iVar7 = copyIndex + 1;
+            outCursor[copyIndex] = ch;
+            nextIndex4 = copyIndex + 1;
             ch = "normalscale"[copyIndex + 1];
-            copyIndex = iVar7;
+            copyIndex = nextIndex4;
           } while (ch != '\0');
         }
-        local_60 = local_60 + iVar7;
+        outCursor = outCursor + nextIndex4;
 switchD_97c02904_caseD_0:
-        if (piVar15[*(ushort *)((int)shader + iVar5 + iVar19 * 8 + 6)] == -1) {
+        if (allocation10[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == -1) {
           ch = ';';
           copyIndex6 = 0;
           do {
-            local_60[copyIndex6] = ch;
+            outCursor[copyIndex6] = ch;
             copyLength8 = copyIndex6 + 1;
             ch = ";\n"[copyIndex6 + 1];
             copyIndex6 = copyLength8;
           } while (ch != '\0');
         }
-        else if (iVar13 + 1 == piVar14[iVar3]) {
-          iVar3 = iVar3 + 1;
+        else if (loopIndex5 + 1 == allocation9[loopIndex7]) {
+          loopIndex7 = loopIndex7 + 1;
           ch = '\n';
           copyIndex6 = 0;
           do {
-            local_60[copyIndex6] = ch;
+            outCursor[copyIndex6] = ch;
             copyLength8 = copyIndex6 + 1;
             ch = "\n};\n"[copyIndex6 + 1];
             copyIndex6 = copyLength8;
@@ -9354,60 +9385,60 @@ switchD_97c02904_caseD_0:
           ch = ',';
           copyIndex6 = 0;
           do {
-            local_60[copyIndex6] = ch;
+            outCursor[copyIndex6] = ch;
             copyLength8 = copyIndex6 + 1;
             ch = ",\n"[copyIndex6 + 1];
             copyIndex6 = copyLength8;
           } while (ch != '\0');
         }
-        local_60 = local_60 + copyLength8;
-        uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&local_68,&local_64,&local_60);
+        outCursor = outCursor + copyLength8;
+        uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
         if ((int)((ulonglong)uVar25 >> 0x20) == 0) {
-          if (iVar16 != 0) {
-            _free(iVar16);
+          if (allocation3 != 0) {
+            _free(allocation3);
           }
-          pcVar9 = local_64;
-          if (piVar15 != (int *)0x0) {
-            _free(piVar15);
-            pcVar9 = local_64;
+          allocation8 = outBuffer;
+          if (allocation10 != (int *)0x0) {
+            _free(allocation10);
+            allocation8 = outBuffer;
           }
           goto joined_r0x97c02488;
         }
 LAB_97c04238:
         loopIndex = loopIndex + 1;
-      } while (loopIndex < iVar21);
+      } while (loopIndex < paramCount);
     }
-    if (piVar14 != (int *)0x0) {
-      _free(piVar14);
+    if (allocation9 != (int *)0x0) {
+      _free(allocation9);
     }
   }
-  iVar19 = shader[0xc];
+  outputCount = shader[0xc];
   loopIndex2 = 0;
   iVar13 = shader[0xd];
-  if (0 < iVar19) {
+  if (0 < outputCount) {
     do {
       uVar23 = (uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 0x10 & 0xf;
       if (uVar23 == 0) goto LAB_97c04904;
       ch = 'O';
       copyIndex4 = 0;
       do {
-        local_60[copyIndex4] = ch;
+        outCursor[copyIndex4] = ch;
         copyLength5 = copyIndex4 + 1;
         ch = "OUTPUT res"[copyIndex4 + 1];
         copyIndex4 = copyLength5;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength5;
-      iVar4 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)*(ushort *)((int)shader + loopIndex2 * 8 + iVar13 * 8 + 6))
+      outCursor = outCursor + copyLength5;
+      iVar4 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)*(ushort *)((int)shader + loopIndex2 * 8 + iVar13 * 8 + 6))
       ;
       ch = ' ';
       copyIndex4 = 0;
       do {
-        local_60[copyIndex4 + iVar4] = ch;
+        outCursor[copyIndex4 + iVar4] = ch;
         copyLength3 = copyIndex4 + 1;
         ch = " = "[copyIndex4 + 1];
         copyIndex4 = copyLength3;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength3 + iVar4;
+      outCursor = outCursor + copyLength3 + iVar4;
       switch(uVar23) {
       default:
         goto switchD_97c04350_caseD_0;
@@ -9415,51 +9446,51 @@ LAB_97c04238:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
-          iVar4 = copyIndex4 + 1;
+          outCursor[copyIndex4] = ch;
+          nextIndex3 = copyIndex4 + 1;
           ch = "result.position"[copyIndex4 + 1];
-          copyIndex4 = iVar4;
+          copyIndex4 = nextIndex3;
         } while (ch != '\0');
         break;
       case 2:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
-          iVar4 = copyIndex4 + 1;
+          outCursor[copyIndex4] = ch;
+          nextIndex3 = copyIndex4 + 1;
           ch = "result.fogcoord"[copyIndex4 + 1];
-          copyIndex4 = iVar4;
+          copyIndex4 = nextIndex3;
         } while (ch != '\0');
         break;
       case 3:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
-          iVar4 = copyIndex4 + 1;
+          outCursor[copyIndex4] = ch;
+          nextIndex3 = copyIndex4 + 1;
           ch = "result.pointsize"[copyIndex4 + 1];
-          copyIndex4 = iVar4;
+          copyIndex4 = nextIndex3;
         } while (ch != '\0');
         break;
       case 4:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = "result.color"[copyIndex4 + 1];
           copyIndex4 = copyLength5;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength5;
-        if (iVar17 == 0x8b31) {
+        outCursor = outCursor + copyLength5;
+        if (shaderTarget == 0x8b31) {
           if ((shader[iVar13 * 2 + loopIndex2 * 2] & 1U) == 0) {
             ch = '.';
             copyIndex4 = 0;
             do {
-              local_60[copyIndex4] = ch;
-              iVar4 = copyIndex4 + 1;
+              outCursor[copyIndex4] = ch;
+              nextIndex3 = copyIndex4 + 1;
               ch = ".front.primary"[copyIndex4 + 1];
-              copyIndex4 = iVar4;
+              copyIndex4 = nextIndex3;
             } while (ch != '\0');
           }
           else {
@@ -9467,30 +9498,30 @@ LAB_97c04238:
             ch = '.';
             copyIndex4 = 0;
             do {
-              local_60[copyIndex4] = ch;
-              iVar4 = copyIndex4 + 1;
+              outCursor[copyIndex4] = ch;
+              nextIndex3 = copyIndex4 + 1;
               ch = ".back.primary"[copyIndex4 + 1];
-              copyIndex4 = iVar4;
+              copyIndex4 = nextIndex3;
             } while (ch != '\0');
           }
           break;
         }
-        if ((iVar17 == 0x8b30) && (1 < ((uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 1 & 7))) {
+        if ((shaderTarget == 0x8b30) && (1 < ((uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 1 & 7))) {
           ch = '[';
           copyIndex4 = 0;
           do {
-            local_60[copyIndex4] = ch;
+            outCursor[copyIndex4] = ch;
             copyLength5 = copyIndex4 + 1;
             ch = "["[copyIndex4 + 1];
             copyIndex4 = copyLength5;
           } while (ch != '\0');
-          local_60 = local_60 + copyLength5;
-          copyEnd4 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 1 & 7);
+          outCursor = outCursor + copyLength5;
+          copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 1 & 7);
           ch = ']';
-          local_60 = local_60 + copyEnd4;
+          outCursor = outCursor + copyEnd4;
           copyIndex4 = 0;
           do {
-            local_60[copyIndex4] = ch;
+            outCursor[copyIndex4] = ch;
             copyLength5 = copyIndex4 + 1;
             ch = "]"[copyIndex4 + 1];
             copyIndex4 = copyLength5;
@@ -9502,21 +9533,21 @@ LAB_97c04238:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = "result.color"[copyIndex4 + 1];
           copyIndex4 = copyLength5;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength5;
-        if (iVar17 == 0x8b31) {
+        outCursor = outCursor + copyLength5;
+        if (shaderTarget == 0x8b31) {
           if ((shader[iVar13 * 2 + loopIndex2 * 2] & 1U) == 0) {
             ch = '.';
             copyIndex4 = 0;
             do {
-              local_60[copyIndex4] = ch;
-              iVar4 = copyIndex4 + 1;
+              outCursor[copyIndex4] = ch;
+              nextIndex3 = copyIndex4 + 1;
               ch = ".front.secondary"[copyIndex4 + 1];
-              copyIndex4 = iVar4;
+              copyIndex4 = nextIndex3;
             } while (ch != '\0');
           }
           else {
@@ -9524,10 +9555,10 @@ LAB_97c04238:
             ch = '.';
             copyIndex4 = 0;
             do {
-              local_60[copyIndex4] = ch;
-              iVar4 = copyIndex4 + 1;
+              outCursor[copyIndex4] = ch;
+              nextIndex3 = copyIndex4 + 1;
               ch = ".back.secondary"[copyIndex4 + 1];
-              copyIndex4 = iVar4;
+              copyIndex4 = nextIndex3;
             } while (ch != '\0');
           }
           break;
@@ -9537,18 +9568,18 @@ LAB_97c04238:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = "result.texcoord["[copyIndex4 + 1];
           copyIndex4 = copyLength5;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength5;
-        copyEnd4 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar13 * 2 + loopIndex2 * 2] & 0x1f);
+        outCursor = outCursor + copyLength5;
+        copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[iVar13 * 2 + loopIndex2 * 2] & 0x1f);
         ch = ']';
-        local_60 = local_60 + copyEnd4;
+        outCursor = outCursor + copyEnd4;
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = "]"[copyIndex4 + 1];
           copyIndex4 = copyLength5;
@@ -9558,147 +9589,147 @@ LAB_97c04238:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
-          iVar4 = copyIndex4 + 1;
+          outCursor[copyIndex4] = ch;
+          nextIndex3 = copyIndex4 + 1;
           ch = "result.depth"[copyIndex4 + 1];
-          copyIndex4 = iVar4;
+          copyIndex4 = nextIndex3;
         } while (ch != '\0');
         break;
       case 8:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
-          iVar4 = copyIndex4 + 1;
+          outCursor[copyIndex4] = ch;
+          nextIndex3 = copyIndex4 + 1;
           ch = "result.eyePosition"[copyIndex4 + 1];
-          copyIndex4 = iVar4;
+          copyIndex4 = nextIndex3;
         } while (ch != '\0');
         break;
       case 9:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
-          iVar4 = copyIndex4 + 1;
+          outCursor[copyIndex4] = ch;
+          nextIndex3 = copyIndex4 + 1;
           ch = "result.clipVertex"[copyIndex4 + 1];
-          copyIndex4 = iVar4;
+          copyIndex4 = nextIndex3;
         } while (ch != '\0');
         break;
       case 10:
         ch = 'r';
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = "result.attrib["[copyIndex4 + 1];
           copyIndex4 = copyLength5;
         } while (ch != '\0');
-        local_60 = local_60 + copyLength5;
-        copyEnd4 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar13 * 2 + loopIndex2 * 2] & 0x1f);
+        outCursor = outCursor + copyLength5;
+        copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[iVar13 * 2 + loopIndex2 * 2] & 0x1f);
         ch = ']';
-        local_60 = local_60 + copyEnd4;
+        outCursor = outCursor + copyEnd4;
         copyIndex4 = 0;
         do {
-          local_60[copyIndex4] = ch;
+          outCursor[copyIndex4] = ch;
           copyLength5 = copyIndex4 + 1;
           ch = "]"[copyIndex4 + 1];
           copyIndex4 = copyLength5;
         } while (ch != '\0');
 LAB_97c04804:
-        local_60 = local_60 + copyLength5;
+        outCursor = outCursor + copyLength5;
         goto switchD_97c04350_caseD_0;
       }
-      local_60 = local_60 + iVar4;
+      outCursor = outCursor + nextIndex3;
 switchD_97c04350_caseD_0:
       ch = ';';
       copyIndex4 = 0;
       do {
-        local_60[copyIndex4] = ch;
+        outCursor[copyIndex4] = ch;
         copyLength5 = copyIndex4 + 1;
         ch = ";\n"[copyIndex4 + 1];
         copyIndex4 = copyLength5;
       } while (ch != '\0');
-      local_60 = local_60 + copyLength5;
-      iVar3 = ((int (*)())_adjustAllocation_97bf27d4)(&local_68,&local_64,&local_60);
+      outCursor = outCursor + copyLength5;
+      iVar3 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
       if (iVar3 == 0) {
-        piVar14 = piVar15;
-        pcVar9 = local_64;
-        if (iVar16 != 0) {
-          _free(iVar16);
-          pcVar9 = local_64;
+        allocation9 = allocation10;
+        allocation8 = outBuffer;
+        if (allocation3 != 0) {
+          _free(allocation3);
+          allocation8 = outBuffer;
         }
         goto joined_r0x97c02488;
       }
 LAB_97c04904:
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < iVar19);
+    } while (loopIndex2 < outputCount);
   }
   ch = '\n';
   copyIndex7 = 0;
   do {
-    local_60[copyIndex7] = ch;
+    outCursor[copyIndex7] = ch;
     copyLength9 = copyIndex7 + 1;
     ch = "\n"[copyIndex7 + 1];
     copyIndex7 = copyLength9;
   } while (ch != '\0');
-  local_60 = local_60 + copyLength9;
-  local_48[0] = (char *)_malloc(local_68);
-  pcVar9 = local_64;
-  if (local_48[0] == (char *)0x0) goto LAB_97c04d50;
-  iVar19 = shader[0x14];
+  outCursor = outCursor + copyLength9;
+  bodyCursor[0] = (char *)_malloc(outCapacity);
+  allocation8 = outBuffer;
+  if (bodyCursor[0] == (char *)0x0) goto LAB_97c04d50;
+  instructionCount = shader[0x14];
   loopIndex2 = 0;
   iVar13 = shader[0x15];
-  iVar3 = 0;
-  local_4c = local_48[0];
-  if (0 < iVar19) {
+  loopIndex7 = 0;
+  bodyStart = bodyCursor[0];
+  if (0 < instructionCount) {
     do {
-      iVar4 = ((int (*)())_glpDisassemble2Op)(shader + iVar13 * 2 + iVar3 * 2,local_48[0],&local_58,&local_54,
-                                 iVar16,piVar15,0,&local_50,&local_70,iVar17,param_2);
+      iVar4 = ((int (*)())_glpDisassemble2Op)(shader + iVar13 * 2 + loopIndex7 * 2,bodyCursor[0],&wordsConsumed,&charsWritten,
+                                 allocation3,allocation10,0,&outFlagWord,&usageFlags,shaderTarget,printOptions);
       if (iVar4 == -1) {
 LAB_97c04a0c:
-        if (iVar16 != 0) {
-          _free(iVar16);
+        if (allocation3 != 0) {
+          _free(allocation3);
         }
-        if (piVar15 != (int *)0x0) {
-          _free(piVar15);
+        if (allocation10 != (int *)0x0) {
+          _free(allocation10);
         }
         goto LAB_97c04ab8;
       }
-      local_48[0] = local_48[0] + local_54;
-      iVar3 = iVar3 + local_58;
-      iVar4 = ((int (*)())_adjustAllocation_97bf27d4)(&local_68,&local_4c,local_48);
+      bodyCursor[0] = bodyCursor[0] + charsWritten;
+      loopIndex7 = loopIndex7 + wordsConsumed;
+      iVar4 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&bodyStart,bodyCursor);
       if (iVar4 == 0) goto LAB_97c04a0c;
       loopIndex2 = loopIndex2 + 1;
-      iVar3 = iVar3 + 1;
-    } while (loopIndex2 < iVar19);
+      loopIndex7 = loopIndex7 + 1;
+    } while (loopIndex2 < instructionCount);
   }
-  if (iVar16 != 0) {
-    _free(iVar16);
+  if (allocation3 != 0) {
+    _free(allocation3);
   }
-  if (piVar15 != (int *)0x0) {
-    _free(piVar15);
+  if (allocation10 != (int *)0x0) {
+    _free(allocation10);
   }
   ch = 'E';
   copyIndex2 = 0;
   do {
-    local_48[0][copyIndex2] = ch;
+    bodyCursor[0][copyIndex2] = ch;
     copyLength2 = copyIndex2 + 1;
     ch = "END\n"[copyIndex2 + 1];
     copyIndex2 = copyLength2;
   } while (ch != '\0');
-  local_48[0] = local_48[0] + copyLength2;
-  pcVar9 = (char *)_malloc(local_68);
-  if (pcVar9 == (char *)0x0) {
+  bodyCursor[0] = bodyCursor[0] + copyLength2;
+  allocation8 = (char *)_malloc(outCapacity);
+  if (allocation8 == (char *)0x0) {
 LAB_97c04ab8:
-    _free(local_64);
-    pcVar9 = local_4c;
+    _free(outBuffer);
+    allocation8 = bodyStart;
     goto LAB_97c04d50;
   }
   if (*shader == 0x8b30) {
     ch = '!';
     copyIndex2 = 0;
     do {
-      pcVar9[copyIndex2] = ch;
+      allocation8[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "!!ARBfp1.0\n\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
@@ -9708,7 +9739,7 @@ LAB_97c04ab8:
     ch = '!';
     copyIndex2 = 0;
     do {
-      pcVar9[copyIndex2] = ch;
+      allocation8[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "!!ARBvp1.0\n\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
@@ -9718,19 +9749,19 @@ LAB_97c04ab8:
     ch = 'U';
     copyIndex2 = 0;
     do {
-      pcVar9[copyIndex2] = ch;
+      allocation8[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "Unknown Target (error)\n\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
     } while (ch != '\0');
   }
-  pcVar20 = pcVar9 + copyLength2;
-  if ((local_70 & 0x200000) == 0) {
-    if ((local_70 & 0x100000) != 0) {
+  allocation6 = allocation8 + copyLength2;
+  if ((usageFlags & 0x200000) == 0) {
+    if ((usageFlags & 0x100000) != 0) {
       ch = 'O';
       copyIndex2 = 0;
       do {
-        pcVar20[copyIndex2] = ch;
+        allocation6[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "OPTION NV_vertex_program2;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9742,20 +9773,20 @@ LAB_97c04ab8:
     ch = 'O';
     copyIndex2 = 0;
     do {
-      pcVar20[copyIndex2] = ch;
+      allocation6[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "OPTION NV_vertex_program3;\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
     } while (ch != '\0');
 LAB_97c04c18:
-    pcVar20 = pcVar20 + copyLength2;
+    allocation6 = allocation6 + copyLength2;
   }
-  if ((local_70 & 0x800000) == 0) {
-    if ((local_70 & 0x400000) != 0) {
+  if ((usageFlags & 0x800000) == 0) {
+    if ((usageFlags & 0x400000) != 0) {
       ch = 'O';
       copyIndex2 = 0;
       do {
-        pcVar20[copyIndex2] = ch;
+        allocation6[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "OPTION NV_fragment_program;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9767,40 +9798,40 @@ LAB_97c04c18:
     ch = 'O';
     copyIndex2 = 0;
     do {
-      pcVar20[copyIndex2] = ch;
+      allocation6[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "OPTION NV_fragment_program2;\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
     } while (ch != '\0');
 LAB_97c04c9c:
-    pcVar20 = pcVar20 + copyLength2;
+    allocation6 = allocation6 + copyLength2;
   }
-  if ((local_70 & 0x1000000) != 0) {
+  if ((usageFlags & 0x1000000) != 0) {
     ch = 'O';
     copyIndex2 = 0;
     do {
-      pcVar20[copyIndex2] = ch;
+      allocation6[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "OPTION ARB_fragment_program_shadow;\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
     } while (ch != '\0');
-    pcVar20 = pcVar20 + copyLength2;
+    allocation6 = allocation6 + copyLength2;
   }
-  if ((local_70 & 0xf00000) != 0) {
+  if ((usageFlags & 0xf00000) != 0) {
     ch = '\n';
     copyIndex2 = 0;
     do {
-      pcVar20[copyIndex2] = ch;
+      allocation6[copyIndex2] = ch;
       copyLength2 = copyIndex2 + 1;
       ch = "\n"[copyIndex2 + 1];
       copyIndex2 = copyLength2;
     } while (ch != '\0');
-    pcVar20 = pcVar20 + copyLength2;
+    allocation6 = allocation6 + copyLength2;
   }
-  allocation = (char *)_malloc(local_68);
+  allocation = (char *)_malloc(outCapacity);
   if (allocation != (char *)0x0) {
-    pcVar22 = allocation;
-    if ((local_70 & 0x1000) != 0) {
+    allocation7 = allocation;
+    if ((usageFlags & 0x1000) != 0) {
       ch = 'P';
       copyIndex2 = 0;
       do {
@@ -9817,16 +9848,16 @@ LAB_97c04c9c:
         ch = "ALIAS kZERO       = kARRAY1.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + copyLength2;
+      shaderTarget = copyLength4 + copyLength2;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kONE        = kARRAY1.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
@@ -9835,16 +9866,16 @@ LAB_97c04c9c:
         ch = "ALIAS kTWO        = kARRAY1.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTHREE      = kARRAY1.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
@@ -9853,16 +9884,16 @@ LAB_97c04c9c:
         ch = "ALIAS kSEL        = kARRAY1;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kFLOAT      = kARRAY1.yxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
@@ -9871,16 +9902,16 @@ LAB_97c04c9c:
         ch = "ALIAS kVEC2       = kARRAY1.yyxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kVEC3       = kARRAY1.yyyx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
@@ -9889,154 +9920,154 @@ LAB_97c04c9c:
         ch = "ALIAS kVEC4       = kARRAY1.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      pcVar22 = allocation + copyLength4 + iVar13;
+      allocation7 = allocation + copyLength4 + iVar13;
     }
-    if ((local_70 & 0x2000) != 0) {
+    if ((usageFlags & 0x2000) != 0) {
       ch = 'P';
-      iVar16 = 0;
+      loopIndex6 = 0;
       do {
-        pcVar22[iVar16] = ch;
-        iVar13 = iVar16 + 1;
+        allocation7[loopIndex6] = ch;
+        nextIndex = loopIndex6 + 1;
         ch = "PARAM kARRAY2 = { 0.5, 3.141592653589793, 6.283185307179586, 1.570796326794897 };\n"
-                [iVar16 + 1];
-        iVar16 = iVar13;
+                [loopIndex6 + 1];
+        loopIndex6 = nextIndex;
       } while (ch != '\0');
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kHALF       = kARRAY2.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kPI         = kARRAY2.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS k2PI        = kARRAY2.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kHALFPI     = kARRAY2.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2 + iVar17;
+      allocation7 = allocation7 + copyLength2 + shaderTarget;
     }
-    if ((local_70 & 0x4000) != 0) {
+    if ((usageFlags & 0x4000) != 0) {
       ch = 'P';
-      iVar16 = 0;
+      loopIndex6 = 0;
       do {
-        pcVar22[iVar16] = ch;
-        iVar13 = iVar16 + 1;
+        allocation7[loopIndex6] = ch;
+        nextIndex = loopIndex6 + 1;
         ch = "PARAM kARRAY3 = { 0.636619772367581, 0.31830988618379067, 0.159154943091895, -0.0962243 };\n"
-                [iVar16 + 1];
-        iVar16 = iVar13;
+                [loopIndex6 + 1];
+        loopIndex6 = nextIndex;
       } while (ch != '\0');
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kHALFPI_RCP = kARRAY3.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kPI_RCP     = kARRAY3.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS k2PI_RCP    = kARRAY3.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTAN_K1     = kARRAY3.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2 + iVar17;
+      allocation7 = allocation7 + copyLength2 + shaderTarget;
     }
-    if ((local_70 & 0x8000) != 0) {
+    if ((usageFlags & 0x8000) != 0) {
       ch = 'P';
-      iVar16 = 0;
+      loopIndex6 = 0;
       do {
-        pcVar22[iVar16] = ch;
-        iVar13 = iVar16 + 1;
+        allocation7[loopIndex6] = ch;
+        nextIndex = loopIndex6 + 1;
         ch = "PARAM kARRAY4 = { -0.429562, 0.00986998, 57.295779513082, 0.0174532925199 };\n"
-                [iVar16 + 1];
-        iVar16 = iVar13;
+                [loopIndex6 + 1];
+        loopIndex6 = nextIndex;
       } while (ch != '\0');
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kTAN_K2     = kARRAY4.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTAN_K3     = kARRAY4.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kDEGREES    = kARRAY4.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kRADIANS    = kARRAY4.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2 + iVar17;
+      allocation7 = allocation7 + copyLength2 + shaderTarget;
     }
-    if ((local_70 & 0x10000) != 0) {
+    if ((usageFlags & 0x10000) != 0) {
       ch = 'P';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2] = ch;
+        allocation7[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "PARAM kARRAY5 = { 0.999918, 0.746304, 0.414164, 0.054165 };\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -10044,178 +10075,178 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + copyLength2] = ch;
+        allocation7[copyIndex2 + copyLength2] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K1    = kARRAY5.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + copyLength2;
+      shaderTarget = copyLength4 + copyLength2;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K2    = kARRAY5.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K3    = kARRAY5.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + iVar13;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K4    = kARRAY5.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2 + iVar17;
+      allocation7 = allocation7 + copyLength2 + shaderTarget;
     }
-    if ((local_70 & 0x20000) != 0) {
+    if ((usageFlags & 0x20000) != 0) {
       ch = 'P';
-      iVar16 = 0;
+      loopIndex6 = 0;
       do {
-        pcVar22[iVar16] = ch;
-        iVar13 = iVar16 + 1;
+        allocation7[loopIndex6] = ch;
+        nextIndex = loopIndex6 + 1;
         ch = "PARAM kARRAY6 = { 0.671088e-17, 2.718281828459045, 0.69314718056, 0.0 };\n"
-                [iVar16 + 1];
-        iVar16 = iVar13;
+                [loopIndex6 + 1];
+        loopIndex6 = nextIndex;
       } while (ch != '\0');
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kOFFSET     = kARRAY6.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      iVar17 = copyLength4 + iVar13;
+      shaderTarget = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar17] = ch;
+        allocation7[copyIndex2 + shaderTarget] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kE          = kARRAY6.y;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + iVar17;
+      iVar13 = copyLength2 + shaderTarget;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS k1_OVER_LOG2_E = kARRAY6.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength4 + iVar13;
+      allocation7 = allocation7 + copyLength4 + iVar13;
     }
-    if ((local_70 & 0xff000) != 0) {
+    if ((usageFlags & 0xff000) != 0) {
       ch = '\n';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2] = ch;
+        allocation7[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2;
+      allocation7 = allocation7 + copyLength2;
     }
     loopIndex4 = 0;
-    uVar1 = local_70;
+    uVar1 = usageFlags;
     while ((uVar1 & 1) != 0) {
       ch = 'T';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2] = ch;
+        allocation7[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "TEMP scratch"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2;
+      allocation7 = allocation7 + copyLength2;
       if (loopIndex4 != 0) {
-        copyEnd5 = ((int (*)())_ncpy_97bf2850)(pcVar22,loopIndex4);
-        pcVar22 = pcVar22 + copyEnd5;
+        copyEnd5 = ((int (*)())_ncpy_97bf2850)(allocation7,loopIndex4);
+        allocation7 = allocation7 + copyEnd5;
       }
       ch = ';';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2] = ch;
+        allocation7[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = ";\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
       loopIndex4 = loopIndex4 + 1;
-      pcVar22 = pcVar22 + copyLength2;
-      uVar1 = (int)local_70 >> (loopIndex4 & 0x3f);
+      allocation7 = allocation7 + copyLength2;
+      uVar1 = (int)usageFlags >> (loopIndex4 & 0x3f);
     }
-    if ((local_70 & 0xfff) != 0) {
+    if ((usageFlags & 0xfff) != 0) {
       ch = '\n';
       copyIndex2 = 0;
       do {
-        pcVar22[copyIndex2] = ch;
+        allocation7[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      pcVar22 = pcVar22 + copyLength2;
+      allocation7 = allocation7 + copyLength2;
     }
-    allocation2 = _malloc(pcVar22 + (int)(pcVar20 +
-                                    (int)(local_60 +
-                                         (int)(local_48[0] +
-                                              (((-(int)local_64 - (int)pcVar9) - (int)allocation) -
-                                              (int)local_4c) + 1))));
-    *pcVar20 = '\0';
+    allocation2 = _malloc(allocation7 + (int)(allocation6 +
+                                    (int)(outCursor +
+                                         (int)(bodyCursor[0] +
+                                              (((-(int)outBuffer - (int)allocation8) - (int)allocation) -
+                                              (int)bodyStart) + 1))));
+    *allocation6 = '\0';
     copyIndex9 = 0;
-    *local_60 = '\0';
-    *pcVar22 = '\0';
-    *local_48[0] = '\0';
-    ch = *pcVar9;
+    *outCursor = '\0';
+    *allocation7 = '\0';
+    *bodyCursor[0] = '\0';
+    ch = *allocation8;
     while (ch != '\0') {
       *(char *)(allocation2 + copyIndex9) = ch;
       copyIndex9 = copyIndex9 + 1;
-      ch = pcVar9[copyIndex9];
+      ch = allocation8[copyIndex9];
     }
     copyIndex10 = 0;
-    ch = *local_64;
+    ch = *outBuffer;
     while (ch != '\0') {
       *(char *)(allocation2 + copyIndex9 + copyIndex10) = ch;
       copyIndex10 = copyIndex10 + 1;
-      ch = local_64[copyIndex10];
+      ch = outBuffer[copyIndex10];
     }
-    iVar17 = allocation2 + copyIndex9 + copyIndex10;
+    shaderTarget = allocation2 + copyIndex9 + copyIndex10;
     copyIndex9 = 0;
     ch = *allocation;
     while (ch != '\0') {
-      *(char *)(iVar17 + copyIndex9) = ch;
+      *(char *)(shaderTarget + copyIndex9) = ch;
       copyIndex9 = copyIndex9 + 1;
       ch = allocation[copyIndex9];
     }
-    iVar17 = iVar17 + copyIndex9;
+    shaderTarget = shaderTarget + copyIndex9;
     copyIndex9 = 0;
-    ch = *local_4c;
+    ch = *bodyStart;
     while (ch != '\0') {
-      *(char *)(iVar17 + copyIndex9) = ch;
+      *(char *)(shaderTarget + copyIndex9) = ch;
       copyIndex9 = copyIndex9 + 1;
-      ch = local_4c[copyIndex9];
+      ch = bodyStart[copyIndex9];
     }
-    *(undefined1 *)(iVar17 + copyIndex9) = 0;
-    _free(pcVar9);
-    _free(local_64);
+    *(undefined1 *)(shaderTarget + copyIndex9) = 0;
+    _free(allocation8);
+    _free(outBuffer);
     _free(allocation);
-    _free(local_4c);
+    _free(bodyStart);
     return allocation2;
   }
-  _free(local_64);
-  _free(local_4c);
+  _free(outBuffer);
+  _free(bodyStart);
 LAB_97c04d50:
-  _free(pcVar9);
+  _free(allocation8);
   return 0;
 }
 
@@ -10226,7 +10257,7 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
   undefined4 param_3;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation2;
   undefined4 uVar3;
   int iVar4;
   int iVar5;
@@ -10250,7 +10281,7 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
   _memset(&local_70,0,0x3c);
   iVar1 = ((int (*)())_glpPPShaderToProgramString)(param_1,param_2,param_3);
   iVar5 = 0;
-  uVar2 = 0;
+  allocation2 = 0;
   if (iVar1 != 0) {
     if (*param_1 == 0x8b30) {
       iVar5 = _PPParserCreate(2);
@@ -10286,17 +10317,17 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
     _memcpy(iVar5 + 0x450,&local_70,0x3c);
     _PPParserAttachString(iVar5,iVar1,1);
     iVar4 = _PPParserParse(iVar5);
-    uVar2 = 0;
+    allocation2 = 0;
     if (iVar4 == 0) {
       _PPStreamGetStream(uVar3,0,local_30);
-      uVar2 = _calloc(local_30[0],8);
-      _PPStreamGetStream(uVar3,uVar2,local_30);
+      allocation2 = _calloc(local_30[0],8);
+      _PPStreamGetStream(uVar3,allocation2,local_30);
       _PPStreamFree(uVar3);
       _PPParserFree(iVar5);
       _free(iVar1);
     }
   }
-  return uVar2;
+  return allocation2;
 }
 
 /* _glpFreePPShaderToProgram @ 0x97c0597c (12 bytes) */
