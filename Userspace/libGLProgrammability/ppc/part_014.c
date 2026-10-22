@@ -2192,217 +2192,220 @@ switchD_97bd6924_caseD_7:
 }
 
 /* _InterpreterRasterOpMachine_Blending @ 0x97bd6e88 (1252 bytes) */
-int _InterpreterRasterOpMachine_Blending(param_1, param_2, param_3, param_4)
-  int *param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
+  int *machine;
+  float *srcColor;
+  float *dstColor;
+  float *result;
 {
+  float srcComponent3;
+  float srcComponent2;
+  float srcComponent;
   float fVar1;
   float fVar2;
   float fVar3;
   float fVar4;
-  int iVar5;
+  int emulator;
   uint framebufferFormat;
-  uint uVar7;
-  int iVar8;
-  float local_60;
-  float local_5c;
-  float local_58;
-  float local_54;
-  float local_50;
-  float local_4c;
-  float local_48;
-  float local_44;
+  uint blendState;
+  int blendConstant;
+  float srcFactorR;
+  float srcFactorG;
+  float srcFactorB;
+  float srcFactorA;
+  float dstFactorR;
+  float dstFactorG;
+  float dstFactorB;
+  float dstFactorA;
   undefined1 auStack_40 [12];
-  float local_34;
+  float factorAlphaScratch;
   float local_30;
   
-  iVar5 = *param_1;
-  uVar7 = *(uint *)(*(int *)(iVar5 + 0xd80) + 0x58);
-  iVar8 = *(int *)(*(int *)(iVar5 + 0xd9c) + 0xd8) + 0x2d70;
-  framebufferFormat = _PPEmulatorFramebufferFormat(iVar5);
+  emulator = *machine;
+  blendState = *(uint *)(*(int *)(emulator + 0xd80) + 0x58);
+  blendConstant = *(int *)(*(int *)(emulator + 0xd9c) + 0xd8) + 0x2d70;
+  framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
   fVar2 = FLOAT_97c3acd8;
   if ((framebufferFormat & 0x8000000) == 0) {
-    fVar3 = *param_2;
-    fVar4 = fVar3;
-    if (FLOAT_97c3acd8 <= fVar3) {
-      fVar3 = 1.0;
+    srcComponent2 = *srcColor;
+    fVar4 = srcComponent2;
+    if (FLOAT_97c3acd8 <= srcComponent2) {
+      srcComponent2 = 1.0;
       fVar4 = local_30;
     }
     local_30 = fVar4;
-    fVar4 = param_2[1];
-    *param_2 = fVar3;
+    srcComponent3 = srcColor[1];
+    *srcColor = srcComponent2;
     fVar3 = FLOAT_97c3acd8;
-    fVar1 = fVar4;
-    if (fVar2 <= fVar4) {
-      fVar4 = 1.0;
+    fVar1 = srcComponent3;
+    if (fVar2 <= srcComponent3) {
+      srcComponent3 = 1.0;
       fVar1 = local_30;
     }
     local_30 = fVar1;
-    fVar2 = param_2[2];
-    param_2[1] = fVar4;
+    srcComponent = srcColor[2];
+    srcColor[1] = srcComponent3;
     fVar4 = FLOAT_97c3acd8;
-    fVar1 = fVar2;
-    if (fVar3 <= fVar2) {
-      fVar2 = 1.0;
+    fVar1 = srcComponent;
+    if (fVar3 <= srcComponent) {
+      srcComponent = 1.0;
       fVar1 = local_30;
     }
     local_30 = fVar1;
-    fVar3 = param_2[3];
-    param_2[2] = fVar2;
+    srcComponent2 = srcColor[3];
+    srcColor[2] = srcComponent;
     fVar2 = TAllocation__guardBlockSize;
-    fVar1 = fVar3;
-    if (fVar4 <= fVar3) {
-      fVar3 = 1.0;
+    fVar1 = srcComponent2;
+    if (fVar4 <= srcComponent2) {
+      srcComponent2 = 1.0;
       fVar1 = local_30;
     }
     local_30 = fVar1;
-    fVar4 = *param_2;
-    param_2[3] = fVar3;
+    srcComponent3 = *srcColor;
+    srcColor[3] = srcComponent2;
     fVar3 = TAllocation__guardBlockSize;
-    fVar1 = fVar4;
-    if (fVar4 <= fVar2) {
-      fVar4 = 0.0;
+    fVar1 = srcComponent3;
+    if (srcComponent3 <= fVar2) {
+      srcComponent3 = 0.0;
       fVar1 = local_30;
     }
     local_30 = fVar1;
-    fVar2 = param_2[1];
-    *param_2 = fVar4;
+    srcComponent = srcColor[1];
+    *srcColor = srcComponent3;
     fVar4 = TAllocation__guardBlockSize;
-    fVar1 = fVar2;
-    if (fVar2 <= fVar3) {
-      fVar2 = 0.0;
+    fVar1 = srcComponent;
+    if (srcComponent <= fVar3) {
+      srcComponent = 0.0;
       fVar1 = local_30;
     }
     local_30 = fVar1;
-    fVar3 = param_2[2];
-    param_2[1] = fVar2;
+    srcComponent2 = srcColor[2];
+    srcColor[1] = srcComponent;
     fVar2 = TAllocation__guardBlockSize;
-    fVar1 = fVar3;
-    if (fVar3 <= fVar4) {
-      fVar3 = 0.0;
+    fVar1 = srcComponent2;
+    if (srcComponent2 <= fVar4) {
+      srcComponent2 = 0.0;
       fVar1 = local_30;
     }
     local_30 = fVar1;
-    fVar4 = param_2[3];
-    param_2[2] = fVar3;
-    fVar3 = fVar4;
-    if (fVar4 <= fVar2) {
-      fVar4 = 0.0;
+    srcComponent3 = srcColor[3];
+    srcColor[2] = srcComponent2;
+    fVar3 = srcComponent3;
+    if (srcComponent3 <= fVar2) {
+      srcComponent3 = 0.0;
       fVar3 = local_30;
     }
     local_30 = fVar3;
-    param_2[3] = fVar4;
+    srcColor[3] = srcComponent3;
   }
-  if ((1 < (uVar7 >> 0x10 & 7) - 3) || (1 < (uVar7 >> 0x13 & 7) - 3)) {
-    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 & 0xf,param_2,param_3,iVar8,&local_60)
+  if ((1 < (blendState >> 0x10 & 7) - 3) || (1 < (blendState >> 0x13 & 7) - 3)) {
+    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState & 0xf,srcColor,dstColor,blendConstant,&srcFactorR)
     ;
-    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 >> 8 & 0xf,param_2,param_3,iVar8,&local_50);
-    if ((uVar7 & 0xf) != (uVar7 >> 4 & 0xf)) {
-      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 >> 4 & 0xf,param_2,param_3,iVar8,auStack_40);
-      local_54 = local_34;
+    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 8 & 0xf,srcColor,dstColor,blendConstant,&dstFactorR);
+    if ((blendState & 0xf) != (blendState >> 4 & 0xf)) {
+      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 4 & 0xf,srcColor,dstColor,blendConstant,auStack_40);
+      srcFactorA = factorAlphaScratch;
     }
-    if ((uVar7 >> 8 & 0xf) != (uVar7 >> 0xc & 0xf)) {
-      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 >> 0xc & 0xf,param_2,param_3,iVar8,auStack_40);
-      local_44 = local_34;
+    if ((blendState >> 8 & 0xf) != (blendState >> 0xc & 0xf)) {
+      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 0xc & 0xf,srcColor,dstColor,blendConstant,auStack_40);
+      dstFactorA = factorAlphaScratch;
     }
   }
-  switch(uVar7 >> 0x10 & 7) {
+  switch(blendState >> 0x10 & 7) {
   case 0:
-    *param_4 = *param_2 * local_60 + *param_3 * local_50;
-    param_4[1] = param_2[1] * local_5c + param_3[1] * local_4c;
-    fVar2 = param_2[2] * local_58 + param_3[2] * local_48;
+    *result = *srcColor * srcFactorR + *dstColor * dstFactorR;
+    result[1] = srcColor[1] * srcFactorG + dstColor[1] * dstFactorG;
+    srcComponent = srcColor[2] * srcFactorB + dstColor[2] * dstFactorB;
     goto LAB_97bd7230;
   case 1:
-    *param_4 = *param_2 * local_60 - *param_3 * local_50;
-    param_4[1] = param_2[1] * local_5c - param_3[1] * local_4c;
-    fVar2 = param_3[2];
-    fVar3 = param_2[2];
-    fVar4 = local_48;
-    local_48 = local_58;
+    *result = *srcColor * srcFactorR - *dstColor * dstFactorR;
+    result[1] = srcColor[1] * srcFactorG - dstColor[1] * dstFactorG;
+    srcComponent = dstColor[2];
+    srcComponent2 = srcColor[2];
+    fVar4 = dstFactorB;
+    dstFactorB = srcFactorB;
     break;
   case 2:
-    *param_4 = *param_3 * local_50 - *param_2 * local_60;
-    param_4[1] = param_3[1] * local_4c - param_2[1] * local_5c;
-    fVar2 = param_2[2];
-    fVar3 = param_3[2];
-    fVar4 = local_58;
+    *result = *dstColor * dstFactorR - *srcColor * srcFactorR;
+    result[1] = dstColor[1] * dstFactorG - srcColor[1] * srcFactorG;
+    srcComponent = srcColor[2];
+    srcComponent2 = dstColor[2];
+    fVar4 = srcFactorB;
     break;
   case 3:
-    fVar2 = *param_3;
-    if (*param_2 < *param_3) {
-      fVar2 = *param_2;
+    srcComponent = *dstColor;
+    if (*srcColor < *dstColor) {
+      srcComponent = *srcColor;
     }
-    *param_4 = fVar2;
-    fVar2 = param_3[1];
-    if (param_2[1] < param_3[1]) {
-      fVar2 = param_2[1];
+    *result = srcComponent;
+    srcComponent = dstColor[1];
+    if (srcColor[1] < dstColor[1]) {
+      srcComponent = srcColor[1];
     }
-    param_4[1] = fVar2;
-    fVar3 = param_2[2];
-    fVar2 = param_3[2];
-    if (fVar3 < fVar2) {
+    result[1] = srcComponent;
+    srcComponent2 = srcColor[2];
+    fVar2 = dstColor[2];
+    if (srcComponent2 < fVar2) {
 LAB_97bd72bc:
-      fVar2 = fVar3;
+      fVar2 = srcComponent2;
     }
     goto LAB_97bd72c0;
   case 4:
-    fVar2 = *param_3;
-    if (*param_3 < *param_2) {
-      fVar2 = *param_2;
+    srcComponent = *dstColor;
+    if (*dstColor < *srcColor) {
+      srcComponent = *srcColor;
     }
-    *param_4 = fVar2;
-    fVar2 = param_3[1];
-    if (param_3[1] < param_2[1]) {
-      fVar2 = param_2[1];
+    *result = srcComponent;
+    srcComponent = dstColor[1];
+    if (dstColor[1] < srcColor[1]) {
+      srcComponent = srcColor[1];
     }
-    param_4[1] = fVar2;
-    fVar3 = param_2[2];
-    fVar2 = param_3[2];
-    if (param_3[2] < fVar3) goto LAB_97bd72bc;
+    result[1] = srcComponent;
+    srcComponent2 = srcColor[2];
+    fVar2 = dstColor[2];
+    if (dstColor[2] < srcComponent2) goto LAB_97bd72bc;
 LAB_97bd72c0:
-    param_4[2] = fVar2;
+    result[2] = fVar2;
   default:
     goto switchD_97bd7128_default;
   }
-  fVar2 = fVar3 * local_48 - fVar2 * fVar4;
+  srcComponent = srcComponent2 * dstFactorB - srcComponent * fVar4;
 LAB_97bd7230:
-  param_4[2] = fVar2;
+  result[2] = srcComponent;
 switchD_97bd7128_default:
-  switch(uVar7 >> 0x13 & 7) {
+  switch(blendState >> 0x13 & 7) {
   case 0:
-    fVar3 = param_2[3] * local_54 + param_3[3] * local_44;
+    fVar3 = srcColor[3] * srcFactorA + dstColor[3] * dstFactorA;
     goto LAB_97bd734c;
   case 1:
-    fVar2 = param_2[3];
-    fVar3 = param_3[3] * local_44;
-    local_44 = local_54;
+    srcComponent = srcColor[3];
+    fVar3 = dstColor[3] * dstFactorA;
+    dstFactorA = srcFactorA;
     break;
   case 2:
-    fVar2 = param_3[3];
-    fVar3 = param_2[3] * local_54;
+    srcComponent = dstColor[3];
+    fVar3 = srcColor[3] * srcFactorA;
     break;
   case 3:
-    fVar3 = param_2[3];
-    fVar2 = param_3[3];
-    if (fVar3 < fVar2) {
+    srcComponent2 = srcColor[3];
+    fVar2 = dstColor[3];
+    if (srcComponent2 < fVar2) {
 LAB_97bd7378:
-      fVar2 = fVar3;
+      fVar2 = srcComponent2;
     }
     goto LAB_97bd737c;
   case 4:
-    fVar3 = param_2[3];
-    fVar2 = param_3[3];
-    if (param_3[3] < fVar3) goto LAB_97bd7378;
+    srcComponent2 = srcColor[3];
+    fVar2 = dstColor[3];
+    if (dstColor[3] < srcComponent2) goto LAB_97bd7378;
 LAB_97bd737c:
-    param_4[3] = fVar2;
+    result[3] = fVar2;
   default:
     goto switchD_97bd72e8_default;
   }
-  fVar3 = fVar2 * local_44 - fVar3;
+  fVar3 = srcComponent * dstFactorA - fVar3;
 LAB_97bd734c:
-  param_4[3] = fVar3;
+  result[3] = fVar3;
 switchD_97bd72e8_default:
   return;
 }

@@ -3159,7 +3159,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   int intComponentI26;
   int destSwizzle;
   int destBankIndex;
-  uint sourceElement_uVar17;
+  uint sourceElement2;
   int programInfo;
   int intComponentI14;
   int destOffsetTable;
@@ -5300,18 +5300,18 @@ LAB_97bd0310:
       componentCursor = opVec;
       loopIndex = 0;
       do {
-        sourceElement_uVar17 = loopIndex;
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
-          sourceElement_uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement_uVar17,opVec + 4);
-        sourceElement_uVar17 = loopIndex;
+                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement2,opVec + 4);
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
-          sourceElement_uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement_uVar17,opVec + 8);
+                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement2,opVec + 8);
         if (((opVec[4] != opVec[8]) || (opVec[5] != opVec[9])) ||
            (operandComponent = 1.0, opVec[6] != opVec[10])) {
           operandComponent = 0.0;
@@ -5334,18 +5334,18 @@ LAB_97bd01a0:
         componentCursor = opVec;
         loopIndex = 0;
         do {
-          sourceElement_uVar17 = loopIndex;
+          sourceElement2 = loopIndex;
           if (*(char *)(inst + 0x12) == '\0') {
-            sourceElement_uVar17 = 0;
+            sourceElement2 = 0;
           }
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement_uVar17,opVec + 4);
-          sourceElement_uVar17 = loopIndex;
+                     inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement2,opVec + 4);
+          sourceElement2 = loopIndex;
           if (*(char *)(inst + 0x1b) == '\0') {
-            sourceElement_uVar17 = 0;
+            sourceElement2 = 0;
           }
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement_uVar17,opVec + 8);
+                     inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement2,opVec + 8);
           if ((opVec[4] != opVec[8]) || (operandComponent = 1.0, opVec[5] != opVec[9])) {
             operandComponent = 0.0;
           }
@@ -5367,18 +5367,18 @@ joined_r0x97bd003c:
       componentCursor = opVec;
       loopIndex = 0;
       do {
-        sourceElement_uVar17 = loopIndex;
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
-          sourceElement_uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
-                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement_uVar17,opVec + 4);
-        sourceElement_uVar17 = loopIndex;
+                   inst[0x12],inst[0x13],inst[0x14],inst[0x15],sourceElement2,opVec + 4);
+        sourceElement2 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
-          sourceElement_uVar17 = 0;
+          sourceElement2 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
-                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement_uVar17,opVec + 8);
+                   inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],sourceElement2,opVec + 8);
         if (((opVec[4] != opVec[8]) || (opVec[5] != opVec[9])) ||
            ((opVec[6] != opVec[10] || (operandComponent = 1.0, opVec[7] != opVec[0xb])))) {
           operandComponent = 0.0;
