@@ -111,16 +111,15 @@ class Function:
         if k >= 0:
             lhs = t[:k].strip()
             if re.fullmatch(r'\w+', lhs) and lhs in self.vars:
-                for (v, ln, col, o) in self.occ(t, pos, k + 1, len(t)): u.append(('use', v, ln, col))
-                # embedded assignments on the right
-                self.embedded(t, pos, k + 1)
+                u.extend(self.cond_units(t[k + 1:], pos[k + 1:]))
                 lo = t.index(lhs)
                 u.append(('def', lhs, *pos[lo]))
                 return u
-            for (v, ln, col, o) in self.occ(t, pos, 0, len(t)): u.append(('use', v, ln, col))
-            self.embedded(t, pos, k + 1)
+            # a store through a pointer / into an element: the left side only USES its variables; embedded assignments can only be on the right
+            for (v, ln, col, o) in self.occ(t, pos, 0, k): u.append(('use', v, ln, col))
+            u.extend(self.cond_units(t[k + 1:], pos[k + 1:]))
             return u
-        for (v, ln, col, o) in self.occ(t, pos, 0, len(t)): u.append(('use', v, ln, col))
+        u.extend(self.cond_units(t, pos))
         return u
 
     def embedded(self, t, pos, start):
@@ -128,12 +127,34 @@ class Function:
             if m.group(1) in self.vars: self.complex.add(m.group(1))
 
     def cond_units(self, text, pos):
-        u = []
+        """uses and (weak) defs of a condition / expression text, in evaluation order. An assignment embedded in the text (`(x = f(y), ...)`, often under
+        && / || / the comma operator) becomes a 'wdef': it ADDS its definition to the reaching set without killing the earlier ones (it may not run),
+        which only ever merges webs, never splits one wrongly."""
         for m in re.finditer(r'&\s*(\w+)', text):
             if m.group(1) in self.vars: self.addr.add(m.group(1))
-        for (v, ln, col, o) in self.occ(text, pos, 0, len(text)): u.append(('use', v, ln, col))
-        for m in re.finditer(r'(?<![=!<>+\-*/&|^%])(\w+)\s=\s(?!=)', text):
-            if m.group(1) in self.vars: self.complex.add(m.group(1))
+        u = []; pending = []
+        def flush(limit):
+            while pending and pending[0][0] <= limit:
+                _, v, ln, col = pending.pop(0); u.append(('wdef', v, ln, col))
+        for (v, ln, col, o) in self.occ(text, pos, 0, len(text)):
+            flush(o)
+            rest = text[o + len(v):]
+            mm = re.match(r'\s=(?!=)', rest)
+            prev = text[:o].rstrip()[-1:]
+            if mm and prev not in ('.', '>', '&') and not text[:o].rstrip().endswith('->'):
+                # end of the right-hand side: next ',' / ')' / ';' at depth 0 relative to here
+                d = 0; end = len(text)
+                for k in range(o + len(v) + mm.end(), len(text)):
+                    ch = text[k]
+                    if ch == '(': d += 1
+                    elif ch == ')':
+                        d -= 1
+                        if d < 0: end = k; break
+                    elif ch in ',;' and d == 0: end = k; break
+                pending.append((end, v, ln, col)); pending.sort()
+            else:
+                u.append(('use', v, ln, col))
+        flush(len(text) + 1)
         return u
 
     # ---- CFG ---------------------------------------------------------------------------------------------------------
@@ -326,27 +347,27 @@ class Function:
         defid = {}
         for n in self.nodes:
             for (k, v, ln, col) in n.units:
-                if k == 'def' and v in tracked: defid[(v, ln, col)] = len(defs); defs[len(defs)] = (v, ln, col)
+                if k in ('def', 'wdef') and v in tracked: defid[(v, ln, col)] = len(defs); defs[len(defs)] = (v, ln, col)
         UNINIT = {v: len(defs) + i for i, v in enumerate(sorted(tracked))}
         nd = len(self.nodes)
-        # gen/kill per node: last def per var
-        gen = [dict() for _ in range(nd)]
-        for n in self.nodes:
-            for (k, v, ln, col) in n.units:
-                if k == 'def' and v in tracked: gen[n.id][v] = defid[(v, ln, col)]
+        # ordered transfer per node: 'def' replaces the reaching set of its variable, 'wdef' (an assignment that may not run) adds to it
+        def step(cur, k, v, ln, col):
+            if k == 'def': cur[v] = {defid[(v, ln, col)]}
+            elif k == 'wdef': cur[v] = set(cur.get(v, {UNINIT[v]})) | {defid[(v, ln, col)]}
         IN = [dict() for _ in range(nd)]
         IN[0] = {v: {UNINIT[v]} for v in tracked}
         work = collections.deque(range(nd)); inq = set(work)
         while work:
             i = work.popleft(); inq.discard(i)
-            out = dict(IN[i])
-            for v, d in gen[i].items(): out[v] = {d}
-            for s in self.nodes[i].succ:
+            out = {v: set(d) for v, d in IN[i].items()}
+            for (k, v, ln, col) in self.nodes[i].units:
+                if v in tracked: step(out, k, v, ln, col)
+            for s_ in self.nodes[i].succ:
                 ch = False
                 for v, ds in out.items():
-                    cur = IN[s.id].setdefault(v, set())
+                    cur = IN[s_.id].setdefault(v, set())
                     if not ds <= cur: cur |= ds; ch = True
-                if ch and s.id not in inq: work.append(s.id); inq.add(s.id)
+                if ch and s_.id not in inq: work.append(s_.id); inq.add(s_.id)
         parent = {}
         def find(x):
             while parent.setdefault(x, x) != x: parent[x] = parent[parent[x]]; x = parent[x]
@@ -365,7 +386,7 @@ class Function:
                     for d in ds[1:]: union(ds[0], d)
                     uses.append((ds[0], v, ln, col))
                 else:
-                    cur[v] = {defid[(v, ln, col)]}
+                    step(cur, k, v, ln, col)
         unit_of = lambda ln, col: (ln, 0 if (split_assign(self.lines[ln]) >= 0 and col < split_assign(self.lines[ln])) else 1)
         W = collections.defaultdict(lambda: {'units': set(), 'defs': 0, 'uses': 0, 'var': None, 'du': set()})
         for d, (v, ln, col) in defs.items():
