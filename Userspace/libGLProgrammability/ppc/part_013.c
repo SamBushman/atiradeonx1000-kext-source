@@ -3164,9 +3164,6 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   int intComponentI14;
   int destOffsetTable;
   int sourceCount;
-  double mathAccumulator_28;
-  double log2Value_28;
-  double floorValue_28;
   double logValue;
   double expValue;
   double sqrtValue;
@@ -3879,11 +3876,11 @@ switchD_97bd0598_caseD_0:
       case 4:
         floorValue_29 = (double)opVec[4];
         floorResult = _floor(floorValue_29);
-        floorValue_28 = (double)opVec[5];
+        dVar28 = (double)opVec[5];
         opVec[0] = (float)(floorValue_29 - floorResult);
-        floorResult = _floor(floorValue_28);
+        floorResult = _floor(dVar28);
         floorValue_29 = (double)opVec[6];
-        opVec[1] = (float)(floorValue_28 - floorResult);
+        opVec[1] = (float)(dVar28 - floorResult);
         floorResult2 = _floor(floorValue_29);
         floorValue = (double)opVec[7];
         opVec[2] = (float)(floorValue_29 - floorResult2);
@@ -4120,36 +4117,36 @@ LAB_97bd1d68:
           log2Value = 0.0;
         }
         log2Result = _log2(log2Value);
-        log2Value_28 = (double)opVec[5];
+        dVar28 = (double)opVec[5];
         opVec[0] = (float)log2Result;
-        if (log2Value_28 < 0.0) {
-          log2Value_28 = 0.0;
+        if (dVar28 < 0.0) {
+          dVar28 = 0.0;
         }
-        log2Result = _log2(log2Value_28);
-        log2Value_28 = (double)opVec[6];
+        log2Result = _log2(dVar28);
+        dVar28 = (double)opVec[6];
         opVec[1] = (float)log2Result;
-        if (log2Value_28 < 0.0) {
-          log2Value_28 = 0.0;
+        if (dVar28 < 0.0) {
+          dVar28 = 0.0;
         }
-        log2Result = _log2(log2Value_28);
-        log2Value_28 = (double)opVec[7];
+        log2Result = _log2(dVar28);
+        dVar28 = (double)opVec[7];
         opVec[2] = (float)log2Result;
-        if (log2Value_28 < 0.0) {
-          log2Value_28 = 0.0;
+        if (dVar28 < 0.0) {
+          dVar28 = 0.0;
         }
-        powValue = _log2(log2Value_28);
+        powValue = _log2(dVar28);
         goto LAB_97bd2010;
       case 0x14:
-        mathAccumulator_28 = ABS((double)opVec[7]);
-        log2Result = _log2(mathAccumulator_28);
+        dVar28 = ABS((double)opVec[7]);
+        log2Result = _log2(dVar28);
         floorResult = _floor(log2Result);
         opVec[0] = (float)floorResult;
         exp2Result = _exp2((double)opVec[0]);
-        opVec[1] = (float)(mathAccumulator_28 / exp2Result);
-        if (mathAccumulator_28 < 0.0) {
-          mathAccumulator_28 = 0.0;
+        opVec[1] = (float)(dVar28 / exp2Result);
+        if (dVar28 < 0.0) {
+          dVar28 = 0.0;
         }
-        exp2Value = _log2(mathAccumulator_28);
+        exp2Value = _log2(dVar28);
 LAB_97bd0fd4:
         opVec[2] = (float)exp2Value;
         opVec[3] = 1.0;
@@ -4287,10 +4284,10 @@ LAB_97bd109c:
           floorValue_30 = (double)opVec[8];
           opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
           floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
-          floorValue_28 = (double)opVec[6];
+          dVar28 = (double)opVec[6];
           floorValue_31 = (double)opVec[8];
           opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
-          floorResult = _floor((double)(float)(floorValue_28 / floorValue_31));
+          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
           operandComponent = opVec[8];
         }
         else {
@@ -4301,14 +4298,14 @@ LAB_97bd109c:
           floorValue_30 = (double)opVec[9];
           opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
           floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
-          floorValue_28 = (double)opVec[6];
+          dVar28 = (double)opVec[6];
           floorValue_31 = (double)opVec[10];
           opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
-          floorResult = _floor((double)(float)(floorValue_28 / floorValue_31));
+          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
           operandComponent = opVec[0xb];
         }
         floorValue_29 = (double)opVec[7];
-        opVec[2] = (float)-(floorValue_31 * floorResult - floorValue_28);
+        opVec[2] = (float)-(floorValue_31 * floorResult - dVar28);
         floorResult = _floor((double)(float)(floorValue_29 / (double)operandComponent));
         floorValue = -((double)operandComponent * floorResult - floorValue_29);
 LAB_97bd1440:

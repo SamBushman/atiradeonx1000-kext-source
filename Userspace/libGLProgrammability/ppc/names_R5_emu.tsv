@@ -634,26 +634,6 @@ use	_InterpreterEmulateOp	dVar27	expValue	INFERRED	result of exp()	^\s*dVar27\ =
 use	_InterpreterEmulateOp	dVar27	logValue	INFERRED	result of log()	^\s*dVar27\ =\ _log\(\(double\)local_130\[4\]\);$	+2
 use	_InterpreterEmulateOp	dVar27	logValue	INFERRED	result of log()	^\s*dVar27\ =\ _log\(\(double\)local_130\[5\]\);$	+2
 use	_InterpreterEmulateOp	dVar27	logValue	INFERRED	result of log()	^\s*dVar27\ =\ _log\(\(double\)local_130\[6\]\);$	+2
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*dVar28\ =\ \(double\)local_130\[5\];$	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(dVar28\);$	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*local_130\[1\]\ =\ \(float\)\(dVar28\ \-\ dVar27\);$	+1
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*dVar28\ =\ \(double\)local_130\[5\];$@2	+1
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*if\ \(dVar28\ <\ 0\.0\)\ \{$	+2
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*dVar27\ =\ _log2\(dVar28\);$	+1
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*dVar28\ =\ \(double\)local_130\[6\];$	+1
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*if\ \(dVar28\ <\ 0\.0\)\ \{$@2	+2
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*dVar27\ =\ _log2\(dVar28\);$@2	+1
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*dVar28\ =\ \(double\)local_130\[7\];$	+1
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*if\ \(dVar28\ <\ 0\.0\)\ \{$@3	+2
-use	_InterpreterEmulateOp	dVar28	log2Value_28	INFERRED	result of log2()	^\s*dVar27\ =\ _log2\(dVar28\);$@3	+1
-use	_InterpreterEmulateOp	dVar28	mathAccumulator_28	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar28\ =\ ABS\(\(double\)local_130\[7\]\);$	+2
-use	_InterpreterEmulateOp	dVar28	mathAccumulator_28	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*local_130\[1\]\ =\ \(float\)\(dVar28\ /\ dVar27\);$	+3
-use	_InterpreterEmulateOp	dVar28	mathAccumulator_28	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _log2\(dVar28\);$@5	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*dVar28\ =\ \(double\)local_130\[6\];$@2	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar28\ /\ dVar31\)\);$	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*dVar28\ =\ \(double\)local_130\[6\];$@3	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar28\ /\ dVar31\)\);$@2	+1
-use	_InterpreterEmulateOp	dVar28	floorValue_28	INFERRED	result of floor()	^\s*local_130\[2\]\ =\ \(float\)\-\(dVar31\ \*\ dVar27\ \-\ dVar28\);$	+1
 use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[4\];$	+2
 use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*local_130\[0\]\ =\ \(float\)\(dVar29\ \-\ dVar27\);$	+1
 use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[6\];$	+1
