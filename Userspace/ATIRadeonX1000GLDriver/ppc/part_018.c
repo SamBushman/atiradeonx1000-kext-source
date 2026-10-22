@@ -7184,10 +7184,10 @@ LAB_000d1780:
 }
 
 /* FUN_000d183c @ 0xd183c (13160 bytes) */
-int FUN_000d183c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  uint *param_1;
-  uint param_2;
-  uint *param_3;
+int FUN_000d183c(pixelShader, dumpLabel, dumpId, param_4, param_5, param_6, param_7, param_8)
+  uint *pixelShader;
+  uint dumpLabel;
+  uint *dumpId;
   char *param_4;
   uint param_5;
   uint *param_6;
@@ -7310,40 +7310,40 @@ int FUN_000d183c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint *local_60;
   int local_5c;
   
-  uStack0000001c = param_2;
-  puStack00000020 = param_3;
-  ((int (*)())FUN_000d0b68)(param_1,1,param_3,param_4,param_5,param_6,param_7,param_8);
-  if ((*(byte *)((int)param_1 + 0xf) & 0x10) == 0) {
-    local_a0 = param_1[2];
+  uStack0000001c = dumpLabel;
+  puStack00000020 = dumpId;
+  ((int (*)())FUN_000d0b68)(pixelShader,1,dumpId,param_4,param_5,param_6,param_7,param_8);
+  if ((*(byte *)((int)pixelShader + 0xf) & 0x10) == 0) {
+    local_a0 = pixelShader[2];
     uVar19 = uStack0000001c;
     puVar13 = puStack00000020;
     ((int (*)())FUN_000d03b4)(0,"======== Begin Loki NSF pixel shader dump: %s: %d ========\n",uStack0000001c,
                  puStack00000020,param_5,param_6,param_7,param_8);
-    if (*(short *)(param_1 + 5) == 0) {
+    if (*(short *)(pixelShader + 5) == 0) {
       ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",uVar19,puVar13,param_5,param_6,param_7,param_8);
     }
     else {
       iVar31 = 0;
       ((int (*)())FUN_000d03b4)(0," Shader stats:\n",uVar19,puVar13,param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     Levels:                 %2d\n",(uint)*(ushort *)((int)param_1 + 0x16),
+      ((int (*)())FUN_000d03b4)(0,"     Levels:                 %2d\n",(uint)*(ushort *)((int)pixelShader + 0x16),
                    puVar13,param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(param_1 + 6),puVar13,
+      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),puVar13,
                    param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)param_1 + 0x1a),
+      ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
                    puVar13,param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(param_1 + 7),puVar13,
+      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),puVar13,
                    param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)param_1 + 0x1e),
+      ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
                    puVar13,param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)param_1 + 0x22),
+      ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
                    puVar13,param_5,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(param_1 + 9),puVar13,
+      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),puVar13,
                    param_5,param_6,param_7,param_8);
-      uVar19 = (uint)*(ushort *)((int)param_1 + 0x26);
+      uVar19 = (uint)*(ushort *)((int)pixelShader + 0x26);
       ((int (*)())FUN_000d03b4)(0,"     Nominal cycle count:    %2d\n",uVar19,puVar13,param_5,param_6,param_7,
                    param_8);
       ((int (*)())FUN_000d03b4)(0,"     Tex lookup counts:     ",uVar19,puVar13,param_5,param_6,param_7,param_8);
-      puVar41 = param_1;
+      puVar41 = pixelShader;
       do {
         uVar19 = (uint)*(byte *)((int)puVar41 + 0x2a);
         ((int (*)())FUN_000d03b4)(0," %2d",uVar19,puVar13,param_5,param_6,param_7,param_8);
@@ -7354,11 +7354,11 @@ int FUN_000d183c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       ((int (*)())FUN_000d03b4)(0,"\n \n",uVar19,puVar13,param_5,param_6,param_7,param_8);
     }
     ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",uVar19,puVar13,param_5,param_6,param_7,param_8);
-    if ((param_1[0x12] == 1) && (local_a0 != 0)) {
-      puVar32 = param_1 + 0x24;
+    if ((pixelShader[0x12] == 1) && (local_a0 != 0)) {
+      puVar32 = pixelShader + 0x24;
       uVar37 = 1;
       puVar41 = puVar32;
-      puVar33 = param_1 + 0x12;
+      puVar33 = pixelShader + 0x12;
       do {
         puVar35 = puVar41;
         uVar19 = uVar37 - 1;
@@ -7414,7 +7414,7 @@ LAB_000d3b80:
     ((int (*)())FUN_000d03b4)(0," \n US Program:\n",uVar19,puVar13,param_5,param_6,param_7,param_8);
     if (uVar37 <= local_a0) {
       uVar26 = 0;
-      puVar41 = param_1 + uVar37 * 0x12;
+      puVar41 = pixelShader + uVar37 * 0x12;
       local_a8 = 1;
       local_a4 = (uint *)0x0;
       local_e8 = 0;
@@ -7917,44 +7917,44 @@ switchD_000d489c_caseD_4:
     uVar26 = 0;
     ((int (*)())FUN_000d03b4)(0,"======== End   Loki NSF pixel shader dump: %s: %d ========\n",uStack0000001c,
                  puStack00000020,param_5,param_6,param_7,param_8);
-    uVar37 = param_1[2];
+    uVar37 = pixelShader[2];
     uVar19 = uStack0000001c;
     puVar13 = puStack00000020;
     ((int (*)())FUN_000d03b4)(0,"+++ BEGIN_PSN                       # \"%s\" %d\n",uStack0000001c,
                  puStack00000020,param_5,param_6,param_7,param_8);
     do {
-      uVar27 = *param_1;
+      uVar27 = *pixelShader;
       if (uVar27 < 5) {
         switch(uVar27) {
         case 0:
-          uVar19 = param_1[1];
-          puVar13 = (uint *)param_1[2];
-          param_5 = (uint)*(byte *)(param_1 + 3);
-          param_6 = (uint *)(uint)*(byte *)((int)param_1 + 0xd);
-          param_7 = (char *)(uint)*(ushort *)(param_1 + 5);
-          param_8 = (byte *)(uint)*(ushort *)((int)param_1 + 0x16);
+          uVar19 = pixelShader[1];
+          puVar13 = (uint *)pixelShader[2];
+          param_5 = (uint)*(byte *)(pixelShader + 3);
+          param_6 = (uint *)(uint)*(byte *)((int)pixelShader + 0xd);
+          param_7 = (char *)(uint)*(ushort *)(pixelShader + 5);
+          param_8 = (byte *)(uint)*(ushort *)((int)pixelShader + 0x16);
           ((int (*)())FUN_000d03b4)(0,
                        "+++ R300PSN_INST_HEADER : %08x %08x %02x %02x %04x %04x %04x %04x %04x %04x %04x\n"
                        ,uVar19,puVar13,param_5,param_6,param_7,param_8);
           break;
         case 1:
-          uVar19 = (uint)*(ushort *)(param_1 + 1);
-          puVar13 = (uint *)(uint)*(ushort *)((int)param_1 + 6);
-          param_5 = (uint)*(byte *)(param_1 + 2);
-          param_6 = (uint *)(uint)*(byte *)((int)param_1 + 9);
-          param_7 = (char *)(uint)*(byte *)((int)param_1 + 10);
-          param_8 = (byte *)(uint)*(byte *)((int)param_1 + 0xb);
+          uVar19 = (uint)*(ushort *)(pixelShader + 1);
+          puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 6);
+          param_5 = (uint)*(byte *)(pixelShader + 2);
+          param_6 = (uint *)(uint)*(byte *)((int)pixelShader + 9);
+          param_7 = (char *)(uint)*(byte *)((int)pixelShader + 10);
+          param_8 = (byte *)(uint)*(byte *)((int)pixelShader + 0xb);
           ((int (*)())FUN_000d03b4)(0,
                        "+++ R300PSN_INST_RS     : %04x %04x %02x %02x %02x %02x %02x %02x %02x %02x\n"
                        ,uVar19,puVar13,param_5,param_6,param_7,param_8);
           break;
         case 2:
-          uVar19 = (uint)*(ushort *)(param_1 + 3);
-          puVar13 = (uint *)(uint)*(ushort *)((int)param_1 + 0xe);
-          param_5 = (uint)*(byte *)((int)param_1 + 0x19);
-          param_6 = (uint *)(uint)*(byte *)((int)param_1 + 0x1a);
-          param_7 = (char *)(uint)*(byte *)((int)param_1 + 0x1f);
-          param_8 = (byte *)(uint)*(byte *)(param_1 + 8);
+          uVar19 = (uint)*(ushort *)(pixelShader + 3);
+          puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 0xe);
+          param_5 = (uint)*(byte *)((int)pixelShader + 0x19);
+          param_6 = (uint *)(uint)*(byte *)((int)pixelShader + 0x1a);
+          param_7 = (char *)(uint)*(byte *)((int)pixelShader + 0x1f);
+          param_8 = (byte *)(uint)*(byte *)(pixelShader + 8);
           ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_TEX    : %04x %04x %02x %02x %02x %02x\n",uVar19,puVar13,
                        param_5,param_6,param_7,param_8);
           break;
@@ -7962,77 +7962,77 @@ switchD_000d489c_caseD_4:
           ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_ALU    : \n",uVar19,puVar13,param_5,param_6,
                        0,param_8);
           ((int (*)())FUN_000d03b4)(0,"+++ RGB_ADDR            : %04x %04x %04x %04x %02x %02x %02x\n",
-                       (uint)*(ushort *)(param_1 + 3),(uint)*(ushort *)((int)param_1 + 0xe),
-                       (uint)*(ushort *)(param_1 + 4),(uint)*(ushort *)((int)param_1 + 0x12),
-                       (uint)*(byte *)(param_1 + 5),(uint)*(byte *)((int)param_1 + 0x15));
+                       (uint)*(ushort *)(pixelShader + 3),(uint)*(ushort *)((int)pixelShader + 0xe),
+                       (uint)*(ushort *)(pixelShader + 4),(uint)*(ushort *)((int)pixelShader + 0x12),
+                       (uint)*(byte *)(pixelShader + 5),(uint)*(byte *)((int)pixelShader + 0x15));
           ((int (*)())FUN_000d03b4)(0,"+++ ALPHA_ADDR          : %04x %04x %04x %04x %02x %02x %02x %02x\n",
-                       (uint)*(ushort *)(param_1 + 6),(uint)*(ushort *)((int)param_1 + 0x1a),
-                       (uint)*(ushort *)(param_1 + 7),(uint)*(ushort *)((int)param_1 + 0x1e),
-                       (uint)*(byte *)(param_1 + 8),(uint)*(byte *)((int)param_1 + 0x21));
+                       (uint)*(ushort *)(pixelShader + 6),(uint)*(ushort *)((int)pixelShader + 0x1a),
+                       (uint)*(ushort *)(pixelShader + 7),(uint)*(ushort *)((int)pixelShader + 0x1e),
+                       (uint)*(byte *)(pixelShader + 8),(uint)*(byte *)((int)pixelShader + 0x21));
           ((int (*)())FUN_000d03b4)(0,
                        "+++ RGB_INST            : %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n"
-                       ,(uint)*(byte *)((int)param_1 + 0x2a),(uint)*(byte *)((int)param_1 + 0x2d),
-                       (uint)*(byte *)((int)param_1 + 0x2b),(uint)*(byte *)((int)param_1 + 0x2e),
-                       (uint)*(byte *)(param_1 + 0xb),(uint)*(byte *)((int)param_1 + 0x2f));
-          uVar19 = (uint)*(byte *)((int)param_1 + 0x39);
-          puVar13 = (uint *)(uint)*(byte *)(param_1 + 0xf);
-          param_5 = (uint)*(byte *)((int)param_1 + 0x3a);
-          param_6 = (uint *)(uint)*(byte *)((int)param_1 + 0x3d);
-          param_7 = (char *)(uint)*(byte *)((int)param_1 + 0x3b);
-          param_8 = (byte *)(uint)*(byte *)((int)param_1 + 0x3e);
+                       ,(uint)*(byte *)((int)pixelShader + 0x2a),(uint)*(byte *)((int)pixelShader + 0x2d),
+                       (uint)*(byte *)((int)pixelShader + 0x2b),(uint)*(byte *)((int)pixelShader + 0x2e),
+                       (uint)*(byte *)(pixelShader + 0xb),(uint)*(byte *)((int)pixelShader + 0x2f));
+          uVar19 = (uint)*(byte *)((int)pixelShader + 0x39);
+          puVar13 = (uint *)(uint)*(byte *)(pixelShader + 0xf);
+          param_5 = (uint)*(byte *)((int)pixelShader + 0x3a);
+          param_6 = (uint *)(uint)*(byte *)((int)pixelShader + 0x3d);
+          param_7 = (char *)(uint)*(byte *)((int)pixelShader + 0x3b);
+          param_8 = (byte *)(uint)*(byte *)((int)pixelShader + 0x3e);
           ((int (*)())FUN_000d03b4)(0,
                        "+++ ALPHA_INST          : %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n"
                        ,uVar19,puVar13,param_5,param_6,param_7,param_8);
         }
       }
       uVar26 = uVar26 + 1;
-      param_1 = param_1 + 0x12;
+      pixelShader = pixelShader + 0x12;
     } while (uVar26 <= uVar37);
     ((int (*)())FUN_000d03b4)(0,"+++ END_PSN                         # \"%s\" %d\n",uStack0000001c,
                  puStack00000020,param_5,param_6,param_7,param_8);
   }
   else {
-    uVar19 = param_1[2];
+    uVar19 = pixelShader[2];
     puVar13 = puStack00000020;
     local_7c = uVar19;
     ((int (*)())FUN_000d03b4)(0,"======== Begin r520 neutral format pixel shader: %d =============\n",
                  puStack00000020,param_4,uVar19,param_6,param_7,param_8);
-    if (*(short *)(param_1 + 5) == 0) {
+    if (*(short *)(pixelShader + 5) == 0) {
       ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",puVar13,param_4,uVar19,param_6,param_7,param_8);
     }
     else {
       ((int (*)())FUN_000d03b4)(0," Shader stats:\n",puVar13,param_4,uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(param_1 + 6),param_4,
+      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),param_4,
                    uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)param_1 + 0x1a),
+      ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
                    param_4,uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(param_1 + 7),param_4,
+      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),param_4,
                    uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)param_1 + 0x1e),
+      ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
                    param_4,uVar19,param_6,param_7,param_8);
-      if (*(byte *)((int)param_1 + 0xe) != 0) {
-        ((int (*)())FUN_000d03b4)(0,"     UMRT_EN:               %3d\n",(uint)*(byte *)((int)param_1 + 0xe),
+      if (*(byte *)((int)pixelShader + 0xe) != 0) {
+        ((int (*)())FUN_000d03b4)(0,"     UMRT_EN:               %3d\n",(uint)*(byte *)((int)pixelShader + 0xe),
                      param_4,uVar19,param_6,param_7,param_8);
       }
-      ((int (*)())FUN_000d03b4)(0,"     CF Instructions:       %3d\n",(uint)*(ushort *)(param_1 + 8),param_4,
+      ((int (*)())FUN_000d03b4)(0,"     CF Instructions:       %3d\n",(uint)*(ushort *)(pixelShader + 8),param_4,
                    uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)param_1 + 0x22),
+      ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
                    param_4,uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(param_1 + 9),param_4,
+      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),param_4,
                    uVar19,param_6,param_7,param_8);
-      ((int (*)())FUN_000d03b4)(0,"     Start Addr:            %3d\n",(uint)*(ushort *)(param_1 + 4),param_4,
+      ((int (*)())FUN_000d03b4)(0,"     Start Addr:            %3d\n",(uint)*(ushort *)(pixelShader + 4),param_4,
                    uVar19,param_6,param_7,param_8);
-      puVar13 = (uint *)(uint)*(ushort *)((int)param_1 + 0x12);
+      puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 0x12);
       ((int (*)())FUN_000d03b4)(0,"     End Addr:              %3d\n",puVar13,param_4,uVar19,param_6,param_7,
                    param_8);
       ((int (*)())FUN_000d03b4)(0," \n",puVar13,param_4,uVar19,param_6,param_7,param_8);
     }
     ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",puVar13,param_4,uVar19,param_6,param_7,param_8);
-    if ((param_1[0x12] == 1) && (0 < (int)local_7c)) {
-      puVar32 = param_1 + 0x24;
+    if ((pixelShader[0x12] == 1) && (0 < (int)local_7c)) {
+      puVar32 = pixelShader + 0x24;
       iVar31 = 1;
       puVar41 = puVar32;
-      puVar33 = param_1 + 0x12;
+      puVar33 = pixelShader + 0x12;
       do {
         puVar35 = puVar41;
         puVar13 = (uint *)(iVar31 + -1);
@@ -8100,7 +8100,7 @@ LAB_000d1afc:
     ((int (*)())FUN_000d03b4)(0,local_5c + 0x5b00,puVar13,param_4,uVar19,param_6,param_7,param_8);
     if (iVar31 <= (int)local_7c) {
       local_78 = 0;
-      puVar41 = param_1 + iVar31 * 0x12;
+      puVar41 = pixelShader + iVar31 * 0x12;
       local_70 = 0;
       local_f0 = (uint *)0x0;
       local_f4 = 0;

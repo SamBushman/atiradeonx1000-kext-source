@@ -1,24 +1,42 @@
 #!/usr/bin/env python3
-"""split_equiv.py BASE.dis CAND.dis BASE.warn CAND.warn - gate for per-use splits (`use` rows), where gcc -O0 gives the new locals other stack slots.
+"""split_equiv.py BASE.dis BASE.raw CAND.dis CAND.raw BASE.warn CAND.warn - gate for per-use splits (`use` rows), where gcc -O0 gives the new locals other stack slots.
 
 Passes when, function by function:
-  1. the instruction streams are identical once frame displacements `N(r30)` / `N(r1)` are masked (same code, only slot numbers moved);
+  1. the instruction words are identical once the displacement of every D-form instruction based on r1/r30 is masked (same code, only slot numbers moved);
   2. the slot renumbering is a function from candidate slot to base slot (several candidate slots may map to one base slot: that is a split; a candidate
      slot standing for two base slots would be a merge, which is a bug);
   3. the -O1 -Wuninitialized warnings of the candidate are no more numerous per function than the base's (a use left reading the old variable, after the
      value went into the new one, shows up as 'may be used uninitialized').
-Exit 0 = pass. Usage inside verify_names.sh; the .dis files are `otool -arch ppc -tV` output, the .warn files are gcc stderr."""
+Exit 0 = pass. Usage inside verify_names.sh; the .dis files are `otool -arch ppc -tV` output, the .raw files `otool -arch ppc -t`, the .warn files are gcc stderr."""
 import re, sys
-FR = re.compile(r'(-?0x[0-9a-f]+|-?\d+)\((r30|r1)\)|(?<=,r30,)(0x[0-9a-f]+)|(?<=,r1,)(0x[0-9a-f]+)')
+
+DFORM = set([14, 15] + list(range(32, 56)))      # addi/addis and the D-form loads/stores: the immediate is a frame displacement when rA is r1/r30
 
 
-def funcs(path):
+def funcs(dis, raw):
+    """{function label: [instruction word, ...]} from `otool -tV` (labels, addresses) and `otool -t` (raw words)."""
+    words = {}
+    for l in open(raw, errors='replace'):
+        m = re.match(r'^([0-9a-f]{8})[ \t](.*)$', l.rstrip('\n'))
+        if m:
+            a = int(m.group(1), 16)
+            for k, w in enumerate(m.group(2).split()): words[a + 4 * k] = int(w, 16)
     out = {}; cur = None
-    for l in open(path, errors='replace'):
+    for l in open(dis, errors='replace'):
         l = l.rstrip('\n')
         if re.match(r'^[A-Za-z_$][^\s]*:$', l): cur = l; out[cur] = []
-        elif cur and re.match(r'^[0-9a-f]{8}\t', l): out[cur].append(l.split('\t', 1)[1])
+        else:
+            m = re.match(r'^([0-9a-f]{8})\t', l)
+            if cur and m: out[cur].append(words[int(m.group(1), 16)])
     return out
+
+
+def frame(w):
+    """-> (masked word, displacement or None): displacement of a D-form instruction whose rA is r1 or r30."""
+    op = w >> 26; ra = (w >> 16) & 31
+    if op in DFORM and ra in (1, 30) and not (op in (14, 15) and ra == 0):
+        return w & ~0xffff, w & 0xffff
+    return w, None
 
 
 def warns(path):
@@ -32,19 +50,18 @@ def warns(path):
 
 
 def main():
-    bd, cd, bw, cw = sys.argv[1:5]
-    B, C = funcs(bd), funcs(cd); bad = 0
+    bd, br, cd, cr, bw, cw = sys.argv[1:7]
+    B, C = funcs(bd, br), funcs(cd, cr); bad = 0
     for name in B:
         if name not in C: print('MISSING', name); bad += 1; continue
         b, c = B[name], C[name]
         if len(b) != len(c): print('LENGTH', name); bad += 1; continue
         m = {}; ok = True
-        for x, y in zip(b, c):
-            if FR.sub('<F>', x) != FR.sub('<F>', y): print('CODE', name, x, '|', y); ok = False; break
-            for fx, fy in zip(FR.finditer(x), FR.finditer(y)):
-                kx = fx.group(1) or fx.group(3) or fx.group(4); ky = fy.group(1) or fy.group(3) or fy.group(4)
-                if m.setdefault(ky, kx) != kx:
-                    print('MERGE', name, 'candidate slot', ky, 'stands for', m[ky], 'and', kx); ok = False
+        for k, (x, y) in enumerate(zip(b, c)):
+            mx, dx = frame(x); my, dy = frame(y)
+            if mx != my: print('CODE', name, 'instruction', k, '%08x | %08x' % (x, y)); ok = False; break
+            if dx is not None and m.setdefault(dy, dx) != dx:
+                print('MERGE', name, 'candidate slot 0x%x stands for 0x%x and 0x%x' % (dy, m[dy], dx)); ok = False
         bad += not ok
     wb_, wc = warns(bw), warns(cw)
     for k, v in wc.items():

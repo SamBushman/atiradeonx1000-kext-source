@@ -1411,8 +1411,8 @@ int FUN_000ddb7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000ddbcc @ 0xddbcc (10080 bytes) */
-int FUN_000ddbcc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
+int FUN_000ddbcc(disassembler, param_2, param_3, param_4, param_5, param_6, param_7)
+  int *disassembler;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -1668,7 +1668,7 @@ int FUN_000ddbcc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 extraout_r4_x00240;
   undefined4 extraout_r4_x00241;
   undefined4 extraout_r4_x00242;
-  char *pcVar5;
+  char *mnemonic;
   undefined4 uVar6;
   uint uVar7;
   undefined4 uVar8;
@@ -1681,7 +1681,7 @@ int FUN_000ddbcc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint *puVar15;
   uint *puVar16;
   float fVar17;
-  uint uVar18;
+  uint instructionToken;
   int iVar19;
   int iVar20;
   int iVar21;
@@ -1689,1501 +1689,1503 @@ int FUN_000ddbcc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_194;
   char local_134;
   char local_133;
+  uint *instructionPtr;
+  uint opcode;
   char acStack_132 [266];
-  undefined4 local_28;
+  undefined4 result;
   
-  puVar16 = (uint *)param_1[2];
-  uVar18 = *puVar16;
-  puVar15 = puVar16 + 1;
-  param_1[2] = (int)puVar15;
-  uVar7 = uVar18 & 0xffff;
-  if (uVar7 < 0xbf) {
+  instructionPtr = (uint *)disassembler[2];
+  instructionToken = *instructionPtr;
+  puVar15 = instructionPtr + 1;
+  disassembler[2] = (int)puVar15;
+  opcode = instructionToken & 0xffff;
+  if (opcode < 0xbf) {
     param_7 = 0;
-    switch(uVar7) {
+    switch(opcode) {
     default:
       goto switchD_000ddc1c_caseD_0;
     case 1:
-      pcVar5 = "abs";
-      FUN_000da9fc(param_1,param_1[0x87],"abs",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_01,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "abs";
+      FUN_000da9fc(disassembler,disassembler[0x87],"abs",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_01,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 2:
-      pcVar5 = "acos";
-      FUN_000da9fc(param_1,param_1[0x87],"acos",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_02,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "acos";
+      FUN_000da9fc(disassembler,disassembler[0x87],"acos",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_02,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 3:
-      pcVar5 = "add";
-      FUN_000da9fc(param_1,param_1[0x87],"add",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_44,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "add";
+      FUN_000da9fc(disassembler,disassembler[0x87],"add",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_44,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 4:
-      pcVar5 = "asin";
-      FUN_000da9fc(param_1,param_1[0x87],"asin",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_04,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "asin";
+      FUN_000da9fc(disassembler,disassembler[0x87],"asin",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_04,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 5:
-      pcVar5 = "atan";
-      FUN_000da9fc(param_1,param_1[0x87],"atan",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_05,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "atan";
+      FUN_000da9fc(disassembler,disassembler[0x87],"atan",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_05,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 6:
-      pcVar5 = "break";
-      FUN_000da9fc(param_1,param_1[0x87],"break",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00111,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "break";
+      FUN_000da9fc(disassembler,disassembler[0x87],"break",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00111,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 7:
-      pcVar5 = "breakc";
-      FUN_000da9fc(param_1,param_1[0x87],"breakc",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dccd4)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00112,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00113,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00114,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "breakc";
+      FUN_000da9fc(disassembler,disassembler[0x87],"breakc",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dccd4)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00112,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00113,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00114,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 8:
-      pcVar5 = "call";
-      FUN_000da9fc(param_1,param_1[0x87],"call",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db2f4(param_1,extraout_r4_x00119,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00120,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "call";
+      FUN_000da9fc(disassembler,disassembler[0x87],"call",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db2f4(disassembler,extraout_r4_x00119,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00120,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 9:
-      pcVar5 = "callnz";
-      FUN_000da9fc(param_1,param_1[0x87],"callnz",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00121,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db2f4(param_1,extraout_r4_x00122,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00123,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "callnz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"callnz",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00121,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db2f4(disassembler,extraout_r4_x00122,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00123,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 10:
-      pcVar5 = "clamp";
-      FUN_000da9fc(param_1,param_1[0x87],"clamp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_56,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "clamp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"clamp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_56,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb:
-      pcVar5 = "clg";
-      FUN_000da9fc(param_1,param_1[0x87],"clg",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_06,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "clg";
+      FUN_000da9fc(disassembler,disassembler[0x87],"clg",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_06,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xc:
-      pcVar5 = "cmov";
-      FUN_000da9fc(param_1,param_1[0x87],"cmov",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_07,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "cmov";
+      FUN_000da9fc(disassembler,disassembler[0x87],"cmov",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_07,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xd:
-      pcVar5 = "cmp";
-      FUN_000da9fc(param_1,param_1[0x87],"cmp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dccd4)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db350(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_57,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "cmp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"cmp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dccd4)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db350(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_57,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xe:
-      pcVar5 = "colorclamp";
-      FUN_000da9fc(param_1,param_1[0x87],"colorclamp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_09,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "colorclamp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"colorclamp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_09,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xf:
       uVar7 = *puVar15;
-      param_1[2] = (int)(puVar16 + 2);
+      disassembler[2] = (int)(instructionPtr + 2);
       iVar21 = (uVar7 & 0xffff) * 4;
       pcVar4 = " ); ";
-      FUN_000da9fc(param_1,param_1[0x87]," ); ",param_4,param_5,param_6,param_7,puVar15);
-      pcVar5 = (char *)param_1[2];
+      FUN_000da9fc(disassembler,disassembler[0x87]," ); ",param_4,param_5,param_6,param_7,puVar15);
+      mnemonic = (char *)disassembler[2];
       iVar19 = 0;
       uVar6 = extraout_r4_x00241;
       if ((uVar7 & 0xffff) != 0) {
-        cVar1 = *pcVar5;
-        pcVar5 = pcVar5 + 1;
+        cVar1 = *mnemonic;
+        mnemonic = mnemonic + 1;
         pcVar4 = (char *)(int)cVar1;
         iVar19 = 1;
         if (pcVar4 != (char *)0x0) {
           iVar20 = 1;
           do {
-            FUN_000da904(param_1,"%c",pcVar4,param_4,param_5,param_6,param_7,puVar15);
+            FUN_000da904(disassembler,"%c",pcVar4,param_4,param_5,param_6,param_7,puVar15);
             iVar19 = iVar21;
             uVar6 = extraout_r4_x00242;
             if (iVar20 == iVar21) break;
-            cVar1 = *pcVar5;
+            cVar1 = *mnemonic;
             iVar20 = iVar20 + 1;
-            pcVar5 = pcVar5 + 1;
+            mnemonic = mnemonic + 1;
             pcVar4 = (char *)(int)cVar1;
             iVar19 = iVar20;
           } while (pcVar4 != (char *)0x0);
         }
       }
       for (iVar21 = iVar21 - iVar19; iVar21 != 0; iVar21 = iVar21 + -1) {
-        pcVar5 = pcVar5 + 1;
+        mnemonic = mnemonic + 1;
       }
-      param_1[2] = (int)pcVar5;
-      FUN_000da984(param_1,uVar6,pcVar4,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      disassembler[2] = (int)mnemonic;
+      FUN_000da984(disassembler,uVar6,pcVar4,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x10:
-      pcVar5 = "continue";
-      FUN_000da9fc(param_1,param_1[0x87],"continue",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00130,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "continue";
+      FUN_000da9fc(disassembler,disassembler[0x87],"continue",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00130,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x11:
-      pcVar5 = "continuec";
-      FUN_000da9fc(param_1,param_1[0x87],"continuec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dccd4)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00131,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00132,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00133,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "continuec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"continuec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dccd4)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00131,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00132,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00133,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x12:
-      pcVar5 = "cos";
-      FUN_000da9fc(param_1,param_1[0x87],"cos",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_10,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "cos";
+      FUN_000da9fc(disassembler,disassembler[0x87],"cos",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_10,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x13:
-      pcVar5 = "crs";
-      FUN_000da9fc(param_1,param_1[0x87],"crs",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_45,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "crs";
+      FUN_000da9fc(disassembler,disassembler[0x87],"crs",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_45,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x14:
-      pcVar5 = "dclarray";
-      FUN_000da9fc(param_1,param_1[0x87],"dclarray",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00180,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00181,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00182,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dclarray";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclarray",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00180,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00181,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00182,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x15:
-      local_198 = uVar18;
-      FUN_000da9fc(param_1,param_1[0x87],"dcldef",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc4bc)(param_1,local_198,local_194,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00202,local_194,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00203,local_194,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      local_198 = instructionToken;
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcldef",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc4bc)(disassembler,local_198,local_194,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00202,local_194,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00203,local_194,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x16:
-      pcVar5 = "dclpi";
-      FUN_000da9fc(param_1,param_1[0x87],"dclpi",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc1ac)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00191,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00192,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dclpi";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclpi",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc1ac)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00191,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00192,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x17:
-      pcVar5 = "dclpin";
-      FUN_000da9fc(param_1,param_1[0x87],"dclpin",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dbf34)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00193,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00194,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dclpin";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclpin",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dbf34)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00193,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00194,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x18:
-      FUN_000da9fc(param_1,param_1[0x87],"dclpp",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da9fc(param_1,param_1[0x87],"dclv",param_4,param_5,param_6,param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0xff;
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclpp",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclv",param_4,param_5,param_6,param_7,puVar15);
+      uVar7 = instructionToken >> 0x10 & 0xff;
       FUN_001a32d0(&local_198,"_param(%d)",uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_198,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00195,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00196,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_198,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00195,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00196,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x19:
-      pcVar5 = "dclpt";
-      FUN_000da9fc(param_1,param_1[0x87],"dclpt",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc3b0)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      ((int (*)())FUN_000dc83c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00201,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dclpt";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclpt",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc3b0)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      ((int (*)())FUN_000dc83c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00201,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x1a:
-      pcVar5 = "dclv";
-      FUN_000da9fc(param_1,param_1[0x87],"dclv",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc098)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00197,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00198,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dclv";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclv",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc098)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00197,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00198,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x1b:
-      pcVar5 = "dclvout";
-      FUN_000da9fc(param_1,param_1[0x87],"dclvout",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dbe18)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00199,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00200,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dclvout";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dclvout",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dbe18)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00199,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00200,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x1c:
-      pcVar5 = "def";
-      FUN_000da9fc(param_1,param_1[0x87],"def",param_4,param_5,param_6,param_7,puVar15);
-      if ((*(uint *)param_1[2] & 0x3f0000) == 0x10000) {
+      mnemonic = "def";
+      FUN_000da9fc(disassembler,disassembler[0x87],"def",param_4,param_5,param_6,param_7,puVar15);
+      if ((*(uint *)disassembler[2] & 0x3f0000) == 0x10000) {
         puVar16 = &local_198;
-        uVar6 = ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00204,pcVar5,param_4,param_5,param_6,param_7,
+        uVar6 = ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00204,mnemonic,param_4,param_5,param_6,param_7,
                              puVar15);
-        pfVar3 = (float *)param_1[2];
+        pfVar3 = (float *)disassembler[2];
         puVar15 = (uint *)0x19dbd8;
         fVar12 = *pfVar3;
-        param_1[2] = (int)(pfVar3 + 1);
+        disassembler[2] = (int)(pfVar3 + 1);
         fVar17 = pfVar3[1];
-        param_1[2] = (int)(pfVar3 + 2);
+        disassembler[2] = (int)(pfVar3 + 2);
         fVar13 = pfVar3[2];
-        param_1[2] = (int)(pfVar3 + 3);
+        disassembler[2] = (int)(pfVar3 + 3);
         puVar14 = (*(undefined4 * *)(pfVar3 + (3)));
-        param_1[2] = (int)(pfVar3 + 4);
+        disassembler[2] = (int)(pfVar3 + 4);
         local_134 = s___001a44f4[0];
         local_133 = s___001a44f4[1];
         acStack_132[0] = s___001a44f4[2];
         puVar2 = puVar14;
         ((char * (*)())FUN_000cdc3c)(uVar6,10,puVar16,(double)fVar12);
         iVar21 = FUN_001a32d0(acStack_132,"%s, ",puVar16,param_4,param_5,param_6,puVar2,puVar15);
-        pcVar5 = acStack_132 + iVar21;
+        mnemonic = acStack_132 + iVar21;
         ((char * (*)())FUN_000cdc3c)(iVar21,10,puVar16,(double)fVar17);
-        iVar21 = FUN_001a32d0(pcVar5,"%s, ",puVar16,param_4,param_5,param_6,puVar2,puVar15);
+        iVar21 = FUN_001a32d0(mnemonic,"%s, ",puVar16,param_4,param_5,param_6,puVar2,puVar15);
         ((char * (*)())FUN_000cdc3c)(iVar21,10,puVar16,(double)fVar13);
-        iVar19 = FUN_001a32d0(pcVar5 + iVar21,"%s, ",puVar16,param_4,param_5,param_6,puVar2,puVar15)
+        iVar19 = FUN_001a32d0(mnemonic + iVar21,"%s, ",puVar16,param_4,param_5,param_6,puVar2,puVar15)
         ;
         ((char * (*)())FUN_000cdc3c)(iVar19,10,puVar16,(double)GH_U2F((unsigned int)(puVar14)));
-        FUN_001a32d0(pcVar5 + iVar21 + iVar19,"%s",puVar16,param_4,param_5,param_6,puVar2,puVar15);
+        FUN_001a32d0(mnemonic + iVar21 + iVar19,"%s",puVar16,param_4,param_5,param_6,puVar2,puVar15);
       }
       else {
-        ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00204,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-        puVar14 = (undefined4 *)param_1[2];
+        ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00204,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+        puVar14 = (undefined4 *)disassembler[2];
         puVar16 = (uint *)*puVar14;
         puVar2 = puVar14 + 2;
-        param_1[2] = (int)(puVar14 + 1);
+        disassembler[2] = (int)(puVar14 + 1);
         param_4 = puVar14[1];
-        param_1[2] = (int)puVar2;
+        disassembler[2] = (int)puVar2;
         param_5 = puVar14[2];
-        param_1[2] = (int)(puVar14 + 3);
+        disassembler[2] = (int)(puVar14 + 3);
         param_6 = puVar14[3];
-        param_1[2] = (int)(puVar14 + 4);
+        disassembler[2] = (int)(puVar14 + 4);
         FUN_001a32d0(&local_134,", %lu, %lu, %lu, %lu",puVar16,param_4,param_5,param_6,puVar2,
                      puVar15);
       }
-      FUN_000da904(param_1,&local_134,puVar16,param_4,param_5,param_6,puVar2,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00205,puVar16,param_4,param_5,param_6,puVar2,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_134,puVar16,param_4,param_5,param_6,puVar2,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00205,puVar16,param_4,param_5,param_6,puVar2,puVar15);
+      result = 1;
       break;
     case 0x1d:
-      pcVar5 = "defb";
-      FUN_000da9fc(param_1,param_1[0x87],"defb",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd6bc)(param_1,extraout_r4_x00206,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      uVar6 = *(undefined4 *)param_1[2];
-      param_1[2] = (int)((undefined4 *)param_1[2] + 1);
+      mnemonic = "defb";
+      FUN_000da9fc(disassembler,disassembler[0x87],"defb",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00206,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      uVar6 = *(undefined4 *)disassembler[2];
+      disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
       FUN_001a32d0(&local_198,", %lu",uVar6,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_198,uVar6,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00207,uVar6,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_198,uVar6,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00207,uVar6,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x1e:
-      pcVar5 = "det";
-      FUN_000da9fc(param_1,param_1[0x87],"det",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00104,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "det";
+      FUN_000da9fc(disassembler,disassembler[0x87],"det",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00104,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x1f:
-      pcVar5 = "dist";
-      FUN_000da9fc(param_1,param_1[0x87],"dist",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_46,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dist";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dist",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_46,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x20:
-      pcVar5 = "div";
-      FUN_000da9fc(param_1,param_1[0x87],"div",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_58,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "div";
+      FUN_000da9fc(disassembler,disassembler[0x87],"div",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_58,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x21:
-      pcVar5 = "dp2add";
-      FUN_000da9fc(param_1,param_1[0x87],"dp2add",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_60,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dp2add";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dp2add",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_60,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x22:
-      pcVar5 = "dp3";
-      FUN_000da9fc(param_1,param_1[0x87],"dp3",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_47,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dp3";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dp3",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_47,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x23:
-      pcVar5 = "dp4";
-      FUN_000da9fc(param_1,param_1[0x87],"dp4",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_48,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dp4";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dp4",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_48,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x24:
-      pcVar5 = "dst";
-      FUN_000da9fc(param_1,param_1[0x87],"dst",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_49,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dst";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dst",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_49,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x25:
-      pcVar5 = "dsx";
-      FUN_000da9fc(param_1,param_1[0x87],"dsx",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dca3c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_61,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dsx";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dsx",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dca3c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_61,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x26:
-      pcVar5 = "dsy";
-      FUN_000da9fc(param_1,param_1[0x87],"dsy",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dca3c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_62,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dsy";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dsy",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dca3c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_62,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x27:
-      FUN_000da8e0(param_1,param_1[0x87] + -1);
-      pcVar5 = "else";
-      FUN_000da9fc(param_1,param_1[0x87],"else",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      FUN_000da984(param_1,extraout_r4_x00138,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da8e0(disassembler,disassembler[0x87] + -1);
+      mnemonic = "else";
+      FUN_000da9fc(disassembler,disassembler[0x87],"else",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      FUN_000da984(disassembler,extraout_r4_x00138,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x28:
-      pcVar5 = "end";
-      FUN_000da9fc(param_1,param_1[0x87],"end",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00150,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 0;
+      mnemonic = "end";
+      FUN_000da9fc(disassembler,disassembler[0x87],"end",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00150,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 0;
       break;
     case 0x29:
-      FUN_000da8e0(param_1,param_1[0x87] + -1);
-      pcVar5 = "endif";
-      FUN_000da9fc(param_1,param_1[0x87],"endif",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00152,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da8e0(disassembler,disassembler[0x87] + -1);
+      mnemonic = "endif";
+      FUN_000da9fc(disassembler,disassembler[0x87],"endif",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00152,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x2a:
-      FUN_000da8e0(param_1,param_1[0x87] + -1);
-      pcVar5 = "endloop";
-      FUN_000da9fc(param_1,param_1[0x87],"endloop",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00153,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da8e0(disassembler,disassembler[0x87] + -1);
+      mnemonic = "endloop";
+      FUN_000da9fc(disassembler,disassembler[0x87],"endloop",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00153,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x2b:
-      pcVar5 = "endmain";
-      FUN_000da9fc(param_1,param_1[0x87],"endmain",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00139,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "endmain";
+      FUN_000da9fc(disassembler,disassembler[0x87],"endmain",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00139,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x2c:
-      pcVar5 = "exn";
-      FUN_000da9fc(param_1,param_1[0x87],"exn",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_13,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "exn";
+      FUN_000da9fc(disassembler,disassembler[0x87],"exn",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_13,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x2d:
-      pcVar5 = "exp";
-      FUN_000da9fc(param_1,param_1[0x87],"exp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_15,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "exp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"exp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_15,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x2e:
-      pcVar5 = "expp";
-      FUN_000da9fc(param_1,param_1[0x87],"expp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_16,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "expp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"expp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_16,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x2f:
-      pcVar5 = "faceforward";
-      FUN_000da9fc(param_1,param_1[0x87],"faceforward",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_63,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "faceforward";
+      FUN_000da9fc(disassembler,disassembler[0x87],"faceforward",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_63,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x30:
-      pcVar5 = "flr";
-      FUN_000da9fc(param_1,param_1[0x87],"flr",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_17,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "flr";
+      FUN_000da9fc(disassembler,disassembler[0x87],"flr",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_17,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x31:
-      pcVar5 = "frc";
-      FUN_000da9fc(param_1,param_1[0x87],"frc",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "frc";
+      FUN_000da9fc(disassembler,disassembler[0x87],"frc",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_18,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x32:
-      pcVar5 = "func";
-      FUN_000da9fc(param_1,param_1[0x87],"func",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db2f4(param_1,extraout_r4_x00154,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00155,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "func";
+      FUN_000da9fc(disassembler,disassembler[0x87],"func",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db2f4(disassembler,extraout_r4_x00154,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00155,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x33:
-      pcVar5 = "fwidth";
-      FUN_000da9fc(param_1,param_1[0x87],"fwidth",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_19,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "fwidth";
+      FUN_000da9fc(disassembler,disassembler[0x87],"fwidth",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_19,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x34:
-      pcVar5 = "ifc";
-      FUN_000da9fc(param_1,param_1[0x87],"ifc",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      ((int (*)())FUN_000dccd4)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00156,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00157,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00158,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ifc";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ifc",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      ((int (*)())FUN_000dccd4)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00156,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00157,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00158,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x35:
-      pcVar5 = "ifnz ";
-      FUN_000da9fc(param_1,param_1[0x87],"ifnz ",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00164,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00165,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ifnz ";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ifnz ",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00164,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00165,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x36:
     case 0x43:
-      FUN_000da9fc(param_1,param_1[0x87],"memimport",param_4,param_5,param_6,param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0x3f;
+      FUN_000da9fc(disassembler,disassembler[0x87],"memimport",param_4,param_5,param_6,param_7,puVar15);
+      uVar7 = instructionToken >> 0x10 & 0x3f;
       FUN_001a32d0(&local_198,"_elem(%d)",uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_198,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00237,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_198,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00237,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x37:
-      pcVar5 = "kill";
-      FUN_000da9fc(param_1,param_1[0x87],"kill",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc83c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dca18)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00109,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00110,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "kill";
+      FUN_000da9fc(disassembler,disassembler[0x87],"kill",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc83c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dca18)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00109,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00110,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x38:
-      pcVar5 = "len";
-      FUN_000da9fc(param_1,param_1[0x87],"len",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_21,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "len";
+      FUN_000da9fc(disassembler,disassembler[0x87],"len",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_21,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x39:
-      pcVar5 = "lit";
-      FUN_000da9fc(param_1,param_1[0x87],"lit",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_22,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "lit";
+      FUN_000da9fc(disassembler,disassembler[0x87],"lit",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_22,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x3a:
-      pcVar5 = "ln";
-      FUN_000da9fc(param_1,param_1[0x87],"ln",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_64,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ln";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ln",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_64,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x3b:
-      pcVar5 = "lod";
-      FUN_000da9fc(param_1,param_1[0x87],"lod",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc83c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00231,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "lod";
+      FUN_000da9fc(disassembler,disassembler[0x87],"lod",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc83c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00231,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x3c:
-      pcVar5 = "log";
-      FUN_000da9fc(param_1,param_1[0x87],"log",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_65,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "log";
+      FUN_000da9fc(disassembler,disassembler[0x87],"log",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_65,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x3d:
-      pcVar5 = "logp";
-      FUN_000da9fc(param_1,param_1[0x87],"logp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_66,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "logp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"logp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_66,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x3e:
-      pcVar5 = "loop";
-      FUN_000da9fc(param_1,param_1[0x87],"loop",param_4,param_5,param_6,param_7,puVar15);
-      if ((uVar18 & 0x10000) == 0) {
+      mnemonic = "loop";
+      FUN_000da9fc(disassembler,disassembler[0x87],"loop",param_4,param_5,param_6,param_7,puVar15);
+      if ((instructionToken & 0x10000) == 0) {
         pcVar4 = " ";
       }
       else {
         pcVar4 = "_rep ";
       }
-      FUN_000da904(param_1,pcVar4,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00170,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00171,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,pcVar4,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00170,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00171,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x3f:
-      pcVar5 = "lrp";
-      FUN_000da9fc(param_1,param_1[0x87],"lrp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_67,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "lrp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"lrp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_67,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x40:
-      pcVar5 = "mad";
-      FUN_000da9fc(param_1,param_1[0x87],"mad",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_68,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "mad";
+      FUN_000da9fc(disassembler,disassembler[0x87],"mad",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_68,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x41:
-      pcVar5 = "max";
-      FUN_000da9fc(param_1,param_1[0x87],"max",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_50,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "max";
+      FUN_000da9fc(disassembler,disassembler[0x87],"max",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_50,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x42:
-      FUN_000da9fc(param_1,param_1[0x87],"memexport",param_4,param_5,param_6,param_7,puVar15);
-      uVar10 = uVar18 >> 0x17 & 0x3f;
-      uVar7 = uVar18 >> 0x10 & 0x3f;
-      uVar18 = uVar18 >> 0x16 & 1;
-      FUN_001a32d0(&local_198,"_exportStream(%d)_stateStride(%d)_elemOffset(%d)",uVar7,uVar18,uVar10
+      FUN_000da9fc(disassembler,disassembler[0x87],"memexport",param_4,param_5,param_6,param_7,puVar15);
+      uVar10 = instructionToken >> 0x17 & 0x3f;
+      uVar7 = instructionToken >> 0x10 & 0x3f;
+      instructionToken = instructionToken >> 0x16 & 1;
+      FUN_001a32d0(&local_198,"_exportStream(%d)_stateStride(%d)_elemOffset(%d)",uVar7,instructionToken,uVar10
                    ,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_198,uVar7,uVar18,uVar10,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00240,uVar7,uVar18,uVar10,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_198,uVar7,instructionToken,uVar10,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00240,uVar7,instructionToken,uVar10,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x44:
-      pcVar5 = "min";
-      FUN_000da9fc(param_1,param_1[0x87],"min",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_51,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "min";
+      FUN_000da9fc(disassembler,disassembler[0x87],"min",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_51,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x45:
-      pcVar5 = "mmul";
-      FUN_000da9fc(param_1,param_1[0x87],"mmul",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dcbcc)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_95,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "mmul";
+      FUN_000da9fc(disassembler,disassembler[0x87],"mmul",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dcbcc)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_95,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x46:
-      pcVar5 = "mod";
-      FUN_000da9fc(param_1,param_1[0x87],"mod",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_52,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "mod";
+      FUN_000da9fc(disassembler,disassembler[0x87],"mod",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_52,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x47:
-      pcVar5 = "mov";
-      FUN_000da9fc(param_1,param_1[0x87],"mov",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_25,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "mov";
+      FUN_000da9fc(disassembler,disassembler[0x87],"mov",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_25,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x48:
-      pcVar5 = "mova";
-      FUN_000da9fc(param_1,param_1[0x87],"mova",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc9f4)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_96,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "mova";
+      FUN_000da9fc(disassembler,disassembler[0x87],"mova",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc9f4)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_96,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x49:
-      pcVar5 = "mul";
-      FUN_000da9fc(param_1,param_1[0x87],"mul",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_53,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "mul";
+      FUN_000da9fc(disassembler,disassembler[0x87],"mul",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_53,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x4a:
-      pcVar5 = "noise";
-      FUN_000da9fc(param_1,param_1[0x87],"noise",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_26,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "noise";
+      FUN_000da9fc(disassembler,disassembler[0x87],"noise",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_26,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x4b:
-      pcVar5 = "nop";
-      FUN_000da9fc(param_1,param_1[0x87],"nop",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00173,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "nop";
+      FUN_000da9fc(disassembler,disassembler[0x87],"nop",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00173,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x4c:
-      pcVar5 = "nrm";
-      FUN_000da9fc(param_1,param_1[0x87],"nrm",param_4,param_5,param_6,param_7,puVar15);
-      if ((uVar18 & 0x40000) != 0) {
-        FUN_000da904(param_1,"_nrm4",pcVar5,param_4,param_5,param_6,param_7,puVar15);
+      mnemonic = "nrm";
+      FUN_000da9fc(disassembler,disassembler[0x87],"nrm",param_4,param_5,param_6,param_7,puVar15);
+      if ((instructionToken & 0x40000) != 0) {
+        FUN_000da904(disassembler,"_nrm4",mnemonic,param_4,param_5,param_6,param_7,puVar15);
       }
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_97,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_97,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x4d:
-      pcVar5 = "pireduce";
-      FUN_000da9fc(param_1,param_1[0x87],"pireduce",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_28,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "pireduce";
+      FUN_000da9fc(disassembler,disassembler[0x87],"pireduce",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_28,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x4e:
-      pcVar5 = "pow";
-      FUN_000da9fc(param_1,param_1[0x87],"pow",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_54,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "pow";
+      FUN_000da9fc(disassembler,disassembler[0x87],"pow",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_54,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x50:
-      pcVar5 = "project";
-      FUN_000da9fc(param_1,param_1[0x87],"project",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc83c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_98,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "project";
+      FUN_000da9fc(disassembler,disassembler[0x87],"project",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc83c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_98,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x51:
-      pcVar5 = "rcp";
-      FUN_000da9fc(param_1,param_1[0x87],"rcp",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_99,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "rcp";
+      FUN_000da9fc(disassembler,disassembler[0x87],"rcp",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_99,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x52:
-      pcVar5 = "reflect";
-      FUN_000da9fc(param_1,param_1[0x87],"reflect",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc9d0)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00100,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "reflect";
+      FUN_000da9fc(disassembler,disassembler[0x87],"reflect",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc9d0)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00100,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x53:
-      FUN_000da8e0(param_1,param_1[0x87] + -1);
-      pcVar5 = "ret";
-      FUN_000da9fc(param_1,param_1[0x87],"ret",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00174,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da8e0(disassembler,disassembler[0x87] + -1);
+      mnemonic = "ret";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ret",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00174,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x54:
-      pcVar5 = "rnd";
-      FUN_000da9fc(param_1,param_1[0x87],"rnd",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_29,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "rnd";
+      FUN_000da9fc(disassembler,disassembler[0x87],"rnd",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_29,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x55:
-      pcVar5 = "rsq";
-      FUN_000da9fc(param_1,param_1[0x87],"rsq",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc57c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00101,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "rsq";
+      FUN_000da9fc(disassembler,disassembler[0x87],"rsq",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc57c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00101,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x56:
-      pcVar5 = "set";
-      FUN_000da9fc(param_1,param_1[0x87],"set",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dccd4)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00102,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "set";
+      FUN_000da9fc(disassembler,disassembler[0x87],"set",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dccd4)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00102,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x57:
-      pcVar5 = "sgn";
-      FUN_000da9fc(param_1,param_1[0x87],"sgn",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_38,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sgn";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sgn",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_38,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x58:
-      pcVar5 = "sin";
-      FUN_000da9fc(param_1,param_1[0x87],"sin",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_39,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sin";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sin",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_39,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x59:
-      pcVar5 = "sincos";
-      FUN_000da9fc(param_1,param_1[0x87],"sincos",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_40,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sincos";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sincos",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_40,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x5a:
-      pcVar5 = "sqrt";
-      FUN_000da9fc(param_1,param_1[0x87],"sqrt",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_41,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sqrt";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sqrt",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_41,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x5b:
-      pcVar5 = "sub";
-      FUN_000da9fc(param_1,param_1[0x87],"sub",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_55,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sub";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sub",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_55,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x5c:
-      pcVar5 = "tan";
-      FUN_000da9fc(param_1,param_1[0x87],"tan",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_42,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "tan";
+      FUN_000da9fc(disassembler,disassembler[0x87],"tan",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_42,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x5d:
-      pcVar5 = "texld";
-      FUN_000da9fc(param_1,param_1[0x87],"texld",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dcb34)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00232,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "texld";
+      FUN_000da9fc(disassembler,disassembler[0x87],"texld",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dcb34)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00232,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x5e:
-      pcVar5 = "texldb";
-      FUN_000da9fc(param_1,param_1[0x87],"texldb",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dca60)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00233,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "texldb";
+      FUN_000da9fc(disassembler,disassembler[0x87],"texldb",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dca60)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00233,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x5f:
-      pcVar5 = "texldd";
-      FUN_000da9fc(param_1,param_1[0x87],"texldd",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dcb34)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_x00234,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "texldd";
+      FUN_000da9fc(disassembler,disassembler[0x87],"texldd",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dcb34)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_x00234,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x60:
-      pcVar5 = "texldms";
-      FUN_000da9fc(param_1,param_1[0x87],"texldms",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc88c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00235,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "texldms";
+      FUN_000da9fc(disassembler,disassembler[0x87],"texldms",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc88c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00235,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x61:
-      pcVar5 = "texweight";
-      FUN_000da9fc(param_1,param_1[0x87],"texweight",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc83c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dca3c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00236,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "texweight";
+      FUN_000da9fc(disassembler,disassembler[0x87],"texweight",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc83c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dca3c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00236,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x62:
-      pcVar5 = "transpose";
-      FUN_000da9fc(param_1,param_1[0x87],"transpose",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00103,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "transpose";
+      FUN_000da9fc(disassembler,disassembler[0x87],"transpose",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00103,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 99:
-      pcVar5 = "trc";
-      FUN_000da9fc(param_1,param_1[0x87],"trc",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_43,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "trc";
+      FUN_000da9fc(disassembler,disassembler[0x87],"trc",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_43,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 100:
-      pcVar5 = "dxsincos";
-      FUN_000da9fc(param_1,param_1[0x87],"dxsincos",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_11,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dxsincos";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dxsincos",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_11,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x65:
-      pcVar5 = "break_logicalz";
-      FUN_000da9fc(param_1,param_1[0x87],"break_logicalz",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00115,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00116,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "break_logicalz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"break_logicalz",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00115,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00116,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x66:
-      pcVar5 = "break_logicalnz";
-      FUN_000da9fc(param_1,param_1[0x87],"break_logicalnz",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00117,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00118,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "break_logicalnz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"break_logicalnz",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00117,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00118,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x67:
-      pcVar5 = "call_logicalz";
-      FUN_000da9fc(param_1,param_1[0x87],"call_logicalz",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00124,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db2f4(param_1,extraout_r4_x00125,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00126,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "call_logicalz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"call_logicalz",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00124,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db2f4(disassembler,extraout_r4_x00125,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00126,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x68:
-      pcVar5 = "call_logicalnz";
-      FUN_000da9fc(param_1,param_1[0x87],"call_logicalnz",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00127,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,", ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db2f4(param_1,extraout_r4_x00128,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00129,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "call_logicalnz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"call_logicalnz",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00127,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,", ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db2f4(disassembler,extraout_r4_x00128,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00129,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x69:
-      pcVar5 = "case ";
-      FUN_000da9fc(param_1,param_1[0x87],"case ",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      uVar6 = *(undefined4 *)param_1[2];
-      param_1[2] = (int)((undefined4 *)param_1[2] + 1);
+      mnemonic = "case ";
+      FUN_000da9fc(disassembler,disassembler[0x87],"case ",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      uVar6 = *(undefined4 *)disassembler[2];
+      disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
       FUN_001a32d0(&local_198,"%lu",uVar6,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_198,uVar6,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00163,uVar6,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_198,uVar6,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00163,uVar6,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x6a:
-      pcVar5 = "continue_logicalz";
-      FUN_000da9fc(param_1,param_1[0x87],"continue_logicalz",param_4,param_5,param_6,param_7,puVar15
+      mnemonic = "continue_logicalz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"continue_logicalz",param_4,param_5,param_6,param_7,puVar15
                   );
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00134,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00135,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00134,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00135,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x6b:
-      pcVar5 = "continue_logicalnz";
-      FUN_000da9fc(param_1,param_1[0x87],"continue_logicalnz",param_4,param_5,param_6,param_7,
+      mnemonic = "continue_logicalnz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"continue_logicalnz",param_4,param_5,param_6,param_7,
                    puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00136,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00137,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00136,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00137,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x6c:
-      pcVar5 = "default";
-      FUN_000da9fc(param_1,param_1[0x87],"default",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00162,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "default";
+      FUN_000da9fc(disassembler,disassembler[0x87],"default",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00162,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x6d:
-      pcVar5 = "endswitch";
-      FUN_000da9fc(param_1,param_1[0x87],"endswitch",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00161,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "endswitch";
+      FUN_000da9fc(disassembler,disassembler[0x87],"endswitch",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00161,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x6e:
-      pcVar5 = "endfunc";
-      FUN_000da9fc(param_1,param_1[0x87],"endfunc",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00151,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "endfunc";
+      FUN_000da9fc(disassembler,disassembler[0x87],"endfunc",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00151,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x6f:
-      pcVar5 = "if_logicalz ";
-      FUN_000da9fc(param_1,param_1[0x87],"if_logicalz ",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00166,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00167,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "if_logicalz ";
+      FUN_000da9fc(disassembler,disassembler[0x87],"if_logicalz ",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00166,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00167,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x70:
-      pcVar5 = "if_logicalnz ";
-      FUN_000da9fc(param_1,param_1[0x87],"if_logicalnz ",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00168,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00169,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "if_logicalnz ";
+      FUN_000da9fc(disassembler,disassembler[0x87],"if_logicalnz ",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00168,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00169,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x71:
-      pcVar5 = "whileloop";
-      FUN_000da9fc(param_1,param_1[0x87],"whileloop",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00172,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da8e0(param_1,param_1[0x87] + 1);
-      local_28 = 1;
+      mnemonic = "whileloop";
+      FUN_000da9fc(disassembler,disassembler[0x87],"whileloop",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00172,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da8e0(disassembler,disassembler[0x87] + 1);
+      result = 1;
       break;
     case 0x72:
-      pcVar5 = "switch";
-      FUN_000da9fc(param_1,param_1[0x87],"switch",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00159,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00160,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "switch";
+      FUN_000da9fc(disassembler,disassembler[0x87],"switch",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00159,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00160,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x73:
-      pcVar5 = "ret_dyn";
-      FUN_000da9fc(param_1,param_1[0x87],"ret_dyn",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00175,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ret_dyn";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ret_dyn",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00175,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x74:
-      pcVar5 = "ret_logicalz ";
-      FUN_000da9fc(param_1,param_1[0x87],"ret_logicalz ",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00176,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00177,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ret_logicalz ";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ret_logicalz ",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00176,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00177,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x75:
-      pcVar5 = "ret_logicalnz ";
-      FUN_000da9fc(param_1,param_1[0x87],"ret_logicalnz ",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00178,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00179,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ret_logicalnz ";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ret_logicalnz ",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00178,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00179,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x76:
-      if ((int)uVar18 < 0) {
-        FUN_000da9fc(param_1,param_1[0x87],"dcl_immed_cb",param_4,param_5,param_6,param_7,puVar15);
-        iVar19 = *(int *)param_1[2];
-        param_1[2] = (int)((int *)param_1[2] + 1);
+      if ((int)instructionToken < 0) {
+        FUN_000da9fc(disassembler,disassembler[0x87],"dcl_immed_cb",param_4,param_5,param_6,param_7,puVar15);
+        iVar19 = *(int *)disassembler[2];
+        disassembler[2] = (int)((int *)disassembler[2] + 1);
         iVar21 = iVar19;
         FUN_001a32d0(&local_198,"count = %d ",iVar19,param_4,param_5,param_6,param_7,puVar15);
-        FUN_000da904(param_1,&local_198,iVar21,param_4,param_5,param_6,param_7,puVar15);
-        FUN_000da984(param_1,extraout_r4_x00185,iVar21,param_4,param_5,param_6,param_7,puVar15);
+        FUN_000da904(disassembler,&local_198,iVar21,param_4,param_5,param_6,param_7,puVar15);
+        FUN_000da984(disassembler,extraout_r4_x00185,iVar21,param_4,param_5,param_6,param_7,puVar15);
         if (0 < iVar19) {
           iVar21 = 0;
           do {
             iVar21 = iVar21 + 1;
-            uVar6 = *(undefined4 *)param_1[2];
-            param_1[2] = (int)((undefined4 *)param_1[2] + 1);
+            uVar6 = *(undefined4 *)disassembler[2];
+            disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
             FUN_001a32d0(&local_198," 0x%x ",uVar6,param_4,param_5,param_6,param_7,puVar15);
             puVar16 = &local_198;
-            FUN_000da9fc(param_1,param_1[0x87] + 1,&local_198,param_4,param_5,param_6,param_7,
+            FUN_000da9fc(disassembler,disassembler[0x87] + 1,&local_198,param_4,param_5,param_6,param_7,
                          puVar15);
-            FUN_000da984(param_1,extraout_r4_x00186,puVar16,param_4,param_5,param_6,param_7,puVar15)
+            FUN_000da984(disassembler,extraout_r4_x00186,puVar16,param_4,param_5,param_6,param_7,puVar15)
             ;
           } while (iVar19 != iVar21);
         }
-        local_28 = 1;
+        result = 1;
       }
       else {
-        pcVar5 = "dcl_cb";
-        FUN_000da9fc(param_1,param_1[0x87],"dcl_cb",param_4,param_5,param_6,param_7,puVar15);
-        FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-        ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00187,pcVar5,param_4,param_5,param_6,param_7);
-        FUN_000da984(param_1,extraout_r4_x00188,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-        local_28 = 1;
+        mnemonic = "dcl_cb";
+        FUN_000da9fc(disassembler,disassembler[0x87],"dcl_cb",param_4,param_5,param_6,param_7,puVar15);
+        FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+        ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00187,mnemonic,param_4,param_5,param_6,param_7);
+        FUN_000da984(disassembler,extraout_r4_x00188,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+        result = 1;
       }
       break;
     case 0x77:
-      pcVar5 = "dcl_indexed_temp_array";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_indexed_temp_array",param_4,param_5,param_6,param_7,
+      mnemonic = "dcl_indexed_temp_array";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_indexed_temp_array",param_4,param_5,param_6,param_7,
                    puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00183,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00184,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00183,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00184,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x78:
-      pcVar5 = "dcl_input_primitive";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_input_primitive",param_4,param_5,param_6,param_7,
+      mnemonic = "dcl_input_primitive";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_input_primitive",param_4,param_5,param_6,param_7,
                    puVar15);
-      ((int (*)())FUN_000dc71c)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00222,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      ((int (*)())FUN_000dc71c)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00222,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x79:
-      pcVar5 = "dcl_literal";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_literal",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00189,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da904(param_1,",",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      puVar2 = (undefined4 *)param_1[2];
+      mnemonic = "dcl_literal";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_literal",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00189,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da904(disassembler,",",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      puVar2 = (undefined4 *)disassembler[2];
       uVar6 = *puVar2;
       puVar14 = puVar2 + 2;
-      param_1[2] = (int)(puVar2 + 1);
+      disassembler[2] = (int)(puVar2 + 1);
       uVar8 = puVar2[1];
-      param_1[2] = (int)puVar14;
+      disassembler[2] = (int)puVar14;
       uVar9 = puVar2[2];
-      param_1[2] = (int)(puVar2 + 3);
+      disassembler[2] = (int)(puVar2 + 3);
       uVar11 = puVar2[3];
-      param_1[2] = (int)(puVar2 + 4);
+      disassembler[2] = (int)(puVar2 + 4);
       FUN_001a32d0(&local_134," 0x%08lX, 0x%08lX, 0x%08lX, 0x%08lX",uVar6,uVar8,uVar9,uVar11,puVar14
                    ,puVar15);
-      FUN_000da904(param_1,&local_134,uVar6,uVar8,uVar9,uVar11,puVar14,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00190,uVar6,uVar8,uVar9,uVar11,puVar14,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_134,uVar6,uVar8,uVar9,uVar11,puVar14,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00190,uVar6,uVar8,uVar9,uVar11,puVar14,puVar15);
+      result = 1;
       break;
     case 0x7a:
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_max_output_vertex_count",param_4,param_5,param_6,
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_max_output_vertex_count",param_4,param_5,param_6,
                    param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0x3fff;
+      uVar7 = instructionToken >> 0x10 & 0x3fff;
       FUN_001a32d0(&local_198,"(%d)",uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_198,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00208,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_198,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00208,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x7b:
-      pcVar5 = "dcl_odepth";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_odepth",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00224,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dcl_odepth";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_odepth",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00224,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x7c:
-      pcVar5 = "dcl_output_topology";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_output_topology",param_4,param_5,param_6,param_7,
+      mnemonic = "dcl_output_topology";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_output_topology",param_4,param_5,param_6,param_7,
                    puVar15);
-      ((int (*)())FUN_000dc658)(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00209,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      ((int (*)())FUN_000dc658)(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00209,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x7d:
-      pcVar5 = "dcl_output";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_output",param_4,param_5,param_6,param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0x3fff;
+      mnemonic = "dcl_output";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_output",param_4,param_5,param_6,param_7,puVar15);
+      uVar7 = instructionToken >> 0x10 & 0x3fff;
       uVar6 = extraout_r4_x00210;
       if (uVar7 < 0x13) {
-        FUN_000da904(param_1,(PTR_s__position_001dc3f4)[uVar7],pcVar5,param_4,param_5,param_6,
+        FUN_000da904(disassembler,(PTR_s__position_001dc3f4)[uVar7],mnemonic,param_4,param_5,param_6,
                      param_7,puVar15);
         uVar6 = extraout_r4_x00211;
       }
-      ((int (*)())FUN_000dd6bc)(param_1,uVar6,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00212,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      ((int (*)())FUN_000dd6bc)(disassembler,uVar6,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00212,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x7e:
-      pcVar5 = "dcl_input";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_input",param_4,param_5,param_6,param_7,puVar15);
+      mnemonic = "dcl_input";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_input",param_4,param_5,param_6,param_7,puVar15);
       uVar6 = extraout_r4_x00213;
-      if ((uVar18 & 0x7c000) != 0x14000) {
-        FUN_000da904(param_1,*(undefined4 *)
-                              ((int)PTR_s__position_001dc3f4 + (uVar18 >> 0xc & 0x7c)),pcVar5,
+      if ((instructionToken & 0x7c000) != 0x14000) {
+        FUN_000da904(disassembler,*(undefined4 *)
+                              ((int)PTR_s__position_001dc3f4 + (instructionToken >> 0xc & 0x7c)),mnemonic,
                      param_4,param_5,param_6,param_7,puVar15);
         uVar6 = extraout_r4_x00214;
       }
-      uVar7 = uVar18 >> 0x13 & 7;
+      uVar7 = instructionToken >> 0x13 & 7;
       if (uVar7 < 6) {
         param_7 = 0;
         switch(uVar7) {
         case 1:
-          FUN_000da904(param_1,"_interp(constant)",pcVar5,param_4,param_5,param_6,param_7,puVar15);
+          FUN_000da904(disassembler,"_interp(constant)",mnemonic,param_4,param_5,param_6,param_7,puVar15);
           uVar6 = extraout_r4_x00215;
           break;
         case 2:
-          FUN_000da904(param_1,"_interp(linear)",pcVar5,param_4,param_5,param_6,param_7,puVar15);
+          FUN_000da904(disassembler,"_interp(linear)",mnemonic,param_4,param_5,param_6,param_7,puVar15);
           uVar6 = extraout_r4_x00216;
           break;
         case 3:
-          FUN_000da904(param_1,"_interp(linear_centroid)",pcVar5,param_4,param_5,param_6,param_7,
+          FUN_000da904(disassembler,"_interp(linear_centroid)",mnemonic,param_4,param_5,param_6,param_7,
                        puVar15);
           uVar6 = extraout_r4_x00217;
           break;
         case 4:
-          FUN_000da904(param_1,"_interp(linear_noperspective)",pcVar5,param_4,param_5,param_6,
+          FUN_000da904(disassembler,"_interp(linear_noperspective)",mnemonic,param_4,param_5,param_6,
                        param_7,puVar15);
           uVar6 = extraout_r4_x00218;
           break;
         case 5:
-          FUN_000da904(param_1,"_interp(linear_noperspective_centroid)",pcVar5,param_4,param_5,
+          FUN_000da904(disassembler,"_interp(linear_noperspective_centroid)",mnemonic,param_4,param_5,
                        param_6,param_7,puVar15);
           uVar6 = extraout_r4_x00219;
         }
       }
       else {
-        FUN_000da904(param_1,"!!!bad interp mode!!!",pcVar5,param_4,param_5,param_6,param_7,puVar15)
+        FUN_000da904(disassembler,"!!!bad interp mode!!!",mnemonic,param_4,param_5,param_6,param_7,puVar15)
         ;
-        *param_1 = *param_1 + 1;
+        *disassembler = *disassembler + 1;
         uVar6 = extraout_r4_x00220;
       }
-      ((int (*)())FUN_000dd6bc)(param_1,uVar6,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00221,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      ((int (*)())FUN_000dd6bc)(disassembler,uVar6,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00221,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x7f:
-      pcVar5 = "dcl_vprim";
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_vprim",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00223,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dcl_vprim";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_vprim",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00223,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x80:
-      FUN_000da9fc(param_1,param_1[0x87],"dcl_resource",param_4,param_5,param_6,param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0xff;
+      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_resource",param_4,param_5,param_6,param_7,puVar15);
+      uVar7 = instructionToken >> 0x10 & 0xff;
       FUN_001a32d0(&local_134,"_id(%d)",uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_134,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dc2c4)(param_1,uVar18 >> 0x18 & 0xf,uVar7,param_4,param_5,param_6,param_7);
-      FUN_000db048(param_1,extraout_r4_x00225,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00226,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_134,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dc2c4)(disassembler,instructionToken >> 0x18 & 0xf,uVar7,param_4,param_5,param_6,param_7);
+      FUN_000db048(disassembler,extraout_r4_x00225,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00226,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x81:
-      pcVar5 = "cut";
-      FUN_000da9fc(param_1,param_1[0x87],"cut",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00141,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "cut";
+      FUN_000da9fc(disassembler,disassembler[0x87],"cut",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00141,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x82:
-      pcVar5 = "discard_logicalz";
-      FUN_000da9fc(param_1,param_1[0x87],"discard_logicalz",param_4,param_5,param_6,param_7,puVar15)
+      mnemonic = "discard_logicalz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"discard_logicalz",param_4,param_5,param_6,param_7,puVar15)
       ;
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00227,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00228,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00227,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00228,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x83:
-      pcVar5 = "discard_logicalnz";
-      FUN_000da9fc(param_1,param_1[0x87],"discard_logicalnz",param_4,param_5,param_6,param_7,puVar15
+      mnemonic = "discard_logicalnz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"discard_logicalnz",param_4,param_5,param_6,param_7,puVar15
                   );
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4_x00229,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_x00230,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4_x00229,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_x00230,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x84:
-      pcVar5 = "emit";
-      FUN_000da9fc(param_1,param_1[0x87],"emit",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00140,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "emit";
+      FUN_000da9fc(disassembler,disassembler[0x87],"emit",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00140,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x85:
-      pcVar5 = "emitcut";
-      FUN_000da9fc(param_1,param_1[0x87],"emitcut",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da984(param_1,extraout_r4_x00142,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "emitcut";
+      FUN_000da9fc(disassembler,disassembler[0x87],"emitcut",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da984(disassembler,extraout_r4_x00142,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x86:
-      FUN_000da9fc(param_1,param_1[0x87],"load",param_4,param_5,param_6,param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0x1fff;
+      FUN_000da9fc(disassembler,disassembler[0x87],"load",param_4,param_5,param_6,param_7,puVar15);
+      uVar7 = instructionToken >> 0x10 & 0x1fff;
       FUN_001a32d0(&local_134,"_id(%d)",uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_134,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00143,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler,&local_134,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00143,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x87:
-      FUN_000da9fc(param_1,param_1[0x87],"resinfo",param_4,param_5,param_6,param_7,puVar15);
-      uVar7 = uVar18 >> 0x10 & 0xfff;
+      FUN_000da9fc(disassembler,disassembler[0x87],"resinfo",param_4,param_5,param_6,param_7,puVar15);
+      uVar7 = instructionToken >> 0x10 & 0xfff;
       FUN_001a32d0(&local_134,"_id(%d)",uVar7,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000da904(param_1,&local_134,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000da904(disassembler,&local_134,uVar7,param_4,param_5,param_6,param_7,puVar15);
       uVar6 = extraout_r4_x00238;
-      if ((uVar18 & 0x10000000) != 0) {
-        FUN_000da904(param_1,"_uint",uVar7,param_4,param_5,param_6,param_7,puVar15);
+      if ((instructionToken & 0x10000000) != 0) {
+        FUN_000da904(disassembler,"_uint",uVar7,param_4,param_5,param_6,param_7,puVar15);
         uVar6 = extraout_r4_x00239;
       }
-      ((int (*)())FUN_000ddb7c)(param_1,uVar6,uVar7,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      ((int (*)())FUN_000ddb7c)(disassembler,uVar6,uVar7,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x88:
-      pcVar5 = "sample";
-      FUN_000da9fc(param_1,param_1[0x87],"sample",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db8e0(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00144,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sample";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sample",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db8e0(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00144,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x89:
-      pcVar5 = "sample_b";
-      FUN_000da9fc(param_1,param_1[0x87],"sample_b",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db8e0(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00146,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sample_b";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sample_b",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db8e0(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00146,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x8a:
-      pcVar5 = "sample_g";
-      FUN_000da9fc(param_1,param_1[0x87],"sample_g",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db8e0(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_x00145,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sample_g";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sample_g",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db8e0(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_x00145,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x8b:
-      pcVar5 = "sample_l";
-      FUN_000da9fc(param_1,param_1[0x87],"sample_l",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db8e0(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00147,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sample_l";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sample_l",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db8e0(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00147,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x8c:
-      pcVar5 = "sample_c";
-      FUN_000da9fc(param_1,param_1[0x87],"sample_c",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db8e0(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00148,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sample_c";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sample_c",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db8e0(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00148,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x8d:
-      pcVar5 = "sample_c_lz";
-      FUN_000da9fc(param_1,param_1[0x87],"sample_c_lz",param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db8e0(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      FUN_000db81c(param_1,uVar18,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00149,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sample_c_lz";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sample_c_lz",param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db8e0(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      FUN_000db81c(disassembler,instructionToken,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00149,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x8e:
-      pcVar5 = "inot";
-      FUN_000da9fc(param_1,param_1[0x87],"inot",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_x00105,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "inot";
+      FUN_000da9fc(disassembler,disassembler[0x87],"inot",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00105,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x8f:
-      pcVar5 = "ior";
-      FUN_000da9fc(param_1,param_1[0x87],"ior",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00106,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ior";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ior",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00106,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x90:
-      pcVar5 = "ixor";
-      FUN_000da9fc(param_1,param_1[0x87],"ixor",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00107,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ixor";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ixor",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00107,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x91:
-      pcVar5 = "iadd";
-      FUN_000da9fc(param_1,param_1[0x87],"iadd",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_x00108,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "iadd";
+      FUN_000da9fc(disassembler,disassembler[0x87],"iadd",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_x00108,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x92:
-      pcVar5 = "imad";
-      FUN_000da9fc(param_1,param_1[0x87],"imad",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_69,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "imad";
+      FUN_000da9fc(disassembler,disassembler[0x87],"imad",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_69,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x93:
-      pcVar5 = "imax";
-      FUN_000da9fc(param_1,param_1[0x87],"imax",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_70,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "imax";
+      FUN_000da9fc(disassembler,disassembler[0x87],"imax",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_70,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x94:
-      pcVar5 = "imin";
-      FUN_000da9fc(param_1,param_1[0x87],"imin",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_71,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "imin";
+      FUN_000da9fc(disassembler,disassembler[0x87],"imin",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_71,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x95:
-      pcVar5 = "imul";
-      FUN_000da9fc(param_1,param_1[0x87],"imul",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_72,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "imul";
+      FUN_000da9fc(disassembler,disassembler[0x87],"imul",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_72,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x96:
-      pcVar5 = "imul_high";
-      FUN_000da9fc(param_1,param_1[0x87],"imul_high",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_73,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "imul_high";
+      FUN_000da9fc(disassembler,disassembler[0x87],"imul_high",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_73,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x97:
-      pcVar5 = "ieq";
-      FUN_000da9fc(param_1,param_1[0x87],"ieq",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_74,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ieq";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ieq",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_74,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x98:
-      pcVar5 = "ige";
-      FUN_000da9fc(param_1,param_1[0x87],"ige",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_75,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ige";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ige",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_75,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x99:
-      pcVar5 = "ilt";
-      FUN_000da9fc(param_1,param_1[0x87],"ilt",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_76,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ilt";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ilt",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_76,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x9a:
-      pcVar5 = "inegate";
-      FUN_000da9fc(param_1,param_1[0x87],"inegate",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_77,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "inegate";
+      FUN_000da9fc(disassembler,disassembler[0x87],"inegate",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_77,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x9b:
-      pcVar5 = "ine";
-      FUN_000da9fc(param_1,param_1[0x87],"ine",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_78,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ine";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ine",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_78,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x9c:
-      pcVar5 = "ishl";
-      FUN_000da9fc(param_1,param_1[0x87],"ishl",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_79,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ishl";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ishl",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_79,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x9d:
-      pcVar5 = "ishr";
-      FUN_000da9fc(param_1,param_1[0x87],"ishr",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_80,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ishr";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ishr",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_80,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x9e:
-      pcVar5 = "ushr";
-      FUN_000da9fc(param_1,param_1[0x87],"ushr",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_81,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ushr";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ushr",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_81,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0x9f:
-      pcVar5 = "udiv";
-      FUN_000da9fc(param_1,param_1[0x87],"udiv",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_82,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "udiv";
+      FUN_000da9fc(disassembler,disassembler[0x87],"udiv",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_82,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa0:
-      pcVar5 = "umod";
-      FUN_000da9fc(param_1,param_1[0x87],"umod",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_83,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "umod";
+      FUN_000da9fc(disassembler,disassembler[0x87],"umod",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_83,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa1:
-      pcVar5 = "umad";
-      FUN_000da9fc(param_1,param_1[0x87],"umad",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_84,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "umad";
+      FUN_000da9fc(disassembler,disassembler[0x87],"umad",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_84,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa2:
-      pcVar5 = "umax";
-      FUN_000da9fc(param_1,param_1[0x87],"umax",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_85,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "umax";
+      FUN_000da9fc(disassembler,disassembler[0x87],"umax",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_85,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa3:
-      pcVar5 = "umin";
-      FUN_000da9fc(param_1,param_1[0x87],"umin",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_86,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "umin";
+      FUN_000da9fc(disassembler,disassembler[0x87],"umin",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_86,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa4:
-      pcVar5 = "ult";
-      FUN_000da9fc(param_1,param_1[0x87],"ult",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_87,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ult";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ult",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_87,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa5:
-      pcVar5 = "uge";
-      FUN_000da9fc(param_1,param_1[0x87],"uge",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_88,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "uge";
+      FUN_000da9fc(disassembler,disassembler[0x87],"uge",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_88,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa6:
-      pcVar5 = "umul";
-      FUN_000da9fc(param_1,param_1[0x87],"umul",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_89,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "umul";
+      FUN_000da9fc(disassembler,disassembler[0x87],"umul",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_89,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa7:
-      pcVar5 = "umul_high";
-      FUN_000da9fc(param_1,param_1[0x87],"umul_high",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_90,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "umul_high";
+      FUN_000da9fc(disassembler,disassembler[0x87],"umul_high",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_90,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa8:
-      pcVar5 = "ftoi";
-      FUN_000da9fc(param_1,param_1[0x87],"ftoi",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_91,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ftoi";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ftoi",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_91,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xa9:
-      pcVar5 = "ftou";
-      FUN_000da9fc(param_1,param_1[0x87],"ftou",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_92,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ftou";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ftou",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_92,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xaa:
-      pcVar5 = "itof";
-      FUN_000da9fc(param_1,param_1[0x87],"itof",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_93,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "itof";
+      FUN_000da9fc(disassembler,disassembler[0x87],"itof",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_93,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xab:
-      pcVar5 = "utof";
-      FUN_000da9fc(param_1,param_1[0x87],"utof",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_94,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "utof";
+      FUN_000da9fc(disassembler,disassembler[0x87],"utof",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_94,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xac:
-      pcVar5 = "and";
-      FUN_000da9fc(param_1,param_1[0x87],"and",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_03,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "and";
+      FUN_000da9fc(disassembler,disassembler[0x87],"and",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_03,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xad:
-      pcVar5 = "cmov_logical";
-      FUN_000da9fc(param_1,param_1[0x87],"cmov_logical",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dda98)(param_1,extraout_r4_08,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "cmov_logical";
+      FUN_000da9fc(disassembler,disassembler[0x87],"cmov_logical",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dda98)(disassembler,extraout_r4_08,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xae:
-      pcVar5 = "eq";
-      FUN_000da9fc(param_1,param_1[0x87],"eq",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_12,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "eq";
+      FUN_000da9fc(disassembler,disassembler[0x87],"eq",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_12,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xaf:
-      pcVar5 = "exp_vec";
-      FUN_000da9fc(param_1,param_1[0x87],"exp_vec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_14,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "exp_vec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"exp_vec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_14,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb0:
-      pcVar5 = "ge";
-      FUN_000da9fc(param_1,param_1[0x87],"ge",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_20,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ge";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ge",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_20,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb1:
-      pcVar5 = "log_vec";
-      FUN_000da9fc(param_1,param_1[0x87],"log_vec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_23,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "log_vec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"log_vec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_23,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb2:
-      pcVar5 = "lt";
-      FUN_000da9fc(param_1,param_1[0x87],"lt",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_24,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "lt";
+      FUN_000da9fc(disassembler,disassembler[0x87],"lt",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_24,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb3:
-      pcVar5 = "ne";
-      FUN_000da9fc(param_1,param_1[0x87],"ne",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_27,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "ne";
+      FUN_000da9fc(disassembler,disassembler[0x87],"ne",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_27,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb4:
-      pcVar5 = "round_nearest";
-      FUN_000da9fc(param_1,param_1[0x87],"round_nearest",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_30,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "round_nearest";
+      FUN_000da9fc(disassembler,disassembler[0x87],"round_nearest",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_30,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb5:
-      pcVar5 = "round_neginf";
-      FUN_000da9fc(param_1,param_1[0x87],"round_neginf",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_31,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "round_neginf";
+      FUN_000da9fc(disassembler,disassembler[0x87],"round_neginf",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_31,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb6:
-      pcVar5 = "round_plusinf";
-      FUN_000da9fc(param_1,param_1[0x87],"round_plusinf",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_32,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "round_plusinf";
+      FUN_000da9fc(disassembler,disassembler[0x87],"round_plusinf",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_32,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb7:
-      pcVar5 = "round_zero";
-      FUN_000da9fc(param_1,param_1[0x87],"round_zero",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_33,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "round_zero";
+      FUN_000da9fc(disassembler,disassembler[0x87],"round_zero",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_33,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb8:
-      pcVar5 = "rsq_vec";
-      FUN_000da9fc(param_1,param_1[0x87],"rsq_vec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_34,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "rsq_vec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"rsq_vec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_34,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xb9:
-      pcVar5 = "sin_vec";
-      FUN_000da9fc(param_1,param_1[0x87],"sin_vec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_35,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sin_vec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sin_vec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_35,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xba:
-      pcVar5 = "cos_vec";
-      FUN_000da9fc(param_1,param_1[0x87],"cos_vec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_36,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "cos_vec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"cos_vec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_36,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xbb:
-      pcVar5 = "sqrt_vec";
-      FUN_000da9fc(param_1,param_1[0x87],"sqrt_vec",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb7c)(param_1,extraout_r4_37,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "sqrt_vec";
+      FUN_000da9fc(disassembler,disassembler[0x87],"sqrt_vec",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_37,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xbc:
-      pcVar5 = "dp2";
-      FUN_000da9fc(param_1,param_1[0x87],"dp2",param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000ddb14)(param_1,extraout_r4_59,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      mnemonic = "dp2";
+      FUN_000da9fc(disassembler,disassembler[0x87],"dp2",param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000ddb14)(disassembler,extraout_r4_59,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
       break;
     case 0xbe:
-      pcVar5 = "scatter";
-      FUN_000da9fc(param_1,param_1[0x87],"scatter",param_4,param_5,param_6,param_7,puVar15);
-      if ((uVar18 & 0x3fff0000) != 0) {
-        FUN_000da904(param_1,"_quad",pcVar5,param_4,param_5,param_6,param_7,puVar15);
+      mnemonic = "scatter";
+      FUN_000da9fc(disassembler,disassembler[0x87],"scatter",param_4,param_5,param_6,param_7,puVar15);
+      if ((instructionToken & 0x3fff0000) != 0) {
+        FUN_000da904(disassembler,"_quad",mnemonic,param_4,param_5,param_6,param_7,puVar15);
       }
-      FUN_000da904(param_1," ",pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      ((int (*)())FUN_000dd1f8)(param_1,extraout_r4,pcVar5,param_4,param_5,param_6,param_7);
-      FUN_000da984(param_1,extraout_r4_00,pcVar5,param_4,param_5,param_6,param_7,puVar15);
-      local_28 = 1;
+      FUN_000da904(disassembler," ",mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      ((int (*)())FUN_000dd1f8)(disassembler,extraout_r4,mnemonic,param_4,param_5,param_6,param_7);
+      FUN_000da984(disassembler,extraout_r4_00,mnemonic,param_4,param_5,param_6,param_7,puVar15);
+      result = 1;
     }
   }
   else {
 switchD_000ddc1c_caseD_0:
-    *param_1 = *param_1 + 1;
-    FUN_000da904(param_1,"!!!unknownOpcode!!!",param_3,param_4,param_5,param_6,param_7,puVar15);
-    local_28 = 1;
+    *disassembler = *disassembler + 1;
+    FUN_000da904(disassembler,"!!!unknownOpcode!!!",param_3,param_4,param_5,param_6,param_7,puVar15);
+    result = 1;
   }
-  return local_28;
+  return result;
 }
 
 /* FUN_000e0640 @ 0xe0640 (84 bytes) */

@@ -78,8 +78,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         i = brace + 1
         while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1
         return brace + 1, i
+    N = [norm(l) for l in lines]               # renames are taken back, so N only changes when a declaration line is inserted
     for (f, n, fn, old, new, tier, frm, to) in uses:
-        N = [norm(l) for l in lines]
         m = re.match(r'(.*)@(\d+)$', frm); pat, k = (m.group(1), int(m.group(2))) if m else (frm, 1)
         hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
         if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
@@ -107,13 +107,13 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             at = di + 1
             if os.environ.get('USE_DECL', 'end') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
                 at = max(i for i in range(d0, d1) if re.match(DECL, lines[i])) + 1
-            lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); e += 1
+            lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); N.insert(at, norm(lines[at])); e += 1
     # drop old declarations nothing uses any more
     for old in {r[3] for r in uses}:
         d0, d1 = declblock()
         di = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]%s;$' % re.escape(old), lines[i])), None)
         if di is not None and not any(re.search(wb(old), strip_strings(lines[i])) for i in range(brace + 1, e) if i != di):
-            del lines[di]; e -= 1
+            del lines[di]; del N[di]; e -= 1
     return napp, npend, nerr
 
 
@@ -145,7 +145,9 @@ def main():
                 pending += 1; changed = True
             lines[s:e] = body.split('\n')
             if uses:
-                a2, p2, e2 = apply_uses(lines, s, e, name, uses, rws, decl)
+                sub = lines[s:e]
+                a2, p2, e2 = apply_uses(sub, 0, len(sub), name, uses, rws, decl)
+                lines[s:e] = sub
                 applied += a2; pending += p2; errors += e2; changed = changed or p2 > 0
         if changed and not check:
             open(pf, 'w').write('\n'.join(lines))

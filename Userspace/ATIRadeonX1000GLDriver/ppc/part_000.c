@@ -1080,7 +1080,7 @@ int FUN_000027d0(param_1, param_2)
 }
 
 /* FUN_00002ae0 @ 0x2ae0 (88 bytes) */
-void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
+void FUN_00002ae0(int glContext,undefined4 op,double value)
 {
   float fVar1;
   float fVar2;
@@ -1103,7 +1103,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
   uint uVar18;
   int iVar19;
   uint uVar20;
-  void *pvVar22;
+  void *readbackPixels;
   int iVar23;
   undefined1 *puVar24;
   undefined2 *puVar25;
@@ -1148,17 +1148,17 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
   short sStack_22a;
   short sStack_da;
   
-  iVar28 = *(int *)(param_1 + 0x148);
+  iVar28 = *(int *)(glContext + 0x148);
   if (iVar28 == 0) {
     return;
   }
-  switch(param_2) {
+  switch(op) {
   case 0x100:
-    if ((*(uint *)(param_1 + 0x154) & 3) == 0) {
-      iVar28 = *(int *)(param_1 + 0x10);
+    if ((*(uint *)(glContext + 0x154) & 3) == 0) {
+      iVar28 = *(int *)(glContext + 0x10);
       if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(param_1 + 0x15c);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar19 = *(int *)(glContext + 0x15c);
+        iVar26 = *(int *)(glContext + 0x160);
         iVar23 = 0;
         uVar29 = 0;
         uVar20 = iVar19 + 7U & 0xfffffff8;
@@ -1166,7 +1166,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       }
       else {
         iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar26 = *(int *)(glContext + 0x160);
         uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
         uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
         iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
@@ -1176,7 +1176,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         if ((int)uVar29 < 0) {
           uVar29 = 0;
         }
-        iVar19 = *(int *)(param_1 + 0x15c);
+        iVar19 = *(int *)(glContext + 0x15c);
         uVar31 = iVar19 + 7U & 0xfffffff8;
         if ((int)uVar31 < (int)uVar20) {
           uVar20 = uVar31;
@@ -1194,23 +1194,23 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       if (iVar28 == 0) {
         return;
       }
-      pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
-      FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8367,pvVar22,2,0);
+      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
+      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+                   *(undefined4 *)(glContext + 0x160),0x80e1,0x8367,readbackPixels,2,0);
       uVar31 = uVar29 + iVar28;
-      if (fparam_1 < (double)FLOAT_001aa0d4) {
-        *(undefined1 *)(param_1 + 0x140) = 1;
+      if (value < (double)FLOAT_001aa0d4) {
+        *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(param_1 + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(param_1 + 0x160) - uVar29) + -1);
-      if (*(char *)(param_1 + 0x141) == '\x01') {
-        sStack_252 = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      if (*(char *)(glContext + 0x141) == '\x01') {
+        sStack_252 = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_252;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar43 = (uint *)((int)pvVar22 + iVar23 * 4);
-            pcVar37 = (char *)(iVar23 * 4 + *(int *)(param_1 + 0x148));
+            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+            pcVar37 = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
             pcVar30 = pcVar37 + uVar20 * 4;
             for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
               uVar13 = *puVar43;
@@ -1230,13 +1230,13 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         }
       }
       else {
-        sStack_24a = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+        sStack_24a = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_24a;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar43 = (uint *)((int)pvVar22 + iVar23 * 4);
-            psVar38 = (short *)(iVar23 * 8 + *(int *)(param_1 + 0x148));
+            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+            psVar38 = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             psVar39 = psVar38 + uVar20 * 4;
             for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
               uVar13 = *puVar43;
@@ -1257,10 +1257,10 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       }
     }
     else {
-      iVar28 = *(int *)(param_1 + 0x10);
+      iVar28 = *(int *)(glContext + 0x10);
       if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(param_1 + 0x15c);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar19 = *(int *)(glContext + 0x15c);
+        iVar26 = *(int *)(glContext + 0x160);
         iVar23 = 0;
         uVar29 = 0;
         uVar20 = iVar19 + 7U & 0xfffffff8;
@@ -1268,7 +1268,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       }
       else {
         iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar26 = *(int *)(glContext + 0x160);
         uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
         uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
         iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
@@ -1278,7 +1278,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         if ((int)uVar29 < 0) {
           uVar29 = 0;
         }
-        iVar19 = *(int *)(param_1 + 0x15c);
+        iVar19 = *(int *)(glContext + 0x15c);
         uVar31 = iVar19 + 7U & 0xfffffff8;
         if ((int)uVar31 < (int)uVar20) {
           uVar20 = uVar31;
@@ -1296,23 +1296,23 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       if (iVar28 == 0) {
         return;
       }
-      pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
-      FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8366,pvVar22,2,0);
+      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
+      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+                   *(undefined4 *)(glContext + 0x160),0x80e1,0x8366,readbackPixels,2,0);
       uVar31 = uVar29 + iVar28;
-      if (fparam_1 < (double)FLOAT_001aa0d4) {
-        *(undefined1 *)(param_1 + 0x140) = 1;
+      if (value < (double)FLOAT_001aa0d4) {
+        *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(param_1 + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(param_1 + 0x160) - uVar29) + -1);
-      if (*(char *)(param_1 + 0x141) == '\x01') {
-        sStack_262 = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      if (*(char *)(glContext + 0x141) == '\x01') {
+        sStack_262 = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_262;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
-            pcVar37 = (char *)(iVar23 * 4 + *(int *)(param_1 + 0x148));
+            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+            pcVar37 = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
             pcVar30 = pcVar37 + uVar20 * 4;
             for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
               uVar27 = *puVar42;
@@ -1333,13 +1333,13 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         }
       }
       else {
-        sStack_25a = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+        sStack_25a = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_25a;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
-            psVar38 = (short *)(iVar23 * 8 + *(int *)(param_1 + 0x148));
+            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+            psVar38 = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             psVar39 = psVar38 + uVar20 * 4;
             for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
               uVar27 = *puVar42;
@@ -1362,11 +1362,11 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
     }
     goto code_r0x00003264;
   case 0x101:
-    if ((*(uint *)(param_1 + 0x154) & 3) == 0) {
-      iVar28 = *(int *)(param_1 + 0x10);
+    if ((*(uint *)(glContext + 0x154) & 3) == 0) {
+      iVar28 = *(int *)(glContext + 0x10);
       if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(param_1 + 0x15c);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar19 = *(int *)(glContext + 0x15c);
+        iVar26 = *(int *)(glContext + 0x160);
         iVar23 = 0;
         uVar29 = 0;
         uVar20 = iVar19 + 7U & 0xfffffff8;
@@ -1374,7 +1374,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       }
       else {
         iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar26 = *(int *)(glContext + 0x160);
         uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
         uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
         iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
@@ -1384,7 +1384,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         if ((int)uVar29 < 0) {
           uVar29 = 0;
         }
-        iVar19 = *(int *)(param_1 + 0x15c);
+        iVar19 = *(int *)(glContext + 0x15c);
         uVar31 = iVar19 + 7U & 0xfffffff8;
         if ((int)uVar31 < (int)uVar20) {
           uVar20 = uVar31;
@@ -1402,22 +1402,22 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       if (iVar28 == 0) {
         return;
       }
-      pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
-      FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8367,pvVar22,2,0);
+      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
+      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+                   *(undefined4 *)(glContext + 0x160),0x80e1,0x8367,readbackPixels,2,0);
       uVar31 = uVar29 + iVar28;
-      if (fparam_1 < (double)FLOAT_001aa0d4) {
-        *(undefined1 *)(param_1 + 0x140) = 1;
+      if (value < (double)FLOAT_001aa0d4) {
+        *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(param_1 + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(param_1 + 0x160) - uVar29) + -1);
-      if (*(char *)(param_1 + 0x141) == '\x01') {
-        if (fparam_1 == (double)FLOAT_001aa0e8) {
+      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      if (*(char *)(glContext + 0x141) == '\x01') {
+        if (value == (double)FLOAT_001aa0e8) {
           if (uVar29 < uVar31) {
             iVar28 = 0;
             do {
-              puVar43 = (uint *)((int)pvVar22 + iVar23 * 4);
-              pbVar35 = (byte *)(iVar23 * 4 + *(int *)(param_1 + 0x148));
+              puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+              pbVar35 = (byte *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               pbVar32 = pbVar35 + uVar20 * 4;
               for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
                 uVar13 = *puVar43;
@@ -1433,13 +1433,13 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
           }
         }
         else {
-          sStack_232 = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+          sStack_232 = (short)(int)(value * (double)FLOAT_001aa0d8);
           iVar28 = (int)sStack_232;
           if (uVar29 < uVar31) {
             iVar19 = 0;
             do {
-              puVar43 = (uint *)((int)pvVar22 + iVar23 * 4);
-              puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(param_1 + 0x148));
+              puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+              puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               puVar47 = puVar24 + uVar20 * 4;
               for (; puVar24 < puVar47; puVar24 = puVar24 + 4) {
                 uVar13 = *puVar43;
@@ -1459,12 +1459,12 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
           }
         }
       }
-      else if (fparam_1 == (double)FLOAT_001aa0e8) {
+      else if (value == (double)FLOAT_001aa0e8) {
         if (uVar29 < uVar31) {
           iVar28 = 0;
           do {
-            puVar43 = (uint *)((int)pvVar22 + iVar23 * 4);
-            puVar42 = (ushort *)(iVar23 * 8 + *(int *)(param_1 + 0x148));
+            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+            puVar42 = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar33 = puVar42 + uVar20 * 4;
             for (; puVar42 < puVar33; puVar42 = puVar42 + 4) {
               uVar13 = *puVar43;
@@ -1484,13 +1484,13 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         }
       }
       else {
-        sStack_22a = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+        sStack_22a = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_22a;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar43 = (uint *)((int)pvVar22 + iVar23 * 4);
-            puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(param_1 + 0x148));
+            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+            puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar49 = puVar25 + uVar20 * 4;
             for (; puVar25 < puVar49; puVar25 = puVar25 + 4) {
               uVar13 = *puVar43;
@@ -1511,10 +1511,10 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       }
     }
     else {
-      iVar28 = *(int *)(param_1 + 0x10);
+      iVar28 = *(int *)(glContext + 0x10);
       if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(param_1 + 0x15c);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar19 = *(int *)(glContext + 0x15c);
+        iVar26 = *(int *)(glContext + 0x160);
         iVar23 = 0;
         uVar29 = 0;
         uVar20 = iVar19 + 7U & 0xfffffff8;
@@ -1522,7 +1522,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       }
       else {
         iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(param_1 + 0x160);
+        iVar26 = *(int *)(glContext + 0x160);
         uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
         uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
         iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
@@ -1532,7 +1532,7 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         if ((int)uVar29 < 0) {
           uVar29 = 0;
         }
-        iVar19 = *(int *)(param_1 + 0x15c);
+        iVar19 = *(int *)(glContext + 0x15c);
         uVar31 = iVar19 + 7U & 0xfffffff8;
         if ((int)uVar31 < (int)uVar20) {
           uVar20 = uVar31;
@@ -1550,22 +1550,22 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
       if (iVar28 == 0) {
         return;
       }
-      pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
-      FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8366,pvVar22,2,0);
+      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
+      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+                   *(undefined4 *)(glContext + 0x160),0x80e1,0x8366,readbackPixels,2,0);
       uVar31 = uVar29 + iVar28;
-      if (fparam_1 < (double)FLOAT_001aa0d4) {
-        *(undefined1 *)(param_1 + 0x140) = 1;
+      if (value < (double)FLOAT_001aa0d4) {
+        *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(param_1 + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(param_1 + 0x160) - uVar29) + -1);
-      if (*(char *)(param_1 + 0x141) == '\x01') {
-        if (fparam_1 == (double)FLOAT_001aa0e8) {
+      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      if (*(char *)(glContext + 0x141) == '\x01') {
+        if (value == (double)FLOAT_001aa0e8) {
           if (uVar29 < uVar31) {
             iVar28 = 0;
             do {
-              puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
-              pbVar35 = (byte *)(iVar23 * 4 + *(int *)(param_1 + 0x148));
+              puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+              pbVar35 = (byte *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               pbVar32 = pbVar35 + uVar20 * 4;
               for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
                 uVar27 = *puVar42;
@@ -1583,13 +1583,13 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
           }
         }
         else {
-          sStack_242 = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+          sStack_242 = (short)(int)(value * (double)FLOAT_001aa0d8);
           iVar28 = (int)sStack_242;
           if (uVar29 < uVar31) {
             iVar19 = 0;
             do {
-              puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
-              puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(param_1 + 0x148));
+              puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+              puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               puVar47 = puVar24 + uVar20 * 4;
               for (; puVar24 < puVar47; puVar24 = puVar24 + 4) {
                 uVar27 = *puVar42;
@@ -1609,12 +1609,12 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
           }
         }
       }
-      else if (fparam_1 == (double)FLOAT_001aa0e8) {
+      else if (value == (double)FLOAT_001aa0e8) {
         if (uVar29 < uVar31) {
           iVar28 = 0;
           do {
-            puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
-            puVar33 = (ushort *)(iVar23 * 8 + *(int *)(param_1 + 0x148));
+            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+            puVar33 = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar48 = puVar33 + uVar20 * 4;
             for (; puVar33 < puVar48; puVar33 = puVar33 + 4) {
               uVar27 = *puVar42;
@@ -1630,13 +1630,13 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
         }
       }
       else {
-        sStack_23a = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+        sStack_23a = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_23a;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
-            puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(param_1 + 0x148));
+            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+            puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar49 = puVar25 + uVar20 * 4;
             for (; puVar25 < puVar49; puVar25 = puVar25 + 4) {
               uVar27 = *puVar42;
@@ -1659,15 +1659,15 @@ void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
 code_r0x00003264:
                     
                     
-    (*(code *)PTR_FUN_001e8754)(pvVar22);
+    (*(code *)PTR_FUN_001e8754)(readbackPixels);
     return;
   case 0x102:
-    if ((*(uint *)(param_1 + 0x154) & 3) == 0) {
-      iVar28 = *(int *)(param_1 + 0x10);
+    if ((*(uint *)(glContext + 0x154) & 3) == 0) {
+      iVar28 = *(int *)(glContext + 0x10);
       if (*(int *)(((unsigned char *)0x00002e40U) + iVar28) != 0) {
         if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-          iVar19 = *(int *)(param_1 + 0x15c);
-          iVar26 = *(int *)(param_1 + 0x160);
+          iVar19 = *(int *)(glContext + 0x15c);
+          iVar26 = *(int *)(glContext + 0x160);
           iVar23 = 0;
           uVar29 = 0;
           uVar20 = iVar19 + 7U & 0xfffffff8;
@@ -1675,7 +1675,7 @@ code_r0x00003264:
         }
         else {
           iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-          iVar26 = *(int *)(param_1 + 0x160);
+          iVar26 = *(int *)(glContext + 0x160);
           uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
           uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
           iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
@@ -1685,7 +1685,7 @@ code_r0x00003264:
           if ((int)uVar29 < 0) {
             uVar29 = 0;
           }
-          iVar19 = *(int *)(param_1 + 0x15c);
+          iVar19 = *(int *)(glContext + 0x15c);
           uVar31 = iVar19 + 7U & 0xfffffff8;
           if ((int)uVar31 < (int)uVar20) {
             uVar20 = uVar31;
@@ -1698,21 +1698,21 @@ code_r0x00003264:
           iVar28 = iVar34 - uVar29;
         }
         if ((uVar20 != 0) && (iVar28 != 0)) {
-          pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
-          iVar26 = *(int *)(param_1 + 0x160);
+          readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
+          iVar26 = *(int *)(glContext + 0x160);
           uVar45 = uVar29 + iVar28;
-          iVar19 = *(int *)(param_1 + 0x15c);
+          iVar19 = *(int *)(glContext + 0x15c);
           uVar31 = iVar19 + 7U & 0xfffffff8;
-          cVar14 = *(char *)(param_1 + 0x140);
+          cVar14 = *(char *)(glContext + 0x140);
           iVar34 = iVar23 + uVar31 * ((iVar26 - uVar29) + -1);
-          if (*(char *)(param_1 + 0x141) == '\x01') {
-            if (fparam_1 == (double)FLOAT_001aa0e8) {
+          if (*(char *)(glContext + 0x141) == '\x01') {
+            if (value == (double)FLOAT_001aa0e8) {
               if (uVar29 < uVar45) {
-                iVar36 = *(int *)(param_1 + 0x148);
+                iVar36 = *(int *)(glContext + 0x148);
                 iVar40 = 0;
                 do {
                   pbVar35 = (byte *)(iVar34 * 4 + iVar36);
-                  puVar43 = (uint *)((int)pvVar22 + iVar34 * 4);
+                  puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
                   pbVar32 = pbVar35 + uVar20 * 4;
                   if (cVar14 == '\0') {
                     for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
@@ -1750,14 +1750,14 @@ code_r0x00003264:
               }
             }
             else {
-              fVar1 = (float)(fparam_1 * (double)FLOAT_001aa0dc);
+              fVar1 = (float)(value * (double)FLOAT_001aa0dc);
               if (uVar29 < uVar45) {
-                iVar40 = *(int *)(param_1 + 0x148);
+                iVar40 = *(int *)(glContext + 0x148);
                 iVar36 = 0;
                 do {
                   dVar51 = DOUBLE_001aa1e0;
                   pcVar30 = (char *)(iVar34 * 4 + iVar40);
-                  puVar43 = (uint *)((int)pvVar22 + iVar34 * 4);
+                  puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
                   pcVar37 = pcVar30 + uVar20 * 4;
                   if (pcVar30 < pcVar37) {
                     dVar52 = (double)FLOAT_001aa0d4;
@@ -1826,13 +1826,13 @@ code_r0x00003264:
               }
             }
           }
-          else if (fparam_1 == (double)FLOAT_001aa0e8) {
+          else if (value == (double)FLOAT_001aa0e8) {
             if (uVar29 < uVar45) {
-              iVar36 = *(int *)(param_1 + 0x148);
+              iVar36 = *(int *)(glContext + 0x148);
               iVar40 = 0;
               do {
                 psVar38 = (short *)(iVar34 * 8 + iVar36);
-                puVar43 = (uint *)((int)pvVar22 + iVar34 * 4);
+                puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
                 psVar39 = psVar38 + uVar20 * 4;
                 if (cVar14 == '\0') {
                   for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
@@ -1871,14 +1871,14 @@ code_r0x00003264:
             }
           }
           else {
-            fVar1 = (float)(fparam_1 * (double)FLOAT_001aa0e4);
+            fVar1 = (float)(value * (double)FLOAT_001aa0e4);
             if (uVar29 < uVar45) {
-              iVar40 = *(int *)(param_1 + 0x148);
+              iVar40 = *(int *)(glContext + 0x148);
               iVar36 = 0;
               do {
                 dVar51 = DOUBLE_001aa1e0;
                 psVar39 = (short *)(iVar34 * 8 + iVar40);
-                puVar43 = (uint *)((int)pvVar22 + iVar34 * 4);
+                puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
                 psVar38 = psVar39 + uVar20 * 4;
                 if (psVar39 < psVar38) {
                   dVar52 = (double)FLOAT_001aa0d4;
@@ -1946,8 +1946,8 @@ code_r0x00003264:
               } while (iVar36 != uVar45 - uVar29);
             }
           }
-          FUN_000198b0(param_1,iVar23,uVar29,uVar20,iVar28,0x8367,
-                       (void *)((int)pvVar22 +
+          FUN_000198b0(glContext,iVar23,uVar29,uVar20,iVar28,0x8367,
+                       (void *)((int)readbackPixels +
                                (((iVar26 - uVar29) - iVar28) * (iVar19 + 7U & 0xfffffff8) + iVar23)
                                * 4));
           goto code_r0x00003264;
@@ -1955,11 +1955,11 @@ code_r0x00003264:
       }
     }
     else {
-      iVar28 = *(int *)(param_1 + 0x10);
+      iVar28 = *(int *)(glContext + 0x10);
       if (*(int *)(((unsigned char *)0x00002e40U) + iVar28) != 0) {
         if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-          iVar19 = *(int *)(param_1 + 0x15c);
-          iVar26 = *(int *)(param_1 + 0x160);
+          iVar19 = *(int *)(glContext + 0x15c);
+          iVar26 = *(int *)(glContext + 0x160);
           uVar29 = 0;
           uVar31 = 0;
           uVar20 = iVar19 + 7U & 0xfffffff8;
@@ -1967,7 +1967,7 @@ code_r0x00003264:
         }
         else {
           uVar29 = *(uint *)(((unsigned char *)0x00003180) + iVar28);
-          iVar26 = *(int *)(param_1 + 0x160);
+          iVar26 = *(int *)(glContext + 0x160);
           uVar20 = uVar29 + *(int *)(((unsigned char *)0x00003188) + iVar28);
           uVar31 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
           iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar31;
@@ -1977,7 +1977,7 @@ code_r0x00003264:
           if ((int)uVar31 < 0) {
             uVar31 = 0;
           }
-          iVar19 = *(int *)(param_1 + 0x15c);
+          iVar19 = *(int *)(glContext + 0x15c);
           uVar45 = iVar19 + 7U & 0xfffffff8;
           if ((int)uVar45 < (int)uVar20) {
             uVar20 = uVar45;
@@ -1990,23 +1990,23 @@ code_r0x00003264:
           iVar28 = iVar23 - uVar31;
         }
         if ((uVar20 != 0) && (iVar28 != 0)) {
-          pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
+          readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
           fVar1 = FLOAT_001aa0e0;
-          iVar26 = *(int *)(param_1 + 0x160);
+          iVar26 = *(int *)(glContext + 0x160);
           uVar44 = uVar29 + uVar20;
-          iVar19 = *(int *)(param_1 + 0x15c);
-          cVar14 = *(char *)(param_1 + 0x140);
+          iVar19 = *(int *)(glContext + 0x15c);
+          cVar14 = *(char *)(glContext + 0x140);
           uVar45 = iVar19 + 7U & 0xfffffff8;
           uVar13 = uVar31 + iVar28;
           iVar23 = uVar29 + uVar45 * ((iVar26 - uVar31) + -1);
-          if (*(char *)(param_1 + 0x141) == '\x01') {
-            if (fparam_1 == (double)FLOAT_001aa0e8) {
+          if (*(char *)(glContext + 0x141) == '\x01') {
+            if (value == (double)FLOAT_001aa0e8) {
               if (uVar31 < uVar13) {
-                iVar34 = *(int *)(param_1 + 0x148);
+                iVar34 = *(int *)(glContext + 0x148);
                 iVar36 = 0;
                 do {
                   pbVar35 = (byte *)(iVar23 * 4 + iVar34);
-                  puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
+                  puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
                   pbVar32 = pbVar35 + uVar20 * 4;
                   if (cVar14 == '\0') {
                     for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
@@ -2044,16 +2044,16 @@ code_r0x00003264:
               }
             }
             else {
-              fVar2 = (float)(fparam_1 * (double)FLOAT_001aa0dc);
+              fVar2 = (float)(value * (double)FLOAT_001aa0dc);
               if (uVar31 < uVar13) {
-                iVar34 = *(int *)(param_1 + 0x148);
+                iVar34 = *(int *)(glContext + 0x148);
                 iVar36 = 0;
                 do {
                   dVar51 = DOUBLE_001aa1e0;
                   fVar12 = FLOAT_001aa0ec;
                   fVar11 = FLOAT_001aa0d4;
                   pcVar37 = (char *)(iVar23 * 4 + iVar34);
-                  puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
+                  puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
                   iVar40 = uVar44 - uVar29;
                   if (uVar29 < uVar44) {
                     do {
@@ -2098,13 +2098,13 @@ code_r0x00003264:
               }
             }
           }
-          else if (fparam_1 == (double)FLOAT_001aa0e8) {
+          else if (value == (double)FLOAT_001aa0e8) {
             if (uVar31 < uVar13) {
-              iVar34 = *(int *)(param_1 + 0x148);
+              iVar34 = *(int *)(glContext + 0x148);
               iVar36 = 0;
               do {
                 puVar42 = (ushort *)(iVar23 * 8 + iVar34);
-                puVar33 = (ushort *)((int)pvVar22 + iVar23 * 2);
+                puVar33 = (ushort *)((int)readbackPixels + iVar23 * 2);
                 puVar48 = puVar42 + uVar20 * 4;
                 if (cVar14 == '\0') {
                   for (; puVar42 < puVar48; puVar42 = puVar42 + 4) {
@@ -2143,16 +2143,16 @@ code_r0x00003264:
             }
           }
           else {
-            fVar2 = (float)(fparam_1 * (double)FLOAT_001aa0e4);
+            fVar2 = (float)(value * (double)FLOAT_001aa0e4);
             if (uVar31 < uVar13) {
-              iVar34 = *(int *)(param_1 + 0x148);
+              iVar34 = *(int *)(glContext + 0x148);
               iVar36 = 0;
               do {
                 dVar51 = DOUBLE_001aa1e0;
                 fVar12 = FLOAT_001aa0ec;
                 fVar11 = FLOAT_001aa0d4;
                 psVar38 = (short *)(iVar23 * 8 + iVar34);
-                puVar42 = (ushort *)((int)pvVar22 + iVar23 * 2);
+                puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
                 iVar40 = uVar44 - uVar29;
                 if (uVar29 < uVar44) {
                   do {
@@ -2193,8 +2193,8 @@ code_r0x00003264:
               } while (uVar13 - uVar31 != iVar36);
             }
           }
-          FUN_000198b0(param_1,uVar29,uVar31,uVar20,iVar28,0x8366,
-                       (void *)((int)pvVar22 +
+          FUN_000198b0(glContext,uVar29,uVar31,uVar20,iVar28,0x8366,
+                       (void *)((int)readbackPixels +
                                (((iVar26 - uVar31) - iVar28) * (iVar19 + 7U & 0xfffffff8) + uVar29)
                                * 2));
           goto code_r0x00003264;
@@ -2203,10 +2203,10 @@ code_r0x00003264:
     }
     break;
   case 0x103:
-    iVar19 = *(int *)(param_1 + 0x10);
+    iVar19 = *(int *)(glContext + 0x10);
     if (((unsigned char *)0x00003190)[iVar19] == '\0') {
-      iVar23 = *(int *)(param_1 + 0x15c);
-      iVar19 = *(int *)(param_1 + 0x160);
+      iVar23 = *(int *)(glContext + 0x15c);
+      iVar19 = *(int *)(glContext + 0x160);
       iVar34 = 0;
       iVar36 = 0;
       uVar20 = iVar23 + 7U & 0xfffffff8;
@@ -2214,7 +2214,7 @@ code_r0x00003264:
     }
     else {
       iVar34 = *(int *)(((unsigned char *)0x00003180) + iVar19);
-      iVar26 = *(int *)(param_1 + 0x160);
+      iVar26 = *(int *)(glContext + 0x160);
       uVar20 = iVar34 + *(int *)(((unsigned char *)0x00003188) + iVar19);
       iVar36 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar19) + *(int *)(((unsigned char *)0x00003184) + iVar19));
       iVar40 = *(int *)(((unsigned char *)0x0000318c) + iVar19) + iVar36;
@@ -2224,7 +2224,7 @@ code_r0x00003264:
       if (iVar36 < 0) {
         iVar36 = 0;
       }
-      iVar23 = *(int *)(param_1 + 0x15c);
+      iVar23 = *(int *)(glContext + 0x15c);
       uVar29 = iVar23 + 7U & 0xfffffff8;
       if ((int)uVar29 < (int)uVar20) {
         uVar20 = uVar29;
@@ -2245,16 +2245,16 @@ code_r0x00003264:
     iVar40 = uVar20 * 4;
     iVar19 = iVar36 + iVar19;
     dVar51 = (double)FLOAT_001aa0d4;
-    if (fparam_1 < dVar51) {
-      *(undefined1 *)(param_1 + 0x140) = 1;
+    if (value < dVar51) {
+      *(undefined1 *)(glContext + 0x140) = 1;
     }
     uVar29 = iVar23 + 7U & 0xfffffff8;
     iVar34 = iVar34 + uVar29 * ((iVar26 - iVar36) + -1);
-    if (fparam_1 != dVar51) {
-      fVar1 = (float)((double)FLOAT_001aa0e8 / fparam_1);
+    if (value != dVar51) {
+      fVar1 = (float)((double)FLOAT_001aa0e8 / value);
       if ((((fVar1 == FLOAT_001aa0f8) || (fVar1 == FLOAT_001aa0fc)) || (fVar1 == FLOAT_001aa100)) ||
          ((fVar1 == FLOAT_001aa104 || (fVar1 == FLOAT_001aa108)))) {
-        iVar26 = (int)((double)FLOAT_001aa0e8 / fparam_1);
+        iVar26 = (int)((double)FLOAT_001aa0e8 / value);
         iVar23 = 2;
         if (iVar26 != 4) {
           if (iVar26 < 5) {
@@ -2268,7 +2268,7 @@ code_r0x00003264:
           iVar23 = 5;
         }
 code_r0x00004f90:
-        if (*(char *)(param_1 + 0x141) == '\x01') {
+        if (*(char *)(glContext + 0x141) == '\x01') {
           if (iVar19 <= iVar36) {
             return;
           }
@@ -2285,7 +2285,7 @@ code_r0x00004f90:
             iVar26 = iVar26 + 1;
             iVar34 = iVar34 - uVar29;
             if (iVar26 == iVar19 - iVar36) break;
-            iVar28 = *(int *)(param_1 + 0x148);
+            iVar28 = *(int *)(glContext + 0x148);
           }
           return;
         }
@@ -2305,15 +2305,15 @@ code_r0x00004f90:
           iVar26 = iVar26 + 1;
           iVar34 = iVar34 - uVar29;
           if (iVar26 == iVar19 - iVar36) break;
-          iVar28 = *(int *)(param_1 + 0x148);
+          iVar28 = *(int *)(glContext + 0x148);
         }
         return;
       }
     }
-    if ((((fparam_1 != (double)FLOAT_001aa0f8) && (fparam_1 != (double)FLOAT_001aa0fc)) &&
-        (fparam_1 != (double)FLOAT_001aa100)) &&
-       ((fparam_1 != (double)FLOAT_001aa104 && (fparam_1 != (double)FLOAT_001aa108)))) {
-      if (*(char *)(param_1 + 0x141) == '\x01') {
+    if ((((value != (double)FLOAT_001aa0f8) && (value != (double)FLOAT_001aa0fc)) &&
+        (value != (double)FLOAT_001aa100)) &&
+       ((value != (double)FLOAT_001aa104 && (value != (double)FLOAT_001aa108)))) {
+      if (*(char *)(glContext + 0x141) == '\x01') {
         if (iVar19 <= iVar36) {
           return;
         }
@@ -2323,19 +2323,19 @@ code_r0x00004f90:
           pcVar37 = (char *)(iVar34 * 4 + iVar28);
           pcVar30 = pcVar37 + iVar40;
           for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-            *pcVar37 = (char)(int)(fparam_1 *
+            *pcVar37 = (char)(int)(value *
                                   (double)(float)((double)CONCAT44(0x43300000,
                                                                    (int)*pcVar37 ^ 0x80000000) -
                                                  dVar51));
-            pcVar37[1] = (char)(int)(fparam_1 *
+            pcVar37[1] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
                                                                      (int)pcVar37[1] ^ 0x80000000) -
                                                    dVar51));
-            pcVar37[2] = (char)(int)(fparam_1 *
+            pcVar37[2] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
                                                                      (int)pcVar37[2] ^ 0x80000000) -
                                                    dVar51));
-            pcVar37[3] = (char)(int)(fparam_1 *
+            pcVar37[3] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
                                                                      (int)pcVar37[3] ^ 0x80000000) -
                                                    dVar51));
@@ -2343,7 +2343,7 @@ code_r0x00004f90:
           iVar26 = iVar26 + 1;
           iVar34 = iVar34 - uVar29;
           if (iVar26 == iVar19 - iVar36) break;
-          iVar28 = *(int *)(param_1 + 0x148);
+          iVar28 = *(int *)(glContext + 0x148);
         }
         return;
       }
@@ -2356,19 +2356,19 @@ code_r0x00004f90:
         psVar38 = (short *)(iVar34 * 8 + iVar28);
         psVar39 = psVar38 + uVar20 * 4;
         for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-          *psVar38 = (short)(int)(fparam_1 *
+          *psVar38 = (short)(int)(value *
                                  (double)(float)((double)CONCAT44(0x43300000,
                                                                   (int)*psVar38 ^ 0x80000000) -
                                                 dVar51));
-          psVar38[1] = (short)(int)(fparam_1 *
+          psVar38[1] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)psVar38[1] ^ 0x80000000) -
                                                   dVar51));
-          psVar38[2] = (short)(int)(fparam_1 *
+          psVar38[2] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)psVar38[2] ^ 0x80000000) -
                                                   dVar51));
-          psVar38[3] = (short)(int)(fparam_1 *
+          psVar38[3] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)psVar38[3] ^ 0x80000000) -
                                                   dVar51));
@@ -2376,11 +2376,11 @@ code_r0x00004f90:
         iVar26 = iVar26 + 1;
         iVar34 = iVar34 - uVar29;
         if (iVar26 == iVar19 - iVar36) break;
-        iVar28 = *(int *)(param_1 + 0x148);
+        iVar28 = *(int *)(glContext + 0x148);
       }
       return;
     }
-    iVar26 = (int)fparam_1;
+    iVar26 = (int)value;
     iVar23 = 2;
     if (iVar26 != 4) {
       if (iVar26 < 5) {
@@ -2395,7 +2395,7 @@ code_r0x0000510c:
         if ((iVar26 != 8) && (iVar23 = 4, iVar26 != 0x10)) goto code_r0x0000510c;
       }
     }
-    if (*(char *)(param_1 + 0x141) == '\x01') {
+    if (*(char *)(glContext + 0x141) == '\x01') {
       if (iVar36 < iVar19) {
         iVar26 = 0;
         while( true ) {
@@ -2410,7 +2410,7 @@ code_r0x0000510c:
           iVar26 = iVar26 + 1;
           iVar34 = iVar34 - uVar29;
           if (iVar26 == iVar19 - iVar36) break;
-          iVar28 = *(int *)(param_1 + 0x148);
+          iVar28 = *(int *)(glContext + 0x148);
         }
       }
     }
@@ -2428,15 +2428,15 @@ code_r0x0000510c:
         iVar26 = iVar26 + 1;
         iVar34 = iVar34 - uVar29;
         if (iVar26 == iVar19 - iVar36) break;
-        iVar28 = *(int *)(param_1 + 0x148);
+        iVar28 = *(int *)(glContext + 0x148);
       }
     }
     break;
   case 0x104:
-    iVar19 = *(int *)(param_1 + 0x10);
+    iVar19 = *(int *)(glContext + 0x10);
     if (((unsigned char *)0x00003190)[iVar19] == '\0') {
-      iVar23 = *(int *)(param_1 + 0x15c);
-      iVar19 = *(int *)(param_1 + 0x160);
+      iVar23 = *(int *)(glContext + 0x15c);
+      iVar19 = *(int *)(glContext + 0x160);
       iVar34 = 0;
       iVar36 = 0;
       uVar20 = iVar23 + 7U & 0xfffffff8;
@@ -2444,7 +2444,7 @@ code_r0x0000510c:
     }
     else {
       iVar34 = *(int *)(((unsigned char *)0x00003180) + iVar19);
-      iVar26 = *(int *)(param_1 + 0x160);
+      iVar26 = *(int *)(glContext + 0x160);
       uVar20 = iVar34 + *(int *)(((unsigned char *)0x00003188) + iVar19);
       iVar36 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar19) + *(int *)(((unsigned char *)0x00003184) + iVar19));
       iVar40 = *(int *)(((unsigned char *)0x0000318c) + iVar19) + iVar36;
@@ -2454,7 +2454,7 @@ code_r0x0000510c:
       if (iVar36 < 0) {
         iVar36 = 0;
       }
-      iVar23 = *(int *)(param_1 + 0x15c);
+      iVar23 = *(int *)(glContext + 0x15c);
       uVar29 = iVar23 + 7U & 0xfffffff8;
       if ((int)uVar29 < (int)uVar20) {
         uVar20 = uVar29;
@@ -2468,13 +2468,13 @@ code_r0x0000510c:
     }
     if ((0 < (int)uVar20) && (0 < iVar19)) {
       iVar19 = iVar36 + iVar19;
-      if (fparam_1 < (double)FLOAT_001aa0d4) {
-        *(undefined1 *)(param_1 + 0x140) = 1;
+      if (value < (double)FLOAT_001aa0d4) {
+        *(undefined1 *)(glContext + 0x140) = 1;
       }
       uVar29 = iVar23 + 7U & 0xfffffff8;
       iVar34 = iVar34 + uVar29 * ((iVar26 - iVar36) + -1);
-      if (*(char *)(param_1 + 0x141) == '\x01') {
-        cVar14 = (char)(int)(fparam_1 * (double)FLOAT_001aa0f4);
+      if (*(char *)(glContext + 0x141) == '\x01') {
+        cVar14 = (char)(int)(value * (double)FLOAT_001aa0f4);
         if (iVar36 < iVar19) {
           iVar26 = 0;
           while( true ) {
@@ -2489,12 +2489,12 @@ code_r0x0000510c:
             iVar26 = iVar26 + 1;
             iVar34 = iVar34 - uVar29;
             if (iVar26 == iVar19 - iVar36) break;
-            iVar28 = *(int *)(param_1 + 0x148);
+            iVar28 = *(int *)(glContext + 0x148);
           }
         }
       }
       else {
-        sStack_da = (short)(int)(fparam_1 * (double)FLOAT_001aa0d8);
+        sStack_da = (short)(int)(value * (double)FLOAT_001aa0d8);
         if (iVar36 < iVar19) {
           iVar26 = 0;
           while( true ) {
@@ -2509,7 +2509,7 @@ code_r0x0000510c:
             iVar26 = iVar26 + 1;
             iVar34 = iVar34 - uVar29;
             if (iVar26 == iVar19 - iVar36) break;
-            iVar28 = *(int *)(param_1 + 0x148);
+            iVar28 = *(int *)(glContext + 0x148);
           }
         }
       }

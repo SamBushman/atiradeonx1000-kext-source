@@ -1,0 +1,44 @@
+# local|use	FUNCTION	old	new	tier	evidence	from	to
+local	FUN_0000f620	param_1	program	INFERRED	program IR record: [0]=GL target (0x8804/0x8620/0x8b30/0x8b31), then (count,offset) pairs per declaration section; the function prints it as ARB assembly text		
+local	FUN_0000f620	local_88	outBuffer	CONFIRMED	malloc(0x800) text buffer, realloc-trimmed and returned at the end		
+local	FUN_0000f620	local_80	outCapacity	CONFIRMED	local_80[0]=0x800 buffer capacity, passed by address with &outBuffer/&outCursor to the grow helper FUN_0000c8a0		
+local	FUN_0000f620	local_84	outCursor	CONFIRMED	write pointer into outBuffer; advanced by the length of every appended piece		
+local	FUN_0000f620	local_58	outCapacityPtr	CONFIRMED	= local_80 (address of outCapacity), argument of the grow helper		
+local	FUN_0000f620	local_5c	outCursorPtr	CONFIRMED	= &local_84 (address of outCursor), argument of the grow helper		
+local	FUN_0000f620	pcVar11	srcCursor	CONFIRMED	read pointer of the inlined strcpy that appends a string literal		
+local	FUN_0000f620	cVar23	curChar	CONFIRMED	character being copied by the inlined strcpy		
+local	FUN_0000f620	cVar10	nextChar	INFERRED	look-ahead character of the first strcpy form (*++src)		
+local	FUN_0000f620	puVar1	isShaderObject	CONFIRMED	(target - 0x8b30 < 2): the target is a GLSL fragment/vertex shader object, not an ARB program		
+local	FUN_0000f620	bVar3	isAssemblyProgram	CONFIRMED	puVar1 == 0: ARB assembly program (shader objects skip the blank lines printed after each section)		
+use	FUN_0000f620	uVar30	programTarget	CONFIRMED	*param_1 compared with the GL targets 0x8804 (FRAGMENT_PROGRAM_ARB), 0x8620 (VERTEX_PROGRAM_ARB), 0x8b30/0x8b31 (shader objects)	uVar30 = \*param_1;	uVar30 = param_1\[0x15\];
+use	FUN_0000f620	uVar30	instructionOffset	INFERRED	param_1[0x15] = offset (in 8-byte units) of the instruction stream; indexed as param_1[uVar30*2 + ...]	uVar30 = param_1\[0x15\];	
+use	FUN_0000f620	uVar33	optionCount	INFERRED	OPTION section: count at param_1[0x12], entries at param_1[0x13]	uVar33 = param_1\[0x12\];	uVar33 = param_1\[6\];
+use	FUN_0000f620	uVar33	addressRegCount	INFERRED	ADDRESS section: count at param_1[6]; prints "ADDRESS adr0" then ", adrN"	uVar33 = param_1\[6\];	uVar33 = param_1\[4\];
+use	FUN_0000f620	uVar33	tempCount	INFERRED	TEMP section: count at param_1[4], entries at param_1[5]	uVar33 = param_1\[4\];	uVar33 = param_1\[8\];
+use	FUN_0000f620	uVar33	attribCount	INFERRED	ATTRIB section: count at param_1[8], entries at param_1[9]	uVar33 = param_1\[8\];	uVar33 = 0xffffffff;
+use	FUN_0000f620	uVar33	outputCount	INFERRED	OUTPUT section: count at param_1[0xc], entries at param_1[0xd]	uVar33 = param_1\[0xc\];	uVar33 = param_1\[0x14\];
+use	FUN_0000f620	uVar33	instructionCount	INFERRED	instruction stream: count at param_1[0x14]	uVar33 = param_1\[0x14\];	
+local	FUN_000ddbcc	param_1	disassembler	INFERRED	state record: param_1[2] is the read cursor into the 32-bit instruction token stream (advanced after each operand token), param_1[0x87] passed to the line-start helper FUN_000da9fc		
+local	FUN_000ddbcc	local_28	result	CONFIRMED	set to 1 in every handled case and returned		
+local	FUN_000ddbcc	pcVar5	mnemonic	INFERRED	assigned the opcode name literal ("abs","acos","add",...) in each case of the opcode switch (183 sites); also reused once as a text cursor in the case that prints a float vector		
+use	FUN_000ddbcc	puVar16	instructionPtr	CONFIRMED	param_1[2] at entry: address of the instruction token being disassembled; *puVar16 is the opcode token	puVar16 = \(uint \*\)param_1\[2\];	puVar16 = &local_198;
+local	FUN_000ddbcc	uVar18	instructionToken	INFERRED	*puVar16: first token of the instruction; low 16 bits select the opcode (switch below). One path later narrows it in place (uVar18 >> 0x16 & 1), so the name is exact for all other uses		
+use	FUN_000ddbcc	uVar7	opcode	CONFIRMED	uVar18 & 0xffff, the switch selector (cases up to 0xbe)	uVar7 = uVar18 & 0xffff;	uVar7 = \*puVar15;
+local	FUN_00002ae0	param_1	glContext	INFERRED	context record: +0x148 software accumulation buffer, +0x15c/+0x160 drawable width/height, +0x140/+0x141 flags		
+local	FUN_00002ae0	param_2	op	CONFIRMED	switch selector 0x100..0x104 = GL_ACCUM, GL_LOAD, GL_RETURN, GL_MULT, GL_ADD: glAccum(GLenum op, GLfloat value)		
+local	FUN_00002ae0	fparam_1	value	CONFIRMED	glAccum(op, value): scale factor applied to the accumulation (multiplied by the constants FLOAT_001aa0d8 etc.)		
+local	FUN_00002ae0	pvVar22	readbackPixels	INFERRED	malloc(width8*height*4 or *2) staging buffer filled from the colour buffer (format 0x80e1 GL_BGRA / 0x8367) in each case		
+local	FUN_000369f0	param_1	ctx	INFERRED	GL context: +0xc mutex locked at entry, +0x1f4/+0x1f8/+0x1fc command-buffer cursor/limit/start		
+local	FUN_000369f0	param_2	texture	INFERRED	texture object: +0x34 mip-chain record, +0x38/+0x39 format/flag bytes; also passed to the helpers FUN_00031220/FUN_00032100 with face/level		
+local	FUN_000369f0	param_3	face	INFERRED	selects a 0x168-byte per-face record (15 levels x 0x18) via param_3*0x168		
+local	FUN_000369f0	param_4	level	INFERRED	selects a 0x18-byte per-level record via param_4*0x18 and is masked to 16 bits into the command words		
+local	FUN_000369f0	param_8	width	INFERRED	row pitch = ((width << bytesPerPixelShift) + 0x23) & ~0x1f; limited to 0x1000		
+local	FUN_000369f0	param_9	height	INFERRED	row count: the upload loop advances in chunks of 0x10000/rowPitch rows until param_9 rows are done		
+local	FUN_000369f0	param_10	depth	INFERRED	compared with 1 on the single-slice fast path		
+local	FUN_000369f0	param_11	pixelFormat	INFERRED	with param_12 converted by FUN_0002f7c0 to the internal format code compared with texture+0x38		
+local	FUN_000369f0	param_12	pixelType	INFERRED	second argument of FUN_0002f7c0 (format, type) -> internal format code		
+local	FUN_000d183c	param_1	pixelShader	CONFIRMED	compiled pixel shader record dumped by this function ("Begin Loki NSF pixel shader dump"): stats fields (levels, RS/TEX/ALU instruction counts, pix size, highest const, nominal cycles, tex lookup counts) are printed from it		
+local	FUN_000d183c	param_2	dumpLabel	INFERRED	first argument of the "Begin ... dump: %s: %d" line (%s)		
+local	FUN_000d183c	param_3	dumpId	INFERRED	second argument of the "dump: %s: %d" line (%d)		
+local	_gldUpdateDispatch	param_1	ctx	INFERRED	GL context record (+0xc mutex, +0x18 drawable/state pointer, +0x150 current object); same role as ctx in the other gld entry points		
+local	_gldUpdateDispatch	param_3	dirtyBits	INFERRED	array of dirty-state words: set to 0xffffffff / OR-ed with masks when state is invalidated, tested before each update step		
