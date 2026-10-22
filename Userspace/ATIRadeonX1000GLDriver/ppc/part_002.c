@@ -423,7 +423,7 @@ int FUN_0000aaf0(ctx, texture)
       }
       retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 8));
       if (retired == 0) {
-        connection = *(undefined4 *)(ctx + 4);
+        connection = *(undefined4 *)(ctx + GLD_connect);
         resident = resident + 8;
 LAB_0000abac:
         _io_connect_method_scalarI_structureI(connection,9,resident,1,0,0);
@@ -436,7 +436,7 @@ LAB_0000abac:
       }
       retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 0xc));
       if (retired == 0) {
-        connection = *(undefined4 *)(ctx + 4);
+        connection = *(undefined4 *)(ctx + GLD_connect);
         resident = resident + 0xc;
         goto LAB_0000abac;
       }
@@ -946,7 +946,7 @@ int FUN_0000b620(ctx, address, length, unused4, unused5, unused6, unused7, unuse
   int span;
   uint cacheBlockSize;
   
-  cacheBlockSize = (uint)*(byte *)(ctx + 8);
+  cacheBlockSize = (uint)*(byte *)(ctx + GLD_cacheLineSize);
   offset = 0;
   span = (address & cacheBlockSize - 1) + (length - cacheBlockSize);
   if (0 < span) {
@@ -1030,12 +1030,12 @@ int FUN_0000b750(ctx)
   int previousArray;
   int *vertexArray;
   
-  previousArray = *(int *)(ctx + 0x1d4);
-  vertexArray = *(int **)(*(int *)(ctx + 0x18) + 0x194);
+  previousArray = *(int *)(ctx + GLD_currentVertexArray);
+  vertexArray = *(int **)(*(int *)(ctx + GLD_engineObjects) + 0x194);
   arrayState = *vertexArray;
   if ((*(uint *)(arrayState + 0x308) & *(uint *)(arrayState + 0x300)) == 0 &&
       (*(uint *)(arrayState + 0x30c) & *(uint *)(arrayState + 0x304)) == 0) {
-    if ((((unsigned char *)0x000042fc)[*(int *)(ctx + 0x10)] != '\0') ||
+    if ((((unsigned char *)0x000042fc)[*(int *)(ctx + GLD_engineState)] != '\0') ||
        (*(short *)(arrayState + 0x312) != -0x7a4c)) {
       if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
       arrayState = FUN_0001dc10(ctx,vertexArray);
@@ -1075,7 +1075,7 @@ int FUN_0000b880(ctx, vertexArray)
       }
       retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 8));
       if (retired == 0) {
-        connection = *(undefined4 *)(ctx + 4);
+        connection = *(undefined4 *)(ctx + GLD_connect);
         backing = backing + 8;
 LAB_0000b93c:
         _io_connect_method_scalarI_structureI(connection,9,backing,1,0,0);
@@ -1088,7 +1088,7 @@ LAB_0000b93c:
       }
       retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 0xc));
       if (retired == 0) {
-        connection = *(undefined4 *)(ctx + 4);
+        connection = *(undefined4 *)(ctx + GLD_connect);
         backing = backing + 0xc;
         goto LAB_0000b93c;
       }
@@ -1138,7 +1138,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
   int oldRefCount;
   char in_RESERVE;
   
-  _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+  _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   backing = vertexArray[0x8a];
   if (backing != 0) {
     retired = ((*(uint *)(vertexArray[1] + 0x88) ^ 1) & 1) == 0;
@@ -1161,12 +1161,12 @@ int _gldModifyVertexArray(ctx, vertexArray)
       }
     } while (!retired);
     if (oldRefCount == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,backing,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,backing,1,0,0);
     }
     vertexArray[0x8a] = 0;
   }
 LAB_0000bb18:
-  _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
+  _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
   return 0;
 }
 
@@ -1182,7 +1182,7 @@ int _gldReclaimVertexArray(ctx, vertexArray)
   char in_RESERVE;
   byte crBits;
   
-  if (*(int *)(ctx + 0x1d4) == vertexArray) {
+  if (*(int *)(ctx + GLD_currentVertexArray) == vertexArray) {
     *(undefined4 *)(ctx + 0x1d4) = 0;
     FUN_0001dff0(ctx);
   }
@@ -1202,7 +1202,7 @@ int _gldReclaimVertexArray(ctx, vertexArray)
       }
     } while (!(bool)(crBits >> 1 & 1));
     if (oldRefCount == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,backing,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,backing,1,0,0);
     }
     *(undefined4 *)(vertexArray + 0x228) = 0;
   }
@@ -8254,8 +8254,8 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
   fStack_17c = vertex[0xe];
   fStack_188 = vertex[0xf];
   fStack_184 = vertex[0xc];
-  iVar10 = *(int *)(ctx + 0x10);
-  ring = ctx + 0x240;
+  iVar10 = *(int *)(ctx + GLD_engineState);
+  ring = ctx + GLD_commandStream;
   fVar20 = vertex[2];
   if (((unsigned char *)0x00002e0a)[iVar10] != '\0') {
     dVar26 = (double)vertex[0x13];
@@ -8303,7 +8303,7 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
     }
     fVar8 = (float)dVar27;
     if (param_8 == 0) {
-      iVar21 = *(int *)(ctx + 0x10);
+      iVar21 = *(int *)(ctx + GLD_engineState);
       iVar10 = *(int *)(((unsigned char *)0x00002e6c) + iVar21);
       if (*(int *)(((unsigned char *)0x00002e6c) + iVar21) == 0) {
         iVar10 = iStack00000020;
@@ -8345,21 +8345,21 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
       iVar21 = 0x7ff;
       iVar10 = 0xffe0;
     }
-    pfVar12 = *(float **)(ctx + 0x1dc);
-    if (*(float **)(ctx + 0x1e0) <= pfVar12 + 2) {
+    pfVar12 = *(float **)(ctx + GLD_writeCursor);
+    if (*(float **)(ctx + GLD_ringLimit) <= pfVar12 + 2) {
       FUN_0001a0f0(ctx,0x1000000);
-      pfVar12 = *(float **)(ctx + 0x1dc);
+      pfVar12 = *(float **)(ctx + GLD_writeCursor);
       uVar11 = extraout_r4_01;
     }
     if (*(char *)(ring + 0x2802) == '\0') {
       pfVar12[1] = 2.524355e-29;
       *pfVar12 = 2.07392e-42;
       *(undefined1 *)(ring + 0x2802) = 1;
-      pfVar12 = *(float **)(ctx + 0x1dc);
+      pfVar12 = *(float **)(ctx + GLD_writeCursor);
     }
-    if (*(uint *)(ctx + 0x1e0) <= (uint)((int)pfVar12 + iVar10 + 0x10)) {
+    if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)pfVar12 + iVar10 + 0x10)) {
       FUN_0001a0f0(ctx,0x1000000);
-      pfVar12 = *(float **)(ctx + 0x1dc);
+      pfVar12 = *(float **)(ctx + GLD_writeCursor);
       uVar11 = extraout_r4_02;
     }
     pfVar25 = pfVar12 + 4;
@@ -8403,18 +8403,18 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
                   iVar21 = 0x7ff;
                   iVar13 = 0xffe0;
                 }
-                if (*(uint *)(ctx + 0x1e0) <= (uint)((int)pfVar25 + iVar13 + 0x10)) {
+                if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)pfVar25 + iVar13 + 0x10)) {
                   iStack_a0 = iVar10;
                   FUN_0001a0f0(ctx,0x1000000);
                   uVar11 = extraout_r4_03;
                   iVar10 = iStack_a0;
                 }
-                pfVar12 = *(float **)(ctx + 0x1dc);
+                pfVar12 = *(float **)(ctx + GLD_writeCursor);
                 if ((pfVar25 != pfVar12) &&
-                   (*(uint *)(ctx + 0x1e0) <= (uint)((int)pfVar12 + iVar13 + 0x10))) {
+                   (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)pfVar12 + iVar13 + 0x10))) {
                   iStack_a0 = iVar10;
                   FUN_0001a0f0(ctx,0x1000000);
-                  pfVar12 = *(float **)(ctx + 0x1dc);
+                  pfVar12 = *(float **)(ctx + GLD_writeCursor);
                   uVar11 = extraout_r4_04;
                   iVar10 = iStack_a0;
                 }
@@ -8533,13 +8533,13 @@ LAB_00016a6c:
       *(uint *)((int)pfVar12 + iVar10 + 0xc) = iVar13 * 0x10000 | 0x31;
     }
     *(float **)(ctx + 0x1dc) = pfVar25;
-    if (*(float **)(ctx + 0x1e0) <= pfVar25 + 2) {
+    if (*(float **)(ctx + GLD_ringLimit) <= pfVar25 + 2) {
       iStack_a0 = iVar10;
       FUN_0001a0f0(ctx,0x1000000);
       uVar11 = extraout_r4_05;
       iVar10 = iStack_a0;
     }
-    iVar21 = *(int *)(ctx + 0x1dc);
+    iVar21 = *(int *)(ctx + GLD_writeCursor);
     *(int *)(ctx + 0x1dc) = iVar21 + 8;
     *(undefined **)(iVar21 + iVar10) = ((unsigned char *)0x00001087U);
     uVar15 = *(undefined4 *)(ring + 0x1ccc);
@@ -8673,7 +8673,7 @@ int FUN_00017160(ctx, flagsInOut, pbuffer)
     *flagsInOut = levelBits & 0xf000000 | flags;
     *(undefined1 *)(ctx + 0x143) = 0;
   }
-  if (*(int *)(ctx + 0x150) == 0) {
+  if (*(int *)(ctx + GLD_boundFramebuffer) == 0) {
     if (pbuffer == 0) {
       **(uint **)(ctx + 0x14) = **(uint **)(ctx + 0x14) | 2;
       ((unsigned char *)0x00002b7c)[ctx] = 1;
@@ -8697,9 +8697,9 @@ int FUN_00017260(ctx)
   int attachPoint;
   int attachLeft;
   
-  framebuffer = *(int **)(ctx + 0x150);
+  framebuffer = *(int **)(ctx + GLD_boundFramebuffer);
   if (framebuffer == (int *)0x0) {
-    formatByte = FUN_0002f410(*(undefined4 *)(ctx + 0x154));
+    formatByte = FUN_0002f410(*(undefined4 *)(ctx + GLD_renderFlags));
     ((unsigned char *)0x00002b7f)[ctx] = formatByte;
   }
   else {
@@ -10165,7 +10165,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   uint local_64;
   
   *(undefined1 *)(ctx + 0x2a5e) = 1;
-  ctxState = *(int *)(ctx + 0x10);
+  ctxState = *(int *)(ctx + GLD_engineState);
   local_64 = param_9 & 0xff;
   if ((((unsigned char *)0x00002d84)[ctxState] == '\0') ||
      (((((*(int *)(((unsigned char *)0x00002d68) + ctxState) == 0x10000 &&
@@ -10197,7 +10197,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
     uVar19 = uVar19 | 0x800;
     *(uint *)(ctx + 0x26b0) = uVar19;
   }
-  if ((((unsigned char *)0x00002ddc)[ctxState] == '\0') || ((*(uint *)(ctx + 0x154) & 0xf) != 3)) {
+  if ((((unsigned char *)0x00002ddc)[ctxState] == '\0') || ((*(uint *)(ctx + GLD_renderFlags) & 0xf) != 3)) {
     uVar19 = uVar19 & 0xffffffdf;
     *(uint *)(ctx + 0x26b0) = uVar19;
   }
@@ -10205,7 +10205,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
     uVar19 = uVar19 | 0x20;
     *(uint *)(ctx + 0x26b0) = uVar19;
   }
-  if ((((*(uint *)(((unsigned char *)0x000031c0) + ctxState) & 1) == 0) || ((*(uint *)(ctx + 0x154) & 0x80) == 0))
+  if ((((*(uint *)(((unsigned char *)0x000031c0) + ctxState) & 1) == 0) || ((*(uint *)(ctx + GLD_renderFlags) & 0x80) == 0))
      || ((*(short *)(((unsigned char *)0x000031a0) + ctxState) == 0x207 &&
          (*(int *)(((unsigned char *)0x000031a4) + ctxState) == 0x1e001e00)))) {
     uVar19 = uVar19 & 0xfffeffff;
@@ -10215,7 +10215,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
     uVar19 = uVar19 | 0x10000;
     *(uint *)(ctx + 0x26b0) = uVar19;
   }
-  if ((((unsigned char *)0x00002dc8)[ctxState] == '\0') || ((*(uint *)(ctx + 0x154) & 0x40) == 0)) {
+  if ((((unsigned char *)0x00002dc8)[ctxState] == '\0') || ((*(uint *)(ctx + GLD_renderFlags) & 0x40) == 0)) {
     uVar19 = uVar19 & 0xffffffef;
     *(uint *)(ctx + 0x26b0) = uVar19;
   }
@@ -10234,14 +10234,14 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   iVar28 = format;
   uVar12 = pixelType;
   pfStack0000001c = rasterPos;
-  if (((((((*(int *)(ctx + 0x18c) == 0) || (iVar11 = FUN_000a4760(ctx), iVar11 == 0)) &&
-         ((*(int *)(ctx + 400) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 1)))) &&
-        ((*(int *)(ctx + 0x194) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 2)))) &&
-       ((*(int *)(ctx + 0x198) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 3)))) &&
-      (((*(int *)(ctx + 0x19c) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 4)) &&
-       ((*(int *)(ctx + 0x1a0) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 5)))))) &&
-     (((*(int *)(ctx + 0x1a4) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 6)) &&
-      ((*(int *)(ctx + 0x1a8) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 7)))))) {
+  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (iVar11 = FUN_000a4760(ctx), iVar11 == 0)) &&
+         ((*(int *)(ctx + GLD_unitObject1) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 1)))) &&
+        ((*(int *)(ctx + GLD_unitObject2) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 2)))) &&
+       ((*(int *)(ctx + GLD_unitObject3) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 3)))) &&
+      (((*(int *)(ctx + GLD_unitObject4) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 4)) &&
+       ((*(int *)(ctx + GLD_unitObject5) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 5)))))) &&
+     (((*(int *)(ctx + GLD_unitObject6) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 6)) &&
+      ((*(int *)(ctx + GLD_unitObject7) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 7)))))) {
     uVar20 = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
     *(uint *)(ctx + 0x26b0) = uVar20;
   }
@@ -10270,7 +10270,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   if (height == 0) {
     return;
   }
-  ctxState = *(int *)(ctx + 0x10);
+  ctxState = *(int *)(ctx + GLD_engineState);
   if (((unsigned char *)0x00003190)[ctxState] != '\0') {
     if (*(int *)(((unsigned char *)0x00003188) + ctxState) == 0) {
       return;
@@ -10278,13 +10278,13 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
     if (*(int *)(((unsigned char *)0x0000318c) + ctxState) == 0) {
       return;
     }
-    if (*(int *)(ctx + 0x15c) <= *(int *)(((unsigned char *)0x00003180) + ctxState)) {
+    if (*(int *)(ctx + GLD_renderWidth) <= *(int *)(((unsigned char *)0x00003180) + ctxState)) {
       return;
     }
     if (*(int *)(((unsigned char *)0x00003188) + ctxState) + *(int *)(((unsigned char *)0x00003180) + ctxState) < 1) {
       return;
     }
-    if (*(int *)(ctx + 0x160) <= *(int *)(((unsigned char *)0x00003184) + ctxState)) {
+    if (*(int *)(ctx + GLD_renderHeight) <= *(int *)(((unsigned char *)0x00003184) + ctxState)) {
       return;
     }
     if (*(int *)(((unsigned char *)0x0000318c) + ctxState) + *(int *)(((unsigned char *)0x00003184) + ctxState) < 1) {
@@ -10304,7 +10304,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   local_3ec = 0.0;
   puVar8 = (undefined *)0x0;
   if (param_8 == 0) {
-    ctxState = *(int *)(ctx + 0x10);
+    ctxState = *(int *)(ctx + GLD_engineState);
     puVar8 = ((unsigned char *)0x00002e6c) + ctxState;
     local_3fc = (uint)(((unsigned char *)0x00002e84)[ctxState] != '\0');
     if (((unsigned char *)0x00002e85)[ctxState] != '\0') {
@@ -10375,8 +10375,8 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
       local_128 = (longlong)(int)uVar29;
     }
   }
-  fVar7 = fVar3 * *(float *)(((unsigned char *)0x00002e4c) + *(int *)(ctx + 0x10));
-  fVar5 = *(float *)(ctx + 0x2a54) * *(float *)(((unsigned char *)0x00002e48) + *(int *)(ctx + 0x10));
+  fVar7 = fVar3 * *(float *)(((unsigned char *)0x00002e4c) + *(int *)(ctx + GLD_engineState));
+  fVar5 = *(float *)(ctx + 0x2a54) * *(float *)(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState));
   if (bVar2) {
     iVar28 = 4;
   }
@@ -10523,7 +10523,7 @@ LAB_000194f4:
       _glgProcessPixels(0,&local_420,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26);
     }
     else {
-      iVar15 = *(int *)(ctx + 0x10);
+      iVar15 = *(int *)(ctx + GLD_engineState);
       if (((((*(uint *)(((unsigned char *)0x000030b0) + iVar15) & 0x1ff) != 0) ||
            ((*(uint *)(((unsigned char *)0x000030b4) + iVar15) & 0xff0000) != 0)) && (bVar2)) && (format != 0x1902)
          ) {
@@ -10538,7 +10538,7 @@ LAB_000194f4:
           uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002fb4) + iVar15)) + 1;
           uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002fb0) + iVar15)) + 1;
         }
-        pcVar26 = *(char **)(ctx + 0x18);
+        pcVar26 = *(char **)(ctx + GLD_engineObjects);
         iVar23 = *(int *)((int)*(float *)((int)pcVar26 + 0x140) + 0x30);
         local_3e4 = (uint)*(ushort *)(iVar23 + 0x98);
         local_3e0 = (uint)*(ushort *)(iVar23 + 0x9a);

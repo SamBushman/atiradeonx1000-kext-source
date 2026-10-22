@@ -426,10 +426,10 @@ double FUN_00024fe0(int ctx,int param_2,float *param_3,double fparam_1)
   undefined4 local_60;
   float fStack_5c;
   
-  piVar26 = *(int **)(*(int *)(ctx + 0x18) + 0x19c);
+  piVar26 = *(int **)(*(int *)(ctx + GLD_engineObjects) + 0x19c);
   bVar1 = piVar26 == (int *)0x0;
   if (bVar1) {
-    piVar26 = *(int **)(*(int *)(ctx + 0x18) + 400);
+    piVar26 = *(int **)(*(int *)(ctx + GLD_engineObjects) + 400);
   }
   iVar14 = piVar26[0xd];
   if (((iVar14 == 0) && (iVar14 = piVar26[0xc], iVar14 == 0)) &&
@@ -465,15 +465,15 @@ LAB_00025b04:
       }
       if ((uVar15 & 0x2000000) != 0) {
         *param_3 = *(float *)(((unsigned char *)0x00002de0) + *(int *)(ctx + 0x10));
-        param_3[1] = *(float *)(((unsigned char *)0x00002de4) + *(int *)(ctx + 0x10));
-        param_3[2] = *(float *)(((unsigned char *)0x00002de8) + *(int *)(ctx + 0x10));
-        param_3[4] = -*(float *)(((unsigned char *)0x00002dfc) + *(int *)(ctx + 0x10));
+        param_3[1] = *(float *)(((unsigned char *)0x00002de4) + *(int *)(ctx + GLD_engineState));
+        param_3[2] = *(float *)(((unsigned char *)0x00002de8) + *(int *)(ctx + GLD_engineState));
+        param_3[4] = -*(float *)(((unsigned char *)0x00002dfc) + *(int *)(ctx + GLD_engineState));
         fVar6 = FLOAT_001aa140;
-        param_3[5] = *(float *)(((unsigned char *)0x00002df8) + *(int *)(ctx + 0x10)) *
+        param_3[5] = *(float *)(((unsigned char *)0x00002df8) + *(int *)(ctx + GLD_engineState)) *
                      *(float *)(((unsigned char *)0x00002dfc) + *(int *)(ctx + 0x10));
         fVar2 = FLOAT_001aa144;
-        param_3[6] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + 0x10)) * fVar6;
-        param_3[7] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + 0x10)) * fVar2;
+        param_3[6] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + GLD_engineState)) * fVar6;
+        param_3[7] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + GLD_engineState)) * fVar2;
       }
     }
     return fparam_1;
@@ -546,7 +546,7 @@ LAB_0002546c:
   }
   if (uVar20 == 0x20000) {
     iVar23 = (uint)(ushort)*puVar27 * 0x10;
-    iVar10 = iVar23 + *(int *)(((unsigned char *)0x00004310) + *(int *)(ctx + 0x10));
+    iVar10 = iVar23 + *(int *)(((unsigned char *)0x00004310) + *(int *)(ctx + GLD_engineState));
     *param_3 = *(float *)(iVar23 + *(int *)(((unsigned char *)0x00004310) + *(int *)(ctx + 0x10)));
     param_3[1] = *(float *)(iVar10 + 4);
     param_3[2] = *(float *)(iVar10 + 8);
@@ -576,8 +576,8 @@ LAB_0002546c:
       iVar23 = (uVar22 + 8) * 0x40;
     }
     uVar15 = uVar15 >> 0xe & 3;
-    iVar10 = *(int *)(ctx + 0x10) + 0x1860 + iVar23;
-    if ((1 < uVar15) && (iVar10 = iVar23 + *(int *)(ctx + 0x10) + 0x1e60, 3 < uVar15)) {
+    iVar10 = *(int *)(ctx + GLD_engineState) + 0x1860 + iVar23;
+    if ((1 < uVar15) && (iVar10 = iVar23 + *(int *)(ctx + GLD_engineState) + 0x1e60, 3 < uVar15)) {
       iVar10 = 0;
     }
     if (uVar15 < 3) {
@@ -622,43 +622,43 @@ LAB_000256f4:
     uVar20 = uVar15 & 0xff;
     switch(uVar15 >> 8 & 0xf) {
     case 0:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24c0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x24c0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 1:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24d0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x24d0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 2:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24e0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x24e0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 3:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24f0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x24f0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 4:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x2500 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x2500 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 5:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x2510 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x2510 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 6:
-      iVar23 = uVar20 * 0x80 + *(int *)(ctx + 0x10);
+      iVar23 = uVar20 * 0x80 + *(int *)(ctx + GLD_engineState);
       fVar2 = *(float *)(iVar23 + 0x24f4);
       fVar3 = *(float *)(iVar23 + 0x24f0);
       fVar4 = *(float *)(iVar23 + 0x24f8) + FLOAT_001aa0e8;
@@ -670,7 +670,7 @@ LAB_000256f4:
       local_8c = fVar2 * fVar6;
       goto LAB_00025ac8;
     case 7:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x2530 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x80 + 0x2530 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
@@ -681,10 +681,10 @@ LAB_000256f4:
     break;
   case 4:
     uVar20 = uVar15 >> 9 & 3;
-    iVar12 = *(int *)(ctx + 0x10) + 0x24c0;
+    iVar12 = *(int *)(ctx + GLD_engineState) + 0x24c0;
     iVar23 = (uVar15 & 0xff) * 0x80;
     iVar10 = (uVar15 >> 8 & 1) * 0x240;
-    iVar11 = *(int *)(ctx + 0x10) + 0x28c0;
+    iVar11 = *(int *)(ctx + GLD_engineState) + 0x28c0;
     iVar18 = iVar12 + iVar23;
     iVar13 = iVar11 + iVar10;
     if (uVar20 == 1) {
@@ -711,37 +711,37 @@ LAB_000256f4:
     uVar20 = uVar15 & 1;
     switch(uVar15 >> 1 & 7) {
     case 0:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28c0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x240 + 0x28c0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 1:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28d0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x240 + 0x28d0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 2:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28e0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x240 + 0x28e0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 3:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28f0 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x240 + 0x28f0 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 4:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x2900 + *(int *)(ctx + 0x10));
+      pfVar16 = (float *)(uVar20 * 0x240 + 0x2900 + *(int *)(ctx + GLD_engineState));
       pdVar21 = (dword *)(pfVar16 + 1);
       pdVar9 = (dword *)(pfVar16 + 2);
       pdVar17 = (dword *)(pfVar16 + 3);
       break;
     case 5:
-      iVar23 = *(int *)(ctx + 0x10);
+      iVar23 = *(int *)(ctx + GLD_engineState);
       iVar10 = iVar23 + 0x28c0 + uVar20 * 0x240;
       local_90 = *(float *)(iVar23 + 0x24b0) * *(float *)(iVar23 + 0x28c0 + uVar20 * 0x240) +
                  *(float *)(iVar10 + 0x30);
@@ -754,7 +754,7 @@ LAB_000256f4:
     }
     break;
   case 6:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     pdVar17 = (dword *)(iVar23 + 0x24bc);
     pfVar16 = (float *)(iVar23 + 0x24b0);
     pdVar21 = (dword *)(iVar23 + 0x24b4);
@@ -764,7 +764,7 @@ LAB_000256f4:
     uVar20 = uVar15 >> 5 & 7;
     uVar15 = uVar15 & 0x1f;
     if (uVar20 == 1) {
-      iVar23 = *(int *)(ctx + 0x10);
+      iVar23 = *(int *)(ctx + GLD_engineState);
       puVar8 = ((unsigned char *)0x000039a0) + uVar15 * 0x94;
 LAB_00025180:
       pdVar17 = (dword *)(puVar8 + iVar23 + 0x1c);
@@ -775,14 +775,14 @@ LAB_00025180:
     else {
       if (uVar20 < 2) {
         if (uVar20 == 0) {
-          iVar23 = *(int *)(ctx + 0x10);
+          iVar23 = *(int *)(ctx + GLD_engineState);
           puVar8 = ((unsigned char *)0x00003980) + uVar15 * 0x94;
           goto LAB_0002515c;
         }
         goto switchD_00025774_caseD_1;
       }
       if (uVar20 == 2) {
-        iVar23 = *(int *)(ctx + 0x10);
+        iVar23 = *(int *)(ctx + GLD_engineState);
         puVar8 = ((unsigned char *)0x000039c0) + uVar15 * 0x94;
 LAB_000251a4:
         pdVar17 = (dword *)(puVar8 + iVar23 + 0x20);
@@ -792,7 +792,7 @@ LAB_000251a4:
       }
       else {
         if (uVar20 != 3) goto switchD_00025774_caseD_1;
-        iVar23 = *(int *)(ctx + 0x10);
+        iVar23 = *(int *)(ctx + GLD_engineState);
         puVar8 = ((unsigned char *)0x000039e0) + uVar15 * 0x94;
 LAB_000251c8:
         pdVar17 = (dword *)(puVar8 + iVar23 + 0x24);
@@ -806,39 +806,39 @@ LAB_000251c8:
     uVar20 = uVar15 >> 5 & 7;
     uVar15 = uVar15 & 0x1f;
     if (uVar20 == 1) {
-      iVar23 = *(int *)(ctx + 0x10);
+      iVar23 = *(int *)(ctx + GLD_engineState);
       puVar8 = ((unsigned char *)0x000039b0) + uVar15 * 0x94;
       goto LAB_00025180;
     }
     if (uVar20 < 2) {
       if (uVar20 == 0) {
-        iVar23 = *(int *)(ctx + 0x10);
+        iVar23 = *(int *)(ctx + GLD_engineState);
         puVar8 = ((unsigned char *)0x00003990) + uVar15 * 0x94;
         goto LAB_0002515c;
       }
     }
     else {
       if (uVar20 == 2) {
-        iVar23 = *(int *)(ctx + 0x10);
+        iVar23 = *(int *)(ctx + GLD_engineState);
         puVar8 = ((unsigned char *)0x000039d0) + uVar15 * 0x94;
         goto LAB_000251a4;
       }
       if (uVar20 == 3) {
-        iVar23 = *(int *)(ctx + 0x10);
+        iVar23 = *(int *)(ctx + GLD_engineState);
         puVar8 = ((unsigned char *)0x000039f0) + uVar15 * 0x94;
         goto LAB_000251c8;
       }
     }
     goto switchD_00025774_caseD_1;
   case 9:
-    iVar23 = *(int *)(ctx + 0x10) + (uVar15 & 0x1f) * 0x7c;
+    iVar23 = *(int *)(ctx + GLD_engineState) + (uVar15 & 0x1f) * 0x7c;
     pfVar16 = (float *)(((unsigned char *)0x000031c0) + iVar23 + 4);
     pdVar17 = (dword *)(((unsigned char *)0x000031c0) + iVar23 + 0x10);
     pdVar9 = (dword *)(((unsigned char *)0x000031c0) + iVar23 + 0xc);
     pdVar21 = (dword *)(((unsigned char *)0x000031c0) + iVar23 + 8);
     break;
   case 10:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     puVar8 = ((unsigned char *)0x00003e20) + (uVar15 & 0xff) * 0x10;
 LAB_0002515c:
     pdVar17 = (dword *)(puVar8 + iVar23 + 0x18);
@@ -847,42 +847,42 @@ LAB_0002515c:
     pdVar9 = (dword *)(puVar8 + iVar23 + 0x14);
     break;
   case 0xb:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     pdVar17 = (dword *)(((unsigned char *)0x00002dec) + iVar23);
     pfVar16 = (float *)(((unsigned char *)0x00002de0) + iVar23);
     pdVar21 = (dword *)(((unsigned char *)0x00002de4) + iVar23);
     pdVar9 = (dword *)(((unsigned char *)0x00002de8) + iVar23);
     break;
   case 0xc:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     pdVar17 = (dword *)(((unsigned char *)0x00002dfc) + iVar23);
     pfVar16 = (float *)(((unsigned char *)0x00002df0) + iVar23);
     pdVar21 = (dword *)(((unsigned char *)0x00002df4) + iVar23);
     pdVar9 = (dword *)(((unsigned char *)0x00002df8) + iVar23);
     break;
   case 0xd:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     pdVar17 = (dword *)(((unsigned char *)0x000030c8) + iVar23);
     pfVar16 = (float *)(((unsigned char *)0x000030bc) + iVar23);
     pdVar21 = (dword *)(((unsigned char *)0x000030c0) + iVar23);
     pdVar9 = (dword *)(((unsigned char *)0x000030c4) + iVar23);
     break;
   case 0xe:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     pdVar17 = (dword *)(((unsigned char *)0x000030d8) + iVar23);
     pfVar16 = (float *)(((unsigned char *)0x000030cc) + iVar23);
     pdVar21 = (dword *)(((unsigned char *)0x000030d0) + iVar23);
     pdVar9 = (dword *)(((unsigned char *)0x000030d4) + iVar23);
     break;
   case 0xf:
-    iVar23 = *(int *)(ctx + 0x10);
+    iVar23 = *(int *)(ctx + GLD_engineState);
     local_90 = (float)*(double *)(0x00001830 + iVar23);
     local_8c = (float)*(double *)(iVar23 + 0x1838);
     local_84[0] = 1.0;
     local_88 = (float)(*(double *)(iVar23 + 0x1838) - *(double *)(0x00001830 + iVar23));
     goto LAB_00025ac8;
   case 0x12:
-    local_84[0] = *(float *)(*(int *)(ctx + 0x10) + 0x24a4);
+    local_84[0] = *(float *)(*(int *)(ctx + GLD_engineState) + 0x24a4);
     local_90 = local_84[0];
     local_8c = local_84[0];
     local_88 = local_84[0];
@@ -923,7 +923,7 @@ int FUN_00025bf0(ctx, program)
   int *savedNext;
   
   if (*(int *)(program + 0x1c) != 0) {
-    _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+    _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
     if (*(int *)(program + 0x2c) != 0) {
       _glpFreePPShaderLinearize(*(int *)(program + 0x2c));
       *(undefined4 *)(program + 0x2c) = 0;
@@ -971,7 +971,7 @@ int FUN_00025bf0(ctx, program)
       *listNode = kind;
       *(undefined4 *)(program + 0xc) = 0;
     }
-    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     return;
   }
   return;
@@ -2622,16 +2622,16 @@ LAB_000283c0:
     return 0;
   }
 LAB_000284b0:
-  if ((((0x1000 < (int)width) || (0x1000 < (int)height)) || (0x1000 < *(int *)(ctx + 0x15c)))
-     || (0x1000 < *(int *)(ctx + 0x160))) {
+  if ((((0x1000 < (int)width) || (0x1000 < (int)height)) || (0x1000 < *(int *)(ctx + GLD_renderWidth)))
+     || (0x1000 < *(int *)(ctx + GLD_renderHeight))) {
     return 0;
   }
-  _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+  _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   lastHeader = &local_108;
   uVar33 = width;
   uVar29 = height;
   FUN_0000a6e0(ctx,format,pixelType,width,height,lastHeader,auStack_104,local_100,
-               ((unsigned char *)0x00002e50) + *(int *)(ctx + 0x10));
+               ((unsigned char *)0x00002e50) + *(int *)(ctx + GLD_engineState));
   uVar38 = param_8 + local_100[0];
   if ((int)width < 1) {
     uVar36 = 1;
@@ -2668,8 +2668,8 @@ LAB_000284b0:
   local_d0 = 0x43300000;
   local_c8 = 0x43300000;
   local_c0 = 0x43300000;
-  uStack_d4 = *(uint *)(ctx + 0x15c) ^ 0x80000000;
-  uStack_cc = *(uint *)(ctx + 0x160) ^ 0x80000000;
+  uStack_d4 = *(uint *)(ctx + GLD_renderWidth) ^ 0x80000000;
+  uStack_cc = *(uint *)(ctx + GLD_renderHeight) ^ 0x80000000;
   fVar12 = (float)((double)CONCAT44(0x43300000,uStack_e4) - DOUBLE_001aa1e0) + FLOAT_001aa0d4;
   fVar9 = fVar2 - (float)((double)CONCAT44(0x43300000,uStack_ac) - DOUBLE_001aa1e0);
   fVar11 = (float)((double)CONCAT44(0x43300000,uStack_dc) - DOUBLE_001aa1e0) + FLOAT_001aa0d4;
@@ -2745,7 +2745,7 @@ LAB_000284b0:
     fVar8 = fVar7;
   }
   if ((fVar8 <= fVar9) || (fVar11 <= fVar3)) {
-    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     return 1;
   }
   if (((((*(int *)surfaceInfo[1] != 0) && (iVar24 = FUN_0001e280(ctx,surfaceInfo,1), iVar24 == 0)) ||
@@ -2754,15 +2754,15 @@ LAB_000284b0:
          (uVar27 = *(uint *)*surfaceInfo, uVar38 != uVar27)))))) ||
       ((*(char *)(iVar24 + 0x16) != '\x06' && ((format != 0x1908 || (pixelType != ((unsigned char *)0x00001406)))))))
      || (((uVar38 | local_108) & 0x1f) != 0)) {
-    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     return 0;
   }
   if (uVar27 != 0) {
     FUN_0000b670(ctx,uVar27,uVar37 * local_108,uVar33,uVar29,lastHeader,0,uVar34);
   }
-  ring = ctx + 0x240;
+  ring = ctx + GLD_commandStream;
   iVar39 = 0xf;
-  uVar34 = (**(code **)(ctx + 0x2998))(ring,0x343);
+  uVar34 = (**(code **)(ctx + GLD_streamAllocate))(ring,0x343);
   *(undefined4 *)(ctx + 0x298c) = uVar34;
   iVar24 = ctx;
   do {
@@ -2777,7 +2777,7 @@ LAB_000284b0:
   packet = (undefined4 *)((uint)(packetRaw + 0xb) & 0xffffffe0);
   *packetRaw = (((int)packet - (int)packetRaw) + -8) * 0x4000 | 0xc0001000;
   packet[-1] = (int)packet - (int)packetRaw;
-  lastHeader = *(uint **)(ctx + 0x1d8);
+  lastHeader = *(uint **)(ctx + GLD_lastHeader);
   *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x1d8) = packet;
   *packet = 0x40000000;
@@ -2792,7 +2792,7 @@ LAB_000284b0:
   } while (!(bool)(bVar42 >> 1 & 1));
   packet[2] = *puVar32;
   packet[3] = uVar38 - *(int *)*surfaceInfo;
-  uVar34 = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
+  uVar34 = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + GLD_engineState)),
                         *(undefined4 *)(ctx + 0x154));
   packet[4] = uVar34;
   _memcpy(packet + 5,PTR_DAT_001e88d0,0x2f4);
@@ -2845,7 +2845,7 @@ LAB_000284b0:
   packet[0xcd] = 0;
   packet[200] = hwFormat << 0x10 | uVar33;
   packet[1] = (int)puVar32 - (int)packetRaw >> 2;
-  lastHeader = *(uint **)(ctx + 0x1d8);
+  lastHeader = *(uint **)(ctx + GLD_lastHeader);
   *lastHeader = (int)puVar32 - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x1d8) = puVar32;
   packet[0xce] = 0x33000000;
@@ -2907,7 +2907,7 @@ LAB_000284b0:
   uVar34 = *(undefined4 *)(ctx + 0x1de0);
   packet[0xf7] = 0x82d;
   packet[0xf6] = uVar34;
-  uVar34 = *(undefined4 *)(0x000026c8 + ctx + 4);
+  uVar34 = *(undefined4 *)(0x000026c8 + ctx + GLD_connect);
   packet[0xf9] = 0x854;
   packet[0xf8] = uVar34;
   uVar34 = **(undefined4 **)(ctx + 0x2680);
@@ -3048,7 +3048,7 @@ LAB_000284b0:
     iVar28 = *(int *)(hwFormat + 0x18c);
     if (iVar28 != 0) {
       iVar43 = 5;
-      piVar23 = (int *)(iVar24 + *(int *)(ctx + 0x18));
+      piVar23 = (int *)(iVar24 + *(int *)(ctx + GLD_engineObjects));
       do {
         if (iVar28 == *piVar23) {
           if (*(int *)(iVar28 + 0x34) != 0) goto LAB_0002918c;
@@ -3069,9 +3069,9 @@ LAB_0002918c:
     iVar39 = iVar39 + 1;
     if (bVar1) {
       *(undefined4 **)(ctx + 0x298c) = packet;
-      (**(code **)(ctx + 0x299c))(ring,packet);
-      _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
-      if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+      (**(code **)(ctx + GLD_streamSetCurrent))(ring,packet);
+      _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
+      if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
         FUN_0001a0f0(ctx,0x1000000);
       }
       if (*(int *)*surfaceInfo != 0) {
@@ -3155,13 +3155,13 @@ int FUN_00029290(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   undefined4 uStack_54;
   undefined1 uStack_50;
   
-  iVar14 = ctx + 0x240;
+  iVar14 = ctx + GLD_commandStream;
   uStack_84 = 0;
   aiStack_e0[1] = 0;
   uStack_88 = 0;
   uVar18 = param_9 & 0xff;
-  iVar16 = *(int *)(ctx + 0x10);
-  iVar7 = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + iVar16),*(undefined4 *)(ctx + 0x154));
+  iVar16 = *(int *)(ctx + GLD_engineState);
+  iVar7 = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + iVar16),*(undefined4 *)(ctx + GLD_renderFlags));
   if (((((*(uint *)(((unsigned char *)0x000030b0) + iVar16) & 0x1ff) == 0) &&
        ((*(uint *)(((unsigned char *)0x000030b4) + iVar16) & 0xff0000) == 0)) || (param_6 - 0x1901U < 2)) ||
      (uVar18 == 2)) {
@@ -3208,11 +3208,11 @@ LAB_000293b0:
       param_2 = 0;
       uStack_ac = uStack_ac - iStack_e4;
     }
-    if (*(int *)(ctx + 0x160) < param_3 + param_5) {
-      param_5 = *(int *)(ctx + 0x160) - param_3;
+    if (*(int *)(ctx + GLD_renderHeight) < param_3 + param_5) {
+      param_5 = *(int *)(ctx + GLD_renderHeight) - param_3;
     }
-    if (*(int *)(ctx + 0x15c) < param_2 + param_4) {
-      param_4 = *(int *)(ctx + 0x15c) - param_2;
+    if (*(int *)(ctx + GLD_renderWidth) < param_2 + param_4) {
+      param_4 = *(int *)(ctx + GLD_renderWidth) - param_2;
     }
     if ((0 < param_4) && (0 < param_5)) {
       if (bVar1) {
@@ -3244,18 +3244,18 @@ LAB_000293b0:
       iStack_90 = param_4;
       iStack_8c = param_5;
       _glgConvertType(param_6,param_7,puVar11,puVar12);
-      piVar19 = *(int **)(ctx + 0x150);
+      piVar19 = *(int **)(ctx + GLD_boundFramebuffer);
       if (piVar19 == (int *)0x0) {
         aiStack_e0[2] = param_2;
         iStack_d4 = param_3;
         iStack_d0 = param_4;
         iStack_cc = param_5;
         if (param_6 == 0x1901) {
-          uVar18 = *(uint *)(ctx + 0x154);
+          uVar18 = *(uint *)(ctx + GLD_renderFlags);
           if ((uVar18 & 0x30000) == 0x30000) {
-            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+            if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
-              uVar18 = *(uint *)(ctx + 0x154);
+              uVar18 = *(uint *)(ctx + GLD_renderFlags);
             }
             uStack_b8 = (param_4 + 0xf) * 4 & 0xffffffc0;
             uStack_b0 = 0x14;
@@ -3308,7 +3308,7 @@ LAB_00029a74:
             }
             uStack_bc = uStack_c4;
             if (bVar4) {
-              iVar14 = *(int *)(ctx + 0x18);
+              iVar14 = *(int *)(ctx + GLD_engineObjects);
               iVar7 = *(int *)(*(int *)(iVar14 + 0x140) + 0x30);
               uStack_80 = (uint)*(ushort *)(iVar7 + 0x98);
               uStack_7c = (uint)*(ushort *)(iVar7 + 0x9a);
@@ -3326,7 +3326,7 @@ LAB_00029a74:
               uStack_54 = *(undefined4 *)(iVar7 + 0x9c);
             }
             iVar7 = _io_connect_method_structureI_structureO
-                              (*(undefined4 *)(ctx + 4),7,aiStack_e0 + 2,0x1c,0,aiStack_e0 + 1);
+                              (*(undefined4 *)(ctx + GLD_connect),7,aiStack_e0 + 2,0x1c,0,aiStack_e0 + 1);
             if (iVar7 != 0) goto LAB_00029bd0;
             if (!bVar1) {
               _glgProcessPixels(puVar5,&uStack_bc);
@@ -3338,28 +3338,28 @@ LAB_00029a74:
           if (param_6 != 0x1902) {
             iVar6 = FUN_0001a010(ctx,iVar7,puVar11,puVar12,iVar17,puVar13,piVar20);
             if (iVar6 != 0) {
-              FUN_000230d0(ctx,0,iVar7,0,0,0,*(undefined4 *)(ctx + 0x15c),
+              FUN_000230d0(ctx,0,iVar7,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + 0x160));
             }
             if (*(int *)(ctx + 0x1d38) != 0) {
-              puVar10 = (undefined4 *)(**(code **)(ctx + 0x2998))(iVar14,2);
+              puVar10 = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(iVar14,2);
               puVar10[1] = 0;
               *puVar10 = ((unsigned char *)0x00001386);
               *(undefined4 **)(ctx + 0x298c) = puVar10 + 2;
-              (**(code **)(ctx + 0x299c))(iVar14,puVar10 + 2);
+              (**(code **)(ctx + GLD_streamSetCurrent))(iVar14,puVar10 + 2);
             }
-            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+            if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
             }
             if (*(int *)(ctx + 0x1d38) != 0) {
-              puVar10 = (undefined4 *)(**(code **)(ctx + 0x2998))(iVar14,2);
+              puVar10 = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(iVar14,2);
               *puVar10 = ((unsigned char *)0x00001386);
               puVar10[1] = *(undefined4 *)(ctx + 0x1d38);
               *(undefined4 **)(ctx + 0x298c) = puVar10 + 2;
-              (**(code **)(ctx + 0x299c))(iVar14,puVar10 + 2);
+              (**(code **)(ctx + GLD_streamSetCurrent))(iVar14,puVar10 + 2);
             }
             bVar2 = ((unsigned char *)0x00002b7f)[ctx];
-            uVar18 = *(uint *)(ctx + 0x154);
+            uVar18 = *(uint *)(ctx + GLD_renderFlags);
             uStack_b8 = (param_4 << (*(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
             uStack_b0 = *(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x10) >> 0x16 & 0x1f;
@@ -3367,11 +3367,11 @@ LAB_00029a74:
             iStack_c8 = iVar7;
             goto LAB_000299f8;
           }
-          uVar18 = *(uint *)(ctx + 0x154);
+          uVar18 = *(uint *)(ctx + GLD_renderFlags);
           if ((uVar18 & 0x30000) != 0) {
-            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+            if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
-              uVar18 = *(uint *)(ctx + 0x154);
+              uVar18 = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((uVar18 & 0x20000) == 0) {
               uStack_b0 = 2;
@@ -3403,7 +3403,7 @@ LAB_00029a74:
           if ((bVar1) &&
              (((*(uint *)(puVar5 + 0x268) & 0x1ff) != 0 ||
               ((*(uint *)(puVar5 + 0x26c) & 0xff0000) != 0)))) {
-            iVar16 = *(int *)(ctx + 0x18);
+            iVar16 = *(int *)(ctx + GLD_engineObjects);
             iVar14 = *(int *)(*(int *)(iVar16 + 0x140) + 0x30);
             uStack_80 = (uint)*(ushort *)(iVar14 + 0x98);
             uStack_7c = (uint)*(ushort *)(iVar14 + 0x9a);
@@ -3432,10 +3432,10 @@ LAB_00029a74:
           uVar15 = (uint)*(ushort *)(iVar7 + 0xb2);
           uVar18 = (uint)*(ushort *)(iVar7 + 0xb0);
           _glgConvertType(uVar18,uVar15,&uStack_b4,&uStack_b0);
-          iVar6 = *(int *)(ctx + 0x15c);
+          iVar6 = *(int *)(ctx + GLD_renderWidth);
           iVar7 = FUN_0000a3f0(uVar18,uVar15);
           uStack_b8 = iVar6 * iVar7;
-          iVar6 = uStack_b8 * *(int *)(ctx + 0x160);
+          iVar6 = uStack_b8 * *(int *)(ctx + GLD_renderHeight);
           pvVar9 = _valloc((uint)uVar3 * iVar6);
           FUN_00031340(ctx,piVar20,iVar16,iVar14,uVar18,uVar15,pvVar9,uStack_b8);
           iVar7 = param_3 * uStack_b8;
@@ -3540,12 +3540,12 @@ int FUN_00029294(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   undefined4 uStack_54;
   undefined1 uStack_50;
   
-  ring = ctx + 0x240;
+  ring = ctx + GLD_commandStream;
   uStack_84 = 0;
   aiStack_e0[1] = 0;
   uStack_88 = 0;
   flags = param_9 & 0xff;
-  ctxState = *(int *)(ctx + 0x10);
+  ctxState = *(int *)(ctx + GLD_engineState);
   pdVar7 = (dword *)FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
                                  *(undefined4 *)(ctx + 0x154));
   if (((((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0) &&
@@ -3594,11 +3594,11 @@ LAB_000293b0:
       param_2 = 0;
       uVar12 = uVar12 - iStack_e4;
     }
-    if (*(int *)(ctx + 0x160) < param_3 + param_5) {
-      param_5 = *(int *)(ctx + 0x160) - param_3;
+    if (*(int *)(ctx + GLD_renderHeight) < param_3 + param_5) {
+      param_5 = *(int *)(ctx + GLD_renderHeight) - param_3;
     }
-    if (*(int *)(ctx + 0x15c) < param_2 + param_4) {
-      param_4 = *(int *)(ctx + 0x15c) - param_2;
+    if (*(int *)(ctx + GLD_renderWidth) < param_2 + param_4) {
+      param_4 = *(int *)(ctx + GLD_renderWidth) - param_2;
     }
     if ((0 < param_4) && (0 < param_5)) {
       if (bVar1) {
@@ -3631,18 +3631,18 @@ LAB_000293b0:
       iStack_90 = param_4;
       iStack_8c = param_5;
       _glgConvertType(param_6,param_7,a2,a3,iVar9,a5,piVar24,uVar12);
-      piVar23 = *(int **)(ctx + 0x150);
+      piVar23 = *(int **)(ctx + GLD_boundFramebuffer);
       if (piVar23 == (int *)0x0) {
         aiStack_e0[2] = param_2;
         iStack_d4 = param_3;
         iStack_d0 = param_4;
         iStack_cc = param_5;
         if (param_6 == 0x1901) {
-          flags = *(uint *)(ctx + 0x154);
+          flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) == 0x30000) {
-            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+            if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
-              flags = *(uint *)(ctx + 0x154);
+              flags = *(uint *)(ctx + GLD_renderFlags);
             }
             uStack_b8 = (param_4 + 0xf) * 4 & 0xffffffc0;
             uStack_b0 = 0x14;
@@ -3697,7 +3697,7 @@ LAB_00029a74:
             }
             uStack_bc = uStack_c4;
             if (bVar4) {
-              flags = *(uint *)(ctx + 0x18);
+              flags = *(uint *)(ctx + GLD_engineObjects);
               ring = *(int *)(*(int *)(flags + 0x140) + 0x30);
               uStack_80 = (uint)*(ushort *)(ring + 0x98);
               uStack_7c = (uint)*(ushort *)(ring + 0x9a);
@@ -3720,7 +3720,7 @@ LAB_00029a74:
             uVar11 = 0;
             piVar23 = aiStack_e0 + 1;
             ring = _io_connect_method_structureI_structureO
-                               (*(undefined4 *)(ctx + 4),7,piVar24,0x1c,0,piVar23);
+                               (*(undefined4 *)(ctx + GLD_connect),7,piVar24,0x1c,0,piVar23);
             if (ring != 0) goto LAB_00029bd0;
             if (!bVar1) {
               _glgProcessPixels(puVar5,&uStack_bc,piVar24,uVar8,uVar11,piVar23,uVar12,flags);
@@ -3736,29 +3736,29 @@ LAB_00029a74:
               iVar9 = 0;
               a5 = (uint *)0x0;
               a2 = pdVar7;
-              FUN_000230d0(ctx,0,pdVar7,0,0,0,*(undefined4 *)(ctx + 0x15c),
+              FUN_000230d0(ctx,0,pdVar7,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + 0x160));
             }
             if (*(int *)(ctx + 0x1d38) != 0) {
-              puVar10 = (undefined4 *)(**(code **)(ctx + 0x2998))(ring,2);
+              puVar10 = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
               puVar10[1] = 0;
               *puVar10 = ((unsigned char *)0x00001386U);
               *(undefined4 **)(ctx + 0x298c) = puVar10 + 2;
-              (**(code **)(ctx + 0x299c))(ring,puVar10 + 2);
+              (**(code **)(ctx + GLD_streamSetCurrent))(ring,puVar10 + 2);
             }
-            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+            if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
             }
             if (*(int *)(ctx + 0x1d38) != 0) {
-              puVar10 = (undefined4 *)(**(code **)(ctx + 0x2998))(ring,2);
+              puVar10 = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
               a1 = puVar10 + 2;
               *puVar10 = ((unsigned char *)0x00001386U);
               puVar10[1] = *(undefined4 *)(ctx + 0x1d38);
               *(undefined4 **)(ctx + 0x298c) = a1;
-              (**(code **)(ctx + 0x299c))(ring,a1,a2,a3,iVar9,a5,a1);
+              (**(code **)(ctx + GLD_streamSetCurrent))(ring,a1,a2,a3,iVar9,a5,a1);
             }
             bVar2 = ((unsigned char *)0x00002b7f)[ctx];
-            flags = *(uint *)(ctx + 0x154);
+            flags = *(uint *)(ctx + GLD_renderFlags);
             uStack_b8 = (param_4 << (*(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
             uStack_b0 = *(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x10) >> 0x16 & 0x1f;
@@ -3766,11 +3766,11 @@ LAB_00029a74:
             pdStack_c8 = pdVar7;
             goto LAB_000299f8;
           }
-          flags = *(uint *)(ctx + 0x154);
+          flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) != 0) {
-            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+            if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
-              flags = *(uint *)(ctx + 0x154);
+              flags = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((flags & 0x20000) == 0) {
               uStack_b0 = 2;
@@ -3802,7 +3802,7 @@ LAB_00029a74:
           if ((bVar1) &&
              (((*(uint *)(puVar5 + 0x268) & 0x1ff) != 0 ||
               ((*(uint *)(puVar5 + 0x26c) & 0xff0000) != 0)))) {
-            uVar12 = *(uint *)(ctx + 0x18);
+            uVar12 = *(uint *)(ctx + GLD_engineObjects);
             ctxState = *(int *)(*(int *)(uVar12 + 0x140) + 0x30);
             uStack_80 = (uint)*(ushort *)(ctxState + 0x98);
             uStack_7c = (uint)*(ushort *)(ctxState + 0x9a);
@@ -3831,10 +3831,10 @@ LAB_00029a74:
           uVar18 = (uint)*(ushort *)(ctxState + 0xb2);
           uVar17 = (uint)*(ushort *)(ctxState + 0xb0);
           _glgConvertType(uVar17,uVar18,&uStack_b4,&uStack_b0,iVar9,ring,*piVar24,uVar12);
-          ctxState = *(int *)(ctx + 0x15c);
+          ctxState = *(int *)(ctx + GLD_renderWidth);
           ring = FUN_0000a3f0(uVar17,uVar18);
           uStack_b8 = ctxState * ring;
-          iVar19 = uStack_b8 * *(int *)(ctx + 0x160);
+          iVar19 = uStack_b8 * *(int *)(ctx + GLD_renderHeight);
           iVar6 = _valloc((uint)uVar3 * iVar19);
           flags = uVar17;
           uVar12 = uVar18;
@@ -4378,9 +4378,9 @@ LAB_0002a4f4:
     }
   }
 LAB_0002a520:
-  _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+  _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   if (param_8 == 0) {
-    puVar18 = ((unsigned char *)0x00002e6c) + *(int *)(ctx + 0x10);
+    puVar18 = ((unsigned char *)0x00002e6c) + *(int *)(ctx + GLD_engineState);
   }
   else {
     puVar18 = (undefined *)0x0;
@@ -4389,8 +4389,8 @@ LAB_0002a520:
   iVar26 = *(int *)*surfaceInfo;
   uVar31 = param_7 + local_100[0];
   if (((((int)local_108 < 0x1001) && ((int)height < 0x1001)) &&
-      (uVar27 = *(uint *)(ctx + 0x15c), (int)uVar27 < 0x1001)) &&
-     (uVar29 = *(uint *)(ctx + 0x160), (int)uVar29 < 0x1001)) {
+      (uVar27 = *(uint *)(ctx + GLD_renderWidth), (int)uVar27 < 0x1001)) &&
+     (uVar29 = *(uint *)(ctx + GLD_renderHeight), (int)uVar29 < 0x1001)) {
     if ((int)uVar27 < 1) {
       uVar27 = 1;
       fVar3 = FLOAT_001aa0e8;
@@ -4466,9 +4466,9 @@ LAB_0002a520:
           ((*(char *)(iVar22 + 0x16) != '\x06' &&
            ((format != 0x1908 || ((pixelType != ((unsigned char *)0x00001406) && (pixelType != (undefined *)0x8366)))))
            ))) || (((uVar31 | local_108) & 0x1f) != 0)) goto LAB_0002a9a0;
-      ring = ctx + 0x240;
+      ring = ctx + GLD_commandStream;
       iVar34 = 0xf;
-      uVar25 = (**(code **)(ctx + 0x2998))(ring,0x343);
+      uVar25 = (**(code **)(ctx + GLD_streamAllocate))(ring,0x343);
       *(undefined4 *)(ctx + 0x298c) = uVar25;
       iVar22 = ctx;
       do {
@@ -4483,7 +4483,7 @@ LAB_0002a520:
       packet = (undefined4 *)((uint)(packetRaw + 0xb) & 0xffffffe0);
       *packetRaw = (((int)packet - (int)packetRaw) + -8) * 0x4000 | 0xc0001000;
       packet[-1] = (int)packet - (int)packetRaw;
-      puVar19 = *(uint **)(ctx + 0x1d8);
+      puVar19 = *(uint **)(ctx + GLD_lastHeader);
       *puVar19 = (int)packet - (int)puVar19 >> 2 | *puVar19;
       *(undefined4 **)(ctx + 0x1d8) = packet;
       *packet = 0x3f000000;
@@ -4598,7 +4598,7 @@ LAB_0002a520:
       packet[0xcc] = 0;
       packet[199] = hwFormat << 0x10 | uVar31;
       packet[1] = (int)puVar30 - (int)packetRaw >> 2;
-      puVar19 = *(uint **)(ctx + 0x1d8);
+      puVar19 = *(uint **)(ctx + GLD_lastHeader);
       *puVar19 = (int)puVar30 - (int)puVar19 >> 2 | *puVar19;
       *(undefined4 **)(ctx + 0x1d8) = puVar30;
       packet[0xce] = 0;
@@ -4660,7 +4660,7 @@ LAB_0002a520:
       uVar25 = *(undefined4 *)(ctx + 0x1de0);
       packet[0xf6] = 0x82d;
       packet[0xf5] = uVar25;
-      uVar25 = *(undefined4 *)(0x000026c8 + ctx + 4);
+      uVar25 = *(undefined4 *)(0x000026c8 + ctx + GLD_connect);
       packet[0xf8] = 0x854;
       packet[0xf7] = uVar25;
       uVar25 = **(undefined4 **)(ctx + 0x2680);
@@ -4797,7 +4797,7 @@ LAB_0002a520:
         iVar34 = *(int *)(hwFormat + 0x18c);
         if (iVar34 != 0) {
           iVar36 = 5;
-          piVar21 = (int *)(iVar26 + *(int *)(ctx + 0x18));
+          piVar21 = (int *)(iVar26 + *(int *)(ctx + GLD_engineObjects));
           do {
             if (iVar34 == *piVar21) {
               if (*(int *)(iVar34 + 0x34) != 0) goto LAB_0002b2fc;
@@ -4818,14 +4818,14 @@ LAB_0002b2fc:
         iVar22 = iVar22 + 1;
       } while (bVar1);
       *(undefined4 **)(ctx + 0x298c) = packet;
-      (**(code **)(ctx + 0x299c))(ring,packet);
+      (**(code **)(ctx + GLD_streamSetCurrent))(ring,packet);
     }
-    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     uVar25 = 1;
   }
   else {
 LAB_0002a9a0:
-    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     uVar25 = 0;
   }
   return uVar25;
@@ -4967,7 +4967,7 @@ int _gldGetQueryInfo(ctx, query, pname, valueOut)
   int *queryEntry;
   
   resultCount = *(uint *)(ctx + 0x2610);
-  available = *(int *)(ctx + 0x224) + 0x210;
+  available = *(int *)(ctx + GLD_queryPool) + 0x210;
   queryEntry = (int *)(available + *query * 0x20);
   result1 = queryEntry[2];
   result3 = queryEntry[4];
@@ -5946,11 +5946,11 @@ int FUN_0002cb40(ctx)
     FUN_00017e10(ctx);
   }
   ((int (*)())FUN_00025da0)(ctx);
-  if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+  if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
     FUN_0001a0f0(ctx,0x1000000);
   }
-  thunk_FUN_00054a90(ctx + 0x240);
-  thunk_FUN_000a2330(ctx + 0x240);
+  thunk_FUN_00054a90(ctx + GLD_commandStream);
+  thunk_FUN_000a2330(ctx + GLD_commandStream);
   FUN_000a7970(ctx);
   if (*(int *)(((unsigned char *)0x00002b74) + ctx) != 0) {
     _vfree(*(int *)(((unsigned char *)0x00002b74) + ctx));
@@ -5964,7 +5964,7 @@ int FUN_0002cb40(ctx)
 int FUN_0002cc10(ctx)
   int ctx;
 {
-  if (*(uint *)(ctx + 0x1dc) <= *(int *)(ctx + 0x1e4) + 0x28U) {
+  if (*(uint *)(ctx + GLD_writeCursor) <= *(int *)(ctx + GLD_ringMap) + 0x28U) {
     return;
   }
   return FUN_0001a0f0(ctx,0x1000000);
@@ -6017,10 +6017,10 @@ uint FUN_0002cc30(int ctx,undefined4 param_2,uint param_3,uint param_4,undefined
   }
 LAB_0002cce8:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    fparam_1 = (double)FUN_000a3be0(ctx + 0x240,param_3,uVar2,uVar3,param_5,param_6,in_r9);
+    fparam_1 = (double)FUN_000a3be0(ctx + GLD_commandStream,param_3,uVar2,uVar3,param_5,param_6,in_r9);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())FUN_0002c020)(ctx + 0x240,param_3,uVar2,uVar3,param_5,param_6,in_r9,fparam_1,fparam_2,
+    ((void (*)())FUN_0002c020)(ctx + GLD_commandStream,param_3,uVar2,uVar3,param_5,param_6,in_r9,fparam_1,fparam_2,
                  fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
   }
   *(undefined1 *)(ctx + 0x2a5e) = 1;

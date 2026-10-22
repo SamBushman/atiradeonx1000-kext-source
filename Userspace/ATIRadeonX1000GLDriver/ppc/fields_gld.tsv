@@ -1,0 +1,82 @@
+# field\tSTRUCT\tOFFSET\tname\ttier\tevidence   - GLDContext (_gldCreateContext mallocs 0x2b98 bytes); scope: gld_scope.txt
+field	GLD	0x4	connect	CONFIRMED	IOServiceOpen out-param in _gldCreateContext (ctx+1 word); first argument of every _io_connect_method_* / IOConnectMapMemory call
+field	GLD	0x8	cacheLineSize	INFERRED	byte 0x20/0x40/0x80 chosen from the library capability flags in _gldCreateContext; used as dcbt stride (FUN_0001ecd0) and as `cacheLineMask = byte - 1` (FUN_0003d590)
+field	GLD	0xc	mutex	CONFIRMED	_pthread_mutex_lock(*(ctx+0xc)) in _gldModifyVertexArray, FUN_00028350, _gldUpdateDispatch ...; stored from the 3rd _gldCreateContext argument
+field	GLD	0x10	engineState	INFERRED	6th _gldCreateContext argument; byte tables are indexed through it (`[ctx+0x10] + 0x31d4/0x430c`, stride 0x7c per texture unit in _gldUpdateDispatch)
+field	GLD	0x14	capsBlock	INFERRED	5th _gldCreateContext argument; FUN_00017750 fills it with renderer limits (texture size 0x1000, DXT enums 0x83f0..0x83f3, ...); _gldAttachDrawable memcpy()s the 0x3c-byte block at ctx+0x40 into capsBlock+0x24
+field	GLD	0x18	engineObjects	INFERRED	7th _gldCreateContext argument; holds the bound-object table: texture units [16][5] at +0 (stride 0x14, _gldSetInteger pname 0x29c, _gldUpdateDispatch), current vertex array at +0x194, current program at +0x19c
+field	GLD	0x1c	dispatchTable	INFERRED	_gldInitDispatch stores its dispatch table pointer here
+field	GLD	0x24	hwConfig0	CONFIRMED	three-word output of kernel selector 3 (get_config) in _gldCreateContext/_gldAttachDrawable; _gldGetString masks it with 0x7ff00000 (chip class)
+field	GLD	0x28	hwConfig1	CONFIRMED	second word of the get_config output; compared against the resident size in _gldGetTextureLevelInfo
+field	GLD	0x3c	drawableFlags	INFERRED	pixel-format/drawable flags built in _gldCreateContext (0x10 = stereo, set by _gldSetInteger 0x1f96 together with kernel selector 19 set_stereo; 0x20 set for pbuffer attach; low nibble = surface format from selector 6 get_surface_info)
+field	GLD	0x40	stateCopy	INFERRED	0x3c-byte copy of capsBlock+0x24 made in _gldCreateContext and written back by _gldAttachDrawable
+field	GLD	0xf8	attachedDrawable	CONFIRMED	_gldAttachDrawable compares the new drawable with it and stores the drawable pointer
+field	GLD	0xfc	drawableIdHigh	INFERRED	drawableIds >> 8 & 0xff stored by _gldAttachDrawable
+field	GLD	0x100	drawableIdLow	INFERRED	drawableIds & 0xff stored by _gldAttachDrawable
+field	GLD	0x104	drawableWidth	CONFIRMED	first output word of kernel selector 5 (get_surface_size); a change returns the resize code 3 in _gldAttachDrawable
+field	GLD	0x108	drawableHeight	CONFIRMED	second output word of get_surface_size (same resize test)
+field	GLD	0x124	swapRectX	CONFIRMED	_gldSetInteger pname 200: four values stored here and sent as the 4 scalars of kernel selector 1 set_swap_rect(x, y, w, h)
+field	GLD	0x128	swapRectY	CONFIRMED	second scalar of set_swap_rect
+field	GLD	0x12c	swapRectWidth	CONFIRMED	third scalar of set_swap_rect (must be >= 0)
+field	GLD	0x130	swapRectHeight	CONFIRMED	fourth scalar of set_swap_rect (must be >= 0)
+field	GLD	0x134	scaleFlags	CONFIRMED	_gldSetInteger pname 0x12a values[0]; sent by _gldAttachDrawable as the 3 scalars of kernel selector 14 scale_surface(flags, xScale, yScale)
+field	GLD	0x138	scaleX	CONFIRMED	values[1] of pname 0x12a = xScale of scale_surface
+field	GLD	0x13c	scaleY	CONFIRMED	values[2] of pname 0x12a = yScale of scale_surface
+field	GLD	0x141	softwareBufferFormat	INFERRED	0 / 1 / 2 from the pixel format (0x8000 -> 1, 0x800000 -> 2) in _gldCreateContext; _gldAttachDrawable allocates width*height*(4 or 8) bytes when non-zero
+field	GLD	0x142	swapIntervalNumerator	CONFIRMED	_gldSetInteger pname 0xde; scalar 0 of kernel selector 2 set_swap_interval(numerator, denominator)
+field	GLD	0x144	swapRectEnabled	CONFIRMED	_gldSetInteger pname 0xc9: enable flag; when clear the zero rect is sent through selector 1
+field	GLD	0x145	scaleEnabled	CONFIRMED	set by pname 0x12a; _gldAttachDrawable sends selector 14 scale_surface only when it is non-zero
+field	GLD	0x146	swapIntervalDenominator	CONFIRMED	_gldSetInteger pname 0xcb; scalar 1 of set_swap_interval
+field	GLD	0x147	surfaceVolatile	CONFIRMED	_gldSetInteger pname 0x132; sent as the scalar of kernel selector 16 set_surface_volatile_state
+field	GLD	0x148	softwareBuffer	CONFIRMED	_malloc(size) in _gldAttachDrawable, freed in _gldDestroyContext
+field	GLD	0x14c	softwareBufferSize	CONFIRMED	byte size of softwareBuffer, compared before reallocating in _gldAttachDrawable
+field	GLD	0x150	boundFramebuffer	CONFIRMED	compared with the framebuffer being destroyed in _gldDestroyFramebuffer; tested for NULL in _gldAttachDrawable
+field	GLD	0x154	renderFlags	INFERRED	copy of drawableFlags made by _gldAttachDrawable (ctx[0x55] = ctx[0xf])
+field	GLD	0x158	renderBufferMask	INFERRED	copy of ctx+0x38 made by _gldAttachDrawable (ctx[0x56] = ctx[0xe])
+field	GLD	0x15c	renderWidth	INFERRED	copy of drawableWidth (or the framebuffer width for attach type 0x5b); compared with the engine limits in FUN_00018a40/FUN_00028350/FUN_0002a3d0
+field	GLD	0x160	renderHeight	INFERRED	copy of drawableHeight (or the framebuffer height); same comparisons as renderWidth
+field	GLD	0x178	lastError	CONFIRMED	_gldGetError returns it; FUN_00007810 stores a new error only while it is zero
+field	GLD	0x18c	unitObject0	INFERRED	FUN_00018a40 tests eight consecutive pointers at +0x18c..+0x1a8, each against FUN_000a4760(ctx) == index 0..7
+field	GLD	0x190	unitObject1	INFERRED	second of the eight tested pointers (index 1)
+field	GLD	0x194	unitObject2	INFERRED	third of the eight tested pointers (index 2)
+field	GLD	0x198	unitObject3	INFERRED	fourth of the eight tested pointers (index 3)
+field	GLD	0x19c	unitObject4	INFERRED	fifth of the eight tested pointers (index 4)
+field	GLD	0x1a0	unitObject5	INFERRED	sixth of the eight tested pointers (index 5)
+field	GLD	0x1a4	unitObject6	INFERRED	seventh of the eight tested pointers (index 6)
+field	GLD	0x1a8	unitObject7	INFERRED	eighth of the eight tested pointers (index 7)
+field	GLD	0x1cc	currentProgram	INFERRED	**(ctx+0x1cc)+4 is passed to _glpUniformToFloat in FUN_0003b870/FUN_0003d590 (uniform upload for the bound program)
+field	GLD	0x1d4	currentVertexArray	CONFIRMED	_gldModifyVertexArray stores the vertex array here and returns the previous one; _gldReclaimVertexArray clears it
+field	GLD	0x1d8	lastHeader	CONFIRMED	FUN_0001a0f0 ORs the packet length into the word it points at (`*headerWord |= (cursor - headerWord) >> 2`) before submitting
+field	GLD	0x1dc	writeCursor	CONFIRMED	_gldFlush/_gldFinish compare it with ringMap+0x28 to decide whether anything is pending; every packet emitter advances it
+field	GLD	0x1e0	ringLimit	CONFIRMED	FUN_0001a0f0 computes free words as (ringLimit - writeCursor) >> 2; emitters compare writeCursor+N against it
+field	GLD	0x1e4	ringMap	CONFIRMED	IOConnectMapMemory type 1 (kernel clientMemoryForType case 1 = command buffer) output; +0x10 = free words, +0x18 = stamp, +0x1c = first header, +0x20 = first packet
+field	GLD	0x1e8	ringMapSize	CONFIRMED	size output of the type-1 IOConnectMapMemory call
+field	GLD	0x1ec	reserveStart	INFERRED	FUN_0001a0f0 adds (reserveEnd - reserveStart) >> 2 words to the free-word count it reports to the kernel, then zeroes both
+field	GLD	0x1f0	reserveEnd	INFERRED	see reserveStart
+field	GLD	0x1f4	dataCursor	INFERRED	FUN_000369f0: texture data is written at this cursor inside the staging buffer returned by kernel selector 18 get_data_buffer
+field	GLD	0x1f8	dataLimit	INFERRED	end of the staging buffer (base + size); FUN_000369f0 refills when cursor + size + 0x80 reaches it
+field	GLD	0x1fc	dataBase	INFERRED	start of the staging buffer; used for the word count reported back through contextBufferMap+0xc
+field	GLD	0x200	dataBufferId	INFERRED	contextBufferMap+8 after a get_data_buffer refill (FUN_000369f0)
+field	GLD	0x204	dataRefillCount	INFERRED	incremented per refill; FUN_000369f0 submits the ring when it exceeds 2 and resets it to 1; _gldReclaimContext clears it
+field	GLD	0x208	contextBufferMap	CONFIRMED	IOConnectMapMemory type 2 output (kernel clientMemoryForType case 2 = contextBuffer); word +0xc receives the used-word count in FUN_000369f0
+field	GLD	0x20c	contextBufferMapSize	CONFIRMED	size output of the type-2 IOConnectMapMemory call
+field	GLD	0x210	vertexChunkList	INFERRED	_gldAllocVertexBuffer: NULL until the first kernel structure call (selector 10) allocates a 0x16000-byte chunk; the list head
+field	GLD	0x214	vertexChunkCount	INFERRED	_gldAllocVertexBuffer: number of chunks, limit 0x80
+field	GLD	0x218	statusRegion	CONFIRMED	IOConnectMapMemory type 4 output (kernel case 4 = statusRegion); 8-byte entries {stamp, pending} indexed by fence id
+field	GLD	0x21c	statusRegionSize	CONFIRMED	size output of the type-4 IOConnectMapMemory call; the fence scan counter is size >> 8
+field	GLD	0x220	fenceBitmap	CONFIRMED	_malloc(size >> 5) in _gldCreateContext, bit-scanned/set in _gldCreateFence, cleared in _gldDestroyFence, freed in _gldDestroyContext
+field	GLD	0x224	queryPool	INFERRED	_gldCreateQuery: _malloc(0x610) then _realloc as the pool grows
+field	GLD	0x228	queryPoolBytes	INFERRED	current byte size of queryPool (0x610 initially, then capacity*0x40+0x210)
+field	GLD	0x22c	queryBitmap	CONFIRMED	_gldCreateQuery scans it for a free bit, _gldDestroyQuery clears the bit (same scheme as fenceBitmap)
+field	GLD	0x230	queryCapacity	INFERRED	number of query slots (0x20 initially, doubled on growth); bitmap size = capacity >> 3 bytes
+field	GLD	0x234	queryRecord	INFERRED	FUN_00009b70 calloc(1,0x18) record; **record is the pending query tested by FUN_00009bd0/FUN_00009cd0
+field	GLD	0x238	retireCounter	CONFIRMED	IOConnectMapMemory type 0 output (kernel case 0 = accelerator+0xac descriptor); FUN_0001a0d0 reads it as a little-endian 32-bit retired stamp and compares it with a fence stamp
+field	GLD	0x23c	submitEpoch	INFERRED	incremented by every FUN_0001a0f0 submit; _gldAllocVertexBuffer compares it with a chunk stamp
+field	GLD	0x240	commandStream	INFERRED	embedded stream object: its address is the first argument of the function pointers at +0x2998/+0x299c
+field	GLD	0x298c	streamCurrent	INFERRED	pointer returned by the allocate callback and advanced by FUN_0001dff0 (set through the +0x299c callback)
+field	GLD	0x2994	streamSoftLimit	INFERRED	FUN_0001a0f0 sets it to writeCursor + 0x6000 words after a resubmit
+field	GLD	0x2998	streamAllocate	CONFIRMED	indirect call `(**(code **)(ctx + 0x2998))(ctx + 0x240, 1)` returning the next packet slot (FUN_0001dff0)
+field	GLD	0x299c	streamSetCurrent	CONFIRMED	indirect call (FUN_0002be60) that installs the new current pointer, see the comment in FUN_0001dff0
+field	GLD	0x2b7e	hasPreamble	CONFIRMED	byte read as `hasPreamble` in FUN_0001a0f0: when set the submit writes the extra 0x13d6 preamble packet
+field	GLD	0x2b90	listSelf	CONFIRMED	_gldCreateContext stores ctx here and links the node into the global context list DAT_001f65e0 (_gldDestroyContext unlinks it)
+field	GLD	0x2b94	listNext	CONFIRMED	next node of the global context list
