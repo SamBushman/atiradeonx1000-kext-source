@@ -12,10 +12,10 @@ int FUN_0003e4d0(param_1, param_2, param_3, param_4)
   int iVar3;
   undefined4 uVar4;
   uint uVar5;
-  int iVar6;
+  int loopIndex;
   
   if (param_3 != 0) {
-    iVar6 = 0;
+    loopIndex = 0;
     do {
       uVar5 = *param_4;
       param_4 = param_4 + 1;
@@ -54,8 +54,8 @@ LAB_0003e540:
       else {
         FUN_000a1bc0(param_1,iVar2,iVar3,uVar4);
       }
-      iVar6 = iVar6 + 1;
-    } while (param_3 != iVar6);
+      loopIndex = loopIndex + 1;
+    } while (param_3 != loopIndex);
   }
   return;
 }
@@ -73,7 +73,7 @@ int FUN_0003e600(param_1, param_2, param_3, param_4)
   uint uVar4;
   uint uVar5;
   uint *puVar6;
-  int iVar7;
+  int loopIndex;
   int iVar8;
   int iVar9;
   undefined4 uVar10;
@@ -91,7 +91,7 @@ int FUN_0003e600(param_1, param_2, param_3, param_4)
   
   if (param_3 != 0) {
     iVar9 = 0;
-    iVar7 = 0;
+    loopIndex = 0;
     do {
       uVar5 = *param_4;
       param_4 = param_4 + 1;
@@ -283,8 +283,8 @@ LAB_0003e9b8:
           FUN_000a1f20(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60);
         }
       }
-      iVar7 = iVar7 + 1;
-    } while (param_3 != iVar7);
+      loopIndex = loopIndex + 1;
+    } while (param_3 != loopIndex);
   }
   return;
 }
@@ -299,7 +299,7 @@ int FUN_0003eb70(param_1, param_2, param_3)
   uint uVar2;
   undefined4 uVar3;
   uint uVar4;
-  uint uVar5;
+  uint loopIndex;
   uint *puVar6;
   
   *(undefined2 *)(param_1 + 0x2800) = 0;
@@ -308,7 +308,7 @@ int FUN_0003eb70(param_1, param_2, param_3)
   uVar4 = *param_2 >> 0x10 & 0xff;
   puVar6 = param_2 + (*param_2 & 0xffff);
   if (uVar4 != 0) {
-    uVar5 = 0;
+    loopIndex = 0;
     do {
       uVar2 = *puVar6;
       puVar6 = puVar6 + 1;
@@ -316,8 +316,8 @@ int FUN_0003eb70(param_1, param_2, param_3)
         FUN_000a2100(param_1,(uVar2 >> 0x14 & 0xff) + 0x8941,
                      (int)param_2 + (uVar2 >> 8 & 0xff0) + (uint)uVar1 * 4);
       }
-      uVar5 = uVar5 + 1;
-    } while (uVar4 != uVar5);
+      loopIndex = loopIndex + 1;
+    } while (uVar4 != loopIndex);
   }
   ((int (*)())FUN_0003e4d0)(param_1,param_3,param_2[1] >> 0x10 & 0xff,param_2 + (param_2[1] & 0xffff));
   ((int (*)())FUN_0003e600)(param_1,param_3,param_2[2] >> 0x10 & 0xff,param_2 + (param_2[2] & 0xffff));
@@ -482,6 +482,7 @@ int FUN_0003ef50(param_1, param_2, param_3)
   int param_2;
   int *param_3;
 {
+  int allocation;
   uint uVar1;
   int iVar2;
   int *piVar3;
@@ -499,19 +500,19 @@ int FUN_0003ef50(param_1, param_2, param_3)
     for (; uVar1 < (uint)(param_2 + iVar2); uVar1 = uVar1 << 1) {
     }
     if (*piVar3 == 0) {
-      iVar2 = _malloc(uVar1 << 2);
+      allocation = _malloc(uVar1 << 2);
     }
     else {
-      iVar2 = _realloc(*piVar3,uVar1 << 2);
+      allocation = _realloc(*piVar3,uVar1 << 2);
     }
-    if (iVar2 == 0) {
+    if (allocation == 0) {
       if (*(int *)(param_1 + 0x24) != 0) {
         return *(int *)(param_1 + 0x24);
       }
       *(undefined4 *)(param_1 + 0x24) = 1;
       return 1;
     }
-    *piVar3 = iVar2;
+    *piVar3 = allocation;
     *(uint *)(param_1 + 0x30) = uVar1;
     iVar2 = *(int *)(param_1 + 0x2c);
   }
@@ -526,6 +527,7 @@ int FUN_0003f050(param_1, param_2, param_3)
   int param_2;
   undefined4 *param_3;
 {
+  int loopIndex;
   byte *pbVar1;
   ushort uVar2;
   int iVar3;
@@ -555,14 +557,14 @@ LAB_0003f164:
       }
       uVar2 = *(ushort *)(iVar5 + 2);
       if (*pbVar4 != uVar2) {
-        iVar3 = 0;
+        loopIndex = 0;
         pbVar6 = pbVar4;
         uVar8 = uVar7;
         do {
-          iVar3 = iVar3 + 1;
+          loopIndex = loopIndex + 1;
           uVar8 = uVar8 - 1;
           if (uVar8 == 0) {
-            if (0xf < iVar3) {
+            if (0xf < loopIndex) {
               if (param_1[9] != 0) {
                 return param_1[9];
               }
@@ -769,30 +771,30 @@ int FUN_0003f5e0(param_1)
 int FUN_0003f660()
 {
   int iVar1;
-  int iVar2;
-  int iVar3;
+  int allocation;
+  int allocation2;
   
-  iVar2 = _malloc(0x38);
-  if (iVar2 != 0) {
-    _memset(iVar2,0,0x38);
-    *(undefined4 *)(iVar2 + 0x24) = 0;
-    *(undefined4 *)(iVar2 + 0x28) = 0;
-    *(undefined4 *)(iVar2 + 0x30) = 0;
-    *(undefined4 *)(iVar2 + 0x2c) = 0;
-    *(undefined4 *)(iVar2 + 4) = 0xffffffff;
-    *(undefined4 *)(iVar2 + 8) = 0xffffffff;
-    iVar3 = _malloc(0x24);
+  allocation = _malloc(0x38);
+  if (allocation != 0) {
+    _memset(allocation,0,0x38);
+    *(undefined4 *)(allocation + 0x24) = 0;
+    *(undefined4 *)(allocation + 0x28) = 0;
+    *(undefined4 *)(allocation + 0x30) = 0;
+    *(undefined4 *)(allocation + 0x2c) = 0;
+    *(undefined4 *)(allocation + 4) = 0xffffffff;
+    *(undefined4 *)(allocation + 8) = 0xffffffff;
+    allocation2 = _malloc(0x24);
     iVar1 = 0;
-    if (iVar3 != 0) {
-      _memset(iVar3,0,0x24);
-      iVar1 = iVar3;
+    if (allocation2 != 0) {
+      _memset(allocation2,0,0x24);
+      iVar1 = allocation2;
     }
-    *(int *)(iVar2 + 0x34) = iVar1;
-    if (*(int *)(iVar2 + 0x34) != 0) {
-      return iVar2;
+    *(int *)(allocation + 0x34) = iVar1;
+    if (*(int *)(allocation + 0x34) != 0) {
+      return allocation;
     }
-    if (iVar2 != 0) {
-      _free(iVar2);
+    if (allocation != 0) {
+      _free(allocation);
       return 0;
     }
   }
@@ -832,6 +834,7 @@ int FUN_0003f750(param_1, param_2, param_3, param_4, param_5)
 int FUN_0003f850(param_1)
   int param_1;
 {
+  int allocation;
   uint uVar1;
   int iVar2;
   dword *pdVar3;
@@ -858,12 +861,12 @@ int FUN_0003f850(param_1)
     for (; uVar1 < iVar2 + 7U; uVar1 = uVar1 << 1) {
     }
     if (*piVar8 == 0) {
-      iVar2 = _malloc(uVar1 << 2);
+      allocation = _malloc(uVar1 << 2);
     }
     else {
-      iVar2 = _realloc(*piVar8,uVar1 << 2);
+      allocation = _realloc(*piVar8,uVar1 << 2);
     }
-    if (iVar2 == 0) {
+    if (allocation == 0) {
       iVar2 = *(int *)(param_1 + 0x24);
       if (iVar2 == 0) {
         iVar2 = 1;
@@ -881,7 +884,7 @@ int FUN_0003f850(param_1)
       pdVar5 = ((unsigned char *)0x18);
       goto LAB_0003f918;
     }
-    *piVar8 = iVar2;
+    *piVar8 = allocation;
     *(uint *)(param_1 + 0x30) = uVar1;
     iVar2 = *(int *)(param_1 + 0x2c);
   }
@@ -910,6 +913,7 @@ int FUN_0003f9f0(param_1, param_2, param_3)
   uint *param_2;
   undefined4 param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   int iVar2;
   uint uVar3;
@@ -951,12 +955,12 @@ int FUN_0003f9f0(param_1, param_2, param_3)
     for (; uVar3 < iVar2 + 5U; uVar3 = uVar3 << 1) {
     }
     if (*piVar13 == 0) {
-      iVar2 = _malloc(uVar3 << 2);
+      allocation = _malloc(uVar3 << 2);
     }
     else {
-      iVar2 = _realloc(*piVar13,uVar3 << 2);
+      allocation = _realloc(*piVar13,uVar3 << 2);
     }
-    if (iVar2 == 0) {
+    if (allocation == 0) {
       iVar2 = param_1[9];
       if (iVar2 == 0) {
         iVar2 = 1;
@@ -972,7 +976,7 @@ int FUN_0003f9f0(param_1, param_2, param_3)
       pdVar7 = ((unsigned char *)0x10);
       goto LAB_0003fb50;
     }
-    *piVar13 = iVar2;
+    *piVar13 = allocation;
     param_1[0xc] = uVar3;
     iVar2 = param_1[0xb];
   }
@@ -1002,6 +1006,7 @@ int FUN_0003fbf0(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  int allocation;
   undefined4 *puVar1;
   uint uVar2;
   uint uVar3;
@@ -1029,12 +1034,12 @@ int FUN_0003fbf0(param_1, param_2, param_3, param_4)
     for (; uVar2 < uVar3; uVar2 = uVar2 << 1) {
     }
     if (*piVar8 == 0) {
-      iVar6 = _malloc(uVar2 << 2);
+      allocation = _malloc(uVar2 << 2);
     }
     else {
-      iVar6 = _realloc(*piVar8,uVar2 << 2);
+      allocation = _realloc(*piVar8,uVar2 << 2);
     }
-    if (iVar6 == 0) {
+    if (allocation == 0) {
       iVar6 = *(int *)(param_1 + 0x24);
       if (iVar6 == 0) {
         iVar6 = 1;
@@ -1046,7 +1051,7 @@ int FUN_0003fbf0(param_1, param_2, param_3, param_4)
       }
       goto LAB_0003fcc0;
     }
-    *piVar8 = iVar6;
+    *piVar8 = allocation;
     *(uint *)(param_1 + 0x30) = uVar2;
     iVar6 = *(int *)(param_1 + 0x2c);
   }
@@ -1084,6 +1089,7 @@ int FUN_0003fd80(param_1, param_2, param_3)
   int param_2;
   undefined4 *param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   uint uVar2;
   uint uVar3;
@@ -1116,12 +1122,12 @@ int FUN_0003fd80(param_1, param_2, param_3)
     for (; uVar2 < uVar3; uVar2 = uVar2 << 1) {
     }
     if (*piVar9 == 0) {
-      iVar7 = _malloc(uVar2 << 2);
+      allocation = _malloc(uVar2 << 2);
     }
     else {
-      iVar7 = _realloc(*piVar9,uVar2 << 2);
+      allocation = _realloc(*piVar9,uVar2 << 2);
     }
-    if (iVar7 == 0) {
+    if (allocation == 0) {
       iVar7 = param_1[9];
       if (iVar7 == 0) {
         iVar7 = 1;
@@ -1133,7 +1139,7 @@ int FUN_0003fd80(param_1, param_2, param_3)
       }
       goto LAB_0003fe80;
     }
-    *piVar9 = iVar7;
+    *piVar9 = allocation;
     param_1[0xc] = uVar2;
     iVar7 = param_1[0xb];
   }
@@ -1171,6 +1177,7 @@ int FUN_0003ff40(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   undefined4 *puVar3;
@@ -1230,12 +1237,12 @@ int FUN_0003ff40(param_1, param_2, param_3)
     for (; uVar4 < iVar2 + 3U; uVar4 = uVar4 << 1) {
     }
     if (*piVar8 == 0) {
-      iVar2 = _malloc(uVar4 << 2);
+      allocation = _malloc(uVar4 << 2);
     }
     else {
-      iVar2 = _realloc(*piVar8,uVar4 << 2);
+      allocation = _realloc(*piVar8,uVar4 << 2);
     }
-    if (iVar2 == 0) {
+    if (allocation == 0) {
       iVar2 = param_1[9];
       if (iVar2 == 0) {
         iVar2 = 1;
@@ -1249,7 +1256,7 @@ int FUN_0003ff40(param_1, param_2, param_3)
       pdVar6 = ((unsigned char *)0x8);
       goto LAB_00040128;
     }
-    *piVar8 = iVar2;
+    *piVar8 = allocation;
     param_1[0xc] = uVar4;
     iVar2 = param_1[0xb];
   }
@@ -1270,6 +1277,7 @@ int FUN_000401b0(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 *param_3;
 {
+  int allocation;
   uint uVar1;
   int iVar2;
   dword *pdVar3;
@@ -1303,12 +1311,12 @@ int FUN_000401b0(param_1, param_2, param_3)
     for (; uVar1 < iVar2 + 5U; uVar1 = uVar1 << 1) {
     }
     if (*piVar8 == 0) {
-      iVar2 = _malloc(uVar1 << 2);
+      allocation = _malloc(uVar1 << 2);
     }
     else {
-      iVar2 = _realloc(*piVar8,uVar1 << 2);
+      allocation = _realloc(*piVar8,uVar1 << 2);
     }
-    if (iVar2 == 0) {
+    if (allocation == 0) {
       iVar2 = *(int *)(param_1 + 0x24);
       if (iVar2 == 0) {
         iVar2 = 1;
@@ -1324,7 +1332,7 @@ int FUN_000401b0(param_1, param_2, param_3)
       pdVar7 = ((unsigned char *)0x10);
       goto LAB_000402d0;
     }
-    *piVar8 = iVar2;
+    *piVar8 = allocation;
     *(uint *)(param_1 + 0x30) = uVar1;
     iVar2 = *(int *)(param_1 + 0x2c);
   }
@@ -1350,7 +1358,7 @@ int FUN_00040370(param_1, param_2, param_3)
   undefined4 *param_3;
 {
   undefined4 *puVar1;
-  void *pvVar2;
+  void *allocation;
   uint uVar3;
   int iVar4;
   uint uVar5;
@@ -1396,18 +1404,18 @@ int FUN_00040370(param_1, param_2, param_3)
       for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
       }
       if ((void *)*piVar10 == (void *)0x0) {
-        pvVar2 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        pvVar2 = _realloc((void *)*piVar10,uVar3 << 2);
+        allocation = _realloc((void *)*piVar10,uVar3 << 2);
       }
-      if (pvVar2 == (void *)0x0) {
+      if (allocation == (void *)0x0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040524;
       }
-      *piVar10 = (int)pvVar2;
+      *piVar10 = (int)allocation;
       param_1[0xc] = uVar3;
       iVar4 = param_1[0xb];
     }
@@ -1445,18 +1453,18 @@ LAB_00040524:
       for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
       }
       if ((void *)*piVar10 == (void *)0x0) {
-        pvVar2 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        pvVar2 = _realloc((void *)*piVar10,uVar3 << 2);
+        allocation = _realloc((void *)*piVar10,uVar3 << 2);
       }
-      if (pvVar2 == (void *)0x0) {
+      if (allocation == (void *)0x0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040664;
       }
-      *piVar10 = (int)pvVar2;
+      *piVar10 = (int)allocation;
       param_1[0xc] = uVar3;
       iVar4 = param_1[0xb];
     }
@@ -1491,18 +1499,18 @@ LAB_00040664:
       for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
       }
       if ((void *)*piVar10 == (void *)0x0) {
-        pvVar2 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        pvVar2 = _realloc((void *)*piVar10,uVar3 << 2);
+        allocation = _realloc((void *)*piVar10,uVar3 << 2);
       }
-      if (pvVar2 == (void *)0x0) {
+      if (allocation == (void *)0x0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040794;
       }
-      *piVar10 = (int)pvVar2;
+      *piVar10 = (int)allocation;
       param_1[0xc] = uVar3;
       iVar4 = param_1[0xb];
     }
@@ -1537,18 +1545,18 @@ LAB_00040794:
         for (; uVar6 < iVar4 + 5U; uVar6 = uVar6 << 1) {
         }
         if ((void *)*piVar10 == (void *)0x0) {
-          pvVar2 = _malloc(uVar6 << 2);
+          allocation = _malloc(uVar6 << 2);
         }
         else {
-          pvVar2 = _realloc((void *)*piVar10,uVar6 << 2);
+          allocation = _realloc((void *)*piVar10,uVar6 << 2);
         }
-        if (pvVar2 == (void *)0x0) {
+        if (allocation == (void *)0x0) {
           if (param_1[9] == 0) {
             param_1[9] = 1;
           }
           goto LAB_000408d0;
         }
-        *piVar10 = (int)pvVar2;
+        *piVar10 = (int)allocation;
         param_1[0xc] = uVar6;
         iVar4 = param_1[0xb];
       }
@@ -1588,19 +1596,19 @@ LAB_000408d0:
       for (; uVar6 < iVar4 + 5U; uVar6 = uVar6 << 1) {
       }
       if ((void *)*piVar10 == (void *)0x0) {
-        pvVar2 = _malloc(uVar6 << 2);
+        allocation = _malloc(uVar6 << 2);
       }
       else {
-        pvVar2 = _realloc((void *)*piVar10,uVar6 << 2);
+        allocation = _realloc((void *)*piVar10,uVar6 << 2);
       }
-      if (pvVar2 == (void *)0x0) {
+      if (allocation == (void *)0x0) {
         if (param_1[9] != 0) {
           return param_1[9];
         }
         param_1[9] = 1;
         return 1;
       }
-      *piVar10 = (int)pvVar2;
+      *piVar10 = (int)allocation;
       param_1[0xc] = uVar6;
       iVar4 = param_1[0xb];
     }
@@ -1627,6 +1635,7 @@ int FUN_00040374(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  int allocation;
   undefined4 *puVar1;
   uint uVar2;
   int iVar3;
@@ -1673,18 +1682,18 @@ int FUN_00040374(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       for (; uVar2 < iVar3 + 5U; uVar2 = uVar2 << 1) {
       }
       if (*piVar9 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar9,uVar2 << 2);
+        allocation = _realloc(*piVar9,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040524;
       }
-      *piVar9 = iVar3;
+      *piVar9 = allocation;
       param_1[0xc] = uVar2;
       iVar3 = param_1[0xb];
     }
@@ -1722,18 +1731,18 @@ LAB_00040524:
       for (; uVar2 < iVar3 + 5U; uVar2 = uVar2 << 1) {
       }
       if (*piVar9 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar9,uVar2 << 2);
+        allocation = _realloc(*piVar9,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040664;
       }
-      *piVar9 = iVar3;
+      *piVar9 = allocation;
       param_1[0xc] = uVar2;
       iVar3 = param_1[0xb];
     }
@@ -1768,18 +1777,18 @@ LAB_00040664:
       for (; uVar2 < iVar3 + 5U; uVar2 = uVar2 << 1) {
       }
       if (*piVar9 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar9,uVar2 << 2);
+        allocation = _realloc(*piVar9,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040794;
       }
-      *piVar9 = iVar3;
+      *piVar9 = allocation;
       param_1[0xc] = uVar2;
       iVar3 = param_1[0xb];
     }
@@ -1814,18 +1823,18 @@ LAB_00040794:
         for (; uVar5 < iVar3 + 5U; uVar5 = uVar5 << 1) {
         }
         if (*piVar9 == 0) {
-          iVar3 = _malloc(uVar5 << 2);
+          allocation = _malloc(uVar5 << 2);
         }
         else {
-          iVar3 = _realloc(*piVar9,uVar5 << 2);
+          allocation = _realloc(*piVar9,uVar5 << 2);
         }
-        if (iVar3 == 0) {
+        if (allocation == 0) {
           if (param_1[9] == 0) {
             param_1[9] = 1;
           }
           goto LAB_000408d0;
         }
-        *piVar9 = iVar3;
+        *piVar9 = allocation;
         param_1[0xc] = uVar5;
         iVar3 = param_1[0xb];
       }
@@ -1865,19 +1874,19 @@ LAB_000408d0:
       for (; uVar5 < iVar3 + 5U; uVar5 = uVar5 << 1) {
       }
       if (*piVar9 == 0) {
-        iVar3 = _malloc(uVar5 << 2);
+        allocation = _malloc(uVar5 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar9,uVar5 << 2);
+        allocation = _realloc(*piVar9,uVar5 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         if (param_1[9] != 0) {
           return param_1[9];
         }
         param_1[9] = 1;
         return 1;
       }
-      *piVar9 = iVar3;
+      *piVar9 = allocation;
       param_1[0xc] = uVar5;
       iVar3 = param_1[0xb];
     }
@@ -1904,6 +1913,7 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  int allocation;
   undefined4 *puVar1;
   bool bVar2;
   int iVar3;
@@ -1968,18 +1978,18 @@ int FUN_00040ac4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       for (; uVar4 < iVar7 + 7U; uVar4 = uVar4 << 1) {
       }
       if (*piVar17 == 0) {
-        iVar7 = _malloc(uVar4 << 2);
+        allocation = _malloc(uVar4 << 2);
       }
       else {
-        iVar7 = _realloc(*piVar17,uVar4 << 2);
+        allocation = _realloc(*piVar17,uVar4 << 2);
       }
-      if (iVar7 == 0) {
+      if (allocation == 0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040cf0;
       }
-      *piVar17 = iVar7;
+      *piVar17 = allocation;
       param_1[0xc] = uVar4;
       iVar7 = param_1[0xb];
     }
@@ -2032,18 +2042,18 @@ LAB_00040cf0:
       for (; uVar4 < iVar7 + 7U; uVar4 = uVar4 << 1) {
       }
       if (*piVar17 == 0) {
-        iVar7 = _malloc(uVar4 << 2);
+        allocation = _malloc(uVar4 << 2);
       }
       else {
-        iVar7 = _realloc(*piVar17,uVar4 << 2);
+        allocation = _realloc(*piVar17,uVar4 << 2);
       }
-      if (iVar7 == 0) {
+      if (allocation == 0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040e70;
       }
-      *piVar17 = iVar7;
+      *piVar17 = allocation;
       param_1[0xc] = uVar4;
       iVar7 = param_1[0xb];
     }
@@ -2093,18 +2103,18 @@ LAB_00040e70:
       for (; uVar4 < iVar7 + 7U; uVar4 = uVar4 << 1) {
       }
       if (*piVar17 == 0) {
-        iVar7 = _malloc(uVar4 << 2);
+        allocation = _malloc(uVar4 << 2);
       }
       else {
-        iVar7 = _realloc(*piVar17,uVar4 << 2);
+        allocation = _realloc(*piVar17,uVar4 << 2);
       }
-      if (iVar7 == 0) {
+      if (allocation == 0) {
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
         goto LAB_00040ff0;
       }
-      *piVar17 = iVar7;
+      *piVar17 = allocation;
       param_1[0xc] = uVar4;
       iVar7 = param_1[0xb];
     }
@@ -2155,18 +2165,18 @@ LAB_00040ff0:
         for (; uVar11 < iVar7 + 7U; uVar11 = uVar11 << 1) {
         }
         if (*piVar17 == 0) {
-          iVar7 = _malloc(uVar11 << 2);
+          allocation = _malloc(uVar11 << 2);
         }
         else {
-          iVar7 = _realloc(*piVar17,uVar11 << 2);
+          allocation = _realloc(*piVar17,uVar11 << 2);
         }
-        if (iVar7 == 0) {
+        if (allocation == 0) {
           if (param_1[9] == 0) {
             param_1[9] = 1;
           }
           goto LAB_00041170;
         }
-        *piVar17 = iVar7;
+        *piVar17 = allocation;
         param_1[0xc] = uVar11;
         iVar7 = param_1[0xb];
       }
@@ -2215,19 +2225,19 @@ LAB_00041170:
       for (; uVar11 < iVar7 + 5U; uVar11 = uVar11 << 1) {
       }
       if (*piVar17 == 0) {
-        iVar7 = _malloc(uVar11 << 2);
+        allocation = _malloc(uVar11 << 2);
       }
       else {
-        iVar7 = _realloc(*piVar17,uVar11 << 2);
+        allocation = _realloc(*piVar17,uVar11 << 2);
       }
-      if (iVar7 == 0) {
+      if (allocation == 0) {
         if (param_1[9] != 0) {
           return param_1[9];
         }
         param_1[9] = 1;
         return 1;
       }
-      *piVar17 = iVar7;
+      *piVar17 = allocation;
       param_1[0xc] = uVar11;
       iVar7 = param_1[0xb];
     }
@@ -2249,6 +2259,7 @@ int FUN_00041310(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   undefined2 uVar2;
   uint uVar3;
@@ -2287,18 +2298,18 @@ int FUN_00041310(param_1, param_2, param_3)
       for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
       }
       if (*piVar6 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        iVar4 = _realloc(*piVar6,uVar3 << 2);
+        allocation = _realloc(*piVar6,uVar3 << 2);
       }
-      if (iVar4 == 0) {
+      if (allocation == 0) {
         if (*(int *)(param_1 + 0x24) == 0) {
           *(undefined4 *)(param_1 + 0x24) = 1;
         }
         goto LAB_000414c0;
       }
-      *piVar6 = iVar4;
+      *piVar6 = allocation;
       *(uint *)(param_1 + 0x30) = uVar3;
       iVar4 = *(int *)(param_1 + 0x2c);
     }
@@ -2327,6 +2338,7 @@ int FUN_00041510(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  int allocation;
   undefined4 *puVar1;
   bool bVar2;
   int iVar3;
@@ -2364,12 +2376,12 @@ int FUN_00041510(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     for (; uVar9 < iVar3 + 7U; uVar9 = uVar9 << 1) {
     }
     if (*piVar8 == 0) {
-      iVar3 = _malloc(uVar9 << 2);
+      allocation = _malloc(uVar9 << 2);
     }
     else {
-      iVar3 = _realloc(*piVar8,uVar9 << 2);
+      allocation = _realloc(*piVar8,uVar9 << 2);
     }
-    if (iVar3 == 0) {
+    if (allocation == 0) {
       iVar3 = param_1[9];
       if (iVar3 == 0) {
         iVar3 = 1;
@@ -2383,7 +2395,7 @@ int FUN_00041510(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       pdVar6 = ((unsigned char *)0x8);
       goto LAB_00041698;
     }
-    *piVar8 = iVar3;
+    *piVar8 = allocation;
     param_1[0xc] = uVar9;
     iVar3 = param_1[0xb];
   }
@@ -3780,6 +3792,7 @@ int FUN_00043df0(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 *param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   bool bVar2;
   uint uVar3;
@@ -3811,19 +3824,19 @@ int FUN_00043df0(param_1, param_2, param_3)
       for (; uVar3 < iVar4 + 9U; uVar3 = uVar3 << 1) {
       }
       if (*piVar9 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        iVar4 = _realloc(*piVar9,uVar3 << 2);
+        allocation = _realloc(*piVar9,uVar3 << 2);
       }
-      if (iVar4 == 0) {
+      if (allocation == 0) {
         if (*(int *)(param_1 + 0x24) != 0) {
           return *(int *)(param_1 + 0x24);
         }
         *(undefined4 *)(param_1 + 0x24) = 1;
         return 1;
       }
-      *piVar9 = iVar4;
+      *piVar9 = allocation;
       *(uint *)(param_1 + 0x30) = uVar3;
       iVar4 = *(int *)(param_1 + 0x2c);
     }
@@ -3853,6 +3866,7 @@ int FUN_00043f60(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 *param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   bool bVar2;
   uint uVar3;
@@ -3901,13 +3915,13 @@ LAB_000442bc:
     for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
     }
     if (*piVar11 == 0) {
-      iVar4 = _malloc(uVar3 << 2);
+      allocation = _malloc(uVar3 << 2);
     }
     else {
-      iVar4 = _realloc(*piVar11,uVar3 << 2);
+      allocation = _realloc(*piVar11,uVar3 << 2);
     }
-    if (iVar4 != 0) {
-      *piVar11 = iVar4;
+    if (allocation != 0) {
+      *piVar11 = allocation;
       *(uint *)(param_1 + 0x30) = uVar3;
       iVar4 = *(int *)(param_1 + 0x2c);
       goto LAB_000442bc;
@@ -3935,18 +3949,18 @@ LAB_000442bc:
       for (; uVar3 < iVar4 + 7U; uVar3 = uVar3 << 1) {
       }
       if (*piVar11 == 0) {
-        iVar4 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        iVar4 = _realloc(*piVar11,uVar3 << 2);
+        allocation = _realloc(*piVar11,uVar3 << 2);
       }
-      if (iVar4 == 0) {
+      if (allocation == 0) {
         if (*(int *)(param_1 + 0x24) == 0) {
           *(undefined4 *)(param_1 + 0x24) = 1;
         }
         goto LAB_000440e0;
       }
-      *piVar11 = iVar4;
+      *piVar11 = allocation;
       *(uint *)(param_1 + 0x30) = uVar3;
       iVar4 = *(int *)(param_1 + 0x2c);
     }
@@ -3993,12 +4007,12 @@ LAB_000440e0:
     for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
     }
     if (*piVar11 == 0) {
-      iVar4 = _malloc(uVar3 << 2);
+      allocation = _malloc(uVar3 << 2);
     }
     else {
-      iVar4 = _realloc(*piVar11,uVar3 << 2);
+      allocation = _realloc(*piVar11,uVar3 << 2);
     }
-    if (iVar4 == 0) {
+    if (allocation == 0) {
 LAB_0004432c:
       if (*(int *)(param_1 + 0x24) == 0) {
         *(undefined4 *)(param_1 + 0x24) = 1;
@@ -4006,7 +4020,7 @@ LAB_0004432c:
       }
       return *(int *)(param_1 + 0x24);
     }
-    *piVar11 = iVar4;
+    *piVar11 = allocation;
     *(uint *)(param_1 + 0x30) = uVar3;
     iVar4 = *(int *)(param_1 + 0x2c);
   }
@@ -4026,6 +4040,7 @@ int FUN_00044360(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 *param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   bool bVar2;
   uint uVar3;
@@ -4053,12 +4068,12 @@ int FUN_00044360(param_1, param_2, param_3)
     for (; uVar3 < iVar4 + 5U; uVar3 = uVar3 << 1) {
     }
     if (*piVar6 == 0) {
-      iVar4 = _malloc(uVar3 << 2);
+      allocation = _malloc(uVar3 << 2);
     }
     else {
-      iVar4 = _realloc(*piVar6,uVar3 << 2);
+      allocation = _realloc(*piVar6,uVar3 << 2);
     }
-    if (iVar4 == 0) {
+    if (allocation == 0) {
       iVar4 = *(int *)(param_1 + 0x24);
       if (iVar4 == 0) {
         iVar4 = 1;
@@ -4070,7 +4085,7 @@ int FUN_00044360(param_1, param_2, param_3)
       }
       goto LAB_00044460;
     }
-    *piVar6 = iVar4;
+    *piVar6 = allocation;
     *(uint *)(param_1 + 0x30) = uVar3;
     iVar4 = *(int *)(param_1 + 0x2c);
   }
@@ -4097,6 +4112,7 @@ int FUN_00044500(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   uint uVar2;
   int iVar3;
@@ -4138,12 +4154,12 @@ int FUN_00044500(param_1, param_2, param_3)
       for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
       }
       if (*piVar7 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*piVar7,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         iVar3 = *(int *)(param_1 + 0x24);
         if (iVar3 == 0) {
           iVar3 = 1;
@@ -4152,7 +4168,7 @@ int FUN_00044500(param_1, param_2, param_3)
         uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
         goto LAB_000446a0;
       }
-      *piVar7 = iVar3;
+      *piVar7 = allocation;
       *(uint *)(param_1 + 0x30) = uVar2;
       iVar3 = *(int *)(param_1 + 0x2c);
     }
@@ -4191,12 +4207,12 @@ LAB_000446a0:
       for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
       }
       if (*piVar7 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*piVar7,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         iVar3 = *(int *)(param_1 + 0x24);
         if (iVar3 == 0) {
           iVar3 = 1;
@@ -4205,7 +4221,7 @@ LAB_000446a0:
         uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
         goto LAB_00044810;
       }
-      *piVar7 = iVar3;
+      *piVar7 = allocation;
       *(uint *)(param_1 + 0x30) = uVar2;
       iVar3 = *(int *)(param_1 + 0x2c);
     }
@@ -4244,12 +4260,12 @@ LAB_00044810:
       for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
       }
       if (*piVar7 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*piVar7,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         iVar3 = *(int *)(param_1 + 0x24);
         if (iVar3 == 0) {
           iVar3 = 1;
@@ -4257,7 +4273,7 @@ LAB_00044810:
         }
         goto LAB_00044970;
       }
-      *piVar7 = iVar3;
+      *piVar7 = allocation;
       *(uint *)(param_1 + 0x30) = uVar2;
       iVar3 = *(int *)(param_1 + 0x2c);
     }
@@ -4296,19 +4312,19 @@ LAB_00044970:
       for (; uVar2 < iVar3 + 7U; uVar2 = uVar2 << 1) {
       }
       if (*piVar7 == 0) {
-        iVar3 = _malloc(uVar2 << 2);
+        allocation = _malloc(uVar2 << 2);
       }
       else {
-        iVar3 = _realloc(*piVar7,uVar2 << 2);
+        allocation = _realloc(*piVar7,uVar2 << 2);
       }
-      if (iVar3 == 0) {
+      if (allocation == 0) {
         if (*(int *)(param_1 + 0x24) != 0) {
           return *(int *)(param_1 + 0x24);
         }
         *(undefined4 *)(param_1 + 0x24) = 1;
         return 1;
       }
-      *piVar7 = iVar3;
+      *piVar7 = allocation;
       *(uint *)(param_1 + 0x30) = uVar2;
       iVar3 = *(int *)(param_1 + 0x2c);
     }
@@ -4336,6 +4352,7 @@ int FUN_00044ac0(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 *param_3;
 {
+  int allocation;
   uint uVar1;
   int iVar2;
   undefined4 *puVar3;
@@ -4371,12 +4388,12 @@ int FUN_00044ac0(param_1, param_2, param_3)
     for (; uVar1 < iVar2 + 3U; uVar1 = uVar1 << 1) {
     }
     if (*piVar6 == 0) {
-      iVar2 = _malloc(uVar1 << 2);
+      allocation = _malloc(uVar1 << 2);
     }
     else {
-      iVar2 = _realloc(*piVar6,uVar1 << 2);
+      allocation = _realloc(*piVar6,uVar1 << 2);
     }
-    if (iVar2 == 0) {
+    if (allocation == 0) {
       iVar2 = *(int *)(param_1 + 0x24);
       if (iVar2 == 0) {
         iVar2 = 1;
@@ -4390,7 +4407,7 @@ int FUN_00044ac0(param_1, param_2, param_3)
       pdVar4 = ((unsigned char *)0x8);
       goto LAB_00044c08;
     }
-    *piVar6 = iVar2;
+    *piVar6 = allocation;
     *(uint *)(param_1 + 0x30) = uVar1;
     iVar2 = *(int *)(param_1 + 0x2c);
   }
@@ -5173,6 +5190,8 @@ int FUN_00046180(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int allocation;
+  int allocation2;
   undefined4 *puVar1;
   bool bVar2;
   uint uVar3;
@@ -5242,13 +5261,13 @@ LAB_00046640:
       for (; uVar3 < uVar4; uVar3 = uVar3 << 1) {
       }
       if (*piVar10 == 0) {
-        iVar9 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        iVar9 = _realloc(*piVar10,uVar3 << 2);
+        allocation = _realloc(*piVar10,uVar3 << 2);
       }
-      if (iVar9 == 0) goto LAB_0004676c;
-      *piVar10 = iVar9;
+      if (allocation == 0) goto LAB_0004676c;
+      *piVar10 = allocation;
       param_1[0xc] = uVar3;
       iVar9 = param_1[0xb];
     }
@@ -5308,13 +5327,13 @@ LAB_00046640:
       for (; uVar3 < iVar5 + 7U; uVar3 = uVar3 << 1) {
       }
       if (*piVar10 == 0) {
-        iVar5 = _malloc(uVar3 << 2);
+        allocation2 = _malloc(uVar3 << 2);
       }
       else {
-        iVar5 = _realloc(*piVar10,uVar3 << 2);
+        allocation2 = _realloc(*piVar10,uVar3 << 2);
       }
-      if (iVar5 == 0) goto LAB_0004676c;
-      *piVar10 = iVar5;
+      if (allocation2 == 0) goto LAB_0004676c;
+      *piVar10 = allocation2;
       param_1[0xc] = uVar3;
       iVar5 = param_1[0xb];
     }
@@ -5354,12 +5373,12 @@ LAB_00046640:
       for (; uVar3 < iVar9 + 7U; uVar3 = uVar3 << 1) {
       }
       if (*piVar10 == 0) {
-        iVar9 = _malloc(uVar3 << 2);
+        allocation = _malloc(uVar3 << 2);
       }
       else {
-        iVar9 = _realloc(*piVar10,uVar3 << 2);
+        allocation = _realloc(*piVar10,uVar3 << 2);
       }
-      if (iVar9 == 0) {
+      if (allocation == 0) {
 LAB_0004676c:
         if (param_1[9] != 0) {
           return param_1[9];
@@ -5367,7 +5386,7 @@ LAB_0004676c:
         param_1[9] = 1;
         return 1;
       }
-      *piVar10 = iVar9;
+      *piVar10 = allocation;
       param_1[0xc] = uVar3;
       iVar9 = param_1[0xb];
     }
@@ -5393,6 +5412,7 @@ int FUN_000467a0(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int allocation;
   undefined4 *puVar1;
   int iVar2;
   uint uVar3;
@@ -5445,19 +5465,19 @@ int FUN_000467a0(param_1, param_2, param_3)
         for (; uVar3 < iVar2 + 7U; uVar3 = uVar3 << 1) {
         }
         if (*piVar7 == 0) {
-          iVar2 = _malloc(uVar3 << 2);
+          allocation = _malloc(uVar3 << 2);
         }
         else {
-          iVar2 = _realloc(*piVar7,uVar3 << 2);
+          allocation = _realloc(*piVar7,uVar3 << 2);
         }
-        if (iVar2 == 0) {
+        if (allocation == 0) {
           if (param_1[9] != 0) {
             return param_1[9];
           }
           param_1[9] = 1;
           return 1;
         }
-        *piVar7 = iVar2;
+        *piVar7 = allocation;
         param_1[0xc] = uVar3;
         iVar2 = param_1[0xb];
       }
@@ -5489,6 +5509,7 @@ int FUN_00046a30(param_1, param_2)
   int *param_1;
   int param_2;
 {
+  int allocation;
   uint *puVar1;
   int iVar2;
   uint *puVar3;
@@ -5613,13 +5634,13 @@ LAB_00046e28:
           for (; uVar10 < iVar2 + 7U; uVar10 = uVar10 << 1) {
           }
           if (*piVar13 == 0) {
-            iVar2 = _malloc(uVar10 << 2);
+            allocation = _malloc(uVar10 << 2);
           }
           else {
-            iVar2 = _realloc(*piVar13,uVar10 << 2);
+            allocation = _realloc(*piVar13,uVar10 << 2);
           }
-          if (iVar2 == 0) goto LAB_00046e28;
-          *piVar13 = iVar2;
+          if (allocation == 0) goto LAB_00046e28;
+          *piVar13 = allocation;
           param_1[0xc] = uVar10;
           iVar2 = param_1[0xb];
         }
@@ -7711,18 +7732,18 @@ int FUN_0004aa90(param_1, param_2)
 {
   uint *puVar1;
   uint *puVar2;
-  int iVar3;
+  int loopIndex;
   
   if (((unsigned char *)0x000013b2)[param_1] != '\0') {
-    iVar3 = 0;
+    loopIndex = 0;
     puVar2 = param_2;
     do {
       puVar1 = puVar2 + 1;
-      iVar3 = iVar3 + 1;
+      loopIndex = loopIndex + 1;
       puVar2[0x22] = puVar2[0x22] & 0xfe001fc0 | 0xd10000;
       puVar2 = puVar2 + 1;
       *puVar2 = *puVar1 & 0xfffcffef;
-    } while (iVar3 < (int)(uint)(byte)((unsigned char *)0x000013b2)[param_1]);
+    } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b2)[param_1]);
   }
   param_2[0x87] = 0;
   param_2[0x83] = 1;
@@ -7739,6 +7760,7 @@ int FUN_0004aa90(param_1, param_2)
 int FUN_0004ab60(param_1)
   int param_1;
 {
+  int loopIndex;
   int iVar1;
   int iVar2;
   
@@ -7753,13 +7775,13 @@ int FUN_0004ab60(param_1)
   *(undefined4 *)(param_1 + 0x1e64) = 0;
   *(undefined4 *)(param_1 + 0x1e80) = 0;
   if (0 < *(int *)(param_1 + 0x1e74)) {
-    iVar1 = 0;
+    loopIndex = 0;
     do {
-      iVar2 = iVar1 * 4;
-      iVar1 = iVar1 + 1;
+      iVar2 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       ((unsigned char *)0x000010e9)[*(int *)(iVar2 + *(int *)(param_1 + 0x1e7c))] = 0;
       ((unsigned char *)0x000010ea)[*(int *)(iVar2 + *(int *)(param_1 + 0x1e7c))] = 0;
-    } while (iVar1 < *(int *)(param_1 + 0x1e74));
+    } while (loopIndex < *(int *)(param_1 + 0x1e74));
   }
   *(undefined4 *)(param_1 + 0x1e74) = 0;
   if (*(int *)(param_1 + 0x1e5c) == 0) {
@@ -7781,6 +7803,7 @@ int FUN_0004ab60(param_1)
 int FUN_0004ac90(param_1)
   int param_1;
 {
+  uint loopIndex;
   bool bVar1;
   uint uVar2;
   int iVar3;
@@ -7813,13 +7836,13 @@ int FUN_0004ac90(param_1)
   }
   bVar1 = false;
   if (uVar11 != 0) {
-    uVar10 = 0;
+    loopIndex = 0;
     iVar12 = param_1;
     do {
       iVar3 = *(int *)(((unsigned char *)0x000013f8) + iVar12);
       if (((iVar3 != 0) && (*(short *)(iVar3 + 0x38) == 0x1902)) &&
          (fparam_1 = (double)*(float *)(iVar3 + 0x50), fparam_1 != 0.0)) {
-        iVar3 = ((int)uVar10 >> 2) + (uint)((int)uVar10 < 0 && (uVar10 & 3) != 0);
+        iVar3 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
         if (iVar3 == 1) {
           iVar14 = ((uint (*)())FUN_0004a7d0)(fparam_1);
           piVar9[0x68] = iVar14;
@@ -7843,9 +7866,9 @@ int FUN_0004ac90(param_1)
         *(uint *)((int)piVar9 + (int)(((unsigned char *)0x000010b8) + uVar2)) =
              1 << (iVar3 + 0x10U & 0x1f) | *(uint *)((int)piVar9 + (int)(((unsigned char *)0x000010b8) + uVar2));
       }
-      uVar10 = uVar10 + 1;
+      loopIndex = loopIndex + 1;
       iVar12 = iVar12 + 4;
-    } while (uVar11 != uVar10);
+    } while (uVar11 != loopIndex);
   }
   if (*(char *)(param_1 + 0x121) != '\0') {
     iVar12 = *(int *)(*(int *)(param_1 + 4) + 0x10);
@@ -8136,7 +8159,7 @@ int FUN_0004b520(param_1, param_2)
   int param_2;
 {
   int *piVar1;
-  int iVar2;
+  int loopIndex;
   int iVar3;
   int iVar4;
   
@@ -8146,29 +8169,29 @@ int FUN_0004b520(param_1, param_2)
       return;
     }
     piVar1 = *(int **)(param_1 + 0x1e7c);
-    iVar2 = 0;
+    loopIndex = 0;
     if (param_2 != *piVar1) {
-      iVar2 = 0;
+      loopIndex = 0;
       iVar4 = iVar3;
       do {
-        iVar2 = iVar2 + 1;
+        loopIndex = loopIndex + 1;
         iVar4 = iVar4 + -1;
         if (iVar4 == 0) {
           return;
         }
-      } while (param_2 != piVar1[iVar2]);
+      } while (param_2 != piVar1[loopIndex]);
     }
     iVar3 = iVar3 + -1;
     *(int *)(param_1 + 0x1e74) = iVar3;
-    if (iVar3 == iVar2) break;
-    if (iVar2 < iVar3) {
-      iVar4 = iVar2 << 2;
+    if (iVar3 == loopIndex) break;
+    if (loopIndex < iVar3) {
+      iVar4 = loopIndex << 2;
       while( true ) {
-        iVar2 = iVar2 + 1;
+        loopIndex = loopIndex + 1;
         *(undefined4 *)(iVar4 + (int)piVar1) = *(undefined4 *)((int)piVar1 + iVar4 + 4);
         iVar4 = iVar4 + 4;
         iVar3 = *(int *)(param_1 + 0x1e74);
-        if (iVar3 <= iVar2) break;
+        if (iVar3 <= loopIndex) break;
         piVar1 = *(int **)(param_1 + 0x1e7c);
       }
     }
@@ -8182,7 +8205,7 @@ int FUN_0004b5d0(param_1, param_2)
   int param_2;
 {
   int *piVar1;
-  int iVar2;
+  int loopIndex;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -8195,27 +8218,27 @@ int FUN_0004b5d0(param_1, param_2)
     iVar3 = *(int *)(param_1 + 0x1e74);
     while (0 < iVar3) {
       piVar1 = *(int **)(param_1 + 0x1e7c);
-      iVar2 = 0;
+      loopIndex = 0;
       if (param_2 != *piVar1) {
-        iVar2 = 0;
+        loopIndex = 0;
         iVar4 = iVar3;
         do {
-          iVar2 = iVar2 + 1;
+          loopIndex = loopIndex + 1;
           iVar4 = iVar4 + -1;
           if (iVar4 == 0) goto LAB_0004b6a8;
-        } while (piVar1[iVar2] != param_2);
+        } while (piVar1[loopIndex] != param_2);
       }
       iVar3 = iVar3 + -1;
       *(int *)(param_1 + 0x1e74) = iVar3;
-      if (iVar3 == iVar2) break;
-      if (iVar2 < iVar3) {
-        iVar4 = iVar2 << 2;
+      if (iVar3 == loopIndex) break;
+      if (loopIndex < iVar3) {
+        iVar4 = loopIndex << 2;
         while( true ) {
-          iVar2 = iVar2 + 1;
+          loopIndex = loopIndex + 1;
           *(undefined4 *)(iVar4 + (int)piVar1) = *(undefined4 *)((int)piVar1 + iVar4 + 4);
           iVar4 = iVar4 + 4;
           iVar3 = *(int *)(param_1 + 0x1e74);
-          if (iVar3 <= iVar2) break;
+          if (iVar3 <= loopIndex) break;
           piVar1 = *(int **)(param_1 + 0x1e7c);
         }
       }
@@ -8234,19 +8257,19 @@ int FUN_0004b710(param_1)
   int param_1;
 {
   undefined *puVar1;
-  int iVar2;
+  int loopIndex;
   undefined *puVar3;
   
   if (*(short *)(param_1 + 0x1e6c) != 0) {
-    iVar2 = 0;
+    loopIndex = 0;
     puVar3 = (undefined *)0x0;
     do {
-      iVar2 = iVar2 + 1;
+      loopIndex = loopIndex + 1;
       puVar1 = puVar3 + *(int *)(param_1 + 0x1e60);
       puVar3 = ((unsigned char *)0x00003754U) + (int)puVar3;
       *(undefined4 *)(puVar1 + 0x1780) = 0;
       ((int (*)())FUN_0004b5d0)(param_1,puVar1);
-    } while (iVar2 < (int)(uint)*(ushort *)(param_1 + 0x1e6c));
+    } while (loopIndex < (int)(uint)*(ushort *)(param_1 + 0x1e6c));
   }
   _free(*(undefined4 *)(param_1 + 0x1e60));
   _memset(*(undefined4 *)(((unsigned char *)0x00001114) + param_1),0xff,
@@ -8265,19 +8288,19 @@ int FUN_0004b7d0(param_1)
 {
   int iVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 allocation;
   int iVar4;
   uint uVar5;
-  uint uVar6;
-  int iVar7;
+  uint loopIndex2;
+  int loopIndex;
   int iVar8;
   
   iVar8 = *(int *)(((unsigned char *)0x0000112c) + param_1);
   ((int (*)())FUN_0004b710)(param_1);
   *(undefined2 *)(param_1 + 0x1e6c) = 1;
-  uVar3 = _malloc(((unsigned char *)0x00003754U));
-  *(undefined4 *)(param_1 + 0x1e60) = uVar3;
-  _memset(uVar3,0,((unsigned char *)0x00003754U));
+  allocation = _malloc(((unsigned char *)0x00003754U));
+  *(undefined4 *)(param_1 + 0x1e60) = allocation;
+  _memset(allocation,0,((unsigned char *)0x00003754U));
   *(undefined4 *)(param_1 + 0x1e5c) = 0;
   ((int (*)())FUN_0004ab60)(param_1);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(param_1 + 0x1e60)) = 0xffff;
@@ -8286,21 +8309,21 @@ int FUN_0004b7d0(param_1)
   iVar1 = *(int *)(iVar4 + 0x88);
   if (iVar1 != 0) {
     uVar5 = *(uint *)(iVar4 + 4);
-    iVar7 = 0;
+    loopIndex = 0;
     if (uVar5 != 0) {
       do {
         iVar1 = *(int *)(*(int *)(((unsigned char *)0x0000113c) + param_1) * 4 +
-                        *(int *)(iVar7 * 0x78 + iVar1 + 0x70));
+                        *(int *)(loopIndex * 0x78 + iVar1 + 0x70));
         if (iVar1 != 0) {
           *(undefined1 *)(iVar1 + 0x119) = 1;
           uVar5 = *(uint *)(iVar4 + 4);
         }
-        iVar2 = uVar5 - iVar7;
-        if ((uVar5 < iVar7 + 1U) || (uVar5 == 0)) {
+        iVar2 = uVar5 - loopIndex;
+        if ((uVar5 < loopIndex + 1U) || (uVar5 == 0)) {
           iVar2 = 1;
         }
         do {
-          iVar7 = iVar7 + 1;
+          loopIndex = loopIndex + 1;
           iVar2 = iVar2 + -1;
           if (iVar2 == 0) goto LAB_0004b8b8;
           iVar1 = *(int *)(iVar4 + 0x88);
@@ -8311,7 +8334,7 @@ int FUN_0004b7d0(param_1)
 LAB_0004b8b8:
   uVar5 = *(uint *)(iVar8 + 4);
   if (uVar5 != 0) {
-    uVar6 = 0;
+    loopIndex2 = 0;
     iVar1 = 0;
     do {
       iVar4 = iVar1 + *(int *)(iVar8 + 8);
@@ -8321,9 +8344,9 @@ LAB_0004b8b8:
         *(undefined1 *)(iVar4 + 0x119) = 1;
         uVar5 = *(uint *)(iVar8 + 4);
       }
-      uVar6 = uVar6 + 1;
+      loopIndex2 = loopIndex2 + 1;
       iVar1 = iVar1 + 0x18;
-    } while (uVar6 < uVar5);
+    } while (loopIndex2 < uVar5);
   }
   return;
 }
@@ -8346,7 +8369,7 @@ int FUN_0004b980(param_1, param_2)
   uint *puVar11;
   uint uVar12;
   uint uVar13;
-  uint uVar14;
+  uint loopIndex;
   int iVar15;
   
   uVar13 = (uint)*(ushort *)(((unsigned char *)0x00001110) + param_1);
@@ -8363,9 +8386,9 @@ int FUN_0004b980(param_1, param_2)
     }
     else {
       iVar6 = *(int *)(((unsigned char *)0x00001114) + param_1);
-      uVar14 = 0;
+      loopIndex = 0;
       do {
-        uVar12 = (uint)*(ushort *)(uVar14 * 2 + iVar6);
+        uVar12 = (uint)*(ushort *)(loopIndex * 2 + iVar6);
         if (uVar12 != 0xffff) {
           do {
             iVar6 = iVar15 + uVar12 * 0x3754;
@@ -8419,8 +8442,8 @@ int FUN_0004b980(param_1, param_2)
           } while (uVar1 != 0xffff);
           iVar6 = *(int *)(((unsigned char *)0x00001114) + param_1);
         }
-        uVar14 = uVar14 + 1;
-      } while (uVar14 < uVar13);
+        loopIndex = loopIndex + 1;
+      } while (loopIndex < uVar13);
     }
     (**(code **)(param_1 + 0x18))(iVar6);
     *(int *)(((unsigned char *)0x00001114) + param_1) = iVar5;
@@ -8432,6 +8455,9 @@ int FUN_0004b980(param_1, param_2)
 int FUN_0004bbf0(param_1)
   int param_1;
 {
+  undefined4 allocation2;
+  int allocation;
+  int loopIndex;
   uint *puVar1;
   char cVar2;
   uint uVar3;
@@ -8508,14 +8534,14 @@ int FUN_0004bbf0(param_1)
   *(undefined4 *)(param_1 + 0x277c) = 0xffffffff;
   uVar5 = (uint)*(ushort *)(iVar6 + iVar4);
   if (uVar5 == 0xffff) {
-    iVar6 = 0;
+    loopIndex = 0;
   }
   else {
-    iVar6 = 0;
+    loopIndex = 0;
     uVar10 = uVar5;
     do {
       uVar5 = uVar10;
-      iVar6 = iVar6 + 1;
+      loopIndex = loopIndex + 1;
       iVar15 = *(int *)(param_1 + 0x1e60) + uVar5 * 0x3754;
       puVar16 = ((unsigned char *)0x00001544) + iVar15;
       if ((*puVar8 == *(uint *)(((unsigned char *)0x00001544) + iVar15) &&
@@ -8545,16 +8571,16 @@ LAB_0004bee0:
       uVar10 = (uint)*(ushort *)(((unsigned char *)0x000015c8) + iVar15);
     } while (*(ushort *)(((unsigned char *)0x000015c8) + iVar15) != 0xffff);
   }
-  if ((cVar2 == '\0') || (iVar6 < 7)) {
-    if ((iVar6 < 8) || (0x2810 < uVar7)) {
+  if ((cVar2 == '\0') || (loopIndex < 7)) {
+    if ((loopIndex < 8) || (0x2810 < uVar7)) {
       uVar7 = *(ushort *)(param_1 + 0x1e6c);
       if (0x400 < uVar7) {
         uVar5 = 0;
         ((int (*)())FUN_0004b710)(param_1);
         *(undefined2 *)(param_1 + 0x1e6c) = 1;
-        uVar9 = _malloc(((unsigned char *)0x00003754U));
-        *(undefined4 *)(param_1 + 0x1e60) = uVar9;
-        _memset(uVar9,0,((unsigned char *)0x00003754U));
+        allocation2 = _malloc(((unsigned char *)0x00003754U));
+        *(undefined4 *)(param_1 + 0x1e60) = allocation2;
+        _memset(allocation2,0,((unsigned char *)0x00003754U));
         ((int (*)())FUN_0004ab60)(param_1);
         *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(param_1 + 0x1e60)) = 0xffff;
         uVar7 = *(ushort *)(param_1 + 0x1e6c);
@@ -8567,29 +8593,29 @@ LAB_0004bee0:
         *(undefined4 *)(param_1 + 0x1e68) = 0;
       }
       if (0 < *(int *)(param_1 + 0x1e74)) {
-        iVar6 = 0;
+        loopIndex = 0;
         do {
-          iVar15 = iVar6 * 4;
-          iVar6 = iVar6 + 1;
+          iVar15 = loopIndex * 4;
+          loopIndex = loopIndex + 1;
           ((unsigned char *)0x000010e9)[*(int *)(*(int *)(param_1 + 0x1e7c) + iVar15)] = 0;
           ((unsigned char *)0x000010ea)[*(int *)(*(int *)(param_1 + 0x1e7c) + iVar15)] = 0;
-        } while (iVar6 < *(int *)(param_1 + 0x1e74));
+        } while (loopIndex < *(int *)(param_1 + 0x1e74));
       }
       *(undefined4 *)(param_1 + 0x1e74) = 0;
-      iVar6 = _realloc(*(undefined4 *)(param_1 + 0x1e60),
+      allocation = _realloc(*(undefined4 *)(param_1 + 0x1e60),
                        (uint)*(ushort *)(param_1 + 0x1e6c) * 0x3754);
-      *(int *)(param_1 + 0x1e60) = iVar6;
-      if (iVar6 == 0) {
+      *(int *)(param_1 + 0x1e60) = allocation;
+      if (allocation == 0) {
         return 0;
       }
       uVar7 = *(ushort *)(param_1 + 0x1e6c);
       iVar15 = *(int *)(((unsigned char *)0x00001114) + param_1);
-      *(uint *)(param_1 + 0x1e5c) = iVar6 + (uint)uVar7 * 0x3754 + -0x3754;
+      *(uint *)(param_1 + 0x1e5c) = allocation + (uint)uVar7 * 0x3754 + -0x3754;
       if (*(short *)(iVar4 + iVar15) == -1) {
         *(ushort *)(iVar4 + iVar15) = uVar7 - 1;
       }
       else {
-        *(ushort *)(((unsigned char *)0x000015c8) + uVar5 * 0x3754 + iVar6) = uVar7 - 1;
+        *(ushort *)(((unsigned char *)0x000015c8) + uVar5 * 0x3754 + allocation) = uVar7 - 1;
       }
       _memset(*(undefined4 *)(param_1 + 0x1e5c),0,((unsigned char *)0x00003754U));
       *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(param_1 + 0x1e5c)) = 0xffff;

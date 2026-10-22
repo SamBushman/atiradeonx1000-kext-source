@@ -400,7 +400,7 @@ int FUN_000d5900(param_1, param_2)
   uint uVar4;
   uint uVar5;
   int iVar6;
-  uint uVar7;
+  uint loopIndex;
   uint *puVar8;
   
   puVar8 = (uint *)(param_2 + 4);
@@ -462,12 +462,12 @@ int FUN_000d5900(param_1, param_2)
   uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[param_1];
   bVar1 = false;
   if (uVar4 != 0) {
-    uVar7 = 0;
+    loopIndex = 0;
     uVar5 = 0x80000;
     iVar6 = param_1;
     do {
       if (((*(uint *)(param_1 + 0x44) & 0x100000) != 0) &&
-         (*(char *)(uVar7 + *(int *)(((unsigned char *)0x00001168) + param_1) + 0x71) == '\0')) {
+         (*(char *)(loopIndex + *(int *)(((unsigned char *)0x00001168) + param_1) + 0x71) == '\0')) {
         bVar1 = true;
       }
       if (*(int *)(((unsigned char *)0x000013f8) + iVar6) != 0) {
@@ -494,7 +494,7 @@ int FUN_000d5900(param_1, param_2)
           uVar3 = *puVar8;
           *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 0x80;
         }
-        *(uint *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = uVar7 & 0xffff | 0x110000;
+        *(uint *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = loopIndex & 0xffff | 0x110000;
         uVar3 = *puVar8 + 1;
         *puVar8 = uVar3;
         if (*(uint *)(param_2 + 8) <= uVar3) {
@@ -507,10 +507,10 @@ int FUN_000d5900(param_1, param_2)
           uVar3 = *puVar8;
           *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 0x80;
         }
-        *(uint *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = uVar7 << 0x10 | 0x19;
+        *(uint *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = loopIndex << 0x10 | 0x19;
         uVar3 = *puVar8 + 1;
         *puVar8 = uVar3;
-        if (((int)(uint)*(byte *)(param_1 + 0x20) >> (uVar7 & 0x3f) & 1U) == 0) {
+        if (((int)(uint)*(byte *)(param_1 + 0x20) >> (loopIndex & 0x3f) & 1U) == 0) {
           uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[param_1];
         }
         else {
@@ -530,10 +530,10 @@ int FUN_000d5900(param_1, param_2)
           uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[param_1];
         }
       }
-      uVar7 = uVar7 + 1;
+      loopIndex = loopIndex + 1;
       uVar5 = uVar5 + 0x10000;
       iVar6 = iVar6 + 4;
-    } while ((int)uVar7 < (int)uVar4);
+    } while ((int)loopIndex < (int)uVar4);
   }
   if (*(char *)(param_1 + 0x121) != '\0') {
     if (*(uint *)(param_2 + 8) <= uVar3) {

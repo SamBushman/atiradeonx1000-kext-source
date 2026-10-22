@@ -215,20 +215,20 @@ int FUN_000ec468(param_1, param_2, param_3)
 {
   undefined4 uVar1;
   int iVar2;
-  uint uVar3;
+  uint loopIndex;
   
   if (*(int *)(param_1 + 0x394) != 0) {
     FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(int *)(param_1 + 0x394));
   }
   uVar1 = FUN_00193e18(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),param_3 * 4 + 4);
-  uVar3 = 0;
+  loopIndex = 0;
   *(undefined4 *)(param_1 + 0x394) = uVar1;
   iVar2 = 0;
   do {
-    uVar3 = uVar3 + 1;
+    loopIndex = loopIndex + 1;
     *(undefined4 *)(*(int *)(param_1 + 0x394) + iVar2) = *(undefined4 *)(param_2 + iVar2);
     iVar2 = iVar2 + 4;
-  } while (uVar3 <= param_3);
+  } while (loopIndex <= param_3);
   return;
 }
 
@@ -270,7 +270,7 @@ int FUN_000ec5b8(param_1)
   int iVar2;
   undefined4 uVar3;
   undefined4 *puVar4;
-  int iVar5;
+  int loopIndex;
   
   iVar2 = *(int *)(param_1 + 0x398);
   if (iVar2 == 0) {
@@ -281,14 +281,14 @@ int FUN_000ec5b8(param_1)
     **(undefined4 **)(param_1 + 0x398) = *puVar4;
     if (0 < iVar2) {
       puVar4 = puVar4 + iVar2;
-      iVar5 = 1;
+      loopIndex = 1;
       do {
-        iVar1 = iVar5 * 4;
-        iVar5 = iVar5 + 1;
+        iVar1 = loopIndex * 4;
+        loopIndex = loopIndex + 1;
         uVar3 = *puVar4;
         puVar4 = puVar4 + -1;
         *(undefined4 *)(iVar1 + *(int *)(param_1 + 0x398)) = uVar3;
-      } while (iVar5 <= iVar2);
+      } while (loopIndex <= iVar2);
     }
     iVar2 = *(int *)(param_1 + 0x398);
   }
@@ -340,12 +340,13 @@ int FUN_000ec6b0(param_1)
 int FUN_000ec728(param_1)
   int param_1;
 {
+  int loopIndex3;
   int iVar1;
   undefined4 uVar2;
   undefined4 uVar3;
-  int iVar4;
+  int loopIndex;
   int iVar5;
-  int iVar6;
+  int loopIndex2;
   int iVar7;
   int iVar8;
   undefined4 uVar9;
@@ -360,27 +361,27 @@ int FUN_000ec728(param_1)
       do {
         iVar8 = iVar7;
         if (((*(uint *)(iVar10 + 0x14) & 1) != 0) && (iVar7 = *(int *)(iVar10 + 0x84), 0 < iVar7)) {
-          iVar4 = 0;
-          iVar6 = 0;
+          loopIndex = 0;
+          loopIndex2 = 0;
           iVar5 = iVar10;
           iVar11 = iVar7;
           do {
             if (*(int *)(iVar5 + 0xb0) - 2U < 3) {
-              iVar6 = iVar6 + 1;
+              loopIndex2 = loopIndex2 + 1;
             }
             else if (*(int *)(iVar5 + 0xb0) == 0xc) {
-              iVar4 = iVar4 + 1;
+              loopIndex = loopIndex + 1;
             }
             iVar5 = iVar5 + 0x18;
             iVar11 = iVar11 + -1;
           } while (iVar11 != 0);
-          if ((iVar6 != 0) && (iVar4 != 0)) {
-            iVar5 = 0;
+          if ((loopIndex2 != 0) && (loopIndex != 0)) {
+            loopIndex3 = 0;
             iVar8 = iVar10;
             do {
-              iVar5 = iVar5 + 1;
-              if (((*(int *)(iVar8 + 0xb0) - 2U < 3) && (iVar4 >= iVar6)) ||
-                 ((*(int *)(iVar8 + 0xb0) == 0xc && (iVar4 < iVar6)))) {
+              loopIndex3 = loopIndex3 + 1;
+              if (((*(int *)(iVar8 + 0xb0) - 2U < 3) && (loopIndex >= loopIndex2)) ||
+                 ((*(int *)(iVar8 + 0xb0) == 0xc && (loopIndex < loopIndex2)))) {
                 uVar2 = FUN_001043f0(0x31,*(undefined4 *)(param_1 + 8));
                 uVar3 = *(undefined4 *)(param_1 + 0x3ac);
                 uVar9 = *(undefined4 *)(iVar8 + 0xa4);
@@ -390,11 +391,11 @@ int FUN_000ec728(param_1)
                 FUN_001046c8(uVar2,0,uVar3);
                 FUN_001046c8(uVar2,1,uVar9);
                 FUN_001235b8(uVar9,iVar10,uVar2);
-                FUN_001046c8(iVar10,iVar5,uVar3);
+                FUN_001046c8(iVar10,loopIndex3,uVar3);
                 FUN_000e7700(*(undefined4 *)(iVar10 + 0x158),iVar10,uVar2);
               }
               iVar8 = iVar8 + 0x18;
-            } while (iVar7 != iVar5);
+            } while (iVar7 != loopIndex3);
             iVar8 = *(int *)(iVar10 + 8);
           }
         }
@@ -424,9 +425,9 @@ int FUN_000ec920(param_1)
   int iVar1;
   undefined4 *puVar2;
   int iVar3;
-  uint uVar4;
+  uint loopIndex2;
   int iVar5;
-  int iVar6;
+  int loopIndex;
   undefined4 *puVar7;
   int *piVar8;
   bool bVar9;
@@ -434,18 +435,18 @@ int FUN_000ec920(param_1)
   puVar2 = (undefined4 *)((int (*)())FUN_000ec5b8)(param_1);
   do {
     bVar9 = false;
-    iVar6 = 1;
+    loopIndex = 1;
     puVar7 = puVar2;
     while( true ) {
       puVar7 = puVar7 + 1;
       iVar3 = FUN_00194034(param_1 + 0x37c);
-      if (iVar3 < iVar6) break;
+      if (iVar3 < loopIndex) break;
       piVar8 = (int *)*puVar7;
       iVar3 = (**(code **)(*piVar8 + 0x20))(piVar8);
       if (iVar3 == 0) {
         iVar3 = piVar8[3];
         iVar5 = 0;
-        for (uVar4 = 1; uVar4 <= *(uint *)(piVar8[0x34] + 4); uVar4 = uVar4 + 1) {
+        for (loopIndex2 = 1; loopIndex2 <= *(uint *)(piVar8[0x34] + 4); loopIndex2 = loopIndex2 + 1) {
           iVar1 = *(int *)(*(int *)(piVar8[0x34] + 8) + iVar5);
           if (iVar1 != 0) {
             piVar8[3] = *(uint *)(iVar1 + 0xc) & 3 | piVar8[3];
@@ -454,7 +455,7 @@ int FUN_000ec920(param_1)
         }
         bVar9 = iVar3 != piVar8[3];
       }
-      iVar6 = iVar6 + 1;
+      loopIndex = loopIndex + 1;
     }
   } while (bVar9);
   return;
@@ -763,7 +764,7 @@ int FUN_000ed63c(param_1, param_2)
   int iVar2;
   int *piVar3;
   int iVar4;
-  int iVar5;
+  int loopIndex;
   undefined4 uVar6;
   code *pcVar7;
   int iVar8;
@@ -787,7 +788,7 @@ int FUN_000ed63c(param_1, param_2)
     }
   }
   if (0 < *(int *)(param_2 + 0x84)) {
-    iVar5 = 1;
+    loopIndex = 1;
     iVar2 = param_2;
     do {
       iVar4 = *(int *)(iVar2 + 0xb0);
@@ -795,7 +796,7 @@ int FUN_000ed63c(param_1, param_2)
         iVar8 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar8;
         uVar6 = *(undefined4 *)(iVar2 + 0xb0);
-        iVar4 = FUN_001054ec(param_2,iVar5);
+        iVar4 = FUN_001054ec(param_2,loopIndex);
         *(int *)(iVar4 + 8) = iVar8;
         *(undefined4 *)(iVar4 + 0xc) = uVar6;
         iVar4 = *(int *)(iVar2 + 0xb0);
@@ -806,11 +807,11 @@ int FUN_000ed63c(param_1, param_2)
       if (piVar3 != (int *)0x0) {
         piVar1 = piVar3;
       }
-      FUN_001236e4(piVar1,iVar5,param_2);
-      FUN_001046c8(param_2,iVar5,piVar1);
-      iVar5 = iVar5 + 1;
+      FUN_001236e4(piVar1,loopIndex,param_2);
+      FUN_001046c8(param_2,loopIndex,piVar1);
+      loopIndex = loopIndex + 1;
       iVar2 = iVar2 + 0x18;
-    } while (iVar5 <= *(int *)(param_2 + 0x84));
+    } while (loopIndex <= *(int *)(param_2 + 0x84));
   }
   return;
 }
@@ -825,7 +826,7 @@ int FUN_000ed7e4(param_1, param_2)
   uint extraout_r4;
   int iVar3;
   int *a0;
-  uint uVar4;
+  uint loopIndex;
   
   a0 = *(int **)(param_1 + 900);
   iVar1 = a0[2];
@@ -837,7 +838,7 @@ int FUN_000ed7e4(param_1, param_2)
   }
   iVar1 = *(int *)(param_1 + 0x3c4);
   iVar3 = 0;
-  for (uVar4 = 1; uVar4 <= *(uint *)(iVar1 + 4); uVar4 = uVar4 + 1) {
+  for (loopIndex = 1; loopIndex <= *(uint *)(iVar1 + 4); loopIndex = loopIndex + 1) {
     iVar2 = *(int *)(*(int *)(iVar1 + 8) + iVar3);
     if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
       FUN_001054ec(iVar2,0);
@@ -1575,10 +1576,11 @@ int FUN_000ee29c(param_1, param_2)
 int FUN_000ee7a0(param_1)
   int param_1;
 {
+  int loopIndex2;
   int iVar1;
   undefined4 *allocation;
   int *piVar3;
-  int iVar4;
+  int loopIndex;
   int iVar5;
   uint uVar6;
   undefined4 arena;
@@ -1589,7 +1591,7 @@ int FUN_000ee7a0(param_1)
   
   iVar1 = *(int *)(param_1 + 8);
   if (-1 < *(int *)(*(int *)(iVar1 + 0x30c) + 0x4c)) {
-    iVar5 = 0;
+    loopIndex2 = 0;
     piVar3 = local_138;
     do {
       arena = *(undefined4 *)(iVar1 + 0x378);
@@ -1600,11 +1602,11 @@ int FUN_000ee7a0(param_1)
       allocation[2] = 0;
       arena = FUN_00193e18(arena,8);
       allocation[3] = arena;
-      iVar5 = iVar5 + 1;
+      loopIndex2 = loopIndex2 + 1;
       *piVar3 = (int)(allocation + 1);
       piVar3 = piVar3 + 1;
       iVar1 = *(int *)(param_1 + 8);
-    } while (iVar5 <= *(int *)(*(int *)(iVar1 + 0x30c) + 0x4c));
+    } while (loopIndex2 <= *(int *)(*(int *)(iVar1 + 0x30c) + 0x4c));
   }
   iVar1 = *(int *)(param_1 + 900);
   iVar5 = *(int *)(iVar1 + 8);
@@ -1629,10 +1631,10 @@ int FUN_000ee7a0(param_1)
   iVar1 = *(int *)(param_1 + 8);
   *(undefined4 *)(param_1 + 0x39c) = arena;
   if (-1 < *(int *)(*(int *)(iVar1 + 0x30c) + 0x4c)) {
-    iVar4 = 0;
+    loopIndex = 0;
     do {
       iVar10 = iVar5 << 2;
-      iVar9 = local_138[iVar4];
+      iVar9 = local_138[loopIndex];
       uVar6 = *(uint *)(iVar9 + 4);
       if (uVar6 != 0) {
         do {
@@ -1650,8 +1652,8 @@ int FUN_000ee7a0(param_1)
         } while (uVar6 != 0);
         iVar1 = *(int *)(param_1 + 8);
       }
-      iVar4 = iVar4 + 1;
-    } while (iVar4 <= *(int *)(*(int *)(iVar1 + 0x30c) + 0x4c));
+      loopIndex = loopIndex + 1;
+    } while (loopIndex <= *(int *)(*(int *)(iVar1 + 0x30c) + 0x4c));
   }
   return *(undefined4 *)(param_1 + 0x39c);
 }
@@ -1689,7 +1691,7 @@ int FUN_000eea24(param_1)
   int iVar3;
   undefined4 uVar4;
   int iVar5;
-  uint uVar6;
+  uint loopIndex;
   undefined4 uVar7;
   
   if (((*(uint *)(param_1 + 0x30) & 1) != 0) &&
@@ -1709,7 +1711,7 @@ int FUN_000eea24(param_1)
           iVar1 = FUN_00127534(uVar7,uVar4,iVar3,0);
           if (iVar1 != 0) {
             iVar5 = 0;
-            for (uVar6 = 1; uVar6 <= *(uint *)(*(int *)(iVar1 + 0x18) + 4); uVar6 = uVar6 + 1) {
+            for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar1 + 0x18) + 4); loopIndex = loopIndex + 1) {
               iVar2 = *(int *)(iVar5 + *(int *)(*(int *)(iVar1 + 0x18) + 8));
               if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
                 *(uint *)(iVar2 + 0x14) = *(uint *)(iVar2 + 0x14) | 0x10;
@@ -1735,7 +1737,7 @@ int FUN_000eea24(param_1)
           iVar1 = FUN_00127534(uVar7,uVar4,iVar3,0);
           if (iVar1 != 0) {
             iVar5 = 0;
-            for (uVar6 = 1; uVar6 <= *(uint *)(*(int *)(iVar1 + 0x18) + 4); uVar6 = uVar6 + 1) {
+            for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar1 + 0x18) + 4); loopIndex = loopIndex + 1) {
               iVar2 = *(int *)(iVar5 + *(int *)(*(int *)(iVar1 + 0x18) + 8));
               if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
                 *(uint *)(iVar2 + 0x14) = *(uint *)(iVar2 + 0x14) | 0x10;
@@ -2084,6 +2086,7 @@ int FUN_000ef498(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
+  uint loopIndex;
   int *piVar1;
   int iVar2;
   int iVar3;
@@ -2251,7 +2254,7 @@ int FUN_000ef498(param_1, param_2)
   }
   iVar2 = *(int *)(param_1 + 0x3c4);
   iVar3 = 0;
-  for (uVar11 = 1; uVar11 <= *(uint *)(iVar2 + 4); uVar11 = uVar11 + 1) {
+  for (loopIndex = 1; loopIndex <= *(uint *)(iVar2 + 4); loopIndex = loopIndex + 1) {
     iVar7 = *(int *)(*(int *)(iVar2 + 8) + iVar3);
     if ((*(uint *)(iVar7 + 0x14) & 1) != 0) {
       FUN_001054ec(iVar7,0);
@@ -2332,6 +2335,7 @@ int FUN_000ef970(param_1, param_2)
 int FUN_000efa4c(param_1)
   int param_1;
 {
+  uint loopIndex;
   bool bVar1;
   int *piVar2;
   undefined4 *allocation;
@@ -2421,7 +2425,7 @@ code_r0x000efd60:
 code_r0x000efc2c:
   bVar1 = true;
   iVar6 = 0;
-  for (uVar11 = 1; uVar11 <= *(uint *)(*(int *)(iVar13 + 0xd0) + 4); uVar11 = uVar11 + 1) {
+  for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar13 + 0xd0) + 4); loopIndex = loopIndex + 1) {
     iVar8 = *(int *)(iVar6 + *(int *)(*(int *)(iVar13 + 0xd0) + 8));
     if ((iVar8 != 0) && (*(int *)(iVar8 + 0x118) == 0)) {
       uVar12 = allocation[2];
@@ -2472,6 +2476,7 @@ int FUN_000efde4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  uint loopIndex;
   int *piVar1;
   undefined4 *allocation;
   undefined4 *puVar3;
@@ -2537,7 +2542,7 @@ LAB_000eff98:
       arena = FUN_00193e18(arena,8);
       iVar5 = 0;
       allocation[3] = arena;
-      for (uVar6 = 1; uVar6 <= *(uint *)(*(int *)(iVar7 + 0xf4) + 4); uVar6 = uVar6 + 1) {
+      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar7 + 0xf4) + 4); loopIndex = loopIndex + 1) {
         arena = *(undefined4 *)(*(int *)(*(int *)(iVar7 + 0xf4) + 8) + iVar5);
         uVar10 = allocation[2];
         if (uVar10 < *puVar8) {
@@ -2562,7 +2567,7 @@ LAB_000eff98:
         FUN_00194208(puVar8,0);
         iVar5 = 0;
         *(uint *)(iVar7 + 0xc) = *(uint *)(iVar7 + 0xc) | 8;
-        for (uVar6 = 1; uVar6 <= *(uint *)(*(int *)(iVar7 + 0xf4) + 4); uVar6 = uVar6 + 1) {
+        for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar7 + 0xf4) + 4); loopIndex = loopIndex + 1) {
           arena = *(undefined4 *)(*(int *)(*(int *)(iVar7 + 0xf4) + 8) + iVar5);
           uVar10 = allocation[2];
           if (uVar10 < *puVar8) {
@@ -2596,6 +2601,7 @@ LAB_000eff98:
 int FUN_000f019c(param_1)
   int param_1;
 {
+  uint loopIndex;
   int iVar1;
   uint uVar2;
   uint uVar3;
@@ -2615,30 +2621,30 @@ int FUN_000f019c(param_1)
       iVar8 = 0;
     }
     else {
-      uVar2 = 0;
+      loopIndex = 0;
       iVar8 = 0;
       puVar9 = *(uint **)(param_1 + 0x3c4);
       do {
-        if (uVar2 < *puVar9) {
+        if (loopIndex < *puVar9) {
           puVar10 = puVar9;
-          if (uVar3 <= uVar2) {
-            _memset(uVar3 * 4 + puVar9[2],0,(uVar2 - uVar3) * 4 + 4);
-            puVar9[1] = uVar2 + 1;
+          if (uVar3 <= loopIndex) {
+            _memset(uVar3 * 4 + puVar9[2],0,(loopIndex - uVar3) * 4 + 4);
+            puVar9[1] = loopIndex + 1;
             puVar10 = *(uint **)(param_1 + 0x3c4);
           }
-          piVar7 = (int *)(uVar2 * 4 + puVar9[2]);
+          piVar7 = (int *)(loopIndex * 4 + puVar9[2]);
         }
         else {
-          piVar7 = (int *)FUN_0019423c(puVar9,uVar2);
+          piVar7 = (int *)FUN_0019423c(puVar9,loopIndex);
           puVar10 = *(uint **)(param_1 + 0x3c4);
         }
-        uVar2 = uVar2 + 1;
+        loopIndex = loopIndex + 1;
         if (*(int *)(*piVar7 + 0x98) == 0x2c) {
           iVar8 = *piVar7;
         }
         uVar3 = puVar10[1];
         puVar9 = puVar10;
-      } while (uVar2 < uVar3);
+      } while (loopIndex < uVar3);
     }
     arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
     allocation = (undefined4 *)FUN_00193e18(arena,0x14);
@@ -3394,6 +3400,7 @@ int FUN_000f1d7c(param_1, param_2, param_3)
   undefined4 param_2;
   dword *param_3;
 {
+  int loopIndex;
   bool bVar1;
   undefined4 *puVar2;
   int *piVar3;
@@ -3773,10 +3780,10 @@ LAB_000f25ac:
         }
       }
       else {
-        iVar4 = 1;
+        loopIndex = 1;
         if (0 < piVar3[0x21]) {
           do {
-            iVar5 = FUN_00105594(piVar3,iVar4);
+            iVar5 = FUN_00105594(piVar3,loopIndex);
             uVar9 = ~*(uint *)(iVar5 + 0xc);
             if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 |
                          uVar9 >> 0x18)) != 0) {
@@ -3785,9 +3792,9 @@ LAB_000f25ac:
               FUN_0010469c(piVar3,param_1,pdVar11,dVar10);
               piVar3[3] = 0;
               if (0 < piVar3[0x21]) {
-                iVar4 = 1;
+                loopIndex = 1;
                 do {
-                  iVar5 = FUN_00105594(piVar3,iVar4);
+                  iVar5 = FUN_00105594(piVar3,loopIndex);
                   uVar9 = vec2Count;
                   if ((uVar8 & *(uint *)(iVar5 + 0xc)) != 0) {
                     if (vec2Count < vec2Capacity) {
@@ -3812,15 +3819,15 @@ LAB_000f25ac:
                     else {
                       piVar12 = (int *)FUN_0019423c(&vec3Capacity,vec3Count);
                     }
-                    *piVar12 = iVar4;
+                    *piVar12 = loopIndex;
                   }
-                  iVar4 = iVar4 + 1;
-                } while (iVar4 <= piVar3[0x21]);
+                  loopIndex = loopIndex + 1;
+                } while (loopIndex <= piVar3[0x21]);
               }
               break;
             }
-            iVar4 = iVar4 + 1;
-          } while (iVar4 <= piVar3[0x21]);
+            loopIndex = loopIndex + 1;
+          } while (loopIndex <= piVar3[0x21]);
         }
       }
 LAB_000f260c:
@@ -3884,6 +3891,7 @@ LAB_000f260c:
 int FUN_000f29f4(param_1)
   int param_1;
 {
+  int loopIndex;
   int *piVar1;
   int iVar2;
   undefined4 extraout_r4;
@@ -3928,10 +3936,10 @@ int FUN_000f29f4(param_1)
     if (piVar1 == (int *)0x0) {
       piVar7 = (int *)0x0;
       piVar5 = (int *)0x0;
-      iVar2 = 0;
+      loopIndex = 0;
     }
     else {
-      iVar2 = 0;
+      loopIndex = 0;
       piVar4 = (int *)0x0;
       piVar6 = (int *)0x0;
       do {
@@ -3941,7 +3949,7 @@ int FUN_000f29f4(param_1)
         piVar7 = piVar6;
         if (((iVar3 != 0) && (piVar7 = piVar9, piVar9[0x4f] != 6)) &&
            (piVar5 = piVar9, piVar7 = piVar6, piVar9[0x4f] != 7)) {
-          iVar2 = iVar2 + 1;
+          loopIndex = loopIndex + 1;
           ((int (*)())FUN_000f07a8)(param_1,*(undefined4 *)(param_1 + 0x33c),piVar9);
           piVar5 = piVar4;
         }
@@ -3952,8 +3960,8 @@ int FUN_000f29f4(param_1)
       } while (piVar1 != (int *)0x0);
     }
     iVar3 = 0;
-    if (iVar2 != 0) {
-      iVar3 = iVar2 + -1;
+    if (loopIndex != 0) {
+      iVar3 = loopIndex + -1;
     }
     *(int *)(*(int *)(param_1 + 0x33c) + 300) = iVar3;
     if (piVar7 != (int *)0x0) {

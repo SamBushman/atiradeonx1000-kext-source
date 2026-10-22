@@ -1403,8 +1403,8 @@ char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint par
   double dVar13;
   double dVar14;
   uint local_78 [4];
-  undefined4 local_68;
-  uint uStack_64;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   longlong local_60;
   longlong local_58;
   longlong local_50;
@@ -1432,9 +1432,9 @@ char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint par
     if ((fparam_1 < DOUBLE_001aa210) || (DOUBLE_001aa230 < fparam_1)) {
       puVar4 = local_78;
       _frexp(fparam_1,puVar4);
-      local_68 = 0x43300000;
-      uStack_64 = local_78[0] ^ 0x80000000;
-      dVar11 = _round(((double)CONCAT44(0x43300000,uStack_64) - DOUBLE_001aa1e0) * DOUBLE_001aa218);
+      i2dHi1 = 0x43300000;
+      i2dLo1 = local_78[0] ^ 0x80000000;
+      dVar11 = _round(((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0) * DOUBLE_001aa218);
       local_78[0] = (uint)(int)dVar11;
       local_60 = (longlong)(int)local_78[0];
       dVar12 = (double)((double (*)())FUN_0000be70)(local_78[0],extraout_r4,puVar4,param_4,in_r7,in_r8,puVar5);
@@ -1707,6 +1707,7 @@ int FUN_0000c8a0(param_1, param_2, param_3)
   int *param_2;
   int *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -1718,13 +1719,13 @@ int FUN_0000c8a0(param_1, param_2, param_3)
   if (*param_1 - (iVar3 - iVar1) < 0x100) {
     iVar2 = *param_1 + 0x800;
     *param_1 = iVar2;
-    iVar2 = _realloc(*param_2,iVar2);
+    allocation = _realloc(*param_2,iVar2);
     uVar4 = 0;
-    *param_3 = iVar2;
-    if (iVar2 != 0) {
-      *param_2 = iVar2;
+    *param_3 = allocation;
+    if (allocation != 0) {
+      *param_2 = allocation;
       uVar4 = 1;
-      *param_3 = iVar2 + (iVar3 - iVar1);
+      *param_3 = allocation + (iVar3 - iVar1);
     }
   }
   return uVar4;
@@ -9134,17 +9135,17 @@ LAB_00017d90:
 int FUN_00017e10(param_1)
   undefined4 param_1;
 {
-  int iVar1;
+  int distributedCenter;
   int iVar2;
   int iVar3;
   
-  iVar1 = _CFNotificationCenterGetDistributedCenter();
-  if (iVar1 != 0) {
+  distributedCenter = _CFNotificationCenterGetDistributedCenter();
+  if (distributedCenter != 0) {
     iVar2 = _CFStringCreateWithCString(0,"ATI Displays",0x600);
     iVar3 = _CFStringCreateWithCString(0,"com.ati.ati_displays",0x600);
     if (iVar2 != 0) {
       if (iVar3 != 0) {
-        _CFNotificationCenterRemoveObserver(iVar1,param_1,iVar2,iVar3);
+        _CFNotificationCenterRemoveObserver(distributedCenter,param_1,iVar2,iVar3);
       }
       _CFRelease(iVar2);
     }
@@ -9162,8 +9163,8 @@ int FUN_00017ee0()
   undefined1 *puVar1;
   undefined4 uVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
+  int allocation;
+  int allocation2;
   undefined1 *puVar6;
   int iVar7;
   undefined4 in_r6;
@@ -9181,18 +9182,18 @@ int FUN_00017ee0()
     _puts("  failed to compute application path");
   }
   else {
-    iVar4 = _malloc(0x200);
-    iVar5 = _malloc(0x100);
-    if ((iVar4 == 0) || (iVar5 == 0)) {
+    allocation = _malloc(0x200);
+    allocation2 = _malloc(0x100);
+    if ((allocation == 0) || (allocation2 == 0)) {
       _puts("  failed to compute application path");
     }
     else {
-      _fgets(iVar4,0x32,iVar3);
-      _fgets(iVar4,0x200,iVar3);
-      puVar6 = (undefined1 *)_index(iVar4,0x2f);
-      iVar7 = _rindex(iVar4,0x2d);
+      _fgets(allocation,0x32,iVar3);
+      _fgets(allocation,0x200,iVar3);
+      puVar6 = (undefined1 *)_index(allocation,0x2f);
+      iVar7 = _rindex(allocation,0x2d);
       if (iVar7 == 0) {
-        iVar7 = _strchr(iVar4,0);
+        iVar7 = _strchr(allocation,0);
       }
       iVar7 = iVar7 - (int)puVar6;
       if (0 < iVar7) {
@@ -9209,15 +9210,15 @@ int FUN_00017ee0()
           iVar8 = iVar8 + -1;
         } while (iVar8 != 0);
       }
-      _strlcpy(iVar5,puVar6,iVar7);
+      _strlcpy(allocation2,puVar6,iVar7);
       FUN_001a337c("  application path | %s\n",puVar6,iVar7,in_r6,in_r7,in_r8,in_r9,in_r10);
     }
     _pclose(iVar3);
-    if (iVar4 != 0) {
-      _free(iVar4);
+    if (allocation != 0) {
+      _free(allocation);
     }
-    if (iVar5 != 0) {
-      _free(iVar5);
+    if (allocation2 != 0) {
+      _free(allocation2);
     }
   }
   return;
@@ -10648,16 +10649,16 @@ int FUN_000198b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   float fStack_128;
   float fStack_124;
   undefined4 uStack_120;
-  undefined4 uStack_28;
-  uint uStack_24;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   undefined4 uStack_20;
   uint uStack_1c;
   undefined4 uStack_18;
   uint uStack_14;
   
-  uStack_24 = param_2 ^ 0x80000000;
-  uStack_28 = 0x43300000;
-  fStack_128 = (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_001aa1e0);
+  i2dLo1 = param_2 ^ 0x80000000;
+  i2dHi1 = 0x43300000;
+  fStack_128 = (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0);
   if (((unsigned char *)0x00002b7c)[param_1] == '\0') {
     uStack_14 = param_3 ^ 0x80000000;
     uStack_18 = 0x43300000;

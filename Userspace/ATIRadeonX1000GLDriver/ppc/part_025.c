@@ -1732,11 +1732,11 @@ int FUN_000f4be8(param_1, param_2)
 {
   uint uVar1;
   int iVar2;
-  int iVar3;
+  int loopIndex;
   int iVar4;
   
   if (0 < param_2) {
-    iVar3 = 0;
+    loopIndex = 0;
     iVar2 = 0;
     do {
       uVar1 = *param_1;
@@ -1755,8 +1755,8 @@ int FUN_000f4be8(param_1, param_2)
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);
       }
-      iVar3 = iVar3 + 1;
-    } while (param_2 != iVar3);
+      loopIndex = loopIndex + 1;
+    } while (param_2 != loopIndex);
   }
   return -1;
 }
