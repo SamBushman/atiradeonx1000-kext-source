@@ -29,7 +29,7 @@ int FUN_0006c7c0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   srcSwizzleWord = 0;
   dstMaskWord = 0;
   if ((dstFile == 0x12) || (dstFile == 0x13)) {
@@ -135,77 +135,77 @@ LAB_0006c8a0:
   ;
 LAB_0006ca14:
   tokenIndex = *tokenCount;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x51;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x51;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = srcHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcHeader;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((srcHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = srcSwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcSwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -240,7 +240,7 @@ int FUN_0006cd00(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   srcSwizzleWord = 0;
   dstMaskWord = 0;
   if ((dstFile == 0x12) || (dstFile == 0x13)) {
@@ -346,77 +346,77 @@ LAB_0006cde0:
   ;
 LAB_0006cf54:
   tokenIndex = *tokenCount;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x55;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x55;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = srcHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcHeader;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((srcHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = srcSwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcSwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -451,7 +451,7 @@ int FUN_0006d240(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   srcSwizzleWord = 0;
   dstMaskWord = 0;
   if ((dstFile == 0x12) || (dstFile == 0x13)) {
@@ -557,77 +557,77 @@ LAB_0006d320:
   ;
 LAB_0006d494:
   tokenIndex = *tokenCount;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x2d;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x2d;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = srcHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcHeader;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((srcHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = srcSwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcSwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -662,7 +662,7 @@ int FUN_0006d780(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   srcSwizzleWord = 0;
   dstMaskWord = 0;
   if ((dstFile == 0x12) || (dstFile == 0x13)) {
@@ -768,77 +768,77 @@ LAB_0006d860:
   ;
 LAB_0006d9d4:
   tokenIndex = *tokenCount;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x2c;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x2c;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = srcHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcHeader;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((srcHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = srcSwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcSwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -884,7 +884,7 @@ int FUN_0006dcc0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -1057,107 +1057,107 @@ LAB_0006df00:
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_0006e054:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x4e;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x4e;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -1535,7 +1535,7 @@ int FUN_0006ec10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words
   
   uVar16 = 0;
   (**(code **)(ctx + 0x748))(ctx,0,auStack_88,dstMask,src0File,src0Index,src0Words,src0Flags);
-  instrCountPtr = (uint *)(ctx + 0x754);
+  instrCountPtr = (uint *)(ctx + ARB_tokenCount);
   instrWord = uStack_84 & 0xffff;
   uVar14 = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Flags == 0) {
@@ -1604,75 +1604,75 @@ LAB_0006edc0:
              (src1Flags1 & 1) << 7 | (src1Words1 & 7) << 4 | (*src1Flags & 1) << 3 | src1WordsValue & 7;
   }
   instrCountPtrValue = *instrCountPtr;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrCountPtrValue) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrCountPtrValue) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrCountPtrValue = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrCountPtrValue * 4 + *(int *)(ctx + 0x75c)) = 0x47;
+  *(undefined4 *)(instrCountPtrValue * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x47;
   uVar1 = *instrCountPtr + 1;
   *instrCountPtr = uVar1;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar1) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar1) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     uVar1 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar1 * 4 + *(int *)(ctx + 0x75c)) = instrWord | 0x440000;
+  *(uint *)(uVar1 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = instrWord | 0x440000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 1;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 1;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar14;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar14;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar14 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
@@ -1744,75 +1744,75 @@ LAB_0006f1f0:
             (src0Words2 & 7) << 8 |
             (src0Flags1 & 1) << 7 | (src0Words1 & 7) << 4 | (*src0Flags & 1) << 3 | src0WordsValue & 7;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x47;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x47;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar14 | 0x440000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar14 | 0x440000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 4;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 4;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar16 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar1;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
@@ -1885,75 +1885,75 @@ LAB_0006f620:
             (src2Words2 & 7) << 8 |
             (src2Flags1 & 1) << 7 | (src2Words1 & 7) << 4 | (*src2Flags & 1) << 3 | src2WordsValue & 7;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x47;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x47;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar14 | 0x440000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar14 | 0x440000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x40;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x40;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar1;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar1 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar2;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar2;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
@@ -1988,62 +1988,62 @@ LAB_0006f620:
   uVar16 = (uint)(allocator != 0) * 0x40 |
            (uint)(iVar3 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
 LAB_0006f9f0:
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x39;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x39;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar14;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar14;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar14 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uStack_84 & 0xffff | 0x40000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uStack_84 & 0xffff | 0x40000;
   *instrCountPtr = *instrCountPtr + 1;
   (**(code **)(ctx + 0x74c))(ctx,auStack_88);
   return;
