@@ -375,10 +375,10 @@ int __ZNSs6appendEPKc(this, str)
   void *this;
   char *str;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNSs6appendEPKcm)(this,str,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNSs6appendEPKcm)(this,str,length);
 }
 
 /* __ZNSspLEPKc @ 0x97c14834 (64 bytes) */
@@ -386,10 +386,10 @@ int __ZNSspLEPKc(this, param_2)
   void *this;
   char *param_2;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(param_2);
-  return ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
+  length = _strlen(param_2);
+  return ((int (*)())__ZNSs6appendEPKcm)(this,param_2,length);
 }
 
 /* __ZNSspLEc @ 0x97c14874 (12 bytes) */
@@ -739,10 +739,10 @@ int __ZNSs6insertEmPKc(this, param_2, str)
   ulong param_2;
   char *str;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNSs6insertEmPKcm)(this,param_2,str,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNSs6insertEmPKcm)(this,param_2,str,length);
 }
 
 /* __ZNSs6insertEmmc @ 0x97c15104 (92 bytes) */
@@ -860,10 +860,10 @@ int __ZNSs7replaceEmmPKc(this, param_2, param_3, str)
   ulong param_3;
   char *str;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,str,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,str,length);
 }
 
 /* __ZNSs7replaceEmmmc @ 0x97c153dc (120 bytes) */
@@ -920,10 +920,10 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, param_2, pa
   undefined4 param_3;
   undefined4 param_4;
 {
-  undefined4 uVar1;
+  undefined4 length;
   
-  uVar1 = _strlen(param_4);
-  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,param_2,param_3,param_4,uVar1);
+  length = _strlen(param_4);
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,param_2,param_3,param_4,length);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc @ 0x97c15564 (180 bytes) */
@@ -1088,7 +1088,7 @@ int __ZNKSs4findEPKcmm(this, str, param_3, param_4)
   ulong param_4;
 {
   uint uVar1;
-  int iVar2;
+  int compareResult;
   uint uVar3;
   int iVar4;
   
@@ -1097,8 +1097,8 @@ int __ZNKSs4findEPKcmm(this, str, param_3, param_4)
   if (uVar1 <= uVar3) {
     iVar4 = param_3 + *(int *)this;
     do {
-      iVar2 = _memcmp(iVar4,str,param_4);
-      if (iVar2 == 0) {
+      compareResult = _memcmp(iVar4,str,param_4);
+      if (compareResult == 0) {
         return param_3;
       }
       uVar1 = uVar1 + 1;
@@ -1124,10 +1124,10 @@ int __ZNKSs4findEPKcm(this, str, param_3)
   char *str;
   ulong param_3;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNKSs4findEPKcmm)(this,str,param_3,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNKSs4findEPKcmm)(this,str,param_3,length);
 }
 
 /* __ZNKSs4findEcm @ 0x97c159e0 (96 bytes) */
@@ -1202,9 +1202,9 @@ int __ZNKSs5rfindEPKcm(this, str, param_3)
   char *str;
   ulong param_3;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNKSs5rfindEPKcmm)(this,str,param_3,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNKSs5rfindEPKcmm)(this,str,param_3,length);
 }
 

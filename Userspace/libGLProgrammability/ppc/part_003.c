@@ -127,6 +127,7 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  int loopIndex;
   bool bVar1;
   char cVar2;
   int iVar3;
@@ -540,13 +541,13 @@ LAB_97b89a54:
     }
     return 0x106;
   }
-  iVar3 = 0;
+  loopIndex = 0;
   iVar10 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
   uVar4 = extraout_r4_05;
   do {
     while (iVar10 != 0x2a) {
       if (iVar10 == 10) {
-        iVar3 = iVar3 + 1;
+        loopIndex = loopIndex + 1;
       }
       if (iVar10 == -1) {
 LAB_97b89b60:
@@ -560,7 +561,7 @@ LAB_97b89b60:
     uVar4 = extraout_r4_07;
     if (iVar10 == -1) goto LAB_97b89b60;
   } while (iVar10 != 0x2f);
-  if (iVar3 != 0) {
+  if (loopIndex != 0) {
     return 10;
   }
   goto LAB_97b88f18;
@@ -598,6 +599,7 @@ int _yylex_CPP(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
+  int length;
   undefined *puVar1;
   undefined *puVar2;
   int iVar3;
@@ -661,8 +663,8 @@ LAB_97b89e08:
       pcVar6 = (char *)_GetStringOfAtom(uVar5,iVar3);
     }
     if (pcVar6 != (char *)0x0) {
-      iVar3 = _strlen(pcVar6);
-      if (iVar3 < param_2) {
+      length = _strlen(pcVar6);
+      if (length < param_2) {
         param_2 = 0;
         if (*pcVar6 != '\0') {
           _strcpy(param_1,pcVar6);
@@ -824,7 +826,7 @@ int _lAddToTree(param_1, param_2)
 {
   undefined *puVar1;
   int *piVar2;
-  int iVar3;
+  int reversedAtom;
   int iVar4;
   undefined4 in_r5;
   undefined4 in_r6;
@@ -832,7 +834,7 @@ int _lAddToTree(param_1, param_2)
   undefined4 in_r8;
   undefined4 in_r9;
   int *piVar5;
-  undefined8 uVar6;
+  undefined8 reversedAtom2;
   
   puVar1 = PTR__atable_a7b7c0ac;
   piVar5 = (int *)*param_1;
@@ -840,16 +842,16 @@ int _lAddToTree(param_1, param_2)
     *param_1 = param_2;
   }
   else {
-    iVar3 = _GetReversedAtom(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_2 + 0xc));
+    reversedAtom = _GetReversedAtom(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_2 + 0xc));
     do {
-      uVar6 = _GetReversedAtom(*(undefined4 *)puVar1,piVar5[3]);
-      iVar4 = (int)((ulonglong)uVar6 >> 0x20);
-      if (iVar4 == iVar3) {
-        _CPPErrorToInfoLog("GetAtomString(atable, fSymb->name)",(int)uVar6,in_r5,in_r6,in_r7,in_r8,
+      reversedAtom2 = _GetReversedAtom(*(undefined4 *)puVar1,piVar5[3]);
+      iVar4 = (int)((ulonglong)reversedAtom2 >> 0x20);
+      if (iVar4 == reversedAtom) {
+        _CPPErrorToInfoLog("GetAtomString(atable, fSymb->name)",(int)reversedAtom2,in_r5,in_r6,in_r7,in_r8,
                            in_r9);
         return;
       }
-      if (iVar3 < iVar4) {
+      if (reversedAtom < iVar4) {
         piVar2 = (int *)*piVar5;
         if (piVar2 == (int *)0x0) {
           *piVar5 = param_2;
@@ -892,12 +894,12 @@ int _LookUpLocalSymbol(param_1, param_2)
   undefined4 param_2;
 {
   undefined *puVar1;
-  int iVar2;
-  int iVar3;
+  int reversedAtom;
+  int reversedAtom2;
   int *piVar4;
   
   puVar1 = PTR__atable_a7b7c0ac;
-  iVar2 = _GetReversedAtom(*(undefined4 *)PTR__atable_a7b7c0ac,param_2);
+  reversedAtom = _GetReversedAtom(*(undefined4 *)PTR__atable_a7b7c0ac,param_2);
   if (param_1 == 0) {
     param_1 = _CurrentScope;
   }
@@ -906,9 +908,9 @@ int _LookUpLocalSymbol(param_1, param_2)
     if (piVar4 == (int *)0x0) {
       return 0;
     }
-    iVar3 = _GetReversedAtom(*(undefined4 *)puVar1,piVar4[3]);
-    if (iVar3 == iVar2) break;
-    if (iVar2 < iVar3) {
+    reversedAtom2 = _GetReversedAtom(*(undefined4 *)puVar1,piVar4[3]);
+    if (reversedAtom2 == reversedAtom) break;
+    if (reversedAtom < reversedAtom2) {
       piVar4 = (int *)*piVar4;
     }
     else {
@@ -945,6 +947,7 @@ int _idstr(param_1, param_2)
   byte *param_1;
   int param_2;
 {
+  int length;
   byte bVar1;
   undefined *puVar2;
   int iVar3;
@@ -952,12 +955,12 @@ int _idstr(param_1, param_2)
   uint uVar5;
   byte *pbVar6;
   
-  iVar3 = _strlen(param_1);
+  length = _strlen(param_1);
   if (param_2 == 0) {
-    pbVar4 = (byte *)_malloc(iVar3 + 1);
+    pbVar4 = (byte *)_malloc(length + 1);
   }
   else {
-    pbVar4 = (byte *)_mem_Alloc(param_2,iVar3 + 1);
+    pbVar4 = (byte *)_mem_Alloc(param_2,length + 1);
   }
   puVar2 = PTR_DAT_a7b7c0a8;
   bVar1 = *param_1;
@@ -1187,12 +1190,13 @@ int _ReadToken(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
+  int loopIndex2;
   uint uVar1;
   int iVar2;
   undefined4 uVar3;
   int iVar4;
   char *pcVar5;
-  int iVar6;
+  int loopIndex;
   double dVar7;
   undefined1 local_2c0 [144];
   char local_230 [532];
@@ -1206,21 +1210,21 @@ int _ReadToken(param_1, param_2)
   }
   if (iVar2 == 0x10e) {
 LAB_97b8a810:
-    iVar6 = 0;
+    loopIndex = 0;
     uVar3 = ((int (*)())_lReadByte)(param_1);
     iVar4 = (int)(char)uVar3;
     uVar1 = iVar4 - 0x61;
     while (((((uVar1 & 0xff) < 0x1a || (iVar4 - 0x41U < 0x1a)) || (iVar4 - 0x30U < 10)) ||
            (iVar4 == 0x5f))) {
-      if (iVar6 < 0x80) {
-        local_2c0[iVar6] = (char)iVar4;
+      if (loopIndex < 0x80) {
+        local_2c0[loopIndex] = (char)iVar4;
         uVar3 = ((int (*)())_lReadByte)(param_1);
-        iVar6 = iVar6 + 1;
+        loopIndex = loopIndex + 1;
         iVar4 = (int)(char)uVar3;
         uVar1 = iVar4 - 0x61;
       }
     }
-    local_2c0[iVar6] = 0;
+    local_2c0[loopIndex] = 0;
     if (iVar4 == 0) {
       uVar3 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2c0);
       param_2[2] = uVar3;
@@ -1241,21 +1245,21 @@ LAB_97b8aac8:
       if (iVar2 != 0x10b) {
         return iVar2;
       }
-      iVar6 = 0;
+      loopIndex = 0;
       uVar3 = ((int (*)())_lReadByte)(param_1);
       iVar4 = (int)(char)uVar3;
       uVar1 = iVar4 - 0x30;
       while (((((uVar1 & 0xff) < 10 || (iVar4 == 0x65)) ||
               ((iVar4 == 0x45 || ((iVar4 == 0x2e || (iVar4 == 0x2b)))))) || (iVar4 == 0x2d))) {
-        if (iVar6 < 0x80) {
-          local_2c0[iVar6] = (char)iVar4;
+        if (loopIndex < 0x80) {
+          local_2c0[loopIndex] = (char)iVar4;
           uVar3 = ((int (*)())_lReadByte)(param_1);
-          iVar6 = iVar6 + 1;
+          loopIndex = loopIndex + 1;
           iVar4 = (int)(char)uVar3;
           uVar1 = iVar4 - 0x30;
         }
       }
-      local_2c0[iVar6] = 0;
+      local_2c0[loopIndex] = 0;
       if (iVar4 == 0) {
         _strcpy(param_2 + 3,local_2c0);
         dVar7 = (double)((double (*)())_glp_strtod)(param_2 + 3,0);
@@ -1266,18 +1270,18 @@ LAB_97b8aac8:
       goto LAB_97b8aac8;
     }
     if (iVar2 == 0x116) {
-      iVar2 = 0;
+      loopIndex2 = 0;
       pcVar5 = local_230;
       while( true ) {
         uVar3 = ((int (*)())_lReadByte)(param_1);
         if ((char)uVar3 == '\0') break;
-        if (iVar2 < 0x200) {
+        if (loopIndex2 < 0x200) {
           *pcVar5 = (char)uVar3;
-          iVar2 = iVar2 + 1;
+          loopIndex2 = loopIndex2 + 1;
           pcVar5 = pcVar5 + 1;
         }
       }
-      local_230[iVar2] = '\0';
+      local_230[loopIndex2] = '\0';
       uVar3 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_230);
       param_2[2] = uVar3;
       return 0x116;
@@ -1291,20 +1295,20 @@ LAB_97b8aac8:
     if (iVar2 != 0x10f) {
       return iVar2;
     }
-    iVar6 = 0;
+    loopIndex = 0;
     uVar3 = ((int (*)())_lReadByte)(param_1);
     iVar4 = (int)(char)uVar3;
     uVar1 = iVar4 - 0x30;
     while ((uVar1 & 0xff) < 10) {
-      if (iVar6 < 0x80) {
-        local_2c0[iVar6] = (char)iVar4;
+      if (loopIndex < 0x80) {
+        local_2c0[loopIndex] = (char)iVar4;
         uVar3 = ((int (*)())_lReadByte)(param_1);
-        iVar6 = iVar6 + 1;
+        loopIndex = loopIndex + 1;
         iVar4 = (int)(char)uVar3;
         uVar1 = iVar4 - 0x30;
       }
     }
-    local_2c0[iVar6] = 0;
+    local_2c0[loopIndex] = 0;
     if (iVar4 != 0) {
       uVar3 = 0x168;
       goto LAB_97b8aac8;
@@ -1366,29 +1370,29 @@ int _ReadFromTokenStream(param_1, param_2, param_3)
   undefined4 uVar1;
   undefined *puVar2;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *allocation;
   undefined4 uVar5;
   
-  puVar4 = (undefined4 *)_malloc(0x20);
+  allocation = (undefined4 *)_malloc(0x20);
   puVar2 = PTR__cpp_a7b7c0a4;
   iVar3 = *(int *)PTR__cpp_a7b7c0a4;
-  puVar4[7] = 0;
-  *puVar4 = 0;
-  puVar4[1] = 0;
-  puVar4[5] = 0;
-  puVar4[6] = 0;
-  puVar4[2] = 0;
-  puVar4[3] = 0;
-  puVar4[4] = param_2;
+  allocation[7] = 0;
+  *allocation = 0;
+  allocation[1] = 0;
+  allocation[5] = 0;
+  allocation[6] = 0;
+  allocation[2] = 0;
+  allocation[3] = 0;
+  allocation[4] = param_2;
   uVar1 = DAT_a7b7b050;
   uVar5 = *(undefined4 *)(iVar3 + 0x20);
-  puVar4[5] = 1;
-  puVar4[1] = uVar1;
-  *puVar4 = uVar5;
-  puVar4[7] = param_3;
-  puVar4[6] = param_1;
+  allocation[5] = 1;
+  allocation[1] = uVar1;
+  *allocation = uVar5;
+  allocation[7] = param_3;
+  allocation[6] = param_1;
   ((int (*)())_RewindTokenStream)(param_1);
-  *(undefined4 **)(*(int *)puVar2 + 0x20) = puVar4;
+  *(undefined4 **)(*(int *)puVar2 + 0x20) = allocation;
   return 1;
 }
 
@@ -1411,19 +1415,19 @@ int _UngetToken(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  undefined4 *puVar1;
+  undefined4 *allocation;
   int iVar2;
   
-  puVar1 = (undefined4 *)_malloc(0xac);
-  _memset(puVar1,0,0xac);
-  puVar1[6] = param_1;
-  _memcpy(puVar1 + 7,param_2,0x90);
+  allocation = (undefined4 *)_malloc(0xac);
+  _memset(allocation,0,0xac);
+  allocation[6] = param_1;
+  _memcpy(allocation + 7,param_2,0x90);
   iVar2 = *(int *)PTR__cpp_a7b7c0a4;
-  puVar1[1] = DAT_a7b7b04c;
-  *puVar1 = *(undefined4 *)(iVar2 + 0x20);
-  puVar1[4] = *(undefined4 *)(*(int *)(iVar2 + 0x20) + 0x10);
-  puVar1[5] = *(undefined4 *)(*(int *)(iVar2 + 0x20) + 0x14);
-  *(undefined4 **)(iVar2 + 0x20) = puVar1;
+  allocation[1] = DAT_a7b7b04c;
+  *allocation = *(undefined4 *)(iVar2 + 0x20);
+  allocation[4] = *(undefined4 *)(*(int *)(iVar2 + 0x20) + 0x10);
+  allocation[5] = *(undefined4 *)(*(int *)(iVar2 + 0x20) + 0x14);
+  *(undefined4 **)(iVar2 + 0x20) = allocation;
   return;
 }
 
@@ -2621,18 +2625,18 @@ int __ZN13TInfoSinkBase6appendEPKc(this, str)
   char *str;
 {
   uint uVar1;
-  int iVar2;
-  ulong uVar3;
+  int length;
+  ulong length2;
   
   uVar1 = *(uint *)((int)this + 4);
   if ((uVar1 & 4) != 0) {
-    iVar2 = _strlen(str);
+    length = _strlen(str);
     uVar1 = *(uint *)(*(int *)this + -8);
-    if (uVar1 < *(int *)(*(int *)this + -0xc) + iVar2 + 2U) {
+    if (uVar1 < *(int *)(*(int *)this + -0xc) + length + 2U) {
       __ZNSs7reserveEm(this,uVar1 + (uVar1 >> 1));
     }
-    uVar3 = _strlen(str);
-    __ZNSs6appendEPKcm(this,str,uVar3);
+    length2 = _strlen(str);
+    __ZNSs6appendEPKcm(this,str,length2);
     uVar1 = *(uint *)((int)this + 4);
   }
   if ((uVar1 & 2) != 0) {
@@ -2699,7 +2703,7 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
 {
   undefined *puVar1;
   uint uVar2;
-  ulong uVar3;
+  ulong length;
   int iVar4;
   char *pcVar5;
   
@@ -2713,8 +2717,8 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
     }
     *(undefined1 *)(iVar4 + *(int *)(iVar4 + -0xc)) = *DAT_a7b7b720;
     pcVar5 = *(char **)(param_2 + 4);
-    uVar3 = _strlen(pcVar5);
-    __ZNSs6appendEPKcm(this,pcVar5,uVar3);
+    length = _strlen(pcVar5);
+    __ZNSs6appendEPKcm(this,pcVar5,length);
     uVar2 = *(uint *)((int)this + 4);
   }
   puVar1 = PTR_DAT_a7b7c0bc;

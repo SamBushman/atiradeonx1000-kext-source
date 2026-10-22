@@ -52,7 +52,7 @@ int TParseContext__samplerErrorCheck(this, param_2, param_3, param_4)
   char *param_4;
 {
   int iVar1;
-  char *pcVar2;
+  char *basicString;
   char *pcVar3;
   undefined4 in_r8;
   undefined4 in_r9;
@@ -64,17 +64,17 @@ int TParseContext__samplerErrorCheck(this, param_2, param_3, param_4)
     if (iVar1 == 0) {
       return 0;
     }
-    pcVar2 = (char *)TType__getBasicString(*(undefined4 *)param_3);
+    basicString = (char *)TType__getBasicString(*(undefined4 *)param_3);
     pcVar3 = "(structure contains a sampler)";
   }
   else {
     if (7 < iVar1 - 5U) {
       return 0;
     }
-    pcVar2 = (char *)TType__getBasicString(iVar1);
+    basicString = (char *)TType__getBasicString(iVar1);
     pcVar3 = "";
   }
-  error((int)this,(char *)param_2,param_4,pcVar2,pcVar3,in_r8,in_r9,in_r10);
+  error((int)this,(char *)param_2,param_4,basicString,pcVar3,in_r8,in_r9,in_r10);
   return 1;
 }
 
@@ -89,14 +89,14 @@ int TParseContext__structQualifierErrorCheck(this, param_2, param_3, param_4, pa
   undefined4 param_7;
 {
   int iVar1;
-  char *pcVar2;
+  char *qualifierString;
   undefined4 uVar3;
   undefined4 in_r10;
   
   iVar1 = *(int *)(param_3 + 4);
   if ((iVar1 - 3U < 3) && (*(int *)param_3 == 0xe)) {
-    pcVar2 = (char *)getQualifierString(iVar1);
-    error((int)this,(char *)param_2,"cannot be used with a structure",pcVar2,"",param_6,param_7,
+    qualifierString = (char *)getQualifierString(iVar1);
+    error((int)this,(char *)param_2,"cannot be used with a structure",qualifierString,"",param_6,param_7,
           in_r10);
     uVar3 = 1;
   }
@@ -118,7 +118,7 @@ int TParseContext__parameterSamplerErrorCheck(this, param_2, param_3, param_4)
   int *param_4;
 {
   int iVar1;
-  char *pcVar2;
+  char *basicString;
   undefined4 uVar3;
   undefined4 in_r8;
   undefined4 in_r9;
@@ -126,8 +126,8 @@ int TParseContext__parameterSamplerErrorCheck(this, param_2, param_3, param_4)
   
   if (((param_3 - 10U < 2) && (iVar1 = (**(code **)(*param_4 + 0x20))(param_4), iVar1 != 0xe)) &&
      (iVar1 = (**(code **)(*param_4 + 0x20))(param_4), iVar1 - 5U < 8)) {
-    pcVar2 = (char *)TType__getBasicString((uint)param_4[9] >> 0x13 & 0x3f);
-    error((int)this,(char *)param_2,"samplers cannot be output parameters",pcVar2,"",in_r8,in_r9,
+    basicString = (char *)TType__getBasicString((uint)param_4[9] >> 0x13 & 0x3f);
+    error((int)this,(char *)param_2,"samplers cannot be output parameters",basicString,"",in_r8,in_r9,
           in_r10);
     uVar3 = 1;
   }
@@ -1151,7 +1151,7 @@ int TParseContext__paramErrorCheck(this, param_2, param_3, param_4, param_5)
   int *param_5;
 {
   int iVar1;
-  char *pcVar2;
+  char *qualifierString;
   char *pcVar3;
   char *pcVar4;
   undefined4 in_r8;
@@ -1164,7 +1164,7 @@ int TParseContext__paramErrorCheck(this, param_2, param_3, param_4, param_5)
       param_4 = 0xc;
       goto LAB_97b9d48c;
     }
-    pcVar2 = (char *)getQualifierString(2);
+    qualifierString = (char *)getQualifierString(2);
     pcVar4 = (char *)getQualifierString(param_4);
     pcVar3 = "qualifier not allowed with ";
   }
@@ -1175,11 +1175,11 @@ LAB_97b9d48c:
       (**(code **)(iVar1 + 0x28))(param_5,param_4);
       return 0;
     }
-    pcVar2 = (char *)getQualifierString(param_3);
+    qualifierString = (char *)getQualifierString(param_3);
     pcVar3 = "qualifier not allowed on function parameter";
     pcVar4 = "";
   }
-  error((int)this,(char *)param_2,pcVar3,pcVar2,pcVar4,in_r8,in_r9,in_r10);
+  error((int)this,(char *)param_2,pcVar3,qualifierString,pcVar4,in_r8,in_r9,in_r10);
   return 1;
 }
 
@@ -1194,7 +1194,7 @@ int TParseContext__extensionErrorCheck(this, param_2, param_3)
   char *pcVar3;
   int *piVar4;
   int iVar5;
-  ulong uVar6;
+  ulong length;
   uint *puVar7;
   undefined4 in_r8;
   undefined4 in_r10;
@@ -1314,9 +1314,9 @@ LAB_97b9d574:
               ((char *)&local_1a0,(unsigned char *)"extension ",&uStack_130);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
               ((unsigned char *)&local_1b0,(unsigned char *)&local_1a0);
-    uVar6 = _strlen(" is being used");
+    length = _strlen(" is being used");
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-              ((unsigned char *)&local_1b0," is being used",uVar6);
+              ((unsigned char *)&local_1b0," is being used",length);
     pcVar3 = local_1ac;
     local_1ac[*(int *)(local_1ac + -0xc)] = *DAT_a7b7ba18;
                     
@@ -2397,6 +2397,7 @@ int TParseContext__constructStruct(this, param_2, param_3, param_4, param_5, par
   int param_5;
   int param_6;
 {
+  undefined4 basicString;
   int *piVar1;
   undefined4 uVar2;
   unsigned char * pTVar3;
@@ -2427,12 +2428,12 @@ int TParseContext__constructStruct(this, param_2, param_3, param_4, param_5, par
   }
   local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   if (a6 == 0) {
-    uVar2 = TType__getBasicString(*(uint *)(param_3 + 0x24) >> 0x13 & 0x3f);
+    basicString = TType__getBasicString(*(uint *)(param_3 + 0x24) >> 0x13 & 0x3f);
     piVar1 = (int *)(**(code **)(*(int *)param_2 + 0x14))(param_2);
     (**(code **)(*piVar1 + 0x38))(local_50,piVar1);
     uVar4 = TType__getBasicString(local_2c >> 0x13 & 0x3f);
     error((int)this,(char *)param_5,"","constructor",
-          "cannot convert parameter %d from \'%s\' to \'%s\'",param_4,uVar4,uVar2);
+          "cannot convert parameter %d from \'%s\' to \'%s\'",param_4,uVar4,basicString);
     local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
     TParseContext__recover(this);
     uVar2 = 0;
@@ -3232,6 +3233,7 @@ int TPoolAllocator__allocate(this, param_2)
   unsigned char * this;
   ulong param_2;
 {
+  undefined4 *allocation;
   float fVar1;
   undefined4 uVar2;
   ulong uVar3;
@@ -3251,14 +3253,14 @@ int TPoolAllocator__allocate(this, param_2)
   if (uVar3 < uVar5) {
     uVar8 = iVar7 + *(int *)(this + 0x10);
     if (uVar3 < uVar8) {
-      puVar4 = operator_new__(uVar8);
+      allocation = operator_new__(uVar8);
       iVar6 = 0;
-      if (puVar4 != (undefined4 *)0x0) {
+      if (allocation != (undefined4 *)0x0) {
         uVar5 = *(uint *)(this + 4);
-        *puVar4 = *(undefined4 *)(this + 0x1c);
-        puVar4[1] = ((uVar8 + uVar5) - 1) / uVar5;
-        iVar6 = (int)puVar4 + *(int *)(this + 0x10);
-        *(undefined4 **)(this + 0x1c) = puVar4;
+        *allocation = *(undefined4 *)(this + 0x1c);
+        allocation[1] = ((uVar8 + uVar5) - 1) / uVar5;
+        iVar6 = (int)allocation + *(int *)(this + 0x10);
+        *(undefined4 **)(this + 0x1c) = allocation;
         *(undefined4 *)(this + 0x14) = *(undefined4 *)(this + 4);
       }
     }
@@ -3498,17 +3500,17 @@ int GetSymbolTable(param_1)
   int param_1;
 {
   undefined4 *puVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   
   puVar1 = &GetSymbolTable__SymbolTables;
   if (GetSymbolTable__SymbolTables == 0) {
     do {
-      puVar2 = operator_new(0x10);
-      *puVar2 = 0;
-      puVar2[1] = 0;
-      puVar2[2] = 0;
-      puVar2[3] = 0;
-      *puVar1 = puVar2;
+      allocation = operator_new(0x10);
+      *allocation = 0;
+      allocation[1] = 0;
+      allocation[2] = 0;
+      allocation[3] = 0;
+      *puVar1 = allocation;
       puVar1 = puVar1 + 1;
     } while ((int)puVar1 < -0x584817f7);
   }
@@ -3693,6 +3695,8 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   undefined4 param_5;
 {
+  int *stringSizeArray;
+  int numStrings;
   int iVar1;
   int *piVar2;
   int iVar3;
@@ -3822,9 +3826,9 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
     if (uVar6 != 0) {
 LAB_97ba0e34:
       ppcVar7 = (char **)TBuiltIns__getStringArray(param_1,local_124,uVar9);
-      piVar2 = (int *)TBuiltIns__getStringSizeArray(param_1,local_124,uVar9);
-      iVar3 = TBuiltIns__getNumStrings(param_1,local_124,uVar9);
-      iVar3 = PaParseStrings(ppcVar7,piVar2,iVar3,0,(unsigned char *)&local_130);
+      stringSizeArray = (int *)TBuiltIns__getStringSizeArray(param_1,local_124,uVar9);
+      numStrings = TBuiltIns__getNumStrings(param_1,local_124,uVar9);
+      iVar3 = PaParseStrings(ppcVar7,stringSizeArray,numStrings,0,(unsigned char *)&local_130);
       if (iVar3 == 0) goto LAB_97ba0fd8;
                     
       __ZN13TInfoSinkBase6appendEPKc(param_3,"INTERNAL ERROR: ");

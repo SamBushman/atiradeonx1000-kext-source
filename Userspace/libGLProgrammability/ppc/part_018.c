@@ -49,22 +49,22 @@ int _BitSetEqualsTest(bitSet, param_2)
   int iVar2;
   int iVar3;
   undefined4 uVar4;
-  int iVar5;
+  int loopIndex;
   
   uVar4 = 1;
   _BitSetExpandEquals(bitSet,*param_2);
-  iVar5 = 0;
+  loopIndex = 0;
   _BitSetExpandEquals(param_2,*bitSet);
   iVar3 = *bitSet;
   if (0 < iVar3) {
     do {
-      iVar1 = _BitSetGetEquals(bitSet,iVar5);
-      iVar2 = _BitSetGetEquals(param_2,iVar5);
+      iVar1 = _BitSetGetEquals(bitSet,loopIndex);
+      iVar2 = _BitSetGetEquals(param_2,loopIndex);
       if (iVar1 != iVar2) {
         uVar4 = 0;
       }
-      iVar5 = iVar5 + 1;
-    } while (iVar5 < iVar3);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < iVar3);
   }
   return uVar4;
 }
@@ -205,36 +205,37 @@ int _HashSetNew(param_1, param_2, param_3)
   uint param_2;
   uint param_3;
 {
+  uint allocation2;
   int iVar1;
-  uint *puVar2;
+  uint *allocation;
   uint uVar3;
-  undefined4 uVar4;
-  uint uVar5;
+  undefined4 allocation3;
+  uint loopIndex;
   
-  puVar2 = (uint *)_malloc(0x10);
+  allocation = (uint *)_malloc(0x10);
   if (param_2 == 0) {
     param_2 = DAT_a7b7bf70;
   }
-  puVar2[2] = param_2;
+  allocation[2] = param_2;
   if (param_3 == 0) {
     param_3 = DAT_a7b7bf6c;
   }
-  puVar2[3] = param_3;
-  *puVar2 = param_1;
-  uVar3 = _malloc(param_1 << 3);
-  uVar5 = 0;
-  puVar2[1] = uVar3;
-  if (*puVar2 != 0) {
+  allocation[3] = param_3;
+  *allocation = param_1;
+  allocation2 = _malloc(param_1 << 3);
+  loopIndex = 0;
+  allocation[1] = allocation2;
+  if (*allocation != 0) {
     do {
-      uVar3 = puVar2[1];
-      iVar1 = uVar5 * 8;
-      uVar5 = uVar5 + 1;
+      uVar3 = allocation[1];
+      iVar1 = loopIndex * 8;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(uVar3 + iVar1) = 0;
-      uVar4 = _malloc(4);
-      *(undefined4 *)(uVar3 + iVar1 + 4) = uVar4;
-    } while (uVar5 < *puVar2);
+      allocation3 = _malloc(4);
+      *(undefined4 *)(uVar3 + iVar1 + 4) = allocation3;
+    } while (loopIndex < *allocation);
   }
-  return puVar2;
+  return allocation;
 }
 
 /* _HashSetFree @ 0x97c086ac (132 bytes) */
@@ -244,9 +245,9 @@ int _HashSetFree(hashSet)
   uint uVar1;
   int iVar2;
   uint uVar3;
-  uint uVar4;
+  uint loopIndex;
   
-  uVar4 = 0;
+  loopIndex = 0;
   uVar3 = *hashSet;
   if (uVar3 == 0) {
     uVar1 = hashSet[1];
@@ -254,14 +255,14 @@ int _HashSetFree(hashSet)
   else {
     uVar1 = hashSet[1];
     do {
-      iVar2 = *(int *)(uVar1 + uVar4 * 8 + 4);
+      iVar2 = *(int *)(uVar1 + loopIndex * 8 + 4);
       if (iVar2 != 0) {
         _free(iVar2);
         uVar3 = *hashSet;
         uVar1 = hashSet[1];
       }
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < uVar3);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < uVar3);
   }
   if (uVar1 != 0) {
     _free(uVar1);
@@ -274,6 +275,7 @@ int _HashSetAdd(hashSet, param_2)
   uint *hashSet;
   undefined4 param_2;
 {
+  uint allocation;
   uint uVar1;
   int iVar2;
   undefined4 in_r5;
@@ -282,10 +284,10 @@ int _HashSetAdd(hashSet, param_2)
   undefined4 in_r8;
   uint a6;
   uint uVar3;
-  uint uVar4;
+  uint loopIndex;
   uint *puVar5;
   
-  uVar4 = 0;
+  loopIndex = 0;
   uVar3 = 0xffffffff;
   uVar1 = (*(code *)hashSet[2])(param_2,param_2);
   a6 = hashSet[1];
@@ -297,29 +299,29 @@ int _HashSetAdd(hashSet, param_2)
   else {
     uVar1 = puVar5[1];
     do {
-      iVar2 = *(int *)(uVar1 + uVar4 * 4);
+      iVar2 = *(int *)(uVar1 + loopIndex * 4);
       if (iVar2 == 0) {
         if (uVar3 == 0xffffffff) {
-          uVar3 = uVar4;
+          uVar3 = loopIndex;
         }
       }
       else {
         iVar2 = (*(code *)hashSet[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6);
         if (iVar2 == 0) {
-          *(undefined4 *)(uVar1 + uVar4 * 4) = param_2;
+          *(undefined4 *)(uVar1 + loopIndex * 4) = param_2;
           return hashSet;
         }
         uVar1 = puVar5[1];
       }
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < *puVar5);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < *puVar5);
   }
   if (uVar3 == 0xffffffff) {
     uVar3 = *puVar5;
     *puVar5 = uVar3 + 1;
-    uVar3 = _realloc(uVar1,(uVar3 + 1) * 4);
-    puVar5[1] = uVar3;
-    *(undefined4 *)(uVar3 + *puVar5 * 4 + -4) = param_2;
+    allocation = _realloc(uVar1,(uVar3 + 1) * 4);
+    puVar5[1] = allocation;
+    *(undefined4 *)(allocation + *puVar5 * 4 + -4) = param_2;
   }
   else {
     *(undefined4 *)(uVar1 + uVar3 * 4) = param_2;
@@ -340,9 +342,9 @@ int _HashSetGet(hashSet, param_2)
   undefined4 in_r8;
   uint a6;
   uint *puVar3;
-  uint uVar4;
+  uint loopIndex;
   
-  uVar4 = 0;
+  loopIndex = 0;
   uVar1 = (*(code *)hashSet[2])(param_2,param_2);
   a6 = hashSet[1];
   iVar2 = (uVar1 - (uVar1 / *hashSet) * *hashSet) * 8;
@@ -350,13 +352,13 @@ int _HashSetGet(hashSet, param_2)
   if (*(int *)(a6 + iVar2) != 0) {
     do {
       uVar1 = puVar3[1];
-      iVar2 = *(int *)(uVar1 + uVar4 * 4);
+      iVar2 = *(int *)(uVar1 + loopIndex * 4);
       if ((iVar2 != 0) &&
          (iVar2 = (*(code *)hashSet[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6), iVar2 == 0)) {
-        return *(undefined4 *)(uVar1 + uVar4 * 4);
+        return *(undefined4 *)(uVar1 + loopIndex * 4);
       }
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < *puVar3);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < *puVar3);
   }
   return 0;
 }
@@ -376,9 +378,9 @@ int _HashSetRemove(hashSet, param_2)
   undefined4 in_r8;
   uint a6;
   uint *puVar5;
-  uint uVar6;
+  uint loopIndex;
   
-  uVar6 = 0;
+  loopIndex = 0;
   uVar3 = (*(code *)hashSet[2])(param_2,param_2);
   a6 = hashSet[1];
   iVar1 = (uVar3 - (uVar3 / *hashSet) * *hashSet) * 8;
@@ -386,7 +388,7 @@ int _HashSetRemove(hashSet, param_2)
   if (*(int *)(a6 + iVar1) != 0) {
     do {
       uVar3 = puVar5[1];
-      iVar1 = uVar6 * 4;
+      iVar1 = loopIndex * 4;
       if ((*(int *)(uVar3 + iVar1) != 0) &&
          (iVar4 = (*(code *)hashSet[3])(*(int *)(uVar3 + iVar1),param_2,in_r5,in_r6,in_r7,in_r8,a6),
          iVar4 == 0)) {
@@ -394,8 +396,8 @@ int _HashSetRemove(hashSet, param_2)
         *(undefined4 *)(uVar3 + iVar1) = 0;
         return uVar2;
       }
-      uVar6 = uVar6 + 1;
-    } while (uVar6 < *puVar5);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < *puVar5);
   }
   return 0;
 }
@@ -454,13 +456,13 @@ int _HashTableNew(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  undefined4 *puVar1;
+  undefined4 *allocation;
   undefined4 uVar2;
   
-  puVar1 = (undefined4 *)_malloc(4);
+  allocation = (undefined4 *)_malloc(4);
   uVar2 = ((int (*)())_HashSetNew)(param_1,param_2,param_3);
-  *puVar1 = uVar2;
-  return puVar1;
+  *allocation = uVar2;
+  return allocation;
 }
 
 /* _HashTableFree @ 0x97c08ab4 (160 bytes) */
@@ -470,29 +472,29 @@ int _HashTableFree(hashTable)
   uint *puVar1;
   int iVar2;
   uint uVar3;
-  uint uVar4;
+  uint loopIndex;
   uint *puVar5;
-  uint uVar6;
+  uint loopIndex2;
   
-  uVar4 = 0;
+  loopIndex = 0;
   puVar1 = (uint *)*hashTable;
   uVar3 = *puVar1;
   if (uVar3 != 0) {
     do {
-      uVar6 = 0;
-      puVar5 = (uint *)(puVar1[1] + uVar4 * 8);
-      if (*(int *)(puVar1[1] + uVar4 * 8) != 0) {
+      loopIndex2 = 0;
+      puVar5 = (uint *)(puVar1[1] + loopIndex * 8);
+      if (*(int *)(puVar1[1] + loopIndex * 8) != 0) {
         do {
-          iVar2 = *(int *)(puVar5[1] + uVar6 * 4);
+          iVar2 = *(int *)(puVar5[1] + loopIndex2 * 4);
           if (iVar2 != 0) {
             _free(iVar2);
           }
-          uVar6 = uVar6 + 1;
-        } while (uVar6 < *puVar5);
+          loopIndex2 = loopIndex2 + 1;
+        } while (loopIndex2 < *puVar5);
         uVar3 = *puVar1;
       }
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < uVar3);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < uVar3);
     puVar1 = (uint *)*hashTable;
   }
   ((int (*)())_HashSetFree)(puVar1);
@@ -505,10 +507,11 @@ int _HashTableAdd(hashTable, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  uint allocation2;
   int iVar1;
   uint uVar2;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *allocation;
   undefined4 a2;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -516,11 +519,11 @@ int _HashTableAdd(hashTable, param_2, param_3)
   uint a6;
   uint uVar5;
   uint *puVar6;
-  uint uVar7;
+  uint loopIndex;
   uint *puVar8;
   
   puVar6 = (uint *)*hashTable;
-  uVar7 = 0;
+  loopIndex = 0;
   uVar5 = 0xffffffff;
   a2 = param_3;
   uVar2 = (*(code *)puVar6[2])(param_2,param_2,param_3);
@@ -533,10 +536,10 @@ int _HashTableAdd(hashTable, param_2, param_3)
   else {
     uVar2 = puVar8[1];
     do {
-      iVar1 = uVar7 * 4;
+      iVar1 = loopIndex * 4;
       if (*(undefined4 **)(uVar2 + iVar1) == (undefined4 *)0x0) {
         if (uVar5 == 0xffffffff) {
-          uVar5 = uVar7;
+          uVar5 = loopIndex;
         }
       }
       else {
@@ -549,24 +552,24 @@ int _HashTableAdd(hashTable, param_2, param_3)
         }
         uVar2 = puVar8[1];
       }
-      uVar7 = uVar7 + 1;
-    } while (uVar7 < *puVar8);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < *puVar8);
   }
   if (uVar5 == 0xffffffff) {
     uVar5 = *puVar8;
     *puVar8 = uVar5 + 1;
-    uVar5 = _realloc(uVar2,(uVar5 + 1) * 4);
-    puVar8[1] = uVar5;
-    iVar1 = uVar5 + *puVar8 * 4;
-    puVar4 = (undefined4 *)_malloc(8);
-    *(undefined4 **)(iVar1 + -4) = puVar4;
-    *puVar4 = param_2;
+    allocation2 = _realloc(uVar2,(uVar5 + 1) * 4);
+    puVar8[1] = allocation2;
+    iVar1 = allocation2 + *puVar8 * 4;
+    allocation = (undefined4 *)_malloc(8);
+    *(undefined4 **)(iVar1 + -4) = allocation;
+    *allocation = param_2;
     iVar1 = *(int *)(iVar1 + -4);
   }
   else {
-    puVar4 = (undefined4 *)_malloc(8);
-    *(undefined4 **)(uVar2 + uVar5 * 4) = puVar4;
-    *puVar4 = param_2;
+    allocation = (undefined4 *)_malloc(8);
+    *(undefined4 **)(uVar2 + uVar5 * 4) = allocation;
+    *allocation = param_2;
     iVar1 = *(int *)(uVar2 + uVar5 * 4);
   }
   *(undefined4 *)(iVar1 + 4) = param_3;
@@ -588,9 +591,9 @@ int _HashTableGet(hashTable, param_2)
   uint a6;
   uint *puVar4;
   uint *puVar5;
-  uint uVar6;
+  uint loopIndex;
   
-  uVar6 = 0;
+  loopIndex = 0;
   puVar4 = (uint *)*hashTable;
   uVar1 = (*(code *)puVar4[2])(param_2,param_2);
   a6 = puVar4[1];
@@ -599,13 +602,13 @@ int _HashTableGet(hashTable, param_2)
   if (*(int *)(a6 + iVar3) != 0) {
     do {
       uVar1 = puVar5[1];
-      puVar2 = *(undefined4 **)(uVar1 + uVar6 * 4);
+      puVar2 = *(undefined4 **)(uVar1 + loopIndex * 4);
       if ((puVar2 != (undefined4 *)0x0) &&
          (iVar3 = (*(code *)puVar4[3])(*puVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6), iVar3 == 0)) {
-        return *(undefined4 *)(*(int *)(uVar1 + uVar6 * 4) + 4);
+        return *(undefined4 *)(*(int *)(uVar1 + loopIndex * 4) + 4);
       }
-      uVar6 = uVar6 + 1;
-    } while (uVar6 < *puVar5);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < *puVar5);
   }
   return 0;
 }
@@ -625,10 +628,10 @@ int _HashTableRemove(hashTable, param_2, param_3, param_4, param_5, param_6)
   uint a6;
   uint *puVar4;
   uint *puVar5;
-  uint uVar6;
+  uint loopIndex;
   undefined4 uVar7;
   
-  uVar6 = 0;
+  loopIndex = 0;
   puVar4 = (uint *)*hashTable;
   uVar2 = (*(code *)puVar4[2])(param_2,param_2,param_3,param_4,param_5,param_6);
   a6 = puVar4[1];
@@ -637,7 +640,7 @@ int _HashTableRemove(hashTable, param_2, param_3, param_4, param_5, param_6)
   if (*(int *)(a6 + iVar1) != 0) {
     do {
       uVar2 = puVar5[1];
-      iVar1 = uVar6 * 4;
+      iVar1 = loopIndex * 4;
       if ((*(undefined4 **)(uVar2 + iVar1) != (undefined4 *)0x0) &&
          (iVar3 = (*(code *)puVar4[3])
                             (**(undefined4 **)(uVar2 + iVar1),param_2,param_3,param_4,param_5,
@@ -647,8 +650,8 @@ int _HashTableRemove(hashTable, param_2, param_3, param_4, param_5, param_6)
         *(undefined4 *)(uVar2 + iVar1) = 0;
         return uVar7;
       }
-      uVar6 = uVar6 + 1;
-    } while (uVar6 < *puVar5);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < *puVar5);
   }
   return 0;
 }
@@ -777,23 +780,24 @@ int _GetRegister(param_1, param_2, param_3, param_4)
 int _BuildGenKill(param_1)
   int param_1;
 {
+  uint loopIndex;
   uint uVar1;
   int iVar2;
-  uint uVar3;
+  uint loopIndex3;
   int iVar4;
-  uint uVar5;
+  uint loopIndex4;
   uint *puVar6;
   uint *puVar7;
   int iVar8;
   undefined4 *puVar9;
-  uint uVar10;
+  uint loopIndex2;
   
-  uVar3 = 0;
+  loopIndex3 = 0;
   if (*(int *)(param_1 + 4) != 0) {
     iVar4 = 0;
     do {
       iVar8 = *(int *)(param_1 + 8);
-      uVar5 = 0;
+      loopIndex4 = 0;
       puVar6 = (uint *)(iVar8 + iVar4);
       uVar1 = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
       puVar6[9] = uVar1;
@@ -807,10 +811,10 @@ int _BuildGenKill(param_1)
         do {
           puVar7 = (uint *)(puVar6[1] + iVar8);
           if (puVar7[5] == 0) {
-            uVar1 = 0;
+            loopIndex = 0;
             if (*(int *)(puVar6[1] + iVar8) != 0) {
               do {
-                puVar9 = *(undefined4 **)(uVar1 * 4 + puVar7[1]);
+                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar7[1]);
                 if (puVar9[6] == 0) {
                   iVar2 = _BitSetGetEquals(puVar6[10],*puVar9);
                   if (iVar2 == 0) {
@@ -818,30 +822,30 @@ int _BuildGenKill(param_1)
                   }
                   puVar9[9] = puVar9[9] + 1;
                 }
-                uVar1 = uVar1 + 1;
-              } while (uVar1 < *puVar7);
+                loopIndex = loopIndex + 1;
+              } while (loopIndex < *puVar7);
             }
             uVar1 = puVar7[2];
-            uVar10 = 0;
+            loopIndex2 = 0;
             if (uVar1 != 0) {
               do {
-                puVar9 = *(undefined4 **)(uVar10 * 4 + puVar7[3]);
+                puVar9 = *(undefined4 **)(loopIndex2 * 4 + puVar7[3]);
                 if (puVar9[6] == 0) {
                   _BitSetSetEquals(puVar6[10],*puVar9);
                   puVar9[9] = puVar9[9] + 1;
                   uVar1 = puVar7[2];
                 }
-                uVar10 = uVar10 + 1;
-              } while (uVar10 < uVar1);
+                loopIndex2 = loopIndex2 + 1;
+              } while (loopIndex2 < uVar1);
             }
           }
-          uVar5 = uVar5 + 1;
+          loopIndex4 = loopIndex4 + 1;
           iVar8 = iVar8 + 0x1c;
-        } while (uVar5 < *puVar6);
+        } while (loopIndex4 < *puVar6);
       }
-      uVar3 = uVar3 + 1;
+      loopIndex3 = loopIndex3 + 1;
       iVar4 = iVar4 + 0x2c;
-    } while (uVar3 < *(uint *)(param_1 + 4));
+    } while (loopIndex3 < *(uint *)(param_1 + 4));
   }
   return;
 }
@@ -850,11 +854,12 @@ int _BuildGenKill(param_1)
 int _BuildLiveOut(param_1)
   int param_1;
 {
+  uint loopIndex;
   bool bVar1;
   uint uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
-  uint uVar5;
+  uint loopIndex2;
   int iVar6;
   int iVar7;
   int iVar8;
@@ -862,32 +867,32 @@ int _BuildLiveOut(param_1)
   uVar2 = *(uint *)(param_1 + 4);
   do {
     bVar1 = false;
-    uVar5 = 0;
+    loopIndex2 = 0;
     if (uVar2 != 0) {
       iVar6 = 0;
       do {
-        uVar2 = 0;
+        loopIndex = 0;
         iVar8 = *(int *)(param_1 + 8) + iVar6;
         uVar3 = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
         if (*(int *)(iVar8 + 0x10) != 0) {
           do {
-            iVar7 = uVar2 * 4;
-            uVar2 = uVar2 + 1;
+            iVar7 = loopIndex * 4;
+            loopIndex = loopIndex + 1;
             iVar7 = *(int *)(iVar7 + *(int *)(iVar8 + 0x14));
             uVar4 = _BitSetClone(*(undefined4 *)(iVar7 + 0x18));
             _BitSetAndNotEquals(uVar4,*(undefined4 *)(iVar7 + 0x28));
             _BitSetOrEquals(uVar4,*(undefined4 *)(iVar7 + 0x24));
             _BitSetOrEquals(*(undefined4 *)(iVar8 + 0x18),uVar4);
             _BitSetFree(uVar4);
-          } while (uVar2 < *(uint *)(iVar8 + 0x10));
+          } while (loopIndex < *(uint *)(iVar8 + 0x10));
         }
-        uVar5 = uVar5 + 1;
+        loopIndex2 = loopIndex2 + 1;
         iVar6 = iVar6 + 0x2c;
         iVar8 = ((int (*)())_BitSetEqualsTest)(uVar3,*(undefined4 *)(iVar8 + 0x18));
         bVar1 = (bool)(bVar1 | iVar8 == 0);
         _BitSetFree(uVar3);
         uVar2 = *(uint *)(param_1 + 4);
-      } while (uVar5 < uVar2);
+      } while (loopIndex2 < uVar2);
     }
   } while (bVar1);
   return;
@@ -900,17 +905,17 @@ int _BuildInterferenceSets(param_1)
   undefined4 uVar1;
   int iVar2;
   uint uVar3;
-  uint uVar4;
+  uint loopIndex2;
   int iVar5;
   int iVar6;
   int iVar7;
   uint *puVar8;
   undefined4 *puVar9;
-  uint uVar10;
+  uint loopIndex;
   int iVar11;
   int iVar12;
   
-  uVar4 = 0;
+  loopIndex2 = 0;
   if (*(int *)(param_1 + 4) != 0) {
     iVar5 = 0;
     do {
@@ -924,10 +929,10 @@ int _BuildInterferenceSets(param_1)
           puVar8 = (uint *)(*(int *)(iVar6 + 4) + iVar7);
           if (puVar8[5] == 0) {
             uVar3 = puVar8[2];
-            uVar10 = 0;
+            loopIndex = 0;
             if (uVar3 != 0) {
               do {
-                puVar9 = *(undefined4 **)(uVar10 * 4 + puVar8[3]);
+                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[3]);
                 if (puVar9[6] == 0) {
                   for (iVar2 = _BitSetFirstSetBit(uVar1); iVar2 != -1;
                       iVar2 = _BitSetNextSetBit(uVar1,iVar2)) {
@@ -940,41 +945,41 @@ int _BuildInterferenceSets(param_1)
                   }
                   uVar3 = puVar8[2];
                 }
-                uVar10 = uVar10 + 1;
-              } while (uVar10 < uVar3);
+                loopIndex = loopIndex + 1;
+              } while (loopIndex < uVar3);
             }
-            uVar10 = 0;
+            loopIndex = 0;
             if (uVar3 != 0) {
               do {
-                puVar9 = *(undefined4 **)(uVar10 * 4 + puVar8[3]);
+                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[3]);
                 if (puVar9[6] == 0) {
                   _BitSetClearEquals(uVar1,*puVar9);
                   uVar3 = puVar8[2];
                 }
-                uVar10 = uVar10 + 1;
-              } while (uVar10 < uVar3);
+                loopIndex = loopIndex + 1;
+              } while (loopIndex < uVar3);
             }
             uVar3 = *puVar8;
-            uVar10 = 0;
+            loopIndex = 0;
             if (uVar3 != 0) {
               do {
-                puVar9 = *(undefined4 **)(uVar10 * 4 + puVar8[1]);
+                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[1]);
                 if (puVar9[6] == 0) {
                   _BitSetSetEquals(uVar1,*puVar9);
                   uVar3 = *puVar8;
                 }
-                uVar10 = uVar10 + 1;
-              } while (uVar10 < uVar3);
+                loopIndex = loopIndex + 1;
+              } while (loopIndex < uVar3);
             }
           }
           iVar11 = iVar11 + -1;
           iVar7 = iVar7 + -0x1c;
         } while (-1 < iVar11);
       }
-      uVar4 = uVar4 + 1;
+      loopIndex2 = loopIndex2 + 1;
       _BitSetFree(uVar1);
       iVar5 = iVar5 + 0x2c;
-    } while (uVar4 < *(uint *)(param_1 + 4));
+    } while (loopIndex2 < *(uint *)(param_1 + 4));
   }
   return;
 }
@@ -987,28 +992,28 @@ int _RegistersMerge(param_1)
   bool bVar2;
   int iVar3;
   int *piVar4;
-  int iVar5;
-  undefined4 uVar6;
-  int *piVar7;
+  int allocation2;
+  undefined4 allocation3;
+  int *allocation;
   int iVar8;
   uint uVar9;
   uint uVar10;
   int iVar11;
   uint uVar12;
-  uint uVar13;
+  uint loopIndex;
   uint uVar14;
   int iVar15;
   int iVar16;
   int local_50 [6];
   
-  iVar5 = _malloc(8);
+  allocation2 = _malloc(8);
   iVar11 = 0;
-  uVar6 = _malloc(0x10);
-  piVar7 = (int *)_realloc(uVar6,0x10);
+  allocation3 = _malloc(0x10);
+  allocation = (int *)_realloc(allocation3,0x10);
   iVar16 = 4;
-  uVar13 = 1;
+  loopIndex = 1;
   iVar8 = 0;
-  piVar4 = piVar7;
+  piVar4 = allocation;
   do {
     iVar3 = *(int *)(param_1 + 0x10) + iVar8;
     iVar8 = iVar8 + 0x2c;
@@ -1033,8 +1038,8 @@ int _RegistersMerge(param_1)
       iVar16 = ((int (*)())_RegisterVectorIsFixed)(local_50);
       if (iVar16 == 0) {
         uVar14 = 0;
-        piVar4 = piVar7;
-        if (uVar13 != 0) {
+        piVar4 = allocation;
+        if (loopIndex != 0) {
 LAB_97c09514:
           iVar16 = ((int (*)())_RegisterVectorCanMerge)(piVar4,local_50);
           if (iVar16 == 0) goto LAB_97c09608;
@@ -1050,8 +1055,8 @@ LAB_97c09514:
             *(undefined4 *)(*(int *)(iVar3 + (int)local_50) + 0x18) = 1;
             ((int (*)())_RegistersReInterfere)(param_1,*(undefined4 *)(iVar3 + (int)local_50),
                        *(undefined4 *)(iVar3 + (int)piVar4));
-            iVar5 = _realloc(iVar5,iVar11 * 8);
-            iVar15 = iVar5 + iVar11 * 8;
+            allocation2 = _realloc(allocation2,iVar11 * 8);
+            iVar15 = allocation2 + iVar11 * 8;
             iVar16 = iVar16 + -1;
             *(undefined4 *)(iVar15 + -8) = *(undefined4 *)(iVar3 + (int)local_50);
             puVar1 = (undefined4 *)(iVar3 + (int)piVar4);
@@ -1075,12 +1080,12 @@ LAB_97c09618:
       }
       else {
 LAB_97c09620:
-        uVar13 = uVar13 + 1;
-        piVar7 = (int *)_realloc(piVar7,uVar13 * 0x10);
+        loopIndex = loopIndex + 1;
+        allocation = (int *)_realloc(allocation,loopIndex * 0x10);
         iVar3 = 4;
         iVar16 = 0;
         do {
-          *(undefined4 *)((int)piVar7 + iVar16 + uVar13 * 0x10 + -0x10) =
+          *(undefined4 *)((int)allocation + iVar16 + loopIndex * 0x10 + -0x10) =
                *(undefined4 *)(iVar16 + (int)local_50);
           iVar16 = iVar16 + 4;
           iVar3 = iVar3 + -1;
@@ -1090,18 +1095,18 @@ LAB_97c09620:
       iVar8 = iVar8 + 0xb0;
     } while (uVar12 < *(uint *)(param_1 + 0xc));
   }
-  if (piVar7 != (int *)0x0) {
-    _free(piVar7);
+  if (allocation != (int *)0x0) {
+    _free(allocation);
   }
-  ((int (*)())_RegistersReplace)(param_1,iVar11,iVar5);
-  if (iVar5 != 0) {
-    _free(iVar5);
+  ((int (*)())_RegistersReplace)(param_1,iVar11,allocation2);
+  if (allocation2 != 0) {
+    _free(allocation2);
   }
   return;
 LAB_97c09608:
   uVar14 = uVar14 + 1;
   piVar4 = piVar4 + 4;
-  if (uVar13 <= uVar14) goto LAB_97c09618;
+  if (loopIndex <= uVar14) goto LAB_97c09618;
   goto LAB_97c09514;
 }
 
@@ -1109,12 +1114,13 @@ LAB_97c09608:
 int _DeadCodeEliminationSimple(param_1)
   undefined4 *param_1;
 {
+  uint loopIndex;
   bool bVar1;
   undefined4 uVar2;
   int iVar3;
   undefined4 *puVar4;
   uint uVar5;
-  uint uVar6;
+  uint loopIndex2;
   int iVar7;
   int iVar8;
   int iVar9;
@@ -1122,7 +1128,7 @@ int _DeadCodeEliminationSimple(param_1)
   uint uVar11;
   uint *puVar12;
   
-  uVar6 = 0;
+  loopIndex2 = 0;
   if (param_1[1] != 0) {
     iVar7 = 0;
     do {
@@ -1163,28 +1169,28 @@ LAB_97c0978c:
                 } while (bVar1);
               }
             }
-            uVar11 = 0;
+            loopIndex = 0;
             if (uVar5 != 0) {
               do {
-                puVar4 = *(undefined4 **)(uVar11 * 4 + puVar12[3]);
+                puVar4 = *(undefined4 **)(loopIndex * 4 + puVar12[3]);
                 if (puVar4[6] == 0) {
                   _BitSetClearEquals(uVar2,*puVar4);
                   uVar5 = puVar12[2];
                 }
-                uVar11 = uVar11 + 1;
-              } while (uVar11 < uVar5);
+                loopIndex = loopIndex + 1;
+              } while (loopIndex < uVar5);
             }
             uVar5 = *puVar12;
-            uVar11 = 0;
+            loopIndex = 0;
             if (uVar5 != 0) {
               do {
-                puVar4 = *(undefined4 **)(uVar11 * 4 + puVar12[1]);
+                puVar4 = *(undefined4 **)(loopIndex * 4 + puVar12[1]);
                 if (puVar4[6] == 0) {
                   _BitSetSetEquals(uVar2,*puVar4);
                   uVar5 = *puVar12;
                 }
-                uVar11 = uVar11 + 1;
-              } while (uVar11 < uVar5);
+                loopIndex = loopIndex + 1;
+              } while (loopIndex < uVar5);
             }
           }
 LAB_97c09828:
@@ -1192,10 +1198,10 @@ LAB_97c09828:
           iVar9 = iVar9 + -0x1c;
         } while (-1 < iVar10);
       }
-      uVar6 = uVar6 + 1;
+      loopIndex2 = loopIndex2 + 1;
       _BitSetFree(uVar2);
       iVar7 = iVar7 + 0x2c;
-    } while (uVar6 < (uint)param_1[1]);
+    } while (loopIndex2 < (uint)param_1[1]);
   }
   return;
 }
@@ -1228,16 +1234,16 @@ int _RegistersReplace(param_1, param_2, param_3)
 {
   int iVar1;
   uint *puVar2;
-  uint uVar3;
+  uint loopIndex4;
   int *piVar4;
   uint *puVar5;
-  int iVar6;
+  int loopIndex2;
   int iVar7;
   uint uVar8;
-  uint uVar9;
+  uint loopIndex;
   int iVar10;
   int iVar11;
-  uint uVar12;
+  uint loopIndex3;
   int iVar13;
   
   for (iVar13 = **(int **)(*param_1 + 0x20); iVar13 != 0; iVar13 = *(int *)(iVar13 + 8)) {
@@ -1245,7 +1251,7 @@ int _RegistersReplace(param_1, param_2, param_3)
     if (0 < param_2) {
       do {
         iVar1 = ((int (*)())_GetValidArgs)(iVar13);
-        iVar6 = 0;
+        loopIndex2 = 0;
         piVar4 = param_3 + iVar11 * 2;
         if (iVar1 < 1) {
           iVar7 = *piVar4;
@@ -1262,9 +1268,9 @@ int _RegistersReplace(param_1, param_2, param_3)
               *(undefined2 *)(iVar10 + 0x22) = *(undefined2 *)(piVar4[1] + 6);
               iVar7 = *piVar4;
             }
-            iVar6 = iVar6 + 1;
+            loopIndex2 = loopIndex2 + 1;
             iVar10 = iVar10 + 8;
-          } while (iVar6 < iVar1);
+          } while (loopIndex2 < iVar1);
         }
         if (((*(uint *)(iVar13 + 0x14) >> 0x11 & 7) == *(uint *)(iVar7 + 0x14)) &&
            ((uint)*(ushort *)(iVar13 + 0x1a) == *(uint *)(iVar7 + 4))) {
@@ -1277,11 +1283,11 @@ int _RegistersReplace(param_1, param_2, param_3)
     }
   }
   uVar8 = param_1[1];
-  uVar12 = 0;
+  loopIndex3 = 0;
   if (uVar8 != 0) {
     iVar13 = 0;
     do {
-      uVar3 = 0;
+      loopIndex4 = 0;
       puVar2 = (uint *)(param_1[2] + iVar13);
       if (*(int *)(param_1[2] + iVar13) != 0) {
         iVar11 = 0;
@@ -1290,39 +1296,39 @@ int _RegistersReplace(param_1, param_2, param_3)
           if ((puVar5[5] == 0) && (piVar4 = param_3, iVar1 = param_2, 0 < param_2)) {
             do {
               uVar8 = *puVar5;
-              uVar9 = 0;
+              loopIndex = 0;
               if (uVar8 != 0) {
                 do {
-                  if (*(int *)(uVar9 * 4 + puVar5[1]) == *piVar4) {
-                    *(int *)(uVar9 * 4 + puVar5[1]) = piVar4[1];
+                  if (*(int *)(loopIndex * 4 + puVar5[1]) == *piVar4) {
+                    *(int *)(loopIndex * 4 + puVar5[1]) = piVar4[1];
                     uVar8 = *puVar5;
                   }
-                  uVar9 = uVar9 + 1;
-                } while (uVar9 < uVar8);
+                  loopIndex = loopIndex + 1;
+                } while (loopIndex < uVar8);
               }
               uVar8 = puVar5[2];
-              uVar9 = 0;
+              loopIndex = 0;
               if (uVar8 != 0) {
                 do {
-                  if (*(int *)(uVar9 * 4 + puVar5[3]) == *piVar4) {
-                    *(int *)(uVar9 * 4 + puVar5[3]) = piVar4[1];
+                  if (*(int *)(loopIndex * 4 + puVar5[3]) == *piVar4) {
+                    *(int *)(loopIndex * 4 + puVar5[3]) = piVar4[1];
                     uVar8 = puVar5[2];
                   }
-                  uVar9 = uVar9 + 1;
-                } while (uVar9 < uVar8);
+                  loopIndex = loopIndex + 1;
+                } while (loopIndex < uVar8);
               }
               iVar1 = iVar1 + -1;
               piVar4 = piVar4 + 2;
             } while (iVar1 != 0);
           }
-          uVar3 = uVar3 + 1;
+          loopIndex4 = loopIndex4 + 1;
           iVar11 = iVar11 + 0x1c;
-        } while (uVar3 < *puVar2);
+        } while (loopIndex4 < *puVar2);
         uVar8 = param_1[1];
       }
-      uVar12 = uVar12 + 1;
+      loopIndex3 = loopIndex3 + 1;
       iVar13 = iVar13 + 0x2c;
-    } while (uVar12 < uVar8);
+    } while (loopIndex3 < uVar8);
   }
   return;
 }
@@ -1331,35 +1337,37 @@ int _RegistersReplace(param_1, param_2, param_3)
 int _RegistersCleanup(param_1)
   int *param_1;
 {
+  uint loopIndex;
+  uint loopIndex3;
   int iVar1;
   int iVar2;
   undefined4 uVar3;
   uint *puVar4;
   uint *puVar5;
   int iVar6;
-  uint uVar7;
+  uint loopIndex2;
   uint uVar8;
   uint uVar9;
   uint uVar10;
   
-  uVar9 = 0;
+  loopIndex = 0;
   uVar8 = 0;
   if (param_1[3] != 0) {
     iVar6 = 0;
     do {
-      uVar9 = uVar9 + 1;
+      loopIndex = loopIndex + 1;
       iVar2 = param_1[4] + iVar6;
       iVar6 = iVar6 + 0x2c;
       *(undefined4 *)(iVar2 + 0x18) = 1;
       uVar8 = param_1[3];
-    } while (uVar9 < uVar8);
+    } while (loopIndex < uVar8);
   }
   uVar9 = param_1[1];
   uVar10 = 0;
   if (uVar9 != 0) {
     iVar6 = 0;
     do {
-      uVar8 = 0;
+      loopIndex3 = 0;
       puVar4 = (uint *)(param_1[2] + iVar6);
       if (*(int *)(param_1[2] + iVar6) != 0) {
         iVar2 = 0;
@@ -1367,26 +1375,26 @@ int _RegistersCleanup(param_1)
           uVar9 = puVar4[1];
           puVar5 = (uint *)(uVar9 + iVar2);
           if (puVar5[5] == 0) {
-            uVar7 = 0;
+            loopIndex2 = 0;
             if (*(int *)(uVar9 + iVar2) != 0) {
               do {
-                iVar1 = uVar7 * 4;
-                uVar7 = uVar7 + 1;
+                iVar1 = loopIndex2 * 4;
+                loopIndex2 = loopIndex2 + 1;
                 *(undefined4 *)(*(int *)(iVar1 + puVar5[1]) + 0x18) = 0;
-              } while (uVar7 < *puVar5);
+              } while (loopIndex2 < *puVar5);
             }
-            uVar9 = 0;
+            loopIndex = 0;
             if (puVar5[2] != 0) {
               do {
-                iVar1 = uVar9 * 4;
-                uVar9 = uVar9 + 1;
+                iVar1 = loopIndex * 4;
+                loopIndex = loopIndex + 1;
                 *(undefined4 *)(*(int *)(iVar1 + puVar5[3]) + 0x18) = 0;
-              } while (uVar9 < puVar5[2]);
+              } while (loopIndex < puVar5[2]);
             }
           }
-          uVar8 = uVar8 + 1;
+          loopIndex3 = loopIndex3 + 1;
           iVar2 = iVar2 + 0x1c;
-        } while (uVar8 < *puVar4);
+        } while (loopIndex3 < *puVar4);
         uVar9 = param_1[1];
       }
       uVar10 = uVar10 + 1;
@@ -1532,6 +1540,7 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_5;
   undefined4 param_6;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -1540,9 +1549,9 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
   
   iVar4 = param_4 + param_5 * 4;
   if (*(uint *)(param_1 + 0xc) < iVar4 + 4U) {
-    iVar1 = _realloc(*(undefined4 *)(param_1 + 0x10),iVar4 * 0x2c + 0xb0);
-    *(int *)(param_1 + 0x10) = iVar1;
-    _memset(*(int *)(param_1 + 0xc) * 0x2c + iVar1,0,(iVar4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0
+    allocation = _realloc(*(undefined4 *)(param_1 + 0x10),iVar4 * 0x2c + 0xb0);
+    *(int *)(param_1 + 0x10) = allocation;
+    _memset(*(int *)(param_1 + 0xc) * 0x2c + allocation,0,(iVar4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0
            );
     *(uint *)(param_1 + 0xc) = iVar4 + 4U;
   }
@@ -1584,6 +1593,12 @@ int _InstructionAdd(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int loopIndex;
+  int loopIndex3;
+  undefined4 allocation;
+  int allocation2;
+  int allocation4;
+  int allocation3;
   bool bVar1;
   uint uVar2;
   int iVar3;
@@ -1597,7 +1612,7 @@ int _InstructionAdd(param_1, param_2, param_3)
   int *piVar11;
   int iVar12;
   uint *puVar13;
-  int iVar14;
+  int loopIndex2;
   int iVar15;
   uint local_70 [5];
   int local_5c;
@@ -1608,9 +1623,9 @@ int _InstructionAdd(param_1, param_2, param_3)
   *param_2 = iVar3 + 1;
   uVar9 = 0;
   bVar1 = false;
-  iVar3 = _realloc(param_2[1],(iVar3 + 1) * 0x1c);
-  param_2[1] = iVar3;
-  iVar3 = iVar3 + *param_2 * 0x1c;
+  allocation2 = _realloc(param_2[1],(iVar3 + 1) * 0x1c);
+  param_2[1] = allocation2;
+  iVar3 = allocation2 + *param_2 * 0x1c;
   piVar11 = (int *)(iVar3 + -0x1c);
   *(undefined4 *)(iVar3 + -0xc) = 0;
   *(int *)(iVar3 + -4) = param_3;
@@ -1636,10 +1651,10 @@ int _InstructionAdd(param_1, param_2, param_3)
     bVar1 = true;
   }
   *piVar11 = 0;
-  iVar10 = 0;
+  loopIndex3 = 0;
   *(undefined4 *)(iVar3 + -8) = 0;
-  uVar5 = _malloc(4);
-  *(undefined4 *)(iVar3 + -0x18) = uVar5;
+  allocation = _malloc(4);
+  *(undefined4 *)(iVar3 + -0x18) = allocation;
   iVar6 = ((int (*)())_GetValidArgs)(param_3);
   iVar12 = param_3;
   iVar15 = param_3;
@@ -1677,20 +1692,20 @@ LAB_97c0a29c:
       if ((int)local_70[4] <= local_5c) {
         uVar2 = local_70[4];
         do {
-          iVar14 = 0;
+          loopIndex2 = 0;
           puVar13 = local_70;
           do {
             uVar4 = *puVar13;
             puVar13 = puVar13 + 1;
             if ((uVar4 != 0) &&
-               (iVar7 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,iVar14),
+               (iVar7 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,loopIndex2),
                iVar7 != 0)) {
               iVar7 = *piVar11;
               *piVar11 = iVar7 + 1;
               iVar7 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar7 + 1) * 4);
               *(int *)(iVar3 + -0x18) = iVar7;
               iVar7 = iVar7 + *piVar11 * 4;
-              iVar8 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,iVar14);
+              iVar8 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,loopIndex2);
               *(int *)(iVar7 + -4) = iVar8;
               uVar4 = 0;
               *(uint *)(iVar8 + 0x1c) = *(uint *)(iVar8 + 0x1c) | *(uint *)(iVar12 + 0x1c) >> 0x1f;
@@ -1701,15 +1716,15 @@ LAB_97c0a29c:
               }
               *(uint *)(iVar7 + 0x20) = *(uint *)(iVar7 + 0x20) | uVar4;
             }
-            iVar14 = iVar14 + 1;
-          } while (iVar14 < 4);
+            loopIndex2 = loopIndex2 + 1;
+          } while (loopIndex2 < 4);
           uVar2 = uVar2 + 1;
         } while ((int)uVar2 <= local_5c);
       }
-      iVar10 = iVar10 + 1;
+      loopIndex3 = loopIndex3 + 1;
       iVar12 = iVar12 + 8;
       iVar15 = iVar15 + 8;
-    } while (iVar10 < iVar6);
+    } while (loopIndex3 < iVar6);
   }
   uVar2 = *(uint *)(param_3 + 0x14);
   local_70[1] = uVar2 >> 0xe & 1;
@@ -1717,8 +1732,8 @@ LAB_97c0a29c:
   local_70[0] = uVar2 >> 0xd & 1;
   local_70[2] = uVar2 >> 0xf & 1;
   *(undefined4 *)(iVar3 + -0x14) = 0;
-  uVar5 = _malloc(4);
-  *(undefined4 *)(iVar3 + -0x10) = uVar5;
+  allocation = _malloc(4);
+  *(undefined4 *)(iVar3 + -0x10) = allocation;
   *(uint *)(iVar3 + -0xc) =
        *(uint *)(iVar3 + -0xc) | (uint)((*(uint *)(param_3 + 0x14) >> 0x11 & 7) == 3);
   uVar4 = *(uint *)(param_3 + 0x14);
@@ -1728,20 +1743,20 @@ LAB_97c0a29c:
   if (local_58 <= local_54[0]) {
     iVar12 = local_58;
     do {
-      iVar15 = 0;
+      loopIndex = 0;
       puVar13 = local_70;
       do {
         uVar4 = *puVar13;
         puVar13 = puVar13 + 1;
         if (uVar4 != 0) {
-          iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
+          iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
           if (iVar6 != 0) {
             iVar6 = *(int *)(iVar3 + -0x14) + 1;
             *(int *)(iVar3 + -0x14) = iVar6;
             iVar6 = _realloc(*(undefined4 *)(iVar3 + -0x10),iVar6 * 4);
             *(int *)(iVar3 + -0x10) = iVar6;
             iVar6 = iVar6 + *(int *)(iVar3 + -0x14) * 4;
-            iVar10 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
+            iVar10 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
             *(int *)(iVar6 + -4) = iVar10;
             uVar4 = 0;
             *(uint *)(iVar10 + 0x1c) = *(uint *)(iVar10 + 0x1c) | *(uint *)(param_3 + 0x18) >> 0x1f;
@@ -1753,30 +1768,30 @@ LAB_97c0a29c:
             *(uint *)(iVar6 + 0x20) = *(uint *)(iVar6 + 0x20) | uVar4;
           }
           if ((bVar1 || (int)uVar2 < 0) &&
-             (iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15),
+             (iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex),
              iVar6 != 0)) {
             iVar6 = *piVar11;
             *piVar11 = iVar6 + 1;
-            iVar10 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
+            allocation3 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
             iVar6 = *piVar11;
-            *(int *)(iVar3 + -0x18) = iVar10;
-            uVar5 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
-            *(undefined4 *)(iVar10 + iVar6 * 4 + -4) = uVar5;
+            *(int *)(iVar3 + -0x18) = allocation3;
+            uVar5 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
+            *(undefined4 *)(allocation3 + iVar6 * 4 + -4) = uVar5;
           }
         }
-        iVar15 = iVar15 + 1;
-      } while (iVar15 < 4);
+        loopIndex = loopIndex + 1;
+      } while (loopIndex < 4);
       iVar12 = iVar12 + 1;
     } while (iVar12 <= local_54[0]);
   }
   if ((uVar9 != 0 || (int)uVar2 < 0) && (iVar12 = ((int (*)())_GetRegister)(param_1,4,0,0), iVar12 != 0)) {
     iVar12 = *piVar11;
     *piVar11 = iVar12 + 1;
-    iVar15 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
+    allocation4 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
     iVar12 = *piVar11;
-    *(int *)(iVar3 + -0x18) = iVar15;
+    *(int *)(iVar3 + -0x18) = allocation4;
     uVar5 = ((int (*)())_GetRegister)(param_1,4,0,0);
-    *(undefined4 *)(iVar15 + iVar12 * 4 + -4) = uVar5;
+    *(undefined4 *)(allocation4 + iVar12 * 4 + -4) = uVar5;
   }
   return piVar11;
 }
@@ -1799,24 +1814,25 @@ int _InstructionFree(param_1)
 int _BlockAdd(param_1)
   int param_1;
 {
+  int allocation2;
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation;
   
   iVar1 = *(int *)(param_1 + 4) + 1;
   *(int *)(param_1 + 4) = iVar1;
-  iVar1 = _realloc(*(undefined4 *)(param_1 + 8),iVar1 * 0x2c);
-  *(int *)(param_1 + 8) = iVar1;
-  iVar1 = iVar1 + *(int *)(param_1 + 4) * 0x2c;
+  allocation2 = _realloc(*(undefined4 *)(param_1 + 8),iVar1 * 0x2c);
+  *(int *)(param_1 + 8) = allocation2;
+  iVar1 = allocation2 + *(int *)(param_1 + 4) * 0x2c;
   *(undefined4 *)(iVar1 + -0x2c) = 0;
-  uVar2 = _malloc(0x1c);
+  allocation = _malloc(0x1c);
   *(undefined4 *)(iVar1 + -0x24) = 0;
-  *(undefined4 *)(iVar1 + -0x28) = uVar2;
-  uVar2 = _malloc(4);
+  *(undefined4 *)(iVar1 + -0x28) = allocation;
+  allocation = _malloc(4);
   *(undefined4 *)(iVar1 + -0x1c) = 0;
-  *(undefined4 *)(iVar1 + -0x20) = uVar2;
-  uVar2 = _malloc(4);
+  *(undefined4 *)(iVar1 + -0x20) = allocation;
+  allocation = _malloc(4);
   *(undefined4 *)(iVar1 + -4) = 0;
-  *(undefined4 *)(iVar1 + -0x18) = uVar2;
+  *(undefined4 *)(iVar1 + -0x18) = allocation;
   *(undefined4 *)(iVar1 + -0x14) = 0;
   *(undefined4 *)(iVar1 + -0x10) = 0;
   *(undefined4 *)(iVar1 + -0xc) = 0;
@@ -1828,17 +1844,17 @@ int _BlockAdd(param_1)
 int _BlockFree(param_1)
   uint *param_1;
 {
-  uint uVar1;
+  uint loopIndex;
   int iVar2;
   
-  uVar1 = 0;
+  loopIndex = 0;
   if (*param_1 != 0) {
     iVar2 = 0;
     do {
-      uVar1 = uVar1 + 1;
+      loopIndex = loopIndex + 1;
       ((int (*)())_InstructionFree)(param_1[1] + iVar2);
       iVar2 = iVar2 + 0x1c;
-    } while (uVar1 < *param_1);
+    } while (loopIndex < *param_1);
   }
   if (param_1[1] != 0) {
     _free(param_1[1]);
@@ -1876,9 +1892,9 @@ int _RegistersInitialize(param_1)
   undefined4 uVar2;
   int iVar3;
   int iVar4;
-  uint uVar5;
+  uint loopIndex;
   
-  uVar5 = 0;
+  loopIndex = 0;
   uVar1 = *(uint *)(param_1 + 0xc);
   if (uVar1 != 0) {
     iVar3 = 0;
@@ -1888,10 +1904,10 @@ int _RegistersInitialize(param_1)
       iVar4 = iVar4 + iVar3;
       iVar3 = iVar3 + 0x2c;
       *(undefined4 *)(iVar4 + 8) = uVar2;
-      _BitSetSetEquals(uVar2,uVar5);
+      _BitSetSetEquals(uVar2,loopIndex);
       uVar1 = *(uint *)(param_1 + 0xc);
-      uVar5 = uVar5 + 1;
-    } while (uVar5 < uVar1);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < uVar1);
   }
   return;
 }
@@ -1974,18 +1990,18 @@ int _RegistersFree(param_1)
   int param_1;
 {
   int iVar1;
-  uint uVar2;
+  uint loopIndex;
   int iVar3;
   
-  uVar2 = 0;
+  loopIndex = 0;
   if (*(int *)(param_1 + 0xc) != 0) {
     iVar3 = 0;
     do {
-      uVar2 = uVar2 + 1;
+      loopIndex = loopIndex + 1;
       iVar1 = *(int *)(param_1 + 0x10) + iVar3;
       iVar3 = iVar3 + 0x2c;
       ((int (*)())_RegisterFree)(iVar1);
-    } while (uVar2 < *(uint *)(param_1 + 0xc));
+    } while (loopIndex < *(uint *)(param_1 + 0xc));
   }
   if (*(int *)(param_1 + 0x10) != 0) {
     _free(*(int *)(param_1 + 0x10));
@@ -2000,14 +2016,14 @@ int _GetOrAddBlock(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  int iVar2;
+  int allocation;
   undefined4 uVar3;
   
   iVar1 = param_2 * 4;
   if (*(uint *)(param_1 + 0x14) < param_2 + 1U) {
-    iVar2 = _realloc(*(undefined4 *)(param_1 + 0x18),iVar1 + 4);
-    *(int *)(param_1 + 0x18) = iVar2;
-    _memset(*(int *)(param_1 + 0x14) * 4 + iVar2,0,(param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
+    allocation = _realloc(*(undefined4 *)(param_1 + 0x18),iVar1 + 4);
+    *(int *)(param_1 + 0x18) = allocation;
+    _memset(*(int *)(param_1 + 0x14) * 4 + allocation,0,(param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
     *(uint *)(param_1 + 0x14) = param_2 + 1U;
   }
   if (*(int *)(iVar1 + *(int *)(param_1 + 0x18)) == 0) {
@@ -2205,19 +2221,20 @@ int _BlockAddSuccessor(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int allocation;
   int iVar1;
   
   if ((param_1 != 0) && (param_2 != 0)) {
     iVar1 = *(int *)(param_2 + 8) + 1;
     *(int *)(param_2 + 8) = iVar1;
-    iVar1 = _realloc(*(undefined4 *)(param_2 + 0xc),iVar1 * 4);
-    *(int *)(param_2 + 0xc) = iVar1;
-    *(int *)(iVar1 + *(int *)(param_2 + 8) * 4 + -4) = param_1;
+    allocation = _realloc(*(undefined4 *)(param_2 + 0xc),iVar1 * 4);
+    *(int *)(param_2 + 0xc) = allocation;
+    *(int *)(allocation + *(int *)(param_2 + 8) * 4 + -4) = param_1;
     iVar1 = *(int *)(param_1 + 0x10) + 1;
     *(int *)(param_1 + 0x10) = iVar1;
-    iVar1 = _realloc(*(undefined4 *)(param_1 + 0x14),iVar1 * 4);
-    *(int *)(param_1 + 0x14) = iVar1;
-    *(int *)(iVar1 + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
+    allocation = _realloc(*(undefined4 *)(param_1 + 0x14),iVar1 * 4);
+    *(int *)(param_1 + 0x14) = allocation;
+    *(int *)(allocation + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
   }
   return;
 }
@@ -2235,18 +2252,18 @@ int _BlocksFree(param_1)
   int param_1;
 {
   int iVar1;
-  uint uVar2;
+  uint loopIndex;
   int iVar3;
   
-  uVar2 = 0;
+  loopIndex = 0;
   if (*(int *)(param_1 + 4) != 0) {
     iVar3 = 0;
     do {
-      uVar2 = uVar2 + 1;
+      loopIndex = loopIndex + 1;
       iVar1 = *(int *)(param_1 + 8) + iVar3;
       iVar3 = iVar3 + 0x2c;
       ((int (*)())_BlockFree)(iVar1);
-    } while (uVar2 < *(uint *)(param_1 + 4));
+    } while (loopIndex < *(uint *)(param_1 + 4));
   }
   if (*(int *)(param_1 + 8) != 0) {
     _free(*(int *)(param_1 + 8));
@@ -2259,31 +2276,31 @@ int _BlocksFree(param_1)
 int _ProgramNew(param_1)
   undefined4 param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 allocation2;
   
-  puVar1 = (undefined4 *)_malloc(0x44);
-  *puVar1 = param_1;
-  puVar1[1] = 0;
-  uVar2 = _malloc(0x2c);
-  puVar1[2] = uVar2;
-  puVar1[3] = 0;
-  uVar2 = _malloc(0x2c);
-  puVar1[4] = uVar2;
-  puVar1[5] = 0;
-  uVar2 = _malloc(4);
-  puVar1[6] = uVar2;
-  puVar1[0x10] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  puVar1[0xb] = 0;
-  puVar1[0xc] = 0;
-  puVar1[0xd] = 0;
-  puVar1[0xe] = 0;
-  puVar1[0xf] = 0;
-  return puVar1;
+  allocation = (undefined4 *)_malloc(0x44);
+  *allocation = param_1;
+  allocation[1] = 0;
+  allocation2 = _malloc(0x2c);
+  allocation[2] = allocation2;
+  allocation[3] = 0;
+  allocation2 = _malloc(0x2c);
+  allocation[4] = allocation2;
+  allocation[5] = 0;
+  allocation2 = _malloc(4);
+  allocation[6] = allocation2;
+  allocation[0x10] = 0;
+  allocation[7] = 0;
+  allocation[8] = 0;
+  allocation[9] = 0;
+  allocation[10] = 0;
+  allocation[0xb] = 0;
+  allocation[0xc] = 0;
+  allocation[0xd] = 0;
+  allocation[0xe] = 0;
+  allocation[0xf] = 0;
+  return allocation;
 }
 
 /* _ProgramFree @ 0x97c0b208 (76 bytes) */
@@ -2408,7 +2425,7 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
   uint param_3;
   uint param_4;
 {
-  undefined4 uVar1;
+  undefined4 maxIndex;
   uint local_30;
   undefined4 local_2c;
   undefined4 local_28;
@@ -2416,9 +2433,9 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
   local_30 = 0;
   local_2c = 0;
   local_28 = 0;
-  uVar1 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
+  maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
   local_30 = (param_4 & 3) << 0x18 | (param_3 & 7) << 0x1a | param_2 << 0x1d | local_30 & 0xffffff;
-  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),(short)uVar1 + 1);
+  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),(short)maxIndex + 1);
   _PPStreamAddTempUsage(param_1,&local_30);
   return local_2c & 0xffff;
 }

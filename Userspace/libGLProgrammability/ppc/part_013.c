@@ -215,18 +215,18 @@ int TPPStreamCompiler__getSymbolTableString(this, param_2)
   unsigned char * this;
   int param_2;
 {
-  undefined4 uVar1;
-  int iVar2;
-  char *pcVar3;
+  undefined4 string;
+  int length;
+  char *allocation;
   char *pcVar4;
   
   if (*(unsigned char **)(this + 0x68) == (unsigned char *)0x0) {
     return (char *)0x0;
   }
-  uVar1 = ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
-  iVar2 = _strlen(uVar1);
-  pcVar3 = (char *)_malloc(iVar2 + 0x17);
-  *pcVar3 = '\0';
+  string = ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
+  length = _strlen(string);
+  allocation = (char *)_malloc(length + 0x17);
+  *allocation = '\0';
   pcVar4 = DAT_a7b7bd64;
   if (param_2 != 1) {
     if (param_2 < 2) {
@@ -238,10 +238,10 @@ int TPPStreamCompiler__getSymbolTableString(this, param_2)
       if (param_2 != 2) goto LAB_97bc9d00;
     }
   }
-  _sprintf(pcVar3,pcVar4,uVar1);
+  _sprintf(allocation,pcVar4,string);
 LAB_97bc9d00:
-  _free(uVar1);
-  return pcVar3;
+  _free(string);
+  return allocation;
 }
 
 /* TPPStreamCompiler__dumpSymbolTableInfo @ 0x97bc9d20 (220 bytes) */
@@ -249,6 +249,7 @@ int TPPStreamCompiler__dumpSymbolTableInfo(this, param_2)
   unsigned char * this;
   int param_2;
 {
+  char *string;
   char *pcVar1;
   
   pcVar1 = DAT_a7b7bd70;
@@ -264,13 +265,13 @@ int TPPStreamCompiler__dumpSymbolTableInfo(this, param_2)
   }
   __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pcVar1);
 LAB_97bc9d98:
-  pcVar1 = (char *)ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
-  if (pcVar1 == (char *)0x0) {
+  string = (char *)ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
+  if (string == (char *)0x0) {
     return;
   }
-  __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pcVar1);
+  __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,string);
   __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,DAT_a7b7bd78);
-  _free(pcVar1);
+  _free(string);
   return;
 }
 
@@ -284,6 +285,7 @@ int TPPStreamCompiler__reportStats()
 int TPPStreamCompiler__reset(this)
   unsigned char * this;
 {
+  void *allocation;
   undefined4 *puVar1;
   undefined4 uVar2;
   int iVar3;
@@ -311,18 +313,18 @@ int TPPStreamCompiler__reset(this)
     __ZN16ParseSymbolTableD1Ev(pvVar4);
     __ZdlPv(pvVar4);
   }
-  pvVar4 = operator_new(0x54);
-  __ZN16ParseSymbolTableC1Ej(pvVar4,0x80);
-  *(void **)(this + 0x68) = pvVar4;
-  *(undefined4 *)((int)pvVar4 + 0x3c) = *(undefined4 *)(this + 8);
+  allocation = operator_new(0x54);
+  __ZN16ParseSymbolTableC1Ej(allocation,0x80);
+  *(void **)(this + 0x68) = allocation;
+  *(undefined4 *)((int)allocation + 0x3c) = *(undefined4 *)(this + 8);
   pvVar4 = *(void **)(this + 0x6c);
   if (pvVar4 != (void *)0x0) {
     ((int (*)())__ZN13FunctionTableD1Ev)(pvVar4);
     __ZdlPv(pvVar4);
   }
-  pvVar4 = operator_new(8);
-  ((int (*)())__ZN13FunctionTableC1Ev)(pvVar4);
-  *(void **)(this + 0x6c) = pvVar4;
+  allocation = operator_new(8);
+  ((int (*)())__ZN13FunctionTableC1Ev)(allocation);
+  *(void **)(this + 0x6c) = allocation;
   if (*(int *)(this + 0x70) != 0) {
     _PPStreamFree(*(int *)(this + 0x70));
   }
@@ -354,7 +356,7 @@ int TPPStreamCompiler__compile(this, param_2)
   uint uVar1;
   int iVar2;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 allocation;
   char *pcVar5;
   uint uVar6;
   int local_20 [5];
@@ -381,9 +383,9 @@ int TPPStreamCompiler__compile(this, param_2)
     *(undefined4 *)(this + 0x74) = 0;
     _PPStreamGetStream(*(undefined4 *)(this + 0x70),0,local_20);
     if (local_20[0] != 0) {
-      uVar4 = _malloc(local_20[0] * 8 + 0xfU & 0xfffffff0);
-      *(undefined4 *)(this + 0x74) = uVar4;
-      _PPStreamGetStream(*(undefined4 *)(this + 0x70),uVar4,local_20);
+      allocation = _malloc(local_20[0] * 8 + 0xfU & 0xfffffff0);
+      *(undefined4 *)(this + 0x74) = allocation;
+      _PPStreamGetStream(*(undefined4 *)(this + 0x70),allocation,local_20);
     }
   }
   iVar2 = *(int *)(this + 0xc);
@@ -404,17 +406,18 @@ int TPPStreamCompiler__compile(this, param_2)
 int TPPStreamCompiler__getStatsString(this)
   unsigned char * this;
 {
+  int length;
   undefined4 uVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 allocation;
   
   uVar1 = DAT_a7b7bd84;
   iVar2 = *(int *)(this + 0x78);
   if (iVar2 == 0) {
-    iVar2 = _strlen(DAT_a7b7bd84);
-    uVar3 = _malloc(iVar2 * 4 + 4);
-    *(undefined4 *)(this + 0x78) = uVar3;
-    _strcpy(uVar3,uVar1);
+    length = _strlen(DAT_a7b7bd84);
+    allocation = _malloc(length * 4 + 4);
+    *(undefined4 *)(this + 0x78) = allocation;
+    _strcpy(allocation,uVar1);
     iVar2 = *(int *)(this + 0x78);
   }
   return iVar2;
@@ -426,17 +429,17 @@ int TPPStreamCompiler__getPPStreamString(this)
 {
   undefined4 uVar1;
   void *pvVar2;
-  int iVar3;
-  undefined4 uVar4;
+  int length;
+  undefined4 allocation;
   
   uVar1 = DAT_a7b7bd88;
   pvVar2 = *(void **)(this + 0x7c);
   if (pvVar2 == (void *)0x0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
-      iVar3 = _strlen(DAT_a7b7bd88);
-      uVar4 = _malloc(iVar3 * 4 + 4);
-      *(undefined4 *)(this + 0x7c) = uVar4;
-      _strcpy(uVar4,uVar1);
+      length = _strlen(DAT_a7b7bd88);
+      allocation = _malloc(length * 4 + 4);
+      *(undefined4 *)(this + 0x7c) = allocation;
+      _strcpy(allocation,uVar1);
       pvVar2 = *(void **)(this + 0x7c);
     }
     else {
@@ -451,16 +454,17 @@ int TPPStreamCompiler__getPPStreamString(this)
 int TPPStreamCompiler__getShaderToProgramString(this)
   unsigned char * this;
 {
+  int length;
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation;
   
   iVar1 = *(int *)(this + 0x80);
   if (iVar1 == 0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
-      iVar1 = _strlen("No Shader Program generated.");
-      uVar2 = _malloc(iVar1 * 4 + 4);
-      *(undefined4 *)(this + 0x80) = uVar2;
-      _strcpy(uVar2,"No Shader Program generated.");
+      length = _strlen("No Shader Program generated.");
+      allocation = _malloc(length * 4 + 4);
+      *(undefined4 *)(this + 0x80) = allocation;
+      _strcpy(allocation,"No Shader Program generated.");
       iVar1 = *(int *)(this + 0x80);
     }
     else {
@@ -705,6 +709,7 @@ int GetBuiltInChunkForSymbol(param_1, param_2)
   unsigned char * param_1;
   int param_2;
 {
+  uint directIndex;
   bool bVar1;
   char *pcVar2;
   int iVar3;
@@ -713,7 +718,7 @@ int GetBuiltInChunkForSymbol(param_1, param_2)
   uint uVar6;
   int iVar7;
   undefined4 uVar8;
-  undefined1 uVar9;
+  undefined1 directIndex2;
   int iVar10;
   int iVar11;
   int iVar12;
@@ -750,8 +755,8 @@ LAB_97bcc53c:
         uVar6 = iVar3 << 0x10 | uVar6 & 0xffe0ff3f | 0x20;
 LAB_97bcbb78:
         *(uint *)(iVar12 + 0xc) = uVar6;
-        uVar6 = ParseSymbol__GetDirectIndex(param_1,0);
-        uVar6 = uVar6 & 0x1f | *(uint *)(iVar12 + 0xc) & 0xffffffe0;
+        directIndex = ParseSymbol__GetDirectIndex(param_1,0);
+        uVar6 = directIndex & 0x1f | *(uint *)(iVar12 + 0xc) & 0xffffffe0;
       }
       else if (iVar11 < 0x5a71) {
         if (iVar11 == 0x504e) {
@@ -830,8 +835,8 @@ LAB_97bcbb08:
                 }
                 iVar12 = _PPStreamChunkCreateWithType(4,0);
                 *(uint *)(iVar12 + 0xc) = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x40000;
-                uVar6 = ParseSymbol__GetDirectIndex(param_1,0);
-                uVar6 = (uVar6 & 7) << 1 | *(uint *)(iVar12 + 0xc) & 0xfffffff1;
+                directIndex = ParseSymbol__GetDirectIndex(param_1,0);
+                uVar6 = (directIndex & 7) << 1 | *(uint *)(iVar12 + 0xc) & 0xfffffff1;
                 goto LAB_97bcc694;
               }
               if (iVar11 == 0x42d8) goto LAB_97bcc5b0;
@@ -2080,8 +2085,8 @@ LAB_97bcc390:
   }
 LAB_97bcc458:
   *(uint *)(iVar12 + 0xc) = uVar6;
-  uVar9 = ParseSymbol__GetDirectIndex(param_1,0);
-  *(undefined1 *)(iVar12 + 0xf) = uVar9;
+  directIndex2 = ParseSymbol__GetDirectIndex(param_1,0);
+  *(undefined1 *)(iVar12 + 0xf) = directIndex2;
 LAB_97bcc698:
   *(undefined4 *)(param_1 + 0x34) = 1;
   return iVar12;
@@ -2092,6 +2097,8 @@ int GetChunkForSymbol(param_1, param_2)
   unsigned char * param_1;
   int param_2;
 {
+  uint streamType;
+  int scalerWidthForType;
   bool bVar1;
   byte bVar2;
   uint uVar3;
@@ -2141,19 +2148,19 @@ int GetChunkForSymbol(param_1, param_2)
   bVar2 = *pbVar5;
   if (bVar2 == 2) {
 LAB_97bcc864:
-    uVar7 = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
-    *(uint *)(pbVar5 + 0xc) = (uVar7 & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-    iVar8 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
-    uVar7 = (iVar8 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
+    streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
+    *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
+    scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+    uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
 LAB_97bcc8c0:
     *(uint *)(pbVar5 + 0xc) = uVar7;
   }
   else if (bVar2 < 3) {
     if (bVar2 == 0) {
-      uVar7 = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
-      *(uint *)(pbVar5 + 0xc) = (uVar7 & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-      iVar8 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
-      uVar7 = (iVar8 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
+      streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
+      *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
+      scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+      uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
       goto LAB_97bcc8c0;
     }
   }
@@ -2239,18 +2246,18 @@ int FunctionTable__clear(this)
   unsigned char * this;
 {
   undefined4 *puVar1;
-  int iVar2;
+  int loopIndex;
   int iVar3;
   
-  iVar2 = 0;
+  loopIndex = 0;
   if (0 < *(int *)(this + 4)) {
     iVar3 = 0;
     do {
-      iVar2 = iVar2 + 1;
+      loopIndex = loopIndex + 1;
       puVar1 = (undefined4 *)(iVar3 + *(int *)this);
       iVar3 = iVar3 + 0x18;
       _free(*puVar1);
-    } while (iVar2 < *(int *)(this + 4));
+    } while (loopIndex < *(int *)(this + 4));
   }
   if (*(int *)this != 0) {
     _free(*(int *)this);
@@ -2265,6 +2272,10 @@ int FunctionTable__addFunction(this, param_2)
   unsigned char * this;
   char *param_2;
 {
+  int loopIndex;
+  undefined4 allocation2;
+  int length;
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -2278,10 +2289,10 @@ int FunctionTable__addFunction(this, param_2)
   
   uVar10 = *(uint *)(this + 4);
   if ((uVar10 & 0xf) == 0) {
-    iVar2 = _malloc(uVar10 * 0x18 + 0x180);
-    _memset(iVar2,0,*(int *)(this + 4) * 0x18 + 0x180);
+    allocation = _malloc(uVar10 * 0x18 + 0x180);
+    _memset(allocation,0,*(int *)(this + 4) * 0x18 + 0x180);
     uVar10 = *(uint *)(this + 4);
-    iVar4 = 0;
+    loopIndex = 0;
     if ((int)uVar10 < 1) {
       iVar3 = *(int *)this;
     }
@@ -2291,11 +2302,11 @@ int FunctionTable__addFunction(this, param_2)
       do {
         iVar9 = iVar5 + iVar3;
         uVar7 = *(undefined4 *)(iVar9 + 4);
-        iVar4 = iVar4 + 1;
+        loopIndex = loopIndex + 1;
         uVar8 = *(undefined4 *)(iVar9 + 8);
-        iVar1 = iVar5 + iVar2;
+        iVar1 = iVar5 + allocation;
         uVar6 = *(undefined4 *)(iVar9 + 0xc);
-        *(undefined4 *)(iVar5 + iVar2) = *(undefined4 *)(iVar5 + iVar3);
+        *(undefined4 *)(iVar5 + allocation) = *(undefined4 *)(iVar5 + iVar3);
         iVar5 = iVar5 + 0x18;
         *(undefined4 *)(iVar1 + 4) = uVar7;
         *(undefined4 *)(iVar1 + 8) = uVar8;
@@ -2303,18 +2314,18 @@ int FunctionTable__addFunction(this, param_2)
         uVar6 = *(undefined4 *)(iVar9 + 0x10);
         *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(iVar9 + 0x14);
         *(undefined4 *)(iVar1 + 0x10) = uVar6;
-      } while (iVar4 < (int)uVar10);
+      } while (loopIndex < (int)uVar10);
     }
     if (iVar3 != 0) {
       _free(iVar3);
       uVar10 = *(uint *)(this + 4);
     }
-    *(int *)this = iVar2;
+    *(int *)this = allocation;
   }
   iVar4 = *(int *)this;
-  iVar2 = _strlen(param_2);
-  uVar6 = _malloc(iVar2 + 1);
-  *(undefined4 *)(uVar10 * 0x18 + iVar4) = uVar6;
+  length = _strlen(param_2);
+  allocation2 = _malloc(length + 1);
+  *(undefined4 *)(uVar10 * 0x18 + iVar4) = allocation2;
   _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),param_2);
   iVar2 = *(int *)(this + 4);
   *(int *)(this + 4) = iVar2 + 1;
@@ -2411,13 +2422,13 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int loopIndex;
   int iVar2;
   int iVar3;
   int iVar4;
   uint uVar5;
   
-  iVar1 = 0;
+  loopIndex = 0;
   if (0 < *(int *)(this + 4)) {
     iVar2 = 0;
     do {
@@ -2434,9 +2445,9 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
          && ((uVar5 & 0x3ffff) != 0)) {
         *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(param_2 + 8) + 0xc) & 0x3ffff;
       }
-      iVar1 = iVar1 + 1;
+      loopIndex = loopIndex + 1;
       iVar2 = iVar2 + 0x18;
-    } while (iVar1 < *(int *)(this + 4));
+    } while (loopIndex < *(int *)(this + 4));
     return;
   }
   return;
@@ -2451,6 +2462,7 @@ int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_
   undefined4 param_5;
   undefined4 param_6;
 {
+  int compareResult;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -2460,8 +2472,8 @@ int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_
   if (0 < iVar1) {
     iVar2 = 0;
     do {
-      iVar1 = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),param_2);
-      if (iVar1 == 0) {
+      compareResult = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),param_2);
+      if (compareResult == 0) {
         iVar1 = *(int *)(this + 4);
         break;
       }
@@ -2533,11 +2545,11 @@ int FunctionTable__dump()
 /* _InterpreterCreate @ 0x97bccdac (60 bytes) */
 int _InterpreterCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _calloc(0xa70,1);
-  ((int (*)())_InterpreterInit)(uVar1);
-  return uVar1;
+  allocation = _calloc(0xa70,1);
+  ((int (*)())_InterpreterInit)(allocation);
+  return allocation;
 }
 
 /* _InterpreterFree @ 0x97bccde8 (48 bytes) */
@@ -3134,6 +3146,8 @@ int _InterpreterTestCR(param_1, param_2, param_3, param_4, param_5, param_6, par
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  uint loopIndex;
+  uint loopIndex2;
   float *pfVar1;
   bool bVar2;
   char cVar3;
@@ -3739,13 +3753,13 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
     goto LAB_97bd043c;
   }
   if ((iVar21 != 0x31) && (iVar21 != 0x36)) {
-    uVar17 = 0;
+    loopIndex2 = 0;
     if (uVar20 == 0) {
       return piVar18;
     }
     do {
       if (iVar14 != 0) {
-        uVar24 = uVar17;
+        uVar24 = loopIndex2;
         if (*(char *)(inst + 0x12) == '\0') {
           uVar24 = 0;
         }
@@ -3753,7 +3767,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],in_r5,inst[0xf],inst[0x10],inst[0x11],inst[0x12]
                    ,inst[0x13],inst[0x14],inst[0x15],uVar24,opVec + 4);
         if (1 < (uint)inst[0xc]) {
-          uVar24 = uVar17;
+          uVar24 = loopIndex2;
           if (*(char *)(inst + 0x1b) == '\0') {
             uVar24 = 0;
           }
@@ -3761,7 +3775,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],in_r5,inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],uVar24,opVec + 8);
           if (2 < (uint)inst[0xc]) {
-            uVar24 = uVar17;
+            uVar24 = loopIndex2;
             if (*(char *)(inst + 0x24) == '\0') {
               uVar24 = 0;
             }
@@ -5170,7 +5184,7 @@ LAB_97bd2010:
         }
       }
       if (bVar25) {
-        uVar24 = uVar17;
+        uVar24 = loopIndex2;
         if (*(char *)(inst + 8) == '\0') {
           uVar24 = 0;
         }
@@ -5178,8 +5192,8 @@ LAB_97bd2010:
         ((int (*)())_InterpreterWriteDestination)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],inst[8],inst[9],
                    inst[10],inst[0xb],uVar24,opVec,(uint)*(byte *)((int)inst + 6));
       }
-      uVar17 = uVar17 + 1;
-      if (uVar20 <= uVar17) {
+      loopIndex2 = loopIndex2 + 1;
+      if (uVar20 <= loopIndex2) {
         return piVar18;
       }
       iVar14 = inst[0xc];
@@ -5234,15 +5248,15 @@ LAB_97bd0310:
   else {
     if (uVar20 == 3) {
       pfVar10 = opVec;
-      uVar20 = 0;
+      loopIndex = 0;
       do {
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
           uVar17 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                    inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
           uVar17 = 0;
         }
@@ -5252,10 +5266,10 @@ LAB_97bd0310:
            (fVar6 = 1.0, opVec[6] != opVec[10])) {
           fVar6 = 0.0;
         }
-        uVar20 = uVar20 + 1;
+        loopIndex = loopIndex + 1;
         *pfVar10 = fVar6;
         pfVar10 = pfVar10 + 1;
-      } while (uVar20 < 3);
+      } while (loopIndex < 3);
       uStack_ac = 0;
       fVar6 = opVec[2];
       fVar7 = opVec[1];
@@ -5268,15 +5282,15 @@ LAB_97bd01a0:
     else if (uVar20 < 4) {
       if (uVar20 == 2) {
         pfVar10 = opVec;
-        uVar20 = 0;
+        loopIndex = 0;
         do {
-          uVar17 = uVar20;
+          uVar17 = loopIndex;
           if (*(char *)(inst + 0x12) == '\0') {
             uVar17 = 0;
           }
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                      inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-          uVar17 = uVar20;
+          uVar17 = loopIndex;
           if (*(char *)(inst + 0x1b) == '\0') {
             uVar17 = 0;
           }
@@ -5285,12 +5299,12 @@ LAB_97bd01a0:
           if ((opVec[4] != opVec[8]) || (fVar6 = 1.0, opVec[5] != opVec[9])) {
             fVar6 = 0.0;
           }
-          uVar20 = uVar20 + 1;
+          loopIndex = loopIndex + 1;
           *pfVar10 = fVar6;
           pfVar10 = pfVar10 + 1;
           fVar6 = opVec[1];
           fVar7 = opVec[0];
-        } while (uVar20 < 2);
+        } while (loopIndex < 2);
 joined_r0x97bd003c:
         uStack_ac = 0;
         if ((fVar7 != 0.0) && (uStack_ac = 0, fVar6 != 0.0)) {
@@ -5301,15 +5315,15 @@ joined_r0x97bd003c:
     }
     else if (uVar20 == 4) {
       pfVar10 = opVec;
-      uVar20 = 0;
+      loopIndex = 0;
       do {
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
           uVar17 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                    inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
           uVar17 = 0;
         }
@@ -5319,10 +5333,10 @@ joined_r0x97bd003c:
            ((opVec[6] != opVec[10] || (fVar6 = 1.0, opVec[7] != opVec[0xb])))) {
           fVar6 = 0.0;
         }
-        uVar20 = uVar20 + 1;
+        loopIndex = loopIndex + 1;
         *pfVar10 = fVar6;
         pfVar10 = pfVar10 + 1;
-      } while (uVar20 < 4);
+      } while (loopIndex < 4);
       uStack_ac = 0;
       if ((opVec[0] == 0.0) || (fVar6 = opVec[3], fVar7 = opVec[2], opVec[1] == 0.0)
          ) goto LAB_97bd01a0;
@@ -5632,10 +5646,10 @@ void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,dou
 /* _InterpreterTextureSamplerCreate @ 0x97bd35dc (12 bytes) */
 int _InterpreterTextureSamplerCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _calloc(0x2c,1);
-  return uVar1;
+  allocation = _calloc(0x2c,1);
+  return allocation;
 }
 
 /* _InterpreterTextureSamplerInitialise @ 0x97bd35e8 (16 bytes) */

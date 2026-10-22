@@ -74,7 +74,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(param_1
   unsigned char * param_2;
 {
   uint uVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   ulong uVar3;
   
   if (0x3ffffffc < param_1) {
@@ -92,11 +92,11 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(param_1
   param_1 = param_1 + uVar1;
   uVar3 = param_1 + 0xd;
 LAB_97c310a4:
-  puVar2 = (undefined4 *)TPoolAllocator__allocate(*(unsigned char **)param_2,uVar3);
-  *puVar2 = 0;
-  puVar2[1] = param_1;
-  puVar2[2] = 0;
-  return puVar2;
+  allocation = (undefined4 *)TPoolAllocator__allocate(*(unsigned char **)param_2,uVar3);
+  *allocation = 0;
+  allocation[1] = param_1;
+  allocation[2] = 0;
+  return allocation;
 }
 
 /* std___Rb_tree_base_iterator___M_decrement @ 0x97c310d8 (144 bytes) */
@@ -514,7 +514,7 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, 
   int iVar2;
   undefined4 *puVar3;
   int iVar4;
-  void *pvVar5;
+  void *allocation;
   void *pvVar6;
   undefined4 uVar7;
   size_t sVar8;
@@ -526,18 +526,18 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, 
     if (iVar2 != 0) {
       iVar4 = iVar2 << 1;
     }
-    pvVar5 = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
+    allocation = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
     sVar8 = (int)param_2 - (int)*(void **)(this + 4);
-    _memmove(pvVar5,*(void **)(this + 4),sVar8);
-    if ((int)pvVar5 + sVar8 != 0) {
-      *(undefined4 *)((int)pvVar5 + sVar8) = *param_3;
+    _memmove(allocation,*(void **)(this + 4),sVar8);
+    if ((int)allocation + sVar8 != 0) {
+      *(undefined4 *)((int)allocation + sVar8) = *param_3;
     }
     iVar2 = *(int *)(this + 8);
-    pvVar6 = (void *)((int)pvVar5 + sVar8 + 4);
+    pvVar6 = (void *)((int)allocation + sVar8 + 4);
     _memmove(pvVar6,param_2,iVar2 - (int)param_2);
-    *(void **)(this + 0xc) = (void *)((int)pvVar5 + iVar4 * 4);
+    *(void **)(this + 0xc) = (void *)((int)allocation + iVar4 * 4);
     *(int *)(this + 8) = (int)pvVar6 + (iVar2 - (int)param_2);
-    *(void **)(this + 4) = pvVar5;
+    *(void **)(this + 4) = allocation;
   }
   else {
     iVar4 = 0;
@@ -611,6 +611,7 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gn
   void *param_3;
   void *param_4;
 {
+  void *allocation;
   ulong uVar1;
   undefined4 *puVar2;
   void *pvVar3;
@@ -636,17 +637,17 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gn
         puVar8 = &local_40;
       }
       uVar1 = (local_40 + *puVar8) * 4;
-      pvVar7 = (void *)TPoolAllocator__allocate((unsigned char *)*param_1,uVar1);
+      allocation = (void *)TPoolAllocator__allocate((unsigned char *)*param_1,uVar1);
       sVar4 = (int)param_2 - (int)param_1[1];
-      pvVar3 = (void *)((int)pvVar7 + sVar4);
-      _memmove(pvVar7,(void *)param_1[1],sVar4);
+      pvVar3 = (void *)((int)allocation + sVar4);
+      _memmove(allocation,(void *)param_1[1],sVar4);
       pvVar9 = (void *)((int)pvVar3 + sVar5);
       _memmove(pvVar3,param_3,sVar5);
       iVar10 = param_1[2];
       puVar2 = _memmove(pvVar9,param_2,iVar10 - (int)param_2);
-      param_1[3] = (void *)((int)pvVar7 + uVar1);
+      param_1[3] = (void *)((int)allocation + uVar1);
       param_1[2] = (int)pvVar9 + (iVar10 - (int)param_2);
-      param_1[1] = pvVar7;
+      param_1[1] = allocation;
     }
     else {
       uVar6 = (int)pvVar7 - (int)param_2 >> 2;

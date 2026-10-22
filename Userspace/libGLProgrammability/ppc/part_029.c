@@ -63,6 +63,7 @@ int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, para
   undefined4 *param_2;
   undefined4 *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -80,8 +81,8 @@ int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, para
     if (iVar1 != 0) {
       iVar3 = iVar1 << 1;
     }
-    iVar1 = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____)(local_30,*(undefined4 *)(this + 4),param_2,iVar1);
+    allocation = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____)(local_30,*(undefined4 *)(this + 4),param_2,allocation);
     if (local_30[0] != (undefined4 *)0x0) {
       uVar4 = *param_3;
       local_30[0][1] = param_3[1];
@@ -91,8 +92,8 @@ int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, para
     for (iVar2 = *(int *)(this + 4); iVar2 != *(int *)(this + 8); iVar2 = iVar2 + 8) {
     }
     *(undefined4 **)(this + 8) = local_30[0];
-    *(int *)(this + 0xc) = iVar1 + iVar3 * 8;
-    *(int *)(this + 4) = iVar1;
+    *(int *)(this + 0xc) = allocation + iVar3 * 8;
+    *(int *)(this + 4) = allocation;
   }
   else {
     puVar8 = (undefined4 *)0x0;
@@ -487,6 +488,7 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
   undefined4 *param_2;
   undefined4 *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -504,8 +506,8 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
     if (iVar1 != 0) {
       iVar3 = iVar1 << 1;
     }
-    iVar1 = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(local_30,*(undefined4 *)(this + 4),param_2,iVar1);
+    allocation = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(local_30,*(undefined4 *)(this + 4),param_2,allocation);
     if (local_30[0] != (undefined4 *)0x0) {
       uVar4 = *param_3;
       local_30[0][1] = param_3[1];
@@ -515,8 +517,8 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
     for (iVar2 = *(int *)(this + 4); iVar2 != *(int *)(this + 8); iVar2 = iVar2 + 8) {
     }
     *(undefined4 **)(this + 8) = local_30[0];
-    *(int *)(this + 0xc) = iVar1 + iVar3 * 8;
-    *(int *)(this + 4) = iVar1;
+    *(int *)(this + 0xc) = allocation + iVar3 * 8;
+    *(int *)(this + 4) = allocation;
   }
   else {
     puVar8 = (undefined4 *)0x0;
@@ -597,7 +599,7 @@ int std__vector_int_pool_allocator_int_____M_insert_aux(this, param_2, param_3)
   int iVar2;
   undefined4 *puVar3;
   int iVar4;
-  void *pvVar5;
+  void *allocation;
   void *pvVar6;
   undefined4 uVar7;
   size_t sVar8;
@@ -609,18 +611,18 @@ int std__vector_int_pool_allocator_int_____M_insert_aux(this, param_2, param_3)
     if (iVar2 != 0) {
       iVar4 = iVar2 << 1;
     }
-    pvVar5 = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
+    allocation = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
     sVar8 = (int)param_2 - (int)*(void **)(this + 4);
-    _memmove(pvVar5,*(void **)(this + 4),sVar8);
-    if ((int)pvVar5 + sVar8 != 0) {
-      *(undefined4 *)((int)pvVar5 + sVar8) = *param_3;
+    _memmove(allocation,*(void **)(this + 4),sVar8);
+    if ((int)allocation + sVar8 != 0) {
+      *(undefined4 *)((int)allocation + sVar8) = *param_3;
     }
     iVar2 = *(int *)(this + 8);
-    pvVar6 = (void *)((int)pvVar5 + sVar8 + 4);
+    pvVar6 = (void *)((int)allocation + sVar8 + 4);
     _memmove(pvVar6,param_2,iVar2 - (int)param_2);
-    *(void **)(this + 0xc) = (void *)((int)pvVar5 + iVar4 * 4);
+    *(void **)(this + 0xc) = (void *)((int)allocation + iVar4 * 4);
     *(int *)(this + 8) = (int)pvVar6 + (iVar2 - (int)param_2);
-    *(void **)(this + 4) = pvVar5;
+    *(void **)(this + 4) = allocation;
   }
   else {
     iVar4 = 0;

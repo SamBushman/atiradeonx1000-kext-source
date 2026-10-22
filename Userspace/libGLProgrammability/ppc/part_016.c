@@ -3,11 +3,11 @@
 /* _PPCConstantsAndScratchCreate @ 0x97be56c4 (56 bytes) */
 int _PPCConstantsAndScratchCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _malloc(0xd80);
-  ((double (*)())_PPCConstantsAndScratchInitialise)(uVar1);
-  return uVar1;
+  allocation = _malloc(0xd80);
+  ((double (*)())_PPCConstantsAndScratchInitialise)(allocation);
+  return allocation;
 }
 
 /* _PPCConstantsAndScratchInitialise @ 0x97be5700 (1196 bytes) */
@@ -225,7 +225,7 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
   undefined *puVar2;
   int iVar3;
   undefined4 uVar4;
-  undefined4 uVar5;
+  undefined4 compiledResult;
   int a6;
   code *UNRECOVERED_JUMPTABLE;
   uint uVar6;
@@ -264,14 +264,14 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
       }
       if (bVar1) {
         _PPCRuntimeCompilerCompileNO(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x1c) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x1c) = compiledResult;
       }
       else {
         _PPCRuntimeCompilerSetOptionFlags(uVar4,8);
         _PPCRuntimeCompilerCompileNO(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x20) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x20) = compiledResult;
       }
       _PPCRuntimeCompilerFree(uVar4);
     }
@@ -284,14 +284,14 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
       }
       if (bVar1) {
         _PPCRuntimeCompilerCompileAV(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x14) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x14) = compiledResult;
       }
       else {
         _PPCRuntimeCompilerSetOptionFlags(uVar4,8);
         _PPCRuntimeCompilerCompileAV(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x18) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x18) = compiledResult;
       }
       _PPCRuntimeCompilerFree(uVar4);
     }
@@ -1496,12 +1496,12 @@ int _glpWriteSourceOperandExtendedSwizzle(param_1, param_2, param_3)
   char ch;
   int iVar2;
   uint uVar3;
-  int iVar4;
+  int loopIndex;
   
   uVar3 = 0;
-  iVar4 = 0;
+  loopIndex = 0;
   do {
-    if (iVar4 == 1) {
+    if (loopIndex == 1) {
       uVar3 = *(uint *)(param_3 * 8 + param_1) >> 8 & 0xf;
       iVar2 = 0;
       ch = s___97c2a324[0];
@@ -1514,8 +1514,8 @@ LAB_97be7cf0:
       param_2 = param_2 + iVar2;
     }
     else {
-      if (1 < iVar4) {
-        if (iVar4 == 2) {
+      if (1 < loopIndex) {
+        if (loopIndex == 2) {
           uVar3 = *(uint *)(param_3 * 8 + param_1) >> 4 & 0xf;
           iVar2 = 0;
           ch = s___97c2a324[0];
@@ -1526,7 +1526,7 @@ LAB_97be7cf0:
           }
         }
         else {
-          if (iVar4 != 3) goto LAB_97be7cf4;
+          if (loopIndex != 3) goto LAB_97be7cf4;
           uVar3 = *(uint *)(param_3 * 8 + param_1) & 0xf;
           iVar2 = 0;
           ch = s___97c2a324[0];
@@ -1538,7 +1538,7 @@ LAB_97be7cf0:
         }
         goto LAB_97be7cf0;
       }
-      if (iVar4 == 0) {
+      if (loopIndex == 0) {
         uVar3 = *(uint *)(param_3 * 8 + param_1) >> 0xc & 0xf;
         iVar2 = 0;
         ch = s___97c2d7ec[0];
@@ -1656,8 +1656,8 @@ LAB_97be7cf4:
     }
     param_2 = param_2 + iVar2;
 switchD_97be7d14_default:
-    iVar4 = iVar4 + 1;
-    if (3 < iVar4) {
+    loopIndex = loopIndex + 1;
+    if (3 < loopIndex) {
       return;
     }
   } while( true );
@@ -1996,6 +1996,11 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   int *param_10;
   uint param_11;
 {
+  int loopIndex;
+  int outCursor;
+  int copyIndex2;
+  int copyIndex;
+  int outCursor2;
   uint uVar1;
   char ch;
   uint uVar3;
@@ -2018,7 +2023,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   uVar3 = param_1[1];
   uVar12 = param_11 & 0xff;
   uVar11 = uVar1 >> 0x12 & 0xff;
-  iVar9 = 0;
+  loopIndex = 0;
   iVar14 = param_2;
   if (0 < iVar10) {
     do {
@@ -2034,9 +2039,9 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
         } while (ch != '\0');
         iVar10 = *param_10;
       }
-      iVar9 = iVar9 + 1;
+      loopIndex = loopIndex + 1;
       iVar14 = iVar14 + iVar4;
-    } while (iVar9 < iVar10);
+    } while (loopIndex < iVar10);
   }
   pcVar8 = *(char **)(&_ppstreamOpString + uVar11 * 4);
   iVar9 = 0;
@@ -2094,36 +2099,36 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x70:
     uVar6 = ((int (*)())_glpWritePrecision)(puVar15,param_1[1] >> 0x12 & 3);
     uVar7 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(uVar6,uVar7 >> 0x16 & 1,uVar7 >> 0x15 & 1,uVar7 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar7 >> 0x16 & 1,uVar7 >> 0x15 & 1,uVar7 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar7 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar7 >> 0x1a & 3,uVar7 >> 0x1c & 1,uVar7 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar7 >> 0x1a & 3,uVar7 >> 0x1c & 1,uVar7 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar13 = 2;
     if (uVar1 >> 0x1d != 2) break;
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     goto LAB_97be9620;
   case 0x1f:
@@ -2159,35 +2164,35 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x6d:
     uVar6 = ((int (*)())_glpWritePrecision)(puVar15,param_1[1] >> 0x12 & 3);
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar13 = 2;
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     goto LAB_97be9620;
   case 0x3b:
@@ -2201,102 +2206,102 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x68:
     uVar6 = ((int (*)())_glpWritePrecision)(puVar15,param_1[1] >> 0x12 & 3);
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(uVar6,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,0);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     iVar13 = 3;
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12,0);
-    iVar14 = 0;
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,3,uVar12,0);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     goto LAB_97be9620;
   case 0x41:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,1);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,1);
     iVar13 = 3;
     break;
   case 0x42:
   case 0x43:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
+    outCursor = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar10 = 2;
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     goto LAB_97be9848;
   case 0x44:
@@ -2304,49 +2309,49 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   case 0x46:
   case 0x47:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,0);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteTextureOperand_97be8478)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
+              ((int (*)())_glpWriteTextureOperand_97be8478)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,3,uVar12);
     iVar13 = 3 - ((int)-uVar12 >> 0x1f);
     if (uVar12 == 0) break;
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
 LAB_97be9620:
     iVar13 = iVar13 + 1;
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15 + iVar14,param_5,param_6,param_7,param_8,iVar13,uVar12,0);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15 + copyIndex,param_5,param_6,param_7,param_8,iVar13,uVar12,0);
     break;
   case 0x48:
   case 0x49:
@@ -2356,35 +2361,35 @@ LAB_97be9620:
       puVar15 = (undefined1 *)
                 ((int (*)())_glpWriteSizeType)(puVar15,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = " "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = " "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteAddressOperand)(param_1,puVar15 + iVar14,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteAddressOperand)(param_1,puVar15 + copyIndex,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
 LAB_97be9928:
-    puVar15 = (undefined1 *)(iVar9 + iVar14);
+    puVar15 = (undefined1 *)(outCursor + copyIndex);
     goto LAB_97be99b4;
   case 0x4b:
   case 0x4c:
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = " "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = " "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteBranchOperand)(param_1,puVar15 + iVar14,param_9,1,(uint)(uVar11 == 0x4b));
+              ((int (*)())_glpWriteBranchOperand)(param_1,puVar15 + copyIndex,param_9,1,(uint)(uVar11 == 0x4b));
   case 0x4d:
   case 0x54:
   case 0x59:
@@ -2397,25 +2402,25 @@ LAB_97be8e48:
     iVar13 = 1;
     break;
   case 0x4f:
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = " "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = " "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     goto LAB_97be9988;
   case 0x55:
     *param_10 = *param_10 + 1;
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar9 = ((int (*)())_glpWriteSizeType)(puVar15,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
-      iVar14 = 0;
+      outCursor = ((int (*)())_glpWriteSizeType)(puVar15,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      copyIndex = 0;
       ch = s__97c291c0[0];
       while (ch != '\0') {
-        *(char *)(iVar9 + iVar14) = ch;
-        ch = " "[iVar14 + 1];
-        iVar14 = iVar14 + 1;
+        *(char *)(outCursor + copyIndex) = ch;
+        ch = " "[copyIndex + 1];
+        copyIndex = copyIndex + 1;
       }
       goto LAB_97be9928;
     }
@@ -2512,12 +2517,12 @@ switchD_97be8b04_default:
   case 0x56:
   case 0x57:
     *param_10 = *param_10 + 1;
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = " "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = " "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     goto LAB_97be9988;
   case 0x58:
@@ -2526,15 +2531,15 @@ switchD_97be8b04_default:
     goto LAB_97be8e48;
   case 0x60:
   case 0x61:
-    iVar14 = 0;
+    copyIndex = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      puVar15[iVar14] = ch;
-      ch = " "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      puVar15[copyIndex] = ch;
+      ch = " "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
 LAB_97be9988:
-    puVar15 = puVar15 + iVar14;
+    puVar15 = puVar15 + copyIndex;
 LAB_97be99b4:
     puVar15 = (undefined1 *)
               ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15,param_5,param_6,param_7,param_8,2,uVar12,0);
@@ -2542,64 +2547,64 @@ LAB_97be99b4:
     break;
   case 0x62:
     uVar1 = param_1[1];
-    iVar14 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
+    outCursor2 = ((int (*)())_glpWriteClampSat)(puVar15,uVar1 >> 0x16 & 1,uVar1 >> 0x15 & 1,uVar1 >> 0x14 & 1);
     if (uVar12 != 0) {
       uVar1 = param_1[1];
-      iVar14 = ((int (*)())_glpWriteSizeType)(iVar14,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
+      outCursor2 = ((int (*)())_glpWriteSizeType)(outCursor2,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
     }
-    iVar9 = 0;
+    copyIndex2 = 0;
     ch = s__97c291c0[0];
     while (ch != '\0') {
-      *(char *)(iVar14 + iVar9) = ch;
-      ch = " "[iVar9 + 1];
-      iVar9 = iVar9 + 1;
+      *(char *)(outCursor2 + copyIndex2) = ch;
+      ch = " "[copyIndex2 + 1];
+      copyIndex2 = copyIndex2 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteDestinationOperand_97be6730)(param_1,outCursor2 + copyIndex2,param_7,param_8,1,uVar12);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,2,uVar12,0);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12,0);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,3,uVar12,0);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
     iVar10 = 4;
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,4,uVar12,0);
-    iVar14 = 0;
+    outCursor = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,4,uVar12,0);
+    copyIndex = 0;
     ch = s___97c2d7ec[0];
     while (ch != '\0') {
-      *(char *)(iVar9 + iVar14) = ch;
-      ch = ", "[iVar14 + 1];
-      iVar14 = iVar14 + 1;
+      *(char *)(outCursor + copyIndex) = ch;
+      ch = ", "[copyIndex + 1];
+      copyIndex = copyIndex + 1;
     }
 LAB_97be9848:
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteTextureOperand_97be8478)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,iVar10 + 1,uVar12);
+              ((int (*)())_glpWriteTextureOperand_97be8478)(param_1,outCursor + copyIndex,param_5,param_6,param_7,param_8,iVar10 + 1,uVar12);
     iVar13 = (iVar10 + 1) - ((int)-uVar12 >> 0x1f);
   }
-  iVar14 = 0;
+  copyIndex = 0;
   ch = s___97c2d884[0];
   while (ch != '\0') {
-    puVar15[iVar14] = ch;
-    ch = ";"[iVar14 + 1];
-    iVar14 = iVar14 + 1;
+    puVar15[copyIndex] = ch;
+    ch = ";"[copyIndex + 1];
+    copyIndex = copyIndex + 1;
   }
-  pcVar8 = puVar15 + iVar14;
+  pcVar8 = puVar15 + copyIndex;
   if (uVar12 != 0) {
     switch(uVar11) {
     case 0x4b:
@@ -2618,15 +2623,15 @@ LAB_97be9848:
       pcVar8 = pcVar8 + iVar14;
     }
   }
-  iVar14 = 0;
+  copyIndex = 0;
   ch = s__97c26c38[0];
   while (ch != '\0') {
-    pcVar8[iVar14] = ch;
-    ch = "\n"[iVar14 + 1];
-    iVar14 = iVar14 + 1;
+    pcVar8[copyIndex] = ch;
+    ch = "\n"[copyIndex + 1];
+    copyIndex = copyIndex + 1;
   }
   *param_3 = iVar13;
-  *param_4 = (int)(pcVar8 + (iVar14 - param_2));
+  *param_4 = (int)(pcVar8 + (copyIndex - param_2));
   return;
 }
 
@@ -2686,6 +2691,7 @@ int _InsertLabel(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   int param_5;
 {
+  int loopIndex;
   bool bVar1;
   int iVar2;
   int iVar3;
@@ -2697,21 +2703,21 @@ int _InsertLabel(param_1, param_2, param_3, param_4, param_5)
   int iVar9;
   int iVar10;
   
-  iVar8 = 0;
+  loopIndex = 0;
   if ((param_5 < 1) || (piVar6 = param_1, param_3 <= *param_1)) {
     bVar1 = param_5 == 0;
     iVar2 = 0;
   }
   else {
     do {
-      iVar8 = iVar8 + 1;
-      bVar1 = iVar8 == param_5;
-      if (param_5 <= iVar8) {
-        iVar2 = iVar8 * 4;
+      loopIndex = loopIndex + 1;
+      bVar1 = loopIndex == param_5;
+      if (param_5 <= loopIndex) {
+        iVar2 = loopIndex * 4;
         break;
       }
       piVar6 = piVar6 + 1;
-      iVar2 = iVar8 * 4;
+      iVar2 = loopIndex * 4;
     } while (*piVar6 < param_3);
   }
   if (bVar1) {
@@ -2723,7 +2729,7 @@ int _InsertLabel(param_1, param_2, param_3, param_4, param_5)
     iVar7 = *(int *)(iVar2 + (int)param_1);
     iVar10 = param_5;
     if (iVar7 != param_3) {
-      iVar8 = iVar8 + 1;
+      iVar8 = loopIndex + 1;
       *(int *)(iVar2 + (int)param_1) = param_3;
       uVar4 = *(undefined4 *)(iVar2 + param_2);
       *(undefined4 *)(iVar2 + param_2) = param_4;
@@ -2758,6 +2764,7 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
   int *param_2;
   int *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -2767,13 +2774,13 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
   if (*param_1 - (iVar3 - iVar1) < 0x100) {
     iVar2 = *param_1 + 0x800;
     *param_1 = iVar2;
-    iVar2 = _realloc(*param_2,iVar2);
-    *param_3 = iVar2;
-    if (iVar2 == 0) {
+    allocation = _realloc(*param_2,iVar2);
+    *param_3 = allocation;
+    if (allocation == 0) {
       return 0;
     }
-    *param_2 = iVar2;
-    *param_3 = iVar2 + (iVar3 - iVar1);
+    *param_2 = allocation;
+    *param_3 = allocation + (iVar3 - iVar1);
   }
   return 1;
 }
@@ -2782,6 +2789,17 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
 int _glpPPDisassemble(program)
   uint *program;
 {
+  int loopIndex2;
+  int loopIndex;
+  int loopIndex3;
+  int copyIndex2;
+  int copyLength3;
+  int copyIndex4;
+  int copyLength4;
+  int copyIndex3;
+  int copyLength;
+  int copyIndex;
+  int copyLength2;
   bool bVar1;
   bool bVar2;
   bool bVar3;
@@ -2795,13 +2813,13 @@ int _glpPPDisassemble(program)
   uint *puVar11;
   int iVar12;
   int iVar13;
-  int iVar14;
+  int copyLength5;
   int *piVar15;
   undefined4 extraout_r3;
   undefined4 extraout_r3_00;
   undefined4 uVar16;
   undefined4 extraout_r3_01;
-  void *pvVar17;
+  void *allocation;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -2880,231 +2898,231 @@ int _glpPPDisassemble(program)
   local_64 = (uint)(uVar19 - 0x8b30 < 2);
   if (uVar19 == 0x8804) {
     ch = '!';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outBuf + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "!!ARBfp1.0\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outBuf + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "!!ARBfp1.0\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
   }
   else if (uVar19 < 0x8805) {
     if (uVar19 == 0x8620) {
       ch = '!';
-      iVar22 = 0;
+      copyIndex4 = 0;
       do {
-        *(char *)((int)outBuf + iVar22) = ch;
-        iVar9 = iVar22 + 1;
-        ch = "!!ARBvp1.0\n"[iVar22 + 1];
-        iVar22 = iVar9;
+        *(char *)((int)outBuf + copyIndex4) = ch;
+        copyLength3 = copyIndex4 + 1;
+        ch = "!!ARBvp1.0\n"[copyIndex4 + 1];
+        copyIndex4 = copyLength3;
       } while (ch != '\0');
     }
     else {
 LAB_97be9f08:
       ch = 'U';
-      iVar22 = 0;
+      copyIndex4 = 0;
       do {
-        *(char *)((int)outBuf + iVar22) = ch;
-        iVar9 = iVar22 + 1;
-        ch = "Unkown Target (error)\n"[iVar22 + 1];
-        iVar22 = iVar9;
+        *(char *)((int)outBuf + copyIndex4) = ch;
+        copyLength3 = copyIndex4 + 1;
+        ch = "Unkown Target (error)\n"[copyIndex4 + 1];
+        copyIndex4 = copyLength3;
       } while (ch != '\0');
     }
   }
   else if (uVar19 == 0x8b30) {
     ch = '!';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outBuf + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "!!ARBfragmentshader\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outBuf + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "!!ARBfragmentshader\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
   }
   else {
     if (uVar19 != 0x8b31) goto LAB_97be9f08;
     ch = '!';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outBuf + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "!!ARBvertexshader\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outBuf + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "!!ARBvertexshader\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
   }
-  outCursor = (int *)((int)outBuf + iVar9);
+  outCursor = (int *)((int)outBuf + copyLength3);
   bVar2 = local_64 == 0;
   if (!bVar2) {
     ch = '\n';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outCursor + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outCursor + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)((int)outCursor + iVar9);
+    outCursor = (int *)((int)outCursor + copyLength3);
   }
   uVar20 = program[0x12];
-  iVar22 = 0;
+  loopIndex = 0;
   uVar6 = program[0x13];
   if (0 < (int)uVar20) {
     local_60 = "o intialize the Preprocessor";
     do {
       ch = 'O';
-      iVar9 = 0;
+      copyIndex2 = 0;
       do {
-        *(char *)((int)outCursor + iVar9) = ch;
-        iVar10 = iVar9 + 1;
-        ch = "OPTION "[iVar9 + 1];
-        iVar9 = iVar10;
+        *(char *)((int)outCursor + copyIndex2) = ch;
+        copyLength2 = copyIndex2 + 1;
+        ch = "OPTION "[copyIndex2 + 1];
+        copyIndex2 = copyLength2;
       } while (ch != '\0');
-      puVar18 = (undefined1 *)((int)outCursor + iVar10);
-      switch(program[uVar6 * 2 + iVar22 * 2] & 0xff) {
+      puVar18 = (undefined1 *)((int)outCursor + copyLength2);
+      switch(program[uVar6 * 2 + loopIndex * 2] & 0xff) {
       case 0:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_position_invariant"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_position_invariant"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 1:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_fog_exp"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_fog_exp"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 2:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_fog_exp2"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_fog_exp2"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 3:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_fog_linear"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_fog_linear"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 4:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_precision_hint_fastest"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_precision_hint_fastest"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 5:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_precision_hint_nicest"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_precision_hint_nicest"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 6:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "APPLE_no_runtime_compile"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "APPLE_no_runtime_compile"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 7:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "APPLE_no_altivec"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "APPLE_no_altivec"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 8:
         ch = 'N';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "NV_fragment_program"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "NV_fragment_program"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 9:
         ch = 'N';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "NV_fragment_program2"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "NV_fragment_program2"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 10:
         ch = 'N';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "NV_vertex_program2"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "NV_vertex_program2"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 0xb:
         ch = 'N';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "NV_vertex_program3"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "NV_vertex_program3"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 0xc:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_draw_buffers"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_draw_buffers"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 0xd:
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ARB_fragment_program_shadow"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ARB_fragment_program_shadow"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       default:
         goto switchD_97bea038_default;
       }
-      puVar18 = puVar18 + iVar10;
+      puVar18 = puVar18 + copyLength2;
 switchD_97bea038_default:
       iVar9 = 0;
       ch = local_60[0x3bbc];
@@ -3116,43 +3134,43 @@ switchD_97bea038_default:
       outCursor = (int *)(puVar18 + iVar9);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0cec;
-      iVar22 = iVar22 + 1;
-    } while (iVar22 < (int)uVar20);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < (int)uVar20);
   }
   if ((uVar20 != 0) && (!bVar2)) {
     ch = '\n';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outCursor + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outCursor + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)((int)outCursor + iVar9);
+    outCursor = (int *)((int)outCursor + copyLength3);
   }
   uVar6 = program[6];
   if (uVar6 != 0) {
     ch = 'A';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outCursor + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "ADDRESS adr0"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outCursor + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "ADDRESS adr0"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
     iVar22 = 1;
-    puVar18 = (undefined1 *)((int)outCursor + iVar9);
+    puVar18 = (undefined1 *)((int)outCursor + copyLength3);
     if (1 < (int)uVar6) {
       do {
         ch = ',';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          puVar18[iVar9] = ch;
-          iVar10 = iVar9 + 1;
-          ch = ", adr"[iVar9 + 1];
-          iVar9 = iVar10;
+          puVar18[copyIndex2] = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = ", adr"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + iVar10);
+        outCursor = (int *)(puVar18 + copyLength2);
         iVar9 = iVar22 + 1;
         iVar22 = ((int (*)())_ncpy_97be5f58)(outCursor,iVar22);
         puVar18 = (undefined1 *)((int)outCursor + iVar22);
@@ -3160,26 +3178,26 @@ switchD_97bea038_default:
       } while (iVar9 < (int)uVar6);
     }
     ch = ';';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      puVar18[iVar22] = ch;
-      iVar9 = iVar22 + 1;
-      ch = ";\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      puVar18[copyIndex4] = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = ";\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)(puVar18 + iVar9);
+    outCursor = (int *)(puVar18 + copyLength3);
     uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
     if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0cec;
     if (!bVar2) {
       ch = '\n';
-      iVar22 = 0;
+      copyIndex4 = 0;
       do {
-        *(char *)((int)outCursor + iVar22) = ch;
-        iVar9 = iVar22 + 1;
-        ch = "\n"[iVar22 + 1];
-        iVar22 = iVar9;
+        *(char *)((int)outCursor + copyIndex4) = ch;
+        copyLength3 = copyIndex4 + 1;
+        ch = "\n"[copyIndex4 + 1];
+        copyIndex4 = copyLength3;
       } while (ch != '\0');
-      outCursor = (int *)((int)outCursor + iVar9);
+      outCursor = (int *)((int)outCursor + copyLength3);
     }
   }
   uVar16 = (undefined4)uVar26;
@@ -3201,7 +3219,7 @@ LAB_97bea698:
         uVar16 = extraout_r4_01;
       }
       uVar26 = CONCAT44(local_78,uVar16);
-      iVar22 = 0;
+      loopIndex = 0;
       iVar9 = -1;
       local_a4 = 0xffffffff;
       uVar23 = 0xffffffff;
@@ -3239,10 +3257,10 @@ LAB_97bea790:
             bVar1 = *(ushort *)((int)puVar11 + 6) == local_a4;
             goto LAB_97bea790;
           }
-          iVar22 = iVar22 + 1;
+          loopIndex = loopIndex + 1;
           iVar10 = iVar10 + 8;
           puVar11 = puVar11 + 2;
-        } while (iVar22 < (int)uVar20);
+        } while (loopIndex < (int)uVar20);
       }
       local_90 = 0;
       goto LAB_97bea7e0;
@@ -3299,37 +3317,37 @@ LAB_97bea7e0:
         uVar6 = puVar21[uVar23 * 2] >> 0x1d;
         if (uVar6 == 1) {
           ch = 'L';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "LONG TEMP "[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "LONG TEMP "[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
 LAB_97bea920:
-          outCursor = (int *)((int)outCursor + iVar10);
+          outCursor = (int *)((int)outCursor + copyLength2);
         }
         else if (uVar6 < 2) {
           if (uVar6 == 0) {
             ch = 'T';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "TEMP "[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "TEMP "[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             goto LAB_97bea920;
           }
         }
         else if (uVar6 == 2) {
           ch = 'S';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "SHORT TEMP "[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "SHORT TEMP "[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           goto LAB_97bea920;
         }
@@ -3338,14 +3356,14 @@ LAB_97bea920:
       }
       if (bVar2) {
         ch = 't';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "tmp"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "tmp"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
+        outCursor = (int *)((int)outCursor + copyLength2);
         iVar22 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)puVar21 + iVar22 + 6));
         outCursor = (int *)((int)outCursor + iVar22);
       }
@@ -3353,14 +3371,14 @@ LAB_97bea920:
         iVar9 = *(int *)(local_7c + (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4);
         if (iVar9 == -1) {
           ch = 't';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "tmp"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "tmp"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
+          outCursor = (int *)((int)outCursor + copyLength2);
           iVar22 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
                                             (local_80 +
                                             (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4));
@@ -3373,37 +3391,37 @@ LAB_97bea920:
           if (iVar9 == 0) {
             ch = 't';
             local_8c = 0;
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "tmp"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "tmp"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
-            outCursor = (int *)((int)outCursor + iVar10);
+            outCursor = (int *)((int)outCursor + copyLength2);
             iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
                                              (local_80 +
                                              (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4));
             ch = '[';
-            iVar22 = 0;
+            copyIndex4 = 0;
             do {
-              *(char *)((int)outCursor + iVar22 + iVar9) = ch;
-              iVar10 = iVar22 + 1;
-              ch = "["[iVar22 + 1];
-              iVar22 = iVar10;
+              *(char *)((int)outCursor + copyIndex4 + iVar9) = ch;
+              copyLength2 = copyIndex4 + 1;
+              ch = "["[copyIndex4 + 1];
+              copyIndex4 = copyLength2;
             } while (ch != '\0');
-            outCursor = (int *)((int)outCursor + iVar10 + iVar9);
+            outCursor = (int *)((int)outCursor + copyLength2 + iVar9);
             iVar22 = local_90 * 4;
             iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,local_78[local_90]);
             ch = ']';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9 + iVar10) = ch;
-              iVar12 = iVar9 + 1;
-              ch = "]"[iVar9 + 1];
-              iVar9 = iVar12;
+              *(char *)((int)outCursor + copyIndex2 + iVar10) = ch;
+              copyLength = copyIndex2 + 1;
+              ch = "]"[copyIndex2 + 1];
+              copyIndex2 = copyLength;
             } while (ch != '\0');
-            outCursor = (int *)((int)outCursor + iVar12 + iVar10);
+            outCursor = (int *)((int)outCursor + copyLength + iVar10);
             uVar25 = puVar21[uVar23 * 2];
             outCursor = (int *)((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar25 >> 0x18 & 3,0,uVar25 >> 0x1a & 7,
                                          uVar25 >> 0x1d);
@@ -3421,38 +3439,38 @@ LAB_97bea920:
       uVar25 = uVar23 + 1;
       if (uVar25 == uVar20) {
         ch = ';';
-        iVar22 = 0;
+        copyIndex4 = 0;
         do {
-          *(char *)((int)outCursor + iVar22) = ch;
-          iVar9 = iVar22 + 1;
-          ch = ";\n"[iVar22 + 1];
-          iVar22 = iVar9;
+          *(char *)((int)outCursor + copyIndex4) = ch;
+          copyLength3 = copyIndex4 + 1;
+          ch = ";\n"[copyIndex4 + 1];
+          copyIndex4 = copyLength3;
         } while (ch != '\0');
 LAB_97beacc8:
-        outCursor = (int *)((int)outCursor + iVar9);
+        outCursor = (int *)((int)outCursor + copyLength3);
       }
       else {
         if (puVar21[uVar23 * 2 + 2] >> 0x1d != uVar6) {
           local_60 = "o intialize the Preprocessor";
           ch = ';';
-          iVar22 = 0;
+          copyIndex4 = 0;
           do {
-            *(char *)((int)outCursor + iVar22) = ch;
-            iVar9 = iVar22 + 1;
-            ch = ";\n"[iVar22 + 1];
-            iVar22 = iVar9;
+            *(char *)((int)outCursor + copyIndex4) = ch;
+            copyLength3 = copyIndex4 + 1;
+            ch = ";\n"[copyIndex4 + 1];
+            copyIndex4 = copyLength3;
           } while (ch != '\0');
           bVar3 = true;
           goto LAB_97beacc8;
         }
         if (local_8c == -1) {
           ch = ',';
-          iVar22 = 0;
+          copyIndex4 = 0;
           do {
-            *(char *)((int)outCursor + iVar22) = ch;
-            iVar9 = iVar22 + 1;
-            ch = ", "[iVar22 + 1];
-            iVar22 = iVar9;
+            *(char *)((int)outCursor + copyIndex4) = ch;
+            copyLength3 = copyIndex4 + 1;
+            ch = ", "[copyIndex4 + 1];
+            copyIndex4 = copyLength3;
           } while (ch != '\0');
           goto LAB_97beacc8;
         }
@@ -3468,51 +3486,51 @@ LAB_97beacc8:
   }
   if ((uVar20 != 0) && (!bVar2)) {
     ch = '\n';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outCursor + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outCursor + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)((int)outCursor + iVar9);
+    outCursor = (int *)((int)outCursor + copyLength3);
   }
   uVar20 = program[8];
-  iVar22 = 0;
+  loopIndex = 0;
   uVar6 = program[9];
   if (0 < (int)uVar20) {
     do {
-      uVar23 = program[uVar6 * 2 + iVar22 * 2] >> 0x10 & 0xf;
+      uVar23 = program[uVar6 * 2 + loopIndex * 2] >> 0x10 & 0xf;
       if (uVar23 != 0) {
         ch = 'A';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "ATTRIB att"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "ATTRIB att"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
-        iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + iVar22 * 8 + uVar6 * 8 + 6)
+        outCursor = (int *)((int)outCursor + copyLength2);
+        iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + loopIndex * 8 + uVar6 * 8 + 6)
                               );
         outCursor = (int *)((int)outCursor + iVar9);
         if (!bVar2) {
-          uVar25 = program[uVar6 * 2 + iVar22 * 2];
+          uVar25 = program[uVar6 * 2 + loopIndex * 2];
           outCursor = (int *)((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar25 >> 0x18 & 3,0,uVar25 >> 0x1a & 7,
                                        uVar25 >> 0x1d);
         }
         if (uVar19 == 0x8804) {
 LAB_97beae94:
           ch = ' ';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = " = fragment."[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = " = fragment."[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
 LAB_97beaec8:
-          outCursor = (int *)((int)outCursor + iVar10);
+          outCursor = (int *)((int)outCursor + copyLength2);
         }
         else {
           if (uVar19 < 0x8805) {
@@ -3524,12 +3542,12 @@ LAB_97beaec8:
           }
           if (uVar19 == uVar25) {
             ch = ' ';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = " = vertex."[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = " = vertex."[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             goto LAB_97beaec8;
           }
@@ -3539,220 +3557,220 @@ LAB_97beaec8:
           goto switchD_97beaef4_caseD_0;
         case 1:
           ch = 'p';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "position"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "position"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'c';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "color.primary"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "color.primary"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'c';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "color.secondary"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "color.secondary"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'n';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "normal"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "normal"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'f';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "fogcoord"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "fogcoord"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'w';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "weight["[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "weight["[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
-          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] & 0x1f);
+          outCursor = (int *)((int)outCursor + copyLength2);
+          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar9);
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "]"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "]"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 7:
           ch = 't';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "texcoord["[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "texcoord["[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
-          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] & 0x1f);
+          outCursor = (int *)((int)outCursor + copyLength2);
+          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar9);
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "]"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "]"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 8:
           ch = 'm';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "matrixindex["[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "matrixindex["[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
-          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] & 0x1f);
+          outCursor = (int *)((int)outCursor + copyLength2);
+          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar9);
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "]"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "]"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 9:
           ch = 'a';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "attrib["[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "attrib["[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
-          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] & 0x1f);
+          outCursor = (int *)((int)outCursor + copyLength2);
+          iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar9);
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "]"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "]"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           break;
         case 10:
           ch = 'm';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "material."[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "material."[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
-          if ((program[uVar6 * 2 + iVar22 * 2] & 1) == 0) {
+          outCursor = (int *)((int)outCursor + copyLength2);
+          if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 0) {
             ch = 'f';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "front."[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "front."[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
 LAB_97beb3a4:
-            outCursor = (int *)((int)outCursor + iVar10);
+            outCursor = (int *)((int)outCursor + copyLength2);
           }
-          else if ((program[uVar6 * 2 + iVar22 * 2] & 1) == 1) {
+          else if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 1) {
             ch = 'b';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "back."[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "back."[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             goto LAB_97beb3a4;
           }
-          switch(program[uVar6 * 2 + iVar22 * 2] >> 0xc & 0xf) {
+          switch(program[uVar6 * 2 + loopIndex * 2] >> 0xc & 0xf) {
           case 0:
             ch = 'a';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "ambient"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "ambient"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             break;
           case 1:
             ch = 'd';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "diffuse"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "diffuse"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             break;
           case 2:
             ch = 's';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "specular"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "specular"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             break;
           case 3:
             ch = 'e';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "emission"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "emission"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             break;
           case 4:
             ch = 's';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = "shininess"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = "shininess"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
             break;
           default:
@@ -3761,42 +3779,42 @@ LAB_97beb3a4:
           break;
         case 0xb:
           ch = 'f';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "frontfacing"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "frontfacing"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
         }
-        outCursor = (int *)((int)outCursor + iVar10);
+        outCursor = (int *)((int)outCursor + copyLength2);
 switchD_97beaef4_caseD_0:
         ch = ';';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = ";\n"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = ";\n"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
+        outCursor = (int *)((int)outCursor + copyLength2);
         uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
         if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0c18;
       }
-      iVar22 = iVar22 + 1;
-    } while (iVar22 < (int)uVar20);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < (int)uVar20);
   }
   uVar16 = (undefined4)uVar26;
   if ((uVar20 != 0) && (!bVar2)) {
     ch = '\n';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outCursor + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outCursor + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)((int)outCursor + iVar9);
+    outCursor = (int *)((int)outCursor + copyLength3);
   }
   uVar6 = program[10];
   puVar21 = program + program[0xb] * 2;
@@ -3845,7 +3863,7 @@ LAB_97bf0c18:
     uVar16 = extraout_r4_04;
   }
   uVar26 = CONCAT44(local_78,uVar16);
-  iVar22 = 0;
+  loopIndex = 0;
   iVar9 = -1;
   local_a0 = 0xffffffff;
   uVar20 = 0xffffffff;
@@ -3882,124 +3900,124 @@ LAB_97beb790:
           if (*(ushort *)((int)puVar11 + 6) == local_a0) goto LAB_97beb790;
         }
       }
-      iVar22 = iVar22 + 1;
+      loopIndex = loopIndex + 1;
       puVar11 = puVar11 + 2;
-    } while (iVar22 < (int)uVar6);
+    } while (loopIndex < (int)uVar6);
   }
-  iVar22 = 0;
+  loopIndex = 0;
   local_90 = 0;
   if (0 < (int)uVar6) {
     do {
-      iVar9 = iVar22 * 8;
-      uVar20 = puVar21[iVar22 * 2] >> 0x10 & 0x1f;
+      iVar9 = loopIndex * 8;
+      uVar20 = puVar21[loopIndex * 2] >> 0x10 & 0x1f;
       if (uVar20 == 0) goto LAB_97bed4a8;
       iVar10 = *(int *)(local_84 + (uint)*(ushort *)((int)puVar21 + iVar9 + 6) * 4);
       if (iVar10 == -1) {
         ch = 'P';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "PARAM prm"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "PARAM prm"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         uVar26 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
                                           (local_88 +
                                           (uint)*(ushort *)((int)puVar21 + iVar9 + 6) * 4));
         outCursor = (int *)((int)outCursor + (int)((ulonglong)uVar26 >> 0x20));
         if (!bVar2) {
-          uVar23 = puVar21[iVar22 * 2];
+          uVar23 = puVar21[loopIndex * 2];
           uVar26 = ((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar23 >> 0x18 & 3,0,uVar23 >> 0x1a & 7,uVar23 >> 0x1d);
           outCursor = (int *)((ulonglong)uVar26 >> 0x20);
         }
         ch = ' ';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = " = "[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = " = "[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
       }
       else if (iVar10 == 0) {
         ch = 'P';
         local_8c = 0;
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "PARAM prm"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "PARAM prm"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
                                           (local_88 +
                                           (uint)*(ushort *)((int)puVar21 + iVar9 + 6) * 4));
         ch = '[';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "["[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          copyLength4 = copyIndex + 1;
+          ch = "["[copyIndex + 1];
+          copyIndex = copyLength4;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar13 + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength4 + iVar12);
         uVar26 = ((int (*)())_ncpy_97be5f58)(outCursor,local_78[local_90]);
         ch = ']';
         puVar18 = (undefined1 *)((int)outCursor + (int)((ulonglong)uVar26 >> 0x20));
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "]"[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "]"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + iVar12);
+        outCursor = (int *)(puVar18 + copyLength);
         if (!bVar2) {
-          uVar23 = puVar21[iVar22 * 2];
+          uVar23 = puVar21[loopIndex * 2];
           uVar26 = ((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar23 >> 0x18 & 3,0,uVar23 >> 0x1a & 7,uVar23 >> 0x1d);
           outCursor = (int *)((ulonglong)uVar26 >> 0x20);
         }
         ch = ' ';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = " = {\n    "[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = " = {\n    "[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
       }
       else {
         ch = ' ';
         local_8c = local_8c + 1;
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "    "[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "    "[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
       }
       if (uVar20 == 0) {
 LAB_97bebb2c:
         ch = 's';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "state."[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = "state."[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
       }
       else if (uVar20 < 3) {
         ch = 'p';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "program."[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = "program."[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
       }
       else {
@@ -4012,145 +4030,145 @@ LAB_97bebb2c:
         goto switchD_97bebb8c_caseD_0;
       case 1:
         ch = 'l';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "local["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "local["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xffff);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xffff);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar10);
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "]"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "]"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
         goto LAB_97bed34c;
       case 2:
         ch = 'e';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "env["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "env["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xffff);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xffff);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar10);
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "]"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "]"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
         goto LAB_97bed34c;
       case 3:
         ch = 'l';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "light["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "light["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
         ch = ']';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "]."[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = "]."[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + iVar13 + iVar12);
-        switch(puVar21[iVar22 * 2] >> 8 & 0xf) {
+        switch(puVar21[loopIndex * 2] >> 8 & 0xf) {
         case 0:
           ch = 'a';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "ambient"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "ambient"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'd';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "diffuse"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "diffuse"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 2:
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "specular"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "specular"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'p';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "position"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "position"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 4:
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "spot.direction"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "spot.direction"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'a';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "attenuation"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "attenuation"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'h';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "half"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "half"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 7:
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "spotcutoff"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "spotcutoff"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         default:
@@ -4159,189 +4177,189 @@ LAB_97bebb2c:
         break;
       case 4:
         ch = 'l';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "lightprod["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "lightprod["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
         ch = ']';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "]."[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = "]."[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + iVar13 + iVar12);
-        uVar20 = puVar21[iVar22 * 2] >> 8 & 1;
+        uVar20 = puVar21[loopIndex * 2] >> 8 & 1;
         if (uVar20 == 0) {
           ch = 'f';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "front."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "front."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
 LAB_97bec0e8:
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         else if (uVar20 == 1) {
           ch = 'b';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "back."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "back."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           goto LAB_97bec0e8;
         }
-        uVar20 = puVar21[iVar22 * 2] >> 9 & 3;
+        uVar20 = puVar21[loopIndex * 2] >> 9 & 3;
         if (uVar20 == 1) {
           ch = 'd';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "diffuse"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "diffuse"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         }
         if (uVar20 < 2) {
           if (uVar20 == 0) {
             ch = 'a';
-            iVar10 = 0;
+            copyIndex = 0;
             do {
-              *(char *)((int)outCursor + iVar10) = ch;
-              iVar12 = iVar10 + 1;
-              ch = "ambient"[iVar10 + 1];
-              iVar10 = iVar12;
+              *(char *)((int)outCursor + copyIndex) = ch;
+              iVar12 = copyIndex + 1;
+              ch = "ambient"[copyIndex + 1];
+              copyIndex = iVar12;
             } while (ch != '\0');
             break;
           }
         }
         else if (uVar20 == 2) {
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "specular"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "specular"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         }
         goto switchD_97bebb8c_caseD_0;
       case 5:
-        if ((puVar21[iVar22 * 2] >> 1 & 7) == 5) {
+        if ((puVar21[loopIndex * 2] >> 1 & 7) == 5) {
           ch = 'l';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "lightmodel."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "lightmodel."[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else {
           ch = 'm';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "material."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "material."[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         outCursor = (int *)((int)outCursor + iVar12);
-        if ((puVar21[iVar22 * 2] & 1) == 0) {
+        if ((puVar21[loopIndex * 2] & 1) == 0) {
           ch = 'f';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "front."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "front."[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
 LAB_97bec310:
           outCursor = (int *)((int)outCursor + iVar12);
         }
-        else if ((puVar21[iVar22 * 2] & 1) == 1) {
+        else if ((puVar21[loopIndex * 2] & 1) == 1) {
           ch = 'b';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "back."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "back."[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           goto LAB_97bec310;
         }
-        switch(puVar21[iVar22 * 2] >> 1 & 7) {
+        switch(puVar21[loopIndex * 2] >> 1 & 7) {
         case 0:
           ch = 'a';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "ambient"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "ambient"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'd';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "diffuse"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "diffuse"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 2:
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "specular"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "specular"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'e';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "emission"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "emission"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 4:
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "shininess"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "shininess"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 5:
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "scenecolor"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "scenecolor"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         default:
@@ -4350,430 +4368,430 @@ LAB_97bec310:
         break;
       case 6:
         ch = 'l';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "lightmodel.ambient"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "lightmodel.ambient"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
         break;
       case 7:
         ch = 't';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "texgen["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "texgen["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0x1f);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0x1f);
         ch = ']';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "].eye."[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = "].eye."[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + iVar13 + iVar12);
-        uVar20 = puVar21[iVar22 * 2] >> 5 & 7;
+        uVar20 = puVar21[loopIndex * 2] >> 5 & 7;
         if (uVar20 == 1) {
           ch = 't';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "t"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "t"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else if (uVar20 < 2) {
           if (uVar20 != 0) goto switchD_97bebb8c_caseD_0;
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "s"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "s"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else if (uVar20 == 2) {
           ch = 'r';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "r"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "r"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else {
           if (uVar20 != 3) goto switchD_97bebb8c_caseD_0;
           ch = 'q';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "q"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "q"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         break;
       case 8:
         ch = 't';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "texgen["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "texgen["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0x1f);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0x1f);
         ch = ']';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = "].object."[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = "].object."[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + iVar13 + iVar12);
-        uVar20 = puVar21[iVar22 * 2] >> 5 & 7;
+        uVar20 = puVar21[loopIndex * 2] >> 5 & 7;
         if (uVar20 == 1) {
           ch = 't';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "t"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "t"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else if (uVar20 < 2) {
           if (uVar20 != 0) goto switchD_97bebb8c_caseD_0;
           ch = 's';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "s"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "s"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else if (uVar20 == 2) {
           ch = 'r';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "r"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "r"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         else {
           if (uVar20 != 3) goto switchD_97bebb8c_caseD_0;
           ch = 'q';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "q"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "q"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
         }
         break;
       case 9:
         ch = 't';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "texenv["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "texenv["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0x1f);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0x1f);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar10);
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "].color"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "].color"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
         goto LAB_97bed34c;
       case 10:
         ch = 'c';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "clip["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "clip["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar10);
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "].plane"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "].plane"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
         goto LAB_97bed34c;
       case 0xb:
         ch = 'f';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "fog.color"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "fog.color"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
         break;
       case 0xc:
         ch = 'f';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "fog.params"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "fog.params"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
         break;
       case 0xd:
         ch = 'p';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "point.size"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "point.size"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
         break;
       case 0xe:
         ch = 'p';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "point.attenuation"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "point.attenuation"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
         break;
       case 0xf:
         ch = 'd';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "depth.range"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "depth.range"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
         break;
       case 0x10:
         ch = 'm';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "matrix."[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "matrix."[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        switch(puVar21[iVar22 * 2] >> 8 & 7) {
+        outCursor = (int *)((int)outCursor + copyLength);
+        switch(puVar21[loopIndex * 2] >> 8 & 7) {
         case 0:
           ch = 'm';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "mvp."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "mvp."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           goto LAB_97becb5c;
         case 1:
           ch = 'p';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "projection."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "projection."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
 LAB_97becb5c:
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
           goto switchD_97becad4_default;
         case 2:
           ch = 'c';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "color["[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "color["[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
-          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+          outCursor = (int *)((int)outCursor + copyLength);
+          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar10);
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "]."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "]."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'm';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "modelview["[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "modelview["[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
-          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+          outCursor = (int *)((int)outCursor + copyLength);
+          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar10);
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "]."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "]."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 't';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "texture["[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "texture["[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
-          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+          outCursor = (int *)((int)outCursor + copyLength);
+          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar10);
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "]."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "]."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'p';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "program["[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "program["[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
-          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] & 0xff);
+          outCursor = (int *)((int)outCursor + copyLength);
+          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] & 0xff);
           ch = ']';
           outCursor = (int *)((int)outCursor + iVar10);
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "]."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "]."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97becad4_default;
         }
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
 switchD_97becad4_default:
-        uVar20 = puVar21[iVar22 * 2] >> 0xe & 3;
+        uVar20 = puVar21[loopIndex * 2] >> 0xe & 3;
         if (uVar20 == 1) {
           ch = 't';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "transpose."[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "transpose."[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
 LAB_97bece9c:
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         else if (1 < uVar20) {
           if (uVar20 == 2) {
             ch = 'i';
-            iVar10 = 0;
+            copyIndex = 0;
             do {
-              *(char *)((int)outCursor + iVar10) = ch;
-              iVar12 = iVar10 + 1;
-              ch = "inverse."[iVar10 + 1];
-              iVar10 = iVar12;
+              *(char *)((int)outCursor + copyIndex) = ch;
+              copyLength = copyIndex + 1;
+              ch = "inverse."[copyIndex + 1];
+              copyIndex = copyLength;
             } while (ch != '\0');
           }
           else {
             if (uVar20 != 3) goto LAB_97becea8;
             ch = 'i';
-            iVar10 = 0;
+            copyIndex = 0;
             do {
-              *(char *)((int)outCursor + iVar10) = ch;
-              iVar12 = iVar10 + 1;
-              ch = "invtrans."[iVar10 + 1];
-              iVar10 = iVar12;
+              *(char *)((int)outCursor + copyIndex) = ch;
+              copyLength = copyIndex + 1;
+              ch = "invtrans."[copyIndex + 1];
+              copyIndex = copyLength;
             } while (ch != '\0');
           }
           goto LAB_97bece9c;
         }
 LAB_97becea8:
         ch = 'r';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "row["[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "row["[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
-        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[iVar22 * 2] >> 0xc & 3);
+        outCursor = (int *)((int)outCursor + copyLength);
+        iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,puVar21[loopIndex * 2] >> 0xc & 3);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar10);
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "]"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "]"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
 LAB_97bed34c:
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         goto switchD_97bebb8c_caseD_0;
       case 0x11:
-        pfVar24 = (float *)(program + program[0x1b] * 2 + (puVar21[iVar22 * 2] & 0xffff) * 4);
-        switch(puVar21[iVar22 * 2] >> 0x1a & 7) {
+        pfVar24 = (float *)(program + program[0x1b] * 2 + (puVar21[loopIndex * 2] & 0xffff) * 4);
+        switch(puVar21[loopIndex * 2] >> 0x1a & 7) {
         case 0:
         case 1:
           ch = '{';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "{"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "{"[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
           uVar26 = ((char * (*)())_glp_dtostr)((int)((ulonglong)uVar26 >> 0x20),(int)uVar26,outCursor,
                                (int)outBuf + (outBufCapacity - (int)outCursor),(double)*pfVar24,1e-07,
                                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_fffffd08,
@@ -4781,14 +4799,14 @@ LAB_97bed34c:
                                in_stack_fffffd28);
           iVar12 = (int)((ulonglong)uVar26 >> 0x20);
           ch = ',';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)(iVar12 + iVar10) = ch;
-            iVar13 = iVar10 + 1;
-            ch = ", "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)(iVar12 + copyIndex) = ch;
+            copyLength4 = copyIndex + 1;
+            ch = ", "[copyIndex + 1];
+            copyIndex = copyLength4;
           } while (ch != '\0');
-          outCursor = (int *)(iVar12 + iVar13);
+          outCursor = (int *)(iVar12 + copyLength4);
           uVar26 = ((char * (*)())_glp_dtostr)(iVar12,(int)uVar26,outCursor,
                                (int)outBuf + (outBufCapacity - (int)outCursor),(double)pfVar24[1],1e-07,
                                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_fffffd08,
@@ -4796,14 +4814,14 @@ LAB_97bed34c:
                                in_stack_fffffd28);
           iVar12 = (int)((ulonglong)uVar26 >> 0x20);
           ch = ',';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)(iVar12 + iVar10) = ch;
-            iVar13 = iVar10 + 1;
-            ch = ", "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)(iVar12 + copyIndex) = ch;
+            copyLength4 = copyIndex + 1;
+            ch = ", "[copyIndex + 1];
+            copyIndex = copyLength4;
           } while (ch != '\0');
-          outCursor = (int *)(iVar12 + iVar13);
+          outCursor = (int *)(iVar12 + copyLength4);
           uVar26 = ((char * (*)())_glp_dtostr)(iVar12,(int)uVar26,outCursor,
                                (int)outBuf + (outBufCapacity - (int)outCursor),(double)pfVar24[2],1e-07,
                                in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_fffffd08,
@@ -4811,12 +4829,12 @@ LAB_97bed34c:
                                in_stack_fffffd28);
           iVar12 = (int)((ulonglong)uVar26 >> 0x20);
           ch = ',';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)(iVar12 + iVar10) = ch;
-            iVar13 = iVar10 + 1;
-            ch = ", "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)(iVar12 + copyIndex) = ch;
+            iVar13 = copyIndex + 1;
+            ch = ", "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           outCursor = (int *)(iVar12 + iVar13);
           outCursor = (int *)((char * (*)())_glp_dtostr)(iVar12,(int)uVar26,outCursor,
@@ -4825,74 +4843,74 @@ LAB_97bed34c:
                                         ,in_stack_fffffd08,in_stack_fffffd10,in_stack_fffffd18,
                                         in_stack_fffffd20,in_stack_fffffd28);
           ch = '}';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "}"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "}"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 2:
           ch = '{';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "{-- Fixed constant data not currently supported --}"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            iVar12 = copyIndex + 1;
+            ch = "{-- Fixed constant data not currently supported --}"[copyIndex + 1];
+            copyIndex = iVar12;
           } while (ch != '\0');
           break;
         case 3:
         case 4:
           ch = '{';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "{"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "{"[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
           iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor, *(unsigned int *)pfVar24);
           ch = ',';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = ", "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+            copyLength4 = copyIndex + 1;
+            ch = ", "[copyIndex + 1];
+            copyIndex = copyLength4;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar13 + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength4 + iVar12);
           iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor, ((unsigned int *)pfVar24)[1]);
           ch = ',';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = ", "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+            copyLength4 = copyIndex + 1;
+            ch = ", "[copyIndex + 1];
+            copyIndex = copyLength4;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar13 + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength4 + iVar12);
           iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor, ((unsigned int *)pfVar24)[2]);
           ch = ',';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = ", "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+            iVar13 = copyIndex + 1;
+            ch = ", "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + iVar13 + iVar12);
           iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor, ((unsigned int *)pfVar24)[3]);
           ch = '}';
           outCursor = (int *)((int)outCursor + iVar10);
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "}"[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "}"[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           goto LAB_97bed34c;
         default:
@@ -4901,250 +4919,250 @@ LAB_97bed34c:
         break;
       case 0x12:
         ch = 'n';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "normalscale"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          iVar12 = copyIndex + 1;
+          ch = "normalscale"[copyIndex + 1];
+          copyIndex = iVar12;
         } while (ch != '\0');
       }
       outCursor = (int *)((int)outCursor + iVar12);
 switchD_97bebb8c_caseD_0:
       if (*(int *)(local_84 + (uint)*(ushort *)((int)puVar21 + iVar9 + 6) * 4) == -1) {
         ch = ';';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = ";\n"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = ";\n"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
       }
       else if (local_8c + 1 == local_78[local_90]) {
         ch = '\n';
         local_90 = local_90 + 1;
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "\n};\n"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "\n};\n"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
       }
       else {
         ch = ',';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = ",\n"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = ",\n"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
       }
-      outCursor = (int *)((int)outCursor + iVar10);
+      outCursor = (int *)((int)outCursor + copyLength2);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       bVar1 = bVar3;
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto joined_r0x97beb668;
 LAB_97bed4a8:
-      iVar22 = iVar22 + 1;
-    } while (iVar22 < (int)uVar6);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < (int)uVar6);
   }
   if (local_78 != (int *)0x0) {
     _free(local_78);
     uVar26 = CONCAT44(extraout_r3_00,extraout_r4_05);
   }
   ch = '\n';
-  iVar22 = 0;
+  copyIndex4 = 0;
   do {
-    *(char *)((int)outCursor + iVar22) = ch;
-    iVar9 = iVar22 + 1;
-    ch = "\n"[iVar22 + 1];
-    iVar22 = iVar9;
+    *(char *)((int)outCursor + copyIndex4) = ch;
+    copyLength3 = copyIndex4 + 1;
+    ch = "\n"[copyIndex4 + 1];
+    copyIndex4 = copyLength3;
   } while (ch != '\0');
-  outCursor = (int *)((int)outCursor + iVar9);
+  outCursor = (int *)((int)outCursor + copyLength3);
 LAB_97bed528:
   uVar20 = program[0xc];
-  iVar22 = 0;
+  loopIndex = 0;
   uVar6 = program[0xd];
   bVar1 = bVar3;
   if (0 < (int)uVar20) {
     do {
-      uVar23 = program[uVar6 * 2 + iVar22 * 2] >> 0x10 & 0xf;
+      uVar23 = program[uVar6 * 2 + loopIndex * 2] >> 0x10 & 0xf;
       if (uVar23 == 0) goto LAB_97bedcb4;
-      uVar25 = program[uVar6 * 2 + iVar22 * 2] >> 0x1d;
+      uVar25 = program[uVar6 * 2 + loopIndex * 2] >> 0x1d;
       if (uVar25 == 1) {
         ch = 'L';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "LONG OUTPUT res"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "LONG OUTPUT res"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
 LAB_97bed640:
-        outCursor = (int *)((int)outCursor + iVar10);
+        outCursor = (int *)((int)outCursor + copyLength2);
       }
       else if (uVar25 < 2) {
         if (uVar25 == 0) {
           ch = 'O';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "OUTPUT res"[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "OUTPUT res"[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
           goto LAB_97bed640;
         }
       }
       else if (uVar25 == 2) {
         ch = 'S';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "SHORT OUTPUT res"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "SHORT OUTPUT res"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         goto LAB_97bed640;
       }
-      iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + iVar22 * 8 + uVar6 * 8 + 6));
+      iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + loopIndex * 8 + uVar6 * 8 + 6));
       outCursor = (int *)((int)outCursor + iVar9);
       if (!bVar2) {
-        uVar25 = program[uVar6 * 2 + iVar22 * 2];
+        uVar25 = program[uVar6 * 2 + loopIndex * 2];
         outCursor = (int *)((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar25 >> 0x18 & 3,0,uVar25 >> 0x1a & 7,uVar25 >> 0x1d
                                     );
       }
       ch = ' ';
-      iVar9 = 0;
+      copyIndex2 = 0;
       do {
-        *(char *)((int)outCursor + iVar9) = ch;
-        iVar10 = iVar9 + 1;
-        ch = " = "[iVar9 + 1];
-        iVar9 = iVar10;
+        *(char *)((int)outCursor + copyIndex2) = ch;
+        copyLength2 = copyIndex2 + 1;
+        ch = " = "[copyIndex2 + 1];
+        copyIndex2 = copyLength2;
       } while (ch != '\0');
-      outCursor = (int *)((int)outCursor + iVar10);
+      outCursor = (int *)((int)outCursor + copyLength2);
       switch(uVar23) {
       default:
         goto switchD_97bed6f4_caseD_0;
       case 1:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.position"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.position"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 2:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.fogcoord"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.fogcoord"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 3:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.pointsize"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.pointsize"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 4:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.color"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.color"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
+        outCursor = (int *)((int)outCursor + copyLength2);
         if ((uVar19 == 0x8620) || (uVar19 == 0x8b31)) {
-          if ((program[uVar6 * 2 + iVar22 * 2] & 1) == 0) {
+          if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 0) {
             ch = '.';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = ".front.primary"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = ".front.primary"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
           }
           else {
-            if ((program[uVar6 * 2 + iVar22 * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
+            if ((program[uVar6 * 2 + loopIndex * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
             ch = '.';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = ".back.primary"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = ".back.primary"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
           }
           break;
         }
         if (((uVar19 == 0x8804) || (uVar19 == 0x8b30)) &&
-           (1 < (program[uVar6 * 2 + iVar22 * 2] >> 1 & 7))) {
+           (1 < (program[uVar6 * 2 + loopIndex * 2] >> 1 & 7))) {
           ch = '[';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9) = ch;
-            iVar10 = iVar9 + 1;
-            ch = "["[iVar9 + 1];
-            iVar9 = iVar10;
+            *(char *)((int)outCursor + copyIndex2) = ch;
+            copyLength2 = copyIndex2 + 1;
+            ch = "["[copyIndex2 + 1];
+            copyIndex2 = copyLength2;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar10);
-          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] >> 1 & 7);
+          outCursor = (int *)((int)outCursor + copyLength2);
+          iVar10 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] >> 1 & 7);
           ch = ']';
-          iVar9 = 0;
+          copyIndex2 = 0;
           do {
-            *(char *)((int)outCursor + iVar9 + iVar10) = ch;
-            iVar12 = iVar9 + 1;
-            ch = "]"[iVar9 + 1];
-            iVar9 = iVar12;
+            *(char *)((int)outCursor + copyIndex2 + iVar10) = ch;
+            copyLength = copyIndex2 + 1;
+            ch = "]"[copyIndex2 + 1];
+            copyIndex2 = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12 + iVar10);
+          outCursor = (int *)((int)outCursor + copyLength + iVar10);
         }
         goto switchD_97bed6f4_caseD_0;
       case 5:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.color"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.color"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
+        outCursor = (int *)((int)outCursor + copyLength2);
         if ((uVar19 == 0x8620) || (uVar19 == 0x8b31)) {
-          if ((program[uVar6 * 2 + iVar22 * 2] & 1) == 0) {
+          if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 0) {
             ch = '.';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = ".front.secondary"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = ".front.secondary"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
           }
           else {
-            if ((program[uVar6 * 2 + iVar22 * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
+            if ((program[uVar6 * 2 + loopIndex * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
             ch = '.';
-            iVar9 = 0;
+            copyIndex2 = 0;
             do {
-              *(char *)((int)outCursor + iVar9) = ch;
-              iVar10 = iVar9 + 1;
-              ch = ".back.secondary"[iVar9 + 1];
-              iVar9 = iVar10;
+              *(char *)((int)outCursor + copyIndex2) = ch;
+              copyLength2 = copyIndex2 + 1;
+              ch = ".back.secondary"[copyIndex2 + 1];
+              copyIndex2 = copyLength2;
             } while (ch != '\0');
           }
           break;
@@ -5152,103 +5170,103 @@ LAB_97bed640:
         goto switchD_97bed6f4_caseD_0;
       case 6:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.texcoord["[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.texcoord["[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
-        iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] & 0x1f);
+        outCursor = (int *)((int)outCursor + copyLength2);
+        iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar9);
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "]"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "]"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 7:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.depth"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.depth"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 8:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.eyePosition"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.eyePosition"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 9:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.clipVertex"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.clipVertex"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
         break;
       case 10:
         ch = 'r';
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "result.attrib["[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "result.attrib["[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar10);
-        iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + iVar22 * 2] & 0x1f);
+        outCursor = (int *)((int)outCursor + copyLength2);
+        iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
         ch = ']';
         outCursor = (int *)((int)outCursor + iVar9);
-        iVar9 = 0;
+        copyIndex2 = 0;
         do {
-          *(char *)((int)outCursor + iVar9) = ch;
-          iVar10 = iVar9 + 1;
-          ch = "]"[iVar9 + 1];
-          iVar9 = iVar10;
+          *(char *)((int)outCursor + copyIndex2) = ch;
+          copyLength2 = copyIndex2 + 1;
+          ch = "]"[copyIndex2 + 1];
+          copyIndex2 = copyLength2;
         } while (ch != '\0');
       }
-      outCursor = (int *)((int)outCursor + iVar10);
+      outCursor = (int *)((int)outCursor + copyLength2);
 switchD_97bed6f4_caseD_0:
       ch = ';';
-      iVar9 = 0;
+      copyIndex2 = 0;
       do {
-        *(char *)((int)outCursor + iVar9) = ch;
-        iVar10 = iVar9 + 1;
-        ch = ";\n"[iVar9 + 1];
-        iVar9 = iVar10;
+        *(char *)((int)outCursor + copyIndex2) = ch;
+        copyLength2 = copyIndex2 + 1;
+        ch = ";\n"[copyIndex2 + 1];
+        copyIndex2 = copyLength2;
       } while (ch != '\0');
-      outCursor = (int *)((int)outCursor + iVar10);
+      outCursor = (int *)((int)outCursor + copyLength2);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto joined_r0x97beb668;
 LAB_97bedcb4:
-      iVar22 = iVar22 + 1;
-    } while (iVar22 < (int)uVar20);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < (int)uVar20);
   }
   if ((uVar20 != 0) || (bVar2)) {
     ch = '\n';
-    iVar22 = 0;
+    copyIndex4 = 0;
     do {
-      *(char *)((int)outCursor + iVar22) = ch;
-      iVar9 = iVar22 + 1;
-      ch = "\n"[iVar22 + 1];
-      iVar22 = iVar9;
+      *(char *)((int)outCursor + copyIndex4) = ch;
+      copyLength3 = copyIndex4 + 1;
+      ch = "\n"[copyIndex4 + 1];
+      copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)((int)outCursor + iVar9);
+    outCursor = (int *)((int)outCursor + copyLength3);
   }
   uVar20 = program[0x14];
   iVar22 = 0;
@@ -5266,7 +5284,7 @@ LAB_97bedcb4:
   bVar4 = local_6c == 0;
   if (!bVar4) {
     iVar22 = local_6c << 2;
-    iVar9 = 0;
+    loopIndex2 = 0;
     iVar10 = 0;
     local_74 = _malloc(iVar22);
     _memset(local_74,0,local_6c);
@@ -5284,65 +5302,65 @@ LAB_97bedcb4:
           local_6c = (int)((ulonglong)uVar26 >> 0x20);
           uVar19 = program[uVar6 * 2 + iVar10 * 2];
         }
-        iVar9 = iVar9 + 1;
+        loopIndex2 = loopIndex2 + 1;
         iVar10 = iVar10 + (uVar19 >> 0x1d) + 2;
         bVar4 = local_6c == 0;
-      } while (iVar9 < (int)uVar20);
+      } while (loopIndex2 < (int)uVar20);
     }
   }
-  iVar22 = 0;
+  loopIndex = 0;
   iVar9 = 0;
   if (0 < (int)uVar20) {
     puVar21 = (uint *)(local_68 * 4 + local_74);
     do {
       if (((program[uVar6 * 2 + iVar9 * 2] & 0x3ffff) == 0) && (!bVar2)) {
         ch = 'm';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "main:\n"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "main:\n"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
       }
       if (((!bVar4) && (local_68 < local_6c)) &&
          ((program[uVar6 * 2 + iVar9 * 2] & 0x3ffff) == *puVar21)) {
-        iVar10 = 0;
+        loopIndex3 = 0;
         local_9c = local_9c + -1;
         if (0 < local_9c) {
           do {
             ch = ' ';
-            iVar12 = 0;
+            copyIndex3 = 0;
             do {
-              *(char *)((int)outCursor + iVar12) = ch;
-              iVar13 = iVar12 + 1;
-              ch = "  "[iVar12 + 1];
-              iVar12 = iVar13;
+              *(char *)((int)outCursor + copyIndex3) = ch;
+              copyLength4 = copyIndex3 + 1;
+              ch = "  "[copyIndex3 + 1];
+              copyIndex3 = copyLength4;
             } while (ch != '\0');
-            iVar10 = iVar10 + 1;
-            outCursor = (int *)((int)outCursor + iVar13);
-          } while (iVar10 < local_9c);
+            loopIndex3 = loopIndex3 + 1;
+            outCursor = (int *)((int)outCursor + copyLength4);
+          } while (loopIndex3 < local_9c);
         }
         ch = 'l';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "label_"[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "label_"[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         iVar12 = ((int (*)())_ncpy_97be5f58)(outCursor,local_68);
         ch = ':';
         local_68 = local_68 + 1;
         puVar21 = puVar21 + 1;
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-          iVar13 = iVar10 + 1;
-          ch = ":\n"[iVar10 + 1];
-          iVar10 = iVar13;
+          *(char *)((int)outCursor + copyIndex + iVar12) = ch;
+          iVar13 = copyIndex + 1;
+          ch = ":\n"[copyIndex + 1];
+          copyIndex = iVar13;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + iVar13 + iVar12);
         local_9c = local_9c + 1;
@@ -5373,48 +5391,48 @@ LAB_97bedcb4:
         iVar22 = local_70;
         goto LAB_97bee10c;
       }
-      iVar22 = iVar22 + 1;
+      loopIndex = loopIndex + 1;
       iVar9 = iVar9 + 1;
-    } while (iVar22 < (int)uVar20);
+    } while (loopIndex < (int)uVar20);
   }
   if (!bVar4) {
-    if ((local_68 < local_6c) && (iVar22 + 1 == *(int *)(local_74 + local_68 * 4))) {
+    if ((local_68 < local_6c) && (loopIndex + 1 == *(int *)(local_74 + local_68 * 4))) {
       ch = ' ';
-      iVar22 = 0;
+      copyIndex4 = 0;
       do {
-        *(char *)((int)outCursor + iVar22) = ch;
-        iVar9 = iVar22 + 1;
-        ch = "  label_"[iVar22 + 1];
-        iVar22 = iVar9;
+        *(char *)((int)outCursor + copyIndex4) = ch;
+        copyLength3 = copyIndex4 + 1;
+        ch = "  label_"[copyIndex4 + 1];
+        copyIndex4 = copyLength3;
       } while (ch != '\0');
-      outCursor = (int *)((int)outCursor + iVar9);
+      outCursor = (int *)((int)outCursor + copyLength3);
       iVar9 = ((int (*)())_ncpy_97be5f58)(outCursor,local_68);
       ch = ':';
-      iVar22 = 0;
+      copyIndex4 = 0;
       do {
-        *(char *)((int)outCursor + iVar22 + iVar9) = ch;
-        iVar10 = iVar22 + 1;
-        ch = ":\n"[iVar22 + 1];
-        iVar22 = iVar10;
+        *(char *)((int)outCursor + copyIndex4 + iVar9) = ch;
+        copyLength2 = copyIndex4 + 1;
+        ch = ":\n"[copyIndex4 + 1];
+        copyIndex4 = copyLength2;
       } while (ch != '\0');
-      outCursor = (int *)((int)outCursor + iVar10 + iVar9);
+      outCursor = (int *)((int)outCursor + copyLength2 + iVar9);
     }
     _free(local_74);
     _free(local_70);
     uVar26 = CONCAT44(extraout_r3_01,extraout_r4_07);
   }
   ch = 'E';
-  iVar22 = 0;
+  copyIndex4 = 0;
   do {
-    *(char *)((int)outCursor + iVar22) = ch;
-    iVar9 = iVar22 + 1;
-    ch = "END\n"[iVar22 + 1];
-    iVar22 = iVar9;
+    *(char *)((int)outCursor + copyIndex4) = ch;
+    copyLength3 = copyIndex4 + 1;
+    ch = "END\n"[copyIndex4 + 1];
+    copyIndex4 = copyLength3;
   } while (ch != '\0');
   uVar6 = program[0x18];
-  iVar22 = 0;
+  loopIndex = 0;
   uVar19 = program[0x19];
-  outCursor = (int *)((int)outCursor + iVar9);
+  outCursor = (int *)((int)outCursor + copyLength3);
   iVar9 = 0;
   if (0 < (int)uVar6) {
     local_60 = "o intialize the Preprocessor";
@@ -5424,111 +5442,111 @@ LAB_97bedcb4:
       iVar10 = 0;
       do {
         *(char *)((int)outCursor + iVar10) = ch;
-        iVar12 = iVar10 + 1;
+        copyLength = iVar10 + 1;
         ch = "STATE "[iVar10 + 1];
-        iVar10 = iVar12;
+        iVar10 = copyLength;
       } while (ch != '\0');
-      outCursor = (int *)((int)outCursor + iVar12);
+      outCursor = (int *)((int)outCursor + copyLength);
       switch(uVar20 >> 0x18 & 7) {
       case 0:
         ch = 'A';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "ALPHA_TEST "[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "ALPHA_TEST "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
         switch(program[uVar19 * 2 + iVar9 * 2] & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_NEVER "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_NEVER "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_LESS "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_LESS "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_EQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_EQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_LEQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_LEQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_GREATER "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_GREATER "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_NOTEQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_NOTEQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_GEQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_GEQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         default:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_ALWAYS "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_ALWAYS "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
         }
         ch = 'r';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar13 + iVar12) = ch;
-          iVar14 = iVar10 + 1;
-          ch = "ref="[iVar10 + 1];
-          iVar10 = iVar14;
+          *(char *)((int)outCursor + copyIndex + iVar13 + copyLength) = ch;
+          copyLength5 = copyIndex + 1;
+          ch = "ref="[copyIndex + 1];
+          copyIndex = copyLength5;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar14 + iVar13 + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength5 + iVar13 + copyLength);
         outCursor = (int *)((char * (*)())_glp_dtostr)((int)((ulonglong)uVar26 >> 0x20),(int)uVar26,outCursor,
                                       (int)outBuf + (outBufCapacity - (int)outCursor),
                                       (double)GH_U2F((unsigned int)(program[uVar19 * 2 + iVar9 * 2 + 1])),1e-07,in_f3
@@ -5538,378 +5556,378 @@ LAB_97bedcb4:
         goto switchD_97bee2f0_default;
       case 1:
         ch = 'S';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "STENCIL_TEST func="[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "STENCIL_TEST func="[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0xc & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_NEVER "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_NEVER "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_LESS "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_LESS "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_EQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_EQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_LEQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_LEQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_GREATER "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_GREATER "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_NOTEQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_NOTEQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_GEQUAL "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_GEQUAL "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
           break;
         default:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10 + iVar12) = ch;
-            iVar13 = iVar10 + 1;
-            ch = "PP_ALWAYS "[iVar10 + 1];
-            iVar10 = iVar13;
+            *(char *)((int)outCursor + copyIndex + copyLength) = ch;
+            iVar13 = copyIndex + 1;
+            ch = "PP_ALWAYS "[copyIndex + 1];
+            copyIndex = iVar13;
           } while (ch != '\0');
         }
         ch = 'o';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10 + iVar13 + iVar12) = ch;
-          iVar14 = iVar10 + 1;
-          ch = "opfail="[iVar10 + 1];
-          iVar10 = iVar14;
+          *(char *)((int)outCursor + copyIndex + iVar13 + copyLength) = ch;
+          copyLength5 = copyIndex + 1;
+          ch = "opfail="[copyIndex + 1];
+          copyIndex = copyLength5;
         } while (ch != '\0');
-        puVar18 = (undefined1 *)((int)outCursor + iVar14 + iVar13 + iVar12);
+        puVar18 = (undefined1 *)((int)outCursor + copyLength5 + iVar13 + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0xf & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_ZERO "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_ZERO "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_KEEP "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_KEEP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_REPLACE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_REPLACE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INCR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INCR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_DECR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_DECR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INVERT "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INVERT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INCR_WRAP "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INCR_WRAP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_DECR_WRAP "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_DECR_WRAP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97bee894_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97bee894_default:
         ch = 'o';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "opzfail="[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "opzfail="[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x12 & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_ZERO "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_ZERO "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_KEEP "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_KEEP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_REPLACE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_REPLACE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INCR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INCR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_DECR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_DECR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INVERT "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INVERT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INCR_WRAP "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INCR_WRAP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_DECR_WRAP "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_DECR_WRAP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97beeaec_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97beeaec_default:
         ch = 'o';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "opzpass="[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "opzpass="[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + iVar12);
+        outCursor = (int *)(puVar18 + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x15 & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_ZERO "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_ZERO "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_KEEP "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_KEEP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_REPLACE "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_REPLACE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INCR "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INCR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_DECR "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_DECR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INVERT "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INVERT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_INCR_WRAP "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_INCR_WRAP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_STENCIL_DECR_WRAP "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_STENCIL_DECR_WRAP "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97beed44_default;
         }
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
 switchD_97beed44_default:
         _sprintf(&local_2b0,"ref= %#x mask = %#x ",program[uVar19 * 2 + iVar9 * 2 + 1] >> 0x18,
                  program[uVar19 * 2 + iVar9 * 2 + 1] >> 8 & 0xff);
@@ -5926,877 +5944,877 @@ switchD_97beed44_default:
         iVar10 = 0;
         do {
           *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
+          copyLength = iVar10 + 1;
           ch = "DEPTH_TEST func="[iVar10 + 1];
-          iVar10 = iVar12;
+          iVar10 = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] & 7) {
         case 0:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_NEVER "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_NEVER "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LESS "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LESS "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_EQUAL "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_EQUAL "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LEQUAL "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LEQUAL "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_GREATER "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_GREATER "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_NOTEQUAL "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_NOTEQUAL "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_GEQUAL "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_GEQUAL "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         default:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_ALWAYS "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_ALWAYS "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
         }
         break;
       case 3:
         ch = 'B';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "BLENDING \n\talpha equ = "[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "BLENDING \n\talpha equ = "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = (undefined1 *)((int)outCursor + iVar12);
+        puVar18 = (undefined1 *)((int)outCursor + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x13 & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_ADD "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_ADD "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_SUBTRACT "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_SUBTRACT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_REVERSE_SUBTRACT "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_REVERSE_SUBTRACT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_MIN "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_MIN "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_MAX "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_MAX "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97bef244_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97bef244_default:
         ch = '\n';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "\n\trgb equ = "[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "\n\trgb equ = "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x10 & 7) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_ADD "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_ADD "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_SUBTRACT "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_SUBTRACT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_REVERSE_SUBTRACT "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_REVERSE_SUBTRACT "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_MIN "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_MIN "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_FUNC_MAX "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_FUNC_MAX "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97bef3e8_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97bef3e8_default:
         ch = '\n';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "\n\tsrc = "[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "\n\tsrc = "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] & 0xf) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ZERO "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ZERO "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_DST_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_DST_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 8:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_CONSTANT_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 9:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 10:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_CONSTANT_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xb:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xc:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_DST_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_DST_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xd:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xe:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97bef58c_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97bef58c_default:
         ch = '\n';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "\n\tsrcA = "[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "\n\tsrcA = "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 4 & 0xf) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ZERO "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ZERO "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_DST_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_DST_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 8:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_CONSTANT_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 9:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 10:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_CONSTANT_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xb:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xc:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_DST_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_DST_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xd:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xe:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97bef988_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97bef988_default:
         ch = '\n';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
-          ch = "\n\tdst = "[iVar10 + 1];
-          iVar10 = iVar12;
+          puVar18[copyIndex] = ch;
+          copyLength = copyIndex + 1;
+          ch = "\n\tdst = "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 8 & 0xf) {
         case 0:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ZERO "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ZERO "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_DST_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_DST_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 8:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_CONSTANT_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 9:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 10:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_CONSTANT_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xb:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xc:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_DST_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_DST_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xd:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         case 0xe:
           ch = 'P';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            puVar18[iVar10] = ch;
-            iVar12 = iVar10 + 1;
-            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[iVar10 + 1];
-            iVar10 = iVar12;
+            puVar18[copyIndex] = ch;
+            copyLength = copyIndex + 1;
+            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
           break;
         default:
           goto switchD_97befd84_default;
         }
-        puVar18 = puVar18 + iVar12;
+        puVar18 = puVar18 + copyLength;
 switchD_97befd84_default:
         ch = '\n';
         iVar10 = 0;
         do {
           puVar18[iVar10] = ch;
-          iVar12 = iVar10 + 1;
+          copyLength = iVar10 + 1;
           ch = "\n\tdstA = "[iVar10 + 1];
-          iVar10 = iVar12;
+          iVar10 = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + iVar12);
+        outCursor = (int *)(puVar18 + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0xc & 0xf) {
         case 0:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ZERO "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ZERO "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_SRC_COLOR "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_SRC_COLOR "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_SRC_ALPHA "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_SRC_ALPHA "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_DST_ALPHA "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_DST_ALPHA "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 8:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_CONSTANT_COLOR "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 9:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 10:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_CONSTANT_ALPHA "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xb:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xc:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_DST_COLOR "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_DST_COLOR "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xd:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xe:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         default:
@@ -6805,12 +6823,12 @@ switchD_97befd84_default:
         break;
       case 4:
         ch = 'D';
-        iVar12 = 0;
+        copyIndex3 = 0;
         do {
-          *(char *)((int)outCursor + iVar12) = ch;
-          iVar10 = iVar12 + 1;
-          ch = "DITHERING ENABLED"[iVar12 + 1];
-          iVar12 = iVar10;
+          *(char *)((int)outCursor + copyIndex3) = ch;
+          iVar10 = copyIndex3 + 1;
+          ch = "DITHERING ENABLED"[copyIndex3 + 1];
+          copyIndex3 = iVar10;
         } while (ch != '\0');
         break;
       case 5:
@@ -6818,170 +6836,170 @@ switchD_97befd84_default:
         iVar10 = 0;
         do {
           *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
+          copyLength = iVar10 + 1;
           ch = "LOGIC_OP "[iVar10 + 1];
-          iVar10 = iVar12;
+          iVar10 = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] & 0xf) {
         case 0:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_CLEAR"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_CLEAR"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 1:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_SET"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_SET"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 2:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_COPY"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_COPY"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 3:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_COPY_INVERTED"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_COPY_INVERTED"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 4:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_NOOP"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_NOOP"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 5:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_INVERT"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_INVERT"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 6:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_AND"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_AND"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 7:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_NAND"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_NAND"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 8:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_OR"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_OR"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 9:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_NOR"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_NOR"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 10:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_XOR"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_XOR"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xb:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_EQUIV"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_EQUIV"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xc:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_AND_REVERSE"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_AND_REVERSE"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xd:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_AND_INVERTED"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_AND_INVERTED"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xe:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_OR_REVERSE"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_OR_REVERSE"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         case 0xf:
           ch = 'P';
-          iVar12 = 0;
+          copyIndex3 = 0;
           do {
-            *(char *)((int)outCursor + iVar12) = ch;
-            iVar10 = iVar12 + 1;
-            ch = "PP_LOGIC_OR_INVERTED"[iVar12 + 1];
-            iVar12 = iVar10;
+            *(char *)((int)outCursor + copyIndex3) = ch;
+            iVar10 = copyIndex3 + 1;
+            ch = "PP_LOGIC_OR_INVERTED"[copyIndex3 + 1];
+            copyIndex3 = iVar10;
           } while (ch != '\0');
           break;
         default:
@@ -6990,68 +7008,68 @@ switchD_97befd84_default:
         break;
       case 6:
         ch = 'B';
-        iVar10 = 0;
+        copyIndex = 0;
         do {
-          *(char *)((int)outCursor + iVar10) = ch;
-          iVar12 = iVar10 + 1;
-          ch = "BUFFER_MASK "[iVar10 + 1];
-          iVar10 = iVar12;
+          *(char *)((int)outCursor + copyIndex) = ch;
+          copyLength = copyIndex + 1;
+          ch = "BUFFER_MASK "[copyIndex + 1];
+          copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)((int)outCursor + iVar12);
+        outCursor = (int *)((int)outCursor + copyLength);
         if ((program[uVar19 * 2 + iVar9 * 2] & 0x20000) == 0) {
           ch = 'R';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "RED MASKED "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "RED MASKED "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         if ((program[uVar19 * 2 + iVar9 * 2] & 0x40000) == 0) {
           ch = 'G';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "GREEN MASKED "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "GREEN MASKED "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         if ((program[uVar19 * 2 + iVar9 * 2] & 0x80000) == 0) {
           ch = 'B';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "BLUE MASKED "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "BLUE MASKED "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         if ((program[uVar19 * 2 + iVar9 * 2] & 0x100000) == 0) {
           ch = 'A';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "ALPHA MASKED "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "ALPHA MASKED "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         if ((program[uVar19 * 2 + iVar9 * 2] & 0x10000) == 0) {
           ch = 'D';
-          iVar10 = 0;
+          copyIndex = 0;
           do {
-            *(char *)((int)outCursor + iVar10) = ch;
-            iVar12 = iVar10 + 1;
-            ch = "DEPTH MASKED "[iVar10 + 1];
-            iVar10 = iVar12;
+            *(char *)((int)outCursor + copyIndex) = ch;
+            copyLength = copyIndex + 1;
+            ch = "DEPTH MASKED "[copyIndex + 1];
+            copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = (int *)((int)outCursor + iVar12);
+          outCursor = (int *)((int)outCursor + copyLength);
         }
         if (*(char *)((int)program + iVar9 * 8 + uVar19 * 8 + 2) != -1) {
           _sprintf(local_1b0,"STENCIL MASK = %0x",program[uVar19 * 2 + iVar9 * 2] >> 8 & 0xff);
@@ -7079,9 +7097,9 @@ switchD_97bee2f0_default:
       outCursor = (int *)((int)outCursor + iVar10);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto joined_r0x97beb668;
-      iVar22 = iVar22 + 1;
+      loopIndex = loopIndex + 1;
       iVar9 = iVar9 + 1;
-    } while (iVar22 < (int)uVar6);
+    } while (loopIndex < (int)uVar6);
   }
   piVar15 = (int *)((int)outCursor + 1);
   *(undefined1 *)outCursor = 0;
@@ -7097,8 +7115,8 @@ switchD_97bee2f0_default:
     _free(local_7c);
   }
   if (0 < (int)outCursor - (int)outBuf) {
-    pvVar17 = (void *)_realloc(outBuf,(int)outCursor - (int)outBuf);
-    return pvVar17;
+    allocation = (void *)_realloc(outBuf,(int)outCursor - (int)outBuf);
+    return allocation;
   }
   _free(outBuf);
   return (void *)0x0;
@@ -7125,20 +7143,20 @@ int _PPStreamChunkCreateWithType(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  int iVar1;
-  undefined1 *puVar2;
+  int chunkAllocationSize;
+  undefined1 *allocation;
   
-  iVar1 = _GetChunkAllocationSize(param_1,param_2);
-  puVar2 = (undefined1 *)_calloc(iVar1 + 0xc,1);
-  _memset(puVar2,0,iVar1 + 0xc);
-  *puVar2 = (char)param_1;
+  chunkAllocationSize = _GetChunkAllocationSize(param_1,param_2);
+  allocation = (undefined1 *)_calloc(chunkAllocationSize + 0xc,1);
+  _memset(allocation,0,chunkAllocationSize + 0xc);
+  *allocation = (char)param_1;
   if (param_1 == 8) {
-    *(undefined4 *)(puVar2 + 0x40) = param_2;
+    *(undefined4 *)(allocation + 0x40) = param_2;
   }
   else if (param_1 == 0xb) {
-    *(undefined4 *)(puVar2 + 0x10) = param_2;
+    *(undefined4 *)(allocation + 0x10) = param_2;
   }
-  return puVar2;
+  return allocation;
 }
 
 /* _PPStreamChunkCompare @ 0x97bf0e10 (212 bytes) */
@@ -7147,7 +7165,7 @@ int _PPStreamChunkCompare(stream, param_2)
   char *param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int compareResult;
   undefined4 uVar3;
   
   uVar1 = 1;
@@ -7178,9 +7196,9 @@ int _PPStreamChunkCompare(stream, param_2)
     default:
       return 1;
     }
-    iVar2 = _memcmp(stream + 0xc,param_2 + 0xc,uVar3);
+    compareResult = _memcmp(stream + 0xc,param_2 + 0xc,uVar3);
     uVar1 = 1;
-    if (iVar2 == 0) {
+    if (compareResult == 0) {
       uVar1 = 0;
     }
   }
@@ -7307,59 +7325,59 @@ int _PPStreamDuplicate(stream)
 {
   int *piVar1;
   undefined4 *puVar2;
-  undefined4 uVar3;
+  undefined4 chunk;
   int iVar4;
   
   puVar2 = (undefined4 *)_PPStreamCreate();
   piVar1 = (int *)stream[1];
   *puVar2 = *stream;
   for (iVar4 = *piVar1; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[1],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[1],chunk);
   }
   for (iVar4 = *(int *)stream[2]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[2],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[2],chunk);
   }
   for (iVar4 = *(int *)stream[3]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[3],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[3],chunk);
   }
   for (iVar4 = *(int *)stream[4]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[4],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[4],chunk);
   }
   for (iVar4 = *(int *)stream[5]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[5],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[5],chunk);
   }
   for (iVar4 = *(int *)stream[6]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[6],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[6],chunk);
   }
   for (iVar4 = *(int *)stream[7]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[7],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[7],chunk);
   }
   for (iVar4 = *(int *)stream[8]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[8],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[8],chunk);
   }
   for (iVar4 = *(int *)stream[9]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[9],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[9],chunk);
   }
   for (iVar4 = *(int *)stream[0xb]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[0xb],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[0xb],chunk);
   }
   for (iVar4 = *(int *)stream[10]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[10],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[10],chunk);
   }
   for (iVar4 = *(int *)stream[0xc]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[0xc],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[0xc],chunk);
   }
   return puVar2;
 }
@@ -7369,19 +7387,19 @@ int _PPStreamAddTempUsageArray(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  puVar1 = (undefined1 *)_calloc(0x14,1);
+  allocation = (undefined1 *)_calloc(0x14,1);
   uVar4 = param_2[1];
   uVar2 = *(undefined4 *)(param_1 + 8);
   uVar3 = *param_2;
-  *puVar1 = 6;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 6;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  *(undefined4 *)(allocation + 0x10) = uVar4;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamAddAddressUsage @ 0x97bf1390 (84 bytes) */
@@ -7389,16 +7407,16 @@ int _PPStreamAddAddressUsage(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   
-  puVar1 = (undefined1 *)_calloc(0x10,1);
+  allocation = (undefined1 *)_calloc(0x10,1);
   uVar3 = *param_2;
   uVar2 = *(undefined4 *)(param_1 + 0xc);
-  *puVar1 = 1;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 1;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamAddParamBindingArray @ 0x97bf13e4 (92 bytes) */
@@ -7406,19 +7424,19 @@ int _PPStreamAddParamBindingArray(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  puVar1 = (undefined1 *)_calloc(0x14,1);
+  allocation = (undefined1 *)_calloc(0x14,1);
   uVar4 = param_2[1];
   uVar2 = *(undefined4 *)(param_1 + 0x14);
   uVar3 = *param_2;
-  *puVar1 = 5;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 5;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  *(undefined4 *)(allocation + 0x10) = uVar4;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamInsertOperationBeforeChunk @ 0x97bf1440 (288 bytes) */
@@ -7429,10 +7447,11 @@ int _PPStreamInsertOperationBeforeChunk(stream, param_2, param_3, param_4, param
   int param_4;
   int param_5;
 {
+  int maxIndex;
   uint uVar1;
   uint uVar2;
   int iVar3;
-  undefined1 *puVar4;
+  undefined1 *allocation;
   int iVar5;
   
   iVar5 = *(int *)(param_2 + 0x34);
@@ -7440,30 +7459,30 @@ int _PPStreamInsertOperationBeforeChunk(stream, param_2, param_3, param_4, param
   if (iVar5 != 0) {
     iVar3 = iVar5 + 0x39;
   }
-  puVar4 = (undefined1 *)_calloc(iVar3 + 0xc,1);
-  *puVar4 = 8;
-  _memcpy(puVar4 + 0xc,param_2,0x38);
+  allocation = (undefined1 *)_calloc(iVar3 + 0xc,1);
+  *allocation = 8;
+  _memcpy(allocation + 0xc,param_2,0x38);
   if ((iVar5 != 0) && (param_3 != 0)) {
-    _memmove(puVar4 + 0x44,param_3,iVar5);
-    puVar4[iVar5 + 0x44] = 0;
+    _memmove(allocation + 0x44,param_3,iVar5);
+    allocation[iVar5 + 0x44] = 0;
   }
   if (param_4 == 0) {
-    iVar3 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
-    uVar1 = iVar3 + 1U & 0x3ffff | *(uint *)(puVar4 + 0xc) & 0xfffc0000;
+    maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
+    uVar1 = maxIndex + 1U & 0x3ffff | *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
   else {
-    uVar1 = *(uint *)(puVar4 + 0xc) & 0xfffc0000;
+    uVar1 = *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
-  *(uint *)(puVar4 + 0xc) = uVar1;
+  *(uint *)(allocation + 0xc) = uVar1;
   if (param_5 != 0) {
     uVar1 = *(uint *)(param_5 + 0xc);
-    uVar2 = *(uint *)(puVar4 + 0xc);
+    uVar2 = *(uint *)(allocation + 0xc);
     *(uint *)(param_5 + 0xc) =
          uVar2 & 0x3ffff | (uVar2 & 0xe3ffffff) >> 3 & 0x1c000000 | uVar1 & 0xe3fc0000;
-    *(uint *)(puVar4 + 0xc) = uVar1 & 0x3ffff | (uVar1 >> 0x1a & 7) << 0x1a | uVar2 & 0xe3fc0000;
+    *(uint *)(allocation + 0xc) = uVar1 & 0x3ffff | (uVar1 >> 0x1a & 7) << 0x1a | uVar2 & 0xe3fc0000;
   }
-  ((int (*)())_PPStreamChunkListInsertChunkBeforeChunk)(*(undefined4 *)(stream + 0x20),puVar4,param_5);
-  return puVar4;
+  ((int (*)())_PPStreamChunkListInsertChunkBeforeChunk)(*(undefined4 *)(stream + 0x20),allocation,param_5);
+  return allocation;
 }
 
 /* _PPStreamInsertOperationAfterChunk @ 0x97bf1560 (236 bytes) */
@@ -7474,9 +7493,10 @@ int _PPStreamInsertOperationAfterChunk(stream, param_2, param_3, param_4, param_
   int param_4;
   undefined4 param_5;
 {
+  int maxIndex;
   uint uVar1;
   int iVar2;
-  undefined1 *puVar3;
+  undefined1 *allocation;
   int iVar4;
   
   iVar4 = *(int *)(param_2 + 0x34);
@@ -7484,23 +7504,23 @@ int _PPStreamInsertOperationAfterChunk(stream, param_2, param_3, param_4, param_
   if (iVar4 != 0) {
     iVar2 = iVar4 + 0x39;
   }
-  puVar3 = (undefined1 *)_calloc(iVar2 + 0xc,1);
-  *puVar3 = 8;
-  _memcpy(puVar3 + 0xc,param_2,0x38);
+  allocation = (undefined1 *)_calloc(iVar2 + 0xc,1);
+  *allocation = 8;
+  _memcpy(allocation + 0xc,param_2,0x38);
   if ((iVar4 != 0) && (param_3 != 0)) {
-    _memmove(puVar3 + 0x44,param_3,iVar4);
-    puVar3[iVar4 + 0x44] = 0;
+    _memmove(allocation + 0x44,param_3,iVar4);
+    allocation[iVar4 + 0x44] = 0;
   }
   if (param_4 == 0) {
-    iVar2 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
-    uVar1 = iVar2 + 1U & 0x3ffff | *(uint *)(puVar3 + 0xc) & 0xfffc0000;
+    maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
+    uVar1 = maxIndex + 1U & 0x3ffff | *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
   else {
-    uVar1 = *(uint *)(puVar3 + 0xc) & 0xfffc0000;
+    uVar1 = *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
-  *(uint *)(puVar3 + 0xc) = uVar1;
-  ((int (*)())_PPStreamChunkListInsertChunkAfterChunk)(*(undefined4 *)(stream + 0x20),puVar3,param_5);
-  return puVar3;
+  *(uint *)(allocation + 0xc) = uVar1;
+  ((int (*)())_PPStreamChunkListInsertChunkAfterChunk)(*(undefined4 *)(stream + 0x20),allocation,param_5);
+  return allocation;
 }
 
 /* _PPStreamAddLabel @ 0x97bf164c (128 bytes) */
@@ -7509,20 +7529,20 @@ int _PPStreamAddLabel(stream, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
-  int iVar3;
+  int maxIndex;
   
-  puVar1 = (undefined1 *)_calloc(param_3 + 0x15,1);
+  allocation = (undefined1 *)_calloc(param_3 + 0x15,1);
   uVar2 = *(undefined4 *)(stream + 0x20);
-  *puVar1 = 0xb;
-  *(int *)(puVar1 + 0x10) = param_3;
-  iVar3 = _PPStreamChunkListGetMaxIndex(uVar2);
-  *(int *)(puVar1 + 0xc) = iVar3 + 1;
-  _memmove(puVar1 + 0x14,param_2,param_3);
+  *allocation = 0xb;
+  *(int *)(allocation + 0x10) = param_3;
+  maxIndex = _PPStreamChunkListGetMaxIndex(uVar2);
+  *(int *)(allocation + 0xc) = maxIndex + 1;
+  _memmove(allocation + 0x14,param_2,param_3);
   uVar2 = *(undefined4 *)(stream + 0x24);
-  puVar1[param_3 + 0x14] = 0;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  allocation[param_3 + 0x14] = 0;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamRemoveLabelsAtOperationIndex @ 0x97bf16cc (96 bytes) */
@@ -7548,19 +7568,19 @@ int _PPStreamAddRasterOp(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  puVar1 = (undefined1 *)_calloc(0x14,1);
+  allocation = (undefined1 *)_calloc(0x14,1);
   uVar4 = param_2[1];
   uVar2 = *(undefined4 *)(param_1 + 0x28);
   uVar3 = *param_2;
-  *puVar1 = 9;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 9;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  *(undefined4 *)(allocation + 0x10) = uVar4;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamAttachStream @ 0x97bf1788 (1212 bytes) */
@@ -7572,140 +7592,140 @@ int _PPStreamAttachStream(stream, param_2)
   uint uVar2;
   undefined4 uVar3;
   uint uVar4;
-  undefined1 *puVar5;
+  undefined1 *allocation;
   undefined1 *puVar6;
-  uint uVar7;
+  uint loopIndex;
   uint *puVar8;
   undefined4 *puVar9;
   uint uVar10;
   
-  uVar7 = 0;
+  loopIndex = 0;
   *stream = *param_2;
   if (param_2[6] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x10,1);
-      *(uint *)(puVar5 + 0xc) = uVar7;
-      *puVar5 = 1;
-      uVar7 = uVar7 + 1;
-      _PPStreamChunkListAddChunk(stream[3],puVar5);
-    } while (uVar7 < (uint)param_2[6]);
+      allocation = (undefined1 *)_calloc(0x10,1);
+      *(uint *)(allocation + 0xc) = loopIndex;
+      *allocation = 1;
+      loopIndex = loopIndex + 1;
+      _PPStreamChunkListAddChunk(stream[3],allocation);
+    } while (loopIndex < (uint)param_2[6]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[5] * 2;
   if (param_2[4] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x1c,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 0;
+      allocation = (undefined1 *)_calloc(0x1c,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 0;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[1],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[1],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[4]);
+    } while (loopIndex < (uint)param_2[4]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[9] * 2;
   if (param_2[8] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 2;
+      allocation = (undefined1 *)_calloc(0x14,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 2;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[6],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[6],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[8]);
+    } while (loopIndex < (uint)param_2[8]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0xb] * 2;
   if (param_2[10] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x1c,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 3;
+      allocation = (undefined1 *)_calloc(0x1c,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 3;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[4],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[4],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[10]);
+    } while (loopIndex < (uint)param_2[10]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0xd] * 2;
   if (param_2[0xc] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 4;
+      allocation = (undefined1 *)_calloc(0x14,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 4;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[7],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[7],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[0xc]);
+    } while (loopIndex < (uint)param_2[0xc]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0xf] * 2;
   if (param_2[0xe] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 5;
+      allocation = (undefined1 *)_calloc(0x14,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 5;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[5],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[5],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[0xe]);
+    } while (loopIndex < (uint)param_2[0xe]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0x11] * 2;
   if (param_2[0x10] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 6;
+      allocation = (undefined1 *)_calloc(0x14,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 6;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[2],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[2],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[0x10]);
+    } while (loopIndex < (uint)param_2[0x10]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0x13] * 2;
   if (param_2[0x12] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 7;
+      allocation = (undefined1 *)_calloc(0x14,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 7;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[0xc],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[0xc],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[0x12]);
+    } while (loopIndex < (uint)param_2[0x12]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar8 = param_2 + param_2[0x15] * 2;
   if (param_2[0x14] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x44,1);
-      *puVar5 = 8;
-      *(undefined4 *)(puVar5 + 0x40) = 0;
+      allocation = (undefined1 *)_calloc(0x44,1);
+      *allocation = 8;
+      *(undefined4 *)(allocation + 0x40) = 0;
       uVar2 = puVar8[1];
       uVar10 = *puVar8 >> 0x1d;
-      *(uint *)(puVar5 + 0xc) = *puVar8;
-      *(uint *)(puVar5 + 0x10) = uVar2;
+      *(uint *)(allocation + 0xc) = *puVar8;
+      *(uint *)(allocation + 0x10) = uVar2;
       puVar1 = puVar8 + 2;
       uVar2 = puVar8[3];
       puVar8 = puVar8 + 4;
-      *(uint *)(puVar5 + 0x14) = *puVar1;
-      *(uint *)(puVar5 + 0x18) = uVar2;
+      *(uint *)(allocation + 0x14) = *puVar1;
+      *(uint *)(allocation + 0x18) = uVar2;
       if (uVar10 != 0) {
-        puVar6 = puVar5 + 0x10;
+        puVar6 = allocation + 0x10;
         do {
           uVar2 = *puVar8;
           uVar4 = puVar8[1];
@@ -7716,38 +7736,38 @@ int _PPStreamAttachStream(stream, param_2)
           uVar10 = uVar10 - 1;
         } while (uVar10 != 0);
       }
-      uVar7 = uVar7 + 1;
-      _PPStreamChunkListAddChunk(stream[8],puVar5);
-    } while (uVar7 < (uint)param_2[0x14]);
+      loopIndex = loopIndex + 1;
+      _PPStreamChunkListAddChunk(stream[8],allocation);
+    } while (loopIndex < (uint)param_2[0x14]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0x19] * 2;
   if (param_2[0x18] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 9;
+      allocation = (undefined1 *)_calloc(0x14,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 9;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[10],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[10],allocation);
       puVar9 = puVar9 + 2;
-    } while (uVar7 < (uint)param_2[0x18]);
+    } while (loopIndex < (uint)param_2[0x18]);
   }
-  uVar7 = 0;
+  loopIndex = 0;
   puVar9 = param_2 + param_2[0x1b] * 2;
   if (param_2[0x1a] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x1c,1);
-      uVar7 = uVar7 + 1;
-      *puVar5 = 10;
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = puVar9[1];
-      *(undefined4 *)(puVar5 + 0x14) = puVar9[2];
-      *(undefined4 *)(puVar5 + 0x18) = puVar9[3];
+      allocation = (undefined1 *)_calloc(0x1c,1);
+      loopIndex = loopIndex + 1;
+      *allocation = 10;
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = puVar9[1];
+      *(undefined4 *)(allocation + 0x14) = puVar9[2];
+      *(undefined4 *)(allocation + 0x18) = puVar9[3];
       puVar9 = puVar9 + 4;
-      _PPStreamChunkListAddChunk(stream[0xb],puVar5);
-    } while (uVar7 < (uint)param_2[0x1a]);
+      _PPStreamChunkListAddChunk(stream[0xb],allocation);
+    } while (loopIndex < (uint)param_2[0x1a]);
   }
   return 0;
 }
@@ -7816,7 +7836,7 @@ int _PPStreamRenumberOperandIndices(param_1, param_2, param_3)
 {
   bool bVar1;
   uint uVar2;
-  int iVar3;
+  int loopIndex;
   int iVar4;
   byte bVar5;
   int iVar6;
@@ -7827,7 +7847,7 @@ int _PPStreamRenumberOperandIndices(param_1, param_2, param_3)
   }
   do {
     uVar2 = *(uint *)(iVar6 + 0xc);
-    iVar3 = 0;
+    loopIndex = 0;
     if (uVar2 >> 0x1d != 0) {
       bVar5 = *param_2;
       iVar4 = iVar6 + 0x10;
@@ -7880,9 +7900,9 @@ LAB_97bf1ea0:
           }
         }
 LAB_97bf1eb4:
-        iVar3 = iVar3 + 1;
+        loopIndex = loopIndex + 1;
         iVar4 = iVar4 + 8;
-      } while (iVar3 < (int)(uVar2 >> 0x1d));
+      } while (loopIndex < (int)(uVar2 >> 0x1d));
     }
     iVar6 = *(int *)(iVar6 + 8);
     if (iVar6 == 0) {
@@ -8007,52 +8027,53 @@ int _PPStreamChangeBranchTargets(stream, param_2, param_3)
 int _PPStreamPackIndices(stream)
   int stream;
 {
+  int loopIndex2;
   uint uVar1;
-  uint uVar2;
+  uint loopIndex;
   int iVar3;
   int iVar4;
   
-  uVar2 = 0;
+  loopIndex = 0;
   for (iVar3 = **(int **)(stream + 4); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-    if (*(ushort *)(iVar3 + 0x12) != uVar2) {
-      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,uVar2);
-      ((int (*)())_renumberTempArrayIndices)(**(undefined4 **)(stream + 8),(uint)*(ushort *)(iVar3 + 0x12),uVar2);
-      *(short *)(iVar3 + 0x12) = (short)uVar2;
+    if (*(ushort *)(iVar3 + 0x12) != loopIndex) {
+      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,loopIndex);
+      ((int (*)())_renumberTempArrayIndices)(**(undefined4 **)(stream + 8),(uint)*(ushort *)(iVar3 + 0x12),loopIndex);
+      *(short *)(iVar3 + 0x12) = (short)loopIndex;
     }
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
   }
-  iVar3 = 0;
+  loopIndex2 = 0;
   for (iVar4 = **(int **)(stream + 0xc); iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    if (*(int *)(iVar4 + 0xc) != iVar3) {
-      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar4,iVar3);
-      *(int *)(iVar4 + 0xc) = iVar3;
+    if (*(int *)(iVar4 + 0xc) != loopIndex2) {
+      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar4,loopIndex2);
+      *(int *)(iVar4 + 0xc) = loopIndex2;
     }
-    iVar3 = iVar3 + 1;
+    loopIndex2 = loopIndex2 + 1;
   }
-  uVar2 = 0;
+  loopIndex = 0;
   for (iVar3 = **(int **)(stream + 0x10); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-    if (*(ushort *)(iVar3 + 0x12) != uVar2) {
-      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,uVar2);
-      ((int (*)())_renumberParamArrayIndices)(**(undefined4 **)(stream + 0x14),(uint)*(ushort *)(iVar3 + 0x12),uVar2);
-      *(short *)(iVar3 + 0x12) = (short)uVar2;
+    if (*(ushort *)(iVar3 + 0x12) != loopIndex) {
+      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,loopIndex);
+      ((int (*)())_renumberParamArrayIndices)(**(undefined4 **)(stream + 0x14),(uint)*(ushort *)(iVar3 + 0x12),loopIndex);
+      *(short *)(iVar3 + 0x12) = (short)loopIndex;
     }
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
   }
-  uVar2 = 0;
+  loopIndex = 0;
   for (iVar3 = **(int **)(stream + 0x18); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-    if (*(ushort *)(iVar3 + 0x12) != uVar2) {
-      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,uVar2);
-      *(short *)(iVar3 + 0x12) = (short)uVar2;
+    if (*(ushort *)(iVar3 + 0x12) != loopIndex) {
+      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,loopIndex);
+      *(short *)(iVar3 + 0x12) = (short)loopIndex;
     }
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
   }
-  uVar2 = 0;
+  loopIndex = 0;
   for (iVar3 = **(int **)(stream + 0x1c); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-    if (*(ushort *)(iVar3 + 0x12) != uVar2) {
-      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,uVar2);
-      *(short *)(iVar3 + 0x12) = (short)uVar2;
+    if (*(ushort *)(iVar3 + 0x12) != loopIndex) {
+      ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar3,loopIndex);
+      *(short *)(iVar3 + 0x12) = (short)loopIndex;
     }
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
   }
   for (iVar3 = **(int **)(stream + 0x20); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
     *(undefined1 *)(iVar3 + 1) = 0;
@@ -8060,15 +8081,15 @@ int _PPStreamPackIndices(stream)
   for (iVar3 = **(int **)(stream + 0x24); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
     *(undefined1 *)(iVar3 + 1) = 0;
   }
-  uVar2 = 1;
+  loopIndex = 1;
   for (iVar3 = **(int **)(stream + 0x20); iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
     uVar1 = *(uint *)(iVar3 + 0xc) & 0x3ffff;
-    if ((uVar1 != 0) && (uVar1 != uVar2)) {
-      ((int (*)())_renumberLabels)(**(undefined4 **)(stream + 0x24),uVar1,uVar2,1);
-      ((int (*)())_renumberTargets)(**(undefined4 **)(stream + 0x20),*(uint *)(iVar3 + 0xc) & 0x3ffff,uVar2,1);
-      *(uint *)(iVar3 + 0xc) = uVar2 & 0x3ffff | *(uint *)(iVar3 + 0xc) & 0xfffc0000;
+    if ((uVar1 != 0) && (uVar1 != loopIndex)) {
+      ((int (*)())_renumberLabels)(**(undefined4 **)(stream + 0x24),uVar1,loopIndex,1);
+      ((int (*)())_renumberTargets)(**(undefined4 **)(stream + 0x20),*(uint *)(iVar3 + 0xc) & 0x3ffff,loopIndex,1);
+      *(uint *)(iVar3 + 0xc) = loopIndex & 0x3ffff | *(uint *)(iVar3 + 0xc) & 0xfffc0000;
     }
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
   }
   return;
 }
@@ -8078,16 +8099,16 @@ int _PPStreamSortParamConstants(stream)
   int stream;
 {
   ushort uVar1;
-  int iVar2;
+  int maxIndex;
   uint uVar3;
   int iVar4;
   
   iVar4 = **(int **)(stream + 0x10);
-  iVar2 = _PPStreamChunkListGetMaxIndex(*(int **)(stream + 0x10));
+  maxIndex = _PPStreamChunkListGetMaxIndex(*(int **)(stream + 0x10));
   if (iVar4 != 0) {
     uVar1 = *(ushort *)(iVar4 + 0x12);
-    uVar3 = iVar2 + 1U;
-    while ((uint)uVar1 < iVar2 + 1U) {
+    uVar3 = maxIndex + 1U;
+    while ((uint)uVar1 < maxIndex + 1U) {
       if ((*(uint *)(iVar4 + 0xc) >> 0x10 & 0x1f) == 0x11) {
         ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar4,uVar3);
         ((int (*)())_renumberParamArrayIndices)(**(undefined4 **)(stream + 0x14),(uint)*(ushort *)(iVar4 + 0x12),uVar3);
@@ -8106,6 +8127,7 @@ int _PPStreamSortParamConstants(stream)
 int _PPStreamResolveBranches(stream)
   int stream;
 {
+  int compareResult;
   int iVar1;
   undefined4 uVar2;
   int *piVar3;
@@ -8125,8 +8147,8 @@ int _PPStreamResolveBranches(stream)
         if (iVar5 == 0) {
           return uVar2;
         }
-        iVar6 = _memcmp("main(",iVar5 + 0x14,6);
-        if (iVar6 == 0) break;
+        compareResult = _memcmp("main(",iVar5 + 0x14,6);
+        if (compareResult == 0) break;
         iVar5 = *(int *)(iVar5 + 8);
       }
       iVar6 = *piVar4;

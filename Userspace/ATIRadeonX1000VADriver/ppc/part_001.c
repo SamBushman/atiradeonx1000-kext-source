@@ -2451,6 +2451,8 @@ int FUN_00007f80(ctx)
   uint *lastHeader;
   int mapBaseOrPlaneWords;
   int programRingOrPitch;
+  int in_r6;
+  int in_r7;
   undefined4 *ringLimit;
   undefined4 regDefault;
   undefined4 *cmdWriteB;
@@ -2460,10 +2462,6 @@ int FUN_00007f80(ctx)
   int planeIndex;
   int surfaceIndexOrScratch;
   int *planeCursor;
-  int passThroughR6;
-  int passThroughR7;
-  int mapAddressOut;
-  int mapSizeOut;
   
   descTable = (int *)(ctx + 0x55c);
   surfaceIndexOrScratch = *(int *)(ctx + 0x568);
@@ -2503,12 +2501,12 @@ int FUN_00007f80(ctx)
     ringLimit = *(undefined4 **)(ctx + 0x38);
     if (ringLimit <= cmdWriteB + 2) {
       lastHeader = *(uint **)(ctx + 0x30);
-      mapAddressOut = ctx + 0x40;
-      mapSizeOut = ctx + 0x44;
+      in_r6 = ctx + 0x40;
+      in_r7 = ctx + 0x44;
       *lastHeader = (int)cmdWriteB - (int)lastHeader >> 2 | *lastHeader;
       *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
       **(undefined4 **)(ctx + 0x34) = 0x1000000;
-      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,mapAddressOut,mapSizeOut,1);
+      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,in_r6,in_r7,1);
       programRingOrPitch = *(int *)(ctx + 0x40);
       *(int *)(ctx + 0x34) = programRingOrPitch + 0x20;
       *(int *)(ctx + 0x30) = programRingOrPitch + 0x1c;
@@ -2537,8 +2535,8 @@ int FUN_00007f80(ctx)
     *(int *)(ctx + 0x38) = mapBaseOrPlaneWords + 0x20 + *(int *)(mapBaseOrPlaneWords + 0x10) * 4;
     *(undefined4 *)(mapBaseOrPlaneWords + 0x1c) = 0;
     cmdWrite = *(undefined4 **)(ctx + 0x34);
-    passThroughR6 = programRingOrPitch;
-    passThroughR7 = planeIndex;
+    in_r6 = programRingOrPitch;
+    in_r7 = planeIndex;
   }
   *(undefined4 **)(ctx + 0x34) = cmdWrite + 4;
   *cmdWrite = 0x1393;
@@ -2553,10 +2551,10 @@ int FUN_00007f80(ctx)
   mapBaseOrPlaneWords = (*(uint *)(ctx + 0x57c) >> 4) * programRingOrPitch;
   planeCursor = descTable + surfaceIndexOrScratch * 4 + 0x5326;
   do {
-    ((int (*)())FUN_0000bf20)(ctx,*planeCursor,mapBaseOrPlaneWords,passThroughR6,passThroughR7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())FUN_0000bf20)(ctx,*planeCursor,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
     chromaEntry = planeCursor + 0x14;
     planeCursor = planeCursor + 1;
-    ((int (*)())FUN_0000bf20)(ctx,*chromaEntry,mapBaseOrPlaneWords,passThroughR6,passThroughR7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())FUN_0000bf20)(ctx,*chromaEntry,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
     notLast = planeIndex != 3;
     planeIndex = planeIndex + 1;
   } while (notLast);

@@ -504,7 +504,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm(this, param_2, para
   uint uVar1;
   int iVar2;
   char *pcVar3;
-  undefined4 uVar4;
+  undefined4 poolAllocator;
   undefined4 local_40 [11];
   
   iVar2 = *(int *)(param_2 + 4);
@@ -518,8 +518,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm(this, param_2, para
   }
   local_40[0] = GetGlobalPoolAllocator();
   pcVar3 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__normal_iteratorIPcS3_EEEES7_T_S9_RKS2_St20forward_iterator_tag)(iVar2 + param_3,iVar2 + param_3 + param_4,(unsigned char *)local_40,0);
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)this = uVar4;
+  poolAllocator = GetGlobalPoolAllocator();
+  *(undefined4 *)this = poolAllocator;
   *(char **)((int)this + 4) = pcVar3;
   return;
 }
@@ -529,7 +529,7 @@ int __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(this, str)
   void *this;
   char *str;
 {
-  size_t sVar1;
+  size_t length;
   int iVar2;
   size_t *psVar3;
   void *pvVar4;
@@ -540,15 +540,15 @@ int __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(this, str)
   pvVar4 = *(void **)((int)this + 4);
   uVar5 = *(uint *)((int)pvVar4 + -0xc);
   local_30 = uVar5;
-  sVar1 = _strlen(str);
+  length = _strlen(str);
   psVar3 = local_2c;
-  local_2c[0] = sVar1;
-  if (uVar5 <= sVar1) {
+  local_2c[0] = length;
+  if (uVar5 <= length) {
     psVar3 = &local_30;
   }
   iVar2 = _memcmp(pvVar4,str,*psVar3);
   if (iVar2 == 0) {
-    iVar2 = uVar5 - sVar1;
+    iVar2 = uVar5 - length;
   }
   return iVar2;
 }
@@ -563,13 +563,13 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(param_
   int iVar2;
   int *piVar3;
   uint uVar4;
-  size_t sVar5;
-  undefined4 uVar6;
+  size_t length;
+  undefined4 poolAllocator;
   unsigned char * psVar7;
   char in_RESERVE;
   byte in_cr0;
   
-  sVar5 = _strlen((char *)param_2);
+  length = _strlen((char *)param_2);
   iVar2 = DAT_a7b7ba14;
   piVar3 = (int *)(DAT_a7b7ba14 + 8);
   do {
@@ -579,20 +579,20 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(param_
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  uVar6 = GetGlobalPoolAllocator();
-  *(undefined4 *)param_1 = uVar6;
+  poolAllocator = GetGlobalPoolAllocator();
+  *(undefined4 *)param_1 = poolAllocator;
   *(int *)(param_1 + 4) = iVar2 + 0xc;
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm)(param_1,sVar5 + *(int *)(*(int *)(param_3 + 4) + -0xc));
+  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm)(param_1,length + *(int *)(*(int *)(param_3 + 4) + -0xc));
   uVar4 = *(uint *)(*(int *)(param_1 + 4) + -0xc);
-  if (0x3ffffffc - sVar5 < uVar4) {
+  if (0x3ffffffc - length < uVar4) {
     std____throw_length_error("basic_string::replace");
   }
   psVar7 = *(unsigned char **)(param_1 + 4);
   if (((*(int *)(psVar7 + -4) < 1) && (psVar7 <= param_2)) && (param_2 <= psVar7 + uVar4)) {
-    ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag)(param_1,psVar7 + uVar4,(char *)(psVar7 + uVar4),(char *)param_2,param_2 + sVar5);
+    ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag)(param_1,psVar7 + uVar4,(char *)(psVar7 + uVar4),(char *)param_2,param_2 + length);
   }
   else {
-    ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_)(param_1,psVar7 + uVar4,psVar7 + uVar4,(char *)param_2,(char *)(param_2 + sVar5));
+    ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_)(param_1,psVar7 + uVar4,psVar7 + uVar4,(char *)param_2,(char *)(param_2 + length));
   }
   ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_)(param_1,param_3);
   return param_1;

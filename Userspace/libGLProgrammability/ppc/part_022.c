@@ -67,10 +67,10 @@ int __ZNKSs13find_first_ofEPKcm(this, str, param_3)
   char *str;
   ulong param_3;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,str,param_3,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,str,param_3,length);
 }
 
 /* __ZNKSs13find_first_ofEcm @ 0x97c15c70 (4 bytes) */
@@ -129,10 +129,10 @@ int __ZNKSs12find_last_ofEPKcm(this, str, param_3)
   char *str;
   ulong param_3;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,str,param_3,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,str,param_3,length);
 }
 
 /* __ZNKSs12find_last_ofEcm @ 0x97c15d58 (4 bytes) */
@@ -183,10 +183,10 @@ int __ZNKSs17find_first_not_ofEPKcm(this, str, param_3)
   char *str;
   ulong param_3;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,str,param_3,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,str,param_3,length);
 }
 
 /* __ZNKSs17find_first_not_ofEcm @ 0x97c15e2c (68 bytes) */
@@ -252,10 +252,10 @@ int __ZNKSs16find_last_not_ofEPKcm(this, str, param_3)
   char *str;
   ulong param_3;
 {
-  ulong uVar1;
+  ulong length;
   
-  uVar1 = _strlen(str);
-  return ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,str,param_3,uVar1);
+  length = _strlen(str);
+  return ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,str,param_3,length);
 }
 
 /* __ZNKSs16find_last_not_ofEcm @ 0x97c15f4c (84 bytes) */
@@ -433,7 +433,7 @@ int __ZNKSs7compareEPKc(this, str)
   void *this;
   char *str;
 {
-  uint uVar1;
+  uint length;
   uint *puVar2;
   int iVar3;
   uint uVar4;
@@ -443,15 +443,15 @@ int __ZNKSs7compareEPKc(this, str)
   iVar3 = *(int *)this;
   uVar4 = *(uint *)(iVar3 + -0xc);
   local_30 = uVar4;
-  uVar1 = _strlen(str);
+  length = _strlen(str);
   puVar2 = local_2c;
-  local_2c[0] = uVar1;
-  if (uVar4 <= uVar1) {
+  local_2c[0] = length;
+  if (uVar4 <= length) {
     puVar2 = &local_30;
   }
   iVar3 = _memcmp(iVar3,str,*puVar2);
   if (iVar3 == 0) {
-    iVar3 = uVar4 - uVar1;
+    iVar3 = uVar4 - length;
   }
   return iVar3;
 }
@@ -695,17 +695,17 @@ int __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_(param_1, param_2, pa
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int length;
   undefined4 local_30;
   undefined4 local_2c [5];
   
-  iVar1 = _strlen(param_2);
+  length = _strlen(param_2);
   __ZNSsC4Ev(param_1);
-  __ZNSs7reserveEm(param_1,iVar1 + *(int *)(*(int *)param_3 + -0xc));
+  __ZNSs7reserveEm(param_1,length + *(int *)(*(int *)param_3 + -0xc));
   __ZNKSs7_M_iendEv(&local_30,param_1);
   __ZNKSs7_M_iendEv(local_2c,param_1);
   __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_
-            (param_1,local_30,local_2c[0],param_2,param_2 + iVar1);
+            (param_1,local_30,local_2c[0],param_2,param_2 + length);
   __ZNSs6appendERKSs(param_1,param_3);
   return param_1;
 }
@@ -1238,22 +1238,22 @@ int operator_new(param_1)
 {
   undefined *puVar1;
   undefined *puVar2;
-  void *pvVar3;
+  void *allocation;
   code *a0;
   undefined4 *puVar4;
   
   if (param_1 == 0) {
     param_1 = 1;
   }
-  pvVar3 = (void *)_malloc(param_1);
+  allocation = (void *)_malloc(param_1);
   while( true ) {
-    if (pvVar3 != (void *)0x0) {
-      return pvVar3;
+    if (allocation != (void *)0x0) {
+      return allocation;
     }
     a0 = (code *)__keymgr_get_per_thread_data(2);
     if (a0 == (code *)0x0) break;
     (*a0)(a0);
-    pvVar3 = (void *)_malloc(param_1);
+    allocation = (void *)_malloc(param_1);
   }
   puVar4 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c174;

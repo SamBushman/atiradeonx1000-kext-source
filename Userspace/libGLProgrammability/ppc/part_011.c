@@ -24,17 +24,19 @@ int ParseOperand__ClearSwizzles(this)
 int ParseOperand__GetString(this)
   unsigned char * this;
 {
+  char *allocation2;
+  int length;
   short sVar1;
   ushort uVar2;
   int iVar3;
   char *pcVar4;
-  char *pcVar5;
-  int iVar6;
-  int iVar7;
+  char *allocation;
+  int length2;
+  int length3;
   uint uVar8;
   undefined4 extraout_r4;
   char *pcVar9;
-  uint uVar10;
+  uint loopIndex;
   double in_f3;
   double in_f4;
   double in_f5;
@@ -48,20 +50,20 @@ int ParseOperand__GetString(this)
   double in_stack_ffffffb8;
   
   if (*(int *)this != 0) {
-    iVar3 = _strlen(*(undefined4 *)(*(int *)this + 0x14));
-    pcVar4 = (char *)_malloc(iVar3 + 1);
-    _sprintf(pcVar4,DAT_a7b7bbdc,*(undefined4 *)(*(int *)this + 0x14));
-    return pcVar4;
+    length = _strlen(*(undefined4 *)(*(int *)this + 0x14));
+    allocation2 = (char *)_malloc(length + 1);
+    _sprintf(allocation2,DAT_a7b7bbdc,*(undefined4 *)(*(int *)this + 0x14));
+    return allocation2;
   }
   if (*(int *)(this + 4) == 0) {
-    pcVar5 = (char *)_malloc(10);
+    allocation = (char *)_malloc(10);
     pcVar4 = DAT_a7b7bbf0;
 LAB_97bbc23c:
-    _sprintf(pcVar5,pcVar4);
+    _sprintf(allocation,pcVar4);
   }
   else {
-    pcVar5 = (char *)_malloc(0xa0);
-    *pcVar5 = '\0';
+    allocation = (char *)_malloc(0xa0);
+    *allocation = '\0';
     iVar3 = *(int *)this;
     if (iVar3 == 0) {
       sVar1 = *(short *)(this + 0x18);
@@ -87,9 +89,9 @@ LAB_97bbc23c:
         if (sVar1 != -0x74aa) goto LAB_97bbc23c;
       }
     }
-    for (uVar10 = 0; uVar8 = ParseOperand__GetBaseSize(this), uVar10 < uVar8; uVar10 = uVar10 + 1) {
-      if (uVar10 != 0) {
-        _sprintf(pcVar5,DAT_a7b7bbe0,pcVar5);
+    for (loopIndex = 0; uVar8 = ParseOperand__GetBaseSize(this), loopIndex < uVar8; loopIndex = loopIndex + 1) {
+      if (loopIndex != 0) {
+        _sprintf(allocation,DAT_a7b7bbe0,allocation);
       }
       if (*(int *)this == 0) {
         uVar2 = *(ushort *)(this + 0x18);
@@ -98,11 +100,11 @@ LAB_97bbc23c:
         uVar2 = *(ushort *)(*(int *)this + 0x2c);
       }
       if (uVar2 == 0x1406) {
-        _sprintf(pcVar5,"%s ",pcVar5);
-        iVar6 = _strlen(pcVar5);
-        iVar7 = _strlen(pcVar5);
-        iVar3 = uVar10 * 4;
-        ((char * (*)())_glp_dtostr)(iVar7,extraout_r4,pcVar5 + iVar6,0x9f - iVar7,
+        _sprintf(allocation,"%s ",allocation);
+        length2 = _strlen(allocation);
+        length3 = _strlen(allocation);
+        iVar3 = loopIndex * 4;
+        ((char * (*)())_glp_dtostr)(length3,extraout_r4,allocation + length2,0x9f - length3,
                     (double)*(float *)(iVar3 + *(int *)(this + 4)),1e-07,in_f3,in_f4,in_f5,in_f6,
                     in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,
                     in_stack_ffffffb0,in_stack_ffffffb8);
@@ -110,17 +112,17 @@ LAB_97bbc1b0:
         pcVar9 = *(char **)(iVar3 + *(int *)(this + 4));
         pcVar4 = DAT_a7b7bbe8;
 LAB_97bbc1ec:
-        _sprintf(pcVar5,pcVar4,pcVar5,pcVar9);
+        _sprintf(allocation,pcVar4,allocation,pcVar9);
       }
       else if (uVar2 < 0x1407) {
         if (uVar2 == 0x1404) {
-          iVar3 = uVar10 << 2;
+          iVar3 = loopIndex << 2;
           goto LAB_97bbc1b0;
         }
       }
       else if (uVar2 == 0x8b56) {
         pcVar4 = DAT_a7b7bbc4;
-        if (*(int *)(uVar10 * 4 + *(int *)(this + 4)) == 0) {
+        if (*(int *)(loopIndex * 4 + *(int *)(this + 4)) == 0) {
           pcVar9 = "false";
         }
         else {
@@ -130,7 +132,7 @@ LAB_97bbc1ec:
       }
     }
   }
-  return pcVar5;
+  return allocation;
 }
 
 /* __ZN16ParseSymbolTableC2Ej @ 0x97bbc258 (4 bytes) */
@@ -139,21 +141,21 @@ int __ZN16ParseSymbolTableC2Ej(this, param_2)
   uint param_2;
 {
   int iVar1;
-  void *pvVar2;
-  uint uVar3;
+  void *allocation;
+  uint loopIndex;
   
   *(uint *)((int)this + 0x10) = param_2;
-  pvVar2 = operator_new__(param_2 << 2);
-  uVar3 = 0;
-  *(void **)((int)this + 8) = pvVar2;
+  allocation = operator_new__(param_2 << 2);
+  loopIndex = 0;
+  *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   *(undefined4 *)this = 0;
   if (*(int *)((int)this + 0x10) != 0) {
     do {
-      iVar1 = uVar3 * 4;
-      uVar3 = uVar3 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
-    } while (uVar3 < *(uint *)((int)this + 0x10));
+    } while (loopIndex < *(uint *)((int)this + 0x10));
   }
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -180,21 +182,21 @@ int __ZN16ParseSymbolTableC1Ej(this, param_2)
   uint param_2;
 {
   int iVar1;
-  void *pvVar2;
-  uint uVar3;
+  void *allocation;
+  uint loopIndex;
   
   *(uint *)((int)this + 0x10) = param_2;
-  pvVar2 = operator_new__(param_2 << 2);
-  uVar3 = 0;
-  *(void **)((int)this + 8) = pvVar2;
+  allocation = operator_new__(param_2 << 2);
+  loopIndex = 0;
+  *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   *(undefined4 *)this = 0;
   if (*(int *)((int)this + 0x10) != 0) {
     do {
-      iVar1 = uVar3 * 4;
-      uVar3 = uVar3 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
-    } while (uVar3 < *(uint *)((int)this + 0x10));
+    } while (loopIndex < *(uint *)((int)this + 0x10));
   }
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -221,21 +223,21 @@ int __ZN16ParseSymbolTableC4Ej(this, param_2)
   uint param_2;
 {
   int iVar1;
-  void *pvVar2;
-  uint uVar3;
+  void *allocation;
+  uint loopIndex;
   
   *(uint *)((int)this + 0x10) = param_2;
-  pvVar2 = operator_new__(param_2 << 2);
-  uVar3 = 0;
-  *(void **)((int)this + 8) = pvVar2;
+  allocation = operator_new__(param_2 << 2);
+  loopIndex = 0;
+  *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   *(undefined4 *)this = 0;
   if (*(int *)((int)this + 0x10) != 0) {
     do {
-      iVar1 = uVar3 * 4;
-      uVar3 = uVar3 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
-    } while (uVar3 < *(uint *)((int)this + 0x10));
+    } while (loopIndex < *(uint *)((int)this + 0x10));
   }
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -1245,14 +1247,14 @@ int ParseSymbolTable__FindNextParamSymbolByName(this, param_2, param_3)
   unsigned char * param_2;
   char *param_3;
 {
-  int iVar1;
+  int length;
   int iVar2;
   int iVar3;
   int iVar4;
   
   iVar2 = 0;
   if (param_3 != (char *)0x0) {
-    iVar1 = _strlen(param_3);
+    length = _strlen(param_3);
     if (param_2 == (unsigned char *)0x0) {
       iVar4 = *(int *)this;
     }
@@ -1261,9 +1263,9 @@ int ParseSymbolTable__FindNextParamSymbolByName(this, param_2, param_3)
     }
     while ((iVar2 = 0, iVar4 != 0 &&
            (((iVar3 = *(int *)(iVar4 + 0x14), iVar3 == 0 ||
-             (iVar2 = _strncmp(param_3,iVar3,iVar1), iVar2 != 0)) ||
-            ((iVar2 = iVar4, *(int *)(iVar4 + 0x20) != iVar1 &&
-             ((*(char *)(iVar3 + iVar1) != '.' && (*(char *)(iVar3 + iVar1) != '['))))))))) {
+             (iVar2 = _strncmp(param_3,iVar3,length), iVar2 != 0)) ||
+            ((iVar2 = iVar4, *(int *)(iVar4 + 0x20) != length &&
+             ((*(char *)(iVar3 + length) != '.' && (*(char *)(iVar3 + length) != '['))))))))) {
       iVar4 = *(int *)(iVar4 + 8);
     }
   }
@@ -1610,6 +1612,7 @@ int ParseSymbolTable__GetString(this, param_2)
   unsigned char * this;
   int param_2;
 {
+  uint loopIndex;
   uint uVar1;
   unsigned char * pPVar2;
   char *pcVar3;
@@ -1633,12 +1636,12 @@ int ParseSymbolTable__GetString(this, param_2)
     pcVar6 = pcVar3;
     if (param_2 == 1) {
       uVar11 = *(uint *)(this + 0x10);
-      uVar1 = 0;
+      loopIndex = 0;
       if (uVar11 != 0) {
         do {
-          pPVar2 = (unsigned char *)((int (*)())ParseSymbolTable__FirstSymbolInHash)(this,uVar1);
+          pPVar2 = (unsigned char *)((int (*)())ParseSymbolTable__FirstSymbolInHash)(this,loopIndex);
           if (pPVar2 != (unsigned char *)0x0) {
-            _sprintf(pcVar6,DAT_a7b7bc08,pcVar6,uVar1);
+            _sprintf(pcVar6,DAT_a7b7bc08,pcVar6,loopIndex);
             iVar10 = _strlen(pcVar6);
             pcVar3 = pcVar6;
             do {
@@ -1671,8 +1674,8 @@ int ParseSymbolTable__GetString(this, param_2)
             _strcat(pcVar6,DAT_a7b7bc0c);
             uVar11 = *(uint *)(this + 0x10);
           }
-          uVar1 = uVar1 + 1;
-        } while (uVar1 < uVar11);
+          loopIndex = loopIndex + 1;
+        } while (loopIndex < uVar11);
       }
     }
     else if (param_2 < 2) {
@@ -2396,7 +2399,7 @@ int TIntermUnary__compileNode(this, compiler, param_3, param_4, param_5, param_6
   ushort uVar1;
   bool bVar2;
   undefined4 uVar3;
-  uint uVar4;
+  uint streamType;
   unsigned char * pTVar5;
   int *a0;
   undefined4 a1;
@@ -2576,8 +2579,8 @@ LAB_97bbf894:
       }
       pPVar7 = local_1c;
       local_60 = uVar8;
-      uVar4 = GetPPStreamTypeForGLType((uint)uVar1);
-      local_5c = (uVar4 & 7) << 0x17 | local_5c & 0xfc7fffff;
+      streamType = GetPPStreamTypeForGLType((uint)uVar1);
+      local_5c = (streamType & 7) << 0x17 | local_5c & 0xfc7fffff;
       bVar2 = false;
       iVar9 = ParseOperand__GetLogicalSize(local_1c);
       local_5c = (iVar9 + -1) * 0x4000000 & 0xc000000U | local_5c & 0xf3ffffff;
@@ -2595,8 +2598,8 @@ LAB_97bbf894:
       else {
         uVar1 = *(ushort *)(*(int *)local_1c + 0x2c);
       }
-      uVar4 = GetPPStreamTypeForGLType((uint)uVar1);
-      if (uVar4 == 3) {
+      streamType = GetPPStreamTypeForGLType((uint)uVar1);
+      if (streamType == 3) {
         param_5 = 0x1404;
 LAB_97bbfa3c:
         local_18[0] = 1;
@@ -2607,14 +2610,14 @@ LAB_97bbfa44:
         local_98 = local_70;
         local_94 = local_6c;
       }
-      else if (uVar4 < 4) {
-        if (uVar4 == 1) {
+      else if (streamType < 4) {
+        if (streamType == 1) {
           param_5 = 0x1406;
           local_18[0] = 0x3f800000;
           goto LAB_97bbfa44;
         }
       }
-      else if (uVar4 == 4) {
+      else if (streamType == 4) {
         param_5 = 0x8b56;
         goto LAB_97bbfa3c;
       }
@@ -4931,7 +4934,7 @@ int TIntermAggregate__indirectNode(this, param_2, param_3, param_4, param_5, par
   undefined4 param_6;
 {
   undefined4 uVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   int iVar3;
   undefined4 *puVar4;
   undefined4 *puVar5;
@@ -4941,15 +4944,15 @@ int TIntermAggregate__indirectNode(this, param_2, param_3, param_4, param_5, par
   uVar1 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6,this + 0x34)
   ;
   *(undefined4 *)(param_2 + 0x90) = uVar1;
-  puVar2 = (undefined4 *)_malloc(iVar3 << 2);
-  puVar4 = puVar2;
+  allocation = (undefined4 *)_malloc(iVar3 << 2);
+  puVar4 = allocation;
   for (puVar5 = *(undefined4 **)(this + 0x38); puVar5 != *(undefined4 **)(this + 0x3c);
       puVar5 = puVar5 + 1) {
     uVar1 = (**(code **)(*(int *)*puVar5 + 0x10))((int *)*puVar5,param_2);
     *puVar4 = uVar1;
     puVar4 = puVar4 + 1;
   }
-  puVar4 = puVar2;
+  puVar4 = allocation;
   if (0 < iVar3) {
     do {
       this_00 = (void *)*puVar4;
@@ -4961,8 +4964,8 @@ int TIntermAggregate__indirectNode(this, param_2, param_3, param_4, param_5, par
       puVar4 = puVar4 + 1;
     } while (iVar3 != 0);
   }
-  if (puVar2 != (undefined4 *)0x0) {
-    _free(puVar2);
+  if (allocation != (undefined4 *)0x0) {
+    _free(allocation);
   }
   return 0;
 }
@@ -5118,6 +5121,8 @@ int ConstantAllocationList__addConstant(this, param_2, param_3, param_4)
   bool *param_3;
   int param_4;
 {
+  int loopIndex;
+  int allocation;
   bool *pbVar1;
   int iVar2;
   int iVar3;
@@ -5132,10 +5137,10 @@ int ConstantAllocationList__addConstant(this, param_2, param_3, param_4)
   
   uVar11 = *(uint *)(this + 4);
   if ((uVar11 & 0xf) == 0) {
-    iVar3 = _malloc(uVar11 * 0x18 + 0x180);
-    _memset(iVar3,0,*(int *)(this + 4) * 0x18 + 0x180);
+    allocation = _malloc(uVar11 * 0x18 + 0x180);
+    _memset(allocation,0,*(int *)(this + 4) * 0x18 + 0x180);
     uVar11 = *(uint *)(this + 4);
-    iVar5 = 0;
+    loopIndex = 0;
     if ((int)uVar11 < 1) {
       iVar4 = *(int *)this;
     }
@@ -5145,11 +5150,11 @@ int ConstantAllocationList__addConstant(this, param_2, param_3, param_4)
       do {
         iVar10 = iVar6 + iVar4;
         uVar8 = *(undefined4 *)(iVar10 + 4);
-        iVar5 = iVar5 + 1;
+        loopIndex = loopIndex + 1;
         uVar9 = *(undefined4 *)(iVar10 + 8);
-        iVar2 = iVar6 + iVar3;
+        iVar2 = iVar6 + allocation;
         uVar7 = *(undefined4 *)(iVar10 + 0xc);
-        *(undefined4 *)(iVar6 + iVar3) = *(undefined4 *)(iVar6 + iVar4);
+        *(undefined4 *)(iVar6 + allocation) = *(undefined4 *)(iVar6 + iVar4);
         iVar6 = iVar6 + 0x18;
         *(undefined4 *)(iVar2 + 4) = uVar8;
         *(undefined4 *)(iVar2 + 8) = uVar9;
@@ -5157,13 +5162,13 @@ int ConstantAllocationList__addConstant(this, param_2, param_3, param_4)
         uVar7 = *(undefined4 *)(iVar10 + 0x10);
         *(undefined4 *)(iVar2 + 0x14) = *(undefined4 *)(iVar10 + 0x14);
         *(undefined4 *)(iVar2 + 0x10) = uVar7;
-      } while (iVar5 < (int)uVar11);
+      } while (loopIndex < (int)uVar11);
     }
     if (iVar4 != 0) {
       _free(iVar4);
       uVar11 = *(uint *)(this + 4);
     }
-    *(int *)this = iVar3;
+    *(int *)this = allocation;
   }
   iVar3 = 0;
   *(int *)(uVar11 * 0x18 + *(int *)this) = param_2;
@@ -5187,34 +5192,35 @@ int ConstantAllocationList__updateConstant(this, param_2, param_3, param_4)
   bool *param_3;
   uint param_4;
 {
+  int loopIndex2;
   int iVar1;
   int iVar2;
-  int iVar3;
+  int loopIndex;
   int *piVar4;
   int iVar5;
   
   iVar5 = *(int *)(this + 4);
-  iVar3 = 0;
+  loopIndex = 0;
   if (0 < iVar5) {
     piVar4 = *(int **)this;
     do {
       iVar2 = *piVar4;
       piVar4 = piVar4 + 6;
       if (param_2 == iVar2) break;
-      iVar3 = iVar3 + 1;
-    } while (iVar3 < iVar5);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < iVar5);
   }
-  if (iVar5 <= iVar3) {
+  if (iVar5 <= loopIndex) {
     return;
   }
   iVar5 = *(int *)this;
-  iVar2 = 0;
-  if (*(ushort *)(iVar3 * 0x18 + iVar5 + 0x14) == param_4) {
+  loopIndex2 = 0;
+  if (*(ushort *)(loopIndex * 0x18 + iVar5 + 0x14) == param_4) {
     while( true ) {
-      iVar1 = iVar2 * 4;
-      iVar2 = iVar2 + 1;
-      *(undefined4 *)(iVar1 + iVar3 * 0x18 + iVar5 + 4) = *(undefined4 *)(param_3 + iVar1);
-      if (3 < iVar2) break;
+      iVar1 = loopIndex2 * 4;
+      loopIndex2 = loopIndex2 + 1;
+      *(undefined4 *)(iVar1 + loopIndex * 0x18 + iVar5 + 4) = *(undefined4 *)(param_3 + iVar1);
+      if (3 < loopIndex2) break;
       iVar5 = *(int *)this;
     }
     return;
@@ -5230,30 +5236,30 @@ int ConstantAllocationList__getConstantUsage(this, param_2, param_3, param_4)
   ushort *param_4;
 {
   int iVar1;
-  int iVar2;
+  int loopIndex;
   int *piVar3;
   undefined4 uVar4;
   int iVar5;
   
   iVar5 = *(int *)(this + 4);
-  iVar2 = 0;
+  loopIndex = 0;
   if (0 < iVar5) {
     piVar3 = *(int **)this;
     do {
       iVar1 = *piVar3;
       piVar3 = piVar3 + 6;
       if (param_2 == iVar1) break;
-      iVar2 = iVar2 + 1;
-    } while (iVar2 < iVar5);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < iVar5);
   }
   uVar4 = 0;
-  if (iVar2 < iVar5) {
+  if (loopIndex < iVar5) {
     iVar5 = 0;
     iVar1 = 4;
-    *param_4 = *(ushort *)(iVar2 * 0x18 + *(int *)this + 0x14);
+    *param_4 = *(ushort *)(loopIndex * 0x18 + *(int *)this + 0x14);
     do {
       uVar4 = 1;
-      *(undefined4 *)(param_3 + iVar5) = *(undefined4 *)(iVar5 + iVar2 * 0x18 + *(int *)this + 4);
+      *(undefined4 *)(param_3 + iVar5) = *(undefined4 *)(iVar5 + loopIndex * 0x18 + *(int *)this + 4);
       iVar5 = iVar5 + 4;
       iVar1 = iVar1 + -1;
     } while (iVar1 != 0);
@@ -5284,21 +5290,21 @@ int store(param_1, param_2)
   void *param_2;
 {
   int iVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   
-  puVar2 = (undefined4 *)_malloc(8);
+  allocation = (undefined4 *)_malloc(8);
   iVar1 = *(int *)(param_1 + 8);
-  *puVar2 = param_2;
-  puVar2[1] = 0;
+  *allocation = param_2;
+  allocation[1] = 0;
   if (iVar1 == 0) {
-    *(undefined4 **)param_1 = puVar2;
+    *(undefined4 **)param_1 = allocation;
     iVar1 = 0;
   }
   else {
-    *(undefined4 **)(*(int *)(param_1 + 4) + 4) = puVar2;
+    *(undefined4 **)(*(int *)(param_1 + 4) + 4) = allocation;
     iVar1 = *(int *)(param_1 + 8);
   }
-  *(undefined4 **)(param_1 + 4) = puVar2;
+  *(undefined4 **)(param_1 + 4) = allocation;
   *(int *)(param_1 + 8) = iVar1 + 1;
   return;
 }

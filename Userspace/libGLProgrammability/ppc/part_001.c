@@ -264,11 +264,11 @@ int _PPStreamChunkListGetMaxIndex(stream)
   uint uVar1;
   undefined1 *puVar2;
   uint uVar3;
-  uint uVar4;
+  uint loopIndex;
   
   puVar2 = (undefined1 *)*stream;
   uVar3 = 0;
-  uVar4 = 1;
+  loopIndex = 1;
   do {
     if (puVar2 == (undefined1 *)0x0) {
       return uVar3;
@@ -288,8 +288,8 @@ int _PPStreamChunkListGetMaxIndex(stream)
     case 7:
     case 9:
     case 10:
-      if (uVar3 < uVar4) {
-        uVar3 = uVar4;
+      if (uVar3 < loopIndex) {
+        uVar3 = loopIndex;
       }
       goto switchD_97b82c84_default;
     case 8:
@@ -305,7 +305,7 @@ int _PPStreamChunkListGetMaxIndex(stream)
     }
 switchD_97b82c84_default:
     puVar2 = *(undefined1 **)(puVar2 + 8);
-    uVar4 = uVar4 + 1;
+    loopIndex = loopIndex + 1;
   } while( true );
 }
 
@@ -314,40 +314,40 @@ int _PPStreamAddTempUsage(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   undefined4 uVar5;
   undefined4 uVar6;
   
-  puVar1 = (undefined1 *)_calloc(0x1c,1);
+  allocation = (undefined1 *)_calloc(0x1c,1);
   uVar3 = param_2[3];
   uVar2 = *(undefined4 *)(param_1 + 4);
   uVar4 = *param_2;
   uVar6 = param_2[1];
   uVar5 = param_2[2];
-  *puVar1 = 0;
-  *(undefined4 *)(puVar1 + 0xc) = uVar4;
-  *(undefined4 *)(puVar1 + 0x10) = uVar6;
-  *(undefined4 *)(puVar1 + 0x14) = uVar5;
-  *(undefined4 *)(puVar1 + 0x18) = uVar3;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 0;
+  *(undefined4 *)(allocation + 0xc) = uVar4;
+  *(undefined4 *)(allocation + 0x10) = uVar6;
+  *(undefined4 *)(allocation + 0x14) = uVar5;
+  *(undefined4 *)(allocation + 0x18) = uVar3;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPEmulatorProgramCreate @ 0x97b82d7c (72 bytes) */
 int _PPEmulatorProgramCreate()
 {
   undefined4 uVar1;
-  int iVar2;
+  int allocation;
   
-  iVar2 = _calloc(0x128,1);
+  allocation = _calloc(0x128,1);
   uVar1 = DAT_a7b7bda4;
-  *(undefined4 *)(iVar2 + 0xc) = DAT_a7b7bda4;
-  *(undefined4 *)(iVar2 + 8) = uVar1;
+  *(undefined4 *)(allocation + 0xc) = DAT_a7b7bda4;
+  *(undefined4 *)(allocation + 8) = uVar1;
   /* dropped-return-value defect (class 25, issue #68) - stock leaves calloc's result in r3
    * through to blr; verified via Capstone disasm of the real 0x97b82d7c body. */
-  return iVar2;
+  return allocation;
 }
 
 /* _PPEmulatorProgramInitialiseHandleBanks @ 0x97b82dc4 (288 bytes) */
@@ -360,11 +360,11 @@ int _PPEmulatorProgramInitialiseHandleBanks(emulator, param_2, param_3, param_4,
 {
   int iVar1;
   uint uVar2;
-  undefined4 uVar3;
-  uint uVar4;
+  undefined4 allocation;
+  uint loopIndex;
   int iVar5;
   
-  uVar4 = 0;
+  loopIndex = 0;
   do {
     if (*(int *)(emulator + 0x80) != 0) {
       _free(*(int *)(emulator + 0x80));
@@ -373,8 +373,8 @@ int _PPEmulatorProgramInitialiseHandleBanks(emulator, param_2, param_3, param_4,
     *(undefined4 *)(emulator + 0x84) = 0;
     *(undefined4 *)(emulator + 0x88) = 0;
     iVar1 = param_3;
-    if (((((uVar4 == 1) || (iVar1 = param_2, uVar4 == 0)) || (iVar1 = param_4, uVar4 == 2)) ||
-        (iVar1 = param_5, uVar4 == 3)) && (iVar1 != 0)) {
+    if (((((loopIndex == 1) || (iVar1 = param_2, loopIndex == 0)) || (iVar1 = param_4, loopIndex == 2)) ||
+        (iVar1 = param_5, loopIndex == 3)) && (iVar1 != 0)) {
       iVar5 = 0x20;
       do {
         if (iVar1 << (0x20U - iVar5 & 0x3f) < 0) {
@@ -392,13 +392,13 @@ int _PPEmulatorProgramInitialiseHandleBanks(emulator, param_2, param_3, param_4,
       } while (iVar5 != 0);
       uVar2 = iVar1 << 1 & ~*(uint *)(emulator + 0x88);
       *(uint *)(emulator + 0x84) = uVar2;
-      uVar3 = _malloc(uVar2 << 4);
-      *(undefined4 *)(emulator + 0x80) = uVar3;
-      _memset(uVar3,0,*(int *)(emulator + 0x84) << 4);
+      allocation = _malloc(uVar2 << 4);
+      *(undefined4 *)(emulator + 0x80) = allocation;
+      _memset(allocation,0,*(int *)(emulator + 0x84) << 4);
     }
-    uVar4 = uVar4 + 1;
+    loopIndex = loopIndex + 1;
     emulator = emulator + 0xc;
-    if (3 < uVar4) {
+    if (3 < loopIndex) {
       return;
     }
   } while( true );
@@ -409,6 +409,8 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
   undefined4 *emulator;
   undefined4 *param_2;
 {
+  uint loopIndex;
+  undefined4 allocation;
   ushort uVar1;
   byte bVar4;
   uint uVar2;
@@ -430,7 +432,7 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
   uint uVar19;
   uint uVar20;
   int iVar21;
-  uint uVar22;
+  uint loopIndex2;
   uint uVar23;
   int iVar24;
   int iVar25;
@@ -472,8 +474,8 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
   iVar6 = *piVar12;
   if (iVar25 != 0) {
     iVar21 = 0;
-    uVar8 = _malloc(iVar25 << 4);
-    emulator[0x2c] = uVar8;
+    allocation = _malloc(iVar25 << 4);
+    emulator[0x2c] = allocation;
     for (; iVar25 != 0; iVar25 = iVar25 + -1) {
       iVar24 = iVar21 * 0x10;
       uVar8 = *(undefined4 *)(iVar6 + 0x18);
@@ -490,7 +492,7 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
   }
   if (uVar20 != 0) {
     puVar9 = (uint *)_calloc(0x11c,uVar20);
-    uVar22 = 0;
+    loopIndex2 = 0;
     *emulator = puVar9;
     emulator[1] = puVar9 + uVar20 * 0x47 + -0x47;
     iVar25 = *piVar26;
@@ -666,12 +668,12 @@ LAB_97b83714:
           uVar2 = uVar13 - 1;
           goto LAB_97b83714;
         }
-        uVar2 = 0;
+        loopIndex = 0;
         iVar6 = 0;
         if (uVar13 != 0) {
           do {
             if (uVar14 == 0x41) {
-              if (uVar2 != 1) goto LAB_97b837e4;
+              if (loopIndex != 1) goto LAB_97b837e4;
               *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(*(uint *)(iVar25 + 0x24) >> 0xc) & 0xf;
               *(byte *)((int)puVar9 + iVar6 * 0x24 + 0x3d) =
                    (byte)((uint)*(undefined4 *)(iVar25 + 0x24) >> 8) & 0xf;
@@ -683,14 +685,14 @@ LAB_97b83714:
             }
             if ((0x40 < uVar14) && (uVar14 < 0x46)) {
               if (1 < emulator[0xe] - 0x8b30) {
-                if (uVar2 == 1) {
+                if (loopIndex == 1) {
                   puVar9[0x44] = *(uint *)(iVar25 + 0x24) >> 5 & 7;
                   uVar3 = *(uint *)(iVar25 + 0x24);
                   goto LAB_97b83794;
                 }
                 goto LAB_97b837e4;
               }
-              if (uVar2 != 2) goto LAB_97b837e4;
+              if (loopIndex != 2) goto LAB_97b837e4;
               puVar9[0x44] = *(uint *)(iVar25 + 0x2c) >> 5 & 7;
               uVar3 = *(uint *)(iVar25 + 0x2c);
 LAB_97b83794:
@@ -700,9 +702,9 @@ LAB_97b83794:
             }
 LAB_97b837e4:
             iVar24 = iVar6 * 0x24;
-            iVar21 = uVar2 * 8;
+            iVar21 = loopIndex * 8;
             puVar9[iVar6 * 9 + 0x13] = 1;
-            uVar14 = puVar27[uVar2 * 2 + 4] >> 0x17 & 7;
+            uVar14 = puVar27[loopIndex * 2 + 4] >> 0x17 & 7;
             if (uVar14 == 1) {
               *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 0;
               iVar7 = emulator[0x20];
@@ -775,42 +777,42 @@ switchD_97b83930_caseD_0:
             uVar23 = iVar7 + (uint)uVar1 * 0x10;
 LAB_97b839f4:
             puVar9[iVar6 * 9 + 0xd] = uVar23;
-            uVar14 = puVar27[uVar2 * 2 + 4];
+            uVar14 = puVar27[loopIndex * 2 + 4];
             if ((int)uVar14 < 0) {
               *(undefined1 *)((int)puVar9 + iVar24 + 0x47) = 1;
-              *(short *)(puVar9 + iVar6 * 9 + 0x10) = (short)(char)puVar27[uVar2 * 2 + 4];
-              uVar14 = puVar27[uVar2 * 2 + 4];
+              *(short *)(puVar9 + iVar6 * 9 + 0x10) = (short)(char)puVar27[loopIndex * 2 + 4];
+              uVar14 = puVar27[loopIndex * 2 + 4];
             }
             *(byte *)((int)puVar9 + iVar24 + 0x46) = (byte)(uVar14 >> 0x1b) & 1;
             *(undefined1 *)(puVar9 + iVar6 * 9 + 0x14) = 0xf;
             if (emulator[0xe] - 0x8b30 < 2) {
-              *(byte *)(puVar9 + iVar6 * 9 + 0x12) = (byte)(puVar27[uVar2 * 2 + 4] >> 0xe) & 1;
+              *(byte *)(puVar9 + iVar6 * 9 + 0x12) = (byte)(puVar27[loopIndex * 2 + 4] >> 0xe) & 1;
               *(byte *)((int)puVar9 + iVar24 + 0x49) =
-                   ((byte)(puVar27[uVar2 * 2 + 4] >> 0xc) & 3) + 1;
+                   ((byte)(puVar27[loopIndex * 2 + 4] >> 0xc) & 3) + 1;
             }
             else {
               *(undefined1 *)((int)puVar9 + iVar24 + 0x49) = 4;
               *(undefined1 *)(puVar9 + iVar6 * 9 + 0x12) = 0;
             }
             if (*(char *)((int)puVar9 + iVar24 + 0x49) == '\x01') {
-              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(puVar27[uVar2 * 2 + 4] >> 0x15) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3d) = (byte)(puVar27[uVar2 * 2 + 4] >> 0x15) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3e) = (byte)(puVar27[uVar2 * 2 + 4] >> 0x15) & 3;
-              bVar4 = (byte)(puVar27[uVar2 * 2 + 4] >> 0x15);
+              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
+              *(byte *)((int)puVar9 + iVar24 + 0x3d) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
+              *(byte *)((int)puVar9 + iVar24 + 0x3e) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
+              bVar4 = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15);
             }
             else {
-              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(puVar27[uVar2 * 2 + 4] >> 0x15) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3d) = (byte)(puVar27[uVar2 * 2 + 4] >> 0x13) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3e) = (byte)(puVar27[uVar2 * 2 + 4] >> 0x11) & 3;
-              bVar4 = (byte)(puVar27[uVar2 * 2 + 4] >> 0xf);
+              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
+              *(byte *)((int)puVar9 + iVar24 + 0x3d) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x13) & 3;
+              *(byte *)((int)puVar9 + iVar24 + 0x3e) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x11) & 3;
+              bVar4 = (byte)(puVar27[loopIndex * 2 + 4] >> 0xf);
             }
             *(byte *)((int)puVar9 + iVar24 + 0x3f) = bVar4 & 3;
 LAB_97b83af4:
             uVar14 = *puVar9;
 LAB_97b83af8:
-            uVar2 = uVar2 + 1;
+            loopIndex = loopIndex + 1;
             iVar6 = iVar6 + 1;
-          } while (uVar2 < uVar13);
+          } while (loopIndex < uVar13);
         }
         if (uVar19 != 0) {
           switch(uVar14) {
@@ -842,9 +844,9 @@ LAB_97b83af8:
         if (puVar9 == (uint *)emulator[1]) {
           puVar27 = (uint *)0x0;
         }
-        uVar22 = uVar22 + 1;
+        loopIndex2 = loopIndex2 + 1;
         puVar9 = puVar27;
-      } while (uVar22 < uVar20);
+      } while (loopIndex2 < uVar20);
     }
     if ((emulator[0xe] == 0x8804) || (emulator[0xe] == 0x8b30)) {
       iVar6 = *piVar15;
@@ -1052,9 +1054,9 @@ int _PPParserMacroFree(parser)
   uint uVar1;
   int iVar2;
   int iVar3;
-  uint uVar4;
+  uint loopIndex;
   
-  uVar4 = 0;
+  loopIndex = 0;
   _free(*parser);
   _free(parser[1]);
   uVar1 = parser[2];
@@ -1064,14 +1066,14 @@ int _PPParserMacroFree(parser)
   else {
     iVar3 = parser[3];
     do {
-      iVar2 = *(int *)(uVar4 * 4 + iVar3);
+      iVar2 = *(int *)(loopIndex * 4 + iVar3);
       if (iVar2 != 0) {
         _free(iVar2);
         uVar1 = parser[2];
         iVar3 = parser[3];
       }
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < uVar1);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < uVar1);
   }
   if (iVar3 != 0) {
     _free(iVar3);
@@ -1085,30 +1087,30 @@ int _PPParserGetScalars(param_1, param_2, param_3)
   float *param_2;
   int param_3;
 {
-  int iVar1;
-  int iVar2;
+  int part;
+  int loopIndex;
   double dVar3;
   char local_130 [256];
   char *local_30 [5];
   
-  iVar2 = 0;
+  loopIndex = 0;
   while( true ) {
-    iVar1 = _PPParserGetPart(param_1,local_130,1);
-    if (iVar1 == 0) {
+    part = _PPParserGetPart(param_1,local_130,1);
+    if (part == 0) {
       return 0x2d;
     }
     dVar3 = (double)((double (*)())_glp_strtod)(local_130,local_30);
     *param_2 = (float)dVar3;
-    if (local_30[0] != local_130 + iVar1) {
+    if (local_30[0] != local_130 + part) {
       return 0x15;
     }
-    iVar2 = iVar2 + 1;
+    loopIndex = loopIndex + 1;
     param_2 = param_2 + 1;
-    if (iVar2 == param_3) {
+    if (loopIndex == param_3) {
       return 0;
     }
-    iVar1 = _PPParserGetPart(param_1,local_130,0);
-    if (iVar1 == 0) break;
+    part = _PPParserGetPart(param_1,local_130,0);
+    if (part == 0) break;
     if (local_130[0] != ',') {
       _PPParserReturnPart(param_1);
       return 0;
@@ -1126,21 +1128,21 @@ int _PPStreamAddConstant(param_1, param_2)
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
-  undefined1 *puVar5;
+  undefined1 *allocation;
   undefined4 uVar6;
   
-  puVar5 = (undefined1 *)_calloc(0x1c,1);
+  allocation = (undefined1 *)_calloc(0x1c,1);
   uVar1 = param_2[3];
   uVar6 = *(undefined4 *)(param_1 + 0x2c);
   uVar2 = *param_2;
   uVar3 = param_2[1];
   uVar4 = param_2[2];
-  *puVar5 = 10;
-  *(undefined4 *)(puVar5 + 0xc) = uVar2;
-  *(undefined4 *)(puVar5 + 0x10) = uVar3;
-  *(undefined4 *)(puVar5 + 0x14) = uVar4;
-  *(undefined4 *)(puVar5 + 0x18) = uVar1;
-  return _PPStreamChunkListAddChunk(uVar6,puVar5);
+  *allocation = 10;
+  *(undefined4 *)(allocation + 0xc) = uVar2;
+  *(undefined4 *)(allocation + 0x10) = uVar3;
+  *(undefined4 *)(allocation + 0x14) = uVar4;
+  *(undefined4 *)(allocation + 0x18) = uVar1;
+  return _PPStreamChunkListAddChunk(uVar6,allocation);
 }
 
 /* _PPParserParseTempDeclaration @ 0x97b84264 (468 bytes) */
@@ -1148,10 +1150,12 @@ int _PPParserParseTempDeclaration(parser, param_2)
   int parser;
   int param_2;
 {
+  int part;
+  int part2;
   int iVar1;
   int iVar2;
   uint uVar3;
-  uint uVar4;
+  uint loopIndex;
   char local_140 [256];
   int local_40;
   uint local_3c;
@@ -1162,8 +1166,8 @@ int _PPParserParseTempDeclaration(parser, param_2)
   local_30[0] = 0;
   uVar3 = 0;
   do {
-    iVar1 = _PPParserGetPart(parser,local_140,0);
-    if (iVar1 == 0) {
+    part2 = _PPParserGetPart(parser,local_140,0);
+    if (part2 == 0) {
       return 0x2d;
     }
     iVar1 = _PPParserValidateName(parser,local_140);
@@ -1180,8 +1184,8 @@ int _PPParserParseTempDeclaration(parser, param_2)
       ((int (*)())_PPParserIdentifierFree)(iVar1);
       return 0x1c;
     }
-    iVar2 = _PPParserGetPart(parser,local_140,0);
-    if (iVar2 == 0) {
+    part = _PPParserGetPart(parser,local_140,0);
+    if (part == 0) {
       return 0x2d;
     }
     if (local_140[0] == '[') {
@@ -1192,8 +1196,8 @@ int _PPParserParseTempDeclaration(parser, param_2)
       }
       *(undefined1 *)(iVar1 + 0x10) = 1;
       *(undefined4 *)(iVar1 + 4) = local_30[0];
-      iVar2 = _PPParserGetPart(parser,local_140,0);
-      if (iVar2 == 0) {
+      part = _PPParserGetPart(parser,local_140,0);
+      if (part == 0) {
         return 0x2d;
       }
     }
@@ -1203,10 +1207,10 @@ int _PPParserParseTempDeclaration(parser, param_2)
       if (*(uint *)(parser + 0x460) < *(int *)(iVar1 + 0x14) + uVar3) {
         return 0x33;
       }
-      uVar4 = 0;
+      loopIndex = 0;
       if (uVar3 != 0) {
         while( true ) {
-          uVar4 = uVar4 + 1;
+          loopIndex = loopIndex + 1;
           local_34 = 0;
           local_38 = 0;
           local_40 = param_2 << 0x1d;
@@ -1214,7 +1218,7 @@ int _PPParserParseTempDeclaration(parser, param_2)
           ((int (*)())_PPStreamAddTempUsage)(*(undefined4 *)(parser + 0x1c),&local_40);
           *(int *)(*(int *)(parser + 0x44c) + 0x14) =
                *(int *)(*(int *)(parser + 0x44c) + 0x14) + 1;
-          if (uVar3 <= uVar4) break;
+          if (uVar3 <= loopIndex) break;
           iVar1 = *(int *)(parser + 0x44c);
         }
       }
@@ -1233,25 +1237,25 @@ int _PPParserParseSourceSwizzle(param_1, param_2, param_3)
   undefined4 uVar1;
   uint uVar2;
   int iVar3;
-  int iVar4;
+  int part;
   int iVar5;
   uint uVar6;
-  uint uVar7;
+  uint loopIndex;
   undefined1 local_110 [256];
   
-  iVar4 = _PPParserGetPart(param_1,local_110,0);
+  part = _PPParserGetPart(param_1,local_110,0);
   uVar6 = 0;
   uVar1 = 0x2d;
-  if (iVar4 != 0) {
-    if (iVar4 != 1) {
-      if (iVar4 != 4) {
+  if (part != 0) {
+    if (part != 1) {
+      if (part != 4) {
         return 0xd;
       }
     }
     else {
       *param_3 = 1;
     }
-    uVar7 = 0;
+    loopIndex = 0;
     iVar5 = 0;
     do {
       switch(local_110[iVar5]) {
@@ -1290,30 +1294,30 @@ LAB_97b84574:
       }
       iVar3 = 3;
 LAB_97b84584:
-      if (uVar7 == 1) {
+      if (loopIndex == 1) {
         uVar2 = iVar3 << 0x13 | *param_2 & 0xffe7ffff;
 LAB_97b845d4:
         *param_2 = uVar2;
       }
       else {
-        if (uVar7 == 0) {
+        if (loopIndex == 0) {
           uVar2 = iVar3 << 0x15 | *param_2 & 0xff9fffff;
           goto LAB_97b845d4;
         }
-        if (uVar7 == 2) {
+        if (loopIndex == 2) {
           uVar2 = iVar3 << 0x11 | *param_2 & 0xfff9ffff;
           goto LAB_97b845d4;
         }
-        if (uVar7 == 3) {
+        if (loopIndex == 3) {
           uVar2 = iVar3 << 0xf | *param_2 & 0xfffe7fff;
           goto LAB_97b845d4;
         }
       }
-      if (iVar4 != 1) {
+      if (part != 1) {
         iVar5 = iVar5 + 1;
       }
-      uVar7 = uVar7 + 1;
-    } while (uVar7 < 4);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < 4);
     if ((uVar6 == 3) || ((uVar6 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
 switchD_97b844cc_caseD_63:
       uVar1 = 0xd;
@@ -1331,21 +1335,21 @@ int _PPParserParseDestinationMask(param_1, param_2)
   uint *param_2;
 {
   uint uVar1;
-  uint uVar2;
+  uint part;
   undefined4 uVar3;
-  uint uVar4;
+  uint loopIndex;
   uint uVar5;
   undefined1 local_110 [260];
   
-  uVar2 = _PPParserGetPart(param_1,local_110,0);
+  part = _PPParserGetPart(param_1,local_110,0);
   uVar5 = 0;
   uVar3 = 0x2d;
-  if (uVar2 != 0) {
-    uVar4 = 0;
+  if (part != 0) {
+    loopIndex = 0;
     *param_2 = *param_2 & 0xfffe1fff;
-    if (uVar2 != 0) {
+    if (part != 0) {
       do {
-        switch(local_110[uVar4]) {
+        switch(local_110[loopIndex]) {
         case 0x61:
           if ((*param_2 & 0x10000) != 0) {
             return 0xc;
@@ -1403,8 +1407,8 @@ LAB_97b84778:
         *param_2 = uVar1;
         uVar5 = uVar5 | 2;
 LAB_97b847e8:
-        uVar4 = uVar4 + 1;
-      } while (uVar4 < uVar2);
+        loopIndex = loopIndex + 1;
+      } while (loopIndex < part);
       if ((uVar5 == 3) || ((uVar5 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
 LAB_97b8481c:
         return 0xc;
@@ -1420,6 +1424,8 @@ int _PPParserParseTextureSourceVar(parser, param_2)
   int parser;
   uint *param_2;
 {
+  int compareResult;
+  int part;
   uint uVar1;
   int iVar2;
   int iVar3;
@@ -1433,15 +1439,15 @@ int _PPParserParseTextureSourceVar(parser, param_2)
   char local_140 [256];
   uint local_40 [6];
   
-  iVar2 = _PPParserGetPart(parser,local_140,0);
+  part = _PPParserGetPart(parser,local_140,0);
   iVar3 = 0x2d;
-  if (iVar2 != 0) {
-    iVar2 = _memcmp(local_140,"texture",8);
+  if (part != 0) {
+    compareResult = _memcmp(local_140,"texture",8);
     iVar3 = 0xe;
-    if (iVar2 == 0) {
-      iVar2 = _PPParserGetPart(parser,local_140,0);
+    if (compareResult == 0) {
+      part = _PPParserGetPart(parser,local_140,0);
       iVar3 = 0x2d;
-      if (iVar2 != 0) {
+      if (part != 0) {
         if (local_140[0] == '[') {
           _PPParserReturnPart(parser);
           iVar2 = _PPParserParseArray(parser,local_40);
@@ -1451,8 +1457,8 @@ int _PPParserParseTextureSourceVar(parser, param_2)
           if (*(uint *)(parser + 0x474) <= local_40[0]) {
             return 0x38;
           }
-          iVar2 = _PPParserGetPart(parser,local_140,0);
-          if (iVar2 == 0) {
+          part = _PPParserGetPart(parser,local_140,0);
+          if (part == 0) {
             return 0x2d;
           }
         }
@@ -1461,37 +1467,37 @@ int _PPParserParseTextureSourceVar(parser, param_2)
         }
         iVar3 = 0x1f;
         if (local_140[0] == ',') {
-          iVar2 = _PPParserGetPart(parser,local_140,0);
+          part = _PPParserGetPart(parser,local_140,0);
           uVar1 = local_40[0];
           iVar3 = 0x2d;
-          if (iVar2 != 0) {
+          if (part != 0) {
             uVar5 = *(uint *)(parser + 0x34);
             uVar6 = *(uint *)(parser + 0x38);
             ((int (*)())___lshrdi3)(uVar5,uVar6,local_40[0] << 2);
-            iVar2 = _memcmp(local_140,"CUBE",5);
+            compareResult = _memcmp(local_140,"CUBE",5);
             uVar7 = 0;
-            if (iVar2 != 0) {
-              iVar2 = _memcmp(local_140,"3D",3);
+            if (compareResult != 0) {
+              compareResult = _memcmp(local_140,"3D",3);
               uVar7 = 1;
-              if (iVar2 != 0) {
-                iVar2 = _memcmp(local_140,"RECT",5);
+              if (compareResult != 0) {
+                compareResult = _memcmp(local_140,"RECT",5);
                 uVar7 = 2;
-                if (iVar2 != 0) {
-                  iVar2 = _memcmp(local_140,"2D",3);
+                if (compareResult != 0) {
+                  compareResult = _memcmp(local_140,"2D",3);
                   uVar7 = 3;
-                  if (iVar2 != 0) {
-                    iVar2 = _memcmp(local_140,"1D",3);
+                  if (compareResult != 0) {
+                    compareResult = _memcmp(local_140,"1D",3);
                     uVar7 = 4;
-                    if (iVar2 != 0) {
-                      iVar2 = _memcmp(local_140,"SHADOWRECT",0xb);
+                    if (compareResult != 0) {
+                      compareResult = _memcmp(local_140,"SHADOWRECT",0xb);
                       uVar7 = 5;
-                      if (iVar2 != 0) {
-                        iVar2 = _memcmp(local_140,"SHADOW2D",9);
+                      if (compareResult != 0) {
+                        compareResult = _memcmp(local_140,"SHADOW2D",9);
                         uVar7 = 6;
-                        if (iVar2 != 0) {
-                          iVar2 = _memcmp(local_140,"SHADOW1D",9);
+                        if (compareResult != 0) {
+                          compareResult = _memcmp(local_140,"SHADOW1D",9);
                           uVar7 = 7;
-                          if (iVar2 != 0) {
+                          if (compareResult != 0) {
                             return 0xe;
                           }
                         }
@@ -1657,53 +1663,56 @@ int _PPEmulatorProgramFree(emulator)
 int _PPParserParseAliasDeclaration(parser)
   int parser;
 {
+  int part3;
+  int allocation;
+  int part;
   undefined4 uVar1;
   int iVar2;
   undefined4 uVar3;
   int iVar4;
-  int iVar5;
+  int part2;
   char local_130 [256];
   undefined4 local_30;
   undefined4 local_2c;
   
-  iVar2 = _PPParserGetPart(parser,local_130,0);
+  part = _PPParserGetPart(parser,local_130,0);
   uVar1 = 0x2d;
-  if (iVar2 != 0) {
+  if (part != 0) {
     uVar3 = _PPParserMacroCreate();
-    _PPParserMacroSetSearchString(parser,uVar3,local_130,iVar2);
-    iVar2 = _PPParserGetPart(parser,local_130,0);
+    _PPParserMacroSetSearchString(parser,uVar3,local_130,part);
+    part = _PPParserGetPart(parser,local_130,0);
     uVar1 = 0x2d;
-    if ((iVar2 != 0) && (uVar1 = 10, local_130[0] == '=')) {
+    if ((part != 0) && (uVar1 = 10, local_130[0] == '=')) {
       local_30 = *(undefined4 *)(parser + 0xc);
       iVar2 = 0;
       local_2c = *(undefined4 *)(parser + 0x10);
       while( true ) {
-        iVar4 = _PPParserGetPart(parser,local_130,0);
+        part3 = _PPParserGetPart(parser,local_130,0);
         uVar1 = 0x2d;
-        if (iVar4 == 0) break;
+        if (part3 == 0) break;
         if (local_130[0] == ';') {
           if (iVar2 == 0) {
             return 10;
           }
           *(undefined4 *)(parser + 0x10) = local_2c;
           *(undefined4 *)(parser + 0xc) = local_30;
-          iVar2 = _malloc(iVar2 + 2);
+          allocation = _malloc(iVar2 + 2);
           iVar4 = 0;
           while( true ) {
-            iVar5 = _PPParserGetPart(parser,iVar2 + iVar4,0);
-            if (iVar5 == 0) {
+            part2 = _PPParserGetPart(parser,allocation + iVar4,0);
+            if (part2 == 0) {
               return 0x2d;
             }
-            if (*(char *)(iVar2 + iVar4) == ';') break;
-            *(undefined1 *)(iVar2 + iVar4 + iVar5) = 0x20;
-            iVar4 = iVar4 + iVar5 + 1;
+            if (*(char *)(allocation + iVar4) == ';') break;
+            *(undefined1 *)(allocation + iVar4 + part2) = 0x20;
+            iVar4 = iVar4 + part2 + 1;
           }
-          *(undefined1 *)(iVar2 + iVar4) = 0;
-          ((int (*)())_PPParserMacroSetReplaceString)(parser,uVar3,iVar2);
+          *(undefined1 *)(allocation + iVar4) = 0;
+          ((int (*)())_PPParserMacroSetReplaceString)(parser,uVar3,allocation);
           _PPParserScopeAddMacro(*(undefined4 *)(parser + 0x44c),uVar3);
           return 0;
         }
-        iVar2 = iVar2 + iVar4 + 1;
+        iVar2 = iVar2 + part3 + 1;
       }
     }
   }
@@ -1736,7 +1745,7 @@ int _PPParserMacroGetReplaceString(parser, param_2, param_3, param_4)
   int iVar4;
   char *pcVar5;
   char *pcVar6;
-  uint uVar7;
+  uint loopIndex;
   int iVar8;
   
   iVar4 = 0;
@@ -1751,11 +1760,11 @@ int _PPParserMacroGetReplaceString(parser, param_2, param_3, param_4)
     }
     for (iVar8 = 0; (cVar1 = pcVar5[iVar8], cVar1 != ' ' && (cVar1 != '\n')); iVar8 = iVar8 + 1) {
     }
-    uVar7 = 0;
+    loopIndex = 0;
     pcVar6 = pcVar5 + iVar8 + 1;
     if (*(int *)(parser + 8) != 0) {
       do {
-        iVar2 = uVar7 * 4;
+        iVar2 = loopIndex * 4;
         iVar3 = _strlen(*(undefined4 *)(iVar2 + *(int *)(parser + 0xc)));
         if ((iVar8 == iVar3) &&
            (iVar3 = _strncmp(pcVar5,*(undefined4 *)(iVar2 + *(int *)(parser + 0xc)),iVar8),
@@ -1764,8 +1773,8 @@ int _PPParserMacroGetReplaceString(parser, param_2, param_3, param_4)
           iVar8 = _strlen(pcVar5);
           break;
         }
-        uVar7 = uVar7 + 1;
-      } while (uVar7 < *(uint *)(parser + 8));
+        loopIndex = loopIndex + 1;
+      } while (loopIndex < *(uint *)(parser + 8));
     }
     if (param_4 != 0) {
       _memmove(param_4 + iVar4,pcVar5,iVar8 + 1);
@@ -1782,16 +1791,17 @@ int _PPParserParseSwizzleCode(param_1, param_2)
   int param_1;
   uint *param_2;
 {
+  int part2;
   uint uVar1;
-  int iVar2;
+  int part;
   uint uVar3;
-  int iVar4;
+  int loopIndex;
   int iVar5;
   char local_120;
   char local_11f;
   
   uVar3 = 0;
-  iVar4 = 0;
+  loopIndex = 0;
   do {
     uVar1 = _PPParserGetPart(param_1,&local_120,0);
     iVar5 = 0;
@@ -1807,11 +1817,11 @@ LAB_97b850c8:
         local_120 = local_11f;
       }
       else {
-        iVar2 = _PPParserGetPart(param_1,&local_120,0);
-        if (iVar2 == 0) {
+        part = _PPParserGetPart(param_1,&local_120,0);
+        if (part == 0) {
           return 0x2d;
         }
-        if (iVar2 != 1) {
+        if (part != 1) {
           return 0xf;
         }
       }
@@ -1881,34 +1891,34 @@ LAB_97b852e8:
     if ((uVar3 == 3) || ((uVar3 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
       return 0xd;
     }
-    if (iVar4 == 1) {
+    if (loopIndex == 1) {
       uVar1 = uVar1 << 8 | *param_2 & 0xfffff0ff;
 LAB_97b85380:
       *param_2 = uVar1;
 LAB_97b85398:
-      if (iVar4 == 3) {
+      if (loopIndex == 3) {
         return 0;
       }
     }
     else {
-      if (iVar4 == 0) {
+      if (loopIndex == 0) {
         uVar1 = uVar1 << 0xc | *param_2 & 0xffff0fff;
         goto LAB_97b85380;
       }
-      if (iVar4 == 2) {
+      if (loopIndex == 2) {
         uVar1 = uVar1 << 4 | *param_2 & 0xffffff0f;
         goto LAB_97b85380;
       }
-      if (iVar4 == 3) {
+      if (loopIndex == 3) {
         *param_2 = uVar1 | *param_2 & 0xfffffff0;
         goto LAB_97b85398;
       }
     }
-    iVar5 = _PPParserGetPart(param_1,&local_120,0);
-    if (iVar5 == 0) {
+    part2 = _PPParserGetPart(param_1,&local_120,0);
+    if (part2 == 0) {
       return 0x2d;
     }
-    iVar4 = iVar4 + 1;
+    loopIndex = loopIndex + 1;
     if (local_120 != ',') {
       return 0xf;
     }
@@ -1963,15 +1973,15 @@ int DetachProcess()
 int _InitStringTable(param_1)
   int *param_1;
 {
-  int iVar1;
+  int allocation;
   
-  iVar1 = _malloc(0x4000);
-  *param_1 = iVar1;
-  if (iVar1 != 0) {
+  allocation = _malloc(0x4000);
+  *param_1 = allocation;
+  if (allocation != 0) {
     param_1[2] = 0x4000;
     param_1[1] = 1;
   }
-  return (uint)(iVar1 != 0);
+  return (uint)(allocation != 0);
 }
 
 /* _FreeStringTable @ 0x97b8552c (72 bytes) */
@@ -2036,21 +2046,21 @@ int _AddString(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
-  int iVar1;
-  int iVar2;
+  int length;
+  int allocation;
   int iVar3;
   
-  iVar1 = _strlen(param_2);
+  length = _strlen(param_2);
   iVar3 = param_1[1];
-  if (param_1[2] <= iVar3 + iVar1 + 1) {
-    iVar2 = _malloc(param_1[2] << 1);
-    _memcpy(iVar2,*param_1,param_1[2]);
+  if (param_1[2] <= iVar3 + length + 1) {
+    allocation = _malloc(param_1[2] << 1);
+    _memcpy(allocation,*param_1,param_1[2]);
     _free(*param_1);
     iVar3 = param_1[1];
-    *param_1 = iVar2;
+    *param_1 = allocation;
   }
   _strcpy(*param_1 + iVar3,param_2);
-  param_1[1] = param_1[1] + iVar1 + 1;
+  param_1[1] = param_1[1] + length + 1;
   return iVar3;
 }
 
@@ -2059,15 +2069,16 @@ int _InitHashTable(param_1, param_2)
   int *param_1;
   int param_2;
 {
+  int allocation;
   int iVar1;
   int *piVar2;
   int iVar3;
   undefined4 uVar4;
   
-  iVar3 = _malloc(param_2 << 3);
-  *param_1 = iVar3;
+  allocation = _malloc(param_2 << 3);
+  *param_1 = allocation;
   uVar4 = 0;
-  if (iVar3 != 0) {
+  if (allocation != 0) {
     iVar3 = 0;
     param_1[1] = param_2;
     if (0 < param_2) {
@@ -2110,33 +2121,33 @@ int _GrowAtomTable(param_1, param_2)
   int param_1;
   int param_2;
 {
-  int iVar1;
-  int iVar2;
+  int allocation;
+  int allocation2;
   
   if (*(int *)(param_1 + 0x34) < param_2) {
     if (*(int *)(param_1 + 0x28) == 0) {
-      iVar1 = _malloc(param_2 << 2);
-      iVar2 = _malloc(param_2 << 2);
+      allocation = _malloc(param_2 << 2);
+      allocation2 = _malloc(param_2 << 2);
       *(undefined4 *)(param_1 + 0x34) = 0;
     }
     else {
-      iVar1 = _realloc(*(int *)(param_1 + 0x28),param_2 << 2);
-      iVar2 = _realloc(*(undefined4 *)(param_1 + 0x2c),param_2 << 2);
+      allocation = _realloc(*(int *)(param_1 + 0x28),param_2 << 2);
+      allocation2 = _realloc(*(undefined4 *)(param_1 + 0x2c),param_2 << 2);
     }
-    if ((iVar1 == 0) || (iVar2 == 0)) {
-      if (iVar1 != 0) {
-        *(int *)(param_1 + 0x28) = iVar1;
+    if ((allocation == 0) || (allocation2 == 0)) {
+      if (allocation != 0) {
+        *(int *)(param_1 + 0x28) = allocation;
       }
-      if (iVar2 != 0) {
-        *(int *)(param_1 + 0x28) = iVar2;
+      if (allocation2 != 0) {
+        *(int *)(param_1 + 0x28) = allocation2;
       }
       return 0xffffffff;
     }
-    _memset(*(int *)(param_1 + 0x34) * 4 + iVar1,0,(param_2 - *(int *)(param_1 + 0x34)) * 4);
-    _memset(*(int *)(param_1 + 0x34) * 4 + iVar2,0,(param_2 - *(int *)(param_1 + 0x34)) * 4);
+    _memset(*(int *)(param_1 + 0x34) * 4 + allocation,0,(param_2 - *(int *)(param_1 + 0x34)) * 4);
+    _memset(*(int *)(param_1 + 0x34) * 4 + allocation2,0,(param_2 - *(int *)(param_1 + 0x34)) * 4);
     *(int *)(param_1 + 0x34) = param_2;
-    *(int *)(param_1 + 0x28) = iVar1;
-    *(int *)(param_1 + 0x2c) = iVar2;
+    *(int *)(param_1 + 0x28) = allocation;
+    *(int *)(param_1 + 0x2c) = allocation2;
   }
   return 0;
 }
@@ -2147,22 +2158,22 @@ int _lReverse(param_1)
 {
   uint uVar1;
   uint uVar2;
-  int iVar3;
+  int loopIndex;
   
   uVar2 = 0;
-  iVar3 = 0;
+  loopIndex = 0;
   if (param_1 != 0) {
     do {
       uVar1 = param_1 & 1;
       param_1 = param_1 >> 1;
-      iVar3 = iVar3 + 1;
+      loopIndex = loopIndex + 1;
       uVar2 = uVar2 << 1 | uVar1;
     } while (param_1 != 0);
-    if (0x13 < iVar3) {
+    if (0x13 < loopIndex) {
       return uVar2;
     }
   }
-  return uVar2 << (0x14U - iVar3 & 0x3f);
+  return uVar2 << (0x14U - loopIndex & 0x3f);
 }
 
 /* _AllocateAtom @ 0x97b858bc (120 bytes) */
@@ -2202,12 +2213,13 @@ int _FindHashLoc(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
+  int compareResult;
   uint uVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int *piVar5;
-  int iVar6;
+  int loopIndex;
   int local_30;
   int local_2c [4];
   
@@ -2215,7 +2227,7 @@ int _FindHashLoc(param_1, param_2)
   iVar4 = iVar4 - (iVar4 / param_1[4]) * param_1[4];
   iVar2 = *(int *)(iVar4 * 8 + param_1[3]);
   if ((iVar2 != 0) && (iVar2 = _strcmp(param_2,*param_1 + iVar2), iVar2 != 0)) {
-    iVar6 = 0;
+    loopIndex = 0;
     iVar2 = ((int (*)())_HashString2)(param_2);
     piVar5 = &local_30;
     local_30 = iVar4;
@@ -2224,17 +2236,17 @@ int _FindHashLoc(param_1, param_2)
       iVar4 = uVar1 - ((int)uVar1 / param_1[4]) * param_1[4];
       iVar3 = *(int *)(iVar4 * 8 + param_1[3]);
       if (iVar3 == 0) {
-        param_1[iVar6 + 6] = param_1[iVar6 + 6] + 1;
+        param_1[loopIndex + 6] = param_1[loopIndex + 6] + 1;
         return iVar4;
       }
-      iVar3 = _strcmp(param_2,*param_1 + iVar3);
-      if (iVar3 == 0) {
+      compareResult = _strcmp(param_2,*param_1 + iVar3);
+      if (compareResult == 0) {
         return iVar4;
       }
-      iVar6 = iVar6 + 1;
+      loopIndex = loopIndex + 1;
       piVar5 = piVar5 + 1;
       *piVar5 = iVar4;
-    } while (iVar6 < 3);
+    } while (loopIndex < 3);
     iVar4 = -1;
   }
   return iVar4;
