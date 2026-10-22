@@ -141,8 +141,8 @@ int FUN_00003cd0(ctx, syncId)
   int mapBaseOrCount;
   int *refCounter;
   int *cmdWrite;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservationHeld;
+  byte condReg0;
   
   taskPortPtr = PTR_0000f1a0;
   cmdWrite = *(int **)(ctx + 0x34);
@@ -205,12 +205,12 @@ LAB_00003ed8:
     *payload = *refCounter;
     refCounter = refCounter + 4;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservationHeld != '\0') {
         mapBaseOrCount = storeWordConditionalIndexed(*refCounter + 1,0,refCounter);
         *refCounter = mapBaseOrCount;
-        in_cr0 = 2;
+        condReg0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(condReg0 >> 1 & 1));
   default:
     goto switchD_00003e00_default;
   }
@@ -219,12 +219,12 @@ LAB_00003ed8:
   *payload = *refCounter;
   refCounter = refCounter + 4;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservationHeld != '\0') {
       mapBaseOrCount = storeWordConditionalIndexed(*refCounter + 1,0,refCounter);
       *refCounter = mapBaseOrCount;
-      in_cr0 = 2;
+      condReg0 = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(condReg0 >> 1 & 1));
 switchD_00003e00_default:
   mapBaseOrCount = 6;
   do {
@@ -367,7 +367,7 @@ int FUN_00004340(ctx, sizeInfo, requestedCount)
   bool notLast;
   uint heightOrCtrlOrPlaneAddr;
   int allocOrRowBase;
-  undefined4 extraout_r4;
+  undefined4 r4AfterCall;
   undefined4 bufferOrStatus;
   undefined4 allocAlign;
   undefined4 allocFlags;
@@ -381,14 +381,14 @@ int FUN_00004340(ctx, sizeInfo, requestedCount)
   uint surfaceCount;
   undefined4 *freeCursor;
   int innerCount;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double fpPassThrough1;
+  double fpPassThrough2;
+  double fpPassThrough3;
+  double fpPassThrough4;
+  double fpPassThrough5;
+  double fpPassThrough6;
+  double fpPassThrough7;
+  double fpPassThrough8;
   double in_stack_ffffff88;
   double in_stack_ffffff90;
   undefined4 scalarOut0;
@@ -522,10 +522,10 @@ int FUN_00004340(ctx, sizeInfo, requestedCount)
           allocOrRowBase = (*(uint *)(ctx + 0x57c) >> 4) * 0x18;
           indexOrStatus = FUN_00003350(ctx,ctx + 0x15394,bufferOrStatus,widthOrCount,allocOrRowBase,0x20,0);
           if (indexOrStatus == 0) {
-            fparam_1 = (double)((int (*)())FUN_00003cd0)(ctx,1);
-            ((void (*)())FUN_00006d90)(ctx,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+            fpPassThrough1 = (double)((int (*)())FUN_00003cd0)(ctx,1);
+            ((void (*)())FUN_00006d90)(ctx,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,
                          in_stack_ffffff88,in_stack_ffffff90);
-            ((int (*)())FUN_00005d70)(ctx,extraout_r4,bufferOrStatus,widthOrCount,allocOrRowBase,allocAlign,allocFlags,planeTableA);
+            ((int (*)())FUN_00005d70)(ctx,r4AfterCall,bufferOrStatus,widthOrCount,allocOrRowBase,allocAlign,allocFlags,planeTableA);
             DAT_0000f1a8 = *(undefined4 *)(ctx + 0x578);
             DAT_0000f1a4 = *(undefined4 *)(ctx + 0x57c);
             do {
@@ -554,41 +554,42 @@ LAB_00004448:
 }
 
 /* FUN_00004740 @ 0x4740 (664 bytes) */
-int FUN_00004740(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 *param_4;
-  int param_5;
+int FUN_00004740(ctx, slotIndex, flags, position, enable)
+  int ctx;
+  int slotIndex;
+  undefined4 flags;
+  undefined4 *position;
+  int enable;
 {
-  undefined *puVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 uVar4;
-  uint *puVar5;
-  int iVar6;
-  int iVar7;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
+  undefined *mapMemoryType;
+  uint effectFlags;
+  int slotEntry;
+  undefined4 positionX;
+  uint *lastHeader;
+  int slotTable;
+  double fpPassThrough;
+  double fpPassThrough2;
+  double fpPassThrough3;
+  double fpPassThrough4;
+  int slotOffset;
+  int mapBase;
   
-  iVar6 = param_2 * 4;
-  iVar7 = param_1 + 0x55c;
-  iVar3 = iVar6 + iVar7;
-  if (*(int *)(iVar3 + 0x52c) != 0) {
+  slotOffset = slotIndex * 4;
+  slotTable = ctx + 0x55c;
+  slotEntry = slotOffset + slotTable;
+  if (*(int *)(slotEntry + 0x52c) != 0) {
     return;
   }
-  if (*(int *)(iVar3 + 0x554) == 0) {
-    if (*(int *)(param_1 + 0x120) != 0) {
-      if (*(int *)(iVar3 + 0x540) == 1) {
-        if (*(int *)(param_1 + 0x120) == 4) {
-          ((int (*)())FUN_0000caa0)(param_1,param_1 + 0x14348 + param_2 * 0x14,param_1 + 0x143ac + param_2 * 0x18
+  if (*(int *)(slotEntry + 0x554) == 0) {
+    if (*(int *)(ctx + 0x120) != 0) {
+      if (*(int *)(slotEntry + 0x540) == 1) {
+        if (*(int *)(ctx + 0x120) == 4) {
+          ((int (*)())FUN_0000caa0)(ctx,ctx + 0x14348 + slotIndex * 0x14,ctx + 0x143ac + slotIndex * 0x18
                        ,1);
         }
-        ((int (*)())FUN_0000caa0)(param_1,param_2 * 0x14 + param_1 + 0x14348,param_2 * 0x18 + param_1 + 0x143ac,2
+        ((int (*)())FUN_0000caa0)(ctx,slotIndex * 0x14 + ctx + 0x14348,slotIndex * 0x18 + ctx + 0x143ac,2
                     );
-        *(undefined4 *)(iVar6 + iVar7 + 0x554) = 1;
+        *(undefined4 *)(slotOffset + slotTable + 0x554) = 1;
         goto LAB_00004810;
       }
       goto LAB_0000481c;
@@ -596,60 +597,60 @@ int FUN_00004740(param_1, param_2, param_3, param_4, param_5)
   }
   else {
 LAB_00004810:
-    if (*(int *)(param_1 + 0x120) != 0) {
+    if (*(int *)(ctx + 0x120) != 0) {
 LAB_0000481c:
-      if (*(int *)(iVar6 + iVar7 + 0x554) != 0) {
-        uVar2 = *(uint *)(param_1 + 0x11c);
-        if ((uVar2 & 2) != 0) {
-          ((int (*)())FUN_0000a110)(param_1,param_2,1);
-          uVar2 = *(uint *)(param_1 + 0x11c);
+      if (*(int *)(slotOffset + slotTable + 0x554) != 0) {
+        effectFlags = *(uint *)(ctx + 0x11c);
+        if ((effectFlags & 2) != 0) {
+          ((int (*)())FUN_0000a110)(ctx,slotIndex,1);
+          effectFlags = *(uint *)(ctx + 0x11c);
         }
-        if ((uVar2 & 4) != 0) {
-          ((int (*)())FUN_00009c80)(param_1,param_2,1);
+        if ((effectFlags & 4) != 0) {
+          ((int (*)())FUN_00009c80)(ctx,slotIndex,1);
         }
-        fparam_1 = (double)((int (*)())FUN_0000b7f0)(param_1,param_2,1);
+        fpPassThrough = (double)((int (*)())FUN_0000b7f0)(ctx,slotIndex,1);
         goto LAB_000048e0;
       }
     }
   }
-  uVar2 = *(uint *)(param_1 + 0x11c);
-  if ((uVar2 & 2) != 0) {
-    ((int (*)())FUN_0000a110)(param_1,param_2,0);
-    uVar2 = *(uint *)(param_1 + 0x11c);
+  effectFlags = *(uint *)(ctx + 0x11c);
+  if ((effectFlags & 2) != 0) {
+    ((int (*)())FUN_0000a110)(ctx,slotIndex,0);
+    effectFlags = *(uint *)(ctx + 0x11c);
   }
-  if ((uVar2 & 4) != 0) {
-    ((int (*)())FUN_00009c80)(param_1,param_2,0);
+  if ((effectFlags & 4) != 0) {
+    ((int (*)())FUN_00009c80)(ctx,slotIndex,0);
   }
-  fparam_1 = (double)((int (*)())FUN_0000b7f0)(param_1,param_2,0);
+  fpPassThrough = (double)((int (*)())FUN_0000b7f0)(ctx,slotIndex,0);
 LAB_000048e0:
-  *(int *)(param_1 + 0x118) = param_5;
-  if (param_5 != 0) {
-    *(undefined4 *)(param_1 + 0x114) = param_3;
-    uVar4 = *param_4;
-    *(undefined4 *)(param_1 + 0x110) = param_4[1];
-    *(undefined4 *)(param_1 + 0x10c) = uVar4;
-    ((void (*)())FUN_0000ae80)(param_1,fparam_1,in_f2,in_f3,in_f4);
+  *(int *)(ctx + 0x118) = enable;
+  if (enable != 0) {
+    *(undefined4 *)(ctx + 0x114) = flags;
+    positionX = *position;
+    *(undefined4 *)(ctx + 0x110) = position[1];
+    *(undefined4 *)(ctx + 0x10c) = positionX;
+    ((void (*)())FUN_0000ae80)(ctx,fpPassThrough,fpPassThrough2,fpPassThrough3,fpPassThrough4);
   }
-  puVar5 = *(uint **)(param_1 + 0x30);
-  *puVar5 = *(int *)(param_1 + 0x34) - (int)puVar5 >> 2 | *puVar5;
-  puVar1 = PTR_0000f1a0;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x2000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar6 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar6 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar6 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
-  *(undefined4 *)(iVar6 + 0x1c) = 0;
-  if ((*(uint *)(*(int *)(param_1 + 0x40) + 0x14) & 2) == 0) {
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  mapMemoryType = PTR_0000f1a0;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x2000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  mapBase = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = mapBase + 0x20;
+  *(int *)(ctx + 0x30) = mapBase + 0x1c;
+  *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+  *(undefined4 *)(mapBase + 0x1c) = 0;
+  if ((*(uint *)(*(int *)(ctx + 0x40) + 0x14) & 2) == 0) {
     return;
   }
                     
                     
-  (**(code **)(*(int *)(*(int *)(param_1 + 0x50) + 0xc) + 0xc))
-            (*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 8),
-             *(undefined4 *)(param_1 + 0xc));
+  (**(code **)(*(int *)(*(int *)(ctx + 0x50) + 0xc) + 0xc))
+            (*(undefined4 *)(ctx + 4),*(undefined4 *)(ctx + 8),
+             *(undefined4 *)(ctx + 0xc));
   return;
 }
 
@@ -1109,17 +1110,17 @@ int FUN_000052f0(ctx, subpicture, unused1, unused2, unused3)
 }
 
 /* FUN_000056a0 @ 0x56a0 (512 bytes) */
-int FUN_000056a0(ctx, param_2)
+int FUN_000056a0(ctx, slotId)
   int ctx;
-  int param_2;
+  int slotId;
 {
   undefined *mapMemoryType;
   uint *lastHeader;
-  int iVar3;
+  int mapBase;
   undefined4 *cmdWrite;
   
   mapMemoryType = PTR_0000f1a0;
-  if (param_2 == *(int *)(ctx + 0x558)) {
+  if (slotId == *(int *)(ctx + 0x558)) {
     cmdWrite = *(undefined4 **)(ctx + 0x34);
     if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x10) {
       lastHeader = *(uint **)(ctx + 0x30);
@@ -1128,11 +1129,11 @@ int FUN_000056a0(ctx, param_2)
       **(undefined4 **)(ctx + 0x34) = 0x1000000;
       _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
                           ctx + 0x44,1);
-      iVar3 = *(int *)(ctx + 0x40);
-      *(int *)(ctx + 0x34) = iVar3 + 0x20;
-      *(int *)(ctx + 0x30) = iVar3 + 0x1c;
-      *(int *)(ctx + 0x38) = iVar3 + 0x20 + *(int *)(iVar3 + 0x10) * 4;
-      *(undefined4 *)(iVar3 + 0x1c) = 0;
+      mapBase = *(int *)(ctx + 0x40);
+      *(int *)(ctx + 0x34) = mapBase + 0x20;
+      *(int *)(ctx + 0x30) = mapBase + 0x1c;
+      *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+      *(undefined4 *)(mapBase + 0x1c) = 0;
       cmdWrite = *(undefined4 **)(ctx + 0x34);
     }
     lastHeader = *(uint **)(ctx + 0x30);
@@ -1152,11 +1153,11 @@ int FUN_000056a0(ctx, param_2)
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
                         ctx + 0x44,1);
-    iVar3 = *(int *)(ctx + 0x40);
-    *(int *)(ctx + 0x34) = iVar3 + 0x20;
-    *(int *)(ctx + 0x30) = iVar3 + 0x1c;
-    *(int *)(ctx + 0x38) = iVar3 + 0x20 + *(int *)(iVar3 + 0x10) * 4;
-    *(undefined4 *)(iVar3 + 0x1c) = 0;
+    mapBase = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = mapBase + 0x20;
+    *(int *)(ctx + 0x30) = mapBase + 0x1c;
+    *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+    *(undefined4 *)(mapBase + 0x1c) = 0;
   }
   if ((*(uint *)(*(int *)(ctx + 0x40) + 0x14) & 2) != 0) {
     (**(code **)(*(int *)(*(int *)(ctx + 0x50) + 0xc) + 0xc))
@@ -1435,104 +1436,104 @@ int FUN_00005d70(ctx, unused1, unused2, rowOrScratch, unused3, unused4, unused5,
 }
 
 /* FUN_00005fd0 @ 0x5fd0 (320 bytes) */
-int FUN_00005fd0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00005fd0(ctx, listSelect)
+  int ctx;
+  int listSelect;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  int local_48;
-  int local_44;
-  uint local_40;
-  undefined4 local_3c;
-  uint local_30;
+  bool isSecondList;
+  uint modeBits;
+  int status;
+  uint requestHeight;
+  undefined4 outResult;
+  undefined4 requestInterlace;
+  undefined4 requestFlag;
+  undefined4 requestSurface;
+  int requestList;
+  int requestWordCount;
+  uint requestFlags;
+  undefined4 requestExtra;
+  uint requestSize;
   
-  bVar1 = param_2 != 0;
-  local_58 = 0;
-  if (bVar1) {
-    local_44 = *(int *)(param_1 + 0x15148) - *(int *)(param_1 + 0x15140);
+  isSecondList = listSelect != 0;
+  outResult = 0;
+  if (isSecondList) {
+    requestWordCount = *(int *)(ctx + 0x15148) - *(int *)(ctx + 0x15140);
   }
   else {
-    local_44 = *(int *)(param_1 + 0x15124) - *(int *)(param_1 + 0x1511c);
+    requestWordCount = *(int *)(ctx + 0x15124) - *(int *)(ctx + 0x1511c);
   }
-  local_44 = local_44 >> 2;
-  if (local_44 == 0) {
+  requestWordCount = requestWordCount >> 2;
+  if (requestWordCount == 0) {
     return 1;
   }
-  if (*(int *)(param_1 + 0x55c) == 3) {
-    uVar4 = *(uint *)(param_1 + 0x57c);
-    local_54 = 0;
+  if (*(int *)(ctx + 0x55c) == 3) {
+    requestHeight = *(uint *)(ctx + 0x57c);
+    requestInterlace = 0;
   }
   else {
-    local_54 = 1;
-    uVar4 = *(uint *)(param_1 + 0x57c) >> 1;
-    if (*(int *)(param_1 + 0x55c) == 2) {
-      local_50 = 1;
+    requestInterlace = 1;
+    requestHeight = *(uint *)(ctx + 0x57c) >> 1;
+    if (*(int *)(ctx + 0x55c) == 2) {
+      requestFlag = 1;
       goto LAB_00006078;
     }
   }
-  local_50 = 0;
+  requestFlag = 0;
 LAB_00006078:
-  local_4c = *(undefined4 *)(param_1 + 0x568);
-  if (bVar1) {
-    uVar2 = 0;
+  requestSurface = *(undefined4 *)(ctx + 0x568);
+  if (isSecondList) {
+    modeBits = 0;
   }
   else {
-    uVar2 = 0x20;
+    modeBits = 0x20;
   }
-  local_40 = uVar2 | (*(byte *)(param_1 + 0x564) & 3) << 3 | 0x10080;
-  if (bVar1) {
-    local_3c = 0x8000;
+  requestFlags = modeBits | (*(byte *)(ctx + 0x564) & 3) << 3 | 0x10080;
+  if (isSecondList) {
+    requestExtra = 0x8000;
   }
   else {
-    local_3c = 0;
+    requestExtra = 0;
   }
-  local_30 = uVar4 << 0x10 | *(uint *)(param_1 + 0x578);
-  local_48 = param_2;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 0x14),0x12,&local_54,0x38,0,&local_58);
-  if (iVar3 == 0) {
+  requestSize = requestHeight << 0x10 | *(uint *)(ctx + 0x578);
+  requestList = listSelect;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 0x14),0x12,&requestInterlace,0x38,0,&outResult);
+  if (status == 0) {
     return 1;
   }
   return 0;
 }
 
 /* FUN_00006120 @ 0x6120 (252 bytes) */
-int FUN_00006120(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00006120(ctx, listSelect)
+  int ctx;
+  int listSelect;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int bufferStart;
+  undefined4 submitResult;
+  int mappedBase;
   
-  uVar2 = ((int (*)())FUN_00005fd0)(param_1,param_2);
-  if (param_2 == 0) {
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),4,*(undefined4 *)PTR_0000f1a0,
-                        param_1 + 0x14554,param_1 + 0x14558,1);
-    iVar3 = *(int *)(param_1 + 0x14554);
-    iVar1 = iVar3 + 0x20;
-    *(int *)(param_1 + 0x1511c) = iVar1;
-    *(int *)(param_1 + 0x15124) = iVar1;
-    *(int *)(param_1 + 0x15120) = *(int *)(iVar3 + 0x10) * 4 + iVar1 + -4;
-    *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + param_1 + 0xac8) = *(undefined4 *)(iVar3 + 0x18)
+  submitResult = ((int (*)())FUN_00005fd0)(ctx,listSelect);
+  if (listSelect == 0) {
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),4,*(undefined4 *)PTR_0000f1a0,
+                        ctx + 0x14554,ctx + 0x14558,1);
+    mappedBase = *(int *)(ctx + 0x14554);
+    bufferStart = mappedBase + 0x20;
+    *(int *)(ctx + 0x1511c) = bufferStart;
+    *(int *)(ctx + 0x15124) = bufferStart;
+    *(int *)(ctx + 0x15120) = *(int *)(mappedBase + 0x10) * 4 + bufferStart + -4;
+    *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0xac8) = *(undefined4 *)(mappedBase + 0x18)
     ;
   }
   else {
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),5,*(undefined4 *)PTR_0000f1a0,
-                        param_1 + 0x1455c,param_1 + 0x14560,1);
-    iVar1 = *(int *)(param_1 + 0x1455c) + 0x20;
-    *(int *)(param_1 + 0x15140) = iVar1;
-    *(int *)(param_1 + 0x15148) = iVar1;
-    *(int *)(param_1 + 0x15144) = *(int *)(*(int *)(param_1 + 0x1455c) + 0x10) * 4 + iVar1 + -4;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),5,*(undefined4 *)PTR_0000f1a0,
+                        ctx + 0x1455c,ctx + 0x14560,1);
+    bufferStart = *(int *)(ctx + 0x1455c) + 0x20;
+    *(int *)(ctx + 0x15140) = bufferStart;
+    *(int *)(ctx + 0x15148) = bufferStart;
+    *(int *)(ctx + 0x15144) = *(int *)(*(int *)(ctx + 0x1455c) + 0x10) * 4 + bufferStart + -4;
   }
-  return uVar2;
+  return submitResult;
 }
 
 /* FUN_00006230 @ 0x6230 (2900 bytes) */
@@ -1817,7 +1818,7 @@ int FUN_00006230(ctx, outProgram, variant, halfHeight)
 }
 
 /* FUN_00006d90 @ 0x6d90 (644 bytes) */
-void FUN_00006d90(int ctx,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10)
+void FUN_00006d90(int ctx,double fpArg1,double fpArg2,double fpArg3,double fpArg4,double fpArg5,double fpArg6,double fpArg7,double fpArg8,double fpArg9,double fpArg10)
 {
   float widthF;
   float heightF;
@@ -1925,142 +1926,142 @@ void FUN_00006d90(int ctx,double fparam_1,double fparam_2,double fparam_3,double
 }
 
 /* FUN_00007020 @ 0x7020 (592 bytes) */
-int FUN_00007020(param_1, param_2, param_3)
-  int param_1;
-  undefined4 *param_2;
-  int param_3;
+int FUN_00007020(ctx, cmdPtr, mode)
+  int ctx;
+  undefined4 *cmdPtr;
+  int mode;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
+  uint halfPitch;
+  int wordCountOrLimit;
+  undefined4 *cmdCursor;
+  int pitchOrLimit;
   
-  if (param_3 == 1) {
-    iVar4 = *(int *)(param_1 + 0x588);
-    if (*(int *)(param_1 + 0x55c) == 3) {
-      _memcpy(param_2,*(undefined4 *)(param_1 + 0x15294),*(int *)(param_1 + 0x15298) << 2);
-      iVar2 = *(int *)(param_1 + 0x15298);
+  if (mode == 1) {
+    pitchOrLimit = *(int *)(ctx + 0x588);
+    if (*(int *)(ctx + 0x55c) == 3) {
+      _memcpy(cmdPtr,*(undefined4 *)(ctx + 0x15294),*(int *)(ctx + 0x15298) << 2);
+      wordCountOrLimit = *(int *)(ctx + 0x15298);
     }
     else {
-      _memcpy(param_2,*(undefined4 *)(param_1 + 0x152a4),*(int *)(param_1 + 0x152a8) << 2);
-      iVar2 = *(int *)(param_1 + 0x152a8);
+      _memcpy(cmdPtr,*(undefined4 *)(ctx + 0x152a4),*(int *)(ctx + 0x152a8) << 2);
+      wordCountOrLimit = *(int *)(ctx + 0x152a8);
     }
-    puVar3 = param_2 + iVar2;
-    *puVar3 = 0x1144;
-    iVar2 = iVar4 + -1;
-    puVar3[1] = iVar2;
-    puVar3[2] = 0x1147;
-    puVar3[3] = iVar2;
-    puVar3[4] = 0x1145;
-    iVar4 = iVar4 * 2 + -1;
-    puVar3[5] = iVar4;
-    puVar3[6] = 0x1146;
-    puVar3[7] = iVar4;
-    puVar3[8] = 0x1148;
-    puVar3[9] = iVar4;
-    puVar3[10] = 0x1149;
-    puVar3[0xb] = iVar4;
-    puVar3 = puVar3 + 0xc;
-    iVar4 = 0x1e;
+    cmdCursor = cmdPtr + wordCountOrLimit;
+    *cmdCursor = 0x1144;
+    wordCountOrLimit = pitchOrLimit + -1;
+    cmdCursor[1] = wordCountOrLimit;
+    cmdCursor[2] = 0x1147;
+    cmdCursor[3] = wordCountOrLimit;
+    cmdCursor[4] = 0x1145;
+    pitchOrLimit = pitchOrLimit * 2 + -1;
+    cmdCursor[5] = pitchOrLimit;
+    cmdCursor[6] = 0x1146;
+    cmdCursor[7] = pitchOrLimit;
+    cmdCursor[8] = 0x1148;
+    cmdCursor[9] = pitchOrLimit;
+    cmdCursor[10] = 0x1149;
+    cmdCursor[0xb] = pitchOrLimit;
+    cmdCursor = cmdCursor + 0xc;
+    pitchOrLimit = 0x1e;
     do {
-      *puVar3 = 0x80000000;
-      puVar3 = puVar3 + 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      *cmdCursor = 0x80000000;
+      cmdCursor = cmdCursor + 1;
+      pitchOrLimit = pitchOrLimit + -1;
+    } while (pitchOrLimit != 0);
   }
   else {
-    *param_2 = ((unsigned char *)0x00001040U);
-    puVar3 = param_2 + 2;
-    param_2[1] = 0;
-    uVar1 = *(uint *)(param_1 + 0x588) >> 1;
-    if (*(int *)(param_1 + 0x55c) == 3) {
-      _memcpy(puVar3,*(undefined4 *)(param_1 + 0x1529c),*(int *)(param_1 + 0x152a0) << 2);
-      iVar4 = *(int *)(param_1 + 0x152a0);
+    *cmdPtr = ((unsigned char *)0x00001040U);
+    cmdCursor = cmdPtr + 2;
+    cmdPtr[1] = 0;
+    halfPitch = *(uint *)(ctx + 0x588) >> 1;
+    if (*(int *)(ctx + 0x55c) == 3) {
+      _memcpy(cmdCursor,*(undefined4 *)(ctx + 0x1529c),*(int *)(ctx + 0x152a0) << 2);
+      pitchOrLimit = *(int *)(ctx + 0x152a0);
     }
     else {
-      _memcpy(puVar3,*(undefined4 *)(param_1 + 0x152ac),*(int *)(param_1 + 0x152b0) << 2);
-      iVar4 = *(int *)(param_1 + 0x152b0);
+      _memcpy(cmdCursor,*(undefined4 *)(ctx + 0x152ac),*(int *)(ctx + 0x152b0) << 2);
+      pitchOrLimit = *(int *)(ctx + 0x152b0);
     }
-    puVar3 = puVar3 + iVar4;
-    *puVar3 = 0x1144;
-    iVar4 = uVar1 - 1;
-    puVar3[1] = iVar4;
-    puVar3[2] = 0x1147;
-    puVar3[3] = iVar4;
-    puVar3[4] = 0x1145;
-    iVar4 = uVar1 * 2 + -1;
-    puVar3[5] = iVar4;
-    puVar3[6] = 0x1146;
-    puVar3[7] = iVar4;
-    puVar3[8] = 0x1148;
-    puVar3[9] = iVar4;
-    puVar3[10] = 0x1149;
-    puVar3[0xb] = iVar4;
-    puVar3 = puVar3 + 0xc;
-    iVar4 = 0x1e;
+    cmdCursor = cmdCursor + pitchOrLimit;
+    *cmdCursor = 0x1144;
+    pitchOrLimit = halfPitch - 1;
+    cmdCursor[1] = pitchOrLimit;
+    cmdCursor[2] = 0x1147;
+    cmdCursor[3] = pitchOrLimit;
+    cmdCursor[4] = 0x1145;
+    pitchOrLimit = halfPitch * 2 + -1;
+    cmdCursor[5] = pitchOrLimit;
+    cmdCursor[6] = 0x1146;
+    cmdCursor[7] = pitchOrLimit;
+    cmdCursor[8] = 0x1148;
+    cmdCursor[9] = pitchOrLimit;
+    cmdCursor[10] = 0x1149;
+    cmdCursor[0xb] = pitchOrLimit;
+    cmdCursor = cmdCursor + 0xc;
+    pitchOrLimit = 0x1e;
     do {
-      *puVar3 = 0x80000000;
-      puVar3 = puVar3 + 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      *cmdCursor = 0x80000000;
+      cmdCursor = cmdCursor + 1;
+      pitchOrLimit = pitchOrLimit + -1;
+    } while (pitchOrLimit != 0);
   }
-  return puVar3;
+  return cmdCursor;
 }
 
 /* FUN_00007270 @ 0x7270 (544 bytes) */
-int FUN_00007270(param_1, param_2, param_3)
-  undefined4 param_1;
-  int *param_2;
-  int param_3;
+int FUN_00007270(cmdPtr, ranges, variant)
+  undefined4 cmdPtr;
+  int *ranges;
+  int variant;
 {
-  int iVar1;
-  undefined4 *puVar2;
-  undefined *puVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  uint auStack_3f8 [244];
+  int rangeLengthOrLast;
+  undefined4 *cmdAfterEntries;
+  undefined *tableBase;
+  int rangeLength;
+  int entriesSoFar;
+  int entriesAfterNext;
+  uint entries [244];
   
-  puVar3 = &UNK_0000d5c4;
-  iVar4 = (param_2[1] - *param_2) + 1;
-  _memcpy(auStack_3f8,&UNK_0000d5c4 + *param_2 * 0x18,iVar4 * 0x18);
-  iVar1 = (param_2[7] - param_2[6]) + 1;
-  iVar5 = iVar4 + iVar1;
-  _memcpy(auStack_3f8 + iVar4 * 6,&UNK_0000d4ec + param_2[6] * 0x18,iVar1 * 0x18);
-  iVar1 = iVar5 + -1;
-  auStack_3f8[iVar4 * 6] = auStack_3f8[iVar4 * 6] | 0x400;
-  auStack_3f8[iVar1 * 6] = auStack_3f8[iVar1 * 6] | 4;
-  auStack_3f8[iVar1 * 6 + 1] = auStack_3f8[iVar1 * 6 + 1] | 0x2000000;
-  iVar1 = (param_2[5] - param_2[4]) + 1;
-  iVar6 = iVar5 + iVar1;
-  _memcpy(auStack_3f8 + iVar5 * 6,&UNK_0000d5c4 + param_2[4] * 0x18,iVar1 * 0x18);
-  iVar4 = param_2[10];
-  iVar1 = param_2[0xb];
-  auStack_3f8[iVar5 * 6] = auStack_3f8[iVar5 * 6] | 4;
-  iVar1 = (iVar1 - iVar4) + 1;
-  iVar5 = iVar6 + iVar1;
-  _memcpy(auStack_3f8 + iVar6 * 6,&UNK_0000d4ec + iVar4 * 0x18,iVar1 * 0x18);
-  iVar1 = iVar5 + -1;
-  auStack_3f8[iVar6 * 6] = auStack_3f8[iVar6 * 6] | 0x400;
-  auStack_3f8[iVar1 * 6] = auStack_3f8[iVar1 * 6] | 4;
-  auStack_3f8[iVar1 * 6 + 1] = auStack_3f8[iVar1 * 6 + 1] | 0x2000000;
-  if (param_3 == 2) {
-    puVar3 = &UNK_0000d474;
+  tableBase = &UNK_0000d5c4;
+  rangeLength = (ranges[1] - *ranges) + 1;
+  _memcpy(entries,&UNK_0000d5c4 + *ranges * 0x18,rangeLength * 0x18);
+  rangeLengthOrLast = (ranges[7] - ranges[6]) + 1;
+  entriesSoFar = rangeLength + rangeLengthOrLast;
+  _memcpy(entries + rangeLength * 6,&UNK_0000d4ec + ranges[6] * 0x18,rangeLengthOrLast * 0x18);
+  rangeLengthOrLast = entriesSoFar + -1;
+  entries[rangeLength * 6] = entries[rangeLength * 6] | 0x400;
+  entries[rangeLengthOrLast * 6] = entries[rangeLengthOrLast * 6] | 4;
+  entries[rangeLengthOrLast * 6 + 1] = entries[rangeLengthOrLast * 6 + 1] | 0x2000000;
+  rangeLengthOrLast = (ranges[5] - ranges[4]) + 1;
+  entriesAfterNext = entriesSoFar + rangeLengthOrLast;
+  _memcpy(entries + entriesSoFar * 6,&UNK_0000d5c4 + ranges[4] * 0x18,rangeLengthOrLast * 0x18);
+  rangeLength = ranges[10];
+  rangeLengthOrLast = ranges[0xb];
+  entries[entriesSoFar * 6] = entries[entriesSoFar * 6] | 4;
+  rangeLengthOrLast = (rangeLengthOrLast - rangeLength) + 1;
+  entriesSoFar = entriesAfterNext + rangeLengthOrLast;
+  _memcpy(entries + entriesAfterNext * 6,&UNK_0000d4ec + rangeLength * 0x18,rangeLengthOrLast * 0x18);
+  rangeLengthOrLast = entriesSoFar + -1;
+  entries[entriesAfterNext * 6] = entries[entriesAfterNext * 6] | 0x400;
+  entries[rangeLengthOrLast * 6] = entries[rangeLengthOrLast * 6] | 4;
+  entries[rangeLengthOrLast * 6 + 1] = entries[rangeLengthOrLast * 6 + 1] | 0x2000000;
+  if (variant == 2) {
+    tableBase = &UNK_0000d474;
   }
-  iVar4 = (param_2[9] - param_2[8]) + 1;
-  iVar6 = iVar5 + iVar4;
-  iVar1 = iVar6 + -1;
-  _memcpy(auStack_3f8 + iVar5 * 6,puVar3 + param_2[8] * 0x18,iVar4 * 0x18);
-  auStack_3f8[iVar5 * 6] = auStack_3f8[iVar5 * 6] | 4;
-  auStack_3f8[iVar1 * 6] = auStack_3f8[iVar1 * 6] | 0x100;
-  puVar2 = (undefined4 *)((int (*)())FUN_00009980)(param_1,0,(uint)(iVar6 * 0x18) >> 2,auStack_3f8);
-  *puVar2 = 0x118e;
-  puVar2[1] = 0;
-  puVar2[2] = 0x118c;
-  puVar2[3] = iVar1 * 0x10000;
-  puVar2[4] = 0x118d;
-  puVar2[5] = iVar1 * 0x10000;
-  return puVar2 + 6;
+  rangeLength = (ranges[9] - ranges[8]) + 1;
+  entriesAfterNext = entriesSoFar + rangeLength;
+  rangeLengthOrLast = entriesAfterNext + -1;
+  _memcpy(entries + entriesSoFar * 6,tableBase + ranges[8] * 0x18,rangeLength * 0x18);
+  entries[entriesSoFar * 6] = entries[entriesSoFar * 6] | 4;
+  entries[rangeLengthOrLast * 6] = entries[rangeLengthOrLast * 6] | 0x100;
+  cmdAfterEntries = (undefined4 *)((int (*)())FUN_00009980)(cmdPtr,0,(uint)(entriesAfterNext * 0x18) >> 2,entries);
+  *cmdAfterEntries = 0x118e;
+  cmdAfterEntries[1] = 0;
+  cmdAfterEntries[2] = 0x118c;
+  cmdAfterEntries[3] = rangeLengthOrLast * 0x10000;
+  cmdAfterEntries[4] = 0x118d;
+  cmdAfterEntries[5] = rangeLengthOrLast * 0x10000;
+  return cmdAfterEntries + 6;
 }
 
 /* FUN_00007490 @ 0x7490 (696 bytes) */
@@ -2160,40 +2161,40 @@ int FUN_00007490(ctx, blockType, wordCount, srcWords, alternateTable, stream)
 }
 
 /* FUN_00007760 @ 0x7760 (204 bytes) */
-int FUN_00007760(param_1, param_2, param_3)
-  int *param_1;
-  undefined4 param_2;
-  int param_3;
+int FUN_00007760(reservation, value, listSelect)
+  int *reservation;
+  undefined4 value;
+  int listSelect;
 {
-  undefined4 *puVar1;
+  undefined4 *slot;
   
-  if (param_3 == 3) {
-    if (param_1[5] != 0) {
-      puVar1 = (undefined4 *)param_1[8];
-      param_1[8] = (int)(puVar1 + 1);
-      *puVar1 = param_2;
+  if (listSelect == 3) {
+    if (reservation[5] != 0) {
+      slot = (undefined4 *)reservation[8];
+      reservation[8] = (int)(slot + 1);
+      *slot = value;
       return 1;
     }
   }
-  else if (param_3 == 4) {
-    if (param_1[10] != 0) {
-      puVar1 = (undefined4 *)param_1[0xd];
-      param_1[0xd] = (int)(puVar1 + 1);
-      *puVar1 = param_2;
+  else if (listSelect == 4) {
+    if (reservation[10] != 0) {
+      slot = (undefined4 *)reservation[0xd];
+      reservation[0xd] = (int)(slot + 1);
+      *slot = value;
       return 1;
     }
   }
-  else if ((param_3 == 1) && (*param_1 != 0)) {
-    puVar1 = (undefined4 *)param_1[3];
-    if (puVar1 <= (undefined4 *)param_1[4]) {
-      param_1[3] = (int)(puVar1 + 1);
-      param_1[1] = param_1[1] + 1;
-      *puVar1 = param_2;
+  else if ((listSelect == 1) && (*reservation != 0)) {
+    slot = (undefined4 *)reservation[3];
+    if (slot <= (undefined4 *)reservation[4]) {
+      reservation[3] = (int)(slot + 1);
+      reservation[1] = reservation[1] + 1;
+      *slot = value;
       return 1;
     }
-    param_1[10] = 0;
-    *param_1 = 0;
-    param_1[5] = 0;
+    reservation[10] = 0;
+    *reservation = 0;
+    reservation[5] = 0;
     return 0;
   }
   return 0;
@@ -2373,70 +2374,70 @@ LAB_00007998:
 }
 
 /* FUN_00007de0 @ 0x7de0 (416 bytes) */
-int FUN_00007de0(param_1)
-  int param_1;
+int FUN_00007de0(listState)
+  int listState;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  uint *puVar4;
-  undefined4 *puVar5;
+  int chunkCount;
+  int chunkCount2;
+  uint wordsLeft;
+  uint *packetHeader;
+  undefined4 *cmdCursor;
   
-  puVar5 = *(undefined4 **)(param_1 + 0x10);
-  uVar3 = *(int *)(param_1 + 0x14) - (int)puVar5 >> 2;
-  if (0x4001 < uVar3) {
-    iVar1 = (uVar3 - 0x4002) / 0x4001 + 1;
-    if (uVar3 == 0x4001) {
-      iVar1 = 1;
+  cmdCursor = *(undefined4 **)(listState + 0x10);
+  wordsLeft = *(int *)(listState + 0x14) - (int)cmdCursor >> 2;
+  if (0x4001 < wordsLeft) {
+    chunkCount = (wordsLeft - 0x4002) / 0x4001 + 1;
+    if (wordsLeft == 0x4001) {
+      chunkCount = 1;
     }
     do {
-      *puVar5 = 0xffff1000;
-      uVar3 = uVar3 - 0x4001;
-      puVar5 = puVar5 + 0x4001;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
-    *(undefined4 **)(param_1 + 0x10) = puVar5;
+      *cmdCursor = 0xffff1000;
+      wordsLeft = wordsLeft - 0x4001;
+      cmdCursor = cmdCursor + 0x4001;
+      chunkCount = chunkCount + -1;
+    } while (chunkCount != 0);
+    *(undefined4 **)(listState + 0x10) = cmdCursor;
   }
-  if (uVar3 != 0) {
-    if (uVar3 < 2) {
-      puVar5 = *(undefined4 **)(param_1 + 0x10);
-      *(undefined4 **)(param_1 + 0x10) = puVar5 + 1;
-      *puVar5 = 0x80000000;
+  if (wordsLeft != 0) {
+    if (wordsLeft < 2) {
+      cmdCursor = *(undefined4 **)(listState + 0x10);
+      *(undefined4 **)(listState + 0x10) = cmdCursor + 1;
+      *cmdCursor = 0x80000000;
     }
     else {
-      puVar4 = *(uint **)(param_1 + 0x10);
-      *(uint **)(param_1 + 0x10) = puVar4 + 1;
-      *puVar4 = (uVar3 - 2) * 0x10000 | 0xc0001000;
+      packetHeader = *(uint **)(listState + 0x10);
+      *(uint **)(listState + 0x10) = packetHeader + 1;
+      *packetHeader = (wordsLeft - 2) * 0x10000 | 0xc0001000;
     }
   }
-  puVar5 = *(undefined4 **)(param_1 + 0x18);
-  iVar1 = *(int *)(param_1 + 4) - (int)puVar5 >> 2;
-  uVar3 = iVar1 + 1;
-  if (0x4001 < uVar3) {
-    iVar2 = (iVar1 - 0x4001U) / 0x4001 + 1;
-    if (iVar1 == 0x4000) {
-      iVar2 = 1;
+  cmdCursor = *(undefined4 **)(listState + 0x18);
+  chunkCount = *(int *)(listState + 4) - (int)cmdCursor >> 2;
+  wordsLeft = chunkCount + 1;
+  if (0x4001 < wordsLeft) {
+    chunkCount2 = (chunkCount - 0x4001U) / 0x4001 + 1;
+    if (chunkCount == 0x4000) {
+      chunkCount2 = 1;
     }
     do {
-      *puVar5 = 0xffff1000;
-      uVar3 = uVar3 - 0x4001;
-      puVar5 = puVar5 + 0x4001;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
-    *(undefined4 **)(param_1 + 0x18) = puVar5;
+      *cmdCursor = 0xffff1000;
+      wordsLeft = wordsLeft - 0x4001;
+      cmdCursor = cmdCursor + 0x4001;
+      chunkCount2 = chunkCount2 + -1;
+    } while (chunkCount2 != 0);
+    *(undefined4 **)(listState + 0x18) = cmdCursor;
   }
-  if (uVar3 == 0) {
+  if (wordsLeft == 0) {
     return;
   }
-  if (1 < uVar3) {
-    puVar4 = *(uint **)(param_1 + 0x18);
-    *(uint **)(param_1 + 0x18) = puVar4 + 1;
-    *puVar4 = (uVar3 - 2) * 0x10000 | 0xc0001000;
+  if (1 < wordsLeft) {
+    packetHeader = *(uint **)(listState + 0x18);
+    *(uint **)(listState + 0x18) = packetHeader + 1;
+    *packetHeader = (wordsLeft - 2) * 0x10000 | 0xc0001000;
     return;
   }
-  puVar5 = *(undefined4 **)(param_1 + 0x18);
-  *(undefined4 **)(param_1 + 0x18) = puVar5 + 1;
-  *puVar5 = 0x80000000;
+  cmdCursor = *(undefined4 **)(listState + 0x18);
+  *(undefined4 **)(listState + 0x18) = cmdCursor + 1;
+  *cmdCursor = 0x80000000;
   return;
 }
 
@@ -2450,8 +2451,6 @@ int FUN_00007f80(ctx)
   uint *lastHeader;
   int mapBaseOrPlaneWords;
   int programRingOrPitch;
-  int in_r6;
-  int in_r7;
   undefined4 *ringLimit;
   undefined4 regDefault;
   undefined4 *cmdWriteB;
@@ -2461,6 +2460,10 @@ int FUN_00007f80(ctx)
   int planeIndex;
   int surfaceIndexOrScratch;
   int *planeCursor;
+  int passThroughR6;
+  int passThroughR7;
+  int mapAddressOut;
+  int mapSizeOut;
   
   descTable = (int *)(ctx + 0x55c);
   surfaceIndexOrScratch = *(int *)(ctx + 0x568);
@@ -2500,12 +2503,12 @@ int FUN_00007f80(ctx)
     ringLimit = *(undefined4 **)(ctx + 0x38);
     if (ringLimit <= cmdWriteB + 2) {
       lastHeader = *(uint **)(ctx + 0x30);
-      in_r6 = ctx + 0x40;
-      in_r7 = ctx + 0x44;
+      mapAddressOut = ctx + 0x40;
+      mapSizeOut = ctx + 0x44;
       *lastHeader = (int)cmdWriteB - (int)lastHeader >> 2 | *lastHeader;
       *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
       **(undefined4 **)(ctx + 0x34) = 0x1000000;
-      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,in_r6,in_r7,1);
+      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,mapAddressOut,mapSizeOut,1);
       programRingOrPitch = *(int *)(ctx + 0x40);
       *(int *)(ctx + 0x34) = programRingOrPitch + 0x20;
       *(int *)(ctx + 0x30) = programRingOrPitch + 0x1c;
@@ -2534,8 +2537,8 @@ int FUN_00007f80(ctx)
     *(int *)(ctx + 0x38) = mapBaseOrPlaneWords + 0x20 + *(int *)(mapBaseOrPlaneWords + 0x10) * 4;
     *(undefined4 *)(mapBaseOrPlaneWords + 0x1c) = 0;
     cmdWrite = *(undefined4 **)(ctx + 0x34);
-    in_r6 = programRingOrPitch;
-    in_r7 = planeIndex;
+    passThroughR6 = programRingOrPitch;
+    passThroughR7 = planeIndex;
   }
   *(undefined4 **)(ctx + 0x34) = cmdWrite + 4;
   *cmdWrite = 0x1393;
@@ -2550,10 +2553,10 @@ int FUN_00007f80(ctx)
   mapBaseOrPlaneWords = (*(uint *)(ctx + 0x57c) >> 4) * programRingOrPitch;
   planeCursor = descTable + surfaceIndexOrScratch * 4 + 0x5326;
   do {
-    ((int (*)())FUN_0000bf20)(ctx,*planeCursor,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())FUN_0000bf20)(ctx,*planeCursor,mapBaseOrPlaneWords,passThroughR6,passThroughR7,regDefault,programRingOrPitch,regValue);
     chromaEntry = planeCursor + 0x14;
     planeCursor = planeCursor + 1;
-    ((int (*)())FUN_0000bf20)(ctx,*chromaEntry,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())FUN_0000bf20)(ctx,*chromaEntry,mapBaseOrPlaneWords,passThroughR6,passThroughR7,regDefault,programRingOrPitch,regValue);
     notLast = planeIndex != 3;
     planeIndex = planeIndex + 1;
   } while (notLast);
@@ -2580,180 +2583,180 @@ LAB_000082e0:
 }
 
 /* FUN_000083e0 @ 0x83e0 (300 bytes) */
-int FUN_000083e0(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int FUN_000083e0(ctx, wordsNeeded, listSelect)
+  int ctx;
+  int wordsNeeded;
+  int listSelect;
 {
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  uint newCursor;
+  int *entryCursor;
+  int chunkCount;
+  int entriesLeft;
+  undefined4 *resetCursor;
+  int totalWords;
+  int bufferState;
+  int pendingWords;
   
-  if (param_3 != 0) {
-    iVar7 = param_1 + 0x15140;
+  if (listSelect != 0) {
+    bufferState = ctx + 0x15140;
   }
   else {
-    iVar7 = param_1 + 0x1511c;
+    bufferState = ctx + 0x1511c;
   }
-  uVar1 = *(int *)(iVar7 + 8) + param_2 * 4;
-  if (*(uint *)(iVar7 + 4) < uVar1) {
-    if (param_3 != 0) {
-      iVar3 = 0;
-      iVar6 = 0;
-      iVar4 = 0x19;
-      piVar2 = (int *)(param_1 + 0x1442c);
+  newCursor = *(int *)(bufferState + 8) + wordsNeeded * 4;
+  if (*(uint *)(bufferState + 4) < newCursor) {
+    if (listSelect != 0) {
+      chunkCount = 0;
+      totalWords = 0;
+      entriesLeft = 0x19;
+      entryCursor = (int *)(ctx + 0x1442c);
       do {
-        if (*piVar2 != 0) {
-          iVar6 = iVar6 + *piVar2;
-          iVar3 = iVar3 + 1;
+        if (*entryCursor != 0) {
+          totalWords = totalWords + *entryCursor;
+          chunkCount = chunkCount + 1;
         }
-        iVar8 = (*(int *)(param_1 + 0x14424) - piVar2[-1]) + -1;
-        if (iVar8 != 0) {
-          iVar3 = iVar3 + 1;
-          iVar6 = iVar6 + iVar8;
+        pendingWords = (*(int *)(ctx + 0x14424) - entryCursor[-1]) + -1;
+        if (pendingWords != 0) {
+          chunkCount = chunkCount + 1;
+          totalWords = totalWords + pendingWords;
         }
-        iVar4 = iVar4 + -1;
-        piVar2 = piVar2 + 3;
-      } while (iVar4 != 0);
-      ((int (*)())FUN_00007850)(param_1,(iVar6 + iVar3 * 0x80) * 2 + 1000);
-      ((int (*)())FUN_00007f80)(param_1);
-      puVar5 = (undefined4 *)(param_1 + 0x1442c);
-      iVar3 = 0x19;
+        entriesLeft = entriesLeft + -1;
+        entryCursor = entryCursor + 3;
+      } while (entriesLeft != 0);
+      ((int (*)())FUN_00007850)(ctx,(totalWords + chunkCount * 0x80) * 2 + 1000);
+      ((int (*)())FUN_00007f80)(ctx);
+      resetCursor = (undefined4 *)(ctx + 0x1442c);
+      chunkCount = 0x19;
       do {
-        *puVar5 = 0;
-        puVar5[-1] = *(int *)(param_1 + 0x14424) + -1;
-        puVar5 = puVar5 + 3;
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
+        *resetCursor = 0;
+        resetCursor[-1] = *(int *)(ctx + 0x14424) + -1;
+        resetCursor = resetCursor + 3;
+        chunkCount = chunkCount + -1;
+      } while (chunkCount != 0);
     }
     else {
-      ((int (*)())FUN_00006120)(param_1,0);
+      ((int (*)())FUN_00006120)(ctx,0);
     }
-    uVar1 = param_2 * 4 + *(int *)(iVar7 + 8);
+    newCursor = wordsNeeded * 4 + *(int *)(bufferState + 8);
   }
-  *(uint *)(iVar7 + 8) = uVar1;
+  *(uint *)(bufferState + 8) = newCursor;
   return;
 }
 
 /* FUN_00008510 @ 0x8510 (372 bytes) */
-int FUN_00008510(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 *param_3;
-  uint param_4;
-  undefined4 param_5;
+int FUN_00008510(ctx, mbHeader, wordStream, mbAddress, listSelect)
+  int ctx;
+  int mbHeader;
+  undefined4 *wordStream;
+  uint mbAddress;
+  undefined4 listSelect;
 {
-  byte *pbVar1;
-  int iVar2;
-  uint *puVar3;
-  uint *puVar4;
-  int iVar5;
-  uint uVar6;
-  uint *puVar7;
-  int iVar8;
+  byte *flagByte;
+  int flagCursor;
+  uint *outHeader;
+  uint *outWords;
+  int payloadWords;
+  uint flagWordOrRow;
+  uint *srcCursor;
+  int flagsLeft;
   
-  iVar8 = 6;
-  iVar5 = 0;
-  puVar7 = (uint *)*param_3;
-  iVar2 = param_2;
+  flagsLeft = 6;
+  payloadWords = 0;
+  srcCursor = (uint *)*wordStream;
+  flagCursor = mbHeader;
   do {
-    pbVar1 = (byte *)(iVar2 + 0x16);
-    iVar2 = iVar2 + 1;
-    iVar5 = iVar5 + (uint)*pbVar1;
-    iVar8 = iVar8 + -1;
-  } while (iVar8 != 0);
-  if (iVar5 == 0) {
-    *(undefined1 *)(param_1 + 0x590) = 1;
+    flagByte = (byte *)(flagCursor + 0x16);
+    flagCursor = flagCursor + 1;
+    payloadWords = payloadWords + (uint)*flagByte;
+    flagsLeft = flagsLeft + -1;
+  } while (flagsLeft != 0);
+  if (payloadWords == 0) {
+    *(undefined1 *)(ctx + 0x590) = 1;
   }
   else {
-    *(undefined1 *)(param_1 + 0x590) = 0;
-    puVar3 = (uint *)((int (*)())FUN_000083e0)(param_1,iVar5 + 2,param_5);
-    uVar6 = 0x80000000;
-    if (*(char *)(param_2 + 0x15) == '\0') {
-      uVar6 = 0;
+    *(undefined1 *)(ctx + 0x590) = 0;
+    outHeader = (uint *)((int (*)())FUN_000083e0)(ctx,payloadWords + 2,listSelect);
+    flagWordOrRow = 0x80000000;
+    if (*(char *)(mbHeader + 0x15) == '\0') {
+      flagWordOrRow = 0;
     }
-    *puVar3 = -(uint)*(byte *)(param_2 + 0x1b) >> 0x19 & 0x40 |
-              -(uint)*(byte *)(param_2 + 0x1a) >> 0x18 & 0x80 |
-              -(uint)*(byte *)(param_2 + 0x19) >> 0x17 & 0x100 |
-              -(uint)*(byte *)(param_2 + 0x18) >> 0x16 & 0x200 |
-              -(uint)*(byte *)(param_2 + 0x17) >> 0x15 & 0x400 |
-              -(uint)*(byte *)(param_2 + 0x16) >> 0x14 & 0x800 |
-              uVar6 | (uint)*(byte *)(param_1 + 0x564) << 0x19;
-    puVar4 = puVar3 + 2;
-    uVar6 = param_4 / *(uint *)(param_1 + 0x580);
-    puVar3[1] = uVar6 << 0x14 | (param_4 - uVar6 * *(uint *)(param_1 + 0x580)) * 0x10;
-    if (iVar5 + 2 != 2) {
+    *outHeader = -(uint)*(byte *)(mbHeader + 0x1b) >> 0x19 & 0x40 |
+              -(uint)*(byte *)(mbHeader + 0x1a) >> 0x18 & 0x80 |
+              -(uint)*(byte *)(mbHeader + 0x19) >> 0x17 & 0x100 |
+              -(uint)*(byte *)(mbHeader + 0x18) >> 0x16 & 0x200 |
+              -(uint)*(byte *)(mbHeader + 0x17) >> 0x15 & 0x400 |
+              -(uint)*(byte *)(mbHeader + 0x16) >> 0x14 & 0x800 |
+              flagWordOrRow | (uint)*(byte *)(ctx + 0x564) << 0x19;
+    outWords = outHeader + 2;
+    flagWordOrRow = mbAddress / *(uint *)(ctx + 0x580);
+    outHeader[1] = flagWordOrRow << 0x14 | (mbAddress - flagWordOrRow * *(uint *)(ctx + 0x580)) * 0x10;
+    if (payloadWords + 2 != 2) {
       do {
-        *puVar4 = *puVar7;
-        puVar7 = puVar7 + 1;
-        puVar4 = puVar4 + 1;
-        iVar5 = iVar5 + -1;
-      } while (iVar5 != 0);
+        *outWords = *srcCursor;
+        srcCursor = srcCursor + 1;
+        outWords = outWords + 1;
+        payloadWords = payloadWords + -1;
+      } while (payloadWords != 0);
     }
-    *param_3 = puVar7;
+    *wordStream = srcCursor;
   }
   return;
 }
 
 /* FUN_00008690 @ 0x8690 (344 bytes) */
-int FUN_00008690(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  int param_2;
-  undefined4 *param_3;
-  int param_4;
-  int param_5;
+int FUN_00008690(ctx, listState, reservation, wordCount, listSelect)
+  undefined4 ctx;
+  int listState;
+  undefined4 *reservation;
+  int wordCount;
+  int listSelect;
 {
-  uint uVar1;
-  undefined4 *puVar2;
+  uint newCursor;
+  undefined4 *reservationCursor;
   
-  if (param_5 == 3) {
-    puVar2 = param_3 + 8;
-    param_3[7] = *(undefined4 *)(param_2 + 0x18);
-    *(int *)(param_2 + 0x18) = param_4 * 4 + *(int *)(param_2 + 0x18);
-    param_3[5] = 1;
-    param_3[8] = param_3[7];
-    param_3[9] = *(int *)(param_2 + 0x18) + -8;
+  if (listSelect == 3) {
+    reservationCursor = reservation + 8;
+    reservation[7] = *(undefined4 *)(listState + 0x18);
+    *(int *)(listState + 0x18) = wordCount * 4 + *(int *)(listState + 0x18);
+    reservation[5] = 1;
+    reservation[8] = reservation[7];
+    reservation[9] = *(int *)(listState + 0x18) + -8;
   }
-  else if (param_5 == 4) {
-    puVar2 = param_3 + 0xd;
-    param_3[0xc] = *(undefined4 *)(param_2 + 0x20);
-    *(int *)(param_2 + 0x20) = param_4 * 4 + *(int *)(param_2 + 0x20);
-    param_3[10] = 1;
-    param_3[0xd] = param_3[0xc];
-    param_3[0xe] = *(int *)(param_2 + 0x20) + -8;
+  else if (listSelect == 4) {
+    reservationCursor = reservation + 0xd;
+    reservation[0xc] = *(undefined4 *)(listState + 0x20);
+    *(int *)(listState + 0x20) = wordCount * 4 + *(int *)(listState + 0x20);
+    reservation[10] = 1;
+    reservation[0xd] = reservation[0xc];
+    reservation[0xe] = *(int *)(listState + 0x20) + -8;
   }
   else {
-    puVar2 = (undefined4 *)0x0;
-    if (param_5 == 1) {
-      param_3[2] = *(undefined4 *)(param_2 + 0x10);
-      uVar1 = param_4 * 4 + *(int *)(param_2 + 0x10);
-      *(uint *)(param_2 + 0x10) = uVar1;
-      if (uVar1 < *(uint *)(param_2 + 0x14)) {
-        param_3[1] = 1;
-        puVar2 = param_3 + 3;
-        *param_3 = 1;
-        param_3[3] = param_3[2];
-        param_3[4] = *(int *)(param_2 + 0x10) + -8;
+    reservationCursor = (undefined4 *)0x0;
+    if (listSelect == 1) {
+      reservation[2] = *(undefined4 *)(listState + 0x10);
+      newCursor = wordCount * 4 + *(int *)(listState + 0x10);
+      *(uint *)(listState + 0x10) = newCursor;
+      if (newCursor < *(uint *)(listState + 0x14)) {
+        reservation[1] = 1;
+        reservationCursor = reservation + 3;
+        *reservation = 1;
+        reservation[3] = reservation[2];
+        reservation[4] = *(int *)(listState + 0x10) + -8;
       }
       else {
-        *(uint *)(param_2 + 0x10) = uVar1 + param_4 * -4;
-        ((int (*)())FUN_00007f80)(param_1);
-        puVar2 = param_3 + 3;
-        param_3[2] = *(undefined4 *)(param_2 + 0x10);
-        *(int *)(param_2 + 0x10) = param_4 * 4 + *(int *)(param_2 + 0x10);
-        param_3[1] = 1;
-        *param_3 = 1;
-        param_3[3] = param_3[2];
-        param_3[4] = *(int *)(param_2 + 0x10) + -8;
+        *(uint *)(listState + 0x10) = newCursor + wordCount * -4;
+        ((int (*)())FUN_00007f80)(ctx);
+        reservationCursor = reservation + 3;
+        reservation[2] = *(undefined4 *)(listState + 0x10);
+        *(int *)(listState + 0x10) = wordCount * 4 + *(int *)(listState + 0x10);
+        reservation[1] = 1;
+        *reservation = 1;
+        reservation[3] = reservation[2];
+        reservation[4] = *(int *)(listState + 0x10) + -8;
       }
     }
   }
-  return puVar2;
+  return reservationCursor;
 }
 
 /* FUN_00008800 @ 0x8800 (28 bytes) */
@@ -2770,12 +2773,12 @@ int FUN_00008820(ctx, mbInfo, mbIndex)
   short *mbInfo;
   uint mbIndex;
 {
-  short sVar1;
-  short sVar2;
-  short sVar3;
-  short sVar4;
-  short sVar5;
-  short sVar6;
+  short mvTmp1;
+  short mvTmp2;
+  short mvTmp3;
+  short mvTmp4;
+  short mvTmp5;
+  short mvTmp6;
   int mbPosOrListEntry;
   int mbOffsetBytes;
   int surfaceOrListBase;
@@ -2848,19 +2851,19 @@ LAB_000089ac:
       return;
     case 5:
       mbPosOrListEntry = mbPosOrListEntry * 4;
-      sVar1 = mbInfo[5];
+      mvTmp1 = mbInfo[5];
       descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
-      sVar2 = mbInfo[4];
+      mvTmp2 = mbInfo[4];
       *(uint *)(*(int *)(descOrSurfaceEntry + 0x14c98) + mbPosOrListEntry) = CONCAT22(mbInfo[1],*mbInfo);
-      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(sVar1,sVar2);
-      sVar1 = mbInfo[5];
-      sVar2 = mbInfo[4];
+      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(mvTmp1,mvTmp2);
+      mvTmp1 = mbInfo[5];
+      mvTmp2 = mbInfo[4];
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ce8)) =
            ((int)mbInfo[1] - ((int)mbInfo[1] >> 0x1f)) * 0x8000 & 0xffff0000U |
            (uint)((int)*mbInfo - ((int)*mbInfo >> 0x1f)) >> 1 & 0xffff;
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf0)) =
-           ((int)sVar1 - ((int)sVar1 >> 0x1f)) * 0x8000 & 0xffff0000U |
-           (uint)((int)sVar2 - ((int)sVar2 >> 0x1f)) >> 1 & 0xffff;
+           ((int)mvTmp1 - ((int)mvTmp1 >> 0x1f)) * 0x8000 & 0xffff0000U |
+           (uint)((int)mvTmp2 - ((int)mvTmp2 >> 0x1f)) >> 1 & 0xffff;
       mbOffsetBytes = mbOffsetBytes + *(int *)(ctx + 0x153fc);
       mbPosOrListEntry = ctx + 0x14428 + (uint)*(byte *)(mbInfo + 8) * 0xc;
       if (*(char *)(ctx + 0x590) == '\0') {
@@ -2884,19 +2887,19 @@ LAB_000089ac:
       break;
     case 6:
       mbPosOrListEntry = mbPosOrListEntry * 4;
-      sVar1 = mbInfo[7];
+      mvTmp1 = mbInfo[7];
       descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
-      sVar2 = mbInfo[6];
+      mvTmp2 = mbInfo[6];
       *(uint *)(*(int *)(descOrSurfaceEntry + 0x14c9c) + mbPosOrListEntry) = CONCAT22(mbInfo[3],mbInfo[2]);
-      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(sVar1,sVar2);
-      sVar1 = mbInfo[7];
-      sVar2 = mbInfo[6];
+      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(mvTmp1,mvTmp2);
+      mvTmp1 = mbInfo[7];
+      mvTmp2 = mbInfo[6];
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cec)) =
            ((int)mbInfo[3] - ((int)mbInfo[3] >> 0x1f)) * 0x8000 & 0xffff0000U |
            (uint)((int)mbInfo[2] - ((int)mbInfo[2] >> 0x1f)) >> 1 & 0xffff;
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf4)) =
-           ((int)sVar1 - ((int)sVar1 >> 0x1f)) * 0x8000 & 0xffff0000U |
-           (uint)((int)sVar2 - ((int)sVar2 >> 0x1f)) >> 1 & 0xffff;
+           ((int)mvTmp1 - ((int)mvTmp1 >> 0x1f)) * 0x8000 & 0xffff0000U |
+           (uint)((int)mvTmp2 - ((int)mvTmp2 >> 0x1f)) >> 1 & 0xffff;
       mbOffsetBytes = mbOffsetBytes + *(int *)(ctx + 0x153fc);
       mbPosOrListEntry = ctx + 0x14428 + (uint)*(byte *)((int)mbInfo + 0x11) * 0xc;
       if (*(char *)(ctx + 0x590) == '\0') {
@@ -2920,35 +2923,35 @@ LAB_000089ac:
       break;
     case 7:
       mbPosOrListEntry = mbPosOrListEntry * 4;
-      sVar4 = mbInfo[2];
-      sVar5 = mbInfo[6];
+      mvTmp4 = mbInfo[2];
+      mvTmp5 = mbInfo[6];
       descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
-      sVar1 = mbInfo[3];
-      sVar2 = mbInfo[5];
-      sVar3 = mbInfo[7];
-      sVar6 = mbInfo[4];
+      mvTmp1 = mbInfo[3];
+      mvTmp2 = mbInfo[5];
+      mvTmp3 = mbInfo[7];
+      mvTmp6 = mbInfo[4];
       *(uint *)(*(int *)(descOrSurfaceEntry + 0x14c98) + mbPosOrListEntry) = CONCAT22(mbInfo[1],*mbInfo);
-      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14c9c)) = CONCAT22(sVar1,sVar4);
-      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(sVar2,sVar6);
-      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(sVar3,sVar5);
-      sVar1 = mbInfo[3];
-      sVar2 = mbInfo[2];
-      sVar3 = mbInfo[5];
-      sVar4 = mbInfo[6];
-      sVar5 = mbInfo[4];
-      sVar6 = mbInfo[7];
+      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14c9c)) = CONCAT22(mvTmp1,mvTmp4);
+      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(mvTmp2,mvTmp6);
+      *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(mvTmp3,mvTmp5);
+      mvTmp1 = mbInfo[3];
+      mvTmp2 = mbInfo[2];
+      mvTmp3 = mbInfo[5];
+      mvTmp4 = mbInfo[6];
+      mvTmp5 = mbInfo[4];
+      mvTmp6 = mbInfo[7];
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ce8)) =
            ((int)mbInfo[1] - ((int)mbInfo[1] >> 0x1f)) * 0x8000 & 0xffff0000U |
            (uint)((int)*mbInfo - ((int)*mbInfo >> 0x1f)) >> 1 & 0xffff;
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cec)) =
-           ((int)sVar1 - ((int)sVar1 >> 0x1f)) * 0x8000 & 0xffff0000U |
-           (uint)((int)sVar2 - ((int)sVar2 >> 0x1f)) >> 1 & 0xffff;
+           ((int)mvTmp1 - ((int)mvTmp1 >> 0x1f)) * 0x8000 & 0xffff0000U |
+           (uint)((int)mvTmp2 - ((int)mvTmp2 >> 0x1f)) >> 1 & 0xffff;
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf0)) =
-           ((int)sVar3 - ((int)sVar3 >> 0x1f)) * 0x8000 & 0xffff0000U |
-           (uint)((int)sVar5 - ((int)sVar5 >> 0x1f)) >> 1 & 0xffff;
+           ((int)mvTmp3 - ((int)mvTmp3 >> 0x1f)) * 0x8000 & 0xffff0000U |
+           (uint)((int)mvTmp5 - ((int)mvTmp5 >> 0x1f)) >> 1 & 0xffff;
       *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf4)) =
-           ((int)sVar6 - ((int)sVar6 >> 0x1f)) * 0x8000 & 0xffff0000U |
-           (uint)((int)sVar4 - ((int)sVar4 >> 0x1f)) >> 1 & 0xffff;
+           ((int)mvTmp6 - ((int)mvTmp6 >> 0x1f)) * 0x8000 & 0xffff0000U |
+           (uint)((int)mvTmp4 - ((int)mvTmp4 >> 0x1f)) >> 1 & 0xffff;
       mbOffsetBytes = mbOffsetBytes + *(int *)(ctx + 0x153fc);
       mbPosOrListEntry = ctx + 0x14428 +
               ((uint)*(byte *)((int)mbInfo + 0x11) * 2 + (uint)*(byte *)(mbInfo + 8)) * 0xc;
@@ -3034,19 +3037,19 @@ LAB_000089ac:
     break;
   case 5:
     mbPosOrListEntry = mbPosOrListEntry * 4;
-    sVar1 = mbInfo[5];
+    mvTmp1 = mbInfo[5];
     descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
-    sVar2 = mbInfo[4];
+    mvTmp2 = mbInfo[4];
     *(uint *)(*(int *)(descOrSurfaceEntry + 0x14c98) + mbPosOrListEntry) = CONCAT22(mbInfo[1],*mbInfo);
-    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(sVar1,sVar2);
-    sVar1 = mbInfo[5];
-    sVar2 = mbInfo[4];
+    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(mvTmp1,mvTmp2);
+    mvTmp1 = mbInfo[5];
+    mvTmp2 = mbInfo[4];
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ce8)) =
          ((int)mbInfo[1] - ((int)mbInfo[1] >> 0x1f)) * 0x8000 & 0xffff0000U |
          (uint)((int)*mbInfo - ((int)*mbInfo >> 0x1f)) >> 1 & 0xffff;
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf0)) =
-         ((int)sVar1 - ((int)sVar1 >> 0x1f)) * 0x8000 & 0xffff0000U |
-         (uint)((int)sVar2 - ((int)sVar2 >> 0x1f)) >> 1 & 0xffff;
+         ((int)mvTmp1 - ((int)mvTmp1 >> 0x1f)) * 0x8000 & 0xffff0000U |
+         (uint)((int)mvTmp2 - ((int)mvTmp2 >> 0x1f)) >> 1 & 0xffff;
     mbPosOrListEntry = ctx + 0x14428 + (uint)*(byte *)(mbInfo + 8) * 0xc;
     mbOffsetBytes = (mbColumn + mbRow * *(int *)(ctx + 0x580) * 2) * 4 + *(int *)(ctx + 0x153fc);
     if (*(char *)(ctx + 0x590) == '\0') {
@@ -3071,19 +3074,19 @@ LAB_000089ac:
     goto LAB_00009624;
   case 6:
     mbPosOrListEntry = mbPosOrListEntry * 4;
-    sVar1 = mbInfo[7];
+    mvTmp1 = mbInfo[7];
     descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
-    sVar2 = mbInfo[6];
+    mvTmp2 = mbInfo[6];
     *(uint *)(*(int *)(descOrSurfaceEntry + 0x14c9c) + mbPosOrListEntry) = CONCAT22(mbInfo[3],mbInfo[2]);
-    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(sVar1,sVar2);
-    sVar1 = mbInfo[7];
-    sVar2 = mbInfo[6];
+    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(mvTmp1,mvTmp2);
+    mvTmp1 = mbInfo[7];
+    mvTmp2 = mbInfo[6];
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cec)) =
          ((int)mbInfo[3] - ((int)mbInfo[3] >> 0x1f)) * 0x8000 & 0xffff0000U |
          (uint)((int)mbInfo[2] - ((int)mbInfo[2] >> 0x1f)) >> 1 & 0xffff;
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf4)) =
-         ((int)sVar1 - ((int)sVar1 >> 0x1f)) * 0x8000 & 0xffff0000U |
-         (uint)((int)sVar2 - ((int)sVar2 >> 0x1f)) >> 1 & 0xffff;
+         ((int)mvTmp1 - ((int)mvTmp1 >> 0x1f)) * 0x8000 & 0xffff0000U |
+         (uint)((int)mvTmp2 - ((int)mvTmp2 >> 0x1f)) >> 1 & 0xffff;
     mbPosOrListEntry = ctx + 0x14428 + (uint)*(byte *)((int)mbInfo + 0x11) * 0xc;
     mbOffsetBytes = (mbColumn + mbRow * *(int *)(ctx + 0x580) * 2) * 4 + *(int *)(ctx + 0x153fc);
     if (*(char *)(ctx + 0x590) == '\0') {
@@ -3108,35 +3111,35 @@ LAB_000089ac:
     goto LAB_00009624;
   case 7:
     mbPosOrListEntry = mbPosOrListEntry * 4;
-    sVar4 = mbInfo[2];
-    sVar5 = mbInfo[6];
+    mvTmp4 = mbInfo[2];
+    mvTmp5 = mbInfo[6];
     descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
-    sVar1 = mbInfo[3];
-    sVar2 = mbInfo[5];
-    sVar3 = mbInfo[7];
-    sVar6 = mbInfo[4];
+    mvTmp1 = mbInfo[3];
+    mvTmp2 = mbInfo[5];
+    mvTmp3 = mbInfo[7];
+    mvTmp6 = mbInfo[4];
     *(uint *)(*(int *)(descOrSurfaceEntry + 0x14c98) + mbPosOrListEntry) = CONCAT22(mbInfo[1],*mbInfo);
-    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14c9c)) = CONCAT22(sVar1,sVar4);
-    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(sVar2,sVar6);
-    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(sVar3,sVar5);
-    sVar1 = mbInfo[3];
-    sVar2 = mbInfo[2];
-    sVar3 = mbInfo[5];
-    sVar4 = mbInfo[6];
-    sVar5 = mbInfo[4];
-    sVar6 = mbInfo[7];
+    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14c9c)) = CONCAT22(mvTmp1,mvTmp4);
+    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca0)) = CONCAT22(mvTmp2,mvTmp6);
+    *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ca4)) = CONCAT22(mvTmp3,mvTmp5);
+    mvTmp1 = mbInfo[3];
+    mvTmp2 = mbInfo[2];
+    mvTmp3 = mbInfo[5];
+    mvTmp4 = mbInfo[6];
+    mvTmp5 = mbInfo[4];
+    mvTmp6 = mbInfo[7];
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14ce8)) =
          ((int)mbInfo[1] - ((int)mbInfo[1] >> 0x1f)) * 0x8000 & 0xffff0000U |
          (uint)((int)*mbInfo - ((int)*mbInfo >> 0x1f)) >> 1 & 0xffff;
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cec)) =
-         ((int)sVar1 - ((int)sVar1 >> 0x1f)) * 0x8000 & 0xffff0000U |
-         (uint)((int)sVar2 - ((int)sVar2 >> 0x1f)) >> 1 & 0xffff;
+         ((int)mvTmp1 - ((int)mvTmp1 >> 0x1f)) * 0x8000 & 0xffff0000U |
+         (uint)((int)mvTmp2 - ((int)mvTmp2 >> 0x1f)) >> 1 & 0xffff;
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf0)) =
-         ((int)sVar3 - ((int)sVar3 >> 0x1f)) * 0x8000 & 0xffff0000U |
-         (uint)((int)sVar5 - ((int)sVar5 >> 0x1f)) >> 1 & 0xffff;
+         ((int)mvTmp3 - ((int)mvTmp3 >> 0x1f)) * 0x8000 & 0xffff0000U |
+         (uint)((int)mvTmp5 - ((int)mvTmp5 >> 0x1f)) >> 1 & 0xffff;
     *(uint *)(mbPosOrListEntry + *(int *)(descOrSurfaceEntry + 0x14cf4)) =
-         ((int)sVar6 - ((int)sVar6 >> 0x1f)) * 0x8000 & 0xffff0000U |
-         (uint)((int)sVar4 - ((int)sVar4 >> 0x1f)) >> 1 & 0xffff;
+         ((int)mvTmp6 - ((int)mvTmp6 >> 0x1f)) * 0x8000 & 0xffff0000U |
+         (uint)((int)mvTmp4 - ((int)mvTmp4 >> 0x1f)) >> 1 & 0xffff;
     mbPosOrListEntry = ctx + 0x14428 +
             ((uint)*(byte *)((int)mbInfo + 0x11) * 2 + (uint)*(byte *)(mbInfo + 8)) * 0xc;
     mbOffsetBytes = (mbColumn + mbRow * *(int *)(ctx + 0x580) * 2) * 4 + *(int *)(ctx + 0x153fc);
@@ -3931,22 +3934,22 @@ int FUN_0000aa00(ctx, slotIndex, pixelDesc)
 /* FUN_0000ae80 @ 0xae80 (2380 bytes) */
 void FUN_0000ae80(int ctx,double fpPassThrough,double unusedFp2,double unusedFp3,double unusedFp4)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
+  float srcHeightOrSrcTopScaled;
+  float srcWidthOrSrcLeftScaled;
+  float clipLeftOrWidthF;
+  float heightFOrClipRightF;
+  float clipBottomF;
+  float surfaceHeightF;
   short clipLeft;
   short srcRight;
   short srcLeft;
   short clipTop;
   float srcRightScaled;
-  float fVar12;
-  float fVar13;
+  float clippedLeft;
+  float centerX;
   float srcBottomScaled;
-  float fVar15;
-  float fVar16;
+  float clippedTop;
+  float centerY;
   float scaleX;
   float scaleY;
   undefined *mapMemoryType;
@@ -4065,24 +4068,24 @@ void FUN_0000ae80(int ctx,double fpPassThrough,double unusedFp2,double unusedFp3
     i2dLo7 = *(undefined4 *)(ctx + 100);
     i2dHi3 = 0x43300000;
     i2dHi7 = 0x43300000;
-    fVar1 = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
-    fVar2 = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
+    srcHeightOrSrcTopScaled = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
+    srcWidthOrSrcLeftScaled = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
     srcCoordRight = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503599627370496.0);
-    fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo7) - 4503599627370496.0);
-    srcCoordLeft = ((float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0) * fVar1) /
+    clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,i2dLo7) - 4503599627370496.0);
+    srcCoordLeft = ((float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0) * srcHeightOrSrcTopScaled) /
                 srcCoordRight;
-    srcCoordRight = ((float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * fVar1) /
+    srcCoordRight = ((float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * srcHeightOrSrcTopScaled) /
                 srcCoordRight;
-    srcCoordTop = ((float)((double)CONCAT44(0x43300000,i2dLo5) - 4503601774854144.0) * fVar2) /
-                fVar3;
+    srcCoordTop = ((float)((double)CONCAT44(0x43300000,i2dLo5) - 4503601774854144.0) * srcWidthOrSrcLeftScaled) /
+                clipLeftOrWidthF;
     i2dHi10 = 0x43300000;
     i2dHi9 = 0x43300000;
     dstOffsetTop = 0.0;
     dstOffsetLeft = 0.0;
     dstOffsetBottom = (float)((double)CONCAT44(0x43300000,i2dLo10) - 4503601774854144.0);
     dstOffsetRight = (float)((double)CONCAT44(0x43300000,i2dLo9) - 4503601774854144.0);
-    srcCoordBottom = ((float)((double)CONCAT44(0x43300000,i2dLo8) - 4503601774854144.0) * fVar2) /
-                fVar3;
+    srcCoordBottom = ((float)((double)CONCAT44(0x43300000,i2dLo8) - 4503601774854144.0) * srcWidthOrSrcLeftScaled) /
+                clipLeftOrWidthF;
     i2dLo2 = surfaceWidth;
     i2dLo6 = surfaceHeight;
   }
@@ -4106,35 +4109,35 @@ LAB_0000b054:
     i2dLo17 = (int)*(short *)(ctx + 0x10c) ^ 0x80000000;
     i2dLo13 = (int)srcLeft ^ 0x80000000;
     i2dLo18 = (int)*(short *)(ctx + 0x110) ^ 0x80000000;
-    fVar1 = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
+    srcHeightOrSrcTopScaled = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
     i2dLo16 = *(undefined4 *)(ctx + 100);
     i2dHi16 = 0x43300000;
-    fVar2 = (float)((double)CONCAT44(0x43300000,i2dLo12) - 4503599627370496.0);
-    srcRightScaled = (fVar1 * (float)((double)CONCAT44(0x43300000,i2dLo14) - 4503601774854144.0)) / fVar2
+    srcWidthOrSrcLeftScaled = (float)((double)CONCAT44(0x43300000,i2dLo12) - 4503599627370496.0);
+    srcRightScaled = (srcHeightOrSrcTopScaled * (float)((double)CONCAT44(0x43300000,i2dLo14) - 4503601774854144.0)) / srcWidthOrSrcLeftScaled
     ;
-    fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo19) - 4503601774854144.0);
-    fVar4 = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
-    fVar2 = ((float)((double)CONCAT44(0x43300000,i2dLo13) - 4503601774854144.0) * fVar1) / fVar2;
-    fVar1 = (float)((double)CONCAT44(0x43300000,i2dLo16) - 4503599627370496.0);
-    srcBottomScaled = (fVar4 * (float)((double)CONCAT44(0x43300000,i2dLo18) - 4503601774854144.0)) / fVar1
+    clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,i2dLo19) - 4503601774854144.0);
+    heightFOrClipRightF = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
+    srcWidthOrSrcLeftScaled = ((float)((double)CONCAT44(0x43300000,i2dLo13) - 4503601774854144.0) * srcHeightOrSrcTopScaled) / srcWidthOrSrcLeftScaled;
+    srcHeightOrSrcTopScaled = (float)((double)CONCAT44(0x43300000,i2dLo16) - 4503599627370496.0);
+    srcBottomScaled = (heightFOrClipRightF * (float)((double)CONCAT44(0x43300000,i2dLo18) - 4503601774854144.0)) / srcHeightOrSrcTopScaled
     ;
-    fVar1 = ((float)((double)CONCAT44(0x43300000,i2dLo17) - 4503601774854144.0) * fVar4) / fVar1;
+    srcHeightOrSrcTopScaled = ((float)((double)CONCAT44(0x43300000,i2dLo17) - 4503601774854144.0) * heightFOrClipRightF) / srcHeightOrSrcTopScaled;
     i2dLo11 = surfaceWidth;
     i2dLo15 = surfaceHeight;
-    if (srcRightScaled <= fVar3) goto LAB_0000b7d0;
-    if (srcRightScaled <= fVar3) {
+    if (srcRightScaled <= clipLeftOrWidthF) goto LAB_0000b7d0;
+    if (srcRightScaled <= clipLeftOrWidthF) {
       clipRight = *(short *)(ctx + 0x12a);
 LAB_0000b1e4:
       i2dLo21 = (int)clipRight ^ 0x80000000;
       i2dHi21 = 0x43300000;
-      fVar4 = (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
-      if (fVar4 <= fVar2) goto LAB_0000b7d0;
-      fVar12 = fVar2;
-      if (fVar2 - fVar3 < 0.0) {
-        fVar12 = fVar3;
+      heightFOrClipRightF = (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
+      if (heightFOrClipRightF <= srcWidthOrSrcLeftScaled) goto LAB_0000b7d0;
+      clippedLeft = srcWidthOrSrcLeftScaled;
+      if (srcWidthOrSrcLeftScaled - clipLeftOrWidthF < 0.0) {
+        clippedLeft = clipLeftOrWidthF;
       }
-      if (-(fVar2 - fVar3) < 0.0) {
-        fVar12 = fVar2;
+      if (-(srcWidthOrSrcLeftScaled - clipLeftOrWidthF) < 0.0) {
+        clippedLeft = srcWidthOrSrcLeftScaled;
       }
     }
     else {
@@ -4143,30 +4146,30 @@ LAB_0000b1e4:
       i2dLo20 = (int)clipRight ^ 0x80000000;
       if ((float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0) <= srcRightScaled)
       goto LAB_0000b1e4;
-      fVar12 = fVar3;
-      fVar4 = srcRightScaled;
-      if (fVar3 <= fVar2) {
-        fVar12 = fVar2;
+      clippedLeft = clipLeftOrWidthF;
+      heightFOrClipRightF = srcRightScaled;
+      if (clipLeftOrWidthF <= srcWidthOrSrcLeftScaled) {
+        clippedLeft = srcWidthOrSrcLeftScaled;
       }
     }
     clipTop = *(short *)(ctx + 0x124);
     i2dHi22 = 0x43300000;
     i2dLo22 = (int)clipTop ^ 0x80000000;
-    fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
-    if (srcBottomScaled <= fVar3) goto LAB_0000b7d0;
-    if (srcBottomScaled <= fVar3) {
+    clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
+    if (srcBottomScaled <= clipLeftOrWidthF) goto LAB_0000b7d0;
+    if (srcBottomScaled <= clipLeftOrWidthF) {
       clipBottom = *(short *)(ctx + 0x128);
 LAB_0000b2b8:
       i2dLo24 = (int)clipBottom ^ 0x80000000;
       i2dHi24 = 0x43300000;
-      fVar5 = (float)((double)CONCAT44(0x43300000,i2dLo24) - 4503601774854144.0);
-      if (fVar5 <= fVar1) goto LAB_0000b7d0;
-      fVar15 = fVar1;
-      if (fVar1 - fVar3 < 0.0) {
-        fVar15 = fVar3;
+      clipBottomF = (float)((double)CONCAT44(0x43300000,i2dLo24) - 4503601774854144.0);
+      if (clipBottomF <= srcHeightOrSrcTopScaled) goto LAB_0000b7d0;
+      clippedTop = srcHeightOrSrcTopScaled;
+      if (srcHeightOrSrcTopScaled - clipLeftOrWidthF < 0.0) {
+        clippedTop = clipLeftOrWidthF;
       }
-      if (-(fVar1 - fVar3) < 0.0) {
-        fVar15 = fVar1;
+      if (-(srcHeightOrSrcTopScaled - clipLeftOrWidthF) < 0.0) {
+        clippedTop = srcHeightOrSrcTopScaled;
       }
     }
     else {
@@ -4175,10 +4178,10 @@ LAB_0000b2b8:
       i2dLo23 = (int)clipBottom ^ 0x80000000;
       if ((float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0) <= srcBottomScaled)
       goto LAB_0000b2b8;
-      fVar15 = fVar3;
-      fVar5 = srcBottomScaled;
-      if (fVar3 <= fVar1) {
-        fVar15 = fVar1;
+      clippedTop = clipLeftOrWidthF;
+      clipBottomF = srcBottomScaled;
+      if (clipLeftOrWidthF <= srcHeightOrSrcTopScaled) {
+        clippedTop = srcHeightOrSrcTopScaled;
       }
     }
     i2dLo29 = (int)clipRight - (int)clipLeft ^ 0x80000000;
@@ -4197,60 +4200,60 @@ LAB_0000b2b8:
     i2dLo25 = (int)srcRight - (int)srcLeft ^ 0x80000000;
     i2dLo27 = (int)*(short *)(ctx + 0x110) - (int)*(short *)(ctx + 0x10c) ^ 0x80000000;
     i2dLo26 = (int)srcRight - (int)srcLeft ^ 0x80000000;
-    fVar3 = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
-    fVar6 = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
-    scaleX = fVar3 / (float)((double)CONCAT44(0x43300000,i2dLo29) - 4503601774854144.0);
+    clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
+    surfaceHeightF = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
+    scaleX = clipLeftOrWidthF / (float)((double)CONCAT44(0x43300000,i2dLo29) - 4503601774854144.0);
     dstOffsetTop = (float)((double)CONCAT44(0x43300000,i2dLo27) - 4503601774854144.0);
-    scaleY = fVar6 / (float)((double)CONCAT44(0x43300000,i2dLo31) - 4503601774854144.0);
-    fVar13 = (float)((double)CONCAT44(0x43300000,i2dLo32) - 4503601774854144.0) * 0.5;
-    fVar16 = (float)((double)CONCAT44(0x43300000,i2dLo33) - 4503601774854144.0) * 0.5;
-    dstOffsetLeft = ((fVar12 - fVar2) / (srcRightScaled - fVar2)) *
+    scaleY = surfaceHeightF / (float)((double)CONCAT44(0x43300000,i2dLo31) - 4503601774854144.0);
+    centerX = (float)((double)CONCAT44(0x43300000,i2dLo32) - 4503601774854144.0) * 0.5;
+    centerY = (float)((double)CONCAT44(0x43300000,i2dLo33) - 4503601774854144.0) * 0.5;
+    dstOffsetLeft = ((clippedLeft - srcWidthOrSrcLeftScaled) / (srcRightScaled - srcWidthOrSrcLeftScaled)) *
                 (float)((double)CONCAT44(0x43300000,i2dLo25) - 4503601774854144.0);
-    dstOffsetRight = (1.0 - (srcRightScaled - fVar4) / (srcRightScaled - fVar2)) *
+    dstOffsetRight = (1.0 - (srcRightScaled - heightFOrClipRightF) / (srcRightScaled - srcWidthOrSrcLeftScaled)) *
                 (float)((double)CONCAT44(0x43300000,i2dLo26) - 4503601774854144.0);
-    dstOffsetBottom = (1.0 - (srcBottomScaled - fVar5) / (srcBottomScaled - fVar1)) * dstOffsetTop;
-    dstOffsetTop = ((fVar15 - fVar1) / (srcBottomScaled - fVar1)) * dstOffsetTop;
+    dstOffsetBottom = (1.0 - (srcBottomScaled - clipBottomF) / (srcBottomScaled - srcHeightOrSrcTopScaled)) * dstOffsetTop;
+    dstOffsetTop = ((clippedTop - srcHeightOrSrcTopScaled) / (srcBottomScaled - srcHeightOrSrcTopScaled)) * dstOffsetTop;
     i2dHi35 = 0x43300000;
     i2dHi34 = 0x43300000;
-    srcCoordRight = scaleX * (fVar4 - fVar13) + fVar13;
-    fVar13 = scaleX * (fVar12 - fVar13) + fVar13;
-    srcCoordLeft = fVar13;
-    if (fVar13 < 0.0) {
+    srcCoordRight = scaleX * (heightFOrClipRightF - centerX) + centerX;
+    centerX = scaleX * (clippedLeft - centerX) + centerX;
+    srcCoordLeft = centerX;
+    if (centerX < 0.0) {
       srcCoordLeft = 0.0;
     }
-    i2dLo34 = (uint)(int)(scaleY * (fVar15 - fVar16) + fVar16);
+    i2dLo34 = (uint)(int)(scaleY * (clippedTop - centerY) + centerY);
     d2iScratch1 = (longlong)(int)i2dLo34;
-    if (-fVar13 < 0.0) {
-      srcCoordLeft = fVar13;
+    if (-centerX < 0.0) {
+      srcCoordLeft = centerX;
     }
-    i2dLo35 = (uint)(int)(scaleY * (fVar5 - fVar16) + fVar16);
+    i2dLo35 = (uint)(int)(scaleY * (clipBottomF - centerY) + centerY);
     d2iScratch2 = (longlong)(int)i2dLo35;
-    fVar1 = fVar3;
-    if (srcCoordRight - fVar3 < 0.0) {
-      fVar1 = srcCoordRight;
+    srcHeightOrSrcTopScaled = clipLeftOrWidthF;
+    if (srcCoordRight - clipLeftOrWidthF < 0.0) {
+      srcHeightOrSrcTopScaled = srcCoordRight;
     }
-    if (-(srcCoordRight - fVar3) < 0.0) {
-      srcCoordRight = fVar1;
+    if (-(srcCoordRight - clipLeftOrWidthF) < 0.0) {
+      srcCoordRight = srcHeightOrSrcTopScaled;
     }
     i2dLo34 = i2dLo34 ^ 0x80000000;
     i2dLo35 = i2dLo35 ^ 0x80000000;
-    fVar1 = (float)((double)CONCAT44(0x43300000,i2dLo34) - 4503601774854144.0);
+    srcHeightOrSrcTopScaled = (float)((double)CONCAT44(0x43300000,i2dLo34) - 4503601774854144.0);
     srcCoordBottom = (float)((double)CONCAT44(0x43300000,i2dLo35) - 4503601774854144.0);
-    srcCoordTop = fVar1;
-    if (fVar1 < 0.0) {
+    srcCoordTop = srcHeightOrSrcTopScaled;
+    if (srcHeightOrSrcTopScaled < 0.0) {
       srcCoordTop = 0.0;
     }
-    if (-fVar1 < 0.0) {
-      srcCoordTop = fVar1;
+    if (-srcHeightOrSrcTopScaled < 0.0) {
+      srcCoordTop = srcHeightOrSrcTopScaled;
     }
-    fVar1 = fVar6;
-    if (srcCoordBottom - fVar6 < 0.0) {
-      fVar1 = srcCoordBottom;
+    srcHeightOrSrcTopScaled = surfaceHeightF;
+    if (srcCoordBottom - surfaceHeightF < 0.0) {
+      srcHeightOrSrcTopScaled = srcCoordBottom;
     }
     i2dLo28 = surfaceWidth;
     i2dLo30 = surfaceHeight;
-    if (-(srcCoordBottom - fVar6) < 0.0) {
-      srcCoordBottom = fVar1;
+    if (-(srcCoordBottom - surfaceHeightF) < 0.0) {
+      srcCoordBottom = srcHeightOrSrcTopScaled;
     }
   }
   cmdWrite = *(undefined4 **)(ctx + 0x34);
@@ -4614,7 +4617,7 @@ int FUN_0000bfc0(ctx)
   undefined *mapMemoryType;
   uint *lastHeader;
   undefined4 *cmdWrite;
-  int iVar4;
+  int mapBase;
   
   mapMemoryType = PTR_0000f1a0;
   cmdWrite = *(undefined4 **)(ctx + 0x34);
@@ -4625,11 +4628,11 @@ int FUN_0000bfc0(ctx)
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
                         ctx + 0x44,1);
-    iVar4 = *(int *)(ctx + 0x40);
-    *(int *)(ctx + 0x34) = iVar4 + 0x20;
-    *(int *)(ctx + 0x30) = iVar4 + 0x1c;
-    *(int *)(ctx + 0x38) = iVar4 + 0x20 + *(int *)(iVar4 + 0x10) * 4;
-    *(undefined4 *)(iVar4 + 0x1c) = 0;
+    mapBase = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = mapBase + 0x20;
+    *(int *)(ctx + 0x30) = mapBase + 0x1c;
+    *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+    *(undefined4 *)(mapBase + 0x1c) = 0;
     cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
   lastHeader = *(uint **)(ctx + 0x30);
@@ -4645,11 +4648,11 @@ int FUN_0000bfc0(ctx)
   **(undefined4 **)(ctx + 0x34) = 0x1000000;
   _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
                       ctx + 0x44,1);
-  iVar4 = *(int *)(ctx + 0x40);
-  *(int *)(ctx + 0x34) = iVar4 + 0x20;
-  *(int *)(ctx + 0x30) = iVar4 + 0x1c;
-  *(int *)(ctx + 0x38) = iVar4 + 0x20 + *(int *)(iVar4 + 0x10) * 4;
-  *(undefined4 *)(iVar4 + 0x1c) = 0;
+  mapBase = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = mapBase + 0x20;
+  *(int *)(ctx + 0x30) = mapBase + 0x1c;
+  *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+  *(undefined4 *)(mapBase + 0x1c) = 0;
   return;
 }
 
@@ -4937,14 +4940,14 @@ int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
   uint *lastHeader;
   undefined4 cmdAfterClear;
   undefined4 *cmdWrite;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  float local_60;
-  float local_5c;
+  float srcLeft;
+  float srcRight;
+  float srcTop;
+  float srcBottom;
+  float dstLeft;
+  float dstRight;
+  float dstTop;
+  float dstBottom;
   undefined4 i2dHi1;
   uint i2dLo1;
   undefined4 i2dHi2;
@@ -4977,16 +4980,16 @@ int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
   srcWidth = *(uint *)(ctx + 0x60);
   srcHeight = *(int *)(ctx + 100);
   halfWidth = srcWidth >> 1;
-  local_70 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  local_6c = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
-  local_78 = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0) * 0.5;
-  local_74 = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * 0.5;
+  srcTop = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
+  srcBottom = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
+  srcLeft = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0) * 0.5;
+  srcRight = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * 0.5;
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = srcPosPacked;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = srcSizePacked;
-  local_68 = local_78;
-  local_64 = local_74;
-  local_60 = local_70;
-  local_5c = local_6c;
+  dstLeft = srcLeft;
+  dstRight = srcRight;
+  dstTop = srcTop;
+  dstBottom = srcBottom;
   if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0xa8) {
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
@@ -5055,7 +5058,7 @@ int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
   cmdWrite[5] = 0xf;
   cmdWrite[6] = 0x11ac;
   cmdWrite[7] = 0xf;
-  ((int (*)())FUN_00009ac0)(cmdWrite + 8,&local_78,&local_68,halfWidth,srcHeight);
+  ((int (*)())FUN_00009ac0)(cmdWrite + 8,&srcLeft,&dstLeft,halfWidth,srcHeight);
   mapMemoryType = PTR_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;

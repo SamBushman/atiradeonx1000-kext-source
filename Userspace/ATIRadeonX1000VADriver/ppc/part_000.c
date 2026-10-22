@@ -772,17 +772,17 @@ int FUN_00001ff8(function, argument, dsoHandle)
   undefined4 dsoHandle;
 {
   undefined4 result;
-  undefined4 uStack00000018;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
+  undefined4 functionHome;
+  undefined4 argumentHome;
+  undefined4 dsoHandleHome;
   undefined4 entryFunction;
   undefined4 entryKind;
   undefined4 entryArgument;
   
   entryKind = 1;
-  uStack00000018 = function;
-  uStack0000001c = argument;
-  uStack00000020 = dsoHandle;
+  functionHome = function;
+  argumentHome = argument;
+  dsoHandleHome = dsoHandle;
   entryFunction = function;
   entryArgument = argument;
   result = ((int (*)())FUN_00001cd8)(&entryFunction,dsoHandle);
