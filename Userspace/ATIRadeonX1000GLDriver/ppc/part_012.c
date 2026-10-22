@@ -3947,8 +3947,8 @@ LAB_0008855c:
   } while( true );
 }
 
-/* FUN_000885b0 @ 0x885b0 (860 bytes) */
-int FUN_000885b0(param_1)
+/* arbLexNumber @ 0x885b0 (860 bytes) */
+int arbLexNumber(param_1)
   int param_1;
 {
   byte bVar1;
@@ -4028,7 +4028,7 @@ LAB_000887c4:
     }
   }
   else {
-    ((int (*)())FUN_00088e70)(param_1,"Invalid scientific notation.");
+    ((int (*)())arbSetError)(param_1,"Invalid scientific notation.");
     pbVar6 = *(byte **)(param_1 + 0xc);
     uVar8 = (uint)*pbVar6;
     dVar9 = DOUBLE_001aa200;
@@ -4042,7 +4042,7 @@ LAB_000887c4:
 LAB_0008886c:
   bVar1 = *pbVar6;
   if ((((byte)(bVar1 + 0xbf) < 0x1a) || ((byte)(bVar1 + 0x9f) < 0x1a)) || (bVar1 == 0x5f)) {
-    ((int (*)())FUN_00088e70)(param_1,"invalid suffix on number");
+    ((int (*)())arbSetError)(param_1,"invalid suffix on number");
   }
   *(double *)(param_1 + 0x1c) = dVar10;
   *(int *)(param_1 + 0x18) = (int)GH_F2U((float)(dVar10));
@@ -4055,8 +4055,8 @@ LAB_0008886c:
   return;
 }
 
-/* FUN_00088920 @ 0x88920 (892 bytes) */
-int FUN_00088920(param_1)
+/* arbNextToken @ 0x88920 (892 bytes) */
+int arbNextToken(param_1)
   int param_1;
 {
   char cVar1;
@@ -4156,7 +4156,7 @@ LAB_00088afc:
       }
       break;
     default:
-      ((int (*)())FUN_00088e70)(param_1,"invalid character");
+      ((int (*)())arbSetError)(param_1,"invalid character");
       return;
     case 0x31:
     case 0x32:
@@ -4181,7 +4181,7 @@ LAB_00088afc:
     case 0x38:
     case 0x39:
 switchD_00088b48_caseD_30:
-      ((int (*)())FUN_000885b0)(param_1);
+      ((int (*)())arbLexNumber)(param_1);
       return;
     case 0x3b:
       *(undefined1 **)(param_1 + 0xc) = puVar7 + 1;
@@ -4278,38 +4278,38 @@ LAB_00088d48:
   return;
 }
 
-/* FUN_00088e70 @ 0x88e70 (112 bytes) */
-int FUN_00088e70(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+/* arbSetError @ 0x88e70 (112 bytes) */
+int arbSetError(parser, message)
+  undefined4 *parser;
+  undefined4 message;
 {
-  if ((int)param_1[10] < 0) {
-    param_1[0xc] = param_2;
-    param_1[0xb] = param_1[9];
-    param_1[10] = param_1[2] - param_1[1];
+  if ((int)parser[10] < 0) {
+    parser[0xc] = message;
+    parser[0xb] = parser[9];
+    parser[10] = parser[2] - parser[1];
   }
-  param_1[3] = param_1[4];
-  ((int (*)())FUN_00088920)(param_1);
-  *(undefined4 *)*param_1 = 0x502;
+  parser[3] = parser[4];
+  ((int (*)())arbNextToken)(parser);
+  *(undefined4 *)*parser = 0x502;
   return;
 }
 
-/* FUN_00088ee0 @ 0x88ee0 (28 bytes) */
-int FUN_00088ee0(param_1)
-  undefined4 param_1;
+/* arbErrorOutOfMemory @ 0x88ee0 (28 bytes) */
+int arbErrorOutOfMemory(parser)
+  undefined4 parser;
 {
-  return ((int (*)())FUN_00088e70)(param_1,"out of memory");
+  return ((int (*)())arbSetError)(parser,"out of memory");
 }
 
-/* FUN_00088f00 @ 0x88f00 (184 bytes) */
-int FUN_00088f00(param_1)
-  int *param_1;
+/* arbAllocVariable @ 0x88f00 (184 bytes) */
+int arbAllocVariable(parser)
+  int *parser;
 {
   undefined4 *puVar1;
   
-  puVar1 = (undefined4 *)(**(code **)(*param_1 + 0xc))(0x2c);
+  puVar1 = (undefined4 *)(**(code **)(*parser + 0xc))(0x2c);
   if (puVar1 == (undefined4 *)0x0) {
-    ((int (*)())FUN_00088ee0)(param_1);
+    ((int (*)())arbErrorOutOfMemory)(parser);
   }
   else {
     puVar1[5] = puVar1 + 6;
@@ -4323,19 +4323,19 @@ int FUN_00088f00(param_1)
     puVar1[4] = 0;
     puVar1[7] = 0;
     puVar1[9] = 0;
-    if (param_1[0x11] == 0) {
-      param_1[0x11] = (int)puVar1;
+    if (parser[0x11] == 0) {
+      parser[0x11] = (int)puVar1;
     }
     else {
-      *(undefined4 **)param_1[0x12] = puVar1;
+      *(undefined4 **)parser[0x12] = puVar1;
     }
-    param_1[0x12] = (int)puVar1;
+    parser[0x12] = (int)puVar1;
   }
   return puVar1;
 }
 
-/* FUN_00088fd0 @ 0x88fd0 (332 bytes) */
-int FUN_00088fd0(param_1)
+/* arbParseVariableName @ 0x88fd0 (332 bytes) */
+int arbParseVariableName(param_1)
   int param_1;
 {
   int *piVar1;
@@ -4396,38 +4396,38 @@ LAB_00089104:
     }
   }
   else {
-    ((int (*)())FUN_00088e70)(param_1,"invalid variable name");
+    ((int (*)())arbSetError)(param_1,"invalid variable name");
   }
   return (int *)0x0;
 }
 
-/* FUN_00089140 @ 0x89140 (28 bytes) */
-int FUN_00089140(param_1)
-  undefined4 param_1;
+/* arbErrorInternal @ 0x89140 (28 bytes) */
+int arbErrorInternal(parser)
+  undefined4 parser;
 {
-  return ((int (*)())FUN_00088e70)(param_1,"internal error");
+  return ((int (*)())arbSetError)(parser,"internal error");
 }
 
-/* FUN_00089160 @ 0x89160 (44 bytes) */
-int FUN_00089160(param_1, param_2)
-  int param_1;
-  int param_2;
+/* arbExpectToken @ 0x89160 (44 bytes) */
+int arbExpectToken(parser, expectedToken)
+  int parser;
+  int expectedToken;
 {
-  if (*(int *)(param_1 + 0x14) == param_2) {
-    ((int (*)())FUN_00088920)(param_1);
+  if (*(int *)(parser + 0x14) == expectedToken) {
+    ((int (*)())arbNextToken)(parser);
     return;
   }
-  return ((int (*)())FUN_00088e70)(param_1,"unexpected token");
+  return ((int (*)())arbSetError)(parser,"unexpected token");
 }
 
-/* FUN_00089190 @ 0x89190 (124 bytes) */
-int FUN_00089190(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+/* arbComponentLetterToIndex @ 0x89190 (124 bytes) */
+int arbComponentLetterToIndex(parser, letter)
+  undefined4 parser;
+  undefined4 letter;
 {
   undefined4 uVar1;
   
-  switch(param_2) {
+  switch(letter) {
   case 0x61:
   case 0x77:
     uVar1 = 3;
@@ -4437,7 +4437,7 @@ int FUN_00089190(param_1, param_2)
     uVar1 = 2;
     break;
   default:
-    ((int (*)())FUN_00088e70)(param_1,"invalid component");
+    ((int (*)())arbSetError)(parser,"invalid component");
   case 0x72:
   case 0x78:
     uVar1 = 0;
@@ -4449,24 +4449,24 @@ int FUN_00089190(param_1, param_2)
   return uVar1;
 }
 
-/* FUN_00089280 @ 0x89280 (156 bytes) */
-int FUN_00089280(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+/* arbAllocBindingEntry @ 0x89280 (156 bytes) */
+int arbAllocBindingEntry(parser, variable)
+  undefined4 parser;
+  int variable;
 {
   undefined4 *puVar1;
   uint uVar2;
   
-  puVar1 = (undefined4 *)(param_2 + 0x18);
-  if (*(uint *)(param_2 + 0xc) != 0) {
-    uVar2 = *(uint *)(param_2 + 0x10);
-    if (uVar2 < *(uint *)(param_2 + 0xc)) {
-      *(uint *)(param_2 + 0x10) = uVar2 + 1;
-      puVar1 = (undefined4 *)(uVar2 * 0x14 + *(int *)(param_2 + 0x14));
+  puVar1 = (undefined4 *)(variable + 0x18);
+  if (*(uint *)(variable + 0xc) != 0) {
+    uVar2 = *(uint *)(variable + 0x10);
+    if (uVar2 < *(uint *)(variable + 0xc)) {
+      *(uint *)(variable + 0x10) = uVar2 + 1;
+      puVar1 = (undefined4 *)(uVar2 * 0x14 + *(int *)(variable + 0x14));
     }
     else {
-      ((int (*)())FUN_00088e70)(param_1,"too many array initializers");
-      puVar1 = (undefined4 *)(param_2 + 0x18);
+      ((int (*)())arbSetError)(parser,"too many array initializers");
+      puVar1 = (undefined4 *)(variable + 0x18);
     }
   }
   *puVar1 = 4;
@@ -4477,10 +4477,10 @@ int FUN_00089280(param_1, param_2)
   return puVar1;
 }
 
-/* FUN_00089320 @ 0x89320 (264 bytes) */
-int FUN_00089320(param_1, param_2)
-  int *param_1;
-  float *param_2;
+/* arbInternConstant @ 0x89320 (264 bytes) */
+int arbInternConstant(parser, constant)
+  int *parser;
+  float *constant;
 {
   float fVar1;
   float fVar2;
@@ -4491,15 +4491,15 @@ int FUN_00089320(param_1, param_2)
   int iVar7;
   int iVar8;
   
-  iVar7 = param_1[0x9116];
+  iVar7 = parser[0x9116];
   iVar6 = 0;
   if (iVar7 != 0) {
-    pfVar4 = (float *)(param_1 + 0x9016);
+    pfVar4 = (float *)(parser + 0x9016);
     iVar5 = 0;
     iVar8 = iVar7;
     do {
-      if ((((*pfVar4 == *param_2) && (pfVar4[1] == param_2[1])) && (pfVar4[2] == param_2[2])) &&
-         (pfVar4[3] == param_2[3])) {
+      if ((((*pfVar4 == *constant) && (pfVar4[1] == constant[1])) && (pfVar4[2] == constant[2])) &&
+         (pfVar4[3] == constant[3])) {
         return iVar5;
       }
       iVar5 = iVar5 + 1;
@@ -4508,25 +4508,25 @@ int FUN_00089320(param_1, param_2)
       iVar6 = iVar7;
     } while (iVar8 != 0);
   }
-  if (iVar6 < *(int *)(((unsigned char *)0x000011e4) + *param_1)) {
-    fVar1 = *param_2;
-    fVar2 = param_2[1];
-    fVar3 = param_2[2];
-    param_1[iVar7 * 4 + 0x9019] = (int)GH_F2U((float)(param_2[3]));
-    param_1[iVar7 * 4 + 0x9016] = (int)GH_F2U(fVar1);
-    param_1[iVar7 * 4 + 0x9017] = (int)GH_F2U(fVar2);
-    param_1[iVar7 * 4 + 0x9018] = (int)GH_F2U(fVar3);
-    param_1[0x9116] = param_1[0x9116] + 1;
+  if (iVar6 < *(int *)(((unsigned char *)0x000011e4) + *parser)) {
+    fVar1 = *constant;
+    fVar2 = constant[1];
+    fVar3 = constant[2];
+    parser[iVar7 * 4 + 0x9019] = (int)GH_F2U((float)(constant[3]));
+    parser[iVar7 * 4 + 0x9016] = (int)GH_F2U(fVar1);
+    parser[iVar7 * 4 + 0x9017] = (int)GH_F2U(fVar2);
+    parser[iVar7 * 4 + 0x9018] = (int)GH_F2U(fVar3);
+    parser[0x9116] = parser[0x9116] + 1;
   }
   else {
-    ((int (*)())FUN_00088e70)(param_1,"too many constants");
+    ((int (*)())arbSetError)(parser,"too many constants");
     iVar7 = 0;
   }
   return iVar7;
 }
 
-/* FUN_00089430 @ 0x89430 (348 bytes) */
-int FUN_00089430(param_1)
+/* arbDeclareVariable @ 0x89430 (348 bytes) */
+int arbDeclareVariable(param_1)
   int *param_1;
 {
   int iVar1;
@@ -4537,14 +4537,14 @@ int FUN_00089430(param_1)
     if ((((iVar1 == 0xc) || (iVar1 == 0x1d)) || (iVar1 == 0x20)) ||
        ((iVar1 == 0x27 || (iVar1 == 0x2a)))) {
       puVar2 = (undefined4 *)0x0;
-      ((int (*)())FUN_00088e70)(param_1,"reserved variable name");
+      ((int (*)())arbSetError)(param_1,"reserved variable name");
     }
     else {
-      iVar1 = ((int (*)())FUN_00088fd0)(param_1);
+      iVar1 = ((int (*)())arbParseVariableName)(param_1);
       if (iVar1 == 0) {
         puVar2 = (undefined4 *)(**(code **)(*param_1 + 0xc))(0x2c);
         if (puVar2 == (undefined4 *)0x0) {
-          ((int (*)())FUN_00088ee0)(param_1);
+          ((int (*)())arbErrorOutOfMemory)(param_1);
         }
         else {
           puVar2[2] = param_1[3] - param_1[2];
@@ -4570,35 +4570,35 @@ int FUN_00089430(param_1)
       }
       else {
         puVar2 = (undefined4 *)0x0;
-        ((int (*)())FUN_00088e70)(param_1,"redeclared variable name");
+        ((int (*)())arbSetError)(param_1,"redeclared variable name");
       }
     }
   }
   else {
-    ((int (*)())FUN_00089140)(param_1);
+    ((int (*)())arbErrorInternal)(param_1);
     puVar2 = (undefined4 *)0x0;
   }
-  ((int (*)())FUN_00088920)(param_1);
+  ((int (*)())arbNextToken)(param_1);
   return puVar2;
 }
 
-/* FUN_000895b0 @ 0x895b0 (364 bytes) */
-int FUN_000895b0(param_1, param_2)
+/* arbParseResultBinding @ 0x895b0 (364 bytes) */
+int arbParseResultBinding(param_1, param_2)
   int *param_1;
   undefined4 *param_2;
 {
   int iVar1;
   
   if ((param_1[5] != 0) || (param_1[6] != 0x20)) {
-    ((int (*)())FUN_00088e70)(param_1,"invalid result binding");
+    ((int (*)())arbSetError)(param_1,"invalid result binding");
   }
-  ((int (*)())FUN_00088920)(param_1);
-  ((int (*)())FUN_00089160)(param_1,0x11);
+  ((int (*)())arbNextToken)(param_1);
+  ((int (*)())arbExpectToken)(param_1,0x11);
   if (param_1[5] == 0) {
     param_2[2] = 0x35;
     *param_2 = 3;
     if (param_1[6] == 4) {
-      ((int (*)())FUN_00088920)(param_1);
+      ((int (*)())arbNextToken)(param_1);
       param_2[1] = 0;
       if (*(char *)((int)param_1 + 0x3a) == '\0') {
         param_2[3] = 0;
@@ -4606,68 +4606,68 @@ int FUN_000895b0(param_1, param_2)
       else {
         iVar1 = 0;
         if (param_1[5] == 0x15) {
-          ((int (*)())FUN_00088920)(param_1);
+          ((int (*)())arbNextToken)(param_1);
           if (((param_1[5] == 0xf) && (iVar1 = param_1[6], -1 < iVar1)) &&
              (iVar1 < (int)(uint)(byte)((unsigned char *)0x000013b3)[*param_1])) {
-            ((int (*)())FUN_00088920)(param_1);
+            ((int (*)())arbNextToken)(param_1);
           }
           else {
             iVar1 = 0;
-            ((int (*)())FUN_00088e70)(param_1,"invalid output color");
+            ((int (*)())arbSetError)(param_1,"invalid output color");
           }
-          ((int (*)())FUN_00089160)(param_1,0x16);
+          ((int (*)())arbExpectToken)(param_1,0x16);
         }
         param_2[3] = iVar1;
       }
     }
     else {
       if (param_1[6] != 5) goto LAB_00089638;
-      ((int (*)())FUN_00088920)(param_1);
+      ((int (*)())arbNextToken)(param_1);
       param_2[1] = 1;
     }
     return;
   }
 LAB_00089638:
-  ((int (*)())FUN_00088e70)(param_1,"invalid result binding");
+  ((int (*)())arbSetError)(param_1,"invalid result binding");
   return;
 }
 
-/* FUN_00089740 @ 0x89740 (88 bytes) */
-int FUN_00089740(param_1)
-  int param_1;
+/* arbParseOptionalSign @ 0x89740 (88 bytes) */
+int arbParseOptionalSign(parser)
+  int parser;
 {
   undefined4 uVar1;
   
-  if (*(int *)(param_1 + 0x14) == 0x19) {
-    ((int (*)())FUN_00088920)(param_1);
+  if (*(int *)(parser + 0x14) == 0x19) {
+    ((int (*)())arbNextToken)(parser);
     uVar1 = 1;
   }
   else {
     uVar1 = 1;
-    if (*(int *)(param_1 + 0x14) == 0x1a) {
-      ((int (*)())FUN_00088920)(param_1);
+    if (*(int *)(parser + 0x14) == 0x1a) {
+      ((int (*)())arbNextToken)(parser);
       uVar1 = 0xffffffff;
     }
   }
   return uVar1;
 }
 
-/* FUN_000897b0 @ 0x897b0 (164 bytes) */
-double FUN_000897b0(int param_1)
+/* arbParseFloatConstant @ 0x897b0 (164 bytes) */
+double arbParseFloatConstant(int param_1)
 {
   uint uVar1;
   double dVar2;
   double dVar3;
   
-  uVar1 = ((int (*)())FUN_00089740)(param_1);
+  uVar1 = ((int (*)())arbParseOptionalSign)(param_1);
   dVar2 = DOUBLE_001aa228;
   dVar3 = (double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_001aa1e0;
   if (*(int *)(param_1 + 0x14) - 0xfU < 2) {
     dVar2 = *(double *)(param_1 + 0x1c);
-    ((int (*)())FUN_00088920)(param_1);
+    ((int (*)())arbNextToken)(param_1);
   }
   else {
-    ((int (*)())FUN_00088e70)(param_1,"invalid constant");
+    ((int (*)())arbSetError)(param_1,"invalid constant");
   }
   return dVar2 * dVar3;
 }

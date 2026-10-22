@@ -270,10 +270,10 @@
 50300	FUN_00050300	r8	PASS-indirect	50358 bctrl 
 50ef0	FUN_00050ef0	r7	PASS-indirect	50fac bctrl 
 50ef0	FUN_00050ef0	r8	PASS-indirect	50fac bctrl 
-53990	FUN_00053990	r5	PASS-no	539c8 bl 0xb9f10
-53990	FUN_00053990	r6	PASS-indirect	539c8 bl 0xb9f10
-53990	FUN_00053990	r7	PASS-no	539c8 bl 0xb9f10
-53990	FUN_00053990	r8	PASS-no	539c8 bl 0xb9f10
+53990	extvsEndShader	r5	PASS-no	539c8 bl 0xb9f10
+53990	extvsEndShader	r6	PASS-indirect	539c8 bl 0xb9f10
+53990	extvsEndShader	r7	PASS-no	539c8 bl 0xb9f10
+53990	extvsEndShader	r8	PASS-no	539c8 bl 0xb9f10
 546d0	FUN_000546d0	r6	PASS-indirect	54704 bctrl 
 546d0	FUN_000546d0	r7	PASS-indirect	54704 bctrl 
 546d0	FUN_000546d0	r8	PASS-indirect	54704 bctrl 
@@ -328,11 +328,11 @@
 872e0	FUN_000872e0	r6	PASS-indirect	87428 bctrl 
 872e0	FUN_000872e0	r7	PASS-indirect	87428 bctrl 
 872e0	FUN_000872e0	r8	PASS-indirect	87428 bctrl 
-8b6d0	FUN_0008b6d0	r5	PASS-deep	8b6f0 bl 0x89740
+8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	8b6f0 bl 0x89740
 8b960	FUN_0008b960	r5	PASS-deep	8b978 bl 0x89740
-8b9f0	FUN_0008b9f0	r5	PASS-deep	8baf4 bl 0x88e70
-8c590	FUN_0008c590	r7	PASS-indirect	8c5d8 bctrl 
-8c590	FUN_0008c590	r8	PASS-indirect	8c5d8 bctrl 
+8b9f0	arbParseProgramText	r5	PASS-deep	8baf4 bl 0x88e70
+8c590	arbValidateProgram	r7	PASS-indirect	8c5d8 bctrl 
+8c590	arbValidateProgram	r8	PASS-indirect	8c5d8 bctrl 
 8dc50	FUN_0008dc50	r5	PASS-indirect	8dce8 bctrl 
 8dc50	FUN_0008dc50	r6	PASS-indirect	8dce8 bctrl 
 8dc50	FUN_0008dc50	r7	PASS-indirect	8dce8 bctrl 

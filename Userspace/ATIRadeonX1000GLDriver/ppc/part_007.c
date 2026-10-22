@@ -4644,8 +4644,8 @@ int FUN_000537c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_000538e0 @ 0x538e0 (164 bytes) */
-int FUN_000538e0(param_1)
+/* extvsBeginShader @ 0x538e0 (164 bytes) */
+int extvsBeginShader(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -4669,8 +4669,8 @@ int FUN_000538e0(param_1)
   return;
 }
 
-/* FUN_00053990 @ 0x53990 (244 bytes) */
-int FUN_00053990(param_1)
+/* extvsEndShader @ 0x53990 (244 bytes) */
+int extvsEndShader(param_1)
   int param_1;
 {
   undefined4 in_r5;
@@ -4682,7 +4682,7 @@ int FUN_00053990(param_1)
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
     a1 = *(int *)(((unsigned char *)0x00001168) + param_1);
     ((unsigned char *)0x00001170)[param_1] = 0;
-    FUN_000b9f10(param_1,a1);
+    extvsOptimizeProgram(param_1,a1);
     (**(code **)(((unsigned char *)0x00001190) + param_1))(param_1,a1);
     (**(code **)(((unsigned char *)0x00001194) + param_1))(param_1,a1);
     (**(code **)(((unsigned char *)0x0000119c) + param_1))

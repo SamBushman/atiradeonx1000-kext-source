@@ -798,7 +798,7 @@ int FUN_0005d470(param_1, param_2, param_3)
   }
   iVar5 = param_3 + 4;
   iVar4 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  iVar3 = FUN_000550e0(param_2 + 7,iVar5);
+  iVar3 = extvsOperandDataType(param_2 + 7,iVar5);
   if (*(uint *)(param_3 + 0x40) < 4) {
     if (iVar3 == 0x87bf) {
       FUN_00056f20(param_1,param_2,iVar5,iVar4,3,0,0);
@@ -851,7 +851,7 @@ int FUN_0005d620(param_1, param_2, param_3)
   piVar4 = param_2 + 7;
   iVar3 = param_3 + 0x20;
   iVar5 = iVar2 * 0x10 + *(int *)(iVar5 + 0x1c);
-  iVar2 = FUN_000550e0(piVar4,iVar3);
+  iVar2 = extvsOperandDataType(piVar4,iVar3);
   uVar6 = *(uint *)(param_3 + 0x40);
   if (uVar6 < 4) {
     FUN_00056f20(param_1,param_2,param_3 + 4,iVar5,3,0,0);

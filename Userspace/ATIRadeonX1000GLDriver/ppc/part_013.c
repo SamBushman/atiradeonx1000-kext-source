@@ -1,240 +1,243 @@
 #include "decls.h"
 
-/* FUN_00089a20 @ 0x89a20 (144 bytes) */
-int FUN_00089a20(param_1)
-  int *param_1;
+/* arbParseLocalParamNumber @ 0x89a20 (144 bytes) */
+int arbParseLocalParamNumber(parser)
+  int *parser;
 {
   int iVar1;
   
-  if (((param_1[5] == 0xf) && (iVar1 = param_1[6], -1 < iVar1)) &&
-     (iVar1 < *(int *)(((unsigned char *)0x000011fc) + *param_1))) {
-    FUN_00088920(param_1);
+  if (((parser[5] == 0xf) && (iVar1 = parser[6], -1 < iVar1)) &&
+     (iVar1 < *(int *)(((unsigned char *)0x000011fc) + *parser))) {
+    arbNextToken(parser);
   }
   else {
     iVar1 = 0;
-    FUN_00088e70(param_1,"invalid program local parameter number");
+    arbSetError(parser,"invalid program local parameter number");
   }
   return iVar1;
 }
 
-/* FUN_00089ac0 @ 0x89ac0 (144 bytes) */
-int FUN_00089ac0(param_1)
-  int *param_1;
+/* arbParseEnvParamNumber @ 0x89ac0 (144 bytes) */
+int arbParseEnvParamNumber(parser)
+  int *parser;
 {
   int iVar1;
   
-  if (((param_1[5] == 0xf) && (iVar1 = param_1[6], -1 < iVar1)) &&
-     (iVar1 < *(int *)(((unsigned char *)0x00001200) + *param_1))) {
-    FUN_00088920(param_1);
+  if (((parser[5] == 0xf) && (iVar1 = parser[6], -1 < iVar1)) &&
+     (iVar1 < *(int *)(((unsigned char *)0x00001200) + *parser))) {
+    arbNextToken(parser);
   }
   else {
     iVar1 = 0;
-    FUN_00088e70(param_1,"invalid program environment parameter number");
+    arbSetError(parser,"invalid program environment parameter number");
   }
   return iVar1;
 }
 
-/* FUN_00089b60 @ 0x89b60 (168 bytes) */
-int FUN_00089b60(param_1)
-  int *param_1;
+/* arbParseTexCoordNumber @ 0x89b60 (168 bytes) */
+int arbParseTexCoordNumber(parser)
+  int *parser;
 {
   int iVar1;
   
   iVar1 = 0;
-  if (param_1[5] == 0x15) {
-    FUN_00088920(param_1);
-    if (((param_1[5] != 0xf) || (iVar1 = param_1[6], iVar1 < 0)) ||
-       ((int)(uint)(byte)((unsigned char *)0x000013b0)[*param_1] <= iVar1)) {
-      FUN_00088e70(param_1,"invalid texture coordinate");
-      iVar1 = param_1[6];
+  if (parser[5] == 0x15) {
+    arbNextToken(parser);
+    if (((parser[5] != 0xf) || (iVar1 = parser[6], iVar1 < 0)) ||
+       ((int)(uint)(byte)((unsigned char *)0x000013b0)[*parser] <= iVar1)) {
+      arbSetError(parser,"invalid texture coordinate");
+      iVar1 = parser[6];
     }
-    FUN_00088920(param_1);
-    FUN_00089160(param_1,0x16);
+    arbNextToken(parser);
+    arbExpectToken(parser,0x16);
   }
   return iVar1;
 }
 
-/* FUN_00089c10 @ 0x89c10 (128 bytes) */
-int FUN_00089c10(param_1)
-  int param_1;
+/* arbParseMatrixRowNumber @ 0x89c10 (128 bytes) */
+int arbParseMatrixRowNumber(parser)
+  int parser;
 {
   uint uVar1;
   
-  if (((*(int *)(param_1 + 0x14) == 0xf) && (uVar1 = *(uint *)(param_1 + 0x18), -1 < (int)uVar1)) &&
+  if (((*(int *)(parser + 0x14) == 0xf) && (uVar1 = *(uint *)(parser + 0x18), -1 < (int)uVar1)) &&
      (uVar1 < 4)) {
-    FUN_00088920(param_1);
+    arbNextToken(parser);
   }
   else {
     uVar1 = 0;
-    FUN_00088e70(param_1,"invalid matrix row number");
+    arbSetError(parser,"invalid matrix row number");
   }
   return uVar1;
 }
 
-/* FUN_00089ca0 @ 0x89ca0 (144 bytes) */
-int FUN_00089ca0(param_1)
-  int *param_1;
+/* arbParseLightNumber @ 0x89ca0 (144 bytes) */
+int arbParseLightNumber(parser)
+  int *parser;
 {
   int iVar1;
   
-  if (((param_1[5] == 0xf) && (iVar1 = param_1[6], -1 < iVar1)) &&
-     (iVar1 < (int)(uint)(byte)((unsigned char *)0x000013b5)[*param_1])) {
-    FUN_00088920(param_1);
+  if (((parser[5] == 0xf) && (iVar1 = parser[6], -1 < iVar1)) &&
+     (iVar1 < (int)(uint)(byte)((unsigned char *)0x000013b5)[*parser])) {
+    arbNextToken(parser);
   }
   else {
     iVar1 = 0;
-    FUN_00088e70(param_1,"invalid light number");
+    arbSetError(parser,"invalid light number");
   }
   return iVar1;
 }
 
-/* FUN_0008aa40 @ 0x8aa40 (3780 bytes) */
-int FUN_0008aa40(param_1, param_2, param_3, param_4)
-  int *param_1;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
+/* arbParseParamBinding @ 0x8aa40 (3780 bytes) */
+int arbParseParamBinding(parser, variable, allowRange, isArrayElement)
+  int *parser;
+  undefined4 variable;
+  int allowRange;
+  int isArrayElement;
 {
+  int tokenValue;
+  int paramNumber;
+  int matrixRowNumber;
   bool bVar1;
   uint uVar2;
-  undefined4 *puVar3;
+  undefined4 *binding;
   undefined4 uVar4;
   int iVar5;
   int iVar6;
   int iVar7;
-  undefined4 *puVar8;
-  char *pcVar9;
+  undefined4 *rangeBinding;
+  char *errorMessage;
   undefined4 uVar10;
   undefined4 uVar11;
-  double dVar12;
+  double constantValue;
   float local_28;
   float local_24;
   float local_20;
   
-  if (0x1a < (uint)param_1[5]) {
+  if (0x1a < (uint)parser[5]) {
 LAB_0008aaa0:
-    pcVar9 = "invalid parameter binding";
+    errorMessage = "invalid parameter binding";
     goto LAB_0008ab20;
   }
-  uVar2 = 1 << (param_1[5] & 0x3fU);
+  uVar2 = 1 << (parser[5] & 0x3fU);
   if ((uVar2 & 0x818000) == 0) {
     if ((uVar2 & 1) != 0) {
-      if (param_1[6] == 0x1d) {
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x11);
-        puVar3 = (undefined4 *)FUN_00089280(param_1,param_2);
-        *puVar3 = 2;
-        if (param_1[5] == 0) {
-          if (param_1[6] == 9) {
-            puVar3[2] = 0x32;
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x15);
-            iVar6 = ((int (*)())FUN_00089ac0)(param_1);
-            iVar7 = iVar6;
-            if ((param_3 == 0) || (param_1[5] != 0x12)) {
+      if (parser[6] == 0x1d) {
+        arbNextToken(parser);
+        arbExpectToken(parser,0x11);
+        binding = (undefined4 *)arbAllocBindingEntry(parser,variable);
+        *binding = 2;
+        if (parser[5] == 0) {
+          if (parser[6] == 9) {
+            binding[2] = 0x32;
+            arbNextToken(parser);
+            arbExpectToken(parser,0x15);
+            paramNumber = ((int (*)())arbParseEnvParamNumber)(parser);
+            iVar7 = paramNumber;
+            if ((allowRange == 0) || (parser[5] != 0x12)) {
 LAB_0008abb4:
-              FUN_00089160(param_1,0x16);
-              puVar3[3] = iVar6;
-              while (iVar6 = iVar6 + 1, iVar6 <= iVar7) {
-                puVar8 = (undefined4 *)FUN_00089280(param_1,param_2);
-                uVar4 = puVar3[1];
-                uVar10 = puVar3[2];
-                uVar11 = puVar3[3];
-                *puVar8 = *puVar3;
-                puVar8[1] = uVar4;
-                puVar8[3] = uVar11;
-                puVar8[2] = uVar10;
-                uVar4 = puVar3[4];
-                puVar8[3] = iVar6;
-                puVar8[4] = uVar4;
-                puVar3 = puVar8;
+              arbExpectToken(parser,0x16);
+              binding[3] = paramNumber;
+              while (paramNumber = paramNumber + 1, paramNumber <= iVar7) {
+                rangeBinding = (undefined4 *)arbAllocBindingEntry(parser,variable);
+                uVar4 = binding[1];
+                uVar10 = binding[2];
+                uVar11 = binding[3];
+                *rangeBinding = *binding;
+                rangeBinding[1] = uVar4;
+                rangeBinding[3] = uVar11;
+                rangeBinding[2] = uVar10;
+                uVar4 = binding[4];
+                rangeBinding[3] = paramNumber;
+                rangeBinding[4] = uVar4;
+                binding = rangeBinding;
               }
               return;
             }
-            FUN_00088920(param_1);
-            iVar7 = ((int (*)())FUN_00089ac0)(param_1);
-            if (iVar6 <= iVar7) goto LAB_0008abb4;
+            arbNextToken(parser);
+            iVar7 = ((int (*)())arbParseEnvParamNumber)(parser);
+            if (paramNumber <= iVar7) goto LAB_0008abb4;
           }
           else {
-            if (param_1[6] != 0x14) goto LAB_0008ab0c;
-            puVar3[2] = 0x33;
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x15);
-            iVar6 = ((int (*)())FUN_00089a20)(param_1);
-            iVar7 = iVar6;
-            if ((param_3 == 0) || (param_1[5] != 0x12)) goto LAB_0008abb4;
-            FUN_00088920(param_1);
-            iVar7 = ((int (*)())FUN_00089a20)(param_1);
-            if (iVar6 <= iVar7) goto LAB_0008abb4;
+            if (parser[6] != 0x14) goto LAB_0008ab0c;
+            binding[2] = 0x33;
+            arbNextToken(parser);
+            arbExpectToken(parser,0x15);
+            paramNumber = ((int (*)())arbParseLocalParamNumber)(parser);
+            iVar7 = paramNumber;
+            if ((allowRange == 0) || (parser[5] != 0x12)) goto LAB_0008abb4;
+            arbNextToken(parser);
+            iVar7 = ((int (*)())arbParseLocalParamNumber)(parser);
+            if (paramNumber <= iVar7) goto LAB_0008abb4;
           }
-          pcVar9 = "invalid program parameter range";
+          errorMessage = "invalid program parameter range";
         }
         else {
 LAB_0008ab0c:
-          pcVar9 = "invalid program parameter type";
+          errorMessage = "invalid program parameter type";
         }
 LAB_0008ab20:
-        FUN_00088e70(param_1,pcVar9);
+        arbSetError(parser,errorMessage);
         return;
       }
-      if (param_1[6] != 0x27) {
-        pcVar9 = "invalid parameter binding";
+      if (parser[6] != 0x27) {
+        errorMessage = "invalid parameter binding";
         goto LAB_0008ab20;
       }
-      FUN_00088920(param_1);
-      FUN_00089160(param_1,0x11);
-      if (param_1[5] != 0) {
-        FUN_00088e70(param_1,"invalid state binding");
+      arbNextToken(parser);
+      arbExpectToken(parser,0x11);
+      if (parser[5] != 0) {
+        arbSetError(parser,"invalid state binding");
       }
-      puVar3 = (undefined4 *)FUN_00089280(param_1,param_2);
-      *puVar3 = 2;
-      switch(param_1[6]) {
+      binding = (undefined4 *)arbAllocBindingEntry(parser,variable);
+      *binding = 2;
+      switch(parser[6]) {
       case 5:
-        if (param_1[5] != 0) {
+        if (parser[5] != 0) {
 LAB_0008a570:
-          FUN_00089140(param_1);
+          arbErrorInternal(parser);
           return;
         }
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x11);
-        if ((param_1[5] == 0) && (param_1[6] == 0x1f)) {
-          FUN_00088920(param_1);
-          puVar3[2] = 0x18;
+        arbNextToken(parser);
+        arbExpectToken(parser,0x11);
+        if ((parser[5] == 0) && (parser[6] == 0x1f)) {
+          arbNextToken(parser);
+          binding[2] = 0x18;
           return;
         }
-        pcVar9 = "invalid depth property";
+        errorMessage = "invalid depth property";
         break;
       default:
-        pcVar9 = "invalid state binding";
+        errorMessage = "invalid state binding";
         break;
       case 10:
-        if (param_1[5] != 0) goto LAB_0008a570;
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x11);
-        if (param_1[5] == 0) {
-          if (param_1[6] == 4) {
-            FUN_00088920(param_1);
-            puVar3[2] = 0x16;
+        if (parser[5] != 0) goto LAB_0008a570;
+        arbNextToken(parser);
+        arbExpectToken(parser,0x11);
+        if (parser[5] == 0) {
+          if (parser[6] == 4) {
+            arbNextToken(parser);
+            binding[2] = 0x16;
             return;
           }
-          if (param_1[6] == 0x1a) {
-            FUN_00088920(param_1);
-            puVar3[2] = 0x17;
+          if (parser[6] == 0x1a) {
+            arbNextToken(parser);
+            binding[2] = 0x17;
             return;
           }
         }
-        pcVar9 = "invalid fog property";
+        errorMessage = "invalid fog property";
         break;
       case 0x11:
-        if (param_1[5] != 0) goto LAB_0008a570;
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x15);
-        uVar4 = ((int (*)())FUN_00089ca0)(param_1);
-        puVar3[3] = uVar4;
-        FUN_00089160(param_1,0x16);
-        FUN_00089160(param_1,0x11);
-        if (param_1[5] == 0) {
-          switch(param_1[6]) {
+        if (parser[5] != 0) goto LAB_0008a570;
+        arbNextToken(parser);
+        arbExpectToken(parser,0x15);
+        uVar4 = ((int (*)())arbParseLightNumber)(parser);
+        binding[3] = uVar4;
+        arbExpectToken(parser,0x16);
+        arbExpectToken(parser,0x11);
+        if (parser[5] == 0) {
+          switch(parser[6]) {
           default:
             goto switchD_0008a094_caseD_0;
           case 1:
@@ -256,101 +259,101 @@ LAB_0008a570:
             uVar4 = 0xc;
             break;
           case 0x26:
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x11);
-            if ((param_1[5] != 0) || (param_1[6] != 7)) {
-              pcVar9 = "invalid spot light property";
+            arbNextToken(parser);
+            arbExpectToken(parser,0x11);
+            if ((parser[5] != 0) || (parser[6] != 7)) {
+              errorMessage = "invalid spot light property";
               goto LAB_0008a9fc;
             }
             uVar4 = 0xf;
           }
 LAB_00089fc4:
-          puVar3[2] = uVar4;
-          FUN_00088920(param_1);
+          binding[2] = uVar4;
+          arbNextToken(parser);
           return;
         }
 switchD_0008a094_caseD_0:
-        pcVar9 = "invalid light property";
+        errorMessage = "invalid light property";
         break;
       case 0x12:
-        if (param_1[5] != 0) {
-          FUN_00089140(param_1);
+        if (parser[5] != 0) {
+          arbErrorInternal(parser);
         }
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x11);
-        if (param_1[5] == 0) {
-          puVar3[3] = 0;
-          iVar6 = param_1[6];
-          if (iVar6 == 3) {
-            puVar3[3] = 1;
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x11);
+        arbNextToken(parser);
+        arbExpectToken(parser,0x11);
+        if (parser[5] == 0) {
+          binding[3] = 0;
+          tokenValue = parser[6];
+          if (tokenValue == 3) {
+            binding[3] = 1;
+            arbNextToken(parser);
+            arbExpectToken(parser,0x11);
           }
-          else if (iVar6 == 0xd) {
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x11);
+          else if (tokenValue == 0xd) {
+            arbNextToken(parser);
+            arbExpectToken(parser,0x11);
           }
-          else if (iVar6 == 1) {
+          else if (tokenValue == 1) {
             uVar4 = 0x11;
             goto LAB_00089fc4;
           }
-          if ((param_1[5] == 0) && (param_1[6] == 0x22)) {
+          if ((parser[5] == 0) && (parser[6] == 0x22)) {
             uVar4 = 0x12;
             goto LAB_00089fc4;
           }
         }
-        pcVar9 = "invalid light model property";
+        errorMessage = "invalid light model property";
         break;
       case 0x13:
-        if (param_1[5] != 0) goto LAB_0008a570;
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x15);
-        uVar4 = ((int (*)())FUN_00089ca0)(param_1);
-        puVar3[3] = uVar4;
-        FUN_00089160(param_1,0x16);
-        FUN_00089160(param_1,0x11);
-        puVar3[4] = 0;
-        if (param_1[5] == 0) {
-          if (param_1[6] == 3) {
-            puVar3[4] = 1;
+        if (parser[5] != 0) goto LAB_0008a570;
+        arbNextToken(parser);
+        arbExpectToken(parser,0x15);
+        uVar4 = ((int (*)())arbParseLightNumber)(parser);
+        binding[3] = uVar4;
+        arbExpectToken(parser,0x16);
+        arbExpectToken(parser,0x11);
+        binding[4] = 0;
+        if (parser[5] == 0) {
+          if (parser[6] == 3) {
+            binding[4] = 1;
 LAB_0008a31c:
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x11);
-            if (param_1[5] != 0) goto LAB_0008a38c;
+            arbNextToken(parser);
+            arbExpectToken(parser,0x11);
+            if (parser[5] != 0) goto LAB_0008a38c;
           }
-          else if (param_1[6] == 0xd) goto LAB_0008a31c;
-          iVar6 = param_1[6];
-          if (iVar6 == 6) {
+          else if (parser[6] == 0xd) goto LAB_0008a31c;
+          tokenValue = parser[6];
+          if (tokenValue == 6) {
             uVar4 = 0x14;
             goto LAB_00089fc4;
           }
-          if (iVar6 == 0x25) {
+          if (tokenValue == 0x25) {
             uVar4 = 0x15;
             goto LAB_00089fc4;
           }
-          if (iVar6 == 1) {
+          if (tokenValue == 1) {
             uVar4 = 0x13;
             goto LAB_00089fc4;
           }
         }
 LAB_0008a38c:
-        pcVar9 = "invalid light product property";
+        errorMessage = "invalid light product property";
         break;
       case 0x15:
-        if (param_1[5] != 0) goto LAB_0008a570;
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x11);
-        puVar3[3] = 0;
-        if (param_1[5] == 0) {
-          if (param_1[6] == 3) {
-            puVar3[3] = 1;
+        if (parser[5] != 0) goto LAB_0008a570;
+        arbNextToken(parser);
+        arbExpectToken(parser,0x11);
+        binding[3] = 0;
+        if (parser[5] == 0) {
+          if (parser[6] == 3) {
+            binding[3] = 1;
 LAB_00089ec0:
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x11);
-            if (param_1[5] != 0) goto switchD_00089f14_caseD_0;
+            arbNextToken(parser);
+            arbExpectToken(parser,0x11);
+            if (parser[5] != 0) goto switchD_00089f14_caseD_0;
           }
-          else if (param_1[6] == 0xd) goto LAB_00089ec0;
-          switch(param_1[6]) {
+          else if (parser[6] == 0xd) goto LAB_00089ec0;
+          switch(parser[6]) {
           default:
             goto switchD_00089f14_caseD_0;
           case 1:
@@ -371,245 +374,245 @@ LAB_00089ec0:
           goto LAB_00089fc4;
         }
 switchD_00089f14_caseD_0:
-        pcVar9 = "invalid material property";
+        errorMessage = "invalid material property";
         break;
       case 0x16:
-        if (param_1[5] != 0) goto LAB_0008a570;
-        FUN_00088920(param_1);
-        FUN_00089160(param_1,0x11);
-        if (param_1[5] != 0) {
-          FUN_00088e70(param_1,"invalid matrix property");
+        if (parser[5] != 0) goto LAB_0008a570;
+        arbNextToken(parser);
+        arbExpectToken(parser,0x11);
+        if (parser[5] != 0) {
+          arbSetError(parser,"invalid matrix property");
         }
-        switch(param_1[6]) {
+        switch(parser[6]) {
         case 0x17:
           iVar6 = 0;
-          FUN_00088920(param_1);
-          puVar3[2] = 0x1a;
-          if (param_1[5] == 0x15) {
-            FUN_00088920(param_1);
-            if (((param_1[5] == 0xf) && (iVar6 = param_1[6], -1 < iVar6)) &&
-               (iVar6 < (int)(uint)(byte)((unsigned char *)0x000013b4)[*param_1])) {
-              FUN_00088920(param_1);
+          arbNextToken(parser);
+          binding[2] = 0x1a;
+          if (parser[5] == 0x15) {
+            arbNextToken(parser);
+            if (((parser[5] == 0xf) && (iVar6 = parser[6], -1 < iVar6)) &&
+               (iVar6 < (int)(uint)(byte)((unsigned char *)0x000013b4)[*parser])) {
+              arbNextToken(parser);
             }
             else {
               iVar6 = 0;
-              FUN_00088e70(param_1,"invalid modelview matrix number");
+              arbSetError(parser,"invalid modelview matrix number");
             }
-            FUN_00089160(param_1,0x16);
+            arbExpectToken(parser,0x16);
           }
-          puVar3[3] = iVar6;
+          binding[3] = iVar6;
           break;
         case 0x18:
-          FUN_00088920(param_1);
-          puVar3[2] = 0x22;
+          arbNextToken(parser);
+          binding[2] = 0x22;
           break;
         case 0x19:
-          FUN_00088920(param_1);
-          puVar3[2] = 0x2a;
-          FUN_00089160(param_1,0x15);
-          FUN_00088e70(param_1,"invalid palette matrix number");
-          puVar3[3] = 0;
-          FUN_00089160(param_1,0x16);
+          arbNextToken(parser);
+          binding[2] = 0x2a;
+          arbExpectToken(parser,0x15);
+          arbSetError(parser,"invalid palette matrix number");
+          binding[3] = 0;
+          arbExpectToken(parser,0x16);
           break;
         default:
-          FUN_00088e70(param_1,"invalid matrix property");
+          arbSetError(parser,"invalid matrix property");
           break;
         case 0x1d:
-          FUN_00088920(param_1);
-          puVar3[2] = 0x2e;
-          FUN_00089160(param_1,0x15);
-          if (((param_1[5] == 0xf) && (iVar6 = param_1[6], -1 < iVar6)) &&
-             (iVar6 < *(int *)(((unsigned char *)0x0000149c) + *param_1))) {
-            FUN_00088920(param_1);
+          arbNextToken(parser);
+          binding[2] = 0x2e;
+          arbExpectToken(parser,0x15);
+          if (((parser[5] == 0xf) && (iVar6 = parser[6], -1 < iVar6)) &&
+             (iVar6 < *(int *)(((unsigned char *)0x0000149c) + *parser))) {
+            arbNextToken(parser);
           }
           else {
             iVar6 = 0;
-            FUN_00088e70(param_1,"invalid program matrix number");
+            arbSetError(parser,"invalid program matrix number");
           }
-          puVar3[3] = iVar6;
-          FUN_00089160(param_1,0x16);
+          binding[3] = iVar6;
+          arbExpectToken(parser,0x16);
           break;
         case 0x1e:
-          FUN_00088920(param_1);
-          puVar3[2] = 0x1e;
+          arbNextToken(parser);
+          binding[2] = 0x1e;
           break;
         case 0x2a:
-          FUN_00088920(param_1);
-          puVar3[2] = 0x26;
-          uVar4 = ((int (*)())FUN_00089b60)(param_1);
-          puVar3[3] = uVar4;
+          arbNextToken(parser);
+          binding[2] = 0x26;
+          uVar4 = ((int (*)())arbParseTexCoordNumber)(parser);
+          binding[3] = uVar4;
         }
-        if (param_1[5] == 0x11) {
-          FUN_00088920(param_1);
-          if (param_1[5] != 0) {
-            pcVar9 = "invalid matrix modifier";
+        if (parser[5] == 0x11) {
+          arbNextToken(parser);
+          if (parser[5] != 0) {
+            errorMessage = "invalid matrix modifier";
             break;
           }
-          iVar6 = param_1[6];
-          if (iVar6 == 0x10) {
-            FUN_00088920(param_1);
-            bVar1 = param_1[5] != 0x11;
+          tokenValue = parser[6];
+          if (tokenValue == 0x10) {
+            arbNextToken(parser);
+            bVar1 = parser[5] != 0x11;
             if (!bVar1) {
-              FUN_00088920(param_1);
+              arbNextToken(parser);
             }
-            puVar3[4] = 3;
+            binding[4] = 3;
 LAB_0008a838:
             if (bVar1) goto LAB_0008a960;
           }
           else {
-            if (iVar6 == 0x2b) {
-              FUN_00088920(param_1);
-              bVar1 = param_1[5] != 0x11;
+            if (tokenValue == 0x2b) {
+              arbNextToken(parser);
+              bVar1 = parser[5] != 0x11;
               if (!bVar1) {
-                FUN_00088920(param_1);
+                arbNextToken(parser);
               }
-              puVar3[4] = 2;
+              binding[4] = 2;
               goto LAB_0008a838;
             }
-            if (iVar6 == 0xf) {
-              FUN_00088920(param_1);
-              bVar1 = param_1[5] != 0x11;
+            if (tokenValue == 0xf) {
+              arbNextToken(parser);
+              bVar1 = parser[5] != 0x11;
               if (!bVar1) {
-                FUN_00088920(param_1);
+                arbNextToken(parser);
               }
-              puVar3[4] = 1;
+              binding[4] = 1;
               goto LAB_0008a838;
             }
-            puVar3[4] = 0;
+            binding[4] = 0;
           }
-          if ((param_1[5] == 0) && (param_1[6] == 0x21)) {
-            FUN_00088920(param_1);
-            FUN_00089160(param_1,0x15);
-            iVar5 = ((int (*)())FUN_00089c10)(param_1);
-            iVar7 = iVar5;
-            if ((param_3 != 0) && (param_1[5] == 0x12)) {
-              FUN_00088920(param_1);
-              iVar7 = ((int (*)())FUN_00089c10)(param_1);
-              if (iVar7 < iVar5) {
-                pcVar9 = "invalid matrix row range";
+          if ((parser[5] == 0) && (parser[6] == 0x21)) {
+            arbNextToken(parser);
+            arbExpectToken(parser,0x15);
+            matrixRowNumber = ((int (*)())arbParseMatrixRowNumber)(parser);
+            iVar7 = matrixRowNumber;
+            if ((allowRange != 0) && (parser[5] == 0x12)) {
+              arbNextToken(parser);
+              iVar7 = ((int (*)())arbParseMatrixRowNumber)(parser);
+              if (iVar7 < matrixRowNumber) {
+                errorMessage = "invalid matrix row range";
                 break;
               }
             }
-            iVar6 = iVar5 + 1;
-            FUN_00089160(param_1,0x16);
+            iVar6 = matrixRowNumber + 1;
+            arbExpectToken(parser,0x16);
 LAB_0008a984:
-            puVar3[2] = iVar5 + puVar3[2];
+            binding[2] = matrixRowNumber + binding[2];
             for (; iVar6 <= iVar7; iVar6 = iVar6 + 1) {
-              puVar8 = (undefined4 *)FUN_00089280(param_1,param_2);
-              iVar5 = puVar3[2];
-              uVar4 = *puVar3;
-              uVar10 = puVar3[1];
-              uVar11 = puVar3[3];
-              puVar8[2] = iVar5;
-              *puVar8 = uVar4;
-              puVar8[1] = uVar10;
-              puVar8[3] = uVar11;
-              uVar4 = puVar3[4];
-              puVar8[2] = iVar5 + 1;
-              puVar8[4] = uVar4;
-              puVar3 = puVar8;
+              rangeBinding = (undefined4 *)arbAllocBindingEntry(parser,variable);
+              iVar5 = binding[2];
+              uVar4 = *binding;
+              uVar10 = binding[1];
+              uVar11 = binding[3];
+              rangeBinding[2] = iVar5;
+              *rangeBinding = uVar4;
+              rangeBinding[1] = uVar10;
+              rangeBinding[3] = uVar11;
+              uVar4 = binding[4];
+              rangeBinding[2] = iVar5 + 1;
+              rangeBinding[4] = uVar4;
+              binding = rangeBinding;
             }
             return;
           }
-          pcVar9 = "invalid matrix row selector";
+          errorMessage = "invalid matrix row selector";
         }
         else {
 LAB_0008a960:
-          if (param_3 != 0) {
+          if (allowRange != 0) {
             iVar7 = 3;
-            iVar5 = 0;
+            matrixRowNumber = 0;
             iVar6 = 1;
             goto LAB_0008a984;
           }
-          pcVar9 = "missing matrix row selector";
+          errorMessage = "missing matrix row selector";
         }
         break;
       case 0x29:
-        if (param_1[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto LAB_0008a570;
         iVar6 = 0;
-        FUN_00088920(param_1);
-        if (param_1[5] == 0x15) {
-          FUN_00088920(param_1);
-          if (((param_1[5] != 0xf) || (iVar6 = param_1[6], iVar6 < 0)) ||
-             ((int)(uint)(byte)((unsigned char *)0x000013b2)[*param_1] <= iVar6)) {
-            FUN_00088e70(param_1,"invalid legacy texture unit");
-            iVar6 = param_1[6];
+        arbNextToken(parser);
+        if (parser[5] == 0x15) {
+          arbNextToken(parser);
+          if (((parser[5] != 0xf) || (iVar6 = parser[6], iVar6 < 0)) ||
+             ((int)(uint)(byte)((unsigned char *)0x000013b2)[*parser] <= iVar6)) {
+            arbSetError(parser,"invalid legacy texture unit");
+            iVar6 = parser[6];
           }
-          FUN_00088920(param_1);
-          FUN_00089160(param_1,0x16);
+          arbNextToken(parser);
+          arbExpectToken(parser,0x16);
         }
-        puVar3[3] = iVar6;
-        FUN_00089160(param_1,0x11);
-        if ((param_1[5] == 0) && (param_1[6] == 4)) {
+        binding[3] = iVar6;
+        arbExpectToken(parser,0x11);
+        if ((parser[5] == 0) && (parser[6] == 4)) {
           uVar4 = 0x19;
           goto LAB_00089fc4;
         }
-        pcVar9 = "invalid texenv property";
+        errorMessage = "invalid texenv property";
       }
 LAB_0008a9fc:
-      FUN_00088e70(param_1,pcVar9);
+      arbSetError(parser,errorMessage);
       return;
     }
     if ((uVar2 & 0x6000000) == 0) goto LAB_0008aaa0;
-    if (param_4 == 0) {
-      pcVar9 = "consecutive sign operators";
+    if (isArrayElement == 0) {
+      errorMessage = "consecutive sign operators";
       goto LAB_0008ab20;
     }
   }
-  puVar3 = (undefined4 *)FUN_00089280(param_1,param_2);
-  puVar3[2] = 0x34;
-  *puVar3 = 2;
-  if (0x1a < (uint)param_1[5]) {
+  binding = (undefined4 *)arbAllocBindingEntry(parser,variable);
+  binding[2] = 0x34;
+  *binding = 2;
+  if (0x1a < (uint)parser[5]) {
 LAB_000898c0:
-    FUN_00088e70(param_1,"invalid constant");
+    arbSetError(parser,"invalid constant");
     return;
   }
-  uVar2 = 1 << (param_1[5] & 0x3fU);
+  uVar2 = 1 << (parser[5] & 0x3fU);
   if ((uVar2 & 0x6018000) != 0) {
-    dVar12 = (double)((double (*)())FUN_000897b0)(param_1);
-    local_28 = (float)dVar12;
+    constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
+    local_28 = (float)constantValue;
     local_24 = local_28;
     local_20 = local_28;
-    uVar4 = FUN_00089320(param_1,&local_28);
-    puVar3[3] = uVar4;
+    uVar4 = arbInternConstant(parser,&local_28);
+    binding[3] = uVar4;
     return;
   }
   if ((uVar2 & 0x800000) == 0) goto LAB_000898c0;
-  FUN_00088920(param_1);
+  arbNextToken(parser);
   local_20 = 0.0;
   local_24 = 0.0;
-  dVar12 = (double)((double (*)())FUN_000897b0)(param_1);
-  local_28 = (float)dVar12;
-  if (param_1[5] == 0x13) {
-    FUN_00088920(param_1);
-    dVar12 = (double)((double (*)())FUN_000897b0)(param_1);
-    local_24 = (float)dVar12;
-    if (param_1[5] == 0x13) {
-      FUN_00088920(param_1);
-      dVar12 = (double)((double (*)())FUN_000897b0)(param_1);
-      local_20 = (float)dVar12;
-      if (param_1[5] == 0x13) {
-        FUN_00088920(param_1);
-        ((double (*)())FUN_000897b0)(param_1);
+  constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
+  local_28 = (float)constantValue;
+  if (parser[5] == 0x13) {
+    arbNextToken(parser);
+    constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
+    local_24 = (float)constantValue;
+    if (parser[5] == 0x13) {
+      arbNextToken(parser);
+      constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
+      local_20 = (float)constantValue;
+      if (parser[5] == 0x13) {
+        arbNextToken(parser);
+        ((double (*)())arbParseFloatConstant)(parser);
         goto LAB_000899e0;
       }
     }
   }
-  if ((param_1[10] < 0) && (param_1[0xb] == -1)) {
-    param_1[0xb] = param_1[9];
-    param_1[0xc] = (int)
+  if ((parser[10] < 0) && (parser[0xb] == -1)) {
+    parser[0xb] = parser[9];
+    parser[0xc] = (int)
                    "warning: <paramConstVector> rule match where parser is supplying some default component(s)"
     ;
   }
 LAB_000899e0:
-  FUN_00089160(param_1,0x18);
-  uVar4 = FUN_00089320(param_1,&local_28);
-  puVar3[3] = uVar4;
+  arbExpectToken(parser,0x18);
+  uVar4 = arbInternConstant(parser,&local_28);
+  binding[3] = uVar4;
   return;
 }
 
-/* FUN_0008ace0 @ 0x8ace0 (464 bytes) */
-int FUN_0008ace0(param_1, param_2)
+/* arbParseFragmentAttribBinding @ 0x8ace0 (464 bytes) */
+int arbParseFragmentAttribBinding(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -619,41 +622,41 @@ int FUN_0008ace0(param_1, param_2)
   
   if ((*(int *)(param_1 + 0x14) == 0) && (*(int *)(param_1 + 0x18) == 0xc)) {
     *(undefined4 *)(param_2 + 0x18) = 1;
-    FUN_00088920(param_1);
-    FUN_00089160(param_1,0x11);
+    arbNextToken(param_1);
+    arbExpectToken(param_1,0x11);
     if (*(int *)(param_1 + 0x14) != 0) {
-      FUN_00088e70(param_1,"invalid fragment attribute binding item");
+      arbSetError(param_1,"invalid fragment attribute binding item");
     }
     uVar1 = *(uint *)(param_1 + 0x18);
     if (uVar1 == 0xb) {
-      FUN_00088920(param_1);
+      arbNextToken(param_1);
       *(undefined4 *)(param_2 + 0x20) = 3;
       return;
     }
     if (uVar1 < 0xc) {
       if (uVar1 == 4) {
-        FUN_00088920(param_1);
+        arbNextToken(param_1);
         *(undefined4 *)(param_2 + 0x20) = 1;
         uVar2 = 0;
         if (*(int *)(param_1 + 0x14) == 0x11) {
-          FUN_00088920(param_1);
+          arbNextToken(param_1);
           if (*(int *)(param_1 + 0x14) == 0) {
             if (*(int *)(param_1 + 0x18) == 0x1c) {
-              FUN_00088920(param_1);
+              arbNextToken(param_1);
               uVar2 = 0;
             }
             else if (*(int *)(param_1 + 0x18) == 0x23) {
-              FUN_00088920(param_1);
+              arbNextToken(param_1);
               uVar2 = 1;
             }
             else {
               *(int *)(param_1 + 0xc) = *(int *)(param_1 + 8) + -1;
-              FUN_00088920(param_1);
+              arbNextToken(param_1);
               uVar2 = 0;
             }
           }
           else {
-            FUN_00088e70(param_1,"invalid color type");
+            arbSetError(param_1,"invalid color type");
             uVar2 = 0;
           }
         }
@@ -663,14 +666,14 @@ int FUN_0008ace0(param_1, param_2)
     }
     else {
       if (uVar1 == 0x1b) {
-        FUN_00088920(param_1);
+        arbNextToken(param_1);
         *(undefined4 *)(param_2 + 0x20) = 4;
         return;
       }
       if (uVar1 == 0x28) {
-        FUN_00088920(param_1);
+        arbNextToken(param_1);
         *(undefined4 *)(param_2 + 0x20) = 2;
-        uVar2 = ((int (*)())FUN_00089b60)(param_1);
+        uVar2 = ((int (*)())arbParseTexCoordNumber)(param_1);
         *(undefined4 *)(param_2 + 0x24) = uVar2;
         return;
       }
@@ -680,30 +683,30 @@ int FUN_0008ace0(param_1, param_2)
   else {
     pcVar3 = "invalid fragment attribute binding";
   }
-  FUN_00088e70(param_1,pcVar3);
+  arbSetError(param_1,pcVar3);
   return;
 }
 
-/* FUN_0008aec0 @ 0x8aec0 (136 bytes) */
-int FUN_0008aec0(param_1)
+/* arbParseComponentToken @ 0x8aec0 (136 bytes) */
+int arbParseComponentToken(param_1)
   int param_1;
 {
   undefined4 uVar1;
   
   if ((*(int *)(param_1 + 0x14) == 0) &&
      (*(int *)(param_1 + 0xc) - (int)*(byte **)(param_1 + 8) == 1)) {
-    uVar1 = FUN_00089190(param_1,(uint)**(byte **)(param_1 + 8));
-    FUN_00088920(param_1);
+    uVar1 = arbComponentLetterToIndex(param_1,(uint)**(byte **)(param_1 + 8));
+    arbNextToken(param_1);
   }
   else {
     uVar1 = 0;
-    FUN_00088e70(param_1,"invalid component");
+    arbSetError(param_1,"invalid component");
   }
   return uVar1;
 }
 
-/* FUN_0008b160 @ 0x8b160 (864 bytes) */
-int FUN_0008b160(param_1, param_2, param_3)
+/* arbParseSourceRegister @ 0x8b160 (864 bytes) */
+int arbParseSourceRegister(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   undefined4 param_3;
@@ -720,26 +723,26 @@ int FUN_0008b160(param_1, param_2, param_3)
     iVar1 = *(int *)(param_1 + 0x18);
     if ((iVar1 == 0x1d) || (iVar1 == 0x27)) goto LAB_0008b1f0;
     if (iVar1 == 0xc) {
-      iVar1 = FUN_00088f00(param_1);
+      iVar1 = arbAllocVariable(param_1);
       if (iVar1 == 0) {
         return;
       }
 LAB_0008b270:
       *param_2 = iVar1;
       if (*(int *)(param_1 + 0x14) != 0) {
-        FUN_00089140(param_1);
+        arbErrorInternal(param_1);
         return;
       }
       if (*(int *)(param_1 + 0x18) == 0xc) {
-        ((int (*)())FUN_0008ace0)(param_1,iVar1);
+        ((int (*)())arbParseFragmentAttribBinding)(param_1,iVar1);
       }
       else {
-        FUN_00088920(param_1);
+        arbNextToken(param_1);
       }
       param_2[6] = 0;
       return;
     }
-    iVar1 = FUN_00088fd0(param_1);
+    iVar1 = arbParseVariableName(param_1);
     if (iVar1 == 0) {
       pcVar3 = "undefined variable";
       goto LAB_0008b220;
@@ -749,12 +752,12 @@ LAB_0008b270:
     if (iVar2 == 0) {
       param_2[6] = 0;
       *param_2 = iVar1;
-      FUN_00088920(param_1);
+      arbNextToken(param_1);
       return;
     }
     if (iVar2 != 2) {
       if (iVar2 != 3) {
-        FUN_00089140(param_1);
+        arbErrorInternal(param_1);
         return;
       }
       pcVar3 = "invalid source register type";
@@ -766,11 +769,11 @@ LAB_0008b270:
 LAB_0008b1a0:
       pcVar3 = "invalid source register";
 LAB_0008b220:
-      FUN_00088e70(param_1,pcVar3);
+      arbSetError(param_1,pcVar3);
       return;
     }
 LAB_0008b1f0:
-    iVar1 = FUN_00088f00(param_1);
+    iVar1 = arbAllocVariable(param_1);
     if (iVar1 == 0) {
       return;
     }
@@ -782,18 +785,18 @@ LAB_0008b1f0:
       if (uVar4 == 0) {
         if ((*(int *)(param_1 + 0x18) != 0x1d) && (*(int *)(param_1 + 0x18) != 0x27)) {
           if (*(int *)(iVar1 + 0xc) == 0) {
-            FUN_00088920(param_1);
+            arbNextToken(param_1);
             param_2[6] = 0;
             return;
           }
-          FUN_00088920(param_1);
-          FUN_00089160(param_1,0x15);
+          arbNextToken(param_1);
+          arbExpectToken(param_1,0x15);
           if (*(int *)(param_1 + 0x14) == 0xf) {
             iVar2 = *(int *)(param_1 + 0x18);
             param_2[6] = iVar2;
             if (iVar2 <= *(int *)(iVar1 + 0xc)) {
-              FUN_00088920(param_1);
-              FUN_00089160(param_1,0x16);
+              arbNextToken(param_1);
+              arbExpectToken(param_1,0x16);
               return;
             }
             pcVar3 = "invalid array index";
@@ -801,26 +804,26 @@ LAB_0008b1f0:
           else {
             pcVar3 = "invalid array addressing";
           }
-          FUN_00088e70(param_1,pcVar3);
+          arbSetError(param_1,pcVar3);
           return;
         }
-        ((int (*)())FUN_0008aa40)(param_1,iVar1,0,0);
+        ((int (*)())arbParseParamBinding)(param_1,iVar1,0,0);
         param_2[6] = 0;
         return;
       }
 LAB_0008afa0:
-      FUN_00089140(param_1);
+      arbErrorInternal(param_1);
       return;
     }
   }
   else if (uVar4 != 0x17) goto LAB_0008afa0;
-  ((int (*)())FUN_0008aa40)(param_1,iVar1,0,0);
+  ((int (*)())arbParseParamBinding)(param_1,iVar1,0,0);
   param_2[6] = 0;
   return;
 }
 
-/* FUN_0008b300 @ 0x8b300 (396 bytes) */
-int FUN_0008b300(param_1, param_2)
+/* arbParseExtendedSwizzleSelector @ 0x8b300 (396 bytes) */
+int arbParseExtendedSwizzleSelector(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -831,7 +834,7 @@ int FUN_0008b300(param_1, param_2)
   int iVar5;
   undefined4 uVar6;
   
-  iVar3 = FUN_00089740(param_1);
+  iVar3 = arbParseOptionalSign(param_1);
   if (*(int *)(param_1 + 0x14) == 0) {
     bVar4 = **(char **)(param_1 + 8) + 0x9f;
     if (bVar4 < 0x1a) {
@@ -843,7 +846,7 @@ int FUN_0008b300(param_1, param_2)
 LAB_0008b3d0:
       iVar5 = -1;
     }
-    uVar6 = ((int (*)())FUN_0008aec0)(param_1);
+    uVar6 = ((int (*)())arbParseComponentToken)(param_1);
     iVar2 = *param_2;
     if (*param_2 == -1) {
       *param_2 = iVar5;
@@ -854,17 +857,17 @@ LAB_0008b3d0:
   else if (*(int *)(param_1 + 0x14) == 0xf) {
     if (*(int *)(param_1 + 0x18) == 0) {
       uVar6 = 4;
-      FUN_00088920(param_1);
+      arbNextToken(param_1);
       goto LAB_0008b41c;
     }
     if (*(int *)(param_1 + 0x18) == 1) {
       uVar6 = 5;
-      FUN_00088920(param_1);
+      arbNextToken(param_1);
       goto LAB_0008b41c;
     }
   }
   uVar6 = 0;
-  FUN_00088e70(param_1,"invalid extended swizzle selector");
+  arbSetError(param_1,"invalid extended swizzle selector");
 LAB_0008b41c:
   if (iVar3 == -1) {
     switch(uVar6) {
@@ -887,14 +890,14 @@ LAB_0008b41c:
       uVar6 = 10;
       break;
     default:
-      FUN_00089140(param_1);
+      arbErrorInternal(param_1);
     }
   }
   return uVar6;
 }
 
-/* FUN_0008b4b0 @ 0x8b4b0 (496 bytes) */
-int FUN_0008b4b0(param_1, param_2)
+/* arbParseDestRegister @ 0x8b4b0 (496 bytes) */
+int arbParseDestRegister(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -908,44 +911,44 @@ int FUN_0008b4b0(param_1, param_2)
   
   if (*(int *)(param_1 + 0x14) == 0) {
     if (*(int *)(param_1 + 0x18) == 0x20) {
-      iVar2 = FUN_00088f00(param_1);
+      iVar2 = arbAllocVariable(param_1);
       if (iVar2 != 0) {
-        FUN_000895b0(param_1,iVar2 + 0x18);
+        arbParseResultBinding(param_1,iVar2 + 0x18);
       }
     }
     else {
-      iVar2 = FUN_00088fd0(param_1);
+      iVar2 = arbParseVariableName(param_1);
       if (iVar2 == 0) {
-        FUN_00088e70(param_1,"undefined variable");
+        arbSetError(param_1,"undefined variable");
       }
       else {
         uVar6 = *(uint *)(iVar2 + 0x18);
         if (uVar6 < 3) {
           if (uVar6 == 0) {
 LAB_0008b558:
-            FUN_00088920(param_1);
+            arbNextToken(param_1);
           }
           else {
             iVar2 = 0;
-            FUN_00088e70(param_1,"invalid destination register type");
+            arbSetError(param_1,"invalid destination register type");
           }
         }
         else {
           if (uVar6 == 3) goto LAB_0008b558;
           iVar2 = 0;
-          FUN_00089140(param_1);
+          arbErrorInternal(param_1);
         }
       }
     }
   }
   else {
     iVar2 = 0;
-    FUN_00088e70(param_1,"invalid destination register");
+    arbSetError(param_1,"invalid destination register");
   }
   *param_2 = iVar2;
   uVar6 = 0xf;
   if (*(int *)(param_1 + 0x14) == 0x11) {
-    FUN_00088920(param_1);
+    arbNextToken(param_1);
     if (*(int *)(param_1 + 0x14) == 0) {
       pbVar7 = *(byte **)(param_1 + 8);
       if ((int)*(byte **)(param_1 + 0xc) - (int)pbVar7 < 5) {
@@ -953,7 +956,7 @@ LAB_0008b558:
         if (pbVar7 < *(byte **)(param_1 + 0xc)) {
           cVar4 = '\x02';
           do {
-            uVar3 = FUN_00089190(param_1,(uint)*pbVar7);
+            uVar3 = arbComponentLetterToIndex(param_1,(uint)*pbVar7);
             uVar3 = 1 << (uVar3 & 0x3f);
             cVar5 = 3 < (byte)(**(char **)(param_1 + 8) + 0x89U);
             if ((cVar4 == '\x02') || (bVar1 = cVar4 == cVar5, cVar5 = cVar4, bVar1)) {
@@ -961,30 +964,30 @@ LAB_0008b558:
                 uVar6 = uVar6 | uVar3;
               }
               else {
-                FUN_00088e70(param_1,"invalid writemask order");
+                arbSetError(param_1,"invalid writemask order");
               }
             }
             else {
-              FUN_00088e70(param_1,"invalid writemask components");
+              arbSetError(param_1,"invalid writemask components");
             }
             pbVar7 = pbVar7 + 1;
             cVar4 = cVar5;
           } while (pbVar7 < *(byte **)(param_1 + 0xc));
         }
-        FUN_00088920(param_1);
+        arbNextToken(param_1);
         goto LAB_0008b6a0;
       }
     }
     uVar6 = 0xf;
-    FUN_00088e70(param_1,"invalid writemask");
+    arbSetError(param_1,"invalid writemask");
   }
 LAB_0008b6a0:
   param_2[1] = uVar6;
   return;
 }
 
-/* FUN_0008b6d0 @ 0x8b6d0 (624 bytes) */
-int FUN_0008b6d0(param_1, param_2)
+/* arbParseSwizzleSuffix @ 0x8b6d0 (624 bytes) */
+int arbParseSwizzleSuffix(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -994,14 +997,14 @@ int FUN_0008b6d0(param_1, param_2)
   undefined4 in_r5;
   char *pcVar4;
   
-  iVar2 = FUN_00089740(param_1);
+  iVar2 = arbParseOptionalSign(param_1);
   if (iVar2 == -1) {
     *(undefined1 *)(param_2 + 0x14) = 1;
   }
   else {
     *(undefined1 *)(param_2 + 0x14) = 0;
   }
-  ((int (*)())FUN_0008b160)(param_1,param_2,in_r5);
+  ((int (*)())arbParseSourceRegister)(param_1,param_2,in_r5);
   if (*(int *)(param_1 + 0x14) != 0x11) {
     *(undefined4 *)(param_2 + 4) = 0;
     *(undefined4 *)(param_2 + 0x10) = 3;
@@ -1009,11 +1012,11 @@ int FUN_0008b6d0(param_1, param_2)
     *(undefined4 *)(param_2 + 0xc) = 2;
     return;
   }
-  FUN_00088920(param_1);
+  arbNextToken(param_1);
   if (*(int *)(param_1 + 0x14) == 0) {
     iVar2 = *(int *)(param_1 + 0xc) - (int)*(byte **)(param_1 + 8);
     if ((iVar2 == 1) || (iVar2 == 4)) {
-      uVar3 = FUN_00089190(param_1,(uint)**(byte **)(param_1 + 8));
+      uVar3 = arbComponentLetterToIndex(param_1,(uint)**(byte **)(param_1 + 8));
       *(undefined4 *)(param_2 + 4) = uVar3;
       if (*(int *)(param_1 + 0xc) - *(int *)(param_1 + 8) < 2) {
         *(undefined4 *)(param_2 + 0x10) = uVar3;
@@ -1021,11 +1024,11 @@ int FUN_0008b6d0(param_1, param_2)
         *(undefined4 *)(param_2 + 0xc) = uVar3;
       }
       else {
-        uVar3 = FUN_00089190(param_1,(uint)*(byte *)(*(int *)(param_1 + 8) + 1));
+        uVar3 = arbComponentLetterToIndex(param_1,(uint)*(byte *)(*(int *)(param_1 + 8) + 1));
         *(undefined4 *)(param_2 + 8) = uVar3;
-        uVar3 = FUN_00089190(param_1,(uint)*(byte *)(*(int *)(param_1 + 8) + 2));
+        uVar3 = arbComponentLetterToIndex(param_1,(uint)*(byte *)(*(int *)(param_1 + 8) + 2));
         *(undefined4 *)(param_2 + 0xc) = uVar3;
-        uVar3 = FUN_00089190(param_1,(uint)*(byte *)(*(int *)(param_1 + 8) + 3));
+        uVar3 = arbComponentLetterToIndex(param_1,(uint)*(byte *)(*(int *)(param_1 + 8) + 3));
         *(undefined4 *)(param_2 + 0x10) = uVar3;
         pcVar4 = *(char **)(param_1 + 8);
         if ((byte)(*pcVar4 + 0x89U) < 4) {
@@ -1041,14 +1044,14 @@ int FUN_0008b6d0(param_1, param_2)
                  (((cVar1 != 'z' && (cVar1 != 'w')) &&
                   ((cVar1 = pcVar4[3], cVar1 != 'x' && ((cVar1 != 'y' && (cVar1 != 'z')))))))) &&
                 (cVar1 != 'w')) goto LAB_0008b93c;
-        FUN_00088e70(param_1,"invalid swizzle suffix");
+        arbSetError(param_1,"invalid swizzle suffix");
       }
 LAB_0008b93c:
-      FUN_00088920(param_1);
+      arbNextToken(param_1);
       return;
     }
   }
-  FUN_00088e70(param_1,"invalid swizzle suffix");
+  arbSetError(param_1,"invalid swizzle suffix");
   return;
 }
 
@@ -1061,16 +1064,16 @@ int FUN_0008b960(param_1, param_2)
   undefined4 uVar2;
   undefined4 in_r5;
   
-  iVar1 = FUN_00089740(param_1);
+  iVar1 = arbParseOptionalSign(param_1);
   if (iVar1 == -1) {
     *(undefined1 *)(param_2 + 0x14) = 1;
   }
   else {
     *(undefined1 *)(param_2 + 0x14) = 0;
   }
-  ((int (*)())FUN_0008b160)(param_1,param_2,in_r5);
-  FUN_00089160(param_1,0x11);
-  uVar2 = ((int (*)())FUN_0008aec0)(param_1);
+  ((int (*)())arbParseSourceRegister)(param_1,param_2,in_r5);
+  arbExpectToken(param_1,0x11);
+  uVar2 = ((int (*)())arbParseComponentToken)(param_1);
   *(undefined4 *)(param_2 + 0x10) = uVar2;
   *(undefined4 *)(param_2 + 4) = uVar2;
   *(undefined4 *)(param_2 + 8) = uVar2;
@@ -1078,8 +1081,8 @@ int FUN_0008b960(param_1, param_2)
   return;
 }
 
-/* FUN_0008b9f0 @ 0x8b9f0 (2664 bytes) */
-int FUN_0008b9f0(param_1)
+/* arbParseProgramText @ 0x8b9f0 (2664 bytes) */
+int arbParseProgramText(param_1)
   int *param_1;
 {
   char cVar1;
@@ -1134,24 +1137,24 @@ int FUN_0008b9f0(param_1)
                     pcVar5 = pcVar4 + 10;
                     param_1[3] = (int)pcVar5;
                     if (cVar1 == '0') {
-                      FUN_00088920(param_1);
+                      arbNextToken(param_1);
                       uVar7 = param_1[5];
                       while (uVar7 == 8) {
-                        FUN_00088920(param_1);
+                        arbNextToken(param_1);
                         if (param_1[5] == 1) {
                           *(undefined1 *)((int)param_1 + param_1[6] + 0x34) = 1;
-                          FUN_00088920(param_1);
+                          arbNextToken(param_1);
                         }
                         else {
-                          FUN_00088e70(param_1,"invalid option name");
+                          arbSetError(param_1,"invalid option name");
                         }
-                        FUN_00089160(param_1,0x14);
+                        arbExpectToken(param_1,0x14);
                         uVar7 = param_1[5];
                       }
 LAB_0008bbb0:
                       if ((uVar7 == 6) || (uVar7 == 0x1c)) {
-                        FUN_00089160(param_1,6);
-                        FUN_00089160(param_1,0x1c);
+                        arbExpectToken(param_1,6);
+                        arbExpectToken(param_1,0x1c);
                         return (uint)param_1[10] >> 0x1f;
                       }
                       if (uVar7 < 0xe) {
@@ -1162,54 +1165,54 @@ LAB_0008bbb0:
                             switch(uVar7) {
                             case 3:
                               *piVar6 = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,piVar6 + 1);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,piVar6 + 3);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,piVar6 + 10);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,piVar6 + 1);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,piVar6 + 3);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,piVar6 + 10);
                               piVar6[0x11] = 0;
                               break;
                             case 4:
                               *piVar6 = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,piVar6 + 1);
-                              FUN_00089160(param_1,0x13);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,piVar6 + 1);
+                              arbExpectToken(param_1,0x13);
                               ((int (*)())FUN_0008b960)(param_1,piVar6 + 3);
-                              FUN_00089160(param_1,0x13);
+                              arbExpectToken(param_1,0x13);
                               ((int (*)())FUN_0008b960)(param_1,piVar6 + 10);
                               piVar6[0x11] = 0;
                               break;
                             default:
-                              FUN_00089140(param_1);
+                              arbErrorInternal(param_1);
                               break;
                             case 9:
                               *piVar6 = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,piVar6 + 1);
-                              FUN_00089160(param_1,0x13);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,piVar6 + 1);
+                              arbExpectToken(param_1,0x13);
                               ((int (*)())FUN_0008b960)(param_1,piVar6 + 3);
                               piVar6[0x11] = 0;
                               piVar6[10] = 0;
                               break;
                             case 10:
                               *piVar6 = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,piVar6 + 1);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b160)(param_1,piVar6 + 3,in_r5);
-                              FUN_00089160(param_1,0x13);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,piVar6 + 1);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSourceRegister)(param_1,piVar6 + 3,in_r5);
+                              arbExpectToken(param_1,0x13);
                               local_38[0] = 0xffffffff;
-                              iVar3 = ((int (*)())FUN_0008b300)(param_1,local_38);
+                              iVar3 = ((int (*)())arbParseExtendedSwizzleSelector)(param_1,local_38);
                               piVar6[4] = iVar3;
-                              FUN_00089160(param_1,0x13);
-                              iVar3 = ((int (*)())FUN_0008b300)(param_1,local_38);
+                              arbExpectToken(param_1,0x13);
+                              iVar3 = ((int (*)())arbParseExtendedSwizzleSelector)(param_1,local_38);
                               piVar6[5] = iVar3;
-                              FUN_00089160(param_1,0x13);
-                              iVar3 = ((int (*)())FUN_0008b300)(param_1,local_38);
+                              arbExpectToken(param_1,0x13);
+                              iVar3 = ((int (*)())arbParseExtendedSwizzleSelector)(param_1,local_38);
                               piVar6[6] = iVar3;
-                              FUN_00089160(param_1,0x13);
-                              iVar3 = ((int (*)())FUN_0008b300)(param_1,local_38);
+                              arbExpectToken(param_1,0x13);
+                              iVar3 = ((int (*)())arbParseExtendedSwizzleSelector)(param_1,local_38);
                               piVar6[7] = iVar3;
                               piVar6[0x11] = 0;
                               *(undefined1 *)(piVar6 + 8) = 0;
@@ -1217,28 +1220,28 @@ LAB_0008bbb0:
                               break;
                             case 0xc:
                               *piVar6 = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,piVar6 + 1);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,piVar6 + 3);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,piVar6 + 10);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,piVar6 + 0x11);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,piVar6 + 1);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,piVar6 + 3);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,piVar6 + 10);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,piVar6 + 0x11);
                               break;
                             case 0xd:
                               *piVar6 = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,piVar6 + 1);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,piVar6 + 3);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,piVar6 + 1);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,piVar6 + 3);
                               piVar6[0x11] = 0;
                               piVar6[10] = 0;
                             }
                             param_1[0x9014] = param_1[0x9014] + 1;
                             goto LAB_0008bba0;
                           }
-                          FUN_00088e70(param_1,"too many ALU instructions");
+                          arbSetError(param_1,"too many ALU instructions");
                           uVar7 = param_1[5];
                           goto LAB_0008bbb0;
                         }
@@ -1248,71 +1251,71 @@ LAB_0008bbb0:
                             iVar3 = param_1[0x9015] + param_1[0x9014];
                             if (uVar7 == 7) {
                               param_1[iVar3 * 0x18 + 0x14] = param_1[6];
-                              FUN_00088920(param_1);
+                              arbNextToken(param_1);
                               param_1[iVar3 * 0x18 + 0x15] = 0;
-                              ((int (*)())FUN_0008b6d0)(param_1,param_1 + iVar3 * 0x18 + 0x17);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,param_1 + iVar3 * 0x18 + 0x17);
                               param_1[iVar3 * 0x18 + 0x25] = 0;
                               param_1[iVar3 * 0x18 + 0x1e] = 0;
                             }
                             else if (uVar7 == 0xb) {
                               param_1[iVar3 * 0x18 + 0x14] = param_1[6];
-                              FUN_00088920(param_1);
-                              ((int (*)())FUN_0008b4b0)(param_1,param_1 + iVar3 * 0x18 + 0x15);
-                              FUN_00089160(param_1,0x13);
-                              ((int (*)())FUN_0008b6d0)(param_1,param_1 + iVar3 * 0x18 + 0x17);
-                              FUN_00089160(param_1,0x13);
+                              arbNextToken(param_1);
+                              ((int (*)())arbParseDestRegister)(param_1,param_1 + iVar3 * 0x18 + 0x15);
+                              arbExpectToken(param_1,0x13);
+                              ((int (*)())arbParseSwizzleSuffix)(param_1,param_1 + iVar3 * 0x18 + 0x17);
+                              arbExpectToken(param_1,0x13);
                               if ((param_1[5] != 0) || (param_1[6] != 0x2a)) {
-                                FUN_00088e70(param_1,"invalid texture image unit");
+                                arbSetError(param_1,"invalid texture image unit");
                               }
                               iVar8 = 0;
-                              FUN_00088920(param_1);
+                              arbNextToken(param_1);
                               if (param_1[5] == 0x15) {
-                                FUN_00088920(param_1);
+                                arbNextToken(param_1);
                                 if (((param_1[5] != 0xf) || (iVar8 = param_1[6], iVar8 < 0)) ||
                                    ((int)(uint)(byte)((unsigned char *)0x000013b1)[*param_1] <= iVar8)) {
-                                  FUN_00088e70(param_1,"invalid texture image unit number");
+                                  arbSetError(param_1,"invalid texture image unit number");
                                   iVar8 = param_1[6];
                                 }
-                                FUN_00088920(param_1);
-                                FUN_00089160(param_1,0x16);
+                                arbNextToken(param_1);
+                                arbExpectToken(param_1,0x16);
                               }
                               param_1[iVar3 * 0x18 + 0x24] = iVar8;
-                              FUN_00089160(param_1,0x13);
+                              arbExpectToken(param_1,0x13);
                               if (param_1[5] != 0xe) {
-                                FUN_00088e70(param_1,"invalid texture target");
+                                arbSetError(param_1,"invalid texture target");
                               }
-                              FUN_00088920(param_1);
+                              arbNextToken(param_1);
                               iVar8 = param_1[6];
                               param_1[iVar3 * 0x18 + 0x2b] = iVar8;
                               if ((*(char *)((int)param_1 + 0x39) == '\0') && (iVar8 - 6U < 3)) {
-                                FUN_00088e70(param_1,"invalid texture target");
+                                arbSetError(param_1,"invalid texture target");
                               }
                               param_1[iVar3 * 0x18 + 0x25] = 0;
                               param_1[iVar3 * 0x18 + 0x1e] = 0;
                             }
                             else {
-                              FUN_00089140(param_1);
+                              arbErrorInternal(param_1);
                             }
                             param_1[0x9015] = param_1[0x9015] + 1;
                             goto LAB_0008bba0;
                           }
-                          FUN_00088e70(param_1,"too many texture instructions");
+                          arbSetError(param_1,"too many texture instructions");
                           uVar7 = param_1[5];
                           goto LAB_0008bbb0;
                         }
                         if ((uVar7 != 2) && (uVar7 != 5)) {
-                          FUN_00089140(param_1);
+                          arbErrorInternal(param_1);
                           uVar7 = param_1[5];
                         }
                         if (uVar7 == 2) {
-                          FUN_00088920(param_1);
-                          iVar3 = FUN_00088fd0(param_1);
+                          arbNextToken(param_1);
+                          iVar3 = arbParseVariableName(param_1);
                           if (iVar3 != 0) {
-                            FUN_00088e70(param_1,"redeclared variable name");
+                            arbSetError(param_1,"redeclared variable name");
                           }
                           piVar6 = (int *)(**(code **)(*param_1 + 0xc))(0x10);
                           if (piVar6 == (int *)0x0) {
-                            FUN_00088ee0(param_1);
+                            arbErrorOutOfMemory(param_1);
                           }
                           piVar6[2] = param_1[3] - param_1[2];
                           piVar6[1] = param_1[2];
@@ -1320,54 +1323,54 @@ LAB_0008bbb0:
                           piVar6[3] = 0;
                           *piVar6 = iVar3;
                           param_1[0x13] = (int)piVar6;
-                          FUN_00088920(param_1);
-                          FUN_00089160(param_1,0x1b);
-                          iVar3 = FUN_00088fd0(param_1);
+                          arbNextToken(param_1);
+                          arbExpectToken(param_1,0x1b);
+                          iVar3 = arbParseVariableName(param_1);
                           if (iVar3 == 0) {
-                            FUN_00088e70(param_1,"undefined variable binding in alias");
+                            arbSetError(param_1,"undefined variable binding in alias");
                           }
                           else {
                             piVar6[3] = iVar3;
-                            FUN_00088920(param_1);
+                            arbNextToken(param_1);
                           }
                         }
                         else {
                           iVar3 = param_1[6];
                           if (iVar3 == 1) {
-                            FUN_00088920(param_1);
-                            iVar3 = FUN_00089430(param_1);
+                            arbNextToken(param_1);
+                            iVar3 = arbDeclareVariable(param_1);
                             if (iVar3 != 0) {
-                              FUN_00089160(param_1,0x1b);
-                              ((int (*)())FUN_0008ace0)(param_1,iVar3);
+                              arbExpectToken(param_1,0x1b);
+                              ((int (*)())arbParseFragmentAttribBinding)(param_1,iVar3);
                             }
                           }
                           else if (iVar3 == 0) {
-                            FUN_00088920(param_1);
+                            arbNextToken(param_1);
                             if (param_1[5] != 0x1c) {
-                              while (iVar3 = FUN_00089430(param_1), iVar3 != 0) {
+                              while (iVar3 = arbDeclareVariable(param_1), iVar3 != 0) {
                                 *(undefined4 *)(iVar3 + 0x20) = 0;
                                 *(undefined4 *)(iVar3 + 0x18) = 0;
                                 if ((param_1[5] != 0x13) ||
-                                   (FUN_00088920(param_1), param_1[5] == 0x1c)) break;
+                                   (arbNextToken(param_1), param_1[5] == 0x1c)) break;
                               }
                             }
                           }
                           else if (iVar3 == 2) {
-                            FUN_00088920(param_1);
-                            iVar3 = FUN_00089430(param_1);
+                            arbNextToken(param_1);
+                            iVar3 = arbDeclareVariable(param_1);
                             if (iVar3 != 0) {
                               *(undefined4 *)(iVar3 + 0x18) = 2;
                               if (param_1[5] == 0x15) {
-                                FUN_00088920(param_1);
+                                arbNextToken(param_1);
                                 if (param_1[5] == 0xf) {
                                   iVar8 = param_1[6];
                                   if ((iVar8 == 0) || (*(int *)(((unsigned char *)0x000011e4) + *param_1) < iVar8))
                                   {
-                                    FUN_00088e70(param_1,"invalid parameter array size");
+                                    arbSetError(param_1,"invalid parameter array size");
                                     iVar8 = 1;
                                   }
                                   else {
-                                    FUN_00088920(param_1);
+                                    arbNextToken(param_1);
                                   }
                                 }
                                 else {
@@ -1378,56 +1381,56 @@ LAB_0008bbb0:
                                 *(int *)(iVar3 + 0x14) = iVar8;
                                 *(undefined4 *)(iVar3 + 0x10) = 0;
                                 if (iVar8 == 0) {
-                                  FUN_00088ee0(param_1);
+                                  arbErrorOutOfMemory(param_1);
                                 }
                                 else {
-                                  FUN_00089160(param_1,0x16);
-                                  FUN_00089160(param_1,0x1b);
-                                  FUN_00089160(param_1,0x17);
+                                  arbExpectToken(param_1,0x16);
+                                  arbExpectToken(param_1,0x1b);
+                                  arbExpectToken(param_1,0x17);
                                   iVar8 = param_1[5];
                                   while (iVar8 != 0x1c) {
                                     in_r5 = 1;
-                                    ((int (*)())FUN_0008aa40)(param_1,iVar3,1,1);
+                                    ((int (*)())arbParseParamBinding)(param_1,iVar3,1,1);
                                     if (param_1[5] != 0x13) break;
-                                    FUN_00088920(param_1);
+                                    arbNextToken(param_1);
                                     iVar8 = param_1[5];
                                   }
                                   if (*(int *)(((unsigned char *)0x000011e4) + *param_1) < *(int *)(iVar3 + 0xc)) {
                                     *(undefined4 *)(iVar3 + 0xc) = *(undefined4 *)(iVar3 + 0x10);
                                   }
                                   else if (*(int *)(iVar3 + 0xc) != *(int *)(iVar3 + 0x10)) {
-                                    FUN_00088e70(param_1,"array size and binding count mismatch");
+                                    arbSetError(param_1,"array size and binding count mismatch");
                                   }
-                                  FUN_00089160(param_1,0x18);
+                                  arbExpectToken(param_1,0x18);
                                 }
                               }
                               else {
                                 *(undefined4 *)(iVar3 + 0xc) = 0;
-                                FUN_00089160(param_1,0x1b);
+                                arbExpectToken(param_1,0x1b);
                                 in_r5 = 0;
-                                ((int (*)())FUN_0008aa40)(param_1,iVar3,0,1);
+                                ((int (*)())arbParseParamBinding)(param_1,iVar3,0,1);
                               }
                             }
                           }
                           else if (iVar3 == 3) {
-                            FUN_00088920(param_1);
-                            iVar3 = FUN_00089430(param_1);
+                            arbNextToken(param_1);
+                            iVar3 = arbDeclareVariable(param_1);
                             if (iVar3 != 0) {
-                              FUN_00089160(param_1,0x1b);
-                              FUN_000895b0(param_1,iVar3 + 0x18);
+                              arbExpectToken(param_1,0x1b);
+                              arbParseResultBinding(param_1,iVar3 + 0x18);
                             }
                           }
                           else {
-                            FUN_00089140(param_1);
+                            arbErrorInternal(param_1);
                           }
                         }
                       }
                       else {
 LAB_0008bb90:
-                        FUN_00088e70(param_1,"invalid statement");
+                        arbSetError(param_1,"invalid statement");
                       }
 LAB_0008bba0:
-                      FUN_00089160(param_1,0x14);
+                      arbExpectToken(param_1,0x14);
                       uVar7 = param_1[5];
                       goto LAB_0008bbb0;
                     }
@@ -1441,7 +1444,7 @@ LAB_0008bba0:
     }
   }
   param_1[2] = (int)(pcVar5 + -1);
-  FUN_00088e70(param_1,"invalid header");
+  arbSetError(param_1,"invalid header");
   return 0;
 }
 
@@ -1493,14 +1496,14 @@ int FUN_0008c490(param_1, param_2, param_3, param_4, param_5, param_6)
     *param_3 = *param_3 + 1;
   }
   else {
-    FUN_00088e70(param_1,param_5);
+    arbSetError(param_1,param_5);
     uVar1 = 0xffffffff;
   }
   return uVar1;
 }
 
-/* FUN_0008c590 @ 0x8c590 (3768 bytes) */
-int FUN_0008c590(callbacks, program, param_3, param_4)
+/* arbValidateProgram @ 0x8c590 (3768 bytes) */
+int arbValidateProgram(callbacks, program, param_3, param_4)
   int callbacks;
   undefined1 *program;
   int *param_3;
@@ -1631,7 +1634,7 @@ int FUN_0008c590(callbacks, program, param_3, param_4)
   workArea[0x9116] = 0;
   workArea[0x9149] = 0;
   workArea[0x928a] = 0;
-  iVar12 = ((int (*)())FUN_0008b9f0)(workArea);
+  iVar12 = ((int (*)())arbParseProgramText)(workArea);
   if (iVar12 != 0) {
     iVar12 = *workArea;
     bVar8 = *(char *)(workArea + 0xd) == '\x01';
@@ -1679,7 +1682,7 @@ LAB_0008c88c:
               else if (iVar2 == 0) {
                 if (*(int *)(((unsigned char *)0x000011dc) + iVar12) - (int)local_8c <= workArea[0x928b]) {
                   piVar13 = local_8c;
-                  FUN_00088e70(workArea,"too many temporaries");
+                  arbSetError(workArea,"too many temporaries");
                   goto LAB_0008d2d0;
                 }
                 piVar21[7] = workArea[0x928b];
@@ -1712,7 +1715,7 @@ LAB_0008c88c:
                 }
               }
               else if (iVar2 != 3) {
-                FUN_00089140(workArea);
+                arbErrorInternal(workArea);
                 goto LAB_0008d2d0;
               }
               piVar21 = (int *)*piVar21;
@@ -1733,7 +1736,7 @@ LAB_0008c88c:
                     goto LAB_0008ca70;
                   }
 LAB_0008cab4:
-                  FUN_00088e70(workArea,"too many ALU instructions");
+                  arbSetError(workArea,"too many ALU instructions");
                   piVar15 = piVar4;
                   goto LAB_0008d2d0;
                 }
@@ -1883,7 +1886,7 @@ LAB_0008cc50:
                         }
                         else {
                           if (*(int *)((int)piVar13 + (int)piVar15) != *(int *)(puVar17 + 0x5c)) {
-                            FUN_00088e70(workArea,"multiple targets on texture context");
+                            arbSetError(workArea,"multiple targets on texture context");
                             goto LAB_0008d2d0;
                           }
                           piVar13 = *(int **)(puVar17 + 4);
@@ -1923,7 +1926,7 @@ LAB_0008ce38:
               }
               piVar15 = piVar4;
               if (*(int *)(((unsigned char *)0x0000120cU) + iVar12) < iVar22) {
-                FUN_00088e70(workArea,"too many indirections");
+                arbSetError(workArea,"too many indirections");
               }
               else {
                 piVar13 = (int *)workArea[0x928a];
@@ -2093,7 +2096,7 @@ LAB_0008ce38:
               goto LAB_0008d2d0;
             }
 LAB_0008cad4:
-            FUN_00088e70(workArea,"too many total instructions");
+            arbSetError(workArea,"too many total instructions");
             piVar15 = piVar4;
             goto LAB_0008d2d0;
           }
@@ -2101,11 +2104,11 @@ LAB_0008cad4:
           piVar21 = (int *)workArea[0x11];
         } while( true );
       }
-      FUN_00088e70(workArea,"more than one precision hint option");
+      arbSetError(workArea,"more than one precision hint option");
       piVar15 = piVar4;
     }
     else {
-      FUN_00088e70(workArea,"more than one fog option");
+      arbSetError(workArea,"more than one fog option");
     }
   }
 LAB_0008d2d0:
@@ -2701,7 +2704,7 @@ int FUN_0008df50(param_1, param_2, param_3, param_4)
       }
       else {
         *(undefined1 *)(iVar18 + 0x55) = 0;
-        ((int (*)())FUN_0008c590)(param_1,*(undefined4 *)(iVar4 + 0x74),param_3,param_4);
+        ((int (*)())arbValidateProgram)(param_1,*(undefined4 *)(iVar4 + 0x74),param_3,param_4);
         if (*(char *)(*(int *)(iVar4 + 0x74) + 0x54) == '\0') {
           ((int (*)())FUN_0008dda0)(param_1,iVar4);
           (*(code *)param_1[6])(iVar4);
@@ -3538,7 +3541,7 @@ int FUN_0008f760(param_1)
         (*(int *)(((unsigned char *)0x0000126c) + param_1) * 0x18 + *(int *)(*(int *)(((unsigned char *)0x0000112c) + param_1) + 8)
         + 0x14);
   iVar3 = *(int *)(((unsigned char *)0x0000112c) + param_1);
-  ((int (*)())FUN_0008c590)(param_1,*(undefined4 *)
+  ((int (*)())arbValidateProgram)(param_1,*(undefined4 *)
                         (*(int *)(*(int *)(((unsigned char *)0x00001220) + param_1) * 0x18 + *(int *)(iVar3 + 8) +
                                  0x14) + 0x74),0xf,"!!ARBfp1.0\nEND\n");
   return ((int (*)())FUN_0008dbd0)(param_1,*(undefined4 *)(((unsigned char *)0x0000126c) + param_1),uVar1,pcVar2,in_r7,in_r8,iVar3,

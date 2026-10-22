@@ -1,0 +1,19 @@
+local	FUN_00088ee0	param_1	parser	CONFIRMED	argument of FUN_00088e70(parser, msg)
+local	FUN_00089140	param_1	parser	CONFIRMED	argument of FUN_00088e70(parser, msg)
+local	FUN_00089160	param_1	parser	CONFIRMED	current token parser[5] compared with the expected one
+local	FUN_00089160	param_2	expectedToken	CONFIRMED	compared with parser[5]; advance via FUN_00088920 on match
+local	FUN_00089190	param_1	parser	CONFIRMED	error reporting argument
+local	FUN_00089190	param_2	letter	CONFIRMED	switch on ASCII r/g/b/a/x/y/z/w (0x72 0x67 0x62 0x61 0x78 0x79 0x7a 0x77)
+local	FUN_00089280	param_1	parser	CONFIRMED	error reporting argument
+local	FUN_00089280	param_2	variable	CONFIRMED	array variable record: +0xc capacity, +0x10 count, +0x14 entries (0x14 bytes each)
+local	FUN_00089a20	param_1	parser	CONFIRMED	token type/value parser[5]/[6]
+local	FUN_00089ac0	param_1	parser	CONFIRMED	token type/value parser[5]/[6]
+local	FUN_00089b60	param_1	parser	CONFIRMED	token type/value parser[5]/[6]
+local	FUN_00089c10	param_1	parser	CONFIRMED	token type/value parser[5]/[6]
+local	FUN_00089ca0	param_1	parser	CONFIRMED	token type/value parser[5]/[6]
+local	FUN_00088e70	param_1	parser	CONFIRMED	records the first error (parser[0xc] message, [0xb] position) and sets the GL error word to 0x502 (GL_INVALID_OPERATION)
+local	FUN_00088e70	param_2	message	CONFIRMED	stored in parser[0xc]
+local	FUN_00088f00	param_1	parser	CONFIRMED	allocates a 0x2c-byte variable node through the ctx allocator callback and links it at parser[0x11]/[0x12]
+local	FUN_00089740	param_1	parser	CONFIRMED	tokens 0x19 and 0x1a are the + and - signs
+local	FUN_00089320	param_1	parser	CONFIRMED	constant pool at parser+0x9016*4 (4 floats each), count parser[0x9116]
+local	FUN_00089320	param_2	constant	CONFIRMED	4-float constant compared with each pooled entry

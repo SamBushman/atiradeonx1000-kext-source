@@ -1,0 +1,159 @@
+local	FUN_000b72d0	param_1	symbolTable	CONFIRMED	passed through to FUN_000550e0, which reads symbolTable+4 (array of 0x54-byte symbol records)
+local	FUN_000b72d0	param_2	inst	CONFIRMED	0x74-byte EXT_vertex_shader instruction: +0 opcode (0x8782..), +4 dest type, +8 dest index, +0xc..+0x1b dest write enables, source slots at +0x20/+0x3c/+0x58 (type, index, 4 swizzle selectors)
+local	FUN_000b72d0	param_3	tempIndex	CONFIRMED	compared with each source slot's index when the slot's type is 2 (temp/local)
+local	FUN_000b72d0	param_4	outReadsX	CONFIRMED	*param_4 = 1 when component X (swizzle selector 0x87d5 / 0x87d9 = GL_X_EXT / GL_NEGATIVE_X_EXT) of the temp is read
+local	FUN_000b72d0	param_5	outReadsY	CONFIRMED	*param_5 = 1 when Y (0x87d6 / 0x87da) is read
+local	FUN_000b72d0	param_6	outReadsZ	CONFIRMED	*param_6 = 1 when Z (0x87d7 / 0x87db) is read
+local	FUN_000b72d0	param_7	outReadsW	CONFIRMED	*param_7 = 1 when W (0x87d8 / 0x87dc) is read
+local	FUN_000b72d0	cVar4	destEnableX	CONFIRMED	byte at inst+0xf: X write-enable of the instruction's destination
+local	FUN_000b72d0	cVar5	destEnableY	CONFIRMED	byte at inst+0x13
+local	FUN_000b72d0	cVar6	destEnableZ	CONFIRMED	byte at inst+0x17
+local	FUN_000b72d0	cVar7	destEnableW	CONFIRMED	byte at inst+0x1b
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 8\);$	+2
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 8\);$@2	+2
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 0xf\);$	+2
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 8\);$@3	+2
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 0xf\);$@2	+2
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 0x16\);$	+2
+use	FUN_000b72d0	iVar17	operandDataType	CONFIRMED	FUN_000550e0 result: GL_SCALAR_EXT 0x87be / GL_VECTOR_EXT 0x87bf / GL_MATRIX_EXT 0x87c0 compared against 0x87bf	^\s*iVar17\ =\ FUN_000550e0\(param_1,param_2\ \+\ 8\);$@4	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xd\];$	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ !=\ 0x87dc\)\ goto\ LAB_000b9970;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[10\];$@6	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 0x87d8\)\ break;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xb\];$@4	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xc\];$@4	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[10\];$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d6\)\ \|\|\ \(iVar17\ ==\ 0x87da\)\)\ \|\|$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d7\)\ \|\|\ \(iVar17\ ==\ 0x87db\)\)\ \|\|$	+3
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(\(iVar17\ ==\ 0x87d8\)\ \|\|\ \(iVar17\ ==\ 0x87dc\)\)\ \|\|\ \(param_2\[0xb\]\ ==\ 0x87d8\)\)\ \|\|$	+3
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x11\];$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d6\)\ \|\|\ \(iVar17\ ==\ 0x87da\)\)\ \|\|$@2	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d7\)\ \|\|\ \(iVar17\ ==\ 0x87db\)\)\ \|\|$@2	+3
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(\(iVar17\ ==\ 0x87d8\)\ \|\|\ \(iVar17\ ==\ 0x87dc\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d8\)\)\ \|\|$	+3
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[10\];$@2	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(iVar17\ ==\ 0x87d6\)\ \|\|\ \(iVar17\ ==\ 0x87da\)\)\ \|\|\ \(param_2\[0xb\]\ ==\ 0x87d6\)\)\ \|\|$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(iVar17\ ==\ 0x87d7\)\ \|\|\ \(iVar17\ ==\ 0x87db\)\)\ \|\|\ \(param_2\[0xb\]\ ==\ 0x87d7\)\)\ \|\|$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(\(iVar17\ ==\ 0x87d8\)\ \|\|\ \(iVar17\ ==\ 0x87dc\)\)\ \|\|\ \(param_2\[0xb\]\ ==\ 0x87d8\)\)\ \|\|$@2	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x11\];$@2	+5
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(iVar17\ ==\ 0x87d6\)\ \|\|\ \(iVar17\ ==\ 0x87da\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d6\)\)\ \|\|$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(\(iVar17\ ==\ 0x87d7\)\ \|\|\ \(iVar17\ ==\ 0x87db\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d7\)\)\ \|\|$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(iVar17\ ==\ 0x87d8\)\ \|\|\ \(iVar17\ ==\ 0x87dc\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d8\)\)\ \|\|$	+4
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x14\];$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(iVar17\ !=\ 0x87d8\)\ \&\&\ \(uVar18\ =\ 0,\ iVar17\ !=\ 0x87dc\)\)\ goto\ LAB_000b9ef0;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xd\];$@5	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x10\];$	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 1\)\ \{$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 2\)\ \{$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 3\)\ \{$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[10\];$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(iVar17\ !=\ 0x87d5\)\ \&\&\ \(iVar17\ !=\ 0x87d9\)\)\ goto\ LAB_000b9790;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xb\];$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xc\];$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xd\];$@2	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x10\];$@2	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 1\)\ \{$@2	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 2\)\ \{$@2	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 3\)\ \{$@2	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[10\];$@4	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(iVar17\ !=\ 0x87d6\)\ \&\&\ \(iVar17\ !=\ 0x87da\)\)\ goto\ LAB_000b9830;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xb\];$@2	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xc\];$@2	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xd\];$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x10\];$@3	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 1\)\ \{$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 2\)\ \{$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 3\)\ \{$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[10\];$@5	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(iVar17\ !=\ 0x87d7\)\ \&\&\ \(iVar17\ !=\ 0x87db\)\)\ goto\ LAB_000b98d0;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xb\];$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xc\];$@3	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xd\];$@4	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x10\];$@4	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 1\)\ \{$@4	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 2\)\ \{$@4	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(iVar17\ ==\ 3\)\ goto\ LAB_000b99c0;$	+1
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0xb\];$@5	+3
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d6\)\ \|\|\ \(iVar17\ ==\ 0x87da\)\)\ \|\|$@3	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d7\)\ \|\|\ \(iVar17\ ==\ 0x87db\)\)\ \|\|$@3	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(iVar17\ ==\ 0x87d8\)\ \|\|\ \(iVar17\ ==\ 0x87dc\)\)\ \|\|\ \(param_2\[0xc\]\ ==\ 0x87d8\)\)\ \|\|$	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*iVar17\ =\ param_2\[0x12\];$	+3
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(\(iVar17\ ==\ 0x87d6\)\ \|\|\ \(iVar17\ ==\ 0x87da\)\)\ \|\|\ \(param_2\[0x14\]\ ==\ 0x87d6\)\)\ \|\|$	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d7\)\ \|\|\ \(iVar17\ ==\ 0x87db\)\)\ \|\|$@4	+2
+use	FUN_000b72d0	iVar17	swizzleSelect	CONFIRMED	a source swizzle selector word compared with GL_X_EXT..GL_NEGATIVE_W_EXT (0x87d5..0x87dc)	^\s*if\ \(\(\(iVar17\ ==\ 0x87d8\)\ \|\|\ \(iVar17\ ==\ 0x87dc\)\)\ \|\|$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@2	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@2	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@3	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@3	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@4	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@6	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(iVar17\ !=\ 0x87d8\)\ \&\&\ \(uVar18\ =\ 0,\ iVar17\ !=\ 0x87dc\)\)\ goto\ LAB_000b9ef0;$	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@10	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@33	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_7\ =\ uVar18;$@2	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar3\)\ \|\|\ \(uVar18\ =\ 0,\ bVar8\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@2	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar9\)\ \|\|\ \(uVar18\ =\ 0,\ bVar10\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@2	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar11\)\ \|\|\ \(uVar18\ =\ 0,\ bVar12\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@2	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar3\)\ \|\|\ \(uVar18\ =\ 0,\ bVar8\)\)\ \{$@2	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@3	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@5	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@15	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@5	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar9\)\ \|\|\ \(uVar18\ =\ 0,\ bVar8\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@4	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar11\)\ \|\|\ \(uVar18\ =\ 0,\ bVar10\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@3	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar18\ =\ 0,\ bVar12\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@3	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(bVar3\)\ \|\|\ \(bVar10\)\)\ \|\|\ \(uVar18\ =\ 0,\ bVar13\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@5	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(bVar9\)\ \|\|\ \(bVar12\)\)\ \|\|\ \(uVar18\ =\ 0,\ bVar14\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@4	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(bVar11\)\ \|\|\ \(bVar16\)\)\ \|\|\ \(uVar18\ =\ 0,\ bVar15\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@4	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar3\)\ \|\|\ \(uVar18\ =\ 0,\ bVar8\)\)\ \{$@3	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@6	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar11\)\ \|\|\ \(uVar18\ =\ 0,\ bVar12\)\)\ \{$@2	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@5	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(\(\(\(param_2\[0x11\]\ ==\ 0x87d5\)\ \|\|\ \(param_2\[0x11\]\ ==\ 0x87d9\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d5\)\)\ \|\|$	+4
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@7	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(\(param_2\[0x11\]\ ==\ 0x87d6\)\ \|\|\ \(param_2\[0x11\]\ ==\ 0x87da\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d6\)\)\ \|\|$	+5
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@6	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(\(param_2\[0x11\]\ ==\ 0x87d7\)\ \|\|\ \(param_2\[0x11\]\ ==\ 0x87db\)\)\ \|\|\ \(param_2\[0x12\]\ ==\ 0x87d7\)\)\ \|\|$	+5
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@6	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@20	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@7	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@8	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@21	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@8	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@7	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 1;$@22	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*uVar18\ =\ 0;$@9	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@7	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(\(\(param_2\[10\]\ ==\ 0x87d5\)\ \|\|\ \(param_2\[10\]\ ==\ 0x87d9\)\)\ \|\|\ \(param_2\[0xb\]\ ==\ 0x87d5\)\)\ \|\|$	+4
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@9	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(param_2\[10\]\ ==\ 0x87d6\)\ \|\|\ \(param_2\[10\]\ ==\ 0x87da\)\)\ \|\|$	+5
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@8	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(\(param_2\[10\]\ ==\ 0x87d7\)\ \|\|\ \(param_2\[10\]\ ==\ 0x87db\)\)\ \|\|$	+4
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@8	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar9\)\ \|\|\ \(uVar18\ =\ 0,\ bVar8\)\)\ \{$@2	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@10	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar11\)\ \|\|\ \(uVar18\ =\ 0,\ bVar10\)\)\ \{$@2	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@9	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar18\ =\ 0,\ bVar12\)\)\ \{$@2	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@9	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(param_2\[10\]\ ==\ 0x87d5\)\ \|\|\ \(uVar18\ =\ 0,\ param_2\[10\]\ ==\ 0x87d9\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_4\ =\ uVar18;$@11	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(param_2\[10\]\ ==\ 0x87d6\)\ \|\|\ \(uVar18\ =\ 0,\ param_2\[10\]\ ==\ 0x87da\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_5\ =\ uVar18;$@10	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(param_2\[10\]\ ==\ 0x87d7\)\ \|\|\ \(uVar18\ =\ 0,\ param_2\[10\]\ ==\ 0x87db\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_6\ =\ uVar18;$@10	+1
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*if\ \(\(param_2\[10\]\ ==\ 0x87d8\)\ \|\|\ \(uVar18\ =\ 0,\ param_2\[10\]\ ==\ 0x87dc\)\)\ \{$	+2
+use	FUN_000b72d0	uVar18	readFlag	CONFIRMED	0/1 value stored through outReadsX..W	^\s*\*param_7\ =\ uVar18;$	+1

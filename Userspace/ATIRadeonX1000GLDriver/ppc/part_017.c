@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000b9f10 @ 0xb9f10 (11376 bytes) */
-int FUN_000b9f10(ctx, shader)
+/* extvsOptimizeProgram @ 0xb9f10 (11376 bytes) */
+int extvsOptimizeProgram(ctx, shader)
   int ctx;
   int shader;
 {
@@ -212,7 +212,7 @@ LAB_000ba1a0:
                      (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x40) == iVar22)))) ||
                    ((*(int *)(laterInstPtr + 0x58) == 2 &&
                     (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x5c) == iVar22)))) {
-                  FUN_000b72d0(symbolTable,laterInstPtr,iVar22,&local_68,&local_67,&local_66,local_65);
+                  extvsInstReadsTempComponents(symbolTable,laterInstPtr,iVar22,&local_68,&local_67,&local_66,local_65);
                   if (((((bVar1) || ((local_68 == '\0' || (bVar15 != 0)))) &&
                        ((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))))) &&
                       ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar11 != 0)))))) &&
@@ -262,7 +262,7 @@ LAB_000ba1a0:
                    (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x40) == iVar22)))) ||
                  ((*(int *)(iVar18 + 0x58) == 2 &&
                   (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x5c) == iVar22)))) {
-                FUN_000b72d0(symbolTable,iVar18,iVar22,&local_68,&local_67,&local_66,local_65);
+                extvsInstReadsTempComponents(symbolTable,iVar18,iVar22,&local_68,&local_67,&local_66,local_65);
                 if ((((bVar1) || ((local_68 == '\0' || (bVar11 != 0)))) &&
                     (((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))) &&
                      ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar15 != 0)))))))) &&
@@ -2884,7 +2884,7 @@ LAB_000bd88c:
             }
             iVar18 = *(int *)(shader + 0x2c);
             if (iVar18 == 0) {
-              iVar18 = FUN_00054dd0(iStack00000018,symbolTable,
+              iVar18 = extvsAppendSymbol(iStack00000018,symbolTable,
                                     *(undefined4 *)(*(int *)(((unsigned char *)0x0000116c) + iStack00000018) + 0x18)
                                    );
               instArray = *(int *)(shader + 0x18);

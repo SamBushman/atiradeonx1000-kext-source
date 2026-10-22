@@ -190,7 +190,7 @@ int FUN_00054270(param_1, param_2, param_3, param_4)
                          &DAT_001db998,0,&DAT_001db998);
     if (iVar1 != 0) {
       iVar1 = *(int *)(iVar2 + 0x14) * 0x74 + *(int *)(iVar2 + 0x18);
-      iVar2 = ((int (*)())FUN_000550e0)(iVar2 + 0x1c,iVar1 + -0x70);
+      iVar2 = ((int (*)())extvsOperandDataType)(iVar2 + 0x1c,iVar1 + -0x70);
       if (iVar2 == 0x87bf) {
         if (param_4 == 1) {
           *(undefined4 *)(iVar1 + -0x5c) = 0;
@@ -610,8 +610,8 @@ int FUN_00054da0(param_1, param_2)
   return *(undefined4 *)(param_2 * 4 + *(int *)(param_1 + 8));
 }
 
-/* FUN_00054dd0 @ 0x54dd0 (376 bytes) */
-int FUN_00054dd0(param_1, param_2, param_3)
+/* extvsAppendSymbol @ 0x54dd0 (376 bytes) */
+int extvsAppendSymbol(param_1, param_2, param_3)
   int param_1;
   uint *param_2;
   int param_3;
@@ -702,7 +702,7 @@ int FUN_00054f50(param_1, param_2, param_3, param_4, param_5)
       if (*(int *)(iVar5 + 0x30) == 0) {
         uVar2 = *(uint *)(iVar5 + 0x34);
         if (uVar2 < 2) {
-          iVar5 = ((int (*)())FUN_00054dd0)(param_1,iVar8,iVar5);
+          iVar5 = ((int (*)())extvsAppendSymbol)(param_1,iVar8,iVar5);
           goto LAB_00055088;
         }
       }
@@ -718,7 +718,7 @@ int FUN_00054f50(param_1, param_2, param_3, param_4, param_5)
           iVar11 = iVar4 + iVar11;
           loopIndex = loopIndex + 1;
           iVar4 = iVar4 + 0x54;
-          ((int (*)())FUN_00054dd0)(param_1,iVar8,iVar11);
+          ((int (*)())extvsAppendSymbol)(param_1,iVar8,iVar11);
           iVar11 = *(int *)(iVar10 + 0x18);
         } while (loopIndex < *(uint *)(iVar9 + iVar11 + 0x34));
       }
@@ -739,8 +739,8 @@ LAB_000550a0:
   return 1;
 }
 
-/* FUN_000550e0 @ 0x550e0 (244 bytes) */
-int FUN_000550e0(param_1, param_2)
+/* extvsOperandDataType @ 0x550e0 (244 bytes) */
+int extvsOperandDataType(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -2477,7 +2477,7 @@ int FUN_00057cf0(param_1, param_2, param_3)
   
   piVar5 = param_2 + 7;
   iVar4 = param_3 + 4;
-  uVar1 = ((int (*)())FUN_000550e0)(piVar5,iVar4);
+  uVar1 = ((int (*)())extvsOperandDataType)(piVar5,iVar4);
   if (0x87bd < uVar1) {
     if (uVar1 < 0x87c0) {
       iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
@@ -2682,7 +2682,7 @@ int FUN_00058450(param_1, param_2, param_3)
   iVar5 = param_3 + 4;
   iVar6 = param_3 + 0x20;
   iVar4 = param_3 + 0x3c;
-  ((int (*)())FUN_000550e0)(piVar8,iVar5);
+  ((int (*)())extvsOperandDataType)(piVar8,iVar5);
   iVar2 = ((int (*)())FUN_00057af0)(piVar8,iVar6,iVar4);
   if (iVar2 == 0) {
     iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);

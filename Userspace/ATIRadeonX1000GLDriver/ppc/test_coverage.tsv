@@ -326,7 +326,7 @@
 0x31340	FUN_00031340	1352	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_scalarI_structureI)
 0x31890	_gldGetTextureLevel	176	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x31940	FUN_00031940	1972	no	calls an import (glgConvertType); calls an import (glgProcessPixels)
-0x32100	FUN_00032100	8252	yes	
+0x32100	gldTextureMakeResident	8252	yes	
 0x341a0	FUN_000341a0	92	yes	
 0x34200	FUN_00034200	4472	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
 0x353a0	FUN_000353a0	5656	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
@@ -474,8 +474,8 @@
 0x536a0	FUN_000536a0	144	yes	
 0x53730	FUN_00053730	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x537c0	FUN_000537c0	276	yes	
-0x538e0	FUN_000538e0	164	yes	
-0x53990	FUN_00053990	244	no	indirect call (driver context / vtable / callback)
+0x538e0	extvsBeginShader	164	yes	
+0x53990	extvsEndShader	244	no	indirect call (driver context / vtable / callback)
 0x53a90	FUN_00053a90	100	yes	
 0x53b00	FUN_00053b00	84	yes	
 0x53b60	FUN_00053b60	568	yes	
@@ -500,9 +500,9 @@
 0x54b20	FUN_00054b20	240	no	indirect call (driver context / vtable / callback)
 0x54c10	FUN_00054c10	388	no	indirect call (driver context / vtable / callback)
 0x54da0	FUN_00054da0	36	yes	
-0x54dd0	FUN_00054dd0	376	no	indirect call (driver context / vtable / callback)
+0x54dd0	extvsAppendSymbol	376	no	indirect call (driver context / vtable / callback)
 0x54f50	FUN_00054f50	380	yes	
-0x550e0	FUN_000550e0	244	yes	
+0x550e0	extvsOperandDataType	244	yes	
 0x551f0	FUN_000551f0	244	no	indirect call (driver context / vtable / callback)
 0x55300	FUN_00055300	184	yes	
 0x553c0	FUN_000553c0	556	yes	
@@ -764,37 +764,37 @@
 0x87e80	FUN_00087e80	764	yes	
 0x88190	FUN_00088190	740	no	indirect call (driver context / vtable / callback)
 0x88480	FUN_00088480	268	yes	
-0x885b0	FUN_000885b0	860	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x88920	FUN_00088920	892	yes	
-0x88e70	FUN_00088e70	112	yes	
-0x88ee0	FUN_00088ee0	28	yes	
-0x88f00	FUN_00088f00	184	no	indirect call (driver context / vtable / callback)
-0x88fd0	FUN_00088fd0	332	yes	
-0x89140	FUN_00089140	28	yes	
-0x89160	FUN_00089160	44	yes	
-0x89190	FUN_00089190	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x89280	FUN_00089280	156	yes	
-0x89320	FUN_00089320	264	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x89430	FUN_00089430	348	no	indirect call (driver context / vtable / callback)
-0x895b0	FUN_000895b0	364	yes	
-0x89740	FUN_00089740	88	yes	
-0x897b0	FUN_000897b0	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x89a20	FUN_00089a20	144	yes	
-0x89ac0	FUN_00089ac0	144	yes	
-0x89b60	FUN_00089b60	168	yes	
-0x89c10	FUN_00089c10	128	yes	
-0x89ca0	FUN_00089ca0	144	yes	
-0x8aa40	FUN_0008aa40	3780	yes	
-0x8ace0	FUN_0008ace0	464	yes	
-0x8aec0	FUN_0008aec0	136	yes	
-0x8b160	FUN_0008b160	864	yes	
-0x8b300	FUN_0008b300	396	yes	
-0x8b4b0	FUN_0008b4b0	496	yes	
-0x8b6d0	FUN_0008b6d0	624	yes	
+0x885b0	arbLexNumber	860	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x88920	arbNextToken	892	yes	
+0x88e70	arbSetError	112	yes	
+0x88ee0	arbErrorOutOfMemory	28	yes	
+0x88f00	arbAllocVariable	184	no	indirect call (driver context / vtable / callback)
+0x88fd0	arbParseVariableName	332	yes	
+0x89140	arbErrorInternal	28	yes	
+0x89160	arbExpectToken	44	yes	
+0x89190	arbComponentLetterToIndex	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x89280	arbAllocBindingEntry	156	yes	
+0x89320	arbInternConstant	264	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x89430	arbDeclareVariable	348	no	indirect call (driver context / vtable / callback)
+0x895b0	arbParseResultBinding	364	yes	
+0x89740	arbParseOptionalSign	88	yes	
+0x897b0	arbParseFloatConstant	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x89a20	arbParseLocalParamNumber	144	yes	
+0x89ac0	arbParseEnvParamNumber	144	yes	
+0x89b60	arbParseTexCoordNumber	168	yes	
+0x89c10	arbParseMatrixRowNumber	128	yes	
+0x89ca0	arbParseLightNumber	144	yes	
+0x8aa40	arbParseParamBinding	3780	yes	
+0x8ace0	arbParseFragmentAttribBinding	464	yes	
+0x8aec0	arbParseComponentToken	136	yes	
+0x8b160	arbParseSourceRegister	864	yes	
+0x8b300	arbParseExtendedSwizzleSelector	396	yes	
+0x8b4b0	arbParseDestRegister	496	yes	
+0x8b6d0	arbParseSwizzleSuffix	624	yes	
 0x8b960	FUN_0008b960	132	yes	
-0x8b9f0	FUN_0008b9f0	2664	no	indirect call (driver context / vtable / callback)
+0x8b9f0	arbParseProgramText	2664	no	indirect call (driver context / vtable / callback)
 0x8c490	FUN_0008c490	248	yes	
-0x8c590	FUN_0008c590	3768	no	indirect call (driver context / vtable / callback)
+0x8c590	arbValidateProgram	3768	no	indirect call (driver context / vtable / callback)
 0x8d470	FUN_0008d470	1744	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x8dbd0	FUN_0008dbd0	100	yes	
 0x8dc40	FUN_0008dc40	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1018,8 +1018,8 @@
 0xb6020	FUN_000b6020	1360	yes	
 0xb6580	FUN_000b6580	2448	yes	
 0xb6f20	FUN_000b6f20	928	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xb72d0	FUN_000b72d0	11108	yes	
-0xb9f10	FUN_000b9f10	11376	yes	
+0xb72d0	extvsInstReadsTempComponents	11108	yes	
+0xb9f10	extvsOptimizeProgram	11376	yes	
 0xbd9a0	FUN_000bd9a0	160	no	indirect call (driver context / vtable / callback)
 0xbda40	FUN_000bda40	1016	yes	
 0xbde70	FUN_000bde70	1504	no	indirect call (driver context / vtable / callback)

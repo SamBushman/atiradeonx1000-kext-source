@@ -4979,7 +4979,7 @@ LAB_0007e530:
             }
           } while ((uVar18 != 0) && (!bVar35));
           if (bVar34) {
-            FUN_000b72d0(param_2 + 0x1c,iVar11 + -0x74,*(undefined4 *)(iVar11 + -0x50),&cStack_88,
+            extvsInstReadsTempComponents(param_2 + 0x1c,iVar11 + -0x74,*(undefined4 *)(iVar11 + -0x50),&cStack_88,
                          &cStack_87,&cStack_86,acStack_85);
             if (((((cStack_88 == '\0') || (uVar25 != 0)) && ((cStack_87 == '\0' || (uVar26 != 0))))
                 && ((cStack_86 == '\0' || (uVar27 != 0)))) &&
@@ -5085,7 +5085,7 @@ LAB_0007e760: ;
                    (iVar13 = *(int *)(iVar32 + 8), *(int *)(iVar31 + 0x40) == iVar13)))) ||
                  ((*(int *)(iVar31 + 0x58) == 2 &&
                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(iVar31 + 0x5c) == iVar13)))) {
-                FUN_000b72d0(param_2 + 0x1c,iVar31,iVar13,&cStack_88,&cStack_87,&cStack_86,
+                extvsInstReadsTempComponents(param_2 + 0x1c,iVar31,iVar13,&cStack_88,&cStack_87,&cStack_86,
                              acStack_85);
                 if (((cStack_88 == '\0') || (bVar12 != 0)) &&
                    ((((cStack_87 == '\0' || (bVar14 != 0)) && ((cStack_86 == '\0' || (bVar29 != 0)))
@@ -6770,7 +6770,7 @@ LAB_00080860:
       uVar30 = uVar16 - uVar15;
       iVar31 = iVar11 + *(int *)(param_2 + 0x18);
       if (((*(int *)(iVar31 + -0x74) == 0x879d) && (*(int *)(iVar31 + -0x70) == 2)) &&
-         (iVar23 = FUN_000550e0(param_2 + 0x1c,iVar31 + -0x54), iVar23 == 0x87bf)) {
+         (iVar23 = extvsOperandDataType(param_2 + 0x1c,iVar31 + -0x54), iVar23 == 0x87bf)) {
         uVar18 = *(uint *)(param_2 + 0x14);
         if (uVar30 < uVar18) {
           iVar23 = uVar18 - uVar30;
@@ -8461,7 +8461,7 @@ code_r0x00082600:
       iVar31 = uVar16 * 0x74;
       iVar11 = iVar31 + *(int *)(param_2 + 0x18);
       if (((*(int *)(iVar11 + -0x74) == 0x879c) && (*(int *)(iVar11 + -0x54) == 2)) &&
-         (iVar23 = FUN_000550e0(param_2 + 0x1c,iVar11 + -0x54), iVar23 == 0x87be)) break;
+         (iVar23 = extvsOperandDataType(param_2 + 0x1c,iVar11 + -0x54), iVar23 == 0x87be)) break;
 code_r0x00082770:
       uVar15 = uVar16 - 1;
     }

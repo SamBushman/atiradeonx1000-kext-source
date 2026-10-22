@@ -341,7 +341,7 @@ LAB_0000a96c:
         iVar12 = *(int *)(iVar9 + *(int *)(param_1 + 0x18) + uVar3 * 4);
         if ((*(short *)(*(int *)(iVar12 + 0x30) + 0x5c) == 0) ||
            (((*(byte *)(iVar12 + 0x39) & 0x87) != 0 &&
-            (iVar4 = FUN_00032100(param_1,iVar12,param_3,param_4,param_5,param_6), iVar4 == 0))))
+            (iVar4 = gldTextureMakeResident(param_1,iVar12,param_3,param_4,param_5,param_6), iVar4 == 0))))
         goto LAB_0000a924;
       }
       *(int *)(iVar6 + 0x18c) = iVar12;

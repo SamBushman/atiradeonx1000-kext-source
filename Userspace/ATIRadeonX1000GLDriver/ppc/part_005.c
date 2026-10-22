@@ -2773,10 +2773,10 @@ LAB_00032098:
   return 1;
 }
 
-/* FUN_00032100 @ 0x32100 (8252 bytes) */
-int FUN_00032100(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int *param_2;
+/* gldTextureMakeResident @ 0x32100 (8252 bytes) */
+int gldTextureMakeResident(ctx, texture, param_3, param_4, param_5, param_6)
+  int ctx;
+  int *texture;
   uint param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -2813,13 +2813,13 @@ int FUN_00032100(param_1, param_2, param_3, param_4, param_5, param_6)
   uint uVar28;
   int iVar29;
   uint uVar30;
-  ushort *puVar31;
+  ushort *texImages;
   uint uVar32;
   int iVar33;
   int *piVar34;
   int iVar35;
   uint uVar36;
-  undefined *puVar37;
+  undefined *formatInfo;
   undefined1 *puVar38;
   byte in_xer_so = 0;
   bool bVar39;
@@ -2833,7 +2833,7 @@ int FUN_00032100(param_1, param_2, param_3, param_4, param_5, param_6)
   byte bVar42;
   byte bVar43;
   undefined8 uVar44;
-  int iStack00000018;
+  int ctxSaved;
   uint local_218;
   uint local_214;
   uint local_210;
@@ -2895,14 +2895,14 @@ int FUN_00032100(param_1, param_2, param_3, param_4, param_5, param_6)
   uint local_58;
   uint local_54;
   
-  puVar31 = (ushort *)param_2[0xc];
-  iStack00000018 = param_1;
-  iVar11 = ((int (*)())FUN_00030b50)(param_2,param_2,param_3,param_4,param_5,param_6);
+  texImages = (ushort *)texture[0xc];
+  ctxSaved = ctx;
+  iVar11 = ((int (*)())FUN_00030b50)(texture,texture,param_3,param_4,param_5,param_6);
   if (iVar11 != 0) {
-    iVar25 = param_2[0xc];
+    iVar25 = texture[0xc];
     bVar41 = *(byte *)(iVar25 + 1);
     bVar42 = bVar41 & 0xf;
-    *(byte *)(param_2 + 0x1b) = bVar42;
+    *(byte *)(texture + 0x1b) = bVar42;
     iVar11 = *(short *)(iVar25 + 0x3c) * 0x18 + iVar25;
     uVar22 = (uint)*(byte *)(iVar11 + 0xaa);
     if ((bVar41 & 0xf) == 0) {
@@ -2936,7 +2936,7 @@ int FUN_00032100(param_1, param_2, param_3, param_4, param_5, param_6)
     }
 LAB_00032230:
     bVar41 = *(byte *)(iVar25 + 1) & 0xf;
-    *(byte *)(param_2 + 0x1b) = bVar41;
+    *(byte *)(texture + 0x1b) = bVar41;
     iVar11 = *(short *)(iVar25 + 0x3c) * 0x18 + iVar25;
     uVar22 = (uint)*(byte *)(iVar11 + 0xaa);
     if (bVar41 == 3) {
@@ -2964,7 +2964,7 @@ LAB_0003234c:
           else if (uVar27 != 0x8912) goto LAB_00032340;
         }
 LAB_00032380:
-        *(undefined1 *)(param_2 + 0x11) = 1;
+        *(undefined1 *)(texture + 0x11) = 1;
         goto LAB_000323a0;
       }
     }
@@ -2983,50 +2983,50 @@ LAB_00032370:
       }
     }
 LAB_00032390:
-    *(undefined1 *)(param_2 + 0x11) = 0;
+    *(undefined1 *)(texture + 0x11) = 0;
   }
 LAB_000323a0:
-  bVar41 = *(byte *)((int)param_2 + 0x39);
-  *(byte *)((int)param_2 + 0x39) = bVar41 & 0x9f;
+  bVar41 = *(byte *)((int)texture + 0x39);
+  *(byte *)((int)texture + 0x39) = bVar41 & 0x9f;
   if ((bVar41 & 0x1f) == 0) {
-    ((int (*)())FUN_0002ee30)(iStack00000018,param_2);
+    ((int (*)())FUN_0002ee30)(ctxSaved,texture);
     return 1;
   }
-  ((int (*)())FUN_0002fac0)(iStack00000018,param_2);
-  if (*(char *)(param_2 + 0xe) == '\0') {
+  ((int (*)())FUN_0002fac0)(ctxSaved,texture);
+  if (*(char *)(texture + 0xe) == '\0') {
     return 0;
   }
-  bVar39 = *(char *)((int)puVar31 + 0x6f) == '\0';
-  bVar41 = (*(char *)((int)puVar31 + 0x6f) != '\0') << 2 | bVar39 << 1 | in_xer_so & 1;
+  bVar39 = *(char *)((int)texImages + 0x6f) == '\0';
+  bVar41 = (*(char *)((int)texImages + 0x6f) != '\0') << 2 | bVar39 << 1 | in_xer_so & 1;
   if (!bVar39) {
-    if (((unsigned char *)0x00001001) <= (undefined *)(1 << (*(byte *)(puVar31 + 0x32) & 0x3f))) {
+    if (((unsigned char *)0x00001001) <= (undefined *)(1 << (*(byte *)(texImages + 0x32) & 0x3f))) {
       return 0;
     }
-    if (((unsigned char *)0x00001001) <= (undefined *)(1 << (*(byte *)((int)puVar31 + 0x65) & 0x3f))) {
+    if (((unsigned char *)0x00001001) <= (undefined *)(1 << (*(byte *)((int)texImages + 0x65) & 0x3f))) {
       return 0;
     }
-    if (0x100 < (uint)(1 << (*(byte *)(puVar31 + 0x33) & 0x3f))) {
+    if (0x100 < (uint)(1 << (*(byte *)(texImages + 0x33) & 0x3f))) {
       return 0;
     }
   }
-  uVar27 = *puVar31;
-  uVar22 = (uint)*(byte *)(puVar31 + 0x2f);
+  uVar27 = *texImages;
+  uVar22 = (uint)*(byte *)(texImages + 0x2f);
   if ((uVar27 & 0x400) == 0) {
     if ((uVar27 & 0x800) != 0) {
-      iVar11 = FUN_0000b4f0(iStack00000018,param_2,*(undefined4 *)(puVar31 + 4));
+      iVar11 = FUN_0000b4f0(ctxSaved,texture,*(undefined4 *)(texImages + 4));
       if (iVar11 == 0) {
         return 0;
       }
-      if (*(char *)((int)puVar31 + 0x6d) != '\0') {
-        uVar22 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(param_2 + 0xe) * 0x24) & 7);
-        *(short *)((int)param_2 + 0x3e) =
-             (short)((uVar22 * ((uint)puVar31[0x52] + (uint)*(byte *)(puVar31 + 0x55) * -2) + 0x1f &
+      if (*(char *)((int)texImages + 0x6d) != '\0') {
+        uVar22 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
+        *(short *)((int)texture + 0x3e) =
+             (short)((uVar22 * ((uint)texImages[0x52] + (uint)*(byte *)(texImages + 0x55) * -2) + 0x1f &
                      0xffffffe0) / uVar22);
       }
       goto LAB_00032600;
     }
     if ((uVar27 & 0x2000) != 0) {
-      iVar11 = ((int (*)())FUN_00031940)(iStack00000018,param_2);
+      iVar11 = ((int (*)())FUN_00031940)(ctxSaved,texture);
       if (iVar11 == 0) {
         return 0;
       }
@@ -3034,31 +3034,31 @@ LAB_000323a0:
     }
     uVar19 = 0x1a2114;
     uVar16 = extraout_r4;
-    if ((((((*(float *)(param_2[0xc] + 4) == 0.0) ||
-           (sVar5 = *(short *)(param_2[0xc] + 0x1a), sVar5 == -0x7a41)) || (sVar5 == -0x7a42)) &&
-         ((*(char *)(puVar31 + 0x36) == '\x01' && (*(char *)(puVar31 + 0x35) == '\x01')))) &&
-        (bVar39)) && (*(int *)(puVar31 + uVar22 * 0xc + 0x5a) != 0)) {
-      iVar11 = FUN_0000a3f0((uint)puVar31[uVar22 * 0xc + 0x58],(uint)puVar31[uVar22 * 0xc + 0x59]);
-      uVar27 = puVar31[uVar22 * 0xc + 0x56];
+    if ((((((*(float *)(texture[0xc] + 4) == 0.0) ||
+           (sVar5 = *(short *)(texture[0xc] + 0x1a), sVar5 == -0x7a41)) || (sVar5 == -0x7a42)) &&
+         ((*(char *)(texImages + 0x36) == '\x01' && (*(char *)(texImages + 0x35) == '\x01')))) &&
+        (bVar39)) && (*(int *)(texImages + uVar22 * 0xc + 0x5a) != 0)) {
+      iVar11 = FUN_0000a3f0((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59]);
+      uVar27 = texImages[uVar22 * 0xc + 0x56];
       uVar28 = iVar11 * (int)(uint)uVar27;
-      uVar32 = *(int *)(puVar31 + uVar22 * 0xc + 0x5a) +
-               iVar11 * (uint)*(byte *)(puVar31 + uVar22 * 0xc + 0x55);
-      if (*(char *)(puVar31 + 0x37) != '\0') {
-        uVar32 = uVar32 + uVar28 * *(byte *)(puVar31 + uVar22 * 0xc + 0x55);
+      uVar32 = *(int *)(texImages + uVar22 * 0xc + 0x5a) +
+               iVar11 * (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55);
+      if (*(char *)(texImages + 0x37) != '\0') {
+        uVar32 = uVar32 + uVar28 * *(byte *)(texImages + uVar22 * 0xc + 0x55);
       }
-      bVar4 = *(byte *)(param_2 + 0xe);
+      bVar4 = *(byte *)(texture + 0xe);
       bVar42 = ((uVar32 & 0x1f) != 0) << 2 | ((uVar32 & 0x1f) == 0) << 1;
       bVar41 = bVar42 | in_xer_so & 1;
       param_3 = (uint)bVar4;
-      uVar44 = ((int (*)())FUN_0002f4d0)((uint)puVar31[uVar22 * 0xc + 0x58],(uint)puVar31[uVar22 * 0xc + 0x59],
+      uVar44 = ((int (*)())FUN_0002f4d0)((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59],
                             param_3);
       uVar16 = (undefined4)uVar44;
-      iVar25 = param_2[0xc];
+      iVar25 = texture[0xc];
       if (*(short *)(iVar25 + 0x1a) == -0x7a41) {
         bVar39 = (undefined *)(uint)uVar27 < ((unsigned char *)0x00004001);
       }
       else {
-        bVar39 = uVar28 <= *(uint *)(iStack00000018 + 0x29d8);
+        bVar39 = uVar28 <= *(uint *)(ctxSaved + 0x29d8);
       }
       if (((uint)bVar39 &
           (uint)((uVar28 & 0x1f) == 0) & bVar42 >> 1 & 1 & (uint)((ulonglong)uVar44 >> 0x20)) == 0)
@@ -3068,36 +3068,36 @@ LAB_000323a0:
       local_1a4 = 0;
       puVar17 = &local_218;
       puVar26 = &local_214;
-      ((int (*)())FUN_00031170)((uint)bVar4,param_2,aiStack_1c8,puVar17,&local_208,&local_208,&local_210,puVar26,
+      ((int (*)())FUN_00031170)((uint)bVar4,texture,aiStack_1c8,puVar17,&local_208,&local_208,&local_210,puVar26,
                    &local_20c);
-      iVar33 = (uint)puVar31[uVar22 * 0xc + 0x52] +
-               (uint)*(byte *)(puVar31 + uVar22 * 0xc + 0x55) * -2;
+      iVar33 = (uint)texImages[uVar22 * 0xc + 0x52] +
+               (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55) * -2;
       if (iVar33 < 1) {
         iVar33 = 1;
       }
-      uVar22 = (uint)puVar31[uVar22 * 0xc + 0x53] -
-               (uint)*(byte *)(puVar31 + uVar22 * 0xc + 0x55) * (uint)*(byte *)(iVar25 + 0x6e);
+      uVar22 = (uint)texImages[uVar22 * 0xc + 0x53] -
+               (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55) * (uint)*(byte *)(iVar25 + 0x6e);
       if ((int)uVar22 < 1) {
         uVar22 = 1;
       }
-      uVar23 = *(uint *)(iStack00000018 + 0x24);
+      uVar23 = *(uint *)(ctxSaved + 0x24);
       uVar20 = uVar23 & 0x82;
       iVar25 = uVar28 * (uVar22 - 1) + iVar11 * (iVar33 + 1U & 0xfffffffe);
       if (uVar20 == 0) {
-        iVar29 = param_2[0xc];
+        iVar29 = texture[0xc];
       }
       else {
-        iVar29 = param_2[0xc];
+        iVar29 = texture[0xc];
         if (((*(uint *)(iVar29 + 0x48) & 0x40) == 0) && (uVar22 != 0)) {
           uVar36 = 0;
           uVar16 = 0;
           uVar8 = uVar32;
           do {
             uVar36 = uVar36 + 1;
-            FUN_0000b620(iStack00000018,uVar8,iVar11 * iVar33,puVar17,uVar20,uVar16,uVar23,puVar26);
+            FUN_0000b620(ctxSaved,uVar8,iVar11 * iVar33,puVar17,uVar20,uVar16,uVar23,puVar26);
             uVar8 = uVar8 + uVar28;
           } while (uVar36 < uVar22);
-          iVar29 = param_2[0xc];
+          iVar29 = texture[0xc];
         }
       }
       uVar23 = *(uint *)(iVar29 + 0x50);
@@ -3109,28 +3109,28 @@ LAB_000323a0:
       }
       if ((*(short *)(iVar29 + 0x1a) == -0x7a41) &&
          ((*(char *)(iVar29 + 0x6d) != '\0' || (iVar33 * iVar11 == uVar28)))) {
-        *(short *)((int)param_2 + 0x3e) = (short)(uVar28 >> (local_218 & 0x3f));
-        iVar11 = FUN_0000b150(iStack00000018,param_2,uVar32,uVar20,iVar25);
+        *(short *)((int)texture + 0x3e) = (short)(uVar28 >> (local_218 & 0x3f));
+        iVar11 = FUN_0000b150(ctxSaved,texture,uVar32,uVar20,iVar25);
         if (iVar11 == 0) {
           return 0;
         }
         uVar27 = (ushort)(-2 << (uVar30 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (uVar30 & 0x1f));
-        *(byte *)(param_2[0xd] + 0x15) = (byte)local_20c & 3;
+        *(byte *)(texture[0xd] + 0x15) = (byte)local_20c & 3;
       }
       else {
         uVar23 = (iVar33 << (local_218 & 0x3f)) + 0x1fU & 0xffffffe0;
-        *(short *)((int)param_2 + 0x3e) = (short)(uVar23 >> (local_218 & 0x3f));
-        if ((*(byte *)((int)param_2 + 0x39) & 3) != 0) {
+        *(short *)((int)texture + 0x3e) = (short)(uVar23 >> (local_218 & 0x3f));
+        if ((*(byte *)((int)texture + 0x39) & 3) != 0) {
           if ((local_214 < 3) || ((iVar11 = 1, 4 < local_214 && (iVar11 = 2, local_214 != 6)))) {
             iVar11 = 0;
           }
           bVar39 = (iVar33 << (local_218 & 0x3f)) >> iVar11 < 0x2000;
-          iVar25 = FUN_0000b270(iStack00000018,param_2,0x348,uVar23 * uVar22,uVar20,iVar25);
+          iVar25 = FUN_0000b270(ctxSaved,texture,0x348,uVar23 * uVar22,uVar20,iVar25);
           if (iVar25 == 0) {
             return 0;
           }
-          *(undefined1 *)(param_2[0xd] + 0x15) = 0;
-          piVar34 = (int *)*param_2;
+          *(undefined1 *)(texture[0xd] + 0x15) = 0;
+          piVar34 = (int *)*texture;
           uVar8 = piVar34[8];
           piVar34[2] = 0;
           piVar14 = piVar34 + 0x280;
@@ -3145,59 +3145,59 @@ LAB_000323a0:
           piVar34[3] = uVar23;
           piVar34[4] = uVar28;
           *(char *)((int)piVar34 + 0x1b) = (char)local_20c;
-          iVar25 = (uint)*(byte *)(param_2 + 0xe) * 0x24;
-          puVar37 = &DAT_001d9f34 + iVar25;
+          iVar25 = (uint)*(byte *)(texture + 0xe) * 0x24;
+          formatInfo = &DAT_001d9f34 + iVar25;
           if ((*(uint *)(&DAT_001d9f4c + iVar25) & 0x10000) == 0) {
             if ((*(uint *)(&DAT_001d9f48 + iVar25) & 8) == 0) {
               uVar8 = *(uint *)(&DAT_001d9f48 + iVar25) & 7;
               if (uVar8 == 1) {
-                puVar37 = &DAT_001da00c;
+                formatInfo = &DAT_001da00c;
               }
               else if (uVar8 < 2) {
                 if (uVar8 == 0) {
-                  puVar37 = &DAT_001d9fa0;
+                  formatInfo = &DAT_001d9fa0;
                 }
                 else {
 LAB_00032a20:
-                  puVar37 = &DAT_001da1bc;
+                  formatInfo = &DAT_001da1bc;
                 }
               }
               else {
                 if (uVar8 == 2) goto LAB_00032b08;
                 if (uVar8 != 3) goto LAB_00032a20;
-                puVar37 = &DAT_001da36c;
+                formatInfo = &DAT_001da36c;
               }
             }
             else {
 LAB_00032b08:
-              puVar37 = &DAT_001da054;
+              formatInfo = &DAT_001da054;
             }
           }
           _memcpy(piVar34 + 0x2a0,PTR_DAT_001e899c,0x23c);
           uVar9 = piVar34[0x306];
           uVar10 = piVar34[0x31c];
           piVar34[0x2ab] = 0;
-          uVar8 = *(uint *)(puVar37 + 0x18) >> 5 & 0x1f;
+          uVar8 = *(uint *)(formatInfo + 0x18) >> 5 & 0x1f;
           piVar34[0x306] = uVar8 | uVar9 & 0xffffffe0;
-          uVar36 = (*(uint *)(puVar37 + 0x18) & 0x18) << 5;
+          uVar36 = (*(uint *)(formatInfo + 0x18) & 0x18) << 5;
           piVar34[0x306] = uVar36 | uVar8 | uVar9 & 0xfffffce0;
-          uVar15 = (*(uint *)(puVar37 + 0x18) & 6) << 9;
+          uVar15 = (*(uint *)(formatInfo + 0x18) & 6) << 9;
           piVar34[0x306] = uVar15 | uVar36 | uVar8 | uVar9 & 0xfffff0e0;
-          uVar7 = *(uint *)(puVar37 + 0x1c) >> 0x12 & 0x3000;
+          uVar7 = *(uint *)(formatInfo + 0x1c) >> 0x12 & 0x3000;
           piVar34[0x306] = uVar7 | uVar15 | uVar36 | uVar8 | uVar9 & 0xffffc0e0;
           piVar34[0x306] =
-               *(uint *)(puVar37 + 0x1c) >> 0xe & 0xc000 |
+               *(uint *)(formatInfo + 0x1c) >> 0xe & 0xc000 |
                uVar7 | uVar15 | uVar36 | uVar8 | uVar9 & 0xfff000e0;
-          uVar8 = *(uint *)(puVar37 + 0x1c) >> 7 & 0x1f;
+          uVar8 = *(uint *)(formatInfo + 0x1c) >> 7 & 0x1f;
           piVar34[0x31c] = uVar8 | uVar10 & 0xfffffe00;
-          uVar36 = (*(uint *)(puVar37 + 0x1c) & 0x70) << 5;
+          uVar36 = (*(uint *)(formatInfo + 0x1c) & 0x70) << 5;
           piVar34[0x31c] = uVar36 | uVar8 | uVar10 & 0xfffff000;
-          uVar15 = (*(uint *)(puVar37 + 0x1c) & 0xe) << 0xb;
+          uVar15 = (*(uint *)(formatInfo + 0x1c) & 0xe) << 0xb;
           piVar34[0x31c] = uVar15 | uVar36 | uVar8 | uVar10 & 0xffff8000;
-          uVar7 = *(uint *)(puVar37 + 0x20) >> 0xe & 0x38000;
+          uVar7 = *(uint *)(formatInfo + 0x20) >> 0xe & 0x38000;
           piVar34[0x31c] = uVar7 | uVar15 | uVar36 | uVar8 | uVar10 & 0xfffc0000;
           piVar34[0x31c] =
-               *(uint *)(puVar37 + 0x20) >> 8 & 0x1c0000 |
+               *(uint *)(formatInfo + 0x20) >> 8 & 0x1c0000 |
                uVar7 | uVar15 | uVar36 | uVar8 | uVar10 & 0xf8000000;
           piVar13 = piVar14;
           if (bVar39) {
@@ -3220,37 +3220,37 @@ LAB_00032b08:
           piVar34[uVar30 * 8 + 0x15] = 0;
           *(short *)(piVar34 + uVar30 * 8 + 0x16) =
                (short)((int)(piVar34 + 0x32f) - (int)piVar14 >> 2) - (short)iVar25;
-          iVar25 = (uint)*(byte *)(param_2 + 0xe) * 0x24;
-          puVar37 = &DAT_001d9f34 + iVar25;
+          iVar25 = (uint)*(byte *)(texture + 0xe) * 0x24;
+          formatInfo = &DAT_001d9f34 + iVar25;
           if ((*(uint *)(&DAT_001d9f4c + iVar25) & 0x10000) == 0) {
             if ((*(uint *)(&DAT_001d9f48 + iVar25) & 8) == 0) {
               uVar32 = *(uint *)(&DAT_001d9f48 + iVar25) & 7;
               if (uVar32 == 1) {
-                puVar37 = &DAT_001da00c;
+                formatInfo = &DAT_001da00c;
               }
               else if (uVar32 < 2) {
                 if (uVar32 == 0) {
-                  puVar37 = &DAT_001d9fa0;
+                  formatInfo = &DAT_001d9fa0;
                 }
                 else {
 LAB_00032bf4:
-                  puVar37 = &DAT_001da1bc;
+                  formatInfo = &DAT_001da1bc;
                 }
               }
               else {
                 if (uVar32 == 2) goto LAB_00032c54;
                 if (uVar32 != 3) goto LAB_00032bf4;
-                puVar37 = &DAT_001da36c;
+                formatInfo = &DAT_001da36c;
               }
             }
             else {
 LAB_00032c54:
-              puVar37 = &DAT_001da054;
+              formatInfo = &DAT_001da054;
             }
           }
           puVar12 = (undefined4 *)
-                    ((int (*)())FUN_00030420)(piVar34 + 0x32f,puVar37,uVar28,uVar23,0,
-                                 (iVar33 << (local_218 & 0x3f)) >> (*(uint *)(puVar37 + 0x14) & 7),
+                    ((int (*)())FUN_00030420)(piVar34 + 0x32f,formatInfo,uVar28,uVar23,0,
+                                 (iVar33 << (local_218 & 0x3f)) >> (*(uint *)(formatInfo + 0x14) & 7),
                                  uVar22);
           if (bVar39) {
             piVar13 = (int *)((int (*)())FUN_00030a60)(piVar13,local_214,uVar28,uVar23,0,0,
@@ -3273,29 +3273,29 @@ LAB_00032c54:
             piVar13 = piVar13 + 6;
             *piVar24 = 0;
           }
-          *(uint *)(param_2[0xd] + 0x18) = uVar23 * uVar22;
-          *(byte *)(param_2[0xd] + 0x14) = *(byte *)(param_2[0xd] + 0x14) | 2;
+          *(uint *)(texture[0xd] + 0x18) = uVar23 * uVar22;
+          *(byte *)(texture[0xd] + 0x14) = *(byte *)(texture[0xd] + 0x14) | 2;
           *piVar34 = (int)piVar13 - (int)piVar14 >> 2;
           piVar34[2] = ((int)puVar12 + (0x18 - (int)piVar14) >> 2) - piVar34[1];
         }
         uVar6 = (ushort)(1 << (uVar30 & 0x3f));
         uVar27 = ~uVar6;
-        *(byte *)(param_2[0xd] + 0x14) = *(byte *)(param_2[0xd] + 0x14) | 1;
-        *(ushort *)(param_2[0xd] + 0x1c) = uVar6 | *(ushort *)(param_2[0xd] + 0x1c);
-        *(ushort *)(param_2[0xd] + 0x28) = uVar27 & *(ushort *)(param_2[0xd] + 0x28);
-        *(byte *)(param_2[0xd] + 0x17) = bVar41;
-        *(undefined1 *)(param_2[0xd] + 0x34) = 1;
-        *(undefined1 *)(param_2[0xd] + 0x35) = 1;
+        *(byte *)(texture[0xd] + 0x14) = *(byte *)(texture[0xd] + 0x14) | 1;
+        *(ushort *)(texture[0xd] + 0x1c) = uVar6 | *(ushort *)(texture[0xd] + 0x1c);
+        *(ushort *)(texture[0xd] + 0x28) = uVar27 & *(ushort *)(texture[0xd] + 0x28);
+        *(byte *)(texture[0xd] + 0x17) = bVar41;
+        *(undefined1 *)(texture[0xd] + 0x34) = 1;
+        *(undefined1 *)(texture[0xd] + 0x35) = 1;
       }
-      *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) & 0xf8;
-      *(ushort *)(param_2 + 9) = uVar27 & *(ushort *)(param_2 + 9);
+      *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) & 0xf8;
+      *(ushort *)(texture + 9) = uVar27 & *(ushort *)(texture + 9);
     }
     else {
 LAB_00034128:
-      if (*(char *)((int)puVar31 + 0x6d) == '\0') {
-        iVar11 = ((int (*)())FUN_00030b50)(param_2,uVar16,param_3,param_4,uVar19,param_6);
+      if (*(char *)((int)texImages + 0x6d) == '\0') {
+        iVar11 = ((int (*)())FUN_00030b50)(texture,uVar16,param_3,param_4,uVar19,param_6);
         if (iVar11 == 0) {
-          local_74 = param_2[0xc];
+          local_74 = texture[0xc];
           local_78 = (uint)*(byte *)(local_74 + 0x6c);
           local_7c = (uint)*(byte *)(local_74 + 0x69);
           local_80 = (uint)*(byte *)(local_74 + 0x6b);
@@ -3313,10 +3313,10 @@ LAB_00034128:
 LAB_00032e78:
           local_64 = &local_158;
           local_138 = 2;
-          ((int (*)())FUN_00031170)((uint)*(byte *)(param_2 + 0xe),param_2,local_64,&local_214,&local_208,
+          ((int (*)())FUN_00031170)((uint)*(byte *)(texture + 0xe),texture,local_64,&local_214,&local_208,
                        &local_204,&local_218,&local_210,&local_20c);
-          iVar11 = (uint)*(byte *)(param_2 + 0xe) * 0x24;
-          puVar37 = &DAT_001d9f34 + iVar11;
+          iVar11 = (uint)*(byte *)(texture + 0xe) * 0x24;
+          formatInfo = &DAT_001d9f34 + iVar11;
           uVar22 = *(uint *)(&DAT_001d9f48 + iVar11) & 7;
           if (uVar22 == 4) {
             iVar25 = 0;
@@ -3379,7 +3379,7 @@ LAB_00032f74:
           bVar42 = (local_80 < local_7c) << 3 | (local_7c < local_80) << 2 |
                    (local_80 == local_7c) << 1 | in_xer_so & 1;
           bVar40 = (uint)((1 << (uVar32 & 0x3f)) << (local_214 & 0x3f)) <=
-                   *(uint *)(iStack00000018 + 0x29d8);
+                   *(uint *)(ctxSaved + 0x29d8);
           uVar20 = local_7c;
           local_a0 = uVar22;
           local_9c = uVar30;
@@ -3485,22 +3485,22 @@ LAB_00032f74:
             } while (uVar32 <= local_80);
             uVar32 = iVar29 + 7;
           }
-          iVar33 = FUN_0000acb0(iStack00000018,param_2,
+          iVar33 = FUN_0000acb0(ctxSaved,texture,
                                 iVar21 + uVar22 * 4 + (uVar32 & 0xfffffff8) * 4,iVar33);
           if (iVar33 == 0) {
             return 0;
           }
-          *(byte *)(param_2[0xd] + 0x15) = (byte)((iVar25 << iVar11) << 3) & 0x18 | 4;
-          local_84 = (int *)*param_2;
-          if ((*(byte *)((int)param_2 + 0x39) & 3) == 0) {
+          *(byte *)(texture[0xd] + 0x15) = (byte)((iVar25 << iVar11) << 3) & 0x18 | 4;
+          local_84 = (int *)*texture;
+          if ((*(byte *)((int)texture + 0x39) & 3) == 0) {
             local_8c = (int *)0x0;
             local_e8 = (int *)0x0;
           }
           else {
-            *(char *)(param_2[0xd] + 0x17) = (char)local_7c;
+            *(char *)(texture[0xd] + 0x17) = (char)local_7c;
             uVar30 = 1 << (local_98 & 0x3f);
-            *(char *)(param_2[0xd] + 0x34) = (char)local_78;
-            *(char *)(param_2[0xd] + 0x35) = ((char)local_80 - (char)local_7c) + '\x01';
+            *(char *)(texture[0xd] + 0x34) = (char)local_78;
+            *(char *)(texture[0xd] + 0x35) = ((char)local_80 - (char)local_7c) + '\x01';
             uVar28 = local_84[8];
             local_84[2] = 0;
             local_84[1] = uVar22;
@@ -3521,66 +3521,66 @@ LAB_00032f74:
             if (uVar30 >> 5 == 0) {
               local_84[4] = 0x20;
             }
-            puVar37 = PTR_DAT_001e899c;
+            formatInfo = PTR_DAT_001e899c;
             local_84[8] = (uint)bVar40 << 0x1f | uVar28 & 0x4fffffff | 0x40000000;
             local_8c = local_84 + 0x280;
             piVar14 = local_8c + local_84[1];
             local_e8 = piVar14 + 0x8f;
-            _memcpy(piVar14,puVar37,0x23c);
-            iVar25 = (uint)*(byte *)(param_2 + 0xe) * 0x24;
-            puVar37 = &DAT_001d9f34 + iVar25;
+            _memcpy(piVar14,formatInfo,0x23c);
+            iVar25 = (uint)*(byte *)(texture + 0xe) * 0x24;
+            formatInfo = &DAT_001d9f34 + iVar25;
             if ((*(uint *)(&DAT_001d9f4c + iVar25) & 0x10000) == 0) {
               if ((*(uint *)(&DAT_001d9f48 + iVar25) & 8) == 0) {
                 uVar28 = *(uint *)(&DAT_001d9f48 + iVar25) & 7;
                 if (uVar28 == 1) {
-                  puVar37 = &DAT_001da00c;
+                  formatInfo = &DAT_001da00c;
                 }
                 else if (uVar28 < 2) {
                   if (uVar28 == 0) {
-                    puVar37 = &DAT_001d9fa0;
+                    formatInfo = &DAT_001d9fa0;
                   }
                   else {
 LAB_000333f4:
-                    puVar37 = &DAT_001da1bc;
+                    formatInfo = &DAT_001da1bc;
                   }
                 }
                 else {
                   if (uVar28 == 2) goto LAB_000334dc;
                   if (uVar28 != 3) goto LAB_000333f4;
-                  puVar37 = &DAT_001da36c;
+                  formatInfo = &DAT_001da36c;
                 }
               }
               else {
 LAB_000334dc:
-                puVar37 = &DAT_001da054;
+                formatInfo = &DAT_001da054;
               }
             }
             uVar8 = piVar14[0x66];
             uVar36 = piVar14[0x7c];
             piVar14[0xb] = 0;
-            uVar28 = *(uint *)(puVar37 + 0x18) >> 5 & 0x1f;
+            uVar28 = *(uint *)(formatInfo + 0x18) >> 5 & 0x1f;
             piVar14[0x66] = uVar28 | uVar8 & 0xffffffe0;
-            uVar30 = (*(uint *)(puVar37 + 0x18) & 0x18) << 5;
+            uVar30 = (*(uint *)(formatInfo + 0x18) & 0x18) << 5;
             piVar14[0x66] = uVar30 | uVar28 | uVar8 & 0xfffffce0;
-            uVar20 = (*(uint *)(puVar37 + 0x18) & 6) << 9;
+            uVar20 = (*(uint *)(formatInfo + 0x18) & 6) << 9;
             piVar14[0x66] = uVar20 | uVar30 | uVar28 | uVar8 & 0xfffff0e0;
-            uVar23 = *(uint *)(puVar37 + 0x1c) >> 0x12 & 0x3000;
+            uVar23 = *(uint *)(formatInfo + 0x1c) >> 0x12 & 0x3000;
             piVar14[0x66] = uVar23 | uVar20 | uVar30 | uVar28 | uVar8 & 0xffffc0e0;
             piVar14[0x66] =
-                 *(uint *)(puVar37 + 0x1c) >> 0xe & 0xc000 |
+                 *(uint *)(formatInfo + 0x1c) >> 0xe & 0xc000 |
                  uVar23 | uVar20 | uVar30 | uVar28 | uVar8 & 0xfff000e0;
-            uVar28 = *(uint *)(puVar37 + 0x1c) >> 7 & 0x1f;
+            uVar28 = *(uint *)(formatInfo + 0x1c) >> 7 & 0x1f;
             piVar14[0x7c] = uVar28 | uVar36 & 0xfffffe00;
-            uVar30 = (*(uint *)(puVar37 + 0x1c) & 0x70) << 5;
+            uVar30 = (*(uint *)(formatInfo + 0x1c) & 0x70) << 5;
             piVar14[0x7c] = uVar30 | uVar28 | uVar36 & 0xfffff000;
-            uVar20 = (*(uint *)(puVar37 + 0x1c) & 0xe) << 0xb;
+            uVar20 = (*(uint *)(formatInfo + 0x1c) & 0xe) << 0xb;
             piVar14[0x7c] = uVar20 | uVar30 | uVar28 | uVar36 & 0xffff8000;
-            uVar23 = *(uint *)(puVar37 + 0x20) >> 0xe & 0x38000;
+            uVar23 = *(uint *)(formatInfo + 0x20) >> 0xe & 0x38000;
             piVar14[0x7c] = uVar23 | uVar20 | uVar30 | uVar28 | uVar36 & 0xfffc0000;
-            uVar8 = *(uint *)(puVar37 + 0x20) >> 8 & 0x1c0000;
+            uVar8 = *(uint *)(formatInfo + 0x20) >> 8 & 0x1c0000;
             piVar14[0x7c] = uVar8 | uVar23 | uVar20 | uVar30 | uVar28 | uVar36 & 0xffc00000;
             piVar14[0x7c] =
-                 (*(uint *)(puVar37 + 0x20) >> 0x19 & 1) << 0x16 |
+                 (*(uint *)(formatInfo + 0x20) >> 0x19 & 1) << 0x16 |
                  uVar8 | uVar23 | uVar20 | uVar30 | uVar28 | uVar36 & 0xf8000000;
             if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
               *local_8c = (int)((unsigned char *)0x00001393U);
@@ -3597,7 +3597,7 @@ LAB_000334dc:
                    in_xer_so & 1;
           if (local_78 != 0) {
             local_90 = 0;
-            local_dc = param_2;
+            local_dc = texture;
             local_58 = iVar11 << 1;
             local_94 = 0;
             local_e4 = local_7c * 0x18;
@@ -3634,14 +3634,14 @@ LAB_000334dc:
                   }
                   iVar11 = 1 << (uVar20 & 0x3f);
                   local_b0 = 1;
-                  bVar39 = 3 < *(byte *)(param_2 + 0xe) - 0xc;
+                  bVar39 = 3 < *(byte *)(texture + 0xe) - 0xc;
                   local_ac = *piVar14 * local_78 + local_94 * (piVar14[1] - *piVar14) + local_c4 +
                              0xa00;
                   if (bVar39) {
                     local_b0 = 0;
                   }
                   local_b0 = (uint)!bVar39;
-                  if ((*(byte *)((int)param_2 + 0x39) & 3) == 0) {
+                  if ((*(byte *)((int)texture + 0x39) & 3) == 0) {
                     bVar42 = ((int)uVar28 < 0) << 3 | (0 < (int)uVar28) << 2 | (uVar28 == 0) << 1 |
                              in_xer_so & 1;
                     local_a8 = local_a8 & *(ushort *)(local_dc + 9);
@@ -3710,9 +3710,9 @@ LAB_00033700:
                           uVar36 = 1;
                         }
                         uVar36 = (uVar36 | local_58) << 1 | uVar20 & 1;
-                        local_e8 = (int *)((int (*)())FUN_00030420)(local_e8,puVar37,iVar11,iVar29,uVar36,
+                        local_e8 = (int *)((int (*)())FUN_00030420)(local_e8,formatInfo,iVar11,iVar29,uVar36,
                                                        (iVar35 << (local_214 & 0x3f)) >>
-                                                       (*(uint *)(puVar37 + 0x14) & 7),iVar33);
+                                                       (*(uint *)(formatInfo + 0x14) & 7),iVar33);
                         if (!(bool)((byte)(local_6c >> 0x1d) & 1)) {
                           local_8c = (int *)((int (*)())FUN_00030a60)(local_8c,local_210,iVar11,iVar29,uVar36,0,
                                                          iVar33 << 0x10 |
@@ -3767,7 +3767,7 @@ LAB_00033700:
                     if (!bVar2) {
                       local_144 = local_12c << 2;
                     }
-                    local_148 = local_ac + *param_2;
+                    local_148 = local_ac + *texture;
                     local_130 = 0x7ffff;
                     uVar27 = *(short *)(iVar33 + 0x10) + 0xe6fa;
                     bVar43 = (uVar27 < 4) << 3 | (4 < uVar27) << 2 | (uVar27 == 4) << 1 |
@@ -3797,7 +3797,7 @@ LAB_00033700:
                     }
                     uVar27 = *(ushort *)(iVar33 + 0x10);
                     uVar6 = *(ushort *)(iVar33 + 0x12);
-                    uVar15 = (uint)*(byte *)(param_2 + 0xe);
+                    uVar15 = (uint)*(byte *)(texture + 0xe);
                     iVar25 = 1 << (uVar28 + uVar22 + uVar32 + local_214 & 0x3f);
                     uVar20 = ((int (*)())FUN_0002f4d0)((uint)uVar27,(uint)uVar6,uVar15);
                     iVar11 = FUN_0000a3f0((uint)uVar27,(uint)uVar6);
@@ -3824,7 +3824,7 @@ LAB_00033700:
                             uVar15 = local_90;
                           }
                           uVar20 = local_12c;
-                          puVar18 = (undefined1 *)(uint)*(byte *)(param_2 + 0xe);
+                          puVar18 = (undefined1 *)(uint)*(byte *)(texture + 0xe);
                           local_148 = local_b4;
                           if (puVar18 == (undefined1 *)((int)((unsigned char *)0xc) + 3)) {
                             bVar39 = uVar23 == 0x1908;
@@ -3868,7 +3868,7 @@ LAB_00033700:
                       }
                       else if (!bVar2) {
                         puVar18 = (undefined1 *)((int)((unsigned char *)0x0) + 1);
-                        uVar20 = ((int (*)())FUN_000303d0)((uint)*(byte *)(param_2 + 0xe),local_12c,1,1);
+                        uVar20 = ((int (*)())FUN_000303d0)((uint)*(byte *)(texture + 0xe),local_12c,1,1);
                         if (uVar20 < 0x20) {
                           if (local_128 != 0) {
                             uVar15 = 0;
@@ -3891,9 +3891,9 @@ LAB_00033700:
                     else {
                       _memcpy(local_148,local_158,iVar25);
                     }
-                    uVar20 = *(uint *)(iStack00000018 + 0x24) & 0x82;
+                    uVar20 = *(uint *)(ctxSaved + 0x24) & 0x82;
                     if (uVar20 != 0) {
-                      FUN_0000b620(iStack00000018,local_ac + *param_2,
+                      FUN_0000b620(ctxSaved,local_ac + *texture,
                                    (uint)*(ushort *)((int)local_5c + local_c8 + 2) *
                                    *(int *)((int)local_5c + local_c8 + 0xc),puVar18,local_c8,
                                    local_5c,uVar20,uVar8);
@@ -3919,12 +3919,12 @@ LAB_00033700:
               iVar11 = local_94 * 2;
               local_94 = local_94 + 1;
               uVar27 = ~(ushort)local_a8;
-              iVar25 = iVar11 + param_2[0xd];
+              iVar25 = iVar11 + texture[0xd];
               local_d8 = local_d8 + 2;
               local_e0 = local_e0 + 0x1a0;
               local_e4 = local_e4 + 0x168;
               *(ushort *)(iVar25 + 0x1c) = (ushort)local_a8 | *(ushort *)(iVar25 + 0x1c);
-              iVar11 = iVar11 + param_2[0xd];
+              iVar11 = iVar11 + texture[0xd];
               *(ushort *)(iVar11 + 0x28) = uVar27 & *(ushort *)(iVar11 + 0x28);
               *(ushort *)(local_dc + 9) = uVar27 & *(ushort *)(local_dc + 9);
               local_dc = (int *)((int)local_dc + 2);
@@ -3933,7 +3933,7 @@ LAB_00033700:
               _free(local_90);
             }
           }
-          bVar41 = *(byte *)((int)param_2 + 0x39);
+          bVar41 = *(byte *)((int)texture + 0x39);
           if ((bVar41 & 3) != 0) {
             *local_e8 = (int)((unsigned char *)0x00001393U);
             local_e8[1] = 10;
@@ -3953,23 +3953,23 @@ LAB_00033700:
             }
             *local_84 = (int)local_8c - (int)(local_84 + 0x280) >> 2;
             local_84[2] = ((int)local_e8 + (0x18 - (int)(local_84 + 0x280)) >> 2) - local_84[1];
-            bVar41 = *(byte *)((int)param_2 + 0x39);
+            bVar41 = *(byte *)((int)texture + 0x39);
           }
-          *(byte *)((int)param_2 + 0x39) = bVar41 & 0xf8;
+          *(byte *)((int)texture + 0x39) = bVar41 & 0xf8;
           goto LAB_00033ff0;
         }
-        if (*(char *)(param_2 + 0x11) != '\0') {
+        if (*(char *)(texture + 0x11) != '\0') {
           return 0;
         }
       }
-      iVar11 = ((int (*)())FUN_00031940)(iStack00000018,param_2);
+      iVar11 = ((int (*)())FUN_00031940)(ctxSaved,texture);
       if (iVar11 == 0) {
         return 0;
       }
     }
   }
   else {
-    uVar27 = puVar31[6];
+    uVar27 = texImages[6];
     if (uVar27 == 0x405) {
 LAB_000324ac:
       uVar16 = 0;
@@ -3989,64 +3989,64 @@ LAB_00032480:
         uVar16 = 7;
       }
     }
-    iVar11 = FUN_0000b3a0(iStack00000018,param_2,*(undefined4 *)(puVar31 + 4),uVar16,
-                          (uint)*(byte *)(puVar31 + 0x36));
+    iVar11 = FUN_0000b3a0(ctxSaved,texture,*(undefined4 *)(texImages + 4),uVar16,
+                          (uint)*(byte *)(texImages + 0x36));
     if (iVar11 == 0) {
       return 0;
     }
-    if (*(char *)((int)puVar31 + 0x6d) == '\0') {
-      uVar22 = (uint)puVar31[0x52];
-      if ((0x20 < uVar22) || (0x20 < puVar31[0x53])) goto LAB_00032600;
+    if (*(char *)((int)texImages + 0x6d) == '\0') {
+      uVar22 = (uint)texImages[0x52];
+      if ((0x20 < uVar22) || (0x20 < texImages[0x53])) goto LAB_00032600;
     }
     else {
-      uVar22 = (uint)puVar31[0x52];
+      uVar22 = (uint)texImages[0x52];
     }
-    uVar28 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(param_2 + 0xe) * 0x24) & 7);
-    *(short *)((int)param_2 + 0x3e) =
-         (short)((uVar28 * (uVar22 + (uint)*(byte *)(puVar31 + 0x55) * -2) + 0xff & 0xffffff00) /
+    uVar28 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
+    *(short *)((int)texture + 0x3e) =
+         (short)((uVar28 * (uVar22 + (uint)*(byte *)(texImages + 0x55) * -2) + 0xff & 0xffffff00) /
                 uVar28);
 LAB_00032600:
-    *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) & 0xf8;
+    *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) & 0xf8;
   }
 LAB_00033ff0:
-  if (*(char *)((int)puVar31 + 0x6d) != '\0') {
-    if (0x1000 < puVar31[0x52]) {
-      if (0x1000 < puVar31[0x53]) {
+  if (*(char *)((int)texImages + 0x6d) != '\0') {
+    if (0x1000 < texImages[0x52]) {
+      if (0x1000 < texImages[0x53]) {
         return 0;
       }
-      param_2[0x32] = param_2[0x32] & 0xff3fffffU | 0x400000;
-      uVar27 = puVar31[0x52];
+      texture[0x32] = texture[0x32] & 0xff3fffffU | 0x400000;
+      uVar27 = texImages[0x52];
       uVar22 = uVar27 >> 1 & 0x7e00;
       sVar5 = (short)uVar22;
-      *(short *)(param_2 + 0x35) = sVar5;
-      *(ushort *)((int)param_2 + 0xd2) = uVar27 - sVar5;
-      *(short *)(param_2 + 0x34) = sVar5 + 2;
-      param_2[0x33] = uVar22 << 2 | param_2[0x33] & 3U;
+      *(short *)(texture + 0x35) = sVar5;
+      *(ushort *)((int)texture + 0xd2) = uVar27 - sVar5;
+      *(short *)(texture + 0x34) = sVar5 + 2;
+      texture[0x33] = uVar22 << 2 | texture[0x33] & 3U;
       goto LAB_00034100;
     }
-    if (0x1000 < puVar31[0x53]) {
-      param_2[0x32] = param_2[0x32] & 0xff3fffffU | 0x800000;
-      uVar27 = puVar31[0x53];
+    if (0x1000 < texImages[0x53]) {
+      texture[0x32] = texture[0x32] & 0xff3fffffU | 0x800000;
+      uVar27 = texImages[0x53];
       uVar22 = uVar27 >> 1 & 0x7fc0;
       sVar5 = (short)uVar22;
-      *(short *)(param_2 + 0x35) = sVar5;
-      *(ushort *)((int)param_2 + 0xd2) = uVar27 - sVar5;
-      *(short *)(param_2 + 0x34) = sVar5 + 1;
-      if ((*(ushort *)param_2[0xc] & 0x400) == 0) {
-        param_2[0x33] =
-             ((*(ushort *)((int)param_2 + 0x3e) * uVar22 <<
-              (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(param_2 + 0xe) * 0x24) & 7)) >> 5) << 2 |
-             param_2[0x33] & 3U;
+      *(short *)(texture + 0x35) = sVar5;
+      *(ushort *)((int)texture + 0xd2) = uVar27 - sVar5;
+      *(short *)(texture + 0x34) = sVar5 + 1;
+      if ((*(ushort *)texture[0xc] & 0x400) == 0) {
+        texture[0x33] =
+             ((*(ushort *)((int)texture + 0x3e) * uVar22 <<
+              (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7)) >> 5) << 2 |
+             texture[0x33] & 3U;
       }
       else {
-        param_2[0x33] = uVar22 << 2 | param_2[0x33] & 3U;
+        texture[0x33] = uVar22 << 2 | texture[0x33] & 3U;
       }
       goto LAB_00034100;
     }
   }
-  param_2[0x32] = param_2[0x32] & 0xff3fffff;
+  texture[0x32] = texture[0x32] & 0xff3fffff;
 LAB_00034100:
-  ((int (*)())FUN_0002ddf0)(iStack00000018,param_2);
+  ((int (*)())FUN_0002ddf0)(ctxSaved,texture);
   return 1;
 }
 
@@ -4063,7 +4063,7 @@ int FUN_000341a0(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 uVar2;
   
   uVar2 = *(undefined4 *)(param_1 + 4);
-  iVar1 = ((int (*)())FUN_00032100)(uVar2,param_2,param_3,param_4,param_5,param_6);
+  iVar1 = ((int (*)())gldTextureMakeResident)(uVar2,param_2,param_3,param_4,param_5,param_6);
   if (iVar1 == 0) {
     _gldDeleteTexture(uVar2,param_2);
   }
@@ -4192,7 +4192,7 @@ LAB_000342e0:
   levelRecord = ((int (*)())FUN_00031220)(ctx,texture,face,baseLevel,1);
   if (((levelRecord == 0) || ((*(uint *)(levelRecord + 0x18) & 0x10000) == 0)) ||
      (((*(byte *)((int)texture + 0x39) & 7) != 0 &&
-      (faceArg = ((int (*)())FUN_00032100)(ctx,texture,faceArg,uVar12,uVar20,in_r8), faceArg == 0))))
+      (faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,uVar12,uVar20,in_r8), faceArg == 0))))
   goto LAB_000342e0;
   baseWidth = *(byte *)(levelTable + 0x30) - baseLevel;
   if ((int)baseWidth < 0) {
@@ -4962,7 +4962,7 @@ LAB_00035740:
     return 1;
   }
   if (((*(byte *)((int)param_2 + 0x39) & 7) != 0) &&
-     (iVar34 = ((int (*)())FUN_00032100)(param_1,param_2,iVar35,uVar49,uVar39,uVar50), iVar34 == 0))
+     (iVar34 = ((int (*)())gldTextureMakeResident)(param_1,param_2,iVar35,uVar49,uVar39,uVar50), iVar34 == 0))
   goto LAB_00035740;
   iVar34 = *(int *)(param_1 + 0x150);
   if (iVar34 == 0) {
@@ -5844,7 +5844,7 @@ int FUN_000369f0(ctx, texture, face, level, xOffset, yOffset, zOffset, width, he
     if ((levelRecord != 0) &&
        ((iVar22 = texture[0xd], iVar22 == 0 || (*(char *)(iVar22 + 0x16) != '\x06')))) {
       if ((*(byte *)((int)texture + 0x39) & 7) != 0) {
-        faceArg = ((int (*)())FUN_00032100)(ctx,texture,faceArg,levelArg,uVar44,yoffsetArg);
+        faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,levelArg,uVar44,yoffsetArg);
         if (faceArg == 0) goto LAB_00037930;
         iVar22 = texture[0xd];
       }
@@ -6774,7 +6774,7 @@ LAB_00037930:
     return 1;
   }
   if (((((*(byte *)((int)texture + 0x39) & 7) != 0) &&
-       (iVar22 = ((int (*)())FUN_00032100)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
+       (iVar22 = ((int (*)())gldTextureMakeResident)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
        iVar22 == 0)) ||
       ((*(int *)sourceSurface[1] != 0 && (iVar22 = FUN_0001e280(ctx,sourceSurface,1), iVar22 == 0)))) ||
      (((int *)sourceSurface[2] == (int *)0x0 || (iVar22 = *(int *)sourceSurface[2], iVar22 == 0))))
@@ -9317,7 +9317,7 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
   
   if (shaderObject[8] != 0) {
     isGLSLShader = *shaderObject - 0x8b30U < 2;
-    FUN_000538e0(ctx);
+    extvsBeginShader(ctx);
     FUN_00053060(ctx);
     iVar12 = shaderObject[0x12];
     iVar5 = shaderObject[0x13];
@@ -9676,7 +9676,7 @@ LAB_0003d254:
       FUN_00053f80(ctx,0x8785,uVar26,uVar7,hwProgram[0x1d]);
       FUN_000541a0(ctx,0x879a,uVar26,0,0,0,1);
     }
-    FUN_00053990(ctx);
+    extvsEndShader(ctx);
     if (!bVar2) {
       FUN_000530a0(ctx);
       return 0;

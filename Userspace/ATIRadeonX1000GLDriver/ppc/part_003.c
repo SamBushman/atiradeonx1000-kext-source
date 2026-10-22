@@ -1058,7 +1058,7 @@ int FUN_0001b510(param_1, param_2, param_3, param_4, param_5, param_6)
       if (loopIndex < 4) {
         iVar17 = iVar10;
       }
-      iVar10 = FUN_00032100(param_1,iVar10,param_3,param_4,param_5,param_6);
+      iVar10 = gldTextureMakeResident(param_1,iVar10,param_3,param_4,param_5,param_6);
       if (iVar10 == 0) {
         piVar14 = (int *)param_2[1];
         goto LAB_0001b730;
@@ -5283,7 +5283,7 @@ LAB_00022580:
                   uVar24 = target & -(uint)*(byte *)(target + 0x3d);
                 }
                 else {
-                  textureComplete2 = FUN_00032100(ctx,target,dirtyBitsArg,scratchR6,scratchR7,scratchR8);
+                  textureComplete2 = gldTextureMakeResident(ctx,target,dirtyBitsArg,scratchR6,scratchR7,scratchR8);
                   if ((textureComplete2 == 0) || (uVar24 = target, *(char *)(target + 0x3d) == '\0')) {
                     uVar24 = 0;
                   }
@@ -5326,7 +5326,7 @@ LAB_000225e8:
                 unitObjectValue = boundTexture & -(uint)*(byte *)(boundTexture + 0x3d);
               }
               else {
-                textureComplete = FUN_00032100(ctx,boundTexture,dirtyBitsArg,scratchR6,scratchR7,scratchR8);
+                textureComplete = gldTextureMakeResident(ctx,boundTexture,dirtyBitsArg,scratchR6,scratchR7,scratchR8);
                 if ((textureComplete == 0) || (unitObjectValue = boundTexture, *(char *)(boundTexture + 0x3d) == '\0')) {
                   unitObjectValue = 0;
                 }

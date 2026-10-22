@@ -209,7 +209,7 @@
 50300	FUN_00050300	r8	PASS-indirect	GARBAGE	
 50ef0	FUN_00050ef0	r7	PASS-indirect	GARBAGE	
 50ef0	FUN_00050ef0	r8	PASS-indirect	GARBAGE	
-53990	FUN_00053990	r6	PASS-indirect	GARBAGE	
+53990	extvsEndShader	r6	PASS-indirect	GARBAGE	
 546d0	FUN_000546d0	r6	PASS-indirect	GARBAGE	
 546d0	FUN_000546d0	r7	PASS-indirect	GARBAGE	
 546d0	FUN_000546d0	r8	PASS-indirect	GARBAGE	
@@ -244,11 +244,11 @@
 872e0	FUN_000872e0	r6	PASS-indirect	GARBAGE	
 872e0	FUN_000872e0	r7	PASS-indirect	GARBAGE	
 872e0	FUN_000872e0	r8	PASS-indirect	GARBAGE	
-8b6d0	FUN_0008b6d0	r5	PASS-deep	GARBAGE	
+8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	GARBAGE	
 8b960	FUN_0008b960	r5	PASS-deep	GARBAGE	
-8b9f0	FUN_0008b9f0	r5	PASS-deep	GARBAGE	
-8c590	FUN_0008c590	r7	PASS-indirect	GARBAGE	
-8c590	FUN_0008c590	r8	PASS-indirect	GARBAGE	
+8b9f0	arbParseProgramText	r5	PASS-deep	GARBAGE	
+8c590	arbValidateProgram	r7	PASS-indirect	GARBAGE	
+8c590	arbValidateProgram	r8	PASS-indirect	GARBAGE	
 8dc50	FUN_0008dc50	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 8dce8 bctrl via +0x10 (argument registers up to r5)
 8dc50	FUN_0008dc50	r6	PASS-indirect	GARBAGE	
 8dc50	FUN_0008dc50	r7	PASS-indirect	GARBAGE	

@@ -1,0 +1,30 @@
+# func rows: ARB_vertex_program/ARB_fragment_program text parser (0x885b0..0x8c590), every name confirmed by the program-text error strings
+func	FUN_000885b0	arbLexNumber	CONFIRMED	strings "Invalid scientific notation." and "invalid suffix on number": scans a numeric literal of the ARB program text
+func	FUN_00088920	arbNextToken	CONFIRMED	advances the lexer; string "invalid character"; called after every token consumed (parser[5]/[6] = new token type/value)
+func	FUN_00088e70	arbSetError	CONFIRMED	records the first message/position and sets the GL error word (*parser[0]) to 0x502 GL_INVALID_OPERATION
+func	FUN_00088ee0	arbErrorOutOfMemory	CONFIRMED	arbSetError(parser, "out of memory")
+func	FUN_00088f00	arbAllocVariable	CONFIRMED	allocates a 0x2c-byte variable node via ctx callback, links it into the parser variable list; error out of memory
+func	FUN_00088fd0	arbParseVariableName	CONFIRMED	string "invalid variable name"
+func	FUN_00089140	arbErrorInternal	CONFIRMED	arbSetError(parser, "internal error")
+func	FUN_00089160	arbExpectToken	CONFIRMED	advance when parser[5] == expected, else error "unexpected token"
+func	FUN_00089190	arbComponentLetterToIndex	CONFIRMED	r/x -> 0, g/y -> 1, b/z -> 2, a/w -> 3, else error "invalid component"
+func	FUN_00089280	arbAllocBindingEntry	CONFIRMED	next 0x14-byte entry of an array variable; error "too many array initializers"
+func	FUN_00089320	arbInternConstant	CONFIRMED	finds or appends a 4-float constant in the constant pool; error "too many constants"; returns its index
+func	FUN_00089430	arbDeclareVariable	CONFIRMED	strings "redeclared variable name" and "reserved variable name"
+func	FUN_000895b0	arbParseResultBinding	CONFIRMED	strings "invalid output color" and "invalid result binding"
+func	FUN_00089740	arbParseOptionalSign	CONFIRMED	consumes token 0x19 (+) returning 1 or 0x1a (-) returning -1, else 1
+func	FUN_000897b0	arbParseFloatConstant	CONFIRMED	string "invalid constant"; returns the literal as a double
+func	FUN_00089a20	arbParseLocalParamNumber	CONFIRMED	string "invalid program local parameter number"
+func	FUN_00089ac0	arbParseEnvParamNumber	CONFIRMED	string "invalid program environment parameter number"
+func	FUN_00089b60	arbParseTexCoordNumber	CONFIRMED	string "invalid texture coordinate"
+func	FUN_00089c10	arbParseMatrixRowNumber	CONFIRMED	string "invalid matrix row number"
+func	FUN_00089ca0	arbParseLightNumber	CONFIRMED	string "invalid light number"
+func	FUN_0008aa40	arbParseParamBinding	CONFIRMED	PARAM binding parser: program.env/local[n..m], state.fog/depth/light/lightmodel/lightprod/material/matrix/texgen..., strings "invalid parameter binding", "invalid fog property", "invalid light model property", "invalid matrix modifier", ...
+func	FUN_0008ace0	arbParseFragmentAttribBinding	CONFIRMED	strings "invalid fragment attribute binding" / "invalid color type"
+func	FUN_0008aec0	arbParseComponentToken	CONFIRMED	reads a component letter token via FUN_00089190; string "invalid component"
+func	FUN_0008b160	arbParseSourceRegister	CONFIRMED	strings "invalid source register", "invalid source register type", "invalid array addressing", "invalid array index", "undefined variable"
+func	FUN_0008b300	arbParseExtendedSwizzleSelector	CONFIRMED	string "invalid extended swizzle selector"
+func	FUN_0008b4b0	arbParseDestRegister	CONFIRMED	strings "invalid destination register", "invalid writemask", "invalid writemask order"
+func	FUN_0008b6d0	arbParseSwizzleSuffix	CONFIRMED	string "invalid swizzle suffix"
+func	FUN_0008b9f0	arbParseProgramText	CONFIRMED	top level: header, OPTION, declarations and statements; strings "invalid header", "invalid option name", "invalid statement", "array size and binding count mismatch"
+func	FUN_0008c590	arbValidateProgram	CONFIRMED	post-parse semantic checks and error formatting ("line %d: %s", "too many ALU instructions", "too many indirections", "more than one fog option", "multiple targets on texture context")

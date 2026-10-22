@@ -4819,7 +4819,7 @@ int FUN_00074ed0(param_1, param_2, param_3, param_4)
   undefined4 uStack_34;
   undefined4 uStack_30;
   
-  iVar1 = FUN_000550e0(param_3 + 0x1c,param_4 + 4);
+  iVar1 = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
   uVar4 = *(uint *)(param_4 + 0x40);
   if (3 < uVar4) {
     return 0xffffffff;
@@ -4886,7 +4886,7 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
   undefined4 uStack_34;
   undefined4 uStack_30;
   
-  iVar1 = FUN_000550e0(param_3 + 0x1c,param_4 + 4);
+  iVar1 = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
   uVar4 = *(uint *)(param_4 + 0x40);
   if (3 < uVar4) {
     return 0xffffffff;

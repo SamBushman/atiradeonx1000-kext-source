@@ -2759,7 +2759,7 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
     }
     texture = *values;
     if (((*(byte *)(texture + 0x39) & 7) != 0) &&
-       (status = FUN_00032100(ctx,texture,values,extraArg3,extraArg4,extraArg5), status == 0)) {
+       (status = gldTextureMakeResident(ctx,texture,values,extraArg3,extraArg4,extraArg5), status == 0)) {
       *values = 0;
       return 0;
     }

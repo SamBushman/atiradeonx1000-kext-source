@@ -9027,23 +9027,24 @@ LAB_000b7220:
   return;
 }
 
-/* FUN_000b72d0 @ 0xb72d0 (11108 bytes) */
-int FUN_000b72d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 *param_2;
-  int param_3;
-  undefined1 *param_4;
-  undefined1 *param_5;
-  undefined1 *param_6;
-  undefined1 *param_7;
+/* extvsInstReadsTempComponents @ 0xb72d0 (11108 bytes) */
+int extvsInstReadsTempComponents(symbolTable, inst, tempIndex, outReadsX, outReadsY, outReadsZ, outReadsW)
+  undefined4 symbolTable;
+  undefined4 *inst;
+  int tempIndex;
+  undefined1 *outReadsX;
+  undefined1 *outReadsY;
+  undefined1 *outReadsZ;
+  undefined1 *outReadsW;
 {
+  int swizzleSelect;
   bool bVar1;
   bool bVar2;
   bool bVar3;
-  char cVar4;
-  char cVar5;
-  char cVar6;
-  char cVar7;
+  char destEnableX;
+  char destEnableY;
+  char destEnableZ;
+  char destEnableW;
   bool bVar8;
   bool bVar9;
   bool bVar10;
@@ -9053,14 +9054,14 @@ int FUN_000b72d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   bool bVar14;
   bool bVar15;
   bool bVar16;
-  undefined1 uVar18;
-  int iVar17;
+  undefined1 readFlag;
+  int operandDataType;
   
-  cVar4 = *(char *)((int)param_2 + 0xf);
-  cVar5 = *(char *)((int)param_2 + 0x13);
-  cVar6 = *(char *)((int)param_2 + 0x17);
-  cVar7 = *(char *)((int)param_2 + 0x1b);
-  switch(*param_2) {
+  destEnableX = *(char *)((int)inst + 0xf);
+  destEnableY = *(char *)((int)inst + 0x13);
+  destEnableZ = *(char *)((int)inst + 0x17);
+  destEnableW = *(char *)((int)inst + 0x1b);
+  switch(*inst) {
   case 0x8782:
   case 0x8791:
   case 0x8792:
@@ -9068,10 +9069,10 @@ int FUN_000b72d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   case 0x8794:
   case 0x8795:
 switchD_000b7340_caseD_8782:
-    *param_4 = 1;
-    *param_5 = 1;
-    *param_6 = 1;
-    *param_7 = 1;
+    *outReadsX = 1;
+    *outReadsY = 1;
+    *outReadsZ = 1;
+    *outReadsW = 1;
     return;
   case 0x8783:
   case 0x8789:
@@ -9079,79 +9080,79 @@ switchD_000b7340_caseD_8782:
   case 0x8790:
   case 0x8799:
   case 0x879c:
-    iVar17 = FUN_000550e0(param_1,param_2 + 8);
-    if (iVar17 != 0x87bf) goto switchD_000b7340_caseD_8782;
+    operandDataType = extvsOperandDataType(symbolTable,inst + 8);
+    if (operandDataType != 0x87bf) goto switchD_000b7340_caseD_8782;
   case 0x879a:
   case 0x879b:
-    bVar3 = cVar4 == '\0';
-    if ((((bVar3) || ((param_2[10] != 0x87d5 && (param_2[10] != 0x87d9)))) &&
-        (((cVar5 == '\0' || ((param_2[0xb] != 0x87d5 && (param_2[0xb] != 0x87d9)))) &&
-         ((cVar6 == '\0' || ((param_2[0xc] != 0x87d5 && (param_2[0xc] != 0x87d9)))))))) &&
-       ((cVar7 == '\0' || ((param_2[0xd] != 0x87d5 && (param_2[0xd] != 0x87d9)))))) {
-      uVar18 = 0;
+    bVar3 = destEnableX == '\0';
+    if ((((bVar3) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
+        (((destEnableY == '\0' || ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))) &&
+         ((destEnableZ == '\0' || ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))))) &&
+       ((destEnableW == '\0' || ((inst[0xd] != 0x87d5 && (inst[0xd] != 0x87d9)))))) {
+      readFlag = 0;
     }
     else {
-      uVar18 = 1;
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if (((((bVar3) || ((param_2[10] != 0x87d6 && (param_2[10] != 0x87da)))) &&
-         ((cVar5 == '\0' || ((param_2[0xb] != 0x87d6 && (param_2[0xb] != 0x87da)))))) &&
-        ((cVar6 == '\0' || ((param_2[0xc] != 0x87d6 && (param_2[0xc] != 0x87da)))))) &&
-       ((cVar7 == '\0' || ((param_2[0xd] != 0x87d6 && (param_2[0xd] != 0x87da)))))) {
-      uVar18 = 0;
-    }
-    else {
-      uVar18 = 1;
-    }
-    *param_5 = uVar18;
-    if ((((bVar3) || ((param_2[10] != 0x87d7 && (param_2[10] != 0x87db)))) &&
-        ((cVar5 == '\0' || ((param_2[0xb] != 0x87d7 && (param_2[0xb] != 0x87db)))))) &&
-       (((cVar6 == '\0' || ((param_2[0xc] != 0x87d7 && (param_2[0xc] != 0x87db)))) &&
-        ((cVar7 == '\0' || ((param_2[0xd] != 0x87d7 && (param_2[0xd] != 0x87db)))))))) {
-      uVar18 = 0;
+    *outReadsX = readFlag;
+    if (((((bVar3) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
+         ((destEnableY == '\0' || ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))) &&
+        ((destEnableZ == '\0' || ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))))) &&
+       ((destEnableW == '\0' || ((inst[0xd] != 0x87d6 && (inst[0xd] != 0x87da)))))) {
+      readFlag = 0;
     }
     else {
-      uVar18 = 1;
+      readFlag = 1;
     }
-    *param_6 = uVar18;
-    if ((((bVar3) || ((param_2[10] != 0x87d8 && (param_2[10] != 0x87dc)))) &&
-        ((cVar5 == '\0' || ((param_2[0xb] != 0x87d8 && (param_2[0xb] != 0x87dc)))))) &&
-       ((cVar6 == '\0' || ((param_2[0xc] != 0x87d8 && (param_2[0xc] != 0x87dc)))))) {
-      if (cVar7 == '\0') {
+    *outReadsY = readFlag;
+    if ((((bVar3) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
+        ((destEnableY == '\0' || ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))) &&
+       (((destEnableZ == '\0' || ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))) &&
+        ((destEnableW == '\0' || ((inst[0xd] != 0x87d7 && (inst[0xd] != 0x87db)))))))) {
+      readFlag = 0;
+    }
+    else {
+      readFlag = 1;
+    }
+    *outReadsZ = readFlag;
+    if ((((bVar3) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
+        ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
+       ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) {
+      if (destEnableW == '\0') {
 LAB_000b9970:
-        uVar18 = 0;
+        readFlag = 0;
         goto LAB_000b9ef0;
       }
 LAB_000b99c0:
-      iVar17 = param_2[0xd];
-      if (iVar17 != 0x87d8) {
+      swizzleSelect = inst[0xd];
+      if (swizzleSelect != 0x87d8) {
 LAB_000b9960:
-        if (iVar17 != 0x87dc) goto LAB_000b9970;
+        if (swizzleSelect != 0x87dc) goto LAB_000b9970;
       }
     }
     break;
   case 0x8784:
-    if ((param_2[8] == 2) && (param_3 == param_2[9])) {
-      iVar17 = param_2[10];
-      if ((((iVar17 == 0x87d5) || (iVar17 == 0x87d9)) || (param_2[0xb] == 0x87d5)) ||
-         (((param_2[0xb] == 0x87d9 || (param_2[0xc] == 0x87d5)) ||
-          (bVar3 = false, param_2[0xc] == 0x87d9)))) {
+    if ((inst[8] == 2) && (tempIndex == inst[9])) {
+      swizzleSelect = inst[10];
+      if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0xb] == 0x87d5)) ||
+         (((inst[0xb] == 0x87d9 || (inst[0xc] == 0x87d5)) ||
+          (bVar3 = false, inst[0xc] == 0x87d9)))) {
         bVar3 = true;
       }
-      if (((iVar17 == 0x87d6) || (iVar17 == 0x87da)) ||
-         ((param_2[0xb] == 0x87d6 ||
-          (((param_2[0xb] == 0x87da || (param_2[0xc] == 0x87d6)) ||
-           (bVar9 = false, param_2[0xc] == 0x87da)))))) {
+      if (((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) ||
+         ((inst[0xb] == 0x87d6 ||
+          (((inst[0xb] == 0x87da || (inst[0xc] == 0x87d6)) ||
+           (bVar9 = false, inst[0xc] == 0x87da)))))) {
         bVar9 = true;
       }
-      if (((iVar17 == 0x87d7) || (iVar17 == 0x87db)) ||
-         (((param_2[0xb] == 0x87d7 || ((param_2[0xb] == 0x87db || (param_2[0xc] == 0x87d7)))) ||
-          (bVar11 = false, param_2[0xc] == 0x87db)))) {
+      if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
+         (((inst[0xb] == 0x87d7 || ((inst[0xb] == 0x87db || (inst[0xc] == 0x87d7)))) ||
+          (bVar11 = false, inst[0xc] == 0x87db)))) {
         bVar11 = true;
       }
-      if (((((iVar17 == 0x87d8) || (iVar17 == 0x87dc)) || (param_2[0xb] == 0x87d8)) ||
-          ((param_2[0xb] == 0x87dc || (param_2[0xc] == 0x87d8)))) ||
-         (bVar1 = false, param_2[0xc] == 0x87dc)) {
+      if (((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0xb] == 0x87d8)) ||
+          ((inst[0xb] == 0x87dc || (inst[0xc] == 0x87d8)))) ||
+         (bVar1 = false, inst[0xc] == 0x87dc)) {
         bVar1 = true;
       }
     }
@@ -9161,27 +9162,27 @@ LAB_000b9960:
       bVar11 = false;
       bVar1 = false;
     }
-    if ((param_2[0xf] == 2) && (param_3 == param_2[0x10])) {
-      iVar17 = param_2[0x11];
-      if ((((iVar17 == 0x87d5) || (iVar17 == 0x87d9)) || (param_2[0x12] == 0x87d5)) ||
-         (((param_2[0x12] == 0x87d9 || (param_2[0x13] == 0x87d5)) ||
-          (bVar8 = false, param_2[0x13] == 0x87d9)))) {
+    if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
+      swizzleSelect = inst[0x11];
+      if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0x12] == 0x87d5)) ||
+         (((inst[0x12] == 0x87d9 || (inst[0x13] == 0x87d5)) ||
+          (bVar8 = false, inst[0x13] == 0x87d9)))) {
         bVar8 = true;
       }
-      if (((iVar17 == 0x87d6) || (iVar17 == 0x87da)) ||
-         ((param_2[0x12] == 0x87d6 ||
-          (((param_2[0x12] == 0x87da || (param_2[0x13] == 0x87d6)) ||
-           (bVar10 = false, param_2[0x13] == 0x87da)))))) {
+      if (((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) ||
+         ((inst[0x12] == 0x87d6 ||
+          (((inst[0x12] == 0x87da || (inst[0x13] == 0x87d6)) ||
+           (bVar10 = false, inst[0x13] == 0x87da)))))) {
         bVar10 = true;
       }
-      if (((iVar17 == 0x87d7) || (iVar17 == 0x87db)) ||
-         (((param_2[0x12] == 0x87d7 || ((param_2[0x12] == 0x87db || (param_2[0x13] == 0x87d7)))) ||
-          (bVar12 = false, param_2[0x13] == 0x87db)))) {
+      if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
+         (((inst[0x12] == 0x87d7 || ((inst[0x12] == 0x87db || (inst[0x13] == 0x87d7)))) ||
+          (bVar12 = false, inst[0x13] == 0x87db)))) {
         bVar12 = true;
       }
-      if (((((iVar17 == 0x87d8) || (iVar17 == 0x87dc)) || (param_2[0x12] == 0x87d8)) ||
-          ((param_2[0x12] == 0x87dc || (param_2[0x13] == 0x87d8)))) ||
-         (bVar2 = false, param_2[0x13] == 0x87dc)) {
+      if (((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0x12] == 0x87d8)) ||
+          ((inst[0x12] == 0x87dc || (inst[0x13] == 0x87d8)))) ||
+         (bVar2 = false, inst[0x13] == 0x87dc)) {
         bVar2 = true;
       }
     }
@@ -9191,44 +9192,44 @@ LAB_000b9960:
       bVar12 = false;
       bVar2 = false;
     }
-    if ((bVar3) || (uVar18 = 0, bVar8)) {
-      uVar18 = 1;
+    if ((bVar3) || (readFlag = 0, bVar8)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if ((bVar9) || (uVar18 = 0, bVar10)) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if ((bVar9) || (readFlag = 0, bVar10)) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if ((bVar11) || (uVar18 = 0, bVar12)) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if ((bVar11) || (readFlag = 0, bVar12)) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
+    *outReadsZ = readFlag;
     if (bVar1) break;
     goto LAB_000b9dfc;
   case 0x8785:
-    if ((param_2[8] == 2) && (param_3 == param_2[9])) {
-      iVar17 = param_2[10];
-      if ((((((iVar17 == 0x87d5) || (iVar17 == 0x87d9)) || (param_2[0xb] == 0x87d5)) ||
-           ((param_2[0xb] == 0x87d9 || (param_2[0xc] == 0x87d5)))) || (param_2[0xc] == 0x87d9)) ||
-         ((param_2[0xd] == 0x87d5 || (bVar3 = false, param_2[0xd] == 0x87d9)))) {
+    if ((inst[8] == 2) && (tempIndex == inst[9])) {
+      swizzleSelect = inst[10];
+      if ((((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0xb] == 0x87d5)) ||
+           ((inst[0xb] == 0x87d9 || (inst[0xc] == 0x87d5)))) || (inst[0xc] == 0x87d9)) ||
+         ((inst[0xd] == 0x87d5 || (bVar3 = false, inst[0xd] == 0x87d9)))) {
         bVar3 = true;
       }
-      if ((((iVar17 == 0x87d6) || (iVar17 == 0x87da)) || (param_2[0xb] == 0x87d6)) ||
-         (((param_2[0xb] == 0x87da || (param_2[0xc] == 0x87d6)) ||
-          ((param_2[0xc] == 0x87da ||
-           ((param_2[0xd] == 0x87d6 || (bVar9 = false, param_2[0xd] == 0x87da)))))))) {
+      if ((((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) || (inst[0xb] == 0x87d6)) ||
+         (((inst[0xb] == 0x87da || (inst[0xc] == 0x87d6)) ||
+          ((inst[0xc] == 0x87da ||
+           ((inst[0xd] == 0x87d6 || (bVar9 = false, inst[0xd] == 0x87da)))))))) {
         bVar9 = true;
       }
-      if ((((iVar17 == 0x87d7) || (iVar17 == 0x87db)) || (param_2[0xb] == 0x87d7)) ||
-         (((param_2[0xb] == 0x87db || (param_2[0xc] == 0x87d7)) ||
-          ((param_2[0xc] == 0x87db ||
-           ((param_2[0xd] == 0x87d7 || (bVar11 = false, param_2[0xd] == 0x87db)))))))) {
+      if ((((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) || (inst[0xb] == 0x87d7)) ||
+         (((inst[0xb] == 0x87db || (inst[0xc] == 0x87d7)) ||
+          ((inst[0xc] == 0x87db ||
+           ((inst[0xd] == 0x87d7 || (bVar11 = false, inst[0xd] == 0x87db)))))))) {
         bVar11 = true;
       }
-      if (((((iVar17 == 0x87d8) || (iVar17 == 0x87dc)) || (param_2[0xb] == 0x87d8)) ||
-          ((param_2[0xb] == 0x87dc || (param_2[0xc] == 0x87d8)))) ||
-         ((param_2[0xc] == 0x87dc ||
-          ((param_2[0xd] == 0x87d8 || (bVar1 = false, param_2[0xd] == 0x87dc)))))) {
+      if (((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0xb] == 0x87d8)) ||
+          ((inst[0xb] == 0x87dc || (inst[0xc] == 0x87d8)))) ||
+         ((inst[0xc] == 0x87dc ||
+          ((inst[0xd] == 0x87d8 || (bVar1 = false, inst[0xd] == 0x87dc)))))) {
         bVar1 = true;
       }
     }
@@ -9238,30 +9239,30 @@ LAB_000b9960:
       bVar11 = false;
       bVar1 = false;
     }
-    if ((param_2[0xf] == 2) && (param_3 == param_2[0x10])) {
-      iVar17 = param_2[0x11];
-      if ((((iVar17 == 0x87d5) || (iVar17 == 0x87d9)) || (param_2[0x12] == 0x87d5)) ||
-         (((param_2[0x12] == 0x87d9 || (param_2[0x13] == 0x87d5)) ||
-          ((param_2[0x13] == 0x87d9 ||
-           ((param_2[0x14] == 0x87d5 || (bVar8 = false, param_2[0x14] == 0x87d9)))))))) {
+    if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
+      swizzleSelect = inst[0x11];
+      if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0x12] == 0x87d5)) ||
+         (((inst[0x12] == 0x87d9 || (inst[0x13] == 0x87d5)) ||
+          ((inst[0x13] == 0x87d9 ||
+           ((inst[0x14] == 0x87d5 || (bVar8 = false, inst[0x14] == 0x87d9)))))))) {
         bVar8 = true;
       }
-      if ((((iVar17 == 0x87d6) || (iVar17 == 0x87da)) || (param_2[0x12] == 0x87d6)) ||
-         (((param_2[0x12] == 0x87da || (param_2[0x13] == 0x87d6)) ||
-          ((param_2[0x13] == 0x87da ||
-           ((param_2[0x14] == 0x87d6 || (bVar10 = false, param_2[0x14] == 0x87da)))))))) {
+      if ((((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) || (inst[0x12] == 0x87d6)) ||
+         (((inst[0x12] == 0x87da || (inst[0x13] == 0x87d6)) ||
+          ((inst[0x13] == 0x87da ||
+           ((inst[0x14] == 0x87d6 || (bVar10 = false, inst[0x14] == 0x87da)))))))) {
         bVar10 = true;
       }
-      if (((((iVar17 == 0x87d7) || (iVar17 == 0x87db)) || (param_2[0x12] == 0x87d7)) ||
-          ((param_2[0x12] == 0x87db || (param_2[0x13] == 0x87d7)))) ||
-         ((param_2[0x13] == 0x87db ||
-          ((param_2[0x14] == 0x87d7 || (bVar12 = false, param_2[0x14] == 0x87db)))))) {
+      if (((((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) || (inst[0x12] == 0x87d7)) ||
+          ((inst[0x12] == 0x87db || (inst[0x13] == 0x87d7)))) ||
+         ((inst[0x13] == 0x87db ||
+          ((inst[0x14] == 0x87d7 || (bVar12 = false, inst[0x14] == 0x87db)))))) {
         bVar12 = true;
       }
-      if ((((iVar17 == 0x87d8) || (iVar17 == 0x87dc)) || (param_2[0x12] == 0x87d8)) ||
-         (((param_2[0x12] == 0x87dc || (param_2[0x13] == 0x87d8)) ||
-          ((param_2[0x13] == 0x87dc ||
-           ((param_2[0x14] == 0x87d8 || (bVar2 = false, param_2[0x14] == 0x87dc)))))))) {
+      if ((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0x12] == 0x87d8)) ||
+         (((inst[0x12] == 0x87dc || (inst[0x13] == 0x87d8)) ||
+          ((inst[0x13] == 0x87dc ||
+           ((inst[0x14] == 0x87d8 || (bVar2 = false, inst[0x14] == 0x87dc)))))))) {
         bVar2 = true;
       }
     }
@@ -9271,13 +9272,13 @@ LAB_000b9960:
       bVar12 = false;
       bVar2 = false;
     }
-    if ((bVar3) || (uVar18 = 0, bVar8)) {
-      uVar18 = 1;
+    if ((bVar3) || (readFlag = 0, bVar8)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
+    *outReadsX = readFlag;
     if (bVar9) goto LAB_000b92a0;
 LAB_000b9294:
-    uVar18 = 0;
+    readFlag = 0;
     if (bVar10) goto LAB_000b92a0;
     goto LAB_000b92a4;
   case 0x8786:
@@ -9287,41 +9288,41 @@ LAB_000b9294:
   case 0x878c:
   case 0x878d:
   case 0x8796:
-    if ((param_2[8] == 2) && (param_3 == param_2[9])) {
-      iVar17 = FUN_000550e0(param_1,param_2 + 8);
-      if (iVar17 == 0x87bf) {
-        bVar3 = cVar4 == '\0';
-        if (((((bVar3) || ((param_2[10] != 0x87d5 && (param_2[10] != 0x87d9)))) &&
-             ((cVar5 == '\0' || ((param_2[0xb] != 0x87d5 && (param_2[0xb] != 0x87d9)))))) &&
-            ((cVar6 == '\0' || ((param_2[0xc] != 0x87d5 && (param_2[0xc] != 0x87d9)))))) &&
-           ((cVar7 == '\0' || ((param_2[0xd] != 0x87d5 && (param_2[0xd] != 0x87d9)))))) {
+    if ((inst[8] == 2) && (tempIndex == inst[9])) {
+      operandDataType = extvsOperandDataType(symbolTable,inst + 8);
+      if (operandDataType == 0x87bf) {
+        bVar3 = destEnableX == '\0';
+        if (((((bVar3) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
+             ((destEnableY == '\0' || ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))))) &&
+            ((destEnableZ == '\0' || ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))) &&
+           ((destEnableW == '\0' || ((inst[0xd] != 0x87d5 && (inst[0xd] != 0x87d9)))))) {
           bVar9 = false;
         }
         else {
           bVar9 = true;
         }
-        if ((((bVar3) || ((param_2[10] != 0x87d6 && (param_2[10] != 0x87da)))) &&
-            ((cVar5 == '\0' || ((param_2[0xb] != 0x87d6 && (param_2[0xb] != 0x87da)))))) &&
-           (((cVar6 == '\0' || ((param_2[0xc] != 0x87d6 && (param_2[0xc] != 0x87da)))) &&
-            ((cVar7 == '\0' || ((param_2[0xd] != 0x87d6 && (param_2[0xd] != 0x87da)))))))) {
+        if ((((bVar3) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
+            ((destEnableY == '\0' || ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))) &&
+           (((destEnableZ == '\0' || ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))) &&
+            ((destEnableW == '\0' || ((inst[0xd] != 0x87d6 && (inst[0xd] != 0x87da)))))))) {
           bVar11 = false;
         }
         else {
           bVar11 = true;
         }
-        if ((((bVar3) || ((param_2[10] != 0x87d7 && (param_2[10] != 0x87db)))) &&
-            ((cVar5 == '\0' || ((param_2[0xb] != 0x87d7 && (param_2[0xb] != 0x87db)))))) &&
-           (((cVar6 == '\0' || ((param_2[0xc] != 0x87d7 && (param_2[0xc] != 0x87db)))) &&
-            ((cVar7 == '\0' || ((param_2[0xd] != 0x87d7 && (param_2[0xd] != 0x87db)))))))) {
+        if ((((bVar3) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
+            ((destEnableY == '\0' || ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))) &&
+           (((destEnableZ == '\0' || ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))) &&
+            ((destEnableW == '\0' || ((inst[0xd] != 0x87d7 && (inst[0xd] != 0x87db)))))))) {
           bVar1 = false;
         }
         else {
           bVar1 = true;
         }
-        if (((((bVar3) || ((param_2[10] != 0x87d8 && (param_2[10] != 0x87dc)))) &&
-             ((cVar5 == '\0' || ((param_2[0xb] != 0x87d8 && (param_2[0xb] != 0x87dc)))))) &&
-            ((cVar6 == '\0' || ((param_2[0xc] != 0x87d8 && (param_2[0xc] != 0x87dc)))))) &&
-           ((cVar7 == '\0' || ((param_2[0xd] != 0x87d8 && (param_2[0xd] != 0x87dc))))))
+        if (((((bVar3) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
+             ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
+            ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
+           ((destEnableW == '\0' || ((inst[0xd] != 0x87d8 && (inst[0xd] != 0x87dc))))))
         goto LAB_000b7dec;
         bVar3 = true;
       }
@@ -9339,41 +9340,41 @@ LAB_000b9294:
 LAB_000b7dec:
       bVar3 = false;
     }
-    if ((param_2[0xf] == 2) && (param_3 == param_2[0x10])) {
-      iVar17 = FUN_000550e0(param_1,param_2 + 0xf);
-      if (iVar17 == 0x87bf) {
-        bVar2 = cVar4 == '\0';
-        if ((((bVar2) || ((param_2[0x11] != 0x87d5 && (param_2[0x11] != 0x87d9)))) &&
-            ((cVar5 == '\0' || ((param_2[0x12] != 0x87d5 && (param_2[0x12] != 0x87d9)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x13] != 0x87d5 && (param_2[0x13] != 0x87d9)))) &&
-            ((cVar7 == '\0' || ((param_2[0x14] != 0x87d5 && (param_2[0x14] != 0x87d9)))))))) {
+    if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
+      operandDataType = extvsOperandDataType(symbolTable,inst + 0xf);
+      if (operandDataType == 0x87bf) {
+        bVar2 = destEnableX == '\0';
+        if ((((bVar2) || ((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)))) &&
+            ((destEnableY == '\0' || ((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x13] != 0x87d5 && (inst[0x13] != 0x87d9)))) &&
+            ((destEnableW == '\0' || ((inst[0x14] != 0x87d5 && (inst[0x14] != 0x87d9)))))))) {
           bVar8 = false;
         }
         else {
           bVar8 = true;
         }
-        if ((((bVar2) || ((param_2[0x11] != 0x87d6 && (param_2[0x11] != 0x87da)))) &&
-            ((cVar5 == '\0' || ((param_2[0x12] != 0x87d6 && (param_2[0x12] != 0x87da)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x13] != 0x87d6 && (param_2[0x13] != 0x87da)))) &&
-            ((cVar7 == '\0' || ((param_2[0x14] != 0x87d6 && (param_2[0x14] != 0x87da)))))))) {
+        if ((((bVar2) || ((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)))) &&
+            ((destEnableY == '\0' || ((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x13] != 0x87d6 && (inst[0x13] != 0x87da)))) &&
+            ((destEnableW == '\0' || ((inst[0x14] != 0x87d6 && (inst[0x14] != 0x87da)))))))) {
           bVar10 = false;
         }
         else {
           bVar10 = true;
         }
-        if (((((bVar2) || ((param_2[0x11] != 0x87d7 && (param_2[0x11] != 0x87db)))) &&
-             ((cVar5 == '\0' || ((param_2[0x12] != 0x87d7 && (param_2[0x12] != 0x87db)))))) &&
-            ((cVar6 == '\0' || ((param_2[0x13] != 0x87d7 && (param_2[0x13] != 0x87db)))))) &&
-           ((cVar7 == '\0' || ((param_2[0x14] != 0x87d7 && (param_2[0x14] != 0x87db)))))) {
+        if (((((bVar2) || ((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)))) &&
+             ((destEnableY == '\0' || ((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)))))) &&
+            ((destEnableZ == '\0' || ((inst[0x13] != 0x87d7 && (inst[0x13] != 0x87db)))))) &&
+           ((destEnableW == '\0' || ((inst[0x14] != 0x87d7 && (inst[0x14] != 0x87db)))))) {
           bVar12 = false;
         }
         else {
           bVar12 = true;
         }
-        if ((((bVar2) || ((param_2[0x11] != 0x87d8 && (param_2[0x11] != 0x87dc)))) &&
-            ((cVar5 == '\0' || ((param_2[0x12] != 0x87d8 && (param_2[0x12] != 0x87dc)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x13] != 0x87d8 && (param_2[0x13] != 0x87dc)))) &&
-            ((cVar7 == '\0' || ((param_2[0x14] != 0x87d8 && (param_2[0x14] != 0x87dc))))))))
+        if ((((bVar2) || ((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)))) &&
+            ((destEnableY == '\0' || ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))) &&
+            ((destEnableW == '\0' || ((inst[0x14] != 0x87d8 && (inst[0x14] != 0x87dc))))))))
         goto LAB_000b812c;
         bVar2 = true;
       }
@@ -9391,56 +9392,56 @@ LAB_000b7dec:
 LAB_000b812c:
       bVar2 = false;
     }
-    if ((bVar9) || (uVar18 = 0, bVar8)) {
-      uVar18 = 1;
+    if ((bVar9) || (readFlag = 0, bVar8)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if ((bVar11) || (uVar18 = 0, bVar10)) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if ((bVar11) || (readFlag = 0, bVar10)) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if ((bVar1) || (uVar18 = 0, bVar12)) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if ((bVar1) || (readFlag = 0, bVar12)) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
+    *outReadsZ = readFlag;
     goto joined_r0x000b9df8;
   case 0x8788:
   case 0x878e:
-    if ((param_2[8] == 2) && (param_3 == param_2[9])) {
-      iVar17 = FUN_000550e0(param_1,param_2 + 8);
-      if (iVar17 == 0x87bf) {
-        bVar1 = cVar4 == '\0';
-        if (((((bVar1) || ((param_2[10] != 0x87d5 && (param_2[10] != 0x87d9)))) &&
-             ((cVar5 == '\0' || ((param_2[0xb] != 0x87d5 && (param_2[0xb] != 0x87d9)))))) &&
-            ((cVar6 == '\0' || ((param_2[0xc] != 0x87d5 && (param_2[0xc] != 0x87d9)))))) &&
-           ((cVar7 == '\0' || ((param_2[0xd] != 0x87d5 && (param_2[0xd] != 0x87d9)))))) {
+    if ((inst[8] == 2) && (tempIndex == inst[9])) {
+      operandDataType = extvsOperandDataType(symbolTable,inst + 8);
+      if (operandDataType == 0x87bf) {
+        bVar1 = destEnableX == '\0';
+        if (((((bVar1) || ((inst[10] != 0x87d5 && (inst[10] != 0x87d9)))) &&
+             ((destEnableY == '\0' || ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))))) &&
+            ((destEnableZ == '\0' || ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))) &&
+           ((destEnableW == '\0' || ((inst[0xd] != 0x87d5 && (inst[0xd] != 0x87d9)))))) {
           bVar3 = false;
         }
         else {
           bVar3 = true;
         }
-        if ((((bVar1) || ((param_2[10] != 0x87d6 && (param_2[10] != 0x87da)))) &&
-            ((cVar5 == '\0' || ((param_2[0xb] != 0x87d6 && (param_2[0xb] != 0x87da)))))) &&
-           (((cVar6 == '\0' || ((param_2[0xc] != 0x87d6 && (param_2[0xc] != 0x87da)))) &&
-            ((cVar7 == '\0' || ((param_2[0xd] != 0x87d6 && (param_2[0xd] != 0x87da)))))))) {
+        if ((((bVar1) || ((inst[10] != 0x87d6 && (inst[10] != 0x87da)))) &&
+            ((destEnableY == '\0' || ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))) &&
+           (((destEnableZ == '\0' || ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))) &&
+            ((destEnableW == '\0' || ((inst[0xd] != 0x87d6 && (inst[0xd] != 0x87da)))))))) {
           bVar9 = false;
         }
         else {
           bVar9 = true;
         }
-        if ((((bVar1) || ((param_2[10] != 0x87d7 && (param_2[10] != 0x87db)))) &&
-            ((cVar5 == '\0' || ((param_2[0xb] != 0x87d7 && (param_2[0xb] != 0x87db)))))) &&
-           (((cVar6 == '\0' || ((param_2[0xc] != 0x87d7 && (param_2[0xc] != 0x87db)))) &&
-            ((cVar7 == '\0' || ((param_2[0xd] != 0x87d7 && (param_2[0xd] != 0x87db)))))))) {
+        if ((((bVar1) || ((inst[10] != 0x87d7 && (inst[10] != 0x87db)))) &&
+            ((destEnableY == '\0' || ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))) &&
+           (((destEnableZ == '\0' || ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))) &&
+            ((destEnableW == '\0' || ((inst[0xd] != 0x87d7 && (inst[0xd] != 0x87db)))))))) {
           bVar11 = false;
         }
         else {
           bVar11 = true;
         }
-        if (((((bVar1) || ((param_2[10] != 0x87d8 && (param_2[10] != 0x87dc)))) &&
-             ((cVar5 == '\0' || ((param_2[0xb] != 0x87d8 && (param_2[0xb] != 0x87dc)))))) &&
-            ((cVar6 == '\0' || ((param_2[0xc] != 0x87d8 && (param_2[0xc] != 0x87dc)))))) &&
-           ((cVar7 == '\0' || ((param_2[0xd] != 0x87d8 && (param_2[0xd] != 0x87dc))))))
+        if (((((bVar1) || ((inst[10] != 0x87d8 && (inst[10] != 0x87dc)))) &&
+             ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
+            ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
+           ((destEnableW == '\0' || ((inst[0xd] != 0x87d8 && (inst[0xd] != 0x87dc))))))
         goto LAB_000b84cc;
         bVar8 = true;
       }
@@ -9458,41 +9459,41 @@ LAB_000b812c:
 LAB_000b84cc:
       bVar8 = false;
     }
-    if ((param_2[0xf] == 2) && (param_3 == param_2[0x10])) {
-      iVar17 = FUN_000550e0(param_1,param_2 + 0xf);
-      if (iVar17 == 0x87bf) {
-        bVar1 = cVar4 == '\0';
-        if ((((bVar1) || ((param_2[0x11] != 0x87d5 && (param_2[0x11] != 0x87d9)))) &&
-            ((cVar5 == '\0' || ((param_2[0x12] != 0x87d5 && (param_2[0x12] != 0x87d9)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x13] != 0x87d5 && (param_2[0x13] != 0x87d9)))) &&
-            ((cVar7 == '\0' || ((param_2[0x14] != 0x87d5 && (param_2[0x14] != 0x87d9)))))))) {
+    if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
+      operandDataType = extvsOperandDataType(symbolTable,inst + 0xf);
+      if (operandDataType == 0x87bf) {
+        bVar1 = destEnableX == '\0';
+        if ((((bVar1) || ((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)))) &&
+            ((destEnableY == '\0' || ((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x13] != 0x87d5 && (inst[0x13] != 0x87d9)))) &&
+            ((destEnableW == '\0' || ((inst[0x14] != 0x87d5 && (inst[0x14] != 0x87d9)))))))) {
           bVar10 = false;
         }
         else {
           bVar10 = true;
         }
-        if (((((bVar1) || ((param_2[0x11] != 0x87d6 && (param_2[0x11] != 0x87da)))) &&
-             ((cVar5 == '\0' || ((param_2[0x12] != 0x87d6 && (param_2[0x12] != 0x87da)))))) &&
-            ((cVar6 == '\0' || ((param_2[0x13] != 0x87d6 && (param_2[0x13] != 0x87da)))))) &&
-           ((cVar7 == '\0' || ((param_2[0x14] != 0x87d6 && (param_2[0x14] != 0x87da)))))) {
+        if (((((bVar1) || ((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)))) &&
+             ((destEnableY == '\0' || ((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)))))) &&
+            ((destEnableZ == '\0' || ((inst[0x13] != 0x87d6 && (inst[0x13] != 0x87da)))))) &&
+           ((destEnableW == '\0' || ((inst[0x14] != 0x87d6 && (inst[0x14] != 0x87da)))))) {
           bVar12 = false;
         }
         else {
           bVar12 = true;
         }
-        if (((((bVar1) || ((param_2[0x11] != 0x87d7 && (param_2[0x11] != 0x87db)))) &&
-             ((cVar5 == '\0' || ((param_2[0x12] != 0x87d7 && (param_2[0x12] != 0x87db)))))) &&
-            ((cVar6 == '\0' || ((param_2[0x13] != 0x87d7 && (param_2[0x13] != 0x87db)))))) &&
-           ((cVar7 == '\0' || ((param_2[0x14] != 0x87d7 && (param_2[0x14] != 0x87db)))))) {
+        if (((((bVar1) || ((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)))) &&
+             ((destEnableY == '\0' || ((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)))))) &&
+            ((destEnableZ == '\0' || ((inst[0x13] != 0x87d7 && (inst[0x13] != 0x87db)))))) &&
+           ((destEnableW == '\0' || ((inst[0x14] != 0x87d7 && (inst[0x14] != 0x87db)))))) {
           bVar16 = false;
         }
         else {
           bVar16 = true;
         }
-        if ((((bVar1) || ((param_2[0x11] != 0x87d8 && (param_2[0x11] != 0x87dc)))) &&
-            ((cVar5 == '\0' || ((param_2[0x12] != 0x87d8 && (param_2[0x12] != 0x87dc)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x13] != 0x87d8 && (param_2[0x13] != 0x87dc)))) &&
-            ((cVar7 == '\0' || ((param_2[0x14] != 0x87d8 && (param_2[0x14] != 0x87dc))))))))
+        if ((((bVar1) || ((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)))) &&
+            ((destEnableY == '\0' || ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))) &&
+            ((destEnableW == '\0' || ((inst[0x14] != 0x87d8 && (inst[0x14] != 0x87dc))))))))
         goto LAB_000b880c;
         bVar1 = true;
       }
@@ -9510,41 +9511,41 @@ LAB_000b84cc:
 LAB_000b880c:
       bVar1 = false;
     }
-    if ((param_2[0x16] == 2) && (param_3 == param_2[0x17])) {
-      iVar17 = FUN_000550e0(param_1,param_2 + 0x16);
-      if (iVar17 == 0x87bf) {
-        bVar2 = cVar4 == '\0';
-        if ((((bVar2) || ((param_2[0x18] != 0x87d5 && (param_2[0x18] != 0x87d9)))) &&
-            ((cVar5 == '\0' || ((param_2[0x19] != 0x87d5 && (param_2[0x19] != 0x87d9)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x1a] != 0x87d5 && (param_2[0x1a] != 0x87d9)))) &&
-            ((cVar7 == '\0' || ((param_2[0x1b] != 0x87d5 && (param_2[0x1b] != 0x87d9)))))))) {
+    if ((inst[0x16] == 2) && (tempIndex == inst[0x17])) {
+      operandDataType = extvsOperandDataType(symbolTable,inst + 0x16);
+      if (operandDataType == 0x87bf) {
+        bVar2 = destEnableX == '\0';
+        if ((((bVar2) || ((inst[0x18] != 0x87d5 && (inst[0x18] != 0x87d9)))) &&
+            ((destEnableY == '\0' || ((inst[0x19] != 0x87d5 && (inst[0x19] != 0x87d9)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d5 && (inst[0x1a] != 0x87d9)))) &&
+            ((destEnableW == '\0' || ((inst[0x1b] != 0x87d5 && (inst[0x1b] != 0x87d9)))))))) {
           bVar13 = false;
         }
         else {
           bVar13 = true;
         }
-        if (((((bVar2) || ((param_2[0x18] != 0x87d6 && (param_2[0x18] != 0x87da)))) &&
-             ((cVar5 == '\0' || ((param_2[0x19] != 0x87d6 && (param_2[0x19] != 0x87da)))))) &&
-            ((cVar6 == '\0' || ((param_2[0x1a] != 0x87d6 && (param_2[0x1a] != 0x87da)))))) &&
-           ((cVar7 == '\0' || ((param_2[0x1b] != 0x87d6 && (param_2[0x1b] != 0x87da)))))) {
+        if (((((bVar2) || ((inst[0x18] != 0x87d6 && (inst[0x18] != 0x87da)))) &&
+             ((destEnableY == '\0' || ((inst[0x19] != 0x87d6 && (inst[0x19] != 0x87da)))))) &&
+            ((destEnableZ == '\0' || ((inst[0x1a] != 0x87d6 && (inst[0x1a] != 0x87da)))))) &&
+           ((destEnableW == '\0' || ((inst[0x1b] != 0x87d6 && (inst[0x1b] != 0x87da)))))) {
           bVar14 = false;
         }
         else {
           bVar14 = true;
         }
-        if ((((bVar2) || ((param_2[0x18] != 0x87d7 && (param_2[0x18] != 0x87db)))) &&
-            ((cVar5 == '\0' || ((param_2[0x19] != 0x87d7 && (param_2[0x19] != 0x87db)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x1a] != 0x87d7 && (param_2[0x1a] != 0x87db)))) &&
-            ((cVar7 == '\0' || ((param_2[0x1b] != 0x87d7 && (param_2[0x1b] != 0x87db)))))))) {
+        if ((((bVar2) || ((inst[0x18] != 0x87d7 && (inst[0x18] != 0x87db)))) &&
+            ((destEnableY == '\0' || ((inst[0x19] != 0x87d7 && (inst[0x19] != 0x87db)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d7 && (inst[0x1a] != 0x87db)))) &&
+            ((destEnableW == '\0' || ((inst[0x1b] != 0x87d7 && (inst[0x1b] != 0x87db)))))))) {
           bVar15 = false;
         }
         else {
           bVar15 = true;
         }
-        if ((((bVar2) || ((param_2[0x18] != 0x87d8 && (param_2[0x18] != 0x87dc)))) &&
-            ((cVar5 == '\0' || ((param_2[0x19] != 0x87d8 && (param_2[0x19] != 0x87dc)))))) &&
-           (((cVar6 == '\0' || ((param_2[0x1a] != 0x87d8 && (param_2[0x1a] != 0x87dc)))) &&
-            ((cVar7 == '\0' || ((param_2[0x1b] != 0x87d8 && (param_2[0x1b] != 0x87dc))))))))
+        if ((((bVar2) || ((inst[0x18] != 0x87d8 && (inst[0x18] != 0x87dc)))) &&
+            ((destEnableY == '\0' || ((inst[0x19] != 0x87d8 && (inst[0x19] != 0x87dc)))))) &&
+           (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d8 && (inst[0x1a] != 0x87dc)))) &&
+            ((destEnableW == '\0' || ((inst[0x1b] != 0x87d8 && (inst[0x1b] != 0x87dc))))))))
         goto LAB_000b8b4c;
         bVar2 = true;
       }
@@ -9562,74 +9563,74 @@ LAB_000b880c:
 LAB_000b8b4c:
       bVar2 = false;
     }
-    if (((bVar3) || (bVar10)) || (uVar18 = 0, bVar13)) {
-      uVar18 = 1;
+    if (((bVar3) || (bVar10)) || (readFlag = 0, bVar13)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if (((bVar9) || (bVar12)) || (uVar18 = 0, bVar14)) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if (((bVar9) || (bVar12)) || (readFlag = 0, bVar14)) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if (((bVar11) || (bVar16)) || (uVar18 = 0, bVar15)) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if (((bVar11) || (bVar16)) || (readFlag = 0, bVar15)) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
+    *outReadsZ = readFlag;
     if (bVar8) break;
     goto joined_r0x000b8bc8;
   case 0x8797:
-    if ((param_2[8] == 2) && (param_3 == param_2[9])) {
-      bVar1 = cVar4 == '\0';
+    if ((inst[8] == 2) && (tempIndex == inst[9])) {
+      bVar1 = destEnableX == '\0';
       if ((((bVar1) ||
-           ((((param_2[0xb] != 0x87d5 && (param_2[0xb] != 0x87d9)) && (param_2[0xc] != 0x87d5)) &&
-            (param_2[0xc] != 0x87d9)))) &&
-          ((cVar5 == '\0' ||
-           (((param_2[10] != 0x87d5 && (param_2[10] != 0x87d9)) &&
-            ((param_2[0xc] != 0x87d5 && (param_2[0xc] != 0x87d9)))))))) &&
-         ((cVar6 == '\0' ||
-          (((param_2[10] != 0x87d5 && (param_2[10] != 0x87d9)) &&
-           ((param_2[0xb] != 0x87d5 && (param_2[0xb] != 0x87d9)))))))) {
+           ((((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)) && (inst[0xc] != 0x87d5)) &&
+            (inst[0xc] != 0x87d9)))) &&
+          ((destEnableY == '\0' ||
+           (((inst[10] != 0x87d5 && (inst[10] != 0x87d9)) &&
+            ((inst[0xc] != 0x87d5 && (inst[0xc] != 0x87d9)))))))) &&
+         ((destEnableZ == '\0' ||
+          (((inst[10] != 0x87d5 && (inst[10] != 0x87d9)) &&
+           ((inst[0xb] != 0x87d5 && (inst[0xb] != 0x87d9)))))))) {
         bVar3 = false;
       }
       else {
         bVar3 = true;
       }
       if (((bVar1) ||
-          ((((param_2[0xb] != 0x87d6 && (param_2[0xb] != 0x87da)) && (param_2[0xc] != 0x87d6)) &&
-           (param_2[0xc] != 0x87da)))) &&
-         (((cVar5 == '\0' ||
-           (((param_2[10] != 0x87d6 && (param_2[10] != 0x87da)) &&
-            ((param_2[0xc] != 0x87d6 && (param_2[0xc] != 0x87da)))))) &&
-          ((cVar6 == '\0' ||
-           (((param_2[10] != 0x87d6 && (param_2[10] != 0x87da)) &&
-            ((param_2[0xb] != 0x87d6 && (param_2[0xb] != 0x87da)))))))))) {
+          ((((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)) && (inst[0xc] != 0x87d6)) &&
+           (inst[0xc] != 0x87da)))) &&
+         (((destEnableY == '\0' ||
+           (((inst[10] != 0x87d6 && (inst[10] != 0x87da)) &&
+            ((inst[0xc] != 0x87d6 && (inst[0xc] != 0x87da)))))) &&
+          ((destEnableZ == '\0' ||
+           (((inst[10] != 0x87d6 && (inst[10] != 0x87da)) &&
+            ((inst[0xb] != 0x87d6 && (inst[0xb] != 0x87da)))))))))) {
         bVar9 = false;
       }
       else {
         bVar9 = true;
       }
       if ((((bVar1) ||
-           ((((param_2[0xb] != 0x87d7 && (param_2[0xb] != 0x87db)) && (param_2[0xc] != 0x87d7)) &&
-            (param_2[0xc] != 0x87db)))) &&
-          ((cVar5 == '\0' ||
-           (((param_2[10] != 0x87d7 && (param_2[10] != 0x87db)) &&
-            ((param_2[0xc] != 0x87d7 && (param_2[0xc] != 0x87db)))))))) &&
-         ((cVar6 == '\0' ||
-          (((param_2[10] != 0x87d7 && (param_2[10] != 0x87db)) &&
-           ((param_2[0xb] != 0x87d7 && (param_2[0xb] != 0x87db)))))))) {
+           ((((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)) && (inst[0xc] != 0x87d7)) &&
+            (inst[0xc] != 0x87db)))) &&
+          ((destEnableY == '\0' ||
+           (((inst[10] != 0x87d7 && (inst[10] != 0x87db)) &&
+            ((inst[0xc] != 0x87d7 && (inst[0xc] != 0x87db)))))))) &&
+         ((destEnableZ == '\0' ||
+          (((inst[10] != 0x87d7 && (inst[10] != 0x87db)) &&
+           ((inst[0xb] != 0x87d7 && (inst[0xb] != 0x87db)))))))) {
         bVar11 = false;
       }
       else {
         bVar11 = true;
       }
       if (((bVar1) ||
-          ((((param_2[0xb] != 0x87d8 && (param_2[0xb] != 0x87dc)) && (param_2[0xc] != 0x87d8)) &&
-           (param_2[0xc] != 0x87dc)))) &&
-         (((cVar5 == '\0' ||
-           (((param_2[10] != 0x87d8 && (param_2[10] != 0x87dc)) &&
-            ((param_2[0xc] != 0x87d8 && (param_2[0xc] != 0x87dc)))))) &&
-          ((cVar6 == '\0' ||
-           (((param_2[10] != 0x87d8 && (param_2[10] != 0x87dc)) &&
-            ((param_2[0xb] != 0x87d8 && (param_2[0xb] != 0x87dc)))))))))) goto LAB_000b8f1c;
+          ((((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)) && (inst[0xc] != 0x87d8)) &&
+           (inst[0xc] != 0x87dc)))) &&
+         (((destEnableY == '\0' ||
+           (((inst[10] != 0x87d8 && (inst[10] != 0x87dc)) &&
+            ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
+          ((destEnableZ == '\0' ||
+           (((inst[10] != 0x87d8 && (inst[10] != 0x87dc)) &&
+            ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))))))) goto LAB_000b8f1c;
       bVar1 = true;
     }
     else {
@@ -9639,59 +9640,59 @@ LAB_000b8b4c:
 LAB_000b8f1c:
       bVar1 = false;
     }
-    if ((param_2[0xf] == 2) && (param_3 == param_2[0x10])) {
-      bVar2 = cVar4 == '\0';
+    if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
+      bVar2 = destEnableX == '\0';
       if ((((bVar2) ||
-           ((((param_2[0x12] != 0x87d5 && (param_2[0x12] != 0x87d9)) && (param_2[0x13] != 0x87d5))
-            && (param_2[0x13] != 0x87d9)))) &&
-          ((cVar5 == '\0' ||
-           (((param_2[0x11] != 0x87d5 && (param_2[0x11] != 0x87d9)) &&
-            ((param_2[0x13] != 0x87d5 && (param_2[0x13] != 0x87d9)))))))) &&
-         ((cVar6 == '\0' ||
-          (((param_2[0x11] != 0x87d5 && (param_2[0x11] != 0x87d9)) &&
-           ((param_2[0x12] != 0x87d5 && (param_2[0x12] != 0x87d9)))))))) {
+           ((((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)) && (inst[0x13] != 0x87d5))
+            && (inst[0x13] != 0x87d9)))) &&
+          ((destEnableY == '\0' ||
+           (((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)) &&
+            ((inst[0x13] != 0x87d5 && (inst[0x13] != 0x87d9)))))))) &&
+         ((destEnableZ == '\0' ||
+          (((inst[0x11] != 0x87d5 && (inst[0x11] != 0x87d9)) &&
+           ((inst[0x12] != 0x87d5 && (inst[0x12] != 0x87d9)))))))) {
         bVar8 = false;
       }
       else {
         bVar8 = true;
       }
       if ((((bVar2) ||
-           ((((param_2[0x12] != 0x87d6 && (param_2[0x12] != 0x87da)) && (param_2[0x13] != 0x87d6))
-            && (param_2[0x13] != 0x87da)))) &&
-          ((cVar5 == '\0' ||
-           (((param_2[0x11] != 0x87d6 && (param_2[0x11] != 0x87da)) &&
-            ((param_2[0x13] != 0x87d6 && (param_2[0x13] != 0x87da)))))))) &&
-         ((cVar6 == '\0' ||
-          (((param_2[0x11] != 0x87d6 && (param_2[0x11] != 0x87da)) &&
-           ((param_2[0x12] != 0x87d6 && (param_2[0x12] != 0x87da)))))))) {
+           ((((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)) && (inst[0x13] != 0x87d6))
+            && (inst[0x13] != 0x87da)))) &&
+          ((destEnableY == '\0' ||
+           (((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)) &&
+            ((inst[0x13] != 0x87d6 && (inst[0x13] != 0x87da)))))))) &&
+         ((destEnableZ == '\0' ||
+          (((inst[0x11] != 0x87d6 && (inst[0x11] != 0x87da)) &&
+           ((inst[0x12] != 0x87d6 && (inst[0x12] != 0x87da)))))))) {
         bVar10 = false;
       }
       else {
         bVar10 = true;
       }
       if (((bVar2) ||
-          ((((param_2[0x12] != 0x87d7 && (param_2[0x12] != 0x87db)) && (param_2[0x13] != 0x87d7)) &&
-           (param_2[0x13] != 0x87db)))) &&
-         (((cVar5 == '\0' ||
-           (((param_2[0x11] != 0x87d7 && (param_2[0x11] != 0x87db)) &&
-            ((param_2[0x13] != 0x87d7 && (param_2[0x13] != 0x87db)))))) &&
-          ((cVar6 == '\0' ||
-           (((param_2[0x11] != 0x87d7 && (param_2[0x11] != 0x87db)) &&
-            ((param_2[0x12] != 0x87d7 && (param_2[0x12] != 0x87db)))))))))) {
+          ((((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)) && (inst[0x13] != 0x87d7)) &&
+           (inst[0x13] != 0x87db)))) &&
+         (((destEnableY == '\0' ||
+           (((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)) &&
+            ((inst[0x13] != 0x87d7 && (inst[0x13] != 0x87db)))))) &&
+          ((destEnableZ == '\0' ||
+           (((inst[0x11] != 0x87d7 && (inst[0x11] != 0x87db)) &&
+            ((inst[0x12] != 0x87d7 && (inst[0x12] != 0x87db)))))))))) {
         bVar12 = false;
       }
       else {
         bVar12 = true;
       }
       if ((((bVar2) ||
-           ((((param_2[0x12] != 0x87d8 && (param_2[0x12] != 0x87dc)) && (param_2[0x13] != 0x87d8))
-            && (param_2[0x13] != 0x87dc)))) &&
-          ((cVar5 == '\0' ||
-           (((param_2[0x11] != 0x87d8 && (param_2[0x11] != 0x87dc)) &&
-            ((param_2[0x13] != 0x87d8 && (param_2[0x13] != 0x87dc)))))))) &&
-         ((cVar6 == '\0' ||
-          (((param_2[0x11] != 0x87d8 && (param_2[0x11] != 0x87dc)) &&
-           ((param_2[0x12] != 0x87d8 && (param_2[0x12] != 0x87dc)))))))) goto LAB_000b926c;
+           ((((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)) && (inst[0x13] != 0x87d8))
+            && (inst[0x13] != 0x87dc)))) &&
+          ((destEnableY == '\0' ||
+           (((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)) &&
+            ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))))))) &&
+         ((destEnableZ == '\0' ||
+          (((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)) &&
+           ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))))) goto LAB_000b926c;
       bVar2 = true;
     }
     else {
@@ -9701,189 +9702,189 @@ LAB_000b8f1c:
 LAB_000b926c:
       bVar2 = false;
     }
-    if ((bVar3) || (uVar18 = 0, bVar8)) {
-      uVar18 = 1;
+    if ((bVar3) || (readFlag = 0, bVar8)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
+    *outReadsX = readFlag;
     if (!bVar9) goto LAB_000b9294;
 LAB_000b92a0:
-    uVar18 = 1;
+    readFlag = 1;
 LAB_000b92a4:
-    *param_5 = uVar18;
-    if ((bVar11) || (uVar18 = 0, bVar12)) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if ((bVar11) || (readFlag = 0, bVar12)) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
+    *outReadsZ = readFlag;
 joined_r0x000b8bc8:
     if (!bVar1) {
 LAB_000b9dfc:
-      uVar18 = 0;
+      readFlag = 0;
       if (!bVar2) goto LAB_000b9ef0;
     }
     break;
   case 0x8798:
-    if ((((((param_2[0x11] == 0x87d5) || (param_2[0x11] == 0x87d9)) || (param_2[0x12] == 0x87d5)) ||
-         ((param_2[0x12] == 0x87d9 || (param_2[0x13] == 0x87d5)))) || (param_2[0x13] == 0x87d9)) ||
-       ((param_2[0x14] == 0x87d5 || (uVar18 = 0, param_2[0x14] == 0x87d9)))) {
-      uVar18 = 1;
+    if ((((((inst[0x11] == 0x87d5) || (inst[0x11] == 0x87d9)) || (inst[0x12] == 0x87d5)) ||
+         ((inst[0x12] == 0x87d9 || (inst[0x13] == 0x87d5)))) || (inst[0x13] == 0x87d9)) ||
+       ((inst[0x14] == 0x87d5 || (readFlag = 0, inst[0x14] == 0x87d9)))) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if ((((param_2[0x11] == 0x87d6) || (param_2[0x11] == 0x87da)) || (param_2[0x12] == 0x87d6)) ||
-       (((param_2[0x12] == 0x87da || (param_2[0x13] == 0x87d6)) ||
-        ((param_2[0x13] == 0x87da ||
-         ((param_2[0x14] == 0x87d6 || (uVar18 = 0, param_2[0x14] == 0x87da)))))))) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if ((((inst[0x11] == 0x87d6) || (inst[0x11] == 0x87da)) || (inst[0x12] == 0x87d6)) ||
+       (((inst[0x12] == 0x87da || (inst[0x13] == 0x87d6)) ||
+        ((inst[0x13] == 0x87da ||
+         ((inst[0x14] == 0x87d6 || (readFlag = 0, inst[0x14] == 0x87da)))))))) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if ((((param_2[0x11] == 0x87d7) || (param_2[0x11] == 0x87db)) || (param_2[0x12] == 0x87d7)) ||
-       (((param_2[0x12] == 0x87db || (param_2[0x13] == 0x87d7)) ||
-        ((param_2[0x13] == 0x87db ||
-         ((param_2[0x14] == 0x87d7 || (uVar18 = 0, param_2[0x14] == 0x87db)))))))) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if ((((inst[0x11] == 0x87d7) || (inst[0x11] == 0x87db)) || (inst[0x12] == 0x87d7)) ||
+       (((inst[0x12] == 0x87db || (inst[0x13] == 0x87d7)) ||
+        ((inst[0x13] == 0x87db ||
+         ((inst[0x14] == 0x87d7 || (readFlag = 0, inst[0x14] == 0x87db)))))))) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
-    if (((((param_2[0x11] != 0x87d8) && (param_2[0x11] != 0x87dc)) && (param_2[0x12] != 0x87d8)) &&
-        ((param_2[0x12] != 0x87dc && (param_2[0x13] != 0x87d8)))) && (param_2[0x13] != 0x87dc)) {
-      iVar17 = param_2[0x14];
+    *outReadsZ = readFlag;
+    if (((((inst[0x11] != 0x87d8) && (inst[0x11] != 0x87dc)) && (inst[0x12] != 0x87d8)) &&
+        ((inst[0x12] != 0x87dc && (inst[0x13] != 0x87d8)))) && (inst[0x13] != 0x87dc)) {
+      swizzleSelect = inst[0x14];
 joined_r0x000b9b40:
-      if ((iVar17 != 0x87d8) && (uVar18 = 0, iVar17 != 0x87dc)) goto LAB_000b9ef0;
+      if ((swizzleSelect != 0x87d8) && (readFlag = 0, swizzleSelect != 0x87dc)) goto LAB_000b9ef0;
     }
     break;
   case 0x879d:
-    iVar17 = FUN_000550e0(param_1,param_2 + 8);
-    if (iVar17 != 0x87bf) goto switchD_000b7340_caseD_8782;
-    iVar17 = param_2[0x10];
-    if (iVar17 == 0) {
-      iVar17 = param_2[10];
+    operandDataType = extvsOperandDataType(symbolTable,inst + 8);
+    if (operandDataType != 0x87bf) goto switchD_000b7340_caseD_8782;
+    swizzleSelect = inst[0x10];
+    if (swizzleSelect == 0) {
+      swizzleSelect = inst[10];
 joined_r0x000b97e0:
-      if ((iVar17 != 0x87d5) && (iVar17 != 0x87d9)) goto LAB_000b9790;
-      uVar18 = 1;
+      if ((swizzleSelect != 0x87d5) && (swizzleSelect != 0x87d9)) goto LAB_000b9790;
+      readFlag = 1;
     }
     else {
-      if (iVar17 == 1) {
-        iVar17 = param_2[0xb];
+      if (swizzleSelect == 1) {
+        swizzleSelect = inst[0xb];
         goto joined_r0x000b97e0;
       }
-      if (iVar17 == 2) {
-        iVar17 = param_2[0xc];
+      if (swizzleSelect == 2) {
+        swizzleSelect = inst[0xc];
         goto joined_r0x000b97e0;
       }
-      if (iVar17 == 3) {
-        iVar17 = param_2[0xd];
+      if (swizzleSelect == 3) {
+        swizzleSelect = inst[0xd];
         goto joined_r0x000b97e0;
       }
 LAB_000b9790:
-      uVar18 = 0;
+      readFlag = 0;
     }
-    *param_4 = uVar18;
-    iVar17 = param_2[0x10];
-    if (iVar17 == 0) {
-      iVar17 = param_2[10];
+    *outReadsX = readFlag;
+    swizzleSelect = inst[0x10];
+    if (swizzleSelect == 0) {
+      swizzleSelect = inst[10];
 joined_r0x000b9880:
-      if ((iVar17 != 0x87d6) && (iVar17 != 0x87da)) goto LAB_000b9830;
-      uVar18 = 1;
+      if ((swizzleSelect != 0x87d6) && (swizzleSelect != 0x87da)) goto LAB_000b9830;
+      readFlag = 1;
     }
     else {
-      if (iVar17 == 1) {
-        iVar17 = param_2[0xb];
+      if (swizzleSelect == 1) {
+        swizzleSelect = inst[0xb];
         goto joined_r0x000b9880;
       }
-      if (iVar17 == 2) {
-        iVar17 = param_2[0xc];
+      if (swizzleSelect == 2) {
+        swizzleSelect = inst[0xc];
         goto joined_r0x000b9880;
       }
-      if (iVar17 == 3) {
-        iVar17 = param_2[0xd];
+      if (swizzleSelect == 3) {
+        swizzleSelect = inst[0xd];
         goto joined_r0x000b9880;
       }
 LAB_000b9830:
-      uVar18 = 0;
+      readFlag = 0;
     }
-    *param_5 = uVar18;
-    iVar17 = param_2[0x10];
-    if (iVar17 == 0) {
-      iVar17 = param_2[10];
+    *outReadsY = readFlag;
+    swizzleSelect = inst[0x10];
+    if (swizzleSelect == 0) {
+      swizzleSelect = inst[10];
 joined_r0x000b9920:
-      if ((iVar17 != 0x87d7) && (iVar17 != 0x87db)) goto LAB_000b98d0;
-      uVar18 = 1;
+      if ((swizzleSelect != 0x87d7) && (swizzleSelect != 0x87db)) goto LAB_000b98d0;
+      readFlag = 1;
     }
     else {
-      if (iVar17 == 1) {
-        iVar17 = param_2[0xb];
+      if (swizzleSelect == 1) {
+        swizzleSelect = inst[0xb];
         goto joined_r0x000b9920;
       }
-      if (iVar17 == 2) {
-        iVar17 = param_2[0xc];
+      if (swizzleSelect == 2) {
+        swizzleSelect = inst[0xc];
         goto joined_r0x000b9920;
       }
-      if (iVar17 == 3) {
-        iVar17 = param_2[0xd];
+      if (swizzleSelect == 3) {
+        swizzleSelect = inst[0xd];
         goto joined_r0x000b9920;
       }
 LAB_000b98d0:
-      uVar18 = 0;
+      readFlag = 0;
     }
-    *param_6 = uVar18;
-    iVar17 = param_2[0x10];
-    if (iVar17 == 0) {
-      iVar17 = param_2[10];
+    *outReadsZ = readFlag;
+    swizzleSelect = inst[0x10];
+    if (swizzleSelect == 0) {
+      swizzleSelect = inst[10];
 joined_r0x000b9990:
-      if (iVar17 == 0x87d8) break;
+      if (swizzleSelect == 0x87d8) break;
       goto LAB_000b9960;
     }
-    if (iVar17 == 1) {
-      iVar17 = param_2[0xb];
+    if (swizzleSelect == 1) {
+      swizzleSelect = inst[0xb];
       goto joined_r0x000b9990;
     }
-    if (iVar17 == 2) {
-      iVar17 = param_2[0xc];
+    if (swizzleSelect == 2) {
+      swizzleSelect = inst[0xc];
       goto joined_r0x000b9990;
     }
-    if (iVar17 == 3) goto LAB_000b99c0;
+    if (swizzleSelect == 3) goto LAB_000b99c0;
     goto LAB_000b9970;
   case 0x879e:
-    if (((((param_2[10] == 0x87d5) || (param_2[10] == 0x87d9)) || (param_2[0xb] == 0x87d5)) ||
-        ((param_2[0xb] == 0x87d9 || (param_2[0xd] == 0x87d5)))) ||
-       (uVar18 = 0, param_2[0xd] == 0x87d9)) {
-      uVar18 = 1;
+    if (((((inst[10] == 0x87d5) || (inst[10] == 0x87d9)) || (inst[0xb] == 0x87d5)) ||
+        ((inst[0xb] == 0x87d9 || (inst[0xd] == 0x87d5)))) ||
+       (readFlag = 0, inst[0xd] == 0x87d9)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if (((param_2[10] == 0x87d6) || (param_2[10] == 0x87da)) ||
-       ((param_2[0xb] == 0x87d6 ||
-        (((param_2[0xb] == 0x87da || (param_2[0xd] == 0x87d6)) ||
-         (uVar18 = 0, param_2[0xd] == 0x87da)))))) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if (((inst[10] == 0x87d6) || (inst[10] == 0x87da)) ||
+       ((inst[0xb] == 0x87d6 ||
+        (((inst[0xb] == 0x87da || (inst[0xd] == 0x87d6)) ||
+         (readFlag = 0, inst[0xd] == 0x87da)))))) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if (((param_2[10] == 0x87d7) || (param_2[10] == 0x87db)) ||
-       (((param_2[0xb] == 0x87d7 || ((param_2[0xb] == 0x87db || (param_2[0xd] == 0x87d7)))) ||
-        (uVar18 = 0, param_2[0xd] == 0x87db)))) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if (((inst[10] == 0x87d7) || (inst[10] == 0x87db)) ||
+       (((inst[0xb] == 0x87d7 || ((inst[0xb] == 0x87db || (inst[0xd] == 0x87d7)))) ||
+        (readFlag = 0, inst[0xd] == 0x87db)))) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
-    if ((((param_2[10] != 0x87d8) && (param_2[10] != 0x87dc)) && (param_2[0xb] != 0x87d8)) &&
-       (param_2[0xb] != 0x87dc)) {
-      iVar17 = param_2[0xd];
+    *outReadsZ = readFlag;
+    if ((((inst[10] != 0x87d8) && (inst[10] != 0x87dc)) && (inst[0xb] != 0x87d8)) &&
+       (inst[0xb] != 0x87dc)) {
+      swizzleSelect = inst[0xd];
       goto joined_r0x000b9b40;
     }
     break;
   case 0x879f:
-    if ((param_2[8] == 2) && (param_3 == param_2[9])) {
-      iVar17 = param_2[0xb];
-      if ((((iVar17 == 0x87d5) || (iVar17 == 0x87d9)) || (param_2[0xc] == 0x87d5)) ||
-         (bVar9 = false, param_2[0xc] == 0x87d9)) {
+    if ((inst[8] == 2) && (tempIndex == inst[9])) {
+      swizzleSelect = inst[0xb];
+      if ((((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) || (inst[0xc] == 0x87d5)) ||
+         (bVar9 = false, inst[0xc] == 0x87d9)) {
         bVar9 = true;
       }
-      if (((iVar17 == 0x87d6) || (iVar17 == 0x87da)) ||
-         ((param_2[0xc] == 0x87d6 || (bVar11 = false, param_2[0xc] == 0x87da)))) {
+      if (((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) ||
+         ((inst[0xc] == 0x87d6 || (bVar11 = false, inst[0xc] == 0x87da)))) {
         bVar11 = true;
       }
-      if (((iVar17 == 0x87d7) || (iVar17 == 0x87db)) ||
-         ((param_2[0xc] == 0x87d7 || (bVar1 = false, param_2[0xc] == 0x87db)))) {
+      if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
+         ((inst[0xc] == 0x87d7 || (bVar1 = false, inst[0xc] == 0x87db)))) {
         bVar1 = true;
       }
-      if ((((iVar17 == 0x87d8) || (iVar17 == 0x87dc)) || (param_2[0xc] == 0x87d8)) ||
-         (bVar3 = false, param_2[0xc] == 0x87dc)) {
+      if ((((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) || (inst[0xc] == 0x87d8)) ||
+         (bVar3 = false, inst[0xc] == 0x87dc)) {
         bVar3 = true;
       }
     }
@@ -9893,22 +9894,22 @@ joined_r0x000b9990:
       bVar1 = false;
       bVar3 = false;
     }
-    if ((param_2[0xf] == 2) && (param_2[0x10] == param_3)) {
-      iVar17 = param_2[0x12];
-      if (((iVar17 == 0x87d5) || (iVar17 == 0x87d9)) ||
-         ((param_2[0x14] == 0x87d5 || (bVar8 = false, param_2[0x14] == 0x87d9)))) {
+    if ((inst[0xf] == 2) && (inst[0x10] == tempIndex)) {
+      swizzleSelect = inst[0x12];
+      if (((swizzleSelect == 0x87d5) || (swizzleSelect == 0x87d9)) ||
+         ((inst[0x14] == 0x87d5 || (bVar8 = false, inst[0x14] == 0x87d9)))) {
         bVar8 = true;
       }
-      if ((((iVar17 == 0x87d6) || (iVar17 == 0x87da)) || (param_2[0x14] == 0x87d6)) ||
-         (bVar10 = false, param_2[0x14] == 0x87da)) {
+      if ((((swizzleSelect == 0x87d6) || (swizzleSelect == 0x87da)) || (inst[0x14] == 0x87d6)) ||
+         (bVar10 = false, inst[0x14] == 0x87da)) {
         bVar10 = true;
       }
-      if (((iVar17 == 0x87d7) || (iVar17 == 0x87db)) ||
-         ((param_2[0x14] == 0x87d7 || (bVar12 = false, param_2[0x14] == 0x87db)))) {
+      if (((swizzleSelect == 0x87d7) || (swizzleSelect == 0x87db)) ||
+         ((inst[0x14] == 0x87d7 || (bVar12 = false, inst[0x14] == 0x87db)))) {
         bVar12 = true;
       }
-      if (((iVar17 == 0x87d8) || (iVar17 == 0x87dc)) ||
-         ((param_2[0x14] == 0x87d8 || (bVar2 = false, param_2[0x14] == 0x87dc)))) {
+      if (((swizzleSelect == 0x87d8) || (swizzleSelect == 0x87dc)) ||
+         ((inst[0x14] == 0x87d8 || (bVar2 = false, inst[0x14] == 0x87dc)))) {
         bVar2 = true;
       }
     }
@@ -9918,51 +9919,51 @@ joined_r0x000b9990:
       bVar12 = false;
       bVar2 = false;
     }
-    if ((bVar9) || (uVar18 = 0, bVar8)) {
-      uVar18 = 1;
+    if ((bVar9) || (readFlag = 0, bVar8)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if ((bVar11) || (uVar18 = 0, bVar10)) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if ((bVar11) || (readFlag = 0, bVar10)) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if ((bVar1) || (uVar18 = 0, bVar12)) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if ((bVar1) || (readFlag = 0, bVar12)) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
+    *outReadsZ = readFlag;
 joined_r0x000b9df8:
     if (bVar3) break;
     goto LAB_000b9dfc;
   case 0x87a0:
   case 0x87a1:
   case 0x87a2:
-    if ((param_2[10] == 0x87d5) || (uVar18 = 0, param_2[10] == 0x87d9)) {
-      uVar18 = 1;
+    if ((inst[10] == 0x87d5) || (readFlag = 0, inst[10] == 0x87d9)) {
+      readFlag = 1;
     }
-    *param_4 = uVar18;
-    if ((param_2[10] == 0x87d6) || (uVar18 = 0, param_2[10] == 0x87da)) {
-      uVar18 = 1;
+    *outReadsX = readFlag;
+    if ((inst[10] == 0x87d6) || (readFlag = 0, inst[10] == 0x87da)) {
+      readFlag = 1;
     }
-    *param_5 = uVar18;
-    if ((param_2[10] == 0x87d7) || (uVar18 = 0, param_2[10] == 0x87db)) {
-      uVar18 = 1;
+    *outReadsY = readFlag;
+    if ((inst[10] == 0x87d7) || (readFlag = 0, inst[10] == 0x87db)) {
+      readFlag = 1;
     }
-    *param_6 = uVar18;
-    if ((param_2[10] == 0x87d8) || (uVar18 = 0, param_2[10] == 0x87dc)) {
-      uVar18 = 1;
+    *outReadsZ = readFlag;
+    if ((inst[10] == 0x87d8) || (readFlag = 0, inst[10] == 0x87dc)) {
+      readFlag = 1;
     }
-    *param_7 = uVar18;
+    *outReadsW = readFlag;
     return;
   default:
-    uVar18 = 0;
-    *param_4 = 0;
-    *param_5 = 0;
-    *param_6 = 0;
+    readFlag = 0;
+    *outReadsX = 0;
+    *outReadsY = 0;
+    *outReadsZ = 0;
     goto LAB_000b9ef0;
   }
-  uVar18 = 1;
+  readFlag = 1;
 LAB_000b9ef0:
-  *param_7 = uVar18;
+  *outReadsW = readFlag;
   return;
 }
 
