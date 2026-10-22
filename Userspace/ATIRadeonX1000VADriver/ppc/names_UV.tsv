@@ -1,0 +1,208 @@
+# local	FUNCTION	old	new	tier	evidence
+local	_AVACreateRenderer	param_1	outRenderer	CONFIRMED	*param_1 = the calloc(1,100) renderer record
+local	_AVACreateRenderer	param_2	driverInfo	INFERRED	[0],[1],[2],[3] copied into the 0x14-byte info block at renderer[3]; [1] is the display-mask word
+local	_AVACreateRenderer	param_3	rendererInfo	CONFIRMED	filled with version 0x1020000, flags|0x57 and the "ATIVADriver " name, exactly as _AVAGetRendererInfo does
+local	_AVACreateRenderer	puVar4	renderer	CONFIRMED	calloc(1,100) record: version word, function-pointer table at [4..0x16], info block at [3]
+local	_AVACreateRenderer	uVar3	status	CONFIRMED	0xfffffff9/0xfffffffd/0 returned
+local	_AVACreateRenderer	iVar5	infoBlock	CONFIRMED	calloc(1,0x14) stored in renderer[3]
+local	_AVACreateRenderer	uVar6	bit	CONFIRMED	loop 0..31 over the display-mask bits; highest set bit+1 stored in info[1]
+local	_AVACreateRenderer	puVar1	fnTableA	UNKNOWN	temporary holding PTR_FUN_* entries copied into the renderer function table
+local	_AVACreateRenderer	puVar2	fnTableB	UNKNOWN	temporary holding PTR_FUN_* entries copied into the renderer function table
+local	FUN_00002340	param_1	renderer	CONFIRMED	its [3] block, and the two globals, are freed, then the record itself
+local	FUN_00002340	uVar1	status	CONFIRMED	0xfffffff9 on NULL, else 0
+local	_AVACreateRendererDisplayExt	param_1	outExt	CONFIRMED	*param_1 = the calloc(1,0x1c) extension record
+local	_AVACreateRendererDisplayExt	puVar5	ext	CONFIRMED	calloc(1,0x1c) record, version 0x1020000, 4 function pointers at [2..5], saved in a global
+local	_AVACreateRendererDisplayExt	uVar4	status	CONFIRMED	0xfffffffd on alloc failure, else 0
+local	_AVACreateRendererDisplayExt	puVar1	fnTmp1	UNKNOWN	PTR_FUN_* temporary
+local	_AVACreateRendererDisplayExt	puVar2	fnTmp2	UNKNOWN	PTR_FUN_* temporary
+local	_AVACreateRendererDisplayExt	puVar3	fnTmp3	UNKNOWN	PTR_FUN_* temporary
+local	_AVACreateRendererDVDExt	param_1	outExt	CONFIRMED	*param_1 = the calloc(1,0x20) extension record
+local	_AVACreateRendererDVDExt	puVar4	ext	CONFIRMED	calloc(1,0x20) record, version 0x1020000, function pointers at [2..6], saved in a global
+local	_AVACreateRendererDVDExt	uVar3	status	CONFIRMED	0xfffffffd on alloc failure, else 0
+local	_AVACreateRendererDVDExt	puVar1	fnTmp1	UNKNOWN	PTR_FUN_* temporary
+local	_AVACreateRendererDVDExt	puVar2	fnTmp2	UNKNOWN	PTR_FUN_* temporary
+local	_AVAGetRendererInfo	param_1	rendererInfo	CONFIRMED	same info layout _AVACreateRenderer fills: version, flags|0x57, name string at +0x18
+local	FUN_00002570	param_1	renderer	CONFIRMED	its [3] block holds the display-mask word [0], display count [1] and the per-display IOKit service array [2]
+local	FUN_00002570	param_2	outContext	CONFIRMED	*param_2 = the new calloc(1,0x15408) context
+local	FUN_00002570	param_3	createInfo	INFERRED	[0] struct size (<6), [1] (stored ctx[0x16]), [2] CGDirectDisplayID, [3..5] width/height/flags copied to ctx[1..3]
+local	FUN_00002570	puVar5	ctx	CONFIRMED	calloc(1,0x15408) context: display id [0], connect [5], mapped windows, 5-entry tables
+local	FUN_00002570	puVar6	trackTable	UNKNOWN	ctx+0x157 region zeroed with memset(0x14eac); then walked with stride 1 for 5 entries
+local	FUN_00002570	uVar4	displayMask	CONFIRMED	_CGDisplayIDToOpenGLDisplayMask(createInfo[2]); must be a subset of the renderer mask
+local	FUN_00002570	uVar3	displayIndex	CONFIRMED	index of the first set mask bit; indexes the IOKit service array
+local	FUN_00002570	iVar2	status	CONFIRMED	result of IOServiceOpen / io_connect_method / IOConnectMapMemory calls
+local	FUN_00002570	puVar1	kernelTask	UNKNOWN	PTR_0000f1a0 : mach_task_self-style global passed to IOServiceOpen/IOConnectMapMemory
+local	FUN_00002570	local_38	outCount	CONFIRMED	in/out scalarO count for selector 1
+local	FUN_00002570	local_34	scalarIn0	CONFIRMED	local_34/local_30/local_2c are the 3-word structureI passed as &local_34 to selector 0
+local	FUN_00002570	local_30	scalarIn1	CONFIRMED	second word of that block
+local	FUN_00002570	local_2c	scalarIn2	CONFIRMED	third word of that block
+local	FUN_00002930	param_1	ctx	CONFIRMED	+0x14 is its IOConnect handle
+local	FUN_00002930	param_2	mapping	INFERRED	64-byte mapping record: [0] backing pointer, [10] kernel handle block
+local	FUN_00002930	param_3	freeBacking	INFERRED	nonzero: free(mapping[0])
+local	FUN_00002930	iVar1	handle	INFERRED	*mapping[10]: kernel handle released with selector 9
+local	FUN_000029c0	param_1	ctx	CONFIRMED	+0x14 IOConnect, +0x30/+0x34/+0x38 command-buffer last-header/write/limit pointers, +0x40/+0x44 mapped buffer
+local	FUN_000029c0	param_2	opcodeIndex	INFERRED	multiplied by 0x1000000 and added to 0x2b000000 to build the packet header
+local	FUN_000029c0	piVar4	writePtr	CONFIRMED	ctx+0x34 current write position
+local	FUN_000029c0	puVar2	lastHeader	CONFIRMED	ctx+0x30 previous packet header, its length field updated
+local	FUN_000029c0	iVar3	count	UNKNOWN	loop counter / mapped-buffer base
+local	FUN_000029c0	puVar1	kernelTask	UNKNOWN	PTR_0000f1a0 task global
+local	FUN_00002b70	param_1	ctx	CONFIRMED	freed at the end; +0x14 IOConnect closed
+local	FUN_00002b70	uVar2	status	CONFIRMED	0xfffffff9 on NULL, else 0
+local	FUN_00002b70	iVar3	cursor	INFERRED	loop counter, then pointer into the mapping-record array
+local	FUN_00002b70	puVar5	tableEntry	INFERRED	ctx+0x14430 table, stride 12 bytes, pointer freed each
+local	FUN_00002b70	bVar1	more	UNKNOWN	loop-continue flag
+local	FUN_00002b70	uVar4	mappingIndex	INFERRED	counts ctx[0x54] mapping records of 100 bytes
+local	FUN_00002c70	param_1	ctx	CONFIRMED	+0x14 IOConnect
+local	FUN_00002c70	param_3	slot	INFERRED	< 10000; indexes 8-byte entries at ctx+0x55c+0x56c
+local	FUN_00002c70	iVar1	entry	INFERRED	address of the slot entry
+local	FUN_00002c70	local_28	scalarOut	UNKNOWN	local_28[0] result count/value; local_28[1] outCount; local_28[2..] scalarI words
+local	FUN_00002c70	local_1c	scalarIn1	INFERRED	second scalarI word of selector 0x14
+local	FUN_00002d00	param_1	ctx	CONFIRMED	+0x14 IOConnect
+local	FUN_00002d00	param_3	slot	INFERRED	< 10000; indexes 8-byte entries at ctx+0x55c+0x56c
+local	FUN_00002d00	iVar1	entry	INFERRED	slot entry address, then selector status
+local	FUN_00002d00	local_28	scalarIn0	CONFIRMED	local_28/local_24 are the 2-word structureI passed as &local_28 to selector 0x13
+local	FUN_00002d00	local_24	scalarIn1	CONFIRMED	second word
+local	FUN_00002d80	param_1	ctx	CONFIRMED	+0x120 is the stored mode value
+local	FUN_00002d80	param_2	property	INFERRED	3 returns constant 4, 4 returns ctx+0x120
+local	FUN_00002d80	param_3	outValue	CONFIRMED	written in every path
+local	FUN_00002dc0	param_1	ctx	CONFIRMED	+0x120 stores the property value
+local	FUN_00002dc0	param_2	property	INFERRED	only 4 is settable
+local	FUN_00002dc0	param_3	value	INFERRED	stored at ctx+0x120; value 4 triggers FUN_0000bfc0
+local	FUN_00002dc0	uVar1	status	CONFIRMED	0xfffffff9 unless property==4
+local	FUN_00002e10	param_1	ctx	CONFIRMED	+0x120 is the stored mode value
+local	FUN_00002e10	param_2	property	INFERRED	3 returns constant 4, 4 returns ctx+0x120
+local	FUN_00002e10	param_3	outValue	CONFIRMED	written in every path
+local	FUN_00002e50	param_1	ctx	CONFIRMED	+0x14 IOConnect, +0x11c procamp flag bits, +0x120 value 4, +0x12c..+0x138 float attributes
+local	FUN_00002e50	param_2	attribute	INFERRED	switch selector: 4, 0x17..0x1c
+local	FUN_00002e50	param_3	value	CONFIRMED	float array read through *param_3 (0x1c reads four values)
+local	FUN_00002e50	fVar1	hue	INFERRED	ctx+300; case 0x17 clamps it to -pi..pi
+local	FUN_00002e50	fVar2	brightness	INFERRED	ctx+0x134; case 0x19 clamps it to -1..1
+local	FUN_00002e50	fVar3	newValue	CONFIRMED	value just read from the caller, clamped then stored
+local	FUN_00002e50	uVar4	flags	CONFIRMED	ctx+0x11c bit 0 / 1 / 2 set and cleared from the attribute state
+local	FUN_00002e50	uVar6	status	CONFIRMED	0 or 0xfffffffb
+local	FUN_00002e50	iVar5	kr	CONFIRMED	result of the _io_connect_method_* calls
+local	FUN_00002e50	local_148	outCount	CONFIRMED	in/out scalarO count
+local	FUN_00002e50	local_144	scalarIn0	CONFIRMED	local_144.. is the scalarI/structureI block passed as &local_144
+local	FUN_00002e50	local_140	scalarIn1	CONFIRMED	second word
+local	FUN_00002e50	local_13c	scalarIn2	CONFIRMED	third word
+local	FUN_00002e50	local_138	scalarIn3	CONFIRMED	fourth word
+local	FUN_00002e50	local_134	controlWord	INFERRED	ctx+0xa84 with 0x8000 / 0x80000 or-ed in
+local	FUN_00002e50	auStack_130	attributeBlock	CONFIRMED	0x100-byte structureO of selector 4
+local	FUN_00003350	param_1	ctx	CONFIRMED	+0xc stored in the record, +0x14 IOConnect, +0x20 flags
+local	FUN_00003350	param_2	surface	CONFIRMED	output descriptor: [0] data, [1] fourcc, [4] width, [5] height, [6] pitch, [9] flag, [10] record
+local	FUN_00003350	param_3	unused	UNKNOWN	never read
+local	FUN_00003350	param_4	width	CONFIRMED	stored in surface[4]; pitch = width*bytesPerPixel
+local	FUN_00003350	param_5	height	CONFIRMED	stored in surface[5]
+local	FUN_00003350	param_6	pixelFormat	CONFIRMED	fourcc: 0x20/8 depth, 'argb' 0x61726762, 'rgba' 0x72676261, '2vuy' 0x32767579, 'yuvs' 0x79757673, 'ar15' 0x61723135
+local	FUN_00003350	param_7	externalData	INFERRED	nonzero: caller-owned pixel data; zero: malloc(h*pitch+0x100)
+local	FUN_00003350	uVar4	record	CONFIRMED	calloc(1,0x34) kernel surface record; [9] bytesPerPixel [10] ... freed on failure
+local	FUN_00003350	uVar2	formatCode	INFERRED	hardware format 0xb / 0x14 / 0x15 stored at record+0x2c, then the return status
+local	FUN_00003350	bVar1	hasExternalData	CONFIRMED	param_7 != 0
+local	FUN_00003350	uVar7	bytesPerPixel	CONFIRMED	record+0x24; pitch = width*uVar7, row bytes divided by it
+local	FUN_00003350	uVar5	pitch	CONFIRMED	surface[6]
+local	FUN_00003350	uVar3	widthCopy	UNKNOWN	surface[4] reread
+local	FUN_00003350	iVar6	kr	CONFIRMED	result of selector 8
+local	FUN_00003350	local_48	outCount	CONFIRMED	scalarO count
+local	FUN_00003350	local_44	scalarIn0	CONFIRMED	local_44..local_3c are the scalarI block
+local	FUN_00003350	local_40	scalarIn1	CONFIRMED	data address aligned to 256
+local	FUN_00003350	local_3c	scalarIn2	CONFIRMED	height*pitch
+local	FUN_00003630	param_1	ctx	CONFIRMED	+0x54 surface count, +0x55c descriptor array, +0x814 surface records of 100 bytes
+local	FUN_00003630	param_2	surfaceDescs	INFERRED	array of pointers to caller descriptors ([0],[1],[3] read)
+local	FUN_00003630	param_3	count	CONFIRMED	must equal ctx[0x54]
+local	FUN_00003630	uVar3	status	CONFIRMED	0xfffffff9 on count mismatch, else 0
+local	FUN_00003630	iVar6	surfaceCount	CONFIRMED	ctx[0x54]
+local	FUN_00003630	iVar8	index	CONFIRMED	surface loop index / remaining counter
+local	FUN_00003630	iVar7	descCursor	UNKNOWN	iVar5-relative cursor, stride 4
+local	FUN_00003630	iVar5	descBase	UNKNOWN	ctx+0x55c
+local	FUN_00003630	iVar4	kr	INFERRED	result of FUN_00003350, then record cursor stride 0x40
+local	FUN_00003630	puVar2	desc	CONFIRMED	param_2[index]
+local	FUN_00003630	uVar1	alignedPitch	CONFIRMED	(pitch+0xff)&~0xff stored in the descriptor [6]
+local	FUN_000037b0	param_1	ctx	CONFIRMED	+0x54 count, +0x55c table, stride 0x40
+local	FUN_000037b0	param_2	outDescs	INFERRED	array of pointers receiving 4 words and word [7]
+local	FUN_000037b0	iVar7	entry	INFERRED	table cursor
+local	FUN_000037b0	uVar2	index	CONFIRMED	loop counter
+local	FUN_000037b0	puVar1	src0	UNKNOWN	first copied word
+local	FUN_000037b0	uVar8	word1	UNKNOWN	copied word
+local	FUN_000037b0	uVar6	word2	UNKNOWN	copied word
+local	FUN_000037b0	uVar4	word3	UNKNOWN	copied word
+local	FUN_000037b0	uVar3	word7	UNKNOWN	copied to +0x1c
+local	FUN_000037b0	iVar5	dest	UNKNOWN	current output descriptor
+local	FUN_00003830	param_1	ctx	CONFIRMED	+0x54 count, +0x55c table, stride 0x40
+local	FUN_00003830	param_2	outDescs	INFERRED	array of pointers receiving words at +0,+4,+8,+0xc,+0x18,+0x1c
+local	FUN_00003830	iVar7	entry	INFERRED	table cursor
+local	FUN_00003830	uVar9	index	CONFIRMED	loop counter
+local	FUN_00003830	puVar1	src0	UNKNOWN	first copied word
+local	FUN_00003830	uVar8	word1	UNKNOWN	copied word
+local	FUN_00003830	uVar6	word2	UNKNOWN	copied word
+local	FUN_00003830	uVar5	word3	UNKNOWN	copied word
+local	FUN_00003830	uVar4	word6	UNKNOWN	copied to +0x18
+local	FUN_00003830	uVar3	word7	UNKNOWN	copied to +0x1c
+local	FUN_00003830	iVar2	dest	UNKNOWN	current output descriptor
+local	FUN_000038c0	param_1	ctx	CONFIRMED	+0xac4 next slot id, +0x55c table of 8-byte slots
+local	FUN_000038c0	param_2	unused1	UNKNOWN	never read
+local	FUN_000038c0	param_3	unused2	UNKNOWN	never read
+local	FUN_000038c0	param_4	outSlot	CONFIRMED	receives {0, slotIndex}
+local	FUN_000038c0	uVar1	slotIndex	CONFIRMED	ctx[0xac4] before increment; modulus 10000
+local	FUN_00004280	param_1	ctx	CONFIRMED	+0xac4 next slot id, +0x55c table
+local	FUN_00004280	param_2	arg	UNKNOWN	forwarded to FUN_00009690 (empty)
+local	FUN_00004280	param_3	opcodeBase	INFERRED	(param_3+0xc)&0xff is the packet index passed on
+local	FUN_00004280	param_4	outSlot	CONFIRMED	receives {0, slotIndex}
+local	FUN_00004280	uVar1	packetIndex	INFERRED	(opcodeBase+0xc)&0xff
+local	FUN_00004280	uVar2	slotIndex	CONFIRMED	ctx[0xac4] before increment (mod 10000)
+local	FUN_00004a10	param_1	ctx	CONFIRMED	+0xac4 next slot id, +0x55c table
+local	FUN_00004a10	param_2	srcRect	INFERRED	int[5] record: id at [0], 4 more words copied to ctx+0x13dec table (stride 0x14)
+local	FUN_00004a10	param_3	dstRect	INFERRED	int[6] copied to ctx+0x13e50 table (stride 0x18)
+local	FUN_00004a10	param_4	outSlot	CONFIRMED	receives {0, slotIndex}
+local	FUN_00004a10	iVar6	table	UNKNOWN	ctx+0x55c
+local	FUN_00004a10	iVar2	entry	INFERRED	table entry address
+local	FUN_00004a10	uVar1	srcWord0	UNKNOWN	copied word
+local	FUN_00004a10	uVar5	srcWord2	UNKNOWN	copied word
+local	FUN_00004a10	uVar4	srcWord3	UNKNOWN	copied word
+local	FUN_00004a10	uVar3	slotIndex	CONFIRMED	ctx[0xac4] before increment
+local	FUN_000051f0	param_1	ctx	CONFIRMED	+0x5c record count, +0x1b0 and +0x218.. mapping records
+local	FUN_000051f0	uVar1	index	CONFIRMED	loop counter
+local	FUN_000051f0	iVar2	mapping	CONFIRMED	mapping record cursor, stride 100 bytes
+local	FUN_00005280	param_1	ctx	CONFIRMED	+0x14 IOConnect
+local	FUN_00005280	param_2	value	UNKNOWN	second scalar of selector 0x10
+local	FUN_00005280	uVar1	status	CONFIRMED	0xfffffffb / 0xfffffff9 / 0
+local	FUN_00005280	iVar2	kr	CONFIRMED	io_connect_method result; -0x11 and -0x32 are the mapped errors
+local	FUN_00005280	local_28	outCount	CONFIRMED	scalarO count
+local	FUN_00005280	local_24	scalarIn0	CONFIRMED	local_24/local_20 are the scalarI block, first word 0x92
+local	FUN_00005280	local_20	scalarIn1	CONFIRMED	param_2
+local	FUN_00008800	param_1	ctx	CONFIRMED	+0x15164 pointer, word before it cleared
+local	FUN_000096a0	param_1	cmdPtr	CONFIRMED	command-stream write pointer; returns the advanced pointer
+local	FUN_00009930	param_1	cmdPtr	CONFIRMED	command-stream write pointer; returns the advanced pointer
+local	FUN_00009930	param_2	registerHeader	INFERRED	packet header register bits or-ed with 0x8000
+local	FUN_00009930	param_3	data	CONFIRMED	source dwords
+local	FUN_00009930	param_4	count	CONFIRMED	dword count; header holds count-1 in the high half
+local	FUN_00009930	uVar1	word	CONFIRMED	dword being copied
+local	FUN_00009980	param_1	cmdPtr	CONFIRMED	command-stream write pointer
+local	FUN_00009980	param_2	registerValue	INFERRED	written after header 0x1094
+local	FUN_00009980	param_3	count	INFERRED	forwarded as count to FUN_00009930
+local	FUN_00009980	param_4	data	INFERRED	forwarded as data to FUN_00009930
+local	FUN_00009980	uVar1	nextPtr	CONFIRMED	returned advanced pointer
+local	FUN_0000bf20	param_1	ctx	CONFIRMED	+0x144 data cache line size
+local	FUN_0000bf20	param_2	address	CONFIRMED	start of the range
+local	FUN_0000bf20	param_3	length	CONFIRMED	byte length
+local	FUN_0000bf20	param_4	unused1	UNKNOWN	never read
+local	FUN_0000bf20	param_5	unused2	UNKNOWN	never read
+local	FUN_0000bf20	param_6	unused3	UNKNOWN	never read
+local	FUN_0000bf20	param_7	unused4	UNKNOWN	never read
+local	FUN_0000bf20	param_8	unused5	UNKNOWN	never read
+local	FUN_0000bf20	iVar3	lineSize	CONFIRMED	ctx[0x144]
+local	FUN_0000bf20	iVar1	offset	CONFIRMED	byte offset into the range, stepped by lineSize
+local	FUN_0000bf20	iVar2	span	CONFIRMED	bytes to process
+local	FUN_0000bf70	param_1	ctx	CONFIRMED	+0x144 data cache line size
+local	FUN_0000bf70	param_2	address	CONFIRMED	start of the range
+local	FUN_0000bf70	param_3	length	CONFIRMED	byte length
+local	FUN_0000bf70	param_4	unused1	UNKNOWN	never read
+local	FUN_0000bf70	param_5	unused2	UNKNOWN	never read
+local	FUN_0000bf70	param_6	unused3	UNKNOWN	never read
+local	FUN_0000bf70	param_7	unused4	UNKNOWN	never read
+local	FUN_0000bf70	param_8	unused5	UNKNOWN	never read
+local	FUN_0000bf70	iVar3	lineSize	CONFIRMED	ctx[0x144]
+local	FUN_0000bf70	iVar1	offset	CONFIRMED	byte offset into the range, stepped by lineSize
+local	FUN_0000bf70	iVar2	span	CONFIRMED	bytes to process
+local	FUN_0000caa0	param_1	ctx	CONFIRMED	+0x120 mode, +0xac4 slot id, +0x40 mapped buffer
+local	FUN_0000caa0	param_2	arg1	UNKNOWN	forwarded to FUN_0000c4b0
+local	FUN_0000caa0	param_3	arg2	UNKNOWN	forwarded to FUN_0000c4b0
+local	FUN_0000caa0	param_4	arg3	UNKNOWN	forwarded to FUN_0000c4b0
