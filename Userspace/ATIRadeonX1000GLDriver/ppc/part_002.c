@@ -10141,7 +10141,7 @@ LAB_00018700:
 }
 
 /* FUN_00018a40 @ 0x18a40 (3636 bytes) */
-int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param_8, param_9)
+int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTransfer, transferMode)
   int ctx;
   float *rasterPos;
   uint width;
@@ -10149,61 +10149,78 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   int format;
   undefined4 pixelType;
   int pixels;
-  int param_8;
-  uint param_9;
+  int rawTransfer;
+  uint transferMode;
 {
+  uint tileRow;
+  uint tileRows;
+  uint tileHeight;
+  undefined4 stateBytes;
+  undefined4 convResult;
+  float zoomYScaledB;
+  float zoomXScaled;
+  float zoomXScaledB;
+  int tileX;
+  int xDir;
+  int tileRowOffset;
+  int bytesPerPixel;
+  uint windowY;
+  uint scaledHeight;
+  uint tileWidth;
+  uint heightCopy;
+  uint widthCopy;
   int engineState;
-  bool bVar1;
-  bool bVar2;
+  bool skipPixelStore;
+  bool notStencil;
   float fVar3;
-  float fVar4;
+  float rasterXScaled;
   float fVar5;
-  float fVar6;
-  float fVar7;
-  undefined *puVar8;
-  uint uVar9;
+  float rasterXRounded;
+  float zoomYScaled;
+  undefined *unpackState;
+  uint zoomXFlag;
   int iVar10;
   int iVar11;
-  undefined4 uVar12;
-  uint uVar13;
-  int iVar14;
+  undefined4 typeArg;
+  uint scaledWidth;
+  int convBuffer;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
-  int iVar15;
+  int tileRowStart;
   undefined1 *puVar16;
   undefined1 *puVar17;
   int *piVar18;
-  uint uVar19;
-  uint uVar20;
+  uint pathFlags;
+  uint pathFlagsB;
   undefined1 *puVar21;
-  char *pcVar22;
+  char *scratchR9;
   int iVar23;
-  uint uVar24;
+  uint fullColumns;
   int *piVar25;
-  char *pcVar26;
-  uint uVar27;
-  int iVar28;
-  uint uVar29;
-  uint uVar30;
-  int iVar31;
-  uint uVar32;
+  char *scratchR10;
+  uint fullRows;
+  int formatArg;
+  uint heightArg;
+  uint tileColumns;
+  int convRowBytes;
+  uint tileColumn;
   int ctxState;
   float *pfStack0000001c;
   undefined1 auStack_428 [4];
-  int local_424;
+  int srcSkipBytes;
   int local_420;
-  int local_41c;
+  int srcRowBytes;
   undefined1 auStack_418 [4];
   undefined1 auStack_414 [4];
-  int local_410;
-  int local_40c;
-  undefined4 local_408;
-  undefined4 local_404;
-  undefined4 local_400;
-  uint local_3fc;
-  undefined4 local_3f8;
-  uint local_3f4;
-  uint local_3f0;
+  int procPixels;
+  int procPitch;
+  undefined4 procChannelFormat;
+  undefined4 procChannelSize;
+  undefined4 procMode;
+  uint procFlags;
+  undefined4 procMask;
+  uint procWidth;
+  uint procHeight;
   float local_3ec;
   float local_3e8;
   uint local_3e4;
@@ -10219,47 +10236,47 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   uint local_3bc;
   undefined4 local_3b8;
   undefined1 local_3b4;
-  float local_3b0;
-  float local_3ac;
-  uint local_144;
-  longlong local_138;
-  longlong local_130;
-  longlong local_128;
-  longlong local_120;
-  longlong local_118;
-  longlong local_110;
-  longlong local_108;
-  longlong local_100;
-  longlong local_f8;
-  longlong local_f0;
-  longlong local_e8;
-  longlong local_e0;
-  undefined4 local_d8;
-  uint uStack_d4;
-  longlong local_d0;
-  longlong local_c8;
-  undefined4 local_c0;
-  uint uStack_bc;
-  longlong local_b8;
-  longlong local_b0;
-  longlong local_a8;
-  longlong local_a0;
-  longlong local_98;
-  undefined4 local_90;
-  uint uStack_8c;
-  longlong local_88;
-  undefined4 local_80;
-  uint uStack_7c;
-  undefined4 local_78;
-  uint uStack_74;
-  undefined4 local_70;
-  uint uStack_6c;
-  int local_68;
-  uint local_64;
+  float procZoomX;
+  float procZoomY;
+  uint procZoomFlags;
+  longlong fctiwzSlot0;
+  longlong fctiwzSlot1;
+  longlong fctiwzSlot2;
+  longlong fctiwzSlot3;
+  longlong fctiwzSlot4;
+  longlong fctiwzSlot5;
+  longlong fctiwzSlot6;
+  longlong fctiwzSlot7;
+  longlong fctiwzSlot8;
+  longlong fctiwzSlot9;
+  longlong fctiwzSlot10;
+  longlong fctiwzSlot11;
+  undefined4 windowYI2dHiB;
+  uint windowYI2dLoB;
+  longlong fctiwzSlot12;
+  longlong fctiwzSlot13;
+  undefined4 windowYI2dHi;
+  uint windowYI2dLo;
+  longlong fctiwzSlot14;
+  longlong fctiwzSlot15;
+  longlong fctiwzSlot16;
+  longlong fctiwzSlot17;
+  longlong fctiwzSlot18;
+  undefined4 rasterXTruncI2dHi;
+  uint rasterXTruncI2dLo;
+  longlong fctiwzSlot19;
+  undefined4 rasterYTruncI2dHi;
+  uint rasterYTruncI2dLo;
+  undefined4 widthI2dHi;
+  uint widthI2dLo;
+  undefined4 heightI2dHi;
+  uint heightI2dLo;
+  int yDir;
+  uint transferMode8;
   
   *(undefined1 *)(ctx + 0x2a5e) = 1;
   ctxState = *(int *)(ctx + GLD_engineState);
-  local_64 = param_9 & 0xff;
+  transferMode8 = transferMode & 0xff;
   if ((((unsigned char *)0x00002d84)[ctxState] == '\0') ||
      (((((*(int *)(((unsigned char *)0x00002d68) + ctxState) == 0x10000 &&
          (*(int *)(((unsigned char *)0x00002d6c) + ctxState) == 0x10000)) &&
@@ -10267,65 +10284,65 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
        (((*(short *)(((unsigned char *)0x00002d80) + ctxState) != -0x7ff9 &&
          (*(short *)(((unsigned char *)0x00002d82) + ctxState) != -0x7ff5)) &&
         (*(short *)(((unsigned char *)0x00002d82) + ctxState) != -0x7ff9)))) || (((unsigned char *)0x00002e33)[ctxState] != '\0')))) {
-    uVar19 = *(uint *)(ctx + 0x26b0) & 0xfffffffd;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = *(uint *)(ctx + 0x26b0) & 0xfffffffd;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   else {
-    uVar19 = *(uint *)(ctx + 0x26b0) | 2;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = *(uint *)(ctx + 0x26b0) | 2;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   if (((unsigned char *)0x00002d66)[ctxState] == '\0') {
-    uVar19 = uVar19 & 0xfffffffe;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags & 0xfffffffe;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   else {
-    uVar19 = uVar19 | 1;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags | 1;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   if ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xcff1) == 0) {
-    uVar19 = uVar19 & 0xfffff7ff;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags & 0xfffff7ff;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   else {
-    uVar19 = uVar19 | 0x800;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags | 0x800;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   if ((((unsigned char *)0x00002ddc)[ctxState] == '\0') || ((*(uint *)(ctx + GLD_renderFlags) & 0xf) != 3)) {
-    uVar19 = uVar19 & 0xffffffdf;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags & 0xffffffdf;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   else {
-    uVar19 = uVar19 | 0x20;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags | 0x20;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   if ((((*(uint *)(((unsigned char *)0x000031c0) + ctxState) & 1) == 0) || ((*(uint *)(ctx + GLD_renderFlags) & 0x80) == 0))
      || ((*(short *)(((unsigned char *)0x000031a0) + ctxState) == 0x207 &&
          (*(int *)(((unsigned char *)0x000031a4) + ctxState) == 0x1e001e00)))) {
-    uVar19 = uVar19 & 0xfffeffff;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags & 0xfffeffff;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   else {
-    uVar19 = uVar19 | 0x10000;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags | 0x10000;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   if ((((unsigned char *)0x00002dc8)[ctxState] == '\0') || ((*(uint *)(ctx + GLD_renderFlags) & 0x40) == 0)) {
-    uVar19 = uVar19 & 0xffffffef;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags & 0xffffffef;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   else {
-    uVar19 = uVar19 | 0x10;
-    *(uint *)(ctx + 0x26b0) = uVar19;
+    pathFlags = pathFlags | 0x10;
+    *(uint *)(ctx + 0x26b0) = pathFlags;
   }
   if (((unsigned char *)0x00002e0a)[ctxState] == '\0') {
-    *(uint *)(ctx + 0x26b0) = uVar19 & 0xffffffbf;
+    *(uint *)(ctx + 0x26b0) = pathFlags & 0xffffffbf;
   }
   else {
-    *(uint *)(ctx + 0x26b0) = uVar19 | 0x40;
+    *(uint *)(ctx + 0x26b0) = pathFlags | 0x40;
   }
-  uVar19 = width;
-  uVar29 = height;
-  iVar28 = format;
-  uVar12 = pixelType;
+  widthCopy = width;
+  heightArg = height;
+  formatArg = format;
+  typeArg = pixelType;
   pfStack0000001c = rasterPos;
   if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (iVar11 = FUN_000a4760(ctx), iVar11 == 0)) &&
          ((*(int *)(ctx + GLD_unitObject1) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 1)))) &&
@@ -10335,27 +10352,27 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
        ((*(int *)(ctx + GLD_unitObject5) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 5)))))) &&
      (((*(int *)(ctx + GLD_unitObject6) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 6)) &&
       ((*(int *)(ctx + GLD_unitObject7) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 7)))))) {
-    uVar20 = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
-    *(uint *)(ctx + 0x26b0) = uVar20;
+    pathFlagsB = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
+    *(uint *)(ctx + 0x26b0) = pathFlagsB;
   }
   else {
-    uVar20 = *(uint *)(ctx + 0x26b0) | 0x20000;
-    *(uint *)(ctx + 0x26b0) = uVar20;
+    pathFlagsB = *(uint *)(ctx + 0x26b0) | 0x20000;
+    *(uint *)(ctx + 0x26b0) = pathFlagsB;
   }
   if (((unsigned char *)0x00002e33)[ctxState] == '\0') {
-    uVar20 = uVar20 & 0xfffffdff;
-    *(uint *)(ctx + 0x26b0) = uVar20;
+    pathFlagsB = pathFlagsB & 0xfffffdff;
+    *(uint *)(ctx + 0x26b0) = pathFlagsB;
   }
   else {
-    uVar20 = uVar20 | 0x200;
-    *(uint *)(ctx + 0x26b0) = uVar20;
+    pathFlagsB = pathFlagsB | 0x200;
+    *(uint *)(ctx + 0x26b0) = pathFlagsB;
   }
   if ((((((unsigned char *)0x00002e43)[ctxState] == '\0') || (((unsigned char *)0x00002e40)[ctxState] == '\0')) ||
       (((unsigned char *)0x00002e41)[ctxState] == '\0')) || (((unsigned char *)0x00002e42)[ctxState] == '\0')) {
-    *(uint *)(ctx + 0x26b0) = uVar20 | 0x400;
+    *(uint *)(ctx + 0x26b0) = pathFlagsB | 0x400;
   }
   else {
-    *(uint *)(ctx + 0x26b0) = uVar20 & 0xfffffbff;
+    *(uint *)(ctx + 0x26b0) = pathFlagsB & 0xfffffbff;
   }
   if (width == 0) {
     return;
@@ -10384,346 +10401,346 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
       return;
     }
   }
-  bVar1 = local_64 != 0;
-  if (((!bVar1) && ((*(uint *)(ctx + 0x26b0) & 0x30e73) == 0)) &&
+  skipPixelStore = transferMode8 != 0;
+  if (((!skipPixelStore) && ((*(uint *)(ctx + 0x26b0) & 0x30e73) == 0)) &&
      ((1 < format - 0x1901U &&
       (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0 &&
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)))))) {
-    FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),uVar19,uVar29,iVar28,uVar12,ctxState);
+    FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),widthCopy,heightArg,formatArg,typeArg,ctxState);
   }
   local_3e8 = 0.0;
-  local_3fc = 0;
-  local_3f8 = 0x7ffff;
+  procFlags = 0;
+  procMask = 0x7ffff;
   local_3ec = 0.0;
-  puVar8 = (undefined *)0x0;
-  if (param_8 == 0) {
+  unpackState = (undefined *)0x0;
+  if (rawTransfer == 0) {
     ctxState = *(int *)(ctx + GLD_engineState);
-    puVar8 = ((unsigned char *)0x00002e6c) + ctxState;
-    local_3fc = (uint)(((unsigned char *)0x00002e84)[ctxState] != '\0');
+    unpackState = ((unsigned char *)0x00002e6c) + ctxState;
+    procFlags = (uint)(((unsigned char *)0x00002e84)[ctxState] != '\0');
     if (((unsigned char *)0x00002e85)[ctxState] != '\0') {
-      local_3fc = local_3fc | 4;
+      procFlags = procFlags | 4;
     }
   }
-  piVar18 = &local_41c;
+  piVar18 = &srcRowBytes;
   puVar21 = auStack_428;
-  piVar25 = &local_424;
-  bVar2 = format != 0x1901;
-  uVar19 = height;
-  ((int (*)())FUN_0000a6e0)(ctx,format,pixelType,width,height,piVar18,puVar21,piVar25,puVar8);
+  piVar25 = &srcSkipBytes;
+  notStencil = format != 0x1901;
+  heightCopy = height;
+  ((int (*)())FUN_0000a6e0)(ctx,format,pixelType,width,height,piVar18,puVar21,piVar25,unpackState);
   ((int (*)())FUN_0000a3f0)(format,pixelType);
   puVar16 = auStack_418;
   puVar17 = auStack_414;
-  uVar12 = _glgConvertType(format,pixelType,puVar16,puVar17,uVar19,piVar18,puVar21,piVar25);
-  if (bVar2) {
+  convResult = _glgConvertType(format,pixelType,puVar16,puVar17,heightCopy,piVar18,puVar21,piVar25);
+  if (notStencil) {
     if (format == 0x1902) {
-      local_408 = 0xd;
-      local_404 = 7;
+      procChannelFormat = 0xd;
+      procChannelSize = 7;
     }
     else {
-      local_408 = 6;
-      local_404 = 0x11;
+      procChannelFormat = 6;
+      procChannelSize = 0x11;
     }
   }
   else {
-    local_408 = 0xe;
-    local_404 = 0;
+    procChannelFormat = 0xe;
+    procChannelSize = 0;
   }
   local_3ec = *pfStack0000001c;
-  local_400 = 2;
-  fVar4 = local_3ec * *(float *)(ctx + 0x2a54);
-  fVar6 = fVar4 + 0.5;
-  if (0.0 <= fVar6) {
-    ctxState = (int)fVar6;
-    local_130 = (longlong)ctxState;
+  procMode = 2;
+  rasterXScaled = local_3ec * *(float *)(ctx + 0x2a54);
+  rasterXRounded = rasterXScaled + 0.5;
+  if (0.0 <= rasterXRounded) {
+    ctxState = (int)rasterXRounded;
+    fctiwzSlot1 = (longlong)ctxState;
   }
   else {
-    ctxState = (int)(fVar6 - 0.999975);
-    local_138 = (longlong)ctxState;
+    ctxState = (int)(rasterXRounded - 0.999975);
+    fctiwzSlot0 = (longlong)ctxState;
   }
   if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
     fVar3 = *(float *)(ctx + 0x2a58);
     local_3e8 = pfStack0000001c[1];
     fVar5 = local_3e8 * fVar3 + 0.5;
-    pcVar26 = (char *)pfStack0000001c;
+    scratchR10 = (char *)pfStack0000001c;
     if (0.0 <= fVar5) {
-      uVar29 = (uint)(int)fVar5;
-      local_110 = (longlong)(int)uVar29;
+      windowY = (uint)(int)fVar5;
+      fctiwzSlot5 = (longlong)(int)windowY;
     }
     else {
-      uVar29 = (uint)(int)(fVar5 - 0.999975);
-      local_118 = (longlong)(int)uVar29;
+      windowY = (uint)(int)(fVar5 - 0.999975);
+      fctiwzSlot4 = (longlong)(int)windowY;
     }
   }
   else {
     fVar3 = *(float *)(ctx + 0x2a58);
     local_3e8 = pfStack0000001c[1];
     fVar5 = local_3e8 * fVar3 - 0.5;
-    pcVar26 = "ret_logicalnz ";
+    scratchR10 = "ret_logicalnz ";
     if (0.0 <= fVar5) {
-      uVar29 = (uint)(int)fVar5;
-      local_120 = (longlong)(int)uVar29;
+      windowY = (uint)(int)fVar5;
+      fctiwzSlot3 = (longlong)(int)windowY;
     }
     else {
-      uVar29 = (uint)(int)(fVar5 + 0.999975);
-      local_128 = (longlong)(int)uVar29;
+      windowY = (uint)(int)(fVar5 + 0.999975);
+      fctiwzSlot2 = (longlong)(int)windowY;
     }
   }
-  fVar7 = fVar3 * *(float *)(((unsigned char *)0x00002e4c) + *(int *)(ctx + GLD_engineState));
-  fVar5 = *(float *)(ctx + 0x2a54) * *(float *)(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState));
-  if (bVar2) {
-    iVar28 = 4;
+  zoomYScaled = fVar3 * *(float *)(((unsigned char *)0x00002e4c) + *(int *)(ctx + GLD_engineState));
+  zoomXScaled = *(float *)(ctx + 0x2a54) * *(float *)(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState));
+  if (notStencil) {
+    bytesPerPixel = 4;
   }
   else {
-    iVar28 = 1;
+    bytesPerPixel = 1;
   }
-  pcVar22 = "ret_logicalnz ";
-  if ((fVar5 == 1.0) && (fVar7 == 1.0)) {
-    iVar31 = iVar28 * width;
+  scratchR9 = "ret_logicalnz ";
+  if ((zoomXScaled == 1.0) && (zoomYScaled == 1.0)) {
+    convRowBytes = bytesPerPixel * width;
     local_3e8 = 0.0;
     local_3ec = 0.0;
-    iVar14 = height * iVar31;
-    iVar11 = 1;
-    local_68 = 1;
-    uVar13 = width;
-    uVar20 = height;
+    convBuffer = height * convRowBytes;
+    xDir = 1;
+    yDir = 1;
+    scaledWidth = width;
+    scaledHeight = height;
     goto LAB_000194f4;
   }
-  pcVar26 = "ret_logicalnz ";
+  scratchR10 = "ret_logicalnz ";
   fVar3 = fVar3 * local_3e8;
-  if (fVar5 < 0.0) {
-    fVar4 = fVar4 - 0.5;
-    if (0.0 <= fVar4) {
-      ctxState = (int)fVar4;
-      local_f0 = (longlong)ctxState;
-      iVar11 = -1;
+  if (zoomXScaled < 0.0) {
+    rasterXScaled = rasterXScaled - 0.5;
+    if (0.0 <= rasterXScaled) {
+      ctxState = (int)rasterXScaled;
+      fctiwzSlot9 = (longlong)ctxState;
+      xDir = -1;
     }
     else {
-      iVar11 = -1;
-      ctxState = (int)(fVar4 + 0.999975);
-      local_f8 = (longlong)ctxState;
+      xDir = -1;
+      ctxState = (int)(rasterXScaled + 0.999975);
+      fctiwzSlot8 = (longlong)ctxState;
     }
   }
-  else if (0.0 <= fVar6) {
-    ctxState = (int)fVar6;
-    local_100 = (longlong)ctxState;
-    iVar11 = 1;
+  else if (0.0 <= rasterXRounded) {
+    ctxState = (int)rasterXRounded;
+    fctiwzSlot7 = (longlong)ctxState;
+    xDir = 1;
   }
   else {
-    iVar11 = 1;
-    ctxState = (int)(fVar6 + 0.999975);
-    local_108 = (longlong)ctxState;
+    xDir = 1;
+    ctxState = (int)(rasterXRounded + 0.999975);
+    fctiwzSlot6 = (longlong)ctxState;
   }
   if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
-    pcVar22 = "ret_logicalnz ";
-    if (fVar7 < 0.0) {
+    scratchR9 = "ret_logicalnz ";
+    if (zoomYScaled < 0.0) {
       fVar3 = fVar3 - 0.5;
       if (0.0 <= fVar3) {
-        uVar29 = (uint)(int)fVar3;
-        local_a0 = (longlong)(int)uVar29;
-        pcVar26 = (char *)((int)((unsigned char *)0x0) + 1);
-        iVar11 = -1;
-        local_68 = 1;
+        windowY = (uint)(int)fVar3;
+        fctiwzSlot17 = (longlong)(int)windowY;
+        scratchR10 = (char *)((int)((unsigned char *)0x0) + 1);
+        xDir = -1;
+        yDir = 1;
       }
       else {
-        pcVar22 = (char *)0x1;
-        iVar11 = -1;
-        local_68 = 1;
-        uVar29 = (uint)(int)(fVar3 + 0.999975);
-        local_a8 = (longlong)(int)uVar29;
+        scratchR9 = (char *)0x1;
+        xDir = -1;
+        yDir = 1;
+        windowY = (uint)(int)(fVar3 + 0.999975);
+        fctiwzSlot16 = (longlong)(int)windowY;
       }
     }
     else {
-      pcVar26 = "ret_logicalnz ";
+      scratchR10 = "ret_logicalnz ";
       fVar3 = fVar3 + 0.5;
       if (0.0 <= fVar3) {
-        uVar29 = (uint)(int)fVar3;
-        local_b0 = (longlong)(int)uVar29;
-        local_68 = 1;
+        windowY = (uint)(int)fVar3;
+        fctiwzSlot15 = (longlong)(int)windowY;
+        yDir = 1;
       }
       else {
-        local_68 = 1;
-        uVar29 = (uint)(int)(fVar3 + 0.999975);
-        local_b8 = (longlong)(int)uVar29;
+        yDir = 1;
+        windowY = (uint)(int)(fVar3 + 0.999975);
+        fctiwzSlot14 = (longlong)(int)windowY;
       }
     }
   }
-  else if (fVar7 < 0.0) {
-    pcVar22 = "ret_logicalnz ";
+  else if (zoomYScaled < 0.0) {
+    scratchR9 = "ret_logicalnz ";
     fVar3 = fVar3 + 0.5;
     if (0.0 <= fVar3) {
-      uVar29 = (uint)(int)fVar3;
-      local_c8 = (longlong)(int)uVar29;
+      windowY = (uint)(int)fVar3;
+      fctiwzSlot13 = (longlong)(int)windowY;
     }
     else {
-      uVar29 = (uint)(int)(fVar3 + 0.999975);
-      local_d0 = (longlong)(int)uVar29;
+      windowY = (uint)(int)(fVar3 + 0.999975);
+      fctiwzSlot12 = (longlong)(int)windowY;
     }
-    uStack_bc = uVar29 ^ 0x80000000;
-    pcVar26 = (char *)0xffffffff;
-    local_c0 = 0x43300000;
-    local_68 = -1;
-    if (fVar3 - (float)((double)CONCAT44(0x43300000,uStack_bc) - 4503601774854144.0) == 0.0)
+    windowYI2dLo = windowY ^ 0x80000000;
+    scratchR10 = (char *)0xffffffff;
+    windowYI2dHi = 0x43300000;
+    yDir = -1;
+    if (fVar3 - (float)((double)CONCAT44(0x43300000,windowYI2dLo) - 4503601774854144.0) == 0.0)
     goto LAB_0001931c;
   }
   else {
-    pcVar22 = "ret_logicalnz ";
+    scratchR9 = "ret_logicalnz ";
     fVar3 = fVar3 - 0.5;
     if (0.0 <= fVar3) {
-      uVar29 = (uint)(int)fVar3;
-      local_e0 = (longlong)(int)uVar29;
+      windowY = (uint)(int)fVar3;
+      fctiwzSlot11 = (longlong)(int)windowY;
     }
     else {
-      uVar29 = (uint)(int)(fVar3 + 0.999975);
-      local_e8 = (longlong)(int)uVar29;
+      windowY = (uint)(int)(fVar3 + 0.999975);
+      fctiwzSlot10 = (longlong)(int)windowY;
     }
-    uStack_d4 = uVar29 ^ 0x80000000;
-    pcVar26 = "ret_logicalnz ";
-    local_d8 = 0x43300000;
-    local_68 = 1;
-    if (((float)((double)CONCAT44(0x43300000,uStack_d4) - 4503601774854144.0) - fVar3) + 1.0 == 1.0)
+    windowYI2dLoB = windowY ^ 0x80000000;
+    scratchR10 = "ret_logicalnz ";
+    windowYI2dHiB = 0x43300000;
+    yDir = 1;
+    if (((float)((double)CONCAT44(0x43300000,windowYI2dLoB) - 4503601774854144.0) - fVar3) + 1.0 == 1.0)
     {
 LAB_0001931c:
-      pcVar22 = "ret_logicalnz ";
-      uVar29 = uVar29 - 1;
+      scratchR9 = "ret_logicalnz ";
+      windowY = windowY - 1;
     }
   }
-  local_98 = (longlong)(int)local_3ec;
-  local_88 = (longlong)(int)local_3e8;
-  uStack_74 = width ^ 0x80000000;
-  local_90 = 0x43300000;
-  local_78 = 0x43300000;
-  local_80 = 0x43300000;
-  uStack_8c = (int)local_3ec ^ 0x80000000;
-  uStack_7c = (int)local_3e8 ^ 0x80000000;
-  local_3ec = local_3ec - (float)((double)CONCAT44(0x43300000,uStack_8c) - 4503601774854144.0);
-  local_3e8 = local_3e8 - (float)((double)CONCAT44(0x43300000,uStack_7c) - 4503601774854144.0);
-  uVar13 = _glgPixelCenters(uVar12,extraout_r4,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26);
-  uStack_6c = height ^ 0x80000000;
-  local_70 = 0x43300000;
-  iVar31 = iVar28 * uVar13;
-  uVar20 = _glgPixelCenters(uVar13,extraout_r4_00,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26);
-  iVar14 = uVar20 * iVar31;
+  fctiwzSlot18 = (longlong)(int)local_3ec;
+  fctiwzSlot19 = (longlong)(int)local_3e8;
+  widthI2dLo = width ^ 0x80000000;
+  rasterXTruncI2dHi = 0x43300000;
+  widthI2dHi = 0x43300000;
+  rasterYTruncI2dHi = 0x43300000;
+  rasterXTruncI2dLo = (int)local_3ec ^ 0x80000000;
+  rasterYTruncI2dLo = (int)local_3e8 ^ 0x80000000;
+  local_3ec = local_3ec - (float)((double)CONCAT44(0x43300000,rasterXTruncI2dLo) - 4503601774854144.0);
+  local_3e8 = local_3e8 - (float)((double)CONCAT44(0x43300000,rasterYTruncI2dLo) - 4503601774854144.0);
+  scaledWidth = _glgPixelCenters(convResult,extraout_r4,puVar16,puVar17,heightCopy,piVar18,scratchR9,scratchR10);
+  heightI2dLo = height ^ 0x80000000;
+  heightI2dHi = 0x43300000;
+  convRowBytes = bytesPerPixel * scaledWidth;
+  scaledHeight = _glgPixelCenters(scaledWidth,extraout_r4_00,puVar16,puVar17,heightCopy,piVar18,scratchR9,scratchR10);
+  convBuffer = scaledHeight * convRowBytes;
 LAB_000194f4:
-  iVar14 = _malloc(iVar14);
-  if (iVar14 != 0) {
+  convBuffer = _malloc(convBuffer);
+  if (convBuffer != 0) {
     local_3b4 = 1;
-    local_3f0 = height;
-    local_3f4 = width;
-    local_420 = pixels + local_424;
-    local_410 = iVar14;
-    local_40c = iVar31;
-    if (bVar1) {
-      _glgProcessPixels(0,&local_420,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26);
+    procHeight = height;
+    procWidth = width;
+    local_420 = pixels + srcSkipBytes;
+    procPixels = convBuffer;
+    procPitch = convRowBytes;
+    if (skipPixelStore) {
+      _glgProcessPixels(0,&local_420,puVar16,puVar17,heightCopy,piVar18,scratchR9,scratchR10);
     }
     else {
       engineState = *(int *)(ctx + GLD_engineState);
       if (((((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 0x1ff) != 0) ||
-           ((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xff0000) != 0)) && (bVar2)) && (format != 0x1902)
+           ((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xff0000) != 0)) && (notStencil)) && (format != 0x1902)
          ) {
         if ((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 2) == 0) {
           if (((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 4) != 0) &&
              (*(short *)(((unsigned char *)0x00002fe8) + engineState) == -0x7fea)) {
-            uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002ff4) + engineState)) + 1;
-            uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002ff0) + engineState)) + 1;
+            scaledHeight = (scaledHeight - *(int *)(((unsigned char *)0x00002ff4) + engineState)) + 1;
+            scaledWidth = (scaledWidth - *(int *)(((unsigned char *)0x00002ff0) + engineState)) + 1;
           }
         }
         else if (*(short *)(((unsigned char *)0x00002fa8) + engineState) == -0x7fea) {
-          uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002fb4) + engineState)) + 1;
-          uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002fb0) + engineState)) + 1;
+          scaledHeight = (scaledHeight - *(int *)(((unsigned char *)0x00002fb4) + engineState)) + 1;
+          scaledWidth = (scaledWidth - *(int *)(((unsigned char *)0x00002fb0) + engineState)) + 1;
         }
-        pcVar26 = *(char **)(ctx + GLD_engineObjects);
-        iVar23 = *(int *)((int)*(float *)((int)pcVar26 + 0x140) + 0x30);
+        scratchR10 = *(char **)(ctx + GLD_engineObjects);
+        iVar23 = *(int *)((int)*(float *)((int)scratchR10 + 0x140) + 0x30);
         local_3e4 = (uint)*(ushort *)(iVar23 + 0x98);
         local_3e0 = (uint)*(ushort *)(iVar23 + 0x9a);
         local_3dc = (uint)*(ushort *)(iVar23 + 0x8c);
         local_3d8 = *(undefined4 *)(iVar23 + 0x9c);
-        iVar23 = *(int *)((int)*(float *)((int)pcVar26 + 0x148) + 0x30);
+        iVar23 = *(int *)((int)*(float *)((int)scratchR10 + 0x148) + 0x30);
         local_3d4 = (uint)*(ushort *)(iVar23 + 0x98);
         local_3d0 = (uint)*(ushort *)(iVar23 + 0x9a);
         local_3cc = (uint)*(ushort *)(iVar23 + 0x8c);
         local_3c8 = *(undefined4 *)(iVar23 + 0x9c);
-        iVar23 = *(int *)((int)*(float *)((int)pcVar26 + 0x144) + 0x30);
+        iVar23 = *(int *)((int)*(float *)((int)scratchR10 + 0x144) + 0x30);
         local_3c4 = (uint)*(ushort *)(iVar23 + 0x98);
         local_3c0 = (uint)*(ushort *)(iVar23 + 0x9a);
         local_3bc = (uint)*(ushort *)(iVar23 + 0x8c);
         local_3b8 = *(undefined4 *)(iVar23 + 0x9c);
       }
-      uVar12 = 0x274;
-      fVar4 = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + 0x2a54);
-      fVar6 = *(float *)(((unsigned char *)0x00002e4c) + engineState) * *(float *)(ctx + 0x2a58);
-      _memcpy(&local_3b0,((unsigned char *)0x00002e48) + engineState,0x274);
-      uVar9 = 0x4000;
-      if (fVar4 == 1.0) {
-        uVar9 = 0;
+      stateBytes = 0x274;
+      zoomXScaledB = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + 0x2a54);
+      zoomYScaledB = *(float *)(((unsigned char *)0x00002e4c) + engineState) * *(float *)(ctx + 0x2a58);
+      _memcpy(&procZoomX,((unsigned char *)0x00002e48) + engineState,0x274);
+      zoomXFlag = 0x4000;
+      if (zoomXScaledB == 1.0) {
+        zoomXFlag = 0;
       }
-      local_144 = (uint)(fVar6 != 1.0) << 0xf | uVar9 | local_144 & 0xffff3fff;
-      local_3b0 = fVar4;
-      local_3ac = fVar6;
-      _glgProcessPixels(&local_3b0,&local_420,uVar12,puVar17,uVar19,piVar18,"ret_logicalnz ",pcVar26
+      procZoomFlags = (uint)(zoomYScaledB != 1.0) << 0xf | zoomXFlag | procZoomFlags & 0xffff3fff;
+      procZoomX = zoomXScaledB;
+      procZoomY = zoomYScaledB;
+      _glgProcessPixels(&procZoomX,&local_420,stateBytes,puVar17,heightCopy,piVar18,"ret_logicalnz ",scratchR10
                        );
     }
-    local_41c = iVar31;
+    srcRowBytes = convRowBytes;
     if (((unsigned char *)0x00002b7c)[ctx] != '\0') {
-      local_41c = -iVar31;
+      srcRowBytes = -convRowBytes;
     }
-    uVar19 = uVar13;
-    if (0x7fe < uVar13) {
-      uVar19 = 0x7fe;
+    tileWidth = scaledWidth;
+    if (0x7fe < scaledWidth) {
+      tileWidth = 0x7fe;
     }
-    uVar9 = 0x7fe / uVar19;
-    if (uVar20 < 0x7fe / uVar19) {
-      uVar9 = uVar20;
+    tileHeight = 0x7fe / tileWidth;
+    if (scaledHeight < 0x7fe / tileWidth) {
+      tileHeight = scaledHeight;
     }
-    uVar24 = uVar13 / uVar19;
-    uVar27 = uVar20 / uVar9;
-    uVar13 = uVar13 - uVar24 * uVar19;
-    uVar20 = uVar20 - uVar27 * uVar9;
-    uVar30 = uVar24 + 1;
-    if (uVar13 == 0) {
-      uVar13 = uVar19;
-      uVar30 = uVar24;
+    fullColumns = scaledWidth / tileWidth;
+    fullRows = scaledHeight / tileHeight;
+    scaledWidth = scaledWidth - fullColumns * tileWidth;
+    scaledHeight = scaledHeight - fullRows * tileHeight;
+    tileColumns = fullColumns + 1;
+    if (scaledWidth == 0) {
+      scaledWidth = tileWidth;
+      tileColumns = fullColumns;
     }
-    uVar24 = uVar27 + 1;
-    if (uVar20 == 0) {
-      uVar20 = uVar9;
-      uVar24 = uVar27;
+    tileRows = fullRows + 1;
+    if (scaledHeight == 0) {
+      scaledHeight = tileHeight;
+      tileRows = fullRows;
     }
-    if (uVar24 != 0) {
-      uVar27 = 0;
+    if (tileRows != 0) {
+      tileRow = 0;
       do {
-        if (uVar30 != 0) {
-          iVar15 = uVar9 * uVar27;
-          uVar32 = 0;
-          iVar31 = local_68 * iVar15;
+        if (tileColumns != 0) {
+          tileRowStart = tileHeight * tileRow;
+          tileColumn = 0;
+          tileRowOffset = yDir * tileRowStart;
           do {
-            local_3f0 = uVar9;
-            if (uVar27 == uVar24 - 1) {
-              local_3f0 = uVar20;
+            procHeight = tileHeight;
+            if (tileRow == tileRows - 1) {
+              procHeight = scaledHeight;
             }
-            local_3f4 = uVar13;
-            if (uVar32 != uVar30 - 1) {
-              local_3f4 = uVar19;
+            procWidth = scaledWidth;
+            if (tileColumn != tileColumns - 1) {
+              procWidth = tileWidth;
             }
-            iVar23 = uVar32 * uVar19;
+            tileX = tileColumn * tileWidth;
             if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
-              local_420 = iVar15 * local_41c + iVar28 * iVar23;
-              iVar10 = iVar31;
+              local_420 = tileRowStart * srcRowBytes + bytesPerPixel * tileX;
+              iVar10 = tileRowOffset;
             }
             else {
-              iVar10 = iVar15 + local_3f0 + -1;
-              local_420 = iVar28 * iVar23 - local_41c * iVar10;
-              iVar10 = -(local_68 * iVar10);
+              iVar10 = tileRowStart + procHeight + -1;
+              local_420 = bytesPerPixel * tileX - srcRowBytes * iVar10;
+              iVar10 = -(yDir * iVar10);
             }
-            local_420 = local_420 + iVar14;
-            uVar32 = uVar32 + 1;
-            FUN_00029c00(ctx,local_420,local_3f4,local_3f0,local_41c,iVar28,
-                         ctxState + iVar11 * iVar23,uVar29 + iVar10,pfStack0000001c,format,local_64);
-          } while (uVar30 != uVar32);
+            local_420 = local_420 + convBuffer;
+            tileColumn = tileColumn + 1;
+            FUN_00029c00(ctx,local_420,procWidth,procHeight,srcRowBytes,bytesPerPixel,
+                         ctxState + xDir * tileX,windowY + iVar10,pfStack0000001c,format,transferMode8);
+          } while (tileColumns != tileColumn);
         }
-        uVar27 = uVar27 + 1;
-      } while (uVar24 != uVar27);
+        tileRow = tileRow + 1;
+      } while (tileRows != tileRow);
     }
-    _free(iVar14);
+    _free(convBuffer);
   }
   return;
 }
