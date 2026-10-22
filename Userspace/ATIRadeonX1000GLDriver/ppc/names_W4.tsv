@@ -16,8 +16,6 @@ local	FUN_00001830	param_2	cxaFinalizeFn	CONFIRMED	called with &state to run/can
 local	FUN_00001830	iVar1	status	CONFIRMED	result of cxaAtexitFn (same crt atexit shim as GA _check_cxa_atexit)
 local	FUN_00001830	pcStack00000018	cxaAtexitFnHome	CONFIRMED	home-slot copy of param_1 (same crt atexit shim as GA _check_cxa_atexit)
 local	FUN_00001830	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	home-slot copy of param_2 (same crt atexit shim as GA _check_cxa_atexit)
-local	FUN_00001830	local_28	state	CONFIRMED	set to 1 by _cxa_atexit_check_2 when the check routine ran (same crt atexit shim as GA _check_cxa_atexit)
-local	FUN_00001830	local_24	cxaAtexitFnCopy	CONFIRMED	copy of param_1 (same crt atexit shim as GA _check_cxa_atexit)
 local	FUN_00001830	local_18	result	CONFIRMED	returned state or -1 (same crt atexit shim as GA _check_cxa_atexit)
 local	FUN_00001e24	param_1	atexit_globals	CONFIRMED	keymgr block: +4 is the routine list head (same crt atexit shim as GA _add_routine)
 local	FUN_00001e24	param_2	routine	CONFIRMED	3-word record {function, kind, argument} (same crt atexit shim as GA _add_routine)
@@ -162,7 +160,7 @@ local	_gldInitializeLibrary	param_1	libArg0	UNKNOWN	stored at library+8 (zeroed 
 local	_gldInitializeLibrary	param_2	libArg1	UNKNOWN	stored at library+0xc
 local	_gldInitializeLibrary	param_3	displayMask	INFERRED	bit mask; library+4 receives index of highest set bit + 1 (loop over 32 bits)
 local	_gldInitializeLibrary	param_4	libArg3	UNKNOWN	stored at library+0x10
-local	_gldInitializeLibrary	param_5	libArg4	UNKNOWN	stored at library+0x14
+local	_gldInitializeLibrary	param_5	attachCallback	INFERRED	stored at library+0x14
 local	_gldInitializeLibrary	puVar1	library	CONFIRMED	PTR_DAT_001e88ac global library record
 local	_gldInitializeLibrary	puVar2	libraryAlias	CONFIRMED	reload of the same global pointer
 local	_gldInitializeLibrary	uVar3	bitIndex	CONFIRMED	loop counter 0..31
@@ -1687,4 +1685,3 @@ local	FUN_0003aba0	uVar1	element1	INFERRED	second word of the 16-byte element be
 local	FUN_0003aba0	uVar2	element2	INFERRED	third word of the element (same code shape as FUN_00039a60)
 local	FUN_0003aba0	uVar3	element3	INFERRED	fourth word of the element (same code shape as FUN_00039a60)
 local	FUN_0003aba0	uVar4	weightWord	INFERRED	word read through weightCursor, stored before the element (same code shape as FUN_00039a60)
-local	_gldInitializeLibrary	libArg4	attachCallback	INFERRED	stored at library+0x14, which _gldAttachDrawable calls as the drawable attach callback
