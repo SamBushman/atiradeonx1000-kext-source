@@ -1,0 +1,773 @@
+# local	FUNCTION	old	new	tier	evidence (written by the userspace naming pass; reused locals carry Or/Alias names)
+local	__SetSurface	param_1	accel	CONFIRMED	*(param_1+0xc) is the io_connect_t
+local	__SetSurface	param_2	flags	INFERRED	bit 0x800 selects the destination surface path
+local	__SetSurface	param_3	surfaceDesc	INFERRED	+0x28 holds the surface record
+local	__SetSurface	iVar1	status	CONFIRMED	result of _io_connect_method_scalarI_structureO, returned
+local	__SetSurface	local_28	outSize	CONFIRMED	struct-output size (0x30) passed as &local_28
+local	__SetSurface	local_24	scalarIn0	CONFIRMED	first of two scalar inputs (local_24/local_20) passed as &local_24
+local	__SetSurface	local_20	scalarIn1	CONFIRMED	second scalar input
+local	__SetDestination	param_1	accel	CONFIRMED	forwarded as __SetSurface accel
+local	__SetDestination	param_2	destFlag	INFERRED	(param_2&1)<<11 builds the 0x800 flag of __SetSurface
+local	__SetDestination	param_3	surfaceDesc	CONFIRMED	forwarded as __SetSurface surfaceDesc
+local	__SetDestination	uVar1	status	CONFIRMED	return value of __SetSurface
+local	__LockSurface	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__LockSurface	param_2	lockArg	UNKNOWN	sent as scalar input 0 of selector 5
+local	__LockSurface	param_3	surfaceDesc	INFERRED	+0x28 holds the surface record
+local	__LockSurface	param_4	outAddress	CONFIRMED	receives the mapped address
+local	__LockSurface	iVar1	mappedAddress	INFERRED	record[1], returned when already mapped
+local	__LockSurface	iVar2	status	CONFIRMED	returned result
+local	__LockSurface	local_28	outCount	CONFIRMED	scalar-output count passed as &local_28
+local	__LockSurface	local_24	scalarIn0	CONFIRMED	scalar input 0 / output 0 (same slot)
+local	__LockSurface	local_20	scalarOut1	CONFIRMED	second output word, stored to surfaceDesc+0x18
+local	__UnlockSurface	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__UnlockSurface	param_2	unlockArg	UNKNOWN	sent as scalar input 0 of selector 6
+local	__UnlockSurface	param_3	surfaceDesc	INFERRED	+0x28 holds the surface record
+local	__UnlockSurface	param_4	outValue	CONFIRMED	receives scalar output 0 when non-NULL
+local	__UnlockSurface	uVar1	status	CONFIRMED	returned result
+local	__UnlockSurface	local_28	outCount	CONFIRMED	scalar-output count passed as &local_28
+local	__UnlockSurface	local_24	scalarIO	CONFIRMED	scalar in/out array passed as local_24
+local	__SwapSurface	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__SwapSurface	param_2	swapArg	UNKNOWN	sent as scalar input 0 of selector 3
+local	__SwapSurface	param_3	surfaceDesc	INFERRED	+0x28 holds the surface record
+local	__SwapSurface	param_4	outValue	CONFIRMED	receives scalar output 0 when non-NULL
+local	__SwapSurface	uVar1	status	CONFIRMED	returned result
+local	__SwapSurface	local_28	outCount	CONFIRMED	scalar-output count passed as &local_28
+local	__SwapSurface	local_24	scalarIO	CONFIRMED	scalar in/out array passed as local_24
+local	__Probe	param_1	unusedArg1	CONFIRMED	never read
+local	__Probe	param_2	unusedArg2	CONFIRMED	never read
+local	__Probe	param_3	unusedArg3	CONFIRMED	never read
+local	__Probe	param_4	outScore	INFERRED	receives the constant 2000 (probe priority)
+local	_window_mode_to_ati_format	param_1	windowMode	INFERRED	low nibble selects the result; table matches __DecodePixelFormat param_8 values
+local	__QueryInterface	param_1	instance	CONFIRMED	(*param_1)+8 is called as AddRef and param_1 is returned
+local	__QueryInterface	param_2	uuidWord0	CONFIRMED	CFUUIDBytes passed as four register words
+local	__QueryInterface	param_3	uuidWord1	CONFIRMED	second word of the 16 UUID bytes
+local	__QueryInterface	param_4	uuidWord2	CONFIRMED	third word
+local	__QueryInterface	param_5	uuidWord3	CONFIRMED	fourth word
+local	__QueryInterface	param_6	outInterface	CONFIRMED	receives instance or NULL
+local	__QueryInterface	uVar1	requestedUUID	CONFIRMED	_CFUUIDCreateFromUUIDBytes result
+local	__QueryInterface	uVar2	knownUUID	CONFIRMED	_CFUUIDGetConstantUUIDWithBytes result compared with _CFEqual
+local	__QueryInterface	iVar3	isEqual	CONFIRMED	_CFEqual result
+local	__QueryInterface	uStack0000001c	uuidHome0	CONFIRMED	home-slot copy of param_2
+local	__QueryInterface	uStack00000020	uuidHome1	CONFIRMED	home-slot copy of param_3
+local	__QueryInterface	uStack00000024	uuidHome2	CONFIRMED	home-slot copy of param_4
+local	__QueryInterface	uStack00000028	uuidHome3	CONFIRMED	home-slot copy of param_5
+local	__AddRef	param_1	instance	CONFIRMED	refcount at +8 is incremented
+local	__Release	param_1	instance	CONFIRMED	refcount at +8 is decremented and the block freed at 0
+local	__Release	iVar1	factoryID	CONFIRMED	+4: passed to _CFPlugInRemoveInstanceForFactory/_CFRelease
+local	__Release	iVar2	refCount	CONFIRMED	new reference count, returned
+local	__DecodePixelFormat	param_1	pixelFormat	CONFIRMED	compared with FourCC codes (2vuy, yuvs, YVYU, BGRA...) and bit depths 8/16/32
+local	__DecodePixelFormat	param_2	outDstFormat	UNKNOWN	stored to record+0x30 by __AllocateSurface
+local	__DecodePixelFormat	param_3	outPixelClass	UNKNOWN	stored to record+0x34 (0 for 8-bit/YUV, 1 for 16-bit, 2 for 32-bit)
+local	__DecodePixelFormat	param_4	outBytesPerPixel	INFERRED	__AllocateSurface multiplies width by record[10] to get the pitch
+local	__DecodePixelFormat	param_5	outHwColorFormat	INFERRED	__AllocateSurface masks it &0xf into the format word and tests ==3
+local	__DecodePixelFormat	param_6	outLog2BytesPerPixel	INFERRED	values 0/1/2 for 8/16/32 bits per pixel
+local	__DecodePixelFormat	param_7	outTileFormat	INFERRED	forwarded as scalar input 0 of selector 10
+local	__DecodePixelFormat	param_8	outAtiFormat	INFERRED	equals the result of _window_mode_to_ati_format for the same pixel kinds
+local	__DecodePixelFormat	uVar1	dstFormat	CONFIRMED	stored to param_2
+local	__DecodePixelFormat	uVar5	pixelClass	CONFIRMED	stored to param_3
+local	__DecodePixelFormat	uVar3	bytesPerPixel	CONFIRMED	stored to param_4
+local	__DecodePixelFormat	uVar4	hwColorFormat	CONFIRMED	stored to param_5
+local	__DecodePixelFormat	uVar7	log2BytesPerPixel	CONFIRMED	stored to param_6
+local	__DecodePixelFormat	uVar2	tileFormat	CONFIRMED	stored to param_7
+local	__DecodePixelFormat	uVar6	atiFormat	CONFIRMED	stored to param_8
+local	_fillTextureWithPattern	param_1	patternRef	INFERRED	*param_1 points at the two 32-bit words of the 8x8 1-bit pattern
+local	_fillTextureWithPattern	param_2	opFlags	INFERRED	(param_2 & 0x7ffff000)==0x6000 selects the solid (all-ones) pattern
+local	_fillTextureWithPattern	param_3	backColor	INFERRED	written where the pattern bit is 0
+local	_fillTextureWithPattern	param_4	foreColor	INFERRED	written where the pattern bit is 1
+local	_fillTextureWithPattern	uVar7	patternWord0Cursor	UNKNOWN	byte-swapped first pattern word, reused as the bit cursor of the second loop
+local	_fillTextureWithPattern	uVar14	patternWord1	CONFIRMED	byte-swapped second pattern word
+local	_fillTextureWithPattern	uVar10	bitCursor	CONFIRMED	one-hot mask shifted right each iteration
+local	_fillTextureWithPattern	bVar1	columnIsLast	CONFIRMED	column index == 7
+local	_fillTextureWithPattern	iVar8	column	CONFIRMED	0..7 within an 8-texel row
+local	_fillTextureWithPattern	iVar15	bitsLeft	CONFIRMED	counts 32 pattern bits
+local	_fillTextureWithPattern	iVar2	eightRowsBytes	INFERRED	texture width * 8 rows * bytes per texel
+local	_fillTextureWithPattern	iVar3	rowBytes	INFERRED	texture width * bytes per texel
+local	_fillTextureWithPattern	iVar4	eightRowsTexels	INFERRED	texture width * 8
+local	_fillTextureWithPattern	iVar13	secondRowBase	INFERRED	destination pointer advanced by eightRowsBytes
+local	_fillTextureWithPattern	iVar9	dstPtr	INFERRED	running pointer into _textureBufferBytes
+local	_fillTextureWithPattern	iVar5	columnByteOffset	CONFIRMED	column * bytes per texel
+local	_fillTextureWithPattern	iVar6	eightRowsTexelIndex	INFERRED	eightRowsTexels + column
+local	_fillTextureWithPattern	uVar12	texel16	CONFIRMED	16-bit texel stored
+local	_fillTextureWithPattern	uVar11	texel32	CONFIRMED	32-bit texel stored
+local	__GetCapabilities	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__GetCapabilities	param_2	capabilityTag	CONFIRMED	FourCC compared with cgls/smvl/BGRA
+local	__GetCapabilities	param_3	outCaps	CONFIRMED	receives the capability word (or structure input for smvl)
+local	__GetCapabilities	uVar1	status	CONFIRMED	returned result
+local	__GetBlitter	param_1	accel	INFERRED	unused context argument
+local	__GetBlitter	param_2	unusedArg2	CONFIRMED	never read
+local	__GetBlitter	param_3	operation	INFERRED	compared with 0,1,3,4,0x100,0x40000 to select the blit routine
+local	__GetBlitter	param_4	blitFlags	INFERRED	masked 0x7ffff000 to pick the class
+local	__GetBlitter	param_5	outBlitter	CONFIRMED	receives the function pointer
+local	__GetBlitter	uVar1	blitClass	CONFIRMED	param_4 & 0x7ffff000
+local	__GetBlitter	pcVar2	blitter	CONFIRMED	selected routine (_radeonCopy/_radeonFill/...)
+local	__GetBeamPosition	param_1	accel	CONFIRMED	io_connect_t at +0xc, +0x90 input word
+local	__GetBeamPosition	param_2	unusedArg2	CONFIRMED	never read
+local	__GetBeamPosition	param_3	outScanline	INFERRED	receives bits 16..26 of the returned word
+local	__GetBeamPosition	local_28	outSize	CONFIRMED	structure output size passed as &local_28
+local	__GetBeamPosition	local_24	beamData	CONFIRMED	struct in/out array passed as local_24
+local	__WaitSurface	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__WaitSurface	param_2	unusedArg2	CONFIRMED	never read
+local	__WaitSurface	param_3	surfaceDesc	INFERRED	+0x28 holds the surface record
+local	__WaitSurface	uVar1	status	CONFIRMED	returned result
+local	__WaitSurface	iVar2	surfaceHandle	INFERRED	record[0], sent to selector 0xc
+local	_ATIRadeonX1000GAFactory	param_1	allocator	INFERRED	CFPlugIn factory signature (allocator, typeUUID)
+local	_ATIRadeonX1000GAFactory	param_2	typeUUID	CONFIRMED	compared with a constant UUID by _CFEqual
+local	_ATIRadeonX1000GAFactory	puVar1	instance	CONFIRMED	calloc(1,0x98) interface object returned
+local	_ATIRadeonX1000GAFactory	uVar2	uuidRef	UNKNOWN	constant UUID, later the retained factory UUID
+local	_ATIRadeonX1000GAFactory	iVar3	factoryUUIDOrIsEqual	UNKNOWN	_CFEqual result, then the factory UUID reference
+local	__Reset	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__Reset	puVar1	lastHeader	CONFIRMED	*(accel+0x7c): last command header word, ORed with the length
+local	__Reset	iVar2	status	CONFIRMED	_IOConnectMapMemory result
+local	__Reset	uVar3	result	CONFIRMED	returned value
+local	__Reset	local_28	mapSize	CONFIRMED	size output of _IOConnectMapMemory
+local	__Reset	local_24	cmdBufferAddr	INFERRED	address mapped for memory type 0, stored at accel+0x18
+local	__Reset	local_20	sharedAddr	INFERRED	address mapped for memory type 1, stored at accel+0x14
+local	__Start	param_1	accel	CONFIRMED	io_connect_t stored at +0xc
+local	__Start	param_2	unusedArg2	CONFIRMED	never read
+local	__Start	param_3	displayID	INFERRED	first argument of _IOAccelFindAccelerator
+local	__Start	param_4	unusedArg4	CONFIRMED	only forwarded to printf
+local	__Start	param_5	unusedArg5	CONFIRMED	only forwarded to printf
+local	__Start	param_6	unusedArg6	CONFIRMED	only forwarded to printf
+local	__Start	param_7	unusedArg7	CONFIRMED	only forwarded to printf
+local	__Start	param_8	unusedArg8	CONFIRMED	only forwarded to printf
+local	__Start	iVar1	status	CONFIRMED	result of each IOKit call, returned
+local	__Start	iVar2	accelIdSlot	CONFIRMED	accel+0x84: receives the accelerator id
+local	__Start	local_a8	service	CONFIRMED	io_service_t from _IOAccelFindAccelerator, stored at +0x10
+local	__Start	local_a4	connectAndCount	CONFIRMED	[0] = io_connect_t from _IOServiceOpen, [1] = output count
+local	__Start	auStack_9c	className	CONFIRMED	_IOObjectGetClass buffer printed in the "Unusual class" message
+local	__Flush	param_1	accel	CONFIRMED	cmd buffer fields at +0x18/+0x7c/+0x80
+local	__Flush	param_2	flushFlags	INFERRED	bit 0x10000 appends a 0x2000000 header word
+local	__Flush	puVar1	taskPtr	INFERRED	PTR_0000e694: passed as the target task of _IOConnectMapMemory
+local	__Flush	iVar2	destOrNewBase	UNKNOWN	accel+0x8c, then 0, then the new buffer base+0x20
+local	__Flush	puVar3	lastHeader	CONFIRMED	*(accel+0x7c) header word, ORed with the length
+local	__Flush	puVar4	cmdWrite	CONFIRMED	accel+0x80 command-buffer write cursor
+local	__Flush	local_28	padWords	UNKNOWN	0 or 2 words of padding, then the output size
+local	__Flush	local_24	mapAddr	CONFIRMED	address output of _IOConnectMapMemory
+local	__WaitComplete	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__WaitComplete	param_2	waitArg	UNKNOWN	stored in the home slot then sent as the scalar input
+local	__FreeSurface	param_1	accel	CONFIRMED	io_connect_t at +0xc
+local	__FreeSurface	param_2	freeFlags	INFERRED	bit 8 waits for completion first
+local	__FreeSurface	param_3	surfaceDesc	INFERRED	+0x28 holds the surface record
+local	__FreeSurface	iVar1	record	CONFIRMED	*(param_3+0x28)
+local	__FreeSurface	piVar2	recordPtr	CONFIRMED	*(param_3+0x28) re-read
+local	__FreeSurface	uVar3	status	CONFIRMED	returned result
+local	_createTextureBuffer	param_1	accel	CONFIRMED	+0x94 busy count, io_connect_t at +0xc
+local	_createTextureBuffer	param_2	width	INFERRED	rounded up to a multiple of 32 into _textureBufferWidth
+local	_createTextureBuffer	param_3	height	INFERRED	rounded into _textureBufferHeight
+local	_createTextureBuffer	param_4	is16bpp	INFERRED	0 selects BGRA 4 bytes/texel, else 2 bytes/texel
+local	_createTextureBuffer	iVar1	status	CONFIRMED	call result
+local	_createTextureBuffer	uVar2	result	CONFIRMED	returned success flag
+local	_createTextureBuffer	uVar3	alignedHeight	CONFIRMED	(height+0x20)&~0x1f
+local	_createTextureBuffer	uVar4	alignedWidth	CONFIRMED	(width+0x20)&~0x1f
+local	_createOffscreenBuffer	param_1	accel	CONFIRMED	+0x94 busy count, io_connect_t at +0xc
+local	_createOffscreenBuffer	param_2	rect	INFERRED	short width at +4 and height at +6
+local	_createOffscreenBuffer	param_3	is16bpp	INFERRED	0 selects BGRA 4 bytes/pixel, else 2
+local	_createOffscreenBuffer	iVar1	status	CONFIRMED	call result
+local	_createOffscreenBuffer	uVar2	result	CONFIRMED	returned success flag
+local	__Stop	param_1	accel	CONFIRMED	frees buffers, closes +0xc/+0x10
+local	__Stop	iVar1	service	CONFIRMED	accel+0x10 io_service_t released
+local	_radeon3DCopySetup	param_1	accel	INFERRED	unused context pointer
+local	_radeon3DCopySetup	param_2	cmdBuf	CONFIRMED	word array written at index cmdIndex
+local	_radeon3DCopySetup	param_3	dstDesc	INFERRED	short width at +4, height at +6, pitch at +0x10, format at +0x2c
+local	_radeon3DCopySetup	param_4	dstFormat	INFERRED	compared with 6 and 3, &0x1f gives the colour format
+local	_radeon3DCopySetup	param_5	useMask	UNKNOWN	selects 0xa92 vs 0x1492 in the 0x1100 word
+local	_radeon3DCopySetup	param_6	cmdIndex	CONFIRMED	word index; returns cmdIndex+0x6e
+local	_radeon3DCopySetup	param_7	widthOverride	INFERRED	0 means use the descriptor width
+local	_radeon3DCopySetup	param_8	heightOverride	INFERRED	0 means use the descriptor height
+local	_radeon3DCopySetup	iVar1	width	CONFIRMED	overridden width
+local	_radeon3DCopySetup	iVar2	height	CONFIRMED	overridden height
+local	_radeon3DCopySetup	uVar3	formatBias	UNKNOWN	format-0x13 style value compared with 2
+local	_radeon3DCopySetup	uVar4	blendControl	UNKNOWN	0x1492/0xa92 | 0x2000
+local	_radeon3DCopySetup	uVar5	hwFormat	INFERRED	0xc/0xb/format&0x1f
+local	_radeon3DFillSetup	param_1	cmdBuf	CONFIRMED	word array written at index cmdIndex
+local	_radeon3DFillSetup	param_2	cmdIndex	CONFIRMED	word index; returns cmdIndex+0x68
+local	_radeon3DFillSetup	param_3	packedColor	CONFIRMED	split into float components
+local	_radeon3DFillSetup	param_4	target	INFERRED	+0x54/+0x58 extents, +0x70 format (3 = 16-bit)
+local	_radeon3DFillSetup	fVar1	blue	CONFIRMED	param_3&0xff (or &0x1f): emitted third
+local	_radeon3DFillSetup	fVar2	green	CONFIRMED	param_3>>8: emitted second
+local	_radeon3DFillSetup	fVar3	red	CONFIRMED	param_3>>16: emitted first
+local	_radeon3DFillSetup	fVar4	alpha	CONFIRMED	param_3>>24: emitted last
+local	_radeonCopy	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80, io_connect_t at +0xc
+local	_radeonCopy	param_2	unusedArg2	CONFIRMED	never read
+local	_radeonCopy	param_3	unusedArg3	CONFIRMED	never read
+local	_radeonCopy	param_4	unusedArg4	CONFIRMED	never read
+local	_radeonCopy	param_5	blitReq	INFERRED	+0x58 rect count, +0x5c rect array of 6-int entries
+local	_radeonCopy	iVar39	rectCount	CONFIRMED	*(blitReq+0x58): do-while loop bound
+local	_radeonCopy	local_ac	rect	CONFIRMED	6-int entry advanced by 6 each iteration: [0],[1] src x,y, [2],[3] dst x,y, [4],[5] width,height
+local	_radeonCopy	bVar3	needsSetup	INFERRED	true when a new command block must emit the 3D setup
+local	_radeonCopy	uVar38	dstX	CONFIRMED	rect[2] + accel+0x60
+local	_radeonCopy	uVar36	dstRight	CONFIRMED	dstX + rect[4]
+local	_radeonCopy	local_dc	srcLeftInt	INFERRED	rect[0]+accel+0x60 converted to int
+local	_radeonCopy	local_e0	srcTopInt	INFERRED	rect[1]+accel+0x64 converted to int
+local	_radeonCopy	local_e4	srcRightInt	INFERRED	srcLeft + rect[4] converted to int
+local	_radeonCopy	local_e8	srcBottomInt	INFERRED	srcTop + rect[5] converted to int
+local	_radeonCopy	dVar44	srcLeftExact	INFERRED	rect[0]+accel+0x60 as double
+local	_radeonCopy	dVar46	srcTopExact	INFERRED	rect[1]+accel+0x64 as double
+local	_radeonCopy	dVar48	srcLeftFloat	INFERRED	(float)srcLeftExact
+local	_radeonCopy	dVar49	srcTopFloat	INFERRED	(float)srcTopExact
+local	_radeonCopy	dVar50	srcRightFloat	INFERRED	srcLeftFloat + rect[4]
+local	_radeonCopy	dVar51	srcBottomFloat	INFERRED	srcTopFloat + rect[5]
+local	_radeonCopy	dVar47	srcRightExactOrInvWidth	UNKNOWN	source right edge, later 1/width
+local	_radeonCopy	dVar45	srcBottomExactOrInvHeight	UNKNOWN	source bottom edge, later 1/height
+local	_radeonCopy	local_1a8	scratchWord0	CONFIRMED	&local_1a8 is passed as an _IOConnectMapMemory output; also holds a float texture-coordinate word
+local	_radeonCopy	local_1a4	scratchWord1	CONFIRMED	same, second word
+local	_radeonCopy	local_1a0	scratchWord2	CONFIRMED	same, third word
+local	_radeonCopy	local_19c	scratchWord3	CONFIRMED	same, fourth word
+local	_radeonCopy	local_b4	scratchWord0Ptr	CONFIRMED	= &local_1a8
+local	_radeonCopy	local_b0	scratchWord1Ptr	CONFIRMED	= &local_1a4
+local	_radeonCopy	local_c0	scratchWord2Ptr	CONFIRMED	= &local_1a0
+local	_radeonCopy	local_bc	scratchWord3Ptr	CONFIRMED	= &local_19c
+local	_radeonCopy	local_d4	screenFormat	INFERRED	accel+0x70 with 3 -> 0xb and 6 -> 0xc
+local	_radeonCopy	local_d8	offscreenFormat	INFERRED	DAT_0000e6e4[0xc] (offscreen buffer format) with the same remap
+local	_radeonCopy	local_cc	offscreenDesc	INFERRED	DAT_0000e6e4+3: offscreen buffer descriptor
+local	_radeonCopy	local_c8	flushWaitWord	CONFIRMED	constant 0xc000 stored after 0x5c8 when a flush is emitted
+local	_radeonCopy	local_c4	colorBufferWord	INFERRED	screenFormat&0x1f | 0x53000, the 0x1130 register value
+local	_radeonCopy	local_b8	screenWidth	INFERRED	*(short *)(accel+0x50)
+local	_radeonCopy	local_b6	screenHeight	INFERRED	*(short *)(accel+0x52)
+local	_radeonCopy	sVar1	offscreenWidth	INFERRED	short at offscreenDesc+4
+local	_radeonCopy	uVar2	dstBottomHi	INFERRED	(dstY+height)<<16: bottom coordinate in the high half-word
+local	_radeonCopy	dVar15	texWord1	UNKNOWN	texture-coordinate word read back from a scratch word
+local	_radeonCopy	dVar21	texWord2	UNKNOWN	texture-coordinate word
+local	_radeonCopy	dVar23	texWord3	UNKNOWN	texture-coordinate word
+local	_radeonCopy	puVar5	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
+local	_radeonCopy	pdVar42	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
+local	_radeonCopy	uVar40	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
+local	_radeonCopy	uVar41	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
+local	_radeonCopy	puVar4	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
+local	FUN_000055a4	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80, io_connect_t at +0xc
+local	FUN_000055a4	param_2	unusedArg2	CONFIRMED	never read
+local	FUN_000055a4	param_3	unusedArg3	CONFIRMED	never read
+local	FUN_000055a4	param_4	blitFlags	CONFIRMED	param_4&0x7ffff000 is compared with 0, 0x1000, 0x3000, 0x7000 to pick the source kind
+local	FUN_000055a4	param_5	blitReq	INFERRED	+0x58/+0x5c offsets, +0x60 region list
+local	FUN_000055a4	param_6	srcRef	INFERRED	a surface descriptor (kind 0x3000) or surface id (kind 0x7000)
+local	FUN_000055a4	uVar55	blitKindOrWordsLeft	UNKNOWN	param_4&0x7ffff000, reused later as a words-left counter and rect extent
+local	FUN_000055a4	bVar1	isScreenCopyOrNeedsSetup	UNKNOWN	kind==0x1000, reused as a needs-setup flag in the later loops
+local	FUN_000055a4	bVar14	needsSetup	INFERRED	true when a new command block must emit the 3D setup
+local	FUN_000055a4	piVar54	regionRect	INFERRED	walks the region list: shorts x,y at +0/+2 and w,h at +4/+6
+local	FUN_000055a4	iVar38	regionCount	CONFIRMED	*regionList: loop bound (1 when zero)
+local	FUN_000055a4	local_d4	regionFirstRect	INFERRED	regionList+3 or +1: first rectangle
+local	FUN_000055a4	local_d8	srcDesc	INFERRED	surface descriptor: shorts at +4/+6 are width/height
+local	FUN_000055a4	local_348	srcWidth	CONFIRMED	short at srcDesc+4
+local	FUN_000055a4	local_dc	offscreenDesc	INFERRED	DAT_0000e6e4+3: offscreen buffer descriptor
+local	FUN_000055a4	local_f4	srcFormat	INFERRED	srcDesc[9] with 3 -> 0xb and 6 -> 0xc
+local	FUN_000055a4	local_f8	offscreenFormat	INFERRED	DAT_0000e6e4[0xc] with the same remap
+local	FUN_000055a4	local_fc	srcHandle	INFERRED	accel+0x84, record handle or surface id: written as a command word
+local	FUN_000055a4	local_ec	srcOriginX	INFERRED	accel+0x30 for kind 0x1000, else 0
+local	FUN_000055a4	local_f0	srcOriginY	INFERRED	accel+0x34 for kind 0x1000, else 0
+local	FUN_000055a4	local_e4	dstOffsetX	INFERRED	blitReq+0x58 minus the first region x, later plus accel+0x60
+local	FUN_000055a4	local_e8	dstOffsetY	INFERRED	blitReq+0x5c minus the first region y, later plus accel+0x64
+local	FUN_000055a4	local_140	blitCommandHeader	INFERRED	0x1000000 + opcode word written as the block header
+local	FUN_000055a4	local_144	sizeMismatch	INFERRED	1 when srcDesc size differs from the first region
+local	FUN_000055a4	local_100	srcMode	UNKNOWN	1 or (srcDesc[10]==2)<<1
+local	FUN_000055a4	local_114	tileHeightWords	UNKNOWN	dVar31*dVar27*0x1000
+local	FUN_000055a4	local_120	splitRow	INFERRED	(height>>1) & 0xfffffe00
+local	FUN_000055a4	local_11c	splitRemainder	INFERRED	height - splitRow
+local	FUN_000055a4	local_118	splitRowPlus2	INFERRED	splitRow + 2
+local	FUN_000055a4	fVar9	widthRatio	INFERRED	srcWidth / srcDesc[2]
+local	FUN_000055a4	fVar10	heightRatio	INFERRED	srcHeight / srcDesc[3]
+local	FUN_000055a4	local_364	scratchWord0	CONFIRMED	&local_364 is an _IOConnectMapMemory output; also a float texture-coordinate word
+local	FUN_000055a4	local_360	scratchWord1	CONFIRMED	same, second word
+local	FUN_000055a4	local_35c	scratchWord2	CONFIRMED	same, third word
+local	FUN_000055a4	local_358	scratchWord3	CONFIRMED	same, fourth word
+local	FUN_000055a4	local_b8	scratchWord0Ptr	CONFIRMED	= &local_364
+local	FUN_000055a4	local_b4	scratchWord1Ptr	CONFIRMED	= &local_360
+local	FUN_000055a4	local_b0	scratchWord2Ptr	CONFIRMED	= &local_35c
+local	FUN_000055a4	local_ac	scratchWord3Ptr	CONFIRMED	= &local_358
+local	FUN_000055a4	local_104	srcLeftInt	INFERRED	x converted to int
+local	FUN_000055a4	local_108	srcTopInt	INFERRED	y converted to int
+local	FUN_000055a4	local_10c	srcRightInt	INFERRED	right converted to int
+local	FUN_000055a4	local_110	srcBottomInt	INFERRED	bottom converted to int
+local	FUN_000055a4	dVar59	srcLeftExact	INFERRED	x as double
+local	FUN_000055a4	dVar60	srcTopExact	INFERRED	y as double
+local	FUN_000055a4	dVar62	srcLeftFloat	INFERRED	(float)srcLeftExact
+local	FUN_000055a4	dVar63	srcTopFloat	INFERRED	(float)srcTopExact
+local	FUN_000055a4	dVar64	srcRightFloat	INFERRED	srcLeftFloat + width
+local	FUN_000055a4	dVar65	srcBottomFloat	INFERRED	srcTopFloat + height
+local	FUN_000055a4	puVar18	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
+local	FUN_000055a4	pdVar53	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
+local	FUN_000055a4	uVar48	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
+local	FUN_000055a4	uVar39	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
+local	FUN_000055a4	puVar15	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
+local	FUN_000055a4	fparam_1	unusedFloatArg1	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_2	unusedFloatArg2	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_3	unusedFloatArg3	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_4	unusedFloatArg4	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_5	unusedFloatArg5	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_6	unusedFloatArg6	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_7	unusedFloatArg7	CONFIRMED	floating-point argument register never read
+local	FUN_000055a4	fparam_8	unusedFloatArg8	CONFIRMED	floating-point argument register never read
+local	_radeonFill	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80
+local	_radeonFill	param_2	unusedArg2	CONFIRMED	never read
+local	_radeonFill	param_3	fillFlags	UNKNOWN	bits 0xc000 select a mask variant
+local	_radeonFill	param_4	blitFlags	CONFIRMED	param_4&0x7ffff000 == 0x6000 selects the solid pattern
+local	_radeonFill	param_5	fillReq	INFERRED	[0],[1] pattern colours, [2],[3] pattern offset, [5] colour, [0x16] rect count, [0x17..] rects
+local	_radeonFill	param_6	patternBuf	INFERRED	forwarded as the first argument of _fillTextureWithPattern
+local	_radeonFill	uVar42	fillColor	INFERRED	param_5[5]; its bytes feed the colour components; reused as a scratch later
+local	_radeonFill	puVar48	rectEntry	CONFIRMED	4-int rect entry advanced by 4 per iteration: [0x17] x, [0x18] y, [0x19] width, [0x1a] height
+local	_radeonFill	local_10c	dstLeft	CONFIRMED	rect[0x17] + accel+0x60
+local	_radeonFill	local_114	dstTop	CONFIRMED	rect[0x18] + accel+0x64
+local	_radeonFill	local_110	dstRight	CONFIRMED	dstLeft + rect[0x19]
+local	_radeonFill	local_118	dstBottom	CONFIRMED	dstTop + rect[0x1a]
+local	_radeonFill	local_11c	tileTop	INFERRED	top of the current 8-row tile
+local	_radeonFill	local_120	tileBottom	INFERRED	min(dstBottom, dstTop+8)
+local	_radeonFill	local_124	tileRight	INFERRED	min(dstRight, dstLeft+8)
+local	_radeonFill	local_f4	tileHeight	CONFIRMED	tileBottom - tileTop
+local	_radeonFill	local_c8	tileTopHi	CONFIRMED	tileTop<<16
+local	_radeonFill	local_cc	tileBottomHi	CONFIRMED	tileBottom<<16
+local	_radeonFill	local_f8	screenWidth	INFERRED	*(short *)(accel+0x50)
+local	_radeonFill	local_f6	screenHeight	INFERRED	*(short *)(accel+0x52)
+local	_radeonFill	local_108	textureDesc	INFERRED	DAT_0000e748+0xc: pattern texture descriptor
+local	_radeonFill	bVar4	firstTile	INFERRED	true until the first tile block has been emitted
+local	_radeonFill	bVar5	noMaskFlags	CONFIRMED	(fillFlags&0xc000)==0
+local	_radeonFill	local_c4	maskBit	CONFIRMED	(fillFlags&0xc000)>>14&1
+local	_radeonFill	local_bc	colorBits	INFERRED	fillColor & 0x7c00
+local	_radeonFill	local_2ec	scratchWord0	CONFIRMED	&local_2ec is an _IOConnectMapMemory output
+local	_radeonFill	local_2e8	scratchWord1	CONFIRMED	&local_2e8 is an _IOConnectMapMemory output / padding words
+local	_radeonFill	local_2e4	scratchWord2	CONFIRMED	padding/word scratch
+local	_radeonFill	puVar24	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
+local	_radeonFill	pdVar44	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
+local	_radeonFill	uVar32	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
+local	_radeonFill	uVar29	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
+local	_radeonFill	puVar7	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
+local	_radeonHighlight	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80
+local	_radeonHighlight	param_2	unusedArg2	CONFIRMED	never read
+local	_radeonHighlight	param_3	unusedArg3	CONFIRMED	never read
+local	_radeonHighlight	param_4	unusedArg4	CONFIRMED	never read
+local	_radeonHighlight	param_5	fillReq	INFERRED	same layout as _radeonFill: [0x16] count, [0x17..] rects
+local	_radeonHighlight	param_6	highlightColor	UNKNOWN	packed colour source
+local	_radeonHighlight	sVar1	screenWidth	INFERRED	*(short *)(accel+0x50)
+local	_radeonHighlight	sVar2	screenHeight	INFERRED	*(short *)(accel+0x52)
+local	_radeonHighlight	puVar24	rectEntry	CONFIRMED	4-int rect entry advanced by 4: [0x17] x, [0x18] y, [0x19] width, [0x1a] height
+local	_radeonHighlight	uVar31	dstLeft	CONFIRMED	rect[0x17] + accel+0x60
+local	_radeonHighlight	uVar29	dstTop	CONFIRMED	rect[0x18] + accel+0x64
+local	_radeonHighlight	uVar30	dstRight	CONFIRMED	dstLeft + rect[0x19]
+local	_radeonHighlight	uVar25	bottomRightPacked	CONFIRMED	right | bottom<<16
+local	_radeonHighlight	uVar26	topRightPacked	CONFIRMED	right | top<<16
+local	_radeonHighlight	uVar27	topLeftPacked	CONFIRMED	left | top<<16
+local	_radeonHighlight	uVar28	bottomLeftPacked	CONFIRMED	left | bottom<<16
+local	_radeonHighlight	local_1f8	scratchWord0	CONFIRMED	&local_1f8 is an _IOConnectMapMemory output; also a float word
+local	_radeonHighlight	local_1fc	scratchWord1	CONFIRMED	same, second word
+local	_radeonHighlight	local_ac	scratchWord0Ptr	CONFIRMED	= &local_1f8
+local	_radeonHighlight	local_b0	scratchWord1Ptr	CONFIRMED	= &local_1fc
+local	_radeonHighlight	local_c8	shaderWord0	INFERRED	constant 0xdb0490 stored in the 0x1095 shader stream
+local	_radeonHighlight	local_c4	shaderWord1	INFERRED	constant 0xc10016 in the shader stream
+local	_radeonHighlight	local_c0	shaderWord2	INFERRED	constant 0xdfa23018 in the shader stream
+local	_radeonHighlight	local_bc	shaderWord3	INFERRED	constant 0xdb0220 in the shader stream
+local	_radeonHighlight	local_b8	shaderWord4	INFERRED	constant 0xc0c011 in the shader stream
+local	_radeonHighlight	local_b4	shaderWord5	INFERRED	constant 0x440221 in the shader stream
+local	_radeonHighlight	puVar5	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
+local	_radeonHighlight	pdVar32	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
+local	_radeonHighlight	uVar8	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
+local	_radeonHighlight	local_cc	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
+local	_radeonSolidScanlines	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80
+local	_radeonSolidScanlines	param_2	unusedArg2	CONFIRMED	never read
+local	_radeonSolidScanlines	param_3	unusedArg3	CONFIRMED	never read
+local	_radeonSolidScanlines	param_4	blitFlags	INFERRED	blit class word
+local	_radeonSolidScanlines	param_5	scanReq	INFERRED	[0x16] count, [0x17..] scanline entries
+local	_radeonSolidScanlines	param_6	packedColor	CONFIRMED	passed as the colour argument of _radeon3DFillSetup
+local	_radeonSolidScanlines	local_10c	scanEntry	CONFIRMED	entry pointer advanced by 2 ints per iteration
+local	_radeonSolidScanlines	uVar32	dstTop	CONFIRMED	param_5[0x17] + accel+0x64
+local	_radeonSolidScanlines	uVar35	dstBottom	CONFIRMED	dstTop + param_5[0x18]
+local	_radeonSolidScanlines	uVar36	dstLeft	CONFIRMED	accel+0x60 + entry[0x19]
+local	_radeonSolidScanlines	uVar37	dstRight	CONFIRMED	accel+0x60 + entry[0x1a]
+local	_radeonSolidScanlines	local_f4	dstLeftMasked	CONFIRMED	dstLeft & 0x1fff
+local	_radeonSolidScanlines	local_f0	dstRightMasked	CONFIRMED	dstRight & 0x1fff
+local	_radeonSolidScanlines	local_f8	flushWaitWord	CONFIRMED	constant 0xc000
+local	_radeonSolidScanlines	local_1a4	scratchWord0	CONFIRMED	&local_1a4 is an _IOConnectMapMemory output
+local	_radeonSolidScanlines	local_1a0	scratchWord1	CONFIRMED	&local_1a0 is an _IOConnectMapMemory output / padding words
+local	_radeonSolidScanlines	puVar24	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
+local	_radeonSolidScanlines	pdVar39	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
+local	_radeonSolidScanlines	uVar34	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
+local	_radeonSolidScanlines	uVar29	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
+local	_radeonSolidScanlines	puVar6	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
+local	_radeonCopy	iVar10	idxPlus22Or10Block1	CONFIRMED	assigned base+22Or10 (command word index) on every path
+local	_radeonCopy	pdVar12	cmdPtrPlus36Or1Block2	CONFIRMED	assigned base+36Or1 (command word pointer) on every path
+local	_radeonCopy	iVar13	idxPlus1Or20Block1	CONFIRMED	assigned base+1Or20 (command word index) on every path
+local	_radeonCopy	iVar14	idxPlus6Or22Block1	CONFIRMED	assigned base+6Or22 (command word index) on every path
+local	_radeonCopy	iVar17	idxPlus2Or5Block1	CONFIRMED	assigned base+2Or5 (command word index) on every path
+local	_radeonCopy	iVar18	idxPlus8Or7Block1	CONFIRMED	assigned base+8Or7 (command word index) on every path
+local	_radeonCopy	iVar20	idxPlus7Or8Block1	CONFIRMED	assigned base+7Or8 (command word index) on every path
+local	_radeonCopy	iVar25	idxPlus4Or6Block1	CONFIRMED	assigned base+4Or6 (command word index) on every path
+local	_radeonCopy	iVar26	idxPlus9Block1	CONFIRMED	assigned base+9 (command word index) on every path
+local	_radeonCopy	iVar27	idxPlus10Or19Block1	CONFIRMED	assigned base+10Or19 (command word index) on every path
+local	_radeonCopy	iVar28	idxPlus11Block1	CONFIRMED	assigned base+11 (command word index) on every path
+local	_radeonCopy	iVar29	idxPlus12Block1	CONFIRMED	assigned base+12 (command word index) on every path
+local	_radeonCopy	iVar30	idxPlus13Block1	CONFIRMED	assigned base+13 (command word index) on every path
+local	_radeonCopy	iVar31	idxPlus14Block1	CONFIRMED	assigned base+14 (command word index) on every path
+local	_radeonCopy	iVar32	idxPlus15Block1	CONFIRMED	assigned base+15 (command word index) on every path
+local	_radeonCopy	iVar33	idxPlus16Block1	CONFIRMED	assigned base+16 (command word index) on every path
+local	_radeonCopy	iVar34	idxPlus17Block1	CONFIRMED	assigned base+17 (command word index) on every path
+local	_radeonCopy	iVar35	idxPlus18Block1	CONFIRMED	assigned base+18 (command word index) on every path
+local	_radeonCopy	iVar37	idxPlus19Block3	CONFIRMED	assigned base+19 (command word index) on every path
+local	_radeonCopy	iVar43	idxPlus3Block3	CONFIRMED	assigned base+3 (command word index) on every path
+local	_radeonCopy	uStack_198	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_194	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_190	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_18c	i2dLo2	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_188	i2dHi3	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_184	i2dLo3	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_180	i2dHi4	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_17c	i2dLo4	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_178	d2iScratch1	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_170	d2iScratch2	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_168	d2iScratch3	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_160	d2iScratch4	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_158	d2iScratch5	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_150	d2iScratch6	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_148	d2iScratch7	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_140	d2iScratch8	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	_radeonCopy	local_138	i2dHi5	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_134	i2dLo5	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_128	i2dHi6	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_124	i2dLo6	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_118	i2dHi7	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_114	i2dLo7	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_110	i2dHi8	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_10c	i2dLo8	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_108	i2dHi9	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_104	i2dLo9	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_100	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonCopy	uStack_fc	i2dLo10	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonCopy	local_f8	idxPlus4Block4	CONFIRMED	assigned base+4 (command word index) on every path
+local	_radeonCopy	local_f4	idxPlus3Block4	CONFIRMED	assigned base+3 (command word index) on every path
+local	_radeonCopy	local_f0	idxPlus2Block4	CONFIRMED	assigned base+2 (command word index) on every path
+local	_radeonCopy	local_ec	idxPlus1Block4	CONFIRMED	assigned base+1 (command word index) on every path
+local	FUN_000055a4	iVar21	idxPlus5Or22Or13Or20Or19Block1	CONFIRMED	assigned base+5Or22Or13Or20Or19 (command word index) on every path
+local	FUN_000055a4	iVar22	idxPlus7Or5Or22Or8Or20Block1	CONFIRMED	assigned base+7Or5Or22Or8Or20 (command word index) on every path
+local	FUN_000055a4	iVar24	idxPlus8Or7Or4Or1Block1	CONFIRMED	assigned base+8Or7Or4Or1 (command word index) on every path
+local	FUN_000055a4	iVar28	idxPlus6Or4Or5Or2Or1Block1	CONFIRMED	assigned base+6Or4Or5Or2Or1 (command word index) on every path
+local	FUN_000055a4	iVar34	idxPlus3Or8Or2Block1	CONFIRMED	assigned base+3Or8Or2 (command word index) on every path
+local	FUN_000055a4	iVar35	idxPlus4Or6Or1Or5Or3Block1	CONFIRMED	assigned base+4Or6Or1Or5Or3 (command word index) on every path
+local	FUN_000055a4	iVar36	idxPlus9Or2Or10Or16Block1	CONFIRMED	assigned base+9Or2Or10Or16 (command word index) on every path
+local	FUN_000055a4	iVar37	idxPlus10Or11Or20Or12Block1	CONFIRMED	assigned base+10Or11Or20Or12 (command word index) on every path
+local	FUN_000055a4	iVar40	idxPlus11Or12Or6Or22Block1	CONFIRMED	assigned base+11Or12Or6Or22 (command word index) on every path
+local	FUN_000055a4	iVar41	idxPlus12Or13Or7Or6Or4Block1	CONFIRMED	assigned base+12Or13Or7Or6Or4 (command word index) on every path
+local	FUN_000055a4	iVar42	idxPlus13Or14Or8Or7Or5Block1	CONFIRMED	assigned base+13Or14Or8Or7Or5 (command word index) on every path
+local	FUN_000055a4	iVar43	idxPlus14Or15Or9Or11Or6Block1	CONFIRMED	assigned base+14Or15Or9Or11Or6 (command word index) on every path
+local	FUN_000055a4	iVar44	idxPlus15Or16Or10Or13Or7Block1	CONFIRMED	assigned base+15Or16Or10Or13Or7 (command word index) on every path
+local	FUN_000055a4	iVar46	idxPlus16Or17Or11Or14Block1	CONFIRMED	assigned base+16Or17Or11Or14 (command word index) on every path
+local	FUN_000055a4	iVar47	idxPlus17Or18Or12Or15Or13Block1	CONFIRMED	assigned base+17Or18Or12Or15Or13 (command word index) on every path
+local	FUN_000055a4	iVar49	idxPlus18Or19Or16Or14Block1	CONFIRMED	assigned base+18Or19Or16Or14 (command word index) on every path
+local	FUN_000055a4	iVar50	idxPlus19Or10Or17Block2	CONFIRMED	assigned base+19Or10Or17 (command word index) on every path
+local	FUN_000055a4	pdVar52	cmdPtrPlus6Block3	CONFIRMED	assigned base+6 (command word pointer) on every path
+local	FUN_000055a4	iVar57	idxPlus2Or18Block4	CONFIRMED	assigned base+2Or18 (command word index) on every path
+local	FUN_000055a4	iVar58	idxPlus4Or15Block5	CONFIRMED	assigned base+4Or15 (command word index) on every path
+local	FUN_000055a4	local_318	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_314	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_310	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_30c	i2dLo2	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_308	i2dHi3	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	local_300	i2dHi4	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	local_2f8	i2dHi5	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_2f4	i2dLo3	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_2f0	i2dHi6	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_2ec	i2dLo4	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_2e8	i2dHi7	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_2e4	i2dLo5	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_2e0	i2dHi8	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_2dc	i2dLo6	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_2d8	d2iScratch1	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2d0	d2iScratch2	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2c8	d2iScratch3	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2c0	d2iScratch4	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2b8	d2iScratch5	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2b0	d2iScratch6	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2a8	d2iScratch7	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_2a0	d2iScratch8	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_298	i2dHi9	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_294	i2dLo7	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_290	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_28c	i2dLo8	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_288	i2dHi11	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_284	i2dLo9	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_280	i2dHi12	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_27c	i2dLo10	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_278	i2dHi13	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_274	i2dLo11	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_270	i2dHi14	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_26c	i2dLo12	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_268	i2dHi15	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_264	i2dLo13	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_260	i2dHi16	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_25c	i2dLo14	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_258	i2dHi17	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_254	i2dLo15	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_250	i2dHi18	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_24c	i2dLo16	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_248	i2dHi19	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_244	i2dLo17	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_240	i2dHi20	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_23c	i2dLo18	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_238	i2dHi21	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	local_230	i2dHi22	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_22c	i2dLo19	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_228	i2dHi23	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_224	i2dLo20	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_220	i2dHi24	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	local_218	i2dHi25	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_214	i2dLo21	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_210	i2dHi26	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_20c	i2dLo22	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_208	i2dHi27	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_204	i2dLo23	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_200	i2dHi28	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1fc	i2dLo24	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1f8	i2dHi29	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	local_1f0	i2dHi30	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1ec	i2dLo25	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1e8	i2dHi31	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1e4	i2dLo26	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1e0	i2dHi32	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1dc	i2dLo27	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1d8	i2dHi33	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1d4	i2dLo28	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1d0	d2iScratch9	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_1c8	d2iScratch10	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_1c0	i2dHi34	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	local_1b8	i2dHi35	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1b4	i2dLo29	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1b0	i2dHi36	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1ac	i2dLo30	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1a8	i2dHi37	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_1a4	i2dLo31	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_1a0	i2dHi38	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_19c	i2dLo32	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_198	i2dHi39	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_194	i2dLo33	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_190	i2dHi40	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	FUN_000055a4	uStack_18c	i2dLo34	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	FUN_000055a4	local_188	d2iScratch11	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_180	d2iScratch12	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
+local	FUN_000055a4	local_15c	idxPlus3Block6	CONFIRMED	assigned base+3 (command word index) on every path
+local	FUN_000055a4	local_158	idxPlus2Block6	CONFIRMED	assigned base+2 (command word index) on every path
+local	FUN_000055a4	local_154	idxPlus1Block6	CONFIRMED	assigned base+1 (command word index) on every path
+local	FUN_000055a4	local_150	idxPlus16Block7	CONFIRMED	assigned base+16 (command word index) on every path
+local	FUN_000055a4	local_14c	idxPlus15Block7	CONFIRMED	assigned base+15 (command word index) on every path
+local	FUN_000055a4	local_148	idxPlus14Block7	CONFIRMED	assigned base+14 (command word index) on every path
+local	_radeonFill	uVar38	idxPlus8Block1	CONFIRMED	assigned base+8 (command word index) on every path
+local	_radeonFill	local_2d8	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_2d4	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_2d0	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_2cc	i2dLo2	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_2c8	i2dHi3	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_2c4	i2dLo3	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_2c0	i2dHi4	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_2bc	i2dLo4	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_2b8	i2dHi5	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_2b0	i2dHi6	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_2a8	i2dHi7	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_2a0	i2dHi8	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_298	i2dHi9	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_290	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_288	i2dHi11	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_280	i2dHi12	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_278	i2dHi13	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_270	i2dHi14	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_268	i2dHi15	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_260	i2dHi16	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_258	i2dHi17	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_250	i2dHi18	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_248	i2dHi19	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_240	i2dHi20	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_238	i2dHi21	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_234	i2dLo5	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_228	i2dHi22	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_224	i2dLo6	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_218	i2dHi23	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_214	i2dLo7	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_210	i2dHi24	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_208	i2dHi25	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_204	i2dLo8	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_200	i2dHi26	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1fc	i2dLo9	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1f8	i2dHi27	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_1f0	i2dHi28	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1ec	i2dLo10	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1e8	i2dHi29	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1e4	i2dLo11	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1e0	i2dHi30	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1dc	i2dLo12	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1d8	i2dHi31	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1d4	i2dLo13	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1d0	i2dHi32	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1cc	i2dLo14	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1c8	i2dHi33	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_1c0	i2dHi34	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_1b8	i2dHi35	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_1b0	i2dHi36	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	local_1a8	i2dHi37	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_1a4	i2dLo15	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_1a0	i2dHi38	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_19c	i2dLo16	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_198	i2dHi39	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_194	i2dLo17	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_190	i2dHi40	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonFill	uStack_18c	i2dLo18	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonFill	local_160	idxPlus36Block2	CONFIRMED	assigned base+36 (command word index) on every path
+local	_radeonFill	local_15c	idxPlus34Block2	CONFIRMED	assigned base+34 (command word index) on every path
+local	_radeonFill	local_158	idxPlus33Block2	CONFIRMED	assigned base+33 (command word index) on every path
+local	_radeonFill	local_154	idxPlus32Block2	CONFIRMED	assigned base+32 (command word index) on every path
+local	_radeonFill	local_150	idxPlus31Block2	CONFIRMED	assigned base+31 (command word index) on every path
+local	_radeonFill	local_14c	idxPlus30Block2	CONFIRMED	assigned base+30 (command word index) on every path
+local	_radeonFill	local_148	idxPlus29Block2	CONFIRMED	assigned base+29 (command word index) on every path
+local	_radeonFill	local_144	idxPlus27Block2	CONFIRMED	assigned base+27 (command word index) on every path
+local	_radeonFill	local_140	idxPlus24Block2	CONFIRMED	assigned base+24 (command word index) on every path
+local	_radeonFill	local_13c	idxPlus23Block2	CONFIRMED	assigned base+23 (command word index) on every path
+local	_radeonHighlight	local_1e0	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1d8	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1d0	i2dHi3	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1c8	i2dHi4	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1c0	i2dHi5	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1b8	i2dHi6	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1b0	i2dHi7	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1a8	i2dHi8	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_1a0	i2dHi9	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_198	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_190	i2dHi11	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_188	i2dHi12	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_180	i2dHi13	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_178	i2dHi14	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_170	i2dHi15	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_168	i2dHi16	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_164	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_160	i2dHi17	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_15c	i2dLo2	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_158	i2dHi18	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_154	i2dLo3	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_150	i2dHi19	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_14c	i2dLo4	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_148	i2dHi20	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_144	i2dLo5	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_138	i2dHi21	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_134	i2dLo6	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_128	i2dHi22	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_120	i2dHi23	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_118	i2dHi24	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_110	i2dHi25	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	local_108	i2dHi26	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_104	i2dLo7	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_100	i2dHi27	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_fc	i2dLo8	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_f8	i2dHi28	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_f4	i2dLo9	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonHighlight	local_f0	i2dHi29	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonHighlight	uStack_ec	i2dLo10	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	pdVar12	cmdPtrPlus44Or3Block1	CONFIRMED	assigned base+44Or3 (command word pointer) on every path
+local	_radeonSolidScanlines	pdVar15	cmdPtrPlus6Block2	CONFIRMED	assigned base+6 (command word pointer) on every path
+local	_radeonSolidScanlines	iVar21	idxPlus3Block3	CONFIRMED	assigned base+3 (command word index) on every path
+local	_radeonSolidScanlines	iVar27	idxPlus1Block3	CONFIRMED	assigned base+1 (command word index) on every path
+local	_radeonSolidScanlines	iVar30	idxPlus2Block3	CONFIRMED	assigned base+2 (command word index) on every path
+local	_radeonSolidScanlines	pdVar31	cmdPtrPlus40Or2Block1	CONFIRMED	assigned base+40Or2 (command word pointer) on every path
+local	_radeonSolidScanlines	local_178	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	local_170	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	local_168	i2dHi3	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	local_160	i2dHi4	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	local_158	i2dHi5	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_154	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_150	i2dHi6	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_14c	i2dLo2	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_148	i2dHi7	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_144	i2dLo3	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_140	i2dHi8	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_13c	i2dLo4	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_138	i2dHi9	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_134	i2dLo5	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_130	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_12c	i2dLo6	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_128	i2dHi11	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_124	i2dLo7	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_120	i2dHi12	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
+local	_radeonSolidScanlines	uStack_11c	i2dLo8	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
+local	_radeonSolidScanlines	local_114	idxPlus8Block4	CONFIRMED	assigned base+8 (command word index) on every path
+local	__AllocateSurface	uVar5	width	CONFIRMED	surfaceDesc[4]
+local	__AllocateSurface	uVar9	rowBytes	CONFIRMED	bytes per pixel * width
+local	__AllocateSurface	uVar6	paddedRowBytes	CONFIRMED	max(0x20, rowBytes)
+local	__AllocateSurface	iVar7	hwTileMode	UNKNOWN	3 when formatCode==3 else 0
+local	__AllocateSurface	iVar8	repeatIndex	CONFIRMED	loop counter over the repeated blocks
+local	__AllocateSurface	uVar13	rowIndex	CONFIRMED	loop counter over rows copied by _bcopy
+local	__AllocateSurface	uVar10	srcNext	CONFIRMED	next source row pointer
+local	__AllocateSurface	uVar11	srcRow	CONFIRMED	current source row pointer
+local	__AllocateSurface	piVar14	cmdCursor	CONFIRMED	write cursor into the returned command buffer
+local	_find_atexit_10_3	local_38	imageIndex	CONFIRMED	loop index over _dyld_image_count images
+local	_find_atexit_10_3	local_34	imageCountFn	CONFIRMED	filled by __dyld_func_lookup("__dyld_image_count")
+local	_find_atexit_10_3	local_30	imageNameFn	CONFIRMED	__dyld_get_image_name
+local	_find_atexit_10_3	local_2c	imageHeaderFn	CONFIRMED	__dyld_get_image_header
+local	_find_atexit_10_3	local_28	lookupSymbolFn	CONFIRMED	__dyld_NSLookupSymbolInImage
+local	_find_atexit_10_3	local_24	addressOfSymbolFn	CONFIRMED	__dyld_NSAddressOfSymbol (array of 7 words, first used)
+local	_find_atexit_10_3	uVar2	imageCount	CONFIRMED	result of the image-count function
+local	_get_globals	iVar1	libSystemHandle	CONFIRMED	_dlopen("/usr/lib/libSystem.B.dylib") result, then reused for the atexit test
+local	_get_globals	uVar2	symbolAddress	CONFIRMED	_dlsym / _find_atexit_10_3 result stored into the globals block
+local	_get_globals	iVar3	checkResult	CONFIRMED	_check_cxa_atexit result (-1, 0 or other)
+local	_get_globals	local_20	globals	CONFIRMED	processwide keymgr block (calloc 0x14): +2 running flag, +3 mode, +4 routine list, +8 __cxa_atexit, +0xc __cxa_finalize, +0x10 atexit
+local	_get_globals	local_18	result	CONFIRMED	returned globals pointer or 0
+local	_check_cxa_atexit	param_1	cxaAtexitFn	CONFIRMED	called as __cxa_atexit(0x678 check routine, &state, &state)
+local	_check_cxa_atexit	param_2	cxaFinalizeFn	CONFIRMED	called with &state to run/cancel the registered check
+local	_check_cxa_atexit	iVar1	status	CONFIRMED	result of cxaAtexitFn
+local	_check_cxa_atexit	pcStack00000018	cxaAtexitFnHome	CONFIRMED	home-slot copy of param_1
+local	_check_cxa_atexit	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	home-slot copy of param_2
+local	_check_cxa_atexit	local_28	state	CONFIRMED	set to 1 by _cxa_atexit_check_2 when the check routine ran
+local	_check_cxa_atexit	local_24	cxaAtexitFnCopy	CONFIRMED	copy of param_1
+local	_check_cxa_atexit	local_18	result	CONFIRMED	returned state or -1
+local	_add_routine	param_1	globals	CONFIRMED	keymgr block: +4 is the routine list head
+local	_add_routine	param_2	routine	CONFIRMED	3-word record {function, kind, argument}
+local	_add_routine	uVar1	argument	CONFIRMED	routine[2]
+local	_add_routine	puVar2	node	CONFIRMED	malloc(0x10) list node: [0] next, [1..3] routine copy
+local	_add_routine	iVar3	unlockResult	CONFIRMED	_keymgr_set_and_unlock result
+local	_add_routine	uVar4	kind	CONFIRMED	routine[1]
+local	_add_routine	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1
+local	_add_routine	puStack0000001c	routineHome	CONFIRMED	home-slot copy of param_2
+local	_add_routine	local_18	status	CONFIRMED	0 or -1
+local	_add_routine	local_14	result	CONFIRMED	returned status
+local	_run_routines	param_1	globals	CONFIRMED	keymgr block: +4 is the routine list head
+local	_run_routines	param_2	stopNode	CONFIRMED	walk stops when this node is reached
+local	_run_routines	puVar1	node	CONFIRMED	current list node
+local	_run_routines	uVar2	kindMask	CONFIRMED	1 << node[2]: tested against 0x15 and 0x2a
+local	_run_routines	a0	unlockResult	INFERRED	result of the keymgr unlock, first argument register
+local	_run_routines	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1, updated on re-lock
+local	_run_routines	puStack0000001c	stopNodeHome	CONFIRMED	home-slot copy of param_2
+local	_cxa_atexit_wrapper	param_1	entry	CONFIRMED	3-word record {function, argCount selector, argument}
+local	_cxa_atexit_wrapper	local_28	savedRunning	CONFIRMED	previous globals+2 flag
+local	_cxa_atexit_wrapper	local_24	savedList	CONFIRMED	globals+4 list head at entry, the stop node for _run_routines
+local	_cxa_atexit_wrapper	local_20	globals	CONFIRMED	keymgr block
+local	_cxa_atexit_wrapper	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1
+local	_our_atexit	uVar1	savedRunning	CONFIRMED	previous running flag at +2
+local	_our_atexit	psVar2	globals	CONFIRMED	keymgr block
+local	_our_atexit	iVar3	relocked	CONFIRMED	_run_routines result (re-locked block)
+local	_atexit_common	param_1	entry	CONFIRMED	3-word record {function, argument selector, argument}
+local	_atexit_common	param_2	dsoHandle	INFERRED	forwarded as __cxa_atexit third argument
+local	_atexit_common	pcVar1	registerFn	CONFIRMED	globals+8 (__cxa_atexit) or +0x10 (atexit)
+local	_atexit_common	iVar3	globals	CONFIRMED	_get_globals result, later the unlock result
+local	_atexit_common	a1	entryCopy	CONFIRMED	malloc(0xc) copy of the entry passed to the wrapper
+local	_atexit_common	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1
+local	_atexit_common	uStack0000001c	dsoHandleHome	CONFIRMED	home-slot copy of param_2
+local	_atexit_common	local_18	result	CONFIRMED	returned status
+local	___cxa_atexit	param_1	function	CONFIRMED	stored as the first word of the entry
+local	___cxa_atexit	param_2	argument	CONFIRMED	stored as the third word
+local	___cxa_atexit	param_3	dsoHandle	INFERRED	forwarded to _atexit_common
+local	___cxa_atexit	local_28	entryFunction	CONFIRMED	entry[0]
+local	___cxa_atexit	local_24	entryKind	CONFIRMED	entry[1] = 1
+local	___cxa_atexit	local_20	entryArgument	CONFIRMED	entry[2]
+local	___cxa_atexit	uVar1	result	CONFIRMED	_atexit_common result
+local	_atexit	param_1	function	CONFIRMED	registered function
+local	_atexit	local_28	entryFunction	CONFIRMED	entry[0]
+local	_atexit	local_24	entryKind	CONFIRMED	entry[1] = 0
+local	_atexit	iVar1	result	CONFIRMED	_atexit_common result
+local	_cxa_atexit_check_1	param_1	state	CONFIRMED	*state is set to -1 when the registration call fails
+local	_cxa_atexit_check_1	iVar1	status	CONFIRMED	result of state[1](0x650, state, state)
+local	_cxa_atexit_check_1	puStack00000018	stateHome	CONFIRMED	home-slot copy of param_1
+local	_cxa_atexit_check_2	param_1	state	CONFIRMED	*state = 1: the check routine ran
+local	_printf_LDBLStub	param_1	printfArg1	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_2	printfArg2	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_3	printfArg3	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_4	printfArg4	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_5	printfArg5	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_6	printfArg6	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_7	printfArg7	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_8	printfArg8	CONFIRMED	forwarded unchanged to the real printf
+local	___stub_getrealaddr	param_1	symbolName	CONFIRMED	copied after an underscore and suffixed with $LDBL128
+local	___stub_getrealaddr	iVar1	nameLength	CONFIRMED	_strlen of the underscore-prefixed name
+local	___stub_getrealaddr	iVar2	isDefined	CONFIRMED	_NSIsSymbolNameDefinedWithHint result
+local	___stub_getrealaddr	uVar3	symbol	CONFIRMED	NSSymbol, then its address (returned)
+local	___stub_getrealaddr	local_58	nameBuffer	CONFIRMED	"_<name>" built here
+local	___stub_getrealaddr	acStack_54	nameBufferTail	CONFIRMED	overlaps nameBuffer for the "L128" suffix store
+local	___stub_getrealaddr	acStack_50	nameBufferEnd	CONFIRMED	overlaps nameBuffer for the terminating NUL
