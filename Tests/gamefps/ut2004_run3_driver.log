@@ -1,0 +1,13 @@
+rebuilt_v1/DM-Antalus_high: 20.288568 / 73.717400 / 98.764534 fps         rand[650988771] Score = 72.560562 
+rebuilt_v1/DM-Antalus_low: 25.697178 / 87.391609 / 116.391304 fps         rand[650988771] Score = 78.194191 
+rebuilt_v1/ONS-Torlan_high: 
+rebuilt_v1/ONS-Torlan_low: 
+rebuilt_v2/DM-Antalus_high: 18.877821 / 73.532555 / 98.665474 fps         rand[650988771] Score = 72.419624 
+rebuilt_v2/DM-Antalus_low: 26.397797 / 87.090073 / 116.038498 fps         rand[650988771] Score = 78.150215 
+rebuilt_v2/ONS-Torlan_high: 5.863523 / 65.520378 / 79.392822 fps         rand[2118218666] Score = 65.555702 
+rebuilt_v2/ONS-Torlan_low: 9.315725 / 68.657188 / 81.895645 fps         rand[827666382] Score = 68.692947 
+rebuilt_v3/DM-Antalus_high: 19.260796 / 73.346298 / 98.439796 fps         rand[650988771] Score = 72.267784 
+rebuilt_v3/DM-Antalus_low: 25.460524 / 86.877441 / 115.900261 fps         rand[650988771] Score = 78.128181 
+rebuilt_v3/ONS-Torlan_high: 8.445086 / 65.560631 / 78.864517 fps         rand[2118218666] Score = 65.597061 
+rebuilt_v3/ONS-Torlan_low: 9.339913 / 68.454323 / 81.726303 fps         rand[827666382] Score = 68.488487 
+done rebuilt: /home/sam/g5logs/gamefps/ut2004_run3

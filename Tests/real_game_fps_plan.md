@@ -85,3 +85,9 @@ Each title ends with: scripts in `Tools/gamefps/<title>_compare.sh`, results in 
 - HL2: how you want the Tiger/10.5 requirement handled (try on Tiger first is my recommendation), and Steam login/ownership details for the download path (I will not enter credentials without your OK).
 - AoE3: which version/patches you have on disc, in case the installed 1.0 is not what you want benchmarked.
 - Whether benchmarking is allowed to run while the 4-hour soak is NOT running (it must not overlap) and whether to schedule it after Phase 9.
+
+## Status (Oct 21): UT2004 DONE, boot-per-side method
+- Method changed per user: NO hot-swap between sides. Stock measured on a boot-time stock driver; rebuilt (6842a99, md5 3c187f4d) installed per `boot_time_install_procedure.md`, reboot, same passes; stock restored afterwards (binary + kernelcache from backup, 2 reboots, baseline IDENTICAL).
+- Scripts: `Tools/gamefps/ut2004_bench.command` (G5), `Tools/gamefps/ut2004_run_side.sh` (dev, one side per boot), `Tools/game_fps_report.py`. Seed fixed; the recorder is NOT a frame counter for UT2004 (about 8 flushes per frame, and it halves FPS), so the game's own CSV is the cross-check.
+- Result (rebuilt prelinked vs stock prelinked, 3 rounds, `Tests/gamefps/ut2004_stock_vs_rebuilt_report.txt`): avg FPS within 0.3% on DM-Antalus/ONS-Torlan x high/low, 0 REGRESSIONS (round-1 ONS-Torlan passes lost to an unexplained SIGTERM, n=2 there).
+- A kextd-loaded rebuilt boot (rounds 1-2 clean) then panicked in round 3 in SonnetSATA 2.2.4 (NULL deref, no ATI module in the backtrace). Newest Power Mac Sonnet driver is 2.2.4 (2010); 2.2.9b is Intel-only. Not reproduced on the prelinked rebuilt boot; no stock control long enough yet.

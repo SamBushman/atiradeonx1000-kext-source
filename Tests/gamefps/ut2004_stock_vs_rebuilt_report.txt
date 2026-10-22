@@ -1,0 +1,25 @@
+== DM-Antalus_high  (stock n=3, rebuilt n=3)
+   avg    stock     73.54  rebuilt     73.53  delta   -0.0%  tol  5.0%  noise  0.4%  OK
+   min    stock     20.02  rebuilt     19.48  delta   -2.7%  tol  6.9%  noise  2.3%  OK
+   p90    stock     15.17  rebuilt     15.17  delta   +0.0%  tol  5.0%  noise  0.4%  OK
+   stall  stock     73.56  rebuilt     71.46  delta   +2.9%  tol 14.4%  noise  4.8%  OK
+   avg-fps cross-check (csv vs game line): worst 0.3%
+== DM-Antalus_low  (stock n=3, rebuilt n=3)
+   avg    stock     87.30  rebuilt     87.12  delta   -0.2%  tol  5.0%  noise  0.3%  OK
+   min    stock     24.90  rebuilt     25.85  delta   +3.8%  tol  7.7%  noise  2.6%  OK
+   p90    stock     12.94  rebuilt     12.98  delta   -0.3%  tol  5.0%  noise  0.1%  OK
+   stall  stock     65.95  rebuilt     68.40  delta   -3.7%  tol  5.0%  noise  0.1%  OK
+   avg-fps cross-check (csv vs game line): worst 0.3%
+== ONS-Torlan_high  (stock n=3, rebuilt n=2)
+   avg    stock     65.72  rebuilt     65.54  delta   -0.3%  tol  5.0%  noise  0.2%  OK
+   min    stock      7.61  rebuilt      7.15  delta   -6.0%  tol 67.2%  noise 22.4%  NOISY
+   p90    stock     17.01  rebuilt     17.08  delta   -0.4%  tol  5.0%  noise  0.2%  OK
+   stall  stock    136.59  rebuilt    144.48  delta   -5.8%  tol 77.2%  noise 25.7%  NOISY
+   avg-fps cross-check (csv vs game line): worst 0.3%
+== ONS-Torlan_low  (stock n=3, rebuilt n=2)
+   avg    stock     68.64  rebuilt     68.56  delta   -0.1%  tol  5.0%  noise  0.2%  OK
+   min    stock      9.44  rebuilt      9.33  delta   -1.1%  tol  5.0%  noise  1.3%  OK
+   p90    stock     15.93  rebuilt     15.96  delta   -0.2%  tol  5.0%  noise  0.1%  OK
+   stall  stock    105.99  rebuilt    107.21  delta   -1.1%  tol  5.0%  noise  1.3%  OK
+   avg-fps cross-check (csv vs game line): worst 0.2%
+REGRESSIONS: 0
