@@ -128,6 +128,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             else: print('%s:%d: %s: neither %s nor %s in the segment' % (f, n, fn, old, new)); nerr += 1
             continue
         if new in declset: print('%s:%d: %s: new name %s collides with a declaration' % (f, n, fn, new)); nerr += 1; continue
+        if new not in {x for v_ in created.values() for x in v_} and any(re.search(wb(new), strip_strings(l)) for l in lines[s:e]):
+            print('%s:%d: %s: new name %s is already used in the function' % (f, n, fn, new)); nerr += 1; continue
         for i, pt in todo: lines[i] = sub_part(lines[i], pt, old, new)
         npend += 1
         # declaration of new, beside old's
@@ -137,7 +139,9 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             if di is None: print('%s:%d: %s: no simple declaration of %s' % (f, n, fn, old)); nerr += 1; continue
             m = re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[di])
             at = di + 1
-            if os.environ.get('USE_DECL', 'beside') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
+            if os.environ.get('USE_DECL', 'first') == 'first':     # frame offsets count from the bottom: declarations placed first sit at the top and move nothing else
+                at = d0
+            elif os.environ.get('USE_DECL', 'first') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
                 at = max(i for i in range(d0, d1) if re.match(DECL, lines[i])) + 1
             lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); e += 1
             created.setdefault(old, []).append(new)

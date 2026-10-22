@@ -136,6 +136,23 @@ def warns(path):
     return d
 
 
+IDXREF = re.compile(r'^(lbz|lwz|lhz|lha|stb|sth|stw|lfs|lfd|stfs|stfd)\t(\S+),(-?\d+)\((r\d+)\)$')
+
+
+def prep(ins):
+    """-> (masked text, frame keys) per instruction. Frame displacements are masked; an element of a local array addressed as
+    `addi rA,r30,K / add rX,rA,rB / lbz rD,N(rX)` is the frame offset K+N (key 'A<K+N>')."""
+    masked, keys = [], []
+    for i, x in enumerate(ins):
+        mx = IDXREF.match(x)
+        if mx and i >= 2 and re.match(r'add\t%s,' % mx.group(4), ins[i - 1]) and re.match(r'addi\t\S+,r30,(\d+)$', ins[i - 2]):
+            K = int(re.match(r'addi\t\S+,r30,(\d+)$', ins[i - 2]).group(1))
+            masked.append(canon('%s\t%s,<F>(%s)' % (mx.group(1), mx.group(2), mx.group(4)))); keys.append(['A%d' % (K + int(mx.group(3)))])
+        else:
+            masked.append(canon(FR.sub('<F>', x))); keys.append([fx.group(1) or fx.group(3) or fx.group(4) for fx in FR.finditer(x)])
+    return masked, keys
+
+
 def main():
     bd, cd, bw, cw = sys.argv[1:5]
     B = funcs(bd); METAB = dict(META); C = funcs(cd); METAC = dict(META); bad = 0
@@ -145,8 +162,9 @@ def main():
         b, c = B[name], C[name]
         if len(b) != len(c): print('LENGTH', name); bad += 1; continue
         ok = True
-        for x, y in zip(b, c):
-            if canon(FR.sub('<F>', x)) != canon(FR.sub('<F>', y)): print('CODE', name, x, '|', y); ok = False; break
+        mb, kb = prep(b); mc, kc = prep(c)
+        for x, y, x0, y0 in zip(mb, mc, b, c):
+            if x != y: print('CODE', name, x0, '|', y0); ok = False; break
         m = {}
         if ok:
             # `x = y + x` becomes `x' = y + x''` when x is split, and gcc loads the operands of a commutative op in another order then: such a
@@ -156,14 +174,13 @@ def main():
             if wb_set != wc_set: print('WINDOWS differ', name); ok = False
             amb = set()
             for i in wb_set: amb.update((i, i + 1))
-            def refs(x): return [fx.group(1) or fx.group(3) or fx.group(4) for fx in FR.finditer(x)]
-            for k, (x, y) in enumerate(zip(b, c)):
+            for k in range(len(b)):
                 if k in amb: continue
-                for kx, ky in zip(refs(x), refs(y)):
+                for kx, ky in zip(kb[k], kc[k]):
                     if m.setdefault(ky, kx) != kx:
                         print('MERGE', name, 'candidate slot', ky, 'stands for', m[ky], 'and', kx); ok = False
             for i in sorted(wb_set):
-                (x1, x2), (y1, y2) = (refs(b[i])[0], refs(b[i + 1])[0]), (refs(c[i])[0], refs(c[i + 1])[0])
+                (x1, x2), (y1, y2) = (kb[i][0], kb[i + 1][0]), (kc[i][0], kc[i + 1][0])
                 for (p1, p2) in (((x1, y1), (x2, y2)), ((x1, y2), (x2, y1))):
                     if all(m.get(ky, kx) == kx for kx, ky in (p1, p2)):
                         for kx, ky in (p1, p2): m[ky] = kx
@@ -179,7 +196,7 @@ def main():
             groups = {}
             for ky, kx in m.items(): groups.setdefault(kx, set()).add(ky)
             for kx, ks in groups.items():
-                if len(ks) > 1 and any(int(k, 0) in tc for k in ks): print('ADDRESS-TAKEN split', name, kx); ok = False
+                if len(ks) > 1 and any((not k.startswith('A')) and int(k, 0) in tc for k in ks): print('ADDRESS-TAKEN split', name, kx); ok = False
         bad += not ok
     wb_, wc = warns(bw), warns(cw)
     for k, v in wc.items():
