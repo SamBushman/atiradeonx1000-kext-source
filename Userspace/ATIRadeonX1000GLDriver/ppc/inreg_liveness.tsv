@@ -29,11 +29,11 @@
 1214fc	pass_ssa_build	r8	PASS-indirect	121544 bl 0x193e18
 12499c	PrimitiveIndex__ctor_12499c	r8	PASS-deep	1249bc bl 0x124938
 125db8	PrimitiveIndex__ctor_125db8	r8	PASS-deep	125dd8 bl 0x124938
-12abd8	FUN_0012abd8	r5	PASS-no	12ac08 bl 0x19401c
-12abd8	FUN_0012abd8	r6	PASS-no	12ac08 bl 0x19401c
-12abd8	FUN_0012abd8	r7	PASS-no	12ac08 bl 0x19401c
-12abd8	FUN_0012abd8	r8	PASS-no	12ac08 bl 0x19401c
-12abd8	FUN_0012abd8	r9	PASS-no	12ac08 bl 0x19401c
+12abd8	IfHeader__swapArms	r5	PASS-no	12ac08 bl 0x19401c
+12abd8	IfHeader__swapArms	r6	PASS-no	12ac08 bl 0x19401c
+12abd8	IfHeader__swapArms	r7	PASS-no	12ac08 bl 0x19401c
+12abd8	IfHeader__swapArms	r8	PASS-no	12ac08 bl 0x19401c
+12abd8	IfHeader__swapArms	r9	PASS-no	12ac08 bl 0x19401c
 12bb48	FUN_0012bb48	r5	PASS-indirect	12bb88 bctrl 
 12bb48	FUN_0012bb48	r6	PASS-indirect	12bb88 bctrl 
 12bb48	FUN_0012bb48	r7	PASS-indirect	12bb88 bctrl 

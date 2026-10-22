@@ -173,7 +173,7 @@ local	FUN_001312f4	param_1	inst	INFERRED	FUN_001312f4 passes it as arg 0 of FUN_
 local	FUN_001315f8	param_2	inst	INFERRED	FUN_001315f8 passes it as arg 0 of FUN_00106804 (typed Inst)
 local	FUN_001330f4	param_2	inst	INFERRED	FUN_001330f4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00134de8	param_2	inst	INFERRED	FUN_00134de8 passes it as arg 0 of FUN_001054ec (typed Inst)
-local	FUN_00135d24	param_3	vector	INFERRED	FUN_00135d24 passes it as arg 0 of FUN_0019423c (typed Vector)
+local	FUN_00135d24	param_3	workList	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
 local	FUN_00137e98	param_1	inst	INFERRED	FUN_00137e98 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00138240	param_1	inst	INFERRED	FUN_00138240 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_001382b8	param_1	inst	INFERRED	FUN_001382b8 passes it as arg 0 of FUN_001054ec (typed Inst)
@@ -306,7 +306,7 @@ local	FUN_0016a568	param_1	compiler	INFERRED	accessed at Compiler-only field off
 local	FUN_0016c1fc	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0016ff54	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_00170e6c	param_1	compiler	INFERRED	FUN_00170e6c passes it as arg 0 of FUN_0016a568 (typed Compiler)
-local	FUN_00171714	param_1	compiler	INFERRED	FUN_00171714 passes it as arg 0 of FUN_00169e30 (typed Compiler)
+local	FUN_00171714	param_1	scheduler	INFERRED	param_1 is the scheduler object, not the compiler: [0] = compiler, [1] = program, [2]/[3] = target+0x60/+0x64, strings 'Scheduler : Total cycles %d' at [100]=+0x190 and 'Total dot-product transformed %d' at [0x6a]=+0x1a8
 local	FUN_00171714	param_2	program	INFERRED	FUN_00171714 passes it as arg 1 of FUN_00184ab4 (typed Program)
 local	FUN_00172474	param_2	inst	INFERRED	FUN_00172474 passes it as arg 0 of FUN_0010502c (typed Inst)
 local	FUN_001725c4	param_1	inst	INFERRED	FUN_001725c4 passes it as arg 0 of FUN_00105594 (typed Inst)

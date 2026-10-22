@@ -9,7 +9,7 @@ int FUN_00107df4(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   FUN_00107da8(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -24,7 +24,7 @@ int FUN_00107e70(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   FUN_00107da8(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -59,7 +59,7 @@ int FUN_00107f38(this, param_2, param_3)
   *this = puVar1;
   this[5] = this[5] | 0x18;
   this[0x4b] = 0;
-  return FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),this);
+  return Program__addInst(*(undefined4 *)(param_3 + 0x6c4),this);
 }
 
 /* FUN_00107fd0 @ 0x107fd0 (92 bytes) */
@@ -75,7 +75,7 @@ int FUN_00107fd0(param_1, param_2, compiler)
   param_1[0x20] = 0;
   param_1[5] = param_1[5] | 0x18;
   *param_1 = puVar1 + 8;
-  return FUN_000ee9ac(*(undefined4 *)(compiler + 0x6c4),param_1);
+  return Program__addInst(*(undefined4 *)(compiler + 0x6c4),param_1);
 }
 
 /* FUN_00108064 @ 0x108064 (68 bytes) */
@@ -87,7 +87,7 @@ int FUN_00108064(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00107fd0)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -106,7 +106,7 @@ int FUN_001080e0(param_1, param_2, param_3)
   param_1[0x20] = 0;
   param_1[5] = param_1[5] | 0x18;
   *param_1 = puVar1 + 8;
-  return FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
+  return Program__addInst(*(undefined4 *)(param_3 + 0x6c4),param_1);
 }
 
 /* FUN_00108174 @ 0x108174 (76 bytes) */
@@ -133,7 +133,7 @@ int FUN_001081c0(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108174)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -148,7 +148,7 @@ int FUN_0010823c(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108174)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -193,7 +193,7 @@ int FUN_00108350(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108304)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -208,7 +208,7 @@ int FUN_001083cc(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108304)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -248,7 +248,7 @@ int FUN_001084b8(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108448)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -263,7 +263,7 @@ int FUN_00108534(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108448)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -281,10 +281,10 @@ int IRExport__ctor_1085b0(this, compiler)
   this[5] = this[5] | 0x12;
   *this = &PTR_FUN_001ea118;
   if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) == 0) {
-    FUN_000ee9ac(*(int *)(compiler + 0x6c4),this);
+    Program__addInst(*(int *)(compiler + 0x6c4),this);
   }
   uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x178))(*(int **)(compiler + 0x30c),compiler);
-  opcodeInfo = FUN_00112f54(uVar1);
+  opcodeInfo = Opcode__getInfo(uVar1);
   uVar1 = DAT_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
@@ -314,7 +314,7 @@ int FUN_001086e8(param_1, param_2, param_3)
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  opcodeInfo = FUN_00112f54(param_2);
+  opcodeInfo = Opcode__getInfo(param_2);
   param_1[0x22] = opcodeInfo;
   return;
 }
@@ -332,7 +332,7 @@ int FUN_00108770(param_1, param_2)
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  opcodeInfo = FUN_00112f54(0xf9);
+  opcodeInfo = Opcode__getInfo(0xf9);
   param_1[0x22] = opcodeInfo;
   return;
 }
@@ -350,7 +350,7 @@ int FUN_001087f0(param_1, param_2)
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  opcodeInfo = FUN_00112f54(0xf9);
+  opcodeInfo = Opcode__getInfo(0xf9);
   param_1[0x22] = opcodeInfo;
   return;
 }
@@ -397,10 +397,10 @@ int IRExport__ctor_108918(this, compiler)
   this[5] = this[5] | 0x12;
   *this = &PTR_FUN_001ea118;
   if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) == 0) {
-    FUN_000ee9ac(*(int *)(compiler + 0x6c4),this);
+    Program__addInst(*(int *)(compiler + 0x6c4),this);
   }
   uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x178))(*(int **)(compiler + 0x30c),compiler);
-  opcodeInfo = FUN_00112f54(uVar1);
+  opcodeInfo = Opcode__getInfo(uVar1);
   uVar1 = DAT_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
@@ -430,7 +430,7 @@ int FUN_00108a50(param_1, param_2, compiler)
   param_1[0x21] = 1;
   param_1[0x20] = 1;
   *param_1 = puVar1 + 8;
-  opcodeInfo = FUN_00112f54(param_2);
+  opcodeInfo = Opcode__getInfo(param_2);
   param_1[0x22] = opcodeInfo;
   return;
 }
@@ -444,7 +444,7 @@ int FUN_00108ad8(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108a50)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -464,7 +464,7 @@ int FUN_00108b54(this, param_2, compiler)
   *this = puVar1;
   this[5] = this[5] | 0x18;
   this[0x4b] = 0;
-  return FUN_000ee9ac(*(undefined4 *)(compiler + 0x6c4),this);
+  return Program__addInst(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
 /* FUN_00108bec @ 0x108bec (68 bytes) */
@@ -476,7 +476,7 @@ int FUN_00108bec(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108b54)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -590,7 +590,7 @@ int FUN_00108ee0(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108e8c)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -796,7 +796,7 @@ int FUN_00109480(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00109428)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -905,7 +905,7 @@ int FUN_00109764(param_1, param_2, compiler)
   *param_1 = puVar1 + 8;
   param_1[0x20] = 1;
   param_1[0x4c] = 0;
-  iVar2 = FUN_000e07dc(compiler,0x3e);
+  iVar2 = Compiler__isOptionEnabled(compiler,0x3e);
   if (iVar2 != 0) {
     param_1[5] = param_1[5] | 0x18;
   }
@@ -921,7 +921,7 @@ int FUN_00109810(param_1, compiler)
   undefined4 arena;
   
   arena = *(undefined4 *)(compiler + 0x374);
-  allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+  allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00109764)(allocation + 1,param_1,compiler);
   return allocation + 1;
@@ -943,7 +943,7 @@ int FUN_0010988c(param_1, param_2, param_3)
   *param_1 = puVar1 + 8;
   param_1[0x20] = 1;
   param_1[0x4c] = 0;
-  iVar2 = FUN_000e07dc(param_3,0x3e);
+  iVar2 = Compiler__isOptionEnabled(param_3,0x3e);
   if (iVar2 != 0) {
     param_1[5] = param_1[5] | 0x18;
   }

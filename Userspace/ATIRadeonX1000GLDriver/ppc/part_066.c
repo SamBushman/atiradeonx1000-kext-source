@@ -100,7 +100,7 @@ int VRegInfo__deleting_dtor(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return Arena__free(param_1[-1],param_1 + -1);
 }
 
 /* ImmedConstBuffer__deleting_dtor @ 0x1d79ac (72 bytes) */
@@ -115,7 +115,7 @@ int ImmedConstBuffer__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* TempValue__dtor_1d79f4 @ 0x1d79f4 (72 bytes) */
@@ -130,7 +130,7 @@ int TempValue__dtor_1d79f4(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* TempValue__dtor_1d7a3c @ 0x1d7a3c (52 bytes) */
@@ -157,7 +157,7 @@ int TempValue__dtor_1d7a70(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* TempValue__dtor_1d7ab8 @ 0x1d7ab8 (52 bytes) */
@@ -196,7 +196,7 @@ int Physical__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* AddrIndexedSet__dtor @ 0x1d7b68 (52 bytes) */
@@ -223,7 +223,7 @@ int AddrIndexedSet__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* LoopRegister__dtor @ 0x1d7be4 (52 bytes) */
@@ -250,7 +250,7 @@ int LoopRegister__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* LoopIndexedSet__dtor @ 0x1d7c60 (52 bytes) */
@@ -277,7 +277,7 @@ int LoopIndexedSet__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* ExportAddress__dtor @ 0x1d7cdc (52 bytes) */
@@ -304,7 +304,7 @@ int ExportAddress__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* ExportValue__dtor @ 0x1d7d58 (52 bytes) */
@@ -331,7 +331,7 @@ int ExportValue__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* Interpolator__dtor @ 0x1d7dd4 (52 bytes) */
@@ -358,7 +358,7 @@ int Interpolator__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* TempValue__dtor_1d7e50 @ 0x1d7e50 (52 bytes) */
@@ -385,7 +385,7 @@ int TempValue__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* ExportSlot__dtor @ 0x1d7ecc (52 bytes) */
@@ -412,7 +412,7 @@ int ExportSlot__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* Resource__dtor @ 0x1d7f48 (52 bytes) */
@@ -439,7 +439,7 @@ int Resource__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* VertexRegister__dtor @ 0x1d7fc4 (52 bytes) */
@@ -466,7 +466,7 @@ int VertexRegister__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* FixedValue__dtor @ 0x1d8040 (52 bytes) */
@@ -493,7 +493,7 @@ int FixedValue__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* ImmedConstBuffer__dtor @ 0x1d80bc (52 bytes) */
@@ -538,7 +538,7 @@ int LoopIndexedConstSet__deleting_dtor(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return Arena__free(param_1[-1],param_1 + -1);
 }
 
 /* LoopIndexedInputSet__dtor @ 0x1d818c (68 bytes) */
@@ -571,7 +571,7 @@ int LoopIndexedInputSet__deleting_dtor(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return Arena__free(param_1[-1],param_1 + -1);
 }
 
 /* LoopIndexedOutputSet__dtor @ 0x1d8228 (68 bytes) */
@@ -604,7 +604,7 @@ int LoopIndexedOutputSet__deleting_dtor(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(param_1[-1],param_1 + -1);
+  return Arena__free(param_1[-1],param_1 + -1);
 }
 
 /* KhanPs__deleting_dtor @ 0x1d8318 (52 bytes) */
@@ -716,7 +716,7 @@ int MirrorBlock__deleting_dtor(param_1)
   *param_1 = PTR_DAT_001e9134 + 8;
   Block__dtor_ea270(param_1);
   if (param_1 != (undefined4 *)0x0) {
-    FUN_00193cc0(param_1[-1],param_1 + -1);
+    Arena__free(param_1[-1],param_1 + -1);
     return;
   }
   return;
@@ -754,7 +754,7 @@ int SchedNode__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* ResourceModel__deleting_dtor @ 0x1d86b4 (56 bytes) */
@@ -765,7 +765,7 @@ int ResourceModel__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* ThreadModel__deleting_dtor @ 0x1d87a8 (56 bytes) */
@@ -776,7 +776,7 @@ int ThreadModel__deleting_dtor(this2)
   if (this2 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this2[-1],this2 + -1);
+  return Arena__free(this2[-1],this2 + -1);
 }
 
 

@@ -28,7 +28,7 @@ int R300SchedModel__dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* R300VSchedModel__dtor @ 0x1d8a28 (52 bytes) */
@@ -55,7 +55,7 @@ int R300VSchedModel__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* FudoChip__deleting_dtor @ 0x1d8af4 (68 bytes) */
@@ -133,7 +133,7 @@ int R520SchedModel__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* R520SchedModel__dtor @ 0x1d8c70 (68 bytes) */
@@ -158,7 +158,7 @@ int R520MachineAssembler__deleting_dtor(this)
   *this = &PTR_FUN_001eb9a8;
   R300MachineAssembler__dtor_196dbc(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;

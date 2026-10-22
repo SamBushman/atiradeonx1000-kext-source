@@ -7,7 +7,7 @@ int FuncEndBlock__deleting_dtor(this)
   *this = &PTR_FUN_001e9b60;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -28,7 +28,7 @@ int LoopHeader__deleting_dtor(this)
   *this = &PTR_FUN_001e9bb8;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -49,7 +49,7 @@ int LoopFooter__deleting_dtor(this)
   *this = &PTR_FUN_001e9c10;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -70,7 +70,7 @@ int PostLoopFooter__deleting_dtor(this)
   *this = &PTR_FUN_001e9c68;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -91,7 +91,7 @@ int IfHeader__deleting_dtor(this)
   *this = &PTR_FUN_001e9cc0;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -112,7 +112,7 @@ int IfHeader__dtor_1ce208(this)
   *this = &PTR_FUN_001e9cc0;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -133,7 +133,7 @@ int IfFooter__deleting_dtor(this)
   *this = &PTR_FUN_001e9d70;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -154,7 +154,7 @@ int IfFooter__dtor_1ce320(this)
   *this = &PTR_FUN_001e9d70;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -175,7 +175,7 @@ int BreakOrContinueBlock__deleting_dtor(param_1)
   *param_1 = PTR_DAT_001e8b54 + 8;
   Block__dtor_ea270(param_1);
   if (param_1 != (undefined4 *)0x0) {
-    FUN_00193cc0(param_1[-1],param_1 + -1);
+    Arena__free(param_1[-1],param_1 + -1);
     return;
   }
   return;
@@ -192,7 +192,7 @@ int ContinueBlock__deleting_dtor(this)
   *this = vtable;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -213,7 +213,7 @@ int ExitBlock__deleting_dtor(this)
   *this = &PTR_FUN_001e9ed0;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -250,7 +250,7 @@ int BreakBlock__deleting_dtor(this)
   *this = vtable;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
-    FUN_00193cc0(this[-1],this + -1);
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -424,7 +424,7 @@ int IRInst__dtor_1cecf4(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1ced3c @ 0x1ced3c (52 bytes) */
@@ -451,7 +451,7 @@ int IRInst__deleting_dtor(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cedb8 @ 0x1cedb8 (52 bytes) */
@@ -478,7 +478,7 @@ int IRInst__dtor_1cedec(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cee34 @ 0x1cee34 (72 bytes) */
@@ -493,7 +493,7 @@ int IRInst__dtor_1cee34(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cee7c @ 0x1cee7c (72 bytes) */
@@ -508,7 +508,7 @@ int IRInst__dtor_1cee7c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1ceec4 @ 0x1ceec4 (72 bytes) */
@@ -523,7 +523,7 @@ int IRInst__dtor_1ceec4(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cef0c @ 0x1cef0c (52 bytes) */
@@ -562,7 +562,7 @@ int IRInst__dtor_1cef74(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cefbc @ 0x1cefbc (52 bytes) */
@@ -589,7 +589,7 @@ int IRInst__dtor_1ceff0(this2)
   if (this2 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this2[-1],this2 + -1);
+  return Arena__free(this2[-1],this2 + -1);
 }
 
 

@@ -8,7 +8,7 @@ int eh_pad_107c38(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -22,7 +22,7 @@ int eh_pad_107cb4(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -36,7 +36,7 @@ int eh_pad_107e38(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -50,7 +50,7 @@ int eh_pad_107eb4(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -94,7 +94,7 @@ int eh_pad_1080a8(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -123,7 +123,7 @@ int eh_pad_108204(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -137,7 +137,7 @@ int eh_pad_108280(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -151,7 +151,7 @@ int eh_pad_108394(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -165,7 +165,7 @@ int eh_pad_108410(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -179,7 +179,7 @@ int eh_pad_1084fc(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -193,7 +193,7 @@ int eh_pad_108578(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -297,7 +297,7 @@ int eh_pad_108b1c(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -326,7 +326,7 @@ int eh_pad_108c30(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -340,7 +340,7 @@ int eh_pad_108f24(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -354,7 +354,7 @@ int eh_pad_1094c4(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -413,7 +413,7 @@ int eh_pad_109854(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -472,7 +472,7 @@ int eh_pad_109bb8(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -486,7 +486,7 @@ int eh_pad_109d94(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -500,7 +500,7 @@ int eh_pad_109ec8(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -514,7 +514,7 @@ int eh_pad_109fe4(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -528,7 +528,7 @@ int eh_pad_10a108(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -542,7 +542,7 @@ int eh_pad_10a284(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -616,7 +616,7 @@ int eh_pad_10a5e8(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -660,7 +660,7 @@ int eh_pad_10a79c(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -674,7 +674,7 @@ int eh_pad_10adb4(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r28,unaff_r30);
+    Arena__free(unaff_r28,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -688,7 +688,7 @@ int eh_pad_10b000(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r29,unaff_r30);
+    Arena__free(unaff_r29,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);
@@ -702,7 +702,7 @@ int eh_pad_10be9c(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r28,unaff_r30);
+    Arena__free(unaff_r28,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);

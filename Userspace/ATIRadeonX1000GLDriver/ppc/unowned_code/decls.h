@@ -498,7 +498,7 @@ extern int FUN_0004a860();
 extern int FUN_00055610();
 extern int FUN_00055a30();
 extern int FUN_000da458();
-extern int FUN_000e1534();
+extern int Compiler__fail();
 extern int FUN_000e9294();
 extern int FUN_000f4a84();
 extern int FUN_0010defc();

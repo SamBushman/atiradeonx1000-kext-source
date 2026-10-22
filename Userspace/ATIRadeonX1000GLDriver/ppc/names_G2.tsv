@@ -55,14 +55,14 @@ local	FUN_0002a3d0	iVar32	hwFormat	INFERRED	index chosen from the (format,type) 
 local	FUN_0002a3d0	puVar24	packet	INFERRED	32-byte aligned command packet, header 0xc0001000
 local	FUN_0002a3d0	puVar23	packetRaw	INFERRED	FUN_0002cd50 result the packet pointer is aligned from
 local	FUN_00135fb0	param_1	colorGraph	INFERRED	function carries the string "color_graph"; *(param_1+0x2c) is the compiler whose +0x378 is the arena (as named by W5)
-local	FUN_00135fb0	iVar20	nodeCount	INFERRED	*(*(compiler+0x30c)+0x14); every per-node array below is allocated nodeCount*4 bytes from the arena
-local	FUN_00135fb0	uVar26	bitsetWords	INFERRED	(n + 31) >> 5: words of a per-node bit set allocated as bitsetWords*4+0xc bytes and cleared in a loop
+local	FUN_00135fb0	iVar20	registerClassCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	uVar26	nodeIdOrBitsetWords	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
 local	FUN_00135fb0	puVar21	bitsetData	INFERRED	start of the cleared bit set words (allocation+1)
 local	FUN_00135fb0	iVar25	byteOffset	INFERRED	node index * 4 stepped by 4 each iteration over the nodes
-local	FUN_00135fb0	iVar3	nodeIndex	INFERRED	loop counter over the nodes (reused earlier as the length of the cleared header array)
+local	FUN_00135fb0	iVar3	classIndexOrNodeCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
 local	FUN_0012d2f0	param_1	flattenPass	INFERRED	function carries the string "flatten_ifs"; *(param_1+8) is the compiler (+0x30c, +0x6a8, +0x6c4 are read as in other compiler passes) and *(param_1+900) the node being flattened
-local	FUN_0012d2f0	piVar20	node	INFERRED	*(flattenPass+900); virtual methods at +0x28/+0x40 are asked before flattening, field [2] is the child list head, [0x4b] the condition value
-local	FUN_0012d2f0	bVar1	changed	INFERRED	set when a flatten step succeeded
+local	FUN_0012d2f0	piVar20	block	INFERRED	pass_flatten_ifs (notes_compiler_passes.md): if/else regions are linearised and the footer phis become conditional selects; roles read from the CFG rewiring and the phi rewrite
+local	FUN_0012d2f0	bVar1	changedAny	INFERRED	pass_flatten_ifs (notes_compiler_passes.md): if/else regions are linearised and the footer phis become conditional selects; roles read from the CFG rewiring and the phi rewrite
 local	FUN_0008c590	param_1	callbacks	INFERRED	table whose +0xc entry allocates (called with 0x24a30 first) and +0x18 entry releases the old program pointer
 local	FUN_0008c590	param_2	program	INFERRED	output record zeroed field by field at entry (flag byte at +0x54, pointer at +0x60 released)
 local	FUN_0008c590	piVar9	workArea	INFERRED	allocation of 0x24a30 bytes from callbacks[3], freed with _free before returning

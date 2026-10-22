@@ -24,7 +24,7 @@ int IRInst__dtor_1cfee0(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cff28 @ 0x1cff28 (52 bytes) */
@@ -51,7 +51,7 @@ int IRInst__dtor_1cff5c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* HwLimits__dtor @ 0x1cffa4 (36 bytes) */
@@ -143,7 +143,7 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
   
   iVar2 = FUN_0017d610(param_2);
   if (((iVar2 == 0) && (iVar2 = FUN_0017cdbc(param_2), iVar2 == 0)) &&
-     ((iVar2 = FUN_000e07dc(param_4,0xc), iVar2 == 0 || (iVar2 = FUN_0017e338(param_2), iVar2 == 0))
+     ((iVar2 = Compiler__isOptionEnabled(param_4,0xc), iVar2 == 0 || (iVar2 = FUN_0017e338(param_2), iVar2 == 0))
      )) {
     iVar4 = *(int *)(param_4 + 0x658);
     iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
@@ -151,7 +151,7 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
     uVar6 = 2;
     loopIndex = 0;
     do {
-      operandRecord = FUN_001054ec(uVar5,0);
+      operandRecord = IRInst__getOperandRecord(uVar5,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar6;
@@ -531,7 +531,7 @@ int FUN_001d0e0c(param_1, param_2, param_3, param_4)
     uVar5 = 2;
     loopIndex = 0;
     do {
-      operandRecord = FUN_001054ec(uVar6,0);
+      operandRecord = IRInst__getOperandRecord(uVar6,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar5;
