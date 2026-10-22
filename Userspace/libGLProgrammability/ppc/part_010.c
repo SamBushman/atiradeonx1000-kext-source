@@ -939,6 +939,7 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2, param_3)
   uint param_2;
   int param_3;
 {
+  int copyIndex;
   int length;
   char ch;
   uint loopIndex;
@@ -955,7 +956,7 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2, param_3)
   iVar8 = 0;
   allocation = _malloc(*(int *)(param_1 + 0x20) + length + 1);
   loopIndex = 0;
-  iVar3 = 0;
+  copyIndex = 0;
   if (param_2 != 0xffffffff) {
     pcVar6 = *(char **)(param_1 + 0x14);
     ch = *pcVar6;
@@ -964,10 +965,10 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2, param_3)
         loopIndex = loopIndex + 1;
       }
       *(char *)(allocation + iVar8) = ch;
-      iVar3 = iVar3 + 1;
+      copyIndex = copyIndex + 1;
       iVar8 = iVar8 + 1;
       if (param_2 + 1 <= loopIndex) break;
-      ch = pcVar6[iVar3];
+      ch = pcVar6[copyIndex];
     }
   }
   *(undefined1 *)(allocation + iVar8) = 0;
@@ -978,20 +979,20 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2, param_3)
     ch = *(char *)(allocation + iVar8);
   }
   iVar7 = *(int *)(param_1 + 0x14);
-  ch = *(char *)(iVar7 + iVar3);
+  ch = *(char *)(iVar7 + copyIndex);
   while ((ch != '\0' && (ch != ']'))) {
-    iVar3 = iVar3 + 1;
-    ch = *(char *)(iVar7 + iVar3);
+    copyIndex = copyIndex + 1;
+    ch = *(char *)(iVar7 + copyIndex);
   }
-  ch = *(char *)(iVar7 + iVar3);
+  ch = *(char *)(iVar7 + copyIndex);
   while (ch != '\0') {
     *(char *)(allocation + iVar8) = ch;
-    iVar3 = iVar3 + 1;
+    copyIndex = copyIndex + 1;
     iVar8 = iVar8 + 1;
-    ch = *(char *)(iVar7 + iVar3);
+    ch = *(char *)(iVar7 + copyIndex);
   }
   iVar5 = *(int *)(param_1 + 0x14);
-  *(undefined1 *)(allocation + iVar8) = *(undefined1 *)(iVar7 + iVar3);
+  *(undefined1 *)(allocation + iVar8) = *(undefined1 *)(iVar7 + copyIndex);
   if (iVar5 != 0) {
     _free(iVar5);
   }

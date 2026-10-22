@@ -83,15 +83,15 @@ int yy_scan_string(param_1)
   char *param_1;
 {
   char ch;
-  int iVar2;
+  int copyIndex;
   
-  iVar2 = 0;
+  copyIndex = 0;
   ch = *param_1;
   while (ch != '\0') {
-    iVar2 = iVar2 + 1;
-    ch = param_1[iVar2];
+    copyIndex = copyIndex + 1;
+    ch = param_1[copyIndex];
   }
-  return ((int (*)())yy_scan_bytes)(param_1,iVar2);
+  return ((int (*)())yy_scan_bytes)(param_1,copyIndex);
 }
 
 /* yy_scan_bytes @ 0x97badce4 (176 bytes) */
@@ -1222,19 +1222,19 @@ int scpy(param_1, param_2)
   char *param_2;
 {
   char ch;
-  int iVar2;
+  int copyIndex;
   
   ch = *param_2;
-  iVar2 = 0;
+  copyIndex = 0;
   if (ch != '\0') {
     do {
-      param_1[iVar2] = ch;
-      iVar2 = iVar2 + 1;
-      ch = param_2[iVar2];
+      param_1[copyIndex] = ch;
+      copyIndex = copyIndex + 1;
+      ch = param_2[copyIndex];
     } while (ch != '\0');
-    return iVar2;
+    return copyIndex;
   }
-  return iVar2;
+  return copyIndex;
 }
 
 /* handleDigit @ 0x97baf3b8 (112 bytes) */
