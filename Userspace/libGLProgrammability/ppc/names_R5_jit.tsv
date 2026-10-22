@@ -553,3 +553,232 @@ use	_PPCRuntimeCompilerCompileAV	uVar7	vectorInstWord	CONFIRMED	AltiVec instruct
 use	_PPCRuntimeCompilerCompileAV	uVar7	vectorInstWord	CONFIRMED	AltiVec instruction template (opcode 4) stored into the code buffer, register fields ORed in	^\s*uVar7\ =\ 0x10631a2c;$@3	+1
 use	_PPCRuntimeCompilerCompileAV	uVar7	vectorInstWord	CONFIRMED	AltiVec instruction template (opcode 4) stored into the code buffer, register fields ORed in	^\s*uVar7\ =\ 0x10631b2c;$@2	+1
 use	_PPCRuntimeCompilerCompileAV	uVar7	vectorInstWord	CONFIRMED	AltiVec instruction template (opcode 4) stored into the code buffer, register fields ORed in	^\s*\*puVar13\ =\ uVar7;$@8	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*iVar21\ =\ \*piVar10;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*if\ \(iVar21\ ==\ 0x22\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*if\ \(\(iVar21\ ==\ 0x31\)\ \|\|\ \(iVar21\ ==\ 0x36\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*if\ \(iVar21\ ==\ 0x36\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*switch\(iVar21\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*switch\(iVar21\)\ \{$@2	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*if\ \(\(iVar21\ ==\ 0x43\)\ \|\|\ \(iVar21\ ==\ 0x45\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	opcode	CONFIRMED	shader opcode of the current instruction (index into _ppstreamOpString)	^\s*\(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSetLodBiasEnabled\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),\(uint\)\(iVar21\ \-\ 0x44U\ <\ 2\)\);$	+2
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar21\ =\ \(uint\)\(\*\(char\ \*\)\(in_r9\ \+\ 0x12\)\ ==\ '\\0'\)\ \*\ 0x24;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar9\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar21\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$	+9
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar9\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@2	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar21\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@2	+9
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar9\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@3	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar9\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@4	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	sourceOffset21	INFERRED	byte offset (0 or 0x24) of the vector source operand descriptor inside the instruction	^\s*iVar21\ =\ iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@3	+9
+use	_PPCRuntimeCompilerCompileAV	iVar21	codeBufferBase	CONFIRMED	compiler+0xe2c: start of the generated code buffer	^\s*iVar21\ =\ \(int\)\(\(ulonglong\)uVar23\ >>\ 0x20\);$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	codeBufferBase	CONFIRMED	compiler+0xe2c: start of the generated code buffer	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe2c\)\ =\ iVar21;$	+2
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe48\);$	+2
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe48\);$@2	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*else\ if\ \(iVar21\ ==\ 1\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe48\);$@3	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*if\ \(iVar21\ ==\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*if\ \(iVar21\ ==\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe48\);$@4	+1
+use	_PPCRuntimeCompilerCompileAV	iVar21	passIndex	CONFIRMED	compiler+0xe48: compile pass counter (the depth test is only emitted from the second pass on)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0xe48\)\ =\ iVar21\ \+\ 1U;$	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ <\ 3\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ ==\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$@2	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ <\ 3\)\ \{$@2	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ ==\ 3\)\ \{$@2	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$@3	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ <\ 3\)\ \{$@3	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ ==\ 3\)\ \{$@3	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$@3	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$@4	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ <\ 3\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ ==\ 3\)\ goto\ switchD_97bdfc38_caseD_28;$	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$@5	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ <\ 3\)\ \{$@4	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ ==\ 3\)\ \{$@4	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$@4	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$@6	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ <\ 3\)\ \{$@5	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ ==\ 3\)\ \{$@5	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$@5	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*bVar3\ =\ \*\(byte\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$@7	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ <\ 3\)\ \{$@6	+2
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*else\ if\ \(bVar3\ ==\ 3\)\ \{$@6	+1
+use	_PPCRuntimeCompilerCompileAV	bVar3	dimension	INFERRED	vector dimension byte of the instruction (inst+5): 1..4 selects the 1D..4D variant	^\s*if\ \(bVar3\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$@6	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	codeBuffer	CONFIRMED	0x2000-byte code buffer returned by _glpDCBAlloc	^\s*uVar15\ =\ _glpDCBAlloc\(0x2000\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	codeBuffer	CONFIRMED	0x2000-byte code buffer returned by _glpDCBAlloc	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\ =\ uVar15;$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_01;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_02;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_00;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_03;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_04;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_05;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_06;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_07;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_08;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$@5	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$@6	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_09;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ \(undefined4\)uVar23;$@7	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_10;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_11;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerWriteFinalFragmentToBuffer\)\(param_1,uVar15,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_12;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerWriteFinalFragmentToBuffer\)\(param_1,uVar15,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	passThroughR4	UNKNOWN	Ghidra extra-output register r4 carried between calls	^\s*uVar15\ =\ extraout_r4_13;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	destComponent	INFERRED	destination component (0..3) written back by _PPCRuntimeCompilerWriteDestinationAV	^\s*uVar15\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	destComponent	INFERRED	destination component (0..3) written back by _PPCRuntimeCompilerWriteDestinationAV	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerWriteDestinationAV\)\(param_1,uVar15\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	destComponent	INFERRED	destination component (0..3) written back by _PPCRuntimeCompilerWriteDestinationAV	^\s*uVar15\ =\ 1;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	destComponent	INFERRED	destination component (0..3) written back by _PPCRuntimeCompilerWriteDestinationAV	^\s*uVar15\ =\ 2;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	destComponent	INFERRED	destination component (0..3) written back by _PPCRuntimeCompilerWriteDestinationAV	^\s*uVar15\ =\ 3;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	projectionEnabled	INFERRED	flag passed to _PPCTextureSamplerSetProjectionEnabled (TXP vs TEX)	^\s*uVar15\ =\ 0;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	projectionEnabled	INFERRED	flag passed to _PPCTextureSamplerSetProjectionEnabled (TXP vs TEX)	^\s*uVar15\ =\ 1;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	projectionEnabled	INFERRED	flag passed to _PPCTextureSamplerSetProjectionEnabled (TXP vs TEX)	^\s*\(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSetProjectionEnabled\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar15\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar15	grownCodeBuffer	CONFIRMED	code buffer after _glpDCBRealloc (it grows as the compiled code is finalised)	^\s*uVar15\ =\ _glpDCBRealloc\(\*\(int\ \*\)\(param_1\ \+\ 0xe2c\),iVar19\ <<\ 2\);$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar15	grownCodeBuffer	CONFIRMED	code buffer after _glpDCBRealloc (it grows as the compiled code is finalised)	^\s*\(\*_glpPushInstructions\)\(iVar19,uVar15,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*uVar20\ =\ 1;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*\(uVar12\ =\ \(uint\)\*\(byte\ \*\)\(iVar11\ \+\ 0x49\),\ uVar20\ <\ uVar12\)\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ !=\ 4\)\ goto\ LAB_97bdde9c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 3\)\ \{$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ !=\ 4\)\ goto\ LAB_97bdde9c;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ !=\ 4\)\ goto\ LAB_97be18e4;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 3\)\ \{$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 4\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ <\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 3\)\ \{$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ <\ 4\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 4\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*if\ \(uVar20\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	elementCount	INFERRED	number of vec4 slots: the largest vector width of the active source operands	^\s*\}\ while\ \(uVar12\ <\ uVar20\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	vectorInstWord2	CONFIRMED	AltiVec instruction template (primary opcode 4)	^\s*uVar20\ =\ 0x10a20000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	vectorInstWord2	CONFIRMED	AltiVec instruction template (primary opcode 4)	^\s*uVar20\ =\ 0x10a30000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	vectorInstWord2	CONFIRMED	AltiVec instruction template (primary opcode 4)	^\s*\*puVar13\ =\ uVar20\ \|\ 0x28c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	ppcWord	CONFIRMED	integer-unit instruction word (primary opcode 31: lvx/stvx/and...) stored into the code buffer	^\s*uVar20\ =\ 0x7c43c0ce;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	ppcWord	CONFIRMED	integer-unit instruction word (primary opcode 31: lvx/stvx/and...) stored into the code buffer	^\s*uVar20\ =\ 0x7c43b8ce;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	ppcWord	CONFIRMED	integer-unit instruction word (primary opcode 31: lvx/stvx/and...) stored into the code buffer	^\s*uVar20\ =\ 0x1048104a;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar20	ppcWord	CONFIRMED	integer-unit instruction word (primary opcode 31: lvx/stvx/and...) stored into the code buffer	^\s*\*puVar13\ =\ uVar20;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10603cc4;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10603cc4;$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10603cc4;$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060012c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060022c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060032c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1063192c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10631a2c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ uVar8;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10603cc4;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060012c;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ uVar8;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060022c;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060032c;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1063192c;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10631a2c;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10631b2c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10631a8c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar18\ =\ uVar8;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x1060038c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar8\ =\ 0x10683cc4;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	vectorInstWord3	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ uVar8;$@3	+1
+local	_PPCRuntimeCompilerCompileAV	in_r5	srcBankWord	INFERRED	operand descriptor word 1 (bank index) of the last source operand, carried in r5 into the next _PPCRuntimeCompilerLoadSourceAV call
+local	_PPCRuntimeCompilerCompileAV	in_r6	srcSwizzleWord	INFERRED	operand descriptor word 2 (swizzle bytes) carried in r6
+local	_PPCRuntimeCompilerCompileAV	in_r7	srcIndexWord	INFERRED	operand descriptor word 3 (relative-address info) carried in r7
+local	_PPCRuntimeCompilerCompileAV	in_r8	srcStorageWord	INFERRED	operand descriptor word 4 (storage class/negate/relative flag) carried in r8
+local	_PPCRuntimeCompilerCompileAV	in_r9	inst	CONFIRMED	current shader instruction (compiler+0xe28) kept in r9 across the emitter calls
+local	_PPCRuntimeCompilerCompileAV	in_r10	srcTypeWord	INFERRED	operand descriptor word 6 (value type) carried in r10
+use	_PPCRuntimeCompilerCompileAV	uVar6	sourceComponent	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar6\ =\ uVar12;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	sourceComponent	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar6\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	sourceComponent	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x54\),uVar6,uVar7\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10400000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar6\ \|\ 0x28c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar13\ =\ uVar6;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10410000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10400484;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10403cc4;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10400000;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar13\ =\ uVar6\ \|\ 0x1a8c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10410000;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10430000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10421a2c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$@5	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$@6	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0x10420000;$@7	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar6\ \|\ 0x192c;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar6	vectorInstWord4	CONFIRMED	AltiVec instruction template (primary opcode 4) stored into the code buffer	^\s*\*puVar14\ =\ uVar6;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*\(uVar12\ =\ \(uint\)\*\(byte\ \*\)\(iVar11\ \+\ 0x49\),\ uVar20\ <\ uVar12\)\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ uVar20;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ 0;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x78\),uVar12,1\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ uVar20;$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ 0;$@4	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x78\),uVar12,1\);$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ uVar20;$@6	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ 0;$@6	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x78\),uVar12,1\);$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ 0;$@7	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar6\ =\ uVar12;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerWriteDestinationAV\)\(param_1,uVar12\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	operandWidth	CONFIRMED	component count byte of the source operand (descriptor word 5, byte 1) used to find the widest operand	^\s*uVar12\ =\ uVar12\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar12\ =\ uVar20;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar12\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x54\),uVar12,0\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar12\ =\ uVar20;$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar12\ =\ 0;$@3	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x54\),uVar12,0\);$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar12\ =\ uVar20;$@5	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*uVar12\ =\ 0;$@5	+1
+use	_PPCRuntimeCompilerCompileAV	uVar12	sourceComponent2	INFERRED	source component index passed to _PPCRuntimeCompilerLoadSourceAV	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x54\),uVar12,0\);$@3	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\ =\ in_r10\ \+\ iVar21;$	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\[1\]\ =\ 0x10452c84;$	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\ =\ in_r10\ \+\ iVar21;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\ =\ \(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar9\ \*\ 4\);$	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\[1\]\ =\ 0x10452c84;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*\*\(int\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ piVar10\ \+\ 2;$	+1
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0xd80\);$	+3
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0xd80\);$@2	+3
+use	_PPCRuntimeCompilerCompileAV	piVar10	codeWordPtr	INFERRED	pointer into the code buffer words being filled in	^\s*piVar10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0xd80\);$@3	+3
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCRasterOpMachine_DepthTestRTCAV\)\(param_1\ \+\ 0xe14,\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\);$	+3
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCNoiseGeneratorCalculate2DAVRTC\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0x360,$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCNoiseGeneratorCalculate1DAVRTC\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0x360,$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCNoiseGeneratorCalculate3DAVRTC\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0x360,$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCNoiseGeneratorCalculate4DAVRTC\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe20\)\ \+\ 0x360,$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexelRECTRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel3DRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel2DRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel1DRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar15\ =\ \(undefined4\)uVar23;$@3	+2
+use	_PPCRuntimeCompilerCompileAV	uVar23	emitResult64	INFERRED	64-bit return pair of an emitter call: new code cursor in the high word, extra value in the low word	^\s*uVar23\ =\ _glpDCBRealloc\(iVar9,iVar19\);$	+3
+use	_PPCRuntimeCompilerCompileAV	iVar17	operandOffset	INFERRED	byte offset (stride 0x24) walking the source operand descriptors	^\s*iVar17\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	operandOffset	INFERRED	byte offset (stride 0x24) walking the source operand descriptors	^\s*iVar11\ =\ iVar17\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	operandOffset	INFERRED	byte offset (stride 0x24) walking the source operand descriptors	^\s*iVar17\ =\ iVar17\ \+\ 0x24;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	operandOffset	INFERRED	byte offset (stride 0x24) walking the source operand descriptors	^\s*iVar17\ =\ 0;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	operandOffset	INFERRED	byte offset (stride 0x24) walking the source operand descriptors	^\s*iVar9\ =\ iVar17\ \+\ iVar9;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	operandOffset	INFERRED	byte offset (stride 0x24) walking the source operand descriptors	^\s*iVar17\ =\ iVar17\ \+\ 0x24;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	codeCursorAfter	INFERRED	code cursor advanced past the chunk just copied	^\s*iVar17\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar9\ \*\ 4\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar17	codeCursorAfter	INFERRED	code cursor advanced past the chunk just copied	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ =\ iVar17;$	+2
+use	_PPCRuntimeCompilerCompileAV	cVar2	saturateFlag	CONFIRMED	saturate flag of the instruction: the saturate chunk is appended when set	^\s*cVar2\ =\ \*\(char\ \*\)\(piVar10\ \+\ 1\);$	+1
+use	_PPCRuntimeCompilerCompileAV	cVar2	saturateFlag	CONFIRMED	saturate flag of the instruction: the saturate chunk is appended when set	^\s*if\ \(cVar2\ !=\ '\\0'\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	cVar2	saturateFlag	CONFIRMED	saturate flag of the instruction: the saturate chunk is appended when set	^\s*if\ \(cVar2\ !=\ '\\0'\)\ \{$@2	+1
+use	_PPCRuntimeCompilerCompileAV	cVar2	dimensionByte	INFERRED	vector dimension byte of the instruction (inst+5)	^\s*cVar2\ =\ \*\(char\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 5\);$	+2
+use	_PPCRuntimeCompilerCompileAV	cVar2	dimensionByte	INFERRED	vector dimension byte of the instruction (inst+5)	^\s*else\ if\ \(cVar2\ ==\ '\\x02'\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	cVar2	dimensionByte	INFERRED	vector dimension byte of the instruction (inst+5)	^\s*else\ if\ \(cVar2\ ==\ '\\x03'\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	cVar2	dimensionByte	INFERRED	vector dimension byte of the instruction (inst+5)	^\s*if\ \(cVar2\ !=\ '\\x04'\)\ goto\ LAB_97bdf944;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar19	codeBufferCapacity	CONFIRMED	code buffer capacity in bytes (0x2000, grown by _glpDCBRealloc when fewer than 3000 bytes remain)	^\s*iVar19\ =\ 0x2000;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar19	codeBufferCapacity	CONFIRMED	code buffer capacity in bytes (0x2000, grown by _glpDCBRealloc when fewer than 3000 bytes remain)	^\s*if\ \(iVar19\ \-\ 3000U\ <\ \(uint\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \-\ iVar9\)\)\ \{$	+3
+use	_PPCRuntimeCompilerCompileAV	iVar19	codeWordCount	CONFIRMED	number of generated code words (cursor minus buffer base, >> 2)	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\)\ >>\ 2;$	+2
+use	_PPCRuntimeCompilerCompileAV	iVar19	codeWordCount	CONFIRMED	number of generated code words (cursor minus buffer base, >> 2)	^\s*\(\*_glpPushInstructions\)\(iVar19,uVar15,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
