@@ -822,25 +822,16 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
   bool needsSetup;
   undefined *taskPtr;
   uint *lastHeader;
-  int iVar6;
-  int iVar7;
-  dword *pdVar8;
-  int iVar9;
   int idxPlus22Or10Block1;
-  int iVar11;
   dword *cmdPtrPlus36Or1Block2;
   int idxPlus1Or20Block1;
   int idxPlus6Or22Block1;
   dword texWord1;
-  dword *pdVar16;
   int idxPlus2Or5Block1;
   int idxPlus8Or7Block1;
-  dword *pdVar19;
   int idxPlus7Or8Block1;
   dword texWord2;
-  dword *pdVar22;
   dword texWord3;
-  dword *pdVar24;
   int idxPlus4Or6Block1;
   int idxPlus9Block1;
   int idxPlus10Or19Block1;
@@ -910,7 +901,6 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
   uint srcLeftInt;
   uint offscreenFormat;
   uint screenFormat;
-  int local_d0;
   undefined4 *offscreenDesc;
   undefined4 flushWaitWord;
   uint colorBufferWord;
@@ -921,6 +911,28 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
   dword *scratchWord0Ptr;
   dword *scratchWord1Ptr;
   int *rect;
+  int createResult;
+  int mapResult;
+  int pass1RegByteOffset;
+  int rectHeight;
+  int pass1SetupWords;
+  int dstY;
+  int pass1Idx20;
+  int mapResultPass2;
+  int pass2RegByteOffset;
+  int offscreenHeightM1;
+  int pass1Idx5;
+  int pass2SetupWords;
+  dword *streamCursor;
+  dword *pass1Word2;
+  dword *pass1Word3;
+  dword *pass1Word4;
+  dword *pass1Word5;
+  dword *pass2Word2;
+  dword *pass2Word3;
+  dword *pass2Word4;
+  dword *pass2Word5;
+  int rectIndex;
   
   cmdWrite = *(dword **)(accel + 0x80);
   rectCount = *(int *)(blitReq + 0x58);
@@ -930,8 +942,8 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
     if ((0x1000 < *(short *)(accel + 0x50)) || (0x1000 < *(short *)(accel + 0x52))) {
       return 0xe00002c7;
     }
-    iVar6 = ((int (*)())_createOffscreenBuffer)(accel,accel + 0x4c,0);
-    if (iVar6 != 0) {
+    createResult = ((int (*)())_createOffscreenBuffer)(accel,accel + 0x4c,0);
+    if (createResult != 0) {
       screenFormat = *(uint *)(accel + 0x70);
       offscreenDesc = DAT_0000e6e4 + 3;
       if (screenFormat == 3) {
@@ -951,7 +963,7 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
         scratchWord2Ptr = &scratchWord2;
         scratchWord3Ptr = &scratchWord3;
         scratchWord0Ptr = &scratchWord0;
-        local_d0 = 0;
+        rectIndex = 0;
         scratchWord1Ptr = &scratchWord1;
         flushWaitWord = 0xc000;
         colorBufferWord = screenFormat & 0x1f | 0x53000;
@@ -1021,20 +1033,20 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
               cmdWrite[scratchWord3] = 0x1000000;
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord3 | *lastHeader;
-              iVar6 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
+              mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
                                           *(undefined4 *)PTR_0000e694,scratchWord0Ptr,scratchWord3Ptr,1);
-              if (iVar6 == 0) {
+              if (mapResult == 0) {
                 needsSetup = true;
                 *(undefined4 *)(scratchWord0 + 0x1c) = 0;
                 cmdWrite = (dword *)(scratchWord0 + 0x20);
                 *(uint *)(accel + 0x18) = scratchWord0;
-                pdVar8 = (dword *)(scratchWord0 + 0x38);
+                streamCursor = (dword *)(scratchWord0 + 0x38);
                 cmdPtrPlus36Or1Block2 = (dword *)(scratchWord0 + 0x24);
                 *(uint *)(accel + 0x7c) = scratchWord0 + 0x1c;
-                pdVar24 = (dword *)(scratchWord0 + 0x28);
-                pdVar16 = (dword *)(scratchWord0 + 0x2c);
-                pdVar19 = (dword *)(scratchWord0 + 0x30);
-                pdVar22 = (dword *)(scratchWord0 + 0x34);
+                pass1Word2 = (dword *)(scratchWord0 + 0x28);
+                pass1Word3 = (dword *)(scratchWord0 + 0x2c);
+                pass1Word4 = (dword *)(scratchWord0 + 0x30);
+                pass1Word5 = (dword *)(scratchWord0 + 0x34);
                 cmdWordsLeft = cmdCapacity;
               }
               else {
@@ -1044,21 +1056,21 @@ LAB_00004b14:
                 *(undefined4 *)(accel + 0x18) = 0;
                 cmdWrite = (dword *)0x0;
                 cmdPtrPlus36Or1Block2 = &__mh_bundle_header.cputype;
-                pdVar24 = &__mh_bundle_header.cpusubtype;
-                pdVar16 = &__mh_bundle_header.filetype;
-                pdVar19 = &__mh_bundle_header.ncmds;
-                pdVar22 = &__mh_bundle_header.sizeofcmds;
-                pdVar8 = &__mh_bundle_header.flags;
+                pass1Word2 = &__mh_bundle_header.cpusubtype;
+                pass1Word3 = &__mh_bundle_header.filetype;
+                pass1Word4 = &__mh_bundle_header.ncmds;
+                pass1Word5 = &__mh_bundle_header.sizeofcmds;
+                streamCursor = &__mh_bundle_header.flags;
                 cmdWordsLeft = cmdCapacity;
               }
             }
             else {
               cmdPtrPlus36Or1Block2 = cmdWrite + 1;
-              pdVar24 = cmdWrite + 2;
-              pdVar16 = cmdWrite + 3;
-              pdVar19 = cmdWrite + 4;
-              pdVar22 = cmdWrite + 5;
-              pdVar8 = cmdWrite + 6;
+              pass1Word2 = cmdWrite + 2;
+              pass1Word3 = cmdWrite + 3;
+              pass1Word4 = cmdWrite + 4;
+              pass1Word5 = cmdWrite + 5;
+              streamCursor = cmdWrite + 6;
               needsSetup = true;
             }
           }
@@ -1074,29 +1086,29 @@ LAB_00004b14:
             cmdWrite[scratchWord0] = 0x1000000;
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
-            iVar6 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)PTR_0000e694
+            mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)PTR_0000e694
                                         ,scratchWord3Ptr,&scratchWord0,1);
-            if (iVar6 != 0) goto LAB_00004b14;
+            if (mapResult != 0) goto LAB_00004b14;
             needsSetup = true;
             *(undefined4 *)(scratchWord3 + 0x1c) = 0;
             *(uint *)(accel + 0x18) = scratchWord3;
             cmdWrite = (dword *)(scratchWord3 + 0x20);
-            pdVar8 = (dword *)(scratchWord3 + 0x38);
+            streamCursor = (dword *)(scratchWord3 + 0x38);
             *(uint *)(accel + 0x7c) = scratchWord3 + 0x1c;
             cmdPtrPlus36Or1Block2 = (dword *)(scratchWord3 + 0x24);
-            pdVar24 = (dword *)(scratchWord3 + 0x28);
-            pdVar16 = (dword *)(scratchWord3 + 0x2c);
-            pdVar19 = (dword *)(scratchWord3 + 0x30);
-            pdVar22 = (dword *)(scratchWord3 + 0x34);
+            pass1Word2 = (dword *)(scratchWord3 + 0x28);
+            pass1Word3 = (dword *)(scratchWord3 + 0x2c);
+            pass1Word4 = (dword *)(scratchWord3 + 0x30);
+            pass1Word5 = (dword *)(scratchWord3 + 0x34);
             cmdWordsLeft = cmdCapacity;
           }
           else {
             cmdPtrPlus36Or1Block2 = cmdWrite + 1;
-            pdVar24 = cmdWrite + 2;
-            pdVar16 = cmdWrite + 3;
-            pdVar19 = cmdWrite + 4;
-            pdVar22 = cmdWrite + 5;
-            pdVar8 = cmdWrite + 6;
+            pass1Word2 = cmdWrite + 2;
+            pass1Word3 = cmdWrite + 3;
+            pass1Word4 = cmdWrite + 4;
+            pass1Word5 = cmdWrite + 5;
+            streamCursor = cmdWrite + 6;
             needsSetup = false;
           }
           lastHeader = *(uint **)(accel + 0x7c);
@@ -1105,56 +1117,56 @@ LAB_00004b14:
           *cmdWrite = 0xe000000;
           *cmdPtrPlus36Or1Block2 = 0;
           lastHeader = *(uint **)(accel + 0x7c);
-          *lastHeader = (int)pdVar24 - (int)lastHeader >> 2 | *lastHeader;
-          *(dword **)(accel + 0x7c) = pdVar24;
-          *pdVar24 = 0x10000000;
-          *pdVar16 = *(dword *)*DAT_0000e6e4;
-          *pdVar19 = DAT_0000e6e4[7];
-          *pdVar22 = 6;
+          *lastHeader = (int)pass1Word2 - (int)lastHeader >> 2 | *lastHeader;
+          *(dword **)(accel + 0x7c) = pass1Word2;
+          *pass1Word2 = 0x10000000;
+          *pass1Word3 = *(dword *)*DAT_0000e6e4;
+          *pass1Word4 = DAT_0000e6e4[7];
+          *pass1Word5 = 6;
           if (needsSetup) {
-            iVar7 = ((int (*)())_radeon3DCopySetup)(accel,pdVar8,accel + 0x4c,screenFormat,0,0,0,0);
+            pass1SetupWords = ((int (*)())_radeon3DCopySetup)(accel,streamCursor,accel + 0x4c,screenFormat,0,0,0,0);
             screenWidth = *(short *)(accel + 0x50);
-            idxPlus1Or20Block1 = iVar7 + 1;
-            idxPlus2Or5Block1 = iVar7 + 2;
-            idxPlus22Or10Block1 = iVar7 + 0x16;
-            iVar6 = iVar7 << 2;
-            idxPlus3Block3 = iVar7 + 3;
-            idxPlus4Or6Block1 = iVar7 + 4;
-            iVar11 = iVar7 + 5;
-            idxPlus6Or22Block1 = iVar7 + 6;
-            idxPlus7Or8Block1 = iVar7 + 7;
-            idxPlus8Or7Block1 = iVar7 + 8;
-            idxPlus9Block1 = iVar7 + 9;
-            idxPlus10Or19Block1 = iVar7 + 10;
-            idxPlus11Block1 = iVar7 + 0xb;
-            idxPlus12Block1 = iVar7 + 0xc;
-            idxPlus13Block1 = iVar7 + 0xd;
-            idxPlus14Block1 = iVar7 + 0xe;
-            idxPlus15Block1 = iVar7 + 0xf;
-            idxPlus16Block1 = iVar7 + 0x10;
-            idxPlus17Block1 = iVar7 + 0x11;
-            idxPlus18Block1 = iVar7 + 0x12;
-            idxPlus19Block3 = iVar7 + 0x13;
-            iVar9 = iVar7 + 0x14;
-            iVar7 = iVar7 + 0x15;
+            idxPlus1Or20Block1 = pass1SetupWords + 1;
+            idxPlus2Or5Block1 = pass1SetupWords + 2;
+            idxPlus22Or10Block1 = pass1SetupWords + 0x16;
+            pass1RegByteOffset = pass1SetupWords << 2;
+            idxPlus3Block3 = pass1SetupWords + 3;
+            idxPlus4Or6Block1 = pass1SetupWords + 4;
+            pass1Idx5 = pass1SetupWords + 5;
+            idxPlus6Or22Block1 = pass1SetupWords + 6;
+            idxPlus7Or8Block1 = pass1SetupWords + 7;
+            idxPlus8Or7Block1 = pass1SetupWords + 8;
+            idxPlus9Block1 = pass1SetupWords + 9;
+            idxPlus10Or19Block1 = pass1SetupWords + 10;
+            idxPlus11Block1 = pass1SetupWords + 0xb;
+            idxPlus12Block1 = pass1SetupWords + 0xc;
+            idxPlus13Block1 = pass1SetupWords + 0xd;
+            idxPlus14Block1 = pass1SetupWords + 0xe;
+            idxPlus15Block1 = pass1SetupWords + 0xf;
+            idxPlus16Block1 = pass1SetupWords + 0x10;
+            idxPlus17Block1 = pass1SetupWords + 0x11;
+            idxPlus18Block1 = pass1SetupWords + 0x12;
+            idxPlus19Block3 = pass1SetupWords + 0x13;
+            pass1Idx20 = pass1SetupWords + 0x14;
+            pass1SetupWords = pass1SetupWords + 0x15;
             screenHeight = *(short *)(accel + 0x52);
           }
           else {
-            *pdVar8 = 0x1120;
+            *streamCursor = 0x1120;
             screenWidth = *(short *)(accel + 0x50);
             screenHeight = *(short *)(accel + 0x52);
-            pdVar8[1] = (int)screenWidth - 1U & 0x7ff | (screenHeight + -1) * 0x800 & 0x3ff800U |
+            streamCursor[1] = (int)screenWidth - 1U & 0x7ff | (screenHeight + -1) * 0x800 & 0x3ff800U |
                         0x80000000;
-            pdVar8[2] = 0x1130;
-            pdVar8[3] = colorBufferWord;
-            pdVar8[4] = 0x1140;
-            pdVar8[5] = *(int *)(accel + 0x5c) - 1U & 0x3fff |
+            streamCursor[2] = 0x1130;
+            streamCursor[3] = colorBufferWord;
+            streamCursor[4] = 0x1140;
+            streamCursor[5] = *(int *)(accel + 0x5c) - 1U & 0x3fff |
                         ((int)screenWidth - 1U) * 0x10 & 0x8000 | (screenHeight + -1) * 0x20 & 0x10000U;
-            iVar6 = 0x18;
+            pass1RegByteOffset = 0x18;
             idxPlus3Block3 = 9;
             idxPlus1Or20Block1 = 7;
             idxPlus4Or6Block1 = 10;
-            iVar11 = 0xb;
+            pass1Idx5 = 0xb;
             idxPlus2Or5Block1 = 8;
             idxPlus6Or22Block1 = 0xc;
             idxPlus7Or8Block1 = 0xd;
@@ -1170,16 +1182,16 @@ LAB_00004b14:
             idxPlus17Block1 = 0x17;
             idxPlus18Block1 = 0x18;
             idxPlus19Block3 = 0x19;
-            iVar9 = 0x1a;
-            iVar7 = 0x1b;
+            pass1Idx20 = 0x1a;
+            pass1SetupWords = 0x1b;
             idxPlus22Or10Block1 = 0x1c;
           }
-          *(undefined4 *)((int)pdVar8 + iVar6) = 0x10f8;
-          pdVar8[idxPlus1Or20Block1] = srcLeftInt & 0x1fff | (srcTopInt & 0x1fff) << 0xd;
-          pdVar8[idxPlus2Or5Block1] = 0x10f9;
-          pdVar8[idxPlus3Block3] = srcRightInt & 0x1fff | (srcBottomInt & 0x1fff) << 0xd;
-          pdVar8[idxPlus4Or6Block1] = 0xc00c3500;
-          pdVar8[iVar11] = 0x4003d;
+          *(undefined4 *)((int)streamCursor + pass1RegByteOffset) = 0x10f8;
+          streamCursor[idxPlus1Or20Block1] = srcLeftInt & 0x1fff | (srcTopInt & 0x1fff) << 0xd;
+          streamCursor[idxPlus2Or5Block1] = 0x10f9;
+          streamCursor[idxPlus3Block3] = srcRightInt & 0x1fff | (srcBottomInt & 0x1fff) << 0xd;
+          streamCursor[idxPlus4Or6Block1] = 0xc00c3500;
+          streamCursor[pass1Idx5] = 0x4003d;
           i2dLo5 = (int)screenWidth ^ 0x80000000;
           i2dLo6 = (int)screenHeight ^ 0x80000000;
           i2dHi5 = 0x43300000;
@@ -1190,134 +1202,134 @@ LAB_00004b14:
           scratchWord3 = (uint)GH_F2U((float)(srcBottomFloat * srcBottomExactOrInvHeight));
           scratchWord2 = (uint)GH_F2U((float)(srcLeftFloat * srcRightExactOrInvWidth));
           scratchWord0 = (uint)GH_F2U((float)(srcTopFloat * srcBottomExactOrInvHeight));
-          pdVar8[idxPlus6Or22Block1] = srcLeftInt | srcBottomInt << 0x10;
+          streamCursor[idxPlus6Or22Block1] = srcLeftInt | srcBottomInt << 0x10;
           texWord2 = *scratchWord2Ptr;
-          pdVar8[idxPlus7Or8Block1] = texWord2;
+          streamCursor[idxPlus7Or8Block1] = texWord2;
           texWord1 = *scratchWord3Ptr;
-          pdVar8[idxPlus8Or7Block1] = texWord1;
-          pdVar8[idxPlus9Block1] = srcLeftInt | srcTopInt << 0x10;
-          pdVar8[idxPlus10Or19Block1] = texWord2;
+          streamCursor[idxPlus8Or7Block1] = texWord1;
+          streamCursor[idxPlus9Block1] = srcLeftInt | srcTopInt << 0x10;
+          streamCursor[idxPlus10Or19Block1] = texWord2;
           texWord2 = *scratchWord0Ptr;
-          pdVar8[idxPlus11Block1] = texWord2;
-          pdVar8[idxPlus12Block1] = srcRightInt | srcTopInt << 0x10;
+          streamCursor[idxPlus11Block1] = texWord2;
+          streamCursor[idxPlus12Block1] = srcRightInt | srcTopInt << 0x10;
           texWord3 = *scratchWord1Ptr;
-          pdVar8[idxPlus13Block1] = texWord3;
-          pdVar8[idxPlus14Block1] = texWord2;
-          pdVar8[idxPlus15Block1] = srcRightInt | srcBottomInt << 0x10;
-          pdVar8[idxPlus16Block1] = texWord3;
-          pdVar8[idxPlus17Block1] = texWord1;
-          pdVar8[idxPlus18Block1] = 0x1393;
-          pdVar8[idxPlus19Block3] = 10;
-          pdVar8[iVar9] = 0x5c8;
-          pdVar8[iVar7] = 0x20000;
+          streamCursor[idxPlus13Block1] = texWord3;
+          streamCursor[idxPlus14Block1] = texWord2;
+          streamCursor[idxPlus15Block1] = srcRightInt | srcBottomInt << 0x10;
+          streamCursor[idxPlus16Block1] = texWord3;
+          streamCursor[idxPlus17Block1] = texWord1;
+          streamCursor[idxPlus18Block1] = 0x1393;
+          streamCursor[idxPlus19Block3] = 10;
+          streamCursor[pass1Idx20] = 0x5c8;
+          streamCursor[pass1SetupWords] = 0x20000;
           cmdWordsLeft = (cmdWordsLeft - 6) - idxPlus22Or10Block1;
-          iVar6 = rect[5];
+          rectHeight = rect[5];
           dstX = rect[2] + *(int *)(accel + 0x60);
-          iVar7 = rect[3] + *(int *)(accel + 100);
+          dstY = rect[3] + *(int *)(accel + 100);
           dstRight = dstX + rect[4];
-          pdVar8 = pdVar8 + idxPlus22Or10Block1;
+          streamCursor = streamCursor + idxPlus22Or10Block1;
           if (cmdWordsLeft < 0x22) {
             scratchWord1 = *(uint *)(accel + 0x18);
             scratchWord2 = 0;
             if (*(int *)(accel + 0x8c) == 0) {
-              *pdVar8 = 0x5c8;
+              *streamCursor = 0x5c8;
               scratchWord2 = 2;
-              pdVar8[1] = flushWaitWord;
+              streamCursor[1] = flushWaitWord;
               *(undefined4 *)(accel + 0x94) = 0;
             }
-            pdVar8[scratchWord2] = 0x1000000;
+            streamCursor[scratchWord2] = 0x1000000;
             taskPtr = PTR_0000e694;
             lastHeader = *(uint **)(accel + 0x7c);
-            *lastHeader = ((int)pdVar8 - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
-            iVar9 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
+            *lastHeader = ((int)streamCursor - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
+            mapResultPass2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
                                         scratchWord1Ptr,scratchWord2Ptr,1);
             cmdWordsLeft = cmdCapacity;
-            if (iVar9 == 0) {
+            if (mapResultPass2 == 0) {
               needsSetup = true;
               *(undefined4 *)(scratchWord1 + 0x1c) = 0;
               *(uint *)(accel + 0x18) = scratchWord1;
-              pdVar8 = (dword *)(scratchWord1 + 0x20);
+              streamCursor = (dword *)(scratchWord1 + 0x20);
               cmdWrite = (dword *)(scratchWord1 + 0x38);
               *(uint *)(accel + 0x7c) = scratchWord1 + 0x1c;
               cmdPtrPlus36Or1Block2 = (dword *)(scratchWord1 + 0x24);
-              pdVar16 = (dword *)(scratchWord1 + 0x28);
-              pdVar19 = (dword *)(scratchWord1 + 0x2c);
-              pdVar24 = (dword *)(scratchWord1 + 0x30);
-              pdVar22 = (dword *)(scratchWord1 + 0x34);
+              pass2Word2 = (dword *)(scratchWord1 + 0x28);
+              pass2Word3 = (dword *)(scratchWord1 + 0x2c);
+              pass2Word4 = (dword *)(scratchWord1 + 0x30);
+              pass2Word5 = (dword *)(scratchWord1 + 0x34);
             }
             else {
               needsSetup = true;
               *(undefined4 *)(accel + 0x7c) = 0;
               *(undefined4 *)(accel + 0x18) = 0;
-              pdVar8 = (dword *)0x0;
+              streamCursor = (dword *)0x0;
               cmdPtrPlus36Or1Block2 = &__mh_bundle_header.cputype;
-              pdVar16 = &__mh_bundle_header.cpusubtype;
-              pdVar19 = &__mh_bundle_header.filetype;
-              pdVar24 = &__mh_bundle_header.ncmds;
-              pdVar22 = &__mh_bundle_header.sizeofcmds;
+              pass2Word2 = &__mh_bundle_header.cpusubtype;
+              pass2Word3 = &__mh_bundle_header.filetype;
+              pass2Word4 = &__mh_bundle_header.ncmds;
+              pass2Word5 = &__mh_bundle_header.sizeofcmds;
               cmdWrite = &__mh_bundle_header.flags;
             }
           }
           else {
-            cmdPtrPlus36Or1Block2 = pdVar8 + 1;
-            pdVar16 = pdVar8 + 2;
-            pdVar19 = pdVar8 + 3;
-            pdVar24 = pdVar8 + 4;
-            pdVar22 = pdVar8 + 5;
-            cmdWrite = pdVar8 + 6;
+            cmdPtrPlus36Or1Block2 = streamCursor + 1;
+            pass2Word2 = streamCursor + 2;
+            pass2Word3 = streamCursor + 3;
+            pass2Word4 = streamCursor + 4;
+            pass2Word5 = streamCursor + 5;
+            cmdWrite = streamCursor + 6;
             needsSetup = false;
           }
           lastHeader = *(uint **)(accel + 0x7c);
-          *lastHeader = (int)pdVar8 - (int)lastHeader >> 2 | *lastHeader;
-          *(dword **)(accel + 0x7c) = pdVar8;
-          *pdVar8 = 0x12000000;
+          *lastHeader = (int)streamCursor - (int)lastHeader >> 2 | *lastHeader;
+          *(dword **)(accel + 0x7c) = streamCursor;
+          *streamCursor = 0x12000000;
           *cmdPtrPlus36Or1Block2 = 0;
-          *pdVar16 = 0;
-          *pdVar19 = 0;
+          *pass2Word2 = 0;
+          *pass2Word3 = 0;
           lastHeader = *(uint **)(accel + 0x7c);
-          *lastHeader = (int)pdVar24 - (int)lastHeader >> 2 | *lastHeader;
-          *(dword **)(accel + 0x7c) = pdVar24;
-          *pdVar24 = 0x4000000;
-          *pdVar22 = *(dword *)*DAT_0000e6e4;
+          *lastHeader = (int)pass2Word4 - (int)lastHeader >> 2 | *lastHeader;
+          *(dword **)(accel + 0x7c) = pass2Word4;
+          *pass2Word4 = 0x4000000;
+          *pass2Word5 = *(dword *)*DAT_0000e6e4;
           if (needsSetup) {
-            iVar11 = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,offscreenDesc,offscreenFormat,0,0,0,0);
-            idxPlus1Block4 = iVar11 + 1;
-            idxPlus9Block1 = iVar11 + 9;
-            idxPlus3Block4 = iVar11 + 3;
-            idxPlus4Block4 = iVar11 + 4;
-            idxPlus22Or10Block1 = iVar11 + 10;
-            idxPlus2Block4 = iVar11 + 2;
-            idxPlus6Or22Block1 = iVar11 + 0x16;
-            iVar9 = iVar11 << 2;
-            idxPlus2Or5Block1 = iVar11 + 5;
-            idxPlus4Or6Block1 = iVar11 + 6;
-            idxPlus8Or7Block1 = iVar11 + 7;
-            idxPlus7Or8Block1 = iVar11 + 8;
-            idxPlus11Block1 = iVar11 + 0xb;
-            idxPlus12Block1 = iVar11 + 0xc;
-            idxPlus13Block1 = iVar11 + 0xd;
-            idxPlus14Block1 = iVar11 + 0xe;
-            idxPlus15Block1 = iVar11 + 0xf;
-            idxPlus16Block1 = iVar11 + 0x10;
-            idxPlus17Block1 = iVar11 + 0x11;
-            idxPlus18Block1 = iVar11 + 0x12;
-            idxPlus10Or19Block1 = iVar11 + 0x13;
-            idxPlus1Or20Block1 = iVar11 + 0x14;
-            iVar11 = iVar11 + 0x15;
+            pass2SetupWords = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,offscreenDesc,offscreenFormat,0,0,0,0);
+            idxPlus1Block4 = pass2SetupWords + 1;
+            idxPlus9Block1 = pass2SetupWords + 9;
+            idxPlus3Block4 = pass2SetupWords + 3;
+            idxPlus4Block4 = pass2SetupWords + 4;
+            idxPlus22Or10Block1 = pass2SetupWords + 10;
+            idxPlus2Block4 = pass2SetupWords + 2;
+            idxPlus6Or22Block1 = pass2SetupWords + 0x16;
+            pass2RegByteOffset = pass2SetupWords << 2;
+            idxPlus2Or5Block1 = pass2SetupWords + 5;
+            idxPlus4Or6Block1 = pass2SetupWords + 6;
+            idxPlus8Or7Block1 = pass2SetupWords + 7;
+            idxPlus7Or8Block1 = pass2SetupWords + 8;
+            idxPlus11Block1 = pass2SetupWords + 0xb;
+            idxPlus12Block1 = pass2SetupWords + 0xc;
+            idxPlus13Block1 = pass2SetupWords + 0xd;
+            idxPlus14Block1 = pass2SetupWords + 0xe;
+            idxPlus15Block1 = pass2SetupWords + 0xf;
+            idxPlus16Block1 = pass2SetupWords + 0x10;
+            idxPlus17Block1 = pass2SetupWords + 0x11;
+            idxPlus18Block1 = pass2SetupWords + 0x12;
+            idxPlus10Or19Block1 = pass2SetupWords + 0x13;
+            idxPlus1Or20Block1 = pass2SetupWords + 0x14;
+            pass2SetupWords = pass2SetupWords + 0x15;
           }
           else {
             *cmdWrite = 0x1120;
             offscreenWidth = *(short *)(offscreenDesc + 1);
-            iVar9 = *(short *)((int)offscreenDesc + 6) + -1;
-            cmdWrite[1] = (int)offscreenWidth - 1U & 0x7ff | iVar9 * 0x800 & 0x3ff800U | 0x80000000;
+            offscreenHeightM1 = *(short *)((int)offscreenDesc + 6) + -1;
+            cmdWrite[1] = (int)offscreenWidth - 1U & 0x7ff | offscreenHeightM1 * 0x800 & 0x3ff800U | 0x80000000;
             cmdWrite[2] = 0x1130;
             cmdWrite[3] = offscreenFormat & 0x1f | 0x53000;
             cmdWrite[4] = 0x1140;
             cmdWrite[5] = offscreenDesc[4] - 1 & 0x3fff | ((int)offscreenWidth - 1U) * 0x10 & 0x8000 |
-                         iVar9 * 0x20 & 0x10000U;
+                         offscreenHeightM1 * 0x20 & 0x10000U;
             idxPlus4Block4 = 10;
             idxPlus2Block4 = 8;
-            iVar9 = 0x18;
+            pass2RegByteOffset = 0x18;
             idxPlus3Block4 = 9;
             idxPlus1Block4 = 7;
             idxPlus9Block1 = 0xf;
@@ -1336,16 +1348,16 @@ LAB_00004b14:
             idxPlus18Block1 = 0x18;
             idxPlus10Or19Block1 = 0x19;
             idxPlus1Or20Block1 = 0x1a;
-            iVar11 = 0x1b;
+            pass2SetupWords = 0x1b;
             idxPlus6Or22Block1 = 0x1c;
           }
-          *(undefined4 *)((int)cmdWrite + iVar9) = 0x10f8;
-          cmdWrite[idxPlus1Block4] = dstX & 0x1fff | iVar7 * 0x2000 & 0x3ffe000U;
+          *(undefined4 *)((int)cmdWrite + pass2RegByteOffset) = 0x10f8;
+          cmdWrite[idxPlus1Block4] = dstX & 0x1fff | dstY * 0x2000 & 0x3ffe000U;
           cmdWrite[idxPlus2Block4] = 0x10f9;
-          cmdWrite[idxPlus3Block4] = dstRight & 0x1fff | (iVar7 + iVar6) * 0x2000 & 0x3ffe000U;
+          cmdWrite[idxPlus3Block4] = dstRight & 0x1fff | (dstY + rectHeight) * 0x2000 & 0x3ffe000U;
           cmdWrite[idxPlus4Block4] = 0xc00c3500;
           cmdWrite[idxPlus2Or5Block1] = 0x4003d;
-          dstBottomHi = (iVar7 + iVar6) * 0x10000;
+          dstBottomHi = (dstY + rectHeight) * 0x10000;
           i2dHi7 = 0x43300000;
           i2dLo7 = (int)*(short *)(offscreenDesc + 1) ^ 0x80000000;
           scratchWord0 = (uint)GH_F2U((float)(srcLeftFloat * (1.0 / ((double)CONCAT44(0x43300000,i2dLo7) -
@@ -1367,11 +1379,11 @@ LAB_00004b14:
           cmdWrite[idxPlus8Or7Block1] = texWord2;
           texWord1 = *scratchWord1Ptr;
           cmdWrite[idxPlus7Or8Block1] = texWord1;
-          cmdWrite[idxPlus9Block1] = dstX | iVar7 * 0x10000;
+          cmdWrite[idxPlus9Block1] = dstX | dstY * 0x10000;
           cmdWrite[idxPlus22Or10Block1] = texWord2;
           texWord2 = *scratchWord2Ptr;
           cmdWrite[idxPlus11Block1] = texWord2;
-          cmdWrite[idxPlus12Block1] = dstRight | iVar7 * 0x10000;
+          cmdWrite[idxPlus12Block1] = dstRight | dstY * 0x10000;
           texWord3 = *scratchWord3Ptr;
           cmdWrite[idxPlus13Block1] = texWord3;
           cmdWrite[idxPlus14Block1] = texWord2;
@@ -1381,13 +1393,13 @@ LAB_00004b14:
           cmdWrite[idxPlus18Block1] = 0x1393;
           cmdWrite[idxPlus10Or19Block1] = 10;
           cmdWrite[idxPlus1Or20Block1] = 0x5c8;
-          cmdWrite[iVar11] = 0x20000;
+          cmdWrite[pass2SetupWords] = 0x20000;
           cmdWordsLeft = (cmdWordsLeft - 6) - idxPlus6Or22Block1;
           cmdWrite = cmdWrite + idxPlus6Or22Block1;
-          local_d0 = local_d0 + 1;
+          rectIndex = rectIndex + 1;
           rect = rect + 6;
           needsSetup = false;
-        } while (rectCount != local_d0);
+        } while (rectCount != rectIndex);
       }
       *(dword **)(accel + 0x80) = cmdWrite;
       return 0;

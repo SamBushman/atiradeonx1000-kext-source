@@ -12,7 +12,8 @@ named way), INFERRED (the role is clear from use, nothing names it) or UNKNOWN (
     use<TAB>FUNCTION<TAB>old<TAB>new<TAB>tier<TAB>evidence<TAB>from<TAB>to   rename `old` to `new` only in one segment of FUNCTION (splits a local reused for several roles)
 `from`/`to` are regexes over the function's lines AS GHIDRA WROTE THEM (lines are matched with every rename of the function taken back, so a table
 stays valid after it was applied). `from` may end in @N (Nth matching line, default 1); the segment starts at that line and runs up to, not
-including, the first later line matching `to` (empty `to` = end of function). One `new` name belongs to one `old` per function; a function with
+including, the first later line matching `to` (empty `to` = end of function; `+K` = exactly K lines). Tools/userspace/find_webs.py finds the
+real def-use webs of a variable and writes rows in the +K form. One `new` name belongs to one `old` per function; a function with
 `use` rows for a variable must not also have a `local` row for it. The declaration of `new` is added next to old's (same type); old's declaration is
 dropped when nothing uses it any more. Only locals (declared after the `{`) can be split.
 
@@ -84,7 +85,9 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
         if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
         a = hits[k - 1]; z = e
-        if to:
+        if re.match(r'^\+\d+$', to):                 # +K: exactly K lines from the anchor line
+            z = min(a + int(to[1:]), e)
+        elif to:
             tz = [i for i in range(a + 1, e) if re.search(to, N[i])]
             if not tz: print('%s:%d: %s: end anchor %r not found' % (f, n, fn, to)); nerr += 1; continue
             z = tz[0]
@@ -155,4 +158,5 @@ def main():
     sys.exit(1 if errors or (check and pending) else 0)
 
 
-main()
+if __name__ == '__main__':
+    main()
