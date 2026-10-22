@@ -1,0 +1,124 @@
+local	FUN_00016670	param_3	width	CONFIRMED	glBitmap width: loop bound of the column loop, (width + skip + 7) >> 3 bytes per row, guarded by `0 < width`
+local	FUN_00016670	param_4	height	CONFIRMED	glBitmap height: row loop bound
+local	FUN_00016670	param_7	bitmap	CONFIRMED	pointer to the 1-bit-per-pixel data, advanced one row at a time and read through GL_UNPACK_* state
+local	FUN_00016670	param_8	tightlyPacked	INFERRED	when non-zero the unpack state (row length, skip, alignment, lsbFirst in engineState+0x2e6c..0x2e85) is ignored and rows are width+7>>3 bytes MSB first
+local	FUN_00016670	fparam_1	xOrigin	INFERRED	subtracted from vertex[0] before floor(): the x origin of glBitmap
+local	FUN_00016670	fparam_2	yOrigin	INFERRED	subtracted from vertex[1] before floor() (added before ceil() when the y axis is inverted)
+local	FUN_00016670	fVar20	rasterZ	CONFIRMED	vertex[2], written as the third position component of every point vertex
+local	FUN_00016670	fStack_184	colorR	CONFIRMED	vertex[0xc]; the first of the four colour words that follow (x, y, z, 1.0) in each emitted vertex, blended with the fog colour at engineState+0x2de0
+local	FUN_00016670	fStack_180	colorG	CONFIRMED	vertex[0xd]; second colour word (blended with engineState+0x2de4)
+local	FUN_00016670	fStack_17c	colorB	CONFIRMED	vertex[0xe]; third colour word (blended with engineState+0x2de8)
+local	FUN_00016670	fStack_188	colorA	CONFIRMED	vertex[0xf]; fourth colour word (blended with engineState+0x2dec)
+use	FUN_00016670	dVar26	fogFactor	INFERRED	vertex[0x13]; colour = (1 - f) * fogColor + f * colour when the fog flag engineState+0x2e0a is set	^\s*dVar26\ =\ \(double\)param_2\[0x13\];$	+10
+use	FUN_00016670	dVar27	oneMinusFogFactor	INFERRED	1.0 - fogFactor	^\s*dVar27\ =\ DOUBLE_001aa200\ \-\ dVar26;$	+9
+use	FUN_00016670	dVar26	startX	INFERRED	floor(vertex[0] - xOrigin): the x of the first bitmap column	^\s*dVar26\ =\ _floor\(\(double\)\(float\)\(\(double\)\*param_2\ \-\ fparam_1\)\);$	+1
+use	FUN_00016670	dVar26	startX	INFERRED	floor(vertex[0] - xOrigin): the x of the first bitmap column	^\s*fVar5\ =\ \(float\)dVar26;$	+1
+use	FUN_00016670	dVar27	startY	INFERRED	floor(vertex[1] - yOrigin) (ceil form when the y axis is inverted): the y of the first bitmap row	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(\(double\)param_2\[1\]\ \-\ fparam_2\)\);$	+1
+use	FUN_00016670	dVar27	startY	INFERRED	floor(vertex[1] - yOrigin) (ceil form when the y axis is inverted): the y of the first bitmap row	^\s*dVar27\ =\ _ceil\(\(double\)\(\(float\)\(fparam_2\ \+\ \(double\)param_2\[1\]\)\ \-\ FLOAT_001aa0e8\)\);$	+1
+use	FUN_00016670	dVar27	startY	INFERRED	floor(vertex[1] - yOrigin) (ceil form when the y axis is inverted): the y of the first bitmap row	^\s*fVar8\ =\ \(float\)dVar27;$	+1
+local	FUN_00016670	fVar5	pixelX	INFERRED	running x of the current bitmap column, advanced by the x step per bit
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*fVar8\ =\ \(float\)dVar27;$	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*pfVar25\[1\]\ =\ fVar6\ \+\ fVar8;$	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*pfVar25\[1\]\ =\ fVar6\ \+\ fVar8;$@2	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*pfVar25\[9\]\ =\ fVar6\ \+\ fVar8\ \+\ fVar9;$	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*fVar8\ =\ \(fVar8\ \+\ fVar9\)\ \-\ fVar9;$	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*pfVar25\[1\]\ =\ fVar6\ \+\ fVar8;$@3	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*fVar4\ =\ fVar6\ \+\ fVar8\ \+\ fVar9;$	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*fVar8\ =\ \(fVar8\ \+\ fVar9\)\ \-\ fVar9;$@2	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*pfVar25\[0x19\]\ =\ fVar6\ \+\ fVar8;$	+1
+use	FUN_00016670	fVar8	pixelY	INFERRED	running y of the current bitmap row	^\s*fVar8\ =\ fVar8\ \+\ fVar7;$	+1
+use	FUN_00016670	fVar8	invertedRowStep	INFERRED	FLOAT_001aa114 constant that becomes the row step when ctx+0x2b7c (y axis inverted) is set	^\s*fVar8\ =\ FLOAT_001aa114;$	+1
+use	FUN_00016670	fVar8	invertedRowStep	INFERRED	FLOAT_001aa114 constant that becomes the row step when ctx+0x2b7c (y axis inverted) is set	^\s*fVar7\ =\ fVar8;$	+1
+local	FUN_00016670	fVar7	rowStep	INFERRED	added to pixelY after every row; FLOAT_001aa0e8, or invertedRowStep when the y axis is inverted
+local	FUN_00016670	fVar3	centerOffsetX	INFERRED	x offset added to every emitted point: 0.5, or 1.0 when the x zoom is 2
+local	FUN_00016670	fVar6	centerOffsetY	INFERRED	y offset added to every emitted point: 0.5, or 1.0 when the y zoom is 2
+local	FUN_00016670	fVar9	pixelStep	INFERRED	FLOAT_001aa10c, the offset of the second/third point of a zoomed pixel and the x advance per bit
+use	FUN_00016670	iVar10	zoomX	INFERRED	(int)(ctx+0x2a54 + 0.5): the horizontal pixel zoom	^\s*iVar10\ =\ \(int\)\(\*\(float\ \*\)\(param_1\ \+\ 0x2a54\)\ \+\ FLOAT_001aa10c\);$	+2
+use	FUN_00016670	iVar10	zoomX	INFERRED	(int)(ctx+0x2a54 + 0.5): the horizontal pixel zoom	^\s*iVar16\ =\ iVar10\ \*\ iVar21;$	+1
+use	FUN_00016670	iVar10	zoomX	INFERRED	(int)(ctx+0x2a54 + 0.5): the horizontal pixel zoom	^\s*if\ \(iVar10\ ==\ 2\)\ \{$	+1
+use	FUN_00016670	iVar21	zoomY	INFERRED	(int)(ctx+0x2a58 + 0.5): the vertical pixel zoom	^\s*iVar21\ =\ \(int\)\(\*\(float\ \*\)\(param_1\ \+\ 0x2a58\)\ \+\ FLOAT_001aa10c\);$	+3
+use	FUN_00016670	iVar21	zoomY	INFERRED	(int)(ctx+0x2a58 + 0.5): the vertical pixel zoom	^\s*if\ \(iVar21\ ==\ 2\)\ \{$	+1
+local	FUN_00016670	iVar16	pointsPerPixel	CONFIRMED	zoomX * zoomY, compared with 1 and 2 to choose the 1-, 2- or 4-point emitter
+use	FUN_00016670	iVar10	rowLength	INFERRED	engineState+0x2e6c (GL_UNPACK_ROW_LENGTH); falls back to width when zero	^\s*iVar10\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e6c\)\ \+\ iVar21\);$	+1
+use	FUN_00016670	iVar10	rowLength	INFERRED	engineState+0x2e6c (GL_UNPACK_ROW_LENGTH); falls back to width when zero	^\s*iVar10\ =\ iStack00000020;$	+1
+use	FUN_00016670	iVar10	rowLength	INFERRED	engineState+0x2e6c (GL_UNPACK_ROW_LENGTH); falls back to width when zero	^\s*uStack_c0\ =\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e80\)\ \+\ iVar21\)\ \-\ 1U\)\ \+\ \(iVar10\ \+\ 7\ >>\ 3\)\ \&$	+1
+local	FUN_00016670	lStack_e8	zoomXWide	CONFIRMED	(long long) cast of zoomX left by the float-to-int conversion
+local	FUN_00016670	lStack_e0	zoomYWide	CONFIRMED	(long long) cast of zoomY
+local	FUN_00016670	iVar19	pixelsLeft	INFERRED	width * height, decremented once per bit
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*iVar21\ =\ iVar16\ \*\ iVar19;$	+4
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*iVar13\ =\ iVar21;$	+1
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*if\ \(iVar21\ <\ iVar16\)\ \{$	+1
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*pfVar12\[2\]\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(iVar13\ \-\ iVar21\)\ \*\ 0x80000\ \|\ 0xc0003500\)\)\);$	+3
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*iVar13\ =\ iVar21\ \*\ 0x20;$	+3
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*iVar13\ =\ iVar21;$@2	+1
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*iVar21\ =\ iVar21\ \-\ iVar16;$	+1
+use	FUN_00016670	iVar21	vertexBudget	INFERRED	pointsPerPixel * pixelsLeft, clamped to 0x7ff points per packet; decremented by pointsPerPixel per emitted pixel	^\s*iVar13\ =\ iVar13\ \-\ iVar21;$	+1
+use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*iVar13\ =\ iVar21;$	+1
+use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*pfVar12\[2\]\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(iVar13\ \-\ iVar21\)\ \*\ 0x80000\ \|\ 0xc0003500\)\)\);$	+2
+use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*iVar13\ =\ iVar21;$@2	+1
+use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*iVar13\ =\ iVar13\ \-\ iVar21;$	+2
+use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*\*\(uint\ \*\)\(\(int\)pfVar12\ \+\ iVar10\ \+\ 8\)\ =\ iVar13\ \*\ 0x80000\ \|\ 0xc0003500;$	+2
+use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*FUN_0009d3b0\(iStack_b0,uVar11,param_3,iVar10,pfVar12,iVar13,uVar15\);$	+1
+use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*iVar13\ =\ iVar21\ \*\ 0x20;$	+1
+use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*iVar13\ =\ 0xffe0;$	+1
+use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ GLD_ringLimit\)\ <=\ \(uint\)\(\(int\)pfVar25\ \+\ iVar13\ \+\ 0x10\)\)\ \{$	+1
+use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*if\ \(\(pfVar25\ !=\ pfVar12\)\ \&\&$	+2
+use	FUN_00016670	iVar10	packetBytesTotal	INFERRED	vertexBudget * 0x20 (0xffe0 at most): space the first packet reserves	^\s*iVar10\ =\ iVar21\ \*\ 0x20;$	+1
+use	FUN_00016670	iVar10	packetBytesTotal	INFERRED	vertexBudget * 0x20 (0xffe0 at most): space the first packet reserves	^\s*iVar10\ =\ 0xffe0;$	+1
+use	FUN_00016670	iVar10	packetBytesTotal	INFERRED	vertexBudget * 0x20 (0xffe0 at most): space the first packet reserves	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ GLD_ringLimit\)\ <=\ \(uint\)\(\(int\)pfVar12\ \+\ iVar10\ \+\ 0x10\)\)\ \{$	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iStack_a0\ =\ iVar10;$	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iVar10\ =\ iStack_a0;$	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iStack_a0\ =\ iVar10;$@2	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iVar10\ =\ iStack_a0;$@2	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*\*\(undefined4\ \*\)\(\(int\)pfVar12\ \+\ iVar10\)\ =\ 0x82c;$	+4
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iStack_a0\ =\ iVar10;$@3	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*iVar10\ =\ iStack_a0;$@3	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*\*\(undefined\ \*\*\)\(iVar21\ \+\ iVar10\)\ =\ \(\(unsigned\ char\ \*\)0x00001087U\);$	+1
+use	FUN_00016670	iVar10	trailerOffset	INFERRED	byte offset of the trailer words behind the vertex run (0x82c, stream word, packet header) and later of the GA_POINT_SIZE write	^\s*\*\(undefined4\ \*\)\(iVar21\ \+\ 4\ \+\ iVar10\)\ =\ uVar15;$	+2
+use	FUN_00016670	iStack_a0	savedTrailerOffset	CONFIRMED	iVar10 saved across the FUN_0001a0f0 submit call (restored right after)	^\s*iStack_a0\ =\ iVar10;$	+1
+use	FUN_00016670	iStack_a0	savedTrailerOffset	CONFIRMED	iVar10 saved across the FUN_0001a0f0 submit call (restored right after)	^\s*iVar10\ =\ iStack_a0;$	+1
+use	FUN_00016670	iStack_a0	savedTrailerOffset	CONFIRMED	same save/restore around the second submit	^\s*iStack_a0\ =\ iVar10;$@2	+1
+use	FUN_00016670	iStack_a0	savedTrailerOffset	CONFIRMED	same save/restore around the second submit	^\s*iVar10\ =\ iStack_a0;$@2	+1
+use	FUN_00016670	iStack_a0	savedTrailerOffset	CONFIRMED	same save/restore around the third submit	^\s*iStack_a0\ =\ iVar10;$@3	+1
+use	FUN_00016670	iStack_a0	savedTrailerOffset	CONFIRMED	same save/restore around the third submit	^\s*iVar10\ =\ iStack_a0;$@3	+1
+local	FUN_00016670	pfVar12	packetStart	CONFIRMED	writeCursor at the start of a packet; the header words (0x82c, ...) are patched there once the vertex count is known
+local	FUN_00016670	pfVar25	vertexCursor	CONFIRMED	write pointer for the vertices: packetStart + 4, advanced 8/16/32 words per emitted pixel
+use	FUN_00016670	pfVar14	alphaSlot	CONFIRMED	address of the last colour word, written after vertexCursor was advanced (compiler store order)	^\s*pfVar14\ =\ pfVar25\ \+\ 7;$	+1
+use	FUN_00016670	pfVar14	alphaSlot	CONFIRMED	address of the last colour word, written after vertexCursor was advanced (compiler store order)	^\s*\*pfVar14\ =\ fStack_188;$	+1
+use	FUN_00016670	pfVar14	alphaSlot	CONFIRMED	same, two-point emitter	^\s*pfVar14\ =\ pfVar25\ \+\ 0xf;$	+1
+use	FUN_00016670	pfVar14	alphaSlot	CONFIRMED	same, two-point emitter	^\s*\*pfVar14\ =\ fStack_188;$@2	+1
+use	FUN_00016670	pfVar14	alphaSlot	CONFIRMED	same, four-point emitter	^\s*pfVar14\ =\ pfVar25\ \+\ 0x1f;$	+1
+use	FUN_00016670	pfVar14	alphaSlot	CONFIRMED	same, four-point emitter	^\s*\*pfVar14\ =\ fStack_188;$@3	+1
+local	FUN_00016670	iStack00000020	columns	INFERRED	copy of width kept across the loops
+local	FUN_00016670	iStack00000024	rows	INFERRED	copy of height; the row loop runs until rowIndex reaches it
+local	FUN_00016670	iStack00000030	rowPtr	CONFIRMED	copy of bitmap advanced by rowStride after every row (and offset by the unpack skip rows/pixels)
+local	FUN_00016670	iStack_b8	rowIndex	CONFIRMED	row loop counter 0..height-1
+local	FUN_00016670	iStack_bc	byteColumn	INFERRED	index of the current data byte inside the row
+local	FUN_00016670	iStack_cc	byteBits	INFERRED	bits still to examine in the current run of bytes (starts at width)
+local	FUN_00016670	iVar22	bitsLeft	INFERRED	columns of the row not yet consumed
+use	FUN_00016670	iVar18	bitInByte	INFERRED	bits examined in the current byte	^\s*iVar18\ =\ 0;$	+1
+use	FUN_00016670	iVar18	bitInByte	INFERRED	bits examined in the current byte	^\s*\}\ while\ \(\(bVar2\)\ \&\&\ \(iVar18\ =\ iVar18\ \+\ 1,\ iStack_cc\ !=\ iVar18\)\);$	+1
+use	FUN_00016670	iVar18	rowBytesLeft	INFERRED	rowBytesUsed - byteColumn	^\s*iVar18\ =\ uStack_c4\ \-\ iStack_bc;$	+1
+use	FUN_00016670	iVar18	rowBytesLeft	INFERRED	rowBytesUsed - byteColumn	^\s*iVar18\ =\ iVar18\ \+\ \-1;$	+2
+local	FUN_00016670	uStack_c8	skipBits	CONFIRMED	engineState+0x2e78 & 7: GL_UNPACK_SKIP_PIXELS modulo 8 (first bit used in the first byte)
+local	FUN_00016670	uStack_c4	rowBytesUsed	INFERRED	(width + skipBits + 7) >> 3: bytes of each row that carry bits
+local	FUN_00016670	uStack_c0	rowStride	INFERRED	row length rounded up to the unpack alignment (engineState+0x2e80), the pointer step per row
+local	FUN_00016670	bVar1	rowHasBytes	INFERRED	0 < rowBytesUsed
+local	FUN_00016670	bVar2	moreBitsInByte	INFERRED	bitIndex != 7
+local	FUN_00016670	uStack_b4	msbFirstMask	INFERRED	0xffffffff when the unpack order is MSB first (engineState+0x2e85 clear), else 0
+local	FUN_00016670	uStack_d0	lsbFirstMask	INFERRED	0xffffffff when LSB first, else 0
+local	FUN_00016670	uStack_d4	msbStartBit	INFERRED	0x80 >> skipBits: first bit tested in MSB-first order
+local	FUN_00016670	uStack_d8	lsbStartBit	INFERRED	(1 << skipBits) & lsbFirstMask
+local	FUN_00016670	uStack_a4	msbNextByteBit	INFERRED	msbFirstMask & 0x80: bit to restart at for the next byte
+local	FUN_00016670	uStack_a8	lsbNextByteBit	INFERRED	lsbFirstMask & 1
+local	FUN_00016670	uVar17	bitIndex	INFERRED	bit position inside the current byte, 0..7
+local	FUN_00016670	uVar23	msbBit	INFERRED	running single-bit mask for MSB-first order (>> 1 per bit)
+use	FUN_00016670	uVar24	lsbBitStart	INFERRED	1 << skipBits	^\s*uVar24\ =\ 1\ <<\ uStack_c8;$	+1
+use	FUN_00016670	uVar24	lsbBitStart	INFERRED	1 << skipBits	^\s*uVar24\ =\ 1\ <<\ uStack_c8;$@2	+1
+use	FUN_00016670	uVar24	lsbBitStart	INFERRED	1 << skipBits	^\s*uVar24\ =\ 1;$	+1
+use	FUN_00016670	uVar24	lsbBitStart	INFERRED	1 << skipBits	^\s*uStack_d8\ =\ uVar24\ \&\ uStack_d0;$	+1
+use	FUN_00016670	uVar24	lsbBit	INFERRED	running single-bit mask for LSB-first order (<< 1 per bit)	^\s*uVar24\ =\ uStack_d8;$	+1
+use	FUN_00016670	uVar24	lsbBit	INFERRED	running single-bit mask for LSB-first order (<< 1 per bit)	^\s*if\ \(\(\(uint\)\*\(byte\ \*\)\(iStack00000030\ \+\ iStack_bc\)\ \&\ \(uVar24\ \|\ uVar23\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_00016670	uVar24	lsbBit	INFERRED	running single-bit mask for LSB-first order (<< 1 per bit)	^\s*uVar24\ =\ uVar24\ <<\ 1;$	+1
+use	FUN_00016670	uVar24	lsbBit	INFERRED	running single-bit mask for LSB-first order (<< 1 per bit)	^\s*uVar24\ =\ uStack_a8;$	+1

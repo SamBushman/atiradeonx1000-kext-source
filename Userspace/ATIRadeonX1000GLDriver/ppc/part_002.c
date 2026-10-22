@@ -8188,20 +8188,31 @@ LAB_00016630:
 }
 
 /* FUN_00016670 @ 0x16670 (2312 bytes) */
-void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2)
+void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,undefined4 param_6,int bitmap,int tightlyPacked,double xOrigin,double yOrigin)
 {
+  uint lsbBit;
+  int rowBytesLeft;
+  int trailerOffset;
+  int packetBytesTotal;
+  int packetBytes;
+  int vertexBudget;
+  int rowLength;
+  int zoomY;
+  float invertedRowStep;
+  double startY;
+  double startX;
   int writeCursor;
   int engineState;
-  bool bVar1;
-  bool bVar2;
-  float fVar3;
+  bool rowHasBytes;
+  bool moreBitsInByte;
+  float centerOffsetX;
   float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  int iVar10;
+  float pixelX;
+  float centerOffsetY;
+  float rowStep;
+  float pixelY;
+  float pixelStep;
+  int zoomX;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -8210,343 +8221,343 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
   undefined4 extraout_r4_04;
   undefined4 uVar11;
   undefined4 extraout_r4_05;
-  float *pfVar12;
-  int iVar13;
-  float *pfVar14;
+  float *packetStart;
+  int packetVertexCount;
+  float *alphaSlot;
   undefined4 uVar15;
-  int iVar16;
-  uint uVar17;
-  int iVar18;
-  int iVar19;
-  float fVar20;
+  int pointsPerPixel;
+  uint bitIndex;
+  int bitInByte;
+  int pixelsLeft;
+  float rasterZ;
   int iVar21;
-  int iVar22;
-  uint uVar23;
-  uint uVar24;
-  float *pfVar25;
-  double dVar26;
-  double dVar27;
-  int iStack00000020;
-  int iStack00000024;
-  int iStack00000030;
-  float fStack_188;
-  float fStack_184;
-  float fStack_180;
-  float fStack_17c;
+  int bitsLeft;
+  uint msbBit;
+  uint lsbBitStart;
+  float *vertexCursor;
+  double fogFactor;
+  double oneMinusFogFactor;
+  int columns;
+  int rows;
+  int rowPtr;
+  float colorA;
+  float colorR;
+  float colorG;
+  float colorB;
   undefined1 auStack_178 [144];
-  longlong lStack_e8;
-  longlong lStack_e0;
-  uint uStack_d8;
-  uint uStack_d4;
-  uint uStack_d0;
-  int iStack_cc;
-  uint uStack_c8;
-  uint uStack_c4;
-  uint uStack_c0;
-  int iStack_bc;
-  int iStack_b8;
-  uint uStack_b4;
+  longlong zoomXWide;
+  longlong zoomYWide;
+  uint lsbStartBit;
+  uint msbStartBit;
+  uint lsbFirstMask;
+  int byteBits;
+  uint skipBits;
+  uint rowBytesUsed;
+  uint rowStride;
+  int byteColumn;
+  int rowIndex;
+  uint msbFirstMask;
   int ring;
   undefined1 *puStack_ac;
-  uint uStack_a8;
-  uint uStack_a4;
-  int iStack_a0;
+  uint lsbNextByteBit;
+  uint msbNextByteBit;
+  int savedTrailerOffset;
   
-  fStack_180 = vertex[0xd];
-  fStack_17c = vertex[0xe];
-  fStack_188 = vertex[0xf];
-  fStack_184 = vertex[0xc];
+  colorG = vertex[0xd];
+  colorB = vertex[0xe];
+  colorA = vertex[0xf];
+  colorR = vertex[0xc];
   engineState = *(int *)(ctx + GLD_engineState);
   ring = ctx + GLD_commandStream;
-  fVar20 = vertex[2];
+  rasterZ = vertex[2];
   if (((unsigned char *)0x00002e0a)[engineState] != '\0') {
-    dVar26 = (double)vertex[0x13];
-    dVar27 = DOUBLE_001aa200 - dVar26;
-    fStack_184 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de0) + engineState) +
-                        (double)(float)((double)fStack_184 * dVar26));
-    fStack_180 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de4) + engineState) +
-                        (double)(float)((double)fStack_180 * dVar26));
-    fStack_17c = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de8) + engineState) +
-                        (double)(float)((double)fStack_17c * dVar26));
-    fStack_188 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002dec) + engineState) +
-                        (double)(float)((double)fStack_188 * dVar26));
+    fogFactor = (double)vertex[0x13];
+    oneMinusFogFactor = DOUBLE_001aa200 - fogFactor;
+    colorR = (float)(oneMinusFogFactor * (double)*(float *)(((unsigned char *)0x00002de0) + engineState) +
+                        (double)(float)((double)colorR * fogFactor));
+    colorG = (float)(oneMinusFogFactor * (double)*(float *)(((unsigned char *)0x00002de4) + engineState) +
+                        (double)(float)((double)colorG * fogFactor));
+    colorB = (float)(oneMinusFogFactor * (double)*(float *)(((unsigned char *)0x00002de8) + engineState) +
+                        (double)(float)((double)colorB * fogFactor));
+    colorA = (float)(oneMinusFogFactor * (double)*(float *)(((unsigned char *)0x00002dec) + engineState) +
+                        (double)(float)((double)colorA * fogFactor));
   }
-  iVar10 = (int)(*(float *)(ctx + 0x2a54) + FLOAT_001aa10c);
-  lStack_e8 = (longlong)iVar10;
-  iVar21 = (int)(*(float *)(ctx + 0x2a58) + FLOAT_001aa10c);
-  lStack_e0 = (longlong)iVar21;
-  iVar16 = iVar10 * iVar21;
-  fVar3 = FLOAT_001aa10c;
-  if (iVar10 == 2) {
-    fVar3 = FLOAT_001aa110;
+  zoomX = (int)(*(float *)(ctx + 0x2a54) + FLOAT_001aa10c);
+  zoomXWide = (longlong)zoomX;
+  zoomY = (int)(*(float *)(ctx + 0x2a58) + FLOAT_001aa10c);
+  zoomYWide = (longlong)zoomY;
+  pointsPerPixel = zoomX * zoomY;
+  centerOffsetX = FLOAT_001aa10c;
+  if (zoomX == 2) {
+    centerOffsetX = FLOAT_001aa110;
   }
-  fVar6 = FLOAT_001aa10c;
-  if (iVar21 == 2) {
-    fVar6 = FLOAT_001aa110;
+  centerOffsetY = FLOAT_001aa10c;
+  if (zoomY == 2) {
+    centerOffsetY = FLOAT_001aa110;
   }
-  if ((0 < param_3) && (0 < param_4)) {
+  if ((0 < width) && (0 < height)) {
     puStack_ac = auStack_178;
     *(undefined1 *)(ctx + 0x2a5e) = 1;
-    iStack00000020 = param_3;
-    iStack00000024 = param_4;
-    iStack00000030 = param_7;
+    columns = width;
+    rows = height;
+    rowPtr = bitmap;
     FUN_0002a260(ring,puStack_ac);
-    dVar26 = _floor((double)(float)((double)*vertex - fparam_1));
-    fVar8 = FLOAT_001aa114;
-    fVar7 = FLOAT_001aa0e8;
+    startX = _floor((double)(float)((double)*vertex - xOrigin));
+    invertedRowStep = FLOAT_001aa114;
+    rowStep = FLOAT_001aa0e8;
     if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
-      dVar27 = _floor((double)(float)((double)vertex[1] - fparam_2));
+      startY = _floor((double)(float)((double)vertex[1] - yOrigin));
       uVar11 = extraout_r4_00;
     }
     else {
-      dVar27 = _ceil((double)((float)(fparam_2 + (double)vertex[1]) - FLOAT_001aa0e8));
+      startY = _ceil((double)((float)(yOrigin + (double)vertex[1]) - FLOAT_001aa0e8));
       uVar11 = extraout_r4;
-      fVar7 = fVar8;
+      rowStep = invertedRowStep;
     }
-    fVar8 = (float)dVar27;
-    if (param_8 == 0) {
+    pixelY = (float)startY;
+    if (tightlyPacked == 0) {
       iVar21 = *(int *)(ctx + GLD_engineState);
-      iVar10 = *(int *)(((unsigned char *)0x00002e6c) + iVar21);
+      rowLength = *(int *)(((unsigned char *)0x00002e6c) + iVar21);
       if (*(int *)(((unsigned char *)0x00002e6c) + iVar21) == 0) {
-        iVar10 = iStack00000020;
+        rowLength = columns;
       }
-      uStack_c8 = *(uint *)(((unsigned char *)0x00002e78) + iVar21) & 7;
-      uStack_c0 = (*(int *)(((unsigned char *)0x00002e80) + iVar21) - 1U) + (iVar10 + 7 >> 3) &
+      skipBits = *(uint *)(((unsigned char *)0x00002e78) + iVar21) & 7;
+      rowStride = (*(int *)(((unsigned char *)0x00002e80) + iVar21) - 1U) + (rowLength + 7 >> 3) &
                   ~(*(int *)(((unsigned char *)0x00002e80) + iVar21) - 1U);
-      iStack00000030 =
-           iStack00000030 +
-           uStack_c0 * *(int *)(((unsigned char *)0x00002e74) + iVar21) +
+      rowPtr =
+           rowPtr +
+           rowStride * *(int *)(((unsigned char *)0x00002e74) + iVar21) +
            ((int)*(uint *)(((unsigned char *)0x00002e78) + iVar21) >> 3);
-      uStack_c4 = (int)(iStack00000020 + uStack_c8 + 7) >> 3;
+      rowBytesUsed = (int)(columns + skipBits + 7) >> 3;
       if (((unsigned char *)0x00002e85)[iVar21] == '\0') {
-        uStack_b4 = 0xffffffff;
-        uVar24 = 1 << uStack_c8;
-        uStack_d4 = 0x80 >> uStack_c8;
-        uStack_d0 = 0;
+        msbFirstMask = 0xffffffff;
+        lsbBitStart = 1 << skipBits;
+        msbStartBit = 0x80 >> skipBits;
+        lsbFirstMask = 0;
       }
       else {
-        uStack_b4 = 0;
-        uStack_d0 = 0xffffffff;
-        uStack_d4 = 0;
-        uVar24 = 1 << uStack_c8;
+        msbFirstMask = 0;
+        lsbFirstMask = 0xffffffff;
+        msbStartBit = 0;
+        lsbBitStart = 1 << skipBits;
       }
     }
     else {
-      uVar24 = 1;
-      uStack_c8 = 0;
-      uStack_b4 = 0xff;
-      uStack_d0 = 0xffffff00;
-      uStack_c4 = iStack00000020 + 7 >> 3;
-      uStack_d4 = 0x80;
-      uStack_c0 = uStack_c4;
+      lsbBitStart = 1;
+      skipBits = 0;
+      msbFirstMask = 0xff;
+      lsbFirstMask = 0xffffff00;
+      rowBytesUsed = columns + 7 >> 3;
+      msbStartBit = 0x80;
+      rowStride = rowBytesUsed;
     }
-    iVar19 = iStack00000020 * iStack00000024;
-    iVar21 = iVar16 * iVar19;
-    iVar10 = iVar21 * 0x20;
-    if (0x7ff < iVar21) {
-      iVar21 = 0x7ff;
-      iVar10 = 0xffe0;
+    pixelsLeft = columns * rows;
+    vertexBudget = pointsPerPixel * pixelsLeft;
+    packetBytesTotal = vertexBudget * 0x20;
+    if (0x7ff < vertexBudget) {
+      vertexBudget = 0x7ff;
+      packetBytesTotal = 0xffe0;
     }
-    pfVar12 = *(float **)(ctx + GLD_writeCursor);
-    if (*(float **)(ctx + GLD_ringLimit) <= pfVar12 + 2) {
+    packetStart = *(float **)(ctx + GLD_writeCursor);
+    if (*(float **)(ctx + GLD_ringLimit) <= packetStart + 2) {
       FUN_0001a0f0(ctx,0x1000000);
-      pfVar12 = *(float **)(ctx + GLD_writeCursor);
+      packetStart = *(float **)(ctx + GLD_writeCursor);
       uVar11 = extraout_r4_01;
     }
     if (*(char *)(ring + 0x2802) == '\0') {
-      pfVar12[1] = 2.524355e-29;
-      *pfVar12 = 2.07392e-42;
+      packetStart[1] = 2.524355e-29;
+      *packetStart = 2.07392e-42;
       *(undefined1 *)(ring + 0x2802) = 1;
-      pfVar12 = *(float **)(ctx + GLD_writeCursor);
+      packetStart = *(float **)(ctx + GLD_writeCursor);
     }
-    if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)pfVar12 + iVar10 + 0x10)) {
+    if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)packetStart + packetBytesTotal + 0x10)) {
       FUN_0001a0f0(ctx,0x1000000);
-      pfVar12 = *(float **)(ctx + GLD_writeCursor);
+      packetStart = *(float **)(ctx + GLD_writeCursor);
       uVar11 = extraout_r4_02;
     }
-    pfVar25 = pfVar12 + 4;
-    iVar10 = 0;
-    iStack_b8 = 0;
-    uStack_d8 = uVar24 & uStack_d0;
-    bVar1 = 0 < (int)uStack_c4;
-    iVar13 = iVar21;
+    vertexCursor = packetStart + 4;
+    trailerOffset = 0;
+    rowIndex = 0;
+    lsbStartBit = lsbBitStart & lsbFirstMask;
+    rowHasBytes = 0 < (int)rowBytesUsed;
+    packetVertexCount = vertexBudget;
     do {
-      if (bVar1) {
-        fVar5 = (float)dVar26;
-        if (7 < (int)uStack_c8) {
-          iStack_bc = 0;
-          uStack_a8 = uStack_d0 & 1;
-          uStack_a4 = uStack_b4 & 0x80;
-          iVar22 = iStack00000020;
+      if (rowHasBytes) {
+        pixelX = (float)startX;
+        if (7 < (int)skipBits) {
+          byteColumn = 0;
+          lsbNextByteBit = lsbFirstMask & 1;
+          msbNextByteBit = msbFirstMask & 0x80;
+          bitsLeft = columns;
           goto LAB_00016e40;
         }
-        iStack_bc = 0;
-        uStack_a8 = uStack_d0 & 1;
-        uStack_a4 = uStack_b4 & 0x80;
-        uVar17 = uStack_c8;
-        uVar23 = uStack_d4;
-        uVar24 = uStack_d8;
-        iStack_cc = iStack00000020;
+        byteColumn = 0;
+        lsbNextByteBit = lsbFirstMask & 1;
+        msbNextByteBit = msbFirstMask & 0x80;
+        bitIndex = skipBits;
+        msbBit = msbStartBit;
+        lsbBit = lsbStartBit;
+        byteBits = columns;
         do {
-          fVar9 = FLOAT_001aa10c;
-          iVar18 = 0;
-          iVar22 = iStack_cc;
+          pixelStep = FLOAT_001aa10c;
+          bitInByte = 0;
+          bitsLeft = byteBits;
           do {
-            if (((uint)*(byte *)(iStack00000030 + iStack_bc) & (uVar24 | uVar23)) != 0) {
-              if (iVar21 < iVar16) {
-                *pfVar12 = 2.93152e-42;
-                pfVar12[1] = *(float *)(ring + 0x1b84);
-                pfVar12[2] = GH_U2F((unsigned int)(((iVar13 - iVar21) * 0x80000 | 0xc0003500)));
-                pfVar12[3] = GH_U2F((unsigned int)(((iVar13 - iVar21) * 0x10000 | 0x31)));
-                iVar21 = iVar16 * iVar19;
-                *(float **)(ctx + GLD_writeCursor) = pfVar25;
-                iVar13 = iVar21 * 0x20;
-                if (0x7ff < iVar21) {
-                  iVar21 = 0x7ff;
-                  iVar13 = 0xffe0;
+            if (((uint)*(byte *)(rowPtr + byteColumn) & (lsbBit | msbBit)) != 0) {
+              if (vertexBudget < pointsPerPixel) {
+                *packetStart = 2.93152e-42;
+                packetStart[1] = *(float *)(ring + 0x1b84);
+                packetStart[2] = GH_U2F((unsigned int)(((packetVertexCount - vertexBudget) * 0x80000 | 0xc0003500)));
+                packetStart[3] = GH_U2F((unsigned int)(((packetVertexCount - vertexBudget) * 0x10000 | 0x31)));
+                vertexBudget = pointsPerPixel * pixelsLeft;
+                *(float **)(ctx + GLD_writeCursor) = vertexCursor;
+                packetBytes = vertexBudget * 0x20;
+                if (0x7ff < vertexBudget) {
+                  vertexBudget = 0x7ff;
+                  packetBytes = 0xffe0;
                 }
-                if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)pfVar25 + iVar13 + 0x10)) {
-                  iStack_a0 = iVar10;
+                if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)vertexCursor + packetBytes + 0x10)) {
+                  savedTrailerOffset = trailerOffset;
                   FUN_0001a0f0(ctx,0x1000000);
                   uVar11 = extraout_r4_03;
-                  iVar10 = iStack_a0;
+                  trailerOffset = savedTrailerOffset;
                 }
-                pfVar12 = *(float **)(ctx + GLD_writeCursor);
-                if ((pfVar25 != pfVar12) &&
-                   (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)pfVar12 + iVar13 + 0x10))) {
-                  iStack_a0 = iVar10;
+                packetStart = *(float **)(ctx + GLD_writeCursor);
+                if ((vertexCursor != packetStart) &&
+                   (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)packetStart + packetBytes + 0x10))) {
+                  savedTrailerOffset = trailerOffset;
                   FUN_0001a0f0(ctx,0x1000000);
-                  pfVar12 = *(float **)(ctx + GLD_writeCursor);
+                  packetStart = *(float **)(ctx + GLD_writeCursor);
                   uVar11 = extraout_r4_04;
-                  iVar10 = iStack_a0;
+                  trailerOffset = savedTrailerOffset;
                 }
-                pfVar25 = pfVar12 + 4;
-                iVar13 = iVar21;
+                vertexCursor = packetStart + 4;
+                packetVertexCount = vertexBudget;
               }
-              if (iVar16 == 1) {
-                *pfVar25 = fVar3 + fVar5;
-                pfVar25[1] = fVar6 + fVar8;
-                pfVar25[2] = fVar20;
-                pfVar25[3] = 1.0;
-                pfVar25[4] = fStack_184;
-                pfVar25[5] = fStack_180;
-                pfVar14 = pfVar25 + 7;
-                pfVar25[6] = fStack_17c;
-                pfVar25 = pfVar25 + 8;
-                *pfVar14 = fStack_188;
+              if (pointsPerPixel == 1) {
+                *vertexCursor = centerOffsetX + pixelX;
+                vertexCursor[1] = centerOffsetY + pixelY;
+                vertexCursor[2] = rasterZ;
+                vertexCursor[3] = 1.0;
+                vertexCursor[4] = colorR;
+                vertexCursor[5] = colorG;
+                alphaSlot = vertexCursor + 7;
+                vertexCursor[6] = colorB;
+                vertexCursor = vertexCursor + 8;
+                *alphaSlot = colorA;
               }
-              else if (iVar16 == 2) {
-                *pfVar25 = fVar3 + fVar5;
-                pfVar25[1] = fVar6 + fVar8;
-                pfVar25[2] = fVar20;
-                pfVar25[3] = 1.0;
-                pfVar25[4] = fStack_184;
-                pfVar25[5] = fStack_180;
-                pfVar25[6] = fStack_17c;
-                pfVar25[7] = fStack_188;
-                pfVar25[8] = fVar3 + fVar5;
-                pfVar25[9] = fVar6 + fVar8 + fVar9;
-                pfVar25[10] = fVar20;
-                pfVar25[0xb] = 1.0;
-                pfVar25[0xc] = fStack_184;
-                pfVar25[0xd] = fStack_180;
-                pfVar14 = pfVar25 + 0xf;
-                pfVar25[0xe] = fStack_17c;
-                pfVar25 = pfVar25 + 0x10;
-                *pfVar14 = fStack_188;
-                fVar8 = (fVar8 + fVar9) - fVar9;
+              else if (pointsPerPixel == 2) {
+                *vertexCursor = centerOffsetX + pixelX;
+                vertexCursor[1] = centerOffsetY + pixelY;
+                vertexCursor[2] = rasterZ;
+                vertexCursor[3] = 1.0;
+                vertexCursor[4] = colorR;
+                vertexCursor[5] = colorG;
+                vertexCursor[6] = colorB;
+                vertexCursor[7] = colorA;
+                vertexCursor[8] = centerOffsetX + pixelX;
+                vertexCursor[9] = centerOffsetY + pixelY + pixelStep;
+                vertexCursor[10] = rasterZ;
+                vertexCursor[0xb] = 1.0;
+                vertexCursor[0xc] = colorR;
+                vertexCursor[0xd] = colorG;
+                alphaSlot = vertexCursor + 0xf;
+                vertexCursor[0xe] = colorB;
+                vertexCursor = vertexCursor + 0x10;
+                *alphaSlot = colorA;
+                pixelY = (pixelY + pixelStep) - pixelStep;
               }
               else {
-                *pfVar25 = fVar3 + fVar5;
-                pfVar25[1] = fVar6 + fVar8;
-                pfVar25[2] = fVar20;
-                pfVar25[3] = 1.0;
-                pfVar25[4] = fStack_184;
-                pfVar25[5] = fStack_180;
-                pfVar25[6] = fStack_17c;
-                pfVar25[7] = fStack_188;
-                pfVar25[8] = fVar3 + fVar5;
-                fVar4 = fVar6 + fVar8 + fVar9;
-                pfVar25[9] = fVar4;
-                pfVar25[10] = fVar20;
-                pfVar25[0xb] = 1.0;
-                pfVar25[0xc] = fStack_184;
-                pfVar25[0xd] = fStack_180;
-                pfVar25[0xe] = fStack_17c;
-                pfVar25[0xf] = fStack_188;
-                pfVar25[0x11] = fVar4;
-                fVar4 = fVar3 + fVar5 + fVar9;
-                pfVar25[0x10] = fVar4;
-                pfVar25[0x12] = fVar20;
-                pfVar25[0x13] = 1.0;
-                pfVar25[0x14] = fStack_184;
-                pfVar25[0x15] = fStack_180;
-                pfVar25[0x16] = fStack_17c;
-                pfVar25[0x17] = fStack_188;
-                fVar8 = (fVar8 + fVar9) - fVar9;
-                pfVar25[0x18] = fVar4;
-                pfVar25[0x19] = fVar6 + fVar8;
-                pfVar25[0x1a] = fVar20;
-                pfVar25[0x1b] = 1.0;
-                pfVar25[0x1c] = fStack_184;
-                pfVar25[0x1d] = fStack_180;
-                pfVar14 = pfVar25 + 0x1f;
-                pfVar25[0x1e] = fStack_17c;
-                pfVar25 = pfVar25 + 0x20;
-                *pfVar14 = fStack_188;
-                fVar5 = (fVar5 + fVar9) - fVar9;
+                *vertexCursor = centerOffsetX + pixelX;
+                vertexCursor[1] = centerOffsetY + pixelY;
+                vertexCursor[2] = rasterZ;
+                vertexCursor[3] = 1.0;
+                vertexCursor[4] = colorR;
+                vertexCursor[5] = colorG;
+                vertexCursor[6] = colorB;
+                vertexCursor[7] = colorA;
+                vertexCursor[8] = centerOffsetX + pixelX;
+                fVar4 = centerOffsetY + pixelY + pixelStep;
+                vertexCursor[9] = fVar4;
+                vertexCursor[10] = rasterZ;
+                vertexCursor[0xb] = 1.0;
+                vertexCursor[0xc] = colorR;
+                vertexCursor[0xd] = colorG;
+                vertexCursor[0xe] = colorB;
+                vertexCursor[0xf] = colorA;
+                vertexCursor[0x11] = fVar4;
+                fVar4 = centerOffsetX + pixelX + pixelStep;
+                vertexCursor[0x10] = fVar4;
+                vertexCursor[0x12] = rasterZ;
+                vertexCursor[0x13] = 1.0;
+                vertexCursor[0x14] = colorR;
+                vertexCursor[0x15] = colorG;
+                vertexCursor[0x16] = colorB;
+                vertexCursor[0x17] = colorA;
+                pixelY = (pixelY + pixelStep) - pixelStep;
+                vertexCursor[0x18] = fVar4;
+                vertexCursor[0x19] = centerOffsetY + pixelY;
+                vertexCursor[0x1a] = rasterZ;
+                vertexCursor[0x1b] = 1.0;
+                vertexCursor[0x1c] = colorR;
+                vertexCursor[0x1d] = colorG;
+                alphaSlot = vertexCursor + 0x1f;
+                vertexCursor[0x1e] = colorB;
+                vertexCursor = vertexCursor + 0x20;
+                *alphaSlot = colorA;
+                pixelX = (pixelX + pixelStep) - pixelStep;
               }
-              iVar21 = iVar21 - iVar16;
+              vertexBudget = vertexBudget - pointsPerPixel;
             }
-            bVar2 = uVar17 != 7;
-            iVar19 = iVar19 + -1;
-            uVar24 = uVar24 << 1;
-            uVar23 = uVar23 >> 1;
-            iVar22 = iVar22 + -1;
-            uVar17 = uVar17 + 1;
-            fVar5 = fVar5 + FLOAT_001aa0e8;
-          } while ((bVar2) && (iVar18 = iVar18 + 1, iStack_cc != iVar18));
+            moreBitsInByte = bitIndex != 7;
+            pixelsLeft = pixelsLeft + -1;
+            lsbBit = lsbBit << 1;
+            msbBit = msbBit >> 1;
+            bitsLeft = bitsLeft + -1;
+            bitIndex = bitIndex + 1;
+            pixelX = pixelX + FLOAT_001aa0e8;
+          } while ((moreBitsInByte) && (bitInByte = bitInByte + 1, byteBits != bitInByte));
 LAB_00016e40:
-          iVar18 = uStack_c4 - iStack_bc;
+          rowBytesLeft = rowBytesUsed - byteColumn;
           do {
-            iStack_bc = iStack_bc + 1;
-            iVar18 = iVar18 + -1;
-            if (iVar18 == 0) goto LAB_00016a6c;
-          } while (iVar22 == 0);
-          uVar17 = 0;
-          uVar23 = uStack_a4;
-          uVar24 = uStack_a8;
-          iStack_cc = iVar22;
+            byteColumn = byteColumn + 1;
+            rowBytesLeft = rowBytesLeft + -1;
+            if (rowBytesLeft == 0) goto LAB_00016a6c;
+          } while (bitsLeft == 0);
+          bitIndex = 0;
+          msbBit = msbNextByteBit;
+          lsbBit = lsbNextByteBit;
+          byteBits = bitsLeft;
         } while( true );
       }
 LAB_00016a6c:
-      fVar8 = fVar8 + fVar7;
-      iStack_b8 = iStack_b8 + 1;
-      iStack00000030 = iStack00000030 + uStack_c0;
-    } while (iStack00000024 != iStack_b8);
-    iVar13 = iVar13 - iVar21;
-    if (iVar13 == 0) {
-      pfVar25 = pfVar25 + -4;
+      pixelY = pixelY + rowStep;
+      rowIndex = rowIndex + 1;
+      rowPtr = rowPtr + rowStride;
+    } while (rows != rowIndex);
+    packetVertexCount = packetVertexCount - vertexBudget;
+    if (packetVertexCount == 0) {
+      vertexCursor = vertexCursor + -4;
     }
     else {
-      *(undefined4 *)((int)pfVar12 + iVar10) = 0x82c;
-      *(undefined4 *)((int)pfVar12 + iVar10 + 4) = *(undefined4 *)(ring + 0x1b84);
-      *(uint *)((int)pfVar12 + iVar10 + 8) = iVar13 * 0x80000 | 0xc0003500;
-      *(uint *)((int)pfVar12 + iVar10 + 0xc) = iVar13 * 0x10000 | 0x31;
+      *(undefined4 *)((int)packetStart + trailerOffset) = 0x82c;
+      *(undefined4 *)((int)packetStart + trailerOffset + 4) = *(undefined4 *)(ring + 0x1b84);
+      *(uint *)((int)packetStart + trailerOffset + 8) = packetVertexCount * 0x80000 | 0xc0003500;
+      *(uint *)((int)packetStart + trailerOffset + 0xc) = packetVertexCount * 0x10000 | 0x31;
     }
-    *(float **)(ctx + GLD_writeCursor) = pfVar25;
-    if (*(float **)(ctx + GLD_ringLimit) <= pfVar25 + 2) {
-      iStack_a0 = iVar10;
+    *(float **)(ctx + GLD_writeCursor) = vertexCursor;
+    if (*(float **)(ctx + GLD_ringLimit) <= vertexCursor + 2) {
+      savedTrailerOffset = trailerOffset;
       FUN_0001a0f0(ctx,0x1000000);
       uVar11 = extraout_r4_05;
-      iVar10 = iStack_a0;
+      trailerOffset = savedTrailerOffset;
     }
     writeCursor = *(int *)(ctx + GLD_writeCursor);
     *(int *)(ctx + GLD_writeCursor) = writeCursor + 8;
-    *(undefined **)(writeCursor + iVar10) = ((unsigned char *)0x00001087U);
+    *(undefined **)(writeCursor + trailerOffset) = ((unsigned char *)0x00001087U);
     uVar15 = *(undefined4 *)(ring + 0x1ccc);
-    *(undefined4 *)(writeCursor + 4 + iVar10) = uVar15;
-    FUN_0009d3b0(ring,uVar11,param_3,iVar10,pfVar12,iVar13,uVar15);
+    *(undefined4 *)(writeCursor + 4 + trailerOffset) = uVar15;
+    FUN_0009d3b0(ring,uVar11,width,trailerOffset,packetStart,packetVertexCount,uVar15);
     FUN_000872e0(ring,puStack_ac);
   }
   return;
