@@ -1767,6 +1767,7 @@ LAB_97bb56a8:
 int TGenericLinker__AllocateTextureUnitsForVaryings(this)
   unsigned char * this;
 {
+  int ppStreamManager;
   uint loopIndex;
   uint firstOp;
   bool bVar1;
@@ -2174,10 +2175,10 @@ code_r0x97bb5cd0:
                         iVar4 = 0;
                         local_58 = local_e0 + 8;
 code_r0x97bb5ec0:
-                        iVar14 = *(int *)(this + 0x30);
+                        ppStreamManager = *(int *)(this + 0x30);
                         loopIndex = 0;
                         uVar17 = *(uint *)((int)local_e0 + iVar4);
-                        for (iVar19 = **(int **)(iVar14 + 0x1c); iVar19 != 0;
+                        for (iVar19 = **(int **)(ppStreamManager + 0x1c); iVar19 != 0;
                             iVar19 = *(int *)(iVar19 + 8)) {
                           if (((*(uint *)(iVar19 + 0xc) & 0xf0000) == 0x60000) &&
                              ((*(uint *)(iVar19 + 0xc) & 0x1f) == uVar17)) {
@@ -2200,12 +2201,12 @@ code_r0x97bb5ec0:
                           }
                           uVar3 = uVar3 - 1;
                         } while (-1 < (int)uVar3);
-                        uVar13 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(iVar14 + 0x1c));
+                        uVar13 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(ppStreamManager + 0x1c));
                         uVar23 = (short)uVar13 + 1;
                         local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),uVar23);
                         _PPStreamAddOutputBinding(*(undefined4 *)(this + 0x30),&local_80);
 code_r0x97bb5fe4:
-                        iVar14 = *(int *)(this + 0x30);
+                        ppStreamManager = *(int *)(this + 0x30);
                         goto code_r0x97bb5fe8;
                       }
 code_r0x97bb61d0:
@@ -2360,7 +2361,7 @@ code_r0x97bb6154:
   }
   local_e0[0xc] = (loopIndex - 1) * 0x1000 & 0x3000 | uVar21;
   local_e0[9] = (loopIndex - 1) * 0x4000000 & 0xc000000 | 0x800000;
-  iVar19 = _PPStreamInsertOperationAfterChunk(iVar14,local_58,0,0,*(undefined4 *)(iVar24 + 4));
+  iVar19 = _PPStreamInsertOperationAfterChunk(ppStreamManager,local_58,0,0,*(undefined4 *)(iVar24 + 4));
   _PPStreamChangeBranchTargets
             (*(undefined4 *)(this + 0x30),*(uint *)(iVar24 + 0xc) & 0x3ffff,
              *(uint *)(iVar19 + 0xc) & 0x3ffff);
@@ -3233,8 +3234,8 @@ int __ZN14TGenericLinkerC2Ei(this, param_2)
   undefined4 *allocation;
   void *this_00;
   int iVar4;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   *(int *)this = DAT_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = param_2;
@@ -3242,21 +3243,21 @@ int __ZN14TGenericLinkerC2Ei(this, param_2)
   puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[1] = 4;
   *allocation = puVar1 + 0xc;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[2] = puVar1 + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
@@ -3296,8 +3297,8 @@ int __ZN14TGenericLinkerC1Ei(this, param_2)
   undefined4 *allocation;
   void *this_00;
   int iVar4;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   *(int *)this = DAT_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = param_2;
@@ -3305,21 +3306,21 @@ int __ZN14TGenericLinkerC1Ei(this, param_2)
   puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[1] = 4;
   *allocation = puVar1 + 0xc;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[2] = puVar1 + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
@@ -3359,8 +3360,8 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
   undefined4 *allocation;
   void *this_00;
   int iVar4;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   *(int *)this = DAT_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = param_2;
@@ -3368,21 +3369,21 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
   puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[1] = 4;
   *allocation = puVar1 + 0xc;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[2] = puVar1 + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
@@ -3438,13 +3439,13 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
   uint param_2;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   int iVar4;
   int *piVar5;
   void *this_00;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   undefined1 auStack_30 [28];
   
   *(int *)this = DAT_a7b7bba0 + 8;
@@ -3452,29 +3453,29 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
   piVar5 = *(int **)((int)this + 0x84);
   if (piVar5 != (int *)0x0) {
     iVar4 = piVar5[2];
-    piVar2 = (int *)(iVar4 + -4);
+    refCountPtr = (int *)(iVar4 + -4);
     do {
-      iVar3 = *piVar2;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = atomicStore;
-        in_cr0 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 < 1) {
+    } while (!(bool)(cr0Reg >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
     }
     iVar4 = *piVar5;
-    piVar2 = (int *)(iVar4 + -4);
+    refCountPtr = (int *)(iVar4 + -4);
     do {
-      iVar3 = *piVar2;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = atomicStore;
-        in_cr0 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 < 1) {
+    } while (!(bool)(cr0Reg >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
     }
     __ZdlPv(piVar5);

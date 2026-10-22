@@ -10722,8 +10722,8 @@ int _InlineFunctionsBranch(stream)
   bool bVar16;
   uint uVar17;
   int iVar18;
-  uint local_90;
-  uint local_8c;
+  uint opHeader;
+  uint opFlags;
   int local_50 [6];
   
   piVar3 = *(int **)(stream + 0x20);
@@ -10781,20 +10781,20 @@ int _InlineFunctionsBranch(stream)
           bVar16 = true;
           iVar7 = iVar18;
           do {
-            _memcpy(&local_90,iVar15 + 0xc,0x38);
-            if (((local_90 >> 0x12 & 0xff) == 0x4d) &&
-               ((local_90 & 0x3ffff) != *(uint *)(iVar6 + local_50[0] + 4))) {
-              local_8c = uVar10 & 0x3ffff | local_8c & 0xfffc0000;
-              local_90 = local_90 & 0xfc03ffff | 0x12c0000;
+            _memcpy(&opHeader,iVar15 + 0xc,0x38);
+            if (((opHeader >> 0x12 & 0xff) == 0x4d) &&
+               ((opHeader & 0x3ffff) != *(uint *)(iVar6 + local_50[0] + 4))) {
+              opFlags = uVar10 & 0x3ffff | opFlags & 0xfffc0000;
+              opHeader = opHeader & 0xfc03ffff | 0x12c0000;
             }
-            else if ((local_90 >> 0x12 & 0xff) == 0x4d) {
-              local_90 = local_90 & 0xfc03ffff | 0x1b80000;
+            else if ((opHeader >> 0x12 & 0xff) == 0x4d) {
+              opHeader = opHeader & 0xfc03ffff | 0x1b80000;
             }
             uVar5 = 0;
             if ((uVar17 == 0) && (uVar8 == 0xffffffff)) {
               uVar5 = 1;
             }
-            iVar7 = _PPStreamInsertOperationAfterChunk(stream,&local_90,iVar15 + 0x44,uVar5,iVar7);
+            iVar7 = _PPStreamInsertOperationAfterChunk(stream,&opHeader,iVar15 + 0x44,uVar5,iVar7);
             uVar2 = *(uint *)(iVar7 + 0x10);
             if ((uVar2 & 0x3ffff) != 0) {
               iVar9 = 0;

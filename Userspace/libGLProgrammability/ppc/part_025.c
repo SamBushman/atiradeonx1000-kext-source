@@ -697,75 +697,75 @@ LAB_97c19440:
 }
 
 /* __Z21size_of_encoded_valueh @ 0x97c193e0 (120 bytes) */
-int __Z21size_of_encoded_valueh(param_1)
-  uint param_1;
+int __Z21size_of_encoded_valueh(encoding)
+  uint encoding;
 {
-  uint uVar1;
-  undefined4 uVar2;
+  uint format;
+  undefined4 valueSize;
   
-  uVar2 = 0;
-  if (param_1 != 0xff) {
-    uVar1 = param_1 & 7;
-    uVar2 = 2;
-    if (uVar1 != 2) {
-      if (uVar1 < 3) {
-        if (uVar1 != 0) {
+  valueSize = 0;
+  if (encoding != 0xff) {
+    format = encoding & 7;
+    valueSize = 2;
+    if (format != 2) {
+      if (format < 3) {
+        if (format != 0) {
 LAB_97c19440:
                     
           _abort();
         }
-        uVar2 = 4;
+        valueSize = 4;
       }
       else {
-        uVar2 = 4;
-        if (uVar1 != 3) {
-          if (uVar1 != 4) goto LAB_97c19440;
-          uVar2 = 8;
+        valueSize = 4;
+        if (format != 3) {
+          if (format != 4) goto LAB_97c19440;
+          valueSize = 8;
         }
       }
     }
   }
-  return uVar2;
+  return valueSize;
 }
 
 /* __Z21base_of_encoded_valuehP15_Unwind_Context @ 0x97c19458 (172 bytes) */
-int __Z21base_of_encoded_valuehP15_Unwind_Context(param_1, _Unwind_Context)
-  uint param_1;
+int __Z21base_of_encoded_valuehP15_Unwind_Context(encoding, _Unwind_Context)
+  uint encoding;
   unsigned char * _Unwind_Context;
 {
   unsigned char dataRelBase;
   unsigned char textRelBase;
-  bool bVar1;
-  uint uVar2;
+  bool isPcrelOrAligned;
+  uint application;
   unsigned char regionStart;
   
-  if (param_1 != 0xff) {
-    uVar2 = param_1 & 0x70;
-    if (uVar2 == 0x20) {
+  if (encoding != 0xff) {
+    application = encoding & 0x70;
+    if (application == 0x20) {
       textRelBase = __Unwind_GetTextRelBase(_Unwind_Context);
       return textRelBase;
     }
-    if (uVar2 < 0x21) {
-      if (uVar2 == 0) {
+    if (application < 0x21) {
+      if (application == 0) {
         return 0;
       }
-      bVar1 = uVar2 == 0x10;
+      isPcrelOrAligned = application == 0x10;
     }
     else {
-      if (uVar2 == 0x40) {
+      if (application == 0x40) {
         regionStart = ((int (*)())__Unwind_GetRegionStart)(_Unwind_Context);
         return regionStart;
       }
-      if (uVar2 < 0x41) {
-        if (uVar2 == 0x30) {
+      if (application < 0x41) {
+        if (application == 0x30) {
           dataRelBase = __Unwind_GetDataRelBase(_Unwind_Context);
           return dataRelBase;
         }
         goto LAB_97c194ec;
       }
-      bVar1 = uVar2 == 0x50;
+      isPcrelOrAligned = application == 0x50;
     }
-    if (!bVar1) {
+    if (!isPcrelOrAligned) {
 LAB_97c194ec:
                     
       _abort();
@@ -775,114 +775,114 @@ LAB_97c194ec:
 }
 
 /* __Z12read_uleb128PKhPj @ 0x97c19504 (48 bytes) */
-int __Z12read_uleb128PKhPj(param_1, param_2)
-  uchar *param_1;
-  uint *param_2;
+int __Z12read_uleb128PKhPj(p, val)
+  uchar *p;
+  uint *val;
 {
   byte bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint shiftForByte;
+  uint shift;
+  uint result;
   
-  uVar3 = 0;
-  uVar4 = 0;
+  shift = 0;
+  result = 0;
   do {
-    bVar1 = *param_1;
-    param_1 = param_1 + 1;
-    uVar2 = uVar3 & 0x3f;
-    uVar3 = uVar3 + 7;
-    uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
+    bVar1 = *p;
+    p = p + 1;
+    shiftForByte = shift & 0x3f;
+    shift = shift + 7;
+    result = result | (bVar1 & 0x7f) << shiftForByte;
   } while ((bVar1 & 0x80) != 0);
-  *param_2 = uVar4;
-  return param_1;
+  *val = result;
+  return p;
 }
 
 /* __Z12read_sleb128PKhPi @ 0x97c19534 (76 bytes) */
-int __Z12read_sleb128PKhPi(param_1, param_2)
-  uchar *param_1;
-  int *param_2;
+int __Z12read_sleb128PKhPi(p, val)
+  uchar *p;
+  int *val;
 {
   byte bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint shiftForByte;
+  uint shift;
+  uint result;
   
-  uVar3 = 0;
-  uVar4 = 0;
+  shift = 0;
+  result = 0;
   do {
-    bVar1 = *param_1;
-    param_1 = param_1 + 1;
-    uVar2 = uVar3 & 0x3f;
-    uVar3 = uVar3 + 7;
-    uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
+    bVar1 = *p;
+    p = p + 1;
+    shiftForByte = shift & 0x3f;
+    shift = shift + 7;
+    result = result | (bVar1 & 0x7f) << shiftForByte;
   } while ((bVar1 & 0x80) != 0);
-  if ((uVar3 < 0x20) && ((bVar1 & 0x40) != 0)) {
-    uVar4 = uVar4 | -1 << (uVar3 & 0x3f);
+  if ((shift < 0x20) && ((bVar1 & 0x40) != 0)) {
+    result = result | -1 << (shift & 0x3f);
   }
-  *param_2 = uVar4;
-  return param_1;
+  *val = result;
+  return p;
 }
 
 /* __Z28read_encoded_value_with_basehjPKhPj @ 0x97c19580 (312 bytes) */
-int __Z28read_encoded_value_with_basehjPKhPj(param_1, param_2, param_3, param_4)
-  uint param_1;
-  uint param_2;
-  uchar *param_3;
-  uint *param_4;
+int __Z28read_encoded_value_with_basehjPKhPj(encoding, base, p, val)
+  uint encoding;
+  uint base;
+  uchar *p;
+  uint *val;
 {
-  uint *puVar1;
-  uint *local_30;
-  uint *local_2c [6];
+  uint *next;
+  uint *utmp;
+  uint *result [6];
   
-  if (param_1 == 0x50) {
-    local_2c[0] = (uint *)((uint)(param_3 + 3) & 0xfffffffc);
-    puVar1 = local_2c[0] + 1;
+  if (encoding == 0x50) {
+    result[0] = (uint *)((uint)(p + 3) & 0xfffffffc);
+    next = result[0] + 1;
     goto LAB_97c196cc;
   }
-  switch(param_1 & 0xf) {
+  switch(encoding & 0xf) {
   case 0:
   case 3:
   case 0xb:
-    local_2c[0] = *(uint **)param_3;
-    puVar1 = (uint *)(param_3 + 4);
+    result[0] = *(uint **)p;
+    next = (uint *)(p + 4);
     break;
   case 1:
-    puVar1 = (uint *)((int (*)())__Z12read_uleb128PKhPj)(param_3,(uint *)&local_30);
-    local_2c[0] = local_30;
+    next = (uint *)((int (*)())__Z12read_uleb128PKhPj)(p,(uint *)&utmp);
+    result[0] = utmp;
     break;
   case 2:
-    local_2c[0] = (uint *)(uint)*(ushort *)param_3;
+    result[0] = (uint *)(uint)*(ushort *)p;
     goto LAB_97c19658;
   case 4:
   case 0xc:
-    puVar1 = (uint *)(param_3 + 8);
-    local_2c[0] = (uint *)((uint)param_3[7] |
-                          (uint)param_3[6] << 8 |
-                          (uint)param_3[5] << 0x10 | (uint)param_3[4] << 0x18);
+    next = (uint *)(p + 8);
+    result[0] = (uint *)((uint)p[7] |
+                          (uint)p[6] << 8 |
+                          (uint)p[5] << 0x10 | (uint)p[4] << 0x18);
     break;
   default:
                     
     _abort();
   case 9:
-    puVar1 = (uint *)((int (*)())__Z12read_sleb128PKhPi)(param_3,(int *)local_2c);
+    next = (uint *)((int (*)())__Z12read_sleb128PKhPi)(p,(int *)result);
     break;
   case 10:
-    local_2c[0] = (uint *)(int)*(short *)param_3;
+    result[0] = (uint *)(int)*(short *)p;
 LAB_97c19658:
-    puVar1 = (uint *)(param_3 + 2);
+    next = (uint *)(p + 2);
   }
-  if (local_2c[0] != (uint *)0x0) {
-    if ((param_1 & 0x70) == 0x10) {
-      param_2 = (uint)param_3;
+  if (result[0] != (uint *)0x0) {
+    if ((encoding & 0x70) == 0x10) {
+      base = (uint)p;
     }
-    local_2c[0] = (uint *)((int)local_2c[0] + param_2);
-    if ((param_1 & 0x80) != 0) {
+    result[0] = (uint *)((int)result[0] + base);
+    if ((encoding & 0x80) != 0) {
 LAB_97c196cc:
-      local_2c[0] = (uint *)*local_2c[0];
+      result[0] = (uint *)*result[0];
     }
   }
-  *param_4 = (uint)local_2c[0];
-  return puVar1;
+  *val = (uint)result[0];
+  return next;
 }
 
 /* parse_lsda_header @ 0x97c196ec (216 bytes) */
@@ -1472,75 +1472,75 @@ int FUN_97c1a28c()
 }
 
 /* _size_of_encoded_value_97c1a2c8 @ 0x97c1a2c8 (120 bytes) */
-int _size_of_encoded_value_97c1a2c8(param_1)
-  uint param_1;
+int _size_of_encoded_value_97c1a2c8(encoding)
+  uint encoding;
 {
-  uint uVar1;
-  undefined4 uVar2;
+  uint format;
+  undefined4 valueSize;
   
-  uVar2 = 0;
-  if (param_1 != 0xff) {
-    uVar1 = param_1 & 7;
-    uVar2 = 2;
-    if (uVar1 != 2) {
-      if (uVar1 < 3) {
-        if (uVar1 != 0) {
+  valueSize = 0;
+  if (encoding != 0xff) {
+    format = encoding & 7;
+    valueSize = 2;
+    if (format != 2) {
+      if (format < 3) {
+        if (format != 0) {
 LAB_97c1a328:
                     
           _abort();
         }
-        uVar2 = 4;
+        valueSize = 4;
       }
       else {
-        uVar2 = 4;
-        if (uVar1 != 3) {
-          if (uVar1 != 4) goto LAB_97c1a328;
-          uVar2 = 8;
+        valueSize = 4;
+        if (format != 3) {
+          if (format != 4) goto LAB_97c1a328;
+          valueSize = 8;
         }
       }
     }
   }
-  return uVar2;
+  return valueSize;
 }
 
 /* _base_of_encoded_value @ 0x97c1a340 (172 bytes) */
-int _base_of_encoded_value(param_1, context)
-  uint param_1;
+int _base_of_encoded_value(encoding, context)
+  uint encoding;
   unsigned char * context;
 {
   unsigned char dataRelBase;
   unsigned char textRelBase;
-  bool bVar1;
-  uint uVar2;
+  bool isPcrelOrAligned;
+  uint application;
   unsigned char regionStart;
   
-  if (param_1 != 0xff) {
-    uVar2 = param_1 & 0x70;
-    if (uVar2 == 0x20) {
+  if (encoding != 0xff) {
+    application = encoding & 0x70;
+    if (application == 0x20) {
       textRelBase = __Unwind_GetTextRelBase(context);
       return textRelBase;
     }
-    if (uVar2 < 0x21) {
-      if (uVar2 == 0) {
+    if (application < 0x21) {
+      if (application == 0) {
         return 0;
       }
-      bVar1 = uVar2 == 0x10;
+      isPcrelOrAligned = application == 0x10;
     }
     else {
-      if (uVar2 == 0x40) {
+      if (application == 0x40) {
         regionStart = ((int (*)())__Unwind_GetRegionStart)(context);
         return regionStart;
       }
-      if (uVar2 < 0x41) {
-        if (uVar2 == 0x30) {
+      if (application < 0x41) {
+        if (application == 0x30) {
           dataRelBase = __Unwind_GetDataRelBase(context);
           return dataRelBase;
         }
         goto LAB_97c1a3d4;
       }
-      bVar1 = uVar2 == 0x50;
+      isPcrelOrAligned = application == 0x50;
     }
-    if (!bVar1) {
+    if (!isPcrelOrAligned) {
 LAB_97c1a3d4:
                     
       _abort();
@@ -1550,115 +1550,115 @@ LAB_97c1a3d4:
 }
 
 /* _read_uleb128_97c1a3ec @ 0x97c1a3ec (48 bytes) */
-int _read_uleb128_97c1a3ec(param_1, param_2)
-  byte *param_1;
-  uint *param_2;
+int _read_uleb128_97c1a3ec(p, val)
+  byte *p;
+  uint *val;
 {
   byte bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint shiftForByte;
+  uint shift;
+  uint result;
   
-  uVar3 = 0;
-  uVar4 = 0;
+  shift = 0;
+  result = 0;
   do {
-    bVar1 = *param_1;
-    param_1 = param_1 + 1;
-    uVar2 = uVar3 & 0x3f;
-    uVar3 = uVar3 + 7;
-    uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
+    bVar1 = *p;
+    p = p + 1;
+    shiftForByte = shift & 0x3f;
+    shift = shift + 7;
+    result = result | (bVar1 & 0x7f) << shiftForByte;
   } while ((bVar1 & 0x80) != 0);
-  *param_2 = uVar4;
-  return param_1;
+  *val = result;
+  return p;
 }
 
 /* _read_sleb128_97c1a41c @ 0x97c1a41c (76 bytes) */
-int _read_sleb128_97c1a41c(param_1, param_2)
-  byte *param_1;
-  uint *param_2;
+int _read_sleb128_97c1a41c(p, val)
+  byte *p;
+  uint *val;
 {
   byte bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint shiftForByte;
+  uint shift;
+  uint result;
   
-  uVar3 = 0;
-  uVar4 = 0;
+  shift = 0;
+  result = 0;
   do {
-    bVar1 = *param_1;
-    param_1 = param_1 + 1;
-    uVar2 = uVar3 & 0x3f;
-    uVar3 = uVar3 + 7;
-    uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
+    bVar1 = *p;
+    p = p + 1;
+    shiftForByte = shift & 0x3f;
+    shift = shift + 7;
+    result = result | (bVar1 & 0x7f) << shiftForByte;
   } while ((bVar1 & 0x80) != 0);
-  if ((uVar3 < 0x20) && ((bVar1 & 0x40) != 0)) {
-    uVar4 = uVar4 | -1 << (uVar3 & 0x3f);
+  if ((shift < 0x20) && ((bVar1 & 0x40) != 0)) {
+    result = result | -1 << (shift & 0x3f);
   }
-  *param_2 = uVar4;
-  return param_1;
+  *val = result;
+  return p;
 }
 
 /* _read_encoded_value_with_base_97c1a468 @ 0x97c1a468 (312 bytes) */
-int _read_encoded_value_with_base_97c1a468(param_1, param_2, param_3, param_4)
-  uint param_1;
-  uint *param_2;
-  uint *param_3;
-  uint *param_4;
+int _read_encoded_value_with_base_97c1a468(encoding, base, p, val)
+  uint encoding;
+  uint *base;
+  uint *p;
+  uint *val;
 {
-  uint *puVar1;
-  uint *local_30;
-  uint *local_2c [6];
+  uint *next;
+  uint *utmp;
+  uint *result [6];
   
-  if (param_1 == 0x50) {
-    local_2c[0] = (uint *)((int)param_3 + 3U & 0xfffffffc);
-    puVar1 = local_2c[0] + 1;
+  if (encoding == 0x50) {
+    result[0] = (uint *)((int)p + 3U & 0xfffffffc);
+    next = result[0] + 1;
     goto LAB_97c1a5b4;
   }
-  switch(param_1 & 0xf) {
+  switch(encoding & 0xf) {
   case 0:
   case 3:
   case 0xb:
-    local_2c[0] = (uint *)*param_3;
-    puVar1 = param_3 + 1;
+    result[0] = (uint *)*p;
+    next = p + 1;
     break;
   case 1:
-    puVar1 = (uint *)((int (*)())_read_uleb128_97c1a3ec)(param_3,&local_30);
-    local_2c[0] = local_30;
+    next = (uint *)((int (*)())_read_uleb128_97c1a3ec)(p,&utmp);
+    result[0] = utmp;
     break;
   case 2:
-    local_2c[0] = (uint *)(uint)*(ushort *)param_3;
+    result[0] = (uint *)(uint)*(ushort *)p;
     goto LAB_97c1a540;
   case 4:
   case 0xc:
-    puVar1 = param_3 + 2;
-    local_2c[0] = (uint *)((uint)*(byte *)((int)param_3 + 7) |
-                          (uint)*(byte *)((int)param_3 + 6) << 8 |
-                          (uint)*(byte *)((int)param_3 + 5) << 0x10 |
-                          (uint)*(byte *)(param_3 + 1) << 0x18);
+    next = p + 2;
+    result[0] = (uint *)((uint)*(byte *)((int)p + 7) |
+                          (uint)*(byte *)((int)p + 6) << 8 |
+                          (uint)*(byte *)((int)p + 5) << 0x10 |
+                          (uint)*(byte *)(p + 1) << 0x18);
     break;
   default:
                     
     _abort();
   case 9:
-    puVar1 = (uint *)((int (*)())_read_sleb128_97c1a41c)(param_3,local_2c);
+    next = (uint *)((int (*)())_read_sleb128_97c1a41c)(p,result);
     break;
   case 10:
-    local_2c[0] = (uint *)(int)(short)*(ushort *)param_3;
+    result[0] = (uint *)(int)(short)*(ushort *)p;
 LAB_97c1a540:
-    puVar1 = (uint *)((int)param_3 + 2);
+    next = (uint *)((int)p + 2);
   }
-  if (local_2c[0] != (uint *)0x0) {
-    if ((param_1 & 0x70) == 0x10) {
-      param_2 = param_3;
+  if (result[0] != (uint *)0x0) {
+    if ((encoding & 0x70) == 0x10) {
+      base = p;
     }
-    local_2c[0] = (uint *)((int)local_2c[0] + (int)param_2);
-    if ((param_1 & 0x80) != 0) {
+    result[0] = (uint *)((int)result[0] + (int)base);
+    if ((encoding & 0x80) != 0) {
 LAB_97c1a5b4:
-      local_2c[0] = (uint *)*local_2c[0];
+      result[0] = (uint *)*result[0];
     }
   }
-  *param_4 = (uint)local_2c[0];
-  return puVar1;
+  *val = (uint)result[0];
+  return next;
 }
 
 /* __Unwind_GetLanguageSpecificData @ 0x97c1a5d4 (8 bytes) */

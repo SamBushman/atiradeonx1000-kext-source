@@ -1,0 +1,104 @@
+bVar1	*	stringTerminator	INFERRED	3Dlabs ParseHelper.cpp TParseContext::executeInitializer (same control flow here); byte *DAT_a7b7ba18 stored at data[length] before reading c_str() of a TString
+bVar30	*	cr0Flags	INFERRED	Ghidra models the condition register: (x==0)<<1 / the lwarx-stwcx loop test
+in_RESERVE	*	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store
+uVar31	1	variableAllocation	CONFIRMED	result of TPoolAllocator__allocate(pool, 0x40): the new TVariable record (0x40 bytes, built field by field below)
+uVar31	2,4,5	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)
+uVar31	3,6	typeNameAllocation	CONFIRMED	result of TPoolAllocator__allocate(pool, 8): 8-byte TString for the struct type name
+uVar19	*	passThroughR4	UNKNOWN	Ghidra r4 pass-through of 64-bit return pairs and extraout values
+uVar27	1	symbolTableLevel	INFERRED	last element of the symbol table level vector: *(levels.begin + ((end-begin)&~3) - 4)
+uVar27	2	symbolTableArg	CONFIRMED	*(this+4): the TSymbolTable passed to parseConstTree
+pTVar9	*	poolAllocator	CONFIRMED	GetGlobalPoolAllocator()
+pTVar12	1	assignNode	CONFIRMED	TIntermediate::addAssign(this->intermediate, EOpAssign(0x76), symbol, initializer, line) result, stored to *intermNode
+psVar10	1	variableNameString	INFERRED	virtual call at slot +8 of the new TVariable (getName) returns the name TString that is copied into a temporary
+ppuVar11	1,2,3	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars
+ppuVar13	1,2	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10
+ppuVar13	3	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size
+ppuVar20	1	ptSize	CONFIRMED	*(publicType+8): TPublicType.size
+ppuVar20	2	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)
+uVar18	1	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier
+uVar18	2	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line
+uVar18	3	variableBasicTypeBits	CONFIRMED	((variable bit-field >> 0x13) & 0x3f) << 0x13: the basic type field of the TVariable TType bits
+uVar7	0	typeSizeBits	CONFIRMED	stack TType bit-field & 0x7f800: the size field (bits 18..11)
+uVar7	1	uniqueId	CONFIRMED	symbolTable.nextId (a6[3]) before the increment; stored as TVariable.uniqueId
+uVar7	2	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector
+uVar7	3	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier
+uVar7	4	variableMatrixBits	CONFIRMED	((variable bits >> 10) & 1) << 10: matrix bit
+uVar7	5	variableBits	CONFIRMED	the TVariable TType bit-field word (variable + 0x30)
+uVar17	1	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line
+uVar17	2	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))
+uVar17	3	typeStringData	INFERRED	string data pointer of the getCompleteString result, later used for the _Rep refcount
+uVar17	4	stackTypeLowBits	CONFIRMED	stack TType bits & 0x3ff (matrix/array bits and below)
+uVar21	1	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)
+uVar21	2	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)
+uVar21	3	variableBitsCopy	CONFIRMED	the TVariable TType bit-field word
+uVar4	*	oldVariableBits	CONFIRMED	old TVariable bit-field word (piVar6[0xc]) merged field by field
+uVar2	*	basicTypeField	CONFIRMED	(stack bits >> 0x13 & 0x3f) << 0x13: basic type field
+uVar3	*	matrixField	CONFIRMED	(stack bits >> 10 & 1) << 10: matrix bit
+paVar15	1	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)
+paVar15	2	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)
+paVar15	3	stackTypeBitsCopy	CONFIRMED	the stack TType bit-field word being assembled from the public type
+pcVar29	1,3,5	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor
+pcVar29	2	nameChars	CONFIRMED	*(identifier+4): characters of the variable name TString (newNode[1])
+pcVar29	4	qualifierString	CONFIRMED	getQualifierString(variable.bits >> 0x19)
+pcVar16	*	errorReason	CONFIRMED	reason string passed to TParseContext::error: "redefinition", " cannot initialize this type of qualifier ", " cannot initialize constant of this type"
+piVar5	2,3	aggregateNode	INFERRED	initializer slot +0x1c = getAsAggregate()
+piVar5	4	childConstantUnion	INFERRED	first sequence element: getAsTyped()->getAsConstantUnion() (slot +0x18)
+piVar5	6	symbolNode	INFERRED	initializer slot +0x28 = getAsSymbolNode()
+piVar26	*	symbolTable	CONFIRMED	*(this+4): the TSymbolTable (its level vector begin/end at +0/+4)
+iVar22	5	childVtable	INFERRED	vtable of the first sequence element
+iVar22	7	levelIndex	CONFIRMED	index of the symbol table level, counted down from levels.size()-1
+iVar28	1	currentLevel	CONFIRMED	*(levels.begin + levelIndex*4): TSymbolTableLevel searched for the symbol
+iVar8	0	reservedErrorResult	CONFIRMED	TParseContext::reservedErrorCheck(line, identifier) result
+iVar8	1,7,22	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data
+iVar8	3	variableSymbol	CONFIRMED	TIntermediate::addSymbol(id, name, type, line): the TIntermSymbol for the variable
+iVar8	8	typesMatch	CONFIRMED	1 when (stack bits & 0x1fffe00) == (publicType copy bits) and the structure pointers are equal
+iVar8	9	constantUnionNode	INFERRED	initializer slot +0x18 = getAsConstantUnion()
+iVar8	10	aggregateNodeResult	INFERRED	initializer slot +0x1c = getAsAggregate()
+iVar8	11,21	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array
+iVar8	12,13	sequence	CONFIRMED	aggregate slot +100 = getSequence(): vector with begin at +4 and end at +8
+iVar8	14	childConstantUnionResult	INFERRED	getAsConstantUnion() of the single sequence element
+iVar8	15,16	constantArrayPtr	INFERRED	aggregate slot +0x1c result; +0x30 holds the const union array pointer
+iVar8	17	parseResult	CONFIRMED	TIntermediate::parseConstTree result (error flag)
+iVar8	18	symbolNodeResult	INFERRED	initializer slot +0x28 = getAsSymbolNode()
+iVar8	23	ptBasicType	CONFIRMED	*(publicType): TPublicType.type compared with 1/2/3 (float/int/bool)
+iVar8	24,25	constantUnionNodeArray	INFERRED	getAsConstantUnion() result whose first union element is copied (+0x30 = union array)
+local_150	*	stackType	CONFIRMED	stack TType object (vtable at +0; its first word is also reused as the TString slot of getCompleteString)
+local_148	*	stackTypeStructure	CONFIRMED	stack TType +8: structure (TTypeList*), copied from userDef+8
+local_144	*	stackTypeFieldName	INFERRED	stack TType +0xc (fieldName), zero here
+local_140	*	stackTypeTypeName	CONFIRMED	stack TType +0x10: typeName TString* (also reused as getCompleteString output)
+local_13c	*	stackTypeWord14	UNKNOWN	stack TType +0x14: copied to TVariable +0x20, zero here
+local_138	*	stackTypeStructureSize	CONFIRMED	stack TType +0x18: structureSize, set by TType__setStructSize
+local_134	*	stackTypeWord1c	UNKNOWN	stack TType +0x1c, zero here
+local_130	*	stackTypeWord20	UNKNOWN	stack TType +0x20, zero here
+local_12c	*	stackTypeBits	CONFIRMED	stack TType +0x24: bit-field word (qualifier 31..25, basic type 24..19, size 18..11, matrix 10, array 9)
+local_120	*	ptCopyType	CONFIRMED	first TPublicType copy +0 (type); the same slot is reused as a getCompleteString output
+local_11c	*	ptCopyQualifier	CONFIRMED	first TPublicType copy +4 (qualifier)
+local_118	*	ptCopySize	CONFIRMED	first TPublicType copy +8 (size)
+local_114	*	ptCopyMatrix	CONFIRMED	first TPublicType copy +0xc (matrix)
+local_110	*	ptCopyArray	CONFIRMED	first TPublicType copy +0x10 (array)
+local_10c	*	ptCopyUserDef	CONFIRMED	first TPublicType copy +0x14 (userDef)
+local_108	*	ptCopyLine	CONFIRMED	first TPublicType copy +0x18 (line)
+local_100	*	pt2CopyType	CONFIRMED	second TPublicType copy +0 (type)
+local_fc	*	pt2CopyQualifier	CONFIRMED	second TPublicType copy +4 (qualifier)
+local_f8	*	pt2CopySize	CONFIRMED	second TPublicType copy +8 (size)
+local_f4	*	pt2CopyMatrix	CONFIRMED	second TPublicType copy +0xc (matrix)
+local_f0	*	pt2CopyArray	CONFIRMED	second TPublicType copy +0x10 (array)
+local_ec	*	pt2CopyUserDef	CONFIRMED	second TPublicType copy +0x14 (userDef)
+local_e8	*	pt2CopyLine	CONFIRMED	second TPublicType copy +0x18 (line)
+local_e0	*	poolAllocatorArg1	CONFIRMED	one-word array holding GetGlobalPoolAllocator(), passed by reference as the allocator of the TString constructor
+local_a0	*	poolAllocatorArg2	CONFIRMED	same, second TString construction
+local_90	*	poolAllocatorArg3	CONFIRMED	same, third TString construction
+local_d0	*	nameCopy	INFERRED	temporary TString copy-constructed from the variable name
+local_cc	*	nameCopyChars	INFERRED	character pointer of nameCopy (its refcount word is at -4)
+local_c8	*	variableForInsert	INFERRED	the new TVariable passed to the symbol table insert
+local_c0	*	destroyAllocator1	INFERRED	allocator argument array of the first _Rep::_M_destroy call
+local_b0	*	destroyAllocator2	INFERRED	allocator argument array of the second _Rep::_M_destroy call
+local_70	*	destroyAllocator3	INFERRED	allocator argument array of the third _Rep::_M_destroy call
+local_60	*	destroyAllocator4	INFERRED	allocator argument array of the fourth _Rep::_M_destroy call
+local_50	*	destroyAllocator5	INFERRED	allocator argument array of the fifth _Rep::_M_destroy call
+local_80	*	levelFindResult	INFERRED	result of the symbol table level map find (std::_Rb_tree): local_80[0] is the found node
+pppuVar14	*	destroyAllocatorArg	INFERRED	address of the allocator array passed to _M_destroy
+uVar23	*	singleConstantParam	INFERRED	last argument of TIntermediate::parseConstTree: 1 when a single constant constructor argument is used
+pcVar25	*	variableConstPointer	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use
+puVar24	1	tempName	INFERRED	address of the nameCopy temporary
+puVar24	2	variableConstArray	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use

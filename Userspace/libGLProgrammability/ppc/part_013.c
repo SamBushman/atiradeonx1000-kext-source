@@ -20,12 +20,12 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   uint param_2;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   int iVar4;
   void *pvVar5;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   undefined1 auStack_30 [24];
   
   *(int *)this = DAT_a7b7bd98 + 8;
@@ -79,29 +79,29 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
     _free(*(int *)((int)this + 0x74));
   }
   iVar4 = *(int *)((int)this + 0xb8);
-  piVar2 = (int *)(iVar4 + -4);
+  refCountPtr = (int *)(iVar4 + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
   }
   iVar4 = *(int *)((int)this + 0xb0);
-  piVar2 = (int *)(iVar4 + -4);
+  refCountPtr = (int *)(iVar4 + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
   }
   __ZN22ConstantAllocationListD1Ev((unsigned char *)((int)this + 0x44));
@@ -359,7 +359,7 @@ int TPPStreamCompiler__compile(this, intermNode)
   int iVar2;
   int iVar3;
   undefined4 allocation;
-  char *pcVar5;
+  char *pPStreamString;
   uint uVar6;
   int local_20 [5];
   
@@ -397,8 +397,8 @@ int TPPStreamCompiler__compile(this, intermNode)
   }
   if ((iVar2 != 0) && ((*(uint *)(this + 0xc0) & 2) != 0)) {
     __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,DAT_a7b7bd80);
-    pcVar5 = (char *)(**(code **)(*(int *)this + 0x28))(this);
-    __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pcVar5);
+    pPStreamString = (char *)(**(code **)(*(int *)this + 0x28))(this);
+    __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pPStreamString);
     iVar2 = *(int *)(this + 0xc);
   }
   return iVar2;

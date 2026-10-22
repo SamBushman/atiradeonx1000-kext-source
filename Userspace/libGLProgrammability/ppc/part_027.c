@@ -457,14 +457,15 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
   void *this;
   unsigned char * text;
 {
+  int *refCountPtr;
   int atomicStore;
   int atomicStore2;
   int *piVar2;
-  int iVar3;
+  int oldRefCount;
   int iVar4;
   int iVar5;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_30 [4];
   int local_20;
   
@@ -479,24 +480,24 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
     else {
       piVar2 = (int *)(iVar4 + -4);
       do {
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
           *piVar2 = atomicStore;
-          in_cr0 = 2;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
+      } while (!(bool)(cr0Reg >> 1 & 1));
     }
     iVar5 = *(int *)((int)this + 4);
-    piVar2 = (int *)(iVar5 + -4);
+    refCountPtr = (int *)(iVar5 + -4);
     do {
-      iVar3 = *piVar2;
-      if (in_RESERVE != '\0') {
-        atomicStore2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = atomicStore2;
-        in_cr0 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore2 = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore2;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 < 1) {
+    } while (!(bool)(cr0Reg >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(iVar5 + -0xc),(unsigned char *)local_30);
     }
@@ -511,19 +512,20 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, 
   undefined4 *param_2;
   undefined4 *intermNode;
 {
+  int finish2;
   uint uVar1;
   int iVar2;
-  undefined4 *puVar3;
+  undefined4 *finish;
   int iVar4;
   void *allocation;
   void *pvVar6;
   undefined4 uVar7;
   size_t sVar8;
   
-  puVar3 = *(undefined4 **)(this + 8);
-  if (puVar3 == *(undefined4 **)(this + 0xc)) {
+  finish = *(undefined4 **)(this + 8);
+  if (finish == *(undefined4 **)(this + 0xc)) {
     iVar4 = 1;
-    iVar2 = (int)puVar3 - *(int *)(this + 4) >> 2;
+    iVar2 = (int)finish - *(int *)(this + 4) >> 2;
     if (iVar2 != 0) {
       iVar4 = iVar2 << 1;
     }
@@ -533,17 +535,17 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, 
     if ((int)allocation + sVar8 != 0) {
       *(undefined4 *)((int)allocation + sVar8) = *intermNode;
     }
-    iVar2 = *(int *)(this + 8);
+    finish2 = *(int *)(this + 8);
     pvVar6 = (void *)((int)allocation + sVar8 + 4);
-    _memmove(pvVar6,param_2,iVar2 - (int)param_2);
+    _memmove(pvVar6,param_2,finish2 - (int)param_2);
     *(void **)(this + 0xc) = (void *)((int)allocation + iVar4 * 4);
-    *(int *)(this + 8) = (int)pvVar6 + (iVar2 - (int)param_2);
+    *(int *)(this + 8) = (int)pvVar6 + (finish2 - (int)param_2);
     *(void **)(this + 4) = allocation;
   }
   else {
     iVar4 = 0;
-    if (puVar3 != (undefined4 *)0x0) {
-      *puVar3 = puVar3[-1];
+    if (finish != (undefined4 *)0x0) {
+      *finish = finish[-1];
       iVar4 = *(int *)(this + 8);
     }
     *(int *)(this + 8) = iVar4 + 4;
@@ -1063,47 +1065,47 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
 
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   int iVar4;
   unsigned char * p_Var5;
-  char in_RESERVE;
-  byte bVar6;
+  char reservation;
+  byte cr0Flags;
   undefined4 local_40 [4];
   undefined4 local_30 [5];
   
-  bVar6 = (param_2 == (unsigned char *)0x0) << 1;
+  cr0Flags = (param_2 == (unsigned char *)0x0) << 1;
   if (param_2 != (unsigned char *)0x0) {
     do {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase)(this,*(unsigned char **)(param_2 + 0xc));
       local_40[0] = *(undefined4 *)(param_2 + 0x18);
       iVar4 = *(int *)(param_2 + 0x1c);
-      piVar2 = (int *)(iVar4 + -4);
+      refCountPtr = (int *)(iVar4 + -4);
       p_Var5 = *(unsigned char **)(param_2 + 8);
       do {
-        iVar3 = *piVar2;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = atomicStore;
-          bVar6 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Flags = 2;
         }
-      } while (!(bool)(bVar6 >> 1 & 1));
-      if (iVar3 < 1) {
+      } while (!(bool)(cr0Flags >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(iVar4 + -0xc),local_40);
       }
       iVar4 = *(int *)(param_2 + 0x14);
       local_30[0] = *(undefined4 *)(param_2 + 0x10);
-      piVar2 = (int *)(iVar4 + -4);
+      refCountPtr = (int *)(iVar4 + -4);
       do {
-        iVar3 = *piVar2;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = atomicStore;
-          bVar6 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Flags = 2;
         }
-      } while (!(bool)(bVar6 >> 1 & 1));
-      if (iVar3 < 1) {
+      } while (!(bool)(cr0Flags >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(iVar4 + -0xc),local_30);
       }

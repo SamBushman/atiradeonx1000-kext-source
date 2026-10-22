@@ -1650,15 +1650,21 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   int language;
   int *symbolTable;
 {
+  int oldRefCount;
+  uint oldVariableBits2;
+  undefined4 passThroughR4;
+  undefined *operatorStrings;
+  char *nameChars;
+  int levelsBegin;
   int atomicStore;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
+  uint oldVariableBits;
+  uint basicTypeField;
+  int uniqueId;
   undefined4 *puVar5;
   unsigned char * poolAllocator;
   int *symbol;
-  unsigned char * psVar8;
-  void *pvVar9;
+  unsigned char * variableName;
+  void *nameStringAllocation;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1668,182 +1674,182 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   undefined4 extraout_r4_05;
   char *pcVar10;
   unsigned char * in_r5;
-  unsigned char * paVar11;
-  unsigned char * paVar12;
+  unsigned char * allocatorArgPtr;
+  unsigned char * allocatorArgPtr2;
   undefined4 uVar13;
   undefined4 in_r6;
   undefined4 in_r7;
-  void *pvVar14;
-  undefined *puVar15;
-  undefined4 uVar16;
-  char in_RESERVE;
-  byte bVar17;
-  undefined8 uVar18;
-  undefined4 local_3b0 [4];
-  undefined **local_3a0;
-  undefined4 local_39c;
-  undefined4 local_398;
-  undefined4 local_394;
-  undefined4 local_390;
-  undefined4 local_38c;
-  undefined4 local_388;
-  undefined4 local_384;
-  undefined4 local_380;
-  uint local_37c;
-  undefined4 local_370;
-  undefined4 local_36c;
-  undefined4 local_360;
-  undefined4 local_35c;
-  undefined4 local_350;
-  int local_34c;
-  int *local_348;
-  undefined4 local_340 [4];
-  undefined4 local_330 [4];
-  undefined **local_320;
-  undefined4 local_31c;
-  undefined4 local_318;
-  undefined4 local_314;
-  undefined4 local_310;
-  undefined4 local_30c;
-  undefined4 local_308;
-  undefined4 local_304;
-  undefined4 local_300;
-  uint local_2fc;
-  undefined4 local_2f0;
-  undefined4 local_2ec;
-  undefined4 local_2e0;
-  undefined4 local_2dc;
-  undefined4 local_2d0;
-  int local_2cc;
-  int *local_2c8;
-  undefined4 local_2c0 [4];
-  undefined4 local_2b0 [4];
-  undefined **local_2a0;
-  undefined4 local_29c;
-  undefined4 local_298;
-  undefined4 local_294;
-  undefined4 local_290;
-  undefined4 local_28c;
-  undefined4 local_288;
-  undefined4 local_284;
-  undefined4 local_280;
-  uint local_27c;
-  undefined4 local_270;
-  undefined4 local_26c;
-  undefined4 local_260;
-  undefined4 local_25c;
-  undefined4 local_250;
-  int local_24c;
-  int *local_248;
-  undefined4 local_240 [4];
-  undefined4 local_230 [4];
-  undefined **local_220;
-  undefined4 local_21c;
-  undefined4 local_218;
-  undefined4 local_214;
-  undefined4 local_210;
-  undefined4 local_20c;
-  undefined4 local_208;
-  undefined4 local_204;
-  undefined4 local_200;
-  uint local_1fc;
-  undefined4 local_1f0;
-  undefined4 local_1ec;
-  undefined4 local_1e0;
-  undefined4 local_1dc;
-  undefined4 local_1d0;
-  int local_1cc;
-  int *local_1c8;
-  undefined4 local_1c0 [4];
-  undefined4 local_1b0 [4];
-  undefined **local_1a0;
-  undefined4 local_19c;
-  undefined4 local_198;
-  undefined4 local_194;
-  undefined4 local_190;
-  undefined4 local_18c;
-  undefined4 local_188;
-  undefined4 local_184;
-  undefined4 local_180;
-  uint local_17c;
-  undefined4 local_170;
-  undefined4 local_16c;
-  undefined4 local_160;
-  undefined4 local_15c;
-  undefined4 local_150;
-  int local_14c;
-  int *local_148;
-  undefined4 local_140 [4];
-  undefined4 local_130 [4];
-  undefined **local_120;
-  undefined4 local_11c;
-  undefined4 local_118;
-  undefined4 local_114;
-  undefined4 local_110;
-  undefined4 local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  undefined4 local_100;
-  uint local_fc;
-  undefined4 local_f0;
-  undefined4 local_ec;
-  undefined4 local_e0;
-  undefined4 local_dc;
-  undefined4 local_d0;
-  int local_cc;
-  int *local_c8;
-  undefined4 local_c0 [4];
-  undefined4 local_b0 [4];
-  undefined **local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  uint local_7c;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_50;
-  int local_4c;
-  int *local_48;
-  undefined4 local_40 [6];
+  void *nameString;
+  undefined *variableVtable;
+  undefined4 symbolTableLevel;
+  char reservation;
+  byte cr0Flags;
+  undefined8 nameStringAllocationPair;
+  undefined4 poolAllocatorArg [4];
+  undefined **stackType;
+  undefined4 stackTypeArraySize;
+  undefined4 stackTypeStructure;
+  undefined4 stackTypeFieldName;
+  undefined4 stackTypeTypeName;
+  undefined4 stackTypeWord14;
+  undefined4 stackTypeStructureSize;
+  undefined4 stackTypeWord1c;
+  undefined4 stackTypeWord20;
+  uint stackTypeBits;
+  undefined4 insertResultCopy;
+  undefined4 insertResultFlagCopy;
+  undefined4 insertResult;
+  undefined4 insertResultFlag;
+  undefined4 nameCopy;
+  int nameCopyChars;
+  int *variableForInsert;
+  undefined4 destroyAllocator [4];
+  undefined4 poolAllocatorArgB [4];
+  undefined **stackTypeB;
+  undefined4 stackTypeBArraySize;
+  undefined4 stackTypeBStructure;
+  undefined4 stackTypeBFieldName;
+  undefined4 stackTypeBTypeName;
+  undefined4 stackTypeBWord14;
+  undefined4 stackTypeBStructureSize;
+  undefined4 stackTypeBWord1c;
+  undefined4 stackTypeBWord20;
+  uint stackTypeBBits;
+  undefined4 insertResultCopyB;
+  undefined4 insertResultFlagCopyB;
+  undefined4 insertResultB;
+  undefined4 insertResultFlagB;
+  undefined4 nameCopyB;
+  int nameCopyCharsB;
+  int *variableForInsertB;
+  undefined4 destroyAllocatorB [4];
+  undefined4 poolAllocatorArgC [4];
+  undefined **stackTypeC;
+  undefined4 stackTypeCArraySize;
+  undefined4 stackTypeCStructure;
+  undefined4 stackTypeCFieldName;
+  undefined4 stackTypeCTypeName;
+  undefined4 stackTypeCWord14;
+  undefined4 stackTypeCStructureSize;
+  undefined4 stackTypeCWord1c;
+  undefined4 stackTypeCWord20;
+  uint stackTypeCBits;
+  undefined4 insertResultCopyC;
+  undefined4 insertResultFlagCopyC;
+  undefined4 insertResultC;
+  undefined4 insertResultFlagC;
+  undefined4 nameCopyC;
+  int nameCopyCharsC;
+  int *variableForInsertC;
+  undefined4 destroyAllocatorC [4];
+  undefined4 poolAllocatorArgD [4];
+  undefined **stackTypeD;
+  undefined4 stackTypeDArraySize;
+  undefined4 stackTypeDStructure;
+  undefined4 stackTypeDFieldName;
+  undefined4 stackTypeDTypeName;
+  undefined4 stackTypeDWord14;
+  undefined4 stackTypeDStructureSize;
+  undefined4 stackTypeDWord1c;
+  undefined4 stackTypeDWord20;
+  uint stackTypeDBits;
+  undefined4 insertResultCopyD;
+  undefined4 insertResultFlagCopyD;
+  undefined4 insertResultD;
+  undefined4 insertResultFlagD;
+  undefined4 nameCopyD;
+  int nameCopyCharsD;
+  int *variableForInsertD;
+  undefined4 destroyAllocatorD [4];
+  undefined4 poolAllocatorArgE [4];
+  undefined **stackTypeE;
+  undefined4 stackTypeEArraySize;
+  undefined4 stackTypeEStructure;
+  undefined4 stackTypeEFieldName;
+  undefined4 stackTypeETypeName;
+  undefined4 stackTypeEWord14;
+  undefined4 stackTypeEStructureSize;
+  undefined4 stackTypeEWord1c;
+  undefined4 stackTypeEWord20;
+  uint stackTypeEBits;
+  undefined4 insertResultCopyE;
+  undefined4 insertResultFlagCopyE;
+  undefined4 insertResultE;
+  undefined4 insertResultFlagE;
+  undefined4 nameCopyE;
+  int nameCopyCharsE;
+  int *variableForInsertE;
+  undefined4 destroyAllocatorE [4];
+  undefined4 poolAllocatorArgF [4];
+  undefined **stackTypeF;
+  undefined4 stackTypeFArraySize;
+  undefined4 stackTypeFStructure;
+  undefined4 stackTypeFFieldName;
+  undefined4 stackTypeFTypeName;
+  undefined4 stackTypeFWord14;
+  undefined4 stackTypeFStructureSize;
+  undefined4 stackTypeFWord1c;
+  undefined4 stackTypeFWord20;
+  uint stackTypeFBits;
+  undefined4 insertResultCopyF;
+  undefined4 insertResultFlagCopyF;
+  undefined4 insertResultF;
+  undefined4 insertResultFlagF;
+  undefined4 nameCopyF;
+  int nameCopyCharsF;
+  int *variableForInsertF;
+  undefined4 destroyAllocatorF [4];
+  undefined4 poolAllocatorArgG [4];
+  undefined **stackTypeG;
+  undefined4 stackTypeGArraySize;
+  undefined4 stackTypeGStructure;
+  undefined4 stackTypeGFieldName;
+  undefined4 stackTypeGTypeName;
+  undefined4 stackTypeGWord14;
+  undefined4 stackTypeGStructureSize;
+  undefined4 stackTypeGWord1c;
+  undefined4 stackTypeGWord20;
+  uint stackTypeGBits;
+  undefined4 insertResultCopyG;
+  undefined4 insertResultFlagCopyG;
+  undefined4 insertResultG;
+  undefined4 insertResultFlagG;
+  undefined4 nameCopyG;
+  int nameCopyCharsG;
+  int *variableForInsertG;
+  undefined4 destroyAllocatorG [6];
   
   if (language == 0) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = DAT_a7b7b708;
+    nameChars = DAT_a7b7b708;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_1b0[0] = GetGlobalPoolAllocator();
-      in_r5 = (unsigned char *)local_1b0;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,in_r5);
-      uVar13 = extraout_r4_03;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArgE[0] = GetGlobalPoolAllocator();
+      in_r5 = (unsigned char *)poolAllocatorArgE;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,in_r5);
+      passThroughR4 = extraout_r4_03;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_17c = local_17c & 0x801ff | 0x1a082000;
-    local_19c = 0;
-    local_198 = 0;
-    local_194 = 0;
-    paVar11 = (unsigned char *)&local_150;
-    local_190 = 0;
-    local_18c = 0;
-    local_188 = 0;
-    local_184 = 0;
-    local_180 = 0;
-    local_1a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeEBits = stackTypeEBits & 0x801ff | 0x1a082000;
+    stackTypeEArraySize = 0;
+    stackTypeEStructure = 0;
+    stackTypeEFieldName = 0;
+    allocatorArgPtr = (unsigned char *)&nameCopyE;
+    stackTypeETypeName = 0;
+    stackTypeEWord14 = 0;
+    stackTypeEStructureSize = 0;
+    stackTypeEWord1c = 0;
+    stackTypeEWord20 = 0;
+    stackTypeE = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -1853,73 +1859,73 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar2 = symbol[0xc];
-    symbol[0xc] = uVar2 & 0x1ffffff | 0x1a000000;
-    uVar3 = (local_17c >> 0x13 & 0x3f) << 0x13;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x1a000000;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x1a000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x1a000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x1a000000 | 0x2000;
+    oldVariableBits = symbol[0xc];
+    symbol[0xc] = oldVariableBits & 0x1ffffff | 0x1a000000;
+    basicTypeField = (stackTypeEBits >> 0x13 & 0x3f) << 0x13;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ffff | 0x1a000000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ff | 0x1a000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x3ff | 0x1a000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x1ff | 0x1a000000 | 0x2000;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_16c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,in_r5,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar11,psVar8);
-    local_148 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_160,uVar16,paVar11);
-    local_170 = local_160;
-    symbol = (int *)(local_14c + -4);
-    local_16c = local_15c;
-    local_140[0] = local_150;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopyE = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,in_r5,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(allocatorArgPtr,variableName);
+    variableForInsertE = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultE,symbolTableLevel,allocatorArgPtr);
+    insertResultCopyE = insertResultE;
+    symbol = (int *)(nameCopyCharsE + -4);
+    insertResultFlagCopyE = insertResultFlagE;
+    destroyAllocatorE[0] = nameCopyE;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_14c + -0xc),local_140);
+                ((unsigned char *)(nameCopyCharsE + -0xc),destroyAllocatorE);
     }
-    local_1a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackTypeE = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = DAT_a7b7b70c;
+    nameChars = DAT_a7b7b70c;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_130[0] = GetGlobalPoolAllocator();
-      paVar11 = (unsigned char *)local_130;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,paVar11);
-      uVar13 = extraout_r4_04;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArgF[0] = GetGlobalPoolAllocator();
+      allocatorArgPtr = (unsigned char *)poolAllocatorArgF;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,allocatorArgPtr);
+      passThroughR4 = extraout_r4_04;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_fc = local_fc & 0x1ff | 0x1c080800;
-    local_11c = 0;
-    local_118 = 0;
-    paVar12 = (unsigned char *)&local_d0;
-    local_114 = 0;
-    local_110 = 0;
-    local_10c = 0;
-    local_108 = 0;
-    local_104 = 0;
-    local_100 = 0;
-    local_120 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeFBits = stackTypeFBits & 0x1ff | 0x1c080800;
+    stackTypeFArraySize = 0;
+    stackTypeFStructure = 0;
+    allocatorArgPtr2 = (unsigned char *)&nameCopyF;
+    stackTypeFFieldName = 0;
+    stackTypeFTypeName = 0;
+    stackTypeFWord14 = 0;
+    stackTypeFStructureSize = 0;
+    stackTypeFWord1c = 0;
+    stackTypeFWord20 = 0;
+    stackTypeF = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -1929,71 +1935,71 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar3 = symbol[0xc];
-    symbol[0xc] = uVar3 & 0x1ffffff | 0x1c000000;
-    symbol[0xc] = uVar3 & 0x7ffff | 0x1c080000;
-    symbol[0xc] = uVar3 & 0x7ff | 0x1c080800;
-    symbol[0xc] = uVar3 & 0x3ff | 0x1c080800;
-    symbol[0xc] = uVar3 & 0x1ff | 0x1c080800;
+    oldVariableBits2 = symbol[0xc];
+    symbol[0xc] = oldVariableBits2 & 0x1ffffff | 0x1c000000;
+    symbol[0xc] = oldVariableBits2 & 0x7ffff | 0x1c080000;
+    symbol[0xc] = oldVariableBits2 & 0x7ff | 0x1c080800;
+    symbol[0xc] = oldVariableBits2 & 0x3ff | 0x1c080800;
+    symbol[0xc] = oldVariableBits2 & 0x1ff | 0x1c080800;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_ec = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar12,psVar8);
-    local_c8 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_e0,uVar16,paVar12);
-    local_f0 = local_e0;
-    symbol = (int *)(local_cc + -4);
-    local_ec = local_dc;
-    local_c0[0] = local_d0;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopyF = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,allocatorArgPtr,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(allocatorArgPtr2,variableName);
+    variableForInsertF = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultF,symbolTableLevel,allocatorArgPtr2);
+    insertResultCopyF = insertResultF;
+    symbol = (int *)(nameCopyCharsF + -4);
+    insertResultFlagCopyF = insertResultFlagF;
+    destroyAllocatorF[0] = nameCopyF;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_cc + -0xc),local_c0);
+                ((unsigned char *)(nameCopyCharsF + -0xc),destroyAllocatorF);
     }
-    local_120 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackTypeF = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = DAT_a7b7b710;
+    nameChars = DAT_a7b7b710;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_b0[0] = GetGlobalPoolAllocator();
-      paVar12 = (unsigned char *)local_b0;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,paVar12);
-      uVar13 = extraout_r4_05;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArgG[0] = GetGlobalPoolAllocator();
+      allocatorArgPtr2 = (unsigned char *)poolAllocatorArgG;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,allocatorArgPtr2);
+      passThroughR4 = extraout_r4_05;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_7c = local_7c & 0x801ff | 0x1e082000;
-    local_9c = 0;
-    local_98 = 0;
-    local_94 = 0;
-    local_90 = 0;
-    local_8c = 0;
-    local_88 = 0;
-    local_84 = 0;
-    local_80 = 0;
-    local_a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeGBits = stackTypeGBits & 0x801ff | 0x1e082000;
+    stackTypeGArraySize = 0;
+    stackTypeGStructure = 0;
+    stackTypeGFieldName = 0;
+    stackTypeGTypeName = 0;
+    stackTypeGWord14 = 0;
+    stackTypeGStructureSize = 0;
+    stackTypeGWord1c = 0;
+    stackTypeGWord20 = 0;
+    stackTypeG = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -2003,75 +2009,75 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar2 = symbol[0xc];
-    symbol[0xc] = uVar2 & 0x1ffffff | 0x1e000000;
-    uVar3 = (local_7c >> 0x13 & 0x3f) << 0x13;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x1e000000;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x1e000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x1e000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x1e000000 | 0x2000;
+    oldVariableBits = symbol[0xc];
+    symbol[0xc] = oldVariableBits & 0x1ffffff | 0x1e000000;
+    basicTypeField = (stackTypeGBits >> 0x13 & 0x3f) << 0x13;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ffff | 0x1e000000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ff | 0x1e000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x3ff | 0x1e000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x1ff | 0x1e000000 | 0x2000;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_6c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar12,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_50,psVar8);
-    local_48 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_60,uVar16,&local_50);
-    local_70 = local_60;
-    symbol = (int *)(local_4c + -4);
-    local_6c = local_5c;
-    local_40[0] = local_50;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopyG = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,allocatorArgPtr2,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopyG,variableName);
+    variableForInsertG = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultG,symbolTableLevel,&nameCopyG);
+    insertResultCopyG = insertResultG;
+    symbol = (int *)(nameCopyCharsG + -4);
+    insertResultFlagCopyG = insertResultFlagG;
+    destroyAllocatorG[0] = nameCopyG;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_4c + -0xc),local_40);
+                ((unsigned char *)(nameCopyCharsG + -0xc),destroyAllocatorG);
     }
-    local_a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackTypeG = &PTR___ZN5TTypeD1Ev_a7b7cf48;
   }
   else if (language == 1) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = _strSpecialBuiltIn;
+    nameChars = _strSpecialBuiltIn;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_3b0[0] = GetGlobalPoolAllocator();
-      in_r5 = (unsigned char *)local_3b0;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,in_r5);
-      uVar13 = extraout_r4;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArg[0] = GetGlobalPoolAllocator();
+      in_r5 = (unsigned char *)poolAllocatorArg;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,in_r5);
+      passThroughR4 = extraout_r4;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_37c = local_37c & 0x1801ff | 0x20180800;
-    local_39c = 0;
-    local_398 = 0;
-    local_394 = 0;
-    paVar11 = (unsigned char *)&local_350;
-    local_390 = 0;
-    local_38c = 0;
-    local_388 = 0;
-    local_384 = 0;
-    local_380 = 0;
-    local_3a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeBits = stackTypeBits & 0x1801ff | 0x20180800;
+    stackTypeArraySize = 0;
+    stackTypeStructure = 0;
+    stackTypeFieldName = 0;
+    allocatorArgPtr = (unsigned char *)&nameCopy;
+    stackTypeTypeName = 0;
+    stackTypeWord14 = 0;
+    stackTypeStructureSize = 0;
+    stackTypeWord1c = 0;
+    stackTypeWord20 = 0;
+    stackType = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -2081,73 +2087,73 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar2 = symbol[0xc];
-    symbol[0xc] = uVar2 & 0x1ffffff | 0x20000000;
-    uVar3 = (local_37c >> 0x13 & 0x3f) << 0x13;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x20000000;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x20000000 | 0x800;
-    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x20000000 | 0x800;
-    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x20000000 | 0x800;
+    oldVariableBits = symbol[0xc];
+    symbol[0xc] = oldVariableBits & 0x1ffffff | 0x20000000;
+    basicTypeField = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ffff | 0x20000000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ff | 0x20000000 | 0x800;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x3ff | 0x20000000 | 0x800;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x1ff | 0x20000000 | 0x800;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_36c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,in_r5,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar11,psVar8);
-    local_348 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_360,uVar16,paVar11);
-    local_370 = local_360;
-    symbol = (int *)(local_34c + -4);
-    local_36c = local_35c;
-    local_340[0] = local_350;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopy = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,in_r5,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(allocatorArgPtr,variableName);
+    variableForInsert = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResult,symbolTableLevel,allocatorArgPtr);
+    insertResultCopy = insertResult;
+    symbol = (int *)(nameCopyChars + -4);
+    insertResultFlagCopy = insertResultFlag;
+    destroyAllocator[0] = nameCopy;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_34c + -0xc),local_340);
+                ((unsigned char *)(nameCopyChars + -0xc),destroyAllocator);
     }
-    local_3a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackType = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = DAT_a7b7b6f8;
+    nameChars = DAT_a7b7b6f8;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_330[0] = GetGlobalPoolAllocator();
-      paVar11 = (unsigned char *)local_330;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,paVar11);
-      uVar13 = extraout_r4_00;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArgB[0] = GetGlobalPoolAllocator();
+      allocatorArgPtr = (unsigned char *)poolAllocatorArgB;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,allocatorArgPtr);
+      passThroughR4 = extraout_r4_00;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_2fc = local_2fc & 0x801ff | 0x22082000;
-    local_31c = 0;
-    local_318 = 0;
-    local_314 = 0;
-    paVar12 = (unsigned char *)&local_2d0;
-    local_310 = 0;
-    local_30c = 0;
-    local_308 = 0;
-    local_304 = 0;
-    local_300 = 0;
-    local_320 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeBBits = stackTypeBBits & 0x801ff | 0x22082000;
+    stackTypeBArraySize = 0;
+    stackTypeBStructure = 0;
+    stackTypeBFieldName = 0;
+    allocatorArgPtr2 = (unsigned char *)&nameCopyB;
+    stackTypeBTypeName = 0;
+    stackTypeBWord14 = 0;
+    stackTypeBStructureSize = 0;
+    stackTypeBWord1c = 0;
+    stackTypeBWord20 = 0;
+    stackTypeB = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -2157,73 +2163,73 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar2 = symbol[0xc];
-    symbol[0xc] = uVar2 & 0x1ffffff | 0x22000000;
-    uVar3 = (local_2fc >> 0x13 & 0x3f) << 0x13;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x22000000;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x22000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x22000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x22000000 | 0x2000;
+    oldVariableBits = symbol[0xc];
+    symbol[0xc] = oldVariableBits & 0x1ffffff | 0x22000000;
+    basicTypeField = (stackTypeBBits >> 0x13 & 0x3f) << 0x13;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ffff | 0x22000000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ff | 0x22000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x3ff | 0x22000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x1ff | 0x22000000 | 0x2000;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_2ec = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar12,psVar8);
-    local_2c8 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_2e0,uVar16,paVar12);
-    local_2f0 = local_2e0;
-    symbol = (int *)(local_2cc + -4);
-    local_2ec = local_2dc;
-    local_2c0[0] = local_2d0;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopyB = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,allocatorArgPtr,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(allocatorArgPtr2,variableName);
+    variableForInsertB = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultB,symbolTableLevel,allocatorArgPtr2);
+    insertResultCopyB = insertResultB;
+    symbol = (int *)(nameCopyCharsB + -4);
+    insertResultFlagCopyB = insertResultFlagB;
+    destroyAllocatorB[0] = nameCopyB;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_2cc + -0xc),local_2c0);
+                ((unsigned char *)(nameCopyCharsB + -0xc),destroyAllocatorB);
     }
-    local_320 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackTypeB = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = DAT_a7b7b6fc;
+    nameChars = DAT_a7b7b6fc;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_2b0[0] = GetGlobalPoolAllocator();
-      paVar12 = (unsigned char *)local_2b0;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,paVar12);
-      uVar13 = extraout_r4_01;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArgC[0] = GetGlobalPoolAllocator();
+      allocatorArgPtr2 = (unsigned char *)poolAllocatorArgC;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,allocatorArgPtr2);
+      passThroughR4 = extraout_r4_01;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_27c = local_27c & 0x801ff | 0x24082000;
-    local_29c = 0;
-    local_298 = 0;
-    local_294 = 0;
-    paVar11 = (unsigned char *)&local_250;
-    local_290 = 0;
-    local_28c = 0;
-    local_288 = 0;
-    local_284 = 0;
-    local_280 = 0;
-    local_2a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeCBits = stackTypeCBits & 0x801ff | 0x24082000;
+    stackTypeCArraySize = 0;
+    stackTypeCStructure = 0;
+    stackTypeCFieldName = 0;
+    allocatorArgPtr = (unsigned char *)&nameCopyC;
+    stackTypeCTypeName = 0;
+    stackTypeCWord14 = 0;
+    stackTypeCStructureSize = 0;
+    stackTypeCWord1c = 0;
+    stackTypeCWord20 = 0;
+    stackTypeC = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -2233,72 +2239,72 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar2 = symbol[0xc];
-    symbol[0xc] = uVar2 & 0x1ffffff | 0x24000000;
-    uVar3 = (local_27c >> 0x13 & 0x3f) << 0x13;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ffff | 0x24000000;
-    symbol[0xc] = uVar3 | uVar2 & 0x7ff | 0x24000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x3ff | 0x24000000 | 0x2000;
-    symbol[0xc] = uVar3 | uVar2 & 0x1ff | 0x24000000 | 0x2000;
+    oldVariableBits = symbol[0xc];
+    symbol[0xc] = oldVariableBits & 0x1ffffff | 0x24000000;
+    basicTypeField = (stackTypeCBits >> 0x13 & 0x3f) << 0x13;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ffff | 0x24000000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x7ff | 0x24000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x3ff | 0x24000000 | 0x2000;
+    symbol[0xc] = basicTypeField | oldVariableBits & 0x1ff | 0x24000000 | 0x2000;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_26c = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar12,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(paVar11,psVar8);
-    local_248 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_260,uVar16,paVar11);
-    local_270 = local_260;
-    symbol = (int *)(local_24c + -4);
-    local_26c = local_25c;
-    local_240[0] = local_250;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopyC = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,allocatorArgPtr2,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(allocatorArgPtr,variableName);
+    variableForInsertC = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultC,symbolTableLevel,allocatorArgPtr);
+    insertResultCopyC = insertResultC;
+    symbol = (int *)(nameCopyCharsC + -4);
+    insertResultFlagCopyC = insertResultFlagC;
+    destroyAllocatorC[0] = nameCopyC;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_24c + -0xc),local_240);
+                ((unsigned char *)(nameCopyCharsC + -0xc),destroyAllocatorC);
     }
-    local_2a0 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackTypeC = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    pcVar10 = DAT_a7b7b700;
+    nameChars = DAT_a7b7b700;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    uVar18 = TPoolAllocator__allocate(poolAllocator,8);
-    pvVar9 = (void *)((ulonglong)uVar18 >> 0x20);
-    uVar13 = (undefined4)uVar18;
-    bVar17 = (pvVar9 == (void *)0x0) << 1;
-    pvVar14 = (void *)0x0;
-    if (pvVar9 != (void *)0x0) {
-      local_230[0] = GetGlobalPoolAllocator();
-      paVar11 = (unsigned char *)local_230;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(pvVar9,pcVar10,paVar11);
-      uVar13 = extraout_r4_02;
-      pvVar14 = pvVar9;
+    nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
+    nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
+    passThroughR4 = (undefined4)nameStringAllocationPair;
+    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
+    nameString = (void *)0x0;
+    if (nameStringAllocation != (void *)0x0) {
+      poolAllocatorArgD[0] = GetGlobalPoolAllocator();
+      allocatorArgPtr = (unsigned char *)poolAllocatorArgD;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(nameStringAllocation,nameChars,allocatorArgPtr);
+      passThroughR4 = extraout_r4_02;
+      nameString = nameStringAllocation;
     }
-    puVar15 = PTR_vtable_a7b7c0b4 + 8;
-    local_1fc = local_1fc & 0x1ff | 0x26080800;
-    local_21c = 0;
-    local_218 = 0;
-    local_214 = 0;
-    local_210 = 0;
-    local_20c = 0;
-    local_208 = 0;
-    local_204 = 0;
-    local_200 = 0;
-    local_220 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
-    symbol[1] = (int)pvVar14;
-    *symbol = (int)puVar15;
+    variableVtable = PTR_vtable_a7b7c0b4 + 8;
+    stackTypeDBits = stackTypeDBits & 0x1ff | 0x26080800;
+    stackTypeDArraySize = 0;
+    stackTypeDStructure = 0;
+    stackTypeDFieldName = 0;
+    stackTypeDTypeName = 0;
+    stackTypeDWord14 = 0;
+    stackTypeDStructureSize = 0;
+    stackTypeDWord1c = 0;
+    stackTypeDWord20 = 0;
+    stackTypeD = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    symbol[1] = (int)nameString;
+    *symbol = (int)variableVtable;
     symbol[4] = 0;
     symbol[5] = 0;
     symbol[6] = 0;
@@ -2308,209 +2314,209 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol[10] = 0;
     symbol[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7cf48;
     symbol[0xb] = 0;
-    uVar3 = symbol[0xc];
-    symbol[0xc] = uVar3 & 0x1ffffff | 0x26000000;
-    symbol[0xc] = uVar3 & 0x7ffff | 0x26080000;
-    symbol[0xc] = uVar3 & 0x7ff | 0x26080800;
-    symbol[0xc] = uVar3 & 0x3ff | 0x26080800;
-    symbol[0xc] = uVar3 & 0x1ff | 0x26080800;
+    oldVariableBits2 = symbol[0xc];
+    symbol[0xc] = oldVariableBits2 & 0x1ffffff | 0x26000000;
+    symbol[0xc] = oldVariableBits2 & 0x7ffff | 0x26080000;
+    symbol[0xc] = oldVariableBits2 & 0x7ff | 0x26080800;
+    symbol[0xc] = oldVariableBits2 & 0x3ff | 0x26080800;
+    symbol[0xc] = oldVariableBits2 & 0x1ff | 0x26080800;
     symbol[0xd] = 0;
     symbol[0xe] = 0;
     symbol[0xf] = 0;
-    iVar4 = symbolTable[3];
-    symbolTable[3] = iVar4 + 1;
-    symbol[2] = iVar4 + 1;
-    iVar4 = *symbolTable;
-    uVar16 = *(undefined4 *)(iVar4 + ((symbolTable[1] - iVar4 & 0xfffffffcU) - 4));
-    local_1ec = 0;
-    psVar8 = (unsigned char *)(**(code **)(*symbol + 8))(symbol,uVar13,paVar11,in_r6,in_r7,pvVar14,iVar4);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_1d0,psVar8);
-    local_1c8 = symbol;
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_1e0,uVar16,&local_1d0);
-    local_1f0 = local_1e0;
-    symbol = (int *)(local_1cc + -4);
-    local_1ec = local_1dc;
-    local_1c0[0] = local_1d0;
+    uniqueId = symbolTable[3];
+    symbolTable[3] = uniqueId + 1;
+    symbol[2] = uniqueId + 1;
+    levelsBegin = *symbolTable;
+    symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
+    insertResultFlagCopyD = 0;
+    variableName = (unsigned char *)(**(code **)(*symbol + 8))(symbol,passThroughR4,allocatorArgPtr,in_r6,in_r7,nameString,levelsBegin);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopyD,variableName);
+    variableForInsertD = symbol;
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultD,symbolTableLevel,&nameCopyD);
+    insertResultCopyD = insertResultD;
+    symbol = (int *)(nameCopyCharsD + -4);
+    insertResultFlagCopyD = insertResultFlagD;
+    destroyAllocatorD[0] = nameCopyD;
     do {
-      iVar4 = *symbol;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+      oldRefCount = *symbol;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
         *symbol = atomicStore;
-        bVar17 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar17 >> 1 & 1));
-    if (iVar4 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_1cc + -0xc),local_1c0);
+                ((unsigned char *)(nameCopyCharsD + -0xc),destroyAllocatorD);
     }
-    local_220 = &PTR___ZN5TTypeD1Ev_a7b7cf48;
+    stackTypeD = &PTR___ZN5TTypeD1Ev_a7b7cf48;
   }
-  puVar15 = PTR__operatorStrings_a7b7c0b0;
+  operatorStrings = PTR__operatorStrings_a7b7c0b0;
   TSymbolTableLevel__relateToOperator
             (*(unsigned char **)*symbolTable,*(char **)(PTR__operatorStrings_a7b7c0b0 + 0x1c),7);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x54),0x15);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x54),0x15);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x5c),0x17);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x5c),0x17);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x7c),0x1f);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x7c),0x1f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x80),0x20);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x80),0x20);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x84),0x21);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x84),0x21);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x88),0x22);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x88),0x22);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x8c),0x23);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x8c),0x23);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x90),0x24);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x90),0x24);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xc4),0x31);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xc4),0x31);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 200),0x32);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 200),0x32);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xcc),0x33);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xcc),0x33);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xd0),0x34);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xd0),0x34);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xd4),0x35);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xd4),0x35);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xd8),0x36);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xd8),0x36);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xdc),0x37);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xdc),0x37);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xe0),0x38);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xe0),0x38);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xe4),0x39);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xe4),0x39);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xf0),0x3c);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xf0),0x3c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xec),0x3b);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xec),0x3b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xe8),0x3a);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xe8),0x3a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xf4),0x3d);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xf4),0x3d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xf8),0x3e);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xf8),0x3e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0xfc),0x3f);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0xfc),0x3f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x100),0x40);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x100),0x40);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x104),0x41);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x104),0x41);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x108),0x42);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x108),0x42);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x10c),0x43);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x10c),0x43);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x110),0x44);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x110),0x44);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x114),0x45);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x114),0x45);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x118),0x46);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x118),0x46);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x11c),0x47);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x11c),0x47);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x120),0x48);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x120),0x48);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x124),0x49);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x124),0x49);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x128),0x4a);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x128),0x4a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 300),0x4b);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 300),0x4b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x130),0x4c);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x130),0x4c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x134),0x4d);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x134),0x4d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x138),0x4e);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x138),0x4e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x13c),0x4f);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x13c),0x4f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x140),0x50);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x140),0x50);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x144),0x51);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x144),0x51);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x148),0x52);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x148),0x52);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x15c),0x57);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x15c),0x57);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x160),0x58);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x160),0x58);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x218),0x86);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x218),0x86);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x21c),0x87);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x21c),0x87);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x220),0x88);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x220),0x88);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x224),0x89);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x224),0x89);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x228),0x8a);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x228),0x8a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x22c),0x8b);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x22c),0x8b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x230),0x8c);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x230),0x8c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x234),0x8d);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x234),0x8d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x238),0x8e);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x238),0x8e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x23c),0x8f);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x23c),0x8f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x240),0x90);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x240),0x90);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x244),0x91);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x244),0x91);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x248),0x92);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x248),0x92);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x24c),0x93);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x24c),0x93);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x250),0x94);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x250),0x94);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x254),0x95);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x254),0x95);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 600),0x96);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 600),0x96);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x25c),0x97);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x25c),0x97);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x260),0x98);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x260),0x98);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x264),0x99);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x264),0x99);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x268),0x9a);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x268),0x9a);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x26c),0x9b);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x26c),0x9b);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x270),0x9c);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x270),0x9c);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x274),0x9d);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x274),0x9d);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x278),0x9e);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x278),0x9e);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x27c),0x9f);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x27c),0x9f);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x280),0xa0);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x280),0xa0);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x284),0xa1);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x284),0xa1);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x288),0xa2);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x288),0xa2);
   TSymbolTableLevel__relateToOperator
-            (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x28c),0xa3);
+            (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x28c),0xa3);
   if (language == 0) {
     puVar5 = (undefined4 *)*symbolTable;
     uVar13 = 0x85;
-    pcVar10 = *(char **)(puVar15 + 0x214);
+    pcVar10 = *(char **)(operatorStrings + 0x214);
   }
   else {
     if (language != 1) {
       return;
     }
     TSymbolTableLevel__relateToOperator
-              (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x14c),0x53);
+              (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x14c),0x53);
     TSymbolTableLevel__relateToOperator
-              (*(unsigned char **)*symbolTable,*(char **)(puVar15 + 0x150),0x54);
+              (*(unsigned char **)*symbolTable,*(char **)(operatorStrings + 0x150),0x54);
     puVar5 = (undefined4 *)*symbolTable;
-    pcVar10 = *(char **)(puVar15 + 0x154);
+    pcVar10 = *(char **)(operatorStrings + 0x154);
     uVar13 = 0x55;
   }
   TSymbolTableLevel__relateToOperator((unsigned char *)*puVar5,pcVar10,uVar13);
@@ -2523,6 +2529,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
   int *symbolTable;
   unsigned char * builtInResource;
 {
+  int *refCountPtr;
+  int oldRefCount;
   int atomicStore;
   char *pcVar2;
   void *pvVar3;
@@ -2538,8 +2546,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
   undefined4 in_r8;
   int iVar8;
   undefined4 uVar9;
-  char in_RESERVE;
-  byte bVar10;
+  char reservation;
+  byte cr0Flags;
   undefined8 uVar11;
   undefined4 local_70 [4];
   undefined4 local_60;
@@ -2560,7 +2568,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
     uVar11 = TPoolAllocator__allocate(poolAllocator,8);
     this = (void *)((ulonglong)uVar11 >> 0x20);
     a1 = (undefined4)uVar11;
-    bVar10 = (this == (void *)0x0) << 1;
+    cr0Flags = (this == (void *)0x0) << 1;
     pvVar3 = (void *)0x0;
     if (this != (void *)0x0) {
       local_70[0] = GetGlobalPoolAllocator();
@@ -2599,18 +2607,18 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
     local_38 = piVar6;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_50,uVar9,&local_40);
     local_60 = local_50;
-    piVar6 = (int *)(local_3c + -4);
+    refCountPtr = (int *)(local_3c + -4);
     local_5c = local_4c;
     local_30[0] = local_40;
     do {
-      iVar8 = *piVar6;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar8 + -1,0,piVar6);
-        *piVar6 = atomicStore;
-        bVar10 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar10 >> 1 & 1));
-    if (iVar8 < 1) {
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_3c + -0xc),local_30);
     }
@@ -2760,8 +2768,8 @@ int TIntermediate__addSymbol(this, param_2, text, type, param_5)
   int iVar13;
   int iVar14;
   int iVar15;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
@@ -2801,12 +2809,12 @@ int TIntermediate__addSymbol(this, param_2, text, type, param_5)
   *a0 = (int)(puVar5 + 8);
   a0[0xc] = param_2;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       iVar9 = storeWordConditionalIndexed(*piVar8 + 1,0,piVar8);
       *piVar8 = iVar9;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   iVar9 = GetGlobalPoolAllocator();
   a0[0xd] = iVar9;
   a0[0xe] = iVar6 + 0xc;
@@ -2844,16 +2852,16 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, param_5, 
   undefined4 a3;
   undefined4 a4;
   code *pcVar14;
-  undefined **local_120;
-  undefined4 local_11c;
-  int local_118;
-  undefined4 local_114;
-  undefined4 local_110;
-  undefined4 local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  undefined4 local_100;
-  uint local_fc;
+  undefined **stackType;
+  undefined4 stackTypeArraySize;
+  int stackTypeStructure;
+  undefined4 stackTypeFieldName;
+  undefined4 stackTypeTypeName;
+  undefined4 stackTypeWord14;
+  undefined4 stackTypeStructureSize;
+  undefined4 stackTypeWord1c;
+  undefined4 stackTypeWord20;
+  uint stackTypeBits;
   undefined **local_f0 [2];
   int local_e8;
   uint local_cc;
@@ -2873,9 +2881,9 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, param_5, 
     case 0x15:
     case 0x16:
       bVar4 = false;
-      (**(code **)(*intermTyped1 + 0x38))(&local_120,intermTyped1);
+      (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
       bVar1 = false;
-      if ((local_fc >> 0x13 & 0x3f) == 0xe) {
+      if ((stackTypeBits >> 0x13 & 0x3f) == 0xe) {
 LAB_97b8cff8:
         bVar4 = true;
         if (bVar1) goto LAB_97b8d008;
@@ -2898,9 +2906,9 @@ LAB_97b8d008:
       bVar3 = false;
       bVar2 = false;
       (**(code **)(*intermTyped1 + 0x38))
-                (&local_120,intermTyped1,intermTyped1,intermTyped2,param_5,symbolTable,(op - 0x13U) * 4);
+                (&stackType,intermTyped1,intermTyped1,intermTyped2,param_5,symbolTable,(op - 0x13U) * 4);
       bVar1 = false;
-      if ((local_fc & 0x400) == 0) {
+      if ((stackTypeBits & 0x400) == 0) {
         bVar3 = true;
         (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
         if ((local_cc & 0x200) != 0) goto LAB_97b8ce68;
@@ -2925,9 +2933,9 @@ LAB_97b8ce68:
       bVar4 = false;
       bVar3 = false;
       bVar2 = false;
-      (**(code **)(*intermTyped1 + 0x38))(&local_120,intermTyped1);
+      (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
       bVar1 = false;
-      if ((local_fc >> 0x13 & 0x3f) == 3) {
+      if ((stackTypeBits >> 0x13 & 0x3f) == 3) {
         bVar3 = true;
         (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
         if ((local_cc & 0x400) != 0) goto LAB_97b8cf4c;
@@ -2954,16 +2962,16 @@ LAB_97b8cf4c:
       local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
 LAB_97b8d01c:
-    local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     if (bVar4) {
       return (int *)0x0;
     }
   }
 switchD_97b8cd3c_default:
   bVar2 = false;
-  (**(code **)(*intermTyped1 + 0x38))(&local_120,intermTyped1);
+  (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
   bVar1 = false;
-  if (local_118 == 0) {
+  if (stackTypeStructure == 0) {
 LAB_97b8d08c:
     bVar2 = true;
     if (bVar1) goto LAB_97b8d098;
@@ -2975,7 +2983,7 @@ LAB_97b8d08c:
 LAB_97b8d098:
     local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
-  local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (bVar2) {
     (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
     piVar7 = (int *)((int (*)())TIntermediate__addConversion)(this,op,local_c0,intermTyped2);
@@ -3005,15 +3013,15 @@ LAB_97b8d098:
   local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
-  local_fc = local_fc & 0x1ff | 0x80800;
-  local_11c = 0;
-  local_114 = 0;
-  local_110 = 0;
-  local_10c = 0;
-  local_108 = 0;
-  local_104 = 0;
-  local_100 = 0;
-  local_118 = 0;
+  stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
+  stackTypeArraySize = 0;
+  stackTypeFieldName = 0;
+  stackTypeTypeName = 0;
+  stackTypeWord14 = 0;
+  stackTypeStructureSize = 0;
+  stackTypeWord1c = 0;
+  stackTypeWord20 = 0;
+  stackTypeStructure = 0;
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
   a0[3] = 0;
@@ -3032,7 +3040,7 @@ LAB_97b8d098:
   a0[0xb] = uVar6 & 0x3ff | 0x80800;
   puVar5 = PTR_vtable_a7b7c0d8;
   a0[0xb] = uVar6 & 0x1ff | 0x80800;
-  local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[0xc] = op;
   *a0 = (int)(puVar5 + 8);
   if (param_5 == 0) {
@@ -3060,13 +3068,13 @@ LAB_97b8d098:
     pTVar12 = (unsigned char *)(**(code **)(*piVar11 + 0x18))(piVar11);
   }
   bVar1 = false;
-  (**(code **)(*piVar7 + 0x38))(&local_120,piVar7);
-  if (local_fc >> 0x19 == 2) {
+  (**(code **)(*piVar7 + 0x38))(&stackType,piVar7);
+  if (stackTypeBits >> 0x19 == 2) {
     (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
     bVar1 = local_cc >> 0x19 == 2;
     local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
-  local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (bVar1) {
     iVar8 = (**(code **)(*piVar7 + 0x1c))(piVar7);
     if (iVar8 != 0) {
@@ -3139,28 +3147,28 @@ int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, param_5)
   int iVar3;
   unsigned char * pTVar4;
   int *piVar5;
-  undefined **local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  uint local_2c;
+  undefined **stackType;
+  undefined4 stackTypeArraySize;
+  undefined4 stackTypeStructure;
+  undefined4 stackTypeFieldName;
+  undefined4 stackTypeTypeName;
+  undefined4 stackTypeWord14;
+  undefined4 stackTypeStructureSize;
+  undefined4 stackTypeWord1c;
+  undefined4 stackTypeWord20;
+  uint stackTypeBits;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
-  local_2c = local_2c & 0x1ff | 0x80800;
-  local_4c = 0;
-  local_44 = 0;
-  local_40 = 0;
-  local_3c = 0;
-  local_38 = 0;
-  local_34 = 0;
-  local_30 = 0;
-  local_48 = 0;
+  stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
+  stackTypeArraySize = 0;
+  stackTypeFieldName = 0;
+  stackTypeTypeName = 0;
+  stackTypeWord14 = 0;
+  stackTypeStructureSize = 0;
+  stackTypeWord1c = 0;
+  stackTypeWord20 = 0;
+  stackTypeStructure = 0;
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
   a0[3] = 0;
@@ -3179,7 +3187,7 @@ int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, param_5)
   a0[0xb] = uVar2 & 0x3ff | 0x80800;
   puVar1 = PTR_vtable_a7b7c0d8;
   a0[0xb] = uVar2 & 0x1ff | 0x80800;
-  local_50 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   *a0 = (int)(puVar1 + 8);
   a0[0xc] = op;
   if (param_5 == 0) {
@@ -3194,9 +3202,9 @@ int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, param_5)
       return (int *)0x0;
     }
   }
-  (**(code **)(*intermTyped1 + 0x38))(&local_50,intermTyped1);
-  iVar3 = ((int (*)())TIntermediate__addConversion)(this,op,&local_50,intermTyped2);
-  local_50 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
+  iVar3 = ((int (*)())TIntermediate__addConversion)(this,op,&stackType,intermTyped2);
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   piVar5 = (int *)0x0;
   if (iVar3 != 0) {
     (**(code **)(*a0 + 0x60))(a0,intermTyped1);
@@ -3264,6 +3272,7 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
   undefined4 param_6;
   uint param_7;
 {
+  undefined *oldRefCount;
   undefined *atomicStore;
   bool bVar2;
   bool bVar3;
@@ -3291,14 +3300,14 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
   undefined4 extraout_r4_05;
   unsigned char * a4;
   void *this_01;
-  char in_RESERVE;
-  byte bVar15;
-  undefined **local_120;
-  undefined4 local_11c;
-  undefined4 local_118;
-  undefined4 local_114;
+  char reservation;
+  byte cr0Flags;
+  undefined **stackType;
+  undefined4 stackTypeArraySize;
+  undefined4 stackTypeStructure;
+  undefined4 stackTypeFieldName;
   char local_110 [20];
-  uint local_fc;
+  uint stackTypeBits;
   undefined **local_f0 [8];
   unsigned char aaStack_d0 [4];
   uint local_cc;
@@ -3318,27 +3327,27 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
                     
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"INTERNAL ERROR: ");
     uVar7 = param_4 & 0xffff;
-    bVar15 = (uVar7 == 0) << 1;
+    cr0Flags = (uVar7 == 0) << 1;
     if (uVar7 == 0) {
       _sprintf(local_110,"%d:? ",(int)param_4 >> 0x10);
     }
     else {
       _sprintf(local_110,"%d:%d",(int)param_4 >> 0x10,uVar7);
     }
-    __ZNSsC1EPKcRKSaIcE(&local_120,local_110,aaStack_d0);
-    *(undefined *)((int)local_120 + (int)local_120[-3]) = *PTR__S_terminal_a7b7c0b8;
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,(char *)local_120);
-    ppuVar6 = local_120 + -1;
+    __ZNSsC1EPKcRKSaIcE(&stackType,local_110,aaStack_d0);
+    *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,(char *)stackType);
+    ppuVar6 = stackType + -1;
     do {
-      puVar8 = *ppuVar6;
-      if (in_RESERVE != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar6);
+      oldRefCount = *ppuVar6;
+      if (reservation != '\0') {
+        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,ppuVar6);
         *ppuVar6 = atomicStore;
-        bVar15 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar15 >> 1 & 1));
-    if ((int)puVar8 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_120 + -3),local_110);
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if ((int)oldRefCount < 1) {
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),local_110);
     }
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,": ");
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"Bad type in AddUnaryMath");
@@ -3350,9 +3359,9 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
     bVar4 = false;
     bVar3 = false;
     bVar2 = false;
-    (**(code **)(*a1 + 0x38))(&local_120,a1);
+    (**(code **)(*a1 + 0x38))(&stackType,a1);
     uVar14 = extraout_r4_00;
-    if ((local_fc >> 0x13 & 0x3f) == 3) {
+    if ((stackTypeBits >> 0x13 & 0x3f) == 3) {
       bVar4 = true;
       (**(code **)(*a1 + 0x38))(local_c0,a1);
       uVar14 = extraout_r4_01;
@@ -3381,7 +3390,7 @@ LAB_97b8dcfc:
       local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
 LAB_97b8ddc8:
-    local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     if (bVar5) {
       return (int *)0x0;
     }
@@ -3392,10 +3401,10 @@ LAB_97b8ddc8:
       if (op == 5) {
 LAB_97b8dd4c:
         bVar5 = false;
-        (**(code **)(*a1 + 0x38))(&local_120,a1);
+        (**(code **)(*a1 + 0x38))(&stackType,a1);
         bVar2 = false;
         uVar14 = extraout_r4_04;
-        if ((local_fc >> 0x13 & 0x3f) == 0xe) {
+        if ((stackTypeBits >> 0x13 & 0x3f) == 0xe) {
 LAB_97b8dda4:
           bVar5 = true;
           if (bVar2) goto LAB_97b8ddb4;
@@ -3428,16 +3437,16 @@ LAB_97b8ddb4:
   uVar7 = (**(code **)(*a1 + 0x48))(a1,uVar14,intermNode,uVar7,a4,param_6,param_7);
   uVar9 = (**(code **)(*a1 + 0x50))(a1);
   uVar10 = (**(code **)(*a1 + 0x54))(a1);
-  local_fc = (uVar10 & 1) << 9 |
-             (uVar9 & 1) << 10 | (uVar7 & 0xff) << 0xb | iVar11 << 0x13 | local_fc & 0x1ff;
+  stackTypeBits = (uVar10 & 1) << 9 |
+             (uVar9 & 1) << 10 | (uVar7 & 0xff) << 0xb | iVar11 << 0x13 | stackTypeBits & 0x1ff;
   local_110[0x10] = '\0';
   local_110[0x11] = '\0';
   local_110[0x12] = '\0';
   local_110[0x13] = '\0';
-  local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  local_11c = 0;
-  local_118 = 0;
-  local_114 = 0;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackTypeArraySize = 0;
+  stackTypeStructure = 0;
+  stackTypeFieldName = 0;
   local_110[0] = '\0';
   local_110[1] = '\0';
   local_110[2] = '\0';
@@ -3454,8 +3463,8 @@ LAB_97b8ddb4:
   local_110[0xd] = '\0';
   local_110[0xe] = '\0';
   local_110[0xf] = '\0';
-  a1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,&local_120,a1);
-  local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  a1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,&stackType,a1);
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a1 == (int *)0x0) {
     return (int *)0x0;
   }
@@ -3468,9 +3477,9 @@ LAB_97b8decc:
     }
     iVar11 = (**(code **)(*a1 + 0x1c))(a1);
     if (iVar11 != 0) {
-      (**(code **)(*a1 + 0x38))(&local_120,a1);
-      local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      if (local_fc >> 0x19 == 2) {
+      (**(code **)(*a1 + 0x38))(&stackType,a1);
+      stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      if (stackTypeBits >> 0x19 == 2) {
         pTVar13 = (unsigned char *)(**(code **)(*a1 + 0x1c))(a1);
         a1 = (int *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_4);
         iVar11 = (**(code **)(*a1 + 0x18))(a1);
@@ -3482,10 +3491,10 @@ LAB_97b8decc:
     a0 = (int *)(**(code **)(*a1 + 0x18))(a1);
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
     a0_00 = (int *)TPoolAllocator__allocate(this_00,0x38);
-    local_fc = local_fc & 0x1ff | 0x80800;
-    local_11c = 0;
-    local_118 = 0;
-    local_114 = 0;
+    stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
+    stackTypeArraySize = 0;
+    stackTypeStructure = 0;
+    stackTypeFieldName = 0;
     local_110[0] = '\0';
     local_110[1] = '\0';
     local_110[2] = '\0';
@@ -3524,7 +3533,7 @@ LAB_97b8decc:
     a0_00[0xb] = uVar7 & 0x3ff | 0x80800;
     puVar8 = PTR_vtable_a7b7c0d4;
     a0_00[0xb] = uVar7 & 0x1ff | 0x80800;
-    local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     *a0_00 = (int)(puVar8 + 8);
     a0_00[0xd] = 0;
     a0_00[0xc] = op;
@@ -3564,11 +3573,11 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
   unsigned char * this_00;
   undefined4 *puVar8;
   code *pcVar9;
-  char in_RESERVE;
-  byte bVar10;
+  char reservation;
+  byte cr0Flags;
   unsigned char * pTStack0000001c;
   
-  bVar10 = (intermNode == (unsigned char *)0x0) << 1;
+  cr0Flags = (intermNode == (unsigned char *)0x0) << 1;
   pTStack0000001c = intermNode;
   if (intermNode == (unsigned char *)0x0) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -3606,12 +3615,12 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
     piVar4 = (int *)(iVar6 + 8);
     a0[0x13] = 0;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         iVar7 = storeWordConditionalIndexed(*piVar4 + 1,0,piVar4);
         *piVar4 = iVar7;
-        bVar10 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar10 >> 1 & 1));
+    } while (!(bool)(cr0Flags >> 1 & 1));
     iVar7 = GetGlobalPoolAllocator();
     a0[0x16] = iVar6 + 0xc;
     bVar1 = param_4 == 0;
@@ -3621,7 +3630,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
   }
   else {
     a0 = (int *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
-    bVar10 = (a0 == (int *)0x0) << 1;
+    cr0Flags = (a0 == (int *)0x0) << 1;
     if ((a0 == (int *)0x0) || (bVar1 = param_4 == 0, a0[0xc] != 0)) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
@@ -3658,12 +3667,12 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
       piVar4 = (int *)(iVar6 + 8);
       a0[0x13] = 0;
       do {
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           iVar7 = storeWordConditionalIndexed(*piVar4 + 1,0,piVar4);
           *piVar4 = iVar7;
-          bVar10 = 2;
+          cr0Flags = 2;
         }
-      } while (!(bool)(bVar10 >> 1 & 1));
+      } while (!(bool)(cr0Flags >> 1 & 1));
       iVar7 = GetGlobalPoolAllocator();
       a0[0x16] = iVar6 + 0xc;
       a0[0x15] = iVar7;
@@ -3705,6 +3714,7 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   unsigned char * type;
   int *intermTyped;
 {
+  undefined *oldRefCount;
   undefined *atomicStore;
   bool bVar2;
   undefined **ppuVar3;
@@ -3735,18 +3745,18 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined4 *puVar18;
   uint uVar19;
   void *this_00;
-  char in_RESERVE;
-  byte bVar20;
-  undefined **local_c0;
-  int local_bc;
-  int local_b8;
-  int local_b4;
-  int local_b0;
-  int local_ac;
-  int local_a8;
-  int local_a4;
-  int local_a0;
-  uint local_9c;
+  char reservation;
+  byte cr0Flags;
+  undefined **stackType;
+  int stackTypeArraySize;
+  int stackTypeStructure;
+  int stackTypeFieldName;
+  int stackTypeTypeName;
+  int stackTypeWord14;
+  int stackTypeStructureSize;
+  int stackTypeWord1c;
+  int stackTypeWord20;
+  uint stackTypeBits;
   undefined4 local_90;
   undefined4 *puStack_8c;
   char acStack_80 [64];
@@ -3763,31 +3773,31 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   if ((-1 < iVar6) && (iVar6 - 5U < 8)) {
     return (int *)0x0;
   }
-  (**(code **)(*intermTyped + 0x38))(&local_c0,intermTyped);
+  (**(code **)(*intermTyped + 0x38))(&stackType,intermTyped);
   a6 = (undefined4 *)0x0;
-  if (((*(uint *)(type + 0x24) & 0x1fffe00) == (local_9c & 0x1fffe00)) &&
-     (*(int *)(type + 8) == local_b8)) {
+  if (((*(uint *)(type + 0x24) & 0x1fffe00) == (stackTypeBits & 0x1fffe00)) &&
+     (*(int *)(type + 8) == stackTypeStructure)) {
     a6 = (undefined4 *)0x1;
   }
-  local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a6 != (undefined4 *)0x0) {
     return intermTyped;
   }
   if (*(int *)(type + 8) != 0) {
     return (int *)0x0;
   }
-  (**(code **)(*intermTyped + 0x38))((unsigned char *)&local_c0,intermTyped,a2,piVar12,in_r7,in_r8,0);
-  local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if (local_b8 != 0) {
+  (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped,a2,piVar12,in_r7,in_r8,0);
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  if (stackTypeStructure != 0) {
     return (int *)0x0;
   }
   iVar6 = (**(code **)(*(int *)type + 0x38))(type);
   if (iVar6 != 0) {
     return (int *)0x0;
   }
-  (**(code **)(*intermTyped + 0x38))((unsigned char *)&local_c0,intermTyped);
-  local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if ((local_9c & 0x200) != 0) {
+  (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped);
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  if ((stackTypeBits & 0x200) != 0) {
     return (int *)0x0;
   }
   if (op == 0x67) {
@@ -3797,8 +3807,8 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
     if (op != 0x66) {
 LAB_97b8e794:
       uVar7 = (**(code **)(*(int *)type + 0x20))(type);
-      (**(code **)(*intermTyped + 0x38))(&local_c0,intermTyped);
-      if (uVar7 == (local_9c >> 0x13 & 0x3f)) {
+      (**(code **)(*intermTyped + 0x38))(&stackType,intermTyped);
+      if (uVar7 == (stackTypeBits >> 0x13 & 0x3f)) {
         return intermTyped;
       }
       return (int *)0x0;
@@ -3827,16 +3837,16 @@ LAB_97b8e8ac:
         pcVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
         if (uVar7 != 2) break;
         piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-        (**(code **)(*piVar8 + 0x38))(&local_c0,piVar8);
-        uVar19 = local_9c >> 0x13 & 0x3f;
-        local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        (**(code **)(*piVar8 + 0x38))(&stackType,piVar8);
+        uVar19 = stackTypeBits >> 0x13 & 0x3f;
+        stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         if (uVar19 == 1) {
           piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
           iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
           local_40 = (longlong)(int)**(float **)(iVar11 + 0x30);
           *(int *)pcVar10 = (int)**(float **)(iVar11 + 0x30);
 LAB_97b8ec88:
-          local_9c = uVar7 << 0x13 | local_9c & 0x7ff | 0x4000000 | 0x800;
+          stackTypeBits = uVar7 << 0x13 | stackTypeBits & 0x7ff | 0x4000000 | 0x800;
         }
         else {
           if (uVar19 != 3) {
@@ -3851,23 +3861,23 @@ LAB_97b8ec88:
           a6 = *(undefined4 **)(iVar11 + 0x30);
           *(undefined4 *)pcVar10 = *a6;
 LAB_97b8ecd8:
-          local_9c = uVar7 << 0x13 | local_9c & 0xfff | 0x4000000 | 0x800;
+          stackTypeBits = uVar7 << 0x13 | stackTypeBits & 0xfff | 0x4000000 | 0x800;
         }
 LAB_97b8ed90:
-        local_9c = local_9c & 0xfffff9ff;
-        local_bc = 0;
-        local_b8 = 0;
-        local_b4 = 0;
-        local_b0 = 0;
-        local_ac = 0;
-        local_a8 = 0;
-        local_a4 = 0;
-        local_a0 = 0;
-        local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        stackTypeBits = stackTypeBits & 0xfffff9ff;
+        stackTypeArraySize = 0;
+        stackTypeStructure = 0;
+        stackTypeFieldName = 0;
+        stackTypeTypeName = 0;
+        stackTypeWord14 = 0;
+        stackTypeStructureSize = 0;
+        stackTypeWord1c = 0;
+        stackTypeWord20 = 0;
+        stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         piVar12 = (int *)(**(code **)*intermTyped)(intermTyped);
-        a2 = (unsigned char *)&local_c0;
-        iVar11 = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar10,(unsigned char *)&local_c0,(int)piVar12);
-        local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        a2 = (unsigned char *)&stackType;
+        iVar11 = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar10,(unsigned char *)&stackType,(int)piVar12);
+        stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         if (iVar11 != 0) {
           std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(auStack_38,iVar6,pTVar16);
           piVar12 = &local_34;
@@ -3881,9 +3891,9 @@ LAB_97b8ed90:
       if (uVar7 < 3) {
         if (uVar7 == 1) {
           piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-          (**(code **)(*piVar8 + 0x38))(&local_c0,piVar8);
-          uVar19 = local_9c >> 0x13 & 0x3f;
-          local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+          (**(code **)(*piVar8 + 0x38))(&stackType,piVar8);
+          uVar19 = stackTypeBits >> 0x13 & 0x3f;
+          stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
           if (uVar19 == 2) {
             piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
             iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
@@ -3905,16 +3915,16 @@ LAB_97b8ed90:
             *(float *)pcVar10 = (float)((double)CONCAT44(0x43300000,a6) - 4503599627370496.0);
           }
           local_90 = 0x43300000;
-          local_9c = local_9c & 0x7ff | 0x4080800;
+          stackTypeBits = stackTypeBits & 0x7ff | 0x4080800;
           puStack_8c = a6;
           goto LAB_97b8ed90;
         }
       }
       else if (uVar7 == 3) {
         piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-        (**(code **)(*piVar8 + 0x38))(&local_c0,piVar8);
-        uVar19 = local_9c >> 0x13 & 0x3f;
-        local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        (**(code **)(*piVar8 + 0x38))(&stackType,piVar8);
+        uVar19 = stackTypeBits >> 0x13 & 0x3f;
+        stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         if (uVar19 == 1) {
           piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
           iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
@@ -4013,27 +4023,27 @@ LAB_97b8ed90:
 override_jmp_97b8ea8c_case_0:
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,"INTERNAL ERROR: ");
     uVar19 = uVar7 & 0xffff;
-    bVar20 = (uVar19 == 0) << 1;
+    cr0Flags = (uVar19 == 0) << 1;
     if (uVar19 == 0) {
       _sprintf(acStack_80,"%d:? ",(int)uVar7 >> 0x10);
     }
     else {
       _sprintf(acStack_80,"%d:%d",(int)uVar7 >> 0x10,uVar19);
     }
-    __ZNSsC1EPKcRKSaIcE(&local_c0,acStack_80,(unsigned char *)&local_b0);
-    *(undefined *)((int)local_c0 + (int)local_c0[-3]) = *PTR__S_terminal_a7b7c0b8;
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,(char *)local_c0);
-    ppuVar3 = local_c0 + -1;
+    __ZNSsC1EPKcRKSaIcE(&stackType,acStack_80,(unsigned char *)&stackTypeTypeName);
+    *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,(char *)stackType);
+    ppuVar3 = stackType + -1;
     do {
-      puVar4 = *ppuVar3;
-      if (in_RESERVE != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar3);
+      oldRefCount = *ppuVar3;
+      if (reservation != '\0') {
+        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,ppuVar3);
         *ppuVar3 = atomicStore;
-        bVar20 = 2;
+        cr0Flags = 2;
       }
-    } while (!(bool)(bVar20 >> 1 & 1));
-    if ((int)puVar4 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_c0 + -3),(unsigned char *)&local_b0);
+    } while (!(bool)(cr0Flags >> 1 & 1));
+    if ((int)oldRefCount < 1) {
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),(unsigned char *)&stackTypeTypeName);
     }
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,": ");
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,pcVar17);
@@ -4059,41 +4069,41 @@ LAB_97b8f1ac:
   uVar19 = (**(code **)(*intermTyped + 0x48))(intermTyped,uVar13);
   uVar14 = (**(code **)(*intermTyped + 0x50))(intermTyped);
   uVar15 = (**(code **)(*intermTyped + 0x54))(intermTyped);
-  local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  local_9c = (uVar15 & 1) << 9 |
-             (uVar14 & 1) << 10 | (uVar19 & 0xff) << 0xb | uVar7 << 0x13 | local_9c & 0x1ff;
-  local_bc = 0;
-  local_b8 = 0;
-  local_b4 = 0;
-  local_b0 = 0;
-  local_ac = 0;
-  local_a8 = 0;
-  local_a4 = 0;
-  local_a0 = 0;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackTypeBits = (uVar15 & 1) << 9 |
+             (uVar14 & 1) << 10 | (uVar19 & 0xff) << 0xb | uVar7 << 0x13 | stackTypeBits & 0x1ff;
+  stackTypeArraySize = 0;
+  stackTypeStructure = 0;
+  stackTypeFieldName = 0;
+  stackTypeTypeName = 0;
+  stackTypeWord14 = 0;
+  stackTypeStructureSize = 0;
+  stackTypeWord1c = 0;
+  stackTypeWord20 = 0;
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   piVar12 = (int *)TPoolAllocator__allocate(poolAllocator,0x38);
   piVar12[1] = 0;
   *piVar12 = (int)&PTR_getLine_a7b7cf90;
-  piVar12[3] = local_bc;
-  piVar12[4] = local_b8;
-  piVar12[5] = local_b4;
-  piVar12[6] = local_b0;
-  piVar12[7] = local_ac;
-  piVar12[8] = local_a8;
+  piVar12[3] = stackTypeArraySize;
+  piVar12[4] = stackTypeStructure;
+  piVar12[5] = stackTypeFieldName;
+  piVar12[6] = stackTypeTypeName;
+  piVar12[7] = stackTypeWord14;
+  piVar12[8] = stackTypeStructureSize;
   piVar12[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
-  piVar12[10] = local_a0;
-  piVar12[9] = local_a4;
+  piVar12[10] = stackTypeWord20;
+  piVar12[9] = stackTypeWord1c;
   puVar4 = PTR_vtable_a7b7c0d4;
   uVar5 = piVar12[0xb];
-  uVar19 = local_9c & 0xfe000000;
+  uVar19 = stackTypeBits & 0xfe000000;
   piVar12[0xb] = uVar19 | uVar5 & 0x1ffffff;
-  uVar14 = (local_9c >> 0x13 & 0x3f) << 0x13;
+  uVar14 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
   piVar12[0xb] = uVar14 | uVar19 | uVar5 & 0x7ffff;
-  uVar7 = local_9c & 0x7f800;
+  uVar7 = stackTypeBits & 0x7f800;
   piVar12[0xb] = uVar7 | uVar14 | uVar19 | uVar5 & 0x7ff;
-  uVar15 = (local_9c >> 10 & 1) << 10;
+  uVar15 = (stackTypeBits >> 10 & 1) << 10;
   piVar12[0xb] = uVar15 | uVar7 | uVar14 | uVar19 | uVar5 & 0x3ff;
-  piVar12[0xb] = (local_9c >> 9 & 1) << 9 | uVar15 | uVar7 | uVar14 | uVar19 | uVar5 & 0x1ff;
+  piVar12[0xb] = (stackTypeBits >> 9 & 1) << 9 | uVar15 | uVar7 | uVar14 | uVar19 | uVar5 & 0x1ff;
   piVar12[0xc] = iVar11;
   *piVar12 = (int)(puVar4 + 8);
   piVar12[0xd] = 0;
@@ -4120,8 +4130,8 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, param_4)
   int iVar5;
   unsigned char * pvVar6;
   undefined4 *puVar7;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   unsigned char * pTStack0000001c;
   unsigned char * pTStack00000020;
   
@@ -4132,7 +4142,7 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, param_4)
   pTStack00000020 = intermNode2;
   if (intermNode1 != (unsigned char *)0x0) {
     a0 = (int *)(**(code **)(*(int *)intermNode1 + 0x1c))(intermNode1);
-    in_cr0 = (a0 == (int *)0x0) << 1;
+    cr0Reg = (a0 == (int *)0x0) << 1;
     if ((a0 != (int *)0x0) && (a0[0xc] == 0)) goto LAB_97b8f5cc;
   }
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
@@ -4170,12 +4180,12 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, param_4)
   piVar3 = (int *)(iVar4 + 8);
   a0[0x13] = 0;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       iVar5 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
       *piVar3 = iVar5;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   iVar5 = GetGlobalPoolAllocator();
   a0[0x16] = iVar4 + 0xc;
   a0[0x15] = iVar5;
@@ -4238,8 +4248,8 @@ int TIntermediate__makeAggregate(this, intermNode, param_3)
   undefined4 *a1;
   undefined4 *extraout_r4;
   code *pcVar6;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   unsigned char * pTStack0000001c;
   
   a0 = (int *)0x0;
@@ -4280,12 +4290,12 @@ int TIntermediate__makeAggregate(this, intermNode, param_3)
     piVar3 = (int *)(iVar4 + 8);
     a0[0x13] = 0;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         iVar5 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
         *piVar3 = iVar5;
-        in_cr0 = 2;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0Reg >> 1 & 1));
     iVar5 = GetGlobalPoolAllocator();
     a0[0x16] = iVar4 + 0xc;
     a0[0x15] = iVar5;
@@ -4454,26 +4464,26 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   undefined4 in_r8;
   unsigned char * a0_00;
   undefined8 uVar10;
-  undefined **local_60;
-  int local_5c;
-  int local_58;
-  int local_54;
-  int local_50;
-  int local_4c;
-  int local_48;
-  int local_44;
-  int local_40;
-  uint local_3c;
+  undefined **stackType;
+  int stackTypeArraySize;
+  int stackTypeStructure;
+  int stackTypeFieldName;
+  int stackTypeTypeName;
+  int stackTypeWord14;
+  int stackTypeStructureSize;
+  int stackTypeWord1c;
+  int stackTypeWord20;
+  uint stackTypeBits;
   
-  a0 = &local_60;
+  a0 = &stackType;
   iVar8 = param_5;
-  (**(code **)(*(int *)intermTyped2 + 0x38))(&local_60,intermTyped2,intermTyped2,intermTyped3,param_5);
-  a2 = &local_60;
+  (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2,intermTyped2,intermTyped3,param_5);
+  a2 = &stackType;
   a3 = intermTyped3;
   uVar10 = ((int (*)())TIntermediate__addConversion)(this,1,a2,intermTyped3);
   a0_00 = (unsigned char *)((ulonglong)uVar10 >> 0x20);
   a1 = (undefined4)uVar10;
-  local_60 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a0_00 == (unsigned char *)0x0) {
     (**(code **)(*(int *)intermTyped3 + 0x38))(a0,intermTyped3);
     pTVar9 = (unsigned char *)((int (*)())TIntermediate__addConversion)(this,1,a0,intermTyped2);
@@ -4486,41 +4496,41 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
       return (unsigned char *)0x0;
     }
   }
-  local_60 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   iVar7 = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1,a1);
   if (((iVar7 == 0) || (iVar7 = (**(code **)(*(int *)intermTyped2 + 0x18))(intermTyped2), iVar7 == 0)) ||
      (iVar7 = (**(code **)(*(int *)a0_00 + 0x18))(a0_00), iVar7 == 0)) {
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
     pTVar9 = (unsigned char *)TPoolAllocator__allocate(this_00,0x3c);
-    (**(code **)(*(int *)intermTyped2 + 0x38))(&local_60,intermTyped2);
+    (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2);
     *(int *)(pTVar9 + 4) = 0;
     *(undefined ***)pTVar9 = &PTR_getLine_a7b7cf90;
-    *(int *)(pTVar9 + 0xc) = local_5c;
-    *(int *)(pTVar9 + 0x10) = local_58;
-    *(int *)(pTVar9 + 0x14) = local_54;
-    *(int *)(pTVar9 + 0x18) = local_50;
-    *(int *)(pTVar9 + 0x1c) = local_4c;
-    *(int *)(pTVar9 + 0x20) = local_48;
+    *(int *)(pTVar9 + 0xc) = stackTypeArraySize;
+    *(int *)(pTVar9 + 0x10) = stackTypeStructure;
+    *(int *)(pTVar9 + 0x14) = stackTypeFieldName;
+    *(int *)(pTVar9 + 0x18) = stackTypeTypeName;
+    *(int *)(pTVar9 + 0x1c) = stackTypeWord14;
+    *(int *)(pTVar9 + 0x20) = stackTypeStructureSize;
     *(undefined ***)(pTVar9 + 8) = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    *(int *)(pTVar9 + 0x24) = local_44;
-    *(int *)(pTVar9 + 0x28) = local_40;
+    *(int *)(pTVar9 + 0x24) = stackTypeWord1c;
+    *(int *)(pTVar9 + 0x28) = stackTypeWord20;
     uVar6 = *(uint *)(pTVar9 + 0x2c);
-    uVar2 = local_3c & 0xfe000000;
+    uVar2 = stackTypeBits & 0xfe000000;
     *(uint *)(pTVar9 + 0x2c) = uVar2 | uVar6 & 0x1ffffff;
-    uVar3 = (local_3c >> 0x13 & 0x3f) << 0x13;
+    uVar3 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
     *(uint *)(pTVar9 + 0x2c) = uVar3 | uVar2 | uVar6 & 0x7ffff;
-    uVar1 = local_3c & 0x7f800;
+    uVar1 = stackTypeBits & 0x7f800;
     *(uint *)(pTVar9 + 0x2c) = uVar1 | uVar3 | uVar2 | uVar6 & 0x7ff;
-    uVar4 = (local_3c >> 10 & 1) << 10;
+    uVar4 = (stackTypeBits >> 10 & 1) << 10;
     *(uint *)(pTVar9 + 0x2c) = uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x3ff;
     puVar5 = PTR_vtable_a7b7c0cc;
     *(uint *)(pTVar9 + 0x2c) =
-         (local_3c >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
+         (stackTypeBits >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
     *(unsigned char **)(pTVar9 + 0x30) = intermTyped1;
     *(undefined **)pTVar9 = puVar5 + 8;
     *(unsigned char **)(pTVar9 + 0x34) = intermTyped2;
     *(unsigned char **)(pTVar9 + 0x38) = a0_00;
-    local_60 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     (**(code **)(*(int *)pTVar9 + 4))(pTVar9,param_5,a2,a3,iVar8,in_r8,pTVar9 + 8);
   }
   else {
@@ -4618,18 +4628,18 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
   code *pcVar8;
   int iVar9;
   unsigned char * pTVar10;
-  char in_RESERVE;
-  byte in_cr0;
-  undefined **local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  uint local_8c;
+  char reservation;
+  byte cr0Reg;
+  undefined **stackType;
+  undefined4 stackTypeArraySize;
+  undefined4 stackTypeStructure;
+  undefined4 stackTypeFieldName;
+  undefined4 stackTypeTypeName;
+  undefined4 stackTypeWord14;
+  undefined4 stackTypeStructureSize;
+  undefined4 stackTypeWord1c;
+  undefined4 stackTypeWord20;
+  uint stackTypeBits;
   int local_80;
   int local_70;
   int local_60;
@@ -4637,15 +4647,15 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
   
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
-  local_8c = local_8c & 0x1ff | 0x80800;
-  local_ac = 0;
-  local_a8 = 0;
-  local_a4 = 0;
-  local_a0 = 0;
-  local_9c = 0;
-  local_98 = 0;
-  local_94 = 0;
-  local_90 = 0;
+  stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
+  stackTypeArraySize = 0;
+  stackTypeStructure = 0;
+  stackTypeFieldName = 0;
+  stackTypeTypeName = 0;
+  stackTypeWord14 = 0;
+  stackTypeStructureSize = 0;
+  stackTypeWord1c = 0;
+  stackTypeWord20 = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
   a0[1] = 0;
   a0[3] = 0;
@@ -4664,7 +4674,7 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
   a0[0xb] = uVar2 & 0x3ff | 0x80800;
   puVar1 = PTR_vtable_a7b7c0d0;
   a0[0xb] = uVar2 & 0x1ff | 0x80800;
-  local_b0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[0xc] = 1;
   *a0 = (int)(puVar1 + 8);
   local_80 = GetGlobalPoolAllocator();
@@ -4680,12 +4690,12 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
   piVar3 = (int *)(iVar9 + 8);
   a0[0x13] = 0;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
       *piVar3 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   local_60 = GetGlobalPoolAllocator();
   a0[0x16] = iVar9 + 0xc;
   iVar9 = 0;
@@ -4700,19 +4710,19 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pcVar6 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
       *(undefined4 *)pcVar6 = *(undefined4 *)pTVar10;
-      local_8c = local_8c & 0x1ff | 0x4100800;
+      stackTypeBits = stackTypeBits & 0x1ff | 0x4100800;
       pTVar10 = pTVar10 + 4;
-      local_b0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      local_ac = 0;
-      local_a8 = 0;
-      local_a4 = 0;
-      local_a0 = 0;
-      local_9c = 0;
-      local_98 = 0;
-      local_94 = 0;
-      local_90 = 0;
-      local_50[0] = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar6,(unsigned char *)&local_b0,param_3);
-      local_b0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      stackTypeArraySize = 0;
+      stackTypeStructure = 0;
+      stackTypeFieldName = 0;
+      stackTypeTypeName = 0;
+      stackTypeWord14 = 0;
+      stackTypeStructureSize = 0;
+      stackTypeWord1c = 0;
+      stackTypeWord20 = 0;
+      local_50[0] = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar6,(unsigned char *)&stackType,param_3);
+      stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       puVar7 = *(undefined4 **)(this_00 + 8);
       if (puVar7 == *(undefined4 **)(this_00 + 0xc)) {
         std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux

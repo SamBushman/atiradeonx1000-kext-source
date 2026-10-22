@@ -383,14 +383,15 @@ int _CPPDebugLogMsg(str)
 int _CPPWarningToInfoLog(str)
   char *str;
 {
+  int oldRefCount;
   int atomicStore;
   uint uVar2;
-  int *piVar3;
+  int *refCountPtr;
   int iVar4;
   uint a1;
   void *this;
-  char in_RESERVE;
-  byte bVar5;
+  char reservation;
+  byte cr0Flags;
   char *local_70 [4];
   char acStack_60 [64];
   unsigned char aaStack_20 [16];
@@ -400,7 +401,7 @@ int _CPPWarningToInfoLog(str)
                     
   __ZN13TInfoSinkBase6appendEPKc(this,"WARNING: ");
   a1 = uVar2 & 0xffff;
-  bVar5 = (a1 == 0) << 1;
+  cr0Flags = (a1 == 0) << 1;
   iVar4 = (int)uVar2 >> 0x10;
   if (a1 == 0) {
     _sprintf(acStack_60,"%d:? ",iVar4);
@@ -411,16 +412,16 @@ int _CPPWarningToInfoLog(str)
   __ZNSsC1EPKcRKSaIcE(local_70,acStack_60,aaStack_20);
   local_70[0][*(int *)(local_70[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(this,local_70[0]);
-  piVar3 = (int *)(local_70[0] + -4);
+  refCountPtr = (int *)(local_70[0] + -4);
   do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = atomicStore;
-      bVar5 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Flags = 2;
     }
-  } while (!(bool)(bVar5 >> 1 & 1));
-  if (iVar4 < 1) {
+  } while (!(bool)(cr0Flags >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_70[0] + -0xc));
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
@@ -635,14 +636,16 @@ LAB_97bae84c:
 int _StoreStr(str)
   char *str;
 {
+  int *refCountPtr;
+  int oldRefCount;
   int atomicStore;
   int *piVar2;
   int iVar3;
   ulong length;
   unsigned char * paVar5;
   unsigned char * this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   undefined4 local_c0;
   int local_bc;
   undefined4 local_b0;
@@ -661,12 +664,12 @@ int _StoreStr(str)
   iVar3 = DAT_a7b7baa8;
   piVar2 = (int *)(DAT_a7b7baa8 + 8);
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   local_c0 = GetGlobalPoolAllocator();
   local_bc = iVar3 + 0xc;
   local_b0 = local_c0;
@@ -674,17 +677,17 @@ int _StoreStr(str)
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
             ((unsigned char *)&local_a0,str,(unsigned char *)local_90);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_c0,(unsigned char *)&local_a0);
-  piVar2 = (int *)(local_9c + -4);
+  refCountPtr = (int *)(local_9c + -4);
   local_80[0] = local_a0;
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(local_9c + -0xc),local_80);
   }
@@ -695,46 +698,46 @@ int _StoreStr(str)
   __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
             ((unsigned char *)&local_70,(unsigned char *)&local_60,&local_c0);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this,(unsigned char *)&local_70);
-  piVar2 = (int *)(local_6c + -4);
+  refCountPtr = (int *)(local_6c + -4);
   local_50[0] = local_70;
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(local_6c + -0xc),local_50);
   }
-  piVar2 = (int *)(local_5c + -4);
+  refCountPtr = (int *)(local_5c + -4);
   local_40[0] = local_60;
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(local_5c + -0xc),local_40);
   }
-  piVar2 = (int *)(local_bc + -4);
+  refCountPtr = (int *)(local_bc + -4);
   paVar5 = (unsigned char *)(local_bc + -0xc);
   local_30[0] = local_c0;
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     paVar5 = (unsigned char *)
              __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(paVar5,local_30);
   }
@@ -799,16 +802,16 @@ int _GetBehavior(str)
   int compareResult;
   byte bVar1;
   int atomicStore;
-  int *piVar3;
-  int iVar4;
+  int *refCountPtr;
+  int oldRefCount;
   undefined4 uVar5;
   ulong length;
   undefined4 extraout_r4;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   undefined4 local_80;
   int local_7c;
   undefined4 local_70;
@@ -847,45 +850,45 @@ int _GetBehavior(str)
           bVar1 = *DAT_a7b7baa4;
           *(byte *)(local_7c + *(int *)(local_7c + -0xc)) = bVar1;
           ((int (*)())_CPPShInfoLogMsg)(local_7c,extraout_r4,length,in_r6,in_r7,in_r8,(uint)bVar1);
-          piVar3 = (int *)(local_7c + -4);
+          refCountPtr = (int *)(local_7c + -4);
           local_40[0] = local_80;
           do {
-            iVar4 = *piVar3;
-            if (in_RESERVE != '\0') {
-              atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-              *piVar3 = atomicStore;
-              in_cr0 = 2;
+            oldRefCount = *refCountPtr;
+            if (reservation != '\0') {
+              atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+              *refCountPtr = atomicStore;
+              cr0Reg = 2;
             }
-          } while (!(bool)(in_cr0 >> 1 & 1));
-          if (iVar4 < 1) {
+          } while (!(bool)(cr0Reg >> 1 & 1));
+          if (oldRefCount < 1) {
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                       ((unsigned char *)(local_7c + -0xc),local_40);
           }
-          piVar3 = (int *)(local_6c + -4);
+          refCountPtr = (int *)(local_6c + -4);
           local_30[0] = local_70;
           do {
-            iVar4 = *piVar3;
-            if (in_RESERVE != '\0') {
-              atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-              *piVar3 = atomicStore;
-              in_cr0 = 2;
+            oldRefCount = *refCountPtr;
+            if (reservation != '\0') {
+              atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+              *refCountPtr = atomicStore;
+              cr0Reg = 2;
             }
-          } while (!(bool)(in_cr0 >> 1 & 1));
-          if (iVar4 < 1) {
+          } while (!(bool)(cr0Reg >> 1 & 1));
+          if (oldRefCount < 1) {
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                       ((unsigned char *)(local_6c + -0xc),local_30);
           }
-          piVar3 = (int *)(local_5c + -4);
+          refCountPtr = (int *)(local_5c + -4);
           local_20[0] = local_60;
           do {
-            iVar4 = *piVar3;
-            if (in_RESERVE != '\0') {
-              atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-              *piVar3 = atomicStore;
-              in_cr0 = 2;
+            oldRefCount = *refCountPtr;
+            if (reservation != '\0') {
+              atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+              *refCountPtr = atomicStore;
+              cr0Reg = 2;
             }
-          } while (!(bool)(in_cr0 >> 1 & 1));
-          if (iVar4 < 1) {
+          } while (!(bool)(cr0Reg >> 1 & 1));
+          if (oldRefCount < 1) {
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                       ((unsigned char *)(local_5c + -0xc),local_20);
           }
@@ -902,6 +905,8 @@ int _updateExtensionBehavior(param_1, str)
   char *param_1;
   undefined4 str;
 {
+  int *refCountPtr;
+  int oldRefCount;
   uint behavior2;
   int compareResult;
   byte bVar1;
@@ -922,8 +927,8 @@ int _updateExtensionBehavior(param_1, str)
   undefined4 in_r8;
   undefined4 in_r9;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_1f0 [4];
   undefined4 local_1e0;
   char *local_1dc;
@@ -961,12 +966,12 @@ int _updateExtensionBehavior(param_1, str)
   iVar7 = DAT_a7b7baa8;
   piVar5 = (int *)(DAT_a7b7baa8 + 8);
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar5 + 1,0,piVar5);
       *piVar5 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   local_1e0 = GetGlobalPoolAllocator();
   local_1dc = (char *)(iVar7 + 0xc);
   uVar10 = 4;
@@ -983,17 +988,17 @@ int _updateExtensionBehavior(param_1, str)
         std___Rb_tree_base_iterator___M_increment((unsigned char *)local_1f0);
       }
 LAB_97baf31c:
-      piVar5 = (int *)(local_1dc + -4);
+      refCountPtr = (int *)(local_1dc + -4);
       local_50[0] = local_1e0;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (0 < iVar7) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (0 < oldRefCount) {
         return;
       }
       puVar9 = local_50;
@@ -1001,16 +1006,16 @@ LAB_97baf31c:
     }
     ((int (*)())_CPPShInfoLogMsg)("extension \'all\' cannot have \'require\' or \'enable\' behavior",extraout_r4,
                      uVar10,in_r6,in_r7,in_r8,in_r9);
-    piVar5 = (int *)(local_1dc + -4);
+    refCountPtr = (int *)(local_1dc + -4);
     local_30[0] = local_1e0;
     do {
-      iVar7 = *piVar5;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-        *piVar5 = atomicStore;
-        in_cr0 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0Reg >> 1 & 1));
     puVar9 = local_30;
   }
   else {
@@ -1020,17 +1025,17 @@ LAB_97baf31c:
               (&local_190,param_1,(unsigned char *)local_180);
     std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find((unsigned char *)local_1a0,iVar7 + 0x30,&local_190);
     local_1f0[0] = local_1a0[0];
-    piVar5 = (int *)(local_18c + -4);
+    refCountPtr = (int *)(local_18c + -4);
     local_170[0] = local_190;
     do {
-      iVar7 = *piVar5;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-        *piVar5 = atomicStore;
-        in_cr0 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar7 < 1) {
+    } while (!(bool)(cr0Reg >> 1 & 1));
+    if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_18c + -0xc),local_170);
     }
@@ -1055,45 +1060,45 @@ LAB_97baf31c:
       bVar1 = *DAT_a7b7baa4;
       *(byte *)(local_14c + *(int *)(local_14c + -0xc)) = bVar1;
       ((int (*)())_CPPShInfoLogMsg)(local_14c,extraout_r4_00,length,in_r6,in_r7,in_r8,(uint)bVar1);
-      piVar5 = (int *)(local_14c + -4);
+      refCountPtr = (int *)(local_14c + -4);
       local_110[0] = local_150;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_14c + -0xc),local_110);
       }
-      piVar5 = (int *)(local_13c + -4);
+      refCountPtr = (int *)(local_13c + -4);
       local_100[0] = local_140;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_13c + -0xc),local_100);
       }
-      piVar5 = (int *)(local_12c + -4);
+      refCountPtr = (int *)(local_12c + -4);
       local_f0[0] = local_130;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_12c + -0xc),local_f0);
       }
@@ -1113,45 +1118,45 @@ LAB_97baf31c:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
                 ((unsigned char *)&local_150,"\' is not supported",length);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_1e0,(unsigned char *)&local_150);
-      piVar5 = (int *)(local_14c + -4);
+      refCountPtr = (int *)(local_14c + -4);
       local_c0[0] = local_150;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_14c + -0xc),local_c0);
       }
-      piVar5 = (int *)(local_13c + -4);
+      refCountPtr = (int *)(local_13c + -4);
       local_b0[0] = local_140;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_13c + -0xc),local_b0);
       }
-      piVar5 = (int *)(local_dc + -4);
+      refCountPtr = (int *)(local_dc + -4);
       local_a0[0] = local_e0;
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_dc + -0xc),local_a0);
       }
@@ -1162,7 +1167,7 @@ LAB_97baf31c:
                     
       __ZN13TInfoSinkBase6appendEPKc(this,"WARNING: ");
       a1 = uVar6 & 0xffff;
-      in_cr0 = (a1 == 0) << 1;
+      cr0Reg = (a1 == 0) << 1;
       iVar7 = (int)uVar6 >> 0x10;
       if (a1 == 0) {
         _sprintf(acStack_90,"%d:? ",iVar7);
@@ -1173,35 +1178,35 @@ LAB_97baf31c:
       __ZNSsC1EPKcRKSaIcE((unsigned char *)&local_150,acStack_90,(unsigned char *)&local_140);
       local_150[*(int *)(local_150 + -0xc)] = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(this,local_150);
-      piVar5 = (int *)(local_150 + -4);
+      refCountPtr = (int *)(local_150 + -4);
       do {
-        iVar7 = *piVar5;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = atomicStore;
-          in_cr0 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar7 < 1) {
+      } while (!(bool)(cr0Reg >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_150 + -0xc));
       }
       __ZN13TInfoSinkBase6appendEPKc(this,": ");
       __ZN13TInfoSinkBase6appendEPKc(this,pcVar4);
       __ZN13TInfoSinkBase6appendEPKc(this,"\n");
     }
-    piVar5 = (int *)(local_1dc + -4);
+    refCountPtr = (int *)(local_1dc + -4);
     local_40[0] = local_1e0;
     do {
-      iVar7 = *piVar5;
-      if (in_RESERVE != '\0') {
-        atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-        *piVar5 = atomicStore;
-        in_cr0 = 2;
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0Reg >> 1 & 1));
     puVar9 = local_40;
   }
-  if (0 < iVar7) {
+  if (0 < oldRefCount) {
     return;
   }
 code_r0x97baf34c:

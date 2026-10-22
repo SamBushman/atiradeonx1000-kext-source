@@ -160,27 +160,27 @@ int std____default_alloc_template_true_0___allocate(this)
   uint uVar1;
   int getenvResult;
   undefined4 *puVar3;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   undefined1 auStack_30 [28];
   
   if (_S_force_new == 0) {
     getenvResult = _getenv("GLIBCPP_FORCE_NEW");
     if (getenvResult == 0) {
       do {
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           _S_force_new = storeWordConditionalIndexed(_S_force_new + -1,0,0xa7b7c00c);
-          in_cr0 = 2;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
+      } while (!(bool)(cr0Reg >> 1 & 1));
     }
     else {
       do {
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           _S_force_new = storeWordConditionalIndexed(_S_force_new + 1,0,0xa7b7c00c);
-          in_cr0 = 2;
+          cr0Reg = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
+      } while (!(bool)(cr0Reg >> 1 & 1));
     }
   }
   if ((this < 0x81) && (_S_force_new < 1)) {
@@ -212,34 +212,34 @@ int std__allocator_char___allocate(this, param_2)
   uint uVar1;
   undefined4 *puVar2;
   int getenvResult;
-  char in_RESERVE;
-  byte bVar4;
+  char reservation;
+  byte cr0Flags;
   undefined1 auStack_30 [28];
   
-  bVar4 = (param_2 == (void *)0x0) << 1;
+  cr0Flags = (param_2 == (void *)0x0) << 1;
   puVar2 = (undefined4 *)0x0;
   if (param_2 != (void *)0x0) {
     if (__default_alloc_template_true_0____S_force_new == 0) {
       getenvResult = _getenv("GLIBCPP_FORCE_NEW");
       if (getenvResult == 0) {
         do {
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             __default_alloc_template_true_0____S_force_new =
                  storeWordConditionalIndexed
                            (__default_alloc_template_true_0____S_force_new + -1,0,0xa7b7c00c);
-            bVar4 = 2;
+            cr0Flags = 2;
           }
-        } while (!(bool)(bVar4 >> 1 & 1));
+        } while (!(bool)(cr0Flags >> 1 & 1));
       }
       else {
         do {
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             __default_alloc_template_true_0____S_force_new =
                  storeWordConditionalIndexed
                            (__default_alloc_template_true_0____S_force_new + 1,0,0xa7b7c00c);
-            bVar4 = 2;
+            cr0Flags = 2;
           }
-        } while (!(bool)(bVar4 >> 1 & 1));
+        } while (!(bool)(cr0Flags >> 1 & 1));
       }
     }
     if ((param_2 < (void *)0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
@@ -632,25 +632,25 @@ int __ZNSt11logic_errorD4Ev(this, param_2)
   uint param_2;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   int iVar4;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   undefined1 auStack_20 [20];
   
   iVar4 = *(int *)((int)this + 4);
   *(int *)this = DAT_a7b7c014 + 8;
-  piVar2 = (int *)(iVar4 + -4);
+  refCountPtr = (int *)(iVar4 + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_20);
   }
   __ZNSt9exceptionD2Ev(this);

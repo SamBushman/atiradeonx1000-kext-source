@@ -27,21 +27,21 @@ int std__string___M_check(this, param_2, param_3)
 }
 
 /* __ZNKSs7_M_foldEmm @ 0x97c13334 (100 bytes) */
-int __ZNKSs7_M_foldEmm(this, param_2, param_3, param_4)
+int __ZNKSs7_M_foldEmm(this, pos, n, param_4)
   ulong this;
-  ulong param_2;
-  int param_3;
+  ulong pos;
+  int n;
   uint param_4;
 {
   uint uVar1;
   int local_20 [4];
   
-  uVar1 = *(int *)(*(int *)param_2 + -0xc) - param_3;
+  uVar1 = *(int *)(*(int *)pos + -0xc) - n;
   if (uVar1 <= param_4) {
     param_4 = uVar1;
   }
-  __ZNKSs9_M_ibeginEv(local_20,param_2);
-  *(uint *)this = local_20[0] + param_3 + param_4;
+  __ZNKSs9_M_ibeginEv(local_20,pos);
+  *(uint *)this = local_20[0] + n + param_4;
   return this;
 }
 
@@ -55,12 +55,12 @@ int __ZNSs13_S_copy_charsEPcS_S_(this, str1, str2)
 }
 
 /* __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_ @ 0x97c133bc (36 bytes) */
-int __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_(this, str, param_3)
+int __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_(this, str, i1)
   char *this;
   int str;
-  int param_3;
+  int i1;
 {
-  return _memcpy(this,str,param_3 - str);
+  return _memcpy(this,str,i1 - str);
 }
 
 /* __ZNSs13_S_copy_charsEPcPKcS1_ @ 0x97c133e0 (36 bytes) */
@@ -73,12 +73,12 @@ int __ZNSs13_S_copy_charsEPcPKcS1_(this, str1, str2)
 }
 
 /* __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_ @ 0x97c13404 (36 bytes) */
-int __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_(this, str, param_3)
+int __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_(this, str, i1)
   char *this;
   int str;
-  int param_3;
+  int i1;
 {
-  return _memcpy(this,str,param_3 - str);
+  return _memcpy(this,str,i1 - str);
 }
 
 /* __ZNKSs4_Rep12_M_is_sharedEv @ 0x97c13428 (24 bytes) */
@@ -119,18 +119,18 @@ int __ZNSs4_Rep10_M_disposeERKSaIcE(this, in_r4)
   int atomicStore;
   unsigned char * paVar2;
   int iVar3;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   paVar2 = this + 8;
   do {
     iVar3 = *(int *)paVar2;
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,paVar2);
       *(int *)paVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   if (0 < iVar3) {
     return;
   }
@@ -146,65 +146,67 @@ int __ZNSs4_Rep15_M_set_sharableEv(this)
 }
 
 /* __ZNSs9_M_mutateEmmm @ 0x97c13484 (260 bytes) */
-int __ZNSs9_M_mutateEmmm(this, param_2, param_3, param_4)
+int __ZNSs9_M_mutateEmmm(this, pos, n, n2)
   void *this;
-  ulong param_2;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
+  ulong n2;
 {
+  int data;
+  int oldRefCount;
   int atomicStore;
-  uint uVar2;
-  int *piVar3;
+  uint repCapacity;
+  int *refCountPtr;
   int iVar4;
   uint uVar5;
   int iVar6;
   int iVar7;
   uint uVar8;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   unsigned char aaStack_40 [32];
   
   iVar4 = *(int *)this;
-  iVar6 = iVar4 + param_2 + param_3;
-  iVar7 = (*(int *)(iVar4 + -0xc) - param_2) - param_3;
-  uVar8 = (*(int *)(iVar4 + -0xc) + param_4) - param_3;
+  iVar6 = iVar4 + pos + n;
+  iVar7 = (*(int *)(iVar4 + -0xc) - pos) - n;
+  uVar8 = (*(int *)(iVar4 + -0xc) + n2) - n;
   if (*(int *)(iVar4 + -4) < 1) {
-    uVar2 = *(uint *)(iVar4 + -8);
-    if (uVar8 <= uVar2) {
-      if ((iVar7 != 0) && (param_3 != param_4)) {
-        _memmove(iVar4 + param_2 + param_4,iVar6,iVar7);
+    repCapacity = *(uint *)(iVar4 + -8);
+    if (uVar8 <= repCapacity) {
+      if ((iVar7 != 0) && (n != n2)) {
+        _memmove(iVar4 + pos + n2,iVar6,iVar7);
         iVar4 = *(int *)this;
       }
       goto LAB_97c135b0;
     }
   }
   else {
-    uVar2 = *(uint *)(iVar4 + -8);
+    repCapacity = *(uint *)(iVar4 + -8);
   }
   uVar5 = uVar8;
-  if (((uVar2 < uVar8) && (0xfe3 < uVar8)) && (uVar5 = uVar2 << 1, uVar2 << 1 < uVar8)) {
+  if (((repCapacity < uVar8) && (0xfe3 < uVar8)) && (uVar5 = repCapacity << 1, repCapacity << 1 < uVar8)) {
     uVar5 = uVar8;
   }
   iVar4 = __ZNSs4_Rep9_S_createEmRKSaIcE(uVar5,aaStack_40);
   iVar4 = iVar4 + 0xc;
-  if (param_2 != 0) {
-    _memcpy(iVar4,*(undefined4 *)this,param_2);
+  if (pos != 0) {
+    _memcpy(iVar4,*(undefined4 *)this,pos);
   }
   if (iVar7 != 0) {
-    _memcpy(iVar4 + param_2 + param_4,iVar6,iVar7);
+    _memcpy(iVar4 + pos + n2,iVar6,iVar7);
   }
-  iVar6 = *(int *)this;
-  piVar3 = (int *)(iVar6 + -4);
+  data = *(int *)this;
+  refCountPtr = (int *)(data + -4);
   do {
-    iVar7 = *piVar3;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar3);
-      *piVar3 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar7 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar6 + -0xc),(uint)aaStack_40);
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)aaStack_40);
   }
   *(int *)this = iVar4;
 LAB_97c135b0:
@@ -226,14 +228,14 @@ int __ZNSs4_Rep13_M_set_leakedEv(this)
 int std__string___M_leak_hard(this)
   unsigned char * this;
 {
-  int iVar1;
+  int data;
   
-  iVar1 = *(int *)this;
-  if (0 < *(int *)(iVar1 + -4)) {
+  data = *(int *)this;
+  if (0 < *(int *)(data + -4)) {
     ((int (*)())__ZNSs9_M_mutateEmmm)(this,0,0,0);
-    iVar1 = *(int *)this;
+    data = *(int *)this;
   }
-  *(undefined4 *)(iVar1 + -4) = 0xffffffff;
+  *(undefined4 *)(data + -4) = 0xffffffff;
   return;
 }
 
@@ -291,17 +293,17 @@ int __ZNSs4_Rep10_M_refcopyEv(this)
 {
   int atomicStore;
   int *piVar2;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   piVar2 = (int *)((int)this + 8);
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
       *piVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   return (int)this + 0xc;
 }
 
@@ -309,16 +311,16 @@ int __ZNSs4_Rep10_M_refcopyEv(this)
 int __ZNSsC4Ev(this)
   void *this;
 {
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   unsigned char aaStack_20 [28];
   
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,&DAT_a7b7bf90,aaStack_20);
 }
 
@@ -365,8 +367,8 @@ int __ZNSsC1ERKSs(this, text)
   int atomicStore;
   int *piVar2;
   char *pcVar3;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   unsigned char aaStack_50 [32];
   unsigned char aaStack_30 [28];
   
@@ -378,12 +380,12 @@ int __ZNSsC1ERKSs(this, text)
   else {
     piVar2 = (int *)(pcVar3 + -4);
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
         *piVar2 = atomicStore;
-        in_cr0 = 2;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0Reg >> 1 & 1));
   }
   ((int (*)())__ZNKSs13get_allocatorEv)();
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar3,aaStack_30);
@@ -396,8 +398,8 @@ int __ZNSs4_Rep7_M_grabERKSaIcES2_(this, allocator1)
 {
   int atomicStore;
   unsigned char * paVar2;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   
   if (*(int *)(this + 8) < 0) {
     paVar2 = (unsigned char *)__ZNSs4_Rep8_M_cloneERKSaIcEm(this,allocator1,0);
@@ -405,12 +407,12 @@ int __ZNSs4_Rep7_M_grabERKSaIcES2_(this, allocator1)
   }
   paVar2 = this + 8;
   do {
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*(int *)paVar2 + 1,0,paVar2);
       *(int *)paVar2 = atomicStore;
-      in_cr0 = 2;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0Reg >> 1 & 1));
   return this + 0xc;
 }
 
@@ -422,8 +424,8 @@ int __ZNSsC4ERKSs(this, text)
   int atomicStore;
   int *piVar2;
   char *pcVar3;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   unsigned char aaStack_50 [32];
   unsigned char aaStack_30 [28];
   
@@ -435,33 +437,33 @@ int __ZNSsC4ERKSs(this, text)
   else {
     piVar2 = (int *)(pcVar3 + -4);
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
         *piVar2 = atomicStore;
-        in_cr0 = 2;
+        cr0Reg = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0Reg >> 1 & 1));
   }
   ((int (*)())__ZNKSs13get_allocatorEv)();
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar3,aaStack_30);
 }
 
 /* __ZNSsC2ERKSsmm @ 0x97c13808 (4 bytes) */
-int __ZNSsC2ERKSsmm(this, text, param_3, param_4)
+int __ZNSsC2ERKSsmm(this, text, pos, n)
   void *this;
   unsigned char * text;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
 {
-  return ((int (*)())__ZNSsC4ERKSsmm)(this,text,param_3,param_4);
+  return ((int (*)())__ZNSsC4ERKSsmm)(this,text,pos,n);
 }
 
 /* __ZNSsC1ERKSsmm @ 0x97c1380c (4 bytes) */
-int __ZNSsC1ERKSsmm(this, text, param_3, param_4)
+int __ZNSsC1ERKSsmm(this, text, pos, n)
   void *this;
   unsigned char * text;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
 {
   char *pcVar1;
   undefined4 uStack_50;
@@ -469,19 +471,19 @@ int __ZNSsC1ERKSsmm(this, text, param_3, param_4)
   unsigned char aaStack_40 [16];
   unsigned char aaStack_30 [24];
   
-  ((int (*)())std__string___M_check)((ulong)&uStack_50,text,param_3);
-  ((int (*)())__ZNKSs7_M_foldEmm)((ulong)auStack_4c,(ulong)text,param_3,param_4);
+  ((int (*)())std__string___M_check)((ulong)&uStack_50,text,pos);
+  ((int (*)())__ZNKSs7_M_foldEmm)((ulong)auStack_4c,(ulong)text,pos,n);
   pcVar1 = __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag
                      (uStack_50,auStack_4c[0],aaStack_40,0);
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar1,aaStack_30);
 }
 
 /* __ZNSsC4ERKSsmm @ 0x97c13810 (120 bytes) */
-int __ZNSsC4ERKSsmm(this, text, param_3, param_4)
+int __ZNSsC4ERKSsmm(this, text, pos, n)
   void *this;
   unsigned char * text;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
 {
   char *pcVar1;
   undefined4 local_50;
@@ -489,85 +491,85 @@ int __ZNSsC4ERKSsmm(this, text, param_3, param_4)
   unsigned char aaStack_40 [16];
   unsigned char aaStack_30 [24];
   
-  ((int (*)())std__string___M_check)((ulong)&local_50,text,param_3);
-  ((int (*)())__ZNKSs7_M_foldEmm)((ulong)local_4c,(ulong)text,param_3,param_4);
+  ((int (*)())std__string___M_check)((ulong)&local_50,text,pos);
+  ((int (*)())__ZNKSs7_M_foldEmm)((ulong)local_4c,(ulong)text,pos,n);
   pcVar1 = __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag
                      (local_50,local_4c[0],aaStack_40,0);
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar1,aaStack_30);
 }
 
 /* __ZNSsC2ERKSsmmRKSaIcE @ 0x97c1388c (4 bytes) */
-int __ZNSsC2ERKSsmmRKSaIcE(this, text, param_3, param_4, allocator)
+int __ZNSsC2ERKSsmmRKSaIcE(this, text, pos, n, allocator)
   void *this;
   unsigned char * text;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
   unsigned char * allocator;
 {
-  return ((int (*)())__ZNSsC4ERKSsmmRKSaIcE)(this,text,param_3,param_4,allocator);
+  return ((int (*)())__ZNSsC4ERKSsmmRKSaIcE)(this,text,pos,n,allocator);
 }
 
 /* __ZNSsC1ERKSsmmRKSaIcE @ 0x97c13890 (4 bytes) */
-int __ZNSsC1ERKSsmmRKSaIcE(this, text, param_3, param_4, allocator)
+int __ZNSsC1ERKSsmmRKSaIcE(this, text, pos, n, allocator)
   void *this;
   unsigned char * text;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
   unsigned char * allocator;
 {
-  return ((int (*)())__ZNSsC4ERKSsmmRKSaIcE)(this,text,param_3,param_4,allocator);
+  return ((int (*)())__ZNSsC4ERKSsmmRKSaIcE)(this,text,pos,n,allocator);
 }
 
 /* __ZNSsC4ERKSsmmRKSaIcE @ 0x97c13894 (124 bytes) */
-int __ZNSsC4ERKSsmmRKSaIcE(this, text, param_3, param_4, allocator)
+int __ZNSsC4ERKSsmmRKSaIcE(this, text, pos, n, allocator)
   void *this;
   unsigned char * text;
-  ulong param_3;
-  ulong param_4;
+  ulong pos;
+  ulong n;
   unsigned char * allocator;
 {
   char *pcVar1;
   undefined4 local_30;
   undefined4 local_2c [4];
   
-  ((int (*)())std__string___M_check)((ulong)&local_30,text,param_3);
-  ((int (*)())__ZNKSs7_M_foldEmm)((ulong)local_2c,(ulong)text,param_3,param_4);
+  ((int (*)())std__string___M_check)((ulong)&local_30,text,pos);
+  ((int (*)())__ZNKSs7_M_foldEmm)((ulong)local_2c,(ulong)text,pos,n);
   pcVar1 = __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag
                      (local_30,local_2c[0],allocator,0);
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar1,allocator);
 }
 
 /* __ZNSsC2EPKcmRKSaIcE @ 0x97c13910 (4 bytes) */
-int __ZNSsC2EPKcmRKSaIcE(this, str, param_3, allocator)
+int __ZNSsC2EPKcmRKSaIcE(this, str, pos, allocator)
   void *this;
   char *str;
-  ulong param_3;
+  ulong pos;
   unsigned char * allocator;
 {
-  return ((int (*)())__ZNSsC4EPKcmRKSaIcE)(this,str,param_3,allocator);
+  return ((int (*)())__ZNSsC4EPKcmRKSaIcE)(this,str,pos,allocator);
 }
 
 /* __ZNSsC1EPKcmRKSaIcE @ 0x97c13914 (4 bytes) */
-int __ZNSsC1EPKcmRKSaIcE(this, str, param_3, allocator)
+int __ZNSsC1EPKcmRKSaIcE(this, str, pos, allocator)
   void *this;
   char *str;
-  ulong param_3;
+  ulong pos;
   unsigned char * allocator;
 {
-  return ((int (*)())__ZNSsC4EPKcmRKSaIcE)(this,str,param_3,allocator);
+  return ((int (*)())__ZNSsC4EPKcmRKSaIcE)(this,str,pos,allocator);
 }
 
 /* __ZNSsC4EPKcmRKSaIcE @ 0x97c13918 (80 bytes) */
-int __ZNSsC4EPKcmRKSaIcE(this, str, param_3, allocator)
+int __ZNSsC4EPKcmRKSaIcE(this, str, pos, allocator)
   void *this;
   char *str;
-  ulong param_3;
+  ulong pos;
   unsigned char * allocator;
 {
   char *pcVar1;
   
   pcVar1 = __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
-                     (str,str + param_3,allocator,0);
+                     (str,str + pos,allocator,0);
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar1,allocator);
 }
 
@@ -635,36 +637,36 @@ int __ZNSsC4EPKcRKSaIcE(this, str, allocator)
 }
 
 /* __ZNSsC2EmcRKSaIcE @ 0x97c139d8 (4 bytes) */
-int __ZNSsC2EmcRKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC2EmcRKSaIcE(this, pos, c, allocator)
   void *this;
-  ulong param_2;
-  int param_3;
+  ulong pos;
+  int c;
   unsigned char * allocator;
 {
-  return ((int (*)())__ZNSsC4EmcRKSaIcE)(this,param_2,param_3,allocator);
+  return ((int (*)())__ZNSsC4EmcRKSaIcE)(this,pos,c,allocator);
 }
 
 /* __ZNSsC1EmcRKSaIcE @ 0x97c139dc (4 bytes) */
-int __ZNSsC1EmcRKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC1EmcRKSaIcE(this, pos, c, allocator)
   void *this;
-  ulong param_2;
-  int param_3;
+  ulong pos;
+  int c;
   unsigned char * allocator;
 {
-  return ((int (*)())__ZNSsC4EmcRKSaIcE)(this,param_2,param_3,allocator);
+  return ((int (*)())__ZNSsC4EmcRKSaIcE)(this,pos,c,allocator);
 }
 
 /* __ZNSsC4EmcRKSaIcE @ 0x97c139e0 (76 bytes) */
-int __ZNSsC4EmcRKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC4EmcRKSaIcE(this, pos, c, allocator)
   void *this;
-  ulong param_2;
-  int param_3;
+  ulong pos;
+  int c;
   unsigned char * allocator;
 {
   char *pcVar1;
   undefined3 in_register_00000014;
   
-  pcVar1 = (char *)std__string___S_construct(param_2,CONCAT31(in_register_00000014,param_3),allocator)
+  pcVar1 = (char *)std__string___S_construct(pos,CONCAT31(in_register_00000014,c),allocator)
   ;
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,pcVar1,allocator);
 }
@@ -688,26 +690,26 @@ int __ZNSsD4Ev(this)
   void *this;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  char in_RESERVE;
-  byte in_cr0;
+  int *refCountPtr;
+  int oldRefCount;
+  int data;
+  char reservation;
+  byte cr0Reg;
   undefined1 auStack_20 [20];
   
-  iVar4 = *(int *)this;
+  data = *(int *)this;
   ((int (*)())__ZNKSs13get_allocatorEv)();
-  piVar2 = (int *)(iVar4 + -4);
+  refCountPtr = (int *)(data + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),(uint)auStack_20);
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)auStack_20);
   }
   return;
 }
@@ -727,39 +729,39 @@ int __ZNKSs8max_sizeEv()
 }
 
 /* __ZNSs6assignEPKcm @ 0x97c13aa8 (252 bytes) */
-int __ZNSs6assignEPKcm(this, str, param_3)
+int __ZNSs6assignEPKcm(this, str, pos)
   void *this;
   char *str;
-  ulong param_3;
+  ulong pos;
 {
-  char *pcVar1;
+  char *data;
   unsigned char * psVar2;
   undefined4 local_30;
   undefined4 local_2c [6];
   
-  if (0x3ffffffc < param_3) {
+  if (0x3ffffffc < pos) {
     std____throw_length_error("basic_string::assign");
   }
-  pcVar1 = *(char **)this;
-  if (((0 < *(int *)(pcVar1 + -4)) || (str < pcVar1)) ||
-     (pcVar1 + *(int *)(pcVar1 + -0xc) < str)) {
+  data = *(char **)this;
+  if (((0 < *(int *)(data + -4)) || (str < data)) ||
+     (data + *(int *)(data + -0xc) < str)) {
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs7_M_iendEv(local_2c,this);
     psVar2 = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                       (this,local_30,local_2c[0],str,str + param_3);
+                       (this,local_30,local_2c[0],str,str + pos);
     return psVar2;
   }
-  if ((uint)((int)str - (int)pcVar1) < param_3) {
-    if (str == pcVar1) goto LAB_97c13b7c;
-    _memmove(pcVar1,str,param_3);
+  if ((uint)((int)str - (int)data) < pos) {
+    if (str == data) goto LAB_97c13b7c;
+    _memmove(data,str,pos);
   }
   else {
-    _memcpy(pcVar1,str,param_3);
+    _memcpy(data,str,pos);
   }
-  pcVar1 = *(char **)this;
+  data = *(char **)this;
 LAB_97c13b7c:
-  *(ulong *)(pcVar1 + -0xc) = param_3;
-  *(undefined1 *)(*(int *)this + param_3) = 0;
+  *(ulong *)(data + -0xc) = pos;
+  *(undefined1 *)(*(int *)this + pos) = 0;
   return this;
 }
 
@@ -769,7 +771,7 @@ int __ZNSs6assignEPKc(this, str)
   char *str;
 {
   uint length;
-  char *pcVar2;
+  char *data;
   unsigned char * psVar3;
   undefined4 local_30;
   undefined4 local_2c [6];
@@ -778,25 +780,25 @@ int __ZNSs6assignEPKc(this, str)
   if (0x3ffffffc < length) {
     std____throw_length_error("basic_string::assign");
   }
-  pcVar2 = *(char **)this;
-  if (((0 < *(int *)(pcVar2 + -4)) || (str < pcVar2)) ||
-     (pcVar2 + *(int *)(pcVar2 + -0xc) < str)) {
+  data = *(char **)this;
+  if (((0 < *(int *)(data + -4)) || (str < data)) ||
+     (data + *(int *)(data + -0xc) < str)) {
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs7_M_iendEv(local_2c,this);
     psVar3 = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
                        (this,local_30,local_2c[0],str,str + length);
     return psVar3;
   }
-  if ((uint)((int)str - (int)pcVar2) < length) {
-    if (str == pcVar2) goto LAB_97c13c80;
-    _memmove(pcVar2,str,length);
+  if ((uint)((int)str - (int)data) < length) {
+    if (str == data) goto LAB_97c13c80;
+    _memmove(data,str,length);
   }
   else {
-    _memcpy(pcVar2,str,length);
+    _memcpy(data,str,length);
   }
-  pcVar2 = *(char **)this;
+  data = *(char **)this;
 LAB_97c13c80:
-  *(uint *)(pcVar2 + -0xc) = length;
+  *(uint *)(data + -0xc) = length;
   *(undefined1 *)(*(int *)this + length) = 0;
   return this;
 }
@@ -807,7 +809,7 @@ int __ZNSsaSEPKc(this, str)
   char *str;
 {
   uint length;
-  char *pcVar2;
+  char *data;
   unsigned char * psVar3;
   undefined4 local_30;
   undefined4 local_2c [6];
@@ -816,34 +818,34 @@ int __ZNSsaSEPKc(this, str)
   if (0x3ffffffc < length) {
     std____throw_length_error("basic_string::assign");
   }
-  pcVar2 = *(char **)this;
-  if (((0 < *(int *)(pcVar2 + -4)) || (str < pcVar2)) ||
-     (pcVar2 + *(int *)(pcVar2 + -0xc) < str)) {
+  data = *(char **)this;
+  if (((0 < *(int *)(data + -4)) || (str < data)) ||
+     (data + *(int *)(data + -0xc) < str)) {
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs7_M_iendEv(local_2c,this);
     psVar3 = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
                        (this,local_30,local_2c[0],str,str + length);
     return psVar3;
   }
-  if ((uint)((int)str - (int)pcVar2) < length) {
-    if (str == pcVar2) goto LAB_97c13d84;
-    _memmove(pcVar2,str,length);
+  if ((uint)((int)str - (int)data) < length) {
+    if (str == data) goto LAB_97c13d84;
+    _memmove(data,str,length);
   }
   else {
-    _memcpy(pcVar2,str,length);
+    _memcpy(data,str,length);
   }
-  pcVar2 = *(char **)this;
+  data = *(char **)this;
 LAB_97c13d84:
-  *(uint *)(pcVar2 + -0xc) = length;
+  *(uint *)(data + -0xc) = length;
   *(undefined1 *)(*(int *)this + length) = 0;
   return this;
 }
 
 /* __ZNSs6assignEmc @ 0x97c13dac (100 bytes) */
-int __ZNSs6assignEmc(this, param_2, param_3)
+int __ZNSs6assignEmc(this, pos, c)
   void *this;
-  ulong param_2;
-  undefined4 param_3;
+  ulong pos;
+  undefined4 c;
 {
   undefined4 local_30;
   undefined4 local_2c [5];
@@ -851,7 +853,7 @@ int __ZNSs6assignEmc(this, param_2, param_3)
   __ZNKSs9_M_ibeginEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
   return __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc
-            (this,local_30,local_2c[0],param_2,param_3);
+            (this,local_30,local_2c[0],pos,c);
 }
 
 /* __ZNSsaSEc @ 0x97c13e10 (96 bytes) */

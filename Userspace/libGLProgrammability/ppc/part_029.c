@@ -1,22 +1,22 @@
 #include "decls.h"
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc @ 0x97c33dfc (108 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(this, param_2, param_3)
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(this, pos, c)
   void *this;
-  ulong param_2;
-  undefined4 param_3;
+  ulong pos;
+  undefined4 c;
 {
   ulong uVar1;
   int iVar2;
   
   iVar2 = *(int *)((int)this + 4);
-  uVar1 = param_2 + *(int *)(iVar2 + -0xc);
+  uVar1 = pos + *(int *)(iVar2 + -0xc);
   if (*(uint *)(iVar2 + -8) < uVar1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm(this,uVar1);
     iVar2 = *(int *)((int)this + 4);
   }
   iVar2 = iVar2 + *(int *)(iVar2 + -0xc);
-  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc)(this,iVar2,iVar2,param_2,param_3);
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc)(this,iVar2,iVar2,pos,c);
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase @ 0x97c33e68 (128 bytes) */
@@ -25,30 +25,30 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
 
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   int iVar4;
-  char in_RESERVE;
-  byte bVar5;
+  char reservation;
+  byte cr0Flags;
   undefined4 local_20 [4];
   
-  bVar5 = (param_2 == (unsigned char *)0x0) << 1;
+  cr0Flags = (param_2 == (unsigned char *)0x0) << 1;
   if (param_2 != (unsigned char *)0x0) {
     do {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase)(this,*(unsigned char **)(param_2 + 0xc));
       local_20[0] = *(undefined4 *)(param_2 + 0x10);
       iVar4 = *(int *)(param_2 + 0x14);
-      piVar2 = (int *)(iVar4 + -4);
+      refCountPtr = (int *)(iVar4 + -4);
       param_2 = *(unsigned char **)(param_2 + 8);
       do {
-        iVar3 = *piVar2;
-        if (in_RESERVE != '\0') {
-          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = atomicStore;
-          bVar5 = 2;
+        oldRefCount = *refCountPtr;
+        if (reservation != '\0') {
+          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+          *refCountPtr = atomicStore;
+          cr0Flags = 2;
         }
-      } while (!(bool)(bVar5 >> 1 & 1));
-      if (iVar3 < 1) {
+      } while (!(bool)(cr0Flags >> 1 & 1));
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(iVar4 + -0xc),local_20);
       }
@@ -63,6 +63,7 @@ int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, para
   undefined4 *param_2;
   undefined4 *param_3;
 {
+  undefined4 *finish;
   int allocation;
   int iVar1;
   int iVar2;
@@ -74,10 +75,10 @@ int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, para
   undefined4 *puVar8;
   undefined4 *local_30 [5];
   
-  puVar6 = *(undefined4 **)(this + 8);
-  if (puVar6 == *(undefined4 **)(this + 0xc)) {
+  finish = *(undefined4 **)(this + 8);
+  if (finish == *(undefined4 **)(this + 0xc)) {
     iVar3 = 1;
-    iVar1 = (int)puVar6 - *(int *)(this + 4) >> 3;
+    iVar1 = (int)finish - *(int *)(this + 4) >> 3;
     if (iVar1 != 0) {
       iVar3 = iVar1 << 1;
     }
@@ -97,9 +98,9 @@ int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, para
   }
   else {
     puVar8 = (undefined4 *)0x0;
-    if (puVar6 != (undefined4 *)0x0) {
-      puVar6[1] = puVar6[-1];
-      *puVar6 = puVar6[-2];
+    if (finish != (undefined4 *)0x0) {
+      finish[1] = finish[-1];
+      *finish = finish[-2];
       puVar8 = *(undefined4 **)(this + 8);
     }
     *(undefined4 **)(this + 8) = puVar8 + 2;
@@ -488,6 +489,7 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
   undefined4 *param_2;
   undefined4 *typeLine;
 {
+  undefined4 *finish;
   int allocation;
   int iVar1;
   int iVar2;
@@ -499,10 +501,10 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
   undefined4 *puVar8;
   undefined4 *local_30 [5];
   
-  puVar6 = *(undefined4 **)(this + 8);
-  if (puVar6 == *(undefined4 **)(this + 0xc)) {
+  finish = *(undefined4 **)(this + 8);
+  if (finish == *(undefined4 **)(this + 0xc)) {
     iVar3 = 1;
-    iVar1 = (int)puVar6 - *(int *)(this + 4) >> 3;
+    iVar1 = (int)finish - *(int *)(this + 4) >> 3;
     if (iVar1 != 0) {
       iVar3 = iVar1 << 1;
     }
@@ -522,9 +524,9 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
   }
   else {
     puVar8 = (undefined4 *)0x0;
-    if (puVar6 != (undefined4 *)0x0) {
-      puVar6[1] = puVar6[-1];
-      *puVar6 = puVar6[-2];
+    if (finish != (undefined4 *)0x0) {
+      finish[1] = finish[-1];
+      *finish = finish[-2];
       puVar8 = *(undefined4 **)(this + 8);
     }
     *(undefined4 **)(this + 8) = puVar8 + 2;
@@ -595,19 +597,20 @@ int std__vector_int_pool_allocator_int_____M_insert_aux(this, param_2, param_3)
   undefined4 *param_2;
   undefined4 *param_3;
 {
+  int finish2;
   uint uVar1;
   int iVar2;
-  undefined4 *puVar3;
+  undefined4 *finish;
   int iVar4;
   void *allocation;
   void *pvVar6;
   undefined4 uVar7;
   size_t sVar8;
   
-  puVar3 = *(undefined4 **)(this + 8);
-  if (puVar3 == *(undefined4 **)(this + 0xc)) {
+  finish = *(undefined4 **)(this + 8);
+  if (finish == *(undefined4 **)(this + 0xc)) {
     iVar4 = 1;
-    iVar2 = (int)puVar3 - *(int *)(this + 4) >> 2;
+    iVar2 = (int)finish - *(int *)(this + 4) >> 2;
     if (iVar2 != 0) {
       iVar4 = iVar2 << 1;
     }
@@ -617,17 +620,17 @@ int std__vector_int_pool_allocator_int_____M_insert_aux(this, param_2, param_3)
     if ((int)allocation + sVar8 != 0) {
       *(undefined4 *)((int)allocation + sVar8) = *param_3;
     }
-    iVar2 = *(int *)(this + 8);
+    finish2 = *(int *)(this + 8);
     pvVar6 = (void *)((int)allocation + sVar8 + 4);
-    _memmove(pvVar6,param_2,iVar2 - (int)param_2);
+    _memmove(pvVar6,param_2,finish2 - (int)param_2);
     *(void **)(this + 0xc) = (void *)((int)allocation + iVar4 * 4);
-    *(int *)(this + 8) = (int)pvVar6 + (iVar2 - (int)param_2);
+    *(int *)(this + 8) = (int)pvVar6 + (finish2 - (int)param_2);
     *(void **)(this + 4) = allocation;
   }
   else {
     iVar4 = 0;
-    if (puVar3 != (undefined4 *)0x0) {
-      *puVar3 = puVar3[-1];
+    if (finish != (undefined4 *)0x0) {
+      *finish = finish[-1];
       iVar4 = *(int *)(this + 8);
     }
     *(int *)(this + 8) = iVar4 + 4;

@@ -118,20 +118,20 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
   undefined1 local_240 [8];
   undefined1 local_238 [40];
   undefined1 auStack_210 [48];
-  uint local_1e0;
-  uint local_1dc;
-  uint local_1d8;
-  undefined4 local_1d4;
-  uint local_1d0;
-  undefined4 local_1cc;
-  undefined4 local_1c8;
-  undefined4 local_1c4;
-  undefined4 local_1c0;
-  undefined4 local_1bc;
-  undefined4 local_1b8;
-  undefined4 local_1b4;
-  undefined4 local_1b0;
-  undefined4 local_1ac;
+  uint op1Header;
+  uint op1Flags;
+  uint op1Dest0;
+  undefined4 op1Dest1;
+  uint op1Src0A;
+  undefined4 op1Src0B;
+  undefined4 op1Src1A;
+  undefined4 op1Src1B;
+  undefined4 op1Src2A;
+  undefined4 op1Src2B;
+  undefined4 op1AuxA;
+  undefined4 op1AuxB;
+  undefined4 op1Line;
+  undefined4 op1Word13;
   uint local_1a0;
   uint local_19c;
   undefined4 local_198;
@@ -144,36 +144,36 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
   uint local_17c;
   undefined4 local_178;
   undefined4 local_174;
-  undefined4 local_170;
-  uint local_16c;
-  uint local_168;
-  undefined4 local_164;
-  uint local_160;
-  undefined4 local_15c;
+  undefined4 op2Header;
+  uint op2Flags;
+  uint op2Dest0;
+  undefined4 op2Dest1;
+  uint op2Src0A;
+  undefined4 op2Src0B;
   undefined2 uStack_15a;
-  undefined4 local_158;
-  undefined4 local_154;
-  undefined4 local_150;
-  undefined4 local_14c;
-  undefined4 local_148;
-  undefined4 local_144;
-  undefined4 local_140;
-  undefined4 local_13c;
-  undefined4 local_130;
-  uint local_12c;
-  uint local_128;
-  uint local_124;
-  uint local_120;
-  undefined4 local_11c;
+  undefined4 op2Src1A;
+  undefined4 op2Src1B;
+  undefined4 op2Src2A;
+  undefined4 op2Src2B;
+  undefined4 op2AuxA;
+  undefined4 op2AuxB;
+  undefined4 op2Line;
+  undefined4 op2Word13;
+  undefined4 op3Header;
+  uint op3Flags;
+  uint op3Dest0;
+  uint op3Dest1;
+  uint op3Src0A;
+  undefined4 op3Src0B;
   undefined2 uStack_11a;
-  undefined4 local_118;
-  undefined4 local_114;
-  undefined4 local_110;
-  undefined4 local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  undefined4 local_100;
-  undefined4 local_fc;
+  undefined4 op3Src1A;
+  undefined4 op3Src1B;
+  undefined4 op3Src2A;
+  undefined4 op3Src2B;
+  undefined4 op3AuxA;
+  undefined4 op3AuxB;
+  undefined4 op3Line;
+  undefined4 op3Word13;
   undefined1 *local_f0;
   int local_ec;
   int local_e8;
@@ -203,22 +203,22 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
   loopByteOffset = 0;
   endifChunkHome = endifChunk;
   do {
-    local_1b0 = *(undefined4 *)(ifChunk + 0x3c);
-    local_1d4 = 0;
+    op1Line = *(undefined4 *)(ifChunk + 0x3c);
+    op1Dest1 = 0;
     uVar6 = *(uint *)(ifChunk + 0x10) >> 0x12 & 3;
-    local_1d0 = 0;
-    local_1cc = 0;
+    op1Src0A = 0;
+    op1Src0B = 0;
     uVar15 = *(uint *)(ifChunk + 0x10) >> 0x17 & 7;
-    local_1c8 = 0;
-    local_1c4 = 0;
-    local_1c0 = 0;
-    local_1bc = 0;
-    local_1b8 = 0;
-    local_1b4 = 0;
-    local_1ac = 0;
+    op1Src1A = 0;
+    op1Src1B = 0;
+    op1Src2A = 0;
+    op1Src2B = 0;
+    op1AuxA = 0;
+    op1AuxB = 0;
+    op1Word13 = 0;
     uVar7 = uVar19 << 10;
-    local_1dc = uVar15 << 0x17 | uVar6 << 0x12;
-    local_1e0 = (*(uint *)((int)local_b0 + loopByteOffset + -8) & 0xff) << 0x12 | 0x20000000;
+    op1Flags = uVar15 << 0x17 | uVar6 << 0x12;
+    op1Header = (*(uint *)((int)local_b0 + loopByteOffset + -8) & 0xff) << 0x12 | 0x20000000;
     if (uVar19 == 1) {
       uVar7 = 0x4400;
     }
@@ -233,22 +233,22 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
     else if (uVar19 == 0) {
       uVar7 = 0x2000;
     }
-    local_1d8 = uVar7 | 0x20000;
+    op1Dest0 = uVar7 | 0x20000;
     addTempRegisterResult = _AddTempRegister(stream,uVar6,uVar15,(uVar7 & 0xc00) >> 10);
-    local_1d0 = (*(uint *)(ifChunk + 0x1c) >> 0x1b & 1) << 0x1b |
+    op1Src0A = (*(uint *)(ifChunk + 0x1c) >> 0x1b & 1) << 0x1b |
                 (*(uint *)(ifChunk + 0x1c) >> 0x17 & 7) << 0x17 |
-                uVar19 << 0x15 | local_1d0 & 0xf41fcfff;
-    local_1d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_1d4) + 0)),addTempRegisterResult);
-    local_1cc = CONCAT22((*(unsigned short *)((unsigned char *)&(local_1cc) + 0)),*(undefined2 *)(ifChunk + 0x22));
-    _PPStreamInsertOperationBeforeChunk(stream,&local_1e0,0,0,ifChunk);
+                uVar19 << 0x15 | op1Src0A & 0xf41fcfff;
+    op1Dest1 = CONCAT22((*(unsigned short *)((unsigned char *)&(op1Dest1) + 0)),addTempRegisterResult);
+    op1Src0B = CONCAT22((*(unsigned short *)((unsigned char *)&(op1Src0B) + 0)),*(undefined2 *)(ifChunk + 0x22));
+    _PPStreamInsertOperationBeforeChunk(stream,&op1Header,0,0,ifChunk);
     loopIndex = loopIndex + 1;
-    *(uint *)(*(int *)((int)local_c0 + loopByteOffset) + 4) = local_1d8 >> 0x11 & 7;
-    **(uint **)((int)local_c0 + loopByteOffset) = local_1d4 & 0xffff;
-    *(uint *)(*(int *)((int)local_c0 + loopByteOffset) + 8) = local_1dc >> 0x12 & 3;
-    *(uint *)(*(int *)((int)local_c0 + loopByteOffset) + 0xc) = local_1dc >> 0x17 & 7;
+    *(uint *)(*(int *)((int)local_c0 + loopByteOffset) + 4) = op1Dest0 >> 0x11 & 7;
+    **(uint **)((int)local_c0 + loopByteOffset) = op1Dest1 & 0xffff;
+    *(uint *)(*(int *)((int)local_c0 + loopByteOffset) + 8) = op1Flags >> 0x12 & 3;
+    *(uint *)(*(int *)((int)local_c0 + loopByteOffset) + 0xc) = op1Flags >> 0x17 & 7;
     piVar12 = (int *)((int)local_c0 + loopByteOffset);
     loopByteOffset = loopByteOffset + 4;
-    *(uint *)(*piVar12 + 0x10) = local_1d8 >> 10 & 3;
+    *(uint *)(*piVar12 + 0x10) = op1Dest0 >> 10 & 3;
   } while (loopIndex < 2);
   uVar17 = 0;
   uVar21 = 0;
@@ -341,22 +341,22 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
           *(undefined2 *)(iVar9 + 0x1a) = *(undefined2 *)((int)puVar11 + 2);
         }
         if ((*(uint *)(iVar9 + 0xc) >> 0x12 & 0xff) == 0x4f) {
-          local_160 = 0;
-          local_15c = 0;
-          local_158 = 0;
-          local_154 = 0;
-          local_150 = 0;
-          local_14c = 0;
-          local_148 = 0;
-          local_144 = 0;
-          local_140 = *(undefined4 *)(iVar9 + 0x3c);
-          local_164 = 0;
-          local_170 = 0x40900000;
-          local_13c = 0;
+          op2Src0A = 0;
+          op2Src0B = 0;
+          op2Src1A = 0;
+          op2Src1B = 0;
+          op2Src2A = 0;
+          op2Src2B = 0;
+          op2AuxA = 0;
+          op2AuxB = 0;
+          op2Line = *(undefined4 *)(iVar9 + 0x3c);
+          op2Dest1 = 0;
+          op2Header = 0x40900000;
+          op2Word13 = 0;
           uVar6 = *(uint *)(iVar9 + 0x10) >> 0x12 & 3;
           uVar7 = uVar19 << 10;
           uVar15 = *(uint *)(iVar9 + 0x10) >> 0x17 & 7;
-          local_16c = uVar15 << 0x17 | uVar6 << 0x12;
+          op2Flags = uVar15 << 0x17 | uVar6 << 0x12;
           if (uVar19 == 1) {
             uVar7 = 0x4400;
           }
@@ -371,13 +371,13 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
           else if (uVar19 == 0) {
             uVar7 = 0x2000;
           }
-          local_168 = uVar7 | 0x20000;
+          op2Dest0 = uVar7 | 0x20000;
           addTempRegisterResult = _AddTempRegister(stream,uVar6,uVar15,(uVar7 & 0xc00) >> 10);
           puVar5 = local_54;
           puVar4 = local_58;
           puVar3 = local_60;
           piVar12 = local_64;
-          local_164 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_164) + 0)),addTempRegisterResult);
+          op2Dest1 = CONCAT22((*(unsigned short *)((unsigned char *)&(op2Dest1) + 0)),addTempRegisterResult);
           iVar10 = 0;
           local_b0[8] = *(uint *)(iVar9 + 0x1c) >> 0x15 & 3;
           local_b0[9] = uVar19;
@@ -405,11 +405,11 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
             puVar16 = puVar16 + 8;
           } while (puVar16 <= puVar5);
           uVar6 = *(uint *)(iVar9 + 0x1c);
-          uVar7 = (local_168 >> 0x11 & 7) << 0x17;
+          uVar7 = (op2Dest0 >> 0x11 & 7) << 0x17;
           *(uint *)(iVar9 + 0x1c) = uVar7 | uVar6 & 0xfc7fffff;
           *(uint *)(iVar9 + 0x1c) = uVar19 << 0x15 | uVar7 | uVar6 & 0xfc1fffff | 0x8000000;
           *(undefined2 *)(iVar9 + 0x22) = addTempRegisterResult;
-          _PPStreamInsertOperationBeforeChunk(stream,&local_170,0,0,iVar9);
+          _PPStreamInsertOperationBeforeChunk(stream,&op2Header,0,0,iVar9);
         }
         iVar9 = *(int *)(iVar9 + 8);
       } while (iVar9 != *(int *)((int)local_b0 + loopByteOffset + 0x18));
@@ -425,16 +425,16 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
       piVar12 = (int *)_HashSetIteratorNext(&local_1a0);
       while (piVar12 != (int *)0x0) {
         iVar9 = piVar12[1];
-        local_160 = 0;
+        op2Src0A = 0;
         local_178 = 0;
         local_174 = 0;
-        local_170 = 0;
-        local_16c = 0;
-        local_168 = 0;
-        local_164 = 0;
-        local_15c = 0;
+        op2Header = 0;
+        op2Flags = 0;
+        op2Dest0 = 0;
+        op2Dest1 = 0;
+        op2Src0B = 0;
         local_190 = 0x20000000;
-        local_160 = *(undefined4 *)(*(int *)((int)local_b0 + loopByteOffset + 0x10) + 0x3c);
+        op2Src0A = *(undefined4 *)(*(int *)((int)local_b0 + loopByteOffset + 0x10) + 0x3c);
         uVar7 = (*(uint *)(iVar9 + 0x10) & 3) << 10;
         uVar15 = uVar7 | 0x6c;
         uVar6 = *(uint *)(iVar9 + 0x10) & 3;
@@ -472,8 +472,8 @@ LAB_97c0c1e8:
     loopIndex = loopIndex + 1;
     loopByteOffset = loopByteOffset + 4;
   } while (loopIndex < 2);
-  _HashSetIteratorSetup(local_70[2],&local_150);
-  hashSetIteratorNextResult = _HashSetIteratorNext(&local_150);
+  _HashSetIteratorSetup(local_70[2],&op2Src2A);
+  hashSetIteratorNextResult = _HashSetIteratorNext(&op2Src2A);
   do {
     if (hashSetIteratorNextResult == 0) {
       loopIndex = 0;
@@ -481,12 +481,12 @@ LAB_97c0c1e8:
       _PPStreamRemoveOperation(stream,endifChunkHome);
       do {
         if (*(undefined4 **)((int)local_b0 + loopByteOffset) != (undefined4 *)0x0) {
-          _HashSetIteratorSetup(**(undefined4 **)((int)local_b0 + loopByteOffset),&local_130);
-          puVar11 = (undefined4 *)_HashSetIteratorNext(&local_130);
+          _HashSetIteratorSetup(**(undefined4 **)((int)local_b0 + loopByteOffset),&op3Header);
+          puVar11 = (undefined4 *)_HashSetIteratorNext(&op3Header);
           while (puVar11 != (undefined4 *)0x0) {
             _free(*puVar11);
             _free(puVar11[1]);
-            puVar11 = (undefined4 *)_HashSetIteratorNext(&local_130);
+            puVar11 = (undefined4 *)_HashSetIteratorNext(&op3Header);
           }
           _HashTableFree(*(undefined4 *)((int)local_b0 + loopByteOffset));
           _HashTableFree(*(undefined4 *)((int)local_b0 + loopByteOffset + 8));
@@ -521,43 +521,43 @@ LAB_97c0c1e8:
       iVar9 = iVar9 + 4;
     } while (loopIndex < 2);
     if (local_70[0] != local_70[1]) {
-      local_12c = 0;
-      local_fc = 0;
-      local_130 = 0x60f80000;
-      local_100 = *(undefined4 *)(endifChunkHome + 0x3c);
-      local_120 = 0;
-      local_11c = 0;
-      local_118 = 0;
-      local_114 = 0;
-      local_110 = 0;
-      local_10c = 0;
-      local_108 = 0;
-      local_104 = 0;
+      op3Flags = 0;
+      op3Word13 = 0;
+      op3Header = 0x60f80000;
+      op3Line = *(undefined4 *)(endifChunkHome + 0x3c);
+      op3Src0A = 0;
+      op3Src0B = 0;
+      op3Src1A = 0;
+      op3Src1B = 0;
+      op3Src2A = 0;
+      op3Src2B = 0;
+      op3AuxA = 0;
+      op3AuxB = 0;
       uVar18 = (*(uint *)(hashSetIteratorNextResult + 0x10) & 3) << 10;
-      local_128 = uVar18 | 0x6c;
+      op3Dest0 = uVar18 | 0x6c;
       uVar7 = *(uint *)(hashSetIteratorNextResult + 0x10) & 3;
       if (uVar7 == 1) {
 LAB_97c0c404:
-        local_128 = local_128 | 0x4000;
+        op3Dest0 = op3Dest0 | 0x4000;
 LAB_97c0c40c:
-        local_128 = local_128 | 0x2000;
+        op3Dest0 = op3Dest0 | 0x2000;
       }
       else {
         if (1 < uVar7) {
           if (uVar7 != 2) {
             if (uVar7 != 3) goto LAB_97c0c414;
-            local_128 = uVar18 | 0x1006c;
+            op3Dest0 = uVar18 | 0x1006c;
           }
-          local_128 = local_128 | 0x8000;
+          op3Dest0 = op3Dest0 | 0x8000;
           goto LAB_97c0c404;
         }
         if (uVar7 == 0) goto LAB_97c0c40c;
       }
 LAB_97c0c414:
-      local_128 = (*(uint *)(hashSetIteratorNextResult + 4) & 7) << 0x11 | local_128;
+      op3Dest0 = (*(uint *)(hashSetIteratorNextResult + 4) & 7) << 0x11 | op3Dest0;
       local_d0[2] = 0;
       local_e0[2] = 0;
-      local_124 = (uint)*(ushort *)(hashSetIteratorNextResult + 2);
+      op3Dest1 = (uint)*(ushort *)(hashSetIteratorNextResult + 2);
       local_f0 = local_c0[0];
       local_ec = local_70[0];
       local_e8 = local_70[1];
@@ -565,44 +565,44 @@ LAB_97c0c414:
       local_d0[1] = 0;
       local_e0[0] = 1;
       local_e0[1] = 0;
-      uVar18 = local_128;
+      uVar18 = op3Dest0;
       uVar7 = 0;
       do {
-        (&local_120)[uVar7 * 2] = (uVar18 >> 10 & 3) << 0xc | (&local_120)[uVar7 * 2] & 0xffffcfff;
+        (&op3Src0A)[uVar7 * 2] = (uVar18 >> 10 & 3) << 0xc | (&op3Src0A)[uVar7 * 2] & 0xffffcfff;
         uVar18 = uVar19;
         if (local_d0[uVar7] == 0) {
           uVar18 = 0;
         }
-        (&local_120)[uVar7 * 2] = uVar18 << 0x15 | (&local_120)[uVar7 * 2] & 0xff9fffff;
+        (&op3Src0A)[uVar7 * 2] = uVar18 << 0x15 | (&op3Src0A)[uVar7 * 2] & 0xff9fffff;
         uVar18 = uVar19;
         if (local_d0[uVar7] == 0) {
           uVar18 = 1;
         }
-        (&local_120)[uVar7 * 2] = uVar18 << 0x13 | (&local_120)[uVar7 * 2] & 0xffe7ffff;
+        (&op3Src0A)[uVar7 * 2] = uVar18 << 0x13 | (&op3Src0A)[uVar7 * 2] & 0xffe7ffff;
         uVar18 = uVar19;
         if (local_d0[uVar7] == 0) {
           uVar18 = 2;
         }
-        (&local_120)[uVar7 * 2] = uVar18 << 0x11 | (&local_120)[uVar7 * 2] & 0xfff9ffff;
+        (&op3Src0A)[uVar7 * 2] = uVar18 << 0x11 | (&op3Src0A)[uVar7 * 2] & 0xfff9ffff;
         uVar18 = uVar19;
         if (local_d0[uVar7] == 0) {
           uVar18 = 3;
         }
-        (&local_120)[uVar7 * 2] = uVar18 << 0xf | (&local_120)[uVar7 * 2] & 0xfffe7fff;
+        (&op3Src0A)[uVar7 * 2] = uVar18 << 0xf | (&op3Src0A)[uVar7 * 2] & 0xfffe7fff;
         uVar6 = uVar7 + 1;
-        (&local_120)[uVar7 * 2] =
-             (*(uint *)((&local_f0)[uVar7] + 4) & 7) << 0x17 | (&local_120)[uVar7 * 2] & 0xfc7fffff;
+        (&op3Src0A)[uVar7 * 2] =
+             (*(uint *)((&local_f0)[uVar7] + 4) & 7) << 0x17 | (&op3Src0A)[uVar7 * 2] & 0xfc7fffff;
         (&uStack_11a)[uVar7 * 4] = *(undefined2 *)((&local_f0)[uVar7] + 2);
-        (&local_120)[uVar7 * 2] =
-             (local_e0[uVar7] & 1) << 0x1b | (&local_120)[uVar7 * 2] & 0xf7ffffff;
-        uVar18 = local_128;
+        (&op3Src0A)[uVar7 * 2] =
+             (local_e0[uVar7] & 1) << 0x1b | (&op3Src0A)[uVar7 * 2] & 0xf7ffffff;
+        uVar18 = op3Dest0;
         uVar7 = uVar6;
       } while (uVar6 < 3);
-      local_12c = (*(uint *)(hashSetIteratorNextResult + 0x10) & 3) << 0x1a |
+      op3Flags = (*(uint *)(hashSetIteratorNextResult + 0x10) & 3) << 0x1a |
                   (*(uint *)(hashSetIteratorNextResult + 0xc) & 7) << 0x17 | (*(uint *)(hashSetIteratorNextResult + 8) & 3) << 0x12;
-      _PPStreamInsertOperationAfterChunk(stream,&local_130,0,0,endifChunkHome);
+      _PPStreamInsertOperationAfterChunk(stream,&op3Header,0,0,endifChunkHome);
     }
-    hashSetIteratorNextResult = _HashSetIteratorNext(&local_150);
+    hashSetIteratorNextResult = _HashSetIteratorNext(&op2Src2A);
   } while( true );
 }
 
@@ -2216,21 +2216,21 @@ int _DetectConstantLoopsSimple(stream)
   undefined4 *local_b8;
   undefined4 *local_b4;
   undefined4 *local_b0;
-  uint local_a0;
-  uint local_9c;
-  uint local_98;
-  uint local_94;
-  uint local_90;
-  undefined4 local_8c;
+  uint opHeader;
+  uint opFlags;
+  uint opDest0;
+  uint opDest1;
+  uint opSrc0A;
+  undefined4 opSrc0B;
   undefined2 uStack_8a;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
+  undefined4 opSrc1A;
+  undefined4 opSrc1B;
+  undefined4 opSrc2A;
+  undefined4 opSrc2B;
+  undefined4 opAuxA;
+  undefined4 opAuxB;
+  undefined4 opLine;
+  undefined4 opWord13;
   int local_60;
   int local_5c;
   
@@ -2478,70 +2478,70 @@ LAB_97c0f608:
         local_dc = local_1e0;
         do {
           if (*(int *)(puVar18 + 0x310) != 0) {
-            local_90 = 0;
-            local_8c = 0;
-            local_88 = 0;
-            local_84 = 0;
-            local_80 = 0;
-            local_7c = 0;
-            local_78 = 0;
-            local_74 = 0;
-            local_9c = 0;
-            local_70 = 0;
-            local_a0 = (*(uint *)(puVar18 + 0x2e0) & 0xff) << 0x12;
+            opSrc0A = 0;
+            opSrc0B = 0;
+            opSrc1A = 0;
+            opSrc1B = 0;
+            opSrc2A = 0;
+            opSrc2B = 0;
+            opAuxA = 0;
+            opAuxB = 0;
+            opFlags = 0;
+            opLine = 0;
+            opHeader = (*(uint *)(puVar18 + 0x2e0) & 0xff) << 0x12;
             uVar7 = *(uint *)(puVar18 + 0x340);
-            local_98 = 0;
-            local_94 = 0;
-            local_70 = *(undefined4 *)(iVar14 + 0x3c);
-            local_a0 = uVar7 << 0x1d | local_a0;
-            local_6c = 0;
+            opDest0 = 0;
+            opDest1 = 0;
+            opLine = *(undefined4 *)(iVar14 + 0x3c);
+            opHeader = uVar7 << 0x1d | opHeader;
+            opWord13 = 0;
             uVar9 = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 0x10) & 3) << 10;
-            local_98 = uVar9 | 0x6c;
+            opDest0 = uVar9 | 0x6c;
             uVar13 = *(uint *)(*(int *)(puVar18 + 0x3c0) + 0x10) & 3;
             if (uVar13 == 1) {
 LAB_97c0f960:
-              local_98 = local_98 | 0x4000;
+              opDest0 = opDest0 | 0x4000;
 LAB_97c0f968:
-              local_98 = local_98 | 0x2000;
+              opDest0 = opDest0 | 0x2000;
             }
             else {
               if (1 < uVar13) {
                 if (uVar13 != 2) {
                   if (uVar13 != 3) goto LAB_97c0f970;
-                  local_98 = uVar9 | 0x1006c;
+                  opDest0 = uVar9 | 0x1006c;
                 }
-                local_98 = local_98 | 0x8000;
+                opDest0 = opDest0 | 0x8000;
                 goto LAB_97c0f960;
               }
               if (uVar13 == 0) goto LAB_97c0f968;
             }
 LAB_97c0f970:
-            local_98 = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 4) & 7) << 0x11 | local_98;
-            local_94 = (uint)*(ushort *)(*(int *)(puVar18 + 0x3c0) + 2);
+            opDest0 = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 4) & 7) << 0x11 | opDest0;
+            opDest1 = (uint)*(ushort *)(*(int *)(puVar18 + 0x3c0) + 2);
             iVar10 = 0;
-            uVar9 = local_98;
+            uVar9 = opDest0;
             if ((uVar7 & 7) != 0) {
               do {
-                uVar17 = (&local_90)[iVar10 * 2];
+                uVar17 = (&opSrc0A)[iVar10 * 2];
                 uVar13 = (uVar9 >> 10 & 3) << 0xc;
                 iVar12 = loopIndex * 2 + iVar10;
-                (&local_90)[iVar10 * 2] = uVar13 | uVar17 & 0xff804fff | 0xd8000;
+                (&opSrc0A)[iVar10 * 2] = uVar13 | uVar17 & 0xff804fff | 0xd8000;
                 iVar16 = iVar10 + 1;
                 uVar9 = (*(uint *)((&local_120)[iVar12] + 4) & 7) << 0x17;
-                (&local_90)[iVar10 * 2] = uVar9 | uVar13 | uVar17 & 0xfc004fff | 0xd8000;
+                (&opSrc0A)[iVar10 * 2] = uVar9 | uVar13 | uVar17 & 0xfc004fff | 0xd8000;
                 uVar2 = *(undefined2 *)((&local_120)[iVar12] + 2);
-                (&local_90)[iVar10 * 2] = uVar9 | uVar13 | uVar17 & 0xf4004fff | 0xd8000;
+                (&opSrc0A)[iVar10 * 2] = uVar9 | uVar13 | uVar17 & 0xf4004fff | 0xd8000;
                 (&uStack_8a)[iVar10 * 4] = uVar2;
                 iVar10 = iVar16;
-                uVar9 = local_98;
+                uVar9 = opDest0;
               } while (iVar16 < (int)(uVar7 & 7));
             }
             uVar9 = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 8) & 3) << 0x12;
-            local_9c = uVar9;
+            opFlags = uVar9;
             uVar13 = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 0xc) & 7) << 0x17;
-            local_9c = uVar13 | uVar9;
-            local_9c = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 0x10) & 3) << 0x1a | uVar13 | uVar9;
-            _PPStreamInsertOperationBeforeChunk(stream,&local_a0,0,0,iVar14);
+            opFlags = uVar13 | uVar9;
+            opFlags = (*(uint *)(*(int *)(puVar18 + 0x3c0) + 0x10) & 3) << 0x1a | uVar13 | uVar9;
+            _PPStreamInsertOperationBeforeChunk(stream,&opHeader,0,0,iVar14);
           }
           loopIndex = loopIndex + 1;
           puVar18 = puVar18 + 4;
@@ -2874,20 +2874,20 @@ int _UnrollConstantLoopSimple(stream, param_2, param_3, param_4)
   int iVar4;
   int iVar5;
   int iVar6;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
+  undefined4 opHeader;
+  undefined4 opFlags;
+  undefined4 opDest0;
+  undefined4 opDest1;
+  undefined4 opSrc0A;
+  undefined4 opSrc0B;
+  undefined4 opSrc1A;
+  undefined4 opSrc1B;
+  undefined4 opSrc2A;
+  undefined4 opSrc2B;
+  undefined4 opAuxA;
+  undefined4 opAuxB;
+  undefined4 opLine;
+  undefined4 opWord13;
   
   iVar4 = param_3;
   if (0 < param_4) {
@@ -2906,21 +2906,21 @@ int _UnrollConstantLoopSimple(stream, param_2, param_3, param_4)
         _HashTableAdd(hashTableNewResult,(*(uint *)(iVar6 + 0xc) & 0x3ffff) + 1,
                       (*(uint *)(iVar4 + 0xc) & 0x3ffff) + 1);
       }
-      local_7c = 0;
-      local_80 = 0x1b80000;
-      local_78 = 0;
-      local_74 = 0;
-      local_70 = 0;
-      local_6c = 0;
-      local_68 = 0;
-      local_64 = 0;
-      local_60 = 0;
-      local_5c = 0;
-      local_58 = 0;
-      local_54 = 0;
-      local_50 = 0;
-      local_4c = 0;
-      iVar4 = _PPStreamInsertOperationAfterChunk(stream,&local_80,0,0,iVar4);
+      opFlags = 0;
+      opHeader = 0x1b80000;
+      opDest0 = 0;
+      opDest1 = 0;
+      opSrc0A = 0;
+      opSrc0B = 0;
+      opSrc1A = 0;
+      opSrc1B = 0;
+      opSrc2A = 0;
+      opSrc2B = 0;
+      opAuxA = 0;
+      opAuxB = 0;
+      opLine = 0;
+      opWord13 = 0;
+      iVar4 = _PPStreamInsertOperationAfterChunk(stream,&opHeader,0,0,iVar4);
       _HashTableAdd(hashTableNewResult,(*(uint *)(param_3 + 0xc) & 0x3ffff) + 1,
                     (*(uint *)(iVar4 + 0xc) & 0x3ffff) + 1);
       if (bVar1) {
@@ -4728,11 +4728,11 @@ int std____throw_logic_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4740,16 +4740,16 @@ int std____throw_logic_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt11logic_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4761,11 +4761,11 @@ int std____throw_domain_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4773,16 +4773,16 @@ int std____throw_domain_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12domain_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4794,11 +4794,11 @@ int std____throw_invalid_argument(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4806,16 +4806,16 @@ int std____throw_invalid_argument(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt16invalid_argumentC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4827,11 +4827,11 @@ int std____throw_length_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4839,16 +4839,16 @@ int std____throw_length_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12length_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4860,11 +4860,11 @@ int std____throw_out_of_range(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4872,16 +4872,16 @@ int std____throw_out_of_range(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12out_of_rangeC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4893,11 +4893,11 @@ int std____throw_runtime_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4905,16 +4905,16 @@ int std____throw_runtime_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt13runtime_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4926,11 +4926,11 @@ int std____throw_range_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4938,16 +4938,16 @@ int std____throw_range_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt11range_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4959,11 +4959,11 @@ int std____throw_overflow_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -4971,16 +4971,16 @@ int std____throw_overflow_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt14overflow_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
@@ -4992,11 +4992,11 @@ int std____throw_underflow_error(str)
   char *str;
 {
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *refCountPtr;
+  int oldRefCount;
   void *this;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0Reg;
   int local_40 [4];
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
@@ -5004,16 +5004,16 @@ int std____throw_underflow_error(str)
   __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt15underflow_errorC1ERKSs(this,(unsigned char *)local_40);
-  piVar2 = (int *)(local_40[0] + -4);
+  refCountPtr = (int *)(local_40[0] + -4);
   do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = atomicStore;
-      in_cr0 = 2;
+    oldRefCount = *refCountPtr;
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
+      cr0Reg = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     

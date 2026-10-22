@@ -1,0 +1,189 @@
+# local rows, fork D6: words of the 14-word _PPStreamOperation record
+local	_PPParserParseOperation	local_90	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_PPParserParseOperation	local_8c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_PPParserParseOperation	local_88	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	_PPParserParseOperation	local_84	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	_PPParserParseOperation	local_80	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	_PPParserParseOperation	local_7c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	_PPParserParseOperation	local_78	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	_PPParserParseOperation	local_74	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	_PPParserParseOperation	local_70	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	_PPParserParseOperation	local_6c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	_PPParserParseOperation	local_68	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	_PPParserParseOperation	local_64	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	_PPParserParseOperation	local_60	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	_PPParserParseOperation	local_5c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	TIntermBinary__compileNode	local_c0	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TIntermBinary__compileNode	local_bc	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TIntermBinary__compileNode	local_b8	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	TIntermBinary__compileNode	local_b4	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	TIntermBinary__compileNode	local_b0	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	TIntermBinary__compileNode	local_ac	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	TIntermBinary__compileNode	local_a8	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	TIntermBinary__compileNode	local_a4	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	TIntermBinary__compileNode	local_a0	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	TIntermBinary__compileNode	local_9c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	TIntermBinary__compileNode	local_98	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	TIntermBinary__compileNode	local_94	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	TIntermBinary__compileNode	local_90	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	TIntermBinary__compileNode	local_8c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	TIntermUnary__compileNode	local_b0	op1Header	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TIntermUnary__compileNode	local_ac	op1Flags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TIntermUnary__compileNode	local_a8	op1Dest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	TIntermUnary__compileNode	local_a4	op1Dest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	TIntermUnary__compileNode	local_a0	op1Src0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	TIntermUnary__compileNode	local_9c	op1Src0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	TIntermUnary__compileNode	local_98	op1Src1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	TIntermUnary__compileNode	local_94	op1Src1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	TIntermUnary__compileNode	local_90	op1Src2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	TIntermUnary__compileNode	local_8c	op1Src2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	TIntermUnary__compileNode	local_88	op1AuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	TIntermUnary__compileNode	local_84	op1AuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	TIntermUnary__compileNode	local_80	op1Line	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	TIntermUnary__compileNode	local_7c	op1Word13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	TIntermUnary__compileNode	local_20	op2Header	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TIntermUnary__compileNode	local_1c	op2Flags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TIntermSelection__compileNode	local_40	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TIntermSelection__compileNode	local_3c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TPPStreamCompiler__equalOperands	local_e0	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TPPStreamCompiler__equalOperands	local_dc	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TPPStreamCompiler__equalOperands	local_d8	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	TPPStreamCompiler__equalOperands	local_d4	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	TPPStreamCompiler__equalOperands	local_d0	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	TPPStreamCompiler__equalOperands	local_cc	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	TPPStreamCompiler__equalOperands	local_c8	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	TPPStreamCompiler__equalOperands	local_c4	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	TPPStreamCompiler__equalOperands	local_c0	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	TPPStreamCompiler__equalOperands	local_bc	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	TPPStreamCompiler__equalOperands	local_b8	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	TPPStreamCompiler__equalOperands	local_b4	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	TPPStreamCompiler__equalOperands	local_b0	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	TPPStreamCompiler__equalOperands	local_ac	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	TPPStreamCompiler__assignOperands	local_b0	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TPPStreamCompiler__assignOperands	local_ac	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TPPStreamCompiler__assignOperands	local_a8	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	TPPStreamCompiler__assignOperands	local_a4	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	TPPStreamCompiler__assignOperands	local_a0	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	TPPStreamCompiler__assignOperands	local_9c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	TPPStreamCompiler__assignOperands	local_98	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	TPPStreamCompiler__assignOperands	local_94	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	TPPStreamCompiler__assignOperands	local_90	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	TPPStreamCompiler__assignOperands	local_8c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	TPPStreamCompiler__assignOperands	local_88	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	TPPStreamCompiler__assignOperands	local_84	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	TPPStreamCompiler__assignOperands	local_80	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	TPPStreamCompiler__assignOperands	local_7c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	TPPStreamCompiler__FinishScalerSelect	local_70	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TPPStreamCompiler__FinishScalerSelect	local_6c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TPPStreamCompiler__FinishScalerSelect	local_68	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	TPPStreamCompiler__FinishScalerSelect	local_64	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	TPPStreamCompiler__FinishScalerSelect	local_60	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	TPPStreamCompiler__FinishScalerSelect	local_5c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	TPPStreamCompiler__FinishScalerSelect	local_58	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	TPPStreamCompiler__FinishScalerSelect	local_54	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	TPPStreamCompiler__FinishScalerSelect	local_50	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	TPPStreamCompiler__FinishScalerSelect	local_4c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	TPPStreamCompiler__FinishScalerSelect	local_48	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	TPPStreamCompiler__FinishScalerSelect	local_44	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	TPPStreamCompiler__FinishScalerSelect	local_40	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	TPPStreamCompiler__FinishScalerSelect	local_3c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_a0	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_9c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_98	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_94	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_90	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_8c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_88	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_84	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_80	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_7c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_78	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_74	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_70	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_6c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	TPPStreamCompiler__generateAddressLoad	local_70	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	TPPStreamCompiler__generateAddressLoad	local_6c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	TPPStreamCompiler__generateAddressLoad	local_68	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	TPPStreamCompiler__generateAddressLoad	local_64	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	TPPStreamCompiler__generateAddressLoad	local_60	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	TPPStreamCompiler__generateAddressLoad	local_5c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	TPPStreamCompiler__generateAddressLoad	local_58	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	TPPStreamCompiler__generateAddressLoad	local_54	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	TPPStreamCompiler__generateAddressLoad	local_50	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	TPPStreamCompiler__generateAddressLoad	local_4c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	TPPStreamCompiler__generateAddressLoad	local_48	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	TPPStreamCompiler__generateAddressLoad	local_44	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	TPPStreamCompiler__generateAddressLoad	local_40	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	TPPStreamCompiler__generateAddressLoad	local_3c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	_InlineFunctionsBranch	local_90	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_InlineFunctionsBranch	local_8c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_FlattenIf	local_1e0	op1Header	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_FlattenIf	local_1dc	op1Flags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_FlattenIf	local_1d8	op1Dest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	_FlattenIf	local_1d4	op1Dest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	_FlattenIf	local_1d0	op1Src0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	_FlattenIf	local_1cc	op1Src0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	_FlattenIf	local_1c8	op1Src1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	_FlattenIf	local_1c4	op1Src1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	_FlattenIf	local_1c0	op1Src2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	_FlattenIf	local_1bc	op1Src2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	_FlattenIf	local_1b8	op1AuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	_FlattenIf	local_1b4	op1AuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	_FlattenIf	local_1b0	op1Line	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	_FlattenIf	local_1ac	op1Word13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	_FlattenIf	local_170	op2Header	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_FlattenIf	local_16c	op2Flags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_FlattenIf	local_168	op2Dest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	_FlattenIf	local_164	op2Dest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	_FlattenIf	local_160	op2Src0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	_FlattenIf	local_15c	op2Src0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	_FlattenIf	local_158	op2Src1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	_FlattenIf	local_154	op2Src1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	_FlattenIf	local_150	op2Src2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	_FlattenIf	local_14c	op2Src2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	_FlattenIf	local_148	op2AuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	_FlattenIf	local_144	op2AuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	_FlattenIf	local_140	op2Line	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	_FlattenIf	local_13c	op2Word13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	_FlattenIf	local_130	op3Header	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_FlattenIf	local_12c	op3Flags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_FlattenIf	local_128	op3Dest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	_FlattenIf	local_124	op3Dest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	_FlattenIf	local_120	op3Src0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	_FlattenIf	local_11c	op3Src0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	_FlattenIf	local_118	op3Src1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	_FlattenIf	local_114	op3Src1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	_FlattenIf	local_110	op3Src2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	_FlattenIf	local_10c	op3Src2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	_FlattenIf	local_108	op3AuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	_FlattenIf	local_104	op3AuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	_FlattenIf	local_100	op3Line	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	_FlattenIf	local_fc	op3Word13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	_DetectConstantLoopsSimple	local_a0	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_DetectConstantLoopsSimple	local_9c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_DetectConstantLoopsSimple	local_98	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	_DetectConstantLoopsSimple	local_94	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	_DetectConstantLoopsSimple	local_90	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	_DetectConstantLoopsSimple	local_8c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	_DetectConstantLoopsSimple	local_88	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	_DetectConstantLoopsSimple	local_84	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	_DetectConstantLoopsSimple	local_80	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	_DetectConstantLoopsSimple	local_7c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	_DetectConstantLoopsSimple	local_78	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	_DetectConstantLoopsSimple	local_74	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	_DetectConstantLoopsSimple	local_70	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	_DetectConstantLoopsSimple	local_6c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
+local	_UnrollConstantLoopSimple	local_80	opHeader	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 0: opcode in bits 25..18 ((opcode & 0xff) << 0x12 in _PPParserParseOperation)
+local	_UnrollConstantLoopSimple	local_7c	opFlags	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 1: modifier/condition flags ((param_3 & 3) << 0x12 | ... in _PPParserParseOperation)
+local	_UnrollConstantLoopSimple	local_78	opDest0	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, first word (ParseOperand__GetAsDestVar output, filled by _PPParserParseDestination(parser, &rec+8))
+local	_UnrollConstantLoopSimple	local_74	opDest1	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: destination operand descriptor, second word
+local	_UnrollConstantLoopSimple	local_70	opSrc0A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, first word (_PPParserParseSourceVar(parser, &rec+0x10))
+local	_UnrollConstantLoopSimple	local_6c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 0 descriptor, second word
+local	_UnrollConstantLoopSimple	local_68	opSrc1A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, first word
+local	_UnrollConstantLoopSimple	local_64	opSrc1B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 1 descriptor, second word
+local	_UnrollConstantLoopSimple	local_60	opSrc2A	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, first word
+local	_UnrollConstantLoopSimple	local_5c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source 2 descriptor, second word
+local	_UnrollConstantLoopSimple	local_58	opAuxA	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand (condition/branch) first word, zero-initialised
+local	_UnrollConstantLoopSimple	local_54	opAuxB	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: auxiliary operand second word
+local	_UnrollConstantLoopSimple	local_50	opLine	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: source line (parser+0x18 / TIntermNode slot 0 getLine)
+local	_UnrollConstantLoopSimple	local_4c	opWord13	INFERRED	_PPStreamOperation record (14 words) passed by address to the stream: word 13: copied from the parser state (local_5c = local_50 in _PPParserParseOperation)
