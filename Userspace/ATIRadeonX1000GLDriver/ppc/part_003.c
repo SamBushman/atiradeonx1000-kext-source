@@ -367,27 +367,27 @@ int FUN_0001a4e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* _gldFlush @ 0x1a5c0 (28 bytes) */
-int _gldFlush(param_1)
-  int param_1;
+int _gldFlush(ctx)
+  int ctx;
 {
-  if (*(uint *)(param_1 + 0x1dc) <= *(int *)(param_1 + 0x1e4) + 0x28U) {
+  if (*(uint *)(ctx + 0x1dc) <= *(int *)(ctx + 0x1e4) + 0x28U) {
     return;
   }
-  return ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+  return ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
 }
 
 /* _gldFinish @ 0x1a5e0 (136 bytes) */
-int _gldFinish(param_1)
-  int param_1;
+int _gldFinish(ctx)
+  int ctx;
 {
-  int iVar1;
+  int status;
   
-  if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+  if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+    ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
   }
   do {
-    iVar1 = _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),8,0,0,0,0);
-  } while (iVar1 == -0x1ffffd2a);
+    status = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),8,0,0,0,0);
+  } while (status == -0x1ffffd2a);
   return;
 }
 
@@ -810,14 +810,14 @@ int FUN_0001b150(param_1)
 }
 
 /* _gldFreeVertexBuffer @ 0x1b1b0 (20 bytes) */
-int _gldFreeVertexBuffer(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int _gldFreeVertexBuffer(ctx, vertexBuffer)
+  undefined4 ctx;
+  int vertexBuffer;
 {
-  if (param_2 == 0) {
+  if (vertexBuffer == 0) {
     return;
   }
-  *(undefined4 *)(param_2 + -0x6c) = 1;
+  *(undefined4 *)(vertexBuffer + -0x6c) = 1;
   return;
 }
 

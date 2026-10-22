@@ -2447,29 +2447,29 @@ LAB_000316fc:
 }
 
 /* _gldGetTextureLevel @ 0x31890 (176 bytes) */
-int _gldGetTextureLevel(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int _gldGetTextureLevel(ctx, texture, face, level)
+  int ctx;
+  int texture;
+  int face;
+  int level;
 {
-  ushort uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  ushort levelFormat;
+  int bytesPerElement;
+  undefined4 returnCode;
+  int levelEntry;
   
-  uVar3 = 0x2717;
-  if (*(int *)(param_2 + 0x30) != 0) {
-    iVar4 = *(int *)(param_2 + 0x30) + 0xa0 + param_4 * 0x18 + param_3 * 0x168;
-    uVar1 = *(ushort *)(iVar4 + 0xc);
-    iVar2 = FUN_0000a3f0((uint)*(ushort *)(iVar4 + 0x10),(uint)*(ushort *)(iVar4 + 0x12));
-    _pthread_mutex_lock(*(undefined4 *)(param_1 + 0xc));
-    uVar3 = ((int (*)())FUN_00031340)(param_1,param_2,param_3,param_4,(uint)*(ushort *)(iVar4 + 0x10),
-                         (uint)*(ushort *)(iVar4 + 0x12),*(undefined4 *)(iVar4 + 0x14),
-                         (uint)uVar1 * iVar2);
-    _pthread_mutex_unlock(*(undefined4 *)(param_1 + 0xc));
+  returnCode = 0x2717;
+  if (*(int *)(texture + 0x30) != 0) {
+    levelEntry = *(int *)(texture + 0x30) + 0xa0 + level * 0x18 + face * 0x168;
+    levelFormat = *(ushort *)(levelEntry + 0xc);
+    bytesPerElement = FUN_0000a3f0((uint)*(ushort *)(levelEntry + 0x10),(uint)*(ushort *)(levelEntry + 0x12));
+    _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+    returnCode = ((int (*)())FUN_00031340)(ctx,texture,face,level,(uint)*(ushort *)(levelEntry + 0x10),
+                         (uint)*(ushort *)(levelEntry + 0x12),*(undefined4 *)(levelEntry + 0x14),
+                         (uint)levelFormat * bytesPerElement);
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
   }
-  return uVar3;
+  return returnCode;
 }
 
 /* FUN_00031940 @ 0x31940 (1972 bytes) */
@@ -7050,30 +7050,30 @@ int FUN_000391d0()
 }
 
 /* _gldGetVersion @ 0x391f0 (84 bytes) */
-int _gldGetVersion(param_1, param_2, param_3, param_4)
-  undefined4 *param_1;
-  undefined4 *param_2;
-  undefined4 *param_3;
-  undefined4 *param_4;
+int _gldGetVersion(majorOut, minorOut, patchOut, buildOut)
+  undefined4 *majorOut;
+  undefined4 *minorOut;
+  undefined4 *patchOut;
+  undefined4 *buildOut;
 {
   if (*(int *)PTR_DAT_001e88ac == 0) {
     return 0;
   }
-  *param_1 = 2;
-  *param_2 = 4;
-  *param_3 = 0xb;
-  *param_4 = 0x1900;
+  *majorOut = 2;
+  *minorOut = 4;
+  *patchOut = 0xb;
+  *buildOut = 0x1900;
   return 1;
 }
 
 /* _gldGetString @ 0x39250 (204 bytes) */
-int _gldGetString(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int _gldGetString(ctx, name)
+  int ctx;
+  undefined4 name;
 {
-  uint uVar1;
+  uint chipClass;
   
-  switch(param_2) {
+  switch(name) {
   case 0x1f00:
     return "ATI Technologies Inc.";
   case 0x1f01:
@@ -7087,12 +7087,12 @@ int _gldGetString(param_1, param_2)
   default:
     return (char *)0x0;
   }
-  uVar1 = *(uint *)(param_1 + 0x24) & 0x7ff00000;
-  if (uVar1 == 0x100000) {
+  chipClass = *(uint *)(ctx + 0x24) & 0x7ff00000;
+  if (chipClass == 0x100000) {
     return "ATI Radeon X1800 OpenGL Engine";
   }
-  if (uVar1 != 0x200000) {
-    if (uVar1 != 0x800000) {
+  if (chipClass != 0x200000) {
+    if (chipClass != 0x800000) {
       return "ATI Radeon X1000 OpenGL Engine";
     }
     return "ATI Radeon X1900 OpenGL Engine";

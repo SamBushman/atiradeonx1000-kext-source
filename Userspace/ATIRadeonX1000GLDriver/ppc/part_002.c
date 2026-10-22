@@ -990,36 +990,36 @@ int FUN_0000b670(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* _gldCreateVertexArray @ 0xb6c0 (80 bytes) */
-int _gldCreateVertexArray(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int _gldCreateVertexArray(ctx, vertexArrayOut, initialWord0, initialWord1)
+  undefined4 ctx;
+  int *vertexArrayOut;
+  undefined4 initialWord0;
+  undefined4 initialWord1;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexArray;
   
-  puVar1 = (undefined4 *)_calloc(1,0x244);
-  *param_2 = (int)puVar1;
-  *puVar1 = param_3;
-  puVar1[1] = param_4;
+  vertexArray = (undefined4 *)_calloc(1,0x244);
+  *vertexArrayOut = (int)vertexArray;
+  *vertexArray = initialWord0;
+  vertexArray[1] = initialWord1;
   return 0;
 }
 
 /* _gldFlushVertexArray @ 0xb710 (56 bytes) */
-int _gldFlushVertexArray(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int _gldFlushVertexArray(ctx, unused2, flushArg2, flushArg3, doFlush, flushArg5, flushArg6, flushArg7)
+  undefined4 ctx;
+  undefined4 unused2;
+  undefined4 flushArg2;
+  undefined4 flushArg3;
+  int doFlush;
+  undefined4 flushArg5;
+  undefined4 flushArg6;
+  undefined4 flushArg7;
 {
-  if (param_5 != 0) {
-    ((int (*)())FUN_0000b620)(param_1,param_4,param_3,param_4,param_5,param_6,param_7,param_8);
+  if (doFlush != 0) {
+    ((int (*)())FUN_0000b620)(ctx,flushArg3,flushArg2,flushArg3,doFlush,flushArg5,flushArg6,flushArg7);
   }
-  return param_5 != 0;
+  return doFlush != 0;
 }
 
 /* FUN_0000b750 @ 0xb750 (276 bytes) */
@@ -1126,96 +1126,96 @@ int FUN_0000b980(param_1, param_2)
 }
 
 /* _gldModifyVertexArray @ 0xba40 (248 bytes) */
-int _gldModifyVertexArray(param_1, param_2)
-  int param_1;
-  int *param_2;
+int _gldModifyVertexArray(ctx, vertexArray)
+  int ctx;
+  int *vertexArray;
 {
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
+  bool retired;
+  int updatedRefCount;
+  uint stateMismatch;
+  int *refCountSlot;
+  int backing;
+  int oldRefCount;
   char in_RESERVE;
   
-  _pthread_mutex_lock(*(undefined4 *)(param_1 + 0xc));
-  iVar5 = param_2[0x8a];
-  if (iVar5 != 0) {
-    bVar1 = ((*(uint *)(param_2[1] + 0x88) ^ 1) & 1) == 0;
-    if (!bVar1) {
-      if (*(short *)(*param_2 + 0x312) == -0x7a42) {
-        uVar3 = param_2[0x8c] ^ 7;
+  _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+  backing = vertexArray[0x8a];
+  if (backing != 0) {
+    retired = ((*(uint *)(vertexArray[1] + 0x88) ^ 1) & 1) == 0;
+    if (!retired) {
+      if (*(short *)(*vertexArray + 0x312) == -0x7a42) {
+        stateMismatch = vertexArray[0x8c] ^ 7;
       }
       else {
-        uVar3 = param_2[0x8c] ^ 6;
+        stateMismatch = vertexArray[0x8c] ^ 6;
       }
-      if (uVar3 == 0) goto LAB_0000bb18;
+      if (stateMismatch == 0) goto LAB_0000bb18;
     }
-    piVar4 = (int *)(iVar5 + 0x10);
+    refCountSlot = (int *)(backing + 0x10);
     do {
-      iVar6 = *piVar4;
+      oldRefCount = *refCountSlot;
       if (in_RESERVE != '\0') {
-        iVar2 = storeWordConditionalIndexed(iVar6 + -0x10000,0,piVar4);
-        *piVar4 = iVar2;
-        bVar1 = true;
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
+        *refCountSlot = updatedRefCount;
+        retired = true;
       }
-    } while (!bVar1);
-    if (iVar6 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!retired);
+    if (oldRefCount == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,backing,1,0,0);
     }
-    param_2[0x8a] = 0;
+    vertexArray[0x8a] = 0;
   }
 LAB_0000bb18:
-  _pthread_mutex_unlock(*(undefined4 *)(param_1 + 0xc));
+  _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
   return 0;
 }
 
 /* _gldReclaimVertexArray @ 0xbb40 (220 bytes) */
-int _gldReclaimVertexArray(param_1, param_2)
-  int param_1;
-  int param_2;
+int _gldReclaimVertexArray(ctx, vertexArray)
+  int ctx;
+  int vertexArray;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
+  int updatedRefCount;
+  int *refCountSlot;
+  int oldRefCount;
+  int backing;
   char in_RESERVE;
-  byte in_cr0;
+  byte crBits;
   
-  if (*(int *)(param_1 + 0x1d4) == param_2) {
-    *(undefined4 *)(param_1 + 0x1d4) = 0;
-    FUN_0001dff0(param_1);
+  if (*(int *)(ctx + 0x1d4) == vertexArray) {
+    *(undefined4 *)(ctx + 0x1d4) = 0;
+    FUN_0001dff0(ctx);
   }
-  iVar4 = *(int *)(param_2 + 0x228);
-  if (iVar4 != 0) {
-    if ((0x1ffff < (int)*(uint *)(iVar4 + 0x10)) || ((*(uint *)(iVar4 + 0x10) & 0xffff) != 0)) {
-      _gldFlush(param_1);
+  backing = *(int *)(vertexArray + 0x228);
+  if (backing != 0) {
+    if ((0x1ffff < (int)*(uint *)(backing + 0x10)) || ((*(uint *)(backing + 0x10) & 0xffff) != 0)) {
+      _gldFlush(ctx);
     }
-    ((int (*)())FUN_0000b880)(param_1,param_2);
-    piVar2 = (int *)(iVar4 + 0x10);
+    ((int (*)())FUN_0000b880)(ctx,vertexArray);
+    refCountSlot = (int *)(backing + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCount = *refCountSlot;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
+        *refCountSlot = updatedRefCount;
+        crBits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar4,1,0,0);
+    } while (!(bool)(crBits >> 1 & 1));
+    if (oldRefCount == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,backing,1,0,0);
     }
-    *(undefined4 *)(param_2 + 0x228) = 0;
+    *(undefined4 *)(vertexArray + 0x228) = 0;
   }
   return;
 }
 
 /* _gldDestroyVertexArray @ 0xbc20 (56 bytes) */
-int _gldDestroyVertexArray(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int _gldDestroyVertexArray(ctx, vertexArray)
+  undefined4 ctx;
+  undefined4 vertexArray;
 {
-  ((int (*)())_gldReclaimVertexArray)(param_1,param_2);
-  _free(param_2);
+  ((int (*)())_gldReclaimVertexArray)(ctx,vertexArray);
+  _free(vertexArray);
   return 0;
 }
 

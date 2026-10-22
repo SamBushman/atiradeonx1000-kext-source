@@ -347,3 +347,88 @@ local	_gldGetVersion	param_4	buildOut	INFERRED	receives 0x1900
 local	_gldGetString	param_1	ctx	CONFIRMED	ctx+0x24 high bits select the X1600/X1800/X1900 renderer string
 local	_gldGetString	param_2	name	CONFIRMED	GL string enum: 0x1f00 GL_VENDOR, 0x1f01 GL_RENDERER, 0x1f02 GL_VERSION, 0x1f03 GL_EXTENSIONS, 0x1f04 driver name
 local	_gldGetString	uVar1	chipClass	CONFIRMED	ctx+0x24 & 0x7ff00000: 0x100000 X1800, 0x200000 X1600, 0x800000 X1900
+local	_gldSetInteger	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for every _io_connect_method_scalarI_structureI call
+local	_gldSetInteger	param_2	pname	INFERRED	GLD integer-state selector (0xc8, 0xc9, 0xcb, 0xde, 0x124, 0x12a, 0x132, 0x29a, 0x29c, 0x29d, 0x1f96...); unhandled ones go to FUN_00017310
+local	_gldSetInteger	param_3	values	CONFIRMED	pointer to the value(s); NULL returns 0x271e
+local	_gldSetInteger	uVar1	textureTarget	CONFIRMED	values[1] on pname 0x29c, compared with GL enums 0x806f 3D, 0xde0 1D, 0xde1 2D, 0x84f5 RECTANGLE, 0x8513 CUBE_MAP
+local	_gldSetInteger	iVar2	statusOrObject	INFERRED	FUN_00017100 result, call status, then a bound-object pointer (reused role)
+local	_gldSetInteger	uVar3	connectionOrError	INFERRED	error code to return on call failure, later the io_connect_t
+local	_gldSetInteger	uVar4	selector	CONFIRMED	external method selector (0x10 or 0xf) used by the shared tail call
+local	_gldSetInteger	bVar5	enable	INFERRED	pname 0xc9: *values != 0
+local	_gldSetInteger	local_28	scalarIn0	CONFIRMED	first word of the scalar-in array passed as &local_28
+local	_gldSetInteger	local_24	scalarIn1	CONFIRMED	second word
+local	_gldSetInteger	local_20	scalarIn2	CONFIRMED	third word
+local	_gldSetInteger	local_1c	scalarIn3	CONFIRMED	fourth word
+local	_gldGetInteger	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 6
+local	_gldGetInteger	param_2	pname	INFERRED	GLD integer-state selector (0xc8, 0xc9, 0xcb, 0xde, 0x126, 0x132, 0x29a, 0x3e3)
+local	_gldGetInteger	param_3	values	CONFIRMED	pointer to the output value(s); NULL returns 0x271e
+local	_gldGetInteger	param_4	extraArg3	UNKNOWN	forwarded to FUN_00032100
+local	_gldGetInteger	param_5	extraArg4	UNKNOWN	forwarded to FUN_00032100
+local	_gldGetInteger	param_6	extraArg5	UNKNOWN	forwarded to FUN_00032100
+local	_gldGetInteger	iVar1	status	CONFIRMED	FUN_00032100 / _io_connect_method_scalarI_scalarO result
+local	_gldGetInteger	uVar2	returnCode	CONFIRMED	0 or 0x2722
+local	_gldGetInteger	uVar3	texture	INFERRED	*values on pname 0x126: texture record pointer
+local	_gldGetInteger	local_28	outCount	CONFIRMED	scalarO count (3) passed as &local_28
+local	_gldGetInteger	local_24	scalarOut0	CONFIRMED	first scalarO word; low nibble selects the pixel format cases
+local	_gldGetInteger	local_20	scalarOut1	CONFIRMED	second scalarO word, copied to values[2]
+local	_gldGetInteger	local_1c	scalarOut2	CONFIRMED	third scalarO word, copied to values[3]
+local	_gldChoosePixelFormat	param_1	formatListOut	CONFIRMED	*param_1 receives the malloc(n*0x34) list of matching pixel-format records (NULL return 0x271e)
+local	_gldChoosePixelFormat	param_2	attribList	CONFIRMED	attribute list: enum word (+ value word for sized ones), terminated by 0, at most 0x94 bytes
+local	_gldChoosePixelFormat	puVar1	library	CONFIRMED	PTR_DAT_001e88ac library record (+4 renderer count, +8 renderer service list)
+local	_gldChoosePixelFormat	uVar2	attribValue	CONFIRMED	value word following a sized attribute; negative -> 0x2718
+local	_gldChoosePixelFormat	uVar3	stencilSize	INFERRED	attr 0xd = kCGLPFAStencilSize (max); later reused for temporaries and the colour format mask
+local	_gldChoosePixelFormat	iVar4	formatCount	INFERRED	_getenv("GL_REJECT_HW") result, later the running number of records
+local	_gldChoosePixelFormat	piVar5	newList	INFERRED	malloc(formatCount*0x34) replacement list
+local	_gldChoosePixelFormat	iVar6	copyIndex	INFERRED	number of old records copied; also a remaining-renderers counter
+local	_gldChoosePixelFormat	puVar7	nextCursor	INFERRED	attribute cursor after the current attribute
+local	_gldChoosePixelFormat	piVar8	rendererListCursor	INFERRED	library renderer service list walk / destination record cursor
+local	_gldChoosePixelFormat	puVar9	attribCursor	CONFIRMED	current attribute word
+local	_gldChoosePixelFormat	iVar10	serviceOrNewRows	INFERRED	renderer service entry, later rows FUN_0001ae20 produced
+local	_gldChoosePixelFormat	uVar11	bufferFlags	INFERRED	attr 5 DoubleBuffer -> |8, attr 6 Stereo -> |2; stored in the record
+local	_gldChoosePixelFormat	uVar12	colorSize	INFERRED	attr 8 = kCGLPFAColorSize (max with R+G+B); later reused for the alpha format mask
+local	_gldChoosePixelFormat	uVar13	accumSize	INFERRED	attr 0xe = kCGLPFAAccumSize (max with accum R+G+B+A); later the accum format mask
+local	_gldChoosePixelFormat	uVar14	alphaSize	INFERRED	attr 0xb = kCGLPFAAlphaSize; later the alpha format mask
+local	_gldChoosePixelFormat	piVar15	formatList	INFERRED	list built so far, stored through formatListOut
+local	_gldChoosePixelFormat	uVar16	accumAlphaSize	INFERRED	attr 0x1a; later reused as the library renderer count and the accum-alpha mask
+local	_gldChoosePixelFormat	uVar17	depthSize	INFERRED	attr 0xc = kCGLPFADepthSize; later reused as the renderer index loop variable
+local	_gldChoosePixelFormat	uVar18	redSize	INFERRED	attr 0x14; later the renderer display mask
+local	_gldChoosePixelFormat	uVar19	greenSize	INFERRED	attr 0x15; later the renderer-index+1 scratch
+local	_gldChoosePixelFormat	uVar20	blueSize	INFERRED	attr 0x16; later the red+green+blue sum
+local	_gldChoosePixelFormat	uVar21	accumRedSize	INFERRED	attr 0x17
+local	_gldChoosePixelFormat	iVar22	recordsCopied	INFERRED	copy loop counter
+local	_gldChoosePixelFormat	uVar23	accumGreenSize	INFERRED	attr 0x18
+local	_gldChoosePixelFormat	uVar24	accumBlueSize	INFERRED	attr 0x19
+local	_gldChoosePixelFormat	piVar25	oldRecordCursor	INFERRED	source cursor copying old records
+local	_gldChoosePixelFormat	puVar26	candidateCursor	INFERRED	source cursor copying new candidate rows
+local	_gldChoosePixelFormat	uVar27	screenMask	CONFIRMED	starts as library display mask, AND-ed by attr 0x54 = kCGLPFAScreenMask
+local	_gldChoosePixelFormat	uVar28	surfaceFlags	INFERRED	starts 0x510; attr 0x35 OffScreen |4, 0x36 FullScreen |2, 0x50 Window |1, 0x4c |8, 0x39 AuxDepthStencil |0x800, 0x5a PixelBuffer |0x2000
+local	_gldChoosePixelFormat	uVar29	capabilityMask	INFERRED	starts 0xfffffc; attr 0x3a ColorFloat sets 0x3f000000; &0xff0fffff when colour<=32 and alpha<=8 bits
+local	_gldChoosePixelFormat	local_88	depthMask	INFERRED	FUN_00007ec0(depthSize) & 0x1ffff
+local	_gldChoosePixelFormat	local_84	stencilMask	INFERRED	FUN_00007ec0(stencilSize) & 0x1ffff
+local	_gldChoosePixelFormat	local_80	level	INFERRED	attr 3 value (short)
+local	_gldChoosePixelFormat	local_7c	auxBuffers	INFERRED	attr 7 = kCGLPFAAuxBuffers (short)
+local	_gldChoosePixelFormat	local_78	sampleBuffers	INFERRED	attr 0x37 = kCGLPFASampleBuffers (short)
+local	_gldChoosePixelFormat	local_74	samples	INFERRED	attr 0x38 = kCGLPFASamples (short)
+local	_gldChoosePixelFormat	local_70	antialiasMode	INFERRED	attr 0x3b Multisample -> 2, attr 0x3c Supersample -> 1
+local	_gldChoosePixelFormat	local_6c	sampleAlpha	INFERRED	attr 0x3d = kCGLPFASampleAlpha
+local	_gldChoosePixelFormat	local_68	minimumPolicy	INFERRED	attr 0x33 = kCGLPFAMinimumPolicy; passed to FUN_0001ae20
+local	_gldChoosePixelFormat	local_64	maximumPolicy	INFERRED	attr 0x34 = kCGLPFAMaximumPolicy; passed to FUN_0001ae20
+local	_gldChoosePixelFormat	local_60	candidateRow	CONFIRMED	&local_194: first row of the candidate 0x34-byte pixel-format records
+local	_gldChoosePixelFormat	local_194	pfNext	CONFIRMED	record +0x00, cleared before the row is built
+local	_gldChoosePixelFormat	local_190	pfRendererId	CONFIRMED	record +0x04 = FUN_00017720(index) | index<<24
+local	_gldChoosePixelFormat	local_18c	pfSurfaceFlags	CONFIRMED	record +0x08 = surfaceFlags (|0x200 when several renderers match)
+local	_gldChoosePixelFormat	local_188	pfBufferFlags	CONFIRMED	record +0x0c = bufferFlags
+local	_gldChoosePixelFormat	local_184	pfColorMask	CONFIRMED	record +0x10 = capabilityMask & colour mask & alpha mask
+local	_gldChoosePixelFormat	local_180	pfAccumMask	CONFIRMED	record +0x14 = accum mask & 0xbffffffc & accum-alpha mask
+local	_gldChoosePixelFormat	local_17c	pfDepthMask	CONFIRMED	record +0x18 = depthMask
+local	_gldChoosePixelFormat	local_178	pfStencilMask	CONFIRMED	record +0x1c = stencilMask
+local	_gldChoosePixelFormat	local_174	pfLevel	CONFIRMED	record +0x20 = level
+local	_gldChoosePixelFormat	local_172	pfAuxBuffers	CONFIRMED	record +0x22 = auxBuffers
+local	_gldChoosePixelFormat	local_170	pfSampleBuffers	CONFIRMED	record +0x24 = sampleBuffers
+local	_gldChoosePixelFormat	local_16e	pfSamples	CONFIRMED	record +0x26 = samples
+local	_gldChoosePixelFormat	local_16c	pfAntialiasMode	CONFIRMED	record +0x28 = antialiasMode
+local	_gldChoosePixelFormat	local_168	pfSampleAlpha	CONFIRMED	record +0x2c = sampleAlpha
+local	_gldChoosePixelFormat	local_167	pfPad0	CONFIRMED	record +0x2d, cleared
+local	_gldChoosePixelFormat	local_166	pfPad1	CONFIRMED	record +0x2e, cleared
+local	_gldChoosePixelFormat	local_165	pfPad2	CONFIRMED	record +0x2f, cleared
+local	_gldChoosePixelFormat	local_164	pfDisplayMask	CONFIRMED	record +0x30 = renderer display mask
