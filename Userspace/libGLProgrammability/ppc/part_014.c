@@ -2989,23 +2989,23 @@ int _PPCRuntimeCompilerCalculateIndirectAddress(compiler, param_2, param_3, para
   undefined4 param_8;
 {
   ushort uVar1;
-  uint *puVar2;
+  uint *codeCursor;
   short sStack00000028;
   
   sStack00000028 = (short)((uint)param_5 >> 0x10);
-  puVar2 = *(uint **)(compiler + 0xe30);
-  *puVar2 = ((uint)(param_2 - *(int *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80)) >> 4) +
+  codeCursor = *(uint **)(compiler + 0xe30);
+  *codeCursor = ((uint)(param_2 - *(int *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80)) >> 4) +
             (int)sStack00000028 & 0xffff | 0x39f00000;
-  *(uint **)(compiler + 0xe30) = puVar2 + 1;
+  *(uint **)(compiler + 0xe30) = codeCursor + 1;
   uVar1 = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x8a);
-  puVar2[2] = 0x1def0010;
-  puVar2[1] = uVar1 | 0x71ef0000;
-  *(uint **)(compiler + 0xe30) = puVar2 + 3;
-  puVar2[3] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80) | 0x3ee00000;
-  *(uint **)(compiler + 0xe30) = puVar2 + 4;
-  puVar2[4] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x82) | 0x62f70000;
-  puVar2[5] = 0x7defba14;
-  *(uint **)(compiler + 0xe30) = puVar2 + 6;
+  codeCursor[2] = 0x1def0010;
+  codeCursor[1] = uVar1 | 0x71ef0000;
+  *(uint **)(compiler + 0xe30) = codeCursor + 3;
+  codeCursor[3] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80) | 0x3ee00000;
+  *(uint **)(compiler + 0xe30) = codeCursor + 4;
+  codeCursor[4] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x82) | 0x62f70000;
+  codeCursor[5] = 0x7defba14;
+  *(uint **)(compiler + 0xe30) = codeCursor + 6;
   return;
 }
 
@@ -3625,11 +3625,12 @@ int _PPCRuntimeCompilerSaveRegisterToMemory(compiler, param_2)
   int compiler;
   int param_2;
 {
+  uint *codeCursor2;
   uint *puVar1;
   uint uVar2;
   undefined4 uVar3;
   int iVar4;
-  undefined4 *puVar5;
+  undefined4 *codeCursor;
   uint *puVar6;
   uint uVar7;
   int iVar8;
@@ -3666,9 +3667,9 @@ LAB_97bd9944:
     if ((*(unsigned char *)((unsigned char *)&(local_34) + 0)) == '\x0f') {
       iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if ((((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) && (*puVar1 == 0)) {
-        puVar6 = *(uint **)(compiler + 0xe30);
-        *puVar6 = param_2 << 0x10 | param_2 << 0xb | 0x12600484;
-        *(uint **)(compiler + 0xe30) = puVar6 + 1;
+        codeCursor2 = *(uint **)(compiler + 0xe30);
+        *codeCursor2 = param_2 << 0x10 | param_2 << 0xb | 0x12600484;
+        *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
         return;
       }
       if ((char)local_40 == '\0') {
@@ -3677,119 +3678,119 @@ LAB_97bd9944:
           uVar2 = param_2 << 0x15 | iVar8 * 0x800 | 0x7c0001ce;
           goto LAB_97bd9944;
         }
-        puVar6 = *(uint **)(compiler + 0xe30);
+        codeCursor2 = *(uint **)(compiler + 0xe30);
         uVar7 = *puVar1 & 0xffff | 0x39e00000;
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c0079ce;
       }
       else {
         ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
         uVar7 = 0x82ef0000;
-        puVar6 = *(uint **)(compiler + 0xe30);
+        codeCursor2 = *(uint **)(compiler + 0xe30);
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b9ce;
       }
     }
     else {
       iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) {
-        puVar5 = *(undefined4 **)(compiler + 0xe30);
-        puVar5[1] = 0x10836a8c;
-        *puVar5 = 0x10694c84;
-        *(undefined4 **)(compiler + 0xe30) = puVar5 + 3;
+        codeCursor = *(undefined4 **)(compiler + 0xe30);
+        codeCursor[1] = 0x10836a8c;
+        *codeCursor = 0x10694c84;
+        *(undefined4 **)(compiler + 0xe30) = codeCursor + 3;
         uVar3 = 0x1063212c;
         if ((local_34 & 0x1000000) == 0) {
           uVar3 = 0x1063492c;
         }
-        puVar5[2] = uVar3;
-        puVar5 = *(undefined4 **)(compiler + 0xe30);
+        codeCursor[2] = uVar3;
+        codeCursor = *(undefined4 **)(compiler + 0xe30);
         uVar3 = 0x1063212c;
-        *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
+        *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
         if ((local_34 & 0x2000000) == 0) {
           uVar3 = 0x1063492c;
         }
-        *puVar5 = uVar3;
-        puVar5 = *(undefined4 **)(compiler + 0xe30);
+        *codeCursor = uVar3;
+        codeCursor = *(undefined4 **)(compiler + 0xe30);
         uVar3 = 0x1063212c;
-        *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
+        *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
         if ((local_34 & 0x4000000) == 0) {
           uVar3 = 0x1063492c;
         }
-        *puVar5 = uVar3;
-        puVar5 = *(undefined4 **)(compiler + 0xe30);
+        *codeCursor = uVar3;
+        codeCursor = *(undefined4 **)(compiler + 0xe30);
         uVar3 = 0x1063212c;
-        *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
+        *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
         if ((local_34 & 0x8000000) == 0) {
           uVar3 = 0x1063492c;
         }
-        *puVar5 = uVar3;
+        *codeCursor = uVar3;
         puVar6 = *(uint **)(compiler + 0xe30);
         uVar2 = param_2 << 0xb | 0x127300ea;
         goto LAB_97bd9944;
       }
       iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 9)) {
-        puVar5 = *(undefined4 **)(compiler + 0xe30);
-        *puVar5 = 0x39e00210;
-        puVar5[1] = param_2 << 0x15 | 0x7c0379ce;
-        puVar6 = puVar5 + 3;
-        puVar5[2] = 0xc1a30218;
+        codeCursor = *(undefined4 **)(compiler + 0xe30);
+        *codeCursor = 0x39e00210;
+        codeCursor[1] = param_2 << 0x15 | 0x7c0379ce;
+        puVar6 = codeCursor + 3;
+        codeCursor[2] = 0xc1a30218;
         goto LAB_97bd994c;
       }
       if ((char)local_40 == '\0') {
         if ((local_34 & 0x1000000) != 0) {
-          puVar6 = *(uint **)(compiler + 0xe30);
-          *puVar6 = (ushort)*puVar1 | 0x39e00000;
-          puVar6[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
-          *(uint **)(compiler + 0xe30) = puVar6 + 2;
+          codeCursor2 = *(uint **)(compiler + 0xe30);
+          *codeCursor2 = (ushort)*puVar1 | 0x39e00000;
+          codeCursor2[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
+          *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
         if ((local_34 & 0x2000000) != 0) {
-          puVar6 = *(uint **)(compiler + 0xe30);
-          *puVar6 = *(ushort *)((int)puVar1 + 6) | 0x39e00000;
-          puVar6[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
-          *(uint **)(compiler + 0xe30) = puVar6 + 2;
+          codeCursor2 = *(uint **)(compiler + 0xe30);
+          *codeCursor2 = *(ushort *)((int)puVar1 + 6) | 0x39e00000;
+          codeCursor2[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
+          *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
         if ((local_34 & 0x4000000) != 0) {
-          puVar6 = *(uint **)(compiler + 0xe30);
-          *puVar6 = *(ushort *)((int)puVar1 + 10) | 0x39e00000;
-          puVar6[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
-          *(uint **)(compiler + 0xe30) = puVar6 + 2;
+          codeCursor2 = *(uint **)(compiler + 0xe30);
+          *codeCursor2 = *(ushort *)((int)puVar1 + 10) | 0x39e00000;
+          codeCursor2[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
+          *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
         if ((local_34 & 0x8000000) == 0) {
           return;
         }
-        puVar6 = *(uint **)(compiler + 0xe30);
+        codeCursor2 = *(uint **)(compiler + 0xe30);
         uVar7 = *(ushort *)((int)puVar1 + 0xe) | 0x39e00000;
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00798e;
       }
       else {
         ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
         if ((local_34 & 0x1000000) != 0) {
-          puVar5 = *(undefined4 **)(compiler + 0xe30);
-          *puVar5 = 0x82ef0000;
-          puVar5[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
-          *(undefined4 **)(compiler + 0xe30) = puVar5 + 2;
+          codeCursor = *(undefined4 **)(compiler + 0xe30);
+          *codeCursor = 0x82ef0000;
+          codeCursor[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
+          *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
         if ((local_34 & 0x2000000) != 0) {
-          puVar5 = *(undefined4 **)(compiler + 0xe30);
-          *puVar5 = 0x82ef0004;
-          puVar5[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
-          *(undefined4 **)(compiler + 0xe30) = puVar5 + 2;
+          codeCursor = *(undefined4 **)(compiler + 0xe30);
+          *codeCursor = 0x82ef0004;
+          codeCursor[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
+          *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
         if ((local_34 & 0x4000000) != 0) {
-          puVar5 = *(undefined4 **)(compiler + 0xe30);
-          *puVar5 = 0x82ef0008;
-          puVar5[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
-          *(undefined4 **)(compiler + 0xe30) = puVar5 + 2;
+          codeCursor = *(undefined4 **)(compiler + 0xe30);
+          *codeCursor = 0x82ef0008;
+          codeCursor[1] = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
+          *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
         if ((local_34 & 0x8000000) == 0) {
           return;
         }
-        puVar6 = *(uint **)(compiler + 0xe30);
+        codeCursor2 = *(uint **)(compiler + 0xe30);
         uVar7 = 0x82ef000c;
         uVar2 = param_2 << 0x15 | iVar8 * 0x10000 | 0x7c00b98e;
       }
     }
-    *puVar6 = uVar7;
-    puVar6 = puVar6 + 1;
+    *codeCursor2 = uVar7;
+    puVar6 = codeCursor2 + 1;
     *puVar6 = uVar2;
   }
   puVar6 = puVar6 + 1;
