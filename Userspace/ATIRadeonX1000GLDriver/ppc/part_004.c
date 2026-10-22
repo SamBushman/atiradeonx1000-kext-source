@@ -384,40 +384,48 @@ int FUN_00024fd0()
 }
 
 /* FUN_00024fe0 @ 0x24fe0 (2908 bytes) */
-double FUN_00024fe0(int ctx,int param_2,float *param_3,double fparam_1)
+double FUN_00024fe0(int ctx,int maxCount,float *outConstants,double fparam_1)
 {
+  int stateBlockB;
+  int stateRowPtr;
+  int engineStateB;
+  float *vecPtr;
+  uint operandFile;
+  uint operandWord;
+  int operandsLeft;
+  int programDataB;
   int engineState;
-  bool bVar1;
+  bool useDefaultProgram;
   float fVar2;
   float fVar3;
   float fVar4;
   double dVar5;
   float fVar6;
-  int iVar7;
-  undefined *puVar8;
-  dword *pdVar9;
+  int paramBase;
+  undefined *stateRecord;
+  dword *srcZPtr;
   int iVar10;
   int iVar11;
-  int iVar12;
+  int stateBlockA;
   int iVar13;
-  int iVar14;
-  uint uVar15;
-  float *pfVar16;
-  dword *pdVar17;
+  int programData;
+  uint programFlags;
+  float *constantSrc;
+  dword *srcWPtr;
   int iVar18;
-  int iVar19;
+  int programHeader;
   uint uVar20;
-  dword *pdVar21;
+  dword *srcYPtr;
   uint uVar22;
   int iVar23;
-  int iVar24;
-  int iVar25;
-  int *piVar26;
-  uint *puVar27;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84 [3];
+  int literalPool;
+  int operandIndex;
+  int *programObject;
+  uint *operandPtr;
+  float vecX;
+  float vecY;
+  float vecZ;
+  float vecW [3];
   undefined4 local_78;
   float fStack_74;
   undefined4 local_70;
@@ -427,137 +435,137 @@ double FUN_00024fe0(int ctx,int param_2,float *param_3,double fparam_1)
   undefined4 local_60;
   float fStack_5c;
   
-  piVar26 = *(int **)(*(int *)(ctx + GLD_engineObjects) + 0x19c);
-  bVar1 = piVar26 == (int *)0x0;
-  if (bVar1) {
-    piVar26 = *(int **)(*(int *)(ctx + GLD_engineObjects) + 400);
+  programObject = *(int **)(*(int *)(ctx + GLD_engineObjects) + 0x19c);
+  useDefaultProgram = programObject == (int *)0x0;
+  if (useDefaultProgram) {
+    programObject = *(int **)(*(int *)(ctx + GLD_engineObjects) + 400);
   }
-  iVar14 = piVar26[0xd];
-  if (((iVar14 == 0) && (iVar14 = piVar26[0xc], iVar14 == 0)) &&
-     (iVar14 = piVar26[0xb], iVar14 == 0)) {
-    iVar19 = *piVar26;
-    iVar14 = *(int *)(iVar19 + 4);
+  programData = programObject[0xd];
+  if (((programData == 0) && (programData = programObject[0xc], programData == 0)) &&
+     (programData = programObject[0xb], programData == 0)) {
+    programHeader = *programObject;
+    programData = *(int *)(programHeader + 4);
   }
   else {
-    iVar19 = *piVar26;
+    programHeader = *programObject;
   }
-  iVar7 = *(int *)(iVar14 + 0x6c);
-  iVar24 = *(int *)(iVar19 + 0x18);
-  puVar27 = (uint *)(iVar14 + *(int *)(iVar14 + 0x2c) * 8);
-  iVar19 = *(int *)(iVar14 + 0x28);
-  if (param_2 < *(int *)(iVar14 + 0x28)) {
-    iVar19 = param_2;
+  paramBase = *(int *)(programData + 0x6c);
+  literalPool = *(int *)(programHeader + 0x18);
+  operandPtr = (uint *)(programData + *(int *)(programData + 0x2c) * 8);
+  operandsLeft = *(int *)(programData + 0x28);
+  if (maxCount < *(int *)(programData + 0x28)) {
+    operandsLeft = maxCount;
   }
-  if (iVar19 < 1) {
+  if (operandsLeft < 1) {
 LAB_00025b04:
     fVar3 = FLOAT_001aa13c;
     fVar2 = FLOAT_001aa138;
     fVar6 = FLOAT_001aa134;
-    iVar14 = piVar26[0xe];
-    if (iVar14 != 0) {
-      uVar15 = *(uint *)(iVar14 + 0x20);
-      if ((uVar15 & 0x4000000) != 0) {
-        *param_3 = FLOAT_001aa130;
-        param_3[1] = fVar6;
-        param_3[2] = fVar2;
-        param_3[3] = fVar3;
-        param_3 = param_3 + 4;
-        uVar15 = *(uint *)(iVar14 + 0x20);
+    programDataB = programObject[0xe];
+    if (programDataB != 0) {
+      programFlags = *(uint *)(programDataB + 0x20);
+      if ((programFlags & 0x4000000) != 0) {
+        *outConstants = FLOAT_001aa130;
+        outConstants[1] = fVar6;
+        outConstants[2] = fVar2;
+        outConstants[3] = fVar3;
+        outConstants = outConstants + 4;
+        programFlags = *(uint *)(programDataB + 0x20);
       }
-      if ((uVar15 & 0x2000000) != 0) {
-        *param_3 = *(float *)(((unsigned char *)0x00002de0) + *(int *)(ctx + GLD_engineState));
-        param_3[1] = *(float *)(((unsigned char *)0x00002de4) + *(int *)(ctx + GLD_engineState));
-        param_3[2] = *(float *)(((unsigned char *)0x00002de8) + *(int *)(ctx + GLD_engineState));
-        param_3[4] = -*(float *)(((unsigned char *)0x00002dfc) + *(int *)(ctx + GLD_engineState));
+      if ((programFlags & 0x2000000) != 0) {
+        *outConstants = *(float *)(((unsigned char *)0x00002de0) + *(int *)(ctx + GLD_engineState));
+        outConstants[1] = *(float *)(((unsigned char *)0x00002de4) + *(int *)(ctx + GLD_engineState));
+        outConstants[2] = *(float *)(((unsigned char *)0x00002de8) + *(int *)(ctx + GLD_engineState));
+        outConstants[4] = -*(float *)(((unsigned char *)0x00002dfc) + *(int *)(ctx + GLD_engineState));
         fVar6 = FLOAT_001aa140;
-        param_3[5] = *(float *)(((unsigned char *)0x00002df8) + *(int *)(ctx + GLD_engineState)) *
+        outConstants[5] = *(float *)(((unsigned char *)0x00002df8) + *(int *)(ctx + GLD_engineState)) *
                      *(float *)(((unsigned char *)0x00002dfc) + *(int *)(ctx + GLD_engineState));
         fVar2 = FLOAT_001aa144;
-        param_3[6] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + GLD_engineState)) * fVar6;
-        param_3[7] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + GLD_engineState)) * fVar2;
+        outConstants[6] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + GLD_engineState)) * fVar6;
+        outConstants[7] = *(float *)(((unsigned char *)0x00002df0) + *(int *)(ctx + GLD_engineState)) * fVar2;
       }
     }
     return fparam_1;
   }
-  iVar25 = 0;
+  operandIndex = 0;
 LAB_00025090:
   dVar5 = DOUBLE_001aa1e0;
   fVar6 = FLOAT_001aa0e8;
-  uVar15 = *puVar27;
-  uVar20 = uVar15 & 0x1f0000;
-  if (uVar20 == 0) goto LAB_00025af0;
-  if (uVar20 == 0x110000) {
-    pfVar16 = (float *)(iVar14 + iVar7 * 8 + (uint)(ushort)*puVar27 * 0x10);
+  operandWord = *operandPtr;
+  operandFile = operandWord & 0x1f0000;
+  if (operandFile == 0) goto LAB_00025af0;
+  if (operandFile == 0x110000) {
+    constantSrc = (float *)(programData + paramBase * 8 + (uint)(ushort)*operandPtr * 0x10);
 LAB_0002546c:
-    if ((bVar1) || ((uVar15 & 0x1c000000) == 0x4000000)) {
-      *param_3 = *pfVar16;
-      param_3[1] = pfVar16[1];
-      param_3[2] = pfVar16[2];
-      param_3[3] = pfVar16[3];
+    if ((useDefaultProgram) || ((operandWord & 0x1c000000) == 0x4000000)) {
+      *outConstants = *constantSrc;
+      outConstants[1] = constantSrc[1];
+      outConstants[2] = constantSrc[2];
+      outConstants[3] = constantSrc[3];
     }
-    else if ((uVar15 & 0x1c000000) == 0xc000000) {
+    else if ((operandWord & 0x1c000000) == 0xc000000) {
       local_78 = 0x43300000;
-      fStack_74 = -*pfVar16;
-      *param_3 = (float)((double)CONCAT44(0x43300000,-*pfVar16) - DOUBLE_001aa1e0);
+      fStack_74 = -*constantSrc;
+      *outConstants = (float)((double)CONCAT44(0x43300000,-*constantSrc) - DOUBLE_001aa1e0);
       local_70 = 0x43300000;
-      fStack_6c = -pfVar16[1];
-      param_3[1] = (float)((double)CONCAT44(0x43300000,-pfVar16[1]) - dVar5);
+      fStack_6c = -constantSrc[1];
+      outConstants[1] = (float)((double)CONCAT44(0x43300000,-constantSrc[1]) - dVar5);
       local_68 = 0x43300000;
-      fStack_64 = -pfVar16[2];
-      param_3[2] = (float)((double)CONCAT44(0x43300000,-pfVar16[2]) - dVar5);
+      fStack_64 = -constantSrc[2];
+      outConstants[2] = (float)((double)CONCAT44(0x43300000,-constantSrc[2]) - dVar5);
       local_60 = 0x43300000;
-      fStack_5c = -pfVar16[3];
-      param_3[3] = (float)((double)CONCAT44(0x43300000,-pfVar16[3]) - dVar5);
+      fStack_5c = -constantSrc[3];
+      outConstants[3] = (float)((double)CONCAT44(0x43300000,-constantSrc[3]) - dVar5);
     }
     else {
-      if (*pfVar16 == 0.0) {
+      if (*constantSrc == 0.0) {
         fVar6 = 0.0;
       }
       else {
         fVar6 = 1.0;
       }
-      *param_3 = fVar6;
-      if (pfVar16[1] == 0.0) {
+      *outConstants = fVar6;
+      if (constantSrc[1] == 0.0) {
         fVar6 = 0.0;
       }
       else {
         fVar6 = 1.0;
       }
-      param_3[1] = fVar6;
-      if (pfVar16[2] == 0.0) {
+      outConstants[1] = fVar6;
+      if (constantSrc[2] == 0.0) {
         fVar6 = 0.0;
       }
       else {
         fVar6 = 1.0;
       }
-      param_3[2] = fVar6;
-      if (pfVar16[3] == 0.0) {
+      outConstants[2] = fVar6;
+      if (constantSrc[3] == 0.0) {
         fVar6 = 0.0;
       }
       else {
         fVar6 = 1.0;
       }
-      param_3[3] = fVar6;
+      outConstants[3] = fVar6;
     }
     goto LAB_00025af0;
   }
-  if (uVar20 == 0x10000) {
-    pfVar16 = (float *)(iVar24 + (uint)(ushort)*puVar27 * 0x10);
+  if (operandFile == 0x10000) {
+    constantSrc = (float *)(literalPool + (uint)(ushort)*operandPtr * 0x10);
     goto LAB_0002546c;
   }
-  if (uVar20 == 0x20000) {
-    iVar23 = (uint)(ushort)*puVar27 * 0x10;
+  if (operandFile == 0x20000) {
+    iVar23 = (uint)(ushort)*operandPtr * 0x10;
     iVar10 = iVar23 + *(int *)(((unsigned char *)0x00004310) + *(int *)(ctx + GLD_engineState));
-    *param_3 = *(float *)(iVar23 + *(int *)(((unsigned char *)0x00004310) + *(int *)(ctx + GLD_engineState)));
-    param_3[1] = *(float *)(iVar10 + 4);
-    param_3[2] = *(float *)(iVar10 + 8);
-    param_3[3] = *(float *)(iVar10 + 0xc);
+    *outConstants = *(float *)(iVar23 + *(int *)(((unsigned char *)0x00004310) + *(int *)(ctx + GLD_engineState)));
+    outConstants[1] = *(float *)(iVar10 + 4);
+    outConstants[2] = *(float *)(iVar10 + 8);
+    outConstants[3] = *(float *)(iVar10 + 0xc);
     goto LAB_00025af0;
   }
-  if (uVar20 == 0x100000) {
-    uVar20 = uVar15 >> 0xc & 3;
-    uVar22 = uVar15 & 0xff;
-    switch(uVar15 >> 8 & 7) {
+  if (operandFile == 0x100000) {
+    uVar20 = operandWord >> 0xc & 3;
+    uVar22 = operandWord & 0xff;
+    switch(operandWord >> 8 & 7) {
     default:
       iVar23 = 0;
       break;
@@ -576,87 +584,87 @@ LAB_0002546c:
     case 5:
       iVar23 = (uVar22 + 8) * 0x40;
     }
-    uVar15 = uVar15 >> 0xe & 3;
+    operandWord = operandWord >> 0xe & 3;
     iVar10 = *(int *)(ctx + GLD_engineState) + 0x1860 + iVar23;
-    if ((1 < uVar15) && (iVar10 = iVar23 + *(int *)(ctx + GLD_engineState) + 0x1e60, 3 < uVar15)) {
+    if ((1 < operandWord) && (iVar10 = iVar23 + *(int *)(ctx + GLD_engineState) + 0x1e60, 3 < operandWord)) {
       iVar10 = 0;
     }
-    if (uVar15 < 3) {
-      if (uVar15 == 0) {
+    if (operandWord < 3) {
+      if (operandWord == 0) {
 LAB_000256f4:
         iVar23 = uVar20 * 4;
         iVar11 = iVar10 + iVar23;
-        local_90 = *(float *)(iVar10 + iVar23);
-        local_8c = *(float *)(iVar11 + 0x10);
-        local_88 = *(float *)(iVar11 + 0x20);
-        local_84[0] = *(float *)(iVar11 + 0x30);
+        vecX = *(float *)(iVar10 + iVar23);
+        vecY = *(float *)(iVar11 + 0x10);
+        vecZ = *(float *)(iVar11 + 0x20);
+        vecW[0] = *(float *)(iVar11 + 0x30);
       }
       else {
         iVar23 = uVar20 * 0x10;
         iVar11 = iVar10 + iVar23;
-        local_90 = *(float *)(iVar10 + iVar23);
-        local_8c = *(float *)(iVar11 + 4);
-        local_88 = *(float *)(iVar11 + 8);
-        local_84[0] = *(float *)(iVar11 + 0xc);
+        vecX = *(float *)(iVar10 + iVar23);
+        vecY = *(float *)(iVar11 + 4);
+        vecZ = *(float *)(iVar11 + 8);
+        vecW[0] = *(float *)(iVar11 + 0xc);
       }
     }
-    else if (uVar15 == 3) goto LAB_000256f4;
+    else if (operandWord == 3) goto LAB_000256f4;
     goto LAB_00025ac8;
   }
-  switch(uVar15 >> 0x10 & 0x1f) {
+  switch(operandWord >> 0x10 & 0x1f) {
   case 0:
-    pdVar21 = (dword *)&local_8c;
-    pdVar9 = (dword *)&local_88;
-    pdVar17 = (dword *)local_84;
-    pfVar16 = &local_90;
+    srcYPtr = (dword *)&vecY;
+    srcZPtr = (dword *)&vecZ;
+    srcWPtr = (dword *)vecW;
+    vecPtr = &vecX;
     break;
   default:
     goto switchD_00025774_caseD_1;
   case 2:
-    pfVar16 = (float *)((uVar15 & 0xffff) * 0x10 +
+    vecPtr = (float *)((operandWord & 0xffff) * 0x10 +
                        *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + GLD_engineState)));
-    pdVar21 = (dword *)(pfVar16 + 1);
-    pdVar9 = (dword *)(pfVar16 + 2);
-    pdVar17 = (dword *)(pfVar16 + 3);
+    srcYPtr = (dword *)(vecPtr + 1);
+    srcZPtr = (dword *)(vecPtr + 2);
+    srcWPtr = (dword *)(vecPtr + 3);
     break;
   case 3:
-    uVar20 = uVar15 & 0xff;
-    switch(uVar15 >> 8 & 0xf) {
+    uVar20 = operandWord & 0xff;
+    switch(operandWord >> 8 & 0xf) {
     case 0:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24c0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x24c0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 1:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24d0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x24d0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 2:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24e0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x24e0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 3:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x24f0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x24f0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 4:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x2500 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x2500 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 5:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x2510 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x2510 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 6:
       iVar23 = uVar20 * 0x80 + *(int *)(ctx + GLD_engineState);
@@ -664,91 +672,91 @@ LAB_000256f4:
       fVar3 = *(float *)(iVar23 + 0x24f0);
       fVar4 = *(float *)(iVar23 + 0x24f8) + FLOAT_001aa0e8;
       fparam_1 = _sqrt((double)(fVar4 * fVar4 + fVar3 * fVar3 + fVar2 * fVar2));
-      local_84[0] = fVar6;
+      vecW[0] = fVar6;
       fVar6 = (float)(DOUBLE_001aa200 / fparam_1);
-      local_88 = fVar4 * fVar6;
-      local_90 = fVar3 * fVar6;
-      local_8c = fVar2 * fVar6;
+      vecZ = fVar4 * fVar6;
+      vecX = fVar3 * fVar6;
+      vecY = fVar2 * fVar6;
       goto LAB_00025ac8;
     case 7:
-      pfVar16 = (float *)(uVar20 * 0x80 + 0x2530 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x80 + 0x2530 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     default:
       goto switchD_00025774_caseD_1;
     }
     break;
   case 4:
-    uVar20 = uVar15 >> 9 & 3;
-    iVar12 = *(int *)(ctx + GLD_engineState) + 0x24c0;
-    iVar23 = (uVar15 & 0xff) * 0x80;
-    iVar10 = (uVar15 >> 8 & 1) * 0x240;
-    iVar11 = *(int *)(ctx + GLD_engineState) + 0x28c0;
-    iVar18 = iVar12 + iVar23;
-    iVar13 = iVar11 + iVar10;
+    uVar20 = operandWord >> 9 & 3;
+    stateBlockA = *(int *)(ctx + GLD_engineState) + 0x24c0;
+    iVar23 = (operandWord & 0xff) * 0x80;
+    iVar10 = (operandWord >> 8 & 1) * 0x240;
+    stateBlockB = *(int *)(ctx + GLD_engineState) + 0x28c0;
+    iVar18 = stateBlockA + iVar23;
+    iVar13 = stateBlockB + iVar10;
     if (uVar20 == 1) {
-      local_90 = *(float *)(iVar18 + 0x10) * *(float *)(iVar13 + 0x10);
-      local_8c = *(float *)(iVar18 + 0x14) * *(float *)(iVar13 + 0x14);
-      local_88 = *(float *)(iVar18 + 0x18) * *(float *)(iVar13 + 0x18);
-      local_84[0] = *(float *)(iVar13 + 0x1c);
+      vecX = *(float *)(iVar18 + 0x10) * *(float *)(iVar13 + 0x10);
+      vecY = *(float *)(iVar18 + 0x14) * *(float *)(iVar13 + 0x14);
+      vecZ = *(float *)(iVar18 + 0x18) * *(float *)(iVar13 + 0x18);
+      vecW[0] = *(float *)(iVar13 + 0x1c);
     }
     else if (uVar20 == 2) {
-      local_90 = *(float *)(iVar18 + 0x20) * *(float *)(iVar13 + 0x20);
-      local_8c = *(float *)(iVar18 + 0x24) * *(float *)(iVar13 + 0x24);
-      local_88 = *(float *)(iVar18 + 0x28) * *(float *)(iVar13 + 0x28);
-      local_84[0] = *(float *)(iVar13 + 0x2c);
+      vecX = *(float *)(iVar18 + 0x20) * *(float *)(iVar13 + 0x20);
+      vecY = *(float *)(iVar18 + 0x24) * *(float *)(iVar13 + 0x24);
+      vecZ = *(float *)(iVar18 + 0x28) * *(float *)(iVar13 + 0x28);
+      vecW[0] = *(float *)(iVar13 + 0x2c);
     }
     else {
       if (uVar20 != 0) goto switchD_00025774_caseD_1;
-      local_90 = *(float *)(iVar12 + iVar23) * *(float *)(iVar11 + iVar10);
-      local_8c = *(float *)(iVar18 + 4) * *(float *)(iVar13 + 4);
-      local_88 = *(float *)(iVar18 + 8) * *(float *)(iVar13 + 8);
-      local_84[0] = *(float *)(iVar13 + 0xc);
+      vecX = *(float *)(stateBlockA + iVar23) * *(float *)(stateBlockB + iVar10);
+      vecY = *(float *)(iVar18 + 4) * *(float *)(iVar13 + 4);
+      vecZ = *(float *)(iVar18 + 8) * *(float *)(iVar13 + 8);
+      vecW[0] = *(float *)(iVar13 + 0xc);
     }
     goto LAB_00025ac8;
   case 5:
-    uVar20 = uVar15 & 1;
-    switch(uVar15 >> 1 & 7) {
+    uVar20 = operandWord & 1;
+    switch(operandWord >> 1 & 7) {
     case 0:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28c0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x240 + 0x28c0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 1:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28d0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x240 + 0x28d0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 2:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28e0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x240 + 0x28e0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 3:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x28f0 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x240 + 0x28f0 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 4:
-      pfVar16 = (float *)(uVar20 * 0x240 + 0x2900 + *(int *)(ctx + GLD_engineState));
-      pdVar21 = (dword *)(pfVar16 + 1);
-      pdVar9 = (dword *)(pfVar16 + 2);
-      pdVar17 = (dword *)(pfVar16 + 3);
+      vecPtr = (float *)(uVar20 * 0x240 + 0x2900 + *(int *)(ctx + GLD_engineState));
+      srcYPtr = (dword *)(vecPtr + 1);
+      srcZPtr = (dword *)(vecPtr + 2);
+      srcWPtr = (dword *)(vecPtr + 3);
       break;
     case 5:
-      iVar23 = *(int *)(ctx + GLD_engineState);
-      iVar10 = iVar23 + 0x28c0 + uVar20 * 0x240;
-      local_90 = *(float *)(iVar23 + 0x24b0) * *(float *)(iVar23 + 0x28c0 + uVar20 * 0x240) +
+      engineStateB = *(int *)(ctx + GLD_engineState);
+      iVar10 = engineStateB + 0x28c0 + uVar20 * 0x240;
+      vecX = *(float *)(engineStateB + 0x24b0) * *(float *)(engineStateB + 0x28c0 + uVar20 * 0x240) +
                  *(float *)(iVar10 + 0x30);
-      local_8c = *(float *)(iVar23 + 0x24b4) * *(float *)(iVar10 + 4) + *(float *)(iVar10 + 0x34);
-      local_88 = *(float *)(iVar23 + 0x24b8) * *(float *)(iVar10 + 8) + *(float *)(iVar10 + 0x38);
-      local_84[0] = *(float *)(iVar10 + 0x1c);
+      vecY = *(float *)(engineStateB + 0x24b4) * *(float *)(iVar10 + 4) + *(float *)(iVar10 + 0x34);
+      vecZ = *(float *)(engineStateB + 0x24b8) * *(float *)(iVar10 + 8) + *(float *)(iVar10 + 0x38);
+      vecW[0] = *(float *)(iVar10 + 0x1c);
       goto LAB_00025ac8;
     default:
       goto switchD_00025774_caseD_1;
@@ -756,160 +764,160 @@ LAB_000256f4:
     break;
   case 6:
     engineState = *(int *)(ctx + GLD_engineState);
-    pdVar17 = (dword *)(engineState + 0x24bc);
-    pfVar16 = (float *)(engineState + 0x24b0);
-    pdVar21 = (dword *)(engineState + 0x24b4);
-    pdVar9 = (dword *)(engineState + 0x24b8);
+    srcWPtr = (dword *)(engineState + 0x24bc);
+    vecPtr = (float *)(engineState + 0x24b0);
+    srcYPtr = (dword *)(engineState + 0x24b4);
+    srcZPtr = (dword *)(engineState + 0x24b8);
     break;
   case 7:
-    uVar20 = uVar15 >> 5 & 7;
-    uVar15 = uVar15 & 0x1f;
+    uVar20 = operandWord >> 5 & 7;
+    operandWord = operandWord & 0x1f;
     if (uVar20 == 1) {
       engineState = *(int *)(ctx + GLD_engineState);
-      puVar8 = ((unsigned char *)0x000039a0) + uVar15 * 0x94;
+      stateRecord = ((unsigned char *)0x000039a0) + operandWord * 0x94;
 LAB_00025180:
-      pdVar17 = (dword *)(puVar8 + engineState + 0x1c);
-      pfVar16 = (float *)(puVar8 + engineState + 0x10);
-      pdVar21 = (dword *)(puVar8 + engineState + 0x14);
-      pdVar9 = (dword *)(puVar8 + engineState + 0x18);
+      srcWPtr = (dword *)(stateRecord + engineState + 0x1c);
+      vecPtr = (float *)(stateRecord + engineState + 0x10);
+      srcYPtr = (dword *)(stateRecord + engineState + 0x14);
+      srcZPtr = (dword *)(stateRecord + engineState + 0x18);
     }
     else {
       if (uVar20 < 2) {
         if (uVar20 == 0) {
           engineState = *(int *)(ctx + GLD_engineState);
-          puVar8 = ((unsigned char *)0x00003980) + uVar15 * 0x94;
+          stateRecord = ((unsigned char *)0x00003980) + operandWord * 0x94;
           goto LAB_0002515c;
         }
         goto switchD_00025774_caseD_1;
       }
       if (uVar20 == 2) {
         engineState = *(int *)(ctx + GLD_engineState);
-        puVar8 = ((unsigned char *)0x000039c0) + uVar15 * 0x94;
+        stateRecord = ((unsigned char *)0x000039c0) + operandWord * 0x94;
 LAB_000251a4:
-        pdVar17 = (dword *)(puVar8 + engineState + 0x20);
-        pfVar16 = (float *)(puVar8 + engineState + 0x14);
-        pdVar21 = (dword *)(puVar8 + engineState + 0x18);
-        pdVar9 = (dword *)(puVar8 + engineState + 0x1c);
+        srcWPtr = (dword *)(stateRecord + engineState + 0x20);
+        vecPtr = (float *)(stateRecord + engineState + 0x14);
+        srcYPtr = (dword *)(stateRecord + engineState + 0x18);
+        srcZPtr = (dword *)(stateRecord + engineState + 0x1c);
       }
       else {
         if (uVar20 != 3) goto switchD_00025774_caseD_1;
         engineState = *(int *)(ctx + GLD_engineState);
-        puVar8 = ((unsigned char *)0x000039e0) + uVar15 * 0x94;
+        stateRecord = ((unsigned char *)0x000039e0) + operandWord * 0x94;
 LAB_000251c8:
-        pdVar17 = (dword *)(puVar8 + engineState + 0x24);
-        pfVar16 = (float *)(puVar8 + engineState + 0x18);
-        pdVar21 = (dword *)(puVar8 + engineState + 0x1c);
-        pdVar9 = (dword *)(puVar8 + engineState + 0x20);
+        srcWPtr = (dword *)(stateRecord + engineState + 0x24);
+        vecPtr = (float *)(stateRecord + engineState + 0x18);
+        srcYPtr = (dword *)(stateRecord + engineState + 0x1c);
+        srcZPtr = (dword *)(stateRecord + engineState + 0x20);
       }
     }
     break;
   case 8:
-    uVar20 = uVar15 >> 5 & 7;
-    uVar15 = uVar15 & 0x1f;
+    uVar20 = operandWord >> 5 & 7;
+    operandWord = operandWord & 0x1f;
     if (uVar20 == 1) {
       engineState = *(int *)(ctx + GLD_engineState);
-      puVar8 = ((unsigned char *)0x000039b0) + uVar15 * 0x94;
+      stateRecord = ((unsigned char *)0x000039b0) + operandWord * 0x94;
       goto LAB_00025180;
     }
     if (uVar20 < 2) {
       if (uVar20 == 0) {
         engineState = *(int *)(ctx + GLD_engineState);
-        puVar8 = ((unsigned char *)0x00003990) + uVar15 * 0x94;
+        stateRecord = ((unsigned char *)0x00003990) + operandWord * 0x94;
         goto LAB_0002515c;
       }
     }
     else {
       if (uVar20 == 2) {
         engineState = *(int *)(ctx + GLD_engineState);
-        puVar8 = ((unsigned char *)0x000039d0) + uVar15 * 0x94;
+        stateRecord = ((unsigned char *)0x000039d0) + operandWord * 0x94;
         goto LAB_000251a4;
       }
       if (uVar20 == 3) {
         engineState = *(int *)(ctx + GLD_engineState);
-        puVar8 = ((unsigned char *)0x000039f0) + uVar15 * 0x94;
+        stateRecord = ((unsigned char *)0x000039f0) + operandWord * 0x94;
         goto LAB_000251c8;
       }
     }
     goto switchD_00025774_caseD_1;
   case 9:
-    iVar23 = *(int *)(ctx + GLD_engineState) + (uVar15 & 0x1f) * 0x7c;
-    pfVar16 = (float *)(((unsigned char *)0x000031c0) + iVar23 + 4);
-    pdVar17 = (dword *)(((unsigned char *)0x000031c0) + iVar23 + 0x10);
-    pdVar9 = (dword *)(((unsigned char *)0x000031c0) + iVar23 + 0xc);
-    pdVar21 = (dword *)(((unsigned char *)0x000031c0) + iVar23 + 8);
+    stateRowPtr = *(int *)(ctx + GLD_engineState) + (operandWord & 0x1f) * 0x7c;
+    vecPtr = (float *)(((unsigned char *)0x000031c0) + stateRowPtr + 4);
+    srcWPtr = (dword *)(((unsigned char *)0x000031c0) + stateRowPtr + 0x10);
+    srcZPtr = (dword *)(((unsigned char *)0x000031c0) + stateRowPtr + 0xc);
+    srcYPtr = (dword *)(((unsigned char *)0x000031c0) + stateRowPtr + 8);
     break;
   case 10:
     engineState = *(int *)(ctx + GLD_engineState);
-    puVar8 = ((unsigned char *)0x00003e20) + (uVar15 & 0xff) * 0x10;
+    stateRecord = ((unsigned char *)0x00003e20) + (operandWord & 0xff) * 0x10;
 LAB_0002515c:
-    pdVar17 = (dword *)(puVar8 + engineState + 0x18);
-    pfVar16 = (float *)(puVar8 + engineState + 0xc);
-    pdVar21 = (dword *)(puVar8 + engineState + 0x10);
-    pdVar9 = (dword *)(puVar8 + engineState + 0x14);
+    srcWPtr = (dword *)(stateRecord + engineState + 0x18);
+    vecPtr = (float *)(stateRecord + engineState + 0xc);
+    srcYPtr = (dword *)(stateRecord + engineState + 0x10);
+    srcZPtr = (dword *)(stateRecord + engineState + 0x14);
     break;
   case 0xb:
     engineState = *(int *)(ctx + GLD_engineState);
-    pdVar17 = (dword *)(((unsigned char *)0x00002dec) + engineState);
-    pfVar16 = (float *)(((unsigned char *)0x00002de0) + engineState);
-    pdVar21 = (dword *)(((unsigned char *)0x00002de4) + engineState);
-    pdVar9 = (dword *)(((unsigned char *)0x00002de8) + engineState);
+    srcWPtr = (dword *)(((unsigned char *)0x00002dec) + engineState);
+    vecPtr = (float *)(((unsigned char *)0x00002de0) + engineState);
+    srcYPtr = (dword *)(((unsigned char *)0x00002de4) + engineState);
+    srcZPtr = (dword *)(((unsigned char *)0x00002de8) + engineState);
     break;
   case 0xc:
     engineState = *(int *)(ctx + GLD_engineState);
-    pdVar17 = (dword *)(((unsigned char *)0x00002dfc) + engineState);
-    pfVar16 = (float *)(((unsigned char *)0x00002df0) + engineState);
-    pdVar21 = (dword *)(((unsigned char *)0x00002df4) + engineState);
-    pdVar9 = (dword *)(((unsigned char *)0x00002df8) + engineState);
+    srcWPtr = (dword *)(((unsigned char *)0x00002dfc) + engineState);
+    vecPtr = (float *)(((unsigned char *)0x00002df0) + engineState);
+    srcYPtr = (dword *)(((unsigned char *)0x00002df4) + engineState);
+    srcZPtr = (dword *)(((unsigned char *)0x00002df8) + engineState);
     break;
   case 0xd:
     engineState = *(int *)(ctx + GLD_engineState);
-    pdVar17 = (dword *)(((unsigned char *)0x000030c8) + engineState);
-    pfVar16 = (float *)(((unsigned char *)0x000030bc) + engineState);
-    pdVar21 = (dword *)(((unsigned char *)0x000030c0) + engineState);
-    pdVar9 = (dword *)(((unsigned char *)0x000030c4) + engineState);
+    srcWPtr = (dword *)(((unsigned char *)0x000030c8) + engineState);
+    vecPtr = (float *)(((unsigned char *)0x000030bc) + engineState);
+    srcYPtr = (dword *)(((unsigned char *)0x000030c0) + engineState);
+    srcZPtr = (dword *)(((unsigned char *)0x000030c4) + engineState);
     break;
   case 0xe:
     engineState = *(int *)(ctx + GLD_engineState);
-    pdVar17 = (dword *)(((unsigned char *)0x000030d8) + engineState);
-    pfVar16 = (float *)(((unsigned char *)0x000030cc) + engineState);
-    pdVar21 = (dword *)(((unsigned char *)0x000030d0) + engineState);
-    pdVar9 = (dword *)(((unsigned char *)0x000030d4) + engineState);
+    srcWPtr = (dword *)(((unsigned char *)0x000030d8) + engineState);
+    vecPtr = (float *)(((unsigned char *)0x000030cc) + engineState);
+    srcYPtr = (dword *)(((unsigned char *)0x000030d0) + engineState);
+    srcZPtr = (dword *)(((unsigned char *)0x000030d4) + engineState);
     break;
   case 0xf:
-    iVar23 = *(int *)(ctx + GLD_engineState);
-    local_90 = (float)*(double *)(0x00001830 + iVar23);
-    local_8c = (float)*(double *)(iVar23 + 0x1838);
-    local_84[0] = 1.0;
-    local_88 = (float)(*(double *)(iVar23 + 0x1838) - *(double *)(0x00001830 + iVar23));
+    engineStateB = *(int *)(ctx + GLD_engineState);
+    vecX = (float)*(double *)(0x00001830 + engineStateB);
+    vecY = (float)*(double *)(engineStateB + 0x1838);
+    vecW[0] = 1.0;
+    vecZ = (float)(*(double *)(engineStateB + 0x1838) - *(double *)(0x00001830 + engineStateB));
     goto LAB_00025ac8;
   case 0x12:
-    local_84[0] = *(float *)(*(int *)(ctx + GLD_engineState) + 0x24a4);
-    local_90 = local_84[0];
-    local_8c = local_84[0];
-    local_88 = local_84[0];
+    vecW[0] = *(float *)(*(int *)(ctx + GLD_engineState) + 0x24a4);
+    vecX = vecW[0];
+    vecY = vecW[0];
+    vecZ = vecW[0];
     goto LAB_00025ac8;
   }
 LAB_00025aa8:
-  local_90 = *pfVar16;
-  local_8c = (float)*pdVar21;
-  local_88 = (float)*pdVar9;
-  local_84[0] = (float)*pdVar17;
+  vecX = *vecPtr;
+  vecY = (float)*srcYPtr;
+  vecZ = (float)*srcZPtr;
+  vecW[0] = (float)*srcWPtr;
 LAB_00025ac8:
-  param_3[1] = local_8c;
-  param_3[2] = local_88;
-  *param_3 = local_90;
-  param_3[3] = local_84[0];
+  outConstants[1] = vecY;
+  outConstants[2] = vecZ;
+  *outConstants = vecX;
+  outConstants[3] = vecW[0];
 LAB_00025af0:
-  iVar25 = iVar25 + 1;
-  puVar27 = puVar27 + 2;
-  param_3 = param_3 + 4;
-  if (iVar19 == iVar25) goto LAB_00025b04;
+  operandIndex = operandIndex + 1;
+  operandPtr = operandPtr + 2;
+  outConstants = outConstants + 4;
+  if (operandsLeft == operandIndex) goto LAB_00025b04;
   goto LAB_00025090;
 switchD_00025774_caseD_1:
-  pfVar16 = (float *)0x0;
-  pdVar21 = ((unsigned char *)0x4);
-  pdVar9 = ((unsigned char *)0x8);
-  pdVar17 = ((unsigned char *)0xc);
+  vecPtr = (float *)0x0;
+  srcYPtr = ((unsigned char *)0x4);
+  srcZPtr = ((unsigned char *)0x8);
+  srcWPtr = ((unsigned char *)0xc);
   goto LAB_00025aa8;
 }
 

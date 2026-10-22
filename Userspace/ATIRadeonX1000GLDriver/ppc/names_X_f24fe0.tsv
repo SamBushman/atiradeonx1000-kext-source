@@ -1,0 +1,122 @@
+# FUN_00024fe0 (program constant table): fork X
+local	FUN_00024fe0	param_2	maxCount	INFERRED	upper bound on the number of operand descriptors processed: min(maxCount, programData+0x28)
+local	FUN_00024fe0	param_3	outConstants	CONFIRMED	float output table: each operand writes 4 floats (x, y, z, w) and advances by 4
+local	FUN_00024fe0	piVar26	programObject	INFERRED	engineObjects+0x19c (current program), or engineObjects+0x190 when none is bound
+local	FUN_00024fe0	bVar1	useDefaultProgram	CONFIRMED	programObject was null: the default program object (engineObjects+0x190) is used
+use	FUN_00024fe0	iVar14	programData	INFERRED	programObject[0xd]/[0xc]/[0xb] or the header+4 record: the program data with the operand count (+0x28), operand table (+0x2c), flags (+0x20)	^\s*iVar14\ =\ piVar26\[0xd\];$	+3
+use	FUN_00024fe0	iVar14	programData	INFERRED	programObject[0xd]/[0xc]/[0xb] or the header+4 record: the program data with the operand count (+0x28), operand table (+0x2c), flags (+0x20)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar19\ \+\ 4\);$	+1
+use	FUN_00024fe0	iVar14	programData	INFERRED	programObject[0xd]/[0xc]/[0xb] or the header+4 record: the program data with the operand count (+0x28), operand table (+0x2c), flags (+0x20)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x6c\);$	+1
+use	FUN_00024fe0	iVar14	programData	INFERRED	programObject[0xd]/[0xc]/[0xb] or the header+4 record: the program data with the operand count (+0x28), operand table (+0x2c), flags (+0x20)	^\s*puVar27\ =\ \(uint\ \*\)\(iVar14\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 0x2c\)\ \*\ 8\);$	+3
+use	FUN_00024fe0	iVar14	programData	INFERRED	programObject[0xd]/[0xc]/[0xb] or the header+4 record: the program data with the operand count (+0x28), operand table (+0x2c), flags (+0x20)	^\s*pfVar16\ =\ \(float\ \*\)\(iVar14\ \+\ iVar7\ \*\ 8\ \+\ \(uint\)\(ushort\)\*puVar27\ \*\ 0x10\);$	+1
+use	FUN_00024fe0	iVar14	programDataB	INFERRED	programObject[0xe]: the second program data record used for the default fog/point parameters	^\s*iVar14\ =\ piVar26\[0xe\];$	+3
+use	FUN_00024fe0	iVar14	programDataB	INFERRED	programObject[0xe]: the second program data record used for the default fog/point parameters	^\s*uVar15\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x20\);$@2	+1
+local	FUN_00024fe0	iVar7	paramBase	INFERRED	programData+0x6c: offset (in 8-byte units) of the parameter constants inside the program data
+use	FUN_00024fe0	iVar19	programHeader	INFERRED	*programObject: the program header (+0x18 literal pool)	^\s*iVar19\ =\ \*piVar26;$	+2
+use	FUN_00024fe0	iVar19	programHeader	INFERRED	*programObject: the program header (+0x18 literal pool)	^\s*iVar19\ =\ \*piVar26;$@2	+1
+use	FUN_00024fe0	iVar19	programHeader	INFERRED	*programObject: the program header (+0x18 literal pool)	^\s*iVar24\ =\ \*\(int\ \*\)\(iVar19\ \+\ 0x18\);$	+1
+use	FUN_00024fe0	iVar19	operandsLeft	CONFIRMED	min(maxCount, programData+0x28): the number of operand descriptors to process	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x28\);$	+1
+use	FUN_00024fe0	iVar19	operandsLeft	CONFIRMED	min(maxCount, programData+0x28): the number of operand descriptors to process	^\s*iVar19\ =\ param_2;$	+1
+use	FUN_00024fe0	iVar19	operandsLeft	CONFIRMED	min(maxCount, programData+0x28): the number of operand descriptors to process	^\s*if\ \(iVar19\ <\ 1\)\ \{$	+1
+use	FUN_00024fe0	iVar19	operandsLeft	CONFIRMED	min(maxCount, programData+0x28): the number of operand descriptors to process	^\s*if\ \(iVar19\ ==\ iVar25\)\ goto\ LAB_00025b04;$	+1
+local	FUN_00024fe0	iVar24	literalPool	INFERRED	programHeader+0x18: the pool of literal vec4 constants, indexed by operandWord & 0xffff * 0x10
+local	FUN_00024fe0	puVar27	operandPtr	CONFIRMED	programData + programData[0x2c] * 8: the table of 8-byte operand descriptors, advanced per operand
+local	FUN_00024fe0	iVar25	operandIndex	CONFIRMED	operand loop counter
+use	FUN_00024fe0	uVar15	programFlags	INFERRED	programDataB+0x20 flags (bit 26 / 25 select the extra constant blocks written at the end)	^\s*uVar15\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x20\);$	+2
+use	FUN_00024fe0	uVar15	programFlags	INFERRED	programDataB+0x20 flags (bit 26 / 25 select the extra constant blocks written at the end)	^\s*uVar15\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x20\);$@2	+1
+use	FUN_00024fe0	uVar15	programFlags	INFERRED	programDataB+0x20 flags (bit 26 / 25 select the extra constant blocks written at the end)	^\s*if\ \(\(uVar15\ \&\ 0x2000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar15\ =\ \*puVar27;$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*if\ \(\(bVar1\)\ \|\|\ \(\(uVar15\ \&\ 0x1c000000\)\ ==\ 0x4000000\)\)\ \{$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*else\ if\ \(\(uVar15\ \&\ 0x1c000000\)\ ==\ 0xc000000\)\ \{$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar20\ =\ uVar15\ >>\ 0xc\ \&\ 3;$	+3
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar15\ =\ uVar15\ >>\ 0xe\ \&\ 3;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*if\ \(\(1\ <\ uVar15\)\ \&\&\ \(iVar10\ =\ iVar23\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\ \+\ 0x1e60,\ 3\ <\ uVar15\)\)\ \{$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*if\ \(uVar15\ <\ 3\)\ \{$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*else\ if\ \(uVar15\ ==\ 3\)\ goto\ LAB_000256f4;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*switch\(uVar15\ >>\ 0x10\ \&\ 0x1f\)\ \{$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*pfVar16\ =\ \(float\ \*\)\(\(uVar15\ \&\ 0xffff\)\ \*\ 0x10\ \+$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar20\ =\ uVar15\ \&\ 0xff;$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar20\ =\ uVar15\ >>\ 9\ \&\ 3;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*iVar23\ =\ \(uVar15\ \&\ 0xff\)\ \*\ 0x80;$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar20\ =\ uVar15\ \&\ 1;$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar20\ =\ uVar15\ >>\ 5\ \&\ 7;$	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039a0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x00003980\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039c0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039e0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*uVar20\ =\ uVar15\ >>\ 5\ \&\ 7;$@2	+2
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039b0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x00003990\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039d0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039f0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\ \+\ \(uVar15\ \&\ 0x1f\)\ \*\ 0x7c;$	+1
+use	FUN_00024fe0	uVar15	operandWord	CONFIRMED	*operandPtr: descriptor word; >>16 & 0x1f selects the source file, & 0x1c000000 the modifier (4 normal, 0xc negate-as-int, else boolean)	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x00003e20\)\ \+\ \(uVar15\ \&\ 0xff\)\ \*\ 0x10;$	+1
+use	FUN_00024fe0	uVar20	operandFile	CONFIRMED	operandWord & 0x1f0000: source file (0x10000 literal pool, 0x20000 environment parameters, 0x100000 state matrix rows, 0x110000 program constants)	^\s*uVar20\ =\ uVar15\ \&\ 0x1f0000;$	+3
+use	FUN_00024fe0	uVar20	operandFile	CONFIRMED	operandWord & 0x1f0000: source file (0x10000 literal pool, 0x20000 environment parameters, 0x100000 state matrix rows, 0x110000 program constants)	^\s*if\ \(uVar20\ ==\ 0x10000\)\ \{$	+1
+use	FUN_00024fe0	uVar20	operandFile	CONFIRMED	operandWord & 0x1f0000: source file (0x10000 literal pool, 0x20000 environment parameters, 0x100000 state matrix rows, 0x110000 program constants)	^\s*if\ \(uVar20\ ==\ 0x20000\)\ \{$	+1
+use	FUN_00024fe0	uVar20	operandFile	CONFIRMED	operandWord & 0x1f0000: source file (0x10000 literal pool, 0x20000 environment parameters, 0x100000 state matrix rows, 0x110000 program constants)	^\s*if\ \(uVar20\ ==\ 0x100000\)\ \{$	+1
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*pfVar16\ =\ \(float\ \*\)\(iVar14\ \+\ iVar7\ \*\ 8\ \+\ \(uint\)\(ushort\)\*puVar27\ \*\ 0x10\);$	+1
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*\*param_3\ =\ \*pfVar16;$	+4
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*fStack_74\ =\ \-\*pfVar16;$	+2
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*fStack_6c\ =\ \-pfVar16\[1\];$	+2
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*fStack_64\ =\ \-pfVar16\[2\];$	+2
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*fStack_5c\ =\ \-pfVar16\[3\];$	+2
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*if\ \(\*pfVar16\ ==\ 0\.0\)\ \{$	+1
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*if\ \(pfVar16\[1\]\ ==\ 0\.0\)\ \{$	+1
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*if\ \(pfVar16\[2\]\ ==\ 0\.0\)\ \{$	+1
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*if\ \(pfVar16\[3\]\ ==\ 0\.0\)\ \{$	+1
+use	FUN_00024fe0	pfVar16	constantSrc	CONFIRMED	pointer to the 4-float source vector inside the program data	^\s*pfVar16\ =\ \(float\ \*\)\(iVar24\ \+\ \(uint\)\(ushort\)\*puVar27\ \*\ 0x10\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \&local_90;$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(\(uVar15\ \&\ 0xffff\)\ \*\ 0x10\ \+$	+5
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x24c0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x24d0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x24e0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x24f0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x2500\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x2510\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x80\ \+\ 0x2530\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x240\ \+\ 0x28c0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x240\ \+\ 0x28d0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x240\ \+\ 0x28e0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x240\ \+\ 0x28f0\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(uVar20\ \*\ 0x240\ \+\ 0x2900\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+4
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(iVar23\ \+\ 0x24b0\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x10\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x14\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x18\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000031c0\)\ \+\ iVar23\ \+\ 4\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0xc\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002de0\)\ \+\ iVar23\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002df0\)\ \+\ iVar23\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000030bc\)\ \+\ iVar23\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000030cc\)\ \+\ iVar23\);$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*local_90\ =\ \*pfVar16;$	+1
+use	FUN_00024fe0	pfVar16	vecPtr	CONFIRMED	&local_90: the gathered temporary vec4 for the state-derived sources	^\s*pfVar16\ =\ \(float\ \*\)0x0;$	+1
+local	FUN_00024fe0	local_90	vecX	CONFIRMED	x of the gathered vec4
+local	FUN_00024fe0	local_8c	vecY	CONFIRMED	y of the gathered vec4
+local	FUN_00024fe0	local_88	vecZ	CONFIRMED	z of the gathered vec4
+local	FUN_00024fe0	local_84	vecW	CONFIRMED	w of the gathered vec4 (array of 1 used as a scalar)
+local	FUN_00024fe0	pdVar21	srcYPtr	CONFIRMED	pointer to the y component of the source vec4
+local	FUN_00024fe0	pdVar9	srcZPtr	CONFIRMED	pointer to the z component of the source vec4
+local	FUN_00024fe0	pdVar17	srcWPtr	CONFIRMED	pointer to the w component of the source vec4
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039a0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x1c\);$	+4
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039b0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x00003980\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x00003990\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x00003e20\)\ \+\ \(uVar15\ \&\ 0xff\)\ \*\ 0x10;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x18\);$	+4
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039c0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x20\);$	+4
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039d0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039e0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x24\);$	+4
+use	FUN_00024fe0	puVar8	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar8\ =\ \(\(unsigned\ char\ \*\)0x000039f0\)\ \+\ uVar15\ \*\ 0x94;$	+1
+use	FUN_00024fe0	iVar23	engineStateB	CONFIRMED	*(ctx + GLD_engineState)	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+3
+use	FUN_00024fe0	iVar23	engineStateB	CONFIRMED	*(ctx + GLD_engineState)	^\s*local_8c\ =\ \*\(float\ \*\)\(iVar23\ \+\ 0x24b4\)\ \*\ \*\(float\ \*\)\(iVar10\ \+\ 4\)\ \+\ \*\(float\ \*\)\(iVar10\ \+\ 0x34\);$	+2
+use	FUN_00024fe0	iVar23	engineStateB	CONFIRMED	*(ctx + GLD_engineState)	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@16	+3
+use	FUN_00024fe0	iVar23	engineStateB	CONFIRMED	*(ctx + GLD_engineState)	^\s*local_88\ =\ \(float\)\(\*\(double\ \*\)\(iVar23\ \+\ 0x1838\)\ \-\ \*\(double\ \*\)\(0x00001830\ \+\ iVar23\)\);$	+1
+use	FUN_00024fe0	iVar23	stateRowPtr	CONFIRMED	engineState + (operandWord & 0x1f) * 0x7c: the per-texture-unit state record (stride 0x7c)	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\ \+\ \(uVar15\ \&\ 0x1f\)\ \*\ 0x7c;$	+5
+local	FUN_00024fe0	iVar12	stateBlockA	INFERRED	engineState + 0x24c0: base of the first state block (stride 0x80 per entry)
+use	FUN_00024fe0	iVar11	stateBlockB	INFERRED	engineState + 0x28c0: base of the second state block (stride 0x240)	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\ \+\ 0x28c0;$	+1
+use	FUN_00024fe0	iVar11	stateBlockB	INFERRED	engineState + 0x28c0: base of the second state block (stride 0x240)	^\s*iVar13\ =\ iVar11\ \+\ iVar10;$	+1
+use	FUN_00024fe0	iVar11	stateBlockB	INFERRED	engineState + 0x28c0: base of the second state block (stride 0x240)	^\s*local_90\ =\ \*\(float\ \*\)\(iVar12\ \+\ iVar23\)\ \*\ \*\(float\ \*\)\(iVar11\ \+\ iVar10\);$	+1
