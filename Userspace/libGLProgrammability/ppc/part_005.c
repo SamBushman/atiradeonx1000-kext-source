@@ -3629,11 +3629,11 @@ int _ShInitialize()
 }
 
 /* _ShConstructCompiler @ 0x97ba0980 (32 bytes) */
-int _ShConstructCompiler(param_1, param_2)
-  undefined4 param_1;
+int _ShConstructCompiler(language, param_2)
+  undefined4 language;
   undefined4 param_2;
 {
-  return ConstructCompiler(param_1,param_2);
+  return ConstructCompiler(language,param_2);
 }
 
 /* _ShDestruct @ 0x97ba09a4 (200 bytes) */
@@ -3946,9 +3946,9 @@ LAB_97ba0fd8:
 }
 
 /* _ShCompile @ 0x97ba10c8 (1888 bytes) */
-int _ShCompile(param_1, param_2, param_3, param_4, param_5)
+int _ShCompile(param_1, str, param_3, param_4, param_5)
   int *param_1;
-  char **param_2;
+  char **str;
   int param_3;
   int param_4;
   uint param_5;
@@ -4163,7 +4163,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
       uVar13 = 0;
     }
   }
-  iVar3 = PaParseStrings(param_2,(int *)0x0,param_3,0,(unsigned char *)&local_140);
+  iVar3 = PaParseStrings(str,(int *)0x0,param_3,0,(unsigned char *)&local_140);
   pvVar10 = local_138;
   if (iVar3 != 0) {
     uVar13 = 0;

@@ -286,16 +286,16 @@ int __ZNKSs16find_last_not_ofEcm(this, param_2, param_3)
 }
 
 /* std__string__substr @ 0x97c15fa0 (112 bytes) */
-int std__string__substr(this, param_2, param_3, param_4)
+int std__string__substr(this, text, param_3, param_4)
   ulong this;
-  ulong param_2;
+  ulong text;
   uint param_3;
   ulong param_4;
 {
-  if (*(uint *)(*(int *)param_2 + -0xc) < param_3) {
+  if (*(uint *)(*(int *)text + -0xc) < param_3) {
     std____throw_out_of_range("basic_string::substr");
   }
-  __ZNSsC1ERKSsmm((void *)this,(unsigned char *)param_2,param_3,param_4);
+  __ZNSsC1ERKSsmm((void *)this,(unsigned char *)text,param_3,param_4);
   return this;
 }
 
@@ -985,17 +985,17 @@ int __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18
 }
 
 /* __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_ @ 0x97c16cf4 (168 bytes) */
-int __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_(this, param_2, param_3, param_4, param_5)
+int __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_(this, param_2, param_3, str, param_5)
   void *this;
   int param_2;
   int param_3;
-  int param_4;
+  int str;
   int param_5;
 {
   uint uVar1;
   int local_30 [5];
   
-  uVar1 = param_5 - param_4;
+  uVar1 = param_5 - str;
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string::_M_replace");
   }
@@ -1003,23 +1003,23 @@ int __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_
-              ((char *)(*(int *)this + (param_2 - local_30[0])),param_4,param_5);
+              ((char *)(*(int *)this + (param_2 - local_30[0])),str,param_5);
   }
   return this;
 }
 
 /* std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__ @ 0x97c16d9c (168 bytes) */
-int std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__(this, param_2, param_3, param_4, param_5)
+int std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__(this, param_2, param_3, str, param_5)
   unsigned char * this;
   int param_2;
   int param_3;
-  int param_4;
+  int str;
   int param_5;
 {
   uint uVar1;
   int local_30 [5];
   
-  uVar1 = param_5 - param_4;
+  uVar1 = param_5 - str;
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string::_M_replace");
   }
@@ -1027,7 +1027,7 @@ int std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__s
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_
-              ((char *)(*(int *)this + (param_2 - local_30[0])),param_4,param_5);
+              ((char *)(*(int *)this + (param_2 - local_30[0])),str,param_5);
   }
   return this;
 }

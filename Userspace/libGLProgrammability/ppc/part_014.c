@@ -3687,8 +3687,8 @@ LAB_97bd9024:
 }
 
 /* _PPCRuntimeCompilerSaveAllTemporariesToMemory @ 0x97bd9374 (120 bytes) */
-int _PPCRuntimeCompilerSaveAllTemporariesToMemory(param_1)
-  int param_1;
+int _PPCRuntimeCompilerSaveAllTemporariesToMemory(compiler)
+  int compiler;
 {
   uint uVar1;
   uint loopIndex;
@@ -3696,12 +3696,12 @@ int _PPCRuntimeCompilerSaveAllTemporariesToMemory(param_1)
   loopIndex = 0;
   do {
     uVar1 = loopIndex;
-    if (*(int *)(param_1 + 0xe4c) != 0) {
+    if (*(int *)(compiler + 0xe4c) != 0) {
       uVar1 = loopIndex + 0x20;
     }
-    if (*(short *)(uVar1 * 0x38 + param_1 + 0x18) == 0) {
-      ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,loopIndex);
-      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,loopIndex);
+    if (*(short *)(uVar1 * 0x38 + compiler + 0x18) == 0) {
+      ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,loopIndex);
+      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
     loopIndex = loopIndex + 1;
   } while (loopIndex < 0x20);

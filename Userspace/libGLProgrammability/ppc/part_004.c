@@ -5731,17 +5731,17 @@ int TParseContext__recover(this)
 }
 
 /* TParseContext__error @ 0x97b9a7c4 (104 bytes) */
-int TParseContext__error(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int TParseContext__error(param_1, param_2, param_3, str, param_5, param_6, param_7, param_8)
   int param_1;
   char *param_2;
   char *param_3;
-  char *param_4;
+  char *str;
   char *param_5;
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, str, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   int *piVar2;
   int iVar3;
@@ -5786,7 +5786,7 @@ int TParseContext__error(param_1, param_2, param_3, param_4, param_5, param_6, p
   __ZN13TInfoSinkBase6appendEPKc(pvVar4,": ");
   pvVar4 = *(void **)(param_1 + 8);
   __ZN13TInfoSinkBase6appendEPKc(pvVar4,"\'");
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,param_4);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar4,str);
   __ZN13TInfoSinkBase6appendEPKc(pvVar4,"\' : ");
   __ZN13TInfoSinkBase6appendEPKc(pvVar4,param_3);
   __ZN13TInfoSinkBase6appendEPKc(pvVar4," ");

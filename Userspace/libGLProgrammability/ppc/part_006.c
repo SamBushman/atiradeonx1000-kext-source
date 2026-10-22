@@ -51,9 +51,9 @@ int _ShGetPPStream(param_1)
 }
 
 /* _ShGetShaderLocalParamRemapTable @ 0x97ba1dc0 (92 bytes) */
-int _ShGetShaderLocalParamRemapTable(param_1, param_2)
+int _ShGetShaderLocalParamRemapTable(param_1, language)
   int *param_1;
-  undefined4 param_2;
+  undefined4 language;
 {
   unsigned char * this;
   undefined4 uVar1;
@@ -62,15 +62,15 @@ int _ShGetShaderLocalParamRemapTable(param_1, param_2)
   if ((param_1 != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*param_1 + 0xc))(param_1), this != (unsigned char *)0x0
      )) {
-    uVar1 = TGenericLinker__getShaderLocalParamRemapTable(this,param_2);
+    uVar1 = TGenericLinker__getShaderLocalParamRemapTable(this,language);
   }
   return uVar1;
 }
 
 /* _ShGetNumShaderLocalParams @ 0x97ba1e1c (92 bytes) */
-int _ShGetNumShaderLocalParams(param_1, param_2)
+int _ShGetNumShaderLocalParams(param_1, language)
   int *param_1;
-  undefined4 param_2;
+  undefined4 language;
 {
   unsigned char * this;
   undefined4 uVar1;
@@ -79,23 +79,23 @@ int _ShGetNumShaderLocalParams(param_1, param_2)
   if ((param_1 != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*param_1 + 0xc))(param_1), this != (unsigned char *)0x0
      )) {
-    uVar1 = TGenericLinker__getNumShaderLocalParams(this,param_2);
+    uVar1 = TGenericLinker__getNumShaderLocalParams(this,language);
   }
   return uVar1;
 }
 
 /* _ShAttributeBindingRequest @ 0x97ba1e78 (104 bytes) */
-int _ShAttributeBindingRequest(param_1, param_2, param_3)
+int _ShAttributeBindingRequest(param_1, param_2, str)
   int *param_1;
   ulong param_2;
-  char *param_3;
+  char *str;
 {
   unsigned char * this;
   
   if ((param_1 != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*param_1 + 0xc))(param_1), this != (unsigned char *)0x0
      )) {
-    TGenericLinker__attributeBindingRequest(this,param_2,param_3);
+    TGenericLinker__attributeBindingRequest(this,param_2,str);
     return;
   }
   return;
@@ -187,14 +187,14 @@ int _ShGetMaxUniformLength(param_1)
 }
 
 /* _ShGetActiveUniform @ 0x97ba20e8 (132 bytes) */
-int _ShGetActiveUniform(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int _ShGetActiveUniform(param_1, param_2, param_3, param_4, param_5, param_6, str)
   int *param_1;
   ulong param_2;
   long param_3;
   long *param_4;
   long *param_5;
   ulong *param_6;
-  char *param_7;
+  char *str;
 {
   unsigned char * this;
   undefined4 uVar1;
@@ -203,7 +203,7 @@ int _ShGetActiveUniform(param_1, param_2, param_3, param_4, param_5, param_6, pa
   if ((param_1 != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*param_1 + 0xc))(param_1), this != (unsigned char *)0x0
      )) {
-    uVar1 = TGenericLinker__getActiveUniform(this,param_2,param_3,param_4,param_5,param_6,param_7);
+    uVar1 = TGenericLinker__getActiveUniform(this,param_2,param_3,param_4,param_5,param_6,str);
   }
   return uVar1;
 }
@@ -229,14 +229,14 @@ int _ShGetUniformTypeInfo(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _ShGetActiveAttrib @ 0x97ba21e0 (132 bytes) */
-int _ShGetActiveAttrib(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int _ShGetActiveAttrib(param_1, param_2, param_3, param_4, param_5, param_6, str)
   int *param_1;
   ulong param_2;
   long param_3;
   long *param_4;
   long *param_5;
   ulong *param_6;
-  char *param_7;
+  char *str;
 {
   unsigned char * this;
   undefined4 uVar1;
@@ -245,15 +245,15 @@ int _ShGetActiveAttrib(param_1, param_2, param_3, param_4, param_5, param_6, par
   if ((param_1 != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*param_1 + 0xc))(param_1), this != (unsigned char *)0x0
      )) {
-    uVar1 = TGenericLinker__getActiveAttrib(this,param_2,param_3,param_4,param_5,param_6,param_7);
+    uVar1 = TGenericLinker__getActiveAttrib(this,param_2,param_3,param_4,param_5,param_6,str);
   }
   return uVar1;
 }
 
 /* _ShGetAttribLocation @ 0x97ba2264 (112 bytes) */
-int _ShGetAttribLocation(param_1, param_2)
+int _ShGetAttribLocation(param_1, str)
   int *param_1;
-  char *param_2;
+  char *str;
 {
   int iVar1;
   undefined4 uVar2;
@@ -262,16 +262,16 @@ int _ShGetAttribLocation(param_1, param_2)
   if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(param_1), iVar1 != 0)) {
     uVar2 = 0xffffffff;
     if (*(unsigned char **)(iVar1 + 4) != (unsigned char *)0x0) {
-      uVar2 = BindingTable__FindAttribBindingLocationByName(*(unsigned char **)(iVar1 + 4),param_2);
+      uVar2 = BindingTable__FindAttribBindingLocationByName(*(unsigned char **)(iVar1 + 4),str);
     }
   }
   return uVar2;
 }
 
 /* _ShGetUniformLocation @ 0x97ba22d4 (112 bytes) */
-int _ShGetUniformLocation(param_1, param_2)
+int _ShGetUniformLocation(param_1, str)
   int *param_1;
-  char *param_2;
+  char *str;
 {
   int iVar1;
   undefined4 uVar2;
@@ -281,16 +281,16 @@ int _ShGetUniformLocation(param_1, param_2)
     uVar2 = 0xffffffff;
     if (*(unsigned char **)(iVar1 + 4) != (unsigned char *)0x0) {
       uVar2 = BindingTable__FindClientUniformBindingLocationByName
-                        (*(unsigned char **)(iVar1 + 4),param_2);
+                        (*(unsigned char **)(iVar1 + 4),str);
     }
   }
   return uVar2;
 }
 
 /* _ShGetPPStreamManager @ 0x97ba2344 (92 bytes) */
-int _ShGetPPStreamManager(param_1, param_2)
+int _ShGetPPStreamManager(param_1, language)
   int *param_1;
-  undefined4 param_2;
+  undefined4 language;
 {
   unsigned char * this;
   undefined4 uVar1;
@@ -299,7 +299,7 @@ int _ShGetPPStreamManager(param_1, param_2)
   if ((param_1 != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*param_1 + 0xc))(param_1), this != (unsigned char *)0x0
      )) {
-    uVar1 = TGenericLinker__getPPStreamManager(this,param_2);
+    uVar1 = TGenericLinker__getPPStreamManager(this,language);
   }
   return uVar1;
 }

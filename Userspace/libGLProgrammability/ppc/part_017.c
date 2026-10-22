@@ -10258,10 +10258,10 @@ LAB_97c04d50:
 }
 
 /* _glpPPShaderToProgram @ 0x97c057a4 (472 bytes) */
-int _glpPPShaderToProgram(param_1, param_2, param_3)
-  int *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _glpPPShaderToProgram(shader, printOptions, printFlags)
+  int *shader;
+  undefined4 printOptions;
+  undefined4 printFlags;
 {
   int glpPPShaderToProgramStringResult;
   undefined4 allocation2;
@@ -10286,11 +10286,11 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
   undefined4 local_30 [5];
   
   _memset(&local_70,0,0x3c);
-  glpPPShaderToProgramStringResult = ((int (*)())_glpPPShaderToProgramString)(param_1,param_2,param_3);
+  glpPPShaderToProgramStringResult = ((int (*)())_glpPPShaderToProgramString)(shader,printOptions,printFlags);
   iVar5 = 0;
   allocation2 = 0;
   if (glpPPShaderToProgramStringResult != 0) {
-    if (*param_1 == 0x8b30) {
+    if (*shader == 0x8b30) {
       iVar5 = _PPParserCreate(2);
       local_60 = 0x100;
       local_64 = 0x8000;
@@ -10301,7 +10301,7 @@ int _glpPPShaderToProgram(param_1, param_2, param_3)
       local_6c = 0x80;
       local_38 = 0;
     }
-    else if (*param_1 == 0x8b31) {
+    else if (*shader == 0x8b31) {
       iVar5 = _PPParserCreate(0);
       local_38 = 0x10;
       local_64 = 0x8000;
@@ -10699,8 +10699,8 @@ int _FindFunctionIndex(param_1, param_2, param_3)
 }
 
 /* _InlineFunctionsBranch @ 0x97c06044 (1488 bytes) */
-int _InlineFunctionsBranch(param_1)
-  int param_1;
+int _InlineFunctionsBranch(stream)
+  int stream;
 {
   int findFunctionIndexResult;
   bool bVar1;
@@ -10726,7 +10726,7 @@ int _InlineFunctionsBranch(param_1)
   uint local_8c;
   int local_50 [6];
   
-  piVar3 = *(int **)(param_1 + 0x20);
+  piVar3 = *(int **)(stream + 0x20);
   local_50[0] = 0;
   uVar17 = 0;
   iVar15 = *piVar3;
@@ -10745,7 +10745,7 @@ int _InlineFunctionsBranch(param_1)
       }
       iVar15 = *(int *)(iVar15 + 8);
     } while (iVar15 != 0);
-    piVar3 = *(int **)(param_1 + 0x20);
+    piVar3 = *(int **)(stream + 0x20);
   }
   uVar8 = 0;
   for (iVar15 = *piVar3; iVar15 != 0; iVar15 = *(int *)(iVar15 + 8)) {
@@ -10756,7 +10756,7 @@ int _InlineFunctionsBranch(param_1)
   }
   uVar5 = ((int (*)())_RecordFunctionEdge)(iVar14,0,uVar17,local_50[0],uVar13);
   if (1 < uVar13) {
-    piVar3 = *(int **)(param_1 + 0x20);
+    piVar3 = *(int **)(stream + 0x20);
     iVar15 = *piVar3;
     bVar16 = iVar15 == 0;
     if (!bVar16) {
@@ -10771,8 +10771,8 @@ int _InlineFunctionsBranch(param_1)
           uVar17 = *(uint *)(iVar15 + 0xc) & 0x3ffff;
           iVar18 = *(int *)(iVar15 + 4);
           iVar6 = findFunctionIndexResult * 0x20;
-          _PPStreamChunkListRemoveChunk(*(undefined4 *)(param_1 + 0x20),iVar15);
-          iVar15 = **(int **)(param_1 + 0x20);
+          _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),iVar15);
+          iVar15 = **(int **)(stream + 0x20);
           uVar2 = *(uint *)(iVar15 + 0xc);
           while (*(uint *)(iVar6 + local_50[0]) != (uVar2 & 0x3ffff)) {
             iVar15 = *(int *)(iVar15 + 8);
@@ -10794,11 +10794,11 @@ int _InlineFunctionsBranch(param_1)
             if ((uVar17 == 0) && (uVar8 == 0xffffffff)) {
               uVar5 = 1;
             }
-            iVar7 = _PPStreamInsertOperationAfterChunk(param_1,&local_90,iVar15 + 0x44,uVar5,iVar7);
+            iVar7 = _PPStreamInsertOperationAfterChunk(stream,&local_90,iVar15 + 0x44,uVar5,iVar7);
             uVar2 = *(uint *)(iVar7 + 0x10);
             if ((uVar2 & 0x3ffff) != 0) {
               iVar9 = 0;
-              iVar4 = **(int **)(param_1 + 0x20);
+              iVar4 = **(int **)(stream + 0x20);
               uVar11 = *(uint *)(iVar4 + 0xc);
               while (*(uint *)(iVar6 + local_50[0]) != (uVar11 & 0x3ffff)) {
                 iVar4 = *(int *)(iVar4 + 8);
@@ -10840,11 +10840,11 @@ LAB_97c0638c:
             uVar2 = *(uint *)(iVar7 + 0xc) & 0x3ffff;
           }
           bVar16 = iVar18 == 0;
-          _PPStreamChangeBranchTargets(param_1,uVar17,uVar8);
+          _PPStreamChangeBranchTargets(stream,uVar17,uVar8);
           ((int (*)())_UpdateFunctionTable)(uVar17,uVar8,uVar2,local_50[0],uVar13);
         }
         iVar15 = iVar14 * 0x20;
-        iVar6 = **(int **)(param_1 + 0x20);
+        iVar6 = **(int **)(stream + 0x20);
         ((int (*)())_ClearJumpTable)(local_50[0] + iVar15);
         uVar17 = *(uint *)(iVar6 + 0xc);
         while (*(uint *)(iVar15 + local_50[0]) != (uVar17 & 0x3ffff)) {
@@ -10859,14 +10859,14 @@ LAB_97c0638c:
         }
         uVar5 = ((int (*)())_AddOpToJumpTable)(iVar6 + 0xc,local_50[0] + iVar15);
         if (bVar16) {
-          iVar15 = **(int **)(param_1 + 0x20);
+          iVar15 = **(int **)(stream + 0x20);
         }
         else {
           iVar15 = *(int *)(iVar18 + 8);
         }
         bVar16 = iVar15 == 0;
       } while (!bVar16);
-      piVar3 = *(int **)(param_1 + 0x20);
+      piVar3 = *(int **)(stream + 0x20);
     }
     uVar17 = 0;
     bVar16 = false;
@@ -10891,11 +10891,11 @@ LAB_97c0638c:
         if (*(uint *)(uVar17 * 0x20 + local_50[0] + 4) == (uVar8 & 0x3ffff)) {
           bVar16 = false;
         }
-        _PPStreamRemoveLabelsAtOperationIndex(param_1,uVar8 & 0x3ffff);
-        uVar5 = _PPStreamChunkListRemoveChunk(*(undefined4 *)(param_1 + 0x20),iVar15);
+        _PPStreamRemoveLabelsAtOperationIndex(stream,uVar8 & 0x3ffff);
+        uVar5 = _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),iVar15);
       }
       else if ((uVar8 >> 0x12 & 0xff) == 0x6e) {
-        uVar5 = ((int (*)())_PPStreamRemoveOperation)(param_1,iVar15);
+        uVar5 = ((int (*)())_PPStreamRemoveOperation)(stream,iVar15);
       }
     }
   }
@@ -11758,8 +11758,8 @@ LAB_97c0774c:
 }
 
 /* _LinearizeFixOutputReads @ 0x97c0775c (916 bytes) */
-int _LinearizeFixOutputReads(param_1)
-  int param_1;
+int _LinearizeFixOutputReads(stream)
+  int stream;
 {
   uint loopIndex2;
   uint loopIndex;
@@ -11791,14 +11791,14 @@ int _LinearizeFixOutputReads(param_1)
   undefined4 local_40;
   undefined4 local_3c;
   
-  iVar9 = **(int **)(param_1 + 0x1c);
+  iVar9 = **(int **)(stream + 0x1c);
   do {
     if (iVar9 == 0) {
       return;
     }
     bVar2 = false;
     uVar1 = *(ushort *)(iVar9 + 0x12);
-    local_7c = **(int **)(param_1 + 0x20);
+    local_7c = **(int **)(stream + 0x20);
     if (local_7c != 0) {
       do {
         loopIndex = 0;
@@ -11824,13 +11824,13 @@ int _LinearizeFixOutputReads(param_1)
         local_80 = 0;
         local_78 = local_7c;
         local_74 = local_7c;
-        maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
+        maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 4));
         local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)maxIndex + 1);
         local_80 = (*(uint *)(iVar9 + 0xc) >> 0x18 & 3) << 0x18 |
                    (*(uint *)(iVar9 + 0xc) >> 0x1a & 7) << 0x1a |
                    *(uint *)(iVar9 + 0xc) & 0xe0000000 | local_80 & 0xffffff;
-        _PPStreamAddTempUsage(param_1,&local_80);
-        piVar4 = *(int **)(param_1 + 0x20);
+        _PPStreamAddTempUsage(stream,&local_80);
+        piVar4 = *(int **)(stream + 0x20);
         iVar3 = *piVar4;
         if (iVar3 != 0) {
           do {
@@ -11856,7 +11856,7 @@ int _LinearizeFixOutputReads(param_1)
             }
             iVar3 = *(int *)(iVar3 + 8);
           } while (iVar3 != 0);
-          piVar4 = *(int **)(param_1 + 0x20);
+          piVar4 = *(int **)(stream + 0x20);
         }
         for (iVar3 = *piVar4; iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
           if ((*(uint *)(iVar3 + 0xc) >> 0x12 & 0xff) == 0x4d) {
@@ -11897,9 +11897,9 @@ LAB_97c07a34:
             local_5c = local_7c & 0xffff;
             local_64 = (uint)uVar1;
             iVar8 = _PPStreamInsertOperationAfterChunk
-                              (param_1,&local_70,0,0,*(undefined4 *)(iVar3 + 4));
+                              (stream,&local_70,0,0,*(undefined4 *)(iVar3 + 4));
             _PPStreamChangeBranchTargets
-                      (param_1,*(uint *)(iVar3 + 0xc) & 0x3ffff,*(uint *)(iVar8 + 0xc) & 0x3ffff);
+                      (stream,*(uint *)(iVar3 + 0xc) & 0x3ffff,*(uint *)(iVar8 + 0xc) & 0x3ffff);
           }
         }
       }
@@ -11909,39 +11909,39 @@ LAB_97c07a34:
 }
 
 /* _glpPPShaderLinearizeStreamMgr @ 0x97c07af0 (320 bytes) */
-int _glpPPShaderLinearizeStreamMgr(param_1, param_2)
-  undefined4 param_1;
+int _glpPPShaderLinearizeStreamMgr(stream, param_2)
+  undefined4 stream;
   uint param_2;
 {
   undefined4 uVar1;
   
   if ((param_2 & 1) != 0) {
-    ((int (*)())_InlineFunctionsBranch)(param_1);
+    ((int (*)())_InlineFunctionsBranch)(stream);
   }
   if ((param_2 & 0x102) != 0) {
-    _DetectConstantLoopsSimple(param_1);
-    _UnrollConstantLoopsSimple(param_1,param_2 & 0x100);
+    _DetectConstantLoopsSimple(stream);
+    _UnrollConstantLoopsSimple(stream,param_2 & 0x100);
   }
   if ((param_2 & 4) != 0) {
-    _PPStreamPackIndices(param_1);
-    _FlattenIfs(param_1);
+    _PPStreamPackIndices(stream);
+    _FlattenIfs(stream);
   }
   if ((param_2 & 0x106) != 0) {
-    ((int (*)())_LinearizeFixOutputReads)(param_1);
+    ((int (*)())_LinearizeFixOutputReads)(stream);
   }
   if ((param_2 & 0x80) != 0) {
-    _ConstantPropagateFold(param_1);
+    _ConstantPropagateFold(stream);
   }
   if ((param_2 & 8) != 0) {
-    ((int (*)())_LocalCopyPropagator)(param_1);
+    ((int (*)())_LocalCopyPropagator)(stream);
   }
   if ((param_2 & 0x10) != 0) {
-    ((int (*)())_EmbedSamplerParamIndices)(param_1);
+    ((int (*)())_EmbedSamplerParamIndices)(stream);
   }
   uVar1 = 0;
   if (param_2 != 0) {
-    _PPStreamPackIndices(param_1);
-    uVar1 = _ProgramNew(param_1);
+    _PPStreamPackIndices(stream);
+    uVar1 = _ProgramNew(stream);
     _Registerify(uVar1);
     _Blockify(uVar1);
   }
@@ -11960,7 +11960,7 @@ int _glpPPShaderLinearizeStreamMgr(param_1, param_2)
     _RegistersCleanup(uVar1);
     _ProgramFree(uVar1);
   }
-  return _PPStreamPackIndices(param_1);
+  return _PPStreamPackIndices(stream);
 }
 
 /* _glpPPShaderLinearize @ 0x97c07c30 (156 bytes) */
@@ -12044,12 +12044,12 @@ int _BitSetGetSizeInBits(bitSet)
 }
 
 /* _BitSetGetEquals @ 0x97c07dbc (88 bytes) */
-int _BitSetGetEquals(param_1, param_2)
-  int param_1;
+int _BitSetGetEquals(bitSet, param_2)
+  int bitSet;
   uint param_2;
 {
-  ((int (*)())_BitSetExpandEquals)(param_1,param_2 + 1);
-  return (*(uint *)((param_2 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 8)) & 1 << (param_2 & 0x1f)) !=
+  ((int (*)())_BitSetExpandEquals)(bitSet,param_2 + 1);
+  return (*(uint *)((param_2 >> 3 & 0x1ffffffc) + *(int *)(bitSet + 8)) & 1 << (param_2 & 0x1f)) !=
          0;
 }
 
@@ -12083,15 +12083,15 @@ int _BitSetClearEquals(bitSet, param_2)
 }
 
 /* _BitSetSetRangeEquals @ 0x97c07ec4 (84 bytes) */
-int _BitSetSetRangeEquals(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+int _BitSetSetRangeEquals(bitSet, param_2, param_3, param_4)
+  undefined4 bitSet;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
 {
-  ((int (*)())_BitSetExpandEquals)(param_1,param_3);
-  ((int (*)())_BitSetSetRangeEqualsInternal)(param_1,param_2,param_3,param_4);
-  return param_1;
+  ((int (*)())_BitSetExpandEquals)(bitSet,param_3);
+  ((int (*)())_BitSetSetRangeEqualsInternal)(bitSet,param_2,param_3,param_4);
+  return bitSet;
 }
 
 /* _BitSetSetRangeEqualsInternal @ 0x97c07f18 (100 bytes) */

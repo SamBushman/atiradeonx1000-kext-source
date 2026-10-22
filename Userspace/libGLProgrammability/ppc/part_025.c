@@ -45,13 +45,13 @@ LAB_97c1866c:
 }
 
 /* __cxxabiv1____vmi_class_type_info____do_dyncast @ 0x97c186f0 (1092 bytes) */
-int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, param_4, param_5, type_info, param_7, param_8)
   unsigned char * this;
   int param_2;
   uint param_3;
   unsigned char * param_4;
   int *param_5;
-  unsigned char * param_6;
+  unsigned char * type_info;
   int *param_7;
   int *param_8;
 {
@@ -73,7 +73,7 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
   if ((param_8[4] & 0x10U) != 0) {
     param_8[4] = *(int *)(this + 8);
   }
-  if ((param_5 == param_7) && (iVar6 = __ZNKSt9type_infoeqERKS_(this,param_6), iVar6 != 0)) {
+  if ((param_5 == param_7) && (iVar6 = __ZNKSt9type_infoeqERKS_(this,type_info), iVar6 != 0)) {
     param_8[2] = param_3;
     return 0;
   }
@@ -108,7 +108,7 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
       else {
 LAB_97c18848:
         uVar3 = (**(code **)(**(int **)p_Var9 + 0x1c))
-                          (*(int **)p_Var9,param_2,uVar7,param_4,(int)param_5 + iVar4,param_6,
+                          (*(int **)p_Var9,param_2,uVar7,param_4,(int)param_5 + iVar4,type_info,
                            param_7,&local_60);
         uVar7 = local_54;
         uVar5 = param_8[2];
@@ -143,7 +143,7 @@ LAB_97c188fc:
                     if (param_2 < 0) {
                       if (!bVar1) goto LAB_97c189e8;
                       uVar5 = (**(code **)(*(int *)param_4 + 0x20))
-                                        (param_4,param_2,iVar4,param_6,param_7);
+                                        (param_4,param_2,iVar4,type_info,param_7);
                     }
                     else {
                       uVar5 = 6;
@@ -163,7 +163,7 @@ LAB_97c189e8:
                   if (param_2 < 0) {
                     if (!bVar1) goto LAB_97c18a60;
                     uVar7 = (**(code **)(*(int *)param_4 + 0x20))
-                                      (param_4,param_2,local_60,param_6,param_7);
+                                      (param_4,param_2,local_60,type_info,param_7);
                   }
                   else {
                     uVar7 = 6;
@@ -286,11 +286,11 @@ int __ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_inf
 }
 
 /* __cxxabiv1____vmi_class_type_info____do_upcast @ 0x97c18bfc (556 bytes) */
-int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_2, param_3, param_4)
+int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, param_3, __upcast_result)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * __class_type_info;
   void *param_3;
-  unsigned char * param_4;
+  unsigned char * __upcast_result;
 {
   uint uVar1;
   int iVar2;
@@ -305,10 +305,10 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_2, param_3, param
   uint local_38;
   void *local_34;
   
-  iVar3 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,param_2,param_3,param_4);
+  iVar3 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,__class_type_info,param_3,__upcast_result);
   bVar7 = true;
   if (iVar3 == 0) {
-    uVar5 = *(uint *)(param_4 + 8);
+    uVar5 = *(uint *)(__upcast_result + 8);
     if ((uVar5 & 0x10) != 0) {
       uVar5 = *(uint *)(this + 8);
     }
@@ -332,7 +332,7 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_2, param_3, param
           }
           local_38 = uVar5;
           iVar2 = (**(code **)(**(int **)(p_Var6 + 0x10) + 0x18))
-                            (*(int **)(p_Var6 + 0x10),param_2,a2,&local_40);
+                            (*(int **)(p_Var6 + 0x10),__class_type_info,a2,&local_40);
           if (iVar2 != 0) {
             if ((local_34 == (void *)0x8) && ((uVar1 & 1) != 0)) {
               local_34 = *(void **)(p_Var6 + 0x10);
@@ -340,12 +340,12 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_2, param_3, param
             if ((3 < (int)local_3c) && (!bVar7)) {
               local_3c = local_3c & 0xfffffffd;
             }
-            ptVar4 = *(unsigned char **)(param_4 + 0xc);
+            ptVar4 = *(unsigned char **)(__upcast_result + 0xc);
             if (ptVar4 == (unsigned char *)0x0) {
-              *(uint *)(param_4 + 8) = local_38;
-              *(int *)param_4 = local_40;
-              *(void **)(param_4 + 0xc) = local_34;
-              *(uint *)(param_4 + 4) = local_3c;
+              *(uint *)(__upcast_result + 8) = local_38;
+              *(int *)__upcast_result = local_40;
+              *(void **)(__upcast_result + 0xc) = local_34;
+              *(uint *)(__upcast_result + 4) = local_3c;
               if ((int)local_3c < 4) {
                 return true;
               }
@@ -362,18 +362,18 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_2, param_3, param
               }
             }
             else {
-              if (*(int *)param_4 != local_40) {
-                *(undefined4 *)(param_4 + 4) = 2;
-                *(undefined4 *)param_4 = 0;
+              if (*(int *)__upcast_result != local_40) {
+                *(undefined4 *)(__upcast_result + 4) = 2;
+                *(undefined4 *)__upcast_result = 0;
                 return true;
               }
-              if ((*(int *)param_4 == 0) &&
+              if ((*(int *)__upcast_result == 0) &&
                  (((local_34 == (void *)0x8 || (ptVar4 == (unsigned char *)0x8)) ||
                   (iVar2 = __ZNKSt9type_infoeqERKS_(local_34,ptVar4), iVar2 == 0)))) {
-                *(undefined4 *)(param_4 + 4) = 2;
+                *(undefined4 *)(__upcast_result + 4) = 2;
                 return true;
               }
-              *(uint *)(param_4 + 4) = *(uint *)(param_4 + 4) | local_3c;
+              *(uint *)(__upcast_result + 4) = *(uint *)(__upcast_result + 4) | local_3c;
             }
           }
         }
@@ -382,7 +382,7 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_2, param_3, param
         iVar3 = iVar3 + -1;
       } while (bVar7);
     }
-    bVar7 = *(int *)(param_4 + 4) != 0;
+    bVar7 = *(int *)(__upcast_result + 4) != 0;
   }
   return bVar7;
 }
@@ -1504,9 +1504,9 @@ LAB_97c1a328:
 }
 
 /* _base_of_encoded_value @ 0x97c1a340 (172 bytes) */
-int _base_of_encoded_value(param_1, param_2)
+int _base_of_encoded_value(param_1, context)
   uint param_1;
-  unsigned char * param_2;
+  unsigned char * context;
 {
   unsigned char dataRelBase;
   unsigned char textRelBase;
@@ -1517,7 +1517,7 @@ int _base_of_encoded_value(param_1, param_2)
   if (param_1 != 0xff) {
     uVar2 = param_1 & 0x70;
     if (uVar2 == 0x20) {
-      textRelBase = __Unwind_GetTextRelBase(param_2);
+      textRelBase = __Unwind_GetTextRelBase(context);
       return textRelBase;
     }
     if (uVar2 < 0x21) {
@@ -1528,12 +1528,12 @@ int _base_of_encoded_value(param_1, param_2)
     }
     else {
       if (uVar2 == 0x40) {
-        regionStart = ((int (*)())__Unwind_GetRegionStart)(param_2);
+        regionStart = ((int (*)())__Unwind_GetRegionStart)(context);
         return regionStart;
       }
       if (uVar2 < 0x41) {
         if (uVar2 == 0x30) {
-          dataRelBase = __Unwind_GetDataRelBase(param_2);
+          dataRelBase = __Unwind_GetDataRelBase(context);
           return dataRelBase;
         }
         goto LAB_97c1a3d4;

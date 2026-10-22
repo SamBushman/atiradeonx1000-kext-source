@@ -2322,8 +2322,8 @@ int _ProgramFree(param_1)
 }
 
 /* _FlattenIfs @ 0x97c0b254 (468 bytes) */
-int _FlattenIfs(param_1)
-  int param_1;
+int _FlattenIfs(stream)
+  int stream;
 {
   int *piVar1;
   bool bVar2;
@@ -2337,7 +2337,7 @@ int _FlattenIfs(param_1)
   int iVar10;
   int iVar11;
   
-  iVar11 = **(int **)(param_1 + 0x20);
+  iVar11 = **(int **)(stream + 0x20);
   do {
     while( true ) {
       if (iVar11 == 0) {
@@ -2407,9 +2407,9 @@ switchD_97c0b318_caseD_4c:
     } while (*piVar1 != 0);
     if (!bVar2) goto LAB_97c0b480;
     iVar10 = *(int *)(iVar11 + 4);
-    _FlattenIf(param_1,iVar11,iVar7,iVar6);
+    _FlattenIf(stream,iVar11,iVar7,iVar6);
     if (iVar10 != 0) goto LAB_97c0b480;
-    iVar11 = **(int **)(param_1 + 0x20);
+    iVar11 = **(int **)(stream + 0x20);
   } while( true );
 }
 

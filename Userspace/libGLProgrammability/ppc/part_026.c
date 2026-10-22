@@ -31,9 +31,9 @@ int __Unwind_GetTextRelBase(context)
 }
 
 /* _extract_cie_info @ 0x97c1a62c (348 bytes) */
-int _extract_cie_info(param_1, param_2, param_3)
+int _extract_cie_info(param_1, context, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 context;
   int param_3;
 {
   undefined4 lebValue;
@@ -95,7 +95,7 @@ LAB_97c1a718:
         return pbVar8;
       }
       bVar4 = *pbVar10;
-      base_of_encoded_valueResult = _base_of_encoded_value((uint)bVar4,param_2);
+      base_of_encoded_valueResult = _base_of_encoded_value((uint)bVar4,context);
       pbVar10 = (byte *)_read_encoded_value_with_base_97c1a468
                                   ((uint)bVar4,base_of_encoded_valueResult,pbVar10 + 1,param_3 + 0x390);
     }
@@ -508,10 +508,10 @@ switchD_97c1a7e8_caseD_4:
 }
 
 /* _execute_cfa_program @ 0x97c1aee8 (1084 bytes) */
-int _execute_cfa_program(param_1, param_2, param_3, param_4)
+int _execute_cfa_program(param_1, param_2, context, param_4)
   uint *param_1;
   uint *param_2;
-  int param_3;
+  int context;
   int param_4;
 {
   byte bVar1;
@@ -536,7 +536,7 @@ int _execute_cfa_program(param_1, param_2, param_3, param_4)
   puVar10 = (undefined4 *)0x0;
   *(undefined4 *)(param_4 + 0x378) = 0;
   if ((param_1 < param_2) &&
-     (uVar8 = *(uint *)(param_4 + 0x38c), uVar8 < *(uint *)(param_3 + 0x1c0))) {
+     (uVar8 = *(uint *)(param_4 + 0x38c), uVar8 < *(uint *)(context + 0x1c0))) {
     do {
       bVar1 = *(byte *)param_1;
       puVar12 = (uint *)((int)param_1 + 1);
@@ -568,7 +568,7 @@ LAB_97c1b3a0:
         break;
       case 1:
         bVar1 = *(byte *)(param_4 + 0x39d);
-        uVar6 = _base_of_encoded_value((uint)bVar1,param_3);
+        uVar6 = _base_of_encoded_value((uint)bVar1,context);
         puVar12 = (uint *)_read_encoded_value_with_base_97c1a468
                                     ((uint)bVar1,uVar6,puVar12,param_4 + 0x38c);
         break;
@@ -685,7 +685,7 @@ LAB_97c1b2e8:
         } while (uVar8 < 0x20);
         break;
       case 0x2e:
-        puVar7 = (uint *)(param_3 + 0x1d4);
+        puVar7 = (uint *)(context + 0x1d4);
 LAB_97c1b358:
         puVar12 = (uint *)_read_uleb128_97c1a3ec(puVar12,puVar7);
         break;
@@ -700,14 +700,14 @@ LAB_97c1b358:
 switchD_97c1afc0_caseD_0: ;
     } while ((puVar12 < param_2) &&
             (uVar8 = *(uint *)(param_4 + 0x38c), param_1 = puVar12,
-            uVar8 < *(uint *)(param_3 + 0x1c0)));
+            uVar8 < *(uint *)(context + 0x1c0)));
   }
   return;
 }
 
 /* _uw_frame_state_for @ 0x97c1b3e4 (328 bytes) */
-int _uw_frame_state_for(param_1, param_2)
-  int param_1;
+int _uw_frame_state_for(context, param_2)
+  int context;
   int param_2;
 {
   undefined4 base_of_encoded_valueResult;
@@ -722,20 +722,20 @@ int _uw_frame_state_for(param_1, param_2)
   int local_30 [5];
   
   _memset(param_2,0,0x3a4);
-  *(undefined4 *)(param_1 + 0x1c4) = 0;
-  *(undefined4 *)(param_1 + 0x1d4) = 0;
-  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)(*(int *)(param_1 + 0x1c0) + -1),
-                             (dwarf_eh_bases *)(param_1 + 0x1c8));
+  *(undefined4 *)(context + 0x1c4) = 0;
+  *(undefined4 *)(context + 0x1d4) = 0;
+  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)(*(int *)(context + 0x1c0) + -1),
+                             (dwarf_eh_bases *)(context + 0x1c8));
   uVar1 = 5;
   if (unwind_Find_FDEResult != (int *)0x0) {
-    *(undefined4 *)(param_2 + 0x38c) = *(undefined4 *)(param_1 + 0x1d0);
+    *(undefined4 *)(param_2 + 0x38c) = *(undefined4 *)(context + 0x1d0);
     iVar2 = unwind_Find_FDEResult[1];
     iVar6 = (int)unwind_Find_FDEResult + (4 - iVar2);
-    extract_cie_infoResult = ((int (*)())_extract_cie_info)(iVar6,param_1,param_2);
+    extract_cie_infoResult = ((int (*)())_extract_cie_info)(iVar6,context,param_2);
     uVar1 = 3;
     if (extract_cie_infoResult != 0) {
       iVar5 = 0;
-      ((int (*)())_execute_cfa_program)(extract_cie_infoResult,iVar6 + *(int *)((int)unwind_Find_FDEResult + (4 - iVar2)) + 4,param_1,param_2);
+      ((int (*)())_execute_cfa_program)(extract_cie_infoResult,iVar6 + *(int *)((int)unwind_Find_FDEResult + (4 - iVar2)) + 4,context,param_2);
       size_of_encoded_valueResult = _size_of_encoded_value_97c1a2c8((uint)*(byte *)(param_2 + 0x39d));
       iVar2 = (int)unwind_Find_FDEResult + size_of_encoded_valueResult * 2 + 8;
       if (*(char *)(param_2 + 0x39f) != '\0') {
@@ -744,13 +744,13 @@ int _uw_frame_state_for(param_1, param_2)
       }
       uVar7 = (uint)*(byte *)(param_2 + 0x39e);
       if (uVar7 != 0xff) {
-        base_of_encoded_valueResult = _base_of_encoded_value(uVar7,param_1);
-        iVar2 = _read_encoded_value_with_base_97c1a468(uVar7,base_of_encoded_valueResult,iVar2,param_1 + 0x1c4);
+        base_of_encoded_valueResult = _base_of_encoded_value(uVar7,context);
+        iVar2 = _read_encoded_value_with_base_97c1a468(uVar7,base_of_encoded_valueResult,iVar2,context + 0x1c4);
       }
       if (iVar5 == 0) {
         iVar5 = iVar2;
       }
-      ((int (*)())_execute_cfa_program)(iVar5,(int)unwind_Find_FDEResult + *unwind_Find_FDEResult + 4,param_1,param_2);
+      ((int (*)())_execute_cfa_program)(iVar5,(int)unwind_Find_FDEResult + *unwind_Find_FDEResult + 4,context,param_2);
       uVar1 = 0;
     }
   }
@@ -881,8 +881,8 @@ int _uw_update_context(param_1, param_2)
 }
 
 /* _uw_init_context_1 @ 0x97c1b79c (132 bytes) */
-int _uw_init_context_1(param_1, param_2, param_3)
-  int param_1;
+int _uw_init_context_1(context, param_2, param_3)
+  int context;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -892,18 +892,18 @@ int _uw_init_context_1(param_1, param_2, param_3)
   int local_50;
   undefined4 local_48;
   
-  _memset(param_1,0,0x1d8);
-  *(undefined4 *)(param_1 + 0x1c0) = in_LR;
-  local_54 = ((int (*)())_uw_frame_state_for)(param_1,auStack_3d0);
+  _memset(context,0,0x1d8);
+  *(undefined4 *)(context + 0x1c0) = in_LR;
+  local_54 = ((int (*)())_uw_frame_state_for)(context,auStack_3d0);
   if (local_54 != 0) {
                     
     _abort();
   }
-  *(undefined4 *)(param_1 + 0x1bc) = param_2;
+  *(undefined4 *)(context + 0x1bc) = param_2;
   local_48 = 1;
   local_50 = local_54;
-  ((int (*)())_uw_update_context_1)(param_1,auStack_3d0);
-  *(undefined4 *)(param_1 + 0x1c0) = param_3;
+  ((int (*)())_uw_update_context_1)(context,auStack_3d0);
+  *(undefined4 *)(context + 0x1c0) = param_3;
   return;
 }
 
@@ -1046,9 +1046,9 @@ int _uw_install_context_1(param_1, param_2)
 }
 
 /* __Unwind_RaiseException_Phase2 @ 0x97c1baac (192 bytes) */
-int __Unwind_RaiseException_Phase2(param_1, param_2)
+int __Unwind_RaiseException_Phase2(param_1, context)
   undefined4 *param_1;
-  int param_2;
+  int context;
 {
   uint uVar1;
   bool bVar2;
@@ -1058,18 +1058,18 @@ int __Unwind_RaiseException_Phase2(param_1, param_2)
   code *local_30;
   
   while( true ) {
-    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(param_2,auStack_3c0);
+    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(context,auStack_3c0);
     iVar4 = 2;
-    uVar1 = (uint)(*(int *)(param_2 + 0x1c0) == param_1[4]);
+    uVar1 = (uint)(*(int *)(context + 0x1c0) == param_1[4]);
     if ((uw_frame_state_forResult != 0) ||
        ((local_30 != (code *)0x0 &&
-        ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,param_2,2), iVar4 == 7 ||
+        ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,context,2), iVar4 == 7 ||
          (bVar2 = iVar4 != 8, iVar4 = 2, bVar2)))))) break;
     if (uVar1 != 0) {
                     
       _abort();
     }
-    ((int (*)())_uw_update_context)(param_2,auStack_3c0);
+    ((int (*)())_uw_update_context)(context,auStack_3c0);
   }
   return iVar4;
 }
@@ -1108,9 +1108,9 @@ int __Unwind_RaiseException(exception_object)
 }
 
 /* __Unwind_ForcedUnwind_Phase2 @ 0x97c1bc88 (260 bytes) */
-int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
+int __Unwind_ForcedUnwind_Phase2(param_1, context)
   undefined4 *param_1;
-  undefined4 param_2;
+  undefined4 context;
 {
   int uw_frame_state_forResult;
   int iVar1;
@@ -1124,7 +1124,7 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
   pcVar3 = (code *)param_1[3];
   a6 = param_1[4];
   while( true ) {
-    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(param_2,auStack_3d0);
+    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(context,auStack_3d0);
     if ((uw_frame_state_forResult != 0) && (uw_frame_state_forResult != 5)) {
       return 2;
     }
@@ -1132,13 +1132,13 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
     if (uw_frame_state_forResult == 5) {
       a1 = 0x1a;
     }
-    iVar2 = (*pcVar3)(1,a1,*param_1,param_1[1],param_1,param_2,a6);
+    iVar2 = (*pcVar3)(1,a1,*param_1,param_1[1],param_1,context,a6);
     if (iVar2 != 0) break;
     if (uw_frame_state_forResult == 5) {
       return 5;
     }
     if (local_40 != (code *)0x0) {
-      iVar1 = (*local_40)(1,10,*param_1,param_1[1],param_1,param_2);
+      iVar1 = (*local_40)(1,10,*param_1,param_1[1],param_1,context);
       if (iVar1 == 7) {
         return 7;
       }
@@ -1146,7 +1146,7 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
         return 2;
       }
     }
-    ((int (*)())_uw_update_context)(param_2,auStack_3d0);
+    ((int (*)())_uw_update_context)(context,auStack_3d0);
   }
   return 2;
 }
@@ -2706,10 +2706,10 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_(this, text)
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique @ 0x97c30be0 (388 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(this, pair, param_3)
+int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(this, pair, text)
   unsigned char * this;
   unsigned char * pair;
-  int param_3;
+  int text;
 {
   int iVar1;
   uint *puVar2;
@@ -2731,7 +2731,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   iVar1 = 1;
   iVar5 = iVar4;
   if (*(int *)(iVar4 + 4) != 0) {
-    pvVar3 = *(void **)(param_3 + 4);
+    pvVar3 = *(void **)(text + 4);
     iVar6 = *(int *)(iVar4 + 4);
     do {
       iVar5 = iVar6;
@@ -2760,7 +2760,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   if (iVar1 != 0) {
     local_60[0] = *(int *)(iVar4 + 8);
     if (iVar5 == local_60[0]) {
-      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,param_3);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,text);
       goto LAB_97c30d34;
     }
     std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
@@ -2769,12 +2769,12 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   puVar2 = &local_34;
   uVar7 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
   local_38 = uVar7;
-  uVar8 = *(uint *)((int)*(void **)(param_3 + 4) + -0xc);
+  uVar8 = *(uint *)((int)*(void **)(text + 4) + -0xc);
   local_34 = uVar8;
   if (uVar7 <= uVar8) {
     puVar2 = &local_38;
   }
-  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(param_3 + 4),*puVar2);
+  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(text + 4),*puVar2);
   if (iVar4 == 0) {
     iVar4 = uVar7 - uVar8;
   }
@@ -2783,7 +2783,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
     *(undefined4 *)(this + 4) = 0;
     return this;
   }
-  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,param_3);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,text);
   local_50[0] = local_60[0];
 LAB_97c30d34:
   *(int *)this = local_50[0];

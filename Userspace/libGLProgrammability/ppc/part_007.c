@@ -369,19 +369,19 @@ LAB_97bae268:
 }
 
 /* _CPPDebugLogMsg @ 0x97bae28c (92 bytes) */
-int _CPPDebugLogMsg(param_1)
-  char *param_1;
+int _CPPDebugLogMsg(str)
+  char *str;
 {
   void *this;
   
   this = (void *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8) + 8);
-  __ZN13TInfoSinkBase6appendEPKc(this,param_1);
+  __ZN13TInfoSinkBase6appendEPKc(this,str);
   return __ZN13TInfoSinkBase6appendEPKc(this,"\n");
 }
 
 /* _CPPWarningToInfoLog @ 0x97bae2e8 (92 bytes) */
-int _CPPWarningToInfoLog(param_1)
-  char *param_1;
+int _CPPWarningToInfoLog(str)
+  char *str;
 {
   int atomicStore;
   uint uVar2;
@@ -424,7 +424,7 @@ int _CPPWarningToInfoLog(param_1)
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_70[0] + -0xc));
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
-  __ZN13TInfoSinkBase6appendEPKc(this,param_1);
+  __ZN13TInfoSinkBase6appendEPKc(this,str);
   __ZN13TInfoSinkBase6appendEPKc(this,"\n");
   return;
 }
@@ -632,8 +632,8 @@ LAB_97bae84c:
 }
 
 /* _StoreStr @ 0x97bae874 (448 bytes) */
-int _StoreStr(param_1)
-  char *param_1;
+int _StoreStr(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -672,7 +672,7 @@ int _StoreStr(param_1)
   local_b0 = local_c0;
   local_90[0] = GetGlobalPoolAllocator();
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-            ((unsigned char *)&local_a0,param_1,(unsigned char *)local_90);
+            ((unsigned char *)&local_a0,str,(unsigned char *)local_90);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_c0,(unsigned char *)&local_a0);
   piVar2 = (int *)(local_9c + -4);
   local_80[0] = local_a0;
@@ -793,8 +793,8 @@ LAB_97baeb5c:
 }
 
 /* _GetBehavior @ 0x97baeb80 (484 bytes) */
-int _GetBehavior(param_1)
-  char *param_1;
+int _GetBehavior(str)
+  char *str;
 {
   int compareResult;
   byte bVar1;
@@ -820,16 +820,16 @@ int _GetBehavior(param_1)
   undefined4 local_30 [4];
   undefined4 local_20 [4];
   
-  compareResult = _memcmp("require",param_1,8);
+  compareResult = _memcmp("require",str,8);
   uVar5 = 0;
   if (compareResult != 0) {
-    compareResult = _memcmp("enable",param_1,7);
+    compareResult = _memcmp("enable",str,7);
     uVar5 = 1;
     if (compareResult != 0) {
-      compareResult = _memcmp("disable",param_1,8);
+      compareResult = _memcmp("disable",str,8);
       uVar5 = 3;
       if (compareResult != 0) {
-        compareResult = _memcmp("warn",param_1,5);
+        compareResult = _memcmp("warn",str,5);
         uVar5 = 2;
         if (compareResult != 0) {
           local_50[0] = GetGlobalPoolAllocator();
@@ -837,9 +837,9 @@ int _GetBehavior(param_1)
                     ((unsigned char *)&local_60,"behavior \'",(unsigned char *)local_50);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
                     ((unsigned char *)&local_70,(unsigned char *)&local_60);
-          length = _strlen(param_1);
+          length = _strlen(str);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                    ((unsigned char *)&local_70,param_1,length);
+                    ((unsigned char *)&local_70,str,length);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_80,(unsigned char *)&local_70);
           length = _strlen("\' is not supported");
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
@@ -898,9 +898,9 @@ int _GetBehavior(param_1)
 }
 
 /* _updateExtensionBehavior @ 0x97baed64 (1124 bytes) */
-int _updateExtensionBehavior(param_1, param_2)
+int _updateExtensionBehavior(param_1, str)
   char *param_1;
-  undefined4 param_2;
+  undefined4 str;
 {
   uint behavior2;
   int compareResult;
@@ -957,7 +957,7 @@ int _updateExtensionBehavior(param_1, param_2)
   undefined4 local_40 [4];
   undefined4 local_30 [5];
   
-  behavior2 = ((int (*)())_GetBehavior)(param_2);
+  behavior2 = ((int (*)())_GetBehavior)(str);
   iVar7 = DAT_a7b7baa8;
   piVar5 = (int *)(DAT_a7b7baa8 + 8);
   do {

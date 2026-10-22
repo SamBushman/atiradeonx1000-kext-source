@@ -928,11 +928,11 @@ LAB_97b83e9c:
 }
 
 /* _PPParserFree @ 0x97b83ea4 (48 bytes) */
-int _PPParserFree(param_1)
-  undefined4 param_1;
+int _PPParserFree(parser)
+  undefined4 parser;
 {
-  ((int (*)())_PPParserShutdown)(param_1);
-  return _free(param_1);
+  ((int (*)())_PPParserShutdown)(parser);
+  return _free(parser);
 }
 
 /* _PPParserShutdown @ 0x97b83ed4 (88 bytes) */
@@ -1019,11 +1019,11 @@ int _PPParserScopeRemoveIdentifier(parser, param_2)
 }
 
 /* _PPParserIdentifierFree @ 0x97b84028 (52 bytes) */
-int _PPParserIdentifierFree(param_1)
-  undefined4 param_1;
+int _PPParserIdentifierFree(parser)
+  undefined4 parser;
 {
-  _PPParserIdentifierSetName(param_1,0);
-  return _free(param_1);
+  _PPParserIdentifierSetName(parser,0);
+  return _free(parser);
 }
 
 /* _PPParserScopeRemoveMacro @ 0x97b8405c (68 bytes) */
@@ -1085,8 +1085,8 @@ int _PPParserMacroFree(parser)
 }
 
 /* _PPParserGetScalars @ 0x97b84130 (200 bytes) */
-int _PPParserGetScalars(param_1, param_2, param_3)
-  undefined4 param_1;
+int _PPParserGetScalars(parser, param_2, param_3)
+  undefined4 parser;
   float *param_2;
   int param_3;
 {
@@ -1098,7 +1098,7 @@ int _PPParserGetScalars(param_1, param_2, param_3)
   
   loopIndex = 0;
   while( true ) {
-    part = _PPParserGetPart(param_1,local_130,1);
+    part = _PPParserGetPart(parser,local_130,1);
     if (part == 0) {
       return 0x2d;
     }
@@ -1112,10 +1112,10 @@ int _PPParserGetScalars(param_1, param_2, param_3)
     if (loopIndex == param_3) {
       return 0;
     }
-    part = _PPParserGetPart(param_1,local_130,0);
+    part = _PPParserGetPart(parser,local_130,0);
     if (part == 0) break;
     if (local_130[0] != ',') {
-      _PPParserReturnPart(param_1);
+      _PPParserReturnPart(parser);
       return 0;
     }
   }
@@ -1235,8 +1235,8 @@ int _PPParserParseTempDeclaration(parser, param_2)
 }
 
 /* _PPParserParseSourceSwizzle @ 0x97b84438 (396 bytes) */
-int _PPParserParseSourceSwizzle(param_1, param_2, param_3)
-  int param_1;
+int _PPParserParseSourceSwizzle(parser, param_2, param_3)
+  int parser;
   uint *param_2;
   undefined4 *param_3;
 {
@@ -1249,7 +1249,7 @@ int _PPParserParseSourceSwizzle(param_1, param_2, param_3)
   uint loopIndex;
   undefined1 local_110 [256];
   
-  part = _PPParserGetPart(param_1,local_110,0);
+  part = _PPParserGetPart(parser,local_110,0);
   uVar6 = 0;
   uVar1 = 0x2d;
   if (part != 0) {
@@ -1324,7 +1324,7 @@ LAB_97b845d4:
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 4);
-    if ((uVar6 == 3) || ((uVar6 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
+    if ((uVar6 == 3) || ((uVar6 == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
 switchD_97b844cc_caseD_63:
       uVar1 = 0xd;
     }
@@ -1336,8 +1336,8 @@ switchD_97b844cc_caseD_63:
 }
 
 /* _PPParserParseDestinationMask @ 0x97b8462c (412 bytes) */
-int _PPParserParseDestinationMask(param_1, param_2)
-  int param_1;
+int _PPParserParseDestinationMask(parser, param_2)
+  int parser;
   uint *param_2;
 {
   uint uVar1;
@@ -1347,7 +1347,7 @@ int _PPParserParseDestinationMask(param_1, param_2)
   uint uVar5;
   undefined1 local_110 [260];
   
-  part = _PPParserGetPart(param_1,local_110,0);
+  part = _PPParserGetPart(parser,local_110,0);
   uVar5 = 0;
   uVar3 = 0x2d;
   if (part != 0) {
@@ -1415,7 +1415,7 @@ LAB_97b84778:
 LAB_97b847e8:
         loopIndex = loopIndex + 1;
       } while (loopIndex < part);
-      if ((uVar5 == 3) || ((uVar5 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
+      if ((uVar5 == 3) || ((uVar5 == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
 LAB_97b8481c:
         return 0xc;
       }
@@ -1794,8 +1794,8 @@ int _PPParserMacroGetReplaceString(parser, param_2, param_3, param_4)
 }
 
 /* _PPParserParseSwizzleCode @ 0x97b85058 (620 bytes) */
-int _PPParserParseSwizzleCode(param_1, param_2)
-  int param_1;
+int _PPParserParseSwizzleCode(parser, param_2)
+  int parser;
   uint *param_2;
 {
   int part2;
@@ -1810,7 +1810,7 @@ int _PPParserParseSwizzleCode(param_1, param_2)
   uVar3 = 0;
   loopIndex = 0;
   do {
-    uVar1 = _PPParserGetPart(param_1,&local_120,0);
+    uVar1 = _PPParserGetPart(parser,&local_120,0);
     iVar5 = 0;
     if (uVar1 == 0) {
       return 0x2d;
@@ -1824,7 +1824,7 @@ LAB_97b850c8:
         local_120 = local_11f;
       }
       else {
-        part = _PPParserGetPart(param_1,&local_120,0);
+        part = _PPParserGetPart(parser,&local_120,0);
         if (part == 0) {
           return 0x2d;
         }
@@ -1895,7 +1895,7 @@ LAB_97b852e8:
         uVar1 = 2;
       }
     }
-    if ((uVar3 == 3) || ((uVar3 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
+    if ((uVar3 == 3) || ((uVar3 == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
       return 0xd;
     }
     if (loopIndex == 1) {
@@ -1921,7 +1921,7 @@ LAB_97b85398:
         goto LAB_97b85398;
       }
     }
-    part2 = _PPParserGetPart(param_1,&local_120,0);
+    part2 = _PPParserGetPart(parser,&local_120,0);
     if (part2 == 0) {
       return 0x2d;
     }

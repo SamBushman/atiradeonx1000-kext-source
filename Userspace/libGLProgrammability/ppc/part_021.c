@@ -964,33 +964,33 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_(this, param_2,
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_ @ 0x97c15678 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_(this, param_2, param_3, param_4, param_5)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_(this, param_2, param_3, str, param_5)
   void *this;
   int param_2;
   int param_3;
-  char *param_4;
+  char *str;
   int param_5;
 {
   int local_30 [5];
   
   __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,param_4,param_5 - (int)param_4)
+  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,str,param_5 - (int)str)
   ;
   return;
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_ @ 0x97c156d8 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_(this, param_2, param_3, param_4, param_5)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_(this, param_2, param_3, str, param_5)
   void *this;
   int param_2;
   int param_3;
-  char *param_4;
+  char *str;
   int param_5;
 {
   int local_30 [5];
   
   __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,param_4,param_5 - (int)param_4)
+  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,str,param_5 - (int)str)
   ;
   return;
 }
