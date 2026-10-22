@@ -290,17 +290,17 @@ int __ZN16ParseSymbolTableD4Ev(this)
 }
 
 /* ParseSymbolTable__processOperand @ 0x97bbc384 (252 bytes) */
-int ParseSymbolTable__processOperand(this, param_2)
+int ParseSymbolTable__processOperand(this, parseOperand)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseOperand;
 {
   bool bVar1;
   unsigned char * pPVar2;
   int iVar3;
   unsigned char * this_00;
   
-  if (((param_2 != (unsigned char *)0x0) &&
-      (this_00 = *(unsigned char **)param_2, this_00 != (unsigned char *)0x0)) &&
+  if (((parseOperand != (unsigned char *)0x0) &&
+      (this_00 = *(unsigned char **)parseOperand, this_00 != (unsigned char *)0x0)) &&
      (*(int *)(this_00 + 0x50) == 0)) {
     if (*(int *)(this_00 + 0x48) == 0) {
       *(undefined2 *)(this_00 + 0x30) = 0;
@@ -318,9 +318,9 @@ int ParseSymbolTable__processOperand(this, param_2)
       __ZdlPv(this_00);
       bVar1 = false;
     }
-    if (((!bVar1) && (*(unsigned char **)param_2 = pPVar2, *(int *)(pPVar2 + 0x34) != 0)) &&
+    if (((!bVar1) && (*(unsigned char **)parseOperand = pPVar2, *(int *)(pPVar2 + 0x34) != 0)) &&
        (iVar3 = GetBuiltInInitialSwizzle(pPVar2), iVar3 != 0)) {
-      ParseOperand__AddSwizzle(param_2,(uchar)iVar3);
+      ParseOperand__AddSwizzle(parseOperand,(uchar)iVar3);
       return;
     }
   }
@@ -328,46 +328,46 @@ int ParseSymbolTable__processOperand(this, param_2)
 }
 
 /* ParseSymbolTable__AddSymbol @ 0x97bbc480 (140 bytes) */
-int ParseSymbolTable__AddSymbol(this, param_2)
+int ParseSymbolTable__AddSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
   if (*(int *)(this + 4) == 0) {
-    *(unsigned char **)this = param_2;
+    *(unsigned char **)this = parseSymbol;
     iVar3 = *(int *)(this + 8);
-    iVar1 = (*(uint *)(param_2 + 0x1c) -
-            (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
+    iVar1 = (*(uint *)(parseSymbol + 0x1c) -
+            (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
   }
   else {
-    *(unsigned char **)(*(int *)(this + 4) + 8) = param_2;
+    *(unsigned char **)(*(int *)(this + 4) + 8) = parseSymbol;
     iVar3 = *(int *)(this + 8);
-    iVar1 = (*(uint *)(param_2 + 0x1c) -
-            (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
+    iVar1 = (*(uint *)(parseSymbol + 0x1c) -
+            (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
     iVar2 = *(int *)(iVar1 + iVar3);
     if (*(int *)(iVar1 + iVar3) != 0) {
       do {
         iVar1 = iVar2;
         iVar2 = *(int *)(iVar1 + 4);
       } while (iVar2 != 0);
-      *(unsigned char **)(iVar1 + 4) = param_2;
+      *(unsigned char **)(iVar1 + 4) = parseSymbol;
       goto LAB_97bbc4f8;
     }
   }
-  *(unsigned char **)(iVar1 + iVar3) = param_2;
+  *(unsigned char **)(iVar1 + iVar3) = parseSymbol;
 LAB_97bbc4f8:
-  *(unsigned char **)(this + 4) = param_2;
+  *(unsigned char **)(this + 4) = parseSymbol;
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;
   return;
 }
 
 /* ParseSymbolTable__InsertSingleSymbol @ 0x97bbc50c (1504 bytes) */
-int ParseSymbolTable__InsertSingleSymbol(this, param_2)
+int ParseSymbolTable__InsertSingleSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   bool bVar1;
   byte bVar2;
@@ -389,26 +389,26 @@ int ParseSymbolTable__InsertSingleSymbol(this, param_2)
   byte *pbVar11;
   uint local_40 [6];
   
-  p_Var5 = (unsigned char *)GetChunkForSymbol(param_2,*(int *)(this + 0x3c));
-  *(undefined4 *)(param_2 + 4) = 0;
-  *(undefined4 *)(param_2 + 8) = 0;
-  ((int (*)())ParseSymbolTable__AddSymbol)(this,param_2);
-  *(undefined4 *)(param_2 + 0x50) = 1;
-  if (*(int *)(param_2 + 0x38) == 0) {
+  p_Var5 = (unsigned char *)GetChunkForSymbol(parseSymbol,*(int *)(this + 0x3c));
+  *(undefined4 *)(parseSymbol + 4) = 0;
+  *(undefined4 *)(parseSymbol + 8) = 0;
+  ((int (*)())ParseSymbolTable__AddSymbol)(this,parseSymbol);
+  *(undefined4 *)(parseSymbol + 0x50) = 1;
+  if (*(int *)(parseSymbol + 0x38) == 0) {
     uVar9 = 0;
-    if ((*(int *)(param_2 + 0x58) == 0) && (*(int *)(param_2 + 0x3c) == 0)) {
-      a0 = *(int **)(param_2 + 0xc);
+    if ((*(int *)(parseSymbol + 0x58) == 0) && (*(int *)(parseSymbol + 0x3c) == 0)) {
+      a0 = *(int **)(parseSymbol + 0xc);
       a0_00 = (int *)0x0;
       if (a0 != (int *)0x0) {
         iVar6 = (**(code **)(*a0 + 0x24))(a0);
         if ((((iVar6 != 0) &&
-             (iVar6 = (**(code **)(**(int **)(param_2 + 0xc) + 0x24))(*(int **)(param_2 + 0xc)),
+             (iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
              iVar6 != 9)) &&
-            (iVar6 = (**(code **)(**(int **)(param_2 + 0xc) + 0x24))(*(int **)(param_2 + 0xc)),
+            (iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
             iVar6 != 10)) &&
-           ((iVar6 = (**(code **)(**(int **)(param_2 + 0xc) + 0x24))(*(int **)(param_2 + 0xc)),
+           ((iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
             iVar6 != 0xb &&
-            (iVar6 = (**(code **)(**(int **)(param_2 + 0xc) + 0x24))(*(int **)(param_2 + 0xc)),
+            (iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
             iVar6 != 0xc)))) {
           uVar9 = 1;
         }
@@ -417,25 +417,25 @@ int ParseSymbolTable__InsertSingleSymbol(this, param_2)
     }
     else {
 LAB_97bbc61c:
-      a0_00 = *(int **)(param_2 + 0xc);
+      a0_00 = *(int **)(parseSymbol + 0xc);
     }
-    *(undefined4 *)(param_2 + 0x38) = uVar9;
+    *(undefined4 *)(parseSymbol + 0x38) = uVar9;
   }
   else {
-    a0_00 = *(int **)(param_2 + 0xc);
+    a0_00 = *(int **)(parseSymbol + 0xc);
   }
   iVar6 = (**(code **)(*a0_00 + 0x24))(a0_00);
-  *(uint *)(param_2 + 0x60) = (uint)(iVar6 == 4);
-  iVar6 = **(int **)(param_2 + 0xc);
-  iVar6 = (**(code **)(iVar6 + 0x24))(*(int **)(param_2 + 0xc),a1,in_r5,in_r6,in_r7,in_r8,iVar6);
-  *(uint *)(param_2 + 0x5c) = (uint)(iVar6 == 5);
-  *(undefined4 *)(param_2 + 0x54) = *(undefined4 *)(this + 0x50);
-  uVar7 = GetVec4sForType((uint)*(ushort *)(param_2 + 0x2c));
-  ParseSymbol__SetChunk(param_2,p_Var5);
-  pbVar11 = *(byte **)param_2;
-  *(undefined4 *)(param_2 + 0x44) = 0;
+  *(uint *)(parseSymbol + 0x60) = (uint)(iVar6 == 4);
+  iVar6 = **(int **)(parseSymbol + 0xc);
+  iVar6 = (**(code **)(iVar6 + 0x24))(*(int **)(parseSymbol + 0xc),a1,in_r5,in_r6,in_r7,in_r8,iVar6);
+  *(uint *)(parseSymbol + 0x5c) = (uint)(iVar6 == 5);
+  *(undefined4 *)(parseSymbol + 0x54) = *(undefined4 *)(this + 0x50);
+  uVar7 = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
+  ParseSymbol__SetChunk(parseSymbol,p_Var5);
+  pbVar11 = *(byte **)parseSymbol;
+  *(undefined4 *)(parseSymbol + 0x44) = 0;
   if (pbVar11 == (byte *)0x0) {
-    return param_2;
+    return parseSymbol;
   }
   bVar2 = *pbVar11;
   if (bVar2 == 2) {
@@ -476,7 +476,7 @@ LAB_97bbc70c:
           uVar8 = *(uint *)(this + 0x1c);
           *(uint *)(pbVar11 + 0xc) = uVar8 & 0x1f | *(uint *)(pbVar11 + 0xc) & 0xffffffe0;
           *(uint *)(this + 0x1c) = uVar8 + 1;
-          iVar3 = GetScalerWidthForType((uint)*(ushort *)(param_2 + 0x2c));
+          iVar3 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
           *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar3;
         }
       }
@@ -485,8 +485,8 @@ LAB_97bbc70c:
           iVar3 = *(int *)(this + 0x38);
           *(short *)(pbVar11 + 0x12) = (short)iVar3;
           *(int *)(this + 0x38) = iVar3 + 1;
-          if (*(int *)(param_2 + 0x60) == 0) {
-            if (*(int *)(param_2 + 0x5c) != 0) {
+          if (*(int *)(parseSymbol + 0x60) == 0) {
+            if (*(int *)(parseSymbol + 0x5c) != 0) {
               uVar8 = *(uint *)(this + 0x34);
               *(uint *)(pbVar11 + 0xc) = uVar8 & 0x1f | *(uint *)(pbVar11 + 0xc) & 0xffffffe0;
               *(uint *)(this + 0x34) = uVar8 + 1;
@@ -496,7 +496,7 @@ LAB_97bbc70c:
             uVar8 = *(uint *)(this + 0x1c);
             *(uint *)(pbVar11 + 0xc) = uVar8 & 0x1f | *(uint *)(pbVar11 + 0xc) & 0xffffffe0;
             *(uint *)(this + 0x1c) = uVar8 + 1;
-            iVar3 = GetScalerWidthForType((uint)*(ushort *)(param_2 + 0x2c));
+            iVar3 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
             *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar3;
           }
           if (*(int *)(this + 0x50) != 0) {
@@ -611,7 +611,7 @@ LAB_97bbc984:
       *(byte **)(this + 0x48) = pbVar11;
     } while (uVar10 < uVar7);
   }
-  return param_2;
+  return parseSymbol;
 }
 
 /* ParseSymbolTable__FinishArrayAddition @ 0x97bbcaec (216 bytes) */
@@ -660,9 +660,9 @@ LAB_97bbcba4:
 }
 
 /* ParseSymbolTable__AddTempFromOutput @ 0x97bbcbc4 (324 bytes) */
-int ParseSymbolTable__AddTempFromOutput(this, param_2)
+int ParseSymbolTable__AddTempFromOutput(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   ushort uVar1;
   int iVar2;
@@ -678,7 +678,7 @@ int ParseSymbolTable__AddTempFromOutput(this, param_2)
   this_00 = operator_new(100);
   __ZN11ParseSymbolC1Ev(this_00);
   p_Var3 = (unsigned char *)_PPStreamChunkCreateWithType(0,0);
-  ParseSymbol__operator_(this_00,param_2);
+  ParseSymbol__operator_(this_00,parseSymbol);
   *(undefined4 *)(this_00 + 8) = 0;
   *(undefined4 *)(this_00 + 4) = 0;
   ((int (*)())ParseSymbolTable__AddSymbol)(this,this_00);
@@ -714,9 +714,9 @@ int ParseSymbolTable__AddTempFromOutput(this, param_2)
 }
 
 /* ParseSymbolTable__AddFromExternalSymbol @ 0x97bbcd08 (1028 bytes) */
-int ParseSymbolTable__AddFromExternalSymbol(this, param_2, param_3, param_4)
+int ParseSymbolTable__AddFromExternalSymbol(this, parseSymbol, param_3, param_4)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
   int param_3;
   int param_4;
 {
@@ -735,10 +735,10 @@ int ParseSymbolTable__AddFromExternalSymbol(this, param_2, param_3, param_4)
   
   this_00 = operator_new(100);
   __ZN11ParseSymbolC1Ev(this_00);
-  iVar7 = *(int *)param_2;
+  iVar7 = *(int *)parseSymbol;
   iVar8 = 0;
   p_Var5 = (unsigned char *)_PPStreamChunkCreateFromChunk(iVar7);
-  ParseSymbol__operator_(this_00,param_2);
+  ParseSymbol__operator_(this_00,parseSymbol);
   *(undefined4 *)(this_00 + 8) = 0;
   *(undefined4 *)(this_00 + 4) = 0;
   ((int (*)())ParseSymbolTable__AddSymbol)(this,this_00);
@@ -880,9 +880,9 @@ LAB_97bbd0d4:
 }
 
 /* ParseSymbolTable__InsertSymbol @ 0x97bbd10c (952 bytes) */
-int ParseSymbolTable__InsertSymbol(this, param_2)
+int ParseSymbolTable__InsertSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   bool bVar1;
   undefined1 *puVar2;
@@ -900,21 +900,21 @@ int ParseSymbolTable__InsertSymbol(this, param_2)
   
   puVar2 = DAT_a7b7bcfc;
   uVar9 = 0;
-  if (param_2 == (unsigned char *)0x0) {
+  if (parseSymbol == (unsigned char *)0x0) {
     return 0;
   }
-  if ((*(int *)(this + 0x4c) != 0) || (*(int *)(param_2 + 0x24) == 0)) {
-    sVar5 = *(short *)(param_2 + 0x2c);
+  if ((*(int *)(this + 0x4c) != 0) || (*(int *)(parseSymbol + 0x24) == 0)) {
+    sVar5 = *(short *)(parseSymbol + 0x2c);
 LAB_97bbd254:
     if (sVar5 == 0x7ffe) {
-      iVar3 = *(int *)(*(int *)(param_2 + 0xc) + 8);
+      iVar3 = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
       if (iVar3 != 0) {
         uVar11 = 0;
         uVar10 = *(int *)(iVar3 + 8) - *(int *)(iVar3 + 4) >> 3;
         if (uVar10 != 0) {
           do {
             pPVar6 = operator_new(100);
-            __ZN11ParseSymbolC1ERKS_(pPVar6,param_2);
+            __ZN11ParseSymbolC1ERKS_(pPVar6,parseSymbol);
             ParseSymbol__CatName(pPVar6,".");
             a0 = *(int **)(*(int *)(iVar3 + 4) + uVar11 * 8);
             iVar8 = (**(code **)(*a0 + 0x1c))(a0);
@@ -924,7 +924,7 @@ LAB_97bbd254:
             *(undefined4 *)(pPVar6 + 0x48) = 0;
             ParseSymbol__ResolveOpenGLType(pPVar6);
             uVar4 = 0;
-            if ((*(int *)(param_2 + 0x3c) != 0) || (*(int *)(param_2 + 0x40) != 0)) {
+            if ((*(int *)(parseSymbol + 0x3c) != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
               uVar4 = 1;
             }
             *(undefined4 *)(pPVar6 + 0x40) = uVar4;
@@ -942,17 +942,17 @@ LAB_97bbd254:
     }
     else if (sVar5 == 0x7fff) {
       uVar10 = 0;
-      if (0 < *(int *)(*(int *)(param_2 + 0xc) + 4)) {
+      if (0 < *(int *)(*(int *)(parseSymbol + 0xc) + 4)) {
         do {
           pPVar6 = operator_new(100);
-          __ZN11ParseSymbolC1ERKS_(pPVar6,param_2);
+          __ZN11ParseSymbolC1ERKS_(pPVar6,parseSymbol);
           ParseSymbol__AddDirectIndex(pPVar6,uVar10);
           _sprintf(acStack_40,"[%d]",uVar10);
           ParseSymbol__CatName(pPVar6,acStack_40);
           *(undefined4 *)(pPVar6 + 0x48) = 1;
           ParseSymbol__ResolveOpenGLType(pPVar6);
           uVar4 = 0;
-          if ((*(int *)(param_2 + 0x3c) != 0) || (*(int *)(param_2 + 0x40) != 0)) {
+          if ((*(int *)(parseSymbol + 0x3c) != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
             uVar4 = 1;
           }
           *(undefined4 *)(pPVar6 + 0x40) = uVar4;
@@ -964,7 +964,7 @@ LAB_97bbd254:
             *(int *)(this + 0x40) = *(int *)(this + 0x40) + 1;
           }
           ((int (*)())ParseSymbolTable__processOperand)(this,pPVar7);
-          if (uVar10 == *(int *)(*(int *)(param_2 + 0xc) + 4) - 1U) {
+          if (uVar10 == *(int *)(*(int *)(parseSymbol + 0xc) + 4) - 1U) {
             *(int *)(this + 0x40) = *(int *)(this + 0x40) + -1;
             ((int (*)())ParseSymbolTable__FinishArrayAddition)(this);
           }
@@ -973,21 +973,21 @@ LAB_97bbd254:
             __ZdlPv(pPVar7);
           }
           uVar10 = uVar10 + 1;
-        } while ((int)uVar10 < *(int *)(*(int *)(param_2 + 0xc) + 4));
+        } while ((int)uVar10 < *(int *)(*(int *)(parseSymbol + 0xc) + 4));
       }
     }
     else {
-      uVar9 = ((int (*)())ParseSymbolTable__InsertSingleSymbol)(this,param_2);
+      uVar9 = ((int (*)())ParseSymbolTable__InsertSingleSymbol)(this,parseSymbol);
     }
     return uVar9;
   }
-  sVar5 = *(short *)(param_2 + 0x2c);
-  if (((sVar5 != 0x7fff) || (*(int *)(param_2 + 0x3c) != 0)) || (*(int *)(param_2 + 0x40) != 0))
+  sVar5 = *(short *)(parseSymbol + 0x2c);
+  if (((sVar5 != 0x7fff) || (*(int *)(parseSymbol + 0x3c) != 0)) || (*(int *)(parseSymbol + 0x40) != 0))
   goto LAB_97bbd254;
   bVar1 = false;
-  if (-1 < *(int *)(param_2 + 0x28)) {
+  if (-1 < *(int *)(parseSymbol + 0x28)) {
     for (iVar3 = *(int *)this; iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-      if (*(int *)(param_2 + 0x28) == *(int *)(iVar3 + 0x28)) {
+      if (*(int *)(parseSymbol + 0x28) == *(int *)(iVar3 + 0x28)) {
         bVar1 = true;
         break;
       }
@@ -996,11 +996,11 @@ LAB_97bbd254:
   }
   *(undefined4 *)(this + 0x4c) = 1;
   pPVar6 = operator_new(100);
-  __ZN11ParseSymbolC1ERKS_(pPVar6,param_2);
+  __ZN11ParseSymbolC1ERKS_(pPVar6,parseSymbol);
   ParseSymbol__TrimNameToBase(pPVar6);
-  ParseSymbol__SetParseTreeType(pPVar6,*(unsigned char **)(param_2 + 0x10));
+  ParseSymbol__SetParseTreeType(pPVar6,*(unsigned char **)(parseSymbol + 0x10));
   uVar9 = 0;
-  if ((*(int *)(param_2 + 0x3c) != 0) || (*(int *)(param_2 + 0x40) != 0)) {
+  if ((*(int *)(parseSymbol + 0x3c) != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
     uVar9 = 1;
   }
   *(undefined4 *)(pPVar6 + 0x40) = uVar9;
@@ -1017,9 +1017,9 @@ LAB_97bbd244:
 }
 
 /* ParseSymbolTable__FindFirstElement @ 0x97bbd4c4 (624 bytes) */
-int ParseSymbolTable__FindFirstElement(this, param_2)
+int ParseSymbolTable__FindFirstElement(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   unsigned char * pPVar1;
   int iVar2;
@@ -1040,9 +1040,9 @@ int ParseSymbolTable__FindFirstElement(this, param_2)
   char acStack_30 [16];
   
   uVar10 = 0;
-  if (param_2 != (unsigned char *)0x0) {
-    if (*(short *)(param_2 + 0x2c) == 0x7ffe) {
-      iVar9 = *(int *)(*(int *)(param_2 + 0xc) + 8);
+  if (parseSymbol != (unsigned char *)0x0) {
+    if (*(short *)(parseSymbol + 0x2c) == 0x7ffe) {
+      iVar9 = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
       if (iVar9 != 0) {
         pPVar1 = operator_new(100);
         __ZN11ParseSymbolC1Ev(pPVar1);
@@ -1053,22 +1053,22 @@ int ParseSymbolTable__FindFirstElement(this, param_2)
         uVar10 = *(undefined4 *)(iVar5 + 4);
         iVar5 = _strlen(uVar10);
         iVar5 = iVar5 + 1;
-        if (*(int *)(param_2 + 0x14) != 0) {
-          iVar2 = _strlen(*(int *)(param_2 + 0x14));
+        if (*(int *)(parseSymbol + 0x14) != 0) {
+          iVar2 = _strlen(*(int *)(parseSymbol + 0x14));
           iVar5 = iVar5 + iVar2 + 1;
         }
         pcVar3 = (char *)_malloc(iVar5);
-        if (*(int *)(param_2 + 0x14) == 0) {
+        if (*(int *)(parseSymbol + 0x14) == 0) {
           _strcpy(pcVar3,uVar10);
         }
         else {
-          _sprintf(pcVar3,DAT_a7b7bbf4,*(int *)(param_2 + 0x14),uVar10);
+          _sprintf(pcVar3,DAT_a7b7bbf4,*(int *)(parseSymbol + 0x14),uVar10);
         }
         ParseSymbol__SetName(pPVar1,pcVar3);
-        iVar5 = *(int *)(param_2 + 0x3c);
-        *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(param_2 + 0x28);
+        iVar5 = *(int *)(parseSymbol + 0x3c);
+        *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
         uVar10 = 0;
-        if ((iVar5 != 0) || (*(int *)(param_2 + 0x40) != 0)) {
+        if ((iVar5 != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
           uVar10 = 1;
         }
         *(undefined4 *)(pPVar1 + 0x40) = uVar10;
@@ -1081,22 +1081,22 @@ int ParseSymbolTable__FindFirstElement(this, param_2)
         _free(pcVar3);
       }
     }
-    else if (*(short *)(param_2 + 0x2c) == 0x7fff) {
+    else if (*(short *)(parseSymbol + 0x2c) == 0x7fff) {
       uVar11 = 0;
-      if (0 < *(int *)(*(int *)(param_2 + 0xc) + 4)) {
+      if (0 < *(int *)(*(int *)(parseSymbol + 0xc) + 4)) {
         do {
           pPVar1 = operator_new(100);
           __ZN11ParseSymbolC1Ev(pPVar1);
-          ParseSymbol__SetName(pPVar1,*(char **)(param_2 + 0x14));
+          ParseSymbol__SetName(pPVar1,*(char **)(parseSymbol + 0x14));
           ParseSymbol__AddDirectIndex(pPVar1,uVar11);
           _sprintf(acStack_30,DAT_a7b7bbf8,uVar11);
           ParseSymbol__CatName(pPVar1,acStack_30);
-          uVar10 = *(undefined4 *)(param_2 + 0x40);
-          uVar6 = *(undefined4 *)(param_2 + 0x3c);
-          uVar8 = *(undefined4 *)(param_2 + 0x60);
-          uVar7 = *(undefined4 *)(param_2 + 0x5c);
-          pTVar4 = *(unsigned char **)(param_2 + 0xc);
-          *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(param_2 + 0x28);
+          uVar10 = *(undefined4 *)(parseSymbol + 0x40);
+          uVar6 = *(undefined4 *)(parseSymbol + 0x3c);
+          uVar8 = *(undefined4 *)(parseSymbol + 0x60);
+          uVar7 = *(undefined4 *)(parseSymbol + 0x5c);
+          pTVar4 = *(unsigned char **)(parseSymbol + 0xc);
+          *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
           *(undefined4 *)(pPVar1 + 0x40) = uVar10;
           *(undefined4 *)(pPVar1 + 0x3c) = uVar6;
           *(undefined4 *)(pPVar1 + 0x60) = uVar8;
@@ -1110,33 +1110,33 @@ int ParseSymbolTable__FindFirstElement(this, param_2)
             __ZdlPv(pPVar1);
           }
           uVar11 = uVar11 + 1;
-        } while ((int)uVar11 < *(int *)(*(int *)(param_2 + 0xc) + 4));
+        } while ((int)uVar11 < *(int *)(*(int *)(parseSymbol + 0xc) + 4));
       }
     }
     else {
-      uVar10 = ((int (*)())ParseSymbolTable__FindSymbol)(this,param_2);
+      uVar10 = ((int (*)())ParseSymbolTable__FindSymbol)(this,parseSymbol);
     }
   }
   return uVar10;
 }
 
 /* ParseSymbolTable__FindSymbol @ 0x97bbd734 (120 bytes) */
-int ParseSymbolTable__FindSymbol(this, param_2)
+int ParseSymbolTable__FindSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   int iVar1;
   unsigned char * pPVar2;
   
   pPVar2 = *(unsigned char **)
-            ((*(uint *)(param_2 + 0x1c) -
-             (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
+            ((*(uint *)(parseSymbol + 0x1c) -
+             (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
             *(int *)(this + 8));
   while( true ) {
     if (pPVar2 == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
     }
-    iVar1 = __ZeqRK11ParseSymbolS1_(pPVar2,param_2);
+    iVar1 = __ZeqRK11ParseSymbolS1_(pPVar2,parseSymbol);
     if (iVar1 != 0) break;
     pPVar2 = *(unsigned char **)(pPVar2 + 4);
   }
@@ -1144,25 +1144,25 @@ int ParseSymbolTable__FindSymbol(this, param_2)
 }
 
 /* ParseSymbolTable__NextSymbol @ 0x97bbd7ac (24 bytes) */
-int ParseSymbolTable__NextSymbol(this, param_2)
+int ParseSymbolTable__NextSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
-  if (param_2 != (unsigned char *)0x0) {
-    return *(undefined4 *)(param_2 + 8);
+  if (parseSymbol != (unsigned char *)0x0) {
+    return *(undefined4 *)(parseSymbol + 8);
   }
   return *(undefined4 *)this;
 }
 
 /* ParseSymbolTable__NextSymbolInHash @ 0x97bbd7c4 (20 bytes) */
-int ParseSymbolTable__NextSymbolInHash(this, param_2)
+int ParseSymbolTable__NextSymbolInHash(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
-  if (param_2 == (unsigned char *)0x0) {
+  if (parseSymbol == (unsigned char *)0x0) {
     return 0;
   }
-  return *(undefined4 *)(param_2 + 4);
+  return *(undefined4 *)(parseSymbol + 4);
 }
 
 /* ParseSymbolTable__FirstSymbolInHash @ 0x97bbd7d8 (32 bytes) */
@@ -1176,19 +1176,19 @@ int ParseSymbolTable__FirstSymbolInHash(this, param_2)
 }
 
 /* ParseSymbolTable__FindGlobalSymbolByName @ 0x97bbd7f8 (244 bytes) */
-int ParseSymbolTable__FindGlobalSymbolByName(this, param_2)
+int ParseSymbolTable__FindGlobalSymbolByName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   unsigned char * this_00;
   int iVar1;
   unsigned char * pPVar2;
   
-  if (param_2 != (char *)0x0) {
+  if (str != (char *)0x0) {
     this_00 = operator_new(100);
     __ZN11ParseSymbolC1Ev(this_00);
     if (this_00 != (unsigned char *)0x0) {
-      ParseSymbol__SetName(this_00,param_2);
+      ParseSymbol__SetName(this_00,str);
       for (pPVar2 = *(unsigned char **)
                      ((*(uint *)(this_00 + 0x1c) -
                       (*(uint *)(this_00 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
@@ -1209,19 +1209,19 @@ int ParseSymbolTable__FindGlobalSymbolByName(this, param_2)
 }
 
 /* ParseSymbolTable__FindSymbolByName @ 0x97bbd8ec (232 bytes) */
-int ParseSymbolTable__FindSymbolByName(this, param_2)
+int ParseSymbolTable__FindSymbolByName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   unsigned char * this_00;
   int iVar1;
   unsigned char * pPVar2;
   
-  if (param_2 != (char *)0x0) {
+  if (str != (char *)0x0) {
     this_00 = operator_new(100);
     __ZN11ParseSymbolC1Ev(this_00);
     if (this_00 != (unsigned char *)0x0) {
-      ParseSymbol__SetName(this_00,param_2);
+      ParseSymbol__SetName(this_00,str);
       for (pPVar2 = *(unsigned char **)
                      ((*(uint *)(this_00 + 0x1c) -
                       (*(uint *)(this_00 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
@@ -1242,10 +1242,10 @@ int ParseSymbolTable__FindSymbolByName(this, param_2)
 }
 
 /* ParseSymbolTable__FindNextParamSymbolByName @ 0x97bbd9d4 (192 bytes) */
-int ParseSymbolTable__FindNextParamSymbolByName(this, param_2, param_3)
+int ParseSymbolTable__FindNextParamSymbolByName(this, parseSymbol, str)
   unsigned char * this;
-  unsigned char * param_2;
-  char *param_3;
+  unsigned char * parseSymbol;
+  char *str;
 {
   int length;
   int iVar2;
@@ -1253,17 +1253,17 @@ int ParseSymbolTable__FindNextParamSymbolByName(this, param_2, param_3)
   int iVar4;
   
   iVar2 = 0;
-  if (param_3 != (char *)0x0) {
-    length = _strlen(param_3);
-    if (param_2 == (unsigned char *)0x0) {
+  if (str != (char *)0x0) {
+    length = _strlen(str);
+    if (parseSymbol == (unsigned char *)0x0) {
       iVar4 = *(int *)this;
     }
     else {
-      iVar4 = *(int *)(param_2 + 8);
+      iVar4 = *(int *)(parseSymbol + 8);
     }
     while ((iVar2 = 0, iVar4 != 0 &&
            (((iVar3 = *(int *)(iVar4 + 0x14), iVar3 == 0 ||
-             (iVar2 = _strncmp(param_3,iVar3,length), iVar2 != 0)) ||
+             (iVar2 = _strncmp(str,iVar3,length), iVar2 != 0)) ||
             ((iVar2 = iVar4, *(int *)(iVar4 + 0x20) != length &&
              ((*(char *)(iVar3 + length) != '.' && (*(char *)(iVar3 + length) != '['))))))))) {
       iVar4 = *(int *)(iVar4 + 8);
@@ -1273,9 +1273,9 @@ int ParseSymbolTable__FindNextParamSymbolByName(this, param_2, param_3)
 }
 
 /* ParseSymbolTable__RemoveSymbol @ 0x97bbda94 (600 bytes) */
-int ParseSymbolTable__RemoveSymbol(this, param_2)
+int ParseSymbolTable__RemoveSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   byte bVar1;
   unsigned char * pPVar2;
@@ -1287,8 +1287,8 @@ int ParseSymbolTable__RemoveSymbol(this, param_2)
   byte *pbVar8;
   
   uVar7 = 0;
-  uVar5 = GetVec4sForType((uint)*(ushort *)(param_2 + 0x2c));
-  pbVar8 = *(byte **)param_2;
+  uVar5 = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
+  pbVar8 = *(byte **)parseSymbol;
   if (uVar5 != 0) {
     do {
       bVar1 = *pbVar8;
@@ -1297,20 +1297,20 @@ LAB_97bbdb58:
         *(int *)(this + 0x18) = *(int *)(this + 0x18) + -1;
         if ((*(uint *)(pbVar8 + 0xc) & 0xf0000) == 0x90000) {
           *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
-          iVar6 = GetScalerWidthForType((uint)*(ushort *)(param_2 + 0x2c));
+          iVar6 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
           *(int *)(this + 0x20) = *(int *)(this + 0x20) - iVar6;
         }
       }
       else if (bVar1 < 3) {
         if (bVar1 == 0) {
-          if (*(int *)(param_2 + 0x60) == 0) {
-            if (*(int *)(param_2 + 0x5c) != 0) {
+          if (*(int *)(parseSymbol + 0x60) == 0) {
+            if (*(int *)(parseSymbol + 0x5c) != 0) {
               *(int *)(this + 0x34) = *(int *)(this + 0x34) + -1;
             }
           }
           else {
             *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
-            iVar6 = GetScalerWidthForType((uint)*(ushort *)(param_2 + 0x2c));
+            iVar6 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
             *(int *)(this + 0x20) = *(int *)(this + 0x20) - iVar6;
           }
           *(int *)(this + 0x38) = *(int *)(this + 0x38) + -1;
@@ -1335,19 +1335,19 @@ LAB_97bbdb58:
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + -1;
   pPVar2 = (unsigned char *)0x0;
   for (pPVar3 = *(unsigned char **)
-                 ((*(uint *)(param_2 + 0x1c) -
-                  (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
+                 ((*(uint *)(parseSymbol + 0x1c) -
+                  (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
                  + *(int *)(this + 8)); pPVar3 != (unsigned char *)0x0;
       pPVar3 = *(unsigned char **)(pPVar3 + 4)) {
-    if (pPVar3 == param_2) {
+    if (pPVar3 == parseSymbol) {
       if (pPVar2 == (unsigned char *)0x0) {
         *(undefined4 *)
-         ((*(uint *)(param_2 + 0x1c) -
-          (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
-         *(int *)(this + 8)) = *(undefined4 *)(param_2 + 4);
+         ((*(uint *)(parseSymbol + 0x1c) -
+          (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
+         *(int *)(this + 8)) = *(undefined4 *)(parseSymbol + 4);
       }
       else {
-        *(undefined4 *)(pPVar2 + 4) = *(undefined4 *)(param_2 + 4);
+        *(undefined4 *)(pPVar2 + 4) = *(undefined4 *)(parseSymbol + 4);
       }
     }
     pPVar2 = pPVar3;
@@ -1358,15 +1358,15 @@ LAB_97bbdb58:
     pPVar4 = pPVar3;
     if (pPVar4 == (unsigned char *)0x0) {
 LAB_97bbdcd0:
-      *(undefined4 *)(param_2 + 0x50) = 0;
+      *(undefined4 *)(parseSymbol + 0x50) = 0;
       return;
     }
-    if (pPVar4 == param_2) {
+    if (pPVar4 == parseSymbol) {
       if (pPVar2 == (unsigned char *)0x0) {
-        *(undefined4 *)this = *(undefined4 *)(param_2 + 8);
+        *(undefined4 *)this = *(undefined4 *)(parseSymbol + 8);
       }
       else {
-        *(undefined4 *)(pPVar2 + 8) = *(undefined4 *)(param_2 + 8);
+        *(undefined4 *)(pPVar2 + 8) = *(undefined4 *)(parseSymbol + 8);
       }
       if (*(unsigned char **)(this + 4) == pPVar4) {
         *(unsigned char **)(this + 4) = pPVar2;
@@ -1379,9 +1379,9 @@ LAB_97bbdcd0:
 }
 
 /* ParseSymbolTable__RemoveEndSymbol @ 0x97bbdcec (704 bytes) */
-int ParseSymbolTable__RemoveEndSymbol(this, param_2)
+int ParseSymbolTable__RemoveEndSymbol(this, parseSymbol)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * parseSymbol;
 {
   byte bVar1;
   unsigned char * pPVar2;
@@ -1396,8 +1396,8 @@ int ParseSymbolTable__RemoveEndSymbol(this, param_2)
   
   iVar8 = 1;
   uVar9 = 0;
-  uVar5 = GetVec4sForType((uint)*(ushort *)(param_2 + 0x2c));
-  pbVar10 = *(byte **)param_2;
+  uVar5 = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
+  pbVar10 = *(byte **)parseSymbol;
   if (uVar5 != 0) {
     do {
       bVar1 = *pbVar10;
@@ -1406,7 +1406,7 @@ int ParseSymbolTable__RemoveEndSymbol(this, param_2)
         *(uint *)(this + 0x18) = *(int *)(this + 0x18) - 1U;
         if ((*(uint *)(pbVar10 + 0xc) & 0xf0000) == 0x90000) {
           *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
-          iVar7 = GetScalerWidthForType((uint)*(ushort *)(param_2 + 0x2c));
+          iVar7 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
           *(int *)(this + 0x20) = *(int *)(this + 0x20) - iVar7;
         }
       }
@@ -1414,14 +1414,14 @@ int ParseSymbolTable__RemoveEndSymbol(this, param_2)
         if (bVar1 == 0) {
           iVar7 = *(int *)(this + 0x38);
           if (iVar7 - 1U != (uint)*(ushort *)(pbVar10 + 0x12)) goto LAB_97bbde78;
-          if (*(int *)(param_2 + 0x60) == 0) {
-            if (*(int *)(param_2 + 0x5c) != 0) {
+          if (*(int *)(parseSymbol + 0x60) == 0) {
+            if (*(int *)(parseSymbol + 0x5c) != 0) {
               *(int *)(this + 0x34) = *(int *)(this + 0x34) + -1;
             }
           }
           else {
             *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
-            iVar6 = GetScalerWidthForType((uint)*(ushort *)(param_2 + 0x2c));
+            iVar6 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
             *(int *)(this + 0x20) = *(int *)(this + 0x20) - iVar6;
           }
           *(int *)(this + 0x38) = iVar7 + -1;
@@ -1455,16 +1455,16 @@ LAB_97bbde78:
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + -1;
   pPVar2 = (unsigned char *)0x0;
   for (pPVar3 = *(unsigned char **)
-                 ((*(uint *)(param_2 + 0x1c) -
-                  (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
+                 ((*(uint *)(parseSymbol + 0x1c) -
+                  (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
                  + *(int *)(this + 8)); pPVar3 != (unsigned char *)0x0;
       pPVar3 = *(unsigned char **)(pPVar3 + 4)) {
-    iVar7 = __ZeqRK11ParseSymbolS1_(pPVar3,param_2);
+    iVar7 = __ZeqRK11ParseSymbolS1_(pPVar3,parseSymbol);
     if (iVar7 != 0) {
       if (pPVar2 == (unsigned char *)0x0) {
         *(undefined4 *)
-         ((*(uint *)(param_2 + 0x1c) -
-          (*(uint *)(param_2 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
+         ((*(uint *)(parseSymbol + 0x1c) -
+          (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
          *(int *)(this + 8)) = *(undefined4 *)(pPVar3 + 4);
       }
       else {
@@ -1479,10 +1479,10 @@ LAB_97bbde78:
     pPVar4 = pPVar3;
     if (pPVar4 == (unsigned char *)0x0) {
 LAB_97bbdf8c:
-      *(undefined4 *)(param_2 + 0x50) = 0;
+      *(undefined4 *)(parseSymbol + 0x50) = 0;
       return iVar8;
     }
-    iVar7 = __ZeqRK11ParseSymbolS1_(pPVar4,param_2);
+    iVar7 = __ZeqRK11ParseSymbolS1_(pPVar4,parseSymbol);
     if (iVar7 != 0) {
       if (pPVar2 == (unsigned char *)0x0) {
         *(undefined4 *)this = *(undefined4 *)(pPVar4 + 8);
@@ -1551,10 +1551,10 @@ int ParseSymbolTable__CopySymbolTable(this)
 }
 
 /* ParseSymbolTable__ChangeChunk @ 0x97bbe090 (128 bytes) */
-int ParseSymbolTable__ChangeChunk(this, param_2, param_3, param_4)
+int ParseSymbolTable__ChangeChunk(this, _PPStreamChunk1, _PPStreamChunk2, param_4)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * _PPStreamChunk1;
+  unsigned char * _PPStreamChunk2;
   int param_4;
 {
   unsigned char * this_00;
@@ -1562,8 +1562,8 @@ int ParseSymbolTable__ChangeChunk(this, param_2, param_3, param_4)
   this_00 = *(unsigned char **)this;
   if (this_00 != (unsigned char *)0x0) {
     do {
-      if (*(unsigned char **)this_00 == param_2) {
-        ParseSymbol__SetChunk(this_00,param_3);
+      if (*(unsigned char **)this_00 == _PPStreamChunk1) {
+        ParseSymbol__SetChunk(this_00,_PPStreamChunk2);
         if (param_4 != 0) {
           *(undefined4 *)(this_00 + 0x44) = 0;
         }
@@ -1774,9 +1774,9 @@ LAB_97bbe53c:
 }
 
 /* TIntermSymbol__compileNode @ 0x97bbe56c (304 bytes) */
-int TIntermSymbol__compileNode(this, param_2, param_3, param_4, param_5, param_6)
+int TIntermSymbol__compileNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -1792,13 +1792,13 @@ int TIntermSymbol__compileNode(this, param_2, param_3, param_4, param_5, param_6
   undefined4 *this_01;
   
   this_01 = (undefined4 *)0x0;
-  iVar2 = (**(code **)(*(int *)this + 0x60))(this,param_2,param_3,param_4,param_5,param_6);
+  iVar2 = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,param_3,param_4,param_5,param_6);
   puVar1 = DAT_a7b7bd04;
   a6 = *(int *)(iVar2 + 4);
   *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *DAT_a7b7bd04;
   if (*(int *)(iVar2 + 4) != 0) {
     uVar3 = (*(code *)**(undefined4 **)this)(this,a1,param_3,param_4,param_5,param_6,a6);
-    *(undefined4 *)(param_2 + 0x90) = uVar3;
+    *(undefined4 *)(pPStreamCompiler + 0x90) = uVar3;
     this_00 = operator_new(100);
     __ZN11ParseSymbolC1Ev(this_00);
     iVar2 = (**(code **)(*(int *)this + 0x60))(this);
@@ -1818,9 +1818,9 @@ int TIntermSymbol__compileNode(this, param_2, param_3, param_4, param_5, param_6
 }
 
 /* TIntermConstantUnion__compileNode @ 0x97bbe69c (340 bytes) */
-int TIntermConstantUnion__compileNode(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int TIntermConstantUnion__compileNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6, param_7, param_8)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -1839,7 +1839,7 @@ int TIntermConstantUnion__compileNode(this, param_2, param_3, param_4, param_5, 
   this_00 = operator_new(0x38);
   __ZN12ParseOperandC1Ev(this_00);
   uVar4 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(param_2 + 0x90) = uVar4;
+  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar4;
   (**(code **)(*(int *)this + 0x38))(local_50,this);
   if ((local_2c & 0x400) == 0) {
     iVar1 = (int)(local_2c << 0xd | local_2c >> 0x13) >> 0x18;
@@ -1873,13 +1873,13 @@ LAB_97bbe7a0:
       }
       if (uVar2 == 0xe) {
         TPPStreamCompiler__error
-                  (param_2,(char *)0x1,(char *)0x0,
+                  (pPStreamCompiler,(char *)0x1,(char *)0x0,
                    "TIntermConstantUnion::compileNode: EbtStruct constant union type, investigate",
                    param_5,param_6,param_7,param_8);
       }
     }
     TPPStreamCompiler__error
-              (param_2,(char *)0x1,(char *)0x0,
+              (pPStreamCompiler,(char *)0x1,(char *)0x0,
                "TIntermConstantUnion::compileNode: Unexpected constant union type",param_5,param_6,
                param_7,param_8);
   }
@@ -4638,9 +4638,9 @@ int TIntermBranch__compileNode(this, compiler, param_3, param_4, param_5, param_
 }
 
 /* TIntermSymbol__indirectNode @ 0x97bc2d44 (312 bytes) */
-int TIntermSymbol__indirectNode(this, param_2, param_3, param_4, param_5, param_6)
+int TIntermSymbol__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -4656,13 +4656,13 @@ int TIntermSymbol__indirectNode(this, param_2, param_3, param_4, param_5, param_
   undefined4 *this_01;
   
   this_01 = (undefined4 *)0x0;
-  iVar2 = (**(code **)(*(int *)this + 0x60))(this,param_2,param_3,param_4,param_5,param_6);
+  iVar2 = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,param_3,param_4,param_5,param_6);
   puVar1 = DAT_a7b7bd0c;
   a6 = *(int *)(iVar2 + 4);
   *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *DAT_a7b7bd0c;
   if (**(char **)(iVar2 + 4) != '\0') {
     uVar3 = (*(code *)**(undefined4 **)this)(this,a1,param_3,param_4,param_5,param_6,a6);
-    *(undefined4 *)(param_2 + 0x90) = uVar3;
+    *(undefined4 *)(pPStreamCompiler + 0x90) = uVar3;
     this_00 = operator_new(100);
     __ZN11ParseSymbolC1Ev(this_00);
     iVar2 = (**(code **)(*(int *)this + 0x60))(this);
@@ -4682,9 +4682,9 @@ int TIntermSymbol__indirectNode(this, param_2, param_3, param_4, param_5, param_
 }
 
 /* TIntermConstantUnion__indirectNode @ 0x97bc2e7c (340 bytes) */
-int TIntermConstantUnion__indirectNode(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int TIntermConstantUnion__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6, param_7, param_8)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -4703,7 +4703,7 @@ int TIntermConstantUnion__indirectNode(this, param_2, param_3, param_4, param_5,
   this_00 = operator_new(0x38);
   __ZN12ParseOperandC1Ev(this_00);
   uVar4 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(param_2 + 0x90) = uVar4;
+  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar4;
   (**(code **)(*(int *)this + 0x38))(local_50,this);
   if ((local_2c & 0x400) == 0) {
     iVar1 = (int)(local_2c << 0xd | local_2c >> 0x13) >> 0x18;
@@ -4737,13 +4737,13 @@ LAB_97bc2f80:
       }
       if (uVar2 == 0xe) {
         TPPStreamCompiler__error
-                  (param_2,(char *)0x1,(char *)0x0,
+                  (pPStreamCompiler,(char *)0x1,(char *)0x0,
                    "TIntermConstantUnion::indirectNode: EbtStruct constant union type, investigate",
                    param_5,param_6,param_7,param_8);
       }
     }
     TPPStreamCompiler__error
-              (param_2,(char *)0x1,(char *)0x0,
+              (pPStreamCompiler,(char *)0x1,(char *)0x0,
                "TIntermConstantUnion::indirectNode: Unexpected constant union type",param_5,param_6,
                param_7,param_8);
   }
@@ -4751,9 +4751,9 @@ LAB_97bc2f80:
 }
 
 /* TIntermBinary__indirectNode @ 0x97bc2fd0 (1000 bytes) */
-int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int TIntermBinary__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6, param_7, param_8)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -4782,14 +4782,14 @@ int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_
   this_02 = (unsigned char *)0x0;
   this_01 = (void *)0x0;
   uVar3 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(param_2 + 0x90) = uVar3;
+  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar3;
   piVar4 = *(int **)(this + 0x34);
   if (piVar4 != (int *)0x0) {
-    this_02 = (unsigned char *)(**(code **)(*piVar4 + 0x10))(piVar4,param_2);
+    this_02 = (unsigned char *)(**(code **)(*piVar4 + 0x10))(piVar4,pPStreamCompiler);
   }
   piVar4 = *(int **)(this + 0x38);
   if (piVar4 != (int *)0x0) {
-    this_01 = (void *)(**(code **)(*piVar4 + 0x10))(piVar4,param_2);
+    this_01 = (void *)(**(code **)(*piVar4 + 0x10))(piVar4,pPStreamCompiler);
   }
   bVar1 = this_02 == (unsigned char *)0x0;
   pPVar7 = (unsigned char *)0x0;
@@ -4805,7 +4805,7 @@ int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_
     iVar2 = (**(code **)(*(int *)this + 0x54))(this);
     if (iVar2 != 0) {
       TPPStreamCompiler__error
-                (param_2,(char *)0x1,(char *)0x0,
+                (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::: Array index results in another array, this is not handled",
                  param_5,param_6,param_7,param_8);
       goto LAB_97bc3364;
@@ -4818,7 +4818,7 @@ int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_
       if (*(int *)this_02 == 0) {
         pTVar6 = (unsigned char *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
         pPVar7 = (unsigned char *)
-                 TPPStreamCompiler__newIndirectOperandFromConstant(param_2,this_02,pTVar6);
+                 TPPStreamCompiler__newIndirectOperandFromConstant(pPStreamCompiler,this_02,pTVar6);
         __ZN12ParseOperandD1Ev(this_02);
         __ZdlPv(this_02);
         bVar1 = pPVar7 == (unsigned char *)0x0;
@@ -4830,14 +4830,14 @@ int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_
           iVar2 = (**(code **)(*piVar4 + 0x34))(piVar4);
           pPVar7 = this_02;
           if (iVar2 == 0) goto LAB_97bc3364;
-          this_00 = *(unsigned char **)(param_2 + 0x68);
-          *(undefined4 *)(param_2 + 0xa8) = 1;
+          this_00 = *(unsigned char **)(pPStreamCompiler + 0x68);
+          *(undefined4 *)(pPStreamCompiler + 0xa8) = 1;
         }
         else {
           (**(code **)(**(int **)(this + 0x34) + 0x38))(&local_50,*(int **)(this + 0x34));
-          *(undefined4 *)(param_2 + 0xa8) = 1;
+          *(undefined4 *)(pPStreamCompiler + 0xa8) = 1;
           local_50 = &PTR___ZN5TTypeD1Ev_a7b7d778;
-          ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(param_2 + 0x68),this_02);
+          ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(pPStreamCompiler + 0x68),this_02);
           ParseSymbol__AddDirectIndex(*(unsigned char **)this_02,local_4c);
           _sprintf((char *)local_60,"[%d]",0);
           ParseSymbol__CatName(*(unsigned char **)this_02,(char *)local_60);
@@ -4847,7 +4847,7 @@ int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_
             *(undefined4 *)(pPVar5 + 0x48) = 1;
             ParseSymbol__ResolveOpenGLType(pPVar5);
           }
-          this_00 = *(unsigned char **)(param_2 + 0x68);
+          this_00 = *(unsigned char **)(pPStreamCompiler + 0x68);
         }
         ((int (*)())ParseSymbolTable__processOperand)(this_00,this_02);
         pPVar7 = this_02;
@@ -4862,19 +4862,19 @@ int TIntermBinary__indirectNode(this, param_2, param_3, param_4, param_5, param_
     uVar10 = *puVar9;
     if (pPVar5 == (unsigned char *)0x0) {
       TPPStreamCompiler__error
-                (param_2,(char *)0x1,(char *)0x0,
+                (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::indirectNode: Structure symbol, parse error.",param_5,param_6,
                  puVar9,param_8);
     }
     if (local_58 == 0) {
       TPPStreamCompiler__error
-                (param_2,(char *)0x1,(char *)0x0,
+                (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::indirectNode: No structure fields, parse error.",param_5,param_6,
                  puVar9,param_8);
     }
     if ((uint)(*(int *)(local_58 + 8) - *(int *)(local_58 + 4) >> 3) <= uVar10) {
       TPPStreamCompiler__error
-                (param_2,(char *)0x1,(char *)0x0,
+                (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::indirectNode: Structure index too big for field size, parse error",
                  param_5,param_6,puVar9,param_8);
     }
@@ -4903,9 +4903,9 @@ LAB_97bc3364:
 }
 
 /* TIntermUnary__indirectNode @ 0x97bc33b8 (112 bytes) */
-int TIntermUnary__indirectNode(this, param_2, param_3, param_4, param_5, param_6)
+int TIntermUnary__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -4914,9 +4914,9 @@ int TIntermUnary__indirectNode(this, param_2, param_3, param_4, param_5, param_6
   undefined4 uVar1;
   void *this_00;
   
-  uVar1 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6);
-  *(undefined4 *)(param_2 + 0x90) = uVar1;
-  this_00 = (void *)(**(code **)(**(int **)(this + 0x34) + 0x10))(*(int **)(this + 0x34),param_2);
+  uVar1 = (*(code *)**(undefined4 **)this)(this,pPStreamCompiler,param_3,param_4,param_5,param_6);
+  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar1;
+  this_00 = (void *)(**(code **)(**(int **)(this + 0x34) + 0x10))(*(int **)(this + 0x34),pPStreamCompiler);
   if (this_00 != (void *)0x0) {
     __ZN12ParseOperandD1Ev(this_00);
     __ZdlPv(this_00);
@@ -4925,9 +4925,9 @@ int TIntermUnary__indirectNode(this, param_2, param_3, param_4, param_5, param_6
 }
 
 /* TIntermAggregate__indirectNode @ 0x97bc3428 (232 bytes) */
-int TIntermAggregate__indirectNode(this, param_2, param_3, param_4, param_5, param_6)
+int TIntermAggregate__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -4941,14 +4941,14 @@ int TIntermAggregate__indirectNode(this, param_2, param_3, param_4, param_5, par
   void *this_00;
   
   iVar3 = *(int *)(this + 0x3c) - *(int *)(this + 0x38) >> 2;
-  uVar1 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6,this + 0x34)
+  uVar1 = (*(code *)**(undefined4 **)this)(this,pPStreamCompiler,param_3,param_4,param_5,param_6,this + 0x34)
   ;
-  *(undefined4 *)(param_2 + 0x90) = uVar1;
+  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar1;
   allocation = (undefined4 *)_malloc(iVar3 << 2);
   puVar4 = allocation;
   for (puVar5 = *(undefined4 **)(this + 0x38); puVar5 != *(undefined4 **)(this + 0x3c);
       puVar5 = puVar5 + 1) {
-    uVar1 = (**(code **)(*(int *)*puVar5 + 0x10))((int *)*puVar5,param_2);
+    uVar1 = (**(code **)(*(int *)*puVar5 + 0x10))((int *)*puVar5,pPStreamCompiler);
     *puVar4 = uVar1;
     puVar4 = puVar4 + 1;
   }
@@ -4971,9 +4971,9 @@ int TIntermAggregate__indirectNode(this, param_2, param_3, param_4, param_5, par
 }
 
 /* TIntermSelection__indirectNode @ 0x97bc3510 (204 bytes) */
-int TIntermSelection__indirectNode(this, param_2)
+int TIntermSelection__indirectNode(this, pPStreamCompiler)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
 {
   void *pvVar1;
   int *piVar2;
@@ -4988,7 +4988,7 @@ int TIntermSelection__indirectNode(this, param_2)
     piVar2 = *(int **)(this + 0x34);
   }
   if (piVar2 != (int *)0x0) {
-    pvVar1 = (void *)(**(code **)(*piVar2 + 0x10))(piVar2,param_2);
+    pvVar1 = (void *)(**(code **)(*piVar2 + 0x10))(piVar2,pPStreamCompiler);
     if (pvVar1 != (void *)0x0) {
       __ZN12ParseOperandD1Ev(pvVar1);
       __ZdlPv(pvVar1);
@@ -4996,7 +4996,7 @@ int TIntermSelection__indirectNode(this, param_2)
   }
   piVar2 = *(int **)(this + 0x38);
   if ((piVar2 != (int *)0x0) &&
-     (pvVar1 = (void *)(**(code **)(*piVar2 + 0x10))(piVar2,param_2), pvVar1 != (void *)0x0)) {
+     (pvVar1 = (void *)(**(code **)(*piVar2 + 0x10))(piVar2,pPStreamCompiler), pvVar1 != (void *)0x0)) {
     __ZN12ParseOperandD1Ev(pvVar1);
     __ZdlPv(pvVar1);
   }
@@ -5004,9 +5004,9 @@ int TIntermSelection__indirectNode(this, param_2)
 }
 
 /* TIntermLoop__indirectNode @ 0x97bc35dc (200 bytes) */
-int TIntermLoop__indirectNode(this, param_2)
+int TIntermLoop__indirectNode(this, pPStreamCompiler)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * pPStreamCompiler;
 {
   int *piVar1;
   void *pvVar2;
@@ -5021,7 +5021,7 @@ int TIntermLoop__indirectNode(this, param_2)
   }
   piVar1 = *(int **)(this + 8);
   if (piVar1 != (int *)0x0) {
-    pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1,param_2);
+    pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1,pPStreamCompiler);
     if (pvVar2 != (void *)0x0) {
       __ZN12ParseOperandD1Ev(pvVar2);
       __ZdlPv(pvVar2);
@@ -5029,7 +5029,7 @@ int TIntermLoop__indirectNode(this, param_2)
   }
   piVar1 = *(int **)(this + 0x10);
   if ((piVar1 != (int *)0x0) &&
-     (pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1,param_2), pvVar2 != (void *)0x0)) {
+     (pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1,pPStreamCompiler), pvVar2 != (void *)0x0)) {
     __ZN12ParseOperandD1Ev(pvVar2);
     __ZdlPv(pvVar2);
   }
@@ -5268,44 +5268,44 @@ int ConstantAllocationList__getConstantUsage(this, param_2, param_3, param_4)
 }
 
 /* newQueue @ 0x97bc39bc (20 bytes) */
-int newQueue(param_1)
-  unsigned char * param_1;
+int newQueue(q)
+  unsigned char * q;
 {
-  *(undefined4 *)(param_1 + 8) = 0;
-  *(undefined4 *)param_1 = 0;
-  *(undefined4 *)(param_1 + 4) = 0;
+  *(undefined4 *)(q + 8) = 0;
+  *(undefined4 *)q = 0;
+  *(undefined4 *)(q + 4) = 0;
   return;
 }
 
 /* size @ 0x97bc39d0 (8 bytes) */
-int size(param_1)
-  unsigned char * param_1;
+int size(q)
+  unsigned char * q;
 {
-  return *(undefined4 *)(param_1 + 8);
+  return *(undefined4 *)(q + 8);
 }
 
 /* store @ 0x97bc39d8 (108 bytes) */
-int store(param_1, param_2)
-  unsigned char * param_1;
+int store(q, param_2)
+  unsigned char * q;
   void *param_2;
 {
   int iVar1;
   undefined4 *allocation;
   
   allocation = (undefined4 *)_malloc(8);
-  iVar1 = *(int *)(param_1 + 8);
+  iVar1 = *(int *)(q + 8);
   *allocation = param_2;
   allocation[1] = 0;
   if (iVar1 == 0) {
-    *(undefined4 **)param_1 = allocation;
+    *(undefined4 **)q = allocation;
     iVar1 = 0;
   }
   else {
-    *(undefined4 **)(*(int *)(param_1 + 4) + 4) = allocation;
-    iVar1 = *(int *)(param_1 + 8);
+    *(undefined4 **)(*(int *)(q + 4) + 4) = allocation;
+    iVar1 = *(int *)(q + 8);
   }
-  *(undefined4 **)(param_1 + 4) = allocation;
-  *(int *)(param_1 + 8) = iVar1 + 1;
+  *(undefined4 **)(q + 4) = allocation;
+  *(int *)(q + 8) = iVar1 + 1;
   return;
 }
 

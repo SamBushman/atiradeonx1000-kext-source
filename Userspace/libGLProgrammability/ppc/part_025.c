@@ -613,15 +613,15 @@ int ___cxa_free_exception(param_1)
 }
 
 /* __gxx_exception_cleanup @ 0x97c192b0 (88 bytes) */
-int __gxx_exception_cleanup(param_1, param_2)
-  unsigned char param_1;
+int __gxx_exception_cleanup(_Unwind_Reason_Code, param_2)
+  unsigned char _Unwind_Reason_Code;
   _Unwind_Exception *param_2;
 {
   _Unwind_Exception *extraout_r4;
   unsigned char * puVar1;
   
   puVar1 = &param_2[-2].private_2;
-  if (_URC_FOREIGN_EXCEPTION_CAUGHT < param_1) {
+  if (_URC_FOREIGN_EXCEPTION_CAUGHT < _Unwind_Reason_Code) {
     ((int (*)())__cxxabiv1____terminate)((unsigned char *)param_2[-2].reserved[2]);
     param_2 = extraout_r4;
   }
@@ -884,10 +884,10 @@ LAB_97c196cc:
 }
 
 /* parse_lsda_header @ 0x97c196ec (216 bytes) */
-int parse_lsda_header(param_1, param_2, param_3)
-  unsigned char * param_1;
+int parse_lsda_header(_Unwind_Context, param_2, lsda_header_info)
+  unsigned char * _Unwind_Context;
   uchar *param_2;
-  unsigned char * param_3;
+  unsigned char * lsda_header_info;
 {
   unsigned char uVar1;
   uint uVar2;
@@ -897,34 +897,34 @@ int parse_lsda_header(param_1, param_2, param_3)
   unsigned char * plVar6;
   uint local_30 [7];
   
-  if (param_1 == (unsigned char *)0x0) {
+  if (_Unwind_Context == (unsigned char *)0x0) {
     uVar1 = 0;
   }
   else {
-    uVar1 = ((int (*)())__Unwind_GetRegionStart)(param_1);
+    uVar1 = ((int (*)())__Unwind_GetRegionStart)(_Unwind_Context);
   }
-  *(unsigned char *)param_3 = uVar1;
+  *(unsigned char *)lsda_header_info = uVar1;
   uVar4 = (uint)*param_2;
   plVar5 = (unsigned char *)(param_2 + 1);
   if (uVar4 == 0xff) {
-    *(unsigned char *)(param_3 + 4) = uVar1;
+    *(unsigned char *)(lsda_header_info + 4) = uVar1;
   }
   else {
-    uVar2 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar4,param_1);
+    uVar2 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar4,_Unwind_Context);
     plVar5 = (unsigned char *)
-             ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar4,uVar2,(uchar *)plVar5,(uint *)(param_3 + 4));
+             ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar4,uVar2,(uchar *)plVar5,(uint *)(lsda_header_info + 4));
   }
   plVar6 = plVar5 + 1;
-  param_3[0x14] = *plVar5;
+  lsda_header_info[0x14] = *plVar5;
   plVar5 = (unsigned char *)0x0;
-  if (param_3[0x14] != 0xff) {
+  if (lsda_header_info[0x14] != 0xff) {
     plVar6 = (unsigned char *)((int (*)())__Z12read_uleb128PKhPj)((uchar *)plVar6,local_30);
     plVar5 = plVar6 + local_30[0];
   }
-  *(unsigned char **)(param_3 + 0xc) = plVar5;
-  param_3[0x15] = *plVar6;
+  *(unsigned char **)(lsda_header_info + 0xc) = plVar5;
+  lsda_header_info[0x15] = *plVar6;
   iVar3 = ((int (*)())__Z12read_uleb128PKhPj)((uchar *)(plVar6 + 1),local_30);
-  *(uint *)(param_3 + 0x10) = iVar3 + local_30[0];
+  *(uint *)(lsda_header_info + 0x10) = iVar3 + local_30[0];
   return iVar3;
 }
 
@@ -943,20 +943,20 @@ int __Z15get_ttype_entryP16lsda_header_infoj(lsda_header_info, param_2)
 }
 
 /* get_adjusted_ptr @ 0x97c19818 (152 bytes) */
-int get_adjusted_ptr(param_1, param_2, param_3)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int get_adjusted_ptr(type_info1, type_info2, param_3)
+  unsigned char * type_info1;
+  unsigned char * type_info2;
   void **param_3;
 {
   int iVar1;
   undefined4 *local_20 [4];
   
   local_20[0] = *param_3;
-  iVar1 = (**(code **)(*(int *)param_2 + 8))(param_2,param_2,param_3);
+  iVar1 = (**(code **)(*(int *)type_info2 + 8))(type_info2,type_info2,param_3);
   if (iVar1 != 0) {
     local_20[0] = (undefined4 *)*local_20[0];
   }
-  iVar1 = (**(code **)(*(int *)param_1 + 0x10))(param_1,param_2,local_20,1);
+  iVar1 = (**(code **)(*(int *)type_info1 + 0x10))(type_info1,type_info2,local_20,1);
   if (iVar1 != 0) {
     *param_3 = local_20[0];
   }
@@ -964,27 +964,27 @@ int get_adjusted_ptr(param_1, param_2, param_3)
 }
 
 /* check_exception_spec @ 0x97c198b0 (124 bytes) */
-int check_exception_spec(param_1, param_2, param_3, param_4)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int check_exception_spec(lsda_header_info, type_info, param_3, param_4)
+  unsigned char * lsda_header_info;
+  unsigned char * type_info;
   void *param_3;
   int param_4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { lsda_header_info, type_info, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   unsigned char * ptVar1;
   int iVar2;
   uchar *puVar3;
   uint local_20 [4];
   
-  puVar3 = (uchar *)((*(int *)(param_1 + 0xc) - param_4) + -1);
+  puVar3 = (uchar *)((*(int *)(lsda_header_info + 0xc) - param_4) + -1);
   (*(void * *)((unsigned char *)ghidra_home + 8)) = param_3;
   do {
     puVar3 = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(puVar3,local_20);
     if (local_20[0] == 0) {
       return 0;
     }
-    ptVar1 = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(param_1,local_20[0]);
-    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+    ptVar1 = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(lsda_header_info,local_20[0]);
+    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,type_info,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   } while (iVar2 == 0);
   return 1;
 }

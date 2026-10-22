@@ -4705,8 +4705,8 @@ int std____throw_bad_typeid()
 }
 
 /* std____throw_logic_error @ 0x97c12d90 (108 bytes) */
-int std____throw_logic_error(param_1)
-  char *param_1;
+int std____throw_logic_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4718,7 +4718,7 @@ int std____throw_logic_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt11logic_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4738,8 +4738,8 @@ int std____throw_logic_error(param_1)
 }
 
 /* std____throw_domain_error @ 0x97c12e18 (108 bytes) */
-int std____throw_domain_error(param_1)
-  char *param_1;
+int std____throw_domain_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4751,7 +4751,7 @@ int std____throw_domain_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12domain_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4771,8 +4771,8 @@ int std____throw_domain_error(param_1)
 }
 
 /* std____throw_invalid_argument @ 0x97c12ea0 (108 bytes) */
-int std____throw_invalid_argument(param_1)
-  char *param_1;
+int std____throw_invalid_argument(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4784,7 +4784,7 @@ int std____throw_invalid_argument(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt16invalid_argumentC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4804,8 +4804,8 @@ int std____throw_invalid_argument(param_1)
 }
 
 /* std____throw_length_error @ 0x97c12f28 (108 bytes) */
-int std____throw_length_error(param_1)
-  char *param_1;
+int std____throw_length_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4817,7 +4817,7 @@ int std____throw_length_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12length_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4837,8 +4837,8 @@ int std____throw_length_error(param_1)
 }
 
 /* std____throw_out_of_range @ 0x97c12fb0 (108 bytes) */
-int std____throw_out_of_range(param_1)
-  char *param_1;
+int std____throw_out_of_range(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4850,7 +4850,7 @@ int std____throw_out_of_range(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12out_of_rangeC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4870,8 +4870,8 @@ int std____throw_out_of_range(param_1)
 }
 
 /* std____throw_runtime_error @ 0x97c13038 (108 bytes) */
-int std____throw_runtime_error(param_1)
-  char *param_1;
+int std____throw_runtime_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4883,7 +4883,7 @@ int std____throw_runtime_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt13runtime_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4903,8 +4903,8 @@ int std____throw_runtime_error(param_1)
 }
 
 /* std____throw_range_error @ 0x97c130c0 (108 bytes) */
-int std____throw_range_error(param_1)
-  char *param_1;
+int std____throw_range_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4916,7 +4916,7 @@ int std____throw_range_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt11range_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4936,8 +4936,8 @@ int std____throw_range_error(param_1)
 }
 
 /* std____throw_overflow_error @ 0x97c13148 (108 bytes) */
-int std____throw_overflow_error(param_1)
-  char *param_1;
+int std____throw_overflow_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4949,7 +4949,7 @@ int std____throw_overflow_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt14overflow_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -4969,8 +4969,8 @@ int std____throw_overflow_error(param_1)
 }
 
 /* std____throw_underflow_error @ 0x97c131d0 (108 bytes) */
-int std____throw_underflow_error(param_1)
-  char *param_1;
+int std____throw_underflow_error(str)
+  char *str;
 {
   int atomicStore;
   int *piVar2;
@@ -4982,7 +4982,7 @@ int std____throw_underflow_error(param_1)
   unsigned char aaStack_30 [16];
   undefined1 auStack_20 [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt15underflow_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
@@ -5009,12 +5009,12 @@ int __ZNKSs7_M_dataEv(this)
 }
 
 /* __ZNSs7_M_dataEPc @ 0x97c13260 (12 bytes) */
-int __ZNSs7_M_dataEPc(this, param_2)
+int __ZNSs7_M_dataEPc(this, str)
   void *this;
-  char *param_2;
+  char *str;
 {
-  *(char **)this = param_2;
-  return param_2;
+  *(char **)this = str;
+  return str;
 }
 
 /* __ZNKSs6_M_repEv @ 0x97c1326c (12 bytes) */
@@ -5025,11 +5025,11 @@ int __ZNKSs6_M_repEv(this)
 }
 
 /* __ZNKSs9_M_ibeginEv @ 0x97c13278 (12 bytes) */
-int __ZNKSs9_M_ibeginEv(param_1, param_2)
-  undefined4 *param_1;
+int __ZNKSs9_M_ibeginEv(this, param_2)
+  undefined4 *this;
   undefined4 *param_2;
 {
-  *param_1 = *param_2;
+  *this = *param_2;
   return;
 }
 
@@ -5041,11 +5041,11 @@ int __ZNKSs4sizeEv(this)
 }
 
 /* __ZNKSs7_M_iendEv @ 0x97c13290 (20 bytes) */
-int __ZNKSs7_M_iendEv(param_1, param_2)
-  int *param_1;
+int __ZNKSs7_M_iendEv(this, param_2)
+  int *this;
   int *param_2;
 {
-  *param_1 = *param_2 + *(int *)(*param_2 + -0xc);
+  *this = *param_2 + *(int *)(*param_2 + -0xc);
   return;
 }
 

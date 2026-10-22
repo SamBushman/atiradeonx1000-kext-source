@@ -1,61 +1,61 @@
 #include "decls.h"
 
 /* yy_delete_buffer @ 0x97badae0 (124 bytes) */
-int yy_delete_buffer(param_1)
-  unsigned char * param_1;
+int yy_delete_buffer(yy_buffer_state)
+  unsigned char * yy_buffer_state;
 {
-  if (param_1 != (unsigned char *)0x0) {
-    if (param_1 == _yy_current_buffer) {
+  if (yy_buffer_state != (unsigned char *)0x0) {
+    if (yy_buffer_state == _yy_current_buffer) {
       _yy_current_buffer = (unsigned char *)0x0;
     }
-    if (*(int *)(param_1 + 0x14) != 0) {
-      ((int (*)())yy_flex_free)(*(void **)(param_1 + 4));
+    if (*(int *)(yy_buffer_state + 0x14) != 0) {
+      ((int (*)())yy_flex_free)(*(void **)(yy_buffer_state + 4));
     }
-    ((int (*)())yy_flex_free)(param_1);
+    ((int (*)())yy_flex_free)(yy_buffer_state);
     return;
   }
   return;
 }
 
 /* yy_init_buffer @ 0x97badb5c (68 bytes) */
-int yy_init_buffer(param_1, param_2)
-  unsigned char * param_1;
+int yy_init_buffer(yy_buffer_state, param_2)
+  unsigned char * yy_buffer_state;
   unsigned char * param_2;
 {
-  ((int (*)())yy_flush_buffer)(param_1);
-  *(undefined4 *)(param_1 + 0x18) = 0;
-  *(undefined4 *)(param_1 + 0x20) = 1;
-  *(unsigned char **)param_1 = param_2;
+  ((int (*)())yy_flush_buffer)(yy_buffer_state);
+  *(undefined4 *)(yy_buffer_state + 0x18) = 0;
+  *(undefined4 *)(yy_buffer_state + 0x20) = 1;
+  *(unsigned char **)yy_buffer_state = param_2;
   return;
 }
 
 /* yy_flush_buffer @ 0x97badba0 (88 bytes) */
-int yy_flush_buffer(param_1)
-  unsigned char * param_1;
+int yy_flush_buffer(yy_buffer_state)
+  unsigned char * yy_buffer_state;
 {
-  if (param_1 == (unsigned char *)0x0) {
+  if (yy_buffer_state == (unsigned char *)0x0) {
     return;
   }
-  *(undefined4 *)(param_1 + 0x10) = 0;
-  **(undefined1 **)(param_1 + 4) = 0;
-  *(undefined1 *)(*(int *)(param_1 + 4) + 1) = 0;
-  *(undefined4 *)(param_1 + 0x1c) = 1;
-  *(undefined4 *)(param_1 + 8) = *(undefined4 *)(param_1 + 4);
-  *(undefined4 *)(param_1 + 0x24) = 0;
-  if (param_1 != _yy_current_buffer) {
+  *(undefined4 *)(yy_buffer_state + 0x10) = 0;
+  **(undefined1 **)(yy_buffer_state + 4) = 0;
+  *(undefined1 *)(*(int *)(yy_buffer_state + 4) + 1) = 0;
+  *(undefined4 *)(yy_buffer_state + 0x1c) = 1;
+  *(undefined4 *)(yy_buffer_state + 8) = *(undefined4 *)(yy_buffer_state + 4);
+  *(undefined4 *)(yy_buffer_state + 0x24) = 0;
+  if (yy_buffer_state != _yy_current_buffer) {
     return;
   }
   return yy_load_buffer_state();
 }
 
 /* yy_scan_buffer @ 0x97badbf8 (192 bytes) */
-int yy_scan_buffer(param_1, param_2)
-  char *param_1;
+int yy_scan_buffer(str, param_2)
+  char *str;
   uint param_2;
 {
   unsigned char * pyVar1;
   
-  if (((param_2 < 2) || (param_1[param_2 - 2] != '\0')) || (param_1[param_2 - 1] != '\0')) {
+  if (((param_2 < 2) || (str[param_2 - 2] != '\0')) || (str[param_2 - 1] != '\0')) {
     pyVar1 = (unsigned char *)0x0;
   }
   else {
@@ -63,12 +63,12 @@ int yy_scan_buffer(param_1, param_2)
     if (pyVar1 == (unsigned char *)0x0) {
       ((int (*)())yy_fatal_error)("out of dynamic memory in yy_scan_buffer()");
     }
-    *(char **)(pyVar1 + 8) = param_1;
+    *(char **)(pyVar1 + 8) = str;
     *(uint *)(pyVar1 + 0x10) = param_2 - 2;
     *(undefined4 *)(pyVar1 + 0x1c) = 1;
     *(undefined4 *)(pyVar1 + 0x24) = 0;
     *(uint *)(pyVar1 + 0xc) = param_2 - 2;
-    *(char **)(pyVar1 + 4) = param_1;
+    *(char **)(pyVar1 + 4) = str;
     *(undefined4 *)(pyVar1 + 0x14) = 0;
     *(undefined4 *)pyVar1 = 0;
     *(undefined4 *)(pyVar1 + 0x18) = 0;
@@ -79,24 +79,24 @@ int yy_scan_buffer(param_1, param_2)
 }
 
 /* yy_scan_string @ 0x97badcb8 (44 bytes) */
-int yy_scan_string(param_1)
-  char *param_1;
+int yy_scan_string(str)
+  char *str;
 {
   char ch;
   int copyIndex;
   
   copyIndex = 0;
-  ch = *param_1;
+  ch = *str;
   while (ch != '\0') {
     copyIndex = copyIndex + 1;
-    ch = param_1[copyIndex];
+    ch = str[copyIndex];
   }
-  return ((int (*)())yy_scan_bytes)(param_1,copyIndex);
+  return ((int (*)())yy_scan_bytes)(str,copyIndex);
 }
 
 /* yy_scan_bytes @ 0x97badce4 (176 bytes) */
-int yy_scan_bytes(param_1, param_2)
-  char *param_1;
+int yy_scan_bytes(str, param_2)
+  char *str;
   int param_2;
 {
   int iVar1;
@@ -111,7 +111,7 @@ int yy_scan_bytes(param_1, param_2)
   iVar3 = param_2;
   if (0 < param_2) {
     do {
-      pcVar2[iVar1] = param_1[iVar1];
+      pcVar2[iVar1] = str[iVar1];
       iVar1 = iVar1 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
@@ -127,10 +127,10 @@ int yy_scan_bytes(param_1, param_2)
 }
 
 /* yy_fatal_error @ 0x97badd94 (60 bytes) */
-int yy_fatal_error(param_1)
-  char *param_1;
+int yy_fatal_error(str)
+  char *str;
 {
-  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),"%s\n",param_1);
+  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),"%s\n",str);
                     
   _exit(2);
 }
@@ -164,12 +164,12 @@ int yy_flex_free(param_1)
 }
 
 /* PaParseStrings @ 0x97badddc (452 bytes) */
-int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
-  char **param_1;
+int PaParseStrings(str, param_2, param_3, param_4, parseContext)
+  char **str;
   int *param_2;
   int param_3;
   int param_4;
-  unsigned char * param_5;
+  unsigned char * parseContext;
 {
   undefined *puVar1;
   undefined *puVar2;
@@ -187,19 +187,19 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
   
   iVar3 = param_3;
   iVar7 = param_4;
-  pTVar8 = param_5;
-  _ScanFromString(*param_1);
+  pTVar8 = parseContext;
+  _ScanFromString(*str);
   uVar5 = 1;
-  *(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = param_5;
+  *(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = parseContext;
   if (param_3 != 0) {
     iVar9 = 0;
-    ppcVar4 = param_1;
+    ppcVar4 = str;
     if (0 < param_3) {
       do {
         if (*ppcVar4 == (char *)0x0) {
           TParseContext__error
-                    ((int)param_5,(char *)0x0,"Null shader source string","","",in_r8,iVar9,in_r10);
-          TParseContext__recover(param_5);
+                    ((int)parseContext,(char *)0x0,"Null shader source string","","",in_r8,iVar9,in_r10);
+          TParseContext__recover(parseContext);
           goto LAB_97badf80;
         }
         iVar9 = iVar9 + 1;
@@ -208,22 +208,22 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
     }
     if (param_2 == (int *)0x0) {
       param_2 = local_30;
-      local_30[0] = _strlen(*param_1);
+      local_30[0] = _strlen(*str);
     }
     yyrestart((unsigned char *)0x0);
     puVar1 = PTR__cpp_a7b7c0a4;
     uVar5 = 0;
-    *(undefined4 *)(param_5 + 0x60) = 0;
+    *(undefined4 *)(parseContext + 0x60) = 0;
     *(undefined4 *)(*(int *)puVar1 + 0x144) = 0;
-    *(char ***)(*(int *)puVar1 + 0x150) = param_1;
+    *(char ***)(*(int *)puVar1 + 0x150) = str;
     *(int *)(*(int *)puVar1 + 0x14c) = param_3;
     *(int **)(*(int *)puVar1 + 0x148) = param_2;
     *(undefined4 *)(*(int *)puVar1 + 0x28) = 0;
     _yylineno = 1;
     if ((-1 < **(int **)(*(int *)puVar1 + 0x148)) &&
-       (((yyparse(param_5,extraout_r4,iVar3,iVar7,pTVar8,in_r8,*(int **)(*(int *)puVar1 + 0x148),
+       (((yyparse(parseContext,extraout_r4,iVar3,iVar7,pTVar8,in_r8,*(int **)(*(int *)puVar1 + 0x148),
                   in_r10), puVar2 = PTR__cpp_a7b7c0a4, *(int *)(*(int *)puVar1 + 0x140) == 1 ||
-         (*(int *)(param_5 + 0x14) != 0)) || (uVar5 = 0, 0 < *(int *)(param_5 + 0x18))))) {
+         (*(int *)(parseContext + 0x14) != 0)) || (uVar5 = 0, 0 < *(int *)(parseContext + 0x18))))) {
       if (param_4 != 0) {
         iVar3 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
         while (iVar3 != 0) {
@@ -242,8 +242,8 @@ LAB_97badf80:
 }
 
 /* yyerror @ 0x97badfa0 (184 bytes) */
-int yyerror(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  char *param_1;
+int yyerror(str, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+  char *str;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -265,7 +265,7 @@ int yyerror(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param
     }
     pcVar3 = "pre-mature EOF";
   }
-  TParseContext__error(iVar2,_yylineno,"syntax error",pcVar3,param_1,"",param_7,param_8);
+  TParseContext__error(iVar2,_yylineno,"syntax error",pcVar3,str,"",param_7,param_8);
   TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
   return;
 }
@@ -285,10 +285,10 @@ int PaReservedWord()
 }
 
 /* PaIdentOrType @ 0x97bae0c4 (228 bytes) */
-int PaIdentOrType(param_1, param_2, param_3)
-  unsigned char * param_1;
-  unsigned char * param_2;
-  unsigned char ** param_3;
+int PaIdentOrType(text, parseContext, symbol)
+  unsigned char * text;
+  unsigned char * parseContext;
+  unsigned char ** symbol;
 {
   unsigned char * a0;
   undefined4 uVar1;
@@ -297,12 +297,12 @@ int PaIdentOrType(param_1, param_2, param_3)
   int iVar4;
   int local_30 [5];
   
-  piVar3 = *(int **)(param_2 + 4);
+  piVar3 = *(int **)(parseContext + 4);
   iVar2 = *piVar3;
   iVar4 = (piVar3[1] - iVar2 >> 2) + -1;
   while( true ) {
     iVar2 = *(int *)(iVar2 + iVar4 * 4);
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30,iVar2,param_1);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30,iVar2,text);
     a0 = (unsigned char *)0x0;
     if (local_30[0] != *(int *)(iVar2 + 4)) {
       a0 = *(unsigned char **)(local_30[0] + 0x18);
@@ -311,23 +311,23 @@ int PaIdentOrType(param_1, param_2, param_3)
     if ((a0 != (unsigned char *)0x0) || (iVar4 < 0)) break;
     iVar2 = *piVar3;
   }
-  *param_3 = a0;
-  if ((((*(int *)(param_2 + 0x1c) != 0) || (a0 == (unsigned char *)0x0)) ||
+  *symbol = a0;
+  if ((((*(int *)(parseContext + 0x1c) != 0) || (a0 == (unsigned char *)0x0)) ||
       (iVar2 = (**(code **)(*(int *)a0 + 0x10))(a0), iVar2 == 0)) ||
-     (*(int *)(*param_3 + 0x34) == 0)) {
+     (*(int *)(*symbol + 0x34) == 0)) {
     uVar1 = 0x12a;
   }
   else {
     uVar1 = 299;
-    *(undefined4 *)(param_2 + 0x1c) = 1;
+    *(undefined4 *)(parseContext + 0x1c) = 1;
   }
   return uVar1;
 }
 
 /* PaParseComment @ 0x97bae1a8 (228 bytes) */
-int PaParseComment(param_1, param_2)
+int PaParseComment(param_1, parseContext)
   int *param_1;
-  unsigned char * param_2;
+  unsigned char * parseContext;
 {
   int iVar1;
   undefined4 in_r9;
@@ -347,7 +347,7 @@ int PaParseComment(param_1, param_2)
     if (iVar1 < 0x2b) {
       if (iVar1 == -1) {
         TParseContext__error
-                  ((int)param_2,_yylineno,"End of shader found before end of comment.","","","",
+                  ((int)parseContext,_yylineno,"End of shader found before end of comment.","","","",
                    in_r9,in_r10);
         TParseContext__recover(*(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c));
         return 0;
@@ -1217,20 +1217,20 @@ int setInitialState()
 }
 
 /* scpy @ 0x97baf384 (52 bytes) */
-int scpy(param_1, param_2)
-  char *param_1;
-  char *param_2;
+int scpy(str1, str2)
+  char *str1;
+  char *str2;
 {
   char ch;
   int copyIndex;
   
-  ch = *param_2;
+  ch = *str2;
   copyIndex = 0;
   if (ch != '\0') {
     do {
-      param_1[copyIndex] = ch;
+      str1[copyIndex] = ch;
       copyIndex = copyIndex + 1;
-      ch = param_2[copyIndex];
+      ch = str2[copyIndex];
     } while (ch != '\0');
     return copyIndex;
   }
@@ -1238,41 +1238,41 @@ int scpy(param_1, param_2)
 }
 
 /* handleDigit @ 0x97baf3b8 (112 bytes) */
-int handleDigit(param_1, param_2)
-  char **param_1;
+int handleDigit(str, param_2)
+  char **str;
   int param_2;
 {
   int iVar1;
   
   iVar1 = param_2 / 10;
   if (iVar1 != 0) {
-    ((int (*)())handleDigit)(param_1,iVar1);
+    ((int (*)())handleDigit)(str,iVar1);
   }
-  **param_1 = (char)param_2 + (char)iVar1 * -10 + '0';
-  *param_1 = *param_1 + 1;
+  **str = (char)param_2 + (char)iVar1 * -10 + '0';
+  *str = *str + 1;
   return;
 }
 
 /* ncpy @ 0x97baf428 (88 bytes) */
-int ncpy(param_1, param_2)
-  char *param_1;
+int ncpy(str, param_2)
+  char *str;
   int param_2;
 {
   char *local_20 [6];
   
-  local_20[0] = param_1;
+  local_20[0] = str;
   if (param_2 < 0) {
-    local_20[0] = param_1 + 1;
-    *param_1 = '-';
+    local_20[0] = str + 1;
+    *str = '-';
     param_2 = -param_2;
   }
   ((int (*)())handleDigit)(local_20,param_2);
-  return (int)local_20[0] - (int)param_1;
+  return (int)local_20[0] - (int)str;
 }
 
 /* PrintAttribute @ 0x97baf480 (456 bytes) */
-int PrintAttribute(param_1, param_2)
-  uint param_1;
+int PrintAttribute(_PPStreamToken, param_2)
+  uint _PPStreamToken;
   uint param_2;
 {
   uint uVar1;
@@ -1283,7 +1283,7 @@ int PrintAttribute(param_1, param_2)
   uint uStack00000018;
   uint uStack0000001c;
   
-  uStack00000018 = param_1;
+  uStack00000018 = _PPStreamToken;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x100);
   copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
@@ -1368,8 +1368,8 @@ switchD_97baf4e0_default:
 }
 
 /* PrintParam @ 0x97baf68c (1228 bytes) */
-int PrintParam(param_1, param_2)
-  uint param_1;
+int PrintParam(_PPStreamToken, param_2)
+  uint _PPStreamToken;
   uint param_2;
 {
   char *allocation;
@@ -1381,7 +1381,7 @@ int PrintParam(param_1, param_2)
   uint uStack00000018;
   uint uStack0000001c;
   
-  uStack00000018 = param_1;
+  uStack00000018 = _PPStreamToken;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x100);
   copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
@@ -1606,8 +1606,8 @@ switchD_97bafb24_default:
 }
 
 /* PrintOutput @ 0x97bafbf4 (420 bytes) */
-int PrintOutput(param_1, param_2)
-  uint param_1;
+int PrintOutput(_PPStreamToken, param_2)
+  uint _PPStreamToken;
   uint param_2;
 {
   char *allocation;
@@ -1620,7 +1620,7 @@ int PrintOutput(param_1, param_2)
   uint uStack00000018;
   uint uStack0000001c;
   
-  uStack00000018 = param_1;
+  uStack00000018 = _PPStreamToken;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x100);
   copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
@@ -1690,8 +1690,8 @@ LAB_97bafd98:
 }
 
 /* PrintTemp @ 0x97bafdc4 (76 bytes) */
-int PrintTemp(param_1, param_2)
-  undefined4 param_1;
+int PrintTemp(_PPStreamToken, param_2)
+  undefined4 _PPStreamToken;
   uint param_2;
 {
   char *allocation;
@@ -1699,7 +1699,7 @@ int PrintTemp(param_1, param_2)
   undefined4 uStack00000018;
   uint uStack0000001c;
   
-  uStack00000018 = param_1;
+  uStack00000018 = _PPStreamToken;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x10);
   copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
@@ -1889,9 +1889,9 @@ int __ZN7BindingC1ERKS_(this, binding)
 }
 
 /* __ZN7BindingC4ERKS_ @ 0x97bafec8 (224 bytes) */
-int __ZN7BindingC4ERKS_(this, param_2)
+int __ZN7BindingC4ERKS_(this, binding)
   void *this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   undefined4 isBuiltIn;
   ulong actualSize;
@@ -1903,23 +1903,23 @@ int __ZN7BindingC4ERKS_(this, param_2)
   char *pcVar5;
   
   *(undefined4 *)((int)this + 8) = 0;
-  pcVar5 = *(char **)(param_2 + 8);
+  pcVar5 = *(char **)(binding + 8);
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   ((int (*)())Binding__SetName)(this,pcVar5);
-  location = Binding__GetLocation(param_2);
+  location = Binding__GetLocation(binding);
   Binding__SetLocation(this,location);
-  activeIndex = Binding__GetActiveIndex(param_2);
+  activeIndex = Binding__GetActiveIndex(binding);
   Binding__SetActiveIndex(this,activeIndex);
-  isClientRequest = ((int (*)())Binding__IsClientRequest)(param_2);
+  isClientRequest = ((int (*)())Binding__IsClientRequest)(binding);
   ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
-  isBuiltIn = ((int (*)())Binding__IsBuiltIn)(param_2);
+  isBuiltIn = ((int (*)())Binding__IsBuiltIn)(binding);
   ((int (*)())Binding__SetBuiltIn)(this,isBuiltIn);
-  openGLType = Binding__GetOpenGLType(param_2);
+  openGLType = Binding__GetOpenGLType(binding);
   Binding__SetOpenGLType(this,openGLType);
-  decSize = Binding__GetDecSize(param_2);
+  decSize = Binding__GetDecSize(binding);
   Binding__SetDecSize(this,decSize);
-  actualSize = Binding__GetActualSize(param_2);
+  actualSize = Binding__GetActualSize(binding);
   Binding__SetActualSize(this,actualSize);
   *(undefined1 *)((int)this + 0x35) = 0;
   *(undefined4 *)this = 0;
@@ -1929,9 +1929,9 @@ int __ZN7BindingC4ERKS_(this, param_2)
 }
 
 /* Binding__operator_ @ 0x97baffa8 (232 bytes) */
-int Binding__operator_(this, param_2)
+int Binding__operator_(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   undefined4 isBuiltIn;
   ulong actualSize;
@@ -1942,24 +1942,24 @@ int Binding__operator_(this, param_2)
   ushort openGLType;
   ulong decSize;
   
-  if (this != param_2) {
-    SetName(this,*(char **)(param_2 + 8));
-    location = Binding__GetLocation(param_2);
+  if (this != binding) {
+    SetName(this,*(char **)(binding + 8));
+    location = Binding__GetLocation(binding);
     Binding__SetLocation(this,location);
-    activeIndex = Binding__GetActiveIndex(param_2);
+    activeIndex = Binding__GetActiveIndex(binding);
     Binding__SetActiveIndex(this,activeIndex);
-    isClientRequest = ((int (*)())Binding__IsClientRequest)(param_2);
+    isClientRequest = ((int (*)())Binding__IsClientRequest)(binding);
     ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
-    isBuiltIn = ((int (*)())Binding__IsBuiltIn)(param_2);
+    isBuiltIn = ((int (*)())Binding__IsBuiltIn)(binding);
     ((int (*)())Binding__SetBuiltIn)(this,isBuiltIn);
-    openGLType = Binding__GetOpenGLType(param_2);
+    openGLType = Binding__GetOpenGLType(binding);
     Binding__SetOpenGLType(this,openGLType);
-    decSize = Binding__GetDecSize(param_2);
+    decSize = Binding__GetDecSize(binding);
     Binding__SetDecSize(this,decSize);
-    actualSize = Binding__GetActualSize(param_2);
+    actualSize = Binding__GetActualSize(binding);
     Binding__SetActualSize(this,actualSize);
-    this[0x34] = param_2[0x34];
-    BVar1 = param_2[0x35];
+    this[0x34] = binding[0x34];
+    BVar1 = binding[0x35];
     *(undefined4 *)(this + 4) = 0;
     this[0x35] = BVar1;
     *(undefined4 *)this = 0;
@@ -1968,25 +1968,25 @@ int Binding__operator_(this, param_2)
 }
 
 /* __ZeqRK7BindingS1_ @ 0x97bb0090 (88 bytes) */
-int __ZeqRK7BindingS1_(param_1, param_2)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int __ZeqRK7BindingS1_(binding1, binding2)
+  unsigned char * binding1;
+  unsigned char * binding2;
 {
   int iVar1;
   
-  if (((*(int *)(param_1 + 0xc) == *(int *)(param_2 + 0xc)) &&
-      (*(int *)(param_1 + 0x10) == *(int *)(param_2 + 0x10))) &&
-     (iVar1 = _strncmp(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_2 + 8),
-                       *(int *)(param_1 + 0x10)), iVar1 == 0)) {
+  if (((*(int *)(binding1 + 0xc) == *(int *)(binding2 + 0xc)) &&
+      (*(int *)(binding1 + 0x10) == *(int *)(binding2 + 0x10))) &&
+     (iVar1 = _strncmp(*(undefined4 *)(binding1 + 8),*(undefined4 *)(binding2 + 8),
+                       *(int *)(binding1 + 0x10)), iVar1 == 0)) {
     return 1;
   }
   return 0;
 }
 
 /* Binding__CatName @ 0x97bb00e8 (208 bytes) */
-int Binding__CatName(this, param_2)
+int Binding__CatName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   int length;
   char *pcVar1;
@@ -1995,13 +1995,13 @@ int Binding__CatName(this, param_2)
   char *allocation;
   int iVar5;
   
-  if (param_2 != (char *)0x0) {
-    length = _strlen(param_2);
+  if (str != (char *)0x0) {
+    length = _strlen(str);
     allocation = (char *)_malloc(length + *(int *)(this + 0x10) + 1);
     if (*(char **)(this + 8) != (char *)0x0) {
       _strncpy(allocation,*(char **)(this + 8),*(int *)(this + 0x10) + 1);
     }
-    _strncpy(allocation + *(int *)(this + 0x10),param_2,length + 1);
+    _strncpy(allocation + *(int *)(this + 0x10),str,length + 1);
     *(int *)(this + 0x10) = *(int *)(this + 0x10) + length;
     _free(*(undefined4 *)(this + 8));
     iVar3 = *(int *)(this + 0x10);
@@ -2023,9 +2023,9 @@ int Binding__CatName(this, param_2)
 }
 
 /* Binding__SetName @ 0x97bb01b8 (164 bytes) */
-int Binding__SetName(this, param_2)
+int Binding__SetName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   char *allocation;
   int iVar1;
@@ -2033,11 +2033,11 @@ int Binding__SetName(this, param_2)
   int iVar3;
   
   ClearName(this);
-  if ((param_2 != (char *)0x0) && (iVar1 = _strlen(param_2), 0 < iVar1)) {
+  if ((str != (char *)0x0) && (iVar1 = _strlen(str), 0 < iVar1)) {
     *(int *)(this + 0x10) = iVar1;
     allocation = (char *)_malloc(iVar1 + 1);
     *(char **)(this + 8) = allocation;
-    _strncpy(allocation,param_2,*(int *)(this + 0x10) + 1);
+    _strncpy(allocation,str,*(int *)(this + 0x10) + 1);
     iVar1 = *(int *)(this + 0x10);
     iVar3 = 0;
     *(undefined4 *)(this + 0xc) = 0;
@@ -2054,9 +2054,9 @@ int Binding__SetName(this, param_2)
 }
 
 /* Binding__SetNameFromArrayName @ 0x97bb025c (332 bytes) */
-int Binding__SetNameFromArrayName(this, param_2)
+int Binding__SetNameFromArrayName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   char *allocation;
   bool bVar1;
@@ -2068,11 +2068,11 @@ int Binding__SetNameFromArrayName(this, param_2)
   
   ClearName(this);
   uVar5 = 0;
-  if ((param_2 != (char *)0x0) && (iVar2 = _strlen(param_2), 0 < iVar2)) {
+  if ((str != (char *)0x0) && (iVar2 = _strlen(str), 0 < iVar2)) {
     *(int *)(this + 0x10) = iVar2;
     allocation = (char *)_malloc(iVar2 + 1);
     *(char **)(this + 8) = allocation;
-    _strncpy(allocation,param_2,*(int *)(this + 0x10) + 1);
+    _strncpy(allocation,str,*(int *)(this + 0x10) + 1);
     iVar4 = *(int *)(this + 8);
     iVar2 = *(int *)(this + 0x10);
     if (*(char *)(iVar4 + iVar2 + -1) == ']') {

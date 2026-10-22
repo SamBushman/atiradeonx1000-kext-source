@@ -349,9 +349,9 @@ int TPPStreamCompiler__reset(this)
 }
 
 /* TPPStreamCompiler__compile @ 0x97bc9f44 (332 bytes) */
-int TPPStreamCompiler__compile(this, param_2)
+int TPPStreamCompiler__compile(this, intermNode)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * intermNode;
 {
   uint uVar1;
   int iVar2;
@@ -361,7 +361,7 @@ int TPPStreamCompiler__compile(this, param_2)
   uint uVar6;
   int local_20 [5];
   
-  iVar2 = TPPStreamCompiler__parseIntermediateTree(this,param_2);
+  iVar2 = TPPStreamCompiler__parseIntermediateTree(this,intermNode);
   *(int *)(this + 0xc) = iVar2;
   if (iVar2 != 0) {
     iVar3 = *(int *)(this + 0x70);
@@ -490,27 +490,27 @@ int TPPStreamCompiler__getTableString(this)
 }
 
 /* ConstructCompiler @ 0x97bca268 (72 bytes) */
-int ConstructCompiler(param_1, param_2)
-  undefined4 param_1;
+int ConstructCompiler(language, param_2)
+  undefined4 language;
   undefined4 param_2;
 {
   void *this;
   
   this = operator_new(200);
-  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,param_1,param_2);
+  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,language,param_2);
   return this;
 }
 
 /* DeleteCompiler @ 0x97bca2b0 (24 bytes) */
-int DeleteCompiler(param_1)
-  unsigned char * param_1;
+int DeleteCompiler(compiler)
+  unsigned char * compiler;
 {
-  if (param_1 == (unsigned char *)0x0) {
+  if (compiler == (unsigned char *)0x0) {
     return;
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 4))(param_1);
+  (**(code **)(*(int *)compiler + 4))(compiler);
   return;
 }
 
@@ -2095,8 +2095,8 @@ LAB_97bcc698:
 }
 
 /* GetChunkForSymbol @ 0x97bcc6b8 (592 bytes) */
-int GetChunkForSymbol(param_1, param_2)
-  unsigned char * param_1;
+int GetChunkForSymbol(parseSymbol, param_2)
+  unsigned char * parseSymbol;
   int param_2;
 {
   uint builtInInitialSwizzle;
@@ -2111,10 +2111,10 @@ int GetChunkForSymbol(param_1, param_2)
   uint uVar7;
   int iVar8;
   
-  iVar8 = *(int *)(param_1 + 0x14);
+  iVar8 = *(int *)(parseSymbol + 0x14);
   if (((iVar8 == 0) || (iVar4 = _memcmp(iVar8,"gl_",3), iVar4 != 0)) ||
      (*(char *)(iVar8 + 3) == '_')) {
-    uVar6 = (**(code **)(**(int **)(param_1 + 0xc) + 0x24))(*(int **)(param_1 + 0xc));
+    uVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc));
     switch(uVar6) {
     case 0:
     case 1:
@@ -2134,7 +2134,7 @@ int GetChunkForSymbol(param_1, param_2)
     case 6:
       pbVar5 = (byte *)_PPStreamChunkCreateWithType(3,0);
       *(uint *)(pbVar5 + 0xc) = *(uint *)(pbVar5 + 0xc) & 0xffe0ffff | 0x10000;
-      iVar8 = (**(code **)(**(int **)(param_1 + 0xc) + 0x20))(*(int **)(param_1 + 0xc));
+      iVar8 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x20))(*(int **)(parseSymbol + 0xc));
       *(uint *)(pbVar5 + 0x10) =
            (uint)(iVar8 - 5U < 8) << 0x1f | *(uint *)(pbVar5 + 0x10) & 0x7fffffff;
       break;
@@ -2143,36 +2143,36 @@ int GetChunkForSymbol(param_1, param_2)
     }
   }
   else {
-    pbVar5 = (byte *)((int (*)())GetBuiltInChunkForSymbol)(param_1,param_2);
-    *(undefined4 *)(param_1 + 0x38) = 1;
-    *(undefined4 *)(param_1 + 0x28) = 0xffffffff;
+    pbVar5 = (byte *)((int (*)())GetBuiltInChunkForSymbol)(parseSymbol,param_2);
+    *(undefined4 *)(parseSymbol + 0x38) = 1;
+    *(undefined4 *)(parseSymbol + 0x28) = 0xffffffff;
   }
   if (pbVar5 == (byte *)0x0) goto LAB_97bcc8c4;
   bVar2 = *pbVar5;
   if (bVar2 == 2) {
 LAB_97bcc864:
-    streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
+    streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
     *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-    scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+    scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
     uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
 LAB_97bcc8c0:
     *(uint *)(pbVar5 + 0xc) = uVar7;
   }
   else if (bVar2 < 3) {
     if (bVar2 == 0) {
-      streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
+      streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
       *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-      scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+      scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
       uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
       goto LAB_97bcc8c0;
     }
   }
   else if ((bVar2 == 3) || (bVar2 == 4)) goto LAB_97bcc864;
 LAB_97bcc8c4:
-  if (*(int *)(param_1 + 0x34) == 0) {
+  if (*(int *)(parseSymbol + 0x34) == 0) {
     return pbVar5;
   }
-  builtInInitialSwizzle = ((int (*)())GetBuiltInInitialSwizzle)(param_1);
+  builtInInitialSwizzle = ((int (*)())GetBuiltInInitialSwizzle)(parseSymbol);
   if (builtInInitialSwizzle == 0) {
     return pbVar5;
   }
@@ -2271,9 +2271,9 @@ int FunctionTable__clear(this)
 }
 
 /* FunctionTable__addFunction @ 0x97bcc9e0 (284 bytes) */
-int FunctionTable__addFunction(this, param_2)
+int FunctionTable__addFunction(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   int loopIndex;
   undefined4 allocation2;
@@ -2326,10 +2326,10 @@ int FunctionTable__addFunction(this, param_2)
     *(int *)this = allocation;
   }
   iVar4 = *(int *)this;
-  length = _strlen(param_2);
+  length = _strlen(str);
   allocation2 = _malloc(length + 1);
   *(undefined4 *)(uVar10 * 0x18 + iVar4) = allocation2;
-  _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),param_2);
+  _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),str);
   iVar2 = *(int *)(this + 4);
   *(int *)(this + 4) = iVar2 + 1;
   return iVar2;
@@ -2421,9 +2421,9 @@ int FunctionTable__setLastOp(this, param_2, param_3)
 }
 
 /* FunctionTable__updateForRemovingChunk @ 0x97bccc08 (168 bytes) */
-int FunctionTable__updateForRemovingChunk(this, param_2)
+int FunctionTable__updateForRemovingChunk(this, _PPStreamChunk)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * _PPStreamChunk;
 {
   int loopIndex;
   int iVar2;
@@ -2436,17 +2436,17 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
     iVar2 = 0;
     do {
       iVar3 = *(int *)this;
-      uVar5 = *(uint *)(param_2 + 0xc);
+      uVar5 = *(uint *)(_PPStreamChunk + 0xc);
       iVar4 = iVar2 + iVar3;
-      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar4 + 0x14)) && (*(int *)(param_2 + 4) != 0)) &&
+      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar4 + 0x14)) && (*(int *)(_PPStreamChunk + 4) != 0)) &&
          (*(int *)(iVar4 + 0x10) != 0)) {
-        *(uint *)(iVar4 + 0x14) = *(uint *)(*(int *)(param_2 + 4) + 0xc) & 0x3ffff;
-        uVar5 = *(uint *)(param_2 + 0xc);
+        *(uint *)(iVar4 + 0x14) = *(uint *)(*(int *)(_PPStreamChunk + 4) + 0xc) & 0x3ffff;
+        uVar5 = *(uint *)(_PPStreamChunk + 0xc);
         iVar3 = *(int *)this;
       }
-      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar2 + iVar3 + 0x10)) && (*(int *)(param_2 + 8) != 0))
+      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar2 + iVar3 + 0x10)) && (*(int *)(_PPStreamChunk + 8) != 0))
          && ((uVar5 & 0x3ffff) != 0)) {
-        *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(param_2 + 8) + 0xc) & 0x3ffff;
+        *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(_PPStreamChunk + 8) + 0xc) & 0x3ffff;
       }
       loopIndex = loopIndex + 1;
       iVar2 = iVar2 + 0x18;
@@ -2457,9 +2457,9 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
 }
 
 /* FunctionTable__findFunction @ 0x97bcccb0 (132 bytes) */
-int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_6)
+int FunctionTable__findFunction(this, str, param_3, param_4, param_5, param_6)
   unsigned char * this;
-  char *param_2;
+  char *str;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -2475,7 +2475,7 @@ int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_
   if (0 < iVar1) {
     iVar2 = 0;
     do {
-      compareResult = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),param_2);
+      compareResult = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),str);
       if (compareResult == 0) {
         iVar1 = *(int *)(this + 4);
         break;

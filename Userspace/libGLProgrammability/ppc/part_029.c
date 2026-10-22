@@ -162,8 +162,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal
 }
 
 /* std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____ @ 0x97c34160 (92 bytes) */
-int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____(param_1, param_2, param_3, param_4)
-  int *param_1;
+int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____(this, param_2, param_3, param_4)
+  int *this;
   undefined4 *param_2;
   undefined4 *param_3;
   int param_4;
@@ -172,19 +172,19 @@ int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__
   undefined4 *puVar2;
   int iVar3;
   
-  *param_1 = param_4;
+  *this = param_4;
   if (param_2 != param_3) {
     do {
-      puVar2 = (undefined4 *)*param_1;
+      puVar2 = (undefined4 *)*this;
       iVar3 = 0;
       if (puVar2 != (undefined4 *)0x0) {
         uVar1 = *param_2;
         puVar2[1] = param_2[1];
         *puVar2 = uVar1;
-        iVar3 = *param_1;
+        iVar3 = *this;
       }
       param_2 = param_2 + 2;
-      *param_1 = iVar3 + 8;
+      *this = iVar3 + 8;
     } while (param_2 != param_3);
     return;
   }
@@ -227,10 +227,10 @@ int std___Rb_tree_base_iterator___M_increment(this)
 }
 
 /* TType__copyType @ 0x97c34234 (800 bytes) */
-int TType__copyType(this, param_2, param_3)
+int TType__copyType(this, type, map)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * type;
+  unsigned char * map;
 {
   uint uVar1;
   uint uVar2;
@@ -259,24 +259,24 @@ int TType__copyType(this, param_2, param_3)
   undefined4 local_40 [7];
   
   uVar4 = *(uint *)(this + 0x24);
-  uVar1 = (*(uint *)(param_2 + 0x24) >> 0x13 & 0x3f) << 0x13;
+  uVar1 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
   *(uint *)(this + 0x24) = uVar1 | uVar4 & 0xfe07ffff;
-  uVar2 = *(uint *)(param_2 + 0x24) & 0xfe000000;
+  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
   *(uint *)(this + 0x24) = uVar2 | uVar1 | uVar4 & 0x7ffff;
-  uVar13 = *(uint *)(param_2 + 0x24) & 0x7f800;
+  uVar13 = *(uint *)(type + 0x24) & 0x7f800;
   *(uint *)(this + 0x24) = uVar13 | uVar2 | uVar1 | uVar4 & 0x7ff;
-  uVar3 = (*(uint *)(param_2 + 0x24) >> 10 & 1) << 10;
+  uVar3 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
   *(uint *)(this + 0x24) = uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x3ff;
   *(uint *)(this + 0x24) =
-       (*(uint *)(param_2 + 0x24) >> 9 & 1) << 9 | uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x1ff;
-  iVar6 = *(int *)(param_2 + 8);
-  *(undefined4 *)(this + 4) = *(undefined4 *)(param_2 + 4);
+       (*(uint *)(type + 0x24) >> 9 & 1) << 9 | uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x1ff;
+  iVar6 = *(int *)(type + 8);
+  *(undefined4 *)(this + 4) = *(undefined4 *)(type + 4);
   if (iVar6 == 0) {
     *(undefined4 *)(this + 8) = 0;
   }
   else {
-    ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(local_a0,param_3,this + 8);
-    local_90 = *(unsigned char **)param_3;
+    ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(local_a0,map,this + 8);
+    local_90 = *(unsigned char **)map;
     if (local_a0[0] == local_90) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       puVar9 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
@@ -290,14 +290,14 @@ int TType__copyType(this, param_2, param_3)
         puVar11 = puVar9;
       }
       *(undefined4 **)(this + 8) = puVar11;
-      for (uVar13 = 0; iVar6 = *(int *)(*(int *)(param_2 + 8) + 4),
-          uVar13 < (uint)(*(int *)(*(int *)(param_2 + 8) + 8) - iVar6 >> 3); uVar13 = uVar13 + 1) {
+      for (uVar13 = 0; iVar6 = *(int *)(*(int *)(type + 8) + 4),
+          uVar13 < (uint)(*(int *)(*(int *)(type + 8) + 8) - iVar6 >> 3); uVar13 = uVar13 + 1) {
         local_6c = *(undefined4 *)(iVar6 + uVar13 * 8 + 4);
-        pTVar15 = *(unsigned char **)(*(int *)(*(int *)(param_2 + 8) + 4) + uVar13 * 8);
+        pTVar15 = *(unsigned char **)(*(int *)(*(int *)(type + 8) + 4) + uVar13 * 8);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         this_00 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
         *(undefined ***)this_00 = &PTR___ZN5TTypeD1Ev_a7b7d590;
-        ((int (*)())TType__copyType)(this_00,pTVar15,param_3);
+        ((int (*)())TType__copyType)(this_00,pTVar15,map);
         this_01 = *(unsigned char **)(this + 8);
         puVar11 = *(undefined4 **)(this_01 + 8);
         local_70 = this_00;
@@ -321,7 +321,7 @@ int TType__copyType(this, param_2, param_3)
     }
   }
   *(undefined4 *)(this + 0xc) = 0;
-  iVar6 = *(int *)(param_2 + 0xc);
+  iVar6 = *(int *)(type + 0xc);
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
@@ -337,7 +337,7 @@ int TType__copyType(this, param_2, param_3)
     *(void **)(this + 0xc) = pvVar5;
   }
   *(undefined4 *)(this + 0x10) = 0;
-  iVar6 = *(int *)(param_2 + 0x10);
+  iVar6 = *(int *)(type + 0x10);
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
@@ -353,7 +353,7 @@ int TType__copyType(this, param_2, param_3)
     *(void **)(this + 0x10) = pvVar5;
   }
   *(undefined4 *)(this + 0x14) = 0;
-  iVar6 = *(int *)(param_2 + 0x14);
+  iVar6 = *(int *)(type + 0x14);
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
@@ -368,8 +368,8 @@ int TType__copyType(this, param_2, param_3)
     }
     *(void **)(this + 0x14) = pvVar5;
   }
-  uVar12 = *(undefined4 *)(param_2 + 0x1c);
-  uVar7 = *(undefined4 *)(param_2 + 0x18);
+  uVar12 = *(undefined4 *)(type + 0x1c);
+  uVar7 = *(undefined4 *)(type + 0x18);
   *(undefined4 *)(this + 0x20) = 0;
   *(undefined4 *)(this + 0x18) = uVar7;
   *(undefined4 *)(this + 0x1c) = uVar12;
@@ -449,9 +449,9 @@ int TFunction__getMangledName(this)
 }
 
 /* std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find @ 0x97c34634 (108 bytes) */
-int std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find(param_1, param_2, param_3)
-  unsigned char ** param_1;
-  undefined4 *param_2;
+int std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find(this, vector, param_3)
+  unsigned char ** this;
+  undefined4 *vector;
   uint *param_3;
 {
   unsigned char * pTVar1;
@@ -459,7 +459,7 @@ int std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector
   unsigned char * pTVar3;
   unsigned char * pTVar4;
   
-  pTVar3 = (unsigned char *)*param_2;
+  pTVar3 = (unsigned char *)*vector;
   pTVar4 = pTVar3;
   if (*(unsigned char **)(pTVar3 + 4) != (unsigned char *)0x0) {
     pTVar1 = *(unsigned char **)(pTVar3 + 4);
@@ -475,18 +475,18 @@ int std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector
     } while (pTVar2 != (unsigned char *)0x0);
   }
   if ((pTVar4 != pTVar3) && (*(uint *)(pTVar4 + 0x10) <= *param_3)) {
-    *param_1 = pTVar4;
+    *this = pTVar4;
     return;
   }
-  *param_1 = pTVar3;
+  *this = pTVar3;
   return;
 }
 
 /* std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux @ 0x97c346a0 (384 bytes) */
-int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_2, param_3)
+int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_2, typeLine)
   unsigned char * this;
   undefined4 *param_2;
-  undefined4 *param_3;
+  undefined4 *typeLine;
 {
   int allocation;
   int iVar1;
@@ -509,8 +509,8 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
     allocation = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
     ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(local_30,*(undefined4 *)(this + 4),param_2,allocation);
     if (local_30[0] != (undefined4 *)0x0) {
-      uVar4 = *param_3;
-      local_30[0][1] = param_3[1];
+      uVar4 = *typeLine;
+      local_30[0][1] = typeLine[1];
       *local_30[0] = uVar4;
     }
     ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(local_30,param_2,*(undefined4 *)(this + 8),local_30[0] + 2);
@@ -528,9 +528,9 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
       puVar8 = *(undefined4 **)(this + 8);
     }
     *(undefined4 **)(this + 8) = puVar8 + 2;
-    uVar7 = param_3[1];
+    uVar7 = typeLine[1];
     iVar3 = (int)(puVar8 + -2) - (int)param_2 >> 3;
-    uVar4 = *param_3;
+    uVar4 = *typeLine;
     puVar6 = puVar8 + -2;
     if (0 < iVar3) {
       do {
@@ -549,8 +549,8 @@ int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_
 }
 
 /* std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____ @ 0x97c34820 (92 bytes) */
-int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____(param_1, param_2, param_3, param_4)
-  int *param_1;
+int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____(this, param_2, param_3, param_4)
+  int *this;
   undefined4 *param_2;
   undefined4 *param_3;
   int param_4;
@@ -559,19 +559,19 @@ int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__v
   undefined4 *puVar2;
   int iVar3;
   
-  *param_1 = param_4;
+  *this = param_4;
   if (param_2 != param_3) {
     do {
-      puVar2 = (undefined4 *)*param_1;
+      puVar2 = (undefined4 *)*this;
       iVar3 = 0;
       if (puVar2 != (undefined4 *)0x0) {
         uVar1 = *param_2;
         puVar2[1] = param_2[1];
         *puVar2 = uVar1;
-        iVar3 = *param_1;
+        iVar3 = *this;
       }
       param_2 = param_2 + 2;
-      *param_1 = iVar3 + 8;
+      *this = iVar3 + 8;
     } while (param_2 != param_3);
     return;
   }
@@ -579,14 +579,14 @@ int std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__v
 }
 
 /* __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_ @ 0x97c3487c (64 bytes) */
-int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_(param_1, param_2, param_3)
-  unsigned char * param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
+int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_(this, text1, text2)
+  unsigned char * this;
+  unsigned char * text1;
+  unsigned char * text2;
 {
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(param_1,param_2);
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_(param_1,param_3);
-  return param_1;
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(this,text1);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_(this,text2);
+  return this;
 }
 
 /* std__vector_int_pool_allocator_int_____M_insert_aux @ 0x97c348bc (252 bytes) */
@@ -640,9 +640,9 @@ int std__vector_int_pool_allocator_int_____M_insert_aux(this, param_2, param_3)
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find @ 0x97c349b8 (288 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find(param_1, param_2, param_3)
-  unsigned char * param_1;
-  int param_2;
+int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find(this, text, param_3)
+  unsigned char * this;
+  int text;
   int param_3;
 {
   int iVar1;
@@ -658,7 +658,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
   uint local_38;
   uint local_34 [2];
   
-  iVar4 = *(int *)(param_2 + 4);
+  iVar4 = *(int *)(text + 4);
   iVar6 = iVar4;
   if (*(int *)(iVar4 + 4) != 0) {
     pvVar5 = *(void **)(param_3 + 4);
@@ -700,12 +700,12 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
       iVar2 = uVar7 - uVar8;
     }
     if (-1 < iVar2) {
-      *(int *)param_1 = iVar6;
-      return param_1;
+      *(int *)this = iVar6;
+      return this;
     }
   }
-  *(int *)param_1 = iVar4;
-  return param_1;
+  *(int *)this = iVar4;
+  return this;
 }
 
 /* __ZN13TShHandleBaseD1Ev @ 0x97c34ad8 (36 bytes) */
@@ -813,15 +813,15 @@ int TCompiler__getTableString()
 }
 
 /* TCompiler__setOpimizationLevel @ 0x97c34c24 (4 bytes) */
-int TCompiler__setOpimizationLevel(param_1)
-  undefined4 param_1;
+int TCompiler__setOpimizationLevel(this)
+  undefined4 this;
 {
   return;
 }
 
 /* TCompiler__setDebugOptions @ 0x97c34c28 (4 bytes) */
-int TCompiler__setDebugOptions(param_1)
-  undefined4 param_1;
+int TCompiler__setDebugOptions(this)
+  undefined4 this;
 {
   return;
 }
@@ -839,20 +839,20 @@ int TCompiler__getNewCompilationAllocator(this)
 }
 
 /* TPPStreamCompiler__setOpimizationLevel @ 0x97c34c68 (8 bytes) */
-int TPPStreamCompiler__setOpimizationLevel(this, param_2)
+int TPPStreamCompiler__setOpimizationLevel(this, optimizationLevel)
   unsigned char * this;
-  undefined4 param_2;
+  undefined4 optimizationLevel;
 {
-  *(undefined4 *)(this + 0xc4) = param_2;
+  *(undefined4 *)(this + 0xc4) = optimizationLevel;
   return;
 }
 
 /* TPPStreamCompiler__setDebugOptions @ 0x97c34c70 (8 bytes) */
-int TPPStreamCompiler__setDebugOptions(this, param_2)
+int TPPStreamCompiler__setDebugOptions(this, debugOptions)
   unsigned char * this;
-  undefined4 param_2;
+  undefined4 debugOptions;
 {
-  *(undefined4 *)(this + 0xc0) = param_2;
+  *(undefined4 *)(this + 0xc0) = debugOptions;
   return;
 }
 

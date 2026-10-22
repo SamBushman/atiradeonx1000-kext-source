@@ -115,20 +115,20 @@ int Binding__GetNextBindingInHash(this)
 }
 
 /* Binding__SetNextBinding @ 0x97bb04d0 (8 bytes) */
-int Binding__SetNextBinding(this, param_2)
+int Binding__SetNextBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
-  *(unsigned char **)this = param_2;
+  *(unsigned char **)this = binding;
   return;
 }
 
 /* Binding__SetNextBindingInHash @ 0x97bb04d8 (8 bytes) */
-int Binding__SetNextBindingInHash(this, param_2)
+int Binding__SetNextBindingInHash(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
-  *(unsigned char **)(this + 4) = param_2;
+  *(unsigned char **)(this + 4) = binding;
   return;
 }
 
@@ -433,95 +433,95 @@ int BindingTable__ClearInternalBindings(this)
 }
 
 /* BindingTable__InsertAttribRequestBinding @ 0x97bb08fc (244 bytes) */
-int BindingTable__InsertAttribRequestBinding(this, param_2)
+int BindingTable__InsertAttribRequestBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   unsigned char * pBVar1;
   int iVar2;
   unsigned char * pBVar3;
   
-  if (param_2 != (unsigned char *)0x0) {
-    pBVar1 = (unsigned char *)((int (*)())BindingTable__FindAttribRequestBinding)(this,param_2);
+  if (binding != (unsigned char *)0x0) {
+    pBVar1 = (unsigned char *)((int (*)())BindingTable__FindAttribRequestBinding)(this,binding);
     if (pBVar1 == (unsigned char *)0x0) {
       pBVar1 = *(unsigned char **)(this + 4);
       if (*(unsigned char **)(this + 4) == (unsigned char *)0x0) {
-        *(unsigned char **)(this + 4) = param_2;
-        iVar2 = Binding__GetHash(param_2,*(uint *)this);
-        *(unsigned char **)(iVar2 * 4 + *(int *)(this + 8)) = param_2;
+        *(unsigned char **)(this + 4) = binding;
+        iVar2 = Binding__GetHash(binding,*(uint *)this);
+        *(unsigned char **)(iVar2 * 4 + *(int *)(this + 8)) = binding;
       }
       else {
         do {
           pBVar3 = pBVar1;
           pBVar1 = (unsigned char *)((int (*)())Binding__GetNextBinding)(pBVar3);
         } while (pBVar1 != (unsigned char *)0x0);
-        ((int (*)())Binding__SetNextBinding)(pBVar3,param_2);
-        iVar2 = Binding__GetHash(param_2,*(uint *)this);
+        ((int (*)())Binding__SetNextBinding)(pBVar3,binding);
+        iVar2 = Binding__GetHash(binding,*(uint *)this);
         pBVar1 = *(unsigned char **)(iVar2 * 4 + *(int *)(this + 8));
         if (pBVar1 == (unsigned char *)0x0) {
-          *(unsigned char **)(iVar2 * 4 + *(int *)(this + 8)) = param_2;
+          *(unsigned char **)(iVar2 * 4 + *(int *)(this + 8)) = binding;
         }
         else {
           do {
             pBVar3 = pBVar1;
             pBVar1 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(pBVar3);
           } while (pBVar1 != (unsigned char *)0x0);
-          ((int (*)())Binding__SetNextBindingInHash)(pBVar3,param_2);
+          ((int (*)())Binding__SetNextBindingInHash)(pBVar3,binding);
         }
       }
       return 1;
     }
-    iVar2 = ((int (*)())Binding__GetLocation)(param_2);
+    iVar2 = ((int (*)())Binding__GetLocation)(binding);
     ((int (*)())Binding__SetLocation)(pBVar1,iVar2);
   }
   return 0;
 }
 
 /* BindingTable__NextAttribRequestBinding @ 0x97bb09f0 (24 bytes) */
-int BindingTable__NextAttribRequestBinding(this, param_2)
+int BindingTable__NextAttribRequestBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   undefined4 nextBinding;
   
-  if (param_2 != (unsigned char *)0x0) {
-    nextBinding = ((int (*)())Binding__GetNextBinding)(param_2);
+  if (binding != (unsigned char *)0x0) {
+    nextBinding = ((int (*)())Binding__GetNextBinding)(binding);
     return nextBinding;
   }
   return *(undefined4 *)(this + 4);
 }
 
 /* BindingTable__FindAttribRequestBinding @ 0x97bb0a08 (116 bytes) */
-int BindingTable__FindAttribRequestBinding(this, param_2)
+int BindingTable__FindAttribRequestBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   int iVar1;
   unsigned char * this_00;
   
-  iVar1 = Binding__GetHash(param_2,*(uint *)this);
+  iVar1 = Binding__GetHash(binding,*(uint *)this);
   this_00 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 8));
-  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,param_2), iVar1 != 1))) {
+  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,binding), iVar1 != 1))) {
     this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
   }
   return this_00;
 }
 
 /* BindingTable__FindAttribRequestBindingLocationByName @ 0x97bb0a7c (228 bytes) */
-int BindingTable__FindAttribRequestBindingLocationByName(this, param_2)
+int BindingTable__FindAttribRequestBindingLocationByName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   unsigned char * this_00;
   int iVar1;
   undefined4 uVar2;
   unsigned char * this_01;
   
-  if (param_2 != (char *)0x0) {
+  if (str != (char *)0x0) {
     this_00 = operator_new(0x38);
     __ZN7BindingC1Ev(this_00);
     if (this_00 != (unsigned char *)0x0) {
-      Binding__SetName(this_00,param_2);
+      Binding__SetName(this_00,str);
       iVar1 = Binding__GetHash(this_00,*(uint *)this);
       this_01 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 8));
       while ((this_01 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_01,this_00), iVar1 != 1)
@@ -540,9 +540,9 @@ int BindingTable__FindAttribRequestBindingLocationByName(this, param_2)
 }
 
 /* BindingTable__InsertClientAttribBinding @ 0x97bb0b60 (368 bytes) */
-int BindingTable__InsertClientAttribBinding(this, param_2)
+int BindingTable__InsertClientAttribBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   unsigned char * this_00;
   int iVar1;
@@ -551,11 +551,11 @@ int BindingTable__InsertClientAttribBinding(this, param_2)
   unsigned char * pBVar4;
   unsigned char * this_01;
   
-  if (param_2 == (unsigned char *)0x0) {
+  if (binding == (unsigned char *)0x0) {
     return 0;
   }
   this_00 = operator_new(0x38);
-  __ZN7BindingC1ERKS_(this_00,param_2);
+  __ZN7BindingC1ERKS_(this_00,binding);
   pBVar4 = *(unsigned char **)(this + 0xc);
   if (pBVar4 != (unsigned char *)0x0) {
     iVar1 = ((int (*)())Binding__GetLocation)(this_00);
@@ -607,9 +607,9 @@ LAB_97bb0bf0:
 }
 
 /* BindingTable__InsertAttribBinding @ 0x97bb0cd0 (508 bytes) */
-int BindingTable__InsertAttribBinding(this, param_2)
+int BindingTable__InsertAttribBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   int slotCount;
   undefined4 uVar1;
@@ -621,12 +621,12 @@ int BindingTable__InsertAttribBinding(this, param_2)
   unsigned char * this_00;
   
   uVar1 = 0;
-  if (param_2 != (unsigned char *)0x0) {
+  if (binding != (unsigned char *)0x0) {
     iVar3 = 0;
-    iVar2 = Binding__IsBuiltIn(param_2);
+    iVar2 = Binding__IsBuiltIn(binding);
     pBVar6 = *(unsigned char **)(this + 0xc);
     iVar4 = 1;
-    if ((iVar2 != 0) && (iVar2 = _memcmp(*(undefined4 *)(param_2 + 8),"gl_Vertex",10), iVar2 == 0))
+    if ((iVar2 != 0) && (iVar2 = _memcmp(*(undefined4 *)(binding + 8),"gl_Vertex",10), iVar2 == 0))
     {
       if ((pBVar6 != (unsigned char *)0x0) && (iVar2 = ((int (*)())Binding__GetLocation)(pBVar6), iVar2 == 0)) {
         return 0;
@@ -639,7 +639,7 @@ int BindingTable__InsertAttribBinding(this, param_2)
         this_00 = pBVar6;
         iVar4 = iVar3 + iVar4;
         iVar2 = ((int (*)())Binding__GetLocation)(this_00);
-        slotCount = ((int (*)())Binding__GetBindingSlots)(param_2);
+        slotCount = ((int (*)())Binding__GetBindingSlots)(binding);
         pBVar6 = this_00;
         if (iVar4 + slotCount <= iVar2) goto LAB_97bb0db4;
         iVar3 = ((int (*)())Binding__GetLocation)(this_00);
@@ -651,90 +651,90 @@ int BindingTable__InsertAttribBinding(this, param_2)
     }
 LAB_97bb0db4:
     if (pBVar5 == (unsigned char *)0x0) {
-      *(unsigned char **)(this + 0xc) = param_2;
+      *(unsigned char **)(this + 0xc) = binding;
     }
     else {
-      ((int (*)())Binding__SetNextBinding)(pBVar5,param_2);
+      ((int (*)())Binding__SetNextBinding)(pBVar5,binding);
     }
-    ((int (*)())Binding__SetNextBinding)(param_2,pBVar6);
-    ((int (*)())Binding__SetLocation)(param_2,iVar4);
-    iVar2 = Binding__GetHash(param_2,*(uint *)this);
+    ((int (*)())Binding__SetNextBinding)(binding,pBVar6);
+    ((int (*)())Binding__SetLocation)(binding,iVar4);
+    iVar2 = Binding__GetHash(binding,*(uint *)this);
     pBVar6 = *(unsigned char **)(iVar2 * 4 + *(int *)(this + 0x10));
     if (pBVar6 == (unsigned char *)0x0) {
-      *(unsigned char **)(iVar2 * 4 + *(int *)(this + 0x10)) = param_2;
+      *(unsigned char **)(iVar2 * 4 + *(int *)(this + 0x10)) = binding;
     }
     else {
       do {
         pBVar5 = pBVar6;
         pBVar6 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(pBVar5);
       } while (pBVar6 != (unsigned char *)0x0);
-      ((int (*)())Binding__SetNextBindingInHash)(pBVar5,param_2);
+      ((int (*)())Binding__SetNextBindingInHash)(pBVar5,binding);
     }
-    ((int (*)())Binding__SetNextBindingInHash)(param_2,(unsigned char *)0x0);
+    ((int (*)())Binding__SetNextBindingInHash)(binding,(unsigned char *)0x0);
     iVar2 = *(int *)(this + 0x1c);
     *(int *)(this + 0x1c) = iVar2 + 1;
-    ((int (*)())Binding__SetActiveIndex)(param_2,iVar2);
-    iVar2 = Binding__IsBuiltIn(param_2);
+    ((int (*)())Binding__SetActiveIndex)(binding,iVar2);
+    iVar2 = Binding__IsBuiltIn(binding);
     if (iVar2 == 0) {
-      iVar2 = ((int (*)())Binding__GetBindingSlots)(param_2);
+      iVar2 = ((int (*)())Binding__GetBindingSlots)(binding);
       *(int *)(this + 0x28) = *(int *)(this + 0x28) + iVar2;
     }
-    iVar2 = ((int (*)())Binding__GetBindingSlots)(param_2);
+    iVar2 = ((int (*)())Binding__GetBindingSlots)(binding);
     *(int *)(this + 0x34) = *(int *)(this + 0x34) + iVar2;
-    if (*(int *)(this + 0x38) < *(int *)(param_2 + 0x10) + 1) {
-      *(int *)(this + 0x38) = *(int *)(param_2 + 0x10) + 1;
+    if (*(int *)(this + 0x38) < *(int *)(binding + 0x10) + 1) {
+      *(int *)(this + 0x38) = *(int *)(binding + 0x10) + 1;
     }
     uVar1 = 1;
-    param_2[0x34] = 0x1;
+    binding[0x34] = 0x1;
   }
   return uVar1;
 }
 
 /* BindingTable__NextAttribBinding @ 0x97bb0ecc (24 bytes) */
-int BindingTable__NextAttribBinding(this, param_2)
+int BindingTable__NextAttribBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   undefined4 nextBinding;
   
-  if (param_2 != (unsigned char *)0x0) {
-    nextBinding = ((int (*)())Binding__GetNextBinding)(param_2);
+  if (binding != (unsigned char *)0x0) {
+    nextBinding = ((int (*)())Binding__GetNextBinding)(binding);
     return nextBinding;
   }
   return *(undefined4 *)(this + 0xc);
 }
 
 /* BindingTable__FindAttribBinding @ 0x97bb0ee4 (116 bytes) */
-int BindingTable__FindAttribBinding(this, param_2)
+int BindingTable__FindAttribBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   int iVar1;
   unsigned char * this_00;
   
-  iVar1 = Binding__GetHash(param_2,*(uint *)this);
+  iVar1 = Binding__GetHash(binding,*(uint *)this);
   this_00 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 0x10));
-  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,param_2), iVar1 != 1))) {
+  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,binding), iVar1 != 1))) {
     this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
   }
   return this_00;
 }
 
 /* BindingTable__FindAttribBindingLocationByName @ 0x97bb0f58 (228 bytes) */
-int BindingTable__FindAttribBindingLocationByName(this, param_2)
+int BindingTable__FindAttribBindingLocationByName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   unsigned char * this_00;
   int iVar1;
   undefined4 uVar2;
   unsigned char * this_01;
   
-  if (param_2 != (char *)0x0) {
+  if (str != (char *)0x0) {
     this_00 = operator_new(0x38);
     __ZN7BindingC1Ev(this_00);
     if (this_00 != (unsigned char *)0x0) {
-      Binding__SetName(this_00,param_2);
+      Binding__SetName(this_00,str);
       iVar1 = Binding__GetHash(this_00,*(uint *)this);
       this_01 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 0x10));
       while ((this_01 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_01,this_00), iVar1 != 1)
@@ -789,9 +789,9 @@ int BindingTable__GetAttribBindingByIndex(this, param_2)
 }
 
 /* BindingTable__InsertSingleUniform @ 0x97bb10f0 (452 bytes) */
-int BindingTable__InsertSingleUniform(this, param_2, param_3)
+int BindingTable__InsertSingleUniform(this, binding, param_3)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
   int param_3;
 {
   undefined4 uVar1;
@@ -803,12 +803,12 @@ int BindingTable__InsertSingleUniform(this, param_2, param_3)
   int iVar7;
   
   uVar1 = 0;
-  if (param_2 != (unsigned char *)0x0) {
+  if (binding != (unsigned char *)0x0) {
     iVar6 = 0;
     iVar7 = 0;
     pBVar3 = *(unsigned char **)(this + 0x14);
     if (*(unsigned char **)(this + 0x14) == (unsigned char *)0x0) {
-      *(unsigned char **)(this + 0x14) = param_2;
+      *(unsigned char **)(this + 0x14) = binding;
     }
     else {
       do {
@@ -820,40 +820,40 @@ int BindingTable__InsertSingleUniform(this, param_2, param_3)
         }
         pBVar3 = (unsigned char *)((int (*)())Binding__GetNextBinding)(pBVar4);
       } while (pBVar3 != (unsigned char *)0x0);
-      ((int (*)())Binding__SetNextBinding)(pBVar4,param_2);
+      ((int (*)())Binding__SetNextBinding)(pBVar4,binding);
     }
-    ((int (*)())Binding__SetLocation)(param_2,iVar6 + iVar7);
-    iVar6 = Binding__GetHash(param_2,*(uint *)this);
+    ((int (*)())Binding__SetLocation)(binding,iVar6 + iVar7);
+    iVar6 = Binding__GetHash(binding,*(uint *)this);
     pBVar3 = *(unsigned char **)(iVar6 * 4 + *(int *)(this + 0x18));
     if (pBVar3 == (unsigned char *)0x0) {
-      *(unsigned char **)(iVar6 * 4 + *(int *)(this + 0x18)) = param_2;
+      *(unsigned char **)(iVar6 * 4 + *(int *)(this + 0x18)) = binding;
     }
     else {
       do {
         pBVar4 = pBVar3;
         pBVar3 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(pBVar4);
       } while (pBVar3 != (unsigned char *)0x0);
-      ((int (*)())Binding__SetNextBindingInHash)(pBVar4,param_2);
+      ((int (*)())Binding__SetNextBindingInHash)(pBVar4,binding);
     }
     iVar6 = *(int *)(this + 0x20);
     *(int *)(this + 0x20) = iVar6 + 1;
-    ((int (*)())Binding__SetActiveIndex)(param_2,iVar6);
-    iVar6 = Binding__IsBuiltIn(param_2);
+    ((int (*)())Binding__SetActiveIndex)(binding,iVar6);
+    iVar6 = Binding__IsBuiltIn(binding);
     if (iVar6 == 0) {
-      iVar6 = ((int (*)())Binding__GetBindingSlots)(param_2);
+      iVar6 = ((int (*)())Binding__GetBindingSlots)(binding);
       *(int *)(this + 0x24) = *(int *)(this + 0x24) + iVar6;
     }
     if (param_3 != 0) {
-      param_2[0x35] = 0x1;
-      iVar6 = ((int (*)())Binding__GetBindingSlots)(param_2);
+      binding[0x35] = 0x1;
+      iVar6 = ((int (*)())Binding__GetBindingSlots)(binding);
       *(int *)(this + 0x30) = *(int *)(this + 0x30) + iVar6;
     }
     else {
-      param_2[0x34] = 0x1;
-      iVar6 = ((int (*)())Binding__GetBindingSlots)(param_2);
+      binding[0x34] = 0x1;
+      iVar6 = ((int (*)())Binding__GetBindingSlots)(binding);
       *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + iVar6;
     }
-    uVar5 = ((int (*)())Binding__GetOpenGLType)(param_2);
+    uVar5 = ((int (*)())Binding__GetOpenGLType)(binding);
     if ((0x8b5c < uVar5) && (uVar5 < 0x8b65)) {
       if (param_3 != 0) {
         *(int *)(this + 0x44) = *(int *)(this + 0x44) + 1;
@@ -862,8 +862,8 @@ int BindingTable__InsertSingleUniform(this, param_2, param_3)
         *(int *)(this + 0x40) = *(int *)(this + 0x40) + 1;
       }
     }
-    if (*(int *)(this + 0x3c) < *(int *)(param_2 + 0x10) + 1) {
-      *(int *)(this + 0x3c) = *(int *)(param_2 + 0x10) + 1;
+    if (*(int *)(this + 0x3c) < *(int *)(binding + 0x10) + 1) {
+      *(int *)(this + 0x3c) = *(int *)(binding + 0x10) + 1;
     }
     uVar1 = 1;
   }
@@ -871,25 +871,25 @@ int BindingTable__InsertSingleUniform(this, param_2, param_3)
 }
 
 /* BindingTable__AddSingleUniformReference @ 0x97bb12b4 (184 bytes) */
-int BindingTable__AddSingleUniformReference(this, param_2, param_3)
+int BindingTable__AddSingleUniformReference(this, binding, param_3)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
   int param_3;
 {
   int slotCount;
   uint glType;
   
   if (param_3 != 0) {
-    param_2[0x35] = 0x1;
-    slotCount = ((int (*)())Binding__GetBindingSlots)(param_2);
+    binding[0x35] = 0x1;
+    slotCount = ((int (*)())Binding__GetBindingSlots)(binding);
     *(int *)(this + 0x30) = *(int *)(this + 0x30) + slotCount;
   }
   else {
-    param_2[0x34] = 0x1;
-    slotCount = ((int (*)())Binding__GetBindingSlots)(param_2);
+    binding[0x34] = 0x1;
+    slotCount = ((int (*)())Binding__GetBindingSlots)(binding);
     *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + slotCount;
   }
-  glType = ((int (*)())Binding__GetOpenGLType)(param_2);
+  glType = ((int (*)())Binding__GetOpenGLType)(binding);
   if ((0x8b5c < glType) && (glType < 0x8b65)) {
     if (param_3 != 0) {
       *(int *)(this + 0x44) = *(int *)(this + 0x44) + 1;
@@ -902,13 +902,13 @@ int BindingTable__AddSingleUniformReference(this, param_2, param_3)
 }
 
 /* BindingTable__InsertUniformArray @ 0x97bb136c (944 bytes) */
-int BindingTable__InsertUniformArray(this, param_2, param_3, param_4, param_5, param_6)
+int BindingTable__InsertUniformArray(this, binding, param_3, param_4, param_5, parseSymbolTable)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
   int param_3;
   int param_4;
   int param_5;
-  unsigned char ** param_6;
+  unsigned char ** parseSymbolTable;
 {
   bool bVar1;
   undefined4 uVar2;
@@ -929,16 +929,16 @@ int BindingTable__InsertUniformArray(this, param_2, param_3, param_4, param_5, p
   undefined8 local_50;
   
   uVar2 = 0;
-  if (param_2 != (unsigned char *)0x0) {
+  if (binding != (unsigned char *)0x0) {
     local_50 = DAT_97c38f98;
-    iVar3 = ((int (*)())Binding__GetDecSize)(param_2);
+    iVar3 = ((int (*)())Binding__GetDecSize)(binding);
     while (iVar3 = iVar3 + -1, -1 < iVar3) {
-      Binding__RemoveNameBackToChar(param_2,0x5b);
+      Binding__RemoveNameBackToChar(binding,0x5b);
       _sprintf(acStack_90,"[%d]",iVar3);
-      Binding__CatName(param_2,acStack_90);
+      Binding__CatName(binding,acStack_90);
       for (iVar11 = param_4; iVar11 < param_5; iVar11 = iVar11 + 1) {
-        if (((param_6[iVar11] != (unsigned char *)0x0) &&
-            (iVar4 = ParseSymbolTable__FindSymbolByName(param_6[iVar11],*(char **)(param_2 + 8)),
+        if (((parseSymbolTable[iVar11] != (unsigned char *)0x0) &&
+            (iVar4 = ParseSymbolTable__FindSymbolByName(parseSymbolTable[iVar11],*(char **)(binding + 8)),
             iVar4 != 0)) && (*(int *)((int)&local_50 + iVar11 * 4) < iVar3)) {
           *(int *)((int)&local_50 + iVar11 * 4) = iVar3;
         }
@@ -950,20 +950,20 @@ int BindingTable__InsertUniformArray(this, param_2, param_3, param_4, param_5, p
       iVar3 = (*(unsigned int *)((unsigned char *)&(local_50) + 0));
     }
     iVar11 = 0;
-    Binding__RemoveNameBackToChar(param_2,0x5b);
+    Binding__RemoveNameBackToChar(binding,0x5b);
     if (-1 < iVar3) {
       uVar10 = iVar3 + 1;
       do {
         bVar1 = true;
         this_00 = operator_new(0x38);
-        __ZN7BindingC1ERKS_(this_00,param_2);
+        __ZN7BindingC1ERKS_(this_00,binding);
         _sprintf(acStack_70,"[%d]",iVar11);
         Binding__CatName(this_00,acStack_70);
-        iVar4 = Binding__IsBuiltIn(param_2);
+        iVar4 = Binding__IsBuiltIn(binding);
         if (iVar4 != 0) {
           bVar1 = false;
           if (param_4 < param_5) {
-            ppPVar12 = param_6 + param_4;
+            ppPVar12 = parseSymbolTable + param_4;
             iVar4 = param_4;
             do {
               this_01 = *ppPVar12;
@@ -1034,7 +1034,7 @@ LAB_97bb1538:
           }
           if (iVar11 <= (*(int *)((unsigned char *)&(local_50) + 4))) {
             this_00[0x35] = 0x1;
-            iVar4 = ((int (*)())Binding__GetBindingSlots)(param_2);
+            iVar4 = ((int (*)())Binding__GetBindingSlots)(binding);
             *(int *)(this + 0x30) = *(int *)(this + 0x30) + iVar4;
             uVar9 = ((int (*)())Binding__GetOpenGLType)(this_00);
             if ((0x8b5c < uVar9) && (uVar9 < 0x8b65)) {
@@ -1049,55 +1049,55 @@ LAB_97bb1538:
         uVar10 = uVar10 - 1;
       } while (iVar11 <= iVar3);
     }
-    __ZN7BindingD1Ev(param_2);
-    __ZdlPv(param_2);
+    __ZN7BindingD1Ev(binding);
+    __ZdlPv(binding);
     uVar2 = 1;
   }
   return uVar2;
 }
 
 /* BindingTable__NextUniformBinding @ 0x97bb171c (24 bytes) */
-int BindingTable__NextUniformBinding(this, param_2)
+int BindingTable__NextUniformBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   undefined4 nextBinding;
   
-  if (param_2 != (unsigned char *)0x0) {
-    nextBinding = ((int (*)())Binding__GetNextBinding)(param_2);
+  if (binding != (unsigned char *)0x0) {
+    nextBinding = ((int (*)())Binding__GetNextBinding)(binding);
     return nextBinding;
   }
   return *(undefined4 *)(this + 0x14);
 }
 
 /* BindingTable__FindUniformBinding @ 0x97bb1734 (116 bytes) */
-int BindingTable__FindUniformBinding(this, param_2)
+int BindingTable__FindUniformBinding(this, binding)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * binding;
 {
   int iVar1;
   unsigned char * this_00;
   
-  iVar1 = Binding__GetHash(param_2,*(uint *)this);
+  iVar1 = Binding__GetHash(binding,*(uint *)this);
   this_00 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 0x18));
-  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,param_2), iVar1 != 1))) {
+  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,binding), iVar1 != 1))) {
     this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
   }
   return this_00;
 }
 
 /* BindingTable__FindUniformBindingByName @ 0x97bb17a8 (116 bytes) */
-int BindingTable__FindUniformBindingByName(this, param_2)
+int BindingTable__FindUniformBindingByName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   unsigned char * this_00;
   
-  if (param_2 != (char *)0x0) {
+  if (str != (char *)0x0) {
     this_00 = operator_new(0x38);
     __ZN7BindingC1Ev(this_00);
     if (this_00 != (unsigned char *)0x0) {
-      Binding__SetName(this_00,param_2);
+      Binding__SetName(this_00,str);
       ((int (*)())BindingTable__FindUniformBinding)(this,this_00);
       __ZN7BindingD1Ev(this_00);
       __ZdlPv(this_00);
@@ -1107,9 +1107,9 @@ int BindingTable__FindUniformBindingByName(this, param_2)
 }
 
 /* BindingTable__FindClientUniformBindingLocationByName @ 0x97bb181c (264 bytes) */
-int BindingTable__FindClientUniformBindingLocationByName(this, param_2)
+int BindingTable__FindClientUniformBindingLocationByName(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   int iVar1;
   unsigned char * this_00;
@@ -1117,11 +1117,11 @@ int BindingTable__FindClientUniformBindingLocationByName(this, param_2)
   undefined4 uVar3;
   
   uVar3 = 0xffffffff;
-  if ((param_2 != (char *)0x0) && (iVar1 = _memcmp(param_2,"gl_",3), iVar1 != 0)) {
+  if ((str != (char *)0x0) && (iVar1 = _memcmp(str,"gl_",3), iVar1 != 0)) {
     this_00 = operator_new(0x38);
     __ZN7BindingC1Ev(this_00);
     if (this_00 != (unsigned char *)0x0) {
-      Binding__SetName(this_00,param_2);
+      Binding__SetName(this_00,str);
       pBVar2 = (unsigned char *)((int (*)())BindingTable__FindUniformBinding)(this,this_00);
       if (pBVar2 == (unsigned char *)0x0) {
         if (*(char *)(*(int *)(this_00 + 8) + *(int *)(this_00 + 0x10) + -1) != ']') {
@@ -1485,24 +1485,24 @@ int ConstructLinker(param_1)
 }
 
 /* DeleteLinker @ 0x97bb1eb8 (24 bytes) */
-int DeleteLinker(param_1)
-  unsigned char * param_1;
+int DeleteLinker(shHandleBase)
+  unsigned char * shHandleBase;
 {
-  if (param_1 == (unsigned char *)0x0) {
+  if (shHandleBase == (unsigned char *)0x0) {
     return;
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 4))(param_1);
+  (**(code **)(*(int *)shHandleBase + 4))(shHandleBase);
   return;
 }
 
 /* UpdateOperations @ 0x97bb1ed0 (504 bytes) */
-int UpdateOperations(param_1, param_2, param_3, param_4, param_5, param_6)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, param_3, _PPStreamChunk3, param_5, param_6)
+  unsigned char * _PPStreamChunk1;
+  unsigned char * _PPStreamChunk2;
   int param_3;
-  unsigned char * param_4;
+  unsigned char * _PPStreamChunk3;
   int param_5;
   int param_6;
 {
@@ -1523,10 +1523,10 @@ int UpdateOperations(param_1, param_2, param_3, param_4, param_5, param_6)
     do {
       iVar5 = 0;
       iVar2 = 0;
-      if (param_2 != (unsigned char *)0x0) {
-        _Var10 = *param_4;
-        p_Var4 = param_2;
-        p_Var6 = param_1;
+      if (_PPStreamChunk2 != (unsigned char *)0x0) {
+        _Var10 = *_PPStreamChunk3;
+        p_Var4 = _PPStreamChunk2;
+        p_Var6 = _PPStreamChunk1;
         do {
           uVar9 = *(uint *)(p_Var4 + 0xc);
           iVar8 = 0;
@@ -1550,7 +1550,7 @@ int UpdateOperations(param_1, param_2, param_3, param_4, param_5, param_6)
                 }
                 if (bVar1) {
 LAB_97bb1f94:
-                  if ((uint)*(ushort *)(p_Var7 + 0x12) == (uint)*(ushort *)(param_4 + 0x12) + iVar11
+                  if ((uint)*(ushort *)(p_Var7 + 0x12) == (uint)*(ushort *)(_PPStreamChunk3 + 0x12) + iVar11
                      ) {
                     iVar3 = iVar2;
                     if ((iVar2 != iVar5) && (iVar3 = iVar5, iVar2 < iVar5)) {
@@ -1563,7 +1563,7 @@ LAB_97bb1f94:
                     *(short *)(p_Var6 + iVar8 * 8 + 0x22) =
                          *(short *)(p_Var6 + iVar8 * 8 + 0x22) - (short)param_6;
                     uVar9 = *(uint *)(p_Var4 + 0xc);
-                    _Var10 = *param_4;
+                    _Var10 = *_PPStreamChunk3;
                     iVar2 = iVar3;
                   }
                 }
@@ -1590,7 +1590,7 @@ LAB_97bb1fe8:
             }
             if (bVar1) {
 LAB_97bb2064:
-              if ((uint)*(ushort *)(p_Var4 + 0x1a) == (uint)*(ushort *)(param_4 + 0x12) + iVar11) {
+              if ((uint)*(ushort *)(p_Var4 + 0x1a) == (uint)*(ushort *)(_PPStreamChunk3 + 0x12) + iVar11) {
                 iVar8 = iVar2;
                 if ((iVar2 != iVar5) && (iVar8 = iVar5, iVar2 < iVar5)) {
                   iVar2 = iVar5 - iVar2;
@@ -1616,10 +1616,10 @@ LAB_97bb20a4:
 }
 
 /* TGenericLinker__FindChunkDelta @ 0x97bb20c8 (84 bytes) */
-int TGenericLinker__FindChunkDelta(this, param_2, param_3)
+int TGenericLinker__FindChunkDelta(this, _PPStreamChunk1, _PPStreamChunk2)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * _PPStreamChunk1;
+  unsigned char * _PPStreamChunk2;
 {
   bool bVar1;
   unsigned char _Var2;
@@ -1627,8 +1627,8 @@ int TGenericLinker__FindChunkDelta(this, param_2, param_3)
   void *this_00;
   
   pcVar3 = DAT_a7b7bb8c;
-  _Var2 = *param_2;
-  if (_Var2 != *param_3) {
+  _Var2 = *_PPStreamChunk1;
+  if (_Var2 != *_PPStreamChunk2) {
     this_00 = *(void **)(this + 0x84);
                     
     __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
@@ -1649,6 +1649,6 @@ int TGenericLinker__FindChunkDelta(this, param_2, param_3)
     }
   }
 LAB_97bb21b8:
-  return (uint)*(ushort *)(param_2 + 0x12) - (uint)*(ushort *)(param_3 + 0x12);
+  return (uint)*(ushort *)(_PPStreamChunk1 + 0x12) - (uint)*(ushort *)(_PPStreamChunk2 + 0x12);
 }
 
