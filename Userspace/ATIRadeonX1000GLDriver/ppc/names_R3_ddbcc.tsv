@@ -1,0 +1,51 @@
+use	FUN_000ddbcc	iVar19	copiedCount	INFERRED	characters of the inline comment text printed so far (or the count to skip)	^\s*iVar19\ =\ 0;$@1	+22	all	all
+use	FUN_000ddbcc	iVar19	fieldLength	INFERRED	characters sprintf wrote for one float field of a def	^\s*iVar19\ =\ FUN_001a32d0\(pcVar5\ \+\ iVar21,"%s,\ ",puVar16,param_4,param_5,param_6,puVar2,puVar15\)$@1	+3	all	all
+use	FUN_000ddbcc	iVar19	literalCount	CONFIRMED	dcl_immed_cb: the "count = %d" dword: number of literal dwords that follow	^\s*iVar19\ =\ \*\(int\ \*\)param_1\[2\];$@1	+18	all	all
+use	FUN_000ddbcc	iVar21	fieldOffset	INFERRED	characters sprintf wrote so far for the earlier float fields of a def (offset of the next field)	^\s*iVar21\ =\ FUN_001a32d0\(acStack_132,"%s,\ ",puVar16,param_4,param_5,param_6,puVar2,puVar15\);$@1	+8	all	all
+use	FUN_000ddbcc	iVar21	literalCountCopy	INFERRED	copy of the literal count for the final printing	^\s*iVar21\ =\ iVar19;$@1	+3	all	all
+use	FUN_000ddbcc	iVar21	literalIndex	CONFIRMED	index of the literal dword being printed in dcl_immed_cb	^\s*iVar21\ =\ 0;$@1	+11	all	all
+use	FUN_000ddbcc	pcVar4	commentChar	CONFIRMED	current character of the inline comment text	^\s*pcVar4\ =\ "\ \);\ ";$@1	+29	all	all
+use	FUN_000ddbcc	pcVar4	repSuffix	CONFIRMED	"_rep " or " ": the text appended to the instruction depending on the repeat bit	^\s*pcVar4\ =\ "\ ";$@1	+5	all	all
+use	FUN_000ddbcc	puVar14	defFloat3Bits	CONFIRMED	the 4th dword of a float def, converted with GH_U2F when printed	^\s*puVar14\ =\ \(\*\(undefined4\ \*\ \*\)\(pfVar3\ \+\ \(3\)\)\);$@1	+14	all	all
+use	FUN_000ddbcc	puVar14	immediatePtr	CONFIRMED	pointer into the instruction stream at the first of the four literal dwords/floats of a def	^\s*puVar14\ =\ \(undefined4\ \*\)param_1\[2\];$@1	+9	all	all
+use	FUN_000ddbcc	puVar14	defWord3	CONFIRMED	fourth dword of an integer def (printed last)	^\s*puVar14\ =\ puVar2\ \+\ 2;$@1	+11	all	all
+use	FUN_000ddbcc	puVar2	defPtrAlias	INFERRED	alias of the pointer to the def's literal dwords (also passed along as a variadic sprintf argument)	^\s*puVar2\ =\ puVar14;$@1	+28	all	all
+use	FUN_000ddbcc	puVar2	immediatePtr2	CONFIRMED	pointer into the instruction stream at the four literal dwords of an integer def (hex)	^\s*puVar2\ =\ \(undefined4\ \*\)param_1\[2\];$@1	+9	all	all
+use	FUN_000ddbcc	uVar6	lastReturnR4	UNKNOWN	Ghidra 'extraout' copy of r4 returned by the previous helper call	^\s*uVar6\ =\ extraout_r4_x00241;$@1	+25	all	all
+use	FUN_000ddbcc	uVar6	declResult	INFERRED	64-bit return of the declaration operand printer FUN_000dd6bc (r3/r4)	^\s*uVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000dd6bc\)\(param_1,extraout_r4_x00204,pcVar5,param_4,param_5,param_6,param_7,$@1	+16	all	all
+use	FUN_000ddbcc	uVar6	immediateWord	CONFIRMED	next dword read from the instruction stream and printed as a decimal/hex literal	^\s*uVar6\ =\ \*\(undefined4\ \*\)param_1\[2\];$@1	+631	all	all
+use	FUN_000ddbcc	uVar6	defWord0	CONFIRMED	first of the four dwords of an integer def (printed as 0x%08lX)	^\s*uVar6\ =\ \*puVar2;$@1	+12	all	all
+use	FUN_000ddbcc	uVar6	lastReturnR4	UNKNOWN	Ghidra 'extraout' copy of r4 returned by the previous helper call	^\s*uVar6\ =\ extraout_r4_x00210;$@1	+129	all	all
+use	FUN_000ddbcc	uVar7	commentWordCount	CONFIRMED	low 16 bits of the word after the token: number of 4-byte groups of inline comment text	^\s*uVar7\ =\ \*puVar15;$@1	+8	all	all
+use	FUN_000ddbcc	uVar7	paramNumber	CONFIRMED	bits 16..23 of dclpp/dclv: printed as "_param(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0xff;$@1	+4	all	all
+use	FUN_000ddbcc	uVar7	memimportElement	CONFIRMED	bits 16..21 of memimport: printed as "_elem(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0x3f;$@1	+3	all	all
+use	FUN_000ddbcc	uVar7	exportStreamId	CONFIRMED	bits 16..21 of memexport: printed as "_exportStream(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0x3f;$@2	+5	all	all
+use	FUN_000ddbcc	uVar7	maxOutputVertexCount	CONFIRMED	bits 16..29 of dcl_max_output_vertex_count: printed as "(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0x3fff;$@1	+3	all	all
+use	FUN_000ddbcc	uVar7	outputSemantic	INFERRED	bits 16..29 of dcl_output: index into the semantic name table at 0x1dc3f4 (position, color, ...) when < 0x13	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0x3fff;$@2	+3	all	all
+use	FUN_000ddbcc	uVar7	interpolationMode	CONFIRMED	bits 19..21 of dcl_input: 1 constant, 2 linear, 3 linear_centroid, 4 linear_noperspective, 5 linear_noperspective_centroid	^\s*uVar7\ =\ uVar18\ >>\ 0x13\ \&\ 7;$@1	+3	all	all
+use	FUN_000ddbcc	uVar7	resourceId	CONFIRMED	bits 16..23 of dcl_resource: printed as "_id(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0xff;$@2	+5	all	all
+use	FUN_000ddbcc	uVar7	loadResourceId	CONFIRMED	bits 16..28 of load: printed as "_id(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0x1fff;$@1	+4	all	all
+use	FUN_000ddbcc	uVar7	resinfoResourceId	CONFIRMED	bits 16..27 of resinfo: printed as "_id(%d)"	^\s*uVar7\ =\ uVar18\ >>\ 0x10\ \&\ 0xfff;$@1	+8	all	all
+use	FUN_000ddbcc	iVar21	commentBytes	CONFIRMED	(word & 0xffff) * 4: bytes of inline comment text of the pseudo-op that prints " ); ..."	^\s*iVar21 = \(uVar7 & 0xffff\) \* 4;$@1	FUN_000da984\(param_1,uVar6,pcVar4	all	none
+local	FUN_000ddbcc	uVar8	defWord1	CONFIRMED	second dword of an integer def (printed as 0x%08lX)
+local	FUN_000ddbcc	uVar9	defWord2	CONFIRMED	third dword of an integer def (printed as 0x%08lX)
+local	FUN_000ddbcc	uVar11	defWord3Printed	CONFIRMED	fourth dword of an integer def (printed as 0x%08lX)
+local	FUN_000ddbcc	uVar10	memexportElemOffset	CONFIRMED	bits 23..28 of memexport: printed as "_elemOffset(%d)"
+local	FUN_000ddbcc	fVar12	defFloat0	CONFIRMED	first float of a def (printed with FUN_000cdc3c)
+local	FUN_000ddbcc	fVar17	defFloat1	CONFIRMED	second float of a def
+local	FUN_000ddbcc	fVar13	defFloat2	CONFIRMED	third float of a def
+local	FUN_000ddbcc	puVar16	fmtArgR5	UNKNOWN	first sprintf argument register (r5): the text buffer &local_198 on the float path, def word 0 on the integer path (Ghidra merged them)
+local	FUN_000ddbcc	puVar15	nextWordPtr	INFERRED	pointer to the stream word after the opcode token (disassembler[2] after the fetch); also forwarded as the last sprintf argument register (r10)
+local	FUN_000ddbcc	param_2	passThroughR4	UNKNOWN	Ghidra register input (r4), forwarded to the helper calls
+local	FUN_000ddbcc	param_3	passThroughR5	UNKNOWN	Ghidra register input (r5), forwarded to the helper calls
+local	FUN_000ddbcc	param_4	fmtArgR6	UNKNOWN	sprintf argument register r6 (def word 1 on the integer path)
+local	FUN_000ddbcc	param_5	fmtArgR7	UNKNOWN	sprintf argument register r7 (def word 2 on the integer path)
+local	FUN_000ddbcc	param_6	fmtArgR8	UNKNOWN	sprintf argument register r8 (def word 3 on the integer path)
+local	FUN_000ddbcc	param_7	fmtArgR9	UNKNOWN	sprintf argument register r9; also reset to 0 before dispatching to the per-opcode helpers
+local	FUN_000ddbcc	local_134	textBuffer	INFERRED	second sprintf text buffer (local_134 .. acStack_132); holds e.g. "0xNN, 0xNN" or the float list
+local	FUN_000ddbcc	local_133	textBufferByte1	INFERRED	second byte of textBuffer: the copy of the ", " separator literal is written byte by byte
+local	FUN_000ddbcc	local_198	scratchText	INFERRED	first sprintf text buffer (local_198 .. local_135): "_id(%d)", "(%d)", "count = %d " ...
+local	FUN_000ddbcc	pfVar3	defFloatPtr	CONFIRMED	pointer into the instruction stream at the four float literals of a float def (advanced by one float per read)
+local	FUN_000ddbcc	iVar20	commentCharIndex	CONFIRMED	1-based index of the inline comment character being printed
+local	FUN_000ddbcc	cVar1	commentStreamChar	CONFIRMED	character read from the instruction stream while printing the inline comment
+local	FUN_000ddbcc	local_194	scratchTextWord1	UNKNOWN	second word of scratchText (the buffer is addressed by &local_198); passed along as a call argument by the dcldef case

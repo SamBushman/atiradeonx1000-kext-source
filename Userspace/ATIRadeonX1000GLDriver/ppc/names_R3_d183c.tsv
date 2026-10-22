@@ -1,0 +1,99 @@
+use	FUN_000d183c	bVar4	texWriteMask	INFERRED	record byte offset 0x14 in the TEX part: destination write mask bits (r g b a)	^\s*bVar4\ =\ \*\(byte\ \*\)\(puVar41\ \+\ 5\);$@1	+23	all	all
+use	FUN_000d183c	cVar5	depthWrite	INFERRED	record byte offset 0x23 in the ALU part: depth output enable	^\s*cVar5\ =\ \*\(char\ \*\)\(\(int\)puVar41\ \+\ 0x23\);$@1	+1141	all	all
+use	FUN_000d183c	cVar6	alphaOutIndex	INFERRED	record byte offset 0x22 in the ALU part: alpha output index	^\s*cVar6\ =\ \*\(char\ \*\)\(\(int\)puVar41\ \+\ 0x22\);$@1	+10	all	all
+use	FUN_000d183c	cVar9	alphaPreOp	INFERRED	record byte offset 0x3f in the ALU part: alpha pre-op	^\s*cVar9\ =\ \*\(char\ \*\)\(\(int\)puVar41\ \+\ 0x3f\);$@1	+18	all	all
+use	FUN_000d183c	cVar9	alphaTempEnable	INFERRED	record byte offset 0x20 in the ALU part: alpha temp write enable	^\s*cVar9\ =\ \*\(char\ \*\)\(puVar41\ \+\ 8\);$@1	+14	all	all
+use	FUN_000d183c	cVar9	alphaPreOp	INFERRED	record byte offset 0x3f in the ALU part: alpha pre-op	^\s*cVar9\ =\ \*\(char\ \*\)\(\(int\)puVar41\ \+\ 0x3f\);$@2	+17	all	all
+use	FUN_000d183c	cVar9	rgbOutIndex	INFERRED	record byte offset 0x16 in the ALU part: RGB output index	^\s*cVar9\ =\ \*\(char\ \*\)\(\(int\)puVar41\ \+\ 0x16\);$@1	+10	all	all
+use	FUN_000d183c	cVar9	alphaTempEnable	INFERRED	record byte offset 0x20 in the ALU part: alpha temp write enable	^\s*cVar9\ =\ \*\(char\ \*\)\(puVar41\ \+\ 8\);$@2	+32	all	all
+use	FUN_000d183c	local_6c	rgbAuxC	INFERRED	record byte offset 0x28 in the ALU part: auxiliary address of RGB source 2	^\s*local_6c\ =\ \*\(ushort\ \*\)\(puVar41\ \+\ 10\);$@1	+232	all	all
+use	FUN_000d183c	local_80	rgbModA2	INFERRED	record byte offset 0x2d in the ALU part: RGB source 0 modifier	^\s*local_80\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2d\);$@1	+212	all	all
+use	FUN_000d183c	local_84	rgbModB2	INFERRED	record byte offset 0x2e in the ALU part: RGB source 1 modifier	^\s*local_84\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2e\);$@1	+215	all	all
+use	FUN_000d183c	local_88	rgbModC2	INFERRED	record byte offset 0x2f in the ALU part: RGB source 2 modifier	^\s*local_88\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2f\);$@1	+217	all	all
+use	FUN_000d183c	local_90	alphaModB2	INFERRED	record byte offset 0x3d in the ALU part: alpha source 1 modifier	^\s*local_90\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3d\);$@1	+221	all	all
+use	FUN_000d183c	local_94	alphaModC2	INFERRED	record byte offset 0x3e in the ALU part: alpha source 2 modifier	^\s*local_94\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3e\);$@1	+225	all	all
+use	FUN_000d183c	local_b0	rgbModA	INFERRED	record byte offset 0x2d in the ALU part: RGB source 0 modifier	^\s*local_b0\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2d\);$@1	+129	all	all
+use	FUN_000d183c	local_b4	rgbModB	INFERRED	record byte offset 0x2e in the ALU part: RGB source 1 modifier	^\s*local_b4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2e\);$@1	+131	all	all
+use	FUN_000d183c	local_b8	rgbModC	INFERRED	record byte offset 0x2f in the ALU part: RGB source 2 modifier	^\s*local_b8\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2f\);$@1	+131	all	all
+use	FUN_000d183c	local_c0	alphaModB	INFERRED	record byte offset 0x3d in the ALU part: alpha source 1 modifier	^\s*local_c0\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3d\);$@1	+133	all	all
+use	FUN_000d183c	local_c4	alphaModC	INFERRED	record byte offset 0x3e in the ALU part: alpha source 2 modifier	^\s*local_c4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3e\);$@1	+134	all	all
+use	FUN_000d183c	local_d0	alphaSelectCBase	INFERRED	record byte offset 0x3b in the ALU part: alpha source 2 select (bit 7 masked off)	^\s*local_d0\ =\ \*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3b\)\ \&\ 0xffffff7f;$@1	+243	all	all
+use	FUN_000d183c	local_d4	alphaSelectBBase	INFERRED	record byte offset 0x3a in the ALU part: alpha source 1 select (bit 7 masked off)	^\s*local_d4\ =\ \*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3a\)\ \&\ 0xffffff7f;$@1	+239	all	all
+use	FUN_000d183c	local_d8	alphaSelectABase	INFERRED	record byte offset 0x39 in the ALU part: alpha source 0 select (bit 7 masked off)	^\s*local_d8\ =\ \*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x39\)\ \&\ 0xffffff7f;$@1	+237	all	all
+use	FUN_000d183c	local_e0	rgbSelectBBase	INFERRED	record byte offset 0x2b in the ALU part: RGB source 1 select (bit 7 masked off)	^\s*local_e0\ =\ \*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2b\)\ \&\ 0xffffff7f;$@1	+235	all	all
+use	FUN_000d183c	local_e4	rgbSelectABase	INFERRED	record byte offset 0x2a in the ALU part: RGB source 0 select (bit 7 masked off)	^\s*local_e4\ =\ \*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2a\)\ \&\ 0xffffff7f;$@1	+233	all	all
+use	FUN_000d183c	uVar19	alphaSelectC	INFERRED	record byte offset 0x3b in the ALU part: alpha source 2 select	^\s*uVar19\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3b\);$@1	+225	all	all
+use	FUN_000d183c	uVar26	alphaSelectB	INFERRED	record byte offset 0x3a in the ALU part: alpha source 1 select	^\s*uVar26\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3a\);$@1	+226	all	all
+use	FUN_000d183c	uVar27	texDestReg	INFERRED	record byte offset 0xc in the TEX part: destination register of the lookup (r%02d)	^\s*uVar27\ =\ \(uint\)\*\(ushort\ \*\)\(puVar41\ \+\ 3\);$@1	+16	all	all
+use	FUN_000d183c	uVar27	alphaAuxC	INFERRED	record byte offset 0x37 in the ALU part: auxiliary byte of alpha source 2	^\s*uVar27\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x37\);$@1	+227	all	all
+use	FUN_000d183c	uVar28	texSrcReg	INFERRED	record byte offset 0xe in the TEX part: source register (bit 14 = relative r[AL+nn])	^\s*uVar28\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0xe\);$@1	+35	all	all
+use	FUN_000d183c	uVar28	alphaSelectB2	INFERRED	record byte offset 0x3a in the ALU part: alpha source 1 select	^\s*uVar28\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3a\);$@1	+138	all	all
+use	FUN_000d183c	uVar28	alphaAuxB	INFERRED	record byte offset 0x36 in the ALU part: auxiliary byte of alpha source 1	^\s*uVar28\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x36\);$@1	+225	all	all
+use	FUN_000d183c	uVar29	rgbSelectB	INFERRED	record byte offset 0x2b in the ALU part: RGB source 1 select	^\s*uVar29\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x2b\);$@1	+136	all	all
+use	FUN_000d183c	uVar34	texUnit	INFERRED	record byte offset 0x19 in the TEX part: texture unit, printed as tex%02d	^\s*uVar34\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x19\);$@1	+33	all	all
+use	FUN_000d183c	uVar34	alphaSelectA	INFERRED	record byte offset 0x39 in the ALU part: alpha source 0 select	^\s*uVar34\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x39\);$@1	+137	all	all
+use	FUN_000d183c	uVar34	rgbAddrA	INFERRED	record byte offset 0xe in the ALU part: RGB source 0 address	^\s*uVar34\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0xe\);$@1	+241	all	all
+use	FUN_000d183c	uVar36	rgbAddrA2	INFERRED	record byte offset 0xe in the ALU part: RGB source 0 address	^\s*uVar36\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0xe\);$@1	+150	all	all
+use	FUN_000d183c	uVar7	texSrcReg2	INFERRED	record byte offset 0xe in the TEX part: source register (bit 14 = relative r[AL+nn])	^\s*uVar7\ =\ \*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0xe\);$@1	+88	all	all
+use	FUN_000d183c	uVar7	rgbAuxA	INFERRED	record byte offset 0x24 in the ALU part: halfword after ALPHA_ADDR: auxiliary address of RGB source 0 (tested with FUN_000d10a8)	^\s*uVar7\ =\ \*\(ushort\ \*\)\(puVar41\ \+\ 9\);$@1	+216	all	all
+use	FUN_000d183c	uVar8	texDestReg2	INFERRED	record byte offset 0xc in the TEX part: destination register of the lookup (r%02d)	^\s*uVar8\ =\ \*\(ushort\ \*\)\(puVar41\ \+\ 3\);$@1	+35	all	all
+use	FUN_000d183c	uVar8	rgbAuxB	INFERRED	record byte offset 0x26 in the ALU part: auxiliary address of RGB source 1	^\s*uVar8\ =\ \*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0x26\);$@1	+218	all	all
+local	FUN_000d183c	param_4	argR6	UNKNOWN	Ghidra register parameter (r6): the printf variadic slot the dump's printf calls read; holds whichever value the current line prints (text, number or leftover)
+local	FUN_000d183c	param_5	argR7	UNKNOWN	Ghidra register parameter (r7): printf variadic slot
+local	FUN_000d183c	param_6	argR8	UNKNOWN	Ghidra register parameter (r8): printf variadic slot
+local	FUN_000d183c	param_7	argR9	UNKNOWN	Ghidra register parameter (r9): printf variadic slot (often a string such as " ign_unc")
+local	FUN_000d183c	param_8	argR10	UNKNOWN	Ghidra register parameter (r10): printf variadic slot
+local	FUN_000d183c	uStack0000001c	dumpLabelSlot	INFERRED	spill of dumpLabel (r4 on entry), printed with "%s" in the Begin/End headers
+local	FUN_000d183c	puStack00000020	dumpIdSlot	INFERRED	spill of dumpId (r5 on entry), printed with "%d" in the Begin/End headers
+local	FUN_000d183c	local_a0	recordCount	CONFIRMED	pixelShader[2] (header +0x08): number of instruction records after the header (Loki format)
+local	FUN_000d183c	local_7c	recordCount2	CONFIRMED	pixelShader[2]: number of instruction records (r520 format)
+local	FUN_000d183c	local_70	instructionNumber	CONFIRMED	sequence number printed as "%d" before tex/alu/cf lines of the r520 format; incremented after every record
+local	FUN_000d183c	local_f4	texIndex	CONFIRMED	TEX instruction counter printed as "tex %02d" (r520 format)
+local	FUN_000d183c	local_f0	aluIndex	CONFIRMED	ALU instruction counter printed as "alu %02d" (r520 format)
+local	FUN_000d183c	local_f8	cfIndex	CONFIRMED	flow-control instruction counter printed as "cf  %02d"
+local	FUN_000d183c	local_e8	texNumber	CONFIRMED	TEX instruction counter printed as "tex %02d" (Loki format)
+local	FUN_000d183c	local_a4	aluNumber	CONFIRMED	ALU instruction counter printed as "alu %02d" (Loki format)
+local	FUN_000d183c	local_a8	previousIsAlu	INFERRED	previous record was an ALU record (kind 3 or 4): a new "Level" header is printed after a TEX record that follows ALU records
+local	FUN_000d183c	local_2b8	predicateText	CONFIRMED	text "p" or "!p" (predicate / negated predicate) built byte by byte and printed with %s
+local	FUN_000d183c	local_2b4	semWaitText	CONFIRMED	text " sem_wait" (first 4 bytes; the rest is local_2b0/local_2ac) or empty
+local	FUN_000d183c	local_2b0	semWaitText4	CONFIRMED	bytes 4..7 of the " sem_wait" text
+local	FUN_000d183c	local_2ac	semWaitText8	CONFIRMED	bytes 8..9 of the " sem_wait" text
+local	FUN_000d183c	local_296	semGrabText	CONFIRMED	text " sem_grab" (first 4 bytes) or empty
+local	FUN_000d183c	local_292	semGrabText4	CONFIRMED	bytes 4..7 of the " sem_grab" text
+local	FUN_000d183c	local_28e	semGrabText8	CONFIRMED	bytes 8..9 of the " sem_grab" text
+local	FUN_000d183c	local_28c	aluWaitText	CONFIRMED	text " alu_wait" (first 4 bytes) or empty
+local	FUN_000d183c	local_288	aluWaitText4	CONFIRMED	bytes 4..7 of the " alu_wait" text
+local	FUN_000d183c	local_284	aluWaitText8	CONFIRMED	bytes 8..9 of the " alu_wait" text
+local	FUN_000d183c	local_282	ignUncText	CONFIRMED	text " ign_unc" (first 4 bytes) or empty
+local	FUN_000d183c	local_27e	ignUncText4	CONFIRMED	bytes 4..7 of the " ign_unc" text
+local	FUN_000d183c	local_27a	ignUncText8	CONFIRMED	byte 8 of the " ign_unc" text
+local	FUN_000d183c	local_2aa	srcpTextA	INFERRED	text of the first srcp operand (FUN_000d0450/d10dc: "rNN" or "cNN"), also reused for the "red"/"alpha" word of cf lines
+local	FUN_000d183c	local_2a0	srcpTextB	INFERRED	text of the second srcp operand, also reused for the lt/eq/ge/ne word of cf lines
+local	FUN_000d183c	auStack_278	registerText	CONFIRMED	"r%02d" or "r[AL+%02d]": the TEX source register text
+local	FUN_000d183c	auStack_269	dxSwizzleTextA	INFERRED	"%s%s%s%s" swizzle text of the dx operand (lookup_dxdy)
+local	FUN_000d183c	auStack_25a	writeMaskText	CONFIRMED	"%s%s%s%s" TEX destination write mask text (letters or '_')
+local	FUN_000d183c	auStack_24b	srcSwizzleText	CONFIRMED	"%s%s%s%s" TEX source swizzle text
+local	FUN_000d183c	auStack_23c	operandText0	INFERRED	operand text buffer #0 (the same 8-word arrays serve rgb sources in one format and alpha sources in the other)
+local	FUN_000d183c	auStack_21c	operandText1	INFERRED	operand text buffer #1
+local	FUN_000d183c	auStack_1fc	operandText2	INFERRED	operand text buffer #2
+local	FUN_000d183c	auStack_1dc	operandText3	INFERRED	operand text buffer #3
+local	FUN_000d183c	auStack_1bc	operandText4	INFERRED	operand text buffer #4
+local	FUN_000d183c	auStack_19c	operandText5	INFERRED	operand text buffer #5
+local	FUN_000d183c	auStack_17c	operandText6	INFERRED	operand text buffer #6
+local	FUN_000d183c	auStack_15c	cfWordText	CONFIRMED	"0x%02x %1d %s %s %s %s %1d %1d %d": the decoded flow-control word, matched against the table of known words at 0x1dc2cc
+use	FUN_000d183c	puVar32	rsScanRecord	INFERRED	cursor over the records after record 1, checking that each is an RS record (kind word == 1)	^\s*puVar32\ =\ param_1\ \+\ 0x24;$@1	+48	all	all
+use	FUN_000d183c	puVar32	rsScanRecord2	INFERRED	cursor over the records after record 1, checking that each is an RS record (r520 format)	^\s*puVar32\ =\ param_1\ \+\ 0x24;$@2	+58	all	all
+use	FUN_000d183c	puVar33	rsRecord	CONFIRMED	RS record being printed (Loki format): starts at record 1, then follows the previous record	^\s*puVar33\ =\ param_1\ \+\ 0x12;$@1	+47	all	all
+use	FUN_000d183c	puVar33	rsRecord2	CONFIRMED	RS record being printed (r520 format)	^\s*puVar33\ =\ param_1\ \+\ 0x12;$@2	+57	all	all
+use	FUN_000d183c	puVar41	statByteCursor	CONFIRMED	byte cursor over the sixteen texture-lookup counters at header +0x2a (printed " %2d" each)	^\s*puVar41\ =\ param_1;$@1	+5	all	all
+use	FUN_000d183c	puVar41	rsNextRecord	INFERRED	record after the RS record just printed (Loki format)	^\s*puVar41\ =\ puVar32;$@1	+47	all	all
+use	FUN_000d183c	puVar41	instructionRecord	CONFIRMED	current 0x48-byte instruction record of the Loki-format dump: pixelShader + index*0x12 words, advanced by 0x12 words per record	^\s*puVar41\ =\ param_1\ \+\ uVar37\ \*\ 0x12;$@1	+495	all	all
+use	FUN_000d183c	puVar41	rsNextRecord2	INFERRED	record after the RS record just printed (r520 format)	^\s*puVar41\ =\ puVar32;$@2	+57	all	all
+use	FUN_000d183c	puVar41	instructionRecord2	CONFIRMED	current 0x48-byte instruction record of the r520-format dump	^\s*puVar41\ =\ param_1\ \+\ iVar31\ \*\ 0x12;$@1	+1086	all	all
+use	FUN_000d183c	local_ac	alphaSelectC2	INFERRED	record byte offset 0x3b in the ALU part: alpha source 2 select	^\s*local_ac\ =\ \(byte\ \*\)\(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x3b\);$@1	+151	all	all
+use	FUN_000d183c	puVar13	rgbAddrB	INFERRED	record byte offset 0x10 in the ALU part: RGB source 1 address	^\s*puVar13\ =\ \(uint\ \*\)\(uint\)\*\(ushort\ \*\)\(puVar41\ \+\ 4\);$@1	+240	all	all
+use	FUN_000d183c	puVar13	rgbAddrB	INFERRED	record byte offset 0x10 in the ALU part: RGB source 1 address	^\s*\(\(int\ \(\*\)\(\)\)FUN_000d03b4\)\(0,"sop\(\)",puVar13,puVar32,puVar35,param_6,param_7,uVar19\);$@1	+17	all	all
+use	FUN_000d183c	puVar32	rgbAddrC	INFERRED	record byte offset 0x12 in the ALU part: RGB source 2 address	^\s*puVar32\ =\ \(uint\ \*\)\(uint\)\*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0x12\);$@2	+302	all	all
+use	FUN_000d183c	puVar33	texOpcode	INFERRED	record byte offset 0x1a in the TEX part: 0 NOP 1 lookup 2 kill 3 lookup_proj 4 lookup_lodbias 5 lookup_lod 6 lookup_dxdy 7 lookup_uncached	^\s*puVar33\ =\ \(uint\ \*\)\(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x1a\);$@1	+8	all	all
+use	FUN_000d183c	puVar33	texUnit2	INFERRED	record byte offset 0x19 in the TEX part: texture unit, printed as tex%02d	^\s*puVar33\ =\ \(uint\ \*\)\(uint\)\*\(byte\ \*\)\(\(int\)puVar41\ \+\ 0x19\);$@1	+211	all	all
+use	FUN_000d183c	puVar35	alphaAddrA	INFERRED	record byte offset 0x1a in the ALU part: alpha source 0 address	^\s*puVar35\ =\ \(uint\ \*\)\(uint\)\*\(ushort\ \*\)\(\(int\)puVar41\ \+\ 0x1a\);$@2	+302	all	all
