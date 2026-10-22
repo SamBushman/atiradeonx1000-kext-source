@@ -1,10 +1,10 @@
 #include "decls.h"
 
 /* __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped @ 0x97b9ba78 (208 bytes) */
-int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, param_2, param_3, param_4, param_5, param_6)
+int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, param_2, intermTyped, param_4, param_5, param_6)
   void *this;
   int param_2;
-  unsigned char * param_3;
+  unsigned char * intermTyped;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -13,10 +13,10 @@ int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, param_2, param_3
   undefined4 in_r9;
   undefined4 in_r10;
   
-  iVar1 = (**(code **)(*(int *)param_3 + 0x40))(param_3,param_2,param_3,param_4,param_5,param_6);
-  if ((((iVar1 == 3) && (iVar1 = (**(code **)(*(int *)param_3 + 0x54))(param_3), iVar1 == 0)) &&
-      (iVar1 = (**(code **)(*(int *)param_3 + 0x50))(param_3), iVar1 == 0)) &&
-     (iVar1 = (**(code **)(*(int *)param_3 + 0x58))(param_3), iVar1 == 0)) {
+  iVar1 = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped,param_2,intermTyped,param_4,param_5,param_6);
+  if ((((iVar1 == 3) && (iVar1 = (**(code **)(*(int *)intermTyped + 0x54))(intermTyped), iVar1 == 0)) &&
+      (iVar1 = (**(code **)(*(int *)intermTyped + 0x50))(intermTyped), iVar1 == 0)) &&
+     (iVar1 = (**(code **)(*(int *)intermTyped + 0x58))(intermTyped), iVar1 == 0)) {
     return 0;
   }
   TParseContext__error
@@ -45,11 +45,11 @@ int __ZN13TParseContext14boolErrorCheckEiRK11TPublicType(this, param_2, publicTy
 }
 
 /* TParseContext__samplerErrorCheck @ 0x97b9bbcc (184 bytes) */
-int TParseContext__samplerErrorCheck(this, param_2, param_3, param_4)
+int TParseContext__samplerErrorCheck(this, param_2, publicType, str)
   unsigned char * this;
   int param_2;
-  unsigned char * param_3;
-  char *param_4;
+  unsigned char * publicType;
+  char *str;
 {
   int iVar1;
   char *basicString;
@@ -58,13 +58,13 @@ int TParseContext__samplerErrorCheck(this, param_2, param_3, param_4)
   undefined4 in_r9;
   undefined4 in_r10;
   
-  iVar1 = *(int *)param_3;
+  iVar1 = *(int *)publicType;
   if (iVar1 == 0xe) {
-    iVar1 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(param_3 + 0x14));
+    iVar1 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(publicType + 0x14));
     if (iVar1 == 0) {
       return 0;
     }
-    basicString = (char *)TType__getBasicString(*(undefined4 *)param_3);
+    basicString = (char *)TType__getBasicString(*(undefined4 *)publicType);
     pcVar3 = "(structure contains a sampler)";
   }
   else {
@@ -74,15 +74,15 @@ int TParseContext__samplerErrorCheck(this, param_2, param_3, param_4)
     basicString = (char *)TType__getBasicString(iVar1);
     pcVar3 = "";
   }
-  error((int)this,(char *)param_2,param_4,basicString,pcVar3,in_r8,in_r9,in_r10);
+  error((int)this,(char *)param_2,str,basicString,pcVar3,in_r8,in_r9,in_r10);
   return 1;
 }
 
 /* TParseContext__structQualifierErrorCheck @ 0x97b9bc84 (172 bytes) */
-int TParseContext__structQualifierErrorCheck(this, param_2, param_3, param_4, param_5, param_6, param_7)
+int TParseContext__structQualifierErrorCheck(this, param_2, publicType, param_4, param_5, param_6, param_7)
   unsigned char * this;
   int param_2;
-  unsigned char * param_3;
+  unsigned char * publicType;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -93,8 +93,8 @@ int TParseContext__structQualifierErrorCheck(this, param_2, param_3, param_4, pa
   undefined4 uVar3;
   undefined4 in_r10;
   
-  iVar1 = *(int *)(param_3 + 4);
-  if ((iVar1 - 3U < 3) && (*(int *)param_3 == 0xe)) {
+  iVar1 = *(int *)(publicType + 4);
+  if ((iVar1 - 3U < 3) && (*(int *)publicType == 0xe)) {
     qualifierString = (char *)getQualifierString(iVar1);
     error((int)this,(char *)param_2,"cannot be used with a structure",qualifierString,"",param_6,param_7,
           in_r10);
@@ -102,7 +102,7 @@ int TParseContext__structQualifierErrorCheck(this, param_2, param_3, param_4, pa
   }
   else {
     if ((iVar1 != 6) &&
-       (iVar1 = ((int (*)())TParseContext__samplerErrorCheck)(this,param_2,param_3,"samplers must be uniform"), iVar1 != 0)) {
+       (iVar1 = ((int (*)())TParseContext__samplerErrorCheck)(this,param_2,publicType,"samplers must be uniform"), iVar1 != 0)) {
       return 1;
     }
     uVar3 = 0;
@@ -111,11 +111,11 @@ int TParseContext__structQualifierErrorCheck(this, param_2, param_3, param_4, pa
 }
 
 /* TParseContext__parameterSamplerErrorCheck @ 0x97b9bd30 (184 bytes) */
-int TParseContext__parameterSamplerErrorCheck(this, param_2, param_3, param_4)
+int TParseContext__parameterSamplerErrorCheck(this, param_2, qualifier, type)
   unsigned char * this;
   int param_2;
-  int param_3;
-  int *param_4;
+  int qualifier;
+  int *type;
 {
   int iVar1;
   char *basicString;
@@ -124,9 +124,9 @@ int TParseContext__parameterSamplerErrorCheck(this, param_2, param_3, param_4)
   undefined4 in_r9;
   undefined4 in_r10;
   
-  if (((param_3 - 10U < 2) && (iVar1 = (**(code **)(*param_4 + 0x20))(param_4), iVar1 != 0xe)) &&
-     (iVar1 = (**(code **)(*param_4 + 0x20))(param_4), iVar1 - 5U < 8)) {
-    basicString = (char *)TType__getBasicString((uint)param_4[9] >> 0x13 & 0x3f);
+  if (((qualifier - 10U < 2) && (iVar1 = (**(code **)(*type + 0x20))(type), iVar1 != 0xe)) &&
+     (iVar1 = (**(code **)(*type + 0x20))(type), iVar1 - 5U < 8)) {
+    basicString = (char *)TType__getBasicString((uint)type[9] >> 0x13 & 0x3f);
     error((int)this,(char *)param_2,"samplers cannot be output parameters",basicString,"",in_r8,in_r9,
           in_r10);
     uVar3 = 1;
@@ -138,21 +138,21 @@ int TParseContext__parameterSamplerErrorCheck(this, param_2, param_3, param_4)
 }
 
 /* TParseContext__containsSampler @ 0x97b9bde8 (180 bytes) */
-int TParseContext__containsSampler(this, param_2)
+int TParseContext__containsSampler(this, type)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * type;
 {
   int iVar1;
   undefined4 uVar2;
   int iVar3;
   uint uVar4;
   
-  iVar1 = (**(code **)(*(int *)param_2 + 0x20))(param_2,param_2);
+  iVar1 = (**(code **)(*(int *)type + 0x20))(type,type);
   uVar2 = 1;
   if (7 < iVar1 - 5U) {
-    iVar1 = (**(code **)(*(int *)param_2 + 0x20))(param_2);
+    iVar1 = (**(code **)(*(int *)type + 0x20))(type);
     if (iVar1 == 0xe) {
-      iVar1 = *(int *)(param_2 + 8);
+      iVar1 = *(int *)(type + 8);
       for (uVar4 = 0; iVar3 = *(int *)(iVar1 + 4), uVar4 < (uint)(*(int *)(iVar1 + 8) - iVar3 >> 3);
           uVar4 = uVar4 + 1) {
         iVar3 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(iVar3 + uVar4 * 8));
@@ -316,12 +316,12 @@ LAB_97b9c154:
 }
 
 /* TParseContext__arrayErrorCheck @ 0x97b9c180 (2552 bytes) */
-int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
+int TParseContext__arrayErrorCheck(param_1, param_2, text, publicType, intermTyped, param_6, param_7, param_8, param_9, param_10, param_11)
   int param_1;
   unsigned char * param_2;
-  unsigned char * param_3;
-  uint param_4;
-  uint param_5;
+  unsigned char * text;
+  uint publicType;
+  uint intermTyped;
   uint param_6;
   uint param_7;
   uint param_8;
@@ -329,7 +329,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   undefined4 param_10;
   int *param_11;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, param_2, text, publicType, intermTyped, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
   uint uVar3;
@@ -405,11 +405,11 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   uint local_40;
   uint local_3c;
   
-  (*(uint *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(uint *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(uint *)((unsigned char *)ghidra_home + 12)) = publicType;
+  (*(uint *)((unsigned char *)ghidra_home + 16)) = intermTyped;
   (*(uint *)((unsigned char *)ghidra_home + 20)) = param_6;
   (*(uint *)((unsigned char *)ghidra_home + 24)) = param_7;
-  if (((param_8 == 0) && (param_5 != 3)) && (param_5 != 2)) {
+  if (((param_8 == 0) && (intermTyped != 3)) && (intermTyped != 2)) {
     bVar1 = param_11 == (int *)0x0;
     (*(uint *)((unsigned char *)ghidra_home + 28)) = 1;
     piVar7 = (int *)0x0;
@@ -424,8 +424,8 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
       iVar9 = (piVar21[1] - iVar17 >> 2) + -1;
       while( true ) {
         iVar19 = *(int *)(iVar17 + iVar9 * 4);
-        psVar11 = param_3;
-        std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_90,iVar19,param_3);
+        psVar11 = text;
+        std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_90,iVar19,text);
         a0 = (int *)0x0;
         if (local_90[0] != *(int *)(iVar19 + 4)) {
           a0 = *(int **)(local_90[0] + 0x18);
@@ -441,7 +441,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
         local_3c = (uint)(iVar9 == (piVar21[1] - *piVar21 >> 2) + -1);
       }
       if ((a0 == (int *)0x0) || (local_3c == 0)) {
-        local_12c = (char *)TParseContext__reservedErrorCheck((unsigned char *)param_1,(int)param_2,param_3);
+        local_12c = (char *)TParseContext__reservedErrorCheck((unsigned char *)param_1,(int)param_2,text);
         bVar22 = (local_12c == (char *)0x0) << 1;
         if (local_12c != (char *)0x0) {
           return 1;
@@ -505,7 +505,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
           }
         }
         local_120 = ppuVar6;
-        piVar21[1] = (int)param_3;
+        piVar21[1] = (int)text;
         param_8 = 0;
         *piVar21 = (int)(PTR_vtable_a7b7c0b4 + 8);
         piVar21[4] = (int)local_12c;
@@ -563,7 +563,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
         }
         if (local_12c != (char *)0x0) {
 LAB_97b9caf4:
-          iVar9 = TParseContext__voidErrorCheck((unsigned char *)param_1,(int)param_2,param_3,
+          iVar9 = TParseContext__voidErrorCheck((unsigned char *)param_1,(int)param_2,text,
                                  (unsigned char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
           if (iVar9 != 0) {
             return 1;
@@ -573,23 +573,23 @@ LAB_97b9caf4:
         if (piVar21 != (int *)0x0) {
           (**(code **)(*piVar21 + 4))(piVar21);
         }
-        iVar17 = *(int *)(param_3 + 4);
+        iVar17 = *(int *)(text + 4);
         iVar9 = *(int *)(iVar17 + -0xc);
         uVar16 = (uint)*DAT_a7b7ba18;
         pcVar14 = "INTERNAL ERROR inserting new symbol";
       }
       else {
-        iVar9 = (**(code **)(*a0 + 0x10))(a0,a1,psVar11,param_4,param_5,param_6,iVar17);
+        iVar9 = (**(code **)(*a0 + 0x10))(a0,a1,psVar11,publicType,intermTyped,param_6,iVar17);
         if (iVar9 == 0) {
-          iVar17 = *(int *)(param_3 + 4);
+          iVar17 = *(int *)(text + 4);
           iVar9 = *(int *)(iVar17 + -0xc);
           uVar16 = (uint)*DAT_a7b7ba18;
           pcVar14 = "variable expected";
         }
         else {
-          iVar9 = (**(code **)(a0[3] + 0x38))(a0 + 3,a1_00,psVar11,param_4,param_5,param_6,iVar17);
+          iVar9 = (**(code **)(a0[3] + 0x38))(a0 + 3,a1_00,psVar11,publicType,intermTyped,param_6,iVar17);
           if (iVar9 == 0) {
-            iVar17 = *(int *)(param_3 + 4);
+            iVar17 = *(int *)(text + 4);
             iVar9 = *(int *)(iVar17 + -0xc);
             uVar16 = (uint)*DAT_a7b7ba18;
             pcVar14 = "redeclaring non-array as array";
@@ -657,7 +657,7 @@ LAB_97b9caf4:
             if (bVar2) {
               for (iVar9 = a0[0xf]; iVar9 != 0; iVar9 = *(int *)(iVar9 + 0x20)) {
                 if (*(int *)piVar7[0xc] < *(int *)(iVar9 + 0x1c)) {
-                  iVar17 = *(int *)(param_3 + 4);
+                  iVar17 = *(int *)(text + 4);
                   iVar9 = *(int *)(iVar17 + -0xc);
                   uVar16 = (uint)*DAT_a7b7ba18;
                   pcVar14 = "higher index value already used for the array";
@@ -672,13 +672,13 @@ LAB_97b9caf4:
               }
               goto LAB_97b9caf4;
             }
-            iVar17 = *(int *)(param_3 + 4);
+            iVar17 = *(int *)(text + 4);
             iVar9 = *(int *)(iVar17 + -0xc);
             uVar16 = (uint)*DAT_a7b7ba18;
             pcVar14 = "redeclaration of array with a different type";
           }
           else {
-            iVar17 = *(int *)(param_3 + 4);
+            iVar17 = *(int *)(text + 4);
             iVar9 = *(int *)(iVar17 + -0xc);
             uVar16 = (uint)*DAT_a7b7ba18;
             pcVar14 = "redeclaration of array with size";
@@ -687,20 +687,20 @@ LAB_97b9caf4:
       }
     }
     else {
-      iVar17 = *(int *)(param_3 + 4);
+      iVar17 = *(int *)(text + 4);
       iVar9 = *(int *)(iVar17 + -0xc);
       uVar16 = (uint)*DAT_a7b7ba18;
       pcVar14 = "array size must be a positive integer";
     }
 LAB_97b9cb40:
     *(char *)(iVar17 + iVar9) = (char)uVar16;
-    error(param_1,(char *)param_2,pcVar14,*(char **)(param_3 + 4),"",param_6,uVar16,param_8);
+    error(param_1,(char *)param_2,pcVar14,*(char **)(text + 4),"",param_6,uVar16,param_8);
   }
   else {
     local_fc = (param_8 & 1) << 9 |
                (param_7 & 1) << 10 |
                (param_6 & 0xff) << 0xb |
-               (param_4 & 0x3f) << 0x13 | param_5 << 0x19 | local_fc & 0x1ff;
+               (publicType & 0x3f) << 0x13 | intermTyped << 0x19 | local_fc & 0x1ff;
     local_b8 = param_10;
     local_120 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
     local_110 = (void *)0x0;
@@ -716,13 +716,13 @@ LAB_97b9cb40:
     local_104 = 0;
     (*(uint *)((unsigned char *)ghidra_home + 28)) = param_8;
     pcVar14 = local_110;
-    local_f0 = param_4;
-    local_ec = (unsigned char *)param_5;
+    local_f0 = publicType;
+    local_ec = (unsigned char *)intermTyped;
     local_e8 = param_6;
     local_e4 = param_7;
     local_e0 = param_8;
-    local_d0 = param_4;
-    local_cc = (unsigned char *)param_5;
+    local_d0 = publicType;
+    local_cc = (unsigned char *)intermTyped;
     local_c8 = param_6;
     local_c4 = param_7;
     local_c0 = param_8;
@@ -732,7 +732,7 @@ LAB_97b9cb40:
       uVar23 = TType__setStructSize((unsigned char *)&local_120,*(unsigned char **)(param_9 + 8));
       local_108 = (undefined4)((ulonglong)uVar23 >> 0x20);
       iVar9 = (**(code **)(*(int *)local_bc + 0x18))
-                        (local_bc,(int)uVar23,uVar13,param_5,param_6,param_4,*(int *)local_bc);
+                        (local_bc,(int)uVar23,uVar13,intermTyped,param_6,publicType,*(int *)local_bc);
       *(byte *)(*(int *)(iVar9 + 4) + *(int *)(*(int *)(iVar9 + 4) + -0xc)) = *DAT_a7b7ba18;
       pcVar18 = *(char **)(iVar9 + 4);
       pTVar10 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
@@ -749,7 +749,7 @@ LAB_97b9cb40:
     local_110 = pcVar14;
     TType__getCompleteString(&local_130,(unsigned char *)&local_120);
     local_12c[*(int *)(local_12c + -0xc)] = *DAT_a7b7ba18;
-    error(param_1,(char *)param_2,"cannot declare arrays of this type",local_12c,"",param_4,
+    error(param_1,(char *)param_2,"cannot declare arrays of this type",local_12c,"",publicType,
           local_12c,param_7);
     piVar7 = (int *)(local_12c + -4);
     local_a0[0] = local_130;
@@ -770,10 +770,10 @@ LAB_97b9cb40:
 }
 
 /* TParseContext__arraySetMaxSize @ 0x97b9cb78 (600 bytes) */
-int TParseContext__arraySetMaxSize(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__arraySetMaxSize(this, intermSymbol, type, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermSymbol;
+  unsigned char * type;
   int param_4;
   int param_5;
   int param_6;
@@ -804,7 +804,7 @@ int TParseContext__arraySetMaxSize(this, param_2, param_3, param_4, param_5, par
   local_50 = 0;
   piVar7 = *(int **)(this + 4);
   iVar5 = param_6;
-  uVar2 = (**(code **)(*(int *)param_2 + 0x60))(param_2,param_2,param_3,param_4,param_5,param_6);
+  uVar2 = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol,intermSymbol,type,param_4,param_5,param_6);
   iVar6 = *piVar7;
   iVar3 = (piVar7[1] - iVar6 >> 2) + -1;
   while( true ) {
@@ -822,19 +822,19 @@ int TParseContext__arraySetMaxSize(this, param_2, param_3, param_4, param_5, par
     local_50 = (uint)(iVar3 == 0);
   }
   if (iVar6 != 0) {
-    *(undefined4 *)(param_3 + 0x20) = *(undefined4 *)(iVar6 + 0x3c);
-    *(unsigned char **)(iVar6 + 0x3c) = param_3;
-    pvVar4 = (void *)(**(code **)(*(int *)param_2 + 0x60))(param_2);
+    *(undefined4 *)(type + 0x20) = *(undefined4 *)(iVar6 + 0x3c);
+    *(unsigned char **)(iVar6 + 0x3c) = type;
+    pvVar4 = (void *)(**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol);
     iVar5 = __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(pvVar4,"gl_TexCoord");
     if (iVar5 != 0) {
 LAB_97b9cf8c:
       if (param_5 == 0) {
         return 0;
       }
-      iVar5 = *(int *)(param_3 + 0x20);
+      iVar5 = *(int *)(type + 0x20);
       iVar3 = param_4 + 1;
       *(int *)(iVar6 + 0x28) = iVar3;
-      *(int *)(param_3 + 0x1c) = iVar3;
+      *(int *)(type + 0x1c) = iVar3;
       while (iVar5 != 0) {
         *(int *)(iVar5 + 0x1c) = iVar3;
         iVar5 = *(int *)(iVar5 + 0x20);
@@ -933,7 +933,7 @@ LAB_97b9cf8c:
     }
   }
   else {
-    iVar3 = (**(code **)(*(int *)param_2 + 0x60))(param_2);
+    iVar3 = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol);
     bVar9 = *DAT_a7b7ba18;
     *(byte *)(*(int *)(iVar3 + 4) + *(int *)(*(int *)(iVar3 + 4) + -0xc)) = bVar9;
     error((int)this,(char *)param_6," undeclared identifier",*(char **)(iVar3 + 4),"",iVar5,
@@ -943,11 +943,11 @@ LAB_97b9cf8c:
 }
 
 /* TParseContext__nonInitErrorCheck @ 0x97b9cfe8 (1008 bytes) */
-int TParseContext__nonInitErrorCheck(this, param_2, param_3, param_4)
+int TParseContext__nonInitErrorCheck(this, param_2, text, publicType)
   unsigned char * this;
   int param_2;
-  unsigned char * param_3;
-  unsigned char * param_4;
+  unsigned char * text;
+  unsigned char * publicType;
 {
   byte bVar1;
   int atomicStore;
@@ -1005,23 +1005,23 @@ int TParseContext__nonInitErrorCheck(this, param_2, param_3, param_4)
   int *local_48;
   undefined4 local_40 [5];
   
-  iVar9 = TParseContext__reservedErrorCheck(this,param_2,param_3);
+  iVar9 = TParseContext__reservedErrorCheck(this,param_2,text);
   if (iVar9 != 0) {
     TParseContext__recover(this);
   }
-  iVar9 = *(int *)(param_4 + 4);
+  iVar9 = *(int *)(publicType + 4);
   if (iVar9 == 2) {
-    *(undefined4 *)(param_4 + 4) = 0;
+    *(undefined4 *)(publicType + 4) = 0;
   }
   pTVar10 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   a0 = (int *)((int (*)())TPoolAllocator__allocate)(pTVar10,0x40);
-  local_8c = *(int **)(param_4 + 0x14);
-  iVar13 = *(int *)(param_4 + 4);
-  a5 = *(uint *)param_4;
-  a4 = *(uint *)(param_4 + 8);
-  local_94 = *(uint *)(param_4 + 0xc);
-  local_90 = *(uint *)(param_4 + 0x10);
-  a2 = *(unsigned char **)(param_4 + 0x18);
+  local_8c = *(int **)(publicType + 0x14);
+  iVar13 = *(int *)(publicType + 4);
+  a5 = *(uint *)publicType;
+  a4 = *(uint *)(publicType + 8);
+  local_94 = *(uint *)(publicType + 0xc);
+  local_90 = *(uint *)(publicType + 0x10);
+  a2 = *(unsigned char **)(publicType + 0x18);
   local_ac = (local_90 & 1) << 9 |
              (local_94 & 1) << 10 |
              (a4 & 0xff) << 0xb | (a5 & 0x3f) << 0x13 | iVar13 << 0x19 | local_ac & 0x1ff;
@@ -1069,7 +1069,7 @@ int TParseContext__nonInitErrorCheck(this, param_2, param_3, param_4)
     }
   }
   local_c0 = pvVar7;
-  a0[1] = (int)param_3;
+  a0[1] = (int)text;
   *a0 = (int)(PTR_vtable_a7b7c0b4 + 8);
   a0[4] = local_cc;
   a0[5] = local_c8;
@@ -1132,24 +1132,24 @@ int TParseContext__nonInitErrorCheck(this, param_2, param_3, param_4)
   }
   else {
     if (iVar9 != 2) {
-      iVar9 = TParseContext__voidErrorCheck(this,param_2,param_3,param_4);
+      iVar9 = TParseContext__voidErrorCheck(this,param_2,text,publicType);
       return iVar9 != 0;
     }
     bVar1 = *DAT_a7b7ba18;
-    *(byte *)(*(int *)(param_3 + 4) + *(int *)(*(int *)(param_3 + 4) + -0xc)) = bVar1;
+    *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = bVar1;
     error((int)this,(char *)param_2,"variables with qualifier \'const\' must be initialized",
-          *(char **)(param_3 + 4),"",a5,(uint)bVar1,iVar11);
+          *(char **)(text + 4),"",a5,(uint)bVar1,iVar11);
   }
   return true;
 }
 
 /* TParseContext__paramErrorCheck @ 0x97b9d3d8 (216 bytes) */
-int TParseContext__paramErrorCheck(this, param_2, param_3, param_4, param_5)
+int TParseContext__paramErrorCheck(this, param_2, qualifier1, qualifier2, type)
   unsigned char * this;
   int param_2;
-  int param_3;
-  int param_4;
-  int *param_5;
+  int qualifier1;
+  int qualifier2;
+  int *type;
 {
   int iVar1;
   char *qualifierString;
@@ -1159,24 +1159,24 @@ int TParseContext__paramErrorCheck(this, param_2, param_3, param_4, param_5)
   undefined4 in_r9;
   undefined4 in_r10;
   
-  if (param_3 == 2) {
-    if (param_4 == 9) {
-      iVar1 = *param_5;
-      param_4 = 0xc;
+  if (qualifier1 == 2) {
+    if (qualifier2 == 9) {
+      iVar1 = *type;
+      qualifier2 = 0xc;
       goto LAB_97b9d48c;
     }
     qualifierString = (char *)getQualifierString(2);
-    pcVar4 = (char *)getQualifierString(param_4);
+    pcVar4 = (char *)getQualifierString(qualifier2);
     pcVar3 = "qualifier not allowed with ";
   }
   else {
-    if (param_3 == 0) {
-      iVar1 = *param_5;
+    if (qualifier1 == 0) {
+      iVar1 = *type;
 LAB_97b9d48c:
-      (**(code **)(iVar1 + 0x28))(param_5,param_4);
+      (**(code **)(iVar1 + 0x28))(type,qualifier2);
       return 0;
     }
-    qualifierString = (char *)getQualifierString(param_3);
+    qualifierString = (char *)getQualifierString(qualifier1);
     pcVar3 = "qualifier not allowed on function parameter";
     pcVar4 = "";
   }
@@ -1185,10 +1185,10 @@ LAB_97b9d48c:
 }
 
 /* TParseContext__extensionErrorCheck @ 0x97b9d4b0 (532 bytes) */
-int TParseContext__extensionErrorCheck(this, param_2, param_3)
+int TParseContext__extensionErrorCheck(this, param_2, str)
   unsigned char * this;
   int param_2;
-  char *param_3;
+  char *str;
 {
   int atomicStore;
   bool bVar1;
@@ -1246,7 +1246,7 @@ int TParseContext__extensionErrorCheck(this, param_2, param_3)
   local_1c0[0] = ((int (*)())GetGlobalPoolAllocator)();
   pTVar8 = this + 0x30;
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-            ((unsigned char *)&local_1d0,param_3,(unsigned char *)local_1c0);
+            ((unsigned char *)&local_1d0,str,(unsigned char *)local_1c0);
   std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound((unsigned char *)&local_1b0,pTVar8,(unsigned char *)&local_1d0);
   iVar10 = local_1b0;
   local_1a0 = *(int *)(this + 0x34);
@@ -1311,7 +1311,7 @@ LAB_97b9d574:
     this_00 = *(void **)(this + 8);
     local_120[0] = ((int (*)())GetGlobalPoolAllocator)();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              (&uStack_130,param_3,(unsigned char *)local_120);
+              (&uStack_130,str,(unsigned char *)local_120);
     __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_
               ((char *)&local_1a0,(unsigned char *)"extension ",&uStack_130);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
@@ -1395,7 +1395,7 @@ LAB_97b9d574:
   }
   local_80[0] = ((int (*)())GetGlobalPoolAllocator)();
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-            ((unsigned char *)&local_1d0,param_3,(unsigned char *)local_80);
+            ((unsigned char *)&local_1d0,str,(unsigned char *)local_80);
   std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound((unsigned char *)local_1c0,pTVar8,(unsigned char *)&local_1d0);
   iVar10 = local_1c0[0];
   local_1b0 = *(int *)(this + 0x34);
@@ -1456,16 +1456,16 @@ LAB_97b9d98c:
   }
   bVar1 = iVar10 == 3;
   if (bVar1) {
-    error((int)this,(char *)param_2,"extension",param_3,"is disabled",in_r8,local_1cc,in_r10);
+    error((int)this,(char *)param_2,"extension",str,"is disabled",in_r8,local_1cc,in_r10);
   }
   return bVar1;
 }
 
 /* TParseContext__findFunction @ 0x97b9da08 (356 bytes) */
-int TParseContext__findFunction(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__findFunction(this, param_2, function, param_4, param_5, param_6)
   unsigned char * this;
   int param_2;
-  unsigned char * param_3;
+  unsigned char * function;
   bool *param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -1485,7 +1485,7 @@ int TParseContext__findFunction(this, param_2, param_3, param_4, param_5, param_
   
   piVar6 = *(int **)(this + 4);
   a3 = param_4;
-  uVar3 = (**(code **)(*(int *)param_3 + 8))(param_3,param_2,param_3,param_4,param_5,param_6);
+  uVar3 = (**(code **)(*(int *)function + 8))(function,param_2,function,param_4,param_5,param_6);
   iVar5 = *piVar6;
   iVar2 = (piVar6[1] - iVar5 >> 2) + -1;
   while( true ) {
@@ -1508,14 +1508,14 @@ int TParseContext__findFunction(this, param_2, param_3, param_4, param_5, param_
     if (iVar2 != 0) {
       return a0;
     }
-    iVar5 = *(int *)(param_3 + 4);
+    iVar5 = *(int *)(function + 4);
     iVar7 = *(int *)(iVar5 + 4);
     bVar1 = *DAT_a7b7ba18;
     iVar2 = *(int *)(iVar7 + -0xc);
     pcVar4 = "function name expected";
   }
   else {
-    iVar5 = *(int *)(param_3 + 4);
+    iVar5 = *(int *)(function + 4);
     iVar7 = *(int *)(iVar5 + 4);
     bVar1 = *DAT_a7b7ba18;
     iVar2 = *(int *)(iVar7 + -0xc);
@@ -1527,13 +1527,13 @@ int TParseContext__findFunction(this, param_2, param_3, param_4, param_5, param_
 }
 
 /* TParseContext__executeInitializer @ 0x97b9db6c (3572 bytes) */
-int TParseContext__executeInitializer(this, line, identifier, publicType, initializer, param_6)
+int TParseContext__executeInitializer(this, line, identifier, publicType, initializer, intermNode)
   unsigned char * this;
   int line;
   unsigned char * identifier;
   unsigned char * publicType;
   unsigned char * initializer;
-  unsigned char ** param_6;
+  unsigned char ** intermNode;
 {
   byte bVar1;
   uint uVar2;
@@ -1761,7 +1761,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
                       (*(unsigned char **)this,newNode[2],(unsigned char *)newNode[1],a0,line);
     pTVar12 = (unsigned char *)
               TIntermediate__addAssign(*(unsigned char **)this,0x76,iVar8,initializer,line);
-    *param_6 = pTVar12;
+    *intermNode = pTVar12;
     if (pTVar12 != (unsigned char *)0x0) {
       return 0;
     }
@@ -1988,7 +1988,7 @@ LAB_97b9e6d8:
                         (this_01,line,(unsigned char *)initializer,pcVar25,uVar19,uVar27,
                          (unsigned char *)&local_150,uVar23);
       local_150 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-      *param_6 = (unsigned char *)0x0;
+      *intermNode = (unsigned char *)0x0;
       if (iVar8 != 0) {
         (**(code **)(newNode[3] + 0x28))(a0,0);
         return iVar8;
@@ -2144,14 +2144,14 @@ LAB_97b9e3bc:
   }
   newNode[0xe] = iVar8;
 LAB_97b9e850:
-  *param_6 = (unsigned char *)0x0;
+  *intermNode = (unsigned char *)0x0;
   return 0;
 }
 
 /* TParseContext__canNodeBeRemoved @ 0x97b9e960 (204 bytes) */
-int TParseContext__canNodeBeRemoved(this, param_2)
+int TParseContext__canNodeBeRemoved(this, intermNode)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * intermNode;
 {
   undefined4 uVar1;
   unsigned char * this_00;
@@ -2160,7 +2160,7 @@ int TParseContext__canNodeBeRemoved(this, param_2)
   int iVar3;
   undefined4 *puVar4;
   
-  this_00 = (unsigned char *)(**(code **)(*(int *)param_2 + 0x1c))(param_2,param_2);
+  this_00 = (unsigned char *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode,intermNode);
   uVar1 = 0;
   if (this_00 != (unsigned char *)0x0) {
     iVar2 = TIntermOperator__isConstructor(this_00);
@@ -2184,12 +2184,12 @@ int TParseContext__canNodeBeRemoved(this, param_2)
 }
 
 /* TParseContext__addConstructor @ 0x97b9ea2c (944 bytes) */
-int TParseContext__addConstructor(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__addConstructor(this, intermNode, type, op, function, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
-  int param_4;
-  int param_5;
+  unsigned char * intermNode;
+  unsigned char * type;
+  int op;
+  int function;
   char *param_6;
 {
   bool bVar1;
@@ -2214,25 +2214,25 @@ int TParseContext__addConstructor(this, param_2, param_3, param_4, param_5, para
   undefined4 *local_38;
   unsigned char * local_34;
   
-  if (param_2 == (unsigned char *)0x0) {
+  if (intermNode == (unsigned char *)0x0) {
     return (unsigned char *)0x0;
   }
   iVar10 = 0;
-  bVar1 = param_4 != 0x75;
+  bVar1 = op != 0x75;
   puVar9 = (undefined4 *)0x0;
   pcVar8 = param_6;
-  a0 = (unsigned char *)(**(code **)(*(int *)param_2 + 0x1c))(param_2);
+  a0 = (unsigned char *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
   if (!bVar1) {
-    iVar10 = *(int *)(param_5 + 0x24);
+    iVar10 = *(int *)(function + 0x24);
     puVar9 = *(undefined4 **)(iVar10 + 4);
   }
   if (((a0 == (unsigned char *)0x0) || (*(int *)(a0 + 0x30) != 0)) ||
      (iVar2 = (**(code **)(*(int *)a0 + 100))(a0),
      *(int *)(iVar2 + 8) - *(int *)(iVar2 + 4) >> 2 == 1)) {
     if (bVar1) {
-      uVar4 = (*(code *)**(undefined4 **)param_2)(param_2);
+      uVar4 = (*(code *)**(undefined4 **)intermNode)(intermNode);
       a5 = 0;
-      pTVar3 = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,param_3,param_4,param_2,uVar4,0);
+      pTVar3 = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,type,op,intermNode,uVar4,0);
       if (pTVar3 == (unsigned char *)0x0) {
         return (unsigned char *)0x0;
       }
@@ -2251,15 +2251,15 @@ int TParseContext__addConstructor(this, param_2, param_3, param_4, param_5, para
       iVar2 = *(int *)**(undefined4 **)(iVar10 + 4);
       pTVar6 = (unsigned char *)
                (**(code **)(iVar2 + 0x1c))
-                         ((int *)**(undefined4 **)(iVar10 + 4),a1,param_4,param_2,uVar4,a5,iVar2);
+                         ((int *)**(undefined4 **)(iVar10 + 4),a1,op,intermNode,uVar4,a5,iVar2);
       pTVar3 = (unsigned char *)
                __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate
-                         (*(void **)this,pTVar3,param_3,pTVar6);
+                         (*(void **)this,pTVar3,type,pTVar6);
       return pTVar3;
     }
     if (*(int *)(iVar10 + 8) - *(int *)(iVar10 + 4) >> 3 == 1) {
-      iVar10 = (*(code *)**(undefined4 **)param_2)(param_2);
-      pTVar3 = (unsigned char *)((int (*)())TParseContext__constructStruct)(this,param_2,(unsigned char *)*puVar9,1,iVar10,0);
+      iVar10 = (*(code *)**(undefined4 **)intermNode)(intermNode);
+      pTVar3 = (unsigned char *)((int (*)())TParseContext__constructStruct)(this,intermNode,(unsigned char *)*puVar9,1,iVar10,0);
       return pTVar3;
     }
   }
@@ -2275,23 +2275,23 @@ int TParseContext__addConstructor(this, param_2, param_3, param_4, param_5, para
         local_38 = puVar11;
         if (puVar11 == *(undefined4 **)(pTVar7 + 8)) {
           pTVar3 = (unsigned char *)
-                   TIntermediate__setAggregateOperator(*(unsigned char **)this,a0,param_4,param_6);
+                   TIntermediate__setAggregateOperator(*(unsigned char **)this,a0,op,param_6);
           return pTVar3;
         }
         if (bVar1) {
-          uVar4 = (*(code *)**(undefined4 **)param_2)(param_2);
-          a0_00 = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,param_3,param_4,*puVar11,uVar4,1);
+          uVar4 = (*(code *)**(undefined4 **)intermNode)(intermNode);
+          a0_00 = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,type,op,*puVar11,uVar4,1);
           if (a0_00 != (unsigned char *)0x0) {
             iVar10 = ((int (*)())TParseContext__canNodeBeRemoved)(this,a0_00);
             if (iVar10 == 0) goto LAB_97b9ed60;
             pTVar6 = (unsigned char *)(**(code **)(*(int *)a0_00 + 0x1c))(a0_00);
             __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate
-                      (*(void **)this,pTVar7,param_3,&local_3c,(unsigned char *)&local_38,pTVar6
+                      (*(void **)this,pTVar7,type,&local_3c,(unsigned char *)&local_38,pTVar6
                       );
           }
         }
         else {
-          iVar2 = (*(code *)**(undefined4 **)param_2)(param_2);
+          iVar2 = (*(code *)**(undefined4 **)intermNode)(intermNode);
           a0_00 = (unsigned char *)
                   ((int (*)())TParseContext__constructStruct)(this,(unsigned char *)*puVar11,(unsigned char *)puVar9[iVar10 * 2],
                                   local_3c + 1,iVar2,1);
@@ -2316,11 +2316,11 @@ LAB_97b9ed60:
 }
 
 /* TParseContext__constructBuiltIn @ 0x97b9eddc (408 bytes) */
-int TParseContext__constructBuiltIn(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__constructBuiltIn(this, type, op, intermNode, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  int param_3;
-  unsigned char * param_4;
+  unsigned char * type;
+  int op;
+  unsigned char * intermNode;
   char *param_5;
   int param_6;
 {
@@ -2336,7 +2336,7 @@ int TParseContext__constructBuiltIn(this, param_2, param_3, param_4, param_5, pa
   int local_48;
   uint local_2c;
   
-  uVar5 = param_3 - 0x66;
+  uVar5 = op - 0x66;
   if (uVar5 < 0xf) {
     iVar6 = uVar5 * 4;
     switch(uVar5) {
@@ -2356,20 +2356,20 @@ int TParseContext__constructBuiltIn(this, param_2, param_3, param_4, param_5, pa
       uVar7 = 0x68;
     }
     iVar4 = param_6;
-    uVar2 = (*(code *)**(undefined4 **)param_4)(param_4);
+    uVar2 = (*(code *)**(undefined4 **)intermNode)(intermNode);
     pTVar3 = (unsigned char *)
              TIntermediate__addUnaryMath
-                       (*(unsigned char **)this,uVar7,param_4,uVar2,*(undefined4 *)(this + 4),iVar4,
+                       (*(unsigned char **)this,uVar7,intermNode,uVar2,*(undefined4 *)(this + 4),iVar4,
                         iVar6);
     if (pTVar3 != (unsigned char *)0x0) {
       if (param_6 != 0) {
         return pTVar3;
       }
-      if (pTVar3 != param_4) {
+      if (pTVar3 != intermNode) {
         (**(code **)(*(int *)pTVar3 + 0x38))(local_50,pTVar3);
         bVar1 = false;
-        if (((local_2c & 0x1fffe00) == (*(uint *)(param_2 + 0x24) & 0x1fffe00)) &&
-           (local_48 == *(int *)(param_2 + 8))) {
+        if (((local_2c & 0x1fffe00) == (*(uint *)(type + 0x24) & 0x1fffe00)) &&
+           (local_48 == *(int *)(type + 8))) {
           bVar1 = true;
         }
         local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
@@ -2378,7 +2378,7 @@ int TParseContext__constructBuiltIn(this, param_2, param_3, param_4, param_5, pa
         }
       }
       pTVar3 = (unsigned char *)
-               TIntermediate__setAggregateOperator(*(unsigned char **)this,pTVar3,param_3,param_5);
+               TIntermediate__setAggregateOperator(*(unsigned char **)this,pTVar3,op,param_5);
       return pTVar3;
     }
     error((int)this,param_5,"can\'t convert","constructor","",iVar4,iVar6,in_r10);
@@ -2391,10 +2391,10 @@ int TParseContext__constructBuiltIn(this, param_2, param_3, param_4, param_5, pa
 }
 
 /* TParseContext__constructStruct @ 0x97b9efb0 (392 bytes) */
-int TParseContext__constructStruct(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__constructStruct(this, intermNode, type, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermNode;
+  unsigned char * type;
   int param_4;
   int param_5;
   int param_6;
@@ -2416,22 +2416,22 @@ int TParseContext__constructStruct(this, param_2, param_3, param_4, param_5, par
   undefined **local_50 [9];
   uint local_2c;
   
-  a2 = param_3;
+  a2 = type;
   a3 = param_4;
   a4 = param_5;
   a5 = param_6;
-  piVar1 = (int *)(**(code **)(*(int *)param_2 + 0x14))
-                            (param_2,param_2,param_3,param_4,param_5,param_6);
+  piVar1 = (int *)(**(code **)(*(int *)intermNode + 0x14))
+                            (intermNode,intermNode,type,param_4,param_5,param_6);
   (**(code **)(*piVar1 + 0x38))(local_80,piVar1);
   a6 = 0;
-  if (((*(uint *)(param_3 + 0x24) & 0x1fffe00) == (local_5c & 0x1fffe00)) &&
-     (*(int *)(param_3 + 8) == local_78)) {
+  if (((*(uint *)(type + 0x24) & 0x1fffe00) == (local_5c & 0x1fffe00)) &&
+     (*(int *)(type + 8) == local_78)) {
     a6 = 1;
   }
   local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   if (a6 == 0) {
-    basicString = TType__getBasicString(*(uint *)(param_3 + 0x24) >> 0x13 & 0x3f);
-    piVar1 = (int *)(**(code **)(*(int *)param_2 + 0x14))(param_2);
+    basicString = TType__getBasicString(*(uint *)(type + 0x24) >> 0x13 & 0x3f);
+    piVar1 = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode);
     (**(code **)(*piVar1 + 0x38))(local_50,piVar1);
     uVar4 = TType__getBasicString(local_2c >> 0x13 & 0x3f);
     error((int)this,(char *)param_5,"","constructor",
@@ -2441,20 +2441,20 @@ int TParseContext__constructStruct(this, param_2, param_3, param_4, param_5, par
     uVar2 = 0;
   }
   else if (param_6 == 0) {
-    pTVar3 = (unsigned char *)(**(code **)(*(int *)param_2 + 0x14))(param_2);
+    pTVar3 = (unsigned char *)(**(code **)(*(int *)intermNode + 0x14))(intermNode);
     uVar2 = TIntermediate__setAggregateOperator(*(unsigned char **)this,pTVar3,0x75,param_5);
   }
   else {
-    uVar2 = (**(code **)(*(int *)param_2 + 0x14))(param_2,a1,a2,a3,a4,a5,a6);
+    uVar2 = (**(code **)(*(int *)intermNode + 0x14))(intermNode,a1,a2,a3,a4,a5,a6);
   }
   return uVar2;
 }
 
 /* TParseContext__addConstVectorNode @ 0x97b9f138 (148 bytes) */
-int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * vectorFields;
+  unsigned char * intermTyped;
   int param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -2483,10 +2483,10 @@ int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, 
   uint local_6c;
   unsigned char aaStack_40 [16];
   
-  pTVar9 = param_3;
+  pTVar9 = intermTyped;
   iVar11 = param_4;
-  iVar5 = (**(code **)(*(int *)param_3 + 0x18))(param_3,param_2,param_3,param_4,param_5,param_6);
-  a1 = (unsigned char *)(**(code **)(*(int *)param_3 + 0x1c))(param_3);
+  iVar5 = (**(code **)(*(int *)intermTyped + 0x18))(intermTyped,vectorFields,intermTyped,param_4,param_5,param_6);
+  a1 = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   if (iVar5 != 0) {
     pcVar10 = *(unsigned char **)(iVar5 + 0x30);
     if (pcVar10 == (unsigned char *)0x0) {
@@ -2521,7 +2521,7 @@ int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, 
                 (this_00,"constUnion not initialized in addConstVectorNode function");
       __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
       TParseContext__recover(this);
-      return param_3;
+      return intermTyped;
     }
     goto LAB_97b9f4c4;
   }
@@ -2572,14 +2572,14 @@ LAB_97b9f438:
     return (unsigned char *)0x0;
   }
 LAB_97b9f4c4:
-  iVar11 = *(int *)(param_2 + 0x10);
+  iVar11 = *(int *)(vectorFields + 0x10);
   iVar5 = 0;
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   pcVar8 = (unsigned char *)((int (*)())TPoolAllocator__allocate)(pTVar7,iVar11 << 2);
-  if (0 < *(int *)(param_2 + 0x10)) {
+  if (0 < *(int *)(vectorFields + 0x10)) {
     iVar11 = 0;
     do {
-      (**(code **)(*(int *)param_3 + 0x38))(local_90,param_3);
+      (**(code **)(*(int *)intermTyped + 0x38))(local_90,intermTyped);
       if ((local_6c & 0x400) == 0) {
         iVar3 = (int)(local_6c << 0xd | local_6c >> 0x13) >> 0x18;
       }
@@ -2588,18 +2588,18 @@ LAB_97b9f4c4:
         iVar3 = iVar3 * iVar3;
       }
       local_90[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-      if (iVar3 <= *(int *)(param_2 + iVar11) != 0) {
+      if (iVar3 <= *(int *)(vectorFields + iVar11) != 0) {
         error((int)this,(char *)param_4,"","[","vector field selection out of range \'%d\'",
-              *(undefined4 *)(param_2 + iVar11),(uint)(iVar3 <= *(int *)(param_2 + iVar11)),in_r10);
+              *(undefined4 *)(vectorFields + iVar11),(uint)(iVar3 <= *(int *)(vectorFields + iVar11)),in_r10);
         TParseContext__recover(this);
-        *(undefined4 *)(param_2 + iVar11) = 0;
+        *(undefined4 *)(vectorFields + iVar11) = 0;
       }
       iVar5 = iVar5 + 1;
-      *(undefined4 *)(pcVar8 + iVar11) = *(undefined4 *)(pcVar10 + *(int *)(param_2 + iVar11) * 4);
+      *(undefined4 *)(pcVar8 + iVar11) = *(undefined4 *)(pcVar10 + *(int *)(vectorFields + iVar11) * 4);
       iVar11 = iVar11 + 4;
-    } while (iVar5 < *(int *)(param_2 + 0x10));
+    } while (iVar5 < *(int *)(vectorFields + 0x10));
   }
-  (**(code **)(*(int *)param_3 + 0x38))(local_90,param_3);
+  (**(code **)(*(int *)intermTyped + 0x38))(local_90,intermTyped);
   pTVar9 = (unsigned char *)
            TIntermediate__addConstantUnion(*(unsigned char **)this,pcVar8,(unsigned char *)local_90,param_4)
   ;
@@ -2607,10 +2607,10 @@ LAB_97b9f4c4:
 }
 
 /* TParseContext__addConstMatrixNode @ 0x97b9f600 (904 bytes) */
-int TParseContext__addConstMatrixNode(this, param_2, param_3, param_4)
+int TParseContext__addConstMatrixNode(this, param_2, intermTyped, param_4)
   unsigned char * this;
   int param_2;
-  unsigned char * param_3;
+  unsigned char * intermTyped;
   int param_4;
 {
   int *piVar1;
@@ -2631,11 +2631,11 @@ int TParseContext__addConstMatrixNode(this, param_2, param_3, param_4)
   undefined **local_60 [9];
   uint local_3c;
   
-  a2 = (char *)param_3;
+  a2 = (char *)intermTyped;
   a3 = (char *)param_4;
-  piVar1 = (int *)(**(code **)(*(int *)param_3 + 0x18))(param_3,param_2,param_3,param_4);
-  a1 = (unsigned char *)(**(code **)(*(int *)param_3 + 0x1c))(param_3);
-  (**(code **)(*(int *)param_3 + 0x38))(local_60,param_3);
+  piVar1 = (int *)(**(code **)(*(int *)intermTyped + 0x18))(intermTyped,param_2,intermTyped,param_4);
+  a1 = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  (**(code **)(*(int *)intermTyped + 0x38))(local_60,intermTyped);
   local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   iVar4 = param_2;
   if ((int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18 <= param_2) {
@@ -2714,10 +2714,10 @@ LAB_97b9f8f4:
 }
 
 /* TParseContext__addConstStruct @ 0x97b9f988 (848 bytes) */
-int TParseContext__addConstStruct(this, param_2, param_3, param_4, param_5, param_6)
+int TParseContext__addConstStruct(this, text, intermTyped, param_4, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * text;
+  unsigned char * intermTyped;
   int param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -2748,27 +2748,27 @@ int TParseContext__addConstStruct(this, param_2, param_3, param_4, param_5, para
   uint local_4c [5];
   
   iVar8 = 0;
-  a2 = param_3;
+  a2 = intermTyped;
   iVar1 = param_4;
-  (**(code **)(*(int *)param_3 + 0x38))(local_80,param_3,param_3,param_4,param_5,param_6);
-  iVar6 = *(int *)param_3;
+  (**(code **)(*(int *)intermTyped + 0x38))(local_80,intermTyped,intermTyped,param_4,param_5,param_6);
+  iVar6 = *(int *)intermTyped;
   local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  pTVar2 = (unsigned char *)(**(code **)(iVar6 + 0x18))(param_3,a1_00,a2,iVar1,param_5,param_6,iVar6);
-  a1 = (unsigned char *)(**(code **)(*(int *)param_3 + 0x1c))(param_3);
+  pTVar2 = (unsigned char *)(**(code **)(iVar6 + 0x18))(intermTyped,a1_00,a2,iVar1,param_5,param_6,iVar6);
+  a1 = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   for (uVar9 = 0; uVar9 < (uint)(*(int *)(local_78 + 8) - *(int *)(local_78 + 4) >> 3);
       uVar9 = uVar9 + 1) {
     piVar3 = *(int **)(*(int *)(local_78 + 4) + uVar9 * 8);
     iVar7 = (**(code **)(*piVar3 + 0x1c))(piVar3);
     uVar12 = *(uint *)(*(int *)(iVar7 + 4) + -0xc);
     local_50 = uVar12;
-    uVar10 = *(uint *)(*(int *)(param_2 + 4) + -0xc);
+    uVar10 = *(uint *)(*(int *)(text + 4) + -0xc);
     local_4c[0] = uVar10;
     puVar5 = local_4c;
     if (uVar12 <= uVar10) {
       puVar5 = &local_50;
     }
     a2 = (unsigned char *)*puVar5;
-    iVar7 = _memcmp(*(undefined4 *)(iVar7 + 4),*(int *)(param_2 + 4),a2);
+    iVar7 = _memcmp(*(undefined4 *)(iVar7 + 4),*(int *)(text + 4),a2);
     if (iVar7 == 0) {
       iVar7 = uVar12 - uVar10;
     }
@@ -2975,10 +2975,10 @@ int GetGlobalPoolAllocator()
 }
 
 /* SetGlobalPoolAllocatorPtr @ 0x97b9ff74 (32 bytes) */
-int SetGlobalPoolAllocatorPtr(param_1)
-  unsigned char * param_1;
+int SetGlobalPoolAllocatorPtr(poolAllocator)
+  unsigned char * poolAllocator;
 {
-  *_gPollAllocThreadData = param_1;
+  *_gPollAllocThreadData = poolAllocator;
   return;
 }
 
@@ -3153,8 +3153,8 @@ int __ZN14TPoolAllocatorD4Ev(this)
 }
 
 /* TAllocation__checkGuardBlock @ 0x97ba011c (4 bytes) */
-int TAllocation__checkGuardBlock(param_1, param_2, param_3)
-  uchar *param_1;
+int TAllocation__checkGuardBlock(this, param_2, param_3)
+  uchar *this;
   int param_2;
   char *param_3;
 {
@@ -3317,9 +3317,9 @@ int TAllocation__checkAllocList(this)
 }
 
 /* QualifierWritten @ 0x97ba0478 (156 bytes) */
-int QualifierWritten(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  unsigned char * param_1;
-  undefined4 param_2;
+int QualifierWritten(intermNode, qualifier, param_3, param_4, param_5, param_6, param_7, param_8)
+  unsigned char * intermNode;
+  undefined4 qualifier;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -3355,116 +3355,116 @@ int QualifierWritten(param_1, param_2, param_3, param_4, param_5, param_6, param
   local_30 = 0;
   local_2c = 1;
   local_28 = 0;
-  if (param_1 != (unsigned char *)0x0) {
-    local_1c = param_2;
-    (**(code **)(*(int *)param_1 + 8))
-              (param_1,&local_50,param_3,param_4,param_5,param_6,DAT_a7b7ba20,param_1);
+  if (intermNode != (unsigned char *)0x0) {
+    local_1c = qualifier;
+    (**(code **)(*(int *)intermNode + 8))
+              (intermNode,&local_50,param_3,param_4,param_5,param_6,DAT_a7b7ba20,intermNode);
   }
   return local_20;
 }
 
 /* AliveSymbol @ 0x97ba0514 (76 bytes) */
-int AliveSymbol(param_1, param_2)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int AliveSymbol(intermSymbol, intermTraverser)
+  unsigned char * intermSymbol;
+  unsigned char * intermTraverser;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(*(int *)param_1 + 0x44))(param_1);
-  if (iVar1 == *(int *)(param_2 + 0x34)) {
-    *(undefined4 *)(param_2 + 0x30) = 1;
+  iVar1 = (**(code **)(*(int *)intermSymbol + 0x44))(intermSymbol);
+  if (iVar1 == *(int *)(intermTraverser + 0x34)) {
+    *(undefined4 *)(intermTraverser + 0x30) = 1;
   }
   return;
 }
 
 /* AliveSelection @ 0x97ba0560 (16 bytes) */
-int AliveSelection(param_1, param_2, param_3)
+int AliveSelection(param_1, intermSelection, intermTraverser)
   int param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermSelection;
+  unsigned char * intermTraverser;
 {
-  return *(int *)(param_3 + 0x30) == 0;
+  return *(int *)(intermTraverser + 0x30) == 0;
 }
 
 /* RemoveSymbol @ 0x97ba0570 (24 bytes) */
-int RemoveSymbol(param_1, param_2)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int RemoveSymbol(intermSymbol, intermTraverser)
+  unsigned char * intermSymbol;
+  unsigned char * intermTraverser;
 {
-  if (param_1 == (unsigned char *)0x0) {
+  if (intermSymbol == (unsigned char *)0x0) {
     return;
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 0x30))(param_1);
+  (**(code **)(*(int *)intermSymbol + 0x30))(intermSymbol);
   return;
 }
 
 /* RemoveBinary @ 0x97ba0588 (56 bytes) */
-int RemoveBinary(param_1, param_2, param_3)
+int RemoveBinary(param_1, intermBinary, intermTraverser)
   int param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermBinary;
+  unsigned char * intermTraverser;
 {
-  if (param_2 != (unsigned char *)0x0) {
-    (**(code **)(*(int *)param_2 + 0x30))(param_2);
+  if (intermBinary != (unsigned char *)0x0) {
+    (**(code **)(*(int *)intermBinary + 0x30))(intermBinary);
   }
   return 1;
 }
 
 /* RemoveUnary @ 0x97ba05c0 (56 bytes) */
-int RemoveUnary(param_1, param_2, param_3)
+int RemoveUnary(param_1, intermUnary, intermTraverser)
   int param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermUnary;
+  unsigned char * intermTraverser;
 {
-  if (param_2 != (unsigned char *)0x0) {
-    (**(code **)(*(int *)param_2 + 0x30))(param_2);
+  if (intermUnary != (unsigned char *)0x0) {
+    (**(code **)(*(int *)intermUnary + 0x30))(intermUnary);
   }
   return 1;
 }
 
 /* RemoveAggregate @ 0x97ba05f8 (56 bytes) */
-int RemoveAggregate(param_1, param_2, param_3)
+int RemoveAggregate(param_1, intermAggregate, intermTraverser)
   int param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermAggregate;
+  unsigned char * intermTraverser;
 {
-  if (param_2 != (unsigned char *)0x0) {
-    (**(code **)(*(int *)param_2 + 0x30))(param_2);
+  if (intermAggregate != (unsigned char *)0x0) {
+    (**(code **)(*(int *)intermAggregate + 0x30))(intermAggregate);
   }
   return 1;
 }
 
 /* RemoveSelection @ 0x97ba0630 (56 bytes) */
-int RemoveSelection(param_1, param_2, param_3)
+int RemoveSelection(param_1, intermSelection, intermTraverser)
   int param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermSelection;
+  unsigned char * intermTraverser;
 {
-  if (param_2 != (unsigned char *)0x0) {
-    (**(code **)(*(int *)param_2 + 0x30))(param_2);
+  if (intermSelection != (unsigned char *)0x0) {
+    (**(code **)(*(int *)intermSelection + 0x30))(intermSelection);
   }
   return 1;
 }
 
 /* RemoveConstantUnion @ 0x97ba0668 (24 bytes) */
-int RemoveConstantUnion(param_1, param_2)
-  unsigned char * param_1;
-  unsigned char * param_2;
+int RemoveConstantUnion(intermConstantUnion, intermTraverser)
+  unsigned char * intermConstantUnion;
+  unsigned char * intermTraverser;
 {
-  if (param_1 == (unsigned char *)0x0) {
+  if (intermConstantUnion == (unsigned char *)0x0) {
     return;
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 0x30))(param_1);
+  (**(code **)(*(int *)intermConstantUnion + 0x30))(intermConstantUnion);
   return;
 }
 
 /* RemoveAllTreeNodes @ 0x97ba0680 (168 bytes) */
-int RemoveAllTreeNodes(param_1)
-  unsigned char * param_1;
+int RemoveAllTreeNodes(intermNode)
+  unsigned char * intermNode;
 {
   undefined4 in_r5;
   undefined4 in_r6;
@@ -3495,8 +3495,8 @@ int RemoveAllTreeNodes(param_1)
   local_24 = 0;
   local_20 = 0;
   local_14 = 0;
-  return (**(code **)(*(int *)param_1 + 8))
-            (param_1,&local_40,in_r5,in_r6,in_r7,in_r8,DAT_a7b7ba28,*(int *)param_1);
+  return (**(code **)(*(int *)intermNode + 8))
+            (intermNode,&local_40,in_r5,in_r6,in_r7,in_r8,DAT_a7b7ba28,*(int *)intermNode);
 }
 
 /* GetSymbolTable @ 0x97ba0728 (132 bytes) */
@@ -3678,27 +3678,27 @@ int _ShFinalize()
 }
 
 /* generateBuiltInSymbolTable @ 0x97ba0adc (112 bytes) */
-int generateBuiltInSymbolTable(param_1, param_2, param_3, param_4)
-  unsigned char * param_1;
-  unsigned char * param_2;
-  unsigned char * param_3;
-  undefined4 param_4;
+int generateBuiltInSymbolTable(builtInResource, infoSink, symbolTable, language)
+  unsigned char * builtInResource;
+  unsigned char * infoSink;
+  unsigned char * symbolTable;
+  undefined4 language;
 {
   unsigned char aTStack_30 [28];
   
-  __ZN9TBuiltIns10initializeERK16TBuiltInResource(aTStack_30,param_1);
-  ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,0,param_2,param_1,param_3);
-  ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,1,param_2,param_1,param_3);
+  __ZN9TBuiltIns10initializeERK16TBuiltInResource(aTStack_30,builtInResource);
+  ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,0,infoSink,builtInResource,symbolTable);
+  ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,1,infoSink,builtInResource,symbolTable);
   return 1;
 }
 
 /* initializeSymbolTable @ 0x97ba0b4c (548 bytes) */
-int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
-  unsigned char * param_1;
-  int param_2;
-  void *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolTable)
+  unsigned char * builtIns;
+  int language;
+  void *infoSink;
+  undefined4 builtInResource;
+  undefined4 symbolTable;
 {
   int atomicStore2;
   int *stringSizeArray;
@@ -3747,8 +3747,8 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
   undefined4 auStack_50 [4];
   void *local_40 [7];
   
-  local_40[0] = param_3;
-  this = (unsigned char *)((int (*)())GetSymbolTable)(param_2);
+  local_40[0] = infoSink;
+  this = (unsigned char *)((int (*)())GetSymbolTable)(language);
   local_130 = local_40;
   local_120 = 0;
   local_11c = 0;
@@ -3757,8 +3757,8 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
   local_110 = 0;
   local_10c = 0;
   local_12c = this;
-  local_128 = param_3;
-  local_124 = param_2;
+  local_128 = infoSink;
+  local_124 = language;
   local_100 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   local_fc = (undefined4 *)0x0;
   local_c0 = local_100;
@@ -3827,19 +3827,19 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
   }
   iVar3 = _InitPreprocessor();
   if (iVar3 == 0) {
-    uVar6 = TBuiltIns__getNumStringArrays(param_1,local_124);
+    uVar6 = TBuiltIns__getNumStringArrays(builtIns,local_124);
     uVar9 = 0;
     if (uVar6 != 0) {
 LAB_97ba0e34:
-      ppcVar7 = (char **)TBuiltIns__getStringArray(param_1,local_124,uVar9);
-      stringSizeArray = (int *)TBuiltIns__getStringSizeArray(param_1,local_124,uVar9);
-      numStrings = TBuiltIns__getNumStrings(param_1,local_124,uVar9);
+      ppcVar7 = (char **)TBuiltIns__getStringArray(builtIns,local_124,uVar9);
+      stringSizeArray = (int *)TBuiltIns__getStringSizeArray(builtIns,local_124,uVar9);
+      numStrings = TBuiltIns__getNumStrings(builtIns,local_124,uVar9);
       iVar3 = PaParseStrings(ppcVar7,stringSizeArray,numStrings,0,(unsigned char *)&local_130);
       if (iVar3 == 0) goto LAB_97ba0fd8;
                     
-      __ZN13TInfoSinkBase6appendEPKc(param_3,"INTERNAL ERROR: ");
-      __ZN13TInfoSinkBase6appendEPKc(param_3,"Unable to parse built-ins");
-      __ZN13TInfoSinkBase6appendEPKc(param_3,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"Unable to parse built-ins");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
       _FinalizePreprocessor();
       piVar2 = (int *)(local_d4 + -4);
       auStack_60[0] = local_d8;
@@ -3858,7 +3858,7 @@ LAB_97ba0e34:
       goto code_r0x97ba0f58;
     }
 LAB_97ba0fe4:
-    __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(local_124,this,param_4);
+    __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(local_124,this,builtInResource);
     __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(local_124,this);
     _FinalizePreprocessor();
     piVar2 = (int *)(local_d4 + -4);
@@ -3894,9 +3894,9 @@ LAB_97ba0fe4:
   }
   else {
                     
-    __ZN13TInfoSinkBase6appendEPKc(param_3,"INTERNAL ERROR: ");
-    __ZN13TInfoSinkBase6appendEPKc(param_3,"Unable to intialize the Preprocessor");
-    __ZN13TInfoSinkBase6appendEPKc(param_3,"\n");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"Unable to intialize the Preprocessor");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     piVar2 = (int *)(local_d4 + -4);
     auStack_50[0] = local_d8;
     do {

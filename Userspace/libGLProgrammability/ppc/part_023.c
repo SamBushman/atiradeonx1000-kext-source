@@ -34,22 +34,22 @@ int __ZNSaIcEC4Ev()
 }
 
 /* __ZNSaIcEC2ERKS_ @ 0x97c17380 (4 bytes) */
-int __ZNSaIcEC2ERKS_(param_1)
-  unsigned char * param_1;
+int __ZNSaIcEC2ERKS_(this)
+  unsigned char * this;
 {
   return;
 }
 
 /* __ZNSaIcEC1ERKS_ @ 0x97c17384 (4 bytes) */
-int __ZNSaIcEC1ERKS_(param_1)
-  unsigned char * param_1;
+int __ZNSaIcEC1ERKS_(this)
+  unsigned char * this;
 {
   return;
 }
 
 /* __ZNSaIcEC4ERKS_ @ 0x97c17388 (4 bytes) */
-int __ZNSaIcEC4ERKS_(param_1)
-  unsigned char * param_1;
+int __ZNSaIcEC4ERKS_(this)
+  unsigned char * this;
 {
   return;
 }
@@ -98,10 +98,10 @@ int __ZNKSaIcE8max_sizeEv()
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm @ 0x97c173b8 (16 bytes) */
-int __ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm(param_1)
-  ulong param_1;
+int __ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm(this)
+  ulong this;
 {
-  return (param_1 + 7 >> 3) - 1;
+  return (this + 7 >> 3) - 1;
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC2Ev @ 0x97c173c8 (4 bytes) */
@@ -147,15 +147,15 @@ int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev(this)
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEm @ 0x97c17418 (12 bytes) */
-int __ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEm(param_1)
-  ulong param_1;
+int __ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEm(this)
+  ulong this;
 {
-  return param_1 + 7 & 0xfffffff8;
+  return this + 7 & 0xfffffff8;
 }
 
 /* std____default_alloc_template_true_0___allocate @ 0x97c17424 (228 bytes) */
-int std____default_alloc_template_true_0___allocate(param_1)
-  ulong param_1;
+int std____default_alloc_template_true_0___allocate(this)
+  ulong this;
 {
   uint uVar1;
   int iVar2;
@@ -183,12 +183,12 @@ int std____default_alloc_template_true_0___allocate(param_1)
       } while (!(bool)(in_cr0 >> 1 & 1));
     }
   }
-  if ((param_1 < 0x81) && (_S_force_new < 1)) {
-    uVar1 = param_1 + 7 >> 1 & 0x7ffffffc;
+  if ((this < 0x81) && (_S_force_new < 1)) {
+    uVar1 = this + 7 >> 1 & 0x7ffffffc;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(auStack_30);
     puVar3 = *(undefined4 **)(&DAT_a7b7bf90 + uVar1);
     if (puVar3 == (undefined4 *)0x0) {
-      puVar3 = (undefined4 *)((int (*)())std____default_alloc_template_true_0____S_refill)(param_1 + 7 & 0xfffffff8);
+      puVar3 = (undefined4 *)((int (*)())std____default_alloc_template_true_0____S_refill)(this + 7 & 0xfffffff8);
     }
     else {
       *(undefined4 *)(&DAT_a7b7bf90 + uVar1) = *puVar3;
@@ -199,14 +199,14 @@ int std____default_alloc_template_true_0___allocate(param_1)
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(auStack_30);
   }
   else {
-    puVar3 = operator_new(param_1);
+    puVar3 = operator_new(this);
   }
   return puVar3;
 }
 
 /* std__allocator_char___allocate @ 0x97c17544 (236 bytes) */
-int std__allocator_char___allocate(param_1, param_2)
-  ulong param_1;
+int std__allocator_char___allocate(this, param_2)
+  ulong this;
   void *param_2;
 {
   uint uVar1;
@@ -266,8 +266,8 @@ int std__allocator_char___allocate(param_1, param_2)
 }
 
 /* std____default_alloc_template_true_0___deallocate @ 0x97c1766c (136 bytes) */
-int std____default_alloc_template_true_0___deallocate(param_1, param_2)
-  void *param_1;
+int std____default_alloc_template_true_0___deallocate(this, param_2)
+  void *this;
   ulong param_2;
 {
   uint uVar1;
@@ -276,20 +276,20 @@ int std____default_alloc_template_true_0___deallocate(param_1, param_2)
   if ((param_2 < 0x81) && (_S_force_new < 1)) {
     uVar1 = param_2 + 7 >> 1 & 0x7ffffffc;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(auStack_30);
-    *(undefined4 *)param_1 = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
-    *(void **)(&DAT_a7b7bf90 + uVar1) = param_1;
+    *(undefined4 *)this = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
+    *(void **)(&DAT_a7b7bf90 + uVar1) = this;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(auStack_30);
   }
   else {
-    ((int (*)())__ZdlPv)(param_1);
+    ((int (*)())__ZdlPv)(this);
   }
   return;
 }
 
 /* std__allocator_char___deallocate @ 0x97c176f4 (140 bytes) */
-int std__allocator_char___deallocate(this, param_2, param_3)
+int std__allocator_char___deallocate(this, str, param_3)
   unsigned char * this;
-  char *param_2;
+  char *str;
   ulong param_3;
 {
   uint uVar1;
@@ -298,12 +298,12 @@ int std__allocator_char___deallocate(this, param_2, param_3)
   if ((param_3 < 0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
     uVar1 = param_3 + 7 >> 1 & 0x7ffffffc;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(auStack_30);
-    *(undefined4 *)param_2 = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
-    *(char **)(&DAT_a7b7bf90 + uVar1) = param_2;
+    *(undefined4 *)str = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
+    *(char **)(&DAT_a7b7bf90 + uVar1) = str;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(auStack_30);
   }
   else {
-    ((int (*)())__ZdlPv)(param_2);
+    ((int (*)())__ZdlPv)(str);
   }
   return;
 }
@@ -322,8 +322,8 @@ int __ZNSaIcE9constructEPcRKc(this, param_2, str)
 }
 
 /* __ZNSaIcE7destroyEPc @ 0x97c17794 (4 bytes) */
-int __ZNSaIcE7destroyEPc(param_1)
-  char *param_1;
+int __ZNSaIcE7destroyEPc(this)
+  char *this;
 {
   return;
 }
@@ -347,22 +347,22 @@ int __ZNSaIwEC4Ev()
 }
 
 /* __ZNSaIwEC2ERKS_ @ 0x97c177a4 (4 bytes) */
-int __ZNSaIwEC2ERKS_(param_1)
-  unsigned char * param_1;
+int __ZNSaIwEC2ERKS_(this)
+  unsigned char * this;
 {
   return;
 }
 
 /* __ZNSaIwEC1ERKS_ @ 0x97c177a8 (4 bytes) */
-int __ZNSaIwEC1ERKS_(param_1)
-  unsigned char * param_1;
+int __ZNSaIwEC1ERKS_(this)
+  unsigned char * this;
 {
   return;
 }
 
 /* __ZNSaIwEC4ERKS_ @ 0x97c177ac (4 bytes) */
-int __ZNSaIwEC4ERKS_(param_1)
-  unsigned char * param_1;
+int __ZNSaIwEC4ERKS_(this)
+  unsigned char * this;
 {
   return;
 }
@@ -389,19 +389,19 @@ int __ZNSaIwED4Ev(this)
 }
 
 /* __ZNKSaIwE7addressERw @ 0x97c177c4 (8 bytes) */
-int __ZNKSaIwE7addressERw(this, param_2)
+int __ZNKSaIwE7addressERw(this, wchar_t)
   void *this;
-  unsigned char * param_2;
+  unsigned char * wchar_t;
 {
-  return param_2;
+  return wchar_t;
 }
 
 /* __ZNKSaIwE7addressERKw @ 0x97c177cc (8 bytes) */
-int __ZNKSaIwE7addressERKw(this, param_2)
+int __ZNKSaIwE7addressERKw(this, wchar_t)
   void *this;
-  unsigned char * param_2;
+  unsigned char * wchar_t;
 {
-  return param_2;
+  return wchar_t;
 }
 
 /* __ZNKSaIwE8max_sizeEv @ 0x97c177d4 (12 bytes) */
@@ -411,8 +411,8 @@ int __ZNKSaIwE8max_sizeEv()
 }
 
 /* std__allocator_wchar_t___allocate @ 0x97c177e0 (88 bytes) */
-int std__allocator_wchar_t___allocate(param_1, param_2)
-  ulong param_1;
+int std__allocator_wchar_t___allocate(this, param_2)
+  ulong this;
   void *param_2;
 {
   undefined4 uVar1;
@@ -430,37 +430,37 @@ int std__allocator_wchar_t___allocate(param_1, param_2)
 }
 
 /* __ZNSaIwE10deallocateEPwm @ 0x97c17838 (12 bytes) */
-int __ZNSaIwE10deallocateEPwm(this, param_2, param_3)
+int __ZNSaIwE10deallocateEPwm(this, wchar_t, param_3)
   void *this;
-  unsigned char * param_2;
+  unsigned char * wchar_t;
   ulong param_3;
 {
-  return ((int (*)())std____default_alloc_template_true_0___deallocate)(param_2,param_3 << 2);
+  return ((int (*)())std____default_alloc_template_true_0___deallocate)(wchar_t,param_3 << 2);
 }
 
 /* __ZNSaIwE9constructEPwRKw @ 0x97c17844 (20 bytes) */
-int __ZNSaIwE9constructEPwRKw(this, param_2, param_3)
+int __ZNSaIwE9constructEPwRKw(this, wchar_t1, wchar_t2)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * wchar_t1;
+  unsigned char * wchar_t2;
 {
-  if (param_2 == (unsigned char *)0x0) {
+  if (wchar_t1 == (unsigned char *)0x0) {
     return;
   }
-  *(undefined4 *)param_2 = *(undefined4 *)param_3;
+  *(undefined4 *)wchar_t1 = *(undefined4 *)wchar_t2;
   return;
 }
 
 /* __ZNSaIwE7destroyEPw @ 0x97c17858 (4 bytes) */
-int __ZNSaIwE7destroyEPw(param_1)
-  unsigned char * param_1;
+int __ZNSaIwE7destroyEPw(this)
+  unsigned char * this;
 {
   return;
 }
 
 /* std____default_alloc_template_true_0____S_refill @ 0x97c1785c (152 bytes) */
-int std____default_alloc_template_true_0____S_refill(param_1)
-  ulong param_1;
+int std____default_alloc_template_true_0____S_refill(this)
+  ulong this;
 {
   int iVar1;
   int loopIndex;
@@ -468,14 +468,14 @@ int std____default_alloc_template_true_0____S_refill(param_1)
   int local_20 [6];
   
   local_20[0] = 0x14;
-  iVar1 = ((int (*)())std____default_alloc_template_true_0____S_chunk_alloc)(param_1,local_20);
+  iVar1 = ((int (*)())std____default_alloc_template_true_0____S_chunk_alloc)(this,local_20);
   if (local_20[0] != 1) {
-    *(undefined4 **)(&DAT_a7b7bf90 + (param_1 + 7 >> 1 & 0x7ffffffc)) =
-         (undefined4 *)(iVar1 + param_1);
-    puVar3 = (undefined4 *)(iVar1 + param_1);
+    *(undefined4 **)(&DAT_a7b7bf90 + (this + 7 >> 1 & 0x7ffffffc)) =
+         (undefined4 *)(iVar1 + this);
+    puVar3 = (undefined4 *)(iVar1 + this);
     for (loopIndex = 1; local_20[0] + -1 != loopIndex; loopIndex = loopIndex + 1) {
-      *puVar3 = (undefined4 *)((int)puVar3 + param_1);
-      puVar3 = (undefined4 *)((int)puVar3 + param_1);
+      *puVar3 = (undefined4 *)((int)puVar3 + this);
+      puVar3 = (undefined4 *)((int)puVar3 + this);
     }
     *puVar3 = 0;
   }
@@ -483,8 +483,8 @@ int std____default_alloc_template_true_0____S_refill(param_1)
 }
 
 /* std____default_alloc_template_true_0____S_chunk_alloc @ 0x97c178f4 (368 bytes) */
-int std____default_alloc_template_true_0____S_chunk_alloc(param_1, param_2)
-  ulong param_1;
+int std____default_alloc_template_true_0____S_chunk_alloc(this, param_2)
+  ulong this;
   int *param_2;
 {
   uint uVar1;
@@ -495,16 +495,16 @@ int std____default_alloc_template_true_0____S_chunk_alloc(param_1, param_2)
 LAB_97c1791c:
   do {
     puVar3 = _S_start_free;
-    uVar2 = param_1 * *param_2;
+    uVar2 = this * *param_2;
     uVar1 = _S_end_free - (int)_S_start_free;
     if (uVar2 <= uVar1) {
       _S_start_free = (undefined4 *)((int)_S_start_free + uVar2);
       return puVar3;
     }
-    if (param_1 <= uVar1) {
-      *param_2 = uVar1 / param_1;
+    if (this <= uVar1) {
+      *param_2 = uVar1 / this;
       puVar3 = _S_start_free;
-      _S_start_free = (undefined4 *)((int)_S_start_free + param_1 * (uVar1 / param_1));
+      _S_start_free = (undefined4 *)((int)_S_start_free + this * (uVar1 / this));
       return puVar3;
     }
     uVar4 = uVar2 * 2 + ((_S_heap_size >> 4) + 7 & 0xfffffff8);
@@ -514,7 +514,7 @@ LAB_97c1791c:
       *(undefined4 **)(&DAT_a7b7bf90 + uVar1) = _S_start_free;
     }
     _S_start_free = operator_new(uVar4);
-    uVar1 = param_1;
+    uVar1 = this;
     if (_S_start_free == (undefined4 *)0x0) {
       for (; uVar1 < 0x81; uVar1 = uVar1 + 8) {
         uVar2 = uVar1 + 7 >> 1 & 0x7ffffffc;
@@ -535,8 +535,8 @@ LAB_97c1791c:
 }
 
 /* std____default_alloc_template_true_0___reallocate @ 0x97c17a64 (172 bytes) */
-int std____default_alloc_template_true_0___reallocate(param_1, param_2, param_3)
-  void *param_1;
+int std____default_alloc_template_true_0___reallocate(this, param_2, param_3)
+  void *this;
   ulong param_2;
   ulong param_3;
 {
@@ -544,17 +544,17 @@ int std____default_alloc_template_true_0___reallocate(param_1, param_2, param_3)
   void *pvVar1;
   
   if ((0x80 < param_2) && (0x80 < param_3)) {
-    allocation = (void *)_realloc(param_1,param_3);
+    allocation = (void *)_realloc(this,param_3);
     return allocation;
   }
-  pvVar1 = param_1;
+  pvVar1 = this;
   if ((param_2 + 7 & 0xfffffff8) != (param_3 + 7 & 0xfffffff8)) {
     pvVar1 = (void *)allocate(param_3);
     if (param_2 < param_3) {
       param_3 = param_2;
     }
-    _memcpy(pvVar1,param_1,param_3);
-    deallocate(param_1,param_2);
+    _memcpy(pvVar1,this,param_3);
+    deallocate(this,param_2);
   }
   return pvVar1;
 }
@@ -580,29 +580,29 @@ int operator_new__(param_1)
 }
 
 /* __ZNSt11logic_errorC2ERKSs @ 0x97c17b64 (4 bytes) */
-int __ZNSt11logic_errorC2ERKSs(this, param_2)
+int __ZNSt11logic_errorC2ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
   *(int *)this = DAT_a7b7c014 + 8;
-  return __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
+  return __ZNSsC1ERKSs((void *)((int)this + 4),text);
 }
 
 /* __ZNSt11logic_errorC1ERKSs @ 0x97c17b68 (4 bytes) */
-int __ZNSt11logic_errorC1ERKSs(this, param_2)
+int __ZNSt11logic_errorC1ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
-  return ((int (*)())__ZNSt11logic_errorC4ERKSs)(this,param_2);
+  return ((int (*)())__ZNSt11logic_errorC4ERKSs)(this,text);
 }
 
 /* __ZNSt11logic_errorC4ERKSs @ 0x97c17b6c (56 bytes) */
-int __ZNSt11logic_errorC4ERKSs(this, param_2)
+int __ZNSt11logic_errorC4ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
   *(int *)this = DAT_a7b7c014 + 8;
-  return __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
+  return __ZNSsC1ERKSs((void *)((int)this + 4),text);
 }
 
 /* __ZNSt11logic_errorD2Ev @ 0x97c17bcc (8 bytes) */
@@ -670,36 +670,36 @@ int __ZNKSt11logic_error4whatEv(this)
 }
 
 /* __ZNSt12domain_errorC2ERKSs @ 0x97c17c9c (4 bytes) */
-int __ZNSt12domain_errorC2ERKSs(this, param_2)
+int __ZNSt12domain_errorC2ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
-  return ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,param_2);
+  return ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,text);
 }
 
 /* __ZNSt12domain_errorC1ERKSs @ 0x97c17ca0 (4 bytes) */
-int __ZNSt12domain_errorC1ERKSs(this, param_2)
+int __ZNSt12domain_errorC1ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
-  return ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,param_2);
+  return ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,text);
 }
 
 /* __ZNSt12domain_errorC4ERKSs @ 0x97c17ca4 (68 bytes) */
-int __ZNSt12domain_errorC4ERKSs(this, param_2)
+int __ZNSt12domain_errorC4ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
-  ((int (*)())__ZNSt11logic_errorC2ERKSs)(this,param_2);
+  ((int (*)())__ZNSt11logic_errorC2ERKSs)(this,text);
   *(undefined ***)this = &PTR___ZNSt12domain_errorD1Ev_a7b7ded8;
   return;
 }
 
 /* __ZNSt16invalid_argumentC2ERKSs @ 0x97c17ce8 (4 bytes) */
-int __ZNSt16invalid_argumentC2ERKSs(this, param_2)
+int __ZNSt16invalid_argumentC2ERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
-  return __ZNSt16invalid_argumentC4ERKSs(this,param_2);
+  return __ZNSt16invalid_argumentC4ERKSs(this,text);
 }
 

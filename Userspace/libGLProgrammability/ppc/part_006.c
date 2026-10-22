@@ -429,9 +429,9 @@ int _ShGetCompilerSymbolTable(param_1)
 }
 
 /* TType__buildMangledName @ 0x97ba2670 (688 bytes) */
-int TType__buildMangledName(this, param_2)
+int TType__buildMangledName(this, text)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
   int iVar1;
   ulong length;
@@ -452,7 +452,7 @@ int TType__buildMangledName(this, param_2)
   else {
     uVar3 = 0x6d;
 LAB_97ba26e0:
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,uVar3);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,uVar3);
   }
   switch(*(uint *)(this + 0x24) >> 0x13 & 0x3f) {
   default:
@@ -466,7 +466,7 @@ LAB_97ba26e0:
   case 3:
     uVar3 = 0x62;
 LAB_97ba2778:
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,uVar3);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,uVar3);
     goto switchD_97ba270c_caseD_0;
   case 5:
     pcVar4 = "s1";
@@ -502,39 +502,39 @@ LAB_97ba2778:
     break;
   case 0xe:
     length = _strlen("struct-");
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,"struct-",length);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(text,"struct-",length);
     if (*(unsigned char **)(this + 0x10) != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_(param_2,*(unsigned char **)(this + 0x10))
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_(text,*(unsigned char **)(this + 0x10))
       ;
     }
     for (uVar5 = 0;
         uVar5 < (uint)(*(int *)(*(int *)(this + 8) + 8) - *(int *)(*(int *)(this + 8) + 4) >> 3);
         uVar5 = uVar5 + 1) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,0x2d);
-      ((int (*)())TType__buildMangledName)(*(unsigned char **)(*(int *)(*(int *)(this + 8) + 4) + uVar5 * 8),param_2);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,0x2d);
+      ((int (*)())TType__buildMangledName)(*(unsigned char **)(*(int *)(*(int *)(this + 8) + 4) + uVar5 * 8),text);
     }
     goto switchD_97ba270c_caseD_0;
   }
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,pcVar4,length);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(text,pcVar4,length);
 switchD_97ba270c_caseD_0:
   uVar3 = (**(code **)(*(int *)this + 0x2c))(this);
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,(int)(char)((char)uVar3 + '0'))
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,(int)(char)((char)uVar3 + '0'))
   ;
   iVar1 = (**(code **)(*(int *)this + 0x38))(this);
   if (iVar1 != 0) {
     _sprintf(acStack_20,"%d",*(undefined4 *)(this + 4));
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,0x5b);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,0x5b);
     length = _strlen(acStack_20);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,acStack_20,length);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,0x5d);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(text,acStack_20,length);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,0x5d);
   }
   return;
 }
 
 /* TVariable__dump @ 0x97ba295c (220 bytes) */
-int TVariable__dump(this, param_2)
+int TVariable__dump(this, infoSink)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * infoSink;
 {
   char *basicString;
   char *qualifierString;
@@ -543,7 +543,7 @@ int TVariable__dump(this, param_2)
   unsigned char * this_00;
   
   iVar2 = *(int *)(this + 4);
-  this_00 = param_2 + 8;
+  this_00 = infoSink + 8;
   iVar3 = *(int *)(iVar2 + 4);
   *(undefined1 *)(iVar3 + *(int *)(iVar3 + -0xc)) = *DAT_a7b7ba80;
   __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(iVar2 + 4));
@@ -560,9 +560,9 @@ int TVariable__dump(this, param_2)
 }
 
 /* TFunction__dump @ 0x97ba2a38 (216 bytes) */
-int TFunction__dump(this, param_2)
+int TFunction__dump(this, infoSink)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * infoSink;
 {
   undefined1 *puVar1;
   int iVar2;
@@ -572,7 +572,7 @@ int TFunction__dump(this, param_2)
   
   puVar1 = DAT_a7b7ba80;
   iVar4 = *(int *)(this + 4);
-  this_00 = param_2 + 8;
+  this_00 = infoSink + 8;
   iVar2 = *(int *)(iVar4 + 4);
   *(undefined1 *)(iVar2 + *(int *)(iVar2 + -0xc)) = *DAT_a7b7ba80;
   __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(iVar4 + 4));
@@ -587,9 +587,9 @@ int TFunction__dump(this, param_2)
 }
 
 /* TSymbolTableLevel__dump @ 0x97ba2b10 (112 bytes) */
-int TSymbolTableLevel__dump(this, param_2)
+int TSymbolTableLevel__dump(this, infoSink)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * infoSink;
 {
   undefined4 in_r5;
   undefined4 in_r6;
@@ -602,7 +602,7 @@ int TSymbolTableLevel__dump(this, param_2)
   local_20[0] = *(int *)(a6 + 8);
   while (local_20[0] != a6) {
     (**(code **)(**(int **)(local_20[0] + 0x18) + 0x14))
-              (*(int **)(local_20[0] + 0x18),param_2,in_r5,in_r6,in_r7,in_r8,a6);
+              (*(int **)(local_20[0] + 0x18),infoSink,in_r5,in_r6,in_r7,in_r8,a6);
     std___Rb_tree_base_iterator___M_increment((unsigned char *)local_20);
     a6 = *(int *)(this + 4);
   }
@@ -610,9 +610,9 @@ int TSymbolTableLevel__dump(this, param_2)
 }
 
 /* TSymbolTable__dump @ 0x97ba2b80 (268 bytes) */
-int TSymbolTable__dump(this, param_2)
+int TSymbolTable__dump(this, infoSink)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * infoSink;
 {
   int atomicStore;
   int *piVar2;
@@ -629,7 +629,7 @@ int TSymbolTable__dump(this, param_2)
   
   iVar4 = (*(int *)(this + 4) - *(int *)this >> 2) + -1;
   if (-1 < iVar4) {
-    this_00 = param_2 + 8;
+    this_00 = infoSink + 8;
     do {
       bVar5 = (iVar4 == 0) << 1;
       __ZN13TInfoSinkBase6appendEPKc(this_00,"LEVEL ");
@@ -654,7 +654,7 @@ int TSymbolTable__dump(this, param_2)
                   ((unsigned char *)(local_6c + -0xc),local_40);
       }
       __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
-      ((int (*)())TSymbolTableLevel__dump)(*(unsigned char **)(*(int *)this + iVar4 * 4),param_2);
+      ((int (*)())TSymbolTableLevel__dump)(*(unsigned char **)(*(int *)this + iVar4 * 4),infoSink);
       iVar4 = iVar4 + -1;
     } while (-1 < iVar4);
   }
@@ -779,10 +779,10 @@ int __ZN17TSymbolTableLevelD4Ev(this, param_2)
 }
 
 /* TSymbolTableLevel__relateToOperator @ 0x97ba2e58 (168 bytes) */
-int TSymbolTableLevel__relateToOperator(this, param_2, param_3)
+int TSymbolTableLevel__relateToOperator(this, str, op)
   unsigned char * this;
-  char *param_2;
-  undefined4 param_3;
+  char *str;
+  undefined4 op;
 {
   int iVar1;
   int iVar2;
@@ -797,9 +797,9 @@ int TSymbolTableLevel__relateToOperator(this, param_2, param_3)
       if (iVar1 != 0) {
         iVar2 = *(int *)(local_40[0] + 0x18);
         iVar1 = __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc
-                          (*(void **)(iVar2 + 4),param_2);
+                          (*(void **)(iVar2 + 4),str);
         if (iVar1 == 0) {
-          *(undefined4 *)(iVar2 + 0x4c) = param_3;
+          *(undefined4 *)(iVar2 + 0x4c) = op;
         }
       }
       std___Rb_tree_base_iterator___M_increment((unsigned char *)local_40);
@@ -878,9 +878,9 @@ int __ZN7TSymbolC1ERKS_(this, symbol)
 }
 
 /* __ZN7TSymbolC4ERKS_ @ 0x97ba2f08 (164 bytes) */
-int __ZN7TSymbolC4ERKS_(this, param_2)
+int __ZN7TSymbolC4ERKS_(this, symbol)
   void *this;
-  unsigned char * param_2;
+  unsigned char * symbol;
 {
   undefined4 uVar1;
   void *pvVar2;
@@ -891,7 +891,7 @@ int __ZN7TSymbolC4ERKS_(this, param_2)
   char *pcVar5;
   undefined4 local_30 [7];
   
-  iVar3 = *(int *)(param_2 + 4);
+  iVar3 = *(int *)(symbol + 4);
   *(undefined ***)this = &PTR___ZN7TSymbolD1Ev_a7b7d568;
   iVar4 = *(int *)(iVar3 + 4);
   *(undefined1 *)(iVar4 + *(int *)(iVar4 + -0xc)) = *DAT_a7b7ba80;
@@ -904,17 +904,17 @@ int __ZN7TSymbolC4ERKS_(this, param_2)
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this_01,pcVar5,(unsigned char *)local_30);
     pvVar2 = this_01;
   }
-  uVar1 = *(undefined4 *)(param_2 + 8);
+  uVar1 = *(undefined4 *)(symbol + 8);
   *(void **)((int)this + 4) = pvVar2;
   *(undefined4 *)((int)this + 8) = uVar1;
   return;
 }
 
 /* __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba2fac (4 bytes) */
-int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, param_2, param_3)
+int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, variable, map)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * variable;
+  unsigned char * map;
 {
   uint uVar1;
   int iVar2;
@@ -923,21 +923,21 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 uVar4;
   char *pcVar5;
   
-  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
+  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)variable);
   *(int *)this = DAT_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
-  TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(param_2 + 0xc),param_3);
-  iVar2 = *(int *)(param_2 + 0x3c);
-  uVar1 = *(uint *)(param_2 + 0x34);
+  TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
+  iVar2 = *(int *)(variable + 0x3c);
+  uVar1 = *(uint *)(variable + 0x34);
   *(uint *)((int)this + 0x34) = uVar1;
   if (iVar2 == 0) {
-    iVar2 = *(int *)(param_2 + 0x38);
+    iVar2 = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
     uVar1 = 0;
     if (iVar2 == 0) goto LAB_97ba314c;
-    uVar1 = *(uint *)(param_2 + 0x14);
+    uVar1 = *(uint *)(variable + 0x14);
     if (uVar1 == 0) {
-      uVar1 = *(uint *)(param_2 + 0x30);
+      uVar1 = *(uint *)(variable + 0x30);
       if ((uVar1 & 0x400) == 0) {
         uVar1 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
       }
@@ -952,12 +952,12 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
         uVar1 = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
         if (uVar1 == 2) {
 LAB_97ba311c:
-          *puVar3 = **(undefined4 **)(param_2 + 0x38);
+          *puVar3 = **(undefined4 **)(variable + 0x38);
           return;
         }
         if (uVar1 < 3) {
           if (uVar1 == 1) {
-            *puVar3 = **(undefined4 **)(param_2 + 0x38);
+            *puVar3 = **(undefined4 **)(variable + 0x38);
             return;
           }
         }
@@ -988,10 +988,10 @@ LAB_97ba314c:
 }
 
 /* __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba2fb0 (4 bytes) */
-int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, param_2, param_3)
+int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, variable, map)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * variable;
+  unsigned char * map;
 {
   uint uVar1;
   int iVar2;
@@ -1000,21 +1000,21 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 uVar4;
   char *pcVar5;
   
-  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
+  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)variable);
   *(int *)this = DAT_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
-  TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(param_2 + 0xc),param_3);
-  iVar2 = *(int *)(param_2 + 0x3c);
-  uVar1 = *(uint *)(param_2 + 0x34);
+  TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
+  iVar2 = *(int *)(variable + 0x3c);
+  uVar1 = *(uint *)(variable + 0x34);
   *(uint *)((int)this + 0x34) = uVar1;
   if (iVar2 == 0) {
-    iVar2 = *(int *)(param_2 + 0x38);
+    iVar2 = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
     uVar1 = 0;
     if (iVar2 == 0) goto LAB_97ba314c;
-    uVar1 = *(uint *)(param_2 + 0x14);
+    uVar1 = *(uint *)(variable + 0x14);
     if (uVar1 == 0) {
-      uVar1 = *(uint *)(param_2 + 0x30);
+      uVar1 = *(uint *)(variable + 0x30);
       if ((uVar1 & 0x400) == 0) {
         uVar1 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
       }
@@ -1029,12 +1029,12 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
         uVar1 = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
         if (uVar1 == 2) {
 LAB_97ba311c:
-          *puVar3 = **(undefined4 **)(param_2 + 0x38);
+          *puVar3 = **(undefined4 **)(variable + 0x38);
           return;
         }
         if (uVar1 < 3) {
           if (uVar1 == 1) {
-            *puVar3 = **(undefined4 **)(param_2 + 0x38);
+            *puVar3 = **(undefined4 **)(variable + 0x38);
             return;
           }
         }
@@ -1065,10 +1065,10 @@ LAB_97ba314c:
 }
 
 /* __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba2fb4 (432 bytes) */
-int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, param_2, param_3)
+int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, variable, map)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * variable;
+  unsigned char * map;
 {
   uint uVar1;
   int iVar2;
@@ -1077,21 +1077,21 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 uVar4;
   char *pcVar5;
   
-  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
+  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)variable);
   *(int *)this = DAT_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
-  TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(param_2 + 0xc),param_3);
-  iVar2 = *(int *)(param_2 + 0x3c);
-  uVar1 = *(uint *)(param_2 + 0x34);
+  TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
+  iVar2 = *(int *)(variable + 0x3c);
+  uVar1 = *(uint *)(variable + 0x34);
   *(uint *)((int)this + 0x34) = uVar1;
   if (iVar2 == 0) {
-    iVar2 = *(int *)(param_2 + 0x38);
+    iVar2 = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
     uVar1 = 0;
     if (iVar2 == 0) goto LAB_97ba314c;
-    uVar1 = *(uint *)(param_2 + 0x14);
+    uVar1 = *(uint *)(variable + 0x14);
     if (uVar1 == 0) {
-      uVar1 = *(uint *)(param_2 + 0x30);
+      uVar1 = *(uint *)(variable + 0x30);
       if ((uVar1 & 0x400) == 0) {
         uVar1 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
       }
@@ -1106,12 +1106,12 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
         uVar1 = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
         if (uVar1 == 2) {
 LAB_97ba311c:
-          *puVar3 = **(undefined4 **)(param_2 + 0x38);
+          *puVar3 = **(undefined4 **)(variable + 0x38);
           return;
         }
         if (uVar1 < 3) {
           if (uVar1 == 1) {
-            *puVar3 = **(undefined4 **)(param_2 + 0x38);
+            *puVar3 = **(undefined4 **)(variable + 0x38);
             return;
           }
         }
@@ -1142,24 +1142,24 @@ LAB_97ba314c:
 }
 
 /* TVariable__clone @ 0x97ba3164 (76 bytes) */
-int TVariable__clone(this, param_2)
+int TVariable__clone(this, map)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * map;
 {
   unsigned char * this_00;
   void *this_01;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   this_01 = (void *)TPoolAllocator__allocate(this_00,0x40);
-  ((int (*)())__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(this_01,this,param_2);
+  ((int (*)())__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(this_01,this,map);
   return this_01;
 }
 
 /* __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba31b0 (4 bytes) */
-int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, param_2, param_3)
+int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, function, map)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * function;
+  unsigned char * map;
 {
   undefined4 poolAllocator2;
   undefined1 *puVar1;
@@ -1183,7 +1183,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 uStack_5c;
   undefined4 auStack_50 [4];
   
-  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
+  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
@@ -1204,7 +1204,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = iVar8 + 0xc;
   puVar1 = DAT_a7b7ba80;
-  for (uVar11 = 0; uVar11 < (uint)(*(int *)(param_2 + 0x14) - *(int *)(param_2 + 0x10) >> 3);
+  for (uVar11 = 0; uVar11 < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       uVar11 = uVar11 + 1) {
     puVar7 = *(undefined4 **)((int)this + 0x14);
     if (puVar7 == *(undefined4 **)((int)this + 0x18)) {
@@ -1220,7 +1220,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
       }
       *(int *)((int)this + 0x14) = iVar8 + 8;
     }
-    iVar6 = *(int *)(param_2 + 0x10);
+    iVar6 = *(int *)(function + 0x10);
     iVar10 = *(int *)(iVar6 + uVar11 * 8);
     iVar8 = *(int *)((int)this + 0x14);
     iVar9 = *(int *)(iVar10 + 4);
@@ -1240,23 +1240,23 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     this_01 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)this_01 = &PTR___ZN5TTypeD1Ev_a7b7d590;
-    TType__copyType(this_01,pTVar13,param_3);
+    TType__copyType(this_01,pTVar13,map);
     *(unsigned char **)(iVar8 + -4) = this_01;
   }
-  TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(param_2 + 0x1c),param_3);
+  TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(function + 0x1c),map);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
-            ((void *)((int)this + 0x44),(unsigned char *)(param_2 + 0x44));
-  uVar4 = *(undefined4 *)(param_2 + 0x4c);
-  *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(param_2 + 0x50);
+            ((void *)((int)this + 0x44),(unsigned char *)(function + 0x44));
+  uVar4 = *(undefined4 *)(function + 0x4c);
+  *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(function + 0x50);
   *(undefined4 *)((int)this + 0x4c) = uVar4;
   return;
 }
 
 /* __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba31b4 (4 bytes) */
-int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, param_2, param_3)
+int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, function, map)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * function;
+  unsigned char * map;
 {
   undefined4 poolAllocator2;
   undefined1 *puVar1;
@@ -1280,7 +1280,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 uStack_5c;
   undefined4 auStack_50 [4];
   
-  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
+  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
@@ -1301,7 +1301,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = iVar8 + 0xc;
   puVar1 = DAT_a7b7ba80;
-  for (uVar11 = 0; uVar11 < (uint)(*(int *)(param_2 + 0x14) - *(int *)(param_2 + 0x10) >> 3);
+  for (uVar11 = 0; uVar11 < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       uVar11 = uVar11 + 1) {
     puVar7 = *(undefined4 **)((int)this + 0x14);
     if (puVar7 == *(undefined4 **)((int)this + 0x18)) {
@@ -1317,7 +1317,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
       }
       *(int *)((int)this + 0x14) = iVar8 + 8;
     }
-    iVar6 = *(int *)(param_2 + 0x10);
+    iVar6 = *(int *)(function + 0x10);
     iVar10 = *(int *)(iVar6 + uVar11 * 8);
     iVar8 = *(int *)((int)this + 0x14);
     iVar9 = *(int *)(iVar10 + 4);
@@ -1337,23 +1337,23 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     this_01 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)this_01 = &PTR___ZN5TTypeD1Ev_a7b7d590;
-    TType__copyType(this_01,pTVar13,param_3);
+    TType__copyType(this_01,pTVar13,map);
     *(unsigned char **)(iVar8 + -4) = this_01;
   }
-  TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(param_2 + 0x1c),param_3);
+  TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(function + 0x1c),map);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
-            ((void *)((int)this + 0x44),(unsigned char *)(param_2 + 0x44));
-  uVar4 = *(undefined4 *)(param_2 + 0x4c);
-  *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(param_2 + 0x50);
+            ((void *)((int)this + 0x44),(unsigned char *)(function + 0x44));
+  uVar4 = *(undefined4 *)(function + 0x4c);
+  *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(function + 0x50);
   *(undefined4 *)((int)this + 0x4c) = uVar4;
   return;
 }
 
 /* __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba31b8 (492 bytes) */
-int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, param_2, param_3)
+int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE(this, function, map)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * function;
+  unsigned char * map;
 {
   undefined4 poolAllocator2;
   undefined1 *puVar1;
@@ -1377,7 +1377,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 local_5c;
   undefined4 local_50 [4];
   
-  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
+  ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
@@ -1398,7 +1398,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = iVar8 + 0xc;
   puVar1 = DAT_a7b7ba80;
-  for (uVar11 = 0; uVar11 < (uint)(*(int *)(param_2 + 0x14) - *(int *)(param_2 + 0x10) >> 3);
+  for (uVar11 = 0; uVar11 < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       uVar11 = uVar11 + 1) {
     puVar7 = *(undefined4 **)((int)this + 0x14);
     if (puVar7 == *(undefined4 **)((int)this + 0x18)) {
@@ -1415,7 +1415,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
       }
       *(int *)((int)this + 0x14) = iVar8 + 8;
     }
-    iVar6 = *(int *)(param_2 + 0x10);
+    iVar6 = *(int *)(function + 0x10);
     iVar10 = *(int *)(iVar6 + uVar11 * 8);
     iVar8 = *(int *)((int)this + 0x14);
     iVar9 = *(int *)(iVar10 + 4);
@@ -1435,36 +1435,36 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     this_01 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)this_01 = &PTR___ZN5TTypeD1Ev_a7b7d590;
-    TType__copyType(this_01,pTVar13,param_3);
+    TType__copyType(this_01,pTVar13,map);
     *(unsigned char **)(iVar8 + -4) = this_01;
   }
-  TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(param_2 + 0x1c),param_3);
+  TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(function + 0x1c),map);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
-            ((void *)((int)this + 0x44),(unsigned char *)(param_2 + 0x44));
-  uVar4 = *(undefined4 *)(param_2 + 0x4c);
-  *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(param_2 + 0x50);
+            ((void *)((int)this + 0x44),(unsigned char *)(function + 0x44));
+  uVar4 = *(undefined4 *)(function + 0x4c);
+  *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(function + 0x50);
   *(undefined4 *)((int)this + 0x4c) = uVar4;
   return;
 }
 
 /* TFunction__clone @ 0x97ba33a4 (76 bytes) */
-int TFunction__clone(this, param_2)
+int TFunction__clone(this, map)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * map;
 {
   unsigned char * this_00;
   void *this_01;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   this_01 = (void *)TPoolAllocator__allocate(this_00,0x54);
-  ((int (*)())__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(this_01,this,param_2);
+  ((int (*)())__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(this_01,this,map);
   return this_01;
 }
 
 /* TSymbolTableLevel__clone @ 0x97ba33f0 (352 bytes) */
-int TSymbolTableLevel__clone(this, param_2)
+int TSymbolTableLevel__clone(this, map)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * map;
 {
   int atomicStore;
   int iVar2;
@@ -1509,7 +1509,7 @@ int TSymbolTableLevel__clone(this, param_2)
   if (local_90[0] != local_80) {
     do {
       piVar6 = (int *)(**(code **)(**(int **)(local_90[0] + 0x18) + 0x18))
-                                (*(int **)(local_90[0] + 0x18),param_2,in_r5,in_r6,in_r7,in_r8,a6);
+                                (*(int **)(local_90[0] + 0x18),map,in_r5,in_r6,in_r7,in_r8,a6);
       local_6c = 0;
       psVar7 = (unsigned char *)(**(code **)(*piVar6 + 8))(piVar6);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_50,psVar7);
@@ -1541,9 +1541,9 @@ int TSymbolTableLevel__clone(this, param_2)
 }
 
 /* TSymbolTable__copyTable @ 0x97ba3550 (492 bytes) */
-int TSymbolTable__copyTable(this, param_2)
+int TSymbolTable__copyTable(this, symbolTable)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * symbolTable;
 {
   undefined4 atomicStore;
   undefined *puVar2;
@@ -1602,10 +1602,10 @@ int TSymbolTable__copyTable(this, param_2)
   puVar4[1] = 0;
   puVar4[2] = puVar4;
   puVar4[3] = puVar4;
-  *(undefined4 *)(this + 0xc) = *(undefined4 *)(param_2 + 0xc);
+  *(undefined4 *)(this + 0xc) = *(undefined4 *)(symbolTable + 0xc);
   local_60 = puVar4;
-  for (loopIndex = 0; loopIndex < (uint)(*(int *)(param_2 + 4) - *(int *)param_2 >> 2); loopIndex = loopIndex + 1) {
-    local_30[0] = ((int (*)())TSymbolTableLevel__clone)(*(unsigned char **)(*(int *)param_2 + loopIndex * 4),(unsigned char *)&local_60);
+  for (loopIndex = 0; loopIndex < (uint)(*(int *)(symbolTable + 4) - *(int *)symbolTable >> 2); loopIndex = loopIndex + 1) {
+    local_30[0] = ((int (*)())TSymbolTableLevel__clone)(*(unsigned char **)(*(int *)symbolTable + loopIndex * 4),(unsigned char *)&local_60);
     puVar4 = *(undefined4 **)(this + 4);
     if (puVar4 == *(undefined4 **)(this + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
@@ -7974,8 +7974,8 @@ LAB_97ba5548:
 }
 
 /* yylex @ 0x97bac120 (4128 bytes) */
-int yylex(param_1, param_2)
-  unsigned char * param_1;
+int yylex(yYSTYPE, param_2)
+  unsigned char * yYSTYPE;
   void *param_2;
 {
   int iVar1;
@@ -8072,201 +8072,201 @@ LAB_97bad2c8:
     goto switchD_97bac34c_caseD_1;
   case 2:
     token = 0x101;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 3:
     token = 0x102;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 4:
     token = 0x11d;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 5:
     token = 0x11e;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 6:
     token = 0x106;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 7:
     token = 0x107;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 8:
     token = 0x108;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 9:
     token = 0x10a;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 10:
     token = 0x121;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0xb:
     token = 0x10b;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0xc:
     token = 0x109;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0xd:
     token = 0x11a;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0xe:
     token = 0x11b;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0xf:
     token = 0x11c;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x10:
     token = 0x104;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x11:
     token = 0x105;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x12:
     token = 0x120;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x13:
     token = 0x103;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x14:
     token = 0x12e;
-    *(undefined4 *)(param_1 + 4) = 1;
-    *(char **)param_1 = pcVar3;
+    *(undefined4 *)(yYSTYPE + 4) = 1;
+    *(char **)yYSTYPE = pcVar3;
     break;
   case 0x15:
     token = 0x12e;
-    *(undefined4 *)(param_1 + 4) = 0;
-    *(char **)param_1 = pcVar3;
+    *(undefined4 *)(yYSTYPE + 4) = 0;
+    *(char **)yYSTYPE = pcVar3;
     break;
   case 0x16:
     token = 0x10c;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x17:
     token = 0x10d;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x18:
     token = 0x117;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x19:
     token = 0x118;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1a:
     token = 0x119;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1b:
     token = 0x114;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1c:
     token = 0x115;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1d:
     token = 0x116;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1e:
     token = 0x111;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1f:
     token = 0x112;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x20:
     token = 0x113;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x21:
     token = 0x10e;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x22:
     token = 0x10f;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x23:
     token = 0x110;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x24:
     token = 0x122;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x25:
     token = 0x123;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x26:
     token = 0x124;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x27:
     token = 0x125;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x28:
     token = 0x126;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x29:
     token = 0x127;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x2a:
     token = 0x128;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x2b:
     token = 0x129;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x2c:
     token = 0x11f;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x2d:
     PaReservedWord();
@@ -8433,7 +8433,7 @@ LAB_97bad2c8:
     token = 0;
     break;
   case 0x56:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     pbVar11 = _yytext;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     this = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
@@ -8444,23 +8444,23 @@ LAB_97bad2c8:
                 (this,(char *)pbVar11,(unsigned char *)local_70);
       psVar4 = this;
     }
-    *(unsigned char **)(param_1 + 4) = psVar4;
-    token = PaIdentOrType(psVar4,param_2,(unsigned char **)(param_1 + 8));
+    *(unsigned char **)(yYSTYPE + 4) = psVar4;
+    token = PaIdentOrType(psVar4,param_2,(unsigned char **)(yYSTYPE + 8));
     break;
   case 0x57:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     lVar5 = _strtol((char *)_yytext,(char **)0x0,0);
-    *(long *)(param_1 + 4) = lVar5;
+    *(long *)(yYSTYPE + 4) = lVar5;
     token = 0x12d;
     break;
   case 0x58:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     lVar5 = _strtol((char *)_yytext,(char **)0x0,0);
-    *(long *)(param_1 + 4) = lVar5;
+    *(long *)(yYSTYPE + 4) = lVar5;
     token = 0x12d;
     break;
   case 0x59:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     TParseContext__error
               ((int)param_2,_yylineno,"Invalid Octal number.",(char *)_yytext,"","",uVar9 * 4,
                puVar10);
@@ -8468,134 +8468,134 @@ LAB_97bad2c8:
     token = 0;
     break;
   case 0x5a:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     lVar5 = _strtol((char *)_yytext,(char **)0x0,0);
-    *(long *)(param_1 + 4) = lVar5;
+    *(long *)(yYSTYPE + 4) = lVar5;
     token = 0x12d;
     break;
   case 0x5b:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     dVar15 = (double)((double (*)())_glp_strtod)(_yytext,0);
     token = 300;
-    *(float *)(param_1 + 4) = (float)dVar15;
+    *(float *)(yYSTYPE + 4) = (float)dVar15;
     break;
   case 0x5c:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     dVar15 = (double)((double (*)())_glp_strtod)(_yytext,0);
     token = 300;
-    *(float *)(param_1 + 4) = (float)dVar15;
+    *(float *)(yYSTYPE + 4) = (float)dVar15;
     break;
   case 0x5d:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     dVar15 = (double)((double (*)())_glp_strtod)(_yytext,0);
     token = 300;
-    *(float *)(param_1 + 4) = (float)dVar15;
+    *(float *)(yYSTYPE + 4) = (float)dVar15;
     break;
   case 0x5e:
-    iVar12 = PaParseComment((int *)param_1,param_2);
+    iVar12 = PaParseComment((int *)yYSTYPE,param_2);
     token = 0;
     if (iVar12 != 0) goto switchD_97bac34c_caseD_1;
     break;
   case 0x5f:
     token = 0x13d;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x60:
     token = 0x144;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x61:
     token = 0x13b;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x62:
     token = 0x13c;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 99:
     token = 0x13e;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 100:
     token = 0x13f;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x65:
     token = 0x140;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x66:
     token = 0x141;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x67:
     token = 0x142;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x68:
     token = 0x143;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x69:
     token = 0x132;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x6a:
     token = 0x133;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x6b:
     token = 0x138;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x6c:
     token = 0x139;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x6d:
     token = 0x13a;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x6e:
     token = 0x134;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x6f:
     token = 0x135;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x70:
     token = 0x136;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x71:
     token = 0x137;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x72:
     token = 0x130;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x73:
     token = 0x131;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x74:
     token = 0x14f;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x75:
     token = 0x149;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x76:
     token = 0x14a;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x77:
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     if (*(int *)((int)param_2 + 0x24) != 0) {
       *(undefined4 *)((int)param_2 + 0x1c) = 0;
     }
@@ -8603,31 +8603,31 @@ LAB_97bad2c8:
     break;
   case 0x78:
     token = 0x14d;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x79:
     token = 0x14e;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x7a:
     token = 0x145;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x24) = 1;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x7b:
     token = 0x146;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     *(undefined4 *)((int)param_2 + 0x24) = 0;
     break;
   case 0x7c:
     token = 0x147;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x7d:
     token = 0x148;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x7e:
     token = 0x14b;
@@ -8635,59 +8635,59 @@ LAB_97bad2c8:
     break;
   case 0x7f:
     token = 0x150;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x80:
     token = 0x151;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x81:
     token = 0x152;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x82:
     token = 0x153;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x83:
     token = 0x154;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x84:
     token = 0x155;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x85:
     token = 0x156;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x86:
     token = 0x157;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x87:
     token = 0x158;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x88:
     token = 0x159;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x89:
     token = 0x15a;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x8a:
     token = 0x15b;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x8b:
     token = 0x15c;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     break;
   case 0x8c:
     _yy_start = 1;
-    *(char **)param_1 = _yylineno;
+    *(char **)yYSTYPE = _yylineno;
     pbVar11 = _yytext;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     this_00 = (void *)TPoolAllocator__allocate(poolAllocator,8);
@@ -8698,7 +8698,7 @@ LAB_97bad2c8:
                 (this_00,(char *)pbVar11,(unsigned char *)local_60);
       pvVar13 = this_00;
     }
-    *(void **)(param_1 + 4) = pvVar13;
+    *(void **)(yYSTYPE + 4) = pvVar13;
     token = 0x12f;
     break;
   case 0x8f:
@@ -8970,16 +8970,16 @@ int yyrestart(param_1)
 }
 
 /* yy_switch_to_buffer @ 0x97bad968 (148 bytes) */
-int yy_switch_to_buffer(param_1)
-  unsigned char * param_1;
+int yy_switch_to_buffer(yy_buffer_state)
+  unsigned char * yy_buffer_state;
 {
-  if (_yy_current_buffer != param_1) {
+  if (_yy_current_buffer != yy_buffer_state) {
     if (_yy_current_buffer != (unsigned char *)0x0) {
       *_yy_c_buf_p = _yy_hold_char;
       *(undefined1 **)(_yy_current_buffer + 8) = _yy_c_buf_p;
       *(undefined4 *)(_yy_current_buffer + 0x10) = _yy_n_chars;
     }
-    _yy_current_buffer = param_1;
+    _yy_current_buffer = yy_buffer_state;
     ((int (*)())yy_load_buffer_state)();
     _yy_did_buffer_switch_on_eof = 1;
   }

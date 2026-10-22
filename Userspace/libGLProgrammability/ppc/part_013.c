@@ -349,9 +349,9 @@ int TPPStreamCompiler__reset(this)
 }
 
 /* TPPStreamCompiler__compile @ 0x97bc9f44 (332 bytes) */
-int TPPStreamCompiler__compile(this, param_2)
+int TPPStreamCompiler__compile(this, intermNode)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * intermNode;
 {
   uint uVar1;
   int iVar2;
@@ -361,7 +361,7 @@ int TPPStreamCompiler__compile(this, param_2)
   uint uVar6;
   int local_20 [5];
   
-  iVar2 = TPPStreamCompiler__parseIntermediateTree(this,param_2);
+  iVar2 = TPPStreamCompiler__parseIntermediateTree(this,intermNode);
   *(int *)(this + 0xc) = iVar2;
   if (iVar2 != 0) {
     iVar3 = *(int *)(this + 0x70);
@@ -490,27 +490,27 @@ int TPPStreamCompiler__getTableString(this)
 }
 
 /* ConstructCompiler @ 0x97bca268 (72 bytes) */
-int ConstructCompiler(param_1, param_2)
-  undefined4 param_1;
+int ConstructCompiler(language, param_2)
+  undefined4 language;
   undefined4 param_2;
 {
   void *this;
   
   this = operator_new(200);
-  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,param_1,param_2);
+  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,language,param_2);
   return this;
 }
 
 /* DeleteCompiler @ 0x97bca2b0 (24 bytes) */
-int DeleteCompiler(param_1)
-  unsigned char * param_1;
+int DeleteCompiler(compiler)
+  unsigned char * compiler;
 {
-  if (param_1 == (unsigned char *)0x0) {
+  if (compiler == (unsigned char *)0x0) {
     return;
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 4))(param_1);
+  (**(code **)(*(int *)compiler + 4))(compiler);
   return;
 }
 
@@ -2095,8 +2095,8 @@ LAB_97bcc698:
 }
 
 /* GetChunkForSymbol @ 0x97bcc6b8 (592 bytes) */
-int GetChunkForSymbol(param_1, param_2)
-  unsigned char * param_1;
+int GetChunkForSymbol(parseSymbol, param_2)
+  unsigned char * parseSymbol;
   int param_2;
 {
   uint builtInInitialSwizzle;
@@ -2111,10 +2111,10 @@ int GetChunkForSymbol(param_1, param_2)
   uint uVar7;
   int iVar8;
   
-  iVar8 = *(int *)(param_1 + 0x14);
+  iVar8 = *(int *)(parseSymbol + 0x14);
   if (((iVar8 == 0) || (iVar4 = _memcmp(iVar8,"gl_",3), iVar4 != 0)) ||
      (*(char *)(iVar8 + 3) == '_')) {
-    uVar6 = (**(code **)(**(int **)(param_1 + 0xc) + 0x24))(*(int **)(param_1 + 0xc));
+    uVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc));
     switch(uVar6) {
     case 0:
     case 1:
@@ -2134,7 +2134,7 @@ int GetChunkForSymbol(param_1, param_2)
     case 6:
       pbVar5 = (byte *)_PPStreamChunkCreateWithType(3,0);
       *(uint *)(pbVar5 + 0xc) = *(uint *)(pbVar5 + 0xc) & 0xffe0ffff | 0x10000;
-      iVar8 = (**(code **)(**(int **)(param_1 + 0xc) + 0x20))(*(int **)(param_1 + 0xc));
+      iVar8 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x20))(*(int **)(parseSymbol + 0xc));
       *(uint *)(pbVar5 + 0x10) =
            (uint)(iVar8 - 5U < 8) << 0x1f | *(uint *)(pbVar5 + 0x10) & 0x7fffffff;
       break;
@@ -2143,36 +2143,36 @@ int GetChunkForSymbol(param_1, param_2)
     }
   }
   else {
-    pbVar5 = (byte *)((int (*)())GetBuiltInChunkForSymbol)(param_1,param_2);
-    *(undefined4 *)(param_1 + 0x38) = 1;
-    *(undefined4 *)(param_1 + 0x28) = 0xffffffff;
+    pbVar5 = (byte *)((int (*)())GetBuiltInChunkForSymbol)(parseSymbol,param_2);
+    *(undefined4 *)(parseSymbol + 0x38) = 1;
+    *(undefined4 *)(parseSymbol + 0x28) = 0xffffffff;
   }
   if (pbVar5 == (byte *)0x0) goto LAB_97bcc8c4;
   bVar2 = *pbVar5;
   if (bVar2 == 2) {
 LAB_97bcc864:
-    streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
+    streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
     *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-    scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+    scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
     uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
 LAB_97bcc8c0:
     *(uint *)(pbVar5 + 0xc) = uVar7;
   }
   else if (bVar2 < 3) {
     if (bVar2 == 0) {
-      streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
+      streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
       *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-      scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+      scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
       uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
       goto LAB_97bcc8c0;
     }
   }
   else if ((bVar2 == 3) || (bVar2 == 4)) goto LAB_97bcc864;
 LAB_97bcc8c4:
-  if (*(int *)(param_1 + 0x34) == 0) {
+  if (*(int *)(parseSymbol + 0x34) == 0) {
     return pbVar5;
   }
-  builtInInitialSwizzle = ((int (*)())GetBuiltInInitialSwizzle)(param_1);
+  builtInInitialSwizzle = ((int (*)())GetBuiltInInitialSwizzle)(parseSymbol);
   if (builtInInitialSwizzle == 0) {
     return pbVar5;
   }
@@ -2271,9 +2271,9 @@ int FunctionTable__clear(this)
 }
 
 /* FunctionTable__addFunction @ 0x97bcc9e0 (284 bytes) */
-int FunctionTable__addFunction(this, param_2)
+int FunctionTable__addFunction(this, str)
   unsigned char * this;
-  char *param_2;
+  char *str;
 {
   int loopIndex;
   undefined4 allocation2;
@@ -2326,10 +2326,10 @@ int FunctionTable__addFunction(this, param_2)
     *(int *)this = allocation;
   }
   iVar4 = *(int *)this;
-  length = _strlen(param_2);
+  length = _strlen(str);
   allocation2 = _malloc(length + 1);
   *(undefined4 *)(uVar10 * 0x18 + iVar4) = allocation2;
-  _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),param_2);
+  _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),str);
   iVar2 = *(int *)(this + 4);
   *(int *)(this + 4) = iVar2 + 1;
   return iVar2;
@@ -2421,9 +2421,9 @@ int FunctionTable__setLastOp(this, param_2, param_3)
 }
 
 /* FunctionTable__updateForRemovingChunk @ 0x97bccc08 (168 bytes) */
-int FunctionTable__updateForRemovingChunk(this, param_2)
+int FunctionTable__updateForRemovingChunk(this, _PPStreamChunk)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * _PPStreamChunk;
 {
   int loopIndex;
   int iVar2;
@@ -2436,17 +2436,17 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
     iVar2 = 0;
     do {
       iVar3 = *(int *)this;
-      uVar5 = *(uint *)(param_2 + 0xc);
+      uVar5 = *(uint *)(_PPStreamChunk + 0xc);
       iVar4 = iVar2 + iVar3;
-      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar4 + 0x14)) && (*(int *)(param_2 + 4) != 0)) &&
+      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar4 + 0x14)) && (*(int *)(_PPStreamChunk + 4) != 0)) &&
          (*(int *)(iVar4 + 0x10) != 0)) {
-        *(uint *)(iVar4 + 0x14) = *(uint *)(*(int *)(param_2 + 4) + 0xc) & 0x3ffff;
-        uVar5 = *(uint *)(param_2 + 0xc);
+        *(uint *)(iVar4 + 0x14) = *(uint *)(*(int *)(_PPStreamChunk + 4) + 0xc) & 0x3ffff;
+        uVar5 = *(uint *)(_PPStreamChunk + 0xc);
         iVar3 = *(int *)this;
       }
-      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar2 + iVar3 + 0x10)) && (*(int *)(param_2 + 8) != 0))
+      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar2 + iVar3 + 0x10)) && (*(int *)(_PPStreamChunk + 8) != 0))
          && ((uVar5 & 0x3ffff) != 0)) {
-        *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(param_2 + 8) + 0xc) & 0x3ffff;
+        *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(_PPStreamChunk + 8) + 0xc) & 0x3ffff;
       }
       loopIndex = loopIndex + 1;
       iVar2 = iVar2 + 0x18;
@@ -2457,9 +2457,9 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
 }
 
 /* FunctionTable__findFunction @ 0x97bcccb0 (132 bytes) */
-int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_6)
+int FunctionTable__findFunction(this, str, param_3, param_4, param_5, param_6)
   unsigned char * this;
-  char *param_2;
+  char *str;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -2475,7 +2475,7 @@ int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_
   if (0 < iVar1) {
     iVar2 = 0;
     do {
-      compareResult = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),param_2);
+      compareResult = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),str);
       if (compareResult == 0) {
         iVar1 = *(int *)(this + 4);
         break;
@@ -2601,194 +2601,210 @@ int _InterpreterPackPixel(machine, color, pixelOut)
   float *color;
   float *pixelOut;
 {
+  float greenOut;
+  float redOut;
+  float blueOut;
+  float alphaClamp8;
+  float blueClamp8;
+  float greenClamp8;
+  float greenClamp5;
+  float blueClamp;
+  float zeroConstC;
+  float zeroConstB;
+  float zeroConstA;
+  float scale31;
+  float roundOffset5;
+  double alphaDouble;
+  double blueDouble;
+  double greenDouble;
   uint framebufferFormat;
   float floatValue;
-  float fVar1;
-  float fVar2;
-  uint uVar3;
-  uint uVar4;
-  float fVar5;
-  uint uVar6;
-  float fVar7;
-  uint uVar8;
+  float greenScaled;
+  float scale255;
+  uint alphaBit;
+  uint redInt;
+  float roundOffset8;
+  uint greenInt;
+  float redScaled;
+  uint blueInt;
   int emulator;
-  bool bVar10;
-  double dVar11;
-  double dVar12;
+  bool notBelowZero;
+  double redDouble;
+  double convertThreshold;
   
   emulator = *machine;
   if (*(int *)(emulator + 0xd9c) != 0) {
     framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
     if ((framebufferFormat & 0x8000000) == 0) {
       framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
-      fVar5 = FLOAT_97c3acc0;
-      fVar2 = FLOAT_97c3acbc;
+      roundOffset8 = FLOAT_97c3acc0;
+      scale255 = FLOAT_97c3acbc;
       if ((framebufferFormat & 0x8000) == 0) {
         framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
-        fVar5 = FLOAT_97c3acc4;
-        fVar2 = FLOAT_97c3acc0;
+        scale31 = FLOAT_97c3acc4;
+        roundOffset5 = FLOAT_97c3acc0;
         if ((framebufferFormat & 0x400) == 0) {
           return;
         }
-        fVar7 = *color * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        fVar1 = color[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        bVar10 = TAllocation__guardBlockSize <= fVar7;
-        *color = fVar7;
-        color[1] = fVar1;
-        color[2] = color[2] * fVar5 + fVar2;
-        fVar2 = TAllocation__guardBlockSize;
-        if (bVar10) {
-          if (fVar5 < fVar7) {
-            fVar7 = 31.0;
+        redScaled = *color * FLOAT_97c3acc4 + FLOAT_97c3acc0;
+        greenScaled = color[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
+        notBelowZero = TAllocation__guardBlockSize <= redScaled;
+        *color = redScaled;
+        color[1] = greenScaled;
+        color[2] = color[2] * scale31 + roundOffset5;
+        zeroConstA = TAllocation__guardBlockSize;
+        if (notBelowZero) {
+          if (scale31 < redScaled) {
+            redScaled = 31.0;
           }
         }
         else {
-          fVar7 = 0.0;
+          redScaled = 0.0;
         }
-        fVar5 = color[1];
-        *color = fVar7;
-        fVar7 = TAllocation__guardBlockSize;
-        if (fVar2 <= fVar5) {
-          if (FLOAT_97c3acc4 < fVar5) {
-            fVar5 = 31.0;
+        greenClamp5 = color[1];
+        *color = redScaled;
+        zeroConstC = TAllocation__guardBlockSize;
+        if (zeroConstA <= greenClamp5) {
+          if (FLOAT_97c3acc4 < greenClamp5) {
+            greenClamp5 = 31.0;
           }
         }
         else {
-          fVar5 = 0.0;
+          greenClamp5 = 0.0;
         }
-        fVar2 = color[2];
-        color[1] = fVar5;
-        dVar12 = DOUBLE_97c30a78;
-        if (fVar7 <= fVar2) {
-          if (FLOAT_97c3acc4 < fVar2) {
-            fVar2 = 31.0;
+        blueClamp = color[2];
+        color[1] = greenClamp5;
+        convertThreshold = DOUBLE_97c30a78;
+        if (zeroConstC <= blueClamp) {
+          if (FLOAT_97c3acc4 < blueClamp) {
+            blueClamp = 31.0;
           }
         }
         else {
-          fVar2 = 0.0;
+          blueClamp = 0.0;
         }
-        dVar11 = (double)*color;
-        color[2] = fVar2;
-        if (dVar12 <= dVar11) {
-          uVar4 = (uint)(int)(dVar11 - dVar12);
-        }
-        else {
-          uVar4 = (uint)(int)*color;
-        }
-        dVar12 = (double)color[1];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        redDouble = (double)*color;
+        color[2] = blueClamp;
+        if (convertThreshold <= redDouble) {
+          redInt = (uint)(int)(redDouble - convertThreshold);
         }
         else {
-          uVar6 = (uint)(int)color[1];
+          redInt = (uint)(int)*color;
         }
-        dVar12 = (double)color[2];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        greenDouble = (double)color[1];
+        if (DOUBLE_97c30a78 <= greenDouble) {
+          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)(int)color[2];
+          greenInt = (uint)(int)color[1];
+        }
+        blueDouble = (double)color[2];
+        if (DOUBLE_97c30a78 <= blueDouble) {
+          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78);
+        }
+        else {
+          blueInt = (uint)(int)color[2];
         }
         if (FLOAT_97c3acc0 <= color[3]) {
-          uVar3 = 0x8000;
+          alphaBit = 0x8000;
         }
         else {
-          uVar3 = 0;
+          alphaBit = 0;
         }
-        floatValue = GH_U2F((unsigned int)((uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f)));
+        floatValue = GH_U2F((unsigned int)((alphaBit | (redInt & 0x1f) << 10 | (greenInt & 0x1f) << 5 | blueInt & 0x1f)));
       }
       else {
-        fVar7 = *color * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        fVar1 = color[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        bVar10 = TAllocation__guardBlockSize <= fVar7;
-        *color = fVar7;
-        color[1] = fVar1;
-        color[3] = color[3] * fVar2 + fVar5;
-        color[2] = color[2] * fVar2 + fVar5;
-        fVar5 = TAllocation__guardBlockSize;
-        if (bVar10) {
-          if (fVar2 < fVar7) {
-            fVar7 = 255.0;
+        redScaled = *color * FLOAT_97c3acbc + FLOAT_97c3acc0;
+        greenScaled = color[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
+        notBelowZero = TAllocation__guardBlockSize <= redScaled;
+        *color = redScaled;
+        color[1] = greenScaled;
+        color[3] = color[3] * scale255 + roundOffset8;
+        color[2] = color[2] * scale255 + roundOffset8;
+        zeroConstB = TAllocation__guardBlockSize;
+        if (notBelowZero) {
+          if (scale255 < redScaled) {
+            redScaled = 255.0;
           }
         }
         else {
-          fVar7 = 0.0;
+          redScaled = 0.0;
         }
-        fVar2 = color[1];
-        *color = fVar7;
-        fVar7 = TAllocation__guardBlockSize;
-        if (fVar5 <= fVar2) {
-          if (FLOAT_97c3acbc < fVar2) {
-            fVar2 = 255.0;
+        greenClamp8 = color[1];
+        *color = redScaled;
+        zeroConstC = TAllocation__guardBlockSize;
+        if (zeroConstB <= greenClamp8) {
+          if (FLOAT_97c3acbc < greenClamp8) {
+            greenClamp8 = 255.0;
           }
         }
         else {
-          fVar2 = 0.0;
+          greenClamp8 = 0.0;
         }
-        fVar5 = color[2];
-        color[1] = fVar2;
-        fVar2 = TAllocation__guardBlockSize;
-        if (fVar7 <= fVar5) {
-          if (FLOAT_97c3acbc < fVar5) {
-            fVar5 = 255.0;
+        blueClamp8 = color[2];
+        color[1] = greenClamp8;
+        zeroConstA = TAllocation__guardBlockSize;
+        if (zeroConstC <= blueClamp8) {
+          if (FLOAT_97c3acbc < blueClamp8) {
+            blueClamp8 = 255.0;
           }
         }
         else {
-          fVar5 = 0.0;
+          blueClamp8 = 0.0;
         }
-        fVar7 = color[3];
-        color[2] = fVar5;
-        dVar12 = DOUBLE_97c30a78;
-        if (fVar2 <= fVar7) {
-          if (FLOAT_97c3acbc < fVar7) {
-            fVar7 = 255.0;
+        alphaClamp8 = color[3];
+        color[2] = blueClamp8;
+        convertThreshold = DOUBLE_97c30a78;
+        if (zeroConstA <= alphaClamp8) {
+          if (FLOAT_97c3acbc < alphaClamp8) {
+            alphaClamp8 = 255.0;
           }
         }
         else {
-          fVar7 = 0.0;
+          alphaClamp8 = 0.0;
         }
-        dVar11 = (double)*color;
-        color[3] = fVar7;
-        if (dVar12 <= dVar11) {
-          uVar4 = (uint)(int)(dVar11 - dVar12);
-        }
-        else {
-          uVar4 = (uint)(int)*color;
-        }
-        dVar12 = (double)color[1];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        redDouble = (double)*color;
+        color[3] = alphaClamp8;
+        if (convertThreshold <= redDouble) {
+          redInt = (uint)(int)(redDouble - convertThreshold);
         }
         else {
-          uVar6 = (uint)(int)color[1];
+          redInt = (uint)(int)*color;
         }
-        dVar12 = (double)color[2];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        greenDouble = (double)color[1];
+        if (DOUBLE_97c30a78 <= greenDouble) {
+          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)(int)color[2];
+          greenInt = (uint)(int)color[1];
         }
-        dVar12 = (double)color[3];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          emulator = (int)(dVar12 - DOUBLE_97c30a78);
+        blueDouble = (double)color[2];
+        if (DOUBLE_97c30a78 <= blueDouble) {
+          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78);
+        }
+        else {
+          blueInt = (uint)(int)color[2];
+        }
+        alphaDouble = (double)color[3];
+        if (DOUBLE_97c30a78 <= alphaDouble) {
+          emulator = (int)(alphaDouble - DOUBLE_97c30a78);
         }
         else {
           emulator = (int)color[3];
         }
-        floatValue = GH_U2F((unsigned int)((emulator << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
+        floatValue = GH_U2F((unsigned int)((emulator << 0x18 | (redInt & 0xff) << 0x10 | (greenInt & 0xff) << 8 | blueInt & 0xff)))
         ;
       }
       *pixelOut = floatValue;
     }
     else {
-      fVar2 = *color;
-      fVar5 = color[1];
-      fVar7 = color[2];
+      redOut = *color;
+      greenOut = color[1];
+      blueOut = color[2];
       pixelOut[3] = color[3];
-      *pixelOut = fVar2;
-      pixelOut[1] = fVar5;
-      pixelOut[2] = fVar7;
+      *pixelOut = redOut;
+      pixelOut[1] = greenOut;
+      pixelOut[2] = blueOut;
     }
   }
   return;

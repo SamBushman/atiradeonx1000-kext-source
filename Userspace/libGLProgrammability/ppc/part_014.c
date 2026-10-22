@@ -9,520 +9,537 @@ void _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,
 }
 
 /* _InterpreterTextureSamplerSampleTexel1D @ 0x97bd3620 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _InterpreterTextureSamplerSampleTexel1D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  double dVar4;
-  double fparam_1_00;
+  double lodOrFrac;
+  float oneMinusLodFrac;
+  int *textureObject;
+  uint baseLevel;
+  double lambda;
+  double levelSampleResult;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   double in_stack_ffffff60;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  longlong local_60;
-  longlong local_58;
-  float local_40;
+  float texelBaseLevelr;
+  float texelBaseLevelg;
+  float texelBaseLevelb;
+  float texelBaseLevela;
+  float texelNextLevelr;
+  float texelNextLevelg;
+  float texelNextLevelb;
+  float texelNextLevela;
+  longlong intCastScratchA;
+  longlong intCastScratchB;
+  float lodBiasedClamped;
   
-  piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
-    param_1[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  textureObject = *(int **)(*sampler + textureUnit * 4);
+  if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
+    sampler[10] = 1;
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(sampler,texCoord,textureUnit,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
-    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
-      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + fparam_1);
+    if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
+      lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    fparam_1 = (double)local_40;
-    dVar4 = fparam_1;
-    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
-      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
+    fparam_1 = (double)lodBiasedClamped;
+    lodOrFrac = fparam_1;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < fparam_1) {
+      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= dVar4) {
-      local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
-      uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= lodOrFrac) {
+      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
+      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar4;
-      local_60 = (longlong)(int)uVar3;
+      baseLevel = (uint)(int)lodOrFrac;
+      intCastScratchA = (longlong)(int)baseLevel;
     }
-    if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+    if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,fparam_1,fparam_2,
                                        fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                        in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
-      ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+      ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,fparam_2,fparam_3,fparam_4,
                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58);
-      dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
+      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
       return;
     }
   }
   else {
-    uVar3 = 0;
-    param_1[10] = 0;
+    baseLevel = 0;
+    sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2D @ 0x97bd3820 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _InterpreterTextureSamplerSampleTexel2D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  double dVar4;
-  double fparam_1_00;
+  double lodOrFrac;
+  float oneMinusLodFrac;
+  int *textureObject;
+  uint baseLevel;
+  double lambda;
+  double levelSampleResult;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   double in_stack_ffffff60;
   double in_stack_ffffff68;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  longlong local_60;
-  longlong local_58;
-  float local_40;
+  float texelBaseLevelr;
+  float texelBaseLevelg;
+  float texelBaseLevelb;
+  float texelBaseLevela;
+  float texelNextLevelr;
+  float texelNextLevelg;
+  float texelNextLevelb;
+  float texelNextLevela;
+  longlong intCastScratchA;
+  longlong intCastScratchB;
+  float lodBiasedClamped;
   
-  piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
-    param_1[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  textureObject = *(int **)(*sampler + textureUnit * 4);
+  if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
+    sampler[10] = 1;
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(sampler,texCoord,textureUnit,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
-    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
-      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + fparam_1);
+    if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
+      lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    fparam_1 = (double)local_40;
-    dVar4 = fparam_1;
-    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
-      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
+    fparam_1 = (double)lodBiasedClamped;
+    lodOrFrac = fparam_1;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < fparam_1) {
+      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= dVar4) {
-      local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
-      uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= lodOrFrac) {
+      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
+      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar4;
-      local_60 = (longlong)(int)uVar3;
+      baseLevel = (uint)(int)lodOrFrac;
+      intCastScratchA = (longlong)(int)baseLevel;
     }
-    if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+    if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,fparam_1,fparam_2,
                                        fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                        in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                        in_stack_ffffff60,in_stack_ffffff68);
-      ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+      ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,fparam_2,fparam_3,fparam_4,
                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
-      dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
+      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
       return;
     }
   }
   else {
-    uVar3 = 0;
-    param_1[10] = 0;
+    baseLevel = 0;
+    sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
              in_stack_ffffff60,in_stack_ffffff68);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3D @ 0x97bd3a20 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _InterpreterTextureSamplerSampleTexel3D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  double dVar4;
-  double fparam_1_00;
+  double lodOrFrac;
+  float oneMinusLodFrac;
+  int *textureObject;
+  uint baseLevel;
+  double lambda;
+  double levelSampleResult;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   double in_stack_ffffff60;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  longlong local_60;
-  longlong local_58;
-  float local_40;
+  float texelBaseLevelr;
+  float texelBaseLevelg;
+  float texelBaseLevelb;
+  float texelBaseLevela;
+  float texelNextLevelr;
+  float texelNextLevelg;
+  float texelNextLevelb;
+  float texelNextLevela;
+  longlong intCastScratchA;
+  longlong intCastScratchB;
+  float lodBiasedClamped;
   
-  piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
-    param_1[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  textureObject = *(int **)(*sampler + textureUnit * 4);
+  if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
+    sampler[10] = 1;
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(sampler,texCoord,textureUnit,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
-    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
-      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + fparam_1);
+    if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
+      lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    fparam_1 = (double)local_40;
-    dVar4 = fparam_1;
-    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
-      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
+    fparam_1 = (double)lodBiasedClamped;
+    lodOrFrac = fparam_1;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < fparam_1) {
+      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= dVar4) {
-      local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
-      uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= lodOrFrac) {
+      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
+      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar4;
-      local_60 = (longlong)(int)uVar3;
+      baseLevel = (uint)(int)lodOrFrac;
+      intCastScratchA = (longlong)(int)baseLevel;
     }
-    if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+    if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,fparam_1,fparam_2,
                                        fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                        in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
-      ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+      ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,fparam_2,fparam_3,fparam_4,
                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58);
-      dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
+      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
       return;
     }
   }
   else {
-    uVar3 = 0;
-    param_1[10] = 0;
+    baseLevel = 0;
+    sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
   return;
 }
 
 /* _InterpreterTextureSamplerWrapCoordinate @ 0x97bd3c28 (528 bytes) */
-int _InterpreterTextureSamplerWrapCoordinate(param_1, param_2)
-  int param_1;
-  uint *param_2;
+int _InterpreterTextureSamplerWrapCoordinate(sampler, texelCoord)
+  int sampler;
+  uint *texelCoord;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
+  uint clampLimitR;
+  uint clampLimitT;
+  uint wrappedR;
+  uint wrappedT;
+  uint wrappedS;
+  int textureState;
+  uint clampLimitS;
+  int levelRecord;
+  ushort wrapModeS;
+  ushort wrapModeR;
+  ushort wrapModeT;
   
-  iVar4 = *(int *)(param_1 + 8);
-  iVar2 = **(int **)(param_1 + 4);
-  uVar5 = *(ushort *)(iVar2 + 0x10);
-  uVar7 = *(ushort *)(iVar2 + 0x12);
-  uVar6 = *(ushort *)(iVar2 + 0x14);
-  if ((*(short *)(iVar2 + 0x16) == 0x2600) || (*(short *)(iVar2 + 0x16) == 0x2700)) {
-    if (uVar5 == 0x2900) {
-      uVar5 = 0x812f;
+  levelRecord = *(int *)(sampler + 8);
+  textureState = **(int **)(sampler + 4);
+  wrapModeS = *(ushort *)(textureState + 0x10);
+  wrapModeT = *(ushort *)(textureState + 0x12);
+  wrapModeR = *(ushort *)(textureState + 0x14);
+  if ((*(short *)(textureState + 0x16) == 0x2600) || (*(short *)(textureState + 0x16) == 0x2700)) {
+    if (wrapModeS == 0x2900) {
+      wrapModeS = 0x812f;
     }
-    if (uVar7 == 0x2900) {
-      uVar7 = 0x812f;
+    if (wrapModeT == 0x2900) {
+      wrapModeT = 0x812f;
     }
-    if (uVar6 == 0x2900) {
-      uVar6 = 0x812f;
+    if (wrapModeR == 0x2900) {
+      wrapModeR = 0x812f;
     }
   }
-  if (uVar5 == 0x2901) {
-    uVar1 = *param_2 & *(uint *)(iVar4 + 0x40);
+  if (wrapModeS == 0x2901) {
+    wrappedS = *texelCoord & *(uint *)(levelRecord + 0x40);
 LAB_97bd3d20:
-    *param_2 = uVar1;
+    *texelCoord = wrappedS;
   }
   else {
-    if (uVar5 < 0x2902) {
-      if (uVar5 != 0x2900) goto LAB_97bd3d24;
+    if (wrapModeS < 0x2902) {
+      if (wrapModeS != 0x2900) goto LAB_97bd3d24;
 LAB_97bd3cec:
-      uVar1 = *param_2;
-      if ((int)uVar1 < 0) {
+      wrappedS = *texelCoord;
+      if ((int)wrappedS < 0) {
 LAB_97bd3cf8:
-        uVar1 = 0;
+        wrappedS = 0;
         goto LAB_97bd3d20;
       }
-      uVar3 = *(uint *)(iVar4 + 0x80);
+      clampLimitS = *(uint *)(levelRecord + 0x80);
     }
     else {
-      if (uVar5 == 0x812d) goto LAB_97bd3cec;
-      if (uVar5 != 0x812f) goto LAB_97bd3d24;
-      uVar1 = *param_2;
-      if ((int)uVar1 < 0) goto LAB_97bd3cf8;
-      uVar3 = *(uint *)(iVar4 + 0x30);
+      if (wrapModeS == 0x812d) goto LAB_97bd3cec;
+      if (wrapModeS != 0x812f) goto LAB_97bd3d24;
+      wrappedS = *texelCoord;
+      if ((int)wrappedS < 0) goto LAB_97bd3cf8;
+      clampLimitS = *(uint *)(levelRecord + 0x30);
     }
-    if (uVar3 < uVar1) {
-      *param_2 = uVar3;
+    if (clampLimitS < wrappedS) {
+      *texelCoord = clampLimitS;
     }
   }
 LAB_97bd3d24:
-  if (uVar7 == 0x2901) {
-    uVar1 = param_2[1] & *(uint *)(iVar4 + 0x44);
+  if (wrapModeT == 0x2901) {
+    wrappedT = texelCoord[1] & *(uint *)(levelRecord + 0x44);
 LAB_97bd3da8:
-    param_2[1] = uVar1;
+    texelCoord[1] = wrappedT;
   }
   else {
-    if (uVar7 < 0x2902) {
-      if (uVar7 != 0x2900) goto LAB_97bd3dac;
+    if (wrapModeT < 0x2902) {
+      if (wrapModeT != 0x2900) goto LAB_97bd3dac;
 LAB_97bd3d74:
-      uVar1 = param_2[1];
-      if ((int)uVar1 < 0) {
+      wrappedT = texelCoord[1];
+      if ((int)wrappedT < 0) {
 LAB_97bd3d80:
-        uVar1 = 0;
+        wrappedT = 0;
         goto LAB_97bd3da8;
       }
-      uVar3 = *(uint *)(iVar4 + 0x84);
+      clampLimitT = *(uint *)(levelRecord + 0x84);
     }
     else {
-      if (uVar7 == 0x812d) goto LAB_97bd3d74;
-      if (uVar7 != 0x812f) goto LAB_97bd3dac;
-      uVar1 = param_2[1];
-      if ((int)uVar1 < 0) goto LAB_97bd3d80;
-      uVar3 = *(uint *)(iVar4 + 0x34);
+      if (wrapModeT == 0x812d) goto LAB_97bd3d74;
+      if (wrapModeT != 0x812f) goto LAB_97bd3dac;
+      wrappedT = texelCoord[1];
+      if ((int)wrappedT < 0) goto LAB_97bd3d80;
+      clampLimitT = *(uint *)(levelRecord + 0x34);
     }
-    if (uVar3 < uVar1) {
-      param_2[1] = uVar3;
+    if (clampLimitT < wrappedT) {
+      texelCoord[1] = clampLimitT;
     }
   }
 LAB_97bd3dac:
-  if (uVar6 == 0x2901) {
-    uVar1 = param_2[2] & *(uint *)(iVar4 + 0x48);
+  if (wrapModeR == 0x2901) {
+    wrappedR = texelCoord[2] & *(uint *)(levelRecord + 0x48);
     goto LAB_97bd3e30;
   }
-  if (uVar6 < 0x2902) {
-    if (uVar6 != 0x2900) {
+  if (wrapModeR < 0x2902) {
+    if (wrapModeR != 0x2900) {
       return;
     }
 LAB_97bd3dfc:
-    uVar1 = param_2[2];
-    if (-1 < (int)uVar1) {
-      uVar3 = *(uint *)(iVar4 + 0x88);
+    wrappedR = texelCoord[2];
+    if (-1 < (int)wrappedR) {
+      clampLimitR = *(uint *)(levelRecord + 0x88);
 LAB_97bd3e14:
-      if (uVar3 < uVar1) {
-        param_2[2] = uVar3;
+      if (clampLimitR < wrappedR) {
+        texelCoord[2] = clampLimitR;
         return;
       }
       return;
     }
   }
   else {
-    if (uVar6 == 0x812d) goto LAB_97bd3dfc;
-    if (uVar6 != 0x812f) {
+    if (wrapModeR == 0x812d) goto LAB_97bd3dfc;
+    if (wrapModeR != 0x812f) {
       return;
     }
-    uVar1 = param_2[2];
-    if (-1 < (int)uVar1) {
-      uVar3 = *(uint *)(iVar4 + 0x38);
+    wrappedR = texelCoord[2];
+    if (-1 < (int)wrappedR) {
+      clampLimitR = *(uint *)(levelRecord + 0x38);
       goto LAB_97bd3e14;
     }
   }
-  uVar1 = 0;
+  wrappedR = 0;
 LAB_97bd3e30:
-  param_2[2] = uVar1;
+  texelCoord[2] = wrappedR;
   return;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda1D @ 0x97bd3e38 (276 bytes) */
-double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _InterpreterTextureSamplerCalculateLambda1D(int *sampler,float *texCoord,int textureUnit,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  double log2Result;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  int iVar8;
-  int iVar9;
-  double sqrtResult;
-  double sqrtResult2;
+  float maxGradientLength;
+  double lambda;
+  float q;
+  float neighbourXQOrDsdx;
+  float neighbourYQOrDsdy;
+  float coordS;
+  float neighbourXS;
+  float neighbourYS;
+  float baseWidthOrDsdy;
+  int neighbourY;
+  int neighbourX;
+  double gradientLengthX;
+  double gradientLengthY;
   
-  fVar1 = param_2[3];
-  iVar9 = param_3 * 0x10 + param_1[3];
-  fVar2 = *(float *)(iVar9 + 0x4c);
-  iVar8 = param_3 * 0x10 + param_1[3] + 0xc0;
-  fVar3 = *(float *)(iVar8 + 0x4c);
-  fVar4 = *param_2;
-  fVar5 = *(float *)(iVar9 + 0x40);
-  fVar6 = *(float *)(iVar8 + 0x40);
-  fVar7 = *(float *)(*(int *)(param_3 * 4 + *param_1) + 0x120);
-  fVar2 = -((fVar4 - fVar5) * (float)(DOUBLE_97c30a60 / (double)(fVar1 - fVar2)) -
-           (fVar4 + fVar5) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar2))) * fVar7;
-  fVar7 = -((fVar4 - fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 - fVar3)) -
-           (fVar4 + fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar3))) * fVar7;
-  sqrtResult = _sqrt((double)(fVar2 * fVar2));
-  sqrtResult2 = _sqrt((double)(fVar7 * fVar7));
-  fVar1 = (float)sqrtResult2;
-  if ((float)sqrtResult2 < (float)sqrtResult) {
-    fVar1 = (float)sqrtResult;
+  q = texCoord[3];
+  neighbourX = textureUnit * 0x10 + sampler[3];
+  neighbourXQOrDsdx = *(float *)(neighbourX + 0x4c);
+  neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
+  neighbourYQOrDsdy = *(float *)(neighbourY + 0x4c);
+  coordS = *texCoord;
+  neighbourXS = *(float *)(neighbourX + 0x40);
+  neighbourYS = *(float *)(neighbourY + 0x40);
+  baseWidthOrDsdy = *(float *)(*(int *)(textureUnit * 4 + *sampler) + 0x120);
+  neighbourXQOrDsdx = -((coordS - neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourXQOrDsdx)) -
+           (coordS + neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourXQOrDsdx))) * baseWidthOrDsdy;
+  baseWidthOrDsdy = -((coordS - neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourYQOrDsdy)) -
+           (coordS + neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourYQOrDsdy))) * baseWidthOrDsdy;
+  gradientLengthX = _sqrt((double)(neighbourXQOrDsdx * neighbourXQOrDsdx));
+  gradientLengthY = _sqrt((double)(baseWidthOrDsdy * baseWidthOrDsdy));
+  maxGradientLength = (float)gradientLengthY;
+  if ((float)gradientLengthY < (float)gradientLengthX) {
+    maxGradientLength = (float)gradientLengthX;
   }
-  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)log2Result;
+  lambda = _log2((double)(maxGradientLength * GH_U2F((unsigned int)(sampler[4]))));
+  return (double)(float)lambda;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda2D @ 0x97bd3f4c (348 bytes) */
-double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _InterpreterTextureSamplerCalculateLambda2D(int *sampler,float *texCoord,int textureUnit,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  double log2Result;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  double sqrtResult;
-  double sqrtResult2;
+  float maxGradientLength;
+  double lambda;
+  float invQPlusXOrDsdx;
+  float invQMinusX;
+  float invQPlusY;
+  float qOrInvQMinusY;
+  float coordS;
+  float coordT;
+  float baseHeightOrDtdy;
+  float baseWidthOrDsdy;
+  float dtdx;
+  int textureObject;
+  int neighbourX;
+  int neighbourY;
+  double gradientLengthX;
+  double gradientLengthY;
   
-  fVar4 = param_2[3];
-  iVar11 = param_3 * 0x10 + param_1[3];
-  iVar12 = param_3 * 0x10 + param_1[3] + 0xc0;
-  fVar5 = *param_2;
-  fVar6 = param_2[1];
-  iVar10 = *(int *)(param_3 * 4 + *param_1);
-  fVar7 = *(float *)(iVar10 + 0x124);
-  fVar8 = *(float *)(iVar10 + 0x120);
-  fVar1 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar11 + 0x4c)));
-  fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar11 + 0x4c)));
-  fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar12 + 0x4c)));
-  fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar12 + 0x4c)));
-  fVar9 = -((fVar6 - *(float *)(iVar11 + 0x44)) * fVar2 -
-           (fVar6 + *(float *)(iVar11 + 0x44)) * fVar1) * fVar7;
-  fVar1 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar2 -
-           (fVar5 + *(float *)(iVar11 + 0x40)) * fVar1) * fVar8;
-  fVar8 = -((fVar5 - *(float *)(iVar12 + 0x40)) * fVar4 -
-           (fVar5 + *(float *)(iVar12 + 0x40)) * fVar3) * fVar8;
-  fVar7 = -((fVar6 - *(float *)(iVar12 + 0x44)) * fVar4 -
-           (fVar6 + *(float *)(iVar12 + 0x44)) * fVar3) * fVar7;
-  sqrtResult = _sqrt((double)(fVar1 * fVar1 + fVar9 * fVar9));
-  sqrtResult2 = _sqrt((double)(fVar8 * fVar8 + fVar7 * fVar7));
-  fVar1 = (float)sqrtResult2;
-  if ((float)sqrtResult2 < (float)sqrtResult) {
-    fVar1 = (float)sqrtResult;
+  qOrInvQMinusY = texCoord[3];
+  neighbourX = textureUnit * 0x10 + sampler[3];
+  neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
+  coordS = *texCoord;
+  coordT = texCoord[1];
+  textureObject = *(int *)(textureUnit * 4 + *sampler);
+  baseHeightOrDtdy = *(float *)(textureObject + 0x124);
+  baseWidthOrDsdy = *(float *)(textureObject + 0x120);
+  invQPlusXOrDsdx = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourX + 0x4c)));
+  invQMinusX = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourX + 0x4c)));
+  invQPlusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourY + 0x4c)));
+  qOrInvQMinusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourY + 0x4c)));
+  dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusX -
+           (coordT + *(float *)(neighbourX + 0x44)) * invQPlusXOrDsdx) * baseHeightOrDtdy;
+  invQPlusXOrDsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusX -
+           (coordS + *(float *)(neighbourX + 0x40)) * invQPlusXOrDsdx) * baseWidthOrDsdy;
+  baseWidthOrDsdy = -((coordS - *(float *)(neighbourY + 0x40)) * qOrInvQMinusY -
+           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusY) * baseWidthOrDsdy;
+  baseHeightOrDtdy = -((coordT - *(float *)(neighbourY + 0x44)) * qOrInvQMinusY -
+           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusY) * baseHeightOrDtdy;
+  gradientLengthX = _sqrt((double)(invQPlusXOrDsdx * invQPlusXOrDsdx + dtdx * dtdx));
+  gradientLengthY = _sqrt((double)(baseWidthOrDsdy * baseWidthOrDsdy + baseHeightOrDtdy * baseHeightOrDtdy));
+  maxGradientLength = (float)gradientLengthY;
+  if ((float)gradientLengthY < (float)gradientLengthX) {
+    maxGradientLength = (float)gradientLengthX;
   }
-  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)log2Result;
+  lambda = _log2((double)(maxGradientLength * GH_U2F((unsigned int)(sampler[4]))));
+  return (double)(float)lambda;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda3D @ 0x97bd40a8 (360 bytes) */
-double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _InterpreterTextureSamplerCalculateLambda3D(int *sampler,float *texCoord,int textureUnit,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  double log2Result;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  double sqrtResult;
-  double sqrtResult2;
+  float maxGradientLength;
+  float dtdy;
+  double lambda;
+  float invQPlusX;
+  float invQMinusXOrDsdx;
+  float invQPlusYOrDsdy;
+  float qOrInvQMinusY;
+  float coordS;
+  float coordT;
+  float dtdx;
+  float drdxOrDrdxSquared;
+  int textureObject;
+  int neighbourX;
+  int neighbourY;
+  double gradientLengthX;
+  double gradientLengthY;
   
-  fVar4 = param_2[3];
-  iVar10 = param_3 * 0x10 + param_1[3];
-  iVar11 = param_3 * 0x10 + param_1[3] + 0xc0;
-  fVar5 = *param_2;
-  fVar6 = param_2[1];
-  iVar9 = *(int *)(param_3 * 4 + *param_1);
-  fVar1 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar10 + 0x4c)));
-  fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar10 + 0x4c)));
-  fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar11 + 0x4c)));
-  fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar11 + 0x4c)));
-  fVar7 = -((fVar6 - *(float *)(iVar10 + 0x44)) * fVar2 -
-           (fVar6 + *(float *)(iVar10 + 0x44)) * fVar1) * *(float *)(iVar9 + 0x124);
-  fVar8 = -((param_2[2] - *(float *)(iVar10 + 0x48)) * fVar2 -
-           (param_2[2] + *(float *)(iVar10 + 0x48)) * fVar1) * *(float *)(iVar9 + 0x128);
-  fVar2 = -((fVar5 - *(float *)(iVar10 + 0x40)) * fVar2 -
-           (fVar5 + *(float *)(iVar10 + 0x40)) * fVar1) * *(float *)(iVar9 + 0x120);
-  fVar8 = fVar8 * fVar8;
-  fVar1 = -((fVar6 - *(float *)(iVar11 + 0x44)) * fVar4 -
-           (fVar6 + *(float *)(iVar11 + 0x44)) * fVar3) * *(float *)(iVar9 + 0x124);
-  fVar3 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar4 -
-           (fVar5 + *(float *)(iVar11 + 0x40)) * fVar3) * *(float *)(iVar9 + 0x120);
-  sqrtResult = _sqrt((double)(fVar2 * fVar2 + fVar7 * fVar7 + fVar8));
-  sqrtResult2 = _sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar8));
-  fVar1 = (float)sqrtResult2;
-  if ((float)sqrtResult2 < (float)sqrtResult) {
-    fVar1 = (float)sqrtResult;
+  qOrInvQMinusY = texCoord[3];
+  neighbourX = textureUnit * 0x10 + sampler[3];
+  neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
+  coordS = *texCoord;
+  coordT = texCoord[1];
+  textureObject = *(int *)(textureUnit * 4 + *sampler);
+  invQPlusX = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourX + 0x4c)));
+  invQMinusXOrDsdx = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourX + 0x4c)));
+  invQPlusYOrDsdy = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourY + 0x4c)));
+  qOrInvQMinusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourY + 0x4c)));
+  dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusXOrDsdx -
+           (coordT + *(float *)(neighbourX + 0x44)) * invQPlusX) * *(float *)(textureObject + 0x124);
+  drdxOrDrdxSquared = -((texCoord[2] - *(float *)(neighbourX + 0x48)) * invQMinusXOrDsdx -
+           (texCoord[2] + *(float *)(neighbourX + 0x48)) * invQPlusX) * *(float *)(textureObject + 0x128);
+  invQMinusXOrDsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusXOrDsdx -
+           (coordS + *(float *)(neighbourX + 0x40)) * invQPlusX) * *(float *)(textureObject + 0x120);
+  drdxOrDrdxSquared = drdxOrDrdxSquared * drdxOrDrdxSquared;
+  dtdy = -((coordT - *(float *)(neighbourY + 0x44)) * qOrInvQMinusY -
+           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusYOrDsdy) * *(float *)(textureObject + 0x124);
+  invQPlusYOrDsdy = -((coordS - *(float *)(neighbourY + 0x40)) * qOrInvQMinusY -
+           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusYOrDsdy) * *(float *)(textureObject + 0x120);
+  gradientLengthX = _sqrt((double)(invQMinusXOrDsdx * invQMinusXOrDsdx + dtdx * dtdx + drdxOrDrdxSquared));
+  gradientLengthY = _sqrt((double)(invQPlusYOrDsdy * invQPlusYOrDsdy + dtdy * dtdy + drdxOrDrdxSquared));
+  maxGradientLength = (float)gradientLengthY;
+  if ((float)gradientLengthY < (float)gradientLengthX) {
+    maxGradientLength = (float)gradientLengthX;
   }
-  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)log2Result;
+  lambda = _log2((double)(maxGradientLength * GH_U2F((unsigned int)(sampler[4]))));
+  return (double)(float)lambda;
 }
 
 /* _InterpreterTextureSamplerSampleTexel1DFromLevel @ 0x97bd4210 (876 bytes) */
 double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
+  int linearRecordIndex;
+  int linearTexelData;
+  int nearestRecordIndex;
+  double loadTexelResult;
+  double oneConst;
+  float weightL;
   double floorResult;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  ushort uVar4;
-  int iVar5;
+  bool isLinearFilterCode;
+  float coordS;
+  float levelWidthF;
+  ushort minFilter;
+  int textureState;
   int *textureObject;
   float *levelInfo;
-  int iVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  uint local_90;
-  int local_8c;
-  int local_88;
-  longlong local_80;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  float local_60;
-  float local_5c;
-  float local_58;
-  float local_54;
-  uint local_50;
-  int local_4c;
-  int local_48;
-  undefined4 local_40;
-  uint uStack_3c;
+  int nearestTexelData;
+  double scaledR;
+  double fracS;
+  double scaledT;
+  uint texelCoordS;
+  int texelCoordT;
+  int texelCoordR;
+  longlong intCastScratch;
+  float texelHr;
+  float texelHg;
+  float texelHb;
+  float texelHa;
+  float texelLr;
+  float texelLg;
+  float texelLb;
+  float texelLa;
+  uint sampleCoordS;
+  int sampleCoordT;
+  int sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -535,143 +552,151 @@ double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *sampler,uint textur
   levelInfo = (float *)(textureObject + level * 0x34 + 0x48);
   sampler[2] = (int)levelInfo;
   if (sampler[8] == 0) {
-    fVar2 = *texCoord;
+    coordS = *texCoord;
   }
   else {
-    fVar2 = *texCoord / texCoord[3];
+    coordS = *texCoord / texCoord[3];
   }
-  iVar5 = *textureObject;
-  uVar4 = *(ushort *)(iVar5 + 0x16);
-  if (uVar4 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd42d8:
-    if (*(short *)(iVar5 + 0x10) == -0x7ed3) {
-      fVar3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-      iVar5 = level * 0x34 + 100;
-      iVar8 = textureObject[level * 0x34 + 0x71];
+    if (*(short *)(textureState + 0x10) == -0x7ed3) {
+      levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
     }
     else {
-      fVar3 = *levelInfo;
-      iVar5 = level * 0x34 + 0x50;
-      iVar8 = textureObject[level * 0x34 + 0x70];
+      levelWidthF = *levelInfo;
+      nearestRecordIndex = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
     }
-    local_90 = (uint)(fVar2 * fVar3);
-    local_80 = 0;
-    local_8c = 0;
-    local_88 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_90);
-    dVar9 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,iVar8,textureObject + iVar5,&local_90,texelOut);
-    return dVar9;
+    texelCoordS = (uint)(coordS * levelWidthF);
+    intCastScratch = 0;
+    texelCoordT = 0;
+    texelCoordR = 0;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
+    return loadTexelResult;
   }
-  if (uVar4 < 0x2701) {
-    if (uVar4 == 0x2600) goto LAB_97bd42d8;
-    bVar1 = uVar4 == 0x2601;
+  if (minFilter < 0x2701) {
+    if (minFilter == 0x2600) goto LAB_97bd42d8;
+    isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd42d0:
-    if (!bVar1) {
+    if (!isLinearFilterCode) {
       return fparam_1;
     }
   }
   else {
-    if (uVar4 == 0x2702) goto LAB_97bd42d8;
-    if (0x2701 < uVar4) {
-      bVar1 = uVar4 == 0x2703;
+    if (minFilter == 0x2702) goto LAB_97bd42d8;
+    if (0x2701 < minFilter) {
+      isLinearFilterCode = minFilter == 0x2703;
       goto LAB_97bd42d0;
     }
   }
-  if (*(short *)(iVar5 + 0x10) == -0x7ed3) {
-    fVar3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar5 = textureObject[level * 0x34 + 0x71];
+  if (*(short *)(textureState + 0x10) == -0x7ed3) {
+    levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
-    if (*(short *)(iVar5 + 0x10) != 0x2900) {
-      fVar3 = *levelInfo;
-      iVar8 = level * 0x34 + 0x50;
-      iVar5 = textureObject[level * 0x34 + 0x70];
+    if (*(short *)(textureState + 0x10) != 0x2900) {
+      levelWidthF = *levelInfo;
+      linearRecordIndex = level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
       goto LAB_97bd43d4;
     }
-    fVar3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar5 = textureObject[level * 0x34 + 0x72];
+    levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x72];
   }
-  iVar8 = level * 0x34 + 100;
+  linearRecordIndex = level * 0x34 + 100;
 LAB_97bd43d4:
-  fVar2 = (float)((double)(fVar2 * fVar3) + DOUBLE_97c30a88);
-  dVar11 = DOUBLE_97c30a88 + 0.0;
-  dVar9 = DOUBLE_97c30a88 + 0.0;
-  floorResult = _floor((double)fVar2);
-  local_90 = (uint)(int)floorResult;
-  local_80 = (longlong)(int)local_90;
-  floorResult = _floor((double)(float)dVar11);
-  local_8c = (int)floorResult;
-  local_80 = (longlong)local_8c;
-  floorResult = _floor((double)(float)dVar9);
-  dVar9 = DOUBLE_97c30a60;
-  local_40 = 0x43300000;
-  local_88 = (int)floorResult;
-  local_80 = (longlong)local_88;
-  uStack_3c = local_90 ^ 0x80000000;
-  local_50 = local_90;
-  local_4c = local_8c;
-  dVar10 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,uStack_3c) - DOUBLE_97c30a58));
-  local_48 = local_88;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_50);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,iVar5,textureObject + iVar8,&local_50,&local_70);
-  local_50 = local_90 - 1;
-  fVar2 = (float)(dVar9 - dVar10);
-  local_4c = local_8c;
-  local_48 = local_88;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_50);
-  dVar9 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,iVar5,textureObject + iVar8,&local_50,&local_60);
-  *texelOut = (float)(dVar10 * (double)local_70 + (double)(fVar2 * local_60));
-  texelOut[3] = (float)(dVar10 * (double)local_64 + (double)(fVar2 * local_54));
-  texelOut[1] = (float)(dVar10 * (double)local_6c + (double)(fVar2 * local_5c));
-  texelOut[2] = (float)(dVar10 * (double)local_68 + (double)(fVar2 * local_58));
-  return dVar9;
+  coordS = (float)((double)(coordS * levelWidthF) + DOUBLE_97c30a88);
+  scaledT = DOUBLE_97c30a88 + 0.0;
+  scaledR = DOUBLE_97c30a88 + 0.0;
+  floorResult = _floor((double)coordS);
+  texelCoordS = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordS;
+  floorResult = _floor((double)(float)scaledT);
+  texelCoordT = (int)floorResult;
+  intCastScratch = (longlong)texelCoordT;
+  floorResult = _floor((double)(float)scaledR);
+  oneConst = DOUBLE_97c30a60;
+  i2dHi1 = 0x43300000;
+  texelCoordR = (int)floorResult;
+  intCastScratch = (longlong)texelCoordR;
+  i2dLo1 = texelCoordS ^ 0x80000000;
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT;
+  fracS = (double)(coordS - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,linearTexelData,textureObject + linearRecordIndex,&sampleCoordS,&texelHr);
+  sampleCoordS = texelCoordS - 1;
+  weightL = (float)(oneConst - fracS);
+  sampleCoordT = texelCoordT;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,linearTexelData,textureObject + linearRecordIndex,&sampleCoordS,&texelLr);
+  *texelOut = (float)(fracS * (double)texelHr + (double)(weightL * texelLr));
+  texelOut[3] = (float)(fracS * (double)texelHa + (double)(weightL * texelLa));
+  texelOut[1] = (float)(fracS * (double)texelHg + (double)(weightL * texelLg));
+  texelOut[2] = (float)(fracS * (double)texelHb + (double)(weightL * texelLb));
+  return loadTexelResult;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2DFromLevel @ 0x97bd457c (1196 bytes) */
 double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
-  float floatValue;
-  float floatValue2;
+  int linearRecordIndex;
+  int linearTexelData;
+  int nearestRecordIndex;
+  double loadTexelResult;
+  float linearWidthF;
+  float nearestWidthF;
+  float weightHH;
+  float weightLH;
+  float linearHeightF;
+  float nearestHeightF;
   double floorResult;
   double floorResult2;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  ushort uVar6;
+  bool isLinearFilterCode;
+  float coordS;
+  float coordT;
+  float weightHL;
+  float weightLL;
+  ushort minFilter;
   int *textureObject;
-  int iVar8;
+  int textureState;
   float *levelInfo;
-  int iVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  uint local_c0;
-  uint local_bc;
-  int local_b8;
-  longlong local_b0;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  uint local_60;
-  uint local_5c;
-  int local_58;
-  undefined4 local_50;
-  uint uStack_4c;
+  int nearestTexelData;
+  double scaledR;
+  double fracT;
+  double fracS;
+  uint texelCoordS;
+  uint texelCoordT;
+  int texelCoordR;
+  longlong intCastScratch;
+  float texelHHr;
+  float texelHHg;
+  float texelHHb;
+  float texelHHa;
+  float texelHLr;
+  float texelHLg;
+  float texelHLb;
+  float texelHLa;
+  float texelLHr;
+  float texelLHg;
+  float texelLHb;
+  float texelLHa;
+  float texelLLr;
+  float texelLLg;
+  float texelLLb;
+  float texelLLa;
+  uint sampleCoordS;
+  uint sampleCoordT;
+  int sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -684,192 +709,200 @@ double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *sampler,uint textur
   levelInfo = (float *)(textureObject + level * 0x34 + 0x48);
   sampler[2] = (int)levelInfo;
   if (sampler[8] == 0) {
-    fVar3 = texCoord[1];
-    fVar2 = *texCoord;
+    coordT = texCoord[1];
+    coordS = *texCoord;
   }
   else {
-    fVar3 = texCoord[1] / texCoord[3];
-    fVar2 = *texCoord / texCoord[3];
+    coordT = texCoord[1] / texCoord[3];
+    coordS = *texCoord / texCoord[3];
   }
-  iVar8 = *textureObject;
-  uVar6 = *(ushort *)(iVar8 + 0x16);
-  if (uVar6 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd4648:
-    if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      fVar5 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-      iVar8 = level * 0x34 + 100;
-      iVar10 = textureObject[level * 0x34 + 0x71];
-      floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
+    if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+      nearestWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
+      nearestHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
     }
     else {
-      fVar5 = *levelInfo;
-      iVar8 = level * 0x34 + 0x50;
-      iVar10 = textureObject[level * 0x34 + 0x70];
-      floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
+      nearestWidthF = *levelInfo;
+      nearestRecordIndex = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
+      nearestHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
     }
-    local_c0 = (uint)(fVar2 * fVar5);
-    local_bc = (uint)(int)(fVar3 * floatValue2);
-    local_b0 = 0;
-    local_b8 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_c0);
-    dVar11 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar10,textureObject + iVar8,&local_c0,texelOut);
-    return dVar11;
+    texelCoordS = (uint)(coordS * nearestWidthF);
+    texelCoordT = (uint)(int)(coordT * nearestHeightF);
+    intCastScratch = 0;
+    texelCoordR = 0;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
+    return loadTexelResult;
   }
-  if (uVar6 < 0x2701) {
-    if (uVar6 == 0x2600) goto LAB_97bd4648;
-    bVar1 = uVar6 == 0x2601;
+  if (minFilter < 0x2701) {
+    if (minFilter == 0x2600) goto LAB_97bd4648;
+    isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd4640:
-    if (!bVar1) {
+    if (!isLinearFilterCode) {
       return fparam_1;
     }
   }
   else {
-    if (uVar6 == 0x2702) goto LAB_97bd4648;
-    if (0x2701 < uVar6) {
-      bVar1 = uVar6 == 0x2703;
+    if (minFilter == 0x2702) goto LAB_97bd4648;
+    if (0x2701 < minFilter) {
+      isLinearFilterCode = minFilter == 0x2703;
       goto LAB_97bd4640;
     }
   }
-  if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-    fVar4 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar8 = textureObject[level * 0x34 + 0x71];
+  if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+    linearWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
-    if ((*(short *)(iVar8 + 0x10) != 0x2900) && (*(short *)(iVar8 + 0x12) != 0x2900)) {
-      fVar4 = *levelInfo;
-      iVar10 = level * 0x34 + 0x50;
-      iVar8 = textureObject[level * 0x34 + 0x70];
-      floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
+    if ((*(short *)(textureState + 0x10) != 0x2900) && (*(short *)(textureState + 0x12) != 0x2900)) {
+      linearWidthF = *levelInfo;
+      linearRecordIndex = level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
+      linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
       goto LAB_97bd479c;
     }
-    fVar4 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar8 = textureObject[level * 0x34 + 0x72];
+    linearWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x72];
   }
-  iVar10 = level * 0x34 + 100;
-  floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
+  linearRecordIndex = level * 0x34 + 100;
+  linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
 LAB_97bd479c:
-  textureObject = textureObject + iVar10;
-  fVar2 = (float)((double)(fVar2 * fVar4) + DOUBLE_97c30a88);
-  dVar11 = DOUBLE_97c30a88 + 0.0;
-  fVar3 = (float)((double)(fVar3 * floatValue) + DOUBLE_97c30a88);
-  floorResult = _floor((double)fVar2);
-  local_c0 = (uint)(int)floorResult;
-  local_b0 = (longlong)(int)local_c0;
-  floorResult = _floor((double)fVar3);
-  local_bc = (uint)(int)floorResult;
-  local_b0 = (longlong)(int)local_bc;
-  floorResult2 = _floor((double)(float)dVar11);
-  local_50 = 0x43300000;
-  uStack_4c = local_bc ^ 0x80000000;
-  local_5c = local_bc;
-  local_60 = local_c0;
-  dVar13 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
+  textureObject = textureObject + linearRecordIndex;
+  coordS = (float)((double)(coordS * linearWidthF) + DOUBLE_97c30a88);
+  scaledR = DOUBLE_97c30a88 + 0.0;
+  coordT = (float)((double)(coordT * linearHeightF) + DOUBLE_97c30a88);
+  floorResult = _floor((double)coordS);
+  texelCoordS = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordS;
+  floorResult = _floor((double)coordT);
+  texelCoordT = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordT;
+  floorResult2 = _floor((double)(float)scaledR);
+  i2dHi1 = 0x43300000;
+  i2dLo1 = texelCoordT ^ 0x80000000;
+  sampleCoordT = texelCoordT;
+  sampleCoordS = texelCoordS;
+  fracS = (double)(coordS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  dVar12 = (double)(fVar3 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-  local_b8 = (int)floorResult2;
-  local_b0 = (longlong)local_b8;
-  fVar3 = (float)(dVar13 * dVar12);
-  fVar2 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
-  fVar4 = (float)(dVar13 * (double)(float)(DOUBLE_97c30a60 - dVar12));
-  fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) *
-                 (double)(float)(DOUBLE_97c30a60 - dVar12));
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_a0);
-  local_60 = local_c0;
-  local_5c = local_bc - 1;
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_90);
-  local_60 = local_c0 - 1;
-  local_5c = local_bc - 1;
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_70);
-  local_60 = local_c0 - 1;
-  local_5c = local_bc;
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  dVar11 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_80);
-  *texelOut = fVar5 * local_70 + fVar2 * local_80 + fVar3 * local_a0 + fVar4 * local_90;
-  texelOut[3] = fVar5 * local_64 + fVar2 * local_74 + fVar3 * local_94 + fVar4 * local_84;
-  texelOut[1] = fVar5 * local_6c + fVar2 * local_7c + fVar3 * local_9c + fVar4 * local_8c;
-  texelOut[2] = fVar5 * local_68 + fVar2 * local_78 + fVar3 * local_98 + fVar4 * local_88;
-  return dVar11;
+  fracT = (double)(coordT - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+  texelCoordR = (int)floorResult2;
+  intCastScratch = (longlong)texelCoordR;
+  weightHH = (float)(fracS * fracT);
+  weightLH = (float)((double)(float)(DOUBLE_97c30a60 - fracS) * fracT);
+  weightHL = (float)(fracS * (double)(float)(DOUBLE_97c30a60 - fracT));
+  weightLL = (float)((double)(float)(DOUBLE_97c30a60 - fracS) *
+                 (double)(float)(DOUBLE_97c30a60 - fracT));
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHHr);
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHr);
+  *texelOut = weightLL * texelLLr + weightLH * texelLHr + weightHH * texelHHr + weightHL * texelHLr;
+  texelOut[3] = weightLL * texelLLa + weightLH * texelLHa + weightHH * texelHHa + weightHL * texelHLa;
+  texelOut[1] = weightLL * texelLLg + weightLH * texelLHg + weightHH * texelHHg + weightHL * texelHLg;
+  texelOut[2] = weightLL * texelLLb + weightLH * texelLHb + weightHH * texelHHb + weightHL * texelHLb;
+  return loadTexelResult;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3DFromLevel @ 0x97bd4a28 (1768 bytes) */
 double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
+  float scaledR;
+  float scaledT;
+  float levelWidthOrScaledS;
+  float nearestWidthF;
+  int linearRecordIndex;
+  int linearTexelData;
+  int nearestRecordIndex;
+  double fracR;
   float floatValue;
-  float floatValue2;
-  float floatValue3;
+  float linearHeightF;
+  float nearestDepthF;
   double floorResult;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  ushort uVar10;
-  int iVar11;
+  bool isLinearFilterCode;
+  float weightLHH;
+  float weightLLL;
+  float weightLLH;
+  float weightHLL;
+  float weightHLH;
+  float weightHHL;
+  float weightHHH;
+  float weightLHL;
+  ushort minFilter;
+  int textureState;
   int *textureObject;
   float *levelInfo;
-  int iVar14;
+  int nearestTexelData;
   double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  float local_130;
-  float local_12c;
-  float local_128;
-  uint local_120;
-  uint local_11c;
-  uint local_118;
-  longlong local_110;
-  float local_100;
-  float local_fc;
-  float local_f8;
-  float local_f4;
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e4;
-  float local_e0;
-  float local_dc;
-  float local_d8;
-  float local_d4;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c4;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  float local_b4;
-  float local_b0;
-  float local_ac;
-  float local_a8;
-  float local_a4;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  uint local_80;
-  uint local_7c;
-  uint local_78;
-  undefined4 local_70;
-  uint uStack_6c;
+  double fracT;
+  double weight2dLH;
+  double fracS;
+  double weight2dHL;
+  double oneMinusFracR;
+  double weight2dLL;
+  float coordS;
+  float coordT;
+  float coordR;
+  uint texelCoordS;
+  uint texelCoordT;
+  uint texelCoordR;
+  longlong intCastScratch;
+  float texelHHHr;
+  float texelHHHg;
+  float texelHHHb;
+  float texelHHHa;
+  float texelHLHr;
+  float texelHLHg;
+  float texelHLHb;
+  float texelHLHa;
+  float texelLHHr;
+  float texelLHHg;
+  float texelLHHb;
+  float texelLHHa;
+  float texelLLHr;
+  float texelLLHg;
+  float texelLLHb;
+  float texelLLHa;
+  float texelHHLr;
+  float texelHHLg;
+  float texelHHLb;
+  float texelHHLa;
+  float texelHLLr;
+  float texelHLLg;
+  float texelHLLb;
+  float texelHLLa;
+  float texelLHLr;
+  float texelLHLg;
+  float texelLHLb;
+  float texelLHLa;
+  float texelLLLr;
+  float texelLLLg;
+  float texelLLLb;
+  float texelLLLa;
+  uint sampleCoordS;
+  uint sampleCoordT;
+  uint sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -882,174 +915,174 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textur
   levelInfo = (float *)(textureObject + level * 0x34 + 0x48);
   sampler[2] = (int)levelInfo;
   if (sampler[8] == 0) {
-    local_128 = texCoord[2];
-    local_130 = *texCoord;
-    local_12c = texCoord[1];
+    coordR = texCoord[2];
+    coordS = *texCoord;
+    coordT = texCoord[1];
   }
   else {
-    local_12c = texCoord[3];
-    local_130 = *texCoord / local_12c;
-    local_128 = texCoord[2] / local_12c;
-    local_12c = texCoord[1] / local_12c;
+    coordT = texCoord[3];
+    coordS = *texCoord / coordT;
+    coordR = texCoord[2] / coordT;
+    coordT = texCoord[1] / coordT;
   }
-  iVar11 = *textureObject;
-  uVar10 = *(ushort *)(iVar11 + 0x16);
-  if (uVar10 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd4b08:
-    if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
-       (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
-      fVar8 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-      iVar11 = level * 0x34 + 100;
-      iVar14 = textureObject[level * 0x34 + 0x71];
+    if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
+       (*(short *)(textureState + 0x14) == -0x7ed3)) {
+      nearestWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
-      floatValue3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
+      nearestDepthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
     }
     else {
-      fVar8 = *levelInfo;
-      iVar11 = level * 0x34 + 0x50;
-      iVar14 = textureObject[level * 0x34 + 0x70];
+      nearestWidthF = *levelInfo;
+      nearestRecordIndex = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
-      floatValue3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
+      nearestDepthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
     }
-    local_120 = (uint)(int)(local_130 * fVar8);
-    local_11c = (uint)(int)(local_12c * floatValue);
-    local_118 = (uint)(int)(local_128 * floatValue3);
-    local_110 = (longlong)(int)local_118;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_120);
-    dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar14,textureObject + iVar11,&local_120,texelOut);
+    texelCoordS = (uint)(int)(coordS * nearestWidthF);
+    texelCoordT = (uint)(int)(coordT * floatValue);
+    texelCoordR = (uint)(int)(coordR * nearestDepthF);
+    intCastScratch = (longlong)(int)texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
     return dVar15;
   }
-  if (uVar10 < 0x2701) {
-    if (uVar10 == 0x2600) goto LAB_97bd4b08;
-    bVar1 = uVar10 == 0x2601;
+  if (minFilter < 0x2701) {
+    if (minFilter == 0x2600) goto LAB_97bd4b08;
+    isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd4b00:
-    if (!bVar1) {
+    if (!isLinearFilterCode) {
       return fparam_1;
     }
   }
   else {
-    if (uVar10 == 0x2702) goto LAB_97bd4b08;
-    if (0x2701 < uVar10) {
-      bVar1 = uVar10 == 0x2703;
+    if (minFilter == 0x2702) goto LAB_97bd4b08;
+    if (0x2701 < minFilter) {
+      isLinearFilterCode = minFilter == 0x2703;
       goto LAB_97bd4b00;
     }
   }
-  if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
-     (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
-    fVar7 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar11 = textureObject[level * 0x34 + 0x71];
+  if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
+     (*(short *)(textureState + 0x14) == -0x7ed3)) {
+    levelWidthOrScaledS = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
-    if (((*(short *)(iVar11 + 0x10) != 0x2900) && (*(short *)(iVar11 + 0x12) != 0x2900)) &&
-       (*(short *)(iVar11 + 0x14) != 0x2900)) {
-      fVar7 = *levelInfo;
-      iVar14 = level * 0x34 + 0x50;
-      iVar11 = textureObject[level * 0x34 + 0x70];
-      floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
+    if (((*(short *)(textureState + 0x10) != 0x2900) && (*(short *)(textureState + 0x12) != 0x2900)) &&
+       (*(short *)(textureState + 0x14) != 0x2900)) {
+      levelWidthOrScaledS = *levelInfo;
+      linearRecordIndex = level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
+      linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
       goto LAB_97bd4cb4;
     }
-    fVar7 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar11 = textureObject[level * 0x34 + 0x72];
+    levelWidthOrScaledS = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x72];
   }
-  iVar14 = level * 0x34 + 100;
-  floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
+  linearRecordIndex = level * 0x34 + 100;
+  linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
   floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
 LAB_97bd4cb4:
-  textureObject = textureObject + iVar14;
-  fVar7 = (float)((double)(local_130 * fVar7) + DOUBLE_97c30a88);
-  fVar8 = (float)((double)(local_12c * floatValue2) + DOUBLE_97c30a88);
-  fVar9 = (float)((double)(local_128 * floatValue) + DOUBLE_97c30a88);
-  floorResult = _floor((double)fVar7);
-  local_120 = (uint)(int)floorResult;
-  local_110 = (longlong)(int)local_120;
-  floorResult = _floor((double)fVar8);
-  local_11c = (uint)(int)floorResult;
-  local_110 = (longlong)(int)local_11c;
-  floorResult = _floor((double)fVar9);
-  local_118 = (uint)(int)floorResult;
-  local_110 = (longlong)(int)local_118;
-  local_70 = 0x43300000;
-  uStack_6c = local_118 ^ 0x80000000;
-  local_7c = local_11c;
-  dVar18 = (double)(fVar7 - (float)((double)CONCAT44(0x43300000,local_120 ^ 0x80000000) -
+  textureObject = textureObject + linearRecordIndex;
+  levelWidthOrScaledS = (float)((double)(coordS * levelWidthOrScaledS) + DOUBLE_97c30a88);
+  scaledT = (float)((double)(coordT * linearHeightF) + DOUBLE_97c30a88);
+  scaledR = (float)((double)(coordR * floatValue) + DOUBLE_97c30a88);
+  floorResult = _floor((double)levelWidthOrScaledS);
+  texelCoordS = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordS;
+  floorResult = _floor((double)scaledT);
+  texelCoordT = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordT;
+  floorResult = _floor((double)scaledR);
+  texelCoordR = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordR;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = texelCoordR ^ 0x80000000;
+  sampleCoordT = texelCoordT;
+  fracS = (double)(levelWidthOrScaledS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  local_80 = local_120;
-  dVar16 = (double)(fVar8 - (float)((double)CONCAT44(0x43300000,local_11c ^ 0x80000000) -
+  sampleCoordS = texelCoordS;
+  fracT = (double)(scaledT - (float)((double)CONCAT44(0x43300000,texelCoordT ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  dVar15 = (double)(fVar9 - (float)((double)CONCAT44(0x43300000,uStack_6c) - DOUBLE_97c30a58));
-  dVar20 = (double)(float)(DOUBLE_97c30a60 - dVar15);
-  dVar19 = (double)(float)(dVar18 * (double)(float)(DOUBLE_97c30a60 - dVar16));
-  dVar17 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar18) * dVar16);
-  dVar21 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar18) *
-                          (double)(float)(DOUBLE_97c30a60 - dVar16));
-  fVar7 = (float)((double)(float)(dVar18 * dVar16) * dVar20);
-  fVar9 = (float)(dVar17 * dVar20);
-  fVar8 = (float)((double)(float)(dVar18 * dVar16) * dVar15);
-  fVar2 = (float)(dVar17 * dVar15);
-  fVar3 = (float)(dVar21 * dVar20);
-  fVar4 = (float)(dVar21 * dVar15);
-  fVar5 = (float)(dVar19 * dVar20);
-  fVar6 = (float)(dVar19 * dVar15);
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_100);
-  local_80 = local_120;
-  local_7c = local_11c - 1;
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_f0);
-  local_80 = local_120 - 1;
-  local_7c = local_11c - 1;
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_d0);
-  local_80 = local_120 - 1;
-  local_7c = local_11c;
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_e0);
-  local_78 = local_118 - 1;
-  local_80 = local_120;
-  local_7c = local_11c;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_c0);
-  local_7c = local_11c - 1;
-  local_78 = local_118 - 1;
-  local_80 = local_120;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_b0);
-  local_80 = local_120 - 1;
-  local_7c = local_11c - 1;
-  local_78 = local_118 - 1;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_90);
-  local_80 = local_120 - 1;
-  local_78 = local_118 - 1;
-  local_7c = local_11c;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_a0)
+  fracR = (double)(scaledR - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+  oneMinusFracR = (double)(float)(DOUBLE_97c30a60 - fracR);
+  weight2dHL = (double)(float)(fracS * (double)(float)(DOUBLE_97c30a60 - fracT));
+  weight2dLH = (double)(float)((double)(float)(DOUBLE_97c30a60 - fracS) * fracT);
+  weight2dLL = (double)(float)((double)(float)(DOUBLE_97c30a60 - fracS) *
+                          (double)(float)(DOUBLE_97c30a60 - fracT));
+  weightHHL = (float)((double)(float)(fracS * fracT) * oneMinusFracR);
+  weightLHL = (float)(weight2dLH * oneMinusFracR);
+  weightHHH = (float)((double)(float)(fracS * fracT) * fracR);
+  weightLHH = (float)(weight2dLH * fracR);
+  weightLLL = (float)(weight2dLL * oneMinusFracR);
+  weightLLH = (float)(weight2dLL * fracR);
+  weightHLL = (float)(weight2dHL * oneMinusFracR);
+  weightHLH = (float)(weight2dHL * fracR);
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHHHr);
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHLHr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLLHr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHHr);
+  sampleCoordR = texelCoordR - 1;
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHHLr);
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR - 1;
+  sampleCoordS = texelCoordS;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHLLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR - 1;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLLLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordR = texelCoordR - 1;
+  sampleCoordT = texelCoordT;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHLr)
   ;
-  *texelOut = fVar3 * local_90 +
-             fVar9 * local_a0 +
-             fVar5 * local_b0 +
-             fVar7 * local_c0 +
-             fVar4 * local_d0 + fVar2 * local_e0 + fVar8 * local_100 + fVar6 * local_f0;
-  texelOut[1] = fVar3 * local_8c +
-               fVar9 * local_9c +
-               fVar5 * local_ac +
-               fVar7 * local_bc +
-               fVar4 * local_cc + fVar2 * local_dc + fVar8 * local_fc + fVar6 * local_ec;
-  texelOut[2] = fVar3 * local_88 +
-               fVar9 * local_98 +
-               fVar5 * local_a8 +
-               fVar7 * local_b8 +
-               fVar4 * local_c8 + fVar2 * local_d8 + fVar8 * local_f8 + fVar6 * local_e8;
-  texelOut[3] = fVar3 * local_84 +
-               fVar9 * local_94 +
-               fVar5 * local_a4 +
-               fVar7 * local_b4 +
-               fVar4 * local_c4 + fVar2 * local_d4 + fVar8 * local_f4 + fVar6 * local_e4;
+  *texelOut = weightLLL * texelLLLr +
+             weightLHL * texelLHLr +
+             weightHLL * texelHLLr +
+             weightHHL * texelHHLr +
+             weightLLH * texelLLHr + weightLHH * texelLHHr + weightHHH * texelHHHr + weightHLH * texelHLHr;
+  texelOut[1] = weightLLL * texelLLLg +
+               weightLHL * texelLHLg +
+               weightHLL * texelHLLg +
+               weightHHL * texelHHLg +
+               weightLLH * texelLLHg + weightLHH * texelLHHg + weightHHH * texelHHHg + weightHLH * texelHLHg;
+  texelOut[2] = weightLLL * texelLLLb +
+               weightLHL * texelLHLb +
+               weightHLL * texelHLLb +
+               weightHHL * texelHHLb +
+               weightLLH * texelLLHb + weightLHH * texelLHHb + weightHHH * texelHHHb + weightHLH * texelHLHb;
+  texelOut[3] = weightLLL * texelLLLa +
+               weightLHL * texelLHLa +
+               weightHLL * texelHLLa +
+               weightHHL * texelHHLa +
+               weightLLH * texelLLHa + weightLHH * texelLHHa + weightHHH * texelHHHa + weightHLH * texelHLHa;
   return dVar15;
 }
 
@@ -1061,46 +1094,50 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(sampler, textureUnit, lev
   float *texCoord;
   float *texelOut;
 {
+  int linearTexelData;
+  int nearestRecordIndex;
+  float weightLH;
+  float weightHH;
   double floorResult;
   double floorResult2;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  ushort uVar6;
+  bool isLinearFilterCode;
+  float weightHL;
+  float weightLL;
+  float scaledS;
+  float scaledT;
+  ushort minFilter;
   int *textureObject;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  uint local_c0;
-  uint local_bc;
-  int local_b8;
-  longlong local_b0;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  uint local_60;
-  uint local_5c;
-  int local_58;
-  undefined4 local_50;
-  uint uStack_4c;
+  int textureState;
+  int *linearRecord;
+  int nearestTexelData;
+  double scaledR;
+  double fracT;
+  double fracS;
+  uint texelCoordS;
+  uint texelCoordT;
+  int texelCoordR;
+  longlong intCastScratch;
+  float texelHHr;
+  float texelHHg;
+  float texelHHb;
+  float texelHHa;
+  float texelHLr;
+  float texelHLg;
+  float texelHLb;
+  float texelHLa;
+  float texelLHr;
+  float texelLHg;
+  float texelLHb;
+  float texelLHa;
+  float texelLLr;
+  float texelLLg;
+  float texelLLb;
+  float texelLLa;
+  uint sampleCoordS;
+  uint sampleCoordT;
+  int sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -1111,245 +1148,245 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(sampler, textureUnit, lev
   }
   sampler[1] = (int)textureObject;
   sampler[2] = (int)(textureObject + level * 0x34 + 0x48);
-  iVar8 = *textureObject;
-  uVar6 = *(ushort *)(iVar8 + 0x16);
-  if (uVar6 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd51b8:
-    if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      iVar8 = level * 0x34 + 100;
-      iVar10 = textureObject[level * 0x34 + 0x71];
+    if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
     }
     else {
-      iVar10 = textureObject[level * 0x34 + 0x70];
-      iVar8 = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
+      nearestRecordIndex = level * 0x34 + 0x50;
     }
-    local_c0 = (uint)*texCoord;
-    local_bc = (uint)(int)texCoord[1];
-    local_b0 = 0;
-    local_b8 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_c0);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar10,textureObject + iVar8,&local_c0,texelOut);
+    texelCoordS = (uint)*texCoord;
+    texelCoordT = (uint)(int)texCoord[1];
+    intCastScratch = 0;
+    texelCoordR = 0;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
   }
   else {
-    if (uVar6 < 0x2701) {
-      if (uVar6 == 0x2600) goto LAB_97bd51b8;
-      bVar1 = uVar6 == 0x2601;
+    if (minFilter < 0x2701) {
+      if (minFilter == 0x2600) goto LAB_97bd51b8;
+      isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd51b0:
-      if (!bVar1) {
+      if (!isLinearFilterCode) {
         return;
       }
     }
     else {
-      if (uVar6 == 0x2702) goto LAB_97bd51b8;
-      if (0x2701 < uVar6) {
-        bVar1 = uVar6 == 0x2703;
+      if (minFilter == 0x2702) goto LAB_97bd51b8;
+      if (0x2701 < minFilter) {
+        isLinearFilterCode = minFilter == 0x2703;
         goto LAB_97bd51b0;
       }
     }
-    if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      piVar9 = textureObject + level * 0x34 + 100;
-      iVar8 = textureObject[level * 0x34 + 0x71];
+    if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+      linearRecord = textureObject + level * 0x34 + 100;
+      linearTexelData = textureObject[level * 0x34 + 0x71];
     }
-    else if ((*(short *)(iVar8 + 0x10) == 0x2900) || (*(short *)(iVar8 + 0x12) == 0x2900)) {
-      piVar9 = textureObject + level * 0x34 + 100;
-      iVar8 = textureObject[level * 0x34 + 0x72];
+    else if ((*(short *)(textureState + 0x10) == 0x2900) || (*(short *)(textureState + 0x12) == 0x2900)) {
+      linearRecord = textureObject + level * 0x34 + 100;
+      linearTexelData = textureObject[level * 0x34 + 0x72];
     }
     else {
-      iVar8 = textureObject[level * 0x34 + 0x70];
-      piVar9 = textureObject + level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
+      linearRecord = textureObject + level * 0x34 + 0x50;
     }
-    fVar4 = (float)((double)*texCoord + DOUBLE_97c30a88);
-    dVar11 = DOUBLE_97c30a88 + 0.0;
-    fVar5 = (float)((double)texCoord[1] + DOUBLE_97c30a88);
-    floorResult = _floor((double)fVar4);
-    local_c0 = (uint)(int)floorResult;
-    local_b0 = (longlong)(int)local_c0;
-    floorResult = _floor((double)fVar5);
-    local_bc = (uint)(int)floorResult;
-    local_b0 = (longlong)(int)local_bc;
-    floorResult2 = _floor((double)(float)dVar11);
-    local_50 = 0x43300000;
-    uStack_4c = local_bc ^ 0x80000000;
-    local_5c = local_bc;
-    local_60 = local_c0;
-    dVar13 = (double)(fVar4 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
+    scaledS = (float)((double)*texCoord + DOUBLE_97c30a88);
+    scaledR = DOUBLE_97c30a88 + 0.0;
+    scaledT = (float)((double)texCoord[1] + DOUBLE_97c30a88);
+    floorResult = _floor((double)scaledS);
+    texelCoordS = (uint)(int)floorResult;
+    intCastScratch = (longlong)(int)texelCoordS;
+    floorResult = _floor((double)scaledT);
+    texelCoordT = (uint)(int)floorResult;
+    intCastScratch = (longlong)(int)texelCoordT;
+    floorResult2 = _floor((double)(float)scaledR);
+    i2dHi1 = 0x43300000;
+    i2dLo1 = texelCoordT ^ 0x80000000;
+    sampleCoordT = texelCoordT;
+    sampleCoordS = texelCoordS;
+    fracS = (double)(scaledS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                      DOUBLE_97c30a58));
-    dVar12 = (double)(fVar5 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-    local_b8 = (int)floorResult2;
-    local_b0 = (longlong)local_b8;
-    fVar4 = (float)(dVar13 * dVar12);
-    fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
-    fVar2 = (float)(dVar13 * (double)(float)(DOUBLE_97c30a60 - dVar12));
-    fVar3 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) *
-                   (double)(float)(DOUBLE_97c30a60 - dVar12));
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_a0);
-    local_60 = local_c0;
-    local_5c = local_bc - 1;
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_90);
-    local_60 = local_c0 - 1;
-    local_5c = local_bc - 1;
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_70);
-    local_60 = local_c0 - 1;
-    local_5c = local_bc;
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_80);
-    *texelOut = fVar3 * local_70 + fVar5 * local_80 + fVar4 * local_a0 + fVar2 * local_90;
-    texelOut[3] = fVar3 * local_64 + fVar5 * local_74 + fVar4 * local_94 + fVar2 * local_84;
-    texelOut[1] = fVar3 * local_6c + fVar5 * local_7c + fVar4 * local_9c + fVar2 * local_8c;
-    texelOut[2] = fVar3 * local_68 + fVar5 * local_78 + fVar4 * local_98 + fVar2 * local_88;
+    fracT = (double)(scaledT - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+    texelCoordR = (int)floorResult2;
+    intCastScratch = (longlong)texelCoordR;
+    weightHH = (float)(fracS * fracT);
+    weightLH = (float)((double)(float)(DOUBLE_97c30a60 - fracS) * fracT);
+    weightHL = (float)(fracS * (double)(float)(DOUBLE_97c30a60 - fracT));
+    weightLL = (float)((double)(float)(DOUBLE_97c30a60 - fracS) *
+                   (double)(float)(DOUBLE_97c30a60 - fracT));
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelHHr);
+    sampleCoordS = texelCoordS;
+    sampleCoordT = texelCoordT - 1;
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelHLr);
+    sampleCoordS = texelCoordS - 1;
+    sampleCoordT = texelCoordT - 1;
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelLLr);
+    sampleCoordS = texelCoordS - 1;
+    sampleCoordT = texelCoordT;
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelLHr);
+    *texelOut = weightLL * texelLLr + weightLH * texelLHr + weightHH * texelHHr + weightHL * texelHLr;
+    texelOut[3] = weightLL * texelLLa + weightLH * texelLHa + weightHH * texelHHa + weightHL * texelHLa;
+    texelOut[1] = weightLL * texelLLg + weightLH * texelLHg + weightHH * texelHHg + weightHL * texelHLg;
+    texelOut[2] = weightLL * texelLLb + weightLH * texelLHb + weightHH * texelHHb + weightHL * texelHLb;
   }
   return;
 }
 
 /* _InterpreterTextureSamplerLoadTexel1D @ 0x97bd5530 (172 bytes) */
-int _InterpreterTextureSamplerLoadTexel1D(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  int *param_4;
-  undefined4 *param_5;
+int _InterpreterTextureSamplerLoadTexel1D(sampler, texelData, unusedLevelRecord, texelCoord, texelOut)
+  int sampler;
+  int texelData;
+  undefined4 unusedLevelRecord;
+  int *texelCoord;
+  undefined4 *texelOut;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *texelPtr;
+  uint texelType;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 0xae4);
-  if (uVar2 < 0x8368) {
-    if (0x8365 < uVar2) {
+  texelType = *(uint *)(*(int *)(sampler + 4) + 0xae4);
+  if (texelType < 0x8368) {
+    if (0x8365 < texelType) {
       return;
     }
-    if (uVar2 != 0x1406) {
-      if (uVar2 < 0x1407) {
-        if (uVar2 == 0x1401) {
+    if (texelType != 0x1406) {
+      if (texelType < 0x1407) {
+        if (texelType == 0x1401) {
           return;
         }
       }
       else {
-        if (uVar2 == 0x8033) {
+        if (texelType == 0x8033) {
           return;
         }
-        if (uVar2 == 0x8363) {
+        if (texelType == 0x8363) {
           return;
         }
       }
     }
   }
   else {
-    if (uVar2 == 0x8815) {
+    if (texelType == 0x8815) {
       return;
     }
-    if ((0x8815 < uVar2) && (uVar2 - 0x881a < 2)) {
+    if ((0x8815 < texelType) && (texelType - 0x881a < 2)) {
       return;
     }
   }
-  puVar1 = (undefined4 *)(param_2 + *param_4 * 0x10);
-  *param_5 = *puVar1;
-  param_5[1] = puVar1[1];
-  param_5[2] = puVar1[2];
-  param_5[3] = puVar1[3];
+  texelPtr = (undefined4 *)(texelData + *texelCoord * 0x10);
+  *texelOut = *texelPtr;
+  texelOut[1] = texelPtr[1];
+  texelOut[2] = texelPtr[2];
+  texelOut[3] = texelPtr[3];
   return;
 }
 
 /* _InterpreterTextureSamplerLoadTexel2D @ 0x97bd55dc (188 bytes) */
-int _InterpreterTextureSamplerLoadTexel2D(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int *param_3;
-  int *param_4;
-  undefined4 *param_5;
+int _InterpreterTextureSamplerLoadTexel2D(sampler, texelData, levelRecord, texelCoord, texelOut)
+  int sampler;
+  int texelData;
+  int *levelRecord;
+  int *texelCoord;
+  undefined4 *texelOut;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *texelPtr;
+  uint texelType;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 0xae4);
-  if (uVar2 < 0x8368) {
-    if (0x8365 < uVar2) {
+  texelType = *(uint *)(*(int *)(sampler + 4) + 0xae4);
+  if (texelType < 0x8368) {
+    if (0x8365 < texelType) {
       return;
     }
-    if (uVar2 != 0x1406) {
-      if (uVar2 < 0x1407) {
-        if (uVar2 == 0x1401) {
+    if (texelType != 0x1406) {
+      if (texelType < 0x1407) {
+        if (texelType == 0x1401) {
           return;
         }
       }
       else {
-        if (uVar2 == 0x8033) {
+        if (texelType == 0x8033) {
           return;
         }
-        if (uVar2 == 0x8363) {
+        if (texelType == 0x8363) {
           return;
         }
       }
     }
   }
   else {
-    if (uVar2 == 0x8815) {
+    if (texelType == 0x8815) {
       return;
     }
-    if ((0x8815 < uVar2) && (uVar2 - 0x881a < 2)) {
+    if ((0x8815 < texelType) && (texelType - 0x881a < 2)) {
       return;
     }
   }
-  puVar1 = (undefined4 *)(param_2 + (param_4[1] * *param_3 + *param_4) * 0x10);
-  *param_5 = *puVar1;
-  param_5[1] = puVar1[1];
-  param_5[2] = puVar1[2];
-  param_5[3] = puVar1[3];
+  texelPtr = (undefined4 *)(texelData + (texelCoord[1] * *levelRecord + *texelCoord) * 0x10);
+  *texelOut = *texelPtr;
+  texelOut[1] = texelPtr[1];
+  texelOut[2] = texelPtr[2];
+  texelOut[3] = texelPtr[3];
   return;
 }
 
 /* _InterpreterTextureSamplerLoadTexel3D @ 0x97bd5698 (204 bytes) */
-int _InterpreterTextureSamplerLoadTexel3D(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int *param_3;
-  int *param_4;
-  undefined4 *param_5;
+int _InterpreterTextureSamplerLoadTexel3D(sampler, texelData, levelRecord, texelCoord, texelOut)
+  int sampler;
+  int texelData;
+  int *levelRecord;
+  int *texelCoord;
+  undefined4 *texelOut;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *texelPtr;
+  uint texelType;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 0xae4);
-  if (uVar2 < 0x8368) {
-    if (0x8365 < uVar2) {
+  texelType = *(uint *)(*(int *)(sampler + 4) + 0xae4);
+  if (texelType < 0x8368) {
+    if (0x8365 < texelType) {
       return;
     }
-    if (uVar2 != 0x1406) {
-      if (uVar2 < 0x1407) {
-        if (uVar2 == 0x1401) {
+    if (texelType != 0x1406) {
+      if (texelType < 0x1407) {
+        if (texelType == 0x1401) {
           return;
         }
       }
       else {
-        if (uVar2 == 0x8033) {
+        if (texelType == 0x8033) {
           return;
         }
-        if (uVar2 == 0x8363) {
+        if (texelType == 0x8363) {
           return;
         }
       }
     }
   }
   else {
-    if (uVar2 == 0x8815) {
+    if (texelType == 0x8815) {
       return;
     }
-    if ((0x8815 < uVar2) && (uVar2 - 0x881a < 2)) {
+    if ((0x8815 < texelType) && (texelType - 0x881a < 2)) {
       return;
     }
   }
-  puVar1 = (undefined4 *)
-           (param_2 + ((param_4[2] * param_3[1] + param_4[1]) * *param_3 + *param_4) * 0x10);
-  *param_5 = *puVar1;
-  param_5[1] = puVar1[1];
-  param_5[2] = puVar1[2];
-  param_5[3] = puVar1[3];
+  texelPtr = (undefined4 *)
+           (texelData + ((texelCoord[2] * levelRecord[1] + texelCoord[1]) * *levelRecord + *texelCoord) * 0x10);
+  *texelOut = *texelPtr;
+  texelOut[1] = texelPtr[1];
+  texelOut[2] = texelPtr[2];
+  texelOut[3] = texelPtr[3];
   return;
 }
 
@@ -1364,447 +1401,451 @@ int _InterpreterNoiseGeneratorCreate()
 }
 
 /* _InterpreterNoiseGeneratorInitialise @ 0x97bd57a0 (280 bytes) */
-int _InterpreterNoiseGeneratorInitialise(param_1)
-  undefined1 *param_1;
+int _InterpreterNoiseGeneratorInitialise(noise)
+  undefined1 *noise;
 {
   uint loopIndex;
-  undefined1 uVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  int iVar4;
-  float *pfVar5;
-  uint uVar6;
-  undefined1 *puVar7;
+  undefined1 swapTemp;
+  undefined4 gradientCopy;
+  uint randomValue;
+  int swapIndex;
+  float *gradientPtr;
+  uint shuffleRandom;
+  undefined1 *permPtr;
   
-  _memset(param_1,0,0xa20);
+  _memset(noise,0,0xa20);
   loopIndex = 0;
-  pfVar5 = (float *)(param_1 + 0x210);
+  gradientPtr = (float *)(noise + 0x210);
   do {
-    param_1[loopIndex] = (char)loopIndex;
-    uVar3 = _random();
+    noise[loopIndex] = (char)loopIndex;
+    randomValue = _random();
     loopIndex = loopIndex + 1;
-    *pfVar5 = (float)(((double)CONCAT44(0x43300000,
-                                        (uVar3 + (((int)uVar3 >> 9) +
-                                                 (uint)((int)uVar3 < 0 && (uVar3 & 0x1ff) != 0)) *
+    *gradientPtr = (float)(((double)CONCAT44(0x43300000,
+                                        (randomValue + (((int)randomValue >> 9) +
+                                                 (uint)((int)randomValue < 0 && (randomValue & 0x1ff) != 0)) *
                                                  -0x200) - 0x100 ^ 0x80000000) - 4503601774854144.0)
                      * 0.00390625);
-    pfVar5 = pfVar5 + 1;
+    gradientPtr = gradientPtr + 1;
   } while (loopIndex < 0x100);
-  puVar7 = param_1 + 0xff;
+  permPtr = noise + 0xff;
   do {
-    uVar1 = *puVar7;
-    uVar6 = _random();
-    iVar4 = uVar6 + (((int)uVar6 >> 8) + (uint)((int)uVar6 < 0 && (uVar6 & 0xff) != 0)) * -0x100;
-    *puVar7 = param_1[iVar4];
-    puVar7 = puVar7 + -1;
-    param_1[iVar4] = uVar1;
-  } while (puVar7 != param_1);
-  iVar4 = 0x102;
-  puVar7 = param_1;
+    swapTemp = *permPtr;
+    shuffleRandom = _random();
+    swapIndex = shuffleRandom + (((int)shuffleRandom >> 8) + (uint)((int)shuffleRandom < 0 && (shuffleRandom & 0xff) != 0)) * -0x100;
+    *permPtr = noise[swapIndex];
+    permPtr = permPtr + -1;
+    noise[swapIndex] = swapTemp;
+  } while (permPtr != noise);
+  swapIndex = 0x102;
+  permPtr = noise;
   do {
-    uVar2 = *(undefined4 *)(puVar7 + 0x210);
-    param_1[0x100] = *param_1;
-    param_1 = param_1 + 1;
-    *(undefined4 *)(puVar7 + 0x610) = uVar2;
-    puVar7 = puVar7 + 4;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
-  return puVar7;
+    gradientCopy = *(undefined4 *)(permPtr + 0x210);
+    noise[0x100] = *noise;
+    noise = noise + 1;
+    *(undefined4 *)(permPtr + 0x610) = gradientCopy;
+    permPtr = permPtr + 4;
+    swapIndex = swapIndex + -1;
+  } while (swapIndex != 0);
+  return permPtr;
 }
 
 /* _InterpreterNoiseGeneratorSmoothHermiteCurve @ 0x97bd58bc (156 bytes) */
-int _InterpreterNoiseGeneratorSmoothHermiteCurve(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorSmoothHermiteCurve(noise, fraction, curve)
+  undefined4 noise;
+  float *fraction;
+  float *curve;
 {
-  double dVar1;
-  double dVar2;
+  double threeConst;
+  double fractionD;
   
-  dVar1 = DOUBLE_97c30a80;
-  dVar2 = (double)*param_2;
-  *param_3 = (float)((double)(float)(dVar2 * dVar2) * (DOUBLE_97c30a80 - (dVar2 + dVar2)));
-  dVar2 = (double)param_2[1];
-  param_3[1] = (float)((double)(float)(dVar2 * dVar2) * (dVar1 - (dVar2 + dVar2)));
-  dVar2 = (double)param_2[2];
-  param_3[2] = (float)((double)(float)(dVar2 * dVar2) * (dVar1 - (dVar2 + dVar2)));
-  dVar2 = (double)param_2[3];
-  param_3[3] = (float)((double)(float)(dVar2 * dVar2) * (dVar1 - (dVar2 + dVar2)));
+  threeConst = DOUBLE_97c30a80;
+  fractionD = (double)*fraction;
+  *curve = (float)((double)(float)(fractionD * fractionD) * (DOUBLE_97c30a80 - (fractionD + fractionD)));
+  fractionD = (double)fraction[1];
+  curve[1] = (float)((double)(float)(fractionD * fractionD) * (threeConst - (fractionD + fractionD)));
+  fractionD = (double)fraction[2];
+  curve[2] = (float)((double)(float)(fractionD * fractionD) * (threeConst - (fractionD + fractionD)));
+  fractionD = (double)fraction[3];
+  curve[3] = (float)((double)(float)(fractionD * fractionD) * (threeConst - (fractionD + fractionD)));
   return;
 }
 
 /* _InterpreterNoiseGeneratorInterpolate @ 0x97bd5958 (100 bytes) */
-int _InterpreterNoiseGeneratorInterpolate(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
-  float *param_5;
+int _InterpreterNoiseGeneratorInterpolate(noise, vecA, vecB, weight, result)
+  undefined4 noise;
+  float *vecA;
+  float *vecB;
+  float *weight;
+  float *result;
 {
-  *param_5 = *param_4 * (*param_3 - *param_2) + *param_2;
-  param_5[1] = param_4[1] * (param_3[1] - param_2[1]) + param_2[1];
-  param_5[2] = param_4[2] * (param_3[2] - param_2[2]) + param_2[2];
-  param_5[3] = param_4[3] * (param_3[3] - param_2[3]) + param_2[3];
+  *result = *weight * (*vecB - *vecA) + *vecA;
+  result[1] = weight[1] * (vecB[1] - vecA[1]) + vecA[1];
+  result[2] = weight[2] * (vecB[2] - vecA[2]) + vecA[2];
+  result[3] = weight[3] * (vecB[3] - vecA[3]) + vecA[3];
   return;
 }
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise1D @ 0x97bd59bc (476 bytes) */
-double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
+double _InterpreterNoiseGeneratorInterpolatedNoise1D(int noise,float *point)
 {
-  uint uVar1;
+  uint cellX;
   double floorResult;
   double floorResult2;
-  float local_80;
-  float local_7c;
-  float local_78;
-  undefined4 local_74;
-  undefined4 local_70 [4];
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  float local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  float local_34;
-  longlong local_30;
-  undefined4 local_28;
-  uint uStack_24;
+  float fracX;
+  float fracY;
+  float fracZ;
+  undefined4 fracPad;
+  undefined4 smooth [4];
+  undefined4 lerpWeight0;
+  undefined4 lerpWeight1;
+  undefined4 lerpWeight2;
+  undefined4 lerpWeight3;
+  float lerpA0;
+  undefined4 lerpA1;
+  undefined4 lerpA2;
+  undefined4 lerpA3;
+  undefined4 lerpB0;
+  undefined4 lerpB1;
+  undefined4 lerpB2;
+  float lerpB3;
+  longlong intCastScratch;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  floorResult = _floor((double)*param_2);
-  uVar1 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar1;
-  floorResult = _floor((double)param_2[1]);
-  local_30 = (longlong)(int)floorResult;
-  floorResult2 = _floor((double)param_2[2]);
-  local_30 = (longlong)(int)floorResult2;
-  local_28 = 0x43300000;
-  uStack_24 = (int)floorResult2 ^ 0x80000000;
-  local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_97c30a58);
-  local_78 = param_2[2] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
-  local_7c = param_2[1] -
+  floorResult = _floor((double)*point);
+  cellX = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellX;
+  floorResult = _floor((double)point[1]);
+  intCastScratch = (longlong)(int)floorResult;
+  floorResult2 = _floor((double)point[2]);
+  intCastScratch = (longlong)(int)floorResult2;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = (int)floorResult2 ^ 0x80000000;
+  fracX = *point - (float)((double)CONCAT44(0x43300000,cellX ^ 0x80000000) - DOUBLE_97c30a58);
+  fracZ = point[2] - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58);
+  fracY = point[1] -
              (float)((double)CONCAT44(0x43300000,(int)floorResult ^ 0x80000000) - DOUBLE_97c30a58);
-  local_74 = 0;
-  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,local_70);
-  local_50 = *(float *)((uint)*(byte *)(param_1 + (uVar1 & 0xff)) * 4 + param_1 + 0x210);
-  local_4c = *(undefined4 *)
-              ((uint)*(byte *)(param_1 + ((uVar1 & 0xff) + 1 & 0xff)) * 4 + param_1 + 0x210);
-  local_38 = 0;
-  local_48 = 0;
-  local_44 = 0;
-  local_3c = 0;
-  local_54 = local_70[0];
-  local_60 = local_70[0];
-  local_5c = local_70[0];
-  local_58 = local_70[0];
-  local_40 = local_4c;
-  local_34 = local_50;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  return (double)local_50;
+  fracPad = 0;
+  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,smooth);
+  lerpA0 = *(float *)((uint)*(byte *)(noise + (cellX & 0xff)) * 4 + noise + 0x210);
+  lerpA1 = *(undefined4 *)
+              ((uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff)) * 4 + noise + 0x210);
+  lerpB2 = 0;
+  lerpA2 = 0;
+  lerpA3 = 0;
+  lerpB1 = 0;
+  lerpWeight3 = smooth[0];
+  lerpWeight0 = smooth[0];
+  lerpWeight1 = smooth[0];
+  lerpWeight2 = smooth[0];
+  lerpB0 = lerpA1;
+  lerpB3 = lerpA0;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  return (double)lerpA0;
 }
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise2D @ 0x97bd5b98 (544 bytes) */
-double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
+double _InterpreterNoiseGeneratorInterpolatedNoise2D(int noise,float *point)
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint cellY1;
+  uint cellX;
+  uint cellY;
+  uint permX0;
+  uint permX1;
   double floorResult;
-  float local_80;
-  float local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  float local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  float local_38;
-  float local_34;
-  longlong local_30;
-  undefined4 local_28;
-  uint uStack_24;
+  float fracX;
+  float fracY;
+  undefined4 fracPad2;
+  undefined4 fracPad;
+  undefined4 smoothX;
+  undefined4 smoothY;
+  undefined4 lerpWeight0;
+  undefined4 lerpWeight1;
+  undefined4 lerpWeight2;
+  undefined4 lerpWeight3;
+  float lerpA0;
+  undefined4 lerpA1;
+  undefined4 lerpA2;
+  undefined4 lerpA3;
+  undefined4 lerpB0;
+  undefined4 lerpB1;
+  float lerpB2;
+  float lerpB3;
+  longlong intCastScratch;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  floorResult = _floor((double)*param_2);
-  uVar1 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar1;
-  floorResult = _floor((double)param_2[1]);
-  uVar2 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar2;
-  local_28 = 0x43300000;
-  uStack_24 = uVar2 ^ 0x80000000;
-  uVar2 = uVar2 & 0xff;
-  local_74 = 0;
-  local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_97c30a58);
-  local_7c = param_2[1] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
-  local_78 = 0;
-  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,&local_70);
-  uVar3 = (uint)*(byte *)(param_1 + (uVar1 & 0xff));
-  uVar4 = (uint)*(byte *)(param_1 + ((uVar1 & 0xff) + 1 & 0xff));
-  uVar1 = uVar2 + 1 & 0xff;
-  local_50 = *(float *)(((uVar3 + uVar2) * 4 & 0x3fc) + param_1 + 0x210);
-  local_4c = *(undefined4 *)(((uVar4 + uVar2) * 4 & 0x3fc) + param_1 + 0x210);
-  local_48 = *(undefined4 *)(((uVar3 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_44 = *(undefined4 *)(((uVar4 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_54 = local_70;
-  local_60 = local_70;
-  local_5c = local_70;
-  local_58 = local_70;
-  local_40 = local_4c;
-  local_3c = local_48;
-  local_38 = GH_U2F((unsigned int)(local_44));
-  local_34 = local_50;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  local_40 = local_48;
-  local_3c = local_44;
-  local_38 = local_50;
-  local_34 = GH_U2F((unsigned int)(local_4c));
-  local_54 = local_6c;
-  local_60 = local_6c;
-  local_5c = local_6c;
-  local_58 = local_6c;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  return (double)local_50;
+  floorResult = _floor((double)*point);
+  cellX = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellX;
+  floorResult = _floor((double)point[1]);
+  cellY = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellY;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = cellY ^ 0x80000000;
+  cellY = cellY & 0xff;
+  fracPad = 0;
+  fracX = *point - (float)((double)CONCAT44(0x43300000,cellX ^ 0x80000000) - DOUBLE_97c30a58);
+  fracY = point[1] - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58);
+  fracPad2 = 0;
+  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,&smoothX);
+  permX0 = (uint)*(byte *)(noise + (cellX & 0xff));
+  permX1 = (uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff));
+  cellY1 = cellY + 1 & 0xff;
+  lerpA0 = *(float *)(((permX0 + cellY) * 4 & 0x3fc) + noise + 0x210);
+  lerpA1 = *(undefined4 *)(((permX1 + cellY) * 4 & 0x3fc) + noise + 0x210);
+  lerpA2 = *(undefined4 *)(((permX0 + cellY1) * 4 & 0x3fc) + noise + 0x210);
+  lerpA3 = *(undefined4 *)(((permX1 + cellY1) * 4 & 0x3fc) + noise + 0x210);
+  lerpWeight3 = smoothX;
+  lerpWeight0 = smoothX;
+  lerpWeight1 = smoothX;
+  lerpWeight2 = smoothX;
+  lerpB0 = lerpA1;
+  lerpB1 = lerpA2;
+  lerpB2 = GH_U2F((unsigned int)(lerpA3));
+  lerpB3 = lerpA0;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  lerpB0 = lerpA2;
+  lerpB1 = lerpA3;
+  lerpB2 = lerpA0;
+  lerpB3 = GH_U2F((unsigned int)(lerpA1));
+  lerpWeight3 = smoothY;
+  lerpWeight0 = smoothY;
+  lerpWeight1 = smoothY;
+  lerpWeight2 = smoothY;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  return (double)lerpA0;
 }
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise3D @ 0x97bd5db8 (784 bytes) */
-double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
+double _InterpreterNoiseGeneratorInterpolatedNoise3D(int noise,float *point)
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
+  int permRow1;
+  uint cellY1OrPermX1Y1;
+  uint permX1Y0;
+  uint cellZ;
+  uint cellY0;
+  uint cellZ1;
+  uint permX0Y0;
+  uint cellX;
+  uint permX0Y1;
+  uint cellY;
+  int permRow0;
   double floorResult;
-  float local_80;
-  float local_7c;
-  float local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  float local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  float local_38;
-  float local_34;
-  longlong local_30;
-  undefined4 local_28;
-  uint uStack_24;
+  float fracX;
+  float fracY;
+  float fracZ;
+  undefined4 fracPad;
+  undefined4 smoothX;
+  undefined4 smoothY;
+  undefined4 smoothZ;
+  undefined4 lerpWeight0;
+  undefined4 lerpWeight1;
+  undefined4 lerpWeight2;
+  undefined4 lerpWeight3;
+  float lerpA0;
+  undefined4 lerpA1;
+  undefined4 lerpA2;
+  undefined4 lerpA3;
+  undefined4 lerpB0;
+  undefined4 lerpB1;
+  float lerpB2;
+  float lerpB3;
+  longlong intCastScratch;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  floorResult = _floor((double)*param_2);
-  uVar5 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar5;
-  floorResult = _floor((double)param_2[1]);
-  uVar7 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar7;
-  floorResult = _floor((double)param_2[2]);
-  uVar1 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar1;
-  local_28 = 0x43300000;
-  uStack_24 = uVar1 ^ 0x80000000;
-  uVar1 = uVar1 & 0xff;
-  uVar2 = uVar7 & 0xff;
-  local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar5 ^ 0x80000000) - DOUBLE_97c30a58);
-  local_78 = param_2[2] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
-  local_74 = 0;
-  local_7c = param_2[1] - (float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - DOUBLE_97c30a58)
+  floorResult = _floor((double)*point);
+  cellX = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellX;
+  floorResult = _floor((double)point[1]);
+  cellY = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellY;
+  floorResult = _floor((double)point[2]);
+  cellZ = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellZ;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = cellZ ^ 0x80000000;
+  cellZ = cellZ & 0xff;
+  cellY0 = cellY & 0xff;
+  fracX = *point - (float)((double)CONCAT44(0x43300000,cellX ^ 0x80000000) - DOUBLE_97c30a58);
+  fracZ = point[2] - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58);
+  fracPad = 0;
+  fracY = point[1] - (float)((double)CONCAT44(0x43300000,cellY ^ 0x80000000) - DOUBLE_97c30a58)
   ;
-  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,&local_70);
-  uVar7 = uVar2 + 1 & 0xff;
-  uVar3 = uVar1 + 1 & 0xff;
-  iVar8 = (uint)*(byte *)(param_1 + (uVar5 & 0xff)) + param_1;
-  uVar4 = (uint)*(byte *)(iVar8 + uVar2);
-  uVar6 = (uint)*(byte *)(iVar8 + uVar7);
-  local_50 = *(float *)(((uVar4 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_4c = *(undefined4 *)(((uVar6 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_48 = *(undefined4 *)(((uVar4 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  local_44 = *(undefined4 *)(((uVar6 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  iVar8 = (uint)*(byte *)(param_1 + ((uVar5 & 0xff) + 1 & 0xff)) + param_1;
-  uVar5 = (uint)*(byte *)(iVar8 + uVar2);
-  uVar7 = (uint)*(byte *)(iVar8 + uVar7);
-  local_40 = *(undefined4 *)(((uVar5 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_3c = *(undefined4 *)(((uVar7 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_38 = *(float *)(((uVar5 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  local_34 = *(float *)(((uVar7 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  local_54 = local_70;
-  local_60 = local_70;
-  local_5c = local_70;
-  local_58 = local_70;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  local_40 = local_4c;
-  local_3c = local_48;
-  local_54 = local_6c;
-  local_38 = GH_U2F((unsigned int)(local_44));
-  local_34 = local_50;
-  local_60 = local_6c;
-  local_5c = local_6c;
-  local_58 = local_6c;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  local_40 = local_48;
-  local_3c = local_44;
-  local_54 = local_68;
-  local_38 = local_50;
-  local_34 = GH_U2F((unsigned int)(local_4c));
-  local_60 = local_68;
-  local_5c = local_68;
-  local_58 = local_68;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  return (double)local_50;
+  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,&smoothX);
+  cellY1OrPermX1Y1 = cellY0 + 1 & 0xff;
+  cellZ1 = cellZ + 1 & 0xff;
+  permRow0 = (uint)*(byte *)(noise + (cellX & 0xff)) + noise;
+  permX0Y0 = (uint)*(byte *)(permRow0 + cellY0);
+  permX0Y1 = (uint)*(byte *)(permRow0 + cellY1OrPermX1Y1);
+  lerpA0 = *(float *)(((permX0Y0 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpA1 = *(undefined4 *)(((permX0Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpA2 = *(undefined4 *)(((permX0Y0 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpA3 = *(undefined4 *)(((permX0Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  permRow1 = (uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff)) + noise;
+  permX1Y0 = (uint)*(byte *)(permRow1 + cellY0);
+  cellY1OrPermX1Y1 = (uint)*(byte *)(permRow1 + cellY1OrPermX1Y1);
+  lerpB0 = *(undefined4 *)(((permX1Y0 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpB1 = *(undefined4 *)(((cellY1OrPermX1Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpB2 = *(float *)(((permX1Y0 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpB3 = *(float *)(((cellY1OrPermX1Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpWeight3 = smoothX;
+  lerpWeight0 = smoothX;
+  lerpWeight1 = smoothX;
+  lerpWeight2 = smoothX;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  lerpB0 = lerpA1;
+  lerpB1 = lerpA2;
+  lerpWeight3 = smoothY;
+  lerpB2 = GH_U2F((unsigned int)(lerpA3));
+  lerpB3 = lerpA0;
+  lerpWeight0 = smoothY;
+  lerpWeight1 = smoothY;
+  lerpWeight2 = smoothY;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  lerpB0 = lerpA2;
+  lerpB1 = lerpA3;
+  lerpWeight3 = smoothZ;
+  lerpB2 = lerpA0;
+  lerpB3 = GH_U2F((unsigned int)(lerpA1));
+  lerpWeight0 = smoothZ;
+  lerpWeight1 = smoothZ;
+  lerpWeight2 = smoothZ;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  return (double)lerpA0;
 }
 
 /* _InterpreterNoiseGeneratorCalculate1D @ 0x97bd60c8 (240 bytes) */
-int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorCalculate1D(noise, point, result)
+  undefined4 noise;
+  float *point;
+  float *result;
 {
   uint loopIndex;
-  double exp2Result;
-  float fVar1;
-  double dVar2;
-  uint uVar3;
-  double dVar4;
-  double powResult;
-  float local_60 [5];
-  uint uStack_4c;
+  double frequency;
+  float noiseSum;
+  double i2dBias;
+  uint nextOctave;
+  double octaveNoise;
+  double amplitude;
+  float samplePoint [5];
+  uint i2dLo1;
   
-  dVar2 = DOUBLE_97c30a68;
+  i2dBias = DOUBLE_97c30a68;
   loopIndex = 0;
-  fVar1 = TAllocation__guardBlockSize;
+  noiseSum = TAllocation__guardBlockSize;
   do {
-    uVar3 = loopIndex + 1;
-    local_60[4] = 176.0;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar2));
-    local_60[4] = 176.0;
-    uStack_4c = uVar3;
-    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
-    local_60[0] = *param_2 * (float)exp2Result;
-    local_60[1] = 0.0;
-    local_60[2] = 0.0;
-    local_60[3] = 0.0;
-    dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise1D)(param_1,local_60);
-    fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
-    loopIndex = uVar3;
-  } while (uVar3 < 8);
-  param_3[3] = fVar1;
-  *param_3 = fVar1;
-  param_3[1] = fVar1;
-  param_3[2] = fVar1;
+    nextOctave = loopIndex + 1;
+    samplePoint[4] = 176.0;
+    frequency = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - i2dBias));
+    samplePoint[4] = 176.0;
+    i2dLo1 = nextOctave;
+    amplitude = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,nextOctave) - i2dBias);
+    samplePoint[0] = *point * (float)frequency;
+    samplePoint[1] = 0.0;
+    samplePoint[2] = 0.0;
+    samplePoint[3] = 0.0;
+    octaveNoise = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise1D)(noise,samplePoint);
+    noiseSum = (float)(octaveNoise * (double)(float)amplitude + (double)noiseSum);
+    loopIndex = nextOctave;
+  } while (nextOctave < 8);
+  result[3] = noiseSum;
+  *result = noiseSum;
+  result[1] = noiseSum;
+  result[2] = noiseSum;
   return;
 }
 
 /* _InterpreterNoiseGeneratorCalculate2D @ 0x97bd61b8 (248 bytes) */
-int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorCalculate2D(noise, point, result)
+  undefined4 noise;
+  float *point;
+  float *result;
 {
   uint loopIndex;
-  double exp2Result;
-  float fVar1;
-  double dVar2;
-  uint uVar3;
-  double dVar4;
-  double powResult;
-  float local_60;
-  float local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  uint uStack_4c;
+  double frequency;
+  float noiseSum;
+  double i2dBias;
+  uint nextOctave;
+  double octaveNoise;
+  double amplitude;
+  float samplePointX;
+  float samplePointY;
+  undefined4 samplePointZ;
+  undefined4 samplePointW;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  dVar2 = DOUBLE_97c30a68;
+  i2dBias = DOUBLE_97c30a68;
   loopIndex = 0;
-  fVar1 = TAllocation__guardBlockSize;
+  noiseSum = TAllocation__guardBlockSize;
   do {
-    uVar3 = loopIndex + 1;
-    local_50 = 0x43300000;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar2));
-    local_50 = 0x43300000;
-    uStack_4c = uVar3;
-    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
-    local_60 = *param_2 * (float)exp2Result;
-    local_5c = param_2[1] * (float)exp2Result;
-    local_58 = 0;
-    local_54 = 0;
-    dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise2D)(param_1,&local_60);
-    fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
-    loopIndex = uVar3;
-  } while (uVar3 < 8);
-  param_3[3] = fVar1;
-  *param_3 = fVar1;
-  param_3[1] = fVar1;
-  param_3[2] = fVar1;
+    nextOctave = loopIndex + 1;
+    i2dHi1 = 0x43300000;
+    frequency = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - i2dBias));
+    i2dHi1 = 0x43300000;
+    i2dLo1 = nextOctave;
+    amplitude = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,nextOctave) - i2dBias);
+    samplePointX = *point * (float)frequency;
+    samplePointY = point[1] * (float)frequency;
+    samplePointZ = 0;
+    samplePointW = 0;
+    octaveNoise = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise2D)(noise,&samplePointX);
+    noiseSum = (float)(octaveNoise * (double)(float)amplitude + (double)noiseSum);
+    loopIndex = nextOctave;
+  } while (nextOctave < 8);
+  result[3] = noiseSum;
+  *result = noiseSum;
+  result[1] = noiseSum;
+  result[2] = noiseSum;
   return;
 }
 
 /* _InterpreterNoiseGeneratorCalculate3D @ 0x97bd62b0 (256 bytes) */
-int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorCalculate3D(noise, point, result)
+  undefined4 noise;
+  float *point;
+  float *result;
 {
   uint loopIndex;
-  double powResult;
-  float fVar1;
-  float fVar2;
-  double dVar3;
-  uint uVar4;
-  double exp2Result;
-  double dVar6;
-  float local_60;
-  float local_5c;
-  float local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  uint uStack_4c;
+  double amplitude;
+  float noiseSum;
+  float frequencyF;
+  double i2dBias;
+  uint nextOctave;
+  double frequency;
+  double octaveNoise;
+  float samplePointX;
+  float samplePointY;
+  float samplePointZ;
+  undefined4 samplePointW;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  dVar3 = DOUBLE_97c30a68;
+  i2dBias = DOUBLE_97c30a68;
   loopIndex = 0;
-  fVar1 = TAllocation__guardBlockSize;
+  noiseSum = TAllocation__guardBlockSize;
   do {
-    uVar4 = loopIndex + 1;
-    local_50 = 0x43300000;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar3));
-    local_50 = 0x43300000;
-    fVar2 = (float)exp2Result;
-    uStack_4c = uVar4;
-    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar4) - dVar3);
-    local_60 = *param_2 * fVar2;
-    local_5c = param_2[1] * fVar2;
-    local_58 = param_2[2] * fVar2;
-    local_54 = 0;
-    dVar6 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise3D)(param_1,&local_60);
-    fVar1 = (float)(dVar6 * (double)(float)powResult + (double)fVar1);
-    loopIndex = uVar4;
-  } while (uVar4 < 8);
-  param_3[3] = fVar1;
-  *param_3 = fVar1;
-  param_3[1] = fVar1;
-  param_3[2] = fVar1;
+    nextOctave = loopIndex + 1;
+    i2dHi1 = 0x43300000;
+    frequency = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - i2dBias));
+    i2dHi1 = 0x43300000;
+    frequencyF = (float)frequency;
+    i2dLo1 = nextOctave;
+    amplitude = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,nextOctave) - i2dBias);
+    samplePointX = *point * frequencyF;
+    samplePointY = point[1] * frequencyF;
+    samplePointZ = point[2] * frequencyF;
+    samplePointW = 0;
+    octaveNoise = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise3D)(noise,&samplePointX);
+    noiseSum = (float)(octaveNoise * (double)(float)amplitude + (double)noiseSum);
+    loopIndex = nextOctave;
+  } while (nextOctave < 8);
+  result[3] = noiseSum;
+  *result = noiseSum;
+  result[1] = noiseSum;
+  result[2] = noiseSum;
   return;
 }
 
@@ -1846,349 +1887,350 @@ int _InterpreterRasterOpMachineAttachRuntimeCompiler(param_1, param_2)
 }
 
 /* _InterpreterRasterOpMachine_DepthTest @ 0x97bd6414 (236 bytes) */
-int _InterpreterRasterOpMachine_DepthTest(param_1)
-  int *param_1;
+int _InterpreterRasterOpMachine_DepthTest(machine)
+  int *machine;
 {
-  float fVar1;
-  int iVar2;
-  float *pfVar3;
-  bool bVar4;
+  float fragDepth;
+  int emulator;
+  float *depthBufferPtr;
+  bool passed;
   
-  iVar2 = *param_1;
-  fVar1 = *(float *)(*(int *)(iVar2 + 0xdf0) + 0xa38);
-  pfVar3 = *(float **)(iVar2 + 0xda8);
-  switch(*(uint *)(*(int *)(iVar2 + 0xd80) + 0x50) & 7) {
+  emulator = *machine;
+  fragDepth = *(float *)(*(int *)(emulator + 0xdf0) + 0xa38);
+  depthBufferPtr = *(float **)(emulator + 0xda8);
+  switch(*(uint *)(*(int *)(emulator + 0xd80) + 0x50) & 7) {
   case 0:
     return true;
   case 1:
-    bVar4 = fVar1 < *pfVar3;
+    passed = fragDepth < *depthBufferPtr;
     break;
   case 2:
-    return fVar1 != *pfVar3;
+    return fragDepth != *depthBufferPtr;
   case 3:
-    bVar4 = fVar1 <= *pfVar3;
+    passed = fragDepth <= *depthBufferPtr;
     break;
   case 4:
-    bVar4 = *pfVar3 < fVar1;
+    passed = *depthBufferPtr < fragDepth;
     break;
   case 5:
-    return fVar1 == *pfVar3;
+    return fragDepth == *depthBufferPtr;
   case 6:
-    bVar4 = *pfVar3 <= fVar1;
+    passed = *depthBufferPtr <= fragDepth;
     break;
   default:
     return false;
   }
-  return (bool)(bVar4 ^ 1);
+  return (bool)(passed ^ 1);
 }
 
 /* _InterpreterRasterOpMachine_DepthAndStencilTest @ 0x97bd6520 (732 bytes) */
-int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
-  int *param_1;
+int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
+  int *machine;
 {
-  bool bVar1;
-  bool bVar2;
-  float fVar3;
-  uint uVar4;
-  bool bVar5;
-  uint uVar6;
-  int iVar7;
-  byte *pbVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
-  float *pfVar14;
-  uint uVar15;
+  bool writeMasksUnrestricted;
+  bool depthLessOrEqual;
+  float fragDepth;
+  uint stencilRef;
+  bool stencilEnabled;
+  uint stencilFuncAndOps;
+  int state;
+  byte *stencilBufferPtr;
+  uint stencilWriteMask;
+  uint stencilCompareMask;
+  uint writeMaskWord;
+  uint stateFlags;
+  int emulator;
+  float *depthBufferPtr;
+  uint testPassed;
   
-  uVar15 = 0;
-  iVar13 = *param_1;
-  iVar7 = *(int *)(iVar13 + 0xd80);
-  uVar6 = *(uint *)(iVar7 + 0x48);
-  uVar12 = *(uint *)(iVar7 + 0x3c);
-  uVar4 = *(uint *)(iVar7 + 0x4c) >> 0x18;
-  fVar3 = *(float *)(*(int *)(iVar13 + 0xdf0) + 0xa38);
-  pfVar14 = *(float **)(iVar13 + 0xda8);
-  pbVar8 = *(byte **)(iVar13 + 0xdac);
-  bVar1 = (uVar12 >> 6 & 1) == 0;
-  uVar10 = *(uint *)(iVar7 + 0x4c) >> 8 & 0xff;
-  uVar11 = *(uint *)(*(int *)(iVar13 + 0xd80) + 0x70);
-  if (bVar1) {
-    uVar9 = 0xff;
+  testPassed = 0;
+  emulator = *machine;
+  state = *(int *)(emulator + 0xd80);
+  stencilFuncAndOps = *(uint *)(state + 0x48);
+  stateFlags = *(uint *)(state + 0x3c);
+  stencilRef = *(uint *)(state + 0x4c) >> 0x18;
+  fragDepth = *(float *)(*(int *)(emulator + 0xdf0) + 0xa38);
+  depthBufferPtr = *(float **)(emulator + 0xda8);
+  stencilBufferPtr = *(byte **)(emulator + 0xdac);
+  writeMasksUnrestricted = (stateFlags >> 6 & 1) == 0;
+  stencilCompareMask = *(uint *)(state + 0x4c) >> 8 & 0xff;
+  writeMaskWord = *(uint *)(*(int *)(emulator + 0xd80) + 0x70);
+  if (writeMasksUnrestricted) {
+    stencilWriteMask = 0xff;
   }
   else {
-    uVar9 = uVar11 >> 8 & 0xff;
+    stencilWriteMask = writeMaskWord >> 8 & 0xff;
   }
-  bVar5 = (uVar12 & 2) != 0;
-  if (bVar5) {
-    switch(uVar6 >> 0xc & 7) {
+  stencilEnabled = (stateFlags & 2) != 0;
+  if (stencilEnabled) {
+    switch(stencilFuncAndOps >> 0xc & 7) {
     case 0:
-      uVar15 = 0;
+      testPassed = 0;
       break;
     case 1:
-      uVar15 = (uint)((uVar4 & uVar10) < (uVar10 & *pbVar8));
+      testPassed = (uint)((stencilRef & stencilCompareMask) < (stencilCompareMask & *stencilBufferPtr));
       break;
     case 2:
-      uVar15 = (uint)((uVar4 & uVar10) == (uVar10 & *pbVar8));
+      testPassed = (uint)((stencilRef & stencilCompareMask) == (stencilCompareMask & *stencilBufferPtr));
       break;
     case 3:
-      uVar15 = (uint)((uVar4 & uVar10) <= (uVar10 & *pbVar8));
+      testPassed = (uint)((stencilRef & stencilCompareMask) <= (stencilCompareMask & *stencilBufferPtr));
       break;
     case 4:
-      uVar15 = (uint)((uVar10 & *pbVar8) < (uVar4 & uVar10));
+      testPassed = (uint)((stencilCompareMask & *stencilBufferPtr) < (stencilRef & stencilCompareMask));
       break;
     case 5:
-      uVar15 = -(uint)((*pbVar8 ^ uVar4) & uVar10) >> 0x1f;
+      testPassed = -(uint)((*stencilBufferPtr ^ stencilRef) & stencilCompareMask) >> 0x1f;
       break;
     case 6:
-      uVar15 = (uint)((uVar10 & *pbVar8) <= (uVar4 & uVar10));
+      testPassed = (uint)((stencilCompareMask & *stencilBufferPtr) <= (stencilRef & stencilCompareMask));
       break;
     case 7:
-      uVar15 = 1;
+      testPassed = 1;
     }
-    if (uVar15 == 0) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0xf & 7,uVar4,pbVar8,uVar9);
+    if (testPassed == 0) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0xf & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
       return true;
     }
   }
-  if ((uVar12 & 4) == 0) {
-    if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uVar9);
+  if ((stateFlags & 4) == 0) {
+    if (stencilEnabled) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0x15 & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
     }
-    return uVar15 == 0;
+    return testPassed == 0;
   }
-  switch(*(uint *)(*(int *)(iVar13 + 0xd80) + 0x50) & 7) {
+  switch(*(uint *)(*(int *)(emulator + 0xd80) + 0x50) & 7) {
   case 0:
-    uVar15 = 0;
+    testPassed = 0;
     break;
   case 1:
-    uVar15 = (uint)(fVar3 < *pfVar14);
+    testPassed = (uint)(fragDepth < *depthBufferPtr);
     break;
   case 2:
-    uVar15 = (uint)(fVar3 == *pfVar14);
+    testPassed = (uint)(fragDepth == *depthBufferPtr);
     break;
   case 3:
-    bVar2 = fVar3 <= *pfVar14;
+    depthLessOrEqual = fragDepth <= *depthBufferPtr;
     goto LAB_97bd67ac;
   case 4:
-    uVar15 = (uint)(*pfVar14 < fVar3);
+    testPassed = (uint)(*depthBufferPtr < fragDepth);
     break;
   case 5:
-    uVar15 = (uint)(fVar3 != *pfVar14);
+    testPassed = (uint)(fragDepth != *depthBufferPtr);
     break;
   case 6:
-    bVar2 = *pfVar14 <= fVar3;
+    depthLessOrEqual = *depthBufferPtr <= fragDepth;
 LAB_97bd67ac:
-    uVar15 = (uint)bVar2;
+    testPassed = (uint)depthLessOrEqual;
     break;
   case 7:
-    uVar15 = 1;
+    testPassed = 1;
   }
-  if (uVar15 == 0) {
-    if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x12 & 7,uVar4,pbVar8,uVar9);
+  if (testPassed == 0) {
+    if (stencilEnabled) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0x12 & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
     }
   }
   else {
-    if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uVar9);
+    if (stencilEnabled) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0x15 & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
     }
-    if ((bVar1) || ((uVar11 & 0x10000) != 0)) {
-      *pfVar14 = fVar3;
+    if ((writeMasksUnrestricted) || ((writeMaskWord & 0x10000) != 0)) {
+      *depthBufferPtr = fragDepth;
     }
   }
-  return uVar15 == 0;
+  return testPassed == 0;
 }
 
 /* _InterpreterRasterOpMachine_AlphaTest @ 0x97bd683c (1548 bytes) */
-int _InterpreterRasterOpMachine_AlphaTest(param_1, param_2)
-  int *param_1;
-  int param_2;
+int _InterpreterRasterOpMachine_AlphaTest(machine, fragment)
+  int *machine;
+  int fragment;
 {
+  uint alphaRefFixed;
   uint framebufferFormat;
-  float fVar1;
-  int iVar2;
-  uint uVar3;
-  float fVar4;
-  uint uVar5;
-  bool bVar6;
-  double dVar7;
+  float alphaRef;
+  int state;
+  uint fragAlphaFixed;
+  float fragAlpha;
+  uint alphaFunc;
+  bool passed;
+  double fixedScratch;
   
-  iVar2 = *(int *)(*param_1 + 0xd80);
-  fVar1 = *(float *)(iVar2 + 0x44);
-  uVar5 = *(uint *)(iVar2 + 0x40);
-  framebufferFormat = _PPEmulatorFramebufferFormat(*param_1);
-  bVar6 = false;
+  state = *(int *)(*machine + 0xd80);
+  alphaRef = *(float *)(state + 0x44);
+  alphaFunc = *(uint *)(state + 0x40);
+  framebufferFormat = _PPEmulatorFramebufferFormat(*machine);
+  passed = false;
   if ((framebufferFormat & 0x1c000) == 0) {
-    switch(uVar5 & 7) {
+    switch(alphaFunc & 7) {
     case 0:
 switchD_97bd6924_caseD_0:
-      bVar6 = false;
+      passed = false;
       break;
     case 1:
-      bVar6 = *(float *)(param_2 + 0xc) < fVar1;
+      passed = *(float *)(fragment + 0xc) < alphaRef;
       break;
     case 2:
-      bVar6 = *(float *)(param_2 + 0xc) == fVar1;
+      passed = *(float *)(fragment + 0xc) == alphaRef;
       break;
     case 3:
-      bVar6 = *(float *)(param_2 + 0xc) <= fVar1;
+      passed = *(float *)(fragment + 0xc) <= alphaRef;
       break;
     case 4:
-      bVar6 = fVar1 < *(float *)(param_2 + 0xc);
+      passed = alphaRef < *(float *)(fragment + 0xc);
       break;
     case 5:
-      bVar6 = *(float *)(param_2 + 0xc) != fVar1;
+      passed = *(float *)(fragment + 0xc) != alphaRef;
       break;
     case 6:
-      bVar6 = fVar1 <= *(float *)(param_2 + 0xc);
+      passed = alphaRef <= *(float *)(fragment + 0xc);
       break;
     case 7:
 switchD_97bd6924_caseD_7:
-      bVar6 = true;
+      passed = true;
     }
   }
   else {
-    fVar4 = *(float *)(param_2 + 0xc);
-    if (TAllocation__guardBlockSize <= fVar4) {
-      if (FLOAT_97c3acd8 < fVar4) {
-        fVar4 = 1.0;
+    fragAlpha = *(float *)(fragment + 0xc);
+    if (TAllocation__guardBlockSize <= fragAlpha) {
+      if (FLOAT_97c3acd8 < fragAlpha) {
+        fragAlpha = 1.0;
       }
     }
     else {
-      fVar4 = 0.0;
+      fragAlpha = 0.0;
     }
-    if (TAllocation__guardBlockSize <= fVar1) {
-      if (FLOAT_97c3acd8 < fVar1) {
-        fVar1 = 1.0;
+    if (TAllocation__guardBlockSize <= alphaRef) {
+      if (FLOAT_97c3acd8 < alphaRef) {
+        alphaRef = 1.0;
       }
     }
     else {
-      fVar1 = 0.0;
+      alphaRef = 0.0;
     }
-    switch(uVar5 & 7) {
+    switch(alphaFunc & 7) {
     case 0:
       goto switchD_97bd6924_caseD_0;
     case 1:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 < uVar5;
+      passed = fragAlphaFixed < alphaRefFixed;
       break;
     case 2:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 == uVar5;
+      passed = fragAlphaFixed == alphaRefFixed;
       break;
     case 3:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 <= uVar5;
+      passed = fragAlphaFixed <= alphaRefFixed;
       break;
     case 4:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar5 < uVar3;
+      passed = alphaRefFixed < fragAlphaFixed;
       break;
     case 5:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 != uVar5;
+      passed = fragAlphaFixed != alphaRefFixed;
       break;
     case 6:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar5 <= uVar3;
+      passed = alphaRefFixed <= fragAlphaFixed;
       break;
     case 7:
       goto switchD_97bd6924_caseD_7;
     }
   }
-  return bVar6 ^ 1;
+  return passed ^ 1;
 }
 
 /* _InterpreterRasterOpMachine_Blending @ 0x97bd6e88 (1252 bytes) */
@@ -2411,392 +2453,401 @@ switchD_97bd72e8_default:
 }
 
 /* _InterpreterRasterOpMachine_LogicOp @ 0x97bd7394 (1208 bytes) */
-int _InterpreterRasterOpMachine_LogicOp(param_1, param_2, param_3, param_4)
-  int *param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+int _InterpreterRasterOpMachine_LogicOp(machine, srcColor, dstColor, outColor)
+  int *machine;
+  float *srcColor;
+  float *dstColor;
+  float *outColor;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  float unpackedA;
+  float unpackedB;
+  float unpackedG;
+  float colorR;
+  float copiedAlpha;
+  uint resultPacked;
+  uint resultShiftedLane;
+  uint resultWord;
+  uint resultAlphaLane;
+  float colorG;
+  float colorB;
+  float colorA;
+  float fillValue;
+  uint dstRedByte;
+  uint logicOp;
+  uint packedSrcRG;
+  uint packedSrcRGB;
+  uint packedSrc;
+  uint srcRedByte;
+  uint packedDstRG;
+  uint packedDstRGB;
+  uint packedDst;
   
-  uVar6 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x68) & 0xf;
-  if ((uVar6 < 3) || (uVar6 == 4)) {
-    if (uVar6 == 1) {
-      fVar4 = 1.0;
+  logicOp = *(uint *)(*(int *)(*machine + 0xd80) + 0x68) & 0xf;
+  if ((logicOp < 3) || (logicOp == 4)) {
+    if (logicOp == 1) {
+      fillValue = 1.0;
     }
     else {
-      if (1 < uVar6) {
-        if (uVar6 == 2) {
-          *param_4 = *param_2;
-          param_4[1] = param_2[1];
-          param_4[2] = param_2[2];
-          fVar4 = param_2[3];
+      if (1 < logicOp) {
+        if (logicOp == 2) {
+          *outColor = *srcColor;
+          outColor[1] = srcColor[1];
+          outColor[2] = srcColor[2];
+          copiedAlpha = srcColor[3];
         }
         else {
-          if (uVar6 != 4) {
+          if (logicOp != 4) {
             return;
           }
-          *param_4 = *param_3;
-          param_4[1] = param_3[1];
-          param_4[2] = param_3[2];
-          fVar4 = param_3[3];
+          *outColor = *dstColor;
+          outColor[1] = dstColor[1];
+          outColor[2] = dstColor[2];
+          copiedAlpha = dstColor[3];
         }
-        param_4[3] = fVar4;
+        outColor[3] = copiedAlpha;
         return;
       }
-      fVar4 = 0.0;
-      if (uVar6 != 0) {
+      fillValue = 0.0;
+      if (logicOp != 0) {
         return;
       }
     }
-    param_4[3] = fVar4;
-    *param_4 = fVar4;
-    param_4[1] = fVar4;
-    param_4[2] = fVar4;
+    outColor[3] = fillValue;
+    *outColor = fillValue;
+    outColor[1] = fillValue;
+    outColor[2] = fillValue;
     return;
   }
-  if (uVar6 == 5) {
-    fVar4 = *param_3;
-    fVar1 = param_3[1];
-    fVar2 = param_3[2];
-    fVar3 = param_3[3];
+  if (logicOp == 5) {
+    colorR = *dstColor;
+    colorG = dstColor[1];
+    colorB = dstColor[2];
+    colorA = dstColor[3];
 LAB_97bd74b4:
-    uVar6 = ~(int)((double)fVar3 * DOUBLE_97c30a98) & 0xffU |
-            (~(int)((double)fVar2 * DOUBLE_97c30a98) & 0xffU) << 8 |
-            (~(int)((double)fVar1 * DOUBLE_97c30a98) & 0xffU) << 0x10 |
-            ~(int)((double)fVar4 * DOUBLE_97c30a98) << 0x18;
+    resultPacked = ~(int)((double)colorA * DOUBLE_97c30a98) & 0xffU |
+            (~(int)((double)colorB * DOUBLE_97c30a98) & 0xffU) << 8 |
+            (~(int)((double)colorG * DOUBLE_97c30a98) & 0xffU) << 0x10 |
+            ~(int)((double)colorR * DOUBLE_97c30a98) << 0x18;
     goto LAB_97bd77d8;
   }
-  if (uVar6 == 3) {
-    fVar4 = *param_2;
-    fVar1 = param_2[1];
-    fVar2 = param_2[2];
-    fVar3 = param_2[3];
+  if (logicOp == 3) {
+    colorR = *srcColor;
+    colorG = srcColor[1];
+    colorB = srcColor[2];
+    colorA = srcColor[3];
     goto LAB_97bd74b4;
   }
-  uVar10 = (uint)(int)((double)*param_2 * DOUBLE_97c30a98);
-  uVar5 = (uint)(int)((double)*param_3 * DOUBLE_97c30a98);
-  uVar7 = ((int)((double)param_2[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | uVar10 << 0x18;
-  uVar8 = ((int)((double)param_2[2] * DOUBLE_97c30a98) & 0xffU) << 8 | uVar7;
-  uVar11 = ((int)((double)param_3[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | uVar5 << 0x18;
-  uVar9 = (int)((double)param_2[3] * DOUBLE_97c30a98) & 0xffU | uVar8;
-  uVar12 = ((int)((double)param_3[2] * DOUBLE_97c30a98) & 0xffU) << 8 | uVar11;
-  uVar13 = (int)((double)param_3[3] * DOUBLE_97c30a98) & 0xffU | uVar12;
-  switch(uVar6) {
+  srcRedByte = (uint)(int)((double)*srcColor * DOUBLE_97c30a98);
+  dstRedByte = (uint)(int)((double)*dstColor * DOUBLE_97c30a98);
+  packedSrcRG = ((int)((double)srcColor[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | srcRedByte << 0x18;
+  packedSrcRGB = ((int)((double)srcColor[2] * DOUBLE_97c30a98) & 0xffU) << 8 | packedSrcRG;
+  packedDstRG = ((int)((double)dstColor[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | dstRedByte << 0x18;
+  packedSrc = (int)((double)srcColor[3] * DOUBLE_97c30a98) & 0xffU | packedSrcRGB;
+  packedDstRGB = ((int)((double)dstColor[2] * DOUBLE_97c30a98) & 0xffU) << 8 | packedDstRG;
+  packedDst = (int)((double)dstColor[3] * DOUBLE_97c30a98) & 0xffU | packedDstRGB;
+  switch(logicOp) {
   case 6:
-    uVar5 = uVar13 & uVar9;
-    uVar7 = uVar9 & uVar13;
-    uVar6 = uVar5 >> 8;
-    uVar10 = uVar5 >> 0x10;
+    resultWord = packedDst & packedSrc;
+    resultAlphaLane = packedSrc & packedDst;
+    resultPacked = resultWord >> 8;
+    resultShiftedLane = resultWord >> 0x10;
     goto LAB_97bd7670;
   case 7:
-    uVar6 = uVar13 & uVar9;
-    uVar7 = ~(uVar9 & uVar13);
-    uVar5 = uVar6 ^ 0xff000000;
-    uVar10 = ~(uVar6 >> 0x10);
-    uVar6 = ~(uVar6 >> 8);
+    resultPacked = packedDst & packedSrc;
+    resultAlphaLane = ~(packedSrc & packedDst);
+    resultWord = resultPacked ^ 0xff000000;
+    resultShiftedLane = ~(resultPacked >> 0x10);
+    resultPacked = ~(resultPacked >> 8);
 LAB_97bd7670:
-    uVar6 = (uVar6 & 0xff) << 8 | (uVar10 & 0xff) << 0x10 | uVar5 & 0xff000000;
+    resultPacked = (resultPacked & 0xff) << 8 | (resultShiftedLane & 0xff) << 0x10 | resultWord & 0xff000000;
     goto LAB_97bd770c;
   case 8:
-    uVar10 = uVar13 | uVar9;
-    uVar7 = uVar9 | uVar13;
-    uVar5 = uVar13 | uVar9;
+    resultShiftedLane = packedDst | packedSrc;
+    resultAlphaLane = packedSrc | packedDst;
+    resultWord = packedDst | packedSrc;
     goto LAB_97bd76cc;
   case 9:
-    uVar7 = ~(uVar9 | uVar13);
-    uVar5 = (uVar13 | uVar9) ^ 0xff000000;
-    uVar6 = ~((uVar13 | uVar9) >> 0x10);
-    uVar10 = ~((uVar13 | uVar9) >> 8);
+    resultAlphaLane = ~(packedSrc | packedDst);
+    resultWord = (packedDst | packedSrc) ^ 0xff000000;
+    resultPacked = ~((packedDst | packedSrc) >> 0x10);
+    resultShiftedLane = ~((packedDst | packedSrc) >> 8);
     goto LAB_97bd7700;
   case 10:
-    uVar10 = uVar13 ^ uVar9;
-    uVar7 = uVar9 ^ uVar13;
-    uVar5 = uVar13 ^ uVar9;
+    resultShiftedLane = packedDst ^ packedSrc;
+    resultAlphaLane = packedSrc ^ packedDst;
+    resultWord = packedDst ^ packedSrc;
 LAB_97bd76cc:
-    uVar6 = uVar10 >> 0x10;
-    uVar10 = uVar10 >> 8;
+    resultPacked = resultShiftedLane >> 0x10;
+    resultShiftedLane = resultShiftedLane >> 8;
     goto LAB_97bd7700;
   case 0xb:
-    uVar5 = uVar13 ^ uVar9 ^ 0xff000000;
-    uVar6 = ~((uVar13 ^ uVar9) >> 0x10);
-    uVar10 = ~((uVar13 ^ uVar9) >> 8);
-    uVar7 = ~(uVar9 ^ uVar13);
+    resultWord = packedDst ^ packedSrc ^ 0xff000000;
+    resultPacked = ~((packedDst ^ packedSrc) >> 0x10);
+    resultShiftedLane = ~((packedDst ^ packedSrc) >> 8);
+    resultAlphaLane = ~(packedSrc ^ packedDst);
 LAB_97bd7700:
-    uVar6 = (uVar10 & 0xff) << 8 | (uVar6 & 0xff) << 0x10 | uVar5 & 0xff000000;
+    resultPacked = (resultShiftedLane & 0xff) << 8 | (resultPacked & 0xff) << 0x10 | resultWord & 0xff000000;
 LAB_97bd770c:
-    uVar6 = uVar7 & 0xff | uVar6;
+    resultPacked = resultAlphaLane & 0xff | resultPacked;
     goto LAB_97bd77d8;
   case 0xc:
-    uVar7 = uVar7 >> 0x10 & ~(uVar11 >> 0x10);
-    uVar10 = uVar10 & 0xff & ~(uVar5 & 0xff);
-    uVar6 = uVar8 >> 8 & ~(uVar12 >> 8);
-    uVar13 = uVar9 & ~uVar13;
+    packedSrcRG = packedSrcRG >> 0x10 & ~(packedDstRG >> 0x10);
+    srcRedByte = srcRedByte & 0xff & ~(dstRedByte & 0xff);
+    resultPacked = packedSrcRGB >> 8 & ~(packedDstRGB >> 8);
+    packedDst = packedSrc & ~packedDst;
     break;
   case 0xd:
-    uVar7 = uVar11 >> 0x10 & ~(uVar7 >> 0x10);
-    uVar10 = uVar5 & 0xff & ~(uVar10 & 0xff);
-    uVar6 = uVar12 >> 8 & ~(uVar8 >> 8);
-    uVar13 = uVar13 & ~uVar9;
+    packedSrcRG = packedDstRG >> 0x10 & ~(packedSrcRG >> 0x10);
+    srcRedByte = dstRedByte & 0xff & ~(srcRedByte & 0xff);
+    resultPacked = packedDstRGB >> 8 & ~(packedSrcRGB >> 8);
+    packedDst = packedDst & ~packedSrc;
     break;
   case 0xe:
-    uVar7 = uVar7 >> 0x10 | ~(uVar11 >> 0x10);
-    uVar10 = uVar10 & 0xff | ~(uVar5 & 0xff);
-    uVar6 = uVar8 >> 8 | ~(uVar12 >> 8);
-    uVar13 = uVar9 | ~uVar13;
+    packedSrcRG = packedSrcRG >> 0x10 | ~(packedDstRG >> 0x10);
+    srcRedByte = srcRedByte & 0xff | ~(dstRedByte & 0xff);
+    resultPacked = packedSrcRGB >> 8 | ~(packedDstRGB >> 8);
+    packedDst = packedSrc | ~packedDst;
     break;
   case 0xf:
-    uVar7 = uVar11 >> 0x10 | ~(uVar7 >> 0x10);
-    uVar10 = uVar5 & 0xff | ~(uVar10 & 0xff);
-    uVar6 = uVar12 >> 8 | ~(uVar8 >> 8);
-    uVar13 = uVar13 | ~uVar9;
+    packedSrcRG = packedDstRG >> 0x10 | ~(packedSrcRG >> 0x10);
+    srcRedByte = dstRedByte & 0xff | ~(srcRedByte & 0xff);
+    resultPacked = packedDstRGB >> 8 | ~(packedSrcRGB >> 8);
+    packedDst = packedDst | ~packedSrc;
     break;
   default:
-    uVar6 = 0;
+    resultPacked = 0;
     goto LAB_97bd77d8;
   }
-  uVar6 = uVar13 & 0xff | (uVar6 & 0xff) << 8 | (uVar7 & 0xff) << 0x10 | uVar10 << 0x18;
+  resultPacked = packedDst & 0xff | (resultPacked & 0xff) << 8 | (packedSrcRG & 0xff) << 0x10 | srcRedByte << 0x18;
 LAB_97bd77d8:
-  fVar4 = (GH_U2F((unsigned int)((uVar6 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  fVar1 = (GH_U2F((unsigned int)((uVar6 >> 0x10 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  fVar2 = (GH_U2F((unsigned int)((uVar6 >> 8 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  *param_4 = (GH_U2F((unsigned int)((uVar6 >> 0x18 | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  param_4[3] = fVar4;
-  param_4[1] = fVar1;
-  param_4[2] = fVar2;
+  unpackedA = (GH_U2F((unsigned int)((resultPacked & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  unpackedG = (GH_U2F((unsigned int)((resultPacked >> 0x10 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  unpackedB = (GH_U2F((unsigned int)((resultPacked >> 8 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  *outColor = (GH_U2F((unsigned int)((resultPacked >> 0x18 | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  outColor[3] = unpackedA;
+  outColor[1] = unpackedG;
+  outColor[2] = unpackedB;
   return;
 }
 
 /* _InterpreterRasterOpMachine_BufferMask @ 0x97bd7874 (128 bytes) */
-int _InterpreterRasterOpMachine_BufferMask(param_1, param_2, param_3, param_4)
-  int *param_1;
-  undefined4 *param_2;
-  undefined4 *param_3;
-  undefined4 *param_4;
+int _InterpreterRasterOpMachine_BufferMask(machine, newColor, oldColor, outColor)
+  int *machine;
+  undefined4 *newColor;
+  undefined4 *oldColor;
+  undefined4 *outColor;
 {
-  undefined4 uVar1;
-  uint uVar2;
+  undefined4 selectedChannel;
+  uint writeMaskWord;
   
-  uVar2 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x70);
-  if ((uVar2 & 0x20000) == 0) {
-    uVar1 = *param_3;
+  writeMaskWord = *(uint *)(*(int *)(*machine + 0xd80) + 0x70);
+  if ((writeMaskWord & 0x20000) == 0) {
+    selectedChannel = *oldColor;
   }
   else {
-    uVar1 = *param_2;
+    selectedChannel = *newColor;
   }
-  *param_4 = uVar1;
-  if ((uVar2 & 0x40000) == 0) {
-    uVar1 = param_3[1];
-  }
-  else {
-    uVar1 = param_2[1];
-  }
-  param_4[1] = uVar1;
-  if ((uVar2 & 0x80000) == 0) {
-    uVar1 = param_3[2];
+  *outColor = selectedChannel;
+  if ((writeMaskWord & 0x40000) == 0) {
+    selectedChannel = oldColor[1];
   }
   else {
-    uVar1 = param_2[2];
+    selectedChannel = newColor[1];
   }
-  param_4[2] = uVar1;
-  if ((uVar2 & 0x100000) == 0) {
-    uVar1 = param_3[3];
+  outColor[1] = selectedChannel;
+  if ((writeMaskWord & 0x80000) == 0) {
+    selectedChannel = oldColor[2];
   }
   else {
-    uVar1 = param_2[3];
+    selectedChannel = newColor[2];
   }
-  param_4[3] = uVar1;
+  outColor[2] = selectedChannel;
+  if ((writeMaskWord & 0x100000) == 0) {
+    selectedChannel = oldColor[3];
+  }
+  else {
+    selectedChannel = newColor[3];
+  }
+  outColor[3] = selectedChannel;
   return;
 }
 
 /* _InterpreterRasterOpMachineCalculateBlendingFactors @ 0x97bd78f4 (664 bytes) */
-int _InterpreterRasterOpMachineCalculateBlendingFactors(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
-  float *param_5;
+int _InterpreterRasterOpMachineCalculateBlendingFactors(factorMode, srcColor, dstColor, constantColor, factorOut)
+  undefined4 factorMode;
+  float *srcColor;
+  float *dstColor;
+  float *constantColor;
+  float *factorOut;
 {
-  double dVar1;
-  float fVar2;
-  double dVar3;
+  double oneConst;
+  float factorValue;
+  double alphaForComplement;
   
-  dVar1 = DOUBLE_97c30a60;
-  switch(param_1) {
+  oneConst = DOUBLE_97c30a60;
+  switch(factorMode) {
   case 0:
-    fVar2 = 0.0;
+    factorValue = 0.0;
     goto LAB_97bd7970;
   case 1:
-    fVar2 = 1.0;
+    factorValue = 1.0;
 LAB_97bd7970:
-    param_5[3] = fVar2;
-    *param_5 = fVar2;
-    param_5[1] = fVar2;
-    param_5[2] = fVar2;
+    factorOut[3] = factorValue;
+    *factorOut = factorValue;
+    factorOut[1] = factorValue;
+    factorOut[2] = factorValue;
     return;
   case 2:
-    *param_5 = *param_2;
-    param_5[1] = param_2[1];
-    fVar2 = param_2[2];
+    *factorOut = *srcColor;
+    factorOut[1] = srcColor[1];
+    factorValue = srcColor[2];
     break;
   case 3:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)*param_2);
-    param_5[1] = (float)(dVar1 - (double)param_2[1]);
-    fVar2 = param_2[2];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)*srcColor);
+    factorOut[1] = (float)(oneConst - (double)srcColor[1]);
+    factorValue = srcColor[2];
     goto LAB_97bd7a1c;
   case 4:
-    *param_5 = param_2[3];
-    param_5[1] = param_2[3];
-    fVar2 = param_2[3];
+    *factorOut = srcColor[3];
+    factorOut[1] = srcColor[3];
+    factorValue = srcColor[3];
     break;
   case 5:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)param_2[3]);
-    param_5[1] = (float)(dVar1 - (double)param_2[3]);
-    fVar2 = param_2[3];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)srcColor[3]);
+    factorOut[1] = (float)(oneConst - (double)srcColor[3]);
+    factorValue = srcColor[3];
 LAB_97bd7a1c:
-    param_5[2] = (float)(dVar1 - (double)fVar2);
-    dVar3 = (double)param_2[3];
+    factorOut[2] = (float)(oneConst - (double)factorValue);
+    alphaForComplement = (double)srcColor[3];
 LAB_97bd7a2c:
-    param_5[3] = (float)(dVar1 - dVar3);
+    factorOut[3] = (float)(oneConst - alphaForComplement);
     return;
   case 6:
-    *param_5 = param_3[3];
-    param_5[1] = param_3[3];
-    fVar2 = param_3[3];
+    *factorOut = dstColor[3];
+    factorOut[1] = dstColor[3];
+    factorValue = dstColor[3];
     goto LAB_97bd7b40;
   case 7:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)param_3[3]);
-    param_5[1] = (float)(dVar1 - (double)param_3[3]);
-    fVar2 = param_3[3];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)dstColor[3]);
+    factorOut[1] = (float)(oneConst - (double)dstColor[3]);
+    factorValue = dstColor[3];
     goto LAB_97bd7b78;
   case 8:
-    *param_5 = *param_4;
-    param_5[1] = param_4[1];
-    fVar2 = param_4[2];
+    *factorOut = *constantColor;
+    factorOut[1] = constantColor[1];
+    factorValue = constantColor[2];
     goto LAB_97bd7ae0;
   case 9:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)*param_4);
-    param_5[1] = (float)(dVar1 - (double)param_4[1]);
-    fVar2 = param_4[2];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)*constantColor);
+    factorOut[1] = (float)(oneConst - (double)constantColor[1]);
+    factorValue = constantColor[2];
     goto LAB_97bd7b18;
   case 10:
-    *param_5 = param_4[3];
-    param_5[1] = param_4[3];
-    fVar2 = param_4[3];
+    *factorOut = constantColor[3];
+    factorOut[1] = constantColor[3];
+    factorValue = constantColor[3];
 LAB_97bd7ae0:
-    param_5[2] = fVar2;
-    fVar2 = param_4[3];
+    factorOut[2] = factorValue;
+    factorValue = constantColor[3];
     goto LAB_97bd79e8;
   case 0xb:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)param_4[3]);
-    param_5[1] = (float)(dVar1 - (double)param_4[3]);
-    fVar2 = param_4[3];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)constantColor[3]);
+    factorOut[1] = (float)(oneConst - (double)constantColor[3]);
+    factorValue = constantColor[3];
 LAB_97bd7b18:
-    param_5[2] = (float)(dVar1 - (double)fVar2);
-    dVar3 = (double)param_4[3];
+    factorOut[2] = (float)(oneConst - (double)factorValue);
+    alphaForComplement = (double)constantColor[3];
     goto LAB_97bd7a2c;
   case 0xc:
-    *param_5 = *param_3;
-    param_5[1] = param_3[1];
-    fVar2 = param_3[2];
+    *factorOut = *dstColor;
+    factorOut[1] = dstColor[1];
+    factorValue = dstColor[2];
 LAB_97bd7b40:
-    param_5[2] = fVar2;
-    fVar2 = param_3[3];
+    factorOut[2] = factorValue;
+    factorValue = dstColor[3];
     goto LAB_97bd79e8;
   case 0xd:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)*param_3);
-    param_5[1] = (float)(dVar1 - (double)param_3[1]);
-    fVar2 = param_3[2];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)*dstColor);
+    factorOut[1] = (float)(oneConst - (double)dstColor[1]);
+    factorValue = dstColor[2];
 LAB_97bd7b78:
-    param_5[2] = (float)(dVar1 - (double)fVar2);
-    dVar3 = (double)param_3[3];
+    factorOut[2] = (float)(oneConst - (double)factorValue);
+    alphaForComplement = (double)dstColor[3];
     goto LAB_97bd7a2c;
   case 0xe:
-    fVar2 = (float)(DOUBLE_97c30a60 - (double)param_3[3]);
-    if (param_2[3] < (float)(DOUBLE_97c30a60 - (double)param_3[3])) {
-      fVar2 = param_2[3];
+    factorValue = (float)(DOUBLE_97c30a60 - (double)dstColor[3]);
+    if (srcColor[3] < (float)(DOUBLE_97c30a60 - (double)dstColor[3])) {
+      factorValue = srcColor[3];
     }
-    param_5[2] = fVar2;
-    param_5[3] = 1.0;
-    *param_5 = fVar2;
-    param_5[1] = fVar2;
+    factorOut[2] = factorValue;
+    factorOut[3] = 1.0;
+    *factorOut = factorValue;
+    factorOut[1] = factorValue;
     return;
   default:
     return;
   }
-  param_5[2] = fVar2;
-  fVar2 = param_2[3];
+  factorOut[2] = factorValue;
+  factorValue = srcColor[3];
 LAB_97bd79e8:
-  param_5[3] = fVar2;
+  factorOut[3] = factorValue;
   return;
 }
 
 /* _InterpreterRasterOpMachineUpdateStencilBuffer @ 0x97bd7bc8 (212 bytes) */
-int _InterpreterRasterOpMachineUpdateStencilBuffer(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  byte *param_3;
-  undefined4 param_4;
+int _InterpreterRasterOpMachineUpdateStencilBuffer(stencilOp, referenceValue, stencilPtr, writeMask)
+  undefined4 stencilOp;
+  undefined4 referenceValue;
+  byte *stencilPtr;
+  undefined4 writeMask;
 {
-  byte bVar1;
-  byte bVar2;
+  byte wrappedValue;
+  byte newValue;
   
-  switch(param_1) {
+  switch(stencilOp) {
   case 0:
-    bVar2 = *param_3 & ~(byte)param_4;
+    newValue = *stencilPtr & ~(byte)writeMask;
     goto LAB_97bd7c38;
   case 1:
     return;
   case 2:
-    bVar2 = *param_3 & ~(byte)param_4;
+    newValue = *stencilPtr & ~(byte)writeMask;
     goto LAB_97bd7c34;
   case 3:
-    bVar2 = *param_3;
-    (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = 0xff;
-    if (bVar2 != 0xff) {
-      (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = bVar2 + 1;
+    newValue = *stencilPtr;
+    (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = 0xff;
+    if (newValue != 0xff) {
+      (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = newValue + 1;
     }
     break;
   case 4:
-    bVar2 = *param_3;
-    (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = 0;
-    if (bVar2 != 0) {
-      (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = bVar2 - 1;
+    newValue = *stencilPtr;
+    (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = 0;
+    if (newValue != 0) {
+      (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = newValue - 1;
     }
     break;
   case 5:
-    *param_3 = *param_3 & ~(byte)param_4 | (byte)param_4 & ~*param_3;
+    *stencilPtr = *stencilPtr & ~(byte)writeMask | (byte)writeMask & ~*stencilPtr;
     return;
   case 6:
-    bVar2 = *param_3;
-    bVar1 = bVar2 + 1;
+    newValue = *stencilPtr;
+    wrappedValue = newValue + 1;
     goto LAB_97bd7c90;
   case 7:
-    bVar2 = *param_3;
-    bVar1 = bVar2 - 1;
+    newValue = *stencilPtr;
+    wrappedValue = newValue - 1;
 LAB_97bd7c90:
-    *param_3 = bVar2 & ~(byte)param_4 | bVar1 & (byte)param_4;
+    *stencilPtr = newValue & ~(byte)writeMask | wrappedValue & (byte)writeMask;
     return;
   default:
     return;
   }
-  bVar2 = bVar2 & ~(byte)param_4;
+  newValue = newValue & ~(byte)writeMask;
 LAB_97bd7c34:
-  bVar2 = bVar2 | (byte)param_2 & (byte)param_4;
+  newValue = newValue | (byte)referenceValue & (byte)writeMask;
 LAB_97bd7c38:
-  *param_3 = bVar2;
+  *stencilPtr = newValue;
   return;
 }
 
@@ -3032,26 +3083,40 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
   undefined4 opWord8;
   int element;
 {
+  int *vectorRegRecord;
+  int swizzleDiffers;
+  int variableInfo;
+  int vectorRegIndex;
+  int recordDirtyFlag;
+  uint firstWord;
+  uint loadWordTemplate;
+  uint rtField;
+  uint firstOffset;
+  uint offsetFromTable;
+  uint scanRegister;
+  uint scanIndex;
+  uint cacheLookupIndex;
+  uint *opOffsetList;
   unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  byte bVar1;
-  uint *puVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  undefined4 *puVar6;
-  uint *puVar7;
+  byte swizzleComponent;
+  uint *codeCursor;
+  int containsResult;
+  int elementCopy;
+  uint optionFlags;
+  undefined4 *emitCursorB;
+  uint *emitCursor;
   undefined4 uVar8;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
-  int *piVar12;
+  uint foundRegister;
+  uint matchRegister;
+  int bestPartialState;
+  int *regRecord;
   undefined1 auStack_40 [28];
   
-  iVar4 = element;
+  elementCopy = element;
   uVar8 = 0;
-  uVar9 = 0;
+  foundRegister = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opSwizzle;
-  iVar11 = 0;
+  bestPartialState = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = opIndexInfo;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opStorage;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = opFlags5;
@@ -3059,184 +3124,184 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
     regIndex = regIndex + 0x20;
   }
   compiler[regIndex * 0xe + 0xc] = compiler[0x391];
-  uVar5 = compiler[0x394];
+  optionFlags = compiler[0x394];
   compiler[0x391] = compiler[0x391] + 1;
   (*(uint * *)((unsigned char *)ghidra_home + 8)) = opOffsets;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opBank;
-  if ((uVar5 & 4) != 0) {
-    uVar5 = regIndex;
+  if ((optionFlags & 4) != 0) {
+    cacheLookupIndex = regIndex;
     if (compiler[0x393] != 0) {
-      uVar5 = regIndex - 0x20;
+      cacheLookupIndex = regIndex - 0x20;
     }
-    iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar5,opOffsets,opBank,opSwizzle,opIndexInfo,opStorage,opFlags5,opType,
+    containsResult = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,cacheLookupIndex,opOffsets,opBank,opSwizzle,opIndexInfo,opStorage,opFlags5,opType,
                        opWord7,opWord8,element);
-    if (iVar3 == 1) {
+    if (containsResult == 1) {
       return;
     }
-    uVar5 = compiler[0x394];
+    optionFlags = compiler[0x394];
   }
   if (compiler[0x393] == 0) {
-    if ((uVar5 & 4) != 0) {
-      uVar9 = 0;
-      piVar12 = compiler;
+    if ((optionFlags & 4) != 0) {
+      scanRegister = 0;
+      regRecord = compiler;
       do {
-        if ((*piVar12 == 0) &&
-           (iVar11 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar9,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+        if ((*regRecord == 0) &&
+           (bestPartialState = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,scanRegister,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
                                 (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,
-                                opWord8,iVar4), iVar11 == 1)) {
-          if (uVar9 != regIndex) {
-            puVar2 = (uint *)compiler[0x38c];
-            *puVar2 = regIndex << 0x15 | uVar9 << 0xb | 0xfc000090;
-            compiler[0x38c] = (int)(puVar2 + 1);
+                                opWord8,elementCopy), bestPartialState == 1)) {
+          if (scanRegister != regIndex) {
+            codeCursor = (uint *)compiler[0x38c];
+            *codeCursor = regIndex << 0x15 | scanRegister << 0xb | 0xfc000090;
+            compiler[0x38c] = (int)(codeCursor + 1);
             ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-                       (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,iVar4);
-            piVar12[0xc] = compiler[0x391];
+                       (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
+            regRecord[0xc] = compiler[0x391];
             goto LAB_97bd8938;
           }
-          if (*(char *)((int)piVar12 + 0x1a) == (*(char *)((unsigned char *)ghidra_home + 26))) {
+          if (*(char *)((int)regRecord + 0x1a) == (*(char *)((unsigned char *)ghidra_home + 26))) {
             return;
           }
         }
-        uVar9 = uVar9 + 1;
-        piVar12 = piVar12 + 0xe;
-      } while (uVar9 < 0x20);
+        scanRegister = scanRegister + 1;
+        regRecord = regRecord + 0xe;
+      } while (scanRegister < 0x20);
     }
     if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
       if (((*(int *)(compiler[0x389] + 0x38) == 0x8804) ||
           (*(int *)(compiler[0x389] + 0x38) == 0x8b30)) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
-        puVar7 = (uint *)compiler[0x38c];
-        *puVar7 = (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc10d0000;
-        bVar1 = *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4);
-        compiler[0x38c] = (int)(puVar7 + 1);
-        uVar9 = (*(uint * *)((unsigned char *)ghidra_home + 8))[bVar1];
-        puVar2 = puVar7 + 3;
-        puVar7[2] = regIndex << 0x15 | 0xec09433a;
-        puVar7[1] = uVar9 & 0xffff | 0xc12c0000;
+        emitCursor = (uint *)compiler[0x38c];
+        *emitCursor = (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy)] & 0xffff | 0xc10d0000;
+        swizzleComponent = *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy);
+        compiler[0x38c] = (int)(emitCursor + 1);
+        offsetFromTable = (*(uint * *)((unsigned char *)ghidra_home + 8))[swizzleComponent];
+        codeCursor = emitCursor + 3;
+        emitCursor[2] = regIndex << 0x15 | 0xec09433a;
+        emitCursor[1] = offsetFromTable & 0xffff | 0xc12c0000;
       }
       else {
-        puVar2 = (uint *)compiler[0x38c];
-        *puVar2 = regIndex << 0x15 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 |
-                  (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc0000000;
-        puVar2 = puVar2 + 1;
+        codeCursor = (uint *)compiler[0x38c];
+        *codeCursor = regIndex << 0x15 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 |
+                  (*(uint * *)((unsigned char *)ghidra_home + 8))[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy)] & 0xffff | 0xc0000000;
+        codeCursor = codeCursor + 1;
       }
-      compiler[0x38c] = (int)puVar2;
+      compiler[0x38c] = (int)codeCursor;
     }
     else {
       ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                  (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4) << 2 | 0x82ef0000;
-      puVar2[1] = regIndex << 0x15 | (((*(unsigned int *)((unsigned char *)ghidra_home + 24)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
-      compiler[0x38c] = (int)(puVar2 + 2);
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + elementCopy) << 2 | 0x82ef0000;
+      codeCursor[1] = regIndex << 0x15 | (((*(unsigned int *)((unsigned char *)ghidra_home + 24)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
+      compiler[0x38c] = (int)(codeCursor + 2);
     }
     ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-               (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,iVar4);
+               (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
     return;
   }
-  if ((uVar5 & 4) != 0) {
-    piVar12 = compiler + 0x1c0;
-    uVar5 = 0;
+  if ((optionFlags & 4) != 0) {
+    vectorRegRecord = compiler + 0x1c0;
+    scanIndex = 0;
     do {
-      uVar10 = uVar5;
-      iVar3 = *piVar12;
-      piVar12 = piVar12 + 0xe;
-      if (iVar3 == 0) {
-        iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,uVar10,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+      matchRegister = scanIndex;
+      recordDirtyFlag = *vectorRegRecord;
+      vectorRegRecord = vectorRegRecord + 0xe;
+      if (recordDirtyFlag == 0) {
+        containsResult = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,matchRegister,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
                            (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,
-                           iVar4);
-        if ((iVar3 == 3) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0)) {
-          iVar11 = 3;
-          uVar9 = uVar10;
+                           elementCopy);
+        if ((containsResult == 3) && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0)) {
+          bestPartialState = 3;
+          foundRegister = matchRegister;
         }
-        else if (iVar3 - 1U < 2) break;
+        else if (containsResult - 1U < 2) break;
       }
-      uVar5 = uVar10 + 1;
-      uVar10 = uVar9;
-      iVar3 = iVar11;
-    } while (uVar5 < 0x20);
-    if (iVar3 != 0) {
-      iVar3 = regIndex - 0x20;
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = iVar3 * 0x200000 | uVar10 << 0x10 | uVar10 << 0xb | 0x10000484;
-      compiler[0x38c] = (int)(puVar2 + 1);
-      iVar11 = _memcmp(compiler + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
-      if (iVar11 != 0) {
+      scanIndex = matchRegister + 1;
+      matchRegister = foundRegister;
+      containsResult = bestPartialState;
+    } while (scanIndex < 0x20);
+    if (containsResult != 0) {
+      vectorRegIndex = regIndex - 0x20;
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = vectorRegIndex * 0x200000 | matchRegister << 0x10 | matchRegister << 0xb | 0x10000484;
+      compiler[0x38c] = (int)(codeCursor + 1);
+      swizzleDiffers = _memcmp(compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
+      if (swizzleDiffers != 0) {
         _PPCRuntimeCompilerBuildTransferSwizzle
-                  (auStack_40,compiler + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,iVar3,auStack_40);
+                  (auStack_40,compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,auStack_40);
       }
-      ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,iVar3,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-                 (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,iVar4);
-      compiler[uVar10 * 0xe + 0x1cc] = compiler[0x391];
+      ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,vectorRegIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
+                 (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
+      compiler[matchRegister * 0xe + 0x1cc] = compiler[0x391];
 LAB_97bd8938:
       compiler[0x391] = compiler[0x391] + 1;
       return;
     }
   }
-  puVar2 = (*(uint * *)((unsigned char *)ghidra_home + 8));
+  opOffsetList = (*(uint * *)((unsigned char *)ghidra_home + 8));
   if (((*(int *)(compiler[0x389] + 0x38) == 0x8804) || (*(int *)(compiler[0x389] + 0x38) == 0x8b30))
      && ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 2)) {
     if ((compiler[0x394] & 8U) == 0) {
-      uVar9 = *(*(uint * *)((unsigned char *)ghidra_home + 8));
+      firstOffset = *(*(uint * *)((unsigned char *)ghidra_home + 8));
     }
     else {
-      uVar9 = 0;
+      firstOffset = 0;
       if (*(*(uint * *)((unsigned char *)ghidra_home + 8)) != 0) {
-        puVar2 = (uint *)compiler[0x38c];
-        *puVar2 = *(*(uint * *)((unsigned char *)ghidra_home + 8)) & 0xffff | 0x39e00000;
-        puVar2[1] = 0x10c0728c;
-        uVar9 = (regIndex - 0x20) * 0x200000;
-        puVar2[2] = 0x7c6d78ce;
-        puVar2[3] = 0x10a3728c;
-        puVar2[4] = 0x7c8c78ce;
-        puVar2[5] = uVar9 | 0x100419ae;
-        puVar2[6] = uVar9 | (regIndex - 0x20) * 0x10000 | 0x1000396e;
-        compiler[0x38c] = (int)(puVar2 + 7);
+        codeCursor = (uint *)compiler[0x38c];
+        *codeCursor = *(*(uint * *)((unsigned char *)ghidra_home + 8)) & 0xffff | 0x39e00000;
+        codeCursor[1] = 0x10c0728c;
+        rtField = (regIndex - 0x20) * 0x200000;
+        codeCursor[2] = 0x7c6d78ce;
+        codeCursor[3] = 0x10a3728c;
+        codeCursor[4] = 0x7c8c78ce;
+        codeCursor[5] = rtField | 0x100419ae;
+        codeCursor[6] = rtField | (regIndex - 0x20) * 0x10000 | 0x1000396e;
+        compiler[0x38c] = (int)(codeCursor + 7);
         goto LAB_97bd87b4;
       }
     }
-    puVar2 = (uint *)compiler[0x38c];
-    *puVar2 = uVar9 & 0xffff | 0x39e00000;
-    puVar2[1] = 0x7c6d78ce;
-    puVar2[2] = 0x7c8c78ce;
-    puVar2[3] = 0x10c0728c;
-    puVar2[4] = (regIndex - 0x20) * 0x200000 | 0x100419ae;
-    compiler[0x38c] = (int)(puVar2 + 5);
+    codeCursor = (uint *)compiler[0x38c];
+    *codeCursor = firstOffset & 0xffff | 0x39e00000;
+    codeCursor[1] = 0x7c6d78ce;
+    codeCursor[2] = 0x7c8c78ce;
+    codeCursor[3] = 0x10c0728c;
+    codeCursor[4] = (regIndex - 0x20) * 0x200000 | 0x100419ae;
+    compiler[0x38c] = (int)(codeCursor + 5);
     goto LAB_97bd87b4;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
-    uVar9 = *(*(uint * *)((unsigned char *)ghidra_home + 8));
-    if (((((uVar9 & 0xf) != 0) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[1] != uVar9 + 4)) ||
-        ((*(uint * *)((unsigned char *)ghidra_home + 8))[2] != uVar9 + 8)) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[3] != uVar9 + 0xc)) {
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | uVar9 & 0xffff | 0xc0000000;
-      compiler[0x38c] = (int)(puVar2 + 1);
-      puVar2[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 6) |
+    firstOffset = *(*(uint * *)((unsigned char *)ghidra_home + 8));
+    if (((((firstOffset & 0xf) != 0) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[1] != firstOffset + 4)) ||
+        ((*(uint * *)((unsigned char *)ghidra_home + 8))[2] != firstOffset + 8)) || ((*(uint * *)((unsigned char *)ghidra_home + 8))[3] != firstOffset + 0xc)) {
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | firstOffset & 0xffff | 0xc0000000;
+      compiler[0x38c] = (int)(codeCursor + 1);
+      codeCursor[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 6) |
                   0xc0200000;
-      compiler[0x38c] = (int)(puVar2 + 2);
-      puVar2[2] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 10) |
+      compiler[0x38c] = (int)(codeCursor + 2);
+      codeCursor[2] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 10) |
                   0xc0400000;
-      compiler[0x38c] = (int)(puVar2 + 3);
-      puVar2[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 0xe) |
+      compiler[0x38c] = (int)(codeCursor + 3);
+      codeCursor[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | (uint)*(ushort *)((int)(*(uint * *)((unsigned char *)ghidra_home + 8)) + 0xe) |
                   0xc0600000;
-      puVar2[4] = 0xd0030200;
-      puVar2[5] = 0xd0230204;
-      puVar2[6] = 0xd0430208;
-      puVar2[7] = 0xd063020c;
-      puVar2[8] = 0x39e00200;
-      puVar2[9] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
-      compiler[0x38c] = (int)(puVar2 + 10);
+      codeCursor[4] = 0xd0030200;
+      codeCursor[5] = 0xd0230204;
+      codeCursor[6] = 0xd0430208;
+      codeCursor[7] = 0xd063020c;
+      codeCursor[8] = 0x39e00200;
+      codeCursor[9] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
+      compiler[0x38c] = (int)(codeCursor + 10);
       goto LAB_97bd877c;
     }
-    if (uVar9 != 0) {
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = uVar9 & 0xffff | 0x39e00000;
-      uVar9 = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c0078ce;
+    if (firstOffset != 0) {
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = firstOffset & 0xffff | 0x39e00000;
+      loadWordTemplate = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c0078ce;
       goto LAB_97bd8640;
     }
-    puVar2 = (uint *)compiler[0x38c];
-    *puVar2 = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x800 | 0x7c0000ce;
-    compiler[0x38c] = (int)(puVar2 + 1);
+    codeCursor = (uint *)compiler[0x38c];
+    *codeCursor = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x800 | 0x7c0000ce;
+    compiler[0x38c] = (int)(codeCursor + 1);
   }
   else {
     if ((*(ushort *)((unsigned char *)ghidra_home + 24)) == 0) {
@@ -3244,50 +3309,50 @@ LAB_97bd8938:
     }
     ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),
                (*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
-    uVar9 = *puVar2;
-    if ((((uVar9 & 0xf) == 0) && (puVar2[1] == uVar9 + 4)) &&
-       ((puVar2[2] == uVar9 + 8 && (puVar2[3] == uVar9 + 0xc)))) {
-      puVar2 = (uint *)compiler[0x38c];
-      *puVar2 = 0x82ef0000;
-      uVar9 = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00b8ce;
+    firstWord = *opOffsetList;
+    if ((((firstWord & 0xf) == 0) && (opOffsetList[1] == firstWord + 4)) &&
+       ((opOffsetList[2] == firstWord + 8 && (opOffsetList[3] == firstWord + 0xc)))) {
+      codeCursor = (uint *)compiler[0x38c];
+      *codeCursor = 0x82ef0000;
+      loadWordTemplate = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00b8ce;
 LAB_97bd8640:
-      puVar2[1] = uVar9;
-      compiler[0x38c] = (int)(puVar2 + 2);
+      codeCursor[1] = loadWordTemplate;
+      compiler[0x38c] = (int)(codeCursor + 2);
     }
     else {
-      puVar6 = (undefined4 *)compiler[0x38c];
-      *puVar6 = 0x82ef0000;
-      puVar6[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00bc2e;
-      puVar6[2] = 0x82ef0004;
-      puVar6[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c20bc2e;
-      puVar6[4] = 0x82ef0008;
-      puVar6[5] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c40bc2e;
-      puVar6[6] = 0x82ef000c;
-      puVar6[7] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c60bc2e;
-      puVar6[8] = 0xd0030200;
-      puVar6[9] = 0xd0230204;
-      puVar6[10] = 0xd0430208;
-      puVar6[0xb] = 0xd063020c;
-      puVar6[0xc] = 0x39e00200;
-      puVar6[0xd] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
-      compiler[0x38c] = (int)(puVar6 + 0xe);
+      emitCursorB = (undefined4 *)compiler[0x38c];
+      *emitCursorB = 0x82ef0000;
+      emitCursorB[1] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00bc2e;
+      emitCursorB[2] = 0x82ef0004;
+      emitCursorB[3] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c20bc2e;
+      emitCursorB[4] = 0x82ef0008;
+      emitCursorB[5] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c40bc2e;
+      emitCursorB[6] = 0x82ef000c;
+      emitCursorB[7] = ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c60bc2e;
+      emitCursorB[8] = 0xd0030200;
+      emitCursorB[9] = 0xd0230204;
+      emitCursorB[10] = 0xd0430208;
+      emitCursorB[0xb] = 0xd063020c;
+      emitCursorB[0xc] = 0x39e00200;
+      emitCursorB[0xd] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
+      compiler[0x38c] = (int)(emitCursorB + 0xe);
 LAB_97bd877c:
       uVar8 = 1;
     }
   }
   if (opType - 3U < 2) {
-    puVar2 = (uint *)compiler[0x38c];
-    *puVar2 = (regIndex - 0x20) * 0x200000 | (regIndex - 0x20) * 0x800 | 0x1000034a;
-    compiler[0x38c] = (int)(puVar2 + 1);
+    codeCursor = (uint *)compiler[0x38c];
+    *codeCursor = (regIndex - 0x20) * 0x200000 | (regIndex - 0x20) * 0x800 | 0x1000034a;
+    compiler[0x38c] = (int)(codeCursor + 1);
   }
 LAB_97bd87b4:
   _PPCRuntimeCompilerSwizzleRegisterAV(compiler,regIndex - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex - 0x20,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,uVar8,iVar4);
-  iVar4 = _PPCRuntimeCompilerFindVariableInfo
+             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,uVar8,elementCopy);
+  variableInfo = _PPCRuntimeCompilerFindVariableInfo
                     (compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                      (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
-  *(undefined4 *)(iVar4 + 4) = 0;
+  *(undefined4 *)(variableInfo + 4) = 0;
   return;
 }
 
@@ -3651,31 +3716,31 @@ int _PPCRuntimeCompilerSaveRegisterToMemory(compiler, regIndex)
   uint fieldInstWord2;
   int fieldInstWord;
   uint *codeCursor2;
-  uint *puVar1;
+  uint *offsetTable;
   uint vectorInstWord;
   undefined4 vectorInstWord2;
-  int iVar4;
+  int programTarget;
   undefined4 *codeCursor;
   uint *codeWritePtr;
   uint ppcInstWord;
-  int iVar8;
-  uint *local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  uint local_34;
+  int scalarRecord;
+  uint *descOffsets;
+  undefined4 descBank;
+  undefined4 descSwizzle;
+  undefined4 descIndexInfo;
+  undefined4 descStorage;
+  undefined4 descFlags5;
+  undefined4 descType;
+  uint descWriteMask;
   
   if (*(int *)(compiler + 0xe4c) == 0) {
-    iVar8 = regIndex * 0x38 + compiler;
+    scalarRecord = regIndex * 0x38 + compiler;
     if (*(int *)(compiler + regIndex * 0x38) != 0) {
       return;
     }
     codeWritePtr = *(uint **)(compiler + 0xe30);
-    vectorInstWord = regIndex << 0x15 | (*(ushort *)(iVar8 + 0x18) + 5) * 0x10000 |
-            *(uint *)((uint)*(byte *)(iVar8 + *(int *)(iVar8 + 4) + 0x10) * 4 + *(int *)(iVar8 + 8))
+    vectorInstWord = regIndex << 0x15 | (*(ushort *)(scalarRecord + 0x18) + 5) * 0x10000 |
+            *(uint *)((uint)*(byte *)(scalarRecord + *(int *)(scalarRecord + 4) + 0x10) * 4 + *(int *)(scalarRecord + 8))
             & 0xffff | 0xd0000000;
 LAB_97bd9944:
     *codeWritePtr = vectorInstWord;
@@ -3685,65 +3750,65 @@ LAB_97bd9944:
     if (*(int *)(fieldInstWord + 0x700) != 0) {
       return;
     }
-    _memcpy(&local_50,fieldInstWord + 0x708,0x24);
-    puVar1 = local_50;
+    _memcpy(&descOffsets,fieldInstWord + 0x708,0x24);
+    offsetTable = descOffsets;
     fieldInstWord = *(ushort *)(fieldInstWord + 0x718) + 5;
-    _PPEmulatorVariableMaskFromSwizzle(&local_50);
-    if ((*(unsigned char *)((unsigned char *)&(local_34) + 0)) == '\x0f') {
-      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-      if ((((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) && (*puVar1 == 0)) {
+    _PPEmulatorVariableMaskFromSwizzle(&descOffsets);
+    if ((*(unsigned char *)((unsigned char *)&(descWriteMask) + 0)) == '\x0f') {
+      programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+      if ((((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 1)) && (*offsetTable == 0)) {
         codeCursor2 = *(uint **)(compiler + 0xe30);
         *codeCursor2 = regIndex << 0x10 | regIndex << 0xb | 0x12600484;
         *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
         return;
       }
-      if ((char)local_40 == '\0') {
-        if (*puVar1 == 0) {
+      if ((char)descStorage == '\0') {
+        if (*offsetTable == 0) {
           codeWritePtr = *(uint **)(compiler + 0xe30);
           vectorInstWord = regIndex << 0x15 | fieldInstWord * 0x800 | 0x7c0001ce;
           goto LAB_97bd9944;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
-        ppcInstWord = *puVar1 & 0xffff | 0x39e00000;
+        ppcInstWord = *offsetTable & 0xffff | 0x39e00000;
         fieldInstWord2 = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c0079ce;
       }
       else {
-        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
+        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,descOffsets,descBank,descSwizzle,descIndexInfo,descStorage,descFlags5,descType);
         ppcInstWord = 0x82ef0000;
         codeCursor2 = *(uint **)(compiler + 0xe30);
         fieldInstWord2 = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b9ce;
       }
     }
     else {
-      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-      if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) {
+      programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+      if (((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 1)) {
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         codeCursor[1] = 0x10836a8c;
         *codeCursor = 0x10694c84;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 3;
         vectorInstWord2 = 0x1063212c;
-        if ((local_34 & 0x1000000) == 0) {
+        if ((descWriteMask & 0x1000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         codeCursor[2] = vectorInstWord2;
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         vectorInstWord2 = 0x1063212c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-        if ((local_34 & 0x2000000) == 0) {
+        if ((descWriteMask & 0x2000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         *codeCursor = vectorInstWord2;
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         vectorInstWord2 = 0x1063212c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-        if ((local_34 & 0x4000000) == 0) {
+        if ((descWriteMask & 0x4000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         *codeCursor = vectorInstWord2;
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         vectorInstWord2 = 0x1063212c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-        if ((local_34 & 0x8000000) == 0) {
+        if ((descWriteMask & 0x8000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         *codeCursor = vectorInstWord2;
@@ -3751,8 +3816,8 @@ LAB_97bd9944:
         vectorInstWord = regIndex << 0xb | 0x127300ea;
         goto LAB_97bd9944;
       }
-      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-      if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 9)) {
+      programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+      if (((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 9)) {
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         *codeCursor = 0x39e00210;
         codeCursor[1] = regIndex << 0x15 | 0x7c0379ce;
@@ -3760,53 +3825,53 @@ LAB_97bd9944:
         codeCursor[2] = 0xc1a30218;
         goto LAB_97bd994c;
       }
-      if ((char)local_40 == '\0') {
-        if ((local_34 & 0x1000000) != 0) {
+      if ((char)descStorage == '\0') {
+        if ((descWriteMask & 0x1000000) != 0) {
           codeCursor2 = *(uint **)(compiler + 0xe30);
-          *codeCursor2 = (ushort)*puVar1 | 0x39e00000;
+          *codeCursor2 = (ushort)*offsetTable | 0x39e00000;
           codeCursor2[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
           *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
-        if ((local_34 & 0x2000000) != 0) {
+        if ((descWriteMask & 0x2000000) != 0) {
           codeCursor2 = *(uint **)(compiler + 0xe30);
-          *codeCursor2 = *(ushort *)((int)puVar1 + 6) | 0x39e00000;
+          *codeCursor2 = *(ushort *)((int)offsetTable + 6) | 0x39e00000;
           codeCursor2[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
           *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
-        if ((local_34 & 0x4000000) != 0) {
+        if ((descWriteMask & 0x4000000) != 0) {
           codeCursor2 = *(uint **)(compiler + 0xe30);
-          *codeCursor2 = *(ushort *)((int)puVar1 + 10) | 0x39e00000;
+          *codeCursor2 = *(ushort *)((int)offsetTable + 10) | 0x39e00000;
           codeCursor2[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
           *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
-        if ((local_34 & 0x8000000) == 0) {
+        if ((descWriteMask & 0x8000000) == 0) {
           return;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
-        ppcInstWord = *(ushort *)((int)puVar1 + 0xe) | 0x39e00000;
+        ppcInstWord = *(ushort *)((int)offsetTable + 0xe) | 0x39e00000;
         fieldInstWord2 = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
       }
       else {
-        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
-        if ((local_34 & 0x1000000) != 0) {
+        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,descOffsets,descBank,descSwizzle,descIndexInfo,descStorage,descFlags5,descType);
+        if ((descWriteMask & 0x1000000) != 0) {
           codeCursor = *(undefined4 **)(compiler + 0xe30);
           *codeCursor = 0x82ef0000;
           codeCursor[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b98e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
-        if ((local_34 & 0x2000000) != 0) {
+        if ((descWriteMask & 0x2000000) != 0) {
           codeCursor = *(undefined4 **)(compiler + 0xe30);
           *codeCursor = 0x82ef0004;
           codeCursor[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b98e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
-        if ((local_34 & 0x4000000) != 0) {
+        if ((descWriteMask & 0x4000000) != 0) {
           codeCursor = *(undefined4 **)(compiler + 0xe30);
           *codeCursor = 0x82ef0008;
           codeCursor[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b98e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
-        if ((local_34 & 0x8000000) == 0) {
+        if ((descWriteMask & 0x8000000) == 0) {
           return;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
@@ -3856,79 +3921,81 @@ int _PPCRuntimeCompilerDirtyRegister(param_1, param_2)
 }
 
 /* _PPCRuntimeCompilerDirtyRegistersWithData @ 0x97bd99d4 (436 bytes) */
-int _PPCRuntimeCompilerDirtyRegistersWithData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
+int _PPCRuntimeCompilerDirtyRegistersWithData(compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8, element)
+  int compiler;
+  undefined4 opOffsets;
+  undefined4 opBank;
+  undefined4 opSwizzle;
+  undefined4 opIndexInfo;
+  undefined4 opStorage;
+  undefined4 opFlags5;
+  undefined4 opType;
+  undefined4 opWord7;
+  undefined4 opWord8;
+  undefined4 element;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char cVar1;
-  undefined4 uVar2;
-  int iVar3;
-  uint uVar4;
-  char *pcVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
+  int recordOffset;
+  int vectorRecordBytes;
+  unsigned int ghidra_home[8] = { compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char swizzleByte;
+  undefined4 elementCopy;
+  int containsResult;
+  uint componentIndex;
+  char *operandSwizzlePtr;
+  int containsResultScalar;
+  uint regIndex;
+  int swizzleCountdown;
   
-  uVar2 = param_11;
-  uVar7 = 0;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  if (*(int *)(param_1 + 0xe4c) == 0) {
+  elementCopy = element;
+  regIndex = 0;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = opOffsets;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = opBank;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opSwizzle;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opIndexInfo;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = opStorage;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opFlags5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = opType;
+  if (*(int *)(compiler + 0xe4c) == 0) {
     do {
-      iVar6 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar7,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
-                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,uVar2);
-      if (iVar6 == 1) {
-        ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,uVar7);
+      containsResultScalar = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,regIndex,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opWord7,opWord8,elementCopy);
+      if (containsResultScalar == 1) {
+        ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,regIndex);
       }
-      uVar7 = uVar7 + 1;
-    } while (uVar7 < 0x20);
+      regIndex = regIndex + 1;
+    } while (regIndex < 0x20);
   }
   else {
-    iVar6 = 0;
+    recordOffset = 0;
     do {
-      iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar7,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
-                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,uVar2);
-      if (iVar3 - 1U < 3) {
-        uVar4 = 0;
-        iVar3 = iVar6 + param_1 + 0x700;
+      containsResult = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,regIndex,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opWord7,opWord8,elementCopy);
+      if (containsResult - 1U < 3) {
+        componentIndex = 0;
+        vectorRecordBytes = recordOffset + compiler + 0x700;
         do {
-          iVar8 = 4;
-          pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
+          swizzleCountdown = 4;
+          operandSwizzlePtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
           do {
-            cVar1 = *pcVar5;
-            pcVar5 = pcVar5 + 1;
-            if (*(char *)(iVar3 + 0x10) == cVar1) {
-              *(undefined1 *)(iVar3 + 0x10) = 0xff;
+            swizzleByte = *operandSwizzlePtr;
+            operandSwizzlePtr = operandSwizzlePtr + 1;
+            if (*(char *)(vectorRecordBytes + 0x10) == swizzleByte) {
+              *(undefined1 *)(vectorRecordBytes + 0x10) = 0xff;
             }
-            iVar8 = iVar8 + -1;
-          } while (iVar8 != 0);
-          uVar4 = uVar4 + 1;
-          iVar3 = iVar3 + 1;
-        } while (uVar4 < 4);
-        iVar3 = iVar6 + param_1;
-        if ((((*(char *)(iVar3 + 0x710) == -1) && (*(char *)(iVar3 + 0x711) == -1)) &&
-            (*(char *)(iVar3 + 0x712) == -1)) && (*(char *)(iVar3 + 0x713) == -1)) {
-          ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,uVar7);
+            swizzleCountdown = swizzleCountdown + -1;
+          } while (swizzleCountdown != 0);
+          componentIndex = componentIndex + 1;
+          vectorRecordBytes = vectorRecordBytes + 1;
+        } while (componentIndex < 4);
+        containsResult = recordOffset + compiler;
+        if ((((*(char *)(containsResult + 0x710) == -1) && (*(char *)(containsResult + 0x711) == -1)) &&
+            (*(char *)(containsResult + 0x712) == -1)) && (*(char *)(containsResult + 0x713) == -1)) {
+          ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,regIndex);
         }
       }
-      uVar7 = uVar7 + 1;
-      iVar6 = iVar6 + 0x38;
-    } while (uVar7 < 0x20);
+      regIndex = regIndex + 1;
+      recordOffset = recordOffset + 0x38;
+    } while (regIndex < 0x20);
   }
   return;
 }
@@ -4088,20 +4155,23 @@ int _PPCRuntimeCompilerRegisterContainsData(compiler, regIndex, opOffsets, opBan
   undefined4 opWord8;
   int element;
 {
+  int swizzleCompare;
+  int vectorRecordOffset;
   unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  byte bVar1;
-  int iVar2;
-  byte *pbVar3;
-  int *piVar4;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
-  int local_20 [6];
+  byte recordSwizzleByte;
+  int scalarRecord;
+  byte *recordSwizzlePtr;
+  int *componentPresentPtr;
+  uint recordComponentIndex;
+  uint componentIndex;
+  int offsetsCompare;
+  int vectorRecord;
+  int componentPresent [6];
   
-  local_20[3] = 0;
-  local_20[0] = 0;
-  local_20[1] = 0;
-  local_20[2] = 0;
+  componentPresent[3] = 0;
+  componentPresent[0] = 0;
+  componentPresent[1] = 0;
+  componentPresent[2] = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = opOffsets;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opBank;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opSwizzle;
@@ -4109,54 +4179,54 @@ int _PPCRuntimeCompilerRegisterContainsData(compiler, regIndex, opOffsets, opBan
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opStorage;
   (*(uint *)((unsigned char *)ghidra_home + 28)) = opFlags5;
   if (*(int *)(compiler + 0xe4c) == 0) {
-    iVar2 = regIndex * 0x38 + compiler;
+    scalarRecord = regIndex * 0x38 + compiler;
     if ((((*(int *)(compiler + regIndex * 0x38) == 0) &&
-         (iVar7 = _memcmp(*(undefined4 *)(iVar2 + 8),opOffsets,0x10), iVar7 == 0)) &&
-        (*(short *)(iVar2 + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24)))) &&
-       (((*(char *)(iVar2 + *(int *)(iVar2 + 4) + 0x10) ==
+         (offsetsCompare = _memcmp(*(undefined4 *)(scalarRecord + 8),opOffsets,0x10), offsetsCompare == 0)) &&
+        (*(short *)(scalarRecord + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24)))) &&
+       (((*(char *)(scalarRecord + *(int *)(scalarRecord + 4) + 0x10) ==
           *(char *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + element) && ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0')) &&
-        (*(char *)(iVar2 + 0x1b) == '\0')))) {
+        (*(char *)(scalarRecord + 0x1b) == '\0')))) {
       return 1;
     }
   }
   else {
-    iVar2 = (regIndex + 0x20) * 0x38;
-    iVar7 = iVar2 + compiler;
-    if ((*(int *)(compiler + iVar2) == 0) &&
-       (iVar2 = _memcmp(*(undefined4 *)(iVar7 + 8),opOffsets,0x10), iVar2 == 0)) {
-      if ((*(short *)(iVar7 + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24))) &&
-         (((*(char *)((unsigned char *)ghidra_home + 27)) == '\0' && (*(char *)(iVar7 + 0x1b) == '\0')))) {
-        iVar2 = _memcmp(iVar7 + 0x10,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff);
-        if (iVar2 == 0) {
+    vectorRecordOffset = (regIndex + 0x20) * 0x38;
+    vectorRecord = vectorRecordOffset + compiler;
+    if ((*(int *)(compiler + vectorRecordOffset) == 0) &&
+       (vectorRecordOffset = _memcmp(*(undefined4 *)(vectorRecord + 8),opOffsets,0x10), vectorRecordOffset == 0)) {
+      if ((*(short *)(vectorRecord + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24))) &&
+         (((*(char *)((unsigned char *)ghidra_home + 27)) == '\0' && (*(char *)(vectorRecord + 0x1b) == '\0')))) {
+        swizzleCompare = _memcmp(vectorRecord + 0x10,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff);
+        if (swizzleCompare == 0) {
           return 1;
         }
-        uVar6 = 0;
-        piVar4 = local_20;
+        componentIndex = 0;
+        componentPresentPtr = componentPresent;
         do {
-          if ((uVar6 < ((*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff)) &&
-             (*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + uVar6) < 4)) {
-            uVar5 = 0;
-            pbVar3 = (byte *)(iVar7 + 0x10);
+          if ((componentIndex < ((*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff)) &&
+             (*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + componentIndex) < 4)) {
+            recordComponentIndex = 0;
+            recordSwizzlePtr = (byte *)(vectorRecord + 0x10);
             do {
-              bVar1 = *pbVar3;
-              pbVar3 = pbVar3 + 1;
-              if (bVar1 == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + uVar6)) goto LAB_97bd9f54;
-              uVar5 = uVar5 + 1;
-            } while (uVar5 < 4);
+              recordSwizzleByte = *recordSwizzlePtr;
+              recordSwizzlePtr = recordSwizzlePtr + 1;
+              if (recordSwizzleByte == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + componentIndex)) goto LAB_97bd9f54;
+              recordComponentIndex = recordComponentIndex + 1;
+            } while (recordComponentIndex < 4);
           }
           else {
 LAB_97bd9f54:
-            *piVar4 = 1;
+            *componentPresentPtr = 1;
           }
-          uVar6 = uVar6 + 1;
-          piVar4 = piVar4 + 1;
-          if (3 < uVar6) {
-            if ((((local_20[0] != 0) && (local_20[1] != 0)) && (local_20[2] != 0)) &&
-               (local_20[3] != 0)) {
+          componentIndex = componentIndex + 1;
+          componentPresentPtr = componentPresentPtr + 1;
+          if (3 < componentIndex) {
+            if ((((componentPresent[0] != 0) && (componentPresent[1] != 0)) && (componentPresent[2] != 0)) &&
+               (componentPresent[3] != 0)) {
               return 2;
             }
-            if (((local_20[0] == 0) && (local_20[1] == 0)) &&
-               ((local_20[2] == 0 && (local_20[3] == 0)))) {
+            if (((componentPresent[0] == 0) && (componentPresent[1] == 0)) &&
+               ((componentPresent[2] == 0 && (componentPresent[3] == 0)))) {
               return 0;
             }
             return 3;

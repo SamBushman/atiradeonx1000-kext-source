@@ -1636,8 +1636,8 @@ int __ZN9TBuiltIns10initializeEv()
 }
 
 /* __ZN9TBuiltIns10initializeERK16TBuiltInResource @ 0x97b8b118 (4 bytes) */
-int __ZN9TBuiltIns10initializeERK16TBuiltInResource(param_1)
-  unsigned char * param_1;
+int __ZN9TBuiltIns10initializeERK16TBuiltInResource(this)
+  unsigned char * this;
 {
   return;
 }
@@ -2673,9 +2673,9 @@ int __ZN13TInfoSinkBase6appendEic(this, param_2, param_3)
 }
 
 /* __ZN13TInfoSinkBase6appendERKSs @ 0x97b8c9ac (204 bytes) */
-int __ZN13TInfoSinkBase6appendERKSs(this, param_2)
+int __ZN13TInfoSinkBase6appendERKSs(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
   undefined *puVar1;
   uint uVar2;
@@ -2683,25 +2683,25 @@ int __ZN13TInfoSinkBase6appendERKSs(this, param_2)
   uVar2 = *(uint *)((int)this + 4);
   if ((uVar2 & 4) != 0) {
     uVar2 = *(uint *)(*(int *)this + -8);
-    if (uVar2 < *(int *)(*(int *)this + -0xc) + *(int *)(*(int *)param_2 + -0xc) + 2U) {
+    if (uVar2 < *(int *)(*(int *)this + -0xc) + *(int *)(*(int *)text + -0xc) + 2U) {
       __ZNSs7reserveEm(this,uVar2 + (uVar2 >> 1));
     }
-    __ZNSs6appendERKSs(this,param_2);
+    __ZNSs6appendERKSs(this,text);
     uVar2 = *(uint *)((int)this + 4);
   }
   puVar1 = PTR_DAT_a7b7c0bc;
   if ((uVar2 & 2) != 0) {
-    *(undefined *)(*(int *)param_2 + *(int *)(*(int *)param_2 + -0xc)) = *PTR__S_terminal_a7b7c0b8;
-    _fprintf((FILE *)(puVar1 + 0x58),"%s",*(undefined4 *)param_2);
+    *(undefined *)(*(int *)text + *(int *)(*(int *)text + -0xc)) = *PTR__S_terminal_a7b7c0b8;
+    _fprintf((FILE *)(puVar1 + 0x58),"%s",*(undefined4 *)text);
     return;
   }
   return;
 }
 
 /* __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE @ 0x97b8ca78 (244 bytes) */
-int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this, param_2)
+int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this, text)
   void *this;
-  unsigned char * param_2;
+  unsigned char * text;
 {
   undefined *puVar1;
   uint uVar2;
@@ -2711,33 +2711,33 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
   
   uVar2 = *(uint *)((int)this + 4);
   if ((uVar2 & 4) != 0) {
-    iVar4 = *(int *)(param_2 + 4);
+    iVar4 = *(int *)(text + 4);
     uVar2 = *(uint *)(*(int *)this + -8);
     if (uVar2 < *(int *)(*(int *)this + -0xc) + *(int *)(iVar4 + -0xc) + 2U) {
       __ZNSs7reserveEm(this,uVar2 + (uVar2 >> 1));
-      iVar4 = *(int *)(param_2 + 4);
+      iVar4 = *(int *)(text + 4);
     }
     *(undefined1 *)(iVar4 + *(int *)(iVar4 + -0xc)) = *DAT_a7b7b720;
-    pcVar5 = *(char **)(param_2 + 4);
+    pcVar5 = *(char **)(text + 4);
     length = _strlen(pcVar5);
     __ZNSs6appendEPKcm(this,pcVar5,length);
     uVar2 = *(uint *)((int)this + 4);
   }
   puVar1 = PTR_DAT_a7b7c0bc;
   if ((uVar2 & 2) != 0) {
-    *(undefined1 *)(*(int *)(param_2 + 4) + *(int *)(*(int *)(param_2 + 4) + -0xc)) = *DAT_a7b7b720;
-    _fprintf((FILE *)(puVar1 + 0x58),"%s",*(undefined4 *)(param_2 + 4));
+    *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7b720;
+    _fprintf((FILE *)(puVar1 + 0x58),"%s",*(undefined4 *)(text + 4));
     return;
   }
   return;
 }
 
 /* TIntermediate__addSymbol @ 0x97b8cb6c (376 bytes) */
-int TIntermediate__addSymbol(this, param_2, param_3, param_4, param_5)
+int TIntermediate__addSymbol(this, param_2, text, type, param_5)
   unsigned char * this;
   int param_2;
-  unsigned char * param_3;
-  unsigned char * param_4;
+  unsigned char * text;
+  unsigned char * type;
   int param_5;
 {
   uint uVar1;
@@ -2764,14 +2764,14 @@ int TIntermediate__addSymbol(this, param_2, param_3, param_4, param_5)
   a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
-  iVar6 = *(int *)(param_4 + 4);
-  iVar15 = *(int *)(param_4 + 8);
-  iVar14 = *(int *)(param_4 + 0xc);
-  iVar13 = *(int *)(param_4 + 0x10);
-  iVar12 = *(int *)(param_4 + 0x14);
-  iVar11 = *(int *)(param_4 + 0x18);
-  iVar10 = *(int *)(param_4 + 0x1c);
-  iVar9 = *(int *)(param_4 + 0x20);
+  iVar6 = *(int *)(type + 4);
+  iVar15 = *(int *)(type + 8);
+  iVar14 = *(int *)(type + 0xc);
+  iVar13 = *(int *)(type + 0x10);
+  iVar12 = *(int *)(type + 0x14);
+  iVar11 = *(int *)(type + 0x18);
+  iVar10 = *(int *)(type + 0x1c);
+  iVar9 = *(int *)(type + 0x20);
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[3] = iVar6;
   a0[4] = iVar15;
@@ -2782,17 +2782,17 @@ int TIntermediate__addSymbol(this, param_2, param_3, param_4, param_5)
   a0[9] = iVar10;
   a0[10] = iVar9;
   uVar7 = a0[0xb];
-  uVar2 = *(uint *)(param_4 + 0x24) & 0xfe000000;
+  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
   a0[0xb] = uVar2 | uVar7 & 0x1ffffff;
-  uVar3 = (*(uint *)(param_4 + 0x24) >> 0x13 & 0x3f) << 0x13;
+  uVar3 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
   a0[0xb] = uVar3 | uVar2 | uVar7 & 0x7ffff;
-  uVar1 = *(uint *)(param_4 + 0x24) & 0x7f800;
+  uVar1 = *(uint *)(type + 0x24) & 0x7f800;
   a0[0xb] = uVar1 | uVar3 | uVar2 | uVar7 & 0x7ff;
-  uVar4 = (*(uint *)(param_4 + 0x24) >> 10 & 1) << 10;
+  uVar4 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
   a0[0xb] = uVar4 | uVar1 | uVar3 | uVar2 | uVar7 & 0x3ff;
   puVar5 = PTR_vtable_a7b7c0dc;
   iVar6 = DAT_a7b7b9b8;
-  a0[0xb] = (*(uint *)(param_4 + 0x24) >> 9 & 1) << 9 |
+  a0[0xb] = (*(uint *)(type + 0x24) >> 9 & 1) << 9 |
             uVar4 | uVar1 | uVar3 | uVar2 | uVar7 & 0x1ff;
   piVar8 = (int *)(iVar6 + 8);
   *a0 = (int)(puVar5 + 8);
@@ -2807,19 +2807,19 @@ int TIntermediate__addSymbol(this, param_2, param_3, param_4, param_5)
   iVar9 = GetGlobalPoolAllocator();
   a0[0xd] = iVar9;
   a0[0xe] = iVar6 + 0xc;
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(a0 + 0xd,param_3);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(a0 + 0xd,text);
   (**(code **)(*a0 + 4))(a0,param_5);
   return a0;
 }
 
 /* TIntermediate__addBinaryMath @ 0x97b8cce4 (2288 bytes) */
-int TIntermediate__addBinaryMath(this, param_2, param_3, param_4, param_5, param_6)
+int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, param_5, symbolTable)
   unsigned char * this;
-  int param_2;
-  int *param_3;
-  int *param_4;
+  int op;
+  int *intermTyped1;
+  int *intermTyped2;
   int param_5;
-  unsigned char * param_6;
+  unsigned char * symbolTable;
 {
   bool bVar1;
   bool bVar2;
@@ -2863,14 +2863,14 @@ int TIntermediate__addBinaryMath(this, param_2, param_3, param_4, param_5, param
   undefined **local_60 [9];
   uint local_3c;
   
-  if (param_2 - 0x13U < 0x1a) {
-    switch(param_2) {
+  if (op - 0x13U < 0x1a) {
+    switch(op) {
     case 0x13:
     case 0x14:
     case 0x15:
     case 0x16:
       bVar4 = false;
-      (**(code **)(*param_3 + 0x38))(&local_120,param_3);
+      (**(code **)(*intermTyped1 + 0x38))(&local_120,intermTyped1);
       bVar1 = false;
       if ((local_fc >> 0x13 & 0x3f) == 0xe) {
 LAB_97b8cff8:
@@ -2878,7 +2878,7 @@ LAB_97b8cff8:
         if (bVar1) goto LAB_97b8d008;
       }
       else {
-        (**(code **)(*param_3 + 0x38))(local_f0,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
         bVar1 = true;
         if ((local_cc >> 0x13 & 0x3f) == 3) goto LAB_97b8cff8;
 LAB_97b8d008:
@@ -2894,19 +2894,19 @@ LAB_97b8d008:
       bVar4 = false;
       bVar3 = false;
       bVar2 = false;
-      (**(code **)(*param_3 + 0x38))
-                (&local_120,param_3,param_3,param_4,param_5,param_6,(param_2 - 0x13U) * 4);
+      (**(code **)(*intermTyped1 + 0x38))
+                (&local_120,intermTyped1,intermTyped1,intermTyped2,param_5,symbolTable,(op - 0x13U) * 4);
       bVar1 = false;
       if ((local_fc & 0x400) == 0) {
         bVar3 = true;
-        (**(code **)(*param_3 + 0x38))(local_f0,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
         if ((local_cc & 0x200) != 0) goto LAB_97b8ce68;
         bVar2 = true;
-        (**(code **)(*param_3 + 0x38))(local_c0,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
         if ((1 < (int)(local_9c << 0xd | local_9c >> 0x13) >> 0x18) && ((local_9c & 0x400) == 0))
         goto LAB_97b8ce68;
         bVar1 = true;
-        (**(code **)(*param_3 + 0x38))(local_90,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_90,intermTyped1);
         if ((local_6c >> 0x13 & 0x3f) == 0xe) goto LAB_97b8ce68;
       }
       else {
@@ -2922,17 +2922,17 @@ LAB_97b8ce68:
       bVar4 = false;
       bVar3 = false;
       bVar2 = false;
-      (**(code **)(*param_3 + 0x38))(&local_120,param_3);
+      (**(code **)(*intermTyped1 + 0x38))(&local_120,intermTyped1);
       bVar1 = false;
       if ((local_fc >> 0x13 & 0x3f) == 3) {
         bVar3 = true;
-        (**(code **)(*param_3 + 0x38))(local_f0,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
         if ((local_cc & 0x400) != 0) goto LAB_97b8cf4c;
         bVar2 = true;
-        (**(code **)(*param_3 + 0x38))(local_c0,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
         if ((local_9c & 0x200) != 0) goto LAB_97b8cf4c;
         bVar1 = true;
-        (**(code **)(*param_3 + 0x38))(local_60,param_3);
+        (**(code **)(*intermTyped1 + 0x38))(local_60,intermTyped1);
         if ((1 < (int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18) && ((local_3c & 0x400) == 0))
         goto LAB_97b8cf4c;
 LAB_97b8cf5c:
@@ -2958,7 +2958,7 @@ LAB_97b8d01c:
   }
 switchD_97b8cd3c_default:
   bVar2 = false;
-  (**(code **)(*param_3 + 0x38))(&local_120,param_3);
+  (**(code **)(*intermTyped1 + 0x38))(&local_120,intermTyped1);
   bVar1 = false;
   if (local_118 == 0) {
 LAB_97b8d08c:
@@ -2966,7 +2966,7 @@ LAB_97b8d08c:
     if (bVar1) goto LAB_97b8d098;
   }
   else {
-    (**(code **)(*param_4 + 0x38))(local_f0,param_4);
+    (**(code **)(*intermTyped2 + 0x38))(local_f0,intermTyped2);
     bVar1 = true;
     if (local_e8 == 0) goto LAB_97b8d08c;
 LAB_97b8d098:
@@ -2974,27 +2974,27 @@ LAB_97b8d098:
   }
   local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (bVar2) {
-    (**(code **)(*param_3 + 0x38))(local_c0,param_3);
-    piVar7 = (int *)((int (*)())TIntermediate__addConversion)(this,param_2,local_c0,param_4);
+    (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
+    piVar7 = (int *)((int (*)())TIntermediate__addConversion)(this,op,local_c0,intermTyped2);
     local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     if (piVar7 == (int *)0x0) {
-      (**(code **)(*param_4 + 0x38))(local_c0,param_4);
-      param_3 = (int *)((int (*)())TIntermediate__addConversion)(this,param_2,local_c0,param_3);
-      piVar7 = param_4;
-      if (param_3 == (int *)0x0) {
+      (**(code **)(*intermTyped2 + 0x38))(local_c0,intermTyped2);
+      intermTyped1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,local_c0,intermTyped1);
+      piVar7 = intermTyped2;
+      if (intermTyped1 == (int *)0x0) {
         return (int *)0x0;
       }
     }
   }
   else {
-    (**(code **)(*param_3 + 0x38))(local_c0,param_3);
-    (**(code **)(*param_4 + 0x38))(local_90,param_4);
+    (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
+    (**(code **)(*intermTyped2 + 0x38))(local_90,intermTyped2);
     bVar1 = false;
     if (((local_9c & 0x1fffe00) == (local_6c & 0x1fffe00)) && (local_b8 == local_88)) {
       bVar1 = true;
     }
     local_90[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    piVar7 = param_4;
+    piVar7 = intermTyped2;
     if (!bVar1) {
       return (int *)0x0;
     }
@@ -3030,23 +3030,23 @@ LAB_97b8d098:
   puVar5 = PTR_vtable_a7b7c0d8;
   a0[0xb] = uVar6 & 0x1ff | 0x80800;
   local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  a0[0xc] = param_2;
+  a0[0xc] = op;
   *a0 = (int)(puVar5 + 8);
   if (param_5 == 0) {
     param_5 = (**(code **)*piVar7)(piVar7);
   }
   (**(code **)(*a0 + 4))(a0,param_5);
-  (**(code **)(*a0 + 0x60))(a0,param_3);
+  (**(code **)(*a0 + 0x60))(a0,intermTyped1);
   (**(code **)(*a0 + 100))(a0,piVar7);
   iVar8 = (**(code **)(*a0 + 0x5c))(a0,*(undefined4 *)this);
   if (iVar8 == 0) {
     return (int *)0x0;
   }
-  iVar8 = (**(code **)(*param_3 + 0x18))(param_3);
+  iVar8 = (**(code **)(*intermTyped1 + 0x18))(intermTyped1);
   iVar9 = (**(code **)(*piVar7 + 0x18))(piVar7);
   pTVar10 = (unsigned char *)0x0;
   if (iVar8 != 0) {
-    pTVar10 = (unsigned char *)(**(code **)(*param_3 + 0x18))(param_3);
+    pTVar10 = (unsigned char *)(**(code **)(*intermTyped1 + 0x18))(intermTyped1);
     piVar11 = (int *)TIntermediate__copyConstUnion(this,pTVar10);
     pTVar10 = (unsigned char *)(**(code **)(*piVar11 + 0x18))(piVar11);
   }
@@ -3059,7 +3059,7 @@ LAB_97b8d098:
   bVar1 = false;
   (**(code **)(*piVar7 + 0x38))(&local_120,piVar7);
   if (local_fc >> 0x19 == 2) {
-    (**(code **)(*param_3 + 0x38))(local_f0,param_3);
+    (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
     bVar1 = local_cc >> 0x19 == 2;
     local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
@@ -3068,15 +3068,15 @@ LAB_97b8d098:
     iVar8 = (**(code **)(*piVar7 + 0x1c))(piVar7);
     if (iVar8 != 0) {
       pTVar13 = (unsigned char *)(**(code **)(*piVar7 + 0x1c))(piVar7);
-      pTVar12 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,param_6,param_5);
+      pTVar12 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_5);
       if (*(int *)(pTVar12 + 0x30) == 0) {
         return (int *)0x0;
       }
     }
-    iVar8 = (**(code **)(*param_3 + 0x1c))(param_3);
+    iVar8 = (**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
     if (iVar8 != 0) {
-      pTVar13 = (unsigned char *)(**(code **)(*param_3 + 0x1c))(param_3);
-      pTVar10 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,param_6,param_5);
+      pTVar13 = (unsigned char *)(**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
+      pTVar10 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_5);
       if (*(int *)(pTVar10 + 0x30) == 0) {
         return (int *)0x0;
       }
@@ -3122,11 +3122,11 @@ LAB_97b8d618:
 }
 
 /* TIntermediate__addAssign @ 0x97b8d63c (640 bytes) */
-int TIntermediate__addAssign(this, param_2, param_3, param_4, param_5)
+int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, param_5)
   unsigned char * this;
-  int param_2;
-  int *param_3;
-  int *param_4;
+  int op;
+  int *intermTyped1;
+  int *intermTyped2;
   int param_5;
 {
   undefined *puVar1;
@@ -3178,25 +3178,25 @@ int TIntermediate__addAssign(this, param_2, param_3, param_4, param_5)
   a0[0xb] = uVar2 & 0x1ff | 0x80800;
   local_50 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   *a0 = (int)(puVar1 + 8);
-  a0[0xc] = param_2;
+  a0[0xc] = op;
   if (param_5 == 0) {
-    param_5 = (**(code **)*param_3)(param_3);
+    param_5 = (**(code **)*intermTyped1)(intermTyped1);
   }
   (**(code **)(*a0 + 4))(a0,param_5);
-  iVar3 = (**(code **)(*param_4 + 0x18))(param_4);
+  iVar3 = (**(code **)(*intermTyped2 + 0x18))(intermTyped2);
   if (iVar3 != 0) {
-    pTVar4 = (unsigned char *)(**(code **)(*param_4 + 0x18))(param_4);
-    param_4 = (int *)TIntermediate__copyConstUnion(this,pTVar4);
-    if (param_4 == (int *)0x0) {
+    pTVar4 = (unsigned char *)(**(code **)(*intermTyped2 + 0x18))(intermTyped2);
+    intermTyped2 = (int *)TIntermediate__copyConstUnion(this,pTVar4);
+    if (intermTyped2 == (int *)0x0) {
       return (int *)0x0;
     }
   }
-  (**(code **)(*param_3 + 0x38))(&local_50,param_3);
-  iVar3 = ((int (*)())TIntermediate__addConversion)(this,param_2,&local_50,param_4);
+  (**(code **)(*intermTyped1 + 0x38))(&local_50,intermTyped1);
+  iVar3 = ((int (*)())TIntermediate__addConversion)(this,op,&local_50,intermTyped2);
   local_50 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   piVar5 = (int *)0x0;
   if (iVar3 != 0) {
-    (**(code **)(*a0 + 0x60))(a0,param_3);
+    (**(code **)(*a0 + 0x60))(a0,intermTyped1);
     (**(code **)(*a0 + 100))(a0,iVar3);
     iVar3 = (**(code **)(*a0 + 0x5c))(a0,*(undefined4 *)this);
     piVar5 = (int *)0x0;
@@ -3208,11 +3208,11 @@ int TIntermediate__addAssign(this, param_2, param_3, param_4, param_5)
 }
 
 /* TIntermediate__addIndex @ 0x97b8d8bc (460 bytes) */
-int TIntermediate__addIndex(this, param_2, param_3, param_4, param_5)
+int TIntermediate__addIndex(this, op, intermTyped1, intermTyped2, param_5)
   unsigned char * this;
-  int param_2;
-  undefined4 param_3;
-  undefined4 *param_4;
+  int op;
+  undefined4 intermTyped1;
+  undefined4 *intermTyped2;
   int param_5;
 {
   undefined *puVar1;
@@ -3240,24 +3240,24 @@ int TIntermediate__addIndex(this, param_2, param_3, param_4, param_5)
   a0[0xb] = uVar2 & 0x3ff | 0x80800;
   puVar1 = PTR_vtable_a7b7c0d8;
   a0[0xb] = uVar2 & 0x1ff | 0x80800;
-  a0[0xc] = param_2;
+  a0[0xc] = op;
   *a0 = (int)(puVar1 + 8);
   if (param_5 == 0) {
-    param_5 = (**(code **)*param_4)(param_4);
+    param_5 = (**(code **)*intermTyped2)(intermTyped2);
   }
   (**(code **)(*a0 + 4))(a0,param_5);
-  (**(code **)(*a0 + 0x60))(a0,param_3);
-  (**(code **)(*a0 + 100))(a0,param_4);
+  (**(code **)(*a0 + 0x60))(a0,intermTyped1);
+  (**(code **)(*a0 + 100))(a0,intermTyped2);
   return a0;
 }
 
 /* TIntermediate__addUnaryMath @ 0x97b8da88 (104 bytes) */
-int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5, param_6, param_7)
+int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, param_6, param_7)
   unsigned char * this;
-  int param_2;
-  int *param_3;
+  int op;
+  int *intermNode;
   uint param_4;
-  unsigned char * param_5;
+  unsigned char * symbolTable;
   undefined4 param_6;
   uint param_7;
 {
@@ -3307,9 +3307,9 @@ int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5, param_
   uint local_3c;
   
   uVar7 = param_4;
-  a4 = param_5;
-  a1 = (int *)(**(code **)(*param_3 + 0x14))
-                        (param_3,param_2,param_3,param_4,param_5,param_6,param_7);
+  a4 = symbolTable;
+  a1 = (int *)(**(code **)(*intermNode + 0x14))
+                        (intermNode,op,intermNode,param_4,symbolTable,param_6,param_7);
   if (a1 == (int *)0x0) {
     this_01 = *(void **)this;
                     
@@ -3342,7 +3342,7 @@ int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5, param_
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"\n");
     return (int *)0x0;
   }
-  if (param_2 == 6) {
+  if (op == 6) {
     bVar5 = false;
     bVar4 = false;
     bVar3 = false;
@@ -3385,8 +3385,8 @@ LAB_97b8ddc8:
   }
   else {
     uVar14 = extraout_r4;
-    if (param_2 < 7) {
-      if (param_2 == 5) {
+    if (op < 7) {
+      if (op == 5) {
 LAB_97b8dd4c:
         bVar5 = false;
         (**(code **)(*a1 + 0x38))(&local_120,a1);
@@ -3409,20 +3409,20 @@ LAB_97b8ddb4:
         goto LAB_97b8ddc8;
       }
     }
-    else if (param_2 - 9U < 4) goto LAB_97b8dd4c;
+    else if (op - 9U < 4) goto LAB_97b8dd4c;
   }
-  if (param_2 == 0x67) {
+  if (op == 0x67) {
     iVar11 = 3;
   }
-  else if (param_2 < 0x68) {
-    if (param_2 != 0x66) goto LAB_97b8decc;
+  else if (op < 0x68) {
+    if (op != 0x66) goto LAB_97b8decc;
     iVar11 = 2;
   }
   else {
-    if (param_2 != 0x68) goto LAB_97b8decc;
+    if (op != 0x68) goto LAB_97b8decc;
     iVar11 = 1;
   }
-  uVar7 = (**(code **)(*a1 + 0x48))(a1,uVar14,param_3,uVar7,a4,param_6,param_7);
+  uVar7 = (**(code **)(*a1 + 0x48))(a1,uVar14,intermNode,uVar7,a4,param_6,param_7);
   uVar9 = (**(code **)(*a1 + 0x50))(a1);
   uVar10 = (**(code **)(*a1 + 0x54))(a1);
   local_fc = (uVar10 & 1) << 9 |
@@ -3451,13 +3451,13 @@ LAB_97b8ddb4:
   local_110[0xd] = '\0';
   local_110[0xe] = '\0';
   local_110[0xf] = '\0';
-  a1 = (int *)((int (*)())TIntermediate__addConversion)(this,param_2,&local_120,a1);
+  a1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,&local_120,a1);
   local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a1 == (int *)0x0) {
     return (int *)0x0;
   }
 LAB_97b8decc:
-  if (2 < param_2 - 0x66U) {
+  if (2 < op - 0x66U) {
     iVar11 = (**(code **)(*a1 + 0x18))(a1);
     if (iVar11 != 0) {
       pTVar12 = (unsigned char *)(**(code **)(*a1 + 0x18))(a1);
@@ -3469,7 +3469,7 @@ LAB_97b8decc:
       local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       if (local_fc >> 0x19 == 2) {
         pTVar13 = (unsigned char *)(**(code **)(*a1 + 0x1c))(a1);
-        a1 = (int *)TIntermediate__changeAggrToTempConst(this,pTVar13,param_5,param_4);
+        a1 = (int *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_4);
         iVar11 = (**(code **)(*a1 + 0x18))(a1);
         if (*(int *)(iVar11 + 0x30) == 0) {
           return (int *)0x0;
@@ -3524,7 +3524,7 @@ LAB_97b8decc:
     local_120 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     *a0_00 = (int)(puVar8 + 8);
     a0_00[0xd] = 0;
-    a0_00[0xc] = param_2;
+    a0_00[0xc] = op;
     if (param_4 == 0) {
       param_4 = (**(code **)*a1)(a1);
     }
@@ -3534,7 +3534,7 @@ LAB_97b8decc:
     a1 = (int *)0x0;
     if ((iVar11 != 0) &&
        ((a0 == (int *)0x0 ||
-        (a1 = (int *)(**(code **)(*a0 + 0x5c))(a0,param_2,0,*(undefined4 *)this,1), a1 == (int *)0x0
+        (a1 = (int *)(**(code **)(*a0 + 0x5c))(a0,op,0,*(undefined4 *)this,1), a1 == (int *)0x0
         )))) {
       a1 = a0_00;
     }
@@ -3543,13 +3543,13 @@ LAB_97b8decc:
 }
 
 /* TIntermediate__setAggregateOperator @ 0x97b8e1b8 (1132 bytes) */
-int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
+int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
   unsigned char * this;
-  unsigned char * param_2;
-  undefined4 param_3;
+  unsigned char * intermNode;
+  undefined4 op;
   int param_4;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, intermNode, op, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   undefined *puVar2;
   uint uVar3;
@@ -3565,9 +3565,9 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
   byte bVar10;
   unsigned char * pTStack0000001c;
   
-  bVar10 = (param_2 == (unsigned char *)0x0) << 1;
-  pTStack0000001c = param_2;
-  if (param_2 == (unsigned char *)0x0) {
+  bVar10 = (intermNode == (unsigned char *)0x0) << 1;
+  pTStack0000001c = intermNode;
+  if (intermNode == (unsigned char *)0x0) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
     a0[1] = 0;
@@ -3617,7 +3617,7 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
     a0[0x17] = 0;
   }
   else {
-    a0 = (int *)(**(code **)(*(int *)param_2 + 0x1c))(param_2);
+    a0 = (int *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
     bVar10 = (a0 == (int *)0x0) << 1;
     if ((a0 == (int *)0x0) || (bVar1 = param_4 == 0, a0[0xc] != 0)) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -3688,7 +3688,7 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
       }
     }
   }
-  (**(code **)(*a0 + 0x60))(a0,param_3);
+  (**(code **)(*a0 + 0x60))(a0,op);
   if (!bVar1) {
     (**(code **)(*a0 + 4))(a0,param_4);
   }
@@ -3696,11 +3696,11 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
 }
 
 /* TIntermediate__addConversion @ 0x97b8e624 (2488 bytes) */
-int TIntermediate__addConversion(this, param_2, param_3, param_4)
+int TIntermediate__addConversion(this, op, type, intermTyped)
   unsigned char * this;
-  int param_2;
-  unsigned char * param_3;
-  int *param_4;
+  int op;
+  unsigned char * type;
+  int *intermTyped;
 {
   undefined *atomicStore;
   bool bVar2;
@@ -3751,73 +3751,73 @@ int TIntermediate__addConversion(this, param_2, param_3, param_4)
   undefined1 auStack_38 [4];
   int local_34;
   
-  a2 = param_3;
-  piVar12 = param_4;
-  iVar6 = (**(code **)(*param_4 + 0x40))(param_4,param_2,param_3,param_4);
+  a2 = type;
+  piVar12 = intermTyped;
+  iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped,op,type,intermTyped);
   if (iVar6 == 0) {
     return (int *)0x0;
   }
   if ((-1 < iVar6) && (iVar6 - 5U < 8)) {
     return (int *)0x0;
   }
-  (**(code **)(*param_4 + 0x38))(&local_c0,param_4);
+  (**(code **)(*intermTyped + 0x38))(&local_c0,intermTyped);
   a6 = (undefined4 *)0x0;
-  if (((*(uint *)(param_3 + 0x24) & 0x1fffe00) == (local_9c & 0x1fffe00)) &&
-     (*(int *)(param_3 + 8) == local_b8)) {
+  if (((*(uint *)(type + 0x24) & 0x1fffe00) == (local_9c & 0x1fffe00)) &&
+     (*(int *)(type + 8) == local_b8)) {
     a6 = (undefined4 *)0x1;
   }
   local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a6 != (undefined4 *)0x0) {
-    return param_4;
+    return intermTyped;
   }
-  if (*(int *)(param_3 + 8) != 0) {
+  if (*(int *)(type + 8) != 0) {
     return (int *)0x0;
   }
-  (**(code **)(*param_4 + 0x38))((unsigned char *)&local_c0,param_4,a2,piVar12,in_r7,in_r8,0);
+  (**(code **)(*intermTyped + 0x38))((unsigned char *)&local_c0,intermTyped,a2,piVar12,in_r7,in_r8,0);
   local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (local_b8 != 0) {
     return (int *)0x0;
   }
-  iVar6 = (**(code **)(*(int *)param_3 + 0x38))(param_3);
+  iVar6 = (**(code **)(*(int *)type + 0x38))(type);
   if (iVar6 != 0) {
     return (int *)0x0;
   }
-  (**(code **)(*param_4 + 0x38))((unsigned char *)&local_c0,param_4);
+  (**(code **)(*intermTyped + 0x38))((unsigned char *)&local_c0,intermTyped);
   local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if ((local_9c & 0x200) != 0) {
     return (int *)0x0;
   }
-  if (param_2 == 0x67) {
+  if (op == 0x67) {
     uVar7 = 3;
   }
-  else if (param_2 < 0x68) {
-    if (param_2 != 0x66) {
+  else if (op < 0x68) {
+    if (op != 0x66) {
 LAB_97b8e794:
-      uVar7 = (**(code **)(*(int *)param_3 + 0x20))(param_3);
-      (**(code **)(*param_4 + 0x38))(&local_c0,param_4);
+      uVar7 = (**(code **)(*(int *)type + 0x20))(type);
+      (**(code **)(*intermTyped + 0x38))(&local_c0,intermTyped);
       if (uVar7 == (local_9c >> 0x13 & 0x3f)) {
-        return param_4;
+        return intermTyped;
       }
       return (int *)0x0;
     }
     uVar7 = 2;
   }
   else {
-    if (param_2 != 0x68) goto LAB_97b8e794;
+    if (op != 0x68) goto LAB_97b8e794;
     uVar7 = 1;
   }
   bVar2 = true;
-  iVar6 = (**(code **)(*param_4 + 0x1c))(param_4);
+  iVar6 = (**(code **)(*intermTyped + 0x1c))(intermTyped);
   if (iVar6 == 0) {
 LAB_97b8e8ac:
-    iVar6 = (**(code **)(*param_4 + 0x1c))(param_4);
+    iVar6 = (**(code **)(*intermTyped + 0x1c))(intermTyped);
     if (iVar6 != 0) {
-      piVar8 = (int *)(**(code **)(*param_4 + 0x1c))(param_4);
+      piVar8 = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
       iVar6 = (**(code **)(*piVar8 + 100))(piVar8);
       pTVar16 = *(unsigned char **)(iVar6 + 4);
       while( true ) {
         if (pTVar16 == *(unsigned char **)(iVar6 + 8)) {
-          piVar12 = (int *)(**(code **)(*param_4 + 0x1c))(param_4);
+          piVar12 = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
           return piVar12;
         }
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -3839,7 +3839,7 @@ LAB_97b8ec88:
           if (uVar19 != 3) {
             this_00 = *(void **)this;
             pcVar17 = "Bad promotion node";
-            uVar7 = (**(code **)*param_4)(param_4,a1_00,a2,piVar12,in_r7,in_r8,a6);
+            uVar7 = (**(code **)*intermTyped)(intermTyped,a1_00,a2,piVar12,in_r7,in_r8,a6);
                     
             goto override_jmp_97b8ea8c_case_0;
           }
@@ -3861,7 +3861,7 @@ LAB_97b8ed90:
         local_a4 = 0;
         local_a0 = 0;
         local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        piVar12 = (int *)(**(code **)*param_4)(param_4);
+        piVar12 = (int *)(**(code **)*intermTyped)(intermTyped);
         a2 = (unsigned char *)&local_c0;
         iVar11 = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar10,(unsigned char *)&local_c0,(int)piVar12);
         local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
@@ -3891,7 +3891,7 @@ LAB_97b8ed90:
             if (uVar19 != 3) {
               this_00 = *(void **)this;
               pcVar17 = "Bad promotion node";
-              uVar7 = (**(code **)*param_4)(param_4,a1,a2,piVar12,in_r7,in_r8,a6);
+              uVar7 = (**(code **)*intermTyped)(intermTyped,a1,a2,piVar12,in_r7,in_r8,a6);
                     
               goto override_jmp_97b8ea8c_case_0;
             }
@@ -3928,24 +3928,24 @@ LAB_97b8ed90:
         }
         this_00 = *(void **)this;
         pcVar17 = "Bad promotion node";
-        uVar7 = (**(code **)*param_4)(param_4,a1_01,a2,piVar12,in_r7,in_r8,a6);
+        uVar7 = (**(code **)*intermTyped)(intermTyped,a1_01,a2,piVar12,in_r7,in_r8,a6);
                     
         goto override_jmp_97b8ea8c_case_0;
       }
       this_00 = *(void **)this;
       pcVar17 = "Bad promotion node";
-      uVar7 = (**(code **)*param_4)(param_4);
+      uVar7 = (**(code **)*intermTyped)(intermTyped);
                     
       goto override_jmp_97b8ea8c_case_0;
     }
   }
   else {
-    iVar6 = (**(code **)(*param_4 + 0x1c))(param_4);
+    iVar6 = (**(code **)(*intermTyped + 0x1c))(intermTyped);
     if (*(int *)(iVar6 + 0x30) == 2) {
       bVar2 = false;
     }
     else {
-      piVar8 = (int *)(**(code **)(*param_4 + 0x1c))(param_4);
+      piVar8 = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
       iVar6 = (**(code **)(*piVar8 + 100))(piVar8);
       for (puVar18 = *(undefined4 **)(iVar6 + 4); puVar18 != *(undefined4 **)(iVar6 + 8);
           puVar18 = puVar18 + 1) {
@@ -3958,16 +3958,16 @@ LAB_97b8ed90:
     }
     if (bVar2) goto LAB_97b8e8ac;
   }
-  iVar6 = (**(code **)(*param_4 + 0x18))(param_4);
+  iVar6 = (**(code **)(*intermTyped + 0x18))(intermTyped);
   if (iVar6 != 0) {
-    uVar13 = (**(code **)(*param_4 + 0x18))(param_4);
+    uVar13 = (**(code **)(*intermTyped + 0x18))(intermTyped);
     piVar12 = (int *)TIntermediate__promoteConstantUnion(this,uVar7,uVar13);
     return piVar12;
   }
   if (uVar7 != 2) {
     if (uVar7 < 3) {
       if (uVar7 == 1) {
-        iVar6 = (**(code **)(*param_4 + 0x40))(param_4);
+        iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped);
         uVar13 = extraout_r4;
         if (iVar6 == 2) {
           iVar11 = 0x10;
@@ -3977,7 +3977,7 @@ LAB_97b8ed90:
           if (iVar6 != 3) {
             this_00 = *(void **)this;
             pcVar17 = "Bad promotion node";
-            uVar7 = (**(code **)*param_4)(param_4);
+            uVar7 = (**(code **)*intermTyped)(intermTyped);
                     
             goto override_jmp_97b8ea8c_case_0;
           }
@@ -3986,7 +3986,7 @@ LAB_97b8ed90:
       }
     }
     else if (uVar7 == 3) {
-      iVar6 = (**(code **)(*param_4 + 0x40))(param_4);
+      iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped);
       uVar13 = extraout_r4_00;
       if (iVar6 == 1) {
         iVar11 = 0xe;
@@ -3996,7 +3996,7 @@ LAB_97b8ed90:
         if (iVar6 != 2) {
           this_00 = *(void **)this;
           pcVar17 = "Bad promotion node";
-          uVar7 = (**(code **)*param_4)(param_4);
+          uVar7 = (**(code **)*intermTyped)(intermTyped);
                     
           goto override_jmp_97b8ea8c_case_0;
         }
@@ -4005,7 +4005,7 @@ LAB_97b8ed90:
     }
     this_00 = *(void **)this;
     pcVar17 = "Bad promotion type";
-    uVar7 = (**(code **)*param_4)(param_4);
+    uVar7 = (**(code **)*intermTyped)(intermTyped);
                     
 override_jmp_97b8ea8c_case_0:
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,"INTERNAL ERROR: ");
@@ -4037,7 +4037,7 @@ override_jmp_97b8ea8c_case_0:
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,"\n");
     return (int *)0x0;
   }
-  iVar6 = (**(code **)(*param_4 + 0x40))(param_4);
+  iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped);
   uVar13 = extraout_r4_01;
   if (iVar6 == 1) {
     iVar11 = 0x11;
@@ -4047,15 +4047,15 @@ override_jmp_97b8ea8c_case_0:
     if (iVar6 != 3) {
       this_00 = *(void **)this;
       pcVar17 = "Bad promotion node";
-      uVar7 = (**(code **)*param_4)(param_4);
+      uVar7 = (**(code **)*intermTyped)(intermTyped);
                     
       goto override_jmp_97b8ea8c_case_0;
     }
   }
 LAB_97b8f1ac:
-  uVar19 = (**(code **)(*param_4 + 0x48))(param_4,uVar13);
-  uVar14 = (**(code **)(*param_4 + 0x50))(param_4);
-  uVar15 = (**(code **)(*param_4 + 0x54))(param_4);
+  uVar19 = (**(code **)(*intermTyped + 0x48))(intermTyped,uVar13);
+  uVar14 = (**(code **)(*intermTyped + 0x50))(intermTyped);
+  uVar15 = (**(code **)(*intermTyped + 0x54))(intermTyped);
   local_c0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   local_9c = (uVar15 & 1) << 9 |
              (uVar14 & 1) << 10 | (uVar19 & 0xff) << 0xb | uVar7 << 0x13 | local_9c & 0x1ff;
@@ -4094,20 +4094,20 @@ LAB_97b8f1ac:
   piVar12[0xc] = iVar11;
   *piVar12 = (int)(puVar4 + 8);
   piVar12[0xd] = 0;
-  uVar13 = (**(code **)*param_4)(param_4);
+  uVar13 = (**(code **)*intermTyped)(intermTyped);
   (**(code **)(puVar4 + 0xc))(piVar12,uVar13);
-  (**(code **)(*piVar12 + 0x60))(piVar12,param_4);
+  (**(code **)(*piVar12 + 0x60))(piVar12,intermTyped);
   return piVar12;
 }
 
 /* TIntermediate__growAggregate @ 0x97b8f36c (760 bytes) */
-int TIntermediate__growAggregate(this, param_2, param_3, param_4)
+int TIntermediate__growAggregate(this, intermNode1, intermNode2, param_4)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermNode1;
+  unsigned char * intermNode2;
   int param_4;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, intermNode1, intermNode2, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *puVar1;
   uint uVar2;
   int *piVar3;
@@ -4122,13 +4122,13 @@ int TIntermediate__growAggregate(this, param_2, param_3, param_4)
   unsigned char * pTStack0000001c;
   unsigned char * pTStack00000020;
   
-  if ((param_2 == (unsigned char *)0x0) && (param_3 == (unsigned char *)0x0)) {
+  if ((intermNode1 == (unsigned char *)0x0) && (intermNode2 == (unsigned char *)0x0)) {
     return (int *)0x0;
   }
-  pTStack0000001c = param_2;
-  pTStack00000020 = param_3;
-  if (param_2 != (unsigned char *)0x0) {
-    a0 = (int *)(**(code **)(*(int *)param_2 + 0x1c))(param_2);
+  pTStack0000001c = intermNode1;
+  pTStack00000020 = intermNode2;
+  if (intermNode1 != (unsigned char *)0x0) {
+    a0 = (int *)(**(code **)(*(int *)intermNode1 + 0x1c))(intermNode1);
     in_cr0 = (a0 == (int *)0x0) << 1;
     if ((a0 != (int *)0x0) && (a0[0xc] == 0)) goto LAB_97b8f5cc;
   }
@@ -4218,12 +4218,12 @@ LAB_97b8f5cc:
 }
 
 /* TIntermediate__makeAggregate @ 0x97b8f664 (632 bytes) */
-int TIntermediate__makeAggregate(this, param_2, param_3)
+int TIntermediate__makeAggregate(this, intermNode, param_3)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * intermNode;
   int param_3;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, intermNode, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *puVar1;
   uint uVar2;
   int *piVar3;
@@ -4240,8 +4240,8 @@ int TIntermediate__makeAggregate(this, param_2, param_3)
   unsigned char * pTStack0000001c;
   
   a0 = (int *)0x0;
-  if (param_2 != (unsigned char *)0x0) {
-    pTStack0000001c = param_2;
+  if (intermNode != (unsigned char *)0x0) {
+    pTStack0000001c = intermNode;
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
     a0 = (int *)TPoolAllocator__allocate(this_00,0x6c);
     a0[1] = 0;
@@ -4318,10 +4318,10 @@ int TIntermediate__makeAggregate(this, param_2, param_3)
 }
 
 /* __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi @ 0x97b8f8dc (516 bytes) */
-int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(param_1, param_2, param_3, param_4, param_5)
+int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(param_1, intermTyped, intermNodePair, param_4, param_5)
   unsigned char * param_1;
-  int *param_2;
-  undefined4 *param_3;
+  int *intermTyped;
+  undefined4 *intermNodePair;
   undefined4 *param_4;
   undefined4 param_5;
 {
@@ -4336,14 +4336,14 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(param_1,
   undefined4 *puStack00000020;
   undefined4 *puStack00000024;
   
-  puStack00000020 = param_3;
+  puStack00000020 = intermNodePair;
   puStack00000024 = param_4;
-  iVar3 = (**(code **)(*param_2 + 0x14))(param_2,param_2,param_3,param_4,param_5);
+  iVar3 = (**(code **)(*intermTyped + 0x14))(intermTyped,intermTyped,intermNodePair,param_4,param_5);
   if (iVar3 != 0) {
-    piVar4 = (int *)(**(code **)(*param_2 + 0x14))(param_2);
+    piVar4 = (int *)(**(code **)(*intermTyped + 0x14))(intermTyped);
     iVar3 = (**(code **)(*piVar4 + 0x18))(piVar4);
     if (iVar3 != 0) {
-      piVar4 = (int *)(**(code **)(*param_2 + 0x14))(param_2);
+      piVar4 = (int *)(**(code **)(*intermTyped + 0x14))(intermTyped);
       iVar3 = (**(code **)(*piVar4 + 0x18))(piVar4);
       if (**(int **)(iVar3 + 0x30) == 0) {
         return puStack00000024;
@@ -4373,20 +4373,20 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(param_1,
   a0[0xb] = uVar2 & 0x7ff | 0x800;
   a0[0xb] = uVar2 & 0x3ff | 0x800;
   a0[0xb] = uVar2 & 0x1ff | 0x800;
-  a0[0xc] = param_2;
+  a0[0xc] = intermTyped;
   a0[0xd] = puStack00000020;
   a0[0xe] = puStack00000024;
   *a0 = a6;
-  (*pcVar5)(a0,param_5,param_3,param_4,puStack00000024,puStack00000020,a6,
+  (*pcVar5)(a0,param_5,intermNodePair,param_4,puStack00000024,puStack00000020,a6,
             &PTR___ZN5TTypeD1Ev_a7b7cff8);
   return a0;
 }
 
 /* TIntermediate__addComma @ 0x97b8fae0 (348 bytes) */
-int TIntermediate__addComma(this, param_2, param_3, param_4)
+int TIntermediate__addComma(this, intermTyped1, intermTyped2, param_4)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * intermTyped1;
+  unsigned char * intermTyped2;
   int param_4;
 {
   bool bVar1;
@@ -4402,22 +4402,22 @@ int TIntermediate__addComma(this, param_2, param_3, param_4)
   undefined **local_50 [13];
   
   bVar1 = false;
-  pTVar2 = param_3;
+  pTVar2 = intermTyped2;
   a3 = param_4;
-  (**(code **)(*(int *)param_2 + 0x38))(local_b0,param_2,param_3,param_4);
+  (**(code **)(*(int *)intermTyped1 + 0x38))(local_b0,intermTyped1,intermTyped2,param_4);
   if (local_8c >> 0x19 == 2) {
-    (**(code **)(*(int *)param_3 + 0x38))(local_80,param_3,pTVar2,a3,in_r7,in_r8,0xa7b7faf0);
+    (**(code **)(*(int *)intermTyped2 + 0x38))(local_80,intermTyped2,pTVar2,a3,in_r7,in_r8,0xa7b7faf0);
     bVar1 = local_5c >> 0x19 == 2;
     local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
   local_b0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  pTVar2 = param_3;
+  pTVar2 = intermTyped2;
   if (!bVar1) {
     pTVar2 = (unsigned char *)
-             ((int (*)())TIntermediate__growAggregate)(this,(unsigned char *)param_2,(unsigned char *)param_3,param_4);
+             ((int (*)())TIntermediate__growAggregate)(this,(unsigned char *)intermTyped1,(unsigned char *)intermTyped2,param_4);
     piVar3 = (int *)(**(code **)(*(int *)pTVar2 + 0x1c))(pTVar2);
     (**(code **)(*piVar3 + 0x60))(piVar3,0x25);
-    (**(code **)(*(int *)param_3 + 0x38))(local_50,param_3);
+    (**(code **)(*(int *)intermTyped2 + 0x38))(local_50,intermTyped2);
     (**(code **)(*(int *)pTVar2 + 0x34))(pTVar2,local_50);
     local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     piVar3 = (int *)(**(code **)(*(int *)pTVar2 + 0x3c))(pTVar2);
@@ -4531,10 +4531,10 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
 }
 
 /* TIntermediate__addConstantUnion @ 0x97b8feb0 (300 bytes) */
-int TIntermediate__addConstantUnion(this, param_2, param_3, param_4)
+int TIntermediate__addConstantUnion(this, constUnion, type, param_4)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * constUnion;
+  unsigned char * type;
   int param_4;
 {
   uint uVar1;
@@ -4560,14 +4560,14 @@ int TIntermediate__addConstantUnion(this, param_2, param_3, param_4)
   a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x34);
   a0[1] = 0;
   *a0 = &PTR_getLine_a7b7cf90;
-  uVar5 = *(undefined4 *)(param_3 + 4);
-  uVar9 = *(undefined4 *)(param_3 + 8);
-  uVar8 = *(undefined4 *)(param_3 + 0x20);
-  a7 = *(undefined4 *)(param_3 + 0xc);
-  a5 = *(undefined4 *)(param_3 + 0x10);
-  a4 = *(undefined4 *)(param_3 + 0x14);
-  a3 = *(undefined4 *)(param_3 + 0x18);
-  a2 = *(undefined4 *)(param_3 + 0x1c);
+  uVar5 = *(undefined4 *)(type + 4);
+  uVar9 = *(undefined4 *)(type + 8);
+  uVar8 = *(undefined4 *)(type + 0x20);
+  a7 = *(undefined4 *)(type + 0xc);
+  a5 = *(undefined4 *)(type + 0x10);
+  a4 = *(undefined4 *)(type + 0x14);
+  a3 = *(undefined4 *)(type + 0x18);
+  a2 = *(undefined4 *)(type + 0x1c);
   a0[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[3] = uVar5;
   a0[10] = uVar8;
@@ -4578,28 +4578,28 @@ int TIntermediate__addConstantUnion(this, param_2, param_3, param_4)
   a0[8] = a3;
   a0[9] = a2;
   uVar6 = a0[0xb];
-  uVar2 = *(uint *)(param_3 + 0x24) & 0xfe000000;
+  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
   a0[0xb] = uVar2 | uVar6 & 0x1ffffff;
-  uVar3 = (*(uint *)(param_3 + 0x24) >> 0x13 & 0x3f) << 0x13;
+  uVar3 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
   a0[0xb] = uVar3 | uVar2 | uVar6 & 0x7ffff;
-  uVar1 = *(uint *)(param_3 + 0x24) & 0x7f800;
+  uVar1 = *(uint *)(type + 0x24) & 0x7f800;
   a0[0xb] = uVar1 | uVar3 | uVar2 | uVar6 & 0x7ff;
-  uVar4 = (*(uint *)(param_3 + 0x24) >> 10 & 1) << 10;
+  uVar4 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
   a0[0xb] = uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x3ff;
   puVar7 = PTR_vtable_a7b7c0c8 + 8;
-  a6 = *(uint *)(param_3 + 0x24) >> 9 & 1;
+  a6 = *(uint *)(type + 0x24) >> 9 & 1;
   pcVar10 = *(code **)(PTR_vtable_a7b7c0c8 + 0xc);
   a0[0xb] = a6 << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
-  a0[0xc] = param_2;
+  a0[0xc] = constUnion;
   *a0 = puVar7;
   (*pcVar10)(a0,param_4,a2,a3,a4,a5,a6,a7);
   return a0;
 }
 
 /* TIntermediate__addSwizzle @ 0x97b8ffdc (744 bytes) */
-int TIntermediate__addSwizzle(this, param_2, param_3)
+int TIntermediate__addSwizzle(this, vectorFields, param_3)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * vectorFields;
   int param_3;
 {
   int atomicStore;
@@ -4691,8 +4691,8 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
   a0[0x1a] = 0;
   (*pcVar8)(a0,param_3);
   this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
-  if (0 < *(int *)(param_2 + 0x10)) {
-    pTVar10 = param_2;
+  if (0 < *(int *)(vectorFields + 0x10)) {
+    pTVar10 = vectorFields;
     do {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pcVar6 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
@@ -4724,17 +4724,17 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
         *(int *)(this_00 + 8) = iVar4 + 4;
       }
       iVar9 = iVar9 + 1;
-    } while (iVar9 < *(int *)(param_2 + 0x10));
+    } while (iVar9 < *(int *)(vectorFields + 0x10));
   }
   return a0;
 }
 
 /* TIntermediate__addLoop @ 0x97b902c4 (140 bytes) */
-int TIntermediate__addLoop(this, param_2, param_3, param_4, param_5, param_6)
+int TIntermediate__addLoop(this, intermNode, intermTyped1, intermTyped2, param_5, param_6)
   unsigned char * this;
-  unsigned char * param_2;
-  unsigned char * param_3;
-  unsigned char * param_4;
+  unsigned char * intermNode;
+  unsigned char * intermTyped1;
+  unsigned char * intermTyped2;
   undefined4 param_5;
   int param_6;
 {
@@ -4747,10 +4747,10 @@ int TIntermediate__addLoop(this, param_2, param_3, param_4, param_5, param_6)
   a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x18);
   puVar1 = PTR_vtable_a7b7c0c4;
   a0[1] = 0;
-  a0[2] = param_2;
+  a0[2] = intermNode;
   pcVar2 = *(code **)(puVar1 + 0xc);
-  a0[3] = param_3;
-  a0[4] = param_4;
+  a0[3] = intermTyped1;
+  a0[4] = intermTyped2;
   a0[5] = param_5;
   *a0 = puVar1 + 8;
   (*pcVar2)(a0,param_6);
@@ -4791,28 +4791,28 @@ int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, op, intermTyp
 }
 
 /* TIntermediate__postProcess @ 0x97b903d8 (96 bytes) */
-int TIntermediate__postProcess(param_1, param_2)
-  unsigned char * param_1;
-  int *param_2;
+int TIntermediate__postProcess(this, intermNode)
+  unsigned char * this;
+  int *intermNode;
 {
   int *a0;
   
-  if (((param_2 != (int *)0x0) &&
-      (a0 = (int *)(**(code **)(*param_2 + 0x1c))(param_2), a0 != (int *)0x0)) && (a0[0xc] == 0)) {
+  if (((intermNode != (int *)0x0) &&
+      (a0 = (int *)(**(code **)(*intermNode + 0x1c))(intermNode), a0 != (int *)0x0)) && (a0[0xc] == 0)) {
     (**(code **)(*a0 + 0x60))(a0,1);
   }
   return 1;
 }
 
 /* TIntermediate__remove @ 0x97b90438 (12 bytes) */
-int TIntermediate__remove(this, param_2)
+int TIntermediate__remove(this, intermNode)
   unsigned char * this;
-  unsigned char * param_2;
+  unsigned char * intermNode;
 {
-  if (param_2 == (unsigned char *)0x0) {
+  if (intermNode == (unsigned char *)0x0) {
     return;
   }
-  return RemoveAllTreeNodes(param_2);
+  return RemoveAllTreeNodes(intermNode);
 }
 
 /* TIntermOperator__modifiesState @ 0x97b90444 (48 bytes) */
