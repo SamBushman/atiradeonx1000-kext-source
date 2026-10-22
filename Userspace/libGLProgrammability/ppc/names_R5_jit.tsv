@@ -782,3 +782,146 @@ use	_PPCRuntimeCompilerCompileAV	iVar19	codeBufferCapacity	CONFIRMED	code buffer
 use	_PPCRuntimeCompilerCompileAV	iVar19	codeBufferCapacity	CONFIRMED	code buffer capacity in bytes (0x2000, grown by _glpDCBRealloc when fewer than 3000 bytes remain)	^\s*if\ \(iVar19\ \-\ 3000U\ <\ \(uint\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \-\ iVar9\)\)\ \{$	+3
 use	_PPCRuntimeCompilerCompileAV	iVar19	codeWordCount	CONFIRMED	number of generated code words (cursor minus buffer base, >> 2)	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\)\ >>\ 2;$	+2
 use	_PPCRuntimeCompilerCompileAV	iVar19	codeWordCount	CONFIRMED	number of generated code words (cursor minus buffer base, >> 2)	^\s*\(\*_glpPushInstructions\)\(iVar19,uVar15,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorMode	CONFIRMED	compiler+0xe4c: nonzero when compiling the AltiVec variant (registers 0x20.. are vector registers)	^\s*iVar15\ =\ param_1\[0x393\];$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorMode	CONFIRMED	compiler+0xe4c: nonzero when compiling the AltiVec variant (registers 0x20.. are vector registers)	^\s*if\ \(iVar15\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorMode	CONFIRMED	compiler+0xe4c: nonzero when compiling the AltiVec variant (registers 0x20.. are vector registers)	^\s*if\ \(iVar15\ ==\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorMode	CONFIRMED	compiler+0xe4c: nonzero when compiling the AltiVec variant (registers 0x20.. are vector registers)	^\s*iVar15\ =\ param_1\[0x393\];$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorMode	CONFIRMED	compiler+0xe4c: nonzero when compiling the AltiVec variant (registers 0x20.. are vector registers)	^\s*if\ \(iVar15\ !=\ 0\)\ \{$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	containsResult	CONFIRMED	result of _PPCRuntimeCompilerRegisterContainsData (0 no, 1 identical, 2 all components, 3 partial)	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerRegisterContainsData\)\(param_1,uVar19,param_1\[param_2\ \*\ 0xe\ \+\ 2\],param_1\[param_2\ \*\ 0xe\ \+\ 3\],$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	containsResult	CONFIRMED	result of _PPCRuntimeCompilerRegisterContainsData (0 no, 1 identical, 2 all components, 3 partial)	^\s*if\ \(iVar15\ ==\ 1\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	containsResult	CONFIRMED	result of _PPCRuntimeCompilerRegisterContainsData (0 no, 1 identical, 2 all components, 3 partial)	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerRegisterContainsData\)\(param_1,uVar19,param_1\[param_2\ \*\ 0xe\ \+\ 2\],param_1\[param_2\ \*\ 0xe\ \+\ 3\],$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	containsResult	CONFIRMED	result of _PPCRuntimeCompilerRegisterContainsData (0 no, 1 identical, 2 all components, 3 partial)	^\s*if\ \(iVar15\ \-\ 1U\ <\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorRecordOffset	CONFIRMED	byte offset of the vector register record (0x700 + index*0x38) plus 8 for its data pointer	^\s*iVar15\ =\ uVar19\ \*\ 0x38\ \+\ 0x708;$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorRecordOffset	CONFIRMED	byte offset of the vector register record (0x700 + index*0x38) plus 8 for its data pointer	^\s*\(\(int\)param_1\ \+\ \(uint\)local_50\ \+\ iVar15\ \+\ 8\),$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorRecordOffset	CONFIRMED	byte offset of the vector register record (0x700 + index*0x38) plus 8 for its data pointer	^\s*\(\(int\)param_1\ \+\ \(uint\)local_4f\ \+\ iVar15\ \+\ 8\)\),$	+2
+use	_PPCRuntimeCompilerBackupRegister	iVar15	vectorRecordOffset	CONFIRMED	byte offset of the vector register record (0x700 + index*0x38) plus 8 for its data pointer	^\s*\*\(undefined1\ \*\)\(\(int\)param_1\ \+\ \(uint\)local_4d\ \+\ iVar15\ \+\ 8\)\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	componentUsed	INFERRED	component-in-use flag read through the component cursor	^\s*iVar15\ =\ \*piVar13;$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	componentUsed	INFERRED	component-in-use flag read through the component cursor	^\s*if\ \(iVar15\ !=\ 0\)\ \{$@3	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	variableInfo	CONFIRMED	variable record returned by _PPCRuntimeCompilerFindVariableInfo	^\s*iVar15\ =\ _PPCRuntimeCompilerFindVariableInfo$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar15	variableInfo	CONFIRMED	variable record returned by _PPCRuntimeCompilerFindVariableInfo	^\s*if\ \(\*\(int\ \*\)\(iVar15\ \+\ 4\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*uVar17\ =\ 0;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*uVar17\ =\ uVar19;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*if\ \(\(\*\(short\ \*\)\(param_1\ \+\ uVar17\ \*\ 0xe\ \+\ 6\)\ ==\ 0\)\ \&\&\ \(param_1\[uVar17\ \*\ 0xe\]\ ==\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerSaveRegisterToMemory\)\(param_1,uVar17\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerSaveRegisterToMemory\)\(param_1,uVar17\ \-\ 0x20\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*\(param_1,param_1\[uVar17\ \*\ 0xe\ \+\ 2\],param_1\[uVar17\ \*\ 0xe\ \+\ 3\],$	+4
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*uVar19\ =\ uVar17;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*uVar19\ =\ uVar17\ \-\ 0x20;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*uVar17\ =\ uVar17\ <<\ 0x15\ \|\ param_2\ <<\ 0xb\ \|\ 0xfc000090;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*uVar17\ =\ \(uVar17\ \-\ 0x20\)\ \*\ 0x200000\ \|\ \(param_2\ \-\ 0x20\)\ \*\ 0x10000\ \|$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	candidateReg	INFERRED	register index being considered as the backup target	^\s*\*puVar8\ =\ uVar17;$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ param_1;$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*if\ \(\(\(uVar19\ !=\ param_2\)\ \&\&\ \(\*piVar11\ ==\ 0\)\)\ \&\&\ \(piVar11\[0xb\]\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*else\ if\ \(\(\(uVar19\ !=\ param_2\ \-\ 0x20\)\ \&\&\ \(piVar11\[0x1c0\]\ ==\ 0\)\)\ \&\&\ \(piVar11\[0x1cb\]\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ piVar11\ \+\ 0xe;$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ param_1;$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*if\ \(\(\(uVar20\ !=\ uVar19\)\ \&\&\ \(piVar11\[0x1c0\]\ ==\ 0\)\)\ \&\&$	+4
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*if\ \(\(\(uint\)piVar11\[0x1c4\]\ >>\ 8\ !=\ \(piVar11\[0x1c4\]\ \&\ 0xffffffU\)\)\ \&\&$	+7
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*_PPCRuntimeCompilerBuildTransferSwizzle\(\&local_50,piVar11\ \+\ 0x1c4,\&local_4c\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*local_48\ =\ CONCAT31\(CONCAT21\(CONCAT11\(\*\(undefined1\ \*\)\(\(int\)piVar11\ \+\ local_50\ \+\ 0x710\),$	+5
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ piVar11\ \+\ 0x1c4;$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*\*\(undefined1\ \*\)piVar11\ =\ \*\(undefined1\ \*\)piVar9;$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ \(int\ \*\)\(\(int\)piVar11\ \+\ 1\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ piVar11\ \+\ 0xe;$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ param_1\ \+\ uVar20\ \*\ 0x1c0;$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*if\ \(\(\(uVar19\ !=\ param_2\)\ \&\&\ \(piVar11\[0xb\]\ !=\ 0\)\)\ \&\&$	+2
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*iVar16\ =\ param_1\[0x391\]\ \-\ piVar11\[0xc\];$	+1
+use	_PPCRuntimeCompilerBackupRegister	piVar11	regRecord	CONFIRMED	cursor over the 0x38-byte register allocator records starting at the compiler (stride 0xe words)	^\s*piVar11\ =\ piVar11\ \+\ 0xe;$@3	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*uVar19\ =\ param_2\ \-\ 0x20;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*iVar15\ =\ uVar19\ \*\ 0x38\ \+\ 0x708;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*if\ \(\(\(uVar20\ !=\ uVar19\)\ \&\&\ \(piVar11\[0x1c0\]\ ==\ 0\)\)\ \&\&$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*if\ \(\(\(uint\)param_1\[uVar19\ \*\ 0xe\ \+\ 0x1c4\]\ >>\ 8\ !=$	+5
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*\(\(cVar1\ =\ \*\(char\ \*\)\(\(int\)param_1\ \+\ uVar19\ \*\ 0x38\ \+\ 0x712\),\ cVar1\ !=\ '\\x02'\ \&\&$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*\(\(cVar1\ =\ \*\(char\ \*\)\(\(int\)param_1\ \+\ uVar19\ \*\ 0x38\ \+\ 0x713\),\ cVar1\ !=\ '\\x03'\ \&\&$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*\(\&local_50,param_1\ \+\ uVar19\ \*\ 0xe\ \+\ 0x1c4,\&local_4c\);$	+2
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*param_1\[uVar19\ \*\ 0xe\ \+\ 0x1c4\]\ =\ local_48;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*pbVar5\ =\ \(byte\ \*\)\(param_1\ \+\ uVar19\ \*\ 0xe\ \+\ 0x1c4\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*\*puVar8\ =\ uVar20\ <<\ 0x15\ \|\ uVar20\ <<\ 0x10\ \|\ uVar19\ \*\ 0x800\ \|\ 0x100000ea;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	vectorRegIndex	CONFIRMED	index of the register inside the vector bank (regIndex - 0x20)	^\s*piVar9\ =\ param_1\ \+\ uVar19\ \*\ 0xe\ \+\ 0x1c4;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	bankFirstReg	INFERRED	first register index of bank uVar20 (0 = scalar FPRs, 0x20 = vector registers)	^\s*uVar19\ =\ uVar20\ \*\ 0x20;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	bankFirstReg	INFERRED	first register index of bank uVar20 (0 = scalar FPRs, 0x20 = vector registers)	^\s*if\ \(uVar19\ <\ uVar12\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	bankFirstReg	INFERRED	first register index of bank uVar20 (0 = scalar FPRs, 0x20 = vector registers)	^\s*if\ \(\(\(uVar19\ !=\ param_2\)\ \&\&\ \(piVar11\[0xb\]\ !=\ 0\)\)\ \&\&$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	bankFirstReg	INFERRED	first register index of bank uVar20 (0 = scalar FPRs, 0x20 = vector registers)	^\s*uVar17\ =\ uVar19;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	bankFirstReg	INFERRED	first register index of bank uVar20 (0 = scalar FPRs, 0x20 = vector registers)	^\s*uVar19\ =\ uVar19\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	targetReg	INFERRED	register index passed to _PPCRuntimeCompilerSetRegister	^\s*uVar19\ =\ uVar17;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	targetReg	INFERRED	register index passed to _PPCRuntimeCompilerSetRegister	^\s*uVar19\ =\ uVar17\ \-\ 0x20;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar19	targetReg	INFERRED	register index passed to _PPCRuntimeCompilerSetRegister	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerSetRegister\)\(param_1,uVar19,param_1\[param_2\ \*\ 0xe\ \+\ 2\],param_1\[param_2\ \*\ 0xe\ \+\ 3\],$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	bestAge	INFERRED	age (use-counter distance) of the best eviction candidate found so far	^\s*iVar16\ =\ 0;$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	bestAge	INFERRED	age (use-counter distance) of the best eviction candidate found so far	^\s*\(\(iVar16\ <=\ param_1\[0x391\]\ \-\ piVar11\[0xc\]\ \&\&\ \(piVar11\[0xd\]\ ==\ 0\)\)\)\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	bestAge	INFERRED	age (use-counter distance) of the best eviction candidate found so far	^\s*iVar16\ =\ param_1\[0x391\]\ \-\ piVar11\[0xc\];$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	componentsRemaining	INFERRED	down-counter over the four components	^\s*iVar16\ =\ 4;$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	componentsRemaining	INFERRED	down-counter over the four components	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2
+use	_PPCRuntimeCompilerBackupRegister	iVar16	componentSlot	INFERRED	component slot value read through the component cursor	^\s*iVar16\ =\ \*piVar9;$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	componentSlot	INFERRED	component slot value read through the component cursor	^\s*if\ \(iVar16\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	componentsRemaining	INFERRED	down-counter over the four components	^\s*iVar16\ =\ 4;$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	componentsRemaining	INFERRED	down-counter over the four components	^\s*iVar16\ =\ iVar16\ \+\ \-1;$@2	+2
+use	_PPCRuntimeCompilerBackupRegister	iVar16	variableInfo2	CONFIRMED	variable record returned by _PPCRuntimeCompilerFindVariableInfo	^\s*iVar16\ =\ _PPCRuntimeCompilerFindVariableInfo$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	variableInfo2	CONFIRMED	variable record returned by _PPCRuntimeCompilerFindVariableInfo	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 4\)\ =\ 1;$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	recordWord7	INFERRED	word 7 of the register record being backed up	^\s*iVar16\ =\ param_1\[param_2\ \*\ 0xe\ \+\ 7\];$	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	recordWord7	INFERRED	word 7 of the register record being backed up	^\s*iVar16\ =\ param_1\[param_2\ \*\ 0xe\ \+\ 7\];$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	iVar16	recordWord7	INFERRED	word 7 of the register record being backed up	^\s*iVar16,param_1\[param_2\ \*\ 0xe\ \+\ 8\],param_1\[param_2\ \*\ 0xe\ \+\ 9\],$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar12	nextComponent	INFERRED	next component index in the component scan	^\s*uVar12\ =\ uVar17\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar12	nextComponent	INFERRED	next component index in the component scan	^\s*if\ \(uVar12\ <\ 4\)\ \{$	+3
+use	_PPCRuntimeCompilerBackupRegister	uVar12	nextComponent	INFERRED	next component index in the component scan	^\s*uVar17\ =\ uVar12;$	+2
+use	_PPCRuntimeCompilerBackupRegister	uVar12	registerLimit	INFERRED	one past the last register of the bank being searched (0x20 FPR, 0x40 vector)	^\s*uVar12\ =\ 0x20;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar12	registerLimit	INFERRED	one past the last register of the bank being searched (0x20 FPR, 0x40 vector)	^\s*uVar12\ =\ 0x40;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar12	registerLimit	INFERRED	one past the last register of the bank being searched (0x20 FPR, 0x40 vector)	^\s*if\ \(uVar19\ <\ uVar12\)\ \{$	+2
+local	_PPCRuntimeCompilerRegisterContainsData	param_1	compiler	CONFIRMED	first argument: the runtime compiler
+local	_PPCRuntimeCompilerRegisterContainsData	param_2	regIndex	CONFIRMED	register index in the allocator table (0x20 added in vector mode)
+local	_PPCRuntimeCompilerRegisterContainsData	param_3	opOffsets	INFERRED	operand descriptor word 0: pointer to the 4-int component offset table
+local	_PPCRuntimeCompilerRegisterContainsData	param_4	opBank	INFERRED	word 1: bank index
+local	_PPCRuntimeCompilerRegisterContainsData	param_5	opSwizzle	INFERRED	word 2: four swizzle bytes
+local	_PPCRuntimeCompilerRegisterContainsData	param_6	opIndexInfo	INFERRED	word 3: high16 relative-address offset
+local	_PPCRuntimeCompilerRegisterContainsData	param_7	opStorage	INFERRED	word 4: high16 storage class, byte2 negate, byte3 relative flag
+local	_PPCRuntimeCompilerRegisterContainsData	param_8	opFlags5	INFERRED	word 5: byte0 vector flag, byte1 component count
+local	_PPCRuntimeCompilerRegisterContainsData	param_9	opType	INFERRED	word 6: value type (0/1 float, 3/4 int)
+local	_PPCRuntimeCompilerRegisterContainsData	param_10	opWord7	INFERRED	word 7: write mask / condition bits (unused for sources)
+local	_PPCRuntimeCompilerRegisterContainsData	param_11	opWord8	INFERRED	word 8: condition swizzle z,w (unused for sources)
+local	_PPCRuntimeCompilerRegisterContainsData	param_12	element	INFERRED	vec4 slot (array element) of the operand: indexes the record swizzle bytes
+local	_PPCRuntimeCompilerLoadRegister	param_2	regIndex	CONFIRMED	register index (0x20 added in vector mode)
+local	_PPCRuntimeCompilerLoadRegister	param_3	opOffsets	INFERRED	operand descriptor word 0: pointer to the 4-int component offset table
+local	_PPCRuntimeCompilerLoadRegister	param_4	opBank	INFERRED	word 1: bank index
+local	_PPCRuntimeCompilerLoadRegister	param_5	opSwizzle	INFERRED	word 2: four swizzle bytes
+local	_PPCRuntimeCompilerLoadRegister	param_6	opIndexInfo	INFERRED	word 3: high16 relative-address offset
+local	_PPCRuntimeCompilerLoadRegister	param_7	opStorage	INFERRED	word 4: high16 storage class, byte2 negate, byte3 relative flag
+local	_PPCRuntimeCompilerLoadRegister	param_8	opFlags5	INFERRED	word 5: byte0 vector flag, byte1 component count
+local	_PPCRuntimeCompilerLoadRegister	param_9	opType	INFERRED	word 6: value type (0/1 float, 3/4 int)
+local	_PPCRuntimeCompilerLoadRegister	param_10	opWord7	INFERRED	word 7: write mask / condition bits (unused for sources)
+local	_PPCRuntimeCompilerLoadRegister	param_11	opWord8	INFERRED	word 8: condition swizzle z,w (unused for sources)
+local	_PPCRuntimeCompilerLoadRegister	param_12	element	INFERRED	vec4 slot (array element) of the operand
+local	_PPCRuntimeCompilerSetRegister	param_2	regIndex	CONFIRMED	register index
+local	_PPCRuntimeCompilerSetRegister	param_3	opOffsets	CONFIRMED	copied into the register record at +8 (0x24 bytes): operand descriptor word 0: pointer to the 4-int component offset table
+local	_PPCRuntimeCompilerSetRegister	param_4	opBank	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 1: bank index
+local	_PPCRuntimeCompilerSetRegister	param_5	opSwizzle	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 2: four swizzle bytes
+local	_PPCRuntimeCompilerSetRegister	param_6	opIndexInfo	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 3: high16 relative-address offset
+local	_PPCRuntimeCompilerSetRegister	param_7	opStorage	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 4: high16 storage class, byte2 negate, byte3 relative flag
+local	_PPCRuntimeCompilerSetRegister	param_8	opFlags5	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 5: byte0 vector flag, byte1 component count
+local	_PPCRuntimeCompilerSetRegister	param_9	opType	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 6: value type (0/1 float, 3/4 int)
+local	_PPCRuntimeCompilerSetRegister	param_10	opWord7	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 7: write mask / condition bits (unused for sources)
+local	_PPCRuntimeCompilerSetRegister	param_11	opWord8	CONFIRMED	copied into the register record at +8 (0x24 bytes): word 8: condition swizzle z,w (unused for sources)
+local	_PPCRuntimeCompilerSetRegister	param_12	recordFlag	INFERRED	stored at record+0x34
+local	_PPCRuntimeCompilerSetRegister	param_13	element	CONFIRMED	stored at record+4
+local	_PPCRuntimeCompilerLoadSourceNO	param_2	opOffsets	INFERRED	operand descriptor word 0: pointer to the 4-int component offset table
+local	_PPCRuntimeCompilerLoadSourceNO	param_3	opBank	INFERRED	word 1: bank index
+local	_PPCRuntimeCompilerLoadSourceNO	param_4	opSwizzle	INFERRED	word 2: four swizzle bytes
+local	_PPCRuntimeCompilerLoadSourceNO	param_5	opIndexInfo	INFERRED	word 3: high16 relative-address offset
+local	_PPCRuntimeCompilerLoadSourceNO	param_6	opStorage	INFERRED	word 4: high16 storage class, byte2 negate, byte3 relative flag
+local	_PPCRuntimeCompilerLoadSourceNO	param_7	opFlags5	INFERRED	word 5: byte0 vector flag, byte1 component count
+local	_PPCRuntimeCompilerLoadSourceNO	param_8	opType	INFERRED	word 6: value type (0/1 float, 3/4 int)
+local	_PPCRuntimeCompilerLoadSourceNO	param_9	opWord7	INFERRED	word 7: write mask / condition bits (unused for sources)
+local	_PPCRuntimeCompilerLoadSourceNO	param_10	opWord8	INFERRED	word 8: condition swizzle z,w (unused for sources)
+local	_PPCRuntimeCompilerLoadSourceNO	param_11	element	INFERRED	vec4 slot (array element) of the operand
+local	_PPCRuntimeCompilerLoadSourceNO	param_12	sourceSlot	CONFIRMED	source slot 0..2: the 4 registers slot*4..slot*4+3 receive the components
+local	_PPCRuntimeCompilerLoadSourceAV	param_2	opOffsets	INFERRED	operand descriptor word 0: pointer to the 4-int component offset table
+local	_PPCRuntimeCompilerLoadSourceAV	param_3	opBank	INFERRED	word 1: bank index
+local	_PPCRuntimeCompilerLoadSourceAV	param_4	opSwizzle	INFERRED	word 2: four swizzle bytes
+local	_PPCRuntimeCompilerLoadSourceAV	param_5	opIndexInfo	INFERRED	word 3: high16 relative-address offset
+local	_PPCRuntimeCompilerLoadSourceAV	param_6	opStorage	INFERRED	word 4: high16 storage class, byte2 negate, byte3 relative flag
+local	_PPCRuntimeCompilerLoadSourceAV	param_7	opFlags5	INFERRED	word 5: byte0 vector flag, byte1 component count
+local	_PPCRuntimeCompilerLoadSourceAV	param_8	opType	INFERRED	word 6: value type (0/1 float, 3/4 int)
+local	_PPCRuntimeCompilerLoadSourceAV	param_9	opWord7	INFERRED	word 7: write mask / condition bits (unused for sources)
+local	_PPCRuntimeCompilerLoadSourceAV	param_10	opWord8	INFERRED	word 8: condition swizzle z,w (unused for sources)
+local	_PPCRuntimeCompilerLoadSourceAV	param_11	element	INFERRED	vec4 slot (array element) of the operand
+local	_PPCRuntimeCompilerLoadSourceAV	param_12	sourceSlot	INFERRED	source slot 0/1 (vector registers v0/v1 receive the operand)
+local	_PPCRuntimeCompilerBackupRegister	param_2	regIndex	CONFIRMED	register index (0x20 added in vector mode)
+local	_PPCRuntimeCompilerSaveRegisterToMemory	param_2	regIndex	CONFIRMED	register index

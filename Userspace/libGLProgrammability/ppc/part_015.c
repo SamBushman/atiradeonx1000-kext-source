@@ -415,19 +415,19 @@ int _PPCRuntimeCompilerFindVariableInfo(compiler, param_2, param_3, param_4, par
 }
 
 /* _PPCRuntimeCompilerLoadSourceNO @ 0x97bdab20 (348 bytes) */
-int _PPCRuntimeCompilerLoadSourceNO(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+int _PPCRuntimeCompilerLoadSourceNO(compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8, element, sourceSlot)
   int compiler;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  int param_12;
+  undefined4 opOffsets;
+  undefined4 opBank;
+  undefined4 opSwizzle;
+  undefined4 opIndexInfo;
+  undefined4 opStorage;
+  undefined4 opFlags5;
+  undefined4 opType;
+  undefined4 opWord7;
+  undefined4 opWord8;
+  undefined4 element;
+  int sourceSlot;
 {
   int chunkIndex;
   uint loopIndex;
@@ -445,14 +445,14 @@ int _PPCRuntimeCompilerLoadSourceNO(compiler, param_2, param_3, param_4, param_5
   undefined4 uStack00000030;
   undefined4 uStack00000034;
   
-  iVar1 = param_12 * 4;
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  iVar1 = sourceSlot * 4;
+  uStack0000001c = opOffsets;
+  uStack00000020 = opBank;
+  uStack00000024 = opSwizzle;
+  uStack00000028 = opIndexInfo;
+  uStack0000002c = opStorage;
+  uStack00000030 = opFlags5;
+  uStack00000034 = opType;
   if ((*(uint *)(compiler + 0xe50) & 4) != 0) {
     loopIndex = 0;
     do {
@@ -467,22 +467,22 @@ int _PPCRuntimeCompilerLoadSourceNO(compiler, param_2, param_3, param_4, param_5
     uVar6 = uVar5 + 1;
     _PPCRuntimeCompilerLoadRegister
               (compiler,iVar1 + uVar5,uStack0000001c,uStack00000020,uStack00000024,uStack00000028,
-               uStack0000002c,uStack00000030,uStack00000034,param_9,param_10,uVar5);
+               uStack0000002c,uStack00000030,uStack00000034,opWord7,opWord8,uVar5);
     uVar5 = uVar6;
   } while (uVar6 < 4);
   if ((*(unsigned char *)((unsigned char *)&(uStack0000002c) + 2)) == '\0') {
     return;
   }
-  if (param_12 == 0) {
+  if (sourceSlot == 0) {
     codeCursor = *(undefined4 *)(compiler + 0xe30);
     puVar2 = &_glpNegateSourceARTC;
   }
-  else if (param_12 == 1) {
+  else if (sourceSlot == 1) {
     codeCursor = *(undefined4 *)(compiler + 0xe30);
     puVar2 = &_glpNegateSourceBRTC;
   }
   else {
-    if (param_12 != 2) goto LAB_97bdac4c;
+    if (sourceSlot != 2) goto LAB_97bdac4c;
     codeCursor = *(undefined4 *)(compiler + 0xe30);
     puVar2 = &_glpNegateSourceCRTC;
   }
@@ -499,19 +499,19 @@ LAB_97bdac4c:
 }
 
 /* _PPCRuntimeCompilerLoadSourceAV @ 0x97bdac7c (268 bytes) */
-int _PPCRuntimeCompilerLoadSourceAV(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
+int _PPCRuntimeCompilerLoadSourceAV(compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8, element, sourceSlot)
   int compiler;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  int param_11;
-  int param_12;
+  int opOffsets;
+  undefined4 opBank;
+  undefined4 opSwizzle;
+  undefined4 opIndexInfo;
+  undefined4 opStorage;
+  undefined4 opFlags5;
+  undefined4 opType;
+  undefined4 opWord7;
+  undefined4 opWord8;
+  int element;
+  int sourceSlot;
 {
   uint *codeCursor;
   int iStack0000001c;
@@ -522,26 +522,26 @@ int _PPCRuntimeCompilerLoadSourceAV(compiler, param_2, param_3, param_4, param_5
   undefined4 uStack00000030;
   undefined4 uStack00000034;
   
-  iStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  iStack0000001c = opOffsets;
+  uStack00000020 = opBank;
+  uStack00000024 = opSwizzle;
+  uStack00000028 = opIndexInfo;
+  uStack0000002c = opStorage;
+  uStack00000030 = opFlags5;
+  uStack00000034 = opType;
   if ((*(uint *)(compiler + 0xe50) & 4) != 0) {
-    _PPCRuntimeCompilerBackupRegister(compiler,param_12);
-    _PPCRuntimeCompilerDirtyRegister(compiler,param_12);
+    _PPCRuntimeCompilerBackupRegister(compiler,sourceSlot);
+    _PPCRuntimeCompilerDirtyRegister(compiler,sourceSlot);
   }
-  iStack0000001c = iStack0000001c + param_11 * 0x10;
+  iStack0000001c = iStack0000001c + element * 0x10;
   _PPCRuntimeCompilerLoadRegister
-            (compiler,param_12,iStack0000001c,uStack00000020,uStack00000024,uStack00000028,
-             uStack0000002c,uStack00000030,uStack00000034,param_9,param_10,0);
+            (compiler,sourceSlot,iStack0000001c,uStack00000020,uStack00000024,uStack00000028,
+             uStack0000002c,uStack00000030,uStack00000034,opWord7,opWord8,0);
   if ((*(unsigned char *)((unsigned char *)&(uStack0000002c) + 2)) != '\0') {
     codeCursor = *(uint **)(compiler + 0xe30);
-    *codeCursor = param_12 << 0x15 | param_12 << 0x10 | 0x10003cc4;
+    *codeCursor = sourceSlot << 0x15 | sourceSlot << 0x10 | 0x10003cc4;
     *(uint **)(compiler + 0xe30) = codeCursor + 1;
-    _PPCRuntimeCompilerDirtyRegister(compiler,param_12);
+    _PPCRuntimeCompilerDirtyRegister(compiler,sourceSlot);
     return;
   }
   return;
