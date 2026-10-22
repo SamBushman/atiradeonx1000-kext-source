@@ -1,0 +1,2 @@
+# use	FUNCTION	old	new	tier	evidence	from	to
+use	__AllocateSurface	uVar1	alignedPitch	CONFIRMED	dword-aligned (0x7f mask) pitch, stored to surfaceDesc[6] and used for the buffer size	uVar1 = param_3\[4\] \* puVar3\[10\] \+ 0x7f	uVar1 = param_3\[6\];

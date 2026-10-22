@@ -8,4 +8,15 @@ tar czf $T/v.tgz -C $T base cand
 R=rung3/vn_$N
 ssh G5 "rm -rf $R; mkdir -p $R" && scp -q $T/v.tgz G5:$R/v.tgz || exit 2
 ssh G5 "cd $R && tar xzf v.tgz && for s in base cand; do (cd \$s/$D && for f in part_*.c; do gcc -arch ppc -w -c \$f -o \${f%.c}.o 2> \${f%.c}.err || echo FAIL \$s \$f; done); done; n=0; bad=0; for f in base/$D/part_*.o; do b=\$(basename \$f); n=\$((n+1)); cmp -s \$f cand/$D/\$b || { bad=\$((bad+1)); echo DIFFERENT \$b; }; done; echo \$n objects, \$bad different" | tee $T/result.txt
-tail -1 $T/result.txt | grep -q ' 0 different$' && echo IDENTICAL || { echo NOT-IDENTICAL; exit 1; }
+if tail -1 $T/result.txt | grep -q ' 0 different$'; then echo IDENTICAL; exit 0; fi
+[ -n "$SPLITS" ] || { echo NOT-IDENTICAL; exit 1; }
+# SPLITS=1: per-use splits move gcc -O0 stack slots, so objects may differ; accept when Tools/userspace/split_equiv.py proves the same code, a
+# many-to-one slot map and no new -Wuninitialized warning (compiled -O1) for every differing part
+H=$(dirname $0); rc=0
+for part in $(grep '^DIFFERENT' $T/result.txt | awk '{print $2}' | sed 's/\.o$//'); do
+  ssh G5 "cd $R && for s in base cand; do (cd \$s/$D && otool -arch ppc -tV $part.o > $part.dis; gcc -arch ppc -O1 -Wuninitialized -c $part.c -o /dev/null 2> $part.warn); done"
+  for s in base cand; do scp -q G5:$R/$s/$D/$part.dis $T/$s.$part.dis; scp -q G5:$R/$s/$D/$part.warn $T/$s.$part.warn; done
+  python3 $H/split_equiv.py $T/base.$part.dis $T/cand.$part.dis $T/base.$part.warn $T/cand.$part.warn | tail -8 || rc=1
+  python3 $H/split_equiv.py $T/base.$part.dis $T/cand.$part.dis $T/base.$part.warn $T/cand.$part.warn > /dev/null || rc=1
+done
+[ $rc = 0 ] && echo SPLIT-EQUIVALENT || { echo NOT-EQUIVALENT; exit 1; }

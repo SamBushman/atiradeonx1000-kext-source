@@ -29,6 +29,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
   uint scalarIn0;
   uint scalarIn1;
   uint scalarIn2;
+  uint alignedPitch;
   
   record = (undefined4 *)_calloc(1,0x3c);
   if ((flags & 1) == 0) {
@@ -176,9 +177,9 @@ LAB_00002cb0:
       if (((flags & 0x10) != 0) &&
          (status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,0,
                                       record + 0xb,&tiledFormatCode,record + 0xe), status != 0)) {
-        uVar1 = surfaceDesc[4] * record[10] + 0x7f & 0xffffff80;
-        scalarIn1 = (surfaceDesc[5] + 1) * uVar1;
-        surfaceDesc[6] = uVar1;
+        alignedPitch = surfaceDesc[4] * record[10] + 0x7f & 0xffffff80;
+        scalarIn1 = (surfaceDesc[5] + 1) * alignedPitch;
+        surfaceDesc[6] = alignedPitch;
         scalarIn0 = tiledFormatCode;
         outCount = 2;
         status = _io_connect_method_scalarI_scalarO
