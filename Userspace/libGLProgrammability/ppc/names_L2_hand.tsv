@@ -1,0 +1,10 @@
+local	GetBuiltInChunkForSymbol	param_1	parseSymbol	INFERRED	passed to ParseSymbol__GetDirectIndex(param_1,0); +0x14 holds the name text and +0x20 its length (the hash loop reads them)
+local	GetBuiltInChunkForSymbol	iVar11	nameHash	CONFIRMED	sum over the symbol's characters of c * (3 + 2*i); the function is a switch over this value against constants (0x10f9c, 0x81d5, ...)
+local	GetBuiltInChunkForSymbol	iVar12	chunk	CONFIRMED	result of _PPStreamChunkCreateWithType; its word at +0xc is filled in and it is returned
+local	GetBuiltInChunkForSymbol	uVar6	chunkWord	CONFIRMED	every definition is the new value stored to *(chunk + 0xc)
+local	GetBuiltInChunkForSymbol	uVar8	chunkType	CONFIRMED	the constant first argument of _PPStreamChunkCreateWithType
+local	GetBuiltInChunkForSymbol	bVar1	hashMatches	INFERRED	bVar1 = nameHash == constant, tested right after
+local	GetBuiltInChunkForSymbol	iVar10	charIndex	INFERRED	0..length-1 index of the character read in the hash loop
+local	GetBuiltInChunkForSymbol	iVar7	charWeight	INFERRED	starts at 3 and grows by 2 per character: the multiplier in the hash
+local	GetBuiltInChunkForSymbol	iVar4	weightedChar	INFERRED	character * charWeight, added to nameHash
+local	GetBuiltInChunkForSymbol	pcVar2	charPtr	INFERRED	points at the current name character in the hash loop
