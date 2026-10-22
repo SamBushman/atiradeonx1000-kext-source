@@ -563,7 +563,7 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(param_1, param_2)
   ulong param_1;
   unsigned char * param_2;
 {
-  undefined4 uVar1;
+  undefined4 atomicStore;
   undefined *puVar2;
   uint uVar3;
   undefined4 *puVar4;
@@ -595,8 +595,8 @@ LAB_97c164a4:
       if (iVar5 == 0) {
         do {
           if (in_RESERVE != '\0') {
-            uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
-            *(undefined4 *)puVar2 = uVar1;
+            atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
+            *(undefined4 *)puVar2 = atomicStore;
             in_cr0 = 2;
           }
         } while (!(bool)(in_cr0 >> 1 & 1));
@@ -604,8 +604,8 @@ LAB_97c164a4:
       else {
         do {
           if (in_RESERVE != '\0') {
-            uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
-            *(undefined4 *)puVar2 = uVar1;
+            atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
+            *(undefined4 *)puVar2 = atomicStore;
             in_cr0 = 2;
           }
         } while (!(bool)(in_cr0 >> 1 & 1));

@@ -83,15 +83,15 @@ int yy_scan_string(param_1)
   char *param_1;
 {
   char ch;
-  int iVar2;
+  int copyIndex;
   
-  iVar2 = 0;
+  copyIndex = 0;
   ch = *param_1;
   while (ch != '\0') {
-    iVar2 = iVar2 + 1;
-    ch = param_1[iVar2];
+    copyIndex = copyIndex + 1;
+    ch = param_1[copyIndex];
   }
-  return ((int (*)())yy_scan_bytes)(param_1,iVar2);
+  return ((int (*)())yy_scan_bytes)(param_1,copyIndex);
 }
 
 /* yy_scan_bytes @ 0x97badce4 (176 bytes) */
@@ -382,7 +382,7 @@ int _CPPDebugLogMsg(param_1)
 int _CPPWarningToInfoLog(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   uint uVar2;
   int *piVar3;
   int iVar4;
@@ -414,8 +414,8 @@ int _CPPWarningToInfoLog(param_1)
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -634,7 +634,7 @@ LAB_97bae84c:
 int _StoreStr(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   ulong length;
@@ -661,8 +661,8 @@ int _StoreStr(param_1)
   piVar2 = (int *)(DAT_a7b7baa8 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -678,8 +678,8 @@ int _StoreStr(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -699,8 +699,8 @@ int _StoreStr(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -713,8 +713,8 @@ int _StoreStr(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -728,8 +728,8 @@ int _StoreStr(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -797,7 +797,7 @@ int _GetBehavior(param_1)
 {
   int compareResult;
   byte bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   undefined4 uVar5;
@@ -851,8 +851,8 @@ int _GetBehavior(param_1)
           do {
             iVar4 = *piVar3;
             if (in_RESERVE != '\0') {
-              iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-              *piVar3 = iVar2;
+              atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+              *piVar3 = atomicStore;
               in_cr0 = 2;
             }
           } while (!(bool)(in_cr0 >> 1 & 1));
@@ -865,8 +865,8 @@ int _GetBehavior(param_1)
           do {
             iVar4 = *piVar3;
             if (in_RESERVE != '\0') {
-              iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-              *piVar3 = iVar2;
+              atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+              *piVar3 = atomicStore;
               in_cr0 = 2;
             }
           } while (!(bool)(in_cr0 >> 1 & 1));
@@ -879,8 +879,8 @@ int _GetBehavior(param_1)
           do {
             iVar4 = *piVar3;
             if (in_RESERVE != '\0') {
-              iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-              *piVar3 = iVar2;
+              atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+              *piVar3 = atomicStore;
               in_cr0 = 2;
             }
           } while (!(bool)(in_cr0 >> 1 & 1));
@@ -901,9 +901,10 @@ int _updateExtensionBehavior(param_1, param_2)
   char *param_1;
   undefined4 param_2;
 {
+  uint behavior2;
   int compareResult;
   byte bVar1;
-  int iVar2;
+  int atomicStore;
   undefined *puVar3;
   char *pcVar4;
   int *piVar5;
@@ -955,13 +956,13 @@ int _updateExtensionBehavior(param_1, param_2)
   undefined4 local_40 [4];
   undefined4 local_30 [5];
   
-  uVar6 = ((int (*)())_GetBehavior)(param_2);
+  behavior2 = ((int (*)())_GetBehavior)(param_2);
   iVar7 = DAT_a7b7baa8;
   piVar5 = (int *)(DAT_a7b7baa8 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(*piVar5 + 1,0,piVar5);
-      *piVar5 = iVar2;
+      atomicStore = storeWordConditionalIndexed(*piVar5 + 1,0,piVar5);
+      *piVar5 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -972,12 +973,12 @@ int _updateExtensionBehavior(param_1, param_2)
   compareResult = _memcmp(param_1,"all",4);
   puVar3 = PTR__cpp_a7b7c0a4;
   if (compareResult == 0) {
-    if (1 < uVar6) {
+    if (1 < behavior2) {
       local_1f0[0] = *(int *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x34) + 8);
       local_1c0 = local_1f0[0];
       while (local_1b0 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34), local_1f0[0] != local_1b0
             ) {
-        *(uint *)(local_1f0[0] + 0x18) = uVar6;
+        *(uint *)(local_1f0[0] + 0x18) = behavior2;
         std___Rb_tree_base_iterator___M_increment((unsigned char *)local_1f0);
       }
 LAB_97baf31c:
@@ -986,8 +987,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1004,8 +1005,8 @@ LAB_97baf31c:
     do {
       iVar7 = *piVar5;
       if (in_RESERVE != '\0') {
-        iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-        *piVar5 = iVar2;
+        atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+        *piVar5 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1023,8 +1024,8 @@ LAB_97baf31c:
     do {
       iVar7 = *piVar5;
       if (in_RESERVE != '\0') {
-        iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-        *piVar5 = iVar2;
+        atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+        *piVar5 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1034,10 +1035,10 @@ LAB_97baf31c:
     }
     local_160 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34);
     if (local_1f0[0] != local_160) {
-      *(uint *)(local_1f0[0] + 0x18) = uVar6;
+      *(uint *)(local_1f0[0] + 0x18) = behavior2;
       goto LAB_97baf31c;
     }
-    if (uVar6 == 0) {
+    if (behavior2 == 0) {
       local_120[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
                 ((unsigned char *)&local_130,"extension \'",(unsigned char *)local_120);
@@ -1058,8 +1059,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1072,8 +1073,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1086,8 +1087,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1096,7 +1097,7 @@ LAB_97baf31c:
                   ((unsigned char *)(local_12c + -0xc),local_f0);
       }
     }
-    else if ((-1 < (int)uVar6) && ((int)uVar6 < 4)) {
+    else if ((-1 < (int)behavior2) && ((int)behavior2 < 4)) {
       local_d0[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
                 ((unsigned char *)&local_e0,"extension \'",(unsigned char *)local_d0);
@@ -1116,8 +1117,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1130,8 +1131,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1144,8 +1145,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1175,8 +1176,8 @@ LAB_97baf31c:
       do {
         iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-          *piVar5 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1192,8 +1193,8 @@ LAB_97baf31c:
     do {
       iVar7 = *piVar5;
       if (in_RESERVE != '\0') {
-        iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
-        *piVar5 = iVar2;
+        atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+        *piVar5 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1221,19 +1222,19 @@ int scpy(param_1, param_2)
   char *param_2;
 {
   char ch;
-  int iVar2;
+  int copyIndex;
   
   ch = *param_2;
-  iVar2 = 0;
+  copyIndex = 0;
   if (ch != '\0') {
     do {
-      param_1[iVar2] = ch;
-      iVar2 = iVar2 + 1;
-      ch = param_2[iVar2];
+      param_1[copyIndex] = ch;
+      copyIndex = copyIndex + 1;
+      ch = param_2[copyIndex];
     } while (ch != '\0');
-    return iVar2;
+    return copyIndex;
   }
-  return iVar2;
+  return copyIndex;
 }
 
 /* handleDigit @ 0x97baf3b8 (112 bytes) */
@@ -1276,7 +1277,7 @@ int PrintAttribute(param_1, param_2)
 {
   uint uVar1;
   char *allocation;
-  int iVar3;
+  int copyEnd;
   char *pcVar4;
   char *pcVar5;
   uint uStack00000018;
@@ -1285,8 +1286,8 @@ int PrintAttribute(param_1, param_2)
   uStack00000018 = param_1;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x100);
-  iVar3 = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  pcVar5 = allocation + iVar3;
+  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
+  pcVar5 = allocation + copyEnd;
   switch(uStack00000018 >> 0x10 & 0xf) {
   case 0:
     pcVar4 = ": PP_BIND_ATTRIB_NONE";
@@ -1318,15 +1319,15 @@ int PrintAttribute(param_1, param_2)
   case 9:
     pcVar4 = ": PP_BIND_ATTRIB_ATTRIB:";
 LAB_97baf584:
-    iVar3 = ((int (*)())scpy)(pcVar5,pcVar4);
-    pcVar5 = pcVar5 + iVar3;
+    copyEnd = ((int (*)())scpy)(pcVar5,pcVar4);
+    pcVar5 = pcVar5 + copyEnd;
     uVar1 = uStack00000018 & 0x1f;
 LAB_97baf658:
-    iVar3 = ((int (*)())ncpy)(pcVar5,uVar1);
+    copyEnd = ((int (*)())ncpy)(pcVar5,uVar1);
     goto LAB_97baf660;
   case 10:
-    iVar3 = ((int (*)())scpy)(pcVar5,"PP_BIND_ATTRIB_MATERIAL:");
-    pcVar5 = pcVar5 + iVar3;
+    copyEnd = ((int (*)())scpy)(pcVar5,"PP_BIND_ATTRIB_MATERIAL:");
+    pcVar5 = pcVar5 + copyEnd;
     switch(uStack00000018 >> 0xc & 0xf) {
     case 0:
       pcVar4 = "PP_ATTRIB_MATERIAL_AMBIENT:";
@@ -1346,8 +1347,8 @@ LAB_97baf658:
     default:
       goto switchD_97baf5f0_default;
     }
-    iVar3 = ((int (*)())scpy)(pcVar5,pcVar4);
-    pcVar5 = pcVar5 + iVar3;
+    copyEnd = ((int (*)())scpy)(pcVar5,pcVar4);
+    pcVar5 = pcVar5 + copyEnd;
 switchD_97baf5f0_default:
     uVar1 = uStack00000018 & 1;
     goto LAB_97baf658;
@@ -1357,9 +1358,9 @@ switchD_97baf5f0_default:
   default:
     goto switchD_97baf4e0_default;
   }
-  iVar3 = ((int (*)())scpy)(pcVar5,pcVar4);
+  copyEnd = ((int (*)())scpy)(pcVar5,pcVar4);
 LAB_97baf660:
-  pcVar5 = pcVar5 + iVar3;
+  pcVar5 = pcVar5 + copyEnd;
 switchD_97baf4e0_default:
   *pcVar5 = '\0';
   _realloc(allocation,pcVar5 + (1 - (int)allocation));
@@ -1372,8 +1373,8 @@ int PrintParam(param_1, param_2)
   uint param_2;
 {
   char *allocation;
-  int iVar2;
-  int iVar3;
+  int copyEnd;
+  int copyEnd2;
   uint uVar4;
   char *pcVar5;
   char *pcVar6;
@@ -1383,8 +1384,8 @@ int PrintParam(param_1, param_2)
   uStack00000018 = param_1;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x100);
-  iVar2 = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  pcVar6 = allocation + iVar2;
+  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
+  pcVar6 = allocation + copyEnd;
   switch(uStack00000018 >> 0x10 & 0x1f) {
   case 0:
     pcVar5 = ": PP_BIND_PARAM_NONE:";
@@ -1396,9 +1397,9 @@ int PrintParam(param_1, param_2)
     pcVar5 = ": PP_BIND_PARAM_PROGRAM_ENV:";
     goto LAB_97baf750;
   case 3:
-    iVar2 = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_LIGHT:");
-    iVar3 = ((int (*)())ncpy)(pcVar6 + iVar2,uStack00000018 & 0xff);
-    pcVar6 = pcVar6 + iVar2 + iVar3;
+    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_LIGHT:");
+    copyEnd2 = ((int (*)())ncpy)(pcVar6 + copyEnd,uStack00000018 & 0xff);
+    pcVar6 = pcVar6 + copyEnd + copyEnd2;
     switch(uStack00000018 >> 8 & 0xf) {
     case 0:
       pcVar5 = ":PP_PARAM_LIGHT_AMBIENT";
@@ -1429,13 +1430,13 @@ int PrintParam(param_1, param_2)
     }
     break;
   case 4:
-    iVar2 = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_LIGHT_PROD:");
-    pcVar6 = pcVar6 + iVar2;
-    iVar2 = ((int (*)())ncpy)(pcVar6,uStack00000018 & 0xff);
-    pcVar6 = pcVar6 + iVar2;
-    iVar2 = ((int (*)())scpy)(pcVar6,":");
-    iVar3 = ((int (*)())ncpy)(pcVar6 + iVar2,uStack00000018 >> 8 & 1);
-    pcVar6 = pcVar6 + iVar2 + iVar3;
+    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_LIGHT_PROD:");
+    pcVar6 = pcVar6 + copyEnd;
+    copyEnd = ((int (*)())ncpy)(pcVar6,uStack00000018 & 0xff);
+    pcVar6 = pcVar6 + copyEnd;
+    copyEnd = ((int (*)())scpy)(pcVar6,":");
+    copyEnd2 = ((int (*)())ncpy)(pcVar6 + copyEnd,uStack00000018 >> 8 & 1);
+    pcVar6 = pcVar6 + copyEnd + copyEnd2;
     uVar4 = uStack00000018 >> 9 & 3;
     if (uVar4 == 1) {
       pcVar5 = ":PP_PARAM_LIGHT_PROD_DIFFUSE";
@@ -1449,9 +1450,9 @@ int PrintParam(param_1, param_2)
     }
     break;
   case 5:
-    iVar2 = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_MATERIAL:");
-    iVar3 = ((int (*)())ncpy)(pcVar6 + iVar2,uStack00000018 & 1);
-    pcVar6 = pcVar6 + iVar2 + iVar3;
+    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_MATERIAL:");
+    copyEnd2 = ((int (*)())ncpy)(pcVar6 + copyEnd,uStack00000018 & 1);
+    pcVar6 = pcVar6 + copyEnd + copyEnd2;
     switch(uStack00000018 >> 1 & 7) {
     case 0:
       pcVar5 = ":PP_PARAM_MATERIAL_AMBIENT";
@@ -1484,14 +1485,14 @@ int PrintParam(param_1, param_2)
   case 8:
     pcVar5 = ": PP_BIND_PARAM_TEX_GEN_OBJECT_PLANE:";
 LAB_97baf9a4:
-    iVar2 = ((int (*)())scpy)(pcVar6,pcVar5);
-    pcVar6 = pcVar6 + iVar2;
+    copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
+    pcVar6 = pcVar6 + copyEnd;
     uVar4 = uStack00000018 >> 5 & 7;
     if (uVar4 == 1) {
       pcVar5 = "PP_PARAM_TEX_GEN_COORD_T:";
 LAB_97bafa10:
-      iVar2 = ((int (*)())scpy)(pcVar6,pcVar5);
-      pcVar6 = pcVar6 + iVar2;
+      copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
+      pcVar6 = pcVar6 + copyEnd;
     }
     else {
       if (uVar4 == 0) {
@@ -1531,14 +1532,14 @@ LAB_97bafa10:
     pcVar5 = ": PP_BIND_PARAM_DEPTH_RANGE";
     break;
   case 0x10:
-    iVar2 = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_MATRIX:");
-    pcVar6 = pcVar6 + iVar2;
+    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_MATRIX:");
+    pcVar6 = pcVar6 + copyEnd;
     uVar4 = uStack00000018 >> 0xe & 3;
     if (uVar4 == 1) {
       pcVar5 = "PP_MATRIX_TRANSFORM_TRANSPOSE:";
 LAB_97bafae0:
-      iVar2 = ((int (*)())scpy)(pcVar6,pcVar5);
-      pcVar6 = pcVar6 + iVar2;
+      copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
+      pcVar6 = pcVar6 + copyEnd;
     }
     else {
       if (uVar4 == 0) {
@@ -1554,8 +1555,8 @@ LAB_97bafae0:
         goto LAB_97bafae0;
       }
     }
-    iVar2 = ((int (*)())ncpy)(pcVar6,uStack00000018 >> 0xc & 3);
-    pcVar6 = pcVar6 + iVar2;
+    copyEnd = ((int (*)())ncpy)(pcVar6,uStack00000018 >> 0xc & 3);
+    pcVar6 = pcVar6 + copyEnd;
     switch(uStack00000018 >> 8 & 7) {
     case 0:
       pcVar5 = ":PP_PARAM_MATRIX_MODELVIEW_PROJECTION";
@@ -1575,7 +1576,7 @@ LAB_97bafae0:
     case 5:
       pcVar5 = ":PP_PARAM_MATRIX_PROGRAM:";
 LAB_97bafb84:
-      iVar2 = ((int (*)())scpy)(pcVar6,pcVar5);
+      copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
       uVar4 = uStack00000018 & 0xff;
       goto LAB_97baf75c;
     default:
@@ -1585,19 +1586,19 @@ LAB_97bafb84:
   case 0x11:
     pcVar5 = ": PP_BIND_PARAM_CONSTANT:";
 LAB_97baf750:
-    iVar2 = ((int (*)())scpy)(pcVar6,pcVar5);
+    copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
     uVar4 = uStack00000018 & 0xffff;
 LAB_97baf75c:
-    pcVar6 = pcVar6 + iVar2;
+    pcVar6 = pcVar6 + copyEnd;
 LAB_97baf760:
-    iVar2 = ((int (*)())ncpy)(pcVar6,uVar4);
+    copyEnd = ((int (*)())ncpy)(pcVar6,uVar4);
     goto LAB_97bafbc8;
   case 0x12:
     pcVar5 = ": PP_BIND_PARAM_NORMAL_SCALE";
   }
-  iVar2 = ((int (*)())scpy)(pcVar6,pcVar5);
+  copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
 LAB_97bafbc8:
-  pcVar6 = pcVar6 + iVar2;
+  pcVar6 = pcVar6 + copyEnd;
 switchD_97bafb24_default:
   *pcVar6 = '\0';
   _realloc(allocation,pcVar6 + (1 - (int)allocation));
@@ -1610,8 +1611,8 @@ int PrintOutput(param_1, param_2)
   uint param_2;
 {
   char *allocation;
-  int iVar2;
-  int iVar3;
+  int copyEnd;
+  int copyEnd2;
   undefined4 allocation2;
   uint uVar5;
   char *pcVar6;
@@ -1622,8 +1623,8 @@ int PrintOutput(param_1, param_2)
   uStack00000018 = param_1;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x100);
-  iVar2 = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  pcVar7 = allocation + iVar2;
+  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
+  pcVar7 = allocation + copyEnd;
   switch(uStack00000018 >> 0x10 & 0xf) {
   default:
     pcVar6 = ": Error, binding not found.";
@@ -1638,20 +1639,20 @@ int PrintOutput(param_1, param_2)
     pcVar6 = ": PP_BIND_OUTPUT_RESULT_POINT_SIZE";
     break;
   case 4:
-    iVar2 = ((int (*)())scpy)(pcVar7,": PP_BIND_OUTPUT_RESULT_COLOR:");
+    copyEnd = ((int (*)())scpy)(pcVar7,": PP_BIND_OUTPUT_RESULT_COLOR:");
     if ((uStack00000018 & 1) == 0) {
       pcVar6 = "PP_FACE_FRONT:";
     }
     else {
       pcVar6 = "PP_FACE_BACK:";
     }
-    iVar3 = ((int (*)())scpy)(pcVar7 + iVar2,pcVar6);
-    pcVar7 = pcVar7 + iVar2 + iVar3;
+    copyEnd2 = ((int (*)())scpy)(pcVar7 + copyEnd,pcVar6);
+    pcVar7 = pcVar7 + copyEnd + copyEnd2;
     uVar5 = uStack00000018 >> 1 & 7;
     goto LAB_97bafcf4;
   case 5:
-    iVar2 = ((int (*)())scpy)(pcVar7,": PP_BIND_OUTPUT_RESULT_SEC_COLOR:");
-    pcVar7 = pcVar7 + iVar2;
+    copyEnd = ((int (*)())scpy)(pcVar7,": PP_BIND_OUTPUT_RESULT_SEC_COLOR:");
+    pcVar7 = pcVar7 + copyEnd;
     if ((uStack00000018 & 1) == 0) {
       pcVar6 = "PP_FACE_FRONT";
     }
@@ -1674,17 +1675,17 @@ int PrintOutput(param_1, param_2)
   case 10:
     pcVar6 = ": PP_BIND_OUTPUT_RESULT_ATTRIB:";
 LAB_97bafd6c:
-    iVar2 = ((int (*)())scpy)(pcVar7,pcVar6);
-    pcVar7 = pcVar7 + iVar2;
+    copyEnd = ((int (*)())scpy)(pcVar7,pcVar6);
+    pcVar7 = pcVar7 + copyEnd;
     uVar5 = uStack00000018 & 0x1f;
 LAB_97bafcf4:
-    iVar2 = ((int (*)())ncpy)(pcVar7,uVar5);
+    copyEnd = ((int (*)())ncpy)(pcVar7,uVar5);
     goto LAB_97bafd98;
   }
-  iVar2 = ((int (*)())scpy)(pcVar7,pcVar6);
+  copyEnd = ((int (*)())scpy)(pcVar7,pcVar6);
 LAB_97bafd98:
-  pcVar7[iVar2] = '\0';
-  allocation2 = _realloc(allocation,pcVar7 + iVar2 + (1 - (int)allocation));
+  pcVar7[copyEnd] = '\0';
+  allocation2 = _realloc(allocation,pcVar7 + copyEnd + (1 - (int)allocation));
   return allocation2;
 }
 
@@ -1694,15 +1695,15 @@ int PrintTemp(param_1, param_2)
   uint param_2;
 {
   char *allocation;
-  int iVar2;
+  int copyEnd;
   undefined4 uStack00000018;
   uint uStack0000001c;
   
   uStack00000018 = param_1;
   uStack0000001c = param_2;
   allocation = (char *)_malloc(0x10);
-  iVar2 = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  allocation[iVar2] = '\0';
+  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
+  allocation[copyEnd] = '\0';
   return allocation;
 }
 
@@ -1892,10 +1893,11 @@ int __ZN7BindingC4ERKS_(this, param_2)
   void *this;
   unsigned char * param_2;
 {
+  undefined4 isBuiltIn;
   ulong actualSize;
   int activeIndex;
   int location;
-  undefined4 uVar2;
+  undefined4 isClientRequest;
   ushort openGLType;
   ulong decSize;
   char *pcVar5;
@@ -1909,10 +1911,10 @@ int __ZN7BindingC4ERKS_(this, param_2)
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(param_2);
   Binding__SetActiveIndex(this,activeIndex);
-  uVar2 = ((int (*)())Binding__IsClientRequest)(param_2);
-  ((int (*)())Binding__SetClientRequest)(this,uVar2);
-  uVar2 = ((int (*)())Binding__IsBuiltIn)(param_2);
-  ((int (*)())Binding__SetBuiltIn)(this,uVar2);
+  isClientRequest = ((int (*)())Binding__IsClientRequest)(param_2);
+  ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
+  isBuiltIn = ((int (*)())Binding__IsBuiltIn)(param_2);
+  ((int (*)())Binding__SetBuiltIn)(this,isBuiltIn);
   openGLType = Binding__GetOpenGLType(param_2);
   Binding__SetOpenGLType(this,openGLType);
   decSize = Binding__GetDecSize(param_2);
@@ -1931,11 +1933,12 @@ int Binding__operator_(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
+  undefined4 isBuiltIn;
   ulong actualSize;
   int activeIndex;
   unsigned char BVar1;
   int location;
-  undefined4 uVar3;
+  undefined4 isClientRequest;
   ushort openGLType;
   ulong decSize;
   
@@ -1945,10 +1948,10 @@ int Binding__operator_(this, param_2)
     Binding__SetLocation(this,location);
     activeIndex = Binding__GetActiveIndex(param_2);
     Binding__SetActiveIndex(this,activeIndex);
-    uVar3 = ((int (*)())Binding__IsClientRequest)(param_2);
-    ((int (*)())Binding__SetClientRequest)(this,uVar3);
-    uVar3 = ((int (*)())Binding__IsBuiltIn)(param_2);
-    ((int (*)())Binding__SetBuiltIn)(this,uVar3);
+    isClientRequest = ((int (*)())Binding__IsClientRequest)(param_2);
+    ((int (*)())Binding__SetClientRequest)(this,isClientRequest);
+    isBuiltIn = ((int (*)())Binding__IsBuiltIn)(param_2);
+    ((int (*)())Binding__SetBuiltIn)(this,isBuiltIn);
     openGLType = Binding__GetOpenGLType(param_2);
     Binding__SetOpenGLType(this,openGLType);
     decSize = Binding__GetDecSize(param_2);

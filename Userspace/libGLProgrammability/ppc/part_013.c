@@ -19,7 +19,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   void *this;
   uint param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -83,8 +83,8 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -96,8 +96,8 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -515,1504 +515,1506 @@ int DeleteCompiler(param_1)
 }
 
 /* GetBuiltInInitialSwizzle @ 0x97bca2c8 (748 bytes) */
-int GetBuiltInInitialSwizzle(param_1)
-  unsigned char * param_1;
+int GetBuiltInInitialSwizzle(parseSymbol)
+  unsigned char * parseSymbol;
 {
-  bool bVar1;
-  char *pcVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int fieldValue;
+  bool hashMatches;
+  char *charPtr;
+  int nameLength;
+  int weightedChar;
+  int charWeight;
+  int charIndex;
+  int nameHash;
   
-  iVar3 = *(int *)(param_1 + 0x20);
-  iVar7 = 0;
-  iVar6 = 0;
-  if (0 < iVar3) {
-    iVar5 = 3;
+  nameLength = *(int *)(parseSymbol + 0x20);
+  nameHash = 0;
+  charIndex = 0;
+  if (0 < nameLength) {
+    charWeight = 3;
     do {
-      pcVar2 = (char *)(*(int *)(param_1 + 0x14) + iVar6);
-      iVar6 = iVar6 + 1;
-      iVar4 = *pcVar2 * iVar5;
-      iVar5 = iVar5 + 2;
-      iVar7 = iVar7 + iVar4;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      charPtr = (char *)(*(int *)(parseSymbol + 0x14) + charIndex);
+      charIndex = charIndex + 1;
+      weightedChar = *charPtr * charWeight;
+      charWeight = charWeight + 2;
+      nameHash = nameHash + weightedChar;
+      nameLength = nameLength + -1;
+    } while (nameLength != 0);
   }
-  if (iVar7 == 0x18ec7) {
+  if (nameHash == 0x18ec7) {
     return 3;
   }
-  if (iVar7 < 0x18ec8) {
-    if (iVar7 == 0x17e27) {
+  if (nameHash < 0x18ec8) {
+    if (nameHash == 0x17e27) {
       return 3;
     }
-    if (0x17e27 < iVar7) {
-      if (iVar7 == 0x17ecc) {
+    if (0x17e27 < nameHash) {
+      if (nameHash == 0x17ecc) {
         return 3;
       }
-      if (iVar7 < 0x17ecd) {
-        if (iVar7 == 0x17e69) {
+      if (nameHash < 0x17ecd) {
+        if (nameHash == 0x17e69) {
           return 3;
         }
-        if (iVar7 < 0x17e6a) {
-          iVar3 = 0x17e48;
+        if (nameHash < 0x17e6a) {
+          fieldValue = 0x17e48;
         }
         else {
-          if (iVar7 == 0x17e8a) {
+          if (nameHash == 0x17e8a) {
             return 3;
           }
-          iVar3 = 0x17eab;
+          fieldValue = 0x17eab;
         }
       }
       else {
-        if (iVar7 == 0x18e64) {
+        if (nameHash == 0x18e64) {
           return 3;
         }
-        if (iVar7 < 0x18e65) {
-          if (iVar7 == 0x17eed) {
+        if (nameHash < 0x18e65) {
+          if (nameHash == 0x17eed) {
             return 3;
           }
-          iVar3 = 0x18e43;
+          fieldValue = 0x18e43;
         }
         else {
-          if (iVar7 == 0x18e85) {
+          if (nameHash == 0x18e85) {
             return 3;
           }
-          iVar3 = 0x18ea6;
+          fieldValue = 0x18ea6;
         }
       }
 LAB_97bca478:
-      if (iVar7 == iVar3) {
+      if (nameHash == fieldValue) {
         return 3;
       }
       return 0;
     }
-    if (iVar7 == 0x71c3) {
+    if (nameHash == 0x71c3) {
       return 2;
     }
-    if (iVar7 < 0x71c4) {
-      if (iVar7 == 0x3f94) {
+    if (nameHash < 0x71c4) {
+      if (nameHash == 0x3f94) {
         return 3;
       }
-      if (0x3f94 < iVar7) {
-        if (iVar7 == 0x42d8) {
+      if (0x3f94 < nameHash) {
+        if (nameHash == 0x42d8) {
           return 1;
         }
-        bVar1 = iVar7 == 0x7171;
+        hashMatches = nameHash == 0x7171;
         goto LAB_97bca520;
       }
-      bVar1 = iVar7 == 0x2c25;
+      hashMatches = nameHash == 0x2c25;
       goto LAB_97bca590;
     }
-    if (iVar7 == 0x8837) {
+    if (nameHash == 0x8837) {
       return 2;
     }
-    if (0x8837 < iVar7) {
-      if (iVar7 == 0x12304) {
+    if (0x8837 < nameHash) {
+      if (nameHash == 0x12304) {
         return 3;
       }
-      iVar3 = 0x17e06;
+      fieldValue = 0x17e06;
       goto LAB_97bca478;
     }
-    bVar1 = iVar7 == 0x7a53;
+    hashMatches = nameHash == 0x7a53;
     goto LAB_97bca520;
   }
-  if (iVar7 == 0x2043a) {
+  if (nameHash == 0x2043a) {
     return 1;
   }
-  if (iVar7 < 0x2043b) {
-    if (iVar7 == 0x20374) {
+  if (nameHash < 0x2043b) {
+    if (nameHash == 0x20374) {
       return 1;
     }
-    if (iVar7 < 0x20375) {
-      if (iVar7 == 0x18f09) {
+    if (nameHash < 0x20375) {
+      if (nameHash == 0x18f09) {
         return 3;
       }
-      if (iVar7 < 0x18f0a) {
-        iVar3 = 0x18ee8;
+      if (nameHash < 0x18f0a) {
+        fieldValue = 0x18ee8;
         goto LAB_97bca478;
       }
-      if (iVar7 == 0x18f2a) {
+      if (nameHash == 0x18f2a) {
         return 3;
       }
-      iVar3 = 0x1f1a8;
+      fieldValue = 0x1f1a8;
     }
     else {
-      if (iVar7 == 0x203d7) {
+      if (nameHash == 0x203d7) {
         return 1;
       }
-      if (iVar7 < 0x203d8) {
-        if (iVar7 == 0x20395) {
+      if (nameHash < 0x203d8) {
+        if (nameHash == 0x20395) {
           return 1;
         }
-        iVar3 = 0x203b6;
+        fieldValue = 0x203b6;
       }
       else {
-        if (iVar7 == 0x203f8) {
+        if (nameHash == 0x203f8) {
           return 1;
         }
-        iVar3 = 0x20419;
+        fieldValue = 0x20419;
       }
     }
 LAB_97bca51c:
-    bVar1 = iVar7 == iVar3;
+    hashMatches = nameHash == fieldValue;
 LAB_97bca520:
-    if (bVar1) {
+    if (hashMatches) {
       return 1;
     }
     return 0;
   }
-  if (iVar7 == 0x2614d) {
+  if (nameHash == 0x2614d) {
     return 2;
   }
-  if (iVar7 < 0x2614e) {
-    if (iVar7 == 0x24cb9) {
+  if (nameHash < 0x2614e) {
+    if (nameHash == 0x24cb9) {
       return 2;
     }
-    if (iVar7 < 0x24cba) {
-      iVar3 = 0x2045b;
+    if (nameHash < 0x24cba) {
+      fieldValue = 0x2045b;
       goto LAB_97bca51c;
     }
-    if (iVar7 == 0x2610b) {
+    if (nameHash == 0x2610b) {
       return 2;
     }
-    iVar3 = 0x2612c;
+    fieldValue = 0x2612c;
   }
   else {
-    if (iVar7 == 0x261b0) {
+    if (nameHash == 0x261b0) {
       return 2;
     }
-    if (iVar7 < 0x261b1) {
-      if (iVar7 == 0x2616e) {
+    if (nameHash < 0x261b1) {
+      if (nameHash == 0x2616e) {
         return 2;
       }
-      iVar3 = 0x2618f;
+      fieldValue = 0x2618f;
     }
     else {
-      if (iVar7 == 0x261d1) {
+      if (nameHash == 0x261d1) {
         return 2;
       }
-      iVar3 = 0x261f2;
+      fieldValue = 0x261f2;
     }
   }
-  bVar1 = iVar7 == iVar3;
+  hashMatches = nameHash == fieldValue;
 LAB_97bca590:
-  if (bVar1) {
+  if (hashMatches) {
     return 2;
   }
   return 0;
 }
 
 /* GetBuiltInChunkForSymbol @ 0x97bca5b4 (8452 bytes) */
-int GetBuiltInChunkForSymbol(param_1, param_2)
-  unsigned char * param_1;
+int GetBuiltInChunkForSymbol(parseSymbol, param_2)
+  unsigned char * parseSymbol;
   int param_2;
 {
+  int fieldValue;
   uint directIndex;
-  bool bVar1;
-  char *pcVar2;
-  int iVar3;
-  int iVar4;
+  bool hashMatches;
+  char *charPtr;
+  int nameLength;
+  int weightedChar;
   uint uVar5;
-  uint uVar6;
-  int iVar7;
-  undefined4 uVar8;
+  uint chunkWord;
+  int charWeight;
+  undefined4 chunkType;
   undefined1 directIndex2;
-  int iVar10;
-  int iVar11;
-  int iVar12;
+  int charIndex;
+  int nameHash;
+  int chunk;
   
-  iVar12 = 0;
-  iVar3 = *(int *)(param_1 + 0x20);
-  iVar11 = 0;
-  iVar10 = 0;
-  if (0 < iVar3) {
-    iVar7 = 3;
+  chunk = 0;
+  nameLength = *(int *)(parseSymbol + 0x20);
+  nameHash = 0;
+  charIndex = 0;
+  if (0 < nameLength) {
+    charWeight = 3;
     do {
-      pcVar2 = (char *)(*(int *)(param_1 + 0x14) + iVar10);
-      iVar10 = iVar10 + 1;
-      iVar4 = *pcVar2 * iVar7;
-      iVar7 = iVar7 + 2;
-      iVar11 = iVar11 + iVar4;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      charPtr = (char *)(*(int *)(parseSymbol + 0x14) + charIndex);
+      charIndex = charIndex + 1;
+      weightedChar = *charPtr * charWeight;
+      charWeight = charWeight + 2;
+      nameHash = nameHash + weightedChar;
+      nameLength = nameLength + -1;
+    } while (nameLength != 0);
   }
-  if (iVar11 == 0x10f9c) {
-    iVar12 = _PPStreamChunkCreateWithType(3,0);
-    uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fff9 | 0x50009;
+  if (nameHash == 0x10f9c) {
+    chunk = _PPStreamChunkCreateWithType(3,0);
+    chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff9 | 0x50009;
     goto LAB_97bcc694;
   }
-  if (iVar11 < 0x10f9d) {
-    if (iVar11 == 0x81d5) goto LAB_97bcc54c;
-    if (iVar11 < 0x81d6) {
-      if (iVar11 == 0x5a70) {
+  if (nameHash < 0x10f9d) {
+    if (nameHash == 0x81d5) goto LAB_97bcc54c;
+    if (nameHash < 0x81d6) {
+      if (nameHash == 0x5a70) {
 LAB_97bcc4ac:
-        iVar12 = _PPStreamChunkCreateWithType(3,0);
-        iVar3 = 7;
-        uVar6 = *(uint *)(iVar12 + 0xc);
+        chunk = _PPStreamChunkCreateWithType(3,0);
+        fieldValue = 7;
+        chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcc53c:
-        uVar6 = iVar3 << 0x10 | uVar6 & 0xffe0ff3f | 0x20;
+        chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff3f | 0x20;
 LAB_97bcbb78:
-        *(uint *)(iVar12 + 0xc) = uVar6;
-        directIndex = ParseSymbol__GetDirectIndex(param_1,0);
-        uVar6 = directIndex & 0x1f | *(uint *)(iVar12 + 0xc) & 0xffffffe0;
+        *(uint *)(chunk + 0xc) = chunkWord;
+        directIndex = ParseSymbol__GetDirectIndex(parseSymbol,0);
+        chunkWord = directIndex & 0x1f | *(uint *)(chunk + 0xc) & 0xffffffe0;
       }
-      else if (iVar11 < 0x5a71) {
-        if (iVar11 == 0x504e) {
-          iVar12 = _PPStreamChunkCreateWithType(4,0);
-          iVar3 = 9;
-          uVar6 = *(uint *)(iVar12 + 0xc);
+      else if (nameHash < 0x5a71) {
+        if (nameHash == 0x504e) {
+          chunk = _PPStreamChunkCreateWithType(4,0);
+          fieldValue = 9;
+          chunkWord = *(uint *)(chunk + 0xc);
         }
         else {
-          if (iVar11 < 0x504f) {
-            if (iVar11 == 0x4209) {
+          if (nameHash < 0x504f) {
+            if (nameHash == 0x4209) {
 LAB_97bcc5e0:
-              uVar8 = 2;
+              chunkType = 2;
 LAB_97bcc64c:
-              iVar12 = _PPStreamChunkCreateWithType(uVar8,0);
-              iVar3 = 1;
+              chunk = _PPStreamChunkCreateWithType(chunkType,0);
+              fieldValue = 1;
             }
-            else if (iVar11 < 0x420a) {
-              if (iVar11 != 0x383f) {
-                if (iVar11 < 0x3840) {
-                  if (iVar11 == 0x280f) {
-                    uVar8 = 2;
+            else if (nameHash < 0x420a) {
+              if (nameHash != 0x383f) {
+                if (nameHash < 0x3840) {
+                  if (nameHash == 0x280f) {
+                    chunkType = 2;
 LAB_97bcc5ec:
-                    iVar12 = _PPStreamChunkCreateWithType(uVar8,0);
-                    iVar3 = 4;
+                    chunk = _PPStreamChunkCreateWithType(chunkType,0);
+                    fieldValue = 4;
                     goto LAB_97bcc658;
                   }
-                  if (iVar11 < 0x2810) {
-                    if (iVar11 != 0x2099) goto LAB_97bcc698;
-                    uVar8 = 2;
+                  if (nameHash < 0x2810) {
+                    if (nameHash != 0x2099) goto LAB_97bcc698;
+                    chunkType = 2;
                     goto LAB_97bcbba8;
                   }
-                  if (iVar11 == 0x297a) goto LAB_97bcc5e0;
-                  if (iVar11 != 0x2c25) goto LAB_97bcc698;
+                  if (nameHash == 0x297a) goto LAB_97bcc5e0;
+                  if (nameHash != 0x2c25) goto LAB_97bcc698;
                 }
-                else if (iVar11 != 0x3f94) {
-                  if (iVar11 < 0x3f95) {
-                    if (iVar11 != 0x3bf9) goto LAB_97bcc698;
-                    uVar8 = 4;
+                else if (nameHash != 0x3f94) {
+                  if (nameHash < 0x3f95) {
+                    if (nameHash != 0x3bf9) goto LAB_97bcc698;
+                    chunkType = 4;
                     goto LAB_97bcc64c;
                   }
-                  if (iVar11 == 0x41d9) {
-                    iVar12 = _PPStreamChunkCreateWithType(3,0);
-                    iVar3 = 0xb;
+                  if (nameHash == 0x41d9) {
+                    chunk = _PPStreamChunkCreateWithType(3,0);
+                    fieldValue = 0xb;
                     goto LAB_97bcc5c0;
                   }
-                  if (iVar11 != 0x4203) goto LAB_97bcc698;
-                  iVar12 = _PPStreamChunkCreateWithType(4,0);
-                  iVar3 = 7;
+                  if (nameHash != 0x4203) goto LAB_97bcc698;
+                  chunk = _PPStreamChunkCreateWithType(4,0);
+                  fieldValue = 7;
                   goto LAB_97bcc658;
                 }
 LAB_97bcc5b0:
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                iVar3 = 0xc;
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                fieldValue = 0xc;
                 goto LAB_97bcc5c0;
               }
 LAB_97bcbce8:
-              iVar12 = _PPStreamChunkCreateWithType(2,0);
-              iVar3 = 5;
+              chunk = _PPStreamChunkCreateWithType(2,0);
+              fieldValue = 5;
             }
             else {
-              if (iVar11 == 0x4dd3) goto LAB_97bcc034;
-              if (0x4dd3 < iVar11) {
-                if (iVar11 != 0x4ee0) {
-                  if (iVar11 < 0x4ee1) {
-                    if ((iVar11 != 0x4eaa) && (iVar11 != 0x4ec5)) goto LAB_97bcc698;
+              if (nameHash == 0x4dd3) goto LAB_97bcc034;
+              if (0x4dd3 < nameHash) {
+                if (nameHash != 0x4ee0) {
+                  if (nameHash < 0x4ee1) {
+                    if ((nameHash != 0x4eaa) && (nameHash != 0x4ec5)) goto LAB_97bcc698;
                   }
-                  else if (iVar11 != 0x4efb) {
-                    if (iVar11 != 0x4fb4) goto LAB_97bcc698;
-                    iVar12 = _PPStreamChunkCreateWithType(4,0);
-                    iVar3 = 4;
-                    uVar6 = *(uint *)(iVar12 + 0xc);
+                  else if (nameHash != 0x4efb) {
+                    if (nameHash != 0x4fb4) goto LAB_97bcc698;
+                    chunk = _PPStreamChunkCreateWithType(4,0);
+                    fieldValue = 4;
+                    chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcbb08:
-                    uVar6 = iVar3 << 0x10 | uVar6 & 0xfff0fffe;
+                    chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0fffe;
                     goto LAB_97bcc694;
                   }
                 }
-                iVar12 = _PPStreamChunkCreateWithType(4,0);
-                *(uint *)(iVar12 + 0xc) = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x40000;
-                directIndex = ParseSymbol__GetDirectIndex(param_1,0);
-                uVar6 = (directIndex & 7) << 1 | *(uint *)(iVar12 + 0xc) & 0xfffffff1;
+                chunk = _PPStreamChunkCreateWithType(4,0);
+                *(uint *)(chunk + 0xc) = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x40000;
+                directIndex = ParseSymbol__GetDirectIndex(parseSymbol,0);
+                chunkWord = (directIndex & 7) << 1 | *(uint *)(chunk + 0xc) & 0xfffffff1;
                 goto LAB_97bcc694;
               }
-              if (iVar11 == 0x42d8) goto LAB_97bcc5b0;
-              if (iVar11 < 0x42d9) {
-                if (iVar11 != 0x425a) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(4,0);
-                iVar3 = 4;
-                uVar6 = *(uint *)(iVar12 + 0xc);
+              if (nameHash == 0x42d8) goto LAB_97bcc5b0;
+              if (nameHash < 0x42d9) {
+                if (nameHash != 0x425a) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(4,0);
+                fieldValue = 4;
+                chunkWord = *(uint *)(chunk + 0xc);
                 goto LAB_97bcbb2c;
               }
-              if (iVar11 == 0x42e3) {
-                uVar8 = 4;
+              if (nameHash == 0x42e3) {
+                chunkType = 4;
                 goto LAB_97bcc5ec;
               }
-              if (iVar11 != 0x4493) goto LAB_97bcc698;
-              uVar8 = 4;
+              if (nameHash != 0x4493) goto LAB_97bcc698;
+              chunkType = 4;
 LAB_97bcc668:
-              iVar12 = _PPStreamChunkCreateWithType(uVar8,0);
-              iVar3 = 3;
+              chunk = _PPStreamChunkCreateWithType(chunkType,0);
+              fieldValue = 3;
             }
           }
           else {
-            if (iVar11 != 0x58a1) {
-              if (0x58a1 < iVar11) {
-                if (iVar11 != 0x5a3e) {
-                  if (iVar11 < 0x5a3f) {
-                    if (iVar11 != 0x5a21) {
-                      if (iVar11 < 0x5a22) {
-                        bVar1 = iVar11 == 0x5a08;
+            if (nameHash != 0x58a1) {
+              if (0x58a1 < nameHash) {
+                if (nameHash != 0x5a3e) {
+                  if (nameHash < 0x5a3f) {
+                    if (nameHash != 0x5a21) {
+                      if (nameHash < 0x5a22) {
+                        hashMatches = nameHash == 0x5a08;
 LAB_97bca874:
-                        if (!bVar1) goto LAB_97bcc698;
+                        if (!hashMatches) goto LAB_97bcc698;
                       }
-                      else if (iVar11 != 0x5a25) {
-                        bVar1 = iVar11 == 0x5a3a;
+                      else if (nameHash != 0x5a25) {
+                        hashMatches = nameHash == 0x5a3a;
                         goto LAB_97bca888;
                       }
                       goto LAB_97bcc4e4;
                     }
                   }
                   else {
-                    if (iVar11 == 0x5a57) goto LAB_97bcc490;
-                    if (iVar11 < 0x5a58) {
-                      if (iVar11 != 0x5a42) {
-                        bVar1 = iVar11 == 0x5a53;
+                    if (nameHash == 0x5a57) goto LAB_97bcc490;
+                    if (nameHash < 0x5a58) {
+                      if (nameHash != 0x5a42) {
+                        hashMatches = nameHash == 0x5a53;
                         goto LAB_97bca8e4;
                       }
                       goto LAB_97bcc4e4;
                     }
-                    if (iVar11 != 0x5a5b) {
-                      bVar1 = iVar11 == 0x5a5f;
+                    if (nameHash != 0x5a5b) {
+                      hashMatches = nameHash == 0x5a5f;
                       goto LAB_97bca874;
                     }
                   }
                 }
                 goto LAB_97bcc4c8;
               }
-              if (iVar11 != 0x5214) {
-                if (iVar11 < 0x5215) {
-                  if (iVar11 != 0x51c3) {
-                    if (iVar11 < 0x51c4) {
-                      bVar1 = iVar11 == 0x51a8;
+              if (nameHash != 0x5214) {
+                if (nameHash < 0x5215) {
+                  if (nameHash != 0x51c3) {
+                    if (nameHash < 0x51c4) {
+                      hashMatches = nameHash == 0x51a8;
                     }
                     else {
-                      if (iVar11 == 0x51de) goto LAB_97bcbb38;
-                      bVar1 = iVar11 == 0x51f9;
+                      if (nameHash == 0x51de) goto LAB_97bcbb38;
+                      hashMatches = nameHash == 0x51f9;
                     }
 LAB_97bca770:
-                    if (!bVar1) goto LAB_97bcc698;
+                    if (!hashMatches) goto LAB_97bcc698;
                   }
                 }
-                else if (iVar11 != 0x524a) {
-                  if (iVar11 < 0x524b) {
-                    bVar1 = iVar11 == 0x522f;
+                else if (nameHash != 0x524a) {
+                  if (nameHash < 0x524b) {
+                    hashMatches = nameHash == 0x522f;
                     goto LAB_97bca770;
                   }
-                  if (iVar11 != 0x5265) {
-                    if (iVar11 != 0x5811) goto LAB_97bcc698;
-                    iVar12 = _PPStreamChunkCreateWithType(3,0);
-                    iVar3 = 0x12;
+                  if (nameHash != 0x5265) {
+                    if (nameHash != 0x5811) goto LAB_97bcc698;
+                    chunk = _PPStreamChunkCreateWithType(3,0);
+                    fieldValue = 0x12;
                     goto LAB_97bcc5c0;
                   }
                 }
               }
 LAB_97bcbb38:
               if (param_2 == 0) {
-                iVar12 = _PPStreamChunkCreateWithType(4,0);
-                iVar3 = 6;
-                uVar6 = *(uint *)(iVar12 + 0xc);
+                chunk = _PPStreamChunkCreateWithType(4,0);
+                fieldValue = 6;
+                chunkWord = *(uint *)(chunk + 0xc);
               }
               else {
-                iVar12 = _PPStreamChunkCreateWithType(2,0);
-                iVar3 = 7;
-                uVar6 = *(uint *)(iVar12 + 0xc);
+                chunk = _PPStreamChunkCreateWithType(2,0);
+                fieldValue = 7;
+                chunkWord = *(uint *)(chunk + 0xc);
               }
-              uVar6 = iVar3 << 0x10 | uVar6 & 0xfff0ffff;
+              chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0ffff;
               goto LAB_97bcbb78;
             }
-            iVar12 = _PPStreamChunkCreateWithType(2,0);
-            iVar3 = 0xb;
+            chunk = _PPStreamChunkCreateWithType(2,0);
+            fieldValue = 0xb;
           }
 LAB_97bcc658:
-          uVar6 = *(uint *)(iVar12 + 0xc);
+          chunkWord = *(uint *)(chunk + 0xc);
         }
-        uVar6 = iVar3 << 0x10 | uVar6 & 0xfff0ffff;
+        chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0ffff;
       }
       else {
-        if (iVar11 == 0x5b05) goto LAB_97bcc490;
-        if (iVar11 < 0x5b06) {
-          if (iVar11 != 0x5ab2) {
-            if (iVar11 < 0x5ab3) {
-              if (iVar11 == 0x5a91) {
+        if (nameHash == 0x5b05) goto LAB_97bcc490;
+        if (nameHash < 0x5b06) {
+          if (nameHash != 0x5ab2) {
+            if (nameHash < 0x5ab3) {
+              if (nameHash == 0x5a91) {
 LAB_97bcc490:
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                iVar3 = 7;
-                uVar6 = *(uint *)(iVar12 + 0xc);
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                fieldValue = 7;
+                chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcc518:
-                uVar6 = iVar3 << 0x10 | uVar6 & 0xffe0ff1f;
+                chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff1f;
                 goto LAB_97bcbb78;
               }
-              if (iVar11 < 0x5a92) {
-                if (iVar11 != 0x5a78) {
-                  if (0x5a78 < iVar11) {
-                    if (iVar11 != 0x5a7c) {
-                      bVar1 = iVar11 == 0x5a8d;
+              if (nameHash < 0x5a92) {
+                if (nameHash != 0x5a78) {
+                  if (0x5a78 < nameHash) {
+                    if (nameHash != 0x5a7c) {
+                      hashMatches = nameHash == 0x5a8d;
                       goto LAB_97bca8e4;
                     }
                     goto LAB_97bcc4e4;
                   }
-                  bVar1 = iVar11 == 0x5a74;
+                  hashMatches = nameHash == 0x5a74;
 LAB_97bca888:
-                  if (!bVar1) goto LAB_97bcc698;
+                  if (!hashMatches) goto LAB_97bcc698;
                   goto LAB_97bcc490;
                 }
               }
               else {
-                if (iVar11 == 0x5a99) {
+                if (nameHash == 0x5a99) {
 LAB_97bcc4e4:
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  iVar3 = 7;
-                  uVar6 = *(uint *)(iVar12 + 0xc);
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  fieldValue = 7;
+                  chunkWord = *(uint *)(chunk + 0xc);
                   goto LAB_97bcc58c;
                 }
-                if (0x5a99 < iVar11) {
-                  if (iVar11 == 0x5aaa) goto LAB_97bcc4ac;
-                  bVar1 = iVar11 == 0x5aae;
+                if (0x5a99 < nameHash) {
+                  if (nameHash == 0x5aaa) goto LAB_97bcc4ac;
+                  hashMatches = nameHash == 0x5aae;
                   goto LAB_97bca888;
                 }
-                if (iVar11 != 0x5a95) goto LAB_97bcc698;
+                if (nameHash != 0x5a95) goto LAB_97bcc698;
               }
             }
-            else if (iVar11 != 0x5acf) {
-              if (iVar11 < 0x5ad0) {
-                if (iVar11 == 0x5ac2) goto LAB_97bcc5b0;
-                if (iVar11 < 0x5ac3) {
-                  bVar1 = iVar11 == 0x5ab6;
+            else if (nameHash != 0x5acf) {
+              if (nameHash < 0x5ad0) {
+                if (nameHash == 0x5ac2) goto LAB_97bcc5b0;
+                if (nameHash < 0x5ac3) {
+                  hashMatches = nameHash == 0x5ab6;
                   goto LAB_97bca874;
                 }
-                if (iVar11 == 0x5ac7) goto LAB_97bcc4ac;
-                bVar1 = iVar11 == 0x5acb;
+                if (nameHash == 0x5ac7) goto LAB_97bcc4ac;
+                hashMatches = nameHash == 0x5acb;
                 goto LAB_97bca888;
               }
-              if (iVar11 != 0x5ae8) {
-                if (iVar11 < 0x5ae9) {
-                  if (iVar11 == 0x5ad3) goto LAB_97bcc4e4;
-                  bVar1 = iVar11 == 0x5ae4;
+              if (nameHash != 0x5ae8) {
+                if (nameHash < 0x5ae9) {
+                  if (nameHash == 0x5ad3) goto LAB_97bcc4e4;
+                  hashMatches = nameHash == 0x5ae4;
                 }
                 else {
-                  if (iVar11 == 0x5aec) goto LAB_97bcc4c8;
-                  bVar1 = iVar11 == 0x5b01;
+                  if (nameHash == 0x5aec) goto LAB_97bcc4c8;
+                  hashMatches = nameHash == 0x5b01;
                 }
 LAB_97bca8e4:
-                if (!bVar1) goto LAB_97bcc698;
+                if (!hashMatches) goto LAB_97bcc698;
                 goto LAB_97bcc4ac;
               }
               goto LAB_97bcc490;
             }
           }
 LAB_97bcc4c8:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          iVar3 = 7;
-          uVar6 = *(uint *)(iVar12 + 0xc);
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          fieldValue = 7;
+          chunkWord = *(uint *)(chunk + 0xc);
           goto LAB_97bcc564;
         }
-        if (iVar11 != 0x71c3) {
-          if (0x71c3 < iVar11) {
-            if (iVar11 == 0x7ab2) {
-              iVar12 = _PPStreamChunkCreateWithType(2,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xfff0ffe3 | 0x70000;
+        if (nameHash != 0x71c3) {
+          if (0x71c3 < nameHash) {
+            if (nameHash == 0x7ab2) {
+              chunk = _PPStreamChunkCreateWithType(2,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xfff0ffe3 | 0x70000;
               goto LAB_97bcc190;
             }
-            if (iVar11 < 0x7ab3) {
-              if (iVar11 == 0x7a53) goto LAB_97bcbff4;
-              if (iVar11 < 0x7a54) {
-                if (iVar11 != 0x7a49) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(2,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xfff0ffe0 | 0x70000;
+            if (nameHash < 0x7ab3) {
+              if (nameHash == 0x7a53) goto LAB_97bcbff4;
+              if (nameHash < 0x7a54) {
+                if (nameHash != 0x7a49) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(2,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xfff0ffe0 | 0x70000;
                 goto LAB_97bcc694;
               }
-              if (iVar11 == 0x7a6c) {
-                iVar12 = _PPStreamChunkCreateWithType(2,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xfff0ffe1 | 0x70000;
+              if (nameHash == 0x7a6c) {
+                chunk = _PPStreamChunkCreateWithType(2,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xfff0ffe1 | 0x70000;
                 goto LAB_97bcbb30;
               }
-              if (iVar11 != 0x7a8f) goto LAB_97bcc698;
-              iVar12 = _PPStreamChunkCreateWithType(2,0);
-              uVar5 = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x70000;
-              uVar6 = 2;
+              if (nameHash != 0x7a8f) goto LAB_97bcc698;
+              chunk = _PPStreamChunkCreateWithType(2,0);
+              uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+              chunkWord = 2;
             }
-            else if (iVar11 == 0x7b1b) {
-              iVar12 = _PPStreamChunkCreateWithType(2,0);
-              uVar5 = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x70000;
-              uVar6 = 6;
+            else if (nameHash == 0x7b1b) {
+              chunk = _PPStreamChunkCreateWithType(2,0);
+              uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+              chunkWord = 6;
             }
-            else if (iVar11 < 0x7b1c) {
-              if (iVar11 == 0x7ad5) {
-                iVar12 = _PPStreamChunkCreateWithType(2,0);
-                uVar5 = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x70000;
-                uVar6 = 4;
+            else if (nameHash < 0x7b1c) {
+              if (nameHash == 0x7ad5) {
+                chunk = _PPStreamChunkCreateWithType(2,0);
+                uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+                chunkWord = 4;
               }
               else {
-                if (iVar11 != 0x7af8) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(2,0);
-                uVar5 = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x70000;
-                uVar6 = 5;
+                if (nameHash != 0x7af8) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(2,0);
+                uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+                chunkWord = 5;
               }
             }
             else {
-              if (iVar11 != 0x7b3e) {
-                iVar3 = 0x81b6;
+              if (nameHash != 0x7b3e) {
+                fieldValue = 0x81b6;
                 goto LAB_97bcab00;
               }
-              iVar12 = _PPStreamChunkCreateWithType(2,0);
-              uVar6 = 7;
-              uVar5 = *(uint *)(iVar12 + 0xc) & 0xfff0ffff | 0x70000;
+              chunk = _PPStreamChunkCreateWithType(2,0);
+              chunkWord = 7;
+              uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
             }
-            uVar6 = uVar6 | uVar5 & 0xffffffe0;
+            chunkWord = chunkWord | uVar5 & 0xffffffe0;
             goto LAB_97bcc694;
           }
-          if (iVar11 != 0x5c79) {
-            if (iVar11 < 0x5c7a) {
-              if (iVar11 != 0x5c22) {
-                if (iVar11 < 0x5c23) {
-                  bVar1 = iVar11 == 0x5b1e;
+          if (nameHash != 0x5c79) {
+            if (nameHash < 0x5c7a) {
+              if (nameHash != 0x5c22) {
+                if (nameHash < 0x5c23) {
+                  hashMatches = nameHash == 0x5b1e;
                   goto LAB_97bca8e4;
                 }
-                if (iVar11 != 0x5c3f) {
-                  bVar1 = iVar11 == 0x5c5c;
+                if (nameHash != 0x5c3f) {
+                  hashMatches = nameHash == 0x5c5c;
 LAB_97bca914:
-                  if (!bVar1) goto LAB_97bcc698;
+                  if (!hashMatches) goto LAB_97bcc698;
                 }
               }
             }
             else {
-              if (iVar11 == 0x6349) {
-                uVar8 = 4;
+              if (nameHash == 0x6349) {
+                chunkType = 4;
                 if (param_2 != 0) goto LAB_97bcbce8;
 LAB_97bcbba8:
-                iVar12 = _PPStreamChunkCreateWithType(uVar8,0);
-                iVar3 = 2;
+                chunk = _PPStreamChunkCreateWithType(chunkType,0);
+                fieldValue = 2;
                 goto LAB_97bcc658;
               }
-              if (0x6349 < iVar11) {
-                if (iVar11 != 0x68de) {
-                  bVar1 = iVar11 == 0x7171;
+              if (0x6349 < nameHash) {
+                if (nameHash != 0x68de) {
+                  hashMatches = nameHash == 0x7171;
                   goto LAB_97bcb178;
                 }
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe08fff | 0x108000;
-                iVar3 = 3;
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
+                fieldValue = 3;
                 goto LAB_97bcbe2c;
               }
-              if (iVar11 != 0x5c96) {
-                bVar1 = iVar11 == 0x5cb3;
+              if (nameHash != 0x5c96) {
+                hashMatches = nameHash == 0x5cb3;
                 goto LAB_97bca914;
               }
             }
           }
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0xa0000;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0xa0000;
           goto LAB_97bcc458;
         }
 LAB_97bcc034:
-        iVar12 = _PPStreamChunkCreateWithType(3,0);
-        iVar3 = 0xd;
+        chunk = _PPStreamChunkCreateWithType(3,0);
+        fieldValue = 0xd;
 LAB_97bcc5c0:
-        uVar6 = *(uint *)(iVar12 + 0xc);
+        chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcc00c:
-        uVar6 = iVar3 << 0x10 | uVar6 & 0xffe0ffff;
+        chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ffff;
       }
     }
-    else if (iVar11 == 0xa562) {
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe008ff | 0x104100;
+    else if (nameHash == 0xa562) {
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe008ff | 0x104100;
     }
     else {
-      if (iVar11 < 0xa563) {
-        if (iVar11 == 0x829f) {
+      if (nameHash < 0xa563) {
+        if (nameHash == 0x829f) {
 LAB_97bcc524:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          iVar3 = 8;
-          uVar6 = *(uint *)(iVar12 + 0xc);
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          fieldValue = 8;
+          chunkWord = *(uint *)(chunk + 0xc);
           goto LAB_97bcc53c;
         }
-        if (iVar11 < 0x82a0) {
-          if (iVar11 != 0x823a) {
-            if (0x823a < iVar11) {
-              if (iVar11 != 0x8261) {
-                if (iVar11 < 0x8262) {
-                  if (iVar11 != 0x8242) {
-                    if (0x8242 < iVar11) {
-                      if (iVar11 != 0x8259) {
-                        iVar3 = 0x825d;
+        if (nameHash < 0x82a0) {
+          if (nameHash != 0x823a) {
+            if (0x823a < nameHash) {
+              if (nameHash != 0x8261) {
+                if (nameHash < 0x8262) {
+                  if (nameHash != 0x8242) {
+                    if (0x8242 < nameHash) {
+                      if (nameHash != 0x8259) {
+                        fieldValue = 0x825d;
                         goto LAB_97bcab50;
                       }
                       goto LAB_97bcc524;
                     }
-                    if (iVar11 != 0x823e) goto LAB_97bcc698;
+                    if (nameHash != 0x823e) goto LAB_97bcc698;
                     goto LAB_97bcc54c;
                   }
                 }
                 else {
-                  if (iVar11 == 0x8280) goto LAB_97bcc500;
-                  if (0x8280 < iVar11) {
-                    if (iVar11 != 0x8284) {
-                      iVar3 = 0x8288;
+                  if (nameHash == 0x8280) goto LAB_97bcc500;
+                  if (0x8280 < nameHash) {
+                    if (nameHash != 0x8284) {
+                      fieldValue = 0x8288;
                       goto LAB_97bcab00;
                     }
                     goto LAB_97bcc54c;
                   }
-                  if (iVar11 != 0x8265) {
-                    iVar3 = 0x827c;
+                  if (nameHash != 0x8265) {
+                    fieldValue = 0x827c;
                     goto LAB_97bcaba4;
                   }
                 }
 LAB_97bcc574:
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                iVar3 = 8;
-                uVar6 = *(uint *)(iVar12 + 0xc);
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                fieldValue = 8;
+                chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcc58c:
-                uVar6 = iVar3 << 0x10 | uVar6 & 0xffe0ff7f | 0x60;
+                chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff7f | 0x60;
                 goto LAB_97bcbb78;
               }
               goto LAB_97bcc54c;
             }
-            if (iVar11 == 0x8213) goto LAB_97bcc524;
-            if (iVar11 < 0x8214) {
-              if (iVar11 != 0x81f4) {
-                if (iVar11 < 0x81f5) {
-                  iVar3 = 0x81d9;
+            if (nameHash == 0x8213) goto LAB_97bcc524;
+            if (nameHash < 0x8214) {
+              if (nameHash != 0x81f4) {
+                if (nameHash < 0x81f5) {
+                  fieldValue = 0x81d9;
                 }
                 else {
-                  if (iVar11 == 0x81f8) goto LAB_97bcc54c;
-                  iVar3 = 0x81fc;
+                  if (nameHash == 0x81f8) goto LAB_97bcc54c;
+                  fieldValue = 0x81fc;
                 }
 LAB_97bcab00:
-                if (iVar11 != iVar3) goto LAB_97bcc698;
+                if (nameHash != fieldValue) goto LAB_97bcc698;
                 goto LAB_97bcc574;
               }
             }
             else {
-              if (iVar11 == 0x821b) goto LAB_97bcc54c;
-              if (0x821b < iVar11) {
-                if (iVar11 != 0x821f) {
-                  iVar3 = 0x8236;
+              if (nameHash == 0x821b) goto LAB_97bcc54c;
+              if (0x821b < nameHash) {
+                if (nameHash != 0x821f) {
+                  fieldValue = 0x8236;
                   goto LAB_97bcaba4;
                 }
                 goto LAB_97bcc574;
               }
-              iVar3 = 0x8217;
+              fieldValue = 0x8217;
 LAB_97bcab50:
-              if (iVar11 != iVar3) goto LAB_97bcc698;
+              if (nameHash != fieldValue) goto LAB_97bcc698;
             }
           }
           goto LAB_97bcc500;
         }
-        if (iVar11 == 0x8837) {
+        if (nameHash == 0x8837) {
 LAB_97bcbff4:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          iVar3 = 0xf;
-          uVar6 = *(uint *)(iVar12 + 0xc);
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          fieldValue = 0xf;
+          chunkWord = *(uint *)(chunk + 0xc);
           goto LAB_97bcc00c;
         }
-        if (0x8837 < iVar11) {
-          if (iVar11 != 0x9a2c) {
-            if (iVar11 < 0x9a2d) {
-              if (iVar11 == 0x92cd) {
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe07fff | 0x104000;
+        if (0x8837 < nameHash) {
+          if (nameHash != 0x9a2c) {
+            if (nameHash < 0x9a2d) {
+              if (nameHash == 0x92cd) {
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe07fff | 0x104000;
 LAB_97bcbdf0:
-                uVar6 = uVar6 & 0xffffcfff;
+                chunkWord = chunkWord & 0xffffcfff;
                 goto LAB_97bcbdf4;
               }
-              if (iVar11 < 0x92ce) {
-                if (iVar11 != 0x89f6) goto LAB_97bcc698;
+              if (nameHash < 0x92ce) {
+                if (nameHash != 0x89f6) goto LAB_97bcc698;
                 goto LAB_97bcbff4;
               }
-              if (iVar11 != 0x99e2) {
-                iVar3 = 0x9a07;
+              if (nameHash != 0x99e2) {
+                fieldValue = 0x9a07;
                 goto LAB_97bcac74;
               }
             }
-            else if (iVar11 != 0x9a9b) {
-              if (iVar11 < 0x9a9c) {
-                if (iVar11 != 0x9a51) {
-                  iVar3 = 0x9a76;
+            else if (nameHash != 0x9a9b) {
+              if (nameHash < 0x9a9c) {
+                if (nameHash != 0x9a51) {
+                  fieldValue = 0x9a76;
 LAB_97bcac74:
-                  if (iVar11 != iVar3) goto LAB_97bcc698;
+                  if (nameHash != fieldValue) goto LAB_97bcc698;
                 }
               }
-              else if (iVar11 != 0x9ac0) {
-                iVar3 = 0x9ae5;
+              else if (nameHash != 0x9ac0) {
+                fieldValue = 0x9ae5;
                 goto LAB_97bcac74;
               }
             }
           }
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe07fff | 0x104000;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe07fff | 0x104000;
 LAB_97bcbe80:
-          uVar6 = uVar6 & 0xffffcfff;
+          chunkWord = chunkWord & 0xffffcfff;
           goto LAB_97bcbe84;
         }
-        if (iVar11 == 0x82c6) {
+        if (nameHash == 0x82c6) {
 LAB_97bcc500:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          iVar3 = 8;
-          uVar6 = *(uint *)(iVar12 + 0xc);
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          fieldValue = 8;
+          chunkWord = *(uint *)(chunk + 0xc);
           goto LAB_97bcc518;
         }
-        if (iVar11 < 0x82c7) {
-          if (iVar11 != 0x82a7) {
-            if (iVar11 < 0x82a8) {
-              iVar3 = 0x82a3;
+        if (nameHash < 0x82c7) {
+          if (nameHash != 0x82a7) {
+            if (nameHash < 0x82a8) {
+              fieldValue = 0x82a3;
               goto LAB_97bcab50;
             }
-            if (iVar11 == 0x82ab) goto LAB_97bcc574;
-            iVar3 = 0x82c2;
+            if (nameHash == 0x82ab) goto LAB_97bcc574;
+            fieldValue = 0x82c2;
 LAB_97bcaba4:
-            if (iVar11 != iVar3) goto LAB_97bcc698;
+            if (nameHash != fieldValue) goto LAB_97bcc698;
             goto LAB_97bcc524;
           }
         }
         else {
-          if (iVar11 == 0x82e9) goto LAB_97bcc500;
-          if (0x82e9 < iVar11) {
-            if (iVar11 != 0x8308) {
-              if (iVar11 != 0x840f) goto LAB_97bcc698;
-              uVar8 = 2;
+          if (nameHash == 0x82e9) goto LAB_97bcc500;
+          if (0x82e9 < nameHash) {
+            if (nameHash != 0x8308) {
+              if (nameHash != 0x840f) goto LAB_97bcc698;
+              chunkType = 2;
               goto LAB_97bcc668;
             }
             goto LAB_97bcc524;
           }
-          if (iVar11 != 0x82ca) {
-            iVar3 = 0x82e5;
+          if (nameHash != 0x82ca) {
+            fieldValue = 0x82e5;
             goto LAB_97bcaba4;
           }
         }
 LAB_97bcc54c:
-        iVar12 = _PPStreamChunkCreateWithType(3,0);
-        iVar3 = 8;
-        uVar6 = *(uint *)(iVar12 + 0xc);
+        chunk = _PPStreamChunkCreateWithType(3,0);
+        fieldValue = 8;
+        chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcc564:
-        uVar6 = iVar3 << 0x10 | uVar6 & 0xffe0ff1f | 0x40;
+        chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff1f | 0x40;
         goto LAB_97bcbb78;
       }
-      if (iVar11 != 0xe1f0) {
-        if (0xe1f0 < iVar11) {
-          if (iVar11 != 0x1021f) {
-            if (0x1021f < iVar11) {
-              if (iVar11 != 0x1029a) {
-                if (iVar11 < 0x1029b) {
-                  if (iVar11 == 0x10240) goto LAB_97bcc1e8;
-                  if (iVar11 < 0x10241) {
-                    iVar3 = 0x10237;
+      if (nameHash != 0xe1f0) {
+        if (0xe1f0 < nameHash) {
+          if (nameHash != 0x1021f) {
+            if (0x1021f < nameHash) {
+              if (nameHash != 0x1029a) {
+                if (nameHash < 0x1029b) {
+                  if (nameHash == 0x10240) goto LAB_97bcc1e8;
+                  if (nameHash < 0x10241) {
+                    fieldValue = 0x10237;
                   }
                   else {
-                    if (iVar11 == 0x10258) goto LAB_97bcc20c;
-                    iVar3 = 0x10279;
+                    if (nameHash == 0x10258) goto LAB_97bcc20c;
+                    fieldValue = 0x10279;
                   }
 LAB_97bcaf2c:
-                  if (iVar11 != iVar3) goto LAB_97bcc698;
+                  if (nameHash != fieldValue) goto LAB_97bcc698;
                 }
-                else if (iVar11 != 0x102fd) {
-                  if (iVar11 < 0x102fe) {
-                    if (iVar11 != 0x102bb) {
-                      iVar3 = 0x102dc;
+                else if (nameHash != 0x102fd) {
+                  if (nameHash < 0x102fe) {
+                    if (nameHash != 0x102bb) {
+                      fieldValue = 0x102dc;
                       goto LAB_97bcaf2c;
                     }
                   }
-                  else if (iVar11 != 0x1031e) {
-                    if (iVar11 != 0x10f0d) goto LAB_97bcc698;
-                    iVar12 = _PPStreamChunkCreateWithType(3,0);
-                    uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fffe | 0x50000;
+                  else if (nameHash != 0x1031e) {
+                    if (nameHash != 0x10f0d) goto LAB_97bcc698;
+                    chunk = _PPStreamChunkCreateWithType(3,0);
+                    chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
                     goto LAB_97bcc1b8;
                   }
                 }
               }
 LAB_97bcc20c:
-              iVar12 = _PPStreamChunkCreateWithType(3,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0f1ff | 0x30100;
+              chunk = _PPStreamChunkCreateWithType(3,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f1ff | 0x30100;
               goto LAB_97bcc458;
             }
-            if (iVar11 != 0x10159) {
-              if (iVar11 < 0x1015a) {
-                if (iVar11 == 0xf7d2) {
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fffe | 0x50000;
-                  iVar3 = 1;
+            if (nameHash != 0x10159) {
+              if (nameHash < 0x1015a) {
+                if (nameHash == 0xf7d2) {
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
+                  fieldValue = 1;
                   goto LAB_97bcc0cc;
                 }
-                if (iVar11 < 0xf7d3) {
-                  if (iVar11 != 0xf700) goto LAB_97bcc698;
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fff0 | 0x50000;
+                if (nameHash < 0xf7d3) {
+                  if (nameHash != 0xf700) goto LAB_97bcc698;
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff0 | 0x50000;
                 }
                 else {
-                  if (iVar11 == 0xf839) {
-                    iVar12 = _PPStreamChunkCreateWithType(3,0);
-                    uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x50001;
+                  if (nameHash == 0xf839) {
+                    chunk = _PPStreamChunkCreateWithType(3,0);
+                    chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x50001;
 LAB_97bcc1b8:
-                    iVar3 = 2;
+                    fieldValue = 2;
                     goto LAB_97bcc0cc;
                   }
-                  if (iVar11 != 0xf9fd) goto LAB_97bcc698;
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fff7 | 0x50007;
+                  if (nameHash != 0xf9fd) goto LAB_97bcc698;
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff7 | 0x50007;
                 }
                 goto LAB_97bcc694;
               }
-              if (iVar11 != 0x101bc) {
-                if (iVar11 < 0x101bd) {
-                  if (iVar11 != 0x1017a) {
-                    iVar3 = 0x1019b;
+              if (nameHash != 0x101bc) {
+                if (nameHash < 0x101bd) {
+                  if (nameHash != 0x1017a) {
+                    fieldValue = 0x1019b;
 LAB_97bcaea4:
-                    if (iVar11 != iVar3) goto LAB_97bcc698;
+                    if (nameHash != fieldValue) goto LAB_97bcc698;
                   }
                 }
-                else if (iVar11 != 0x101dd) {
-                  iVar3 = 0x101fe;
+                else if (nameHash != 0x101dd) {
+                  fieldValue = 0x101fe;
                   goto LAB_97bcaea4;
                 }
               }
             }
           }
 LAB_97bcc1e8:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0f0ff | 0x30000;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f0ff | 0x30000;
           goto LAB_97bcc458;
         }
-        if (iVar11 != 0xb938) {
-          if (iVar11 < 0xb939) {
-            if (iVar11 != 0xb86b) {
-              if (iVar11 < 0xb86c) {
-                if (iVar11 != 0xb7f0) {
-                  if (iVar11 < 0xb7f1) {
-                    iVar3 = 0xb7c7;
+        if (nameHash != 0xb938) {
+          if (nameHash < 0xb939) {
+            if (nameHash != 0xb86b) {
+              if (nameHash < 0xb86c) {
+                if (nameHash != 0xb7f0) {
+                  if (nameHash < 0xb7f1) {
+                    fieldValue = 0xb7c7;
                   }
                   else {
-                    if (iVar11 == 0xb819) goto LAB_97bcc470;
-                    iVar3 = 0xb842;
+                    if (nameHash == 0xb819) goto LAB_97bcc470;
+                    fieldValue = 0xb842;
                   }
 LAB_97bcadb8:
-                  if (iVar11 != iVar3) goto LAB_97bcc698;
+                  if (nameHash != fieldValue) goto LAB_97bcc698;
                 }
               }
-              else if (iVar11 != 0xb8bd) {
-                if (iVar11 < 0xb8be) {
-                  iVar3 = 0xb894;
+              else if (nameHash != 0xb8bd) {
+                if (nameHash < 0xb8be) {
+                  fieldValue = 0xb894;
                 }
                 else {
-                  if (iVar11 == 0xb8e6) goto LAB_97bcc470;
-                  iVar3 = 0xb90f;
+                  if (nameHash == 0xb8e6) goto LAB_97bcc470;
+                  fieldValue = 0xb90f;
                 }
                 goto LAB_97bcadb8;
               }
             }
           }
-          else if (iVar11 != 0xc13b) {
-            if (0xc13b < iVar11) {
-              if (iVar11 == 0xc310) {
-                iVar12 = _PPStreamChunkCreateWithType(4,0);
-                iVar3 = 5;
-                uVar6 = *(uint *)(iVar12 + 0xc);
+          else if (nameHash != 0xc13b) {
+            if (0xc13b < nameHash) {
+              if (nameHash == 0xc310) {
+                chunk = _PPStreamChunkCreateWithType(4,0);
+                fieldValue = 5;
+                chunkWord = *(uint *)(chunk + 0xc);
 LAB_97bcbb2c:
-                uVar6 = iVar3 << 0x10 | uVar6 & 0xfff0ffff;
+                chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0ffff;
 LAB_97bcbb30:
-                uVar6 = uVar6 | 1;
+                chunkWord = chunkWord | 1;
               }
               else {
-                if (iVar11 < 0xc311) {
-                  if (iVar11 != 0xc166) {
-                    iVar3 = 0xc191;
+                if (nameHash < 0xc311) {
+                  if (nameHash != 0xc166) {
+                    fieldValue = 0xc191;
                     goto LAB_97bcadb8;
                   }
                   goto LAB_97bcc470;
                 }
-                if (iVar11 == 0xd7ba) {
-                  iVar12 = _PPStreamChunkCreateWithType(4,0);
-                  iVar3 = 5;
-                  uVar6 = *(uint *)(iVar12 + 0xc);
+                if (nameHash == 0xd7ba) {
+                  chunk = _PPStreamChunkCreateWithType(4,0);
+                  fieldValue = 5;
+                  chunkWord = *(uint *)(chunk + 0xc);
                   goto LAB_97bcbb08;
                 }
-                if (iVar11 != 0xe12a) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fff1 | 0x50001;
+                if (nameHash != 0xe12a) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff1 | 0x50001;
               }
               goto LAB_97bcc694;
             }
-            if (iVar11 != 0xc0ba) {
-              if (iVar11 < 0xc0bb) {
-                if (iVar11 != 0xbd41) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                iVar3 = 6;
+            if (nameHash != 0xc0ba) {
+              if (nameHash < 0xc0bb) {
+                if (nameHash != 0xbd41) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                fieldValue = 6;
                 goto LAB_97bcc5c0;
               }
-              if (iVar11 != 0xc0e5) {
-                iVar3 = 0xc110;
+              if (nameHash != 0xc0e5) {
+                fieldValue = 0xc110;
                 goto LAB_97bcadb8;
               }
             }
           }
         }
 LAB_97bcc470:
-        iVar12 = _PPStreamChunkCreateWithType(3,0);
-        uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x90000;
+        chunk = _PPStreamChunkCreateWithType(3,0);
+        chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x90000;
         goto LAB_97bcbb78;
       }
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fff3 | 0x50000;
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff3 | 0x50000;
 LAB_97bcc190:
-      uVar6 = uVar6 | 3;
+      chunkWord = chunkWord | 3;
     }
 LAB_97bcc694:
-    *(uint *)(iVar12 + 0xc) = uVar6;
+    *(uint *)(chunk + 0xc) = chunkWord;
     goto LAB_97bcc698;
   }
-  if (iVar11 == 0x18b0a) goto LAB_97bcc36c;
-  if (iVar11 < 0x18b0b) {
-    if (iVar11 == 0x147c7) goto LAB_97bcc2a0;
-    if (0x147c7 < iVar11) {
-      if (iVar11 == 0x1705e) goto LAB_97bcc3e4;
-      if (0x1705e < iVar11) {
-        if (iVar11 != 0x17e27) {
-          if (iVar11 < 0x17e28) {
-            if (iVar11 != 0x170f7) {
-              if (iVar11 < 0x170f8) {
-                if (iVar11 == 0x17089) goto LAB_97bcc3e4;
-                if (iVar11 < 0x1708a) {
-                  iVar3 = 0x17076;
+  if (nameHash == 0x18b0a) goto LAB_97bcc36c;
+  if (nameHash < 0x18b0b) {
+    if (nameHash == 0x147c7) goto LAB_97bcc2a0;
+    if (0x147c7 < nameHash) {
+      if (nameHash == 0x1705e) goto LAB_97bcc3e4;
+      if (0x1705e < nameHash) {
+        if (nameHash != 0x17e27) {
+          if (nameHash < 0x17e28) {
+            if (nameHash != 0x170f7) {
+              if (nameHash < 0x170f8) {
+                if (nameHash == 0x17089) goto LAB_97bcc3e4;
+                if (nameHash < 0x1708a) {
+                  fieldValue = 0x17076;
                 }
                 else {
-                  if (iVar11 == 0x170a1) goto LAB_97bcc40c;
-                  iVar3 = 0x170cc;
+                  if (nameHash == 0x170a1) goto LAB_97bcc40c;
+                  fieldValue = 0x170cc;
                 }
 LAB_97bcb448:
-                if (iVar11 != iVar3) goto LAB_97bcc698;
+                if (nameHash != fieldValue) goto LAB_97bcc698;
               }
-              else if (iVar11 != 0x17178) {
-                if (iVar11 < 0x17179) {
-                  if (iVar11 != 0x17122) {
-                    iVar3 = 0x1714d;
+              else if (nameHash != 0x17178) {
+                if (nameHash < 0x17179) {
+                  if (nameHash != 0x17122) {
+                    fieldValue = 0x1714d;
                     goto LAB_97bcb448;
                   }
                 }
-                else if (iVar11 != 0x171a3) {
-                  iVar3 = 0x17e06;
+                else if (nameHash != 0x171a3) {
+                  fieldValue = 0x17e06;
                   goto LAB_97bcba88;
                 }
               }
             }
 LAB_97bcc40c:
-            iVar12 = _PPStreamChunkCreateWithType(3,0);
-            uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fbff | 0x40300;
+            chunk = _PPStreamChunkCreateWithType(3,0);
+            chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fbff | 0x40300;
             goto LAB_97bcc458;
           }
-          if (iVar11 != 0x17ecc) {
-            if (0x17ecc < iVar11) {
-              if (iVar11 != 0x18a83) {
-                if (iVar11 < 0x18a84) {
-                  if (iVar11 == 0x17eed) goto LAB_97bcc2ec;
-                  iVar3 = 0x18a56;
+          if (nameHash != 0x17ecc) {
+            if (0x17ecc < nameHash) {
+              if (nameHash != 0x18a83) {
+                if (nameHash < 0x18a84) {
+                  if (nameHash == 0x17eed) goto LAB_97bcc2ec;
+                  fieldValue = 0x18a56;
                 }
                 else {
-                  if (iVar11 == 0x18ab0) goto LAB_97bcc36c;
-                  iVar3 = 0x18add;
+                  if (nameHash == 0x18ab0) goto LAB_97bcc36c;
+                  fieldValue = 0x18add;
                 }
 LAB_97bcb594:
-                if (iVar11 != iVar3) goto LAB_97bcc698;
+                if (nameHash != fieldValue) goto LAB_97bcc698;
               }
 LAB_97bcc36c:
-              iVar12 = _PPStreamChunkCreateWithType(3,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0f8ff | 0x40000;
+              chunk = _PPStreamChunkCreateWithType(3,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f8ff | 0x40000;
               goto LAB_97bcc458;
             }
-            if (iVar11 != 0x17e69) {
-              if (iVar11 < 0x17e6a) {
-                iVar3 = 0x17e48;
+            if (nameHash != 0x17e69) {
+              if (nameHash < 0x17e6a) {
+                fieldValue = 0x17e48;
               }
               else {
-                if (iVar11 == 0x17e8a) goto LAB_97bcc2ec;
-                iVar3 = 0x17eab;
+                if (nameHash == 0x17e8a) goto LAB_97bcc2ec;
+                fieldValue = 0x17eab;
               }
 LAB_97bcba88:
-              if (iVar11 != iVar3) goto LAB_97bcc698;
+              if (nameHash != fieldValue) goto LAB_97bcc698;
             }
           }
         }
         goto LAB_97bcc2ec;
       }
-      if (iVar11 != 0x14d24) {
-        if (0x14d24 < iVar11) {
-          if (iVar11 != 0x16f5c) {
-            if (iVar11 < 0x16f5d) {
-              if (iVar11 != 0x14d92) {
-                if (0x14d92 < iVar11) {
-                  if (iVar11 == 0x158fc) {
-                    iVar12 = _PPStreamChunkCreateWithType(3,0);
-                    uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe07fff | 0x104000;
+      if (nameHash != 0x14d24) {
+        if (0x14d24 < nameHash) {
+          if (nameHash != 0x16f5c) {
+            if (nameHash < 0x16f5d) {
+              if (nameHash != 0x14d92) {
+                if (0x14d92 < nameHash) {
+                  if (nameHash == 0x158fc) {
+                    chunk = _PPStreamChunkCreateWithType(3,0);
+                    chunkWord = *(uint *)(chunk + 0xc) & 0xffe07fff | 0x104000;
 LAB_97bcbe54:
-                    uVar6 = uVar6 & 0xffffcfff;
+                    chunkWord = chunkWord & 0xffffcfff;
 LAB_97bcbfa8:
-                    uVar6 = uVar6 & 0xfffff8ff;
+                    chunkWord = chunkWord & 0xfffff8ff;
                     goto LAB_97bcbfac;
                   }
-                  if (iVar11 != 0x15dbb) goto LAB_97bcc698;
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe00fff | 0x100000;
+                  if (nameHash != 0x15dbb) goto LAB_97bcc698;
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  chunkWord = *(uint *)(chunk + 0xc) & 0xffe00fff | 0x100000;
                   goto LAB_97bcbe28;
                 }
-                iVar3 = 0x14d5b;
+                fieldValue = 0x14d5b;
                 goto LAB_97bcb334;
               }
               goto LAB_97bcbf0c;
             }
-            if (iVar11 != 0x16fdd) {
-              if (iVar11 < 0x16fde) {
-                if (iVar11 != 0x16f87) {
-                  iVar3 = 0x16fb2;
+            if (nameHash != 0x16fdd) {
+              if (nameHash < 0x16fde) {
+                if (nameHash != 0x16f87) {
+                  fieldValue = 0x16fb2;
 LAB_97bcb3ac:
-                  if (iVar11 != iVar3) goto LAB_97bcc698;
+                  if (nameHash != fieldValue) goto LAB_97bcc698;
                 }
               }
-              else if (iVar11 != 0x17008) {
-                iVar3 = 0x17033;
+              else if (nameHash != 0x17008) {
+                fieldValue = 0x17033;
                 goto LAB_97bcb3ac;
               }
             }
           }
 LAB_97bcc3e4:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0f9ff | 0x40100;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f9ff | 0x40100;
           goto LAB_97bcc458;
         }
-        if (iVar11 != 0x14c11) {
-          if (iVar11 < 0x14c12) {
-            if (iVar11 != 0x14809) {
-              if (iVar11 < 0x1480a) {
-                iVar3 = 0x147e8;
+        if (nameHash != 0x14c11) {
+          if (nameHash < 0x14c12) {
+            if (nameHash != 0x14809) {
+              if (nameHash < 0x1480a) {
+                fieldValue = 0x147e8;
               }
               else {
-                if (iVar11 == 0x1482a) goto LAB_97bcc2a0;
-                iVar3 = 0x1484b;
+                if (nameHash == 0x1482a) goto LAB_97bcc2a0;
+                fieldValue = 0x1484b;
               }
 LAB_97bcb2bc:
-              if (iVar11 != iVar3) goto LAB_97bcc698;
+              if (nameHash != fieldValue) goto LAB_97bcc698;
             }
             goto LAB_97bcc2a0;
           }
-          if (iVar11 != 0x14c7f) {
-            if (iVar11 < 0x14c80) {
-              iVar3 = 0x14c48;
+          if (nameHash != 0x14c7f) {
+            if (nameHash < 0x14c80) {
+              fieldValue = 0x14c48;
             }
             else {
-              if (iVar11 == 0x14cb6) goto LAB_97bcbf0c;
-              iVar3 = 0x14ced;
+              if (nameHash == 0x14cb6) goto LAB_97bcbf0c;
+              fieldValue = 0x14ced;
             }
 LAB_97bcb334:
-            if (iVar11 != iVar3) goto LAB_97bcc698;
+            if (nameHash != fieldValue) goto LAB_97bcc698;
           }
         }
       }
 LAB_97bcbf0c:
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe00fff | 0x100000;
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe00fff | 0x100000;
 LAB_97bcbe84:
-      uVar6 = uVar6 & 0xfffff8ff | 0x400;
+      chunkWord = chunkWord & 0xfffff8ff | 0x400;
       goto LAB_97bcc458;
     }
-    if (iVar11 == 0x11ea4) goto LAB_97bcc258;
-    if (iVar11 < 0x11ea5) {
-      if (iVar11 != 0x11b4b) {
-        if (0x11b4b < iVar11) {
-          if (iVar11 != 0x11d4e) {
-            if (iVar11 < 0x11d4f) {
-              if (iVar11 != 0x11cb5) {
-                if (iVar11 < 0x11cb6) {
-                  iVar3 = 0x11c82;
+    if (nameHash == 0x11ea4) goto LAB_97bcc258;
+    if (nameHash < 0x11ea5) {
+      if (nameHash != 0x11b4b) {
+        if (0x11b4b < nameHash) {
+          if (nameHash != 0x11d4e) {
+            if (nameHash < 0x11d4f) {
+              if (nameHash != 0x11cb5) {
+                if (nameHash < 0x11cb6) {
+                  fieldValue = 0x11c82;
                 }
                 else {
-                  if (iVar11 == 0x11ce8) goto LAB_97bcbe60;
-                  iVar3 = 0x11d1b;
+                  if (nameHash == 0x11ce8) goto LAB_97bcbe60;
+                  fieldValue = 0x11d1b;
                 }
 LAB_97bcb0c4:
-                if (iVar11 != iVar3) goto LAB_97bcc698;
+                if (nameHash != fieldValue) goto LAB_97bcc698;
               }
             }
-            else if (iVar11 != 0x11de7) {
-              if (0x11de7 < iVar11) {
-                if (iVar11 != 0x11e62) {
-                  iVar3 = 0x11e83;
+            else if (nameHash != 0x11de7) {
+              if (0x11de7 < nameHash) {
+                if (nameHash != 0x11e62) {
+                  fieldValue = 0x11e83;
                   goto LAB_97bcb14c;
                 }
                 goto LAB_97bcc258;
               }
-              if (iVar11 != 0x11d81) {
-                iVar3 = 0x11db4;
+              if (nameHash != 0x11d81) {
+                fieldValue = 0x11db4;
                 goto LAB_97bcb0c4;
               }
             }
           }
 LAB_97bcbe60:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x10c000;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10c000;
           goto LAB_97bcbe80;
         }
-        if (iVar11 != 0x11aa6) {
-          if (iVar11 < 0x11aa7) {
-            if (iVar11 == 0x1142d) {
-              iVar12 = _PPStreamChunkCreateWithType(3,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x10c000;
+        if (nameHash != 0x11aa6) {
+          if (nameHash < 0x11aa7) {
+            if (nameHash == 0x1142d) {
+              chunk = _PPStreamChunkCreateWithType(3,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10c000;
               goto LAB_97bcbdf0;
             }
-            if (iVar11 < 0x1142e) {
-              if (iVar11 != 0x110e1) goto LAB_97bcc698;
-              iVar12 = _PPStreamChunkCreateWithType(3,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fffe | 0x50000;
-              iVar3 = 3;
+            if (nameHash < 0x1142e) {
+              if (nameHash != 0x110e1) goto LAB_97bcc698;
+              chunk = _PPStreamChunkCreateWithType(3,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
+              fieldValue = 3;
               goto LAB_97bcc0cc;
             }
-            if (iVar11 != 0x11a64) {
-              iVar3 = 0x11a85;
+            if (nameHash != 0x11a64) {
+              fieldValue = 0x11a85;
               goto LAB_97bcb03c;
             }
           }
-          else if (iVar11 != 0x11ae8) {
-            if (iVar11 < 0x11ae9) {
-              iVar3 = 0x11ac7;
+          else if (nameHash != 0x11ae8) {
+            if (nameHash < 0x11ae9) {
+              fieldValue = 0x11ac7;
             }
             else {
-              if (iVar11 == 0x11b09) goto LAB_97bcc234;
-              iVar3 = 0x11b2a;
+              if (nameHash == 0x11b09) goto LAB_97bcc234;
+              fieldValue = 0x11b2a;
             }
 LAB_97bcb03c:
-            if (iVar11 != iVar3) goto LAB_97bcc698;
+            if (nameHash != fieldValue) goto LAB_97bcc698;
           }
         }
       }
 LAB_97bcc234:
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x30000;
-      iVar3 = 2;
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
+      fieldValue = 2;
     }
     else {
-      if (iVar11 != 0x14328) {
-        if (iVar11 < 0x14329) {
-          if (iVar11 != 0x11f49) {
-            if (0x11f49 < iVar11) {
-              if (iVar11 == 0x1275a) {
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fff8 | 0x50008;
+      if (nameHash != 0x14328) {
+        if (nameHash < 0x14329) {
+          if (nameHash != 0x11f49) {
+            if (0x11f49 < nameHash) {
+              if (nameHash == 0x1275a) {
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff8 | 0x50008;
                 goto LAB_97bcc694;
               }
-              if (iVar11 < 0x1275b) {
-                bVar1 = iVar11 == 0x12304;
+              if (nameHash < 0x1275b) {
+                hashMatches = nameHash == 0x12304;
 LAB_97bcb178:
-                if (!bVar1) goto LAB_97bcc698;
+                if (!hashMatches) goto LAB_97bcc698;
                 goto LAB_97bcc034;
               }
-              if (iVar11 == 0x12c7a) {
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0cfff | 0x10c000;
+              if (nameHash == 0x12c7a) {
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe0cfff | 0x10c000;
                 goto LAB_97bcbe28;
               }
-              iVar3 = 0x14307;
+              fieldValue = 0x14307;
               goto LAB_97bcb220;
             }
-            if (iVar11 != 0x11ee6) {
-              if (iVar11 < 0x11ee7) {
-                iVar3 = 0x11ec5;
+            if (nameHash != 0x11ee6) {
+              if (nameHash < 0x11ee7) {
+                fieldValue = 0x11ec5;
               }
               else {
-                if (iVar11 == 0x11f07) goto LAB_97bcc258;
-                iVar3 = 0x11f28;
+                if (nameHash == 0x11f07) goto LAB_97bcc258;
+                fieldValue = 0x11f28;
               }
 LAB_97bcb14c:
-              if (iVar11 != iVar3) goto LAB_97bcc698;
+              if (nameHash != fieldValue) goto LAB_97bcc698;
             }
           }
 LAB_97bcc258:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          iVar3 = 3;
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x30000;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          fieldValue = 3;
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
           goto LAB_97bcc274;
         }
-        if (iVar11 != 0x143ac) {
-          if (0x143ac < iVar11) {
-            if (iVar11 != 0x14764) {
-              if (iVar11 < 0x14765) {
-                if (iVar11 != 0x143cd) {
-                  iVar3 = 0x143ee;
+        if (nameHash != 0x143ac) {
+          if (0x143ac < nameHash) {
+            if (nameHash != 0x14764) {
+              if (nameHash < 0x14765) {
+                if (nameHash != 0x143cd) {
+                  fieldValue = 0x143ee;
                   goto LAB_97bcb220;
                 }
                 goto LAB_97bcc27c;
               }
-              if (iVar11 != 0x14785) {
-                iVar3 = 0x147a6;
+              if (nameHash != 0x14785) {
+                fieldValue = 0x147a6;
                 goto LAB_97bcb2bc;
               }
             }
 LAB_97bcc2a0:
-            iVar12 = _PPStreamChunkCreateWithType(3,0);
-            uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0f7ff | 0x30700;
+            chunk = _PPStreamChunkCreateWithType(3,0);
+            chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f7ff | 0x30700;
             goto LAB_97bcc458;
           }
-          if (iVar11 != 0x1436a) {
-            if (iVar11 < 0x1436b) {
-              iVar3 = 0x14349;
+          if (nameHash != 0x1436a) {
+            if (nameHash < 0x1436b) {
+              fieldValue = 0x14349;
 LAB_97bcb220:
-              if (iVar11 != iVar3) goto LAB_97bcc698;
+              if (nameHash != fieldValue) goto LAB_97bcc698;
             }
-            else if (iVar11 != 0x1438b) {
-              if (iVar11 != 0x143a8) goto LAB_97bcc698;
-              iVar12 = _PPStreamChunkCreateWithType(3,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe00fff | 0x100000;
+            else if (nameHash != 0x1438b) {
+              if (nameHash != 0x143a8) goto LAB_97bcc698;
+              chunk = _PPStreamChunkCreateWithType(3,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xffe00fff | 0x100000;
               goto LAB_97bcbdf4;
             }
           }
         }
       }
 LAB_97bcc27c:
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x30000;
-      iVar3 = 6;
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
+      fieldValue = 6;
     }
 LAB_97bcc274:
-    uVar6 = iVar3 << 8 | uVar6 & 0xfffff0ff;
+    chunkWord = fieldValue << 8 | chunkWord & 0xfffff0ff;
   }
   else {
-    if (iVar11 == 0x1aa90) goto LAB_97bcc3bc;
-    if (0x1aa90 < iVar11) {
-      if (iVar11 == 0x21945) {
-        iVar12 = _PPStreamChunkCreateWithType(3,0);
-        uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe08fff | 0x108000;
+    if (nameHash == 0x1aa90) goto LAB_97bcc3bc;
+    if (0x1aa90 < nameHash) {
+      if (nameHash == 0x21945) {
+        chunk = _PPStreamChunkCreateWithType(3,0);
+        chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
 LAB_97bcbe28:
-        iVar3 = 1;
+        fieldValue = 1;
 LAB_97bcbe2c:
-        uVar6 = iVar3 << 8 | uVar6 & 0xfffff8ff;
+        chunkWord = fieldValue << 8 | chunkWord & 0xfffff8ff;
         goto LAB_97bcc694;
       }
-      if (iVar11 < 0x21946) {
-        if (iVar11 != 0x203d7) {
-          if (iVar11 < 0x203d8) {
-            if (iVar11 == 0x20368) goto LAB_97bcbfb8;
-            if (iVar11 < 0x20369) {
-              if (iVar11 == 0x1f97a) {
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe08fff | 0x108000;
+      if (nameHash < 0x21946) {
+        if (nameHash != 0x203d7) {
+          if (nameHash < 0x203d8) {
+            if (nameHash == 0x20368) goto LAB_97bcbfb8;
+            if (nameHash < 0x20369) {
+              if (nameHash == 0x1f97a) {
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
 LAB_97bcbdf4:
-                uVar6 = uVar6 & 0xfffff8ff | 0x300;
+                chunkWord = chunkWord & 0xfffff8ff | 0x300;
 LAB_97bcbfac:
-                *(uint *)(iVar12 + 0xc) = uVar6;
-                *(undefined1 *)(iVar12 + 0xf) = 0;
+                *(uint *)(chunk + 0xc) = chunkWord;
+                *(undefined1 *)(chunk + 0xf) = 0;
                 goto LAB_97bcc698;
               }
-              if (0x1f97a < iVar11) {
-                if (iVar11 == 0x1ff52) {
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  iVar3 = 5;
-                  uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x50001;
+              if (0x1f97a < nameHash) {
+                if (nameHash == 0x1ff52) {
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  fieldValue = 5;
+                  chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x50001;
                   goto LAB_97bcc0cc;
                 }
-                iVar3 = 0x20323;
+                fieldValue = 0x20323;
                 goto LAB_97bcb91c;
               }
-              if (iVar11 != 0x1f1a8) goto LAB_97bcc698;
+              if (nameHash != 0x1f1a8) goto LAB_97bcc698;
               goto LAB_97bcc048;
             }
-            if (iVar11 != 0x20395) {
-              if (iVar11 < 0x20396) {
-                iVar3 = 0x20374;
+            if (nameHash != 0x20395) {
+              if (nameHash < 0x20396) {
+                fieldValue = 0x20374;
               }
               else {
-                if (iVar11 == 0x203ad) goto LAB_97bcbfb8;
-                iVar3 = 0x203b6;
+                if (nameHash == 0x203ad) goto LAB_97bcbfb8;
+                fieldValue = 0x203b6;
               }
               goto LAB_97bcba88;
             }
           }
-          else if (iVar11 != 0x2043a) {
-            if (iVar11 < 0x2043b) {
-              if (iVar11 == 0x203f8) goto LAB_97bcc2ec;
-              if (iVar11 < 0x203f9) {
-                iVar3 = 0x203f2;
+          else if (nameHash != 0x2043a) {
+            if (nameHash < 0x2043b) {
+              if (nameHash == 0x203f8) goto LAB_97bcc2ec;
+              if (nameHash < 0x203f9) {
+                fieldValue = 0x203f2;
               }
               else {
-                if (iVar11 == 0x20419) goto LAB_97bcc2ec;
-                iVar3 = 0x20437;
+                if (nameHash == 0x20419) goto LAB_97bcc2ec;
+                fieldValue = 0x20437;
               }
 LAB_97bcb91c:
-              if (iVar11 != iVar3) goto LAB_97bcc698;
+              if (nameHash != fieldValue) goto LAB_97bcc698;
             }
-            else if (iVar11 != 0x204c1) {
-              if (iVar11 < 0x204c2) {
-                if (iVar11 != 0x2045b) {
-                  iVar3 = 0x2047c;
+            else if (nameHash != 0x204c1) {
+              if (nameHash < 0x204c2) {
+                if (nameHash != 0x2045b) {
+                  fieldValue = 0x2047c;
                   goto LAB_97bcb91c;
                 }
                 goto LAB_97bcc2ec;
               }
-              if (iVar11 != 0x20506) {
-                if (iVar11 != 0x2138c) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x10c000;
+              if (nameHash != 0x20506) {
+                if (nameHash != 0x2138c) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10c000;
                 goto LAB_97bcbe54;
               }
             }
 LAB_97bcbfb8:
-            iVar12 = _PPStreamChunkCreateWithType(3,0);
-            uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe08fff | 0x108000;
+            chunk = _PPStreamChunkCreateWithType(3,0);
+            chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
             goto LAB_97bcbe84;
           }
         }
       }
       else {
-        if (iVar11 == 0x24cb9) {
+        if (nameHash == 0x24cb9) {
 LAB_97bcc048:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          iVar3 = 0xe;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          fieldValue = 0xe;
           goto LAB_97bcc5c0;
         }
-        if (iVar11 < 0x24cba) {
-          if (iVar11 != 0x2461d) {
-            if (iVar11 < 0x2461e) {
-              if (iVar11 == 0x23231) goto LAB_97bcc048;
-              if (iVar11 < 0x23232) {
-                if (iVar11 != 0x21eb8) goto LAB_97bcc698;
-                iVar12 = _PPStreamChunkCreateWithType(3,0);
-                iVar3 = 5;
-                uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fffe | 0x50000;
+        if (nameHash < 0x24cba) {
+          if (nameHash != 0x2461d) {
+            if (nameHash < 0x2461e) {
+              if (nameHash == 0x23231) goto LAB_97bcc048;
+              if (nameHash < 0x23232) {
+                if (nameHash != 0x21eb8) goto LAB_97bcc698;
+                chunk = _PPStreamChunkCreateWithType(3,0);
+                fieldValue = 5;
+                chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
 LAB_97bcc0cc:
-                uVar6 = iVar3 << 1 | uVar6 & 0xfffffff1;
+                chunkWord = fieldValue << 1 | chunkWord & 0xfffffff1;
                 goto LAB_97bcc694;
               }
-              if (iVar11 != 0x245db) {
-                iVar3 = 0x245fc;
+              if (nameHash != 0x245db) {
+                fieldValue = 0x245fc;
                 goto LAB_97bcba88;
               }
             }
-            else if (iVar11 != 0x24680) {
-              if (iVar11 < 0x24681) {
-                if (iVar11 != 0x2463e) {
-                  iVar3 = 0x2465f;
+            else if (nameHash != 0x24680) {
+              if (nameHash < 0x24681) {
+                if (nameHash != 0x2463e) {
+                  fieldValue = 0x2465f;
                   goto LAB_97bcba88;
                 }
               }
-              else if (iVar11 != 0x246a1) {
-                iVar3 = 0x246c2;
+              else if (nameHash != 0x246a1) {
+                fieldValue = 0x246c2;
                 goto LAB_97bcba88;
               }
             }
           }
         }
-        else if (iVar11 != 0x2616e) {
-          if (iVar11 < 0x2616f) {
-            if (iVar11 != 0x2610b) {
-              if (iVar11 < 0x2610c) {
-                if (iVar11 == 0x254c3) {
-                  iVar12 = _PPStreamChunkCreateWithType(3,0);
-                  *(uint *)(iVar12 + 0xc) = *(uint *)(iVar12 + 0xc) & 0xffe008ff | 0x100000;
-                  *(undefined1 *)(iVar12 + 0xf) = 0;
+        else if (nameHash != 0x2616e) {
+          if (nameHash < 0x2616f) {
+            if (nameHash != 0x2610b) {
+              if (nameHash < 0x2610c) {
+                if (nameHash == 0x254c3) {
+                  chunk = _PPStreamChunkCreateWithType(3,0);
+                  *(uint *)(chunk + 0xc) = *(uint *)(chunk + 0xc) & 0xffe008ff | 0x100000;
+                  *(undefined1 *)(chunk + 0xf) = 0;
                 }
                 goto LAB_97bcc698;
               }
-              if (iVar11 != 0x2612c) {
-                iVar3 = 0x2614d;
+              if (nameHash != 0x2612c) {
+                fieldValue = 0x2614d;
                 goto LAB_97bcba88;
               }
             }
           }
-          else if (iVar11 != 0x261d1) {
-            if (iVar11 < 0x261d2) {
-              if (iVar11 != 0x2618f) {
-                iVar3 = 0x261b0;
+          else if (nameHash != 0x261d1) {
+            if (nameHash < 0x261d2) {
+              if (nameHash != 0x2618f) {
+                fieldValue = 0x261b0;
                 goto LAB_97bcba88;
               }
             }
-            else if (iVar11 != 0x261f2) {
-              if (iVar11 != 0x343c5) goto LAB_97bcc698;
-              iVar12 = _PPStreamChunkCreateWithType(3,0);
-              uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe08fff | 0x108000;
+            else if (nameHash != 0x261f2) {
+              if (nameHash != 0x343c5) goto LAB_97bcc698;
+              chunk = _PPStreamChunkCreateWithType(3,0);
+              chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
               goto LAB_97bcbfa8;
             }
           }
         }
       }
 LAB_97bcc2ec:
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x30000;
-      iVar3 = 5;
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
+      fieldValue = 5;
       goto LAB_97bcc274;
     }
-    if (iVar11 == 0x18e85) {
+    if (nameHash == 0x18e85) {
 LAB_97bcc2c8:
-      iVar12 = _PPStreamChunkCreateWithType(3,0);
-      uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0ffff | 0x30000;
-      iVar3 = 4;
+      chunk = _PPStreamChunkCreateWithType(3,0);
+      chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
+      fieldValue = 4;
       goto LAB_97bcc274;
     }
-    if (0x18e85 < iVar11) {
-      if (iVar11 != 0x19384) {
-        if (0x19384 < iVar11) {
-          if (iVar11 != 0x1a982) {
-            if (iVar11 < 0x1a983) {
-              if (iVar11 != 0x193c6) {
-                if (iVar11 < 0x193c7) {
-                  iVar3 = 0x193a5;
+    if (0x18e85 < nameHash) {
+      if (nameHash != 0x19384) {
+        if (0x19384 < nameHash) {
+          if (nameHash != 0x1a982) {
+            if (nameHash < 0x1a983) {
+              if (nameHash != 0x193c6) {
+                if (nameHash < 0x193c7) {
+                  fieldValue = 0x193a5;
                   goto LAB_97bcb768;
                 }
-                if (iVar11 != 0x193e7) {
-                  iVar3 = 0x1a955;
+                if (nameHash != 0x193e7) {
+                  fieldValue = 0x1a955;
                   goto LAB_97bcb7d8;
                 }
               }
               goto LAB_97bcc2c8;
             }
-            if (iVar11 != 0x1aa09) {
-              if (iVar11 < 0x1aa0a) {
-                if (iVar11 != 0x1a9af) {
-                  iVar3 = 0x1a9dc;
+            if (nameHash != 0x1aa09) {
+              if (nameHash < 0x1aa0a) {
+                if (nameHash != 0x1a9af) {
+                  fieldValue = 0x1a9dc;
 LAB_97bcb7d8:
-                  if (iVar11 != iVar3) goto LAB_97bcc698;
+                  if (nameHash != fieldValue) goto LAB_97bcc698;
                 }
               }
-              else if (iVar11 != 0x1aa36) {
-                iVar3 = 0x1aa63;
+              else if (nameHash != 0x1aa36) {
+                fieldValue = 0x1aa63;
                 goto LAB_97bcb7d8;
               }
             }
           }
 LAB_97bcc3bc:
-          iVar12 = _PPStreamChunkCreateWithType(3,0);
-          uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fcff | 0x40400;
+          chunk = _PPStreamChunkCreateWithType(3,0);
+          chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fcff | 0x40400;
           goto LAB_97bcc458;
         }
-        if (iVar11 != 0x18f09) {
-          if (iVar11 < 0x18f0a) {
-            if (iVar11 != 0x18ea6) {
-              if (iVar11 < 0x18ea7) {
-                iVar3 = 0x18e8a;
+        if (nameHash != 0x18f09) {
+          if (nameHash < 0x18f0a) {
+            if (nameHash != 0x18ea6) {
+              if (nameHash < 0x18ea7) {
+                fieldValue = 0x18e8a;
                 goto LAB_97bcb6c4;
               }
-              if (iVar11 != 0x18ec7) {
-                iVar3 = 0x18ee8;
+              if (nameHash != 0x18ec7) {
+                fieldValue = 0x18ee8;
                 goto LAB_97bcb768;
               }
             }
           }
-          else if (iVar11 != 0x19321) {
-            if (iVar11 < 0x19322) {
-              if (iVar11 != 0x18f2a) {
-                iVar3 = 0x19300;
+          else if (nameHash != 0x19321) {
+            if (nameHash < 0x19322) {
+              if (nameHash != 0x18f2a) {
+                fieldValue = 0x19300;
 LAB_97bcb768:
-                if (iVar11 != iVar3) goto LAB_97bcc698;
+                if (nameHash != fieldValue) goto LAB_97bcc698;
               }
             }
-            else if (iVar11 != 0x19342) {
-              iVar3 = 0x19363;
+            else if (nameHash != 0x19342) {
+              fieldValue = 0x19363;
               goto LAB_97bcb768;
             }
           }
@@ -2020,76 +2022,76 @@ LAB_97bcb768:
       }
       goto LAB_97bcc2c8;
     }
-    if (iVar11 != 0x18c8a) {
-      if (0x18c8a < iVar11) {
-        if (iVar11 != 0x18dde) {
-          if (iVar11 < 0x18ddf) {
-            if (iVar11 != 0x18d5d) {
-              if (iVar11 < 0x18d5e) {
-                iVar3 = 0x18cb7;
+    if (nameHash != 0x18c8a) {
+      if (0x18c8a < nameHash) {
+        if (nameHash != 0x18dde) {
+          if (nameHash < 0x18ddf) {
+            if (nameHash != 0x18d5d) {
+              if (nameHash < 0x18d5e) {
+                fieldValue = 0x18cb7;
                 goto LAB_97bcb60c;
               }
-              if (iVar11 != 0x18d88) {
-                iVar3 = 0x18db3;
+              if (nameHash != 0x18d88) {
+                fieldValue = 0x18db3;
 LAB_97bcb6c4:
-                if (iVar11 != iVar3) goto LAB_97bcc698;
+                if (nameHash != fieldValue) goto LAB_97bcc698;
               }
             }
           }
           else {
-            if (iVar11 == 0x18e43) goto LAB_97bcc2c8;
-            if (iVar11 < 0x18e44) {
-              if (iVar11 != 0x18e09) {
-                iVar3 = 0x18e34;
+            if (nameHash == 0x18e43) goto LAB_97bcc2c8;
+            if (nameHash < 0x18e44) {
+              if (nameHash != 0x18e09) {
+                fieldValue = 0x18e34;
                 goto LAB_97bcb6c4;
               }
             }
-            else if (iVar11 != 0x18e5f) {
-              iVar3 = 0x18e64;
+            else if (nameHash != 0x18e5f) {
+              fieldValue = 0x18e64;
               goto LAB_97bcb768;
             }
           }
         }
-        iVar12 = _PPStreamChunkCreateWithType(3,0);
-        uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0fdff | 0x40500;
+        chunk = _PPStreamChunkCreateWithType(3,0);
+        chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fdff | 0x40500;
         goto LAB_97bcc458;
       }
-      if (iVar11 != 0x18ba9) {
-        if (iVar11 < 0x18baa) {
-          if (iVar11 == 0x18b64) goto LAB_97bcc36c;
-          if (iVar11 < 0x18b65) {
-            iVar3 = 0x18b37;
+      if (nameHash != 0x18ba9) {
+        if (nameHash < 0x18baa) {
+          if (nameHash == 0x18b64) goto LAB_97bcc36c;
+          if (nameHash < 0x18b65) {
+            fieldValue = 0x18b37;
           }
           else {
-            if (iVar11 == 0x18b7c) goto LAB_97bcc390;
-            iVar3 = 0x18b91;
+            if (nameHash == 0x18b7c) goto LAB_97bcc390;
+            fieldValue = 0x18b91;
           }
           goto LAB_97bcb594;
         }
-        if (iVar11 != 0x18c03) {
-          if (iVar11 < 0x18c04) {
-            iVar3 = 0x18bd6;
+        if (nameHash != 0x18c03) {
+          if (nameHash < 0x18c04) {
+            fieldValue = 0x18bd6;
           }
           else {
-            if (iVar11 == 0x18c30) goto LAB_97bcc390;
-            iVar3 = 0x18c5d;
+            if (nameHash == 0x18c30) goto LAB_97bcc390;
+            fieldValue = 0x18c5d;
           }
 LAB_97bcb60c:
-          if (iVar11 != iVar3) goto LAB_97bcc698;
+          if (nameHash != fieldValue) goto LAB_97bcc698;
         }
       }
     }
 LAB_97bcc390:
-    iVar12 = _PPStreamChunkCreateWithType(3,0);
-    uVar6 = *(uint *)(iVar12 + 0xc) & 0xffe0f8ff | 0x40200;
+    chunk = _PPStreamChunkCreateWithType(3,0);
+    chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f8ff | 0x40200;
   }
 LAB_97bcc458:
-  *(uint *)(iVar12 + 0xc) = uVar6;
-  directIndex2 = ParseSymbol__GetDirectIndex(param_1,0);
-  *(undefined1 *)(iVar12 + 0xf) = directIndex2;
+  *(uint *)(chunk + 0xc) = chunkWord;
+  directIndex2 = ParseSymbol__GetDirectIndex(parseSymbol,0);
+  *(undefined1 *)(chunk + 0xf) = directIndex2;
 LAB_97bcc698:
-  *(undefined4 *)(param_1 + 0x34) = 1;
-  return iVar12;
+  *(undefined4 *)(parseSymbol + 0x34) = 1;
+  return chunk;
 }
 
 /* GetChunkForSymbol @ 0x97bcc6b8 (592 bytes) */
@@ -2097,6 +2099,7 @@ int GetChunkForSymbol(param_1, param_2)
   unsigned char * param_1;
   int param_2;
 {
+  uint builtInInitialSwizzle;
   uint streamType;
   int scalerWidthForType;
   bool bVar1;
@@ -2169,8 +2172,8 @@ LAB_97bcc8c4:
   if (*(int *)(param_1 + 0x34) == 0) {
     return pbVar5;
   }
-  uVar7 = ((int (*)())GetBuiltInInitialSwizzle)(param_1);
-  if (uVar7 == 0) {
+  builtInInitialSwizzle = ((int (*)())GetBuiltInInitialSwizzle)(param_1);
+  if (builtInInitialSwizzle == 0) {
     return pbVar5;
   }
   bVar2 = *pbVar5;
@@ -2188,8 +2191,8 @@ LAB_97bcc8c4:
   }
 LAB_97bcc908:
   uVar3 = *(uint *)(pbVar5 + 0xc) >> 0x18 & 3;
-  if (uVar3 < uVar7) {
-    uVar3 = uVar7;
+  if (uVar3 < builtInInitialSwizzle) {
+    uVar3 = builtInInitialSwizzle;
   }
   *(uint *)(pbVar5 + 0xc) = (uVar3 & 3) << 0x18 | *(uint *)(pbVar5 + 0xc) & 0xfcffffff;
   return pbVar5;
@@ -2598,6 +2601,8 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  uint framebufferFormat;
+  float floatValue;
   float fVar1;
   float fVar2;
   uint uVar3;
@@ -2613,16 +2618,16 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
   
   iVar9 = *param_1;
   if (*(int *)(iVar9 + 0xd9c) != 0) {
-    uVar4 = _PPEmulatorFramebufferFormat(iVar9);
-    if ((uVar4 & 0x8000000) == 0) {
-      uVar4 = _PPEmulatorFramebufferFormat(iVar9);
+    framebufferFormat = _PPEmulatorFramebufferFormat(iVar9);
+    if ((framebufferFormat & 0x8000000) == 0) {
+      framebufferFormat = _PPEmulatorFramebufferFormat(iVar9);
       fVar5 = FLOAT_97c3acc0;
       fVar2 = FLOAT_97c3acbc;
-      if ((uVar4 & 0x8000) == 0) {
-        uVar4 = _PPEmulatorFramebufferFormat(iVar9);
+      if ((framebufferFormat & 0x8000) == 0) {
+        framebufferFormat = _PPEmulatorFramebufferFormat(iVar9);
         fVar5 = FLOAT_97c3acc4;
         fVar2 = FLOAT_97c3acc0;
-        if ((uVar4 & 0x400) == 0) {
+        if ((framebufferFormat & 0x400) == 0) {
           return;
         }
         fVar7 = *param_2 * FLOAT_97c3acc4 + FLOAT_97c3acc0;
@@ -2690,7 +2695,7 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           uVar3 = 0;
         }
-        fVar2 = GH_U2F((unsigned int)((uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f)));
+        floatValue = GH_U2F((unsigned int)((uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f)));
       }
       else {
         fVar7 = *param_2 * FLOAT_97c3acbc + FLOAT_97c3acc0;
@@ -2771,10 +2776,10 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           iVar9 = (int)param_2[3];
         }
-        fVar2 = GH_U2F((unsigned int)((iVar9 << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
+        floatValue = GH_U2F((unsigned int)((iVar9 << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
         ;
       }
-      *param_3 = fVar2;
+      *param_3 = floatValue;
     }
     else {
       fVar2 = *param_2;
@@ -2798,19 +2803,19 @@ int _InterpreterUnpackPixel(param_1, param_2, param_3)
   float fVar1;
   float fVar2;
   float fVar3;
-  uint uVar4;
+  uint framebufferFormat;
   float fVar5;
   float fVar6;
   int iVar7;
   
   iVar7 = *param_1;
   if (*(int *)(iVar7 + 0xd9c) != 0) {
-    uVar4 = _PPEmulatorFramebufferFormat(iVar7);
-    if ((uVar4 & 0x8000000) == 0) {
-      uVar4 = _PPEmulatorFramebufferFormat(iVar7);
-      if ((uVar4 & 0x8000) == 0) {
-        uVar4 = _PPEmulatorFramebufferFormat(iVar7);
-        if ((uVar4 & 0x400) == 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(iVar7);
+    if ((framebufferFormat & 0x8000000) == 0) {
+      framebufferFormat = _PPEmulatorFramebufferFormat(iVar7);
+      if ((framebufferFormat & 0x8000) == 0) {
+        framebufferFormat = _PPEmulatorFramebufferFormat(iVar7);
+        if ((framebufferFormat & 0x400) == 0) {
           return;
         }
         fVar6 = *param_3;
@@ -3146,6 +3151,22 @@ int _InterpreterTestCR(param_1, param_2, param_3, param_4, param_5, param_6, par
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  int conditionResult;
+  double exp2Result2;
+  double floorResult2;
+  double truncResult;
+  double atanResult;
+  double acosResult;
+  double asinResult;
+  double tanResult;
+  double sinResult;
+  double cosResult;
+  double log2Result;
+  double exp2Result;
+  double sqrtResult;
+  double floorResult;
+  double ceilResult;
+  double powResult;
   uint loopIndex;
   uint loopIndex2;
   float *pfVar1;
@@ -3804,8 +3825,8 @@ switchD_97bd0598_caseD_0:
           local_70 = opVec[4];
           fparam_2 = (double)opVec[7];
           opVec[1] = opVec[4];
-          dVar27 = _pow((double)opVec[5],fparam_2);
-          opVec[2] = (float)dVar27;
+          powResult = _pow((double)opVec[5],fparam_2);
+          opVec[2] = (float)powResult;
         }
         goto LAB_97bd1cd8;
       case 2:
@@ -3815,35 +3836,35 @@ switchD_97bd0598_caseD_0:
         opVec[3] = ABS(opVec[7]);
         break;
       case 3:
-        dVar27 = _ceil((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _ceil((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _ceil((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        ceilResult = _ceil((double)opVec[4]);
+        opVec[0] = (float)ceilResult;
+        ceilResult = _ceil((double)opVec[5]);
+        opVec[1] = (float)ceilResult;
+        ceilResult = _ceil((double)opVec[6]);
+        opVec[2] = (float)ceilResult;
         dVar27 = _ceil((double)opVec[7]);
         goto LAB_97bd2010;
       case 4:
         dVar29 = (double)opVec[4];
-        dVar27 = _floor(dVar29);
+        floorResult = _floor(dVar29);
         dVar28 = (double)opVec[5];
-        opVec[0] = (float)(dVar29 - dVar27);
-        dVar27 = _floor(dVar28);
+        opVec[0] = (float)(dVar29 - floorResult);
+        floorResult = _floor(dVar28);
         dVar29 = (double)opVec[6];
-        opVec[1] = (float)(dVar28 - dVar27);
-        dVar28 = _floor(dVar29);
+        opVec[1] = (float)(dVar28 - floorResult);
+        floorResult2 = _floor(dVar29);
         dVar27 = (double)opVec[7];
-        opVec[2] = (float)(dVar29 - dVar28);
-        dVar28 = _floor(dVar27);
-        dVar27 = dVar27 - dVar28;
+        opVec[2] = (float)(dVar29 - floorResult2);
+        floorResult2 = _floor(dVar27);
+        dVar27 = dVar27 - floorResult2;
         goto LAB_97bd1440;
       case 5:
-        dVar27 = _floor((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _floor((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _floor((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        floorResult = _floor((double)opVec[4]);
+        opVec[0] = (float)floorResult;
+        floorResult = _floor((double)opVec[5]);
+        opVec[1] = (float)floorResult;
+        floorResult = _floor((double)opVec[6]);
+        opVec[2] = (float)floorResult;
         dVar27 = _floor((double)opVec[7]);
         goto LAB_97bd2010;
       default:
@@ -3946,28 +3967,28 @@ LAB_97bd0cc8:
         }
         break;
       case 0xc:
-        dVar27 = _sqrt(ABS((double)opVec[4]));
-        opVec[0] = (float)dVar27;
-        dVar27 = _sqrt(ABS((double)opVec[5]));
-        opVec[1] = (float)dVar27;
-        dVar27 = _sqrt(ABS((double)opVec[6]));
-        opVec[2] = (float)dVar27;
+        sqrtResult = _sqrt(ABS((double)opVec[4]));
+        opVec[0] = (float)sqrtResult;
+        sqrtResult = _sqrt(ABS((double)opVec[5]));
+        opVec[1] = (float)sqrtResult;
+        sqrtResult = _sqrt(ABS((double)opVec[6]));
+        opVec[2] = (float)sqrtResult;
         dVar27 = _sqrt(ABS((double)opVec[7]));
         goto LAB_97bd2010;
       case 0xd:
         if (*(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U < 2) {
-          dVar27 = _sqrt(ABS((double)opVec[4]));
-          opVec[0] = (float)(1.0 / dVar27);
-          dVar27 = _sqrt(ABS((double)opVec[5]));
-          opVec[1] = (float)(1.0 / dVar27);
-          dVar27 = _sqrt(ABS((double)opVec[6]));
-          opVec[2] = (float)(1.0 / dVar27);
-          dVar27 = _sqrt(ABS((double)opVec[7]));
-          dVar27 = 1.0 / dVar27;
+          sqrtResult = _sqrt(ABS((double)opVec[4]));
+          opVec[0] = (float)(1.0 / sqrtResult);
+          sqrtResult = _sqrt(ABS((double)opVec[5]));
+          opVec[1] = (float)(1.0 / sqrtResult);
+          sqrtResult = _sqrt(ABS((double)opVec[6]));
+          opVec[2] = (float)(1.0 / sqrtResult);
+          sqrtResult = _sqrt(ABS((double)opVec[7]));
+          dVar27 = 1.0 / sqrtResult;
           goto LAB_97bd1440;
         }
-        dVar27 = _sqrt(ABS((double)opVec[7]));
-        dVar27 = 1.0 / dVar27;
+        sqrtResult = _sqrt(ABS((double)opVec[7]));
+        dVar27 = 1.0 / sqrtResult;
         goto LAB_97bd0cc8;
       case 0xe:
         opVec[0] = 1.0 / opVec[7];
@@ -4018,19 +4039,19 @@ LAB_97bd0d80:
           dVar27 = _exp2((double)opVec[7]);
           goto LAB_97bd1d68;
         }
-        dVar27 = _exp2((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _exp2((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _exp2((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        exp2Result = _exp2((double)opVec[4]);
+        opVec[0] = (float)exp2Result;
+        exp2Result = _exp2((double)opVec[5]);
+        opVec[1] = (float)exp2Result;
+        exp2Result = _exp2((double)opVec[6]);
+        opVec[2] = (float)exp2Result;
         dVar27 = _exp2((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x11:
-        dVar27 = _floor((double)opVec[7]);
-        dVar28 = _exp2((double)(float)dVar27);
-        opVec[0] = (float)dVar28;
-        opVec[1] = (float)((double)opVec[7] - (double)(float)dVar27);
+        floorResult = _floor((double)opVec[7]);
+        exp2Result2 = _exp2((double)(float)floorResult);
+        opVec[0] = (float)exp2Result2;
+        opVec[1] = (float)((double)opVec[7] - (double)(float)floorResult);
         dVar27 = _exp2((double)opVec[7]);
         goto LAB_97bd0fd4;
       case 0x12:
@@ -4066,21 +4087,21 @@ LAB_97bd1d68:
         if (dVar27 < 0.0) {
           dVar27 = 0.0;
         }
-        dVar27 = _log2(dVar27);
+        log2Result = _log2(dVar27);
         dVar28 = (double)opVec[5];
-        opVec[0] = (float)dVar27;
+        opVec[0] = (float)log2Result;
         if (dVar28 < 0.0) {
           dVar28 = 0.0;
         }
-        dVar27 = _log2(dVar28);
+        log2Result = _log2(dVar28);
         dVar28 = (double)opVec[6];
-        opVec[1] = (float)dVar27;
+        opVec[1] = (float)log2Result;
         if (dVar28 < 0.0) {
           dVar28 = 0.0;
         }
-        dVar27 = _log2(dVar28);
+        log2Result = _log2(dVar28);
         dVar28 = (double)opVec[7];
-        opVec[2] = (float)dVar27;
+        opVec[2] = (float)log2Result;
         if (dVar28 < 0.0) {
           dVar28 = 0.0;
         }
@@ -4088,11 +4109,11 @@ LAB_97bd1d68:
         goto LAB_97bd2010;
       case 0x14:
         dVar28 = ABS((double)opVec[7]);
-        dVar27 = _log2(dVar28);
-        dVar27 = _floor(dVar27);
-        opVec[0] = (float)dVar27;
-        dVar27 = _exp2((double)opVec[0]);
-        opVec[1] = (float)(dVar28 / dVar27);
+        log2Result = _log2(dVar28);
+        floorResult = _floor(log2Result);
+        opVec[0] = (float)floorResult;
+        exp2Result = _exp2((double)opVec[0]);
+        opVec[1] = (float)(dVar28 / exp2Result);
         if (dVar28 < 0.0) {
           dVar28 = 0.0;
         }
@@ -4113,12 +4134,12 @@ LAB_97bd0fd4:
             uVar24 = uVar24 - 1;
           } while (uVar24 != 0);
         }
-        dVar27 = _sqrt(dVar27);
+        sqrtResult = _sqrt(dVar27);
         uVar24 = (uint)*(byte *)((int)inst + 5);
         if (uVar24 != 0) {
           pfVar10 = opVec;
           do {
-            *pfVar10 = pfVar10[4] / (float)dVar27;
+            *pfVar10 = pfVar10[4] / (float)sqrtResult;
             pfVar10 = pfVar10 + 1;
             uVar24 = uVar24 - 1;
           } while (uVar24 != 0);
@@ -4136,10 +4157,10 @@ LAB_97bd109c:
         opVec[3] = opVec[7] * fVar6;
         break;
       case 0x18:
-        dVar27 = _cos((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _sin((double)opVec[4]);
-        opVec[1] = (float)dVar27;
+        cosResult = _cos((double)opVec[4]);
+        opVec[0] = (float)cosResult;
+        sinResult = _sin((double)opVec[4]);
+        opVec[1] = (float)sinResult;
         opVec[3] = 0.0;
         opVec[2] = 0.0;
         break;
@@ -4148,12 +4169,12 @@ LAB_97bd109c:
           dVar27 = _sin((double)opVec[7]);
           goto LAB_97bd1d68;
         }
-        dVar27 = _sin((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _sin((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _sin((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        sinResult = _sin((double)opVec[4]);
+        opVec[0] = (float)sinResult;
+        sinResult = _sin((double)opVec[5]);
+        opVec[1] = (float)sinResult;
+        sinResult = _sin((double)opVec[6]);
+        opVec[2] = (float)sinResult;
         dVar27 = _sin((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1a:
@@ -4161,49 +4182,49 @@ LAB_97bd109c:
           dVar27 = _cos((double)opVec[7]);
           goto LAB_97bd1d68;
         }
-        dVar27 = _cos((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _cos((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _cos((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        cosResult = _cos((double)opVec[4]);
+        opVec[0] = (float)cosResult;
+        cosResult = _cos((double)opVec[5]);
+        opVec[1] = (float)cosResult;
+        cosResult = _cos((double)opVec[6]);
+        opVec[2] = (float)cosResult;
         dVar27 = _cos((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1b:
-        dVar27 = _tan((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _tan((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _tan((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        tanResult = _tan((double)opVec[4]);
+        opVec[0] = (float)tanResult;
+        tanResult = _tan((double)opVec[5]);
+        opVec[1] = (float)tanResult;
+        tanResult = _tan((double)opVec[6]);
+        opVec[2] = (float)tanResult;
         dVar27 = _tan((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1c:
-        dVar27 = _asin((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _asin((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _asin((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        asinResult = _asin((double)opVec[4]);
+        opVec[0] = (float)asinResult;
+        asinResult = _asin((double)opVec[5]);
+        opVec[1] = (float)asinResult;
+        asinResult = _asin((double)opVec[6]);
+        opVec[2] = (float)asinResult;
         dVar27 = _asin((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1d:
-        dVar27 = _acos((double)opVec[4]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _acos((double)opVec[5]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _acos((double)opVec[6]);
-        opVec[2] = (float)dVar27;
+        acosResult = _acos((double)opVec[4]);
+        opVec[0] = (float)acosResult;
+        acosResult = _acos((double)opVec[5]);
+        opVec[1] = (float)acosResult;
+        acosResult = _acos((double)opVec[6]);
+        opVec[2] = (float)acosResult;
         dVar27 = _acos((double)opVec[7]);
         goto LAB_97bd2010;
       case 0x1e:
         if (inst[0xc] == 1) {
-          dVar27 = _atan((double)opVec[4]);
-          opVec[0] = (float)dVar27;
-          dVar27 = _atan((double)opVec[5]);
-          opVec[1] = (float)dVar27;
-          dVar27 = _atan((double)opVec[6]);
-          opVec[2] = (float)dVar27;
+          atanResult = _atan((double)opVec[4]);
+          opVec[0] = (float)atanResult;
+          atanResult = _atan((double)opVec[5]);
+          opVec[1] = (float)atanResult;
+          atanResult = _atan((double)opVec[6]);
+          opVec[2] = (float)atanResult;
           dVar27 = _atan((double)opVec[7]);
           goto LAB_97bd2010;
         }
@@ -4229,35 +4250,35 @@ LAB_97bd109c:
         if (*(char *)((int)inst + 0x6d) == '\x01') {
           dVar27 = (double)opVec[4];
           dVar31 = (double)opVec[8];
-          dVar28 = _floor((double)(float)(dVar27 / dVar31));
+          floorResult2 = _floor((double)(float)(dVar27 / dVar31));
           dVar29 = (double)opVec[5];
           dVar30 = (double)opVec[8];
-          opVec[0] = (float)-(dVar31 * dVar28 - dVar27);
-          dVar27 = _floor((double)(float)(dVar29 / dVar30));
+          opVec[0] = (float)-(dVar31 * floorResult2 - dVar27);
+          floorResult = _floor((double)(float)(dVar29 / dVar30));
           dVar28 = (double)opVec[6];
           dVar31 = (double)opVec[8];
-          opVec[1] = (float)-(dVar30 * dVar27 - dVar29);
-          dVar27 = _floor((double)(float)(dVar28 / dVar31));
+          opVec[1] = (float)-(dVar30 * floorResult - dVar29);
+          floorResult = _floor((double)(float)(dVar28 / dVar31));
           fVar6 = opVec[8];
         }
         else {
           dVar27 = (double)opVec[4];
           dVar31 = (double)opVec[8];
-          dVar28 = _floor((double)(float)(dVar27 / dVar31));
+          floorResult2 = _floor((double)(float)(dVar27 / dVar31));
           dVar29 = (double)opVec[5];
           dVar30 = (double)opVec[9];
-          opVec[0] = (float)-(dVar31 * dVar28 - dVar27);
-          dVar27 = _floor((double)(float)(dVar29 / dVar30));
+          opVec[0] = (float)-(dVar31 * floorResult2 - dVar27);
+          floorResult = _floor((double)(float)(dVar29 / dVar30));
           dVar28 = (double)opVec[6];
           dVar31 = (double)opVec[10];
-          opVec[1] = (float)-(dVar30 * dVar27 - dVar29);
-          dVar27 = _floor((double)(float)(dVar28 / dVar31));
+          opVec[1] = (float)-(dVar30 * floorResult - dVar29);
+          floorResult = _floor((double)(float)(dVar28 / dVar31));
           fVar6 = opVec[0xb];
         }
         dVar29 = (double)opVec[7];
-        opVec[2] = (float)-(dVar31 * dVar27 - dVar28);
-        dVar27 = _floor((double)(float)(dVar29 / (double)fVar6));
-        dVar27 = -((double)fVar6 * dVar27 - dVar29);
+        opVec[2] = (float)-(dVar31 * floorResult - dVar28);
+        floorResult = _floor((double)(float)(dVar29 / (double)fVar6));
+        dVar27 = -((double)fVar6 * floorResult - dVar29);
 LAB_97bd1440:
         opVec[3] = (float)dVar27;
         break;
@@ -4587,13 +4608,13 @@ LAB_97bd1cd8:
           dVar27 = _pow((double)opVec[7],fparam_2);
           goto LAB_97bd1d68;
         }
-        dVar27 = _pow((double)opVec[4],(double)opVec[8]);
-        opVec[0] = (float)dVar27;
-        dVar27 = _pow((double)opVec[5],(double)opVec[9]);
-        opVec[1] = (float)dVar27;
-        dVar27 = _pow((double)opVec[6],(double)opVec[10]);
+        powResult = _pow((double)opVec[4],(double)opVec[8]);
+        opVec[0] = (float)powResult;
+        powResult = _pow((double)opVec[5],(double)opVec[9]);
+        opVec[1] = (float)powResult;
+        powResult = _pow((double)opVec[6],(double)opVec[10]);
         fparam_2 = (double)opVec[0xb];
-        opVec[2] = (float)dVar27;
+        opVec[2] = (float)powResult;
         dVar27 = _pow((double)opVec[7],fparam_2);
         goto LAB_97bd2010;
       case 0x39:
@@ -4642,11 +4663,11 @@ LAB_97bd1cd8:
           opVec[3] = opVec[7] / opVec[0xb];
         }
         else if (inst[9] == 3) {
-          dVar27 = _trunc((double)(opVec[4] / opVec[8]));
-          opVec[0] = (float)dVar27;
-          dVar27 = _trunc((double)(opVec[5] / opVec[9]));
-          opVec[1] = (float)dVar27;
-          dVar27 = _trunc((double)(opVec[6] / opVec[10]));
+          truncResult = _trunc((double)(opVec[4] / opVec[8]));
+          opVec[0] = (float)truncResult;
+          truncResult = _trunc((double)(opVec[5] / opVec[9]));
+          opVec[1] = (float)truncResult;
+          truncResult = _trunc((double)(opVec[6] / opVec[10]));
           fVar6 = opVec[7] / opVec[0xb];
           goto LAB_97bd200c;
         }
@@ -4925,34 +4946,34 @@ LAB_97bd29a8:
         break;
       case 0x48:
       case 0x49:
-        dVar27 = _floor((double)opVec[4]);
-        if (2147483648.0 <= dVar27) {
-          local_98 = (longlong)(int)(dVar27 - 2147483648.0);
-          uVar24 = (int)(dVar27 - 2147483648.0) ^ 0x80000000;
+        floorResult = _floor((double)opVec[4]);
+        if (2147483648.0 <= floorResult) {
+          local_98 = (longlong)(int)(floorResult - 2147483648.0);
+          uVar24 = (int)(floorResult - 2147483648.0) ^ 0x80000000;
         }
         else {
-          uVar24 = (uint)(int)dVar27;
+          uVar24 = (uint)(int)floorResult;
           local_90 = (longlong)(int)uVar24;
         }
         machine[0x290] = uVar24;
         goto switchD_97bd0598_caseD_6;
       case 0x4b:
         in_r5 = (float *)inst[4];
-        iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                     inst[8],inst[9],inst[10],inst[0xb],0);
-        if (iVar14 == 0) {
+        if (conditionResult == 0) {
           in_r5 = (float *)inst[4];
-          iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                       inst[8],inst[9],inst[10],inst[0xb],1);
-          if (iVar14 == 0) {
+          if (conditionResult == 0) {
             in_r5 = (float *)inst[4];
-            iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                         inst[8],inst[9],inst[10],inst[0xb],2);
-            if (iVar14 == 0) {
+            if (conditionResult == 0) {
               in_r5 = (float *)inst[4];
-              iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
-              if (iVar14 == 0) goto switchD_97bd0598_caseD_6;
+              if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
             }
           }
         }
@@ -4969,21 +4990,21 @@ switchD_97bd0598_caseD_6:
         break;
       case 0x4c:
         in_r5 = (float *)inst[4];
-        iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                     inst[8],inst[9],inst[10],inst[0xb],0);
-        if (iVar14 == 0) {
+        if (conditionResult == 0) {
           in_r5 = (float *)inst[4];
-          iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                       inst[8],inst[9],inst[10],inst[0xb],1);
-          if (iVar14 == 0) {
+          if (conditionResult == 0) {
             in_r5 = (float *)inst[4];
-            iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                         inst[8],inst[9],inst[10],inst[0xb],2);
-            if (iVar14 == 0) {
+            if (conditionResult == 0) {
               in_r5 = (float *)inst[4];
-              iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
-              if (iVar14 == 0) goto switchD_97bd0598_caseD_6;
+              if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
             }
           }
         }
@@ -4995,21 +5016,21 @@ switchD_97bd0598_caseD_6:
         break;
       case 0x4d:
         in_r5 = (float *)inst[4];
-        iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+        conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                     inst[8],inst[9],inst[10],inst[0xb],0);
-        if (iVar14 == 0) {
+        if (conditionResult == 0) {
           in_r5 = (float *)inst[4];
-          iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+          conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                       inst[8],inst[9],inst[10],inst[0xb],1);
-          if (iVar14 == 0) {
+          if (conditionResult == 0) {
             in_r5 = (float *)inst[4];
-            iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+            conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                         inst[8],inst[9],inst[10],inst[0xb],2);
-            if (iVar14 == 0) {
+            if (conditionResult == 0) {
               in_r5 = (float *)inst[4];
-              iVar14 = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
+              conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
-              if (iVar14 == 0) goto switchD_97bd0598_caseD_6;
+              if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
             }
           }
         }
@@ -5047,9 +5068,9 @@ switchD_97bd0598_caseD_6:
         dVar27 = (double)-(local_100[0] * local_100[0] * (1.0 - fVar6 * fVar6) - 1.0);
         if (0.0 <= dVar27) {
           fVar6 = local_100[0] * fVar6;
-          dVar27 = _sqrt(dVar27);
+          sqrtResult = _sqrt(dVar27);
           dVar28 = (double)local_100[0];
-          fVar6 = (float)((double)fVar6 + dVar27);
+          fVar6 = (float)((double)fVar6 + sqrtResult);
           fparam_7 = (double)(fVar6 * opVec[0xb]);
           opVec[0] = (float)(dVar28 * (double)opVec[4] - (double)(fVar6 * opVec[8]));
           opVec[1] = (float)(dVar28 * (double)opVec[5] - (double)(fVar6 * opVec[9]));
@@ -5066,14 +5087,14 @@ switchD_97bd0598_caseD_6:
         break;
       case 0x6c:
         if ((inst[9] == 3) && (inst[0x13] == 1)) {
-          dVar27 = _trunc((double)opVec[4]);
-          opVec[0] = (float)dVar27;
-          dVar27 = _trunc((double)opVec[5]);
-          opVec[1] = (float)dVar27;
-          dVar27 = _trunc((double)opVec[6]);
+          truncResult = _trunc((double)opVec[4]);
+          opVec[0] = (float)truncResult;
+          truncResult = _trunc((double)opVec[5]);
+          opVec[1] = (float)truncResult;
+          truncResult = _trunc((double)opVec[6]);
           fVar6 = opVec[7];
 LAB_97bd200c:
-          opVec[2] = (float)dVar27;
+          opVec[2] = (float)truncResult;
           dVar27 = _trunc((double)fVar6);
           goto LAB_97bd2010;
         }

@@ -166,6 +166,7 @@ int _PPStreamGetStream(stream, param_2, param_3)
   undefined4 *param_2;
   int *param_3;
 {
+  int maxIndex;
   undefined4 uVar1;
   int iVar2;
   uint uVar3;
@@ -200,8 +201,8 @@ int _PPStreamGetStream(stream, param_2, param_3)
       param_2[6] = 0;
     }
     else {
-      iVar2 = ((int (*)())_PPStreamChunkListGetMaxIndex)(stream[3]);
-      param_2[6] = iVar2 + 1;
+      maxIndex = ((int (*)())_PPStreamChunkListGetMaxIndex)(stream[3]);
+      param_2[6] = maxIndex + 1;
     }
     uVar1 = *(undefined4 *)(stream[1] + 8);
     param_2[5] = 0xe;
@@ -409,6 +410,8 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
   undefined4 *emulator;
   undefined4 *param_2;
 {
+  int chunk2;
+  int chunk;
   uint loopIndex;
   undefined4 allocation;
   ushort uVar1;
@@ -572,8 +575,8 @@ switchD_97b832a0_caseD_6:
           uVar23 = emulator[0x20] + (uint)*(ushort *)(iVar25 + 0x1a) * 0x10;
         }
         else if (uVar13 == 3) {
-          iVar6 = ((int (*)())_PPStreamChunkListChunkAtIndex)(uVar16,(uint)*(ushort *)(iVar25 + 0x1a));
-          if ((*(uint *)(iVar6 + 0xc) >> 0x10 & 0xf) == 7) {
+          chunk2 = ((int (*)())_PPStreamChunkListChunkAtIndex)(uVar16,(uint)*(ushort *)(iVar25 + 0x1a));
+          if ((*(uint *)(chunk2 + 0xc) >> 0x10 & 0xf) == 7) {
             emulator[0xd] = emulator[0xd] | 0x2000;
             *(undefined2 *)(puVar9 + 7) = 9;
           }
@@ -581,7 +584,7 @@ switchD_97b832a0_caseD_6:
             *(undefined2 *)(puVar9 + 7) = 1;
           }
           emulator[0xd] = emulator[0xd] | 2;
-          uVar23 = emulator[0x23] + (uint)*(ushort *)(iVar6 + 0x12) * 0x10;
+          uVar23 = emulator[0x23] + (uint)*(ushort *)(chunk2 + 0x12) * 0x10;
         }
         puVar9[3] = uVar23;
         if (*(int *)(iVar25 + 0x18) < 0) {
@@ -716,8 +719,8 @@ LAB_97b837e4:
             }
             if (1 < uVar14) {
               if (uVar14 == 2) {
-                iVar21 = ((int (*)())_PPStreamChunkListChunkAtIndex)(uVar17,(uint)*(ushort *)((int)puVar27 + iVar21 + 0x16));
-                uVar23 = *(uint *)(iVar21 + 0xc) >> 0x10 & 0x1f;
+                chunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(uVar17,(uint)*(ushort *)((int)puVar27 + iVar21 + 0x16));
+                uVar23 = *(uint *)(chunk + 0xc) >> 0x10 & 0x1f;
                 if (uVar23 == 1) {
                   *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 5;
                   iVar7 = emulator[0x29];
@@ -734,16 +737,16 @@ LAB_97b837e4:
                   uVar23 = emulator[0xd] | 0x10;
                 }
                 emulator[0xd] = uVar23;
-                uVar23 = iVar7 + (uint)*(ushort *)(iVar21 + 0x12) * 0x10;
+                uVar23 = iVar7 + (uint)*(ushort *)(chunk + 0x12) * 0x10;
                 puVar9[iVar6 * 9 + 0xe] = 3;
-                puVar9[iVar6 * 9 + 0x13] = *(uint *)(iVar21 + 0xc) >> 0x1a & 7;
+                puVar9[iVar6 * 9 + 0x13] = *(uint *)(chunk + 0xc) >> 0x1a & 7;
               }
               goto LAB_97b839f4;
             }
             if (uVar14 != 0) goto LAB_97b839f4;
-            iVar21 = ((int (*)())_PPStreamChunkListChunkAtIndex)(iVar18,(uint)*(ushort *)((int)puVar27 + iVar21 + 0x16));
+            chunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(iVar18,(uint)*(ushort *)((int)puVar27 + iVar21 + 0x16));
             *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 2;
-            switch(*(uint *)(iVar21 + 0xc) >> 0x10 & 0xf) {
+            switch(*(uint *)(chunk + 0xc) >> 0x10 & 0xf) {
             default:
               goto switchD_97b83930_caseD_0;
             case 1:
@@ -759,10 +762,10 @@ LAB_97b837e4:
               uVar23 = emulator[0xd] | 0x80000;
               break;
             case 7:
-              emulator[0xd] = emulator[0xd] | 1 << (*(uint *)(iVar21 + 0xc) & 0x1f) + 0x14;
+              emulator[0xd] = emulator[0xd] | 1 << (*(uint *)(chunk + 0xc) & 0x1f) + 0x14;
               goto switchD_97b83930_caseD_0;
             case 9:
-              if ((*(uint *)(iVar21 + 0xc) & 0x1f) == 0) {
+              if ((*(uint *)(chunk + 0xc) & 0x1f) == 0) {
                 uVar23 = emulator[0xd] | 0x100;
                 break;
               }
@@ -772,7 +775,7 @@ LAB_97b837e4:
 switchD_97b83930_caseD_0:
             iVar7 = emulator[0x26];
             emulator[0xd] = emulator[0xd] | 4;
-            uVar1 = *(ushort *)(iVar21 + 0x12);
+            uVar1 = *(ushort *)(chunk + 0x12);
             puVar9[iVar6 * 9 + 0xe] = 2;
             uVar23 = iVar7 + (uint)uVar1 * 0x10;
 LAB_97b839f4:
@@ -1150,6 +1153,7 @@ int _PPParserParseTempDeclaration(parser, param_2)
   int parser;
   int param_2;
 {
+  int arrayResult;
   int part;
   int part2;
   int iVar1;
@@ -1190,9 +1194,9 @@ int _PPParserParseTempDeclaration(parser, param_2)
     }
     if (local_140[0] == '[') {
       _PPParserReturnPart(parser);
-      iVar2 = _PPParserParseArray(parser,local_30);
-      if (iVar2 != 0) {
-        return iVar2;
+      arrayResult = _PPParserParseArray(parser,local_30);
+      if (arrayResult != 0) {
+        return arrayResult;
       }
       *(undefined1 *)(iVar1 + 0x10) = 1;
       *(undefined4 *)(iVar1 + 4) = local_30[0];
@@ -1424,6 +1428,7 @@ int _PPParserParseTextureSourceVar(parser, param_2)
   int parser;
   uint *param_2;
 {
+  int arrayResult;
   int compareResult;
   int part;
   uint uVar1;
@@ -1450,9 +1455,9 @@ int _PPParserParseTextureSourceVar(parser, param_2)
       if (part != 0) {
         if (local_140[0] == '[') {
           _PPParserReturnPart(parser);
-          iVar2 = _PPParserParseArray(parser,local_40);
-          if (iVar2 != 0) {
-            return iVar2;
+          arrayResult = _PPParserParseArray(parser,local_40);
+          if (arrayResult != 0) {
+            return arrayResult;
           }
           if (*(uint *)(parser + 0x474) <= local_40[0]) {
             return 0x38;

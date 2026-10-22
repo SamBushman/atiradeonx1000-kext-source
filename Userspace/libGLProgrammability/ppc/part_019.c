@@ -5,6 +5,7 @@ int _GetRegisterTypeInfo(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
+  int chunk;
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
@@ -16,11 +17,11 @@ int _GetRegisterTypeInfo(param_1, param_2)
   
   switch(param_2[1]) {
   case 0:
-    iVar3 = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(param_1 + 0x18),*param_2);
-    if (iVar3 != 0) {
-      param_2[2] = *(uint *)(iVar3 + 0xc) >> 0x1d;
-      param_2[3] = *(uint *)(iVar3 + 0xc) >> 0x1a & 7;
-      param_2[4] = *(uint *)(iVar3 + 0xc) >> 0x18 & 3;
+    chunk = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(param_1 + 0x18),*param_2);
+    if (chunk != 0) {
+      param_2[2] = *(uint *)(chunk + 0xc) >> 0x1d;
+      param_2[3] = *(uint *)(chunk + 0xc) >> 0x1a & 7;
+      param_2[4] = *(uint *)(chunk + 0xc) >> 0x18 & 3;
     }
     param_2[5] = 0;
     break;
@@ -28,16 +29,16 @@ int _GetRegisterTypeInfo(param_1, param_2)
     uVar2 = *(undefined4 *)(param_1 + 4);
     goto LAB_97c0b8d4;
   case 2:
-    iVar3 = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(param_1 + 0x10),*param_2);
-    param_2[2] = *(uint *)(iVar3 + 0xc) >> 0x1d;
-    param_2[3] = *(uint *)(iVar3 + 0xc) >> 0x1a & 7;
-    uVar1 = *(uint *)(iVar3 + 0xc);
+    chunk = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(param_1 + 0x10),*param_2);
+    param_2[2] = *(uint *)(chunk + 0xc) >> 0x1d;
+    param_2[3] = *(uint *)(chunk + 0xc) >> 0x1a & 7;
+    uVar1 = *(uint *)(chunk + 0xc);
     param_2[5] = 0;
     param_2[4] = uVar1 >> 0x18 & 3;
-    if ((*(uint *)(iVar3 + 0xc) >> 0x10 & 0x1f) == 0x11) {
+    if ((*(uint *)(chunk + 0xc) >> 0x10 & 0x1f) == 0x11) {
       param_2[5] = 1;
       iVar3 = _PPStreamChunkListChunkAtIndex
-                        (*(undefined4 *)(param_1 + 0x2c),(uint)*(ushort *)(iVar3 + 0xe));
+                        (*(undefined4 *)(param_1 + 0x2c),(uint)*(ushort *)(chunk + 0xe));
       uVar5 = *(uint *)(iVar3 + 0x10);
       uVar1 = *(uint *)(iVar3 + 0xc);
       uVar4 = *(uint *)(iVar3 + 0x14);
@@ -61,10 +62,10 @@ int _GetRegisterTypeInfo(param_1, param_2)
   case 3:
     uVar2 = *(undefined4 *)(param_1 + 0x1c);
 LAB_97c0b8d4:
-    iVar3 = _PPStreamChunkListChunkAtIndex(uVar2,*param_2);
-    param_2[2] = *(uint *)(iVar3 + 0xc) >> 0x1d;
-    param_2[3] = *(uint *)(iVar3 + 0xc) >> 0x1a & 7;
-    uVar1 = *(uint *)(iVar3 + 0xc);
+    chunk = _PPStreamChunkListChunkAtIndex(uVar2,*param_2);
+    param_2[2] = *(uint *)(chunk + 0xc) >> 0x1d;
+    param_2[3] = *(uint *)(chunk + 0xc) >> 0x1a & 7;
+    uVar1 = *(uint *)(chunk + 0xc);
     param_2[5] = 0;
     param_2[4] = uVar1 >> 0x18 & 3;
     break;
@@ -705,6 +706,22 @@ int _EmulateOp(param_1, inst, hashSet)
   int inst;
   undefined4 hashSet;
 {
+  int isBadUsage;
+  int chunk;
+  double exp2Result2;
+  double truncResult;
+  double atanResult;
+  double acosResult;
+  double asinResult;
+  double tanResult;
+  double sinResult;
+  double cosResult;
+  double log2Result;
+  double exp2Result;
+  double sqrtResult;
+  double floorResult;
+  double ceilResult;
+  double powResult;
   int loopIndex;
   int allocation;
   bool bVar1;
@@ -796,10 +813,10 @@ int _EmulateOp(param_1, inst, hashSet)
     src2 = (float *)0x0;
   }
   bVar6 = true;
-  iVar13 = ((int (*)())_IsBadUsage)(inst);
+  isBadUsage = ((int (*)())_IsBadUsage)(inst);
   pfVar21 = (float *)(iVar18 + 0x18);
   bVar2 = false;
-  if (iVar13 != 0) goto LAB_97c0ee84;
+  if (isBadUsage != 0) goto LAB_97c0ee84;
   if (((iVar12 != 1) || (bVar1)) || (src0 == (float *)0x0)) goto LAB_97c0d82c;
   bVar6 = false;
   switch(*puVar16 >> 0x12 & 0xff) {
@@ -819,8 +836,8 @@ int _EmulateOp(param_1, inst, hashSet)
       fVar7 = 0.0;
     }
     else {
-      dVar23 = _pow((double)src0[1],(double)src0[3]);
-      fVar7 = (float)dVar23;
+      powResult = _pow((double)src0[1],(double)src0[3]);
+      fVar7 = (float)powResult;
     }
     *(float *)(iVar18 + 0x20) = fVar7;
 LAB_97c0d000:
@@ -833,35 +850,35 @@ LAB_97c0d000:
     fVar7 = ABS(src0[3]);
     goto LAB_97c0ce78;
   case 3:
-    dVar23 = _ceil((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _ceil((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _ceil((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    ceilResult = _ceil((double)*src0);
+    *pfVar21 = (float)ceilResult;
+    ceilResult = _ceil((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)ceilResult;
+    ceilResult = _ceil((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)ceilResult;
     dVar23 = _ceil((double)src0[3]);
     break;
   case 4:
     fVar7 = *src0;
-    dVar23 = _floor((double)fVar7);
-    *pfVar21 = (float)((double)fVar7 - dVar23);
+    floorResult = _floor((double)fVar7);
+    *pfVar21 = (float)((double)fVar7 - floorResult);
     fVar7 = src0[1];
-    dVar23 = _floor((double)fVar7);
-    *(float *)(iVar18 + 0x1c) = (float)((double)fVar7 - dVar23);
+    floorResult = _floor((double)fVar7);
+    *(float *)(iVar18 + 0x1c) = (float)((double)fVar7 - floorResult);
     fVar7 = src0[2];
-    dVar23 = _floor((double)fVar7);
-    *(float *)(iVar18 + 0x20) = (float)((double)fVar7 - dVar23);
+    floorResult = _floor((double)fVar7);
+    *(float *)(iVar18 + 0x20) = (float)((double)fVar7 - floorResult);
     fVar7 = src0[3];
-    dVar23 = _floor((double)fVar7);
-    *(float *)(iVar18 + 0x24) = (float)((double)fVar7 - dVar23);
+    floorResult = _floor((double)fVar7);
+    *(float *)(iVar18 + 0x24) = (float)((double)fVar7 - floorResult);
     goto LAB_97c0d82c;
   case 5:
-    dVar23 = _floor((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _floor((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _floor((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    floorResult = _floor((double)*src0);
+    *pfVar21 = (float)floorResult;
+    floorResult = _floor((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)floorResult;
+    floorResult = _floor((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)floorResult;
     dVar23 = _floor((double)src0[3]);
     break;
   default:
@@ -951,28 +968,28 @@ LAB_97c0d128:
     *(undefined4 *)(iVar18 + 0x24) = uVar8;
     goto LAB_97c0d82c;
   case 0xc:
-    dVar23 = _sqrt(ABS((double)*src0));
-    *pfVar21 = (float)dVar23;
-    dVar23 = _sqrt(ABS((double)src0[1]));
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _sqrt(ABS((double)src0[2]));
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    sqrtResult = _sqrt(ABS((double)*src0));
+    *pfVar21 = (float)sqrtResult;
+    sqrtResult = _sqrt(ABS((double)src0[1]));
+    *(float *)(iVar18 + 0x1c) = (float)sqrtResult;
+    sqrtResult = _sqrt(ABS((double)src0[2]));
+    *(float *)(iVar18 + 0x20) = (float)sqrtResult;
     dVar23 = _sqrt(ABS((double)src0[3]));
     break;
   case 0xd:
     if (*param_1 - 0x8b30U < 2) {
-      dVar23 = _sqrt(ABS((double)*src0));
-      *pfVar21 = (float)(1.0 / dVar23);
-      dVar23 = _sqrt(ABS((double)src0[1]));
-      *(float *)(iVar18 + 0x1c) = (float)(1.0 / dVar23);
-      dVar23 = _sqrt(ABS((double)src0[2]));
-      *(float *)(iVar18 + 0x20) = (float)(1.0 / dVar23);
-      dVar23 = _sqrt(ABS((double)src0[3]));
-      *(float *)(iVar18 + 0x24) = (float)(1.0 / dVar23);
+      sqrtResult = _sqrt(ABS((double)*src0));
+      *pfVar21 = (float)(1.0 / sqrtResult);
+      sqrtResult = _sqrt(ABS((double)src0[1]));
+      *(float *)(iVar18 + 0x1c) = (float)(1.0 / sqrtResult);
+      sqrtResult = _sqrt(ABS((double)src0[2]));
+      *(float *)(iVar18 + 0x20) = (float)(1.0 / sqrtResult);
+      sqrtResult = _sqrt(ABS((double)src0[3]));
+      *(float *)(iVar18 + 0x24) = (float)(1.0 / sqrtResult);
       goto LAB_97c0d82c;
     }
-    dVar23 = _sqrt(ABS((double)src0[3]));
-    dVar23 = 1.0 / dVar23;
+    sqrtResult = _sqrt(ABS((double)src0[3]));
+    dVar23 = 1.0 / sqrtResult;
     goto LAB_97c0d214;
   case 0xe:
     fVar7 = 1.0 / src0[3];
@@ -1006,19 +1023,19 @@ LAB_97c0d2cc:
       dVar23 = _exp2((double)src0[3]);
       goto LAB_97c0d718;
     }
-    dVar23 = _exp2((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _exp2((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _exp2((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    exp2Result = _exp2((double)*src0);
+    *pfVar21 = (float)exp2Result;
+    exp2Result = _exp2((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)exp2Result;
+    exp2Result = _exp2((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)exp2Result;
     dVar23 = _exp2((double)src0[3]);
     break;
   case 0x11:
-    dVar23 = _floor((double)src0[3]);
-    dVar24 = _exp2((double)(float)dVar23);
-    *pfVar21 = (float)dVar24;
-    *(float *)(iVar18 + 0x1c) = (float)((double)src0[3] - (double)(float)dVar23);
+    floorResult = _floor((double)src0[3]);
+    exp2Result2 = _exp2((double)(float)floorResult);
+    *pfVar21 = (float)exp2Result2;
+    *(float *)(iVar18 + 0x1c) = (float)((double)src0[3] - (double)(float)floorResult);
     dVar23 = _exp2((double)src0[3]);
     goto LAB_97c0d51c;
   case 0x12:
@@ -1056,20 +1073,20 @@ LAB_97c0d71c:
     if (dVar23 < 0.0) {
       dVar23 = 0.0;
     }
-    dVar23 = _log2(dVar23);
-    *pfVar21 = (float)dVar23;
+    log2Result = _log2(dVar23);
+    *pfVar21 = (float)log2Result;
     dVar23 = (double)src0[1];
     if (dVar23 < 0.0) {
       dVar23 = 0.0;
     }
-    dVar23 = _log2(dVar23);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
+    log2Result = _log2(dVar23);
+    *(float *)(iVar18 + 0x1c) = (float)log2Result;
     dVar23 = (double)src0[2];
     if (dVar23 < 0.0) {
       dVar23 = 0.0;
     }
-    dVar23 = _log2(dVar23);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    log2Result = _log2(dVar23);
+    *(float *)(iVar18 + 0x20) = (float)log2Result;
     dVar23 = (double)src0[3];
     if (dVar23 < 0.0) {
       dVar23 = 0.0;
@@ -1078,11 +1095,11 @@ LAB_97c0d71c:
     break;
   case 0x14:
     dVar24 = ABS((double)src0[3]);
-    dVar23 = _log2(dVar24);
-    dVar23 = _floor(dVar23);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _exp2((double)(float)dVar23);
-    *(float *)(iVar18 + 0x1c) = (float)(dVar24 / dVar23);
+    log2Result = _log2(dVar24);
+    floorResult = _floor(log2Result);
+    *pfVar21 = (float)floorResult;
+    exp2Result = _exp2((double)(float)floorResult);
+    *(float *)(iVar18 + 0x1c) = (float)(dVar24 / exp2Result);
     if (dVar24 < 0.0) {
       dVar24 = 0.0;
     }
@@ -1104,12 +1121,12 @@ LAB_97c0d51c:
         iVar13 = iVar13 + -1;
       } while (iVar13 != 0);
     }
-    dVar23 = _sqrt(dVar23);
+    sqrtResult = _sqrt(dVar23);
     iVar13 = 0;
     if ((*(uint *)(inst + 0x10) >> 0x1a & 3) != 0xffffffff) {
       do {
         iVar14 = iVar13 + 1;
-        pfVar21[iVar13] = src0[iVar13] / (float)dVar23;
+        pfVar21[iVar13] = src0[iVar13] / (float)sqrtResult;
         iVar13 = iVar14;
       } while (iVar14 < (int)((*(uint *)(inst + 0x10) >> 0x1a & 3) + 1));
     }
@@ -1126,24 +1143,24 @@ LAB_97c0d600:
     *(float *)(iVar18 + 0x24) = src0[3] * fVar7;
     goto LAB_97c0d82c;
   case 0x18:
-    dVar23 = _cos((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _sin((double)*src0);
+    cosResult = _cos((double)*src0);
+    *pfVar21 = (float)cosResult;
+    sinResult = _sin((double)*src0);
     *(undefined4 *)(iVar18 + 0x24) = 0;
     *(undefined4 *)(iVar18 + 0x20) = 0;
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
+    *(float *)(iVar18 + 0x1c) = (float)sinResult;
     goto LAB_97c0d82c;
   case 0x19:
     if (1 < *param_1 - 0x8b30U) {
       dVar23 = _sin((double)src0[3]);
       goto LAB_97c0d718;
     }
-    dVar23 = _sin((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _sin((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _sin((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    sinResult = _sin((double)*src0);
+    *pfVar21 = (float)sinResult;
+    sinResult = _sin((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)sinResult;
+    sinResult = _sin((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)sinResult;
     dVar23 = _sin((double)src0[3]);
     break;
   case 0x1a:
@@ -1151,48 +1168,48 @@ LAB_97c0d600:
       dVar23 = _cos((double)src0[3]);
       goto LAB_97c0d718;
     }
-    dVar23 = _cos((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _cos((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _cos((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    cosResult = _cos((double)*src0);
+    *pfVar21 = (float)cosResult;
+    cosResult = _cos((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)cosResult;
+    cosResult = _cos((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)cosResult;
     dVar23 = _cos((double)src0[3]);
     break;
   case 0x1b:
-    dVar23 = _tan((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _tan((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _tan((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    tanResult = _tan((double)*src0);
+    *pfVar21 = (float)tanResult;
+    tanResult = _tan((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)tanResult;
+    tanResult = _tan((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)tanResult;
     dVar23 = _tan((double)src0[3]);
     break;
   case 0x1c:
-    dVar23 = _asin((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _asin((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _asin((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    asinResult = _asin((double)*src0);
+    *pfVar21 = (float)asinResult;
+    asinResult = _asin((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)asinResult;
+    asinResult = _asin((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)asinResult;
     dVar23 = _asin((double)src0[3]);
     break;
   case 0x1d:
-    dVar23 = _acos((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _acos((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _acos((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    acosResult = _acos((double)*src0);
+    *pfVar21 = (float)acosResult;
+    acosResult = _acos((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)acosResult;
+    acosResult = _acos((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)acosResult;
     dVar23 = _acos((double)src0[3]);
     break;
   case 0x1e:
-    dVar23 = _atan((double)*src0);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _atan((double)src0[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _atan((double)src0[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    atanResult = _atan((double)*src0);
+    *pfVar21 = (float)atanResult;
+    atanResult = _atan((double)src0[1]);
+    *(float *)(iVar18 + 0x1c) = (float)atanResult;
+    atanResult = _atan((double)src0[2]);
+    *(float *)(iVar18 + 0x20) = (float)atanResult;
     dVar23 = _atan((double)src0[3]);
     break;
   case 0x48:
@@ -1203,12 +1220,12 @@ LAB_97c0d600:
     goto LAB_97c0ce78;
   case 0x6c:
     if ((*(int *)(iVar18 + 0xc) == 3) && (*(int *)(operandIds[0] + 0xc) == 1)) {
-      dVar23 = _trunc((double)*src0);
-      *pfVar21 = (float)dVar23;
-      dVar23 = _trunc((double)src0[1]);
-      *(float *)(iVar18 + 0x1c) = (float)dVar23;
-      dVar23 = _trunc((double)src0[2]);
-      *(float *)(iVar18 + 0x20) = (float)dVar23;
+      truncResult = _trunc((double)*src0);
+      *pfVar21 = (float)truncResult;
+      truncResult = _trunc((double)src0[1]);
+      *(float *)(iVar18 + 0x1c) = (float)truncResult;
+      truncResult = _trunc((double)src0[2]);
+      *(float *)(iVar18 + 0x20) = (float)truncResult;
       dVar23 = _trunc((double)src0[3]);
       break;
     }
@@ -1642,12 +1659,12 @@ LAB_97c0e778:
       dVar23 = _pow((double)src0[3],(double)src1[3]);
       goto LAB_97c0e4d8;
     }
-    dVar23 = _pow((double)*src0,(double)*src1);
-    *pfVar21 = (float)dVar23;
-    dVar23 = _pow((double)src0[1],(double)src1[1]);
-    *(float *)(iVar18 + 0x1c) = (float)dVar23;
-    dVar23 = _pow((double)src0[2],(double)src1[2]);
-    *(float *)(iVar18 + 0x20) = (float)dVar23;
+    powResult = _pow((double)*src0,(double)*src1);
+    *pfVar21 = (float)powResult;
+    powResult = _pow((double)src0[1],(double)src1[1]);
+    *(float *)(iVar18 + 0x1c) = (float)powResult;
+    powResult = _pow((double)src0[2],(double)src1[2]);
+    *(float *)(iVar18 + 0x20) = (float)powResult;
     dVar23 = _pow((double)src0[3],(double)src1[3]);
 LAB_97c0e764:
     bVar6 = true;
@@ -1708,12 +1725,12 @@ LAB_97c0e6f8:
     }
     bVar6 = true;
     if (*(int *)(iVar18 + 0xc) == 3) {
-      dVar23 = _trunc((double)(*src0 / *src1));
-      *pfVar21 = (float)dVar23;
-      dVar23 = _trunc((double)(src0[1] / src1[1]));
-      *(float *)(iVar18 + 0x1c) = (float)dVar23;
-      dVar23 = _trunc((double)(src0[2] / src1[2]));
-      *(float *)(iVar18 + 0x20) = (float)dVar23;
+      truncResult = _trunc((double)(*src0 / *src1));
+      *pfVar21 = (float)truncResult;
+      truncResult = _trunc((double)(src0[1] / src1[1]));
+      *(float *)(iVar18 + 0x1c) = (float)truncResult;
+      truncResult = _trunc((double)(src0[2] / src1[2]));
+      *(float *)(iVar18 + 0x20) = (float)truncResult;
       dVar23 = _trunc((double)(src0[3] / src1[3]));
       goto LAB_97c0e764;
     }
@@ -1913,8 +1930,8 @@ LAB_97c0ee74:
     fVar3 = *src2;
     dVar23 = (double)-(fVar3 * fVar3 * (1.0 - fVar7 * fVar7) - 1.0);
     if (0.0 <= dVar23) {
-      dVar23 = _sqrt(dVar23);
-      fVar7 = (float)((double)(fVar3 * fVar7) + dVar23);
+      sqrtResult = _sqrt(dVar23);
+      fVar7 = (float)((double)(fVar3 * fVar7) + sqrtResult);
       *pfVar21 = *src2 * *src0 - fVar7 * *src1;
       *(float *)(iVar18 + 0x1c) = *src2 * src0[1] - fVar7 * src1[1];
       *(float *)(iVar18 + 0x20) = *src2 * src0[2] - fVar7 * src1[2];
@@ -1957,15 +1974,15 @@ LAB_97c0eea8:
   case 0x56:
   case 0x57:
   case 0x6a:
-    iVar12 = _PPStreamChunkListChunkAtIndex(param_1[8],*(uint *)(inst + 0x10) & 0x3ffff);
-    iVar18 = *(int *)(iVar12 + 4);
+    chunk = _PPStreamChunkListChunkAtIndex(param_1[8],*(uint *)(inst + 0x10) & 0x3ffff);
+    iVar18 = *(int *)(chunk + 4);
     iVar12 = inst;
     break;
   case 0x5a:
   case 0x5b:
   case 0x6b:
-    iVar12 = _PPStreamChunkListChunkAtIndex(param_1[8],*(uint *)(inst + 0x10) & 0x3ffff);
-    iVar12 = *(int *)(iVar12 + 4);
+    chunk = _PPStreamChunkListChunkAtIndex(param_1[8],*(uint *)(inst + 0x10) & 0x3ffff);
+    iVar12 = *(int *)(chunk + 4);
     iVar18 = inst;
   }
   ((int (*)())_ClearDestedRegisters)(param_1,hashSet,iVar12,iVar18);
@@ -2073,6 +2090,7 @@ LAB_97c0f130:
 int _DetectConstantLoopsSimple(param_1)
   int param_1;
 {
+  uint isBadUsage;
   uint loopIndex;
   bool bVar1;
   undefined2 uVar2;
@@ -2213,8 +2231,8 @@ int _DetectConstantLoopsSimple(param_1)
       iVar15 = *(int *)(iVar16 + 8);
       ((int (*)())_GetOpRegs)(param_1,iVar19,auStack_490,auStack_3f0);
       uVar13 = 0;
-      uVar9 = ((int (*)())_IsBadUsage)(iVar19);
-      uVar8 = uVar8 | uVar9;
+      isBadUsage = ((int (*)())_IsBadUsage)(iVar19);
+      uVar8 = uVar8 | isBadUsage;
       iVar10 = _regEqualsFunction(auStack_390,auStack_490);
       bVar3 = false;
       iVar12 = 0;
@@ -2273,10 +2291,10 @@ LAB_97c0f33c:
                (iVar10 = iVar16, (*(uint *)(iVar16 + 0xc) >> 0x12 & 0xff) != 0x6b))) {
           ((int (*)())_UpdateScope)(iVar19,&local_60);
           ((int (*)())_GetOpRegs)(param_1,iVar19,auStack_490,auStack_3f0);
-          uVar9 = ((int (*)())_IsBadUsage)(iVar19);
+          isBadUsage = ((int (*)())_IsBadUsage)(iVar19);
           iVar10 = _regEqualsFunction(auStack_390,auStack_3f0);
           if (iVar10 == 0) {
-            uVar7 = uVar7 | uVar9 | (uint)(1 < local_60);
+            uVar7 = uVar7 | isBadUsage | (uint)(1 < local_60);
             if (bVar4) {
               uVar7 = 1;
               goto LAB_97c0f4cc;
@@ -4084,186 +4102,186 @@ int _PPParserBuildErrorString(parser, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  char *pcVar1;
+  char *message;
   int iVar2;
   undefined1 auStack_130 [16];
   undefined1 auStack_120 [264];
   
   switch(param_2) {
   default:
-    pcVar1 = "";
+    message = "";
     break;
   case 4:
-    pcVar1 = "missing or invalid version";
+    message = "missing or invalid version";
     break;
   case 5:
-    pcVar1 = "unrecognised option";
+    message = "unrecognised option";
     break;
   case 6:
-    pcVar1 = "unrecognised statement";
+    message = "unrecognised statement";
     break;
   case 7:
-    pcVar1 = "unrecognised block parameter";
+    message = "unrecognised block parameter";
     break;
   case 8:
-    pcVar1 = "unexpected option";
+    message = "unexpected option";
     break;
   case 9:
-    pcVar1 = "unexpected statement";
+    message = "unexpected statement";
     break;
   case 10:
-    pcVar1 = "malformed declaration";
+    message = "malformed declaration";
     break;
   case 0xb:
-    pcVar1 = "malformed array specifier";
+    message = "malformed array specifier";
     break;
   case 0xc:
-    pcVar1 = "malformed destination mask";
+    message = "malformed destination mask";
     break;
   case 0xd:
-    pcVar1 = "malformed source swizzle";
+    message = "malformed source swizzle";
     break;
   case 0xe:
-    pcVar1 = "malformed source texture";
+    message = "malformed source texture";
     break;
   case 0xf:
-    pcVar1 = "malformed extended swizzle code";
+    message = "malformed extended swizzle code";
     break;
   case 0x10:
-    pcVar1 = "invalid condition mask";
+    message = "invalid condition mask";
     break;
   case 0x11:
-    pcVar1 = "invalid texture coordinate plane";
+    message = "invalid texture coordinate plane";
     break;
   case 0x12:
-    pcVar1 = "invalid identifier name";
+    message = "invalid identifier name";
     break;
   case 0x13:
-    pcVar1 = "invalid attribute pair";
+    message = "invalid attribute pair";
     break;
   case 0x14:
-    pcVar1 = "invalid swizzle for scalar op";
+    message = "invalid swizzle for scalar op";
     break;
   case 0x15:
-    pcVar1 = "invalid number";
+    message = "invalid number";
     break;
   case 0x16:
-    pcVar1 = "invalid address identifier";
+    message = "invalid address identifier";
     break;
   case 0x17:
-    pcVar1 = "invalid source identifier";
+    message = "invalid source identifier";
     break;
   case 0x18:
-    pcVar1 = "invalid dest identifier";
+    message = "invalid dest identifier";
     break;
   case 0x19:
-    pcVar1 = "undefined destination identifier";
+    message = "undefined destination identifier";
     break;
   case 0x1a:
-    pcVar1 = "undefined source identifier";
+    message = "undefined source identifier";
     break;
   case 0x1b:
-    pcVar1 = "undefined branch label";
+    message = "undefined branch label";
     break;
   case 0x1c:
-    pcVar1 = "an identifier with this name already exists";
+    message = "an identifier with this name already exists";
     break;
   case 0x1d:
-    pcVar1 = "duplicate branch label";
+    message = "duplicate branch label";
     break;
   case 0x1e:
-    pcVar1 = "missing semicolon";
+    message = "missing semicolon";
     break;
   case 0x1f:
-    pcVar1 = "missing comma";
+    message = "missing comma";
     break;
   case 0x20:
-    pcVar1 = "identifier is not an array";
+    message = "identifier is not an array";
     break;
   case 0x21:
-    pcVar1 = "identifier is an array";
+    message = "identifier is an array";
     break;
   case 0x22:
-    pcVar1 = "use of result.position illegal with ARB_position_invariant";
+    message = "use of result.position illegal with ARB_position_invariant";
     break;
   case 0x23:
-    pcVar1 = "out of range array index";
+    message = "out of range array index";
     break;
   case 0x24:
-    pcVar1 = "out of range indirect offset";
+    message = "out of range indirect offset";
     break;
   case 0x25:
-    pcVar1 = "incorrect array component count";
+    message = "incorrect array component count";
     break;
   case 0x26:
-    pcVar1 = "incorrect argument count for macro";
+    message = "incorrect argument count for macro";
     break;
   case 0x27:
-    pcVar1 = "conflicting option specification";
+    message = "conflicting option specification";
     break;
   case 0x28:
-    pcVar1 = "conflicting texture target";
+    message = "conflicting texture target";
     break;
   case 0x29:
-    pcVar1 = "impossible array";
+    message = "impossible array";
     break;
   case 0x2a:
-    pcVar1 = "precision qualifier only allowed for temporaries or outputs";
+    message = "precision qualifier only allowed for temporaries or outputs";
     break;
   case 0x2b:
-    pcVar1 = "unpack instructions cannot take SHORT source";
+    message = "unpack instructions cannot take SHORT source";
     break;
   case 0x2c:
-    pcVar1 = "pack instructions cannot take SHORT destination";
+    message = "pack instructions cannot take SHORT destination";
     break;
   case 0x2d:
-    pcVar1 = "unexpected end of program";
+    message = "unexpected end of program";
     break;
   case 0x2e:
-    pcVar1 = "program env limit exceeded";
+    message = "program env limit exceeded";
     break;
   case 0x2f:
-    pcVar1 = "program local limit exceeded";
+    message = "program local limit exceeded";
     break;
   case 0x30:
-    pcVar1 = "program matrices limit exceeded";
+    message = "program matrices limit exceeded";
     break;
   case 0x31:
-    pcVar1 = "program matrix stack depth exceeded";
+    message = "program matrix stack depth exceeded";
     break;
   case 0x32:
-    pcVar1 = "program instruction count exceeded";
+    message = "program instruction count exceeded";
     break;
   case 0x33:
-    pcVar1 = "program temporary count exceeded";
+    message = "program temporary count exceeded";
     break;
   case 0x34:
-    pcVar1 = "program parameter count exceeded";
+    message = "program parameter count exceeded";
     break;
   case 0x35:
   case 0x36:
-    pcVar1 = "program attribute count exceeded";
+    message = "program attribute count exceeded";
     break;
   case 0x37:
-    pcVar1 = "program address registers limit exceeded";
+    message = "program address registers limit exceeded";
     break;
   case 0x38:
-    pcVar1 = "texture unit limit exceeded";
+    message = "texture unit limit exceeded";
     break;
   case 0x39:
-    pcVar1 = "vertex unit limit exceeded";
+    message = "vertex unit limit exceeded";
     break;
   case 0x3a:
-    pcVar1 = "palette matrix limit exceeded";
+    message = "palette matrix limit exceeded";
     break;
   case 0x3b:
-    pcVar1 = "clip plane limit exceeded";
+    message = "clip plane limit exceeded";
     break;
   case 0x3c:
-    pcVar1 = "light limit exceeded";
+    message = "light limit exceeded";
     break;
   case 0x3d:
-    pcVar1 = "vertex attribute limit exceeded";
+    message = "vertex attribute limit exceeded";
   }
   _PPParserReturnPart(parser);
   _PPParserGetPart(parser,auStack_120,0);
@@ -4271,12 +4289,12 @@ int _PPParserBuildErrorString(parser, param_2, param_3)
   iVar2 = *(int *)(parser + 0x10) + 1;
   _PPParserGetCharacter(parser,auStack_130);
   if (param_3 == 0) {
-    _sprintf((char *)(parser + 0x3c),"Error on line %u: %s (hint: \'%s\')",iVar2,pcVar1,auStack_120
+    _sprintf((char *)(parser + 0x3c),"Error on line %u: %s (hint: \'%s\')",iVar2,message,auStack_120
             );
   }
   else {
     _sprintf((char *)(parser + 0x3c),"Error in macro %s on line %u: %s (hint: \'%s\')",param_3,
-             iVar2,pcVar1,auStack_120);
+             iVar2,message,auStack_120);
   }
   return;
 }
@@ -4443,6 +4461,8 @@ LAB_97c12804:
 /* _glp_dtostr @ 0x97c12838 (1096 bytes) */
 char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  double floorResult2;
+  double floorResult;
   char *pcVar1;
   char cVar2;
   double dVar3;
@@ -4501,17 +4521,17 @@ char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint para
   fparam_2 = dVar10;
 LAB_97c12a28:
   dVar8 = fparam_2 * DOUBLE_97c30a88 + dVar8;
-  dVar10 = _floor(dVar8);
+  floorResult = _floor(dVar8);
   dVar3 = DOUBLE_97c30ab8;
   dVar9 = DOUBLE_97c30a50;
   pcVar6 = param_3;
-  while (fparam_2 < dVar10) {
+  while (fparam_2 < floorResult) {
     if (pcVar6 == pcVar5) {
       return (char *)0x0;
     }
-    dVar11 = dVar10 * dVar3;
-    dVar10 = _floor(dVar11);
-    *pcVar6 = (char)(int)((dVar11 - dVar10) * dVar9) + '0';
+    dVar11 = floorResult * dVar3;
+    floorResult = _floor(dVar11);
+    *pcVar6 = (char)(int)((dVar11 - floorResult) * dVar9) + '0';
     pcVar6 = pcVar6 + 1;
   }
   if (param_3 < pcVar6) {
@@ -4530,9 +4550,9 @@ LAB_97c12a28:
     *pcVar6 = '0';
     pcVar6 = pcVar6 + 1;
   }
-  dVar9 = _floor(dVar8);
+  floorResult2 = _floor(dVar8);
   dVar10 = DOUBLE_97c30a50;
-  dVar8 = dVar8 - dVar9;
+  dVar8 = dVar8 - floorResult2;
   if (dVar8 <= fparam_2) {
     if (local_50[0] == 0) {
       if ((int)pcVar5 - (int)pcVar6 < 2) {
@@ -4555,9 +4575,9 @@ LAB_97c12a28:
       }
       dVar8 = dVar8 * dVar10;
       fparam_2 = fparam_2 * dVar10;
-      dVar9 = _floor(dVar8);
-      dVar8 = dVar8 - dVar9;
-      *pcVar6 = (char)(int)dVar9 + '0';
+      floorResult2 = _floor(dVar8);
+      dVar8 = dVar8 - floorResult2;
+      *pcVar6 = (char)(int)floorResult2 + '0';
       pcVar6 = pcVar6 + 1;
     } while (fparam_2 < dVar8);
   }
@@ -4665,7 +4685,7 @@ int std____throw_bad_typeid()
 int std____throw_logic_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4682,8 +4702,8 @@ int std____throw_logic_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4698,7 +4718,7 @@ int std____throw_logic_error(param_1)
 int std____throw_domain_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4715,8 +4735,8 @@ int std____throw_domain_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4731,7 +4751,7 @@ int std____throw_domain_error(param_1)
 int std____throw_invalid_argument(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4748,8 +4768,8 @@ int std____throw_invalid_argument(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4764,7 +4784,7 @@ int std____throw_invalid_argument(param_1)
 int std____throw_length_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4781,8 +4801,8 @@ int std____throw_length_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4797,7 +4817,7 @@ int std____throw_length_error(param_1)
 int std____throw_out_of_range(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4814,8 +4834,8 @@ int std____throw_out_of_range(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4830,7 +4850,7 @@ int std____throw_out_of_range(param_1)
 int std____throw_runtime_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4847,8 +4867,8 @@ int std____throw_runtime_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4863,7 +4883,7 @@ int std____throw_runtime_error(param_1)
 int std____throw_range_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4880,8 +4900,8 @@ int std____throw_range_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4896,7 +4916,7 @@ int std____throw_range_error(param_1)
 int std____throw_overflow_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4913,8 +4933,8 @@ int std____throw_overflow_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4929,7 +4949,7 @@ int std____throw_overflow_error(param_1)
 int std____throw_underflow_error(param_1)
   char *param_1;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *this;
@@ -4946,8 +4966,8 @@ int std____throw_underflow_error(param_1)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));

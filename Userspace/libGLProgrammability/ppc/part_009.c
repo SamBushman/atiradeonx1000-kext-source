@@ -1416,21 +1416,21 @@ int TGenericLinker__GetBindingTableString(this)
 int TGenericLinker__GetFullTableString(this)
   unsigned char * this;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 remapTableString;
+  undefined4 bindingTableString;
   int length;
   int length2;
   char *allocation;
   
-  uVar1 = ((int (*)())TGenericLinker__GetRemapTableString)(this);
-  uVar2 = ((int (*)())TGenericLinker__GetBindingTableString)(this);
-  length = _strlen(uVar1);
-  length2 = _strlen(uVar2);
+  remapTableString = ((int (*)())TGenericLinker__GetRemapTableString)(this);
+  bindingTableString = ((int (*)())TGenericLinker__GetBindingTableString)(this);
+  length = _strlen(remapTableString);
+  length2 = _strlen(bindingTableString);
   allocation = (char *)_malloc(length + length2 + 1);
   *allocation = '\0';
-  _sprintf(allocation,"%s%s",uVar2,uVar1);
-  _free(uVar2);
-  _free(uVar1);
+  _sprintf(allocation,"%s%s",bindingTableString,remapTableString);
+  _free(bindingTableString);
+  _free(remapTableString);
   return allocation;
 }
 
@@ -3226,6 +3226,7 @@ int __ZN14TGenericLinkerC2Ei(this, param_2)
   void *this;
   int param_2;
 {
+  int atomicStore;
   undefined *puVar1;
   int *piVar2;
   undefined4 *allocation;
@@ -3241,8 +3242,8 @@ int __ZN14TGenericLinkerC2Ei(this, param_2)
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3250,8 +3251,8 @@ int __ZN14TGenericLinkerC2Ei(this, param_2)
   *allocation = puVar1 + 0xc;
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3288,6 +3289,7 @@ int __ZN14TGenericLinkerC1Ei(this, param_2)
   void *this;
   int param_2;
 {
+  int atomicStore;
   undefined *puVar1;
   int *piVar2;
   undefined4 *allocation;
@@ -3303,8 +3305,8 @@ int __ZN14TGenericLinkerC1Ei(this, param_2)
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3312,8 +3314,8 @@ int __ZN14TGenericLinkerC1Ei(this, param_2)
   *allocation = puVar1 + 0xc;
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3350,6 +3352,7 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
   void *this;
   int param_2;
 {
+  int atomicStore;
   undefined *puVar1;
   int *piVar2;
   undefined4 *allocation;
@@ -3365,8 +3368,8 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3374,8 +3377,8 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
   *allocation = puVar1 + 0xc;
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3433,7 +3436,7 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
   void *this;
   uint param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -3452,8 +3455,8 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3465,8 +3468,8 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));

@@ -614,7 +614,7 @@ int TSymbolTable__dump(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * this_00;
@@ -644,8 +644,8 @@ int TSymbolTable__dump(this, param_2)
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar5 = 2;
         }
       } while (!(bool)(bVar5 >> 1 & 1));
@@ -686,7 +686,7 @@ int __ZN9TFunctionD0Ev(this)
 int __ZN9TFunctionD4Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int iVar2;
   int *piVar3;
   int iVar4;
@@ -710,8 +710,8 @@ int __ZN9TFunctionD4Ev(this)
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1466,7 +1466,7 @@ int TSymbolTableLevel__clone(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   int iVar2;
   unsigned char * poolAllocator;
   undefined4 *puVar4;
@@ -1524,8 +1524,8 @@ int TSymbolTableLevel__clone(this, param_2)
         iVar2 = *piVar6;
         a6 = iVar2 + -1;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(a6,0,piVar6);
-          *piVar6 = iVar1;
+          atomicStore = storeWordConditionalIndexed(a6,0,piVar6);
+          *piVar6 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1545,7 +1545,7 @@ int TSymbolTable__copyTable(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  undefined4 uVar1;
+  undefined4 atomicStore;
   undefined *puVar2;
   int iVar3;
   undefined4 *puVar4;
@@ -1563,8 +1563,8 @@ int TSymbolTable__copyTable(this, param_2)
     if (iVar3 == 0) {
       do {
         if (in_RESERVE != '\0') {
-          uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
-          *(undefined4 *)puVar2 = uVar1;
+          atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
+          *(undefined4 *)puVar2 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1572,8 +1572,8 @@ int TSymbolTable__copyTable(this, param_2)
     else {
       do {
         if (in_RESERVE != '\0') {
-          uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
-          *(undefined4 *)puVar2 = uVar1;
+          atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
+          *(undefined4 *)puVar2 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -7909,7 +7909,7 @@ int yylex(param_1, param_2)
   long lVar5;
   unsigned char * poolAllocator;
   void *this_00;
-  undefined4 uVar7;
+  undefined4 token;
   int iVar8;
   uint uVar9;
   undefined *puVar10;
@@ -7994,366 +7994,366 @@ LAB_97bad2c8:
   default:
     goto switchD_97bac34c_caseD_1;
   case 2:
-    uVar7 = 0x101;
+    token = 0x101;
     *(char **)param_1 = _yylineno;
     break;
   case 3:
-    uVar7 = 0x102;
+    token = 0x102;
     *(char **)param_1 = _yylineno;
     break;
   case 4:
-    uVar7 = 0x11d;
+    token = 0x11d;
     *(char **)param_1 = _yylineno;
     break;
   case 5:
-    uVar7 = 0x11e;
+    token = 0x11e;
     *(char **)param_1 = _yylineno;
     break;
   case 6:
-    uVar7 = 0x106;
+    token = 0x106;
     *(char **)param_1 = _yylineno;
     break;
   case 7:
-    uVar7 = 0x107;
+    token = 0x107;
     *(char **)param_1 = _yylineno;
     break;
   case 8:
-    uVar7 = 0x108;
+    token = 0x108;
     *(char **)param_1 = _yylineno;
     break;
   case 9:
-    uVar7 = 0x10a;
+    token = 0x10a;
     *(char **)param_1 = _yylineno;
     break;
   case 10:
-    uVar7 = 0x121;
+    token = 0x121;
     *(char **)param_1 = _yylineno;
     break;
   case 0xb:
-    uVar7 = 0x10b;
+    token = 0x10b;
     *(char **)param_1 = _yylineno;
     break;
   case 0xc:
-    uVar7 = 0x109;
+    token = 0x109;
     *(char **)param_1 = _yylineno;
     break;
   case 0xd:
-    uVar7 = 0x11a;
+    token = 0x11a;
     *(char **)param_1 = _yylineno;
     break;
   case 0xe:
-    uVar7 = 0x11b;
+    token = 0x11b;
     *(char **)param_1 = _yylineno;
     break;
   case 0xf:
-    uVar7 = 0x11c;
+    token = 0x11c;
     *(char **)param_1 = _yylineno;
     break;
   case 0x10:
-    uVar7 = 0x104;
+    token = 0x104;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x11:
-    uVar7 = 0x105;
+    token = 0x105;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x12:
-    uVar7 = 0x120;
+    token = 0x120;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x13:
-    uVar7 = 0x103;
+    token = 0x103;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x14:
-    uVar7 = 0x12e;
+    token = 0x12e;
     *(undefined4 *)(param_1 + 4) = 1;
     *(char **)param_1 = pcVar3;
     break;
   case 0x15:
-    uVar7 = 0x12e;
+    token = 0x12e;
     *(undefined4 *)(param_1 + 4) = 0;
     *(char **)param_1 = pcVar3;
     break;
   case 0x16:
-    uVar7 = 0x10c;
+    token = 0x10c;
     *(char **)param_1 = _yylineno;
     break;
   case 0x17:
-    uVar7 = 0x10d;
+    token = 0x10d;
     *(char **)param_1 = _yylineno;
     break;
   case 0x18:
-    uVar7 = 0x117;
+    token = 0x117;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x19:
-    uVar7 = 0x118;
+    token = 0x118;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1a:
-    uVar7 = 0x119;
+    token = 0x119;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1b:
-    uVar7 = 0x114;
+    token = 0x114;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1c:
-    uVar7 = 0x115;
+    token = 0x115;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1d:
-    uVar7 = 0x116;
+    token = 0x116;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1e:
-    uVar7 = 0x111;
+    token = 0x111;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x1f:
-    uVar7 = 0x112;
+    token = 0x112;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x20:
-    uVar7 = 0x113;
+    token = 0x113;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x21:
-    uVar7 = 0x10e;
+    token = 0x10e;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x22:
-    uVar7 = 0x10f;
+    token = 0x10f;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x23:
-    uVar7 = 0x110;
+    token = 0x110;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x24:
-    uVar7 = 0x122;
+    token = 0x122;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x25:
-    uVar7 = 0x123;
+    token = 0x123;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x26:
-    uVar7 = 0x124;
+    token = 0x124;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x27:
-    uVar7 = 0x125;
+    token = 0x125;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x28:
-    uVar7 = 0x126;
+    token = 0x126;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x29:
-    uVar7 = 0x127;
+    token = 0x127;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x2a:
-    uVar7 = 0x128;
+    token = 0x128;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x2b:
-    uVar7 = 0x129;
+    token = 0x129;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 1;
     break;
   case 0x2c:
-    uVar7 = 0x11f;
+    token = 0x11f;
     *(char **)param_1 = _yylineno;
     break;
   case 0x2d:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x2e:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x2f:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x30:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x31:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x32:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x33:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x34:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x35:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x36:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x37:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x38:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x39:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x3a:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x3b:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x3c:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x3d:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x3e:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x3f:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x40:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x41:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x42:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x43:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x44:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x45:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x46:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x47:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x48:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x49:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x4a:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x4b:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x4c:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x4d:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x4e:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x4f:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x50:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x51:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x52:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x53:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x54:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x55:
     PaReservedWord();
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x56:
     *(char **)param_1 = _yylineno;
@@ -8368,19 +8368,19 @@ LAB_97bad2c8:
       psVar4 = this;
     }
     *(unsigned char **)(param_1 + 4) = psVar4;
-    uVar7 = PaIdentOrType(psVar4,param_2,(unsigned char **)(param_1 + 8));
+    token = PaIdentOrType(psVar4,param_2,(unsigned char **)(param_1 + 8));
     break;
   case 0x57:
     *(char **)param_1 = _yylineno;
     lVar5 = _strtol((char *)_yytext,(char **)0x0,0);
     *(long *)(param_1 + 4) = lVar5;
-    uVar7 = 0x12d;
+    token = 0x12d;
     break;
   case 0x58:
     *(char **)param_1 = _yylineno;
     lVar5 = _strtol((char *)_yytext,(char **)0x0,0);
     *(long *)(param_1 + 4) = lVar5;
-    uVar7 = 0x12d;
+    token = 0x12d;
     break;
   case 0x59:
     *(char **)param_1 = _yylineno;
@@ -8388,133 +8388,133 @@ LAB_97bad2c8:
               ((int)param_2,_yylineno,"Invalid Octal number.",(char *)_yytext,"","",uVar9 * 4,
                puVar10);
     TParseContext__recover(param_2);
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x5a:
     *(char **)param_1 = _yylineno;
     lVar5 = _strtol((char *)_yytext,(char **)0x0,0);
     *(long *)(param_1 + 4) = lVar5;
-    uVar7 = 0x12d;
+    token = 0x12d;
     break;
   case 0x5b:
     *(char **)param_1 = _yylineno;
     dVar15 = (double)((double (*)())_glp_strtod)(_yytext,0);
-    uVar7 = 300;
+    token = 300;
     *(float *)(param_1 + 4) = (float)dVar15;
     break;
   case 0x5c:
     *(char **)param_1 = _yylineno;
     dVar15 = (double)((double (*)())_glp_strtod)(_yytext,0);
-    uVar7 = 300;
+    token = 300;
     *(float *)(param_1 + 4) = (float)dVar15;
     break;
   case 0x5d:
     *(char **)param_1 = _yylineno;
     dVar15 = (double)((double (*)())_glp_strtod)(_yytext,0);
-    uVar7 = 300;
+    token = 300;
     *(float *)(param_1 + 4) = (float)dVar15;
     break;
   case 0x5e:
     iVar12 = PaParseComment((int *)param_1,param_2);
-    uVar7 = 0;
+    token = 0;
     if (iVar12 != 0) goto switchD_97bac34c_caseD_1;
     break;
   case 0x5f:
-    uVar7 = 0x13d;
+    token = 0x13d;
     *(char **)param_1 = _yylineno;
     break;
   case 0x60:
-    uVar7 = 0x144;
+    token = 0x144;
     *(char **)param_1 = _yylineno;
     break;
   case 0x61:
-    uVar7 = 0x13b;
+    token = 0x13b;
     *(char **)param_1 = _yylineno;
     break;
   case 0x62:
-    uVar7 = 0x13c;
+    token = 0x13c;
     *(char **)param_1 = _yylineno;
     break;
   case 99:
-    uVar7 = 0x13e;
+    token = 0x13e;
     *(char **)param_1 = _yylineno;
     break;
   case 100:
-    uVar7 = 0x13f;
+    token = 0x13f;
     *(char **)param_1 = _yylineno;
     break;
   case 0x65:
-    uVar7 = 0x140;
+    token = 0x140;
     *(char **)param_1 = _yylineno;
     break;
   case 0x66:
-    uVar7 = 0x141;
+    token = 0x141;
     *(char **)param_1 = _yylineno;
     break;
   case 0x67:
-    uVar7 = 0x142;
+    token = 0x142;
     *(char **)param_1 = _yylineno;
     break;
   case 0x68:
-    uVar7 = 0x143;
+    token = 0x143;
     *(char **)param_1 = _yylineno;
     break;
   case 0x69:
-    uVar7 = 0x132;
+    token = 0x132;
     *(char **)param_1 = _yylineno;
     break;
   case 0x6a:
-    uVar7 = 0x133;
+    token = 0x133;
     *(char **)param_1 = _yylineno;
     break;
   case 0x6b:
-    uVar7 = 0x138;
+    token = 0x138;
     *(char **)param_1 = _yylineno;
     break;
   case 0x6c:
-    uVar7 = 0x139;
+    token = 0x139;
     *(char **)param_1 = _yylineno;
     break;
   case 0x6d:
-    uVar7 = 0x13a;
+    token = 0x13a;
     *(char **)param_1 = _yylineno;
     break;
   case 0x6e:
-    uVar7 = 0x134;
+    token = 0x134;
     *(char **)param_1 = _yylineno;
     break;
   case 0x6f:
-    uVar7 = 0x135;
+    token = 0x135;
     *(char **)param_1 = _yylineno;
     break;
   case 0x70:
-    uVar7 = 0x136;
+    token = 0x136;
     *(char **)param_1 = _yylineno;
     break;
   case 0x71:
-    uVar7 = 0x137;
+    token = 0x137;
     *(char **)param_1 = _yylineno;
     break;
   case 0x72:
-    uVar7 = 0x130;
+    token = 0x130;
     *(char **)param_1 = _yylineno;
     break;
   case 0x73:
-    uVar7 = 0x131;
+    token = 0x131;
     *(char **)param_1 = _yylineno;
     break;
   case 0x74:
-    uVar7 = 0x14f;
+    token = 0x14f;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x75:
-    uVar7 = 0x149;
+    token = 0x149;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x76:
-    uVar7 = 0x14a;
+    token = 0x14a;
     *(char **)param_1 = _yylineno;
     break;
   case 0x77:
@@ -8522,90 +8522,90 @@ LAB_97bad2c8:
     if (*(int *)((int)param_2 + 0x24) != 0) {
       *(undefined4 *)((int)param_2 + 0x1c) = 0;
     }
-    uVar7 = 0x14c;
+    token = 0x14c;
     break;
   case 0x78:
-    uVar7 = 0x14d;
+    token = 0x14d;
     *(char **)param_1 = _yylineno;
     break;
   case 0x79:
-    uVar7 = 0x14e;
+    token = 0x14e;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x7a:
-    uVar7 = 0x145;
+    token = 0x145;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x24) = 1;
     *(undefined4 *)((int)param_2 + 0x1c) = 0;
     break;
   case 0x7b:
-    uVar7 = 0x146;
+    token = 0x146;
     *(char **)param_1 = _yylineno;
     *(undefined4 *)((int)param_2 + 0x24) = 0;
     break;
   case 0x7c:
-    uVar7 = 0x147;
+    token = 0x147;
     *(char **)param_1 = _yylineno;
     break;
   case 0x7d:
-    uVar7 = 0x148;
+    token = 0x148;
     *(char **)param_1 = _yylineno;
     break;
   case 0x7e:
-    uVar7 = 0x14b;
+    token = 0x14b;
     _yy_start = 3;
     break;
   case 0x7f:
-    uVar7 = 0x150;
+    token = 0x150;
     *(char **)param_1 = _yylineno;
     break;
   case 0x80:
-    uVar7 = 0x151;
+    token = 0x151;
     *(char **)param_1 = _yylineno;
     break;
   case 0x81:
-    uVar7 = 0x152;
+    token = 0x152;
     *(char **)param_1 = _yylineno;
     break;
   case 0x82:
-    uVar7 = 0x153;
+    token = 0x153;
     *(char **)param_1 = _yylineno;
     break;
   case 0x83:
-    uVar7 = 0x154;
+    token = 0x154;
     *(char **)param_1 = _yylineno;
     break;
   case 0x84:
-    uVar7 = 0x155;
+    token = 0x155;
     *(char **)param_1 = _yylineno;
     break;
   case 0x85:
-    uVar7 = 0x156;
+    token = 0x156;
     *(char **)param_1 = _yylineno;
     break;
   case 0x86:
-    uVar7 = 0x157;
+    token = 0x157;
     *(char **)param_1 = _yylineno;
     break;
   case 0x87:
-    uVar7 = 0x158;
+    token = 0x158;
     *(char **)param_1 = _yylineno;
     break;
   case 0x88:
-    uVar7 = 0x159;
+    token = 0x159;
     *(char **)param_1 = _yylineno;
     break;
   case 0x89:
-    uVar7 = 0x15a;
+    token = 0x15a;
     *(char **)param_1 = _yylineno;
     break;
   case 0x8a:
-    uVar7 = 0x15b;
+    token = 0x15b;
     *(char **)param_1 = _yylineno;
     break;
   case 0x8b:
-    uVar7 = 0x15c;
+    token = 0x15c;
     *(char **)param_1 = _yylineno;
     break;
   case 0x8c:
@@ -8622,14 +8622,14 @@ LAB_97bad2c8:
       pvVar13 = this_00;
     }
     *(void **)(param_1 + 4) = pvVar13;
-    uVar7 = 0x12f;
+    token = 0x12f;
     break;
   case 0x8f:
     pvVar13 = *(void **)((int)param_2 + 8);
     __ZN13TInfoSinkBase6appendEPKc(pvVar13,"FLEX: Unknown char ");
     __ZN13TInfoSinkBase6appendEPKc(pvVar13,(char *)_yytext);
     __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
-    uVar7 = 0;
+    token = 0;
     break;
   case 0x90:
     _fwrite(_yytext,_yyleng,1,_yyout);
@@ -8665,9 +8665,9 @@ LAB_97bad2c8:
   case 0x93:
     *(undefined4 *)((int)param_2 + 0x60) = 1;
     yy_delete_buffer(_yy_current_buffer);
-    uVar7 = 0;
+    token = 0;
   }
-  return uVar7;
+  return token;
 LAB_97bad2f8:
   uVar9 = _yy_start - 1;
   _yy_did_buffer_switch_on_eof = 0;

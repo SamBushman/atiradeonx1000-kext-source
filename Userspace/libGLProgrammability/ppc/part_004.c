@@ -65,7 +65,7 @@ int TIntermBinary__promote(this, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_6;
 {
   bool bVar1;
-  undefined *puVar2;
+  undefined *atomicStore;
   undefined **ppuVar3;
   undefined4 uVar4;
   undefined *puVar5;
@@ -290,8 +290,8 @@ LAB_97b90940:
           do {
             puVar5 = *ppuVar3;
             if (in_RESERVE != '\0') {
-              puVar2 = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar3);
-              *ppuVar3 = puVar2;
+              atomicStore = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar3);
+              *ppuVar3 = atomicStore;
               bVar13 = 2;
             }
           } while (!(bool)(bVar13 >> 1 & 1));
@@ -406,8 +406,8 @@ LAB_97b914fc:
             do {
               puVar5 = *ppuVar3;
               if (in_RESERVE != '\0') {
-                puVar2 = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar3);
-                *ppuVar3 = puVar2;
+                atomicStore = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar3);
+                *ppuVar3 = atomicStore;
                 bVar13 = 2;
               }
             } while (!(bool)(bVar13 >> 1 & 1));
@@ -2725,7 +2725,7 @@ int TIntermediate__promoteConstantUnion(this, param_2, param_3)
   uint param_2;
   int *param_3;
 {
-  undefined *puVar1;
+  undefined *atomicStore;
   int iVar2;
   undefined **ppuVar3;
   undefined *puVar4;
@@ -2833,8 +2833,8 @@ override_jmp_97b960f0_case_0:
           do {
             puVar4 = *ppuVar3;
             if (in_RESERVE != '\0') {
-              puVar1 = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar3);
-              *ppuVar3 = puVar1;
+              atomicStore = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar3);
+              *ppuVar3 = atomicStore;
               bVar11 = 2;
             }
           } while (!(bool)(bVar11 >> 1 & 1));
@@ -3361,7 +3361,7 @@ int OutputTreeText(param_1, param_2, param_3)
   unsigned char * param_2;
   int param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   uint uVar4;
@@ -3387,8 +3387,8 @@ int OutputTreeText(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -3413,6 +3413,7 @@ int OutputSymbol(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  int atomicStore;
   undefined1 *puVar1;
   int *piVar2;
   int iVar3;
@@ -3447,8 +3448,8 @@ int OutputSymbol(param_1, param_2, param_3, param_4, param_5, param_6)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar4;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3465,7 +3466,7 @@ int OutputBinary(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   char *pcVar4;
@@ -3496,8 +3497,8 @@ int OutputBinary(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3515,7 +3516,7 @@ int OutputUnary(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * this;
@@ -3538,8 +3539,8 @@ int OutputUnary(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3557,7 +3558,7 @@ int OutputAggregate(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * pTVar4;
@@ -3590,8 +3591,8 @@ int OutputAggregate(param_1, param_2, param_3)
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3611,7 +3612,7 @@ int OutputSelection(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * this;
@@ -3633,8 +3634,8 @@ int OutputSelection(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3674,7 +3675,7 @@ int OutputConstantUnion(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
-  undefined *puVar1;
+  undefined *atomicStore;
   int iVar2;
   uint uVar3;
   undefined **ppuVar4;
@@ -3787,8 +3788,8 @@ LAB_97b977f8:
         do {
           puVar5 = *ppuVar4;
           if (in_RESERVE != '\0') {
-            puVar1 = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar4);
-            *ppuVar4 = puVar1;
+            atomicStore = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar4);
+            *ppuVar4 = atomicStore;
             bVar11 = 2;
           }
         } while (!(bool)(bVar11 >> 1 & 1));
@@ -4175,7 +4176,7 @@ int ParseSymbol(param_1, param_2)
   unsigned char * param_2;
 {
   bool bVar1;
-  undefined *puVar2;
+  undefined *atomicStore;
   int *piVar3;
   undefined **ppuVar4;
   undefined *puVar5;
@@ -4375,8 +4376,8 @@ override_jmp_97b98aec_case_0:
               do {
                 puVar5 = *ppuVar4;
                 if (in_RESERVE != '\0') {
-                  puVar2 = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar4);
-                  *ppuVar4 = puVar2;
+                  atomicStore = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar4);
+                  *ppuVar4 = atomicStore;
                   bVar18 = 2;
                 }
               } while (!(bool)(bVar18 >> 1 & 1));
@@ -4469,8 +4470,8 @@ code_r0x97b98dd8:
       do {
         puVar5 = *ppuVar4;
         if (in_RESERVE != '\0') {
-          puVar2 = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar4);
-          *ppuVar4 = puVar2;
+          atomicStore = (undefined *)storeWordConditionalIndexed(puVar5 + -1,0,ppuVar4);
+          *ppuVar4 = atomicStore;
           bVar18 = 2;
         }
       } while (!(bool)(bVar18 >> 1 & 1));
@@ -4492,8 +4493,8 @@ int ParseBinary(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
-  undefined *puVar2;
+  int atomicStore2;
+  undefined *atomicStore;
   int *piVar3;
   undefined **ppuVar4;
   int iVar5;
@@ -4534,8 +4535,8 @@ int ParseBinary(param_1, param_2, param_3)
     do {
       puVar6 = *ppuVar4;
       if (in_RESERVE != '\0') {
-        puVar2 = (undefined *)storeWordConditionalIndexed(puVar6 + -1,0,ppuVar4);
-        *ppuVar4 = puVar2;
+        atomicStore = (undefined *)storeWordConditionalIndexed(puVar6 + -1,0,ppuVar4);
+        *ppuVar4 = atomicStore;
         bVar10 = 2;
       }
     } while (!(bool)(bVar10 >> 1 & 1));
@@ -4555,8 +4556,8 @@ int ParseBinary(param_1, param_2, param_3)
     do {
       iVar5 = *piVar3;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar5 + -1,0,piVar3);
-        *piVar3 = iVar1;
+        atomicStore2 = storeWordConditionalIndexed(iVar5 + -1,0,piVar3);
+        *piVar3 = atomicStore2;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4582,8 +4583,8 @@ int ParseBinary(param_1, param_2, param_3)
     do {
       puVar6 = *ppuVar4;
       if (in_RESERVE != '\0') {
-        puVar2 = (undefined *)storeWordConditionalIndexed(puVar6 + -1,0,ppuVar4);
-        *ppuVar4 = puVar2;
+        atomicStore = (undefined *)storeWordConditionalIndexed(puVar6 + -1,0,ppuVar4);
+        *ppuVar4 = atomicStore;
         bVar10 = 2;
       }
     } while (!(bool)(bVar10 >> 1 & 1));
@@ -4602,7 +4603,7 @@ int ParseBinary(param_1, param_2, param_3)
 int FUN_97b9907c()
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
@@ -4628,8 +4629,8 @@ int FUN_97b9907c()
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -4648,7 +4649,7 @@ int ParseUnary(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   uint uVar4;
@@ -4672,8 +4673,8 @@ int ParseUnary(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4699,8 +4700,8 @@ int ParseUnary(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -4718,7 +4719,7 @@ int ParseUnary(param_1, param_2, param_3)
 int FUN_97b99274()
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   void *unaff_r27;
@@ -4745,8 +4746,8 @@ int FUN_97b99274()
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -4923,7 +4924,7 @@ int ParseSelection(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   uint uVar4;
@@ -4953,8 +4954,8 @@ int ParseSelection(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -4972,7 +4973,7 @@ int ParseSelection(param_1, param_2, param_3)
 int FUN_97b9989c()
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -4999,8 +5000,8 @@ int FUN_97b9989c()
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -5235,7 +5236,7 @@ int ParseLoop(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   uint uVar4;
@@ -5265,8 +5266,8 @@ int ParseLoop(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -5284,7 +5285,7 @@ int ParseLoop(param_1, param_2, param_3)
 int FUN_97b99eb8()
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -5311,8 +5312,8 @@ int FUN_97b99eb8()
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -5332,7 +5333,7 @@ int ParseBranch(param_1, param_2, param_3)
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   uint uVar4;
@@ -5362,8 +5363,8 @@ int ParseBranch(param_1, param_2, param_3)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -5381,7 +5382,7 @@ int ParseBranch(param_1, param_2, param_3)
 int FUN_97b9a04c()
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -5408,8 +5409,8 @@ int FUN_97b9a04c()
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar5 = 2;
     }
   } while (!(bool)(bVar5 >> 1 & 1));
@@ -5798,7 +5799,7 @@ int FUN_97b9a844(param_1)
   void *param_1;
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int *piVar3;
   int iVar4;
   char *unaff_r26;
@@ -5827,8 +5828,8 @@ int FUN_97b9a844(param_1)
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       bVar6 = 2;
     }
   } while (!(bool)(bVar6 >> 1 & 1));
@@ -6118,7 +6119,7 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
   int param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int iVar2;
   int *piVar3;
   int iVar4;
@@ -6163,8 +6164,8 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
     do {
       iVar4 = *piVar3;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-        *piVar3 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+        *piVar3 = atomicStore;
         bVar8 = 2;
       }
     } while (!(bool)(bVar8 >> 1));
@@ -6177,8 +6178,8 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
     do {
       iVar4 = *piVar3;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-        *piVar3 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+        *piVar3 = atomicStore;
         bVar8 = 2;
       }
     } while (!(bool)(bVar8 >> 1 & 1));

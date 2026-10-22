@@ -631,7 +631,7 @@ int __ZNSt11logic_errorD4Ev(this, param_2)
   void *this;
   uint param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -645,8 +645,8 @@ int __ZNSt11logic_errorD4Ev(this, param_2)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));

@@ -457,7 +457,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
+  int atomicStore2;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -479,8 +480,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, param_2)
       piVar2 = (int *)(iVar4 + -4);
       do {
         if (in_RESERVE != '\0') {
-          iVar5 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-          *piVar2 = iVar5;
+          atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+          *piVar2 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -490,8 +491,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, param_2)
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore2;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1060,7 +1061,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
                 *this, unsigned char *param_2)
 
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -1081,8 +1082,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar6 = 2;
         }
       } while (!(bool)(bVar6 >> 1 & 1));
@@ -1096,8 +1097,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar6 = 2;
         }
       } while (!(bool)(bVar6 >> 1 & 1));

@@ -253,6 +253,7 @@ int _FinalCPP(param_1, param_2, param_3, param_4, param_5, param_6)
 int _CPPdefine(param_1)
   int *param_1;
 {
+  undefined4 stringOfAtom;
   int loopIndex;
   int loopIndex2;
   undefined4 strfromTStr;
@@ -371,8 +372,8 @@ LAB_97b86554:
       else {
 LAB_97b86728:
         _StoreStr("Macro Redefined");
-        uVar3 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,iVar5);
-        _StoreStr(uVar3);
+        stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,iVar5);
+        _StoreStr(stringOfAtom);
         strfromTStr = _GetStrfromTStr();
         _DecLineNumber();
         _CPPShInfoLogMsg(strfromTStr,extraout_r4_02,in_r5,in_r6,in_r7,in_r8,in_r9);
@@ -1291,6 +1292,7 @@ int _CPPextension(param_1)
 int _readCPPline(param_1)
   int param_1;
 {
+  undefined4 stringOfAtom;
   undefined4 strfromTStr;
   undefined *puVar1;
   int iVar2;
@@ -1385,9 +1387,9 @@ int _readCPPline(param_1)
                 }
                 else {
                   _StoreStr("Invalid Directive");
-                  uVar4 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,
+                  stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,
                                            *(undefined4 *)(param_1 + 8));
-                  _StoreStr(uVar4);
+                  _StoreStr(stringOfAtom);
                   strfromTStr = _GetStrfromTStr();
                   _CPPShInfoLogMsg(strfromTStr,extraout_r4_01,in_r5,in_r6,in_r7,in_r8,in_r9);
                   _ResetTString();
@@ -1590,6 +1592,7 @@ int _MacroExpand(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
+  undefined4 stringOfAtom;
   int loopIndex;
   undefined4 strfromTStr;
   undefined4 allocation2;
@@ -1718,8 +1721,8 @@ LAB_97b88294:
     pcVar10 = "Too few args in Macro ";
 LAB_97b8834c:
     _StoreStr(pcVar10);
-    uVar7 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
-    _StoreStr(uVar7);
+    stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
+    _StoreStr(stringOfAtom);
     strfromTStr = _GetStrfromTStr();
     _CPPShInfoLogMsg(strfromTStr,extraout_r4_00,in_r5,in_r6,in_r7,in_r8,a6);
     _ResetTString();
@@ -1744,8 +1747,8 @@ LAB_97b8834c:
     if (!bVar1) {
 LAB_97b8830c:
       _StoreStr("EOF in Macro ");
-      uVar7 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
-      _StoreStr(uVar7);
+      stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
+      _StoreStr(stringOfAtom);
       strfromTStr = _GetStrfromTStr();
       _CPPShInfoLogMsg(strfromTStr,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
       _ResetTString();

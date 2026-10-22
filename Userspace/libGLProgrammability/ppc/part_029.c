@@ -24,7 +24,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
                 *this, unsigned char *param_2)
 
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -43,8 +43,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar5 = 2;
         }
       } while (!(bool)(bVar5 >> 1 & 1));

@@ -3516,6 +3516,7 @@ int TPPStreamCompiler__getConstantAsSourceVar(param_1, param_2, param_3, param_4
   uint param_4;
   uint param_5;
 {
+  int chunk;
   uint loopIndex;
   bool bVar1;
   bool bVar2;
@@ -3547,7 +3548,7 @@ int TPPStreamCompiler__getConstantAsSourceVar(param_1, param_2, param_3, param_4
         local_80 = *(uint *)(iVar7 + 0xc);
         local_7c = *(uint *)(iVar7 + 0x10);
         if ((local_80 & 0x1f0000) == 0x110000) {
-          iVar4 = _PPStreamChunkListChunkAtIndex(uVar5,local_80 & 0xffff);
+          chunk = _PPStreamChunkListChunkAtIndex(uVar5,local_80 & 0xffff);
           if (*(int *)(param_2 + 0xc4) == 3) {
             ConstantAllocationList__getConstantUsage
                       ((unsigned char *)(param_2 + 0x44),local_7c & 0xffff,(bool *)local_70
@@ -3556,19 +3557,19 @@ int TPPStreamCompiler__getConstantAsSourceVar(param_1, param_2, param_3, param_4
           if (local_60[0] == param_5) {
             if (param_4 == 2) {
 LAB_97bc86b4:
-              if ((local_70[1] != 0) && (param_3[1] == *(float *)(iVar4 + 0x10))) {
+              if ((local_70[1] != 0) && (param_3[1] == *(float *)(chunk + 0x10))) {
 LAB_97bc86d0:
-                if ((local_70[0] != 0) && (*param_3 == *(float *)(iVar4 + 0xc))) goto LAB_97bc86ec;
+                if ((local_70[0] != 0) && (*param_3 == *(float *)(chunk + 0xc))) goto LAB_97bc86ec;
               }
             }
             else {
               if (2 < param_4) {
                 if (param_4 != 3) {
                   if (param_4 != 4) goto LAB_97bc86ec;
-                  if ((local_70[3] == 0) || (param_3[3] != *(float *)(iVar4 + 0x18)))
+                  if ((local_70[3] == 0) || (param_3[3] != *(float *)(chunk + 0x18)))
                   goto LAB_97bc86f8;
                 }
-                if ((local_70[2] == 0) || (param_3[2] != *(float *)(iVar4 + 0x14)))
+                if ((local_70[2] == 0) || (param_3[2] != *(float *)(chunk + 0x14)))
                 goto LAB_97bc86f8;
                 goto LAB_97bc86b4;
               }
@@ -3602,7 +3603,7 @@ LAB_97bc8720:
           local_80 = *(uint *)(iVar7 + 0xc);
           local_7c = *(uint *)(iVar7 + 0x10);
           if ((local_80 & 0x1f0000) == 0x110000) {
-            iVar4 = _PPStreamChunkListChunkAtIndex(uVar5,local_80 & 0xffff);
+            chunk = _PPStreamChunkListChunkAtIndex(uVar5,local_80 & 0xffff);
             if (*(int *)(param_2 + 0xc4) == 3) {
               ConstantAllocationList__getConstantUsage
                         ((unsigned char *)(param_2 + 0x44),local_7c & 0xffff,
@@ -3612,14 +3613,14 @@ LAB_97bc8720:
               bVar2 = true;
               if (param_4 == 2) {
 LAB_97bc8838:
-                if ((local_70[1] == 1) && (param_3[1] == *(float *)(iVar4 + 0x10))) {
+                if ((local_70[1] == 1) && (param_3[1] == *(float *)(chunk + 0x10))) {
                   local_50[1] = local_70[1];
                 }
                 else if (local_70[1] != 0) {
                   bVar2 = false;
                 }
 LAB_97bc8868:
-                if ((local_70[0] == 1) && (*param_3 == *(float *)(iVar4 + 0xc))) {
+                if ((local_70[0] == 1) && (*param_3 == *(float *)(chunk + 0xc))) {
                   local_50[0] = local_70[0];
                 }
                 else if (local_70[0] != 0) {
@@ -3631,14 +3632,14 @@ LAB_97bc8868:
                 if (2 < param_4) {
                   if (param_4 != 3) {
                     if (param_4 != 4) goto LAB_97bc88a0;
-                    if ((local_70[3] == 1) && (param_3[3] == *(float *)(iVar4 + 0x18))) {
+                    if ((local_70[3] == 1) && (param_3[3] == *(float *)(chunk + 0x18))) {
                       local_50[3] = 1;
                     }
                     else if (local_70[3] != 0) {
                       bVar2 = false;
                     }
                   }
-                  if ((local_70[2] == 1) && (param_3[2] == *(float *)(iVar4 + 0x14))) {
+                  if ((local_70[2] == 1) && (param_3[2] == *(float *)(chunk + 0x14))) {
                     local_50[2] = local_70[2];
                   }
                   else if (local_70[2] != 0) {
@@ -3657,7 +3658,7 @@ LAB_97bc88a0:
                       bVar2 = false;
                       break;
                     }
-                    ((float *)(iVar4 + 0xc))[loopIndex] = param_3[loopIndex];
+                    ((float *)(chunk + 0xc))[loopIndex] = param_3[loopIndex];
                     local_50[loopIndex] = 1;
                     local_70[loopIndex] = 1;
                   }
@@ -4300,7 +4301,7 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, param_3)
   undefined4 language;
   undefined4 param_3;
 {
-  int iVar1;
+  int atomicStore;
   undefined *puVar2;
   int *piVar3;
   char in_RESERVE;
@@ -4319,8 +4320,8 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, param_3)
   piVar3 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4328,8 +4329,8 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, param_3)
   *(undefined **)((int)this + 0xb0) = puVar2 + 0xc;
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4358,7 +4359,7 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, param_3)
   undefined4 language;
   undefined4 param_3;
 {
-  int iVar1;
+  int atomicStore;
   undefined *puVar2;
   int *piVar3;
   char in_RESERVE;
@@ -4377,8 +4378,8 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, param_3)
   piVar3 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4386,8 +4387,8 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, param_3)
   *(undefined **)((int)this + 0xb0) = puVar2 + 0xc;
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4416,7 +4417,7 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  int iVar1;
+  int atomicStore;
   undefined *puVar2;
   int *piVar3;
   char in_RESERVE;
@@ -4435,8 +4436,8 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
   piVar3 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -4444,8 +4445,8 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
   *(undefined **)((int)this + 0xb0) = puVar2 + 0xc;
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));

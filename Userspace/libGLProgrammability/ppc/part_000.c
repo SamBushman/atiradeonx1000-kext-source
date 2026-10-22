@@ -170,7 +170,7 @@ int _PPParserPreprocessString(param_1, param_2, param_3)
   uint uVar4;
   undefined1 uVar5;
   uint length;
-  uint uVar7;
+  uint scanPos;
   uint uVar8;
   int iVar9;
   int iVar10;
@@ -183,20 +183,20 @@ int _PPParserPreprocessString(param_1, param_2, param_3)
   
   length = _strlen(param_2);
   if (param_3 == 0) {
-    uVar7 = 0;
+    scanPos = 0;
     uVar16 = 0;
 LAB_97b7c0e8:
     uVar12 = 1;
   }
   else {
-    uVar7 = 10;
+    scanPos = 10;
     if (length < 10) {
-      uVar7 = length;
+      scanPos = length;
     }
-    uVar16 = uVar7;
-    if ((((uVar7 < length) && (cVar2 = *(char *)(param_2 + uVar7), cVar2 != ' ')) && (cVar2 != '\t'))
+    uVar16 = scanPos;
+    if ((((scanPos < length) && (cVar2 = *(char *)(param_2 + scanPos), cVar2 != ' ')) && (cVar2 != '\t'))
        && (((cVar2 != '\n' && (cVar2 != '\r')) && (cVar2 != '#')))) {
-      uVar7 = uVar7 + 1;
+      scanPos = scanPos + 1;
       goto LAB_97b7c0e8;
     }
     uVar12 = 0;
@@ -219,21 +219,21 @@ joined_r0x97b7c0f8:
         ((cVar2 = *(char *)(param_2 + uVar4 + 1), cVar2 != ' ' &&
          (((cVar2 != '\t' && (cVar2 != '\n')) && (cVar2 != '\r')))))) && (cVar2 != '#')) {
 LAB_97b7c5fc:
-      uVar7 = uVar7 + 1;
+      scanPos = scanPos + 1;
       uVar12 = 1;
     }
     goto LAB_97b7c604;
   case 10:
-    uVar7 = uVar7 + 1;
+    scanPos = scanPos + 1;
     uVar15 = uVar4 + 1;
     break;
   default:
-    uVar7 = uVar7 + 1;
+    scanPos = scanPos + 1;
     uVar15 = uVar4 + 1;
     uVar12 = 0;
     goto LAB_97b7c664;
   case 0xd:
-    uVar7 = uVar7 + 1;
+    scanPos = scanPos + 1;
     if ((uVar4 + 1 < length) && (*(char *)(param_2 + uVar4 + 1) == '\n')) {
       iVar13 = 2;
     }
@@ -255,9 +255,9 @@ LAB_97b7c5fc:
   case 0x7c:
   case 0x7d:
     if (uVar12 == 0) {
-      uVar7 = uVar7 + 1;
+      scanPos = scanPos + 1;
     }
-    uVar7 = uVar7 + 1;
+    scanPos = scanPos + 1;
     if (((uVar4 + 1 < length) && (cVar2 = *(char *)(param_2 + uVar4 + 1), cVar2 != ' ')) &&
        ((cVar2 != '\t' && (((cVar2 != '\n' && (cVar2 != '\r')) && (cVar2 != '#'))))))
     goto LAB_97b7c5fc;
@@ -268,10 +268,10 @@ LAB_97b7c604:
   case 0x2b:
   case 0x2d:
     if ((uVar12 == 0) && (uVar11 == 0)) {
-      uVar7 = uVar7 + 1;
+      scanPos = scanPos + 1;
     }
     uVar15 = uVar4 + 1;
-    uVar8 = uVar7 + 1;
+    uVar8 = scanPos + 1;
     if ((((length <= uVar15) || (bVar1 = *(byte *)(param_2 + uVar4 + 1), bVar1 - 0x30 < 10)) ||
         (bVar1 == 0x20)) ||
        (((bVar1 == 9 || (bVar1 == 10)) || ((bVar1 == 0xd || ((bVar1 == 0x23 || (bVar1 == 0x2e)))))))
@@ -288,7 +288,7 @@ LAB_97b7c604:
         }
       }
       uVar11 = 0;
-      uVar7 = uVar8;
+      scanPos = uVar8;
       if (uVar16 < length) {
         if (((uint)(*(byte *)(param_2 + uVar16) - 0x30) < 10) || (*(byte *)(param_2 + uVar16) == 0x2e)) {
           uVar11 = 1;
@@ -301,18 +301,18 @@ LAB_97b7c604:
       }
       goto joined_r0x97b7c0f8;
     }
-    uVar7 = uVar7 + 2;
+    scanPos = scanPos + 2;
     break;
   case 0x2e:
     if ((uVar4 + 1 < length) && (*(char *)(param_2 + uVar4 + 1) == '.')) {
-      uVar16 = uVar7;
+      uVar16 = scanPos;
       if (uVar12 == 0) {
-        uVar16 = uVar7 + 1;
+        uVar16 = scanPos + 1;
       }
-      uVar7 = uVar16 + 2;
+      scanPos = uVar16 + 2;
       if (((((uVar4 + 2 < length) && (cVar2 = *(char *)(param_2 + uVar4 + 2), cVar2 != ' ')) &&
            (cVar2 != '\t')) && ((cVar2 != '\n' && (cVar2 != '\r')))) && (cVar2 != '#')) {
-        uVar7 = uVar16 + 3;
+        scanPos = uVar16 + 3;
         uVar12 = 1;
       }
       else {
@@ -322,22 +322,22 @@ LAB_97b7c604:
       goto LAB_97b7c664;
     }
     if ((uVar12 == 0) && (uVar11 != 1)) {
-      uVar7 = uVar7 + 1;
+      scanPos = scanPos + 1;
     }
-    uVar16 = uVar7 + 1;
+    uVar16 = scanPos + 1;
     if (length <= uVar4 + 1) goto LAB_97b7c64c;
     bVar1 = *(byte *)(param_2 + uVar4 + 1);
     if (bVar1 - 0x30 < 10) {
       uVar12 = 0;
       uVar11 = 3;
-      uVar7 = uVar16;
+      scanPos = uVar16;
       uVar16 = uVar4 + 1;
       goto joined_r0x97b7c0f8;
     }
     if ((((bVar1 != 0x20) && (bVar1 != 9)) && (bVar1 != 10)) && ((bVar1 != 0xd && (bVar1 != 0x23))))
     {
       uVar12 = 1;
-      uVar7 = uVar7 + 2;
+      scanPos = scanPos + 2;
       uVar16 = uVar4 + 1;
       goto joined_r0x97b7c0f8;
     }
@@ -355,10 +355,10 @@ LAB_97b7c604:
     uVar11 = uVar11 | uVar12;
   case 0x45:
   case 0x65:
-    uVar16 = uVar7 + 1;
+    uVar16 = scanPos + 1;
 LAB_97b7c64c:
     uVar12 = 0;
-    uVar7 = uVar16;
+    scanPos = uVar16;
     uVar16 = uVar4 + 1;
     goto joined_r0x97b7c0f8;
   }
@@ -369,26 +369,26 @@ LAB_97b7c664:
   goto joined_r0x97b7c0f8;
 LAB_97b7c6cc:
   if (uVar12 == 0) {
-    uVar7 = uVar7 + 1;
+    scanPos = scanPos + 1;
   }
-  allocation = _calloc(uVar7 + 1,1);
+  allocation = _calloc(scanPos + 1,1);
   if (param_3 == 0) {
     iVar9 = 0;
-    uVar7 = 0;
+    scanPos = 0;
 LAB_97b7c774:
     uVar16 = 1;
   }
   else {
-    uVar7 = 10;
+    scanPos = 10;
     if (length < 10) {
-      uVar7 = length;
+      scanPos = length;
     }
     iVar9 = 0;
-    for (uVar16 = uVar7; uVar16 != 0; uVar16 = uVar16 - 1) {
+    for (uVar16 = scanPos; uVar16 != 0; uVar16 = uVar16 - 1) {
       *(undefined1 *)(allocation + iVar9) = *(undefined1 *)(param_2 + iVar9);
       iVar9 = iVar9 + 1;
     }
-    if (((uVar7 < length) && (cVar2 = *(char *)(param_2 + uVar7), cVar2 != ' ')) &&
+    if (((scanPos < length) && (cVar2 = *(char *)(param_2 + scanPos), cVar2 != ' ')) &&
        ((cVar2 != '\t' && (((cVar2 != '\n' && (cVar2 != '\r')) && (cVar2 != '#')))))) {
       *(undefined1 *)(allocation + iVar9) = 0x20;
       iVar9 = iVar9 + 1;
@@ -399,7 +399,7 @@ LAB_97b7c774:
   bVar3 = false;
   uVar12 = 0;
 joined_r0x97b7c784:
-  uVar11 = uVar7;
+  uVar11 = scanPos;
   if (length <= uVar11) {
     if (uVar16 == 0) {
       *(undefined1 *)(allocation + iVar9) = 0x20;
@@ -410,7 +410,7 @@ joined_r0x97b7c784:
   if (bVar3) {
     if (*(char *)(param_2 + uVar11) != '\n') goto code_r0x97b7cd84;
     *(undefined1 *)(allocation + iVar9) = 10;
-    uVar7 = uVar11 + 1;
+    scanPos = uVar11 + 1;
     goto LAB_97b7cdd0;
   }
   uVar5 = *(undefined1 *)(param_2 + uVar11);
@@ -432,7 +432,7 @@ LAB_97b7ccec:
     goto LAB_97b7cbd8;
   default:
     *(undefined1 *)(allocation + iVar9) = uVar5;
-    uVar7 = uVar11 + 1;
+    scanPos = uVar11 + 1;
     iVar10 = iVar9 + 1;
     uVar16 = 0;
     break;
@@ -442,10 +442,10 @@ LAB_97b7ccec:
     if ((uVar11 + 1 < length) && (*(char *)(param_2 + uVar11 + 1) == '\n')) {
       iVar14 = 2;
     }
-    uVar7 = uVar11 + iVar14;
+    scanPos = uVar11 + iVar14;
     goto LAB_97b7cbe0;
   case 0x23:
-    uVar7 = uVar11 + 1;
+    scanPos = uVar11 + 1;
     bVar3 = true;
     goto LAB_97b7cbe0;
   case 0x28:
@@ -471,7 +471,7 @@ LAB_97b7ccec:
     uVar16 = 0;
     iVar10 = iVar9;
 LAB_97b7ccfc:
-    uVar7 = uVar11 + 1;
+    scanPos = uVar11 + 1;
     break;
   case 0x2b:
   case 0x2d:
@@ -487,32 +487,32 @@ LAB_97b7ccfc:
        (((bVar1 == 9 || (bVar1 == 10)) || ((bVar1 == 0xd || ((bVar1 == 0x23 || (bVar1 == 0x2e)))))))
        ) {
       uVar16 = 0;
-      uVar7 = uVar11 + 1;
+      scanPos = uVar11 + 1;
       if (uVar12 < length) {
         cVar2 = *(char *)(param_2 + uVar12);
         while ((cVar2 == ' ' || (cVar2 == '\t'))) {
           iVar14 = iVar14 + 1;
-          uVar7 = uVar11 + iVar14;
-          if (length <= uVar7) break;
-          cVar2 = *(char *)(param_2 + uVar7);
+          scanPos = uVar11 + iVar14;
+          if (length <= scanPos) break;
+          cVar2 = *(char *)(param_2 + scanPos);
         }
       }
       uVar12 = 0;
-      if (uVar7 < length) {
-        if (((uint)(*(byte *)(param_2 + uVar7) - 0x30) < 10) || (*(byte *)(param_2 + uVar7) == 0x2e)) {
+      if (scanPos < length) {
+        if (((uint)(*(byte *)(param_2 + scanPos) - 0x30) < 10) || (*(byte *)(param_2 + scanPos) == 0x2e)) {
           uVar12 = 1;
         }
-        bVar1 = *(byte *)(param_2 + uVar7);
+        bVar1 = *(byte *)(param_2 + scanPos);
         if ((((9 < bVar1 - 0x30) && (bVar1 != 0x2e)) && (bVar1 != 10)) &&
            ((bVar1 != 0xd && (bVar1 != 0x23)))) {
-          uVar7 = uVar11 + iVar14 + -1;
+          scanPos = uVar11 + iVar14 + -1;
         }
       }
       goto joined_r0x97b7c784;
     }
     uVar5 = 0x20;
 LAB_97b7cbd8:
-    uVar7 = uVar11 + 1;
+    scanPos = uVar11 + 1;
     *(undefined1 *)(allocation + iVar9) = uVar5;
     iVar10 = iVar9 + 1;
 LAB_97b7cbe0:
@@ -532,7 +532,7 @@ LAB_97b7cbe0:
         uVar16 = 0;
         uVar12 = 3;
         iVar9 = iVar14;
-        uVar7 = uVar11 + 1;
+        scanPos = uVar11 + 1;
         goto joined_r0x97b7c784;
       }
       if ((((bVar1 != 0x20) && (bVar1 != 9)) && (bVar1 != 10)) &&
@@ -540,7 +540,7 @@ LAB_97b7cbe0:
         *(undefined1 *)(allocation + iVar14) = 0x20;
         uVar16 = 1;
         iVar9 = iVar9 + 2;
-        uVar7 = uVar11 + 1;
+        scanPos = uVar11 + 1;
         goto joined_r0x97b7c784;
       }
       goto LAB_97b7cd54;
@@ -561,7 +561,7 @@ LAB_97b7cbe0:
     else {
       uVar16 = 0;
     }
-    uVar7 = uVar11 + 2;
+    scanPos = uVar11 + 2;
     break;
   case 0x30:
   case 0x31:
@@ -584,20 +584,20 @@ LAB_97b7cbe0:
 LAB_97b7cd54:
     uVar16 = 0;
     iVar9 = iVar14;
-    uVar7 = uVar11 + 1;
+    scanPos = uVar11 + 1;
     goto joined_r0x97b7c784;
   }
   uVar12 = 0;
   iVar9 = iVar10;
   goto joined_r0x97b7c784;
 code_r0x97b7cd84:
-  uVar7 = uVar11 + 1;
+  scanPos = uVar11 + 1;
   if (*(char *)(param_2 + uVar11) == '\r') {
     *(undefined1 *)(allocation + iVar9) = 10;
     if ((uVar11 + 1 < length) && (*(char *)(param_2 + uVar11 + 1) == '\n')) {
       iVar14 = 2;
     }
-    uVar7 = uVar11 + iVar14;
+    scanPos = uVar11 + iVar14;
 LAB_97b7cdd0:
     bVar3 = false;
     iVar9 = iVar9 + 1;
@@ -612,7 +612,7 @@ code_r0x97b7c67c:
     uVar16 = uVar4 + iVar13;
 LAB_97b7c6bc:
     bVar3 = false;
-    uVar7 = uVar7 + 1;
+    scanPos = scanPos + 1;
   }
   goto joined_r0x97b7c0f8;
 }
@@ -714,33 +714,33 @@ int _PPParserAttachString(parser, param_2, param_3)
 int _PPStreamCreate()
 {
   int allocation;
-  undefined4 uVar2;
+  undefined4 chunkList;
   
   allocation = _calloc(0x34,1);
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 4) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 8) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0xc) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x10) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x14) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x18) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x1c) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x20) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x24) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x2c) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x28) = uVar2;
-  uVar2 = ((int (*)())_PPStreamChunkListCreate)();
-  *(undefined4 *)(allocation + 0x30) = uVar2;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 4) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 8) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0xc) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x10) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x14) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x18) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x1c) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x20) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x24) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x2c) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x28) = chunkList;
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
+  *(undefined4 *)(allocation + 0x30) = chunkList;
   return allocation;
 }
 
@@ -849,12 +849,12 @@ int _PPParserParseVersion(parser)
 {
   int compareResult;
   undefined4 uVar1;
-  int iVar2;
+  int part;
   undefined1 auStack_110 [264];
   
-  iVar2 = ((int (*)())_PPParserGetPart)(parser,auStack_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,auStack_110,0);
   uVar1 = 4;
-  if (iVar2 != 0) {
+  if (part != 0) {
     if ((*(uint *)(parser + 0x48c) & 2) == 0) {
       compareResult = _memcmp(auStack_110,"!!ARBvp1.0",0xb);
       if (compareResult != 0) {
@@ -959,20 +959,20 @@ int _PPParserParseOption(param_1)
   undefined4 param_1;
 {
   int compareResult;
-  int iVar1;
+  int part;
   int iVar2;
   char local_110 [264];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+  part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
   iVar2 = 1;
-  if (iVar1 != 0) {
+  if (part != 0) {
     compareResult = _memcmp(local_110,"OPTION",7);
     if (compareResult == 0) {
       iVar2 = ((int (*)())_PPParserParseOptionIdentifier)(param_1);
       if (iVar2 == 0) {
-        iVar1 = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+        part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
         iVar2 = 0x2d;
-        if ((iVar1 != 0) && (iVar2 = 0x1e, local_110[0] == ';')) {
+        if ((part != 0) && (iVar2 = 0x1e, local_110[0] == ';')) {
           iVar2 = 0;
         }
       }
@@ -990,15 +990,15 @@ int _PPParserParseOptionIdentifier(parser)
   int parser;
 {
   int compareResult;
-  int iVar1;
+  int part;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined1 auStack_120 [256];
   undefined4 local_20;
   uint local_1c;
   
-  iVar1 = ((int (*)())_PPParserGetPart)(parser,auStack_120,0);
-  if (iVar1 == 0) {
+  part = ((int (*)())_PPParserGetPart)(parser,auStack_120,0);
+  if (part == 0) {
     return 0x2d;
   }
   if ((*(uint *)(parser + 0x48c) & 2) == 0) {
@@ -1251,7 +1251,7 @@ int _PPParserParseStatement(parser)
   undefined4 in_r9;
   uint uVar8;
   int iVar9;
-  int *piVar10;
+  int *opsList;
   undefined1 auStack_140 [256];
   char acStack_40 [20];
   
@@ -1316,39 +1316,39 @@ LAB_97b7db80:
                   iVar9 = _memcmp(auStack_140,"BLOCK",6);
                   if (iVar9 != 0) {
                     if ((uVar8 & 2) == 0) {
-                      piVar10 = &_OpsList_ARBvp10;
+                      opsList = &_OpsList_ARBvp10;
                     }
                     else {
-                      piVar10 = &_OpsList_ARBfp10;
+                      opsList = &_OpsList_ARBfp10;
                     }
                     iVar9 = 0;
                     do {
-                      iVar2 = *piVar10;
+                      iVar2 = *opsList;
                       if (iVar2 != 0) {
                         do {
                           compareResult = _strcmp(auStack_140,iVar2);
                           if (compareResult == 0) {
-                            iVar1 = piVar10[1];
+                            iVar1 = opsList[1];
                             uVar4 = 0;
                             goto LAB_97b7e2b0;
                           }
                           uVar8 = *(uint *)(parser + 0x48c);
                           if ((uVar8 & 0x10) != 0) {
-                            _sprintf(acStack_40,"%sC",*piVar10);
+                            _sprintf(acStack_40,"%sC",*opsList);
                             compareResult = _strcmp(auStack_140,acStack_40);
                             if (compareResult != 0) {
                               uVar8 = *(uint *)(parser + 0x48c);
                               if (uVar8 != 0x34) goto LAB_97b7ddc8;
-                              _sprintf(acStack_40,"%sC0",*piVar10);
+                              _sprintf(acStack_40,"%sC0",*opsList);
                               compareResult = _strcmp(auStack_140,acStack_40);
                               if (compareResult == 0) goto LAB_97b7e228;
-                              _sprintf(acStack_40,"%sC1",*piVar10);
+                              _sprintf(acStack_40,"%sC1",*opsList);
                               compareResult = _strcmp(auStack_140,acStack_40);
                               if (compareResult != 0) {
                                 uVar8 = *(uint *)(parser + 0x48c);
                                 goto LAB_97b7ddc8;
                               }
-                              iVar1 = piVar10[1];
+                              iVar1 = opsList[1];
                               uVar6 = 0;
 LAB_97b7e28c:
                               uVar5 = 1;
@@ -1357,61 +1357,61 @@ LAB_97b7e28c:
                               goto LAB_97b7e334;
                             }
 LAB_97b7e228:
-                            iVar1 = piVar10[1];
+                            iVar1 = opsList[1];
                             uVar4 = 0;
                             goto LAB_97b7e234;
                           }
 LAB_97b7ddc8:
                           if ((uVar8 & 2) != 0) {
-                            _sprintf(acStack_40,"%s_SAT",*piVar10);
+                            _sprintf(acStack_40,"%s_SAT",*opsList);
                             compareResult = _strcmp(auStack_140,acStack_40);
                             if (compareResult == 0) {
-                              iVar1 = piVar10[1];
+                              iVar1 = opsList[1];
                               uVar4 = 0;
                               goto LAB_97b7e260;
                             }
                             if ((*(uint *)(parser + 0x48c) & 0x10) == 0) goto LAB_97b7e11c;
-                            _sprintf(acStack_40,"%sC_SAT",*piVar10);
+                            _sprintf(acStack_40,"%sC_SAT",*opsList);
                             compareResult = _strcmp(auStack_140,acStack_40);
                             if (compareResult == 0) {
 LAB_97b7e268:
-                              iVar1 = piVar10[1];
+                              iVar1 = opsList[1];
                               uVar4 = 0;
                               goto LAB_97b7e328;
                             }
                             if (*(int *)(parser + 0x48c) == 0x34) {
-                              _sprintf(acStack_40,"%sC0_SAT",*piVar10);
+                              _sprintf(acStack_40,"%sC0_SAT",*opsList);
                               compareResult = _strcmp(auStack_140,acStack_40);
                               if (compareResult == 0) goto LAB_97b7e268;
-                              _sprintf(acStack_40,"%sC1_SAT",*piVar10);
+                              _sprintf(acStack_40,"%sC1_SAT",*opsList);
                               compareResult = _strcmp(auStack_140,acStack_40);
                               if (compareResult == 0) {
-                                iVar1 = piVar10[1];
+                                iVar1 = opsList[1];
                                 uVar6 = 1;
                                 goto LAB_97b7e28c;
                               }
                             }
                             length = _strlen(auStack_140);
-                            length2 = _strlen(*piVar10);
+                            length2 = _strlen(*opsList);
                             if (length == length2 + 1) {
-                              _sprintf(acStack_40,"%sR",*piVar10);
+                              _sprintf(acStack_40,"%sR",*opsList);
                               compareResult = _strcmp(auStack_140,acStack_40);
                               if (compareResult == 0) {
-                                iVar1 = piVar10[1];
+                                iVar1 = opsList[1];
                                 uVar4 = 1;
                               }
                               else {
-                                _sprintf(acStack_40,"%sH",*piVar10);
+                                _sprintf(acStack_40,"%sH",*opsList);
                                 compareResult = _strcmp(auStack_140,acStack_40);
                                 if (compareResult == 0) {
-                                  iVar1 = piVar10[1];
+                                  iVar1 = opsList[1];
                                   uVar4 = 2;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sX",*piVar10);
+                                  _sprintf(acStack_40,"%sX",*opsList);
                                   compareResult = _strcmp(auStack_140,acStack_40);
                                   if (compareResult != 0) goto LAB_97b7e11c;
-                                  iVar1 = piVar10[1];
+                                  iVar1 = opsList[1];
                                   uVar4 = 3;
                                 }
                               }
@@ -1422,26 +1422,26 @@ LAB_97b7e2b4:
                             }
                             else {
                               length = _strlen(auStack_140);
-                              length2 = _strlen(*piVar10);
+                              length2 = _strlen(*opsList);
                               if (length == length2 + 2) {
-                                _sprintf(acStack_40,"%sRC",*piVar10);
+                                _sprintf(acStack_40,"%sRC",*opsList);
                                 compareResult = _strcmp(auStack_140,acStack_40);
                                 if (compareResult == 0) {
-                                  iVar1 = piVar10[1];
+                                  iVar1 = opsList[1];
                                   uVar4 = 1;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sHC",*piVar10);
+                                  _sprintf(acStack_40,"%sHC",*opsList);
                                   compareResult = _strcmp(auStack_140,acStack_40);
                                   if (compareResult == 0) {
-                                    iVar1 = piVar10[1];
+                                    iVar1 = opsList[1];
                                     uVar4 = 2;
                                   }
                                   else {
-                                    _sprintf(acStack_40,"%sXC",*piVar10);
+                                    _sprintf(acStack_40,"%sXC",*opsList);
                                     compareResult = _strcmp(auStack_140,acStack_40);
                                     if (compareResult != 0) goto LAB_97b7e11c;
-                                    iVar1 = piVar10[1];
+                                    iVar1 = opsList[1];
                                     uVar4 = 3;
                                   }
                                 }
@@ -1450,26 +1450,26 @@ LAB_97b7e234:
                                 goto LAB_97b7e2b4;
                               }
                               length = _strlen(auStack_140);
-                              length2 = _strlen(*piVar10);
+                              length2 = _strlen(*opsList);
                               if (length == length2 + 5) {
-                                _sprintf(acStack_40,"%sR_SAT",*piVar10);
+                                _sprintf(acStack_40,"%sR_SAT",*opsList);
                                 compareResult = _strcmp(auStack_140,acStack_40);
                                 if (compareResult == 0) {
-                                  iVar1 = piVar10[1];
+                                  iVar1 = opsList[1];
                                   uVar4 = 1;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sH_SAT",*piVar10);
+                                  _sprintf(acStack_40,"%sH_SAT",*opsList);
                                   compareResult = _strcmp(auStack_140,acStack_40);
                                   if (compareResult == 0) {
-                                    iVar1 = piVar10[1];
+                                    iVar1 = opsList[1];
                                     uVar4 = 2;
                                   }
                                   else {
-                                    _sprintf(acStack_40,"%sX_SAT",*piVar10);
+                                    _sprintf(acStack_40,"%sX_SAT",*opsList);
                                     compareResult = _strcmp(auStack_140,acStack_40);
                                     if (compareResult != 0) goto LAB_97b7e11c;
-                                    iVar1 = piVar10[1];
+                                    iVar1 = opsList[1];
                                     uVar4 = 3;
                                   }
                                 }
@@ -1478,26 +1478,26 @@ LAB_97b7e260:
                               }
                               else {
                                 length = _strlen(auStack_140);
-                                length2 = _strlen(*piVar10);
+                                length2 = _strlen(*opsList);
                                 if (length != length2 + 6) goto LAB_97b7e11c;
-                                _sprintf(acStack_40,"%sRC_SAT",*piVar10);
+                                _sprintf(acStack_40,"%sRC_SAT",*opsList);
                                 compareResult = _strcmp(auStack_140,acStack_40);
                                 if (compareResult == 0) {
-                                  iVar1 = piVar10[1];
+                                  iVar1 = opsList[1];
                                   uVar4 = 1;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sHC_SAT",*piVar10);
+                                  _sprintf(acStack_40,"%sHC_SAT",*opsList);
                                   compareResult = _strcmp(auStack_140,acStack_40);
                                   if (compareResult == 0) {
-                                    iVar1 = piVar10[1];
+                                    iVar1 = opsList[1];
                                     uVar4 = 2;
                                   }
                                   else {
-                                    _sprintf(acStack_40,"%sXC_SAT",*piVar10);
+                                    _sprintf(acStack_40,"%sXC_SAT",*opsList);
                                     compareResult = _strcmp(auStack_140,acStack_40);
                                     if (compareResult != 0) goto LAB_97b7e11c;
-                                    iVar1 = piVar10[1];
+                                    iVar1 = opsList[1];
                                     uVar4 = 3;
                                   }
                                 }
@@ -1512,19 +1512,19 @@ LAB_97b7e334:
                             return iVar1;
                           }
 LAB_97b7e11c:
-                          piVar10 = piVar10 + 2;
-                          iVar2 = *piVar10;
+                          opsList = opsList + 2;
+                          iVar2 = *opsList;
                         } while (iVar2 != 0);
                         uVar8 = *(uint *)(parser + 0x48c);
                       }
                       if (uVar8 == 0x34) {
                         if (iVar9 == 0) {
 LAB_97b7e160:
-                          piVar10 = (int *)&_OpsList_NVvp20;
+                          opsList = (int *)&_OpsList_NVvp20;
                         }
                         else {
                           if (iVar9 != 1) goto LAB_97b7e1b4;
-                          piVar10 = &_OpsList_NVvp30;
+                          opsList = &_OpsList_NVvp30;
                         }
                       }
                       else {
@@ -1557,13 +1557,13 @@ LAB_97b7e1b4:
                           }
                           if (iVar9 != 0) {
                             if (iVar9 == 1) {
-                              piVar10 = (int *)&_OpsList_NVfp20;
+                              opsList = (int *)&_OpsList_NVfp20;
                               goto LAB_97b7e1ac;
                             }
                             goto LAB_97b7e1b4;
                           }
                         }
-                        piVar10 = (int *)&_OpsList_NVfp10;
+                        opsList = (int *)&_OpsList_NVfp10;
                       }
 LAB_97b7e1ac:
                       iVar9 = iVar9 + 1;
@@ -1585,18 +1585,19 @@ LAB_97b7e1ac:
 int _PPParserParseParameterDeclaration(parser)
   int parser;
 {
+  int part;
   int iVar1;
   int iVar2;
-  int iVar3;
+  int part2;
   undefined4 uVar4;
   char local_130 [256];
   undefined4 local_30 [7];
   
   local_30[0] = 1;
-  iVar1 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
   uVar4 = 0;
   iVar2 = 0x2d;
-  if (iVar1 != 0) {
+  if (part != 0) {
     iVar1 = ((int (*)())_PPParserValidateName)(parser,local_130);
     iVar2 = 0x12;
     if (iVar1 == 0) {
@@ -1605,9 +1606,9 @@ int _PPParserParseParameterDeclaration(parser)
       *(undefined4 *)(iVar1 + 0xc) = 2;
       iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),iVar1);
       if (iVar2 == 0) {
-        iVar3 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
+        part2 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
         iVar2 = 0x2d;
-        if (iVar3 != 0) {
+        if (part2 != 0) {
           if (local_130[0] == '[') {
             ((int (*)())_PPParserReturnPart)(parser);
             iVar2 = _PPParserParseDefaultArray(parser,local_30);
@@ -1627,9 +1628,9 @@ int _PPParserParseParameterDeclaration(parser)
             iVar2 = ((int (*)())_PPParserParseParamBinding)(parser,uVar4,local_30);
             if (iVar2 == 0) {
               *(undefined4 *)(iVar1 + 4) = local_30[0];
-              iVar1 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
+              part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
               iVar2 = 0x2d;
-              if ((iVar1 != 0) && (iVar2 = 10, local_130[0] == ';')) {
+              if ((part != 0) && (iVar2 = 10, local_130[0] == ';')) {
                 iVar2 = 0;
               }
             }
@@ -1953,6 +1954,8 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
   int param_2;
   int *param_3;
 {
+  int arrayResult;
+  int part;
   int compareResult2;
   int scalars;
   int compareResult;
@@ -1962,7 +1965,7 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
   char cVar4;
   int iVar5;
   undefined4 uVar6;
-  int iVar7;
+  int part2;
   undefined4 *puVar8;
   int loopIndex;
   char local_180 [256];
@@ -1988,8 +1991,8 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
   uVar3 = *(uint *)(parser + 0x48c);
   loopIndex = 0;
   if (!bVar1) {
-    iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-    if (iVar5 == 0) {
+    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+    if (part == 0) {
       return 0x2d;
     }
     if (local_180[0] != '{') {
@@ -2000,8 +2003,8 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
   local_6c = 0;
   local_70 = (uint)*(ushort *)(parser + 0x22);
   do {
-    iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,1);
-    if (iVar5 == 0) {
+    part = ((int (*)())_PPParserGetPart)(parser,local_180,1);
+    if (part == 0) {
       return 0x2d;
     }
     local_74 = 0;
@@ -2010,18 +2013,18 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
     local_78 = 0;
     compareResult = _memcmp(local_180,"program",8);
     if (compareResult == 0) {
-      iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-      if (iVar5 == 0) {
+      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+      if (part == 0) {
         return 0x2d;
       }
       if (local_180[0] != '.') {
         return 10;
       }
-      if (iVar5 != 1) {
+      if (part != 1) {
         return 10;
       }
-      iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-      if (iVar5 == 0) {
+      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+      if (part == 0) {
         return 0x2d;
       }
       compareResult = _memcmp(local_180,"env",4);
@@ -2086,49 +2089,49 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
     else {
       compareResult = _memcmp(local_180,"state",6);
       if (compareResult == 0) {
-        iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-        if (iVar5 == 0) {
+        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+        if (part == 0) {
           return 0x2d;
         }
         if (local_180[0] != '.') {
           return 10;
         }
-        if (iVar5 != 1) {
+        if (part != 1) {
           return 10;
         }
-        iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-        if (iVar5 == 0) {
+        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+        if (part == 0) {
           return 0x2d;
         }
         compareResult = _memcmp(local_180,"material",9);
         if (compareResult == 0) {
           local_80 = local_80 & 0xffe0fffe | 0x50000;
-          iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-          if (iVar5 == 0) {
+          part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+          if (part == 0) {
             return 0x2d;
           }
           if (local_180[0] != '.') {
             return 10;
           }
-          if (iVar5 != 1) {
+          if (part != 1) {
             return 10;
           }
-          iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-          if (iVar5 == 0) {
+          part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+          if (part == 0) {
             return 0x2d;
           }
           compareResult = _memcmp(local_180,"front",6);
           if (compareResult == 0) {
 LAB_97b7ef9c:
-            iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-            if (iVar5 == 0) {
+            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            if (part == 0) {
               return 0x2d;
             }
-            if ((local_180[0] != '.') || (iVar5 != 1)) {
+            if ((local_180[0] != '.') || (part != 1)) {
               return 10;
             }
-            iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-            if (iVar5 == 0) {
+            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            if (part == 0) {
               return 0x2d;
             }
           }
@@ -2182,26 +2185,26 @@ LAB_97b7fbb8:
           compareResult = _memcmp(local_180,"light",6);
           if (compareResult == 0) {
             local_80 = local_80 & 0xffe0ffff | 0x30000;
-            iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-            if (iVar5 != 0) {
-              return iVar5;
+            arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+            if (arrayResult != 0) {
+              return arrayResult;
             }
             if (*(uint *)(parser + 0x484) <= local_40) {
               return 0x3c;
             }
             local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
-            iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-            if (iVar5 == 0) {
+            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            if (part == 0) {
               return 0x2d;
             }
             if (local_180[0] != '.') {
               return 10;
             }
-            if (iVar5 != 1) {
+            if (part != 1) {
               return 10;
             }
-            iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-            if (iVar5 == 0) {
+            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            if (part == 0) {
               return 0x2d;
             }
             compareResult = _memcmp(local_180,"ambient",8);
@@ -2231,18 +2234,18 @@ LAB_97b7fbb8:
                     else {
                       compareResult = _memcmp(local_180,"spot",5);
                       if (compareResult == 0) {
-                        iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                        if (iVar5 == 0) {
+                        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                        if (part == 0) {
                           return 0x2d;
                         }
                         if (local_180[0] != '.') {
                           return 10;
                         }
-                        if (iVar5 != 1) {
+                        if (part != 1) {
                           return 10;
                         }
-                        iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                        if (iVar5 == 0) {
+                        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                        if (part == 0) {
                           return 0x2d;
                         }
                         compareResult = _memcmp(local_180,"direction",10);
@@ -2274,18 +2277,18 @@ LAB_97b7fbb8:
           else {
             compareResult = _memcmp(local_180,"lightmodel",0xb);
             if (compareResult == 0) {
-              iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-              if (iVar5 == 0) {
+              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              if (part == 0) {
                 return 0x2d;
               }
               if (local_180[0] != '.') {
                 return 10;
               }
-              if (iVar5 != 1) {
+              if (part != 1) {
                 return 10;
               }
-              iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-              if (iVar5 == 0) {
+              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              if (part == 0) {
                 return 0x2d;
               }
               compareResult = _memcmp(local_180,"ambient",8);
@@ -2294,18 +2297,18 @@ LAB_97b7fbb8:
                 if (compareResult == 0) {
                   local_80 = local_80 & 0xfffffffe;
 LAB_97b7f420:
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                   if (local_180[0] != '.') {
                     return 10;
                   }
-                  if (iVar5 != 1) {
+                  if (part != 1) {
                     return 10;
                   }
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                 }
@@ -2329,40 +2332,40 @@ LAB_97b7f420:
             compareResult = _memcmp(local_180,"lightprod",10);
             if (compareResult == 0) {
               local_80 = local_80 & 0xffe0feff | 0x40000;
-              iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-              if (iVar5 != 0) {
-                return iVar5;
+              arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+              if (arrayResult != 0) {
+                return arrayResult;
               }
               local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
-              iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-              if (iVar5 == 0) {
+              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              if (part == 0) {
                 return 0x2d;
               }
               if (local_180[0] != '.') {
                 return 10;
               }
-              if (iVar5 != 1) {
+              if (part != 1) {
                 return 10;
               }
-              iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-              if (iVar5 == 0) {
+              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              if (part == 0) {
                 return 0x2d;
               }
               compareResult = _memcmp(local_180,"front",6);
               if (compareResult == 0) {
 LAB_97b7f59c:
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 if (local_180[0] != '.') {
                   return 10;
                 }
-                if (iVar5 != 1) {
+                if (part != 1) {
                   return 10;
                 }
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
               }
@@ -2396,30 +2399,30 @@ LAB_97b7f59c:
               compareResult = _memcmp(local_180,"texenv",7);
               if (compareResult != 0) goto LAB_97b7f980;
               local_80 = local_80 & 0xffe0ffe0 | 0x90000;
-              iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-              if (iVar5 == 0) {
+              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              if (part == 0) {
                 return 0x2d;
               }
               if (local_180[0] == '[') {
                 ((int (*)())_PPParserReturnPart)(parser);
-                iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-                if (iVar5 != 0) {
-                  return iVar5;
+                arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                if (arrayResult != 0) {
+                  return arrayResult;
                 }
                 local_80 = local_40 & 0x1f | local_80 & 0xffffffe0;
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
               }
               if (local_180[0] != '.') {
                 return 10;
               }
-              if (iVar5 != 1) {
+              if (part != 1) {
                 return 10;
               }
-              iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-              if (iVar5 == 0) {
+              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              if (part == 0) {
                 return 0x2d;
               }
               compareResult = _memcmp(local_180,"color",6);
@@ -2431,22 +2434,22 @@ LAB_97b7fae0:
             else {
               compareResult = _memcmp(local_180,"texgen",7);
               if (compareResult == 0) {
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 if (local_180[0] == '[') {
                   ((int (*)())_PPParserReturnPart)(parser);
-                  iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-                  if (iVar5 != 0) {
-                    return iVar5;
+                  arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                  if (arrayResult != 0) {
+                    return arrayResult;
                   }
                   if (*(uint *)(parser + 0x470) <= local_40) {
                     return 0x38;
                   }
                   local_80 = local_40 & 0x1f | local_80 & 0xffffffe0;
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                 }
@@ -2456,11 +2459,11 @@ LAB_97b7fae0:
                 if (local_180[0] != '.') {
                   return 10;
                 }
-                if (iVar5 != 1) {
+                if (part != 1) {
                   return 10;
                 }
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 compareResult = _memcmp(local_180,"eye",4);
@@ -2475,18 +2478,18 @@ LAB_97b7fae0:
                   iVar5 = 8;
                 }
                 local_80 = iVar5 << 0x10 | local_80 & 0xffe0ffff;
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 if (local_180[0] != '.') {
                   return 10;
                 }
-                if (iVar5 != 1) {
+                if (part != 1) {
                   return 10;
                 }
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 compareResult = _memcmp(local_180,"s",2);
@@ -2517,18 +2520,18 @@ LAB_97b7fae0:
 LAB_97b7f980:
               compareResult = _memcmp(local_180,"fog",4);
               if (compareResult == 0) {
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 if (local_180[0] != '.') {
                   return 10;
                 }
-                if (iVar5 != 1) {
+                if (part != 1) {
                   return 10;
                 }
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 compareResult = _memcmp(local_180,"color",6);
@@ -2553,33 +2556,33 @@ LAB_97b7fc90:
                       return 10;
                     }
                     local_80 = local_80 & 0xffe03fff | 0x100000;
-                    iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                    if (iVar5 == 0) {
+                    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    if (part == 0) {
                       return 0x2d;
                     }
                     if (local_180[0] != '.') {
                       return 10;
                     }
-                    if (iVar5 != 1) {
+                    if (part != 1) {
                       return 10;
                     }
-                    iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                    if (iVar5 == 0) {
+                    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    if (part == 0) {
                       return 0x2d;
                     }
                     compareResult = _memcmp(local_180,"modelview",10);
                     if (compareResult == 0) {
                       local_80 = local_80 & 0xfffff8ff | 0x300;
-                      iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                      if (iVar5 == 0) {
+                      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                      if (part == 0) {
                         return 0x2d;
                       }
                       ((int (*)())_PPParserReturnPart)(parser);
                       if (local_180[0] == '[') {
 LAB_97b7fe54:
-                        iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-                        if (iVar5 != 0) {
-                          return iVar5;
+                        arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                        if (arrayResult != 0) {
+                          return arrayResult;
                         }
 LAB_97b7fec8:
                         local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
@@ -2611,9 +2614,9 @@ LAB_97b7fec8:
                                 return 10;
                               }
                               local_80 = local_80 & 0xfffff8ff | 0x500;
-                              iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-                              if (iVar5 != 0) {
-                                return iVar5;
+                              arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                              if (arrayResult != 0) {
+                                return arrayResult;
                               }
                               if (*(uint *)(parser + 0x458) <= local_40) {
                                 return 0x30;
@@ -2621,8 +2624,8 @@ LAB_97b7fec8:
                               goto LAB_97b7fec8;
                             }
                             local_80 = local_80 & 0xfffff8ff | 0x400;
-                            iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                            if (iVar5 == 0) {
+                            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                            if (part == 0) {
                               return 0x2d;
                             }
                             ((int (*)())_PPParserReturnPart)(parser);
@@ -2632,15 +2635,15 @@ LAB_97b7fec8:
                         }
                       }
                     }
-                    iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
                     cVar4 = local_180[0];
-                    if (iVar5 == 0) {
+                    if (part == 0) {
                       return 0x2d;
                     }
                     local_180[0] = cVar4;
-                    if ((local_180[0] == '.') && (iVar5 == 1)) {
-                      iVar7 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                      if (iVar7 == 0) {
+                    if ((local_180[0] == '.') && (part == 1)) {
+                      part2 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                      if (part2 == 0) {
                         return 0x2d;
                       }
                       compareResult2 = _memcmp(local_180,"inverse",8);
@@ -2664,18 +2667,18 @@ LAB_97b7fec8:
                           local_80 = local_80 & 0xffff3fff | 0xc000;
                         }
                       }
-                      iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
                       cVar4 = local_180[0];
-                      if (iVar5 == 0) {
+                      if (part == 0) {
                         return 0x2d;
                       }
                     }
 LAB_97b7ffd8:
                     local_40 = 0;
                     local_3c[0] = 3;
-                    if ((cVar4 == '.') && (iVar5 == 1)) {
-                      iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                      if (iVar5 == 0) {
+                    if ((cVar4 == '.') && (part == 1)) {
+                      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                      if (part == 0) {
                         return 0x2d;
                       }
                       compareResult = _memcmp(local_180,"row",4);
@@ -2719,18 +2722,18 @@ LAB_97b7ffd8:
                     goto LAB_97b801d4;
                   }
                   local_80 = local_80 & 0xffe0ffff | 0xf0000;
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                   if (local_180[0] != '.') {
                     return 10;
                   }
-                  if (iVar5 != 1) {
+                  if (part != 1) {
                     return 10;
                   }
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                   compareResult = _memcmp(local_180,"range",6);
@@ -2738,26 +2741,26 @@ LAB_97b7ffd8:
                 }
                 compareResult = _memcmp(local_180,"clip",5);
                 if (compareResult == 0) {
-                  iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-                  if (iVar5 != 0) {
-                    return iVar5;
+                  arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                  if (arrayResult != 0) {
+                    return arrayResult;
                   }
                   if (*(uint *)(parser + 0x480) <= local_40) {
                     return 0x3b;
                   }
                   local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                   if (local_180[0] != '.') {
                     return 10;
                   }
-                  if (iVar5 != 1) {
+                  if (part != 1) {
                     return 10;
                   }
-                  iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                  if (iVar5 == 0) {
+                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  if (part == 0) {
                     return 0x2d;
                   }
                   compareResult = _memcmp(local_180,"plane",6);
@@ -2770,18 +2773,18 @@ LAB_97b7ffd8:
                 }
                 compareResult = _memcmp(local_180,"point",6);
                 if (compareResult != 0) goto LAB_97b7fc90;
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 if (local_180[0] != '.') {
                   return 10;
                 }
-                if (iVar5 != 1) {
+                if (part != 1) {
                   return 10;
                 }
-                iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                if (iVar5 == 0) {
+                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                if (part == 0) {
                   return 0x2d;
                 }
                 compareResult = _memcmp(local_180,"size",5);
@@ -2815,8 +2818,8 @@ LAB_97b7fa44:
           if (scalars != 0) {
             return scalars;
           }
-          iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-          if (iVar5 == 0) {
+          part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+          if (part == 0) {
             return 0x2d;
           }
           if (local_180[0] != '}') {
@@ -2850,8 +2853,8 @@ LAB_97b801d4:
     loopIndex = loopIndex + 1;
     *(int *)(parser + 0x20) = *(int *)(parser + 0x20) + 1;
     if (bVar1) goto LAB_97b80220;
-    iVar5 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-    if (iVar5 == 0) {
+    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+    if (part == 0) {
       return 0x2d;
     }
   } while (local_180[0] == ',');
@@ -2905,18 +2908,18 @@ int _PPParserParseArray(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
-  int iVar1;
+  int part;
   int iVar2;
   char local_110 [260];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+  part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
   iVar2 = 0x2d;
-  if ((((iVar1 != 0) && (iVar2 = 0xb, local_110[0] == '[')) &&
+  if ((((part != 0) && (iVar2 = 0xb, local_110[0] == '[')) &&
       (iVar2 = ((int (*)())_PPParserGetInteger)(param_1,param_2), iVar2 == 0)) && (iVar2 = 0x23, -1 < *param_2))
   {
-    iVar1 = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+    part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
     iVar2 = 0x2d;
-    if ((iVar1 != 0) && (iVar2 = 0xb, local_110[0] == ']')) {
+    if ((part != 0) && (iVar2 = 0xb, local_110[0] == ']')) {
       iVar2 = 0;
     }
   }
@@ -2928,19 +2931,19 @@ int _PPParserGetInteger(param_1, param_2)
   undefined4 param_1;
   long *param_2;
 {
-  int iVar1;
+  int part;
   undefined4 uVar2;
   long lVar3;
   char acStack_120 [256];
   char *local_20 [5];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(param_1,acStack_120,1);
+  part = ((int (*)())_PPParserGetPart)(param_1,acStack_120,1);
   uVar2 = 0x2d;
-  if (iVar1 != 0) {
+  if (part != 0) {
     lVar3 = _strtol(acStack_120,local_20,0);
     *param_2 = lVar3;
     uVar2 = 0x15;
-    if (local_20[0] == acStack_120 + iVar1) {
+    if (local_20[0] == acStack_120 + part) {
       uVar2 = 0;
     }
   }
@@ -2977,14 +2980,15 @@ int _PPStreamAddParamBinding(param_1, param_2)
 int _PPParserParseAttributeDeclaration(parser)
   int parser;
 {
+  int part;
   int iVar1;
   int iVar2;
-  int iVar3;
+  int part2;
   char local_110 [256];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
   iVar2 = 0x2d;
-  if (iVar1 != 0) {
+  if (part != 0) {
     iVar1 = ((int (*)())_PPParserValidateName)(parser,local_110);
     iVar2 = 0x12;
     if (iVar1 == 0) {
@@ -2993,15 +2997,15 @@ int _PPParserParseAttributeDeclaration(parser)
       *(undefined4 *)(iVar1 + 0xc) = 0;
       iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),iVar1);
       if (iVar2 == 0) {
-        iVar3 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
+        part2 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
         iVar2 = 0x2d;
-        if ((iVar3 != 0) && (iVar2 = 10, local_110[0] == '=')) {
+        if ((part2 != 0) && (iVar2 = 10, local_110[0] == '=')) {
           *(undefined4 *)(iVar1 + 8) = *(undefined4 *)(parser + 0x24);
           iVar2 = ((int (*)())_PPParserParseAttributeBinding)(parser);
           if (iVar2 == 0) {
-            iVar1 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
+            part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
             iVar2 = 0x2d;
-            if ((iVar1 != 0) && (iVar2 = 10, local_110[0] == ';')) {
+            if ((part != 0) && (iVar2 = 10, local_110[0] == ';')) {
               iVar2 = 0;
             }
           }
@@ -3329,14 +3333,15 @@ int _PPParserParseOutputDeclaration(parser, param_2)
   int parser;
   undefined4 param_2;
 {
+  int part;
   int iVar1;
   int iVar2;
-  int iVar3;
+  int part2;
   char local_110 [256];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
   iVar2 = 0x2d;
-  if (iVar1 != 0) {
+  if (part != 0) {
     iVar1 = ((int (*)())_PPParserValidateName)(parser,local_110);
     iVar2 = 0x12;
     if (iVar1 == 0) {
@@ -3346,15 +3351,15 @@ int _PPParserParseOutputDeclaration(parser, param_2)
       *(undefined4 *)(iVar1 + 0x14) = param_2;
       iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),iVar1);
       if (iVar2 == 0) {
-        iVar3 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
+        part2 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
         iVar2 = 0x2d;
-        if ((iVar3 != 0) && (iVar2 = 10, local_110[0] == '=')) {
+        if ((part2 != 0) && (iVar2 = 10, local_110[0] == '=')) {
           *(undefined4 *)(iVar1 + 8) = *(undefined4 *)(parser + 0x28);
           iVar2 = ((int (*)())_PPParserParseOutputBinding)(parser,param_2);
           if (iVar2 == 0) {
-            iVar1 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
+            part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
             iVar2 = 0x2d;
-            if ((iVar1 != 0) && (iVar2 = 10, local_110[0] == ';')) {
+            if ((part != 0) && (iVar2 = 10, local_110[0] == ';')) {
               iVar2 = 0;
             }
           }
@@ -3378,7 +3383,7 @@ int _PPParserParseOutputBinding(parser, param_2)
   bool bVar1;
   uint uVar2;
   int iVar3;
-  int iVar4;
+  int part;
   char local_140;
   undefined1 local_13f;
   uint local_40;
@@ -3444,8 +3449,8 @@ int _PPParserParseOutputBinding(parser, param_2)
       return 0x2d;
     }
     if ((local_140 == '.') && (iVar3 == 1)) {
-      iVar4 = ((int (*)())_PPParserGetPart)(parser,&local_140,0);
-      if (iVar4 == 0) {
+      part = ((int (*)())_PPParserGetPart)(parser,&local_140,0);
+      if (part == 0) {
         return 0x2d;
       }
       compareResult = _memcmp(&local_140,"back",5);
@@ -3577,6 +3582,7 @@ int _PPParserParseOperation(parser, param_2, param_3, param_4, param_5, param_6,
   uint param_6;
   undefined4 param_7;
 {
+  int part;
   bool bVar1;
   bool bVar2;
   bool bVar3;
@@ -3763,8 +3769,8 @@ LAB_97b816c8:
     do {
       local_4c[0] = 0;
       if (bVar1) {
-        iVar4 = ((int (*)())_PPParserGetPart)(parser,local_290,0);
-        if (iVar4 == 0) {
+        part = ((int (*)())_PPParserGetPart)(parser,local_290,0);
+        if (part == 0) {
           return 0x2d;
         }
         if (local_290[0] != ',') {
@@ -3808,9 +3814,9 @@ LAB_97b818a8:
       puVar8 = puVar8 + 2;
     } while (loopIndex < uVar7);
   }
-  iVar4 = ((int (*)())_PPParserGetPart)(parser,local_290,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_290,0);
   iVar5 = 0x2d;
-  if ((iVar4 != 0) && (iVar5 = 0x1e, local_290[0] == ';')) {
+  if ((part != 0) && (iVar5 = 0x1e, local_290[0] == ';')) {
     iVar4 = *(int *)(parser + 0x1c);
     iVar5 = 0x32;
     if (*(uint *)(*(int *)(iVar4 + 0x20) + 8) < *(uint *)(parser + 0x45c)) {
@@ -3836,9 +3842,10 @@ int _PPParserParseDestination(parser, param_2, param_3)
   uint *param_2;
   int param_3;
 {
+  int arrayResult;
   int iVar1;
   uint uVar2;
-  int iVar3;
+  int part;
   char local_130 [256];
   undefined4 local_30;
   
@@ -3865,8 +3872,8 @@ int _PPParserParseDestination(parser, param_2, param_3)
     if ((param_3 - 0x5cU < 4) && (*(int *)(iVar1 + 0x14) == 2)) {
       return 0x2c;
     }
-    iVar3 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
-    if (iVar3 == 0) {
+    part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
+    if (part == 0) {
       return 0x2d;
     }
     ((int (*)())_PPParserReturnPart)(parser);
@@ -3874,9 +3881,9 @@ int _PPParserParseDestination(parser, param_2, param_3)
       if (*(char *)(iVar1 + 0x10) == '\0') {
         return 0x20;
       }
-      iVar3 = ((int (*)())_PPParserParseArray)(parser,&local_30);
-      if (iVar3 != 0) {
-        return iVar3;
+      arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_30);
+      if (arrayResult != 0) {
+        return arrayResult;
       }
       if (*(uint *)(iVar1 + 4) <= local_30) {
         ((int (*)())_PPParserReturnPart)(parser);
@@ -3894,10 +3901,10 @@ int _PPParserParseDestination(parser, param_2, param_3)
     *param_2 = (uVar2 & 7) << 0x11 | *param_2 & 0xfff1ffff;
   }
   *param_2 = *param_2 & 0xf03ffc0f | 0x1b1e06c;
-  iVar3 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
   iVar1 = 0x2d;
-  if (iVar3 != 0) {
-    if ((local_130[0] == '.') && (iVar3 == 1)) {
+  if (part != 0) {
+    if ((local_130[0] == '.') && (part == 1)) {
       iVar1 = _PPParserParseDestinationMask(parser,param_2);
       if (iVar1 != 0) {
         return iVar1;
@@ -3921,14 +3928,15 @@ int _PPParserParseSwizzleSourceVar(parser, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
+  int part;
   int compareResult;
   int iVar1;
   int iVar2;
   char local_120 [268];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(parser,local_120,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_120,0);
   iVar2 = 0x2d;
-  if (iVar1 != 0) {
+  if (part != 0) {
     compareResult = _memcmp(local_120,"-",2);
     if (compareResult == 0) {
       *param_2 = *param_2 | 0x8000000;
@@ -3940,8 +3948,8 @@ int _PPParserParseSwizzleSourceVar(parser, param_2, param_3, param_4)
       }
     }
     if ((*(uint *)(parser + 0x48c) & 0x20) != 0) {
-      iVar1 = ((int (*)())_PPParserGetPart)(parser,local_120,0);
-      if (iVar1 == 0) {
+      part = ((int (*)())_PPParserGetPart)(parser,local_120,0);
+      if (part == 0) {
         return 0x2d;
       }
       compareResult = _memcmp(local_120,"|",2);
@@ -3954,10 +3962,10 @@ int _PPParserParseSwizzleSourceVar(parser, param_2, param_3, param_4)
     }
     iVar2 = ((int (*)())_PPParserParseSourceVar)(parser,param_2,param_3,param_4);
     if (iVar2 == 0) {
-      iVar1 = ((int (*)())_PPParserGetPart)(parser,local_120,0);
+      part = ((int (*)())_PPParserGetPart)(parser,local_120,0);
       iVar2 = 0x2d;
-      if (iVar1 != 0) {
-        if ((local_120[0] == '.') && (iVar1 == 1)) {
+      if (part != 0) {
+        if ((local_120[0] == '.') && (part == 1)) {
           iVar1 = _PPParserParseSourceSwizzle(parser,param_2,param_4);
           if (iVar1 != 0) {
             return iVar1;
@@ -3967,8 +3975,8 @@ int _PPParserParseSwizzleSourceVar(parser, param_2, param_3, param_4)
           ((int (*)())_PPParserReturnPart)(parser);
         }
         if (((*(uint *)(parser + 0x48c) & 0x20) != 0) && ((*param_2 & 0x4000000) != 0)) {
-          iVar1 = ((int (*)())_PPParserGetPart)(parser,local_120,0);
-          if (iVar1 == 0) {
+          part = ((int (*)())_PPParserGetPart)(parser,local_120,0);
+          if (part == 0) {
             return 0x2d;
           }
           compareResult = _memcmp(local_120,"|",2);
@@ -3990,6 +3998,7 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
   int param_3;
   uint *param_4;
 {
+  int part;
   undefined2 uVar1;
   uint uVar2;
   int iVar3;
@@ -3999,8 +4008,8 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
   undefined4 local_2c;
   undefined4 local_28;
   
-  iVar3 = ((int (*)())_PPParserGetPart)(parser,local_130,1);
-  if (iVar3 == 0) {
+  part = ((int (*)())_PPParserGetPart)(parser,local_130,1);
+  if (part == 0) {
     return 0x2d;
   }
   iVar4 = ((int (*)())_PPParserScopeFindIdentifier)(*(undefined4 *)(parser + 0x44c),local_130);
@@ -4021,7 +4030,7 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
       if (((local_130[0] != '{') && (iVar4 = _memcmp(local_130,"program",8), iVar4 != 0)) &&
          (iVar4 = _memcmp(local_130,"state",6), iVar4 != 0)) {
         ((double (*)())_glp_strtod)(local_130,&local_30);
-        uVar2 = (uint)(local_30 == local_130 + iVar3);
+        uVar2 = (uint)(local_30 == local_130 + part);
         *param_4 = uVar2;
         if (uVar2 == 0) {
           return 0x1a;
@@ -4043,8 +4052,8 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
     if ((param_3 - 99U < 4) && (*(int *)(iVar4 + 0x14) == 2)) {
       return 0x2b;
     }
-    iVar3 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
-    if (iVar3 == 0) {
+    part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
+    if (part == 0) {
       return 0x2d;
     }
     ((int (*)())_PPParserReturnPart)(parser);
@@ -4121,19 +4130,19 @@ int _PPParserParseEnd(param_1)
   undefined4 param_1;
 {
   int compareResult;
-  int iVar1;
+  int part;
   undefined4 uVar2;
   undefined1 auStack_110 [264];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(param_1,auStack_110,0);
+  part = ((int (*)())_PPParserGetPart)(param_1,auStack_110,0);
   uVar2 = 0x2d;
-  if (iVar1 != 0) {
+  if (part != 0) {
     compareResult = _memcmp(auStack_110,"END",4);
     uVar2 = 6;
     if (compareResult == 0) {
-      iVar1 = ((int (*)())_PPParserGetPart)(param_1,auStack_110,0);
+      part = ((int (*)())_PPParserGetPart)(param_1,auStack_110,0);
       uVar2 = 9;
-      if (iVar1 == 0) {
+      if (part == 0) {
         uVar2 = 0;
       }
     }
@@ -4304,16 +4313,16 @@ LAB_97b824b4:
 int _PPStreamChunkListCreateFromChunkList(stream)
   int *stream;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 chunkList;
+  undefined4 chunk;
   int iVar3;
   
-  uVar1 = ((int (*)())_PPStreamChunkListCreate)();
+  chunkList = ((int (*)())_PPStreamChunkListCreate)();
   for (iVar3 = *stream; iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-    uVar2 = ((int (*)())_PPStreamChunkCreateFromChunk)(iVar3);
-    ((int (*)())_PPStreamChunkListAddChunk)(uVar1,uVar2);
+    chunk = ((int (*)())_PPStreamChunkCreateFromChunk)(iVar3);
+    ((int (*)())_PPStreamChunkListAddChunk)(chunkList,chunk);
   }
-  return uVar1;
+  return chunkList;
 }
 
 /* _PPStreamChunkCreateFromChunk @ 0x97b8253c (128 bytes) */

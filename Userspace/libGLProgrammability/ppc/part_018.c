@@ -45,8 +45,8 @@ int _BitSetEqualsTest(bitSet, param_2)
   int *bitSet;
   undefined4 *param_2;
 {
-  int iVar1;
-  int iVar2;
+  int bitSetEquals;
+  int bitSetEquals2;
   int iVar3;
   undefined4 uVar4;
   int loopIndex;
@@ -58,9 +58,9 @@ int _BitSetEqualsTest(bitSet, param_2)
   iVar3 = *bitSet;
   if (0 < iVar3) {
     do {
-      iVar1 = _BitSetGetEquals(bitSet,loopIndex);
-      iVar2 = _BitSetGetEquals(param_2,loopIndex);
-      if (iVar1 != iVar2) {
+      bitSetEquals = _BitSetGetEquals(bitSet,loopIndex);
+      bitSetEquals2 = _BitSetGetEquals(param_2,loopIndex);
+      if (bitSetEquals != bitSetEquals2) {
         uVar4 = 0;
       }
       loopIndex = loopIndex + 1;
@@ -74,7 +74,7 @@ int _BitSetAndTest(bitSet, param_2)
   int *bitSet;
   undefined4 *param_2;
 {
-  uint uVar1;
+  uint bitSetEquals;
   uint uVar2;
   int iVar3;
   uint uVar4;
@@ -88,10 +88,10 @@ int _BitSetAndTest(bitSet, param_2)
   iVar5 = 0;
   if (0 < iVar3) {
     do {
-      uVar1 = _BitSetGetEquals(bitSet,iVar5);
+      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
       iVar6 = iVar5 + 1;
       uVar2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | uVar1 & uVar2;
+      uVar4 = uVar4 | bitSetEquals & uVar2;
       iVar5 = iVar6;
     } while (iVar6 < iVar3);
   }
@@ -103,8 +103,8 @@ int _BitSetAndNotTest(bitSet, param_2)
   int *bitSet;
   undefined4 *param_2;
 {
-  uint uVar1;
-  uint uVar2;
+  uint bitSetEquals;
+  uint bitSetEquals2;
   int iVar3;
   uint uVar4;
   int iVar5;
@@ -117,10 +117,10 @@ int _BitSetAndNotTest(bitSet, param_2)
   iVar5 = 0;
   if (0 < iVar3) {
     do {
-      uVar1 = _BitSetGetEquals(bitSet,iVar5);
+      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
       iVar6 = iVar5 + 1;
-      uVar2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | uVar1 & ~uVar2;
+      bitSetEquals2 = _BitSetGetEquals(param_2,iVar5);
+      uVar4 = uVar4 | bitSetEquals & ~bitSetEquals2;
       iVar5 = iVar6;
     } while (iVar6 < iVar3);
   }
@@ -132,8 +132,8 @@ int _BitSetOrTest(bitSet, param_2)
   int *bitSet;
   undefined4 *param_2;
 {
-  uint uVar1;
-  uint uVar2;
+  uint bitSetEquals;
+  uint bitSetEquals2;
   int iVar3;
   uint uVar4;
   int iVar5;
@@ -146,10 +146,10 @@ int _BitSetOrTest(bitSet, param_2)
   iVar5 = 0;
   if (0 < iVar3) {
     do {
-      uVar1 = _BitSetGetEquals(bitSet,iVar5);
+      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
       iVar6 = iVar5 + 1;
-      uVar2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | uVar1 | uVar2;
+      bitSetEquals2 = _BitSetGetEquals(param_2,iVar5);
+      uVar4 = uVar4 | bitSetEquals | bitSetEquals2;
       iVar5 = iVar6;
     } while (iVar6 < iVar3);
   }
@@ -161,8 +161,8 @@ int _BitSetXorTest(bitSet, param_2)
   int *bitSet;
   undefined4 *param_2;
 {
-  uint uVar1;
-  uint uVar2;
+  uint bitSetEquals;
+  uint bitSetEquals2;
   int iVar3;
   uint uVar4;
   int iVar5;
@@ -175,10 +175,10 @@ int _BitSetXorTest(bitSet, param_2)
   iVar5 = 0;
   if (0 < iVar3) {
     do {
-      uVar1 = _BitSetGetEquals(bitSet,iVar5);
+      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
       iVar6 = iVar5 + 1;
-      uVar2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | uVar1 ^ uVar2;
+      bitSetEquals2 = _BitSetGetEquals(param_2,iVar5);
+      uVar4 = uVar4 | bitSetEquals ^ bitSetEquals2;
       iVar5 = iVar6;
     } while (iVar6 < iVar3);
   }
@@ -782,7 +782,7 @@ int _BuildGenKill(param_1)
 {
   uint loopIndex;
   uint uVar1;
-  int iVar2;
+  int bitSetEquals;
   uint loopIndex3;
   int iVar4;
   uint loopIndex4;
@@ -816,8 +816,8 @@ int _BuildGenKill(param_1)
               do {
                 puVar9 = *(undefined4 **)(loopIndex * 4 + puVar7[1]);
                 if (puVar9[6] == 0) {
-                  iVar2 = _BitSetGetEquals(puVar6[10],*puVar9);
-                  if (iVar2 == 0) {
+                  bitSetEquals = _BitSetGetEquals(puVar6[10],*puVar9);
+                  if (bitSetEquals == 0) {
                     _BitSetSetEquals(puVar6[9],*puVar9);
                   }
                   puVar9[9] = puVar9[9] + 1;
@@ -1117,7 +1117,7 @@ int _DeadCodeEliminationSimple(param_1)
   uint loopIndex;
   bool bVar1;
   undefined4 uVar2;
-  int iVar3;
+  int bitSetEquals;
   undefined4 *puVar4;
   uint uVar5;
   uint loopIndex2;
@@ -1158,8 +1158,8 @@ LAB_97c0978c:
                 do {
                   puVar4 = *(undefined4 **)(uVar11 * 4 + puVar12[3]);
                   if (puVar4[6] == 0) {
-                    iVar3 = _BitSetGetEquals(uVar2,*puVar4);
-                    if (iVar3 != 0) {
+                    bitSetEquals = _BitSetGetEquals(uVar2,*puVar4);
+                    if (bitSetEquals != 0) {
                       bVar1 = false;
                     }
                     uVar5 = puVar12[2];
@@ -1603,12 +1603,12 @@ int _InstructionAdd(param_1, param_2, param_3)
   uint uVar2;
   int iVar3;
   uint uVar4;
-  undefined4 uVar5;
+  undefined4 registerValue2;
   int iVar6;
   int iVar7;
-  int iVar8;
+  int registerValue3;
   uint uVar9;
-  int iVar10;
+  int registerValue;
   int *piVar11;
   int iVar12;
   uint *puVar13;
@@ -1705,10 +1705,10 @@ LAB_97c0a29c:
               iVar7 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar7 + 1) * 4);
               *(int *)(iVar3 + -0x18) = iVar7;
               iVar7 = iVar7 + *piVar11 * 4;
-              iVar8 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,loopIndex2);
-              *(int *)(iVar7 + -4) = iVar8;
+              registerValue3 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,loopIndex2);
+              *(int *)(iVar7 + -4) = registerValue3;
               uVar4 = 0;
-              *(uint *)(iVar8 + 0x1c) = *(uint *)(iVar8 + 0x1c) | *(uint *)(iVar12 + 0x1c) >> 0x1f;
+              *(uint *)(registerValue3 + 0x1c) = *(uint *)(registerValue3 + 0x1c) | *(uint *)(iVar12 + 0x1c) >> 0x1f;
               iVar7 = *(int *)(iVar7 + -4);
               if (((*(uint *)(iVar12 + 0x1c) & 0x4000) != 0) &&
                  (1 < (*(uint *)(iVar12 + 0x1c) >> 0xc & 3) + 1)) {
@@ -1756,10 +1756,10 @@ LAB_97c0a29c:
             iVar6 = _realloc(*(undefined4 *)(iVar3 + -0x10),iVar6 * 4);
             *(int *)(iVar3 + -0x10) = iVar6;
             iVar6 = iVar6 + *(int *)(iVar3 + -0x14) * 4;
-            iVar10 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
-            *(int *)(iVar6 + -4) = iVar10;
+            registerValue = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
+            *(int *)(iVar6 + -4) = registerValue;
             uVar4 = 0;
-            *(uint *)(iVar10 + 0x1c) = *(uint *)(iVar10 + 0x1c) | *(uint *)(param_3 + 0x18) >> 0x1f;
+            *(uint *)(registerValue + 0x1c) = *(uint *)(registerValue + 0x1c) | *(uint *)(param_3 + 0x18) >> 0x1f;
             iVar6 = *(int *)(iVar6 + -4);
             if (((*(uint *)(param_3 + 0x14) & 0x1000) != 0) &&
                (1 < (*(uint *)(param_3 + 0x14) >> 10 & 3) + 1)) {
@@ -1775,8 +1775,8 @@ LAB_97c0a29c:
             allocation3 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
             iVar6 = *piVar11;
             *(int *)(iVar3 + -0x18) = allocation3;
-            uVar5 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
-            *(undefined4 *)(allocation3 + iVar6 * 4 + -4) = uVar5;
+            registerValue2 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
+            *(undefined4 *)(allocation3 + iVar6 * 4 + -4) = registerValue2;
           }
         }
         loopIndex = loopIndex + 1;
@@ -1790,8 +1790,8 @@ LAB_97c0a29c:
     allocation4 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
     iVar12 = *piVar11;
     *(int *)(iVar3 + -0x18) = allocation4;
-    uVar5 = ((int (*)())_GetRegister)(param_1,4,0,0);
-    *(undefined4 *)(allocation4 + iVar12 * 4 + -4) = uVar5;
+    registerValue2 = ((int (*)())_GetRegister)(param_1,4,0,0);
+    *(undefined4 *)(allocation4 + iVar12 * 4 + -4) = registerValue2;
   }
   return piVar11;
 }
@@ -2070,9 +2070,10 @@ int _GetBlock(param_1, param_2)
 int _Blockify(param_1)
   int *param_1;
 {
+  int block2;
   int iVar1;
   int iVar2;
-  int iVar3;
+  int block;
   uint uVar4;
   int iVar5;
   uint uVar6;
@@ -2169,10 +2170,10 @@ switchD_97c0adac_caseD_4e:
     if (*(int *)(iVar7 + 8) != 0) {
       uVar6 = *(uint *)(*(int *)(iVar7 + 8) + 0xc) & 0x3ffff;
     }
-    iVar2 = ((int (*)())_GetBlock)(param_1,uVar4);
+    block2 = ((int (*)())_GetBlock)(param_1,uVar4);
     iVar5 = iVar1;
-    if (iVar2 != 0) {
-      iVar5 = iVar2;
+    if (block2 != 0) {
+      iVar5 = block2;
     }
     ((int (*)())_InstructionAdd)(param_1,iVar5,iVar7);
     iVar1 = iVar5;
@@ -2182,7 +2183,7 @@ switchD_97c0adac_caseD_4e:
     case 0x58:
     case 0x69:
       iVar2 = ((int (*)())_GetBlock)(param_1,uVar6);
-      iVar3 = ((int (*)())_GetBlock)(param_1,*(uint *)(iVar7 + 0x10) & 0x3ffff);
+      block = ((int (*)())_GetBlock)(param_1,*(uint *)(iVar7 + 0x10) & 0x3ffff);
       goto LAB_97c0b02c;
     case 0x4c:
       break;
@@ -2190,9 +2191,9 @@ switchD_97c0adac_caseD_4e:
       iVar1 = ((int (*)())_GetBlock)(param_1,uVar6);
       break;
     default:
-      iVar3 = ((int (*)())_GetBlock)(param_1,uVar6);
-      iVar2 = iVar3;
-      if (iVar3 != 0) goto LAB_97c0b02c;
+      block = ((int (*)())_GetBlock)(param_1,uVar6);
+      iVar2 = block;
+      if (block != 0) goto LAB_97c0b02c;
       break;
     case 0x55:
     case 0x56:
@@ -2202,15 +2203,15 @@ switchD_97c0adac_caseD_4e:
     case 0x6a:
     case 0x6b:
       iVar2 = ((int (*)())_GetBlock)(param_1,uVar6);
-      iVar3 = ((int (*)())_GetBlock)(param_1,*(uint *)(iVar7 + 0x10) & 0x3ffff);
+      block = ((int (*)())_GetBlock)(param_1,*(uint *)(iVar7 + 0x10) & 0x3ffff);
       ((int (*)())_BlockAddSuccessor)(iVar5,iVar2);
       goto LAB_97c0b02c;
     case 0x59:
-      iVar3 = ((int (*)())_GetBlock)(param_1,uVar6);
-      iVar2 = iVar3;
+      block = ((int (*)())_GetBlock)(param_1,uVar6);
+      iVar2 = block;
 LAB_97c0b02c:
       iVar1 = iVar2;
-      ((int (*)())_BlockAddSuccessor)(iVar5,iVar3);
+      ((int (*)())_BlockAddSuccessor)(iVar5,block);
     }
     iVar7 = *(int *)(iVar7 + 8);
   } while( true );
