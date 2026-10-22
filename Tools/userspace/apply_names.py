@@ -122,6 +122,24 @@ def sub_part(l, part, old, new):
     return (l[:i + 1] + re.sub(wb(old), new, l[i + 1:])) if i >= 0 else re.sub(wb(old), new, l)
 
 
+FIELD_DIR = None
+_FIELDS = {}
+PATALT = {}
+
+
+def field_consts():
+    """GLD_/ARB_ constant name -> offset, from the generated *_ctx_fields.h of the corpus directory (apply_fields.py renamed the byte offsets
+    in the code; anchors written before that still carry the literal offsets, so lines are also tried with the constants turned back)."""
+    if FIELD_DIR and FIELD_DIR not in _FIELDS:
+        m = {}
+        for fh in glob.glob(os.path.join(FIELD_DIR, '*_ctx_fields.h')):
+            for l in open(fh):
+                x = re.match(r'\s+(\w+) = (0x[0-9a-f]+),', l)
+                if x: m[x.group(1)] = int(x.group(2), 16)
+        _FIELDS[FIELD_DIR] = (m, re.compile('|'.join(r'\b%s\b' % re.escape(k) for k in sorted(m, key=len, reverse=True))) if m else None)
+    return _FIELDS.get(FIELD_DIR, ({}, None))
+
+
 def apply_uses(lines, s, e, name, uses, allrows, declset):
     """Apply the `use` rows of one function in place (lines[s:e]); -> (already applied, newly applied, errors)."""
     back = {}                                  # every new name of the function -> its old name, to normalise lines back to Ghidra's text
@@ -149,21 +167,36 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         return brace + 1, i
     Ncache = None; created = {}
     for (f, n, fn, old, new, tier, frm, to, first, last) in uses:
-        if Ncache is None or len(Ncache) != len(lines): Ncache = [norm(l) for l in lines]    # renames do not change normalised text
+        if Ncache is None or len(Ncache) != len(lines):
+            Ncache = [norm(l) for l in lines]    # renames do not change normalised text
+            fm0, frx0 = field_consts()
         N = Ncache
+        fm, frx = field_consts()
+        def hit(pat, i):
+            if re.search(pat, N[i]): return True
+            if not fm: return False
+            if pat not in PATALT:
+                rev = {}
+                for k, v in fm.items(): rev.setdefault(v, []).append(k)
+                def alt(m):
+                    v = int(m.group(0), 16)
+                    return '(?:%s)' % '|'.join([m.group(0)] + rev[v]) if v in rev else m.group(0)
+                try: PATALT[pat] = re.compile(re.sub(r'0x[0-9a-f]+', alt, pat))
+                except re.error: PATALT[pat] = None
+            return bool(PATALT[pat] and PATALT[pat].search(N[i]))
         d0, d1 = declblock()
         if frm.startswith('#'):                # '#L': L lines after the end of the declarations (machine-written rows); '+N' as `to`: N lines after `from`
             a = d1 + int(frm[1:])
             if a >= e: print('%s:%d: %s: line anchor %s beyond the function' % (f, n, fn, frm)); nerr += 1; continue
         else:
             m = re.match(r'(.*)@(\d+)$', frm); pat, k = (m.group(1), int(m.group(2))) if m else (frm, 1)
-            hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
+            hits = [i for i in range(brace + 1, e) if hit(pat, i)]
             if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
             a = hits[k - 1]
         z = e
         if to.startswith('+'): z = min(a + int(to[1:]), e)
         elif to:
-            tz = [i for i in range(a + 1, e) if re.search(to, N[i])]
+            tz = [i for i in range(a + 1, e) if hit(to, i)]
             if not tz: print('%s:%d: %s: end anchor %r not found' % (f, n, fn, to)); nerr += 1; continue
             z = tz[0]
         todo = [(i, first if i == a else 'all') for i in range(a, z)] + ([(z, last)] if to and last != 'none' and z < e else [])
@@ -250,6 +283,8 @@ def apply_funcs(d, funcs, decl, check):
 def main():
     a = sys.argv[1:]; check = '--check' in a; a = [x for x in a if x != '--check']
     d = a[0]
+    global FIELD_DIR
+    FIELD_DIR = d
     rows = load_rows(d)
     dtext = re.sub(r'/\*.*?\*/|//[^\n]*', ' ', open(os.path.join(d, 'decls.h')).read(), flags=re.S)   # identifiers declared, not words in comments
     decl = set(IDENT.findall(dtext))
