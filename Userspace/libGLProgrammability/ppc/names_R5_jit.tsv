@@ -925,3 +925,883 @@ local	_PPCRuntimeCompilerLoadSourceAV	param_11	element	INFERRED	vec4 slot (array
 local	_PPCRuntimeCompilerLoadSourceAV	param_12	sourceSlot	INFERRED	source slot 0/1 (vector registers v0/v1 receive the operand)
 local	_PPCRuntimeCompilerBackupRegister	param_2	regIndex	CONFIRMED	register index (0x20 added in vector mode)
 local	_PPCRuntimeCompilerSaveRegisterToMemory	param_2	regIndex	CONFIRMED	register index
+use	_PPCNoiseGeneratorCalculate1DAVRTC	puVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar1\ =\ puVar5\ \+\ iVar2\ \+\ iVar3;$	+5
+use	_PPCNoiseGeneratorCalculate1DAVRTC	puVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar1\[4\]\ =\ 0x1120038c;$	+4
+use	_PPCNoiseGeneratorCalculate1DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\ =\ param_2\ \+\ 2;$	+1
+use	_PPCNoiseGeneratorCalculate1DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be4088\)\(\&_glpOpFirstStageAVRTC,puVar5\);$	+3
+use	_PPCNoiseGeneratorCalculate1DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\ =\ puVar1\ \+\ 3;$	+1
+use	_PPCNoiseGeneratorCalculate1DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ 0x10494c84;$	+1
+use	_PPCNoiseGeneratorCalculate2DAVRTC	puVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar1\ =\ puVar5\ \+\ iVar2\ \+\ iVar3;$	+5
+use	_PPCNoiseGeneratorCalculate2DAVRTC	puVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar1\[4\]\ =\ 0x1120038c;$	+4
+use	_PPCNoiseGeneratorCalculate2DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\ =\ param_2\ \+\ 2;$	+1
+use	_PPCNoiseGeneratorCalculate2DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be4088\)\(\&_glpOpFirstStageAVRTC,puVar5\);$	+3
+use	_PPCNoiseGeneratorCalculate2DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\ =\ puVar1\ \+\ 3;$	+1
+use	_PPCNoiseGeneratorCalculate2DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ 0x10494c84;$	+1
+use	_PPCNoiseGeneratorCalculate3DAVRTC	puVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar1\ =\ puVar5\ \+\ iVar2\ \+\ iVar3;$	+5
+use	_PPCNoiseGeneratorCalculate3DAVRTC	puVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar1\[4\]\ =\ 0x1120038c;$	+4
+use	_PPCNoiseGeneratorCalculate3DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\ =\ param_2\ \+\ 2;$	+1
+use	_PPCNoiseGeneratorCalculate3DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be4088\)\(\&_glpOpFirstStageAVRTC,puVar5\);$	+3
+use	_PPCNoiseGeneratorCalculate3DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\ =\ puVar1\ \+\ 3;$	+1
+use	_PPCNoiseGeneratorCalculate3DAVRTC	puVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ 0x10494c84;$	+1
+
+
+
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ 0xfc094000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ \(uint\)\(int\)\(dVar7\ \-\ DOUBLE_97c30a78\);$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ \(uint\)\(int\)fVar3;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ uVar6\ \&\ 0xffff\ \|\ 0x2c170000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_2\[7\]\ =\ uVar6;$	+1
+
+
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar6\ =\ 0x13;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar6\ =\ 3;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1002206e;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1004284a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1005204a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1013144a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1013140a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ iVar6\ <<\ 0x10\ \|\ 0x12609b6a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	puVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineCalculateBlendingFactorsRTCAV\)\(param_2,3,uVar2\);$	+3
+use	_PPCRasterOpMachine_BlendingRTCAV	puVar4	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineCalculateBlendingFactorsRTCAV\)\(puVar3,3,uVar2\);$	+3
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1004284a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1005204a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar2;$@2	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1013144a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1013140a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar2;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1262206e;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1264284a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1265204a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar2;$@4	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1273144a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1273140a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar2;$@3	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063492c;$	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063212c;$	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_2\[1\]\ =\ uVar2;$	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063492c;$@2	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063212c;$@2	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_2\[2\]\ =\ uVar2;$	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063492c;$@3	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063212c;$@3	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_2\[3\]\ =\ uVar2;$	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063492c;$@4	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x1063212c;$@4	+1
+use	_PPCRasterOpMachine_BufferMaskRTCAV	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_2\[4\]\ =\ uVar2;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x10094c84;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x10084484;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x10139c84;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x1008984a;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x10039a8c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x1003128c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x10063484;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x1008304a;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x1003328c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x10021484;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ 0x1008104a;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_1\ =\ uVar1;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0xb\ \|\ 0x10080000;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0xb\ \|\ 0x10080000;$@2	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0xb\ \|\ 0x10080000;$@3	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_1\ =\ uVar1\ \|\ 0x4a;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ param_2\ <<\ 0x15;$	+3
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_1\[2\]\ =\ uVar1\ \|\ param_2\ <<\ 0xb\ \|\ 0x1003028c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ 0x10039a8c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ 0x1003128c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ 0x1003328c;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_1\ =\ uVar2;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ uVar1\ \|\ param_2\ <<\ 0x10;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_1\[1\]\ =\ uVar2\ \|\ 0x10009c4a;$	+1
+use	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_1\ =\ uVar2\ \|\ 0x1000436a;$	+1
+
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar6\ =\ param_2\ \+\ 1;$	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar6\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineUpdateStencilBufferRTCAV\)\(uVar5\ >>\ 0x15\ \&\ 7,0x1a,0x19,uVar2,uVar14,puVar6\);$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar6\ =\ 0xd1af0000;$	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*return\ puVar6;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar7\ =\ param_2\ \+\ 2;$	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_2\ =\ puVar7;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@2	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@3	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@4	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@5	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@6	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ 0x48000000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar15\ =\ puVar7;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar12\ =\ 0x41800000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar12\ =\ 0x41820000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar12\ =\ 0x40810000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar12\ =\ 0x41810000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar12\ =\ 0x40820000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar12\ =\ 0x40800000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar15\ =\ uVar12;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x41800000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x41820000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x40810000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x41810000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x40820000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x40800000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar8\ =\ 0x48000000;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar15\ =\ uVar8;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar2\ =\ 0x41800000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar2\ =\ 0x41820000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar2\ =\ 0x40810000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar2\ =\ 0x41810000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar2\ =\ 0x40820000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar2\ =\ 0x40800000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*param_2\ =\ uVar2\ \|\ 8;$	+1
+
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x12684484;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x12694c84;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x12621484;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar1;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c30000;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c40000;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ uVar1\ \|\ 0x4d04;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c32404;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c32484;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c32504;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c324c4;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c32444;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c41c44;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar1;$@3	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c32404;$@2	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10c324c4;$@2	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar1;$@2	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10840000;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10630000;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ uVar1\ \|\ 0x4d04;$@2	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x10c64d04;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*param_2\ =\ uVar2;$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ 0x10c32484;$	+1
+
+
+
+use	_PPCRuntimeCompilerBackupRegister	puVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\ =\ \(undefined4\ \*\)param_1\[0x38c\];$@5	+4
+use	_PPCRuntimeCompilerBackupRegister	puVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\ =\ \(undefined4\ \*\)param_1\[0x38c\];$@6	+3
+use	_PPCRuntimeCompilerBackupRegister	puVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\[1\]\ =\ \(uVar14\ \&\ 3\)\ <<\ 8\ \|\ 0x1063482c;$	+2
+use	_PPCRuntimeCompilerBackupRegister	puVar8	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\ =\ \(uint\ \*\)param_1\[0x38c\];$	+1
+use	_PPCRuntimeCompilerBackupRegister	puVar8	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar20\ <<\ 0x15\ \|\ uVar20\ <<\ 0x10\ \|\ uVar19\ \*\ 0x800\ \|\ 0x100000ea;$	+1
+use	_PPCRuntimeCompilerBackupRegister	puVar8	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_1\[0x38c\]\ =\ \(int\)\(puVar8\ \+\ 1\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar14	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar14\ =\ 3\ \-\ uVar17;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar14	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar14\ =\ \(uVar7\ \-\ uVar17\)\ \-\ 1;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar14	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+2
+use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar17\ =\ 0;$@2	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar12\ =\ uVar17\ \+\ 1;$	+3
+use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar14\ =\ \(uVar7\ \-\ uVar17\)\ \-\ 1;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar17\ =\ uVar12;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d6c84;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d492c;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d4a2c;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d4b2c;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar6\ =\ uVar4;$	+1
+
+
+use	_PPCRuntimeCompilerCompileAV	iVar9	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar9\ =\ \(int\)\(\(ulonglong\)uVar23\ >>\ 0x20\)\ \*\ 4;$	+3
+use	_PPCRuntimeCompilerCompileAV	iVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar9\ =\ \(int\)\(\(ulonglong\)uVar23\ >>\ 0x20\)\ \*\ 4;$@2	+2
+use	_PPCRuntimeCompilerCompileAV	iVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(undefined4\ \*\)\(in_r7\ \+\ iVar9\)\ =\ 0x39e001c0;$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar9	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\);$	+2
+use	_PPCRuntimeCompilerCompileAV	iVar9	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar23\ =\ _glpDCBRealloc\(iVar9,iVar19\);$	+1
+use	_PPCRuntimeCompilerCompileAV	iVar9	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar9\ =\ iVar21\ \-\ iVar9\ >>\ 2;$	+8
+use	_PPCRuntimeCompilerCompileAV	puVar18	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar18\ =\ puVar5\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerCompileAV	puVar18	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar18\ =\ 0x10631b2c;$	+1
+use	_PPCRuntimeCompilerCompileAV	puVar18	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar18\ =\ uVar8;$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar16	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\)\ >>\ 2;$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar16	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\*_glpPushInstructions\)\(iVar16,uVar10,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe24\);$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x48\)\ !=\ '\\0'\)\ \&\&$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ iVar6\ \+\ 0x24;$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x10\),\ \*piVar19\ !=\ iVar6\)\)\ \|\|$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(uVar7\ =\ puVar21\[3\],\ iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x11\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(uVar7\ =\ puVar21\[3\],\ iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x12\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(uVar7\ =\ puVar21\[3\],\ iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x13\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x10\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x11\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x12\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetOffsetInRegister\)\(param_1,0x13\),$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ 0;$@3	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x4c\);$	+9
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ iVar6\ \+\ 0x24;$@2	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar6\ \*\ 4;$	+11
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@4	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@5	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@6	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@7	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@8	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@9	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@10	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@11	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@12	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(puVar11,uVar10\);$@2	+3
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@13	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@14	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@15	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@16	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@17	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@18	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc$@2	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar6\ \*\ 4;$@6	+8
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(puVar11,iVar6\);$	+3
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@19	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@20	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\);$@21	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@2	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@4	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*switch\(\*\(undefined1\ \*\)\(iVar6\ \+\ 0x61\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@5	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@6	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*switch\(\*\(undefined1\ \*\)\(iVar6\ \+\ 0x62\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@7	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@8	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*switch\(\*\(undefined1\ \*\)\(iVar6\ \+\ 99\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 0x110\);$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*if\ \(iVar6\ !=\ 3\)\ goto\ switchD_97bdcdfc_caseD_3;$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(\&_glpOpArlRTC,\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\);$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(puVar11,iVar6\);$@2	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc$@3	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar6\ \*\ 4;$@5	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe24\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*if\ \(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ ==\ \*\(int\ \*\)\(iVar6\ \+\ 4\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*if\ \(\(\*\(int\ \*\)\(iVar6\ \+\ 0x38\)\ !=\ 0x8804\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x38\)\ !=\ 0x8b30\)\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(\&_glpOpMultRTC,\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\);$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(\&_glpOpDot4RTC,\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\);$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ iVar6\ <<\ 2;$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(\&_glpOpDot4RTC,\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ iVar6\ <<\ 2;$@2	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(\&_glpOpDot4RTC,\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ iVar6\ <<\ 2;$@3	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(\(int\)in_r10\ \+\ iVar6\)\ =\ uVar17\ \|\ 0x8090;$	+3
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(puVar11,uVar10\);$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\);$	+2
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar9\ =\ _glpDCBRealloc\(iVar6,iVar16\);$	+1
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ iVar9\ \-\ iVar6\ >>\ 2;$	+8
+use	_PPCRuntimeCompilerCompileNO	iVar6	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(\&_glpOpClippingRTC,puVar5\ \+\ 4\);$	+2
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0x70\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x6c\),in_r10,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x74\),$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x4c\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x70\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,uVar12,in_r5,in_r6,in_r7,in_r8,uVar14,in_r10,uVar10,uVar13,0,0\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xe30\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xe30\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xe30\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(uint\ \*\)\(\(int\)in_r10\ \+\ iVar6\)\ =\ uVar17\ \|\ 0x8090;$	+3
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x4c\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r8,\*\(undefined4\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x48\),in_r10,$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 0x58\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r8\ \+\ 0xd84\)\ \+\ \*in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r10\ =\ \(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe3c\)\ \+\ iVar6\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(int\ \*\*\)\(param_1\ \+\ 0xe3c\)\ =\ in_r10;$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r10	codeWritePtr3	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\*_glpPushInstructions\)\(iVar16,uVar10,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x5c\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x58\),in_r5,in_r6,in_r7,in_r8,$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x38\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ 0x5c\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,uVar12,in_r5,in_r6,in_r7,in_r8,uVar14,in_r10,uVar10,uVar13,0,0\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x38\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x34\),in_r5,in_r6,in_r7,in_r8,$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x38\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x34\),in_r5,in_r6,in_r7,in_r8,$@2	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x38\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x34\),in_r5,in_r6,in_r7,in_r8,$@3	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x38\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerLoadSourceNO\)\(param_1,\*\(undefined4\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x34\),in_r5,in_r6,in_r7,$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$	+2
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@2	+2
+use	_PPCRuntimeCompilerCompileNO	in_r5	codeWritePtr4	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\(\*_glpPushInstructions\)\(iVar16,uVar10,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r9	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*in_r9\ =\ \(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 0x11c\);$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r9	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*in_r9\ =\ \(undefined4\ \*\)0x0;$	+1
+use	_PPCRuntimeCompilerCompileNO	in_r9	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe28\)\ =\ in_r9;$	+2
+use	_PPCRuntimeCompilerCompileNO	in_r9	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*in_r9\ =\ puVar5\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerCompileNO	in_r9	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\(\*_glpPushInstructions\)\(iVar16,uVar10,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10\);$	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@4	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@5	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@6	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@7	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@8	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@9	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@10	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar5\ =\ uVar10;$	+2
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@11	+2
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar5\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@12	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@13	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@14	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@15	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@16	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@17	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@18	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@19	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@20	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@21	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar5\ =\ uVar10;$@2	+2
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@22	+2
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar5\ \+\ 1;$@3	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@23	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@24	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@25	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@26	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@27	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@28	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@29	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@30	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@31	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@32	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar5\ =\ uVar10;$@3	+2
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@33	+2
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar5\ \+\ 1;$@5	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@34	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@35	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@36	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@37	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@38	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@39	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@40	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@41	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@42	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@43	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@44	+1
+use	_PPCRuntimeCompilerCompileNO	puVar5	codeWritePtr5	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar5\ =\ uVar10;$@4	+2
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@7	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@8	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@9	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(puVar11,uVar10\);$@2	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@3	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc\(puVar11,uVar10\);$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@4	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@5	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	codeWritePtr6	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\);$@6	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe000090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe000890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe001090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe001890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe000050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe000850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe001050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe001850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe005090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe005890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar5\ =\ uVar10;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe200090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe200890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe201090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe201890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe200050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe200850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe201050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe201850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe205090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe205890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar5\ =\ uVar10;$@2	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe400090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe400890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe401090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe401890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe400050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe400850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe401050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe401850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe405090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe405890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar5\ =\ uVar10;$@3	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe600090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe600890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe601090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe601890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe600050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe600850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe601050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe601850;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe605090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe605890;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar10\ =\ 0xfe605050;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar10	ppcInstWord3	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar5\ =\ uVar10;$@4	+1
+use	_PPCRuntimeCompilerCompileNO	uVar17	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar17\ =\ 0xfe200000;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar17	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar17\ =\ 0xfe400000;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar17	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar17\ =\ 0xfe600000;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar17	ppcInstWord4	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(\(int\)in_r10\ \+\ iVar6\)\ =\ uVar17\ \|\ 0x8090;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar7	loopIndex	INFERRED	up-counting loop index	^\s*uVar7\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar7	loopIndex	INFERRED	up-counting loop index	^\s*\*\(undefined4\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x54\),uVar7,uVar8\);$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar7	loopIndex	INFERRED	up-counting loop index	^\s*\(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerWriteDestinationNO\)\(param_1,uVar7\);$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar7	loopIndex	INFERRED	up-counting loop index	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*\(uVar8\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x49\),\ uVar17\ <\ uVar8\)\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetBaseIndexInRegister\)\(param_1,0x10\),\ uVar3\ !=\ uVar8$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetBaseIndexInRegister\)\(param_1,0x11\),\ uVar3\ !=\ uVar8$	+2
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*\*\(int\ \*\)\(uVar8\ \+\ 4\)\ !=\ iVar6\)\)\ \|\|$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetBaseIndexInRegister\)\(param_1,0x12\),\ uVar3\ !=\ uVar8$	+2
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*\*\(int\ \*\)\(uVar8\ \+\ 8\)\ !=\ iVar6\)\)\ \|\|$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)_PPCRuntimeCompilerGetBaseIndexInRegister\)\(param_1,0x13\),\ uVar3\ !=\ uVar8$	+2
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*\*\(int\ \*\)\(uVar8\ \+\ 0xc\)\ !=\ iVar6\)\)\ \|\|$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar8\ =\ 0;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar20\ =\ uVar8\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*\*\(undefined4\ \*\)\(\(int\)puVar21\ \+\ iVar6\ \+\ 0x54\),uVar7,uVar8\);$	+1
+use	_PPCRuntimeCompilerCompileNO	uVar8	loopIndex2	INFERRED	up-counting loop index	^\s*uVar8\ =\ uVar20;$	+1
+
+
+
+
+
+
+
+
+
+
+
+use	_PPCRuntimeCompilerInitialiseRegisterAllocator	uVar1	loopIndex	INFERRED	up-counting loop index	^\s*uVar1\ =\ 0;$	+1
+use	_PPCRuntimeCompilerInitialiseRegisterAllocator	uVar1	loopIndex	INFERRED	up-counting loop index	^\s*uVar3\ =\ uVar1\ \+\ 1;$	+3
+
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar1	allocation2	CONFIRMED	memory returned by the allocator call	^\s*iVar1\ =\ \*piVar4;$	+1
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar1	allocation2	CONFIRMED	memory returned by the allocator call	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe04\)\ \+\ iVar1;$	+2
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar1	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ _calloc\(iVar1,8\);$	+1
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar7	loopIndex3	INFERRED	up-counting loop index	^\s*iVar7\ =\ 0;$	+1
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar7	loopIndex3	INFERRED	up-counting loop index	^\s*\*\(int\ \*\)\(iVar7\ \*\ 8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe00\)\)\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x80\)\ \+\ iVar8;$	+2
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar8	remaining	INFERRED	down-counting loop counter	^\s*iVar8\ =\ 4;$	+1
+use	_PPCRuntimeCompilerInitialiseVariableInfo	iVar8	remaining	INFERRED	down-counting loop counter	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+
+use	_PPCRuntimeCompilerLoadSourceNO	uVar5	loopIndex2	INFERRED	up-counting loop index	^\s*uVar5\ =\ 0;$@2	+1
+use	_PPCRuntimeCompilerLoadSourceNO	uVar5	loopIndex2	INFERRED	up-counting loop index	^\s*uVar6\ =\ uVar5\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerLoadSourceNO	uVar5	loopIndex2	INFERRED	up-counting loop index	^\s*\(param_1,iVar1\ \+\ uVar5,uStack0000001c,uStack00000020,uStack00000024,uStack00000028,$	+3
+
+
+
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar8\ =\ param_2\ \*\ 0x38\ \+\ param_1;$@2	+2
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*_memcpy\(\&local_50,iVar8\ \+\ 0x708,0x24\);$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar8\ =\ \*\(ushort\ \*\)\(iVar8\ \+\ 0x718\)\ \+\ 5;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x800\ \|\ 0x7c0001ce;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c0079ce;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b9ce;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*puVar6\[1\]\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00798e;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*puVar6\[1\]\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00798e;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*puVar6\[1\]\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00798e;$@3	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00798e;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*puVar5\[1\]\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b98e;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*puVar5\[1\]\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b98e;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*puVar5\[1\]\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b98e;$@3	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	iVar8	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b98e;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar6\ =\ uVar2;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$@3	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$@6	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar6\ =\ puVar5\ \+\ 3;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar6\ =\ puVar6\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar6\ =\ puVar6\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	puVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar6;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ \(\*\(ushort\ \*\)\(iVar8\ \+\ 0x18\)\ \+\ 5\)\ \*\ 0x10000\ \|$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar6\ =\ uVar2;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x800\ \|\ 0x7c0001ce;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0xb\ \|\ 0x127300ea;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c0079ce;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b9ce;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00798e;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ iVar8\ \*\ 0x10000\ \|\ 0x7c00b98e;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar2	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar6\ =\ uVar2;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063212c;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063492c;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar5\[2\]\ =\ uVar3;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063212c;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063492c;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ uVar3;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063212c;$@3	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063492c;$@3	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ uVar3;$@2	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063212c;$@4	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ 0x1063492c;$@4	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar3	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar5\ =\ uVar3;$@3	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ \*puVar1\ \&\ 0xffff\ \|\ 0x39e00000;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x82ef0000;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ \*\(ushort\ \*\)\(\(int\)puVar1\ \+\ 0xe\)\ \|\ 0x39e00000;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x82ef000c;$	+1
+use	_PPCRuntimeCompilerSaveRegisterToMemory	uVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar6\ =\ uVar7;$	+1
+
+
+
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000022c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ iVar4\ <<\ 0xb\ \|\ 0x1063012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@4	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$@4	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@5	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 3;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1000022c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ iVar4\ <<\ 0x10\ \|\ 0x1000222c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1060012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@6	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$@5	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000012c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@7	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 3;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1060012c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@8	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$@6	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ iVar4\ <<\ 0xb\ \|\ 0x1063012c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@9	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 4;$@7	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000012c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ param_2;$@10	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ 3;$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1000012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ param_2;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1000022c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ param_2;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ 4;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1060012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ param_2;$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ 4;$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1060012c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ param_2;$@4	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar5\ =\ 4;$@4	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ iVar4\ <<\ 0x10\ \|\ iVar5\ <<\ 0xb\ \|\ 0x1000012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar12	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar12\ =\ puVar8\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar12	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar11\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar12	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar11\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar12	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ uVar6\ <<\ 0x10\ \|\ 0x800000\ \|\ uVar2\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar8\ =\ uVar6;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar8\ =\ puVar8\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$@18	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar8\ =\ puVar8\ \+\ 1;$@3	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar8\ =\ uVar2\ \|\ \(4\ \-\ uVar6\)\ \*\ 0x100\ \&\ 0x300\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar8\ \+\ 1;$@16	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$@9	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar8\ \+\ 1;$@6	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar8	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar8\ =\ puVar8\ \+\ 1;$@2	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar11\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x14\ \&\ 0x3f\);$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar11\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar11\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ \*param_3;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ \(uVar2\ \&\ 0x3000000\)\ <<\ 4\ \|\ \(uVar2\ \&\ 0x30000\)\ <<\ 8\ \|\ \(uVar2\ \&\ 0x300\)\ <<\ 0xc\ \|$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ \(uVar2\ \&\ 0x3000000\)\ >>\ 0x18;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ \(uVar2\ \&\ 0x3000000\)\ >>\ 0x18;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar2\ \&\ 0x30000\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ \(\(uVar2\ \&\ 0x30000\)\ >>\ 0x10\)\ <<\ 8$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar2\ \&\ 0x300\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ uVar2\ \&\ 0x300\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar2\ \&\ 3\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar2\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0x10\ \|\ param_2\ <<\ 0xb;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar2\ \|\ uVar6\ \&\ 0x300\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0xb;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ 0x600000\ \|\ uVar2\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar11\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar11\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar3\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ uVar6\ <<\ 0x10\ \|\ 0x800000\ \|\ uVar2\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0x10\ \|\ uVar2;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0x10\ \|\ param_2\ <<\ 0xb;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0xb;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ 0x600000\ \|\ uVar2\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar6\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0x10\ \|\ uVar2;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ param_2\ <<\ 0x15\ \|\ param_2\ <<\ 0x10\ \|\ param_2\ <<\ 0xb;$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar2\ \|\ \(4\ \-\ uVar6\)\ \*\ 0x100\ \&\ 0x300\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ uVar10\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar7\ ==\ \(uVar2\ \+\ 1\ \&\ 3\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar2\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar7\ ==\ uVar2\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar2\ <<\ 0x10\ \|\ 0x800000\ \|\ param_2\ <<\ 0xb\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar2\ !=\ 0\)\ \{$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ \(uVar2\ \&\ 0x3000000\)\ <<\ 4\ \|\ \(uVar2\ \&\ 0x30000\)\ <<\ 8\ \|\ \(uVar2\ \&\ 0x300\)\ <<\ 0xc\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ \|\ uVar3\ >>\ 0x10;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(\(uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ ==\ \(uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x18\ \&\ 0x3f\)\ \&\ 3\)$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ >>\ \(uVar11\ \&\ 0x3f\)\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ >>\ \(uVar11\ \&\ 0x3f\)\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(\(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(\(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 3\)\ ==\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x18\ \&\ 0x3f\)\ \&\ 3\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ param_2\ <<\ 0xb$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ 0x600000\ \|\ uVar2\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar11\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x14\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar10\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ 0x600000\ \|\ uVar2\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ \&\ 0xf\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar3\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar10\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x14\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar7\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ \&\ 0xf\)\ !=\ 0\)\ \{$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar3\ \&\ 3\)\ <<\ 8\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ \&\ 0xf\)\ !=\ 0\)\ \{$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar3	vectorInstWord6	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar3\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ 0;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(\(uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ ==\ \(uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x18\ \&\ 0x3f\)\ \&\ 3\)$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar1\ =\ uVar6\ \*\ 4\ \+\ 8;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar6\ ==\ 0\)\ \&\&\ \(iVar4\ <\ 4\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar6\ \-\ 1\ \&\ 3;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ \(uVar2\ \&\ 0x3000000\)\ >>\ 0x18;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar6\ <<\ 8;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar2\ \|\ uVar6\ \&\ 0x300\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar6;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar7;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar7;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ \(4\ \-\ uVar6\)\ \*\ 0x100;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar10\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x14\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar7\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar6\ ==\ 0\)\ \{$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000012c;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar2\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar6\ ==\ 0\)\ \{$@3	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar2\ \|\ \(4\ \-\ uVar6\)\ \*\ 0x100\ \&\ 0x300\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar6\ \&\ 0xf\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\[1\]\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ uVar2\ \|\ \(uVar6\ \&\ 3\)\ <<\ 8\ \|\ 0x1000002c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar11\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar10\ ==\ \(uVar6\ \+\ 1\ \&\ 3\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar10\ !=\ uVar6\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar6\ !=\ 0\)\ \{$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar12\ =\ uVar6\ <<\ 0x10\ \|\ 0x800000\ \|\ uVar2\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000022c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar9\ =\ uVar6;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	vectorInstWord7	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ param_2\ <<\ 0x15\ \|\ 0x30000U\ \|\ iVar4\ <<\ 0xb\ \|\ 0x1000012c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar7\ ==\ 0\)\ \&\&\ \(iVar5\ <\ 4\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar7\ =\ uVar7\ \-\ 1\ \&\ 3;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar7\ =\ 0;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(\(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 3\)\ ==\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x18\ \&\ 0x3f\)\ \&\ 3\)\)\ \{$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ param_2\ <<\ 0x15\ \|\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ param_2\ <<\ 0xb$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ 0x600000\ \|\ uVar2\ \|\ 0x1000028c;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar7\ ==\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar7;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar11\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x14\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar10\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ \(uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf\)\ <<\ 0x10\ \|\ 0x600000\ \|\ uVar2\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar3\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar7\ ==\ 0\)\ \{$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	vectorInstWord8	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar6\ =\ uVar7;$@2	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar3\ =\ puVar2\ \+\ 3;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\);$@5	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*puVar3\ =\ uVar1;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar3\ =\ puVar3\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar3\ =\ puVar3\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	puVar3	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar3;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10636a8c;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10694c84;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar3\ =\ uVar1;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10600000;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10610000;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10620000;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar3\ =\ uVar1\ \|\ 0x38c;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10810000;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x10820000;$	+1
+use	_PPCRuntimeCompilerTestConditionRegisterAV	uVar1	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar2\[1\]\ =\ uVar1\ \|\ 0x38c;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ _glpRTCAddAChunk_97bd7cbc$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar4\ =\ iVar4\ \*\ 4;$	+2
+use	_PPCRuntimeCompilerWriteDestinationAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ iVar4\)\ =\ 0x12852c84;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	iVar4	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ iVar4\)\ =\ 0x10836a8c;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	puVar2	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar3\ \+\ iVar4\);$	+2
+use	_PPCRuntimeCompilerWriteDestinationAV	puVar2	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar2\ \+\ 2;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	puVar2	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar2\[1\]\ =\ uVar1;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	puVar2	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar2\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@4	+2
+use	_PPCRuntimeCompilerWriteDestinationAV	puVar2	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar2\ \+\ 1;$@4	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063212c;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063492c;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar2\[1\]\ =\ uVar1;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063212c;$@2	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063492c;$@2	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar2\ =\ uVar1;$	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063212c;$@3	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063492c;$@3	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar2\ =\ uVar1;$@2	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063212c;$@4	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar1\ =\ 0x1063492c;$@4	+1
+use	_PPCRuntimeCompilerWriteDestinationAV	uVar1	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar2\ =\ uVar1;$@3	+1
+
+use	_PPCRuntimeCompilerWriteEpilogAV	iVar1	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar1\ =\ 0xd;$	+1
+use	_PPCRuntimeCompilerWriteEpilogAV	iVar1	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*if\ \(\(iVar1\ !=\ 0x10\)\ \|\|\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe24\)\ \+\ 0x34\)\ \&\ 0x200\)\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerWriteEpilogAV	iVar1	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar2\ =\ iVar1\ <<\ 0x15\ \|\ uVar3\ \&\ 0xffff\ \|\ 0x80030000;$	+1
+use	_PPCRuntimeCompilerWriteEpilogAV	iVar1	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar1\ =\ iVar1\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerWriteEpilogAV	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar3\ =\ 0x284;$	+1
+use	_PPCRuntimeCompilerWriteEpilogAV	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar2\ =\ iVar1\ <<\ 0x15\ \|\ uVar3\ \&\ 0xffff\ \|\ 0x80030000;$	+1
+use	_PPCRuntimeCompilerWriteEpilogAV	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar3\ =\ uVar3\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	iVar2	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar2\ =\ 0xd;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	iVar2	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*if\ \(\(iVar2\ !=\ 0x10\)\ \|\|\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe24\)\ \+\ 0x34\)\ \&\ 0x200\)\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	iVar2	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar3\ =\ iVar2\ <<\ 0x15\ \|\ uVar4\ \&\ 0xffff\ \|\ 0x80030000;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	iVar2	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar4\ =\ 0x284;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar3\ =\ iVar2\ <<\ 0x15\ \|\ uVar4\ \&\ 0xffff\ \|\ 0x80030000;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar4\ =\ uVar4\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar4\ =\ 0x308;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar3\ =\ uVar6\ <<\ 0x15\ \|\ uVar4\ \&\ 0xffff\ \|\ 0xc0030000;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar4\ =\ uVar4\ \+\ 4;$@2	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar6\ =\ 0xe;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*if\ \(\(uVar6\ <\ 0x14\)\ \|\|\ \(\*piVar5\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar3\ =\ uVar6\ <<\ 0x15\ \|\ uVar4\ \&\ 0xffff\ \|\ 0xc0030000;$	+1
+use	_PPCRuntimeCompilerWriteEpilogNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*iVar6\ =\ _glpRTCAddAChunk_97bd7cbc$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	codeWritePtr	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar6\ \*\ 4;$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	puVar5	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\);$@2	+2
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	puVar5	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*puVar5\ =\ \(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ \+\ iVar6\ \*\ 4\);$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	puVar5	codeWritePtr2	CONFIRMED	pointer into the generated-code buffer: compiler+0xe30 is the cursor where the next instruction word goes	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar5\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerWritePrologAV	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar6\ =\ iVar5\ \+\ iVar7\ \*\ 4;$	+2
+use	_PPCRuntimeCompilerWritePrologAV	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 4\)\ =\ 0x81a30da0;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	iVar6	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ =\ iVar6\ \+\ 8;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	iVar7	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar7\ =\ 0xd;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	iVar7	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*if\ \(\(iVar7\ !=\ 0x10\)\ \|\|\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe24\)\ \+\ 0x34\)\ \&\ 0x200\)\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerWritePrologAV	iVar7	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar2\ =\ iVar7\ <<\ 0x15\ \|\ uVar4\ \&\ 0xffff\ \|\ 0x90030000;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	iVar7	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	puVar3	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar3\ =\ puVar1\ \+\ 1;$	+2
+use	_PPCRuntimeCompilerWritePrologAV	puVar3	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar3\ =\ 0x11c9436a;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	puVar3	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar3\ =\ 0x1080190a;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar4\ =\ 0x284;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar2\ =\ iVar7\ <<\ 0x15\ \|\ uVar4\ \&\ 0xffff\ \|\ 0x90030000;$	+1
+use	_PPCRuntimeCompilerWritePrologAV	uVar4	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar4\ =\ uVar4\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar5\ =\ 0xd;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*if\ \(\(iVar5\ !=\ 0x10\)\ \|\|\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe24\)\ \+\ 0x34\)\ \&\ 0x200\)\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar1\ =\ iVar5\ <<\ 0x15\ \|\ uVar3\ \&\ 0xffff\ \|\ 0x90030000;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	fieldInstWord	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*iVar5\ =\ iVar5\ \+\ iVar7\ \*\ 4;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ =\ iVar5\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 4\)\ =\ 0x3a2000ff;$	+2
+use	_PPCRuntimeCompilerWritePrologNO	iVar5	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe30\)\ =\ iVar5\ \+\ 0xc;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar3\ =\ 0x284;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar1\ =\ iVar5\ <<\ 0x15\ \|\ uVar3\ \&\ 0xffff\ \|\ 0x90030000;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar3\ =\ uVar3\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar3\ =\ 0x308;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar1\ =\ uVar6\ <<\ 0x15\ \|\ uVar3\ \&\ 0xffff\ \|\ 0xd0030000;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar3	fieldInstWord2	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar3\ =\ uVar3\ \+\ 4;$@2	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar6\ =\ 0xe;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*if\ \(\(uVar6\ <\ 0x14\)\ \|\|\ \(\*piVar4\ !=\ 0\)\)\ \{$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*\*puVar1\ =\ uVar6\ <<\ 0x15\ \|\ uVar3\ \&\ 0xffff\ \|\ 0xd0030000;$	+1
+use	_PPCRuntimeCompilerWritePrologNO	uVar6	fieldInstWord3	CONFIRMED	PowerPC/AltiVec instruction word assembled from register fields (RT/RS << 21, RA << 16, RB << 11) and an opcode template	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+
+
+
+
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar10	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar5\ \+\ iVar7\ \*\ 4\);$	+2
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar10	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar5\ \+\ iVar7\ \*\ 4\);$@3	+4
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar10	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*return\ puVar10\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar10	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar5\ \+\ iVar7\ \*\ 4\);$@2	+6
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\ =\ param_3\ \+\ 2;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x39e00040;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\ =\ param_3\ \+\ 4;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x82510070;$	+5
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x82510070;$@2	+5
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x82510020;$	+5
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\[5\]\ =\ uVar6;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\ =\ puVar9\ \+\ 6;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ 0x3a310120;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ 0x7e31ba14;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\[1\]\ =\ uVar6;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ 0x823100a4;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ 0x823100a8;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar6\ =\ 0x823100a0;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar6	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\[5\]\ =\ uVar6;$	+1
+
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\ =\ param_3\ \+\ 2;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x39e00040;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\ =\ param_3\ \+\ 4;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x82510070;$	+5
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x82510070;$@2	+5
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x82510020;$	+5
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\[5\]\ =\ uVar7;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\ =\ puVar10\ \+\ 6;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar8\ \*\ 4\);$	+2
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar8\ \*\ 4\);$@5	+6
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*return\ puVar11\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar8\ \*\ 4\);$@2	+8
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar8\ \*\ 4\);$@3	+8
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar8\ \*\ 4\);$@4	+8
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x3a310120;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x7e31ba14;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\[1\]\ =\ uVar7;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x823100a4;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x823100a8;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x823100a0;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\[5\]\ =\ uVar7;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar8\ =\ param_3\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar8\ =\ 0x82910160;$	+2
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar8\ =\ 0x82b10164;$	+2
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar8\ =\ 0x82510190;$	+3
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar8\ =\ 0x82510190;$@2	+3
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar8\ =\ 0x82510140;$	+3
+use	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar8\[3\]\ =\ uVar3;$	+2
+use	_PPCTextureSamplerSampleTexel2DRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar3\ =\ 0x823101c4;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar3\ =\ 0x823101c8;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar3\ =\ 0x823101c0;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar8\[3\]\ =\ uVar3;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\ =\ param_3\ \+\ 2;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x39e00040;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\ =\ param_3\ \+\ 4;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x82510070;$	+6
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x82510070;$@2	+6
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar10\ =\ 0x82510020;$	+6
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\[6\]\ =\ uVar7;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar10	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\ =\ puVar10\ \+\ 7;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@9	+8
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*return\ puVar11\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@2	+10
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@3	+10
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@4	+11
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@5	+10
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@6	+11
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@7	+12
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	puVar11	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar6\ \+\ iVar9\ \*\ 4\);$@8	+10
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x3a310120;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x7e31ba14;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\[1\]\ =\ uVar7;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x823100a4;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x823100a8;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar7\ =\ 0x823100a0;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar7	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar10\[6\]\ =\ uVar7;$	+1
+
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\ =\ param_3\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x39e00160;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\ =\ param_3\ \+\ 3;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x82510190;$	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x82510190;$@2	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar9\ =\ 0x82510140;$	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\[5\]\ =\ uVar5;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*param_3\ =\ puVar9\ \+\ 6;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar9\ =\ param_3\ \+\ iVar6;$	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar9\ =\ param_3\ \+\ iVar6;$@2	+41
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*return\ puVar9\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	uVar5	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar5\ =\ 0x823101c4;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	uVar5	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar5\ =\ 0x823101c8;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	uVar5	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar5\ =\ 0x823101c0;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	uVar5	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar9\[5\]\ =\ uVar5;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar7\ =\ param_3\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ 0x82910160;$	+2
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ 0x82b10164;$	+2
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ 0x82510190;$	+3
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ 0x82510190;$@2	+3
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*puVar7\ =\ 0x82510140;$	+3
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar7\[3\]\ =\ uVar3;$	+2
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar3\ =\ 0x823101c4;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar3\ =\ 0x823101c8;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar3\ =\ 0x823101c0;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	uVar3	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*puVar7\[3\]\ =\ uVar3;$	+1
+
+
+
+
+
