@@ -154,3 +154,71 @@ local	FUN_000684c0	param_11	src1Words	INFERRED	four-word operand record, same la
 local	FUN_000684c0	param_12	src1Flags	INFERRED	companion flags of param_11
 local	FUN_000684c0	param_15	src2Words	INFERRED	four-word operand record, same layout as param_7
 local	FUN_000684c0	param_16	src2Flags	INFERRED	companion flags of param_15
+local	FUN_0000e1f0	param_1	instrTable	INFERRED	8-byte instruction/operand entries indexed by param_7: *(instrTable+instrIndex*8) holds the operand word
+local	FUN_0000e1f0	param_2	outCursor	INFERRED	char* the text is written to; advanced by the number of characters each piece appends
+local	FUN_0000e1f0	param_3	nameTable3	UNKNOWN	pointer table indexed by the entry's ushort at +6 (name string pointers, -1 = none); copied with FUN_0000cdf0
+local	FUN_0000e1f0	param_4	nameTable4	UNKNOWN	pointer table indexed like param_3
+local	FUN_0000e1f0	param_5	nameTable5	UNKNOWN	pointer table indexed like param_3
+local	FUN_0000e1f0	param_6	nameTable6	UNKNOWN	pointer table indexed like param_3
+local	FUN_0000e1f0	param_7	instrIndex	INFERRED	index of the 8-byte entry being printed
+local	FUN_0000e1f0	puVar10	operandEntry	INFERRED	&instrTable[instrIndex*8]
+local	FUN_0000e1f0	uVar7	operandWord	INFERRED	*operandEntry: bit 0x8000000 prints "-", bit 0x4000000 prints "|", bits 23..25 select att/tmp/... register file
+local	FUN_0000e1f0	uVar8	nameIndex	INFERRED	ushort at operandEntry+6: index into the name tables
+local	FUN_0000e1f0	iVar5	written	INFERRED	number of characters copied by the current inlined string copy
+local	FUN_0000e1f0	cVar2	curChar	INFERRED	character being copied
+local	FUN_0000e1f0	pcVar3	srcCursor	INFERRED	walks the literal ("-", "|", "att", "tmp", ...) being copied into outCursor
+local	FUN_0000e1f0	pcVar4	srcCursor2	INFERRED	walks a second literal ("]" and similar) being copied
+local	FUN_0000e1f0	iVar6	nameLength	INFERRED	FUN_0000cdf0 result: length of the table name copied
+local	FUN_0000d380	param_1	instrTable	INFERRED	8-byte entries indexed by param_5 (same shape as FUN_0000e1f0)
+local	FUN_0000d380	param_2	outCursor	INFERRED	char* the text is written to; advanced after each appended piece
+local	FUN_0000d380	param_3	nameTable3	UNKNOWN	pointer table indexed by the entry's ushort at +6; used with param_6 != 0
+local	FUN_0000d380	param_4	nameTable4	UNKNOWN	second pointer table indexed the same way (-1 = none)
+local	FUN_0000d380	param_5	instrIndex	INFERRED	index of the 8-byte entry being printed
+local	FUN_0000d380	param_6	useNames	INFERRED	when 0 the numeric index is printed instead of the table name
+local	FUN_0000d380	puVar8	operandEntry	INFERRED	&instrTable[instrIndex*8]
+local	FUN_0000d380	uVar1	registerFile	INFERRED	bits 17..19 of the entry word select the file ("tmp" for 1, ...)
+local	FUN_0000d380	puVar7	afterPrefix	INFERRED	outCursor after the file name literal was copied
+local	FUN_0000d380	iVar6	written	INFERRED	number of characters copied by the current inlined string copy (and later FUN_0000cdf0 result)
+local	FUN_0000d380	cVar2	curChar	INFERRED	character being copied
+local	FUN_0000d380	pcVar3	srcCursor	INFERRED	walks the literal being copied into outCursor
+local	FUN_00115fa0	iVar1	guardResult	INFERRED	result of ___cxa_guard_acquire for each function-local static initialised here (253 times); reused as the loop counter of the final 0xfd-iteration loop
+local	FUN_00115fa0	puVar2	vtablePtr	INFERRED	PTR_DAT_xxx + 8: C++ vtable address stored into the global object being constructed
+local	FUN_00028350	iVar40	ring	CONFIRMED	ctx+0x240: ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60
+local	FUN_0002a3d0	iVar33	ring	CONFIRMED	ctx+0x240: ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60
+local	FUN_0003d590	param_1	ctx	CONFIRMED	ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60; param_1+0x240 is passed to FUN_00054470
+local	FUN_0003d590	iVar31	ring	CONFIRMED	ctx+0x240: ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60
+local	FUN_0003d590	puVar16	cmdStart	INFERRED	result of (*(ctx+0x2998))(ring, constantCount*7+2): start of the reserved command words, first word 0x8a1
+local	FUN_0003d590	puVar19	cmdEnd	INFERRED	cmdStart + constantCount*7 + 2: end of the reserved words
+local	FUN_0003d590	puVar21	cacheClearedUpTo	INFERRED	*(ctx+0x2834): highest address already cache-zeroed; compared with the reserved range
+local	FUN_0003d590	uVar28	cacheLineMask	INFERRED	*(byte*)(ctx+8) - 1: cache line size minus one
+local	FUN_0003d590	uVar11	cmdEndAligned	INFERRED	cmdEnd rounded down to a cache line; stored back to ctx+0x2834
+local	FUN_0003d590	uVar29	cacheLineAddr	INFERRED	cache line address stepped by the line size while dataCacheBlockClearToZero zeroes the new words
+local	FUN_0003d590	puVar24	cmdCursor	INFERRED	write cursor in the reserved words (starts at cmdStart+2)
+local	FUN_0003b870	param_1	ctx	INFERRED	FUN_00054470(ctx+0x240,...) as in FUN_0003d590; *(ctx+0x10)+0x1860 is the state constant table read below
+local	FUN_0003b870	local_68	program	INFERRED	output of FUN_00054470: record with 8-byte entries; +0x800 and +0x804 are entry counts of two lists
+local	FUN_0003b870	local_64	constantTable	INFERRED	output of FUN_00054470: destination table of 16-byte constants indexed by the entry's byte at +0
+local	FUN_0003b870	iVar15	entryCount	INFERRED	*(program+0x800) then *(program+0x804): number of 8-byte entries in the list being walked
+local	FUN_0003b870	pbVar28	entryCursor	INFERRED	walks the 8-byte entries of program
+local	FUN_0003b870	iVar16	stateConstants	INFERRED	*(ctx+0x10)+0x1860: array of 4-word state constants indexed by the entry's ushort at +2
+local	FUN_0003b870	bVar2	destSlot	INFERRED	byte at entry+0: index of the 16-byte destination in constantTable
+local	FUN_0003b870	puVar22	destPtr	INFERRED	pointer at entry+4: the 4 words are also copied through it
+local	FUN_0003d590	local_88	program	INFERRED	output of FUN_00054470(ring,...): record with 8-byte entries; +0x800/+0x804 are entry counts, +0x808 the constant count used for the reservation size
+local	FUN_0003d590	local_84	constantTable	INFERRED	second output of FUN_00054470: table of 16-byte constants indexed by the entry's byte at +0
+local	FUN_0003d590	pbVar33	entryCursor	INFERRED	walks the 8-byte entries of program
+local	FUN_0003d590	iVar25	stateConstants	INFERRED	*(ctx+0x10)+0x1860: array of 4-word state constants indexed by the entry's ushort at +2
+local	FUN_0003d590	bVar2	destSlot	INFERRED	byte at entry+0: index of the 16-byte destination in constantTable
+local	FUN_0001ecd0	param_1	ctx	CONFIRMED	ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60; iVar34 = ctx+0x240
+local	FUN_0001ecd0	iVar34	ring	CONFIRMED	ctx+0x240: ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60
+local	FUN_00029294	param_1	ctx	CONFIRMED	ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60; iVar16 = ctx+0x240
+local	FUN_00029294	iVar16	ring	CONFIRMED	ctx+0x240: ring allocator at ctx+0x240 (slot +0x2998 allocates words), as named for FUN_00039a60
+local	FUN_00029294	iVar20	ctxState	INFERRED	*(ctx+0x10): record indexed with fixed offsets (+0x2db8, +0x30b0, ...) by the pixel code, as in FUN_00018a40
+local	FUN_00029294	uVar22	flags	INFERRED	param_9 & 0xff
+local	FUN_00029290	param_1	ctx	CONFIRMED	same shape as FUN_00029294 (its decompile shares that body): ctx+0x240 ring allocator, slot +0x2998 allocates words
+local	FUN_00016670	param_1	ctx	INFERRED	iStack_b0 = ctx+0x240 (ring allocator, as named for FUN_00039a60); *(ctx+0x10) record read at fixed offsets
+local	FUN_00016670	param_2	vertex	INFERRED	float record: elements [0xc..0xf] are blended with state values (alpha weight param_2[0x13]); [2] is read as a coordinate
+local	FUN_00016670	iStack_b0	ring	CONFIRMED	ctx+0x240: ring allocator, slot +0x2998 allocates words, as named for FUN_00039a60
+local	FUN_00024fe0	param_1	ctx	INFERRED	*(ctx+0x10) record is read 46 times at fixed offsets, as in the other pixel/raster entry points
+local	FUN_0003c400	param_1	ctx	INFERRED	*(ctx+0x10) record read at fixed offsets; param_1 passed first to FUN_000538e0/FUN_00053060
+local	FUN_0003c400	param_2	shaderObject	INFERRED	record whose [8] is tested, [0x12]/[0x13] are a count and an index into its own entry table, and whose first word is compared with 0x8b30..0x8b31 (shader type enums)
+local	FUN_0003c400	param_3	hwProgram	INFERRED	output record: byte at +0x8c is set when an entry byte is zero, words [0xd]/[0x10] receive FUN_00054460 results
+local	FUN_00018a40	iVar33	ctxState	INFERRED	*(ctx+0x10): record indexed with fixed offsets (+0x2d68, +0x2d84, +0x2e33, ...)
