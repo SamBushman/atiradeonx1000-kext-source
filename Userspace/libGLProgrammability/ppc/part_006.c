@@ -614,7 +614,7 @@ int TSymbolTable__dump(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * this_00;
@@ -644,8 +644,8 @@ int TSymbolTable__dump(this, param_2)
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar5 = 2;
         }
       } while (!(bool)(bVar5 >> 1 & 1));
@@ -686,7 +686,7 @@ int __ZN9TFunctionD0Ev(this)
 int __ZN9TFunctionD4Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int iVar2;
   int *piVar3;
   int iVar4;
@@ -710,8 +710,8 @@ int __ZN9TFunctionD4Ev(this)
   do {
     iVar4 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1466,7 +1466,7 @@ int TSymbolTableLevel__clone(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   int iVar2;
   unsigned char * poolAllocator;
   undefined4 *puVar4;
@@ -1524,8 +1524,8 @@ int TSymbolTableLevel__clone(this, param_2)
         iVar2 = *piVar6;
         a6 = iVar2 + -1;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(a6,0,piVar6);
-          *piVar6 = iVar1;
+          atomicStore = storeWordConditionalIndexed(a6,0,piVar6);
+          *piVar6 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1545,7 +1545,7 @@ int TSymbolTable__copyTable(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  undefined4 uVar1;
+  undefined4 atomicStore;
   undefined *puVar2;
   int iVar3;
   undefined4 *puVar4;
@@ -1563,8 +1563,8 @@ int TSymbolTable__copyTable(this, param_2)
     if (iVar3 == 0) {
       do {
         if (in_RESERVE != '\0') {
-          uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
-          *(undefined4 *)puVar2 = uVar1;
+          atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
+          *(undefined4 *)puVar2 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1572,8 +1572,8 @@ int TSymbolTable__copyTable(this, param_2)
     else {
       do {
         if (in_RESERVE != '\0') {
-          uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
-          *(undefined4 *)puVar2 = uVar1;
+          atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
+          *(undefined4 *)puVar2 = atomicStore;
           in_cr0 = 2;
         }
       } while (!(bool)(in_cr0 >> 1 & 1));

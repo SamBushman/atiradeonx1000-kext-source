@@ -735,7 +735,7 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(param_1, _Unwind_Context)
   unsigned char textRelBase;
   bool bVar1;
   uint uVar2;
-  unsigned char uVar3;
+  unsigned char regionStart;
   
   if (param_1 != 0xff) {
     uVar2 = param_1 & 0x70;
@@ -751,8 +751,8 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(param_1, _Unwind_Context)
     }
     else {
       if (uVar2 == 0x40) {
-        uVar3 = ((int (*)())__Unwind_GetRegionStart)(_Unwind_Context);
-        return uVar3;
+        regionStart = ((int (*)())__Unwind_GetRegionStart)(_Unwind_Context);
+        return regionStart;
       }
       if (uVar2 < 0x41) {
         if (uVar2 == 0x30) {
@@ -1507,7 +1507,7 @@ int _base_of_encoded_value(param_1, param_2)
   unsigned char textRelBase;
   bool bVar1;
   uint uVar2;
-  unsigned char uVar3;
+  unsigned char regionStart;
   
   if (param_1 != 0xff) {
     uVar2 = param_1 & 0x70;
@@ -1523,8 +1523,8 @@ int _base_of_encoded_value(param_1, param_2)
     }
     else {
       if (uVar2 == 0x40) {
-        uVar3 = ((int (*)())__Unwind_GetRegionStart)(param_2);
-        return uVar3;
+        regionStart = ((int (*)())__Unwind_GetRegionStart)(param_2);
+        return regionStart;
       }
       if (uVar2 < 0x41) {
         if (uVar2 == 0x30) {

@@ -1190,6 +1190,7 @@ int _ReadToken(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
+  undefined4 byteValue;
   int loopIndex2;
   uint uVar1;
   int iVar2;
@@ -1211,16 +1212,16 @@ int _ReadToken(param_1, param_2)
   if (iVar2 == 0x10e) {
 LAB_97b8a810:
     loopIndex = 0;
-    uVar3 = ((int (*)())_lReadByte)(param_1);
-    iVar4 = (int)(char)uVar3;
+    byteValue = ((int (*)())_lReadByte)(param_1);
+    iVar4 = (int)(char)byteValue;
     uVar1 = iVar4 - 0x61;
     while (((((uVar1 & 0xff) < 0x1a || (iVar4 - 0x41U < 0x1a)) || (iVar4 - 0x30U < 10)) ||
            (iVar4 == 0x5f))) {
       if (loopIndex < 0x80) {
         local_2c0[loopIndex] = (char)iVar4;
-        uVar3 = ((int (*)())_lReadByte)(param_1);
+        byteValue = ((int (*)())_lReadByte)(param_1);
         loopIndex = loopIndex + 1;
-        iVar4 = (int)(char)uVar3;
+        iVar4 = (int)(char)byteValue;
         uVar1 = iVar4 - 0x61;
       }
     }
@@ -1246,16 +1247,16 @@ LAB_97b8aac8:
         return iVar2;
       }
       loopIndex = 0;
-      uVar3 = ((int (*)())_lReadByte)(param_1);
-      iVar4 = (int)(char)uVar3;
+      byteValue = ((int (*)())_lReadByte)(param_1);
+      iVar4 = (int)(char)byteValue;
       uVar1 = iVar4 - 0x30;
       while (((((uVar1 & 0xff) < 10 || (iVar4 == 0x65)) ||
               ((iVar4 == 0x45 || ((iVar4 == 0x2e || (iVar4 == 0x2b)))))) || (iVar4 == 0x2d))) {
         if (loopIndex < 0x80) {
           local_2c0[loopIndex] = (char)iVar4;
-          uVar3 = ((int (*)())_lReadByte)(param_1);
+          byteValue = ((int (*)())_lReadByte)(param_1);
           loopIndex = loopIndex + 1;
-          iVar4 = (int)(char)uVar3;
+          iVar4 = (int)(char)byteValue;
           uVar1 = iVar4 - 0x30;
         }
       }
@@ -1273,10 +1274,10 @@ LAB_97b8aac8:
       loopIndex2 = 0;
       pcVar5 = local_230;
       while( true ) {
-        uVar3 = ((int (*)())_lReadByte)(param_1);
-        if ((char)uVar3 == '\0') break;
+        byteValue = ((int (*)())_lReadByte)(param_1);
+        if ((char)byteValue == '\0') break;
         if (loopIndex2 < 0x200) {
-          *pcVar5 = (char)uVar3;
+          *pcVar5 = (char)byteValue;
           loopIndex2 = loopIndex2 + 1;
           pcVar5 = pcVar5 + 1;
         }
@@ -1296,15 +1297,15 @@ LAB_97b8aac8:
       return iVar2;
     }
     loopIndex = 0;
-    uVar3 = ((int (*)())_lReadByte)(param_1);
-    iVar4 = (int)(char)uVar3;
+    byteValue = ((int (*)())_lReadByte)(param_1);
+    iVar4 = (int)(char)byteValue;
     uVar1 = iVar4 - 0x30;
     while ((uVar1 & 0xff) < 10) {
       if (loopIndex < 0x80) {
         local_2c0[loopIndex] = (char)iVar4;
-        uVar3 = ((int (*)())_lReadByte)(param_1);
+        byteValue = ((int (*)())_lReadByte)(param_1);
         loopIndex = loopIndex + 1;
-        iVar4 = (int)(char)uVar3;
+        iVar4 = (int)(char)byteValue;
         uVar1 = iVar4 - 0x30;
       }
     }
@@ -1645,7 +1646,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   int language;
   int *symbolTable;
 {
-  int iVar1;
+  int atomicStore;
   uint uVar2;
   uint uVar3;
   int iVar4;
@@ -1875,8 +1876,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -1950,8 +1951,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2025,8 +2026,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2103,8 +2104,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2179,8 +2180,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2255,8 +2256,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2329,8 +2330,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     do {
       iVar4 = *symbol;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
-        *symbol = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar4 + -1,0,symbol);
+        *symbol = atomicStore;
         bVar17 = 2;
       }
     } while (!(bool)(bVar17 >> 1 & 1));
@@ -2518,7 +2519,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
   int *symbolTable;
   unsigned char * builtInResource;
 {
-  int iVar1;
+  int atomicStore;
   char *pcVar2;
   void *pvVar3;
   uint uVar4;
@@ -2600,8 +2601,8 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
     do {
       iVar8 = *piVar6;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar8 + -1,0,piVar6);
-        *piVar6 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar8 + -1,0,piVar6);
+        *piVar6 = atomicStore;
         bVar10 = 2;
       }
     } while (!(bool)(bVar10 >> 1 & 1));
@@ -3259,7 +3260,7 @@ int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5, param_
   undefined4 param_6;
   uint param_7;
 {
-  undefined *puVar1;
+  undefined *atomicStore;
   bool bVar2;
   bool bVar3;
   bool bVar4;
@@ -3327,8 +3328,8 @@ int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5, param_
     do {
       puVar8 = *ppuVar6;
       if (in_RESERVE != '\0') {
-        puVar1 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar6);
-        *ppuVar6 = puVar1;
+        atomicStore = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar6);
+        *ppuVar6 = atomicStore;
         bVar15 = 2;
       }
     } while (!(bool)(bVar15 >> 1 & 1));
@@ -3700,7 +3701,7 @@ int TIntermediate__addConversion(this, param_2, param_3, param_4)
   unsigned char * param_3;
   int *param_4;
 {
-  undefined *puVar1;
+  undefined *atomicStore;
   bool bVar2;
   undefined **ppuVar3;
   undefined *puVar4;
@@ -4022,8 +4023,8 @@ override_jmp_97b8ea8c_case_0:
     do {
       puVar4 = *ppuVar3;
       if (in_RESERVE != '\0') {
-        puVar1 = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar3);
-        *ppuVar3 = puVar1;
+        atomicStore = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar3);
+        *ppuVar3 = atomicStore;
         bVar20 = 2;
       }
     } while (!(bool)(bVar20 >> 1 & 1));
@@ -4600,6 +4601,7 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
   unsigned char * param_2;
   int param_3;
 {
+  int atomicStore;
   undefined *puVar1;
   uint uVar2;
   int *piVar3;
@@ -4675,8 +4677,8 @@ int TIntermediate__addSwizzle(this, param_2, param_3)
   a0[0x13] = 0;
   do {
     if (in_RESERVE != '\0') {
-      iVar4 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar4;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));

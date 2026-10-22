@@ -65,7 +65,7 @@ int TIntermUnary__getOperand(this)
 int __ZN16TIntermAggregateD1Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -89,8 +89,8 @@ int __ZN16TIntermAggregateD1Ev(this)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -107,7 +107,7 @@ int __ZN16TIntermAggregateD1Ev(this)
 int __ZN16TIntermAggregateD0Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -131,8 +131,8 @@ int __ZN16TIntermAggregateD0Ev(this)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -354,7 +354,7 @@ int __ZN20TIntermConstantUnionD0Ev(this)
 int __ZN13TIntermSymbolD1Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -369,8 +369,8 @@ int __ZN13TIntermSymbolD1Ev(this)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -387,7 +387,7 @@ int __ZN13TIntermSymbolD1Ev(this)
 int __ZN13TIntermSymbolD0Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -402,8 +402,8 @@ int __ZN13TIntermSymbolD0Ev(this)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -559,7 +559,7 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(param_
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int atomicStore;
   int iVar2;
   int *piVar3;
   uint uVar4;
@@ -574,8 +574,8 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(param_
   piVar3 = (int *)(DAT_a7b7ba14 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -843,7 +843,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm(this, param_2)
   void *this;
   ulong param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -870,8 +870,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm(this, param_2)
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -915,7 +915,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
   char *param_4;
   char *param_5;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * psVar4;
@@ -934,8 +934,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1130,7 +1130,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm(this, param_2, 
   ulong param_3;
   ulong param_4;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   void *pvVar4;
@@ -1174,8 +1174,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm(this, param_2, 
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1224,6 +1224,7 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
                    *this,undefined4 *param_2,undefined4 *param_3)
 
 {
+  undefined4 atomicStore;
   undefined *puVar1;
   int iVar2;
   int iVar3;
@@ -1261,8 +1262,8 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
         if (pcVar6 == (char *)0x0) {
           do {
             if (in_RESERVE != '\0') {
-              uVar4 = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
-              *(undefined4 *)puVar1 = uVar4;
+              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
+              *(undefined4 *)puVar1 = atomicStore;
               bVar13 = 2;
             }
           } while (!(bool)(bVar13 >> 1 & 1));
@@ -1270,8 +1271,8 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
         else {
           do {
             if (in_RESERVE != '\0') {
-              uVar4 = storeWordConditionalIndexed(*(int *)puVar1 + 1,0,puVar1);
-              *(undefined4 *)puVar1 = uVar4;
+              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + 1,0,puVar1);
+              *(undefined4 *)puVar1 = atomicStore;
               bVar13 = 2;
             }
           } while (!(bool)(bVar13 >> 1 & 1));
@@ -1381,7 +1382,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
                 *this, unsigned char *param_2)
 
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -1400,8 +1401,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar5 = 2;
         }
       } while (!(bool)(bVar5 >> 1 & 1));
@@ -1420,6 +1421,7 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
   undefined4 *param_2;
   undefined4 *param_3;
 {
+  undefined4 atomicStore;
   undefined *puVar1;
   int iVar2;
   undefined4 *puVar3;
@@ -1451,8 +1453,8 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
         if (pcVar5 == (char *)0x0) {
           do {
             if (in_RESERVE != '\0') {
-              uVar8 = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
-              *(undefined4 *)puVar1 = uVar8;
+              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
+              *(undefined4 *)puVar1 = atomicStore;
               bVar10 = 2;
             }
           } while (!(bool)(bVar10 >> 1 & 1));
@@ -1460,8 +1462,8 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
         else {
           do {
             if (in_RESERVE != '\0') {
-              uVar8 = storeWordConditionalIndexed(*(int *)puVar1 + 1,0,puVar1);
-              *(undefined4 *)puVar1 = uVar8;
+              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + 1,0,puVar1);
+              *(undefined4 *)puVar1 = atomicStore;
               bVar10 = 2;
             }
           } while (!(bool)(bVar10 >> 1 & 1));

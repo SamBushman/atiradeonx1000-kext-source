@@ -321,7 +321,7 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   undefined2 uVar1;
   undefined2 uVar2;
   int iVar3;
-  uint uVar4;
+  uint directIndex;
   unsigned char * pTVar5;
   char *pcVar6;
   undefined4 uVar7;
@@ -379,9 +379,9 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   *(undefined4 *)((int)this + 0x54) = uVar11;
   if (iVar3 != 0) {
     do {
-      uVar4 = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,uVar14);
+      directIndex = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,uVar14);
       uVar14 = uVar14 + 1;
-      ((int (*)())ParseSymbol__AddDirectIndex)(this,uVar4);
+      ((int (*)())ParseSymbol__AddDirectIndex)(this,directIndex);
     } while (uVar14 < *(uint *)(parseSymbol + 0x24));
   }
   return;
@@ -395,7 +395,7 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   undefined2 uVar1;
   undefined2 uVar2;
   int iVar3;
-  uint uVar4;
+  uint directIndex;
   unsigned char * pTVar5;
   char *pcVar6;
   undefined4 uVar7;
@@ -453,9 +453,9 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   *(undefined4 *)((int)this + 0x54) = uVar11;
   if (iVar3 != 0) {
     do {
-      uVar4 = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,uVar14);
+      directIndex = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,uVar14);
       uVar14 = uVar14 + 1;
-      ((int (*)())ParseSymbol__AddDirectIndex)(this,uVar4);
+      ((int (*)())ParseSymbol__AddDirectIndex)(this,directIndex);
     } while (uVar14 < *(uint *)(parseSymbol + 0x24));
   }
   return;
@@ -469,7 +469,7 @@ int __ZN11ParseSymbolC4ERKS_(this, param_2)
   undefined2 uVar1;
   undefined2 uVar2;
   int iVar3;
-  uint uVar4;
+  uint directIndex;
   unsigned char * pTVar5;
   char *pcVar6;
   undefined4 uVar7;
@@ -527,9 +527,9 @@ int __ZN11ParseSymbolC4ERKS_(this, param_2)
   *(undefined4 *)((int)this + 0x54) = uVar11;
   if (iVar3 != 0) {
     do {
-      uVar4 = ((int (*)())ParseSymbol__GetDirectIndex)(param_2,uVar14);
+      directIndex = ((int (*)())ParseSymbol__GetDirectIndex)(param_2,uVar14);
       uVar14 = uVar14 + 1;
-      ((int (*)())ParseSymbol__AddDirectIndex)(this,uVar4);
+      ((int (*)())ParseSymbol__AddDirectIndex)(this,directIndex);
     } while (uVar14 < *(uint *)(param_2 + 0x24));
   }
   return;
@@ -1304,7 +1304,7 @@ int __ZN12ParseOperandC2ERKS_(this, parseOperand)
   undefined2 uVar1;
   int iVar2;
   undefined4 uVar3;
-  uint uVar4;
+  uint directIndex;
   uchar swizzle;
   undefined4 uVar6;
   uint loopIndex;
@@ -1326,8 +1326,8 @@ int __ZN12ParseOperandC2ERKS_(this, parseOperand)
   *(undefined4 *)((int)this + 0x10) = 0;
   if (iVar2 != 0) {
     do {
-      uVar4 = ((int (*)())ParseOperand__GetDirectIndex)(parseOperand,loopIndex);
-      ((int (*)())ParseOperand__AddDirectIndex)(this,uVar4);
+      directIndex = ((int (*)())ParseOperand__GetDirectIndex)(parseOperand,loopIndex);
+      ((int (*)())ParseOperand__AddDirectIndex)(this,directIndex);
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(uint *)(parseOperand + 0x20));
   }
@@ -1361,7 +1361,7 @@ int __ZN12ParseOperandC4ERKS_(this, param_2)
   undefined2 uVar1;
   int iVar2;
   undefined4 uVar3;
-  uint uVar4;
+  uint directIndex;
   uchar swizzle;
   undefined4 uVar6;
   uint loopIndex;
@@ -1383,8 +1383,8 @@ int __ZN12ParseOperandC4ERKS_(this, param_2)
   *(undefined4 *)((int)this + 0x10) = 0;
   if (iVar2 != 0) {
     do {
-      uVar4 = ((int (*)())ParseOperand__GetDirectIndex)(param_2,loopIndex);
-      ((int (*)())ParseOperand__AddDirectIndex)(this,uVar4);
+      directIndex = ((int (*)())ParseOperand__GetDirectIndex)(param_2,loopIndex);
+      ((int (*)())ParseOperand__AddDirectIndex)(this,directIndex);
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(uint *)(param_2 + 0x20));
   }
@@ -1503,27 +1503,31 @@ int __ZeqRK12ParseOperandS1_(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
+  int directIndex2;
+  int isMatrix2;
+  int directIndex;
+  int isMatrix;
   int swizzle2;
   int swizzle;
-  int iVar1;
-  int iVar2;
+  int baseSize;
+  int baseSize2;
   uint loopIndex;
   
   if ((*(int *)param_1 == *(int *)param_2) && (*(int *)(param_1 + 4) == *(int *)(param_2 + 4))) {
-    iVar1 = ((int (*)())ParseOperand__GetBaseSize)(param_1);
-    iVar2 = ((int (*)())ParseOperand__GetBaseSize)(param_2);
-    if (iVar1 == iVar2) {
-      iVar1 = ((int (*)())ParseOperand__IsMatrix)(param_1);
-      iVar2 = ((int (*)())ParseOperand__IsMatrix)(param_2);
-      if ((((iVar1 == iVar2) && (*(int *)(param_1 + 0x28) == *(int *)(param_2 + 0x28))) &&
+    baseSize = ((int (*)())ParseOperand__GetBaseSize)(param_1);
+    baseSize2 = ((int (*)())ParseOperand__GetBaseSize)(param_2);
+    if (baseSize == baseSize2) {
+      isMatrix = ((int (*)())ParseOperand__IsMatrix)(param_1);
+      isMatrix2 = ((int (*)())ParseOperand__IsMatrix)(param_2);
+      if ((((isMatrix == isMatrix2) && (*(int *)(param_1 + 0x28) == *(int *)(param_2 + 0x28))) &&
           (*(int *)(param_1 + 0x2c) == *(int *)(param_2 + 0x2c))) &&
          (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) {
         loopIndex = 0;
         if (*(int *)(param_1 + 0x20) != 0) {
           do {
-            iVar1 = ((int (*)())ParseOperand__GetDirectIndex)(param_1,loopIndex);
-            iVar2 = ((int (*)())ParseOperand__GetDirectIndex)(param_2,loopIndex);
-            if (iVar1 != iVar2) {
+            directIndex = ((int (*)())ParseOperand__GetDirectIndex)(param_1,loopIndex);
+            directIndex2 = ((int (*)())ParseOperand__GetDirectIndex)(param_2,loopIndex);
+            if (directIndex != directIndex2) {
               return 0;
             }
             loopIndex = 0;
@@ -1647,6 +1651,8 @@ int ParseOperand__GetAsDestVar(param_1, param_2, param_3)
   unsigned char * param_2;
   int param_3;
 {
+  uint isMatrix;
+  int isMatrix2;
   uint loopIndex;
   short scalerWidthForType;
   int directIndex;
@@ -1664,11 +1670,11 @@ int ParseOperand__GetAsDestVar(param_1, param_2, param_3)
   uVar5 = 0;
   scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(*(int *)param_2 + 0x2c));
   *param_1 = (scalerWidthForType + -1) * 0x400 & 0xc00U | *param_1 & 0xfffff04f | 0x6c;
-  uVar1 = ((int (*)())ParseOperand__IsMatrix)(param_2);
-  *param_1 = (uVar1 & 1) << 0xc | *param_1 & 0xffffefff;
-  iVar2 = ((int (*)())ParseOperand__IsMatrix)(param_2);
+  isMatrix = ((int (*)())ParseOperand__IsMatrix)(param_2);
+  *param_1 = (isMatrix & 1) << 0xc | *param_1 & 0xffffefff;
+  isMatrix2 = ((int (*)())ParseOperand__IsMatrix)(param_2);
   sVar3 = 0;
-  if (iVar2 == 0) {
+  if (isMatrix2 == 0) {
 LAB_97bbb868:
     sVar4 = sVar3;
     uVar1 = *(uint *)(param_2 + 0x20);
@@ -1789,6 +1795,8 @@ int ParseOperand__GetAsSourceVar(param_1, param_2, param_3)
   unsigned char * param_2;
   int param_3;
 {
+  int logicalSize;
+  int isMatrix;
   uint loopIndex;
   uint swizzle;
   byte bVar1;
@@ -1838,9 +1846,9 @@ LAB_97bbbb6c:
       loopIndex = loopIndex + 1;
     } while (loopIndex < uVar2);
   }
-  iVar3 = ((int (*)())ParseOperand__IsMatrix)(param_2);
+  isMatrix = ((int (*)())ParseOperand__IsMatrix)(param_2);
   uVar7 = 1;
-  if (iVar3 != 0) {
+  if (isMatrix != 0) {
     uVar7 = uVar4;
   }
   if (uVar4 == 1) {
@@ -1905,9 +1913,9 @@ LAB_97bbbbc4:
   *(short *)((int)param_1 + 6) = *(short *)(**(int **)param_2 + 0x12) + sVar6;
 LAB_97bbbcb0:
   *param_1 = (uint)(uVar7 != 1) * 0x4000 | *param_1 & 0xffffbfff;
-  iVar3 = ((int (*)())ParseOperand__GetLogicalSize)(param_2);
+  logicalSize = ((int (*)())ParseOperand__GetLogicalSize)(param_2);
   uVar8 = *param_1;
-  uVar5 = (iVar3 + -1) * 0x1000 & 0x3000;
+  uVar5 = (logicalSize + -1) * 0x1000 & 0x3000;
   *param_1 = uVar5 | uVar8 & 0xffffcfff;
   uVar2 = (*(uint *)(param_2 + 0x28) & 1) << 0x1b;
   *param_1 = uVar2 | uVar5 | uVar8 & 0xf7ffcfff;

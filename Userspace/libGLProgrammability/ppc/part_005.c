@@ -778,6 +778,7 @@ int TParseContext__arraySetMaxSize(this, param_2, param_3, param_4, param_5, par
   int param_5;
   int param_6;
 {
+  int atomicStore;
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
@@ -918,8 +919,8 @@ LAB_97b9cf8c:
       do {
         iVar5 = *piVar7;
         if (in_RESERVE != '\0') {
-          iVar3 = storeWordConditionalIndexed(iVar5 + -1,0,piVar7);
-          *piVar7 = iVar3;
+          atomicStore = storeWordConditionalIndexed(iVar5 + -1,0,piVar7);
+          *piVar7 = atomicStore;
           bVar9 = 2;
         }
       } while (!(bool)(bVar9 >> 1 & 1));
@@ -949,7 +950,7 @@ int TParseContext__nonInitErrorCheck(this, param_2, param_3, param_4)
   unsigned char * param_4;
 {
   byte bVar1;
-  int iVar2;
+  int atomicStore;
   uint uVar3;
   uint uVar4;
   uint uVar5;
@@ -1111,8 +1112,8 @@ int TParseContext__nonInitErrorCheck(this, param_2, param_3, param_4)
   do {
     iVar13 = *piVar14;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar13 + -1,0,piVar14);
-      *piVar14 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar13 + -1,0,piVar14);
+      *piVar14 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1189,8 +1190,9 @@ int TParseContext__extensionErrorCheck(this, param_2, param_3)
   int param_2;
   char *param_3;
 {
+  int atomicStore;
   bool bVar1;
-  int iVar2;
+  int atomicStore2;
   char *pcVar3;
   int *piVar4;
   int iVar5;
@@ -1296,8 +1298,8 @@ LAB_97b9d574:
   do {
     iVar5 = *piVar4;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar5 + -1,0,piVar4);
-      *piVar4 = iVar2;
+      atomicStore2 = storeWordConditionalIndexed(iVar5 + -1,0,piVar4);
+      *piVar4 = atomicStore2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -1336,8 +1338,8 @@ LAB_97b9d574:
     do {
       iVar10 = *piVar4;
       if (in_RESERVE != '\0') {
-        iVar5 = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
-        *piVar4 = iVar5;
+        atomicStore = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
+        *piVar4 = atomicStore;
         bVar12 = 2;
       }
     } while (!(bool)(bVar12 >> 1 & 1));
@@ -1352,8 +1354,8 @@ LAB_97b9d574:
     do {
       iVar10 = *piVar4;
       if (in_RESERVE != '\0') {
-        iVar5 = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
-        *piVar4 = iVar5;
+        atomicStore = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
+        *piVar4 = atomicStore;
         bVar12 = 2;
       }
     } while (!(bool)(bVar12 >> 1 & 1));
@@ -1366,8 +1368,8 @@ LAB_97b9d574:
     do {
       iVar10 = *piVar4;
       if (in_RESERVE != '\0') {
-        iVar5 = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
-        *piVar4 = iVar5;
+        atomicStore = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
+        *piVar4 = atomicStore;
         bVar12 = 2;
       }
     } while (!(bool)(bVar12 >> 1 & 1));
@@ -1380,8 +1382,8 @@ LAB_97b9d574:
     do {
       iVar10 = *piVar4;
       if (in_RESERVE != '\0') {
-        iVar5 = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
-        *piVar4 = iVar5;
+        atomicStore = storeWordConditionalIndexed(iVar10 + -1,0,piVar4);
+        *piVar4 = atomicStore;
         bVar12 = 2;
       }
     } while (!(bool)(bVar12 >> 1 & 1));
@@ -1443,8 +1445,8 @@ LAB_97b9d98c:
   do {
     iVar5 = *piVar4;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar5 + -1,0,piVar4);
-      *piVar4 = iVar2;
+      atomicStore2 = storeWordConditionalIndexed(iVar5 + -1,0,piVar4);
+      *piVar4 = atomicStore2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -2457,7 +2459,7 @@ int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, 
   undefined4 param_5;
   undefined4 param_6;
 {
-  undefined *puVar1;
+  undefined *atomicStore;
   undefined **ppuVar2;
   int iVar3;
   undefined *puVar4;
@@ -2506,8 +2508,8 @@ int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, 
       do {
         puVar4 = *ppuVar2;
         if (in_RESERVE != '\0') {
-          puVar1 = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar2);
-          *ppuVar2 = puVar1;
+          atomicStore = (undefined *)storeWordConditionalIndexed(puVar4 + -1,0,ppuVar2);
+          *ppuVar2 = atomicStore;
           bVar12 = 2;
         }
       } while (!(bool)(bVar12 >> 1 & 1));
@@ -2835,6 +2837,8 @@ LAB_97b9fc60:
 int TParseContext__initializeExtensionBehavior(this)
   unsigned char * this;
 {
+  int atomicStore2;
+  int atomicStore;
   int *piVar1;
   int iVar2;
   int iVar3;
@@ -2893,8 +2897,8 @@ int TParseContext__initializeExtensionBehavior(this)
   do {
     iVar3 = *piVar1;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar1);
-      *piVar1 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar1);
+      *piVar1 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -2911,8 +2915,8 @@ LAB_97b9fe04:
   do {
     iVar2 = *piVar1;
     if (in_RESERVE != '\0') {
-      iVar3 = storeWordConditionalIndexed(iVar2 + -1,0,piVar1);
-      *piVar1 = iVar3;
+      atomicStore2 = storeWordConditionalIndexed(iVar2 + -1,0,piVar1);
+      *piVar1 = atomicStore2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3538,7 +3542,8 @@ int GetResources()
 /* _ShInitialize @ 0x97ba0818 (360 bytes) */
 int _ShInitialize()
 {
-  int iVar1;
+  int atomicStore;
+  int atomicStore2;
   int *piVar2;
   int iVar3;
   unsigned char * pTVar4;
@@ -3557,8 +3562,8 @@ int _ShInitialize()
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar3 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar3;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3566,8 +3571,8 @@ int _ShInitialize()
   local_3c = 4;
   do {
     if (in_RESERVE != '\0') {
-      iVar3 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar3;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3595,8 +3600,8 @@ int _ShInitialize()
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3607,8 +3612,8 @@ int _ShInitialize()
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3695,9 +3700,10 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   undefined4 param_5;
 {
+  int atomicStore2;
   int *stringSizeArray;
   int numStrings;
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   unsigned char * this;
@@ -3777,8 +3783,8 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4, param_5)
   local_e4[3] = local_e4;
   do {
     if (in_RESERVE != '\0') {
-      iVar3 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar3;
+      atomicStore2 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -3840,8 +3846,8 @@ LAB_97ba0e34:
       do {
         iVar3 = *piVar2;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-          *piVar2 = iVar1;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = atomicStore;
           bVar10 = 2;
         }
       } while (!(bool)(bVar10 >> 1 & 1));
@@ -3860,8 +3866,8 @@ LAB_97ba0fe4:
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore;
         bVar10 = 2;
       }
     } while (!(bool)(bVar10 >> 1 & 1));
@@ -3896,8 +3902,8 @@ LAB_97ba0fe4:
     do {
       iVar3 = *piVar2;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+        *piVar2 = atomicStore;
         bVar10 = 2;
       }
     } while (!(bool)(bVar10 >> 1 & 1));
@@ -3941,7 +3947,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
   uint param_5;
 {
   bool bVar1;
-  int iVar2;
+  int atomicStore;
   int iVar3;
   int *piVar4;
   uint uVar5;
@@ -4194,8 +4200,8 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
       do {
         iVar3 = *piVar6;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar6);
-          *piVar6 = iVar2;
+          atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar6);
+          *piVar6 = atomicStore;
           bVar15 = 2;
         }
       } while (!(bool)(bVar15 >> 1 & 1));
@@ -4240,8 +4246,8 @@ LAB_97ba18d4:
   do {
     iVar3 = *piVar6;
     if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar3 + -1,0,piVar6);
-      *piVar6 = iVar2;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar6);
+      *piVar6 = atomicStore;
       bVar15 = 2;
     }
   } while (!(bool)(bVar15 >> 1 & 1));

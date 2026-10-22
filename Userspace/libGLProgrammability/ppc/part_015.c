@@ -427,6 +427,7 @@ int _PPCRuntimeCompilerLoadSourceNO(compiler, param_2, param_3, param_4, param_5
   undefined4 param_11;
   int param_12;
 {
+  int chunkIndex;
   uint loopIndex;
   int iVar1;
   undefined *puVar2;
@@ -483,8 +484,8 @@ int _PPCRuntimeCompilerLoadSourceNO(compiler, param_2, param_3, param_4, param_5
     uVar3 = *(undefined4 *)(compiler + 0xe30);
     puVar2 = &_glpNegateSourceCRTC;
   }
-  iVar4 = _glpRTCAddAChunk_97bd7cbc(puVar2,uVar3);
-  *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + iVar4 * 4;
+  chunkIndex = _glpRTCAddAChunk_97bd7cbc(puVar2,uVar3);
+  *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkIndex * 4;
 LAB_97bdac4c:
   loopIndex = 0;
   do {
@@ -816,10 +817,11 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
   undefined4 param_7;
   undefined4 param_8;
 {
+  int chunkIndex;
   bool bVar1;
   bool bVar2;
   undefined4 uVar3;
-  uint uVar4;
+  uint framebufferFormat;
   undefined4 *puVar5;
   int iVar6;
   
@@ -845,10 +847,10 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
     *(undefined4 *)(compiler + 0xe30) = uVar3;
   }
   if ((((*(uint *)(*(int *)(iVar6 + 0xd80) + 0x3c) & 8) != 0) || (bVar2)) || (bVar1)) {
-    uVar4 = _PPEmulatorFramebufferFormat(iVar6);
-    if ((uVar4 & 0x8000) == 0) {
-      uVar4 = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
-      if ((uVar4 & 0x8000000) != 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(iVar6);
+    if ((framebufferFormat & 0x8000) == 0) {
+      framebufferFormat = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
+      if ((framebufferFormat & 0x8000000) != 0) {
         puVar5 = *(undefined4 **)(compiler + 0xe30);
         *puVar5 = 0x7c4030ce;
         *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
@@ -874,10 +876,10 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
     uVar3 = ((int (*)())_PPCRasterOpMachine_BufferMaskRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
     *(undefined4 *)(compiler + 0xe30) = uVar3;
   }
-  uVar4 = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
-  if ((uVar4 & 0x8000) == 0) {
-    uVar4 = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
-    if ((uVar4 & 0x8000000) == 0) {
+  framebufferFormat = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
+  if ((framebufferFormat & 0x8000) == 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
+    if ((framebufferFormat & 0x8000000) == 0) {
       return;
     }
     puVar5 = *(undefined4 **)(compiler + 0xe30);
@@ -888,9 +890,9 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
     *puVar5 = 0x10739c84;
     puVar5 = puVar5 + 1;
     *(undefined4 **)(compiler + 0xe30) = puVar5;
-    iVar6 = _glpRTCAddAChunk_97bd7cbc(&_glpOpConvertRGBAFFFFToARGB8888,puVar5);
-    puVar5 = (undefined4 *)(*(int *)(compiler + 0xe30) + iVar6 * 4);
-    *(undefined4 *)(*(int *)(compiler + 0xe30) + iVar6 * 4) = 0x7c60318e;
+    chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpConvertRGBAFFFFToARGB8888,puVar5);
+    puVar5 = (undefined4 *)(*(int *)(compiler + 0xe30) + chunkIndex * 4);
+    *(undefined4 *)(*(int *)(compiler + 0xe30) + chunkIndex * 4) = 0x7c60318e;
   }
   *(undefined4 **)(compiler + 0xe30) = puVar5 + 1;
   return;
@@ -900,6 +902,7 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
 int _PPCRuntimeCompilerWritePrologNO(compiler)
   int compiler;
 {
+  int chunkIndex;
   uint *puVar1;
   undefined4 *puVar2;
   uint uVar3;
@@ -990,10 +993,10 @@ int _PPCRuntimeCompilerWritePrologNO(compiler)
     puVar2[1] = 0x81a30da0;
     *(undefined4 **)(compiler + 0xe30) = puVar2 + 2;
   }
-  iVar7 = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroRTC,*(undefined4 *)(compiler + 0xe30));
+  chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroRTC,*(undefined4 *)(compiler + 0xe30));
   iVar5 = *(int *)(compiler + 0xe30);
-  *(undefined4 *)(iVar5 + iVar7 * 4) = 0x7c8903a6;
-  iVar5 = iVar5 + iVar7 * 4;
+  *(undefined4 *)(iVar5 + chunkIndex * 4) = 0x7c8903a6;
+  iVar5 = iVar5 + chunkIndex * 4;
   iVar7 = *(int *)(compiler + 0xe24);
   *(int *)(compiler + 0xe30) = iVar5 + 4;
   if ((*(int *)(iVar7 + 0x38) != 0x8804) && (*(int *)(iVar7 + 0x38) != 0x8b30)) {
@@ -1076,6 +1079,8 @@ int _PPCRuntimeCompilerWriteEpilogNO(compiler)
 int _PPCRuntimeCompilerWritePrologAV(compiler)
   int compiler;
 {
+  uint framebufferFormat;
+  int chunkIndex;
   undefined4 *puVar1;
   uint *puVar2;
   undefined4 *puVar3;
@@ -1150,14 +1155,14 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
     *puVar1 = 0x81430d98;
     *(undefined4 **)(compiler + 0xe30) = puVar1 + 1;
   }
-  iVar7 = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroAVRTC,*(undefined4 *)(compiler + 0xe30));
+  chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroAVRTC,*(undefined4 *)(compiler + 0xe30));
   iVar5 = *(int *)(compiler + 0xe30);
   iVar8 = *(int *)(compiler + 0xe24);
-  iVar6 = iVar5 + iVar7 * 4;
+  iVar6 = iVar5 + chunkIndex * 4;
   *(int *)(compiler + 0xe30) = iVar6;
   if (((*(int *)(iVar8 + 0x38) == 0x8804) || (*(int *)(iVar8 + 0x38) == 0x8b30)) &&
      ((*(uint *)(iVar8 + 0x34) & 0x1004) != 0)) {
-    *(undefined4 *)(iVar5 + iVar7 * 4) = 0x81830da4;
+    *(undefined4 *)(iVar5 + chunkIndex * 4) = 0x81830da4;
     *(undefined4 *)(iVar6 + 4) = 0x81a30da0;
     iVar8 = *(int *)(compiler + 0xe24);
     *(int *)(compiler + 0xe30) = iVar6 + 8;
@@ -1178,12 +1183,12 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
   *puVar1 = 0x7c8903a6;
   puVar1 = puVar1 + 1;
   *(undefined4 **)(compiler + 0xe30) = puVar1;
-  iVar7 = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroRTC,puVar1);
+  chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroRTC,puVar1);
   iVar8 = *(int *)(compiler + 0xe24);
-  *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + iVar7 * 4;
+  *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkIndex * 4;
   if ((*(int *)(iVar8 + 0x38) == 0x8804) || (*(int *)(iVar8 + 0x38) == 0x8b30)) {
-    uVar4 = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
-    if ((uVar4 & 0x8000) != 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
+    if ((framebufferFormat & 0x8000) != 0) {
       puVar1 = *(undefined4 **)(compiler + 0xe30);
       *puVar1 = 0x39e00040;
       puVar1[1] = 0x7e4378ce;
@@ -1223,6 +1228,7 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
 int _PPCRuntimeCompilerWriteEpilogAV(compiler)
   int compiler;
 {
+  int chunkIndex;
   int iVar1;
   uint *puVar2;
   uint uVar3;
@@ -1256,8 +1262,8 @@ int _PPCRuntimeCompilerWriteEpilogAV(compiler)
   *puVar4 = 0x7ca32b78;
   puVar4 = puVar4 + 1;
   *(undefined4 **)(compiler + 0xe30) = puVar4;
-  iVar1 = _glpRTCAddAChunk_97bd7cbc(&_glpEpilogAVRTC,puVar4);
-  *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + iVar1 * 4;
+  chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpEpilogAVRTC,puVar4);
+  *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkIndex * 4;
   return;
 }
 
@@ -1364,6 +1370,8 @@ int _PPCRuntimeCompilerLoop(compiler)
 int _PPCRuntimeCompilerCompileNO(compiler)
   int compiler;
 {
+  int chunkIndex;
+  int chunkIndex2;
   char cVar1;
   byte bVar2;
   ushort uVar3;
@@ -1514,11 +1522,11 @@ LAB_97bdc778:
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,uVar12,in_r5,in_r6,in_r7,in_r8,uVar14,in_r10,uVar10,uVar13,0,0);
             }
             if (uVar17 == 2) {
-              iVar9 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               iVar15 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar15 + iVar9 * 4) = 0xfd008090;
+              *(undefined4 *)(iVar15 + chunkIndex * 4) = 0xfd008090;
               iVar6 = iVar6 * 0x24 + *(int *)(compiler + 0xe28);
-              *(int *)(compiler + 0xe30) = iVar15 + iVar9 * 4 + 4;
+              *(int *)(compiler + 0xe30) = iVar15 + chunkIndex * 4 + 4;
               in_r5 = *(undefined4 *)(iVar6 + 0x38);
               in_r6 = *(undefined4 *)(iVar6 + 0x3c);
               in_r7 = *(undefined4 *)(iVar6 + 0x40);
@@ -1532,20 +1540,20 @@ LAB_97bdc778:
               uVar17 = 0xfe200000;
             }
             else if (uVar17 == 3) {
-              iVar9 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               iVar15 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar15 + iVar9 * 4) = 0xfd008090;
-              *(int *)(compiler + 0xe30) = iVar15 + iVar9 * 4 + 4;
+              *(undefined4 *)(iVar15 + chunkIndex * 4) = 0xfd008090;
+              *(int *)(compiler + 0xe30) = iVar15 + chunkIndex * 4 + 4;
               iVar9 = iVar6 * 0x24 + *(int *)(compiler + 0xe28);
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(iVar9 + 0x34),*(undefined4 *)(iVar9 + 0x38),
                          *(undefined4 *)(iVar9 + 0x3c),*(undefined4 *)(iVar9 + 0x40),
                          *(undefined4 *)(iVar9 + 0x44),*(undefined4 *)(iVar9 + 0x48),
                          *(undefined4 *)(iVar9 + 0x4c),*(undefined4 *)(iVar9 + 0x50),
                          *(undefined4 *)(iVar9 + 0x54),1,1);
-              iVar15 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               iVar9 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar9 + iVar15 * 4) = 0xfe208090;
-              *(int *)(compiler + 0xe30) = iVar9 + iVar15 * 4 + 4;
+              *(undefined4 *)(iVar9 + chunkIndex2 * 4) = 0xfe208090;
+              *(int *)(compiler + 0xe30) = iVar9 + chunkIndex2 * 4 + 4;
               iVar6 = iVar6 * 0x24 + *(int *)(compiler + 0xe28);
               in_r5 = *(undefined4 *)(iVar6 + 0x38);
               in_r6 = *(undefined4 *)(iVar6 + 0x3c);
@@ -1562,30 +1570,30 @@ LAB_97bdc778:
             else {
               if (uVar17 != 4) goto LAB_97bdcb04;
               iVar6 = iVar6 * 0x24;
-              iVar9 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               iVar15 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar15 + iVar9 * 4) = 0xfd008090;
-              *(int *)(compiler + 0xe30) = iVar15 + iVar9 * 4 + 4;
+              *(undefined4 *)(iVar15 + chunkIndex * 4) = 0xfd008090;
+              *(int *)(compiler + 0xe30) = iVar15 + chunkIndex * 4 + 4;
               iVar9 = iVar6 + *(int *)(compiler + 0xe28);
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(iVar9 + 0x34),*(undefined4 *)(iVar9 + 0x38),
                          *(undefined4 *)(iVar9 + 0x3c),*(undefined4 *)(iVar9 + 0x40),
                          *(undefined4 *)(iVar9 + 0x44),*(undefined4 *)(iVar9 + 0x48),
                          *(undefined4 *)(iVar9 + 0x4c),*(undefined4 *)(iVar9 + 0x50),
                          *(undefined4 *)(iVar9 + 0x54),1,1);
-              iVar9 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               iVar15 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar15 + iVar9 * 4) = 0xfe208090;
-              *(int *)(compiler + 0xe30) = iVar15 + iVar9 * 4 + 4;
+              *(undefined4 *)(iVar15 + chunkIndex * 4) = 0xfe208090;
+              *(int *)(compiler + 0xe30) = iVar15 + chunkIndex * 4 + 4;
               iVar9 = iVar6 + *(int *)(compiler + 0xe28);
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(iVar9 + 0x34),*(undefined4 *)(iVar9 + 0x38),
                          *(undefined4 *)(iVar9 + 0x3c),*(undefined4 *)(iVar9 + 0x40),
                          *(undefined4 *)(iVar9 + 0x44),*(undefined4 *)(iVar9 + 0x48),
                          *(undefined4 *)(iVar9 + 0x4c),*(undefined4 *)(iVar9 + 0x50),
                          *(undefined4 *)(iVar9 + 0x54),2,1);
-              iVar15 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               iVar9 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar9 + iVar15 * 4) = 0xfe408090;
-              *(int *)(compiler + 0xe30) = iVar9 + iVar15 * 4 + 4;
+              *(undefined4 *)(iVar9 + chunkIndex2 * 4) = 0xfe408090;
+              *(int *)(compiler + 0xe30) = iVar9 + chunkIndex2 * 4 + 4;
               iVar6 = iVar6 + *(int *)(compiler + 0xe28);
               in_r5 = *(undefined4 *)(iVar6 + 0x38);
               in_r6 = *(undefined4 *)(iVar6 + 0x3c);
@@ -2208,6 +2216,8 @@ LAB_97bdd85c:
 int _PPCRuntimeCompilerCompileAV(compiler)
   int compiler;
 {
+  undefined8 chunkIndex2;
+  int chunkIndex;
   uint loopIndex;
   bool bVar1;
   char cVar2;
@@ -2442,11 +2452,11 @@ LAB_97bddea4:
                        *(undefined4 *)(iVar9 + 0x48),in_r10,*(undefined4 *)(iVar9 + 0x50),
                        *(undefined4 *)(iVar9 + 0x54),0,0);
             if (uVar20 == 2) {
-              iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp2AVRTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp2AVRTC,*(undefined4 *)(compiler + 0xe30));
               iVar17 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar17 + iVar21 * 4) = 0x10a5112c;
+              *(undefined4 *)(iVar17 + chunkIndex * 4) = 0x10a5112c;
               iVar9 = *(int *)(compiler + 0xe28);
-              *(int *)(compiler + 0xe30) = iVar17 + iVar21 * 4 + 4;
+              *(int *)(compiler + 0xe30) = iVar17 + chunkIndex * 4 + 4;
               in_r5 = *(undefined4 *)(iVar9 + 0x5c);
               in_r6 = *(undefined4 *)(iVar9 + 0x60);
               in_r7 = *(int *)(iVar9 + 100);
@@ -2454,33 +2464,33 @@ LAB_97bddea4:
               ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,*(undefined4 *)(iVar9 + 0x58),in_r5,in_r6,in_r7,in_r8,
                          *(undefined4 *)(iVar9 + 0x6c),*(undefined4 *)(iVar9 + 0x70),
                          *(undefined4 *)(iVar9 + 0x74),*(undefined4 *)(iVar9 + 0x78),1,1);
-              iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp2AVRTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp2AVRTC,*(undefined4 *)(compiler + 0xe30));
               in_r10 = *(int **)(compiler + 0xe30);
-              piVar10 = in_r10 + iVar21;
+              piVar10 = in_r10 + chunkIndex;
               iVar9 = 0x10a5132c;
 LAB_97bdeef0:
-              in_r10[iVar21] = iVar9;
+              in_r10[chunkIndex] = iVar9;
               piVar10[1] = 0x10452c84;
             }
             else {
               if (uVar20 == 3) {
-                iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp3AVRTC,*(undefined4 *)(compiler + 0xe30))
+                chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp3AVRTC,*(undefined4 *)(compiler + 0xe30))
                 ;
                 iVar17 = *(int *)(compiler + 0xe30);
-                *(undefined4 *)(iVar17 + iVar21 * 4) = 0x10a5112c;
+                *(undefined4 *)(iVar17 + chunkIndex * 4) = 0x10a5112c;
                 iVar9 = *(int *)(compiler + 0xe28);
-                *(int *)(compiler + 0xe30) = iVar17 + iVar21 * 4 + 4;
+                *(int *)(compiler + 0xe30) = iVar17 + chunkIndex * 4 + 4;
                 ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,*(undefined4 *)(iVar9 + 0x58),*(undefined4 *)(iVar9 + 0x5c),
                            *(undefined4 *)(iVar9 + 0x60),*(undefined4 *)(iVar9 + 100),
                            *(undefined4 *)(iVar9 + 0x68),*(undefined4 *)(iVar9 + 0x6c),
                            *(undefined4 *)(iVar9 + 0x70),*(undefined4 *)(iVar9 + 0x74),
                            *(undefined4 *)(iVar9 + 0x78),1,1);
-                iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp3AVRTC,*(undefined4 *)(compiler + 0xe30))
+                chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp3AVRTC,*(undefined4 *)(compiler + 0xe30))
                 ;
                 iVar9 = *(int *)(compiler + 0xe30);
-                *(undefined4 *)(iVar9 + iVar21 * 4) = 0x10a5112c;
+                *(undefined4 *)(iVar9 + chunkIndex * 4) = 0x10a5112c;
                 iVar17 = *(int *)(compiler + 0xe28);
-                *(int *)(compiler + 0xe30) = iVar9 + iVar21 * 4 + 4;
+                *(int *)(compiler + 0xe30) = iVar9 + chunkIndex * 4 + 4;
                 in_r5 = *(undefined4 *)(iVar17 + 0x5c);
                 in_r6 = *(undefined4 *)(iVar17 + 0x60);
                 in_r7 = *(int *)(iVar17 + 100);
@@ -2488,39 +2498,39 @@ LAB_97bdeef0:
                 ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,*(undefined4 *)(iVar17 + 0x58),in_r5,in_r6,in_r7,in_r8,
                            *(undefined4 *)(iVar17 + 0x6c),*(undefined4 *)(iVar17 + 0x70),
                            *(undefined4 *)(iVar17 + 0x74),*(undefined4 *)(iVar17 + 0x78),2,1);
-                iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp3AVRTC,*(undefined4 *)(compiler + 0xe30))
+                chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp3AVRTC,*(undefined4 *)(compiler + 0xe30))
                 ;
                 in_r10 = *(int **)(compiler + 0xe30);
-                piVar10 = in_r10 + iVar21;
+                piVar10 = in_r10 + chunkIndex;
                 iVar9 = 0x10a5122c;
                 goto LAB_97bdeef0;
               }
               if (uVar20 != 4) goto LAB_97bdde9c;
-              iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
               iVar17 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar17 + iVar21 * 4) = 0x10a5112c;
+              *(undefined4 *)(iVar17 + chunkIndex * 4) = 0x10a5112c;
               iVar9 = *(int *)(compiler + 0xe28);
-              *(int *)(compiler + 0xe30) = iVar17 + iVar21 * 4 + 4;
+              *(int *)(compiler + 0xe30) = iVar17 + chunkIndex * 4 + 4;
               ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,*(undefined4 *)(iVar9 + 0x58),*(undefined4 *)(iVar9 + 0x5c),
                          *(undefined4 *)(iVar9 + 0x60),*(undefined4 *)(iVar9 + 100),
                          *(undefined4 *)(iVar9 + 0x68),*(undefined4 *)(iVar9 + 0x6c),
                          *(undefined4 *)(iVar9 + 0x70),*(undefined4 *)(iVar9 + 0x74),
                          *(undefined4 *)(iVar9 + 0x78),1,1);
-              iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
               iVar9 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar9 + iVar21 * 4) = 0x10a5112c;
+              *(undefined4 *)(iVar9 + chunkIndex * 4) = 0x10a5112c;
               iVar17 = *(int *)(compiler + 0xe28);
-              *(int *)(compiler + 0xe30) = iVar9 + iVar21 * 4 + 4;
+              *(int *)(compiler + 0xe30) = iVar9 + chunkIndex * 4 + 4;
               ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,*(undefined4 *)(iVar17 + 0x58),*(undefined4 *)(iVar17 + 0x5c),
                          *(undefined4 *)(iVar17 + 0x60),*(undefined4 *)(iVar17 + 100),
                          *(undefined4 *)(iVar17 + 0x68),*(undefined4 *)(iVar17 + 0x6c),
                          *(undefined4 *)(iVar17 + 0x70),*(undefined4 *)(iVar17 + 0x74),
                          *(undefined4 *)(iVar17 + 0x78),2,1);
-              iVar21 = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
+              chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
               iVar9 = *(int *)(compiler + 0xe30);
-              *(undefined4 *)(iVar9 + iVar21 * 4) = 0x10a5112c;
+              *(undefined4 *)(iVar9 + chunkIndex * 4) = 0x10a5112c;
               iVar17 = *(int *)(compiler + 0xe28);
-              *(int *)(compiler + 0xe30) = iVar9 + iVar21 * 4 + 4;
+              *(int *)(compiler + 0xe30) = iVar9 + chunkIndex * 4 + 4;
               in_r10 = *(int **)(iVar17 + 0x70);
               in_r5 = *(undefined4 *)(iVar17 + 0x5c);
               in_r6 = *(undefined4 *)(iVar17 + 0x60);
@@ -3403,9 +3413,9 @@ switchD_97bdfc38_caseD_0:
               iVar17 = *(int *)(compiler + 0xe30) + iVar9 * 4 + 4;
               *(undefined4 *)(*(int *)(compiler + 0xe30) + iVar9 * 4) = 0x10221484;
               *(int *)(compiler + 0xe30) = iVar17;
-              uVar23 = _glpRTCAddAChunk_97bd7cbc(&_glpOpSinAVRTC,iVar17);
-              uVar15 = (undefined4)uVar23;
-              iVar9 = (int)((ulonglong)uVar23 >> 0x20) * 4;
+              chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(&_glpOpSinAVRTC,iVar17);
+              uVar15 = (undefined4)chunkIndex2;
+              iVar9 = (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
               puVar14 = (uint *)(*(int *)(compiler + 0xe30) + iVar9 + 4);
               *(undefined4 *)(*(int *)(compiler + 0xe30) + iVar9) = 0x1041132c;
               goto LAB_97be1820;
@@ -4442,11 +4452,11 @@ LAB_97be1634:
               goto switchD_97bdfc38_caseD_6;
             case 0x48:
               if ((*(byte *)(*(int *)(compiler + 0xe28) + 0x28) & 1) != 0) {
-                uVar23 = _glpRTCAddAChunk_97bd7cbc(&_glpOpArlAVRTC,*(undefined4 *)(compiler + 0xe30))
+                chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(&_glpOpArlAVRTC,*(undefined4 *)(compiler + 0xe30))
                 ;
-                uVar15 = (undefined4)uVar23;
+                uVar15 = (undefined4)chunkIndex2;
                 *(int *)(compiler + 0xe30) =
-                     *(int *)(compiler + 0xe30) + (int)((ulonglong)uVar23 >> 0x20) * 4;
+                     *(int *)(compiler + 0xe30) + (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
               }
             case 0x49:
             case 0x4a:
@@ -4562,10 +4572,10 @@ switchD_97bdfc38_caseD_49:
               *(undefined4 **)(compiler + 0xe30) = puVar5;
               break;
             case 0x70:
-              uVar23 = _glpRTCAddAChunk_97bd7cbc(&_glpOpLg2AVRTC,*(undefined4 *)(compiler + 0xe30));
-              uVar15 = (undefined4)uVar23;
+              chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(&_glpOpLg2AVRTC,*(undefined4 *)(compiler + 0xe30));
+              uVar15 = (undefined4)chunkIndex2;
               in_r7 = *(int *)(compiler + 0xe30);
-              iVar9 = (int)((ulonglong)uVar23 >> 0x20) * 4;
+              iVar9 = (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
               in_r10 = (int *)(in_r7 + iVar9);
               in_r8 = in_r10 + 1;
               *(undefined4 *)(in_r7 + iVar9) = 0x39e001c0;
@@ -4574,10 +4584,10 @@ switchD_97bdfc38_caseD_49:
               *(int **)(compiler + 0xe30) = in_r10 + 3;
               goto switchD_97bdfc38_caseD_6;
             }
-            uVar23 = _glpRTCAddAChunk_97bd7cbc(puVar16,puVar5);
-            uVar15 = (undefined4)uVar23;
+            chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(puVar16,puVar5);
+            uVar15 = (undefined4)chunkIndex2;
             *(int *)(compiler + 0xe30) =
-                 *(int *)(compiler + 0xe30) + (int)((ulonglong)uVar23 >> 0x20) * 4;
+                 *(int *)(compiler + 0xe30) + (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
 switchD_97bdfc38_caseD_6:
             if (bVar4) {
               if (cVar2 != '\0') {
@@ -4826,7 +4836,7 @@ int _PPCTextureSamplerSampleTexel2DRTCNO(param_1, param_2, param_3)
   uint uVar3;
   int *piVar4;
   undefined *puVar5;
-  int iVar6;
+  int chunkIndex;
   int iVar7;
   uint *puVar8;
   
@@ -4894,8 +4904,8 @@ int _PPCTextureSamplerSampleTexel2DRTCNO(param_1, param_2, param_3)
       puVar5 = &_glpOpTexPrepareCoords2CCRTC;
     }
     iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar5,param_3);
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSampleRTC,param_3 + iVar7);
-    param_3 = param_3 + iVar7 + iVar6;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSampleRTC,param_3 + iVar7);
+    param_3 = param_3 + iVar7 + chunkIndex;
   }
   return param_3;
 }
@@ -4919,7 +4929,7 @@ int _PPCTextureSamplerSampleTexelRECTRTCNO(param_1, param_2, param_3)
   short sVar2;
   uint uVar3;
   int *piVar4;
-  int iVar5;
+  int chunkIndex;
   int iVar6;
   uint *puVar7;
   
@@ -4973,8 +4983,8 @@ int _PPCTextureSamplerSampleTexelRECTRTCNO(param_1, param_2, param_3)
       param_1[6] = 2;
     }
     iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexPrepareCoords4CCRTC,param_3);
-    iVar5 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSampleRTC,param_3 + iVar6);
-    param_3 = param_3 + iVar6 + iVar5;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSampleRTC,param_3 + iVar6);
+    param_3 = param_3 + iVar6 + chunkIndex;
   }
   return param_3;
 }
@@ -4987,7 +4997,7 @@ int _PPCTextureSamplerWrapCoordinates1DRTCAV(param_1, param_2)
   short sVar1;
   short sVar2;
   undefined *puVar3;
-  int iVar4;
+  int chunkIndex;
   
   sVar1 = *(short *)(**(int **)(param_1 + 4) + 0x16);
   sVar2 = *(short *)(**(int **)(param_1 + 4) + 0x10);
@@ -5000,8 +5010,8 @@ int _PPCTextureSamplerWrapCoordinates1DRTCAV(param_1, param_2)
   else {
     puVar3 = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  iVar4 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar3,param_2);
-  return param_2 + iVar4 * 4;
+  chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar3,param_2);
+  return param_2 + chunkIndex * 4;
 }
 
 /* _PPCTextureSamplerWrapCoordinates2DRTCAV @ 0x97be2114 (212 bytes) */
@@ -5009,6 +5019,7 @@ int _PPCTextureSamplerWrapCoordinates2DRTCAV(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int chunkIndex;
   short sVar1;
   undefined *puVar2;
   int iVar3;
@@ -5039,8 +5050,8 @@ int _PPCTextureSamplerWrapCoordinates2DRTCAV(param_1, param_2)
   else {
     puVar2 = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  iVar3 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar2,param_2);
-  return param_2 + iVar3 * 4;
+  chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar2,param_2);
+  return param_2 + chunkIndex * 4;
 }
 
 /* _PPCTextureSamplerWrapCoordinates3DRTCAV @ 0x97be21e8 (328 bytes) */
@@ -5048,6 +5059,7 @@ int _PPCTextureSamplerWrapCoordinates3DRTCAV(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int chunkIndex;
   short sVar1;
   undefined *puVar2;
   int iVar3;
@@ -5099,8 +5111,8 @@ int _PPCTextureSamplerWrapCoordinates3DRTCAV(param_1, param_2)
   else {
     puVar2 = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  iVar3 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar2,param_2);
-  return param_2 + iVar3 * 4;
+  chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar2,param_2);
+  return param_2 + chunkIndex * 4;
 }
 
 /* _PPCTextureSamplerSampleTexel1DRTCAV @ 0x97be2330 (780 bytes) */
@@ -5110,7 +5122,7 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
   uint *param_3;
 {
   uint *puVar1;
-  int iVar2;
+  int chunkIndex;
   undefined4 *puVar3;
   uint uVar4;
   int *piVar5;
@@ -5132,8 +5144,8 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
     param_3[4] = 0x7c2c78ce;
     param_3[5] = 0x39ef00c0;
     param_3[6] = 0x7c4c78ce;
-    iVar2 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexCalculateLambda1DAVRTC,param_3 + 7);
-    puVar1 = param_3 + 7 + iVar2;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexCalculateLambda1DAVRTC,param_3 + 7);
+    puVar1 = param_3 + 7 + chunkIndex;
     *puVar1 = 0x39e00040;
     puVar1[1] = 0x7c9178ce;
     puVar1[2] = 0x1063200a;
@@ -5200,7 +5212,7 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
   uint *param_3;
 {
   uint *puVar1;
-  int iVar2;
+  int chunkIndex;
   undefined4 *puVar3;
   uint uVar4;
   int *piVar5;
@@ -5222,8 +5234,8 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
     param_3[4] = 0x7c2c78ce;
     param_3[5] = 0x39ef00c0;
     param_3[6] = 0x7c4c78ce;
-    iVar2 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexCalculateLambda2DAVRTC,param_3 + 7);
-    puVar1 = param_3 + 7 + iVar2;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexCalculateLambda2DAVRTC,param_3 + 7);
+    puVar1 = param_3 + 7 + chunkIndex;
     *puVar1 = 0x39e00040;
     puVar1[1] = 0x7c9178ce;
     puVar1[2] = 0x1063200a;
@@ -5290,7 +5302,7 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
   uint *param_3;
 {
   uint *puVar1;
-  int iVar2;
+  int chunkIndex;
   undefined4 *puVar3;
   uint uVar4;
   int *piVar5;
@@ -5312,8 +5324,8 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
     param_3[4] = 0x7c2c78ce;
     param_3[5] = 0x39ef00c0;
     param_3[6] = 0x7c4c78ce;
-    iVar2 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexCalculateLambda3DAVRTC,param_3 + 7);
-    puVar1 = param_3 + 7 + iVar2;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexCalculateLambda3DAVRTC,param_3 + 7);
+    puVar1 = param_3 + 7 + chunkIndex;
     *puVar1 = 0x39e00040;
     puVar1[1] = 0x7c9178ce;
     puVar1[2] = 0x1063200a;
@@ -5379,6 +5391,7 @@ int _PPCTextureSamplerSampleTexel1DFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int chunkIndex;
   bool bVar1;
   short sVar2;
   ushort uVar3;
@@ -5465,11 +5478,11 @@ LAB_97be2d14:
   if (uVar3 == 0x2700) {
 LAB_97be2ebc:
     if (param_1[8] != 0) {
-      iVar5 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
-      param_3 = param_3 + iVar5;
+      chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      param_3 = param_3 + chunkIndex;
     }
-    iVar5 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
-    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + iVar5);
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
+    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + chunkIndex);
     iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,iVar5);
     puVar10 = (undefined4 *)(iVar5 + iVar7 * 4);
     *puVar10 = 0x10431c84;
@@ -5491,12 +5504,12 @@ LAB_97be2eb4:
       }
     }
     if (param_1[8] != 0) {
-      iVar5 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
-      param_3 = param_3 + iVar5;
+      chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      param_3 = param_3 + chunkIndex;
     }
-    iVar5 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
-    param_3[iVar5] = 0x10c00484;
-    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + iVar5 + 1);
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
+    param_3[chunkIndex] = 0x10c00484;
+    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + chunkIndex + 1);
     iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,iVar5);
     puVar10 = (undefined4 *)(iVar5 + iVar7 * 4);
     *puVar10 = 0x1020228c;
@@ -5519,6 +5532,7 @@ int _PPCTextureSamplerSampleTexel2DFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int chunkIndex;
   bool bVar1;
   short sVar2;
   short sVar3;
@@ -5608,11 +5622,11 @@ LAB_97be30f0:
   if (uVar4 == 0x2700) {
 LAB_97be32a0:
     if (param_1[8] != 0) {
-      iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
-      param_3 = param_3 + iVar6;
+      chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      param_3 = param_3 + chunkIndex;
     }
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + iVar6);
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
+    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + chunkIndex);
     iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x10431c84;
@@ -5634,12 +5648,12 @@ LAB_97be3298:
       }
     }
     if (param_1[8] != 0) {
-      iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
-      param_3 = param_3 + iVar6;
+      chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      param_3 = param_3 + chunkIndex;
     }
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
-    param_3[iVar6] = 0x10c00484;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + iVar6 + 1);
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
+    param_3[chunkIndex] = 0x10c00484;
+    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + chunkIndex + 1);
     iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x1024492c;
@@ -5684,6 +5698,7 @@ int _PPCTextureSamplerSampleTexel3DFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int chunkIndex;
   bool bVar1;
   short sVar2;
   short sVar3;
@@ -5777,11 +5792,11 @@ LAB_97be359c:
   if (uVar4 == 0x2700) {
 LAB_97be376c:
     if (param_1[8] != 0) {
-      iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
-      param_3 = param_3 + iVar6;
+      chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      param_3 = param_3 + chunkIndex;
     }
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + iVar6);
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
+    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + chunkIndex);
     iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x10431c84;
@@ -5803,12 +5818,12 @@ LAB_97be3764:
       }
     }
     if (param_1[8] != 0) {
-      iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
-      param_3 = param_3 + iVar6;
+      chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      param_3 = param_3 + chunkIndex;
     }
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
-    param_3[iVar6] = 0x10c00484;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + iVar6 + 1);
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
+    param_3[chunkIndex] = 0x10c00484;
+    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + chunkIndex + 1);
     iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1024492c;
@@ -5909,6 +5924,7 @@ int _PPCTextureSamplerSampleTexelRECTFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int chunkIndex;
   bool bVar1;
   short sVar2;
   short sVar3;
@@ -5979,11 +5995,11 @@ int _PPCTextureSamplerSampleTexelRECTFromLevelRTCAV(param_1, param_2, param_3)
   uVar4 = *(ushort *)(iVar6 + 0x16);
   if (uVar4 == 0x2700) {
 LAB_97be3d34:
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedAVRTC,param_3);
-    puVar9 = param_3 + iVar6;
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
-    puVar9 = puVar9 + iVar6 + iVar7;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedAVRTC,param_3);
+    puVar9 = param_3 + chunkIndex;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + chunkIndex);
+    puVar9 = puVar9 + chunkIndex + iVar7;
     *puVar9 = 0x10431c84;
   }
   else {
@@ -6002,13 +6018,13 @@ LAB_97be3d2c:
         goto LAB_97be3d2c;
       }
     }
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC,param_3);
-    puVar9 = param_3 + iVar6;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC,param_3);
+    puVar9 = param_3 + chunkIndex;
     *puVar9 = 0x10c00484;
     puVar9 = puVar9 + 1;
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
-    puVar9 = puVar9 + iVar6 + iVar7;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + chunkIndex);
+    puVar9 = puVar9 + chunkIndex + iVar7;
     *puVar9 = 0x1024492c;
     puVar9[1] = 0x1021392e;
     puVar9[2] = 0x10200a8c;
@@ -6016,9 +6032,9 @@ LAB_97be3d2c:
     puVar9[4] = 0x100a4a2c;
     puVar9[5] = 0x10060780;
     puVar9 = puVar9 + 6;
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
-    puVar9 = puVar9 + iVar6 + iVar7;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + chunkIndex);
+    puVar9 = puVar9 + chunkIndex + iVar7;
     *puVar9 = 0x1025492c;
     puVar9[1] = 0x1021392e;
     puVar9[2] = 0x10200a8c;
@@ -6026,9 +6042,9 @@ LAB_97be3d2c:
     puVar9[4] = 0x100a4b2c;
     puVar9[5] = 0x10060780;
     puVar9 = puVar9 + 6;
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
-    puVar9 = puVar9 + iVar6 + iVar7;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + chunkIndex);
+    puVar9 = puVar9 + chunkIndex + iVar7;
     *puVar9 = 0x1024492c;
     puVar9[1] = 0x1021396e;
     puVar9[2] = 0x10200a8c;
@@ -6036,9 +6052,9 @@ LAB_97be3d2c:
     puVar9[4] = 0x1003528c;
     puVar9[5] = 0x10060780;
     puVar9 = puVar9 + 6;
-    iVar6 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
-    puVar9 = puVar9 + iVar6 + iVar7;
+    chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,puVar9 + chunkIndex);
+    puVar9 = puVar9 + chunkIndex + iVar7;
     *puVar9 = 0x1025492c;
     puVar9[1] = 0x1021396e;
     puVar9[2] = 0x10200a8c;
@@ -6498,6 +6514,7 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
   int *param_1;
   uint *param_2;
 {
+  uint framebufferFormat;
   float fVar1;
   uint uVar2;
   float fVar3;
@@ -6512,8 +6529,8 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
   fVar3 = *(float *)(iVar4 + 0x44);
   uVar2 = uVar5 & 7;
   if ((uVar2 != 7) && (uVar2 != 0)) {
-    uVar6 = _PPEmulatorFramebufferFormat(*param_1);
-    if ((uVar6 & 0x1c000) == 0) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(*param_1);
+    if ((framebufferFormat & 0x1c000) == 0) {
       *param_2 = 0x3b000210;
       param_2[1] = 0x7e63c1ce;
       param_2[2] = 0xc123021c;

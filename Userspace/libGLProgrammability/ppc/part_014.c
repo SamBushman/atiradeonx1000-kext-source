@@ -357,6 +357,7 @@ LAB_97bd3e30:
 /* _InterpreterTextureSamplerCalculateLambda1D @ 0x97bd3e38 (276 bytes) */
 double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
+  double log2Result;
   float fVar1;
   float fVar2;
   float fVar3;
@@ -366,8 +367,8 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,i
   float fVar7;
   int iVar8;
   int iVar9;
-  double dVar10;
-  double dVar11;
+  double sqrtResult;
+  double sqrtResult2;
   
   fVar1 = param_2[3];
   iVar9 = param_3 * 0x10 + param_1[3];
@@ -382,19 +383,20 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,i
            (fVar4 + fVar5) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar2))) * fVar7;
   fVar7 = -((fVar4 - fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 - fVar3)) -
            (fVar4 + fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar3))) * fVar7;
-  dVar10 = _sqrt((double)(fVar2 * fVar2));
-  dVar11 = _sqrt((double)(fVar7 * fVar7));
-  fVar1 = (float)dVar11;
-  if ((float)dVar11 < (float)dVar10) {
-    fVar1 = (float)dVar10;
+  sqrtResult = _sqrt((double)(fVar2 * fVar2));
+  sqrtResult2 = _sqrt((double)(fVar7 * fVar7));
+  fVar1 = (float)sqrtResult2;
+  if ((float)sqrtResult2 < (float)sqrtResult) {
+    fVar1 = (float)sqrtResult;
   }
-  dVar10 = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)dVar10;
+  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
+  return (double)(float)log2Result;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda2D @ 0x97bd3f4c (348 bytes) */
 double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
+  double log2Result;
   float fVar1;
   float fVar2;
   float fVar3;
@@ -407,8 +409,8 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,i
   int iVar10;
   int iVar11;
   int iVar12;
-  double dVar13;
-  double dVar14;
+  double sqrtResult;
+  double sqrtResult2;
   
   fVar4 = param_2[3];
   iVar11 = param_3 * 0x10 + param_1[3];
@@ -430,19 +432,20 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,i
            (fVar5 + *(float *)(iVar12 + 0x40)) * fVar3) * fVar8;
   fVar7 = -((fVar6 - *(float *)(iVar12 + 0x44)) * fVar4 -
            (fVar6 + *(float *)(iVar12 + 0x44)) * fVar3) * fVar7;
-  dVar13 = _sqrt((double)(fVar1 * fVar1 + fVar9 * fVar9));
-  dVar14 = _sqrt((double)(fVar8 * fVar8 + fVar7 * fVar7));
-  fVar1 = (float)dVar14;
-  if ((float)dVar14 < (float)dVar13) {
-    fVar1 = (float)dVar13;
+  sqrtResult = _sqrt((double)(fVar1 * fVar1 + fVar9 * fVar9));
+  sqrtResult2 = _sqrt((double)(fVar8 * fVar8 + fVar7 * fVar7));
+  fVar1 = (float)sqrtResult2;
+  if ((float)sqrtResult2 < (float)sqrtResult) {
+    fVar1 = (float)sqrtResult;
   }
-  dVar13 = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)dVar13;
+  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
+  return (double)(float)log2Result;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda3D @ 0x97bd40a8 (360 bytes) */
 double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
+  double log2Result;
   float fVar1;
   float fVar2;
   float fVar3;
@@ -454,8 +457,8 @@ double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,i
   int iVar9;
   int iVar10;
   int iVar11;
-  double dVar12;
-  double dVar13;
+  double sqrtResult;
+  double sqrtResult2;
   
   fVar4 = param_2[3];
   iVar10 = param_3 * 0x10 + param_1[3];
@@ -478,19 +481,20 @@ double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,i
            (fVar6 + *(float *)(iVar11 + 0x44)) * fVar3) * *(float *)(iVar9 + 0x124);
   fVar3 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar4 -
            (fVar5 + *(float *)(iVar11 + 0x40)) * fVar3) * *(float *)(iVar9 + 0x120);
-  dVar12 = _sqrt((double)(fVar2 * fVar2 + fVar7 * fVar7 + fVar8));
-  dVar13 = _sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar8));
-  fVar1 = (float)dVar13;
-  if ((float)dVar13 < (float)dVar12) {
-    fVar1 = (float)dVar12;
+  sqrtResult = _sqrt((double)(fVar2 * fVar2 + fVar7 * fVar7 + fVar8));
+  sqrtResult2 = _sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar8));
+  fVar1 = (float)sqrtResult2;
+  if ((float)sqrtResult2 < (float)sqrtResult) {
+    fVar1 = (float)sqrtResult;
   }
-  dVar12 = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)dVar12;
+  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
+  return (double)(float)log2Result;
 }
 
 /* _InterpreterTextureSamplerSampleTexel1DFromLevel @ 0x97bd4210 (876 bytes) */
 double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
+  double floorResult;
   bool bVar1;
   float fVar2;
   float fVar3;
@@ -592,16 +596,16 @@ LAB_97bd43d4:
   fVar2 = (float)((double)(fVar2 * fVar3) + DOUBLE_97c30a88);
   dVar11 = DOUBLE_97c30a88 + 0.0;
   dVar9 = DOUBLE_97c30a88 + 0.0;
-  dVar10 = _floor((double)fVar2);
-  local_90 = (uint)(int)dVar10;
+  floorResult = _floor((double)fVar2);
+  local_90 = (uint)(int)floorResult;
   local_80 = (longlong)(int)local_90;
-  dVar10 = _floor((double)(float)dVar11);
-  local_8c = (int)dVar10;
+  floorResult = _floor((double)(float)dVar11);
+  local_8c = (int)floorResult;
   local_80 = (longlong)local_8c;
-  dVar10 = _floor((double)(float)dVar9);
+  floorResult = _floor((double)(float)dVar9);
   dVar9 = DOUBLE_97c30a60;
   local_40 = 0x43300000;
-  local_88 = (int)dVar10;
+  local_88 = (int)floorResult;
   local_80 = (longlong)local_88;
   uStack_3c = local_90 ^ 0x80000000;
   local_50 = local_90;
@@ -626,6 +630,10 @@ LAB_97bd43d4:
 /* _InterpreterTextureSamplerSampleTexel2DFromLevel @ 0x97bd457c (1196 bytes) */
 double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  float floatValue;
+  float floatValue2;
+  double floorResult;
+  double floorResult2;
   bool bVar1;
   float fVar2;
   float fVar3;
@@ -691,16 +699,16 @@ LAB_97bd4648:
       fVar5 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5c]));
       iVar8 = param_3 * 0x34 + 100;
       iVar10 = piVar7[param_3 * 0x34 + 0x71];
-      fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5d]));
+      floatValue2 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5d]));
     }
     else {
       fVar5 = *pfVar9;
       iVar8 = param_3 * 0x34 + 0x50;
       iVar10 = piVar7[param_3 * 0x34 + 0x70];
-      fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
+      floatValue2 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
     }
     local_c0 = (uint)(fVar2 * fVar5);
-    local_bc = (uint)(int)(fVar3 * fVar4);
+    local_bc = (uint)(int)(fVar3 * floatValue2);
     local_b0 = 0;
     local_b8 = 0;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_c0);
@@ -731,26 +739,26 @@ LAB_97bd4640:
       fVar4 = *pfVar9;
       iVar10 = param_3 * 0x34 + 0x50;
       iVar8 = piVar7[param_3 * 0x34 + 0x70];
-      fVar5 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
+      floatValue = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
       goto LAB_97bd479c;
     }
     fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5c]));
     iVar8 = piVar7[param_3 * 0x34 + 0x72];
   }
   iVar10 = param_3 * 0x34 + 100;
-  fVar5 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5d]));
+  floatValue = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5d]));
 LAB_97bd479c:
   piVar7 = piVar7 + iVar10;
   fVar2 = (float)((double)(fVar2 * fVar4) + DOUBLE_97c30a88);
   dVar11 = DOUBLE_97c30a88 + 0.0;
-  fVar3 = (float)((double)(fVar3 * fVar5) + DOUBLE_97c30a88);
-  dVar12 = _floor((double)fVar2);
-  local_c0 = (uint)(int)dVar12;
+  fVar3 = (float)((double)(fVar3 * floatValue) + DOUBLE_97c30a88);
+  floorResult = _floor((double)fVar2);
+  local_c0 = (uint)(int)floorResult;
   local_b0 = (longlong)(int)local_c0;
-  dVar12 = _floor((double)fVar3);
-  local_bc = (uint)(int)dVar12;
+  floorResult = _floor((double)fVar3);
+  local_bc = (uint)(int)floorResult;
   local_b0 = (longlong)(int)local_bc;
-  dVar11 = _floor((double)(float)dVar11);
+  floorResult2 = _floor((double)(float)dVar11);
   local_50 = 0x43300000;
   uStack_4c = local_bc ^ 0x80000000;
   local_5c = local_bc;
@@ -758,7 +766,7 @@ LAB_97bd479c:
   dVar13 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
                                    DOUBLE_97c30a58));
   dVar12 = (double)(fVar3 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-  local_b8 = (int)dVar11;
+  local_b8 = (int)floorResult2;
   local_b0 = (longlong)local_b8;
   fVar3 = (float)(dVar13 * dVar12);
   fVar2 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
@@ -793,6 +801,10 @@ LAB_97bd479c:
 /* _InterpreterTextureSamplerSampleTexel3DFromLevel @ 0x97bd4a28 (1768 bytes) */
 double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
+  float floatValue;
+  float floatValue2;
+  float floatValue3;
+  double floorResult;
   bool bVar1;
   float fVar2;
   float fVar3;
@@ -889,19 +901,19 @@ LAB_97bd4b08:
       fVar8 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5c]));
       iVar11 = param_3 * 0x34 + 100;
       iVar14 = piVar12[param_3 * 0x34 + 0x71];
-      fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5d]));
-      fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5e]));
+      floatValue = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5d]));
+      floatValue3 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5e]));
     }
     else {
       fVar8 = *pfVar13;
       iVar11 = param_3 * 0x34 + 0x50;
       iVar14 = piVar12[param_3 * 0x34 + 0x70];
-      fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
-      fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
+      floatValue = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
+      floatValue3 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
     }
     local_120 = (uint)(int)(local_130 * fVar8);
-    local_11c = (uint)(int)(local_12c * fVar9);
-    local_118 = (uint)(int)(local_128 * fVar7);
+    local_11c = (uint)(int)(local_12c * floatValue);
+    local_118 = (uint)(int)(local_128 * floatValue3);
     local_110 = (longlong)(int)local_118;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_120);
     dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar14,piVar12 + iVar11,&local_120,param_5);
@@ -933,29 +945,29 @@ LAB_97bd4b00:
       fVar7 = *pfVar13;
       iVar14 = param_3 * 0x34 + 0x50;
       iVar11 = piVar12[param_3 * 0x34 + 0x70];
-      fVar8 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
-      fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
+      floatValue2 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
+      floatValue = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
       goto LAB_97bd4cb4;
     }
     fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5c]));
     iVar11 = piVar12[param_3 * 0x34 + 0x72];
   }
   iVar14 = param_3 * 0x34 + 100;
-  fVar8 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5d]));
-  fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5e]));
+  floatValue2 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5d]));
+  floatValue = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5e]));
 LAB_97bd4cb4:
   piVar12 = piVar12 + iVar14;
   fVar7 = (float)((double)(local_130 * fVar7) + DOUBLE_97c30a88);
-  fVar8 = (float)((double)(local_12c * fVar8) + DOUBLE_97c30a88);
-  fVar9 = (float)((double)(local_128 * fVar9) + DOUBLE_97c30a88);
-  dVar15 = _floor((double)fVar7);
-  local_120 = (uint)(int)dVar15;
+  fVar8 = (float)((double)(local_12c * floatValue2) + DOUBLE_97c30a88);
+  fVar9 = (float)((double)(local_128 * floatValue) + DOUBLE_97c30a88);
+  floorResult = _floor((double)fVar7);
+  local_120 = (uint)(int)floorResult;
   local_110 = (longlong)(int)local_120;
-  dVar15 = _floor((double)fVar8);
-  local_11c = (uint)(int)dVar15;
+  floorResult = _floor((double)fVar8);
+  local_11c = (uint)(int)floorResult;
   local_110 = (longlong)(int)local_11c;
-  dVar15 = _floor((double)fVar9);
-  local_118 = (uint)(int)dVar15;
+  floorResult = _floor((double)fVar9);
+  local_118 = (uint)(int)floorResult;
   local_110 = (longlong)(int)local_118;
   local_70 = 0x43300000;
   uStack_6c = local_118 ^ 0x80000000;
@@ -1049,6 +1061,8 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(param_1, param_2, param_3
   float *param_4;
   float *param_5;
 {
+  double floorResult;
+  double floorResult2;
   bool bVar1;
   float fVar2;
   float fVar3;
@@ -1147,13 +1161,13 @@ LAB_97bd51b0:
     fVar4 = (float)((double)*param_4 + DOUBLE_97c30a88);
     dVar11 = DOUBLE_97c30a88 + 0.0;
     fVar5 = (float)((double)param_4[1] + DOUBLE_97c30a88);
-    dVar12 = _floor((double)fVar4);
-    local_c0 = (uint)(int)dVar12;
+    floorResult = _floor((double)fVar4);
+    local_c0 = (uint)(int)floorResult;
     local_b0 = (longlong)(int)local_c0;
-    dVar12 = _floor((double)fVar5);
-    local_bc = (uint)(int)dVar12;
+    floorResult = _floor((double)fVar5);
+    local_bc = (uint)(int)floorResult;
     local_b0 = (longlong)(int)local_bc;
-    dVar11 = _floor((double)(float)dVar11);
+    floorResult2 = _floor((double)(float)dVar11);
     local_50 = 0x43300000;
     uStack_4c = local_bc ^ 0x80000000;
     local_5c = local_bc;
@@ -1161,7 +1175,7 @@ LAB_97bd51b0:
     dVar13 = (double)(fVar4 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
                                      DOUBLE_97c30a58));
     dVar12 = (double)(fVar5 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-    local_b8 = (int)dVar11;
+    local_b8 = (int)floorResult2;
     local_b0 = (longlong)local_b8;
     fVar4 = (float)(dVar13 * dVar12);
     fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
@@ -1438,8 +1452,8 @@ int _InterpreterNoiseGeneratorInterpolate(param_1, param_2, param_3, param_4, pa
 double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
 {
   uint uVar1;
-  double dVar2;
-  double dVar3;
+  double floorResult;
+  double floorResult2;
   float local_80;
   float local_7c;
   float local_78;
@@ -1461,19 +1475,19 @@ double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
   undefined4 local_28;
   uint uStack_24;
   
-  dVar2 = _floor((double)*param_2);
-  uVar1 = (uint)(int)dVar2;
+  floorResult = _floor((double)*param_2);
+  uVar1 = (uint)(int)floorResult;
   local_30 = (longlong)(int)uVar1;
-  dVar2 = _floor((double)param_2[1]);
-  local_30 = (longlong)(int)dVar2;
-  dVar3 = _floor((double)param_2[2]);
-  local_30 = (longlong)(int)dVar3;
+  floorResult = _floor((double)param_2[1]);
+  local_30 = (longlong)(int)floorResult;
+  floorResult2 = _floor((double)param_2[2]);
+  local_30 = (longlong)(int)floorResult2;
   local_28 = 0x43300000;
-  uStack_24 = (int)dVar3 ^ 0x80000000;
+  uStack_24 = (int)floorResult2 ^ 0x80000000;
   local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_97c30a58);
   local_78 = param_2[2] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
   local_7c = param_2[1] -
-             (float)((double)CONCAT44(0x43300000,(int)dVar2 ^ 0x80000000) - DOUBLE_97c30a58);
+             (float)((double)CONCAT44(0x43300000,(int)floorResult ^ 0x80000000) - DOUBLE_97c30a58);
   local_74 = 0;
   ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,local_70);
   local_50 = *(float *)((uint)*(byte *)(param_1 + (uVar1 & 0xff)) * 4 + param_1 + 0x210);
@@ -1500,7 +1514,7 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
   uint uVar2;
   uint uVar3;
   uint uVar4;
-  double dVar5;
+  double floorResult;
   float local_80;
   float local_7c;
   undefined4 local_78;
@@ -1523,11 +1537,11 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
   undefined4 local_28;
   uint uStack_24;
   
-  dVar5 = _floor((double)*param_2);
-  uVar1 = (uint)(int)dVar5;
+  floorResult = _floor((double)*param_2);
+  uVar1 = (uint)(int)floorResult;
   local_30 = (longlong)(int)uVar1;
-  dVar5 = _floor((double)param_2[1]);
-  uVar2 = (uint)(int)dVar5;
+  floorResult = _floor((double)param_2[1]);
+  uVar2 = (uint)(int)floorResult;
   local_30 = (longlong)(int)uVar2;
   local_28 = 0x43300000;
   uStack_24 = uVar2 ^ 0x80000000;
@@ -1576,7 +1590,7 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
   uint uVar6;
   uint uVar7;
   int iVar8;
-  double dVar9;
+  double floorResult;
   float local_80;
   float local_7c;
   float local_78;
@@ -1600,14 +1614,14 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
   undefined4 local_28;
   uint uStack_24;
   
-  dVar9 = _floor((double)*param_2);
-  uVar5 = (uint)(int)dVar9;
+  floorResult = _floor((double)*param_2);
+  uVar5 = (uint)(int)floorResult;
   local_30 = (longlong)(int)uVar5;
-  dVar9 = _floor((double)param_2[1]);
-  uVar7 = (uint)(int)dVar9;
+  floorResult = _floor((double)param_2[1]);
+  uVar7 = (uint)(int)floorResult;
   local_30 = (longlong)(int)uVar7;
-  dVar9 = _floor((double)param_2[2]);
-  uVar1 = (uint)(int)dVar9;
+  floorResult = _floor((double)param_2[2]);
+  uVar1 = (uint)(int)floorResult;
   local_30 = (longlong)(int)uVar1;
   local_28 = 0x43300000;
   uStack_24 = uVar1 ^ 0x80000000;
@@ -1667,11 +1681,12 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  double exp2Result;
   float fVar1;
   double dVar2;
   uint uVar3;
   double dVar4;
-  double dVar5;
+  double powResult;
   float local_60 [5];
   uint uStack_4c;
   
@@ -1681,16 +1696,16 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
   do {
     uVar3 = uStack_4c + 1;
     local_60[4] = 176.0;
-    dVar4 = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
+    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
     local_60[4] = 176.0;
     uStack_4c = uVar3;
-    dVar5 = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
-    local_60[0] = *param_2 * (float)dVar4;
+    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
+    local_60[0] = *param_2 * (float)exp2Result;
     local_60[1] = 0.0;
     local_60[2] = 0.0;
     local_60[3] = 0.0;
     dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise1D)(param_1,local_60);
-    fVar1 = (float)(dVar4 * (double)(float)dVar5 + (double)fVar1);
+    fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
     uStack_4c = uVar3;
   } while (uVar3 < 8);
   param_3[3] = fVar1;
@@ -1706,11 +1721,12 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  double exp2Result;
   float fVar1;
   double dVar2;
   uint uVar3;
   double dVar4;
-  double dVar5;
+  double powResult;
   float local_60;
   float local_5c;
   undefined4 local_58;
@@ -1724,16 +1740,16 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
   do {
     uVar3 = uStack_4c + 1;
     local_50 = 0x43300000;
-    dVar4 = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
+    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
     local_50 = 0x43300000;
     uStack_4c = uVar3;
-    dVar5 = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
-    local_60 = *param_2 * (float)dVar4;
-    local_5c = param_2[1] * (float)dVar4;
+    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
+    local_60 = *param_2 * (float)exp2Result;
+    local_5c = param_2[1] * (float)exp2Result;
     local_58 = 0;
     local_54 = 0;
     dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise2D)(param_1,&local_60);
-    fVar1 = (float)(dVar4 * (double)(float)dVar5 + (double)fVar1);
+    fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
     uStack_4c = uVar3;
   } while (uVar3 < 8);
   param_3[3] = fVar1;
@@ -1749,11 +1765,12 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  double powResult;
   float fVar1;
   float fVar2;
   double dVar3;
   uint uVar4;
-  double dVar5;
+  double exp2Result;
   double dVar6;
   float local_60;
   float local_5c;
@@ -1768,17 +1785,17 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
   do {
     uVar4 = uStack_4c + 1;
     local_50 = 0x43300000;
-    dVar5 = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar3));
+    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar3));
     local_50 = 0x43300000;
-    fVar2 = (float)dVar5;
+    fVar2 = (float)exp2Result;
     uStack_4c = uVar4;
-    dVar5 = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar4) - dVar3);
+    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar4) - dVar3);
     local_60 = *param_2 * fVar2;
     local_5c = param_2[1] * fVar2;
     local_58 = param_2[2] * fVar2;
     local_54 = 0;
     dVar6 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise3D)(param_1,&local_60);
-    fVar1 = (float)(dVar6 * (double)(float)dVar5 + (double)fVar1);
+    fVar1 = (float)(dVar6 * (double)(float)powResult + (double)fVar1);
     uStack_4c = uVar4;
   } while (uVar4 < 8);
   param_3[3] = fVar1;
@@ -1986,6 +2003,7 @@ int _InterpreterRasterOpMachine_AlphaTest(param_1, param_2)
   int *param_1;
   int param_2;
 {
+  uint framebufferFormat;
   float fVar1;
   int iVar2;
   uint uVar3;
@@ -1997,9 +2015,9 @@ int _InterpreterRasterOpMachine_AlphaTest(param_1, param_2)
   iVar2 = *(int *)(*param_1 + 0xd80);
   fVar1 = *(float *)(iVar2 + 0x44);
   uVar5 = *(uint *)(iVar2 + 0x40);
-  uVar3 = _PPEmulatorFramebufferFormat(*param_1);
+  framebufferFormat = _PPEmulatorFramebufferFormat(*param_1);
   bVar6 = false;
-  if ((uVar3 & 0x1c000) == 0) {
+  if ((framebufferFormat & 0x1c000) == 0) {
     switch(uVar5 & 7) {
     case 0:
 switchD_97bd6924_caseD_0:
@@ -2182,7 +2200,7 @@ int _InterpreterRasterOpMachine_Blending(param_1, param_2, param_3, param_4)
   float fVar3;
   float fVar4;
   int iVar5;
-  uint uVar6;
+  uint framebufferFormat;
   uint uVar7;
   int iVar8;
   float local_60;
@@ -2200,9 +2218,9 @@ int _InterpreterRasterOpMachine_Blending(param_1, param_2, param_3, param_4)
   iVar5 = *param_1;
   uVar7 = *(uint *)(*(int *)(iVar5 + 0xd80) + 0x58);
   iVar8 = *(int *)(*(int *)(iVar5 + 0xd9c) + 0xd8) + 0x2d70;
-  uVar6 = _PPEmulatorFramebufferFormat(iVar5);
+  framebufferFormat = _PPEmulatorFramebufferFormat(iVar5);
   fVar2 = FLOAT_97c3acd8;
-  if ((uVar6 & 0x8000000) == 0) {
+  if ((framebufferFormat & 0x8000000) == 0) {
     fVar3 = *param_2;
     fVar4 = fVar3;
     if (FLOAT_97c3acd8 <= fVar3) {

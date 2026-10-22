@@ -136,16 +136,17 @@ int Binding__SetNextBindingInHash(this, param_2)
 int Binding__GetString(this)
   unsigned char * this;
 {
+  undefined4 activeIndex;
   undefined4 gLStringForType2;
   undefined4 gLStringForType;
   int isClientRequest;
   int iVar1;
   int length;
-  undefined4 uVar3;
+  undefined4 glType;
   int length2;
   char *allocation;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 location;
+  undefined4 glType2;
   char *pcVar8;
   undefined4 uVar9;
   undefined4 uVar10;
@@ -156,18 +157,18 @@ int Binding__GetString(this)
   isClientRequest = Binding__IsClientRequest(this);
   length = _strlen(*(undefined4 *)((int)local_30 + isClientRequest * 4));
   iVar1 = *(int *)(this + 0x10);
-  uVar3 = ((int (*)())Binding__GetOpenGLType)(this);
-  gLStringForType = GetGLStringForType(uVar3);
+  glType = ((int (*)())Binding__GetOpenGLType)(this);
+  gLStringForType = GetGLStringForType(glType);
   length2 = _strlen(gLStringForType);
   allocation = (char *)_malloc(length + iVar1 + length2 + 0x15);
   pcVar8 = (char *)0x0;
   if (allocation != (char *)0x0) {
     isClientRequest = Binding__IsClientRequest(this);
-    uVar3 = ((int (*)())Binding__GetActiveIndex)(this);
-    uVar6 = ((int (*)())Binding__GetLocation)(this);
-    uVar7 = ((int (*)())Binding__GetOpenGLType)(this);
+    activeIndex = ((int (*)())Binding__GetActiveIndex)(this);
+    location = ((int (*)())Binding__GetLocation)(this);
+    glType2 = ((int (*)())Binding__GetOpenGLType)(this);
     uVar11 = *(undefined4 *)(this + 8);
-    gLStringForType2 = GetGLStringForType(uVar7);
+    gLStringForType2 = GetGLStringForType(glType2);
     uVar9 = 0x56;
     if (this[0x34] == 0x0) {
       uVar9 = 0x20;
@@ -176,7 +177,7 @@ int Binding__GetString(this)
     if (this[0x35] == 0x0) {
       uVar10 = 0x20;
     }
-    _sprintf(allocation,*(char **)((int)local_30 + isClientRequest * 4),uVar3,uVar6,uVar11,gLStringForType2,uVar9,uVar10);
+    _sprintf(allocation,*(char **)((int)local_30 + isClientRequest * 4),activeIndex,location,uVar11,gLStringForType2,uVar9,uVar10);
     pcVar8 = allocation;
   }
   return pcVar8;
@@ -481,11 +482,11 @@ int BindingTable__NextAttribRequestBinding(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  undefined4 uVar1;
+  undefined4 nextBinding;
   
   if (param_2 != (unsigned char *)0x0) {
-    uVar1 = ((int (*)())Binding__GetNextBinding)(param_2);
-    return uVar1;
+    nextBinding = ((int (*)())Binding__GetNextBinding)(param_2);
+    return nextBinding;
   }
   return *(undefined4 *)(this + 4);
 }
@@ -610,6 +611,7 @@ int BindingTable__InsertAttribBinding(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
+  int slotCount;
   undefined4 uVar1;
   int iVar2;
   int iVar3;
@@ -637,9 +639,9 @@ int BindingTable__InsertAttribBinding(this, param_2)
         this_00 = pBVar6;
         iVar4 = iVar3 + iVar4;
         iVar2 = ((int (*)())Binding__GetLocation)(this_00);
-        iVar3 = ((int (*)())Binding__GetBindingSlots)(param_2);
+        slotCount = ((int (*)())Binding__GetBindingSlots)(param_2);
         pBVar6 = this_00;
-        if (iVar4 + iVar3 <= iVar2) goto LAB_97bb0db4;
+        if (iVar4 + slotCount <= iVar2) goto LAB_97bb0db4;
         iVar3 = ((int (*)())Binding__GetLocation)(this_00);
         iVar4 = ((int (*)())Binding__GetBindingSlots)(this_00);
         pBVar6 = (unsigned char *)((int (*)())Binding__GetNextBinding)(this_00);
@@ -693,11 +695,11 @@ int BindingTable__NextAttribBinding(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  undefined4 uVar1;
+  undefined4 nextBinding;
   
   if (param_2 != (unsigned char *)0x0) {
-    uVar1 = ((int (*)())Binding__GetNextBinding)(param_2);
-    return uVar1;
+    nextBinding = ((int (*)())Binding__GetNextBinding)(param_2);
+    return nextBinding;
   }
   return *(undefined4 *)(this + 0xc);
 }
@@ -755,7 +757,7 @@ int BindingTable__GetAttribBindingNameByLocation(this, param_2)
   unsigned char * this;
   long param_2;
 {
-  int iVar1;
+  int location;
   unsigned char * this_00;
   
   this_00 = *(unsigned char **)(this + 0xc);
@@ -763,8 +765,8 @@ int BindingTable__GetAttribBindingNameByLocation(this, param_2)
     if (this_00 == (unsigned char *)0x0) {
       return 0;
     }
-    iVar1 = ((int (*)())Binding__GetLocation)(this_00);
-    if (iVar1 == param_2) break;
+    location = ((int (*)())Binding__GetLocation)(this_00);
+    if (location == param_2) break;
     this_00 = (unsigned char *)((int (*)())Binding__GetNextBinding)(this_00);
   }
   return *(undefined4 *)(this_00 + 8);
@@ -793,7 +795,7 @@ int BindingTable__InsertSingleUniform(this, param_2, param_3)
   int param_3;
 {
   undefined4 uVar1;
-  int iVar2;
+  int location;
   unsigned char * pBVar3;
   unsigned char * pBVar4;
   uint uVar5;
@@ -811,10 +813,10 @@ int BindingTable__InsertSingleUniform(this, param_2, param_3)
     else {
       do {
         pBVar4 = pBVar3;
-        iVar2 = ((int (*)())Binding__GetLocation)(pBVar4);
-        if (-1 < iVar2) {
+        location = ((int (*)())Binding__GetLocation)(pBVar4);
+        if (-1 < location) {
           iVar7 = ((int (*)())Binding__GetBindingSlots)(pBVar4);
-          iVar6 = iVar2;
+          iVar6 = location;
         }
         pBVar3 = (unsigned char *)((int (*)())Binding__GetNextBinding)(pBVar4);
       } while (pBVar3 != (unsigned char *)0x0);
@@ -874,21 +876,21 @@ int BindingTable__AddSingleUniformReference(this, param_2, param_3)
   unsigned char * param_2;
   int param_3;
 {
-  int iVar1;
-  uint uVar2;
+  int slotCount;
+  uint glType;
   
   if (param_3 != 0) {
     param_2[0x35] = 0x1;
-    iVar1 = ((int (*)())Binding__GetBindingSlots)(param_2);
-    *(int *)(this + 0x30) = *(int *)(this + 0x30) + iVar1;
+    slotCount = ((int (*)())Binding__GetBindingSlots)(param_2);
+    *(int *)(this + 0x30) = *(int *)(this + 0x30) + slotCount;
   }
   else {
     param_2[0x34] = 0x1;
-    iVar1 = ((int (*)())Binding__GetBindingSlots)(param_2);
-    *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + iVar1;
+    slotCount = ((int (*)())Binding__GetBindingSlots)(param_2);
+    *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + slotCount;
   }
-  uVar2 = ((int (*)())Binding__GetOpenGLType)(param_2);
-  if ((0x8b5c < uVar2) && (uVar2 < 0x8b65)) {
+  glType = ((int (*)())Binding__GetOpenGLType)(param_2);
+  if ((0x8b5c < glType) && (glType < 0x8b65)) {
     if (param_3 != 0) {
       *(int *)(this + 0x44) = *(int *)(this + 0x44) + 1;
     }
@@ -1059,11 +1061,11 @@ int BindingTable__NextUniformBinding(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  undefined4 uVar1;
+  undefined4 nextBinding;
   
   if (param_2 != (unsigned char *)0x0) {
-    uVar1 = ((int (*)())Binding__GetNextBinding)(param_2);
-    return uVar1;
+    nextBinding = ((int (*)())Binding__GetNextBinding)(param_2);
+    return nextBinding;
   }
   return *(undefined4 *)(this + 0x14);
 }
@@ -1145,9 +1147,9 @@ int BindingTable__FindUniformBindingByLocation(this, param_2)
   unsigned char * this;
   long param_2;
 {
-  int iVar1;
+  int location;
   int iVar2;
-  uint uVar3;
+  uint bindingBasicSize;
   unsigned char * this_00;
   
   this_00 = *(unsigned char **)(this + 0x14);
@@ -1155,12 +1157,12 @@ int BindingTable__FindUniformBindingByLocation(this, param_2)
     if (this_00 == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
     }
-    iVar1 = ((int (*)())Binding__GetLocation)(this_00);
-    if (iVar1 == param_2) break;
-    if ((iVar1 < param_2) &&
-       (iVar2 = ((int (*)())Binding__GetBindingSlots)(this_00), (uint)param_2 < (uint)(iVar1 + iVar2))) {
-      uVar3 = ((int (*)())Binding__GetBindingBasicSize)(this_00);
-      if (param_2 - iVar1 != ((uint)(param_2 - iVar1) / uVar3) * uVar3) {
+    location = ((int (*)())Binding__GetLocation)(this_00);
+    if (location == param_2) break;
+    if ((location < param_2) &&
+       (iVar2 = ((int (*)())Binding__GetBindingSlots)(this_00), (uint)param_2 < (uint)(location + iVar2))) {
+      bindingBasicSize = ((int (*)())Binding__GetBindingBasicSize)(this_00);
+      if (param_2 - location != ((uint)(param_2 - location) / bindingBasicSize) * bindingBasicSize) {
         return (unsigned char *)0x0;
       }
       return this_00;
@@ -1268,6 +1270,7 @@ int BindingTable__GetString(this, param_2)
   unsigned char * this;
   int param_2;
 {
+  int stringValue;
   int string;
   bool bVar1;
   char *pcVar2;
@@ -1383,12 +1386,12 @@ LAB_97bb1d30:
         _sprintf(pcVar2,"%s  --- Hash %d ---\n",pcVar2,loopIndex);
         pcVar7 = pcVar2;
         do {
-          iVar3 = ((int (*)())Binding__GetString)(this_00);
-          if (iVar3 != 0) {
-            length = _strlen(iVar3);
+          stringValue = ((int (*)())Binding__GetString)(this_00);
+          if (stringValue != 0) {
+            length = _strlen(stringValue);
             iVar8 = iVar8 + length;
-            _sprintf(pcVar7,"%s   %s",pcVar7,iVar3);
-            _free(iVar3);
+            _sprintf(pcVar7,"%s   %s",pcVar7,stringValue);
+            _free(stringValue);
           }
           pcVar2 = pcVar7;
           if (uVar9 < iVar8 + 0x300U) {
@@ -1446,12 +1449,12 @@ LAB_97bb1d30:
 LAB_97bb1b5c:
   if (!bVar1) {
     do {
-      iVar3 = ((int (*)())Binding__GetString)(this_00);
-      if (iVar3 != 0) {
-        length = _strlen(iVar3);
+      stringValue = ((int (*)())Binding__GetString)(this_00);
+      if (stringValue != 0) {
+        length = _strlen(stringValue);
         iVar8 = iVar8 + length;
-        _sprintf(pcVar7,"%s  %s",pcVar7,iVar3);
-        _free(iVar3);
+        _sprintf(pcVar7,"%s  %s",pcVar7,stringValue);
+        _free(stringValue);
       }
       pcVar2 = pcVar7;
       if (uVar9 < iVar8 + 0x300U) {

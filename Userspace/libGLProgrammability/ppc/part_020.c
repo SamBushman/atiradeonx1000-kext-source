@@ -116,7 +116,7 @@ int __ZNSs4_Rep10_M_disposeERKSaIcE(param_1, in_r4)
   unsigned char * param_1;
   uint in_r4;
 {
-  int iVar1;
+  int atomicStore;
   unsigned char * paVar2;
   int iVar3;
   char in_RESERVE;
@@ -126,8 +126,8 @@ int __ZNSs4_Rep10_M_disposeERKSaIcE(param_1, in_r4)
   do {
     iVar3 = *(int *)paVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,paVar2);
-      *(int *)paVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,paVar2);
+      *(int *)paVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -152,7 +152,7 @@ int __ZNSs9_M_mutateEmmm(this, param_2, param_3, param_4)
   ulong param_3;
   ulong param_4;
 {
-  int iVar1;
+  int atomicStore;
   uint uVar2;
   int *piVar3;
   int iVar4;
@@ -198,8 +198,8 @@ int __ZNSs9_M_mutateEmmm(this, param_2, param_3, param_4)
   do {
     iVar7 = *piVar3;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar7 + -1,0,piVar3);
-      *piVar3 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar7 + -1,0,piVar3);
+      *piVar3 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -289,7 +289,7 @@ int __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this, param_2, param_3)
 int __ZNSs4_Rep10_M_refcopyEv(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   char in_RESERVE;
   byte in_cr0;
@@ -297,8 +297,8 @@ int __ZNSs4_Rep10_M_refcopyEv(this)
   piVar2 = (int *)((int)this + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -362,7 +362,7 @@ int __ZNSsC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   char *pcVar3;
   char in_RESERVE;
@@ -379,8 +379,8 @@ int __ZNSsC1ERKSs(this, param_2)
     piVar2 = (int *)(pcVar3 + -4);
     do {
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+        *piVar2 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -394,7 +394,7 @@ int __ZNSs4_Rep7_M_grabERKSaIcES2_(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   unsigned char * paVar2;
   char in_RESERVE;
   byte in_cr0;
@@ -406,8 +406,8 @@ int __ZNSs4_Rep7_M_grabERKSaIcES2_(param_1, param_2)
   paVar2 = param_1 + 8;
   do {
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*(int *)paVar2 + 1,0,paVar2);
-      *(int *)paVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(*(int *)paVar2 + 1,0,paVar2);
+      *(int *)paVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
@@ -419,7 +419,7 @@ int __ZNSsC4ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   char *pcVar3;
   char in_RESERVE;
@@ -436,8 +436,8 @@ int __ZNSsC4ERKSs(this, param_2)
     piVar2 = (int *)(pcVar3 + -4);
     do {
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-        *piVar2 = iVar1;
+        atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+        *piVar2 = atomicStore;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
@@ -687,7 +687,7 @@ int __ZNSsD1Ev(this)
 int __ZNSsD4Ev(this)
   void *this;
 {
-  int iVar1;
+  int atomicStore;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -701,8 +701,8 @@ int __ZNSsD4Ev(this)
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+      *piVar2 = atomicStore;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
