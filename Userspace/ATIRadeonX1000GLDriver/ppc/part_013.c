@@ -3584,8 +3584,8 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   uint uStack_5c;
   undefined4 local_58;
   uint uStack_54;
-  undefined4 local_50;
-  uint uStack_4c;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   undefined4 local_48;
   undefined4 uStack_44;
   longlong local_40;
@@ -3635,8 +3635,8 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   local_68 = 0x43300000;
   local_60 = 0x43300000;
   local_58 = 0x43300000;
-  local_50 = 0x43300000;
-  uStack_4c = param_4[2] ^ 0x80000000;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = param_4[2] ^ 0x80000000;
   uStack_64 = param_4[1] ^ 0x80000000;
   uStack_5c = *param_4 ^ 0x80000000;
   uStack_54 = param_4[3] ^ 0x80000000;
@@ -3646,7 +3646,7 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   uVar7 = *(undefined4 *)(((unsigned char *)0x00002da4) + iVar17);
   uVar8 = *(undefined4 *)(((unsigned char *)0x00002da8) + iVar17);
   local_48 = 0x43300000;
-  fVar1 = (float)((double)CONCAT44(0x43300000,uStack_4c) - 4503601774854144.0);
+  fVar1 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   fVar2 = (float)((double)CONCAT44(0x43300000,uStack_64) - 4503601774854144.0);
   fVar3 = (float)((double)CONCAT44(0x43300000,uStack_54) - 4503601774854144.0);
   fVar4 = (float)((double)CONCAT44(0x43300000,uStack_5c) - 4503601774854144.0);

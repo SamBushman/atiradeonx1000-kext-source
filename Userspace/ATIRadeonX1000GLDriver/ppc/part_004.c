@@ -3915,13 +3915,13 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   longlong local_b0;
   undefined4 local_a8;
   float *pfStack_a4;
-  undefined4 local_a0;
-  uint uStack_9c;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   undefined4 local_98;
   undefined4 uStack_94;
   longlong local_90;
-  undefined4 local_88;
-  uint uStack_84;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   undefined4 local_80;
   uint uStack_7c;
   undefined4 local_78;
@@ -4008,11 +4008,11 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     puVar11[2] = iVar20 * 0x80000 | 0xc0003500;
     puVar11[3] = iVar20 * 0x10000 | 0x31;
     if (param_4 != 0) {
-      uStack_84 = param_7 ^ 0x80000000;
-      local_88 = 0x43300000;
+      i2dLo1 = param_7 ^ 0x80000000;
+      i2dHi1 = 0x43300000;
       iVar9 = 0;
       pfVar13 = &local_168;
-      fVar5 = (float)((double)CONCAT44(0x43300000,uStack_84) - dVar6) + fVar5;
+      fVar5 = (float)((double)CONCAT44(0x43300000,i2dLo1) - dVar6) + fVar5;
       do {
         dVar6 = DOUBLE_001aa250;
         fVar18 = FLOAT_001aa0f0;
@@ -4070,11 +4070,11 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     fVar18 = GH_U2F((unsigned int)((*(uint *)(param_1 + 0x1ce8) & 0xffff00ff | 0xff00)));
     pfVar16 = pfStack_a4;
     if (param_4 != 0) {
-      uStack_9c = param_7 ^ 0x80000000;
-      local_a0 = 0x43300000;
+      i2dLo2 = param_7 ^ 0x80000000;
+      i2dHi2 = 0x43300000;
       loopIndex = 0;
       fVar5 = fVar5 / *(float *)(param_1 + 0x2a54) +
-              (float)((double)CONCAT44(0x43300000,uStack_9c) - dVar6);
+              (float)((double)CONCAT44(0x43300000,i2dLo2) - dVar6);
       do {
         dVar7 = DOUBLE_001aa250;
         dVar6 = DOUBLE_001aa240;

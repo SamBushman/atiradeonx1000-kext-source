@@ -4608,12 +4608,12 @@ char * FUN_000cdc3c(undefined4 param_1,int param_2,char *param_3,double fparam_1
   double dVar16;
   uint local_98;
   int local_94 [3];
-  undefined4 local_88;
-  uint uStack_84;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   longlong local_80;
   longlong local_78;
-  undefined4 local_70;
-  uint uStack_6c;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   longlong local_68;
   longlong local_60;
   longlong local_58;
@@ -4651,10 +4651,10 @@ char * FUN_000cdc3c(undefined4 param_1,int param_2,char *param_3,double fparam_1
       param_3[iVar4] = '-';
       iVar4 = iVar8 + 2;
     }
-    uStack_84 = uVar13 ^ 0x80000000;
-    local_88 = 0x43300000;
+    i2dLo1 = uVar13 ^ 0x80000000;
+    i2dHi1 = 0x43300000;
     local_98 = uVar13;
-    dVar14 = _log((double)(float)((double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0));
+    dVar14 = _log((double)(float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0));
     dVar15 = _log(DOUBLE_001aa238);
     dVar3 = DOUBLE_001aa1e8;
     dVar2 = DOUBLE_001aa1e0;
@@ -4671,9 +4671,9 @@ char * FUN_000cdc3c(undefined4 param_1,int param_2,char *param_3,double fparam_1
     pcVar7 = param_3 + iVar4;
     uVar12 = uVar10;
     do {
-      uStack_6c = uVar12 ^ 0x80000000;
-      local_70 = 0x43300000;
-      dVar16 = (double)CONCAT44(0x43300000,uStack_6c) - dVar2;
+      i2dLo2 = uVar12 ^ 0x80000000;
+      i2dHi2 = 0x43300000;
+      dVar16 = (double)CONCAT44(0x43300000,i2dLo2) - dVar2;
       dVar15 = _pow(DOUBLE_001aa238,dVar16);
       dVar14 = DOUBLE_001aa238;
       if (dVar3 <= dVar15) {
@@ -6847,16 +6847,16 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
   char local_8c;
   undefined1 local_8b;
   undefined1 local_8a;
-  undefined4 local_88;
-  uint uStack_84;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   longlong local_80;
   undefined4 local_78;
   uint uStack_74;
-  undefined4 local_70;
-  uint uStack_6c;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   longlong local_68;
-  undefined4 local_60;
-  uint uStack_5c;
+  undefined4 i2dHi3;
+  uint i2dLo3;
   longlong local_58;
   float local_50;
   
@@ -6894,9 +6894,9 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
             local_98[0] = '+';
           }
           local_50 = (float)dVar9;
-          local_88 = 0x43300000;
-          uStack_84 = ((uint)(int)local_50 >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
-          dVar10 = _pow(DOUBLE_001aa2a0,(double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0);
+          i2dHi1 = 0x43300000;
+          i2dLo1 = ((uint)(int)local_50 >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
+          dVar10 = _pow(DOUBLE_001aa2a0,(double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0);
           dVar10 = _log(dVar10);
           dVar11 = _log(dVar3);
           dVar10 = _floor(dVar10 / dVar11);
@@ -6909,9 +6909,9 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
           dVar11 = dVar9 / dVar11 + DOUBLE_001aa298;
           if (dVar3 <= dVar11) {
             uVar7 = uVar7 + 1;
-            local_70 = 0x43300000;
-            uStack_6c = uVar7 ^ 0x80000000;
-            dVar11 = _pow(dVar3,(double)CONCAT44(0x43300000,uStack_6c) - dVar2);
+            i2dHi2 = 0x43300000;
+            i2dLo2 = uVar7 ^ 0x80000000;
+            dVar11 = _pow(dVar3,(double)CONCAT44(0x43300000,i2dLo2) - dVar2);
             dVar11 = dVar9 / dVar11 + dVar10;
           }
           dVar9 = _floor(dVar11);
@@ -6921,9 +6921,9 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
           iVar6 = 3;
           local_98[1] = (char)uVar5 + '0';
           do {
-            uStack_5c = uVar5 ^ 0x80000000;
-            local_60 = 0x43300000;
-            dVar11 = (dVar11 - ((double)CONCAT44(0x43300000,uStack_5c) - dVar2)) * dVar3;
+            i2dLo3 = uVar5 ^ 0x80000000;
+            i2dHi3 = 0x43300000;
+            dVar11 = (dVar11 - ((double)CONCAT44(0x43300000,i2dLo3) - dVar2)) * dVar3;
             dVar9 = _floor(dVar11);
             bVar1 = iVar6 != 9;
             uVar5 = (uint)(int)dVar9;
