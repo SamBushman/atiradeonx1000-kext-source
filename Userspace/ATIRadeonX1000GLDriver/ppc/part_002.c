@@ -8361,9 +8361,9 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
     colorA = (float)(oneMinusFogFactor * (double)*(float *)(((unsigned char *)0x00002dec) + engineState) +
                         (double)(float)((double)colorA * fogFactor));
   }
-  zoomX = (int)(*(float *)(ctx + 0x2a54) + FLOAT_001aa10c);
+  zoomX = (int)(*(float *)(ctx + GLD_rasterScaleX) + FLOAT_001aa10c);
   zoomXWide = (longlong)zoomX;
-  zoomY = (int)(*(float *)(ctx + 0x2a58) + FLOAT_001aa10c);
+  zoomY = (int)(*(float *)(ctx + GLD_rasterScaleY) + FLOAT_001aa10c);
   zoomYWide = (longlong)zoomY;
   pointsPerPixel = zoomX * zoomY;
   centerOffsetX = FLOAT_001aa10c;
@@ -8376,7 +8376,7 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
   }
   if ((0 < width) && (0 < height)) {
     puStack_ac = auStack_178;
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     columns = width;
     rows = height;
     rowPtr = bitmap;
@@ -8384,7 +8384,7 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
     startX = _floor((double)(float)((double)*vertex - xOrigin));
     invertedRowStep = FLOAT_001aa114;
     rowStep = FLOAT_001aa0e8;
-    if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
+    if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
       startY = _floor((double)(float)((double)vertex[1] - yOrigin));
       uVar11 = extraout_r4_00;
     }
@@ -8768,11 +8768,11 @@ int FUN_00017160(ctx, flagsInOut, pbuffer)
   if (*(int *)(ctx + GLD_boundFramebuffer) == 0) {
     if (pbuffer == 0) {
       **(uint **)(ctx + GLD_capsBlock) = **(uint **)(ctx + GLD_capsBlock) | 2;
-      ((unsigned char *)0x00002b7c)[ctx] = 1;
+      ((unsigned char *)GLD_yInverted)[ctx] = 1;
     }
     else {
       **(uint **)(ctx + GLD_capsBlock) = **(uint **)(ctx + GLD_capsBlock) & 0xfffffffd;
-      ((unsigned char *)0x00002b7c)[ctx] = 0;
+      ((unsigned char *)GLD_yInverted)[ctx] = 0;
     }
   }
   FUN_000a7a60(ctx);
@@ -8792,16 +8792,16 @@ int FUN_00017260(ctx)
   framebuffer = *(int **)(ctx + GLD_boundFramebuffer);
   if (framebuffer == (int *)0x0) {
     formatByte = FUN_0002f410(*(undefined4 *)(ctx + GLD_renderFlags));
-    ((unsigned char *)0x00002b7f)[ctx] = formatByte;
+    ((unsigned char *)GLD_colorFormatIndex)[ctx] = formatByte;
   }
   else {
     attachLeft = 4;
-    ((unsigned char *)0x00002b7f)[ctx] = 0x2f;
+    ((unsigned char *)GLD_colorFormatIndex)[ctx] = 0x2f;
     attachPoint = *framebuffer;
     do {
       if ((*(ushort *)(attachPoint + 0x90) != 0) &&
          (attachment = *(int *)((*(ushort *)(attachPoint + 0x90) - 0x8ce0) * 4 + framebuffer[1]), attachment != 0)) {
-        ((unsigned char *)0x00002b7f)[ctx] = *(undefined1 *)(attachment + 0x38);
+        ((unsigned char *)GLD_colorFormatIndex)[ctx] = *(undefined1 *)(attachment + 0x38);
         break;
       }
       attachPoint = attachPoint + 2;
@@ -10274,7 +10274,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
   int yDir;
   uint transferMode8;
   
-  *(undefined1 *)(ctx + 0x2a5e) = 1;
+  *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
   ctxState = *(int *)(ctx + GLD_engineState);
   transferMode8 = transferMode & 0xff;
   if ((((unsigned char *)0x00002d84)[ctxState] == '\0') ||
@@ -10284,60 +10284,60 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
        (((*(short *)(((unsigned char *)0x00002d80) + ctxState) != -0x7ff9 &&
          (*(short *)(((unsigned char *)0x00002d82) + ctxState) != -0x7ff5)) &&
         (*(short *)(((unsigned char *)0x00002d82) + ctxState) != -0x7ff9)))) || (((unsigned char *)0x00002e33)[ctxState] != '\0')))) {
-    pathFlags = *(uint *)(ctx + 0x26b0) & 0xfffffffd;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    pathFlags = *(uint *)(ctx + GLD_drawPixelsFlags) & 0xfffffffd;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   else {
-    pathFlags = *(uint *)(ctx + 0x26b0) | 2;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    pathFlags = *(uint *)(ctx + GLD_drawPixelsFlags) | 2;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if (((unsigned char *)0x00002d66)[ctxState] == '\0') {
     pathFlags = pathFlags & 0xfffffffe;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   else {
     pathFlags = pathFlags | 1;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xcff1) == 0) {
     pathFlags = pathFlags & 0xfffff7ff;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   else {
     pathFlags = pathFlags | 0x800;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if ((((unsigned char *)0x00002ddc)[ctxState] == '\0') || ((*(uint *)(ctx + GLD_renderFlags) & 0xf) != 3)) {
     pathFlags = pathFlags & 0xffffffdf;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   else {
     pathFlags = pathFlags | 0x20;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if ((((*(uint *)(((unsigned char *)0x000031c0) + ctxState) & 1) == 0) || ((*(uint *)(ctx + GLD_renderFlags) & 0x80) == 0))
      || ((*(short *)(((unsigned char *)0x000031a0) + ctxState) == 0x207 &&
          (*(int *)(((unsigned char *)0x000031a4) + ctxState) == 0x1e001e00)))) {
     pathFlags = pathFlags & 0xfffeffff;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   else {
     pathFlags = pathFlags | 0x10000;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if ((((unsigned char *)0x00002dc8)[ctxState] == '\0') || ((*(uint *)(ctx + GLD_renderFlags) & 0x40) == 0)) {
     pathFlags = pathFlags & 0xffffffef;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   else {
     pathFlags = pathFlags | 0x10;
-    *(uint *)(ctx + 0x26b0) = pathFlags;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if (((unsigned char *)0x00002e0a)[ctxState] == '\0') {
-    *(uint *)(ctx + 0x26b0) = pathFlags & 0xffffffbf;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags & 0xffffffbf;
   }
   else {
-    *(uint *)(ctx + 0x26b0) = pathFlags | 0x40;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags | 0x40;
   }
   widthCopy = width;
   heightArg = height;
@@ -10352,27 +10352,27 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
        ((*(int *)(ctx + GLD_unitObject5) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 5)))))) &&
      (((*(int *)(ctx + GLD_unitObject6) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 6)) &&
       ((*(int *)(ctx + GLD_unitObject7) == 0 || (iVar11 = FUN_000a4760(ctx), iVar11 == 7)))))) {
-    pathFlagsB = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
-    *(uint *)(ctx + 0x26b0) = pathFlagsB;
+    pathFlagsB = *(uint *)(ctx + GLD_drawPixelsFlags) & 0xfffdffff;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }
   else {
-    pathFlagsB = *(uint *)(ctx + 0x26b0) | 0x20000;
-    *(uint *)(ctx + 0x26b0) = pathFlagsB;
+    pathFlagsB = *(uint *)(ctx + GLD_drawPixelsFlags) | 0x20000;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }
   if (((unsigned char *)0x00002e33)[ctxState] == '\0') {
     pathFlagsB = pathFlagsB & 0xfffffdff;
-    *(uint *)(ctx + 0x26b0) = pathFlagsB;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }
   else {
     pathFlagsB = pathFlagsB | 0x200;
-    *(uint *)(ctx + 0x26b0) = pathFlagsB;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }
   if ((((((unsigned char *)0x00002e43)[ctxState] == '\0') || (((unsigned char *)0x00002e40)[ctxState] == '\0')) ||
       (((unsigned char *)0x00002e41)[ctxState] == '\0')) || (((unsigned char *)0x00002e42)[ctxState] == '\0')) {
-    *(uint *)(ctx + 0x26b0) = pathFlagsB | 0x400;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB | 0x400;
   }
   else {
-    *(uint *)(ctx + 0x26b0) = pathFlagsB & 0xfffffbff;
+    *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB & 0xfffffbff;
   }
   if (width == 0) {
     return;
@@ -10402,7 +10402,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
     }
   }
   skipPixelStore = transferMode8 != 0;
-  if (((!skipPixelStore) && ((*(uint *)(ctx + 0x26b0) & 0x30e73) == 0)) &&
+  if (((!skipPixelStore) && ((*(uint *)(ctx + GLD_drawPixelsFlags) & 0x30e73) == 0)) &&
      ((1 < format - 0x1901U &&
       (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0 &&
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)))))) {
@@ -10447,7 +10447,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
   }
   local_3ec = *pfStack0000001c;
   procMode = 2;
-  rasterXScaled = local_3ec * *(float *)(ctx + 0x2a54);
+  rasterXScaled = local_3ec * *(float *)(ctx + GLD_rasterScaleX);
   rasterXRounded = rasterXScaled + 0.5;
   if (0.0 <= rasterXRounded) {
     ctxState = (int)rasterXRounded;
@@ -10457,8 +10457,8 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
     ctxState = (int)(rasterXRounded - 0.999975);
     fctiwzSlot0 = (longlong)ctxState;
   }
-  if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
-    fVar3 = *(float *)(ctx + 0x2a58);
+  if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
+    fVar3 = *(float *)(ctx + GLD_rasterScaleY);
     local_3e8 = pfStack0000001c[1];
     fVar5 = local_3e8 * fVar3 + 0.5;
     scratchR10 = (char *)pfStack0000001c;
@@ -10472,7 +10472,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
     }
   }
   else {
-    fVar3 = *(float *)(ctx + 0x2a58);
+    fVar3 = *(float *)(ctx + GLD_rasterScaleY);
     local_3e8 = pfStack0000001c[1];
     fVar5 = local_3e8 * fVar3 - 0.5;
     scratchR10 = "ret_logicalnz ";
@@ -10486,7 +10486,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
     }
   }
   zoomYScaled = fVar3 * *(float *)(((unsigned char *)0x00002e4c) + *(int *)(ctx + GLD_engineState));
-  zoomXScaled = *(float *)(ctx + 0x2a54) * *(float *)(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState));
+  zoomXScaled = *(float *)(ctx + GLD_rasterScaleX) * *(float *)(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState));
   if (notStencil) {
     bytesPerPixel = 4;
   }
@@ -10530,7 +10530,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTr
     ctxState = (int)(rasterXRounded + 0.999975);
     fctiwzSlot6 = (longlong)ctxState;
   }
-  if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
+  if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
     scratchR9 = "ret_logicalnz ";
     if (zoomYScaled < 0.0) {
       fVar3 = fVar3 - 0.5;
@@ -10666,8 +10666,8 @@ LAB_000194f4:
         local_3b8 = *(undefined4 *)(iVar23 + 0x9c);
       }
       stateBytes = 0x274;
-      zoomXScaledB = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + 0x2a54);
-      zoomYScaledB = *(float *)(((unsigned char *)0x00002e4c) + engineState) * *(float *)(ctx + 0x2a58);
+      zoomXScaledB = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + GLD_rasterScaleX);
+      zoomYScaledB = *(float *)(((unsigned char *)0x00002e4c) + engineState) * *(float *)(ctx + GLD_rasterScaleY);
       _memcpy(&procZoomX,((unsigned char *)0x00002e48) + engineState,0x274);
       zoomXFlag = 0x4000;
       if (zoomXScaledB == 1.0) {
@@ -10680,7 +10680,7 @@ LAB_000194f4:
                        );
     }
     srcRowBytes = convRowBytes;
-    if (((unsigned char *)0x00002b7c)[ctx] != '\0') {
+    if (((unsigned char *)GLD_yInverted)[ctx] != '\0') {
       srcRowBytes = -convRowBytes;
     }
     tileWidth = scaledWidth;
@@ -10722,7 +10722,7 @@ LAB_000194f4:
               procWidth = tileWidth;
             }
             tileX = tileColumn * tileWidth;
-            if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
+            if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
               local_420 = tileRowStart * srcRowBytes + bytesPerPixel * tileX;
               iVar10 = tileRowOffset;
             }

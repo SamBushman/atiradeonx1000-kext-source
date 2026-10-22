@@ -126,3 +126,19 @@ field	GLD	0x2680	vap_prog_stream_cntl_0_ptr	CONFIRMED	pointer into the embedded 
 field	GLD	0x2684	vap_prog_stream_cntl_ext_0_ptr	CONFIRMED	pointer into the embedded array at +0x2650; **ptr is the value of the pair (0x878 = VAP_PROG_STREAM_CNTL_EXT_0 0x21e0), four builders
 field	GLD	0x26cc	vap_vtx_size	CONFIRMED	pair (0x82d = VAP_VTX_SIZE 0x20b4) in FUN_000369f0
 field	GLD	0x29f0	tx_enable	CONFIRMED	pair (0x1041 = TX_ENABLE 0x4104), three builders (FUN_000369f0 also pairs it with GA_COLOR_CONTROL_PS3 through a shared temporary)
+field	GLD	0x1cc0	rb3d_blendcntl	CONFIRMED	register shadow: packet pair {0x1381 = RB3D_BLENDCNTL (0x4e04, Headers/ATIRadeonX1000Registers.h), value ctx+0x1cc0} in the state packet builders; the value is masked with 0xfffffffc when the colour format has no blend (+0x18 bit 14 clear)
+field	GLD	0x26b0	drawPixelsFlags	INFERRED	rebuilt at the top of FUN_00018a40 (glDrawPixels) from engine state bits (bit 0/1 = +0x2d66/+0x2d84 flags, 0x20/0x10/0x40/0x800/0x10000/0x20000/0x200/0x400 ...); (flags & 0x30e73) == 0 selects the plain path
+field	GLD	0x26b8	pendingTextureMask	CONFIRMED	_gldUpdateDispatch: bit n = unit n's texture object is flagged modified (+0x44); set per unit while resolving the bound texture, cleared again after FUN_000a7ee0
+field	GLD	0x26c0	pendingDirty2	INFERRED	_gldUpdateDispatch: dirtyWord2 = dirtyBits[2] | ctx+0x26c0 (dirty bits accumulated since the last validate)
+field	GLD	0x26c4	pendingDirty3	INFERRED	_gldUpdateDispatch: dirtyWord3 |= ctx+0x26c4
+field	GLD	0x26c8	updateFlags	INFERRED	_gldUpdateDispatch: |= 7 on a full invalidate, bit 1 adds 2 to the return value, & 0xfffffff9 after the update
+field	GLD	0x29c0	lastDirtyBit28	INFERRED	_gldUpdateDispatch: remembers dirtyWord3 & 0x10000000 (the program-mode dirty bit) after a validate; compared on the next one
+field	GLD	0x29dc	programActive	CONFIRMED	_gldUpdateDispatch: stores programActive (1 when a program with a valid header is bound); a change forces the unit mask to 0xffff
+field	GLD	0x2a42	needsWaitIdle	INFERRED	FUN_0001ecd0: when set, the draw packet is preceded by {0x5c8 = WAIT_UNTIL (0x1720), 0x10000000} and the byte is cleared
+field	GLD	0x2a54	rasterScaleX	INFERRED	FUN_00018a40 (glDrawPixels): raster position x * ctx+0x2a54 gives the window x; multiplied with the engine pixel-zoom x to test for zoom 1.0
+field	GLD	0x2a58	rasterScaleY	INFERRED	FUN_00018a40: raster position y * ctx+0x2a58 gives the window y; multiplied with the engine pixel-zoom y
+field	GLD	0x2a5e	inDrawPixels	INFERRED	FUN_00018a40 sets this byte to 1 on entry (no other write in the corpus function)
+field	GLD	0x2b74	readScratchBuffer	CONFIRMED	FUN_00029290 (glReadPixels): valloc'd scratch buffer (vfree + valloc when the needed size exceeds +0x2b78), stored here
+field	GLD	0x2b78	readScratchSize	CONFIRMED	FUN_00029290: size in bytes of the scratch buffer at +0x2b74 (page-rounded)
+field	GLD	0x2b7c	yInverted	CONFIRMED	set to 1 when the drawable is not a pbuffer (R4); FUN_00018a40/FUN_0002a3d0 choose the rounding direction and the row order of the copy by this byte
+field	GLD	0x2b7f	colorFormatIndex	INFERRED	byte indexing the 0x24-byte pixel format table PTR_DAT_001e88c8 (bits +0x10/+0x14/+0x18 give the channel layout): read in FUN_00029290, FUN_00028350, FUN_0002a3d0, FUN_00034200 and the state packet builders

@@ -4643,22 +4643,22 @@ LAB_00034df0:
   tailCursor[0x30] = zb_cntl;
   baseLevel = *(uint *)(ctx + GLD_fg_fog_blend);
   tailCursor[0x32] = baseLevel;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
+  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x8000) == 0) {
     tailCursor[0x32] = baseLevel & 0xfffffffe;
   }
   tailCursor[0x33] = (int)((unsigned char *)0x000012f5U);
   baseLevel = *(uint *)(ctx + GLD_fg_alpha_func);
   tailCursor[0x34] = baseLevel;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
+  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x8000) == 0) {
     tailCursor[0x34] = baseLevel & 0xfffff7ff;
   }
   tailCursor[0x35] = (int)((unsigned char *)0x000010a2U);
   ga_poly_mode = *(int *)(ctx + GLD_ga_poly_mode);
   tailCursor[0x37] = (int)((unsigned char *)0x00001381U);
   tailCursor[0x36] = ga_poly_mode;
-  baseLevel = *(uint *)(ctx + 0x1cc0);
+  baseLevel = *(uint *)(ctx + GLD_rb3d_blendcntl);
   tailCursor[0x38] = baseLevel;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x4000) == 0) {
+  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x4000) == 0) {
     tailCursor[0x38] = baseLevel & 0xfffffffc;
   }
   tailCursor[0x39] = (int)((unsigned char *)0x0000109eU);
@@ -5901,13 +5901,13 @@ int FUN_000369f0(ctx, texture, face, level, xOffset, yOffset, zOffset, width, he
                        (int)dataCursorPtr - *(int *)(ctx + GLD_dataBase) >> 2;
                   _io_connect_method_scalarI_scalarO
                             (*(undefined4 *)(ctx + GLD_connect),0x12,0,0,&puStack_23c,piStack_c8);
-                  uVar44 = *(uint *)(0x000026c8 + ctx);
+                  uVar44 = *(uint *)(GLD_updateFlags + ctx);
                   *(uint **)(ctx + GLD_dataBase) = puStack_23c;
                   *(uint **)(ctx + GLD_dataCursor) = puStack_23c;
                   *(undefined1 **)(ctx + GLD_dataLimit) =
                        (undefined1 *)((int)puStack_23c + (srcRowBytes & 0xfffffffc));
                   uVar28 = *(undefined4 *)(*(int *)(ctx + GLD_contextBufferMap) + 8);
-                  *(uint *)(0x000026c8 + ctx) = uVar44 | 1;
+                  *(uint *)(GLD_updateFlags + ctx) = uVar44 | 1;
                   *(undefined4 *)(ctx + GLD_dataBufferId) = uVar28;
                   dataCursorPtr = puStack_23c;
                 }
@@ -6462,7 +6462,7 @@ LAB_00038698:
               fg_fog_blendC = *(uint *)(ctx + GLD_fg_fog_blend);
               packet[0xfe] = fg_fog_blendC;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
-                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
+                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
                 packet[0xfe] = fg_fog_blendC & 0xfffffffe;
               }
@@ -6470,7 +6470,7 @@ LAB_00038698:
               fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
               packet[0x100] = fg_alpha_func;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
-                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
+                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
                 packet[0x100] = fg_alpha_func & 0xfffff7ff;
               }
@@ -6478,10 +6478,10 @@ LAB_00038698:
               ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
               packet[0x103] = ((unsigned char *)0x00001381U);
               packet[0x102] = ga_poly_mode;
-              uVar44 = *(uint *)(ctx + 0x1cc0);
+              uVar44 = *(uint *)(ctx + GLD_rb3d_blendcntl);
               packet[0x104] = uVar44;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
-                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
+                            (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18))
                   & 0x4000) == 0) {
                 packet[0x104] = uVar44 & 0xfffffffc;
               }
@@ -7027,7 +7027,7 @@ LAB_000371ac:
   fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
   texPacket[0x100] = fg_fog_blend;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
-                (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x8000) ==
+                (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x8000) ==
       0) {
     texPacket[0x100] = fg_fog_blend & 0xfffffffe;
   }
@@ -7035,7 +7035,7 @@ LAB_000371ac:
   fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
   texPacket[0x102] = fg_alpha_func;
   uVar26 = *(uint *)(((unsigned char *)0x0000352c) +
-                    (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x8000
+                    (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x8000
   ;
   if (uVar26 == 0) {
     texPacket[0x102] = fg_alpha_func & 0xfffff7ff;
@@ -7044,10 +7044,10 @@ LAB_000371ac:
   ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
   texPacket[0x105] = ((unsigned char *)0x00001381U);
   texPacket[0x104] = ga_poly_mode;
-  uVar44 = *(uint *)(ctx + 0x1cc0);
+  uVar44 = *(uint *)(ctx + GLD_rb3d_blendcntl);
   texPacket[0x106] = uVar44;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
-                (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x4000) ==
+                (int)(pcStack_a8 + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18)) & 0x4000) ==
       0) {
     texPacket[0x106] = uVar44 & 0xfffffffc;
   }
@@ -7580,11 +7580,11 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
-    if (*(char *)(ctx + 0x2a42) == '\0') {
+    if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
       ringStart[1] = 0x10000000;
       ringStart = ringStart + 2;
-      *(undefined1 *)(ctx + 0x2a42) = 1;
+      *(undefined1 *)(ctx + GLD_needsWaitIdle) = 1;
     }
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
@@ -7594,7 +7594,7 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringStart[3] = 4;
     ringStart[1] = topology;
     unitCount = *(int *)(programState + 0x2c);
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     if (data < dataEnd) {
       vertexArrayInfo = vertexStride + -1;
       slotIndex = 0;
@@ -7698,11 +7698,11 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
-    if (*(char *)(ctx + 0x2a42) == '\0') {
+    if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
       ringStart[1] = 0x10000000;
       ringStart = ringStart + 2;
-      *(undefined1 *)(ctx + 0x2a42) = 1;
+      *(undefined1 *)(ctx + GLD_needsWaitIdle) = 1;
     }
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
@@ -7712,7 +7712,7 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringStart[3] = 6;
     ringStart[1] = topology;
     unitCount = *(int *)(programState + 0x2c);
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     if (data < dataEnd) {
       vertexArrayInfo = vertexStride + -1;
       slotIndex = 0;
@@ -7816,11 +7816,11 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
-    if (*(char *)(ctx + 0x2a42) == '\0') {
+    if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
       ringStart[1] = 0x10000000;
       ringStart = ringStart + 2;
-      *(undefined1 *)(ctx + 0x2a42) = 1;
+      *(undefined1 *)(ctx + GLD_needsWaitIdle) = 1;
     }
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
@@ -7830,7 +7830,7 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringStart[3] = 0xd;
     ringStart[1] = topology;
     unitCount = *(int *)(programState + 0x2c);
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     if (data < dataEnd) {
       vertexArrayInfo = vertexStride + -1;
       slotIndex = 0;
@@ -7934,11 +7934,11 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
-    if (*(char *)(ctx + 0x2a42) == '\0') {
+    if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
       ringStart[1] = 0x10000000;
       ringStart = ringStart + 2;
-      *(undefined1 *)(ctx + 0x2a42) = 1;
+      *(undefined1 *)(ctx + GLD_needsWaitIdle) = 1;
     }
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
@@ -7948,7 +7948,7 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringStart[3] = 0xe;
     ringStart[1] = topology;
     unitCount = *(int *)(programState + 0x2c);
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     if (data < dataEnd) {
       vertexArrayInfo = vertexStride + -1;
       slotIndex = 0;
@@ -8052,11 +8052,11 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
-    if (*(char *)(ctx + 0x2a42) == '\0') {
+    if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
       ringStart[1] = 0x10000000;
       ringStart = ringStart + 2;
-      *(undefined1 *)(ctx + 0x2a42) = 1;
+      *(undefined1 *)(ctx + GLD_needsWaitIdle) = 1;
     }
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
@@ -8066,7 +8066,7 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringStart[3] = 0xf;
     ringStart[1] = topology;
     unitCount = *(int *)(programState + 0x2c);
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     if (data < dataEnd) {
       vertexArrayInfo = vertexStride + -1;
       slotIndex = 0;
@@ -8288,11 +8288,11 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
-    if (*(char *)(ctx + 0x2a42) == '\0') {
+    if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
       ringStart[1] = 0x10000000;
       ringStart = ringStart + 2;
-      *(undefined1 *)(ctx + 0x2a42) = 1;
+      *(undefined1 *)(ctx + GLD_needsWaitIdle) = 1;
     }
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
@@ -8302,7 +8302,7 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringStart[3] = 2;
     ringStart[1] = topology;
     unitCount = *(int *)(programState + 0x2c);
-    *(undefined1 *)(ctx + 0x2a5e) = 1;
+    *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
     if (data < dataEnd) {
       vertexArrayInfo = vertexStride + -1;
       slotIndex = 0;

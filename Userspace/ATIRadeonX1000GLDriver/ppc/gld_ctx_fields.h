@@ -78,6 +78,7 @@ enum {
   GLD_gb_aa_config = 0x1ca0,   /* CONFIRMED */
   GLD_gb_mspos0 = 0x1ca8,   /* CONFIRMED */
   GLD_gb_mspos1 = 0x1cac,   /* CONFIRMED */
+  GLD_rb3d_blendcntl = 0x1cc0,   /* CONFIRMED */
   GLD_zb_cntl = 0x1ce0,   /* CONFIRMED */
   GLD_zb_zstencilcntl = 0x1ce4,   /* CONFIRMED */
   GLD_zb_bw_cntl = 0x1cf0,   /* CONFIRMED */
@@ -118,13 +119,28 @@ enum {
   GLD_us_out_fmt_3 = 0x2588,   /* CONFIRMED */
   GLD_vap_prog_stream_cntl_0_ptr = 0x2680,   /* CONFIRMED */
   GLD_vap_prog_stream_cntl_ext_0_ptr = 0x2684,   /* CONFIRMED */
+  GLD_drawPixelsFlags = 0x26b0,   /* INFERRED */
+  GLD_pendingTextureMask = 0x26b8,   /* CONFIRMED */
+  GLD_pendingDirty2 = 0x26c0,   /* INFERRED */
+  GLD_pendingDirty3 = 0x26c4,   /* INFERRED */
+  GLD_updateFlags = 0x26c8,   /* INFERRED */
   GLD_vap_vtx_size = 0x26cc,   /* CONFIRMED */
   GLD_streamCurrent = 0x298c,   /* INFERRED */
   GLD_streamSoftLimit = 0x2994,   /* INFERRED */
   GLD_streamAllocate = 0x2998,   /* CONFIRMED */
   GLD_streamSetCurrent = 0x299c,   /* CONFIRMED */
+  GLD_lastDirtyBit28 = 0x29c0,   /* INFERRED */
+  GLD_programActive = 0x29dc,   /* CONFIRMED */
   GLD_tx_enable = 0x29f0,   /* CONFIRMED */
+  GLD_needsWaitIdle = 0x2a42,   /* INFERRED */
+  GLD_rasterScaleX = 0x2a54,   /* INFERRED */
+  GLD_rasterScaleY = 0x2a58,   /* INFERRED */
+  GLD_inDrawPixels = 0x2a5e,   /* INFERRED */
+  GLD_readScratchBuffer = 0x2b74,   /* CONFIRMED */
+  GLD_readScratchSize = 0x2b78,   /* CONFIRMED */
+  GLD_yInverted = 0x2b7c,   /* CONFIRMED */
   GLD_hasPreamble = 0x2b7e,   /* CONFIRMED */
+  GLD_colorFormatIndex = 0x2b7f,   /* INFERRED */
   GLD_listSelf = 0x2b90,   /* CONFIRMED */
   GLD_listNext = 0x2b94,   /* CONFIRMED */
 };

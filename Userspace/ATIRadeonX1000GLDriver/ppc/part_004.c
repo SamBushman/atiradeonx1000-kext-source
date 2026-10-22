@@ -2985,22 +2985,22 @@ LAB_000284b0:
   packet[0xfe] = zb_cntl;
   fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
   packet[0x100] = fg_fog_blend;
-  if ((*(uint *)(formatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+  if ((*(uint *)(formatTable + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
     packet[0x100] = fg_fog_blend & 0xfffffffe;
   }
   packet[0x101] = ((unsigned char *)0x000012f5U);
   fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
   packet[0x102] = fg_alpha_func;
-  if ((*(uint *)(formatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+  if ((*(uint *)(formatTable + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
     packet[0x102] = fg_alpha_func & 0xfffff7ff;
   }
   packet[0x103] = ((unsigned char *)0x000010a2U);
   ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
   packet[0x105] = ((unsigned char *)0x00001381U);
   packet[0x104] = ga_poly_mode;
-  uVar33 = *(uint *)(ctx + 0x1cc0);
+  uVar33 = *(uint *)(ctx + GLD_rb3d_blendcntl);
   packet[0x106] = uVar33;
-  if ((*(uint *)(formatTable + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
+  if ((*(uint *)(formatTable + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
     packet[0x106] = uVar33 & 0xfffffffc;
   }
   packet[0x107] = ((unsigned char *)0x0000109eU);
@@ -3372,15 +3372,15 @@ LAB_000299f8:
 LAB_00029a74:
               requestPitch = procPitch;
               scratchBytes = height * procPitch + 0xfff & 0xfffff000;
-              if (*(uint *)(((unsigned char *)0x00002b78) + ctx) < scratchBytes) {
-                if (*(int *)(((unsigned char *)0x00002b74) + ctx) != 0) {
-                  _vfree(*(int *)(((unsigned char *)0x00002b74) + ctx));
+              if (*(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) < scratchBytes) {
+                if (*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx) != 0) {
+                  _vfree(*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx));
                 }
                 scratchBuffer = _valloc(scratchBytes);
-                *(uint *)(((unsigned char *)0x00002b78) + ctx) = scratchBytes;
-                *(void **)(((unsigned char *)0x00002b74) + ctx) = scratchBuffer;
+                *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) = scratchBytes;
+                *(void **)(((unsigned char *)GLD_readScratchBuffer) + ctx) = scratchBuffer;
               }
-              requestAddress = *(uint *)(((unsigned char *)0x00002b74) + ctx);
+              requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
               if (requestAddress == 0) goto LAB_00029bd0;
               directCopy = false;
             }
@@ -3446,7 +3446,7 @@ LAB_00029a74:
               *(undefined4 **)(ctx + GLD_streamCurrent) = ropPacket + 2;
               (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,ropPacket + 2);
             }
-            formatIndex = ((unsigned char *)0x00002b7f)[ctx];
+            formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             renderFlags = *(uint *)(ctx + GLD_renderFlags);
             procPitch = (width << (*(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
@@ -3772,18 +3772,18 @@ LAB_000299f8:
                 ((((srcRowBytes & 0x3f) != 0 || (0x1fff < (int)srcRowBytes)) ||
                  ((dstAddress & 0x1f) != 0)))))) {
 LAB_00029a74:
-              uVar12 = *(uint *)(((unsigned char *)0x00002b78) + ctx);
+              uVar12 = *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx);
               requestPitch = procPitch;
               scratchBytes = height * procPitch + 0xfff & 0xfffff000;
               if (uVar12 < scratchBytes) {
-                if (*(int *)(((unsigned char *)0x00002b74) + ctx) != 0) {
-                  _vfree(*(int *)(((unsigned char *)0x00002b74) + ctx));
+                if (*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx) != 0) {
+                  _vfree(*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx));
                 }
                 scratchBuffer = _valloc(scratchBytes);
-                *(uint *)(((unsigned char *)0x00002b78) + ctx) = scratchBytes;
-                *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = scratchBuffer;
+                *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) = scratchBytes;
+                *(undefined4 *)(((unsigned char *)GLD_readScratchBuffer) + ctx) = scratchBuffer;
               }
-              requestAddress = *(uint *)(((unsigned char *)0x00002b74) + ctx);
+              requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
               if (requestAddress == 0) goto LAB_00029bd0;
               directCopy = false;
             }
@@ -3859,7 +3859,7 @@ LAB_00029a74:
               *(undefined4 **)(ctx + GLD_streamCurrent) = a1;
               (**(code **)(ctx + GLD_streamSetCurrent))(ring,a1,a2,a3,savedHeight,a5,a1);
             }
-            formatIndex = ((unsigned char *)0x00002b7f)[ctx];
+            formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             flags = *(uint *)(ctx + GLD_renderFlags);
             procPitch = (width << (*(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
@@ -4717,7 +4717,7 @@ LAB_0002a520:
            ((int)local_108 >> (*(uint *)(formatTable + hwFormat * 0x24 + 0x14) & 7)) - 1U & 0x3fff |
            (iVar22 + -1) * 0x10 & 0xffff8000U | (iVar34 + -1) * 0x20 & 0xffff0000U;
       packet[0xa4] = (dstAddress - surfaceBase) * 0x20 | packet[0xa4] & 0x1f;
-      formatIndex = ((unsigned char *)0x00002b7f)[ctx];
+      formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
       dstAddress = (*(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x18) & 0x18) << 5;
       packet[0x8e] = dstAddress | uVar17 & 0xfffffcff;
       uVar20 = (*(uint *)(formatTableB + (uint)formatIndex * 0x24 + 0x18) & 6) << 9;
@@ -4831,22 +4831,22 @@ LAB_0002a520:
       packet[0xfd] = zb_cntl;
       fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
       packet[0xff] = fg_fog_blend;
-      if ((*(uint *)(formatTableB + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+      if ((*(uint *)(formatTableB + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
         packet[0xff] = fg_fog_blend & 0xfffffffe;
       }
       packet[0x100] = ((unsigned char *)0x000012f5U);
       fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
       packet[0x101] = fg_alpha_func;
-      if ((*(uint *)(formatTableB + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
+      if ((*(uint *)(formatTableB + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18) & 0x8000) == 0) {
         packet[0x101] = fg_alpha_func & 0xfffff7ff;
       }
       packet[0x102] = ((unsigned char *)0x000010a2U);
       ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
       packet[0x104] = ((unsigned char *)0x00001381U);
       packet[0x103] = ga_poly_mode;
-      dstAddress = *(uint *)(ctx + 0x1cc0);
+      dstAddress = *(uint *)(ctx + GLD_rb3d_blendcntl);
       packet[0x105] = dstAddress;
-      if ((*(uint *)(formatTableB + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
+      if ((*(uint *)(formatTableB + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24 + 0x18) & 0x4000) == 0) {
         packet[0x105] = dstAddress & 0xfffffffc;
       }
       packet[0x106] = ((unsigned char *)0x0000109eU);
@@ -6109,11 +6109,11 @@ int FUN_0002cb40(ctx)
   thunk_FUN_00054a90(ctx + GLD_commandStream);
   thunk_FUN_000a2330(ctx + GLD_commandStream);
   FUN_000a7970(ctx);
-  if (*(int *)(((unsigned char *)0x00002b74) + ctx) != 0) {
-    _vfree(*(int *)(((unsigned char *)0x00002b74) + ctx));
+  if (*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx) != 0) {
+    _vfree(*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx));
   }
-  *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
-  *(undefined4 *)(((unsigned char *)0x00002b78) + ctx) = 0;
+  *(undefined4 *)(((unsigned char *)GLD_readScratchBuffer) + ctx) = 0;
+  *(undefined4 *)(((unsigned char *)GLD_readScratchSize) + ctx) = 0;
   return;
 }
 
@@ -6180,7 +6180,7 @@ LAB_0002cce8:
     ((void (*)())FUN_0002c020)(ctx + GLD_commandStream,param_3,uVar2,uVar3,param_5,param_6,in_r9,fparam_1,fparam_2,
                  fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
   }
-  *(undefined1 *)(ctx + 0x2a5e) = 1;
+  *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
   return uVar4;
 }
 
