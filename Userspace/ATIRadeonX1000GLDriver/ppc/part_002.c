@@ -2193,7 +2193,7 @@ int FUN_0000d380(instrTable, outCursor, nameTable3, nameTable4, instrIndex, useN
   char curChar;
   char *srcCursor;
   int emitLength;
-  uint uVar5;
+  uint operandWord1;
   int written;
   undefined1 *afterPrefix;
   uint *operandEntry;
@@ -2273,9 +2273,9 @@ LAB_0000d5d0:
       registerFile = operandEntry[1];
     }
     emitLength = ((int (*)())FUN_0000cdf0)(outCursor + written,registerFile >> 0x1e & 1);
-    uVar5 = operandEntry[1];
+    operandWord1 = operandEntry[1];
     afterPrefix = outCursor + written + emitLength;
-    registerFile = uVar5 >> 0x1c & 3;
+    registerFile = operandWord1 >> 0x1c & 3;
     if (registerFile == 1) {
       written = 0;
       if (s__y_001a447c[0] != '\0') {
@@ -2306,7 +2306,7 @@ LAB_0000d798:
               curChar = *srcCursor;
             } while (curChar != '\0');
 LAB_0000d794:
-            uVar5 = operandEntry[1];
+            operandWord1 = operandEntry[1];
           }
         }
         else {
@@ -2347,7 +2347,7 @@ LAB_0000d79c:
        (written = *(int *)(nameTable4 + (uint)*(ushort *)((int)operandEntry + 6) * 4), written == -1)) {
       written = 0;
     }
-    written = written + ((int)(uVar5 << 4 | uVar5 >> 0x1c) >> 0x18);
+    written = written + ((int)(operandWord1 << 4 | operandWord1 >> 0x1c) >> 0x18);
     if (written != 0) {
       if (0 < written) {
         emitLength = 0;

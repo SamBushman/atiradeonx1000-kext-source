@@ -445,3 +445,46 @@ ALU record (kinds 3 and 4): RGB part `+0x0c` dest temp register, `+0x0e`/`+0x10`
 
 Open points: the meaning of the bits inside the source-select / modifier bytes (`+0x2a..+0x2f`, `+0x39..+0x3e`), the `+0x24/+0x26/+0x28` halfwords and `+0x36/+0x37` bytes, and FUN_000d0b68 (the pre-dump
 normalisation) were not decoded.
+
+## 7. Operand formatters, tables and the pre-dump normaliser (fork S; CONFIRMED = read from the code/data, INFERRED = role from use)
+
+Text tables (bytes read from `__DATA,__data`; the code indexes them directly, `FUN_000d183c` prints through them):
+
+| address | stride | contents | indexed by |
+|---|---|---|---|
+| 0x1dc239 | 4 | `---` `r--` `-g-` `rg-` `--b` `r-b` `-gb` `rgb` | RGB output / destination write mask (rec+0x15, 0x14) |
+| 0x1dc259 | 4 | `r` `g` `b` `a` `0.0` `0.5` `1.0` `???` (then the `-`/`_` fillers) | 3-bit swizzle component select (`word >> 11 & 0x1c` etc. = field*4) |
+| 0x1dc279 | 5 | `----` `r---` `-g--` `rg--` ... `rgba` (all 16 masks, bit0 = r) | inverted TEX / RS write mask nibble |
+| 0x1dc1e9 | 10 | `JUMP` `LOOP` `ENDLOOP` `REP` `ENDREP` | CF instruction type, rec+0xe |
+| 0x1dc1da | 5 | `NONE` `POP ` `PUSH` | CF stack op, rec+0x11 |
+| 0x1dc1bc | 10 | `NONE` `DECR` `INCR` `NONE` `PUSH` ... | CF counter ops, rec+0x14 and rec+0x15 |
+| 0x1a6f80.. | 5 | `neg(` `abs(` `nab(` `???(` + `srcp` | operand modifier prefix (see below) |
+
+Flow-control (CF, record kind 5) record, as `FUN_000d183c` prints it with `"0x%02x %1d %s %s %s %s %1d %1d %d"` and then looks the printed word up in the `0x55/0xaa/0x0f/0xf0/0x33 ... JUMP NONE INCR DECR`
+pointer-pair table at 0x1dc2cc (`IF b`, `IF !b`, `IF c`, `IF p`, ...; the first word is the compared prefix, the pointer before it the mnemonic): `+0x12` JUMP function/condition mask (hex),
+`+0x10` flag, `+0xe` type, `+0x11` stack op, `+0x14`/`+0x15` counter ops, `+0x17` boolean address (`( bool_addr: %d )` when the mask is 0x55/0xaa), `+0x44` compare code of a `prev_alu` test
+(0 `eq`, 1 `lt`, 2 `ge`, 3 `ne`), `+0x43` its destination (0 `red`, 1 `alpha`). The mask values 0x0f/0xf0 print `( prev_alu: <compare> <dest> )`.
+
+Operand formatters (all write `outText`; arguments are the six source addresses of the ALU record in the order rgbAddrA, rgbAddrB, rgbAddrC, alphaAddrA, alphaAddrB, alphaAddrC):
+
+* `FUN_000d0450(out, word)`: `c%02u` when bit 15 of the register word is set, else `r%02u`.
+* `FUN_000d10dc(out, word, ...)`: also `r[AL+%02u]` (bit 14, relative to the address register) and, for bit 13, an immediate float printed as `(+d.ddddddd E+dd)`
+  (value from `FUN_000da78c(word & ~0x2000)`, decimal exponent by log/floor, seven mantissa digits).
+* `FUN_000d0488(out, A, B, C, aA, aB, aC, select, modifier)` (RGB operand, selects 0..0x1f): 0-3 `A`.rgb/.rrr/.ggg/.bbb, 4-7 `B`, 8-0xb `C`, 0xc-0xe alpha A/B/C `.aaa`, 0xf-0x13
+  `srcp` (.rgb/.rrr/.ggg/.bbb/.aaa), 0x14 `0.0`, 0x15 `1.0`, 0x16 `0.5`, 0x17-0x19 `A/B/C.gbr`, 0x1a-0x1c `.brg`, 0x1d-0x1f paired `alpha.a:rgb.bg` forms. Anything else prints `???`.
+* `FUN_000d0888(...)` (alpha operand, selects 0..0x12): 0-2 RGB A `.r .g .b`, 3-5 B, 6-8 C, 9-0xb alpha A/B/C `.a`, 0xc-0xf `srcp`, 0x10-0x12 `0.0 1.0 0.5`.
+* `FUN_000d13a4(...)` / `FUN_000d1624(...)` (the r520 neutral listing): selects 0..2 pick A/B/C (or the alpha A/B/C when the swizzle word is one of the special forms tested by `FUN_000d10a8`,
+  i.e. `(w & 0xe000) == 0x6000`, `(w & 0x1c00) == 0xc00` or `(w & 0x380) == 0x180`), 3 = `srcp`; the swizzle word's three 3-bit fields (bits 15-13, 12-10, 9-7... as `>>11, >>8, >>5 & 0x1c`) pick
+  the components; opcodes 0xb/0xc (RGB) and 0xe/0xf (alpha) always print the first register.
+* Modifier byte (all four): 0 none, 1 `neg(`, 2 `abs(`, 3 `nab(` (-abs), anything else `???(`; a closing `)` is appended whenever the modifier is not 0.
+
+`FUN_000d0b68(shader, level)` (run first by `FUN_000d183c`): returns when `(shader[0xf] & 0xf) >= level`; otherwise scans the records once to find out whether the shader fits the R300 format
+(nothing but TEX/ALU/RS, at most 4 levels of dependent texture lookups, no flow control that needs the neutral form), then rewrites it: TEX records without custom enables get the default
+component enables (`+0x1e = 1`, `+0x1d = 7`, swizzle `0x1b1b`), sem_wait/sem_grab flags (`+4`, `+0x1b`) are set on the pending TEX record when no wait flags exist, an ALU record with no output and no
+write mask becomes a `kind 4` predicate record, and a CF result test must follow an ALU (`"FC ALU result test is first US instruction"` / `"... follows non-ALU instruction"` are the two error prints).
+The final store `shader[0xf] = level | level << 4` sets the high nibble (the neutral-format flag) only when wait flags, custom enables or CF records were found. (INFERRED from the code paths; the stats halfwords
+`+0x12` end address, `+0x22` pixel size and `+0x28` are written here.)
+
+Naming convention of the variables in these functions (see `names_Sdump_*.tsv`): `rgbAddrA/B/C`, `alphaAddrA/B/C` addresses, `rgbSelectA/B/CBase` selects with the invert bit removed,
+`rgbModA/B/C`, `alphaModB/C` modifiers, `tex*` TEX record fields, `psnLineArg0/1` the first two %x arguments of each `+++ R300PSN_*` line, `*Text` the printed component/mask strings.
+The printf-argument registers that Ghidra turns into reused locals were split per section (Loki listing, BEGIN_PSN raw listing, r520 neutral listing).

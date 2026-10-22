@@ -216,3 +216,7 @@ use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*bVar1\ =\ uVar
 use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar17\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
 use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar15\ ==\ 100000\)\)\ \{$	+1
 use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*if\ \(\(!bVar1\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
+local	FUN_0000d380	uVar5	operandWord1	INFERRED	operandEntry[1]: second word of the 8-byte operand entry: relative-addressing word - bit 30 = address register index (printed with FUN_0000cdf0), bits 28-29 select the address component (.x .y .z .w), the top byte holds the signed offset added to the register id
+local	FUN_000d183c	uVar30	rgbSelectARaw	INFERRED	byte rec+0x2a: RGB source select A, tested against 0xf..0x12 (srcp) and 0x13
+local	FUN_000d183c	local_2a6	srcpTextATail	INFERRED	bytes +4..+9 of the srcpTextA buffer (the 6 bytes after its first word: the tail of the copied "alpha" text)
+local	FUN_000d183c	uStack_29e	srcpTextBPad	INFERRED	byte +10 of the srcpTextB buffer area, read only as the padding byte of CONCAT21 packing
