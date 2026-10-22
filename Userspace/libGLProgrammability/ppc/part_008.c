@@ -187,48 +187,49 @@ int __ZN12BindingTableC2Ej(this, param_2)
   void *this;
   uint param_2;
 {
+  uint loopIndex2;
   int iVar1;
   uint uVar2;
   void *allocation;
-  uint uVar4;
+  uint loopIndex;
   
   *(uint *)this = param_2;
   allocation = operator_new__(param_2 << 2);
-  uVar4 = 0;
+  loopIndex = 0;
   *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   uVar2 = 0;
   if (*(int *)this != 0) {
     do {
-      iVar1 = uVar4 * 4;
-      uVar4 = uVar4 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
       uVar2 = *(uint *)this;
-    } while (uVar4 < uVar2);
+    } while (loopIndex < uVar2);
   }
   allocation = operator_new__(uVar2 << 2);
-  uVar4 = 0;
+  loopIndex = 0;
   *(void **)((int)this + 0x10) = allocation;
   *(undefined4 *)((int)this + 0xc) = 0;
   uVar2 = 0;
   if (*(int *)this != 0) {
     do {
-      iVar1 = uVar4 * 4;
-      uVar4 = uVar4 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 0x10)) = 0;
       uVar2 = *(uint *)this;
-    } while (uVar4 < uVar2);
+    } while (loopIndex < uVar2);
   }
   allocation = operator_new__(uVar2 << 2);
-  uVar2 = 0;
+  loopIndex2 = 0;
   *(void **)((int)this + 0x18) = allocation;
   *(undefined4 *)((int)this + 0x14) = 0;
   if (*(int *)this != 0) {
     do {
-      iVar1 = uVar2 * 4;
-      uVar2 = uVar2 + 1;
+      iVar1 = loopIndex2 * 4;
+      loopIndex2 = loopIndex2 + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 0x18)) = 0;
-    } while (uVar2 < *(uint *)this);
+    } while (loopIndex2 < *(uint *)this);
   }
   *(undefined4 *)((int)this + 0x40) = 0;
   *(undefined4 *)((int)this + 0x1c) = 0;
@@ -257,48 +258,49 @@ int __ZN12BindingTableC4Ej(this, param_2)
   void *this;
   uint param_2;
 {
+  uint loopIndex2;
   int iVar1;
   uint uVar2;
   void *allocation;
-  uint uVar4;
+  uint loopIndex;
   
   *(uint *)this = param_2;
   allocation = operator_new__(param_2 << 2);
-  uVar4 = 0;
+  loopIndex = 0;
   *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   uVar2 = 0;
   if (*(int *)this != 0) {
     do {
-      iVar1 = uVar4 * 4;
-      uVar4 = uVar4 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
       uVar2 = *(uint *)this;
-    } while (uVar4 < uVar2);
+    } while (loopIndex < uVar2);
   }
   allocation = operator_new__(uVar2 << 2);
-  uVar4 = 0;
+  loopIndex = 0;
   *(void **)((int)this + 0x10) = allocation;
   *(undefined4 *)((int)this + 0xc) = 0;
   uVar2 = 0;
   if (*(int *)this != 0) {
     do {
-      iVar1 = uVar4 * 4;
-      uVar4 = uVar4 + 1;
+      iVar1 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 0x10)) = 0;
       uVar2 = *(uint *)this;
-    } while (uVar4 < uVar2);
+    } while (loopIndex < uVar2);
   }
   allocation = operator_new__(uVar2 << 2);
-  uVar2 = 0;
+  loopIndex2 = 0;
   *(void **)((int)this + 0x18) = allocation;
   *(undefined4 *)((int)this + 0x14) = 0;
   if (*(int *)this != 0) {
     do {
-      iVar1 = uVar2 * 4;
-      uVar2 = uVar2 + 1;
+      iVar1 = loopIndex2 * 4;
+      loopIndex2 = loopIndex2 + 1;
       *(undefined4 *)(iVar1 + *(int *)((int)this + 0x18)) = 0;
-    } while (uVar2 < *(uint *)this);
+    } while (loopIndex2 < *(uint *)this);
   }
   *(undefined4 *)((int)this + 0x40) = 0;
   *(undefined4 *)((int)this + 0x1c) = 0;
@@ -1276,7 +1278,7 @@ int BindingTable__GetString(this, param_2)
   char *pcVar7;
   int iVar8;
   uint uVar9;
-  uint uVar10;
+  uint loopIndex;
   unsigned char * this_00;
   
   this_00 = (unsigned char *)0x0;
@@ -1357,7 +1359,7 @@ int BindingTable__GetString(this, param_2)
     }
     _sprintf(pcVar2,pcVar7);
 LAB_97bb1cf0:
-    uVar10 = 0;
+    loopIndex = 0;
     if (*(int *)this == 0) {
       return pcVar2;
     }
@@ -1365,7 +1367,7 @@ LAB_97bb1cf0:
       if (param_2 == 5) {
         iVar3 = *(int *)(this + 0x10);
 LAB_97bb1d30:
-        this_00 = *(unsigned char **)(uVar10 * 4 + iVar3);
+        this_00 = *(unsigned char **)(loopIndex * 4 + iVar3);
       }
       else if (5 < param_2) {
         if (param_2 == 6) {
@@ -1378,7 +1380,7 @@ LAB_97bb1d30:
         goto LAB_97bb1d30;
       }
       if (this_00 != (unsigned char *)0x0) {
-        _sprintf(pcVar2,"%s  --- Hash %d ---\n",pcVar2,uVar10);
+        _sprintf(pcVar2,"%s  --- Hash %d ---\n",pcVar2,loopIndex);
         pcVar7 = pcVar2;
         do {
           iVar3 = ((int (*)())Binding__GetString)(this_00);
@@ -1398,8 +1400,8 @@ LAB_97bb1d30:
           pcVar7 = pcVar2;
         } while (this_00 != (unsigned char *)0x0);
       }
-      uVar10 = uVar10 + 1;
-      if (*(uint *)this <= uVar10) {
+      loopIndex = loopIndex + 1;
+      if (*(uint *)this <= loopIndex) {
         return pcVar2;
       }
     } while( true );

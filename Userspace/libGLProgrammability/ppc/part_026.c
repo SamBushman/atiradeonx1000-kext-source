@@ -2522,14 +2522,14 @@ int _fde_split(param_1, param_2, param_3, param_4)
   int *piVar5;
   int *piVar6;
   uint uVar7;
-  uint uVar8;
+  uint loopIndex;
   undefined4 *puVar9;
   undefined4 *puVar10;
   undefined4 *puVar11;
   undefined4 *puVar12;
   int iVar13;
   
-  uVar8 = 0;
+  loopIndex = 0;
   uVar7 = *(uint *)(param_3 + 4);
   if (uVar7 != 0) {
     puVar12 = (undefined4 *)(param_4 + 8);
@@ -2543,13 +2543,13 @@ int _fde_split(param_1, param_2, param_3, param_4)
         *(undefined4 *)((int)puVar10 + (param_4 - param_3)) = 0;
         puVar10 = puVar9;
       }
-      uVar8 = uVar8 + 1;
+      loopIndex = loopIndex + 1;
       *puVar12 = puVar10;
       puVar10 = (undefined4 *)(iVar13 + 8);
       puVar11 = puVar11 + 1;
       puVar12 = puVar12 + 1;
       iVar13 = iVar13 + 4;
-    } while (uVar8 < uVar7);
+    } while (loopIndex < uVar7);
   }
   iVar2 = 0;
   iVar13 = 0;

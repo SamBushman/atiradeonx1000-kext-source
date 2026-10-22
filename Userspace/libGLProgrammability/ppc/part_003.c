@@ -127,6 +127,7 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  int loopIndex;
   bool bVar1;
   char cVar2;
   int iVar3;
@@ -540,13 +541,13 @@ LAB_97b89a54:
     }
     return 0x106;
   }
-  iVar3 = 0;
+  loopIndex = 0;
   iVar10 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
   uVar4 = extraout_r4_05;
   do {
     while (iVar10 != 0x2a) {
       if (iVar10 == 10) {
-        iVar3 = iVar3 + 1;
+        loopIndex = loopIndex + 1;
       }
       if (iVar10 == -1) {
 LAB_97b89b60:
@@ -560,7 +561,7 @@ LAB_97b89b60:
     uVar4 = extraout_r4_07;
     if (iVar10 == -1) goto LAB_97b89b60;
   } while (iVar10 != 0x2f);
-  if (iVar3 != 0) {
+  if (loopIndex != 0) {
     return 10;
   }
   goto LAB_97b88f18;
@@ -1189,12 +1190,13 @@ int _ReadToken(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
+  int loopIndex2;
   uint uVar1;
   int iVar2;
   undefined4 uVar3;
   int iVar4;
   char *pcVar5;
-  int iVar6;
+  int loopIndex;
   double dVar7;
   undefined1 local_2c0 [144];
   char local_230 [532];
@@ -1208,21 +1210,21 @@ int _ReadToken(param_1, param_2)
   }
   if (iVar2 == 0x10e) {
 LAB_97b8a810:
-    iVar6 = 0;
+    loopIndex = 0;
     uVar3 = ((int (*)())_lReadByte)(param_1);
     iVar4 = (int)(char)uVar3;
     uVar1 = iVar4 - 0x61;
     while (((((uVar1 & 0xff) < 0x1a || (iVar4 - 0x41U < 0x1a)) || (iVar4 - 0x30U < 10)) ||
            (iVar4 == 0x5f))) {
-      if (iVar6 < 0x80) {
-        local_2c0[iVar6] = (char)iVar4;
+      if (loopIndex < 0x80) {
+        local_2c0[loopIndex] = (char)iVar4;
         uVar3 = ((int (*)())_lReadByte)(param_1);
-        iVar6 = iVar6 + 1;
+        loopIndex = loopIndex + 1;
         iVar4 = (int)(char)uVar3;
         uVar1 = iVar4 - 0x61;
       }
     }
-    local_2c0[iVar6] = 0;
+    local_2c0[loopIndex] = 0;
     if (iVar4 == 0) {
       uVar3 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2c0);
       param_2[2] = uVar3;
@@ -1243,21 +1245,21 @@ LAB_97b8aac8:
       if (iVar2 != 0x10b) {
         return iVar2;
       }
-      iVar6 = 0;
+      loopIndex = 0;
       uVar3 = ((int (*)())_lReadByte)(param_1);
       iVar4 = (int)(char)uVar3;
       uVar1 = iVar4 - 0x30;
       while (((((uVar1 & 0xff) < 10 || (iVar4 == 0x65)) ||
               ((iVar4 == 0x45 || ((iVar4 == 0x2e || (iVar4 == 0x2b)))))) || (iVar4 == 0x2d))) {
-        if (iVar6 < 0x80) {
-          local_2c0[iVar6] = (char)iVar4;
+        if (loopIndex < 0x80) {
+          local_2c0[loopIndex] = (char)iVar4;
           uVar3 = ((int (*)())_lReadByte)(param_1);
-          iVar6 = iVar6 + 1;
+          loopIndex = loopIndex + 1;
           iVar4 = (int)(char)uVar3;
           uVar1 = iVar4 - 0x30;
         }
       }
-      local_2c0[iVar6] = 0;
+      local_2c0[loopIndex] = 0;
       if (iVar4 == 0) {
         _strcpy(param_2 + 3,local_2c0);
         dVar7 = (double)((double (*)())_glp_strtod)(param_2 + 3,0);
@@ -1268,18 +1270,18 @@ LAB_97b8aac8:
       goto LAB_97b8aac8;
     }
     if (iVar2 == 0x116) {
-      iVar2 = 0;
+      loopIndex2 = 0;
       pcVar5 = local_230;
       while( true ) {
         uVar3 = ((int (*)())_lReadByte)(param_1);
         if ((char)uVar3 == '\0') break;
-        if (iVar2 < 0x200) {
+        if (loopIndex2 < 0x200) {
           *pcVar5 = (char)uVar3;
-          iVar2 = iVar2 + 1;
+          loopIndex2 = loopIndex2 + 1;
           pcVar5 = pcVar5 + 1;
         }
       }
-      local_230[iVar2] = '\0';
+      local_230[loopIndex2] = '\0';
       uVar3 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_230);
       param_2[2] = uVar3;
       return 0x116;
@@ -1293,20 +1295,20 @@ LAB_97b8aac8:
     if (iVar2 != 0x10f) {
       return iVar2;
     }
-    iVar6 = 0;
+    loopIndex = 0;
     uVar3 = ((int (*)())_lReadByte)(param_1);
     iVar4 = (int)(char)uVar3;
     uVar1 = iVar4 - 0x30;
     while ((uVar1 & 0xff) < 10) {
-      if (iVar6 < 0x80) {
-        local_2c0[iVar6] = (char)iVar4;
+      if (loopIndex < 0x80) {
+        local_2c0[loopIndex] = (char)iVar4;
         uVar3 = ((int (*)())_lReadByte)(param_1);
-        iVar6 = iVar6 + 1;
+        loopIndex = loopIndex + 1;
         iVar4 = (int)(char)uVar3;
         uVar1 = iVar4 - 0x30;
       }
     }
-    local_2c0[iVar6] = 0;
+    local_2c0[loopIndex] = 0;
     if (iVar4 != 0) {
       uVar3 = 0x168;
       goto LAB_97b8aac8;

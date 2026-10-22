@@ -567,25 +567,25 @@ int FUN_97c1913c(param_1)
   bool bVar1;
   uint uVar2;
   undefined *puVar3;
-  uint uVar4;
+  uint loopIndex;
   
   puVar3 = (undefined *)_malloc(param_1 + 0x50U);
   if (puVar3 == (undefined *)0x0) {
     _pthread_mutex_lock(&_emergency_mutex);
-    uVar4 = 0;
+    loopIndex = 0;
     bVar1 = true;
     uVar2 = _emergency_used;
     if (param_1 + 0x50U < 0x101) {
       do {
         if ((uVar2 & 1) == 0) {
-          _emergency_used = _emergency_used | 1 << (uVar4 & 0x3f);
-          puVar3 = &_emergency_buffer + uVar4 * 0x100;
+          _emergency_used = _emergency_used | 1 << (loopIndex & 0x3f);
+          puVar3 = &_emergency_buffer + loopIndex * 0x100;
           bVar1 = puVar3 == (undefined *)0x0;
           break;
         }
-        uVar4 = uVar4 + 1;
+        loopIndex = loopIndex + 1;
         uVar2 = uVar2 >> 1;
-      } while (uVar4 < 2);
+      } while (loopIndex < 2);
     }
     _pthread_mutex_unlock(&_emergency_mutex);
     if (bVar1) {

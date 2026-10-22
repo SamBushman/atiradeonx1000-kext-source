@@ -565,15 +565,15 @@ int TGenericLinker__RemoveUnreachableFunctions(this)
   uint firstOp;
   int length3;
   char *allocation;
-  int iVar9;
+  int loopIndex;
   int iVar10;
   uint uVar11;
   void *pvVar12;
   int iVar13;
   
-  iVar9 = 0;
+  loopIndex = 0;
 code_r0x97bb33e4:
-  iVar2 = iVar9 * 4;
+  iVar2 = loopIndex * 4;
 code_r0x97bb33e8:
   bVar1 = false;
   iVar10 = 0;
@@ -598,11 +598,11 @@ code_r0x97bb3410:
         }
       }
       length2 = _strlen(DAT_a7b7baec);
-      length = _strlen((&_shaderString)[iVar9]);
+      length = _strlen((&_shaderString)[loopIndex]);
       iVar5 = _strlen(functionName);
       allocation = (char *)_malloc(length2 + length + iVar5 + 9);
       FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
-      _sprintf(allocation,DAT_a7b7baec,functionName,(&_shaderString)[iVar9]);
+      _sprintf(allocation,DAT_a7b7baec,functionName,(&_shaderString)[loopIndex]);
       pvVar12 = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
@@ -617,10 +617,10 @@ code_r0x97bb3410:
   while( true ) {
     if ((*(uint *)(iVar13 + 0xc) & 0x3ffff) == 0) {
       length = _strlen(DAT_a7b7baf0);
-      iVar5 = _strlen((&_shaderString)[iVar9]);
+      iVar5 = _strlen((&_shaderString)[loopIndex]);
       length3 = _strlen(functionName);
       allocation = (char *)_malloc(length + iVar5 + length3 + 1);
-      _sprintf(allocation,DAT_a7b7baf0,functionName,(&_shaderString)[iVar9]);
+      _sprintf(allocation,DAT_a7b7baf0,functionName,(&_shaderString)[loopIndex]);
       pvVar12 = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
@@ -674,8 +674,8 @@ code_r0x97bb37cc:
   if (!bVar1) goto LAB_97bb37d4;
   goto code_r0x97bb33e8;
 LAB_97bb37d4:
-  iVar9 = iVar9 + 1;
-  if (1 < iVar9) {
+  loopIndex = loopIndex + 1;
+  if (1 < loopIndex) {
     return;
   }
   goto code_r0x97bb33e4;
@@ -947,7 +947,7 @@ int TGenericLinker__FixOutputReads(this)
   uint uVar5;
   int iVar6;
   int iVar7;
-  int iVar8;
+  int loopIndex;
   unsigned char * pTVar9;
   int iVar10;
   uint uVar11;
@@ -970,7 +970,7 @@ int TGenericLinker__FixOutputReads(this)
   undefined4 local_60;
   undefined4 local_5c;
   
-  iVar8 = 0;
+  loopIndex = 0;
   iVar7 = 0;
   pTVar9 = this;
   do {
@@ -1106,10 +1106,10 @@ LAB_97bb40a4:
         }
       }
     }
-    iVar8 = iVar8 + 1;
+    loopIndex = loopIndex + 1;
     iVar7 = iVar7 + 4;
     pTVar9 = pTVar9 + 4;
-    if (1 < iVar8) {
+    if (1 < loopIndex) {
       return;
     }
   } while( true );
@@ -1767,6 +1767,7 @@ LAB_97bb56a8:
 int TGenericLinker__AllocateTextureUnitsForVaryings(this)
   unsigned char * this;
 {
+  uint loopIndex;
   uint firstOp;
   bool bVar1;
   uint uVar2;
@@ -2116,23 +2117,23 @@ code_r0x97bb5cd0:
                   if ((uVar18 != 0) && (bVar1)) {
                     do {
                       uVar29 = 0;
-                      uVar2 = 0;
+                      loopIndex = 0;
                       if (bVar1) {
                         do {
                           uVar17 = uVar29;
-                          if (*(int *)(uVar2 * 4 + iVar27) == 0) {
-                            uVar3 = ((int)uVar2 >> 2) + (uint)((int)uVar2 < 0 && (uVar2 & 3) != 0);
+                          if (*(int *)(loopIndex * 4 + iVar27) == 0) {
+                            uVar3 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
                             local_e0[uVar29] = uVar3;
                             uVar17 = uVar29 + 1;
                             *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << (uVar3 & 0x3f);
-                            local_e0[uVar29 + 4] = uVar2 + uVar3 * -4;
-                            *(int *)(uVar2 * 4 + iVar27) = iVar25;
+                            local_e0[uVar29 + 4] = loopIndex + uVar3 * -4;
+                            *(int *)(loopIndex * 4 + iVar27) = iVar25;
                           }
                           if (uVar17 == uVar18) {
                             bVar1 = false;
                           }
-                          uVar2 = uVar2 + 1;
-                        } while (((int)uVar2 < 0x20) && (uVar29 = uVar17, bVar1));
+                          loopIndex = loopIndex + 1;
+                        } while (((int)loopIndex < 0x20) && (uVar29 = uVar17, bVar1));
                       }
                       uVar9 = uVar9 + 1;
                     } while ((uVar9 < uVar18) && (bVar1));
@@ -2174,7 +2175,7 @@ code_r0x97bb5cd0:
                         local_58 = local_e0 + 8;
 code_r0x97bb5ec0:
                         iVar14 = *(int *)(this + 0x30);
-                        uVar2 = 0;
+                        loopIndex = 0;
                         uVar17 = *(uint *)((int)local_e0 + iVar4);
                         for (iVar19 = **(int **)(iVar14 + 0x1c); iVar19 != 0;
                             iVar19 = *(int *)(iVar19 + 8)) {
@@ -2308,7 +2309,7 @@ code_r0x97bb5fe8:
   while ((uVar6 == uVar17 && (uVar29 < uVar18))) {
     uVar6 = *(uint *)((int)local_e0 + iVar4 + 0x10);
     if (uVar6 == 1) {
-      uVar3 = (uVar2 & 3) << 6 | uVar3 & 0xffffff3f | 0x4000;
+      uVar3 = (loopIndex & 3) << 6 | uVar3 & 0xffffff3f | 0x4000;
 code_r0x97bb60fc:
       uVar3 = (uVar6 & 3) << 10 | uVar3 & 0xfffff3ff;
       local_e0[10] = uVar3;
@@ -2316,49 +2317,49 @@ code_r0x97bb60fc:
     else {
       if (1 < (int)uVar6) {
         if (uVar6 == 2) {
-          uVar3 = (uVar2 & 3) << 4 | uVar3 & 0xffffffcf | 0x8000;
+          uVar3 = (loopIndex & 3) << 4 | uVar3 & 0xffffffcf | 0x8000;
         }
         else {
           if (uVar6 != 3) goto code_r0x97bb6108;
-          uVar3 = (uVar2 & 3) << 2 | uVar3 & 0xfffffff3 | 0x10000;
+          uVar3 = (loopIndex & 3) << 2 | uVar3 & 0xfffffff3 | 0x10000;
         }
         goto code_r0x97bb60fc;
       }
       if (uVar6 == 0) {
-        uVar3 = (uVar2 & 3) << 8 | uVar3 & 0xfffffcff | 0x2000;
+        uVar3 = (loopIndex & 3) << 8 | uVar3 & 0xfffffcff | 0x2000;
         goto code_r0x97bb60fc;
       }
     }
 code_r0x97bb6108:
-    if (uVar2 == 1) {
+    if (loopIndex == 1) {
       uVar21 = (uVar29 & 3) << 0x13 | uVar21 & 0xffe7ffff;
 code_r0x97bb6150:
       local_e0[0xc] = uVar21;
     }
     else {
-      if (1 < (int)uVar2) {
-        if (uVar2 == 2) {
+      if (1 < (int)loopIndex) {
+        if (loopIndex == 2) {
           uVar21 = (uVar29 & 3) << 0x11 | uVar21 & 0xfff9ffff;
         }
         else {
-          if (uVar2 != 3) goto code_r0x97bb6154;
+          if (loopIndex != 3) goto code_r0x97bb6154;
           uVar21 = (uVar29 & 3) << 0xf | uVar21 & 0xfffe7fff;
         }
         goto code_r0x97bb6150;
       }
-      if (uVar2 == 0) {
+      if (loopIndex == 0) {
         uVar21 = (uVar29 & 3) << 0x15 | uVar21 & 0xff9fffff;
         goto code_r0x97bb6150;
       }
     }
 code_r0x97bb6154:
     uVar29 = uVar29 + 1;
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
     iVar4 = uVar29 * 4;
     uVar6 = local_e0[uVar29];
   }
-  local_e0[0xc] = (uVar2 - 1) * 0x1000 & 0x3000 | uVar21;
-  local_e0[9] = (uVar2 - 1) * 0x4000000 & 0xc000000 | 0x800000;
+  local_e0[0xc] = (loopIndex - 1) * 0x1000 & 0x3000 | uVar21;
+  local_e0[9] = (loopIndex - 1) * 0x4000000 & 0xc000000 | 0x800000;
   iVar19 = _PPStreamInsertOperationAfterChunk(iVar14,local_58,0,0,*(undefined4 *)(iVar24 + 4));
   _PPStreamChangeBranchTargets
             (*(undefined4 *)(this + 0x30),*(uint *)(iVar24 + 0xc) & 0x3ffff,
@@ -2366,7 +2367,7 @@ code_r0x97bb6154:
   if (uVar18 <= uVar29) goto code_r0x97bb61d0;
   goto code_r0x97bb5ec0;
 code_r0x97bb62a8:
-  uVar2 = 0;
+  loopIndex = 0;
   uVar17 = *(uint *)((int)local_e0 + iVar4);
   for (iVar19 = **(int **)(*(int *)(this + 0x34) + 0x18); iVar19 != 0; iVar19 = *(int *)(iVar19 + 8)
       ) {
@@ -2425,57 +2426,57 @@ code_r0x97bb63d0:
   uVar6 = *(uint *)((int)local_e0 + iVar4);
   local_e0[0xb] = (uint)(ushort)(*(short *)(*(int *)pPVar7 + 0x12) + (short)local_60);
   while ((uVar6 == uVar17 && (uVar29 < uVar18))) {
-    if (uVar2 == 1) {
+    if (loopIndex == 1) {
       uVar21 = (uVar29 & 3) << 6 | uVar21 & 0xffffff3f | 0x4000;
 code_r0x97bb64dc:
       local_e0[10] = uVar21;
     }
     else {
-      if (1 < (int)uVar2) {
-        if (uVar2 == 2) {
+      if (1 < (int)loopIndex) {
+        if (loopIndex == 2) {
           uVar21 = (uVar29 & 3) << 4 | uVar21 & 0xffffffcf | 0x8000;
         }
         else {
-          if (uVar2 != 3) goto code_r0x97bb64e0;
+          if (loopIndex != 3) goto code_r0x97bb64e0;
           uVar21 = (uVar29 & 3) << 2 | uVar21 & 0xfffffff3 | 0x10000;
         }
-        uVar21 = (uVar2 & 3) << 10 | uVar21 & 0xfffff3ff;
+        uVar21 = (loopIndex & 3) << 10 | uVar21 & 0xfffff3ff;
         goto code_r0x97bb64dc;
       }
-      if (uVar2 == 0) {
+      if (loopIndex == 0) {
         uVar21 = (uVar29 & 3) << 8 | uVar21 & 0xfffffcff | 0x2000;
         goto code_r0x97bb64dc;
       }
     }
 code_r0x97bb64e0:
-    if (uVar2 == 1) {
+    if (loopIndex == 1) {
       uVar3 = (*(uint *)((int)local_e0 + iVar4 + 0x10) & 3) << 0x13 | uVar3 & 0xffe7ffff;
 code_r0x97bb6544:
       local_e0[0xc] = uVar3;
     }
     else {
-      if (1 < (int)uVar2) {
-        if (uVar2 == 2) {
+      if (1 < (int)loopIndex) {
+        if (loopIndex == 2) {
           uVar3 = (*(uint *)((int)local_e0 + iVar4 + 0x10) & 3) << 0x11 | uVar3 & 0xfff9ffff;
         }
         else {
-          if (uVar2 != 3) goto code_r0x97bb6548;
+          if (loopIndex != 3) goto code_r0x97bb6548;
           uVar3 = (*(uint *)((int)local_e0 + iVar4 + 0x10) & 3) << 0xf | uVar3 & 0xfffe7fff;
         }
         goto code_r0x97bb6544;
       }
-      if (uVar2 == 0) {
+      if (loopIndex == 0) {
         uVar3 = (*(uint *)((int)local_e0 + iVar4 + 0x10) & 3) << 0x15 | uVar3 & 0xff9fffff;
         goto code_r0x97bb6544;
       }
     }
 code_r0x97bb6548:
     uVar29 = uVar29 + 1;
-    uVar2 = uVar2 + 1;
+    loopIndex = loopIndex + 1;
     iVar4 = uVar29 * 4;
     uVar6 = local_e0[uVar29];
   }
-  iVar19 = uVar2 - 1;
+  iVar19 = loopIndex - 1;
   local_e0[0xc] = iVar19 * 0x1000 & 0x3000U | uVar3;
   local_e0[10] = iVar19 * 0x400 & 0xc00U | uVar21 & 0xfffff3ff;
   local_e0[9] = iVar19 * 0x4000000 & 0xc000000U | 0x800000;
@@ -3767,6 +3768,7 @@ int TGenericLinker__link(this, param_2, param_3)
   void **param_2;
   int param_3;
 {
+  int loopIndex;
   undefined4 numActiveFragmentSamplers2;
   undefined4 numActiveVertexSamplers2;
   undefined4 sizeActiveFragmentUniforms2;
@@ -3813,14 +3815,14 @@ int TGenericLinker__link(this, param_2, param_3)
         pTVar7 = pTVar7 + 4;
       } while ((int)pTVar7 <= (int)(this + 4));
       if (iVar2 != 0) {
-        iVar2 = 0;
+        loopIndex = 0;
         do {
-          if ((*(int *)(this + iVar2 * 4 + 0x30) != 0) &&
-             (iVar3 = _PPStreamResolveBranches(*(int *)(this + iVar2 * 4 + 0x30)), iVar3 != 0)) {
+          if ((*(int *)(this + loopIndex * 4 + 0x30) != 0) &&
+             (iVar3 = _PPStreamResolveBranches(*(int *)(this + loopIndex * 4 + 0x30)), iVar3 != 0)) {
             iVar6 = _strlen(DAT_a7b7bb1c);
-            iVar3 = _strlen((&_shaderString)[iVar2]);
+            iVar3 = _strlen((&_shaderString)[loopIndex]);
             allocation = (char *)_malloc(iVar6 + iVar3 + 1);
-            _sprintf(allocation,DAT_a7b7bb1c,(&_shaderString)[iVar2]);
+            _sprintf(allocation,DAT_a7b7bb1c,(&_shaderString)[loopIndex]);
             pvVar8 = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
@@ -3829,8 +3831,8 @@ int TGenericLinker__link(this, param_2, param_3)
             _free(allocation);
             iVar6 = 0;
           }
-          iVar2 = iVar2 + 1;
-        } while (iVar2 < 2);
+          loopIndex = loopIndex + 1;
+        } while (loopIndex < 2);
         if (iVar6 == 1) {
           iVar2 = ((int (*)())TGenericLinker__CollectClientAttributeBindings)(this);
           if (iVar2 == 0) {
@@ -4544,24 +4546,24 @@ int AddressTempAllocator__getTemporary(this)
   int iVar6;
   int iVar7;
   int iVar8;
-  uint uVar9;
+  uint loopIndex;
   int iVar10;
   
-  uVar9 = 0;
+  loopIndex = 0;
   uVar3 = *(uint *)(this + 4);
   iVar8 = 0;
   if (uVar3 != 0) {
     piVar5 = *(int **)this;
     iVar2 = *piVar5;
     while (iVar2 != 0) {
-      uVar9 = uVar9 + 1;
-      iVar8 = uVar9 * 4;
-      if (uVar3 <= uVar9) break;
+      loopIndex = loopIndex + 1;
+      iVar8 = loopIndex * 4;
+      if (uVar3 <= loopIndex) break;
       piVar5 = piVar5 + 1;
       iVar2 = *piVar5;
     }
   }
-  if (uVar3 <= uVar9) {
+  if (uVar3 <= loopIndex) {
     iVar4 = _malloc(uVar3 * 4 + 0x40);
     iVar2 = *(int *)(this + 4);
     iVar7 = 0;
@@ -4582,13 +4584,13 @@ int AddressTempAllocator__getTemporary(this)
     *(int *)this = iVar4;
     uVar3 = *(int *)(this + 4) + 0x10;
     *(uint *)(this + 4) = uVar3;
-    if (uVar9 < uVar3) {
+    if (loopIndex < uVar3) {
       if (*(int *)(iVar8 + iVar4) != 0) {
-        piVar5 = (int *)(uVar9 * 4 + iVar4);
+        piVar5 = (int *)(loopIndex * 4 + iVar4);
         do {
-          uVar9 = uVar9 + 1;
-          iVar8 = uVar9 * 4;
-          if (uVar3 <= uVar9) break;
+          loopIndex = loopIndex + 1;
+          iVar8 = loopIndex * 4;
+          if (uVar3 <= loopIndex) break;
           piVar5 = piVar5 + 1;
         } while (*piVar5 != 0);
       }
@@ -4598,7 +4600,7 @@ int AddressTempAllocator__getTemporary(this)
   iVar4 = *(int *)this;
 LAB_97bb9e58:
   *(undefined4 *)(iVar8 + iVar4) = 1;
-  return uVar9;
+  return loopIndex;
 }
 
 /* AddressTempAllocator__releaseTemporary @ 0x97bb9e78 (20 bytes) */

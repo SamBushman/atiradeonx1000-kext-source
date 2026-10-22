@@ -1549,7 +1549,7 @@ int TSymbolTable__copyTable(this, param_2)
   undefined *puVar2;
   int iVar3;
   undefined4 *puVar4;
-  uint uVar5;
+  uint loopIndex;
   char in_RESERVE;
   byte in_cr0;
   undefined4 *local_60;
@@ -1604,8 +1604,8 @@ int TSymbolTable__copyTable(this, param_2)
   puVar4[3] = puVar4;
   *(undefined4 *)(this + 0xc) = *(undefined4 *)(param_2 + 0xc);
   local_60 = puVar4;
-  for (uVar5 = 0; uVar5 < (uint)(*(int *)(param_2 + 4) - *(int *)param_2 >> 2); uVar5 = uVar5 + 1) {
-    local_30[0] = ((int (*)())TSymbolTableLevel__clone)(*(unsigned char **)(*(int *)param_2 + uVar5 * 4),(unsigned char *)&local_60);
+  for (loopIndex = 0; loopIndex < (uint)(*(int *)(param_2 + 4) - *(int *)param_2 >> 2); loopIndex = loopIndex + 1) {
+    local_30[0] = ((int (*)())TSymbolTableLevel__clone)(*(unsigned char **)(*(int *)param_2 + loopIndex * 4),(unsigned char *)&local_60);
     puVar4 = *(undefined4 **)(this + 4);
     if (puVar4 == *(undefined4 **)(this + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux

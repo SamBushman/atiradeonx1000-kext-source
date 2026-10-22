@@ -107,17 +107,18 @@ int _InitAtomTable(param_1, param_2)
 int _PrintAtomTable(param_1)
   int *param_1;
 {
+  int loopIndex;
   int *piVar1;
   int iVar2;
   char acStack_e0 [212];
   
-  iVar2 = 0;
+  loopIndex = 0;
   if (0 < param_1[0xc]) {
     do {
-      _sprintf(acStack_e0,"%d: \"%s\"",iVar2,*param_1 + *(int *)(iVar2 * 4 + param_1[10]));
+      _sprintf(acStack_e0,"%d: \"%s\"",loopIndex,*param_1 + *(int *)(loopIndex * 4 + param_1[10]));
       _CPPDebugLogMsg(acStack_e0);
-      iVar2 = iVar2 + 1;
-    } while (iVar2 < param_1[0xc]);
+      loopIndex = loopIndex + 1;
+    } while (loopIndex < param_1[0xc]);
   }
   piVar1 = param_1 + 6;
   _sprintf(acStack_e0,"Hash table: size=%d, entries=%d, collisions=",param_1[4],param_1[5]);
@@ -252,6 +253,8 @@ int _FinalCPP(param_1, param_2, param_3, param_4, param_5, param_6)
 int _CPPdefine(param_1)
   int *param_1;
 {
+  int loopIndex;
+  int loopIndex2;
   undefined4 strfromTStr;
   undefined4 atomString;
   undefined *puVar1;
@@ -293,15 +296,15 @@ int _CPPdefine(param_1)
                       (*(int *)(*(int *)puVar1 + 0x20),param_1);
     if ((iVar2 == 0x28) && (*param_1 == 0)) {
       piVar6 = local_150;
-      iVar8 = 0;
+      loopIndex = 0;
       do {
         iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                           (*(int *)(*(int *)puVar1 + 0x20),param_1);
-        if ((iVar8 == 0) && (iVar2 == 0x29)) goto LAB_97b86554;
+        if ((loopIndex == 0) && (iVar2 == 0x29)) goto LAB_97b86554;
         uVar3 = extraout_r4_00;
         if (iVar2 != 0x10e) goto LAB_97b86774;
-        if (iVar8 < 0x40) {
-          iVar8 = iVar8 + 1;
+        if (loopIndex < 0x40) {
+          loopIndex = loopIndex + 1;
           *piVar6 = param_1[2];
           piVar6 = piVar6 + 1;
         }
@@ -311,8 +314,8 @@ int _CPPdefine(param_1)
       uVar3 = extraout_r4_01;
       if (iVar2 != 0x29) goto LAB_97b86774;
 LAB_97b86554:
-      in_r5 = (int *)(iVar8 << 2);
-      local_50 = iVar8;
+      in_r5 = (int *)(loopIndex << 2);
+      local_50 = loopIndex;
       local_4c = ((int (*)())_mem_Alloc)(*(undefined4 *)(_macros + 0x10),in_r5);
       _memcpy(local_4c,local_150,in_r5);
       in_r9 = *(int *)PTR__cpp_a7b7c0a4;
@@ -347,14 +350,14 @@ LAB_97b86554:
     }
     else if ((*(uint *)(iVar8 + 0x24) & 0x40000000) == 0) {
       if (*(int *)(iVar8 + 0x18) == local_50) {
-        iVar2 = 0;
+        loopIndex2 = 0;
         if (0 < local_50) {
           in_r8 = *(int *)(iVar8 + 0x1c);
           do {
-            in_r9 = *(int *)(iVar2 * 4 + local_4c);
-            if (*(int *)(iVar2 * 4 + in_r8) != in_r9) goto LAB_97b86728;
-            iVar2 = iVar2 + 1;
-          } while (iVar2 < local_50);
+            in_r9 = *(int *)(loopIndex2 * 4 + local_4c);
+            if (*(int *)(loopIndex2 * 4 + in_r8) != in_r9) goto LAB_97b86728;
+            loopIndex2 = loopIndex2 + 1;
+          } while (loopIndex2 < local_50);
         }
         _RewindTokenStream(*(undefined4 *)(iVar8 + 0x20));
         _RewindTokenStream(local_48);
@@ -1587,6 +1590,7 @@ int _MacroExpand(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
+  int loopIndex;
   undefined4 strfromTStr;
   undefined4 allocation2;
   bool bVar1;
@@ -1658,7 +1662,7 @@ int _MacroExpand(param_1, param_2)
             } while (iVar12 < *(int *)allocation[6]);
           }
           puVar4 = PTR__cpp_a7b7c0a4;
-          iVar11 = 0;
+          loopIndex = 0;
           bVar3 = false;
 LAB_97b881d8:
           iVar9 = 0;
@@ -1675,7 +1679,7 @@ LAB_97b881d8:
               if (iVar12 == 0x2c) goto LAB_97b88284;
               if (bVar2) {
                 if ((*a6 != 1) || (bVar3)) {
-                  iVar11 = iVar11 + 1;
+                  loopIndex = loopIndex + 1;
                 }
                 goto LAB_97b88294;
               }
@@ -1688,7 +1692,7 @@ LAB_97b881d8:
             }
             bVar3 = true;
             in_r5 = param_2;
-            _RecordToken(*(undefined4 *)(iVar11 * 4 + allocation[7]),iVar12,param_2);
+            _RecordToken(*(undefined4 *)(loopIndex * 4 + allocation[7]),iVar12,param_2);
           } while( true );
         }
         goto LAB_97b883b8;
@@ -1706,11 +1710,11 @@ LAB_97b88078:
   _UngetToken(0x10f,param_2);
   return 1;
 LAB_97b88284:
-  iVar11 = iVar11 + 1;
-  if (*a6 <= iVar11) goto LAB_97b88294;
+  loopIndex = loopIndex + 1;
+  if (*a6 <= loopIndex) goto LAB_97b88294;
   goto LAB_97b881d8;
 LAB_97b88294:
-  if (iVar11 < *a6) {
+  if (loopIndex < *a6) {
     pcVar10 = "Too few args in Macro ";
 LAB_97b8834c:
     _StoreStr(pcVar10);
@@ -1750,14 +1754,14 @@ LAB_97b8830c:
     pcVar10 = "Too many args in Macro ";
     goto LAB_97b8834c;
   }
-  iVar11 = 0;
+  loopIndex = 0;
   if (0 < *a6) {
     do {
-      iVar9 = iVar11 * 4;
-      iVar11 = iVar11 + 1;
+      iVar9 = loopIndex * 4;
+      loopIndex = loopIndex + 1;
       uVar7 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + allocation[7]),param_2);
       *(undefined4 *)(iVar9 + allocation[7]) = uVar7;
-    } while (iVar11 < *(int *)allocation[6]);
+    } while (loopIndex < *(int *)allocation[6]);
   }
 LAB_97b883b8:
   puVar4 = PTR__cpp_a7b7c0a4;

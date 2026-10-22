@@ -2115,7 +2115,7 @@ int TPPStreamCompiler__constructDiagonal(param_1, param_2, param_3, param_4)
   int *piVar10;
   int iVar11;
   undefined4 *puVar12;
-  int iVar13;
+  int loopIndex;
   undefined4 local_f0;
   uint local_ec;
   uint local_e8;
@@ -2149,7 +2149,7 @@ int TPPStreamCompiler__constructDiagonal(param_1, param_2, param_3, param_4)
   undefined4 local_5c;
   
   ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_)(param_1,param_2,(unsigned char **)param_3);
-  iVar13 = 0;
+  loopIndex = 0;
   logicalSize = ParseOperand__GetLogicalSize(*param_2);
   isMatrix = ParseOperand__IsMatrix(*param_2);
   iVar11 = logicalSize;
@@ -2167,12 +2167,12 @@ int TPPStreamCompiler__constructDiagonal(param_1, param_2, param_3, param_4)
         puVar5 = puVar5 + 1;
         iVar7 = iVar7 + -1;
       } while (iVar7 != 0);
-      bVar2 = iVar13 == 0;
+      bVar2 = loopIndex == 0;
       if (bVar2) {
         ParseOperand__AddDirectIndex(*param_2,0);
       }
       else {
-        *(int *)(*(int *)(*param_2 + 0x20) * 4 + *(int *)(*param_2 + 0x1c) + -4) = iVar13;
+        *(int *)(*(int *)(*param_2 + 0x20) * 4 + *(int *)(*param_2 + 0x1c) + -4) = loopIndex;
       }
       local_80 = param_1[0x24];
       local_7c = 0;
@@ -2210,18 +2210,18 @@ int TPPStreamCompiler__constructDiagonal(param_1, param_2, param_3, param_4)
             *puVar12 = *(undefined4 *)piVar10[1];
           }
         }
-        if (iVar13 == 1) {
+        if (loopIndex == 1) {
           local_a8 = uVar8 | 0x406c;
         }
-        else if (iVar13 < 2) {
+        else if (loopIndex < 2) {
           if (bVar2) {
             local_a8 = uVar8 | 0x206c;
           }
         }
-        else if (iVar13 == 2) {
+        else if (loopIndex == 2) {
           local_a8 = uVar8 | 0x806c;
         }
-        else if (iVar13 == 3) {
+        else if (loopIndex == 3) {
           local_a8 = uVar9 & 0xfffffff3 | 0x1000c;
         }
       }
@@ -2247,18 +2247,18 @@ int TPPStreamCompiler__constructDiagonal(param_1, param_2, param_3, param_4)
                    uVar9,in_r10);
         local_e0 = local_60;
         local_dc = local_5c;
-        if (iVar13 == 1) {
+        if (loopIndex == 1) {
           local_e8 = local_e8 & 0xffffff3f | 0x4000;
         }
-        else if (iVar13 < 2) {
+        else if (loopIndex < 2) {
           if (bVar2) {
             local_e8 = local_e8 & 0xfffffcff | 0x2000;
           }
         }
-        else if (iVar13 == 2) {
+        else if (loopIndex == 2) {
           local_e8 = local_e8 & 0xffffffcf | 0x8000;
         }
-        else if (iVar13 == 3) {
+        else if (loopIndex == 3) {
           local_e8 = local_e8 & 0xfffffff3 | 0x10000;
         }
         local_ec = (local_e8 >> 0xc & 1) << 0x1c | local_ec & 0xefffffff;
@@ -2277,7 +2277,7 @@ int TPPStreamCompiler__constructDiagonal(param_1, param_2, param_3, param_4)
                      (char *)0x0,0);
         piVar10 = *(int **)param_3;
       }
-      if (iVar13 == 1) {
+      if (loopIndex == 1) {
         uVar8 = local_a8 & 0xfffffcff | 0x2000;
         if (logicalSize != 3) {
           if (bVar1) goto LAB_97bc6b98;
@@ -2288,7 +2288,7 @@ LAB_97bc6b90:
       }
       else {
         uVar8 = local_a8;
-        if (iVar13 < 2) {
+        if (loopIndex < 2) {
           if (bVar2) {
             if (logicalSize == 3) {
 LAB_97bc6ae0:
@@ -2305,13 +2305,13 @@ LAB_97bc6af8:
             }
           }
         }
-        else if (iVar13 == 2) {
+        else if (loopIndex == 2) {
           uVar8 = local_a8 & 0xfffffc3f | 0x6040;
           if (!bVar1) {
             uVar8 = local_a8 & 0xfffffc33 | 0x1604c;
           }
         }
-        else if (iVar13 == 3) {
+        else if (loopIndex == 3) {
           uVar8 = local_a8 & 0xfffffc3f | 0x6040;
           goto LAB_97bc6b90;
         }
@@ -2337,7 +2337,7 @@ LAB_97bc6b98:
       }
       streamType = GetPPStreamTypeForGLType((uint)uVar4);
       local_ac = (streamType & 7) << 0x17 | local_ac & 0xfc7fffff;
-      iVar13 = iVar13 + 1;
+      loopIndex = loopIndex + 1;
       logicalSize2 = ParseOperand__GetLogicalSize(*param_2);
       local_ac = (logicalSize2 + -1) * 0x4000000 & 0xc000000U | local_ac & 0xf3f3ffff;
       param_4 = 0;
@@ -2345,7 +2345,7 @@ LAB_97bc6b98:
       ((int (*)())TPPStreamCompiler__AddOperation)((unsigned char *)param_1,param_2,(unsigned char *)&local_b0,(char *)0x0,
                    0);
       puVar12 = puVar12 + 1;
-    } while (iVar13 != iVar11);
+    } while (loopIndex != iVar11);
   }
   ParseOperand__RemoveDirectIndex(*param_2);
   return 1;
@@ -2374,7 +2374,7 @@ int TPPStreamCompiler__constructElement(this, param_2, param_3, param_4)
   undefined4 uVar8;
   int in_r10;
   uint uVar9;
-  uint uVar10;
+  uint loopIndex;
   undefined1 *puVar11;
   uint uVar12;
   int iVar13;
@@ -2439,12 +2439,12 @@ int TPPStreamCompiler__constructElement(this, param_2, param_3, param_4)
   }
   local_58 = 0xffffffff;
   local_54 = 0;
-  uVar10 = 0;
+  loopIndex = 0;
   iVar5 = -1;
   if (iVar13 != 0) {
     do {
       bVar1 = local_5c == 0;
-      if ((bVar1) || (uVar10 != 0)) {
+      if ((bVar1) || (loopIndex != 0)) {
         iVar17 = 4;
         puVar3 = local_80;
         do {
@@ -2452,7 +2452,7 @@ int TPPStreamCompiler__constructElement(this, param_2, param_3, param_4)
           puVar3 = puVar3 + 1;
           iVar17 = iVar17 + -1;
         } while (iVar17 != 0);
-        uVar10 = 0;
+        loopIndex = 0;
       }
       iVar16 = 0;
       iVar17 = ParseOperand__IsMatrix(*param_2);
@@ -2483,7 +2483,7 @@ int TPPStreamCompiler__constructElement(this, param_2, param_3, param_4)
       local_b8 = local_70 & 0xfffe1c2f | 0x6c;
       local_b4 = local_6c;
       if (!bVar1) {
-        puVar11 = &STACKARG(0xfffffec0) + uVar10 * 4;
+        puVar11 = &STACKARG(0xfffffec0) + loopIndex * 4;
         uVar7 = in_r8;
         do {
           iVar17 = iVar5 << 2;
@@ -2531,13 +2531,13 @@ int TPPStreamCompiler__constructElement(this, param_2, param_3, param_4)
                   uVar2 = *(ushort *)(iVar14 + 0x2c);
                 }
                 if (uVar2 == 0x1406) {
-                  local_80[uVar10] =
+                  local_80[loopIndex] =
                        *(undefined4 *)(in_r8 * 4 + *(int *)(*(int *)(iVar17 + (int)param_3) + 4));
                 }
                 else if (uVar2 < 0x1407) {
                   if (uVar2 == 0x1404) {
                     in_r10 = in_r8 * 4;
-                    local_80[uVar10] =
+                    local_80[loopIndex] =
                          *(undefined4 *)(in_r10 + *(int *)(*(int *)(iVar17 + (int)param_3) + 4));
                   }
                 }
@@ -2546,21 +2546,21 @@ int TPPStreamCompiler__constructElement(this, param_2, param_3, param_4)
                             (in_r8 * 4 + *(int *)(*(int *)(iVar17 + (int)param_3) + 4));
                 }
                 if (iVar16 == 1) {
-                  local_b8 = (uVar10 & 3) << 6 | local_b8 & 0xffffff3f | 0x4000;
+                  local_b8 = (loopIndex & 3) << 6 | local_b8 & 0xffffff3f | 0x4000;
                 }
                 else if (iVar16 < 2) {
                   if (iVar16 == 0) {
-                    local_b8 = (uVar10 & 3) << 8 | local_b8 & 0xfffffcff | 0x2000;
+                    local_b8 = (loopIndex & 3) << 8 | local_b8 & 0xfffffcff | 0x2000;
                   }
                 }
                 else if (iVar16 == 2) {
-                  local_b8 = (uVar10 & 3) << 4 | local_b8 & 0xffffffcf | 0x8000;
+                  local_b8 = (loopIndex & 3) << 4 | local_b8 & 0xffffffcf | 0x8000;
                 }
                 else if (iVar16 == 3) {
-                  local_b8 = (uVar10 & 3) << 2 | local_b8 & 0xfffffff3 | 0x10000;
+                  local_b8 = (loopIndex & 3) << 2 | local_b8 & 0xfffffff3 | 0x10000;
                 }
                 iVar16 = iVar16 + 1;
-                uVar10 = uVar10 + 1;
+                loopIndex = loopIndex + 1;
                 puVar11 = puVar11 + 4;
                 in_r7 = in_r7 + 1;
                 uVar12 = uVar12 + 1;
@@ -2653,7 +2653,7 @@ LAB_97bc7050:
           uVar7 = in_r8;
         } while (!bVar1);
       }
-      if (uVar10 != 0) {
+      if (loopIndex != 0) {
         iVar17 = *(int *)param_3[iVar5];
         if (iVar17 == 0) {
           uVar2 = *(ushort *)(param_3[iVar5] + 0x18);
@@ -2661,7 +2661,7 @@ LAB_97bc7050:
         else {
           uVar2 = *(ushort *)(iVar17 + 0x2c);
         }
-        ((int (*)())TPPStreamCompiler__getConstantAsSourceVar)((unsigned char *)&local_70,(uint)this,local_80,uVar10,(uint)uVar2);
+        ((int (*)())TPPStreamCompiler__getConstantAsSourceVar)((unsigned char *)&local_70,(uint)this,local_80,loopIndex,(uint)uVar2);
         local_bc = (local_b8 >> 0xc & 1) << 0x1c | local_bc & 0xefffffff;
         local_b0 = local_70;
         local_ac = local_6c;
@@ -2673,7 +2673,7 @@ LAB_97bc7050:
           uVar2 = *(ushort *)(iVar17 + 0x2c);
         }
         streamType = GetPPStreamTypeForGLType((uint)uVar2);
-        local_bc = (uVar10 - 1) * 0x4000000 & 0xc000000 |
+        local_bc = (loopIndex - 1) * 0x4000000 & 0xc000000 |
                    (streamType & 7) << 0x17 | local_bc & 0xf073ffff;
         param_4 = 0;
         in_r7 = (undefined4 *)0x0;
@@ -3516,6 +3516,7 @@ int TPPStreamCompiler__getConstantAsSourceVar(param_1, param_2, param_3, param_4
   uint param_4;
   uint param_5;
 {
+  uint loopIndex;
   bool bVar1;
   bool bVar2;
   uint uVar3;
@@ -3648,20 +3649,20 @@ LAB_97bc8868:
                 if (param_4 == 1) goto LAB_97bc8868;
               }
 LAB_97bc88a0:
-              uVar3 = 0;
+              loopIndex = 0;
               if (param_4 != 0) {
                 do {
-                  if (local_50[uVar3] == 0) {
-                    if (local_70[uVar3] != 0) {
+                  if (local_50[loopIndex] == 0) {
+                    if (local_70[loopIndex] != 0) {
                       bVar2 = false;
                       break;
                     }
-                    ((float *)(iVar4 + 0xc))[uVar3] = param_3[uVar3];
-                    local_50[uVar3] = 1;
-                    local_70[uVar3] = 1;
+                    ((float *)(iVar4 + 0xc))[loopIndex] = param_3[loopIndex];
+                    local_50[loopIndex] = 1;
+                    local_70[loopIndex] = 1;
                   }
-                  uVar3 = uVar3 + 1;
-                } while (uVar3 < param_4);
+                  loopIndex = loopIndex + 1;
+                } while (loopIndex < param_4);
               }
               if (param_4 != 0) {
                 piVar6 = local_50;

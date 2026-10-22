@@ -2930,6 +2930,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   unsigned char * __normal_iterator;
   unsigned char * intermAggregate;
 {
+  int loopIndex;
   uint uVar1;
   uint uVar2;
   uint uVar3;
@@ -2978,7 +2979,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
       a3 = intermAggregate;
       iVar9 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,a4);
       if (iVar9 == 0) {
-        iVar9 = 0;
+        loopIndex = 0;
         puVar13 = PTR_vtable_a7b7c0c8 + 8;
         while( true ) {
           (**(code **)(*(int *)intermAggregate + 0x38))(local_b0,intermAggregate);
@@ -2990,10 +2991,10 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
             iVar6 = iVar6 * iVar6;
           }
           local_b0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          if (iVar6 <= iVar9) break;
+          if (iVar6 <= loopIndex) break;
           poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
           puVar11 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
-          iVar9 = iVar9 + 1;
+          loopIndex = loopIndex + 1;
           iVar6 = (**(code **)(*(int *)**(undefined4 **)(iVar8 + 4) + 0x18))
                             ((int *)**(undefined4 **)(iVar8 + 4));
           *puVar11 = **(undefined4 **)(iVar6 + 0x30);

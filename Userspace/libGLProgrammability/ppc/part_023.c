@@ -463,7 +463,7 @@ int std____default_alloc_template_true_0____S_refill(param_1)
   ulong param_1;
 {
   int iVar1;
-  int iVar2;
+  int loopIndex;
   undefined4 *puVar3;
   int local_20 [6];
   
@@ -473,7 +473,7 @@ int std____default_alloc_template_true_0____S_refill(param_1)
     *(undefined4 **)(&DAT_a7b7bf90 + (param_1 + 7 >> 1 & 0x7ffffffc)) =
          (undefined4 *)(iVar1 + param_1);
     puVar3 = (undefined4 *)(iVar1 + param_1);
-    for (iVar2 = 1; local_20[0] + -1 != iVar2; iVar2 = iVar2 + 1) {
+    for (loopIndex = 1; local_20[0] + -1 != loopIndex; loopIndex = loopIndex + 1) {
       *puVar3 = (undefined4 *)((int)puVar3 + param_1);
       puVar3 = (undefined4 *)((int)puVar3 + param_1);
     }

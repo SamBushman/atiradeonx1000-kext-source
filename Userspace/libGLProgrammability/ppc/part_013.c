@@ -2246,18 +2246,18 @@ int FunctionTable__clear(this)
   unsigned char * this;
 {
   undefined4 *puVar1;
-  int iVar2;
+  int loopIndex;
   int iVar3;
   
-  iVar2 = 0;
+  loopIndex = 0;
   if (0 < *(int *)(this + 4)) {
     iVar3 = 0;
     do {
-      iVar2 = iVar2 + 1;
+      loopIndex = loopIndex + 1;
       puVar1 = (undefined4 *)(iVar3 + *(int *)this);
       iVar3 = iVar3 + 0x18;
       _free(*puVar1);
-    } while (iVar2 < *(int *)(this + 4));
+    } while (loopIndex < *(int *)(this + 4));
   }
   if (*(int *)this != 0) {
     _free(*(int *)this);
@@ -2272,6 +2272,7 @@ int FunctionTable__addFunction(this, param_2)
   unsigned char * this;
   char *param_2;
 {
+  int loopIndex;
   undefined4 allocation2;
   int length;
   int allocation;
@@ -2291,7 +2292,7 @@ int FunctionTable__addFunction(this, param_2)
     allocation = _malloc(uVar10 * 0x18 + 0x180);
     _memset(allocation,0,*(int *)(this + 4) * 0x18 + 0x180);
     uVar10 = *(uint *)(this + 4);
-    iVar4 = 0;
+    loopIndex = 0;
     if ((int)uVar10 < 1) {
       iVar3 = *(int *)this;
     }
@@ -2301,7 +2302,7 @@ int FunctionTable__addFunction(this, param_2)
       do {
         iVar9 = iVar5 + iVar3;
         uVar7 = *(undefined4 *)(iVar9 + 4);
-        iVar4 = iVar4 + 1;
+        loopIndex = loopIndex + 1;
         uVar8 = *(undefined4 *)(iVar9 + 8);
         iVar1 = iVar5 + allocation;
         uVar6 = *(undefined4 *)(iVar9 + 0xc);
@@ -2313,7 +2314,7 @@ int FunctionTable__addFunction(this, param_2)
         uVar6 = *(undefined4 *)(iVar9 + 0x10);
         *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(iVar9 + 0x14);
         *(undefined4 *)(iVar1 + 0x10) = uVar6;
-      } while (iVar4 < (int)uVar10);
+      } while (loopIndex < (int)uVar10);
     }
     if (iVar3 != 0) {
       _free(iVar3);
@@ -2421,13 +2422,13 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  int iVar1;
+  int loopIndex;
   int iVar2;
   int iVar3;
   int iVar4;
   uint uVar5;
   
-  iVar1 = 0;
+  loopIndex = 0;
   if (0 < *(int *)(this + 4)) {
     iVar2 = 0;
     do {
@@ -2444,9 +2445,9 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
          && ((uVar5 & 0x3ffff) != 0)) {
         *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(param_2 + 8) + 0xc) & 0x3ffff;
       }
-      iVar1 = iVar1 + 1;
+      loopIndex = loopIndex + 1;
       iVar2 = iVar2 + 0x18;
-    } while (iVar1 < *(int *)(this + 4));
+    } while (loopIndex < *(int *)(this + 4));
     return;
   }
   return;
@@ -3145,6 +3146,8 @@ int _InterpreterTestCR(param_1, param_2, param_3, param_4, param_5, param_6, par
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  uint loopIndex;
+  uint loopIndex2;
   float *pfVar1;
   bool bVar2;
   char cVar3;
@@ -3750,13 +3753,13 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
     goto LAB_97bd043c;
   }
   if ((iVar21 != 0x31) && (iVar21 != 0x36)) {
-    uVar17 = 0;
+    loopIndex2 = 0;
     if (uVar20 == 0) {
       return piVar18;
     }
     do {
       if (iVar14 != 0) {
-        uVar24 = uVar17;
+        uVar24 = loopIndex2;
         if (*(char *)(inst + 0x12) == '\0') {
           uVar24 = 0;
         }
@@ -3764,7 +3767,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],in_r5,inst[0xf],inst[0x10],inst[0x11],inst[0x12]
                    ,inst[0x13],inst[0x14],inst[0x15],uVar24,opVec + 4);
         if (1 < (uint)inst[0xc]) {
-          uVar24 = uVar17;
+          uVar24 = loopIndex2;
           if (*(char *)(inst + 0x1b) == '\0') {
             uVar24 = 0;
           }
@@ -3772,7 +3775,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
           ((int (*)())_InterpreterLoadSource)(machine,inst[0x16],in_r5,inst[0x18],inst[0x19],inst[0x1a],
                      inst[0x1b],inst[0x1c],inst[0x1d],inst[0x1e],uVar24,opVec + 8);
           if (2 < (uint)inst[0xc]) {
-            uVar24 = uVar17;
+            uVar24 = loopIndex2;
             if (*(char *)(inst + 0x24) == '\0') {
               uVar24 = 0;
             }
@@ -5181,7 +5184,7 @@ LAB_97bd2010:
         }
       }
       if (bVar25) {
-        uVar24 = uVar17;
+        uVar24 = loopIndex2;
         if (*(char *)(inst + 8) == '\0') {
           uVar24 = 0;
         }
@@ -5189,8 +5192,8 @@ LAB_97bd2010:
         ((int (*)())_InterpreterWriteDestination)(machine,inst[3],in_r5,inst[5],inst[6],inst[7],inst[8],inst[9],
                    inst[10],inst[0xb],uVar24,opVec,(uint)*(byte *)((int)inst + 6));
       }
-      uVar17 = uVar17 + 1;
-      if (uVar20 <= uVar17) {
+      loopIndex2 = loopIndex2 + 1;
+      if (uVar20 <= loopIndex2) {
         return piVar18;
       }
       iVar14 = inst[0xc];
@@ -5245,15 +5248,15 @@ LAB_97bd0310:
   else {
     if (uVar20 == 3) {
       pfVar10 = opVec;
-      uVar20 = 0;
+      loopIndex = 0;
       do {
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
           uVar17 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                    inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
           uVar17 = 0;
         }
@@ -5263,10 +5266,10 @@ LAB_97bd0310:
            (fVar6 = 1.0, opVec[6] != opVec[10])) {
           fVar6 = 0.0;
         }
-        uVar20 = uVar20 + 1;
+        loopIndex = loopIndex + 1;
         *pfVar10 = fVar6;
         pfVar10 = pfVar10 + 1;
-      } while (uVar20 < 3);
+      } while (loopIndex < 3);
       uStack_ac = 0;
       fVar6 = opVec[2];
       fVar7 = opVec[1];
@@ -5279,15 +5282,15 @@ LAB_97bd01a0:
     else if (uVar20 < 4) {
       if (uVar20 == 2) {
         pfVar10 = opVec;
-        uVar20 = 0;
+        loopIndex = 0;
         do {
-          uVar17 = uVar20;
+          uVar17 = loopIndex;
           if (*(char *)(inst + 0x12) == '\0') {
             uVar17 = 0;
           }
           ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                      inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-          uVar17 = uVar20;
+          uVar17 = loopIndex;
           if (*(char *)(inst + 0x1b) == '\0') {
             uVar17 = 0;
           }
@@ -5296,12 +5299,12 @@ LAB_97bd01a0:
           if ((opVec[4] != opVec[8]) || (fVar6 = 1.0, opVec[5] != opVec[9])) {
             fVar6 = 0.0;
           }
-          uVar20 = uVar20 + 1;
+          loopIndex = loopIndex + 1;
           *pfVar10 = fVar6;
           pfVar10 = pfVar10 + 1;
           fVar6 = opVec[1];
           fVar7 = opVec[0];
-        } while (uVar20 < 2);
+        } while (loopIndex < 2);
 joined_r0x97bd003c:
         uStack_ac = 0;
         if ((fVar7 != 0.0) && (uStack_ac = 0, fVar6 != 0.0)) {
@@ -5312,15 +5315,15 @@ joined_r0x97bd003c:
     }
     else if (uVar20 == 4) {
       pfVar10 = opVec;
-      uVar20 = 0;
+      loopIndex = 0;
       do {
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x12) == '\0') {
           uVar17 = 0;
         }
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
                    inst[0x12],inst[0x13],inst[0x14],inst[0x15],uVar17,opVec + 4);
-        uVar17 = uVar20;
+        uVar17 = loopIndex;
         if (*(char *)(inst + 0x1b) == '\0') {
           uVar17 = 0;
         }
@@ -5330,10 +5333,10 @@ joined_r0x97bd003c:
            ((opVec[6] != opVec[10] || (fVar6 = 1.0, opVec[7] != opVec[0xb])))) {
           fVar6 = 0.0;
         }
-        uVar20 = uVar20 + 1;
+        loopIndex = loopIndex + 1;
         *pfVar10 = fVar6;
         pfVar10 = pfVar10 + 1;
-      } while (uVar20 < 4);
+      } while (loopIndex < 4);
       uStack_ac = 0;
       if ((opVec[0] == 0.0) || (fVar6 = opVec[3], fVar7 = opVec[2], opVec[1] == 0.0)
          ) goto LAB_97bd01a0;
