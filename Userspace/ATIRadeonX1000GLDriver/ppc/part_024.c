@@ -518,32 +518,32 @@ int FUN_000ecb90(param_1, param_2)
 }
 
 /* FUN_000ecc1c @ 0xecc1c (268 bytes) */
-int FUN_000ecc1c(inst, param_2, param_3)
+int FUN_000ecc1c(inst, param_2, compiler)
   int *inst;
   undefined4 param_2;
-  int param_3;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(*inst + 0x60))(inst,param_2,param_3);
+  iVar1 = (**(code **)(*inst + 0x60))(inst,param_2,compiler);
   if (iVar1 != 0) {
-    iVar1 = FUN_0010497c(inst,*(undefined4 *)(param_3 + 0x6c4));
+    iVar1 = FUN_0010497c(inst,*(undefined4 *)(compiler + 0x6c4));
     if (iVar1 == 0) {
       return 0;
     }
-    iVar1 = FUN_0010c47c(inst,param_3);
+    iVar1 = FUN_0010c47c(inst,compiler);
     if (iVar1 == 0) {
       return 0;
     }
     inst = (int *)FUN_00105594(inst,1);
   }
-  iVar1 = FUN_0010497c(inst,*(undefined4 *)(param_3 + 0x6c4));
+  iVar1 = FUN_0010497c(inst,*(undefined4 *)(compiler + 0x6c4));
   if ((((iVar1 != 0) &&
-       (iVar1 = (**(code **)(**(int **)(param_3 + 0x30c) + 0x44))
-                          (*(int **)(param_3 + 0x30c),inst), iVar1 != 0)) &&
+       (iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x44))
+                          (*(int **)(compiler + 0x30c),inst), iVar1 != 0)) &&
       ((*(uint *)(inst[0x56] + 0xc) & 8) != 0)) &&
      ((iVar1 = FUN_000f2d18(param_2,0x10203), iVar1 != 0 ||
-      (iVar1 = ((int (*)())FUN_000ecb90)(inst,param_3), iVar1 != 0)))) {
+      (iVar1 = ((int (*)())FUN_000ecb90)(inst,compiler), iVar1 != 0)))) {
     return 1;
   }
   return 0;
@@ -817,8 +817,8 @@ int FUN_000ed63c(param_1, inst)
 }
 
 /* FUN_000ed7e4 @ 0xed7e4 (184 bytes) */
-int FUN_000ed7e4(compiler, param_2)
-  int compiler;
+int FUN_000ed7e4(program, param_2)
+  int program;
   uint param_2;
 {
   int iVar1;
@@ -828,7 +828,7 @@ int FUN_000ed7e4(compiler, param_2)
   int *a0;
   uint loopIndex;
   
-  a0 = *(int **)(compiler + 900);
+  a0 = *(int **)(program + 900);
   iVar1 = a0[2];
   while (iVar1 != 0) {
     (**(code **)(*a0 + 0x48))(a0,param_2);
@@ -836,13 +836,13 @@ int FUN_000ed7e4(compiler, param_2)
     param_2 = extraout_r4;
     iVar1 = a0[2];
   }
-  iVar1 = *(int *)(compiler + 0x3c4);
+  iVar1 = *(int *)(program + 0x3c4);
   iVar3 = 0;
   for (loopIndex = 1; loopIndex <= *(uint *)(iVar1 + 4); loopIndex = loopIndex + 1) {
     iVar2 = *(int *)(*(int *)(iVar1 + 8) + iVar3);
     if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
       FUN_001054ec(iVar2,0);
-      iVar1 = *(int *)(compiler + 0x3c4);
+      iVar1 = *(int *)(program + 0x3c4);
     }
     iVar3 = iVar3 + 4;
   }

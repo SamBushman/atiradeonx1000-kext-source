@@ -180,9 +180,51 @@ Block derives `DListNode` (vtable `0x1f1008`); `this+0x90` (word 0x24) is an emb
 
 Subclasses (section 1.1): structured-control-flow blocks (`IfHeader`/`IfFooter` (+`Static`), `LoopHeader`/`LoopFooter`/`PostLoopFooter`, `Break/ContinueBlock`, `Entry/Exit/FuncEndBlock`, `AnyBlock`, `MirrorBlock`).
 
-## 5. Compiler context
+### 4.1 Block virtual table (the vtables have 20 slots, not 3)
 
-The object most pass functions receive (a parameter or `pass+8`). Fields established by use:
+Reading each Block-family vtable to the next vtable shows 20 slots. Tiny functions of the coalesced text (`unowned_code/part_*.c`, `orph_<addr>`) are the predicate bodies:
+the `Block` implementation returns 0 (`orph_1cdbfc`, `orph_1cdc04`, ...), exactly one subclass family overrides it with `return 1`.
+
+| slot (byte offset) | meaning | evidence |
+|---|---|---|
+| 0, 1 | destructor, deleting destructor | GCC layout |
+| 2 (0x08) | `clone`: allocate a block of the same class from the arena at `compiler+0x374`, copy-construct | CONFIRMED (`FUN_000e9e88` and its per-class variants) |
+| 3 (0x0c) | `Block`: empty (`orph_1cdbf8`); `EntryBlock` overrides with `FUN_000e7cf0(this, graph)` (list insertion) | CONFIRMED structure, name UNKNOWN |
+| 5 (0x14) | true only in `AnyBlock` -> `isAny` | structure CONFIRMED, name INFERRED |
+| 6 (0x18) | true only in `MirrorBlock` -> `isMirror` | same |
+| 7 (0x1c) | `EntryBlock` -> `isEntry` | same |
+| 8 (0x20) | `ExitBlock` -> `isExit` | same |
+| 9 (0x24) | `IfHeader`, `IfHeaderStatic` -> `isIfHeader` | same |
+| 10 (0x28) | `IfFooter`, `IfFooterStatic` -> `isIfFooter` | same |
+| 11 (0x2c) | `LoopHeader` -> `isLoopHeader` | same |
+| 12 (0x30) | `LoopFooter` -> `isLoopFooter` | same |
+| 13 (0x34) | `PostLoopFooter` -> `isPostLoopFooter` | same |
+| 14 (0x38) | `BreakBlock` -> `isBreak` | same |
+| 15 (0x3c) | `ContinueBlock` -> `isContinue` | same |
+| 16 (0x40) | `IfHeaderStatic`, `IfFooterStatic` -> `isStatic` | same |
+| 17 (0x44) | visitor entry: `Block` default `FUN_000e2860(this, visitor)` (calls through `*(visitor+0x20)`), each subclass dispatches to its own visitor method | INFERRED |
+| 18 (0x48) | `FUN_000e84fc(this, ...7 args)` default; `LoopHeader` `FUN_000e86f0`; the if/loop footers and others are empty stubs (`orph_000e86d0..e86ec`) | UNKNOWN meaning |
+| 19 (0x4c) | `getName()` returning the kind string: `"SIMPLE"` (Block), `"ENTRY"`, `"EXIT"`, `"ANY"`, `"MIRROR"`, `"IF_HEADER"`, `"IF_HEADER_S"`, `"IF_FOOTER"`, `"IF_FOOTER_S"`, `"LOOP_HEADER"`/`"REP_HEADER"` (by `+0x134`), `"LOOP_FOOTER"`, `"POST_LOOP_FOOTER"`, `"BREAK"`, `"CONTINUE"`, `"FUNC_END"` | CONFIRMED (the strings) |
+
+Consequence: `+0x384` of the **Program** (section 5.1) is the list of Blocks in order; `FUN_000ed7e4` walks it and calls slot 18 `(this, pass_name)` on each, `flatten_ifs` walks it testing slots 10 and 16.
+
+## 5. Two context objects: `Compiler` and `Program`
+
+Most pass functions take a **Program** (`flatten_ifs` calls its parameter `flattenPass`): `*(program + 8)` is the **Compiler**. The two are easy to confuse because both are passed around as the "context".
+
+### 5.1 Program (the object a pass receives; INFERRED name)
+
+| offset | field | evidence |
+|---|---|---|
+| +0x08 | the Compiler (`*(program+8)+0x374/0x378` are the arenas, `+0x324` the instruction-id counter) | CONFIRMED (every pass passes `*(program+8)` to `FUN_001043f0`, `FUN_00193e18`) |
+| +0x30 | flag word; bit 7 (`>>7 & 1`) is passed as a "debug" argument to `FUN_00106004`/virtual calls (same bit as `*(compiler+0x6c4)+0x30 & 0x80`) | INFERRED |
+| +0x384 (900) | head of the **Block list** (`DListNode`; `node[2]` = next). `FUN_000ed7e4(program, name)` walks it calling Block virtual slot 18 (0x48) with the pass name; `flatten_ifs` and `remove_empty_graphs` iterate it testing Block slots 10 and 16 | CONFIRMED (virtual-slot decode, section 4.1) |
+| +0x3a0 | entry block (passed to `FUN_000e79d0`, `FUN_000ec3ac`) | INFERRED |
+| +0x3c4 | vector of all instructions; `FUN_000ed7e4` clears bit 0 of `+0x14` in each | CONFIRMED |
+| +0x478 | counter used to renumber `IRInst+0x160` in `flatten_ifs` | INFERRED |
+| +0x6a8 | limit compared with `*(*(compiler+0x6c4)+0x15c)` before flattening an `if` | INFERRED |
+
+### 5.2 Compiler
 
 | offset | field | evidence |
 |---|---|---|
@@ -190,17 +232,14 @@ The object most pass functions receive (a parameter or `pass+8`). Fields establi
 | +0x378 | arena B | first argument of `FUN_00193e18` (pass work vectors/bit sets, IRInst debug vector) |
 | +0x324 | next instruction id | `IRInst` ctor |
 | +0x32c | next block id | `Block` ctor |
-| +0x30c | the program/function object; virtual calls at slots `0x60/4`, `0x16c/4` | `FUN_000e07dc`, `FUN_00113388` |
-| +0x384 (900) | head of a listener list; `FUN_000ed7e4(compiler, name)` calls virtual slot `0x48/4` of each listener with the pass name | CONFIRMED (`FUN_000ed7e4`) |
-| +0x3a0 | entry block (passed to `FUN_000e79d0`, `FUN_000ec3ac`) | INFERRED |
+| +0x30c | the target description object; virtual calls at slots `0x60/4`, `0x114/4`, `0x16c/4` (per-opcode record table: `FUN_00113388`) | `FUN_000e07dc`, `FUN_00113388`, `flatten_ifs` |
 | +0x3bc | bit set handing out ids | INFERRED |
-| +0x3c4 | vector of all instructions; `FUN_000ed7e4` clears bit 0 of `+0x14` in each | CONFIRMED |
-| +0x6c4 | target/options object (flags at `+0x30`; bit `0x80` = keep debug vectors) | CONFIRMED |
+| +0x6c4 | options object (flags at `+0x30`; bit `0x80` = keep debug vectors; `+0x15c` a limit) | CONFIRMED / INFERRED |
 | +0xc/+0x18 | callbacks (`(**(code **)(compiler + 0xc))(n)`); in some functions the parameter named `compiler` is a different object | UNKNOWN |
 
 ## 6. Passes
 
-`FUN_000ed7e4(compiler, "name")` marks the start of a pass (notifies listeners, clears per-instruction dirty bits). Functions that call it with a literal:
+`FUN_000ed7e4(program, "name")` marks the start of a pass (calls slot 18 of every Block with the name, clears bit 0 of the flag word of every instruction). Functions that call it with a literal:
 
 | function | pass name |
 |---|---|
@@ -223,7 +262,7 @@ Entry = `{flags, ?, handler, name*}`; `FUN_00126760(kind)` returns `flags & 1`. 
 
 ## 8. What this unlocked in the corpus
 
-`names_R2_params.tsv` (typed parameters), `names_R2_idioms.tsv` (arena/vector/operand webs) and `names_R2_locals.tsv` (typed locals) are produced from sections 2-4.
+`names_R2_params.tsv` (typed parameters: `inst`, `block`, `compiler`, `program`, `vector`, `arena`), `names_R2_idioms.tsv` (arena/vector/operand webs), `names_R2_locals.tsv` (typed locals) and `names_R2_block.tsv` (results of the Block predicate virtual calls) are produced from sections 2-5.
 The method table is `class_methods.tsv`; renaming the `FUN_` functions themselves to `Class::method` was not done (it would change symbols the corpus verification compares by name).
 
 ## 9. Not established (honest list)

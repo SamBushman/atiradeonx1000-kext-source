@@ -5579,9 +5579,9 @@ code_r0x00184480:
 }
 
 /* FUN_00184ab4 @ 0x184ab4 (280 bytes) */
-int FUN_00184ab4(param_1, compiler)
+int FUN_00184ab4(param_1, program)
   undefined4 param_1;
-  int compiler;
+  int program;
 {
   int iVar1;
   int iVar2;
@@ -5589,8 +5589,8 @@ int FUN_00184ab4(param_1, compiler)
   int *piVar4;
   int *piVar5;
   
-  iVar1 = *(int *)(compiler + 900);
-  for (iVar2 = *(int *)(*(int *)(compiler + 900) + 8); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
+  iVar1 = *(int *)(program + 900);
+  for (iVar2 = *(int *)(*(int *)(program + 900) + 8); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
     piVar3 = (int *)(*(int **)(iVar1 + 0xa0))[1];
     piVar5 = *(int **)(iVar1 + 0xa0);
     if (piVar3 != (int *)0x0) {
@@ -5599,8 +5599,8 @@ int FUN_00184ab4(param_1, compiler)
         iVar2 = (**(code **)(*piVar5 + 0x34))(piVar5);
         if ((((iVar2 == 0) && (iVar2 = (**(code **)(*piVar5 + 0x38))(piVar5), iVar2 == 0)) &&
             (iVar2 = (**(code **)(*piVar5 + 0x14))(piVar5), 0 < iVar2)) &&
-           (iVar2 = ((int (*)())FUN_00181928)(piVar5,iVar1,compiler), iVar2 == 0)) {
-          ((int (*)())FUN_0018413c)(param_1,compiler,iVar1,piVar5);
+           (iVar2 = ((int (*)())FUN_00181928)(piVar5,iVar1,program), iVar2 == 0)) {
+          ((int (*)())FUN_0018413c)(param_1,program,iVar1,piVar5);
         }
         piVar3 = (int *)piVar4[1];
         piVar5 = piVar4;
@@ -5609,7 +5609,7 @@ int FUN_00184ab4(param_1, compiler)
     }
     iVar1 = iVar2;
   }
-  return FUN_000ed7e4(compiler,(int)"minreg_order");
+  return FUN_000ed7e4(program,(int)"minreg_order");
 }
 
 /* FUN_00184bcc @ 0x184bcc (36 bytes) */

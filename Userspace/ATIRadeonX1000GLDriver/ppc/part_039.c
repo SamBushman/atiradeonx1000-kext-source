@@ -1890,14 +1890,14 @@ int FUN_0012ab04(inst)
 }
 
 /* FUN_0012ab80 @ 0x12ab80 (88 bytes) */
-int FUN_0012ab80(compiler)
-  int compiler;
+int FUN_0012ab80(program)
+  int program;
 {
   int *piVar1;
   
-  piVar1 = *(int **)(*(int *)(compiler + 8) + 0x30c);
-  (**(code **)(*piVar1 + 0x74))(piVar1,compiler);
-  return FUN_000ed7e4(compiler,(int)"optimize_control_flow");
+  piVar1 = *(int **)(*(int *)(program + 8) + 0x30c);
+  (**(code **)(*piVar1 + 0x74))(piVar1,program);
+  return FUN_000ed7e4(program,(int)"optimize_control_flow");
 }
 
 /* FUN_0012abd8 @ 0x12abd8 (128 bytes) */

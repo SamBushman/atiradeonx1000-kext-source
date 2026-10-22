@@ -2854,9 +2854,9 @@ int FUN_00170e6c(compiler, param_2)
 }
 
 /* FUN_00171714 @ 0x171714 (408 bytes) */
-int FUN_00171714(compiler, compiler2)
+int FUN_00171714(compiler, program)
   int *compiler;
-  int compiler2;
+  int program;
 {
   int *operandVReg;
   int loopIndex;
@@ -2880,8 +2880,8 @@ int FUN_00171714(compiler, compiler2)
   int *piVar14;
   int *piVar15;
   
-  compiler[1] = compiler2;
-  iVar4 = *(int *)(compiler2 + 8);
+  compiler[1] = program;
+  iVar4 = *(int *)(program + 8);
   *compiler = iVar4;
   iVar4 = FUN_0010ddcc(iVar4);
   compiler[2] = iVar4;
@@ -3036,7 +3036,7 @@ code_r0x00171ba0:
   FUN_000ed7e4(compiler[1],(int)"sched_preprocess");
   iVar8 = FUN_000e07dc(*compiler,0x43);
   if (iVar8 != 0) {
-    FUN_00184ab4(compiler,compiler2);
+    FUN_00184ab4(compiler,program);
   }
   FUN_00169e30(compiler);
   FUN_00165014(compiler);
@@ -3087,7 +3087,7 @@ code_r0x00171ba0:
   FUN_000e0e0c(*compiler,"Scheduler : Total dot-product transformed %d\n",compiler[0x6a],in_r6,in_r7,
                in_r8,iVar4,in_r10);
   FUN_000ed7e4(compiler[1],(int)"schedule_inst");
-  FUN_00138080(compiler2);
+  FUN_00138080(program);
   iVar4 = compiler[0x4c];
   piVar13 = compiler;
   if (iVar4 != 0) {

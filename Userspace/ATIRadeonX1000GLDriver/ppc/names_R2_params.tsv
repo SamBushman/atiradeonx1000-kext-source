@@ -21,10 +21,11 @@ local	FUN_000ec0c8	param_4	compiler	INFERRED	FUN_000ec0c8 passes it as arg 1 of 
 local	FUN_000ec120	param_4	compiler	INFERRED	FUN_000ec120 passes it as arg 1 of FUN_000ea148 (typed Compiler)
 local	FUN_000ec178	param_4	compiler	INFERRED	FUN_000ec178 passes it as arg 1 of FUN_000ea148 (typed Compiler)
 local	FUN_000ecc1c	param_1	inst	INFERRED	FUN_000ecc1c passes it as arg 0 of FUN_00105594 (typed Inst)
+local	FUN_000ecc1c	param_3	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_000ed29c	param_2	inst	INFERRED	FUN_000ed29c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000ed29c	param_4	compiler	INFERRED	FUN_000ed29c passes it as arg 1 of FUN_001043f0 (typed Compiler)
 local	FUN_000ed63c	param_2	inst	INFERRED	FUN_000ed63c passes it as arg 0 of FUN_001054ec (typed Inst)
-local	FUN_000ed7e4	param_1	compiler	CONFIRMED	seed: FUN_000ed7e4 reads/writes it as Compiler
+local	FUN_000ed7e4	param_1	program	CONFIRMED	seed: FUN_000ed7e4 reads/writes it as Program
 local	FUN_000f04d4	param_2	inst	INFERRED	FUN_000f04d4 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000f07a8	param_3	inst	INFERRED	FUN_000f07a8 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000f14f8	param_2	inst	INFERRED	FUN_000f14f8 passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -48,6 +49,7 @@ local	FUN_000f485c	param_1	inst	INFERRED	FUN_000f485c passes it as arg 0 of FUN_
 local	FUN_000f48ec	param_1	inst	INFERRED	FUN_000f48ec passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000f497c	param_1	inst	INFERRED	FUN_000f497c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000f497c	param_2	inst2	INFERRED	FUN_000f497c passes it as arg 0 of FUN_001054ec (typed Inst)
+local	FUN_000f4fdc	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_000f5a0c	param_1	inst	INFERRED	FUN_000f5a0c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000f5a0c	param_3	inst2	INFERRED	FUN_000f5a0c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000f5c0c	param_1	inst	INFERRED	FUN_000f5c0c passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -146,7 +148,7 @@ local	FUN_0011ff7c	param_4	vector2	INFERRED	FUN_0011ff7c passes it as arg 0 of F
 local	FUN_0011ff7c	param_5	vector3	INFERRED	FUN_0011ff7c passes it as arg 0 of FUN_0019423c (typed Vector)
 local	FUN_0011ff7c	param_6	vector4	INFERRED	FUN_0011ff7c passes it as arg 0 of FUN_0019423c (typed Vector)
 local	FUN_0011ff7c	param_7	vector5	INFERRED	FUN_0011ff7c passes it as arg 0 of FUN_0019423c (typed Vector)
-local	FUN_001214fc	param_1	compiler	INFERRED	FUN_001214fc passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
+local	FUN_001214fc	param_1	program	INFERRED	FUN_001214fc passes it as arg 0 of FUN_000ed7e4 (typed Program)
 local	FUN_00127994	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0012873c	param_2	inst	INFERRED	FUN_0012873c passes it as arg 0 of FUN_000f5c0c (typed Inst)
 local	FUN_00128930	param_10	compiler	INFERRED	FUN_00128930 passes it as arg 1 of FUN_001043f0 (typed Compiler)
@@ -157,14 +159,14 @@ local	FUN_00129b48	param_4	inst2	INFERRED	FUN_00129b48 passes it as arg 0 of FUN
 local	FUN_0012a00c	param_10	compiler	INFERRED	FUN_0012a00c passes it as arg 1 of FUN_001043f0 (typed Compiler)
 local	FUN_0012aa78	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0012ab04	param_1	inst	INFERRED	FUN_0012ab04 passes it as arg 0 of FUN_00105dbc (typed Inst)
-local	FUN_0012ab80	param_1	compiler	INFERRED	FUN_0012ab80 passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
+local	FUN_0012ab80	param_1	program	INFERRED	FUN_0012ab80 passes it as arg 0 of FUN_000ed7e4 (typed Program)
 local	FUN_0012b35c	param_2	inst	INFERRED	FUN_0012b35c passes it as arg 0 of FUN_000f3a30 (typed Inst)
 local	FUN_0012c3d0	param_1	inst	INFERRED	FUN_0012c3d0 passes it as arg 0 of FUN_00105dbc (typed Inst)
 local	FUN_0012c59c	param_2	inst	INFERRED	FUN_0012c59c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0012c7c0	param_2	inst	INFERRED	FUN_0012c7c0 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0012c908	param_2	inst	INFERRED	FUN_0012c908 passes it as arg 0 of FUN_00105594 (typed Inst)
-local	FUN_0012ccc0	param_1	compiler	INFERRED	FUN_0012ccc0 passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
-local	FUN_001300b0	param_1	compiler	INFERRED	FUN_001300b0 passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
+local	FUN_0012ccc0	param_1	program	INFERRED	FUN_0012ccc0 passes it as arg 0 of FUN_000ed7e4 (typed Program)
+local	FUN_001300b0	param_1	program	INFERRED	FUN_001300b0 passes it as arg 0 of FUN_000ed7e4 (typed Program)
 local	FUN_00130da0	param_2	inst	INFERRED	FUN_00130da0 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00131008	param_2	inst	INFERRED	FUN_00131008 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_001312f4	param_1	inst	INFERRED	FUN_001312f4 passes it as arg 0 of FUN_001054ec (typed Inst)
@@ -186,9 +188,9 @@ local	FUN_0013a240	param_1	vector	INFERRED	FUN_0013a240 passes it as arg 0 of FU
 local	FUN_0013a38c	param_1	inst	INFERRED	FUN_0013a38c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0013a38c	param_2	vector	INFERRED	FUN_0013a38c passes it as arg 0 of FUN_0019423c (typed Vector)
 local	FUN_0013ca84	param_1	inst	INFERRED	FUN_0013ca84 passes it as arg 0 of FUN_00105594 (typed Inst)
-local	FUN_0013d160	param_1	compiler	INFERRED	FUN_0013d160 passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
+local	FUN_0013d160	param_1	program	INFERRED	FUN_0013d160 passes it as arg 0 of FUN_000ed7e4 (typed Program)
 local	FUN_0013d820	param_1	inst	INFERRED	FUN_0013d820 passes it as arg 0 of FUN_00105594 (typed Inst)
-local	FUN_0013da3c	param_1	compiler	INFERRED	FUN_0013da3c passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
+local	FUN_0013da3c	param_1	program	INFERRED	FUN_0013da3c passes it as arg 0 of FUN_000ed7e4 (typed Program)
 local	FUN_0013f3d4	param_1	inst	INFERRED	FUN_0013f3d4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00141044	param_3	inst	INFERRED	FUN_00141044 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00141100	param_2	inst	INFERRED	FUN_00141100 passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -221,6 +223,7 @@ local	FUN_001479f8	param_1	inst	INFERRED	FUN_001479f8 passes it as arg 0 of FUN_
 local	FUN_00147b8c	param_1	inst	INFERRED	FUN_00147b8c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00147b8c	param_3	inst2	INFERRED	FUN_00147b8c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00147f54	param_1	inst	INFERRED	FUN_00147f54 passes it as arg 0 of FUN_001054ec (typed Inst)
+local	FUN_00147f54	param_2	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0014846c	param_1	inst	INFERRED	FUN_0014846c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_001486e8	param_1	inst	INFERRED	FUN_001486e8 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00148980	param_1	inst	INFERRED	FUN_00148980 passes it as arg 0 of FUN_001054ec (typed Inst)
@@ -230,6 +233,7 @@ local	FUN_00149d54	param_1	inst	INFERRED	FUN_00149d54 passes it as arg 0 of FUN_
 local	FUN_00149d54	param_2	inst2	INFERRED	FUN_00149d54 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00149de4	param_1	inst	INFERRED	FUN_00149de4 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00149de4	param_3	inst2	INFERRED	FUN_00149de4 passes it as arg 0 of FUN_00105594 (typed Inst)
+local	FUN_00149de4	param_5	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0014a898	param_1	inst	INFERRED	FUN_0014a898 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0014a898	param_2	inst2	INFERRED	FUN_0014a898 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0014a918	param_1	inst	INFERRED	FUN_0014a918 passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -303,18 +307,19 @@ local	FUN_0016c1fc	param_1	compiler	INFERRED	accessed at Compiler-only field off
 local	FUN_0016ff54	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_00170e6c	param_1	compiler	INFERRED	FUN_00170e6c passes it as arg 0 of FUN_0016a568 (typed Compiler)
 local	FUN_00171714	param_1	compiler	INFERRED	FUN_00171714 passes it as arg 0 of FUN_00169e30 (typed Compiler)
-local	FUN_00171714	param_2	compiler2	INFERRED	FUN_00171714 passes it as arg 1 of FUN_00184ab4 (typed Compiler)
+local	FUN_00171714	param_2	program	INFERRED	FUN_00171714 passes it as arg 1 of FUN_00184ab4 (typed Program)
 local	FUN_00172474	param_2	inst	INFERRED	FUN_00172474 passes it as arg 0 of FUN_0010502c (typed Inst)
 local	FUN_001725c4	param_1	inst	INFERRED	FUN_001725c4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_001725c4	param_3	compiler	INFERRED	FUN_001725c4 passes it as arg 1 of FUN_001043f0 (typed Compiler)
 local	FUN_00173a48	param_1	inst	INFERRED	FUN_00173a48 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0017a130	param_3	inst	INFERRED	FUN_0017a130 passes it as arg 0 of FUN_001054ec (typed Inst)
+local	FUN_0017a130	param_4	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0017bc58	param_1	inst	INFERRED	FUN_0017bc58 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_001819b4	param_1	inst	INFERRED	FUN_001819b4 passes it as arg 0 of FUN_000f3a30 (typed Inst)
 local	FUN_001819b4	param_2	inst2	INFERRED	FUN_001819b4 passes it as arg 0 of FUN_000f3a30 (typed Inst)
 local	FUN_00181f00	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_00181f00	param_3	inst	INFERRED	FUN_00181f00 passes it as arg 0 of FUN_00106004 (typed Inst)
-local	FUN_00184ab4	param_2	compiler	INFERRED	FUN_00184ab4 passes it as arg 0 of FUN_000ed7e4 (typed Compiler)
+local	FUN_00184ab4	param_2	program	INFERRED	FUN_00184ab4 passes it as arg 0 of FUN_000ed7e4 (typed Program)
 local	FUN_001859bc	param_1	inst	INFERRED	FUN_001859bc passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00185da4	param_3	inst	INFERRED	FUN_00185da4 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00185da4	param_4	inst2	INFERRED	FUN_00185da4 passes it as arg 0 of FUN_001054ec (typed Inst)
@@ -326,6 +331,7 @@ local	FUN_001875a8	param_1	inst	INFERRED	FUN_001875a8 passes it as arg 0 of FUN_
 local	FUN_001875a8	param_3	inst2	INFERRED	FUN_001875a8 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00187ad8	param_1	inst	INFERRED	FUN_00187ad8 passes it as arg 2 of FUN_001922c4 (typed Inst)
 local	FUN_001882a4	param_1	inst	INFERRED	FUN_001882a4 passes it as arg 0 of FUN_00105594 (typed Inst)
+local	FUN_001882a4	param_2	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0018843c	param_2	inst	INFERRED	FUN_0018843c passes it as arg 0 of FUN_00146610 (typed Inst)
 local	FUN_0018843c	param_4	inst2	INFERRED	FUN_0018843c passes it as arg 0 of FUN_00154dc0 (typed Inst)
 local	FUN_0018896c	param_1	inst	INFERRED	FUN_0018896c passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -342,6 +348,7 @@ local	FUN_0018a080	param_2	inst	INFERRED	FUN_0018a080 passes it as arg 0 of FUN_
 local	FUN_0018a1ec	param_2	inst	INFERRED	FUN_0018a1ec passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0018ad08	param_2	inst	INFERRED	FUN_0018ad08 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0018d4b4	param_1	inst	INFERRED	FUN_0018d4b4 passes it as arg 0 of FUN_00105594 (typed Inst)
+local	FUN_0018d4b4	param_5	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0018e1a8	param_2	inst	INFERRED	FUN_0018e1a8 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0018f674	param_2	inst	INFERRED	FUN_0018f674 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00190100	param_2	inst	INFERRED	FUN_00190100 passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -362,6 +369,7 @@ local	FUN_0019679c	param_2	inst	INFERRED	FUN_0019679c passes it as arg 0 of FUN_
 local	FUN_00196e90	param_2	inst	INFERRED	FUN_00196e90 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0019786c	param_4	inst	INFERRED	FUN_0019786c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_00197b30	param_2	inst	INFERRED	FUN_00197b30 passes it as arg 0 of FUN_00105594 (typed Inst)
+local	FUN_00197b30	param_4	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_00197de4	param_5	inst	INFERRED	FUN_00197de4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00197ecc	param_5	inst	INFERRED	FUN_00197ecc passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00197fb4	param_4	inst	INFERRED	FUN_00197fb4 passes it as arg 0 of FUN_001054ec (typed Inst)

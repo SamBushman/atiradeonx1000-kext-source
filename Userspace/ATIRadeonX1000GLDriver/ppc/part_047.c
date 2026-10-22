@@ -2005,11 +2005,11 @@ int FUN_0017a034(ctx, param_2)
 }
 
 /* FUN_0017a130 @ 0x17a130 (284 bytes) */
-int FUN_0017a130(param_1, param_2, inst, param_4)
+int FUN_0017a130(param_1, param_2, inst, compiler)
   int param_1;
   float *param_2;
   int inst;
-  int param_4;
+  int compiler;
 {
   undefined4 arenaAt378;
   int *piVar1;
@@ -2027,7 +2027,7 @@ int FUN_0017a130(param_1, param_2, inst, param_4)
     iVar3 = FUN_001054ec(inst,param_1);
     *(undefined4 *)(iVar3 + 0x10) = uVar4;
   }
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(param_4 + 0x6c4),param_1,(double)*param_2,(double)param_2[1],
+  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),param_1,(double)*param_2,(double)param_2[1],
                (double)param_2[2],(double)param_2[3]);
   piVar1 = *(int **)(*(int *)(param_1 * 0x18 + inst + 0x8c) + 0x18);
   if (*piVar1 == 0) {
@@ -2043,11 +2043,11 @@ int FUN_0017a130(param_1, param_2, inst, param_4)
   iVar5 = *piVar1;
   iVar3 = *(int *)(iVar5 + 0x8c);
   if (*(int *)(*(int *)(iVar3 + 0x2c) + 4) == 0) {
-    arenaAt378 = *(undefined4 *)(param_4 + 0x378);
+    arenaAt378 = *(undefined4 *)(compiler + 0x378);
     puVar2 = (undefined4 *)FUN_00193e18(arenaAt378,0x240);
     puVar6 = puVar2 + 1;
     *puVar2 = arenaAt378;
-    FUN_00173938(puVar6,iVar5,param_4);
+    FUN_00173938(puVar6,iVar5,compiler);
     FUN_00174e0c(puVar6);
     FUN_00173278(puVar6);
     FUN_00123424(iVar3,*(undefined4 *)(*(int *)(iVar5 + 0x158) + 0xb0),puVar6);

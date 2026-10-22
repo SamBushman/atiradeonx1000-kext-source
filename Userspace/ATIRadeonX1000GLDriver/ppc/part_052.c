@@ -1,11 +1,11 @@
 #include "decls.h"
 
 /* FUN_00197b30 @ 0x197b30 (692 bytes) */
-int FUN_00197b30(param_1, inst, param_3, param_4)
+int FUN_00197b30(param_1, inst, param_3, compiler)
   int *param_1;
   int inst;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   int *operandVReg;
   undefined2 uVar4;
@@ -16,8 +16,8 @@ int FUN_00197b30(param_1, inst, param_3, param_4)
   int iVar7;
   
   operandVReg = (int *)FUN_00105594(inst,1);
-  uVar4 = thunk_FUN_00134de8(*(undefined4 *)(param_4 + 0x6c4),operandVReg);
-  iVar2 = (**(code **)(**(int **)(param_4 + 0x30c) + 0x7c))(*(int **)(param_4 + 0x30c),inst);
+  uVar4 = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),operandVReg);
+  iVar2 = (**(code **)(**(int **)(compiler + 0x30c) + 0x7c))(*(int **)(compiler + 0x30c),inst);
   if (iVar2 == 0) {
     FUN_001054ec(inst,0);
   }
@@ -29,7 +29,7 @@ int FUN_00197b30(param_1, inst, param_3, param_4)
     *(char *)(param_1[0x18] * 0x48 + param_1[0x16] + 0x19) = (char)iVar2;
     iVar7 = param_1[0x18];
     iVar3 = param_1[0x16];
-    uVar4 = thunk_FUN_00134de8(*(undefined4 *)(param_4 + 0x6c4),inst);
+    uVar4 = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),inst);
     *(undefined2 *)(iVar7 * 0x48 + iVar3 + 0xc) = uVar4;
   }
   else {
@@ -46,7 +46,7 @@ int FUN_00197b30(param_1, inst, param_3, param_4)
          (char)*(int *)(PTR_DAT_001e913c + iVar6 * 0x38 + 0xc);
   }
   bVar5 = 0xc;
-  iVar2 = *(int *)(iVar2 * 0xc + *(int *)(*(int *)(param_4 + 0x6c4) + 0x78) + 4);
+  iVar2 = *(int *)(iVar2 * 0xc + *(int *)(*(int *)(compiler + 0x6c4) + 0x78) + 4);
   if (((iVar2 != 2) && (bVar5 = 8, iVar2 != 3)) && (bVar5 = 0, iVar2 == 1)) {
     bVar5 = 0xe;
   }
@@ -66,7 +66,7 @@ int FUN_00197b30(param_1, inst, param_3, param_4)
   if (iVar2 != 0) {
                     
                     
-    (**(code **)(*param_1 + 0x154))(param_1,1,inst,param_4);
+    (**(code **)(*param_1 + 0x154))(param_1,1,inst,compiler);
     return;
   }
   return;

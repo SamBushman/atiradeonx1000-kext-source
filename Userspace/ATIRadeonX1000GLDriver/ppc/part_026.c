@@ -104,8 +104,8 @@ int FUN_000f4ddc(param_1, param_2, param_3)
 }
 
 /* FUN_000f4fdc @ 0xf4fdc (352 bytes) */
-int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
+int FUN_000f4fdc(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+  int *compiler;
   int param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -131,33 +131,33 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uStack00000034;
   /* issue #64 live-repro: same defect as FUN_000f6248 in this file (fixed earlier this session) -
    * called below as aiStack_9c[param_2] with param_2 observed as 4, one past this array's declared
-   * 4 elements; local_8c (assigned right after, from param_1[5]) sits exactly at the missing 5th
+   * 4 elements; local_8c (assigned right after, from compiler[5]) sits exactly at the missing 5th
    * index by its own hex offset (0x9c-0x8c=0x10). Extended to 5 elements; local_8c aliased to
    * index 4. */
   int aiStack_9c [5];
 #define local_8c aiStack_9c[4]
   undefined4 local_88 [29];
   
-  aiStack_9c[1] = param_1[2];
-  aiStack_9c[2] = param_1[3];
+  aiStack_9c[1] = compiler[2];
+  aiStack_9c[2] = compiler[3];
   iVar9 = 4;
   iVar7 = 0;
   loopIndex = 0;
   local_88[0] = param_3;
   local_88[1] = param_4;
-  aiStack_9c[3] = param_1[4];
-  local_8c = param_1[5];
+  aiStack_9c[3] = compiler[4];
+  local_8c = compiler[5];
   puVar6 = local_88;
   do {
     if ((int)loopIndex < param_2) {
-      *(byte *)(param_1[10] + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(param_1[10] + 0x15c);
+      *(byte *)(compiler[10] + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(compiler[10] + 0x15c);
       arena = *(undefined4 *)((int)puVar6 + iVar7);
-      iVar2 = iVar7 + 0x10 + param_1[10];
+      iVar2 = iVar7 + 0x10 + compiler[10];
       *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_88 + iVar7 + 4);
       *(undefined4 *)(iVar2 + 0xc) = arena;
     }
     else {
-      *(byte *)(param_1[10] + 0x15c) = *(byte *)(param_1[10] + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f))
+      *(byte *)(compiler[10] + 0x15c) = *(byte *)(compiler[10] + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f))
       ;
     }
     loopIndex = loopIndex + 1;
@@ -170,20 +170,20 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  puVar3 = (undefined4 *)FUN_00194834(aiStack_9c[param_2],param_1[10]);
+  puVar3 = (undefined4 *)FUN_00194834(aiStack_9c[param_2],compiler[10]);
   if (puVar3 == (undefined4 *)0x0) {
-    arena = *(undefined4 *)(*param_1 + 0x374);
+    arena = *(undefined4 *)(*compiler + 0x374);
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     *allocation = arena;
     puVar3 = allocation + 1;
-    FUN_00109938(puVar3,*param_1);
-    if ((*(uint *)(*(int *)(*param_1 + 0x6c4) + 0x30) & 0x10000) == 0) {
-      arena = FUN_000f4a5c(param_1);
+    FUN_00109938(puVar3,*compiler);
+    if ((*(uint *)(*(int *)(*compiler + 0x6c4) + 0x30) & 0x10000) == 0) {
+      arena = FUN_000f4a5c(compiler);
       allocation[0x26] = arena;
       allocation[0x27] = 0xc;
     }
     else {
-      arena = FUN_000f4a84(param_1,local_88[0],0,puVar6,iVar7,loopIndex,*param_1);
+      arena = FUN_000f4a84(compiler,local_88[0],0,puVar6,iVar7,loopIndex,*compiler);
       allocation[0x26] = arena;
       allocation[0x27] = 0xc;
     }
@@ -206,9 +206,9 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       puVar6 = puVar6 + 6;
       iVar9 = iVar9 + -1;
     } while (iVar9 != 0);
-    piVar5 = *(int **)(*(int *)(*param_1 + 0x6c4) + 0x3a0);
+    piVar5 = *(int **)(*(int *)(*compiler + 0x6c4) + 0x3a0);
     (**(code **)(*piVar5 + 0xc))(piVar5,puVar3);
-    ((int (*)())FUN_000f4ddc)(param_1,param_2,puVar3);
+    ((int (*)())FUN_000f4ddc)(compiler,param_2,puVar3);
   }
   return puVar3;
 }

@@ -1047,9 +1047,9 @@ code_r0x00188258:
 }
 
 /* FUN_001882a4 @ 0x1882a4 (408 bytes) */
-int FUN_001882a4(inst, param_2)
+int FUN_001882a4(inst, compiler)
   int *inst;
-  int param_2;
+  int compiler;
 {
   bool bVar1;
   float fVar2;
@@ -1059,7 +1059,7 @@ int FUN_001882a4(inst, param_2)
   uint uVar5;
   uint uVar6;
   
-  loopIndex = (**(code **)(*inst + 0x68))(inst,param_2);
+  loopIndex = (**(code **)(*inst + 0x68))(inst,compiler);
   if (loopIndex != 0) {
     a0 = (int *)FUN_00105594(inst,1);
     loopIndex = (**(code **)(*a0 + 0x40))(a0);
@@ -1091,9 +1091,9 @@ int FUN_001882a4(inst, param_2)
         loopIndex = loopIndex + 1;
       } while (bVar1);
       loopIndex = ((int (*)())FUN_0010ab40)((double)GH_U2F((unsigned int)(a0[uVar5 * 6 + 8])));
-      iVar4 = (**(code **)(**(int **)(param_2 + 0x30c) + 0xfc))(*(int **)(param_2 + 0x30c),loopIndex,0);
+      iVar4 = (**(code **)(**(int **)(compiler + 0x30c) + 0xfc))(*(int **)(compiler + 0x30c),loopIndex,0);
       if (iVar4 != 0) {
-        ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(param_2 + 0x6c4),1,1.0,1.0,1.0,1.0);
+        ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),1,1.0,1.0,1.0,1.0);
         inst[0x49] = loopIndex;
         loopIndex = FUN_001054ec(inst,1);
         *(undefined4 *)(loopIndex + 0x10) = 0x10203;
@@ -3761,12 +3761,12 @@ int FUN_0018d388(param_1, param_2, param_3)
 }
 
 /* FUN_0018d4b4 @ 0x18d4b4 (1428 bytes) */
-int FUN_0018d4b4(inst, param_2, param_3, param_4, param_5)
+int FUN_0018d4b4(inst, param_2, param_3, param_4, compiler)
   int *inst;
   int *param_2;
   int *param_3;
   int *param_4;
-  int param_5;
+  int compiler;
 {
   bool bVar1;
   int iVar2;
@@ -3790,7 +3790,7 @@ int FUN_0018d4b4(inst, param_2, param_3, param_4, param_5)
   
   iVar2 = *(int *)(inst[0x22] + 8);
   if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) ||
-     (iVar7 = 1, piVar3 = param_3, a3 = param_4, a4 = param_5, iVar2 == 0xa1)) {
+     (iVar7 = 1, piVar3 = param_3, a3 = param_4, a4 = compiler, iVar2 == 0xa1)) {
     piVar3 = (int *)FUN_00105594(inst,1);
     iVar2 = (**(code **)(*piVar3 + 0x5c))(piVar3);
     if (iVar2 != 0) {
@@ -3934,9 +3934,9 @@ LAB_0018d93c:
         a3 = &local_68;
         iVar7 = FUN_000f5cf0(operandVReg2,1,piVar3,a3);
         if (((iVar7 == 0) || (local_68 != 2)) ||
-           (iVar7 = (**(code **)(**(int **)(param_5 + 0x30c) + 0xf0))((double)local_64), iVar7 == 0)
+           (iVar7 = (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))((double)local_64), iVar7 == 0)
            ) {
-          iVar7 = FUN_0010497c(operandVReg2,*(undefined4 *)(param_5 + 0x6c4));
+          iVar7 = FUN_0010497c(operandVReg2,*(undefined4 *)(compiler + 0x6c4));
           if (iVar7 == 0) {
             bVar1 = true;
             iVar7 = 1;
