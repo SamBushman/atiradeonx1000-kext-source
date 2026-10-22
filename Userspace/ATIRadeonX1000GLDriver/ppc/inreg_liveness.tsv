@@ -150,9 +150,9 @@
 175b40	FUN_00175b40	r8	PASS-deep	175bd4 bl 0x19423c
 176c40	FUN_00176c40	r7	PASS-indirect	176cd0 bctrl 
 176c40	FUN_00176c40	r8	PASS-indirect	176cd0 bctrl 
-17750	FUN_00017750	r6	PASS-no	1784c bl 0xa180
-17750	FUN_00017750	r7	PASS-no	1784c bl 0xa180
-17750	FUN_00017750	r8	PASS-no	1784c bl 0xa180
+17750	gld_fillCapsBlock	r6	PASS-no	1784c bl 0xa180
+17750	gld_fillCapsBlock	r7	PASS-no	1784c bl 0xa180
+17750	gld_fillCapsBlock	r8	PASS-no	1784c bl 0xa180
 17ab4c	FUN_0017ab4c	r6	PASS-indirect	17ab98 bl 0x178d78
 17ab4c	FUN_0017ab4c	r7	PASS-indirect	17ab98 bl 0x178d78
 17ab4c	FUN_0017ab4c	r8	PASS-indirect	17ab98 bl 0x178d78
@@ -220,18 +220,18 @@
 1a3000	R520MachineAssembler__vslot37_closeBranch	r8	PASS-no	1a3020 bl 0x194034
 1e280	FUN_0001e280	r6	PASS-no	1e32c bl 0xb620
 1e280	FUN_0001e280	r10	PASS-no	1e3dc bl 0x1db50
-1f70	FUN_00001f70	r5	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
-1f70	FUN_00001f70	r6	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
-1f70	FUN_00001f70	r7	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
-1f70	FUN_00001f70	r8	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
-20f4	FUN_000020f4	r5	PASS-import	__keymgr_get_and_lock_processwide_ptr	
-20f4	FUN_000020f4	r6	PASS-import	__keymgr_get_and_lock_processwide_ptr	
-20f4	FUN_000020f4	r7	PASS-import	__keymgr_get_and_lock_processwide_ptr	
-20f4	FUN_000020f4	r8	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+1f70	run_routines	r5	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+1f70	run_routines	r6	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+1f70	run_routines	r7	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+1f70	run_routines	r8	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+20f4	cxa_atexit_wrapper	r5	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+20f4	cxa_atexit_wrapper	r6	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+20f4	cxa_atexit_wrapper	r7	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+20f4	cxa_atexit_wrapper	r8	PASS-import	__keymgr_get_and_lock_processwide_ptr	
 23a24	FUN_00023a24	r8	PASS-indirect	23ab4 bctrl 
-23a8	FUN_000023a8	r6	PASS-import		
-23a8	FUN_000023a8	r7	PASS-import		
-23a8	FUN_000023a8	r8	PASS-import		
+23a8	atexit_common	r6	PASS-import		
+23a8	atexit_common	r7	PASS-import		
+23a8	atexit_common	r8	PASS-import		
 24190	FUN_00024190	r7	PASS-indirect	241ec bctrl 
 24190	FUN_00024190	r8	PASS-indirect	241ec bctrl 
 25ec0	FUN_00025ec0	r6	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
@@ -247,7 +247,7 @@
 2cc30	FUN_0002cc30	r9	PASS-no	2ccd8 bl 0x2bf30
 2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
 2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
-34200	FUN_00034200	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut
+34200	glGenerateMipmap_impl	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut
 48da0	FUN_00048da0	r4	RET	4a7cc blr 
 48da0	FUN_00048da0	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
 48da0	FUN_00048da0	r6	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc

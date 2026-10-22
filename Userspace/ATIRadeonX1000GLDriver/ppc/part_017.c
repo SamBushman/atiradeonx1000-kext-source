@@ -10229,7 +10229,7 @@ int FUN_000c6e90(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   
   _strcpy(auStack_118,param_2);
   length = _strlen(auStack_118);
-  return FUN_001a3428(auStack_118 + length,0x100 - length,param_3,param_4,param_5,param_6,param_7,param_8);
+  return printf_LDBLStub_1a3428(auStack_118 + length,0x100 - length,param_3,param_4,param_5,param_6,param_7,param_8);
 }
 
 /* FUN_000c6ef0 @ 0xc6ef0 (88 bytes) */

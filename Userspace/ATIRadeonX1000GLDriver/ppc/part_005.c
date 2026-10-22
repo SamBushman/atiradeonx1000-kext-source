@@ -783,8 +783,8 @@ LAB_0002f3e8:
   return;
 }
 
-/* FUN_0002f410 @ 0x2f410 (148 bytes) */
-int FUN_0002f410(param_1)
+/* window_mode_to_ati_format @ 0x2f410 (148 bytes) */
+int window_mode_to_ati_format(param_1)
   uint param_1;
 {
   switch(param_1 & 0xf) {
@@ -1154,7 +1154,7 @@ int FUN_0002fac0(param_1, param_2)
     else if ((ushort)(uVar1 - 0x40b) < 2) {
       return;
     }
-    uVar9 = ((int (*)())FUN_0002f410)(local_30[0]);
+    uVar9 = ((int (*)())window_mode_to_ati_format)(local_30[0]);
     *(undefined1 *)(param_2 + 0x38) = uVar9;
     return;
   }
@@ -1746,7 +1746,7 @@ int FUN_000307a0(ctx, packetIndex)
   
   cursor = *(int **)(ctx + GLD_writeCursor);
   if (*(int **)(ctx + GLD_ringLimit) <= cursor + 1) {
-    FUN_0001a0f0(ctx,0x1000000);
+    gld_submitRing(ctx,0x1000000);
     cursor = *(int **)(ctx + GLD_writeCursor);
   }
   headerWord = *(uint **)(ctx + GLD_lastHeader);
@@ -2319,7 +2319,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     *(undefined4 **)(param_1 + 0x298c) = a1;
     (**(code **)(param_1 + 0x299c))(param_1 + 0x240,a1,iVar13,uVar17,a1,0x113c8,a6,a7);
     if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-      FUN_0001a0f0(param_1,0x1000000);
+      gld_submitRing(param_1,0x1000000);
     }
     *(undefined1 *)(param_2 + 0x32) = 0;
   }
@@ -2330,7 +2330,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     }
     if ((0x1ffff < (int)puVar16[4]) &&
        (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc))) {
-      FUN_0001a0f0(param_1,0x1000000);
+      gld_submitRing(param_1,0x1000000);
     }
     iVar14 = param_3 * 2;
     iVar13 = iVar14 + (int)puVar16;
@@ -2338,7 +2338,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         & 1) == 0) {
       return 0;
     }
-    iVar6 = FUN_0001a0d0(param_1,puVar16[3]);
+    iVar6 = gld_isStampRetired(param_1,puVar16[3]);
     if (iVar6 == 0) {
       uVar17 = 1;
       a1 = (undefined4 *)0x0;
@@ -2355,7 +2355,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   iVar13 = iVar14 + 0x40 + (param_3 * 0xd + param_4) * 0x20;
   if ((0x1ffff < (int)puVar16[4]) &&
      (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc))) {
-    FUN_0001a0f0(param_1,0x1000000);
+    gld_submitRing(param_1,0x1000000);
   }
   if ((((uint)*(ushort *)((int)puVar16 + param_3 * 2 + 0x28) &
        ~(uint)*(ushort *)((int)puVar16 + param_3 * 2 + 0x1c)) >> (param_4 & 0x3f) & 1) != 0) {
@@ -2364,7 +2364,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xd,&local_b8,2,0,0);
   }
   if ((*(uint *)(iVar14 + 0x20) & 0x10000000) != 0) {
-    iVar6 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar14 + 0x1c));
+    iVar6 = gld_isStampRetired(param_1,*(undefined4 *)(iVar14 + 0x1c));
     if (iVar6 == 0) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar14 + 0x1c,1,0,0);
     }
@@ -2594,7 +2594,7 @@ int FUN_00031940(param_1, param_2)
   }
   *(short *)((int)param_2 + 0x3e) = (short)(uVar23 >> (local_f8 & 0x3f));
   uVar18 = local_f8;
-  iVar11 = FUN_0000acb0(param_1,param_2,iVar7 + 0x3a0,iVar11);
+  iVar11 = gld_ensureTextureBackingSized2(param_1,param_2,iVar7 + 0x3a0,iVar11);
   uVar19 = 0;
   if (iVar11 == 0) {
     return 0;
@@ -3013,7 +3013,7 @@ LAB_000323a0:
   uVar22 = (uint)*(byte *)(puVar31 + 0x2f);
   if ((uVar27 & 0x400) == 0) {
     if ((uVar27 & 0x800) != 0) {
-      iVar11 = FUN_0000b4f0(iStack00000018,param_2,*(undefined4 *)(puVar31 + 4));
+      iVar11 = gld_ensureTextureGlobalBacking(iStack00000018,param_2,*(undefined4 *)(puVar31 + 4));
       if (iVar11 == 0) {
         return 0;
       }
@@ -3110,7 +3110,7 @@ LAB_000323a0:
       if ((*(short *)(iVar29 + 0x1a) == -0x7a41) &&
          ((*(char *)(iVar29 + 0x6d) != '\0' || (iVar33 * iVar11 == uVar28)))) {
         *(short *)((int)param_2 + 0x3e) = (short)(uVar28 >> (local_218 & 0x3f));
-        iVar11 = FUN_0000b150(iStack00000018,param_2,uVar32,uVar20,iVar25);
+        iVar11 = gld_setTextureAgpRefBacking(iStack00000018,param_2,uVar32,uVar20,iVar25);
         if (iVar11 == 0) {
           return 0;
         }
@@ -3125,7 +3125,7 @@ LAB_000323a0:
             iVar11 = 0;
           }
           bVar39 = (iVar33 << (local_218 & 0x3f)) >> iVar11 < 0x2000;
-          iVar25 = FUN_0000b270(iStack00000018,param_2,0x348,uVar23 * uVar22,uVar20,iVar25);
+          iVar25 = gld_setTextureNewTextureBacking(iStack00000018,param_2,0x348,uVar23 * uVar22,uVar20,iVar25);
           if (iVar25 == 0) {
             return 0;
           }
@@ -3485,7 +3485,7 @@ LAB_00032f74:
             } while (uVar32 <= local_80);
             uVar32 = iVar29 + 7;
           }
-          iVar33 = FUN_0000acb0(iStack00000018,param_2,
+          iVar33 = gld_ensureTextureBackingSized2(iStack00000018,param_2,
                                 iVar21 + uVar22 * 4 + (uVar32 & 0xfffffff8) * 4,iVar33);
           if (iVar33 == 0) {
             return 0;
@@ -3989,7 +3989,7 @@ LAB_00032480:
         uVar16 = 7;
       }
     }
-    iVar11 = FUN_0000b3a0(iStack00000018,param_2,*(undefined4 *)(puVar31 + 4),uVar16,
+    iVar11 = gld_ensureTextureSurfaceBacking(iStack00000018,param_2,*(undefined4 *)(puVar31 + 4),uVar16,
                           (uint)*(byte *)(puVar31 + 0x36));
     if (iVar11 == 0) {
       return 0;
@@ -4070,8 +4070,8 @@ int FUN_000341a0(param_1, param_2, param_3, param_4, param_5, param_6)
   return iVar1 != 0;
 }
 
-/* FUN_00034200 @ 0x34200 (4472 bytes) */
-int FUN_00034200(ctx, texture, face, passThroughArg4, passThroughArg5)
+/* glGenerateMipmap_impl @ 0x34200 (4472 bytes) */
+int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
   int ctx;
   int *texture;
   int face;
@@ -5580,14 +5580,14 @@ LAB_00035dd8:
   }
   if (((*(uint *)(param_2[0xc] + 0x48) & 0x8000) != 0) &&
      (param_4 == *(byte *)(param_2[0xc] + 0x5e))) {
-    ((int (*)())FUN_00034200)(param_1,param_2,param_3,uVar39,uVar41);
+    ((int (*)())glGenerateMipmap_impl)(param_1,param_2,param_3,uVar39,uVar41);
     return 1;
   }
   return 1;
 }
 
-/* FUN_000369f0 @ 0x369f0 (9972 bytes) */
-int FUN_000369f0(ctx, texture, face, level, xOffset, yOffset, zOffset, width, height, depth, pixelFormat, pixelType, pixels, rawTransfer, sourceSurface)
+/* glTexSubImage_impl @ 0x369f0 (9972 bytes) */
+int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, width, height, depth, pixelFormat, pixelType, pixels, rawTransfer, sourceSurface)
   int ctx;
   int *texture;
   int face;
@@ -5892,7 +5892,7 @@ int FUN_000369f0(ctx, texture, face, level, xOffset, yOffset, zOffset, width, he
                   *(uint *)(ctx + GLD_dataRefillCount) = uVar44;
                   if (2 < uVar44) {
                     if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-                      FUN_0001a0f0(ctx,0x1000000);
+                      gld_submitRing(ctx,0x1000000);
                       dataCursorPtr = *(uint **)(ctx + GLD_dataCursor);
                     }
                     *(undefined4 *)(ctx + GLD_dataRefillCount) = 1;
@@ -6670,7 +6670,7 @@ LAB_00038698:
           if (level != *(byte *)(texture[0xc] + 0x5e)) {
             return 1;
           }
-          ((int (*)())FUN_00034200)(ctx,texture,face,levelArg,uVar44);
+          ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,levelArg,uVar44);
           return 1;
         }
       }
@@ -7155,14 +7155,14 @@ LAB_000371ac:
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
   if (((*(uint *)(texture[0xc] + 0x48) & 0x8000) != 0) &&
      (level == *(byte *)(texture[0xc] + 0x5e))) {
-    ((int (*)())FUN_00034200)(ctx,texture,face,uVar26,uVar31);
+    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,uVar26,uVar31);
     return 1;
   }
   return 1;
 }
 
-/* FUN_00039100 @ 0x39100 (188 bytes) */
-int FUN_00039100(param_1)
+/* gld_testRendererAvailable @ 0x39100 (188 bytes) */
+int gld_testRendererAvailable(param_1)
   int param_1;
 {
   undefined4 uVar1;
@@ -9318,7 +9318,7 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
   if (shaderObject[8] != 0) {
     isGLSLShader = *shaderObject - 0x8b30U < 2;
     FUN_000538e0(ctx);
-    FUN_00053060(ctx);
+    noop_53060(ctx);
     iVar12 = shaderObject[0x12];
     iVar5 = shaderObject[0x13];
     *(undefined1 *)(hwProgram + 0x23) = 0;
@@ -10465,11 +10465,11 @@ int FUN_0003e4c0(param_1, param_2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00034200");
-asm(".set FUN_00034200, _FUN_00034200");
+asm(".set FUN_00034200, _glGenerateMipmap_impl");
 asm(".globl FUN_000353a0");
 asm(".set FUN_000353a0, _FUN_000353a0");
 asm(".globl FUN_000369f0");
-asm(".set FUN_000369f0, _FUN_000369f0");
+asm(".set FUN_000369f0, _glTexSubImage_impl");
 asm(".globl FUN_00039330");
 asm(".set FUN_00039330, _FUN_00039330");
 asm(".globl FUN_00039610");

@@ -371,14 +371,14 @@ int FUN_00024fb0(list)
   return;
 }
 
-/* FUN_00024fc0 @ 0x24fc0 (4 bytes) */
-int FUN_00024fc0()
+/* noop_24fc0 @ 0x24fc0 (4 bytes) */
+int noop_24fc0()
 {
   return;
 }
 
-/* FUN_00024fd0 @ 0x24fd0 (4 bytes) */
-int FUN_00024fd0()
+/* noop_24fd0 @ 0x24fd0 (4 bytes) */
+int noop_24fd0()
 {
   return;
 }
@@ -1682,7 +1682,7 @@ void FUN_00026f80(int param_1,uint *param_2,uint *param_3,undefined4 param_4,und
     *(uint *)(param_1 + 0x204) = uVar5;
     if (2 < uVar5) {
       if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-        FUN_0001a0f0(param_1,0x1000000);
+        gld_submitRing(param_1,0x1000000);
         iVar6 = *(int *)(param_1 + 500);
       }
       *(undefined4 *)(param_1 + 0x204) = 1;
@@ -1748,7 +1748,7 @@ int FUN_00027150(param_1, param_2, param_3, param_4)
     iVar8 = *(int *)(param_1 + 0x1fc);
     *(uint *)(param_1 + 500) = iVar10 + (uint)bVar1 * iVar5 * 4;
     if (*(undefined4 **)(param_1 + 0x1e0) <= puVar7 + 0x53) {
-      FUN_0001a0f0(param_1,0x1000000);
+      gld_submitRing(param_1,0x1000000);
       puVar7 = *(undefined4 **)(param_1 + 0x1dc);
     }
     puVar6 = puVar7;
@@ -1893,7 +1893,7 @@ LAB_000276e0:
     puVar14 = *(undefined4 **)(param_1 + 0x1dc);
     if (*(undefined4 **)(param_1 + 0x1e0) <=
         puVar14 + uVar5 + iVar11 + 2 + (uint)(*(byte *)(param_1 + 8) >> 1) + 4) {
-      FUN_0001a0f0(param_1,0x1000000);
+      gld_submitRing(param_1,0x1000000);
       puVar14 = *(undefined4 **)(param_1 + 0x1dc);
     }
     uVar5 = (int)puVar14 + iVar11 * 4 + 0xf & 0xfffffff0;
@@ -1937,7 +1937,7 @@ LAB_00027540:
       uVar5 = ((int)(iVar11 - uVar13) >> 2) - 1;
       if (uVar5 < uVar18 + uVar17) {
         if (*(int *)(param_1 + 0x1e4) + 0x28U < uVar13) {
-          FUN_0001a0f0(param_1,0x1000000);
+          gld_submitRing(param_1,0x1000000);
           uVar8 = (uint)*(byte *)(param_1 + 8);
           uVar13 = *(uint *)(param_1 + 0x1dc);
           iVar11 = *(int *)(param_1 + 0x1e0);
@@ -1971,7 +1971,7 @@ LAB_00027630:
       if ((((int)(iVar11 - uVar13) >> 2) - 1U < uVar18) ||
          ((uint)((int)(iVar12 - uVar5) >> 2) < uVar17)) {
         if (*(int *)(param_1 + 0x1e4) + 0x28U < uVar13) {
-          FUN_0001a0f0(param_1,0x1000000);
+          gld_submitRing(param_1,0x1000000);
           uVar8 = (uint)*(byte *)(param_1 + 8);
           uVar13 = *(uint *)(param_1 + 0x1dc);
           iVar11 = *(int *)(param_1 + 0x1e0);
@@ -2406,8 +2406,8 @@ LAB_00028238:
   goto LAB_00027d44;
 }
 
-/* FUN_00028350 @ 0x28350 (3820 bytes) */
-int FUN_00028350(ctx, rectX, rectY, width, height, format, pixelType, param_8, param_9, surfaceInfo)
+/* gld_readPixelsViaBlit @ 0x28350 (3820 bytes) */
+int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, param_8, param_9, surfaceInfo)
   int ctx;
   uint rectX;
   uint rectY;
@@ -3135,7 +3135,7 @@ LAB_0002918c:
       (**(code **)(ctx + GLD_streamSetCurrent))(ring,packet);
       _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
       if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-        FUN_0001a0f0(ctx,0x1000000);
+        gld_submitRing(ctx,0x1000000);
       }
       if (*(int *)*surfaceInfo != 0) {
         FUN_0000b670(ctx,*(int *)*surfaceInfo,clampedHeight * rowBytes,packet,uVar30,uVar31,surfaceInfo,
@@ -3342,7 +3342,7 @@ LAB_000293b0:
           renderFlags = *(uint *)(ctx + GLD_renderFlags);
           if ((renderFlags & 0x30000) == 0x30000) {
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-              FUN_0001a0f0(ctx,0x1000000);
+              gld_submitRing(ctx,0x1000000);
               renderFlags = *(uint *)(ctx + GLD_renderFlags);
             }
             procPitch = (width + 0xf) * 4 & 0xffffffc0;
@@ -3437,7 +3437,7 @@ LAB_00029a74:
               (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,ropPacket + 2);
             }
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-              FUN_0001a0f0(ctx,0x1000000);
+              gld_submitRing(ctx,0x1000000);
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
               ropPacket = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(commandStream,2);
@@ -3458,7 +3458,7 @@ LAB_00029a74:
           renderFlags = *(uint *)(ctx + GLD_renderFlags);
           if ((renderFlags & 0x30000) != 0) {
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-              FUN_0001a0f0(ctx,0x1000000);
+              gld_submitRing(ctx,0x1000000);
               renderFlags = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((renderFlags & 0x20000) == 0) {
@@ -3539,7 +3539,7 @@ LAB_00029a74:
   }
   else {
     if (!sendAttachments) {
-      fallbackResult = ((int (*)())FUN_00028350)(ctx,rectX,rectY,width,height,format,pixelType,pixels,transferMode8,
+      fallbackResult = ((int (*)())gld_readPixelsViaBlit)(ctx,rectX,rectY,width,height,format,pixelType,pixels,transferMode8,
                            surfaceInfo);
       return fallbackResult;
     }
@@ -3549,8 +3549,8 @@ LAB_00029bd0:
   return result;
 }
 
-/* FUN_00029294 @ 0x29294 (2376 bytes) */
-int FUN_00029294(ctx, rectX, rectY, width, height, format, pixelType, pixels, transferMode, surfaceInfo)
+/* glReadPixels_impl @ 0x29294 (2376 bytes) */
+int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixels, transferMode, surfaceInfo)
   int ctx;
   int rectX;
   int rectY;
@@ -3743,7 +3743,7 @@ LAB_000293b0:
           flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) == 0x30000) {
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-              FUN_0001a0f0(ctx,0x1000000);
+              gld_submitRing(ctx,0x1000000);
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
             procPitch = (width + 0xf) * 4 & 0xffffffc0;
@@ -3849,7 +3849,7 @@ LAB_00029a74:
               (**(code **)(ctx + GLD_streamSetCurrent))(ring,ropPacket + 2);
             }
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-              FUN_0001a0f0(ctx,0x1000000);
+              gld_submitRing(ctx,0x1000000);
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
               ropPacket = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
@@ -3871,7 +3871,7 @@ LAB_00029a74:
           flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) != 0) {
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-              FUN_0001a0f0(ctx,0x1000000);
+              gld_submitRing(ctx,0x1000000);
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((flags & 0x20000) == 0) {
@@ -3956,7 +3956,7 @@ LAB_00029a74:
   }
   else {
     if (!sendAttachments) {
-      fallbackResult = ((int (*)())FUN_00028350)(ctx,rectX,rectY,width,height,format,pixelType,pixels,flags,
+      fallbackResult = ((int (*)())gld_readPixelsViaBlit)(ctx,rectX,rectY,width,height,format,pixelType,pixels,flags,
                            surfaceInfo);
       return fallbackResult;
     }
@@ -4279,8 +4279,8 @@ int FUN_0002a260(param_1, param_2)
   return;
 }
 
-/* FUN_0002a3d0 @ 0x2a3d0 (3968 bytes) */
-int FUN_0002a3d0(ctx, rasterPosition, width, height, format, pixelType, pixels, rawTransfer, surfaceInfo)
+/* gld_drawPixelsFromClientSurface @ 0x2a3d0 (3968 bytes) */
+int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, pixelType, pixels, rawTransfer, surfaceInfo)
   int ctx;
   int rasterPosition;
   uint width;
@@ -4988,8 +4988,8 @@ LAB_0002a9a0:
   return uVar25;
 }
 
-/* FUN_0002b3b0 @ 0x2b3b0 (4 bytes) */
-int FUN_0002b3b0(value)
+/* noop_2b3b0 @ 0x2b3b0 (4 bytes) */
+int noop_2b3b0(value)
   undefined4 value;
 {
   /* hidden-argument defect (hidden_params.py) - real body is a single `blr`: an identity function
@@ -5145,7 +5145,7 @@ int _gldGetQueryInfo(ctx, query, pname, valueOut)
     while ((((slot0Pending || ((1 < resultCount && (result3 == -1)))) ||
             (((2 < resultCount && (result1 == -1)) || ((3 < resultCount && (result2 == -1)))))) &&
            (slot0Pending = available != 10000, available = available + 1, slot0Pending))) {
-      FUN_00009bd0(ctx);
+      gld_waitQueryStamp(ctx);
       _usleep(100);
       result3 = queryEntry[4];
       result1 = queryEntry[2];
@@ -5185,7 +5185,7 @@ void FUN_0002b740(int param_1,int *param_2,undefined4 param_3,undefined4 param_4
   *(int *)(iVar4 + 8) = *param_2;
   puVar3 = *(undefined4 **)(param_1 + 0x1dc);
   if (*(undefined4 **)(param_1 + 0x1e0) <= puVar3 + 2) {
-    fparam_1 = (double)FUN_0001a0f0(param_1,0x1000000);
+    fparam_1 = (double)gld_submitRing(param_1,0x1000000);
     puVar3 = *(undefined4 **)(param_1 + 0x1dc);
     param_2 = extraout_r4;
   }
@@ -5420,7 +5420,7 @@ void FUN_0002bbc4(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 
   puVar9 = *(uint **)(param_1 + 0x1dc);
   puVar7 = param_2;
   if (*(uint **)(param_1 + 0x1e0) <= puVar9 + iVar10 + 0x15) {
-    fparam_1 = (double)FUN_0001a0f0(param_1,0x1000000);
+    fparam_1 = (double)gld_submitRing(param_1,0x1000000);
     puVar9 = *(uint **)(param_1 + 0x1dc);
     puVar7 = extraout_r4;
   }
@@ -5501,7 +5501,7 @@ int FUN_0002be00(param_1, param_2)
   iVar2 = *(int *)(param_1 + 4);
   iVar1 = *(int *)(iVar2 + 0x1dc);
   if (*(uint *)(iVar2 + 0x1e0) <= (uint)(param_2 * 4 + iVar1)) {
-    FUN_0001a0f0(iVar2,0x1000000);
+    gld_submitRing(iVar2,0x1000000);
     iVar1 = *(int *)(iVar2 + 0x1dc);
   }
   return iVar1;
@@ -5523,8 +5523,8 @@ int FUN_0002be70(param_1)
   return *(undefined4 *)(0x00002748 + param_1 + 4);
 }
 
-/* FUN_0002be80 @ 0x2be80 (4 bytes) */
-int FUN_0002be80()
+/* noop_2be80 @ 0x2be80 (4 bytes) */
+int noop_2be80()
 {
   return;
 }
@@ -5788,7 +5788,7 @@ LAB_0002c610:
       do {
         puVar1 = (ushort *)(((unsigned char *)0x00002dba) + iVar13);
         iVar13 = iVar13 + 2;
-        uVar5 = FUN_00016fc0((uint)*puVar1,*(undefined4 *)(iVar9 + 0x154));
+        uVar5 = gld_bufferEnumToIndex((uint)*puVar1,*(undefined4 *)(iVar9 + 0x154));
         bVar2 = iVar11 != 3;
         iVar11 = iVar11 + 1;
         *(undefined4 *)(iVar12 + 0x2460) = uVar5;
@@ -5801,7 +5801,7 @@ LAB_0002c610:
          (((uVar8 & 0x20) != 0 && ((uVar8 & 0x400) != 0)))) {
         (**(code **)(param_1 + 0x275c))(param_1,puVar6);
         if (*(int *)(iVar9 + 0x1e4) + 0x28U < *(uint *)(iVar9 + 0x1dc)) {
-          FUN_0001a0f0(iVar9,0x1000000);
+          gld_submitRing(iVar9,0x1000000);
         }
         in_r5 = &local_48;
         in_r6 = 4;
@@ -5904,7 +5904,7 @@ int FUN_0002c6c0(param_1)
   puVar1 = *(undefined4 **)(param_1 + 0x208);
   puVar1[7] = puVar1[7] | 1;
   *(code **)(param_1 + 0x2998) = FUN_0002be70;
-  *(code **)(param_1 + 0x299c) = FUN_0002be80;
+  *(code **)(param_1 + 0x299c) = noop_2be80;
   *(undefined4 **)(param_1 + 0x298c) = puVar1 + 8;
   FUN_00050300(param_1 + 0x240);
   *puVar1 = *(undefined4 *)(param_1 + 0x1d20);
@@ -5919,8 +5919,8 @@ int FUN_0002c6c0(param_1)
   return;
 }
 
-/* FUN_0002c790 @ 0x2c790 (932 bytes) */
-int FUN_0002c790(param_1, param_2)
+/* gld_initContextHardwareState @ 0x2c790 (932 bytes) */
+int gld_initContextHardwareState(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -5967,7 +5967,7 @@ int FUN_0002c790(param_1, param_2)
   ((unsigned char *)0x00002b7d)[param_1] = 0;
   ((unsigned char *)0x00002b7c)[param_1] = 1;
   *(uint *)(param_1 + 0x258c) = *(uint *)(param_1 + 0x258c) & 0xfffffffc | 1;
-  uVar6 = FUN_0002f410(*(undefined4 *)(param_1 + 0x154));
+  uVar6 = window_mode_to_ati_format(*(undefined4 *)(param_1 + 0x154));
   ((unsigned char *)0x00002b7f)[param_1] = uVar6;
   *(int *)(param_1 + 0x2680) = param_1 + 0x26dc;
   *(int *)(param_1 + 0x2684) = param_1 + 0x26fc;
@@ -6104,7 +6104,7 @@ int FUN_0002cb40(ctx)
   }
   ((int (*)())FUN_00025da0)(ctx);
   if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-    FUN_0001a0f0(ctx,0x1000000);
+    gld_submitRing(ctx,0x1000000);
   }
   thunk_FUN_00054a90(ctx + GLD_commandStream);
   thunk_FUN_000a2330(ctx + GLD_commandStream);
@@ -6124,7 +6124,7 @@ int FUN_0002cc10(ctx)
   if (*(uint *)(ctx + GLD_writeCursor) <= *(int *)(ctx + GLD_ringMap) + 0x28U) {
     return;
   }
-  return FUN_0001a0f0(ctx,0x1000000);
+  return gld_submitRing(ctx,0x1000000);
 }
 
 /* FUN_0002cc30 @ 0x2cc30 (276 bytes) - hidden-argument + read-before-write defect (found
@@ -6133,7 +6133,7 @@ int FUN_0002cc10(ctx)
  * holding whatever the caller passed; the `else` path recomputes it (`param_3 & 1`) for its own
  * use before falling into the same shared code. The corpus previously modelled both as the same
  * local `in_r9`, uninitialised on the first path - a real read-before-write. Of the 25 real
- * call sites, only FUN_0001ecd0 supplies a genuine non-zero value here (a real field read);
+ * call sites, only gld_drawVertexArray supplies a genuine non-zero value here (a real field read);
  * every other caller (including this file's own dispatch-wrapper family) passes 0, matching
  * what real stock callers themselves forward. */
 uint FUN_0002cc30(int ctx,undefined4 param_2,uint param_3,uint param_4,undefined4 param_5,undefined4 param_6,uint param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
@@ -6274,7 +6274,7 @@ int FUN_0002ce40(param_1, param_2)
       *(undefined4 **)(0x00002748 + param_1 + 4) = a1;
       (**(code **)(param_1 + 0x275c))(param_1,a1,in_r5,in_r6,a1,0x113c8,a6,puVar2 + 0x3ed);
       if (*(int *)(iVar5 + 0x1e4) + 0x28U < *(uint *)(iVar5 + 0x1dc)) {
-        FUN_0001a0f0(iVar5,0x1000000);
+        gld_submitRing(iVar5,0x1000000);
       }
       *(undefined1 *)(*(int *)(iVar6 + 0x18c) + 200) = 0;
     }

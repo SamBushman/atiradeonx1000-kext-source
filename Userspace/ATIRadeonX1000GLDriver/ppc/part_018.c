@@ -4570,8 +4570,8 @@ int FUN_000cdbe4(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
   return FUN_000d4e64();
 }
 
-/* FUN_000cdc20 @ 0xcdc20 (4 bytes) */
-int FUN_000cdc20()
+/* noop_cdc20 @ 0xcdc20 (4 bytes) */
+int noop_cdc20()
 {
   return;
 }
@@ -4813,7 +4813,7 @@ int FUN_000ce050(disasmCtx, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5,
     (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = fmtArg4;
     (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArg5;
     (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArg6;
-    FUN_001a34d4(lineBuffer,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
+    printf_LDBLStub_1a34d4(lineBuffer,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
     trimCursor = (char *)_strchr(lineBuffer,0x3f);
     if (trimCursor != (char *)0x0) {
       for (; (((trimChar = *trimCursor, trimChar == '?' || (trimChar == ' ')) || (trimChar == ',')) ||
@@ -4821,7 +4821,7 @@ int FUN_000ce050(disasmCtx, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5,
       }
       trimCursor[1] = '\0';
     }
-    FUN_001a32d0(lineBuffer,"%s\n",lineBuffer,fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
+    printf_LDBLStub_1a32d0(lineBuffer,"%s\n",lineBuffer,fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
     (*(code *)**(undefined4 **)(disasmCtx + 8))
               (*(undefined4 *)(disasmCtx + 0xc),"",lineBuffer,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
@@ -4886,7 +4886,7 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
     length = _strlen(outText);
     *(undefined2 *)(outText + length) = 0x3f00;
   }
-  FUN_001a32d0(indexText,"%d",registerIndexOrShift & 0xff,argR6,argR7,argR8,sourceWord,argR10);
+  printf_LDBLStub_1a32d0(indexText,"%d",registerIndexOrShift & 0xff,argR6,argR7,argR8,sourceWord,argR10);
   if (relativeBits == 0) {
     _strcat(outText,indexText);
   }
@@ -5077,7 +5077,7 @@ int FUN_000ce514(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, a
       semanticNameText8 = s_IL_unknown_001a6314[8];
       semanticNameOrValue = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 0));
     }
-    FUN_001a32d0(componentLetters + 4,"%d",(uint)(byte)outputMapEntry[1],argR6,argR7,argR8,semanticNameOrValue,argR10Value);
+    printf_LDBLStub_1a32d0(componentLetters + 4,"%d",(uint)(byte)outputMapEntry[1],argR6,argR7,argR8,semanticNameOrValue,argR10Value);
     builtin_strncpy(componentLetters,"xyzw",4);
     componentMask = *(uint *)outputMapEntry >> 4;
     loopIndex = 0;
@@ -5110,7 +5110,7 @@ int FUN_000ce514(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, a
           componentText0[componentMask * 0x40] = 0;
         }
         else {
-          FUN_001a32d0(componentTextCursor,"o%d.%c ",(uint)(byte)entryCursor[4],(int)componentLetters[(byte)entryCursor[8]],oneArg
+          printf_LDBLStub_1a32d0(componentTextCursor,"o%d.%c ",(uint)(byte)entryCursor[4],(int)componentLetters[(byte)entryCursor[8]],oneArg
                        ,loopIndex,semanticNameOrValue,componentCursorA);
         }
         sourcesDiffer = componentMask != 3;
@@ -5119,7 +5119,7 @@ int FUN_000ce514(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, a
         componentMask = componentMask + 1;
       } while (sourcesDiffer);
       entryCursor = componentText3;
-      FUN_001a32d0(destinationText,"%s%s%s%s",componentText0,componentText1,componentText2,entryCursor,semanticNameOrValue,componentCursorA);
+      printf_LDBLStub_1a32d0(destinationText,"%s%s%s%s",componentText0,componentText1,componentText2,entryCursor,semanticNameOrValue,componentCursorA);
     }
     else {
       iVar5 = 0x5f;
@@ -5138,7 +5138,7 @@ int FUN_000ce514(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, a
       if ((componentMask & 8) != 0) {
         semanticNameOrValue = (char *)(int)componentLetters[(byte)outputMapEntry[0xb]];
       }
-      FUN_001a32d0(destinationText,"o%d.%c%c%c%c",(uint)(byte)outputMapEntry[4],iVar5,componentsRemaining,entryCursor,semanticNameOrValue,
+      printf_LDBLStub_1a32d0(destinationText,"o%d.%c%c%c%c",(uint)(byte)outputMapEntry[4],iVar5,componentsRemaining,entryCursor,semanticNameOrValue,
                    componentCursorA);
     }
     ((int (*)())FUN_000ce050)(disasmCtx,";    %s = %s%s",destinationText,semanticNameText,componentLetters + 4,entryCursor,semanticNameOrValue,componentCursorA);
@@ -5276,7 +5276,7 @@ int FUN_000cea6c(disasmCtx, destWordPtr, outText, argR6, argR7, argR8, argR9, ar
     outText[1] = '\0';
     passThroughArg = registerTypeCode;
   }
-  FUN_001a32d0(indexText,"%d",destWord >> 0xd & 0x7f,argR6,argR7,argR8,passThroughArg,argR10);
+  printf_LDBLStub_1a32d0(indexText,"%d",destWord >> 0xd & 0x7f,argR6,argR7,argR8,passThroughArg,argR10);
   if ((destWord & 0x80001000) == 0) {
     _strcat(outText,indexText);
   }
@@ -5483,7 +5483,7 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
     _strcat(mnemonicText,"ERROR     ");
   }
   *operandText0 = 0x7400;
-  FUN_001a32d0(indexText,"%d",instructionWord >> 0x13 & 3,operandText0Copy,operandText1Copy,argR8,prefixLowOrZero,argR10);
+  printf_LDBLStub_1a32d0(indexText,"%d",instructionWord >> 0x13 & 3,operandText0Copy,operandText1Copy,argR8,prefixLowOrZero,argR10);
   if ((previousWord & 0x2000000) != 0) {
     _strcat(operandText0,"_sat");
   }
@@ -5523,7 +5523,7 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
   else {
     *operandText1 = 0x3f00;
   }
-  FUN_001a32d0(indexTextTail,"%d",instructionWord >> 5 & 0xff,operandText0Copy,operandText1Copy,argR8,prefixLowOrZero,argR10);
+  printf_LDBLStub_1a32d0(indexTextTail,"%d",instructionWord >> 5 & 0xff,operandText0Copy,operandText1Copy,argR8,prefixLowOrZero,argR10);
   _strcat(operandText1,indexTextTail);
   negateBits = instructionWord & 0x6000000;
   if (((instructionWord & 0x7e000) != 0x10000) || (negateBits != 0)) {
@@ -6058,7 +6058,7 @@ int vsDisassembleLine(disassembler, instructionWords, lineBuffer, argR6, argR7, 
       shaderStateOrLabel = *disassembler;
     }
   }
-  FUN_001a32d0(lineNumberText,"%3d:",currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);
+  printf_LDBLStub_1a32d0(lineNumberText,"%3d:",currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);
   _strcat(lineBuffer,lineNumberText);
   disassembler[1] = disassembler[1] + 1;
   length = _strlen(lineBuffer);
@@ -6251,7 +6251,7 @@ int psnReportError(severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5
     (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = fmtArg4;
     (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArg5;
     (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArg6;
-    FUN_001a34d4(lineBuffer,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
+    printf_LDBLStub_1a34d4(lineBuffer,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
     (*(code *)*DAT_001fa61c)(DAT_001fa618,"",lineBuffer,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
   return;
@@ -6268,10 +6268,10 @@ int psnFormatRegister(outBuffer, registerWord, unusedArg5, argR6, argR7, argR8, 
   undefined4 argR9;
 {
   if ((registerWord & 0x8000) != 0) {
-    FUN_001a32d0(outBuffer,"c%02u",registerWord & 0xffff7fff,argR6,argR7,argR8,argR9,0xd0458);
+    printf_LDBLStub_1a32d0(outBuffer,"c%02u",registerWord & 0xffff7fff,argR6,argR7,argR8,argR9,0xd0458);
     return;
   }
-  return FUN_001a32d0(outBuffer,"r%02u",registerWord,argR6,argR7,argR8,argR9,0xd0458);
+  return printf_LDBLStub_1a32d0(outBuffer,"r%02u",registerWord,argR6,argR7,argR8,argR9,0xd0458);
 }
 
 /* psnFormatRgbSource @ 0xd0488 (552 bytes) */
@@ -6400,31 +6400,31 @@ int psnFormatRgbSource(outBuffer, source0Register, source1Register, source2Regis
                     
     switch(selectCode) {
     default:
-      FUN_001a32d0(textEnd,"%s.rgb",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.rgb",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 1:
     case 5:
     case 9:
     case 0x10:
-      FUN_001a32d0(textEnd,"%s.rrr",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.rrr",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 2:
     case 6:
     case 10:
     case 0x11:
-      FUN_001a32d0(textEnd,"%s.ggg",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.ggg",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 3:
     case 7:
     case 0xb:
     case 0x12:
-      FUN_001a32d0(textEnd,"%s.bbb",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.bbb",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 0xc:
     case 0xd:
     case 0xe:
     case 0x13:
-      FUN_001a32d0(textEnd,"%s.aaa",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.aaa",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 0x14:
     case 0x15:
@@ -6433,15 +6433,15 @@ int psnFormatRgbSource(outBuffer, source0Register, source1Register, source2Regis
     case 0x17:
     case 0x18:
     case 0x19:
-      FUN_001a32d0(textEnd,"%s.gbr",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.gbr",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 0x1a:
     case 0x1b:
     case 0x1c:
-      FUN_001a32d0(textEnd,"%s.brg",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.brg",operandText,source2Register,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
       break;
     case 0x1d:
-      FUN_001a32d0(textEnd,"%s.a:%s.bg",operandText,operandTextSecond,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.a:%s.bg",operandText,operandTextSecond,alpha0Register,alpha1Register,swizzleJumpAddr,sourceSelectCopy);
     }
   }
   else {
@@ -6557,20 +6557,20 @@ int psnFormatAlphaSource(outBuffer, source0Register, source1Register, source2Reg
                     
     switch(selectCode) {
     default:
-      FUN_001a32d0(textEnd,"%s.r",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.r",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
       break;
     case 1:
     case 4:
     case 7:
-      FUN_001a32d0(textEnd,"%s.g",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.g",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
       break;
     case 2:
     case 5:
     case 8:
-      FUN_001a32d0(textEnd,"%s.b",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.b",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
       break;
     case 9:
-      FUN_001a32d0(textEnd,"%s.a",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
+      printf_LDBLStub_1a32d0(textEnd,"%s.a",operandText,source2Register,alpha0Register,alpha1Register,componentJumpAddr,sourceSelectCopy);
     }
   }
   else {
@@ -6870,7 +6870,7 @@ double FUN_000d10dc(undefined4 outText,uint registerWord,undefined4 argR5,undefi
   if ((registerWord & 0x8000) == 0) {
     if ((registerWord & 0x4000) == 0) {
       if ((registerWord & 0x2000) == 0) {
-        FUN_001a32d0(outText,"r%02u",registerWord,argR6,argR7,argR8,argR9,argR10);
+        printf_LDBLStub_1a32d0(outText,"r%02u",registerWord,argR6,argR7,argR8,argR9,argR10);
       }
       else {
         immediateValue = (double)((double (*)())FUN_000da78c)(registerWord & 0xffffdfff,floatArg1);
@@ -6951,16 +6951,16 @@ double FUN_000d10dc(undefined4 outText,uint registerWord,undefined4 argR5,undefi
         }
         expMarker = 0x45;
         numberTextEnd = 0;
-        FUN_001a32d0(outText,"(%s)",numberText,argR6,argR7,argR8,digitIndex,argR10);
+        printf_LDBLStub_1a32d0(outText,"(%s)",numberText,argR6,argR7,argR8,digitIndex,argR10);
       }
     }
     else {
-      FUN_001a32d0(outText,"r[AL+%02u]",registerWord & 0xffffbfff,argR6,argR7,argR8,argR9,argR10
+      printf_LDBLStub_1a32d0(outText,"r[AL+%02u]",registerWord & 0xffffbfff,argR6,argR7,argR8,argR9,argR10
                   );
     }
   }
   else {
-    FUN_001a32d0(outText,"c%02u",registerWord & 0xffff7fff,argR6,argR7,argR8,argR9,argR10);
+    printf_LDBLStub_1a32d0(outText,"c%02u",registerWord & 0xffff7fff,argR6,argR7,argR8,argR9,argR10);
   }
   return;
 }
@@ -7085,7 +7085,7 @@ LAB_000d1518:
     _strcpy(outText + length2,(swizzleLow16 >> 0xb & 0x1c) + 0x1dc259);
   }
   else {
-    FUN_001a32d0(outText + length2,"%s.%s%s%s",operandText,(swizzleLow16 >> 0xb & 0x1c) + 0x1dc259,
+    printf_LDBLStub_1a32d0(outText + length2,"%s.%s%s%s",operandText,(swizzleLow16 >> 0xb & 0x1c) + 0x1dc259,
                  (swizzleLow16 >> 8 & 0x1c) + 0x1dc259,(swizzleLow16 >> 5 & 0x1c) + 0x1dc259,swizzleLow16,sourceSelectCopy);
   }
   length = _strlen(outText);
@@ -7191,7 +7191,7 @@ LAB_000d1780:
     _strcpy(outText + length,componentCode * 4 + 0x1dc259);
   }
   else {
-    FUN_001a32d0(outText + length,"%s.%s",operandText,componentCode * 4 + 0x1dc259,alphaAddrA,alphaAddrB,modifierPrefix,
+    printf_LDBLStub_1a32d0(outText + length,"%s.%s",operandText,componentCode * 4 + 0x1dc259,alphaAddrA,alphaAddrB,modifierPrefix,
                  sourceSelect);
   }
   length = _strlen(outText);
@@ -8331,7 +8331,7 @@ LAB_000d1afc:
           else {
             maskTextW = "_";
           }
-          FUN_001a32d0(writeMaskText,"%s%s%s%s",maskTextX,maskTextY,maskTextZ,maskTextW,texComponentEnableBits,argR10);
+          printf_LDBLStub_1a32d0(writeMaskText,"%s%s%s%s",maskTextX,maskTextY,maskTextZ,maskTextW,texComponentEnableBits,argR10);
           if ((*(byte *)((int)instructionRecord2 + 0x1a) < 7) &&
              ((1 << ((int)(char)*(byte *)((int)instructionRecord2 + 0x1a) & 0x3fU) & 0x7aU) != 0)) {
             ((int (*)())psnReportError)(0,"r%02d.%s = ",(uint)texDestReg2,writeMaskText,maskTextZ,maskTextW,texComponentEnableBits,argR10);
@@ -8384,13 +8384,13 @@ LAB_000d1afc:
             }
           }
           srcSwizzleTextPtr = srcSwizzleText;
-          FUN_001a32d0(srcSwizzleTextPtr,"%s%s%s%s",srcSwizzleTextX,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
+          printf_LDBLStub_1a32d0(srcSwizzleTextPtr,"%s%s%s%s",srcSwizzleTextX,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           if ((texSrcReg2 & 0x4000) == 0) {
-            FUN_001a32d0(registerText,"r%02d",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
+            printf_LDBLStub_1a32d0(registerText,"r%02d",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           }
           else {
             neutralLineArg0 = (uint *)((uint)neutralLineArg0 & 0xbfff);
-            FUN_001a32d0(registerText,"r[AL+%02d]",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
+            printf_LDBLStub_1a32d0(registerText,"r[AL+%02d]",neutralLineArg0,argR6,srcSwizzleTextZ,argR8,argR9,argR10);
           }
           registerTextPtr = registerText;
           if (*(char *)((int)instructionRecord2 + 0x1b) == '\0') {
@@ -8479,7 +8479,7 @@ LAB_000d1afc:
                 dxSwizzleTextW = dxSwizzleTextX;
               }
               argR8 = dxSwizzleTextA;
-              FUN_001a32d0(argR8,"%s%s%s%s",dxSwizzleTextX,dxSwizzleTextY,dxSwizzleTextZ,dxSwizzleTextW,dxSwizzleWOffset,argR10);
+              printf_LDBLStub_1a32d0(argR8,"%s%s%s%s",dxSwizzleTextX,dxSwizzleTextY,dxSwizzleTextZ,dxSwizzleTextW,dxSwizzleWOffset,argR10);
               texDySwizzleByte = *(byte *)((int)instructionRecord2 + 0x16);
               dySwizzleWOffset = (uint)texDySwizzleByte;
               srcSwizzleTextZ = (char *)(uint)*(ushort *)(instructionRecord2 + 4);
@@ -8497,7 +8497,7 @@ LAB_000d1afc:
                 dySwizzleTextZ = (byte *)dySwizzleTextX;
                 dySwizzleTextW = dySwizzleTextX;
               }
-              FUN_001a32d0(operandText0,"%s%s%s%s",dySwizzleTextX,dySwizzleTextY,dySwizzleTextZ,dySwizzleTextW,dySwizzleWOffset,argR10);
+              printf_LDBLStub_1a32d0(operandText0,"%s%s%s%s",dySwizzleTextX,dySwizzleTextY,dySwizzleTextZ,dySwizzleTextW,dySwizzleWOffset,argR10);
               argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x12);
               in_stack_fffffd2c = &semWaitText;
               ((int (*)())psnReportError)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",registerTextPtr,
@@ -9284,7 +9284,7 @@ switchD_000d324c_caseD_4:
           in_stack_fffffd2c = (uint *)0x0;
           argR10 = (byte *)((uint)*(byte *)((int)instructionRecord2 + 0x15) * 10 + 0x1dc1bc);
           argR9 = (char *)((uint)*(byte *)(instructionRecord2 + 5) * 10 + 0x1dc1bc);
-          FUN_001a32d0(argR6,"0x%02x %1d %s %s %s %s %1d %1d %d",
+          printf_LDBLStub_1a32d0(argR6,"0x%02x %1d %s %s %s %s %1d %1d %d",
                        (uint)*(byte *)((int)instructionRecord2 + 0x12),(uint)*(byte *)(instructionRecord2 + 4),
                        (uint)*(byte *)((int)instructionRecord2 + 0xe) * 10 + 0x1dc1e9,
                        (uint)*(byte *)((int)instructionRecord2 + 0x11) * 5 + 0x1dc1da,argR9,argR10);

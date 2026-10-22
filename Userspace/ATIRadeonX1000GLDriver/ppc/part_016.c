@@ -102,8 +102,8 @@ int FUN_000a7ea0(param_1)
   return;
 }
 
-/* FUN_000a7ed0 @ 0xa7ed0 (4 bytes) */
-int FUN_000a7ed0()
+/* noop_a7ed0 @ 0xa7ed0 (4 bytes) */
+int noop_a7ed0()
 {
   return;
 }
@@ -5863,7 +5863,7 @@ LAB_000b0fbc:
       iVar15 = *(int *)(a1 + 0x70);
       uVar4 = *(undefined4 *)(iVar19 * 4 + iVar15);
       if (iVar11 == -1) {
-        FUN_001a32d0(auStack_170,
+        printf_LDBLStub_1a32d0(auStack_170,
                      "Fragment program exceeded native resources:\n  Temporaries          - %d\n  Parameters           - %d\n  Attributes           - %d\n  ALU instructions     - %d\n  Texture instructions - %d\n  Texture indirections - %d\n"
                      ,*(undefined4 *)(a1 + 0x68),*(undefined4 *)(a1 + 100),
                      *(undefined4 *)(a1 + 0x60),*(undefined4 *)(a1 + 0x54),
@@ -7206,8 +7206,8 @@ LAB_000b4370:
   } while( true );
 }
 
-/* FUN_000b43f0 @ 0xb43f0 (4 bytes) */
-int FUN_000b43f0()
+/* noop_b43f0 @ 0xb43f0 (4 bytes) */
+int noop_b43f0()
 {
   return;
 }
@@ -7812,8 +7812,8 @@ int FUN_000b50a0(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000b5190 @ 0xb5190 (4 bytes) */
-int FUN_000b5190()
+/* noop_b5190 @ 0xb5190 (4 bytes) */
+int noop_b5190()
 {
   return;
 }
@@ -7900,8 +7900,8 @@ int FUN_000b5320(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000b53f0 @ 0xb53f0 (4 bytes) */
-int FUN_000b53f0()
+/* noop_b53f0 @ 0xb53f0 (4 bytes) */
+int noop_b53f0()
 {
   return;
 }
@@ -8901,7 +8901,7 @@ LAB_000b66b8:
     ((unsigned char *)0x00002ddc)[*(int *)(((unsigned char *)0x0000387c) + *(int *)(((unsigned char *)0x000036c0) + *(int *)(param_1 + 0x1e5c))) +
      *(int *)(param_1 + 0x1e5c)] = 1;
   }
-  ((int (*)())FUN_000b5190)(param_1,*(int *)(param_1 + 0x1e5c) + 0x1784,
+  ((int (*)())noop_b5190)(param_1,*(int *)(param_1 + 0x1e5c) + 0x1784,
                ((unsigned char *)0x00001660) + *(int *)(param_1 + 0x1e5c));
   *(undefined1 **)(((unsigned char *)0x00001488) + param_1) = puVar7;
   FUN_0004ac90(param_1);

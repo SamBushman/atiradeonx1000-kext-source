@@ -62,8 +62,8 @@ LAB_00076dc0:
   return;
 }
 
-/* FUN_00076e60 @ 0x76e60 (4 bytes) */
-int FUN_00076e60()
+/* noop_76e60 @ 0x76e60 (4 bytes) */
+int noop_76e60()
 {
   return;
 }

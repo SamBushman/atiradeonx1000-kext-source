@@ -2606,14 +2606,14 @@ int FUN_00070bf0(param_1, param_2)
   return 0;
 }
 
-/* FUN_00070c50 @ 0x70c50 (4 bytes) */
-int FUN_00070c50()
+/* noop_70c50 @ 0x70c50 (4 bytes) */
+int noop_70c50()
 {
   return;
 }
 
-/* FUN_00070c60 @ 0x70c60 (4 bytes) */
-int FUN_00070c60()
+/* noop_70c60 @ 0x70c60 (4 bytes) */
+int noop_70c60()
 {
   return;
 }
@@ -5688,8 +5688,8 @@ int FUN_00076b80(param_1, param_2)
   return;
 }
 
-/* FUN_00076c00 @ 0x76c00 (4 bytes) */
-int FUN_00076c00()
+/* noop_76c00 @ 0x76c00 (4 bytes) */
+int noop_76c00()
 {
   return;
 }
@@ -5736,9 +5736,9 @@ asm(".set FUN_0006e460, _FUN_0006e460");
 asm(".globl FUN_0006ec10");
 asm(".set FUN_0006ec10, _FUN_0006ec10");
 asm(".globl FUN_00070c50");
-asm(".set FUN_00070c50, _FUN_00070c50");
+asm(".set FUN_00070c50, _noop_70c50");
 asm(".globl FUN_00070c60");
-asm(".set FUN_00070c60, _FUN_00070c60");
+asm(".set FUN_00070c60, _noop_70c60");
 asm(".globl FUN_00071bc0");
 asm(".set FUN_00071bc0, _FUN_00071bc0");
 asm(".globl FUN_00074b30");

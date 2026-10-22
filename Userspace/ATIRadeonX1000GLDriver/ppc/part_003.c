@@ -68,7 +68,7 @@ int FUN_00019db0(param_1, param_2, param_3)
     return 0;
   }
   if (param_1[0x79] + 0x28U < (uint)param_1[0x77]) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
   }
   if ((param_1[0x55] & 0xfU) == 3) {
     bVar1 = true;
@@ -172,8 +172,8 @@ int FUN_0001a010(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 1;
 }
 
-/* FUN_0001a0d0 @ 0x1a0d0 (32 bytes) */
-int FUN_0001a0d0(ctx, stamp)
+/* gld_isStampRetired @ 0x1a0d0 (32 bytes) */
+int gld_isStampRetired(ctx, stamp)
   int ctx;
   int stamp;
 {
@@ -188,8 +188,8 @@ int FUN_0001a0d0(ctx, stamp)
   return 0;
 }
 
-/* FUN_0001a0f0 @ 0x1a0f0 (388 bytes) */
-int FUN_0001a0f0(ctx, terminatorWord)
+/* gld_submitRing @ 0x1a0f0 (388 bytes) */
+int gld_submitRing(ctx, terminatorWord)
   int ctx;
   undefined4 terminatorWord;
 {
@@ -239,8 +239,8 @@ int FUN_0001a0f0(ctx, terminatorWord)
   return FUN_0002c6c0(ctx);
 }
 
-/* FUN_0001a280 @ 0x1a280 (588 bytes) */
-int FUN_0001a280(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* glFlush_impl @ 0x1a280 (588 bytes) */
+int glFlush_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -262,7 +262,7 @@ int FUN_0001a280(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     ((int (*)())FUN_000230d0)(param_1,0,0,1,0,0,*(undefined4 *)(param_1 + 0x15c),*(undefined4 *)(param_1 + 0x160)
                 );
   }
-  ((int (*)())FUN_0001a0f0)(param_1,0x2000000);
+  ((int (*)())gld_submitRing)(param_1,0x2000000);
   if ((*(uint *)(*(int *)(param_1 + 0x1e4) + 0x14) & 2) != 0) {
     puVar4 = *(undefined4 **)(param_1 + 0xf8);
     if (*(char *)(param_1 + 0x144) == '\0') {
@@ -277,7 +277,7 @@ int FUN_0001a280(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   }
   puVar4 = *(undefined4 **)(param_1 + 0x1dc);
   if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 5) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
     puVar4 = *(undefined4 **)(param_1 + 0x1dc);
   }
   puVar5 = *(uint **)(param_1 + 0x1d8);
@@ -324,8 +324,8 @@ int FUN_0001a280(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* FUN_0001a4e0 @ 0x1a4e0 (212 bytes) */
-int FUN_0001a4e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* glFlush_impl_withSurfaceUpdate @ 0x1a4e0 (212 bytes) */
+int glFlush_impl_withSurfaceUpdate(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -343,7 +343,7 @@ int FUN_0001a4e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   
   if (((*(uint *)(param_1 + 0x154) & 0x800) != 0) && (*(int *)(param_1 + 0x26a0) != 1)) {
     if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-      ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+      ((int (*)())gld_submitRing)(param_1,0x1000000);
     }
     uStack_24 = *(uint *)(param_1 + 0x3c);
     uVar1 = uStack_24 & 0xfffff7ff;
@@ -363,7 +363,7 @@ int FUN_0001a4e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0,param_3,4,0,0);
     param_2 = extraout_r4;
   }
-  return ((int (*)())FUN_0001a280)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  return ((int (*)())glFlush_impl)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _gldFlush @ 0x1a5c0 (28 bytes) */
@@ -373,7 +373,7 @@ int _gldFlush(ctx)
   if (*(uint *)(ctx + GLD_writeCursor) <= *(int *)(ctx + GLD_ringMap) + 0x28U) {
     return;
   }
-  return ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
+  return ((int (*)())gld_submitRing)(ctx,0x1000000);
 }
 
 /* _gldFinish @ 0x1a5e0 (136 bytes) */
@@ -383,7 +383,7 @@ int _gldFinish(ctx)
   int status;
   
   if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
-    ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
+    ((int (*)())gld_submitRing)(ctx,0x1000000);
   }
   do {
     status = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),8,0,0,0,0);
@@ -391,8 +391,8 @@ int _gldFinish(ctx)
   return;
 }
 
-/* FUN_0001a670 @ 0x1a670 (216 bytes) */
-int FUN_0001a670(param_1, param_2)
+/* gld_signalFence @ 0x1a670 (216 bytes) */
+int gld_signalFence(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -401,7 +401,7 @@ int FUN_0001a670(param_1, param_2)
   
   puVar2 = *(undefined4 **)(param_1 + 0x1dc);
   if (*(undefined4 **)(param_1 + 0x1e0) <= puVar2 + 6) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
     puVar2 = *(undefined4 **)(param_1 + 0x1dc);
   }
   *(undefined4 **)(param_1 + 0x1dc) = puVar2 + 6;
@@ -419,8 +419,8 @@ int FUN_0001a670(param_1, param_2)
   return;
 }
 
-/* FUN_0001a750 @ 0x1a750 (636 bytes) */
-int FUN_0001a750(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* glFinish_impl @ 0x1a750 (636 bytes) */
+int glFinish_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -442,7 +442,7 @@ int FUN_0001a750(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     ((int (*)())FUN_000230d0)(param_1,0,1,0,0,0,*(undefined4 *)(param_1 + 0x15c),*(undefined4 *)(param_1 + 0x160)
                 );
   }
-  ((int (*)())FUN_0001a0f0)(param_1,0x3000000);
+  ((int (*)())gld_submitRing)(param_1,0x3000000);
   if ((*(uint *)(*(int *)(param_1 + 0x1e4) + 0x14) & 2) != 0) {
     puVar4 = *(undefined4 **)(param_1 + 0xf8);
     if (*(char *)(param_1 + 0x144) == '\0') {
@@ -457,7 +457,7 @@ int FUN_0001a750(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   }
   puVar4 = *(undefined4 **)(param_1 + 0x1dc);
   if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 5) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
     puVar4 = *(undefined4 **)(param_1 + 0x1dc);
   }
   puVar5 = *(uint **)(param_1 + 0x1d8);
@@ -530,7 +530,7 @@ int FUN_0001a9d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     ((int (*)())FUN_000230d0)(param_1,0,1,0,0,0,*(undefined4 *)(param_1 + 0x15c),*(undefined4 *)(param_1 + 0x160)
                 );
   }
-  ((int (*)())FUN_0001a0f0)(param_1,0x3000000);
+  ((int (*)())gld_submitRing)(param_1,0x3000000);
   if ((*(uint *)(*(int *)(param_1 + 0x1e4) + 0x14) & 2) != 0) {
     puVar4 = *(undefined4 **)(param_1 + 0xf8);
     if (*(char *)(param_1 + 0x144) == '\0') {
@@ -545,7 +545,7 @@ int FUN_0001a9d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   }
   puVar4 = *(undefined4 **)(param_1 + 0x1dc);
   if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 5) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
     puVar4 = *(undefined4 **)(param_1 + 0x1dc);
   }
   puVar5 = *(uint **)(param_1 + 0x1d8);
@@ -934,7 +934,7 @@ LAB_0001b494:
   else {
     if (*(int *)(currentChunk + 0x18) == *(int *)(ctx + GLD_submitEpoch)) {
       if (*(uint *)(ctx + GLD_vertexChunkCount) < 0x80) goto LAB_0001b3e4;
-      ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
+      ((int (*)())gld_submitRing)(ctx,0x1000000);
       retireCounter = *(byte **)(ctx + GLD_retireCounter);
       spinCount = 0xf4241;
       do {
@@ -986,14 +986,14 @@ int FUN_0001b4b0(ctx)
   return;
 }
 
-/* FUN_0001b4f0 @ 0x1b4f0 (4 bytes) */
-int FUN_0001b4f0()
+/* noop_1b4f0 @ 0x1b4f0 (4 bytes) */
+int noop_1b4f0()
 {
   return;
 }
 
-/* FUN_0001b500 @ 0x1b500 (8 bytes) */
-int FUN_0001b500()
+/* returnOne_1b500 @ 0x1b500 (8 bytes) */
+int returnOne_1b500()
 {
   return 1;
 }
@@ -1379,7 +1379,7 @@ int FUN_0001bac0(param_1, param_2)
   *(int **)(param_1 + 0x298c) = piVar6 + 0x4b;
   (**(code **)(param_1 + 0x299c))(param_1 + 0x240,piVar6 + 0x4b);
   if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
   }
   ((unsigned char *)0x00002b7d)[param_1] = 1;
   return;
@@ -2788,12 +2788,12 @@ LAB_0001dcf8:
       uVar4 = (uVar3 - (uVar3 / local_2c[0]) * local_2c[0]) + 3 & 0xfffffffc;
     }
     if ((*(short *)(iVar7 + 0x312) == -0x7a42) && (local_38 < 0x4f)) {
-      iVar5 = FUN_0000bd60(param_1,param_2,(local_38 * 0x12 + 0xc) * 4,
+      iVar5 = gld_setVertexArrayNewTextureBacking(param_1,param_2,(local_38 * 0x12 + 0xc) * 4,
                            uVar4 + local_2c[0] * local_34,*(undefined4 *)(iVar7 + 0x314),uVar3);
       if (iVar5 != 0) goto LAB_0001ddc0;
       uVar3 = *(uint *)(iVar7 + 0x318);
     }
-    iVar5 = FUN_0000bc60(param_1,param_2,*(undefined4 *)(iVar7 + 0x314),
+    iVar5 = gld_setVertexArrayAgpRefBacking(param_1,param_2,*(undefined4 *)(iVar7 + 0x314),
                          *(undefined4 *)(iVar7 + 0x314),uVar3);
     if (iVar5 != 0) {
 LAB_0001ddc0:
@@ -2848,8 +2848,8 @@ LAB_0001ddc0:
   return 0;
 }
 
-/* FUN_0001dff0 @ 0x1dff0 (140 bytes) */
-int FUN_0001dff0(ctx)
+/* gld_startPacket @ 0x1dff0 (140 bytes) */
+int gld_startPacket(ctx)
   int ctx;
 {
   undefined4 *packet;
@@ -2897,10 +2897,10 @@ int _gldPageoffBuffer(ctx, buffer)
       if (kind == '\x06') {
         if ((0x1ffff < (int)pluginRecord[4]) &&
            (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor))) {
-          ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
+          ((int (*)())gld_submitRing)(ctx,0x1000000);
         }
         if ((*(ushort *)(pluginRecord + 10) & ~*(ushort *)(pluginRecord + 7) & 1) != 0) {
-          handleOwner = ((int (*)())FUN_0001a0d0)(ctx,pluginRecord[3]);
+          handleOwner = ((int (*)())gld_isStampRetired)(ctx,pluginRecord[3]);
           if (handleOwner == 0) {
             _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),9,pluginRecord + 3,1,0,0);
           }
@@ -2911,7 +2911,7 @@ int _gldPageoffBuffer(ctx, buffer)
     else {
       if ((0x1ffff < (int)pluginRecord[4]) &&
          (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor))) {
-        ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
+        ((int (*)())gld_submitRing)(ctx,0x1000000);
       }
       if ((*(ushort *)(pluginRecord + 10) & ~*(ushort *)(pluginRecord + 7) & 1) != 0) {
         scalarIn0 = *pluginRecord;
@@ -2920,7 +2920,7 @@ int _gldPageoffBuffer(ctx, buffer)
       }
       handleOwner = *(int *)(*(int *)(buffer + 8) + 4);
       if ((*(uint *)(handleOwner + 0x20) & 0x10000000) != 0) {
-        waitStatus = ((int (*)())FUN_0001a0d0)(ctx,*(undefined4 *)(handleOwner + 0x1c));
+        waitStatus = ((int (*)())gld_isStampRetired)(ctx,*(undefined4 *)(handleOwner + 0x1c));
         if (waitStatus == 0) {
           _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),9,handleOwner + 0x1c,1,0,0);
         }
@@ -2932,8 +2932,8 @@ int _gldPageoffBuffer(ctx, buffer)
   return;
 }
 
-/* FUN_0001e270 @ 0x1e270 (8 bytes) */
-int FUN_0001e270()
+/* returnZero_1e270 @ 0x1e270 (8 bytes) */
+int returnZero_1e270()
 {
   return 0;
 }
@@ -2999,7 +2999,7 @@ LAB_0001e3b0:
       }
       uVar5 = *puVar12;
       uVar3 = uVar10 + local_3c[0] * local_44;
-      iVar4 = FUN_000065b0(param_1,param_2,iVar4 + (local_48 * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
+      iVar4 = gld_setBufferNewTextureBacking(param_1,param_2,iVar4 + (local_48 * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
       if (iVar4 == 0) {
         uVar5 = puVar12[1];
         goto LAB_0001e440;
@@ -3008,7 +3008,7 @@ LAB_0001e3b0:
     else {
 LAB_0001e440:
       uVar3 = *puVar12;
-      iVar4 = FUN_00006470(param_1,param_2,uVar3,uVar3,uVar5);
+      iVar4 = gld_setBufferAgpRefBacking(param_1,param_2,uVar3,uVar3,uVar5);
       if (iVar4 == 0) {
         return 0;
       }
@@ -3542,8 +3542,8 @@ LAB_0001ecac:
   return;
 }
 
-/* FUN_0001ecd0 @ 0x1ecd0 (696 bytes) */
-int FUN_0001ecd0(ctx, param_2, primitiveMode, first, count, indexType, drawFlags, currentAttribs)
+/* gld_drawVertexArray @ 0x1ecd0 (696 bytes) */
+int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, drawFlags, currentAttribs)
   int ctx;
   int param_2;
   int primitiveMode;
@@ -4185,7 +4185,7 @@ code_r0x0001f7c0:
         retireCounter = *(byte **)(ctx + GLD_retireCounter);
         if (((uint)retireCounter[3] << 0x18 | (uint)retireCounter[2] << 0x10 | (uint)retireCounter[1] << 8 |
             (uint)*retireCounter) == *(uint *)(retireCounter + 0x20)) {
-          ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
+          ((int (*)())gld_submitRing)(ctx,0x1000000);
           bVar2 = 0 < (int)puVar19;
         }
         else {
@@ -4595,11 +4595,11 @@ int FUN_00020420(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
                (param_7 = uStack_64, (*(uint *)(param_2 + 0x2a64) & uStack_64) == 0)) {
               if (iStack_60 != 0) {
                 if (iVar9 != aiStack_4c[0]) {
-                  FUN_001a337c("  process id does not match | expected %i | received %i\n",iVar9,
+                  printf_LDBLStub_1a337c("  process id does not match | expected %i | received %i\n",iVar9,
                                aiStack_4c[0],param_4,iVar12,param_6,param_7,param_8);
                 }
                 if ((*(uint *)(param_2 + 0x2a64) & uStack_64) == 0) {
-                  FUN_001a337c("  gl display mask does not match | expected 0x%x | received 0x%x\n",
+                  printf_LDBLStub_1a337c("  gl display mask does not match | expected 0x%x | received 0x%x\n",
                                *(uint *)(param_2 + 0x2a64),uStack_64,param_4,iVar12,param_6,param_7,
                                param_8);
                 }
@@ -4609,7 +4609,7 @@ int FUN_00020420(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
               *(undefined1 *)(param_2 + 0x2a68) = 1;
               uVar13 = uStack_64;
               if (iStack_60 != 0) {
-                FUN_001a337c("  process id [%i] and gl display mask [0x%x] match\n",aiStack_4c[0],
+                printf_LDBLStub_1a337c("  process id [%i] and gl display mask [0x%x] match\n",aiStack_4c[0],
                              uStack_64,param_4,iVar12,param_6,uStack_64,param_8);
               }
               iVar9 = _CFDictionaryGetValue(param_5,iVar5);
@@ -4648,7 +4648,7 @@ int FUN_00020420(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
                     _puts("  fsaa samples | app value");
                   }
                   else {
-                    FUN_001a337c("  fsaa samples | %i\n",iStack_5c,piVar11,param_4,iVar12,param_6,
+                    printf_LDBLStub_1a337c("  fsaa samples | %i\n",iStack_5c,piVar11,param_4,iVar12,param_6,
                                  uVar13,param_8);
                   }
                 }
@@ -4669,7 +4669,7 @@ int FUN_00020420(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
                     _puts("  anisotropic filtering samples | app value");
                   }
                   else {
-                    FUN_001a337c("  anisotropic filtering samples | %i\n",iStack_54,piVar11,param_4,
+                    printf_LDBLStub_1a337c("  anisotropic filtering samples | %i\n",iStack_54,piVar11,param_4,
                                  iVar12,param_6,uVar13,param_8);
                   }
                 }
@@ -4713,7 +4713,7 @@ int FUN_00020420(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
                     _puts("  performance cheats | off");
                   }
                   else {
-                    FUN_001a337c("  performance cheats level | %d\n",iStack_68,piVar11,param_4,
+                    printf_LDBLStub_1a337c("  performance cheats level | %d\n",iStack_68,piVar11,param_4,
                                  iVar12,param_6,uVar13,param_8);
                   }
                 }
@@ -4790,7 +4790,7 @@ int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   puVar3 = *(undefined4 **)(param_1 + 0x1dc);
   *(undefined1 *)(param_1 + 0x2a5e) = 1;
   if (*(undefined4 **)(param_1 + 0x1e0) <= puVar3 + 0x10) {
-    ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
+    ((int (*)())gld_submitRing)(param_1,0x1000000);
     puVar3 = *(undefined4 **)(param_1 + 0x1dc);
   }
   *(undefined4 **)(param_1 + 0x1dc) = puVar3 + 0x10;
@@ -5112,8 +5112,8 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_00022280 @ 0x22280 (4 bytes) */
-int FUN_00022280()
+/* noop_22280 @ 0x22280 (4 bytes) */
+int noop_22280()
 {
   return;
 }
@@ -5450,7 +5450,7 @@ LAB_000225e8:
         renderFlags = *(uint *)(ctx + GLD_renderFlags);
         if ((renderFlags & 0x20) == 0) {
           if ((renderFlags & 0x400) == 0) {
-            *(code **)(dispatch + 0x60) = FUN_00022280;
+            *(code **)(dispatch + 0x60) = noop_22280;
           }
           else {
             *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8934;
@@ -5483,7 +5483,7 @@ LAB_000225e8:
         }
       }
       else {
-        *(code **)(dispatch + 0x60) = FUN_00022280;
+        *(code **)(dispatch + 0x60) = noop_22280;
         *(undefined **)(dispatch + 0x58) = puVar5;
         *(undefined **)(dispatch + 0x5c) = PTR__gldFlush_001e897c;
       }
@@ -5512,9 +5512,9 @@ LAB_000225e8:
         *(undefined **)(dispatch + 0x48) = PTR_FUN_001e895c;
       }
       else {
-        *(code **)(dispatch + 0x48) = FUN_00022280;
-        *(code **)(dispatch + 0x40) = FUN_00022280;
-        *(code **)(dispatch + 0x44) = FUN_00022280;
+        *(code **)(dispatch + 0x48) = noop_22280;
+        *(code **)(dispatch + 0x40) = noop_22280;
+        *(code **)(dispatch + 0x44) = noop_22280;
       }
     }
     else {
@@ -6302,7 +6302,7 @@ int FUN_00023a24(param_1, param_2, param_3, param_4, param_5, param_6)
   puVar4[2] = ((unsigned char *)0x00001393U);
   puVar4[1] = 0;
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar4 + 4;
-  /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64) - stock stores the just-advanced
+  /* dropped 2nd arg, same defect class as gld_startPacket (issue #64) - stock stores the just-advanced
    * pointer to +0x274c then loads it right back into r4 before the bctr tail-jump. */
   (**(code **)(param_1 + 0x275c))(param_1,puVar4 + 4);
   return;
@@ -6366,7 +6366,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   puVar3[2] = ((unsigned char *)0x00001393U);
   puVar3[1] = 0;
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3 + 4;
-  /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64) - stock stores the just-advanced
+  /* dropped 2nd arg, same defect class as gld_startPacket (issue #64) - stock stores the just-advanced
    * pointer to +0x274c then loads it right back into r4 before the bctr tail-jump. */
   (**(code **)(param_1 + 0x275c))(param_1,puVar3 + 4);
   return;
@@ -6411,19 +6411,19 @@ void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0001a280");
-asm(".set FUN_0001a280, _FUN_0001a280");
+asm(".set FUN_0001a280, _glFlush_impl");
 asm(".globl FUN_0001a4e0");
-asm(".set FUN_0001a4e0, _FUN_0001a4e0");
+asm(".set FUN_0001a4e0, _glFlush_impl_withSurfaceUpdate");
 asm(".globl FUN_0001a670");
-asm(".set FUN_0001a670, _FUN_0001a670");
+asm(".set FUN_0001a670, _gld_signalFence");
 asm(".globl FUN_0001a750");
-asm(".set FUN_0001a750, _FUN_0001a750");
+asm(".set FUN_0001a750, _glFinish_impl");
 asm(".globl FUN_0001a9d0");
 asm(".set FUN_0001a9d0, _FUN_0001a9d0");
 asm(".globl FUN_0001e270");
-asm(".set FUN_0001e270, _FUN_0001e270");
+asm(".set FUN_0001e270, _returnZero_1e270");
 asm(".globl FUN_0001ecd0");
-asm(".set FUN_0001ecd0, _FUN_0001ecd0");
+asm(".set FUN_0001ecd0, _gld_drawVertexArray");
 asm(".globl FUN_00020330");
 asm(".set FUN_00020330, _FUN_00020330");
 asm(".globl FUN_00020420");

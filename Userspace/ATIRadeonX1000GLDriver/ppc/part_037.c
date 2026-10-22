@@ -1907,7 +1907,7 @@ int pass_ssa_build(program)
               (piVar9,*(int *)(program + 8),iVar23,in_r6,in_r7,in_r8,0xffffffff,iVar3);
     piVar9 = *(int **)(*(int *)(program + 8) + 0x30c);
     (**(code **)(*piVar9 + 0x128))(piVar9,*(int *)(program + 8));
-    FUN_001762bc(*(undefined4 *)(program + 8));
+    noop_1762bc(*(undefined4 *)(program + 8));
     FUN_001762c0(*(undefined4 *)(program + 8));
   }
   arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
@@ -2586,8 +2586,8 @@ LAB_001228ec:
                    *(undefined4 *)(*(int *)(program + 8) + 0x3d8));
       iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
       if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),9), iVar3 != 0)) {
-        FUN_00172fb0(*(undefined4 *)(program + 8));
-        FUN_00172fb4(*(undefined4 *)(program + 8));
+        noop_172fb0(*(undefined4 *)(program + 8));
+        noop_172fb4(*(undefined4 *)(program + 8));
       }
       *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0xc;
       Program__beginPass(program,(int)"ssa_build");

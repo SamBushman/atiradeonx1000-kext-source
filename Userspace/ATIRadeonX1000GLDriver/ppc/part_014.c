@@ -7987,8 +7987,8 @@ int FUN_000a0ef0(param_1)
   return FUN_0008f520(param_1);
 }
 
-/* FUN_000a0f80 @ 0xa0f80 (4 bytes) */
-int FUN_000a0f80()
+/* noop_a0f80 @ 0xa0f80 (4 bytes) */
+int noop_a0f80()
 {
   return;
 }
@@ -8005,8 +8005,8 @@ int FUN_000a0f90(param_1)
   int iVar6;
   
   puVar2 = PTR_FUN_001e89f0;
-  *(code **)(((unsigned char *)0x00001160) + param_1) = FUN_000a0f80;
-  *(code **)(((unsigned char *)0x0000115c) + param_1) = FUN_000a0f80;
+  *(code **)(((unsigned char *)0x00001160) + param_1) = noop_a0f80;
+  *(code **)(((unsigned char *)0x0000115c) + param_1) = noop_a0f80;
   *(undefined **)(((unsigned char *)0x00001164) + param_1) = puVar2;
   FUN_000a21d0(param_1);
   uVar5 = *(uint *)(param_1 + 0x27bc);

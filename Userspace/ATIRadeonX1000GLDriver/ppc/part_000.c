@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00001740 @ 0x1740 (48 bytes) */
-int FUN_00001740()
+/* dyld_stub_binding_helper @ 0x1740 (48 bytes) */
+int dyld_stub_binding_helper()
 {
                     
                     
@@ -20,31 +20,31 @@ int FUN_00001770(param_1, param_2)
   return;
 }
 
-/* FUN_00001790 @ 0x1790 (40 bytes) */
-int FUN_00001790(state)
+/* cxa_atexit_check_2 @ 0x1790 (40 bytes) */
+int cxa_atexit_check_2(state)
   undefined4 *state;
 {
   *state = 1;
   return;
 }
 
-/* FUN_000017b8 @ 0x17b8 (120 bytes) */
-int FUN_000017b8(state)
+/* cxa_atexit_check_1 @ 0x17b8 (120 bytes) */
+int cxa_atexit_check_1(state)
   undefined4 *state;
 {
   int status;
   undefined4 *stateHome;
   
   stateHome = state;
-  status = (*(code *)state[1])(FUN_00001790,state,state);
+  status = (*(code *)state[1])(cxa_atexit_check_2,state,state);
   if (status != 0) {
     *state = 0xffffffff;
   }
   return;
 }
 
-/* FUN_00001830 @ 0x1830 (204 bytes) */
-int FUN_00001830(cxaAtexitFn, cxaFinalizeFn)
+/* check_cxa_atexit @ 0x1830 (204 bytes) */
+int check_cxa_atexit(cxaAtexitFn, cxaFinalizeFn)
   code *cxaAtexitFn;
   code *cxaFinalizeFn;
 {
@@ -53,11 +53,11 @@ int FUN_00001830(cxaAtexitFn, cxaFinalizeFn)
   code *cxaFinalizeFnHome;
   /* issue #75 (follow-up): state (flag/arg, at Ghidra-derived stack offset -0x28) and
    * cxaAtexitFnCopy (the real __cxa_atexit pointer, at offset -0x24, i.e. exactly 4 bytes higher)
-   * were declared as two SEPARATE C locals, but FUN_000017b8 reaches cxaAtexitFnCopy purely via raw
+   * were declared as two SEPARATE C locals, but cxa_atexit_check_1 reaches cxaAtexitFnCopy purely via raw
    * pointer arithmetic on the address of state (`cxaAtexitFn[1]`, i.e. `&state + 4`) - an
    * assumption baked in from the STOCK binary's original gcc-4.0.1 stack layout, which this
    * rebuild's gcc-7 has no reason to honor. Confirmed live: gdb showed &state = 0xbffe70cc
-   * but &cxaAtexitFnCopy = 0xbffe70bc (16 bytes away, not 4) - so `cxaAtexitFn[1]` inside FUN_000017b8 was
+   * but &cxaAtexitFnCopy = 0xbffe70bc (16 bytes away, not 4) - so `cxaAtexitFn[1]` inside cxa_atexit_check_1 was
    * reading an unrelated stack slot instead of the real __cxa_atexit pointer, landing on 0 and
    * crashing with pc=0 the moment __cxa_finalize (called a few lines below) invoked it. Fixed
    * by merging the two into one real struct, so their relative layout is guaranteed regardless
@@ -69,7 +69,7 @@ int FUN_00001830(cxaAtexitFn, cxaFinalizeFn)
   cxaAtexitFnHome = cxaAtexitFn;
   cxaFinalizeFnHome = cxaFinalizeFn;
   local_2818.real_atexit_fn = cxaAtexitFn;
-  status = (*cxaAtexitFn)(FUN_000017b8,&local_2818.flag,&local_2818.flag);
+  status = (*cxaAtexitFn)(cxa_atexit_check_1,&local_2818.flag,&local_2818.flag);
   if (status == 0) {
     (*cxaFinalizeFnHome)(&local_2818.flag);
     if (local_2818.flag == 0) {
@@ -84,8 +84,8 @@ int FUN_00001830(cxaAtexitFn, cxaFinalizeFn)
   return result;
 }
 
-/* FUN_000018fc @ 0x18fc (504 bytes) */
-int FUN_000018fc()
+/* find_atexit_10_3 @ 0x18fc (504 bytes) */
+int find_atexit_10_3()
 {
   int compareResult;
   undefined4 uVar1;
@@ -144,8 +144,8 @@ int FUN_00001b14()
   return;
 }
 
-/* FUN_00001b34 @ 0x1b34 (528 bytes) */
-int FUN_00001b34()
+/* get_globals @ 0x1b34 (528 bytes) */
+int get_globals()
 {
   int libSystemHandle;
   undefined4 symbolAddress;
@@ -161,10 +161,10 @@ int FUN_00001b34()
     libSystemHandle = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
     if (libSystemHandle == 0) {
       *(undefined1 *)(atexit_globals + 3) = 1;
-      symbolAddress = ((int (*)())FUN_000018fc)();
+      symbolAddress = ((int (*)())find_atexit_10_3)();
       *(undefined4 *)(atexit_globals + 0x10) = symbolAddress;
       if ((*(int *)(atexit_globals + 0x10) != 0) &&
-         (libSystemHandle = (**(code **)(atexit_globals + 0x10))(FUN_0000228c), libSystemHandle == 0)) goto LAB_00001d08;
+         (libSystemHandle = (**(code **)(atexit_globals + 0x10))(our_atexit), libSystemHandle == 0)) goto LAB_00001d08;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -172,7 +172,7 @@ int FUN_00001b34()
       symbolAddress = _dlsym(libSystemHandle,"__cxa_finalize");
       *(undefined4 *)(atexit_globals + 0xc) = symbolAddress;
       if (((*(int *)(atexit_globals + 8) != 0) && (*(int *)(atexit_globals + 0xc) != 0)) &&
-         (checkResult = ((int (*)())FUN_00001830)(*(undefined4 *)(atexit_globals + 8),*(undefined4 *)(atexit_globals + 0xc)),
+         (checkResult = ((int (*)())check_cxa_atexit)(*(undefined4 *)(atexit_globals + 8),*(undefined4 *)(atexit_globals + 0xc)),
          checkResult != -1)) {
         if (checkResult == 0) {
           *(undefined1 *)(atexit_globals + 3) = 2;
@@ -220,7 +220,7 @@ int FUN_00001d64(param_1, param_2)
   pcStack00000018 = param_1;
   pcStack0000001c = param_2;
   pcStack_24 = param_1;
-  iVar1 = (*param_1)(FUN_000017b8,&iStack_28,&iStack_28);
+  iVar1 = (*param_1)(cxa_atexit_check_1,&iStack_28,&iStack_28);
   if (iVar1 == 0) {
     (*pcStack0000001c)(&iStack_28);
     if (iStack_28 == 0) {
@@ -308,8 +308,8 @@ int FUN_00001e04()
   return;
 }
 
-/* FUN_00001e24 @ 0x1e24 (268 bytes) */
-int FUN_00001e24(atexit_globals, routine)
+/* add_routine @ 0x1e24 (268 bytes) */
+int add_routine(atexit_globals, routine)
   int atexit_globals;
   undefined4 *routine;
 {
@@ -364,8 +364,8 @@ int FUN_00001f50(param_1)
   return;
 }
 
-/* FUN_00001f70 @ 0x1f70 (292 bytes) */
-int FUN_00001f70(atexit_globals, stopNode)
+/* run_routines @ 0x1f70 (292 bytes) */
+int run_routines(atexit_globals, stopNode)
   int atexit_globals;
   undefined4 *stopNode;
 {
@@ -432,8 +432,8 @@ int FUN_000020d4()
   return;
 }
 
-/* FUN_000020f4 @ 0x20f4 (312 bytes) */
-int FUN_000020f4(atexit_entry)
+/* cxa_atexit_wrapper @ 0x20f4 (312 bytes) */
+int cxa_atexit_wrapper(atexit_entry)
   undefined4 *atexit_entry;
 {
   undefined4 a0;
@@ -472,7 +472,7 @@ int FUN_000020f4(atexit_entry)
     atexit_globals = __keymgr_get_and_lock_processwide_ptr(0xe);
   }
   if (atexit_globals != 0) {
-    atexit_globals = ((int (*)())FUN_00001f70)(atexit_globals,savedList);
+    atexit_globals = ((int (*)())run_routines)(atexit_globals,savedList);
   }
   if (atexit_globals != 0) {
     *(undefined1 *)(atexit_globals + 2) = savedRunning;
@@ -486,7 +486,7 @@ int FUN_0000222c(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  ((int (*)())FUN_00001f70)(param_1,param_2);
+  ((int (*)())run_routines)(param_1,param_2);
   return;
 }
 
@@ -504,8 +504,8 @@ int FUN_0000226c()
   return;
 }
 
-/* FUN_0000228c @ 0x228c (188 bytes) */
-int FUN_0000228c()
+/* our_atexit @ 0x228c (188 bytes) */
+int our_atexit()
 {
   undefined1 savedRunning;
   short *atexit_globals;
@@ -515,7 +515,7 @@ int FUN_0000228c()
   if (((atexit_globals != (short *)0x0) && (*atexit_globals == 0)) && (*(char *)((int)atexit_globals + 3) == '\x01')) {
     savedRunning = *(undefined1 *)(atexit_globals + 1);
     *(undefined1 *)(atexit_globals + 1) = 1;
-    relocked = ((int (*)())FUN_00001f70)(atexit_globals,0);
+    relocked = ((int (*)())run_routines)(atexit_globals,0);
     if (relocked != 0) {
       *(undefined1 *)(relocked + 2) = savedRunning;
       __keymgr_set_and_unlock_processwide_ptr(0xe,relocked);
@@ -578,8 +578,8 @@ int FUN_00002388()
   return;
 }
 
-/* FUN_000023a8 @ 0x23a8 (672 bytes) */
-int FUN_000023a8(atexit_entry, dsoHandle)
+/* atexit_common @ 0x23a8 (672 bytes) */
+int atexit_common(atexit_entry, dsoHandle)
   undefined4 *atexit_entry;
   undefined4 dsoHandle;
 {
@@ -597,7 +597,7 @@ int FUN_000023a8(atexit_entry, dsoHandle)
   
   entryHome = atexit_entry;
   dsoHandleHome = dsoHandle;
-  atexit_globals = ((int (*)())FUN_00001b34)();
+  atexit_globals = ((int (*)())get_globals)();
   if (atexit_globals == 0) {
     result = 0xffffffff;
   }
@@ -616,7 +616,7 @@ int FUN_000023a8(atexit_entry, dsoHandle)
           *entryCopy = *entryHome;
           entryCopy[1] = uVar4;
           entryCopy[2] = uVar2;
-          result = (*registerFn)(FUN_000020f4,entryCopy,dsoHandleHome,in_r6,in_r7,in_r8,entryCopy);
+          result = (*registerFn)(cxa_atexit_wrapper,entryCopy,dsoHandleHome,in_r6,in_r7,in_r8,entryCopy);
         }
       }
       else {
@@ -646,7 +646,7 @@ int FUN_000023a8(atexit_entry, dsoHandle)
     }
   }
   else {
-    result = ((int (*)())FUN_00001e24)(atexit_globals,entryHome);
+    result = ((int (*)())add_routine)(atexit_globals,entryHome);
   }
   return result;
 }
@@ -724,10 +724,10 @@ int FUN_000026a8()
     iVar1 = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
     if (iVar1 == 0) {
       *(undefined1 *)((int)pvStack_20 + 3) = 1;
-      uVar2 = ((int (*)())FUN_000018fc)();
+      uVar2 = ((int (*)())find_atexit_10_3)();
       *(undefined4 *)((int)pvStack_20 + 0x10) = uVar2;
       if ((*(int *)((int)pvStack_20 + 0x10) != 0) &&
-         (iVar1 = (**(code **)((int)pvStack_20 + 0x10))(FUN_0000228c), iVar1 == 0))
+         (iVar1 = (**(code **)((int)pvStack_20 + 0x10))(our_atexit), iVar1 == 0))
       goto LAB_00001d08;
     }
     else {
@@ -736,7 +736,7 @@ int FUN_000026a8()
       uVar2 = _dlsym(iVar1,"__cxa_finalize");
       *(undefined4 *)((int)pvStack_20 + 0xc) = uVar2;
       if (((*(int *)((int)pvStack_20 + 8) != 0) && (*(int *)((int)pvStack_20 + 0xc) != 0)) &&
-         (iVar3 = ((int (*)())FUN_00001830)(*(undefined4 *)((int)pvStack_20 + 8),
+         (iVar3 = ((int (*)())check_cxa_atexit)(*(undefined4 *)((int)pvStack_20 + 8),
                                *(undefined4 *)((int)pvStack_20 + 0xc)), iVar3 != -1)) {
         if (iVar3 == 0) {
           *(undefined1 *)((int)pvStack_20 + 3) = 2;
@@ -761,8 +761,8 @@ LAB_00001d08:
   return pvStack_18;
 }
 
-/* FUN_000026c8 @ 0x26c8 (96 bytes) */
-int FUN_000026c8(atexit_function, argument, dsoHandle)
+/* cxa_atexit @ 0x26c8 (96 bytes) */
+int cxa_atexit(atexit_function, argument, dsoHandle)
   undefined4 atexit_function;
   undefined4 argument;
   undefined4 dsoHandle;
@@ -781,7 +781,7 @@ int FUN_000026c8(atexit_function, argument, dsoHandle)
   uStack00000020 = dsoHandle;
   entryFunction = atexit_function;
   entryArgument = argument;
-  result = ((int (*)())FUN_000023a8)(&entryFunction,dsoHandle);
+  result = ((int (*)())atexit_common)(&entryFunction,dsoHandle);
   return result;
 }
 
@@ -801,7 +801,7 @@ int FUN_00002728(param_1, param_2)
   
   puStack00000018 = param_1;
   uStack0000001c = param_2;
-  iVar3 = ((int (*)())FUN_00001b34)();
+  iVar3 = ((int (*)())get_globals)();
   if (iVar3 == 0) {
     uStack_18 = 0xffffffff;
   }
@@ -820,7 +820,7 @@ int FUN_00002728(param_1, param_2)
           *allocation = *puStack00000018;
           allocation[1] = uVar5;
           allocation[2] = uVar2;
-          uStack_18 = (*pcVar1)(FUN_000020f4,allocation,uStack0000001c);
+          uStack_18 = (*pcVar1)(cxa_atexit_wrapper,allocation,uStack0000001c);
         }
       }
       else {
@@ -849,13 +849,13 @@ int FUN_00002728(param_1, param_2)
     }
   }
   else {
-    uStack_18 = ((int (*)())FUN_00001e24)(iVar3,puStack00000018);
+    uStack_18 = ((int (*)())add_routine)(iVar3,puStack00000018);
   }
   return uStack_18;
 }
 
-/* FUN_00002748 @ 0x2748 (92 bytes) */
-int FUN_00002748(atexit_function)
+/* atexit @ 0x2748 (92 bytes) */
+int atexit(atexit_function)
   undefined4 atexit_function;
 {
   undefined4 result;
@@ -866,7 +866,7 @@ int FUN_00002748(atexit_function)
   entryKind = 0;
   uStack00000018 = atexit_function;
   entryFunction = atexit_function;
-  result = ((int (*)())FUN_000023a8)(&entryFunction,PTR_001e88a8);
+  result = ((int (*)())atexit_common)(&entryFunction,PTR_001e88a8);
   return result;
 }
 
@@ -886,7 +886,7 @@ int FUN_000027a4(param_1, param_2)
   
   puStack00000018 = param_1;
   uStack0000001c = param_2;
-  iVar3 = ((int (*)())FUN_00001b34)();
+  iVar3 = ((int (*)())get_globals)();
   if (iVar3 == 0) {
     uStack_18 = 0xffffffff;
   }
@@ -905,7 +905,7 @@ int FUN_000027a4(param_1, param_2)
           *allocation = *puStack00000018;
           allocation[1] = uVar5;
           allocation[2] = uVar2;
-          uStack_18 = (*pcVar1)(FUN_000020f4,allocation,uStack0000001c);
+          uStack_18 = (*pcVar1)(cxa_atexit_wrapper,allocation,uStack0000001c);
         }
       }
       else {
@@ -934,7 +934,7 @@ int FUN_000027a4(param_1, param_2)
     }
   }
   else {
-    uStack_18 = ((int (*)())FUN_00001e24)(iVar3,puStack00000018);
+    uStack_18 = ((int (*)())add_routine)(iVar3,puStack00000018);
   }
   return uStack_18;
 }
@@ -1082,8 +1082,8 @@ int FUN_000027d0(param_1, param_2)
   return;
 }
 
-/* FUN_00002ae0 @ 0x2ae0 (88 bytes) */
-void FUN_00002ae0(int glContext,undefined4 op,double value)
+/* glAccum_impl @ 0x2ae0 (88 bytes) */
+void glAccum_impl(int glContext,undefined4 op,double value)
 {
   float fVar1;
   float fVar2;
@@ -2840,8 +2840,8 @@ int _gldCreateBuffer(ctx, bufferOut, initialWord0, initialWord1)
   return 0;
 }
 
-/* FUN_00005db0 @ 0x5db0 (244 bytes) */
-int FUN_00005db0(ctx, buffer)
+/* gld_waitBufferStamp @ 0x5db0 (244 bytes) */
+int gld_waitBufferStamp(ctx, buffer)
   int ctx;
   int buffer;
 {
@@ -2854,7 +2854,7 @@ int FUN_00005db0(ctx, buffer)
       if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 8));
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         pluginRecord = pluginRecord + 8;
@@ -2867,7 +2867,7 @@ LAB_00005e6c:
       if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 0xc));
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         pluginRecord = pluginRecord + 0xc;
@@ -2891,14 +2891,14 @@ int FUN_00005eb0(ctx, buffer)
       if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 8));
       return retired;
     }
     if (*(char *)(pluginRecord + 0x16) == '\a') {
       if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 0xc));
       return retired;
     }
   }
@@ -2994,7 +2994,7 @@ int _gldFinishMemoryPluginData(ctx, pluginData)
     _gldFlush(ctx);
   }
   if (*(char *)(pluginRecord + 0x16) == '\x06') {
-    busy = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
+    busy = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 8));
     if (busy != 0) {
       return;
     }
@@ -3005,7 +3005,7 @@ int _gldFinishMemoryPluginData(ctx, pluginData)
     if (*(char *)(pluginRecord + 0x16) != '\a') {
       return;
     }
-    busy = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
+    busy = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 0xc));
     if (busy != 0) {
       return;
     }
@@ -3031,14 +3031,14 @@ LAB_00006230:
   else {
     if (*(char *)(pluginRecord + 0x16) == '\x06') {
       if (*(int *)(pluginRecord + 0x10) < 0x20000) {
-        isComplete = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
+        isComplete = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 8));
         return isComplete;
       }
     }
     else {
       if (*(char *)(pluginRecord + 0x16) != '\a') goto LAB_00006230;
       if (*(int *)(pluginRecord + 0x10) < 0x20000) {
-        isComplete = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
+        isComplete = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 0xc));
         return isComplete;
       }
     }
@@ -3106,7 +3106,7 @@ int _gldReclaimBuffer(ctx, buffer)
       if ((0x1ffff < (int)*(uint *)(pluginRecord + 0x10)) || ((*(uint *)(pluginRecord + 0x10) & 0xffff) != 0)) {
         _gldFlush(ctx);
       }
-      ((int (*)())FUN_00005db0)(ctx,buffer);
+      ((int (*)())gld_waitBufferStamp)(ctx,buffer);
       pluginData = (int *)(pluginRecord + 0x10);
       do {
         oldRefCount = *pluginData;
@@ -3139,8 +3139,8 @@ int _gldDestroyBuffer(ctx, buffer)
   return 0;
 }
 
-/* FUN_00006470 @ 0x6470 (312 bytes) */
-int FUN_00006470(param_1, param_2, param_3, param_4, param_5)
+/* gld_setBufferAgpRefBacking @ 0x6470 (312 bytes) */
+int gld_setBufferAgpRefBacking(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -3207,8 +3207,8 @@ int FUN_00006470(param_1, param_2, param_3, param_4, param_5)
   return uVar4;
 }
 
-/* FUN_000065b0 @ 0x65b0 (328 bytes) */
-int FUN_000065b0(param_1, param_2, param_3, param_4, param_5, param_6)
+/* gld_setBufferNewTextureBacking @ 0x65b0 (328 bytes) */
+int gld_setBufferNewTextureBacking(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -3549,9 +3549,9 @@ LAB_00006798:
                 else {
                   *(undefined4 *)(stateBlock + 0x94) = 1;
                 }
-                FUN_00017750(ctx,stateBlock,pixelFormat);
+                gld_fillCapsBlock(ctx,stateBlock,pixelFormat);
                 _memcpy(ctx + GLD_stateCopy / 4,stateBlock + 0x24,0x3c);
-                FUN_0002c790(ctx,pixelFormat);
+                gld_initContextHardwareState(ctx,pixelFormat);
                 *contextOut = (int)ctx;
                 return 0;
               }
@@ -3641,4 +3641,4 @@ int _gldCreateShared(sharedOut)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00002ae0");
-asm(".set FUN_00002ae0, _FUN_00002ae0");
+asm(".set FUN_00002ae0, _glAccum_impl");

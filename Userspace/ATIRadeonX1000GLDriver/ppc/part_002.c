@@ -406,8 +406,8 @@ int FUN_0000a9f0(param_1, param_2)
   return uVar5;
 }
 
-/* FUN_0000aaf0 @ 0xaaf0 (244 bytes) */
-int FUN_0000aaf0(ctx, texture)
+/* gld_waitTextureStamp @ 0xaaf0 (244 bytes) */
+int gld_waitTextureStamp(ctx, texture)
   int ctx;
   int texture;
 {
@@ -421,7 +421,7 @@ int FUN_0000aaf0(ctx, texture)
       if (0x1ffff < *(int *)(resident + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 8));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(resident + 8));
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         resident = resident + 8;
@@ -434,7 +434,7 @@ LAB_0000abac:
       if (0x1ffff < *(int *)(resident + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 0xc));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(resident + 0xc));
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         resident = resident + 0xc;
@@ -459,22 +459,22 @@ int FUN_0000abf0(ctx, texture)
       if (0x1ffff < *(int *)(resident + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 8));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(resident + 8));
       return retired;
     }
     if (*(char *)(resident + 0x16) == '\a') {
       if (0x1ffff < *(int *)(resident + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 0xc));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(resident + 0xc));
       return retired;
     }
   }
   return 1;
 }
 
-/* FUN_0000acb0 @ 0xacb0 (568 bytes) */
-int FUN_0000acb0(param_1, param_2, param_3, param_4)
+/* gld_ensureTextureBackingSized2 @ 0xacb0 (568 bytes) */
+int gld_ensureTextureBackingSized2(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 *param_2;
   int param_3;
@@ -546,7 +546,7 @@ LAB_0000adc0:
     uVar6 = (uint)*(byte *)(iVar9 + 0x6c);
     if (uVar6 == 0) {
 LAB_0000ad38:
-      iVar9 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar10 + 0xc));
+      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
       if (iVar9 == 0) goto LAB_0000adc0;
     }
     else {
@@ -569,7 +569,7 @@ LAB_0000ad38:
           in_cr0 = bVar1 << 1;
         } while (bVar1);
       }
-      iVar9 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar10 + 0xc));
+      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
       if (iVar9 == 0) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar10 + 0xc,1,0,0);
       }
@@ -580,8 +580,8 @@ LAB_0000ad38:
   return uVar8;
 }
 
-/* FUN_0000aef4 @ 0xaef4 (580 bytes) */
-int FUN_0000aef4(param_1, param_2, param_3)
+/* gld_ensureTextureAgpRefBacking @ 0xaef4 (580 bytes) */
+int gld_ensureTextureAgpRefBacking(param_1, param_2, param_3)
   int param_1;
   undefined4 *param_2;
   int param_3;
@@ -653,7 +653,7 @@ LAB_0000b010:
     uVar6 = (uint)*(byte *)(iVar9 + 0x6c);
     if (uVar6 == 0) {
 LAB_0000af80:
-      iVar9 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar10 + 8));
+      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
       if (iVar9 == 0) goto LAB_0000b010;
     }
     else {
@@ -676,7 +676,7 @@ LAB_0000af80:
           in_cr0 = bVar1 << 1;
         } while (bVar1);
       }
-      iVar9 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar10 + 8));
+      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
       if (iVar9 == 0) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar10 + 8,1,0,0);
       }
@@ -687,8 +687,8 @@ LAB_0000af80:
   return uVar8;
 }
 
-/* FUN_0000b150 @ 0xb150 (280 bytes) */
-int FUN_0000b150(param_1, param_2, param_3, param_4, param_5)
+/* gld_setTextureAgpRefBacking @ 0xb150 (280 bytes) */
+int gld_setTextureAgpRefBacking(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 *param_2;
   undefined4 param_3;
@@ -750,8 +750,8 @@ int FUN_0000b150(param_1, param_2, param_3, param_4, param_5)
   return uVar4;
 }
 
-/* FUN_0000b270 @ 0xb270 (296 bytes) */
-int FUN_0000b270(param_1, param_2, param_3, param_4, param_5, param_6)
+/* gld_setTextureNewTextureBacking @ 0xb270 (296 bytes) */
+int gld_setTextureNewTextureBacking(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 *param_2;
   undefined4 param_3;
@@ -816,8 +816,8 @@ int FUN_0000b270(param_1, param_2, param_3, param_4, param_5, param_6)
   return uVar4;
 }
 
-/* FUN_0000b3a0 @ 0xb3a0 (332 bytes) */
-int FUN_0000b3a0(param_1, param_2, param_3, param_4, param_5)
+/* gld_ensureTextureSurfaceBacking @ 0xb3a0 (332 bytes) */
+int gld_ensureTextureSurfaceBacking(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 *param_2;
   int param_3;
@@ -876,8 +876,8 @@ int FUN_0000b3a0(param_1, param_2, param_3, param_4, param_5)
   return uVar2;
 }
 
-/* FUN_0000b4f0 @ 0xb4f0 (292 bytes) */
-int FUN_0000b4f0(param_1, param_2, param_3)
+/* gld_ensureTextureGlobalBacking @ 0xb4f0 (292 bytes) */
+int gld_ensureTextureGlobalBacking(param_1, param_2, param_3)
   int param_1;
   undefined4 *param_2;
   int param_3;
@@ -1052,14 +1052,14 @@ joined_r0x0000b814:
 LAB_0000b830:
   *(int **)(ctx + GLD_currentVertexArray) = vertexArray;
   if ((previousArray != 0) && (vertexArray == (int *)0x0)) {
-    FUN_0001dff0(ctx);
+    gld_startPacket(ctx);
     return;
   }
   return;
 }
 
-/* FUN_0000b880 @ 0xb880 (244 bytes) */
-int FUN_0000b880(ctx, vertexArray)
+/* gld_waitVertexArrayStamp @ 0xb880 (244 bytes) */
+int gld_waitVertexArrayStamp(ctx, vertexArray)
   int ctx;
   int vertexArray;
 {
@@ -1073,7 +1073,7 @@ int FUN_0000b880(ctx, vertexArray)
       if (0x1ffff < *(int *)(backing + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 8));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(backing + 8));
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         backing = backing + 8;
@@ -1086,7 +1086,7 @@ LAB_0000b93c:
       if (0x1ffff < *(int *)(backing + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 0xc));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(backing + 0xc));
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         backing = backing + 0xc;
@@ -1111,14 +1111,14 @@ int FUN_0000b980(ctx, vertexArray)
       if (0x1ffff < *(int *)(backing + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 8));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(backing + 8));
       return retired;
     }
     if (*(char *)(backing + 0x16) == '\a') {
       if (0x1ffff < *(int *)(backing + 0x10)) {
         _gldFlush(ctx);
       }
-      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 0xc));
+      retired = gld_isStampRetired(ctx,*(undefined4 *)(backing + 0xc));
       return retired;
     }
   }
@@ -1184,14 +1184,14 @@ int _gldReclaimVertexArray(ctx, vertexArray)
   
   if (*(int *)(ctx + GLD_currentVertexArray) == vertexArray) {
     *(undefined4 *)(ctx + GLD_currentVertexArray) = 0;
-    FUN_0001dff0(ctx);
+    gld_startPacket(ctx);
   }
   backing = *(int *)(vertexArray + 0x228);
   if (backing != 0) {
     if ((0x1ffff < (int)*(uint *)(backing + 0x10)) || ((*(uint *)(backing + 0x10) & 0xffff) != 0)) {
       _gldFlush(ctx);
     }
-    ((int (*)())FUN_0000b880)(ctx,vertexArray);
+    ((int (*)())gld_waitVertexArrayStamp)(ctx,vertexArray);
     refCountSlot = (int *)(backing + 0x10);
     do {
       oldRefCount = *refCountSlot;
@@ -1219,8 +1219,8 @@ int _gldDestroyVertexArray(ctx, vertexArray)
   return 0;
 }
 
-/* FUN_0000bc60 @ 0xbc60 (248 bytes) */
-int FUN_0000bc60(param_1, param_2, param_3, param_4, param_5)
+/* gld_setVertexArrayAgpRefBacking @ 0xbc60 (248 bytes) */
+int gld_setVertexArrayAgpRefBacking(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1279,8 +1279,8 @@ int FUN_0000bc60(param_1, param_2, param_3, param_4, param_5)
   return uVar4;
 }
 
-/* FUN_0000bd60 @ 0xbd60 (264 bytes) */
-int FUN_0000bd60(param_1, param_2, param_3, param_4, param_5, param_6)
+/* gld_setVertexArrayNewTextureBacking @ 0xbd60 (264 bytes) */
+int gld_setVertexArrayNewTextureBacking(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -7686,7 +7686,7 @@ LAB_000161a0:
             labelTarget = (char *)branchTargets[labelSearchIndex];
           }
         }
-        emitLength3 = FUN_001a32d0(lineCursor + (int)indentLength,"label_%i",labelSearchIndex,argReg6,argReg7,argReg8,srcCursor,
+        emitLength3 = printf_LDBLStub_1a32d0(lineCursor + (int)indentLength,"label_%i",labelSearchIndex,argReg6,argReg7,argReg8,srcCursor,
                               argReg10);
         lineCursor = lineCursor + (int)indentLength + emitLength3;
         if (opcode != 0x4b) goto switchD_000146d8_caseD_4d;
@@ -8140,7 +8140,7 @@ LAB_00014cb8:
         case 0x69:
         case 0x6a:
         case 0x6b:
-          emitLength3 = FUN_001a32d0(lineCursor,"    # Target: %d",branchWord & 0x3ffff,argReg6,argReg7,argReg8,
+          emitLength3 = printf_LDBLStub_1a32d0(lineCursor,"    # Target: %d",branchWord & 0x3ffff,argReg6,argReg7,argReg8,
                                 (opcode - 0x4b) * 4,argReg10);
           lineCursor = lineCursor + emitLength3;
         }
@@ -8266,8 +8266,8 @@ LAB_00016630:
   return 0;
 }
 
-/* FUN_00016670 @ 0x16670 (2312 bytes) */
-void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,undefined4 param_6,int bitmap,int tightlyPacked,double xOrigin,double yOrigin)
+/* glBitmap_impl @ 0x16670 (2312 bytes) */
+void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 param_5,undefined4 param_6,int bitmap,int tightlyPacked,double xOrigin,double yOrigin)
 {
   uint lsbBit;
   int rowBytesLeft;
@@ -8439,7 +8439,7 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
     }
     packetStart = *(float **)(ctx + GLD_writeCursor);
     if (*(float **)(ctx + GLD_ringLimit) <= packetStart + 2) {
-      FUN_0001a0f0(ctx,0x1000000);
+      gld_submitRing(ctx,0x1000000);
       packetStart = *(float **)(ctx + GLD_writeCursor);
       uVar11 = extraout_r4_01;
     }
@@ -8450,7 +8450,7 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
       packetStart = *(float **)(ctx + GLD_writeCursor);
     }
     if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)packetStart + packetBytesTotal + 0x10)) {
-      FUN_0001a0f0(ctx,0x1000000);
+      gld_submitRing(ctx,0x1000000);
       packetStart = *(float **)(ctx + GLD_writeCursor);
       uVar11 = extraout_r4_02;
     }
@@ -8497,7 +8497,7 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
                 }
                 if (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)vertexCursor + packetBytes + 0x10)) {
                   savedTrailerOffset = trailerOffset;
-                  FUN_0001a0f0(ctx,0x1000000);
+                  gld_submitRing(ctx,0x1000000);
                   uVar11 = extraout_r4_03;
                   trailerOffset = savedTrailerOffset;
                 }
@@ -8505,7 +8505,7 @@ void FUN_00016670(int ctx,float *vertex,int width,int height,undefined4 param_5,
                 if ((vertexCursor != packetStart) &&
                    (*(uint *)(ctx + GLD_ringLimit) <= (uint)((int)packetStart + packetBytes + 0x10))) {
                   savedTrailerOffset = trailerOffset;
-                  FUN_0001a0f0(ctx,0x1000000);
+                  gld_submitRing(ctx,0x1000000);
                   packetStart = *(float **)(ctx + GLD_writeCursor);
                   uVar11 = extraout_r4_04;
                   trailerOffset = savedTrailerOffset;
@@ -8627,7 +8627,7 @@ LAB_00016a6c:
     *(float **)(ctx + GLD_writeCursor) = vertexCursor;
     if (*(float **)(ctx + GLD_ringLimit) <= vertexCursor + 2) {
       savedTrailerOffset = trailerOffset;
-      FUN_0001a0f0(ctx,0x1000000);
+      gld_submitRing(ctx,0x1000000);
       uVar11 = extraout_r4_05;
       trailerOffset = savedTrailerOffset;
     }
@@ -8642,8 +8642,8 @@ LAB_00016a6c:
   return;
 }
 
-/* FUN_00016fc0 @ 0x16fc0 (272 bytes) */
-int FUN_00016fc0(bufferEnum, drawableFlags)
+/* gld_bufferEnumToIndex @ 0x16fc0 (272 bytes) */
+int gld_bufferEnumToIndex(bufferEnum, drawableFlags)
   uint bufferEnum;
   uint drawableFlags;
 {
@@ -8791,7 +8791,7 @@ int FUN_00017260(ctx)
   
   framebuffer = *(int **)(ctx + GLD_boundFramebuffer);
   if (framebuffer == (int *)0x0) {
-    formatByte = FUN_0002f410(*(undefined4 *)(ctx + GLD_renderFlags));
+    formatByte = window_mode_to_ati_format(*(undefined4 *)(ctx + GLD_renderFlags));
     ((unsigned char *)GLD_colorFormatIndex)[ctx] = formatByte;
   }
   else {
@@ -8832,7 +8832,7 @@ int FUN_00017310(param_1, param_2, param_3)
     if (param_2 == 0x132) {
       puVar4 = *(undefined4 **)(param_1 + 0x1dc);
       if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 4) {
-        FUN_0001a0f0(param_1,0x1000000);
+        gld_submitRing(param_1,0x1000000);
         puVar4 = *(undefined4 **)(param_1 + 0x1dc);
       }
       puVar6 = *(uint **)(param_1 + 0x1d8);
@@ -8850,7 +8850,7 @@ int FUN_00017310(param_1, param_2, param_3)
         if (param_2 == 300) {
           puVar4 = *(undefined4 **)(param_1 + 0x1dc);
           if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 6) {
-            FUN_0001a0f0(param_1,0x1000000);
+            gld_submitRing(param_1,0x1000000);
             puVar4 = *(undefined4 **)(param_1 + 0x1dc);
           }
           *(undefined4 **)(param_1 + 0x1dc) = puVar4 + 6;
@@ -8873,7 +8873,7 @@ int FUN_00017310(param_1, param_2, param_3)
         }
         if (param_2 == 0x29b) {
           if (*(uint *)(param_1 + 0x1e0) <= *(int *)(param_1 + 0x1dc) + 0x60U) {
-            FUN_0001a0f0(param_1,0x1000000);
+            gld_submitRing(param_1,0x1000000);
           }
           iVar5 = *(int *)(param_1 + 500);
           uVar3 = *(uint *)(param_1 + 0x1f8);
@@ -8883,7 +8883,7 @@ int FUN_00017310(param_1, param_2, param_3)
             *(uint *)(param_1 + 0x204) = uVar3;
             if (2 < uVar3) {
               if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-                FUN_0001a0f0(param_1,0x1000000);
+                gld_submitRing(param_1,0x1000000);
                 iVar5 = *(int *)(param_1 + 500);
               }
               *(undefined4 *)(param_1 + 0x204) = 1;
@@ -8907,7 +8907,7 @@ int FUN_00017310(param_1, param_2, param_3)
             *(uint *)(param_1 + 0x204) = uVar3;
             if (2 < uVar3) {
               if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-                FUN_0001a0f0(param_1,0x1000000);
+                gld_submitRing(param_1,0x1000000);
                 iVar5 = *(int *)(param_1 + 500);
               }
               *(undefined4 *)(param_1 + 0x204) = 1;
@@ -8931,7 +8931,7 @@ int FUN_00017310(param_1, param_2, param_3)
           *(uint *)(param_1 + 0x204) = uVar3;
           if (2 < uVar3) {
             if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-              FUN_0001a0f0(param_1,0x1000000);
+              gld_submitRing(param_1,0x1000000);
               iVar5 = *(int *)(param_1 + 500);
             }
             *(undefined4 *)(param_1 + 0x204) = 1;
@@ -8961,12 +8961,12 @@ int FUN_00017720(rendererIndex)
 {
   uint uVar1;
   
-  uVar1 = FUN_00039100(rendererIndex);
+  uVar1 = gld_testRendererAvailable(rendererIndex);
   return uVar1 | 0x1900;
 }
 
-/* FUN_00017750 @ 0x17750 (748 bytes) */
-int FUN_00017750(param_1, param_2, param_3)
+/* gld_fillCapsBlock @ 0x17750 (748 bytes) */
+int gld_fillCapsBlock(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 *param_2;
   int param_3;
@@ -9268,7 +9268,7 @@ int FUN_00017ee0()
   undefined1 auStack_48 [52];
   
   uVar2 = _getpid();
-  FUN_001a32d0(auStack_48,"ps -wwp %d\n",uVar2,in_r6,in_r7,in_r8,in_r9,in_r10);
+  printf_LDBLStub_1a32d0(auStack_48,"ps -wwp %d\n",uVar2,in_r6,in_r7,in_r8,in_r9,in_r10);
   iVar3 = _popen(auStack_48,"r");
   if (iVar3 == 0) {
     _puts("  failed to compute application path");
@@ -9303,7 +9303,7 @@ int FUN_00017ee0()
         } while (iVar8 != 0);
       }
       _strlcpy(allocation2,puVar6,iVar7);
-      FUN_001a337c("  application path | %s\n",puVar6,iVar7,in_r6,in_r7,in_r8,in_r9,in_r10);
+      printf_LDBLStub_1a337c("  application path | %s\n",puVar6,iVar7,in_r6,in_r7,in_r8,in_r9,in_r10);
     }
     _pclose(iVar3);
     if (allocation != 0) {
@@ -10088,7 +10088,7 @@ LAB_00018700:
         puVar30[0xc6] = (uint)((unsigned char *)0x000013ccU);
         puVar30[0xc1] = 0x113c8;
         *(uint **)(param_1 + 0x298c) = puVar30 + 0xca;
-        /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64). */
+        /* dropped 2nd arg, same defect class as gld_startPacket (issue #64). */
         (**(code **)(param_1 + 0x299c))(iVar34,puVar30 + 0xca);
         return;
       }
@@ -10130,7 +10130,7 @@ LAB_00018700:
     iVar34 = _malloc(iVar34 * param_6);
     if (iVar34 != 0) {
       FUN_00029290(param_1,param_3,param_4,param_5,param_6,uVar32,puVar42,iVar34,2,0);
-      ((int (*)())FUN_000199a0)(param_1,param_2,param_5,param_6,uVar32,puVar42,iVar34,1,0);
+      ((int (*)())gld_drawPixelsDispatch)(param_1,param_2,param_5,param_6,uVar32,puVar42,iVar34,1,0);
                     
                     
       (*(code *)PTR_FUN_001e8754)(iVar34);
@@ -10140,8 +10140,8 @@ LAB_00018700:
   return;
 }
 
-/* FUN_00018a40 @ 0x18a40 (3636 bytes) */
-int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, rawTransfer, transferMode)
+/* glDrawPixels_impl @ 0x18a40 (3636 bytes) */
+int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, rawTransfer, transferMode)
   int ctx;
   float *rasterPos;
   uint width;
@@ -10781,12 +10781,12 @@ int FUN_000198b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   }
   fStack_124 = (float)((double)CONCAT44(0x43300000,uVar1) - DOUBLE_001aa1e0);
   uStack_120 = 0;
-  ((int (*)())FUN_00018a40)(param_1,&fStack_128,param_4,param_5,0x80e1,param_6,param_7,1,1);
+  ((int (*)())glDrawPixels_impl)(param_1,&fStack_128,param_4,param_5,0x80e1,param_6,param_7,1,1);
   return;
 }
 
-/* FUN_000199a0 @ 0x199a0 (68 bytes) */
-int FUN_000199a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+/* gld_drawPixelsDispatch @ 0x199a0 (68 bytes) */
+int gld_drawPixelsDispatch(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -10800,11 +10800,11 @@ int FUN_000199a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uVar1;
   
   if (param_9 == 0) {
-    ((int (*)())FUN_00018a40)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,0);
+    ((int (*)())glDrawPixels_impl)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,0);
     uVar1 = 1;
   }
   else {
-    uVar1 = FUN_0002a3d0(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
+    uVar1 = gld_drawPixelsFromClientSurface(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
   }
   return uVar1;
 }
@@ -10819,7 +10819,7 @@ int FUN_000199f0(param_1, param_2)
   undefined4 uVar3;
   
   if (param_1 != 0) {
-    iVar2 = ((int (*)())FUN_00016fc0)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
+    iVar2 = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
                          *(undefined4 *)(param_1 + 0x154));
     uVar1 = *(uint *)(param_1 + 0x154);
     if (((((uVar1 & 0x20) == 0) && (((uVar1 & 0x10) != 0 || ((uVar1 & 0x400) == 0)))) ||
@@ -10848,7 +10848,7 @@ int FUN_00019ad0(param_1, param_2)
   if (param_1 == 0) {
     return;
   }
-  iVar2 = ((int (*)())FUN_00016fc0)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
+  iVar2 = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
                        *(undefined4 *)(param_1 + 0x154));
   uVar1 = *(uint *)(param_1 + 0x154);
   if (((((uVar1 & 0x20) == 0) && (((uVar1 & 0x10) != 0 || ((uVar1 & 0x400) == 0)))) ||
@@ -10900,8 +10900,8 @@ LAB_00019be0:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00016670");
-asm(".set FUN_00016670, _FUN_00016670");
+asm(".set FUN_00016670, _glBitmap_impl");
 asm(".globl FUN_00018120");
 asm(".set FUN_00018120, _FUN_00018120");
 asm(".globl FUN_000199a0");
-asm(".set FUN_000199a0, _FUN_000199a0");
+asm(".set FUN_000199a0, _gld_drawPixelsDispatch");

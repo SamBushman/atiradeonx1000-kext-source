@@ -1019,8 +1019,8 @@ int FUN_001a327c()
   return;
 }
 
-/* FUN_001a32d0 @ 0x1a32d0 (172 bytes) */
-int FUN_001a32d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* printf_LDBLStub_1a32d0 @ 0x1a32d0 (172 bytes) */
+int printf_LDBLStub_1a32d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1033,7 +1033,7 @@ int FUN_001a32d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uVar1;
   
   if (DAT_001fc1d4 == (code *)0x0) {
-    DAT_001fc1d4 = (code *)((int (*)())FUN_001a3580)("sprintf");
+    DAT_001fc1d4 = (code *)((int (*)())stub_getrealaddr)("sprintf");
   }
                     
                     
@@ -1041,8 +1041,8 @@ int FUN_001a32d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return uVar1;
 }
 
-/* FUN_001a337c @ 0x1a337c (172 bytes) */
-int FUN_001a337c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* printf_LDBLStub_1a337c @ 0x1a337c (172 bytes) */
+int printf_LDBLStub_1a337c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1053,7 +1053,7 @@ int FUN_001a337c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_8;
 {
   if (DAT_001fc1d8 == (code *)0x0) {
-    DAT_001fc1d8 = (code *)((int (*)())FUN_001a3580)("printf");
+    DAT_001fc1d8 = (code *)((int (*)())stub_getrealaddr)("printf");
   }
                     
                     
@@ -1061,8 +1061,8 @@ int FUN_001a337c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_001a3428 @ 0x1a3428 (172 bytes) */
-int FUN_001a3428(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* printf_LDBLStub_1a3428 @ 0x1a3428 (172 bytes) */
+int printf_LDBLStub_1a3428(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1073,7 +1073,7 @@ int FUN_001a3428(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_8;
 {
   if (DAT_001fc1dc == (code *)0x0) {
-    DAT_001fc1dc = (code *)((int (*)())FUN_001a3580)("vsnprintf");
+    DAT_001fc1dc = (code *)((int (*)())stub_getrealaddr)("vsnprintf");
   }
                     
                     
@@ -1081,8 +1081,8 @@ int FUN_001a3428(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_001a34d4 @ 0x1a34d4 (172 bytes) */
-int FUN_001a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* printf_LDBLStub_1a34d4 @ 0x1a34d4 (172 bytes) */
+int printf_LDBLStub_1a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1093,7 +1093,7 @@ int FUN_001a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_8;
 {
   if (DAT_001fc1e0 == (code *)0x0) {
-    DAT_001fc1e0 = (code *)((int (*)())FUN_001a3580)("vsprintf");
+    DAT_001fc1e0 = (code *)((int (*)())stub_getrealaddr)("vsprintf");
   }
                     
                     
@@ -1101,8 +1101,8 @@ int FUN_001a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_001a3580 @ 0x1a3580 (164 bytes) */
-int FUN_001a3580(param_1)
+/* stub_getrealaddr @ 0x1a3580 (164 bytes) */
+int stub_getrealaddr(param_1)
   undefined4 param_1;
 {
   int length;

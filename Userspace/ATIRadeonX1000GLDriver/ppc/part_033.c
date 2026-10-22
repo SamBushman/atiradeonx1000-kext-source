@@ -1,420 +1,420 @@
 #include "decls.h"
 
-/* FUN_00113ac0 @ 0x113ac0 (40 bytes) */
-int FUN_00113ac0()
+/* IrAllocMem__opcodeInfo_atexit_dtor_op148 @ 0x113ac0 (40 bytes) */
+int IrAllocMem__opcodeInfo_atexit_dtor_op148()
 {
   DAT_001fb2fc = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113ae8 @ 0x113ae8 (40 bytes) */
-int FUN_00113ae8()
+/* IrAllocPos__opcodeInfo_atexit_dtor_op147 @ 0x113ae8 (40 bytes) */
+int IrAllocPos__opcodeInfo_atexit_dtor_op147()
 {
   DAT_001fb310 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113b10 @ 0x113b10 (40 bytes) */
-int FUN_00113b10()
+/* IrEndMakeCall__opcodeInfo_atexit_dtor_op146 @ 0x113b10 (40 bytes) */
+int IrEndMakeCall__opcodeInfo_atexit_dtor_op146()
 {
   DAT_001fb324 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113b38 @ 0x113b38 (40 bytes) */
-int FUN_00113b38()
+/* IrEndCall__opcodeInfo_atexit_dtor_op145 @ 0x113b38 (40 bytes) */
+int IrEndCall__opcodeInfo_atexit_dtor_op145()
 {
   DAT_001fb338 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113b60 @ 0x113b60 (40 bytes) */
-int FUN_00113b60()
+/* IrStartMakeCall__opcodeInfo_atexit_dtor_op144 @ 0x113b60 (40 bytes) */
+int IrStartMakeCall__opcodeInfo_atexit_dtor_op144()
 {
   DAT_001fb34c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113b88 @ 0x113b88 (40 bytes) */
-int FUN_00113b88()
+/* IrStartCallRoutine__opcodeInfo_atexit_dtor_op143 @ 0x113b88 (40 bytes) */
+int IrStartCallRoutine__opcodeInfo_atexit_dtor_op143()
 {
   DAT_001fb360 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113bb0 @ 0x113bb0 (40 bytes) */
-int FUN_00113bb0()
+/* IrPhi__opcodeInfo_atexit_dtor_op142 @ 0x113bb0 (40 bytes) */
+int IrPhi__opcodeInfo_atexit_dtor_op142()
 {
   DAT_001fb374 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113bd8 @ 0x113bd8 (40 bytes) */
-int FUN_00113bd8()
+/* IrCmp1S__opcodeInfo_atexit_dtor_op141 @ 0x113bd8 (40 bytes) */
+int IrCmp1S__opcodeInfo_atexit_dtor_op141()
 {
   DAT_001fb388 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113c00 @ 0x113c00 (40 bytes) */
-int FUN_00113c00()
+/* IrCmp1D__opcodeInfo_atexit_dtor_op140 @ 0x113c00 (40 bytes) */
+int IrCmp1D__opcodeInfo_atexit_dtor_op140()
 {
   DAT_001fb39c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113c28 @ 0x113c28 (40 bytes) */
-int FUN_00113c28()
+/* IrCmp2__opcodeInfo_atexit_dtor_op139 @ 0x113c28 (40 bytes) */
+int IrCmp2__opcodeInfo_atexit_dtor_op139()
 {
   DAT_001fb3b0 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113c50 @ 0x113c50 (40 bytes) */
-int FUN_00113c50()
+/* IrEpilog__opcodeInfo_atexit_dtor_op138 @ 0x113c50 (40 bytes) */
+int IrEpilog__opcodeInfo_atexit_dtor_op138()
 {
   DAT_001fb3c4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113c78 @ 0x113c78 (40 bytes) */
-int FUN_00113c78()
+/* IrProlog__opcodeInfo_atexit_dtor_op137 @ 0x113c78 (40 bytes) */
+int IrProlog__opcodeInfo_atexit_dtor_op137()
 {
   DAT_001fb3d8 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113ca0 @ 0x113ca0 (40 bytes) */
-int FUN_00113ca0()
+/* IrExit__opcodeInfo_atexit_dtor_op136 @ 0x113ca0 (40 bytes) */
+int IrExit__opcodeInfo_atexit_dtor_op136()
 {
   DAT_001fb3ec = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113cc8 @ 0x113cc8 (40 bytes) */
-int FUN_00113cc8()
+/* IrEntry__opcodeInfo_atexit_dtor_op135 @ 0x113cc8 (40 bytes) */
+int IrEntry__opcodeInfo_atexit_dtor_op135()
 {
   DAT_001fb400 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113cf0 @ 0x113cf0 (40 bytes) */
-int FUN_00113cf0()
+/* IrHeader__opcodeInfo_atexit_dtor_op134 @ 0x113cf0 (40 bytes) */
+int IrHeader__opcodeInfo_atexit_dtor_op134()
 {
   DAT_001fb414 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113d18 @ 0x113d18 (40 bytes) */
-int FUN_00113d18()
+/* IrUndefined__opcodeInfo_atexit_dtor_op133 @ 0x113d18 (40 bytes) */
+int IrUndefined__opcodeInfo_atexit_dtor_op133()
 {
   DAT_001fb428 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113d40 @ 0x113d40 (40 bytes) */
-int FUN_00113d40()
+/* IrProjection__opcodeInfo_atexit_dtor_op132 @ 0x113d40 (40 bytes) */
+int IrProjection__opcodeInfo_atexit_dtor_op132()
 {
   DAT_001fb43c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113d68 @ 0x113d68 (40 bytes) */
-int FUN_00113d68()
+/* IrMerge__opcodeInfo_atexit_dtor_op131 @ 0x113d68 (40 bytes) */
+int IrMerge__opcodeInfo_atexit_dtor_op131()
 {
   DAT_001fb450 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113d90 @ 0x113d90 (40 bytes) */
-int FUN_00113d90()
+/* IrPixelLoopFetch__opcodeInfo_atexit_dtor_op128 @ 0x113d90 (40 bytes) */
+int IrPixelLoopFetch__opcodeInfo_atexit_dtor_op128()
 {
   DAT_001fb48c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113db8 @ 0x113db8 (40 bytes) */
-int FUN_00113db8()
+/* IrVertexLoopFetch__opcodeInfo_atexit_dtor_op127 @ 0x113db8 (40 bytes) */
+int IrVertexLoopFetch__opcodeInfo_atexit_dtor_op127()
 {
   DAT_001fb4a0 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113de0 @ 0x113de0 (40 bytes) */
-int FUN_00113de0()
+/* IrLoadInterp__opcodeInfo_atexit_dtor_op126 @ 0x113de0 (40 bytes) */
+int IrLoadInterp__opcodeInfo_atexit_dtor_op126()
 {
   DAT_001fb4b4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113e08 @ 0x113e08 (40 bytes) */
-int FUN_00113e08()
+/* IrLoadTempDefault__opcodeInfo_atexit_dtor_op125 @ 0x113e08 (40 bytes) */
+int IrLoadTempDefault__opcodeInfo_atexit_dtor_op125()
 {
   DAT_001fb4c8 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113e30 @ 0x113e30 (40 bytes) */
-int FUN_00113e30()
+/* IrLoadAbstractState__opcodeInfo_atexit_dtor_op124 @ 0x113e30 (40 bytes) */
+int IrLoadAbstractState__opcodeInfo_atexit_dtor_op124()
 {
   DAT_001fb4dc = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113e58 @ 0x113e58 (40 bytes) */
-int FUN_00113e58()
+/* IrLoadPhysical__opcodeInfo_atexit_dtor_op123 @ 0x113e58 (40 bytes) */
+int IrLoadPhysical__opcodeInfo_atexit_dtor_op123()
 {
   DAT_001fb4f0 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113e80 @ 0x113e80 (40 bytes) */
-int FUN_00113e80()
+/* IrLoadTemp__opcodeInfo_atexit_dtor_op122 @ 0x113e80 (40 bytes) */
+int IrLoadTemp__opcodeInfo_atexit_dtor_op122()
 {
   DAT_001fb504 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113ea8 @ 0x113ea8 (40 bytes) */
-int FUN_00113ea8()
+/* IrLoadConst__opcodeInfo_atexit_dtor_op121 @ 0x113ea8 (40 bytes) */
+int IrLoadConst__opcodeInfo_atexit_dtor_op121()
 {
   DAT_001fb518 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113ed0 @ 0x113ed0 (40 bytes) */
-int FUN_00113ed0()
+/* IrMovaFloorInt__opcodeInfo_atexit_dtor_op193 @ 0x113ed0 (40 bytes) */
+int IrMovaFloorInt__opcodeInfo_atexit_dtor_op193()
 {
   DAT_001fb52c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113ef8 @ 0x113ef8 (40 bytes) */
-int FUN_00113ef8()
+/* IrMovaFloorGprInt__opcodeInfo_atexit_dtor_op192 @ 0x113ef8 (40 bytes) */
+int IrMovaFloorGprInt__opcodeInfo_atexit_dtor_op192()
 {
   DAT_001fb540 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113f20 @ 0x113f20 (40 bytes) */
-int FUN_00113f20()
+/* IrMovaFloorFloat__opcodeInfo_atexit_dtor_op191 @ 0x113f20 (40 bytes) */
+int IrMovaFloorFloat__opcodeInfo_atexit_dtor_op191()
 {
   DAT_001fb554 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113f48 @ 0x113f48 (40 bytes) */
-int FUN_00113f48()
+/* IrMovaFlr__opcodeInfo_atexit_dtor_op166 @ 0x113f48 (40 bytes) */
+int IrMovaFlr__opcodeInfo_atexit_dtor_op166()
 {
   DAT_001fb568 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113f70 @ 0x113f70 (40 bytes) */
-int FUN_00113f70()
+/* IrMovaFloor__opcodeInfo_atexit_dtor_op100 @ 0x113f70 (40 bytes) */
+int IrMovaFloor__opcodeInfo_atexit_dtor_op100()
 {
   DAT_001fb57c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113f98 @ 0x113f98 (40 bytes) */
-int FUN_00113f98()
+/* IrSubPrev__opcodeInfo_atexit_dtor_op98 @ 0x113f98 (40 bytes) */
+int IrSubPrev__opcodeInfo_atexit_dtor_op98()
 {
   DAT_001fb590 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113fc0 @ 0x113fc0 (40 bytes) */
-int FUN_00113fc0()
+/* IrMulPrev2__opcodeInfo_atexit_dtor_op97 @ 0x113fc0 (40 bytes) */
+int IrMulPrev2__opcodeInfo_atexit_dtor_op97()
 {
   DAT_001fb5a4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113fe8 @ 0x113fe8 (40 bytes) */
-int FUN_00113fe8()
+/* IrMulPrev__opcodeInfo_atexit_dtor_op96 @ 0x113fe8 (40 bytes) */
+int IrMulPrev__opcodeInfo_atexit_dtor_op96()
 {
   DAT_001fb5b8 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114010 @ 0x114010 (40 bytes) */
-int FUN_00114010()
+/* IrAddPrev__opcodeInfo_atexit_dtor_op95 @ 0x114010 (40 bytes) */
+int IrAddPrev__opcodeInfo_atexit_dtor_op95()
 {
   DAT_001fb5cc = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114038 @ 0x114038 (40 bytes) */
-int FUN_00114038()
+/* IrPredSetRst__opcodeInfo_atexit_dtor_op90 @ 0x114038 (40 bytes) */
+int IrPredSetRst__opcodeInfo_atexit_dtor_op90()
 {
   DAT_001fb5e0 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114060 @ 0x114060 (40 bytes) */
-int FUN_00114060()
+/* IrPredSetClr__opcodeInfo_atexit_dtor_op89 @ 0x114060 (40 bytes) */
+int IrPredSetClr__opcodeInfo_atexit_dtor_op89()
 {
   DAT_001fb5f4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114088 @ 0x114088 (40 bytes) */
-int FUN_00114088()
+/* IrPredSetPop__opcodeInfo_atexit_dtor_op88 @ 0x114088 (40 bytes) */
+int IrPredSetPop__opcodeInfo_atexit_dtor_op88()
 {
   DAT_001fb608 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001140b0 @ 0x1140b0 (40 bytes) */
-int FUN_001140b0()
+/* IrPredSetInv__opcodeInfo_atexit_dtor_op87 @ 0x1140b0 (40 bytes) */
+int IrPredSetInv__opcodeInfo_atexit_dtor_op87()
 {
   DAT_001fb61c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001140d8 @ 0x1140d8 (40 bytes) */
-int FUN_001140d8()
+/* IrPredSetGEInt__opcodeInfo_atexit_dtor_op212 @ 0x1140d8 (40 bytes) */
+int IrPredSetGEInt__opcodeInfo_atexit_dtor_op212()
 {
   DAT_001fb630 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114100 @ 0x114100 (40 bytes) */
-int FUN_00114100()
+/* IrPredSetGE__opcodeInfo_atexit_dtor_op86 @ 0x114100 (40 bytes) */
+int IrPredSetGE__opcodeInfo_atexit_dtor_op86()
 {
   DAT_001fb644 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114128 @ 0x114128 (40 bytes) */
-int FUN_00114128()
+/* IrPredSetLEInt__opcodeInfo_atexit_dtor_op215 @ 0x114128 (40 bytes) */
+int IrPredSetLEInt__opcodeInfo_atexit_dtor_op215()
 {
   DAT_001fb658 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114150 @ 0x114150 (40 bytes) */
-int FUN_00114150()
+/* IrPredSetLTInt__opcodeInfo_atexit_dtor_op214 @ 0x114150 (40 bytes) */
+int IrPredSetLTInt__opcodeInfo_atexit_dtor_op214()
 {
   DAT_001fb66c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114178 @ 0x114178 (40 bytes) */
-int FUN_00114178()
+/* IrPredSetGTInt__opcodeInfo_atexit_dtor_op211 @ 0x114178 (40 bytes) */
+int IrPredSetGTInt__opcodeInfo_atexit_dtor_op211()
 {
   DAT_001fb680 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001141a0 @ 0x1141a0 (40 bytes) */
-int FUN_001141a0()
+/* IrPredSetGT__opcodeInfo_atexit_dtor_op85 @ 0x1141a0 (40 bytes) */
+int IrPredSetGT__opcodeInfo_atexit_dtor_op85()
 {
   DAT_001fb694 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001141c8 @ 0x1141c8 (40 bytes) */
-int FUN_001141c8()
+/* IrPredSetNEInt__opcodeInfo_atexit_dtor_op213 @ 0x1141c8 (40 bytes) */
+int IrPredSetNEInt__opcodeInfo_atexit_dtor_op213()
 {
   DAT_001fb6a8 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001141f0 @ 0x1141f0 (40 bytes) */
-int FUN_001141f0()
+/* IrPredSetNE__opcodeInfo_atexit_dtor_op84 @ 0x1141f0 (40 bytes) */
+int IrPredSetNE__opcodeInfo_atexit_dtor_op84()
 {
   DAT_001fb6bc = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114218 @ 0x114218 (40 bytes) */
-int FUN_00114218()
+/* IrPredSetEInt__opcodeInfo_atexit_dtor_op210 @ 0x114218 (40 bytes) */
+int IrPredSetEInt__opcodeInfo_atexit_dtor_op210()
 {
   DAT_001fb6d0 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114240 @ 0x114240 (40 bytes) */
-int FUN_00114240()
+/* IrPredSetE__opcodeInfo_atexit_dtor_op83 @ 0x114240 (40 bytes) */
+int IrPredSetE__opcodeInfo_atexit_dtor_op83()
 {
   DAT_001fb6e4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114268 @ 0x114268 (40 bytes) */
-int FUN_00114268()
+/* IrKillOne__opcodeInfo_atexit_dtor_op82 @ 0x114268 (40 bytes) */
+int IrKillOne__opcodeInfo_atexit_dtor_op82()
 {
   DAT_001fb6f8 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114290 @ 0x114290 (40 bytes) */
-int FUN_00114290()
+/* IrCos__opcodeInfo_atexit_dtor_op77 @ 0x114290 (40 bytes) */
+int IrCos__opcodeInfo_atexit_dtor_op77()
 {
   DAT_001fb70c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001142b8 @ 0x1142b8 (40 bytes) */
-int FUN_001142b8()
+/* IrSin__opcodeInfo_atexit_dtor_op76 @ 0x1142b8 (40 bytes) */
+int IrSin__opcodeInfo_atexit_dtor_op76()
 {
   DAT_001fb720 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001142e0 @ 0x1142e0 (40 bytes) */
-int FUN_001142e0()
+/* IrSubConst1__opcodeInfo_atexit_dtor_op75 @ 0x1142e0 (40 bytes) */
+int IrSubConst1__opcodeInfo_atexit_dtor_op75()
 {
   DAT_001fb734 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114308 @ 0x114308 (40 bytes) */
-int FUN_00114308()
+/* IrMulConst1__opcodeInfo_atexit_dtor_op74 @ 0x114308 (40 bytes) */
+int IrMulConst1__opcodeInfo_atexit_dtor_op74()
 {
   DAT_001fb748 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114330 @ 0x114330 (40 bytes) */
-int FUN_00114330()
+/* IrAddConst1__opcodeInfo_atexit_dtor_op73 @ 0x114330 (40 bytes) */
+int IrAddConst1__opcodeInfo_atexit_dtor_op73()
 {
   DAT_001fb75c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114358 @ 0x114358 (40 bytes) */
-int FUN_00114358()
+/* IrSubConst0__opcodeInfo_atexit_dtor_op72 @ 0x114358 (40 bytes) */
+int IrSubConst0__opcodeInfo_atexit_dtor_op72()
 {
   DAT_001fb770 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00114380 @ 0x114380 (40 bytes) */
-int FUN_00114380()
+/* IrMulConst0__opcodeInfo_atexit_dtor_op71 @ 0x114380 (40 bytes) */
+int IrMulConst0__opcodeInfo_atexit_dtor_op71()
 {
   DAT_001fb784 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001143a8 @ 0x1143a8 (40 bytes) */
-int FUN_001143a8()
+/* IrAddConst0__opcodeInfo_atexit_dtor_op70 @ 0x1143a8 (40 bytes) */
+int IrAddConst0__opcodeInfo_atexit_dtor_op70()
 {
   DAT_001fb798 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001143d0 @ 0x1143d0 (40 bytes) */
-int FUN_001143d0()
+/* IrFetchTextureMapGradients__opcodeInfo_atexit_dtor_op120 @ 0x1143d0 (40 bytes) */
+int IrFetchTextureMapGradients__opcodeInfo_atexit_dtor_op120()
 {
   DAT_001fb7ac = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001143f8 @ 0x1143f8 (40 bytes) */
-int FUN_001143f8()
+/* IrFetchTextureMapKill__opcodeInfo_atexit_dtor_op119 @ 0x1143f8 (40 bytes) */
+int IrFetchTextureMapKill__opcodeInfo_atexit_dtor_op119()
 {
   DAT_001fb7c0 = PTR_DAT_001e8f28 + 8;
   return;

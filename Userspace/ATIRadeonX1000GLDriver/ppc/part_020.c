@@ -79,7 +79,7 @@ int FUN_000dbe18(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   
   FUN_000db458(param_1,param_2 >> 0x10 & 0x1f,param_3,param_4,param_5,param_6,param_7,param_8);
   uVar1 = param_2 >> 0x15 & 0xff;
-  FUN_001a32d0(auStack_38,"_usageIndex(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
+  printf_LDBLStub_1a32d0(auStack_38,"_usageIndex(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
   FUN_000da904(param_1,auStack_38,uVar1,param_4,param_5,param_6,param_7,param_8);
   if ((int)param_2 < 0) {
     uVar2 = **(uint **)(param_1 + 8);
@@ -117,7 +117,7 @@ int FUN_000dbf34(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   
   FUN_000db458(param_1,param_2 >> 0x10 & 0x1f,param_3,param_4,param_5,param_6,param_7,param_8);
   uVar1 = param_2 >> 0x15 & 0xff;
-  FUN_001a32d0(auStack_38,"_usageIndex(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
+  printf_LDBLStub_1a32d0(auStack_38,"_usageIndex(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
   FUN_000da904(param_1,auStack_38,uVar1,param_4,param_5,param_6,param_7,param_8);
   if ((int)param_2 < 0) {
     uVar2 = **(uint **)(param_1 + 8);
@@ -163,7 +163,7 @@ int FUN_000dc098(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined1 auStack_38 [40];
   
   uVar1 = param_2 >> 0x10 & 0x3f;
-  FUN_001a32d0(auStack_38,"_elem(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
+  printf_LDBLStub_1a32d0(auStack_38,"_elem(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
   FUN_000da904(param_1,auStack_38,uVar1,param_4,param_5,param_6,param_7,param_8);
   if ((int)param_2 < 0) {
     uVar2 = **(uint **)(param_1 + 8);
@@ -499,7 +499,7 @@ int FUN_000dc83c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined1 auStack_38 [44];
   
   uVar1 = param_2 >> 0x10 & 0xff;
-  FUN_001a32d0(auStack_38,"_stage(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
+  printf_LDBLStub_1a32d0(auStack_38,"_stage(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
   return FUN_000da904(param_1,auStack_38,uVar1,param_4,param_5,param_6,param_7,param_8);
 }
 
@@ -825,7 +825,7 @@ int FUN_000dcdf4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar4 = uVar3 & 0xff;
   pcVar2 = &local_128;
   uVar3 = uVar3 >> 8 & 0xff;
-  FUN_001a32d0(auStack_118,"il_%s_%d_%d",pcVar2,uVar3,uVar4,param_6,param_7,param_8);
+  printf_LDBLStub_1a32d0(auStack_118,"il_%s_%d_%d",pcVar2,uVar3,uVar4,param_6,param_7,param_8);
   *(uint *)(param_1 + 0x218) = (uint)(uVar1 == 1);
   FUN_000da904(param_1,auStack_118,pcVar2,uVar3,uVar4,param_6,param_7,param_8);
   return FUN_000da984(param_1,extraout_r4,pcVar2,uVar3,uVar4,param_6,param_7,param_8);
@@ -1043,7 +1043,7 @@ int FUN_000dd1f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       if (((undefined4 *)(uVar10 & 0x3f0000) == 0x001b0000) ||
          ((undefined4 *)(uVar10 & 0x3f0000) == (undefined4 *)0x1c0000)) {
         param_3 = uVar10 & 0xffff;
-        FUN_001a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,in_r10);
+        printf_LDBLStub_1a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,in_r10);
         bVar2 = true;
         FUN_000da904(param_1,auStack_b8,param_3,param_4,param_5,param_6,param_7,in_r10);
       }
@@ -1055,17 +1055,17 @@ LAB_000dd324:
             param_3 = *(uint *)param_1[2];
             param_1[2] = (int)((uint *)param_1[2] + 1);
           }
-          FUN_001a32d0(auStack_b8,"[%lu]",param_3,param_4,param_5,param_6,param_7,in_r10);
+          printf_LDBLStub_1a32d0(auStack_b8,"[%lu]",param_3,param_4,param_5,param_6,param_7,in_r10);
           FUN_000da904(param_1,auStack_b8,param_3,param_4,param_5,param_6,param_7,in_r10);
         }
         else {
           if (uVar3 == 0) {
             param_3 = uVar10 & 0xffff;
-            FUN_001a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,in_r10);
+            printf_LDBLStub_1a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,in_r10);
           }
           else {
             param_3 = uVar10 & 0xffff;
-            FUN_001a32d0(auStack_b8,"[%d]",param_3,param_4,param_5,param_6,param_7,in_r10);
+            printf_LDBLStub_1a32d0(auStack_b8,"[%d]",param_3,param_4,param_5,param_6,param_7,in_r10);
           }
           FUN_000da904(param_1,auStack_b8,param_3,param_4,param_5,param_6,param_7,in_r10);
         }
@@ -1075,13 +1075,13 @@ LAB_000dd324:
           FUN_000da904(param_1,"[",param_3,param_4,param_5,param_6,param_7,in_r10);
           if ((unaff_r23 & 0x10000) == 0) {
             uVar6 = unaff_r23 & 0xffff;
-            FUN_001a32d0(auStack_b8,"a%d",uVar6,param_4,param_5,param_6,param_7,in_r10);
+            printf_LDBLStub_1a32d0(auStack_b8,"a%d",uVar6,param_4,param_5,param_6,param_7,in_r10);
             FUN_000da904(param_1,auStack_b8,uVar6,param_4,param_5,param_6,param_7,in_r10);
             if ((unaff_r23 & 0xe0000) != 0) {
-              uVar4 = FUN_000da8fc(param_1,uVar10);
+              uVar4 = returnZero_da8fc(param_1,uVar10);
               uVar4 = FUN_000dac4c(param_1,unaff_r23 >> 0x11 & 7,uVar4,param_4,param_5,param_6,
                                    param_7,in_r10);
-              FUN_001a32d0(auStack_b8,".%c",uVar4,param_4,param_5,param_6,param_7,in_r10);
+              printf_LDBLStub_1a32d0(auStack_b8,".%c",uVar4,param_4,param_5,param_6,param_7,in_r10);
               FUN_000da904(param_1,auStack_b8,uVar4,param_4,param_5,param_6,param_7,in_r10);
             }
           }
@@ -1095,13 +1095,13 @@ LAB_000dd324:
               param_1[2] = (int)((uint *)param_1[2] + 1);
             }
 LAB_000dd4f0:
-            FUN_001a32d0(local_78,"+%lu",param_3,param_4,param_5,param_6,param_7,in_r10);
+            printf_LDBLStub_1a32d0(local_78,"+%lu",param_3,param_4,param_5,param_6,param_7,in_r10);
             FUN_000da904(param_1,local_78,param_3,param_4,param_5,param_6,param_7,in_r10);
           }
           else {
             param_3 = uVar10 & 0xffff;
             if (param_3 != 0) {
-              FUN_001a32d0(auStack_b8,"+%d",param_3,param_4,param_5,param_6,param_7,in_r10);
+              printf_LDBLStub_1a32d0(auStack_b8,"+%d",param_3,param_4,param_5,param_6,param_7,in_r10);
               FUN_000da904(param_1,auStack_b8,param_3,param_4,param_5,param_6,param_7,in_r10);
             }
           }
@@ -1142,7 +1142,7 @@ LAB_000dd530:
   if (bVar1) {
     return;
   }
-  uVar4 = FUN_000da8fc(param_1,uVar10);
+  uVar4 = returnZero_da8fc(param_1,uVar10);
   FUN_000dad30(param_1,unaff_r28,uVar4,param_4,param_5,param_6,param_7,in_r10);
   FUN_000daab0(param_1,unaff_r28,uVar4,param_4,param_5,param_6,param_7,in_r10);
   if ((unaff_r28 & 0x10000) != 0) {
@@ -1234,16 +1234,16 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     FUN_000dae5c(param_1,unaff_r25,param_3,param_4,param_5,param_6,param_7,param_8);
   }
   FUN_000da904(param_1," ",param_3,param_4,param_5,param_6,param_7,param_8);
-  uVar4 = FUN_000da8f4(param_1,uVar7);
+  uVar4 = returnZero_da8f4(param_1,uVar7);
   ((int (*)())FUN_000dcef4)(param_1,uVar7 >> 0x10 & 0x3f,param_3,param_4,param_5,param_6,param_7);
   if ((uVar7 & 0x23f0000) == 0x21e0000) {
     uVar7 = uVar7 & 0xffff;
-    FUN_001a32d0(auStack_b8,"[%d]",uVar7,param_4,param_5,param_6,param_7,param_8);
+    printf_LDBLStub_1a32d0(auStack_b8,"[%d]",uVar7,param_4,param_5,param_6,param_7,param_8);
     FUN_000da904(param_1,auStack_b8,uVar7,param_4,param_5,param_6,param_7,param_8);
     uVar8 = *(uint *)param_1[2];
     param_1[2] = (int)((uint *)param_1[2] + 1);
     uVar7 = uVar8 & 0xffff;
-    FUN_001a32d0(auStack_b8,"[%d]",uVar7,param_4,param_5,param_6,param_7,param_8);
+    printf_LDBLStub_1a32d0(auStack_b8,"[%d]",uVar7,param_4,param_5,param_6,param_7,param_8);
     FUN_000da904(param_1,auStack_b8,uVar7,param_4,param_5,param_6,param_7,param_8);
     bVar1 = (uVar8 & 0x400000) == 0;
   }
@@ -1256,7 +1256,7 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     }
     else if ((puVar3 == 0x001b0000) || (bVar2 = false, puVar3 == (undefined4 *)0x1c0000)) {
       param_3 = uVar7 & 0xffff;
-      FUN_001a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,param_8);
+      printf_LDBLStub_1a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,param_8);
       bVar2 = true;
       FUN_000da904(param_1,auStack_b8,param_3,param_4,param_5,param_6,param_7,param_8);
     }
@@ -1267,12 +1267,12 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
           uVar6 = *(undefined4 *)param_1[2];
           param_1[2] = (int)((undefined4 *)param_1[2] + 1);
         }
-        FUN_001a32d0(auStack_b8,"[%lu]",uVar6,param_4,param_5,param_6,param_7,param_8);
+        printf_LDBLStub_1a32d0(auStack_b8,"[%lu]",uVar6,param_4,param_5,param_6,param_7,param_8);
         FUN_000da904(param_1,auStack_b8,uVar6,param_4,param_5,param_6,param_7,param_8);
       }
       else {
         uVar7 = uVar7 & 0xffff;
-        FUN_001a32d0(auStack_b8,"%d",uVar7,param_4,param_5,param_6,param_7,param_8);
+        printf_LDBLStub_1a32d0(auStack_b8,"%d",uVar7,param_4,param_5,param_6,param_7,param_8);
         FUN_000da904(param_1,auStack_b8,uVar7,param_4,param_5,param_6,param_7,param_8);
       }
     }
@@ -1281,13 +1281,13 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         FUN_000da904(param_1,"[",param_3,param_4,param_5,param_6,param_7,param_8);
         if ((unaff_r24 & 0x10000) == 0) {
           uVar8 = unaff_r24 & 0xffff;
-          FUN_001a32d0(auStack_b8,"a%d",uVar8,param_4,param_5,param_6,param_7,param_8);
+          printf_LDBLStub_1a32d0(auStack_b8,"a%d",uVar8,param_4,param_5,param_6,param_7,param_8);
           FUN_000da904(param_1,auStack_b8,uVar8,param_4,param_5,param_6,param_7,param_8);
           if ((unaff_r24 & 0xe0000) != 0) {
-            uVar6 = FUN_000da8f4(param_1,uVar7);
+            uVar6 = returnZero_da8f4(param_1,uVar7);
             uVar6 = FUN_000dac4c(param_1,unaff_r24 >> 0x11 & 7,uVar6,param_4,param_5,param_6,param_7
                                  ,param_8);
-            FUN_001a32d0(auStack_b8,".%c",uVar6,param_4,param_5,param_6,param_7,param_8);
+            printf_LDBLStub_1a32d0(auStack_b8,".%c",uVar6,param_4,param_5,param_6,param_7,param_8);
             FUN_000da904(param_1,auStack_b8,uVar6,param_4,param_5,param_6,param_7,param_8);
           }
         }
@@ -1300,12 +1300,12 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             param_3 = *(uint *)param_1[2];
             param_1[2] = (int)((uint *)param_1[2] + 1);
           }
-          FUN_001a32d0(auStack_78,"+%lu",param_3,param_4,param_5,param_6,param_7,param_8);
+          printf_LDBLStub_1a32d0(auStack_78,"+%lu",param_3,param_4,param_5,param_6,param_7,param_8);
         }
         else {
           param_3 = uVar7 & 0xffff;
           if (param_3 != 0) {
-            FUN_001a32d0(auStack_b8,"+%d",param_3,param_4,param_5,param_6,param_7,param_8);
+            printf_LDBLStub_1a32d0(auStack_b8,"+%d",param_3,param_4,param_5,param_6,param_7,param_8);
             FUN_000da904(param_1,auStack_b8,param_3,param_4,param_5,param_6,param_7,param_8);
           }
         }
@@ -1327,7 +1327,7 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
           if (puVar3 == (undefined4 *)0x1f0000) {
             param_3 = param_3 + (uVar7 & 0xffff);
           }
-          FUN_001a32d0(auStack_78,"+%lu",param_3,param_4,param_5,param_6,param_7,param_8);
+          printf_LDBLStub_1a32d0(auStack_78,"+%lu",param_3,param_4,param_5,param_6,param_7,param_8);
           FUN_000da904(param_1,auStack_78,param_3,param_4,param_5,param_6,param_7,param_8);
         }
       }
@@ -1925,7 +1925,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       FUN_000da9fc(disassembler,disassembler[0x87],"dclpp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da9fc(disassembler,disassembler[0x87],"dclv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       paramNumber = instructionToken >> 0x10 & 0xff;
-      FUN_001a32d0(&scratchText,"_param(%d)",paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&scratchText,"_param(%d)",paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&scratchText,paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00195,paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da984(disassembler,extraout_r4_x00196,paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1977,15 +1977,15 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
         acStack_132[0] = s___001a44f4[2];
         defPtrAlias = defFloat3Bits;
         ((char * (*)())FUN_000cdc3c)(declResult,10,fmtArgR5,(double)defFloat0);
-        fieldOffset = FUN_001a32d0(acStack_132,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
+        fieldOffset = printf_LDBLStub_1a32d0(acStack_132,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
         mnemonic = acStack_132 + fieldOffset;
         ((char * (*)())FUN_000cdc3c)(fieldOffset,10,fmtArgR5,(double)defFloat1);
-        fieldOffset = FUN_001a32d0(mnemonic,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
+        fieldOffset = printf_LDBLStub_1a32d0(mnemonic,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
         ((char * (*)())FUN_000cdc3c)(fieldOffset,10,fmtArgR5,(double)defFloat2);
-        fieldLength = FUN_001a32d0(mnemonic + fieldOffset,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr)
+        fieldLength = printf_LDBLStub_1a32d0(mnemonic + fieldOffset,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr)
         ;
         ((char * (*)())FUN_000cdc3c)(fieldLength,10,fmtArgR5,(double)GH_U2F((unsigned int)(defFloat3Bits)));
-        FUN_001a32d0(mnemonic + fieldOffset + fieldLength,"%s",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
+        printf_LDBLStub_1a32d0(mnemonic + fieldOffset + fieldLength,"%s",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
       }
       else {
         ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00204,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1999,7 +1999,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
         disassembler[2] = (int)(immediatePtr + 3);
         fmtArgR8 = immediatePtr[3];
         disassembler[2] = (int)(immediatePtr + 4);
-        FUN_001a32d0(&textBuffer,", %lu, %lu, %lu, %lu",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,
+        printf_LDBLStub_1a32d0(&textBuffer,", %lu, %lu, %lu, %lu",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,
                      nextWordPtr);
       }
       FUN_000da904(disassembler,&textBuffer,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
@@ -2012,7 +2012,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00206,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       immediateWord = *(undefined4 *)disassembler[2];
       disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
-      FUN_001a32d0(&scratchText,", %lu",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&scratchText,", %lu",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&scratchText,immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da984(disassembler,extraout_r4_x00207,immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
@@ -2183,7 +2183,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
     case 0x43:
       FUN_000da9fc(disassembler,disassembler[0x87],"memimport",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       memimportElement = instructionToken >> 0x10 & 0x3f;
-      FUN_001a32d0(&scratchText,"_elem(%d)",memimportElement,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&scratchText,"_elem(%d)",memimportElement,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&scratchText,memimportElement,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00237,memimportElement,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
@@ -2276,7 +2276,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       memexportElemOffset = instructionToken >> 0x17 & 0x3f;
       exportStreamId = instructionToken >> 0x10 & 0x3f;
       instructionToken = instructionToken >> 0x16 & 1;
-      FUN_001a32d0(&scratchText,"_exportStream(%d)_stateStride(%d)_elemOffset(%d)",exportStreamId,instructionToken,memexportElemOffset
+      printf_LDBLStub_1a32d0(&scratchText,"_exportStream(%d)_stateStride(%d)_elemOffset(%d)",exportStreamId,instructionToken,memexportElemOffset
                    ,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&scratchText,exportStreamId,instructionToken,memexportElemOffset,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00240,exportStreamId,instructionToken,memexportElemOffset,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2534,7 +2534,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       FUN_000da904(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       immediateWord = *(undefined4 *)disassembler[2];
       disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
-      FUN_001a32d0(&scratchText,"%lu",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&scratchText,"%lu",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&scratchText,immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da984(disassembler,extraout_r4_x00163,immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
@@ -2632,7 +2632,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
         literalCount = *(int *)disassembler[2];
         disassembler[2] = (int)((int *)disassembler[2] + 1);
         literalCountCopy = literalCount;
-        FUN_001a32d0(&scratchText,"count = %d ",literalCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+        printf_LDBLStub_1a32d0(&scratchText,"count = %d ",literalCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         FUN_000da904(disassembler,&scratchText,literalCountCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         FUN_000da984(disassembler,extraout_r4_x00185,literalCountCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         if (0 < literalCount) {
@@ -2641,7 +2641,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
             literalIndex = literalIndex + 1;
             immediateWord = *(undefined4 *)disassembler[2];
             disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
-            FUN_001a32d0(&scratchText," 0x%x ",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+            printf_LDBLStub_1a32d0(&scratchText," 0x%x ",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
             fmtArgR5 = &scratchText;
             FUN_000da9fc(disassembler,disassembler[0x87] + 1,&scratchText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                          nextWordPtr);
@@ -2693,7 +2693,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       disassembler[2] = (int)(immediatePtr2 + 3);
       defWord3Printed = immediatePtr2[3];
       disassembler[2] = (int)(immediatePtr2 + 4);
-      FUN_001a32d0(&textBuffer," 0x%08lX, 0x%08lX, 0x%08lX, 0x%08lX",defWord0,defWord1,defWord2,defWord3Printed,defWord3
+      printf_LDBLStub_1a32d0(&textBuffer," 0x%08lX, 0x%08lX, 0x%08lX, 0x%08lX",defWord0,defWord1,defWord2,defWord3Printed,defWord3
                    ,nextWordPtr);
       FUN_000da904(disassembler,&textBuffer,defWord0,defWord1,defWord2,defWord3Printed,defWord3,nextWordPtr);
       FUN_000da984(disassembler,extraout_r4_x00190,defWord0,defWord1,defWord2,defWord3Printed,defWord3,nextWordPtr);
@@ -2703,7 +2703,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       FUN_000da9fc(disassembler,disassembler[0x87],"dcl_max_output_vertex_count",fmtArgR6,fmtArgR7,fmtArgR8,
                    fmtArgR9,nextWordPtr);
       maxOutputVertexCount = instructionToken >> 0x10 & 0x3fff;
-      FUN_001a32d0(&scratchText,"(%d)",maxOutputVertexCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&scratchText,"(%d)",maxOutputVertexCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&scratchText,maxOutputVertexCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da984(disassembler,extraout_r4_x00208,maxOutputVertexCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
@@ -2793,7 +2793,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
     case 0x80:
       FUN_000da9fc(disassembler,disassembler[0x87],"dcl_resource",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       resourceId = instructionToken >> 0x10 & 0xff;
-      FUN_001a32d0(&textBuffer,"_id(%d)",resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&textBuffer,"_id(%d)",resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&textBuffer,resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())FUN_000dc2c4)(disassembler,instructionToken >> 0x18 & 0xf,resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       FUN_000db048(disassembler,extraout_r4_x00225,resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2839,7 +2839,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
     case 0x86:
       FUN_000da9fc(disassembler,disassembler[0x87],"load",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       loadResourceId = instructionToken >> 0x10 & 0x1fff;
-      FUN_001a32d0(&textBuffer,"_id(%d)",loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&textBuffer,"_id(%d)",loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&textBuffer,loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000db81c(disassembler,instructionToken,loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())FUN_000ddb7c)(disassembler,extraout_r4_x00143,loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2848,7 +2848,7 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
     case 0x87:
       FUN_000da9fc(disassembler,disassembler[0x87],"resinfo",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       resinfoResourceId = instructionToken >> 0x10 & 0xfff;
-      FUN_001a32d0(&textBuffer,"_id(%d)",resinfoResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      printf_LDBLStub_1a32d0(&textBuffer,"_id(%d)",resinfoResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       FUN_000da904(disassembler,&textBuffer,resinfoResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       lastReturnR4 = extraout_r4_x00238;
       if ((instructionToken & 0x10000000) != 0) {
@@ -3555,8 +3555,8 @@ int FUN_000e0e28(param_1)
   return;
 }
 
-/* FUN_000e0e9c @ 0xe0e9c (4 bytes) */
-int FUN_000e0e9c()
+/* noop_e0e9c @ 0xe0e9c (4 bytes) */
+int noop_e0e9c()
 {
   return;
 }
@@ -3784,8 +3784,8 @@ int FUN_000e0ee8(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000e1388 @ 0xe1388 (4 bytes) */
-int FUN_000e1388()
+/* noop_e1388 @ 0xe1388 (4 bytes) */
+int noop_e1388()
 {
   return;
 }

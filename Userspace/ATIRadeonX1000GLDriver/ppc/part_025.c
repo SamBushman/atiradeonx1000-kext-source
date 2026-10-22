@@ -1761,8 +1761,8 @@ int FUN_000f4be8(param_1, param_2)
   return -1;
 }
 
-/* FUN_000f4c44 @ 0xf4c44 (4 bytes) */
-int FUN_000f4c44()
+/* noop_f4c44 @ 0xf4c44 (4 bytes) */
+int noop_f4c44()
 {
   return;
 }
