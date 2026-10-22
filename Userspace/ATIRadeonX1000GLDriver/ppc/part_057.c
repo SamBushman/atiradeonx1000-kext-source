@@ -135,7 +135,7 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
 {
   bool bVar1;
   int iVar2;
-  int iVar3;
+  int operandRecord;
   int iVar4;
   undefined4 uVar5;
   undefined4 uVar6;
@@ -151,14 +151,14 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
     uVar6 = 2;
     loopIndex = 0;
     do {
-      iVar3 = FUN_001054ec(uVar5,0);
-      if (*(char *)(loopIndex + iVar3 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(uVar5,0);
+      if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar6;
         }
         if ((*param_3 == 0x7ffffffe) &&
-           ((iVar3 = FUN_00179b28(param_2,loopIndex), iVar3 != 0 ||
-            (iVar3 = FUN_00179cc0(param_2,loopIndex), iVar3 != 0)))) {
+           ((operandRecord = FUN_00179b28(param_2,loopIndex), operandRecord != 0 ||
+            (operandRecord = FUN_00179cc0(param_2,loopIndex), operandRecord != 0)))) {
           uVar6 = 1;
         }
       }
@@ -516,7 +516,7 @@ int FUN_001d0e0c(param_1, param_2, param_3, param_4)
 {
   bool bVar1;
   int iVar2;
-  int iVar3;
+  int operandRecord;
   int iVar4;
   undefined4 uVar5;
   undefined4 uVar6;
@@ -531,12 +531,12 @@ int FUN_001d0e0c(param_1, param_2, param_3, param_4)
     uVar5 = 2;
     loopIndex = 0;
     do {
-      iVar3 = FUN_001054ec(uVar6,0);
-      if (*(char *)(loopIndex + iVar3 + 0x10) != '\x01') {
+      operandRecord = FUN_001054ec(uVar6,0);
+      if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar5;
         }
-        if ((*param_3 == 0x7ffffffe) && (iVar3 = FUN_00179cc0(param_2,loopIndex), iVar3 != 0)) {
+        if ((*param_3 == 0x7ffffffe) && (operandRecord = FUN_00179cc0(param_2,loopIndex), operandRecord != 0)) {
           uVar5 = 1;
         }
       }

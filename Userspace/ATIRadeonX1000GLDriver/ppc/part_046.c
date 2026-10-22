@@ -288,24 +288,24 @@ int FUN_001739c0(param_1, param_2, param_3)
 }
 
 /* FUN_00173a48 @ 0x173a48 (176 bytes) */
-int FUN_00173a48(param_1, param_2)
-  int *param_1;
+int FUN_00173a48(inst, param_2)
+  int *inst;
   undefined4 param_2;
 {
   int callResult;
   int loopIndex;
   
-  callResult = FUN_00113174(*(undefined4 *)(param_1[0x22] + 8),param_2);
+  callResult = FUN_00113174(*(undefined4 *)(inst[0x22] + 8),param_2);
   if (callResult == 0) {
     loopIndex = 1;
-    callResult = (**(code **)(*param_1 + 0x14))(param_1);
+    callResult = (**(code **)(*inst + 0x14))(inst);
     if (callResult != 0) {
       while( true ) {
-        callResult = (**(code **)(*param_1 + 0x14))(param_1);
+        callResult = (**(code **)(*inst + 0x14))(inst);
         if (callResult < loopIndex) {
           return 1;
         }
-        callResult = FUN_001054ec(param_1,loopIndex);
+        callResult = FUN_001054ec(inst,loopIndex);
         callResult = FUN_000f2c5c(*(undefined4 *)(callResult + 0x10));
         if (callResult == 0) break;
         loopIndex = loopIndex + 1;
@@ -322,7 +322,7 @@ int FUN_00173af8(ctx, param_2)
 {
   bool bVar1;
   int loopIndex;
-  int iVar3;
+  int operandRecord;
   undefined4 local_38 [9];
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) &&
@@ -330,8 +330,8 @@ int FUN_00173af8(ctx, param_2)
   {
     loopIndex = 0;
     do {
-      iVar3 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
-      local_38[0] = *(undefined4 *)(iVar3 + 0x10);
+      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      local_38[0] = *(undefined4 *)(operandRecord + 0x10);
       if ((*(char *)((int)local_38 + loopIndex) == '\0') && (*param_2 != 0)) {
         return;
       }
@@ -441,6 +441,7 @@ int FUN_00173e10(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
+  undefined4 arenaAt378;
   undefined4 *puVar1;
   undefined4 *puVar2;
   int *piVar3;
@@ -453,10 +454,10 @@ int FUN_00173e10(param_1, param_2)
   puVar1 = (undefined4 *)
            FUN_00194834(*(undefined4 *)(param_1 + 0x3e4),*(undefined4 *)(param_1 + 0x3f0));
   if (puVar1 == (undefined4 *)0x0) {
-    uVar5 = *(undefined4 *)(param_1 + 0x378);
-    puVar2 = (undefined4 *)FUN_00193e18(uVar5,0x2c);
+    arenaAt378 = *(undefined4 *)(param_1 + 0x378);
+    puVar2 = (undefined4 *)FUN_00193e18(arenaAt378,0x2c);
     puVar1 = puVar2 + 1;
-    *puVar2 = uVar5;
+    *puVar2 = arenaAt378;
     puVar2[1] = param_2;
     puVar2[5] = 4;
     puVar2[8] = 0;
@@ -946,7 +947,7 @@ int FUN_0017494c(ctx, param_2, param_3)
   bool bVar1;
   int iVar2;
   undefined4 *allocation;
-  int iVar4;
+  int operandRecord;
   int *piVar5;
   int loopIndex;
   uint uVar7;
@@ -967,8 +968,8 @@ int FUN_0017494c(ctx, param_2, param_3)
     loopIndex2 = allocation + 1;
     iVar2 = ctx;
     do {
-      iVar4 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
-      if (*(char *)(loopIndex + iVar4 + 0x10) == '\x01') {
+      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
         loopIndex2[8] = 3;
       }
       else {
@@ -1102,6 +1103,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  undefined4 arenaAt378;
   undefined4 *puVar1;
   undefined4 *puVar2;
   int *piVar3;
@@ -1114,10 +1116,10 @@ int FUN_00174ce0(param_1, param_2, param_3)
   puVar1 = (undefined4 *)
            FUN_00194834(*(undefined4 *)(param_1 + 0x3ec),*(undefined4 *)(param_1 + 0x3f4));
   if (puVar1 == (undefined4 *)0x0) {
-    uVar4 = *(undefined4 *)(param_1 + 0x378);
-    puVar2 = (undefined4 *)FUN_00193e18(uVar4,0x34);
+    arenaAt378 = *(undefined4 *)(param_1 + 0x378);
+    puVar2 = (undefined4 *)FUN_00193e18(arenaAt378,0x34);
     puVar1 = puVar2 + 1;
-    *puVar2 = uVar4;
+    *puVar2 = arenaAt378;
     puVar2[3] = 0xffffffff;
     puVar2[8] = 0;
     puVar2[1] = 0;

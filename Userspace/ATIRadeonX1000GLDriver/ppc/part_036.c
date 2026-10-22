@@ -3958,15 +3958,15 @@ int FUN_0011e6ec(param_1)
 }
 
 /* FUN_0011e6f4 @ 0x11e6f4 (140 bytes) */
-int FUN_0011e6f4(param_1)
-  int param_1;
+int FUN_0011e6f4(inst)
+  int inst;
 {
   int callResult;
   int iVar2;
   int iVar3;
   int loopIndex;
   
-  if (*(int *)(param_1 + 0x84) < 1) {
+  if (*(int *)(inst + 0x84) < 1) {
 LAB_0011e764:
     iVar3 = 0;
   }
@@ -3974,33 +3974,33 @@ LAB_0011e764:
     loopIndex = 1;
     iVar2 = 0;
     do {
-      callResult = FUN_00105594(param_1,loopIndex);
+      callResult = FUN_00105594(inst,loopIndex);
       iVar3 = iVar2;
-      if ((((callResult != 0) && (param_1 != callResult)) && (iVar3 = callResult, iVar2 != 0)) &&
+      if ((((callResult != 0) && (inst != callResult)) && (iVar3 = callResult, iVar2 != 0)) &&
          (iVar3 = iVar2, iVar2 != callResult)) goto LAB_0011e764;
       loopIndex = loopIndex + 1;
       iVar2 = iVar3;
-    } while (loopIndex <= *(int *)(param_1 + 0x84));
+    } while (loopIndex <= *(int *)(inst + 0x84));
   }
   return iVar3;
 }
 
 /* FUN_0011e780 @ 0x11e780 (108 bytes) */
-int FUN_0011e780(param_1)
-  int param_1;
+int FUN_0011e780(inst)
+  int inst;
 {
   int callResult;
   int loopIndex;
   
-  if (0 < *(int *)(param_1 + 0x84)) {
+  if (0 < *(int *)(inst + 0x84)) {
     loopIndex = 1;
     do {
-      callResult = FUN_00105594(param_1,loopIndex);
+      callResult = FUN_00105594(inst,loopIndex);
       if (callResult == 0) {
         return 0;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex <= *(int *)(param_1 + 0x84));
+    } while (loopIndex <= *(int *)(inst + 0x84));
   }
   return 1;
 }
