@@ -4,13 +4,13 @@
 int __Unwind_FindEnclosingFunction(pc)
   void *pc;
 {
-  void *pvVar1;
+  void *unwind_Find_FDEResult;
   void *pvVar2;
   dwarf_eh_bases adStack_20 [2];
   
-  pvVar1 = ((int (*)())__Unwind_Find_FDE)((void *)((int)pc + -1),adStack_20);
+  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)((int)pc + -1),adStack_20);
   pvVar2 = (void *)0x0;
-  if (pvVar1 != (void *)0x0) {
+  if (unwind_Find_FDEResult != (void *)0x0) {
     pvVar2 = (void *)adStack_20[0].func;
   }
   return pvVar2;
@@ -31,9 +31,9 @@ int __Unwind_GetTextRelBase(context)
 }
 
 /* _extract_cie_info @ 0x97c1a62c (348 bytes) */
-int _extract_cie_info(param_1, param_2, param_3)
+int _extract_cie_info(param_1, context, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 context;
   int param_3;
 {
   undefined4 lebValue;
@@ -42,7 +42,7 @@ int _extract_cie_info(param_1, param_2, param_3)
   char cVar3;
   byte bVar4;
   int length;
-  undefined4 uVar6;
+  undefined4 base_of_encoded_valueResult;
   undefined1 *puVar7;
   byte *pbVar8;
   char *pcVar9;
@@ -95,9 +95,9 @@ LAB_97c1a718:
         return pbVar8;
       }
       bVar4 = *pbVar10;
-      uVar6 = _base_of_encoded_value((uint)bVar4,param_2);
+      base_of_encoded_valueResult = _base_of_encoded_value((uint)bVar4,context);
       pbVar10 = (byte *)_read_encoded_value_with_base_97c1a468
-                                  ((uint)bVar4,uVar6,pbVar10 + 1,param_3 + 0x390);
+                                  ((uint)bVar4,base_of_encoded_valueResult,pbVar10 + 1,param_3 + 0x390);
     }
     pcVar11 = pcVar11 + 1;
     cVar3 = *pcVar11;
@@ -508,10 +508,10 @@ switchD_97c1a7e8_caseD_4:
 }
 
 /* _execute_cfa_program @ 0x97c1aee8 (1084 bytes) */
-int _execute_cfa_program(param_1, param_2, param_3, param_4)
+int _execute_cfa_program(param_1, param_2, context, param_4)
   uint *param_1;
   uint *param_2;
-  int param_3;
+  int context;
   int param_4;
 {
   byte bVar1;
@@ -536,7 +536,7 @@ int _execute_cfa_program(param_1, param_2, param_3, param_4)
   puVar10 = (undefined4 *)0x0;
   *(undefined4 *)(param_4 + 0x378) = 0;
   if ((param_1 < param_2) &&
-     (uVar8 = *(uint *)(param_4 + 0x38c), uVar8 < *(uint *)(param_3 + 0x1c0))) {
+     (uVar8 = *(uint *)(param_4 + 0x38c), uVar8 < *(uint *)(context + 0x1c0))) {
     do {
       bVar1 = *(byte *)param_1;
       puVar12 = (uint *)((int)param_1 + 1);
@@ -568,7 +568,7 @@ LAB_97c1b3a0:
         break;
       case 1:
         bVar1 = *(byte *)(param_4 + 0x39d);
-        uVar6 = _base_of_encoded_value((uint)bVar1,param_3);
+        uVar6 = _base_of_encoded_value((uint)bVar1,context);
         puVar12 = (uint *)_read_encoded_value_with_base_97c1a468
                                     ((uint)bVar1,uVar6,puVar12,param_4 + 0x38c);
         break;
@@ -685,7 +685,7 @@ LAB_97c1b2e8:
         } while (uVar8 < 0x20);
         break;
       case 0x2e:
-        puVar7 = (uint *)(param_3 + 0x1d4);
+        puVar7 = (uint *)(context + 0x1d4);
 LAB_97c1b358:
         puVar12 = (uint *)_read_uleb128_97c1a3ec(puVar12,puVar7);
         break;
@@ -700,55 +700,57 @@ LAB_97c1b358:
 switchD_97c1afc0_caseD_0: ;
     } while ((puVar12 < param_2) &&
             (uVar8 = *(uint *)(param_4 + 0x38c), param_1 = puVar12,
-            uVar8 < *(uint *)(param_3 + 0x1c0)));
+            uVar8 < *(uint *)(context + 0x1c0)));
   }
   return;
 }
 
 /* _uw_frame_state_for @ 0x97c1b3e4 (328 bytes) */
-int _uw_frame_state_for(param_1, param_2)
-  int param_1;
+int _uw_frame_state_for(context, param_2)
+  int context;
   int param_2;
 {
+  undefined4 base_of_encoded_valueResult;
+  int size_of_encoded_valueResult;
   undefined4 uVar1;
   int iVar2;
-  int *piVar3;
-  int iVar4;
+  int *unwind_Find_FDEResult;
+  int extract_cie_infoResult;
   int iVar5;
   int iVar6;
   uint uVar7;
   int local_30 [5];
   
   _memset(param_2,0,0x3a4);
-  *(undefined4 *)(param_1 + 0x1c4) = 0;
-  *(undefined4 *)(param_1 + 0x1d4) = 0;
-  piVar3 = ((int (*)())__Unwind_Find_FDE)((void *)(*(int *)(param_1 + 0x1c0) + -1),
-                             (dwarf_eh_bases *)(param_1 + 0x1c8));
+  *(undefined4 *)(context + 0x1c4) = 0;
+  *(undefined4 *)(context + 0x1d4) = 0;
+  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)(*(int *)(context + 0x1c0) + -1),
+                             (dwarf_eh_bases *)(context + 0x1c8));
   uVar1 = 5;
-  if (piVar3 != (int *)0x0) {
-    *(undefined4 *)(param_2 + 0x38c) = *(undefined4 *)(param_1 + 0x1d0);
-    iVar2 = piVar3[1];
-    iVar6 = (int)piVar3 + (4 - iVar2);
-    iVar4 = ((int (*)())_extract_cie_info)(iVar6,param_1,param_2);
+  if (unwind_Find_FDEResult != (int *)0x0) {
+    *(undefined4 *)(param_2 + 0x38c) = *(undefined4 *)(context + 0x1d0);
+    iVar2 = unwind_Find_FDEResult[1];
+    iVar6 = (int)unwind_Find_FDEResult + (4 - iVar2);
+    extract_cie_infoResult = ((int (*)())_extract_cie_info)(iVar6,context,param_2);
     uVar1 = 3;
-    if (iVar4 != 0) {
+    if (extract_cie_infoResult != 0) {
       iVar5 = 0;
-      ((int (*)())_execute_cfa_program)(iVar4,iVar6 + *(int *)((int)piVar3 + (4 - iVar2)) + 4,param_1,param_2);
-      iVar2 = _size_of_encoded_value_97c1a2c8((uint)*(byte *)(param_2 + 0x39d));
-      iVar2 = (int)piVar3 + iVar2 * 2 + 8;
+      ((int (*)())_execute_cfa_program)(extract_cie_infoResult,iVar6 + *(int *)((int)unwind_Find_FDEResult + (4 - iVar2)) + 4,context,param_2);
+      size_of_encoded_valueResult = _size_of_encoded_value_97c1a2c8((uint)*(byte *)(param_2 + 0x39d));
+      iVar2 = (int)unwind_Find_FDEResult + size_of_encoded_valueResult * 2 + 8;
       if (*(char *)(param_2 + 0x39f) != '\0') {
         iVar2 = _read_uleb128_97c1a3ec(iVar2,local_30);
         iVar5 = iVar2 + local_30[0];
       }
       uVar7 = (uint)*(byte *)(param_2 + 0x39e);
       if (uVar7 != 0xff) {
-        uVar1 = _base_of_encoded_value(uVar7,param_1);
-        iVar2 = _read_encoded_value_with_base_97c1a468(uVar7,uVar1,iVar2,param_1 + 0x1c4);
+        base_of_encoded_valueResult = _base_of_encoded_value(uVar7,context);
+        iVar2 = _read_encoded_value_with_base_97c1a468(uVar7,base_of_encoded_valueResult,iVar2,context + 0x1c4);
       }
       if (iVar5 == 0) {
         iVar5 = iVar2;
       }
-      ((int (*)())_execute_cfa_program)(iVar5,(int)piVar3 + *piVar3 + 4,param_1,param_2);
+      ((int (*)())_execute_cfa_program)(iVar5,(int)unwind_Find_FDEResult + *unwind_Find_FDEResult + 4,context,param_2);
       uVar1 = 0;
     }
   }
@@ -761,7 +763,7 @@ int ___frame_state_for(param_1, param_2)
   int param_2;
 {
   char cVar1;
-  int iVar2;
+  int uw_frame_state_forResult;
   undefined1 *puVar3;
   char *pcVar4;
   undefined4 *puVar5;
@@ -780,9 +782,9 @@ int ___frame_state_for(param_1, param_2)
   puVar3 = auStack_5a0;
   _memset(puVar3,0,0x1d8);
   local_3e0 = param_1 + 1;
-  iVar2 = ((int (*)())_uw_frame_state_for)(puVar3,&local_3c0);
+  uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(puVar3,&local_3c0);
   iVar6 = 0;
-  if ((iVar2 == 0) && (local_38 != 2)) {
+  if ((uw_frame_state_forResult == 0) && (local_38 != 2)) {
     iVar6 = 0x4e;
     puVar5 = (undefined4 *)(param_2 + 0x10);
     pcVar4 = (char *)(param_2 + 0x14c);
@@ -879,8 +881,8 @@ int _uw_update_context(param_1, param_2)
 }
 
 /* _uw_init_context_1 @ 0x97c1b79c (132 bytes) */
-int _uw_init_context_1(param_1, param_2, param_3)
-  int param_1;
+int _uw_init_context_1(context, param_2, param_3)
+  int context;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -890,18 +892,18 @@ int _uw_init_context_1(param_1, param_2, param_3)
   int local_50;
   undefined4 local_48;
   
-  _memset(param_1,0,0x1d8);
-  *(undefined4 *)(param_1 + 0x1c0) = in_LR;
-  local_54 = ((int (*)())_uw_frame_state_for)(param_1,auStack_3d0);
+  _memset(context,0,0x1d8);
+  *(undefined4 *)(context + 0x1c0) = in_LR;
+  local_54 = ((int (*)())_uw_frame_state_for)(context,auStack_3d0);
   if (local_54 != 0) {
                     
     _abort();
   }
-  *(undefined4 *)(param_1 + 0x1bc) = param_2;
+  *(undefined4 *)(context + 0x1bc) = param_2;
   local_48 = 1;
   local_50 = local_54;
-  ((int (*)())_uw_update_context_1)(param_1,auStack_3d0);
-  *(undefined4 *)(param_1 + 0x1c0) = param_3;
+  ((int (*)())_uw_update_context_1)(context,auStack_3d0);
+  *(undefined4 *)(context + 0x1c0) = param_3;
   return;
 }
 
@@ -910,13 +912,14 @@ int _uw_install_context_1(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int pthread_onceResult;
   byte *pbVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   
-  iVar2 = _pthread_once((pthread_once_t *)&_once_regsizes_0,DAT_a7b7c084);
-  if ((iVar2 != 0) || (_dwarf_reg_size_table == '\0')) {
+  pthread_onceResult = _pthread_once((pthread_once_t *)&_once_regsizes_0,DAT_a7b7c084);
+  if ((pthread_onceResult != 0) || (_dwarf_reg_size_table == '\0')) {
     _dwarf_reg_size_table = '\x04';
     DAT_a7b7ea7d = 4;
     DAT_a7b7ea7e = 4;
@@ -1043,30 +1046,30 @@ int _uw_install_context_1(param_1, param_2)
 }
 
 /* __Unwind_RaiseException_Phase2 @ 0x97c1baac (192 bytes) */
-int __Unwind_RaiseException_Phase2(param_1, param_2)
+int __Unwind_RaiseException_Phase2(param_1, context)
   undefined4 *param_1;
-  int param_2;
+  int context;
 {
   uint uVar1;
   bool bVar2;
-  int iVar3;
+  int uw_frame_state_forResult;
   int iVar4;
   undefined1 auStack_3c0 [912];
   code *local_30;
   
   while( true ) {
-    iVar3 = ((int (*)())_uw_frame_state_for)(param_2,auStack_3c0);
+    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(context,auStack_3c0);
     iVar4 = 2;
-    uVar1 = (uint)(*(int *)(param_2 + 0x1c0) == param_1[4]);
-    if ((iVar3 != 0) ||
+    uVar1 = (uint)(*(int *)(context + 0x1c0) == param_1[4]);
+    if ((uw_frame_state_forResult != 0) ||
        ((local_30 != (code *)0x0 &&
-        ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,param_2,2), iVar4 == 7 ||
+        ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,context,2), iVar4 == 7 ||
          (bVar2 = iVar4 != 8, iVar4 = 2, bVar2)))))) break;
     if (uVar1 != 0) {
                     
       _abort();
     }
-    ((int (*)())_uw_update_context)(param_2,auStack_3c0);
+    ((int (*)())_uw_update_context)(context,auStack_3c0);
   }
   return iVar4;
 }
@@ -1105,10 +1108,11 @@ int __Unwind_RaiseException(exception_object)
 }
 
 /* __Unwind_ForcedUnwind_Phase2 @ 0x97c1bc88 (260 bytes) */
-int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
+int __Unwind_ForcedUnwind_Phase2(param_1, context)
   undefined4 *param_1;
-  undefined4 param_2;
+  undefined4 context;
 {
+  int uw_frame_state_forResult;
   int iVar1;
   int iVar2;
   undefined4 a1;
@@ -1120,21 +1124,21 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
   pcVar3 = (code *)param_1[3];
   a6 = param_1[4];
   while( true ) {
-    iVar1 = ((int (*)())_uw_frame_state_for)(param_2,auStack_3d0);
-    if ((iVar1 != 0) && (iVar1 != 5)) {
+    uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(context,auStack_3d0);
+    if ((uw_frame_state_forResult != 0) && (uw_frame_state_forResult != 5)) {
       return 2;
     }
     a1 = 10;
-    if (iVar1 == 5) {
+    if (uw_frame_state_forResult == 5) {
       a1 = 0x1a;
     }
-    iVar2 = (*pcVar3)(1,a1,*param_1,param_1[1],param_1,param_2,a6);
+    iVar2 = (*pcVar3)(1,a1,*param_1,param_1[1],param_1,context,a6);
     if (iVar2 != 0) break;
-    if (iVar1 == 5) {
+    if (uw_frame_state_forResult == 5) {
       return 5;
     }
     if (local_40 != (code *)0x0) {
-      iVar1 = (*local_40)(1,10,*param_1,param_1[1],param_1,param_2);
+      iVar1 = (*local_40)(1,10,*param_1,param_1[1],param_1,context);
       if (iVar1 == 7) {
         return 7;
       }
@@ -1142,7 +1146,7 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
         return 2;
       }
     }
-    ((int (*)())_uw_update_context)(param_2,auStack_3d0);
+    ((int (*)())_uw_update_context)(context,auStack_3d0);
   }
   return 2;
 }
@@ -1611,12 +1615,12 @@ LAB_97c1c810:
 int ___deregister_frame(fde)
   void *fde;
 {
-  void *pvVar1;
+  void *deregister_frame_infoResult;
   undefined4 extraout_r3;
   
   if (*(int *)fde != 0) {
-    pvVar1 = ___deregister_frame_info(fde);
-    _free(pvVar1);
+    deregister_frame_infoResult = ___deregister_frame_info(fde);
+    _free(deregister_frame_infoResult);
     return extraout_r3;
   }
   return fde;
@@ -1662,8 +1666,8 @@ int _get_cie_encoding(param_1)
 {
   int length;
   char cVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int read_sleb128Result;
+  undefined4 read_uleb128Result;
   byte *pbVar4;
   byte bVar5;
   char *pcVar6;
@@ -1674,9 +1678,9 @@ int _get_cie_encoding(param_1)
   bVar5 = 0;
   if (*(char *)(param_1 + 9) == 'z') {
     length = _strlen(param_1 + 9);
-    uVar3 = ((int (*)())_read_uleb128_97c1c41c)(param_1 + 9 + length + 1,auStack_20);
-    iVar2 = ((int (*)())_read_sleb128_97c1c44c)(uVar3,auStack_1c);
-    pbVar4 = (byte *)((int (*)())_read_uleb128_97c1c41c)(iVar2 + 1,auStack_20);
+    read_uleb128Result = ((int (*)())_read_uleb128_97c1c41c)(param_1 + 9 + length + 1,auStack_20);
+    read_sleb128Result = ((int (*)())_read_sleb128_97c1c44c)(read_uleb128Result,auStack_1c);
+    pbVar4 = (byte *)((int (*)())_read_uleb128_97c1c41c)(read_sleb128Result + 1,auStack_20);
     for (pcVar6 = (char *)(param_1 + 10); cVar1 = *pcVar6, cVar1 != 'R'; pcVar6 = pcVar6 + 1) {
       if (cVar1 == 'P') {
         pbVar4 = (byte *)((int (*)())_read_encoded_value_with_base_97c1c498)(*pbVar4 & 0x7f,0,pbVar4 + 1,auStack_18);
@@ -1741,17 +1745,17 @@ int _fde_mixed_encoding_compare(param_1, param_2, param_3)
   int param_3;
 {
   undefined4 baseAddress;
-  uint uVar1;
+  uint get_cie_encodingResult;
   undefined4 uVar2;
   uint local_30;
   uint local_2c [5];
   
-  uVar1 = ((int (*)())_get_cie_encoding)((param_2 - *(int *)(param_2 + 4)) + 4);
-  baseAddress = ((int (*)())_base_from_object)(uVar1 & 0xff,param_1);
-  ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 & 0xff,baseAddress,param_2 + 8,&local_30);
-  uVar1 = ((int (*)())_get_cie_encoding)((param_3 - *(int *)(param_3 + 4)) + 4);
-  baseAddress = ((int (*)())_base_from_object)(uVar1 & 0xff,param_1);
-  ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 & 0xff,baseAddress,param_3 + 8,local_2c);
+  get_cie_encodingResult = ((int (*)())_get_cie_encoding)((param_2 - *(int *)(param_2 + 4)) + 4);
+  baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
+  ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,param_2 + 8,&local_30);
+  get_cie_encodingResult = ((int (*)())_get_cie_encoding)((param_3 - *(int *)(param_3 + 4)) + 4);
+  baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
+  ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,param_3 + 8,local_2c);
   uVar2 = 1;
   if (local_30 <= local_2c[0]) {
     if (local_30 < local_2c[0]) {
@@ -1999,7 +2003,7 @@ int _linear_search_fdes(param_1, param_2, param_3)
   int iVar1;
   undefined4 baseAddress;
   uint uVar3;
-  undefined4 uVar4;
+  undefined4 read_encoded_value_with_baseResult;
   uint uVar5;
   int *piVar6;
   int iVar7;
@@ -2030,8 +2034,8 @@ int _linear_search_fdes(param_1, param_2, param_3)
         uVar5 = local_40;
       }
       else {
-        uVar4 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar8,baseAddress,param_2 + 2,&local_40);
-        ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar3 & 0xf,0,uVar4,local_3c);
+        read_encoded_value_with_baseResult = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar8,baseAddress,param_2 + 2,&local_40);
+        ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar3 & 0xf,0,read_encoded_value_with_baseResult,local_3c);
         uVar5 = ((int (*)())_size_of_encoded_value_97c1c3a4)(uVar8);
         if (uVar5 < 4) {
           uVar5 = (1 << ((uVar5 & 7) << 3)) - 1;
@@ -2055,11 +2059,13 @@ int _search_object(param_1, param_2)
   uint *param_1;
   uint param_2;
 {
+  uint get_cie_encodingResult;
+  int linear_search_fdesResult;
   undefined4 baseAddress;
   uint uVar1;
   uint uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 read_encoded_value_with_baseResult;
+  undefined4 read_encoded_value_with_baseResult2;
   uint uVar5;
   uint uVar6;
   uint uVar7;
@@ -2107,8 +2113,8 @@ int _search_object(param_1, param_2)
           do {
             uVar8 = uVar2 + uVar7 >> 1;
             iVar10 = *(int *)(uVar8 * 4 + uVar6 + 8);
-            uVar4 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar5,baseAddress,iVar10 + 8,&local_38);
-            ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 >> 0x15 & 0xf,0,uVar4,local_34);
+            read_encoded_value_with_baseResult2 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar5,baseAddress,iVar10 + 8,&local_38);
+            ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 >> 0x15 & 0xf,0,read_encoded_value_with_baseResult2,local_34);
             if ((local_38 <= param_2) &&
                (uVar2 = uVar8 + 1, uVar8 = uVar7, param_2 < local_38 + local_34[0])) {
               return iVar10;
@@ -2126,10 +2132,10 @@ int _search_object(param_1, param_2)
         do {
           uVar6 = uVar7 + uVar1 >> 1;
           iVar10 = *(int *)(uVar6 * 4 + uVar5 + 8);
-          uVar2 = ((int (*)())_get_cie_encoding)((iVar10 - *(int *)(iVar10 + 4)) + 4);
-          baseAddress = ((int (*)())_base_from_object)(uVar2 & 0xff,param_1);
-          uVar3 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar2 & 0xff,baseAddress,iVar10 + 8,&local_40);
-          ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar2 & 0xf,0,uVar3,&local_3c);
+          get_cie_encodingResult = ((int (*)())_get_cie_encoding)((iVar10 - *(int *)(iVar10 + 4)) + 4);
+          baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
+          read_encoded_value_with_baseResult = ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,iVar10 + 8,&local_40);
+          ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xf,0,read_encoded_value_with_baseResult,&local_3c);
           if ((local_40 <= param_2) &&
              (uVar7 = uVar6 + 1, uVar6 = uVar1, param_2 < local_40 + local_3c)) {
             return iVar10;
@@ -2141,15 +2147,15 @@ int _search_object(param_1, param_2)
   }
   else {
     if ((uVar1 & 0x40000000) == 0) {
-      iVar10 = ((int (*)())_linear_search_fdes)(param_1,param_1[3],param_2);
-      return iVar10;
+      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(param_1,param_1[3],param_2);
+      return linear_search_fdesResult;
     }
     piVar9 = (int *)param_1[3];
     iVar10 = *piVar9;
     while (iVar10 != 0) {
-      iVar10 = ((int (*)())_linear_search_fdes)(param_1,iVar10,param_2);
-      if (iVar10 != 0) {
-        return iVar10;
+      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(param_1,iVar10,param_2);
+      if (linear_search_fdesResult != 0) {
+        return linear_search_fdesResult;
       }
       piVar9 = piVar9 + 1;
       iVar10 = *piVar9;
@@ -2429,7 +2435,7 @@ int _examine_objects(param_1, param_2, param_3)
   uint *puVar1;
   uint *puVar2;
   int iVar3;
-  int iVar4;
+  int getsectdatafromheaderResult;
   undefined4 uVar5;
   uint *puVar6;
   uint *puVar7;
@@ -2448,10 +2454,10 @@ LAB_97c1dbb0:
       return iVar8;
     }
     if ((*(uint *)(iVar3 + 0x14) & 1) == 0) {
-      iVar4 = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__DATA","__eh_frame",local_40);
-      if (iVar4 == 0) {
-        iVar4 = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__TEXT","__eh_frame",local_40);
-        if (iVar4 != 0) {
+      getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__DATA","__eh_frame",local_40);
+      if (getsectdatafromheaderResult == 0) {
+        getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__TEXT","__eh_frame",local_40);
+        if (getsectdatafromheaderResult != 0) {
           *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 4;
           goto LAB_97c1da58;
         }
@@ -2460,7 +2466,7 @@ LAB_97c1dbb0:
 LAB_97c1da58:
         if (local_40[0] != 0) {
           puVar7 = (uint *)0x0;
-          uVar9 = iVar4 + *(int *)(iVar3 + 8);
+          uVar9 = getsectdatafromheaderResult + *(int *)(iVar3 + 8);
           if (param_3 == 0) {
             puVar7 = (uint *)_calloc(1,0x1c);
           }
@@ -2700,10 +2706,10 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_(this, text)
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique @ 0x97c30be0 (388 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(this, pair, param_3)
+int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(this, pair, text)
   unsigned char * this;
   unsigned char * pair;
-  int param_3;
+  int text;
 {
   int iVar1;
   uint *puVar2;
@@ -2725,7 +2731,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   iVar1 = 1;
   iVar5 = iVar4;
   if (*(int *)(iVar4 + 4) != 0) {
-    pvVar3 = *(void **)(param_3 + 4);
+    pvVar3 = *(void **)(text + 4);
     iVar6 = *(int *)(iVar4 + 4);
     do {
       iVar5 = iVar6;
@@ -2754,7 +2760,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   if (iVar1 != 0) {
     local_60[0] = *(int *)(iVar4 + 8);
     if (iVar5 == local_60[0]) {
-      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,param_3);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,text);
       goto LAB_97c30d34;
     }
     std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
@@ -2763,12 +2769,12 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   puVar2 = &local_34;
   uVar7 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
   local_38 = uVar7;
-  uVar8 = *(uint *)((int)*(void **)(param_3 + 4) + -0xc);
+  uVar8 = *(uint *)((int)*(void **)(text + 4) + -0xc);
   local_34 = uVar8;
   if (uVar7 <= uVar8) {
     puVar2 = &local_38;
   }
-  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(param_3 + 4),*puVar2);
+  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(text + 4),*puVar2);
   if (iVar4 == 0) {
     iVar4 = uVar7 - uVar8;
   }
@@ -2777,7 +2783,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
     *(undefined4 *)(this + 4) = 0;
     return this;
   }
-  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,param_3);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,text);
   local_50[0] = local_60[0];
 LAB_97c30d34:
   *(int *)this = local_50[0];

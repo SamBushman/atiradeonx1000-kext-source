@@ -6,11 +6,11 @@ int _AddAtomFixed(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int lookUpAddStringHashResult;
+  undefined4 lReverseResult;
   int iVar3;
   
-  iVar1 = _LookUpAddStringHash(param_1,param_2);
+  lookUpAddStringHashResult = _LookUpAddStringHash(param_1,param_2);
   iVar3 = *(int *)(param_1 + 0x34);
   if ((iVar3 <= *(int *)(param_1 + 0x30)) || (iVar3 <= param_3)) {
     iVar3 = iVar3 << 1;
@@ -20,12 +20,12 @@ int _AddAtomFixed(param_1, param_2, param_3)
     _GrowAtomTable(param_1,iVar3);
   }
   *(undefined4 *)(param_3 * 4 + *(int *)(param_1 + 0x28)) =
-       *(undefined4 *)(iVar1 * 8 + *(int *)(param_1 + 0xc));
-  *(int *)(iVar1 * 8 + *(int *)(param_1 + 0xc) + 4) = param_3;
+       *(undefined4 *)(lookUpAddStringHashResult * 8 + *(int *)(param_1 + 0xc));
+  *(int *)(lookUpAddStringHashResult * 8 + *(int *)(param_1 + 0xc) + 4) = param_3;
   iVar3 = *(int *)(param_1 + 0x30);
   while (iVar3 <= param_3) {
-    uVar2 = _lReverse(iVar3);
-    *(undefined4 *)(*(int *)(param_1 + 0x30) * 4 + *(int *)(param_1 + 0x2c)) = uVar2;
+    lReverseResult = _lReverse(iVar3);
+    *(undefined4 *)(*(int *)(param_1 + 0x30) * 4 + *(int *)(param_1 + 0x2c)) = lReverseResult;
     iVar3 = *(int *)(param_1 + 0x30) + 1;
     *(int *)(param_1 + 0x30) = iVar3;
   }
@@ -165,8 +165,8 @@ int _InitCPP()
 {
   int length;
   undefined *puVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 mem_CreatePoolResult;
+  int maskruneResult;
   unsigned char _Var4;
   uint uVar5;
   char *pcVar6;
@@ -197,8 +197,8 @@ int _InitCPP()
   ___VERSION__Atom = _LookUpAddString(*(undefined4 *)puVar1,"__VERSION__");
   _versionAtom = _LookUpAddString(*(undefined4 *)puVar1,"version");
   _extensionAtom = _LookUpAddString(*(undefined4 *)puVar1,"extension");
-  uVar2 = ((int (*)())_mem_CreatePool)(0,0);
-  _macros = _NewScopeInPool(uVar2);
+  mem_CreatePoolResult = ((int (*)())_mem_CreatePool)(0,0);
+  _macros = _NewScopeInPool(mem_CreatePoolResult);
   builtin_strncpy(local_60,"PROFILE_",9);
   length = _strlen(local_60);
   puVar1 = PTR_DAT_a7b7c0a8;
@@ -210,8 +210,8 @@ int _InitCPP()
       uVar5 = -(uint)(*(uint *)(puVar1 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
     }
     else {
-      iVar3 = ___maskrune(uVar5,0x500);
-      uVar5 = (uint)(iVar3 != 0);
+      maskruneResult = ___maskrune(uVar5,0x500);
+      uVar5 = (uint)(maskruneResult != 0);
     }
     if (((uVar5 == 0) && (*pcVar7 != '_')) || (acStack_21 <= pcVar6)) break;
     _Var4 = ___toupper((int)*pcVar7);
@@ -253,6 +253,7 @@ int _FinalCPP(param_1, param_2, param_3, param_4, param_5, param_6)
 int _CPPdefine(param_1)
   int *param_1;
 {
+  int readTokenResult2;
   undefined4 stringOfAtom;
   int loopIndex;
   int loopIndex2;
@@ -261,7 +262,7 @@ int _CPPdefine(param_1)
   undefined *puVar1;
   int iVar2;
   undefined4 uVar3;
-  int iVar4;
+  int readTokenResult;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -363,11 +364,11 @@ LAB_97b86554:
         _RewindTokenStream(*(undefined4 *)(iVar8 + 0x20));
         _RewindTokenStream(local_48);
         do {
-          iVar2 = _ReadToken(*(undefined4 *)(iVar8 + 0x20),param_1);
+          readTokenResult2 = _ReadToken(*(undefined4 *)(iVar8 + 0x20),param_1);
           iVar7 = *param_1;
-          iVar4 = _ReadToken(local_48,param_1);
-          if ((iVar4 != iVar2) || (*param_1 != iVar7)) goto LAB_97b86728;
-        } while (0 < iVar4);
+          readTokenResult = _ReadToken(local_48,param_1);
+          if ((readTokenResult != readTokenResult2) || (*param_1 != iVar7)) goto LAB_97b86728;
+        } while (0 < readTokenResult);
       }
       else {
 LAB_97b86728:
@@ -398,6 +399,7 @@ LAB_97b86774:
 int _CPPundef(param_1)
   int param_1;
 {
+  int lookUpSymbolResult;
   undefined *puVar1;
   int iVar2;
   undefined4 extraout_r4;
@@ -419,9 +421,9 @@ int _CPPundef(param_1)
   else {
     uVar3 = extraout_r4;
     if (iVar2 == 0x10e) {
-      iVar2 = _LookUpSymbol(_macros,*(undefined4 *)(param_1 + 8));
-      if (iVar2 != 0) {
-        *(uint *)(iVar2 + 0x24) = *(uint *)(iVar2 + 0x24) | 0x40000000;
+      lookUpSymbolResult = _LookUpSymbol(_macros,*(undefined4 *)(param_1 + 8));
+      if (lookUpSymbolResult != 0) {
+        *(uint *)(lookUpSymbolResult + 0x24) = *(uint *)(lookUpSymbolResult + 0x24) | 0x40000000;
       }
       iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_1);
@@ -445,6 +447,7 @@ int _CPPelse(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   int param_7;
 {
+  int cpPifResult;
   undefined *puVar1;
   int iVar2;
   int iVar3;
@@ -527,8 +530,8 @@ int _CPPelse(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(int *)(*(int *)puVar1 + 0x34) = iVar4 + -1;
     *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + -1;
   }
-  iVar4 = ((int (*)())_CPPif)(param_2);
-  return iVar4;
+  cpPifResult = ((int (*)())_CPPif)(param_2);
+  return cpPifResult;
 }
 
 /* _op_logor @ 0x97b86b94 (28 bytes) */
@@ -692,6 +695,7 @@ int _eval(param_1, param_2, param_3, param_4, param_5)
   int *param_4;
   undefined4 *param_5;
 {
+  int lookUpSymbolResult;
   bool bVar1;
   undefined *puVar2;
   int iVar3;
@@ -709,7 +713,7 @@ int _eval(param_1, param_2, param_3, param_4, param_5)
   int *piVar7;
   undefined4 a0;
   undefined4 uVar8;
-  undefined8 uVar9;
+  undefined8 macroExpandResult;
   undefined8 uVar10;
   
   iVar5 = param_2;
@@ -732,9 +736,9 @@ int _eval(param_1, param_2, param_3, param_4, param_5)
       uVar10 = CONCAT44(iVar5,uVar8);
       if (iVar5 != 0x10e) goto LAB_97b86fdc;
       uVar8 = 0;
-      iVar5 = _LookUpSymbol(_macros,param_5[2]);
+      lookUpSymbolResult = _LookUpSymbol(_macros,param_5[2]);
       piVar7 = (int *)PTR__cpp_a7b7c0a4;
-      if ((iVar5 != 0) && ((*(uint *)(iVar5 + 0x24) & 0x40000000) == 0)) {
+      if ((lookUpSymbolResult != 0) && ((*(uint *)(lookUpSymbolResult + 0x24) & 0x40000000) == 0)) {
         uVar8 = 1;
       }
       *param_3 = uVar8;
@@ -743,9 +747,9 @@ int _eval(param_1, param_2, param_3, param_4, param_5)
       if (!bVar1) goto LAB_97b86f0c;
       goto LAB_97b86e70;
     }
-    uVar9 = ((int (*)())_MacroExpand)(param_5[2],param_5);
-    uVar10 = CONCAT44(0x10e,(int)uVar9);
-    if ((int)((ulonglong)uVar9 >> 0x20) == 0) goto LAB_97b86fdc;
+    macroExpandResult = ((int (*)())_MacroExpand)(param_5[2],param_5);
+    uVar10 = CONCAT44(0x10e,(int)macroExpandResult);
+    if ((int)((ulonglong)macroExpandResult >> 0x20) == 0) goto LAB_97b86fdc;
     in_r9 = *(int *)PTR__cpp_a7b7c0a4;
     param_1 = (**(code **)(*(int *)(in_r9 + 0x20) + 4))
                         (*(int *)(in_r9 + 0x20),param_5,a2,piVar6,a4,in_r8,in_r9);
@@ -901,6 +905,7 @@ int _CPPifdef(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int lookUpSymbolResult;
   undefined *puVar1;
   int iVar2;
   int iVar3;
@@ -924,7 +929,7 @@ int _CPPifdef(param_1, param_2)
     uVar7 = *(int *)(*(int *)puVar1 + 0x138) + 1;
     *(uint *)(*(int *)puVar1 + 0x138) = uVar7;
     if (iVar3 == 0x10e) {
-      iVar2 = _LookUpSymbol(_macros,uVar5);
+      lookUpSymbolResult = _LookUpSymbol(_macros,uVar5);
       iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_2);
       if (iVar3 != 10) {
@@ -937,7 +942,7 @@ int _CPPifdef(param_1, param_2)
         } while (iVar3 != 10);
       }
       iVar6 = 0;
-      if ((iVar2 != 0) && (uVar7 = *(uint *)(iVar2 + 0x24) & 0x40000000, uVar7 == 0)) {
+      if ((lookUpSymbolResult != 0) && (uVar7 = *(uint *)(lookUpSymbolResult + 0x24) & 0x40000000, uVar7 == 0)) {
         iVar6 = 1;
       }
       if (iVar6 != param_1) {
@@ -965,6 +970,7 @@ int _CPPifdef(param_1, param_2)
 int _CPPline(param_1)
   undefined4 *param_1;
 {
+  undefined4 atoiResult;
   undefined *puVar1;
   int iVar2;
   undefined4 uVar3;
@@ -991,15 +997,15 @@ int _CPPline(param_1)
   else {
     uVar3 = extraout_r4;
     if (iVar2 == 0x10f) {
-      uVar3 = _atoi(param_1 + 3);
-      *param_1 = uVar3;
-      _SetLineNumber(uVar3);
+      atoiResult = _atoi(param_1 + 3);
+      *param_1 = atoiResult;
+      _SetLineNumber(atoiResult);
       iVar2 = *(int *)(*(int *)puVar1 + 0x20);
       iVar2 = (**(code **)(iVar2 + 4))(iVar2,param_1);
       if (iVar2 == 0x10f) {
-        uVar3 = _atoi(param_1 + 3);
-        *param_1 = uVar3;
-        _SetStringNumber(uVar3);
+        atoiResult = _atoi(param_1 + 3);
+        *param_1 = atoiResult;
+        _SetStringNumber(atoiResult);
         iVar2 = *(int *)(*(int *)puVar1 + 0x20);
         iVar4 = (**(code **)(iVar2 + 4))(iVar2,param_1);
         iVar2 = iVar4;
@@ -1171,6 +1177,7 @@ LAB_97b875f0:
 int _CPPversion(param_1)
   int *param_1;
 {
+  int atoiResult;
   undefined *puVar1;
   int iVar2;
   int iVar3;
@@ -1205,9 +1212,9 @@ int _CPPversion(param_1)
     if (iVar2 != 0x10f) {
       _CPPErrorToInfoLog("#version",uVar4,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
-    iVar2 = _atoi(param_1 + 3);
-    *param_1 = iVar2;
-    if (iVar2 != 0x6e) {
+    atoiResult = _atoi(param_1 + 3);
+    *param_1 = atoiResult;
+    if (atoiResult != 0x6e) {
       _CPPShInfoLogMsg("Version number not supported by GL2",extraout_r4_02,in_r5,in_r6,in_r7,in_r8,
                        in_r9);
     }
@@ -1292,6 +1299,7 @@ int _CPPextension(param_1)
 int _readCPPline(param_1)
   int param_1;
 {
+  int chkCorrectElseNestingResult;
   undefined4 stringOfAtom;
   undefined4 strfromTStr;
   undefined *puVar1;
@@ -1319,8 +1327,8 @@ int _readCPPline(param_1)
     }
     else {
       if (iVar2 == _elseAtom) {
-        iVar3 = ((int (*)())_ChkCorrectElseNesting)();
-        if (iVar3 == 0) {
+        chkCorrectElseNestingResult = ((int (*)())_ChkCorrectElseNesting)();
+        if (chkCorrectElseNestingResult == 0) {
           _CPPErrorToInfoLog("#else after a #else",extraout_r4_00,in_r5,in_r6,in_r7,in_r8,in_r9);
           iVar3 = 0;
           uVar5 = 1;
@@ -1492,7 +1500,7 @@ int _PrescanMacroArg(param_1, param_2)
   undefined *puVar1;
   int iVar2;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 newTokenStreamResult;
   
   _RewindTokenStream(param_1);
   do {
@@ -1501,7 +1509,7 @@ int _PrescanMacroArg(param_1, param_2)
        (iVar3 = _LookUpSymbol(_macros,*(undefined4 *)(param_2 + 8)), iVar3 != 0)) break;
   } while (0 < iVar2);
   if (0 < iVar2) {
-    uVar4 = _NewTokenStream("macro arg",0);
+    newTokenStreamResult = _NewTokenStream("macro arg",0);
     ((int (*)())_PushEofSrc)();
     _ReadFromTokenStream(param_1,0,0);
     puVar1 = PTR__cpp_a7b7c0a4;
@@ -1509,12 +1517,12 @@ int _PrescanMacroArg(param_1, param_2)
                              (*(int *)(*(int *)puVar1 + 0x20),param_2), 0 < iVar2) {
       if ((iVar2 != 0x10e) ||
          (iVar3 = ((int (*)())_MacroExpand)(*(undefined4 *)(param_2 + 8),param_2), iVar3 == 0)) {
-        _RecordToken(uVar4,iVar2,param_2);
+        _RecordToken(newTokenStreamResult,iVar2,param_2);
       }
     }
     ((int (*)())_PopEofSrc)();
     _DeleteTokenStream(param_1);
-    param_1 = uVar4;
+    param_1 = newTokenStreamResult;
   }
   return param_1;
 }
@@ -1528,6 +1536,7 @@ int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  int readTokenResult;
   bool bVar1;
   undefined *puVar2;
   int iVar3;
@@ -1535,9 +1544,9 @@ int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar5;
   int iVar6;
   
-  iVar5 = _ReadToken(*(undefined4 *)(param_1[6] + 8),param_2);
+  readTokenResult = _ReadToken(*(undefined4 *)(param_1[6] + 8),param_2);
   puVar2 = PTR__cpp_a7b7c0a4;
-  if (iVar5 == 0x10e) {
+  if (readTokenResult == 0x10e) {
     iVar6 = *(int *)param_1[6] + -1;
     bVar1 = iVar6 < 0;
     if (!bVar1) {
@@ -1559,7 +1568,7 @@ int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
       } while (!bVar1);
     }
   }
-  if (0 < iVar5) {
+  if (0 < readTokenResult) {
     return;
   }
   *(uint *)(param_1[6] + 0xc) = *(uint *)(param_1[6] + 0xc) & 0x7fffffff;
@@ -1592,6 +1601,9 @@ int _MacroExpand(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
+  undefined4 prescanMacroArgResult;
+  undefined4 atoiResult;
+  int newTokenStreamResult;
   undefined4 stringOfAtom;
   int loopIndex;
   undefined4 strfromTStr;
@@ -1601,7 +1613,7 @@ int _MacroExpand(param_1, param_2)
   bool bVar3;
   undefined *puVar4;
   undefined *puVar5;
-  int iVar6;
+  int lookUpSymbolResult;
   undefined4 uVar7;
   undefined4 *allocation;
   int iVar9;
@@ -1616,17 +1628,17 @@ int _MacroExpand(param_1, param_2)
   int iVar11;
   int iVar12;
   
-  iVar6 = _LookUpSymbol(_macros,param_1);
+  lookUpSymbolResult = _LookUpSymbol(_macros,param_1);
   if (param_1 == ___LINE__Atom) {
     uVar7 = _GetLineNumber();
   }
   else {
     if (param_1 != ___FILE__Atom) {
       if (param_1 != ___VERSION__Atom) {
-        if ((iVar6 == 0) || ((*(uint *)(iVar6 + 0x24) & 0x40000000) != 0)) {
+        if ((lookUpSymbolResult == 0) || ((*(uint *)(lookUpSymbolResult + 0x24) & 0x40000000) != 0)) {
           return 0;
         }
-        if ((int)*(uint *)(iVar6 + 0x24) < 0) {
+        if ((int)*(uint *)(lookUpSymbolResult + 0x24) < 0) {
           return 0;
         }
         allocation = (undefined4 *)_malloc(0x20);
@@ -1642,9 +1654,9 @@ int _MacroExpand(param_1, param_2)
         allocation[1] = uVar7;
         allocation[5] = *(undefined4 *)(*(int *)(iVar11 + 0x20) + 0x14);
         a6 = *(int **)(*(int *)(iVar11 + 0x20) + 0x10);
-        allocation[6] = iVar6 + 0x18;
+        allocation[6] = lookUpSymbolResult + 0x18;
         allocation[4] = a6;
-        if (*(int *)(iVar6 + 0x1c) != 0) {
+        if (*(int *)(lookUpSymbolResult + 0x1c) != 0) {
           iVar11 = (**(code **)(*(int *)(iVar11 + 0x20) + 4))
                              (*(int *)(iVar11 + 0x20),param_2,in_r5,in_r6,in_r7,in_r8,a6,iVar11);
           if (iVar11 != 0x28) {
@@ -1657,10 +1669,10 @@ int _MacroExpand(param_1, param_2)
           iVar11 = 0;
           if (0 < *(int *)allocation[6]) {
             do {
-              iVar9 = _NewTokenStream("macro arg",0);
+              newTokenStreamResult = _NewTokenStream("macro arg",0);
               a6 = (int *)allocation[7];
               iVar12 = iVar11 + 1;
-              a6[iVar11] = iVar9;
+              a6[iVar11] = newTokenStreamResult;
               iVar11 = iVar12;
             } while (iVar12 < *(int *)allocation[6]);
           }
@@ -1701,8 +1713,8 @@ LAB_97b881d8:
         goto LAB_97b883b8;
       }
       param_2[3] = 0x31303000;
-      uVar7 = _atoi(param_2 + 3);
-      *param_2 = uVar7;
+      atoiResult = _atoi(param_2 + 3);
+      *param_2 = atoiResult;
       goto LAB_97b88078;
     }
     uVar7 = _GetStringNumber();
@@ -1762,15 +1774,15 @@ LAB_97b8830c:
     do {
       iVar9 = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      uVar7 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + allocation[7]),param_2);
-      *(undefined4 *)(iVar9 + allocation[7]) = uVar7;
+      prescanMacroArgResult = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + allocation[7]),param_2);
+      *(undefined4 *)(iVar9 + allocation[7]) = prescanMacroArgResult;
     } while (loopIndex < *(int *)allocation[6]);
   }
 LAB_97b883b8:
   puVar4 = PTR__cpp_a7b7c0a4;
   *allocation = *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
-  *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 0x80000000;
-  _RewindTokenStream(*(undefined4 *)(iVar6 + 0x20));
+  *(uint *)(lookUpSymbolResult + 0x24) = *(uint *)(lookUpSymbolResult + 0x24) | 0x80000000;
+  _RewindTokenStream(*(undefined4 *)(lookUpSymbolResult + 0x20));
   *(undefined4 **)(*(int *)puVar4 + 0x20) = allocation;
   return 1;
 }
@@ -1840,8 +1852,9 @@ int _ResetPreprocessor()
 /* _InitPreprocessor @ 0x97b88598 (136 bytes) */
 int _InitPreprocessor()
 {
+  int initScannerResult;
   undefined *puVar1;
-  int iVar2;
+  int initAtomTableResult;
   uint uVar3;
   
   ((int (*)())_FreeCPPStruct)();
@@ -1849,11 +1862,11 @@ int _InitPreprocessor()
   *(undefined4 *)(_cpp + 0xc) = 1;
   puVar1 = PTR__atable_a7b7c0ac;
   *(char **)(_cpp + 4) = "generic";
-  iVar2 = ((int (*)())_InitAtomTable)(*(undefined4 *)puVar1,0);
+  initAtomTableResult = ((int (*)())_InitAtomTable)(*(undefined4 *)puVar1,0);
   uVar3 = 1;
-  if (iVar2 != 0) {
-    iVar2 = ((int (*)())_InitScanner)(_cpp);
-    uVar3 = (uint)(iVar2 == 0);
+  if (initAtomTableResult != 0) {
+    initScannerResult = ((int (*)())_InitScanner)(_cpp);
+    uVar3 = (uint)(initScannerResult == 0);
   }
   return uVar3;
 }
@@ -1980,18 +1993,18 @@ int _mem_AddCleanup(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined4 uVar1;
-  undefined4 *puVar2;
+  undefined4 *mem_AllocResult;
   
   *(uint *)(param_1 + 4) = *(int *)(param_1 + 4) + 3U & 0xfffffffc;
-  puVar2 = (undefined4 *)((int (*)())_mem_Alloc)(param_1,0xc);
+  mem_AllocResult = (undefined4 *)((int (*)())_mem_Alloc)(param_1,0xc);
   uVar1 = 0xffffffff;
-  if (puVar2 != (undefined4 *)0x0) {
+  if (mem_AllocResult != (undefined4 *)0x0) {
     uVar1 = *(undefined4 *)(param_1 + 0x14);
-    puVar2[1] = param_2;
-    *puVar2 = uVar1;
+    mem_AllocResult[1] = param_2;
+    *mem_AllocResult = uVar1;
     uVar1 = 0;
-    puVar2[2] = param_3;
-    *(undefined4 **)(param_1 + 0x14) = puVar2;
+    mem_AllocResult[2] = param_3;
+    *(undefined4 **)(param_1 + 0x14) = mem_AllocResult;
   }
   return uVar1;
 }
@@ -2006,10 +2019,10 @@ int _eof_scan_97b88924()
 int _InitScanner(param_1)
   int param_1;
 {
-  int iVar1;
+  int initCPPResult;
   
-  iVar1 = ((int (*)())_InitCPP)();
-  if (iVar1 != 0) {
+  initCPPResult = ((int (*)())_InitCPP)();
+  if (initCPPResult != 0) {
     *(int *)(param_1 + 0x18) = param_1 + 0x30;
     *(undefined4 *)(param_1 + 0x28) = 0;
     *(undefined **)(param_1 + 0x20) = &_eof_inputsrc;
@@ -2018,7 +2031,7 @@ int _InitScanner(param_1)
     *(undefined2 *)(param_1 + 0x30) = 0;
     *(undefined2 *)(param_1 + 0x32) = 0;
   }
-  return iVar1 != 0;
+  return initCPPResult != 0;
 }
 
 /* _str_getch @ 0x97b889a8 (228 bytes) */

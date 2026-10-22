@@ -829,13 +829,17 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
   undefined4 param_7;
   undefined4 param_8;
 {
+  undefined4 ppcRasterOpMachine_BufferMaskRTCAVResult;
+  undefined4 ppcRasterOpMachine_LogicOpRTCAVResult;
+  undefined4 ppcRasterOpMachine_BlendingRTCAVResult;
+  undefined4 ppcRasterOpMachine_DepthAndStencilTestRTCAVResult;
   undefined4 *codeWritePtr2;
   int codeWritePtr;
   undefined4 *codeCursor;
   int chunkIndex;
   bool bVar1;
   bool bVar2;
-  undefined4 uVar3;
+  undefined4 ppcRasterOpMachine_AlphaTestRTCAVResult;
   uint framebufferFormat;
   undefined4 *puVar5;
   int iVar6;
@@ -852,14 +856,14 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
     bVar2 = true;
   }
   if ((*(uint *)(*(int *)(iVar6 + 0xd80) + 0x3c) & 1) != 0) {
-    uVar3 = ((int (*)())_PPCRasterOpMachine_AlphaTestRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
+    ppcRasterOpMachine_AlphaTestRTCAVResult = ((int (*)())_PPCRasterOpMachine_AlphaTestRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
     iVar6 = *(int *)(compiler + 0xe20);
-    *(undefined4 *)(compiler + 0xe30) = uVar3;
+    *(undefined4 *)(compiler + 0xe30) = ppcRasterOpMachine_AlphaTestRTCAVResult;
   }
   if ((*(uint *)(*(int *)(iVar6 + 0xd80) + 0x3c) & 6) != 0) {
-    uVar3 = ((int (*)())_PPCRasterOpMachine_DepthAndStencilTestRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
+    ppcRasterOpMachine_DepthAndStencilTestRTCAVResult = ((int (*)())_PPCRasterOpMachine_DepthAndStencilTestRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
     iVar6 = *(int *)(compiler + 0xe20);
-    *(undefined4 *)(compiler + 0xe30) = uVar3;
+    *(undefined4 *)(compiler + 0xe30) = ppcRasterOpMachine_DepthAndStencilTestRTCAVResult;
   }
   if ((((*(uint *)(*(int *)(iVar6 + 0xd80) + 0x3c) & 8) != 0) || (bVar2)) || (bVar1)) {
     framebufferFormat = _PPEmulatorFramebufferFormat(iVar6);
@@ -879,17 +883,17 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
     iVar6 = *(int *)(compiler + 0xe20);
   }
   if ((*(uint *)(*(int *)(iVar6 + 0xd80) + 0x3c) & 8) != 0) {
-    uVar3 = ((int (*)())_PPCRasterOpMachine_BlendingRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
+    ppcRasterOpMachine_BlendingRTCAVResult = ((int (*)())_PPCRasterOpMachine_BlendingRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
     iVar6 = *(int *)(compiler + 0xe20);
-    *(undefined4 *)(compiler + 0xe30) = uVar3;
+    *(undefined4 *)(compiler + 0xe30) = ppcRasterOpMachine_BlendingRTCAVResult;
   }
   if ((*(uint *)(*(int *)(iVar6 + 0xd80) + 0x3c) & 0x20) != 0) {
-    uVar3 = ((int (*)())_PPCRasterOpMachine_LogicOpRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
-    *(undefined4 *)(compiler + 0xe30) = uVar3;
+    ppcRasterOpMachine_LogicOpRTCAVResult = ((int (*)())_PPCRasterOpMachine_LogicOpRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
+    *(undefined4 *)(compiler + 0xe30) = ppcRasterOpMachine_LogicOpRTCAVResult;
   }
   if (bVar1) {
-    uVar3 = ((int (*)())_PPCRasterOpMachine_BufferMaskRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
-    *(undefined4 *)(compiler + 0xe30) = uVar3;
+    ppcRasterOpMachine_BufferMaskRTCAVResult = ((int (*)())_PPCRasterOpMachine_BufferMaskRTCAV)(compiler + 0xe14,*(undefined4 *)(compiler + 0xe30));
+    *(undefined4 *)(compiler + 0xe30) = ppcRasterOpMachine_BufferMaskRTCAVResult;
   }
   framebufferFormat = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
   if ((framebufferFormat & 0x8000) == 0) {
@@ -1394,6 +1398,8 @@ int _PPCRuntimeCompilerLoop(compiler)
 int _PPCRuntimeCompilerCompileNO(compiler)
   int compiler;
 {
+  undefined4 glpDCBReallocResult;
+  int glpDCBReallocResult2;
   uint loopIndex;
   uint ppcInstWord4;
   undefined4 ppcInstWord3;
@@ -2185,9 +2191,9 @@ LAB_97bdd85c:
           codeWritePtr2 = *(int *)(compiler + 0xe2c);
           if (iVar16 - 2000U < (uint)(*(int *)(compiler + 0xe30) - codeWritePtr2)) {
             iVar16 = iVar16 + 0x2000;
-            iVar9 = _glpDCBRealloc(codeWritePtr2,iVar16);
-            *(int *)(compiler + 0xe2c) = iVar9;
-            codeWritePtr2 = iVar9 - codeWritePtr2 >> 2;
+            glpDCBReallocResult2 = _glpDCBRealloc(codeWritePtr2,iVar16);
+            *(int *)(compiler + 0xe2c) = glpDCBReallocResult2;
+            codeWritePtr2 = glpDCBReallocResult2 - codeWritePtr2 >> 2;
             if (codeWritePtr2 != 0) {
               codeWritePtr2 = codeWritePtr2 * 4;
               codeWritePtr3 = (int *)(*(int *)(compiler + 0xe3c) + codeWritePtr2);
@@ -2237,11 +2243,11 @@ LAB_97bdd85c:
     if (3 < iVar6 + 1U) {
       ((int (*)())_PPCRuntimeCompilerWriteEpilogNO)(compiler);
       codeWritePtr = *(int *)(compiler + 0xe30) - *(int *)(compiler + 0xe2c) >> 2;
-      uVar10 = _glpDCBRealloc(*(int *)(compiler + 0xe2c),codeWritePtr << 2);
-      *(undefined4 *)(compiler + 0xe2c) = uVar10;
+      glpDCBReallocResult = _glpDCBRealloc(*(int *)(compiler + 0xe2c),codeWritePtr << 2);
+      *(undefined4 *)(compiler + 0xe2c) = glpDCBReallocResult;
                     
                     
-      (*_glpPushInstructions)(codeWritePtr,uVar10,codeWritePtr4,in_r6,in_r7,in_r8,ppcInstWord2,codeWritePtr3);
+      (*_glpPushInstructions)(codeWritePtr,glpDCBReallocResult,codeWritePtr4,in_r6,in_r7,in_r8,ppcInstWord2,codeWritePtr3);
       return;
     }
   } while( true );
@@ -5191,6 +5197,7 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
   int param_2;
   uint *param_3;
 {
+  undefined4 *ppcTextureSamplerSampleTexel1DFromLevelRTCAVResult;
   uint *puVar1;
   int chunkIndex;
   undefined4 *puVar3;
@@ -5271,8 +5278,8 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
     return puVar3;
   }
   param_1[10] = 0;
-  puVar3 = (undefined4 *)((int (*)())_PPCTextureSamplerSampleTexel1DFromLevelRTCAV)(param_1,param_2,param_3);
-  return puVar3;
+  ppcTextureSamplerSampleTexel1DFromLevelRTCAVResult = (undefined4 *)((int (*)())_PPCTextureSamplerSampleTexel1DFromLevelRTCAV)(param_1,param_2,param_3);
+  return ppcTextureSamplerSampleTexel1DFromLevelRTCAVResult;
 }
 
 /* _PPCTextureSamplerSampleTexel2DRTCAV @ 0x97be263c (780 bytes) */
@@ -5281,6 +5288,7 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
   int param_2;
   uint *param_3;
 {
+  undefined4 *ppcTextureSamplerSampleTexel2DFromLevelRTCAVResult;
   uint *puVar1;
   int chunkIndex;
   undefined4 *puVar3;
@@ -5361,8 +5369,8 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
     return puVar3;
   }
   param_1[10] = 0;
-  puVar3 = (undefined4 *)((int (*)())_PPCTextureSamplerSampleTexel2DFromLevelRTCAV)(param_1,param_2,param_3);
-  return puVar3;
+  ppcTextureSamplerSampleTexel2DFromLevelRTCAVResult = (undefined4 *)((int (*)())_PPCTextureSamplerSampleTexel2DFromLevelRTCAV)(param_1,param_2,param_3);
+  return ppcTextureSamplerSampleTexel2DFromLevelRTCAVResult;
 }
 
 /* _PPCTextureSamplerSampleTexel3DRTCAV @ 0x97be2948 (780 bytes) */
@@ -5371,6 +5379,7 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
   int param_2;
   uint *param_3;
 {
+  undefined4 *ppcTextureSamplerSampleTexel3DFromLevelRTCAVResult;
   uint *puVar1;
   int chunkIndex;
   undefined4 *puVar3;
@@ -5451,8 +5460,8 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
     return puVar3;
   }
   param_1[10] = 0;
-  puVar3 = (undefined4 *)((int (*)())_PPCTextureSamplerSampleTexel3DFromLevelRTCAV)(param_1,param_2,param_3);
-  return puVar3;
+  ppcTextureSamplerSampleTexel3DFromLevelRTCAVResult = (undefined4 *)((int (*)())_PPCTextureSamplerSampleTexel3DFromLevelRTCAV)(param_1,param_2,param_3);
+  return ppcTextureSamplerSampleTexel3DFromLevelRTCAVResult;
 }
 
 /* _PPCTextureSamplerSampleTexel1DFromLevelRTCAV @ 0x97be2c58 (960 bytes) */
@@ -5461,6 +5470,7 @@ int _PPCTextureSamplerSampleTexel1DFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int ppcTextureSamplerWrapCoordinates1DRTCAVResult;
   int chunkIndex;
   bool bVar1;
   short sVar2;
@@ -5552,9 +5562,9 @@ LAB_97be2ebc:
       param_3 = param_3 + chunkIndex;
     }
     chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
-    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + chunkIndex);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,iVar5);
-    vectorInstWord = (undefined4 *)(iVar5 + iVar7 * 4);
+    ppcTextureSamplerWrapCoordinates1DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + chunkIndex);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,ppcTextureSamplerWrapCoordinates1DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates1DRTCAVResult + iVar7 * 4);
     *vectorInstWord = 0x10431c84;
   }
   else {
@@ -5579,16 +5589,16 @@ LAB_97be2eb4:
     }
     chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
     param_3[chunkIndex] = 0x10c00484;
-    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + chunkIndex + 1);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,iVar5);
-    vectorInstWord = (undefined4 *)(iVar5 + iVar7 * 4);
+    ppcTextureSamplerWrapCoordinates1DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + chunkIndex + 1);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,ppcTextureSamplerWrapCoordinates1DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates1DRTCAVResult + iVar7 * 4);
     *vectorInstWord = 0x1020228c;
     vectorInstWord[1] = 0x104138ee;
     vectorInstWord[2] = 0x100a4b2c;
     vectorInstWord[3] = 0x10060780;
-    iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,vectorInstWord + 4);
-    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,iVar5);
-    vectorInstWord = (undefined4 *)(iVar5 + iVar7 * 4);
+    ppcTextureSamplerWrapCoordinates1DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,vectorInstWord + 4);
+    iVar7 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample1DAVRTC,ppcTextureSamplerWrapCoordinates1DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates1DRTCAVResult + iVar7 * 4);
     *vectorInstWord = 0x10202a8c;
     vectorInstWord = vectorInstWord + 1;
     *vectorInstWord = 0x104110ee;
@@ -5602,6 +5612,7 @@ int _PPCTextureSamplerSampleTexel2DFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int ppcTextureSamplerWrapCoordinates2DRTCAVResult;
   int chunkIndex;
   bool bVar1;
   short sVar2;
@@ -5696,9 +5707,9 @@ LAB_97be32a0:
       param_3 = param_3 + chunkIndex;
     }
     chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + chunkIndex);
-    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar8 * 4);
+    ppcTextureSamplerWrapCoordinates2DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + chunkIndex);
+    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,ppcTextureSamplerWrapCoordinates2DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates2DRTCAVResult + iVar8 * 4);
     *vectorInstWord = 0x10431c84;
   }
   else {
@@ -5723,36 +5734,36 @@ LAB_97be3298:
     }
     chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
     param_3[chunkIndex] = 0x10c00484;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + chunkIndex + 1);
-    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar8 * 4);
+    ppcTextureSamplerWrapCoordinates2DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + chunkIndex + 1);
+    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,ppcTextureSamplerWrapCoordinates2DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates2DRTCAVResult + iVar8 * 4);
     *vectorInstWord = 0x1024492c;
     vectorInstWord[1] = 0x1021392e;
     vectorInstWord[2] = 0x10200a8c;
     vectorInstWord[3] = 0x104138ee;
     vectorInstWord[4] = 0x100a4a2c;
     vectorInstWord[5] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,vectorInstWord + 6);
-    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar8 * 4);
+    ppcTextureSamplerWrapCoordinates2DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,vectorInstWord + 6);
+    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,ppcTextureSamplerWrapCoordinates2DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates2DRTCAVResult + iVar8 * 4);
     *vectorInstWord = 0x1025492c;
     vectorInstWord[1] = 0x1021392e;
     vectorInstWord[2] = 0x10200a8c;
     vectorInstWord[3] = 0x104110ee;
     vectorInstWord[4] = 0x100a4b2c;
     vectorInstWord[5] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,vectorInstWord + 6);
-    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar8 * 4);
+    ppcTextureSamplerWrapCoordinates2DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,vectorInstWord + 6);
+    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,ppcTextureSamplerWrapCoordinates2DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates2DRTCAVResult + iVar8 * 4);
     *vectorInstWord = 0x1024492c;
     vectorInstWord[1] = 0x1021396e;
     vectorInstWord[2] = 0x10200a8c;
     vectorInstWord[3] = 0x104110ee;
     vectorInstWord[4] = 0x1003528c;
     vectorInstWord[5] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,vectorInstWord + 6);
-    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar8 * 4);
+    ppcTextureSamplerWrapCoordinates2DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,vectorInstWord + 6);
+    iVar8 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,ppcTextureSamplerWrapCoordinates2DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates2DRTCAVResult + iVar8 * 4);
     *vectorInstWord = 0x1025492c;
     vectorInstWord[1] = 0x1021396e;
     vectorInstWord[2] = 0x10200a8c;
@@ -5768,6 +5779,7 @@ int _PPCTextureSamplerSampleTexel3DFromLevelRTCAV(param_1, param_2, param_3)
   uint param_2;
   uint *param_3;
 {
+  int ppcTextureSamplerWrapCoordinates3DRTCAVResult;
   int chunkIndex;
   bool bVar1;
   short sVar2;
@@ -5866,9 +5878,9 @@ LAB_97be376c:
       param_3 = param_3 + chunkIndex;
     }
     chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + chunkIndex);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + chunkIndex);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x10431c84;
   }
   else {
@@ -5893,9 +5905,9 @@ LAB_97be3764:
     }
     chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
     param_3[chunkIndex] = 0x10c00484;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + chunkIndex + 1);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + chunkIndex + 1);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1024492c;
     vectorInstWord[1] = 0x1021392e;
     vectorInstWord[2] = 0x10044a2c;
@@ -5904,9 +5916,9 @@ LAB_97be3764:
     vectorInstWord[5] = 0x104138ee;
     vectorInstWord[6] = 0x100a4a2c;
     vectorInstWord[7] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1025492c;
     vectorInstWord[1] = 0x1021392e;
     vectorInstWord[2] = 0x10044a2c;
@@ -5915,9 +5927,9 @@ LAB_97be3764:
     vectorInstWord[5] = 0x104110ee;
     vectorInstWord[6] = 0x100a4b2c;
     vectorInstWord[7] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1024492c;
     vectorInstWord[1] = 0x1021396e;
     vectorInstWord[2] = 0x10044a2c;
@@ -5927,9 +5939,9 @@ LAB_97be3764:
     vectorInstWord[6] = 0x1003528c;
     vectorInstWord[7] = 0x10004a2c;
     vectorInstWord[8] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 9);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 9);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1025492c;
     vectorInstWord[1] = 0x1021396e;
     vectorInstWord[2] = 0x10044a2c;
@@ -5938,9 +5950,9 @@ LAB_97be3764:
     vectorInstWord[5] = 0x104110ee;
     vectorInstWord[6] = 0x100a492c;
     vectorInstWord[7] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1024492c;
     vectorInstWord[1] = 0x1021392e;
     vectorInstWord[2] = 0x10054a2c;
@@ -5950,9 +5962,9 @@ LAB_97be3764:
     vectorInstWord[6] = 0x1003528c;
     vectorInstWord[7] = 0x1009032c;
     vectorInstWord[8] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 9);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 9);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1025492c;
     vectorInstWord[1] = 0x1021392e;
     vectorInstWord[2] = 0x10054a2c;
@@ -5963,9 +5975,9 @@ LAB_97be3764:
     vectorInstWord[7] = 0x1000492c;
     vectorInstWord[8] = 0x1000022c;
     vectorInstWord[9] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 10);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 10);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1024492c;
     vectorInstWord[1] = 0x1021396e;
     vectorInstWord[2] = 0x10054a2c;
@@ -5974,9 +5986,9 @@ LAB_97be3764:
     vectorInstWord[5] = 0x104110ee;
     vectorInstWord[6] = 0x1003528c;
     vectorInstWord[7] = 0x10060780;
-    iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
-    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,iVar6);
-    vectorInstWord = (undefined4 *)(iVar6 + iVar9 * 4);
+    ppcTextureSamplerWrapCoordinates3DRTCAVResult = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,vectorInstWord + 8);
+    iVar9 = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample3DAVRTC,ppcTextureSamplerWrapCoordinates3DRTCAVResult);
+    vectorInstWord = (undefined4 *)(ppcTextureSamplerWrapCoordinates3DRTCAVResult + iVar9 * 4);
     *vectorInstWord = 0x1025492c;
     vectorInstWord[1] = 0x1021396e;
     vectorInstWord[2] = 0x10054a2c;
@@ -6152,10 +6164,10 @@ int _PPCNoiseGeneratorInitialise(param_1)
   uint loopIndex;
   undefined1 uVar1;
   undefined4 uVar2;
-  uint uVar3;
+  uint randomResult;
   int iVar4;
   float *pfVar5;
-  uint uVar6;
+  uint randomResult2;
   undefined1 *puVar7;
   
   _memset(param_1,0,0xa20);
@@ -6163,11 +6175,11 @@ int _PPCNoiseGeneratorInitialise(param_1)
   pfVar5 = (float *)(param_1 + 0x210);
   do {
     param_1[loopIndex] = (char)loopIndex;
-    uVar3 = _random();
+    randomResult = _random();
     loopIndex = loopIndex + 1;
     *pfVar5 = (float)(((double)CONCAT44(0x43300000,
-                                        (uVar3 + (((int)uVar3 >> 9) +
-                                                 (uint)((int)uVar3 < 0 && (uVar3 & 0x1ff) != 0)) *
+                                        (randomResult + (((int)randomResult >> 9) +
+                                                 (uint)((int)randomResult < 0 && (randomResult & 0x1ff) != 0)) *
                                                  -0x200) - 0x100 ^ 0x80000000) - 4503601774854144.0)
                      * 0.00390625);
     pfVar5 = pfVar5 + 1;
@@ -6175,8 +6187,8 @@ int _PPCNoiseGeneratorInitialise(param_1)
   puVar7 = param_1 + 0xff;
   do {
     uVar1 = *puVar7;
-    uVar6 = _random();
-    iVar4 = uVar6 + (((int)uVar6 >> 8) + (uint)((int)uVar6 < 0 && (uVar6 & 0xff) != 0)) * -0x100;
+    randomResult2 = _random();
+    iVar4 = randomResult2 + (((int)randomResult2 >> 8) + (uint)((int)randomResult2 < 0 && (randomResult2 & 0xff) != 0)) * -0x100;
     *puVar7 = param_1[iVar4];
     puVar7 = puVar7 + -1;
     param_1[iVar4] = uVar1;
@@ -6220,8 +6232,8 @@ int _PPCNoiseGeneratorCalculate1DAVRTC(param_1, param_2)
   undefined4 *param_2;
 {
   undefined4 *vectorInstWord;
-  int iVar2;
-  int iVar3;
+  int glpRTCAddAChunkResult;
+  int glpRTCAddAChunkResult2;
   uint loopIndex;
   undefined4 *vectorInstWord2;
   
@@ -6231,9 +6243,9 @@ int _PPCNoiseGeneratorCalculate1DAVRTC(param_1, param_2)
   loopIndex = 0;
   do {
     loopIndex = loopIndex + 1;
-    iVar2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
-    iVar3 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage1DAVRTC,vectorInstWord2 + iVar2);
-    vectorInstWord = vectorInstWord2 + iVar2 + iVar3;
+    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
+    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage1DAVRTC,vectorInstWord2 + glpRTCAddAChunkResult);
+    vectorInstWord = vectorInstWord2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
     *vectorInstWord = 0x1122486e;
     vectorInstWord[1] = 0x10003b6e;
     vectorInstWord[2] = 0x10213aee;
@@ -6252,8 +6264,8 @@ int _PPCNoiseGeneratorCalculate2DAVRTC(param_1, param_2)
   undefined4 *param_2;
 {
   undefined4 *vectorInstWord;
-  int iVar2;
-  int iVar3;
+  int glpRTCAddAChunkResult;
+  int glpRTCAddAChunkResult2;
   uint loopIndex;
   undefined4 *vectorInstWord2;
   
@@ -6263,9 +6275,9 @@ int _PPCNoiseGeneratorCalculate2DAVRTC(param_1, param_2)
   loopIndex = 0;
   do {
     loopIndex = loopIndex + 1;
-    iVar2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
-    iVar3 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage2DAVRTC,vectorInstWord2 + iVar2);
-    vectorInstWord = vectorInstWord2 + iVar2 + iVar3;
+    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
+    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage2DAVRTC,vectorInstWord2 + glpRTCAddAChunkResult);
+    vectorInstWord = vectorInstWord2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
     *vectorInstWord = 0x1122486e;
     vectorInstWord[1] = 0x10003b6e;
     vectorInstWord[2] = 0x10213aee;
@@ -6284,8 +6296,8 @@ int _PPCNoiseGeneratorCalculate3DAVRTC(param_1, param_2)
   undefined4 *param_2;
 {
   undefined4 *vectorInstWord;
-  int iVar2;
-  int iVar3;
+  int glpRTCAddAChunkResult;
+  int glpRTCAddAChunkResult2;
   uint loopIndex;
   undefined4 *vectorInstWord2;
   
@@ -6295,9 +6307,9 @@ int _PPCNoiseGeneratorCalculate3DAVRTC(param_1, param_2)
   loopIndex = 0;
   do {
     loopIndex = loopIndex + 1;
-    iVar2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
-    iVar3 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage3DAVRTC,vectorInstWord2 + iVar2);
-    vectorInstWord = vectorInstWord2 + iVar2 + iVar3;
+    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
+    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage3DAVRTC,vectorInstWord2 + glpRTCAddAChunkResult);
+    vectorInstWord = vectorInstWord2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
     *vectorInstWord = 0x1122486e;
     vectorInstWord[1] = 0x10003b6e;
     vectorInstWord[2] = 0x10213aee;
@@ -6414,6 +6426,8 @@ int _PPCRasterOpMachine_DepthAndStencilTestRTCAV(param_1, param_2)
   int *param_1;
   uint *param_2;
 {
+  uint *ppcRasterOpMachineUpdateStencilBufferRTCAVResult;
+  uint *ppcRasterOpMachineUpdateStencilBufferRTCAVResult2;
   uint ppcInstWord4;
   uint ppcInstWord3;
   uint *ppcInstWord;
@@ -6503,17 +6517,17 @@ int _PPCRasterOpMachine_DepthAndStencilTestRTCAV(param_1, param_2)
   *puVar15 = ppcInstWord3;
   puVar6 = param_2 + 6;
 switchD_97be45d8_default:
-  puVar6 = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(uVar5 >> 0xf & 7,0x1a,0x19,uVar2,uVar14,puVar6);
-  param_2 = puVar6 + 1;
-  *puVar6 = *(int *)(iVar13 + 0xe3c) - (int)puVar6 & 0x3fffffcU | 0x48000000;
+  ppcRasterOpMachineUpdateStencilBufferRTCAVResult = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(uVar5 >> 0xf & 7,0x1a,0x19,uVar2,uVar14,puVar6);
+  param_2 = ppcRasterOpMachineUpdateStencilBufferRTCAVResult + 1;
+  *ppcRasterOpMachineUpdateStencilBufferRTCAVResult = *(int *)(iVar13 + 0xe3c) - (int)ppcRasterOpMachineUpdateStencilBufferRTCAVResult & 0x3fffffcU | 0x48000000;
   *puVar15 = *puVar15 | (int)param_2 - (int)puVar15 & 0xfffcU;
 LAB_97be4754:
   if ((uVar10 & 4) == 0) {
     if (!bVar3) {
       return param_2;
     }
-    puVar15 = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(uVar5 >> 0x15 & 7,0x1a,0x19,uVar2,uVar14,param_2);
-    return puVar15;
+    ppcRasterOpMachineUpdateStencilBufferRTCAVResult2 = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(uVar5 >> 0x15 & 7,0x1a,0x19,uVar2,uVar14,param_2);
+    return ppcRasterOpMachineUpdateStencilBufferRTCAVResult2;
   }
   switch(uVar8 & 7) {
   case 0:

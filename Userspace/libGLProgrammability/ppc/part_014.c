@@ -852,7 +852,7 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textur
   int *textureObject;
   float *levelInfo;
   int nearestTexelData;
-  double dVar15;
+  double interpreterTextureSamplerLoadTexel3DResult;
   double fracT;
   double weight2dLH;
   double fracS;
@@ -949,8 +949,8 @@ LAB_97bd4b08:
     texelCoordR = (uint)(int)(coordR * nearestDepthF);
     intCastScratch = (longlong)(int)texelCoordR;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
-    dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
-    return dVar15;
+    interpreterTextureSamplerLoadTexel3DResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
+    return interpreterTextureSamplerLoadTexel3DResult;
   }
   if (minFilter < 0x2701) {
     if (minFilter == 0x2600) goto LAB_97bd4b08;
@@ -1061,7 +1061,7 @@ LAB_97bd4cb4:
   sampleCoordR = texelCoordR - 1;
   sampleCoordT = texelCoordT;
   ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
-  dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHLr)
+  interpreterTextureSamplerLoadTexel3DResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHLr)
   ;
   *texelOut = weightLLL * texelLLLr +
              weightLHL * texelLHLr +
@@ -1083,7 +1083,7 @@ LAB_97bd4cb4:
                weightHLL * texelHLLa +
                weightHHL * texelHHLa +
                weightLLH * texelLLHa + weightLHH * texelLHHa + weightHHH * texelHHHa + weightHLH * texelHLHa;
-  return dVar15;
+  return interpreterTextureSamplerLoadTexel3DResult;
 }
 
 /* _InterpreterTextureSamplerSampleTexelRECTFromLevel @ 0x97bd5110 (1056 bytes) */
@@ -2875,11 +2875,11 @@ int _glpRTCAddAChunk_97bd7cbc(param_1, param_2)
 int _PPCRuntimeCompilerCreate()
 {
   int allocation;
-  undefined4 uVar2;
+  undefined4 ppcTextureSamplerCreateResult;
   
   allocation = _calloc(0xe54,1);
-  uVar2 = _PPCTextureSamplerCreate();
-  *(undefined4 *)(allocation + 0xe1c) = uVar2;
+  ppcTextureSamplerCreateResult = _PPCTextureSamplerCreate();
+  *(undefined4 *)(allocation + 0xe1c) = ppcTextureSamplerCreateResult;
   _PPCRasterOpMachineInitialise(allocation + 0xe14);
   _PPCRasterOpMachineAttachRuntimeCompiler(allocation + 0xe14,allocation);
   return allocation;
@@ -3687,8 +3687,8 @@ LAB_97bd9024:
 }
 
 /* _PPCRuntimeCompilerSaveAllTemporariesToMemory @ 0x97bd9374 (120 bytes) */
-int _PPCRuntimeCompilerSaveAllTemporariesToMemory(param_1)
-  int param_1;
+int _PPCRuntimeCompilerSaveAllTemporariesToMemory(compiler)
+  int compiler;
 {
   uint uVar1;
   uint loopIndex;
@@ -3696,12 +3696,12 @@ int _PPCRuntimeCompilerSaveAllTemporariesToMemory(param_1)
   loopIndex = 0;
   do {
     uVar1 = loopIndex;
-    if (*(int *)(param_1 + 0xe4c) != 0) {
+    if (*(int *)(compiler + 0xe4c) != 0) {
       uVar1 = loopIndex + 0x20;
     }
-    if (*(short *)(uVar1 * 0x38 + param_1 + 0x18) == 0) {
-      ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,loopIndex);
-      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,loopIndex);
+    if (*(short *)(uVar1 * 0x38 + compiler + 0x18) == 0) {
+      ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,loopIndex);
+      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
     loopIndex = loopIndex + 1;
   } while (loopIndex < 0x20);

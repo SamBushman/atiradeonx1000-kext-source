@@ -26,7 +26,7 @@ int _lFloatConst(param_1, param_2, param_3, param_4)
   uint uVar8;
   int iVar9;
   int iVar10;
-  double dVar11;
+  double lBuildFloatValueResult;
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar6 = 0;
@@ -108,8 +108,8 @@ LAB_97b88e60:
   }
   else {
     *(undefined1 *)((int)param_1 + iVar9) = 0;
-    dVar11 = (double)((double (*)())_lBuildFloatValue)(param_1,param_2,iVar7 - iVar6);
-    fVar2 = (float)dVar11;
+    lBuildFloatValueResult = (double)((double (*)())_lBuildFloatValue)(param_1,param_2,iVar7 - iVar6);
+    fVar2 = (float)lBuildFloatValueResult;
   }
   *(float *)(param_4 + 4) = fVar2;
   _strcpy(param_4 + 0xc,param_1);
@@ -127,6 +127,7 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  uint lookUpAddStringResult;
   int result;
   int loopIndex;
   bool bVar1;
@@ -509,8 +510,8 @@ LAB_97b89a54:
     }
     local_2d0[iVar10] = 0;
     (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
-    uVar7 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2d0);
-    param_2[2] = uVar7;
+    lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2d0);
+    param_2[2] = lookUpAddStringResult;
     return 0x10e;
   case 0x5e:
     iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
@@ -578,8 +579,8 @@ LAB_97b89c74:
         _CPPErrorToInfoLog("ERROR___CPP_EOL_IN_STRING",uVar4,param_3,param_4,param_5,param_6,uVar6);
         return 0x10a;
       }
-      uVar7 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_240);
-      param_2[2] = uVar7;
+      lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_240);
+      param_2[2] = lookUpAddStringResult;
       return 0x116;
     }
   }
@@ -600,6 +601,7 @@ int _yylex_CPP(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
+  undefined4 readCPPlineResult;
   int length;
   undefined *puVar1;
   undefined *puVar2;
@@ -636,8 +638,8 @@ int _yylex_CPP(param_1, param_2)
                                ,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
             return 0;
           }
-          uVar5 = _readCPPline(auStack_b0);
-          iVar3 = ((int (*)())_check_EOF)(uVar5);
+          readCPPlineResult = _readCPPline(auStack_b0);
+          iVar3 = ((int (*)())_check_EOF)(readCPPlineResult);
           if (iVar3 != 0) {
             return 0;
           }
@@ -879,14 +881,14 @@ int _AddSymbol(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
-  undefined4 uVar1;
+  undefined4 newSymbolResult;
   
   if (param_2 == 0) {
     param_2 = _CurrentScope;
   }
-  uVar1 = ((int (*)())_NewSymbol)(param_1,param_2,param_3,param_4);
-  ((int (*)())_lAddToTree)(param_2 + 0x14,uVar1);
-  return uVar1;
+  newSymbolResult = ((int (*)())_NewSymbol)(param_1,param_2,param_3,param_4);
+  ((int (*)())_lAddToTree)(param_2 + 0x14,newSymbolResult);
+  return newSymbolResult;
 }
 
 /* _LookUpLocalSymbol @ 0x97b8a230 (148 bytes) */
@@ -951,7 +953,7 @@ int _idstr(param_1, param_2)
   int length;
   byte bVar1;
   undefined *puVar2;
-  int iVar3;
+  int maskruneResult;
   byte *pbVar4;
   uint uVar5;
   byte *pbVar6;
@@ -976,8 +978,8 @@ int _idstr(param_1, param_2)
       uVar5 = -(uint)(*(uint *)(puVar2 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
     }
     else {
-      iVar3 = ___maskrune(uVar5,0x500);
-      uVar5 = (uint)(iVar3 != 0);
+      maskruneResult = ___maskrune(uVar5,0x500);
+      uVar5 = (uint)(maskruneResult != 0);
     }
     if (uVar5 == 0) {
       if (*param_1 - 0x2e < 2) {
@@ -1076,7 +1078,7 @@ int _NewTokenStream(param_1, param_2)
   int param_2;
 {
   undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 idstrResult;
   
   if (param_2 == 0) {
     puVar1 = (undefined4 *)_malloc(0x10);
@@ -1085,9 +1087,9 @@ int _NewTokenStream(param_1, param_2)
     puVar1 = (undefined4 *)_mem_Alloc(param_2,0x10);
   }
   *puVar1 = 0;
-  uVar2 = ((int (*)())_idstr)(param_1,param_2);
+  idstrResult = ((int (*)())_idstr)(param_1,param_2);
   puVar1[3] = 0;
-  puVar1[1] = uVar2;
+  puVar1[1] = idstrResult;
   puVar1[2] = 0;
   ((int (*)())_lNewBlock)(puVar1,param_2);
   return puVar1;
@@ -1191,6 +1193,7 @@ int _ReadToken(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
+  undefined4 lookUpAddStringResult;
   undefined4 byteValue;
   int loopIndex2;
   uint uVar1;
@@ -1199,7 +1202,7 @@ int _ReadToken(param_1, param_2)
   int iVar4;
   char *pcVar5;
   int loopIndex;
-  double dVar7;
+  double glp_strtodResult;
   undefined1 local_2c0 [144];
   char local_230 [532];
   
@@ -1228,8 +1231,8 @@ LAB_97b8a810:
     }
     local_2c0[loopIndex] = 0;
     if (iVar4 == 0) {
-      uVar3 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2c0);
-      param_2[2] = uVar3;
+      lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2c0);
+      param_2[2] = lookUpAddStringResult;
       return 0x10e;
     }
     uVar3 = 0x140;
@@ -1264,8 +1267,8 @@ LAB_97b8aac8:
       local_2c0[loopIndex] = 0;
       if (iVar4 == 0) {
         _strcpy(param_2 + 3,local_2c0);
-        dVar7 = (double)((double (*)())_glp_strtod)(param_2 + 3,0);
-        param_2[1] = (float)dVar7;
+        glp_strtodResult = (double)((double (*)())_glp_strtod)(param_2 + 3,0);
+        param_2[1] = (float)glp_strtodResult;
         return 0x10b;
       }
       uVar3 = 0x158;
@@ -1284,8 +1287,8 @@ LAB_97b8aac8:
         }
       }
       local_230[loopIndex2] = '\0';
-      uVar3 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_230);
-      param_2[2] = uVar3;
+      lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_230);
+      param_2[2] = lookUpAddStringResult;
       return 0x116;
     }
     if (0x116 < iVar2) {

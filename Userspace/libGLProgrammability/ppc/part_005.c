@@ -51,6 +51,7 @@ int TParseContext__samplerErrorCheck(this, param_2, publicType, str)
   unsigned char * publicType;
   char *str;
 {
+  int containsSamplerResult;
   int iVar1;
   char *basicString;
   char *pcVar3;
@@ -60,8 +61,8 @@ int TParseContext__samplerErrorCheck(this, param_2, publicType, str)
   
   iVar1 = *(int *)publicType;
   if (iVar1 == 0xe) {
-    iVar1 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(publicType + 0x14));
-    if (iVar1 == 0) {
+    containsSamplerResult = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(publicType + 0x14));
+    if (containsSamplerResult == 0) {
       return 0;
     }
     basicString = (char *)TType__getBasicString(*(undefined4 *)publicType);
@@ -949,6 +950,8 @@ int TParseContext__nonInitErrorCheck(this, param_2, text, publicType)
   unsigned char * text;
   unsigned char * publicType;
 {
+  int voidErrorCheckResult;
+  int reservedErrorCheckResult;
   byte bVar1;
   int atomicStore;
   uint uVar3;
@@ -1005,8 +1008,8 @@ int TParseContext__nonInitErrorCheck(this, param_2, text, publicType)
   int *local_48;
   undefined4 local_40 [5];
   
-  iVar9 = TParseContext__reservedErrorCheck(this,param_2,text);
-  if (iVar9 != 0) {
+  reservedErrorCheckResult = TParseContext__reservedErrorCheck(this,param_2,text);
+  if (reservedErrorCheckResult != 0) {
     TParseContext__recover(this);
   }
   iVar9 = *(int *)(publicType + 4);
@@ -1132,8 +1135,8 @@ int TParseContext__nonInitErrorCheck(this, param_2, text, publicType)
   }
   else {
     if (iVar9 != 2) {
-      iVar9 = TParseContext__voidErrorCheck(this,param_2,text,publicType);
-      return iVar9 != 0;
+      voidErrorCheckResult = TParseContext__voidErrorCheck(this,param_2,text,publicType);
+      return voidErrorCheckResult != 0;
     }
     bVar1 = *DAT_a7b7ba18;
     *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = bVar1;
@@ -1535,6 +1538,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   unsigned char * initializer;
   unsigned char ** intermNode;
 {
+  int reservedErrorCheckResult;
   byte bVar1;
   uint uVar2;
   uint uVar3;
@@ -1615,8 +1619,8 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   undefined **local_60 [4];
   undefined **local_50 [6];
   
-  iVar8 = TParseContext__reservedErrorCheck(this,line,identifier);
-  if (iVar8 != 0) {
+  reservedErrorCheckResult = TParseContext__reservedErrorCheck(this,line,identifier);
+  if (reservedErrorCheckResult != 0) {
     return 1;
   }
   local_14c = TParseContext__voidErrorCheck(this,line,identifier,publicType);
@@ -3542,6 +3546,7 @@ int GetResources()
 /* _ShInitialize @ 0x97ba0818 (360 bytes) */
 int _ShInitialize()
 {
+  int initProcessResult;
   int atomicStore;
   int atomicStore2;
   int *piVar2;
@@ -3579,9 +3584,9 @@ int _ShInitialize()
   local_34 = 4;
   local_38 = local_40;
   _pthread_mutex_lock(&_glsl_allocator_lock);
-  iVar3 = InitProcess();
+  initProcessResult = InitProcess();
   uVar6 = 1;
-  if (iVar3 == 0) {
+  if (initProcessResult == 0) {
     uVar6 = 0;
   }
   else if (_PerProcessGPA == (unsigned char *)0x0) {
@@ -3624,11 +3629,11 @@ int _ShInitialize()
 }
 
 /* _ShConstructCompiler @ 0x97ba0980 (32 bytes) */
-int _ShConstructCompiler(param_1, param_2)
-  undefined4 param_1;
+int _ShConstructCompiler(language, param_2)
+  undefined4 language;
   undefined4 param_2;
 {
-  return ConstructCompiler(param_1,param_2);
+  return ConstructCompiler(language,param_2);
 }
 
 /* _ShDestruct @ 0x97ba09a4 (200 bytes) */
@@ -3700,6 +3705,8 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
   undefined4 builtInResource;
   undefined4 symbolTable;
 {
+  int paParseStringsResult;
+  int initPreprocessorResult;
   int atomicStore2;
   int *stringSizeArray;
   int numStrings;
@@ -3825,8 +3832,8 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
     }
     *(int *)(this + 4) = iVar3 + 4;
   }
-  iVar3 = _InitPreprocessor();
-  if (iVar3 == 0) {
+  initPreprocessorResult = _InitPreprocessor();
+  if (initPreprocessorResult == 0) {
     uVar6 = TBuiltIns__getNumStringArrays(builtIns,local_124);
     uVar9 = 0;
     if (uVar6 != 0) {
@@ -3834,8 +3841,8 @@ LAB_97ba0e34:
       ppcVar7 = (char **)TBuiltIns__getStringArray(builtIns,local_124,uVar9);
       stringSizeArray = (int *)TBuiltIns__getStringSizeArray(builtIns,local_124,uVar9);
       numStrings = TBuiltIns__getNumStrings(builtIns,local_124,uVar9);
-      iVar3 = PaParseStrings(ppcVar7,stringSizeArray,numStrings,0,(unsigned char *)&local_130);
-      if (iVar3 == 0) goto LAB_97ba0fd8;
+      paParseStringsResult = PaParseStrings(ppcVar7,stringSizeArray,numStrings,0,(unsigned char *)&local_130);
+      if (paParseStringsResult == 0) goto LAB_97ba0fd8;
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"Unable to parse built-ins");
@@ -3939,13 +3946,15 @@ LAB_97ba0fd8:
 }
 
 /* _ShCompile @ 0x97ba10c8 (1888 bytes) */
-int _ShCompile(param_1, param_2, param_3, param_4, param_5)
+int _ShCompile(param_1, str, param_3, param_4, param_5)
   int *param_1;
-  char **param_2;
+  char **str;
   int param_3;
   int param_4;
   uint param_5;
 {
+  int paParseStringsResult;
+  int insertBuiltInArrayAtGlobalLevelResult;
   bool bVar1;
   int atomicStore;
   int iVar3;
@@ -4143,10 +4152,10 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
   }
   uVar13 = (uint)!bVar1;
   if (uVar13 == 1) {
-    iVar3 = ((int (*)())TParseContext__insertBuiltInArrayAtGlobalLevel)((unsigned char *)&local_140);
-    if (iVar3 == 0) {
-      iVar3 = PaParseStrings(local_3c,(int *)0x0,1,0,(unsigned char *)&local_140);
-      if (iVar3 != 0) {
+    insertBuiltInArrayAtGlobalLevelResult = ((int (*)())TParseContext__insertBuiltInArrayAtGlobalLevel)((unsigned char *)&local_140);
+    if (insertBuiltInArrayAtGlobalLevelResult == 0) {
+      paParseStringsResult = PaParseStrings(local_3c,(int *)0x0,1,0,(unsigned char *)&local_140);
+      if (paParseStringsResult != 0) {
         uVar13 = 0;
       }
     }
@@ -4154,7 +4163,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
       uVar13 = 0;
     }
   }
-  iVar3 = PaParseStrings(param_2,(int *)0x0,param_3,0,(unsigned char *)&local_140);
+  iVar3 = PaParseStrings(str,(int *)0x0,param_3,0,(unsigned char *)&local_140);
   pvVar10 = local_138;
   if (iVar3 != 0) {
     uVar13 = 0;

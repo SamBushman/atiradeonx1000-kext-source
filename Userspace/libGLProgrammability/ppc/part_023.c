@@ -158,15 +158,15 @@ int std____default_alloc_template_true_0___allocate(this)
   ulong this;
 {
   uint uVar1;
-  int iVar2;
+  int getenvResult;
   undefined4 *puVar3;
   char in_RESERVE;
   byte in_cr0;
   undefined1 auStack_30 [28];
   
   if (_S_force_new == 0) {
-    iVar2 = _getenv("GLIBCPP_FORCE_NEW");
-    if (iVar2 == 0) {
+    getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+    if (getenvResult == 0) {
       do {
         if (in_RESERVE != '\0') {
           _S_force_new = storeWordConditionalIndexed(_S_force_new + -1,0,0xa7b7c00c);
@@ -211,7 +211,7 @@ int std__allocator_char___allocate(this, param_2)
 {
   uint uVar1;
   undefined4 *puVar2;
-  int iVar3;
+  int getenvResult;
   char in_RESERVE;
   byte bVar4;
   undefined1 auStack_30 [28];
@@ -220,8 +220,8 @@ int std__allocator_char___allocate(this, param_2)
   puVar2 = (undefined4 *)0x0;
   if (param_2 != (void *)0x0) {
     if (__default_alloc_template_true_0____S_force_new == 0) {
-      iVar3 = _getenv("GLIBCPP_FORCE_NEW");
-      if (iVar3 == 0) {
+      getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+      if (getenvResult == 0) {
         do {
           if (in_RESERVE != '\0') {
             __default_alloc_template_true_0____S_force_new =
@@ -462,24 +462,24 @@ int __ZNSaIwE7destroyEPw(this)
 int std____default_alloc_template_true_0____S_refill(this)
   ulong this;
 {
-  int iVar1;
+  int __default_alloc_template_true_0____S_chunk_allocResult;
   int loopIndex;
   undefined4 *puVar3;
   int local_20 [6];
   
   local_20[0] = 0x14;
-  iVar1 = ((int (*)())std____default_alloc_template_true_0____S_chunk_alloc)(this,local_20);
+  __default_alloc_template_true_0____S_chunk_allocResult = ((int (*)())std____default_alloc_template_true_0____S_chunk_alloc)(this,local_20);
   if (local_20[0] != 1) {
     *(undefined4 **)(&DAT_a7b7bf90 + (this + 7 >> 1 & 0x7ffffffc)) =
-         (undefined4 *)(iVar1 + this);
-    puVar3 = (undefined4 *)(iVar1 + this);
+         (undefined4 *)(__default_alloc_template_true_0____S_chunk_allocResult + this);
+    puVar3 = (undefined4 *)(__default_alloc_template_true_0____S_chunk_allocResult + this);
     for (loopIndex = 1; local_20[0] + -1 != loopIndex; loopIndex = loopIndex + 1) {
       *puVar3 = (undefined4 *)((int)puVar3 + this);
       puVar3 = (undefined4 *)((int)puVar3 + this);
     }
     *puVar3 = 0;
   }
-  return iVar1;
+  return __default_alloc_template_true_0____S_chunk_allocResult;
 }
 
 /* std____default_alloc_template_true_0____S_chunk_alloc @ 0x97c178f4 (368 bytes) */

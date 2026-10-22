@@ -576,11 +576,11 @@ int __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__c
 }
 
 /* __cxxabiv1____vmi_class_type_info____do_find_public_src @ 0x97c18484 (248 bytes) */
-int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param_3, param_4, param_5)
+int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param_3, type_info, param_5)
   unsigned char * this;
   int param_2;
   void *param_3;
-  unsigned char * param_4;
+  unsigned char * type_info;
   void *param_5;
 {
   bool bVar1;
@@ -589,7 +589,7 @@ int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param
   unsigned char * p_Var4;
   
   if ((param_3 == param_5) &&
-     (iVar3 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)param_4), iVar3 != 0)) {
+     (iVar3 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)type_info), iVar3 != 0)) {
     return 6;
   }
   if (*(int *)(this + 0xc) != 0) {
@@ -604,7 +604,7 @@ int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param
             iVar3 = *(int *)(*(int *)param_3 + iVar3);
           }
           uVar2 = (**(code **)(**(int **)(p_Var4 + 0x10) + 0x20))
-                            (*(int **)(p_Var4 + 0x10),param_2,(int)param_3 + iVar3,param_4,param_5);
+                            (*(int **)(p_Var4 + 0x10),param_2,(int)param_3 + iVar3,type_info,param_5);
           if (3 < (int)uVar2) {
             if (bVar1) {
               return uVar2;

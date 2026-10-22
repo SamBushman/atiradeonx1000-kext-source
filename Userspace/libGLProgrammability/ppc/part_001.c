@@ -928,11 +928,11 @@ LAB_97b83e9c:
 }
 
 /* _PPParserFree @ 0x97b83ea4 (48 bytes) */
-int _PPParserFree(param_1)
-  undefined4 param_1;
+int _PPParserFree(parser)
+  undefined4 parser;
 {
-  ((int (*)())_PPParserShutdown)(param_1);
-  return _free(param_1);
+  ((int (*)())_PPParserShutdown)(parser);
+  return _free(parser);
 }
 
 /* _PPParserShutdown @ 0x97b83ed4 (88 bytes) */
@@ -940,15 +940,15 @@ int _PPParserShutdown(parser)
   int parser;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 ppParserAttachStringResult;
   
   iVar1 = *(int *)(parser + 0x448);
   while (iVar1 != 0) {
     ((int (*)())_PPParserRemoveScope)(parser,iVar1);
     iVar1 = *(int *)(parser + 0x448);
   }
-  uVar2 = _PPParserAttachString(parser,0,0);
-  return uVar2;
+  ppParserAttachStringResult = _PPParserAttachString(parser,0,0);
+  return ppParserAttachStringResult;
 }
 
 /* _PPParserRemoveScope @ 0x97b83f2c (68 bytes) */
@@ -1019,11 +1019,11 @@ int _PPParserScopeRemoveIdentifier(parser, param_2)
 }
 
 /* _PPParserIdentifierFree @ 0x97b84028 (52 bytes) */
-int _PPParserIdentifierFree(param_1)
-  undefined4 param_1;
+int _PPParserIdentifierFree(parser)
+  undefined4 parser;
 {
-  _PPParserIdentifierSetName(param_1,0);
-  return _free(param_1);
+  _PPParserIdentifierSetName(parser,0);
+  return _free(parser);
 }
 
 /* _PPParserScopeRemoveMacro @ 0x97b8405c (68 bytes) */
@@ -1085,25 +1085,25 @@ int _PPParserMacroFree(parser)
 }
 
 /* _PPParserGetScalars @ 0x97b84130 (200 bytes) */
-int _PPParserGetScalars(param_1, param_2, param_3)
-  undefined4 param_1;
+int _PPParserGetScalars(parser, param_2, param_3)
+  undefined4 parser;
   float *param_2;
   int param_3;
 {
   int part;
   int loopIndex;
-  double dVar3;
+  double glp_strtodResult;
   char local_130 [256];
   char *local_30 [5];
   
   loopIndex = 0;
   while( true ) {
-    part = _PPParserGetPart(param_1,local_130,1);
+    part = _PPParserGetPart(parser,local_130,1);
     if (part == 0) {
       return 0x2d;
     }
-    dVar3 = (double)((double (*)())_glp_strtod)(local_130,local_30);
-    *param_2 = (float)dVar3;
+    glp_strtodResult = (double)((double (*)())_glp_strtod)(local_130,local_30);
+    *param_2 = (float)glp_strtodResult;
     if (local_30[0] != local_130 + part) {
       return 0x15;
     }
@@ -1112,10 +1112,10 @@ int _PPParserGetScalars(param_1, param_2, param_3)
     if (loopIndex == param_3) {
       return 0;
     }
-    part = _PPParserGetPart(param_1,local_130,0);
+    part = _PPParserGetPart(parser,local_130,0);
     if (part == 0) break;
     if (local_130[0] != ',') {
-      _PPParserReturnPart(param_1);
+      _PPParserReturnPart(parser);
       return 0;
     }
   }
@@ -1153,11 +1153,13 @@ int _PPParserParseTempDeclaration(parser, param_2)
   int parser;
   int param_2;
 {
+  int ppParserIdentifierCreateResult;
+  int ppParserValidateNameResult;
   int arrayResult;
   int part;
   int part2;
   int iVar1;
-  int iVar2;
+  int ppParserScopeAddIdentifierResult;
   uint uVar3;
   uint loopIndex;
   char local_140 [256];
@@ -1174,18 +1176,18 @@ int _PPParserParseTempDeclaration(parser, param_2)
     if (part2 == 0) {
       return 0x2d;
     }
-    iVar1 = _PPParserValidateName(parser,local_140);
-    if (iVar1 != 0) {
+    ppParserValidateNameResult = _PPParserValidateName(parser,local_140);
+    if (ppParserValidateNameResult != 0) {
       return 0x12;
     }
-    iVar1 = _PPParserIdentifierCreate();
-    _PPParserIdentifierSetName(iVar1,local_140);
-    *(undefined4 *)(iVar1 + 0xc) = 1;
-    *(int *)(iVar1 + 0x14) = param_2;
-    *(uint *)(iVar1 + 8) = *(int *)(*(int *)(parser + 0x44c) + 0x14) + uVar3;
-    iVar2 = _PPParserScopeAddIdentifier(*(undefined4 *)(parser + 0x44c),iVar1);
-    if (iVar2 != 0) {
-      ((int (*)())_PPParserIdentifierFree)(iVar1);
+    ppParserIdentifierCreateResult = _PPParserIdentifierCreate();
+    _PPParserIdentifierSetName(ppParserIdentifierCreateResult,local_140);
+    *(undefined4 *)(ppParserIdentifierCreateResult + 0xc) = 1;
+    *(int *)(ppParserIdentifierCreateResult + 0x14) = param_2;
+    *(uint *)(ppParserIdentifierCreateResult + 8) = *(int *)(*(int *)(parser + 0x44c) + 0x14) + uVar3;
+    ppParserScopeAddIdentifierResult = _PPParserScopeAddIdentifier(*(undefined4 *)(parser + 0x44c),ppParserIdentifierCreateResult);
+    if (ppParserScopeAddIdentifierResult != 0) {
+      ((int (*)())_PPParserIdentifierFree)(ppParserIdentifierCreateResult);
       return 0x1c;
     }
     part = _PPParserGetPart(parser,local_140,0);
@@ -1198,14 +1200,14 @@ int _PPParserParseTempDeclaration(parser, param_2)
       if (arrayResult != 0) {
         return arrayResult;
       }
-      *(undefined1 *)(iVar1 + 0x10) = 1;
-      *(undefined4 *)(iVar1 + 4) = local_30[0];
+      *(undefined1 *)(ppParserIdentifierCreateResult + 0x10) = 1;
+      *(undefined4 *)(ppParserIdentifierCreateResult + 4) = local_30[0];
       part = _PPParserGetPart(parser,local_140,0);
       if (part == 0) {
         return 0x2d;
       }
     }
-    uVar3 = uVar3 + *(int *)(iVar1 + 4);
+    uVar3 = uVar3 + *(int *)(ppParserIdentifierCreateResult + 4);
     if (local_140[0] == ';') {
       iVar1 = *(int *)(parser + 0x44c);
       if (*(uint *)(parser + 0x460) < *(int *)(iVar1 + 0x14) + uVar3) {
@@ -1233,8 +1235,8 @@ int _PPParserParseTempDeclaration(parser, param_2)
 }
 
 /* _PPParserParseSourceSwizzle @ 0x97b84438 (396 bytes) */
-int _PPParserParseSourceSwizzle(param_1, param_2, param_3)
-  int param_1;
+int _PPParserParseSourceSwizzle(parser, param_2, param_3)
+  int parser;
   uint *param_2;
   undefined4 *param_3;
 {
@@ -1247,7 +1249,7 @@ int _PPParserParseSourceSwizzle(param_1, param_2, param_3)
   uint loopIndex;
   undefined1 local_110 [256];
   
-  part = _PPParserGetPart(param_1,local_110,0);
+  part = _PPParserGetPart(parser,local_110,0);
   uVar6 = 0;
   uVar1 = 0x2d;
   if (part != 0) {
@@ -1322,7 +1324,7 @@ LAB_97b845d4:
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < 4);
-    if ((uVar6 == 3) || ((uVar6 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
+    if ((uVar6 == 3) || ((uVar6 == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
 switchD_97b844cc_caseD_63:
       uVar1 = 0xd;
     }
@@ -1334,8 +1336,8 @@ switchD_97b844cc_caseD_63:
 }
 
 /* _PPParserParseDestinationMask @ 0x97b8462c (412 bytes) */
-int _PPParserParseDestinationMask(param_1, param_2)
-  int param_1;
+int _PPParserParseDestinationMask(parser, param_2)
+  int parser;
   uint *param_2;
 {
   uint uVar1;
@@ -1345,7 +1347,7 @@ int _PPParserParseDestinationMask(param_1, param_2)
   uint uVar5;
   undefined1 local_110 [260];
   
-  part = _PPParserGetPart(param_1,local_110,0);
+  part = _PPParserGetPart(parser,local_110,0);
   uVar5 = 0;
   uVar3 = 0x2d;
   if (part != 0) {
@@ -1413,7 +1415,7 @@ LAB_97b84778:
 LAB_97b847e8:
         loopIndex = loopIndex + 1;
       } while (loopIndex < part);
-      if ((uVar5 == 3) || ((uVar5 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
+      if ((uVar5 == 3) || ((uVar5 == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
 LAB_97b8481c:
         return 0xc;
       }
@@ -1434,7 +1436,7 @@ int _PPParserParseTextureSourceVar(parser, param_2)
   uint uVar1;
   int iVar2;
   int iVar3;
-  uint uVar4;
+  uint ashldi3Result;
   uint extraout_r4;
   uint extraout_r4_00;
   uint extraout_r4_01;
@@ -1514,13 +1516,13 @@ int _PPParserParseTextureSourceVar(parser, param_2)
             }
             if ((extraout_r4 & 0xf) == 0xf) {
               iVar2 = uVar1 << 2;
-              uVar4 = ((int (*)())___ashldi3)(0,0xf,iVar2);
-              uVar5 = uVar5 & ~uVar4;
+              ashldi3Result = ((int (*)())___ashldi3)(0,0xf,iVar2);
+              uVar5 = uVar5 & ~ashldi3Result;
               uVar6 = uVar6 & ~extraout_r4_00;
               *(uint *)(parser + 0x34) = uVar5;
               *(uint *)(parser + 0x38) = uVar6;
-              uVar4 = ((int (*)())___ashldi3)(0,uVar7,iVar2);
-              *(uint *)(parser + 0x34) = uVar5 | uVar4;
+              ashldi3Result = ((int (*)())___ashldi3)(0,uVar7,iVar2);
+              *(uint *)(parser + 0x34) = uVar5 | ashldi3Result;
               *(uint *)(parser + 0x38) = uVar6 | extraout_r4_01;
             }
             else if ((extraout_r4 & 0xf) != uVar7) {
@@ -1673,7 +1675,7 @@ int _PPParserParseAliasDeclaration(parser)
   int part;
   undefined4 uVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 ppParserMacroCreateResult;
   int iVar4;
   int part2;
   char local_130 [256];
@@ -1683,8 +1685,8 @@ int _PPParserParseAliasDeclaration(parser)
   part = _PPParserGetPart(parser,local_130,0);
   uVar1 = 0x2d;
   if (part != 0) {
-    uVar3 = _PPParserMacroCreate();
-    _PPParserMacroSetSearchString(parser,uVar3,local_130,part);
+    ppParserMacroCreateResult = _PPParserMacroCreate();
+    _PPParserMacroSetSearchString(parser,ppParserMacroCreateResult,local_130,part);
     part = _PPParserGetPart(parser,local_130,0);
     uVar1 = 0x2d;
     if ((part != 0) && (uVar1 = 10, local_130[0] == '=')) {
@@ -1713,8 +1715,8 @@ int _PPParserParseAliasDeclaration(parser)
             iVar4 = iVar4 + part2 + 1;
           }
           *(undefined1 *)(allocation + iVar4) = 0;
-          ((int (*)())_PPParserMacroSetReplaceString)(parser,uVar3,allocation);
-          _PPParserScopeAddMacro(*(undefined4 *)(parser + 0x44c),uVar3);
+          ((int (*)())_PPParserMacroSetReplaceString)(parser,ppParserMacroCreateResult,allocation);
+          _PPParserScopeAddMacro(*(undefined4 *)(parser + 0x44c),ppParserMacroCreateResult);
           return 0;
         }
         iVar2 = iVar2 + part3 + 1;
@@ -1792,8 +1794,8 @@ int _PPParserMacroGetReplaceString(parser, param_2, param_3, param_4)
 }
 
 /* _PPParserParseSwizzleCode @ 0x97b85058 (620 bytes) */
-int _PPParserParseSwizzleCode(param_1, param_2)
-  int param_1;
+int _PPParserParseSwizzleCode(parser, param_2)
+  int parser;
   uint *param_2;
 {
   int part2;
@@ -1808,7 +1810,7 @@ int _PPParserParseSwizzleCode(param_1, param_2)
   uVar3 = 0;
   loopIndex = 0;
   do {
-    uVar1 = _PPParserGetPart(param_1,&local_120,0);
+    uVar1 = _PPParserGetPart(parser,&local_120,0);
     iVar5 = 0;
     if (uVar1 == 0) {
       return 0x2d;
@@ -1822,7 +1824,7 @@ LAB_97b850c8:
         local_120 = local_11f;
       }
       else {
-        part = _PPParserGetPart(param_1,&local_120,0);
+        part = _PPParserGetPart(parser,&local_120,0);
         if (part == 0) {
           return 0x2d;
         }
@@ -1893,7 +1895,7 @@ LAB_97b852e8:
         uVar1 = 2;
       }
     }
-    if ((uVar3 == 3) || ((uVar3 == 2 && ((*(uint *)(param_1 + 0x48c) & 2) == 0)))) {
+    if ((uVar3 == 3) || ((uVar3 == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
       return 0xd;
     }
     if (loopIndex == 1) {
@@ -1919,7 +1921,7 @@ LAB_97b85398:
         goto LAB_97b85398;
       }
     }
-    part2 = _PPParserGetPart(param_1,&local_120,0);
+    part2 = _PPParserGetPart(parser,&local_120,0);
     if (part2 == 0) {
       return 0x2d;
     }
@@ -2186,7 +2188,7 @@ int _AllocateAtom(param_1)
   int param_1;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 lReverseResult;
   
   iVar1 = *(int *)(param_1 + 0x30);
   if (*(int *)(param_1 + 0x34) <= iVar1) {
@@ -2194,8 +2196,8 @@ int _AllocateAtom(param_1)
     iVar1 = *(int *)(param_1 + 0x30);
   }
   *(undefined4 *)(iVar1 * 4 + *(int *)(param_1 + 0x28)) = 0xffffffff;
-  uVar2 = ((int (*)())_lReverse)(*(undefined4 *)(param_1 + 0x30));
-  *(undefined4 *)(*(int *)(param_1 + 0x30) * 4 + *(int *)(param_1 + 0x2c)) = uVar2;
+  lReverseResult = ((int (*)())_lReverse)(*(undefined4 *)(param_1 + 0x30));
+  *(undefined4 *)(*(int *)(param_1 + 0x30) * 4 + *(int *)(param_1 + 0x2c)) = lReverseResult;
   iVar1 = *(int *)(param_1 + 0x30);
   *(int *)(param_1 + 0x30) = iVar1 + 1;
   return iVar1;
@@ -2218,6 +2220,8 @@ int _FindHashLoc(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
+  int hashStringResult;
+  int hashString2Result;
   int compareResult;
   uint uVar1;
   int iVar2;
@@ -2228,16 +2232,16 @@ int _FindHashLoc(param_1, param_2)
   int local_30;
   int local_2c [4];
   
-  iVar4 = ((int (*)())_HashString)(param_2);
-  iVar4 = iVar4 - (iVar4 / param_1[4]) * param_1[4];
+  hashStringResult = ((int (*)())_HashString)(param_2);
+  iVar4 = hashStringResult - (hashStringResult / param_1[4]) * param_1[4];
   iVar2 = *(int *)(iVar4 * 8 + param_1[3]);
   if ((iVar2 != 0) && (iVar2 = _strcmp(param_2,*param_1 + iVar2), iVar2 != 0)) {
     loopIndex = 0;
-    iVar2 = ((int (*)())_HashString2)(param_2);
+    hashString2Result = ((int (*)())_HashString2)(param_2);
     piVar5 = &local_30;
     local_30 = iVar4;
     do {
-      uVar1 = iVar4 + iVar2 & 0x7fffffff;
+      uVar1 = iVar4 + hashString2Result & 0x7fffffff;
       iVar4 = uVar1 - ((int)uVar1 / param_1[4]) * param_1[4];
       iVar3 = *(int *)(iVar4 * 8 + param_1[3]);
       if (iVar3 == 0) {
@@ -2261,9 +2265,10 @@ int _FindHashLoc(param_1, param_2)
 int _IncreaseHashTableSize(param_1)
   int param_1;
 {
+  int initAtomTableResult;
   int iVar1;
   undefined4 uVar2;
-  int iVar3;
+  int findHashLocResult;
   int iVar4;
   int local_50 [3];
   int local_44;
@@ -2272,15 +2277,15 @@ int _IncreaseHashTableSize(param_1)
   int local_20;
   
   _memcpy(local_50,param_1,0x38);
-  iVar1 = _InitAtomTable(param_1,local_40 * 2 + 1);
+  initAtomTableResult = _InitAtomTable(param_1,local_40 * 2 + 1);
   uVar2 = 0;
-  if (iVar1 != 0) {
+  if (initAtomTableResult != 0) {
     iVar1 = *(int *)(param_1 + 0x30);
     if (iVar1 < local_20) {
       do {
         iVar4 = local_50[0] + *(int *)(iVar1 * 4 + local_28);
-        iVar3 = ((int (*)())_FindHashLoc)(local_50,iVar4);
-        _AddAtomFixed(param_1,iVar4,*(undefined4 *)(iVar3 * 8 + local_44 + 4));
+        findHashLocResult = ((int (*)())_FindHashLoc)(local_50,iVar4);
+        _AddAtomFixed(param_1,iVar4,*(undefined4 *)(findHashLocResult * 8 + local_44 + 4));
         iVar1 = iVar1 + 1;
       } while (iVar1 < local_20);
     }
@@ -2296,22 +2301,22 @@ int _LookUpAddStringHash(param_1, param_2)
   undefined4 param_2;
 {
   int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int findHashLocResult;
+  undefined4 addStringResult;
   
   while( true ) {
-    iVar2 = ((int (*)())_FindHashLoc)(param_1,param_2);
-    if (-1 < iVar2) break;
+    findHashLocResult = ((int (*)())_FindHashLoc)(param_1,param_2);
+    if (-1 < findHashLocResult) break;
     ((int (*)())_IncreaseHashTableSize)(param_1);
   }
-  iVar1 = iVar2 * 8;
+  iVar1 = findHashLocResult * 8;
   if (*(int *)(iVar1 + *(int *)(param_1 + 0xc)) == 0) {
     *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + 1;
-    uVar3 = ((int (*)())_AddString)(param_1,param_2);
-    *(undefined4 *)(iVar1 + *(int *)(param_1 + 0xc)) = uVar3;
+    addStringResult = ((int (*)())_AddString)(param_1,param_2);
+    *(undefined4 *)(iVar1 + *(int *)(param_1 + 0xc)) = addStringResult;
     *(undefined4 *)(iVar1 + *(int *)(param_1 + 0xc) + 4) = 0;
   }
-  return iVar2;
+  return findHashLocResult;
 }
 
 /* _LookUpAddString @ 0x97b85bb4 (104 bytes) */
@@ -2319,14 +2324,14 @@ int _LookUpAddString(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  int iVar1;
+  int lookUpAddStringHashResult;
   int iVar2;
   
-  iVar1 = ((int (*)())_LookUpAddStringHash)(param_1,param_2);
-  iVar2 = *(int *)(iVar1 * 8 + *(int *)(param_1 + 0xc) + 4);
+  lookUpAddStringHashResult = ((int (*)())_LookUpAddStringHash)(param_1,param_2);
+  iVar2 = *(int *)(lookUpAddStringHashResult * 8 + *(int *)(param_1 + 0xc) + 4);
   if (iVar2 == 0) {
     iVar2 = ((int (*)())_AllocateAtom)(param_1);
-    ((int (*)())_SetAtomValue)(param_1,iVar2,iVar1);
+    ((int (*)())_SetAtomValue)(param_1,iVar2,lookUpAddStringHashResult);
   }
   return iVar2;
 }

@@ -25,16 +25,16 @@ int _PPEmulatorInit(emulator)
   int emulator;
 {
   undefined4 allocation;
-  undefined4 uVar1;
+  undefined4 interpreterCreateResult;
   
   _memset(emulator,0,0xdf4);
   allocation = _malloc(0x1010);
   *(undefined4 *)(emulator + 0xd84) = allocation;
   _memset(allocation,0,0x1010);
   ((double (*)())_PPCConstantsAndScratchInitialise)(emulator);
-  uVar1 = _InterpreterCreate();
-  *(undefined4 *)(emulator + 0xdf0) = uVar1;
-  return _InterpreterAttachEmulatorContext(uVar1,emulator);
+  interpreterCreateResult = _InterpreterCreate();
+  *(undefined4 *)(emulator + 0xdf0) = interpreterCreateResult;
+  return _InterpreterAttachEmulatorContext(interpreterCreateResult,emulator);
 }
 
 /* _PPParserCreate @ 0x97b7bd24 (96 bytes) */
@@ -42,14 +42,14 @@ int _PPParserCreate(param_1)
   undefined4 param_1;
 {
   int allocation;
-  undefined4 uVar2;
+  undefined4 ppParserScopeCreateResult;
   
   allocation = _calloc(0x490,1);
   *(undefined4 *)(allocation + 0x48c) = param_1;
   *(undefined4 *)(allocation + 0x34) = 0xffffffff;
   *(undefined4 *)(allocation + 0x38) = 0xffffffff;
-  uVar2 = ((int (*)())_PPParserScopeCreate)(allocation);
-  ((int (*)())_PPParserAddScope)(allocation,uVar2);
+  ppParserScopeCreateResult = ((int (*)())_PPParserScopeCreate)(allocation);
+  ((int (*)())_PPParserAddScope)(allocation,ppParserScopeCreateResult);
   return allocation;
 }
 
@@ -58,8 +58,8 @@ int _PPParserScopeCreate(param_1)
   undefined4 param_1;
 {
   undefined4 allocation;
-  int iVar2;
-  undefined4 uVar3;
+  int ppParserMacroCreateResult;
+  undefined4 ppParserPreprocessStringResult;
   undefined1 auStack_f0 [96];
   undefined1 auStack_90 [120];
   
@@ -70,25 +70,25 @@ int _PPParserScopeCreate(param_1)
           "MUL tmp, mat[0], vec.x;\nMAD tmp, mat[1], vec.y, tmp;\nMAD tmp, mat[2], vec.z, tmp;\nMAD dst, mat[3], vec.w, tmp;\n"
           ,0x70);
   allocation = _calloc(0x24,1);
-  iVar2 = ((int (*)())_PPParserMacroCreate)();
-  ((int (*)())_PPParserMacroSetSearchString)(param_1,iVar2,"MVMULT",6);
-  ((int (*)())_PPParserMacroSetParamStringsCount)(iVar2,3);
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,0,"dst");
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,1,"mat");
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,2,"vec");
-  uVar3 = ((int (*)())_PPParserPreprocessString)(param_1,auStack_f0,0);
-  *(undefined4 *)(iVar2 + 4) = uVar3;
-  ((int (*)())_PPParserScopeAddMacro)(allocation,iVar2);
-  iVar2 = ((int (*)())_PPParserMacroCreate)();
-  ((int (*)())_PPParserMacroSetSearchString)(param_1,iVar2,"TMVMULT",7);
-  ((int (*)())_PPParserMacroSetParamStringsCount)(iVar2,4);
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,0,"dst");
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,1,"mat");
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,2,"vec");
-  ((int (*)())_PPParserMacroSetParamString)(iVar2,3,"tmp");
-  uVar3 = ((int (*)())_PPParserPreprocessString)(param_1,auStack_90,0);
-  *(undefined4 *)(iVar2 + 4) = uVar3;
-  ((int (*)())_PPParserScopeAddMacro)(allocation,iVar2);
+  ppParserMacroCreateResult = ((int (*)())_PPParserMacroCreate)();
+  ((int (*)())_PPParserMacroSetSearchString)(param_1,ppParserMacroCreateResult,"MVMULT",6);
+  ((int (*)())_PPParserMacroSetParamStringsCount)(ppParserMacroCreateResult,3);
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,0,"dst");
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,1,"mat");
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,2,"vec");
+  ppParserPreprocessStringResult = ((int (*)())_PPParserPreprocessString)(param_1,auStack_f0,0);
+  *(undefined4 *)(ppParserMacroCreateResult + 4) = ppParserPreprocessStringResult;
+  ((int (*)())_PPParserScopeAddMacro)(allocation,ppParserMacroCreateResult);
+  ppParserMacroCreateResult = ((int (*)())_PPParserMacroCreate)();
+  ((int (*)())_PPParserMacroSetSearchString)(param_1,ppParserMacroCreateResult,"TMVMULT",7);
+  ((int (*)())_PPParserMacroSetParamStringsCount)(ppParserMacroCreateResult,4);
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,0,"dst");
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,1,"mat");
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,2,"vec");
+  ((int (*)())_PPParserMacroSetParamString)(ppParserMacroCreateResult,3,"tmp");
+  ppParserPreprocessStringResult = ((int (*)())_PPParserPreprocessString)(param_1,auStack_90,0);
+  *(undefined4 *)(ppParserMacroCreateResult + 4) = ppParserPreprocessStringResult;
+  ((int (*)())_PPParserScopeAddMacro)(allocation,ppParserMacroCreateResult);
   return allocation;
 }
 
@@ -670,6 +670,7 @@ int _PPParserAttachString(parser, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int ppParserPreprocessStringResult;
   int allocation;
   int length;
   int iVar1;
@@ -684,8 +685,8 @@ int _PPParserAttachString(parser, param_2, param_3)
         _memmove(allocation,param_2,length);
       }
       else {
-        iVar1 = ((int (*)())_PPParserPreprocessString)(parser,param_2,1);
-        *parser = iVar1;
+        ppParserPreprocessStringResult = ((int (*)())_PPParserPreprocessString)(parser,param_2,1);
+        *parser = ppParserPreprocessStringResult;
       }
       iVar1 = _strlen(*parser);
       iVar2 = 0;
@@ -955,22 +956,22 @@ int _PPParserGetCharacter(parser, param_2)
 }
 
 /* _PPParserParseOption @ 0x97b7d488 (184 bytes) */
-int _PPParserParseOption(param_1)
-  undefined4 param_1;
+int _PPParserParseOption(parser)
+  undefined4 parser;
 {
   int compareResult;
   int part;
   int iVar2;
   char local_110 [264];
   
-  part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
   iVar2 = 1;
   if (part != 0) {
     compareResult = _memcmp(local_110,"OPTION",7);
     if (compareResult == 0) {
-      iVar2 = ((int (*)())_PPParserParseOptionIdentifier)(param_1);
+      iVar2 = ((int (*)())_PPParserParseOptionIdentifier)(parser);
       if (iVar2 == 0) {
-        part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+        part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
         iVar2 = 0x2d;
         if ((part != 0) && (iVar2 = 0x1e, local_110[0] == ';')) {
           iVar2 = 0;
@@ -978,7 +979,7 @@ int _PPParserParseOption(param_1)
       }
     }
     else {
-      ((int (*)())_PPParserReturnPart)(param_1);
+      ((int (*)())_PPParserReturnPart)(parser);
       iVar2 = 3;
     }
   }
@@ -1179,20 +1180,20 @@ int _PPStreamAddAttribBinding(param_1, param_2)
 }
 
 /* _PPParserReturnPart @ 0x97b7d9c8 (132 bytes) */
-int _PPParserReturnPart(param_1)
-  undefined4 param_1;
+int _PPParserReturnPart(parser)
+  undefined4 parser;
 {
   int iVar1;
   int iVar2;
   char local_20 [20];
   
-  iVar1 = ((int (*)())_PPParserReturnCharacter)(param_1,local_20);
+  iVar1 = ((int (*)())_PPParserReturnCharacter)(parser,local_20);
   iVar2 = 0;
   if (iVar1 == 0) {
     iVar2 = 0;
-    while (iVar1 = ((int (*)())_PPParserReturnCharacter)(param_1,local_20), iVar1 == 0) {
+    while (iVar1 = ((int (*)())_PPParserReturnCharacter)(parser,local_20), iVar1 == 0) {
       if (local_20[0] == ' ') {
-        ((int (*)())_PPParserGetCharacter)(param_1,local_20);
+        ((int (*)())_PPParserGetCharacter)(parser,local_20);
         return iVar2;
       }
       iVar2 = iVar2 + 1;
@@ -1239,6 +1240,9 @@ int _PPParserReturnCharacter(parser, param_2)
 int _PPParserParseStatement(parser)
   int parser;
 {
+  int ppParserExpandMacroResult;
+  int ppParserScopeFindMacroResult;
+  int ppParserParseOperationResult;
   int length;
   int compareResult;
   int iVar1;
@@ -1508,8 +1512,8 @@ LAB_97b7e328:
                             }
                             uVar7 = 0;
 LAB_97b7e334:
-                            iVar1 = ((int (*)())_PPParserParseOperation)(parser,iVar1,uVar4,uVar5,uVar6,uVar7,in_r9);
-                            return iVar1;
+                            ppParserParseOperationResult = ((int (*)())_PPParserParseOperation)(parser,iVar1,uVar4,uVar5,uVar6,uVar7,in_r9);
+                            return ppParserParseOperationResult;
                           }
 LAB_97b7e11c:
                           opsList = opsList + 2;
@@ -1543,10 +1547,10 @@ LAB_97b7e1b4:
                             {
                               return iVar1;
                             }
-                            iVar1 = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(parser + 0x44c),auStack_140);
-                            if (iVar1 != 0) {
-                              iVar1 = _PPParserExpandMacro(parser,iVar1);
-                              return iVar1;
+                            ppParserScopeFindMacroResult = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(parser + 0x44c),auStack_140);
+                            if (ppParserScopeFindMacroResult != 0) {
+                              ppParserExpandMacroResult = _PPParserExpandMacro(parser,ppParserScopeFindMacroResult);
+                              return ppParserExpandMacroResult;
                             }
                             iVar1 = _memcmp(auStack_140,"OPTION",7);
                             if (iVar1 == 0) {
@@ -1585,8 +1589,11 @@ LAB_97b7e1ac:
 int _PPParserParseParameterDeclaration(parser)
   int parser;
 {
+  int ppParserParseDefaultArrayResult;
+  int ppParserScopeAddIdentifierResult;
+  int ppParserIdentifierCreateResult;
   int part;
-  int iVar1;
+  int ppParserValidateNameResult;
   int iVar2;
   int part2;
   undefined4 uVar4;
@@ -1598,24 +1605,24 @@ int _PPParserParseParameterDeclaration(parser)
   uVar4 = 0;
   iVar2 = 0x2d;
   if (part != 0) {
-    iVar1 = ((int (*)())_PPParserValidateName)(parser,local_130);
+    ppParserValidateNameResult = ((int (*)())_PPParserValidateName)(parser,local_130);
     iVar2 = 0x12;
-    if (iVar1 == 0) {
-      iVar1 = ((int (*)())_PPParserIdentifierCreate)();
-      ((int (*)())_PPParserIdentifierSetName)(iVar1,local_130);
-      *(undefined4 *)(iVar1 + 0xc) = 2;
-      iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),iVar1);
-      if (iVar2 == 0) {
+    if (ppParserValidateNameResult == 0) {
+      ppParserIdentifierCreateResult = ((int (*)())_PPParserIdentifierCreate)();
+      ((int (*)())_PPParserIdentifierSetName)(ppParserIdentifierCreateResult,local_130);
+      *(undefined4 *)(ppParserIdentifierCreateResult + 0xc) = 2;
+      ppParserScopeAddIdentifierResult = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),ppParserIdentifierCreateResult);
+      if (ppParserScopeAddIdentifierResult == 0) {
         part2 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
         iVar2 = 0x2d;
         if (part2 != 0) {
           if (local_130[0] == '[') {
             ((int (*)())_PPParserReturnPart)(parser);
-            iVar2 = _PPParserParseDefaultArray(parser,local_30);
-            if (iVar2 != 0) {
-              return iVar2;
+            ppParserParseDefaultArrayResult = _PPParserParseDefaultArray(parser,local_30);
+            if (ppParserParseDefaultArrayResult != 0) {
+              return ppParserParseDefaultArrayResult;
             }
-            *(undefined1 *)(iVar1 + 0x10) = 1;
+            *(undefined1 *)(ppParserIdentifierCreateResult + 0x10) = 1;
             iVar2 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
             if (iVar2 == 0) {
               return 0x2d;
@@ -1624,10 +1631,10 @@ int _PPParserParseParameterDeclaration(parser)
           }
           iVar2 = 10;
           if (local_130[0] == '=') {
-            *(undefined4 *)(iVar1 + 8) = *(undefined4 *)(parser + 0x20);
+            *(undefined4 *)(ppParserIdentifierCreateResult + 8) = *(undefined4 *)(parser + 0x20);
             iVar2 = ((int (*)())_PPParserParseParamBinding)(parser,uVar4,local_30);
             if (iVar2 == 0) {
-              *(undefined4 *)(iVar1 + 4) = local_30[0];
+              *(undefined4 *)(ppParserIdentifierCreateResult + 4) = local_30[0];
               part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
               iVar2 = 0x2d;
               if ((part != 0) && (iVar2 = 10, local_130[0] == ';')) {
@@ -1638,7 +1645,7 @@ int _PPParserParseParameterDeclaration(parser)
         }
       }
       else {
-        _PPParserIdentifierFree(iVar1);
+        _PPParserIdentifierFree(ppParserIdentifierCreateResult);
         iVar2 = 0x1c;
       }
     }
@@ -1907,12 +1914,12 @@ int _PPParserScopeAddIdentifier(parser, param_2)
   undefined4 *param_2;
 {
   undefined4 *puVar1;
-  int iVar2;
+  int ppParserScopeFindIdentifierResult;
   undefined4 uVar3;
   
-  iVar2 = ((int (*)())_PPParserScopeFindIdentifier)(parser,*param_2);
+  ppParserScopeFindIdentifierResult = ((int (*)())_PPParserScopeFindIdentifier)(parser,*param_2);
   uVar3 = 1;
-  if (iVar2 == 0) {
+  if (ppParserScopeFindIdentifierResult == 0) {
     puVar1 = (undefined4 *)*parser;
     if ((undefined4 *)*parser == (undefined4 *)0x0) {
       puVar1 = param_2;
@@ -2904,20 +2911,20 @@ int _PPParserScopeFindMacro(param_1, param_2)
 }
 
 /* _PPParserParseArray @ 0x97b8031c (176 bytes) */
-int _PPParserParseArray(param_1, param_2)
-  undefined4 param_1;
+int _PPParserParseArray(parser, param_2)
+  undefined4 parser;
   int *param_2;
 {
   int part;
   int iVar2;
   char local_110 [260];
   
-  part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
   iVar2 = 0x2d;
   if ((((part != 0) && (iVar2 = 0xb, local_110[0] == '[')) &&
-      (iVar2 = ((int (*)())_PPParserGetInteger)(param_1,param_2), iVar2 == 0)) && (iVar2 = 0x23, -1 < *param_2))
+      (iVar2 = ((int (*)())_PPParserGetInteger)(parser,param_2), iVar2 == 0)) && (iVar2 = 0x23, -1 < *param_2))
   {
-    part = ((int (*)())_PPParserGetPart)(param_1,local_110,0);
+    part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
     iVar2 = 0x2d;
     if ((part != 0) && (iVar2 = 0xb, local_110[0] == ']')) {
       iVar2 = 0;
@@ -2927,21 +2934,21 @@ int _PPParserParseArray(param_1, param_2)
 }
 
 /* _PPParserGetInteger @ 0x97b803cc (112 bytes) */
-int _PPParserGetInteger(param_1, param_2)
-  undefined4 param_1;
+int _PPParserGetInteger(parser, param_2)
+  undefined4 parser;
   long *param_2;
 {
   int part;
   undefined4 uVar2;
-  long lVar3;
+  long strtolResult;
   char acStack_120 [256];
   char *local_20 [5];
   
-  part = ((int (*)())_PPParserGetPart)(param_1,acStack_120,1);
+  part = ((int (*)())_PPParserGetPart)(parser,acStack_120,1);
   uVar2 = 0x2d;
   if (part != 0) {
-    lVar3 = _strtol(acStack_120,local_20,0);
-    *param_2 = lVar3;
+    strtolResult = _strtol(acStack_120,local_20,0);
+    *param_2 = strtolResult;
     uVar2 = 0x15;
     if (local_20[0] == acStack_120 + part) {
       uVar2 = 0;
@@ -2980,8 +2987,10 @@ int _PPStreamAddParamBinding(param_1, param_2)
 int _PPParserParseAttributeDeclaration(parser)
   int parser;
 {
+  int ppParserScopeAddIdentifierResult;
+  int ppParserIdentifierCreateResult;
   int part;
-  int iVar1;
+  int ppParserValidateNameResult;
   int iVar2;
   int part2;
   char local_110 [256];
@@ -2989,18 +2998,18 @@ int _PPParserParseAttributeDeclaration(parser)
   part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
   iVar2 = 0x2d;
   if (part != 0) {
-    iVar1 = ((int (*)())_PPParserValidateName)(parser,local_110);
+    ppParserValidateNameResult = ((int (*)())_PPParserValidateName)(parser,local_110);
     iVar2 = 0x12;
-    if (iVar1 == 0) {
-      iVar1 = ((int (*)())_PPParserIdentifierCreate)();
-      ((int (*)())_PPParserIdentifierSetName)(iVar1,local_110);
-      *(undefined4 *)(iVar1 + 0xc) = 0;
-      iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),iVar1);
-      if (iVar2 == 0) {
+    if (ppParserValidateNameResult == 0) {
+      ppParserIdentifierCreateResult = ((int (*)())_PPParserIdentifierCreate)();
+      ((int (*)())_PPParserIdentifierSetName)(ppParserIdentifierCreateResult,local_110);
+      *(undefined4 *)(ppParserIdentifierCreateResult + 0xc) = 0;
+      ppParserScopeAddIdentifierResult = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),ppParserIdentifierCreateResult);
+      if (ppParserScopeAddIdentifierResult == 0) {
         part2 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
         iVar2 = 0x2d;
         if ((part2 != 0) && (iVar2 = 10, local_110[0] == '=')) {
-          *(undefined4 *)(iVar1 + 8) = *(undefined4 *)(parser + 0x24);
+          *(undefined4 *)(ppParserIdentifierCreateResult + 8) = *(undefined4 *)(parser + 0x24);
           iVar2 = ((int (*)())_PPParserParseAttributeBinding)(parser);
           if (iVar2 == 0) {
             part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
@@ -3012,7 +3021,7 @@ int _PPParserParseAttributeDeclaration(parser)
         }
       }
       else {
-        _PPParserIdentifierFree(iVar1);
+        _PPParserIdentifierFree(ppParserIdentifierCreateResult);
         iVar2 = 0x1c;
       }
     }
@@ -3027,7 +3036,7 @@ int _PPParserParseAttributeBinding(parser)
   bool bVar1;
   uint uVar2;
   int iVar3;
-  int iVar4;
+  int testAttribMatchResult;
   int iVar5;
   char local_140 [256];
   uint local_40;
@@ -3251,8 +3260,8 @@ LAB_97b80bac:
     iVar5 = **(int **)(iVar3 + 0x18);
     if (iVar5 != 0) {
       do {
-        iVar4 = ((int (*)())_testAttribMatch)(&local_40,iVar5 + 0xc);
-        if (iVar4 != 0) {
+        testAttribMatchResult = ((int (*)())_testAttribMatch)(&local_40,iVar5 + 0xc);
+        if (testAttribMatchResult != 0) {
           return 0x13;
         }
         iVar5 = *(int *)(iVar5 + 8);
@@ -3333,8 +3342,10 @@ int _PPParserParseOutputDeclaration(parser, param_2)
   int parser;
   undefined4 param_2;
 {
+  int ppParserScopeAddIdentifierResult;
+  int ppParserIdentifierCreateResult;
   int part;
-  int iVar1;
+  int ppParserValidateNameResult;
   int iVar2;
   int part2;
   char local_110 [256];
@@ -3342,19 +3353,19 @@ int _PPParserParseOutputDeclaration(parser, param_2)
   part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
   iVar2 = 0x2d;
   if (part != 0) {
-    iVar1 = ((int (*)())_PPParserValidateName)(parser,local_110);
+    ppParserValidateNameResult = ((int (*)())_PPParserValidateName)(parser,local_110);
     iVar2 = 0x12;
-    if (iVar1 == 0) {
-      iVar1 = ((int (*)())_PPParserIdentifierCreate)();
-      ((int (*)())_PPParserIdentifierSetName)(iVar1,local_110);
-      *(undefined4 *)(iVar1 + 0xc) = 3;
-      *(undefined4 *)(iVar1 + 0x14) = param_2;
-      iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),iVar1);
-      if (iVar2 == 0) {
+    if (ppParserValidateNameResult == 0) {
+      ppParserIdentifierCreateResult = ((int (*)())_PPParserIdentifierCreate)();
+      ((int (*)())_PPParserIdentifierSetName)(ppParserIdentifierCreateResult,local_110);
+      *(undefined4 *)(ppParserIdentifierCreateResult + 0xc) = 3;
+      *(undefined4 *)(ppParserIdentifierCreateResult + 0x14) = param_2;
+      ppParserScopeAddIdentifierResult = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),ppParserIdentifierCreateResult);
+      if (ppParserScopeAddIdentifierResult == 0) {
         part2 = ((int (*)())_PPParserGetPart)(parser,local_110,0);
         iVar2 = 0x2d;
         if ((part2 != 0) && (iVar2 = 10, local_110[0] == '=')) {
-          *(undefined4 *)(iVar1 + 8) = *(undefined4 *)(parser + 0x28);
+          *(undefined4 *)(ppParserIdentifierCreateResult + 8) = *(undefined4 *)(parser + 0x28);
           iVar2 = ((int (*)())_PPParserParseOutputBinding)(parser,param_2);
           if (iVar2 == 0) {
             part = ((int (*)())_PPParserGetPart)(parser,local_110,0);
@@ -3366,7 +3377,7 @@ int _PPParserParseOutputDeclaration(parser, param_2)
         }
       }
       else {
-        _PPParserIdentifierFree(iVar1);
+        _PPParserIdentifierFree(ppParserIdentifierCreateResult);
         iVar2 = 0x1c;
       }
     }
@@ -3582,6 +3593,7 @@ int _PPParserParseOperation(parser, param_2, param_3, param_4, param_5, param_6,
   uint param_6;
   undefined4 param_7;
 {
+  int ppParserParseBranchLabelResult;
   int part;
   bool bVar1;
   bool bVar2;
@@ -3718,9 +3730,9 @@ LAB_97b81664:
     break;
   case 0x4b:
   case 0x4c:
-    iVar4 = _PPParserParseBranchLabel(parser,auStack_190,&local_50);
-    if (iVar4 != 0) {
-      return iVar4;
+    ppParserParseBranchLabelResult = _PPParserParseBranchLabel(parser,auStack_190,&local_50);
+    if (ppParserParseBranchLabelResult != 0) {
+      return ppParserParseBranchLabelResult;
     }
   case 0x4d:
   case 0x54:
@@ -3842,6 +3854,8 @@ int _PPParserParseDestination(parser, param_2, param_3)
   uint *param_2;
   int param_3;
 {
+  int ppParserParseOutputBindingResult;
+  int ppParserScopeFindIdentifierResult;
   int arrayResult;
   int iVar1;
   uint uVar2;
@@ -3853,8 +3867,8 @@ int _PPParserParseDestination(parser, param_2, param_3)
   if (iVar1 == 0) {
     return 0x2d;
   }
-  iVar1 = ((int (*)())_PPParserScopeFindIdentifier)(*(undefined4 *)(parser + 0x44c),local_130);
-  if (iVar1 == 0) {
+  ppParserScopeFindIdentifierResult = ((int (*)())_PPParserScopeFindIdentifier)(*(undefined4 *)(parser + 0x44c),local_130);
+  if (ppParserScopeFindIdentifierResult == 0) {
     iVar1 = _memcmp(local_130,"result",7);
     if (iVar1 != 0) {
       return 0x19;
@@ -3862,14 +3876,14 @@ int _PPParserParseDestination(parser, param_2, param_3)
     *(undefined2 *)((int)param_2 + 6) = *(undefined2 *)(parser + 0x2a);
     *param_2 = *param_2 & 0xfff1ffff | 0x60000;
     ((int (*)())_PPParserReturnPart)(parser);
-    iVar1 = ((int (*)())_PPParserParseOutputBinding)(parser,0);
-    if (iVar1 != 0) {
-      return iVar1;
+    ppParserParseOutputBindingResult = ((int (*)())_PPParserParseOutputBinding)(parser,0);
+    if (ppParserParseOutputBindingResult != 0) {
+      return ppParserParseOutputBindingResult;
     }
   }
   else {
     local_30 = 0;
-    if ((param_3 - 0x5cU < 4) && (*(int *)(iVar1 + 0x14) == 2)) {
+    if ((param_3 - 0x5cU < 4) && (*(int *)(ppParserScopeFindIdentifierResult + 0x14) == 2)) {
       return 0x2c;
     }
     part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
@@ -3878,23 +3892,23 @@ int _PPParserParseDestination(parser, param_2, param_3)
     }
     ((int (*)())_PPParserReturnPart)(parser);
     if (local_130[0] == '[') {
-      if (*(char *)(iVar1 + 0x10) == '\0') {
+      if (*(char *)(ppParserScopeFindIdentifierResult + 0x10) == '\0') {
         return 0x20;
       }
       arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_30);
       if (arrayResult != 0) {
         return arrayResult;
       }
-      if (*(uint *)(iVar1 + 4) <= local_30) {
+      if (*(uint *)(ppParserScopeFindIdentifierResult + 4) <= local_30) {
         ((int (*)())_PPParserReturnPart)(parser);
         return 0x23;
       }
     }
-    else if (*(char *)(iVar1 + 0x10) != '\0') {
+    else if (*(char *)(ppParserScopeFindIdentifierResult + 0x10) != '\0') {
       return 0x21;
     }
-    *(short *)((int)param_2 + 6) = *(short *)(iVar1 + 10) + (*(unsigned short *)((unsigned char *)&(local_30) + 2));
-    uVar2 = *(uint *)(iVar1 + 0xc);
+    *(short *)((int)param_2 + 6) = *(short *)(ppParserScopeFindIdentifierResult + 10) + (*(unsigned short *)((unsigned char *)&(local_30) + 2));
+    uVar2 = *(uint *)(ppParserScopeFindIdentifierResult + 0xc);
     if ((uVar2 != 1) && (uVar2 != 3)) {
       return 0x18;
     }
@@ -3930,7 +3944,7 @@ int _PPParserParseSwizzleSourceVar(parser, param_2, param_3, param_4)
 {
   int part;
   int compareResult;
-  int iVar1;
+  int ppParserParseSourceSwizzleResult;
   int iVar2;
   char local_120 [268];
   
@@ -3966,9 +3980,9 @@ int _PPParserParseSwizzleSourceVar(parser, param_2, param_3, param_4)
       iVar2 = 0x2d;
       if (part != 0) {
         if ((local_120[0] == '.') && (part == 1)) {
-          iVar1 = _PPParserParseSourceSwizzle(parser,param_2,param_4);
-          if (iVar1 != 0) {
-            return iVar1;
+          ppParserParseSourceSwizzleResult = _PPParserParseSourceSwizzle(parser,param_2,param_4);
+          if (ppParserParseSourceSwizzleResult != 0) {
+            return ppParserParseSourceSwizzleResult;
           }
         }
         else {
@@ -3998,6 +4012,8 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
   int param_3;
   uint *param_4;
 {
+  int ppParserScopeFindIdentifierResult;
+  int ppParserParseIndirectArrayResult;
   int part;
   undefined2 uVar1;
   uint uVar2;
@@ -4012,8 +4028,8 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
   if (part == 0) {
     return 0x2d;
   }
-  iVar4 = ((int (*)())_PPParserScopeFindIdentifier)(*(undefined4 *)(parser + 0x44c),local_130);
-  if (iVar4 == 0) {
+  ppParserScopeFindIdentifierResult = ((int (*)())_PPParserScopeFindIdentifier)(*(undefined4 *)(parser + 0x44c),local_130);
+  if (ppParserScopeFindIdentifierResult == 0) {
     if ((*(uint *)(parser + 0x48c) & 2) == 0) {
       iVar4 = _memcmp(local_130,"vertex",7);
     }
@@ -4049,7 +4065,7 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
   }
   else {
     local_28 = 0;
-    if ((param_3 - 99U < 4) && (*(int *)(iVar4 + 0x14) == 2)) {
+    if ((param_3 - 99U < 4) && (*(int *)(ppParserScopeFindIdentifierResult + 0x14) == 2)) {
       return 0x2b;
     }
     part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
@@ -4058,26 +4074,26 @@ int _PPParserParseSourceVar(parser, param_2, param_3, param_4)
     }
     ((int (*)())_PPParserReturnPart)(parser);
     if (local_130[0] == '[') {
-      if (*(char *)(iVar4 + 0x10) == '\0') {
+      if (*(char *)(ppParserScopeFindIdentifierResult + 0x10) == '\0') {
         return 0x20;
       }
-      iVar3 = _PPParserParseIndirectArray(parser,param_2,&local_28);
-      if (iVar3 != 0) {
-        return iVar3;
+      ppParserParseIndirectArrayResult = _PPParserParseIndirectArray(parser,param_2,&local_28);
+      if (ppParserParseIndirectArrayResult != 0) {
+        return ppParserParseIndirectArrayResult;
       }
-      if (*(uint *)(iVar4 + 4) <= local_28) {
+      if (*(uint *)(ppParserScopeFindIdentifierResult + 4) <= local_28) {
         ((int (*)())_PPParserReturnPart)(parser);
         return 0x23;
       }
     }
-    else if (*(char *)(iVar4 + 0x10) != '\0') {
+    else if (*(char *)(ppParserScopeFindIdentifierResult + 0x10) != '\0') {
       return 0x21;
     }
-    *(short *)((int)param_2 + 6) = *(short *)(iVar4 + 10) + (*(unsigned short *)((unsigned char *)&(local_28) + 2));
-    if (2 < *(uint *)(iVar4 + 0xc)) {
+    *(short *)((int)param_2 + 6) = *(short *)(ppParserScopeFindIdentifierResult + 10) + (*(unsigned short *)((unsigned char *)&(local_28) + 2));
+    if (2 < *(uint *)(ppParserScopeFindIdentifierResult + 0xc)) {
       return 0x17;
     }
-    *param_2 = (*(uint *)(iVar4 + 0xc) & 7) << 0x17 | *param_2 & 0xfc7fffff;
+    *param_2 = (*(uint *)(ppParserScopeFindIdentifierResult + 0xc) & 7) << 0x17 | *param_2 & 0xfc7fffff;
   }
   if (*param_4 == 0) {
     uVar2 = *param_2 & 0xff89ffff | 0xd8000;
@@ -4126,21 +4142,21 @@ int FUN_97b82078(param_1, param_2, param_3, param_4)
 }
 
 /* _PPParserParseEnd @ 0x97b82150 (136 bytes) */
-int _PPParserParseEnd(param_1)
-  undefined4 param_1;
+int _PPParserParseEnd(parser)
+  undefined4 parser;
 {
   int compareResult;
   int part;
   undefined4 uVar2;
   undefined1 auStack_110 [264];
   
-  part = ((int (*)())_PPParserGetPart)(param_1,auStack_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,auStack_110,0);
   uVar2 = 0x2d;
   if (part != 0) {
     compareResult = _memcmp(auStack_110,"END",4);
     uVar2 = 6;
     if (compareResult == 0) {
-      part = ((int (*)())_PPParserGetPart)(param_1,auStack_110,0);
+      part = ((int (*)())_PPParserGetPart)(parser,auStack_110,0);
       uVar2 = 9;
       if (part == 0) {
         uVar2 = 0;

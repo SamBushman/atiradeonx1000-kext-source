@@ -646,11 +646,11 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
 }
 
 /* __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_ @ 0x97c32d8c (568 bytes) */
-int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_(this, _Rb_tree_iterator, pair, param_4)
+int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_(this, _Rb_tree_iterator, pair, text)
   unsigned char * this;
   unsigned char * _Rb_tree_iterator;
   int *pair;
-  int param_4;
+  int text;
 {
   int iVar1;
   uint *puVar2;
@@ -675,14 +675,14 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
   if (ppVar7 == *(unsigned char **)(ppVar5 + 8)) {
     if (*(int *)(_Rb_tree_iterator + 8) != 0) {
       puVar2 = &local_4c;
-      uVar3 = *(uint *)(*(int *)(param_4 + 4) + -0xc);
+      uVar3 = *(uint *)(*(int *)(text + 4) + -0xc);
       local_50 = uVar3;
       uVar6 = *(uint *)(*(int *)(ppVar7 + 0x14) + -0xc);
       local_4c = uVar6;
       if (uVar3 <= uVar6) {
         puVar2 = &local_50;
       }
-      iVar1 = _memcmp(*(void **)(param_4 + 4),*(void **)(ppVar7 + 0x14),*puVar2);
+      iVar1 = _memcmp(*(void **)(text + 4),*(void **)(ppVar7 + 0x14),*puVar2);
       if (iVar1 == 0) {
         iVar1 = uVar3 - uVar6;
       }
@@ -695,7 +695,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
       local_70[0] = ppVar7;
       std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
       ppVar5 = local_70[0];
-      pvVar4 = *(void **)(param_4 + 4);
+      pvVar4 = *(void **)(text + 4);
       puVar2 = &local_3c;
       uVar3 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
       local_40 = uVar3;
@@ -730,19 +730,19 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
           goto LAB_97c32f68;
         }
       }
-      ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)local_60,_Rb_tree_iterator,param_4);
+      ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)local_60,_Rb_tree_iterator,text);
       local_70[0] = local_60[0];
       goto LAB_97c32fa8;
     }
     puVar2 = &local_44;
     uVar3 = *(uint *)(*(int *)(*(int *)(ppVar7 + 0xc) + 0x14) + -0xc);
     local_48 = uVar3;
-    uVar6 = *(uint *)((int)*(void **)(param_4 + 4) + -0xc);
+    uVar6 = *(uint *)((int)*(void **)(text + 4) + -0xc);
     local_44 = uVar6;
     if (uVar3 <= uVar6) {
       puVar2 = &local_48;
     }
-    iVar1 = _memcmp(*(void **)(*(int *)(ppVar7 + 0xc) + 0x14),*(void **)(param_4 + 4),*puVar2);
+    iVar1 = _memcmp(*(void **)(*(int *)(ppVar7 + 0xc) + 0x14),*(void **)(text + 4),*puVar2);
     if (iVar1 == 0) {
       iVar1 = uVar3 - uVar6;
     }
@@ -751,11 +751,11 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
 LAB_97c32f68:
       ppVar7 = (unsigned char *)0x0;
 LAB_97c32f8c:
-      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)(this,_Rb_tree_iterator,ppVar7,ppVar5,param_4);
+      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)(this,_Rb_tree_iterator,ppVar7,ppVar5,text);
       return this;
     }
   }
-  ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)local_70,_Rb_tree_iterator,param_4);
+  ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)local_70,_Rb_tree_iterator,text);
 LAB_97c32fa8:
   *(unsigned char **)this = local_70[0];
   return this;
@@ -947,12 +947,12 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert @ 0x97c33374 (356 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert(this, _Rb_tree_node_base1, _Rb_tree_node_base2, pair, param_5)
+int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert(this, _Rb_tree_node_base1, _Rb_tree_node_base2, pair, text)
   unsigned char * this;
   unsigned char * _Rb_tree_node_base1;
   unsigned char * _Rb_tree_node_base2;
   int pair;
-  unsigned char * param_5;
+  unsigned char * text;
 {
   int iVar1;
   unsigned char * p_Var2;
@@ -966,8 +966,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
 LAB_97c333f0:
     p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)_Rb_tree_node_base1,0x1c);
     if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,param_5);
-      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(param_5 + 8);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,text);
+      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(text + 8);
     }
     *(unsigned char **)(pair + 8) = p_Var2;
     iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
@@ -982,22 +982,22 @@ LAB_97c333f0:
   }
   else {
     puVar3 = local_2c;
-    uVar5 = *(uint *)(*(int *)(param_5 + 4) + -0xc);
+    uVar5 = *(uint *)(*(int *)(text + 4) + -0xc);
     local_30 = uVar5;
     uVar4 = *(uint *)((int)*(void **)(pair + 0x14) + -0xc);
     local_2c[0] = uVar4;
     if (uVar5 <= uVar4) {
       puVar3 = &local_30;
     }
-    iVar1 = _memcmp(*(void **)(param_5 + 4),*(void **)(pair + 0x14),*puVar3);
+    iVar1 = _memcmp(*(void **)(text + 4),*(void **)(pair + 0x14),*puVar3);
     if (iVar1 == 0) {
       iVar1 = uVar5 - uVar4;
     }
     if (iVar1 < 0) goto LAB_97c333f0;
     p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)_Rb_tree_node_base1,0x1c);
     if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,param_5);
-      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(param_5 + 8);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,text);
+      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(text + 8);
     }
     *(unsigned char **)(pair + 0xc) = p_Var2;
     iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
@@ -1015,10 +1015,10 @@ LAB_97c33490:
 }
 
 /* __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_ @ 0x97c334d8 (388 bytes) */
-int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_(this, pair, param_3)
+int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_(this, pair, text)
   unsigned char * this;
   unsigned char * pair;
-  int param_3;
+  int text;
 {
   int iVar1;
   uint *puVar2;
@@ -1040,7 +1040,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
   iVar1 = 1;
   iVar5 = iVar4;
   if (*(int *)(iVar4 + 4) != 0) {
-    pvVar3 = *(void **)(param_3 + 4);
+    pvVar3 = *(void **)(text + 4);
     iVar6 = *(int *)(iVar4 + 4);
     do {
       iVar5 = iVar6;
@@ -1069,7 +1069,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
   if (iVar1 != 0) {
     local_60[0] = *(int *)(iVar4 + 8);
     if (iVar5 == local_60[0]) {
-      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,param_3);
+      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,text);
       goto LAB_97c3362c;
     }
     std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
@@ -1078,12 +1078,12 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
   puVar2 = &local_34;
   uVar7 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
   local_38 = uVar7;
-  uVar8 = *(uint *)((int)*(void **)(param_3 + 4) + -0xc);
+  uVar8 = *(uint *)((int)*(void **)(text + 4) + -0xc);
   local_34 = uVar8;
   if (uVar7 <= uVar8) {
     puVar2 = &local_38;
   }
-  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(param_3 + 4),*puVar2);
+  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(text + 4),*puVar2);
   if (iVar4 == 0) {
     iVar4 = uVar7 - uVar8;
   }
@@ -1092,7 +1092,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
     *(undefined4 *)(this + 4) = 0;
     return this;
   }
-  ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,param_3);
+  ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,text);
   local_50[0] = local_60[0];
 LAB_97c3362c:
   *(int *)this = local_50[0];
@@ -1230,7 +1230,7 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
   int iVar3;
   undefined4 uVar4;
   undefined4 uVar5;
-  char *pcVar6;
+  char *getenvResult;
   void *pvVar7;
   int iVar8;
   undefined4 *puVar9;
@@ -1258,8 +1258,8 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
     if (iVar3 != 0) {
       uVar12 = iVar3 * 8;
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-        pcVar6 = _getenv("GLIBCPP_FORCE_NEW");
-        if (pcVar6 == (char *)0x0) {
+        getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+        if (getenvResult == (char *)0x0) {
           do {
             if (in_RESERVE != '\0') {
               atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
@@ -1426,7 +1426,7 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
   int iVar2;
   undefined4 *puVar3;
   int iVar4;
-  char *pcVar5;
+  char *getenvResult;
   void *pvVar6;
   uint uVar7;
   undefined4 uVar8;
@@ -1449,8 +1449,8 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
     if (iVar4 != 0) {
       uVar7 = iVar4 * 4;
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-        pcVar5 = _getenv("GLIBCPP_FORCE_NEW");
-        if (pcVar5 == (char *)0x0) {
+        getenvResult = _getenv("GLIBCPP_FORCE_NEW");
+        if (getenvResult == (char *)0x0) {
           do {
             if (in_RESERVE != '\0') {
               atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
