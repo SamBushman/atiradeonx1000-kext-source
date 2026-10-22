@@ -2806,6 +2806,20 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
 int _glpPPDisassemble(program)
   uint *program;
 {
+  uint stateOffset;
+  uint programTarget;
+  uint stateCount;
+  uint instructionOffset;
+  uint outputOffset;
+  uint paramCount;
+  uint attribOffset;
+  uint addressRegCount;
+  uint optionsOffset;
+  uint instructionCount;
+  uint outputCount;
+  uint attribCount;
+  uint tempCount;
+  uint optionCount;
   int copyIndex5;
   int copyIndex6;
   int copyEnd3;
@@ -2917,9 +2931,9 @@ int _glpPPDisassemble(program)
   if (outBuf == (int *)0x0) {
     return (void *)0x0;
   }
-  uVar19 = *program;
-  local_64 = (uint)(uVar19 - 0x8b30 < 2);
-  if (uVar19 == 0x8804) {
+  programTarget = *program;
+  local_64 = (uint)(programTarget - 0x8b30 < 2);
+  if (programTarget == 0x8804) {
     ch = '!';
     copyIndex4 = 0;
     do {
@@ -2929,8 +2943,8 @@ int _glpPPDisassemble(program)
       copyIndex4 = copyLength3;
     } while (ch != '\0');
   }
-  else if (uVar19 < 0x8805) {
-    if (uVar19 == 0x8620) {
+  else if (programTarget < 0x8805) {
+    if (programTarget == 0x8620) {
       ch = '!';
       copyIndex4 = 0;
       do {
@@ -2952,7 +2966,7 @@ LAB_97be9f08:
       } while (ch != '\0');
     }
   }
-  else if (uVar19 == 0x8b30) {
+  else if (programTarget == 0x8b30) {
     ch = '!';
     copyIndex4 = 0;
     do {
@@ -2963,7 +2977,7 @@ LAB_97be9f08:
     } while (ch != '\0');
   }
   else {
-    if (uVar19 != 0x8b31) goto LAB_97be9f08;
+    if (programTarget != 0x8b31) goto LAB_97be9f08;
     ch = '!';
     copyIndex4 = 0;
     do {
@@ -2986,10 +3000,10 @@ LAB_97be9f08:
     } while (ch != '\0');
     outCursor = (int *)((int)outCursor + copyLength3);
   }
-  uVar20 = program[0x12];
+  optionCount = program[0x12];
   loopIndex = 0;
-  uVar6 = program[0x13];
-  if (0 < (int)uVar20) {
+  optionsOffset = program[0x13];
+  if (0 < (int)optionCount) {
     local_60 = "o intialize the Preprocessor";
     do {
       ch = 'O';
@@ -3001,7 +3015,7 @@ LAB_97be9f08:
         copyIndex2 = copyLength2;
       } while (ch != '\0');
       outBytePtr = (undefined1 *)((int)outCursor + copyLength2);
-      switch(program[uVar6 * 2 + loopIndex * 2] & 0xff) {
+      switch(program[optionsOffset * 2 + loopIndex * 2] & 0xff) {
       case 0:
         ch = 'A';
         copyIndex2 = 0;
@@ -3158,9 +3172,9 @@ switchD_97bea038_default:
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0cec;
       loopIndex = loopIndex + 1;
-    } while (loopIndex < (int)uVar20);
+    } while (loopIndex < (int)optionCount);
   }
-  if ((uVar20 != 0) && (!bVar2)) {
+  if ((optionCount != 0) && (!bVar2)) {
     ch = '\n';
     copyIndex4 = 0;
     do {
@@ -3171,8 +3185,8 @@ switchD_97bea038_default:
     } while (ch != '\0');
     outCursor = (int *)((int)outCursor + copyLength3);
   }
-  uVar6 = program[6];
-  if (uVar6 != 0) {
+  addressRegCount = program[6];
+  if (addressRegCount != 0) {
     ch = 'A';
     copyIndex4 = 0;
     do {
@@ -3183,7 +3197,7 @@ switchD_97bea038_default:
     } while (ch != '\0');
     iVar22 = 1;
     outBytePtr = (undefined1 *)((int)outCursor + copyLength3);
-    if (1 < (int)uVar6) {
+    if (1 < (int)addressRegCount) {
       do {
         ch = ',';
         copyIndex2 = 0;
@@ -3198,7 +3212,7 @@ switchD_97bea038_default:
         copyEnd4 = ((int (*)())_ncpy_97be5f58)(outCursor,iVar22);
         outBytePtr = (undefined1 *)((int)outCursor + copyEnd4);
         iVar22 = iVar9;
-      } while (iVar9 < (int)uVar6);
+      } while (iVar9 < (int)addressRegCount);
     }
     ch = ';';
     copyIndex4 = 0;
@@ -3226,11 +3240,11 @@ switchD_97bea038_default:
   uVar16 = (undefined4)uVar26;
   uVar6 = 0;
   bVar3 = true;
-  uVar20 = program[4];
+  tempCount = program[4];
   puVar21 = program + program[5] * 2;
   if (!bVar2) {
     uVar23 = 0xffffffff;
-    if ((int)uVar20 < 1) {
+    if ((int)tempCount < 1) {
 LAB_97bea680:
       local_5c = (uint)(byte)((local_80 < 0) << 3 | (0 < local_80) << 2 | (local_80 == 0) << 1 |
                              in_xer_so & 1) << 0x1c;
@@ -3246,7 +3260,7 @@ LAB_97bea698:
       iVar9 = -1;
       local_a4 = 0xffffffff;
       uVar23 = 0xffffffff;
-      if (0 < (int)uVar20) {
+      if (0 < (int)tempCount) {
         iVar10 = 0;
         piVar15 = local_78;
         puVar11 = puVar21;
@@ -3283,13 +3297,13 @@ LAB_97bea790:
           loopIndex = loopIndex + 1;
           iVar10 = iVar10 + 8;
           puVar11 = puVar11 + 2;
-        } while (loopIndex < (int)uVar20);
+        } while (loopIndex < (int)tempCount);
       }
       local_90 = 0;
       goto LAB_97bea7e0;
     }
     puVar11 = puVar21 + 1;
-    uVar25 = uVar20;
+    uVar25 = tempCount;
     do {
       uVar7 = *puVar11;
       puVar11 = puVar11 + 2;
@@ -3333,7 +3347,7 @@ LAB_97bf0cec:
 LAB_97bea7e0:
   uVar23 = 0;
   local_8c = -1;
-  if (0 < (int)uVar20) {
+  if (0 < (int)tempCount) {
     do {
       iVar22 = uVar23 * 8;
       if (bVar3) {
@@ -3460,7 +3474,7 @@ LAB_97bea920:
         }
       }
       uVar25 = uVar23 + 1;
-      if (uVar25 == uVar20) {
+      if (uVar25 == tempCount) {
         ch = ';';
         copyIndex4 = 0;
         do {
@@ -3501,13 +3515,13 @@ LAB_97beacc8:
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0c18;
       uVar23 = uVar25;
-    } while ((int)uVar25 < (int)uVar20);
+    } while ((int)uVar25 < (int)tempCount);
   }
   if (local_78 != (int *)0x0) {
     _free(local_78);
     uVar26 = CONCAT44(extraout_r3,extraout_r4_02);
   }
-  if ((uVar20 != 0) && (!bVar2)) {
+  if ((tempCount != 0) && (!bVar2)) {
     ch = '\n';
     copyIndex4 = 0;
     do {
@@ -3518,12 +3532,12 @@ LAB_97beacc8:
     } while (ch != '\0');
     outCursor = (int *)((int)outCursor + copyLength3);
   }
-  uVar20 = program[8];
+  attribCount = program[8];
   loopIndex = 0;
-  uVar6 = program[9];
-  if (0 < (int)uVar20) {
+  attribOffset = program[9];
+  if (0 < (int)attribCount) {
     do {
-      uVar23 = program[uVar6 * 2 + loopIndex * 2] >> 0x10 & 0xf;
+      uVar23 = program[attribOffset * 2 + loopIndex * 2] >> 0x10 & 0xf;
       if (uVar23 != 0) {
         ch = 'A';
         copyIndex2 = 0;
@@ -3534,15 +3548,15 @@ LAB_97beacc8:
           copyIndex2 = copyLength2;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength2);
-        copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + loopIndex * 8 + uVar6 * 8 + 6)
+        copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + loopIndex * 8 + attribOffset * 8 + 6)
                               );
         outCursor = (int *)((int)outCursor + copyEnd3);
         if (!bVar2) {
-          uVar25 = program[uVar6 * 2 + loopIndex * 2];
+          uVar25 = program[attribOffset * 2 + loopIndex * 2];
           outCursor = (int *)((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar25 >> 0x18 & 3,0,uVar25 >> 0x1a & 7,
                                        uVar25 >> 0x1d);
         }
-        if (uVar19 == 0x8804) {
+        if (programTarget == 0x8804) {
 LAB_97beae94:
           ch = ' ';
           copyIndex2 = 0;
@@ -3556,14 +3570,14 @@ LAB_97beaec8:
           outCursor = (int *)((int)outCursor + copyLength2);
         }
         else {
-          if (uVar19 < 0x8805) {
+          if (programTarget < 0x8805) {
             uVar25 = 0x8620;
           }
           else {
-            if (uVar19 == 0x8b30) goto LAB_97beae94;
+            if (programTarget == 0x8b30) goto LAB_97beae94;
             uVar25 = 0x8b31;
           }
-          if (uVar19 == uVar25) {
+          if (programTarget == uVar25) {
             ch = ' ';
             copyIndex2 = 0;
             do {
@@ -3638,7 +3652,7 @@ LAB_97beaec8:
             copyIndex2 = copyLength2;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
-          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[attribOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + copyEnd3);
           copyIndex2 = 0;
@@ -3659,7 +3673,7 @@ LAB_97beaec8:
             copyIndex2 = copyLength2;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
-          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[attribOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + copyEnd3);
           copyIndex2 = 0;
@@ -3680,7 +3694,7 @@ LAB_97beaec8:
             copyIndex2 = copyLength2;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
-          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[attribOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + copyEnd3);
           copyIndex2 = 0;
@@ -3701,7 +3715,7 @@ LAB_97beaec8:
             copyIndex2 = copyLength2;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
-          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[attribOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           outCursor = (int *)((int)outCursor + copyEnd3);
           copyIndex2 = 0;
@@ -3722,7 +3736,7 @@ LAB_97beaec8:
             copyIndex2 = copyLength2;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
-          if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 0) {
+          if ((program[attribOffset * 2 + loopIndex * 2] & 1) == 0) {
             ch = 'f';
             copyIndex2 = 0;
             do {
@@ -3734,7 +3748,7 @@ LAB_97beaec8:
 LAB_97beb3a4:
             outCursor = (int *)((int)outCursor + copyLength2);
           }
-          else if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 1) {
+          else if ((program[attribOffset * 2 + loopIndex * 2] & 1) == 1) {
             ch = 'b';
             copyIndex2 = 0;
             do {
@@ -3745,7 +3759,7 @@ LAB_97beb3a4:
             } while (ch != '\0');
             goto LAB_97beb3a4;
           }
-          switch(program[uVar6 * 2 + loopIndex * 2] >> 0xc & 0xf) {
+          switch(program[attribOffset * 2 + loopIndex * 2] >> 0xc & 0xf) {
           case 0:
             ch = 'a';
             copyIndex2 = 0;
@@ -3825,10 +3839,10 @@ switchD_97beaef4_caseD_0:
         if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0c18;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < (int)uVar20);
+    } while (loopIndex < (int)attribCount);
   }
   uVar16 = (undefined4)uVar26;
-  if ((uVar20 != 0) && (!bVar2)) {
+  if ((attribCount != 0) && (!bVar2)) {
     ch = '\n';
     copyIndex4 = 0;
     do {
@@ -3839,20 +3853,20 @@ switchD_97beaef4_caseD_0:
     } while (ch != '\0');
     outCursor = (int *)((int)outCursor + copyLength3);
   }
-  uVar6 = program[10];
+  paramCount = program[10];
   puVar21 = program + program[0xb] * 2;
-  if (uVar6 == 0) {
+  if (paramCount == 0) {
     bVar3 = local_88 == 0;
     goto LAB_97bed528;
   }
   uVar20 = 0xffffffff;
-  if ((int)uVar6 < 1) {
+  if ((int)paramCount < 1) {
 LAB_97beb670:
     bVar3 = local_88 == 0;
   }
   else {
     puVar11 = puVar21 + 1;
-    uVar23 = uVar6;
+    uVar23 = paramCount;
     do {
       uVar25 = *puVar11;
       puVar11 = puVar11 + 2;
@@ -3892,7 +3906,7 @@ LAB_97bf0c18:
   uVar20 = 0xffffffff;
   piVar15 = local_78;
   puVar11 = puVar21;
-  if (0 < (int)uVar6) {
+  if (0 < (int)paramCount) {
     do {
       if ((*puVar11 & 0x1f0000) != 0) {
         if (uVar20 == 0xffffffff) {
@@ -3925,11 +3939,11 @@ LAB_97beb790:
       }
       loopIndex = loopIndex + 1;
       puVar11 = puVar11 + 2;
-    } while (loopIndex < (int)uVar6);
+    } while (loopIndex < (int)paramCount);
   }
   loopIndex = 0;
   local_90 = 0;
-  if (0 < (int)uVar6) {
+  if (0 < (int)paramCount) {
     do {
       iVar9 = loopIndex * 8;
       uVar20 = puVar21[loopIndex * 2] >> 0x10 & 0x1f;
@@ -4989,7 +5003,7 @@ switchD_97bebb8c_caseD_0:
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto joined_r0x97beb668;
 LAB_97bed4a8:
       loopIndex = loopIndex + 1;
-    } while (loopIndex < (int)uVar6);
+    } while (loopIndex < (int)paramCount);
   }
   if (local_78 != (int *)0x0) {
     _free(local_78);
@@ -5005,15 +5019,15 @@ LAB_97bed4a8:
   } while (ch != '\0');
   outCursor = (int *)((int)outCursor + copyLength3);
 LAB_97bed528:
-  uVar20 = program[0xc];
+  outputCount = program[0xc];
   loopIndex = 0;
-  uVar6 = program[0xd];
+  outputOffset = program[0xd];
   bVar1 = bVar3;
-  if (0 < (int)uVar20) {
+  if (0 < (int)outputCount) {
     do {
-      uVar23 = program[uVar6 * 2 + loopIndex * 2] >> 0x10 & 0xf;
+      uVar23 = program[outputOffset * 2 + loopIndex * 2] >> 0x10 & 0xf;
       if (uVar23 == 0) goto LAB_97bedcb4;
-      uVar25 = program[uVar6 * 2 + loopIndex * 2] >> 0x1d;
+      uVar25 = program[outputOffset * 2 + loopIndex * 2] >> 0x1d;
       if (uVar25 == 1) {
         ch = 'L';
         copyIndex2 = 0;
@@ -5050,10 +5064,10 @@ LAB_97bed640:
         } while (ch != '\0');
         goto LAB_97bed640;
       }
-      copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + loopIndex * 8 + uVar6 * 8 + 6));
+      copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,(uint)*(ushort *)((int)program + loopIndex * 8 + outputOffset * 8 + 6));
       outCursor = (int *)((int)outCursor + copyEnd3);
       if (!bVar2) {
-        uVar25 = program[uVar6 * 2 + loopIndex * 2];
+        uVar25 = program[outputOffset * 2 + loopIndex * 2];
         outCursor = (int *)((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar25 >> 0x18 & 3,0,uVar25 >> 0x1a & 7,uVar25 >> 0x1d
                                     );
       }
@@ -5109,8 +5123,8 @@ LAB_97bed640:
           copyIndex2 = copyLength2;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength2);
-        if ((uVar19 == 0x8620) || (uVar19 == 0x8b31)) {
-          if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 0) {
+        if ((programTarget == 0x8620) || (programTarget == 0x8b31)) {
+          if ((program[outputOffset * 2 + loopIndex * 2] & 1) == 0) {
             ch = '.';
             copyIndex2 = 0;
             do {
@@ -5121,7 +5135,7 @@ LAB_97bed640:
             } while (ch != '\0');
           }
           else {
-            if ((program[uVar6 * 2 + loopIndex * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
+            if ((program[outputOffset * 2 + loopIndex * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
             ch = '.';
             copyIndex2 = 0;
             do {
@@ -5133,8 +5147,8 @@ LAB_97bed640:
           }
           break;
         }
-        if (((uVar19 == 0x8804) || (uVar19 == 0x8b30)) &&
-           (1 < (program[uVar6 * 2 + loopIndex * 2] >> 1 & 7))) {
+        if (((programTarget == 0x8804) || (programTarget == 0x8b30)) &&
+           (1 < (program[outputOffset * 2 + loopIndex * 2] >> 1 & 7))) {
           ch = '[';
           copyIndex2 = 0;
           do {
@@ -5144,7 +5158,7 @@ LAB_97bed640:
             copyIndex2 = copyLength2;
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
-          copyEnd = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] >> 1 & 7);
+          copyEnd = ((int (*)())_ncpy_97be5f58)(outCursor,program[outputOffset * 2 + loopIndex * 2] >> 1 & 7);
           ch = ']';
           copyIndex2 = 0;
           do {
@@ -5166,8 +5180,8 @@ LAB_97bed640:
           copyIndex2 = copyLength2;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength2);
-        if ((uVar19 == 0x8620) || (uVar19 == 0x8b31)) {
-          if ((program[uVar6 * 2 + loopIndex * 2] & 1) == 0) {
+        if ((programTarget == 0x8620) || (programTarget == 0x8b31)) {
+          if ((program[outputOffset * 2 + loopIndex * 2] & 1) == 0) {
             ch = '.';
             copyIndex2 = 0;
             do {
@@ -5178,7 +5192,7 @@ LAB_97bed640:
             } while (ch != '\0');
           }
           else {
-            if ((program[uVar6 * 2 + loopIndex * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
+            if ((program[outputOffset * 2 + loopIndex * 2] & 1) != 1) goto switchD_97bed6f4_caseD_0;
             ch = '.';
             copyIndex2 = 0;
             do {
@@ -5201,7 +5215,7 @@ LAB_97bed640:
           copyIndex2 = copyLength2;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength2);
-        copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
+        copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[outputOffset * 2 + loopIndex * 2] & 0x1f);
         ch = ']';
         outCursor = (int *)((int)outCursor + copyEnd3);
         copyIndex2 = 0;
@@ -5252,7 +5266,7 @@ LAB_97bed640:
           copyIndex2 = copyLength2;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength2);
-        copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[uVar6 * 2 + loopIndex * 2] & 0x1f);
+        copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,program[outputOffset * 2 + loopIndex * 2] & 0x1f);
         ch = ']';
         outCursor = (int *)((int)outCursor + copyEnd3);
         copyIndex2 = 0;
@@ -5278,9 +5292,9 @@ switchD_97bed6f4_caseD_0:
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto joined_r0x97beb668;
 LAB_97bedcb4:
       loopIndex = loopIndex + 1;
-    } while (loopIndex < (int)uVar20);
+    } while (loopIndex < (int)outputCount);
   }
-  if ((uVar20 != 0) || (bVar2)) {
+  if ((outputCount != 0) || (bVar2)) {
     ch = '\n';
     copyIndex4 = 0;
     do {
@@ -5291,16 +5305,16 @@ LAB_97bedcb4:
     } while (ch != '\0');
     outCursor = (int *)((int)outCursor + copyLength3);
   }
-  uVar20 = program[0x14];
+  instructionCount = program[0x14];
   iVar22 = 0;
-  uVar6 = program[0x15];
-  uVar19 = uVar20;
-  if (0 < (int)uVar20) {
+  instructionOffset = program[0x15];
+  uVar19 = instructionCount;
+  if (0 < (int)instructionCount) {
     do {
-      if ((program[uVar6 * 2 + iVar22 * 2] >> 0x12 & 0xff) - 0x4b < 2) {
+      if ((program[instructionOffset * 2 + iVar22 * 2] >> 0x12 & 0xff) - 0x4b < 2) {
         local_6c = local_6c + 1;
       }
-      iVar22 = iVar22 + (program[uVar6 * 2 + iVar22 * 2] >> 0x1d) + 2;
+      iVar22 = iVar22 + (program[instructionOffset * 2 + iVar22 * 2] >> 0x1d) + 2;
       uVar19 = uVar19 - 1;
     } while (uVar19 != 0);
   }
@@ -5316,27 +5330,27 @@ LAB_97bedcb4:
     uVar26 = CONCAT44(uVar16,extraout_r4_06);
     local_6c = 0;
     bVar4 = true;
-    if (0 < (int)uVar20) {
+    if (0 < (int)instructionCount) {
       do {
-        uVar19 = program[uVar6 * 2 + iVar10 * 2];
+        uVar19 = program[instructionOffset * 2 + iVar10 * 2];
         if ((uVar19 >> 0x12 & 0xff) - 0x4b < 2) {
-          uVar26 = ((int (*)())_InsertLabel)(local_74,local_70,program[uVar6 * 2 + iVar10 * 2 + 1] & 0x3ffff,
+          uVar26 = ((int (*)())_InsertLabel)(local_74,local_70,program[instructionOffset * 2 + iVar10 * 2 + 1] & 0x3ffff,
                                 uVar19 & 0x3ffff,local_6c);
           local_6c = (int)((ulonglong)uVar26 >> 0x20);
-          uVar19 = program[uVar6 * 2 + iVar10 * 2];
+          uVar19 = program[instructionOffset * 2 + iVar10 * 2];
         }
         loopIndex2 = loopIndex2 + 1;
         iVar10 = iVar10 + (uVar19 >> 0x1d) + 2;
         bVar4 = local_6c == 0;
-      } while (loopIndex2 < (int)uVar20);
+      } while (loopIndex2 < (int)instructionCount);
     }
   }
   loopIndex = 0;
   iVar9 = 0;
-  if (0 < (int)uVar20) {
+  if (0 < (int)instructionCount) {
     puVar21 = (uint *)(local_68 * 4 + local_74);
     do {
-      if (((program[uVar6 * 2 + iVar9 * 2] & 0x3ffff) == 0) && (!bVar2)) {
+      if (((program[instructionOffset * 2 + iVar9 * 2] & 0x3ffff) == 0) && (!bVar2)) {
         ch = 'm';
         copyIndex = 0;
         do {
@@ -5348,7 +5362,7 @@ LAB_97bedcb4:
         outCursor = (int *)((int)outCursor + copyLength);
       }
       if (((!bVar4) && (local_68 < local_6c)) &&
-         ((program[uVar6 * 2 + iVar9 * 2] & 0x3ffff) == *puVar21)) {
+         ((program[instructionOffset * 2 + iVar9 * 2] & 0x3ffff) == *puVar21)) {
         loopIndex3 = 0;
         local_9c = local_9c + -1;
         if (0 < local_9c) {
@@ -5388,12 +5402,12 @@ LAB_97bedcb4:
         outCursor = (int *)((int)outCursor + iVar13 + copyEnd2);
         local_9c = local_9c + 1;
       }
-      uVar19 = program[uVar6 * 2 + iVar9 * 2] >> 0x12 & 0xff;
+      uVar19 = program[instructionOffset * 2 + iVar9 * 2] >> 0x12 & 0xff;
       if (((uVar19 == 0x6b) || (uVar19 == 0x58)) ||
          ((uVar19 == 0x59 || ((uVar19 == 0x5a || (uVar19 == 0x5b)))))) {
         local_9c = local_9c + -1;
       }
-      ((int (*)())_glpDisassemble1Op)(program + uVar6 * 2 + iVar9 * 2,outCursor,&local_98,&local_94,local_88,
+      ((int (*)())_glpDisassemble1Op)(program + instructionOffset * 2 + iVar9 * 2,outCursor,&local_98,&local_94,local_88,
                          local_84,local_80,local_7c,local_74,&local_9c,local_64);
       outCursor = (int *)((int)outCursor + local_94);
       iVar9 = iVar9 + local_98;
@@ -5416,7 +5430,7 @@ LAB_97bedcb4:
       }
       loopIndex = loopIndex + 1;
       iVar9 = iVar9 + 1;
-    } while (loopIndex < (int)uVar20);
+    } while (loopIndex < (int)instructionCount);
   }
   if (!bVar4) {
     if ((local_68 < local_6c) && (loopIndex + 1 == *(int *)(local_74 + local_68 * 4))) {
@@ -5452,16 +5466,16 @@ LAB_97bedcb4:
     ch = "END\n"[copyIndex4 + 1];
     copyIndex4 = copyLength3;
   } while (ch != '\0');
-  uVar6 = program[0x18];
+  stateCount = program[0x18];
   loopIndex = 0;
-  uVar19 = program[0x19];
+  stateOffset = program[0x19];
   outCursor = (int *)((int)outCursor + copyLength3);
   iVar9 = 0;
-  if (0 < (int)uVar6) {
+  if (0 < (int)stateCount) {
     local_60 = "o intialize the Preprocessor";
     do {
       ch = 'S';
-      uVar20 = program[uVar19 * 2 + iVar9 * 2];
+      uVar20 = program[stateOffset * 2 + iVar9 * 2];
       iVar10 = 0;
       do {
         *(char *)((int)outCursor + iVar10) = ch;
@@ -5480,7 +5494,7 @@ LAB_97bedcb4:
           ch = "ALPHA_TEST "[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        switch(program[uVar19 * 2 + iVar9 * 2] & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -5572,7 +5586,7 @@ LAB_97bedcb4:
         outCursor = (int *)((int)outCursor + copyLength5 + iVar13 + copyLength);
         outCursor = (int *)((char * (*)())_glp_dtostr)((int)((ulonglong)uVar26 >> 0x20),(int)uVar26,outCursor,
                                       (int)outBuf + (outBufCapacity - (int)outCursor),
-                                      (double)GH_U2F((unsigned int)(program[uVar19 * 2 + iVar9 * 2 + 1])),1e-07,in_f3
+                                      (double)GH_U2F((unsigned int)(program[stateOffset * 2 + iVar9 * 2 + 1])),1e-07,in_f3
                                       ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_fffffd08,
                                       in_stack_fffffd10,in_stack_fffffd18,in_stack_fffffd20,
                                       in_stack_fffffd28);
@@ -5586,7 +5600,7 @@ LAB_97bedcb4:
           ch = "STENCIL_TEST func="[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0xc & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0xc & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -5676,7 +5690,7 @@ LAB_97bedcb4:
           copyIndex = copyLength5;
         } while (ch != '\0');
         outBytePtr = (undefined1 *)((int)outCursor + copyLength5 + iVar13 + copyLength);
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0xf & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0xf & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -5771,7 +5785,7 @@ switchD_97bee894_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outBytePtr = outBytePtr + copyLength;
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0x12 & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0x12 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -5866,7 +5880,7 @@ switchD_97beeaec_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outCursor = (int *)(outBytePtr + copyLength);
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0x15 & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0x15 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -5952,8 +5966,8 @@ switchD_97beeaec_default:
         }
         outCursor = (int *)((int)outCursor + copyLength);
 switchD_97beed44_default:
-        _sprintf(&local_2b0,"ref= %#x mask = %#x ",program[uVar19 * 2 + iVar9 * 2 + 1] >> 0x18,
-                 program[uVar19 * 2 + iVar9 * 2 + 1] >> 8 & 0xff);
+        _sprintf(&local_2b0,"ref= %#x mask = %#x ",program[stateOffset * 2 + iVar9 * 2 + 1] >> 0x18,
+                 program[stateOffset * 2 + iVar9 * 2 + 1] >> 8 & 0xff);
         iVar10 = 0;
         ch = local_2b0;
         while (ch != '\0') {
@@ -5972,7 +5986,7 @@ switchD_97beed44_default:
           iVar10 = copyLength;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
-        switch(program[uVar19 * 2 + iVar9 * 2] & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] & 7) {
         case 0:
           ch = 'P';
           copyIndex3 = 0;
@@ -6064,7 +6078,7 @@ switchD_97beed44_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outBytePtr = (undefined1 *)((int)outCursor + copyLength);
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0x13 & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0x13 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -6129,7 +6143,7 @@ switchD_97bef244_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outBytePtr = outBytePtr + copyLength;
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0x10 & 7) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0x10 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -6194,7 +6208,7 @@ switchD_97bef3e8_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outBytePtr = outBytePtr + copyLength;
-        switch(program[uVar19 * 2 + iVar9 * 2] & 0xf) {
+        switch(program[stateOffset * 2 + iVar9 * 2] & 0xf) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -6359,7 +6373,7 @@ switchD_97bef58c_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outBytePtr = outBytePtr + copyLength;
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 4 & 0xf) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 4 & 0xf) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -6524,7 +6538,7 @@ switchD_97bef988_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outBytePtr = outBytePtr + copyLength;
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 8 & 0xf) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 8 & 0xf) {
         case 0:
           ch = 'P';
           copyIndex = 0;
@@ -6689,7 +6703,7 @@ switchD_97befd84_default:
           iVar10 = copyLength;
         } while (ch != '\0');
         outCursor = (int *)(outBytePtr + copyLength);
-        switch(program[uVar19 * 2 + iVar9 * 2] >> 0xc & 0xf) {
+        switch(program[stateOffset * 2 + iVar9 * 2] >> 0xc & 0xf) {
         case 0:
           ch = 'P';
           copyIndex3 = 0;
@@ -6864,7 +6878,7 @@ switchD_97befd84_default:
           iVar10 = copyLength;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
-        switch(program[uVar19 * 2 + iVar9 * 2] & 0xf) {
+        switch(program[stateOffset * 2 + iVar9 * 2] & 0xf) {
         case 0:
           ch = 'P';
           copyIndex3 = 0;
@@ -7039,7 +7053,7 @@ switchD_97befd84_default:
           copyIndex = copyLength;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
-        if ((program[uVar19 * 2 + iVar9 * 2] & 0x20000) == 0) {
+        if ((program[stateOffset * 2 + iVar9 * 2] & 0x20000) == 0) {
           ch = 'R';
           copyIndex = 0;
           do {
@@ -7050,7 +7064,7 @@ switchD_97befd84_default:
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength);
         }
-        if ((program[uVar19 * 2 + iVar9 * 2] & 0x40000) == 0) {
+        if ((program[stateOffset * 2 + iVar9 * 2] & 0x40000) == 0) {
           ch = 'G';
           copyIndex = 0;
           do {
@@ -7061,7 +7075,7 @@ switchD_97befd84_default:
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength);
         }
-        if ((program[uVar19 * 2 + iVar9 * 2] & 0x80000) == 0) {
+        if ((program[stateOffset * 2 + iVar9 * 2] & 0x80000) == 0) {
           ch = 'B';
           copyIndex = 0;
           do {
@@ -7072,7 +7086,7 @@ switchD_97befd84_default:
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength);
         }
-        if ((program[uVar19 * 2 + iVar9 * 2] & 0x100000) == 0) {
+        if ((program[stateOffset * 2 + iVar9 * 2] & 0x100000) == 0) {
           ch = 'A';
           copyIndex = 0;
           do {
@@ -7083,7 +7097,7 @@ switchD_97befd84_default:
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength);
         }
-        if ((program[uVar19 * 2 + iVar9 * 2] & 0x10000) == 0) {
+        if ((program[stateOffset * 2 + iVar9 * 2] & 0x10000) == 0) {
           ch = 'D';
           copyIndex = 0;
           do {
@@ -7094,8 +7108,8 @@ switchD_97befd84_default:
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength);
         }
-        if (*(char *)((int)program + iVar9 * 8 + uVar19 * 8 + 2) != -1) {
-          _sprintf(local_1b0,"STENCIL MASK = %0x",program[uVar19 * 2 + iVar9 * 2] >> 8 & 0xff);
+        if (*(char *)((int)program + iVar9 * 8 + stateOffset * 8 + 2) != -1) {
+          _sprintf(local_1b0,"STENCIL MASK = %0x",program[stateOffset * 2 + iVar9 * 2] >> 8 & 0xff);
           iVar10 = 0;
           ch = local_1b0[0];
           while (ch != '\0') {
@@ -7122,7 +7136,7 @@ switchD_97bee2f0_default:
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto joined_r0x97beb668;
       loopIndex = loopIndex + 1;
       iVar9 = iVar9 + 1;
-    } while (loopIndex < (int)uVar6);
+    } while (loopIndex < (int)stateCount);
   }
   piVar15 = (int *)((int)outCursor + 1);
   *(undefined1 *)outCursor = 0;

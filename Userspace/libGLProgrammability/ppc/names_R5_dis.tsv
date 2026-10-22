@@ -615,3 +615,191 @@ use	_glpDisassemble1Op	iVar14	copyIndex12	INFERRED	index of the inlined strcpy o
 use	_glpDisassemble1Op	iVar14	copyIndex12	INFERRED	index of the inlined strcpy of a constant string	^\s*puVar15\ =\ puVar15\ \+\ iVar14;$	+1
 use	_glpDisassemble1Op	iVar14	sprintfLength	CONFIRMED	characters written by sprintf	^\s*iVar14\ =\ _sprintf\(pcVar8,"\ \ \ \ \#\ Target:\ %d",uVar3\ \&\ 0x3ffff\);$	+2
 local	_glpDisassemble1Op	puVar15	textPtr	INFERRED	cursor into the output text: the next character is written here (also the result of the _glpWrite* helpers)
+use	_glpPPDisassemble	uVar20	optionCount	CONFIRMED	program header: number of OPTION lines (program header word 0x12)	^\s*uVar20\ =\ param_1\[0x12\];$	+1
+use	_glpPPDisassemble	uVar20	optionCount	CONFIRMED	program header: number of OPTION lines (program header word 0x12)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	optionCount	CONFIRMED	program header: number of OPTION lines (program header word 0x12)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar20\);$	+1
+use	_glpPPDisassemble	uVar20	optionCount	CONFIRMED	program header: number of OPTION lines (program header word 0x12)	^\s*if\ \(\(uVar20\ !=\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*uVar20\ =\ param_1\[4\];$	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(\(int\)uVar20\ <\ 1\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar20\);$@2	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*uVar25\ =\ uVar20;$	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$@3	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(uVar25\ ==\ uVar20\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*\}\ while\ \(\(int\)uVar25\ <\ \(int\)uVar20\);$	+1
+use	_glpPPDisassemble	uVar20	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(\(uVar20\ !=\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar20	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*uVar20\ =\ param_1\[8\];$	+1
+use	_glpPPDisassemble	uVar20	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$@4	+1
+use	_glpPPDisassemble	uVar20	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar20\);$@3	+1
+use	_glpPPDisassemble	uVar20	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*if\ \(\(uVar20\ !=\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$@3	+1
+use	_glpPPDisassemble	uVar20	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*uVar20\ =\ param_1\[0xc\];$	+1
+use	_glpPPDisassemble	uVar20	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$@5	+1
+use	_glpPPDisassemble	uVar20	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar20\);$@4	+1
+use	_glpPPDisassemble	uVar20	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*if\ \(\(uVar20\ !=\ 0\)\ \|\|\ \(bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*uVar20\ =\ param_1\[0x14\];$	+1
+use	_glpPPDisassemble	uVar20	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*uVar19\ =\ uVar20;$	+2
+use	_glpPPDisassemble	uVar20	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$@7	+1
+use	_glpPPDisassemble	uVar20	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*\}\ while\ \(iVar9\ <\ \(int\)uVar20\);$	+1
+use	_glpPPDisassemble	uVar20	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*if\ \(0\ <\ \(int\)uVar20\)\ \{$@8	+1
+use	_glpPPDisassemble	uVar20	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar20\);$@5	+1
+use	_glpPPDisassemble	uVar6	optionsOffset	CONFIRMED	program header: offset (in 8-byte records) of the option table (header word 0x13)	^\s*uVar6\ =\ param_1\[0x13\];$	+1
+use	_glpPPDisassemble	uVar6	optionsOffset	CONFIRMED	program header: offset (in 8-byte records) of the option table (header word 0x13)	^\s*switch\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0xff\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*uVar6\ =\ param_1\[6\];$	+2
+use	_glpPPDisassemble	uVar6	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*if\ \(1\ <\ \(int\)uVar6\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*\}\ while\ \(iVar9\ <\ \(int\)uVar6\);$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*uVar6\ =\ param_1\[9\];$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*uVar23\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x10\ \&\ 0xf;$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\(uint\)\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar22\ \*\ 8\ \+\ uVar6\ \*\ 8\ \+\ 6\)$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*uVar25\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\];$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0x1f\);$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0x1f\);$@2	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0x1f\);$@3	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0x1f\);$@4	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*else\ if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 1\)\ ==\ 1\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*switch\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0xc\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*uVar6\ =\ param_1\[10\];$	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(uVar6\ ==\ 0\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(\(int\)uVar6\ <\ 1\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*uVar23\ =\ uVar6;$	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(0\ <\ \(int\)uVar6\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar6\);$	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(0\ <\ \(int\)uVar6\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar6	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar6\);$@2	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*uVar6\ =\ param_1\[0xd\];$	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*uVar23\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x10\ \&\ 0xf;$@2	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*uVar25\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x1d;$	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\(uint\)\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar22\ \*\ 8\ \+\ uVar6\ \*\ 8\ \+\ 6\)\);$	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*uVar25\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 1\)\ ==\ 0\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 1\)\ !=\ 1\)\ goto\ switchD_97bed6f4_caseD_0;$	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*\(1\ <\ \(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 1\ \&\ 7\)\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 1\ \&\ 7\);$	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 1\)\ ==\ 0\)\ \{$@3	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 1\)\ !=\ 1\)\ goto\ switchD_97bed6f4_caseD_0;$@2	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0x1f\);$@5	+1
+use	_glpPPDisassemble	uVar6	outputOffset	CONFIRMED	program header: offset of the output record table (header word 0xd)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ \&\ 0x1f\);$@6	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*uVar6\ =\ param_1\[0x15\];$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x12\ \&\ 0xff\)\ \-\ 0x4b\ <\ 2\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*iVar22\ =\ iVar22\ \+\ \(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x1d\)\ \+\ 2;$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\];$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_InsertLabel\)\(local_74,local_70,param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\ \+\ 1\]\ \&\ 0x3ffff,$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*if\ \(\(\(param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x3ffff\)\ ==\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*\(\(param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x3ffff\)\ ==\ \*puVar21\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x12\ \&\ 0xff;$	+1
+use	_glpPPDisassemble	uVar6	instructionOffset	CONFIRMED	program header: offset of the instruction records (header word 0x15)	^\s*\(\(int\ \(\*\)\(\)\)_glpDisassemble1Op\)\(param_1\ \+\ uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2,local_a8,\&local_98,\&local_94,local_88,$	+1
+use	_glpPPDisassemble	uVar6	stateCount	CONFIRMED	program header: number of PP_ raster-state records (header word 0x18)	^\s*uVar6\ =\ param_1\[0x18\];$	+1
+use	_glpPPDisassemble	uVar6	stateCount	CONFIRMED	program header: number of PP_ raster-state records (header word 0x18)	^\s*if\ \(0\ <\ \(int\)uVar6\)\ \{$@3	+1
+use	_glpPPDisassemble	uVar6	stateCount	CONFIRMED	program header: number of PP_ raster-state records (header word 0x18)	^\s*\}\ while\ \(iVar22\ <\ \(int\)uVar6\);$@3	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*uVar19\ =\ \*param_1;$	+3
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*else\ if\ \(uVar19\ <\ 0x8805\)\ \{$	+2
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*else\ if\ \(uVar19\ ==\ 0x8b30\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(uVar19\ !=\ 0x8b31\)\ goto\ LAB_97be9f08;$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(uVar19\ ==\ 0x8804\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(uVar19\ <\ 0x8805\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(uVar19\ ==\ 0x8b30\)\ goto\ LAB_97beae94;$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(uVar19\ ==\ uVar25\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(\(uVar19\ ==\ 0x8620\)\ \|\|\ \(uVar19\ ==\ 0x8b31\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(\(\(uVar19\ ==\ 0x8804\)\ \|\|\ \(uVar19\ ==\ 0x8b30\)\)\ \&\&$	+1
+use	_glpPPDisassemble	uVar19	programTarget	CONFIRMED	program header word 0: target enum (0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader)	^\s*if\ \(\(uVar19\ ==\ 0x8620\)\ \|\|\ \(uVar19\ ==\ 0x8b31\)\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*uVar19\ =\ param_1\[0x19\];$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*uVar20\ =\ param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\];$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*\(double\)GH_U2F\(\(unsigned\ int\)\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\ \+\ 1\]\)\),1e\-07,in_f3$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0xc\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0xf\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x12\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x15\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*_sprintf\(\&local_2b0,"ref=\ %\#x\ mask\ =\ %\#x\ ",param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\ \+\ 1\]\ >>\ 0x18,$	+2
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 7\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x13\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x10\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 4\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 8\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0xc\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0xf\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x40000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x80000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x100000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x10000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar19	stateOffset	CONFIRMED	program header: offset of the raster-state records (header word 0x19)	^\s*if\ \(\*\(char\ \*\)\(\(int\)param_1\ \+\ iVar9\ \*\ 8\ \+\ uVar19\ \*\ 8\ \+\ 2\)\ !=\ \-1\)\ \{$	+2
+
+
+use	_glpPPShaderToProgramString	iVar21	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*iVar21\ =\ param_1\[8\];$	+1
+use	_glpPPShaderToProgramString	iVar21	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*if\ \(0\ <\ iVar21\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar21	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*\}\ while\ \(iVar3\ <\ iVar21\);$	+1
+use	_glpPPShaderToProgramString	iVar21	attribCount	CONFIRMED	program header: number of vertex/fragment attributes (header word 8)	^\s*if\ \(iVar21\ !=\ 0\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*iVar21\ =\ param_1\[10\];$	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(iVar21\ !=\ 0\)\ \{$@2	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(0\ <\ iVar21\)\ \{$@2	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*iVar3\ =\ iVar21;$	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(0\ <\ iVar21\)\ \{$@3	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*\}\ while\ \(iVar3\ <\ iVar21\);$@2	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*if\ \(0\ <\ iVar21\)\ \{$@4	+1
+use	_glpPPShaderToProgramString	iVar21	paramCount	CONFIRMED	program header: number of parameters (header word 10)	^\s*\}\ while\ \(iVar4\ <\ iVar21\);$	+1
+use	_glpPPShaderToProgramString	iVar19	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*iVar19\ =\ param_1\[6\];$	+1
+use	_glpPPShaderToProgramString	iVar19	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*if\ \(iVar19\ !=\ 0\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*if\ \(1\ <\ iVar19\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	addressRegCount	CONFIRMED	program header: number of address registers (header word 6)	^\s*\}\ while\ \(iVar3\ <\ iVar19\);$	+1
+use	_glpPPShaderToProgramString	iVar19	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*iVar19\ =\ param_1\[4\];$	+1
+use	_glpPPShaderToProgramString	iVar19	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(0\ <\ iVar19\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*\}\ while\ \(iVar21\ <\ iVar19\);$	+1
+use	_glpPPShaderToProgramString	iVar19	tempCount	CONFIRMED	program header: number of temporaries (header word 4)	^\s*if\ \(iVar19\ !=\ 0\)\ \{$@2	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar19\ =\ param_1\[9\];$	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ >>\ 0x10\ \&\ 0xf;$	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,\(uint\)\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar3\ \*\ 8\ \+\ iVar19\ \*\ 8\ \+\ 6\)\);$	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ \&\ 0x1f\);$	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ \&\ 0x1f\);$@2	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ \&\ 0x1f\);$@3	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ \&\ 0x1f\);$@4	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*if\ \(\(param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*else\ if\ \(\(param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ \&\ 1U\)\ ==\ 1\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	attribOffset	CONFIRMED	program header: offset of the attribute record table (header word 9)	^\s*switch\(\(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar3\ \*\ 2\]\ >>\ 0xc\ \&\ 0xf\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar19\ =\ param_1\[0xb\];$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*puVar6\ =\ \(uint\ \*\)\(param_1\ \+\ iVar19\ \*\ 2\ \+\ 1\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar5\ =\ iVar3\ \*\ 8\ \+\ iVar19\ \*\ 8;$	+2
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 0x10\ \&\ 0x1f;$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*if\ \(piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)\]\ ==\ \-1\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*if\ \(piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)\]\ ==\ 0\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xffff\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xffff\);$@2	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*switch\(\(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 8\ \&\ 0xf\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$@2	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 8\ \&\ 1;$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 9\ \&\ 3;$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*if\ \(\(\(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 1\ \&\ 7\)\ ==\ 5\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*if\ \(\(param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*else\ if\ \(\(param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 1U\)\ ==\ 1\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*switch\(\(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 1\ \&\ 7\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0x1f\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 5\ \&\ 7;$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0x1f\);$@2	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 5\ \&\ 7;$@2	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0x1f\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*switch\(\(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 8\ \&\ 7\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$@2	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$@3	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$@4	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xff\);$@5	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*uVar23\ =\ \(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 0xe\ \&\ 3;$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,\(uint\)param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ >>\ 0xc\ \&\ 3\);$	+1
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*param_1\[0x1b\]\ \*\ 2\ \+\ \(param_1\[iVar19\ \*\ 2\ \+\ iVar4\ \*\ 2\]\ \&\ 0xffffU\)\ \*\ 4\);$	+2
+use	_glpPPShaderToProgramString	iVar19	paramOffset	CONFIRMED	program header: offset of the parameter record table (header word 0xb)	^\s*if\ \(piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)\]\ ==\ \-1\)\ \{$@2	+1
+use	_glpPPShaderToProgramString	iVar19	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*iVar19\ =\ param_1\[0xc\];$	+1
+use	_glpPPShaderToProgramString	iVar19	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*if\ \(0\ <\ iVar19\)\ \{$@2	+1
+use	_glpPPShaderToProgramString	iVar19	outputCount	CONFIRMED	program header: number of outputs (header word 0xc)	^\s*\}\ while\ \(iVar21\ <\ iVar19\);$@2	+1
+use	_glpPPShaderToProgramString	iVar19	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*iVar19\ =\ param_1\[0x14\];$	+1
+use	_glpPPShaderToProgramString	iVar19	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*if\ \(0\ <\ iVar19\)\ \{$@3	+1
+use	_glpPPShaderToProgramString	iVar19	instructionCount	CONFIRMED	program header: number of instructions (header word 0x14)	^\s*\}\ while\ \(iVar21\ <\ iVar19\);$@3	+1
+
+
+
+
+

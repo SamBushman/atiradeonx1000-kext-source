@@ -7725,6 +7725,13 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   undefined4 param_2;
   uint param_3;
 {
+  int instructionCount;
+  int outputCount;
+  int paramOffset;
+  int attribOffset;
+  int tempCount;
+  int paramCount;
+  int attribCount;
   int copyIndex10;
   int copyIndex9;
   int copyEnd;
@@ -7775,7 +7782,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   int iVar16;
   int iVar17;
   int *piVar18;
-  int iVar19;
+  int addressRegCount;
   char *pcVar20;
   int iVar21;
   char *pcVar22;
@@ -7834,10 +7841,10 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   else {
     local_6c = local_6c | 0xc00000;
   }
-  iVar19 = shader[6];
+  addressRegCount = shader[6];
   uVar11 = extraout_r4;
   local_60 = local_64;
-  if (iVar19 != 0) {
+  if (addressRegCount != 0) {
     ch = 'A';
     copyIndex8 = 0;
     do {
@@ -7848,7 +7855,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
     } while (ch != '\0');
     iVar21 = 1;
     local_60 = local_64 + copyLength10;
-    if (1 < iVar19) {
+    if (1 < addressRegCount) {
       do {
         ch = ',';
         copyIndex4 = 0;
@@ -7863,7 +7870,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
         copyEnd6 = ((int (*)())_ncpy_97bf2850)(local_60,iVar21);
         local_60 = local_60 + copyEnd6;
         iVar21 = iVar3;
-      } while (iVar3 < iVar19);
+      } while (iVar3 < addressRegCount);
     }
     ch = ';';
     copyIndex5 = 0;
@@ -7888,9 +7895,9 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
     } while (ch != '\0');
     local_60 = local_60 + copyLength7;
   }
-  iVar19 = shader[4];
+  tempCount = shader[4];
   loopIndex2 = 0;
-  if (0 < iVar19) {
+  if (0 < tempCount) {
     piVar18 = shader + shader[5] * 2 + 1;
     do {
       ch = 'T';
@@ -7926,9 +7933,9 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
       if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
       loopIndex2 = loopIndex2 + 1;
       piVar18 = piVar18 + 2;
-    } while (loopIndex2 < iVar19);
+    } while (loopIndex2 < tempCount);
   }
-  if (iVar19 != 0) {
+  if (tempCount != 0) {
     ch = '\n';
     copyIndex5 = 0;
     do {
@@ -7939,12 +7946,12 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
     } while (ch != '\0');
     local_60 = local_60 + copyLength7;
   }
-  iVar21 = shader[8];
+  attribCount = shader[8];
   loopIndex3 = 0;
-  iVar19 = shader[9];
-  if (0 < iVar21) {
+  attribOffset = shader[9];
+  if (0 < attribCount) {
     do {
-      uVar23 = (uint)shader[iVar19 * 2 + loopIndex3 * 2] >> 0x10 & 0xf;
+      uVar23 = (uint)shader[attribOffset * 2 + loopIndex3 * 2] >> 0x10 & 0xf;
       if (uVar23 == 0) goto LAB_97c0239c;
       ch = 'A';
       copyIndex3 = 0;
@@ -7955,7 +7962,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
         copyIndex3 = copyLength3;
       } while (ch != '\0');
       local_60 = local_60 + copyLength3;
-      copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)*(ushort *)((int)shader + loopIndex3 * 8 + iVar19 * 8 + 6));
+      copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)*(ushort *)((int)shader + loopIndex3 * 8 + attribOffset * 8 + 6));
       local_60 = local_60 + copyEnd3;
       if (iVar17 == 0x8b30) {
         ch = ' ';
@@ -8043,7 +8050,7 @@ LAB_97c01cf4:
           copyIndex3 = copyLength3;
         } while (ch != '\0');
         local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
         local_60 = local_60 + copyEnd3;
         copyIndex3 = 0;
@@ -8064,7 +8071,7 @@ LAB_97c01cf4:
           copyIndex3 = copyLength3;
         } while (ch != '\0');
         local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
         local_60 = local_60 + copyEnd3;
         copyIndex3 = 0;
@@ -8085,7 +8092,7 @@ LAB_97c01cf4:
           copyIndex3 = copyLength3;
         } while (ch != '\0');
         local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
         local_60 = local_60 + copyEnd3;
         copyIndex3 = 0;
@@ -8106,7 +8113,7 @@ LAB_97c01cf4:
           copyIndex3 = copyLength3;
         } while (ch != '\0');
         local_60 = local_60 + copyLength3;
-        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f);
+        copyEnd3 = ((int (*)())_ncpy_97bf2850)(local_60,shader[attribOffset * 2 + loopIndex3 * 2] & 0x1f);
         ch = ']';
         local_60 = local_60 + copyEnd3;
         copyIndex3 = 0;
@@ -8129,7 +8136,7 @@ LAB_97c02100:
           copyIndex3 = copyLength3;
         } while (ch != '\0');
         local_60 = local_60 + copyLength3;
-        if ((shader[iVar19 * 2 + loopIndex3 * 2] & 1U) == 0) {
+        if ((shader[attribOffset * 2 + loopIndex3 * 2] & 1U) == 0) {
           ch = 'f';
           copyIndex3 = 0;
           do {
@@ -8141,7 +8148,7 @@ LAB_97c02100:
 LAB_97c021d8:
           local_60 = local_60 + copyLength3;
         }
-        else if ((shader[iVar19 * 2 + loopIndex3 * 2] & 1U) == 1) {
+        else if ((shader[attribOffset * 2 + loopIndex3 * 2] & 1U) == 1) {
           ch = 'b';
           copyIndex3 = 0;
           do {
@@ -8152,7 +8159,7 @@ LAB_97c021d8:
           } while (ch != '\0');
           goto LAB_97c021d8;
         }
-        switch((uint)shader[iVar19 * 2 + loopIndex3 * 2] >> 0xc & 0xf) {
+        switch((uint)shader[attribOffset * 2 + loopIndex3 * 2] >> 0xc & 0xf) {
         case 0:
           ch = 'a';
           copyIndex3 = 0;
@@ -8234,9 +8241,9 @@ switchD_97c01d20_caseD_0:
       if ((int)((ulonglong)uVar25 >> 0x20) == 0) goto LAB_97c04d50;
 LAB_97c0239c:
       loopIndex3 = loopIndex3 + 1;
-    } while (loopIndex3 < iVar21);
+    } while (loopIndex3 < attribCount);
   }
-  if (iVar21 != 0) {
+  if (attribCount != 0) {
     ch = '\n';
     copyIndex5 = 0;
     do {
@@ -8247,13 +8254,13 @@ LAB_97c0239c:
     } while (ch != '\0');
     local_60 = local_60 + copyLength7;
   }
-  iVar21 = shader[10];
-  iVar19 = shader[0xb];
-  if (iVar21 != 0) {
+  paramCount = shader[10];
+  paramOffset = shader[0xb];
+  if (paramCount != 0) {
     uVar23 = 0xffffffff;
-    if (0 < iVar21) {
-      puVar6 = (uint *)(shader + iVar19 * 2 + 1);
-      iVar3 = iVar21;
+    if (0 < paramCount) {
+      puVar6 = (uint *)(shader + paramOffset * 2 + 1);
+      iVar3 = paramCount;
       do {
         uVar1 = *puVar6;
         puVar6 = puVar6 + 2;
@@ -8293,10 +8300,10 @@ joined_r0x97c02488:
     local_5c = 0xffffffff;
     uVar23 = 0xffffffff;
     piVar18 = piVar14;
-    if (0 < iVar21) {
+    if (0 < paramCount) {
       do {
-        iVar5 = loopIndex3 * 8 + iVar19 * 8;
-        if ((shader[iVar19 * 2 + loopIndex3 * 2] & 0x1f0000U) != 0) {
+        iVar5 = loopIndex3 * 8 + paramOffset * 8;
+        if ((shader[paramOffset * 2 + loopIndex3 * 2] & 0x1f0000U) != 0) {
           if (uVar23 == 0xffffffff) {
             uVar1 = (uint)*(ushort *)((int)shader + iVar5 + 6);
             *(uint *)(uVar1 * 4 + iVar16) = uVar1;
@@ -8327,16 +8334,16 @@ joined_r0x97c02488:
           }
         }
         loopIndex3 = loopIndex3 + 1;
-      } while (loopIndex3 < iVar21);
+      } while (loopIndex3 < paramCount);
     }
     loopIndex = 0;
     iVar3 = 0;
-    if (0 < iVar21) {
+    if (0 < paramCount) {
       do {
         iVar5 = loopIndex * 8;
-        uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 0x10 & 0x1f;
+        uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x10 & 0x1f;
         if (uVar23 == 0) goto LAB_97c04238;
-        if (piVar15[*(ushort *)((int)shader + iVar5 + iVar19 * 8 + 6)] == -1) {
+        if (piVar15[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == -1) {
           ch = 'P';
           copyIndex = 0;
           do {
@@ -8348,7 +8355,7 @@ joined_r0x97c02488:
           local_60 = local_60 + copyLength;
           uVar25 = ((int (*)())_ncpy_97bf2850)(local_60,*(undefined4 *)
                                             (iVar16 + (uint)*(ushort *)
-                                                             ((int)shader + iVar5 + iVar19 * 8 + 6)
+                                                             ((int)shader + iVar5 + paramOffset * 8 + 6)
                                                       * 4));
           ch = ' ';
           copyIndex = 0;
@@ -8361,7 +8368,7 @@ joined_r0x97c02488:
           local_60 = local_60 + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
         }
         else {
-          if (piVar15[*(ushort *)((int)shader + iVar5 + iVar19 * 8 + 6)] == 0) {
+          if (piVar15[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == 0) {
             iVar13 = 0;
             ch = 'P';
             copyIndex = 0;
@@ -8374,7 +8381,7 @@ joined_r0x97c02488:
             local_60 = local_60 + copyLength;
             copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,*(undefined4 *)
                                              (iVar16 + (uint)*(ushort *)
-                                                              ((int)shader + iVar5 + iVar19 * 8 + 6
+                                                              ((int)shader + iVar5 + paramOffset * 8 + 6
                                                               ) * 4));
             ch = '[';
             copyIndex = 0;
@@ -8456,7 +8463,7 @@ LAB_97c028a4:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xffff);
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xffff);
           ch = ']';
           local_60 = local_60 + copyEnd2;
           copyIndex = 0;
@@ -8477,7 +8484,7 @@ LAB_97c028a4:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xffff);
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xffff);
           ch = ']';
           local_60 = local_60 + copyEnd2;
           copyIndex = 0;
@@ -8498,7 +8505,7 @@ LAB_97c028a4:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          iVar7 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+          iVar7 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
           copyIndex = 0;
           do {
@@ -8508,7 +8515,7 @@ LAB_97c028a4:
             copyIndex = copyLength6;
           } while (ch != '\0');
           local_60 = local_60 + copyLength6 + iVar7;
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 8 & 0xf) {
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 0xf) {
           case 0:
             ch = 'a';
             copyIndex = 0;
@@ -8603,7 +8610,7 @@ LAB_97c028a4:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
           copyIndex = 0;
           do {
@@ -8613,7 +8620,7 @@ LAB_97c028a4:
             copyIndex = copyLength6;
           } while (ch != '\0');
           local_60 = local_60 + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 8 & 1;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 1;
           if (uVar23 == 0) {
             ch = 'f';
             copyIndex = 0;
@@ -8637,7 +8644,7 @@ LAB_97c02e60:
             } while (ch != '\0');
             goto LAB_97c02e60;
           }
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 9 & 3;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 9 & 3;
           if (uVar23 == 1) {
             ch = 'd';
             copyIndex = 0;
@@ -8675,7 +8682,7 @@ LAB_97c02e60:
           }
           goto switchD_97c02904_caseD_0;
         case 5:
-          if (((uint)shader[iVar19 * 2 + loopIndex * 2] >> 1 & 7) == 5) {
+          if (((uint)shader[paramOffset * 2 + loopIndex * 2] >> 1 & 7) == 5) {
             ch = 'l';
             copyIndex = 0;
             do {
@@ -8696,7 +8703,7 @@ LAB_97c02e60:
             } while (ch != '\0');
           }
           local_60 = local_60 + iVar7;
-          if ((shader[iVar19 * 2 + loopIndex * 2] & 1U) == 0) {
+          if ((shader[paramOffset * 2 + loopIndex * 2] & 1U) == 0) {
             ch = 'f';
             copyIndex = 0;
             do {
@@ -8708,7 +8715,7 @@ LAB_97c02e60:
 LAB_97c03088:
             local_60 = local_60 + iVar7;
           }
-          else if ((shader[iVar19 * 2 + loopIndex * 2] & 1U) == 1) {
+          else if ((shader[paramOffset * 2 + loopIndex * 2] & 1U) == 1) {
             ch = 'b';
             copyIndex = 0;
             do {
@@ -8719,7 +8726,7 @@ LAB_97c03088:
             } while (ch != '\0');
             goto LAB_97c03088;
           }
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 1 & 7) {
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 1 & 7) {
           case 0:
             ch = 'a';
             copyIndex = 0;
@@ -8804,7 +8811,7 @@ LAB_97c03088:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           copyIndex = 0;
           do {
@@ -8814,7 +8821,7 @@ LAB_97c03088:
             copyIndex = copyLength6;
           } while (ch != '\0');
           local_60 = local_60 + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 5 & 7;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
           if (uVar23 == 1) {
             ch = 't';
             copyIndex = 0;
@@ -8868,7 +8875,7 @@ LAB_97c03088:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           copyIndex = 0;
           do {
@@ -8878,7 +8885,7 @@ LAB_97c03088:
             copyIndex = copyLength6;
           } while (ch != '\0');
           local_60 = local_60 + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 5 & 7;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
           if (uVar23 == 1) {
             ch = 't';
             copyIndex = 0;
@@ -8932,7 +8939,7 @@ LAB_97c03088:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0x1f);
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0x1f);
           ch = ']';
           local_60 = local_60 + copyEnd2;
           copyIndex = 0;
@@ -8953,7 +8960,7 @@ LAB_97c03088:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
           local_60 = local_60 + copyEnd2;
           copyIndex = 0;
@@ -9024,7 +9031,7 @@ LAB_97c03088:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 8 & 7) {
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 7) {
           case 0:
             ch = 'm';
             copyIndex = 0;
@@ -9057,7 +9064,7 @@ LAB_97c038d4:
               copyIndex = copyLength;
             } while (ch != '\0');
             local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
             local_60 = local_60 + copyEnd2;
             copyIndex = 0;
@@ -9078,7 +9085,7 @@ LAB_97c038d4:
               copyIndex = copyLength;
             } while (ch != '\0');
             local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
             local_60 = local_60 + copyEnd2;
             copyIndex = 0;
@@ -9099,7 +9106,7 @@ LAB_97c038d4:
               copyIndex = copyLength;
             } while (ch != '\0');
             local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
             local_60 = local_60 + copyEnd2;
             copyIndex = 0;
@@ -9120,7 +9127,7 @@ LAB_97c038d4:
               copyIndex = copyLength;
             } while (ch != '\0');
             local_60 = local_60 + copyLength;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[iVar19 * 2 + loopIndex * 2] & 0xff);
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
             ch = ']';
             local_60 = local_60 + copyEnd2;
             copyIndex = 0;
@@ -9136,7 +9143,7 @@ LAB_97c038d4:
           }
           local_60 = local_60 + copyLength;
 switchD_97c0384c_default:
-          uVar23 = (uint)shader[iVar19 * 2 + loopIndex * 2] >> 0xe & 3;
+          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0xe & 3;
           if (uVar23 == 1) {
             ch = 't';
             copyIndex = 0;
@@ -9183,7 +9190,7 @@ LAB_97c03c20:
             copyIndex = copyLength;
           } while (ch != '\0');
           local_60 = local_60 + copyLength;
-          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)shader[iVar19 * 2 + loopIndex * 2] >> 0xc & 3);
+          copyEnd2 = ((int (*)())_ncpy_97bf2850)(local_60,(uint)shader[paramOffset * 2 + loopIndex * 2] >> 0xc & 3);
           ch = ']';
           local_60 = local_60 + copyEnd2;
           copyIndex = 0;
@@ -9198,8 +9205,8 @@ LAB_97c040c4:
           goto switchD_97c02904_caseD_0;
         case 0x11:
           pfVar24 = (float *)(shader +
-                             shader[0x1b] * 2 + (shader[iVar19 * 2 + loopIndex * 2] & 0xffffU) * 4);
-          switch((uint)shader[iVar19 * 2 + loopIndex * 2] >> 0x1a & 7) {
+                             shader[0x1b] * 2 + (shader[paramOffset * 2 + loopIndex * 2] & 0xffffU) * 4);
+          switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x1a & 7) {
           case 0:
           case 1:
             ch = '{';
@@ -9345,7 +9352,7 @@ LAB_97c040c4:
         }
         local_60 = local_60 + iVar7;
 switchD_97c02904_caseD_0:
-        if (piVar15[*(ushort *)((int)shader + iVar5 + iVar19 * 8 + 6)] == -1) {
+        if (piVar15[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == -1) {
           ch = ';';
           copyIndex6 = 0;
           do {
@@ -9391,16 +9398,16 @@ switchD_97c02904_caseD_0:
         }
 LAB_97c04238:
         loopIndex = loopIndex + 1;
-      } while (loopIndex < iVar21);
+      } while (loopIndex < paramCount);
     }
     if (piVar14 != (int *)0x0) {
       _free(piVar14);
     }
   }
-  iVar19 = shader[0xc];
+  outputCount = shader[0xc];
   loopIndex2 = 0;
   iVar13 = shader[0xd];
-  if (0 < iVar19) {
+  if (0 < outputCount) {
     do {
       uVar23 = (uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 0x10 & 0xf;
       if (uVar23 == 0) goto LAB_97c04904;
@@ -9647,7 +9654,7 @@ switchD_97c04350_caseD_0:
       }
 LAB_97c04904:
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < iVar19);
+    } while (loopIndex2 < outputCount);
   }
   ch = '\n';
   copyIndex7 = 0;
@@ -9661,12 +9668,12 @@ LAB_97c04904:
   local_48[0] = (char *)_malloc(local_68);
   pcVar9 = local_64;
   if (local_48[0] == (char *)0x0) goto LAB_97c04d50;
-  iVar19 = shader[0x14];
+  instructionCount = shader[0x14];
   loopIndex2 = 0;
   iVar13 = shader[0x15];
   iVar3 = 0;
   local_4c = local_48[0];
-  if (0 < iVar19) {
+  if (0 < instructionCount) {
     do {
       iVar4 = ((int (*)())_glpDisassemble2Op)(shader + iVar13 * 2 + iVar3 * 2,local_48[0],&local_58,&local_54,
                                  iVar16,piVar15,0,&local_50,&local_70,iVar17,param_2);
@@ -9686,7 +9693,7 @@ LAB_97c04a0c:
       if (iVar4 == 0) goto LAB_97c04a0c;
       loopIndex2 = loopIndex2 + 1;
       iVar3 = iVar3 + 1;
-    } while (loopIndex2 < iVar19);
+    } while (loopIndex2 < instructionCount);
   }
   if (iVar16 != 0) {
     _free(iVar16);
