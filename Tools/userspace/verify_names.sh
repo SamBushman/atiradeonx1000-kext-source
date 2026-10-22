@@ -3,7 +3,7 @@
 # working tree on the G5 (gcc -arch ppc -w, as build_corpus.py does) and demand byte-identical object files. Local names are not in the object (no -g), so a pure
 # rename must be IDENTICAL; a changed object means the batch changed a declaration, a type or a split and has to be looked at.
 D=$1; REV=${2:-HEAD}; N=$(echo $D | tr '/' '_'); T=${TMPDIR:-/tmp}/vn_$N; rm -rf $T; mkdir -p $T/base $T/cand
-git archive $REV $D | tar -x -C $T/base; cp -R $D $T/cand/
+git archive $REV $D | tar -x -C $T/base; mkdir -p $T/cand/$(dirname $D); cp -R $D $T/cand/$(dirname $D)/
 tar czf $T/v.tgz -C $T base cand
 R=rung3/vn_$N
 ssh G5 "rm -rf $R; mkdir -p $R" && scp -q $T/v.tgz G5:$R/v.tgz || exit 2
