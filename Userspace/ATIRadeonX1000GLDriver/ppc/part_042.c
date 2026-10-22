@@ -1022,7 +1022,7 @@ LAB_0013ae00:
               else {
                 uVar16 = *(undefined4 *)(pass + 8);
                 iVar10 = (**(code **)(*piVar7 + 0x24))(piVar7);
-                if (((iVar10 == 0) || (iVar10 = FUN_0011346c(uVar16,piVar7), iVar10 != 0)) ||
+                if (((iVar10 == 0) || (iVar10 = OpcodeTraits__instFlagBit2(uVar16,piVar7), iVar10 != 0)) ||
                    ((piVar7[5] & 0x400000U) != 0)) goto LAB_0013a9dc;
                 bVar4 = false;
                 bVar2 = false;
@@ -1099,7 +1099,7 @@ LAB_0013ae00:
                         else {
                           iVar10 = (**(code **)(*piVar8 + 0x24))(piVar8);
                           if ((iVar10 == 0) ||
-                             (iVar10 = FUN_0011346c(*(undefined4 *)(pass + 8),piVar8),
+                             (iVar10 = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),piVar8),
                              iVar10 != 0)) goto LAB_0013ae10;
                         }
                         if (bVar2) goto LAB_0013ae10;
@@ -1171,7 +1171,7 @@ LAB_0013ae10: ;
         if ((piVar20[5] & 1U) != 0) {
           iVar15 = (**(code **)(*piVar20 + 0x24))(piVar20);
           if ((iVar15 != 0) &&
-             (iVar15 = FUN_0011346c(*(undefined4 *)(pass + 8),piVar20), iVar15 == 0)) {
+             (iVar15 = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),piVar20), iVar15 == 0)) {
             uVar5 = (uint)*(byte *)(piVar20[0x53] * 4 + iVar9 + 3);
             local_68 = uVar5 << 0x18 | local_68 & 0xffffff;
             if ((int)local_68 < 0) {
@@ -1193,7 +1193,7 @@ LAB_0013ae10: ;
                   iVar15 = piVar20[0x22];
                   *(undefined1 *)((int)piVar20 + 0xf) = 0;
                   *(undefined1 *)((int)piVar20 + uVar5 + 0xc) = 1;
-                  iVar15 = FUN_00113174(*(undefined4 *)(iVar15 + 8),*(undefined4 *)(pass + 8));
+                  iVar15 = OpcodeTraits__flagBit7(*(undefined4 *)(iVar15 + 8),*(undefined4 *)(pass + 8));
                   if (iVar15 == 0) {
                     for (iVar15 = 1; iVar10 = (**(code **)(*piVar20 + 0x14))(piVar20),
                         iVar15 <= iVar10; iVar15 = iVar15 + 1) {
@@ -2504,7 +2504,7 @@ int pass_rewrite(program)
   }
   ((int (*)())FUN_0013c210)(program);
   ((int (*)())Program__eliminateDeadInstsAndRecountUses)(program,0);
-  FUN_000ed7e4(program,(int)"rewrite");
+  Program__beginPass(program,(int)"rewrite");
   iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1f);
   if (iVar2 != 0) {
     pass_loop_trans(program);
@@ -2564,7 +2564,7 @@ int FUN_0013d3b8(param_1)
              ((iVar5 = FUN_00126760(piVar10[0x26]), iVar5 != 0 &&
               ((((piVar10[5] & 2U) == 0 &&
                 (iVar5 = (**(code **)(*piVar10 + 0x50))(piVar10), iVar5 == 0)) &&
-               (iVar5 = FUN_00113420(*(undefined4 *)(piVar10[0x22] + 8),*(undefined4 *)(param_1 + 8)
+               (iVar5 = OpcodeTraits__getField34(*(undefined4 *)(piVar10[0x22] + 8),*(undefined4 *)(param_1 + 8)
                                     ), iVar5 == 0)))))) {
             iVar5 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),0x32);
             if (iVar5 == 0) {
@@ -3073,7 +3073,7 @@ LAB_0013dcf0:
                           if (iVar12 != 0) {
                             arena = DAT_001b001c;
                           }
-                          iVar12 = FUN_0011346c(*(undefined4 *)(program + 8),piVar20);
+                          iVar12 = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),piVar20);
                           if (iVar12 != 0) {
                             if (iVar11 == 1) {
                               allocation = &UNK_001b0018;
@@ -3340,7 +3340,7 @@ code_r0x0013e80c:
           do {
             if (vecCount == 0) {
               *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x20000;
-              FUN_000ed7e4(program,"reduce");
+              Program__beginPass(program,"reduce");
               *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x80;
               Arena__free(vecArena,vecData);
               return;
@@ -8292,7 +8292,7 @@ LAB_001463fc:
     } while( true );
   }
 LAB_0014653c:
-  FUN_000ed7e4(iVar2,(int)"post_pack_insts");
+  Program__beginPass(iVar2,(int)"post_pack_insts");
   Arena__free(arenaAt378,iVar7);
   return;
 LAB_00146538:

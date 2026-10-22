@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* orph_e29bc @ 0xe29bc (36 bytes) */
-int orph_e29bc(param_1, param_2)
+/* BreakBlock__accept @ 0xe29bc (36 bytes) */
+int BreakBlock__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -12,8 +12,8 @@ int orph_e29bc(param_1, param_2)
   return;
 }
 
-/* orph_e29e0 @ 0xe29e0 (36 bytes) */
-int orph_e29e0(param_1, param_2)
+/* ContinueBlock__accept @ 0xe29e0 (36 bytes) */
+int ContinueBlock__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -48,8 +48,8 @@ int orph_ec1e4()
   return 0;
 }
 
-/* orph_10451c @ 0x10451c (32 bytes) */
-int orph_10451c(param_1, param_2)
+/* IRLoadConst__removeFromList @ 0x10451c (32 bytes) */
+int IRLoadConst__removeFromList(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -60,8 +60,8 @@ int orph_10451c(param_1, param_2)
   return;
 }
 
-/* orph_10dcfc @ 0x10dcfc (12 bytes) */
-int orph_10dcfc(param_1, param_2)
+/* HwLimits__vslot19 @ 0x10dcfc (12 bytes) */
+int HwLimits__vslot19(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -69,14 +69,14 @@ int orph_10dcfc(param_1, param_2)
   return;
 }
 
-/* orph_10ddf4 @ 0x10ddf4 (8 bytes) */
-int orph_10ddf4()
+/* KhanVs__vslot16 @ 0x10ddf4 (8 bytes) */
+int KhanVs__vslot16()
 {
   return 0xb5;
 }
 
-/* orph_12841c @ 0x12841c (20 bytes) */
-int orph_12841c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* KhanPs__vslot86 @ 0x12841c (20 bytes) */
+int KhanPs__vslot86(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -90,14 +90,14 @@ int orph_12841c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* orph_129400 @ 0x129400 (8 bytes) */
-int orph_129400()
+/* KhanVs__vslot78 @ 0x129400 (8 bytes) */
+int KhanVs__vslot78()
 {
   return 0x20;
 }
 
-/* orph_129ea0 @ 0x129ea0 (20 bytes) */
-int orph_129ea0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* KhanVs__vslot86 @ 0x129ea0 (20 bytes) */
+int KhanVs__vslot86(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -111,8 +111,8 @@ int orph_129ea0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* orph_12ab70 @ 0x12ab70 (8 bytes) */
-int orph_12ab70(param_1, param_2)
+/* KhanPs__vslot69 @ 0x12ab70 (8 bytes) */
+int KhanPs__vslot69(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -120,8 +120,8 @@ int orph_12ab70(param_1, param_2)
   return;
 }
 
-/* orph_12ab78 @ 0x12ab78 (8 bytes) */
-int orph_12ab78(param_1, param_2)
+/* KhanVs__vslot69 @ 0x12ab78 (8 bytes) */
+int KhanVs__vslot69(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -129,8 +129,8 @@ int orph_12ab78(param_1, param_2)
   return;
 }
 
-/* orph_12dd48 @ 0x12dd48 (8 bytes) */
-int orph_12dd48(param_1, param_2)
+/* KhanVs__flattenIfs @ 0x12dd48 (8 bytes) */
+int KhanVs__flattenIfs(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -138,8 +138,8 @@ int orph_12dd48(param_1, param_2)
   return;
 }
 
-/* orph_12dd50 @ 0x12dd50 (8 bytes) */
-int orph_12dd50(param_1, param_2)
+/* KhanPs__flattenIfs @ 0x12dd50 (8 bytes) */
+int KhanPs__flattenIfs(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -170,8 +170,8 @@ int orph_176e0c(param_1, param_2, param_3)
   return uVar1;
 }
 
-/* orph_187588 @ 0x187588 (32 bytes) */
-int orph_187588(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* KhanPs__vslot67 @ 0x187588 (32 bytes) */
+int KhanPs__vslot67(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -185,8 +185,8 @@ int orph_187588(param_1, param_2, param_3, param_4, param_5, param_6, param_7, p
   return;
 }
 
-/* orph_191708 @ 0x191708 (8 bytes) */
-int orph_191708()
+/* FudoPs__vslot78 @ 0x191708 (8 bytes) */
+int FudoPs__vslot78()
 {
   return 0x80;
 }
@@ -210,8 +210,8 @@ int orph_193bd0(param_1)
   return;
 }
 
-/* orph_1961b0 @ 0x1961b0 (24 bytes) */
-int orph_1961b0(param_1)
+/* R300MachineAssembler__visitIfHeader @ 0x1961b0 (24 bytes) */
+int R300MachineAssembler__visitIfHeader(param_1)
   int param_1;
 {
   if (*(int *)(*(int *)(param_1 + 0xc) + 0x6c4) == 0) {
@@ -221,8 +221,8 @@ int orph_1961b0(param_1)
   return;
 }
 
-/* orph_19aad8 @ 0x19aad8 (28 bytes) */
-int orph_19aad8(param_1, param_2, param_3)
+/* R300VMachineAssembler__visitPostLoopFooter @ 0x19aad8 (28 bytes) */
+int R300VMachineAssembler__visitPostLoopFooter(param_1, param_2, param_3)
   int *param_1;
   int param_2;
   undefined4 param_3;
@@ -233,8 +233,8 @@ int orph_19aad8(param_1, param_2, param_3)
   return;
 }
 
-/* orph_1cd664 @ 0x1cd664 (56 bytes) */
-int orph_1cd664(param_1)
+/* MachineAssembler__deleting_dtor @ 0x1cd664 (56 bytes) */
+int MachineAssembler__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined4 *puVar1;
@@ -253,39 +253,39 @@ int orph_1cd664(param_1)
   return;
 }
 
-/* orph_1cd69c @ 0x1cd69c (4 bytes) */
-int orph_1cd69c()
+/* MachineAssembler__visitMemLoad @ 0x1cd69c (4 bytes) */
+int MachineAssembler__visitMemLoad()
 {
   return;
 }
 
-/* orph_1cd6a0 @ 0x1cd6a0 (4 bytes) */
-int orph_1cd6a0()
+/* MachineAssembler__visitMemStore @ 0x1cd6a0 (4 bytes) */
+int MachineAssembler__visitMemStore()
 {
   return;
 }
 
-/* orph_1cd6a4 @ 0x1cd6a4 (4 bytes) */
-int orph_1cd6a4()
+/* MachineAssembler__visitGeomExport @ 0x1cd6a4 (4 bytes) */
+int MachineAssembler__visitGeomExport()
 {
   return;
 }
 
-/* orph_1cd6a8 @ 0x1cd6a8 (8 bytes) */
-int orph_1cd6a8(param_1)
+/* IRInst__getNumDests @ 0x1cd6a8 (8 bytes) */
+int IRInst__getNumDests(param_1)
   int param_1;
 {
   return *(undefined4 *)(param_1 + 0x80);
 }
 
-/* orph_1cd6b0 @ 0x1cd6b0 (4 bytes) */
-int orph_1cd6b0()
+/* IRInst__acceptCallPseudo @ 0x1cd6b0 (4 bytes) */
+int IRInst__acceptCallPseudo()
 {
   return;
 }
 
-/* orph_1cd6b4 @ 0x1cd6b4 (44 bytes) */
-int orph_1cd6b4(param_1)
+/* IRInst__isAlu @ 0x1cd6b4 (44 bytes) */
+int IRInst__isAlu(param_1)
   int param_1;
 {
   int iVar1;
@@ -297,141 +297,141 @@ int orph_1cd6b4(param_1)
   return 1;
 }
 
-/* orph_1cd6e0 @ 0x1cd6e0 (8 bytes) */
-int orph_1cd6e0()
+/* IRInst__isFetch @ 0x1cd6e0 (8 bytes) */
+int IRInst__isFetch()
 {
   return 0;
 }
 
-/* orph_1cd6e8 @ 0x1cd6e8 (8 bytes) */
-int orph_1cd6e8()
+/* IRInst__isVertexFetch @ 0x1cd6e8 (8 bytes) */
+int IRInst__isVertexFetch()
 {
   return 0;
 }
 
-/* orph_1cd6f0 @ 0x1cd6f0 (8 bytes) */
-int orph_1cd6f0()
+/* IRInst__isTextureFetch @ 0x1cd6f0 (8 bytes) */
+int IRInst__isTextureFetch()
 {
   return 0;
 }
 
-/* orph_1cd6f8 @ 0x1cd6f8 (8 bytes) */
-int orph_1cd6f8()
+/* IRInst__isEntry @ 0x1cd6f8 (8 bytes) */
+int IRInst__isEntry()
 {
   return 0;
 }
 
-/* orph_1cd700 @ 0x1cd700 (8 bytes) */
-int orph_1cd700()
+/* IRInst__isExit @ 0x1cd700 (8 bytes) */
+int IRInst__isExit()
 {
   return 0;
 }
 
-/* orph_1cd708 @ 0x1cd708 (24 bytes) */
-int orph_1cd708(param_1)
+/* IRInst__isLoopStart @ 0x1cd708 (24 bytes) */
+int IRInst__isLoopStart(param_1)
   int param_1;
 {
   return *(int *)(*(int *)(param_1 + 0x88) + 4) == 4;
 }
 
-/* orph_1cd720 @ 0x1cd720 (8 bytes) */
-int orph_1cd720()
+/* IRInst__isLoad @ 0x1cd720 (8 bytes) */
+int IRInst__isLoad()
 {
   return 0;
 }
 
-/* orph_1cd728 @ 0x1cd728 (8 bytes) */
-int orph_1cd728()
+/* IRInst__isLoadTemp @ 0x1cd728 (8 bytes) */
+int IRInst__isLoadTemp()
 {
   return 0;
 }
 
-/* orph_1cd730 @ 0x1cd730 (8 bytes) */
-int orph_1cd730()
+/* IRInst__isLoadConst @ 0x1cd730 (8 bytes) */
+int IRInst__isLoadConst()
 {
   return 0;
 }
 
-/* orph_1cd738 @ 0x1cd738 (8 bytes) */
-int orph_1cd738()
+/* IRInst__isLoadInterp @ 0x1cd738 (8 bytes) */
+int IRInst__isLoadInterp()
 {
   return 0;
 }
 
-/* orph_1cd740 @ 0x1cd740 (8 bytes) */
-int orph_1cd740()
+/* IRInst__isUndefined @ 0x1cd740 (8 bytes) */
+int IRInst__isUndefined()
 {
   return 0;
 }
 
-/* orph_1cd748 @ 0x1cd748 (8 bytes) */
-int orph_1cd748()
+/* IRInst__isProjection @ 0x1cd748 (8 bytes) */
+int IRInst__isProjection()
 {
   return 0;
 }
 
-/* orph_1cd750 @ 0x1cd750 (8 bytes) */
-int orph_1cd750()
+/* IRInst__isMerge @ 0x1cd750 (8 bytes) */
+int IRInst__isMerge()
 {
   return 0;
 }
 
-/* orph_1cd758 @ 0x1cd758 (8 bytes) */
-int orph_1cd758()
+/* IRInst__isPresub @ 0x1cd758 (8 bytes) */
+int IRInst__isPresub()
 {
   return 0;
 }
 
-/* orph_1cd760 @ 0x1cd760 (8 bytes) */
-int orph_1cd760()
+/* IRInst__isMix @ 0x1cd760 (8 bytes) */
+int IRInst__isMix()
 {
   return 0;
 }
 
-/* orph_1cd768 @ 0x1cd768 (8 bytes) */
-int orph_1cd768()
+/* IRInst__isMov @ 0x1cd768 (8 bytes) */
+int IRInst__isMov()
 {
   return 0;
 }
 
-/* orph_1cd770 @ 0x1cd770 (8 bytes) */
-int orph_1cd770()
+/* IRInst__isExport @ 0x1cd770 (8 bytes) */
+int IRInst__isExport()
 {
   return 0;
 }
 
-/* orph_1cd778 @ 0x1cd778 (8 bytes) */
-int orph_1cd778()
+/* IRInst__isGeomExport @ 0x1cd778 (8 bytes) */
+int IRInst__isGeomExport()
 {
   return 0;
 }
 
-/* orph_1cd780 @ 0x1cd780 (8 bytes) */
-int orph_1cd780()
+/* IRInst__isMemLoad @ 0x1cd780 (8 bytes) */
+int IRInst__isMemLoad()
 {
   return 0;
 }
 
-/* orph_1cd788 @ 0x1cd788 (8 bytes) */
-int orph_1cd788()
+/* IRInst__isMemStore @ 0x1cd788 (8 bytes) */
+int IRInst__isMemStore()
 {
   return 0;
 }
 
-/* orph_1cd790 @ 0x1cd790 (8 bytes) */
-int orph_1cd790()
+/* IRInst__isPhi @ 0x1cd790 (8 bytes) */
+int IRInst__isPhi()
 {
   return 0;
 }
 
-/* orph_1cd798 @ 0x1cd798 (8 bytes) */
-int orph_1cd798()
+/* IRInst__vslot32 @ 0x1cd798 (8 bytes) */
+int IRInst__vslot32()
 {
   return 0;
 }
 
-/* orph_1cd7a0 @ 0x1cd7a0 (8 bytes) */
-int orph_1cd7a0(param_1, param_2)
+/* IRInst__vslot33 @ 0x1cd7a0 (8 bytes) */
+int IRInst__vslot33(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -439,26 +439,26 @@ int orph_1cd7a0(param_1, param_2)
   return;
 }
 
-/* orph_1cd7a8 @ 0x1cd7a8 (8 bytes) */
-int orph_1cd7a8()
+/* IRInst__vslot35 @ 0x1cd7a8 (8 bytes) */
+int IRInst__vslot35()
 {
   return 1;
 }
 
-/* orph_1cd7b0 @ 0x1cd7b0 (8 bytes) */
-int orph_1cd7b0()
+/* IRPseudo__getNumSources @ 0x1cd7b0 (8 bytes) */
+int IRPseudo__getNumSources()
 {
   return 0;
 }
 
-/* orph_1cd7b8 @ 0x1cd7b8 (4 bytes) */
-int orph_1cd7b8()
+/* IRPseudo__accept @ 0x1cd7b8 (4 bytes) */
+int IRPseudo__accept()
 {
   return;
 }
 
-/* orph_1cd7d8 @ 0x1cd7d8 (20 bytes) */
-int orph_1cd7d8(param_1, param_2, param_3, param_4)
+/* IRInst__vslot34 @ 0x1cd7d8 (20 bytes) */
+int IRInst__vslot34(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -468,38 +468,38 @@ int orph_1cd7d8(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* orph_1cdbf8 @ 0x1cdbf8 (4 bytes) */
-int orph_1cdbf8()
+/* Block__insertInstruction @ 0x1cdbf8 (4 bytes) */
+int Block__insertInstruction()
 {
   return;
 }
 
-/* orph_1cdbfc @ 0x1cdbfc (8 bytes) */
-int orph_1cdbfc()
+/* Block__isFuncEnd @ 0x1cdbfc (8 bytes) */
+int Block__isFuncEnd()
 {
   return 0;
 }
 
-/* orph_1cdc04 @ 0x1cdc04 (8 bytes) */
-int orph_1cdc04()
+/* Block__isAny @ 0x1cdc04 (8 bytes) */
+int Block__isAny()
 {
   return 0;
 }
 
-/* orph_1cdc0c @ 0x1cdc0c (8 bytes) */
-int orph_1cdc0c()
+/* Block__isMirror @ 0x1cdc0c (8 bytes) */
+int Block__isMirror()
 {
   return 0;
 }
 
-/* orph_1cdc14 @ 0x1cdc14 (8 bytes) */
-int orph_1cdc14()
+/* Block__isEntry @ 0x1cdc14 (8 bytes) */
+int Block__isEntry()
 {
   return 0;
 }
 
-/* orph_1cdc1c @ 0x1cdc1c (8 bytes) */
-int orph_1cdc1c()
+/* Block__isExit @ 0x1cdc1c (8 bytes) */
+int Block__isExit()
 {
   return 0;
 }

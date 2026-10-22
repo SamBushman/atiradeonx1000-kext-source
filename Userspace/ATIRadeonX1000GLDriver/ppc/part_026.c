@@ -5066,8 +5066,8 @@ int FUN_000fd5c8(param_1, param_2)
   undefined4 local_178;
   uint ****local_174;
   uint *****local_170;
-  /* issue #64 live-repro (2nd instance, same function): FUN_001940a8(local_6c=auStack_16c), two lines
-   * below FUN_001940a8(local_68=auStack_154) which already got this fix, writes the same 6-word/0x18-byte
+  /* issue #64 live-repro (2nd instance, same function): DListNode__init(local_6c=auStack_16c), two lines
+   * below DListNode__init(local_68=auStack_154) which already got this fix, writes the same 6-word/0x18-byte
    * sentinel-list header (see the comment on auStack_154 just below) - word[2] (self-referential "next",
    * param_1[2] = param_1+3) is what `local_164`'s four loops read as the list head, same shape as
    * local_14c's. auStack_16c was declared only 8 bytes with local_164 as a separate scalar 8 bytes in;
@@ -5077,7 +5077,7 @@ int FUN_000fd5c8(param_1, param_2)
    * Merged into one 0x18-byte buffer the same way, aliased back to the original name. */
   unsigned char auStack_16c [0x18];
 #define local_164 (*(int *)(auStack_16c + 0x08))
-  /* issue #64 live-repro: FUN_001940a8 (called below via local_68=auStack_154) writes param_1[0]
+  /* issue #64 live-repro: DListNode__init (called below via local_68=auStack_154) writes param_1[0]
    * through param_1[5] - 6 words, 0x18 bytes - into whatever auStack_154 points to, including a
    * self-referential empty-list-head init at param_1[2] (offset 8: *(auStack_154+8) = auStack_154+12).
    * auStack_154 was declared only 8 bytes; local_14c (used as a list head in four separate loops
@@ -5229,8 +5229,8 @@ int FUN_000fd5c8(param_1, param_2)
   Block__connect(local_184,local_180);
   local_68 = auStack_154;
   local_184 = local_180;
-  FUN_001940a8(local_6c);
-  FUN_001940a8(local_68);
+  DListNode__init(local_6c);
+  DListNode__init(local_68);
   *(undefined4 *)(param_1 + 0x3d4) = 0;
   *(undefined4 *)(param_1 + 0x3e4) = 0;
   ((int (*)())FUN_000fb230)(param_1,param_2);
@@ -5473,7 +5473,7 @@ code_r0x000fed00:
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x1a:
-      FUN_001940a8(&local_124);
+      DListNode__init(&local_124);
       pppppuVar15 = *ppppppuVar49;
       in_r7 = (uint ******)0x4050607;
       uVar10 = 0;
@@ -7996,7 +7996,7 @@ code_r0x00101d1c:
       *(undefined4 *)(iVar20 + 0xc) = arena;
       *(int *)(iVar20 + 8) = iVar47;
       if ((!bVar1) &&
-         (iVar47 = FUN_0011346c(*(undefined4 *)(param_1 + 8),ppppppuVar19), iVar47 != 0)) {
+         (iVar47 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_1 + 8),ppppppuVar19), iVar47 != 0)) {
         if (ppppppuVar40 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
           puVar12 = &UNK_001aa9d4;
         }
@@ -8022,7 +8022,7 @@ code_r0x00101d1c:
     iVar43 = IRInst__getOperandRecord(ppppppuVar19,0);
     *(int *)(iVar43 + 8) = iVar20;
     *(undefined4 *)(iVar43 + 0xc) = 0;
-    iVar43 = FUN_0011346c(*(undefined4 *)(param_1 + 8),ppppppuVar19);
+    iVar43 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_1 + 8),ppppppuVar19);
     iVar47 = IRInst__getOperandRecord(ppppppuVar19,0);
     ppppppuVar40 = *(uint *******)(iVar47 + 0x10);
     local_178 = ppppppuVar40;

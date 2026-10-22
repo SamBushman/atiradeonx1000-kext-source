@@ -1,13 +1,13 @@
 #include "decls.h"
 
-/* orph_1d8e0c @ 0x1d8e0c (4 bytes) */
-int orph_1d8e0c()
+/* R300VMachineAssembler__vslot41 @ 0x1d8e0c (4 bytes) */
+int R300VMachineAssembler__vslot41()
 {
   return;
 }
 
-/* orph_1d8e10 @ 0x1d8e10 (20 bytes) */
-int orph_1d8e10(param_1, param_2, param_3)
+/* R520MachineAssembler__vslot51 @ 0x1d8e10 (20 bytes) */
+int R520MachineAssembler__vslot51(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -16,8 +16,8 @@ int orph_1d8e10(param_1, param_2, param_3)
   return;
 }
 
-/* orph_1d8e24 @ 0x1d8e24 (20 bytes) */
-int orph_1d8e24(param_1, param_2, param_3)
+/* R520MachineAssembler__vslot52 @ 0x1d8e24 (20 bytes) */
+int R520MachineAssembler__vslot52(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -26,16 +26,16 @@ int orph_1d8e24(param_1, param_2, param_3)
   return;
 }
 
-/* orph_1d8e38 @ 0x1d8e38 (12 bytes) */
-int orph_1d8e38(param_1, param_2)
+/* R520MachineAssembler__vslot56 @ 0x1d8e38 (12 bytes) */
+int R520MachineAssembler__vslot56(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
   return param_2 + 0x8000;
 }
 
-/* orph_1d8e44 @ 0x1d8e44 (24 bytes) */
-int orph_1d8e44(param_1, param_2)
+/* R520MachineAssembler__vslot84 @ 0x1d8e44 (24 bytes) */
+int R520MachineAssembler__vslot84(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -43,8 +43,8 @@ int orph_1d8e44(param_1, param_2)
   return;
 }
 
-/* orph_1d8e5c @ 0x1d8e5c (24 bytes) */
-int orph_1d8e5c(param_1, param_2)
+/* R520MachineAssembler__vslot57 @ 0x1d8e5c (24 bytes) */
+int R520MachineAssembler__vslot57(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -52,8 +52,8 @@ int orph_1d8e5c(param_1, param_2)
   return;
 }
 
-/* orph_1d8e74 @ 0x1d8e74 (24 bytes) */
-int orph_1d8e74(param_1, param_2)
+/* R520MachineAssembler__vslot58 @ 0x1d8e74 (24 bytes) */
+int R520MachineAssembler__vslot58(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -61,14 +61,14 @@ int orph_1d8e74(param_1, param_2)
   return;
 }
 
-/* orph_1d8e8c @ 0x1d8e8c (4 bytes) */
-int orph_1d8e8c()
+/* R520MachineAssembler__vslot78 @ 0x1d8e8c (4 bytes) */
+int R520MachineAssembler__vslot78()
 {
   return;
 }
 
-/* orph_1d8e90 @ 0x1d8e90 (60 bytes) */
-int orph_1d8e90(param_1)
+/* R520MachineAssembler__vslot68 @ 0x1d8e90 (60 bytes) */
+int R520MachineAssembler__vslot68(param_1)
   int param_1;
 {
   int iVar1;
@@ -81,8 +81,8 @@ int orph_1d8e90(param_1)
   return 1;
 }
 
-/* orph_1d8ecc @ 0x1d8ecc (56 bytes) */
-int orph_1d8ecc(param_1)
+/* R520MachineAssembler__vslot69 @ 0x1d8ecc (56 bytes) */
+int R520MachineAssembler__vslot69(param_1)
   int param_1;
 {
   int iVar1;
@@ -95,8 +95,8 @@ int orph_1d8ecc(param_1)
   return 1;
 }
 
-/* orph_1d8f04 @ 0x1d8f04 (48 bytes) */
-int orph_1d8f04(param_1)
+/* R520MachineAssembler__vslot82 @ 0x1d8f04 (48 bytes) */
+int R520MachineAssembler__vslot82(param_1)
   int param_1;
 {
   *(undefined1 *)(*(int *)(param_1 + 0xb0) * 0x48 + *(int *)(param_1 + 0xa8) + 0x1b) = 1;
@@ -104,22 +104,22 @@ int orph_1d8f04(param_1)
   return;
 }
 
-/* orph_1d8f34 @ 0x1d8f34 (28 bytes) */
-int orph_1d8f34(param_1)
+/* R520MachineAssembler__vslot83 @ 0x1d8f34 (28 bytes) */
+int R520MachineAssembler__vslot83(param_1)
   int param_1;
 {
   *(undefined1 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0xa8) + 4) = 1;
   return;
 }
 
-/* orph_1d8f50 @ 0x1d8f50 (4 bytes) */
-int orph_1d8f50()
+/* R520MachineAssembler__vslot85 @ 0x1d8f50 (4 bytes) */
+int R520MachineAssembler__vslot85()
 {
   return;
 }
 
-/* orph_1d8f54 @ 0x1d8f54 (4 bytes) */
-int orph_1d8f54()
+/* R520MachineAssembler__visitContinue @ 0x1d8f54 (4 bytes) */
+int R520MachineAssembler__visitContinue()
 {
   return;
 }

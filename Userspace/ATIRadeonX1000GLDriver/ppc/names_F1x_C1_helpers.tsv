@@ -1,0 +1,56 @@
+# func rows (Tools/userspace/gen_slot_func_rows.py is for the virtual methods; these are the shared helpers); func<TAB>old<TAB>new<TAB>tier<TAB>evidence
+func	FUN_00193d98	Arena__grow	CONFIRMED	allocates a new chunk (>= 0x2fd8 bytes) for the arena and links it into the chunk list (called by Arena__alloc)
+func	FUN_001940a8	DListNode__init	INFERRED	stores the DListNode vtable, zeroes the count and links the sentinel to itself
+func	FUN_00193fb4	DListNode__clear	INFERRED	unlinks every node of the list and resets the head
+func	FUN_00104bbc	IROperand__init	INFERRED	resets one 0x18-byte operand record to its defaults (0x46 at +0xc, -1 at +8, clears the low two flag bits)
+func	FUN_000ed7e4	Program__beginPass	INFERRED	called with (program, pass name) by every pass entry: runs Block slot 18 (verify) on every block of the program and clears bit 0 of the flag word of each instruction
+func	FUN_00112f08	OpcodeTraits__getRecordTail	INFERRED	returns the address of byte +0x10 of the opcode traits record (record = table[opcode] with 0x38-byte entries)
+func	FUN_00112f78	OpcodeTraits__flagBit0	INFERRED	bit 0 of the first word of the opcode traits record of an opcode (table: HwLimits slot getOpcodeTraits, 0x38-byte records)
+func	FUN_00113090	OpcodeTraits__flagBit2	INFERRED	bit 2 of the opcode traits record
+func	FUN_001130dc	OpcodeTraits__flagBit3	INFERRED	bit 3 of the opcode traits record
+func	FUN_00113128	OpcodeTraits__flagBit6	INFERRED	bit 6 of the opcode traits record
+func	FUN_00113174	OpcodeTraits__flagBit7	INFERRED	bit 7 of the opcode traits record
+func	FUN_001131c0	OpcodeTraits__flagBit8	INFERRED	bit 8 of the opcode traits record
+func	FUN_0011320c	OpcodeTraits__flagBit9	INFERRED	bit 9 of the opcode traits record
+func	FUN_00113258	OpcodeTraits__flagBit10	INFERRED	bit 10 of the opcode traits record
+func	FUN_001132a4	OpcodeTraits__flagBit12	INFERRED	bit 12 of the opcode traits record
+func	FUN_001132f0	OpcodeTraits__flagBit13	INFERRED	bit 13 of the opcode traits record
+func	FUN_0011333c	OpcodeTraits__getField4	INFERRED	word +4 of the opcode traits record
+func	FUN_00113388	OpcodeTraits__getInstClass	CONFIRMED	word +0x30 of the opcode traits record: the class index FUN_001043f0 uses to pick the instruction constructor
+func	FUN_001133d4	OpcodeTraits__getFieldC	INFERRED	word +0xc of the opcode traits record
+func	FUN_00113420	OpcodeTraits__getField34	INFERRED	word +0x34 of the opcode traits record
+func	FUN_0011346c	OpcodeTraits__instFlagBit2	INFERRED	bit 2 of the traits record of the opcode of an instruction (+0x88 -> +8)
+local	FUN_00112f78	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00112f78	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00113090	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00113090	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_001130dc	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001130dc	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00113128	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00113128	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00113174	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00113174	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_001131c0	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001131c0	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_0011320c	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_0011320c	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00113258	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00113258	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_001132a4	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001132a4	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_001132f0	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001132f0	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_0011333c	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_0011333c	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00113388	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00113388	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_001133d4	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001133d4	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00113420	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_00113420	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00112f54	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001043f0	param_1	opcode	CONFIRMED	first argument of the opcode-traits accessors is the opcode number (indexes a table of 0x38-byte records)
+local	FUN_001043f0	param_2	compiler	CONFIRMED	second argument reaches *(x+0x30c) (the hardware description object of the compiler)
+local	FUN_00105594	param_2	operandIndex	CONFIRMED	operand number n (record at inst+0x8c+n*0x18 for n<5)
+local	FUN_001054ec	param_2	operandIndex	CONFIRMED	operand number n (record at inst+0x8c+n*0x18 for n<5)
+local	FUN_001046c8	param_2	operandIndex	CONFIRMED	operand number n (record at inst+0x8c+n*0x18 for n<5)

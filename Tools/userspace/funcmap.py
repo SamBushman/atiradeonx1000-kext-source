@@ -3,5 +3,6 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import apply_names as A
-for f, n, old, new, tier, ev in A.load_funcs(sys.argv[1]):
+funcs = A.load_funcs(sys.argv[1])
+for new, old in A.func_roots(funcs).items():          # chained rows map to the Ghidra name
     print('%s\t%s' % (new, old))

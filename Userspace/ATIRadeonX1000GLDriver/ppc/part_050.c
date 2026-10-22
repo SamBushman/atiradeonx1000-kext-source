@@ -1,8 +1,8 @@
 #include "decls.h"
 
-/* FUN_0019156c @ 0x19156c (412 bytes) */
-int FUN_0019156c(param_1, inst)
-  undefined4 param_1;
+/* R300VSchedModel__vslot12 @ 0x19156c (412 bytes) */
+int R300VSchedModel__vslot12(this, inst)
+  undefined4 this;
   int inst;
 {
   int iVar1;
@@ -134,9 +134,9 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
   return callResult;
 }
 
-/* FUN_001919d8 @ 0x1919d8 (344 bytes) */
-int FUN_001919d8(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* FudoPs__vslot85 @ 0x1919d8 (344 bytes) */
+int FudoPs__vslot85(this, param_2, param_3, param_4)
+  undefined4 this;
   int param_2;
   dword *param_3;
   int *param_4;
@@ -216,9 +216,9 @@ int FUN_001919d8(param_1, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_00191b30 @ 0x191b30 (316 bytes) */
-int FUN_00191b30(param_1, inst, param_3, param_4, param_5)
-  undefined4 param_1;
+/* FudoPs__vslot59 @ 0x191b30 (316 bytes) */
+int FudoPs__vslot59(this, inst, param_3, param_4, param_5)
+  undefined4 this;
   undefined4 inst;
   undefined4 param_3;
   uint param_4;
@@ -273,10 +273,10 @@ LAB_00191c54:
 }
 
 /* FudoChip__vslot2 @ 0x191c6c (16 bytes) */
-int FudoChip__vslot2(param_1)
-  int param_1;
+int FudoChip__vslot2(this)
+  int this;
 {
-  *(undefined4 *)(*(int *)(param_1 + 8) + 0x2c) = 0x100;
+  *(undefined4 *)(*(int *)(this + 8) + 0x2c) = 0x100;
   return;
 }
 
@@ -442,7 +442,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   FUN_0010dbd8(this,0x4a);
   FUN_0010dbd8(this,0x4b);
   this[2] = this[2] & 0xfffdffff | 0x1d80;
-  FUN_0019ef2c(this);
+  FudoPs__vslot96(this);
   if (createSchedModels != 0) {
     ((int (*)())FudoPs__createSchedModels)(this,compiler);
   }
@@ -536,7 +536,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   FUN_0010dbd8(this,0x4a);
   FUN_0010dbd8(this,0x4b);
   this[2] = this[2] & 0xfffdffff | 0x1d80;
-  FUN_0019ef2c(this);
+  FudoPs__vslot96(this);
   if (createSchedModels != 0) {
     ((int (*)())FudoPs__createSchedModels)(this,compiler);
   }
@@ -729,9 +729,9 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
   return inst;
 }
 
-/* FUN_0019286c @ 0x19286c (2512 bytes) */
-int FUN_0019286c(param_1, inst, param_3, inst2, param_5, param_6, param_7)
-  undefined4 param_1;
+/* FudoPs__vslot28 @ 0x19286c (2512 bytes) */
+int FudoPs__vslot28(this, inst, param_3, inst2, param_5, param_6, param_7)
+  undefined4 this;
   int *inst;
   int param_3;
   int *inst2;
@@ -1192,9 +1192,9 @@ LAB_00193490:
   return uVar5;
 }
 
-/* FUN_00193944 @ 0x193944 (112 bytes) */
-int FUN_00193944(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* R520SchedModel__vslot21 @ 0x193944 (112 bytes) */
+int R520SchedModel__vslot21(this, param_2, param_3, param_4)
+  undefined4 this;
   int *param_2;
   int param_3;
   undefined4 *param_4;
@@ -1218,9 +1218,9 @@ int FUN_00193944(param_1, param_2, param_3, param_4)
   return uVar2;
 }
 
-/* FUN_001939b4 @ 0x1939b4 (76 bytes) */
-int FUN_001939b4(param_1, param_2, param_3, param_4)
-  int param_1;
+/* R520SchedModel__vslot22 @ 0x1939b4 (76 bytes) */
+int R520SchedModel__vslot22(this, param_2, param_3, param_4)
+  int this;
   int param_2;
   int param_3;
   int param_4;
@@ -1228,7 +1228,7 @@ int FUN_001939b4(param_1, param_2, param_3, param_4)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  if (*(int *)(*(int *)(param_1 + 8) + 0x6b8) != 0) {
+  if (*(int *)(*(int *)(this + 8) + 0x6b8) != 0) {
     return 1;
   }
   if ((param_2 < 0x18) && ((param_3 < 0x10 || (param_4 <= param_3 << 2)))) {
@@ -1239,13 +1239,13 @@ int FUN_001939b4(param_1, param_2, param_3, param_4)
     uVar1 = 1;
     uVar2 = 1;
   }
-  *(undefined4 *)(*(int *)(param_1 + 8) + 0x6b8) = uVar1;
+  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = uVar1;
   return uVar2;
 }
 
-/* FUN_00193a00 @ 0x193a00 (140 bytes) */
-int FUN_00193a00(param_1, param_2)
-  undefined4 param_1;
+/* FudoPs__vslot29 @ 0x193a00 (140 bytes) */
+int FudoPs__vslot29(this, param_2)
+  undefined4 this;
   int param_2;
 {
   int iVar1;
@@ -1400,8 +1400,8 @@ int FUN_00193d18(param_1)
   return;
 }
 
-/* FUN_00193d98 @ 0x193d98 (128 bytes) */
-int FUN_00193d98(arena, param_2)
+/* Arena__grow @ 0x193d98 (128 bytes) */
+int Arena__grow(arena, param_2)
   undefined4 *arena;
   int param_2;
 {
@@ -1438,7 +1438,7 @@ int Arena__alloc(arena, size)
   
   alignedSize = size + 3U & 0xfffffffc;
   if (*(uint *)(arena + 0x10) < alignedSize + *(int *)(arena + 8)) {
-    ((int (*)())FUN_00193d98)(arena,alignedSize);
+    ((int (*)())Arena__grow)(arena,alignedSize);
   }
   result = *(int *)(arena + 8);
   *(int *)(arena + 0x14) = result;
@@ -1567,8 +1567,8 @@ int FUN_00193fa4(param_1)
   return;
 }
 
-/* FUN_00193fb4 @ 0x193fb4 (104 bytes) */
-int FUN_00193fb4(param_1)
+/* DListNode__clear @ 0x193fb4 (104 bytes) */
+int DListNode__clear(param_1)
   int param_1;
 {
   int *piVar1;
@@ -1627,8 +1627,8 @@ int FUN_00194060(param_1)
   return;
 }
 
-/* FUN_001940a8 @ 0x1940a8 (72 bytes) */
-int FUN_001940a8(param_1)
+/* DListNode__init @ 0x1940a8 (72 bytes) */
+int DListNode__init(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -2505,15 +2505,15 @@ int anyEnabledLaneSelectsXyz(swizzle, laneEnable)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0019156c");
-asm(".set FUN_0019156c, _FUN_0019156c");
+asm(".set FUN_0019156c, _R300VSchedModel__vslot12");
 asm(".globl FUN_00191710");
 asm(".set FUN_00191710, _isLiteralZeroHalfOrOne");
 asm(".globl FUN_00191940");
 asm(".set FUN_00191940, _FudoPs__encodeUniformImmediate");
 asm(".globl FUN_001919d8");
-asm(".set FUN_001919d8, _FUN_001919d8");
+asm(".set FUN_001919d8, _FudoPs__vslot85");
 asm(".globl FUN_00191b30");
-asm(".set FUN_00191b30, _FUN_00191b30");
+asm(".set FUN_00191b30, _FudoPs__vslot59");
 asm(".globl FUN_00191c6c");
 asm(".set FUN_00191c6c, _FudoChip__vslot2");
 asm(".globl FUN_00191c7c");
@@ -2521,12 +2521,12 @@ asm(".set FUN_00191c7c, _FudoPs__classifyLiteralOperand");
 asm(".globl FUN_00191e28");
 asm(".set FUN_00191e28, _FudoPs__createSchedModels");
 asm(".globl FUN_0019286c");
-asm(".set FUN_0019286c, _FUN_0019286c");
+asm(".set FUN_0019286c, _FudoPs__vslot28");
 asm(".globl FUN_00193944");
-asm(".set FUN_00193944, _FUN_00193944");
+asm(".set FUN_00193944, _R520SchedModel__vslot21");
 asm(".globl FUN_001939b4");
-asm(".set FUN_001939b4, _FUN_001939b4");
+asm(".set FUN_001939b4, _R520SchedModel__vslot22");
 asm(".globl FUN_00193a00");
-asm(".set FUN_00193a00, _FUN_00193a00");
+asm(".set FUN_00193a00, _FudoPs__vslot29");
 asm(".globl FUN_00193e18");
 asm(".set FUN_00193e18, _Arena__alloc");

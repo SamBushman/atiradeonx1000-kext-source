@@ -545,9 +545,9 @@ LAB_00131f98:
                param_2,param_4,in_r8,arena,in_r10);
 }
 
-/* FUN_001322a8 @ 0x1322a8 (416 bytes) */
-int FUN_001322a8(param_1, param_2, param_3, param_4, param_5, compiler)
-  undefined4 param_1;
+/* HwLimits__vslot82 @ 0x1322a8 (416 bytes) */
+int HwLimits__vslot82(this, param_2, param_3, param_4, param_5, compiler)
+  undefined4 this;
   undefined4 param_2;
   int param_3;
   int param_4;
@@ -3422,7 +3422,7 @@ code_r0x00136cac:
                    *(int *)(colorGraph + 0x10));
     } while (classIndexOrNodeCount < *(int *)(colorGraph + 0xc));
   }
-  FUN_000ed7e4(*(undefined4 *)(colorGraph + 0x28),(int)"color_graph");
+  Program__beginPass(*(undefined4 *)(colorGraph + 0x28),(int)"color_graph");
   Arena__free(*(undefined4 *)(*(int *)(colorGraph + 0x2c) + 0x378),classNodeCount);
   Arena__free(*(undefined4 *)(*(int *)(colorGraph + 0x2c) + 0x378),usedColorBits);
   Arena__free(*(undefined4 *)(*(int *)(colorGraph + 0x2c) + 0x378),simplifiedStacks);
@@ -4385,9 +4385,9 @@ int FUN_00138390(param_1, param_2)
   } while( true );
 }
 
-/* FUN_00138694 @ 0x138694 (2336 bytes) */
-int FUN_00138694(param_1, param_2, param_3, compiler)
-  undefined4 param_1;
+/* HwLimits__vslot81 @ 0x138694 (2336 bytes) */
+int HwLimits__vslot81(this, param_2, param_3, compiler)
+  undefined4 this;
   int param_2;
   int param_3;
   int compiler;
@@ -4864,9 +4864,9 @@ LAB_00139218:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_001322a8");
-asm(".set FUN_001322a8, _FUN_001322a8");
+asm(".set FUN_001322a8, _HwLimits__vslot82");
 asm(".globl FUN_00138694");
-asm(".set FUN_00138694, _FUN_00138694");
+asm(".set FUN_00138694, _HwLimits__vslot81");
 
 /* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
  * just branches straight to the real function below, no different behavior or arguments - but

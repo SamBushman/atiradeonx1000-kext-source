@@ -1,0 +1,254 @@
+opcode	class	kind_field_c	category	numSources	numDests	instFlagsOr	init_fn	fold_fn	fold_vector_fn	name_string
+15	IrRet	15	2	0	0	0x18000	0x1d0e00			
+16	IrCondJmp	0								
+17	IrAlloc	0								
+18	IrAddFloat	0						0x1d0260		
+19	IrMulFloat	0						0x1d0ee0		
+20	IrMulAddFloat	0						0x1d09b4		
+21	IrFloorFloat	0						0x1d09fc		
+22	IrFractFloat	0						0x1d0a38		
+23	IrMaxFloat	0						0x1d04e0		
+24	IrMax4	0								
+25	IrMinFloat	0						0x1d0504		
+26	IrTruncFloat	0								
+27	IrCube	0								
+28	IrDot3	4							0x1d0a84	
+29	IrDot4	5							0x1d0af0	
+30	IrDot2Add	3							0x1d0b94	
+31	IrDst	0								
+32	IrKillEFloat	0								
+33	IrKillGTFloat	0								
+34	IrKillGEFloat	0								
+35	IrKillNEFloat	0								
+36	IrCndEFloat	0						0x1d0bfc		
+37	IrCndGEFloat	0						0x1d0c38		
+38	IrCndGTFloat	0						0x1d0c78		
+39	IrSetEFloat	0						0x1d0cb4		
+40	IrSetGTFloat	0						0x1d0cd8		
+41	IrSetGEFloat	0						0x1d0d1c		
+42	IrSetNEFloat	0						0x1d0d48		
+43	IrMovaRoundFloat	0	6	1	1		0x1d0db8			
+44	IrPredSetEPush	0								
+45	IrPredSetNEPush	0								
+46	IrPredSetGTPush	0								
+47	IrPredSetGEPush	0								
+48	IrExportFloat	0								
+49	IrMovFloat	0						0x1d05a0		
+50	IrLit	2								
+51	IrNop	0								
+52	IrAdd	0						0x1d0260		
+53	IrSub	0								
+54	IrMul	0						0x1d096c		
+55	IrExp	0						0x1d0884		
+56	IrFloor	0								
+57	IrFract	0								
+58	IrLogClamp	0						0x1d0640		
+59	IrLogIEEE	0						0x1d0640		
+60	IrMax	0								
+61	IrMin	0								
+62	IrRecipClamp	0						0x1d075c		
+63	IrRecipFF	0						0x1d075c		
+64	IrRecipIEEE	0						0x1d075c		
+65	IrRecipSqrtClamp	0						0x1d06ec		
+66	IrRecipSqrtFF	0						0x1d06ec		
+67	IrRecipSqrtIEEE	0						0x1d06ec		
+68	IrSqrt	0						0x1d0820		
+69	IrTrunc	0								
+70	IrAddConst0	0								
+71	IrMulConst0	0								
+72	IrSubConst0	0								
+73	IrAddConst1	0								
+74	IrMulConst1	0								
+75	IrSubConst1	0								
+76	IrSin	0						0x1d0794		
+77	IrCos	0						0x1d05b0		
+78	IrKillE	0	7	1	1	0x18	0x1d0de0			
+79	IrKillGT	0	7	1	1	0x18	0x1d0de4			
+80	IrKillGE	0	7	1	1	0x18	0x1d0de8			
+81	IrKillNE	0	7	1	1	0x18	0x1d0dec			
+82	IrKillOne	0	7	1	1	0x18	0x1d0df0			
+83	IrPredSetE	0								
+84	IrPredSetNE	0								
+85	IrPredSetGT	0								
+86	IrPredSetGE	0								
+87	IrPredSetInv	0								
+88	IrPredSetPop	0								
+89	IrPredSetClr	0								
+90	IrPredSetRst	0								
+91	IrSetE	0								
+92	IrSetGT	0								
+93	IrSetGE	0								
+94	IrSetNE	0								
+95	IrAddPrev	0								
+96	IrMulPrev	0								
+97	IrMulPrev2	0								
+98	IrSubPrev	0								
+99	IrMovaRound	0	6	1	1		0x1d0dbc			
+100	IrMovaFloor	0	6	1	1		0x1d0dc0			
+101	IrExport	0								
+102	IrMov	0								
+103	IrNop1	0								
+104	IrFetchVertex	11								
+105	IrFetchTextureMap	9								
+106	IrFetch3DNoiseMap	9								
+107	IrFetchShadowMap	9								
+108	IrFetchMultiSample	9								
+109	IrGetBorderColorFraction	9								
+110	IrGetCompTexLod	9								
+111	IrGetGradients	10								
+112	IrGetWeights	9								
+113	IrSetTexLod	9								
+114	IrSetGradientsH	9								
+115	IrSetGradientsV	9								
+116	IrSetFilter4Weights	0								
+117	IrFetchTextureMapProj	9								
+118	IrFetchTextureMapBias	9								
+119	IrFetchTextureMapKill	8								
+120	IrFetchTextureMapGradients	9								
+121	IrLoadConst	0								
+122	IrLoadTemp	0								
+123	IrLoadPhysical	0								
+124	IrLoadAbstractState	0								
+125	IrLoadTempDefault	0								
+126	IrLoadInterp	0								
+127	IrVertexLoopFetch	0								
+128	IrPixelLoopFetch	0								
+129	IrLoopStart	15								
+130	IrLoopIndex	15	3	1	1	0x18000	0x1d0dfc			
+131	IrMerge	15								
+132	IrProjection	0								
+133	IrUndefined	0								
+134	IrHeader	0								
+135	IrEntry	0								
+136	IrExit	0								
+137	IrProlog	0								
+138	IrEpilog	0								
+139	IrCmp2	0								
+140	IrCmp1D	0	8	1	0	0x18	0x1d0df4			
+141	IrCmp1S	15								
+142	IrPhi	0								
+143	IrStartCallRoutine	0								
+144	IrStartMakeCall	0								
+145	IrEndCall	0								
+146	IrEndMakeCall	0								
+147	IrAllocPos	0	1	0	1	0x18000	0x1d0dd0			
+148	IrAllocMem	0	1	0	1	0x18000	0x1d0dd4			
+149	IrAllocColor	0	1	0	1	0x18000	0x1d0dd8			
+150	IrAllocInterp	0	1	0	1	0x18000	0x1d0ddc			
+151	IrOpDp	0								
+152	IrOpSop	0								
+153	IrPresubBX2Neg	0								
+154	IrPresubSub	0								
+155	IrPresubAdd	0								
+156	IrPresubInvert	0								
+157	IrCnd05	0								
+158	IrDsx	16								
+159	IrDsx1	16								
+160	IrDsy	16								
+161	IrDsy1	16								
+162	IrMix	12								
+163	IrDp3Add	7								
+164	IrLoad	0								
+165	IrPow	0								
+166	IrMovaFlr	0	6	1	1		0x1d0dc4			
+167	IrR300Expp	0								
+168	IrDxLogp	0								
+169	IrR300ExpBaseE	0								
+170	IrMad	0								
+171	IrCndE1	0								
+172	IrCndGE1	0								
+173	IrCndGT1	0								
+174	IrFetchTextureLOD	9								
+175	IrFetchTextureUncached	0								
+176	IrCmovEQ	0								
+177	IrCmovGE	0								
+178	IrCmovGT	0								
+179	IrCmovNE	0								
+180	IrScatter	15	9	3	1		0x1d0db4			SCATTER
+181	IrFetchShaderCall	0								
+182	IrMulIEEE	0						0x1d096c		
+183	IrMaxDx10	0								
+184	IrMinDx10	0								
+185	IrSetE_Dx10	0								
+186	IrSetGTDx10	0								
+187	IrSetGE_Dx10	0								
+188	IrSetNE_Dx10	0								
+189	IrCeil	0								
+190	IrRoundNearestEven	0								
+191	IrMovaFloorFloat	0								
+192	IrMovaFloorGprInt	0	6	1	1		0x1d0dc8			
+193	IrMovaFloorInt	0	6	1	1		0x1d0dcc			
+194	IrAndInt	0						0x1d0440		
+195	IrOrInt	0						0x1d03b0		
+196	IrXorInt	0						0x1d0428		
+197	IrNotInt	0						0x1d03c8		
+198	IrAddInt	0						0x1d0398		
+199	IrMaxInt	0						0x1d04a0		
+200	IrMinInt	0						0x1d0528		
+201	IrMaxUInt	0						0x1d04c0		
+202	IrMinUInt	0						0x1d0548		
+203	IrSubInt	0						0x1d0458		
+204	IrSetEInt	0								
+205	IrSetGTInt	0								
+206	IrSetGEInt	0								
+207	IrSetGTUint	0								
+208	IrSetGE_uint	0								
+209	IrSetNEInt	0								
+210	IrPredSetEInt	0								
+211	IrPredSetGTInt	0								
+212	IrPredSetGEInt	0								
+213	IrPredSetNEInt	0								
+214	IrPredSetLTInt	0								
+215	IrPredSetLEInt	0								
+216	IrPredSetEPushInt	0								
+217	IrPredSetNEPushInt	0								
+218	IrPredSetGTPushInt	0								
+219	IrPredSetGEPushInt	0								
+220	IrPredSetLTPushInt	0								
+221	IrPredSetLEPushInt	0								
+222	IrDot4IEEE	5							0x1d0d7c	
+223	IrDot3IEEE	4								
+224	IrF2Int	0						0x1d0568		
+225	IrInt2F	0						0x1d08e8		
+226	IrUInt2F	0						0x1d092c		
+227	IrAshrInt	0						0x1d03dc		
+228	IrLshrInt	0						0x1d040c		
+229	IrLshlInt	0						0x1d03f4		
+230	IrMulLowInt	0						0x1d0470		
+231	IrMulHiInt	0						0x1d0984		
+232	IrMulLowUInt	0						0x1d0488		
+233	IrMulHiUInt	0						0x1d099c		
+234	IrRecipInt	0								
+235	IrRecipUInt	0								
+236	IrCndEInt	0								
+237	IrCndGTInt	0								
+238	IrCndGEInt	0								
+239	IrDot2AddIEEE	0							0x1d0b6c	
+240	IrMulAddIEEE	0								
+241	IrMulAdd	0								
+242	IrCndE	0								
+243	IrCndGT	0								
+244	IrCndGE	0								
+245	IrMulLit	0								
+246	IrPsColorFog	0								
+247	IrEmit	0								
+248	IrDyamicReturn	15	2	0	0	0x18000	0x1d0e04			
+249	IrExportRing	6								
+250	IrMemInit	0								MEM_INIT
+251	IrScratchLoad	13								
+252	IrScratchStore	14								
+253	IrWhileStart	15	5	1	1	0x18018	0x1d0df8			
+254	IrCbLoad	15								
+255	IrFetchLoad	9								
+256	IrSampleC	9								
+257	IrSampleL	9								
+258	IrSampleCLZ	9								
+259	IrSampleG	9								
+260	IrLdBuffer	11								
+261	IrCut	0								
+262	IrDyamicReturnSwitch	15	2	0	0	0x18000	0x1d0e08			
+263	IrEmitThenCut	0								
+264	IrF2UInt	0						0x1d0584		
+265	IrGetResource	9								
+266	IrImmedConstBuffer	0								
+267	IrImmedConstLoad	11								

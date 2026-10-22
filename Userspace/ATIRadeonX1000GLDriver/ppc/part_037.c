@@ -398,7 +398,7 @@ LAB_0011f190:
           }
           iVar13 = IRInst__getOperandRecord(iVar6,a2);
           local_48 = *(undefined4 *)(iVar13 + 0x10);
-          iVar13 = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+          iVar13 = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                                 *(undefined4 *)(ctx + 0x238));
           if (iVar13 == 0) {
             FUN_000f3340(local_38,local_48,*(undefined4 *)(iVar3 + 0x228));
@@ -2590,7 +2590,7 @@ LAB_001228ec:
         FUN_00172fb4(*(undefined4 *)(program + 8));
       }
       *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0xc;
-      FUN_000ed7e4(program,(int)"ssa_build");
+      Program__beginPass(program,(int)"ssa_build");
       Arena__free(local_50,local_54);
       return;
     }
@@ -2662,31 +2662,31 @@ int FUN_00122ebc(param_1)
   return Vector__removeAt(*(int *)(param_1 + 0x2c),iVar1 + -1);
 }
 
-/* FUN_00122ed8 @ 0x122ed8 (80 bytes) */
-int FUN_00122ed8(param_1, param_2)
-  int param_1;
+/* ExportValue__vslot10 @ 0x122ed8 (80 bytes) */
+int ExportValue__vslot10(this, param_2)
+  int this;
   undefined4 param_2;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   int iVar3;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  if (*(int *)(*(int *)(param_1 + 0x30) + 0x98) != 8) {
+  if (*(int *)(*(int *)(this + 0x30) + 0x98) != 8) {
     iVar2 = 0;
     iVar3 = 4;
     pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
     do {
       if (*pcVar1 == '\0') {
-        *(undefined1 *)(iVar2 + *(int *)(param_1 + 0x30) + 0x9c) = 0;
+        *(undefined1 *)(iVar2 + *(int *)(this + 0x30) + 0x9c) = 0;
       }
       iVar2 = iVar2 + 1;
       pcVar1 = pcVar1 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
   }
-  return *(undefined4 *)(param_1 + 0x34);
+  return *(undefined4 *)(this + 0x34);
 }
 
 /* FUN_00122f28 @ 0x122f28 (124 bytes) */
@@ -2772,9 +2772,9 @@ int FUN_0012306c(param_1, param_2)
   return;
 }
 
-/* ImmedConstBuffer__vslot2 @ 0x1230e4 (268 bytes) */
-int ImmedConstBuffer__vslot2(param_1, param_2, compiler)
-  int param_1;
+/* ImmedConstBuffer__clone @ 0x1230e4 (268 bytes) */
+int ImmedConstBuffer__clone(this, param_2, compiler)
+  int this;
   int *param_2;
   int compiler;
 {
@@ -2801,7 +2801,7 @@ int ImmedConstBuffer__vslot2(param_1, param_2, compiler)
   do {
     *(byte *)(allocation + 0x58) = (byte)(1 << (uVar5 & 0x3f)) | *(byte *)(allocation + 0x58);
     puVar3[7] = 3;
-    iVar1 = *(int *)(param_1 + 8) * 4 + uVar5;
+    iVar1 = *(int *)(this + 8) * 4 + uVar5;
     if (iVar4 < iVar1) {
       puVar3[8] = 0;
     }
@@ -2812,7 +2812,7 @@ int ImmedConstBuffer__vslot2(param_1, param_2, compiler)
     puVar3 = puVar3 + 6;
     iVar9 = iVar9 + -1;
   } while (iVar9 != 0);
-  IRInst__setOperandRef(puVar8,0,param_1);
+  IRInst__setOperandRef(puVar8,0,this);
   arena = *(undefined4 *)(compiler + 0x378);
   puVar3 = (undefined4 *)Arena__alloc(arena,0x240);
   allocation = puVar3 + 1;
@@ -2823,15 +2823,15 @@ int ImmedConstBuffer__vslot2(param_1, param_2, compiler)
     FUN_00174e0c(allocation);
     FUN_00173278(allocation);
   }
-  ((int (*)())FUN_0012306c)(param_1,puVar8);
+  ((int (*)())FUN_0012306c)(this,puVar8);
   (**(code **)(*param_2 + 0xc))(param_2,puVar8);
-  ((int (*)())FUN_00122f28)(param_1,puVar8);
+  ((int (*)())FUN_00122f28)(this,puVar8);
   return allocation;
 }
 
-/* VertexRegister__vslot2 @ 0x123288 (148 bytes) */
-int VertexRegister__vslot2(param_1, param_2, compiler)
-  int param_1;
+/* VertexRegister__clone @ 0x123288 (148 bytes) */
+int VertexRegister__clone(this, param_2, compiler)
+  int this;
   int *param_2;
   int compiler;
 {
@@ -2842,9 +2842,9 @@ int VertexRegister__vslot2(param_1, param_2, compiler)
   undefined4 arena;
   
   iVar1 = FUN_00109810(0xa4,compiler);
-  IRInst__setOperandRef(iVar1,0,param_1);
+  IRInst__setOperandRef(iVar1,0,this);
   *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
-  *(undefined4 *)(iVar1 + 300) = *(undefined4 *)(param_1 + 8);
+  *(undefined4 *)(iVar1 + 300) = *(undefined4 *)(this + 8);
   arena = *(undefined4 *)(compiler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar4 = allocation + 1;
@@ -2855,9 +2855,9 @@ int VertexRegister__vslot2(param_1, param_2, compiler)
     FUN_00174e0c(puVar4);
     FUN_00173278(puVar4);
   }
-  ((int (*)())FUN_0012306c)(param_1,iVar1);
+  ((int (*)())FUN_0012306c)(this,iVar1);
   (**(code **)(*param_2 + 0xc))(param_2,iVar1);
-  ((int (*)())FUN_00122f28)(param_1,iVar1);
+  ((int (*)())FUN_00122f28)(this,iVar1);
   return puVar4;
 }
 
@@ -3161,13 +3161,13 @@ int FUN_001238e8(param_1, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_00123a34 @ 0x123a34 (296 bytes) */
-int FUN_00123a34(param_1, param_2, param_3)
-  int param_1;
+/* Interpolator__vslot10 @ 0x123a34 (296 bytes) */
+int Interpolator__vslot10(this, param_2, param_3)
+  int this;
   undefined4 param_2;
   int param_3;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *allocation;
   undefined4 uVar2;
   int iVar3;
@@ -3178,22 +3178,22 @@ int FUN_00123a34(param_1, param_2, param_3)
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   if ((*(uint *)(param_3 + 0x30) & 0x4000) == 0) {
-    if (*(int *)(param_1 + 0x30) == 0) {
-      iVar3 = *(int *)(param_1 + 0x3c);
-      if (*(int *)(param_1 + 0x3c) == 0) {
-        iVar3 = param_1;
+    if (*(int *)(this + 0x30) == 0) {
+      iVar3 = *(int *)(this + 0x3c);
+      if (*(int *)(this + 0x3c) == 0) {
+        iVar3 = this;
       }
     }
     else {
-      if (*(int *)(*(int *)(param_1 + 0x30) + 0x98) != 0x18) {
+      if (*(int *)(*(int *)(this + 0x30) + 0x98) != 0x18) {
         iVar3 = 0;
         iVar5 = 4;
         pcVar4 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
         do {
           if (*pcVar4 == '\0') {
-            *(undefined1 *)(iVar3 + *(int *)(param_1 + 0x30) + 0x9c) = 0;
-            if (*(int *)(param_1 + 0x34) != 0) {
-              *(undefined1 *)(iVar3 + *(int *)(param_1 + 0x34) + 0x9c) = 0;
+            *(undefined1 *)(iVar3 + *(int *)(this + 0x30) + 0x9c) = 0;
+            if (*(int *)(this + 0x34) != 0) {
+              *(undefined1 *)(iVar3 + *(int *)(this + 0x34) + 0x9c) = 0;
             }
           }
           iVar3 = iVar3 + 1;
@@ -3201,7 +3201,7 @@ int FUN_00123a34(param_1, param_2, param_3)
           iVar5 = iVar5 + -1;
         } while (iVar5 != 0);
       }
-      iVar3 = *(int *)(param_1 + 0x3c);
+      iVar3 = *(int *)(this + 0x3c);
     }
   }
   else {
@@ -3212,8 +3212,8 @@ int FUN_00123a34(param_1, param_2, param_3)
     *allocation = arena;
     FUN_00108770(puVar7,iVar5);
     allocation[0x28] = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
-    allocation[0x51] = *(undefined4 *)(param_1 + 8);
-    allocation[0x50] = *(undefined4 *)(param_1 + 4);
+    allocation[0x51] = *(undefined4 *)(this + 8);
+    allocation[0x50] = *(undefined4 *)(this + 4);
     uVar2 = FUN_00127608(*(undefined4 *)(param_3 + 0x3ac),0x2c,0,0);
     IRInst__setOperandRef(puVar7,0,uVar2);
     IRInst__setOperandRef(puVar7,2,uVar2);
@@ -3225,12 +3225,12 @@ int FUN_00123a34(param_1, param_2, param_3)
     iVar3 = *(int *)(iVar5 + 0x3ac) + -1;
     *(int *)(iVar5 + 0x3ac) = iVar3;
     arena = FUN_001275a0(arena,0,iVar3,0);
-    *(undefined4 *)(param_1 + 0x3c) = arena;
+    *(undefined4 *)(this + 0x3c) = arena;
     IRInst__setOperandRef(puVar7,1,arena);
-    ((int (*)())FUN_001236e4)(*(undefined4 *)(param_1 + 0x3c),1,puVar7);
+    ((int (*)())FUN_001236e4)(*(undefined4 *)(this + 0x3c),1,puVar7);
     ((int (*)())FUN_001236e4)(uVar2,2,puVar7);
-    *(undefined4 **)(param_1 + 0x30) = puVar7;
-    iVar3 = *(int *)(param_1 + 0x3c);
+    *(undefined4 **)(this + 0x30) = puVar7;
+    iVar3 = *(int *)(this + 0x3c);
   }
   return iVar3;
 }
@@ -3395,9 +3395,9 @@ int FUN_00123c08(compiler, param_2, param_3)
   return local_58;
 }
 
-/* TempValue__vslot2 @ 0x1240a8 (180 bytes) */
-int TempValue__vslot2(param_1, param_2, compiler)
-  int param_1;
+/* TempValue__clone @ 0x1240a8 (180 bytes) */
+int TempValue__clone(this, param_2, compiler)
+  int this;
   int *param_2;
   int compiler;
 {
@@ -3407,12 +3407,12 @@ int TempValue__vslot2(param_1, param_2, compiler)
   undefined4 *puVar4;
   undefined4 arena;
   
-  if (*(int *)(param_1 + 4) == 0x1a) {
+  if (*(int *)(this + 4) == 0x1a) {
     iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x50))
-                      (*(int **)(compiler + 0x30c),*(undefined4 *)(param_1 + 8));
-    IRInst__setOperandRef(iVar1,0,param_1);
+                      (*(int **)(compiler + 0x30c),*(undefined4 *)(this + 8));
+    IRInst__setOperandRef(iVar1,0,this);
     *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
-    ((int (*)())FUN_0012306c)(param_1,iVar1);
+    ((int (*)())FUN_0012306c)(this,iVar1);
     arena = *(undefined4 *)(compiler + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
     puVar4 = allocation + 1;
@@ -3425,16 +3425,16 @@ int TempValue__vslot2(param_1, param_2, compiler)
     }
     *(uint *)(*(int *)(compiler + 0x30c) + 8) = *(uint *)(*(int *)(compiler + 0x30c) + 8) | 0x20;
     (**(code **)(*param_2 + 0xc))(param_2,iVar1);
-    ((int (*)())FUN_00122f28)(param_1,iVar1);
+    ((int (*)())FUN_00122f28)(this,iVar1);
     return puVar4;
   }
-  allocation = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + 0x6c4),param_2,param_1);
+  allocation = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + 0x6c4),param_2,this);
   return allocation;
 }
 
-/* ExportSlot__vslot2 @ 0x1241fc (184 bytes) */
-int ExportSlot__vslot2(param_1, param_2, compiler)
-  undefined4 param_1;
+/* ExportSlot__clone @ 0x1241fc (184 bytes) */
+int ExportSlot__clone(this, param_2, compiler)
+  undefined4 this;
   int *param_2;
   int compiler;
 {
@@ -3449,7 +3449,7 @@ int ExportSlot__vslot2(param_1, param_2, compiler)
   puVar5 = allocation + 1;
   *allocation = arena;
   FUN_00109a80(puVar5,0xfa,compiler);
-  IRInst__setOperandRef(puVar5,0,param_1);
+  IRInst__setOperandRef(puVar5,0,this);
   arena = DAT_001afee8;
   allocation[6] = allocation[6] & 0xffff7fff;
   allocation[0x28] = arena;
@@ -3463,15 +3463,15 @@ int ExportSlot__vslot2(param_1, param_2, compiler)
     FUN_00174e0c(puVar3);
     FUN_00173278(puVar3);
   }
-  ((int (*)())FUN_0012306c)(param_1,puVar5);
+  ((int (*)())FUN_0012306c)(this,puVar5);
   (**(code **)(*param_2 + 0xc))(param_2,puVar5);
-  ((int (*)())FUN_00122f28)(param_1,puVar5);
+  ((int (*)())FUN_00122f28)(this,puVar5);
   return puVar3;
 }
 
-/* Resource__vslot2 @ 0x12434c (152 bytes) */
-int Resource__vslot2(param_1, param_2, compiler)
-  undefined4 param_1;
+/* Resource__clone @ 0x12434c (152 bytes) */
+int Resource__clone(this, param_2, compiler)
+  undefined4 this;
   int *param_2;
   int compiler;
 {
@@ -3485,8 +3485,8 @@ int Resource__vslot2(param_1, param_2, compiler)
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar5 = allocation + 1;
   *allocation = arena;
-  FUN_00109348(puVar5,param_1,compiler);
-  IRInst__setOperandRef(puVar5,0,param_1);
+  FUN_00109348(puVar5,this,compiler);
+  IRInst__setOperandRef(puVar5,0,this);
   arena = *(undefined4 *)(compiler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar3 = allocation + 1;
@@ -3497,15 +3497,15 @@ int Resource__vslot2(param_1, param_2, compiler)
     FUN_00174e0c(puVar3);
     FUN_00173278(puVar3);
   }
-  ((int (*)())FUN_0012306c)(param_1,puVar5);
+  ((int (*)())FUN_0012306c)(this,puVar5);
   (**(code **)(*param_2 + 0xc))(param_2,puVar5);
-  ((int (*)())FUN_00122f28)(param_1,puVar5);
+  ((int (*)())FUN_00122f28)(this,puVar5);
   return puVar3;
 }
 
-/* FixedValue__vslot2 @ 0x12447c (148 bytes) */
-int FixedValue__vslot2(param_1, param_2, compiler)
-  undefined4 param_1;
+/* FixedValue__clone @ 0x12447c (148 bytes) */
+int FixedValue__clone(this, param_2, compiler)
+  undefined4 this;
   int *param_2;
   int compiler;
 {
@@ -3520,7 +3520,7 @@ int FixedValue__vslot2(param_1, param_2, compiler)
   puVar5 = allocation + 1;
   *allocation = arena;
   IRLoadConst__ctor_109938(puVar5,compiler);
-  IRInst__setOperandRef(puVar5,0,param_1);
+  IRInst__setOperandRef(puVar5,0,this);
   arena = *(undefined4 *)(compiler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar3 = allocation + 1;
@@ -3531,9 +3531,9 @@ int FixedValue__vslot2(param_1, param_2, compiler)
     FUN_00174e0c(puVar3);
     FUN_00173278(puVar3);
   }
-  ((int (*)())FUN_0012306c)(param_1,puVar5);
+  ((int (*)())FUN_0012306c)(this,puVar5);
   (**(code **)(*param_2 + 0xc))(param_2,puVar5);
-  ((int (*)())FUN_00122f28)(param_1,puVar5);
+  ((int (*)())FUN_00122f28)(this,puVar5);
   return puVar3;
 }
 
@@ -4430,18 +4430,18 @@ int LoopIndexedOutputSet__ctor_126080(this, param_2, param_3, param_4, param_5)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00122ed8");
-asm(".set FUN_00122ed8, _FUN_00122ed8");
+asm(".set FUN_00122ed8, _ExportValue__vslot10");
 asm(".globl FUN_001230e4");
-asm(".set FUN_001230e4, _ImmedConstBuffer__vslot2");
+asm(".set FUN_001230e4, _ImmedConstBuffer__clone");
 asm(".globl FUN_00123288");
-asm(".set FUN_00123288, _VertexRegister__vslot2");
+asm(".set FUN_00123288, _VertexRegister__clone");
 asm(".globl FUN_00123a34");
-asm(".set FUN_00123a34, _FUN_00123a34");
+asm(".set FUN_00123a34, _Interpolator__vslot10");
 asm(".globl FUN_001240a8");
-asm(".set FUN_001240a8, _TempValue__vslot2");
+asm(".set FUN_001240a8, _TempValue__clone");
 asm(".globl FUN_001241fc");
-asm(".set FUN_001241fc, _ExportSlot__vslot2");
+asm(".set FUN_001241fc, _ExportSlot__clone");
 asm(".globl FUN_0012434c");
-asm(".set FUN_0012434c, _Resource__vslot2");
+asm(".set FUN_0012434c, _Resource__clone");
 asm(".globl FUN_0012447c");
-asm(".set FUN_0012447c, _FixedValue__vslot2");
+asm(".set FUN_0012447c, _FixedValue__clone");

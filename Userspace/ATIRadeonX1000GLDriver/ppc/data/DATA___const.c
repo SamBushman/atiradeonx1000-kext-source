@@ -406,13 +406,13 @@ const unsigned int sectDATA___const[2670] = {
     0x001f0f10, /* -> __const_coal+0x8 */ /* +0x64c */
     0x001cd970, /* -> IRInst__dtor_1cd970 */ /* +0x650 */
     0x001cd9c4, /* -> IRInst__dtor_1cd9c4 */ /* +0x654 */
-    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x658 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x65c */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x660 */
+    0x0010647c, /* -> IRInst__validate */ /* +0x658 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x65c */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x660 */
     0x001cd7b0, /* +0x664 */
     0x001cd6a8, /* +0x668 */
     0x001cd7b8, /* +0x66c */
-    0x000e2a54, /* -> FUN_000e2a54 */ /* +0x670 */
+    0x000e2a54, /* -> IRStartCallRoutine__acceptCallPseudo */ /* +0x670 */
     0x001cd6b4, /* +0x674 */
     0x001cd6e0, /* +0x678 */
     0x001cd6e8, /* +0x67c */
@@ -432,7 +432,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x6b4 */
     0x001cd770, /* +0x6b8 */
     0x001cd778, /* +0x6bc */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x6c0 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x6c0 */
     0x001cd780, /* +0x6c4 */
     0x001cd788, /* +0x6c8 */
     0x001cd790, /* +0x6cc */
@@ -441,20 +441,20 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0x6d8 */
     0x001cd7a8, /* +0x6dc */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x6e0 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x6e4 */
-    0x001cd7bc, /* -> FUN_001cd7bc */ /* +0x6e8 */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x6e4 */
+    0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x6e8 */
     0x00000000, /* +0x6ec */
     0x00000000, /* +0x6f0 */
     0x001f0f30, /* -> __const_coal+0x28 */ /* +0x6f4 */
     0x001cda2c, /* -> IRInst__dtor_1cda2c */ /* +0x6f8 */
     0x001cda80, /* -> IRInst__dtor_1cda80 */ /* +0x6fc */
-    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x700 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x704 */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x708 */
+    0x0010647c, /* -> IRInst__validate */ /* +0x700 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x704 */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x708 */
     0x001cd7b0, /* +0x70c */
     0x001cd6a8, /* +0x710 */
     0x001cd7b8, /* +0x714 */
-    0x000e2a70, /* -> FUN_000e2a70 */ /* +0x718 */
+    0x000e2a70, /* -> IREndCallRoutine__acceptCallPseudo */ /* +0x718 */
     0x001cd6b4, /* +0x71c */
     0x001cd6e0, /* +0x720 */
     0x001cd6e8, /* +0x724 */
@@ -474,7 +474,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x75c */
     0x001cd770, /* +0x760 */
     0x001cd778, /* +0x764 */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x768 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x768 */
     0x001cd780, /* +0x76c */
     0x001cd788, /* +0x770 */
     0x001cd790, /* +0x774 */
@@ -483,20 +483,20 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0x780 */
     0x001cd7a8, /* +0x784 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x788 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x78c */
-    0x001cd7bc, /* -> FUN_001cd7bc */ /* +0x790 */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x78c */
+    0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x790 */
     0x00000000, /* +0x794 */
     0x00000000, /* +0x798 */
     0x001f0f40, /* -> __const_coal+0x38 */ /* +0x79c */
     0x001cdae8, /* -> IRInst__dtor_1cdae8 */ /* +0x7a0 */
     0x001cdb3c, /* -> IRInst__dtor_1cdb3c */ /* +0x7a4 */
-    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x7a8 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x7ac */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x7b0 */
+    0x0010647c, /* -> IRInst__validate */ /* +0x7a8 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x7ac */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x7b0 */
     0x001cd7b0, /* +0x7b4 */
     0x001cd6a8, /* +0x7b8 */
     0x001cd7b8, /* +0x7bc */
-    0x000e2a8c, /* -> FUN_000e2a8c */ /* +0x7c0 */
+    0x000e2a8c, /* -> IRStartMakeCall__acceptCallPseudo */ /* +0x7c0 */
     0x001cd6b4, /* +0x7c4 */
     0x001cd6e0, /* +0x7c8 */
     0x001cd6e8, /* +0x7cc */
@@ -516,7 +516,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x804 */
     0x001cd770, /* +0x808 */
     0x001cd778, /* +0x80c */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x810 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x810 */
     0x001cd780, /* +0x814 */
     0x001cd788, /* +0x818 */
     0x001cd790, /* +0x81c */
@@ -525,20 +525,20 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0x828 */
     0x001cd7a8, /* +0x82c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x830 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x834 */
-    0x001cd7bc, /* -> FUN_001cd7bc */ /* +0x838 */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x834 */
+    0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x838 */
     0x00000000, /* +0x83c */
     0x00000000, /* +0x840 */
     0x001f0f50, /* -> __const_coal+0x48 */ /* +0x844 */
     0x001cdba4, /* -> IRInst__dtor_1cdba4 */ /* +0x848 */
     0x001cd908, /* -> IRInst__dtor_1cd908 */ /* +0x84c */
-    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x850 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x854 */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x858 */
+    0x0010647c, /* -> IRInst__validate */ /* +0x850 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x854 */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x858 */
     0x001cd7b0, /* +0x85c */
     0x001cd6a8, /* +0x860 */
     0x001cd7b8, /* +0x864 */
-    0x000e2aa8, /* -> FUN_000e2aa8 */ /* +0x868 */
+    0x000e2aa8, /* -> IREndMakeCall__acceptCallPseudo */ /* +0x868 */
     0x001cd6b4, /* +0x86c */
     0x001cd6e0, /* +0x870 */
     0x001cd6e8, /* +0x874 */
@@ -558,7 +558,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x8ac */
     0x001cd770, /* +0x8b0 */
     0x001cd778, /* +0x8b4 */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x8b8 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x8b8 */
     0x001cd780, /* +0x8bc */
     0x001cd788, /* +0x8c0 */
     0x001cd790, /* +0x8c4 */
@@ -567,8 +567,8 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0x8d0 */
     0x001cd7a8, /* +0x8d4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x8d8 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x8dc */
-    0x001cd7bc, /* -> FUN_001cd7bc */ /* +0x8e0 */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x8dc */
+    0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x8e0 */
     0x00000000, /* +0x8e4 */
     0x00000000, /* +0x8e8 */
     0x001f0f08, /* -> __const_coal+0x0 */ /* +0x8ec */
@@ -598,7 +598,7 @@ const unsigned int sectDATA___const[2670] = {
     0x00000000, /* +0x94c */
     0x00000000, /* +0x950 */
     0x00000000, /* +0x954 */
-    0x000e3140, /* -> FUN_000e3140 */ /* +0x958 */
+    0x000e3140, /* -> MachineAssembler__visitIfHeaderStatic */ /* +0x958 */
     0x00000000, /* +0x95c */
     0x00000000, /* +0x960 */
     0x00000000, /* +0x964 */
@@ -606,7 +606,7 @@ const unsigned int sectDATA___const[2670] = {
     0x00000000, /* +0x96c */
     0x00000000, /* +0x970 */
     0x00000000, /* +0x974 */
-    0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x978 */
+    0x000e2fd8, /* -> MachineAssembler__vslot34 */ /* +0x978 */
     0x000e2ac4, /* +0x97c */
     0x00000000, /* +0x980 */
     0x00000000, /* +0x984 */
@@ -639,9 +639,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc4c, /* +0x9f0 */
     0x001cdc54, /* +0x9f4 */
     0x001cdc5c, /* +0x9f8 */
-    0x000e2860, /* -> FUN_000e2860 */ /* +0x9fc */
-    0x000e84fc, /* -> FUN_000e84fc */ /* +0xa00 */
-    0x001cdc64, /* -> FUN_001cdc64 */ /* +0xa04 */
+    0x000e2860, /* -> Block__accept */ /* +0x9fc */
+    0x000e84fc, /* -> Block__verify */ /* +0xa00 */
+    0x001cdc64, /* -> Block__getKindName */ /* +0xa04 */
     0x00000000, /* +0xa08 */
     0x001f10f0, /* -> __const_coal+0x1e8 */ /* +0xa0c */
     0x001cdf28, /* -> FuncEndBlock__dtor */ /* +0xa10 */
@@ -661,9 +661,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc4c, /* +0xa48 */
     0x001cdc54, /* +0xa4c */
     0x001cdc5c, /* +0xa50 */
-    0x000e2860, /* -> FUN_000e2860 */ /* +0xa54 */
-    0x000e84fc, /* -> FUN_000e84fc */ /* +0xa58 */
-    0x001cde18, /* -> FUN_001cde18 */ /* +0xa5c */
+    0x000e2860, /* -> Block__accept */ /* +0xa54 */
+    0x000e84fc, /* -> Block__verify */ /* +0xa58 */
+    0x001cde18, /* -> FuncEndBlock__getKindName */ /* +0xa5c */
     0x00000000, /* +0xa60 */
     0x001f1050, /* -> __const_coal+0x148 */ /* +0xa64 */
     0x001cdfb4, /* -> LoopHeader__dtor */ /* +0xa68 */
@@ -684,8 +684,8 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc54, /* +0xaa4 */
     0x001cdc5c, /* +0xaa8 */
     0x000e2950, /* +0xaac */
-    0x000e86f0, /* -> FUN_000e86f0 */ /* +0xab0 */
-    0x000e77c0, /* -> FUN_000e77c0 */ /* +0xab4 */
+    0x000e86f0, /* -> LoopHeader__verify */ /* +0xab0 */
+    0x000e77c0, /* -> LoopHeader__getKindName */ /* +0xab4 */
     0x00000000, /* +0xab8 */
     0x001f1060, /* -> __const_coal+0x158 */ /* +0xabc */
     0x001ce040, /* -> LoopFooter__dtor */ /* +0xac0 */
@@ -707,7 +707,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc5c, /* +0xb00 */
     0x000e2974, /* +0xb04 */
     0x000e86ec, /* +0xb08 */
-    0x001cdcfc, /* -> FUN_001cdcfc */ /* +0xb0c */
+    0x001cdcfc, /* -> LoopFooter__getKindName */ /* +0xb0c */
     0x00000000, /* +0xb10 */
     0x001f1070, /* -> __const_coal+0x168 */ /* +0xb14 */
     0x001ce0cc, /* -> PostLoopFooter__dtor */ /* +0xb18 */
@@ -729,7 +729,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc5c, /* +0xb58 */
     0x000e2998, /* +0xb5c */
     0x000e86e8, /* +0xb60 */
-    0x001cdd20, /* -> FUN_001cdd20 */ /* +0xb64 */
+    0x001cdd20, /* -> PostLoopFooter__getKindName */ /* +0xb64 */
     0x00000000, /* +0xb68 */
     0x001f1080, /* -> __const_coal+0x178 */ /* +0xb6c */
     0x001ce158, /* -> IfHeader__dtor_1ce158 */ /* +0xb70 */
@@ -751,7 +751,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc5c, /* +0xbb0 */
     0x000e2884, /* +0xbb4 */
     0x000e86e4, /* +0xbb8 */
-    0x001cdd44, /* -> FUN_001cdd44 */ /* +0xbbc */
+    0x001cdd44, /* -> IfHeader__getKindName */ /* +0xbbc */
     0x00000000, /* +0xbc0 */
     0x001f1090, /* -> __const_coal+0x188 */ /* +0xbc4 */
     0x001ce1e4, /* -> IfHeader__dtor_1ce1e4 */ /* +0xbc8 */
@@ -773,7 +773,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdd7c, /* +0xc08 */
     0x000e28cc, /* +0xc0c */
     0x000e86e0, /* +0xc10 */
-    0x001cdd60, /* -> FUN_001cdd60 */ /* +0xc14 */
+    0x001cdd60, /* -> IfHeaderStatic__getKindName */ /* +0xc14 */
     0x00000000, /* +0xc18 */
     0x001f10a0, /* -> __const_coal+0x198 */ /* +0xc1c */
     0x001ce270, /* -> IfFooter__dtor_1ce270 */ /* +0xc20 */
@@ -795,7 +795,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc5c, /* +0xc60 */
     0x000e28a8, /* +0xc64 */
     0x000e86dc, /* +0xc68 */
-    0x001cdd84, /* -> FUN_001cdd84 */ /* +0xc6c */
+    0x001cdd84, /* -> IfFooter__getKindName */ /* +0xc6c */
     0x00000000, /* +0xc70 */
     0x001f10b0, /* -> __const_coal+0x1a8 */ /* +0xc74 */
     0x001ce2fc, /* -> IfFooter__dtor_1ce2fc */ /* +0xc78 */
@@ -815,9 +815,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc4c, /* +0xcb0 */
     0x001cdc54, /* +0xcb4 */
     0x001cddc4, /* +0xcb8 */
-    0x000e28f0, /* -> FUN_000e28f0 */ /* +0xcbc */
+    0x000e28f0, /* -> IfFooterStatic__accept */ /* +0xcbc */
     0x000e86d8, /* +0xcc0 */
-    0x001cdda8, /* -> FUN_001cdda8 */ /* +0xcc4 */
+    0x001cdda8, /* -> IfFooterStatic__getKindName */ /* +0xcc4 */
     0x00000000, /* +0xcc8 */
     0x001f10c0, /* -> __const_coal+0x1b8 */ /* +0xccc */
     0x001ce53c, /* -> BreakBlock__dtor */ /* +0xcd0 */
@@ -839,7 +839,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc5c, /* +0xd10 */
     0x000e29bc, /* +0xd14 */
     0x000e86d4, /* +0xd18 */
-    0x001cddcc, /* -> FUN_001cddcc */ /* +0xd1c */
+    0x001cddcc, /* -> BreakBlock__getKindName */ /* +0xd1c */
     0x00000000, /* +0xd20 */
     0x001f10e0, /* -> __const_coal+0x1d8 */ /* +0xd24 */
     0x001ce5e8, /* -> ContinueBlock__dtor */ /* +0xd28 */
@@ -861,7 +861,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc5c, /* +0xd68 */
     0x000e29e0, /* +0xd6c */
     0x000e86d0, /* +0xd70 */
-    0x001cddf0, /* -> FUN_001cddf0 */ /* +0xd74 */
+    0x001cddf0, /* -> ContinueBlock__getKindName */ /* +0xd74 */
     0x00000000, /* +0xd78 */
     0x001f1040, /* -> __const_coal+0x138 */ /* +0xd7c */
     0x001ce48c, /* -> ExitBlock__dtor */ /* +0xd80 */
@@ -881,15 +881,15 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc4c, /* +0xdb8 */
     0x001cdc54, /* +0xdbc */
     0x001cdc5c, /* +0xdc0 */
-    0x000e2860, /* -> FUN_000e2860 */ /* +0xdc4 */
+    0x000e2860, /* -> Block__accept */ /* +0xdc4 */
     0x000e87dc, /* +0xdc8 */
-    0x001cdcd0, /* -> FUN_001cdcd0 */ /* +0xdcc */
+    0x001cdcd0, /* -> ExitBlock__getKindName */ /* +0xdcc */
     0x00000000, /* +0xdd0 */
     0x001f1030, /* -> __const_coal+0x128 */ /* +0xdd4 */
     0x001ce518, /* -> EntryBlock__dtor */ /* +0xdd8 */
     0x001cde34, /* -> EntryBlock__deleting_dtor */ /* +0xddc */
     0x000e9e88, /* -> Block__clone */ /* +0xde0 */
-    0x000e7cf0, /* -> EntryBlock__vslot3 */ /* +0xde4 */
+    0x000e7cf0, /* -> EntryBlock__insertInstruction */ /* +0xde4 */
     0x001cdbfc, /* +0xde8 */
     0x001cdc04, /* +0xdec */
     0x001cdc0c, /* +0xdf0 */
@@ -903,9 +903,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001cdc4c, /* +0xe10 */
     0x001cdc54, /* +0xe14 */
     0x001cdc5c, /* +0xe18 */
-    0x000e2860, /* -> FUN_000e2860 */ /* +0xe1c */
+    0x000e2860, /* -> Block__accept */ /* +0xe1c */
     0x000e87e0, /* +0xe20 */
-    0x001cdc88, /* -> FUN_001cdc88 */ /* +0xe24 */
+    0x001cdc88, /* -> EntryBlock__getKindName */ /* +0xe24 */
     0x001ae228, /* +0xe28 */
     0x001ae4a8, /* +0xe2c */
     0x001ae310, /* +0xe30 */
@@ -928,9 +928,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001f11c0, /* -> __const_coal+0x2b8 */ /* +0xe74 */
     0x001ced3c, /* -> IRInst__dtor_1ced3c */ /* +0xe78 */
     0x001ced70, /* -> IRInst__deleting_dtor */ /* +0xe7c */
-    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xe80 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xe84 */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xe88 */
+    0x0010647c, /* -> IRInst__validate */ /* +0xe80 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0xe84 */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0xe88 */
     0x001cecb8, /* +0xe8c */
     0x001cd6a8, /* +0xe90 */
     0x001ce61c, /* +0xe94 */
@@ -954,7 +954,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0xedc */
     0x001cd770, /* +0xee0 */
     0x001cd778, /* +0xee4 */
-    0x0010437c, /* -> FUN_0010437c */ /* +0xee8 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0xee8 */
     0x001cd780, /* +0xeec */
     0x001cd788, /* +0xef0 */
     0x001cd790, /* +0xef4 */
@@ -963,16 +963,16 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0xf00 */
     0x001cd7a8, /* +0xf04 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xf08 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0xf0c */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0xf0c */
     0x001ce690, /* +0xf10 */
     0x00000000, /* +0xf14 */
     0x00000000, /* +0xf18 */
     0x001f1220, /* -> __const_coal+0x318 */ /* +0xf1c */
     0x001cfcbc, /* -> IRInst__dtor_1cfcbc */ /* +0xf20 */
     0x001cfcf0, /* -> IRInst__dtor_1cfcf0 */ /* +0xf24 */
-    0x00106ba0, /* -> IRMix__vslot2 */ /* +0xf28 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xf2c */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xf30 */
+    0x00106ba0, /* -> IRMix__validate */ /* +0xf28 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0xf2c */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0xf30 */
     0x001ce914, /* +0xf34 */
     0x001ce90c, /* +0xf38 */
     0x001cd7b8, /* +0xf3c */
@@ -996,7 +996,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0xf84 */
     0x001cd770, /* +0xf88 */
     0x001cd778, /* +0xf8c */
-    0x0010437c, /* -> FUN_0010437c */ /* +0xf90 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0xf90 */
     0x001cd780, /* +0xf94 */
     0x001cd788, /* +0xf98 */
     0x001cd790, /* +0xf9c */
@@ -1006,15 +1006,15 @@ const unsigned int sectDATA___const[2670] = {
     0x001ce950, /* +0xfac */
     0x001ce944, /* +0xfb0 */
     0x001ce948, /* +0xfb4 */
-    0x001ce91c, /* -> FUN_001ce91c */ /* +0xfb8 */
+    0x001ce91c, /* -> IRMix__getKindName */ /* +0xfb8 */
     0x00000000, /* +0xfbc */
     0x00000000, /* +0xfc0 */
     0x001f1240, /* -> __const_coal+0x338 */ /* +0xfc4 */
     0x001cf608, /* -> IRInst__dtor_1cf608 */ /* +0xfc8 */
     0x001cee34, /* -> IRInst__dtor_1cee34 */ /* +0xfcc */
     0x00106800, /* +0xfd0 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xfd4 */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xfd8 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0xfd4 */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0xfd8 */
     0x001ceaf0, /* +0xfdc */
     0x001ceae8, /* +0xfe0 */
     0x001ceaf8, /* +0xfe4 */
@@ -1038,7 +1038,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x102c */
     0x001ceb30, /* +0x1030 */
     0x001cd778, /* +0x1034 */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x1038 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1038 */
     0x001cd780, /* +0x103c */
     0x001cd788, /* +0x1040 */
     0x001cd790, /* +0x1044 */
@@ -1047,16 +1047,16 @@ const unsigned int sectDATA___const[2670] = {
     0x001cec6c, /* +0x1050 */
     0x001cd7a8, /* +0x1054 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1058 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x105c */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x105c */
     0x001ceb14, /* +0x1060 */
     0x00000000, /* +0x1064 */
     0x00000000, /* +0x1068 */
     0x001f1230, /* -> __const_coal+0x328 */ /* +0x106c */
     0x001cfd38, /* -> IRInst__dtor_1cfd38 */ /* +0x1070 */
     0x001cfd6c, /* -> IRInst__dtor_1cfd6c */ /* +0x1074 */
-    0x00106780, /* -> IRPhiNode__vslot2 */ /* +0x1078 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x107c */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1080 */
+    0x00106780, /* -> IRPhiNode__validate */ /* +0x1078 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x107c */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x1080 */
     0x001ce978, /* +0x1084 */
     0x001cd6a8, /* +0x1088 */
     0x001cd7b8, /* +0x108c */
@@ -1080,7 +1080,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x10d4 */
     0x001cd770, /* +0x10d8 */
     0x001cd778, /* +0x10dc */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x10e0 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x10e0 */
     0x001cd780, /* +0x10e4 */
     0x001cd788, /* +0x10e8 */
     0x001ce958, /* +0x10ec */
@@ -1090,15 +1090,15 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a8, /* +0x10fc */
     0x001ce984, /* +0x1100 */
     0x001ce988, /* +0x1104 */
-    0x001ce95c, /* -> FUN_001ce95c */ /* +0x1108 */
+    0x001ce95c, /* -> IRPhiNode__getKindName */ /* +0x1108 */
     0x00000000, /* +0x110c */
     0x00000000, /* +0x1110 */
     0x001f1200, /* -> __const_coal+0x2f8 */ /* +0x1114 */
     0x001cfdb4, /* -> IRInst__dtor_1cfdb4 */ /* +0x1118 */
     0x001cfde8, /* -> IRInst__dtor_1cfde8 */ /* +0x111c */
-    0x00106cb4, /* -> IRPresub1__vslot2 */ /* +0x1120 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x1124 */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1128 */
+    0x00106cb4, /* -> IRPresub1__validate */ /* +0x1120 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x1124 */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x1128 */
     0x001ce88c, /* +0x112c */
     0x001ce884, /* +0x1130 */
     0x001cd7b8, /* +0x1134 */
@@ -1122,7 +1122,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x117c */
     0x001cd770, /* +0x1180 */
     0x001cd778, /* +0x1184 */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x1188 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1188 */
     0x001cd780, /* +0x118c */
     0x001cd788, /* +0x1190 */
     0x001cd790, /* +0x1194 */
@@ -1132,15 +1132,15 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a8, /* +0x11a4 */
     0x001ce8bc, /* +0x11a8 */
     0x001ce8c0, /* +0x11ac */
-    0x001ce894, /* -> FUN_001ce894 */ /* +0x11b0 */
+    0x001ce894, /* -> IRPresub1__getKindName */ /* +0x11b0 */
     0x00000000, /* +0x11b4 */
     0x00000000, /* +0x11b8 */
     0x001f1210, /* -> __const_coal+0x308 */ /* +0x11bc */
     0x001cfe30, /* -> IRInst__dtor_1cfe30 */ /* +0x11c0 */
     0x001cfe64, /* -> IRInst__dtor_1cfe64 */ /* +0x11c4 */
-    0x0010673c, /* -> IRPresub2__vslot2 */ /* +0x11c8 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x11cc */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x11d0 */
+    0x0010673c, /* -> IRPresub2__validate */ /* +0x11c8 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x11cc */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x11d0 */
     0x001ce8d0, /* +0x11d4 */
     0x001ce8c8, /* +0x11d8 */
     0x001cd7b8, /* +0x11dc */
@@ -1164,7 +1164,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x1224 */
     0x001cd770, /* +0x1228 */
     0x001cd778, /* +0x122c */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x1230 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1230 */
     0x001cd780, /* +0x1234 */
     0x001cd788, /* +0x1238 */
     0x001cd790, /* +0x123c */
@@ -1174,15 +1174,15 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a8, /* +0x124c */
     0x001ce900, /* +0x1250 */
     0x001ce904, /* +0x1254 */
-    0x001ce8d8, /* -> FUN_001ce8d8 */ /* +0x1258 */
+    0x001ce8d8, /* -> IRPresub2__getKindName */ /* +0x1258 */
     0x00000000, /* +0x125c */
     0x00000000, /* +0x1260 */
     0x001f11f0, /* -> __const_coal+0x2e8 */ /* +0x1264 */
     0x001cfeac, /* -> IRInst__dtor_1cfeac */ /* +0x1268 */
     0x001cfee0, /* -> IRInst__dtor_1cfee0 */ /* +0x126c */
-    0x001066e8, /* -> IRProjection__vslot2 */ /* +0x1270 */
-    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x1274 */
-    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1278 */
+    0x001066e8, /* -> IRProjection__validate */ /* +0x1270 */
+    0x00105b7c, /* -> IRInst__removeFromListEx */ /* +0x1274 */
+    0x00105a44, /* -> IRInst__removeFromList */ /* +0x1278 */
     0x001ce858, /* +0x127c */
     0x001ce850, /* +0x1280 */
     0x001cd7b8, /* +0x1284 */
@@ -1206,7 +1206,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x12cc */
     0x001cd770, /* +0x12d0 */
     0x001cd778, /* +0x12d4 */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x12d8 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x12d8 */
     0x001cd780, /* +0x12dc */
     0x001cd788, /* +0x12e0 */
     0x001cd790, /* +0x12e4 */
@@ -1215,15 +1215,15 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0x12f0 */
     0x001cd7a8, /* +0x12f4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x12f8 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x12fc */
-    0x001ce860, /* -> FUN_001ce860 */ /* +0x1300 */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x12fc */
+    0x001ce860, /* -> IRProjection__getKindName */ /* +0x1300 */
     0x00000000, /* +0x1304 */
     0x00000000, /* +0x1308 */
     0x001f11d0, /* -> __const_coal+0x2c8 */ /* +0x130c */
     0x001cf63c, /* -> IRInst__dtor_1cf63c */ /* +0x1310 */
     0x001cee7c, /* -> IRInst__dtor_1cee7c */ /* +0x1314 */
-    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1318 */
-    0x00104e20, /* -> IRLoadConst__vslot3 */ /* +0x131c */
+    0x0010647c, /* -> IRInst__validate */ /* +0x1318 */
+    0x00104e20, /* -> IRLoadConst__removeFromListEx */ /* +0x131c */
     0x0010451c, /* +0x1320 */
     0x001cd7b0, /* +0x1324 */
     0x001cd6a8, /* +0x1328 */
@@ -1248,7 +1248,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd768, /* +0x1374 */
     0x001cd770, /* +0x1378 */
     0x001cd778, /* +0x137c */
-    0x0010437c, /* -> FUN_0010437c */ /* +0x1380 */
+    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1380 */
     0x001cd780, /* +0x1384 */
     0x001cd788, /* +0x1388 */
     0x001cd790, /* +0x138c */
@@ -1257,49 +1257,49 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7d8, /* +0x1398 */
     0x001cd7a8, /* +0x139c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x13a0 */
-    0x001069e8, /* -> FUN_001069e8 */ /* +0x13a4 */
-    0x001ce774, /* -> FUN_001ce774 */ /* +0x13a8 */
+    0x001069e8, /* -> IRInst__vslot37 */ /* +0x13a4 */
+    0x001ce774, /* -> IRLoadConst__getKindName */ /* +0x13a8 */
     0x00000000, /* +0x13ac */
     0x00000000, /* +0x13b0 */
-    0x00107ad0, /* -> FUN_00107ad0 */ /* +0x13b4 */
+    0x00107ad0, /* -> IRLoadConst__vslot41 */ /* +0x13b4 */
     0x00000001, /* +0x13b8 */
-    0x00107e70, /* -> FUN_00107e70 */ /* +0x13bc */
+    0x00107e70, /* -> IRLoadConst__vslot43 */ /* +0x13bc */
     0x00000002, /* +0x13c0 */
-    0x00108534, /* -> FUN_00108534 */ /* +0x13c4 */
+    0x00108534, /* -> IRLoadConst__vslot45 */ /* +0x13c4 */
     0x00000003, /* +0x13c8 */
-    0x0010823c, /* -> FUN_0010823c */ /* +0x13cc */
+    0x0010823c, /* -> IRLoadConst__vslot47 */ /* +0x13cc */
     0x00000004, /* +0x13d0 */
-    0x001083cc, /* -> FUN_001083cc */ /* +0x13d4 */
+    0x001083cc, /* -> IRLoadConst__vslot49 */ /* +0x13d4 */
     0x00000005, /* +0x13d8 */
-    0x00107c70, /* -> FUN_00107c70 */ /* +0x13dc */
+    0x00107c70, /* -> IRLoadConst__vslot51 */ /* +0x13dc */
     0x00000006, /* +0x13e0 */
-    0x00108bec, /* -> FUN_00108bec */ /* +0x13e4 */
+    0x00108bec, /* -> IRLoadConst__vslot53 */ /* +0x13e4 */
     0x00000007, /* +0x13e8 */
-    0x00108064, /* -> FUN_00108064 */ /* +0x13ec */
+    0x00108064, /* -> IRLoadConst__vslot55 */ /* +0x13ec */
     0x00000008, /* +0x13f0 */
-    0x0010a758, /* -> FUN_0010a758 */ /* +0x13f4 */
+    0x0010a758, /* -> IRLoadConst__vslot57 */ /* +0x13f4 */
     0x00000009, /* +0x13f8 */
-    0x001077e8, /* -> FUN_001077e8 */ /* +0x13fc */
+    0x001077e8, /* -> IRLoadConst__vslot59 */ /* +0x13fc */
     0x0000000a, /* +0x1400 */
-    0x00109e84, /* -> FUN_00109e84 */ /* +0x1404 */
+    0x00109e84, /* -> IRLoadConst__vslot61 */ /* +0x1404 */
     0x0000000b, /* +0x1408 */
-    0x00108ee0, /* -> FUN_00108ee0 */ /* +0x140c */
+    0x00108ee0, /* -> IRLoadConst__vslot63 */ /* +0x140c */
     0x0000000c, /* +0x1410 */
-    0x0010a5a4, /* -> FUN_0010a5a4 */ /* +0x1414 */
+    0x0010a5a4, /* -> IRLoadConst__vslot65 */ /* +0x1414 */
     0x0000000d, /* +0x1418 */
-    0x00109fa0, /* -> FUN_00109fa0 */ /* +0x141c */
+    0x00109fa0, /* -> IRLoadConst__vslot67 */ /* +0x141c */
     0x0000000e, /* +0x1420 */
-    0x0010a0c4, /* -> FUN_0010a0c4 */ /* +0x1424 */
+    0x0010a0c4, /* -> IRLoadConst__vslot69 */ /* +0x1424 */
     0x0000000f, /* +0x1428 */
-    0x001078b0, /* -> FUN_001078b0 */ /* +0x142c */
+    0x001078b0, /* -> IRLoadConst__vslot71 */ /* +0x142c */
     0x00000010, /* +0x1430 */
-    0x0010a240, /* -> FUN_0010a240 */ /* +0x1434 */
+    0x0010a240, /* -> IRLoadConst__vslot73 */ /* +0x1434 */
     0x00000011, /* +0x1438 */
-    0x00107464, /* -> FUN_00107464 */ /* +0x143c */
+    0x00107464, /* -> IRLoadConst__vslot75 */ /* +0x143c */
     0x00000012, /* +0x1440 */
-    0x00108ad8, /* -> FUN_00108ad8 */ /* +0x1444 */
+    0x00108ad8, /* -> IRLoadConst__vslot77 */ /* +0x1444 */
     0x00000013, /* +0x1448 */
-    0x00109d50, /* -> FUN_00109d50 */ /* +0x144c */
+    0x00109d50, /* -> IRLoadConst__vslot79 */ /* +0x144c */
     0x00000014, /* +0x1450 */
     0x00000000, /* +0x1454 */
     0x00000000, /* +0x1458 */
@@ -1311,10 +1311,10 @@ const unsigned int sectDATA___const[2670] = {
     0x001cfff8, /* +0x1470 */
     0x001cfffc, /* +0x1474 */
     0x00000000, /* +0x1478 */
-    0x001d0000, /* -> FUN_001d0000 */ /* +0x147c */
-    0x0010ddfc, /* -> FUN_0010ddfc */ /* +0x1480 */
-    0x0010de34, /* -> FUN_0010de34 */ /* +0x1484 */
-    0x0010dcc4, /* -> FUN_0010dcc4 */ /* +0x1488 */
+    0x001d0000, /* -> HwLimits__vslot7 */ /* +0x147c */
+    0x0010ddfc, /* -> HwLimits__vslot8 */ /* +0x1480 */
+    0x0010de34, /* -> HwLimits__vslot9 */ /* +0x1484 */
+    0x0010dcc4, /* -> HwLimits__vslot10 */ /* +0x1488 */
     0x001d0020, /* +0x148c */
     0x001d0028, /* +0x1490 */
     0x001d0030, /* +0x1494 */
@@ -1324,11 +1324,11 @@ const unsigned int sectDATA___const[2670] = {
     0x00000000, /* +0x14a4 */
     0x001d0040, /* +0x14a8 */
     0x0010dcfc, /* +0x14ac */
-    0x0010dd08, /* -> FUN_0010dd08 */ /* +0x14b0 */
+    0x0010dd08, /* -> HwLimits__vslot20 */ /* +0x14b0 */
     0x001d0048, /* +0x14b4 */
     0x001d004c, /* +0x14b8 */
     0x001d0050, /* +0x14bc */
-    0x0010da84, /* -> FUN_0010da84 */ /* +0x14c0 */
+    0x0010da84, /* -> HwLimits__vslot24 */ /* +0x14c0 */
     0x001d0054, /* +0x14c4 */
     0x00000000, /* +0x14c8 */
     0x00000000, /* +0x14cc */
@@ -1344,7 +1344,7 @@ const unsigned int sectDATA___const[2670] = {
     0x00000000, /* +0x14f4 */
     0x00000000, /* +0x14f8 */
     0x001d0068, /* +0x14fc */
-    0x001d0070, /* -> FUN_001d0070 */ /* +0x1500 */
+    0x001d0070, /* -> HwLimits__vslot40 */ /* +0x1500 */
     0x001d0090, /* +0x1504 */
     0x001d0098, /* +0x1508 */
     0x000ed29c, /* +0x150c */
@@ -1374,19 +1374,19 @@ const unsigned int sectDATA___const[2670] = {
     0x00000000, /* +0x156c */
     0x001d0140, /* +0x1570 */
     0x001d0144, /* +0x1574 */
-    0x001d014c, /* -> FUN_001d014c */ /* +0x1578 */
+    0x001d014c, /* -> HwLimits__vslot70 */ /* +0x1578 */
     0x00000000, /* +0x157c */
     0x001d016c, /* +0x1580 */
     0x00000000, /* +0x1584 */
     0x00000000, /* +0x1588 */
     0x00000000, /* +0x158c */
     0x00000000, /* +0x1590 */
-    0x0010dcb8, /* -> FUN_0010dcb8 */ /* +0x1594 */
+    0x0010dcb8, /* -> HwLimits__vslot77 */ /* +0x1594 */
     0x001d0174, /* +0x1598 */
     0x001d017c, /* +0x159c */
     0x001d0184, /* +0x15a0 */
-    0x00138694, /* -> FUN_00138694 */ /* +0x15a4 */
-    0x001322a8, /* -> FUN_001322a8 */ /* +0x15a8 */
+    0x00138694, /* -> HwLimits__vslot81 */ /* +0x15a4 */
+    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x15a8 */
     0x001d018c, /* +0x15ac */
     0x001d0190, /* +0x15b0 */
     0x00000000, /* +0x15b4 */
@@ -1416,7 +1416,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d78d0, /* +0x1614 */
     0x001d78d8, /* +0x1618 */
     0x001d78e0, /* +0x161c */
-    0x00122ed8, /* -> FUN_00122ed8 */ /* +0x1620 */
+    0x00122ed8, /* -> ExportValue__vslot10 */ /* +0x1620 */
     0x001d7928, /* +0x1624 */
     0x00000000, /* +0x1628 */
     0x001f60e8, /* -> __const_coal+0x51e0 */ /* +0x162c */
@@ -1430,13 +1430,13 @@ const unsigned int sectDATA___const[2670] = {
     0x001d78d0, /* +0x164c */
     0x001d78d8, /* +0x1650 */
     0x001d78e0, /* +0x1654 */
-    0x00123a34, /* -> FUN_00123a34 */ /* +0x1658 */
+    0x00123a34, /* -> Interpolator__vslot10 */ /* +0x1658 */
     0x001d7900, /* +0x165c */
     0x00000000, /* +0x1660 */
     0x001f6120, /* -> __const_coal+0x5218 */ /* +0x1664 */
     0x001d7e50, /* -> TempValue__dtor_1d7e50 */ /* +0x1668 */
     0x001d7e84, /* -> TempValue__deleting_dtor */ /* +0x166c */
-    0x001240a8, /* -> TempValue__vslot2 */ /* +0x1670 */
+    0x001240a8, /* -> TempValue__clone */ /* +0x1670 */
     0x001d78b0, /* +0x1674 */
     0x001d78b8, /* +0x1678 */
     0x001d78c0, /* +0x167c */
@@ -1450,7 +1450,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6150, /* -> __const_coal+0x5248 */ /* +0x169c */
     0x001d7ecc, /* -> ExportSlot__dtor */ /* +0x16a0 */
     0x001d7f00, /* -> ExportSlot__deleting_dtor */ /* +0x16a4 */
-    0x001241fc, /* -> ExportSlot__vslot2 */ /* +0x16a8 */
+    0x001241fc, /* -> ExportSlot__clone */ /* +0x16a8 */
     0x001d78b0, /* +0x16ac */
     0x001d78b8, /* +0x16b0 */
     0x001d78c0, /* +0x16b4 */
@@ -1464,7 +1464,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6140, /* -> __const_coal+0x5238 */ /* +0x16d4 */
     0x001d7f48, /* -> Resource__dtor */ /* +0x16d8 */
     0x001d7f7c, /* -> Resource__deleting_dtor */ /* +0x16dc */
-    0x0012434c, /* -> Resource__vslot2 */ /* +0x16e0 */
+    0x0012434c, /* -> Resource__clone */ /* +0x16e0 */
     0x001d78b0, /* +0x16e4 */
     0x001d78b8, /* +0x16e8 */
     0x001d78c0, /* +0x16ec */
@@ -1478,7 +1478,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6110, /* -> __const_coal+0x5208 */ /* +0x170c */
     0x001d7fc4, /* -> VertexRegister__dtor */ /* +0x1710 */
     0x001d7ff8, /* -> VertexRegister__deleting_dtor */ /* +0x1714 */
-    0x00123288, /* -> VertexRegister__vslot2 */ /* +0x1718 */
+    0x00123288, /* -> VertexRegister__clone */ /* +0x1718 */
     0x001d78b0, /* +0x171c */
     0x001d78b8, /* +0x1720 */
     0x001d7910, /* +0x1724 */
@@ -1492,7 +1492,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6100, /* -> __const_coal+0x51f8 */ /* +0x1744 */
     0x001d8040, /* -> FixedValue__dtor */ /* +0x1748 */
     0x001d8074, /* -> FixedValue__deleting_dtor */ /* +0x174c */
-    0x0012447c, /* -> FixedValue__vslot2 */ /* +0x1750 */
+    0x0012447c, /* -> FixedValue__clone */ /* +0x1750 */
     0x001d78b0, /* +0x1754 */
     0x001d78b8, /* +0x1758 */
     0x001d7908, /* +0x175c */
@@ -1506,7 +1506,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6160, /* -> __const_coal+0x5258 */ /* +0x177c */
     0x001d80bc, /* -> ImmedConstBuffer__dtor */ /* +0x1780 */
     0x001d79ac, /* -> ImmedConstBuffer__deleting_dtor */ /* +0x1784 */
-    0x001230e4, /* -> ImmedConstBuffer__vslot2 */ /* +0x1788 */
+    0x001230e4, /* -> ImmedConstBuffer__clone */ /* +0x1788 */
     0x001d78b0, /* +0x178c */
     0x001d78b8, /* +0x1790 */
     0x001d78c0, /* +0x1794 */
@@ -1519,199 +1519,199 @@ const unsigned int sectDATA___const[2670] = {
     0x001a4438, /* -> cstring @0x1a4438 */ /* +0x17b0 */
     0x00000201, /* +0x17b4 */
     0x00000000, /* +0x17b8 */
-    0x00126984, /* -> FUN_00126984 */ /* +0x17bc */
+    0x00126984, /* -> ImmedConstBuffer__vslot15 */ /* +0x17bc */
     0x001a9cb0, /* -> cstring @0x1a9cb0 */ /* +0x17c0 */
     0x00000201, /* +0x17c4 */
     0x00000000, /* +0x17c8 */
-    0x00126984, /* -> FUN_00126984 */ /* +0x17cc */
+    0x00126984, /* -> ImmedConstBuffer__vslot15 */ /* +0x17cc */
     0x001a4428, /* -> cstring @0x1a4428 */ /* +0x17d0 */
     0x000002d0, /* +0x17d4 */
     0x01000000, /* +0x17d8 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x17dc */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x17dc */
     0x001a4450, /* -> cstring @0x1a4450 */ /* +0x17e0 */
     0x00000040, /* +0x17e4 */
     0x00000000, /* +0x17e8 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x17ec */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x17ec */
     0x001a444c, /* -> cstring @0x1a444c */ /* +0x17f0 */
     0x00000040, /* +0x17f4 */
     0x00000000, /* +0x17f8 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x17fc */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x17fc */
     0x001a9cb4, /* -> cstring @0x1a9cb4 */ /* +0x1800 */
     0x00000802, /* +0x1804 */
     0x00000000, /* +0x1808 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x180c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x180c */
     0x001a9cbc, /* -> cstring @0x1a9cbc */ /* +0x1810 */
     0x00000002, /* +0x1814 */
     0x00000000, /* +0x1818 */
-    0x001271d8, /* -> FUN_001271d8 */ /* +0x181c */
+    0x001271d8, /* -> ImmedConstBuffer__vslot39 */ /* +0x181c */
     0x001a9cc0, /* -> cstring @0x1a9cc0 */ /* +0x1820 */
     0x00000002, /* +0x1824 */
     0x00000000, /* +0x1828 */
-    0x001271d8, /* -> FUN_001271d8 */ /* +0x182c */
+    0x001271d8, /* -> ImmedConstBuffer__vslot39 */ /* +0x182c */
     0x001a9cc4, /* -> cstring @0x1a9cc4 */ /* +0x1830 */
     0x00000002, /* +0x1834 */
     0x00000000, /* +0x1838 */
-    0x001271d8, /* -> FUN_001271d8 */ /* +0x183c */
+    0x001271d8, /* -> ImmedConstBuffer__vslot39 */ /* +0x183c */
     0x001a9cc8, /* -> cstring @0x1a9cc8 */ /* +0x1840 */
     0x00000002, /* +0x1844 */
     0x00000000, /* +0x1848 */
-    0x001271d8, /* -> FUN_001271d8 */ /* +0x184c */
+    0x001271d8, /* -> ImmedConstBuffer__vslot39 */ /* +0x184c */
     0x001a9ccc, /* -> cstring @0x1a9ccc */ /* +0x1850 */
     0x00000002, /* +0x1854 */
     0x00000000, /* +0x1858 */
-    0x001271d8, /* -> FUN_001271d8 */ /* +0x185c */
+    0x001271d8, /* -> ImmedConstBuffer__vslot39 */ /* +0x185c */
     0x001a4448, /* -> cstring @0x1a4448 */ /* +0x1860 */
     0x00000040, /* +0x1864 */
     0x00000000, /* +0x1868 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x186c */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x186c */
     0x001a9cd0, /* -> cstring @0x1a9cd0 */ /* +0x1870 */
     0x000002c0, /* +0x1874 */
     0x02000000, /* +0x1878 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x187c */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x187c */
     0x001a9cd4, /* -> cstring @0x1a9cd4 */ /* +0x1880 */
     0x00000101, /* +0x1884 */
     0x00000000, /* +0x1888 */
-    0x00126b28, /* -> FUN_00126b28 */ /* +0x188c */
+    0x00126b28, /* -> ImmedConstBuffer__vslot67 */ /* +0x188c */
     0x001a9cdc, /* -> cstring @0x1a9cdc */ /* +0x1890 */
     0x00000101, /* +0x1894 */
     0x00000000, /* +0x1898 */
-    0x00126bb4, /* -> FUN_00126bb4 */ /* +0x189c */
+    0x00126bb4, /* -> ImmedConstBuffer__vslot71 */ /* +0x189c */
     0x001a9ce4, /* -> cstring @0x1a9ce4 */ /* +0x18a0 */
     0x00000101, /* +0x18a4 */
     0x00000000, /* +0x18a8 */
-    0x00126b28, /* -> FUN_00126b28 */ /* +0x18ac */
+    0x00126b28, /* -> ImmedConstBuffer__vslot67 */ /* +0x18ac */
     0x001a9cec, /* -> cstring @0x1a9cec */ /* +0x18b0 */
     0x00000201, /* +0x18b4 */
     0x00000000, /* +0x18b8 */
-    0x0012714c, /* -> FUN_0012714c */ /* +0x18bc */
+    0x0012714c, /* -> ImmedConstBuffer__vslot79 */ /* +0x18bc */
     0x001a9cf0, /* -> cstring @0x1a9cf0 */ /* +0x18c0 */
     0x00000103, /* +0x18c4 */
     0x00000000, /* +0x18c8 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x18cc */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x18cc */
     0x001a9cf4, /* -> cstring @0x1a9cf4 */ /* +0x18d0 */
     0x00000101, /* +0x18d4 */
     0x00000000, /* +0x18d8 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x18dc */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x18dc */
     0x001a52e8, /* -> cstring @0x1a52e8 */ /* +0x18e0 */
     0x00000003, /* +0x18e4 */
     0x00000000, /* +0x18e8 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x18ec */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x18ec */
     0x001a9cf8, /* -> cstring @0x1a9cf8 */ /* +0x18f0 */
     0x00000b03, /* +0x18f4 */
     0x00000000, /* +0x18f8 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x18fc */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x18fc */
     0x001a9cfc, /* -> cstring @0x1a9cfc */ /* +0x1900 */
     0x00000b03, /* +0x1904 */
     0x00000000, /* +0x1908 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x190c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x190c */
     0x001a9d04, /* -> cstring @0x1a9d04 */ /* +0x1910 */
     0x00000703, /* +0x1914 */
     0x00000000, /* +0x1918 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x191c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x191c */
     0x001a9d0c, /* -> cstring @0x1a9d0c */ /* +0x1920 */
     0x00000703, /* +0x1924 */
     0x00000000, /* +0x1928 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x192c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x192c */
     0x001a9d14, /* -> cstring @0x1a9d14 */ /* +0x1930 */
     0x00000903, /* +0x1934 */
     0x00000000, /* +0x1938 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x193c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x193c */
     0x001a9d1c, /* -> cstring @0x1a9d1c */ /* +0x1940 */
     0x00000103, /* +0x1944 */
     0x00000000, /* +0x1948 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x194c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x194c */
     0x001a9d20, /* -> cstring @0x1a9d20 */ /* +0x1950 */
     0x00000001, /* +0x1954 */
     0x00000000, /* +0x1958 */
-    0x00126984, /* -> FUN_00126984 */ /* +0x195c */
+    0x00126984, /* -> ImmedConstBuffer__vslot15 */ /* +0x195c */
     0x001a9c14, /* -> cstring @0x1a9c14 */ /* +0x1960 */
     0x00000301, /* +0x1964 */
     0x00000000, /* +0x1968 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x196c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x196c */
     0x001a9d24, /* -> cstring @0x1a9d24 */ /* +0x1970 */
     0x00000301, /* +0x1974 */
     0x00000000, /* +0x1978 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x197c */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x197c */
     0x001a9d2c, /* -> cstring @0x1a9d2c */ /* +0x1980 */
     0x00000000, /* +0x1984 */
     0x00000000, /* +0x1988 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x198c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x198c */
     0x001a9d30, /* -> cstring @0x1a9d30 */ /* +0x1990 */
     0x00000000, /* +0x1994 */
     0x00000000, /* +0x1998 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x199c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x199c */
     0x001a9d38, /* -> cstring @0x1a9d38 */ /* +0x19a0 */
     0x00000001, /* +0x19a4 */
     0x00000000, /* +0x19a8 */
-    0x00126b28, /* -> FUN_00126b28 */ /* +0x19ac */
+    0x00126b28, /* -> ImmedConstBuffer__vslot67 */ /* +0x19ac */
     0x001a9d3c, /* -> cstring @0x1a9d3c */ /* +0x19b0 */
     0x00000000, /* +0x19b4 */
     0x00000000, /* +0x19b8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x19bc */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x19bc */
     0x001a9d40, /* -> cstring @0x1a9d40 */ /* +0x19c0 */
     0x00000000, /* +0x19c4 */
     0x00000000, /* +0x19c8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x19cc */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x19cc */
     0x001a9d44, /* -> cstring @0x1a9d44 */ /* +0x19d0 */
     0x00000000, /* +0x19d4 */
     0x00000000, /* +0x19d8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x19dc */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x19dc */
     0x001a9d48, /* -> cstring @0x1a9d48 */ /* +0x19e0 */
     0x00000301, /* +0x19e4 */
     0x00000000, /* +0x19e8 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x19ec */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x19ec */
     0x001a9d4c, /* -> cstring @0x1a9d4c */ /* +0x19f0 */
     0x00000b03, /* +0x19f4 */
     0x00000000, /* +0x19f8 */
-    0x00126a9c, /* -> FUN_00126a9c */ /* +0x19fc */
+    0x00126a9c, /* -> ImmedConstBuffer__vslot83 */ /* +0x19fc */
     0x001a9d54, /* -> cstring @0x1a9d54 */ /* +0x1a00 */
     0x00000001, /* +0x1a04 */
     0x00000000, /* +0x1a08 */
-    0x00126984, /* -> FUN_00126984 */ /* +0x1a0c */
+    0x00126984, /* -> ImmedConstBuffer__vslot15 */ /* +0x1a0c */
     0x001a9d58, /* -> cstring @0x1a9d58 */ /* +0x1a10 */
     0x000002c0, /* +0x1a14 */
     0x04010000, /* +0x1a18 */
-    0x00126ccc, /* -> FUN_00126ccc */ /* +0x1a1c */
+    0x00126ccc, /* -> ImmedConstBuffer__vslot167 */ /* +0x1a1c */
     0x001a4364, /* -> cstring @0x1a4364 */ /* +0x1a20 */
     0x00000080, /* +0x1a24 */
     0x00000000, /* +0x1a28 */
-    0x00126d58, /* -> FUN_00126d58 */ /* +0x1a2c */
+    0x00126d58, /* -> ImmedConstBuffer__vslot171 */ /* +0x1a2c */
     0x001a9d5c, /* -> cstring @0x1a9d5c */ /* +0x1a30 */
     0x000002c0, /* +0x1a34 */
     0x03020000, /* +0x1a38 */
-    0x00126fa8, /* -> FUN_00126fa8 */ /* +0x1a3c */
+    0x00126fa8, /* -> ImmedConstBuffer__vslot175 */ /* +0x1a3c */
     0x001a9d60, /* -> cstring @0x1a9d60 */ /* +0x1a40 */
     0x00000300, /* +0x1a44 */
     0x00020000, /* +0x1a48 */
-    0x00126f1c, /* -> FUN_00126f1c */ /* +0x1a4c */
+    0x00126f1c, /* -> ImmedConstBuffer__vslot179 */ /* +0x1a4c */
     0x001a9d64, /* -> cstring @0x1a9d64 */ /* +0x1a50 */
     0x00000002, /* +0x1a54 */
     0x00020000, /* +0x1a58 */
-    0x00126e90, /* -> FUN_00126e90 */ /* +0x1a5c */
+    0x00126e90, /* -> ImmedConstBuffer__vslot183 */ /* +0x1a5c */
     0x001a9d68, /* -> cstring @0x1a9d68 */ /* +0x1a60 */
     0x00000000, /* +0x1a64 */
     0x00000000, /* +0x1a68 */
-    0x00127034, /* -> FUN_00127034 */ /* +0x1a6c */
+    0x00127034, /* -> ImmedConstBuffer__vslot187 */ /* +0x1a6c */
     0x001a9d70, /* -> cstring @0x1a9d70 */ /* +0x1a70 */
     0x00000000, /* +0x1a74 */
     0x00000000, /* +0x1a78 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1a7c */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1a7c */
     0x001a9d74, /* -> cstring @0x1a9d74 */ /* +0x1a80 */
     0x00000000, /* +0x1a84 */
     0x00000000, /* +0x1a88 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1a8c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1a8c */
     0x001a9d7c, /* -> cstring @0x1a9d7c */ /* +0x1a90 */
     0x00000000, /* +0x1a94 */
     0x00000000, /* +0x1a98 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1a9c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1a9c */
     0x001a9d84, /* -> cstring @0x1a9d84 */ /* +0x1aa0 */
     0x00000000, /* +0x1aa4 */
     0x00000000, /* +0x1aa8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1aac */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1aac */
     0x001a9d8c, /* -> cstring @0x1a9d8c */ /* +0x1ab0 */
     0x00000000, /* +0x1ab4 */
     0x00000000, /* +0x1ab8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1abc */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1abc */
     0x001a9d90, /* -> cstring @0x1a9d90 */ /* +0x1ac0 */
     0x00000000, /* +0x1ac4 */
     0x00000000, /* +0x1ac8 */
@@ -1719,83 +1719,83 @@ const unsigned int sectDATA___const[2670] = {
     0x001a9d94, /* -> cstring @0x1a9d94 */ /* +0x1ad0 */
     0x00000040, /* +0x1ad4 */
     0x00000000, /* +0x1ad8 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x1adc */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x1adc */
     0x001a9d98, /* -> cstring @0x1a9d98 */ /* +0x1ae0 */
     0x000000c0, /* +0x1ae4 */
     0x02000000, /* +0x1ae8 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x1aec */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x1aec */
     0x001a9d9c, /* -> cstring @0x1a9d9c */ /* +0x1af0 */
     0x000002c0, /* +0x1af4 */
     0x02000000, /* +0x1af8 */
-    0x00126a10, /* -> FUN_00126a10 */ /* +0x1afc */
+    0x00126a10, /* -> ImmedConstBuffer__vslot23 */ /* +0x1afc */
     0x001a9da0, /* -> cstring @0x1a9da0 */ /* +0x1b00 */
     0x00000000, /* +0x1b04 */
     0x00000000, /* +0x1b08 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1b0c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1b0c */
     0x001a9da8, /* -> cstring @0x1a9da8 */ /* +0x1b10 */
     0x00000000, /* +0x1b14 */
     0x00000000, /* +0x1b18 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1b1c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1b1c */
     0x001a9dac, /* -> cstring @0x1a9dac */ /* +0x1b20 */
     0x00000340, /* +0x1b24 */
     0x00000000, /* +0x1b28 */
-    0x001268f8, /* -> FUN_001268f8 */ /* +0x1b2c */
+    0x001268f8, /* -> ImmedConstBuffer__vslot235 */ /* +0x1b2c */
     0x001a9db0, /* -> cstring @0x1a9db0 */ /* +0x1b30 */
     0x00000000, /* +0x1b34 */
     0x00000000, /* +0x1b38 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1b3c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1b3c */
     0x001a9dbc, /* -> cstring @0x1a9dbc */ /* +0x1b40 */
     0x00000000, /* +0x1b44 */
     0x00000000, /* +0x1b48 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1b4c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1b4c */
     0x001a9dc0, /* -> cstring @0x1a9dc0 */ /* +0x1b50 */
     0x00000000, /* +0x1b54 */
     0x00010000, /* +0x1b58 */
-    0x00126ccc, /* -> FUN_00126ccc */ /* +0x1b5c */
+    0x00126ccc, /* -> ImmedConstBuffer__vslot167 */ /* +0x1b5c */
     0x001a9dc4, /* -> cstring @0x1a9dc4 */ /* +0x1b60 */
     0x00000000, /* +0x1b64 */
     0x00000000, /* +0x1b68 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1b6c */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1b6c */
     0x001a9dc8, /* -> cstring @0x1a9dc8 */ /* +0x1b70 */
     0x00000000, /* +0x1b74 */
     0x00000000, /* +0x1b78 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1b7c */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1b7c */
     0x001a83a8, /* -> cstring @0x1a83a8 */ /* +0x1b80 */
     0x00000000, /* +0x1b84 */
     0x00000000, /* +0x1b88 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1b8c */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1b8c */
     0x001a9dcc, /* -> cstring @0x1a9dcc */ /* +0x1b90 */
     0x00000002, /* +0x1b94 */
     0x00000000, /* +0x1b98 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1b9c */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1b9c */
     0x001a9dd0, /* -> cstring @0x1a9dd0 */ /* +0x1ba0 */
     0x00000002, /* +0x1ba4 */
     0x00000000, /* +0x1ba8 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1bac */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1bac */
     0x001a9dd4, /* -> cstring @0x1a9dd4 */ /* +0x1bb0 */
     0x00000002, /* +0x1bb4 */
     0x00000000, /* +0x1bb8 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1bbc */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1bbc */
     0x001a9dd8, /* -> cstring @0x1a9dd8 */ /* +0x1bc0 */
     0x00000002, /* +0x1bc4 */
     0x00000000, /* +0x1bc8 */
-    0x001270c0, /* -> FUN_001270c0 */ /* +0x1bcc */
+    0x001270c0, /* -> ImmedConstBuffer__vslot191 */ /* +0x1bcc */
     0x001a9ddc, /* -> cstring @0x1a9ddc */ /* +0x1bd0 */
     0x00000000, /* +0x1bd4 */
     0x00000000, /* +0x1bd8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1bdc */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1bdc */
     0x001a83a4, /* -> cstring @0x1a83a4 */ /* +0x1be0 */
     0x00000080, /* +0x1be4 */
     0x00000000, /* +0x1be8 */
-    0x001267ec, /* -> FUN_001267ec */ /* +0x1bec */
+    0x001267ec, /* -> ImmedConstBuffer__vslot283 */ /* +0x1bec */
     0x001a9de0, /* -> cstring @0x1a9de0 */ /* +0x1bf0 */
     0x00000080, /* +0x1bf4 */
     0x00000000, /* +0x1bf8 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1bfc */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1bfc */
     0x001a9de4, /* -> cstring @0x1a9de4 */ /* +0x1c00 */
     0x00000000, /* +0x1c04 */
     0x00000000, /* +0x1c08 */
-    0x00126c40, /* -> FUN_00126c40 */ /* +0x1c0c */
+    0x00126c40, /* -> ImmedConstBuffer__vslot35 */ /* +0x1c0c */
     0x00000000, /* +0x1c10 */
     0x001f6488, /* -> __const_coal+0x5580 */ /* +0x1c14 */
     0x001d8380, /* -> KhanChip__dtor */ /* +0x1c18 */
@@ -1812,41 +1812,41 @@ const unsigned int sectDATA___const[2670] = {
     0x001cfff4, /* +0x1c44 */
     0x001cfff8, /* +0x1c48 */
     0x00128ad4, /* +0x1c4c */
-    0x00127f24, /* -> FUN_00127f24 */ /* +0x1c50 */
-    0x001d0000, /* -> FUN_001d0000 */ /* +0x1c54 */
-    0x001281b0, /* -> FUN_001281b0 */ /* +0x1c58 */
-    0x00128930, /* -> FUN_00128930 */ /* +0x1c5c */
-    0x0010dcc4, /* -> FUN_0010dcc4 */ /* +0x1c60 */
+    0x00127f24, /* -> KhanPs__vslot6 */ /* +0x1c50 */
+    0x001d0000, /* -> HwLimits__vslot7 */ /* +0x1c54 */
+    0x001281b0, /* -> KhanPs__vslot8 */ /* +0x1c58 */
+    0x00128930, /* -> KhanPs__vslot9 */ /* +0x1c5c */
+    0x0010dcc4, /* -> HwLimits__vslot10 */ /* +0x1c60 */
     0x001d0020, /* +0x1c64 */
     0x001d0028, /* +0x1c68 */
     0x001d0030, /* +0x1c6c */
     0x001d0038, /* +0x1c70 */
     0x001d003c, /* +0x1c74 */
-    0x0010ddec, /* -> FUN_0010ddec */ /* +0x1c78 */
-    0x000ecad0, /* -> FUN_000ecad0 */ /* +0x1c7c */
+    0x0010ddec, /* -> KhanPs__vslot16 */ /* +0x1c78 */
+    0x000ecad0, /* -> KhanPs__vslot17 */ /* +0x1c7c */
     0x001d0040, /* +0x1c80 */
     0x0010dcfc, /* +0x1c84 */
-    0x0010dd08, /* -> FUN_0010dd08 */ /* +0x1c88 */
-    0x00127e48, /* -> FUN_00127e48 */ /* +0x1c8c */
+    0x0010dd08, /* -> HwLimits__vslot20 */ /* +0x1c88 */
+    0x00127e48, /* -> KhanPs__vslot21 */ /* +0x1c8c */
     0x001d004c, /* +0x1c90 */
     0x001d0050, /* +0x1c94 */
-    0x0010da84, /* -> FUN_0010da84 */ /* +0x1c98 */
+    0x0010da84, /* -> HwLimits__vslot24 */ /* +0x1c98 */
     0x001d0054, /* +0x1c9c */
     0x00196d5c, /* -> R300MachineAssembler__create */ /* +0x1ca0 */
-    0x00188e24, /* -> FUN_00188e24 */ /* +0x1ca4 */
-    0x0018843c, /* -> FUN_0018843c */ /* +0x1ca8 */
+    0x00188e24, /* -> KhanPs__vslot27 */ /* +0x1ca4 */
+    0x0018843c, /* -> KhanPs__vslot28 */ /* +0x1ca8 */
     0x001d82c4, /* +0x1cac */
     0x001d82c8, /* +0x1cb0 */
-    0x0018962c, /* -> FUN_0018962c */ /* +0x1cb4 */
+    0x0018962c, /* -> KhanPs__vslot31 */ /* +0x1cb4 */
     0x001d82d0, /* +0x1cb8 */
     0x001d0058, /* +0x1cbc */
     0x001d0060, /* +0x1cc0 */
-    0x0012804c, /* -> FUN_0012804c */ /* +0x1cc4 */
+    0x0012804c, /* -> KhanPs__vslot35 */ /* +0x1cc4 */
     0x001281e8, /* +0x1cc8 */
     0x001281ec, /* +0x1ccc */
     0x001d82f0, /* +0x1cd0 */
     0x001d0068, /* +0x1cd4 */
-    0x001d0070, /* -> FUN_001d0070 */ /* +0x1cd8 */
+    0x001d0070, /* -> HwLimits__vslot40 */ /* +0x1cd8 */
     0x001d0090, /* +0x1cdc */
     0x001d0098, /* +0x1ce0 */
     0x000ed29c, /* +0x1ce4 */
@@ -1862,47 +1862,47 @@ const unsigned int sectDATA___const[2670] = {
     0x001d00e8, /* +0x1d0c */
     0x001d00f0, /* +0x1d10 */
     0x001d82e8, /* +0x1d14 */
-    0x00176304, /* -> FUN_00176304 */ /* +0x1d18 */
+    0x00176304, /* -> KhanPs__vslot56 */ /* +0x1d18 */
     0x001d0104, /* +0x1d1c */
-    0x001281f0, /* -> FUN_001281f0 */ /* +0x1d20 */
-    0x0012873c, /* -> FUN_0012873c */ /* +0x1d24 */
+    0x001281f0, /* -> KhanPs__vslot58 */ /* +0x1d20 */
+    0x0012873c, /* -> KhanPs__vslot59 */ /* +0x1d24 */
     0x001d8300, /* +0x1d28 */
     0x001d8308, /* +0x1d2c */
-    0x00127ff8, /* -> FUN_00127ff8 */ /* +0x1d30 */
+    0x00127ff8, /* -> KhanPs__vslot62 */ /* +0x1d30 */
     0x001d011c, /* +0x1d34 */
     0x00189764, /* +0x1d38 */
     0x00189660, /* +0x1d3c */
-    0x001897f0, /* -> FUN_001897f0 */ /* +0x1d40 */
+    0x001897f0, /* -> KhanPs__vslot66 */ /* +0x1d40 */
     0x00187588, /* +0x1d44 */
     0x0012dd50, /* +0x1d48 */
     0x0012ab70, /* +0x1d4c */
-    0x001d014c, /* -> FUN_001d014c */ /* +0x1d50 */
+    0x001d014c, /* -> HwLimits__vslot70 */ /* +0x1d50 */
     0x001d82d8, /* +0x1d54 */
     0x001d016c, /* +0x1d58 */
-    0x00128348, /* -> FUN_00128348 */ /* +0x1d5c */
-    0x0012839c, /* -> FUN_0012839c */ /* +0x1d60 */
-    0x00128d7c, /* -> FUN_00128d7c */ /* +0x1d64 */
-    0x00127ee4, /* -> FUN_00127ee4 */ /* +0x1d68 */
-    0x0010dcb8, /* -> FUN_0010dcb8 */ /* +0x1d6c */
-    0x00127ecc, /* -> FUN_00127ecc */ /* +0x1d70 */
+    0x00128348, /* -> KhanPs__vslot73 */ /* +0x1d5c */
+    0x0012839c, /* -> KhanPs__vslot74 */ /* +0x1d60 */
+    0x00128d7c, /* -> KhanPs__vslot75 */ /* +0x1d64 */
+    0x00127ee4, /* -> KhanPs__vslot76 */ /* +0x1d68 */
+    0x0010dcb8, /* -> HwLimits__vslot77 */ /* +0x1d6c */
+    0x00127ecc, /* -> KhanPs__vslot78 */ /* +0x1d70 */
     0x001d017c, /* +0x1d74 */
     0x001d0184, /* +0x1d78 */
-    0x00138694, /* -> FUN_00138694 */ /* +0x1d7c */
-    0x001322a8, /* -> FUN_001322a8 */ /* +0x1d80 */
+    0x00138694, /* -> HwLimits__vslot81 */ /* +0x1d7c */
+    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x1d80 */
     0x001d018c, /* +0x1d84 */
     0x001d0190, /* +0x1d88 */
-    0x00128430, /* -> FUN_00128430 */ /* +0x1d8c */
+    0x00128430, /* -> KhanPs__vslot85 */ /* +0x1d8c */
     0x0012841c, /* +0x1d90 */
-    0x0010ed4c, /* -> FUN_0010ed4c */ /* +0x1d94 */
+    0x0010ed4c, /* -> KhanPs__vslot87 */ /* +0x1d94 */
     0x001d82f8, /* +0x1d98 */
     0x001d82fc, /* +0x1d9c */
-    0x0012801c, /* -> FUN_0012801c */ /* +0x1da0 */
-    0x00128030, /* -> FUN_00128030 */ /* +0x1da4 */
+    0x0012801c, /* -> KhanPs__vslot90 */ /* +0x1da0 */
+    0x00128030, /* -> KhanPs__getOpcodeTraits */ /* +0x1da4 */
     0x001d0198, /* +0x1da8 */
     0x0010dd4c, /* +0x1dac */
     0x001d019c, /* +0x1db0 */
     0x001d01a4, /* +0x1db4 */
-    0x0012aa58, /* -> FUN_0012aa58 */ /* +0x1db8 */
+    0x0012aa58, /* -> KhanPs__vslot96 */ /* +0x1db8 */
     0x001d01a8, /* +0x1dbc */
     0x001d01ac, /* +0x1dc0 */
     0x00000000, /* +0x1dc4 */
@@ -1914,41 +1914,41 @@ const unsigned int sectDATA___const[2670] = {
     0x001cfff4, /* +0x1ddc */
     0x001cfff8, /* +0x1de0 */
     0x001cfffc, /* +0x1de4 */
-    0x0012a4b8, /* -> FUN_0012a4b8 */ /* +0x1de8 */
-    0x001d0000, /* -> FUN_001d0000 */ /* +0x1dec */
-    0x0010ddfc, /* -> FUN_0010ddfc */ /* +0x1df0 */
-    0x0012a00c, /* -> FUN_0012a00c */ /* +0x1df4 */
-    0x0010dcc4, /* -> FUN_0010dcc4 */ /* +0x1df8 */
+    0x0012a4b8, /* -> KhanVs__vslot6 */ /* +0x1de8 */
+    0x001d0000, /* -> HwLimits__vslot7 */ /* +0x1dec */
+    0x0010ddfc, /* -> HwLimits__vslot8 */ /* +0x1df0 */
+    0x0012a00c, /* -> KhanVs__vslot9 */ /* +0x1df4 */
+    0x0010dcc4, /* -> HwLimits__vslot10 */ /* +0x1df8 */
     0x001d0020, /* +0x1dfc */
     0x001d0028, /* +0x1e00 */
     0x001d0030, /* +0x1e04 */
     0x001d0038, /* +0x1e08 */
     0x001d003c, /* +0x1e0c */
     0x0010ddf4, /* +0x1e10 */
-    0x000eca10, /* -> FUN_000eca10 */ /* +0x1e14 */
+    0x000eca10, /* -> KhanVs__vslot17 */ /* +0x1e14 */
     0x001d0040, /* +0x1e18 */
     0x0010def8, /* +0x1e1c */
-    0x0010dd08, /* -> FUN_0010dd08 */ /* +0x1e20 */
-    0x00129748, /* -> FUN_00129748 */ /* +0x1e24 */
-    0x001296cc, /* -> FUN_001296cc */ /* +0x1e28 */
+    0x0010dd08, /* -> HwLimits__vslot20 */ /* +0x1e20 */
+    0x00129748, /* -> KhanVs__vslot21 */ /* +0x1e24 */
+    0x001296cc, /* -> KhanVs__vslot22 */ /* +0x1e28 */
     0x001d0050, /* +0x1e2c */
-    0x0010da84, /* -> FUN_0010da84 */ /* +0x1e30 */
+    0x0010da84, /* -> HwLimits__vslot24 */ /* +0x1e30 */
     0x001d0054, /* +0x1e34 */
     0x0019b8bc, /* -> R300VMachineAssembler__create */ /* +0x1e38 */
-    0x001894ec, /* -> FUN_001894ec */ /* +0x1e3c */
-    0x00188fec, /* -> FUN_00188fec */ /* +0x1e40 */
-    0x00188f24, /* -> FUN_00188f24 */ /* +0x1e44 */
+    0x001894ec, /* -> KhanVs__vslot27 */ /* +0x1e3c */
+    0x00188fec, /* -> KhanVs__vslot28 */ /* +0x1e40 */
+    0x00188f24, /* -> KhanVs__vslot29 */ /* +0x1e44 */
     0x001d8418, /* +0x1e48 */
     0x001d83e8, /* +0x1e4c */
     0x001d83f0, /* +0x1e50 */
     0x001d8400, /* +0x1e54 */
     0x001d83f8, /* +0x1e58 */
-    0x00129478, /* -> FUN_00129478 */ /* +0x1e5c */
+    0x00129478, /* -> KhanVs__vslot35 */ /* +0x1e5c */
     0x00129670, /* +0x1e60 */
     0x00129674, /* +0x1e64 */
     0x001d8408, /* +0x1e68 */
     0x001d0068, /* +0x1e6c */
-    0x001d0070, /* -> FUN_001d0070 */ /* +0x1e70 */
+    0x001d0070, /* -> HwLimits__vslot40 */ /* +0x1e70 */
     0x001d0090, /* +0x1e74 */
     0x001d0098, /* +0x1e78 */
     0x000ed29c, /* +0x1e7c */
@@ -1966,9 +1966,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001d00f8, /* +0x1eac */
     0x001d0100, /* +0x1eb0 */
     0x001d0104, /* +0x1eb4 */
-    0x00129854, /* -> FUN_00129854 */ /* +0x1eb8 */
-    0x00129a0c, /* -> FUN_00129a0c */ /* +0x1ebc */
-    0x00129408, /* -> FUN_00129408 */ /* +0x1ec0 */
+    0x00129854, /* -> KhanVs__vslot58 */ /* +0x1eb8 */
+    0x00129a0c, /* -> KhanVs__vslot59 */ /* +0x1ebc */
+    0x00129408, /* -> KhanVs__vslot60 */ /* +0x1ec0 */
     0x001d0114, /* +0x1ec4 */
     0x001d8410, /* +0x1ec8 */
     0x001d011c, /* +0x1ecc */
@@ -1978,37 +1978,37 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8450, /* +0x1edc */
     0x0012dd48, /* +0x1ee0 */
     0x0012ab78, /* +0x1ee4 */
-    0x001d014c, /* -> FUN_001d014c */ /* +0x1ee8 */
-    0x00129b48, /* -> FUN_00129b48 */ /* +0x1eec */
+    0x001d014c, /* -> HwLimits__vslot70 */ /* +0x1ee8 */
+    0x00129b48, /* -> KhanVs__vslot71 */ /* +0x1eec */
     0x001d016c, /* +0x1ef0 */
-    0x00129444, /* -> FUN_00129444 */ /* +0x1ef4 */
-    0x0012998c, /* -> FUN_0012998c */ /* +0x1ef8 */
-    0x0012a3c0, /* -> FUN_0012a3c0 */ /* +0x1efc */
-    0x00129350, /* -> FUN_00129350 */ /* +0x1f00 */
-    0x001293b0, /* -> FUN_001293b0 */ /* +0x1f04 */
+    0x00129444, /* -> KhanVs__vslot73 */ /* +0x1ef4 */
+    0x0012998c, /* -> KhanVs__vslot74 */ /* +0x1ef8 */
+    0x0012a3c0, /* -> KhanVs__vslot75 */ /* +0x1efc */
+    0x00129350, /* -> KhanVs__vslot76 */ /* +0x1f00 */
+    0x001293b0, /* -> KhanVs__vslot77 */ /* +0x1f04 */
     0x00129400, /* +0x1f08 */
     0x001d017c, /* +0x1f0c */
-    0x001293f8, /* -> FUN_001293f8 */ /* +0x1f10 */
-    0x00138694, /* -> FUN_00138694 */ /* +0x1f14 */
-    0x001322a8, /* -> FUN_001322a8 */ /* +0x1f18 */
+    0x001293f8, /* -> KhanVs__vslot80 */ /* +0x1f10 */
+    0x00138694, /* -> HwLimits__vslot81 */ /* +0x1f14 */
+    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x1f18 */
     0x001d018c, /* +0x1f1c */
     0x001d0190, /* +0x1f20 */
-    0x00129eb4, /* -> FUN_00129eb4 */ /* +0x1f24 */
+    0x00129eb4, /* -> KhanVs__vslot85 */ /* +0x1f24 */
     0x00129ea0, /* +0x1f28 */
     0x001d8470, /* +0x1f2c */
-    0x001128a0, /* -> FUN_001128a0 */ /* +0x1f30 */
-    0x0012a260, /* -> FUN_0012a260 */ /* +0x1f34 */
+    0x001128a0, /* -> KhanVs__vslot88 */ /* +0x1f30 */
+    0x0012a260, /* -> KhanVs__vslot89 */ /* +0x1f34 */
     0x001d8474, /* +0x1f38 */
-    0x00129678, /* -> FUN_00129678 */ /* +0x1f3c */
+    0x00129678, /* -> KhanVs__getOpcodeTraits */ /* +0x1f3c */
     0x001d0198, /* +0x1f40 */
     0x0010dd4c, /* +0x1f44 */
     0x001d019c, /* +0x1f48 */
     0x001d01a4, /* +0x1f4c */
-    0x0012a970, /* -> FUN_0012a970 */ /* +0x1f50 */
+    0x0012a970, /* -> KhanVs__vslot96 */ /* +0x1f50 */
     0x001d01a8, /* +0x1f54 */
     0x001d01ac, /* +0x1f58 */
-    0x00129448, /* -> FUN_00129448 */ /* +0x1f5c */
-    0x001297e4, /* -> FUN_001297e4 */ /* +0x1f60 */
+    0x00129448, /* -> KhanVs__vslot99 */ /* +0x1f5c */
+    0x001297e4, /* -> KhanVs__vslot100 */ /* +0x1f60 */
     0x00000000, /* +0x1f64 */
     0x00000000, /* +0x1f68 */
     0x001f64a8, /* -> __const_coal+0x55a0 */ /* +0x1f6c */
@@ -2018,41 +2018,41 @@ const unsigned int sectDATA___const[2670] = {
     0x001cfff4, /* +0x1f7c */
     0x001cfff8, /* +0x1f80 */
     0x001cfffc, /* +0x1f84 */
-    0x00129290, /* -> FUN_00129290 */ /* +0x1f88 */
-    0x001d0000, /* -> FUN_001d0000 */ /* +0x1f8c */
-    0x00129694, /* -> FUN_00129694 */ /* +0x1f90 */
-    0x0012a00c, /* -> FUN_0012a00c */ /* +0x1f94 */
-    0x0010dcc4, /* -> FUN_0010dcc4 */ /* +0x1f98 */
+    0x00129290, /* -> FudoVs__vslot6 */ /* +0x1f88 */
+    0x001d0000, /* -> HwLimits__vslot7 */ /* +0x1f8c */
+    0x00129694, /* -> FudoVs__vslot8 */ /* +0x1f90 */
+    0x0012a00c, /* -> KhanVs__vslot9 */ /* +0x1f94 */
+    0x0010dcc4, /* -> HwLimits__vslot10 */ /* +0x1f98 */
     0x001d0020, /* +0x1f9c */
     0x001d0028, /* +0x1fa0 */
     0x001d0030, /* +0x1fa4 */
     0x001d0038, /* +0x1fa8 */
     0x001d003c, /* +0x1fac */
     0x0010ddf4, /* +0x1fb0 */
-    0x000eca10, /* -> FUN_000eca10 */ /* +0x1fb4 */
+    0x000eca10, /* -> KhanVs__vslot17 */ /* +0x1fb4 */
     0x001d0040, /* +0x1fb8 */
     0x0010def8, /* +0x1fbc */
-    0x0010dd08, /* -> FUN_0010dd08 */ /* +0x1fc0 */
-    0x00129748, /* -> FUN_00129748 */ /* +0x1fc4 */
-    0x001296cc, /* -> FUN_001296cc */ /* +0x1fc8 */
+    0x0010dd08, /* -> HwLimits__vslot20 */ /* +0x1fc0 */
+    0x00129748, /* -> KhanVs__vslot21 */ /* +0x1fc4 */
+    0x001296cc, /* -> KhanVs__vslot22 */ /* +0x1fc8 */
     0x001d0050, /* +0x1fcc */
-    0x0010da84, /* -> FUN_0010da84 */ /* +0x1fd0 */
+    0x0010da84, /* -> HwLimits__vslot24 */ /* +0x1fd0 */
     0x001d0054, /* +0x1fd4 */
     0x0019de50, /* -> R520VMachineAssembler__create */ /* +0x1fd8 */
-    0x001894ec, /* -> FUN_001894ec */ /* +0x1fdc */
-    0x00188fec, /* -> FUN_00188fec */ /* +0x1fe0 */
-    0x00188f24, /* -> FUN_00188f24 */ /* +0x1fe4 */
+    0x001894ec, /* -> KhanVs__vslot27 */ /* +0x1fdc */
+    0x00188fec, /* -> KhanVs__vslot28 */ /* +0x1fe0 */
+    0x00188f24, /* -> KhanVs__vslot29 */ /* +0x1fe4 */
     0x001d8418, /* +0x1fe8 */
     0x001d83e8, /* +0x1fec */
     0x001d8480, /* +0x1ff0 */
     0x001d8490, /* +0x1ff4 */
     0x001d8488, /* +0x1ff8 */
-    0x00129478, /* -> FUN_00129478 */ /* +0x1ffc */
+    0x00129478, /* -> KhanVs__vslot35 */ /* +0x1ffc */
     0x00129670, /* +0x2000 */
     0x00129674, /* +0x2004 */
     0x001d8408, /* +0x2008 */
     0x001d0068, /* +0x200c */
-    0x001d0070, /* -> FUN_001d0070 */ /* +0x2010 */
+    0x001d0070, /* -> HwLimits__vslot40 */ /* +0x2010 */
     0x001d0090, /* +0x2014 */
     0x001d0098, /* +0x2018 */
     0x000ed29c, /* +0x201c */
@@ -2070,9 +2070,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001d00f8, /* +0x204c */
     0x001d0100, /* +0x2050 */
     0x001d0104, /* +0x2054 */
-    0x00129854, /* -> FUN_00129854 */ /* +0x2058 */
-    0x00129a0c, /* -> FUN_00129a0c */ /* +0x205c */
-    0x00129408, /* -> FUN_00129408 */ /* +0x2060 */
+    0x00129854, /* -> KhanVs__vslot58 */ /* +0x2058 */
+    0x00129a0c, /* -> KhanVs__vslot59 */ /* +0x205c */
+    0x00129408, /* -> KhanVs__vslot60 */ /* +0x2060 */
     0x001d0114, /* +0x2064 */
     0x001d8410, /* +0x2068 */
     0x001d011c, /* +0x206c */
@@ -2082,37 +2082,37 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8450, /* +0x207c */
     0x001d84a0, /* +0x2080 */
     0x001d84a4, /* +0x2084 */
-    0x001d014c, /* -> FUN_001d014c */ /* +0x2088 */
-    0x00129b48, /* -> FUN_00129b48 */ /* +0x208c */
+    0x001d014c, /* -> HwLimits__vslot70 */ /* +0x2088 */
+    0x00129b48, /* -> KhanVs__vslot71 */ /* +0x208c */
     0x001d016c, /* +0x2090 */
-    0x00129444, /* -> FUN_00129444 */ /* +0x2094 */
-    0x0012998c, /* -> FUN_0012998c */ /* +0x2098 */
-    0x0012a3c0, /* -> FUN_0012a3c0 */ /* +0x209c */
-    0x00129350, /* -> FUN_00129350 */ /* +0x20a0 */
-    0x001293b0, /* -> FUN_001293b0 */ /* +0x20a4 */
+    0x00129444, /* -> KhanVs__vslot73 */ /* +0x2094 */
+    0x0012998c, /* -> KhanVs__vslot74 */ /* +0x2098 */
+    0x0012a3c0, /* -> KhanVs__vslot75 */ /* +0x209c */
+    0x00129350, /* -> KhanVs__vslot76 */ /* +0x20a0 */
+    0x001293b0, /* -> KhanVs__vslot77 */ /* +0x20a4 */
     0x00129400, /* +0x20a8 */
     0x001d017c, /* +0x20ac */
-    0x001293f8, /* -> FUN_001293f8 */ /* +0x20b0 */
-    0x00138694, /* -> FUN_00138694 */ /* +0x20b4 */
-    0x001322a8, /* -> FUN_001322a8 */ /* +0x20b8 */
+    0x001293f8, /* -> KhanVs__vslot80 */ /* +0x20b0 */
+    0x00138694, /* -> HwLimits__vslot81 */ /* +0x20b4 */
+    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x20b8 */
     0x001d018c, /* +0x20bc */
     0x001d0190, /* +0x20c0 */
-    0x00129eb4, /* -> FUN_00129eb4 */ /* +0x20c4 */
+    0x00129eb4, /* -> KhanVs__vslot85 */ /* +0x20c4 */
     0x00129ea0, /* +0x20c8 */
     0x001d847c, /* +0x20cc */
-    0x001128a0, /* -> FUN_001128a0 */ /* +0x20d0 */
-    0x0012a260, /* -> FUN_0012a260 */ /* +0x20d4 */
+    0x001128a0, /* -> KhanVs__vslot88 */ /* +0x20d0 */
+    0x0012a260, /* -> KhanVs__vslot89 */ /* +0x20d4 */
     0x001d8498, /* +0x20d8 */
-    0x00129678, /* -> FUN_00129678 */ /* +0x20dc */
+    0x00129678, /* -> KhanVs__getOpcodeTraits */ /* +0x20dc */
     0x001d0198, /* +0x20e0 */
     0x0010dd4c, /* +0x20e4 */
     0x001d019c, /* +0x20e8 */
     0x001d01a4, /* +0x20ec */
-    0x0012a9e4, /* -> FUN_0012a9e4 */ /* +0x20f0 */
+    0x0012a9e4, /* -> FudoVs__vslot96 */ /* +0x20f0 */
     0x001d01a8, /* +0x20f4 */
     0x001d01ac, /* +0x20f8 */
-    0x00129448, /* -> FUN_00129448 */ /* +0x20fc */
-    0x001297e4, /* -> FUN_001297e4 */ /* +0x2100 */
+    0x00129448, /* -> KhanVs__vslot99 */ /* +0x20fc */
+    0x001297e4, /* -> KhanVs__vslot100 */ /* +0x2100 */
     0x001aa818, /* +0x2104 */
     0x00000000, /* +0x2108 */
     0x001f6540, /* -> __const_coal+0x5638 */ /* +0x210c */
@@ -2127,7 +2127,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8708, /* +0x2130 */
     0x001d8710, /* +0x2134 */
     0x001d8720, /* +0x2138 */
-    0x00172514, /* -> FUN_00172514 */ /* +0x213c */
+    0x00172514, /* -> ResourceModel__vslot11 */ /* +0x213c */
     0x001d8734, /* +0x2140 */
     0x001d873c, /* +0x2144 */
     0x001d8744, /* +0x2148 */
@@ -2138,14 +2138,14 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8760, /* +0x215c */
     0x001d8768, /* +0x2160 */
     0x001d8770, /* +0x2164 */
-    0x00172428, /* -> FUN_00172428 */ /* +0x2168 */
-    0x00172014, /* -> FUN_00172014 */ /* +0x216c */
-    0x001722cc, /* -> FUN_001722cc */ /* +0x2170 */
-    0x00172328, /* -> FUN_00172328 */ /* +0x2174 */
+    0x00172428, /* -> ResourceModel__vslot22 */ /* +0x2168 */
+    0x00172014, /* -> ResourceModel__vslot23 */ /* +0x216c */
+    0x001722cc, /* -> ResourceModel__vslot24 */ /* +0x2170 */
+    0x00172328, /* -> ResourceModel__vslot25 */ /* +0x2174 */
     0x001d8778, /* +0x2178 */
     0x001d8784, /* +0x217c */
     0x001d878c, /* +0x2180 */
-    0x001723d8, /* -> FUN_001723d8 */ /* +0x2184 */
+    0x001723d8, /* -> ResourceModel__vslot29 */ /* +0x2184 */
     0x001d8790, /* +0x2188 */
     0x001d8798, /* +0x218c */
     0x00172474, /* +0x2190 */
@@ -2156,7 +2156,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d87a8, /* -> ThreadModel__deleting_dtor */ /* +0x21a4 */
     0x001d87e0, /* +0x21a8 */
     0x001d87f4, /* +0x21ac */
-    0x0017281c, /* -> FUN_0017281c */ /* +0x21b0 */
+    0x0017281c, /* -> ThreadModel__vslot4 */ /* +0x21b0 */
     0x001d87fc, /* +0x21b4 */
     0x001d8800, /* +0x21b8 */
     0x001d8808, /* +0x21bc */
@@ -2177,30 +2177,30 @@ const unsigned int sectDATA___const[2670] = {
     0x001d88a8, /* +0x21f8 */
     0x001d8710, /* +0x21fc */
     0x001d8720, /* +0x2200 */
-    0x0018b654, /* -> FUN_0018b654 */ /* +0x2204 */
-    0x0018f674, /* -> FUN_0018f674 */ /* +0x2208 */
-    0x0018dabc, /* -> FUN_0018dabc */ /* +0x220c */
-    0x0018b9cc, /* -> FUN_0018b9cc */ /* +0x2210 */
-    0x00189be4, /* -> FUN_00189be4 */ /* +0x2214 */
-    0x0018ad08, /* -> FUN_0018ad08 */ /* +0x2218 */
+    0x0018b654, /* -> R300SchedModel__vslot11 */ /* +0x2204 */
+    0x0018f674, /* -> R300SchedModel__vslot12 */ /* +0x2208 */
+    0x0018dabc, /* -> R300SchedModel__vslot13 */ /* +0x220c */
+    0x0018b9cc, /* -> R300SchedModel__vslot14 */ /* +0x2210 */
+    0x00189be4, /* -> R300SchedModel__vslot15 */ /* +0x2214 */
+    0x0018ad08, /* -> R300SchedModel__vslot16 */ /* +0x2218 */
     0x001d8758, /* +0x221c */
     0x001d88c0, /* +0x2220 */
-    0x00189fd4, /* -> FUN_00189fd4 */ /* +0x2224 */
+    0x00189fd4, /* -> R300SchedModel__vslot19 */ /* +0x2224 */
     0x001d8768, /* +0x2228 */
     0x001d8770, /* +0x222c */
-    0x00172428, /* -> FUN_00172428 */ /* +0x2230 */
-    0x00172014, /* -> FUN_00172014 */ /* +0x2234 */
-    0x001722cc, /* -> FUN_001722cc */ /* +0x2238 */
-    0x00172328, /* -> FUN_00172328 */ /* +0x223c */
-    0x0018a1ec, /* -> FUN_0018a1ec */ /* +0x2240 */
-    0x0018e1a8, /* -> FUN_0018e1a8 */ /* +0x2244 */
-    0x0018a440, /* -> FUN_0018a440 */ /* +0x2248 */
-    0x001723d8, /* -> FUN_001723d8 */ /* +0x224c */
+    0x00172428, /* -> ResourceModel__vslot22 */ /* +0x2230 */
+    0x00172014, /* -> ResourceModel__vslot23 */ /* +0x2234 */
+    0x001722cc, /* -> ResourceModel__vslot24 */ /* +0x2238 */
+    0x00172328, /* -> ResourceModel__vslot25 */ /* +0x223c */
+    0x0018a1ec, /* -> R300SchedModel__vslot26 */ /* +0x2240 */
+    0x0018e1a8, /* -> R300SchedModel__vslot27 */ /* +0x2244 */
+    0x0018a440, /* -> R300SchedModel__vslot28 */ /* +0x2248 */
+    0x001723d8, /* -> ResourceModel__vslot29 */ /* +0x224c */
     0x001d8790, /* +0x2250 */
     0x001d8798, /* +0x2254 */
     0x00172474, /* +0x2258 */
     0x001d87a0, /* +0x225c */
-    0x0018a080, /* -> FUN_0018a080 */ /* +0x2260 */
+    0x0018a080, /* -> R300SchedModel__vslot34 */ /* +0x2260 */
     0x00000000, /* +0x2264 */
     0x00000000, /* +0x2268 */
     0x001f6560, /* -> __const_coal+0x5658 */ /* +0x226c */
@@ -2216,24 +2216,24 @@ const unsigned int sectDATA___const[2670] = {
     0x001d898c, /* +0x2294 */
     0x001d89d4, /* +0x2298 */
     0x001d8a00, /* +0x229c */
-    0x0019156c, /* -> FUN_0019156c */ /* +0x22a0 */
-    0x0018f918, /* -> FUN_0018f918 */ /* +0x22a4 */
-    0x0018fbd8, /* -> FUN_0018fbd8 */ /* +0x22a8 */
+    0x0019156c, /* -> R300VSchedModel__vslot12 */ /* +0x22a0 */
+    0x0018f918, /* -> R300VSchedModel__vslot13 */ /* +0x22a4 */
+    0x0018fbd8, /* -> R300VSchedModel__vslot14 */ /* +0x22a8 */
     0x001d8748, /* +0x22ac */
     0x001d8750, /* +0x22b0 */
-    0x0018fd34, /* -> FUN_0018fd34 */ /* +0x22b4 */
+    0x0018fd34, /* -> R300VSchedModel__vslot17 */ /* +0x22b4 */
     0x001d875c, /* +0x22b8 */
-    0x00191298, /* -> FUN_00191298 */ /* +0x22bc */
+    0x00191298, /* -> R300VSchedModel__vslot19 */ /* +0x22bc */
     0x001d89f8, /* +0x22c0 */
     0x001d8770, /* +0x22c4 */
-    0x00172428, /* -> FUN_00172428 */ /* +0x22c8 */
-    0x00172014, /* -> FUN_00172014 */ /* +0x22cc */
-    0x001722cc, /* -> FUN_001722cc */ /* +0x22d0 */
-    0x00172328, /* -> FUN_00172328 */ /* +0x22d4 */
+    0x00172428, /* -> ResourceModel__vslot22 */ /* +0x22c8 */
+    0x00172014, /* -> ResourceModel__vslot23 */ /* +0x22cc */
+    0x001722cc, /* -> ResourceModel__vslot24 */ /* +0x22d0 */
+    0x00172328, /* -> ResourceModel__vslot25 */ /* +0x22d4 */
     0x001d8778, /* +0x22d8 */
-    0x00190990, /* -> FUN_00190990 */ /* +0x22dc */
-    0x0018f984, /* -> FUN_0018f984 */ /* +0x22e0 */
-    0x001723d8, /* -> FUN_001723d8 */ /* +0x22e4 */
+    0x00190990, /* -> R300VSchedModel__vslot27 */ /* +0x22dc */
+    0x0018f984, /* -> R300VSchedModel__vslot28 */ /* +0x22e0 */
+    0x001723d8, /* -> ResourceModel__vslot29 */ /* +0x22e4 */
     0x001d8a18, /* +0x22e8 */
     0x001d8a20, /* +0x22ec */
     0x00172474, /* +0x22f0 */
@@ -2247,40 +2247,40 @@ const unsigned int sectDATA___const[2670] = {
     0x001cfff8, /* +0x2310 */
     0x00128ad4, /* +0x2314 */
     0x00191e28, /* -> FudoPs__createSchedModels */ /* +0x2318 */
-    0x001d0000, /* -> FUN_001d0000 */ /* +0x231c */
-    0x001281b0, /* -> FUN_001281b0 */ /* +0x2320 */
-    0x00128930, /* -> FUN_00128930 */ /* +0x2324 */
-    0x0010dcc4, /* -> FUN_0010dcc4 */ /* +0x2328 */
-    0x00176610, /* -> FUN_00176610 */ /* +0x232c */
-    0x001765e4, /* -> FUN_001765e4 */ /* +0x2330 */
+    0x001d0000, /* -> HwLimits__vslot7 */ /* +0x231c */
+    0x001281b0, /* -> KhanPs__vslot8 */ /* +0x2320 */
+    0x00128930, /* -> KhanPs__vslot9 */ /* +0x2324 */
+    0x0010dcc4, /* -> HwLimits__vslot10 */ /* +0x2328 */
+    0x00176610, /* -> FudoPs__vslot11 */ /* +0x232c */
+    0x001765e4, /* -> FudoPs__vslot12 */ /* +0x2330 */
     0x001d0030, /* +0x2334 */
     0x001d0038, /* +0x2338 */
     0x001d003c, /* +0x233c */
-    0x0010ddec, /* -> FUN_0010ddec */ /* +0x2340 */
-    0x000ecad0, /* -> FUN_000ecad0 */ /* +0x2344 */
+    0x0010ddec, /* -> KhanPs__vslot16 */ /* +0x2340 */
+    0x000ecad0, /* -> KhanPs__vslot17 */ /* +0x2344 */
     0x001d0040, /* +0x2348 */
     0x0010dcfc, /* +0x234c */
-    0x0010dd08, /* -> FUN_0010dd08 */ /* +0x2350 */
-    0x00127e48, /* -> FUN_00127e48 */ /* +0x2354 */
+    0x0010dd08, /* -> HwLimits__vslot20 */ /* +0x2350 */
+    0x00127e48, /* -> KhanPs__vslot21 */ /* +0x2354 */
     0x001d004c, /* +0x2358 */
     0x001d0050, /* +0x235c */
-    0x0010da84, /* -> FUN_0010da84 */ /* +0x2360 */
+    0x0010da84, /* -> HwLimits__vslot24 */ /* +0x2360 */
     0x001d0054, /* +0x2364 */
     0x001a1338, /* -> R520MachineAssembler__create */ /* +0x2368 */
-    0x00188e24, /* -> FUN_00188e24 */ /* +0x236c */
-    0x0019286c, /* -> FUN_0019286c */ /* +0x2370 */
-    0x00193a00, /* -> FUN_00193a00 */ /* +0x2374 */
+    0x00188e24, /* -> KhanPs__vslot27 */ /* +0x236c */
+    0x0019286c, /* -> FudoPs__vslot28 */ /* +0x2370 */
+    0x00193a00, /* -> FudoPs__vslot29 */ /* +0x2374 */
     0x001d82c8, /* +0x2378 */
     0x001d8adc, /* +0x237c */
     0x001d82d0, /* +0x2380 */
     0x001d0058, /* +0x2384 */
     0x001d0060, /* +0x2388 */
-    0x0012804c, /* -> FUN_0012804c */ /* +0x238c */
+    0x0012804c, /* -> KhanPs__vslot35 */ /* +0x238c */
     0x001281e8, /* +0x2390 */
     0x001281ec, /* +0x2394 */
     0x00191940, /* -> FudoPs__encodeUniformImmediate */ /* +0x2398 */
     0x001d0068, /* +0x239c */
-    0x001d0070, /* -> FUN_001d0070 */ /* +0x23a0 */
+    0x001d0070, /* -> HwLimits__vslot40 */ /* +0x23a0 */
     0x001d0090, /* +0x23a4 */
     0x001d0098, /* +0x23a8 */
     0x000ed29c, /* +0x23ac */
@@ -2296,47 +2296,47 @@ const unsigned int sectDATA___const[2670] = {
     0x001d00e8, /* +0x23d4 */
     0x001d00f0, /* +0x23d8 */
     0x001d8ac8, /* +0x23dc */
-    0x00176304, /* -> FUN_00176304 */ /* +0x23e0 */
+    0x00176304, /* -> KhanPs__vslot56 */ /* +0x23e0 */
     0x001d0104, /* +0x23e4 */
     0x00191c7c, /* -> FudoPs__classifyLiteralOperand */ /* +0x23e8 */
-    0x00191b30, /* -> FUN_00191b30 */ /* +0x23ec */
+    0x00191b30, /* -> FudoPs__vslot59 */ /* +0x23ec */
     0x00191710, /* -> isLiteralZeroHalfOrOne */ /* +0x23f0 */
     0x001d8ad4, /* +0x23f4 */
-    0x00127ff8, /* -> FUN_00127ff8 */ /* +0x23f8 */
+    0x00127ff8, /* -> KhanPs__vslot62 */ /* +0x23f8 */
     0x001d011c, /* +0x23fc */
     0x001d8aac, /* +0x2400 */
     0x001d8ab4, /* +0x2404 */
     0x001d8aa4, /* +0x2408 */
     0x00187588, /* +0x240c */
-    0x0012dcf0, /* -> FUN_0012dcf0 */ /* +0x2410 */
-    0x0012c134, /* -> FUN_0012c134 */ /* +0x2414 */
-    0x001d014c, /* -> FUN_001d014c */ /* +0x2418 */
+    0x0012dcf0, /* -> FudoPs__flattenIfs */ /* +0x2410 */
+    0x0012c134, /* -> FudoPs__vslot69 */ /* +0x2414 */
+    0x001d014c, /* -> HwLimits__vslot70 */ /* +0x2418 */
     0x001d82d8, /* +0x241c */
     0x001d016c, /* +0x2420 */
-    0x00128348, /* -> FUN_00128348 */ /* +0x2424 */
-    0x0012839c, /* -> FUN_0012839c */ /* +0x2428 */
-    0x00128d7c, /* -> FUN_00128d7c */ /* +0x242c */
-    0x00127ee4, /* -> FUN_00127ee4 */ /* +0x2430 */
-    0x0010dcb8, /* -> FUN_0010dcb8 */ /* +0x2434 */
+    0x00128348, /* -> KhanPs__vslot73 */ /* +0x2424 */
+    0x0012839c, /* -> KhanPs__vslot74 */ /* +0x2428 */
+    0x00128d7c, /* -> KhanPs__vslot75 */ /* +0x242c */
+    0x00127ee4, /* -> KhanPs__vslot76 */ /* +0x2430 */
+    0x0010dcb8, /* -> HwLimits__vslot77 */ /* +0x2434 */
     0x00191708, /* +0x2438 */
     0x001d017c, /* +0x243c */
     0x001d0184, /* +0x2440 */
-    0x00138694, /* -> FUN_00138694 */ /* +0x2444 */
-    0x001322a8, /* -> FUN_001322a8 */ /* +0x2448 */
+    0x00138694, /* -> HwLimits__vslot81 */ /* +0x2444 */
+    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x2448 */
     0x001d018c, /* +0x244c */
     0x001d0190, /* +0x2450 */
-    0x001919d8, /* -> FUN_001919d8 */ /* +0x2454 */
+    0x001919d8, /* -> FudoPs__vslot85 */ /* +0x2454 */
     0x0012841c, /* +0x2458 */
     0x0010f388, /* +0x245c */
     0x001d8ad0, /* +0x2460 */
     0x001d82fc, /* +0x2464 */
     0x001d8ae4, /* +0x2468 */
-    0x00128030, /* -> FUN_00128030 */ /* +0x246c */
+    0x00128030, /* -> KhanPs__getOpcodeTraits */ /* +0x246c */
     0x001d0198, /* +0x2470 */
     0x0010dd4c, /* +0x2474 */
     0x001d019c, /* +0x2478 */
     0x001d01a4, /* +0x247c */
-    0x0019ef2c, /* -> FUN_0019ef2c */ /* +0x2480 */
+    0x0019ef2c, /* -> FudoPs__vslot96 */ /* +0x2480 */
     0x001d01a8, /* +0x2484 */
     0x001d01ac, /* +0x2488 */
     0x00000000, /* +0x248c */
@@ -2361,25 +2361,25 @@ const unsigned int sectDATA___const[2670] = {
     0x001d88a8, /* +0x24d8 */
     0x001d8710, /* +0x24dc */
     0x001d8720, /* +0x24e0 */
-    0x0018b654, /* -> FUN_0018b654 */ /* +0x24e4 */
-    0x0018f674, /* -> FUN_0018f674 */ /* +0x24e8 */
-    0x0018dabc, /* -> FUN_0018dabc */ /* +0x24ec */
-    0x0018b9cc, /* -> FUN_0018b9cc */ /* +0x24f0 */
-    0x00189be4, /* -> FUN_00189be4 */ /* +0x24f4 */
-    0x0018ad08, /* -> FUN_0018ad08 */ /* +0x24f8 */
+    0x0018b654, /* -> R300SchedModel__vslot11 */ /* +0x24e4 */
+    0x0018f674, /* -> R300SchedModel__vslot12 */ /* +0x24e8 */
+    0x0018dabc, /* -> R300SchedModel__vslot13 */ /* +0x24ec */
+    0x0018b9cc, /* -> R300SchedModel__vslot14 */ /* +0x24f0 */
+    0x00189be4, /* -> R300SchedModel__vslot15 */ /* +0x24f4 */
+    0x0018ad08, /* -> R300SchedModel__vslot16 */ /* +0x24f8 */
     0x001d8758, /* +0x24fc */
     0x001d88c0, /* +0x2500 */
-    0x00189fd4, /* -> FUN_00189fd4 */ /* +0x2504 */
+    0x00189fd4, /* -> R300SchedModel__vslot19 */ /* +0x2504 */
     0x001d8768, /* +0x2508 */
-    0x00193944, /* -> FUN_00193944 */ /* +0x250c */
-    0x001939b4, /* -> FUN_001939b4 */ /* +0x2510 */
-    0x00172014, /* -> FUN_00172014 */ /* +0x2514 */
-    0x001722cc, /* -> FUN_001722cc */ /* +0x2518 */
-    0x00172328, /* -> FUN_00172328 */ /* +0x251c */
+    0x00193944, /* -> R520SchedModel__vslot21 */ /* +0x250c */
+    0x001939b4, /* -> R520SchedModel__vslot22 */ /* +0x2510 */
+    0x00172014, /* -> ResourceModel__vslot23 */ /* +0x2514 */
+    0x001722cc, /* -> ResourceModel__vslot24 */ /* +0x2518 */
+    0x00172328, /* -> ResourceModel__vslot25 */ /* +0x251c */
     0x001d8c0c, /* +0x2520 */
-    0x0018e1a8, /* -> FUN_0018e1a8 */ /* +0x2524 */
-    0x0018a440, /* -> FUN_0018a440 */ /* +0x2528 */
-    0x001723d8, /* -> FUN_001723d8 */ /* +0x252c */
+    0x0018e1a8, /* -> R300SchedModel__vslot27 */ /* +0x2524 */
+    0x0018a440, /* -> R300SchedModel__vslot28 */ /* +0x2528 */
+    0x001723d8, /* -> ResourceModel__vslot29 */ /* +0x252c */
     0x001d8790, /* +0x2530 */
     0x001d8c10, /* +0x2534 */
     0x00172474, /* +0x2538 */
@@ -2414,7 +2414,7 @@ const unsigned int sectDATA___const[2670] = {
     0x00197b30, /* -> R300MachineAssembler__emitTexRecord */ /* +0x25ac */
     0x001d8cb4, /* +0x25b0 */
     0x001961b0, /* +0x25b4 */
-    0x000e3140, /* -> FUN_000e3140 */ /* +0x25b8 */
+    0x000e3140, /* -> MachineAssembler__visitIfHeaderStatic */ /* +0x25b8 */
     0x001d8cb8, /* +0x25bc */
     0x001d8cbc, /* +0x25c0 */
     0x00195638, /* -> R300MachineAssembler__vslot29_noOp */ /* +0x25c4 */
@@ -2422,7 +2422,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8cc4, /* +0x25cc */
     0x001d8cc8, /* +0x25d0 */
     0x001d8ccc, /* +0x25d4 */
-    0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x25d8 */
+    0x000e2fd8, /* -> MachineAssembler__vslot34 */ /* +0x25d8 */
     0x00195590, /* -> psnLiteralAddressFromRegisterWord */ /* +0x25dc */
     0x00195624, /* -> R300MachineAssembler__vslot36_noOp */ /* +0x25e0 */
     0x001d8cd0, /* +0x25e4 */
@@ -2504,7 +2504,7 @@ const unsigned int sectDATA___const[2670] = {
     0x0019acac, /* +0x2714 */
     0x0019ae80, /* -> R300VMachineAssembler__vslot24_assembleWithTarget */ /* +0x2718 */
     0x0019ab60, /* -> R300VMachineAssembler__vslot25_assembleOrFail */ /* +0x271c */
-    0x000e3140, /* -> FUN_000e3140 */ /* +0x2720 */
+    0x000e3140, /* -> MachineAssembler__visitIfHeaderStatic */ /* +0x2720 */
     0x0019aaf4, /* -> R300VMachineAssembler__vslot27_assembleOrFail */ /* +0x2724 */
     0x0019abc4, /* -> R300VMachineAssembler__vslot28_assembleChildOrFail */ /* +0x2728 */
     0x0019b808, /* -> R300VMachineAssembler__vslot29_endIfBlock */ /* +0x272c */
@@ -2512,7 +2512,7 @@ const unsigned int sectDATA___const[2670] = {
     0x0019aad8, /* +0x2734 */
     0x0019ab58, /* +0x2738 */
     0x0019ab5c, /* +0x273c */
-    0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x2740 */
+    0x000e2fd8, /* -> MachineAssembler__vslot34 */ /* +0x2740 */
     0x000e2ac4, /* +0x2744 */
     0x0019ac28, /* +0x2748 */
     0x0019af40, /* -> R300VMachineAssembler__vslot37_patchControlFlowTarget */ /* +0x274c */
@@ -2556,7 +2556,7 @@ const unsigned int sectDATA___const[2670] = {
     0x0019acac, /* +0x27e4 */
     0x0019e6e0, /* -> R520VMachineAssembler__vslot24_assembleWithPredicateSet */ /* +0x27e8 */
     0x0019e318, /* -> R520VMachineAssembler__vslot25_assembleConditionalBlock */ /* +0x27ec */
-    0x000e3140, /* -> FUN_000e3140 */ /* +0x27f0 */
+    0x000e3140, /* -> MachineAssembler__visitIfHeaderStatic */ /* +0x27f0 */
     0x0019d858, /* -> R520VMachineAssembler__vslot27_assembleLoopHeader */ /* +0x27f4 */
     0x0019dff8, /* -> R520VMachineAssembler__vslot28_assembleIfEnd */ /* +0x27f8 */
     0x0019b808, /* -> R300VMachineAssembler__vslot29_endIfBlock */ /* +0x27fc */
@@ -2564,7 +2564,7 @@ const unsigned int sectDATA___const[2670] = {
     0x0019e11c, /* -> R520VMachineAssembler__vslot31_assembleWithPredicateRestore */ /* +0x2804 */
     0x0019d7a0, /* -> R520VMachineAssembler__vslot32_assembleWithPredicateClear */ /* +0x2808 */
     0x0019d474, /* -> R520VMachineAssembler__vslot33_noOp */ /* +0x280c */
-    0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x2810 */
+    0x000e2fd8, /* -> MachineAssembler__vslot34 */ /* +0x2810 */
     0x000e2ac4, /* +0x2814 */
     0x0019ac28, /* +0x2818 */
     0x0019d590, /* -> R520VMachineAssembler__vslot37_closeConditional */ /* +0x281c */
@@ -2616,7 +2616,7 @@ const unsigned int sectDATA___const[2670] = {
     0x0019ff2c, /* -> R520MachineAssembler__vslot31_assembleChildrenAndMark */ /* +0x28d4 */
     0x001a2d10, /* -> R520MachineAssembler__vslot32_assembleBranchEnd */ /* +0x28d8 */
     0x001d8f54, /* +0x28dc */
-    0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x28e0 */
+    0x000e2fd8, /* -> MachineAssembler__vslot34 */ /* +0x28e0 */
     0x0019fcc4, /* +0x28e4 */
     0x00195624, /* -> R300MachineAssembler__vslot36_noOp */ /* +0x28e8 */
     0x001a3000, /* -> R520MachineAssembler__vslot37_closeBranch */ /* +0x28ec */

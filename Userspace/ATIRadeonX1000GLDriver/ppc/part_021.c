@@ -847,30 +847,30 @@ int FUN_000e284c(param_1)
   return uVar1;
 }
 
-/* FUN_000e2860 @ 0xe2860 (36 bytes) */
-int FUN_000e2860(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Block__accept @ 0xe2860 (36 bytes) */
+int Block__accept(this, traversal)
+  int this;
+  int traversal;
 {
                     
                     
-  (**(code **)(**(int **)(param_2 + 0x20) + 0x34))
-            (*(int **)(param_2 + 0x20),param_1 + 0x90,*(undefined4 *)(param_1 + 0xdc));
+  (**(code **)(**(int **)(traversal + 0x20) + 0x34))
+            (*(int **)(traversal + 0x20),this + 0x90,*(undefined4 *)(this + 0xdc));
   return;
 }
 
-/* FUN_000e28f0 @ 0xe28f0 (96 bytes) */
-int FUN_000e28f0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* IfFooterStatic__accept @ 0xe28f0 (96 bytes) */
+int IfFooterStatic__accept(this, traversal)
+  int this;
+  int traversal;
 {
   undefined4 uVar1;
   
-  uVar1 = *(undefined4 *)(param_1 + 0xdc);
-  (**(code **)(**(int **)(param_2 + 0x20) + 0x74))(*(int **)(param_2 + 0x20),param_2);
+  uVar1 = *(undefined4 *)(this + 0xdc);
+  (**(code **)(**(int **)(traversal + 0x20) + 0x74))(*(int **)(traversal + 0x20),traversal);
                     
                     
-  (**(code **)(**(int **)(param_2 + 0x20) + 0x34))(*(int **)(param_2 + 0x20),param_1 + 0x90,uVar1);
+  (**(code **)(**(int **)(traversal + 0x20) + 0x34))(*(int **)(traversal + 0x20),this + 0x90,uVar1);
   return;
 }
 
@@ -904,47 +904,47 @@ int FUN_000e2a44(param_1, param_2, param_3)
   return iVar1 + param_3;
 }
 
-/* FUN_000e2a54 @ 0xe2a54 (28 bytes) */
-int FUN_000e2a54(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+/* IRStartCallRoutine__acceptCallPseudo @ 0xe2a54 (28 bytes) */
+int IRStartCallRoutine__acceptCallPseudo(this, visitor)
+  undefined4 this;
+  int *visitor;
 {
                     
                     
-  (**(code **)(*param_2 + 0xac))(param_2,param_1);
+  (**(code **)(*visitor + 0xac))(visitor,this);
   return;
 }
 
-/* FUN_000e2a70 @ 0xe2a70 (28 bytes) */
-int FUN_000e2a70(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+/* IREndCallRoutine__acceptCallPseudo @ 0xe2a70 (28 bytes) */
+int IREndCallRoutine__acceptCallPseudo(this, visitor)
+  undefined4 this;
+  int *visitor;
 {
                     
                     
-  (**(code **)(*param_2 + 0xb0))(param_2,param_1);
+  (**(code **)(*visitor + 0xb0))(visitor,this);
   return;
 }
 
-/* FUN_000e2a8c @ 0xe2a8c (28 bytes) */
-int FUN_000e2a8c(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+/* IRStartMakeCall__acceptCallPseudo @ 0xe2a8c (28 bytes) */
+int IRStartMakeCall__acceptCallPseudo(this, visitor)
+  undefined4 this;
+  int *visitor;
 {
                     
                     
-  (**(code **)(*param_2 + 0xb4))(param_2,param_1);
+  (**(code **)(*visitor + 0xb4))(visitor,this);
   return;
 }
 
-/* FUN_000e2aa8 @ 0xe2aa8 (28 bytes) */
-int FUN_000e2aa8(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+/* IREndMakeCall__acceptCallPseudo @ 0xe2aa8 (28 bytes) */
+int IREndMakeCall__acceptCallPseudo(this, visitor)
+  undefined4 this;
+  int *visitor;
 {
                     
                     
-  (**(code **)(*param_2 + 0xb8))(param_2,param_1);
+  (**(code **)(*visitor + 0xb8))(visitor,this);
   return;
 }
 
@@ -1173,9 +1173,9 @@ int FUN_000e2f8c(inst, param_2, param_3)
   return iVar2 == param_2;
 }
 
-/* FUN_000e2fd8 @ 0xe2fd8 (360 bytes) */
-int FUN_000e2fd8(param_1, inst)
-  int param_1;
+/* MachineAssembler__vslot34 @ 0xe2fd8 (360 bytes) */
+int MachineAssembler__vslot34(this, inst)
+  int this;
   int inst;
 {
   bool bVar1;
@@ -1186,11 +1186,11 @@ int FUN_000e2fd8(param_1, inst)
   iVar2 = *(int *)(inst + 0x98);
   if ((iVar2 == 2) || (iVar2 == 0xc)) {
     iVar2 = 0;
-    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),inst);
+    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-        ((int (*)())FUN_000e17b4)(*(undefined4 *)(param_1 + 0xc),uVar3);
+        ((int (*)())FUN_000e17b4)(*(undefined4 *)(this + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
@@ -1198,11 +1198,11 @@ int FUN_000e2fd8(param_1, inst)
   }
   else if (iVar2 == 4) {
     iVar2 = 0;
-    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),inst);
+    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-        ((int (*)())FUN_000e175c)(*(undefined4 *)(param_1 + 0xc),uVar3);
+        ((int (*)())FUN_000e175c)(*(undefined4 *)(this + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
@@ -1210,11 +1210,11 @@ int FUN_000e2fd8(param_1, inst)
   }
   else if (iVar2 == 3) {
     iVar2 = 0;
-    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),inst);
+    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-        ((int (*)())FUN_000e1704)(*(undefined4 *)(param_1 + 0xc),uVar3);
+        ((int (*)())FUN_000e1704)(*(undefined4 *)(this + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
@@ -1223,9 +1223,9 @@ int FUN_000e2fd8(param_1, inst)
   return;
 }
 
-/* FUN_000e3140 @ 0xe3140 (260 bytes) */
-int FUN_000e3140(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
+/* MachineAssembler__visitIfHeaderStatic @ 0xe3140 (260 bytes) */
+int MachineAssembler__visitIfHeaderStatic(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  int *this;
   int param_2;
   undefined4 param_3;
   int param_4;
@@ -1246,9 +1246,9 @@ int FUN_000e3140(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   iVar1 = *(int *)(iVar2 + 300);
   uVar3 = IRInst__getOperandSource(iVar2,1);
   uVar3 = thunk_FUN_00134de8(uVar5,uVar3);
-  (**(code **)(*param_1 + 0x34))(param_1,param_3,*(undefined4 *)(param_2 + 0xdc));
-  uVar3 = (**(code **)(*param_1 + 0x98))(param_1,iVar1 != 1,uVar3,0);
-  puVar7 = *(uint **)(param_1[4] + 0x24);
+  (**(code **)(*this + 0x34))(this,param_3,*(undefined4 *)(param_2 + 0xdc));
+  uVar3 = (**(code **)(*this + 0x98))(this,iVar1 != 1,uVar3,0);
+  puVar7 = *(uint **)(this[4] + 0x24);
   uVar6 = puVar7[1];
   if (uVar6 < *puVar7) {
     _memset(uVar6 * 4 + puVar7[2],0,4);
@@ -2343,18 +2343,18 @@ int FUN_000e4a38(param_1, param_2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_000e2860");
-asm(".set FUN_000e2860, _FUN_000e2860");
+asm(".set FUN_000e2860, _Block__accept");
 asm(".globl FUN_000e28f0");
-asm(".set FUN_000e28f0, _FUN_000e28f0");
+asm(".set FUN_000e28f0, _IfFooterStatic__accept");
 asm(".globl FUN_000e2a54");
-asm(".set FUN_000e2a54, _FUN_000e2a54");
+asm(".set FUN_000e2a54, _IRStartCallRoutine__acceptCallPseudo");
 asm(".globl FUN_000e2a70");
-asm(".set FUN_000e2a70, _FUN_000e2a70");
+asm(".set FUN_000e2a70, _IREndCallRoutine__acceptCallPseudo");
 asm(".globl FUN_000e2a8c");
-asm(".set FUN_000e2a8c, _FUN_000e2a8c");
+asm(".set FUN_000e2a8c, _IRStartMakeCall__acceptCallPseudo");
 asm(".globl FUN_000e2aa8");
-asm(".set FUN_000e2aa8, _FUN_000e2aa8");
+asm(".set FUN_000e2aa8, _IREndMakeCall__acceptCallPseudo");
 asm(".globl FUN_000e2fd8");
-asm(".set FUN_000e2fd8, _FUN_000e2fd8");
+asm(".set FUN_000e2fd8, _MachineAssembler__vslot34");
 asm(".globl FUN_000e3140");
-asm(".set FUN_000e3140, _FUN_000e3140");
+asm(".set FUN_000e3140, _MachineAssembler__visitIfHeaderStatic");

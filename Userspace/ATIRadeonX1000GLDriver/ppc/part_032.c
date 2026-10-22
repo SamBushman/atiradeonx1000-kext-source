@@ -1977,9 +1977,9 @@ LAB_00112378:
   } while( true );
 }
 
-/* FUN_001128a0 @ 0x1128a0 (1640 bytes) */
-int FUN_001128a0(param_1, param_2)
-  int *param_1;
+/* KhanVs__vslot88 @ 0x1128a0 (1640 bytes) */
+int KhanVs__vslot88(this, param_2)
+  int *this;
   int param_2;
 {
   uint loopIndex;
@@ -2042,21 +2042,21 @@ LAB_0011293c:
     piVar17[0x25] = 0;
     piVar17[0x26] = 5;
     local_58 = 1;
-    pcVar14 = *(code **)(*param_1 + 0x54);
+    pcVar14 = *(code **)(*this + 0x54);
     uVar2 = FUN_00104180(piVar17,0);
     uVar4 = DAT_001afa0c;
     FUN_00104180(piVar17,0);
-    (*pcVar14)(param_1,0,0,uVar2,uVar4,0,0,0);
+    (*pcVar14)(this,0,0,uVar2,uVar4,0,0,0);
   }
   if (piVar11 != (int *)0x0) {
     piVar11[0x25] = 1;
     piVar11[0x26] = 5;
     local_58 = local_58 + 1;
-    pcVar14 = *(code **)(*param_1 + 0x54);
+    pcVar14 = *(code **)(*this + 0x54);
     uVar2 = FUN_00104180(piVar11,0);
     uVar4 = DAT_001afa0c;
     FUN_00104180(piVar11,0);
-    (*pcVar14)(param_1,1,1,uVar2,uVar4,0,0,0);
+    (*pcVar14)(this,1,1,uVar2,uVar4,0,0,0);
   }
   iVar1 = FUN_0010f4d4(param_2);
   *(int *)(param_2 + 0x3e4) = iVar1;
@@ -2202,18 +2202,18 @@ code_r0x00112df4:
   if ((iVar6 != *(int *)(*piVar7 + 4)) ||
      (uVar12 = uVar9, *(int *)(iVar1 + 8) != *(int *)(*piVar7 + 8))) {
 LAB_00112e78:
-    pcVar14 = *(code **)(*param_1 + 0x58);
+    pcVar14 = *(code **)(*this + 0x58);
     uVar10 = FUN_000ec2c4(param_2,iVar6);
     uVar4 = FUN_0010e530(*(undefined4 *)(iVar1 + 4),*(undefined4 *)(iVar1 + 8));
-    (*pcVar14)(param_1,auStack_50,auStack_54,uVar10,uVar4,uVar13);
+    (*pcVar14)(this,auStack_50,auStack_54,uVar10,uVar4,uVar13);
     uVar13 = 0;
     uVar12 = uVar9;
   }
   goto LAB_00112ec4;
 }
 
-/* FUN_00112f08 @ 0x112f08 (76 bytes) */
-int FUN_00112f08(param_1, param_2)
+/* OpcodeTraits__getRecordTail @ 0x112f08 (76 bytes) */
+int OpcodeTraits__getRecordTail(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2230,15 +2230,15 @@ int Opcode__getInfo(opcode)
   return *(undefined4 *)(&DAT_001fc2b0 + opcode * 4);
 }
 
-/* FUN_00112f78 @ 0x112f78 (76 bytes) */
-int FUN_00112f78(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit0 @ 0x112f78 (76 bytes) */
+int OpcodeTraits__flagBit0(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) & 1;
 }
 
 /* FUN_00112fc4 @ 0x112fc4 (16 bytes) */
@@ -2287,151 +2287,151 @@ LAB_00113034:
   return uVar4;
 }
 
-/* FUN_00113090 @ 0x113090 (76 bytes) */
-int FUN_00113090(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit2 @ 0x113090 (76 bytes) */
+int OpcodeTraits__flagBit2(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 2 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 2 & 1;
 }
 
-/* FUN_001130dc @ 0x1130dc (76 bytes) */
-int FUN_001130dc(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit3 @ 0x1130dc (76 bytes) */
+int OpcodeTraits__flagBit3(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 3 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 3 & 1;
 }
 
-/* FUN_00113128 @ 0x113128 (76 bytes) */
-int FUN_00113128(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit6 @ 0x113128 (76 bytes) */
+int OpcodeTraits__flagBit6(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 6 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 6 & 1;
 }
 
-/* FUN_00113174 @ 0x113174 (76 bytes) */
-int FUN_00113174(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit7 @ 0x113174 (76 bytes) */
+int OpcodeTraits__flagBit7(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 7 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 7 & 1;
 }
 
-/* FUN_001131c0 @ 0x1131c0 (76 bytes) */
-int FUN_001131c0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit8 @ 0x1131c0 (76 bytes) */
+int OpcodeTraits__flagBit8(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 8 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 8 & 1;
 }
 
-/* FUN_0011320c @ 0x11320c (76 bytes) */
-int FUN_0011320c(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit9 @ 0x11320c (76 bytes) */
+int OpcodeTraits__flagBit9(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 9 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 9 & 1;
 }
 
-/* FUN_00113258 @ 0x113258 (76 bytes) */
-int FUN_00113258(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit10 @ 0x113258 (76 bytes) */
+int OpcodeTraits__flagBit10(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 10 & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 10 & 1;
 }
 
-/* FUN_001132a4 @ 0x1132a4 (76 bytes) */
-int FUN_001132a4(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit12 @ 0x1132a4 (76 bytes) */
+int OpcodeTraits__flagBit12(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 0xc & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 0xc & 1;
 }
 
-/* FUN_001132f0 @ 0x1132f0 (76 bytes) */
-int FUN_001132f0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__flagBit13 @ 0x1132f0 (76 bytes) */
+int OpcodeTraits__flagBit13(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(uint *)(param_1 * 0x38 + iVar1) >> 0xd & 1;
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(uint *)(opcode * 0x38 + iVar1) >> 0xd & 1;
 }
 
-/* FUN_0011333c @ 0x11333c (76 bytes) */
-int FUN_0011333c(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__getField4 @ 0x11333c (76 bytes) */
+int OpcodeTraits__getField4(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(undefined4 *)(param_1 * 0x38 + iVar1 + 4);
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(undefined4 *)(opcode * 0x38 + iVar1 + 4);
 }
 
-/* FUN_00113388 @ 0x113388 (76 bytes) */
-int FUN_00113388(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__getInstClass @ 0x113388 (76 bytes) */
+int OpcodeTraits__getInstClass(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(undefined4 *)(param_1 * 0x38 + iVar1 + 0x30);
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(undefined4 *)(opcode * 0x38 + iVar1 + 0x30);
 }
 
-/* FUN_001133d4 @ 0x1133d4 (76 bytes) */
-int FUN_001133d4(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__getFieldC @ 0x1133d4 (76 bytes) */
+int OpcodeTraits__getFieldC(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(undefined4 *)(param_1 * 0x38 + iVar1 + 0xc);
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(undefined4 *)(opcode * 0x38 + iVar1 + 0xc);
 }
 
-/* FUN_00113420 @ 0x113420 (76 bytes) */
-int FUN_00113420(param_1, param_2)
-  int param_1;
-  int param_2;
+/* OpcodeTraits__getField34 @ 0x113420 (76 bytes) */
+int OpcodeTraits__getField34(opcode, compiler)
+  int opcode;
+  int compiler;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
-  return *(undefined4 *)(param_1 * 0x38 + iVar1 + 0x34);
+  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  return *(undefined4 *)(opcode * 0x38 + iVar1 + 0x34);
 }
 
-/* FUN_0011346c @ 0x11346c (80 bytes) */
-int FUN_0011346c(param_1, param_2)
+/* OpcodeTraits__instFlagBit2 @ 0x11346c (80 bytes) */
+int OpcodeTraits__instFlagBit2(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2451,7 +2451,7 @@ int FUN_001134bc(param_1, param_2, param_3)
   
   iVar1 = *(int *)(param_1 + 0xc);
   if (iVar1 == 0) {
-    iVar1 = ((int (*)())FUN_0011346c)(*(undefined4 *)(param_3 + 8),param_2);
+    iVar1 = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
     if (iVar1 != 0) {
       return 1;
     }
@@ -2464,7 +2464,7 @@ int FUN_001134bc(param_1, param_2, param_3)
   if (iVar1 != 0) {
     return 9;
   }
-  iVar1 = ((int (*)())FUN_0011346c)(*(undefined4 *)(param_3 + 8),param_2);
+  iVar1 = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
   if (iVar1 != 0) {
     return 1;
   }
@@ -2622,7 +2622,7 @@ int FUN_0011379c(param_1, param_2)
   
   iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c),param_2);
   iVar4 = *(int *)(*(int *)(param_2 + 0x88) + 8);
-  iVar2 = ((int (*)())FUN_00113174)(iVar4,param_1);
+  iVar2 = ((int (*)())OpcodeTraits__flagBit7)(iVar4,param_1);
   if ((iVar2 != 0) || (uVar3 = 1, (*(uint *)(iVar1 + iVar4 * 0x38) & 2) == 0)) {
     uVar3 = 0;
   }
@@ -2755,4 +2755,4 @@ int FUN_00113a98()
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_001128a0");
-asm(".set FUN_001128a0, _FUN_001128a0");
+asm(".set FUN_001128a0, _KhanVs__vslot88");

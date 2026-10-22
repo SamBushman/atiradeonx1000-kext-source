@@ -9,7 +9,7 @@ int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,u
   double fparam_1_00;
   
   *(int *)(param_4 + 0x228) = *(int *)(param_4 + 0x228) + 1;
-  iVar2 = FUN_0010a240(0xa2,param_5);
+  iVar2 = IRLoadConst__vslot73(0xa2,param_5);
   *(undefined4 *)(iVar2 + 0x98) = 0x36;
   *(undefined4 *)(iVar2 + 0x94) = *(undefined4 *)(iVar2 + 0x14c);
   *(undefined4 *)(iVar2 + 0x9c) = param_2;
@@ -525,7 +525,7 @@ int FUN_0010cb48(inst, param_2)
       iVar11 = iVar11 + 1) {
     iVar6 = 0;
     *(int *)(*(int *)(param_2 + 0x6c4) + 0x228) = *(int *)(*(int *)(param_2 + 0x6c4) + 0x228) + 1;
-    piVar10 = (int *)FUN_0010a240(0xa2,param_2);
+    piVar10 = (int *)IRLoadConst__vslot73(0xa2,param_2);
     *puVar8 = piVar10;
     piVar10[0x26] = 0x36;
     piVar10[0x25] = piVar10[0x53];
@@ -772,7 +772,7 @@ int FUN_0010d358(inst, param_2)
   undefined1 auStack_40 [4];
   float local_3c;
   
-  iVar1 = FUN_00112f78(*(undefined4 *)(*(int *)(inst + 0x88) + 8),param_2);
+  iVar1 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(inst + 0x88) + 8),param_2);
   if (iVar1 != 0) {
     iVar1 = IRInst__getOperandRecord(inst,0);
     uVar3 = *(undefined4 *)(iVar1 + 0x10);
@@ -990,15 +990,15 @@ int FUN_0010d730(inst, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_0010da84 @ 0x10da84 (84 bytes) */
-int FUN_0010da84(param_1)
-  int param_1;
+/* HwLimits__vslot24 @ 0x10da84 (84 bytes) */
+int HwLimits__vslot24(this)
+  int this;
 {
-  *(undefined4 *)(((unsigned char *)0x00001730) + param_1) = 0;
-  *(undefined4 *)(((unsigned char *)0x0000172c) + param_1) = 0;
-  *(undefined4 *)(((unsigned char *)0x00001728) + param_1) = 0;
-  _memset(param_1 + 0x68,0,0xd00);
-  return _memset(param_1 + 0xd68,0,0x9c0);
+  *(undefined4 *)(((unsigned char *)0x00001730) + this) = 0;
+  *(undefined4 *)(((unsigned char *)0x0000172c) + this) = 0;
+  *(undefined4 *)(((unsigned char *)0x00001728) + this) = 0;
+  _memset(this + 0x68,0,0xd00);
+  return _memset(this + 0xd68,0,0x9c0);
 }
 
 /* HwLimits__dtor_10dad8 @ 0x10dad8 (128 bytes) */
@@ -1124,17 +1124,17 @@ int FUN_0010dc9c(param_1, param_2)
   return (int)(uint)(byte)((unsigned char *)0x00001734)[((int)param_2 >> 3) + param_1] >> (param_2 & 7) & 1;
 }
 
-/* FUN_0010dcb8 @ 0x10dcb8 (12 bytes) */
-int FUN_0010dcb8(param_1, param_2)
-  undefined4 param_1;
+/* HwLimits__vslot77 @ 0x10dcb8 (12 bytes) */
+int HwLimits__vslot77(this, param_2)
+  undefined4 this;
   undefined4 *param_2;
 {
   *param_2 = 0;
   return;
 }
 
-/* FUN_0010dcc4 @ 0x10dcc4 (56 bytes) */
-int FUN_0010dcc4()
+/* HwLimits__vslot10 @ 0x10dcc4 (56 bytes) */
+int HwLimits__vslot10()
 {
   
   if (*(int *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + 0x6c4) != 0) {
@@ -1143,9 +1143,9 @@ int FUN_0010dcc4()
   return 0;
 }
 
-/* FUN_0010dd08 @ 0x10dd08 (68 bytes) */
-int FUN_0010dd08(param_1, param_2, param_3)
-  undefined4 param_1;
+/* HwLimits__vslot20 @ 0x10dd08 (68 bytes) */
+int HwLimits__vslot20(this, param_2, param_3)
+  undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -1204,15 +1204,15 @@ int FUN_0010dde4()
   return 0x10c;
 }
 
-/* FUN_0010ddec @ 0x10ddec (8 bytes) */
-int FUN_0010ddec()
+/* KhanPs__vslot16 @ 0x10ddec (8 bytes) */
+int KhanPs__vslot16()
 {
   return 0xb5;
 }
 
-/* FUN_0010ddfc @ 0x10ddfc (56 bytes) */
-int FUN_0010ddfc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+/* HwLimits__vslot8 @ 0x10ddfc (56 bytes) */
+int HwLimits__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -1226,8 +1226,8 @@ int FUN_0010ddfc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* FUN_0010de34 @ 0x10de34 (56 bytes) */
-int FUN_0010de34()
+/* HwLimits__vslot9 @ 0x10de34 (56 bytes) */
+int HwLimits__vslot9()
 {
   
   if (*(int *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + 0x6c4) != 0) {
@@ -1953,9 +1953,9 @@ int FUN_0010ecb8(inst)
   return 0;
 }
 
-/* FUN_0010ed4c @ 0x10ed4c (540 bytes) */
-int FUN_0010ed4c(param_1, param_2)
-  int *param_1;
+/* KhanPs__vslot87 @ 0x10ed4c (540 bytes) */
+int KhanPs__vslot87(this, param_2)
+  int *this;
   int param_2;
 {
   bool bVar1;
@@ -2012,11 +2012,11 @@ int FUN_0010ed4c(param_1, param_2)
               }
               if (uVar12 != 0) {
                 uVar9 = uVar9 - uVar12;
-                pcVar13 = *(code **)(*param_1 + 0x54);
+                pcVar13 = *(code **)(*this + 0x54);
                 uVar6 = FUN_000ec2c4(param_2,iVar3);
                 iVar3 = IRInst__getOperandRecord(iVar2,1);
                 uVar12 = *(uint *)(iVar2 + 0x13c);
-                (*pcVar13)(param_1,iVar10,uVar6,iVar4,*(undefined4 *)(iVar3 + 0x10),uVar12 & 1,
+                (*pcVar13)(this,iVar10,uVar6,iVar4,*(undefined4 *)(iVar3 + 0x10),uVar12 & 1,
                            uVar12 >> 2 & 1,uVar12 >> 1 & 1);
               }
             }
@@ -2358,22 +2358,22 @@ int FUN_0010f4d4(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0010da84");
-asm(".set FUN_0010da84, _FUN_0010da84");
+asm(".set FUN_0010da84, _HwLimits__vslot24");
 asm(".globl FUN_0010dcb8");
-asm(".set FUN_0010dcb8, _FUN_0010dcb8");
+asm(".set FUN_0010dcb8, _HwLimits__vslot77");
 asm(".globl FUN_0010dcc4");
-asm(".set FUN_0010dcc4, _FUN_0010dcc4");
+asm(".set FUN_0010dcc4, _HwLimits__vslot10");
 asm(".globl FUN_0010dd08");
-asm(".set FUN_0010dd08, _FUN_0010dd08");
+asm(".set FUN_0010dd08, _HwLimits__vslot20");
 asm(".globl FUN_0010ddec");
-asm(".set FUN_0010ddec, _FUN_0010ddec");
+asm(".set FUN_0010ddec, _KhanPs__vslot16");
 asm(".globl FUN_0010ddfc");
-asm(".set FUN_0010ddfc, _FUN_0010ddfc");
+asm(".set FUN_0010ddfc, _HwLimits__vslot8");
 asm(".globl FUN_0010de34");
-asm(".set FUN_0010de34, _FUN_0010de34");
+asm(".set FUN_0010de34, _HwLimits__vslot9");
 asm(".globl FUN_0010de6c");
 asm(".set FUN_0010de6c, _FUN_0010de6c");
 asm(".globl FUN_0010ed4c");
-asm(".set FUN_0010ed4c, _FUN_0010ed4c");
+asm(".set FUN_0010ed4c, _KhanPs__vslot87");
 asm(".globl FUN_0010ef68");
 asm(".set FUN_0010ef68, _FUN_0010ef68");

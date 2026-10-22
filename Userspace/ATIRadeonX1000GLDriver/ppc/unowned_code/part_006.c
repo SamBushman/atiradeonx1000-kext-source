@@ -1,129 +1,129 @@
 #include "decls.h"
 
-/* orph_1d82c8 @ 0x1d82c8 (8 bytes) */
-int orph_1d82c8()
+/* KhanPs__vslot30 @ 0x1d82c8 (8 bytes) */
+int KhanPs__vslot30()
 {
   return 1;
 }
 
-/* orph_1d82d0 @ 0x1d82d0 (8 bytes) */
-int orph_1d82d0()
+/* KhanPs__vslot32 @ 0x1d82d0 (8 bytes) */
+int KhanPs__vslot32()
 {
   return 1;
 }
 
-/* orph_1d82d8 @ 0x1d82d8 (8 bytes) */
-int orph_1d82d8()
+/* KhanPs__vslot71 @ 0x1d82d8 (8 bytes) */
+int KhanPs__vslot71()
 {
   return 1;
 }
 
-/* orph_1d82e0 @ 0x1d82e0 (8 bytes) */
-int orph_1d82e0()
+/* KhanPs__vslot45 @ 0x1d82e0 (8 bytes) */
+int KhanPs__vslot45()
 {
   return 1;
 }
 
-/* orph_1d82e8 @ 0x1d82e8 (8 bytes) */
-int orph_1d82e8()
+/* KhanPs__vslot55 @ 0x1d82e8 (8 bytes) */
+int KhanPs__vslot55()
 {
   return 0;
 }
 
-/* orph_1d82f0 @ 0x1d82f0 (8 bytes) */
-int orph_1d82f0()
+/* KhanPs__vslot38 @ 0x1d82f0 (8 bytes) */
+int KhanPs__vslot38()
 {
   return 0;
 }
 
-/* orph_1d82f8 @ 0x1d82f8 (4 bytes) */
-int orph_1d82f8()
+/* KhanPs__vslot88 @ 0x1d82f8 (4 bytes) */
+int KhanPs__vslot88()
 {
   return;
 }
 
-/* orph_1d82fc @ 0x1d82fc (4 bytes) */
-int orph_1d82fc()
+/* KhanPs__vslot89 @ 0x1d82fc (4 bytes) */
+int KhanPs__vslot89()
 {
   return;
 }
 
-/* orph_1d8300 @ 0x1d8300 (8 bytes) */
-int orph_1d8300()
+/* KhanPs__vslot60 @ 0x1d8300 (8 bytes) */
+int KhanPs__vslot60()
 {
   return 0;
 }
 
-/* orph_1d8308 @ 0x1d8308 (8 bytes) */
-int orph_1d8308()
+/* KhanPs__vslot61 @ 0x1d8308 (8 bytes) */
+int KhanPs__vslot61()
 {
   return 0;
 }
 
-/* orph_1d8310 @ 0x1d8310 (4 bytes) */
-int orph_1d8310()
+/* KhanChip__vslot3 @ 0x1d8310 (4 bytes) */
+int KhanChip__vslot3()
 {
   return;
 }
 
-/* orph_1d8314 @ 0x1d8314 (4 bytes) */
-int orph_1d8314()
+/* KhanChip__vslot4 @ 0x1d8314 (4 bytes) */
+int KhanChip__vslot4()
 {
   return;
 }
 
-/* orph_1d83e8 @ 0x1d83e8 (8 bytes) */
-int orph_1d83e8()
+/* KhanVs__vslot31 @ 0x1d83e8 (8 bytes) */
+int KhanVs__vslot31()
 {
   return 1;
 }
 
-/* orph_1d83f0 @ 0x1d83f0 (8 bytes) */
-int orph_1d83f0()
+/* KhanVs__vslot32 @ 0x1d83f0 (8 bytes) */
+int KhanVs__vslot32()
 {
   return 0;
 }
 
-/* orph_1d83f8 @ 0x1d83f8 (8 bytes) */
-int orph_1d83f8()
+/* KhanVs__vslot34 @ 0x1d83f8 (8 bytes) */
+int KhanVs__vslot34()
 {
   return 0;
 }
 
-/* orph_1d8400 @ 0x1d8400 (8 bytes) */
-int orph_1d8400()
+/* KhanVs__vslot33 @ 0x1d8400 (8 bytes) */
+int KhanVs__vslot33()
 {
   return 0;
 }
 
-/* orph_1d8408 @ 0x1d8408 (8 bytes) */
-int orph_1d8408()
+/* KhanVs__vslot38 @ 0x1d8408 (8 bytes) */
+int KhanVs__vslot38()
 {
   return 0;
 }
 
-/* orph_1d8410 @ 0x1d8410 (8 bytes) */
-int orph_1d8410()
+/* KhanVs__vslot62 @ 0x1d8410 (8 bytes) */
+int KhanVs__vslot62()
 {
   return 0;
 }
 
-/* orph_1d8418 @ 0x1d8418 (20 bytes) */
-int orph_1d8418(param_1, param_2)
+/* KhanVs__vslot30 @ 0x1d8418 (20 bytes) */
+int KhanVs__vslot30(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
   return 2 < param_2 - 0x16U;
 }
 
-/* orph_1d842c @ 0x1d842c (8 bytes) */
-int orph_1d842c()
+/* KhanVs__vslot64 @ 0x1d842c (8 bytes) */
+int KhanVs__vslot64()
 {
   return 1;
 }
 
-/* orph_1d8434 @ 0x1d8434 (20 bytes) */
-int orph_1d8434(param_1, param_2, param_3, param_4)
+/* KhanVs__vslot65 @ 0x1d8434 (20 bytes) */
+int KhanVs__vslot65(param_1, param_2, param_3, param_4)
   int *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -135,106 +135,106 @@ int orph_1d8434(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* orph_1d8448 @ 0x1d8448 (8 bytes) */
-int orph_1d8448()
+/* KhanVs__vslot66 @ 0x1d8448 (8 bytes) */
+int KhanVs__vslot66()
 {
   return 0;
 }
 
-/* orph_1d8450 @ 0x1d8450 (8 bytes) */
-int orph_1d8450()
+/* KhanVs__vslot67 @ 0x1d8450 (8 bytes) */
+int KhanVs__vslot67()
 {
   return 0;
 }
 
-/* orph_1d8458 @ 0x1d8458 (8 bytes) */
-int orph_1d8458()
+/* KhanVs__vslot48 @ 0x1d8458 (8 bytes) */
+int KhanVs__vslot48()
 {
   return 1;
 }
 
-/* orph_1d8460 @ 0x1d8460 (8 bytes) */
-int orph_1d8460()
+/* KhanVs__vslot52 @ 0x1d8460 (8 bytes) */
+int KhanVs__vslot52()
 {
   return 1;
 }
 
-/* orph_1d8468 @ 0x1d8468 (8 bytes) */
-int orph_1d8468()
+/* KhanVs__vslot54 @ 0x1d8468 (8 bytes) */
+int KhanVs__vslot54()
 {
   return 0;
 }
 
-/* orph_1d8470 @ 0x1d8470 (4 bytes) */
-int orph_1d8470()
+/* KhanVs__vslot87 @ 0x1d8470 (4 bytes) */
+int KhanVs__vslot87()
 {
   return;
 }
 
-/* orph_1d8474 @ 0x1d8474 (8 bytes) */
-int orph_1d8474()
+/* KhanVs__vslot90 @ 0x1d8474 (8 bytes) */
+int KhanVs__vslot90()
 {
   return 0;
 }
 
-/* orph_1d847c @ 0x1d847c (4 bytes) */
-int orph_1d847c()
+/* FudoVs__vslot87 @ 0x1d847c (4 bytes) */
+int FudoVs__vslot87()
 {
   return;
 }
 
-/* orph_1d8480 @ 0x1d8480 (8 bytes) */
-int orph_1d8480()
+/* FudoVs__vslot32 @ 0x1d8480 (8 bytes) */
+int FudoVs__vslot32()
 {
   return 1;
 }
 
-/* orph_1d8488 @ 0x1d8488 (8 bytes) */
-int orph_1d8488()
+/* FudoVs__vslot34 @ 0x1d8488 (8 bytes) */
+int FudoVs__vslot34()
 {
   return 0;
 }
 
-/* orph_1d8490 @ 0x1d8490 (8 bytes) */
-int orph_1d8490()
+/* FudoVs__vslot33 @ 0x1d8490 (8 bytes) */
+int FudoVs__vslot33()
 {
   return 1;
 }
 
-/* orph_1d8498 @ 0x1d8498 (8 bytes) */
-int orph_1d8498()
+/* FudoVs__vslot90 @ 0x1d8498 (8 bytes) */
+int FudoVs__vslot90()
 {
   return 0;
 }
 
-/* orph_1d84a0 @ 0x1d84a0 (4 bytes) */
-int orph_1d84a0()
+/* FudoVs__flattenIfs @ 0x1d84a0 (4 bytes) */
+int FudoVs__flattenIfs()
 {
   return;
 }
 
-/* orph_1d84a4 @ 0x1d84a4 (8 bytes) */
-int orph_1d84a4()
+/* FudoVs__vslot69 @ 0x1d84a4 (8 bytes) */
+int FudoVs__vslot69()
 {
   return 0;
 }
 
-/* orph_1d857c @ 0x1d857c (8 bytes) */
-int orph_1d857c()
+/* MirrorBlock__isMirror @ 0x1d857c (8 bytes) */
+int MirrorBlock__isMirror()
 {
   return 1;
 }
 
-/* orph_1d86a8 @ 0x1d86a8 (12 bytes) */
-int orph_1d86a8(param_1)
+/* ResourceModel__vslot2 @ 0x1d86a8 (12 bytes) */
+int ResourceModel__vslot2(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 4) = 0;
   return;
 }
 
-/* orph_1d86ec @ 0x1d86ec (16 bytes) */
-int orph_1d86ec(param_1)
+/* ResourceModel__vslot5 @ 0x1d86ec (16 bytes) */
+int ResourceModel__vslot5(param_1)
   int *param_1;
 {
                     
@@ -243,101 +243,101 @@ int orph_1d86ec(param_1)
   return;
 }
 
-/* orph_1d86fc @ 0x1d86fc (8 bytes) */
-int orph_1d86fc()
+/* ResourceModel__vslot6 @ 0x1d86fc (8 bytes) */
+int ResourceModel__vslot6()
 {
   return 0;
 }
 
-/* orph_1d8704 @ 0x1d8704 (4 bytes) */
-int orph_1d8704()
+/* ResourceModel__vslot7 @ 0x1d8704 (4 bytes) */
+int ResourceModel__vslot7()
 {
   return;
 }
 
-/* orph_1d8708 @ 0x1d8708 (8 bytes) */
-int orph_1d8708()
+/* ResourceModel__vslot8 @ 0x1d8708 (8 bytes) */
+int ResourceModel__vslot8()
 {
   return 0;
 }
 
-/* orph_1d8710 @ 0x1d8710 (16 bytes) */
-int orph_1d8710(param_1)
+/* ResourceModel__vslot9 @ 0x1d8710 (16 bytes) */
+int ResourceModel__vslot9(param_1)
   int param_1;
 {
   return *(int *)(param_1 + 4) == 0;
 }
 
-/* orph_1d8720 @ 0x1d8720 (20 bytes) */
-int orph_1d8720(param_1, param_2)
+/* ResourceModel__vslot10 @ 0x1d8720 (20 bytes) */
+int ResourceModel__vslot10(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
   return *(int *)(param_2 + 0x98) == 6;
 }
 
-/* orph_1d8734 @ 0x1d8734 (8 bytes) */
-int orph_1d8734()
+/* ResourceModel__vslot12 @ 0x1d8734 (8 bytes) */
+int ResourceModel__vslot12()
 {
   return 0;
 }
 
-/* orph_1d873c @ 0x1d873c (8 bytes) */
-int orph_1d873c()
+/* ResourceModel__vslot13 @ 0x1d873c (8 bytes) */
+int ResourceModel__vslot13()
 {
   return 0;
 }
 
-/* orph_1d8744 @ 0x1d8744 (4 bytes) */
-int orph_1d8744()
+/* ResourceModel__vslot14 @ 0x1d8744 (4 bytes) */
+int ResourceModel__vslot14()
 {
   return;
 }
 
-/* orph_1d8748 @ 0x1d8748 (8 bytes) */
-int orph_1d8748()
+/* ResourceModel__vslot15 @ 0x1d8748 (8 bytes) */
+int ResourceModel__vslot15()
 {
   return 0;
 }
 
-/* orph_1d8750 @ 0x1d8750 (8 bytes) */
-int orph_1d8750()
+/* ResourceModel__vslot16 @ 0x1d8750 (8 bytes) */
+int ResourceModel__vslot16()
 {
   return 0;
 }
 
-/* orph_1d8758 @ 0x1d8758 (4 bytes) */
-int orph_1d8758()
+/* ResourceModel__vslot17 @ 0x1d8758 (4 bytes) */
+int ResourceModel__vslot17()
 {
   return;
 }
 
-/* orph_1d875c @ 0x1d875c (4 bytes) */
-int orph_1d875c()
+/* ResourceModel__vslot18 @ 0x1d875c (4 bytes) */
+int ResourceModel__vslot18()
 {
   return;
 }
 
-/* orph_1d8760 @ 0x1d8760 (8 bytes) */
-int orph_1d8760()
+/* ResourceModel__vslot19 @ 0x1d8760 (8 bytes) */
+int ResourceModel__vslot19()
 {
   return 3;
 }
 
-/* orph_1d8768 @ 0x1d8768 (8 bytes) */
-int orph_1d8768()
+/* ResourceModel__vslot20 @ 0x1d8768 (8 bytes) */
+int ResourceModel__vslot20()
 {
   return 0;
 }
 
-/* orph_1d8770 @ 0x1d8770 (8 bytes) */
-int orph_1d8770()
+/* ResourceModel__vslot21 @ 0x1d8770 (8 bytes) */
+int ResourceModel__vslot21()
 {
   return 0;
 }
 
-/* orph_1d8778 @ 0x1d8778 (12 bytes) */
-int orph_1d8778()
+/* ResourceModel__vslot26 @ 0x1d8778 (12 bytes) */
+int ResourceModel__vslot26()
 {
   undefined4 *in_r7;
   
@@ -345,38 +345,38 @@ int orph_1d8778()
   return;
 }
 
-/* orph_1d8784 @ 0x1d8784 (8 bytes) */
-int orph_1d8784()
+/* ResourceModel__vslot27 @ 0x1d8784 (8 bytes) */
+int ResourceModel__vslot27()
 {
   return 0;
 }
 
-/* orph_1d878c @ 0x1d878c (4 bytes) */
-int orph_1d878c()
+/* ResourceModel__vslot28 @ 0x1d878c (4 bytes) */
+int ResourceModel__vslot28()
 {
   return;
 }
 
-/* orph_1d8790 @ 0x1d8790 (8 bytes) */
-int orph_1d8790()
+/* ResourceModel__vslot30 @ 0x1d8790 (8 bytes) */
+int ResourceModel__vslot30()
 {
   return 1;
 }
 
-/* orph_1d8798 @ 0x1d8798 (8 bytes) */
-int orph_1d8798()
+/* ResourceModel__vslot31 @ 0x1d8798 (8 bytes) */
+int ResourceModel__vslot31()
 {
   return 0;
 }
 
-/* orph_1d87a0 @ 0x1d87a0 (8 bytes) */
-int orph_1d87a0()
+/* ResourceModel__vslot33 @ 0x1d87a0 (8 bytes) */
+int ResourceModel__vslot33()
 {
   return 0x10;
 }
 
-/* orph_1d87e0 @ 0x1d87e0 (20 bytes) */
-int orph_1d87e0(param_1)
+/* ThreadModel__vslot2 @ 0x1d87e0 (20 bytes) */
+int ThreadModel__vslot2(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 8) = 0;

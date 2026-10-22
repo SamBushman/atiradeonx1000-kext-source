@@ -1680,11 +1680,11 @@ int Block__isSimple(block)
   return compareResult == 0;
 }
 
-/* FUN_000e77c0 @ 0xe77c0 (52 bytes) */
-int FUN_000e77c0(param_1)
-  int param_1;
+/* LoopHeader__getKindName @ 0xe77c0 (52 bytes) */
+int LoopHeader__getKindName(this)
+  int this;
 {
-  if (*(int *)(param_1 + 0x134) != 0) {
+  if (*(int *)(this + 0x134) != 0) {
     return "REP_HEADER";
   }
   return "LOOP_HEADER";
@@ -1945,20 +1945,20 @@ int FUN_000e7c98(param_1)
   return piVar1;
 }
 
-/* EntryBlock__vslot3 @ 0xe7cf0 (108 bytes) */
-int EntryBlock__vslot3(param_1, inst)
-  int param_1;
+/* EntryBlock__insertInstruction @ 0xe7cf0 (108 bytes) */
+int EntryBlock__insertInstruction(this, inst)
+  int this;
   int inst;
 {
   if (*(int *)(inst + 0x84) == 0) {
-    DList__insertAfter(inst,*(undefined4 *)(param_1 + 300));
-    *(int *)(param_1 + 300) = inst;
-    *(int *)(inst + 0x158) = param_1;
+    DList__insertAfter(inst,*(undefined4 *)(this + 300));
+    *(int *)(this + 300) = inst;
+    *(int *)(inst + 0x158) = this;
   }
   else {
     IRInst__getOperandSource(inst,1);
-    DList__insertAfter(inst,*(undefined4 *)(param_1 + 300));
-    *(int *)(inst + 0x158) = param_1;
+    DList__insertAfter(inst,*(undefined4 *)(this + 300));
+    *(int *)(inst + 0x158) = this;
   }
   return;
 }
@@ -2364,9 +2364,9 @@ int FUN_000e8424(param_1, param_2)
   return;
 }
 
-/* FUN_000e84fc @ 0xe84fc (468 bytes) */
-int FUN_000e84fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+/* Block__verify @ 0xe84fc (468 bytes) */
+int Block__verify(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  int this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2384,8 +2384,8 @@ int FUN_000e84fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int *piVar8;
   
   iVar4 = 0;
-  for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(param_1 + 0xd4) + 4); loopIndex = loopIndex + 1) {
-    iVar6 = *(int *)(iVar4 + *(int *)(*(int *)(param_1 + 0xd4) + 8));
+  for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(this + 0xd4) + 4); loopIndex = loopIndex + 1) {
+    iVar6 = *(int *)(iVar4 + *(int *)(*(int *)(this + 0xd4) + 8));
     if (iVar6 != 0) {
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
       }
@@ -2393,18 +2393,18 @@ int FUN_000e84fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     iVar4 = iVar4 + 4;
   }
   iVar4 = 0;
-  for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(param_1 + 0xd0) + 4); loopIndex = loopIndex + 1) {
-    iVar6 = *(int *)(iVar4 + *(int *)(*(int *)(param_1 + 0xd0) + 8));
+  for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(this + 0xd0) + 4); loopIndex = loopIndex + 1) {
+    iVar6 = *(int *)(iVar4 + *(int *)(*(int *)(this + 0xd0) + 8));
     if (iVar6 != 0) {
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
       }
     }
     iVar4 = iVar4 + 4;
   }
-  piVar2 = (int *)(*(int **)(param_1 + 0x98))[2];
+  piVar2 = (int *)(*(int **)(this + 0x98))[2];
   if (piVar2 != (int *)0x0) {
     iVar4 = 0;
-    piVar8 = *(int **)(param_1 + 0x98);
+    piVar8 = *(int **)(this + 0x98);
     do {
       piVar3 = piVar2;
       if ((piVar8[5] & 1U) != 0) {
@@ -2413,11 +2413,11 @@ int FUN_000e84fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         if (bVar1) {
           (**(code **)(*piVar8 + 0x34))(piVar8);
         }
-        iVar6 = *(int *)(param_1 + 0xa8);
+        iVar6 = *(int *)(this + 0xa8);
         if (((*(uint *)(*(int *)(iVar6 + 0x6c4) + 0x30) & 4) != 0) &&
            (*(int *)(piVar8[0x22] + 8) == 0x8e)) {
           (**(code **)(*(int *)piVar8[1] + 0x34))((int *)piVar8[1]);
-          iVar6 = *(int *)(param_1 + 0xa8);
+          iVar6 = *(int *)(this + 0xa8);
         }
         (**(code **)(*piVar8 + 8))(piVar8,iVar6);
         piVar3 = (int *)piVar8[2];
@@ -2429,9 +2429,9 @@ int FUN_000e84fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 1;
 }
 
-/* FUN_000e86f0 @ 0xe86f0 (236 bytes) */
-int FUN_000e86f0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+/* LoopHeader__verify @ 0xe86f0 (236 bytes) */
+int LoopHeader__verify(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  int this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2444,8 +2444,8 @@ int FUN_000e86f0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 extraout_r4;
   undefined8 uVar3;
   
-  piVar1 = *(int **)(param_1 + 0x98);
-  for (piVar2 = (int *)(*(int **)(param_1 + 0x98))[2]; piVar2 != (int *)0x0;
+  piVar1 = *(int **)(this + 0x98);
+  for (piVar2 = (int *)(*(int **)(this + 0x98))[2]; piVar2 != (int *)0x0;
       piVar2 = (int *)piVar2[2]) {
     param_7 = piVar1[5] & 1;
     if (param_7 != 0) {
@@ -2466,7 +2466,7 @@ int FUN_000e86f0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     }
     piVar1 = piVar2;
   }
-  return ((int (*)())FUN_000e84fc)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  return ((int (*)())Block__verify)(this,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* IfHeader__canFlatten @ 0xe87e4 (340 bytes) */
@@ -3081,10 +3081,10 @@ LAB_000e9610:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_000e77c0");
-asm(".set FUN_000e77c0, _FUN_000e77c0");
+asm(".set FUN_000e77c0, _LoopHeader__getKindName");
 asm(".globl FUN_000e7cf0");
-asm(".set FUN_000e7cf0, _EntryBlock__vslot3");
+asm(".set FUN_000e7cf0, _EntryBlock__insertInstruction");
 asm(".globl FUN_000e84fc");
-asm(".set FUN_000e84fc, _FUN_000e84fc");
+asm(".set FUN_000e84fc, _Block__verify");
 asm(".globl FUN_000e86f0");
-asm(".set FUN_000e86f0, _FUN_000e86f0");
+asm(".set FUN_000e86f0, _LoopHeader__verify");

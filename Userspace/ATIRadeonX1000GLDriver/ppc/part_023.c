@@ -304,7 +304,7 @@ int Block__ctor_e9d68(this, param_2)
   uVar1 = *(undefined4 *)(param_2 + 0xc);
   *this = &PTR_FUN_001e9b08;
   this[3] = uVar1;
-  FUN_001940a8(this + 0x24);
+  DListNode__init(this + 0x24);
   iVar2 = *(int *)(param_2 + 0xa8);
   uVar1 = *(undefined4 *)(param_2 + 0xac);
   this[0x2a] = iVar2;
@@ -338,16 +338,16 @@ int Block__ctor_e9d68(this, param_2)
 }
 
 /* Block__clone @ 0xe9e88 (64 bytes) */
-int Block__clone(param_1)
-  int param_1;
+int Block__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
   *allocation = arena;
-  ((int (*)())Block__ctor_e9d68)(allocation + 1,param_1);
+  ((int (*)())Block__ctor_e9d68)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -372,7 +372,7 @@ int Block__ctor_e9f00(this, param_2)
   uVar1 = *(undefined4 *)(param_2 + 0xc);
   *this = &PTR_FUN_001e9b08;
   this[3] = uVar1;
-  FUN_001940a8(this + 0x24);
+  DListNode__init(this + 0x24);
   iVar2 = *(int *)(param_2 + 0xa8);
   uVar1 = *(undefined4 *)(param_2 + 0xac);
   this[0x2a] = iVar2;
@@ -423,7 +423,7 @@ int Block__ctor_ea020(this, compiler)
   this[2] = 0;
   this[3] = 0;
   *this = &PTR_FUN_001e9b08;
-  FUN_001940a8(this + 0x24);
+  DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
   iVar3 = *(int *)(compiler + 0x32c);
@@ -478,7 +478,7 @@ int Block__ctor_ea148(this, compiler)
   this[2] = 0;
   this[3] = 0;
   *this = &PTR_FUN_001e9b08;
-  FUN_001940a8(this + 0x24);
+  DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
   iVar3 = *(int *)(compiler + 0x32c);
@@ -548,7 +548,7 @@ int Block__dtor_ea270(this)
     Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  FUN_00193fb4(this + 0x24);
+  DListNode__clear(this + 0x24);
   puVar1 = PTR_DAT_001e8b48 + 8;
   this[0x24] = puVar1;
   this[0x27] = puVar1;
@@ -864,16 +864,16 @@ int PostLoopFooter__ctor_eacb8(this, param_2)
 }
 
 /* PostLoopFooter__clone @ 0xead08 (64 bytes) */
-int PostLoopFooter__clone(param_1)
-  int param_1;
+int PostLoopFooter__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
-  ((int (*)())PostLoopFooter__ctor_eacb8)(allocation + 1,param_1);
+  ((int (*)())PostLoopFooter__ctor_eacb8)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -900,16 +900,16 @@ int LoopFooter__ctor_eadd0(this, param_2)
 }
 
 /* LoopFooter__clone @ 0xeae20 (64 bytes) */
-int LoopFooter__clone(param_1)
-  int param_1;
+int LoopFooter__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
-  ((int (*)())LoopFooter__ctor_eadd0)(allocation + 1,param_1);
+  ((int (*)())LoopFooter__ctor_eadd0)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -955,16 +955,16 @@ int LoopHeader__ctor_eaee8(this, param_2)
 }
 
 /* LoopHeader__clone @ 0xeaf6c (64 bytes) */
-int LoopHeader__clone(param_1)
-  int param_1;
+int LoopHeader__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x15c);
   *allocation = arena;
-  ((int (*)())LoopHeader__ctor_eaee8)(allocation + 1,param_1);
+  ((int (*)())LoopHeader__ctor_eaee8)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -1009,16 +1009,16 @@ int IfFooter__ctor_eb068(this, param_2)
 }
 
 /* IfFooter__clone @ 0xeb0ac (64 bytes) */
-int IfFooter__clone(param_1)
-  int param_1;
+int IfFooter__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
-  ((int (*)())IfFooter__ctor_eb068)(allocation + 1,param_1);
+  ((int (*)())IfFooter__ctor_eb068)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -1053,16 +1053,16 @@ int IfHeader__ctor_eb168(this, param_2)
 }
 
 /* IfHeader__clone @ 0xeb1d0 (64 bytes) */
-int IfHeader__clone(param_1)
-  int param_1;
+int IfHeader__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x15c);
   *allocation = arena;
-  ((int (*)())IfHeader__ctor_eb168)(allocation + 1,param_1);
+  ((int (*)())IfHeader__ctor_eb168)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -1098,16 +1098,16 @@ int FuncEndBlock__ctor_eb2b0(this, param_2)
 }
 
 /* FuncEndBlock__clone @ 0xeb300 (64 bytes) */
-int FuncEndBlock__clone(param_1)
-  int param_1;
+int FuncEndBlock__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
-  ((int (*)())FuncEndBlock__ctor_eb2b0)(allocation + 1,param_1);
+  ((int (*)())FuncEndBlock__ctor_eb2b0)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -1267,16 +1267,16 @@ int IfFooterStatic__ctor_eb824(this, param_2)
 }
 
 /* IfFooterStatic__clone @ 0xeb868 (64 bytes) */
-int IfFooterStatic__clone(param_1)
-  int param_1;
+int IfFooterStatic__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
-  ((int (*)())IfFooterStatic__ctor_eb824)(allocation + 1,param_1);
+  ((int (*)())IfFooterStatic__ctor_eb824)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -1301,16 +1301,16 @@ int IfHeaderStatic__ctor_eb924(this, param_2)
 }
 
 /* IfHeaderStatic__clone @ 0xeb968 (64 bytes) */
-int IfHeaderStatic__clone(param_1)
-  int param_1;
+int IfHeaderStatic__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x15c);
   *allocation = arena;
-  ((int (*)())IfHeaderStatic__ctor_eb924)(allocation + 1,param_1);
+  ((int (*)())IfHeaderStatic__ctor_eb924)(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -1397,7 +1397,7 @@ int Block__dtor(this)
     Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  FUN_00193fb4(this + 0x24);
+  DListNode__clear(this + 0x24);
   puVar1 = PTR_DAT_001e8b48 + 8;
   this[0x24] = puVar1;
   this[0x27] = puVar1;
@@ -1439,7 +1439,7 @@ int Block__deleting_dtor(this)
     Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
     Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
   }
-  FUN_00193fb4(this + 0x24);
+  DListNode__clear(this + 0x24);
   puVar1 = PTR_DAT_001e8b48 + 8;
   this[0x27] = puVar1;
   *this = puVar1;
@@ -1477,16 +1477,16 @@ int BreakBlock__ctor_ebeb4(this, param_2)
 }
 
 /* BreakBlock__clone @ 0xebef8 (64 bytes) */
-int BreakBlock__clone(param_1)
-  int param_1;
+int BreakBlock__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x138);
   *allocation = arena;
-  ((int (*)())BreakBlock__ctor_ebeb4)(allocation + 1,param_1);
+  ((int (*)())BreakBlock__ctor_ebeb4)(allocation + 1,this);
   return allocation + 1;
 }
 

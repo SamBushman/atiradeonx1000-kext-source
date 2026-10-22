@@ -161,21 +161,21 @@ int IfFooter__dtor_1ce320(this)
 }
 
 /* BreakOrContinueBlock__dtor @ 0x1ce388 (36 bytes) */
-int BreakOrContinueBlock__dtor(param_1)
-  undefined4 *param_1;
+int BreakOrContinueBlock__dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8b54 + 8;
-  return Block__dtor_ea270(param_1);
+  *this = PTR_DAT_001e8b54 + 8;
+  return Block__dtor_ea270(this);
 }
 
 /* BreakOrContinueBlock__deleting_dtor @ 0x1ce3ac (104 bytes) */
-int BreakOrContinueBlock__deleting_dtor(param_1)
-  undefined4 *param_1;
+int BreakOrContinueBlock__deleting_dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8b54 + 8;
-  Block__dtor_ea270(param_1);
-  if (param_1 != (undefined4 *)0x0) {
-    Arena__free(param_1[-1],param_1 + -1);
+  *this = PTR_DAT_001e8b54 + 8;
+  Block__dtor_ea270(this);
+  if (this != (undefined4 *)0x0) {
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -268,134 +268,134 @@ int ContinueBlock__dtor(this)
   return Block__dtor_ea270(this);
 }
 
-/* FUN_001ce6b4 @ 0x1ce6b4 (28 bytes) */
-int FUN_001ce6b4()
+/* IREntry__getKindName @ 0x1ce6b4 (28 bytes) */
+int IREntry__getKindName()
 {
   return "entry";
 }
 
-/* FUN_001ce6d8 @ 0x1ce6d8 (28 bytes) */
-int FUN_001ce6d8()
+/* IRExit__getKindName @ 0x1ce6d8 (28 bytes) */
+int IRExit__getKindName()
 {
   return "exit";
 }
 
-/* FUN_001ce6fc @ 0x1ce6fc (28 bytes) */
-int FUN_001ce6fc()
+/* IRLoad__getKindName @ 0x1ce6fc (28 bytes) */
+int IRLoad__getKindName()
 {
   return "load";
 }
 
-/* FUN_001ce718 @ 0x1ce718 (28 bytes) */
-int FUN_001ce718()
+/* IRLoadMemBuffer__getKindName @ 0x1ce718 (28 bytes) */
+int IRLoadMemBuffer__getKindName()
 {
   return "buffer";
 }
 
-/* FUN_001ce734 @ 0x1ce734 (28 bytes) */
-int FUN_001ce734()
+/* IRLoadMemBufferIndex__getKindName @ 0x1ce734 (28 bytes) */
+int IRLoadMemBufferIndex__getKindName()
 {
   return "buffer_index";
 }
 
-/* FUN_001ce750 @ 0x1ce750 (28 bytes) */
-int FUN_001ce750()
+/* IRImmedConstBuff__getKindName @ 0x1ce750 (28 bytes) */
+int IRImmedConstBuff__getKindName()
 {
   return "icb";
 }
 
-/* FUN_001ce774 @ 0x1ce774 (28 bytes) */
-int FUN_001ce774()
+/* IRLoadConst__getKindName @ 0x1ce774 (28 bytes) */
+int IRLoadConst__getKindName()
 {
   return "load const";
 }
 
-/* FUN_001ce798 @ 0x1ce798 (28 bytes) */
-int FUN_001ce798()
+/* IRLoadTemp__getKindName @ 0x1ce798 (28 bytes) */
+int IRLoadTemp__getKindName()
 {
   return "load temp";
 }
 
-/* FUN_001ce7b4 @ 0x1ce7b4 (28 bytes) */
-int FUN_001ce7b4()
+/* IRLoadVertex__getKindName @ 0x1ce7b4 (28 bytes) */
+int IRLoadVertex__getKindName()
 {
   return "load v";
 }
 
-/* FUN_001ce7d8 @ 0x1ce7d8 (28 bytes) */
-int FUN_001ce7d8()
+/* IRLoadInterp__getKindName @ 0x1ce7d8 (28 bytes) */
+int IRLoadInterp__getKindName()
 {
   return "load interp";
 }
 
-/* FUN_001ce800 @ 0x1ce800 (28 bytes) */
-int FUN_001ce800()
+/* IRUndefined__getKindName @ 0x1ce800 (28 bytes) */
+int IRUndefined__getKindName()
 {
   return "ir_undefined";
 }
 
-/* FUN_001ce81c @ 0x1ce81c (28 bytes) */
-int FUN_001ce81c()
+/* IRMerge__getKindName @ 0x1ce81c (28 bytes) */
+int IRMerge__getKindName()
 {
   return "merge";
 }
 
-/* FUN_001ce860 @ 0x1ce860 (28 bytes) */
-int FUN_001ce860()
+/* IRProjection__getKindName @ 0x1ce860 (28 bytes) */
+int IRProjection__getKindName()
 {
   return "ir_projection";
 }
 
-/* FUN_001ce894 @ 0x1ce894 (28 bytes) */
-int FUN_001ce894()
+/* IRPresub1__getKindName @ 0x1ce894 (28 bytes) */
+int IRPresub1__getKindName()
 {
   return "ir_presub1";
 }
 
-/* FUN_001ce8d8 @ 0x1ce8d8 (28 bytes) */
-int FUN_001ce8d8()
+/* IRPresub2__getKindName @ 0x1ce8d8 (28 bytes) */
+int IRPresub2__getKindName()
 {
   return "ir_presub2";
 }
 
-/* FUN_001ce91c @ 0x1ce91c (28 bytes) */
-int FUN_001ce91c()
+/* IRMix__getKindName @ 0x1ce91c (28 bytes) */
+int IRMix__getKindName()
 {
   return "ir_mix";
 }
 
-/* FUN_001ce95c @ 0x1ce95c (28 bytes) */
-int FUN_001ce95c()
+/* IRPhiNode__getKindName @ 0x1ce95c (28 bytes) */
+int IRPhiNode__getKindName()
 {
   return "phi";
 }
 
-/* FUN_001ce9b4 @ 0x1ce9b4 (28 bytes) */
-int FUN_001ce9b4()
+/* IRAlu__getKindName @ 0x1ce9b4 (28 bytes) */
+int IRAlu__getKindName()
 {
   return "alu";
 }
 
-/* FUN_001cea24 @ 0x1cea24 (28 bytes) */
-int FUN_001cea24()
+/* IRFetch__getKindName @ 0x1cea24 (28 bytes) */
+int IRFetch__getKindName()
 {
   return "fetch";
 }
 
-/* FUN_001cebb4 @ 0x1cebb4 (28 bytes) */
-int FUN_001cebb4()
+/* IRCmp2__getKindName @ 0x1cebb4 (28 bytes) */
+int IRCmp2__getKindName()
 {
   return "ir_cmp2";
 }
 
-/* FUN_001cebe4 @ 0x1cebe4 (28 bytes) */
-int FUN_001cebe4()
+/* IRCmp1S__getKindName @ 0x1cebe4 (28 bytes) */
+int IRCmp1S__getKindName()
 {
   return "ir_cmp1s";
 }
 
-/* FUN_001cec50 @ 0x1cec50 (28 bytes) */
-int FUN_001cec50()
+/* IRLoopStart__getKindName @ 0x1cec50 (28 bytes) */
+int IRLoopStart__getKindName()
 {
   return "ir_loop";
 }
@@ -647,49 +647,49 @@ asm(".set FUN_001ce570, _BreakBlock__deleting_dtor");
 asm(".globl FUN_001ce5e8");
 asm(".set FUN_001ce5e8, _ContinueBlock__dtor");
 asm(".globl FUN_001ce6b4");
-asm(".set FUN_001ce6b4, _FUN_001ce6b4");
+asm(".set FUN_001ce6b4, _IREntry__getKindName");
 asm(".globl FUN_001ce6d8");
-asm(".set FUN_001ce6d8, _FUN_001ce6d8");
+asm(".set FUN_001ce6d8, _IRExit__getKindName");
 asm(".globl FUN_001ce6fc");
-asm(".set FUN_001ce6fc, _FUN_001ce6fc");
+asm(".set FUN_001ce6fc, _IRLoad__getKindName");
 asm(".globl FUN_001ce718");
-asm(".set FUN_001ce718, _FUN_001ce718");
+asm(".set FUN_001ce718, _IRLoadMemBuffer__getKindName");
 asm(".globl FUN_001ce734");
-asm(".set FUN_001ce734, _FUN_001ce734");
+asm(".set FUN_001ce734, _IRLoadMemBufferIndex__getKindName");
 asm(".globl FUN_001ce750");
-asm(".set FUN_001ce750, _FUN_001ce750");
+asm(".set FUN_001ce750, _IRImmedConstBuff__getKindName");
 asm(".globl FUN_001ce774");
-asm(".set FUN_001ce774, _FUN_001ce774");
+asm(".set FUN_001ce774, _IRLoadConst__getKindName");
 asm(".globl FUN_001ce798");
-asm(".set FUN_001ce798, _FUN_001ce798");
+asm(".set FUN_001ce798, _IRLoadTemp__getKindName");
 asm(".globl FUN_001ce7b4");
-asm(".set FUN_001ce7b4, _FUN_001ce7b4");
+asm(".set FUN_001ce7b4, _IRLoadVertex__getKindName");
 asm(".globl FUN_001ce7d8");
-asm(".set FUN_001ce7d8, _FUN_001ce7d8");
+asm(".set FUN_001ce7d8, _IRLoadInterp__getKindName");
 asm(".globl FUN_001ce800");
-asm(".set FUN_001ce800, _FUN_001ce800");
+asm(".set FUN_001ce800, _IRUndefined__getKindName");
 asm(".globl FUN_001ce81c");
-asm(".set FUN_001ce81c, _FUN_001ce81c");
+asm(".set FUN_001ce81c, _IRMerge__getKindName");
 asm(".globl FUN_001ce860");
-asm(".set FUN_001ce860, _FUN_001ce860");
+asm(".set FUN_001ce860, _IRProjection__getKindName");
 asm(".globl FUN_001ce894");
-asm(".set FUN_001ce894, _FUN_001ce894");
+asm(".set FUN_001ce894, _IRPresub1__getKindName");
 asm(".globl FUN_001ce8d8");
-asm(".set FUN_001ce8d8, _FUN_001ce8d8");
+asm(".set FUN_001ce8d8, _IRPresub2__getKindName");
 asm(".globl FUN_001ce91c");
-asm(".set FUN_001ce91c, _FUN_001ce91c");
+asm(".set FUN_001ce91c, _IRMix__getKindName");
 asm(".globl FUN_001ce95c");
-asm(".set FUN_001ce95c, _FUN_001ce95c");
+asm(".set FUN_001ce95c, _IRPhiNode__getKindName");
 asm(".globl FUN_001ce9b4");
-asm(".set FUN_001ce9b4, _FUN_001ce9b4");
+asm(".set FUN_001ce9b4, _IRAlu__getKindName");
 asm(".globl FUN_001cea24");
-asm(".set FUN_001cea24, _FUN_001cea24");
+asm(".set FUN_001cea24, _IRFetch__getKindName");
 asm(".globl FUN_001cebb4");
-asm(".set FUN_001cebb4, _FUN_001cebb4");
+asm(".set FUN_001cebb4, _IRCmp2__getKindName");
 asm(".globl FUN_001cebe4");
-asm(".set FUN_001cebe4, _FUN_001cebe4");
+asm(".set FUN_001cebe4, _IRCmp1S__getKindName");
 asm(".globl FUN_001cec50");
-asm(".set FUN_001cec50, _FUN_001cec50");
+asm(".set FUN_001cec50, _IRLoopStart__getKindName");
 asm(".globl FUN_001cecc0");
 asm(".set FUN_001cecc0, _IRInst__dtor_1cecc0");
 asm(".globl FUN_001cecf4");

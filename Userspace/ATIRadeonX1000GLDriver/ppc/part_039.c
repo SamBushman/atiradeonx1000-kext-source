@@ -1,20 +1,20 @@
 #include "decls.h"
 
-/* FUN_00127ee4 @ 0x127ee4 (64 bytes) */
-int FUN_00127ee4(param_1, param_2)
-  int *param_1;
+/* KhanPs__vslot76 @ 0x127ee4 (64 bytes) */
+int KhanPs__vslot76(this, param_2)
+  int *this;
   undefined4 *param_2;
 {
   undefined4 uVar1;
   
-  uVar1 = (**(code **)(*param_1 + 0x138))(param_1,0);
+  uVar1 = (**(code **)(*this + 0x138))(this,0);
   *param_2 = uVar1;
   return;
 }
 
-/* FUN_00127f24 @ 0x127f24 (180 bytes) */
-int FUN_00127f24(param_1, param_2)
-  int param_1;
+/* KhanPs__vslot6 @ 0x127f24 (180 bytes) */
+int KhanPs__vslot6(this, param_2)
+  int this;
   undefined4 param_2;
 {
   undefined *puVar1;
@@ -31,13 +31,13 @@ int FUN_00127f24(param_1, param_2)
   FUN_00189560(puVar2 + 10);
   R520SchedModel__vslot2_reset(puVar2);
   puVar2[0x1a] = 0;
-  *(undefined4 **)(param_1 + 0x60) = puVar2;
+  *(undefined4 **)(this + 0x60) = puVar2;
   puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
   *puVar2 = puVar1 + 8;
-  *(undefined4 **)(param_1 + 100) = puVar2;
+  *(undefined4 **)(this + 100) = puVar2;
   return;
 }
 
@@ -55,32 +55,32 @@ int FUN_00127fd8(param_1)
   return;
 }
 
-/* FUN_00127ff8 @ 0x127ff8 (36 bytes) */
-int FUN_00127ff8(param_1, param_2)
-  undefined4 param_1;
+/* KhanPs__vslot62 @ 0x127ff8 (36 bytes) */
+int KhanPs__vslot62(this, param_2)
+  undefined4 this;
   int param_2;
 {
   return *(undefined4 *)(PTR_PTR_001e910c + param_2 * 4);
 }
 
-/* FUN_0012801c @ 0x12801c (20 bytes) */
-int FUN_0012801c(param_1, param_2, param_3)
-  undefined4 param_1;
+/* KhanPs__vslot90 @ 0x12801c (20 bytes) */
+int KhanPs__vslot90(this, param_2, param_3)
+  undefined4 this;
   undefined4 param_2;
   int param_3;
 {
   return *(int *)(param_3 + 0x138) == 1;
 }
 
-/* FUN_00128030 @ 0x128030 (28 bytes) */
-int FUN_00128030()
+/* KhanPs__getOpcodeTraits @ 0x128030 (28 bytes) */
+int KhanPs__getOpcodeTraits()
 {
   return &DAT_001dca64;
 }
 
-/* FUN_0012804c @ 0x12804c (356 bytes) */
-int FUN_0012804c(param_1, param_2, param_3)
-  int param_1;
+/* KhanPs__vslot35 @ 0x12804c (356 bytes) */
+int KhanPs__vslot35(this, param_2, param_3)
+  int this;
   int param_2;
   undefined4 param_3;
 {
@@ -98,10 +98,10 @@ int FUN_0012804c(param_1, param_2, param_3)
   
   _memcpy(param_2 + 0x64c,param_3,0x963c);
   iVar5 = 0;
-  *(undefined4 *)(param_2 + 0x104) = *(undefined4 *)(((unsigned char *)0x0000172c) + param_1);
-  iVar6 = param_1 + 0x80;
+  *(undefined4 *)(param_2 + 0x104) = *(undefined4 *)(((unsigned char *)0x0000172c) + this);
+  iVar6 = this + 0x80;
   iVar8 = param_2 + 0x100;
-  iVar7 = param_1;
+  iVar7 = this;
   do {
     puVar9 = (undefined1 *)(iVar6 + 0x14);
     puVar10 = (undefined1 *)(iVar8 + 0xc);
@@ -129,19 +129,19 @@ int FUN_0012804c(param_1, param_2, param_3)
   } while (bVar2);
   iVar7 = param_2 + 0x400;
   iVar5 = 0;
-  *(undefined4 *)(param_2 + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + param_1);
-  iVar6 = param_1 + 0xd80;
+  *(undefined4 *)(param_2 + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + this);
+  iVar6 = this + 0xd80;
   do {
     puVar9 = (undefined1 *)(iVar6 + 0x14);
     puVar10 = (undefined1 *)(iVar7 + 0x10);
-    *(char *)(iVar7 + 0xc) = (char)*(undefined4 *)(param_1 + 0xd68);
+    *(char *)(iVar7 + 0xc) = (char)*(undefined4 *)(this + 0xd68);
     iVar8 = 4;
-    *(char *)(iVar7 + 0xd) = (char)*(undefined4 *)(param_1 + 0xd6c);
-    *(char *)(iVar7 + 0xe) = (char)*(undefined4 *)(param_1 + 0xd70);
+    *(char *)(iVar7 + 0xd) = (char)*(undefined4 *)(this + 0xd6c);
+    *(char *)(iVar7 + 0xe) = (char)*(undefined4 *)(this + 0xd70);
     uVar4 = *(uint *)(iVar7 + 0xc);
-    uVar3 = (*(uint *)(param_1 + 0xd78) & 0xf) << 4;
+    uVar3 = (*(uint *)(this + 0xd78) & 0xf) << 4;
     *(uint *)(iVar7 + 0xc) = uVar3 | uVar4 & 0xffffff0f;
-    *(uint *)(iVar7 + 0xc) = *(uint *)(param_1 + 0xd7c) & 1 | uVar3 | uVar4 & 0xffffff0e;
+    *(uint *)(iVar7 + 0xc) = *(uint *)(this + 0xd7c) & 1 | uVar3 | uVar4 & 0xffffff0e;
     do {
       *puVar10 = *puVar9;
       puVar1 = puVar9 + 4;
@@ -153,15 +153,15 @@ int FUN_0012804c(param_1, param_2, param_3)
     bVar2 = iVar5 != 0x2f;
     iVar7 = iVar7 + 0xc;
     iVar6 = iVar6 + 0x34;
-    param_1 = param_1 + 0x34;
+    this = this + 0x34;
     iVar5 = iVar5 + 1;
   } while (bVar2);
   return 0;
 }
 
-/* FUN_001281b0 @ 0x1281b0 (56 bytes) */
-int FUN_001281b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+/* KhanPs__vslot8 @ 0x1281b0 (56 bytes) */
+int KhanPs__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -175,14 +175,14 @@ int FUN_001281b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* FUN_001281f0 @ 0x1281f0 (344 bytes) */
-int FUN_001281f0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* KhanPs__vslot58 @ 0x1281f0 (344 bytes) */
+int KhanPs__vslot58(this, param_2, param_3, param_4)
+  undefined4 this;
   float *param_2;
   undefined4 *param_3;
   undefined4 param_4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   float fVar1;
   float fVar2;
   bool bVar3;
@@ -248,9 +248,9 @@ int FUN_001281f0(param_1, param_2, param_3, param_4)
   return 1;
 }
 
-/* FUN_00128348 @ 0x128348 (84 bytes) */
-int FUN_00128348(param_1, param_2)
-  undefined4 param_1;
+/* KhanPs__vslot73 @ 0x128348 (84 bytes) */
+int KhanPs__vslot73(this, param_2)
+  undefined4 this;
   undefined4 param_2;
 {
   undefined4 uVar1;
@@ -265,9 +265,9 @@ int FUN_00128348(param_1, param_2)
   return;
 }
 
-/* FUN_0012839c @ 0x12839c (128 bytes) */
-int FUN_0012839c(param_1, param_2)
-  undefined4 param_1;
+/* KhanPs__vslot74 @ 0x12839c (128 bytes) */
+int KhanPs__vslot74(this, param_2)
+  undefined4 this;
   undefined4 param_2;
 {
   undefined4 uVar1;
@@ -289,9 +289,9 @@ int FUN_0012839c(param_1, param_2)
   return;
 }
 
-/* FUN_00128430 @ 0x128430 (780 bytes) */
-int FUN_00128430(param_1, param_2, param_3, param_4)
-  int *param_1;
+/* KhanPs__vslot85 @ 0x128430 (780 bytes) */
+int KhanPs__vslot85(this, param_2, param_3, param_4)
+  int *this;
   int param_2;
   dword *param_3;
   int *param_4;
@@ -377,16 +377,16 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
       return iVar6;
     }
     iVar6 = FUN_000f57f0(uVar8,param_3,param_4,piVar3);
-    if ((iVar6 != 0) && (iVar9 = (**(code **)(*param_1 + 0x100))(param_1,param_4), iVar9 != 0)) {
+    if ((iVar6 != 0) && (iVar9 = (**(code **)(*this + 0x100))(this,param_4), iVar9 != 0)) {
       return iVar6;
     }
   }
   return 0;
 }
 
-/* FUN_0012873c @ 0x12873c (500 bytes) */
-int FUN_0012873c(param_1, inst, param_3, param_4, param_5)
-  undefined4 param_1;
+/* KhanPs__vslot59 @ 0x12873c (500 bytes) */
+int KhanPs__vslot59(this, inst, param_3, param_4, param_5)
+  undefined4 this;
   int *inst;
   int param_3;
   uint param_4;
@@ -447,9 +447,9 @@ int FUN_0012873c(param_1, inst, param_3, param_4, param_5)
   return 1;
 }
 
-/* FUN_00128930 @ 0x128930 (420 bytes) */
-int FUN_00128930(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
-  undefined4 param_1;
+/* KhanPs__vslot9 @ 0x128930 (420 bytes) */
+int KhanPs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
+  undefined4 this;
   int param_2;
   int param_3;
   int param_4;
@@ -460,7 +460,7 @@ int FUN_00128930(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_9;
   int compiler;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int callResult;
   undefined4 uVar2;
   int operandRecord;
@@ -502,9 +502,9 @@ int FUN_00128930(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return callResult;
 }
 
-/* FUN_00128ad4 @ 0x128ad4 (680 bytes) */
-int FUN_00128ad4(param_1, param_2, compiler)
-  undefined4 param_1;
+/* KhanPs__vslot5 @ 0x128ad4 (680 bytes) */
+int KhanPs__vslot5(this, param_2, compiler)
+  undefined4 this;
   int param_2;
   int compiler;
 {
@@ -576,9 +576,9 @@ int FUN_00128ad4(param_1, param_2, compiler)
   return;
 }
 
-/* FUN_00128d7c @ 0x128d7c (596 bytes) */
-int FUN_00128d7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+/* KhanPs__vslot75 @ 0x128d7c (596 bytes) */
+int KhanPs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 this;
   float *param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -711,9 +711,9 @@ int KhanPs__ctor_128fd0(this, param_2, param_3)
   FUN_0010dbd8(this,0x41);
   FUN_0010dbd8(this,0x42);
   this[2] = this[2] | 0x20000;
-  ((int (*)())FUN_0012aa58)(this);
+  ((int (*)())KhanPs__vslot96)(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_00127f24)(this,param_2);
+    ((int (*)())KhanPs__vslot6)(this,param_2);
   }
   return;
 }
@@ -752,16 +752,16 @@ int KhanPs__ctor_129130(this, param_2, param_3)
   FUN_0010dbd8(this,0x41);
   FUN_0010dbd8(this,0x42);
   this[2] = this[2] | 0x20000;
-  ((int (*)())FUN_0012aa58)(this);
+  ((int (*)())KhanPs__vslot96)(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_00127f24)(this,param_2);
+    ((int (*)())KhanPs__vslot6)(this,param_2);
   }
   return;
 }
 
-/* FUN_00129290 @ 0x129290 (176 bytes) */
-int FUN_00129290(param_1, param_2)
-  int param_1;
+/* FudoVs__vslot6 @ 0x129290 (176 bytes) */
+int FudoVs__vslot6(this, param_2)
+  int this;
   undefined4 param_2;
 {
   undefined *puVar1;
@@ -778,51 +778,51 @@ int FUN_00129290(param_1, param_2)
   R300VSchedModel__vslot2_reset(puVar2);
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
-  *(undefined4 **)(param_1 + 0x60) = puVar2;
+  *(undefined4 **)(this + 0x60) = puVar2;
   puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
   *puVar2 = puVar1 + 8;
-  *(undefined4 **)(param_1 + 100) = puVar2;
+  *(undefined4 **)(this + 100) = puVar2;
   return;
 }
 
-/* FUN_00129350 @ 0x129350 (96 bytes) */
-int FUN_00129350(param_1, param_2)
-  int *param_1;
+/* KhanVs__vslot76 @ 0x129350 (96 bytes) */
+int KhanVs__vslot76(this, param_2)
+  int *this;
   undefined4 *param_2;
 {
   undefined4 uVar1;
   
-  uVar1 = (**(code **)(*param_1 + 0x138))(param_1,0);
+  uVar1 = (**(code **)(*this + 0x138))(this,0);
   *param_2 = uVar1;
-  uVar1 = (**(code **)(*param_1 + 0x140))(param_1,0);
+  uVar1 = (**(code **)(*this + 0x140))(this,0);
   param_2[1] = uVar1;
   return;
 }
 
-/* FUN_001293b0 @ 0x1293b0 (72 bytes) */
-int FUN_001293b0(param_1, param_2)
-  int *param_1;
+/* KhanVs__vslot77 @ 0x1293b0 (72 bytes) */
+int KhanVs__vslot77(this, param_2)
+  int *this;
   undefined4 *param_2;
 {
   undefined4 uVar1;
   
   *param_2 = 0;
-  uVar1 = (**(code **)(*param_1 + 0x138))(param_1,0);
+  uVar1 = (**(code **)(*this + 0x138))(this,0);
   param_2[1] = uVar1;
   return;
 }
 
-/* FUN_001293f8 @ 0x1293f8 (8 bytes) */
-int FUN_001293f8()
+/* KhanVs__vslot80 @ 0x1293f8 (8 bytes) */
+int KhanVs__vslot80()
 {
   return 0x14;
 }
 
-/* FUN_00129408 @ 0x129408 (60 bytes) */
-undefined4 FUN_00129408(double fparam_1)
+/* KhanVs__vslot60 @ 0x129408 (60 bytes) */
+undefined4 KhanVs__vslot60(double fparam_1)
 {
   if ((fparam_1 != (double)FLOAT_001aa0d4) && (fparam_1 != (double)FLOAT_001aa0e8)) {
     return 0;
@@ -830,15 +830,15 @@ undefined4 FUN_00129408(double fparam_1)
   return 1;
 }
 
-/* FUN_00129444 @ 0x129444 (4 bytes) */
-int FUN_00129444()
+/* KhanVs__vslot73 @ 0x129444 (4 bytes) */
+int KhanVs__vslot73()
 {
   return;
 }
 
-/* FUN_00129448 @ 0x129448 (48 bytes) */
-int FUN_00129448(param_1, param_2, param_3)
-  undefined4 param_1;
+/* KhanVs__vslot99 @ 0x129448 (48 bytes) */
+int KhanVs__vslot99(this, param_2, param_3)
+  undefined4 this;
   uint param_2;
   int param_3;
 {
@@ -847,9 +847,9 @@ int FUN_00129448(param_1, param_2, param_3)
                            0x524) + 0x10a) == param_2;
 }
 
-/* FUN_00129478 @ 0x129478 (504 bytes) */
-int FUN_00129478(param_1, param_2, param_3)
-  int param_1;
+/* KhanVs__vslot35 @ 0x129478 (504 bytes) */
+int KhanVs__vslot35(this, param_2, param_3)
+  int this;
   int param_2;
   int *param_3;
 {
@@ -882,11 +882,11 @@ int FUN_00129478(param_1, param_2, param_3)
   *(int *)(param_2 + 0x664) = iVar8;
   *(int *)(param_2 + 0x668) = iVar6;
   *(int *)(param_2 + 0x66c) = iVar5;
-  iVar4 = *(int *)(((unsigned char *)0x0000172c) + param_1);
+  iVar4 = *(int *)(((unsigned char *)0x0000172c) + this);
   *(int *)(param_2 + 0x104) = iVar4;
   if (iVar4 != 0) {
     loopIndex = 0;
-    iVar4 = param_1;
+    iVar4 = this;
     do {
       loopIndex = loopIndex + 1;
       iVar5 = *(int *)(iVar4 + 0x70) * 0xc + param_2;
@@ -896,9 +896,9 @@ int FUN_00129478(param_1, param_2, param_3)
     } while (loopIndex < *(uint *)(param_2 + 0x104));
   }
   iVar5 = 0;
-  iVar6 = param_1 + 0x80;
+  iVar6 = this + 0x80;
   iVar7 = param_2 + 0x100;
-  iVar4 = param_1;
+  iVar4 = this;
   do {
     puVar10 = (undefined1 *)(iVar6 + 0x14);
     puVar12 = (undefined1 *)(iVar7 + 0xc);
@@ -926,19 +926,19 @@ int FUN_00129478(param_1, param_2, param_3)
   } while (bVar2);
   iVar4 = param_2 + 0x400;
   iVar5 = 0;
-  *(undefined4 *)(param_2 + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + param_1);
-  iVar6 = param_1 + 0xd80;
+  *(undefined4 *)(param_2 + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + this);
+  iVar6 = this + 0xd80;
   do {
     puVar10 = (undefined1 *)(iVar6 + 0x14);
     puVar12 = (undefined1 *)(iVar4 + 0x10);
-    *(char *)(iVar4 + 0xc) = (char)*(undefined4 *)(param_1 + 0xd68);
+    *(char *)(iVar4 + 0xc) = (char)*(undefined4 *)(this + 0xd68);
     iVar7 = 4;
-    *(char *)(iVar4 + 0xd) = (char)*(undefined4 *)(param_1 + 0xd6c);
-    *(char *)(iVar4 + 0xe) = (char)*(undefined4 *)(param_1 + 0xd70);
+    *(char *)(iVar4 + 0xd) = (char)*(undefined4 *)(this + 0xd6c);
+    *(char *)(iVar4 + 0xe) = (char)*(undefined4 *)(this + 0xd70);
     uVar3 = *(uint *)(iVar4 + 0xc);
-    uVar9 = (*(uint *)(param_1 + 0xd78) & 0xf) << 4;
+    uVar9 = (*(uint *)(this + 0xd78) & 0xf) << 4;
     *(uint *)(iVar4 + 0xc) = uVar9 | uVar3 & 0xffffff0f;
-    *(uint *)(iVar4 + 0xc) = *(uint *)(param_1 + 0xd7c) & 1 | uVar9 | uVar3 & 0xffffff0e;
+    *(uint *)(iVar4 + 0xc) = *(uint *)(this + 0xd7c) & 1 | uVar9 | uVar3 & 0xffffff0e;
     do {
       *puVar12 = *puVar10;
       puVar1 = puVar10 + 4;
@@ -950,21 +950,21 @@ int FUN_00129478(param_1, param_2, param_3)
     bVar2 = iVar5 != 0x2f;
     iVar4 = iVar4 + 0xc;
     iVar6 = iVar6 + 0x34;
-    param_1 = param_1 + 0x34;
+    this = this + 0x34;
     iVar5 = iVar5 + 1;
   } while (bVar2);
   return 0;
 }
 
-/* FUN_00129678 @ 0x129678 (28 bytes) */
-int FUN_00129678()
+/* KhanVs__getOpcodeTraits @ 0x129678 (28 bytes) */
+int KhanVs__getOpcodeTraits()
 {
   return &DAT_001df1fc;
 }
 
-/* FUN_00129694 @ 0x129694 (56 bytes) */
-int FUN_00129694(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+/* FudoVs__vslot8 @ 0x129694 (56 bytes) */
+int FudoVs__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -978,9 +978,9 @@ int FUN_00129694(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* FUN_001296cc @ 0x1296cc (124 bytes) */
-int FUN_001296cc(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
+/* KhanVs__vslot22 @ 0x1296cc (124 bytes) */
+int KhanVs__vslot22(this, param_2, param_3, param_4, param_5, param_6)
+  int this;
   undefined4 *param_2;
   undefined1 *param_3;
   undefined4 param_4;
@@ -992,10 +992,10 @@ int FUN_001296cc(param_1, param_2, param_3, param_4, param_5, param_6)
   uint uVar3;
   int iVar4;
   
-  iVar2 = *(int *)(((unsigned char *)0x00001728) + param_1);
-  *(int *)(((unsigned char *)0x00001728) + param_1) = iVar2 + 1;
+  iVar2 = *(int *)(((unsigned char *)0x00001728) + this);
+  *(int *)(((unsigned char *)0x00001728) + this) = iVar2 + 1;
   uVar3 = 0;
-  iVar2 = param_1 + iVar2 * 0x34 + 0xd60;
+  iVar2 = this + iVar2 * 0x34 + 0xd60;
   iVar1 = iVar2 + 8;
   *(undefined4 *)(iVar2 + 8) = param_4;
   *(undefined4 *)(iVar2 + 0x24) = 1;
@@ -1018,9 +1018,9 @@ int FUN_001296cc(param_1, param_2, param_3, param_4, param_5, param_6)
   return;
 }
 
-/* FUN_00129748 @ 0x129748 (156 bytes) */
-int FUN_00129748(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
-  int param_1;
+/* KhanVs__vslot21 @ 0x129748 (156 bytes) */
+int KhanVs__vslot21(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+  int this;
   undefined4 param_2;
   int param_3;
   undefined4 param_4;
@@ -1033,9 +1033,9 @@ int FUN_00129748(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 {
   int iVar1;
   
-  iVar1 = *(int *)(((unsigned char *)0x00001728) + param_1);
-  *(int *)(((unsigned char *)0x00001728) + param_1) = iVar1 + 1;
-  iVar1 = param_1 + iVar1 * 0x34 + 0xd60;
+  iVar1 = *(int *)(((unsigned char *)0x00001728) + this);
+  *(int *)(((unsigned char *)0x00001728) + this) = iVar1 + 1;
+  iVar1 = this + iVar1 * 0x34 + 0xd60;
   *(int *)(iVar1 + 8) = param_3;
   *(undefined4 *)(iVar1 + 0x1c) = 1;
   *(undefined4 *)(iVar1 + 0xc) = param_4;
@@ -1061,17 +1061,17 @@ int FUN_00129748(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_001297e4 @ 0x1297e4 (112 bytes) */
-int FUN_001297e4(param_1, param_2, param_3)
-  int param_1;
+/* KhanVs__vslot100 @ 0x1297e4 (112 bytes) */
+int KhanVs__vslot100(this, param_2, param_3)
+  int this;
   undefined4 param_2;
   undefined4 param_3;
 {
   int iVar1;
   
-  iVar1 = *(int *)(((unsigned char *)0x0000172c) + param_1);
-  *(int *)(((unsigned char *)0x0000172c) + param_1) = iVar1 + 1;
-  iVar1 = param_1 + iVar1 * 0x34 + 0x60;
+  iVar1 = *(int *)(((unsigned char *)0x0000172c) + this);
+  *(int *)(((unsigned char *)0x0000172c) + this) = iVar1 + 1;
+  iVar1 = this + iVar1 * 0x34 + 0x60;
   *(undefined4 *)(iVar1 + 8) = 5;
   *(undefined1 *)(iVar1 + 0x38) = 0;
   *(undefined1 *)(iVar1 + 0x3a) = 2;
@@ -1088,14 +1088,14 @@ int FUN_001297e4(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00129854 @ 0x129854 (312 bytes) */
-int FUN_00129854(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* KhanVs__vslot58 @ 0x129854 (312 bytes) */
+int KhanVs__vslot58(this, param_2, param_3, param_4)
+  undefined4 this;
   float *param_2;
   int *param_3;
   undefined4 param_4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   float fVar1;
   int *piVar2;
   float *pfVar3;
@@ -1154,9 +1154,9 @@ int FUN_00129854(param_1, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_0012998c @ 0x12998c (128 bytes) */
-int FUN_0012998c(param_1, param_2)
-  undefined4 param_1;
+/* KhanVs__vslot74 @ 0x12998c (128 bytes) */
+int KhanVs__vslot74(this, param_2)
+  undefined4 this;
   undefined4 param_2;
 {
   undefined4 uVar1;
@@ -1178,9 +1178,9 @@ int FUN_0012998c(param_1, param_2)
   return;
 }
 
-/* FUN_00129a0c @ 0x129a0c (316 bytes) */
-int FUN_00129a0c(param_1, inst, param_3, param_4, param_5)
-  undefined4 param_1;
+/* KhanVs__vslot59 @ 0x129a0c (316 bytes) */
+int KhanVs__vslot59(this, inst, param_3, param_4, param_5)
+  undefined4 this;
   undefined4 inst;
   undefined4 param_3;
   uint param_4;
@@ -1234,9 +1234,9 @@ LAB_00129b30:
   return uVar4;
 }
 
-/* FUN_00129b48 @ 0x129b48 (632 bytes) */
-int FUN_00129b48(param_1, inst, param_3, inst2, param_5, param_6, param_7)
-  undefined4 param_1;
+/* KhanVs__vslot71 @ 0x129b48 (632 bytes) */
+int KhanVs__vslot71(this, inst, param_3, inst2, param_5, param_6, param_7)
+  undefined4 this;
   int *inst;
   int param_3;
   int *inst2;
@@ -1360,9 +1360,9 @@ switchD_00129ce4_caseD_0:
   } while( true );
 }
 
-/* FUN_00129eb4 @ 0x129eb4 (344 bytes) */
-int FUN_00129eb4(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* KhanVs__vslot85 @ 0x129eb4 (344 bytes) */
+int KhanVs__vslot85(this, param_2, param_3, param_4)
+  undefined4 this;
   int param_2;
   dword *param_3;
   int *param_4;
@@ -1442,9 +1442,9 @@ int FUN_00129eb4(param_1, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_0012a00c @ 0x12a00c (480 bytes) */
-int FUN_0012a00c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
-  undefined4 param_1;
+/* KhanVs__vslot9 @ 0x12a00c (480 bytes) */
+int KhanVs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
+  undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -1455,7 +1455,7 @@ int FUN_0012a00c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_9;
   int compiler;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   undefined4 uVar2;
   undefined4 uVar3;
@@ -1547,9 +1547,9 @@ int FUN_0012a00c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return puVar9;
 }
 
-/* FUN_0012a260 @ 0x12a260 (352 bytes) */
-int FUN_0012a260(param_1, param_2)
-  int *param_1;
+/* KhanVs__vslot89 @ 0x12a260 (352 bytes) */
+int KhanVs__vslot89(this, param_2)
+  int *this;
   int param_2;
 {
   int iVar1;
@@ -1568,9 +1568,9 @@ int FUN_0012a260(param_1, param_2)
         {
           iVar4 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x3e);
           if ((iVar4 == 0) ||
-             (iVar4 = (**(code **)(*param_1 + 0x18c))(param_1,*(undefined4 *)(iVar1 + 0x94),param_2)
+             (iVar4 = (**(code **)(*this + 0x18c))(this,*(undefined4 *)(iVar1 + 0x94),param_2)
              , iVar4 != 0)) {
-            (**(code **)(*param_1 + 400))(param_1,*(undefined4 *)(iVar1 + 0x94),iVar3);
+            (**(code **)(*this + 400))(this,*(undefined4 *)(iVar1 + 0x94),iVar3);
             iVar4 = IRInst__getOperandRecord(iVar1,0);
             *(int *)(iVar4 + 8) = iVar3;
             iVar2 = *(int *)(iVar1 + 8);
@@ -1589,8 +1589,8 @@ int FUN_0012a260(param_1, param_2)
     iVar4 = *(int *)(*(int *)(param_2 + 0x3a0) + 0x98);
     for (iVar1 = *(int *)(iVar4 + 8); iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
       if (((*(uint *)(iVar4 + 0x14) & 1) != 0) && (*(int *)(*(int *)(iVar4 + 0x88) + 8) == 0xa4)) {
-        (**(code **)(*param_1 + 400))
-                  (param_1,*(undefined4 *)(iVar4 + 0x94),*(undefined4 *)(iVar4 + 0x94));
+        (**(code **)(*this + 400))
+                  (this,*(undefined4 *)(iVar4 + 0x94),*(undefined4 *)(iVar4 + 0x94));
         iVar1 = *(int *)(iVar4 + 8);
       }
       iVar4 = iVar1;
@@ -1599,9 +1599,9 @@ int FUN_0012a260(param_1, param_2)
   return;
 }
 
-/* FUN_0012a3c0 @ 0x12a3c0 (248 bytes) */
-int FUN_0012a3c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+/* KhanVs__vslot75 @ 0x12a3c0 (248 bytes) */
+int KhanVs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 this;
   int param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -1639,9 +1639,9 @@ int FUN_0012a3c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* FUN_0012a4b8 @ 0x12a4b8 (176 bytes) */
-int FUN_0012a4b8(param_1, param_2)
-  int param_1;
+/* KhanVs__vslot6 @ 0x12a4b8 (176 bytes) */
+int KhanVs__vslot6(this, param_2)
+  int this;
   undefined4 param_2;
 {
   undefined *puVar1;
@@ -1658,13 +1658,13 @@ int FUN_0012a4b8(param_1, param_2)
   R300VSchedModel__vslot2_reset(puVar2);
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
-  *(undefined4 **)(param_1 + 0x60) = puVar2;
+  *(undefined4 **)(this + 0x60) = puVar2;
   puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
   *puVar2 = puVar1 + 8;
-  *(undefined4 **)(param_1 + 100) = puVar2;
+  *(undefined4 **)(this + 100) = puVar2;
   return;
 }
 
@@ -1704,9 +1704,9 @@ int KhanVs__ctor_12a578(this, param_2, param_3)
   FUN_0010dbd8(this,0x4d);
   this[0x19] = 0;
   this[0x18] = 0;
-  ((int (*)())FUN_0012a970)(this);
+  ((int (*)())KhanVs__vslot96)(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_0012a4b8)(this,param_2);
+    ((int (*)())KhanVs__vslot6)(this,param_2);
   }
   return;
 }
@@ -1747,9 +1747,9 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
   FUN_0010dbd8(this,0x4d);
   this[0x19] = 0;
   this[0x18] = 0;
-  ((int (*)())FUN_0012a970)(this);
+  ((int (*)())KhanVs__vslot96)(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_0012a4b8)(this,param_2);
+    ((int (*)())KhanVs__vslot6)(this,param_2);
   }
   return;
 }
@@ -1765,9 +1765,9 @@ int FudoVs__ctor_12a808(this, param_2, param_3)
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
-  ((int (*)())FUN_0012a9e4)(this);
+  ((int (*)())FudoVs__vslot96)(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_00129290)(this,param_2);
+    ((int (*)())FudoVs__vslot6)(this,param_2);
   }
   return;
 }
@@ -1783,19 +1783,19 @@ int FudoVs__ctor_12a8bc(this, param_2, param_3)
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
-  ((int (*)())FUN_0012a9e4)(this);
+  ((int (*)())FudoVs__vslot96)(this);
   if (param_3 != 0) {
-    ((int (*)())FUN_00129290)(this,param_2);
+    ((int (*)())FudoVs__vslot6)(this,param_2);
   }
   return;
 }
 
-/* FUN_0012a970 @ 0x12a970 (116 bytes) */
-int FUN_0012a970(param_1)
-  int param_1;
+/* KhanVs__vslot96 @ 0x12a970 (116 bytes) */
+int KhanVs__vslot96(this)
+  int this;
 {
   PTR_DAT_001e27bc = PTR_DAT_001e9120;
-  *(undefined **)(param_1 + 0xc) = &DAT_001e1994;
+  *(undefined **)(this + 0xc) = &DAT_001e1994;
   PTR_DAT_001e260c = PTR_DAT_001e911c;
   PTR_DAT_001e1c34 = PTR_DAT_001e9128;
   DAT_001e1c2c = 5;
@@ -1807,11 +1807,11 @@ int FUN_0012a970(param_1)
   return;
 }
 
-/* FUN_0012a9e4 @ 0x12a9e4 (116 bytes) */
-int FUN_0012a9e4(param_1)
-  int param_1;
+/* FudoVs__vslot96 @ 0x12a9e4 (116 bytes) */
+int FudoVs__vslot96(this)
+  int this;
 {
-  *(undefined **)(param_1 + 0xc) = &DAT_001e1994;
+  *(undefined **)(this + 0xc) = &DAT_001e1994;
   DAT_001e25f4 = 0x4c;
   PTR_DAT_001e27bc = PTR_DAT_001e8c84;
   DAT_001e1c2c = 4;
@@ -1826,11 +1826,11 @@ int FUN_0012a9e4(param_1)
   return;
 }
 
-/* FUN_0012aa58 @ 0x12aa58 (32 bytes) */
-int FUN_0012aa58(param_1)
-  int param_1;
+/* KhanPs__vslot96 @ 0x12aa58 (32 bytes) */
+int KhanPs__vslot96(this)
+  int this;
 {
-  *(undefined **)(param_1 + 0xc) = &DAT_001e39a4;
+  *(undefined **)(this + 0xc) = &DAT_001e39a4;
   return;
 }
 
@@ -1897,7 +1897,7 @@ int pass_optimize_control_flow(program)
   
   targetDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*targetDescription + 0x74))(targetDescription,program);
-  return FUN_000ed7e4(program,(int)"optimize_control_flow");
+  return Program__beginPass(program,(int)"optimize_control_flow");
 }
 
 /* IfHeader__swapArms @ 0x12abd8 (128 bytes) */
@@ -2185,84 +2185,84 @@ int FUN_0012b2d8(param_1, param_2, param_3, param_4)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00127ee4");
-asm(".set FUN_00127ee4, _FUN_00127ee4");
+asm(".set FUN_00127ee4, _KhanPs__vslot76");
 asm(".globl FUN_00127f24");
-asm(".set FUN_00127f24, _FUN_00127f24");
+asm(".set FUN_00127f24, _KhanPs__vslot6");
 asm(".globl FUN_00127fd8");
 asm(".set FUN_00127fd8, _FUN_00127fd8");
 asm(".globl FUN_00127ff8");
-asm(".set FUN_00127ff8, _FUN_00127ff8");
+asm(".set FUN_00127ff8, _KhanPs__vslot62");
 asm(".globl FUN_0012801c");
-asm(".set FUN_0012801c, _FUN_0012801c");
+asm(".set FUN_0012801c, _KhanPs__vslot90");
 asm(".globl FUN_00128030");
-asm(".set FUN_00128030, _FUN_00128030");
+asm(".set FUN_00128030, _KhanPs__getOpcodeTraits");
 asm(".globl FUN_0012804c");
-asm(".set FUN_0012804c, _FUN_0012804c");
+asm(".set FUN_0012804c, _KhanPs__vslot35");
 asm(".globl FUN_001281b0");
-asm(".set FUN_001281b0, _FUN_001281b0");
+asm(".set FUN_001281b0, _KhanPs__vslot8");
 asm(".globl FUN_001281f0");
-asm(".set FUN_001281f0, _FUN_001281f0");
+asm(".set FUN_001281f0, _KhanPs__vslot58");
 asm(".globl FUN_00128348");
-asm(".set FUN_00128348, _FUN_00128348");
+asm(".set FUN_00128348, _KhanPs__vslot73");
 asm(".globl FUN_0012839c");
-asm(".set FUN_0012839c, _FUN_0012839c");
+asm(".set FUN_0012839c, _KhanPs__vslot74");
 asm(".globl FUN_00128430");
-asm(".set FUN_00128430, _FUN_00128430");
+asm(".set FUN_00128430, _KhanPs__vslot85");
 asm(".globl FUN_0012873c");
-asm(".set FUN_0012873c, _FUN_0012873c");
+asm(".set FUN_0012873c, _KhanPs__vslot59");
 asm(".globl FUN_00128930");
-asm(".set FUN_00128930, _FUN_00128930");
+asm(".set FUN_00128930, _KhanPs__vslot9");
 asm(".globl FUN_00128ad4");
-asm(".set FUN_00128ad4, _FUN_00128ad4");
+asm(".set FUN_00128ad4, _KhanPs__vslot5");
 asm(".globl FUN_00128d7c");
-asm(".set FUN_00128d7c, _FUN_00128d7c");
+asm(".set FUN_00128d7c, _KhanPs__vslot75");
 asm(".globl FUN_00129290");
-asm(".set FUN_00129290, _FUN_00129290");
+asm(".set FUN_00129290, _FudoVs__vslot6");
 asm(".globl FUN_00129350");
-asm(".set FUN_00129350, _FUN_00129350");
+asm(".set FUN_00129350, _KhanVs__vslot76");
 asm(".globl FUN_001293b0");
-asm(".set FUN_001293b0, _FUN_001293b0");
+asm(".set FUN_001293b0, _KhanVs__vslot77");
 asm(".globl FUN_001293f8");
-asm(".set FUN_001293f8, _FUN_001293f8");
+asm(".set FUN_001293f8, _KhanVs__vslot80");
 asm(".globl FUN_00129408");
-asm(".set FUN_00129408, _FUN_00129408");
+asm(".set FUN_00129408, _KhanVs__vslot60");
 asm(".globl FUN_00129444");
-asm(".set FUN_00129444, _FUN_00129444");
+asm(".set FUN_00129444, _KhanVs__vslot73");
 asm(".globl FUN_00129448");
-asm(".set FUN_00129448, _FUN_00129448");
+asm(".set FUN_00129448, _KhanVs__vslot99");
 asm(".globl FUN_00129478");
-asm(".set FUN_00129478, _FUN_00129478");
+asm(".set FUN_00129478, _KhanVs__vslot35");
 asm(".globl FUN_00129678");
-asm(".set FUN_00129678, _FUN_00129678");
+asm(".set FUN_00129678, _KhanVs__getOpcodeTraits");
 asm(".globl FUN_00129694");
-asm(".set FUN_00129694, _FUN_00129694");
+asm(".set FUN_00129694, _FudoVs__vslot8");
 asm(".globl FUN_001296cc");
-asm(".set FUN_001296cc, _FUN_001296cc");
+asm(".set FUN_001296cc, _KhanVs__vslot22");
 asm(".globl FUN_00129748");
-asm(".set FUN_00129748, _FUN_00129748");
+asm(".set FUN_00129748, _KhanVs__vslot21");
 asm(".globl FUN_001297e4");
-asm(".set FUN_001297e4, _FUN_001297e4");
+asm(".set FUN_001297e4, _KhanVs__vslot100");
 asm(".globl FUN_00129854");
-asm(".set FUN_00129854, _FUN_00129854");
+asm(".set FUN_00129854, _KhanVs__vslot58");
 asm(".globl FUN_0012998c");
-asm(".set FUN_0012998c, _FUN_0012998c");
+asm(".set FUN_0012998c, _KhanVs__vslot74");
 asm(".globl FUN_00129a0c");
-asm(".set FUN_00129a0c, _FUN_00129a0c");
+asm(".set FUN_00129a0c, _KhanVs__vslot59");
 asm(".globl FUN_00129b48");
-asm(".set FUN_00129b48, _FUN_00129b48");
+asm(".set FUN_00129b48, _KhanVs__vslot71");
 asm(".globl FUN_00129eb4");
-asm(".set FUN_00129eb4, _FUN_00129eb4");
+asm(".set FUN_00129eb4, _KhanVs__vslot85");
 asm(".globl FUN_0012a00c");
-asm(".set FUN_0012a00c, _FUN_0012a00c");
+asm(".set FUN_0012a00c, _KhanVs__vslot9");
 asm(".globl FUN_0012a260");
-asm(".set FUN_0012a260, _FUN_0012a260");
+asm(".set FUN_0012a260, _KhanVs__vslot89");
 asm(".globl FUN_0012a3c0");
-asm(".set FUN_0012a3c0, _FUN_0012a3c0");
+asm(".set FUN_0012a3c0, _KhanVs__vslot75");
 asm(".globl FUN_0012a4b8");
-asm(".set FUN_0012a4b8, _FUN_0012a4b8");
+asm(".set FUN_0012a4b8, _KhanVs__vslot6");
 asm(".globl FUN_0012a970");
-asm(".set FUN_0012a970, _FUN_0012a970");
+asm(".set FUN_0012a970, _KhanVs__vslot96");
 asm(".globl FUN_0012a9e4");
-asm(".set FUN_0012a9e4, _FUN_0012a9e4");
+asm(".set FUN_0012a9e4, _FudoVs__vslot96");
 asm(".globl FUN_0012aa58");
-asm(".set FUN_0012aa58, _FUN_0012aa58");
+asm(".set FUN_0012aa58, _KhanPs__vslot96");

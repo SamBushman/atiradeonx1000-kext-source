@@ -1,16 +1,16 @@
 #include "decls.h"
 
 /* ContinueBlock__clone @ 0xebff8 (64 bytes) */
-int ContinueBlock__clone(param_1)
-  int param_1;
+int ContinueBlock__clone(this)
+  int this;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  arena = *(undefined4 *)(*(int *)(this + 0xa8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x138);
   *allocation = arena;
-  ContinueBlock__ctor_ebfb4(allocation + 1,param_1);
+  ContinueBlock__ctor_ebfb4(allocation + 1,this);
   return allocation + 1;
 }
 
@@ -461,9 +461,9 @@ int FUN_000ec920(param_1)
   return;
 }
 
-/* FUN_000eca10 @ 0xeca10 (192 bytes) */
-int FUN_000eca10(param_1, param_2)
-  undefined4 param_1;
+/* KhanVs__vslot17 @ 0xeca10 (192 bytes) */
+int KhanVs__vslot17(this, param_2)
+  undefined4 this;
   int *param_2;
 {
   int iVar1;
@@ -479,9 +479,9 @@ int FUN_000eca10(param_1, param_2)
   return uVar2 ^ 1;
 }
 
-/* FUN_000ecad0 @ 0xecad0 (192 bytes) */
-int FUN_000ecad0(param_1, param_2)
-  undefined4 param_1;
+/* KhanPs__vslot17 @ 0xecad0 (192 bytes) */
+int KhanPs__vslot17(this, param_2)
+  undefined4 this;
   int *param_2;
 {
   int iVar1;
@@ -508,9 +508,9 @@ int FUN_000ecb90(param_1, param_2)
   iVar1 = FUN_0011379c(param_2,param_1);
   if (iVar1 == 0) {
     uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x88) + 8);
-    iVar1 = FUN_00113090(uVar2,param_2);
-    if (((iVar1 == 0) || (iVar1 = FUN_0011320c(uVar2,param_2), iVar1 != 0)) &&
-       (iVar1 = FUN_001131c0(uVar2,param_2), iVar1 == 0)) {
+    iVar1 = OpcodeTraits__flagBit2(uVar2,param_2);
+    if (((iVar1 == 0) || (iVar1 = OpcodeTraits__flagBit9(uVar2,param_2), iVar1 != 0)) &&
+       (iVar1 = OpcodeTraits__flagBit8(uVar2,param_2), iVar1 == 0)) {
       return 0;
     }
   }
@@ -664,7 +664,7 @@ int FUN_000ecfac(param_1)
   Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(undefined4 *)(param_1 + 0x394));
   Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(undefined4 *)(param_1 + 0x398));
   Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(undefined4 *)(param_1 + 0x39c));
-  FUN_00193fb4((undefined4 *)(param_1 + 0x37c));
+  DListNode__clear((undefined4 *)(param_1 + 0x37c));
   puVar2 = PTR_DAT_001e8b48 + 8;
   *(undefined4 *)(param_1 + 0x37c) = puVar2;
   *(undefined **)(param_1 + 0x388) = puVar2;
@@ -707,16 +707,16 @@ int FUN_000ed124(param_1)
   Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(undefined4 *)(param_1 + 0x394));
   Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(undefined4 *)(param_1 + 0x398));
   Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(undefined4 *)(param_1 + 0x39c));
-  FUN_00193fb4((undefined4 *)(param_1 + 0x37c));
+  DListNode__clear((undefined4 *)(param_1 + 0x37c));
   puVar2 = PTR_DAT_001e8b48 + 8;
   *(undefined4 *)(param_1 + 0x37c) = puVar2;
   *(undefined **)(param_1 + 0x388) = puVar2;
   return;
 }
 
-/* FUN_000ed29c @ 0xed29c (264 bytes) */
-int FUN_000ed29c(param_1, inst, param_3, compiler)
-  undefined4 param_1;
+/* HwLimits__vslot43 @ 0xed29c (264 bytes) */
+int HwLimits__vslot43(this, inst, param_3, compiler)
+  undefined4 this;
   int inst;
   undefined4 param_3;
   int compiler;
@@ -816,8 +816,8 @@ int FUN_000ed63c(param_1, inst)
   return;
 }
 
-/* FUN_000ed7e4 @ 0xed7e4 (184 bytes) */
-int FUN_000ed7e4(program, param_2)
+/* Program__beginPass @ 0xed7e4 (184 bytes) */
+int Program__beginPass(program, param_2)
   int program;
   uint param_2;
 {
@@ -1213,7 +1213,7 @@ int FUN_000edd98(param_1, param_2)
   param_1[0xd9] = 0;
   param_1[0xda] = 0;
   param_1[0xdd] = 0;
-  FUN_001940a8(param_1 + 0xdf);
+  DListNode__init(param_1 + 0xdf);
   iVar4 = 0x10;
   param_1[0xfa] = 0x7fffffff;
   param_1[0xfe] = 1;
@@ -1476,7 +1476,7 @@ int FUN_000ee29c(param_1, param_2)
   param_1[0xd9] = 0;
   param_1[0xda] = 0;
   param_1[0xdd] = 0;
-  FUN_001940a8(param_1 + 0xdf);
+  DListNode__init(param_1 + 0xdf);
   iVar4 = 0x10;
   param_1[0xfa] = 0x7fffffff;
   param_1[0xfe] = 1;
@@ -3913,7 +3913,7 @@ int FUN_000f29f4(param_1)
   int *piVar9;
   
   FUN_0010ea30(param_1);
-  ((int (*)())FUN_000ed7e4)(param_1,(int)"assign_slots");
+  ((int (*)())Program__beginPass)(param_1,(int)"assign_slots");
   piVar1 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
   iVar3 = *piVar1;
   iVar2 = (**(code **)(iVar3 + 0xd8))(piVar1);
@@ -3975,7 +3975,7 @@ int FUN_000f29f4(param_1)
   }
   *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x800;
   ((int (*)())FUN_000ec1ec)(param_1);
-  return ((int (*)())FUN_000ed7e4)(param_1,(int)"mark_io");
+  return ((int (*)())Program__beginPass)(param_1,(int)"mark_io");
 }
 
 /* FUN_000f2bdc @ 0xf2bdc (128 bytes) */
@@ -4079,8 +4079,8 @@ int FUN_000f2d08(param_1)
 asm(".globl FUN_000ebff8");
 asm(".set FUN_000ebff8, _ContinueBlock__clone");
 asm(".globl FUN_000eca10");
-asm(".set FUN_000eca10, _FUN_000eca10");
+asm(".set FUN_000eca10, _KhanVs__vslot17");
 asm(".globl FUN_000ecad0");
-asm(".set FUN_000ecad0, _FUN_000ecad0");
+asm(".set FUN_000ecad0, _KhanPs__vslot17");
 asm(".globl FUN_000ed29c");
-asm(".set FUN_000ed29c, _FUN_000ed29c");
+asm(".set FUN_000ed29c, _HwLimits__vslot43");

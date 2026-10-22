@@ -783,7 +783,7 @@ int FUN_001781a4(param_1, param_2, param_3)
   for (loopRemaining = 1;
       iVar2 = (**(code **)(**(int **)(param_2 + 0xb0) + 0x14))(*(int **)(param_2 + 0xb0)),
       loopRemaining <= iVar2; loopRemaining = loopRemaining + 1) {
-    iVar2 = FUN_0011346c(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
+    iVar2 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
     if (iVar2 == 0) {
       *loopIndex = 0;
     }
@@ -1385,7 +1385,7 @@ int FUN_00179138(ctx, param_2)
   int iVar5;
   int *piVar6;
   
-  callResult = FUN_0010a240(0xa2,*(undefined4 *)(ctx + 0x238));
+  callResult = IRLoadConst__vslot73(0xa2,*(undefined4 *)(ctx + 0x238));
   iVar1 = *(int *)(ctx + 0x238);
   uVar3 = *(undefined4 *)(*(int *)(iVar1 + 0x6c4) + 0x3ac);
   iVar5 = *(int *)(iVar1 + 0x3b0) + -1;
@@ -1453,7 +1453,7 @@ int FUN_001792f0(ctx, param_2)
   iVar6 = *piVar2;
   callResult = (**(code **)(*a0 + 100))(a0);
   if ((callResult != 0) &&
-     (callResult = FUN_001131c0(*(undefined4 *)(*(int *)(*(int *)(iVar6 + 0xb0) + 0x88) + 8),
+     (callResult = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(*(int *)(iVar6 + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238)), callResult != 0)) {
     return 1;
   }

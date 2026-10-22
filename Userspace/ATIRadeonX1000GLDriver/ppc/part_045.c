@@ -2524,7 +2524,7 @@ int FUN_00170e6c(compiler, param_2)
   int iVar16;
   int local_48;
   int local_44;
-  /* NOTE (issue #64): declared 8 bytes, but FUN_001940a8's sentinel-list init writes through +0x14
+  /* NOTE (issue #64): declared 8 bytes, but DListNode__init's sentinel-list init writes through +0x14
    * (6 words) - confirmed via stock disasm and by tracing the actual crash: local_38 = auStack_40+0xc
    * computed a pointer past the declared array, into whatever unrelated stack content followed it, so
    * *(local_38+8) read garbage instead of the sentinel's real self-pointer. That garbage happened to
@@ -2701,7 +2701,7 @@ int FUN_00170e6c(compiler, param_2)
   compiler[0x47] = -1;
   compiler[0x48] = -1;
   compiler[0x49] = 0;
-  FUN_001940a8(auStack_40);
+  DListNode__init(auStack_40);
   local_38 = (int)(auStack_40 + 0xc);
   puVar14 = (uint *)compiler[6];
   uVar8 = puVar14[1];
@@ -2908,7 +2908,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   arena = *(undefined4 *)(*scheduler + 0x378);
   puVar6 = (undefined4 *)Arena__alloc(arena,0x30);
   *puVar6 = arena;
-  FUN_001940a8(puVar6 + 6);
+  DListNode__init(puVar6 + 6);
   iVar4 = 5;
   allocation = puVar6 + 1;
   do {
@@ -3033,7 +3033,7 @@ code_r0x00171b84:
   iVar8 = scheduler[1];
 code_r0x00171ba0:
   (**(code **)(*(int *)scheduler[2] + 0x70))((int *)scheduler[2],iVar8);
-  FUN_000ed7e4(scheduler[1],(int)"sched_preprocess");
+  Program__beginPass(scheduler[1],(int)"sched_preprocess");
   iVar8 = Compiler__isOptionEnabled(*scheduler,0x43);
   if (iVar8 != 0) {
     pass_minreg_order(scheduler,program);
@@ -3086,7 +3086,7 @@ code_r0x00171ba0:
   ;
   Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],in_r6,in_r7,
                in_r8,iVar4,in_r10);
-  FUN_000ed7e4(scheduler[1],(int)"schedule_inst");
+  Program__beginPass(scheduler[1],(int)"schedule_inst");
   FUN_00138080(program);
   iVar4 = scheduler[0x4c];
   piVar13 = scheduler;
@@ -3146,7 +3146,7 @@ int FUN_00171e68(param_1)
    * exactly 0xf8 bytes in); (2) the backward-walking loop a few lines down decrements by exactly 6 words
    * (24 bytes) per step through auStack_144/15c/174/18c/1a4, expecting them contiguous; (3) empirically -
    * this IS the original crash: FUN_00170e6c reads *(this_object + 0x3e words) = +0xf8 bytes, which lands
-   * exactly on local_e0's real position in stock (a real FUN_001940a8 sentinel list), but on -O0-scattered
+   * exactly on local_e0's real position in stock (a real DListNode__init sentinel list), but on -O0-scattered
    * garbage in the rebuild, since nothing guarantees these 9 separate locals land in this order or even
    * adjacently. Traced from the crash back to here across two long sessions (issue #64) - fixing by
    * forcing one real contiguous buffer with aliases at the exact offsets stock's own naming confirms. */
@@ -3162,20 +3162,20 @@ int FUN_00171e68(param_1)
 #define local_e0 (auStack_1e68_combined + 0xf8)
   undefined4 *puVar3;
   
-  FUN_001940a8(auStack_1a4);
-  FUN_001940a8(auStack_18c);
-  FUN_001940a8(auStack_174);
-  FUN_001940a8(auStack_15c);
-  FUN_001940a8(auStack_144);
+  DListNode__init(auStack_1a4);
+  DListNode__init(auStack_18c);
+  DListNode__init(auStack_174);
+  DListNode__init(auStack_15c);
+  DListNode__init(auStack_144);
   iVar4 = 1;
   puVar2 = auStack_12c;
   do {
-    FUN_001940a8(puVar2);
+    DListNode__init(puVar2);
     bVar1 = iVar4 != -1;
     puVar2 = puVar2 + 6;
     iVar4 = iVar4 + -1;
   } while (bVar1);
-  FUN_001940a8(local_e0);
+  DListNode__init(local_e0);
   iVar4 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),0x42);
   if (iVar4 != 0) {
     FUN_0018401c(auStack_1d8,param_1,in_r5,in_r6,in_r7,in_r8,in_r9);
@@ -3201,27 +3201,27 @@ int FUN_00172000(param_1)
   return;
 }
 
-/* FUN_00172014 @ 0x172014 (100 bytes) */
-int FUN_00172014(param_1)
-  int param_1;
+/* ResourceModel__vslot23 @ 0x172014 (100 bytes) */
+int ResourceModel__vslot23(this)
+  int this;
 {
   uint uVar1;
   int iVar2;
   int iVar3;
   
-  iVar2 = *(int *)(param_1 + 0xc);
-  iVar3 = *(int *)(param_1 + 0x10);
+  iVar2 = *(int *)(this + 0xc);
+  iVar3 = *(int *)(this + 0x10);
   if (iVar2 <= iVar3) {
-    if (*(int *)(param_1 + 0x14) < iVar3 - iVar2) {
+    if (*(int *)(this + 0x14) < iVar3 - iVar2) {
       return iVar3;
     }
-    uVar1 = *(int *)(param_1 + 0x14) + iVar2 + iVar3;
+    uVar1 = *(int *)(this + 0x14) + iVar2 + iVar3;
     return ((int)uVar1 >> 1) + (uint)((int)uVar1 < 0 && (uVar1 & 1) != 0);
   }
-  if (*(int *)(param_1 + 0x14) < iVar2 - iVar3) {
+  if (*(int *)(this + 0x14) < iVar2 - iVar3) {
     return iVar2;
   }
-  uVar1 = *(int *)(param_1 + 0x14) + iVar2 + iVar3;
+  uVar1 = *(int *)(this + 0x14) + iVar2 + iVar3;
   return ((int)uVar1 >> 1) + (uint)((int)uVar1 < 0 && (uVar1 & 1) != 0);
 }
 
@@ -3312,23 +3312,23 @@ int FUN_00172204(param_1, param_2)
   return;
 }
 
-/* FUN_001722cc @ 0x1722cc (92 bytes) */
-int FUN_001722cc(param_1, param_2)
-  int param_1;
+/* ResourceModel__vslot24 @ 0x1722cc (92 bytes) */
+int ResourceModel__vslot24(this, param_2)
+  int this;
   int param_2;
 {
-  if (*(int *)(param_1 + 0x10) + *(int *)(param_1 + 0x14) < *(int *)(param_1 + 0xc)) {
+  if (*(int *)(this + 0x10) + *(int *)(this + 0x14) < *(int *)(this + 0xc)) {
     return *(int *)(param_2 + 0x20) + *(int *)(param_2 + 0x28);
   }
-  if (*(int *)(param_1 + 0xc) + *(int *)(param_1 + 0x14) < *(int *)(param_1 + 0x10)) {
+  if (*(int *)(this + 0xc) + *(int *)(this + 0x14) < *(int *)(this + 0x10)) {
     return *(int *)(param_2 + 0x20) + *(int *)(param_2 + 0x24);
   }
   return *(int *)(param_2 + 0x20) + *(int *)(param_2 + 0x24) + *(int *)(param_2 + 0x28);
 }
 
-/* FUN_00172328 @ 0x172328 (176 bytes) */
-int FUN_00172328(param_1, param_2)
-  int param_1;
+/* ResourceModel__vslot25 @ 0x172328 (176 bytes) */
+int ResourceModel__vslot25(this, param_2)
+  int this;
   int param_2;
 {
   uint uVar1;
@@ -3338,16 +3338,16 @@ int FUN_00172328(param_1, param_2)
   int iVar5;
   int iVar6;
   
-  iVar4 = *(int *)(param_1 + 0xc);
-  iVar6 = *(int *)(param_1 + 0x10);
+  iVar4 = *(int *)(this + 0xc);
+  iVar6 = *(int *)(this + 0x10);
   iVar3 = iVar4;
   iVar5 = iVar6;
   if (iVar6 < iVar4) {
     iVar3 = iVar6;
     iVar5 = iVar4;
   }
-  if ((iVar5 - iVar3) + 2 <= *(int *)(param_1 + 0x14)) {
-    uVar1 = *(int *)(param_1 + 0x14) + iVar4 + iVar6;
+  if ((iVar5 - iVar3) + 2 <= *(int *)(this + 0x14)) {
+    uVar1 = *(int *)(this + 0x14) + iVar4 + iVar6;
     iVar3 = ((int)uVar1 >> 1) + (uint)((int)uVar1 < 0 && (uVar1 & 1) != 0);
     if ((uVar1 & 1) != 0) {
       return iVar3 + 1;
@@ -3376,9 +3376,9 @@ int FUN_00172328(param_1, param_2)
   return iVar3;
 }
 
-/* FUN_001723d8 @ 0x1723d8 (80 bytes) */
-int FUN_001723d8(param_1, param_2, param_3)
-  undefined4 param_1;
+/* ResourceModel__vslot29 @ 0x1723d8 (80 bytes) */
+int ResourceModel__vslot29(this, param_2, param_3)
+  undefined4 this;
   int param_2;
   int *param_3;
 {
@@ -3405,9 +3405,9 @@ int FUN_001723d8(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00172428 @ 0x172428 (76 bytes) */
-int FUN_00172428(param_1, param_2, param_3, param_4)
-  int param_1;
+/* ResourceModel__vslot22 @ 0x172428 (76 bytes) */
+int ResourceModel__vslot22(this, param_2, param_3, param_4)
+  int this;
   int param_2;
   int param_3;
   int param_4;
@@ -3415,7 +3415,7 @@ int FUN_00172428(param_1, param_2, param_3, param_4)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  if (*(int *)(*(int *)(param_1 + 8) + 0x6b8) != 0) {
+  if (*(int *)(*(int *)(this + 8) + 0x6b8) != 0) {
     return 1;
   }
   if ((param_2 < 0x10) && ((param_3 < 0x10 || (param_4 <= param_3 << 2)))) {
@@ -3426,13 +3426,13 @@ int FUN_00172428(param_1, param_2, param_3, param_4)
     uVar1 = 1;
     uVar2 = 1;
   }
-  *(undefined4 *)(*(int *)(param_1 + 8) + 0x6b8) = uVar1;
+  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = uVar1;
   return uVar2;
 }
 
-/* FUN_00172474 @ 0x172474 (96 bytes) */
-int FUN_00172474(param_1, inst, param_3)
-  int param_1;
+/* ResourceModel__vslot32 @ 0x172474 (96 bytes) */
+int ResourceModel__vslot32(this, inst, param_3)
+  int this;
   undefined4 *inst;
   int param_3;
 {
@@ -3445,11 +3445,11 @@ int FUN_00172474(param_1, inst, param_3)
     if (param_3 == 0) {
       uVar2 = 0xa6;
     }
-    arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
+    arena = *(undefined4 *)(*(int *)(this + 8) + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     *allocation = arena;
     inst = allocation + 1;
-    IRInst__ctor_10502c(inst,uVar2,*(undefined4 *)(param_1 + 8));
+    IRInst__ctor_10502c(inst,uVar2,*(undefined4 *)(this + 8));
   }
   else {
     FUN_00104f34(inst,param_3);
@@ -3457,22 +3457,22 @@ int FUN_00172474(param_1, inst, param_3)
   return inst;
 }
 
-/* FUN_00172514 @ 0x172514 (176 bytes) */
-int FUN_00172514(param_1, param_2)
-  int *param_1;
+/* ResourceModel__vslot11 @ 0x172514 (176 bytes) */
+int ResourceModel__vslot11(this, param_2)
+  int *this;
   int param_2;
 {
   int iVar1;
   
-  ((int (*)())FUN_0017212c)(param_1,param_2);
-  (**(code **)(*param_1 + 0x38))(param_1,param_2);
-  iVar1 = (**(code **)(*param_1 + 0xc))(param_1,*(undefined4 *)(param_2 + 0x38));
+  ((int (*)())FUN_0017212c)(this,param_2);
+  (**(code **)(*this + 0x38))(this,param_2);
+  iVar1 = (**(code **)(*this + 0xc))(this,*(undefined4 *)(param_2 + 0x38));
   if (iVar1 == 0) {
-    (**(code **)(*param_1 + 0x38))(param_1,param_2);
-    ((int (*)())FUN_00172078)(param_1,param_2);
+    (**(code **)(*this + 0x38))(this,param_2);
+    ((int (*)())FUN_00172078)(this,param_2);
   }
   else {
-    ((int (*)())FUN_00172078)(param_1,param_2);
+    ((int (*)())FUN_00172078)(this,param_2);
   }
   return iVar1 != 0;
 }
@@ -3542,9 +3542,9 @@ int FUN_001725c4(inst, param_2, compiler)
   return iVar3;
 }
 
-/* FUN_0017281c @ 0x17281c (416 bytes) */
-int FUN_0017281c(param_1, param_2)
-  int *param_1;
+/* ThreadModel__vslot4 @ 0x17281c (416 bytes) */
+int ThreadModel__vslot4(this, param_2)
+  int *this;
   int param_2;
 {
   int iVar1;
@@ -3558,9 +3558,9 @@ int FUN_0017281c(param_1, param_2)
   
   iVar1 = (**(code **)(**(int **)(param_2 + 0x38) + 0x28))(*(int **)(param_2 + 0x38),param_2);
   if ((iVar1 != 0) &&
-     (iVar1 = (**(code **)(*param_1 + 0x20))(param_1,*(undefined4 *)(param_2 + 0x38)), iVar1 != 0))
+     (iVar1 = (**(code **)(*this + 0x20))(this,*(undefined4 *)(param_2 + 0x38)), iVar1 != 0))
   {
-    param_1[2] = *(int *)(param_2 + 0x2c);
+    this[2] = *(int *)(param_2 + 0x2c);
   }
   puVar8 = *(uint **)(param_2 + 0x44);
   uVar5 = puVar8[1];
@@ -3593,10 +3593,10 @@ int FUN_0017281c(param_1, param_2)
         else {
           puVar4 = (undefined4 *)Vector__elementRefGrow(puVar8,loopIndex);
         }
-        if (param_1[1] <= *(int *)(*(int *)*puVar4 + 0x2c)) {
+        if (this[1] <= *(int *)(*(int *)*puVar4 + 0x2c)) {
           *(uint *)(*(int *)(param_2 + 0x38) + 0x14) =
                *(uint *)(*(int *)(param_2 + 0x38) + 0x14) | 0x1000;
-          param_1[1] = *(int *)(param_2 + 0x2c);
+          this[1] = *(int *)(param_2 + 0x2c);
         }
       }
       loopIndex = loopIndex + 1;
@@ -4173,21 +4173,21 @@ int FUN_00173360(param_1, param_2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00172014");
-asm(".set FUN_00172014, _FUN_00172014");
+asm(".set FUN_00172014, _ResourceModel__vslot23");
 asm(".globl FUN_001722cc");
-asm(".set FUN_001722cc, _FUN_001722cc");
+asm(".set FUN_001722cc, _ResourceModel__vslot24");
 asm(".globl FUN_00172328");
-asm(".set FUN_00172328, _FUN_00172328");
+asm(".set FUN_00172328, _ResourceModel__vslot25");
 asm(".globl FUN_001723d8");
-asm(".set FUN_001723d8, _FUN_001723d8");
+asm(".set FUN_001723d8, _ResourceModel__vslot29");
 asm(".globl FUN_00172428");
-asm(".set FUN_00172428, _FUN_00172428");
+asm(".set FUN_00172428, _ResourceModel__vslot22");
 asm(".globl FUN_00172474");
-asm(".set FUN_00172474, _FUN_00172474");
+asm(".set FUN_00172474, _ResourceModel__vslot32");
 asm(".globl FUN_00172514");
-asm(".set FUN_00172514, _FUN_00172514");
+asm(".set FUN_00172514, _ResourceModel__vslot11");
 asm(".globl FUN_0017281c");
-asm(".set FUN_0017281c, _FUN_0017281c");
+asm(".set FUN_0017281c, _ThreadModel__vslot4");
 asm(".globl FUN_00172ab0");
 asm(".set FUN_00172ab0, _FUN_00172ab0");
 asm(".globl FUN_00172ad8");

@@ -1736,8 +1736,8 @@ int orph_e208c(param_1)
   return;
 }
 
-/* orph_e2884 @ 0xe2884 (36 bytes) */
-int orph_e2884(param_1, param_2)
+/* IfHeader__accept @ 0xe2884 (36 bytes) */
+int IfHeader__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1748,8 +1748,8 @@ int orph_e2884(param_1, param_2)
   return;
 }
 
-/* orph_e28a8 @ 0xe28a8 (36 bytes) */
-int orph_e28a8(param_1, param_2)
+/* IfFooter__accept @ 0xe28a8 (36 bytes) */
+int IfFooter__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1760,8 +1760,8 @@ int orph_e28a8(param_1, param_2)
   return;
 }
 
-/* orph_e28cc @ 0xe28cc (36 bytes) */
-int orph_e28cc(param_1, param_2)
+/* IfHeaderStatic__accept @ 0xe28cc (36 bytes) */
+int IfHeaderStatic__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1772,8 +1772,8 @@ int orph_e28cc(param_1, param_2)
   return;
 }
 
-/* orph_e2950 @ 0xe2950 (36 bytes) */
-int orph_e2950(param_1, param_2)
+/* LoopHeader__accept @ 0xe2950 (36 bytes) */
+int LoopHeader__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1784,8 +1784,8 @@ int orph_e2950(param_1, param_2)
   return;
 }
 
-/* orph_e2974 @ 0xe2974 (36 bytes) */
-int orph_e2974(param_1, param_2)
+/* LoopFooter__accept @ 0xe2974 (36 bytes) */
+int LoopFooter__accept(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1796,8 +1796,8 @@ int orph_e2974(param_1, param_2)
   return;
 }
 
-/* orph_e2998 @ 0xe2998 (36 bytes) */
-int orph_e2998(param_1, param_2)
+/* PostLoopFooter__accept @ 0xe2998 (36 bytes) */
+int PostLoopFooter__accept(param_1, param_2)
   int param_1;
   int param_2;
 {

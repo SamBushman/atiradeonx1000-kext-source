@@ -76,6 +76,15 @@ def load_funcs(d):
     return out
 
 
+def func_roots(funcs):
+    """{new name: Ghidra name} for the `func` rows; a chained row (its old name is an earlier row's new name) maps to the root"""
+    m = {r[3]: r[2] for r in funcs}
+    for k in list(m):
+        seen = set()
+        while m[k] in m and m[k] not in seen: seen.add(m[k]); m[k] = m[m[k]]
+    return m
+
+
 FUNCBACK = {}                                   # new function name -> old (Ghidra) name, set by main(): anchors of `use` rows are written against Ghidra's text
 
 
@@ -263,14 +272,18 @@ def apply_funcs(d, funcs, decl, check):
         ids.update(IDENT.findall('\n'.join('' if ALIAS_G.match(l) else ALIAS_S.sub(lambda m: ' ' + m.group(2) + ' ', l) for l in t.split('\n'))))
     pend, appl, err = {}, 0, 0
     seen_new = {}
+    succ = {r[2]: r[3] for r in funcs}             # old -> new, to follow chained rows
     for (f, n, old, new, tier, ev) in funcs:
         if new in seen_new: print('%s:%d: new function name %s is already used by the row at %s' % (f, n, new, seen_new[new])); err += 1; continue
         seen_new[new] = '%s:%d' % (f, n)
         if old in ids:
             if new in ids or new in decl: print('%s:%d: new function name %s already occurs in the corpus' % (f, n, new)); err += 1; continue
             pend[old] = new
-        elif new in ids: appl += 1
-        else: print('%s:%d: neither %s nor %s occurs in the corpus' % (f, n, old, new)); err += 1
+        else:
+            nn = new                                # a later row of a chain may already have renamed this row's result
+            while nn not in ids and nn in succ: nn = succ[nn]
+            if nn in ids: appl += 1
+            else: print('%s:%d: neither %s nor %s occurs in the corpus' % (f, n, old, new)); err += 1
     if pend:
         for f, t in texts.items():
             # whole identifiers only (PTR_FUN_<addr> and the like are other tokens); the asm form `_name` follows its function. The unprefixed ALIAS symbol of the
@@ -292,14 +305,14 @@ def main():
     dtext = re.sub(r'/\*.*?\*/|//[^\n]*', ' ', open(os.path.join(d, 'decls.h')).read(), flags=re.S)   # identifiers declared, not words in comments
     decl = set(IDENT.findall(dtext))
     funcs = load_funcs(d)
-    FUNCBACK.clear(); FUNCBACK.update({r[3]: r[2] for r in funcs})
+    FUNCBACK.clear(); FUNCBACK.update(func_roots(funcs))
     byfn = {}
-    for r in rows: byfn.setdefault(r[2], []).append(r)
+    for r in rows: byfn.setdefault(FUNCBACK.get(r[2], r[2]), []).append(r)      # rows may name a function by its Ghidra name or by a later (func-row) name
     pending = applied = errors = 0
     for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
         text = open(pf).read(); lines, fns = split_functions(text); changed = False
         for name, s, e in reversed(fns):
-            key = name if name in byfn else FUNCBACK.get(name)     # rows keep a function's Ghidra name; after a `func` row the header has the new one
+            key = FUNCBACK.get(name, name)                          # the header may carry a func-row name; byfn is keyed by the Ghidra name
             if key not in byfn: continue
             body = '\n'.join(lines[s:e])
             rws = byfn.pop(key)

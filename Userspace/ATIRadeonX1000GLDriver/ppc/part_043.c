@@ -1202,7 +1202,7 @@ int FUN_00148980(inst, param_2)
     iVar2 = FUN_000f2c5c(uVar11);
     if (iVar2 != 0) {
       operandVReg = (int *)IRInst__getOperandSource(inst,1);
-      iVar2 = FUN_00113420(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_2 + 8));
+      iVar2 = OpcodeTraits__getField34(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_2 + 8));
       if (((iVar2 == 0) && (iVar2 = (**(code **)(*operandVReg + 0x24))(operandVReg), iVar2 != 0)) &&
          ((operandVReg[5] & 0x200U) == 0)) {
         iVar2 = IRInst__getOperandRecord(operandVReg,0);
@@ -1530,7 +1530,7 @@ LAB_0014937c:
   if (((((iVar5 == 0) || (iVar5 = FUN_000f31e8(inst,1), iVar5 == 0)) &&
        (iVar5 = FUN_000f2c5c(local_58), iVar5 != 0)) &&
       (((char)local_58 == '\x04' && (iVar5 = IRInst__hasSingleUse(operandVReg,param_2), iVar5 != 0)))) &&
-     ((iVar5 = FUN_00113128(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_2 + 8)),
+     ((iVar5 = OpcodeTraits__flagBit6(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_2 + 8)),
       iVar5 != 0 && (iVar5 = FUN_0011379c(*(undefined4 *)(param_2 + 8),operandVReg), iVar5 != 0)))) {
     *(int *)(param_2 + 0x16c) = *(int *)(param_2 + 0x16c) + 1;
     iVar5 = IRInst__getOperandRecord(inst,0);
@@ -1607,7 +1607,7 @@ int FUN_001494dc(inst, param_2, param_3)
             if ((-1 < a0[5]) &&
                (((((a0[5] & 0x200U) == 0 && (iVar2 = (**(code **)(*a0 + 0x24))(a0), iVar2 != 0)) &&
                  (iVar2 = IRInst__hasSingleUse(a0,param_2), iVar2 != 0)) &&
-                (iVar2 = FUN_0011320c(*(undefined4 *)(a0[0x22] + 8),*(undefined4 *)(param_2 + 8)),
+                (iVar2 = OpcodeTraits__flagBit9(*(undefined4 *)(a0[0x22] + 8),*(undefined4 *)(param_2 + 8)),
                 iVar2 == 0)))) {
               iVar2 = IRInst__getOperandRecord(inst,0);
               local_64 = *(int *)(iVar2 + 0x10);
@@ -1694,7 +1694,7 @@ LAB_001499ec:
                (((((piVar6[5] & 0x200U) == 0 &&
                   (iVar2 = (**(code **)(*piVar6 + 0x24))(piVar6), iVar2 != 0)) &&
                  (iVar2 = IRInst__hasSingleUse(piVar6,param_2), iVar2 != 0)) &&
-                (iVar2 = FUN_0011320c(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8)
+                (iVar2 = OpcodeTraits__flagBit9(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8)
                                      ), iVar2 == 0)))) {
               FUN_000f36b8(local_38,local_4c);
               local_64 = local_38[0];
@@ -1732,13 +1732,13 @@ LAB_00149a40:
         if ((((-1 < piVar6[5]) && ((piVar6[5] & 0x200U) == 0)) &&
             ((iVar2 = (**(code **)(*piVar6 + 0x24))(piVar6), iVar2 != 0 &&
              ((iVar2 = IRInst__hasSingleUse(piVar6,param_2), iVar2 != 0 &&
-              (iVar2 = FUN_0011320c(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8)),
+              (iVar2 = OpcodeTraits__flagBit9(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8)),
               iVar2 == 0)))))) &&
            ((iVar2 = FUN_000f3884(inst), iVar2 != 0 && (iVar2 = FUN_000f3884(piVar6), iVar2 != 0)
             ))) {
-          iVar2 = FUN_00113174(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8));
+          iVar2 = OpcodeTraits__flagBit7(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8));
           if ((iVar2 == 0) &&
-             (iVar2 = FUN_001131c0(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8)),
+             (iVar2 = OpcodeTraits__flagBit8(*(undefined4 *)(piVar6[0x22] + 8),*(undefined4 *)(param_2 + 8)),
              iVar2 == 0)) {
             iVar2 = IRInst__getOperandRecord(piVar6,0);
             iVar2 = FUN_000f30d4(*(undefined4 *)(iVar2 + 0x10));
@@ -7879,7 +7879,7 @@ int FUN_00155654(inst, param_2, inst2, param_4)
   piVar2 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
   iVar1 = (**(code **)(*piVar2 + 0x88))(piVar2);
   if ((iVar1 == 0) &&
-     (iVar1 = FUN_00113258(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(param_4 + 8)),
+     (iVar1 = OpcodeTraits__flagBit10(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(param_4 + 8)),
      iVar1 == 0)) {
     return 0;
   }
@@ -7965,7 +7965,7 @@ int FUN_00155654(inst, param_2, inst2, param_4)
         iVar1 = IRInst__getOperandRecord(inst,param_2);
         *(int *)(iVar1 + 0x10) = local_28[0];
       }
-      iVar1 = FUN_00113258(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(param_4 + 8));
+      iVar1 = OpcodeTraits__flagBit10(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(param_4 + 8));
       if (iVar1 == 0) {
         IROperand__setModifierBits(inst + param_2 * 6 + 0x23,2,1);
       }

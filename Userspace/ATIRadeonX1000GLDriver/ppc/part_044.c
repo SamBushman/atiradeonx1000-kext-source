@@ -1423,7 +1423,7 @@ int FUN_0015b4a4(inst, param_2)
       iVar3 = (**(code **)(*a0 + 0x5c))(a0);
       if (((iVar3 == 0) && ((a0[5] & 0x200U) == 0)) &&
          ((iVar3 = FUN_0011379c(*(undefined4 *)(param_2 + 8),a0), iVar3 != 0 ||
-          (iVar3 = FUN_001131c0(*(undefined4 *)(a0[0x22] + 8),*(undefined4 *)(param_2 + 8)),
+          (iVar3 = OpcodeTraits__flagBit8(*(undefined4 *)(a0[0x22] + 8),*(undefined4 *)(param_2 + 8)),
           iVar3 != 0)))) {
         iVar3 = IRInst__getOperandRecord(inst,1);
         uVar8 = 0;
@@ -1967,7 +1967,7 @@ LAB_0015c078:
     operandVReg = (int *)IRInst__getOperandSource(iVar7,uVar25);
     iVar7 = (**(code **)(*operandVReg + 0x60))(operandVReg);
     if (iVar7 == 0) {
-      piVar20 = (int *)FUN_0010a240(0xa2,*(undefined4 *)(pass + 8));
+      piVar20 = (int *)IRLoadConst__vslot73(0xa2,*(undefined4 *)(pass + 8));
       Block__insertInstBefore(piVar13[0x56],piVar13,piVar20);
       piVar20[0x21] = 1;
       piVar20[0x25] = piVar20[0x53];
@@ -2248,7 +2248,7 @@ LAB_0015ca9c:
             iVar5 = (**(code **)(*piVar8 + 0x60))(piVar8);
             if (iVar5 == 0) {
               iVar5 = 0;
-              piVar9 = (int *)FUN_0010a240(0xa2,*(undefined4 *)(param_2 + 8));
+              piVar9 = (int *)IRLoadConst__vslot73(0xa2,*(undefined4 *)(param_2 + 8));
               Block__insertInstBefore(inst[0x56],inst,piVar9);
               piVar9[0x21] = 1;
               piVar9[0x25] = piVar9[0x53];
@@ -2786,7 +2786,7 @@ LAB_0015cf80:
         uVar12 = IRInst__getOperandSource(piVar9,iVar7);
         iVar6 = FUN_0010af38(uVar12,pass,uVar17);
         iVar25 = IRInst__getOperandSource(piVar9,iVar24);
-        iVar13 = FUN_0010a240(0xa2,*(undefined4 *)(pass + 8));
+        iVar13 = IRLoadConst__vslot73(0xa2,*(undefined4 *)(pass + 8));
         Block__insertInstBefore(node[0x56],node,iVar13);
         *(undefined4 *)(iVar13 + 0x84) = 1;
         *(undefined4 *)(iVar13 + 0x94) = *(undefined4 *)(iVar13 + 0x14c);
@@ -4908,7 +4908,7 @@ int FUN_00161748(inst, inst2, pass)
               local_7c = *(undefined4 *)(iVar11 + 0x10);
               FUN_000f2f84(local_58,local_84,local_88);
               local_78[0] = local_58[0];
-              piVar12 = (int *)FUN_0010a240(0xa2,*(undefined4 *)(pass + 8));
+              piVar12 = (int *)IRLoadConst__vslot73(0xa2,*(undefined4 *)(pass + 8));
               piVar12[0x26] = 0x36;
               piVar12[0x25] = piVar12[0x53];
               piVar12[0x21] = 2;
@@ -5621,7 +5621,7 @@ int FUN_00162dfc(param_1, param_2, param_3)
           iVar4 = iVar4 + 1;
           iVar11 = iVar11 + -1;
         } while (iVar11 != 0);
-        iVar2 = FUN_00112f78(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 8),
+        iVar2 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(iVar2 + 0x88) + 8),
                              *(undefined4 *)(param_3 + 8));
         if (iVar2 != 0) {
           iVar2 = IRInst__getOperandSource(*param_1,1);
@@ -6227,7 +6227,7 @@ LAB_00163c2c:
   *(int *)(iVar4 + 8) = iVar19;
   iVar4 = (**(code **)(*piVar8 + 0x60))(piVar8);
   if (iVar4 == 0) {
-    piVar8 = (int *)FUN_0010a240(0xa2,*(undefined4 *)(pass + 8));
+    piVar8 = (int *)IRLoadConst__vslot73(0xa2,*(undefined4 *)(pass + 8));
     Block__insertInstBefore(piVar11[0x56],piVar11,piVar8);
     piVar8[0x21] = 1;
     piVar8[0x25] = piVar8[0x53];
@@ -6338,7 +6338,7 @@ LAB_001642bc:
 LAB_00164300:
   iVar4 = (**(code **)(*piVar9 + 0x60))(piVar9);
   if (iVar4 == 0) {
-    piVar8 = (int *)FUN_0010a240(0xa2,*(undefined4 *)(pass + 8));
+    piVar8 = (int *)IRLoadConst__vslot73(0xa2,*(undefined4 *)(pass + 8));
     Block__insertInstBefore(piVar11[0x56],piVar11,piVar8);
     piVar8[0x21] = 1;
     piVar8[0x25] = piVar8[0x53];
@@ -9737,7 +9737,7 @@ int FUN_00169b70(param_1)
   uint uVar9;
   uint *puVar10;
   int iVar11;
-  /* NOTE (issue #64): auStack_48 was declared 8 bytes, but FUN_001940a8's sentinel-list init writes through
+  /* NOTE (issue #64): auStack_48 was declared 8 bytes, but DListNode__init's sentinel-list init writes through
    * +0x14 (6 words) - confirmed live/via stock disasm: it writes local_40 (frame+0x40, i.e. auStack_48+8) as
    * part of the SAME sentinel struct (the self-referential "list head" pointer), not a separately-initialized
    * local. -O0 doesn't lay declared locals contiguously, so the two must be one buffer (classic stack-split
@@ -9747,7 +9747,7 @@ int FUN_00169b70(param_1)
 #define local_40 ((int)auStack_48_vec169b70[2])
   
   uVar8 = 0;
-  FUN_001940a8(auStack_48);
+  DListNode__init(auStack_48);
   puVar10 = *(uint **)(param_1 + 0x18);
   uVar7 = puVar10[1];
   if (0 < (int)uVar7) {
@@ -10152,7 +10152,7 @@ int FUN_0016a568(compiler, param_2)
   undefined4 arena;
   uint *puVar27;
   /* issue #64 live-repro (crash #11, past the 0x275c dropped-arg fix): auStack_78 is declared
-   * as only 8 bytes, but FUN_001940a8(auStack_78) - a sentinel-node doubly-linked-list
+   * as only 8 bytes, but DListNode__init(auStack_78) - a sentinel-node doubly-linked-list
    * initializer - writes through it as `undefined4*` up to index 5 (`compiler[4] = compiler;
    * compiler[5] = 0;`), i.e. 24 bytes: the same undersized-local defect class already fixed for
    * local_c08c/local_2c/local_98. The overrun silently landed on whatever gcc placed next on
@@ -10176,7 +10176,7 @@ int FUN_0016a568(compiler, param_2)
   }
   compiler[4] = param_2;
   FUN_00172000(compiler[2]);
-  FUN_001940a8(auStack_78);
+  DListNode__init(auStack_78);
   piVar4 = (int *)(*(int **)(compiler[4] + 0x98))[2];
   if (piVar4 != (int *)0x0) {
     uVar20 = 0;

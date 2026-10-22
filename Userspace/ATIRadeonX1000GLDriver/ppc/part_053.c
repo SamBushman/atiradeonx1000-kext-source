@@ -122,7 +122,7 @@ LAB_0019dab0:
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019dc0c:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
-  return FUN_000e2860(*(undefined4 *)(node + 0x13c),param_5);
+  return Block__accept(*(undefined4 *)(node + 0x13c),param_5);
 }
 
 /* R520VMachineAssembler__vslot30_assembleBlockThenSlot40 @ 0x19dc48 (104 bytes) */
@@ -1004,11 +1004,11 @@ int FUN_0019ee74(param_1, param_2)
   return;
 }
 
-/* FUN_0019ef2c @ 0x19ef2c (32 bytes) */
-int FUN_0019ef2c(param_1)
-  int param_1;
+/* FudoPs__vslot96 @ 0x19ef2c (32 bytes) */
+int FudoPs__vslot96(this)
+  int this;
 {
-  *(undefined **)(param_1 + 0xc) = &DAT_001e6730;
+  *(undefined **)(this + 0xc) = &DAT_001e6730;
   return;
 }
 
@@ -2432,7 +2432,7 @@ asm(".set FUN_0019e660, _R520VMachineAssembler__vslot6_setLoopStack");
 asm(".globl FUN_0019e6e0");
 asm(".set FUN_0019e6e0, _R520VMachineAssembler__vslot24_assembleWithPredicateSet");
 asm(".globl FUN_0019ef2c");
-asm(".set FUN_0019ef2c, _FUN_0019ef2c");
+asm(".set FUN_0019ef2c, _FudoPs__vslot96");
 asm(".globl FUN_0019ef50");
 asm(".set FUN_0019ef50, _R520MachineAssembler__vslot5_beginProgram");
 asm(".globl FUN_0019f094");

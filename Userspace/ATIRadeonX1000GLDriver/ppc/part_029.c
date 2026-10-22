@@ -15,9 +15,9 @@ int FUN_00107df4(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_00107e70 @ 0x107e70 (68 bytes) */
-int FUN_00107e70(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot43 @ 0x107e70 (68 bytes) */
+int IRLoadConst__vslot43(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -26,7 +26,7 @@ int FUN_00107e70(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  FUN_00107da8(allocation + 1,param_1,compiler);
+  FUN_00107da8(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -78,9 +78,9 @@ int FUN_00107fd0(param_1, param_2, compiler)
   return Program__addInst(*(undefined4 *)(compiler + 0x6c4),param_1);
 }
 
-/* FUN_00108064 @ 0x108064 (68 bytes) */
-int FUN_00108064(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot55 @ 0x108064 (68 bytes) */
+int IRLoadConst__vslot55(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -89,7 +89,7 @@ int FUN_00108064(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00107fd0)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00107fd0)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -139,9 +139,9 @@ int FUN_001081c0(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_0010823c @ 0x10823c (68 bytes) */
-int FUN_0010823c(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot47 @ 0x10823c (68 bytes) */
+int IRLoadConst__vslot47(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -150,7 +150,7 @@ int FUN_0010823c(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108174)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00108174)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -199,9 +199,9 @@ int FUN_00108350(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_001083cc @ 0x1083cc (68 bytes) */
-int FUN_001083cc(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot49 @ 0x1083cc (68 bytes) */
+int IRLoadConst__vslot49(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -210,7 +210,7 @@ int FUN_001083cc(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108304)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00108304)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -254,9 +254,9 @@ int FUN_001084b8(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_00108534 @ 0x108534 (68 bytes) */
-int FUN_00108534(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot45 @ 0x108534 (68 bytes) */
+int IRLoadConst__vslot45(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -265,7 +265,7 @@ int FUN_00108534(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108448)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00108448)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -435,9 +435,9 @@ int FUN_00108a50(param_1, param_2, compiler)
   return;
 }
 
-/* FUN_00108ad8 @ 0x108ad8 (68 bytes) */
-int FUN_00108ad8(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot77 @ 0x108ad8 (68 bytes) */
+int IRLoadConst__vslot77(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -446,7 +446,7 @@ int FUN_00108ad8(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108a50)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00108a50)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -467,9 +467,9 @@ int FUN_00108b54(this, param_2, compiler)
   return Program__addInst(*(undefined4 *)(compiler + 0x6c4),this);
 }
 
-/* FUN_00108bec @ 0x108bec (68 bytes) */
-int FUN_00108bec(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot53 @ 0x108bec (68 bytes) */
+int IRLoadConst__vslot53(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -478,7 +478,7 @@ int FUN_00108bec(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108b54)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00108b54)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -581,9 +581,9 @@ int FUN_00108e8c(param_1, param_2, compiler)
   return;
 }
 
-/* FUN_00108ee0 @ 0x108ee0 (68 bytes) */
-int FUN_00108ee0(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot63 @ 0x108ee0 (68 bytes) */
+int IRLoadConst__vslot63(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -592,7 +592,7 @@ int FUN_00108ee0(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108e8c)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00108e8c)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -987,24 +987,24 @@ int IRLoadConst__ctor_1099dc(this, param_2)
 asm(".globl FUN_00107df4");
 asm(".set FUN_00107df4, _FUN_00107df4");
 asm(".globl FUN_00107e70");
-asm(".set FUN_00107e70, _FUN_00107e70");
+asm(".set FUN_00107e70, _IRLoadConst__vslot43");
 asm(".globl FUN_00108064");
-asm(".set FUN_00108064, _FUN_00108064");
+asm(".set FUN_00108064, _IRLoadConst__vslot55");
 asm(".globl FUN_001081c0");
 asm(".set FUN_001081c0, _FUN_001081c0");
 asm(".globl FUN_0010823c");
-asm(".set FUN_0010823c, _FUN_0010823c");
+asm(".set FUN_0010823c, _IRLoadConst__vslot47");
 asm(".globl FUN_00108350");
 asm(".set FUN_00108350, _FUN_00108350");
 asm(".globl FUN_001083cc");
-asm(".set FUN_001083cc, _FUN_001083cc");
+asm(".set FUN_001083cc, _IRLoadConst__vslot49");
 asm(".globl FUN_001084b8");
 asm(".set FUN_001084b8, _FUN_001084b8");
 asm(".globl FUN_00108534");
-asm(".set FUN_00108534, _FUN_00108534");
+asm(".set FUN_00108534, _IRLoadConst__vslot45");
 asm(".globl FUN_00108ad8");
-asm(".set FUN_00108ad8, _FUN_00108ad8");
+asm(".set FUN_00108ad8, _IRLoadConst__vslot77");
 asm(".globl FUN_00108bec");
-asm(".set FUN_00108bec, _FUN_00108bec");
+asm(".set FUN_00108bec, _IRLoadConst__vslot53");
 asm(".globl FUN_00108ee0");
-asm(".set FUN_00108ee0, _FUN_00108ee0");
+asm(".set FUN_00108ee0, _IRLoadConst__vslot63");

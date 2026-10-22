@@ -8,7 +8,7 @@ int FUN_001733a0(ctx)
   int loopIndex;
   int loopRemaining;
   
-  iVar1 = FUN_00112f78(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+  iVar1 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                        *(undefined4 *)(ctx + 0x238));
   if (iVar1 != 0) {
     loopRemaining = 4;
@@ -76,7 +76,7 @@ int FUN_0017356c(ctx)
   int callResult;
   int loopIndex;
   
-  callResult = FUN_00113174(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+  callResult = OpcodeTraits__flagBit7(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                        *(undefined4 *)(ctx + 0x238));
   if (callResult == 0) {
     loopIndex = 1;
@@ -295,7 +295,7 @@ int FUN_00173a48(inst, param_2)
   int callResult;
   int loopIndex;
   
-  callResult = FUN_00113174(*(undefined4 *)(inst[0x22] + 8),param_2);
+  callResult = OpcodeTraits__flagBit7(*(undefined4 *)(inst[0x22] + 8),param_2);
   if (callResult == 0) {
     loopIndex = 1;
     callResult = (**(code **)(*inst + 0x14))(inst);
@@ -552,11 +552,11 @@ LAB_00173fa0:
   }
   loopIndex = (**(code **)(**(int **)(ctx + 0xb0) + 0x7c))(*(int **)(ctx + 0xb0));
   if (loopIndex == 0) {
-    loopIndex = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+    loopIndex = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                          *(undefined4 *)(ctx + 0x238));
     if (loopIndex != 0) {
       pdVar11 = ((unsigned char *)0x0);
-      loopIndex = FUN_0011320c(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+      loopIndex = OpcodeTraits__flagBit9(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238));
       if (loopIndex == 0) {
         while( true ) {
@@ -1302,11 +1302,11 @@ LAB_00174efc:
       goto LAB_001757ec;
     }
   }
-  loopIndex2 = FUN_00113090(*(undefined4 *)(*(int *)(loopIndex2 + 0x88) + 8),param_1[0x8e]);
+  loopIndex2 = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(loopIndex2 + 0x88) + 8),param_1[0x8e]);
   if ((((loopIndex2 == 0) ||
-       (loopIndex2 = FUN_0011320c(*(undefined4 *)(*(int *)(param_1[0x2c] + 0x88) + 8),param_1[0x8e]),
+       (loopIndex2 = OpcodeTraits__flagBit9(*(undefined4 *)(*(int *)(param_1[0x2c] + 0x88) + 8),param_1[0x8e]),
        loopIndex2 != 0)) &&
-      (loopIndex2 = FUN_001131c0(*(undefined4 *)(*(int *)(param_1[0x2c] + 0x88) + 8),param_1[0x8e]),
+      (loopIndex2 = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(param_1[0x2c] + 0x88) + 8),param_1[0x8e]),
       loopIndex2 == 0)) &&
      ((loopIndex2 = ((int (*)())FUN_00173a48)(param_1[0x2c],param_1[0x8e]), loopIndex2 == 0 &&
       (loopIndex2 = ((int (*)())FUN_0017356c)(param_1), loopIndex2 == 0)))) {
@@ -1734,16 +1734,16 @@ int FUN_00175b40(param_1)
       if (((*(char *)((int)local_38 + loopIndex) == '\x01') &&
           (loopRemaining = ((int (*)())FUN_00176264)(*loopIndex2,uVar7), loopRemaining != 0)) &&
          (loopRemaining = (**(code **)(*(int *)param_1[0x2c] + 100))((int *)param_1[0x2c]), loopRemaining == 0)) {
-        loopRemaining = FUN_00113090(*(undefined4 *)(*(int *)(param_1[0x2c] + 0x88) + 8),param_1[0x8e]);
+        loopRemaining = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(param_1[0x2c] + 0x88) + 8),param_1[0x8e]);
         if (loopRemaining == 0) {
 LAB_00175c7c:
           iVar6 = *(int *)(param_1[0x2c] + 0x88);
-          loopRemaining = FUN_001131c0(*(undefined4 *)(iVar6 + 8),param_1[0x8e]);
+          loopRemaining = OpcodeTraits__flagBit8(*(undefined4 *)(iVar6 + 8),param_1[0x8e]);
           if (loopRemaining == 0) goto LAB_00175ce8;
         }
         else {
           iVar6 = *(int *)(param_1[0x2c] + 0x88);
-          loopRemaining = FUN_0011320c(*(undefined4 *)(iVar6 + 8),param_1[0x8e]);
+          loopRemaining = OpcodeTraits__flagBit9(*(undefined4 *)(iVar6 + 8),param_1[0x8e]);
           if (loopRemaining != 0) goto LAB_00175c7c;
         }
         loopRemaining = Compiler__isOptionEnabled(param_1[0x8e],0x30);
@@ -1982,8 +1982,8 @@ int FUN_001762c0(param_1)
   return;
 }
 
-/* FUN_00176304 @ 0x176304 (32 bytes) */
-double FUN_00176304(double fparam_1)
+/* KhanPs__vslot56 @ 0x176304 (32 bytes) */
+double KhanPs__vslot56(double fparam_1)
 {
   return (double)(float)(fparam_1 * (double)FLOAT_001aa1cc);
 }
@@ -2164,18 +2164,18 @@ int FUN_001765a4(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_001765e4 @ 0x1765e4 (44 bytes) */
-int FUN_001765e4(param_1, param_2, param_3)
-  undefined4 param_1;
+/* FudoPs__vslot12 @ 0x1765e4 (44 bytes) */
+int FudoPs__vslot12(this, param_2, param_3)
+  undefined4 this;
   int param_2;
   int param_3;
 {
   return *(undefined4 *)(&DAT_001e5f54 + (param_2 * 6 + param_3) * 4);
 }
 
-/* FUN_00176610 @ 0x176610 (28 bytes) */
-int FUN_00176610(param_1, param_2)
-  undefined4 param_1;
+/* FudoPs__vslot11 @ 0x176610 (28 bytes) */
+int FudoPs__vslot11(this, param_2)
+  undefined4 this;
   int param_2;
 {
   if ((param_2 != 2) && (param_2 != 5)) {
@@ -2244,7 +2244,7 @@ int FUN_0017672c(ctx)
     if (iVar1 < loopIndex) {
       return 1;
     }
-    iVar1 = FUN_0011346c(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(ctx + 0xb0));
+    iVar1 = OpcodeTraits__instFlagBit2(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(ctx + 0xb0));
     if ((iVar1 == 0) || ((iVar1 = 3, loopIndex != 1 && (iVar1 = 1, loopIndex != 3)))) {
       iVar1 = 0;
     }
@@ -2362,7 +2362,7 @@ int FUN_001769f4(param_1, param_2, param_3)
   int iVar1;
   undefined4 *puVar2;
   
-  iVar1 = FUN_0011346c(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
+  iVar1 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
   if ((iVar1 == 0) || ((iVar1 = 3, param_3 != 1 && (iVar1 = 1, param_3 != 3)))) {
     iVar1 = 0;
   }
@@ -2582,8 +2582,8 @@ int FUN_00176ec0(param_1, param_2, param_3)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00176304");
-asm(".set FUN_00176304, _FUN_00176304");
+asm(".set FUN_00176304, _KhanPs__vslot56");
 asm(".globl FUN_001765e4");
-asm(".set FUN_001765e4, _FUN_001765e4");
+asm(".set FUN_001765e4, _FudoPs__vslot12");
 asm(".globl FUN_00176610");
-asm(".set FUN_00176610, _FUN_00176610");
+asm(".set FUN_00176610, _FudoPs__vslot11");

@@ -632,7 +632,7 @@ LAB_001a27a4:
     compareCode = 2;
     IROperand__setModifierBits(iVar3,1,uVar5 & 1 ^ 1);
   }
-  FUN_001940a8(auStack_48);
+  DListNode__init(auStack_48);
   DList__pushBack(auStack_48,inst2);
   (**(code **)(*this + 0x34))(this,auStack_48,blockArg,a3);
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -5) = 0;
@@ -1138,8 +1138,8 @@ int FUN_001a3580(param_1)
   return callResult2;
 }
 
-/* FUN_001cd7bc @ 0x1cd7bc (28 bytes) */
-int FUN_001cd7bc()
+/* IRPseudo__getKindName @ 0x1cd7bc (28 bytes) */
+int IRPseudo__getKindName()
 {
   return "pseudo";
 }
@@ -1153,55 +1153,55 @@ int MachineAssembler__dtor_1cd7ec(this)
 }
 
 /* DListNode__dtor @ 0x1cd810 (36 bytes) */
-int DListNode__dtor(param_1)
-  undefined4 *param_1;
+int DListNode__dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8b48 + 8;
+  *this = PTR_DAT_001e8b48 + 8;
   return;
 }
 
 /* DListNode__deleting_dtor @ 0x1cd834 (56 bytes) */
-int DListNode__deleting_dtor(param_1)
-  undefined4 *param_1;
+int DListNode__deleting_dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8b48 + 8;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = PTR_DAT_001e8b48 + 8;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return Arena__free(param_1[-1],param_1 + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRPseudo__dtor @ 0x1cd86c (68 bytes) */
-int IRPseudo__dtor(param_1)
-  undefined4 *param_1;
+int IRPseudo__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e8b4c;
-  *param_1 = PTR_DAT_001e8b50 + 8;
+  *this = PTR_DAT_001e8b50 + 8;
   puVar1 = PTR_DAT_001e8b48;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
   return;
 }
 
 /* IRPseudo__deleting_dtor @ 0x1cd8b0 (88 bytes) */
-int IRPseudo__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IRPseudo__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e8b4c;
-  *param_1 = PTR_DAT_001e8b50 + 8;
+  *this = PTR_DAT_001e8b50 + 8;
   puVar1 = PTR_DAT_001e8b48;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
-  if (param_1 == (undefined4 *)0x0) {
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  return Arena__free(param_1[-1],param_1 + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cd908 @ 0x1cd908 (104 bytes) */
@@ -1336,80 +1336,80 @@ int IRInst__dtor_1cdba4(this)
   return;
 }
 
-/* FUN_001cdc64 @ 0x1cdc64 (28 bytes) */
-int FUN_001cdc64()
+/* Block__getKindName @ 0x1cdc64 (28 bytes) */
+int Block__getKindName()
 {
   return "SIMPLE";
 }
 
-/* FUN_001cdc88 @ 0x1cdc88 (28 bytes) */
-int FUN_001cdc88()
+/* EntryBlock__getKindName @ 0x1cdc88 (28 bytes) */
+int EntryBlock__getKindName()
 {
   return "ENTRY";
 }
 
-/* FUN_001cdcac @ 0x1cdcac (28 bytes) */
-int FUN_001cdcac()
+/* AnyBlock__getKindName @ 0x1cdcac (28 bytes) */
+int AnyBlock__getKindName()
 {
   return "ANY";
 }
 
-/* FUN_001cdcd0 @ 0x1cdcd0 (28 bytes) */
-int FUN_001cdcd0()
+/* ExitBlock__getKindName @ 0x1cdcd0 (28 bytes) */
+int ExitBlock__getKindName()
 {
   return "EXIT";
 }
 
-/* FUN_001cdcfc @ 0x1cdcfc (28 bytes) */
-int FUN_001cdcfc()
+/* LoopFooter__getKindName @ 0x1cdcfc (28 bytes) */
+int LoopFooter__getKindName()
 {
   return "LOOP_FOOTER";
 }
 
-/* FUN_001cdd20 @ 0x1cdd20 (28 bytes) */
-int FUN_001cdd20()
+/* PostLoopFooter__getKindName @ 0x1cdd20 (28 bytes) */
+int PostLoopFooter__getKindName()
 {
   return "POST_LOOP_FOOTER";
 }
 
-/* FUN_001cdd44 @ 0x1cdd44 (28 bytes) */
-int FUN_001cdd44()
+/* IfHeader__getKindName @ 0x1cdd44 (28 bytes) */
+int IfHeader__getKindName()
 {
   return "IF_HEADER";
 }
 
-/* FUN_001cdd60 @ 0x1cdd60 (28 bytes) */
-int FUN_001cdd60()
+/* IfHeaderStatic__getKindName @ 0x1cdd60 (28 bytes) */
+int IfHeaderStatic__getKindName()
 {
   return "IF_HEADER_S";
 }
 
-/* FUN_001cdd84 @ 0x1cdd84 (28 bytes) */
-int FUN_001cdd84()
+/* IfFooter__getKindName @ 0x1cdd84 (28 bytes) */
+int IfFooter__getKindName()
 {
   return "IF_FOOTER";
 }
 
-/* FUN_001cdda8 @ 0x1cdda8 (28 bytes) */
-int FUN_001cdda8()
+/* IfFooterStatic__getKindName @ 0x1cdda8 (28 bytes) */
+int IfFooterStatic__getKindName()
 {
   return "IF_FOOTER_S";
 }
 
-/* FUN_001cddcc @ 0x1cddcc (28 bytes) */
-int FUN_001cddcc()
+/* BreakBlock__getKindName @ 0x1cddcc (28 bytes) */
+int BreakBlock__getKindName()
 {
   return "BREAK";
 }
 
-/* FUN_001cddf0 @ 0x1cddf0 (28 bytes) */
-int FUN_001cddf0()
+/* ContinueBlock__getKindName @ 0x1cddf0 (28 bytes) */
+int ContinueBlock__getKindName()
 {
   return "CONTINUE";
 }
 
-/* FUN_001cde18 @ 0x1cde18 (28 bytes) */
-int FUN_001cde18()
+/* FuncEndBlock__getKindName @ 0x1cde18 (28 bytes) */
+int FuncEndBlock__getKindName()
 {
   return "FUNC_END";
 }
@@ -1428,21 +1428,21 @@ int EntryBlock__deleting_dtor(this)
 }
 
 /* AnyBlock__dtor @ 0x1cde9c (36 bytes) */
-int AnyBlock__dtor(param_1)
-  undefined4 *param_1;
+int AnyBlock__dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8b58 + 8;
-  return Block__dtor_ea270(param_1);
+  *this = PTR_DAT_001e8b58 + 8;
+  return Block__dtor_ea270(this);
 }
 
 /* AnyBlock__deleting_dtor @ 0x1cdec0 (104 bytes) */
-int AnyBlock__deleting_dtor(param_1)
-  undefined4 *param_1;
+int AnyBlock__deleting_dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8b58 + 8;
-  Block__dtor_ea270(param_1);
-  if (param_1 != (undefined4 *)0x0) {
-    Arena__free(param_1[-1],param_1 + -1);
+  *this = PTR_DAT_001e8b58 + 8;
+  Block__dtor_ea270(this);
+  if (this != (undefined4 *)0x0) {
+    Arena__free(this[-1],this + -1);
     return;
   }
   return;
@@ -1485,7 +1485,7 @@ asm(".set FUN_001a2ee4, _R520MachineAssembler__vslot25_assembleLoop");
 asm(".globl FUN_001a3000");
 asm(".set FUN_001a3000, _R520MachineAssembler__vslot37_closeBranch");
 asm(".globl FUN_001cd7bc");
-asm(".set FUN_001cd7bc, _FUN_001cd7bc");
+asm(".set FUN_001cd7bc, _IRPseudo__getKindName");
 asm(".globl FUN_001cd7ec");
 asm(".set FUN_001cd7ec, _MachineAssembler__dtor_1cd7ec");
 asm(".globl FUN_001cd810");
@@ -1513,31 +1513,31 @@ asm(".set FUN_001cdb3c, _IRInst__dtor_1cdb3c");
 asm(".globl FUN_001cdba4");
 asm(".set FUN_001cdba4, _IRInst__dtor_1cdba4");
 asm(".globl FUN_001cdc64");
-asm(".set FUN_001cdc64, _FUN_001cdc64");
+asm(".set FUN_001cdc64, _Block__getKindName");
 asm(".globl FUN_001cdc88");
-asm(".set FUN_001cdc88, _FUN_001cdc88");
+asm(".set FUN_001cdc88, _EntryBlock__getKindName");
 asm(".globl FUN_001cdcac");
-asm(".set FUN_001cdcac, _FUN_001cdcac");
+asm(".set FUN_001cdcac, _AnyBlock__getKindName");
 asm(".globl FUN_001cdcd0");
-asm(".set FUN_001cdcd0, _FUN_001cdcd0");
+asm(".set FUN_001cdcd0, _ExitBlock__getKindName");
 asm(".globl FUN_001cdcfc");
-asm(".set FUN_001cdcfc, _FUN_001cdcfc");
+asm(".set FUN_001cdcfc, _LoopFooter__getKindName");
 asm(".globl FUN_001cdd20");
-asm(".set FUN_001cdd20, _FUN_001cdd20");
+asm(".set FUN_001cdd20, _PostLoopFooter__getKindName");
 asm(".globl FUN_001cdd44");
-asm(".set FUN_001cdd44, _FUN_001cdd44");
+asm(".set FUN_001cdd44, _IfHeader__getKindName");
 asm(".globl FUN_001cdd60");
-asm(".set FUN_001cdd60, _FUN_001cdd60");
+asm(".set FUN_001cdd60, _IfHeaderStatic__getKindName");
 asm(".globl FUN_001cdd84");
-asm(".set FUN_001cdd84, _FUN_001cdd84");
+asm(".set FUN_001cdd84, _IfFooter__getKindName");
 asm(".globl FUN_001cdda8");
-asm(".set FUN_001cdda8, _FUN_001cdda8");
+asm(".set FUN_001cdda8, _IfFooterStatic__getKindName");
 asm(".globl FUN_001cddcc");
-asm(".set FUN_001cddcc, _FUN_001cddcc");
+asm(".set FUN_001cddcc, _BreakBlock__getKindName");
 asm(".globl FUN_001cddf0");
-asm(".set FUN_001cddf0, _FUN_001cddf0");
+asm(".set FUN_001cddf0, _ContinueBlock__getKindName");
 asm(".globl FUN_001cde18");
-asm(".set FUN_001cde18, _FUN_001cde18");
+asm(".set FUN_001cde18, _FuncEndBlock__getKindName");
 asm(".globl FUN_001cde34");
 asm(".set FUN_001cde34, _EntryBlock__deleting_dtor");
 asm(".globl FUN_001cde9c");

@@ -131,22 +131,22 @@
 17e338	FUN_0017e338	r8	PASS-deep	GARBAGE	
 17f1f8	FUN_0017f1f8	r7	PASS-deep	GARBAGE	
 17f1f8	FUN_0017f1f8	r8	PASS-deep	GARBAGE	
-18ad08	FUN_0018ad08	r7	PASS-indirect	GARBAGE	
-18ad08	FUN_0018ad08	r8	PASS-indirect	GARBAGE	
+18ad08	R300SchedModel__vslot16	r7	PASS-indirect	GARBAGE	
+18ad08	R300SchedModel__vslot16	r8	PASS-indirect	GARBAGE	
 18b1bc	FUN_0018b1bc	r8	PASS-indirect	GARBAGE	
-18b654	FUN_0018b654	r7	PASS-deep	GARBAGE	
-18b654	FUN_0018b654	r8	PASS-deep	GARBAGE	
-18b9cc	FUN_0018b9cc	r7	PASS-indirect	GARBAGE	
-18b9cc	FUN_0018b9cc	r8	PASS-indirect	GARBAGE	
+18b654	R300SchedModel__vslot11	r7	PASS-deep	GARBAGE	
+18b654	R300SchedModel__vslot11	r8	PASS-deep	GARBAGE	
+18b9cc	R300SchedModel__vslot14	r7	PASS-indirect	GARBAGE	
+18b9cc	R300SchedModel__vslot14	r8	PASS-indirect	GARBAGE	
 18d4b4	FUN_0018d4b4	r8	PASS-indirect	GARBAGE	
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 190720 bctrl via +0x4c (argument registers up to r5)
 1906c8	R300VSchedModel__vslot3_canAddInstruction	r6	PASS-indirect	GARBAGE	
-190990	FUN_00190990	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 1909d4 bctrl via +0x80 (argument registers up to r5)
-190990	FUN_00190990	r6	PASS-indirect	GARBAGE	
-190990	FUN_00190990	r7	PASS-indirect	GARBAGE	
-190990	FUN_00190990	r8	PASS-indirect	GARBAGE	
-193944	FUN_00193944	r7	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 193974 bctrl via +0x24 (argument registers up to r7)
-193944	FUN_00193944	r8	PASS-indirect	GARBAGE	
+190990	R300VSchedModel__vslot27	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 1909d4 bctrl via +0x80 (argument registers up to r5)
+190990	R300VSchedModel__vslot27	r6	PASS-indirect	GARBAGE	
+190990	R300VSchedModel__vslot27	r7	PASS-indirect	GARBAGE	
+190990	R300VSchedModel__vslot27	r8	PASS-indirect	GARBAGE	
+193944	R520SchedModel__vslot21	r7	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 193974 bctrl via +0x24 (argument registers up to r7)
+193944	R520SchedModel__vslot21	r8	PASS-indirect	GARBAGE	
 19c130	R300VMachineAssembler__encodeSourceOperand	r8	PASS-deep	GARBAGE	
 19ca78	R300VMachineAssembler__encodeDualMathOperands	r6	PASS-deep	GARBAGE	
 19ca78	R300VMachineAssembler__encodeDualMathOperands	r7	PASS-deep	GARBAGE	

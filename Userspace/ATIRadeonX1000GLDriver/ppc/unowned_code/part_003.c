@@ -1,32 +1,32 @@
 #include "decls.h"
 
-/* orph_1ce978 @ 0x1ce978 (8 bytes) */
-int orph_1ce978(param_1)
+/* IRPhiNode__getNumSources @ 0x1ce978 (8 bytes) */
+int IRPhiNode__getNumSources(param_1)
   int param_1;
 {
   return *(undefined4 *)(param_1 + 0x84);
 }
 
-/* orph_1ce980 @ 0x1ce980 (4 bytes) */
-int orph_1ce980()
+/* IRPhiNode__vslot33 @ 0x1ce980 (4 bytes) */
+int IRPhiNode__vslot33()
 {
   return;
 }
 
-/* orph_1ce984 @ 0x1ce984 (4 bytes) */
-int orph_1ce984()
+/* IRPhiNode__appendSource @ 0x1ce984 (4 bytes) */
+int IRPhiNode__appendSource()
 {
   return;
 }
 
-/* orph_1ce988 @ 0x1ce988 (8 bytes) */
-int orph_1ce988()
+/* IRPhiNode__vslot37 @ 0x1ce988 (8 bytes) */
+int IRPhiNode__vslot37()
 {
   return 0;
 }
 
-/* orph_1ce990 @ 0x1ce990 (28 bytes) */
-int orph_1ce990(param_1, param_2)
+/* IRAlu__accept @ 0x1ce990 (28 bytes) */
+int IRAlu__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -36,26 +36,26 @@ int orph_1ce990(param_1, param_2)
   return;
 }
 
-/* orph_1ce9ac @ 0x1ce9ac (8 bytes) */
-int orph_1ce9ac()
+/* IRAlu__isAlu @ 0x1ce9ac (8 bytes) */
+int IRAlu__isAlu()
 {
   return 1;
 }
 
-/* orph_1ce9d0 @ 0x1ce9d0 (8 bytes) */
-int orph_1ce9d0()
+/* IRZeroary__getNumSources @ 0x1ce9d0 (8 bytes) */
+int IRZeroary__getNumSources()
 {
   return 0;
 }
 
-/* orph_1ce9d8 @ 0x1ce9d8 (8 bytes) */
-int orph_1ce9d8()
+/* IRUnary__getNumSources @ 0x1ce9d8 (8 bytes) */
+int IRUnary__getNumSources()
 {
   return 1;
 }
 
-/* orph_1ce9e0 @ 0x1ce9e0 (28 bytes) */
-int orph_1ce9e0(param_1, param_2)
+/* IRMov__accept @ 0x1ce9e0 (28 bytes) */
+int IRMov__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -65,44 +65,44 @@ int orph_1ce9e0(param_1, param_2)
   return;
 }
 
-/* orph_1ce9fc @ 0x1ce9fc (8 bytes) */
-int orph_1ce9fc()
+/* IRMov__isMov @ 0x1ce9fc (8 bytes) */
+int IRMov__isMov()
 {
   return 1;
 }
 
-/* orph_1cea04 @ 0x1cea04 (8 bytes) */
-int orph_1cea04()
+/* IRBinary__getNumSources @ 0x1cea04 (8 bytes) */
+int IRBinary__getNumSources()
 {
   return 2;
 }
 
-/* orph_1cea0c @ 0x1cea0c (8 bytes) */
-int orph_1cea0c()
+/* IRTrinary__getNumSources @ 0x1cea0c (8 bytes) */
+int IRTrinary__getNumSources()
 {
   return 3;
 }
 
-/* orph_1cea14 @ 0x1cea14 (8 bytes) */
-int orph_1cea14()
+/* IRFetch__isFetch @ 0x1cea14 (8 bytes) */
+int IRFetch__isFetch()
 {
   return 1;
 }
 
-/* orph_1cea1c @ 0x1cea1c (8 bytes) */
-int orph_1cea1c()
+/* IRFetch__getNumSources @ 0x1cea1c (8 bytes) */
+int IRFetch__getNumSources()
 {
   return 1;
 }
 
-/* orph_1cea40 @ 0x1cea40 (8 bytes) */
-int orph_1cea40()
+/* IRVertexFetch__isVertexFetch @ 0x1cea40 (8 bytes) */
+int IRVertexFetch__isVertexFetch()
 {
   return 1;
 }
 
-/* orph_1cea48 @ 0x1cea48 (28 bytes) */
-int orph_1cea48(param_1, param_2)
+/* IRVertexFetch__accept @ 0x1cea48 (28 bytes) */
+int IRVertexFetch__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -112,14 +112,14 @@ int orph_1cea48(param_1, param_2)
   return;
 }
 
-/* orph_1cea64 @ 0x1cea64 (8 bytes) */
-int orph_1cea64()
+/* IRTextureFetch__isTextureFetch @ 0x1cea64 (8 bytes) */
+int IRTextureFetch__isTextureFetch()
 {
   return 1;
 }
 
-/* orph_1cea6c @ 0x1cea6c (28 bytes) */
-int orph_1cea6c(param_1, param_2)
+/* IRTextureFetch__accept @ 0x1cea6c (28 bytes) */
+int IRTextureFetch__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -129,26 +129,26 @@ int orph_1cea6c(param_1, param_2)
   return;
 }
 
-/* orph_1cea88 @ 0x1cea88 (8 bytes) */
-int orph_1cea88()
+/* IRTextureFetchGradients__getNumSources @ 0x1cea88 (8 bytes) */
+int IRTextureFetchGradients__getNumSources()
 {
   return 3;
 }
 
-/* orph_1cea90 @ 0x1cea90 (8 bytes) */
-int orph_1cea90()
+/* IRMemLoad__isMemLoad @ 0x1cea90 (8 bytes) */
+int IRMemLoad__isMemLoad()
 {
   return 1;
 }
 
-/* orph_1cea98 @ 0x1cea98 (8 bytes) */
-int orph_1cea98()
+/* IRMemLoad__getNumSources @ 0x1cea98 (8 bytes) */
+int IRMemLoad__getNumSources()
 {
   return 2;
 }
 
-/* orph_1ceaa0 @ 0x1ceaa0 (28 bytes) */
-int orph_1ceaa0(param_1, param_2)
+/* IRMemLoad__accept @ 0x1ceaa0 (28 bytes) */
+int IRMemLoad__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -158,20 +158,20 @@ int orph_1ceaa0(param_1, param_2)
   return;
 }
 
-/* orph_1ceabc @ 0x1ceabc (8 bytes) */
-int orph_1ceabc()
+/* IRMemStore__isMemStore @ 0x1ceabc (8 bytes) */
+int IRMemStore__isMemStore()
 {
   return 1;
 }
 
-/* orph_1ceac4 @ 0x1ceac4 (8 bytes) */
-int orph_1ceac4()
+/* IRMemStore__getNumSources @ 0x1ceac4 (8 bytes) */
+int IRMemStore__getNumSources()
 {
   return 2;
 }
 
-/* orph_1ceacc @ 0x1ceacc (28 bytes) */
-int orph_1ceacc(param_1, param_2)
+/* IRMemStore__accept @ 0x1ceacc (28 bytes) */
+int IRMemStore__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -181,20 +181,20 @@ int orph_1ceacc(param_1, param_2)
   return;
 }
 
-/* orph_1ceae8 @ 0x1ceae8 (8 bytes) */
-int orph_1ceae8()
+/* IRExport__getNumDests @ 0x1ceae8 (8 bytes) */
+int IRExport__getNumDests()
 {
   return 0;
 }
 
-/* orph_1ceaf0 @ 0x1ceaf0 (8 bytes) */
-int orph_1ceaf0()
+/* IRExport__getNumSources @ 0x1ceaf0 (8 bytes) */
+int IRExport__getNumSources()
 {
   return 1;
 }
 
-/* orph_1ceaf8 @ 0x1ceaf8 (28 bytes) */
-int orph_1ceaf8(param_1, param_2)
+/* IRExport__accept @ 0x1ceaf8 (28 bytes) */
+int IRExport__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -204,32 +204,32 @@ int orph_1ceaf8(param_1, param_2)
   return;
 }
 
-/* orph_1ceb14 @ 0x1ceb14 (28 bytes) */
-int orph_1ceb14()
+/* IRExport__getKindName @ 0x1ceb14 (28 bytes) */
+int IRExport__getKindName()
 {
   return "export";
 }
 
-/* orph_1ceb30 @ 0x1ceb30 (8 bytes) */
-int orph_1ceb30()
+/* IRExport__isExport @ 0x1ceb30 (8 bytes) */
+int IRExport__isExport()
 {
   return 1;
 }
 
-/* orph_1ceb38 @ 0x1ceb38 (8 bytes) */
-int orph_1ceb38()
+/* IRExportColorAndFog__getNumDests @ 0x1ceb38 (8 bytes) */
+int IRExportColorAndFog__getNumDests()
 {
   return 2;
 }
 
-/* orph_1ceb40 @ 0x1ceb40 (8 bytes) */
-int orph_1ceb40()
+/* IRExportColorAndFog__getNumSources @ 0x1ceb40 (8 bytes) */
+int IRExportColorAndFog__getNumSources()
 {
   return 2;
 }
 
-/* orph_1ceb48 @ 0x1ceb48 (28 bytes) */
-int orph_1ceb48(param_1, param_2)
+/* IRExportColorAndFog__accept @ 0x1ceb48 (28 bytes) */
+int IRExportColorAndFog__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -239,14 +239,14 @@ int orph_1ceb48(param_1, param_2)
   return;
 }
 
-/* orph_1ceb64 @ 0x1ceb64 (28 bytes) */
-int orph_1ceb64()
+/* IRExportColorAndFog__getKindName @ 0x1ceb64 (28 bytes) */
+int IRExportColorAndFog__getKindName()
 {
   return "export_color_and_fog";
 }
 
-/* orph_1ceb80 @ 0x1ceb80 (28 bytes) */
-int orph_1ceb80(param_1, param_2)
+/* IRGeomExport__accept @ 0x1ceb80 (28 bytes) */
+int IRGeomExport__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -256,50 +256,50 @@ int orph_1ceb80(param_1, param_2)
   return;
 }
 
-/* orph_1ceb9c @ 0x1ceb9c (8 bytes) */
-int orph_1ceb9c()
+/* IRGeomExport__isGeomExport @ 0x1ceb9c (8 bytes) */
+int IRGeomExport__isGeomExport()
 {
   return 1;
 }
 
-/* orph_1ceba4 @ 0x1ceba4 (8 bytes) */
-int orph_1ceba4()
+/* IRCmp2__getNumDests @ 0x1ceba4 (8 bytes) */
+int IRCmp2__getNumDests()
 {
   return 0;
 }
 
-/* orph_1cebac @ 0x1cebac (8 bytes) */
-int orph_1cebac()
+/* IRCmp2__getNumSources @ 0x1cebac (8 bytes) */
+int IRCmp2__getNumSources()
 {
   return 2;
 }
 
-/* orph_1cebd0 @ 0x1cebd0 (4 bytes) */
-int orph_1cebd0()
+/* IRCmp1S__accept @ 0x1cebd0 (4 bytes) */
+int IRCmp1S__accept()
 {
   return;
 }
 
-/* orph_1cebd4 @ 0x1cebd4 (8 bytes) */
-int orph_1cebd4()
+/* IRCmp1S__getNumDests @ 0x1cebd4 (8 bytes) */
+int IRCmp1S__getNumDests()
 {
   return 0;
 }
 
-/* orph_1cebdc @ 0x1cebdc (8 bytes) */
-int orph_1cebdc()
+/* IRCmp1S__getNumSources @ 0x1cebdc (8 bytes) */
+int IRCmp1S__getNumSources()
 {
   return 1;
 }
 
-/* orph_1cec00 @ 0x1cec00 (8 bytes) */
-int orph_1cec00()
+/* IRKill2__getNumSources @ 0x1cec00 (8 bytes) */
+int IRKill2__getNumSources()
 {
   return 2;
 }
 
-/* orph_1cec08 @ 0x1cec08 (28 bytes) */
-int orph_1cec08(param_1, param_2)
+/* IRKill2__accept @ 0x1cec08 (28 bytes) */
+int IRKill2__accept(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
@@ -309,26 +309,26 @@ int orph_1cec08(param_1, param_2)
   return;
 }
 
-/* orph_1cec24 @ 0x1cec24 (28 bytes) */
-int orph_1cec24()
+/* IRKill2__getKindName @ 0x1cec24 (28 bytes) */
+int IRKill2__getKindName()
 {
   return "ir_kill2";
 }
 
-/* orph_1cec40 @ 0x1cec40 (8 bytes) */
-int orph_1cec40()
+/* IRLoopStart__getNumSources @ 0x1cec40 (8 bytes) */
+int IRLoopStart__getNumSources()
 {
   return 1;
 }
 
-/* orph_1cec48 @ 0x1cec48 (8 bytes) */
-int orph_1cec48()
+/* IRLoopStart__isLoopStart @ 0x1cec48 (8 bytes) */
+int IRLoopStart__isLoopStart()
 {
   return 1;
 }
 
-/* orph_1cec6c @ 0x1cec6c (32 bytes) */
-int orph_1cec6c(param_1, param_2, param_3, param_4)
+/* IRAlu__vslot34 @ 0x1cec6c (32 bytes) */
+int IRAlu__vslot34(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -341,8 +341,8 @@ int orph_1cec6c(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* orph_1cec8c @ 0x1cec8c (32 bytes) */
-int orph_1cec8c(param_1, param_2, param_3, param_4)
+/* IRFetch__vslot34 @ 0x1cec8c (32 bytes) */
+int IRFetch__vslot34(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -355,78 +355,78 @@ int orph_1cec8c(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* orph_1cecac @ 0x1cecac (12 bytes) */
-int orph_1cecac(param_1)
+/* IRGeomExport__getNumSources @ 0x1cecac (12 bytes) */
+int IRGeomExport__getNumSources(param_1)
   int param_1;
 {
   return *(int *)(param_1 + 0x84) + -1;
 }
 
-/* orph_1cecb8 @ 0x1cecb8 (8 bytes) */
-int orph_1cecb8(param_1)
+/* IRInst__getNumSources @ 0x1cecb8 (8 bytes) */
+int IRInst__getNumSources(param_1)
   int param_1;
 {
   return *(undefined4 *)(param_1 + 0x84);
 }
 
-/* orph_1cffec @ 0x1cffec (8 bytes) */
-int orph_1cffec()
+/* HwLimits__vslot2 @ 0x1cffec (8 bytes) */
+int HwLimits__vslot2()
 {
   return 0;
 }
 
-/* orph_1cfff4 @ 0x1cfff4 (4 bytes) */
-int orph_1cfff4()
+/* HwLimits__vslot3 @ 0x1cfff4 (4 bytes) */
+int HwLimits__vslot3()
 {
   return;
 }
 
-/* orph_1cfff8 @ 0x1cfff8 (4 bytes) */
-int orph_1cfff8()
+/* HwLimits__vslot4 @ 0x1cfff8 (4 bytes) */
+int HwLimits__vslot4()
 {
   return;
 }
 
-/* orph_1cfffc @ 0x1cfffc (4 bytes) */
-int orph_1cfffc()
+/* HwLimits__vslot5 @ 0x1cfffc (4 bytes) */
+int HwLimits__vslot5()
 {
   return;
 }
 
-/* orph_1d0020 @ 0x1d0020 (8 bytes) */
-int orph_1d0020()
+/* HwLimits__vslot11 @ 0x1d0020 (8 bytes) */
+int HwLimits__vslot11()
 {
   return 1;
 }
 
-/* orph_1d0028 @ 0x1d0028 (8 bytes) */
-int orph_1d0028(param_1, param_2)
+/* HwLimits__vslot12 @ 0x1d0028 (8 bytes) */
+int HwLimits__vslot12(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
   return param_2;
 }
 
-/* orph_1d0030 @ 0x1d0030 (8 bytes) */
-int orph_1d0030()
+/* HwLimits__vslot13 @ 0x1d0030 (8 bytes) */
+int HwLimits__vslot13()
 {
   return 0;
 }
 
-/* orph_1d0038 @ 0x1d0038 (4 bytes) */
-int orph_1d0038()
+/* HwLimits__vslot14 @ 0x1d0038 (4 bytes) */
+int HwLimits__vslot14()
 {
   return;
 }
 
-/* orph_1d003c @ 0x1d003c (4 bytes) */
-int orph_1d003c()
+/* HwLimits__vslot15 @ 0x1d003c (4 bytes) */
+int HwLimits__vslot15()
 {
   return;
 }
 
-/* orph_1d0040 @ 0x1d0040 (8 bytes) */
-int orph_1d0040(param_1, param_2, param_3)
+/* HwLimits__vslot18 @ 0x1d0040 (8 bytes) */
+int HwLimits__vslot18(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;

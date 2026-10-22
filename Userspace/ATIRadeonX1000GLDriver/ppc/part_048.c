@@ -1458,11 +1458,11 @@ int FUN_0017dbdc(ctx, param_2)
   }
   iVar2 = FUN_00176574(uVar6);
   if (iVar2 == 0) {
-    loopIndex = FUN_00113174(uVar6,*(undefined4 *)(ctx + 0x238));
+    loopIndex = OpcodeTraits__flagBit7(uVar6,*(undefined4 *)(ctx + 0x238));
     if ((loopIndex == 0) ||
-       (loopIndex = FUN_001131c0(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+       (loopIndex = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                              *(undefined4 *)(ctx + 0x238)), loopIndex == 0)) {
-      loopIndex = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+      loopIndex = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238));
       if (loopIndex == 0) {
         iVar2 = 0;
@@ -2834,9 +2834,9 @@ LAB_0017fe28:
   loopIndex2 = *(int *)(ctx + 0xb0);
   loopIndex = *(int *)(ctx + 0x238);
 LAB_0017fe34:
-  loopIndex = FUN_00113090(*(undefined4 *)(*(int *)(loopIndex2 + 0x88) + 8),loopIndex);
+  loopIndex = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(loopIndex2 + 0x88) + 8),loopIndex);
   if ((loopIndex == 0) &&
-     (loopIndex = FUN_001131c0(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+     (loopIndex = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238)), loopIndex == 0)) {
     loopIndex = 0;
     do {
@@ -3134,7 +3134,7 @@ LAB_001804a4:
           local_58 = *(int *)(iVar6 + 0x10);
           iVar6 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),loopIndex);
           local_54[0] = *(int *)(iVar6 + 0x10);
-          iVar6 = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+          iVar6 = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                                *(undefined4 *)(ctx + 0x238));
           if (iVar6 == 0) {
             FUN_000f3340(local_44,local_54[0],*(undefined4 *)(iVar4 + 0x228));
@@ -3192,7 +3192,7 @@ LAB_00180784:
         }
         else {
           local_58 = *(int *)(PTR_DAT_001e8b8c + iVar6 * 4);
-          iVar6 = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+          iVar6 = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                                *(undefined4 *)(ctx + 0x238));
           if (iVar6 == 0) {
             FUN_000f3340(&local_48,local_58,*(undefined4 *)(iVar4 + 0x228));
@@ -3609,9 +3609,9 @@ code_r0x001812b0:
     if (loopRemaining == 0) {
       loopIndex = FUN_00176574(uVar22);
       if (loopIndex == 0) {
-        loopIndex = FUN_00113174(uVar22,*(undefined4 *)(ctx + 0x238));
+        loopIndex = OpcodeTraits__flagBit7(uVar22,*(undefined4 *)(ctx + 0x238));
         if (loopIndex == 0) {
-          loopIndex = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+          loopIndex = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                                 *(undefined4 *)(ctx + 0x238));
           if (loopIndex == 0) {
             FUN_001770e4(&local_50,ctx,loopIndex2);
@@ -4274,7 +4274,7 @@ int FUN_00181f00(compiler, param_2, inst)
       local_5c = 0;
     }
   }
-  FUN_001940a8(auStack_88);
+  DListNode__init(auStack_88);
   iVar3 = vectorAlloc[2];
   uVar22 = iVar3 - 1;
   uVar2 = uVar22;
@@ -5609,7 +5609,7 @@ int pass_minreg_order(scheduler, program)
     }
     block = nextBlock;
   }
-  return FUN_000ed7e4(program,(int)"minreg_order");
+  return Program__beginPass(program,(int)"minreg_order");
 }
 
 /* FUN_00184bcc @ 0x184bcc (36 bytes) */
@@ -6369,7 +6369,7 @@ LAB_0018601c:
                 *(int *)(loopIndex2 + 0x10) = iVar6;
               }
             }
-            loopIndex2 = FUN_001131c0(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_6 + 8));
+            loopIndex2 = OpcodeTraits__flagBit8(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_6 + 8));
             if (loopIndex2 != 0) {
               loopIndex2 = IRInst__hasSingleUse(operandVReg,param_6);
               if (loopIndex2 == 0) {

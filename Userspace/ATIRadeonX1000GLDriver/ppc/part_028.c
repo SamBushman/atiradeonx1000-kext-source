@@ -149,33 +149,33 @@ int FUN_00105930(inst, param_2)
   return;
 }
 
-/* IRStartCallRoutine__vslot4 @ 0x105a44 (224 bytes) */
-int IRStartCallRoutine__vslot4(param_1, param_2)
-  int *param_1;
-  int param_2;
+/* IRInst__removeFromList @ 0x105a44 (224 bytes) */
+int IRInst__removeFromList(this, compiler)
+  int *this;
+  int compiler;
 {
   uint uVar1;
   int iVar2;
   int iVar3;
   
-  iVar2 = (**(code **)(*param_1 + 0x34))(param_1,param_2);
+  iVar2 = (**(code **)(*this + 0x34))(this,compiler);
   if (iVar2 == 0) {
-    (**(code **)(*param_1 + 0x38))(param_1);
+    (**(code **)(*this + 0x38))(this);
   }
-  ((int (*)())FUN_00105930)(param_1,*(undefined4 *)(param_2 + 0x6c4));
-  iVar3 = param_1[1];
-  iVar2 = (**(code **)(*param_1 + 0x40))(param_1);
+  ((int (*)())FUN_00105930)(this,*(undefined4 *)(compiler + 0x6c4));
+  iVar3 = this[1];
+  iVar2 = (**(code **)(*this + 0x40))(this);
   if ((iVar2 != 0) &&
-     (iVar2 = *(int *)(*(int *)(param_2 + 0x6c4) + 0x3a0), param_1 == *(int **)(iVar2 + 300))) {
+     (iVar2 = *(int *)(*(int *)(compiler + 0x6c4) + 0x3a0), this == *(int **)(iVar2 + 300))) {
     *(int *)(iVar2 + 300) = iVar3;
   }
-  uVar1 = param_1[5];
+  uVar1 = this[5];
   if ((((uVar1 & 4) == 0) && (iVar3 != 0)) && ((*(uint *)(iVar3 + 0x14) & 4) != 0)) {
     *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
-    uVar1 = param_1[5];
+    uVar1 = this[5];
   }
-  param_1[5] = uVar1 & 0xfffffffe;
-  return DList__unlink(param_1);
+  this[5] = uVar1 & 0xfffffffe;
+  return DList__unlink(this);
 }
 
 /* FUN_00105b24 @ 0x105b24 (88 bytes) */
@@ -191,34 +191,34 @@ int FUN_00105b24(param_1, param_2)
   return;
 }
 
-/* IRStartCallRoutine__vslot3 @ 0x105b7c (224 bytes) */
-int IRStartCallRoutine__vslot3(param_1, param_2, param_3)
-  int *param_1;
+/* IRInst__removeFromListEx @ 0x105b7c (224 bytes) */
+int IRInst__removeFromListEx(this, param_2, compiler)
+  int *this;
   undefined4 param_2;
-  int param_3;
+  int compiler;
 {
   uint uVar1;
   int iVar2;
   int iVar3;
   
-  iVar2 = (**(code **)(*param_1 + 0x34))(param_1,param_2,param_3);
+  iVar2 = (**(code **)(*this + 0x34))(this,param_2,compiler);
   if (iVar2 == 0) {
-    (**(code **)(*param_1 + 0x38))(param_1);
+    (**(code **)(*this + 0x38))(this);
   }
-  ((int (*)())FUN_00105b24)(param_1,*(undefined4 *)(param_3 + 0x6c4));
-  iVar3 = param_1[1];
-  iVar2 = (**(code **)(*param_1 + 0x40))(param_1);
+  ((int (*)())FUN_00105b24)(this,*(undefined4 *)(compiler + 0x6c4));
+  iVar3 = this[1];
+  iVar2 = (**(code **)(*this + 0x40))(this);
   if ((iVar2 != 0) &&
-     (iVar2 = *(int *)(*(int *)(param_3 + 0x6c4) + 0x3a0), param_1 == *(int **)(iVar2 + 300))) {
+     (iVar2 = *(int *)(*(int *)(compiler + 0x6c4) + 0x3a0), this == *(int **)(iVar2 + 300))) {
     *(int *)(iVar2 + 300) = iVar3;
   }
-  uVar1 = param_1[5];
+  uVar1 = this[5];
   if ((((uVar1 & 4) == 0) && (iVar3 != 0)) && ((*(uint *)(iVar3 + 0x14) & 4) != 0)) {
     *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
-    uVar1 = param_1[5];
+    uVar1 = this[5];
   }
-  param_1[5] = uVar1 & 0xfffffffe;
-  return DList__unlink(param_1);
+  this[5] = uVar1 & 0xfffffffe;
+  return DList__unlink(this);
 }
 
 /* FUN_00105c5c @ 0x105c5c (168 bytes) */
@@ -570,10 +570,10 @@ int FUN_001062c0(param_1, param_2, param_3, compiler)
   return;
 }
 
-/* IRStartCallRoutine__vslot2 @ 0x10647c (620 bytes) */
-int IRStartCallRoutine__vslot2(inst, param_2)
+/* IRInst__validate @ 0x10647c (620 bytes) */
+int IRInst__validate(inst, compiler)
   int *inst;
-  int param_2;
+  int compiler;
 {
   int loopIndex;
   bool bVar1;
@@ -596,7 +596,7 @@ int IRStartCallRoutine__vslot2(inst, param_2)
       loopIndex = loopIndex + 1;
     } while (loopIndex < inst[0x20]);
   }
-  iVar5 = *(int *)(param_2 + 0x6c4);
+  iVar5 = *(int *)(compiler + 0x6c4);
   if (((*(uint *)(iVar5 + 0x30) & 8) == 0) && (*(int *)(inst[0x22] + 8) != 0x8e)) {
     iVar3 = IRInst__getOperandRecord(inst,0);
     iVar5 = 0;
@@ -619,7 +619,7 @@ int IRStartCallRoutine__vslot2(inst, param_2)
       iVar5 = iVar5 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
-    iVar5 = *(int *)(param_2 + 0x6c4);
+    iVar5 = *(int *)(compiler + 0x6c4);
     if (((*(uint *)(iVar5 + 0x30) & 0x20000) != 0) && (iVar3 = 1, 0 < inst[0x21])) {
       do {
         iVar5 = IRInst__getOperandRecord(inst,iVar3);
@@ -642,23 +642,23 @@ int IRStartCallRoutine__vslot2(inst, param_2)
         iVar3 = iVar3 + 1;
       } while (iVar3 <= inst[0x21]);
 LAB_0010663c:
-      iVar5 = *(int *)(param_2 + 0x6c4);
+      iVar5 = *(int *)(compiler + 0x6c4);
     }
   }
   if ((*(uint *)(iVar5 + 0x30) & 0x800) == 0) {
     (**(code **)(*inst + 0x68))(inst);
   }
-  if (((inst[5] & 0x200U) != 0) && ((*(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) & 8) != 0)) {
+  if (((inst[5] & 0x200U) != 0) && ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 8) != 0)) {
     IRInst__getOperandSource(inst,inst[0x21]);
   }
   (**(code **)(*inst + 100))(inst);
   return 1;
 }
 
-/* IRProjection__vslot2 @ 0x1066e8 (84 bytes) */
-int IRProjection__vslot2(inst, param_2)
+/* IRProjection__validate @ 0x1066e8 (84 bytes) */
+int IRProjection__validate(inst, compiler)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 compiler;
 {
   int iVar1;
   
@@ -667,22 +667,22 @@ int IRProjection__vslot2(inst, param_2)
     iVar1 = IRInst__getOperandRecord(inst,1);
     FUN_000f2c5c(*(undefined4 *)(iVar1 + 0x10));
   }
-  return ((int (*)())IRStartCallRoutine__vslot2)(inst,param_2);
+  return ((int (*)())IRInst__validate)(inst,compiler);
 }
 
-/* IRPresub2__vslot2 @ 0x10673c (68 bytes) */
-int IRPresub2__vslot2(param_1, param_2)
-  int *param_1;
-  undefined4 param_2;
+/* IRPresub2__validate @ 0x10673c (68 bytes) */
+int IRPresub2__validate(this, compiler)
+  int *this;
+  undefined4 compiler;
 {
-  (**(code **)(*param_1 + 0x14))(param_1,param_2);
-  return ((int (*)())IRStartCallRoutine__vslot2)(param_1,param_2);
+  (**(code **)(*this + 0x14))(this,compiler);
+  return ((int (*)())IRInst__validate)(this,compiler);
 }
 
-/* IRPhiNode__vslot2 @ 0x106780 (128 bytes) */
-int IRPhiNode__vslot2(inst, param_2)
+/* IRPhiNode__validate @ 0x106780 (128 bytes) */
+int IRPhiNode__validate(inst, compiler)
   int inst;
-  undefined4 param_2;
+  undefined4 compiler;
 {
   int loopIndex;
   int iVar1;
@@ -704,7 +704,7 @@ int IRPhiNode__vslot2(inst, param_2)
       iVar2 = iVar2 + 1;
     } while (iVar2 <= iVar1);
   }
-  return ((int (*)())IRStartCallRoutine__vslot2)(inst,param_2);
+  return ((int (*)())IRInst__validate)(inst,compiler);
 }
 
 /* IRInst__setExtraOperandSource @ 0x106804 (484 bytes) */
@@ -789,8 +789,8 @@ LAB_00106908:
   return;
 }
 
-/* FUN_001069e8 @ 0x1069e8 (352 bytes) */
-int FUN_001069e8(inst, param_2, param_3)
+/* IRInst__vslot37 @ 0x1069e8 (352 bytes) */
+int IRInst__vslot37(inst, param_2, param_3)
   int inst;
   undefined4 param_2;
   int param_3;
@@ -870,10 +870,10 @@ int FUN_00106b48(inst, param_2, param_3, param_4)
   return;
 }
 
-/* IRMix__vslot2 @ 0x106ba0 (276 bytes) */
-int IRMix__vslot2(inst, param_2, param_3, param_4, param_5, param_6, param_7)
+/* IRMix__validate @ 0x106ba0 (276 bytes) */
+int IRMix__validate(inst, compiler, param_3, param_4, param_5, param_6, param_7)
   int *inst;
-  int param_2;
+  int compiler;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -901,11 +901,11 @@ int IRMix__vslot2(inst, param_2, param_3, param_4, param_5, param_6, param_7)
       loopIndex = 1;
       do {
         IRInst__getOperandRecord(inst,loopIndex);
-        if ((*(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) & 8) != 0) {
+        if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 8) != 0) {
           if (loopIndex != 1) {
             operandVReg = IRInst__getOperandSource(inst,loopIndex);
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
-            FUN_0010453c(operandVReg,param_2,*(undefined4 *)(operandRecord + 0x10),param_4,param_5,param_6,param_7
+            FUN_0010453c(operandVReg,compiler,*(undefined4 *)(operandRecord + 0x10),param_4,param_5,param_6,param_7
                         );
           }
           a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
@@ -918,16 +918,16 @@ int IRMix__vslot2(inst, param_2, param_3, param_4, param_5, param_6, param_7)
     iVar2 = iVar2 + 1;
   } while (bVar1);
   (**(code **)(*inst + 0x14))(inst);
-  return ((int (*)())IRStartCallRoutine__vslot2)(inst,param_2);
+  return ((int (*)())IRInst__validate)(inst,compiler);
 }
 
-/* IRPresub1__vslot2 @ 0x106cb4 (68 bytes) */
-int IRPresub1__vslot2(param_1, param_2)
-  int *param_1;
-  undefined4 param_2;
+/* IRPresub1__validate @ 0x106cb4 (68 bytes) */
+int IRPresub1__validate(this, compiler)
+  int *this;
+  undefined4 compiler;
 {
-  (**(code **)(*param_1 + 0x14))(param_1,param_2);
-  return ((int (*)())IRStartCallRoutine__vslot2)(param_1,param_2);
+  (**(code **)(*this + 0x14))(this,compiler);
+  return ((int (*)())IRInst__validate)(this,compiler);
 }
 
 /* FUN_00106cf8 @ 0x106cf8 (772 bytes) */
@@ -1222,9 +1222,9 @@ int IRVertexFetch__ctor_107420(this, param_2, compiler)
   return;
 }
 
-/* FUN_00107464 @ 0x107464 (68 bytes) */
-int FUN_00107464(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot75 @ 0x107464 (68 bytes) */
+int IRLoadConst__vslot75(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -1233,7 +1233,7 @@ int FUN_00107464(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())IRVertexFetch__ctor_107420)(allocation + 1,param_1,compiler);
+  ((int (*)())IRVertexFetch__ctor_107420)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -1359,9 +1359,9 @@ int FUN_0010776c(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_001077e8 @ 0x1077e8 (68 bytes) */
-int FUN_001077e8(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot59 @ 0x1077e8 (68 bytes) */
+int IRLoadConst__vslot59(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -1370,7 +1370,7 @@ int FUN_001077e8(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_0010764c)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_0010764c)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -1389,9 +1389,9 @@ int FUN_00107864(param_1, param_2, compiler)
   return;
 }
 
-/* FUN_001078b0 @ 0x1078b0 (68 bytes) */
-int FUN_001078b0(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot71 @ 0x1078b0 (68 bytes) */
+int IRLoadConst__vslot71(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -1400,7 +1400,7 @@ int FUN_001078b0(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00107864)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00107864)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -1486,9 +1486,9 @@ int FUN_00107a74(this, param_2, compiler)
   return;
 }
 
-/* FUN_00107ad0 @ 0x107ad0 (68 bytes) */
-int FUN_00107ad0(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot41 @ 0x107ad0 (68 bytes) */
+int IRLoadConst__vslot41(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -1497,7 +1497,7 @@ int FUN_00107ad0(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00107a74)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00107a74)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -1550,9 +1550,9 @@ int FUN_00107bf4(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_00107c70 @ 0x107c70 (68 bytes) */
-int FUN_00107c70(param_1, compiler)
-  undefined4 param_1;
+/* IRLoadConst__vslot51 @ 0x107c70 (68 bytes) */
+int IRLoadConst__vslot51(this, compiler)
+  undefined4 this;
   int compiler;
 {
   undefined4 *allocation;
@@ -1561,7 +1561,7 @@ int FUN_00107c70(param_1, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00107ba8)(allocation + 1,param_1,compiler);
+  ((int (*)())FUN_00107ba8)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -1627,34 +1627,34 @@ int FUN_00107da8(param_1, param_2, param_3)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00105a44");
-asm(".set FUN_00105a44, _IRStartCallRoutine__vslot4");
+asm(".set FUN_00105a44, _IRInst__removeFromList");
 asm(".globl FUN_00105b7c");
-asm(".set FUN_00105b7c, _IRStartCallRoutine__vslot3");
+asm(".set FUN_00105b7c, _IRInst__removeFromListEx");
 asm(".globl FUN_00105e9c");
 asm(".set FUN_00105e9c, _FUN_00105e9c");
 asm(".globl FUN_0010647c");
-asm(".set FUN_0010647c, _IRStartCallRoutine__vslot2");
+asm(".set FUN_0010647c, _IRInst__validate");
 asm(".globl FUN_001066e8");
-asm(".set FUN_001066e8, _IRProjection__vslot2");
+asm(".set FUN_001066e8, _IRProjection__validate");
 asm(".globl FUN_0010673c");
-asm(".set FUN_0010673c, _IRPresub2__vslot2");
+asm(".set FUN_0010673c, _IRPresub2__validate");
 asm(".globl FUN_00106780");
-asm(".set FUN_00106780, _IRPhiNode__vslot2");
+asm(".set FUN_00106780, _IRPhiNode__validate");
 asm(".globl FUN_001069e8");
-asm(".set FUN_001069e8, _FUN_001069e8");
+asm(".set FUN_001069e8, _IRInst__vslot37");
 asm(".globl FUN_00106ba0");
-asm(".set FUN_00106ba0, _IRMix__vslot2");
+asm(".set FUN_00106ba0, _IRMix__validate");
 asm(".globl FUN_00106cb4");
-asm(".set FUN_00106cb4, _IRPresub1__vslot2");
+asm(".set FUN_00106cb4, _IRPresub1__validate");
 asm(".globl FUN_00107464");
-asm(".set FUN_00107464, _FUN_00107464");
+asm(".set FUN_00107464, _IRLoadConst__vslot75");
 asm(".globl FUN_0010776c");
 asm(".set FUN_0010776c, _FUN_0010776c");
 asm(".globl FUN_001077e8");
-asm(".set FUN_001077e8, _FUN_001077e8");
+asm(".set FUN_001077e8, _IRLoadConst__vslot59");
 asm(".globl FUN_001078b0");
-asm(".set FUN_001078b0, _FUN_001078b0");
+asm(".set FUN_001078b0, _IRLoadConst__vslot71");
 asm(".globl FUN_00107ad0");
-asm(".set FUN_00107ad0, _FUN_00107ad0");
+asm(".set FUN_00107ad0, _IRLoadConst__vslot41");
 asm(".globl FUN_00107c70");
-asm(".set FUN_00107c70, _FUN_00107c70");
+asm(".set FUN_00107c70, _IRLoadConst__vslot51");

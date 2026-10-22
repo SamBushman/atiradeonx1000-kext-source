@@ -70,65 +70,65 @@ int HwLimits__deleting_dtor(this)
   return operator_delete(this);
 }
 
-/* FUN_001d0000 @ 0x1d0000 (32 bytes) */
-int FUN_001d0000(param_1)
-  undefined4 *param_1;
+/* HwLimits__vslot7 @ 0x1d0000 (32 bytes) */
+int HwLimits__vslot7(this)
+  undefined4 *this;
 {
-  *param_1 = DAT_001afa04;
+  *this = DAT_001afa04;
   return;
 }
 
-/* FUN_001d0070 @ 0x1d0070 (32 bytes) */
-int FUN_001d0070(param_1)
-  undefined4 *param_1;
+/* HwLimits__vslot40 @ 0x1d0070 (32 bytes) */
+int HwLimits__vslot40(this)
+  undefined4 *this;
 {
-  *param_1 = DAT_001afa08;
+  *this = DAT_001afa08;
   return;
 }
 
-/* FUN_001d014c @ 0x1d014c (32 bytes) */
-int FUN_001d014c(param_1)
-  undefined4 *param_1;
+/* HwLimits__vslot70 @ 0x1d014c (32 bytes) */
+int HwLimits__vslot70(this)
+  undefined4 *this;
 {
-  *param_1 = DAT_001afa04;
+  *this = DAT_001afa04;
   return;
 }
 
 /* HwChip__dtor @ 0x1d01b0 (36 bytes) */
-int HwChip__dtor(param_1)
-  undefined4 *param_1;
+int HwChip__dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8c88 + 8;
+  *this = PTR_DAT_001e8c88 + 8;
   return;
 }
 
 /* HwChip__deleting_dtor @ 0x1d01d4 (36 bytes) */
-int HwChip__deleting_dtor(param_1)
-  undefined4 *param_1;
+int HwChip__deleting_dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8c88 + 8;
-  return operator_delete(param_1);
+  *this = PTR_DAT_001e8c88 + 8;
+  return operator_delete(this);
 }
 
 /* OpcodeInfo__dtor @ 0x1d0208 (36 bytes) */
-int OpcodeInfo__dtor(param_1)
-  undefined4 *param_1;
+int OpcodeInfo__dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8f28 + 8;
+  *this = PTR_DAT_001e8f28 + 8;
   return;
 }
 
 /* OpcodeInfo__deleting_dtor @ 0x1d022c (36 bytes) */
-int OpcodeInfo__deleting_dtor(param_1)
-  undefined4 *param_1;
+int OpcodeInfo__deleting_dtor(this)
+  undefined4 *this;
 {
-  *param_1 = PTR_DAT_001e8f28 + 8;
-  return operator_delete(param_1);
+  *this = PTR_DAT_001e8f28 + 8;
+  return operator_delete(this);
 }
 
-/* FUN_001d0278 @ 0x1d0278 (288 bytes) */
-int FUN_001d0278(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* IrAddFloat__vslot5 @ 0x1d0278 (288 bytes) */
+int IrAddFloat__vslot5(this, param_2, param_3, param_4)
+  undefined4 this;
   int param_2;
   int *param_3;
   int param_4;
@@ -173,328 +173,328 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
   return uVar6;
 }
 
-/* FUN_001d05b0 @ 0x1d05b0 (144 bytes) */
-int FUN_001d05b0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrCos__fold @ 0x1d05b0 (144 bytes) */
+int IrCos__fold(this, result, operands, param_4)
+  undefined4 this;
+  float *result;
+  int operands;
   int param_4;
 {
   double dVar1;
   
-  if (*(int *)(param_3 + 4) == 0) {
-    *param_2 = 1.0;
+  if (*(int *)(operands + 4) == 0) {
+    *result = 1.0;
   }
-  else if (*(float *)(param_3 + 4) == FLOAT_001aa0e8) {
-    *param_2 = 0.0;
+  else if (*(float *)(operands + 4) == FLOAT_001aa0e8) {
+    *result = 0.0;
   }
   else {
-    dVar1 = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(param_3 + 4)));
-    *param_2 = (float)dVar1;
+    dVar1 = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(operands + 4)));
+    *result = (float)dVar1;
   }
   return 1;
 }
 
-/* FUN_001d0640 @ 0x1d0640 (172 bytes) */
-int FUN_001d0640(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrLogInternal__fold @ 0x1d0640 (172 bytes) */
+int IrLogInternal__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   double dVar1;
   double dVar2;
   
-  if (*(float *)(param_3 + 4) == FLOAT_001aa0e8) {
-    *param_2 = 0.0;
+  if (*(float *)(operands + 4) == FLOAT_001aa0e8) {
+    *result = 0.0;
   }
-  if (*(int *)(param_3 + 4) != 0) {
-    dVar1 = (double)*(float *)(param_3 + 4);
+  if (*(int *)(operands + 4) != 0) {
+    dVar1 = (double)*(float *)(operands + 4);
     if (dVar1 < (double)FLOAT_001aa0d4) {
       dVar1 = -dVar1;
     }
     dVar1 = (double)_logf(dVar1);
     dVar2 = (double)_log(DOUBLE_001aa2a0);
-    *param_2 = (float)(dVar1 * (double)(float)(DOUBLE_001aa200 / dVar2));
+    *result = (float)(dVar1 * (double)(float)(DOUBLE_001aa200 / dVar2));
   }
   return 1;
 }
 
-/* FUN_001d06ec @ 0x1d06ec (112 bytes) */
-int FUN_001d06ec(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrRecipSqrtInternal__fold @ 0x1d06ec (112 bytes) */
+int IrRecipSqrtInternal__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   float fVar1;
   double dVar2;
   
   fVar1 = FLOAT_001aa0e8;
-  if (*(float *)(param_3 + 4) != FLOAT_001aa0e8) {
-    if (*(float *)(param_3 + 4) <= FLOAT_001aa0d4) {
+  if (*(float *)(operands + 4) != FLOAT_001aa0e8) {
+    if (*(float *)(operands + 4) <= FLOAT_001aa0d4) {
       return 1;
     }
-    dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));
+    dVar2 = (double)_sqrt((double)*(float *)(operands + 4));
     fVar1 = (float)(DOUBLE_001aa200 / dVar2);
   }
-  *param_2 = fVar1;
+  *result = fVar1;
   return 1;
 }
 
-/* FUN_001d075c @ 0x1d075c (56 bytes) */
-int FUN_001d075c(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrRecipInternal__fold @ 0x1d075c (56 bytes) */
+int IrRecipInternal__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
-  if (*(int *)(param_3 + 4) != 0) {
-    *param_2 = FLOAT_001aa0e8 / *(float *)(param_3 + 4);
+  if (*(int *)(operands + 4) != 0) {
+    *result = FLOAT_001aa0e8 / *(float *)(operands + 4);
   }
   return 1;
 }
 
-/* FUN_001d0794 @ 0x1d0794 (140 bytes) */
-int FUN_001d0794(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrSin__fold @ 0x1d0794 (140 bytes) */
+int IrSin__fold(this, result, operands, param_4)
+  undefined4 this;
+  float *result;
+  int operands;
   int param_4;
 {
   double dVar1;
   
-  if (*(int *)(param_3 + 4) == 0) {
-    *param_2 = 0.0;
+  if (*(int *)(operands + 4) == 0) {
+    *result = 0.0;
   }
-  else if (*(float *)(param_3 + 4) == FLOAT_001aa0e8) {
-    *param_2 = FLOAT_001aa0e8;
+  else if (*(float *)(operands + 4) == FLOAT_001aa0e8) {
+    *result = FLOAT_001aa0e8;
   }
   else {
-    dVar1 = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(param_3 + 4)));
-    *param_2 = (float)dVar1;
+    dVar1 = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(operands + 4)));
+    *result = (float)dVar1;
   }
   return 1;
 }
 
-/* FUN_001d0820 @ 0x1d0820 (100 bytes) */
-int FUN_001d0820(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrSqrt__fold @ 0x1d0820 (100 bytes) */
+int IrSqrt__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   float fVar1;
   double dVar2;
   
-  fVar1 = *(float *)(param_3 + 4);
-  if ((fVar1 != FLOAT_001aa0e8) && (*(int *)(param_3 + 4) != 0)) {
-    if (*(int *)(param_3 + 4) < 1) {
+  fVar1 = *(float *)(operands + 4);
+  if ((fVar1 != FLOAT_001aa0e8) && (*(int *)(operands + 4) != 0)) {
+    if (*(int *)(operands + 4) < 1) {
       return 1;
     }
-    dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));
+    dVar2 = (double)_sqrt((double)*(float *)(operands + 4));
     fVar1 = (float)dVar2;
   }
-  *param_2 = fVar1;
+  *result = fVar1;
   return 1;
 }
 
-/* FUN_001d0884 @ 0x1d0884 (100 bytes) */
-int FUN_001d0884(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrExp__fold @ 0x1d0884 (100 bytes) */
+int IrExp__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   double dVar1;
   
-  if (*(int *)(param_3 + 4) == 0) {
-    *param_2 = 1.0;
+  if (*(int *)(operands + 4) == 0) {
+    *result = 1.0;
   }
   else {
-    dVar1 = (double)_pow(DOUBLE_001aa2a0,(double)*(float *)(param_3 + 4));
-    *param_2 = (float)dVar1;
+    dVar1 = (double)_pow(DOUBLE_001aa2a0,(double)*(float *)(operands + 4));
+    *result = (float)dVar1;
   }
   return 1;
 }
 
-/* FUN_001d08e8 @ 0x1d08e8 (68 bytes) */
-int FUN_001d08e8(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrInt2F__fold @ 0x1d08e8 (68 bytes) */
+int IrInt2F__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
-  *param_2 = (float)((double)CONCAT44(0x43300000,*(uint *)(param_3 + 4) ^ 0x80000000) -
+  *result = (float)((double)CONCAT44(0x43300000,*(uint *)(operands + 4) ^ 0x80000000) -
                     DOUBLE_001aa1e0);
   return 1;
 }
 
-/* FUN_001d092c @ 0x1d092c (64 bytes) */
-int FUN_001d092c(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrUInt2F__fold @ 0x1d092c (64 bytes) */
+int IrUInt2F__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
-  *param_2 = (float)((double)CONCAT44(0x43300000,*(undefined4 *)(param_3 + 4)) - DOUBLE_001aa250);
+  *result = (float)((double)CONCAT44(0x43300000,*(undefined4 *)(operands + 4)) - DOUBLE_001aa250);
   return 1;
 }
 
-/* FUN_001d09b4 @ 0x1d09b4 (72 bytes) */
-int FUN_001d09b4(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
-{
-  double dVar1;
-  
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*(float *)(param_3 + 4),(double)*(float *)(param_3 + 8));
-  *param_2 = (float)(dVar1 + (double)*(float *)(param_3 + 0xc));
-  return 1;
-}
-
-/* FUN_001d09fc @ 0x1d09fc (60 bytes) */
-int FUN_001d09fc(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrMulAddFloat__fold @ 0x1d09b4 (72 bytes) */
+int IrMulAddFloat__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   double dVar1;
   
-  dVar1 = (double)_floor((double)*(float *)(param_3 + 4));
-  *param_2 = (float)dVar1;
+  dVar1 = (double)((double (*)())FUN_00113554)((double)*(float *)(operands + 4),(double)*(float *)(operands + 8));
+  *result = (float)(dVar1 + (double)*(float *)(operands + 0xc));
   return 1;
 }
 
-/* FUN_001d0a38 @ 0x1d0a38 (76 bytes) */
-int FUN_001d0a38(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrFloorFloat__fold @ 0x1d09fc (60 bytes) */
+int IrFloorFloat__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
+{
+  double dVar1;
+  
+  dVar1 = (double)_floor((double)*(float *)(operands + 4));
+  *result = (float)dVar1;
+  return 1;
+}
+
+/* IrFractFloat__fold @ 0x1d0a38 (76 bytes) */
+int IrFractFloat__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   float fVar1;
   double dVar2;
   
-  fVar1 = *(float *)(param_3 + 4);
+  fVar1 = *(float *)(operands + 4);
   dVar2 = (double)_floor((double)fVar1);
-  *param_2 = (float)((double)fVar1 - dVar2);
+  *result = (float)((double)fVar1 - dVar2);
   return 1;
 }
 
-/* FUN_001d0a84 @ 0x1d0a84 (108 bytes) */
-int FUN_001d0a84(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+/* IrDot3__foldVector @ 0x1d0a84 (108 bytes) */
+int IrDot3__foldVector(this, result, srcA, srcB)
+  undefined4 this;
+  float *result;
+  float *srcA;
+  float *srcB;
 {
   double dVar1;
   double dVar2;
   double dVar3;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*param_3,(double)*param_4);
-  dVar2 = (double)((double (*)())FUN_00113554)((double)param_3[1],(double)param_4[1]);
-  dVar3 = (double)((double (*)())FUN_00113554)((double)param_3[2],(double)param_4[2]);
-  *param_2 = (float)((double)(float)(dVar1 + dVar2) + dVar3);
+  dVar1 = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
+  dVar2 = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  dVar3 = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
+  *result = (float)((double)(float)(dVar1 + dVar2) + dVar3);
   return;
 }
 
-/* FUN_001d0af0 @ 0x1d0af0 (124 bytes) */
-int FUN_001d0af0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+/* IrDot4__foldVector @ 0x1d0af0 (124 bytes) */
+int IrDot4__foldVector(this, result, srcA, srcB)
+  undefined4 this;
+  float *result;
+  float *srcA;
+  float *srcB;
 {
   double dVar1;
   double dVar2;
   double dVar3;
   double dVar4;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*param_3,(double)*param_4);
-  dVar2 = (double)((double (*)())FUN_00113554)((double)param_3[1],(double)param_4[1]);
-  dVar3 = (double)((double (*)())FUN_00113554)((double)param_3[2],(double)param_4[2]);
-  dVar4 = (double)((double (*)())FUN_00113554)((double)param_3[3],(double)param_4[3]);
-  *param_2 = (float)((double)(float)((double)(float)(dVar1 + dVar2) + dVar3) + dVar4);
+  dVar1 = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
+  dVar2 = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  dVar3 = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
+  dVar4 = (double)((double (*)())FUN_00113554)((double)srcA[3],(double)srcB[3]);
+  *result = (float)((double)(float)((double)(float)(dVar1 + dVar2) + dVar3) + dVar4);
   return;
 }
 
-/* FUN_001d0b94 @ 0x1d0b94 (104 bytes) */
-int FUN_001d0b94(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+/* IrDot2Add__foldVector @ 0x1d0b94 (104 bytes) */
+int IrDot2Add__foldVector(this, result, srcA, srcB, param_5)
+  undefined4 this;
+  float *result;
+  float *srcA;
+  float *srcB;
   int param_5;
 {
   double dVar1;
   double dVar2;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*param_3,(double)*param_4);
-  dVar2 = (double)((double (*)())FUN_00113554)((double)param_3[1],(double)param_4[1]);
-  *param_2 = (float)(dVar1 + dVar2) + *(float *)(param_5 + 8);
+  dVar1 = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
+  dVar2 = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  *result = (float)(dVar1 + dVar2) + *(float *)(param_5 + 8);
   return;
 }
 
-/* FUN_001d0bfc @ 0x1d0bfc (60 bytes) */
-int FUN_001d0bfc(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 *param_2;
-  int param_3;
+/* IrCndEFloat__fold @ 0x1d0bfc (60 bytes) */
+int IrCndEFloat__fold(this, result, operands)
+  undefined4 this;
+  undefined4 *result;
+  int operands;
 {
   undefined4 uVar1;
   
-  if (*(float *)(param_3 + 4) == FLOAT_001aa0d4) {
-    uVar1 = *(undefined4 *)(param_3 + 8);
+  if (*(float *)(operands + 4) == FLOAT_001aa0d4) {
+    uVar1 = *(undefined4 *)(operands + 8);
   }
   else {
-    uVar1 = *(undefined4 *)(param_3 + 0xc);
+    uVar1 = *(undefined4 *)(operands + 0xc);
   }
-  *param_2 = uVar1;
+  *result = uVar1;
   return 1;
 }
 
-/* FUN_001d0c38 @ 0x1d0c38 (64 bytes) */
-int FUN_001d0c38(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 *param_2;
-  int param_3;
+/* IrCndGEFloat__fold @ 0x1d0c38 (64 bytes) */
+int IrCndGEFloat__fold(this, result, operands)
+  undefined4 this;
+  undefined4 *result;
+  int operands;
 {
   undefined4 uVar1;
   
-  if (*(float *)(param_3 + 4) < FLOAT_001aa0d4) {
-    uVar1 = *(undefined4 *)(param_3 + 0xc);
+  if (*(float *)(operands + 4) < FLOAT_001aa0d4) {
+    uVar1 = *(undefined4 *)(operands + 0xc);
   }
   else {
-    uVar1 = *(undefined4 *)(param_3 + 8);
+    uVar1 = *(undefined4 *)(operands + 8);
   }
-  *param_2 = uVar1;
+  *result = uVar1;
   return 1;
 }
 
-/* FUN_001d0c78 @ 0x1d0c78 (60 bytes) */
-int FUN_001d0c78(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 *param_2;
-  int param_3;
+/* IrCndGTFloat__fold @ 0x1d0c78 (60 bytes) */
+int IrCndGTFloat__fold(this, result, operands)
+  undefined4 this;
+  undefined4 *result;
+  int operands;
 {
   undefined4 uVar1;
   
-  if (*(float *)(param_3 + 4) <= FLOAT_001aa0d4) {
-    uVar1 = *(undefined4 *)(param_3 + 0xc);
+  if (*(float *)(operands + 4) <= FLOAT_001aa0d4) {
+    uVar1 = *(undefined4 *)(operands + 0xc);
   }
   else {
-    uVar1 = *(undefined4 *)(param_3 + 8);
+    uVar1 = *(undefined4 *)(operands + 8);
   }
-  *param_2 = uVar1;
+  *result = uVar1;
   return 1;
 }
 
-/* FUN_001d0cd8 @ 0x1d0cd8 (68 bytes) */
-int FUN_001d0cd8(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrSetGTFloat__fold @ 0x1d0cd8 (68 bytes) */
+int IrSetGTFloat__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
   float fVar1;
   float fVar2;
   float fVar3;
   
-  fVar1 = *(float *)(param_3 + 4) - *(float *)(param_3 + 8);
+  fVar1 = *(float *)(operands + 4) - *(float *)(operands + 8);
   fVar3 = FLOAT_001aa0e8;
   if (fVar1 < 0.0) {
     fVar3 = FLOAT_001aa0d4;
@@ -503,13 +503,13 @@ int FUN_001d0cd8(param_1, param_2, param_3)
   if (-fVar1 < 0.0) {
     fVar2 = fVar3;
   }
-  *param_2 = fVar2;
+  *result = fVar2;
   return 1;
 }
 
-/* FUN_001d0e0c @ 0x1d0e0c (212 bytes) */
-int FUN_001d0e0c(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
+/* IrAddInt__vslot5 @ 0x1d0e0c (212 bytes) */
+int IrAddInt__vslot5(this, param_2, param_3, param_4)
+  undefined4 this;
   int param_2;
   int *param_3;
   int param_4;
@@ -548,378 +548,378 @@ int FUN_001d0e0c(param_1, param_2, param_3, param_4)
   return uVar5;
 }
 
-/* FUN_001d0ee0 @ 0x1d0ee0 (72 bytes) */
-int FUN_001d0ee0(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  int param_3;
+/* IrMulFloat__fold @ 0x1d0ee0 (72 bytes) */
+int IrMulFloat__fold(this, result, operands)
+  undefined4 this;
+  float *result;
+  int operands;
 {
-  if ((*(float *)(param_3 + 4) == FLOAT_001aa0d4) || (*(float *)(param_3 + 8) == FLOAT_001aa0d4)) {
-    *param_2 = FLOAT_001aa0d4;
+  if ((*(float *)(operands + 4) == FLOAT_001aa0d4) || (*(float *)(operands + 8) == FLOAT_001aa0d4)) {
+    *result = FLOAT_001aa0d4;
   }
   else {
-    *param_2 = *(float *)(param_3 + 4) * *(float *)(param_3 + 8);
+    *result = *(float *)(operands + 4) * *(float *)(operands + 8);
   }
   return 1;
 }
 
 /* IrRecipSqrtClamp__deleting_dtor @ 0x1d0f28 (68 bytes) */
-int IrRecipSqrtClamp__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrRecipSqrtClamp__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d9c;
-  *param_1 = PTR_DAT_001e8e28 + 8;
+  *this = PTR_DAT_001e8e28 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrRecipSqrtClamp__dtor @ 0x1d0f6c (68 bytes) */
-int IrRecipSqrtClamp__dtor(param_1)
-  undefined4 *param_1;
+int IrRecipSqrtClamp__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d9c;
-  *param_1 = PTR_DAT_001e8e28 + 8;
+  *this = PTR_DAT_001e8e28 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrRecipSqrtFF__deleting_dtor @ 0x1d0fb0 (68 bytes) */
-int IrRecipSqrtFF__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrRecipSqrtFF__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d9c;
-  *param_1 = PTR_DAT_001e904c + 8;
+  *this = PTR_DAT_001e904c + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrRecipSqrtFF__dtor @ 0x1d0ff4 (68 bytes) */
-int IrRecipSqrtFF__dtor(param_1)
-  undefined4 *param_1;
+int IrRecipSqrtFF__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d9c;
-  *param_1 = PTR_DAT_001e904c + 8;
+  *this = PTR_DAT_001e904c + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrRecipSqrtIEEE__deleting_dtor @ 0x1d1038 (68 bytes) */
-int IrRecipSqrtIEEE__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrRecipSqrtIEEE__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d9c;
-  *param_1 = PTR_DAT_001e8f0c + 8;
+  *this = PTR_DAT_001e8f0c + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrRecipSqrtIEEE__dtor @ 0x1d107c (68 bytes) */
-int IrRecipSqrtIEEE__dtor(param_1)
-  undefined4 *param_1;
+int IrRecipSqrtIEEE__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d9c;
-  *param_1 = PTR_DAT_001e8f0c + 8;
+  *this = PTR_DAT_001e8f0c + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrRecipClamp__deleting_dtor @ 0x1d10c0 (68 bytes) */
-int IrRecipClamp__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrRecipClamp__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d88;
-  *param_1 = PTR_DAT_001e8fe4 + 8;
+  *this = PTR_DAT_001e8fe4 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrRecipClamp__dtor @ 0x1d1104 (68 bytes) */
-int IrRecipClamp__dtor(param_1)
-  undefined4 *param_1;
+int IrRecipClamp__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d88;
-  *param_1 = PTR_DAT_001e8fe4 + 8;
+  *this = PTR_DAT_001e8fe4 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrRecipFF__deleting_dtor @ 0x1d1148 (68 bytes) */
-int IrRecipFF__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrRecipFF__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d88;
-  *param_1 = PTR_DAT_001e8f8c + 8;
+  *this = PTR_DAT_001e8f8c + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrRecipFF__dtor @ 0x1d118c (68 bytes) */
-int IrRecipFF__dtor(param_1)
-  undefined4 *param_1;
+int IrRecipFF__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d88;
-  *param_1 = PTR_DAT_001e8f8c + 8;
+  *this = PTR_DAT_001e8f8c + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrRecipIEEE__deleting_dtor @ 0x1d11d0 (68 bytes) */
-int IrRecipIEEE__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrRecipIEEE__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d88;
-  *param_1 = PTR_DAT_001e8fec + 8;
+  *this = PTR_DAT_001e8fec + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrRecipIEEE__dtor @ 0x1d1214 (68 bytes) */
-int IrRecipIEEE__dtor(param_1)
-  undefined4 *param_1;
+int IrRecipIEEE__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8d88;
-  *param_1 = PTR_DAT_001e8fec + 8;
+  *this = PTR_DAT_001e8fec + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrMulFloat__deleting_dtor @ 0x1d1258 (68 bytes) */
-int IrMulFloat__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrMulFloat__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8dd8;
-  *param_1 = PTR_DAT_001e8fb8 + 8;
+  *this = PTR_DAT_001e8fb8 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrMulFloat__dtor @ 0x1d129c (68 bytes) */
-int IrMulFloat__dtor(param_1)
-  undefined4 *param_1;
+int IrMulFloat__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8dd8;
-  *param_1 = PTR_DAT_001e8fb8 + 8;
+  *this = PTR_DAT_001e8fb8 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrMul__deleting_dtor @ 0x1d12e0 (68 bytes) */
-int IrMul__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrMul__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8dd8;
-  *param_1 = PTR_DAT_001e8e90 + 8;
+  *this = PTR_DAT_001e8e90 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
-  return operator_delete(param_1);
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
+  return operator_delete(this);
 }
 
 /* IrMul__dtor @ 0x1d1324 (68 bytes) */
-int IrMul__dtor(param_1)
-  undefined4 *param_1;
+int IrMul__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar1 = PTR_DAT_001e8dd8;
-  *param_1 = PTR_DAT_001e8e90 + 8;
+  *this = PTR_DAT_001e8e90 + 8;
   puVar2 = PTR_DAT_001e8f28;
-  *param_1 = puVar1 + 8;
-  *param_1 = puVar2 + 8;
+  *this = puVar1 + 8;
+  *this = puVar2 + 8;
   return;
 }
 
 /* IrLogClamp__deleting_dtor @ 0x1d1368 (68 bytes) */
-int IrLogClamp__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrLogClamp__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e9038;
-  *param_1 = PTR_DAT_001e8d2c + 8;
+  *this = PTR_DAT_001e8d2c + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
-  return operator_delete(param_1);
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
+  return operator_delete(this);
 }
 
 /* IrLogClamp__dtor @ 0x1d13ac (68 bytes) */
-int IrLogClamp__dtor(param_1)
-  undefined4 *param_1;
+int IrLogClamp__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e9038;
-  *param_1 = PTR_DAT_001e8d2c + 8;
+  *this = PTR_DAT_001e8d2c + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
   return;
 }
 
 /* IrLogIEEE__deleting_dtor @ 0x1d13f0 (68 bytes) */
-int IrLogIEEE__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrLogIEEE__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e9038;
-  *param_1 = PTR_DAT_001e8cd8 + 8;
+  *this = PTR_DAT_001e8cd8 + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
-  return operator_delete(param_1);
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
+  return operator_delete(this);
 }
 
 /* IrLogIEEE__dtor @ 0x1d1434 (68 bytes) */
-int IrLogIEEE__dtor(param_1)
-  undefined4 *param_1;
+int IrLogIEEE__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e9038;
-  *param_1 = PTR_DAT_001e8cd8 + 8;
+  *this = PTR_DAT_001e8cd8 + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
   return;
 }
 
 /* IrDot2Add__deleting_dtor @ 0x1d1478 (68 bytes) */
-int IrDot2Add__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrDot2Add__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e8f94;
-  *param_1 = PTR_DAT_001e9070 + 8;
+  *this = PTR_DAT_001e9070 + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
-  return operator_delete(param_1);
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
+  return operator_delete(this);
 }
 
 /* IrDot2Add__dtor @ 0x1d14bc (68 bytes) */
-int IrDot2Add__dtor(param_1)
-  undefined4 *param_1;
+int IrDot2Add__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e8f94;
-  *param_1 = PTR_DAT_001e9070 + 8;
+  *this = PTR_DAT_001e9070 + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
   return;
 }
 
 /* IrAdd__deleting_dtor @ 0x1d1500 (68 bytes) */
-int IrAdd__deleting_dtor(param_1)
-  undefined4 *param_1;
+int IrAdd__deleting_dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e907c;
-  *param_1 = PTR_DAT_001e8cb8 + 8;
+  *this = PTR_DAT_001e8cb8 + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
-  return operator_delete(param_1);
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
+  return operator_delete(this);
 }
 
 /* IrAdd__dtor @ 0x1d1544 (68 bytes) */
-int IrAdd__dtor(param_1)
-  undefined4 *param_1;
+int IrAdd__dtor(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined *puVar2;
   
   puVar2 = PTR_DAT_001e907c;
-  *param_1 = PTR_DAT_001e8cb8 + 8;
+  *this = PTR_DAT_001e8cb8 + 8;
   puVar1 = PTR_DAT_001e8f28;
-  *param_1 = puVar2 + 8;
-  *param_1 = puVar1 + 8;
+  *this = puVar2 + 8;
+  *this = puVar1 + 8;
   return;
 }
 
@@ -954,11 +954,11 @@ asm(".set FUN_001cffa4, _HwLimits__dtor");
 asm(".globl FUN_001cffc8");
 asm(".set FUN_001cffc8, _HwLimits__deleting_dtor");
 asm(".globl FUN_001d0000");
-asm(".set FUN_001d0000, _FUN_001d0000");
+asm(".set FUN_001d0000, _HwLimits__vslot7");
 asm(".globl FUN_001d0070");
-asm(".set FUN_001d0070, _FUN_001d0070");
+asm(".set FUN_001d0070, _HwLimits__vslot40");
 asm(".globl FUN_001d014c");
-asm(".set FUN_001d014c, _FUN_001d014c");
+asm(".set FUN_001d014c, _HwLimits__vslot70");
 asm(".globl FUN_001d01b0");
 asm(".set FUN_001d01b0, _HwChip__dtor");
 asm(".globl FUN_001d01d4");
@@ -968,49 +968,49 @@ asm(".set FUN_001d0208, _OpcodeInfo__dtor");
 asm(".globl FUN_001d022c");
 asm(".set FUN_001d022c, _OpcodeInfo__deleting_dtor");
 asm(".globl FUN_001d0278");
-asm(".set FUN_001d0278, _FUN_001d0278");
+asm(".set FUN_001d0278, _IrAddFloat__vslot5");
 asm(".globl FUN_001d05b0");
-asm(".set FUN_001d05b0, _FUN_001d05b0");
+asm(".set FUN_001d05b0, _IrCos__fold");
 asm(".globl FUN_001d0640");
-asm(".set FUN_001d0640, _FUN_001d0640");
+asm(".set FUN_001d0640, _IrLogInternal__fold");
 asm(".globl FUN_001d06ec");
-asm(".set FUN_001d06ec, _FUN_001d06ec");
+asm(".set FUN_001d06ec, _IrRecipSqrtInternal__fold");
 asm(".globl FUN_001d075c");
-asm(".set FUN_001d075c, _FUN_001d075c");
+asm(".set FUN_001d075c, _IrRecipInternal__fold");
 asm(".globl FUN_001d0794");
-asm(".set FUN_001d0794, _FUN_001d0794");
+asm(".set FUN_001d0794, _IrSin__fold");
 asm(".globl FUN_001d0820");
-asm(".set FUN_001d0820, _FUN_001d0820");
+asm(".set FUN_001d0820, _IrSqrt__fold");
 asm(".globl FUN_001d0884");
-asm(".set FUN_001d0884, _FUN_001d0884");
+asm(".set FUN_001d0884, _IrExp__fold");
 asm(".globl FUN_001d08e8");
-asm(".set FUN_001d08e8, _FUN_001d08e8");
+asm(".set FUN_001d08e8, _IrInt2F__fold");
 asm(".globl FUN_001d092c");
-asm(".set FUN_001d092c, _FUN_001d092c");
+asm(".set FUN_001d092c, _IrUInt2F__fold");
 asm(".globl FUN_001d09b4");
-asm(".set FUN_001d09b4, _FUN_001d09b4");
+asm(".set FUN_001d09b4, _IrMulAddFloat__fold");
 asm(".globl FUN_001d09fc");
-asm(".set FUN_001d09fc, _FUN_001d09fc");
+asm(".set FUN_001d09fc, _IrFloorFloat__fold");
 asm(".globl FUN_001d0a38");
-asm(".set FUN_001d0a38, _FUN_001d0a38");
+asm(".set FUN_001d0a38, _IrFractFloat__fold");
 asm(".globl FUN_001d0a84");
-asm(".set FUN_001d0a84, _FUN_001d0a84");
+asm(".set FUN_001d0a84, _IrDot3__foldVector");
 asm(".globl FUN_001d0af0");
-asm(".set FUN_001d0af0, _FUN_001d0af0");
+asm(".set FUN_001d0af0, _IrDot4__foldVector");
 asm(".globl FUN_001d0b94");
-asm(".set FUN_001d0b94, _FUN_001d0b94");
+asm(".set FUN_001d0b94, _IrDot2Add__foldVector");
 asm(".globl FUN_001d0bfc");
-asm(".set FUN_001d0bfc, _FUN_001d0bfc");
+asm(".set FUN_001d0bfc, _IrCndEFloat__fold");
 asm(".globl FUN_001d0c38");
-asm(".set FUN_001d0c38, _FUN_001d0c38");
+asm(".set FUN_001d0c38, _IrCndGEFloat__fold");
 asm(".globl FUN_001d0c78");
-asm(".set FUN_001d0c78, _FUN_001d0c78");
+asm(".set FUN_001d0c78, _IrCndGTFloat__fold");
 asm(".globl FUN_001d0cd8");
-asm(".set FUN_001d0cd8, _FUN_001d0cd8");
+asm(".set FUN_001d0cd8, _IrSetGTFloat__fold");
 asm(".globl FUN_001d0e0c");
-asm(".set FUN_001d0e0c, _FUN_001d0e0c");
+asm(".set FUN_001d0e0c, _IrAddInt__vslot5");
 asm(".globl FUN_001d0ee0");
-asm(".set FUN_001d0ee0, _FUN_001d0ee0");
+asm(".set FUN_001d0ee0, _IrMulFloat__fold");
 asm(".globl FUN_001d0f28");
 asm(".set FUN_001d0f28, _IrRecipSqrtClamp__deleting_dtor");
 asm(".globl FUN_001d0f6c");

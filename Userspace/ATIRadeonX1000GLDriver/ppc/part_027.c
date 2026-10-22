@@ -370,12 +370,12 @@ int FUN_00104364(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_0010437c @ 0x10437c (36 bytes) */
-int FUN_0010437c(param_1, param_2)
-  int param_1;
+/* IRInst__vslot28 @ 0x10437c (36 bytes) */
+int IRInst__vslot28(this, param_2)
+  int this;
   int param_2;
 {
-  if (((*(uint *)(param_2 + 0x30) & 0x4000) != 0) && (*(int *)(param_1 + 0x98) == 0x24)) {
+  if (((*(uint *)(param_2 + 0x30) & 0x4000) != 0) && (*(int *)(this + 0x98) == 0x24)) {
     return 1;
   }
   return 0;
@@ -412,7 +412,7 @@ int IRInst__create(opcode, compiler)
   int inst;
   undefined4 opcodeInfo;
   
-  inst = FUN_00113388(opcode,compiler);
+  inst = OpcodeTraits__getInstClass(opcode,compiler);
   inst = (**(code **)(&DAT_001ea4fc + inst * 8))(opcode,compiler);
   opcodeInfo = Opcode__getInfo(opcode);
   *(undefined4 *)(inst + 0x88) = opcodeInfo;
@@ -812,8 +812,8 @@ int FUN_00104b6c(param_1, param_2)
   return 0;
 }
 
-/* FUN_00104bbc @ 0x104bbc (44 bytes) */
-int FUN_00104bbc(param_1)
+/* IROperand__init @ 0x104bbc (44 bytes) */
+int IROperand__init(param_1)
   undefined4 *param_1;
 {
   param_1[3] = 0x46;
@@ -829,7 +829,7 @@ int FUN_00104be8(inst, param_2)
   int inst;
   int param_2;
 {
-  return ((int (*)())FUN_00104bbc)(param_2 * 0x18 + inst + 0x8c);
+  return ((int (*)())IROperand__init)(param_2 * 0x18 + inst + 0x8c);
 }
 
 /* FUN_00104bf8 @ 0x104bf8 (324 bytes) */
@@ -861,7 +861,7 @@ int FUN_00104bf8(inst, compiler)
   do {
     ((int (*)())FUN_00104be8)(inst,loopIndex);
     *(undefined4 *)(iVar8 + 0xb4) = DAT_001af9bc;
-    iVar4 = FUN_0011346c(compiler,inst);
+    iVar4 = OpcodeTraits__instFlagBit2(compiler,inst);
     if (iVar4 != 0) {
       if (loopIndex == 1) {
         puVar5 = &DAT_001af9d0;
@@ -943,34 +943,34 @@ int FUN_00104d68(param_1, param_2)
   return;
 }
 
-/* IRLoadConst__vslot3 @ 0x104e20 (196 bytes) */
-int IRLoadConst__vslot3(param_1, param_2, param_3)
-  int param_1;
+/* IRLoadConst__removeFromListEx @ 0x104e20 (196 bytes) */
+int IRLoadConst__removeFromListEx(this, param_2, compiler)
+  int this;
   undefined4 param_2;
-  int param_3;
+  int compiler;
 {
   int iVar1;
   uint uVar2;
   int iVar3;
   
-  iVar1 = *(int *)(param_1 + 0x98);
+  iVar1 = *(int *)(this + 0x98);
   if (iVar1 == 0xc) {
-    FUN_000f4d80(*(undefined4 *)(*(int *)(param_3 + 0x6c4) + 0x3ac),param_1);
-    iVar1 = *(int *)(param_1 + 0x98);
+    FUN_000f4d80(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),this);
+    iVar1 = *(int *)(this + 0x98);
   }
   if ((iVar1 != 2) && (iVar1 != 0x33)) {
-    iVar3 = *(int *)(param_1 + 4);
-    iVar1 = *(int *)(*(int *)(param_3 + 0x6c4) + 0x3a0);
-    if (param_1 == *(int *)(iVar1 + 300)) {
+    iVar3 = *(int *)(this + 4);
+    iVar1 = *(int *)(*(int *)(compiler + 0x6c4) + 0x3a0);
+    if (this == *(int *)(iVar1 + 300)) {
       *(int *)(iVar1 + 300) = iVar3;
     }
-    uVar2 = *(uint *)(param_1 + 0x14);
+    uVar2 = *(uint *)(this + 0x14);
     if ((((uVar2 & 4) == 0) && (iVar3 != 0)) && ((*(uint *)(iVar3 + 0x14) & 4) != 0)) {
       *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
-      uVar2 = *(uint *)(param_1 + 0x14);
+      uVar2 = *(uint *)(this + 0x14);
     }
-    *(uint *)(param_1 + 0x14) = uVar2 & 0xfffffffe;
-    DList__unlink(param_1);
+    *(uint *)(this + 0x14) = uVar2 & 0xfffffffe;
+    DList__unlink(this);
     return;
   }
   return;
@@ -1316,6 +1316,6 @@ int FUN_001055cc(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0010437c");
-asm(".set FUN_0010437c, _FUN_0010437c");
+asm(".set FUN_0010437c, _IRInst__vslot28");
 asm(".globl FUN_00104e20");
-asm(".set FUN_00104e20, _IRLoadConst__vslot3");
+asm(".set FUN_00104e20, _IRLoadConst__removeFromListEx");

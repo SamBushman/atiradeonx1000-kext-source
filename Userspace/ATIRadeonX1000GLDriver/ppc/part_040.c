@@ -494,9 +494,9 @@ int FUN_0012c0e4(param_1)
   return 1;
 }
 
-/* FUN_0012c134 @ 0x12c134 (424 bytes) */
-int FUN_0012c134(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+/* FudoPs__vslot69 @ 0x12c134 (424 bytes) */
+int FudoPs__vslot69(this, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 this;
   int param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -1040,7 +1040,7 @@ LAB_0012ce40:
                     phiInst = ((int (*)())LoopInfo__convertToHardwareLoop)(local_84,boundOnRight,in_r5,in_r6,in_r7,in_r8,in_r9);
                     changed = changed || phiInst != 0;
                     if (phiInst != 0) {
-                      FUN_000ed7e4(program,(int)"loop_trans");
+                      Program__beginPass(program,(int)"loop_trans");
                     }
                   }
                 }
@@ -1530,16 +1530,16 @@ int pass_flatten_ifs(flattenPass)
     } while (piVar23 != (int *)0x0);
     if (changedAny) {
       Program__freeWorkArrays(flattenPass);
-      FUN_000ed7e4(flattenPass,(int)"flatten_ifs");
+      Program__beginPass(flattenPass,(int)"flatten_ifs");
       Program__eliminateDeadInstsAndRecountUses(flattenPass,0);
     }
   }
   return;
 }
 
-/* FUN_0012dcf0 @ 0x12dcf0 (88 bytes) */
-int FUN_0012dcf0(param_1, param_2)
-  undefined4 param_1;
+/* FudoPs__flattenIfs @ 0x12dcf0 (88 bytes) */
+int FudoPs__flattenIfs(this, param_2)
+  undefined4 this;
   int param_2;
 {
   int callResult;
@@ -2925,7 +2925,7 @@ LAB_0013037c:
       Program__eliminateDeadInstsAndRecountUses(program,0);
     }
   }
-  return FUN_000ed7e4(program,(int)"remove_empty_graphs");
+  return Program__beginPass(program,(int)"remove_empty_graphs");
 }
 
 /* FUN_001303f4 @ 0x1303f4 (48 bytes) */
@@ -3745,9 +3745,9 @@ int FUN_001314b8(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0012c134");
-asm(".set FUN_0012c134, _FUN_0012c134");
+asm(".set FUN_0012c134, _FudoPs__vslot69");
 asm(".globl FUN_0012dcf0");
-asm(".set FUN_0012dcf0, _FUN_0012dcf0");
+asm(".set FUN_0012dcf0, _FudoPs__flattenIfs");
 
 /* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
  * just branches straight to the real function below, no different behavior or arguments - but

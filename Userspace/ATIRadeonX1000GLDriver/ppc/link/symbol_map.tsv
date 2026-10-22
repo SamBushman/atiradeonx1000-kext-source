@@ -1424,8 +1424,8 @@ PTR_FUN_001eb0c0	0x1eb0c0	__DATA,__const	undefined *	4	extern unsigned char PTR_
 PTR_DAT_001eb254	0x1eb254	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001eb254 asm("PTR_DAT_001eb254");	pointer -> LD_1aa818	data.s
 PTR_FUN_001eb260	0x1eb260	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb260[] asm("PTR_FUN_001eb260");	pointer -> ResourceModel__dtor	data.s
 PTR_FUN_001eb2f0	0x1eb2f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb2f0[] asm("PTR_FUN_001eb2f0");	pointer -> ThreadModel__dtor	data.s
-PTR_DAT_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_DAT_001eb328[] asm("PTR_DAT_001eb328");	pointer -> orph_1d8910	data.s
-PTR_orph_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_orph_1d8910_001eb328[] asm("PTR_orph_1d8910_001eb328");	pointer -> orph_1d8910	data.s
+PTR_DAT_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_DAT_001eb328[] asm("PTR_DAT_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
+PTR_orph_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_orph_1d8910_001eb328[] asm("PTR_orph_1d8910_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
 PTR_FUN_001eb3c0	0x1eb3c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb3c0[] asm("PTR_FUN_001eb3c0");	pointer -> R300VSchedModel__dtor	data.s
 PTR_FUN_001eb450	0x1eb450	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb450[] asm("PTR_FUN_001eb450");	pointer -> FudoPs__dtor	data.s
 PTR_FUN_001eb5e8	0x1eb5e8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb5e8[] asm("PTR_FUN_001eb5e8");	pointer -> FudoChip__dtor	data.s
@@ -1435,7 +1435,7 @@ PTR_FUN_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char PTR_
 PTR_FUN_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb8d8[] asm("PTR_FUN_001eb8d8");	pointer -> MachineAssembler__dtor_19df54	data.s
 PTR_FUN_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb9a8[] asm("PTR_FUN_001eb9a8");	pointer -> R520MachineAssembler__dtor	data.s
 DAT_001f3a54	0x1f3a54	__DATA,__const_coal	-	-	extern unsigned char DAT_001f3a54 asm("DAT_001f3a54");	0x00000000	data.s
-PTR_DAT_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *PTR_DAT_001f4850 asm("PTR_DAT_001f4850");	pointer -> orph_1d0258	data.s
+PTR_DAT_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *PTR_DAT_001f4850 asm("PTR_DAT_001f4850");	pointer -> OpcodeInfo__vslot6	data.s
 DAT_001f65e0	0x1f65e0	__DATA,__bss	undefined4	4	extern unsigned char *DAT_001f65e0 asm("DAT_001f65e0");		data.s
 DAT_001f65e4	0x1f65e4	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e4[] asm("DAT_001f65e4");		data.s
 DAT_001f65e5	0x1f65e5	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e5[] asm("DAT_001f65e5");		data.s
