@@ -9280,6 +9280,11 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
   int *shaderObject;
   undefined4 *hwProgram;
 {
+  uint instructionWord;
+  uint operandWord;
+  uint opcode;
+  uint *instructionPtr;
+  bool isGLSLShader;
   bool bVar1;
   bool bVar2;
   int iVar3;
@@ -9293,15 +9298,15 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
   int iVar11;
   int iVar12;
   int iVar13;
-  int iVar14;
+  int loopIndex;
   uint uVar15;
-  uint uVar16;
+  uint dstIndex;
   int iVar17;
   int iVar18;
   undefined4 *puVar19;
   int iVar20;
   uint *puVar21;
-  uint *puVar22;
+  uint *nextInstruction;
   int iVar23;
   uint uVar24;
   undefined4 *puVar25;
@@ -9311,20 +9316,20 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
   undefined4 local_70 [11];
   
   if (shaderObject[8] != 0) {
-    bVar2 = *shaderObject - 0x8b30U < 2;
+    isGLSLShader = *shaderObject - 0x8b30U < 2;
     FUN_000538e0(ctx);
     FUN_00053060(ctx);
     iVar12 = shaderObject[0x12];
     iVar5 = shaderObject[0x13];
     *(undefined1 *)(hwProgram + 0x23) = 0;
     if (iVar12 != 0) {
-      iVar14 = 0;
+      loopIndex = 0;
       do {
-        cStack_95 = (char)shaderObject[iVar5 * 2 + iVar14 * 2];
+        cStack_95 = (char)shaderObject[iVar5 * 2 + loopIndex * 2];
         if (cStack_95 == '\0') {
           *(undefined1 *)(hwProgram + 0x23) = 1;
         }
-        iVar14 = iVar14 + 1;
+        loopIndex = loopIndex + 1;
         iVar12 = iVar12 + -1;
       } while (iVar12 != 0);
     }
@@ -9368,11 +9373,11 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
     hwProgram[1] = iVar5;
     if (iVar5 != 0) {
       iVar12 = FUN_00054460(ctx,0x87bf,0x87c4,0x87e1,iVar5);
-      iVar14 = 0;
+      loopIndex = 0;
       do {
-        iVar17 = iVar14 * 4;
-        iVar3 = iVar14 + iVar12;
-        iVar14 = iVar14 + 1;
+        iVar17 = loopIndex * 4;
+        iVar3 = loopIndex + iVar12;
+        loopIndex = loopIndex + 1;
         *(int *)(iVar17 + hwProgram[2]) = iVar3;
         iVar5 = iVar5 + -1;
       } while (iVar5 != 0);
@@ -9392,10 +9397,10 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
     hwProgram[3] = iVar12;
     if (iVar12 != 0) {
       puVar19 = (undefined4 *)hwProgram[4];
-      iVar14 = 0;
+      loopIndex = 0;
       do {
-        uVar15 = shaderObject[iVar5 * 2 + iVar14 * 2 + 1];
-        if (((uint)shaderObject[iVar5 * 2 + iVar14 * 2] >> 0x10 & 0xf) - 1 < 10) {
+        uVar15 = shaderObject[iVar5 * 2 + loopIndex * 2 + 1];
+        if (((uint)shaderObject[iVar5 * 2 + loopIndex * 2] >> 0x10 & 0xf) - 1 < 10) {
           if ((uVar15 & 0xffff) == 0) {
             uVar7 = FUN_00054940(ctx,0x87e2);
             *puVar19 = uVar7;
@@ -9405,31 +9410,31 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
             puVar19[uVar15 & 0xffff] = uVar7;
           }
         }
-        iVar14 = iVar14 + 1;
-      } while (iVar12 != iVar14);
+        loopIndex = loopIndex + 1;
+      } while (iVar12 != loopIndex);
     }
     ((int (*)())FUN_0003b280)(ctx,hwProgram,shaderObject[10],shaderObject + shaderObject[0xb] * 2,shaderObject[0xe],
                  shaderObject + shaderObject[0xf] * 2,shaderObject[0x1a],shaderObject + shaderObject[0x1b] * 2);
     iVar12 = shaderObject[0x14];
     iVar5 = shaderObject[0xd];
     if (iVar12 != 0) {
-      iVar14 = 0;
-      puVar21 = (uint *)(shaderObject + shaderObject[0x15] * 2);
+      loopIndex = 0;
+      instructionPtr = (uint *)(shaderObject + shaderObject[0x15] * 2);
       do {
-        puVar22 = puVar21 + 2;
-        uVar15 = *puVar21 >> 0x12 & 0xff;
-        if ((*puVar21 & 0x3fc0000) == 0x1340000) goto LAB_0003d23c;
-        uVar24 = puVar21[2];
-        if (0x4d < uVar15) goto switchD_0003cbec_caseD_3;
-        bVar1 = uVar15 == 0x48;
+        nextInstruction = instructionPtr + 2;
+        opcode = *instructionPtr >> 0x12 & 0xff;
+        if ((*instructionPtr & 0x3fc0000) == 0x1340000) goto LAB_0003d23c;
+        operandWord = instructionPtr[2];
+        if (0x4d < opcode) goto switchD_0003cbec_caseD_3;
+        bVar1 = opcode == 0x48;
         if (bVar1) {
           iVar17 = hwProgram[0x17];
           goto LAB_0003c9b8;
         }
-        if ((bVar2) && ((uVar24 & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
-        uVar6 = uVar24 >> 0x11 & 7;
+        if ((isGLSLShader) && ((operandWord & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
+        uVar6 = operandWord >> 0x11 & 7;
         if (uVar6 == 1) {
-          iVar17 = *(int *)((puVar21[3] & 0xffff) * 4 + hwProgram[2]);
+          iVar17 = *(int *)((instructionPtr[3] & 0xffff) * 4 + hwProgram[2]);
           goto LAB_0003c9b8;
         }
         if (uVar6 != 3) {
@@ -9437,7 +9442,7 @@ switchD_0003cbec_caseD_3:
           bVar2 = false;
           goto LAB_0003d254;
         }
-        uVar6 = shaderObject[iVar5 * 2 + (puVar21[3] & 0xffff) * 2];
+        uVar6 = shaderObject[iVar5 * 2 + (instructionPtr[3] & 0xffff) * 2];
         switch(uVar6 >> 0x10 & 0xf) {
         case 0:
           iVar17 = 0;
@@ -9471,55 +9476,55 @@ switchD_0003cbec_caseD_3:
         }
 LAB_0003c9b8:
         iVar3 = iVar17;
-        if (((uVar24 & 0x1e000) != 0x1e000) && (!bVar1)) {
+        if (((operandWord & 0x1e000) != 0x1e000) && (!bVar1)) {
           iVar3 = hwProgram[0x16];
         }
-        if ((uVar15 < 0x1f) || ((iVar18 = 2, 0x3a < uVar15 && (iVar18 = 3, 0x40 < uVar15)))) {
+        if ((opcode < 0x1f) || ((iVar18 = 2, 0x3a < opcode && (iVar18 = 3, 0x40 < opcode)))) {
           iVar18 = 1;
         }
         iVar20 = 0;
         iVar23 = 0;
-        puVar22 = puVar21 + 4;
+        nextInstruction = instructionPtr + 4;
         puVar19 = hwProgram;
         do {
-          puVar21 = puVar22;
-          uVar6 = *puVar21;
-          puVar22 = puVar21 + 2;
-          uVar16 = puVar21[1] & 0xffff;
-          if ((bVar2) && ((uVar6 & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
-          uVar4 = uVar6 >> 0x17 & 7;
+          puVar21 = nextInstruction;
+          instructionWord = *puVar21;
+          nextInstruction = puVar21 + 2;
+          dstIndex = puVar21[1] & 0xffff;
+          if ((isGLSLShader) && ((instructionWord & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
+          uVar4 = instructionWord >> 0x17 & 7;
           if (uVar4 == 1) {
-            uVar7 = *(undefined4 *)(uVar16 * 4 + hwProgram[2]);
+            uVar7 = *(undefined4 *)(dstIndex * 4 + hwProgram[2]);
           }
           else if (uVar4 == 2) {
-            if ((int)uVar6 < 0) {
-              cStack_75 = (char)uVar6;
+            if ((int)instructionWord < 0) {
+              cStack_75 = (char)instructionWord;
               FUN_00053f80(ctx,0x8782,puVar19[0x13],hwProgram[0x17],
-                           *(undefined4 *)((uVar16 + (int)cStack_75) * 4 + hwProgram[10]));
+                           *(undefined4 *)((dstIndex + (int)cStack_75) * 4 + hwProgram[10]));
               uVar7 = puVar19[0x13];
             }
             else {
-              uVar7 = *(undefined4 *)(uVar16 * 4 + hwProgram[10]);
+              uVar7 = *(undefined4 *)(dstIndex * 4 + hwProgram[10]);
             }
           }
           else {
             uVar7 = 0;
             if (uVar4 == 0) {
-              uVar7 = *(undefined4 *)(uVar16 * 4 + hwProgram[4]);
+              uVar7 = *(undefined4 *)(dstIndex * 4 + hwProgram[4]);
             }
           }
           *(undefined4 *)((int)local_70 + iVar23) = uVar7;
-          if ((uVar6 & 0x8000000) == 0) {
-            iVar8 = (uVar6 >> 0x15 & 3) + 0x87d5;
-            iVar10 = (uVar6 >> 0x13 & 3) + 0x87d5;
-            iVar11 = (uVar6 >> 0x11 & 3) + 0x87d5;
-            iVar13 = (uVar6 >> 0xf & 3) + 0x87d5;
+          if ((instructionWord & 0x8000000) == 0) {
+            iVar8 = (instructionWord >> 0x15 & 3) + 0x87d5;
+            iVar10 = (instructionWord >> 0x13 & 3) + 0x87d5;
+            iVar11 = (instructionWord >> 0x11 & 3) + 0x87d5;
+            iVar13 = (instructionWord >> 0xf & 3) + 0x87d5;
           }
           else {
-            iVar8 = (uVar6 >> 0x15 & 3) + 0x87d9;
-            iVar10 = (uVar6 >> 0x13 & 3) + 0x87d9;
-            iVar11 = (uVar6 >> 0x11 & 3) + 0x87d9;
-            iVar13 = (uVar6 >> 0xf & 3) + 0x87d9;
+            iVar8 = (instructionWord >> 0x15 & 3) + 0x87d9;
+            iVar10 = (instructionWord >> 0x13 & 3) + 0x87d9;
+            iVar11 = (instructionWord >> 0x11 & 3) + 0x87d9;
+            iVar13 = (instructionWord >> 0xf & 3) + 0x87d9;
           }
           if ((((iVar8 != 0x87d5) || (iVar10 != 0x87d6)) || (iVar11 != 0x87d7)) ||
              (iVar13 != 0x87d8)) {
@@ -9532,7 +9537,7 @@ LAB_0003c9b8:
           iVar23 = iVar23 + 4;
           puVar19 = puVar19 + 1;
         } while (iVar18 != iVar20);
-        switch(uVar15) {
+        switch(opcode) {
         case 0:
           FUN_00053f00(ctx,0x8799,iVar3,local_70[0]);
           break;
@@ -9633,8 +9638,8 @@ LAB_0003cdec:
           FUN_00054000(ctx,0x8788,iVar3,local_70[0],local_70[1],local_70[2]);
           break;
         case 0x41:
-          uVar15 = *puVar22;
-          puVar22 = puVar21 + 4;
+          uVar15 = *nextInstruction;
+          nextInstruction = puVar21 + 4;
           if (((*(int *)(&DAT_001da630 + (uVar15 >> 10 & 0x3c)) != 0x87d5) ||
               (*(int *)(&DAT_001da630 + (uVar15 >> 6 & 0x3c)) != 0x87d6)) ||
              ((*(int *)(&DAT_001da630 + (uVar15 >> 2 & 0x3c)) != 0x87d7 ||
@@ -9648,14 +9653,14 @@ LAB_0003cdec:
         case 0x48:
           FUN_000543b0(ctx,iVar3,local_70[0],0);
         }
-        if (((uVar24 & 0x1e000) != 0x1e000) && (!bVar1)) {
-          FUN_000541a0(ctx,iVar17,iVar3,uVar24 >> 0xd & 1,uVar24 >> 0xe & 1,uVar24 >> 0xf & 1,
-                       uVar24 >> 0x10 & 1);
+        if (((operandWord & 0x1e000) != 0x1e000) && (!bVar1)) {
+          FUN_000541a0(ctx,iVar17,iVar3,operandWord >> 0xd & 1,operandWord >> 0xe & 1,operandWord >> 0xf & 1,
+                       operandWord >> 0x10 & 1);
         }
 LAB_0003d23c:
-        iVar14 = iVar14 + 1;
-        puVar21 = puVar22;
-      } while (iVar12 != iVar14);
+        loopIndex = loopIndex + 1;
+        instructionPtr = nextInstruction;
+      } while (iVar12 != loopIndex);
     }
     bVar2 = true;
 LAB_0003d254:
