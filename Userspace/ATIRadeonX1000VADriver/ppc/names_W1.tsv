@@ -1,0 +1,233 @@
+# local	FUNCTION	old	new	tier	evidence
+local	FUN_00004340	param_1	ctx	CONFIRMED	ctx+0x54 surface count, +0x55c descriptor table, +0xa84 control word, +0x14430 table
+local	FUN_00004340	param_2	sizeInfo	INFERRED	**param_2 = width, (*param_2)[1] = height of the stream
+local	FUN_00004340	param_3	requestedCount	CONFIRMED	must equal ctx+0x54 and be nonzero, else 0xfffffff9
+local	FUN_00004340	bVar1	notLast	CONFIRMED	loop-continue flag of the two table loops
+local	FUN_00004340	uVar14	surfaceCount	CONFIRMED	ctx+0x54
+local	FUN_00004340	iVar13	descCursor	CONFIRMED	ctx+0x55c, advanced by 0x40 per surface in the final loop
+local	FUN_00004340	piVar12	tableCursor	CONFIRMED	ctx+0x14430, 12-byte entries each receiving a malloc of ctx+0x14424*4 bytes
+local	FUN_00004340	puVar15	freeCursor	CONFIRMED	same table walked again to free the entries on failure
+local	FUN_00004340	puVar10	planeEntry	CONFIRMED	stores plane base addresses into ctx+0x151ec / +0x1523c tables
+local	FUN_00004340	iVar8	planeTableA	INFERRED	ctx+0x151ec, 0x10-byte rows of 4 plane addresses
+local	FUN_00004340	local_48	scalarOut0	CONFIRMED	scalarO count word passed as &local_48
+local	FUN_00004340	local_44	scalarIn0	CONFIRMED	scalarI array local_44..local_34 passed as &local_44
+local	FUN_00004340	local_40	scalarIn1	CONFIRMED	second scalarI word
+local	FUN_00004340	local_3c	scalarIn2	CONFIRMED	third scalarI word
+local	FUN_00004340	local_38	scalarIn3	CONFIRMED	fourth scalarI word
+local	FUN_00004340	local_34	scalarIn4	CONFIRMED	fifth scalarI word (control word | 0x20000)
+local	FUN_00004340	iVar16	innerCount	CONFIRMED	counts 4 plane addresses per row
+local	FUN_00004340	uVar5	allocAlign	INFERRED	0x20 argument of FUN_00003350
+local	FUN_00004340	uVar6	allocFlags	UNKNOWN	0 argument of FUN_00003350
+local	FUN_00004340	uVar2	heightOrCtrlOrPlaneAddr	UNKNOWN	reused: height+15, then ctx+0xa84 control word, then the running plane address
+local	FUN_00004340	uVar4	bufferOrStatus	UNKNOWN	reused: freed pointer, call argument, then the returned status
+local	FUN_00004340	uVar7	widthOrCount	UNKNOWN	reused: aligned width, countdown, bit index
+local	FUN_00004340	uVar9	widthPlus15OrBit	UNKNOWN	reused: width+15, then bit position
+local	FUN_00004340	iVar3	allocOrRowBase	UNKNOWN	reused: malloc result, plane table base, call result
+local	FUN_00004340	iVar11	indexOrStatus	UNKNOWN	reused: loop index and the IOConnect/FUN_ call results
+local	FUN_00003930	param_1	ctx	CONFIRMED	+0x55c descriptor table, +0xac4 next slot id (mod 10000), +0x14424/+0x1442c per-surface counters
+local	FUN_00003930	param_2	picParams	INFERRED	byte block: [0] structure, [2] type, [4] flag, [6..8] signed surface indices, +0xc macroblock list, +0x10 extra word
+local	FUN_00003930	param_3	outResult	CONFIRMED	receives {0, slot id}
+local	FUN_00003930	puVar10	descTable	CONFIRMED	ctx+0x55c
+local	FUN_00003930	iVar4	slotOrMbCursor	UNKNOWN	reused: ctx+0xac4 slot id, then the macroblock list cursor (param_2+0xc)
+local	FUN_00003930	iVar8	fieldIndex	INFERRED	0/1 outer loop; ctx+0x574 flag = (fieldIndex != 0)
+local	FUN_00003930	uVar9	macroblockCount	INFERRED	ctx+0x580*ctx+0x584 (halved unless type 3)
+local	FUN_00003930	iVar13	mbCursorOrCount	UNKNOWN	reused: list cursor, 0x19 countdown, nonempty-entry count
+local	FUN_00003930	uVar11	mbIndex	CONFIRMED	loop index passed as 4th argument to FUN_00008510
+local	FUN_00003930	uVar12	nextMbIndex	CONFIRMED	uVar11+1
+local	FUN_00003930	puVar5	statEntry	CONFIRMED	ctx+0x1442c 12-byte entries zeroed, [-1] = counter limit
+local	FUN_00003930	piVar2	statCursor	CONFIRMED	ctx+0x1442c walked in the summing loop
+local	FUN_00003930	iVar7	totalWords	INFERRED	running sum of statistics passed to FUN_00007850
+local	FUN_00003930	iVar6	statCountdown	CONFIRMED	0x19 entries
+local	FUN_00003930	iVar14	unusedWords	INFERRED	ctx+0x14424 - entry[-1] - 1
+local	FUN_00003930	bVar1	notLast	CONFIRMED	loop continue flag
+local	FUN_00003930	uVar3	status	CONFIRMED	0 or 0xffffffff
+local	FUN_00003930	local_48	picExtra	INFERRED	8-word block, [0] = param_2+0x10, passed to FUN_00008510
+local	FUN_00003cd0	param_1	ctx	CONFIRMED	+0x30 last header, +0x34 write ptr, +0x38 limit, +0x40 mapped command buffer
+local	FUN_00003cd0	param_2	syncId	INFERRED	0..0x11 selects the surface whose reference counter is bumped; also the header opcode byte
+local	FUN_00003cd0	puVar1	taskPortPtr	INFERRED	PTR_0000f1a0 dereferenced as the mach port argument of _IOConnectMapMemory
+local	FUN_00003cd0	puVar2	lastHeader	CONFIRMED	ctx+0x30, receives the length word
+local	FUN_00003cd0	piVar7	cmdWrite	CONFIRMED	ctx+0x34 write pointer
+local	FUN_00003cd0	piVar4	payload	CONFIRMED	cmdWrite+1, receives the counter value
+local	FUN_00003cd0	piVar3	fillCursor	CONFIRMED	writes six 0x80000000 words
+local	FUN_00003cd0	piVar6	refCounter	INFERRED	surface reference counter incremented with lwarx/stwcx (storeWordConditionalIndexed)
+local	FUN_00003cd0	iVar5	mapBaseOrCount	UNKNOWN	reused: mapped base address, then the 6-word fill count
+local	FUN_00003fc0	param_1	ctx	CONFIRMED	+0x54 surface count, +0x55c descriptor table, +0xac4 next slot id, +0x11c feature flags
+local	FUN_00003fc0	param_2	surfaceIndex	CONFIRMED	range-checked against ctx+0x54
+local	FUN_00003fc0	param_3	surfaceDesc	INFERRED	[0],[1] first two words, [2], [3] fourcc (yuvs/2vuy/argb/rgba/ar15), [6] data pointer
+local	FUN_00003fc0	param_4	outResult	CONFIRMED	receives {0, slot id}
+local	FUN_00003fc0	param_5	unused1	UNKNOWN	never read
+local	FUN_00003fc0	param_6	unused2	UNKNOWN	never read
+local	FUN_00003fc0	param_7	unused3	UNKNOWN	never read
+local	FUN_00003fc0	param_8	unused4	UNKNOWN	only forwarded as a trailing argument to FUN_0000bf70
+local	FUN_00003fc0	iVar7	descTableOrResult	UNKNOWN	reused: ctx+0x55c, then the FUN_00003350 result
+local	FUN_00003fc0	iVar2	fourcc	CONFIRMED	param_3[3] validated against the five accepted codes
+local	FUN_00003fc0	uVar1	featureFlags	CONFIRMED	ctx+0x11c (bit 1 -> FUN_0000a110, bit 2 -> FUN_00009c80)
+local	FUN_00003fc0	uVar3	descWord0	INFERRED	param_3[0]
+local	FUN_00003fc0	uVar4	descWord1	INFERRED	param_3[1]
+local	FUN_00003fc0	uVar5	fourccArg	INFERRED	param_3[3] forwarded
+local	FUN_00003fc0	uVar6	failStatus	INFERRED	0xfffffffd pre-loaded for the stack-argument call
+local	FUN_00004b40	param_1	ctx	CONFIRMED	+0x54 surface count, +0x30/+0x34/+0x38 ring pointers, +0x11c feature flags
+local	FUN_00004b40	puVar1	taskPortPtr	INFERRED	PTR_0000f1a0 dereferenced as the task port of _IOConnectMapMemory
+local	FUN_00004b40	iVar6	mapAddrPtr	CONFIRMED	ctx+0x40, address out-pointer of _IOConnectMapMemory
+local	FUN_00004b40	iVar5	mapSizePtrOrBase	UNKNOWN	reused: ctx+0x44 size out-pointer, then the mapped base after the loop
+local	FUN_00004b40	uVar7	surfaceIndex	CONFIRMED	0..ctx+0x54, written into word 1 of each command
+local	FUN_00004b40	puVar4	cmdWrite	CONFIRMED	ctx+0x34 write pointer, 16-word slots
+local	FUN_00004b40	puVar3	lastHeader	CONFIRMED	ctx+0x30, receives the length word
+local	FUN_00004b40	iVar2	mapBase	CONFIRMED	ctx+0x40 after remapping the ring
+local	FUN_00004fa0	param_1	ctx	CONFIRMED	+0x5c subpicture count, +0x60/+0x64 subpicture size, +0x218 bitmap descriptors, +0xa84 control word
+local	FUN_00004fa0	param_2	subpicParams	INFERRED	[0] = bitmap count (max 8), following words = per-bitmap address pairs
+local	FUN_00004fa0	uVar3	countOrAlignedWidth	UNKNOWN	reused: count, then aligned width 0x2d0, then loop total
+local	FUN_00004fa0	iVar4	countOrStatus	UNKNOWN	reused: ctx+0x5c count then IOConnect result
+local	FUN_00004fa0	iVar2	cursor	UNKNOWN	walks ctx slots (+4) and descriptor array (+100)
+local	FUN_00004fa0	iVar6	countdown	UNKNOWN	reused: count remaining, then FUN_00003350 result
+local	FUN_00004fa0	uVar5	index	CONFIRMED	bitmap loop index
+local	FUN_00004fa0	uVar1	status	CONFIRMED	0xfffffffb / 0xfffffffd
+local	FUN_00004fa0	local_48	outCountOrResult	UNKNOWN	scalarO word passed as &local_48, also holds the FUN_00003350 result
+local	FUN_00004fa0	local_44	scalarIn0	CONFIRMED	scalarI array local_44..local_34 passed as &local_44
+local	FUN_00004fa0	local_40	scalarIn1	CONFIRMED	role from use
+local	FUN_00004fa0	local_3c	scalarIn2	CONFIRMED	role from use
+local	FUN_00004fa0	local_38	scalarIn3	CONFIRMED	role from use
+local	FUN_00004fa0	local_34	scalarIn4	CONFIRMED	control word | 0x10000
+local	FUN_000052f0	param_1	ctx	CONFIRMED	+0x558 current subpicture index, +0x5c count, +0x1b0 palette ring, +0x10c/+0x110 copied dims
+local	FUN_000052f0	param_2	subpicture	INFERRED	byte block: [0] index, +2/+4/+6/+8 rectangle shorts, +0x12/+0x16 two words, +0x28 packed palette selectors, +0x2c palette pointer
+local	FUN_000052f0	param_3	unused1	UNKNOWN	never read
+local	FUN_000052f0	param_4	unused2	UNKNOWN	never read
+local	FUN_000052f0	param_5	unused3	UNKNOWN	never read
+local	FUN_000052f0	puVar2	taskPortPtr	INFERRED	PTR_0000f1a0 dereferenced as task port for _IOConnectMapMemory
+local	FUN_000052f0	bVar11	subpicIndex	CONFIRMED	*param_2, stored in ctx+0x558
+local	FUN_000052f0	puVar12	cmdWriteOrDst	UNKNOWN	ring write pointer, later the destination in the palette ring
+local	FUN_000052f0	puVar3	lastHeaderOrPalette	UNKNOWN	ctx+0x30 last header, later local_48+2 (palette words)
+local	FUN_000052f0	iVar8	mapBaseOrRectLeft	UNKNOWN	reused: mapped ring base, rectangle left, palette pointer
+local	FUN_000052f0	iVar15	rectRightOrCount	UNKNOWN	reused: rectangle right, loop count
+local	FUN_000052f0	uVar14	packedPalette	INFERRED	param_2+0x28 packed 4-bit selectors, later entry counter
+local	FUN_000052f0	uVar4	status	CONFIRMED	0xfffffff9 or 0, 0x10 reused as a call argument
+local	FUN_000052f0	uVar13	shiftOrByteOffset	UNKNOWN	reused: bit shift counter, byte offset, entry offset
+local	FUN_000052f0	uVar6	alphaOrOffset	UNKNOWN	reused: alpha 0xff or sel*15, then aligned offset
+local	FUN_000052f0	uVar1	selector	INFERRED	4-bit alpha selector, later quad index
+local	FUN_000052f0	iVar9	colorEntry	INFERRED	palette entry address (param_2+0x2c plus index*4)
+local	FUN_000052f0	puVar5	destEntry	INFERRED	ring entry written two words at a time
+local	FUN_000052f0	puVar7	wordsBase	INFERRED	local_48 start
+local	FUN_000052f0	puVar10	wordsCursor	INFERRED	local_48 + (index&3)
+local	FUN_000052f0	local_48	rectAndPalette	INFERRED	[0],[1] rectangle corners, [2..5] palette words
+local	FUN_000058b0	param_1	ctx	CONFIRMED	+0x30/+0x34/+0x38 ring pointers, +0x40 mapped ring, +0x48 setup buffer, +0x1511c.. ring copies
+local	FUN_000058b0	iVar2	ringBase	INFERRED	mapped ring base then ring A body address
+local	FUN_000058b0	iVar4	setupBuf	CONFIRMED	ctx+0x48 buffer into which register/value pairs are written
+local	FUN_000058b0	iVar1	ringBBody	INFERRED	ctx+0x1455c ring body address
+local	FUN_000058b0	iVar3	ringALength	INFERRED	word count of ring A body
+local	FUN_00005d70	param_1	ctx	CONFIRMED	+0x578/+0x57c aligned width/height, +0x15394 vertex table, +0x153fc..+0x15404 section offsets
+local	FUN_00005d70	param_2	unused1	UNKNOWN	never read
+local	FUN_00005d70	param_3	unused2	UNKNOWN	never read
+local	FUN_00005d70	param_4	rowOrScratch	UNKNOWN	passed through; reused as row coordinate in the loops
+local	FUN_00005d70	param_5	unused3	UNKNOWN	never read
+local	FUN_00005d70	param_6	unused4	UNKNOWN	never read
+local	FUN_00005d70	param_7	unused5	UNKNOWN	never read
+local	FUN_00005d70	param_8	colOrScratch	UNKNOWN	passed through; reused as column counter in the loops
+local	FUN_00005d70	uVar10	height	CONFIRMED	ctx+0x57c, halved for the chroma loops
+local	FUN_00005d70	uVar5	width	CONFIRMED	ctx+0x578, halved for the chroma loops
+local	FUN_00005d70	puVar2	quadCursor	CONFIRMED	write cursor into the 256-aligned quad table
+local	FUN_00005d70	puVar7	rowStart	INFERRED	start of the current row in the table
+local	FUN_00005d70	uVar4	row	INFERRED	row coordinate stepping by 16 or 8
+local	FUN_00005d70	uVar6	quadCount	CONFIRMED	running count of quads written
+local	FUN_00005d70	iVar1	sectionWords	CONFIRMED	quadCount*4 stored at ctx+0x153fc/0x15400/0x15404
+local	FUN_00005d70	uVar9	yBottomShifted	INFERRED	(row+step)<<16
+local	FUN_00005d70	uVar3	topLeft	INFERRED	packed (x | y<<16) corner
+local	FUN_00005d70	uVar8	topRight	INFERRED	packed corner
+local	FUN_00006d90	param_1	ctx	CONFIRMED	+0x578/+0x57c aligned size, +0x152b4..+0x15390 float transform/uv tables, +0x15294.. program handles
+local	FUN_00006d90	fVar10	kOne	CONFIRMED	FLOAT_0000d43c = 1.0
+local	FUN_00006d90	fVar11	kFour	CONFIRMED	FLOAT_0000d444 = 4.0
+local	FUN_00006d90	fVar12	kInv255	CONFIRMED	FLOAT_0000d448 = 1/255
+local	FUN_00006d90	fVar13	kS16Max	CONFIRMED	FLOAT_0000d44c = 32767.0
+local	FUN_00006d90	fVar14	kEight	CONFIRMED	FLOAT_0000d450 = 8.0
+local	FUN_00006d90	fVar15	kOnePointFive	CONFIRMED	FLOAT_0000d454 = 1.5
+local	FUN_00006d90	fVar4	kTwoThenInvHeight	CONFIRMED	starts as FLOAT_0000d458 = 2.0, then 2.0/height
+local	FUN_00006d90	dVar9	intToDoubleMagic	CONFIRMED	DOUBLE_0000d418, the 2^52 constant of the CONCAT44(0x43300000,x) int-to-float idiom
+local	FUN_00006d90	uVar8	halfHeightAligned	CONFIRMED	((ctx+0x57c>>1)+15)&~15
+local	FUN_00006d90	fVar1	widthF	CONFIRMED	(float)ctx+0x578
+local	FUN_00006d90	fVar2	heightF	CONFIRMED	(float)ctx+0x57c
+local	FUN_00006d90	fVar3	halfHeightF	INFERRED	(float)uVar8, reused as a temporary before that
+local	FUN_00006d90	fVar5	s16MaxOverTwoWidth	INFERRED	32767/(2*width)
+local	FUN_00006d90	fVar6	twoOverWidth	INFERRED	2.0/width
+local	FUN_00006d90	fVar7	oneAndHalfOverFourWidth	INFERRED	1.5/(width*4)
+local	FUN_00006d90	uVar16	programHandle	INFERRED	FUN_00006230 result stored at ctx+0x15298/0x152a0/0x152a8/0x152b0
+local	FUN_00006d90	uVar17	savedHeight	CONFIRMED	ctx+0x57c saved while it is temporarily doubled
+local	FUN_00007490	param_1	ctx	CONFIRMED	+0x55c picture type (2 or 3), +0x588 pitch, +0x15174/+0x1517c command buffer cursors
+local	FUN_00007490	param_2	blockType	INFERRED	0..0x12, indexes 0x34-byte table entries
+local	FUN_00007490	param_3	wordCount	CONFIRMED	number of payload words copied
+local	FUN_00007490	param_4	srcWords	CONFIRMED	payload words copied into the command
+local	FUN_00007490	param_5	alternateTable	INFERRED	nonzero selects the second table set
+local	FUN_00007490	param_6	stream	INFERRED	1 or 2, selects which cursor (+0x15174 / +0x1517c) is used
+local	FUN_00007490	iVar1	pictureType	CONFIRMED	ctx+0x55c
+local	FUN_00007490	puVar5	programEntry	INFERRED	0x34-byte entry of the constant program table
+local	FUN_00007490	uVar6	pitchWords	INFERRED	ctx+0x588, halved or doubled by type and stream
+local	FUN_00007490	puVar7	cmdBuf	CONFIRMED	selected cursor, becomes the packet tail
+local	FUN_00007490	uVar4	chromaFlag	INFERRED	1 for the chroma block types
+local	FUN_00007490	puVar3	cmdCursor	CONFIRMED	write cursor after FUN_00007270 copied the entry
+local	FUN_00007490	uVar2	word	CONFIRMED	payload word being copied
+local	FUN_00007850	param_1	ctx	CONFIRMED	+0x30/+0x34/+0x38 ring, +0x15164..+0x15188 program ring pointers, +0x14424/+0x14428 counters
+local	FUN_00007850	param_2	ringWords	CONFIRMED	size in words of the program ring allocated from the command ring
+local	FUN_00007850	bVar1	notLast	CONFIRMED	loop-continue flag
+local	FUN_00007850	puVar2	taskPortPtr	INFERRED	PTR_0000f1a0 dereferenced as the task port of _IOConnectMapMemory
+local	FUN_00007850	puVar3	lastHeader	CONFIRMED	ctx+0x30
+local	FUN_00007850	iVar4	mapBaseOrAddr	UNKNOWN	reused: mapped ring base, then program ring cursors
+local	FUN_00007850	iVar5	ringBaseOrMid	UNKNOWN	reused: ring start, then midpoint
+local	FUN_00007850	puVar6	ringLimit	CONFIRMED	ctx+0x38
+local	FUN_00007850	uVar7	wordsLeft	INFERRED	half of the words after the first program
+local	FUN_00007850	puVar8	header14	CONFIRMED	14-word header packet (opcode 0x12000000)
+local	FUN_00007850	puVar9	cmdWriteB	CONFIRMED	second packet write pointer
+local	FUN_00007850	puVar10	programStart	CONFIRMED	start of the allocated program ring
+local	FUN_00007850	iVar11	remainingWords	INFERRED	ctx+0x14424 - entry count - 1
+local	FUN_00007850	iVar12	surfaceIndex	CONFIRMED	0..0x18 loop
+local	FUN_00007850	piVar13	entryHeader	CONFIRMED	two-word entry prefix {length, size word}
+local	FUN_00007850	iVar14	statEntry	CONFIRMED	ctx+0x14428 + 12*index
+local	FUN_00007f80	param_1	ctx	CONFIRMED	+0x55c descriptor table, +0x560 structure, +0x568 surface, +0x574 field flag, +0x1511c.. program rings
+local	FUN_00007f80	piVar12	descTable	CONFIRMED	ctx+0x55c
+local	FUN_00007f80	iVar14	surfaceIndexOrScratch	UNKNOWN	ctx+0x568 surface index, later the program ring base and the mapped base
+local	FUN_00007f80	piVar1	chromaEntry	INFERRED	piVar15+0x14 entry flushed after the luma entry
+local	FUN_00007f80	bVar2	notLast	CONFIRMED	loop-continue flag
+local	FUN_00007f80	puVar3	taskPortPtr	INFERRED	PTR_0000f1a0 dereferenced as the task port of _IOConnectMapMemory
+local	FUN_00007f80	puVar4	lastHeader	CONFIRMED	ctx+0x30
+local	FUN_00007f80	iVar5	mapBaseOrPlaneWords	UNKNOWN	reused: mapped base, then (height/16)*pitch
+local	FUN_00007f80	iVar6	programRingOrPitch	UNKNOWN	reused: ring address, remap argument, then ctx+0x151a4 pitch
+local	FUN_00007f80	puVar7	ringLimit	CONFIRMED	ctx+0x38
+local	FUN_00007f80	uVar8	regDefault	INFERRED	0x5c8 register passed on to FUN_0000bf20
+local	FUN_00007f80	puVar9	cmdWriteB	CONFIRMED	packet write pointer
+local	FUN_00007f80	puVar10	cmdWrite	CONFIRMED	ring write pointer
+local	FUN_00007f80	uVar11	regValue	INFERRED	10, forwarded as a trailing argument
+local	FUN_00007f80	piVar15	planeCursor	CONFIRMED	walks the four plane entries
+local	FUN_00007f80	iVar13	planeIndex	CONFIRMED	0..3 loop
+local	FUN_00006230	param_1	ctx	CONFIRMED	+0x578/+0x57c size, +0x580/+0x584 macroblock dims, +0x588 pitch, +0x58c, +0x152b4/+0x15324 uv tables
+local	FUN_00006230	param_2	outProgram	CONFIRMED	command words written here (register/value pairs)
+local	FUN_00006230	param_3	variant	INFERRED	1 = full pipeline setup, otherwise the short chroma-only setup
+local	FUN_00006230	param_4	halfHeight	INFERRED	nonzero halves the macroblock row count (second field)
+local	FUN_00006230	iVar7	widthMbOrTmp	UNKNOWN	reused: ctx+0x580 macroblock width, then register values
+local	FUN_00006230	uVar4	mbHeight	INFERRED	ctx+0x584 (halved if param_4), then packed size register values
+local	FUN_00006230	uVar1	mbPitchWords	INFERRED	ctx+0x58c>>2
+local	FUN_00006230	puVar2	program	CONFIRMED	FUN_000096a0 result, the pair buffer written in the full setup
+local	FUN_00006230	puVar3	programEnd	CONFIRMED	end of the pair buffer passed to FUN_00009980
+local	FUN_00006230	uVar5	chromaWidthMinus1	INFERRED	(width>>1)-1
+local	FUN_00006230	iVar6	uvTable	CONFIRMED	ctx+0x152b4 or ctx+0x15324
+local	FUN_00006230	iVar8	pitch	CONFIRMED	ctx+0x588 on the full path
+local	FUN_00006230	iVar10	width	CONFIRMED	ctx+0x578
+local	FUN_00006230	uVar9	heightOrHalfPitch	UNKNOWN	ctx+0x57c on the full path, ctx+0x588>>1 on the short path
+local	FUN_00006230	uVar11	widthMinus1OrHeight	UNKNOWN	reused: width-1 or height
+local	FUN_00008820	param_1	ctx	CONFIRMED	+0x55c descriptor table, +0x568 surface, +0x580 mb width, +0x58c pitch, +0x590 direction flag, +0x14428.. per-surface lists
+local	FUN_00008820	param_2	mbInfo	INFERRED	short block: [0..7] four motion-vector pairs, [8],[9] byte list indices, byte at [10] = macroblock kind (1,2,3,5,6,...)
+local	FUN_00008820	param_3	mbIndex	CONFIRMED	macroblock number, split into row/column by ctx+0x580
+local	FUN_00008820	iVar8	mbOffsetBytes	CONFIRMED	mbIndex*4, later plus ctx+0x153fc section offset
+local	FUN_00008820	iVar9	surfaceOrListBase	UNKNOWN	ctx+0x568 surface, then &ctx+0x14428 list base
+local	FUN_00008820	iVar10	descOrSurfaceEntry	UNKNOWN	ctx+0x55c + surface*0x10, then list entry
+local	FUN_00008820	iVar11	mbColumn	CONFIRMED	mbIndex % ctx+0x580
+local	FUN_00008820	uVar12	mbRow	CONFIRMED	mbIndex / ctx+0x580
+local	FUN_00008820	iVar7	mbPosOrListEntry	UNKNOWN	macroblock position (column+row*pitchWords), then list entry/index
+local	FUN_0000c4b0	param_1	ctx	CONFIRMED	+0x30/+0x34/+0x38 ring pointers, +0x40 mapped ring
+local	FUN_0000c4b0	param_2	frameInfo	INFERRED	byte block: [0],[1] signed bytes copied into words 1-2, +8 a word copied into word 3
+local	FUN_0000c4b0	param_3	unused1	UNKNOWN	never read
+local	FUN_0000c4b0	param_4	frameArg	INFERRED	stored as word 4 of the 0x3d000000 packet and forwarded to FUN_0000c160
+local	FUN_0000c4b0	bVar1	notLast	CONFIRMED	loop-continue flag
+local	FUN_0000c4b0	puVar2	taskPortPtr	INFERRED	PTR_0000f1a0 dereferenced as the task port of _IOConnectMapMemory
+local	FUN_0000c4b0	puVar3	lastHeader	CONFIRMED	ctx+0x30
+local	FUN_0000c4b0	puVar4	programCursor	CONFIRMED	register/value pair write cursor
+local	FUN_0000c4b0	puVar5	programEntry	CONFIRMED	loop cursor over the per-plane register pairs
+local	FUN_0000c4b0	iVar6	mapBaseOrProgramEnd	UNKNOWN	reused: mapped base, then the end of the second program
+local	FUN_0000c4b0	uVar7	planeIndex	CONFIRMED	0..1 loop
+local	FUN_0000c4b0	puVar8	packet	CONFIRMED	0x188-word command packet (opcode 0x3d000000)
