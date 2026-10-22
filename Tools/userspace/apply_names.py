@@ -12,7 +12,8 @@ named way), INFERRED (the role is clear from use, nothing names it) or UNKNOWN (
     use<TAB>FUNCTION<TAB>old<TAB>new<TAB>tier<TAB>evidence<TAB>from<TAB>to   rename `old` to `new` only in one segment of FUNCTION (splits a local reused for several roles)
 `from`/`to` are regexes over the function's lines AS GHIDRA WROTE THEM (lines are matched with every rename of the function taken back, so a table
 stays valid after it was applied). `from` may end in @N (Nth matching line, default 1); the segment starts at that line and runs up to, not
-including, the first later line matching `to` (empty `to` = end of function). One `new` name belongs to one `old` per function; a function with
+including, the first later line matching `to` (empty `to` = end of function; `+K` = exactly K lines). Tools/userspace/find_webs.py finds the
+real def-use webs of a variable and writes rows in the +K form. One `new` name belongs to one `old` per function; a function with
 `use` rows for a variable must not also have a `local` row for it. The declaration of `new` is added next to old's (same type); old's declaration is
 dropped when nothing uses it any more. Only locals (declared after the `{`) can be split.
 
@@ -71,9 +72,9 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             print('%s:%d: %s: new name %s is used for both %s and %s' % (r[0], r[1], name, r[4], o, r[3])); return 0, 0, 1
     brace = next((i for i in range(s, e) if lines[i] == '{'), None)
     if brace is None: print('%s: no body' % name); return 0, 0, 1
-    norm = lambda l: re.sub('|'.join(wb(k) for k in back), lambda m: back[m.group(0)], l) if back else l
+    norm = (lambda l: IDENT.sub(lambda m: back.get(m.group(0), m.group(0)), l)) if back else (lambda l: l)
     napp = npend = nerr = 0
-    DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)(\[\w+\])?;$'
+    DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)\s*(\[\w+\])?;$'
     def declblock():                           # (first, last+1) line of the declarations right after the `{`
         i = brace + 1
         while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i]) or re.match(r'\s+[\w ]+ \w+\[\d+\] = \{.*\};', lines[i])): i += 1
@@ -84,7 +85,9 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
         if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
         a = hits[k - 1]; z = e
-        if to:
+        if re.match(r'^\+\d+$', to):                 # +K: exactly K lines from the anchor line
+            z = min(a + int(to[1:]), e)
+        elif to:
             tz = [i for i in range(a + 1, e) if re.search(to, N[i])]
             if not tz: print('%s:%d: %s: end anchor %r not found' % (f, n, fn, to)); nerr += 1; continue
             z = tz[0]
@@ -160,4 +163,5 @@ def main():
     sys.exit(1 if errors or (check and pending) else 0)
 
 
-main()
+if __name__ == '__main__':
+    main()
