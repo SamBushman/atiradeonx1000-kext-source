@@ -3716,31 +3716,31 @@ int _PPCRuntimeCompilerSaveRegisterToMemory(compiler, regIndex)
   uint fieldInstWord2;
   int fieldInstWord;
   uint *codeCursor2;
-  uint *puVar1;
+  uint *offsetTable;
   uint vectorInstWord;
   undefined4 vectorInstWord2;
-  int iVar4;
+  int programTarget;
   undefined4 *codeCursor;
   uint *codeWritePtr;
   uint ppcInstWord;
-  int iVar8;
-  uint *local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  uint local_34;
+  int scalarRecord;
+  uint *descOffsets;
+  undefined4 descBank;
+  undefined4 descSwizzle;
+  undefined4 descIndexInfo;
+  undefined4 descStorage;
+  undefined4 descFlags5;
+  undefined4 descType;
+  uint descWriteMask;
   
   if (*(int *)(compiler + 0xe4c) == 0) {
-    iVar8 = regIndex * 0x38 + compiler;
+    scalarRecord = regIndex * 0x38 + compiler;
     if (*(int *)(compiler + regIndex * 0x38) != 0) {
       return;
     }
     codeWritePtr = *(uint **)(compiler + 0xe30);
-    vectorInstWord = regIndex << 0x15 | (*(ushort *)(iVar8 + 0x18) + 5) * 0x10000 |
-            *(uint *)((uint)*(byte *)(iVar8 + *(int *)(iVar8 + 4) + 0x10) * 4 + *(int *)(iVar8 + 8))
+    vectorInstWord = regIndex << 0x15 | (*(ushort *)(scalarRecord + 0x18) + 5) * 0x10000 |
+            *(uint *)((uint)*(byte *)(scalarRecord + *(int *)(scalarRecord + 4) + 0x10) * 4 + *(int *)(scalarRecord + 8))
             & 0xffff | 0xd0000000;
 LAB_97bd9944:
     *codeWritePtr = vectorInstWord;
@@ -3750,65 +3750,65 @@ LAB_97bd9944:
     if (*(int *)(fieldInstWord + 0x700) != 0) {
       return;
     }
-    _memcpy(&local_50,fieldInstWord + 0x708,0x24);
-    puVar1 = local_50;
+    _memcpy(&descOffsets,fieldInstWord + 0x708,0x24);
+    offsetTable = descOffsets;
     fieldInstWord = *(ushort *)(fieldInstWord + 0x718) + 5;
-    _PPEmulatorVariableMaskFromSwizzle(&local_50);
-    if ((*(unsigned char *)((unsigned char *)&(local_34) + 0)) == '\x0f') {
-      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-      if ((((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) && (*puVar1 == 0)) {
+    _PPEmulatorVariableMaskFromSwizzle(&descOffsets);
+    if ((*(unsigned char *)((unsigned char *)&(descWriteMask) + 0)) == '\x0f') {
+      programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+      if ((((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 1)) && (*offsetTable == 0)) {
         codeCursor2 = *(uint **)(compiler + 0xe30);
         *codeCursor2 = regIndex << 0x10 | regIndex << 0xb | 0x12600484;
         *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
         return;
       }
-      if ((char)local_40 == '\0') {
-        if (*puVar1 == 0) {
+      if ((char)descStorage == '\0') {
+        if (*offsetTable == 0) {
           codeWritePtr = *(uint **)(compiler + 0xe30);
           vectorInstWord = regIndex << 0x15 | fieldInstWord * 0x800 | 0x7c0001ce;
           goto LAB_97bd9944;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
-        ppcInstWord = *puVar1 & 0xffff | 0x39e00000;
+        ppcInstWord = *offsetTable & 0xffff | 0x39e00000;
         fieldInstWord2 = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c0079ce;
       }
       else {
-        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
+        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,descOffsets,descBank,descSwizzle,descIndexInfo,descStorage,descFlags5,descType);
         ppcInstWord = 0x82ef0000;
         codeCursor2 = *(uint **)(compiler + 0xe30);
         fieldInstWord2 = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b9ce;
       }
     }
     else {
-      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-      if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 1)) {
+      programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+      if (((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 1)) {
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         codeCursor[1] = 0x10836a8c;
         *codeCursor = 0x10694c84;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 3;
         vectorInstWord2 = 0x1063212c;
-        if ((local_34 & 0x1000000) == 0) {
+        if ((descWriteMask & 0x1000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         codeCursor[2] = vectorInstWord2;
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         vectorInstWord2 = 0x1063212c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-        if ((local_34 & 0x2000000) == 0) {
+        if ((descWriteMask & 0x2000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         *codeCursor = vectorInstWord2;
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         vectorInstWord2 = 0x1063212c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-        if ((local_34 & 0x4000000) == 0) {
+        if ((descWriteMask & 0x4000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         *codeCursor = vectorInstWord2;
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         vectorInstWord2 = 0x1063212c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-        if ((local_34 & 0x8000000) == 0) {
+        if ((descWriteMask & 0x8000000) == 0) {
           vectorInstWord2 = 0x1063492c;
         }
         *codeCursor = vectorInstWord2;
@@ -3816,8 +3816,8 @@ LAB_97bd9944:
         vectorInstWord = regIndex << 0xb | 0x127300ea;
         goto LAB_97bd9944;
       }
-      iVar4 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-      if (((iVar4 == 0x8804) || (iVar4 == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(local_40) + 0)) == 9)) {
+      programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+      if (((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 9)) {
         codeCursor = *(undefined4 **)(compiler + 0xe30);
         *codeCursor = 0x39e00210;
         codeCursor[1] = regIndex << 0x15 | 0x7c0379ce;
@@ -3825,53 +3825,53 @@ LAB_97bd9944:
         codeCursor[2] = 0xc1a30218;
         goto LAB_97bd994c;
       }
-      if ((char)local_40 == '\0') {
-        if ((local_34 & 0x1000000) != 0) {
+      if ((char)descStorage == '\0') {
+        if ((descWriteMask & 0x1000000) != 0) {
           codeCursor2 = *(uint **)(compiler + 0xe30);
-          *codeCursor2 = (ushort)*puVar1 | 0x39e00000;
+          *codeCursor2 = (ushort)*offsetTable | 0x39e00000;
           codeCursor2[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
           *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
-        if ((local_34 & 0x2000000) != 0) {
+        if ((descWriteMask & 0x2000000) != 0) {
           codeCursor2 = *(uint **)(compiler + 0xe30);
-          *codeCursor2 = *(ushort *)((int)puVar1 + 6) | 0x39e00000;
+          *codeCursor2 = *(ushort *)((int)offsetTable + 6) | 0x39e00000;
           codeCursor2[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
           *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
-        if ((local_34 & 0x4000000) != 0) {
+        if ((descWriteMask & 0x4000000) != 0) {
           codeCursor2 = *(uint **)(compiler + 0xe30);
-          *codeCursor2 = *(ushort *)((int)puVar1 + 10) | 0x39e00000;
+          *codeCursor2 = *(ushort *)((int)offsetTable + 10) | 0x39e00000;
           codeCursor2[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
           *(uint **)(compiler + 0xe30) = codeCursor2 + 2;
         }
-        if ((local_34 & 0x8000000) == 0) {
+        if ((descWriteMask & 0x8000000) == 0) {
           return;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
-        ppcInstWord = *(ushort *)((int)puVar1 + 0xe) | 0x39e00000;
+        ppcInstWord = *(ushort *)((int)offsetTable + 0xe) | 0x39e00000;
         fieldInstWord2 = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00798e;
       }
       else {
-        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,local_50,local_4c,local_48,local_44,local_40,local_3c,local_38);
-        if ((local_34 & 0x1000000) != 0) {
+        ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(compiler,descOffsets,descBank,descSwizzle,descIndexInfo,descStorage,descFlags5,descType);
+        if ((descWriteMask & 0x1000000) != 0) {
           codeCursor = *(undefined4 **)(compiler + 0xe30);
           *codeCursor = 0x82ef0000;
           codeCursor[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b98e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
-        if ((local_34 & 0x2000000) != 0) {
+        if ((descWriteMask & 0x2000000) != 0) {
           codeCursor = *(undefined4 **)(compiler + 0xe30);
           *codeCursor = 0x82ef0004;
           codeCursor[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b98e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
-        if ((local_34 & 0x4000000) != 0) {
+        if ((descWriteMask & 0x4000000) != 0) {
           codeCursor = *(undefined4 **)(compiler + 0xe30);
           *codeCursor = 0x82ef0008;
           codeCursor[1] = regIndex << 0x15 | fieldInstWord * 0x10000 | 0x7c00b98e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
         }
-        if ((local_34 & 0x8000000) == 0) {
+        if ((descWriteMask & 0x8000000) == 0) {
           return;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
@@ -3921,79 +3921,81 @@ int _PPCRuntimeCompilerDirtyRegister(param_1, param_2)
 }
 
 /* _PPCRuntimeCompilerDirtyRegistersWithData @ 0x97bd99d4 (436 bytes) */
-int _PPCRuntimeCompilerDirtyRegistersWithData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
+int _PPCRuntimeCompilerDirtyRegistersWithData(compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType, opWord7, opWord8, element)
+  int compiler;
+  undefined4 opOffsets;
+  undefined4 opBank;
+  undefined4 opSwizzle;
+  undefined4 opIndexInfo;
+  undefined4 opStorage;
+  undefined4 opFlags5;
+  undefined4 opType;
+  undefined4 opWord7;
+  undefined4 opWord8;
+  undefined4 element;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char cVar1;
-  undefined4 uVar2;
-  int iVar3;
-  uint uVar4;
-  char *pcVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
+  int recordOffset;
+  int vectorRecordBytes;
+  unsigned int ghidra_home[8] = { compiler, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5, opType };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char swizzleByte;
+  undefined4 elementCopy;
+  int containsResult;
+  uint componentIndex;
+  char *operandSwizzlePtr;
+  int containsResultScalar;
+  uint regIndex;
+  int swizzleCountdown;
   
-  uVar2 = param_11;
-  uVar7 = 0;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  if (*(int *)(param_1 + 0xe4c) == 0) {
+  elementCopy = element;
+  regIndex = 0;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = opOffsets;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = opBank;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opSwizzle;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opIndexInfo;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = opStorage;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opFlags5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = opType;
+  if (*(int *)(compiler + 0xe4c) == 0) {
     do {
-      iVar6 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar7,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
-                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,uVar2);
-      if (iVar6 == 1) {
-        ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,uVar7);
+      containsResultScalar = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,regIndex,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opWord7,opWord8,elementCopy);
+      if (containsResultScalar == 1) {
+        ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,regIndex);
       }
-      uVar7 = uVar7 + 1;
-    } while (uVar7 < 0x20);
+      regIndex = regIndex + 1;
+    } while (regIndex < 0x20);
   }
   else {
-    iVar6 = 0;
+    recordOffset = 0;
     do {
-      iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar7,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
-                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),param_9,param_10,uVar2);
-      if (iVar3 - 1U < 3) {
-        uVar4 = 0;
-        iVar3 = iVar6 + param_1 + 0x700;
+      containsResult = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(compiler,regIndex,(*(unsigned int *)((unsigned char *)ghidra_home + 4)),(*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),
+                         (*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opWord7,opWord8,elementCopy);
+      if (containsResult - 1U < 3) {
+        componentIndex = 0;
+        vectorRecordBytes = recordOffset + compiler + 0x700;
         do {
-          iVar8 = 4;
-          pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
+          swizzleCountdown = 4;
+          operandSwizzlePtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
           do {
-            cVar1 = *pcVar5;
-            pcVar5 = pcVar5 + 1;
-            if (*(char *)(iVar3 + 0x10) == cVar1) {
-              *(undefined1 *)(iVar3 + 0x10) = 0xff;
+            swizzleByte = *operandSwizzlePtr;
+            operandSwizzlePtr = operandSwizzlePtr + 1;
+            if (*(char *)(vectorRecordBytes + 0x10) == swizzleByte) {
+              *(undefined1 *)(vectorRecordBytes + 0x10) = 0xff;
             }
-            iVar8 = iVar8 + -1;
-          } while (iVar8 != 0);
-          uVar4 = uVar4 + 1;
-          iVar3 = iVar3 + 1;
-        } while (uVar4 < 4);
-        iVar3 = iVar6 + param_1;
-        if ((((*(char *)(iVar3 + 0x710) == -1) && (*(char *)(iVar3 + 0x711) == -1)) &&
-            (*(char *)(iVar3 + 0x712) == -1)) && (*(char *)(iVar3 + 0x713) == -1)) {
-          ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,uVar7);
+            swizzleCountdown = swizzleCountdown + -1;
+          } while (swizzleCountdown != 0);
+          componentIndex = componentIndex + 1;
+          vectorRecordBytes = vectorRecordBytes + 1;
+        } while (componentIndex < 4);
+        containsResult = recordOffset + compiler;
+        if ((((*(char *)(containsResult + 0x710) == -1) && (*(char *)(containsResult + 0x711) == -1)) &&
+            (*(char *)(containsResult + 0x712) == -1)) && (*(char *)(containsResult + 0x713) == -1)) {
+          ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,regIndex);
         }
       }
-      uVar7 = uVar7 + 1;
-      iVar6 = iVar6 + 0x38;
-    } while (uVar7 < 0x20);
+      regIndex = regIndex + 1;
+      recordOffset = recordOffset + 0x38;
+    } while (regIndex < 0x20);
   }
   return;
 }
@@ -4153,20 +4155,23 @@ int _PPCRuntimeCompilerRegisterContainsData(compiler, regIndex, opOffsets, opBan
   undefined4 opWord8;
   int element;
 {
+  int swizzleCompare;
+  int vectorRecordOffset;
   unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  byte bVar1;
-  int iVar2;
-  byte *pbVar3;
-  int *piVar4;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
-  int local_20 [6];
+  byte recordSwizzleByte;
+  int scalarRecord;
+  byte *recordSwizzlePtr;
+  int *componentPresentPtr;
+  uint recordComponentIndex;
+  uint componentIndex;
+  int offsetsCompare;
+  int vectorRecord;
+  int componentPresent [6];
   
-  local_20[3] = 0;
-  local_20[0] = 0;
-  local_20[1] = 0;
-  local_20[2] = 0;
+  componentPresent[3] = 0;
+  componentPresent[0] = 0;
+  componentPresent[1] = 0;
+  componentPresent[2] = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = opOffsets;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opBank;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opSwizzle;
@@ -4174,54 +4179,54 @@ int _PPCRuntimeCompilerRegisterContainsData(compiler, regIndex, opOffsets, opBan
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opStorage;
   (*(uint *)((unsigned char *)ghidra_home + 28)) = opFlags5;
   if (*(int *)(compiler + 0xe4c) == 0) {
-    iVar2 = regIndex * 0x38 + compiler;
+    scalarRecord = regIndex * 0x38 + compiler;
     if ((((*(int *)(compiler + regIndex * 0x38) == 0) &&
-         (iVar7 = _memcmp(*(undefined4 *)(iVar2 + 8),opOffsets,0x10), iVar7 == 0)) &&
-        (*(short *)(iVar2 + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24)))) &&
-       (((*(char *)(iVar2 + *(int *)(iVar2 + 4) + 0x10) ==
+         (offsetsCompare = _memcmp(*(undefined4 *)(scalarRecord + 8),opOffsets,0x10), offsetsCompare == 0)) &&
+        (*(short *)(scalarRecord + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24)))) &&
+       (((*(char *)(scalarRecord + *(int *)(scalarRecord + 4) + 0x10) ==
           *(char *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + element) && ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0')) &&
-        (*(char *)(iVar2 + 0x1b) == '\0')))) {
+        (*(char *)(scalarRecord + 0x1b) == '\0')))) {
       return 1;
     }
   }
   else {
-    iVar2 = (regIndex + 0x20) * 0x38;
-    iVar7 = iVar2 + compiler;
-    if ((*(int *)(compiler + iVar2) == 0) &&
-       (iVar2 = _memcmp(*(undefined4 *)(iVar7 + 8),opOffsets,0x10), iVar2 == 0)) {
-      if ((*(short *)(iVar7 + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24))) &&
-         (((*(char *)((unsigned char *)ghidra_home + 27)) == '\0' && (*(char *)(iVar7 + 0x1b) == '\0')))) {
-        iVar2 = _memcmp(iVar7 + 0x10,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff);
-        if (iVar2 == 0) {
+    vectorRecordOffset = (regIndex + 0x20) * 0x38;
+    vectorRecord = vectorRecordOffset + compiler;
+    if ((*(int *)(compiler + vectorRecordOffset) == 0) &&
+       (vectorRecordOffset = _memcmp(*(undefined4 *)(vectorRecord + 8),opOffsets,0x10), vectorRecordOffset == 0)) {
+      if ((*(short *)(vectorRecord + 0x18) == (*(short *)((unsigned char *)ghidra_home + 24))) &&
+         (((*(char *)((unsigned char *)ghidra_home + 27)) == '\0' && (*(char *)(vectorRecord + 0x1b) == '\0')))) {
+        swizzleCompare = _memcmp(vectorRecord + 0x10,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff);
+        if (swizzleCompare == 0) {
           return 1;
         }
-        uVar6 = 0;
-        piVar4 = local_20;
+        componentIndex = 0;
+        componentPresentPtr = componentPresent;
         do {
-          if ((uVar6 < ((*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff)) &&
-             (*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + uVar6) < 4)) {
-            uVar5 = 0;
-            pbVar3 = (byte *)(iVar7 + 0x10);
+          if ((componentIndex < ((*(uint *)((unsigned char *)ghidra_home + 28)) >> 0x10 & 0xff)) &&
+             (*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + componentIndex) < 4)) {
+            recordComponentIndex = 0;
+            recordSwizzlePtr = (byte *)(vectorRecord + 0x10);
             do {
-              bVar1 = *pbVar3;
-              pbVar3 = pbVar3 + 1;
-              if (bVar1 == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + uVar6)) goto LAB_97bd9f54;
-              uVar5 = uVar5 + 1;
-            } while (uVar5 < 4);
+              recordSwizzleByte = *recordSwizzlePtr;
+              recordSwizzlePtr = recordSwizzlePtr + 1;
+              if (recordSwizzleByte == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + componentIndex)) goto LAB_97bd9f54;
+              recordComponentIndex = recordComponentIndex + 1;
+            } while (recordComponentIndex < 4);
           }
           else {
 LAB_97bd9f54:
-            *piVar4 = 1;
+            *componentPresentPtr = 1;
           }
-          uVar6 = uVar6 + 1;
-          piVar4 = piVar4 + 1;
-          if (3 < uVar6) {
-            if ((((local_20[0] != 0) && (local_20[1] != 0)) && (local_20[2] != 0)) &&
-               (local_20[3] != 0)) {
+          componentIndex = componentIndex + 1;
+          componentPresentPtr = componentPresentPtr + 1;
+          if (3 < componentIndex) {
+            if ((((componentPresent[0] != 0) && (componentPresent[1] != 0)) && (componentPresent[2] != 0)) &&
+               (componentPresent[3] != 0)) {
               return 2;
             }
-            if (((local_20[0] == 0) && (local_20[1] == 0)) &&
-               ((local_20[2] == 0 && (local_20[3] == 0)))) {
+            if (((componentPresent[0] == 0) && (componentPresent[1] == 0)) &&
+               ((componentPresent[2] == 0 && (componentPresent[3] == 0)))) {
               return 0;
             }
             return 3;
