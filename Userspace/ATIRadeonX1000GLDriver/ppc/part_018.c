@@ -7206,6 +7206,19 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   char *argR9;
   byte *argR10;
 {
+  uint *alphaAddrA;
+  uint *texUnit2;
+  uint *texOpcode;
+  uint *rgbAddrC;
+  uint *rgbAddrB;
+  uint *instructionRecord2;
+  uint *rsNextRecord2;
+  uint *instructionRecord;
+  uint *rsNextRecord;
+  uint *rsRecord2;
+  uint *rsRecord;
+  uint *rsScanRecord2;
+  uint *rsScanRecord;
   ushort rgbAuxB;
   ushort rgbAuxA;
   uint rgbAddrA;
@@ -7260,7 +7273,7 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   undefined **ppuVar38;
   bool bVar40;
   undefined *puVar39;
-  uint *puVar41;
+  uint *statByteCursor;
   double dVar42;
   uint dumpLabelSlot;
   uint *dumpIdSlot;
@@ -7314,7 +7327,7 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   uint rgbModC;
   uint rgbModB;
   uint rgbModA;
-  byte *local_ac;
+  byte *alphaSelectC2;
   uint previousIsAlu;
   uint *aluNumber;
   uint recordCount;
@@ -7369,28 +7382,28 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
       ((int (*)())FUN_000d03b4)(0,"     Nominal cycle count:    %2d\n",uVar19,puVar13,argR7,argR8,argR9,
                    argR10);
       ((int (*)())FUN_000d03b4)(0,"     Tex lookup counts:     ",uVar19,puVar13,argR7,argR8,argR9,argR10);
-      puVar41 = pixelShader;
+      statByteCursor = pixelShader;
       do {
-        uVar19 = (uint)*(byte *)((int)puVar41 + 0x2a);
+        uVar19 = (uint)*(byte *)((int)statByteCursor + 0x2a);
         ((int (*)())FUN_000d03b4)(0," %2d",uVar19,puVar13,argR7,argR8,argR9,argR10);
         bVar24 = iVar31 != 0xf;
-        puVar41 = (uint *)((int)puVar41 + 1);
+        statByteCursor = (uint *)((int)statByteCursor + 1);
         iVar31 = iVar31 + 1;
       } while (bVar24);
       ((int (*)())FUN_000d03b4)(0,"\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     }
     ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     if ((pixelShader[0x12] == 1) && (recordCount != 0)) {
-      puVar32 = pixelShader + 0x24;
+      rsScanRecord = pixelShader + 0x24;
       uVar37 = 1;
-      puVar41 = puVar32;
-      puVar33 = pixelShader + 0x12;
+      rsNextRecord = rsScanRecord;
+      rsRecord = pixelShader + 0x12;
       do {
-        puVar35 = puVar41;
+        puVar35 = rsNextRecord;
         uVar19 = uVar37 - 1;
         ((int (*)())FUN_000d03b4)(0,"   rs %02d:",uVar19,puVar13,argR7,argR8,argR9,argR10);
-        if (*(char *)((int)puVar33 + 0xb) == '\0') {
-          if (*(char *)((int)puVar33 + 9) != '\0') {
+        if (*(char *)((int)rsRecord + 0xb) == '\0') {
+          if (*(char *)((int)rsRecord + 9) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"                         ",uVar19,puVar13,argR7,argR8,argR9,
                          argR10);
             goto LAB_000d3b80;
@@ -7399,19 +7412,19 @@ LAB_000d3be0:
           ((int (*)())FUN_000d03b4)(0,"\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
         }
         else {
-          uVar19 = (uint)*(ushort *)((int)puVar33 + 6);
-          argR7 = (uint)*(byte *)((int)puVar33 + 10);
-          puVar13 = (uint *)((*(byte *)((int)puVar33 + 0xf) & 0xf ^ 0xf) * 5 + 0x1dc279);
+          uVar19 = (uint)*(ushort *)((int)rsRecord + 6);
+          argR7 = (uint)*(byte *)((int)rsRecord + 10);
+          puVar13 = (uint *)((*(byte *)((int)rsRecord + 0xf) & 0xf ^ 0xf) * 5 + 0x1dc279);
           ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
-          if (*(char *)((int)puVar33 + 0xd) == '\0') {
-            if (*(char *)((int)puVar33 + 0xb) == '\x02') {
+          if (*(char *)((int)rsRecord + 0xd) == '\0') {
+            if (*(char *)((int)rsRecord + 0xb) == '\x02') {
               ((int (*)())FUN_000d03b4)(0," fbuf  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
             }
-            else if (*(char *)((int)puVar33 + 0xb) == '\x03') {
+            else if (*(char *)((int)rsRecord + 0xb) == '\x03') {
               ((int (*)())FUN_000d03b4)(0," back  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
             }
             else {
-              if (*(char *)((int)puVar33 + 9) == '\0') goto LAB_000d3be0;
+              if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
               ((int (*)())FUN_000d03b4)(0,"       ",uVar19,puVar13,argR7,argR8,argR9,argR10);
             }
           }
@@ -7419,19 +7432,19 @@ LAB_000d3be0:
             ((int (*)())FUN_000d03b4)(0," biased",uVar19,puVar13,argR7,argR8,argR9,argR10);
           }
 LAB_000d3b80:
-          if (*(char *)((int)puVar33 + 9) == '\0') goto LAB_000d3be0;
-          uVar19 = (uint)*(ushort *)(puVar33 + 1);
-          argR7 = (uint)*(byte *)(puVar33 + 2);
-          puVar13 = (uint *)((*(byte *)((int)puVar33 + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
+          if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
+          uVar19 = (uint)*(ushort *)(rsRecord + 1);
+          argR7 = (uint)*(byte *)(rsRecord + 2);
+          puVar13 = (uint *)((*(byte *)((int)rsRecord + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
           ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
-          if (*(char *)(puVar33 + 3) == '\0') goto LAB_000d3be0;
+          if (*(char *)(rsRecord + 3) == '\0') goto LAB_000d3be0;
           ((int (*)())FUN_000d03b4)(0," adjusted\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
         }
         uVar37 = uVar37 + 1;
-        if (*puVar32 != 1) break;
-        puVar32 = puVar32 + 0x12;
-        puVar41 = puVar35 + 0x12;
-        puVar33 = puVar35;
+        if (*rsScanRecord != 1) break;
+        rsScanRecord = rsScanRecord + 0x12;
+        rsNextRecord = puVar35 + 0x12;
+        rsRecord = puVar35;
       } while (uVar37 <= recordCount);
     }
     else {
@@ -7440,14 +7453,14 @@ LAB_000d3b80:
     ((int (*)())FUN_000d03b4)(0," \n US Program:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     if (uVar37 <= recordCount) {
       uVar26 = 0;
-      puVar41 = pixelShader + uVar37 * 0x12;
+      instructionRecord = pixelShader + uVar37 * 0x12;
       previousIsAlu = 1;
       aluNumber = (uint *)0x0;
       texNumber = 0;
       uVar19 = 0;
       do {
-        uVar27 = *puVar41;
-        if (((uVar27 == 2) && ((previousIsAlu != 0 || (*(char *)(puVar41 + 8) != '\0')))) ||
+        uVar27 = *instructionRecord;
+        if (((uVar27 == 2) && ((previousIsAlu != 0 || (*(char *)(instructionRecord + 8) != '\0')))) ||
            (uVar26 == 0)) {
           if (uVar26 < 0x34) {
             (*(unsigned short *)((unsigned char *)&(predicateText) + 1)) = (ushort)(*(unsigned int *)((unsigned char *)&(predicateText) + 0)) & 0xff;
@@ -7465,27 +7478,27 @@ LAB_000d3b80:
           (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(cVar9,(*(unsigned short *)((unsigned char *)&(predicateText) + 1)));
           ((int (*)())FUN_000d03b4)(0," \n   Level %s:\n",&predicateText,puVar13,uVar19,argR8,argR9,argR10);
           uVar26 = uVar26 + 1;
-          uVar27 = *puVar41;
+          uVar27 = *instructionRecord;
         }
         previousIsAlu = (uint)(uVar27 - 3 < 2);
         if (uVar27 == 2) {
           ((int (*)())FUN_000d03b4)(0,"     tex %02d    :  ",texNumber,puVar13,uVar19,argR8,argR9,argR10);
-          texSrcReg = (uint)*(ushort *)((int)puVar41 + 0xe);
-          texDestReg = (uint)*(ushort *)(puVar41 + 3);
-          texUnit = (uint)*(byte *)((int)puVar41 + 0x19);
-          if ((*(byte *)((int)puVar41 + 0x1a) < 5) &&
-             ((1 << ((int)(char)*(byte *)((int)puVar41 + 0x1a) & 0x3fU) & 0x1aU) != 0)) {
+          texSrcReg = (uint)*(ushort *)((int)instructionRecord + 0xe);
+          texDestReg = (uint)*(ushort *)(instructionRecord + 3);
+          texUnit = (uint)*(byte *)((int)instructionRecord + 0x19);
+          if ((*(byte *)((int)instructionRecord + 0x1a) < 5) &&
+             ((1 << ((int)(char)*(byte *)((int)instructionRecord + 0x1a) & 0x3fU) & 0x1aU) != 0)) {
             ((int (*)())FUN_000d03b4)(0,"r%02d.rgba = ",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
           }
-          puVar33 = (uint *)(uint)*(byte *)((int)puVar41 + 0x1a);
-          puVar13 = (uint *)(*(byte *)((int)puVar41 + 0x1f) & 0xf ^ 0xf);
-          if (((unsigned char *)0x4) < puVar33) {
-            ((int (*)())FUN_000d03b4)(0,"???()\n",texDestReg,puVar13,uVar19,argR8,puVar33,argR10);
-            argR9 = (char *)puVar33;
+          texOpcode = (uint *)(uint)*(byte *)((int)instructionRecord + 0x1a);
+          puVar13 = (uint *)(*(byte *)((int)instructionRecord + 0x1f) & 0xf ^ 0xf);
+          if (((unsigned char *)0x4) < texOpcode) {
+            ((int (*)())FUN_000d03b4)(0,"???()\n",texDestReg,puVar13,uVar19,argR8,texOpcode,argR10);
+            argR9 = (char *)texOpcode;
           }
           else {
             argR9 = (char *)(0);
-            switch((int)puVar33) {
+            switch((int)texOpcode) {
             case 0x0:
               ((int (*)())FUN_000d03b4)(0,"NOP\n",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
               break;
@@ -7512,8 +7525,8 @@ LAB_000d3b80:
           texNumber = texNumber + 1;
         }
         else if ((1 < uVar27) && (uVar27 < 5)) {
-          local_cc = (byte *)((int)puVar41 + 0x31);
-          switch(*(undefined1 *)((int)puVar41 + 0x31)) {
+          local_cc = (byte *)((int)instructionRecord + 0x31);
+          switch(*(undefined1 *)((int)instructionRecord + 0x31)) {
           case 0:
           case 3:
           case 7:
@@ -7549,9 +7562,9 @@ LAB_000d3b80:
             uVar19 = 0;
             iVar31 = 0;
           }
-          local_c8 = puVar41 + 0x10;
-          if (*(byte *)(puVar41 + 0x10) < 0xc) {
-            uVar28 = 1 << ((int)(char)*(byte *)(puVar41 + 0x10) & 0x3fU);
+          local_c8 = instructionRecord + 0x10;
+          if (*(byte *)(instructionRecord + 0x10) < 0xc) {
+            uVar28 = 1 << ((int)(char)*(byte *)(instructionRecord + 0x10) & 0x3fU);
             if ((uVar28 & 0x61) == 0) {
               if ((uVar28 & 0xc) == 0) {
                 if ((uVar28 & 0xf80) != 0) {
@@ -7566,24 +7579,24 @@ LAB_000d3b80:
               uVar27 = 7;
             }
           }
-          local_ac = (byte *)(uint)*(byte *)((int)puVar41 + 0x3b);
-          rgbAddrA2 = (uint)*(ushort *)((int)puVar41 + 0xe);
-          puVar33 = (uint *)(uint)*(ushort *)(puVar41 + 4);
-          puVar32 = (uint *)(uint)*(ushort *)((int)puVar41 + 0x12);
-          puVar35 = (uint *)(uint)*(ushort *)((int)puVar41 + 0x1a);
-          argR8 = (uint *)(uint)*(ushort *)(puVar41 + 7);
-          argR9 = (char *)(uint)*(ushort *)((int)puVar41 + 0x1e);
-          uVar30 = (uint)*(byte *)((int)puVar41 + 0x2a);
-          rgbSelectB = (uint)*(byte *)((int)puVar41 + 0x2b);
-          uVar15 = (uint)*(byte *)(puVar41 + 0xb);
-          alphaSelectA = (uint)*(byte *)((int)puVar41 + 0x39);
-          alphaSelectB2 = (uint)*(byte *)((int)puVar41 + 0x3a);
-          rgbModA = (uint)*(byte *)((int)puVar41 + 0x2d);
-          rgbModB = (uint)*(byte *)((int)puVar41 + 0x2e);
-          rgbModC = (uint)*(byte *)((int)puVar41 + 0x2f);
-          local_bc = (uint)*(byte *)(puVar41 + 0xf);
-          alphaModB = (uint)*(byte *)((int)puVar41 + 0x3d);
-          alphaModC = (uint)*(byte *)((int)puVar41 + 0x3e);
+          alphaSelectC2 = (byte *)(uint)*(byte *)((int)instructionRecord + 0x3b);
+          rgbAddrA2 = (uint)*(ushort *)((int)instructionRecord + 0xe);
+          puVar33 = (uint *)(uint)*(ushort *)(instructionRecord + 4);
+          puVar32 = (uint *)(uint)*(ushort *)((int)instructionRecord + 0x12);
+          puVar35 = (uint *)(uint)*(ushort *)((int)instructionRecord + 0x1a);
+          argR8 = (uint *)(uint)*(ushort *)(instructionRecord + 7);
+          argR9 = (char *)(uint)*(ushort *)((int)instructionRecord + 0x1e);
+          uVar30 = (uint)*(byte *)((int)instructionRecord + 0x2a);
+          rgbSelectB = (uint)*(byte *)((int)instructionRecord + 0x2b);
+          uVar15 = (uint)*(byte *)(instructionRecord + 0xb);
+          alphaSelectA = (uint)*(byte *)((int)instructionRecord + 0x39);
+          alphaSelectB2 = (uint)*(byte *)((int)instructionRecord + 0x3a);
+          rgbModA = (uint)*(byte *)((int)instructionRecord + 0x2d);
+          rgbModB = (uint)*(byte *)((int)instructionRecord + 0x2e);
+          rgbModC = (uint)*(byte *)((int)instructionRecord + 0x2f);
+          local_bc = (uint)*(byte *)(instructionRecord + 0xf);
+          alphaModB = (uint)*(byte *)((int)instructionRecord + 0x3d);
+          alphaModC = (uint)*(byte *)((int)instructionRecord + 0x3e);
           if (bVar24) {
             uVar23 = (uint)(uVar30 - 0xf < 4);
           }
@@ -7612,16 +7625,16 @@ LAB_000d3b80:
             bVar24 = (bool)(bVar24 | (alphaSelectB2 ^ 0xf) == 0);
           }
           if ((uVar27 & 4) != 0) {
-            uVar19 = -((uint)local_ac ^ 0xf);
-            uVar23 = uVar23 | local_ac + -0xc < (byte *)((int)((unsigned char *)0x0) + 3);
-            bVar24 = (bool)(bVar24 | ((uint)local_ac ^ 0xf) == 0);
+            uVar19 = -((uint)alphaSelectC2 ^ 0xf);
+            uVar23 = uVar23 | alphaSelectC2 + -0xc < (byte *)((int)((unsigned char *)0x0) + 3);
+            bVar24 = (bool)(bVar24 | ((uint)alphaSelectC2 ^ 0xf) == 0);
           }
           puVar21 = puVar13;
           if (uVar23 != 0) {
             puVar17 = aluNumber;
             ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.rgb = ",aluNumber,puVar13,uVar19,uVar27,uVar23,
                          iVar31);
-            cVar9 = *(char *)(puVar41 + 0xc);
+            cVar9 = *(char *)(instructionRecord + 0xc);
             if (cVar9 == '\x01') {
               puVar21 = &srcpTextA;
               ((int (*)())FUN_000d0450)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
@@ -7654,7 +7667,7 @@ LAB_000d3b80:
             puVar17 = aluNumber;
             ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.a   = ",aluNumber,puVar21,uVar19,uVar27,uVar23,
                          iVar31);
-            alphaPreOp = *(char *)((int)puVar41 + 0x3f);
+            alphaPreOp = *(char *)((int)instructionRecord + 0x3f);
             if (alphaPreOp == '\x01') {
               puVar13 = &srcpTextA;
               ((int (*)())FUN_000d0450)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
@@ -7684,13 +7697,13 @@ LAB_000d3b80:
           }
           puVar21 = aluNumber;
           ((int (*)())FUN_000d03b4)(0,"     alu %02d rgb:  ",aluNumber,puVar13,uVar19,uVar27,uVar23,iVar31);
-          uVar18 = (uint)*(byte *)((int)puVar41 + 0x15);
-          bVar3 = *(byte *)(puVar41 + 5);
+          uVar18 = (uint)*(byte *)((int)instructionRecord + 0x15);
+          bVar3 = *(byte *)(instructionRecord + 5);
           if (uVar18 == 0) {
             ((int (*)())FUN_000d03b4)(0,"           ",puVar21,0,uVar19,uVar27,uVar23,iVar31);
           }
           else {
-            puVar21 = (uint *)(uint)*(byte *)((int)puVar41 + 0x16);
+            puVar21 = (uint *)(uint)*(byte *)((int)instructionRecord + 0x16);
             uVar18 = uVar18 * 4 + 0x1dc239;
             ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
@@ -7698,11 +7711,11 @@ LAB_000d3b80:
             ((int (*)())FUN_000d03b4)(0,"          ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
           else {
-            puVar21 = (uint *)(uint)*(ushort *)(puVar41 + 3);
+            puVar21 = (uint *)(uint)*(ushort *)(instructionRecord + 3);
             uVar18 = (uint)bVar3 * 4 + 0x1dc239;
             ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
-          if (*(char *)((int)puVar41 + 0x33) != '\0') {
+          if (*(char *)((int)instructionRecord + 0x33) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"clamped ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
           local_68 = operandText2;
@@ -7716,8 +7729,8 @@ LAB_000d3b80:
           ((int (*)())FUN_000d0888)(puVar21,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectA,local_bc);
           puVar17 = operandText0;
           ((int (*)())FUN_000d0888)(puVar13,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectB2,alphaModB);
-          argR10 = local_ac;
-          ((int (*)())FUN_000d0888)(puVar17,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,local_ac,alphaModC);
+          argR10 = alphaSelectC2;
+          ((int (*)())FUN_000d0888)(puVar17,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectC2,alphaModC);
           bVar3 = *local_cc;
           if (bVar3 < 0xb) {
             argR9 = (char *)(0);
@@ -7782,7 +7795,7 @@ LAB_000d3b80:
 switchD_000d4578_caseD_6:
             ((int (*)())FUN_000d03b4)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
-          bVar3 = *(byte *)((int)puVar41 + 0x32);
+          bVar3 = *(byte *)((int)instructionRecord + 0x32);
           if (bVar3 < 7) {
             argR9 = (char *)(0);
             switch(bVar3) {
@@ -7813,11 +7826,11 @@ switchD_000d4578_caseD_6:
           }
           puVar33 = aluNumber;
           ((int (*)())FUN_000d03b4)(0,"          alpha:  ",aluNumber,puVar32,puVar35,argR8,argR9,argR10);
-          alphaTempEnable = *(char *)(puVar41 + 8);
-          bVar24 = *(char *)((int)puVar41 + 0x21) != '\0';
-          depthWrite = *(char *)((int)puVar41 + 0x23);
+          alphaTempEnable = *(char *)(instructionRecord + 8);
+          bVar24 = *(char *)((int)instructionRecord + 0x21) != '\0';
+          depthWrite = *(char *)((int)instructionRecord + 0x23);
           if (bVar24) {
-            puVar33 = (uint *)(uint)*(byte *)((int)puVar41 + 0x22);
+            puVar33 = (uint *)(uint)*(byte *)((int)instructionRecord + 0x22);
             ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           bVar2 = depthWrite != '\0';
@@ -7831,10 +7844,10 @@ switchD_000d4578_caseD_6:
             ((int (*)())FUN_000d03b4)(0,"          ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           else {
-            puVar33 = (uint *)(uint)*(ushort *)(puVar41 + 6);
+            puVar33 = (uint *)(uint)*(ushort *)(instructionRecord + 6);
             ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
-          if (*(char *)((int)puVar41 + 0x42) != '\0') {
+          if (*(char *)((int)instructionRecord + 0x42) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"clamped ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           bVar3 = *(byte *)local_c8;
@@ -7899,7 +7912,7 @@ switchD_000d489c_caseD_4:
             puVar13 = puVar32;
             puVar17 = puVar35;
           }
-          bVar3 = *(byte *)((int)puVar41 + 0x41);
+          bVar3 = *(byte *)((int)instructionRecord + 0x41);
           if (bVar3 < 7) {
             argR9 = (char *)(0);
             switch(bVar3) {
@@ -7928,14 +7941,14 @@ switchD_000d489c_caseD_4:
           else {
             ((int (*)())FUN_000d03b4)(0,"*???\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
           }
-          if (*(char *)(puVar41 + 0xd) != '\0') {
+          if (*(char *)(instructionRecord + 0xd) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"     alu %02d post-NOP\n",aluNumber,puVar13,puVar17,argR8,argR9,
                          argR10);
           }
           aluNumber = (uint *)((int)aluNumber + 1);
         }
         uVar37 = uVar37 + 1;
-        puVar41 = puVar41 + 0x12;
+        instructionRecord = instructionRecord + 0x12;
         argR7 = recordCount;
         uVar19 = recordCount;
       } while (uVar37 <= recordCount);
@@ -8055,17 +8068,17 @@ switchD_000d489c_caseD_4:
     }
     ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
     if ((pixelShader[0x12] == 1) && (0 < (int)recordCount2)) {
-      puVar32 = pixelShader + 0x24;
+      rsScanRecord2 = pixelShader + 0x24;
       iVar31 = 1;
-      puVar41 = puVar32;
-      puVar33 = pixelShader + 0x12;
+      rsNextRecord2 = rsScanRecord2;
+      rsRecord2 = pixelShader + 0x12;
       do {
-        puVar35 = puVar41;
+        puVar35 = rsNextRecord2;
         puVar13 = (uint *)(iVar31 + -1);
         ((int (*)())FUN_000d03b4)(0,"   rs %02d:",puVar13,argR6,uVar19,argR8,argR9,argR10);
-        cVar9 = *(char *)((int)puVar33 + 0xb);
+        cVar9 = *(char *)((int)rsRecord2 + 0xb);
         if (cVar9 == '\0') {
-          if (*(char *)((int)puVar33 + 9) != '\0') {
+          if (*(char *)((int)rsRecord2 + 9) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"                         ",puVar13,argR6,uVar19,argR8,argR9,
                          argR10);
             goto LAB_000d1afc;
@@ -8074,48 +8087,48 @@ LAB_000d1b5c:
           ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
         }
         else {
-          uVar37 = *(byte *)((int)puVar33 + 0xf) & 0xf ^ 0xf;
+          uVar37 = *(byte *)((int)rsRecord2 + 0xf) & 0xf ^ 0xf;
           if (cVar9 == '\x01') {
-            puVar13 = (uint *)(uint)*(ushort *)((int)puVar33 + 6);
-            uVar19 = (uint)*(byte *)((int)puVar33 + 10);
+            puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
+            uVar19 = (uint)*(byte *)((int)rsRecord2 + 10);
             argR6 = (char *)(uVar37 * 5 + 0x1dc279);
             ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
-            if (*(char *)((int)puVar33 + 0xd) == '\0') {
-              cVar9 = *(char *)((int)puVar33 + 0xb);
+            if (*(char *)((int)rsRecord2 + 0xd) == '\0') {
+              cVar9 = *(char *)((int)rsRecord2 + 0xb);
             }
             else {
               ((int (*)())FUN_000d03b4)(0," biased",puVar13,argR6,uVar19,argR8,argR9,argR10);
-              cVar9 = *(char *)((int)puVar33 + 0xb);
+              cVar9 = *(char *)((int)rsRecord2 + 0xb);
             }
           }
           if (cVar9 == '\x02') {
-            puVar13 = (uint *)(uint)*(ushort *)((int)puVar33 + 6);
+            puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
             argR6 = (char *)(uVar37 * 5 + 0x1dc279);
             ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = fbuf",puVar13,argR6,uVar19,argR8,argR9,argR10);
           }
           else if (cVar9 == '\x03') {
-            puVar13 = (uint *)(uint)*(ushort *)((int)puVar33 + 6);
+            puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
             argR6 = (char *)(uVar37 * 5 + 0x1dc279);
             ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = back",puVar13,argR6,uVar19,argR8,argR9,argR10);
           }
           else {
-            if (*(char *)((int)puVar33 + 9) == '\0') goto LAB_000d1b5c;
+            if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
             ((int (*)())FUN_000d03b4)(0,"       ",puVar13,argR6,uVar19,argR8,argR9,argR10);
           }
 LAB_000d1afc:
-          if (*(char *)((int)puVar33 + 9) == '\0') goto LAB_000d1b5c;
-          puVar13 = (uint *)(uint)*(ushort *)(puVar33 + 1);
-          uVar19 = (uint)*(byte *)(puVar33 + 2);
-          argR6 = (char *)((*(byte *)((int)puVar33 + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
+          if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
+          puVar13 = (uint *)(uint)*(ushort *)(rsRecord2 + 1);
+          uVar19 = (uint)*(byte *)(rsRecord2 + 2);
+          argR6 = (char *)((*(byte *)((int)rsRecord2 + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
           ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
-          if (*(char *)(puVar33 + 3) == '\0') goto LAB_000d1b5c;
+          if (*(char *)(rsRecord2 + 3) == '\0') goto LAB_000d1b5c;
           ((int (*)())FUN_000d03b4)(0," adjusted\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
         }
         iVar31 = iVar31 + 1;
-        if (*puVar32 != 1) break;
-        puVar32 = puVar32 + 0x12;
-        puVar41 = puVar35 + 0x12;
-        puVar33 = puVar35;
+        if (*rsScanRecord2 != 1) break;
+        rsScanRecord2 = rsScanRecord2 + 0x12;
+        rsNextRecord2 = puVar35 + 0x12;
+        rsRecord2 = puVar35;
       } while (iVar31 <= (int)recordCount2);
     }
     else {
@@ -8126,7 +8139,7 @@ LAB_000d1afc:
     ((int (*)())FUN_000d03b4)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
     if (iVar31 <= (int)recordCount2) {
       local_78 = 0;
-      puVar41 = pixelShader + iVar31 * 0x12;
+      instructionRecord2 = pixelShader + iVar31 * 0x12;
       instructionNumber = 0;
       aluIndex = (uint *)0x0;
       texIndex = 0;
@@ -8134,7 +8147,7 @@ LAB_000d1afc:
       local_74 = 0;
       local_ec = 0;
       do {
-        if (*(char *)(puVar41 + 7) == '\0') {
+        if (*(char *)(instructionRecord2 + 7) == '\0') {
           ignUncText = ignUncText & 0xffffff;
         }
         else {
@@ -8149,7 +8162,7 @@ LAB_000d1afc:
           ignUncText4[3] = s_ign_unc_001a734c[7];
           ignUncText8 = s_ign_unc_001a734c[8];
         }
-        if (*(char *)(puVar41 + 1) == '\0') {
+        if (*(char *)(instructionRecord2 + 1) == '\0') {
           semWaitText = semWaitText & 0xffffff;
         }
         else {
@@ -8165,7 +8178,7 @@ LAB_000d1afc:
           semWaitText8[0] = s_sem_wait_001a7358[8];
           semWaitText8[1] = s_sem_wait_001a7358[9];
         }
-        if (*(char *)((int)puVar41 + 0xb) == '\0') {
+        if (*(char *)((int)instructionRecord2 + 0xb) == '\0') {
           aluWaitText = aluWaitText & 0xffffff;
         }
         else {
@@ -8181,17 +8194,17 @@ LAB_000d1afc:
           aluWaitText8[0] = s_alu_wait_001a7364[8];
           aluWaitText8[1] = s_alu_wait_001a7364[9];
         }
-        uVar37 = *puVar41;
+        uVar37 = *instructionRecord2;
         if (uVar37 == 2) {
           ((int (*)())FUN_000d03b4)(0,"  %d tex %02d    :  ",instructionNumber,texIndex,uVar19,argR8,argR9,argR10);
-          bVar3 = *(byte *)((int)puVar41 + 0x1d);
-          texSrcReg2 = *(ushort *)((int)puVar41 + 0xe);
+          bVar3 = *(byte *)((int)instructionRecord2 + 0x1d);
+          texSrcReg2 = *(ushort *)((int)instructionRecord2 + 0xe);
           puVar13 = (uint *)(uint)texSrcReg2;
-          texDestReg2 = *(ushort *)(puVar41 + 3);
-          uVar19 = (*(byte *)((int)puVar41 + 0x1e) & 0x1f) << 3 | (uint)bVar3;
-          puVar33 = (uint *)(uint)*(byte *)((int)puVar41 + 0x19);
+          texDestReg2 = *(ushort *)(instructionRecord2 + 3);
+          uVar19 = (*(byte *)((int)instructionRecord2 + 0x1e) & 0x1f) << 3 | (uint)bVar3;
+          texUnit2 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x19);
           bVar24 = (bVar3 & 1) != 0;
-          texWriteMask = *(byte *)(puVar41 + 5);
+          texWriteMask = *(byte *)(instructionRecord2 + 5);
           if (bVar24) {
             pcVar14 = (char *)((texWriteMask >> 4 & 0xc) + 0x1dc259);
           }
@@ -8220,12 +8233,12 @@ LAB_000d1afc:
             pcVar22 = "_";
           }
           FUN_001a32d0(writeMaskText,"%s%s%s%s",pcVar14,pcVar16,pcVar20,pcVar22,uVar19,argR10);
-          if ((*(byte *)((int)puVar41 + 0x1a) < 7) &&
-             ((1 << ((int)(char)*(byte *)((int)puVar41 + 0x1a) & 0x3fU) & 0x7aU) != 0)) {
+          if ((*(byte *)((int)instructionRecord2 + 0x1a) < 7) &&
+             ((1 << ((int)(char)*(byte *)((int)instructionRecord2 + 0x1a) & 0x3fU) & 0x7aU) != 0)) {
             ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",(uint)texDestReg2,writeMaskText,pcVar20,pcVar22,uVar19,argR10);
           }
-          if (*(byte *)((int)puVar41 + 0x1a) == 2) {
-            bVar3 = *(byte *)((int)puVar41 + 0x15);
+          if (*(byte *)((int)instructionRecord2 + 0x1a) == 2) {
+            bVar3 = *(byte *)((int)instructionRecord2 + 0x15);
             argR9 = (char *)(uint)bVar3;
             if (bVar24) {
               pcVar16 = (char *)((bVar3 >> 4 & 0xc) + 0x1dc259);
@@ -8253,10 +8266,10 @@ LAB_000d1afc:
             }
           }
           else {
-            local_78 = (uint)*(byte *)((int)puVar41 + 0x1f);
-            bVar3 = *(byte *)((int)puVar41 + 0x15);
+            local_78 = (uint)*(byte *)((int)instructionRecord2 + 0x1f);
+            bVar3 = *(byte *)((int)instructionRecord2 + 0x15);
             argR9 = (char *)(uint)bVar3;
-            if ((*(byte *)((int)puVar41 + 0x1f) & 1) == 0) {
+            if ((*(byte *)((int)instructionRecord2 + 0x1f) & 1) == 0) {
               argR10 = (byte *)(bVar3 & 0xc);
               argR9 = (char *)(((uint)argR9 & 3) * 4);
               argR8 = (uint *)((int)argR9 + 0x1dc259);
@@ -8281,7 +8294,7 @@ LAB_000d1afc:
             FUN_001a32d0(registerText,"r[AL+%02d]",puVar13,argR6,pcVar14,argR8,argR9,argR10);
           }
           puVar35 = registerText;
-          if (*(char *)((int)puVar41 + 0x1b) == '\0') {
+          if (*(char *)((int)instructionRecord2 + 0x1b) == '\0') {
             semGrabText = semGrabText & 0xffffff;
           }
           else {
@@ -8297,7 +8310,7 @@ LAB_000d1afc:
             semGrabText8[0] = s_sem_grab_001a73ac[8];
             semGrabText8[1] = s_sem_grab_001a73ac[9];
           }
-          bVar3 = *(byte *)((int)puVar41 + 0x1a);
+          bVar3 = *(byte *)((int)instructionRecord2 + 0x1a);
           if (bVar3 < 8) {
             argR9 = (char *)(0);
             switch(bVar3) {
@@ -8307,11 +8320,11 @@ LAB_000d1afc:
             case 1:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,puVar33,argR8,
+              ((int (*)())FUN_000d03b4)(0,"lookup(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
                            argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
-              pcVar14 = (char *)puVar33;
+              pcVar14 = (char *)texUnit2;
               break;
             case 2:
               pcVar14 = (char *)&semWaitText;
@@ -8324,32 +8337,32 @@ LAB_000d1afc:
             case 3:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_proj(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,puVar33,argR8,
+              ((int (*)())FUN_000d03b4)(0,"lookup_proj(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
                            argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
-              pcVar14 = (char *)puVar33;
+              pcVar14 = (char *)texUnit2;
               break;
             case 4:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,puVar33,
+              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
                            argR8,argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
-              pcVar14 = (char *)puVar33;
+              pcVar14 = (char *)texUnit2;
               break;
             case 5:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_lod(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,puVar33,argR8,
+              ((int (*)())FUN_000d03b4)(0,"lookup_lod(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
                            argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
-              pcVar14 = (char *)puVar33;
+              pcVar14 = (char *)texUnit2;
               break;
             case 6:
-              bVar3 = *(byte *)((int)puVar41 + 0x16);
+              bVar3 = *(byte *)((int)instructionRecord2 + 0x16);
               uVar19 = (uint)bVar3;
               bVar24 = (local_78 & 1) == 0;
               if (bVar24) {
@@ -8368,9 +8381,9 @@ LAB_000d1afc:
               }
               argR8 = dxSwizzleTextA;
               FUN_001a32d0(argR8,"%s%s%s%s",pcVar20,pcVar14,pbVar25,pcVar16,uVar19,argR10);
-              bVar3 = *(byte *)((int)puVar41 + 0x16);
+              bVar3 = *(byte *)((int)instructionRecord2 + 0x16);
               uVar19 = (uint)bVar3;
-              pcVar14 = (char *)(uint)*(ushort *)(puVar41 + 4);
+              pcVar14 = (char *)(uint)*(ushort *)(instructionRecord2 + 4);
               if (bVar24) {
                 argR10 = (byte *)(bVar3 & 0xc);
                 uVar19 = (uVar19 & 3) * 4;
@@ -8386,7 +8399,7 @@ LAB_000d1afc:
                 pcVar20 = pcVar22;
               }
               FUN_001a32d0(operandText0,"%s%s%s%s",pcVar22,pcVar16,pbVar25,pcVar20,uVar19,argR10);
-              argR9 = (char *)(uint)*(ushort *)((int)puVar41 + 0x12);
+              argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x12);
               in_stack_fffffd2c = &semWaitText;
               ((int (*)())FUN_000d03b4)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",puVar35,
                            puVar32,pcVar14,argR8,argR9,operandText0);
@@ -8396,11 +8409,11 @@ LAB_000d1afc:
             case 7:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_uncached(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,puVar33,
+              ((int (*)())FUN_000d03b4)(0,"lookup_uncached(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
                            argR8,argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
-              pcVar14 = (char *)puVar33;
+              pcVar14 = (char *)texUnit2;
             }
           }
           else {
@@ -8410,9 +8423,9 @@ LAB_000d1afc:
             argR8 = &ignUncText;
             ((int (*)())FUN_000d03b4)(0,"UNKNOWN_OP%s%s%s%s",puVar13,argR6,pcVar14,argR8,argR9,argR10);
           }
-          pbVar25 = (byte *)((int)puVar41 + 5);
-          if (*(char *)((int)puVar41 + 5) != '\0') {
-            if (*(char *)((int)puVar41 + 6) == '\0') {
+          pbVar25 = (byte *)((int)instructionRecord2 + 5);
+          if (*(char *)((int)instructionRecord2 + 5) != '\0') {
+            if (*(char *)((int)instructionRecord2 + 6) == '\0') {
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT21(0x7000,(*(unsigned char *)((unsigned char *)&(predicateText) + 2)));
             }
             else {
@@ -8445,9 +8458,9 @@ LAB_000d1afc:
               }
             }
           }
-          argR10 = (byte *)((int)puVar41 + 7);
-          if (*(char *)((int)puVar41 + 7) != '\0') {
-            if (*(char *)(puVar41 + 2) == '\0') {
+          argR10 = (byte *)((int)instructionRecord2 + 7);
+          if (*(char *)((int)instructionRecord2 + 7) != '\0') {
+            if (*(char *)(instructionRecord2 + 2) == '\0') {
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT21(0x7000,(*(unsigned char *)((unsigned char *)&(predicateText) + 2)));
             }
             else {
@@ -8478,19 +8491,19 @@ LAB_000d1afc:
               }
             }
           }
-          if (*(char *)((int)puVar41 + 9) != '\0') {
+          if (*(char *)((int)instructionRecord2 + 9) != '\0') {
             ((int (*)())FUN_000d03b4)(0," write_inactive",puVar13,argR6,pcVar14,argR8,argR9,argR10);
           }
           ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
-          uVar37 = *puVar41;
+          uVar37 = *instructionRecord2;
           texIndex = texIndex + 1;
         }
         uVar43 = (undefined2)((uint)in_stack_fffffd2c >> 0x10);
         if ((uVar37 == 3) || (uVar37 == 4)) {
-          pbVar25 = (byte *)((int)puVar41 + 0x31);
-          local_74 = (uint)*(byte *)((int)puVar41 + 0x43);
-          local_ec = (uint)*(byte *)(puVar41 + 0x11);
-          switch(*(undefined1 *)((int)puVar41 + 0x31)) {
+          pbVar25 = (byte *)((int)instructionRecord2 + 0x31);
+          local_74 = (uint)*(byte *)((int)instructionRecord2 + 0x43);
+          local_ec = (uint)*(byte *)(instructionRecord2 + 0x11);
+          switch(*(undefined1 *)((int)instructionRecord2 + 0x31)) {
           case 0:
           case 3:
           case 7:
@@ -8528,9 +8541,9 @@ LAB_000d1afc:
             bVar2 = false;
             local_98 = 0;
           }
-          puVar33 = puVar41 + 0x10;
-          if (*(byte *)(puVar41 + 0x10) < 0x10) {
-            uVar19 = 1 << ((int)(char)*(byte *)(puVar41 + 0x10) & 0x3fU);
+          puVar33 = instructionRecord2 + 0x10;
+          if (*(byte *)(instructionRecord2 + 0x10) < 0x10) {
+            uVar19 = 1 << ((int)(char)*(byte *)(instructionRecord2 + 0x10) & 0x3fU);
             if ((uVar19 & 0x61) == 0) {
               if ((uVar19 & 0xc00c) == 0) {
                 if ((uVar19 & 0x3f80) != 0) {
@@ -8545,33 +8558,33 @@ LAB_000d1afc:
               local_98 = 7;
             }
           }
-          rgbSelectABase = *(byte *)((int)puVar41 + 0x2a) & 0xffffff7f;
-          uVar37 = (uint)*(byte *)(puVar41 + 0xb);
-          rgbSelectBBase = *(byte *)((int)puVar41 + 0x2b) & 0xffffff7f;
-          alphaSelectB = (uint)*(byte *)((int)puVar41 + 0x3a);
-          alphaSelectC = (uint)*(byte *)((int)puVar41 + 0x3b);
-          local_dc = *(byte *)(puVar41 + 0xb) & 0xffffff7f;
-          alphaSelectABase = *(byte *)((int)puVar41 + 0x39) & 0xffffff7f;
-          alphaSelectBBase = *(byte *)((int)puVar41 + 0x3a) & 0xffffff7f;
-          alphaSelectCBase = *(byte *)((int)puVar41 + 0x3b) & 0xffffff7f;
-          rgbAuxC = *(ushort *)(puVar41 + 10);
-          rgbAddrA = (uint)*(ushort *)((int)puVar41 + 0xe);
-          puVar13 = (uint *)(uint)*(ushort *)(puVar41 + 4);
-          puVar32 = (uint *)(uint)*(ushort *)((int)puVar41 + 0x12);
-          puVar35 = (uint *)(uint)*(ushort *)((int)puVar41 + 0x1a);
-          argR8 = (uint *)(uint)*(ushort *)(puVar41 + 7);
-          argR9 = (char *)(uint)*(ushort *)((int)puVar41 + 0x1e);
-          rgbAuxA = *(ushort *)(puVar41 + 9);
-          rgbAuxB = *(ushort *)((int)puVar41 + 0x26);
-          local_9c = (uint *)(uint)*(byte *)(puVar41 + 0xe);
-          alphaAuxB = (uint)*(byte *)((int)puVar41 + 0x36);
-          alphaAuxC = (uint)*(byte *)((int)puVar41 + 0x37);
-          rgbModA2 = (uint)*(byte *)((int)puVar41 + 0x2d);
-          rgbModB2 = (uint)*(byte *)((int)puVar41 + 0x2e);
-          rgbModC2 = (uint)*(byte *)((int)puVar41 + 0x2f);
-          local_8c = (uint)*(byte *)(puVar41 + 0xf);
-          alphaModB2 = (uint)*(byte *)((int)puVar41 + 0x3d);
-          alphaModC2 = (uint)*(byte *)((int)puVar41 + 0x3e);
+          rgbSelectABase = *(byte *)((int)instructionRecord2 + 0x2a) & 0xffffff7f;
+          uVar37 = (uint)*(byte *)(instructionRecord2 + 0xb);
+          rgbSelectBBase = *(byte *)((int)instructionRecord2 + 0x2b) & 0xffffff7f;
+          alphaSelectB = (uint)*(byte *)((int)instructionRecord2 + 0x3a);
+          alphaSelectC = (uint)*(byte *)((int)instructionRecord2 + 0x3b);
+          local_dc = *(byte *)(instructionRecord2 + 0xb) & 0xffffff7f;
+          alphaSelectABase = *(byte *)((int)instructionRecord2 + 0x39) & 0xffffff7f;
+          alphaSelectBBase = *(byte *)((int)instructionRecord2 + 0x3a) & 0xffffff7f;
+          alphaSelectCBase = *(byte *)((int)instructionRecord2 + 0x3b) & 0xffffff7f;
+          rgbAuxC = *(ushort *)(instructionRecord2 + 10);
+          rgbAddrA = (uint)*(ushort *)((int)instructionRecord2 + 0xe);
+          rgbAddrB = (uint *)(uint)*(ushort *)(instructionRecord2 + 4);
+          rgbAddrC = (uint *)(uint)*(ushort *)((int)instructionRecord2 + 0x12);
+          alphaAddrA = (uint *)(uint)*(ushort *)((int)instructionRecord2 + 0x1a);
+          argR8 = (uint *)(uint)*(ushort *)(instructionRecord2 + 7);
+          argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x1e);
+          rgbAuxA = *(ushort *)(instructionRecord2 + 9);
+          rgbAuxB = *(ushort *)((int)instructionRecord2 + 0x26);
+          local_9c = (uint *)(uint)*(byte *)(instructionRecord2 + 0xe);
+          alphaAuxB = (uint)*(byte *)((int)instructionRecord2 + 0x36);
+          alphaAuxC = (uint)*(byte *)((int)instructionRecord2 + 0x37);
+          rgbModA2 = (uint)*(byte *)((int)instructionRecord2 + 0x2d);
+          rgbModB2 = (uint)*(byte *)((int)instructionRecord2 + 0x2e);
+          rgbModC2 = (uint)*(byte *)((int)instructionRecord2 + 0x2f);
+          local_8c = (uint)*(byte *)(instructionRecord2 + 0xf);
+          alphaModB2 = (uint)*(byte *)((int)instructionRecord2 + 0x3d);
+          alphaModC2 = (uint)*(byte *)((int)instructionRecord2 + 0x3e);
           if (bVar24) {
             bVar24 = rgbSelectABase != 3;
             if (bVar24) {
@@ -8678,11 +8691,11 @@ LAB_000d270c:
             puVar17 = aluIndex;
             dVar42 = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.rgb = ",instructionNumber,aluIndex,
                                           puVar21,alphaSelectC,uVar37,alphaSelectB);
-            cVar9 = *(char *)(puVar41 + 0xc);
+            cVar9 = *(char *)(instructionRecord2 + 0xc);
             if (cVar9 == '\x01') {
               dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
-              ((double (*)())FUN_000d10dc)(&srcpTextA,puVar13,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
+              ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
               ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (cVar9 == '\0') {
@@ -8692,7 +8705,7 @@ LAB_000d270c:
             else if (cVar9 == '\x02') {
               dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
-              ((double (*)())FUN_000d10dc)(&srcpTextA,puVar13,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
+              ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
               ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (cVar9 == '\x03') {
@@ -8708,25 +8721,25 @@ LAB_000d270c:
             puVar17 = aluIndex;
             dVar42 = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.a   = ",instructionNumber,aluIndex,
                                           puVar21,alphaSelectC,uVar37,alphaSelectB);
-            alphaPreOp = *(char *)((int)puVar41 + 0x3f);
+            alphaPreOp = *(char *)((int)instructionRecord2 + 0x3f);
             if (alphaPreOp == '\x01') {
-              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,puVar35,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
+              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
               ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
               ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (alphaPreOp == '\0') {
-              ((double (*)())FUN_000d10dc)(&srcpTextB,puVar35,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
+              ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
               ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (alphaPreOp == '\x02') {
-              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,puVar35,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
+              dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
               ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
               ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (alphaPreOp == '\x03') {
-              ((double (*)())FUN_000d10dc)(&srcpTextB,puVar35,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
+              ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
               ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else {
@@ -8735,23 +8748,23 @@ LAB_000d270c:
           }
           puVar17 = aluIndex;
           ((int (*)())FUN_000d03b4)(0,"  %d alu %02d rgb:  ",instructionNumber,aluIndex,puVar21,alphaSelectC,uVar37,alphaSelectB);
-          uVar15 = (uint)*(byte *)((int)puVar41 + 0x15);
-          bVar3 = *(byte *)(puVar41 + 5);
+          uVar15 = (uint)*(byte *)((int)instructionRecord2 + 0x15);
+          bVar3 = *(byte *)(instructionRecord2 + 5);
           if (uVar15 == 0) {
 LAB_000d2b24:
             ((int (*)())FUN_000d03b4)(0,"           ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
-          else if (*puVar41 == 3) {
+          else if (*instructionRecord2 == 3) {
             iVar10 = uVar15 * 4;
-            uVar15 = (uint)*(byte *)((int)puVar41 + 0x16);
+            uVar15 = (uint)*(byte *)((int)instructionRecord2 + 0x16);
             puVar17 = (uint *)(iVar10 + 0x1dc239);
             ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           else {
-            if (*puVar41 != 4) goto LAB_000d2b24;
+            if (*instructionRecord2 != 4) goto LAB_000d2b24;
             uVar15 = uVar15 * 4 + 0x1dc239;
             ((int (*)())FUN_000d03b4)(0,"pred.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
-            rgbOutIndex = *(char *)((int)puVar41 + 0x16);
+            rgbOutIndex = *(char *)((int)instructionRecord2 + 0x16);
             if (rgbOutIndex == '\x01') {
               ((int (*)())FUN_000d03b4)(0,"(<) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
@@ -8769,34 +8782,34 @@ LAB_000d2b24:
             ((int (*)())FUN_000d03b4)(0,"          ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           else {
-            uVar15 = (uint)*(ushort *)(puVar41 + 3);
+            uVar15 = (uint)*(ushort *)(instructionRecord2 + 3);
             puVar17 = (uint *)((uint)bVar3 * 4 + 0x1dc239);
             ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
-          if (*(char *)((int)puVar41 + 0x33) != '\0') {
+          if (*(char *)((int)instructionRecord2 + 0x33) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"clamped ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           puVar21 = operandText1;
           uVar11 = CONCAT22(uVar43,rgbAuxA);
-          ((int (*)())FUN_000d13a4)(puVar21,rgbAddrA,puVar13,puVar32,puVar35,argR8,argR9,rgbSelectABase,rgbModA2,
+          ((int (*)())FUN_000d13a4)(puVar21,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,rgbSelectABase,rgbModA2,
                        uVar11,(uint)*pbVar25);
           uVar11 = CONCAT22((short)((uint)uVar11 >> 0x10),rgbAuxB);
           argR6 = (char *)operandText6;
-          ((int (*)())FUN_000d13a4)(argR6,rgbAddrA,puVar13,puVar32,puVar35,argR8,argR9,rgbSelectBBase,rgbModB2,
+          ((int (*)())FUN_000d13a4)(argR6,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,rgbSelectBBase,rgbModB2,
                        uVar11,(uint)*pbVar25);
           puVar17 = operandText5;
-          ((int (*)())FUN_000d13a4)(puVar17,rgbAddrA,puVar13,puVar32,puVar35,argR8,argR9,local_dc,rgbModC2,
+          ((int (*)())FUN_000d13a4)(puVar17,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,local_dc,rgbModC2,
                        CONCAT22((short)((uint)uVar11 >> 0x10),rgbAuxC),(uint)*pbVar25);
           local_60 = operandText4;
-          ((int (*)())FUN_000d1624)(local_60,rgbAddrA,puVar13,puVar32,puVar35,argR8,argR9,alphaSelectABase,local_8c,
+          ((int (*)())FUN_000d1624)(local_60,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectABase,local_8c,
                        alphaAuxB,(uint)*(byte *)puVar33);
           local_64 = operandText3;
-          ((int (*)())FUN_000d1624)(local_64,rgbAddrA,puVar13,puVar32,puVar35,argR8,argR9,alphaSelectBBase,alphaModB2,
+          ((int (*)())FUN_000d1624)(local_64,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectBBase,alphaModB2,
                        alphaAuxC,(uint)*(byte *)puVar33);
           local_68 = operandText2;
           uVar19 = alphaSelectCBase;
           in_stack_fffffd2c = local_9c;
-          ((int (*)())FUN_000d1624)(local_68,rgbAddrA,puVar13,puVar32,puVar35,argR8,argR9,alphaSelectCBase,alphaModC2,
+          ((int (*)())FUN_000d1624)(local_68,rgbAddrA,rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBase,alphaModC2,
                        local_9c,(uint)*(byte *)puVar33);
           bVar3 = *pbVar25;
           if (bVar3 < 0xd) {
@@ -8806,8 +8819,8 @@ LAB_000d2b24:
               ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",puVar21,argR6,puVar35,argR8,argR9,uVar19);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              puVar17 = alphaAddrA;
               break;
             case 2:
               puVar13 = local_60;
@@ -8820,12 +8833,12 @@ LAB_000d2b24:
               ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",puVar21,argR6,puVar35,argR8,argR9,uVar19);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              puVar17 = alphaAddrA;
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",puVar21,argR6,puVar35,argR8,argR9,uVar19);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              puVar17 = alphaAddrA;
               break;
             case 6:
               goto switchD_000d2d30_caseD_6;
@@ -8836,33 +8849,33 @@ LAB_000d2b24:
               ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 9:
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",puVar21,puVar32,puVar35,argR8,argR9,uVar19);
-              argR6 = (char *)puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"frc(%s)",puVar21,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+              argR6 = (char *)rgbAddrC;
+              puVar17 = alphaAddrA;
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"sop()",puVar13,puVar32,puVar35,argR8,argR9,uVar19);
-              puVar21 = puVar13;
-              argR6 = (char *)puVar32;
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"sop()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+              puVar21 = rgbAddrB;
+              argR6 = (char *)rgbAddrC;
+              puVar17 = alphaAddrA;
               break;
             case 0xb:
-              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",puVar21,argR6,puVar35,argR8,argR9,uVar19);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              puVar17 = alphaAddrA;
               break;
             case 0xc:
-              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",puVar21,argR6,puVar35,argR8,argR9,uVar19);
-              puVar17 = puVar35;
+              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              puVar17 = alphaAddrA;
             }
           }
           else {
 switchD_000d2d30_caseD_6:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar13,puVar32,puVar35,argR8,argR9,uVar19);
-            puVar21 = puVar13;
-            argR6 = (char *)puVar32;
-            puVar17 = puVar35;
+            ((int (*)())FUN_000d03b4)(0,"???()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+            puVar21 = rgbAddrB;
+            argR6 = (char *)rgbAddrC;
+            puVar17 = alphaAddrA;
           }
-          bVar3 = *(byte *)((int)puVar41 + 0x32);
+          bVar3 = *(byte *)((int)instructionRecord2 + 0x32);
           if (bVar3 < 7) {
             argR9 = (char *)(0);
             switch(bVar3) {
@@ -8893,9 +8906,9 @@ switchD_000d2d30_caseD_6:
             argR6 = (char *)&aluWaitText;
             ((int (*)())FUN_000d03b4)(0,"%s%s",puVar21,argR6,puVar17,argR8,argR9,uVar19);
           }
-          argR10 = (byte *)((int)puVar41 + 5);
-          if (*(char *)((int)puVar41 + 5) != '\0') {
-            if (*(char *)((int)puVar41 + 6) == '\0') {
+          argR10 = (byte *)((int)instructionRecord2 + 5);
+          if (*(char *)((int)instructionRecord2 + 5) != '\0') {
+            if (*(char *)((int)instructionRecord2 + 6) == '\0') {
               (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT21(0x7000,(*(unsigned char *)((unsigned char *)&(predicateText) + 2)));
             }
             else {
@@ -8931,17 +8944,17 @@ switchD_000d2d30_caseD_6:
           ((int (*)())FUN_000d03b4)(0,"\n",puVar21,argR6,puVar17,argR8,argR9,argR10);
           puVar13 = aluIndex;
           ((int (*)())FUN_000d03b4)(0,"         alpha:  ",aluIndex,argR6,puVar17,argR8,argR9,argR10);
-          alphaTempEnable = *(char *)(puVar41 + 8);
-          bVar24 = *(char *)((int)puVar41 + 0x21) != '\0';
-          depthWrite = *(char *)((int)puVar41 + 0x23);
+          alphaTempEnable = *(char *)(instructionRecord2 + 8);
+          bVar24 = *(char *)((int)instructionRecord2 + 0x21) != '\0';
+          depthWrite = *(char *)((int)instructionRecord2 + 0x23);
           if (bVar24) {
-            if (*puVar41 == 3) {
-              puVar13 = (uint *)(uint)*(byte *)((int)puVar41 + 0x22);
+            if (*instructionRecord2 == 3) {
+              puVar13 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x22);
               ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
             }
-            else if (*puVar41 == 4) {
+            else if (*instructionRecord2 == 4) {
               ((int (*)())FUN_000d03b4)(0,"pred.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
-              alphaOutIndex = *(char *)((int)puVar41 + 0x22);
+              alphaOutIndex = *(char *)((int)instructionRecord2 + 0x22);
               if (alphaOutIndex == '\x01') {
                 ((int (*)())FUN_000d03b4)(0,"(<) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               }
@@ -8967,10 +8980,10 @@ switchD_000d2d30_caseD_6:
             ((int (*)())FUN_000d03b4)(0,"          ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           else {
-            puVar13 = (uint *)(uint)*(ushort *)(puVar41 + 6);
+            puVar13 = (uint *)(uint)*(ushort *)(instructionRecord2 + 6);
             ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
-          if (*(char *)((int)puVar41 + 0x42) != '\0') {
+          if (*(char *)((int)instructionRecord2 + 0x42) != '\0') {
             ((int (*)())FUN_000d03b4)(0,"clamped ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           bVar3 = *(byte *)puVar33;
@@ -9053,7 +9066,7 @@ switchD_000d2d30_caseD_6:
 switchD_000d324c_caseD_4:
             ((int (*)())FUN_000d03b4)(0,"???()",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
-          bVar3 = *(byte *)((int)puVar41 + 0x41);
+          bVar3 = *(byte *)((int)instructionRecord2 + 0x41);
           if (bVar3 < 7) {
             argR9 = (char *)(0);
             switch(bVar3) {
@@ -9082,10 +9095,10 @@ switchD_000d324c_caseD_4:
           else {
             ((int (*)())FUN_000d03b4)(0,"*???",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
-          if (*(char *)((int)puVar41 + 10) == '\0') {
-            argR10 = (byte *)((int)puVar41 + 7);
-            if (*(char *)((int)puVar41 + 7) != '\0') {
-              if (*(char *)(puVar41 + 2) == '\0') {
+          if (*(char *)((int)instructionRecord2 + 10) == '\0') {
+            argR10 = (byte *)((int)instructionRecord2 + 7);
+            if (*(char *)((int)instructionRecord2 + 7) != '\0') {
+              if (*(char *)(instructionRecord2 + 2) == '\0') {
                 (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT21(0x7000,(*(unsigned char *)((unsigned char *)&(predicateText) + 2)));
               }
               else {
@@ -9116,7 +9129,7 @@ switchD_000d324c_caseD_4:
                 }
               }
             }
-            if (*(char *)((int)puVar41 + 9) != '\0') {
+            if (*(char *)((int)instructionRecord2 + 9) != '\0') {
               ((int (*)())FUN_000d03b4)(0," write_inactive",puVar13,argR6,puVar17,argR8,argR9,argR10);
             }
             ((int (*)())FUN_000d03b4)(0," \n",puVar13,argR6,puVar17,argR8,argR9,argR10);
@@ -9124,12 +9137,12 @@ switchD_000d324c_caseD_4:
           else {
             ((int (*)())FUN_000d03b4)(0," last\n",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
-          if (*(char *)(puVar41 + 0xd) != '\0') {
+          if (*(char *)(instructionRecord2 + 0xd) != '\0') {
             puVar13 = aluIndex;
             ((int (*)())FUN_000d03b4)(0,"   alu %02d post-NOP\n",aluIndex,argR6,puVar17,argR8,argR9,argR10
                         );
           }
-          uVar37 = *puVar41;
+          uVar37 = *instructionRecord2;
           aluIndex = (uint *)((int)aluIndex + 1);
         }
         if (uVar37 == 5) {
@@ -9170,12 +9183,12 @@ switchD_000d324c_caseD_4:
           argR6 = (char *)cfWordText;
           ((int (*)())FUN_000d03b4)(0,"  %d cf  %02d    :  ",instructionNumber,cfIndex,local_ec,argR8,argR9,argR10);
           in_stack_fffffd2c = (uint *)0x0;
-          argR10 = (byte *)((uint)*(byte *)((int)puVar41 + 0x15) * 10 + 0x1dc1bc);
-          argR9 = (char *)((uint)*(byte *)(puVar41 + 5) * 10 + 0x1dc1bc);
+          argR10 = (byte *)((uint)*(byte *)((int)instructionRecord2 + 0x15) * 10 + 0x1dc1bc);
+          argR9 = (char *)((uint)*(byte *)(instructionRecord2 + 5) * 10 + 0x1dc1bc);
           FUN_001a32d0(argR6,"0x%02x %1d %s %s %s %s %1d %1d %d",
-                       (uint)*(byte *)((int)puVar41 + 0x12),(uint)*(byte *)(puVar41 + 4),
-                       (uint)*(byte *)((int)puVar41 + 0xe) * 10 + 0x1dc1e9,
-                       (uint)*(byte *)((int)puVar41 + 0x11) * 5 + 0x1dc1da,argR9,argR10);
+                       (uint)*(byte *)((int)instructionRecord2 + 0x12),(uint)*(byte *)(instructionRecord2 + 4),
+                       (uint)*(byte *)((int)instructionRecord2 + 0xe) * 10 + 0x1dc1e9,
+                       (uint)*(byte *)((int)instructionRecord2 + 0x11) * 5 + 0x1dc1da,argR9,argR10);
           if (PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0 == (undefined *)0x0) {
             iVar10 = 0;
           }
@@ -9196,14 +9209,14 @@ switchD_000d324c_caseD_4:
           puVar33 = &semWaitText;
           argR8 = &aluWaitText;
           ((int (*)())FUN_000d03b4)(0,"%s(%s)%s%s",puVar13,argR6,puVar33,argR8,argR9,argR10);
-          cVar9 = *(char *)((int)puVar41 + 0x12);
+          cVar9 = *(char *)((int)instructionRecord2 + 0x12);
           if ((cVar9 == -0x10) || (cVar9 == '\x0f')) {
             puVar13 = &srcpTextA;
             argR6 = (char *)&srcpTextB;
             ((int (*)())FUN_000d03b4)(0,"( prev_alu: %s %s )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
           }
           else if ((cVar9 == -0x56) || (cVar9 == 'U')) {
-            puVar13 = (uint *)(uint)*(byte *)((int)puVar41 + 0x17);
+            puVar13 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x17);
             ((int (*)())FUN_000d03b4)(0,"( bool_addr: %d )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
           }
           else {
@@ -9212,7 +9225,7 @@ switchD_000d324c_caseD_4:
           cfIndex = cfIndex + 1;
         }
         iVar31 = iVar31 + 1;
-        puVar41 = puVar41 + 0x12;
+        instructionRecord2 = instructionRecord2 + 0x12;
         instructionNumber = instructionNumber + 1;
         uVar19 = recordCount2;
       } while (iVar31 <= (int)recordCount2);
