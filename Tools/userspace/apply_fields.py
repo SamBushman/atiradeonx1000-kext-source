@@ -132,7 +132,7 @@ def main():
                 body = lines[i:j]; isptr = ctxtype(body)
                 for k in range(i, j):
                     l = lines[k]
-                    if re.match(r'\s*(/\*|\*|//)', l): continue
+                    if re.match(r'\s*(/\*|\*/|\* |\*$|//)', l): continue
                     nl, n = rewrite(l, tbl, S, isptr)
                     if n: lines[k] = nl; changed = True; pending += n
             if changed and not check: open(pf, 'w').write('\n'.join(lines))

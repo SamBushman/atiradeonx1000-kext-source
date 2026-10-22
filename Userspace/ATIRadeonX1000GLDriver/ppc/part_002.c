@@ -1050,7 +1050,7 @@ joined_r0x0000b814:
   }
   vertexArray = (int *)0x0;
 LAB_0000b830:
-  *(int **)(ctx + 0x1d4) = vertexArray;
+  *(int **)(ctx + GLD_currentVertexArray) = vertexArray;
   if ((previousArray != 0) && (vertexArray == (int *)0x0)) {
     FUN_0001dff0(ctx);
     return;
@@ -1183,7 +1183,7 @@ int _gldReclaimVertexArray(ctx, vertexArray)
   byte crBits;
   
   if (*(int *)(ctx + GLD_currentVertexArray) == vertexArray) {
-    *(undefined4 *)(ctx + 0x1d4) = 0;
+    *(undefined4 *)(ctx + GLD_currentVertexArray) = 0;
     FUN_0001dff0(ctx);
   }
   backing = *(int *)(vertexArray + 0x228);
@@ -8397,7 +8397,7 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
                 pfVar12[2] = GH_U2F((unsigned int)(((iVar13 - iVar21) * 0x80000 | 0xc0003500)));
                 pfVar12[3] = GH_U2F((unsigned int)(((iVar13 - iVar21) * 0x10000 | 0x31)));
                 iVar21 = iVar16 * iVar19;
-                *(float **)(ctx + 0x1dc) = pfVar25;
+                *(float **)(ctx + GLD_writeCursor) = pfVar25;
                 iVar13 = iVar21 * 0x20;
                 if (0x7ff < iVar21) {
                   iVar21 = 0x7ff;
@@ -8532,7 +8532,7 @@ LAB_00016a6c:
       *(uint *)((int)pfVar12 + iVar10 + 8) = iVar13 * 0x80000 | 0xc0003500;
       *(uint *)((int)pfVar12 + iVar10 + 0xc) = iVar13 * 0x10000 | 0x31;
     }
-    *(float **)(ctx + 0x1dc) = pfVar25;
+    *(float **)(ctx + GLD_writeCursor) = pfVar25;
     if (*(float **)(ctx + GLD_ringLimit) <= pfVar25 + 2) {
       iStack_a0 = iVar10;
       FUN_0001a0f0(ctx,0x1000000);
@@ -8540,7 +8540,7 @@ LAB_00016a6c:
       iVar10 = iStack_a0;
     }
     iVar21 = *(int *)(ctx + GLD_writeCursor);
-    *(int *)(ctx + 0x1dc) = iVar21 + 8;
+    *(int *)(ctx + GLD_writeCursor) = iVar21 + 8;
     *(undefined **)(iVar21 + iVar10) = ((unsigned char *)0x00001087U);
     uVar15 = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(iVar21 + 4 + iVar10) = uVar15;
@@ -8626,12 +8626,12 @@ int FUN_00017100(ctx, pname, values)
 {
   if (pname == 0xcb) {
     if (*(char *)(ctx + 0x2a80) != '\0') {
-      *(char *)(ctx + 0x146) = (char)*values;
+      *(char *)(ctx + GLD_swapIntervalDenominator) = (char)*values;
       return 1;
     }
   }
   else if ((pname == 0xde) && (*(char *)(ctx + 0x2a80) != '\0')) {
-    *(char *)(ctx + 0x142) = (char)*values;
+    *(char *)(ctx + GLD_swapIntervalNumerator) = (char)*values;
     return 1;
   }
   return 0;
@@ -8675,11 +8675,11 @@ int FUN_00017160(ctx, flagsInOut, pbuffer)
   }
   if (*(int *)(ctx + GLD_boundFramebuffer) == 0) {
     if (pbuffer == 0) {
-      **(uint **)(ctx + 0x14) = **(uint **)(ctx + 0x14) | 2;
+      **(uint **)(ctx + GLD_capsBlock) = **(uint **)(ctx + GLD_capsBlock) | 2;
       ((unsigned char *)0x00002b7c)[ctx] = 1;
     }
     else {
-      **(uint **)(ctx + 0x14) = **(uint **)(ctx + 0x14) & 0xfffffffd;
+      **(uint **)(ctx + GLD_capsBlock) = **(uint **)(ctx + GLD_capsBlock) & 0xfffffffd;
       ((unsigned char *)0x00002b7c)[ctx] = 0;
     }
   }

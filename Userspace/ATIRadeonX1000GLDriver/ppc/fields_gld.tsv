@@ -80,3 +80,49 @@ field	GLD	0x299c	streamSetCurrent	CONFIRMED	indirect call (FUN_0002be60) that in
 field	GLD	0x2b7e	hasPreamble	CONFIRMED	byte read as `hasPreamble` in FUN_0001a0f0: when set the submit writes the extra 0x13d6 preamble packet
 field	GLD	0x2b90	listSelf	CONFIRMED	_gldCreateContext stores ctx here and links the node into the global context list DAT_001f65e0 (_gldDestroyContext unlinks it)
 field	GLD	0x2b94	listNext	CONFIRMED	next node of the global context list
+field	GLD	0x1c8c	fg_alpha_func	INFERRED	FUN_000369f0 packet pair (reg id 0x12f5, value ctx+0x1c8c); 0x12f5*4 = 0x4bd4 = FG_ALPHA_FUNC per R3xx_3D_Registers.pdf (not in the kext header)
+field	GLD	0x1ca0	gb_aa_config	CONFIRMED	register-write pair (reg id 0x1008 = GB_AA_CONFIG 0x4020, ATIRadeonX1000Registers.h) in FUN_000369f0, FUN_00028350 and FUN_0002a3d0
+field	GLD	0x1ca8	gb_mspos0	CONFIRMED	first value after count-header 0x11004 (regs 0x1004/0x1005 = GB_MSPOS0/1) in the same four packet builders
+field	GLD	0x1cac	gb_mspos1	CONFIRMED	second value after count-header 0x11004 (GB_MSPOS1)
+field	GLD	0x1ce0	zb_cntl	CONFIRMED	pair (0x13c0 = ZB_CNTL 0x4f00) in FUN_000369f0, FUN_00028350, FUN_0002a3d0
+field	GLD	0x1ce4	zb_zstencilcntl	CONFIRMED	pair (0x13c1 = ZB_ZSTENCILCNTL 0x4f04), three builders
+field	GLD	0x1cf0	zb_bw_cntl	CONFIRMED	pair (0x13c7 = ZB_BW_CNTL 0x4f1c), three builders
+field	GLD	0x1cfc	sc_edgerule	CONFIRMED	pair (0x10ea = SC_EDGERULE 0x43a8, also the register named by the kext Types.h field sc_edgerule), three builders
+field	GLD	0x1d20	sc_hyperz_en	CONFIRMED	pair (0x10e9 = SC_HYPERZ_EN 0x43a4), three builders
+field	GLD	0x1d2c	fg_fog_blend	INFERRED	FUN_000369f0 packet pair (reg id 0x12f0, value ctx+0x1d2c, bit 0 cleared when the ROP/blend condition holds); 0x12f0*4 = 0x4bc0 = FG_FOG_BLEND per R3xx_3D_Registers.pdf
+field	GLD	0x1d30	rb3d_dither_ctl	CONFIRMED	pair (0x1394 = RB3D_DITHER_CTL 0x4e50), three builders
+field	GLD	0x1d34	rb3d_color_channel_mask	CONFIRMED	pair (0x1383 = RB3D_COLOR_CHANNEL_MASK 0x4e0c), three builders
+field	GLD	0x1d38	rb3d_ropcntl	CONFIRMED	pair (0x1386 = RB3D_ROPCNTL 0x4e18), three builders
+field	GLD	0x1d50	sc_scissor1	INFERRED	pair (0x10f9 = SC_SCISSOR1 0x43e4 per R3xx_3D_Registers.pdf), four builders
+field	GLD	0x1d70	su_cull_mode	CONFIRMED	pair (0x10ae = SU_CULL_MODE 0x42b8), three builders
+field	GLD	0x1d7c	ga_poly_mode	CONFIRMED	pair (0x10a2 = GA_POLY_MODE 0x4288), three builders
+field	GLD	0x1d90	gb_enable	CONFIRMED	pair (0x1002 = GB_ENABLE 0x4008), three builders
+field	GLD	0x1d98	sc_scissor0	INFERRED	pair (0x10f8 = SC_SCISSOR0 0x43e0 per R3xx_3D_Registers.pdf), four builders
+field	GLD	0x1da0	sc_screendoor	CONFIRMED	pair (0x10fa = SC_SCREENDOOR 0x43e8), three builders
+field	GLD	0x1db4	vap_clip_cntl	CONFIRMED	pair (0x887 = VAP_CLIP_CNTL 0x221c), four builders
+field	GLD	0x1dc0	vap_cntl_status	CONFIRMED	pair (0x850 = VAP_CNTL_STATUS 0x2140), four builders
+field	GLD	0x1dc4	vap_vte_cntl	INFERRED	pair (0x82c = VAP_VTE_CNTL 0x20b0 per R3xx_3D_Registers.pdf), four builders
+field	GLD	0x1ddc	vap_out_vtx_fmt_0	CONFIRMED	pair (0x824 = VAP_OUT_VTX_FMT_0 0x2090), four builders
+field	GLD	0x1de0	vap_out_vtx_fmt_1	CONFIRMED	pair (0x825 = VAP_OUT_VTX_FMT_1 0x2094), four builders
+field	GLD	0x1df8	ga_color_control	CONFIRMED	pair (0x109e = GA_COLOR_CONTROL 0x4278), three builders
+field	GLD	0x1dfc	gb_ps3_enable	CONFIRMED	pair (0x1046 = GB_PS3_ENABLE 0x4118), three builders
+field	GLD	0x1efc	ga_point_s0	INFERRED	pair (0x1080 = GA_POINT_S0 0x4200 per R3xx_3D_Registers.pdf), four builders
+field	GLD	0x1f00	ga_point_s1	INFERRED	pair (0x1082 = GA_POINT_S1 0x4208), four builders
+field	GLD	0x1f04	ga_point_t0	INFERRED	pair (0x1081 = GA_POINT_T0 0x4204), four builders
+field	GLD	0x1f08	ga_point_t1	INFERRED	pair (0x1083 = GA_POINT_T1 0x420c), four builders
+field	GLD	0x1f0c	ga_point_size	CONFIRMED	pair (0x1087 = GA_POINT_SIZE 0x421c), three builders
+field	GLD	0x1f1c	tx_filter0	INFERRED	16-word array: pair (0x1100 = TX_FILTER0_0 0x4400, texture units stride 4 bytes) in three builders; the five arrays sit at a 0x40 stride
+field	GLD	0x1f5c	tx_filter1	INFERRED	16-word array: pair (0x1110 = TX_FILTER1_0 0x4440)
+field	GLD	0x1f9c	tx_format0	INFERRED	16-word array: pair (0x1120 = TX_FORMAT0_0 0x4480)
+field	GLD	0x1fdc	tx_format1	INFERRED	16-word array: pair (0x1130 = TX_FORMAT1_0 0x44c0)
+field	GLD	0x201c	tx_format2	INFERRED	16-word array: pair (0x1140 = TX_FORMAT2_0 0x4500)
+field	GLD	0x2128	rs_ip_0	CONFIRMED	pair (0x101d = RS_IP_0 0x4074), three builders
+field	GLD	0x216c	rs_count	CONFIRMED	pair (0x10c0 = RS_COUNT 0x4300), three builders
+field	GLD	0x257c	us_out_fmt_0	CONFIRMED	pair (0x11a9 = US_OUT_FMT_0 0x46a4), three builders
+field	GLD	0x2580	us_out_fmt_1	CONFIRMED	pair (0x11aa = US_OUT_FMT_1 0x46a8), three builders
+field	GLD	0x2584	us_out_fmt_2	CONFIRMED	pair (0x11ab = US_OUT_FMT_2 0x46ac), three builders
+field	GLD	0x2588	us_out_fmt_3	CONFIRMED	pair (0x11ac = US_OUT_FMT_3 0x46b0), three builders
+field	GLD	0x2680	vap_prog_stream_cntl_0_ptr	CONFIRMED	pointer into the embedded array at +0x2630; **ptr is the value of the pair (0x854 = VAP_PROG_STREAM_CNTL_0 0x2150), four builders
+field	GLD	0x2684	vap_prog_stream_cntl_ext_0_ptr	CONFIRMED	pointer into the embedded array at +0x2650; **ptr is the value of the pair (0x878 = VAP_PROG_STREAM_CNTL_EXT_0 0x21e0), four builders
+field	GLD	0x26cc	vap_vtx_size	CONFIRMED	pair (0x82d = VAP_VTX_SIZE 0x20b4) in FUN_000369f0
+field	GLD	0x29f0	tx_enable	CONFIRMED	pair (0x1041 = TX_ENABLE 0x4104), three builders (FUN_000369f0 also pairs it with GA_COLOR_CONTROL_PS3 through a shared temporary)

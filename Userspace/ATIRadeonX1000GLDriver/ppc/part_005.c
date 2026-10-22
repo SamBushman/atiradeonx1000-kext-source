@@ -1750,9 +1750,9 @@ int FUN_000307a0(ctx, packetIndex)
     cursor = *(int **)(ctx + GLD_writeCursor);
   }
   headerWord = *(uint **)(ctx + GLD_lastHeader);
-  *(int **)(ctx + 0x1dc) = cursor + 1;
+  *(int **)(ctx + GLD_writeCursor) = cursor + 1;
   *headerWord = (int)cursor - (int)headerWord >> 2 | *headerWord;
-  *(int **)(ctx + 0x1d8) = cursor;
+  *(int **)(ctx + GLD_lastHeader) = cursor;
   *cursor = packetIndex * 0x1000000 + 0x16000000;
   return FUN_000a8320(ctx,packetIndex);
 }
@@ -4078,6 +4078,41 @@ int FUN_00034200(ctx, texture, face, passThroughArg4, passThroughArg5)
   undefined4 passThroughArg4;
   undefined4 passThroughArg5;
 {
+  int ga_point_size;
+  int sc_scissor1;
+  int rb3d_ropcntl;
+  int rb3d_color_channel_mask;
+  int tx_format2;
+  int tx_format1;
+  int tx_format0;
+  int tx_filter0;
+  int rs_ip_0;
+  int rs_count;
+  int us_out_fmt_3;
+  int us_out_fmt_2;
+  int us_out_fmt_1;
+  int us_out_fmt_0;
+  int gb_ps3_enable;
+  int tx_enable;
+  int ga_color_control;
+  int ga_poly_mode;
+  int zb_cntl;
+  int vap_prog_stream_cntl_ext_0_ptr;
+  int vap_prog_stream_cntl_0_ptr;
+  int vap_out_vtx_fmt_1;
+  int vap_out_vtx_fmt_0;
+  int gb_enable;
+  int rb3d_dither_ctl;
+  int su_cull_mode;
+  int vap_clip_cntl;
+  int vap_cntl_status;
+  int zb_zstencilcntl;
+  int zb_bw_cntl;
+  int sc_hyperz_en;
+  int gb_aa_config;
+  int gb_mspos1;
+  int sc_screendoor;
+  int sc_edgerule;
   bool bVar1;
   float fVar2;
   float fVar3;
@@ -4103,7 +4138,7 @@ int FUN_00034200(ctx, texture, face, passThroughArg4, passThroughArg5)
   int *piVar21;
   undefined4 in_r8;
   uint baseWidth;
-  uint *puVar23;
+  uint *lastHeader;
   uint uVar24;
   int iVar25;
   int iVar26;
@@ -4220,13 +4255,13 @@ LAB_0003440c:
   a6 = face << 0x10;
   uVar20 = (**(code **)(ctx + GLD_streamAllocate))
                      (a0,iVar15 + iVar16 + 0x340,uStack_80,uVar12,uVar20,in_r8,a6);
-  *(undefined4 *)(ctx + 0x298c) = uVar20;
+  *(undefined4 *)(ctx + GLD_streamCurrent) = uVar20;
   packet = (undefined4 *)((int (*)())FUN_00030840)(ctx,uVar20,texture);
   stateTemplate = PTR_DAT_001e88d0;
-  puVar23 = *(uint **)(ctx + GLD_lastHeader);
+  lastHeader = *(uint **)(ctx + GLD_lastHeader);
   piVar38 = packet + 4 + uVar13;
-  *puVar23 = (int)packet - (int)puVar23 >> 2 | *puVar23;
-  *(undefined4 **)(ctx + 0x1d8) = packet;
+  *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + GLD_lastHeader) = packet;
   packet[2] = levelCount | a6 | uVar33 * 0x100;
   packet[3] = uVar13 | uVar32;
   *packet = 0x37000000;
@@ -4522,9 +4557,9 @@ LAB_00034df0:
     piVar19 = piVar19 + 4;
   }
   packet[1] = (int)piVar38 - (int)packet >> 2;
-  puVar23 = *(uint **)(ctx + GLD_lastHeader);
-  *puVar23 = (int)piVar38 - (int)puVar23 >> 2 | *puVar23;
-  *(int **)(ctx + 0x1d8) = piVar38;
+  lastHeader = *(uint **)(ctx + GLD_lastHeader);
+  *lastHeader = (int)piVar38 - (int)lastHeader >> 2 | *lastHeader;
+  *(int **)(ctx + GLD_lastHeader) = piVar38;
   piVar38[1] = 0;
   *piVar38 = 0x33000000;
   piVar38[2] = (int)((unsigned char *)0x00001393U);
@@ -4534,83 +4569,83 @@ LAB_00034df0:
   piVar38[6] = 0x5c8;
   piVar38[7] = 0x20000;
   piVar38[8] = (int)((unsigned char *)0x000010eaU);
-  iVar16 = *(int *)(ctx + 0x1cfc);
+  sc_edgerule = *(int *)(ctx + GLD_sc_edgerule);
   piVar38[10] = (int)((unsigned char *)0x000010faU);
-  piVar38[9] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1da0);
+  piVar38[9] = sc_edgerule;
+  sc_screendoor = *(int *)(ctx + GLD_sc_screendoor);
   piVar38[0xc] = -0x3ffff000;
   piVar38[0xe] = 0x11004;
-  piVar38[0xb] = iVar16;
-  piVar38[0xf] = *(int *)(ctx + 0x1ca8);
-  iVar16 = *(int *)(ctx + 0x1cac);
+  piVar38[0xb] = sc_screendoor;
+  piVar38[0xf] = *(int *)(ctx + GLD_gb_mspos0);
+  gb_mspos1 = *(int *)(ctx + GLD_gb_mspos1);
   piVar38[0x11] = (int)((unsigned char *)0x00001008U);
-  piVar38[0x10] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1ca0);
+  piVar38[0x10] = gb_mspos1;
+  gb_aa_config = *(int *)(ctx + GLD_gb_aa_config);
   piVar38[0x13] = (int)((unsigned char *)0x000010e9U);
-  piVar38[0x12] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1d20);
+  piVar38[0x12] = gb_aa_config;
+  sc_hyperz_en = *(int *)(ctx + GLD_sc_hyperz_en);
   piVar38[0x15] = (int)((unsigned char *)0x000013c7U);
-  piVar38[0x14] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1cf0);
+  piVar38[0x14] = sc_hyperz_en;
+  zb_bw_cntl = *(int *)(ctx + GLD_zb_bw_cntl);
   piVar38[0x17] = (int)((unsigned char *)0x000013c1U);
-  piVar38[0x16] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1ce4);
+  piVar38[0x16] = zb_bw_cntl;
+  zb_zstencilcntl = *(int *)(ctx + GLD_zb_zstencilcntl);
   piVar38[0x19] = 0x850;
-  piVar38[0x18] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1dc0);
+  piVar38[0x18] = zb_zstencilcntl;
+  vap_cntl_status = *(int *)(ctx + GLD_vap_cntl_status);
   piVar38[0x1b] = 0x887;
-  piVar38[0x1a] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1db4);
+  piVar38[0x1a] = vap_cntl_status;
+  vap_clip_cntl = *(int *)(ctx + GLD_vap_clip_cntl);
   piVar38[0xbd] = 0x82c;
-  piVar38[0x1c] = iVar16;
-  iVar16 = *(int *)(0x00001dc4 + ctx);
+  piVar38[0x1c] = vap_clip_cntl;
+  iVar16 = *(int *)(GLD_vap_vte_cntl + ctx);
   piVar38[0x1d] = (int)((unsigned char *)0x000010aeU);
   piVar38[0xbe] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1d70);
+  su_cull_mode = *(int *)(ctx + GLD_su_cull_mode);
   piVar38[0x1f] = (int)((unsigned char *)0x00001394U);
-  piVar38[0x1e] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1d30);
+  piVar38[0x1e] = su_cull_mode;
+  rb3d_dither_ctl = *(int *)(ctx + GLD_rb3d_dither_ctl);
   piVar38[0x21] = (int)((unsigned char *)0x00001380U);
   piVar38[0x23] = (int)((unsigned char *)0x00001002U);
   piVar38[0x22] = 0;
-  piVar38[0x20] = iVar16;
-  piVar38[0x24] = *(int *)(ctx + 0x1d90);
-  iVar16 = *(int *)(ctx + 0x1d90);
+  piVar38[0x20] = rb3d_dither_ctl;
+  piVar38[0x24] = *(int *)(ctx + GLD_gb_enable);
+  gb_enable = *(int *)(ctx + GLD_gb_enable);
   piVar38[0x25] = 0x824;
-  piVar38[0x24] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1ddc);
+  piVar38[0x24] = gb_enable;
+  vap_out_vtx_fmt_0 = *(int *)(ctx + GLD_vap_out_vtx_fmt_0);
   piVar38[0x27] = 0x825;
-  piVar38[0x26] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1de0);
+  piVar38[0x26] = vap_out_vtx_fmt_0;
+  vap_out_vtx_fmt_1 = *(int *)(ctx + GLD_vap_out_vtx_fmt_1);
   piVar38[0x29] = 0x82d;
-  piVar38[0x28] = iVar16;
+  piVar38[0x28] = vap_out_vtx_fmt_1;
   iVar16 = *(int *)(0x000026c8 + ctx + GLD_connect);
   piVar38[0x2b] = 0x854;
   piVar38[0x2a] = iVar16;
-  iVar16 = **(int **)(ctx + 0x2680);
+  vap_prog_stream_cntl_0_ptr = **(int **)(ctx + GLD_vap_prog_stream_cntl_0_ptr);
   piVar38[0x2d] = 0x878;
-  piVar38[0x2c] = iVar16;
-  iVar16 = **(int **)(ctx + 0x2684);
+  piVar38[0x2c] = vap_prog_stream_cntl_0_ptr;
+  vap_prog_stream_cntl_ext_0_ptr = **(int **)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr);
   piVar38[0x2f] = (int)((unsigned char *)0x000013c0U);
-  piVar38[0x2e] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1ce0);
+  piVar38[0x2e] = vap_prog_stream_cntl_ext_0_ptr;
+  zb_cntl = *(int *)(ctx + GLD_zb_cntl);
   piVar38[0x31] = (int)((unsigned char *)0x000012f0U);
-  piVar38[0x30] = iVar16;
-  baseLevel = *(uint *)(ctx + 0x1d2c);
+  piVar38[0x30] = zb_cntl;
+  baseLevel = *(uint *)(ctx + GLD_fg_fog_blend);
   piVar38[0x32] = baseLevel;
   if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
     piVar38[0x32] = baseLevel & 0xfffffffe;
   }
   piVar38[0x33] = (int)((unsigned char *)0x000012f5U);
-  baseLevel = *(uint *)(ctx + 0x1c8c);
+  baseLevel = *(uint *)(ctx + GLD_fg_alpha_func);
   piVar38[0x34] = baseLevel;
   if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
     piVar38[0x34] = baseLevel & 0xfffff7ff;
   }
   piVar38[0x35] = (int)((unsigned char *)0x000010a2U);
-  iVar16 = *(int *)(ctx + 0x1d7c);
+  ga_poly_mode = *(int *)(ctx + GLD_ga_poly_mode);
   piVar38[0x37] = (int)((unsigned char *)0x00001381U);
-  piVar38[0x36] = iVar16;
+  piVar38[0x36] = ga_poly_mode;
   baseLevel = *(uint *)(ctx + 0x1cc0);
   piVar38[0x38] = baseLevel;
   if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x4000) == 0) {
@@ -4620,13 +4655,13 @@ LAB_00034df0:
   iVar16 = *(int *)(ctx + 0x1d6c);
   piVar38[0x3b] = (int)((unsigned char *)0x00001096U);
   piVar38[0x3a] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1df8);
+  ga_color_control = *(int *)(ctx + GLD_ga_color_control);
   piVar38[0x3d] = (int)((unsigned char *)0x00001041U);
-  piVar38[0x3a] = iVar16;
-  iVar16 = *(int *)(ctx + 0x29f0);
+  piVar38[0x3a] = ga_color_control;
+  tx_enable = *(int *)(ctx + GLD_tx_enable);
   piVar38[0x3f] = (int)((unsigned char *)0x00001046U);
-  piVar38[0x3e] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1dfc);
+  piVar38[0x3e] = tx_enable;
+  gb_ps3_enable = *(int *)(ctx + GLD_gb_ps3_enable);
   piVar38[0x41] = (int)((unsigned char *)0x00001094U);
   piVar38[0x59] = (int)((unsigned char *)0x00001095U);
   piVar38[0x5b] = -0x3fddf000;
@@ -4634,7 +4669,7 @@ LAB_00034df0:
   piVar38[0x43] = (int)((unsigned char *)0x00001095U);
   piVar38[0x45] = (int)((unsigned char *)0x00001095U);
   piVar38[0x47] = (int)((unsigned char *)0x00001095U);
-  piVar38[0x40] = iVar16;
+  piVar38[0x40] = gb_ps3_enable;
   piVar38[0x49] = (int)((unsigned char *)0x00001095U);
   piVar38[0x4b] = (int)((unsigned char *)0x00001095U);
   piVar38[0x4d] = (int)((unsigned char *)0x00001095U);
@@ -4651,24 +4686,24 @@ LAB_00034df0:
   piVar38[0x87] = (int)((unsigned char *)0x0000118eU);
   piVar38[0x89] = (int)((unsigned char *)0x0000118cU);
   piVar38[0x8b] = (int)((unsigned char *)0x000011a9U);
-  iVar16 = *(int *)(ctx + 0x257c);
+  us_out_fmt_0 = *(int *)(ctx + GLD_us_out_fmt_0);
   piVar38[0x8d] = (int)((unsigned char *)0x000011aaU);
-  piVar38[0x8c] = iVar16;
-  iVar16 = *(int *)(ctx + 0x2580);
+  piVar38[0x8c] = us_out_fmt_0;
+  us_out_fmt_1 = *(int *)(ctx + GLD_us_out_fmt_1);
   piVar38[0x8f] = (int)((unsigned char *)0x000011abU);
-  piVar38[0x8e] = iVar16;
-  iVar16 = *(int *)(ctx + 0x2584);
+  piVar38[0x8e] = us_out_fmt_1;
+  us_out_fmt_2 = *(int *)(ctx + GLD_us_out_fmt_2);
   piVar38[0x91] = (int)((unsigned char *)0x000011acU);
-  piVar38[0x90] = iVar16;
-  iVar16 = *(int *)(ctx + 0x2588);
+  piVar38[0x90] = us_out_fmt_2;
+  us_out_fmt_3 = *(int *)(ctx + GLD_us_out_fmt_3);
   piVar38[0x93] = (int)((unsigned char *)0x000010c0U);
-  piVar38[0x92] = iVar16;
-  iVar16 = *(int *)(ctx + 0x216c);
+  piVar38[0x92] = us_out_fmt_3;
+  rs_count = *(int *)(ctx + GLD_rs_count);
   piVar38[0x95] = (int)((unsigned char *)0x000010c1U);
   piVar38[0x97] = (int)((unsigned char *)0x000010c8U);
   piVar38[0x99] = (int)((unsigned char *)0x0000101dU);
-  piVar38[0x94] = iVar16;
-  iVar16 = *(int *)(ctx + 0x2128);
+  piVar38[0x94] = rs_count;
+  rs_ip_0 = *(int *)(ctx + GLD_rs_ip_0);
   piVar38[0x9b] = (int)((unsigned char *)0x0000138aU);
   piVar38[0x9d] = (int)((unsigned char *)0x0000138eU);
   piVar38[0xa2] = 0;
@@ -4676,45 +4711,45 @@ LAB_00034df0:
   piVar38[0x9c] = 0;
   piVar38[0x9e] = 0;
   piVar38[0xa0] = 0;
-  piVar38[0x9a] = iVar16;
+  piVar38[0x9a] = rs_ip_0;
   piVar38[0xa1] = (int)((unsigned char *)0x00001150U);
   piVar38[0xa3] = (int)((unsigned char *)0x00001100U);
-  iVar16 = *(int *)(ctx + 0x1f1c);
+  tx_filter0 = *(int *)(ctx + GLD_tx_filter0);
   piVar38[0xa5] = (int)((unsigned char *)0x00001110U);
-  piVar38[0xa4] = iVar16;
-  piVar38[0xa6] = *(int *)(ctx + 0x1f5c);
+  piVar38[0xa4] = tx_filter0;
+  piVar38[0xa6] = *(int *)(ctx + GLD_tx_filter1);
   piVar38[0xa7] = (int)((unsigned char *)0x00001120U);
-  iVar16 = *(int *)(ctx + 0x1f9c);
+  tx_format0 = *(int *)(ctx + GLD_tx_format0);
   piVar38[0xa9] = (int)((unsigned char *)0x00001130U);
-  piVar38[0xa8] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1fdc);
+  piVar38[0xa8] = tx_format0;
+  tx_format1 = *(int *)(ctx + GLD_tx_format1);
   piVar38[0xab] = (int)((unsigned char *)0x00001140U);
-  piVar38[0xaa] = iVar16;
-  iVar16 = *(int *)(ctx + 0x201c);
+  piVar38[0xaa] = tx_format1;
+  tx_format2 = *(int *)(ctx + GLD_tx_format2);
   piVar38[0xad] = (int)((unsigned char *)0x000010f4U);
   piVar38[0xae] = 0xaaaa;
   piVar38[0xaf] = (int)((unsigned char *)0x00001383U);
-  piVar38[0xac] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1d34);
+  piVar38[0xac] = tx_format2;
+  rb3d_color_channel_mask = *(int *)(ctx + GLD_rb3d_color_channel_mask);
   piVar38[0xb1] = (int)((unsigned char *)0x00001386U);
-  piVar38[0xb0] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1d38);
+  piVar38[0xb0] = rb3d_color_channel_mask;
+  rb3d_ropcntl = *(int *)(ctx + GLD_rb3d_ropcntl);
   piVar38[0xb3] = 0x110f8;
-  piVar38[0xb2] = iVar16;
-  piVar38[0xb4] = *(int *)(ctx + 0x1d98);
-  iVar16 = *(int *)(ctx + 0x1d50);
+  piVar38[0xb2] = rb3d_ropcntl;
+  piVar38[0xb4] = *(int *)(ctx + GLD_sc_scissor0);
+  sc_scissor1 = *(int *)(ctx + GLD_sc_scissor1);
   piVar38[0xb6] = (int)((unsigned char *)0x00001087U);
-  piVar38[0xb5] = iVar16;
-  iVar16 = *(int *)(ctx + 0x1f0c);
+  piVar38[0xb5] = sc_scissor1;
+  ga_point_size = *(int *)(ctx + GLD_ga_point_size);
   piVar38[0xb8] = 0x31080;
-  piVar38[0xb7] = iVar16;
-  piVar38[0xb9] = *(int *)(ctx + 0x1efc);
-  piVar38[0xba] = *(int *)(ctx + 0x1f04);
-  piVar38[0xbb] = *(int *)(ctx + 0x1f00);
-  piVar38[0xbc] = *(int *)(ctx + 0x1f08);
+  piVar38[0xb7] = ga_point_size;
+  piVar38[0xb9] = *(int *)(ctx + GLD_ga_point_s0);
+  piVar38[0xba] = *(int *)(ctx + GLD_ga_point_t0);
+  piVar38[0xbb] = *(int *)(ctx + GLD_ga_point_s1);
+  piVar38[0xbc] = *(int *)(ctx + GLD_ga_point_t1);
   FUN_0004c100(piVar38 + 2,a0);
   uVar20 = ((int (*)())FUN_000308c0)(ctx,piVar38 + 0xbf);
-  *(undefined4 *)(ctx + 0x298c) = uVar20;
+  *(undefined4 *)(ctx + GLD_streamCurrent) = uVar20;
   (**(code **)(ctx + GLD_streamSetCurrent))(a0,uVar20);
 LAB_00035340:
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
@@ -5559,6 +5594,47 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   undefined4 param_14;
   undefined4 *param_15;
 {
+  uint fg_alpha_func;
+  undefined4 ga_point_size;
+  undefined4 sc_scissor1;
+  undefined4 rb3d_ropcntl;
+  undefined4 rb3d_color_channel_mask;
+  undefined4 tx_format2;
+  undefined4 tx_format1;
+  undefined4 tx_format0;
+  undefined4 tx_filter0;
+  undefined4 rs_ip_0;
+  undefined4 rs_count;
+  undefined4 us_out_fmt_3;
+  undefined4 us_out_fmt_2;
+  undefined4 us_out_fmt_1;
+  undefined4 us_out_fmt_0;
+  undefined4 gb_ps3_enable;
+  undefined4 tx_enable;
+  undefined4 ga_color_control;
+  undefined4 ga_poly_mode;
+  undefined4 zb_cntl;
+  undefined4 vap_prog_stream_cntl_ext_0_ptr;
+  undefined4 vap_prog_stream_cntl_0_ptr;
+  undefined4 vap_vtx_size;
+  undefined4 vap_out_vtx_fmt_1;
+  undefined4 vap_out_vtx_fmt_0;
+  undefined4 gb_enable;
+  undefined4 rb3d_dither_ctl;
+  undefined4 su_cull_mode;
+  undefined4 vap_clip_cntl;
+  undefined4 vap_cntl_status;
+  undefined4 zb_zstencilcntl;
+  undefined4 zb_bw_cntl;
+  undefined4 sc_hyperz_en;
+  undefined4 gb_aa_config;
+  undefined4 gb_mspos1;
+  undefined4 sc_screendoor;
+  undefined4 sc_edgerule;
+  undefined4 dataBufferId;
+  uint fg_fog_blend;
+  uint *lastHeader;
+  int engineState;
   bool bVar1;
   float fVar2;
   float fVar3;
@@ -5712,9 +5788,9 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
             ((0x800 >= (int)width || (uVar42 < 4)))) && ((*(uint *)(iVar39 + 0x14) & 8) == 0)) {
           iVar43 = ctx + GLD_commandStream;
           uVar28 = (**(code **)(ctx + GLD_streamAllocate))(iVar43,0xe0);
-          *(undefined4 *)(ctx + 0x298c) = uVar28;
+          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
           uVar28 = ((int (*)())FUN_00030840)(ctx,uVar28,texture);
-          *(undefined4 *)(ctx + 0x298c) = uVar28;
+          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
           (**(code **)(ctx + GLD_streamSetCurrent))(iVar43,uVar28);
           uStack_e0 = 0x1e000 / uVar24;
           uVar42 = ((int (*)())FUN_0002f7c0)(pixelFormat,pixelType);
@@ -5746,31 +5822,31 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
                     (undefined1 *)((int)puVar23 + iStack_d8 + 0x80)) {
                   iStack_244 = 2;
                   uVar44 = *(int *)(ctx + GLD_dataRefillCount) + 1;
-                  *(uint *)(ctx + 0x204) = uVar44;
+                  *(uint *)(ctx + GLD_dataRefillCount) = uVar44;
                   if (2 < uVar44) {
                     if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
                       FUN_0001a0f0(ctx,0x1000000);
                       puVar23 = *(uint **)(ctx + GLD_dataCursor);
                     }
-                    *(undefined4 *)(ctx + 0x204) = 1;
+                    *(undefined4 *)(ctx + GLD_dataRefillCount) = 1;
                   }
-                  *(int *)(*(int *)(ctx + 0x208) + 0xc) =
+                  *(int *)(*(int *)(ctx + GLD_contextBufferMap) + 0xc) =
                        (int)puVar23 - *(int *)(ctx + GLD_dataBase) >> 2;
                   _io_connect_method_scalarI_scalarO
                             (*(undefined4 *)(ctx + GLD_connect),0x12,0,0,&puStack_23c,piStack_c8);
                   uVar44 = *(uint *)(0x000026c8 + ctx);
-                  *(uint **)(ctx + 0x1fc) = puStack_23c;
-                  *(uint **)(ctx + 500) = puStack_23c;
-                  *(undefined1 **)(ctx + 0x1f8) =
+                  *(uint **)(ctx + GLD_dataBase) = puStack_23c;
+                  *(uint **)(ctx + GLD_dataCursor) = puStack_23c;
+                  *(undefined1 **)(ctx + GLD_dataLimit) =
                        (undefined1 *)((int)puStack_23c + (uStack_238 & 0xfffffffc));
                   uVar28 = *(undefined4 *)(*(int *)(ctx + GLD_contextBufferMap) + 8);
                   *(uint *)(0x000026c8 + ctx) = uVar44 | 1;
-                  *(undefined4 *)(ctx + 0x200) = uVar28;
+                  *(undefined4 *)(ctx + GLD_dataBufferId) = uVar28;
                   puVar23 = puStack_23c;
                 }
                 uStack_1d0 = 0;
                 puStack_22c = (uint *)((uint)((int)puVar23 + 0x7f) & 0xffffff80);
-                *(uint **)(ctx + 500) = puStack_22c;
+                *(uint **)(ctx + GLD_dataCursor) = puStack_22c;
                 uStack_21c = 2;
                 uStack_20c = uStack_ec;
                 uStack_234 = *(uint *)(iVar39 + 0x10) >> 0x1b;
@@ -5780,9 +5856,9 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
                 uStack_218 = 0;
                 uStack_230 = *(uint *)(iVar39 + 0x10) >> 0x16 & 0x1f;
                 if ((char)param_14 == '\0') {
-                  iVar22 = *(int *)(ctx + GLD_engineState);
-                  puVar25 = ((unsigned char *)0x00002e6c) + iVar22;
-                  if (((unsigned char *)0x00002e84)[iVar22] != '\0') {
+                  engineState = *(int *)(ctx + GLD_engineState);
+                  puVar25 = ((unsigned char *)0x00002e6c) + engineState;
+                  if (((unsigned char *)0x00002e84)[engineState] != '\0') {
                     uStack_218 = 1;
                     if (pixelType < (undefined *)0x8037) {
                       if (pixelType < (undefined *)0x8035) {
@@ -5816,7 +5892,7 @@ LAB_00037c60:
 LAB_00037c6c:
                     uVar26 = uVar26 ^ uVar44;
                   }
-                  if (((unsigned char *)0x00002e85)[iVar22] != '\0') {
+                  if (((unsigned char *)0x00002e85)[engineState] != '\0') {
                     uStack_218 = uStack_218 | 4;
                   }
                 }
@@ -5980,22 +6056,22 @@ LAB_00037c6c:
                   }
                 }
                 iVar22 = (int)puStack_10c - *(int *)(ctx + GLD_dataBase);
-                *(int *)(ctx + 500) = (int)puStack_10c + iStack_d8;
+                *(int *)(ctx + GLD_dataCursor) = (int)puStack_10c + iStack_d8;
                 puVar30 = (undefined4 *)
                           (**(code **)(ctx + GLD_streamAllocate))(iVar43,0x2a,a2,puStack_10c,iStack_d8);
                 uVar42 = 0;
-                *(undefined4 **)(ctx + 0x298c) = puVar30;
-                puVar23 = *(uint **)(ctx + GLD_lastHeader);
-                *puVar23 = (int)puVar30 - (int)puVar23 >> 2 | *puVar23;
-                *(undefined4 **)(ctx + 0x1d8) = puVar30;
+                *(undefined4 **)(ctx + GLD_streamCurrent) = puVar30;
+                lastHeader = *(uint **)(ctx + GLD_lastHeader);
+                *lastHeader = (int)puVar30 - (int)lastHeader >> 2 | *lastHeader;
+                *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
                 puVar30[2] = uStack_a0 | uStack_ac;
                 *puVar30 = 0x44000000;
                 puVar30[1] = 0x2a;
-                uVar28 = *(undefined4 *)(ctx + GLD_dataBufferId);
+                dataBufferId = *(undefined4 *)(ctx + GLD_dataBufferId);
                 puVar30[9] = 0xd07;
                 puVar30[4] = iVar22;
                 puVar30[5] = ((unsigned char *)0x00001393U);
-                puVar30[3] = uVar28;
+                puVar30[3] = dataBufferId;
                 puVar30[6] = 10;
                 puVar30[7] = 0x5c8;
                 puVar30[8] = 0x20000;
@@ -6088,7 +6164,7 @@ LAB_00037c6c:
                 puVar30[0x25] = 5;
                 puVar30[0x28] = ((unsigned char *)0x00001040U);
                 puVar30[0x27] = 0x10000;
-                *(undefined4 **)(ctx + 0x298c) = puVar30 + 0x2a;
+                *(undefined4 **)(ctx + GLD_streamCurrent) = puVar30 + 0x2a;
                 (**(code **)(ctx + GLD_streamSetCurrent))
                           (iVar43,puVar30 + 0x2a,a2,0,uVar44,uVar42,uVar21,puVar30 + 0x24);
                 if (bVar1) break;
@@ -6134,14 +6210,14 @@ LAB_00037c6c:
               puVar30 = (undefined4 *)
                         (**(code **)(ctx + GLD_streamAllocate))(iVar43,(uVar26 * uVar42 >> 2) + 0x193);
               piStack_fc = puVar30 + 1;
-              *(undefined4 **)(ctx + 0x298c) = puVar30;
-              puVar23 = *(uint **)(ctx + GLD_lastHeader);
+              *(undefined4 **)(ctx + GLD_streamCurrent) = puVar30;
+              lastHeader = *(uint **)(ctx + GLD_lastHeader);
               uVar28 = *(undefined4 *)(iStack_9c + 0x1ec8);
               iVar45 = iStack_a4 + iStack_cc + texture[0xc];
               uStack_f8 = (uint)*(ushort *)(iVar45 + 0xa6);
               uVar9 = *(ushort *)(iVar45 + 0xa4);
-              *puVar23 = (int)puVar30 - (int)puVar23 >> 2 | *puVar23;
-              *(undefined4 **)(ctx + 0x1d8) = puVar30;
+              *lastHeader = (int)puVar30 - (int)lastHeader >> 2 | *lastHeader;
+              *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
               *puVar30 = 0x35000000;
               puVar30[2] = uStack_100;
               _memcpy(puVar30 + 3,uVar28,0x2f4);
@@ -6242,9 +6318,9 @@ LAB_00038698:
               puVar30[0xcb] = 0;
               puVar30[0xc6] = uVar44 | uStack_108;
               *piStack_fc = (int)puVar40 - (int)puVar30 >> 2;
-              puVar23 = *(uint **)(ctx + GLD_lastHeader);
-              *puVar23 = (int)puVar40 - (int)puVar23 >> 2 | *puVar23;
-              *(undefined4 **)(ctx + 0x1d8) = puVar40;
+              lastHeader = *(uint **)(ctx + GLD_lastHeader);
+              *lastHeader = (int)puVar40 - (int)lastHeader >> 2 | *lastHeader;
+              *(undefined4 **)(ctx + GLD_lastHeader) = puVar40;
               puVar30[0xcd] = 0;
               puVar30[0xcc] = 0x33000000;
               puVar30[0xce] = ((unsigned char *)0x00001393U);
@@ -6254,69 +6330,69 @@ LAB_00038698:
               puVar30[0xd2] = 0x5c8;
               puVar30[0xd3] = 0x20000;
               puVar30[0xd4] = ((unsigned char *)0x000010eaU);
-              uVar28 = *(undefined4 *)(ctx + 0x1cfc);
+              sc_edgerule = *(undefined4 *)(ctx + GLD_sc_edgerule);
               puVar30[0xd6] = ((unsigned char *)0x000010faU);
-              puVar30[0xd5] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1da0);
+              puVar30[0xd5] = sc_edgerule;
+              sc_screendoor = *(undefined4 *)(ctx + GLD_sc_screendoor);
               puVar30[0xd8] = 0xc0001000;
               puVar30[0xda] = 0x11004;
-              puVar30[0xd7] = uVar28;
-              puVar30[0xdb] = *(undefined4 *)(ctx + 0x1ca8);
-              uVar28 = *(undefined4 *)(ctx + 0x1cac);
+              puVar30[0xd7] = sc_screendoor;
+              puVar30[0xdb] = *(undefined4 *)(ctx + GLD_gb_mspos0);
+              gb_mspos1 = *(undefined4 *)(ctx + GLD_gb_mspos1);
               puVar30[0xdd] = ((unsigned char *)0x00001008U);
-              puVar30[0xdc] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1ca0);
+              puVar30[0xdc] = gb_mspos1;
+              gb_aa_config = *(undefined4 *)(ctx + GLD_gb_aa_config);
               puVar30[0xdf] = ((unsigned char *)0x000010e9U);
-              puVar30[0xde] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1d20);
+              puVar30[0xde] = gb_aa_config;
+              sc_hyperz_en = *(undefined4 *)(ctx + GLD_sc_hyperz_en);
               puVar30[0xe1] = ((unsigned char *)0x000013c7U);
-              puVar30[0xe0] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1cf0);
+              puVar30[0xe0] = sc_hyperz_en;
+              zb_bw_cntl = *(undefined4 *)(ctx + GLD_zb_bw_cntl);
               puVar30[0xe3] = ((unsigned char *)0x000013c1U);
-              puVar30[0xe2] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1ce4);
+              puVar30[0xe2] = zb_bw_cntl;
+              zb_zstencilcntl = *(undefined4 *)(ctx + GLD_zb_zstencilcntl);
               puVar30[0xe5] = 0x850;
-              puVar30[0xe4] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1dc0);
+              puVar30[0xe4] = zb_zstencilcntl;
+              vap_cntl_status = *(undefined4 *)(ctx + GLD_vap_cntl_status);
               puVar30[0xe7] = 0x887;
-              puVar30[0xe6] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1db4);
+              puVar30[0xe6] = vap_cntl_status;
+              vap_clip_cntl = *(undefined4 *)(ctx + GLD_vap_clip_cntl);
               puVar30[0x189] = 0x82c;
-              puVar30[0xe8] = uVar28;
-              uVar28 = *(undefined4 *)(0x00001dc4 + ctx);
+              puVar30[0xe8] = vap_clip_cntl;
+              uVar28 = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
               puVar30[0xe9] = ((unsigned char *)0x000010aeU);
               puVar30[0x18a] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1d70);
+              su_cull_mode = *(undefined4 *)(ctx + GLD_su_cull_mode);
               puVar30[0xeb] = ((unsigned char *)0x00001394U);
-              puVar30[0xea] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1d30);
+              puVar30[0xea] = su_cull_mode;
+              rb3d_dither_ctl = *(undefined4 *)(ctx + GLD_rb3d_dither_ctl);
               puVar30[0xed] = ((unsigned char *)0x00001380U);
               puVar30[0xef] = ((unsigned char *)0x00001002U);
               puVar30[0xee] = 0;
-              puVar30[0xec] = uVar28;
-              puVar30[0xf0] = *(undefined4 *)(ctx + 0x1d90);
-              uVar28 = *(undefined4 *)(ctx + 0x1d90);
+              puVar30[0xec] = rb3d_dither_ctl;
+              puVar30[0xf0] = *(undefined4 *)(ctx + GLD_gb_enable);
+              gb_enable = *(undefined4 *)(ctx + GLD_gb_enable);
               puVar30[0xf1] = 0x824;
-              puVar30[0xf0] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1ddc);
+              puVar30[0xf0] = gb_enable;
+              vap_out_vtx_fmt_0 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_0);
               puVar30[0xf3] = 0x825;
-              puVar30[0xf2] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1de0);
+              puVar30[0xf2] = vap_out_vtx_fmt_0;
+              vap_out_vtx_fmt_1 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_1);
               puVar30[0xf5] = 0x82d;
-              puVar30[0xf4] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x26cc);
+              puVar30[0xf4] = vap_out_vtx_fmt_1;
+              vap_vtx_size = *(undefined4 *)(ctx + GLD_vap_vtx_size);
               puVar30[0xf7] = 0x854;
-              puVar30[0xf6] = uVar28;
-              uVar28 = **(undefined4 **)(ctx + 0x2680);
+              puVar30[0xf6] = vap_vtx_size;
+              vap_prog_stream_cntl_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_0_ptr);
               puVar30[0xf9] = 0x878;
-              puVar30[0xf8] = uVar28;
-              uVar28 = **(undefined4 **)(ctx + 0x2684);
+              puVar30[0xf8] = vap_prog_stream_cntl_0_ptr;
+              vap_prog_stream_cntl_ext_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr);
               puVar30[0xfb] = ((unsigned char *)0x000013c0U);
-              puVar30[0xfa] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1ce0);
+              puVar30[0xfa] = vap_prog_stream_cntl_ext_0_ptr;
+              zb_cntl = *(undefined4 *)(ctx + GLD_zb_cntl);
               puVar30[0xfd] = ((unsigned char *)0x000012f0U);
-              puVar30[0xfc] = uVar28;
-              uVar44 = *(uint *)(ctx + 0x1d2c);
+              puVar30[0xfc] = zb_cntl;
+              uVar44 = *(uint *)(ctx + GLD_fg_fog_blend);
               puVar30[0xfe] = uVar44;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
                             (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
@@ -6324,17 +6400,17 @@ LAB_00038698:
                 puVar30[0xfe] = uVar44 & 0xfffffffe;
               }
               puVar30[0xff] = ((unsigned char *)0x000012f5U);
-              uVar44 = *(uint *)(ctx + 0x1c8c);
-              puVar30[0x100] = uVar44;
+              fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
+              puVar30[0x100] = fg_alpha_func;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
                             (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
-                puVar30[0x100] = uVar44 & 0xfffff7ff;
+                puVar30[0x100] = fg_alpha_func & 0xfffff7ff;
               }
               puVar30[0x101] = ((unsigned char *)0x000010a2U);
-              uVar28 = *(undefined4 *)(ctx + 0x1d7c);
+              ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
               puVar30[0x103] = ((unsigned char *)0x00001381U);
-              puVar30[0x102] = uVar28;
+              puVar30[0x102] = ga_poly_mode;
               uVar44 = *(uint *)(ctx + 0x1cc0);
               puVar30[0x104] = uVar44;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
@@ -6346,13 +6422,13 @@ LAB_00038698:
               uVar28 = *(undefined4 *)(ctx + 0x1d6c);
               puVar30[0x107] = ((unsigned char *)0x00001096U);
               puVar30[0x106] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1df8);
+              ga_color_control = *(undefined4 *)(ctx + GLD_ga_color_control);
               puVar30[0x109] = ((unsigned char *)0x00001041U);
-              puVar30[0x106] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x29f0);
+              puVar30[0x106] = ga_color_control;
+              tx_enable = *(undefined4 *)(ctx + GLD_tx_enable);
               puVar30[0x10b] = ((unsigned char *)0x00001046U);
-              puVar30[0x10a] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1dfc);
+              puVar30[0x10a] = tx_enable;
+              gb_ps3_enable = *(undefined4 *)(ctx + GLD_gb_ps3_enable);
               puVar30[0x10d] = ((unsigned char *)0x00001094U);
               puVar30[0x125] = ((unsigned char *)0x00001095U);
               puVar30[0x127] = 0xc0221000;
@@ -6360,7 +6436,7 @@ LAB_00038698:
               puVar30[0x10f] = ((unsigned char *)0x00001095U);
               puVar30[0x111] = ((unsigned char *)0x00001095U);
               puVar30[0x113] = ((unsigned char *)0x00001095U);
-              puVar30[0x10c] = uVar28;
+              puVar30[0x10c] = gb_ps3_enable;
               puVar30[0x115] = ((unsigned char *)0x00001095U);
               puVar30[0x117] = ((unsigned char *)0x00001095U);
               puVar30[0x119] = ((unsigned char *)0x00001095U);
@@ -6377,24 +6453,24 @@ LAB_00038698:
               puVar30[0x153] = ((unsigned char *)0x0000118eU);
               puVar30[0x155] = ((unsigned char *)0x0000118cU);
               puVar30[0x157] = ((unsigned char *)0x000011a9U);
-              uVar28 = *(undefined4 *)(ctx + 0x257c);
+              us_out_fmt_0 = *(undefined4 *)(ctx + GLD_us_out_fmt_0);
               puVar30[0x159] = ((unsigned char *)0x000011aaU);
-              puVar30[0x158] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x2580);
+              puVar30[0x158] = us_out_fmt_0;
+              us_out_fmt_1 = *(undefined4 *)(ctx + GLD_us_out_fmt_1);
               puVar30[0x15b] = ((unsigned char *)0x000011abU);
-              puVar30[0x15a] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x2584);
+              puVar30[0x15a] = us_out_fmt_1;
+              us_out_fmt_2 = *(undefined4 *)(ctx + GLD_us_out_fmt_2);
               puVar30[0x15d] = ((unsigned char *)0x000011acU);
-              puVar30[0x15c] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x2588);
+              puVar30[0x15c] = us_out_fmt_2;
+              us_out_fmt_3 = *(undefined4 *)(ctx + GLD_us_out_fmt_3);
               puVar30[0x15f] = ((unsigned char *)0x000010c0U);
-              puVar30[0x15e] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x216c);
+              puVar30[0x15e] = us_out_fmt_3;
+              rs_count = *(undefined4 *)(ctx + GLD_rs_count);
               puVar30[0x161] = ((unsigned char *)0x000010c1U);
               puVar30[0x163] = ((unsigned char *)0x000010c8U);
               puVar30[0x165] = ((unsigned char *)0x0000101dU);
-              puVar30[0x160] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x2128);
+              puVar30[0x160] = rs_count;
+              rs_ip_0 = *(undefined4 *)(ctx + GLD_rs_ip_0);
               puVar30[0x167] = ((unsigned char *)0x0000138aU);
               puVar30[0x169] = ((unsigned char *)0x0000138eU);
               puVar30[0x16e] = 0;
@@ -6402,42 +6478,42 @@ LAB_00038698:
               puVar30[0x168] = 0;
               puVar30[0x16a] = 0;
               puVar30[0x16c] = 0;
-              puVar30[0x166] = uVar28;
+              puVar30[0x166] = rs_ip_0;
               puVar30[0x16d] = ((unsigned char *)0x00001150U);
               puVar30[0x16f] = ((unsigned char *)0x00001100U);
-              uVar28 = *(undefined4 *)(ctx + 0x1f1c);
+              tx_filter0 = *(undefined4 *)(ctx + GLD_tx_filter0);
               puVar30[0x171] = ((unsigned char *)0x00001110U);
-              puVar30[0x170] = uVar28;
-              puVar30[0x172] = *(undefined4 *)(ctx + 0x1f5c);
+              puVar30[0x170] = tx_filter0;
+              puVar30[0x172] = *(undefined4 *)(ctx + GLD_tx_filter1);
               puVar30[0x173] = ((unsigned char *)0x00001120U);
-              uVar28 = *(undefined4 *)(ctx + 0x1f9c);
+              tx_format0 = *(undefined4 *)(ctx + GLD_tx_format0);
               puVar30[0x175] = ((unsigned char *)0x00001130U);
-              puVar30[0x174] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1fdc);
+              puVar30[0x174] = tx_format0;
+              tx_format1 = *(undefined4 *)(ctx + GLD_tx_format1);
               puVar30[0x177] = ((unsigned char *)0x00001140U);
-              puVar30[0x176] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x201c);
+              puVar30[0x176] = tx_format1;
+              tx_format2 = *(undefined4 *)(ctx + GLD_tx_format2);
               puVar30[0x179] = ((unsigned char *)0x000010f4U);
               puVar30[0x17a] = 0xaaaa;
               puVar30[0x17b] = ((unsigned char *)0x00001383U);
-              puVar30[0x178] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1d34);
+              puVar30[0x178] = tx_format2;
+              rb3d_color_channel_mask = *(undefined4 *)(ctx + GLD_rb3d_color_channel_mask);
               puVar30[0x17d] = ((unsigned char *)0x00001386U);
-              puVar30[0x17c] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1d38);
+              puVar30[0x17c] = rb3d_color_channel_mask;
+              rb3d_ropcntl = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
               puVar30[0x17f] = 0x110f8;
-              puVar30[0x17e] = uVar28;
-              puVar30[0x180] = *(undefined4 *)(ctx + 0x1d98);
-              uVar28 = *(undefined4 *)(ctx + 0x1d50);
+              puVar30[0x17e] = rb3d_ropcntl;
+              puVar30[0x180] = *(undefined4 *)(ctx + GLD_sc_scissor0);
+              sc_scissor1 = *(undefined4 *)(ctx + GLD_sc_scissor1);
               puVar30[0x182] = ((unsigned char *)0x00001087U);
-              puVar30[0x181] = uVar28;
-              uVar28 = *(undefined4 *)(ctx + 0x1f0c);
+              puVar30[0x181] = sc_scissor1;
+              ga_point_size = *(undefined4 *)(ctx + GLD_ga_point_size);
               puVar30[0x184] = 0x31080;
-              puVar30[0x183] = uVar28;
-              puVar30[0x185] = *(undefined4 *)(ctx + 0x1efc);
-              puVar30[0x186] = *(undefined4 *)(ctx + 0x1f04);
-              puVar30[0x187] = *(undefined4 *)(ctx + 0x1f00);
-              puVar30[0x188] = *(undefined4 *)(ctx + 0x1f08);
+              puVar30[0x183] = ga_point_size;
+              puVar30[0x185] = *(undefined4 *)(ctx + GLD_ga_point_s0);
+              puVar30[0x186] = *(undefined4 *)(ctx + GLD_ga_point_t0);
+              puVar30[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s1);
+              puVar30[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t1);
               FUN_0004c100(puVar30 + 0xce,iVar43);
               puVar29 = puVar30 + 0x18b;
               for (puVar23 = puVar30 + 0x18c; ((uint)puVar23 & 0x1f) != 0; puVar23 = puVar23 + 1) {
@@ -6510,15 +6586,15 @@ LAB_00038698:
               uStack_20c = uVar42;
               _glgProcessPixels(((unsigned char *)0x00002e48) + *(int *)(ctx + GLD_engineState),ppuStack_c0,puVar33,
                                 param_13,uVar44,puVar37,iVar22 * uStack_238,puVar38);
-              *(uint **)(ctx + 0x298c) = puVar29;
+              *(uint **)(ctx + GLD_streamCurrent) = puVar29;
               (**(code **)(ctx + GLD_streamSetCurrent))(iVar43,puVar29);
               iVar22 = iStack_110;
             } while (bVar1);
           }
           uVar28 = (**(code **)(ctx + GLD_streamAllocate))(iVar43,0xe0);
-          *(undefined4 *)(ctx + 0x298c) = uVar28;
+          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
           uVar28 = ((int (*)())FUN_000308c0)(ctx,uVar28);
-          *(undefined4 *)(ctx + 0x298c) = uVar28;
+          *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
           (**(code **)(ctx + GLD_streamSetCurrent))(iVar43,uVar28);
           _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
           if ((*(uint *)(texture[0xc] + 0x48) & 0x8000) == 0) {
@@ -6649,14 +6725,14 @@ LAB_00037930:
   if (!bVar1) goto LAB_00037930;
   iVar45 = ctx + GLD_commandStream;
   uVar28 = (**(code **)(ctx + GLD_streamAllocate))(iVar45,0x343);
-  *(undefined4 *)(ctx + 0x298c) = uVar28;
+  *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
   puVar29 = (uint *)((int (*)())FUN_00030840)(ctx,uVar28,texture);
   puVar30 = (undefined4 *)((uint)(puVar29 + 0xb) & 0xffffffe0);
   *puVar29 = (((int)puVar30 - (int)puVar29) + -8) * 0x4000 | 0xc0001000;
   puVar30[-1] = (int)puVar30 - (int)puVar29;
-  puVar23 = *(uint **)(ctx + GLD_lastHeader);
-  *puVar23 = (int)puVar30 - (int)puVar23 >> 2 | *puVar23;
-  *(undefined4 **)(ctx + 0x1d8) = puVar30;
+  lastHeader = *(uint **)(ctx + GLD_lastHeader);
+  *lastHeader = (int)puVar30 - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
   *puVar30 = 0x3e000000;
   puVar40 = *(undefined4 **)param_15[2];
   piVar36 = puVar40 + 4;
@@ -6807,9 +6883,9 @@ LAB_000371ac:
   puVar30[0xcd] = 0;
   puVar30[200] = iVar43 << 0x10 | uVar26;
   puVar30[1] = (int)puVar40 - (int)puVar29 >> 2;
-  puVar23 = *(uint **)(ctx + GLD_lastHeader);
-  *puVar23 = (int)puVar40 - (int)puVar23 >> 2 | *puVar23;
-  *(undefined4 **)(ctx + 0x1d8) = puVar40;
+  lastHeader = *(uint **)(ctx + GLD_lastHeader);
+  *lastHeader = (int)puVar40 - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + GLD_lastHeader) = puVar40;
   puVar30[0xcf] = 0;
   puVar30[0xce] = 0x33000000;
   puVar30[0xd0] = ((unsigned char *)0x00001393U);
@@ -6819,88 +6895,88 @@ LAB_000371ac:
   puVar30[0xd4] = 0x5c8;
   puVar30[0xd5] = 0x20000;
   puVar30[0xd6] = ((unsigned char *)0x000010eaU);
-  uVar28 = *(undefined4 *)(ctx + 0x1cfc);
+  sc_edgerule = *(undefined4 *)(ctx + GLD_sc_edgerule);
   puVar30[0xd8] = ((unsigned char *)0x000010faU);
-  puVar30[0xd7] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1da0);
+  puVar30[0xd7] = sc_edgerule;
+  sc_screendoor = *(undefined4 *)(ctx + GLD_sc_screendoor);
   puVar30[0xda] = 0xc0001000;
   puVar30[0xdc] = 0x11004;
-  puVar30[0xd9] = uVar28;
-  puVar30[0xdd] = *(undefined4 *)(ctx + 0x1ca8);
-  uVar28 = *(undefined4 *)(ctx + 0x1cac);
+  puVar30[0xd9] = sc_screendoor;
+  puVar30[0xdd] = *(undefined4 *)(ctx + GLD_gb_mspos0);
+  gb_mspos1 = *(undefined4 *)(ctx + GLD_gb_mspos1);
   puVar30[0xdf] = ((unsigned char *)0x00001008U);
-  puVar30[0xde] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1ca0);
+  puVar30[0xde] = gb_mspos1;
+  gb_aa_config = *(undefined4 *)(ctx + GLD_gb_aa_config);
   puVar30[0xe1] = ((unsigned char *)0x000010e9U);
-  puVar30[0xe0] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1d20);
+  puVar30[0xe0] = gb_aa_config;
+  sc_hyperz_en = *(undefined4 *)(ctx + GLD_sc_hyperz_en);
   puVar30[0xe3] = ((unsigned char *)0x000013c7U);
-  puVar30[0xe2] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1cf0);
+  puVar30[0xe2] = sc_hyperz_en;
+  zb_bw_cntl = *(undefined4 *)(ctx + GLD_zb_bw_cntl);
   puVar30[0xe5] = ((unsigned char *)0x000013c1U);
-  puVar30[0xe4] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1ce4);
+  puVar30[0xe4] = zb_bw_cntl;
+  zb_zstencilcntl = *(undefined4 *)(ctx + GLD_zb_zstencilcntl);
   puVar30[0xe7] = 0x850;
-  puVar30[0xe6] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1dc0);
+  puVar30[0xe6] = zb_zstencilcntl;
+  vap_cntl_status = *(undefined4 *)(ctx + GLD_vap_cntl_status);
   puVar30[0xe9] = 0x887;
-  puVar30[0xe8] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1db4);
+  puVar30[0xe8] = vap_cntl_status;
+  vap_clip_cntl = *(undefined4 *)(ctx + GLD_vap_clip_cntl);
   puVar30[0x18b] = 0x82c;
-  puVar30[0xea] = uVar28;
-  uVar28 = *(undefined4 *)(0x00001dc4 + ctx);
+  puVar30[0xea] = vap_clip_cntl;
+  uVar28 = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
   puVar30[0xeb] = ((unsigned char *)0x000010aeU);
   puVar30[0x18c] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1d70);
+  su_cull_mode = *(undefined4 *)(ctx + GLD_su_cull_mode);
   puVar30[0xed] = ((unsigned char *)0x00001394U);
-  puVar30[0xec] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1d30);
+  puVar30[0xec] = su_cull_mode;
+  rb3d_dither_ctl = *(undefined4 *)(ctx + GLD_rb3d_dither_ctl);
   puVar30[0xef] = ((unsigned char *)0x00001380U);
   puVar30[0xf1] = ((unsigned char *)0x00001002U);
   puVar30[0xf0] = 0;
-  puVar30[0xee] = uVar28;
-  puVar30[0xf2] = *(undefined4 *)(ctx + 0x1d90);
-  uVar28 = *(undefined4 *)(ctx + 0x1d90);
+  puVar30[0xee] = rb3d_dither_ctl;
+  puVar30[0xf2] = *(undefined4 *)(ctx + GLD_gb_enable);
+  gb_enable = *(undefined4 *)(ctx + GLD_gb_enable);
   puVar30[0xf3] = 0x824;
-  puVar30[0xf2] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1ddc);
+  puVar30[0xf2] = gb_enable;
+  vap_out_vtx_fmt_0 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_0);
   puVar30[0xf5] = 0x825;
-  puVar30[0xf4] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1de0);
+  puVar30[0xf4] = vap_out_vtx_fmt_0;
+  vap_out_vtx_fmt_1 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_1);
   puVar30[0xf7] = 0x82d;
-  puVar30[0xf6] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x26cc);
+  puVar30[0xf6] = vap_out_vtx_fmt_1;
+  vap_vtx_size = *(undefined4 *)(ctx + GLD_vap_vtx_size);
   puVar30[0xf9] = 0x854;
-  puVar30[0xf8] = uVar28;
-  uVar28 = **(undefined4 **)(ctx + 0x2680);
+  puVar30[0xf8] = vap_vtx_size;
+  vap_prog_stream_cntl_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_0_ptr);
   puVar30[0xfb] = 0x878;
-  puVar30[0xfa] = uVar28;
-  uVar28 = **(undefined4 **)(ctx + 0x2684);
+  puVar30[0xfa] = vap_prog_stream_cntl_0_ptr;
+  vap_prog_stream_cntl_ext_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr);
   puVar30[0xfd] = ((unsigned char *)0x000013c0U);
-  puVar30[0xfc] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1ce0);
+  puVar30[0xfc] = vap_prog_stream_cntl_ext_0_ptr;
+  zb_cntl = *(undefined4 *)(ctx + GLD_zb_cntl);
   puVar30[0xff] = ((unsigned char *)0x000012f0U);
-  puVar30[0xfe] = uVar28;
-  uVar26 = *(uint *)(ctx + 0x1d2c);
-  puVar30[0x100] = uVar26;
+  puVar30[0xfe] = zb_cntl;
+  fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
+  puVar30[0x100] = fg_fog_blend;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
                 (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x8000) ==
       0) {
-    puVar30[0x100] = uVar26 & 0xfffffffe;
+    puVar30[0x100] = fg_fog_blend & 0xfffffffe;
   }
   puVar30[0x101] = ((unsigned char *)0x000012f5U);
-  uVar44 = *(uint *)(ctx + 0x1c8c);
-  puVar30[0x102] = uVar44;
+  fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
+  puVar30[0x102] = fg_alpha_func;
   uVar26 = *(uint *)(((unsigned char *)0x0000352c) +
                     (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18)) & 0x8000
   ;
   if (uVar26 == 0) {
-    puVar30[0x102] = uVar44 & 0xfffff7ff;
+    puVar30[0x102] = fg_alpha_func & 0xfffff7ff;
   }
   puVar30[0x103] = ((unsigned char *)0x000010a2U);
-  uVar28 = *(undefined4 *)(ctx + 0x1d7c);
+  ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
   puVar30[0x105] = ((unsigned char *)0x00001381U);
-  puVar30[0x104] = uVar28;
+  puVar30[0x104] = ga_poly_mode;
   uVar44 = *(uint *)(ctx + 0x1cc0);
   puVar30[0x106] = uVar44;
   if ((*(uint *)(((unsigned char *)0x0000352c) +
@@ -6913,13 +6989,13 @@ LAB_000371ac:
   uVar28 = *(undefined4 *)(ctx + 0x1d6c);
   puVar30[0x109] = ((unsigned char *)0x00001096U);
   puVar30[0x108] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1df8);
+  ga_color_control = *(undefined4 *)(ctx + GLD_ga_color_control);
   puVar30[0x10b] = ((unsigned char *)0x00001041U);
-  puVar30[0x108] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x29f0);
+  puVar30[0x108] = ga_color_control;
+  tx_enable = *(undefined4 *)(ctx + GLD_tx_enable);
   puVar30[0x10d] = ((unsigned char *)0x00001046U);
-  puVar30[0x10c] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1dfc);
+  puVar30[0x10c] = tx_enable;
+  gb_ps3_enable = *(undefined4 *)(ctx + GLD_gb_ps3_enable);
   puVar30[0x10f] = ((unsigned char *)0x00001094U);
   puVar30[0x14e] = 2;
   puVar30[0x129] = 0xc0221000;
@@ -6927,7 +7003,7 @@ LAB_000371ac:
   puVar30[0x127] = ((unsigned char *)0x00001095U);
   puVar30[0x151] = ((unsigned char *)0x00001181U);
   puVar30[0x111] = ((unsigned char *)0x00001095U);
-  puVar30[0x10e] = uVar28;
+  puVar30[0x10e] = gb_ps3_enable;
   puVar30[0x113] = ((unsigned char *)0x00001095U);
   puVar30[0x115] = ((unsigned char *)0x00001095U);
   puVar30[0x117] = ((unsigned char *)0x00001095U);
@@ -6944,24 +7020,24 @@ LAB_000371ac:
   puVar30[0x153] = ((unsigned char *)0x0000118dU);
   puVar30[0x157] = ((unsigned char *)0x0000118cU);
   puVar30[0x159] = ((unsigned char *)0x000011a9U);
-  uVar28 = *(undefined4 *)(ctx + 0x257c);
+  us_out_fmt_0 = *(undefined4 *)(ctx + GLD_us_out_fmt_0);
   puVar30[0x15b] = ((unsigned char *)0x000011aaU);
-  puVar30[0x15a] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x2580);
+  puVar30[0x15a] = us_out_fmt_0;
+  us_out_fmt_1 = *(undefined4 *)(ctx + GLD_us_out_fmt_1);
   puVar30[0x15d] = ((unsigned char *)0x000011abU);
-  puVar30[0x15c] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x2584);
+  puVar30[0x15c] = us_out_fmt_1;
+  us_out_fmt_2 = *(undefined4 *)(ctx + GLD_us_out_fmt_2);
   puVar30[0x15f] = ((unsigned char *)0x000011acU);
-  puVar30[0x15e] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x2588);
+  puVar30[0x15e] = us_out_fmt_2;
+  us_out_fmt_3 = *(undefined4 *)(ctx + GLD_us_out_fmt_3);
   puVar30[0x161] = ((unsigned char *)0x000010c0U);
-  puVar30[0x160] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x216c);
+  puVar30[0x160] = us_out_fmt_3;
+  rs_count = *(undefined4 *)(ctx + GLD_rs_count);
   puVar30[0x163] = ((unsigned char *)0x000010c1U);
   puVar30[0x165] = ((unsigned char *)0x000010c8U);
   puVar30[0x167] = ((unsigned char *)0x0000101dU);
-  puVar30[0x162] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x2128);
+  puVar30[0x162] = rs_count;
+  rs_ip_0 = *(undefined4 *)(ctx + GLD_rs_ip_0);
   puVar30[0x169] = ((unsigned char *)0x0000138aU);
   puVar30[0x16b] = ((unsigned char *)0x0000138eU);
   puVar30[0x170] = 0;
@@ -6969,45 +7045,45 @@ LAB_000371ac:
   puVar30[0x16a] = 0;
   puVar30[0x16c] = 0;
   puVar30[0x16e] = 0;
-  puVar30[0x168] = uVar28;
+  puVar30[0x168] = rs_ip_0;
   puVar30[0x16f] = ((unsigned char *)0x00001150U);
   puVar30[0x171] = ((unsigned char *)0x00001100U);
-  uVar28 = *(undefined4 *)(ctx + 0x1f1c);
+  tx_filter0 = *(undefined4 *)(ctx + GLD_tx_filter0);
   puVar30[0x173] = ((unsigned char *)0x00001110U);
-  puVar30[0x172] = uVar28;
-  puVar30[0x174] = *(undefined4 *)(ctx + 0x1f5c);
+  puVar30[0x172] = tx_filter0;
+  puVar30[0x174] = *(undefined4 *)(ctx + GLD_tx_filter1);
   puVar30[0x175] = ((unsigned char *)0x00001120U);
-  uVar28 = *(undefined4 *)(ctx + 0x1f9c);
+  tx_format0 = *(undefined4 *)(ctx + GLD_tx_format0);
   puVar30[0x177] = ((unsigned char *)0x00001130U);
-  puVar30[0x176] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1fdc);
+  puVar30[0x176] = tx_format0;
+  tx_format1 = *(undefined4 *)(ctx + GLD_tx_format1);
   puVar30[0x179] = ((unsigned char *)0x00001140U);
-  puVar30[0x178] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x201c);
+  puVar30[0x178] = tx_format1;
+  tx_format2 = *(undefined4 *)(ctx + GLD_tx_format2);
   puVar30[0x17b] = ((unsigned char *)0x000010f4U);
   puVar30[0x17c] = 0xaaaa;
   puVar30[0x17d] = ((unsigned char *)0x00001383U);
-  puVar30[0x17a] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1d34);
+  puVar30[0x17a] = tx_format2;
+  rb3d_color_channel_mask = *(undefined4 *)(ctx + GLD_rb3d_color_channel_mask);
   puVar30[0x17f] = ((unsigned char *)0x00001386U);
-  puVar30[0x17e] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1d38);
+  puVar30[0x17e] = rb3d_color_channel_mask;
+  rb3d_ropcntl = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
   puVar30[0x181] = 0x110f8;
-  puVar30[0x180] = uVar28;
-  puVar30[0x182] = *(undefined4 *)(ctx + 0x1d98);
-  uVar28 = *(undefined4 *)(ctx + 0x1d50);
+  puVar30[0x180] = rb3d_ropcntl;
+  puVar30[0x182] = *(undefined4 *)(ctx + GLD_sc_scissor0);
+  sc_scissor1 = *(undefined4 *)(ctx + GLD_sc_scissor1);
   puVar30[0x184] = ((unsigned char *)0x00001087U);
-  puVar30[0x183] = uVar28;
-  uVar28 = *(undefined4 *)(ctx + 0x1f0c);
+  puVar30[0x183] = sc_scissor1;
+  ga_point_size = *(undefined4 *)(ctx + GLD_ga_point_size);
   puVar30[0x186] = 0x31080;
-  puVar30[0x185] = uVar28;
-  puVar30[0x187] = *(undefined4 *)(ctx + 0x1efc);
-  puVar30[0x188] = *(undefined4 *)(ctx + 0x1f04);
-  puVar30[0x189] = *(undefined4 *)(ctx + 0x1f00);
-  puVar30[0x18a] = *(undefined4 *)(ctx + 0x1f08);
+  puVar30[0x185] = ga_point_size;
+  puVar30[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s0);
+  puVar30[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t0);
+  puVar30[0x189] = *(undefined4 *)(ctx + GLD_ga_point_s1);
+  puVar30[0x18a] = *(undefined4 *)(ctx + GLD_ga_point_t1);
   FUN_0004c100(puVar30 + 0xd0,iVar45);
   uVar28 = ((int (*)())FUN_000308c0)(ctx,puVar30 + 0x18d);
-  *(undefined4 *)(ctx + 0x298c) = uVar28;
+  *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
   (**(code **)(ctx + GLD_streamSetCurrent))(iVar45,uVar28);
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
   if (((*(uint *)(texture[0xc] + 0x48) & 0x8000) != 0) &&
@@ -7430,11 +7506,11 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
                         vertexStride * unitCount * 5 + unitCount * 2 +
                         (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
                         unitCount * 2,vertexArrayInfo,programState);
-    *(undefined4 **)(ctx + 0x298c) = ringStart;
-    if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
-      *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
-      *(int *)(ctx + 0x2684) = ctx + 0x1e44;
-      *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringStart;
+    if (*(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != 0x00001e24 + ctx) {
+      *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
+      *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
+      *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -7446,7 +7522,7 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
     dataEnd = data + unitCount * vertexStride * 4 * 4;
-    topology = *(undefined4 *)(0x00001dc4 + ctx);
+    topology = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
     ringStart[2] = 0x821;
     ringStart[3] = 4;
     ringStart[1] = topology;
@@ -7459,21 +7535,21 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
         *ringCursor = 0x917;
         if (slotIndex < 0x20) {
           ringCursor[1] = (uint)((1 << (slotIndex & 0x3f) &
-                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
+                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8)) != 0);
         }
         else if (slotIndex < 0x40) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x20 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 4
                                       )) != 0);
         }
         else if (slotIndex < 0x60) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x40 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 8
                                       )) != 0);
         }
         else {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x60 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) +
                                       0xc)) != 0);
         }
         ringCursor = ringCursor + 2;
@@ -7506,7 +7582,7 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor[3] = 0;
     ringCursor[2] = ((unsigned char *)0x00001393U);
     ringCursor[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringCursor + 4;
                     
                     
     (**(code **)(ctx + GLD_streamSetCurrent))(ctx + GLD_commandStream,ringCursor + 4);
@@ -7548,11 +7624,11 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
                         vertexStride * unitCount * 5 + unitCount * 2 +
                         (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
                         unitCount * 2,vertexArrayInfo,programState);
-    *(undefined4 **)(ctx + 0x298c) = ringStart;
-    if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
-      *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
-      *(int *)(ctx + 0x2684) = ctx + 0x1e44;
-      *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringStart;
+    if (*(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != 0x00001e24 + ctx) {
+      *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
+      *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
+      *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -7564,7 +7640,7 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
     dataEnd = data + unitCount * vertexStride * 4 * 4;
-    topology = *(undefined4 *)(0x00001dc4 + ctx);
+    topology = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
     ringStart[2] = 0x821;
     ringStart[3] = 6;
     ringStart[1] = topology;
@@ -7577,21 +7653,21 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
         *ringCursor = 0x917;
         if (slotIndex < 0x20) {
           ringCursor[1] = (uint)((1 << (slotIndex & 0x3f) &
-                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
+                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8)) != 0);
         }
         else if (slotIndex < 0x40) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x20 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 4
                                       )) != 0);
         }
         else if (slotIndex < 0x60) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x40 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 8
                                       )) != 0);
         }
         else {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x60 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) +
                                       0xc)) != 0);
         }
         ringCursor = ringCursor + 2;
@@ -7624,7 +7700,7 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor[3] = 0;
     ringCursor[2] = ((unsigned char *)0x00001393U);
     ringCursor[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringCursor + 4;
                     
                     
     (**(code **)(ctx + GLD_streamSetCurrent))(ctx + GLD_commandStream,ringCursor + 4);
@@ -7666,11 +7742,11 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
                         vertexStride * unitCount * 5 + unitCount * 2 +
                         (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
                         unitCount * 2,vertexArrayInfo,programState);
-    *(undefined4 **)(ctx + 0x298c) = ringStart;
-    if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
-      *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
-      *(int *)(ctx + 0x2684) = ctx + 0x1e44;
-      *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringStart;
+    if (*(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != 0x00001e24 + ctx) {
+      *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
+      *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
+      *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -7682,7 +7758,7 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
     dataEnd = data + unitCount * vertexStride * 4 * 4;
-    topology = *(undefined4 *)(0x00001dc4 + ctx);
+    topology = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
     ringStart[2] = 0x821;
     ringStart[3] = 0xd;
     ringStart[1] = topology;
@@ -7695,21 +7771,21 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
         *ringCursor = 0x917;
         if (slotIndex < 0x20) {
           ringCursor[1] = (uint)((1 << (slotIndex & 0x3f) &
-                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
+                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8)) != 0);
         }
         else if (slotIndex < 0x40) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x20 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 4
                                       )) != 0);
         }
         else if (slotIndex < 0x60) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x40 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 8
                                       )) != 0);
         }
         else {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x60 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) +
                                       0xc)) != 0);
         }
         ringCursor = ringCursor + 2;
@@ -7742,7 +7818,7 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor[3] = 0;
     ringCursor[2] = ((unsigned char *)0x00001393U);
     ringCursor[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringCursor + 4;
                     
                     
     (**(code **)(ctx + GLD_streamSetCurrent))(ctx + GLD_commandStream,ringCursor + 4);
@@ -7784,11 +7860,11 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
                         vertexStride * unitCount * 5 + unitCount * 2 +
                         (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
                         unitCount * 2,vertexArrayInfo,programState);
-    *(undefined4 **)(ctx + 0x298c) = ringStart;
-    if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
-      *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
-      *(int *)(ctx + 0x2684) = ctx + 0x1e44;
-      *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringStart;
+    if (*(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != 0x00001e24 + ctx) {
+      *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
+      *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
+      *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -7800,7 +7876,7 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
     dataEnd = data + unitCount * vertexStride * 4 * 4;
-    topology = *(undefined4 *)(0x00001dc4 + ctx);
+    topology = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
     ringStart[2] = 0x821;
     ringStart[3] = 0xe;
     ringStart[1] = topology;
@@ -7813,21 +7889,21 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
         *ringCursor = 0x917;
         if (slotIndex < 0x20) {
           ringCursor[1] = (uint)((1 << (slotIndex & 0x3f) &
-                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
+                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8)) != 0);
         }
         else if (slotIndex < 0x40) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x20 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 4
                                       )) != 0);
         }
         else if (slotIndex < 0x60) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x40 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 8
                                       )) != 0);
         }
         else {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x60 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) +
                                       0xc)) != 0);
         }
         ringCursor = ringCursor + 2;
@@ -7860,7 +7936,7 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor[3] = 0;
     ringCursor[2] = ((unsigned char *)0x00001393U);
     ringCursor[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringCursor + 4;
                     
                     
     (**(code **)(ctx + GLD_streamSetCurrent))(ctx + GLD_commandStream,ringCursor + 4);
@@ -7902,11 +7978,11 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
                         vertexStride * unitCount * 5 + unitCount * 2 +
                         (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
                         unitCount * 2,vertexArrayInfo,programState);
-    *(undefined4 **)(ctx + 0x298c) = ringStart;
-    if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
-      *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
-      *(int *)(ctx + 0x2684) = ctx + 0x1e44;
-      *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringStart;
+    if (*(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != 0x00001e24 + ctx) {
+      *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
+      *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
+      *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -7918,7 +7994,7 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
     dataEnd = data + unitCount * vertexStride * 4 * 4;
-    topology = *(undefined4 *)(0x00001dc4 + ctx);
+    topology = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
     ringStart[2] = 0x821;
     ringStart[3] = 0xf;
     ringStart[1] = topology;
@@ -7931,21 +8007,21 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
         *ringCursor = 0x917;
         if (slotIndex < 0x20) {
           ringCursor[1] = (uint)((1 << (slotIndex & 0x3f) &
-                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
+                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8)) != 0);
         }
         else if (slotIndex < 0x40) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x20 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 4
                                       )) != 0);
         }
         else if (slotIndex < 0x60) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x40 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 8
                                       )) != 0);
         }
         else {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x60 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) +
                                       0xc)) != 0);
         }
         ringCursor = ringCursor + 2;
@@ -7978,7 +8054,7 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor[3] = 0;
     ringCursor[2] = ((unsigned char *)0x00001393U);
     ringCursor[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringCursor + 4;
                     
                     
     (**(code **)(ctx + GLD_streamSetCurrent))(ctx + GLD_commandStream,ringCursor + 4);
@@ -8138,11 +8214,11 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
                         vertexStride * unitCount * 5 + unitCount * 2 +
                         (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
                         unitCount * 2,vertexArrayInfo,programState);
-    *(undefined4 **)(ctx + 0x298c) = ringStart;
-    if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
-      *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
-      *(int *)(ctx + 0x2684) = ctx + 0x1e44;
-      *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringStart;
+    if (*(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != 0x00001e24 + ctx) {
+      *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
+      *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
+      *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
       ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
@@ -8154,7 +8230,7 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor = ringStart + 4;
     *ringStart = 0x82c;
     dataEnd = data + unitCount * vertexStride * 4 * 4;
-    topology = *(undefined4 *)(0x00001dc4 + ctx);
+    topology = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
     ringStart[2] = 0x821;
     ringStart[3] = 2;
     ringStart[1] = topology;
@@ -8167,21 +8243,21 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
         *ringCursor = 0x917;
         if (slotIndex < 0x20) {
           ringCursor[1] = (uint)((1 << (slotIndex & 0x3f) &
-                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
+                             **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8)) != 0);
         }
         else if (slotIndex < 0x40) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x20 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 4
                                       )) != 0);
         }
         else if (slotIndex < 0x60) {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x40 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) + 8
                                       )) != 0);
         }
         else {
           ringCursor[1] = (uint)((1 << (slotIndex - 0x60 & 0x3f) &
-                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
+                             *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + GLD_engineState) + 8) +
                                       0xc)) != 0);
         }
         ringCursor = ringCursor + 2;
@@ -8214,7 +8290,7 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
     ringCursor[3] = 0;
     ringCursor[2] = ((unsigned char *)0x00001393U);
     ringCursor[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
+    *(undefined4 **)(ctx + GLD_streamCurrent) = ringCursor + 4;
                     
                     
     (**(code **)(ctx + GLD_streamSetCurrent))(ctx + GLD_commandStream,ringCursor + 4);
@@ -8804,7 +8880,7 @@ LAB_0003bef8:
     goto switchD_0003bf70_caseD_1;
   case 2:
     pfVar21 = (float *)((local_58 & 0xffff) * 0x10 +
-                       *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + 0x10)));
+                       *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + GLD_engineState)));
     pdVar25 = (dword *)(pfVar21 + 1);
     pdVar13 = (dword *)(pfVar21 + 2);
     pdVar23 = (dword *)(pfVar21 + 3);
@@ -9066,7 +9142,7 @@ LAB_0003bac0:
     pfVar21 = (float *)(((unsigned char *)0x000030cc) + stateConstants);
     break;
   case 0xf:
-    *pfVar27 = (float)*(double *)(0x00001830 + *(int *)(ctx + 0x10));
+    *pfVar27 = (float)*(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
     pfVar27[1] = (float)*(double *)(*(int *)(ctx + GLD_engineState) + 0x1838);
     dVar31 = *(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
     dVar29 = *(double *)(*(int *)(ctx + GLD_engineState) + 0x1838);
@@ -9662,7 +9738,7 @@ int FUN_0003d590(ctx, param_2, param_3, param_4, param_5, param_6)
   cmdStart = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,*(int *)(program + 0x808) * 7 + 2)
   ;
   cacheClearedUpTo = *(undefined4 **)(ctx + 0x2834);
-  *(undefined4 **)(ctx + 0x298c) = cmdStart;
+  *(undefined4 **)(ctx + GLD_streamCurrent) = cmdStart;
   cmdEnd = cmdStart + *(int *)(program + 0x808) * 7 + 2;
   cmdCursor = cmdStart;
   if ((cacheClearedUpTo <= cmdStart) || (cmdCursor = cacheClearedUpTo, cacheClearedUpTo < cmdEnd)) {
@@ -9737,7 +9813,7 @@ int FUN_0003d590(ctx, param_2, param_3, param_4, param_5, param_6)
 LAB_0003d820:
   while( true ) {
     if (program + iVar15 * 8 <= pbVar34) {
-      *(undefined4 **)(ctx + 0x298c) = cmdCursor;
+      *(undefined4 **)(ctx + GLD_streamCurrent) = cmdCursor;
       (**(code **)(ctx + GLD_streamSetCurrent))(ring,cmdCursor);
       return;
     }
@@ -9831,7 +9907,7 @@ LAB_0003dd8c:
     goto switchD_0003de14_caseD_1;
   case 2:
     pfVar23 = (float *)((local_78 & 0xffff) * 0x10 +
-                       *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + 0x10)));
+                       *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + GLD_engineState)));
     pdVar30 = (dword *)(pfVar23 + 1);
     pdVar14 = (dword *)(pfVar23 + 2);
     pdVar26 = (dword *)(pfVar23 + 3);
@@ -10093,7 +10169,7 @@ LAB_0003d8e4:
     pfVar23 = (float *)(((unsigned char *)0x000030cc) + stateConstants);
     break;
   case 0xf:
-    *pfVar32 = (float)*(double *)(0x00001830 + *(int *)(ctx + 0x10));
+    *pfVar32 = (float)*(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
     cmdCursor[4] = (float)*(double *)(*(int *)(ctx + GLD_engineState) + 0x1838);
     dVar38 = *(double *)(0x00001830 + *(int *)(ctx + GLD_engineState));
     dVar36 = *(double *)(*(int *)(ctx + GLD_engineState) + 0x1838);

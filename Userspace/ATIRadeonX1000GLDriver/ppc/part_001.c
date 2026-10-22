@@ -28,11 +28,11 @@ int _gldReclaimContext(ctx)
     _free(ctx);
     return;
   }
-  *(undefined4 *)(ctx + 0x204) = 0;
-  *(undefined4 *)(ctx + 0x1fc) = 0;
-  *(undefined4 *)(ctx + 0x200) = 0;
-  *(undefined4 *)(ctx + 500) = 0;
-  *(undefined4 *)(ctx + 0x1f8) = 0;
+  *(undefined4 *)(ctx + GLD_dataRefillCount) = 0;
+  *(undefined4 *)(ctx + GLD_dataBase) = 0;
+  *(undefined4 *)(ctx + GLD_dataBufferId) = 0;
+  *(undefined4 *)(ctx + GLD_dataCursor) = 0;
+  *(undefined4 *)(ctx + GLD_dataLimit) = 0;
   return;
 }
 
@@ -274,7 +274,7 @@ LAB_00007790:
             ctx[0x5b] = 0;
             ctx[GLD_renderHeight / 4] = (uint)rectField9c;
             _memcpy(ctx[GLD_capsBlock / 4] + 0x24,drawable + 4,0x3c);
-            *(uint *)ctx[5] = *(uint *)ctx[5] & 0xfffffffd;
+            *(uint *)ctx[GLD_capsBlock / 4] = *(uint *)ctx[GLD_capsBlock / 4] & 0xfffffffd;
             return 0;
           }
           ctx[GLD_renderFlags / 4] = ctx[GLD_drawableFlags / 4];
@@ -287,10 +287,10 @@ LAB_00007790:
           ctx[0x5c] = ctx[0x46];
           _memcpy(ctx[GLD_capsBlock / 4] + 0x24,ctx + GLD_stateCopy / 4,0x3c);
           if (*(char *)((int)ctx + 0x143) == '\0') {
-            *(uint *)ctx[5] = *(uint *)ctx[5] & 0xfffffffd;
+            *(uint *)ctx[GLD_capsBlock / 4] = *(uint *)ctx[GLD_capsBlock / 4] & 0xfffffffd;
             return 0;
           }
-          *(uint *)ctx[5] = *(uint *)ctx[5] | 2;
+          *(uint *)ctx[GLD_capsBlock / 4] = *(uint *)ctx[GLD_capsBlock / 4] | 2;
           return 0;
         }
         returnCode = 0x271a;
@@ -331,7 +331,7 @@ int _gldGetError(ctx)
   undefined4 error;
   
   error = *(undefined4 *)(ctx + GLD_lastError);
-  *(undefined4 *)(ctx + 0x178) = 0;
+  *(undefined4 *)(ctx + GLD_lastError) = 0;
   return error;
 }
 
@@ -388,7 +388,7 @@ LAB_00007950:
       return 0x2720;
     }
     wordByteOffset = _realloc(*(undefined4 *)(ctx + GLD_fenceBitmap),*(uint *)(ctx + GLD_statusRegionSize) >> 5);
-    *(int *)(ctx + 0x220) = wordByteOffset;
+    *(int *)(ctx + GLD_fenceBitmap) = wordByteOffset;
     scanCounter = *(uint *)(ctx + GLD_statusRegionSize) >> 6;
     _memset(wordByteOffset + scanCounter,0,scanCounter);
   } while( true );
@@ -405,9 +405,9 @@ LAB_0000797c:
   wordIndex = freeBitIndex + wordIndex * 0x20;
   *(uint *)((int)bitmap + wordByteOffset) = 1 << (scanCounter & 0x3f) | *(uint *)((int)bitmap + wordByteOffset);
   *fence = wordIndex;
-  *(undefined4 *)(wordIndex * 8 + *(int *)(ctx + 0x218)) =
-       *(undefined4 *)(*(int *)(ctx + 0x1e4) + 0x18);
-  *(undefined4 *)(*fence * 8 + *(int *)(ctx + 0x218) + 4) = 0;
+  *(undefined4 *)(wordIndex * 8 + *(int *)(ctx + GLD_statusRegion)) =
+       *(undefined4 *)(*(int *)(ctx + GLD_ringMap) + 0x18);
+  *(undefined4 *)(*fence * 8 + *(int *)(ctx + GLD_statusRegion) + 4) = 0;
   *fenceOut = fence;
   *(undefined1 *)(fence + 1) = 1;
   return 0;
@@ -423,7 +423,7 @@ int _gldDestroyFence(ctx, fence)
   
   wordOffset = *fence >> 3 & 0x1ffffffc;
   bitIndex = *fence & 0x1f;
-  *(uint *)(wordOffset + *(int *)(ctx + 0x220)) =
+  *(uint *)(wordOffset + *(int *)(ctx + GLD_fenceBitmap)) =
        (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(wordOffset + *(int *)(ctx + GLD_fenceBitmap));
   _free(fence);
   return 0;
@@ -556,7 +556,7 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
 {
   if (*(int *)(ctx + GLD_boundFramebuffer) == framebuffer) {
     FUN_0001b4b0(ctx);
-    *(undefined4 *)(ctx + 0x150) = 0;
+    *(undefined4 *)(ctx + GLD_boundFramebuffer) = 0;
   }
   _free(framebuffer);
   return 0;
@@ -2247,7 +2247,7 @@ int FUN_00009b70(ctx)
   
   record = _calloc(1,0x18);
   returnCode = 0x2720;
-  *(int *)(ctx + 0x234) = record;
+  *(int *)(ctx + GLD_queryRecord) = record;
   if (record != 0) {
     returnCode = 0;
   }
@@ -2285,7 +2285,7 @@ int _gldDestroyQuery(ctx, query)
   
   wordOffset = *query >> 3 & 0x1ffffffc;
   bitIndex = *query & 0x1f;
-  *(uint *)(wordOffset + *(int *)(ctx + 0x22c)) =
+  *(uint *)(wordOffset + *(int *)(ctx + GLD_queryBitmap)) =
        (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(wordOffset + *(int *)(ctx + GLD_queryBitmap));
   _free(query);
   return 0;
@@ -2316,7 +2316,7 @@ int FUN_00009cd0(ctx)
     } while (!(bool)(crBits >> 1 & 1));
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,memory,1,0,0);
-      **(undefined4 **)(ctx + 0x234) = 0;
+      **(undefined4 **)(ctx + GLD_queryRecord) = 0;
     }
   }
   return 0;
@@ -2428,10 +2428,10 @@ LAB_0000a010:
       return 0x2720;
     }
     if (*(int *)(ctx + GLD_queryPoolBytes) == 0) {
-      *(undefined4 *)(ctx + 0x230) = 0x20;
-      *(undefined4 *)(ctx + 0x228) = 0x610;
+      *(undefined4 *)(ctx + GLD_queryCapacity) = 0x20;
+      *(undefined4 *)(ctx + GLD_queryPoolBytes) = 0x610;
       allocation = _malloc(0x610);
-      *(undefined4 *)(ctx + 0x224) = allocation;
+      *(undefined4 *)(ctx + GLD_queryPool) = allocation;
       _memset(allocation,0,*(undefined4 *)(ctx + GLD_queryPoolBytes));
     }
     else {
@@ -2439,27 +2439,27 @@ LAB_0000a010:
         ((int (*)())FUN_00009cd0)(ctx);
       }
       wordByteOffset = *(int *)(ctx + GLD_queryCapacity) * 0x40 + 0x210;
-      *(int *)(ctx + 0x230) = *(int *)(ctx + 0x230) << 1;
-      *(int *)(ctx + 0x228) = wordByteOffset;
+      *(int *)(ctx + GLD_queryCapacity) = *(int *)(ctx + GLD_queryCapacity) << 1;
+      *(int *)(ctx + GLD_queryPoolBytes) = wordByteOffset;
       wordByteOffset = _realloc(*(undefined4 *)(ctx + GLD_queryPool),wordByteOffset);
-      *(int *)(ctx + 0x224) = wordByteOffset;
+      *(int *)(ctx + GLD_queryPool) = wordByteOffset;
       if (wordByteOffset == 0) goto LAB_0000a010;
     }
     wordByteOffset = ((int (*)())FUN_00009d70)(ctx,*(undefined4 *)(ctx + GLD_queryRecord),*(undefined4 *)(ctx + GLD_queryPool),
-                         *(undefined4 *)(ctx + 0x224),*(undefined4 *)(ctx + 0x228));
+                         *(undefined4 *)(ctx + GLD_queryPool),*(undefined4 *)(ctx + GLD_queryPoolBytes));
     if (wordByteOffset != 1) goto LAB_0000a010;
     FUN_0002b3b0(ctx);
     bitmapWord = *(uint *)(ctx + GLD_queryCapacity);
     scanCounter = bitmapWord >> 3;
     if (*(int *)(ctx + GLD_queryBitmap) == 0) {
       allocation = _malloc(scanCounter);
-      *(undefined4 *)(ctx + 0x22c) = allocation;
+      *(undefined4 *)(ctx + GLD_queryBitmap) = allocation;
       _memset(allocation,0,scanCounter);
     }
     else {
       wordByteOffset = _realloc(*(int *)(ctx + GLD_queryBitmap),scanCounter);
       bitmapWord = bitmapWord >> 4;
-      *(int *)(ctx + 0x22c) = wordByteOffset;
+      *(int *)(ctx + GLD_queryBitmap) = wordByteOffset;
       _memset(wordByteOffset + bitmapWord,0,bitmapWord);
     }
   } while( true );
