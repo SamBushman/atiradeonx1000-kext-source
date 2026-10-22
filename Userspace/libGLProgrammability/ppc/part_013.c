@@ -2601,194 +2601,210 @@ int _InterpreterPackPixel(machine, color, pixelOut)
   float *color;
   float *pixelOut;
 {
+  float greenOut;
+  float redOut;
+  float blueOut;
+  float alphaClamp8;
+  float blueClamp8;
+  float greenClamp8;
+  float greenClamp5;
+  float blueClamp;
+  float zeroConstC;
+  float zeroConstB;
+  float zeroConstA;
+  float scale31;
+  float roundOffset5;
+  double alphaDouble;
+  double blueDouble;
+  double greenDouble;
   uint framebufferFormat;
   float floatValue;
-  float fVar1;
-  float fVar2;
-  uint uVar3;
-  uint uVar4;
-  float fVar5;
-  uint uVar6;
-  float fVar7;
-  uint uVar8;
+  float greenScaled;
+  float scale255;
+  uint alphaBit;
+  uint redInt;
+  float roundOffset8;
+  uint greenInt;
+  float redScaled;
+  uint blueInt;
   int emulator;
-  bool bVar10;
-  double dVar11;
-  double dVar12;
+  bool notBelowZero;
+  double redDouble;
+  double convertThreshold;
   
   emulator = *machine;
   if (*(int *)(emulator + 0xd9c) != 0) {
     framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
     if ((framebufferFormat & 0x8000000) == 0) {
       framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
-      fVar5 = FLOAT_97c3acc0;
-      fVar2 = FLOAT_97c3acbc;
+      roundOffset8 = FLOAT_97c3acc0;
+      scale255 = FLOAT_97c3acbc;
       if ((framebufferFormat & 0x8000) == 0) {
         framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
-        fVar5 = FLOAT_97c3acc4;
-        fVar2 = FLOAT_97c3acc0;
+        scale31 = FLOAT_97c3acc4;
+        roundOffset5 = FLOAT_97c3acc0;
         if ((framebufferFormat & 0x400) == 0) {
           return;
         }
-        fVar7 = *color * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        fVar1 = color[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        bVar10 = TAllocation__guardBlockSize <= fVar7;
-        *color = fVar7;
-        color[1] = fVar1;
-        color[2] = color[2] * fVar5 + fVar2;
-        fVar2 = TAllocation__guardBlockSize;
-        if (bVar10) {
-          if (fVar5 < fVar7) {
-            fVar7 = 31.0;
+        redScaled = *color * FLOAT_97c3acc4 + FLOAT_97c3acc0;
+        greenScaled = color[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
+        notBelowZero = TAllocation__guardBlockSize <= redScaled;
+        *color = redScaled;
+        color[1] = greenScaled;
+        color[2] = color[2] * scale31 + roundOffset5;
+        zeroConstA = TAllocation__guardBlockSize;
+        if (notBelowZero) {
+          if (scale31 < redScaled) {
+            redScaled = 31.0;
           }
         }
         else {
-          fVar7 = 0.0;
+          redScaled = 0.0;
         }
-        fVar5 = color[1];
-        *color = fVar7;
-        fVar7 = TAllocation__guardBlockSize;
-        if (fVar2 <= fVar5) {
-          if (FLOAT_97c3acc4 < fVar5) {
-            fVar5 = 31.0;
+        greenClamp5 = color[1];
+        *color = redScaled;
+        zeroConstC = TAllocation__guardBlockSize;
+        if (zeroConstA <= greenClamp5) {
+          if (FLOAT_97c3acc4 < greenClamp5) {
+            greenClamp5 = 31.0;
           }
         }
         else {
-          fVar5 = 0.0;
+          greenClamp5 = 0.0;
         }
-        fVar2 = color[2];
-        color[1] = fVar5;
-        dVar12 = DOUBLE_97c30a78;
-        if (fVar7 <= fVar2) {
-          if (FLOAT_97c3acc4 < fVar2) {
-            fVar2 = 31.0;
+        blueClamp = color[2];
+        color[1] = greenClamp5;
+        convertThreshold = DOUBLE_97c30a78;
+        if (zeroConstC <= blueClamp) {
+          if (FLOAT_97c3acc4 < blueClamp) {
+            blueClamp = 31.0;
           }
         }
         else {
-          fVar2 = 0.0;
+          blueClamp = 0.0;
         }
-        dVar11 = (double)*color;
-        color[2] = fVar2;
-        if (dVar12 <= dVar11) {
-          uVar4 = (uint)(int)(dVar11 - dVar12);
-        }
-        else {
-          uVar4 = (uint)(int)*color;
-        }
-        dVar12 = (double)color[1];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        redDouble = (double)*color;
+        color[2] = blueClamp;
+        if (convertThreshold <= redDouble) {
+          redInt = (uint)(int)(redDouble - convertThreshold);
         }
         else {
-          uVar6 = (uint)(int)color[1];
+          redInt = (uint)(int)*color;
         }
-        dVar12 = (double)color[2];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        greenDouble = (double)color[1];
+        if (DOUBLE_97c30a78 <= greenDouble) {
+          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)(int)color[2];
+          greenInt = (uint)(int)color[1];
+        }
+        blueDouble = (double)color[2];
+        if (DOUBLE_97c30a78 <= blueDouble) {
+          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78);
+        }
+        else {
+          blueInt = (uint)(int)color[2];
         }
         if (FLOAT_97c3acc0 <= color[3]) {
-          uVar3 = 0x8000;
+          alphaBit = 0x8000;
         }
         else {
-          uVar3 = 0;
+          alphaBit = 0;
         }
-        floatValue = GH_U2F((unsigned int)((uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f)));
+        floatValue = GH_U2F((unsigned int)((alphaBit | (redInt & 0x1f) << 10 | (greenInt & 0x1f) << 5 | blueInt & 0x1f)));
       }
       else {
-        fVar7 = *color * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        fVar1 = color[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        bVar10 = TAllocation__guardBlockSize <= fVar7;
-        *color = fVar7;
-        color[1] = fVar1;
-        color[3] = color[3] * fVar2 + fVar5;
-        color[2] = color[2] * fVar2 + fVar5;
-        fVar5 = TAllocation__guardBlockSize;
-        if (bVar10) {
-          if (fVar2 < fVar7) {
-            fVar7 = 255.0;
+        redScaled = *color * FLOAT_97c3acbc + FLOAT_97c3acc0;
+        greenScaled = color[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
+        notBelowZero = TAllocation__guardBlockSize <= redScaled;
+        *color = redScaled;
+        color[1] = greenScaled;
+        color[3] = color[3] * scale255 + roundOffset8;
+        color[2] = color[2] * scale255 + roundOffset8;
+        zeroConstB = TAllocation__guardBlockSize;
+        if (notBelowZero) {
+          if (scale255 < redScaled) {
+            redScaled = 255.0;
           }
         }
         else {
-          fVar7 = 0.0;
+          redScaled = 0.0;
         }
-        fVar2 = color[1];
-        *color = fVar7;
-        fVar7 = TAllocation__guardBlockSize;
-        if (fVar5 <= fVar2) {
-          if (FLOAT_97c3acbc < fVar2) {
-            fVar2 = 255.0;
+        greenClamp8 = color[1];
+        *color = redScaled;
+        zeroConstC = TAllocation__guardBlockSize;
+        if (zeroConstB <= greenClamp8) {
+          if (FLOAT_97c3acbc < greenClamp8) {
+            greenClamp8 = 255.0;
           }
         }
         else {
-          fVar2 = 0.0;
+          greenClamp8 = 0.0;
         }
-        fVar5 = color[2];
-        color[1] = fVar2;
-        fVar2 = TAllocation__guardBlockSize;
-        if (fVar7 <= fVar5) {
-          if (FLOAT_97c3acbc < fVar5) {
-            fVar5 = 255.0;
+        blueClamp8 = color[2];
+        color[1] = greenClamp8;
+        zeroConstA = TAllocation__guardBlockSize;
+        if (zeroConstC <= blueClamp8) {
+          if (FLOAT_97c3acbc < blueClamp8) {
+            blueClamp8 = 255.0;
           }
         }
         else {
-          fVar5 = 0.0;
+          blueClamp8 = 0.0;
         }
-        fVar7 = color[3];
-        color[2] = fVar5;
-        dVar12 = DOUBLE_97c30a78;
-        if (fVar2 <= fVar7) {
-          if (FLOAT_97c3acbc < fVar7) {
-            fVar7 = 255.0;
+        alphaClamp8 = color[3];
+        color[2] = blueClamp8;
+        convertThreshold = DOUBLE_97c30a78;
+        if (zeroConstA <= alphaClamp8) {
+          if (FLOAT_97c3acbc < alphaClamp8) {
+            alphaClamp8 = 255.0;
           }
         }
         else {
-          fVar7 = 0.0;
+          alphaClamp8 = 0.0;
         }
-        dVar11 = (double)*color;
-        color[3] = fVar7;
-        if (dVar12 <= dVar11) {
-          uVar4 = (uint)(int)(dVar11 - dVar12);
-        }
-        else {
-          uVar4 = (uint)(int)*color;
-        }
-        dVar12 = (double)color[1];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        redDouble = (double)*color;
+        color[3] = alphaClamp8;
+        if (convertThreshold <= redDouble) {
+          redInt = (uint)(int)(redDouble - convertThreshold);
         }
         else {
-          uVar6 = (uint)(int)color[1];
+          redInt = (uint)(int)*color;
         }
-        dVar12 = (double)color[2];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
+        greenDouble = (double)color[1];
+        if (DOUBLE_97c30a78 <= greenDouble) {
+          greenInt = (uint)(int)(greenDouble - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)(int)color[2];
+          greenInt = (uint)(int)color[1];
         }
-        dVar12 = (double)color[3];
-        if (DOUBLE_97c30a78 <= dVar12) {
-          emulator = (int)(dVar12 - DOUBLE_97c30a78);
+        blueDouble = (double)color[2];
+        if (DOUBLE_97c30a78 <= blueDouble) {
+          blueInt = (uint)(int)(blueDouble - DOUBLE_97c30a78);
+        }
+        else {
+          blueInt = (uint)(int)color[2];
+        }
+        alphaDouble = (double)color[3];
+        if (DOUBLE_97c30a78 <= alphaDouble) {
+          emulator = (int)(alphaDouble - DOUBLE_97c30a78);
         }
         else {
           emulator = (int)color[3];
         }
-        floatValue = GH_U2F((unsigned int)((emulator << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
+        floatValue = GH_U2F((unsigned int)((emulator << 0x18 | (redInt & 0xff) << 0x10 | (greenInt & 0xff) << 8 | blueInt & 0xff)))
         ;
       }
       *pixelOut = floatValue;
     }
     else {
-      fVar2 = *color;
-      fVar5 = color[1];
-      fVar7 = color[2];
+      redOut = *color;
+      greenOut = color[1];
+      blueOut = color[2];
       pixelOut[3] = color[3];
-      *pixelOut = fVar2;
-      pixelOut[1] = fVar5;
-      pixelOut[2] = fVar7;
+      *pixelOut = redOut;
+      pixelOut[1] = greenOut;
+      pixelOut[2] = blueOut;
     }
   }
   return;

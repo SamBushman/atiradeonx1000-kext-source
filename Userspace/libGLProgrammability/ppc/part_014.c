@@ -1401,447 +1401,451 @@ int _InterpreterNoiseGeneratorCreate()
 }
 
 /* _InterpreterNoiseGeneratorInitialise @ 0x97bd57a0 (280 bytes) */
-int _InterpreterNoiseGeneratorInitialise(param_1)
-  undefined1 *param_1;
+int _InterpreterNoiseGeneratorInitialise(noise)
+  undefined1 *noise;
 {
   uint loopIndex;
-  undefined1 uVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  int iVar4;
-  float *pfVar5;
-  uint uVar6;
-  undefined1 *puVar7;
+  undefined1 swapTemp;
+  undefined4 gradientCopy;
+  uint randomValue;
+  int swapIndex;
+  float *gradientPtr;
+  uint shuffleRandom;
+  undefined1 *permPtr;
   
-  _memset(param_1,0,0xa20);
+  _memset(noise,0,0xa20);
   loopIndex = 0;
-  pfVar5 = (float *)(param_1 + 0x210);
+  gradientPtr = (float *)(noise + 0x210);
   do {
-    param_1[loopIndex] = (char)loopIndex;
-    uVar3 = _random();
+    noise[loopIndex] = (char)loopIndex;
+    randomValue = _random();
     loopIndex = loopIndex + 1;
-    *pfVar5 = (float)(((double)CONCAT44(0x43300000,
-                                        (uVar3 + (((int)uVar3 >> 9) +
-                                                 (uint)((int)uVar3 < 0 && (uVar3 & 0x1ff) != 0)) *
+    *gradientPtr = (float)(((double)CONCAT44(0x43300000,
+                                        (randomValue + (((int)randomValue >> 9) +
+                                                 (uint)((int)randomValue < 0 && (randomValue & 0x1ff) != 0)) *
                                                  -0x200) - 0x100 ^ 0x80000000) - 4503601774854144.0)
                      * 0.00390625);
-    pfVar5 = pfVar5 + 1;
+    gradientPtr = gradientPtr + 1;
   } while (loopIndex < 0x100);
-  puVar7 = param_1 + 0xff;
+  permPtr = noise + 0xff;
   do {
-    uVar1 = *puVar7;
-    uVar6 = _random();
-    iVar4 = uVar6 + (((int)uVar6 >> 8) + (uint)((int)uVar6 < 0 && (uVar6 & 0xff) != 0)) * -0x100;
-    *puVar7 = param_1[iVar4];
-    puVar7 = puVar7 + -1;
-    param_1[iVar4] = uVar1;
-  } while (puVar7 != param_1);
-  iVar4 = 0x102;
-  puVar7 = param_1;
+    swapTemp = *permPtr;
+    shuffleRandom = _random();
+    swapIndex = shuffleRandom + (((int)shuffleRandom >> 8) + (uint)((int)shuffleRandom < 0 && (shuffleRandom & 0xff) != 0)) * -0x100;
+    *permPtr = noise[swapIndex];
+    permPtr = permPtr + -1;
+    noise[swapIndex] = swapTemp;
+  } while (permPtr != noise);
+  swapIndex = 0x102;
+  permPtr = noise;
   do {
-    uVar2 = *(undefined4 *)(puVar7 + 0x210);
-    param_1[0x100] = *param_1;
-    param_1 = param_1 + 1;
-    *(undefined4 *)(puVar7 + 0x610) = uVar2;
-    puVar7 = puVar7 + 4;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
-  return puVar7;
+    gradientCopy = *(undefined4 *)(permPtr + 0x210);
+    noise[0x100] = *noise;
+    noise = noise + 1;
+    *(undefined4 *)(permPtr + 0x610) = gradientCopy;
+    permPtr = permPtr + 4;
+    swapIndex = swapIndex + -1;
+  } while (swapIndex != 0);
+  return permPtr;
 }
 
 /* _InterpreterNoiseGeneratorSmoothHermiteCurve @ 0x97bd58bc (156 bytes) */
-int _InterpreterNoiseGeneratorSmoothHermiteCurve(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorSmoothHermiteCurve(noise, fraction, curve)
+  undefined4 noise;
+  float *fraction;
+  float *curve;
 {
-  double dVar1;
-  double dVar2;
+  double threeConst;
+  double fractionD;
   
-  dVar1 = DOUBLE_97c30a80;
-  dVar2 = (double)*param_2;
-  *param_3 = (float)((double)(float)(dVar2 * dVar2) * (DOUBLE_97c30a80 - (dVar2 + dVar2)));
-  dVar2 = (double)param_2[1];
-  param_3[1] = (float)((double)(float)(dVar2 * dVar2) * (dVar1 - (dVar2 + dVar2)));
-  dVar2 = (double)param_2[2];
-  param_3[2] = (float)((double)(float)(dVar2 * dVar2) * (dVar1 - (dVar2 + dVar2)));
-  dVar2 = (double)param_2[3];
-  param_3[3] = (float)((double)(float)(dVar2 * dVar2) * (dVar1 - (dVar2 + dVar2)));
+  threeConst = DOUBLE_97c30a80;
+  fractionD = (double)*fraction;
+  *curve = (float)((double)(float)(fractionD * fractionD) * (DOUBLE_97c30a80 - (fractionD + fractionD)));
+  fractionD = (double)fraction[1];
+  curve[1] = (float)((double)(float)(fractionD * fractionD) * (threeConst - (fractionD + fractionD)));
+  fractionD = (double)fraction[2];
+  curve[2] = (float)((double)(float)(fractionD * fractionD) * (threeConst - (fractionD + fractionD)));
+  fractionD = (double)fraction[3];
+  curve[3] = (float)((double)(float)(fractionD * fractionD) * (threeConst - (fractionD + fractionD)));
   return;
 }
 
 /* _InterpreterNoiseGeneratorInterpolate @ 0x97bd5958 (100 bytes) */
-int _InterpreterNoiseGeneratorInterpolate(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
-  float *param_5;
+int _InterpreterNoiseGeneratorInterpolate(noise, vecA, vecB, weight, result)
+  undefined4 noise;
+  float *vecA;
+  float *vecB;
+  float *weight;
+  float *result;
 {
-  *param_5 = *param_4 * (*param_3 - *param_2) + *param_2;
-  param_5[1] = param_4[1] * (param_3[1] - param_2[1]) + param_2[1];
-  param_5[2] = param_4[2] * (param_3[2] - param_2[2]) + param_2[2];
-  param_5[3] = param_4[3] * (param_3[3] - param_2[3]) + param_2[3];
+  *result = *weight * (*vecB - *vecA) + *vecA;
+  result[1] = weight[1] * (vecB[1] - vecA[1]) + vecA[1];
+  result[2] = weight[2] * (vecB[2] - vecA[2]) + vecA[2];
+  result[3] = weight[3] * (vecB[3] - vecA[3]) + vecA[3];
   return;
 }
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise1D @ 0x97bd59bc (476 bytes) */
-double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
+double _InterpreterNoiseGeneratorInterpolatedNoise1D(int noise,float *point)
 {
-  uint uVar1;
+  uint cellX;
   double floorResult;
   double floorResult2;
-  float local_80;
-  float local_7c;
-  float local_78;
-  undefined4 local_74;
-  undefined4 local_70 [4];
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  float local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  float local_34;
-  longlong local_30;
-  undefined4 local_28;
-  uint uStack_24;
+  float fracX;
+  float fracY;
+  float fracZ;
+  undefined4 fracPad;
+  undefined4 smooth [4];
+  undefined4 lerpWeight0;
+  undefined4 lerpWeight1;
+  undefined4 lerpWeight2;
+  undefined4 lerpWeight3;
+  float lerpA0;
+  undefined4 lerpA1;
+  undefined4 lerpA2;
+  undefined4 lerpA3;
+  undefined4 lerpB0;
+  undefined4 lerpB1;
+  undefined4 lerpB2;
+  float lerpB3;
+  longlong intCastScratch;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  floorResult = _floor((double)*param_2);
-  uVar1 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar1;
-  floorResult = _floor((double)param_2[1]);
-  local_30 = (longlong)(int)floorResult;
-  floorResult2 = _floor((double)param_2[2]);
-  local_30 = (longlong)(int)floorResult2;
-  local_28 = 0x43300000;
-  uStack_24 = (int)floorResult2 ^ 0x80000000;
-  local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_97c30a58);
-  local_78 = param_2[2] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
-  local_7c = param_2[1] -
+  floorResult = _floor((double)*point);
+  cellX = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellX;
+  floorResult = _floor((double)point[1]);
+  intCastScratch = (longlong)(int)floorResult;
+  floorResult2 = _floor((double)point[2]);
+  intCastScratch = (longlong)(int)floorResult2;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = (int)floorResult2 ^ 0x80000000;
+  fracX = *point - (float)((double)CONCAT44(0x43300000,cellX ^ 0x80000000) - DOUBLE_97c30a58);
+  fracZ = point[2] - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58);
+  fracY = point[1] -
              (float)((double)CONCAT44(0x43300000,(int)floorResult ^ 0x80000000) - DOUBLE_97c30a58);
-  local_74 = 0;
-  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,local_70);
-  local_50 = *(float *)((uint)*(byte *)(param_1 + (uVar1 & 0xff)) * 4 + param_1 + 0x210);
-  local_4c = *(undefined4 *)
-              ((uint)*(byte *)(param_1 + ((uVar1 & 0xff) + 1 & 0xff)) * 4 + param_1 + 0x210);
-  local_38 = 0;
-  local_48 = 0;
-  local_44 = 0;
-  local_3c = 0;
-  local_54 = local_70[0];
-  local_60 = local_70[0];
-  local_5c = local_70[0];
-  local_58 = local_70[0];
-  local_40 = local_4c;
-  local_34 = local_50;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  return (double)local_50;
+  fracPad = 0;
+  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,smooth);
+  lerpA0 = *(float *)((uint)*(byte *)(noise + (cellX & 0xff)) * 4 + noise + 0x210);
+  lerpA1 = *(undefined4 *)
+              ((uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff)) * 4 + noise + 0x210);
+  lerpB2 = 0;
+  lerpA2 = 0;
+  lerpA3 = 0;
+  lerpB1 = 0;
+  lerpWeight3 = smooth[0];
+  lerpWeight0 = smooth[0];
+  lerpWeight1 = smooth[0];
+  lerpWeight2 = smooth[0];
+  lerpB0 = lerpA1;
+  lerpB3 = lerpA0;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  return (double)lerpA0;
 }
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise2D @ 0x97bd5b98 (544 bytes) */
-double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
+double _InterpreterNoiseGeneratorInterpolatedNoise2D(int noise,float *point)
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint cellY1;
+  uint cellX;
+  uint cellY;
+  uint permX0;
+  uint permX1;
   double floorResult;
-  float local_80;
-  float local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  float local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  float local_38;
-  float local_34;
-  longlong local_30;
-  undefined4 local_28;
-  uint uStack_24;
+  float fracX;
+  float fracY;
+  undefined4 fracPad2;
+  undefined4 fracPad;
+  undefined4 smoothX;
+  undefined4 smoothY;
+  undefined4 lerpWeight0;
+  undefined4 lerpWeight1;
+  undefined4 lerpWeight2;
+  undefined4 lerpWeight3;
+  float lerpA0;
+  undefined4 lerpA1;
+  undefined4 lerpA2;
+  undefined4 lerpA3;
+  undefined4 lerpB0;
+  undefined4 lerpB1;
+  float lerpB2;
+  float lerpB3;
+  longlong intCastScratch;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  floorResult = _floor((double)*param_2);
-  uVar1 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar1;
-  floorResult = _floor((double)param_2[1]);
-  uVar2 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar2;
-  local_28 = 0x43300000;
-  uStack_24 = uVar2 ^ 0x80000000;
-  uVar2 = uVar2 & 0xff;
-  local_74 = 0;
-  local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar1 ^ 0x80000000) - DOUBLE_97c30a58);
-  local_7c = param_2[1] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
-  local_78 = 0;
-  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,&local_70);
-  uVar3 = (uint)*(byte *)(param_1 + (uVar1 & 0xff));
-  uVar4 = (uint)*(byte *)(param_1 + ((uVar1 & 0xff) + 1 & 0xff));
-  uVar1 = uVar2 + 1 & 0xff;
-  local_50 = *(float *)(((uVar3 + uVar2) * 4 & 0x3fc) + param_1 + 0x210);
-  local_4c = *(undefined4 *)(((uVar4 + uVar2) * 4 & 0x3fc) + param_1 + 0x210);
-  local_48 = *(undefined4 *)(((uVar3 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_44 = *(undefined4 *)(((uVar4 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_54 = local_70;
-  local_60 = local_70;
-  local_5c = local_70;
-  local_58 = local_70;
-  local_40 = local_4c;
-  local_3c = local_48;
-  local_38 = GH_U2F((unsigned int)(local_44));
-  local_34 = local_50;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  local_40 = local_48;
-  local_3c = local_44;
-  local_38 = local_50;
-  local_34 = GH_U2F((unsigned int)(local_4c));
-  local_54 = local_6c;
-  local_60 = local_6c;
-  local_5c = local_6c;
-  local_58 = local_6c;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  return (double)local_50;
+  floorResult = _floor((double)*point);
+  cellX = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellX;
+  floorResult = _floor((double)point[1]);
+  cellY = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellY;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = cellY ^ 0x80000000;
+  cellY = cellY & 0xff;
+  fracPad = 0;
+  fracX = *point - (float)((double)CONCAT44(0x43300000,cellX ^ 0x80000000) - DOUBLE_97c30a58);
+  fracY = point[1] - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58);
+  fracPad2 = 0;
+  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,&smoothX);
+  permX0 = (uint)*(byte *)(noise + (cellX & 0xff));
+  permX1 = (uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff));
+  cellY1 = cellY + 1 & 0xff;
+  lerpA0 = *(float *)(((permX0 + cellY) * 4 & 0x3fc) + noise + 0x210);
+  lerpA1 = *(undefined4 *)(((permX1 + cellY) * 4 & 0x3fc) + noise + 0x210);
+  lerpA2 = *(undefined4 *)(((permX0 + cellY1) * 4 & 0x3fc) + noise + 0x210);
+  lerpA3 = *(undefined4 *)(((permX1 + cellY1) * 4 & 0x3fc) + noise + 0x210);
+  lerpWeight3 = smoothX;
+  lerpWeight0 = smoothX;
+  lerpWeight1 = smoothX;
+  lerpWeight2 = smoothX;
+  lerpB0 = lerpA1;
+  lerpB1 = lerpA2;
+  lerpB2 = GH_U2F((unsigned int)(lerpA3));
+  lerpB3 = lerpA0;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  lerpB0 = lerpA2;
+  lerpB1 = lerpA3;
+  lerpB2 = lerpA0;
+  lerpB3 = GH_U2F((unsigned int)(lerpA1));
+  lerpWeight3 = smoothY;
+  lerpWeight0 = smoothY;
+  lerpWeight1 = smoothY;
+  lerpWeight2 = smoothY;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  return (double)lerpA0;
 }
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise3D @ 0x97bd5db8 (784 bytes) */
-double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
+double _InterpreterNoiseGeneratorInterpolatedNoise3D(int noise,float *point)
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
+  int permRow1;
+  uint cellY1OrPermX1Y1;
+  uint permX1Y0;
+  uint cellZ;
+  uint cellY0;
+  uint cellZ1;
+  uint permX0Y0;
+  uint cellX;
+  uint permX0Y1;
+  uint cellY;
+  int permRow0;
   double floorResult;
-  float local_80;
-  float local_7c;
-  float local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  float local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  float local_38;
-  float local_34;
-  longlong local_30;
-  undefined4 local_28;
-  uint uStack_24;
+  float fracX;
+  float fracY;
+  float fracZ;
+  undefined4 fracPad;
+  undefined4 smoothX;
+  undefined4 smoothY;
+  undefined4 smoothZ;
+  undefined4 lerpWeight0;
+  undefined4 lerpWeight1;
+  undefined4 lerpWeight2;
+  undefined4 lerpWeight3;
+  float lerpA0;
+  undefined4 lerpA1;
+  undefined4 lerpA2;
+  undefined4 lerpA3;
+  undefined4 lerpB0;
+  undefined4 lerpB1;
+  float lerpB2;
+  float lerpB3;
+  longlong intCastScratch;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  floorResult = _floor((double)*param_2);
-  uVar5 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar5;
-  floorResult = _floor((double)param_2[1]);
-  uVar7 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar7;
-  floorResult = _floor((double)param_2[2]);
-  uVar1 = (uint)(int)floorResult;
-  local_30 = (longlong)(int)uVar1;
-  local_28 = 0x43300000;
-  uStack_24 = uVar1 ^ 0x80000000;
-  uVar1 = uVar1 & 0xff;
-  uVar2 = uVar7 & 0xff;
-  local_80 = *param_2 - (float)((double)CONCAT44(0x43300000,uVar5 ^ 0x80000000) - DOUBLE_97c30a58);
-  local_78 = param_2[2] - (float)((double)CONCAT44(0x43300000,uStack_24) - DOUBLE_97c30a58);
-  local_74 = 0;
-  local_7c = param_2[1] - (float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - DOUBLE_97c30a58)
+  floorResult = _floor((double)*point);
+  cellX = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellX;
+  floorResult = _floor((double)point[1]);
+  cellY = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellY;
+  floorResult = _floor((double)point[2]);
+  cellZ = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)cellZ;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = cellZ ^ 0x80000000;
+  cellZ = cellZ & 0xff;
+  cellY0 = cellY & 0xff;
+  fracX = *point - (float)((double)CONCAT44(0x43300000,cellX ^ 0x80000000) - DOUBLE_97c30a58);
+  fracZ = point[2] - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58);
+  fracPad = 0;
+  fracY = point[1] - (float)((double)CONCAT44(0x43300000,cellY ^ 0x80000000) - DOUBLE_97c30a58)
   ;
-  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(param_1,&local_80,&local_70);
-  uVar7 = uVar2 + 1 & 0xff;
-  uVar3 = uVar1 + 1 & 0xff;
-  iVar8 = (uint)*(byte *)(param_1 + (uVar5 & 0xff)) + param_1;
-  uVar4 = (uint)*(byte *)(iVar8 + uVar2);
-  uVar6 = (uint)*(byte *)(iVar8 + uVar7);
-  local_50 = *(float *)(((uVar4 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_4c = *(undefined4 *)(((uVar6 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_48 = *(undefined4 *)(((uVar4 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  local_44 = *(undefined4 *)(((uVar6 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  iVar8 = (uint)*(byte *)(param_1 + ((uVar5 & 0xff) + 1 & 0xff)) + param_1;
-  uVar5 = (uint)*(byte *)(iVar8 + uVar2);
-  uVar7 = (uint)*(byte *)(iVar8 + uVar7);
-  local_40 = *(undefined4 *)(((uVar5 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_3c = *(undefined4 *)(((uVar7 + uVar1) * 4 & 0x3fc) + param_1 + 0x210);
-  local_38 = *(float *)(((uVar5 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  local_34 = *(float *)(((uVar7 + uVar3) * 4 & 0x3fc) + param_1 + 0x210);
-  local_54 = local_70;
-  local_60 = local_70;
-  local_5c = local_70;
-  local_58 = local_70;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  local_40 = local_4c;
-  local_3c = local_48;
-  local_54 = local_6c;
-  local_38 = GH_U2F((unsigned int)(local_44));
-  local_34 = local_50;
-  local_60 = local_6c;
-  local_5c = local_6c;
-  local_58 = local_6c;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  local_40 = local_48;
-  local_3c = local_44;
-  local_54 = local_68;
-  local_38 = local_50;
-  local_34 = GH_U2F((unsigned int)(local_4c));
-  local_60 = local_68;
-  local_5c = local_68;
-  local_58 = local_68;
-  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
-  return (double)local_50;
+  ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,&smoothX);
+  cellY1OrPermX1Y1 = cellY0 + 1 & 0xff;
+  cellZ1 = cellZ + 1 & 0xff;
+  permRow0 = (uint)*(byte *)(noise + (cellX & 0xff)) + noise;
+  permX0Y0 = (uint)*(byte *)(permRow0 + cellY0);
+  permX0Y1 = (uint)*(byte *)(permRow0 + cellY1OrPermX1Y1);
+  lerpA0 = *(float *)(((permX0Y0 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpA1 = *(undefined4 *)(((permX0Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpA2 = *(undefined4 *)(((permX0Y0 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpA3 = *(undefined4 *)(((permX0Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  permRow1 = (uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff)) + noise;
+  permX1Y0 = (uint)*(byte *)(permRow1 + cellY0);
+  cellY1OrPermX1Y1 = (uint)*(byte *)(permRow1 + cellY1OrPermX1Y1);
+  lerpB0 = *(undefined4 *)(((permX1Y0 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpB1 = *(undefined4 *)(((cellY1OrPermX1Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpB2 = *(float *)(((permX1Y0 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpB3 = *(float *)(((cellY1OrPermX1Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpWeight3 = smoothX;
+  lerpWeight0 = smoothX;
+  lerpWeight1 = smoothX;
+  lerpWeight2 = smoothX;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  lerpB0 = lerpA1;
+  lerpB1 = lerpA2;
+  lerpWeight3 = smoothY;
+  lerpB2 = GH_U2F((unsigned int)(lerpA3));
+  lerpB3 = lerpA0;
+  lerpWeight0 = smoothY;
+  lerpWeight1 = smoothY;
+  lerpWeight2 = smoothY;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  lerpB0 = lerpA2;
+  lerpB1 = lerpA3;
+  lerpWeight3 = smoothZ;
+  lerpB2 = lerpA0;
+  lerpB3 = GH_U2F((unsigned int)(lerpA1));
+  lerpWeight0 = smoothZ;
+  lerpWeight1 = smoothZ;
+  lerpWeight2 = smoothZ;
+  ((int (*)())_InterpreterNoiseGeneratorInterpolate)(noise,&lerpA0,&lerpB0,&lerpWeight0,&lerpA0);
+  return (double)lerpA0;
 }
 
 /* _InterpreterNoiseGeneratorCalculate1D @ 0x97bd60c8 (240 bytes) */
-int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorCalculate1D(noise, point, result)
+  undefined4 noise;
+  float *point;
+  float *result;
 {
   uint loopIndex;
-  double exp2Result;
-  float fVar1;
-  double dVar2;
-  uint uVar3;
-  double dVar4;
-  double powResult;
-  float local_60 [5];
-  uint uStack_4c;
+  double frequency;
+  float noiseSum;
+  double i2dBias;
+  uint nextOctave;
+  double octaveNoise;
+  double amplitude;
+  float samplePoint [5];
+  uint i2dLo1;
   
-  dVar2 = DOUBLE_97c30a68;
+  i2dBias = DOUBLE_97c30a68;
   loopIndex = 0;
-  fVar1 = TAllocation__guardBlockSize;
+  noiseSum = TAllocation__guardBlockSize;
   do {
-    uVar3 = loopIndex + 1;
-    local_60[4] = 176.0;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar2));
-    local_60[4] = 176.0;
-    uStack_4c = uVar3;
-    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
-    local_60[0] = *param_2 * (float)exp2Result;
-    local_60[1] = 0.0;
-    local_60[2] = 0.0;
-    local_60[3] = 0.0;
-    dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise1D)(param_1,local_60);
-    fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
-    loopIndex = uVar3;
-  } while (uVar3 < 8);
-  param_3[3] = fVar1;
-  *param_3 = fVar1;
-  param_3[1] = fVar1;
-  param_3[2] = fVar1;
+    nextOctave = loopIndex + 1;
+    samplePoint[4] = 176.0;
+    frequency = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - i2dBias));
+    samplePoint[4] = 176.0;
+    i2dLo1 = nextOctave;
+    amplitude = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,nextOctave) - i2dBias);
+    samplePoint[0] = *point * (float)frequency;
+    samplePoint[1] = 0.0;
+    samplePoint[2] = 0.0;
+    samplePoint[3] = 0.0;
+    octaveNoise = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise1D)(noise,samplePoint);
+    noiseSum = (float)(octaveNoise * (double)(float)amplitude + (double)noiseSum);
+    loopIndex = nextOctave;
+  } while (nextOctave < 8);
+  result[3] = noiseSum;
+  *result = noiseSum;
+  result[1] = noiseSum;
+  result[2] = noiseSum;
   return;
 }
 
 /* _InterpreterNoiseGeneratorCalculate2D @ 0x97bd61b8 (248 bytes) */
-int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorCalculate2D(noise, point, result)
+  undefined4 noise;
+  float *point;
+  float *result;
 {
   uint loopIndex;
-  double exp2Result;
-  float fVar1;
-  double dVar2;
-  uint uVar3;
-  double dVar4;
-  double powResult;
-  float local_60;
-  float local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  uint uStack_4c;
+  double frequency;
+  float noiseSum;
+  double i2dBias;
+  uint nextOctave;
+  double octaveNoise;
+  double amplitude;
+  float samplePointX;
+  float samplePointY;
+  undefined4 samplePointZ;
+  undefined4 samplePointW;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  dVar2 = DOUBLE_97c30a68;
+  i2dBias = DOUBLE_97c30a68;
   loopIndex = 0;
-  fVar1 = TAllocation__guardBlockSize;
+  noiseSum = TAllocation__guardBlockSize;
   do {
-    uVar3 = loopIndex + 1;
-    local_50 = 0x43300000;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar2));
-    local_50 = 0x43300000;
-    uStack_4c = uVar3;
-    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
-    local_60 = *param_2 * (float)exp2Result;
-    local_5c = param_2[1] * (float)exp2Result;
-    local_58 = 0;
-    local_54 = 0;
-    dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise2D)(param_1,&local_60);
-    fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
-    loopIndex = uVar3;
-  } while (uVar3 < 8);
-  param_3[3] = fVar1;
-  *param_3 = fVar1;
-  param_3[1] = fVar1;
-  param_3[2] = fVar1;
+    nextOctave = loopIndex + 1;
+    i2dHi1 = 0x43300000;
+    frequency = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - i2dBias));
+    i2dHi1 = 0x43300000;
+    i2dLo1 = nextOctave;
+    amplitude = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,nextOctave) - i2dBias);
+    samplePointX = *point * (float)frequency;
+    samplePointY = point[1] * (float)frequency;
+    samplePointZ = 0;
+    samplePointW = 0;
+    octaveNoise = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise2D)(noise,&samplePointX);
+    noiseSum = (float)(octaveNoise * (double)(float)amplitude + (double)noiseSum);
+    loopIndex = nextOctave;
+  } while (nextOctave < 8);
+  result[3] = noiseSum;
+  *result = noiseSum;
+  result[1] = noiseSum;
+  result[2] = noiseSum;
   return;
 }
 
 /* _InterpreterNoiseGeneratorCalculate3D @ 0x97bd62b0 (256 bytes) */
-int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
+int _InterpreterNoiseGeneratorCalculate3D(noise, point, result)
+  undefined4 noise;
+  float *point;
+  float *result;
 {
   uint loopIndex;
-  double powResult;
-  float fVar1;
-  float fVar2;
-  double dVar3;
-  uint uVar4;
-  double exp2Result;
-  double dVar6;
-  float local_60;
-  float local_5c;
-  float local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  uint uStack_4c;
+  double amplitude;
+  float noiseSum;
+  float frequencyF;
+  double i2dBias;
+  uint nextOctave;
+  double frequency;
+  double octaveNoise;
+  float samplePointX;
+  float samplePointY;
+  float samplePointZ;
+  undefined4 samplePointW;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
-  dVar3 = DOUBLE_97c30a68;
+  i2dBias = DOUBLE_97c30a68;
   loopIndex = 0;
-  fVar1 = TAllocation__guardBlockSize;
+  noiseSum = TAllocation__guardBlockSize;
   do {
-    uVar4 = loopIndex + 1;
-    local_50 = 0x43300000;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar3));
-    local_50 = 0x43300000;
-    fVar2 = (float)exp2Result;
-    uStack_4c = uVar4;
-    powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar4) - dVar3);
-    local_60 = *param_2 * fVar2;
-    local_5c = param_2[1] * fVar2;
-    local_58 = param_2[2] * fVar2;
-    local_54 = 0;
-    dVar6 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise3D)(param_1,&local_60);
-    fVar1 = (float)(dVar6 * (double)(float)powResult + (double)fVar1);
-    loopIndex = uVar4;
-  } while (uVar4 < 8);
-  param_3[3] = fVar1;
-  *param_3 = fVar1;
-  param_3[1] = fVar1;
-  param_3[2] = fVar1;
+    nextOctave = loopIndex + 1;
+    i2dHi1 = 0x43300000;
+    frequency = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - i2dBias));
+    i2dHi1 = 0x43300000;
+    frequencyF = (float)frequency;
+    i2dLo1 = nextOctave;
+    amplitude = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,nextOctave) - i2dBias);
+    samplePointX = *point * frequencyF;
+    samplePointY = point[1] * frequencyF;
+    samplePointZ = point[2] * frequencyF;
+    samplePointW = 0;
+    octaveNoise = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise3D)(noise,&samplePointX);
+    noiseSum = (float)(octaveNoise * (double)(float)amplitude + (double)noiseSum);
+    loopIndex = nextOctave;
+  } while (nextOctave < 8);
+  result[3] = noiseSum;
+  *result = noiseSum;
+  result[1] = noiseSum;
+  result[2] = noiseSum;
   return;
 }
 

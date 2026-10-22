@@ -195,3 +195,104 @@ local	_InterpreterRasterOpMachineCalculateBlendingFactors	param_5	factorOut	CONF
 local	_InterpreterRasterOpMachineCalculateBlendingFactors	dVar1	oneConst	INFERRED	constant 1.0 (DOUBLE_97c30a60) used for the one-minus factors
 local	_InterpreterRasterOpMachineCalculateBlendingFactors	fVar2	factorValue	INFERRED	channel value being stored into the factor (also holds the saturate minimum)
 local	_InterpreterRasterOpMachineCalculateBlendingFactors	dVar3	alphaForComplement	INFERRED	alpha whose complement becomes the factor alpha
+local	_InterpreterPackPixel	uVar3	alphaBit	INFERRED	0x8000 (alpha bit of the 5-5-5-1 pixel) when alpha >= 0.5
+use	_InterpreterPackPixel	uVar4	framebufferFormat	CONFIRMED	result of _PPEmulatorFramebufferFormat: bit 0x8000000 float framebuffer, 0x8000 8-bit components, 0x400 5-5-5-1	^\s*uVar4\ =\ _PPEmulatorFramebufferFormat\(iVar9\);$	+2
+use	_InterpreterPackPixel	uVar4	framebufferFormat	CONFIRMED	result of _PPEmulatorFramebufferFormat: bit 0x8000000 float framebuffer, 0x8000 8-bit components, 0x400 5-5-5-1	^\s*uVar4\ =\ _PPEmulatorFramebufferFormat\(iVar9\);$@2	+1
+use	_InterpreterPackPixel	uVar4	framebufferFormat	CONFIRMED	result of _PPEmulatorFramebufferFormat: bit 0x8000000 float framebuffer, 0x8000 8-bit components, 0x400 5-5-5-1	^\s*if\ \(\(uVar4\ \&\ 0x8000\)\ ==\ 0\)\ \{$	+1
+use	_InterpreterPackPixel	uVar4	framebufferFormat	CONFIRMED	result of _PPEmulatorFramebufferFormat: bit 0x8000000 float framebuffer, 0x8000 8-bit components, 0x400 5-5-5-1	^\s*uVar4\ =\ _PPEmulatorFramebufferFormat\(iVar9\);$@3	+1
+use	_InterpreterPackPixel	uVar4	framebufferFormat	CONFIRMED	result of _PPEmulatorFramebufferFormat: bit 0x8000000 float framebuffer, 0x8000 8-bit components, 0x400 5-5-5-1	^\s*if\ \(\(uVar4\ \&\ 0x400\)\ ==\ 0\)\ \{$	+1
+use	_InterpreterPackPixel	uVar4	redInt	INFERRED	red component converted to an integer (0..255 or 0..31)	^\s*uVar4\ =\ \(uint\)\(int\)\(dVar11\ \-\ dVar12\);$	+1
+use	_InterpreterPackPixel	uVar4	redInt	INFERRED	red component converted to an integer (0..255 or 0..31)	^\s*uVar4\ =\ \(uint\)\(int\)\*param_2;$	+1
+use	_InterpreterPackPixel	uVar4	redInt	INFERRED	red component converted to an integer (0..255 or 0..31)	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ \(uVar4\ \&\ 0x1f\)\ <<\ 10\ \|\ \(uVar6\ \&\ 0x1f\)\ <<\ 5\ \|\ uVar8\ \&\ 0x1f\)\)\);$	+1
+use	_InterpreterPackPixel	uVar4	redInt	INFERRED	red component converted to an integer (0..255 or 0..31)	^\s*uVar4\ =\ \(uint\)\(int\)\(dVar11\ \-\ dVar12\);$@2	+1
+use	_InterpreterPackPixel	uVar4	redInt	INFERRED	red component converted to an integer (0..255 or 0..31)	^\s*uVar4\ =\ \(uint\)\(int\)\*param_2;$@2	+1
+use	_InterpreterPackPixel	uVar4	redInt	INFERRED	red component converted to an integer (0..255 or 0..31)	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar9\ <<\ 0x18\ \|\ \(uVar4\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ uVar8\ \&\ 0xff\)\)\)$	+1
+use	_InterpreterPackPixel	uVar6	greenInt	INFERRED	green component converted to an integer	^\s*uVar6\ =\ \(uint\)\(int\)\(dVar12\ \-\ DOUBLE_97c30a78\);$	+1
+use	_InterpreterPackPixel	uVar6	greenInt	INFERRED	green component converted to an integer	^\s*uVar6\ =\ \(uint\)\(int\)param_2\[1\];$	+1
+use	_InterpreterPackPixel	uVar6	greenInt	INFERRED	green component converted to an integer	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ \(uVar4\ \&\ 0x1f\)\ <<\ 10\ \|\ \(uVar6\ \&\ 0x1f\)\ <<\ 5\ \|\ uVar8\ \&\ 0x1f\)\)\);$	+1
+use	_InterpreterPackPixel	uVar6	greenInt	INFERRED	green component converted to an integer	^\s*uVar6\ =\ \(uint\)\(int\)\(dVar12\ \-\ DOUBLE_97c30a78\);$@2	+1
+use	_InterpreterPackPixel	uVar6	greenInt	INFERRED	green component converted to an integer	^\s*uVar6\ =\ \(uint\)\(int\)param_2\[1\];$@2	+1
+use	_InterpreterPackPixel	uVar6	greenInt	INFERRED	green component converted to an integer	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar9\ <<\ 0x18\ \|\ \(uVar4\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ uVar8\ \&\ 0xff\)\)\)$	+1
+use	_InterpreterPackPixel	uVar8	blueInt	INFERRED	blue component converted to an integer	^\s*uVar8\ =\ \(uint\)\(int\)\(dVar12\ \-\ DOUBLE_97c30a78\);$	+1
+use	_InterpreterPackPixel	uVar8	blueInt	INFERRED	blue component converted to an integer	^\s*uVar8\ =\ \(uint\)\(int\)param_2\[2\];$	+1
+use	_InterpreterPackPixel	uVar8	blueInt	INFERRED	blue component converted to an integer	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ \(uVar4\ \&\ 0x1f\)\ <<\ 10\ \|\ \(uVar6\ \&\ 0x1f\)\ <<\ 5\ \|\ uVar8\ \&\ 0x1f\)\)\);$	+1
+use	_InterpreterPackPixel	uVar8	blueInt	INFERRED	blue component converted to an integer	^\s*uVar8\ =\ \(uint\)\(int\)\(dVar12\ \-\ DOUBLE_97c30a78\);$@2	+1
+use	_InterpreterPackPixel	uVar8	blueInt	INFERRED	blue component converted to an integer	^\s*uVar8\ =\ \(uint\)\(int\)param_2\[2\];$@2	+1
+use	_InterpreterPackPixel	uVar8	blueInt	INFERRED	blue component converted to an integer	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar9\ <<\ 0x18\ \|\ \(uVar4\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ uVar8\ \&\ 0xff\)\)\)$	+1
+use	_InterpreterPackPixel	dVar11	redDouble	INFERRED	red as double for the float-to-unsigned conversion	^\s*dVar11\ =\ \(double\)\*param_2;$	+1
+use	_InterpreterPackPixel	dVar11	redDouble	INFERRED	red as double for the float-to-unsigned conversion	^\s*if\ \(dVar12\ <=\ dVar11\)\ \{$	+2
+use	_InterpreterPackPixel	dVar11	redDouble	INFERRED	red as double for the float-to-unsigned conversion	^\s*dVar11\ =\ \(double\)\*param_2;$@2	+1
+use	_InterpreterPackPixel	dVar11	redDouble	INFERRED	red as double for the float-to-unsigned conversion	^\s*if\ \(dVar12\ <=\ dVar11\)\ \{$@2	+2
+use	_InterpreterPackPixel	dVar12	convertThreshold	INFERRED	2^31 (DOUBLE_97c30a78): above it the value is converted via x - 2^31	^\s*dVar12\ =\ DOUBLE_97c30a78;$	+1
+use	_InterpreterPackPixel	dVar12	convertThreshold	INFERRED	2^31 (DOUBLE_97c30a78): above it the value is converted via x - 2^31	^\s*if\ \(dVar12\ <=\ dVar11\)\ \{$	+2
+use	_InterpreterPackPixel	dVar12	convertThreshold	INFERRED	2^31 (DOUBLE_97c30a78): above it the value is converted via x - 2^31	^\s*dVar12\ =\ DOUBLE_97c30a78;$@2	+1
+use	_InterpreterPackPixel	dVar12	convertThreshold	INFERRED	2^31 (DOUBLE_97c30a78): above it the value is converted via x - 2^31	^\s*if\ \(dVar12\ <=\ dVar11\)\ \{$@2	+2
+use	_InterpreterPackPixel	dVar12	greenDouble	INFERRED	green as double for the float-to-unsigned conversion	^\s*dVar12\ =\ \(double\)param_2\[1\];$	+3
+use	_InterpreterPackPixel	dVar12	greenDouble	INFERRED	green as double for the float-to-unsigned conversion	^\s*dVar12\ =\ \(double\)param_2\[1\];$@2	+3
+use	_InterpreterPackPixel	dVar12	blueDouble	INFERRED	blue as double for the float-to-unsigned conversion	^\s*dVar12\ =\ \(double\)param_2\[2\];$	+3
+use	_InterpreterPackPixel	dVar12	blueDouble	INFERRED	blue as double for the float-to-unsigned conversion	^\s*dVar12\ =\ \(double\)param_2\[2\];$@2	+3
+use	_InterpreterPackPixel	dVar12	alphaDouble	INFERRED	alpha as double for the float-to-unsigned conversion	^\s*dVar12\ =\ \(double\)param_2\[3\];$	+3
+use	_InterpreterPackPixel	fVar1	greenScaled	INFERRED	green * scale + 0.5 before clamping	^\s*fVar1\ =\ param_2\[1\]\ \*\ FLOAT_97c3acc4\ \+\ FLOAT_97c3acc0;$	+1
+use	_InterpreterPackPixel	fVar1	greenScaled	INFERRED	green * scale + 0.5 before clamping	^\s*param_2\[1\]\ =\ fVar1;$	+1
+use	_InterpreterPackPixel	fVar1	greenScaled	INFERRED	green * scale + 0.5 before clamping	^\s*fVar1\ =\ param_2\[1\]\ \*\ FLOAT_97c3acbc\ \+\ FLOAT_97c3acc0;$	+1
+use	_InterpreterPackPixel	fVar1	greenScaled	INFERRED	green * scale + 0.5 before clamping	^\s*param_2\[1\]\ =\ fVar1;$@2	+1
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*fVar7\ =\ \*param_2\ \*\ FLOAT_97c3acc4\ \+\ FLOAT_97c3acc0;$	+1
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*bVar10\ =\ TAllocation__guardBlockSize\ <=\ fVar7;$	+2
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*if\ \(fVar5\ <\ fVar7\)\ \{$	+2
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*fVar7\ =\ 0\.0;$	+1
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*\*param_2\ =\ fVar7;$@2	+1
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*fVar7\ =\ \*param_2\ \*\ FLOAT_97c3acbc\ \+\ FLOAT_97c3acc0;$	+1
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*bVar10\ =\ TAllocation__guardBlockSize\ <=\ fVar7;$@2	+2
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*if\ \(fVar2\ <\ fVar7\)\ \{$	+2
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*fVar7\ =\ 0\.0;$@2	+1
+use	_InterpreterPackPixel	fVar7	redScaled	INFERRED	red * scale + 0.5 before clamping, then the clamped red	^\s*\*param_2\ =\ fVar7;$@4	+1
+use	_InterpreterPackPixel	fVar2	scale255	INFERRED	FLOAT_97c3acbc: 255.0 component scale of the 8-bit format	^\s*fVar2\ =\ FLOAT_97c3acbc;$	+1
+use	_InterpreterPackPixel	fVar2	scale255	INFERRED	FLOAT_97c3acbc: 255.0 component scale of the 8-bit format	^\s*param_2\[3\]\ =\ param_2\[3\]\ \*\ fVar2\ \+\ fVar5;$	+2
+use	_InterpreterPackPixel	fVar2	scale255	INFERRED	FLOAT_97c3acbc: 255.0 component scale of the 8-bit format	^\s*if\ \(fVar2\ <\ fVar7\)\ \{$	+1
+use	_InterpreterPackPixel	fVar2	roundOffset5	INFERRED	FLOAT_97c3acc0: rounding offset used with the 5-bit scale	^\s*fVar2\ =\ FLOAT_97c3acc0;$	+1
+use	_InterpreterPackPixel	fVar2	roundOffset5	INFERRED	FLOAT_97c3acc0: rounding offset used with the 5-bit scale	^\s*param_2\[2\]\ =\ param_2\[2\]\ \*\ fVar5\ \+\ fVar2;$	+1
+use	_InterpreterPackPixel	fVar5	roundOffset8	INFERRED	FLOAT_97c3acc0: rounding offset used with the 8-bit scale	^\s*fVar5\ =\ FLOAT_97c3acc0;$	+1
+use	_InterpreterPackPixel	fVar5	roundOffset8	INFERRED	FLOAT_97c3acc0: rounding offset used with the 8-bit scale	^\s*param_2\[3\]\ =\ param_2\[3\]\ \*\ fVar2\ \+\ fVar5;$	+2
+use	_InterpreterPackPixel	fVar5	scale31	INFERRED	FLOAT_97c3acc4: 31.0 component scale of the 5-5-5-1 format	^\s*fVar5\ =\ FLOAT_97c3acc4;$	+1
+use	_InterpreterPackPixel	fVar5	scale31	INFERRED	FLOAT_97c3acc4: 31.0 component scale of the 5-5-5-1 format	^\s*param_2\[2\]\ =\ param_2\[2\]\ \*\ fVar5\ \+\ fVar2;$	+1
+use	_InterpreterPackPixel	fVar5	scale31	INFERRED	FLOAT_97c3acc4: 31.0 component scale of the 5-5-5-1 format	^\s*if\ \(fVar5\ <\ fVar7\)\ \{$	+1
+use	_InterpreterPackPixel	fVar2	zeroConstA	INFERRED	0.0 (the global TAllocation__guardBlockSize aliases the float constant 0) compared against the channel	^\s*fVar2\ =\ TAllocation__guardBlockSize;$	+1
+use	_InterpreterPackPixel	fVar2	zeroConstA	INFERRED	0.0 (the global TAllocation__guardBlockSize aliases the float constant 0) compared against the channel	^\s*if\ \(fVar2\ <=\ fVar5\)\ \{$	+1
+use	_InterpreterPackPixel	fVar2	zeroConstA	INFERRED	0.0 (the global TAllocation__guardBlockSize aliases the float constant 0) compared against the channel	^\s*fVar2\ =\ TAllocation__guardBlockSize;$@2	+1
+use	_InterpreterPackPixel	fVar2	zeroConstA	INFERRED	0.0 (the global TAllocation__guardBlockSize aliases the float constant 0) compared against the channel	^\s*if\ \(fVar2\ <=\ fVar7\)\ \{$	+1
+use	_InterpreterPackPixel	fVar5	zeroConstB	INFERRED	0.0 compared against the channel	^\s*fVar5\ =\ TAllocation__guardBlockSize;$	+1
+use	_InterpreterPackPixel	fVar5	zeroConstB	INFERRED	0.0 compared against the channel	^\s*if\ \(fVar5\ <=\ fVar2\)\ \{$	+1
+use	_InterpreterPackPixel	fVar7	zeroConstC	INFERRED	0.0 compared against the channel	^\s*fVar7\ =\ TAllocation__guardBlockSize;$	+1
+use	_InterpreterPackPixel	fVar7	zeroConstC	INFERRED	0.0 compared against the channel	^\s*if\ \(fVar7\ <=\ fVar2\)\ \{$	+1
+use	_InterpreterPackPixel	fVar7	zeroConstC	INFERRED	0.0 compared against the channel	^\s*fVar7\ =\ TAllocation__guardBlockSize;$@2	+1
+use	_InterpreterPackPixel	fVar7	zeroConstC	INFERRED	0.0 compared against the channel	^\s*if\ \(fVar7\ <=\ fVar5\)\ \{$	+1
+use	_InterpreterPackPixel	fVar2	blueClamp	INFERRED	blue being scaled and clamped (5-5-5-1 path)	^\s*fVar2\ =\ param_2\[2\];$	+1
+use	_InterpreterPackPixel	fVar2	blueClamp	INFERRED	blue being scaled and clamped (5-5-5-1 path)	^\s*if\ \(fVar7\ <=\ fVar2\)\ \{$	+3
+use	_InterpreterPackPixel	fVar2	blueClamp	INFERRED	blue being scaled and clamped (5-5-5-1 path)	^\s*fVar2\ =\ 0\.0;$	+1
+use	_InterpreterPackPixel	fVar2	blueClamp	INFERRED	blue being scaled and clamped (5-5-5-1 path)	^\s*param_2\[2\]\ =\ fVar2;$	+1
+use	_InterpreterPackPixel	fVar5	greenClamp5	INFERRED	green being clamped (5-5-5-1 path)	^\s*fVar5\ =\ param_2\[1\];$	+1
+use	_InterpreterPackPixel	fVar5	greenClamp5	INFERRED	green being clamped (5-5-5-1 path)	^\s*if\ \(fVar2\ <=\ fVar5\)\ \{$	+3
+use	_InterpreterPackPixel	fVar5	greenClamp5	INFERRED	green being clamped (5-5-5-1 path)	^\s*fVar5\ =\ 0\.0;$	+1
+use	_InterpreterPackPixel	fVar5	greenClamp5	INFERRED	green being clamped (5-5-5-1 path)	^\s*param_2\[1\]\ =\ fVar5;$	+1
+use	_InterpreterPackPixel	fVar2	greenClamp8	INFERRED	green being clamped (8-bit path)	^\s*fVar2\ =\ param_2\[1\];$	+1
+use	_InterpreterPackPixel	fVar2	greenClamp8	INFERRED	green being clamped (8-bit path)	^\s*if\ \(fVar5\ <=\ fVar2\)\ \{$	+3
+use	_InterpreterPackPixel	fVar2	greenClamp8	INFERRED	green being clamped (8-bit path)	^\s*fVar2\ =\ 0\.0;$@2	+1
+use	_InterpreterPackPixel	fVar2	greenClamp8	INFERRED	green being clamped (8-bit path)	^\s*param_2\[1\]\ =\ fVar2;$	+1
+use	_InterpreterPackPixel	fVar5	blueClamp8	INFERRED	blue being clamped (8-bit path)	^\s*fVar5\ =\ param_2\[2\];$	+1
+use	_InterpreterPackPixel	fVar5	blueClamp8	INFERRED	blue being clamped (8-bit path)	^\s*if\ \(fVar7\ <=\ fVar5\)\ \{$	+3
+use	_InterpreterPackPixel	fVar5	blueClamp8	INFERRED	blue being clamped (8-bit path)	^\s*fVar5\ =\ 0\.0;$@2	+1
+use	_InterpreterPackPixel	fVar5	blueClamp8	INFERRED	blue being clamped (8-bit path)	^\s*param_2\[2\]\ =\ fVar5;$	+1
+use	_InterpreterPackPixel	fVar7	alphaClamp8	INFERRED	alpha being clamped (8-bit path)	^\s*fVar7\ =\ param_2\[3\];$	+1
+use	_InterpreterPackPixel	fVar7	alphaClamp8	INFERRED	alpha being clamped (8-bit path)	^\s*if\ \(fVar2\ <=\ fVar7\)\ \{$	+3
+use	_InterpreterPackPixel	fVar7	alphaClamp8	INFERRED	alpha being clamped (8-bit path)	^\s*fVar7\ =\ 0\.0;$@3	+1
+use	_InterpreterPackPixel	fVar7	alphaClamp8	INFERRED	alpha being clamped (8-bit path)	^\s*param_2\[3\]\ =\ fVar7;$	+1
+use	_InterpreterPackPixel	fVar7	blueOut	INFERRED	blue stored for the float framebuffer	^\s*fVar7\ =\ param_2\[2\];$	+1
+use	_InterpreterPackPixel	fVar7	blueOut	INFERRED	blue stored for the float framebuffer	^\s*param_3\[2\]\ =\ fVar7;$	+1
+use	_InterpreterPackPixel	fVar2	redOut	INFERRED	red stored for the float framebuffer	^\s*fVar2\ =\ \*param_2;$	+1
+use	_InterpreterPackPixel	fVar2	redOut	INFERRED	red stored for the float framebuffer	^\s*\*param_3\ =\ fVar2;$@2	+1
+use	_InterpreterPackPixel	fVar5	greenOut	INFERRED	green stored for the float framebuffer	^\s*fVar5\ =\ param_2\[1\];$@2	+1
+use	_InterpreterPackPixel	fVar5	greenOut	INFERRED	green stored for the float framebuffer	^\s*param_3\[1\]\ =\ fVar5;$	+1
+use	_InterpreterPackPixel	bVar10	notBelowZero	INFERRED	channel >= 0 test (scaled red against 0.0)	^\s*bVar10\ =\ TAllocation__guardBlockSize\ <=\ fVar7;$	+1
+use	_InterpreterPackPixel	bVar10	notBelowZero	INFERRED	channel >= 0 test (scaled red against 0.0)	^\s*if\ \(bVar10\)\ \{$	+1
+use	_InterpreterPackPixel	bVar10	notBelowZero	INFERRED	channel >= 0 test (scaled red against 0.0)	^\s*bVar10\ =\ TAllocation__guardBlockSize\ <=\ fVar7;$@2	+1
+use	_InterpreterPackPixel	bVar10	notBelowZero	INFERRED	channel >= 0 test (scaled red against 0.0)	^\s*if\ \(bVar10\)\ \{$@2	+1
